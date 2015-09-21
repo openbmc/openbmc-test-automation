@@ -1,0 +1,12 @@
+*** Settings ***
+Library           Collections
+Library           String
+Library           RequestsLibrary.RequestsKeywords
+Library           OperatingSystem
+
+*** Variables ***
+${HOST}           192.168.122.100    # openbmc ip address
+${PORT}           3000
+${AUTH_URI}       http://${HOST}:${PORT}
+${USERNAME}       root
+${PASSWORD}       abc123
