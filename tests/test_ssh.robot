@@ -46,6 +46,7 @@ File Not Found
     [Documentation]    This testcase is for testing ls command with non existing file
     ${output}    ${stderr}    ${rc}=    Execute Command    ls file_doesnotexist.txt    return_stderr=True    return_rc=True
     ${msg}=    Catenate    output:${output}    stderr:${stderr}    rc:${rc}
+    Log To Console    ${msg}
     Should Be Equal    ${rc}    ${2}
     Should Contain    ${stderr}    No such file or directory
 
