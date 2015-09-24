@@ -50,6 +50,14 @@ File Not Found
     Should Be Equal    ${rc}    ${2}
     Should Contain    ${stderr}    No such file or directory
 
+etc passwd entry
+    [Documentation]    This testcase is for testing /etc/passwd entry
+    ${output}    ${stderr}    ${rc}=    Execute Command    grep manjunath /etc/passwd    return_stderr=True    return_rc=True
+    ${msg}=    Catenate    output:${output}    stderr:${stderr}    rc:${rc}
+    Log To Console    ${msg}
+    Should Be Equal    ${rc}    ${0}
+    Should Contain    ${output}    manjunath
+
 *** Keywords ***
 Open Connection And Log In
     Open Connection    ${HOST}
