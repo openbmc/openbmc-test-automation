@@ -5,12 +5,12 @@ Library           RequestsLibrary.RequestsKeywords
 Library           OperatingSystem
 
 *** Variables ***
-${HOST}           192.168.122.100    # openbmc ip address
+${OPENBMC_HOST}           192.168.122.100    # openbmc ip address
 ${DBUS_PREFIX}    /bus/session
 ${PORT}           3000
-${AUTH_URI}       http://${HOST}:${PORT}
-${USERNAME}       root
-${PASSWORD}       abc123
+${AUTH_URI}       http://${OPENBMC_HOST}:${PORT}
+${OPENBMC_USERNAME}       root
+${OPENBMC_PASSWORD}       abc123
 # Response codes
 ${HTTP_CONTINUE}    100
 ${HTTP_SWITCHING_PROTOCOLS}    101
