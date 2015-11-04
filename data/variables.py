@@ -28,6 +28,10 @@ INVENTORY={
                  "/org/openbmc/inventory/system/chassis/motherboard", 
                  "/org/openbmc/inventory/system/chassis/motherboard/bmc", 
                  "/org/openbmc/inventory/system/chassis/fan3"],
+}
+
+
+INVENTORY_ITEMS={
 
     "DIMM" : [  "Asset Tag",
                 "Custom Field 1",

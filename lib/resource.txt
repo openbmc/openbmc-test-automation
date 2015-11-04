@@ -19,6 +19,10 @@ Get Inventory Schema
     [Arguments]    ${machine}
     [Return]    &{INVENTORY}[${machine}]
 
+Get Inventory Items Schema
+    [Arguments]    ${machine}
+    [Return]    &{INVENTORY_ITEMS}[${machine}]
+
 Get Sensor Schema
     [Arguments]    ${machine}
     [Return]    &{SENSORS}[${machine}]
