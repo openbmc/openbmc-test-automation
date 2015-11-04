@@ -49,3 +49,31 @@ INVENTORY={
                 "is_fru",
                 "present"],
 }
+
+SENSORS={
+    "palmetto" : {
+        0x2f : '<inventory_root>/system/chassis/motherboard/cpu0',
+        0x22 : '<inventory_root>/system/chassis/motherboard/cpu0/core0',
+        0x23 : '<inventory_root>/system/chassis/motherboard/cpu0/core1',
+        0x24 : '<inventory_root>/system/chassis/motherboard/cpu0/core2',
+        0x25 : '<inventory_root>/system/chassis/motherboard/cpu0/core3',
+        0x26 : '<inventory_root>/system/chassis/motherboard/cpu0/core4',
+        0x27 : '<inventory_root>/system/chassis/motherboard/cpu0/core5',
+        0x28 : '<inventory_root>/system/chassis/motherboard/cpu0/core6',
+        0x29 : '<inventory_root>/system/chassis/motherboard/cpu0/core7',
+        0x2a : '<inventory_root>/system/chassis/motherboard/cpu0/core8',
+        0x2b : '<inventory_root>/system/chassis/motherboard/cpu0/core9',
+        0x2c : '<inventory_root>/system/chassis/motherboard/cpu0/core10',
+        0x2d : '<inventory_root>/system/chassis/motherboard/cpu0/core11',
+        0x2e : '<inventory_root>/system/chassis/motherboard/centaur0',
+        0x1e : '<inventory_root>/system/chassis/motherboard/dimm0',
+        0x1f : '<inventory_root>/system/chassis/motherboard/dimm1',
+        0x20 : '<inventory_root>/system/chassis/motherboard/dimm2',
+        0x21 : '<inventory_root>/system/chassis/motherboard/dimm3',
+        0x09 : '/org/openbmc/sensor/virtual/BootCount',
+        0x05 : '/org/openbmc/sensor/virtual/BootProgress',
+        0x04 : '/org/openbmc/sensor/virtual/HostStatus',
+        0x08 : '/org/openbmc/sensor/virtual/OccStatus',
+        0x32 : '/org/openbmc/sensor/virtual/OperatingSystemStatus',
+    }
+}
