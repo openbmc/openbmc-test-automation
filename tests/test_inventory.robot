@@ -4,6 +4,8 @@ Suite Teardown    Delete All Sessions
 Resource          ../lib/rest_client.robot
 Resource          ../lib/resource.txt
 
+Library           String
+
 *** Test Cases ***
 List Inventory
     ${resp} =    OpenBMC Get Request    /org/openbmc/inventory/list
@@ -14,29 +16,27 @@ List Inventory
     \    Should Contain    ${jsondata}    ${ELEMENT}
 
 
-Verify dimm0 vpd
-	${value} =	Read attribute	/org/openbmc/inventory/system/chassis/motherboard/dimm0	fru_type
-	Should Be Equal	${value}	"DIMM"
+Verify dimm vpd
+	: FOR 	${INDEX} 	IN RANGE 	0 	4
+	\	log 	${INDEX}
+	\	${value} =	Read attribute	/org/openbmc/inventory/system/chassis/motherboard/dimm${INDEX}	fru_type
+	\	Should Be Equal	${value}	"DIMM"
 
 
-Verify dimm1 vpd
-	${value} =	Read attribute	/org/openbmc/inventory/system/chassis/motherboard/dimm1	fru_type
-	Should Be Equal	${value}	"DIMM"
+Verify dimm vpd properties
+	: FOR 	${INDEX} 	IN RANGE 	0 	4
+	\	log 	${INDEX}
+	\	${props} =	Read Properties	/org/openbmc/inventory/system/chassis/motherboard/dimm${INDEX}
+	\	Should Be Valid Dimm Properties	${props}
 
-Verify dimm0 properties
-	${props} =	Read Properties	/org/openbmc/inventory/system/chassis/motherboard/dimm0
-	Should Be Valid Dimm Properties	${props}
 
-Verify dimm1 properties
-	${props} =	Read Properties	/org/openbmc/inventory/system/chassis/motherboard/dimm1
-	Should Be Valid Dimm Properties	${props}
 
 
 
 *** Keywords ***
 Should Be Valid Dimm Properties
 	[arguments]	${props}
-	${ret}=    Get Inventory Schema	DIMM
+	${ret}=    Get Inventory Items Schema	DIMM
 	: FOR    ${ELEMENT}    IN    @{ret}
 	\    Should Contain    ${props}    ${ELEMENT}
 
