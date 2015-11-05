@@ -18,7 +18,7 @@ Good connection for testing
 
 Get an object with no properties 
 	${content} =	Read Properties	/org/openbmc/inventory
-	Should Not Be Empty	${content}
+	Should Be Empty	${content}
 
 
 Get a Property
