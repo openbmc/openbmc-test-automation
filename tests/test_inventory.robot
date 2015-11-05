@@ -19,7 +19,7 @@ List Inventory
 Verify dimm vpd
 	: FOR 	${INDEX} 	IN RANGE 	0 	4
 	\	log 	${INDEX}
-	\	${value} =	Read attribute	/org/openbmc/inventory/system/chassis/motherboard/dimm${INDEX}	fru_type
+	\	${value} =	Read Attribute	/org/openbmc/inventory/system/chassis/motherboard/dimm${INDEX}	fru_type
 	\	Should Be Equal	${value}	"DIMM"
 
 
@@ -39,15 +39,3 @@ Should Be Valid Dimm Properties
 	${ret}=    Get Inventory Items Schema	DIMM
 	: FOR    ${ELEMENT}    IN    @{ret}
 	\    Should Contain    ${props}    ${ELEMENT}
-
-
-Read attribute
-	[arguments]	${uri}	${attr}
-	${resp} =	OpenBMC Get Request	${uri}/attr/${attr}
-	[return]	${resp.content}
-
-
-Read Properties
-	[arguments]	${uri}
-	${resp} =	OpenBMC Get Request	${uri}
-	[return]	${resp.content}

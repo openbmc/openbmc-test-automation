@@ -102,3 +102,16 @@ Log Response
 Logging
     [Arguments]    ${msg}    ${console}=default False
     Log    ${msg}    console=True
+
+Read Attribute
+    [arguments]    ${uri}    ${attr}
+    ${resp} =   OpenBMC Get Request    ${uri}/attr/${attr}
+    [return]    ${resp.content}
+
+
+Read Properties
+    [arguments]    ${uri}
+    ${resp} =   OpenBMC Get Request    ${uri}
+    Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
+    ${content}=     To Json    ${resp.content}
+    [return]    ${content}
