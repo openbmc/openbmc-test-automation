@@ -11,24 +11,23 @@ Resource		../lib/rest_client.robot
 
 *** Test Cases ***
 Good connection for testing
-	${resp} =	Read Properties	/
-	${jdata}=	To Json 	${resp.content}
-	${c}= 		get from List 	${jdata} 	0
-	Should Contain		"/org"	${c}	
+	${content} =	Read Properties	/
+	${c}= 		get from List 	${content} 	0
+	Should Contain		"/org"	${c}
 
 
 Get an object with no properties 
-	${resp} =	Read Properties	/org/openbmc/inventory
-	Should Be Empty	${resp.content}
+	${content} =	Read Properties	/org/openbmc/inventory
+	Should Not Be Empty	${content}
 
 
 Get a Property
-	${resp} =	Read attribute	/org/openbmc/inventory/system/chassis/motherboard/cpu0	is_fru
+	${resp} =	Read Attribute	/org/openbmc/inventory/system/chassis/motherboard/cpu0	is_fru
 	Should Contain		1	${resp}	
 
 
 Get a null Property
-	${resp} =	Read attribute	/org/openbmc/inventory	is_fru
+	${resp} =	Read Attribute	/org/openbmc/inventory	is_fru
 	Should Contain		1	${resp}	
 
 
@@ -54,12 +53,3 @@ Issue a PUT
 
 
 *** Keywords ***
-Read Properties
-	[arguments]	${uri}
-	${resp} =	OpenBMC Get Request	${uri}
-	[return]	${resp}
-
-Read attribute
-	[arguments]	${uri}	${attr}
-	${resp} =	OpenBMC Get Request	${uri}/attr/${attr}
-	[return]	${resp.content}
