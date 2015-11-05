@@ -22,7 +22,7 @@ Execute ipmi BT capabilities command
 
 Execute Set Sensor boot count
 	Run IPMI command  0x04 0x30 0x09 0x01 0x00 0x35 0x00 0x00 0x00 0x00 0x00 0x00
-	${value} =  Read attribute	/org/openbmc/sensor/virtual/BootCount	value
+	${value} =  Read Attribute	/org/openbmc/sensor/virtual/BootCount	value
 	Should Be Equal		${value}	"53"
 
 
@@ -36,8 +36,3 @@ Run IPMI Command
 	[arguments]	${args}
 	${output}=	Execute Command    /home/root/ipmitool -I dbus raw ${args}
 	[return]	${output}
-
-Read attribute
-	[arguments]	${uri}	${attr}
-	${resp} =	OpenBMC Get Request	${uri}/attr/${attr}
-	[return]	${resp.content}
