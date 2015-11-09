@@ -22,3 +22,8 @@ Run tests
 ```shell
     $ tox -e tests
 ```
+
+It can also be run by pasing variables from the cli...
+```shell
+    $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc 
+```
