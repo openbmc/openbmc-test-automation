@@ -9,7 +9,7 @@ Variables         ../data/variables.py
 ${OPENBMC_HOST}    9.3.164.161
 ${DBUS_PREFIX}    ${EMPTY}
 ${PORT}           ${EMPTY}
-${AUTH_URI}       http://${OPENBMC_HOST}
+${AUTH_URI}       https://${OPENBMC_HOST}
 ${OPENBMC_USERNAME}    root
 ${OPENBMC_PASSWORD}    0penBmc
 ${MACHINE_TYPE}    palmetto

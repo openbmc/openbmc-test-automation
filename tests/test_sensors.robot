@@ -188,8 +188,11 @@ response Should Be Equal
 
 Read the Attribute     
     [arguments]    ${uri}    ${parm}
-    ${output} =  Read Attribute      ${uri}    ${parm}
-    set test variable    ${OUTPUT}     ${output}
+    ${output} =     Read Attribute      ${uri}    ${parm}
+    ${json} =       to json             ${output}
+    ${data} =       get from dictionary      ${json}     data
+    set test variable    ${OUTPUT}     "${data}"
+    
 
 
 Open Connection And Log In
