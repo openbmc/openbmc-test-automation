@@ -20,6 +20,6 @@ Test SSL Connection
 Test non-SSL Connection - Negative
     [Documentation]     This testcase is for test to check OpenBMC machine
     ...     will not accepts the non-secure connection that is with http.
-    ...     Expected Response code is - 400
+    ...     Expected a connection error when we try making a call
     Create Session    openbmc    http://${OPENBMC_HOST}/
     Run Keyword And Expect Error    ConnectionError*   Get Request    openbmc   /list
