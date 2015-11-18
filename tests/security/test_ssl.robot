@@ -2,8 +2,8 @@
 Documentation     This testsuite is for testing SSL connection to OpenBMC
 Suite Teardown    Delete All Sessions
 
-Resource          ../lib/rest_client.robot
-Resource          ../lib/resource.txt
+Resource          ../../lib/rest_client.robot
+Resource          ../../lib/resource.txt
 
 Library           RequestsLibrary.RequestsKeywords
 
@@ -12,7 +12,7 @@ Test SSL Connection
     [Documentation]     This testcase is for testing the SSL connection to the
     ...     OpenBMC machine.
     Create Session    openbmc    https://${OPENBMC_HOST}/
-    ${resp}=    Get Request    openbmc   https://${OPENBMC_HOST}/org/openbmc/inventory/list
+    ${resp}=    Get Request    openbmc   /list
     Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    To Json    ${resp.content}
     Should Not Be Empty     ${jsondata}
@@ -22,7 +22,4 @@ Test non-SSL Connection - Negative
     ...     will not accepts the non-secure connection that is with http.
     ...     Expected Response code is - 400
     Create Session    openbmc    http://${OPENBMC_HOST}/
-    ${resp}=    Get Request    openbmc   http://${OPENBMC_HOST}/org/openbmc/inventory/list
-    Should Be Equal As Strings    ${resp.status_code}    ${HTTP_BAD_REQUEST}
-    ${jsondata}=    To Json    ${resp.content}
-    Should Be Empty     ${jsondata}
+    Run Keyword And Expect Error    ConnectionError*   Get Request    openbmc   /list
