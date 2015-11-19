@@ -17,9 +17,18 @@ Test SSL Connection
     ${jsondata}=    To Json    ${resp.content}
     Should Not Be Empty     ${jsondata}
 
-Test non-SSL Connection - Negative
+Test non-SSL Connection to port 80
     [Documentation]     This testcase is for test to check OpenBMC machine
-    ...     will not accepts the non-secure connection that is with http.
-    ...     Expected a connection error when we try making a call
+    ...     will not accepts the non-secure connection that is with http to
+    ...     port 80 and expect a connection error
     Create Session    openbmc    http://${OPENBMC_HOST}/
     Run Keyword And Expect Error    ConnectionError*   Get Request    openbmc   /list
+
+Test non-SSL Connection to port 443
+    [Documentation]     This testcase is for test to check OpenBMC machine
+    ...     will not accepts the non-secure connection that is with http to
+    ...     port 443 and expect 400 in response
+    Create Session    openbmc    http://${OPENBMC_HOST}:443/
+    ${resp}=    Get Request    openbmc   /list
+    Should Be Equal As Strings    ${resp.status_code}    ${HTTP_BAD_REQUEST}
+    Should Be Equal     ${resp.content}     Bad Request
