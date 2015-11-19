@@ -106,7 +106,8 @@ Logging
 Read Attribute
     [arguments]    ${uri}    ${attr}
     ${resp} =   OpenBMC Get Request    ${uri}/attr/${attr}
-    [return]    ${resp.content}
+    ${content}=     To Json    ${resp.content}
+    [return]    ${content["data"]}
 
 
 Read Properties
@@ -114,4 +115,4 @@ Read Properties
     ${resp} =   OpenBMC Get Request    ${uri}
     Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
     ${content}=     To Json    ${resp.content}
-    [return]    ${content}
+    [return]    ${content["data"]}

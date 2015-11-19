@@ -13,14 +13,14 @@ List Inventory
     ${jsondata}=    To Json    ${resp.content}
     ${ret}=    Get Inventory Schema    ${MACHINE_TYPE}
     : FOR    ${ELEMENT}    IN    @{ret}
-    \    Should Contain    ${jsondata}    ${ELEMENT}
+    \    Should Contain    ${jsondata["data"]}    ${ELEMENT}
 
 
 Verify dimm vpd
 	: FOR 	${INDEX} 	IN RANGE 	0 	4
 	\	log 	${INDEX}
 	\	${value} =	Read Attribute	/org/openbmc/inventory/system/chassis/motherboard/dimm${INDEX}	fru_type
-	\	Should Be Equal	${value}	"DIMM"
+	\	Should Be Equal	${value}	DIMM
 
 
 Verify dimm vpd properties
