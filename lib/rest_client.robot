@@ -70,6 +70,8 @@ OpenBMC Get Request
 OpenBMC Post Request
     [Arguments]    ${uri}    &{kwargs}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
+    ${headers}=     Create Dictionary   Content-Type=application/json
+    set to dictionary   ${kwargs}       headers     ${headers}
     Log Request    method=Post    base_uri=${base_uri}    args=&{kwargs}
     Initialize OpenBMC
     ${ret}=    Post Request    openbmc    ${base_uri}    &{kwargs}
@@ -80,6 +82,15 @@ OpenBMC Put Request
     [Arguments]    ${uri}    &{kwargs}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     Log Request    method=Put    base_uri=${base_uri}    args=&{kwargs}
+    Initialize OpenBMC
+    ${ret}=    Put Request    openbmc    ${base_uri}    &{kwargs}
+    Log Response    ${ret}
+    [Return]    ${ret}
+
+OpenBMC Delete Request
+    [Arguments]    ${uri}    &{kwargs}
+    ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
+    Log Request    method=Delete    base_uri=${base_uri}    args=&{kwargs}
     Initialize OpenBMC
     ${ret}=    Put Request    openbmc    ${base_uri}    &{kwargs}
     Log Response    ${ret}
