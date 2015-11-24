@@ -15,8 +15,8 @@ Test Firmware Version
     ...     $ git describe --dirty
     ...     v0.1-34-g95f7347
     ...     $
-    ${resp} =    OpenBMC Get Request    /org/openbmc/inventory/system
+    ${resp} =    OpenBMC Get Request    /org/openbmc/inventory/system/chassis/motherboard/bmc
     Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    To Json    ${resp.content}
-    Should not be empty     ${jsondata["data"]["Version"]}
-    Should Match Regexp     ${jsondata["data"]["Version"]}      ^v\\d+\.\\d+
+    Should not be empty     ${jsondata["data"]["version"]}
+    Should Match Regexp     ${jsondata["data"]["version"]}      ^v\\d+\.\\d+
