@@ -1,4 +1,4 @@
 robotframework
 requests
-robotframework-requests
+robotframework-requests>=0.3.9
 robotframework-sshlibrary
