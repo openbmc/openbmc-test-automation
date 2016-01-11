@@ -1,0 +1,28 @@
+*** Settings ***
+Library           Collections
+Library           String
+Library           RequestsLibrary.RequestsKeywords
+Library           OperatingSystem
+Variables         ../data/variables.py
+
+*** Variables ***
+${OPENBMC_HOST}    9.3.164.161
+${DBUS_PREFIX}    ${EMPTY}
+${PORT}           ${EMPTY}
+${AUTH_URI}       https://${OPENBMC_HOST}
+${OPENBMC_USERNAME}    root
+${OPENBMC_PASSWORD}    0penBmc
+${MACHINE_TYPE}    palmetto
+
+*** Keywords ***
+Get Inventory Schema
+    [Arguments]    ${machine}
+    [Return]    &{INVENTORY}[${machine}]
+
+Get Inventory Items Schema
+    [Arguments]    ${machine}
+    [Return]    &{INVENTORY_ITEMS}[${machine}]
+
+Get Sensor Schema
+    [Arguments]    ${machine}
+    [Return]    &{SENSORS}[${machine}]
