@@ -1,0 +1,37 @@
+*** Settings ***
+Library           Collections
+Library           String
+Library           RequestsLibrary.RequestsKeywords
+Library           OperatingSystem
+Variables         ../data/variables.py
+
+*** Variables ***
+${OPENBMC_HOST}    9.3.164.161
+${DBUS_PREFIX}    ${EMPTY}
+${PORT}           ${EMPTY}
+${AUTH_URI}       https://${OPENBMC_HOST}
+${OPENBMC_USERNAME}    root
+${OPENBMC_PASSWORD}    0penBmc
+${MACHINE_TYPE}    palmetto
+${DBUS_POLL_INTERVAL}      15s
+${OPENBMC_REBOOT_TIMEOUT}   ${10}
+
+# PDU related parameters
+${PDU_TYPE}         ${EMPTY}
+${PDU_IP}           ${EMPTY}
+${PDU_USERNAME}     ${EMPTY}
+${PDU_PASSWORD}     ${EMPTY}
+${PDU_SLOT_NO}      ${EMPTY}
+
+*** Keywords ***
+Get Inventory Schema
+    [Arguments]    ${machine}
+    [Return]    &{INVENTORY}[${machine}]
+
+Get Inventory Items Schema
+    [Arguments]    ${machine}
+    [Return]    &{INVENTORY_ITEMS}[${machine}]
+
+Get Sensor Schema
+    [Arguments]    ${machine}
+    [Return]    &{SENSORS}[${machine}]
