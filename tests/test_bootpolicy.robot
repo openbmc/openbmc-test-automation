@@ -11,8 +11,6 @@ Suite Teardown  Close All Connections
 
 
 *** Variables ***
-${SYSTEM_SHUTDOWN_TIME}       ${5}
-${WAIT_FOR_POWER_OPERATION}   30sec
 
 *** Test Cases ***
 
