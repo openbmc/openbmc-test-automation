@@ -117,7 +117,7 @@ deleting log after obmc-phosphor-event.service restart
     ${resp} =    openbmc post request     ${deluri}    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
 
-makeing new log after obmc-phosphor-event.service restart
+making new log after obmc-phosphor-event.service restart
     [Documentation]     This is for testing event creation after the
     ...                 event service is restarted.
     Open Connection And Log In
