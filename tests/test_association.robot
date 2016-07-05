@@ -4,7 +4,6 @@ Documentation          This suite is used for testing eventlog association.
 Resource        ../lib/rest_client.robot
 Resource        ../lib/utils.robot
 
-Library         BuiltIn
 Library         Collections
 Library         SSHLibrary
 

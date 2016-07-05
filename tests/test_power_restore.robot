@@ -10,8 +10,6 @@ Resource        ../lib/utils.robot
 
 Library         SSHLibrary
 
-[Documentation]       Data Driven Tests
-
 
 ***test cases***
 
