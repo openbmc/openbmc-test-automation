@@ -11,6 +11,7 @@ Resource		../lib/rest_client.robot
 
 *** Test Cases ***
 Good connection for testing
+    [Tags]  CI
     ${content}=    Read Properties     /
     ${c}=          get from List       ${content}      0
     Should Be Equal    ${c}     /org
@@ -30,6 +31,7 @@ Get a null Property
     Should Be Equal     ${jsondata['data']['description']}      The specified property cannot be found: ''is_fru''
 
 get directory listing /
+    [Tags]  CI
     ${resp} =   openbmc get request     /
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json     ${resp.content}
@@ -37,6 +39,7 @@ get directory listing /
     should be equal as strings          ${json['status']}       ok
 
 get directory listing /org/
+    [Tags]  CI
     ${resp} =   openbmc get request     /org/
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
@@ -44,60 +47,70 @@ get directory listing /org/
     should be equal as strings          ${json['status']}       ok
 
 get invalid directory listing /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc get request     /i/dont/exist/
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings          ${json['status']}   error
 
 put directory listing /
+    [Tags]  CI
     ${resp} =   openbmc put request     /
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings          ${json['status']}   error
 
 put directory listing /org/
+    [Tags]  CI
     ${resp} =   openbmc put request     /org/
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings          ${json['status']}   error
 
 put invalid directory listing /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc put request     /i/dont/exist/
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings          ${json['status']}   error
 
 post directory listing /
+    [Tags]  CI
     ${resp} =   openbmc post request    /
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings          ${json['status']}   error
 
 post directory listing /org/
+    [Tags]  CI
     ${resp} =   openbmc post request    /org/
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings          ${json['status']}   error
 
 post invalid directory listing /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc post request    /i/dont/exist/
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings          ${json['status']}   error
 
 delete directory listing /
+    [Tags]  CI
     ${resp} =   openbmc delete request  /
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings          ${json['status']}   error
 
 delete directory listing /org/
+    [Tags]  CI
     ${resp} =   openbmc delete request  /
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings          ${json['status']}   error
 
 delete invalid directory listing /org/nothere/
+    [Tags]  CI
     ${resp} =   openbmc delete request  /org/nothere/
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
@@ -118,60 +131,70 @@ get list names /org/
     should be equal as strings      ${json['status']}       ok
 
 get invalid list names /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc get request     /i/dont/exist/list
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 put list names /
+    [Tags]  CI
     ${resp} =   openbmc put request     /list
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 put list names /org/
+    [Tags]  CI
     ${resp} =   openbmc put request     /org/list
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 put invalid list names /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc put request     /i/dont/exist/list
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 post list names /
+    [Tags]  CI
     ${resp} =   openbmc post request    /list
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 post list names /org/
+    [Tags]  CI
     ${resp} =   openbmc post request    /org/list
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 post invalid list names /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc post request    /i/dont/exist/list
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 delete list names /
+    [Tags]  CI
     ${resp} =   openbmc delete request  /list
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 delete list names /org/
+    [Tags]  CI
     ${resp} =   openbmc delete request  /list
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 delete invalid list names /org/nothere/
+    [Tags]  CI
     ${resp} =   openbmc delete request  /org/nothere/list
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
@@ -192,84 +215,98 @@ get names /org/
     should be equal as strings      ${json['status']}       ok
 
 get invalid names /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc get request     /i/dont/exist/enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 put names /
+    [Tags]  CI
     ${resp} =   openbmc put request     /enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 put names /org/
+    [Tags]  CI
     ${resp} =   openbmc put request     /org/enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 put invalid names /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc put request     /i/dont/exist/enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 post names /
+    [Tags]  CI
     ${resp} =   openbmc post request    /enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 post names /org/
+    [Tags]  CI
     ${resp} =   openbmc post request    /org/enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 post invalid names /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc post request    /i/dont/exist/enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 delete names /
+    [Tags]  CI
     ${resp} =   openbmc delete request  /enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 delete names /org/
+    [Tags]  CI
     ${resp} =   openbmc delete request  /enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 delete invalid names /org/nothere/
+    [Tags]  CI
     ${resp} =   openbmc delete request  /org/nothere/enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 get method org/openbmc/records/events/action/acceptTestMessage
+    [Tags]  CI
     ${resp} =   openbmc get request     org/openbmc/records/events/action/acceptTestMessage
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 get invalid method /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc get request     /i/dont/exist/action/foo
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 put method org/openbmc/records/events/action/acceptTestMessage
+    [Tags]  CI
     ${resp} =   openbmc put request     org/openbmc/records/events/action/acceptTestMessage
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 put invalid method /i/dont/exist/
+    [Tags]  CI
     ${resp} =   openbmc put request     /i/dont/exist/action/foo
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
@@ -284,6 +321,7 @@ post method power/getPowerState no args
     should be equal as strings      ${json['status']}       ok
 
 post method org/openbmc/records/events/action/acceptTestMessage invalid args
+    [Tags]  CI
     ${data} =   create dictionary   foo=bar
     ${resp} =   openbmc post request    org/openbmc/records/events/action/acceptTestMessage      data=${data}
     should be equal as strings      ${resp.status_code}     ${HTTP_BAD_REQUEST}
@@ -303,18 +341,21 @@ post method org/openbmc/sensors/host/BootCount with args
     Should Be Equal     ${content}      ${COUNT}
 
 delete method org/openbmc/records/events/action/acceptTestMessage
+    [Tags]  CI
     ${resp} =   openbmc delete request  org/openbmc/records/events/action/acceptTestMessage
     should be equal as strings      ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED} 
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 delete invalid method /org/nothere/
+    [Tags]  CI
     ${resp} =   openbmc delete request  /org/nothere/action/foomethod
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
     
 post method org/openbmc/records/events/action/acceptTestMessage no args 
+    [Tags]  CI
     ${data} =   create dictionary   data=@{EMPTY}
     ${resp} =   openbmc post request    org/openbmc/records/events/action/acceptTestMessage      data=${data}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
