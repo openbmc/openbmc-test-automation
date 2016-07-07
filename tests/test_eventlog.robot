@@ -19,11 +19,13 @@ ${WAIT_FOR_SERVICES_UP}     3min
 
 valid path to logs
     [Documentation]     Test list all events
+    [Tags]  CI
     ${resp} =   openbmc get request     /org/openbmc/records/events/
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
 
 clear any logs
     [Documentation]     Test delete all events
+    [Tags]  CI
     ${resp} =   openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${resp} =   openbmc get request     /org/openbmc/records/events/
@@ -32,22 +34,26 @@ clear any logs
 
 write a log
     [Documentation]     Test create event
+    [Tags]  CI
     create a test log
 
 Message attribute should match
     [Documentation]     Check message attribute for created event
+    [Tags]  CI
     ${uri} =      create a test log
     ${content} =     Read Attribute      ${uri}   message
     Should Be Equal     ${content}      A Test event log just happened
 
 Severity attribute should match
     [Documentation]     Check severity attribute for created event
+    [Tags]  CI
     ${uri} =      create a test log
     ${content}=     Read Attribute      ${uri}   severity
     Should Be Equal     ${content}      Info
 
 data_bytes attribute should match
     [Documentation]     Check data_bytes attribute for created event
+    [Tags]  CI
     @{data_list} =   Create List     ${48}  ${0}  ${19}  ${127}  ${136}  ${255}
     ${uri} =      create a test log
     ${content} =   Read Attribute      ${uri}   debug_data
@@ -55,6 +61,7 @@ data_bytes attribute should match
 
 delete the log
     [Documentation]     Test the delete event
+    [Tags]  CI
     ${uri} =     create a test log
     ${deluri} =  catenate    SEPARATOR=   ${uri}   /action/delete
     ${resp} =    openbmc post request     ${deluri}    data=${NIL}
@@ -64,6 +71,7 @@ delete the log
 
 2nd delete should fail
     [Documentation]     Negative scnenario to delete already deleted event
+    [Tags]  CI
     ${uri} =     create a test log
     ${deluri} =  catenate    SEPARATOR=   ${uri}   /action/delete
     ${resp} =    openbmc post request     ${deluri}    data=${NIL}
@@ -78,6 +86,7 @@ Intermixed delete
     ...                     delete middle log
     ...                     middle log should not exist
     ...                     time stamp should not match between logs(1st and 3rd)
+    [Tags]  CI
     ${event1}=      create a test log
     ${event2}=      create a test log
     ${event3}=      create a test log
@@ -91,6 +100,7 @@ Intermixed delete
 restarting event process retains logs
     [Documentation]     This is to test events are in place even after the
     ...                 event service is restarted.
+    [Tags]  CI
     ${resp} =   openbmc get request     /org/openbmc/records/events/
     ${json} =   to json         ${resp.content}
     ${logs_pre_restart}=    set variable    ${json['data']}
@@ -107,6 +117,7 @@ restarting event process retains logs
 deleting log after obmc-phosphor-event.service restart
     [Documentation]     This is to test event can be deleted created prior to
     ...                 event service is restarted.
+    [Tags]  CI
     ${uri}=         create a test log
 
     Open Connection And Log In
@@ -120,6 +131,7 @@ deleting log after obmc-phosphor-event.service restart
 makeing new log after obmc-phosphor-event.service restart
     [Documentation]     This is for testing event creation after the
     ...                 event service is restarted.
+    [Tags]  CI
     Open Connection And Log In
     ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
     Sleep   ${10}
@@ -129,6 +141,7 @@ makeing new log after obmc-phosphor-event.service restart
 deleting new log after obmc-phosphor-event.service restart
     [Documentation]     This testcase is for testing deleted newly created event
     ...                 after event service is restarted.
+    [Tags]  CI
     Open Connection And Log In
     ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
     Sleep   ${10}
@@ -170,6 +183,7 @@ Test events after openbmc reboot
 
 clearing logs results in no logs
     [Documentation]     This testcase is for clearning the events when no logs present
+    [Tags]  CI
     ${resp} =   openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${resp} =   openbmc get request     /org/openbmc/records/events/
