@@ -13,6 +13,44 @@ ${SAMPLING_FREQUENCY}  6
 
 *** Test Cases ***
 
+If Heartbeat LED exist then execute test
+    [Documentation]   If heartbeat LED exist then execute the test set.
+    ${resp} =   OpenBMC Get Request   /org/openbmc/control/led/heartbeat
+    Run keyword If  ${resp.status_code} == ${HTTP_OK}   Execute Heartbeat LEDs Test Cases
+
+If Identify LED exist then execute test
+    [Documentation]   If identify LED exist then execute the test set.
+    ${resp} =   OpenBMC Get Request   /org/openbmc/control/led/identify
+    Run keyword If  ${resp.status_code} == ${HTTP_OK}   Execute Identify LEDs Test Cases
+
+If Beep LED exist then execute test
+    [Documentation]   If beep LED exist then execute the test set.
+    ${resp} =   OpenBMC Get Request   /org/openbmc/control/led/beep
+    Run keyword If  ${resp.status_code} == ${HTTP_OK}  Execute Beep LEDs Test Cases
+
+*** Keywords ***
+
+Execute Heartbeat LEDs Test Cases
+    [Documentation]   Executing ON/OFF/Fast/Slow Heartbeat LED test cases.
+    Turn ON the Heartbeat LED
+    Turn OFF the Heartbeat LED
+    Blink Fast the Heartbeat LED
+    Blink Slow the Heartbeat LED
+
+Execute Identify LEDs Test Cases
+    [Documentation]   Executing ON/OFF/Fast/Slow Identify LED test cases.
+    Turn ON the Identify LED
+    Turn OFF the Identify LED
+    Blink Fast the Identify LED
+    Blink Slow the Identify LED
+
+Execute Beep LEDs Test Cases
+    [Documentation]   Executing ON/OFF/Fast/Slow Beep LED test cases.
+    Turn ON the Beep LED
+    Turn OFF the Beep LED
+    Blink Fast the Beep LED
+    Blink Slow the Beep LED
+
 Turn ON the Heartbeat LED
    [Documentation]   This testcase is to test the setOn functionality of the
    ...               Heartbeat LED. The LED state is read again to check if
@@ -152,8 +190,6 @@ Blink Slow the Beep LED
    \   ${OFF_VALUE} =   Set Variable If   '${ledstate}'=='Off'   ${OFF_VALUE + 1}   ${OFF_VALUE}
    should be true   ${ON_VALUE} > ${MIN_TOGGLE_VALUE} and ${OFF_VALUE} > ${MIN_TOGGLE_VALUE}
    
-*** Keywords ***
-
 Get LED State
    [arguments]    ${args}
    ${data} =   create dictionary   data=@{EMPTY}
