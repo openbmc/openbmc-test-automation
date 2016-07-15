@@ -41,6 +41,11 @@ Use following variables for syslog test cases
     $ export SYSLOG_IP_ADDRESS=<remote syslog system ip>
     $ export SYSLOG_PORT=<remote syslog system port>
 
+Use the following variables for Qemu test run
+==========================================================
+    $ export SSH_PORT=<ssh port number>
+    $ export HTTPS_PORT=<https port number>
+
 ```
 
 Run tests

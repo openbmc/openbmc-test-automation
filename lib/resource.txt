@@ -23,6 +23,10 @@ ${PDU_USERNAME}     ${EMPTY}
 ${PDU_PASSWORD}     ${EMPTY}
 ${PDU_SLOT_NO}      ${EMPTY}
 
+# User define input SSH and HTTPS related parameters
+${SSH_PORT}         ${EMPTY}
+${HTTPS_PORT}       ${EMPTY}
+
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}
