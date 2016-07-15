@@ -8,6 +8,8 @@ Library         BuiltIn
 Library         Collections
 Library         SSHLibrary
 
+# 2016/07/15 Mike Walsh (xzy0065) - I tried to run to run this test in our docker image and the "Library  SSHLibrary" request failed with a "No module named SSHLibrary".  I was able to fix this problem by having our docker image updated.  However, I found it troubling that this test run proceeded in spite of this failure.  I was not successful in finding a way to make the test always stop in this case.  We certainly don't want to continue and mark tests as failures when our essential setup failed.  I created this discussion thread in hopes that we may find a better way to handle this issue: https://groups.google.com/forum/#!topic/robotframework-users/5ybqjJfi66E.
+
 *** Variables ***
 
 ${SYSTEM_SHUTDOWN_TIME}           1min
