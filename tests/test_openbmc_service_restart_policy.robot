@@ -1,12 +1,12 @@
 *** Settings ***
-Documentation           This testsuites tests the autorestart policy for
-...                     OpenBMC project
+Documentation        This testsuites tests the autorestart policy for
+...                  OpenBMC project
 
-Resource        ../lib/resource.txt
+Resource             ../lib/resource.txt
+Resource             ../lib/connection_client.robot
 
-Library                SSHLibrary
-Suite Setup            Open Connection And Log In
-Suite Teardown         Close All Connections
+Suite Setup          Open Connection And Log In
+Suite Teardown       Close All Connections
 
 *** Test Cases ***
 Test OpenBMC Services Autorestart Policy
@@ -54,7 +54,3 @@ Execute new Command
     [arguments]    ${command}
     ${stdout}   ${stderr}   ${rc}=  Execute Command    ${command}    return_stderr=True     return_rc=True
     [Return]    ${stdout}   ${stderr}   ${rc}
-
-Open Connection And Log In
-    Open connection     ${OPENBMC_HOST}
-    Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}

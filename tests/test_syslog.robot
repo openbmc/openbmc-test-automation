@@ -4,10 +4,11 @@ Documentation       This suite is for testing syslog function of Open BMC.
 
 Resource            ../lib/rest_client.robot
 Resource            ../lib/utils.robot
-Resource            ../lib/ipmi_client.robot
+Resource            ../lib/connection_client.robot
 
-Library             OperatingSystem
-Library             SSHLibrary
+Suite Setup         Open Connection And Log In
+Suite Teardown      Close All Connections
+
 
 *** Variables ***
 ${INVALID_SYSLOG_IP_ADDRESS}      a.ab.c.d
@@ -111,7 +112,6 @@ Persistency check for syslog setting
     ${old_port}=   Read Attribute   /org/openbmc/LogManager/rsyslog   port
     ${old_status} =    Read Attribute    /org/openbmc/LogManager/rsyslog   status
     
-    Open Connection And Log In
     ${output}=      Execute Command    /sbin/reboot
     Sleep   ${SYSTEM_SHUTDOWN_TIME}
     Wait For Host To Ping   ${OPENBMC_HOST}

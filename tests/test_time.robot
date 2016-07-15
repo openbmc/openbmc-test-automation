@@ -1,14 +1,13 @@
 *** Settings ***
 Documentation          This suite is for testing System time in Open BMC.
 
-Resource        ../lib/ipmi_client.robot
+Resource               ../lib/ipmi_client.robot
 
-Library                 OperatingSystem
-Library                 SSHLibrary
-Library                 DateTime
+Library                OperatingSystem
+Library                DateTime
 
-Suite Setup             Open Connection And Log In
-Suite Teardown          Close All Connections
+Suite Setup            Open Connection And Log In
+Suite Teardown         Close All Connections
 
 *** Variables ***
 ${SYSTEM_TIME_INVALID}     01/01/1969 00:00:00

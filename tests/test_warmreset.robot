@@ -3,10 +3,10 @@ Documentation           This suite is for testing OCC: Power capping setting
 
 Resource                ../lib/rest_client.robot
 Resource                ../lib/utils.robot
+Resource                ../lib/connection_client.robot
 
-
-Library                 OperatingSystem
-Library                 SSHLibrary
+Suite Setup             Open Connection And Log In
+Suite Teardown          Close All Connections
 
 *** Variables ***
 ${SYSTEM_SHUTDOWN_TIME}    ${5}
@@ -46,7 +46,3 @@ Get BMC Link
     \   log     ${ELEMENT}
     \   ${found}=   Get Lines Matching Pattern      ${ELEMENT}      *control/bmc*
     \   Return From Keyword If     '${found}' != ''     ${found}
-
-Open Connection And Log In
-    Open connection     ${OPENBMC_HOST}
-    Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}

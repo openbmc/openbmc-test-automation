@@ -11,3 +11,5 @@ echo "--variable PDU_PASSWORD:$PDU_PASSWORD" >> $ARG_FILE
 echo "--variable PDU_SLOT_NO:$PDU_SLOT_NO" >> $ARG_FILE
 echo "--variable SYSLOG_IP_ADDRESS:$SYSLOG_IP_ADDRESS" >> $ARG_FILE
 echo "--variable SYSLOG_PORT:$SYSLOG_PORT" >> $ARG_FILE
+echo "--variable SSH_PORT:$SSH_PORT" >> $ARG_FILE
+echo "--variable HTTPS_PORT:$HTTPS_PORT" >> $ARG_FILE
