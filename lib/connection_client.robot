@@ -17,6 +17,14 @@ Open Connection And Log In
 
     Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
 
+Open Connection for SCP
+    Import Library      SCPLibrary      WITH NAME       scp
+    Run Keyword If  '${SSH_PORT}' == '${EMPTY}'  scp.Open connection  ${OPENBMC_HOST}
+    ...  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+    ...  ELSE   Run Keyword    scp.Open connection  ${OPENBMC_HOST}  port=${SSH_PORT}
+    ...  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+
+
 User input SSH and HTTPs Ports
     [Documentation]   Update the global SSH and HTTPs port variable for QEMU
     ${port_num}=    Convert To Integer    ${SSH_PORT}
