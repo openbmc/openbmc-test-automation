@@ -17,6 +17,10 @@ Open Connection And Log In
 
     Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
 
+Open Connection for scp
+    Import Library      SCPLibrary      WITH NAME       scp
+    scp.Open connection   ${OPENBMC_HOST}   username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+
 User input SSH and HTTPs Ports
     [Documentation]   Update the global SSH and HTTPs port variable for QEMU
     ${port_num}=    Convert To Integer    ${SSH_PORT}
