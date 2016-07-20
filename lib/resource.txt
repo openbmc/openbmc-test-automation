@@ -23,6 +23,11 @@ ${PDU_USERNAME}     ${EMPTY}
 ${PDU_PASSWORD}     ${EMPTY}
 ${PDU_SLOT_NO}      ${EMPTY}
 
+# OS related parameters.
+${OS_HOST}		${EMPTY}
+${OS_USERNAME}		racker
+${OS_PASSWORD}		P@ssw0rd
+
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}
