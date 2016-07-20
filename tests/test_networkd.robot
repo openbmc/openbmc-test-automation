@@ -3,14 +3,15 @@ Documentation		This suite will verifiy the Network Configuration Rest Interfaces
 ...					Details of valid interfaces can be found here...
 ...					https://github.com/openbmc/docs/blob/master/rest-api.md
 
-Resource		../lib/rest_client.robot
-Resource                ../lib/ipmi_client.robot
-Resource                ../lib/utils.robot
-Library                 ../lib/pythonutil.py
+Resource            ../lib/rest_client.robot
+Resource            ../lib/connection_client.robot
+Resource            ../lib/utils.robot
+Library             ../lib/pythonutil.py
 
+Suite Setup         Open Connection And Log In
+Suite Teardown      Close All Connections
 
-
-*** Test Cases ***                                
+*** Test Cases ***
 
 Get the Mac address
 

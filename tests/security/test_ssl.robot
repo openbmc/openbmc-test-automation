@@ -5,8 +5,6 @@ Suite Teardown    Delete All Sessions
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/resource.txt
 
-Library           RequestsLibrary.RequestsKeywords
-
 *** Test Cases ***
 Test SSL Connection
     [Documentation]     This testcase is for testing the SSL connection to the
@@ -26,7 +24,7 @@ Test non-SSL Connection to port 80
     ...     will not accepts the non-secure connection that is with http to
     ...     port 80 and expect a connection error
     Create Session    openbmc    http://${OPENBMC_HOST}/    timeout=3
-    Run Keyword And Expect Error    ConnectTimeout*   Get Request    openbmc   /list
+    Run Keyword And Expect Error    ConnectionError*   Get Request    openbmc   /list
 
 Test non-SSL Connection to port 443
     [Documentation]     This testcase is for test to check OpenBMC machine

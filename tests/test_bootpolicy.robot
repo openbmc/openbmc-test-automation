@@ -2,17 +2,14 @@
 
 Documentation   This testsuite is for testing boot policy function.
 
-Resource        ../lib/rest_client.robot
-Resource        ../lib/ipmi_client.robot
-Resource        ../lib/utils.robot
+Resource           ../lib/rest_client.robot
+Resource           ../lib/ipmi_client.robot
+Resource           ../lib/utils.robot
 
-Suite Setup     Open Connection And Log In
-Suite Teardown  Close All Connections
-
+Suite Setup        Open Connection And Log In
+Suite Teardown     Close All Connections
 
 *** Variables ***
-${SYSTEM_SHUTDOWN_TIME}       ${5}
-${WAIT_FOR_POWER_OPERATION}   30sec
 
 *** Test Cases ***
 

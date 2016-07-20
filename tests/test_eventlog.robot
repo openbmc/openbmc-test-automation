@@ -1,14 +1,15 @@
 *** Settings ***
-Documentation          This suite is used for testing the error logging
-...                    capability from the host
+Documentation     This suite is used for testing the error logging
+...               capability from the host
 
-Resource        ../lib/rest_client.robot
-Resource        ../lib/utils.robot
+Resource          ../lib/rest_client.robot
+Resource          ../lib/utils.robot
+Resource          ../lib/connection_client.robot
 
+Library           Collections
 
-Library         BuiltIn
-Library         Collections
-Library         SSHLibrary
+Suite Setup       Open Connection And Log In
+Suite Teardown    Close All Connections
 
 *** Variables ***
 &{NIL}  data=@{EMPTY}
@@ -105,7 +106,6 @@ restarting event process retains logs
     ${json} =   to json         ${resp.content}
     ${logs_pre_restart}=    set variable    ${json['data']}
 
-    Open Connection And Log In
     ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
     Sleep   ${10}
 
@@ -120,7 +120,6 @@ deleting log after obmc-phosphor-event.service restart
     [Tags]  CI
     ${uri}=         create a test log
 
-    Open Connection And Log In
     ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
     Sleep   ${10}
 
@@ -128,11 +127,10 @@ deleting log after obmc-phosphor-event.service restart
     ${resp} =    openbmc post request     ${deluri}    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
 
-makeing new log after obmc-phosphor-event.service restart
+making new log after obmc-phosphor-event.service restart
     [Documentation]     This is for testing event creation after the
     ...                 event service is restarted.
     [Tags]  CI
-    Open Connection And Log In
     ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
     Sleep   ${10}
 
@@ -142,7 +140,6 @@ deleting new log after obmc-phosphor-event.service restart
     [Documentation]     This testcase is for testing deleted newly created event
     ...                 after event service is restarted.
     [Tags]  CI
-    Open Connection And Log In
     ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
     Sleep   ${10}
 
@@ -163,7 +160,6 @@ Test events after openbmc reboot
     [Tags]      reboot_tests
     ${pre_reboot_event}=         create a test log
 
-    Open Connection And Log In
     ${output}=      Execute Command    /sbin/reboot
     Sleep   ${SYSTEM_SHUTDOWN_TIME}
     Wait For Host To Ping   ${OPENBMC_HOST}
@@ -204,7 +200,3 @@ create a test log
     ${LOGID} =    convert to integer    ${json['data']}
     ${uri}=     catenate    SEPARATOR=   /org/openbmc/records/events/   ${LOGID}
     [return]  ${uri}
-
-Open Connection And Log In
-    Open connection     ${OPENBMC_HOST}
-    Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}

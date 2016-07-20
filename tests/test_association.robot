@@ -1,12 +1,14 @@
 *** Settings ***
-Documentation          This suite is used for testing eventlog association.
+Documentation     This suite is used for testing eventlog association.
 
-Resource        ../lib/rest_client.robot
-Resource        ../lib/utils.robot
+Resource          ../lib/rest_client.robot
+Resource          ../lib/utils.robot
+Resource          ../lib/connection_client.robot
 
-Library         BuiltIn
-Library         Collections
-Library         SSHLibrary
+Library           Collections
+
+Suite Setup       Open Connection And Log In
+Suite Teardown    Close All Connections
 
 # I tried to run to run this test in our docker image and the "Library  
 # SSHLibrary" request failed with a "No module named SSHLibrary".  I was able to
@@ -49,7 +51,6 @@ Create error log on single FRU
 
     Clear all logs
 
-    Open Connection And Log In
     ${output}=      Execute Command    ${CREATE_ERROR_SINGLE_FRU}
 
     ${log_list} =     Get EventList
@@ -129,12 +130,11 @@ Delete error log
 
 Association with invalid FRU
     [Documentation]     ***BAD PATH***
-    ...                 Create an error log on invalid FRU and verify 
+    ...                 Create an error log on invalid FRU and verify
     ...                 that its does not have any association.\n
 
     Clear all logs
 
-    Open Connection And Log In
     ${output}=      Execute Command    ${CREATE_ERROR_INVALID_FRU}
     ${log_list} =     Get EventList
     ${association_uri} =    catenate    SEPARATOR=   ${log_list[0]}   /fru
@@ -151,7 +151,6 @@ Assocition with no FRU error event
 
     Clear all logs
 
-    Open Connection And Log In
     ${output}=      Execute Command    ${CREATE_ERROR_NO_FRU}
     ${log_list} =     Get EventList
     ${association_uri} =    catenate    SEPARATOR=   ${log_list[0]}   /fru
@@ -168,7 +167,6 @@ Association with virtual sensor
 
     Clear all logs
 
-    Open Connection And Log In
     ${output}=      Execute Command    ${CREATE_ERROR_VIRTUAL_SENSOR}
     ${log_list} =     Get EventList
     ${association_uri} =    catenate    SEPARATOR=   ${log_list[0]}   /fru
@@ -185,7 +183,6 @@ Association unchanged after reboot
     ${association_uri} =    catenate    SEPARATOR=   ${pre_reboot_log_uri}   /fru
     ${pre_reboot_association_content} =     Read Attribute    ${association_uri}    endpoints
 
-    Open Connection And Log In
     ${output}=      Execute Command    /sbin/reboot
     Sleep   ${SYSTEM_SHUTDOWN_TIME}
     Wait For Host To Ping   ${OPENBMC_HOST}
@@ -216,10 +213,6 @@ Create a test log
     ${LOGID} =    convert to integer    ${json['data']}
     ${uri}=     catenate    SEPARATOR=   /org/openbmc/records/events/   ${LOGID}
     [return]  ${uri}
-
-Open Connection And Log In
-    Open connection     ${OPENBMC_HOST}
-    Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
 
 Clear all logs
     ${resp} =   openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}

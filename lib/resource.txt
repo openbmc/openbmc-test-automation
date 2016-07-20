@@ -28,6 +28,9 @@ ${OS_HOST}          ${EMPTY}
 ${OS_USERNAME}      racker
 ${OS_PASSWORD}      P@ssw0rd
 
+# User define input SSH and HTTPS related parameters
+${SSH_PORT}         ${EMPTY}
+${HTTPS_PORT}       ${EMPTY}
 
 *** Keywords ***
 Get Inventory Schema
