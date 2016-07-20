@@ -27,6 +27,11 @@ ${PDU_SLOT_NO}      ${EMPTY}
 ${SSH_PORT}         ${EMPTY}
 ${HTTPS_PORT}       ${EMPTY}
 
+# OS related parameters.
+${OS_HOST}          ${EMPTY}
+${OS_USERNAME}      racker
+${OS_PASSWORD}      P@ssw0rd
+
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}
