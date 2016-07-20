@@ -27,6 +27,12 @@ ${PDU_SLOT_NO}      ${EMPTY}
 ${SSH_PORT}         ${EMPTY}
 ${HTTPS_PORT}       ${EMPTY}
 
+# OS related parameters.
+${OS_HOST}          ${EMPTY}
+${OS_USERNAME}      ${EMPTY}
+${OS_PASSWORD}      ${EMPTY}
+${OS_WAIT_TIMEOUT}  ${15*60}
+
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}
