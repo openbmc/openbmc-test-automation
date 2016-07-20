@@ -52,3 +52,46 @@ Trigger Warm Reset
     Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
     Sleep   ${SYSTEM_SHUTDOWN_TIME}min
     Wait For Host To Ping   ${OPENBMC_HOST}
+
+Check OS
+    [Documentation]  Checks that the host OS is up by running an SSH command.
+
+    [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    ...          ${os_password}=${OS_PASSWORD}
+    [Teardown]  Close Connection
+
+    # os_host           The DNS name/IP of the OS host associated with our BMC.
+    # os_username       The username to be used to sign on to the OS host.
+    # os_password       The password to be used to sign on to the OS host.
+
+    ${OS_PORT}=  set variable  22
+
+    Open connection  ${os_host}
+    Login  ${os_username}  ${os_password}
+
+    ${output}  ${stderr}  ${rc}=  Execute Command  uptime  return_stderr=True
+    ...        return_rc=True
+
+    # If the return code returned by "Execute Command" is non-zero, this keyword
+    # will fail.
+    Should Be Equal  ${rc}      ${0}
+    # We will likewise fail if there is any stderr data.
+    Should Be Empty  ${stderr}
+
+Wait for OS
+    [Documentation]  Waits for the host OS to come up via calls to "Check OS".
+    [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    ...          ${os_password}=${OS_PASSWORD}  ${timeout}=${OS_WAIT_TIMEOUT}
+
+    # os_host           The DNS name or IP of the OS host associated with our
+    #                   BMC.
+    # os_username       The username to be used to sign on to the OS host.
+    # os_password       The password to be used to sign on to the OS host.
+    # timeout           The timeout in seconds indicating how long you're
+    #                   willing to wait for the OS to respond.
+
+    # The interval to be used between calls to "Check OS".
+    ${interval}=  Set Variable  5
+
+    Wait Until Keyword Succeeds  ${timeout} sec  ${interval}  Check OS
+    ...                          ${os_host}  ${os_username}  ${os_password}
