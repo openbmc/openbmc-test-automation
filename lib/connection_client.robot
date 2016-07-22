@@ -23,4 +23,4 @@ User input SSH and HTTPs Ports
     ${SSH_PORT}=    Replace Variables     ${port_num}
 
     ${https_num}=   Convert To Integer    ${HTTPS_PORT}
-    ${AUTH_URI}=    Replace Variables     https://${OPENBMC_HOST}:${https_num}
+    Set Global Variable     ${AUTH_URI}    https://${OPENBMC_HOST}:${https_num}
