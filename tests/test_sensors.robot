@@ -1,13 +1,16 @@
 *** Settings ***
-Documentation          This example demonstrates executing commands on a remote machine
-...                    and getting their output and the return code.
+Documentation          This file demonstrates executing REST way and dbus-send 
+...                    commands on a remote machine to test its sensors and 
+...                    getting their output and the return code.
 ...
-...                    Notice how connections are handled as part of the suite setup and
-...                    teardown. This saves some time when executing several test cases.
+...                    Notice how connections are handled as part of the
+...                    suite setup and teardown.
+...                    This saves some time when executing several test cases.
 
 Resource        ../lib/rest_client.robot
-Resource        ../lib/ipmi_client.robot
+Library         SSHLibrary
 Library         ../data/model.py
+Library 	OperatingSystem
 
 Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
@@ -15,216 +18,143 @@ Suite Teardown         Close All Connections
 
 *** Variables ***
 ${model} =    ${OPENBMC_MODEL}
+${interface} =    org.openbmc.SensorValue.
+${method} =    getValue
+${dbuspart1cmd} =   dbus-send --system --print-reply=literal --dest=org.openbmc.Sensors
 
 *** Test Cases ***
-Verify connection
-    Execute new Command    echo "hello"
-    Response Should Be Equal    "hello"
+Dbusway Execute Set Sensor boot count
+    ${obj} =  Set Variable  /org/openbmc/sensors/host/BootCount
+    ${valuetoset} =   Set Variable    int32:${5}
+    ${method} =   Set Variable  setValue
+    ${output} =   Dbus Send Set Command  ${obj}  ${method}   ${valuetoset}
+    Log to Console   \n ${output}
+    ${prevaluetocompare}   ${postvaluetocompare} =   Split String   ${valuetoset}  :
+    ${listtocompare} =   Catenate  ${prevaluetocompare}   ${postvaluetocompare}
+    ${method} =   Set Variable   getValue
+    ${output} =   Dbus Send Get Command  ${obj}  ${method}
+    ${output} =    Remove String     ${output}  variant
+    Log to Console   \n ${output}
+    Should Be String   ${output}
+    Should Contain  ${output}  ${listtocompare}
 
-Execute ipmi BT capabilities command
-    Run IPMI command            0x06 0x36
-    response Should Be Equal    " 01 40 40 0a 01"
+Dbusway Set Sensor Boot progress
+    ${obj} =  Set Variable  /org/openbmc/sensors/host/BootProgress
+    ${valuetoset} =   Set Variable    string:"FW Progress, Baseboard Init"
+    ${method} =   Set Variable  setValue
+    ${output} =   Dbus Send Set Command  ${obj}  ${method}   ${valuetoset}
+    Log to Console   \n ${output}
+    ${valuetocompare} =  Get Substring   ${valuetoset}  8  34
+    Log to Console   \n   ${valuetocompare}
+    ${method} =   Set Variable   getValue
+    ${output} =   Dbus Send Get Command  ${obj}  ${method}
+    Should Be String   ${output}
+    Should Contain  ${output}  ${valuetocompare}
 
-Execute Set Sensor boot count
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/BootCount
-    ${x} =      Get Sensor Number   ${uri}
+Dbusway Set Sensor Boot progress Longest string
+    ${obj} =    Set Variable    /org/openbmc/sensors/host/BootProgress
+    ${valuetoset} =   Set Variable    string:"FW Progress, Docking station attachment"
+    ${method} =   Set Variable  setValue
+    ${output} =   Dbus Send Set Command  ${obj}  ${method}   ${valuetoset}
+    Log to Console   \n ${output}
+    ${valuetocompare} =  Get Substring   ${valuetoset}  8  42
+    Log to Console   \n   ${valuetocompare}
+    ${method} =   Set Variable   getValue
+    ${output} =   Dbus Send Get Command  ${obj}  ${method}
+    Should Be String   ${output}
+    Should Contain  ${output}  ${valuetocompare}
 
-    Run IPMI command   0x04 0x30 ${x} 0x01 0x00 0x35 0x00 0x00 0x00 0x00 0x00 0x00
-    Read the Attribute      ${uri}   value
-    ${val} =     convert to integer    53
-    Response Should Be Equal   ${val}
+Dbusway Bootprogress Sensor FW Hang Unspecified Error
+    ${obj} =    Set Variable    /org/openbmc/sensors/host/BootProgress
+    ${valuetoset} =   Set Variable    string:"FW Hang, Unspecified"
+    ${method} =   Set Variable  setValue
+    ${output} =   Dbus Send Set Command  ${obj}  ${method}   ${valuetoset}
+    Log to Console   \n ${output}
+    ${valuetocompare} =  Get Substring   ${valuetoset}  8  27
+    Log to Console   \n   ${valuetocompare}
+    ${method} =   Set Variable   getValue
+    ${output} =   Dbus Send Get Command  ${obj}  ${method}
+    Should Be String   ${output}
+    Should Contain  ${output}  ${valuetocompare}
 
-Set Sensor Boot progress
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/BootProgress
-    ${x} =      Get Sensor Number   ${uri}
+Dbusway Bootprogress FW Hang State
+    ${obj} =    Set Variable    /org/openbmc/sensors/host/BootProgress
+    ${valuetoset} =   Set Variable    string:"POST Error, unknown"
+    ${method} =   Set Variable  setValue
+    ${output} =   Dbus Send Set Command  ${obj}  ${method}   ${valuetoset}
+    Log to Console   \n ${output}
+    ${valuetocompare} =  Get Substring   ${valuetoset}  8  27
+    Log to Console   \n   ${valuetocompare}
+    ${method} =   Set Variable   getValue
+    ${output} =   Dbus Send Get Command  ${obj}  ${method}
+    Should Be String   ${output}
+    Should Contain  ${output}  ${valuetocompare}
 
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x04 0x00 0x00 0x00 0x00 0x14 0x00
-    Read the Attribute  ${uri}    value
-    Response Should Be Equal    FW Progress, Baseboard Init
+Dbusway OperatingSystemStatus Sensor boot completed progress
+    ${obj} =    Set Variable    /org/openbmc/sensors/host/OperatingSystemStatus
+    ${valuetoset} =   Set Variable    string:"Boot completed (00)"
+    ${method} =   Set Variable  setValue
+    ${output} =   Dbus Send Set Command  ${obj}  ${method}   ${valuetoset}
+    Log to Console   \n ${output}
+    ${valuetocompare} =  Get Substring   ${valuetoset}  8  27
+    Log to Console   \n   ${valuetocompare}
+    ${method} =   Set Variable   getValue
+    ${output} =   Dbus Send Get Command  ${obj}  ${method}
+    Should Be String   ${output}
+    Should Contain  ${output}  ${valuetocompare}
 
-Set Sensor Boot progress Longest string
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/BootProgress
-    ${x} =      Get Sensor Number   ${uri}
+Dbusway OperatingSystemStatus Sensor progress
+    ${obj} =    Set Variable    /org/openbmc/sensors/host/OperatingSystemStatus
+    ${valuetoset} =   Set Variable    string:"PXE boot completed"
+    ${method} =   Set Variable  setValue
+    ${output} =   Dbus Send Set Command  ${obj}  ${method}   ${valuetoset}
+    Log to Console   \n ${output}
+    ${valuetocompare} =  Get Substring   ${valuetoset}  8  26
+    Log to Console   \n   ${valuetocompare}
+    ${method} =   Set Variable   getValue
+    ${output} =   Dbus Send Get Command  ${obj}  ${method}
+    Should Be String   ${output}
+    Should Contain  ${output}  ${valuetocompare}
 
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x04 0x00 0x00 0x00 0x00 0x0e 0x00
-    Read The Attribute  ${uri}    value
-    Response Should Be Equal    FW Progress, Docking station attachment
+Dbusway OCC Active Sensor on Disabled
+    ${obj} =    Set Variable    /org/openbmc/sensors/host/cpu0/OccStatus
+    ${valuetoset} =   Set Variable    string:"Disabled"
+    ${method} =   Set Variable  setValue
+    ${output} =   Dbus Send Set Command  ${obj}  ${method}   ${valuetoset}
+    Log to Console   \n ${output}
+    ${valuetocompare} =  Get Substring   ${valuetoset}  8  16
+    Log to Console   \n   ${valuetocompare}
+    ${method} =   Set Variable   getValue
+    ${output} =   Dbus Send Get Command  ${obj}  ${method}
+    Should Be String   ${output}
+    Should Contain  ${output}  ${valuetocompare}
 
-BootProgress sensor FW Hang unspecified Error
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/BootProgress
-    ${x} =      Get Sensor Number   ${uri}
 
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00
-    Read The Attribute  ${uri}    value
-    Response Should Be Equal    FW Hang, Unspecified
+Dbusway OCC Active Sensor on Enabled
+    ${obj} =    Set Variable    /org/openbmc/sensors/host/cpu0/OccStatus
+    ${valuetoset} =   Set Variable    string:"Enabled"
+    ${method} =   Set Variable  setValue
+    ${output} =   Dbus Send Set Command  ${obj}  ${method}   ${valuetoset}
+    Log to Console   \n ${output}
+    ${valuetocompare} =  Get Substring   ${valuetoset}  8  16
+    Log to Console   \n   ${valuetocompare}
+    ${method} =   Set Variable   getValue
+    ${output} =   Dbus Send Get Command  ${obj}  ${method}
+    Should Be String   ${output}
+    Should Contain  ${output}  ${valuetocompare}
 
-BootProgress fw hang state
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/BootProgress
-    ${x} =      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}    value
-    Response Should Be Equal    POST Error, unknown
-
-OperatingSystemStatus Sensor boot completed progress
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/OperatingSystemStatus
-    ${x} =      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}     value
-    Response Should Be Equal    Boot completed (00)
-
-OperatingSystemStatus Sensor progress
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/OperatingSystemStatus
-    ${x} =      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x04 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}     value
-    Response Should Be Equal    PXE boot completed
-
-OCC Active sensor on enabled
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/cpu0/OccStatus
-    ${x} =      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}     value
-    Response Should Be Equal    Enabled
-
-OCC Active sensor on disabled
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/cpu0/OccStatus
-    ${x} =      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}     value
-    Response Should Be Equal    Disabled
-
-CPU Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    present
-    Response Should Be Equal    True
-
-CPU not Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    present
-    Response Should Be Equal    False
-
-CPU fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x01 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    fault
-    Response Should Be Equal    True
-
-CPU no fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x20 0x00
-    Read The Attribute   ${uri}    fault
-    Response Should Be Equal    False
-
-core Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0/core11
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}   present
-    Response Should Be Equal    True
-
-core not Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0/core11
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}   present
-    Response Should Be Equal    False
-
-core fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0/core11
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x01 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    fault
-    Response Should Be Equal    True
-
-core no fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0/core11
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x20 0x00
-    Read The Attribute   ${uri}    fault
-    Response Should Be Equal    False
-
-DIMM3 Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/dimm3
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x40 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}     present
-    Response Should Be Equal    True
-
-DIMM3 not Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/dimm3
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x00 0x40 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}     present
-    Response Should Be Equal    False
-
-DIMM0 fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/dimm0
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x10 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}     fault
-    Response Should Be Equal    True
-
-DIMM0 no fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/dimm0
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x10 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}     fault
-    Response Should Be Equal    False
-
-Centaur0 Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/membuf0
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x40 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    present
-    Response Should Be Equal    True
-
-Centaur0 not Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/membuf0
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x40 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    present
-    Response Should Be Equal    False
-
-Centaur0 fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/membuf0
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x10 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    fault
-    Response Should Be Equal    True
-
-Centaur0 no fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/membuf0
-    ${x} =      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x10 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    fault
-    Response Should Be Equal    False
+Dbusway Powercap Set Value
+    ${obj} =    Set Variable    /org/openbmc/sensors/host/cpu0/OccStatus
+    ${valuetoset} =   Set Variable    int32:5
+    ${method} =   Set Variable  setValue
+    ${output} =   Dbus Send Set Command  ${obj}  ${method}   ${valuetoset}
+    Log to Console   \n ${output}
+    ${valuetocompare} =  Get Substring   ${valuetoset}  8  16
+    Log to Console   \n   ${valuetocompare}
+    ${method} =   Set Variable   getValue
+    ${output} =   Dbus Send Get Command  ${obj}  ${method}
+    Should Be String   ${output}
+    Should Contain  ${output}  ${valuetocompare}
 
 System Present
     Read The Attribute   /org/openbmc/inventory/system    present
@@ -249,14 +179,45 @@ io_board Present
 io_board Fault
     Read The Attribute   /org/openbmc/inventory/system/chassis/io_board    fault
     Response Should Be Equal    False
-    
 
+
+OCC Active Sensor on enabled
+    ${uri} =    Set Variable    /org/openbmc/sensors/host/cpu0/OccStatus
+    ${COUNT}=   Set Variable     Enabled
+    @{count_list} =   Create List     ${COUNT}
+    ${data} =   create dictionary   data=@{count_list}
+    ${resp} =   openbmc get request    ${uri}
+    ${resp} =   openbmc post request    ${uri}/action/setValue    data=${data}
+    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+    ${json} =   to json         ${resp.content}
+    should be equal as strings      ${json['status']}       ok
+    ${content}=    Read Attribute      ${uri}   value
+    Should Be Equal   ${content}    Enabled 
 
 *** Keywords ***
-Execute new Command
-    [arguments]    ${args}
-    ${output}=  Execute Command    ${args}
-    set test variable    ${OUTPUT}     "${output}"
+Dbus Send Set Command
+   [Arguments]   ${l_obj}  ${l_method}  ${l_valuetoset}
+   Log to Console   \n ValuetoSet:
+   Log to Console   \n ${l_valuetoset}
+   ${dbuspart2cmd} =   Catenate  SEPARATOR=   ${interface}${l_method}
+   ${dbuspart3cmd} =  Catenate  ${l_obj}  ${SPACE}  ${dbuspart2cmd}
+   ${dbuspart4cmd} =  Catenate  ${dbuspart3cmd}  ${SPACE}${l_valuetoset}
+   Log to Console   \n ${dbuspart1cmd}
+   Log to Console   \n ${dbuspart4cmd}
+   ${output} =    Execute Command    ${dbuspart1cmd} ${dbuspart4cmd}
+   [return]   ${output}
+
+
+Dbus Send Get Command
+   [Arguments]   ${l_obj}   ${l_method}
+   ${dbuspart2cmd} =   Catenate  SEPARATOR=   ${interface}${l_method}
+   ${output} =    Execute Command    ${dbuspart1cmd} ${l_obj} ${dbuspart2cmd}
+   ${output} =    Remove String     ${output}  variant
+   [return]   ${output}
+
+Open Connection And Log In
+    Open connection     ${OPENBMC_HOST}
+    Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
 
 response Should Be Equal
     [arguments]    ${args}
