@@ -16,6 +16,8 @@ ${MACHINE_TYPE}    palmetto
 ${DBUS_POLL_INTERVAL}      15s
 ${OPENBMC_REBOOT_TIMEOUT}   ${10}
 
+${BMC_ALIAS}    bmc_alias
+
 # PDU related parameters
 ${PDU_TYPE}         ${EMPTY}
 ${PDU_IP}           ${EMPTY}
