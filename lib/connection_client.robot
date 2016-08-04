@@ -9,11 +9,18 @@ Library           OperatingSystem
 
 *** Keywords ***
 Open Connection And Log In
-    Run Keyword If   '${SSH_PORT}' != '${EMPTY}' and '${HTTPS_PORT}' != '${EMPTY}'
+    [Arguments]  ${alias}=None
+
+    # alias    The name of the alias to give the connection. 
+
+    Run Keyword If   
+    ...   '${SSH_PORT}' != '${EMPTY}' and '${HTTPS_PORT}' != '${EMPTY}'
     ...   User input SSH and HTTPs Ports
 
-    Run Keyword If  '${SSH_PORT}' == '${EMPTY}'    Open connection     ${OPENBMC_HOST}
-    ...    ELSE  Run Keyword   Open connection     ${OPENBMC_HOST}    port=${SSH_PORT}
+    Run Keyword If  '${SSH_PORT}' == '${EMPTY}'    
+    ...           Open connection  ${OPENBMC_HOST}  alias=${alias}
+    ...         ELSE  Run Keyword  Open connection  ${OPENBMC_HOST}    
+    ...                            port=${SSH_PORT}  alias=${alias}
 
     Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
 
