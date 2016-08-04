@@ -5,7 +5,7 @@ Resource                ../lib/rest_client.robot
 Resource                ../lib/resource.txt
 Resource                ../lib/utils.robot
 
-Suite Setup            Power On Host
+Suite Setup            Initiate Power On
 
 *** Test Cases ***
 

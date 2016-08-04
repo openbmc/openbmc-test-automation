@@ -62,7 +62,7 @@ Verify System VPD Properties
 *** Keywords ***
 
 Setup The Suite
-	Power On Host
+	Initiate Power On
 
 	@{ret} = 	Get Inventory List 	${OPENBMC_MODEL}
 	Set Suite Variable 	@{sys_inv} 	@{ret}
