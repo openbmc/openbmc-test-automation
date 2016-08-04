@@ -59,13 +59,13 @@ Boot order with permanent boot policy
     [Documentation]   This testcase is to verify that boot order does not change
     ...               after first boot when boot policy set to permanent
 
-    Power Off Host
+    Initiate Power Off
 
     Set Boot Policy   PERMANENT
 
     Set Boot Device   CDROM
 
-    Power On Host
+    Initiate Power On
 
     ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
     Should Be Equal    ${boot}    PERMANENT
@@ -77,7 +77,7 @@ Onetime boot order after warm reset
     [Documentation]   This testcase is to verify that boot policy and order does not change
     ...               after warm reset on a system with onetime boot policy.
 
-    Power On Host
+    Initiate Power On
 
     Set Boot Policy   ONETIME
 
@@ -95,7 +95,7 @@ Permanent boot order after warm reset
     [Documentation]   This testcase is to verify that boot policy and order does not change  
     ...               after warm reset on a system with permanent boot policy.
 
-    Power On Host
+    Initiate Power On
 
     Set Boot Policy   PERMANENT
 
