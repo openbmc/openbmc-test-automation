@@ -5,6 +5,7 @@ Documentation		This suite will verifiy all OpenBMC rest interfaces
 
 Resource		../lib/rest_client.robot
 
+Suite Setup     Initialize REST setup
 
 *** Variables ***
 

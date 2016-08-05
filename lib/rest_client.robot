@@ -147,3 +147,13 @@ Call Method
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${resp} =       openbmc post request    ${base_uri}/action/${method}     &{kwargs}
     [return]     ${resp}
+
+Initialize REST setup
+    [Documentation]   Entry point for REST related setup required
+    Run Keyword If   '${HTTPS_PORT}' != '${EMPTY}'   Update Auth URI string
+
+Update Auth URI string
+    [Documentation]    For QEMU test run the AUTH_URI needs to be updated
+    ${https_num}=   Convert To Integer    ${HTTPS_PORT}
+    Set Global Variable    ${AUTH_URI}    https://${OPENBMC_HOST}:${https_num}
+

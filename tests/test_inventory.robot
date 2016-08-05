@@ -9,9 +9,7 @@ Library           Collections
 
 Variables         ../data/variables.py
 
-
-Suite setup		setup the suite
-
+Suite Setup       Test setup initialization
 
 *** Test Cases ***
 
@@ -95,3 +93,7 @@ Verify Present Properties
 	Log List 	${keys}
 	Log List 	${INVENTORY_ITEMS['${type}']}
 	Lists Should Be Equal  ${INVENTORY_ITEMS['${type}']} 	${keys}
+
+Test setup initialization
+    setup the suite
+    Initialize REST setup

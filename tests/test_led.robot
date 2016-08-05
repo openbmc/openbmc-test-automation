@@ -6,6 +6,8 @@ Documentation     This testsuite is for testing the functions of Heartbeat,
 Resource          ../lib/rest_client.robot
 Resource          ../lib/resource.txt
 
+Suite Setup       Initialize REST setup
+
 *** Variables ***
 
 ${MIN_TOGGLE_VALUE}    0

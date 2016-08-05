@@ -7,6 +7,7 @@ Resource        ../lib/rest_client.robot
 Resource        ../lib/pdu/pdu.robot
 Resource        ../lib/utils.robot
 
+Suite Setup     Initialize REST setup
 
 Library         SSHLibrary
 

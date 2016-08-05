@@ -3,6 +3,7 @@ Documentation       This module will test basic power on use cases for CI
 
 Resource            ../lib/rest_client.robot
 
+Suite Setup         Initialize REST setup
 Test template       power on tests
 
 *** variables ***
