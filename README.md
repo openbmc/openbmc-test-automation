@@ -8,7 +8,7 @@ packages which will help to invoke tests through tox.
 
 Install the python dependencies for tox
 ```shell
-    $ easy_install tox==2.1.1
+    $ easy_install tox
     $ easy_install pip
 ```
 
