@@ -5,7 +5,7 @@ Resource                ../lib/rest_client.robot
 Resource                ../lib/resource.txt
 Resource                ../lib/utils.robot
 
-Suite Setup            Power On Host
+Suite Setup             Test setup initialization
 
 *** Test Cases ***
 
@@ -128,3 +128,7 @@ Get Chassis URI
     \   log     ${ELEMENT}
     \   ${found}=   Get Lines Matching Pattern      ${ELEMENT}      *control/chassis*
     \   Return From Keyword If     '${found}' != ''     ${found}
+
+Test setup initialization
+    Initialize REST setup
+    Power On Host
