@@ -4,11 +4,12 @@ Quickstart
 ----------
 
 To run openbmc-automation first you need to install the prerequisite python
-packages which will help to invoke tests through tox.
+packages which will help to invoke tests through tox.  Note that tox
+version 2.3.1 or greater is required.
 
 Install the python dependencies for tox
 ```shell
-    $ easy_install tox==2.1.1
+    $ easy_install tox
     $ easy_install pip
 ```
 
