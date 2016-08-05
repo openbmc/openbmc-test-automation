@@ -4,6 +4,7 @@ Documentation       This suite will the firmware version exposed part of
 
 Resource            ../lib/rest_client.robot
 
+Suite Setup         Initialize REST setup
 
 *** Variables ***
 

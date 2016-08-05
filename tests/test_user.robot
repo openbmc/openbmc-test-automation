@@ -9,6 +9,8 @@ Library             OperatingSystem
 Library             SSHLibrary
 Library             String
 
+Suite Setup         Initialize REST setup
+
 *** Variables ***
 ${RANDOM_STRING_LENGTH}    ${8}
 ${VALID_PASSWORD}          abc123

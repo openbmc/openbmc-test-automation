@@ -5,6 +5,8 @@ Suite Teardown    Delete All Sessions
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/resource.txt
 
+Suite Setup       Initialize REST setup
+
 *** Test Cases ***
 Test SSL Connection
     [Documentation]     This testcase is for testing the SSL connection to the
