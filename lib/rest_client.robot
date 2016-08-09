@@ -147,3 +147,19 @@ Call Method
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${resp} =       openbmc post request    ${base_uri}/action/${method}     &{kwargs}
     [return]     ${resp}
+
+Call Poweron method
+    [arguments]   ${uri}    ${method}
+    @{arglist}=   Create List
+    ${args}=      Create Dictionary   data=@{arglist}
+    ${resp}=      Call Method    ${uri}    ${method}    data=${args}
+    should be equal as strings       ${resp.status_code}     ${HTTP_OK}
+
+System state
+    [arguments]   ${uri}    ${method}
+    @{arglist}=   Create List
+    ${args}=      Create Dictionary   data=@{arglist}
+    ${resp}=      Call Method    ${uri}    ${method}    data=${args}
+    should be equal as strings       ${resp.status_code}     ${HTTP_OK}
+    ${content}=     To Json    ${resp.content}
+    [return]    ${content["data"]}
