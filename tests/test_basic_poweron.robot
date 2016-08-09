@@ -2,15 +2,11 @@
 Documentation       This module will test basic power on use cases for CI
 
 Resource            ../lib/rest_client.robot
+Resource            ../lib/utils.robot
+
+Suite Setup         poweron readiness test
 
 Test template       power on tests
-
-*** variables ***
-
-${POWER_CONTROL}    /org/openbmc/control/chassis0/
-${POWER_SETTING}    /org/openbmc/settings/host0
-${Retry}            1 min
-${Interval}         30s
 
 *** test cases ***
 
@@ -24,21 +20,13 @@ Verify power on system states
 *** keywords ***
 
 power on tests
-    [Arguments]   ${action}    ${endState}
-    Log To Console    ${\n}${action} the host
+    [Arguments]   ${method}    ${endState}
+    Log To Console    ${\n}${method} the host
+    Run Keyword If   '${method}' == 'poweron'  Initiate Power On
+    ...  ELSE    Initiate Power Off
 
-    @{arglist}=   Create List
-    ${args}=      Create Dictionary   data=@{arglist}
-    ${resp}=      Call Method    ${POWER_CONTROL}    ${action}    data=${args}
-    should be equal as strings       ${resp.status_code}     ${HTTP_OK}
-    ${json} =     to json            ${resp.content}
-    should be equal as strings       ${json['status']}      ok
-
-    Wait Until Keyword Succeeds      ${Retry}    ${Interval}
-    ...    system power state   ${endState}
-
-
-system power state
-    [Arguments]       ${endState}
-    ${currState}=     Read Attribute   ${POWER_SETTING}   system_state
-    Should be equal   ${currState}     ${endState}
+poweron readiness test
+    [Documentation]   Confirm that the system is ready for poweron and
+    ...               not in BMC_STARTING state
+    ${state}=   Get BMC State
+    Should not be equal   ${state}  BMC_STARTING  msg=Host not ready
