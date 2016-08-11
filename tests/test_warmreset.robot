@@ -14,7 +14,7 @@ ${SYSTEM_SHUTDOWN_TIME}    ${5}
 *** Test Cases ***
 
 Test WarmReset via REST
-    [Tags]      reboot_tests
+    [Tags]      bmcreboot
     ${warm_test_file}=  Set Variable    /tmp/before_warmreset
     Open Connection And Log In
     ${stdout}   ${stderr}   ${rc}=  Execute Command     touch ${warm_test_file}     return_stderr=True  return_rc=True
