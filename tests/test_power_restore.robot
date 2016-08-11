@@ -10,6 +10,7 @@ Resource        ../lib/utils.robot
 
 Library         SSHLibrary
 
+Force Tags      chassisboot  bmcreboot
 
 ***test cases***
 
@@ -29,7 +30,6 @@ Set the power restore policy       Policy                 ExpectedSystemState   
     ...               in the Expected state then do the power cycle.
 
     [Template]    setRestorePolicy
-    [Tags]        reboot_tests
 
 ***keywords***
 setRestorePolicy

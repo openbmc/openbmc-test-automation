@@ -5,6 +5,8 @@ Resource                ../lib/rest_client.robot
 Resource                ../lib/utils.robot
 Resource                ../lib/connection_client.robot
 
+Force Tags  bmcreboot
+
 Suite Setup             Open Connection And Log In
 Suite Teardown          Close All Connections
 
@@ -14,7 +16,6 @@ ${SYSTEM_SHUTDOWN_TIME}    ${5}
 *** Test Cases ***
 
 Test WarmReset via REST
-    [Tags]      reboot_tests
     ${warm_test_file}=  Set Variable    /tmp/before_warmreset
     Open Connection And Log In
     ${stdout}   ${stderr}   ${rc}=  Execute Command     touch ${warm_test_file}     return_stderr=True  return_rc=True
