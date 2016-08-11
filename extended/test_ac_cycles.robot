@@ -11,7 +11,6 @@ Suite Teardown    Close All Connections
 
 *** Test Cases ***
 Test openbmc buster
-    [Tags]      reboot_tests
     ${output}=  Execute Command    find /var/lib -type f |xargs -n 1 touch
     PDU Power Cycle
     Wait For Host To Ping   ${OPENBMC_HOST}
