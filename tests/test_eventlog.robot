@@ -157,7 +157,7 @@ Test events after openbmc reboot
     ...                     Events should exist post reboot,
     ...                     Create two more events,
     ...                     Delete old and new event
-    [Tags]      reboot_tests
+    [Tags]      bmcreboot
     ${pre_reboot_event}=         create a test log
 
     ${output}=      Execute Command    /sbin/reboot
