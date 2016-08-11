@@ -168,6 +168,7 @@ Association unchanged after reboot
     [Documentation]     ***GOOD PATH***
     ...                 This test case is to verify that error log association
     ...                 does not change after open bmc reboot.\n
+    [Tags]  bmcreboot
 
     ${pre_reboot_log_uri} =      Create a test log
     ${association_uri} =    catenate    SEPARATOR=   ${pre_reboot_log_uri}   /fru

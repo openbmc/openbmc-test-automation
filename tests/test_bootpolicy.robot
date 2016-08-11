@@ -58,6 +58,7 @@ Set Permanent boot policy using IPMITOOL
 Boot order with permanent boot policy
     [Documentation]   This testcase is to verify that boot order does not change
     ...               after first boot when boot policy set to permanent
+    [Tags]  chassisboot
 
     Initiate Power Off
 
@@ -77,6 +78,8 @@ Onetime boot order after warm reset
     [Documentation]   This testcase is to verify that boot policy and order does not change
     ...               after warm reset on a system with onetime boot policy.
 
+    [Tags]  chassisboot
+
     Initiate Power On
 
     Set Boot Policy   ONETIME
@@ -94,6 +97,7 @@ Onetime boot order after warm reset
 Permanent boot order after warm reset
     [Documentation]   This testcase is to verify that boot policy and order does not change  
     ...               after warm reset on a system with permanent boot policy.
+    [Tags]  chassisboot
 
     Initiate Power On
 

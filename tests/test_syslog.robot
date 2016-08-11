@@ -107,6 +107,7 @@ Enable invalid port for Syslog remote server
 Persistency check for syslog setting
     [Documentation]   This test case is to verify that syslog setting does not change
     ...               after service processor reboot.
+    [Tags]  bmcreboot
 
     ${old_ip}=   Read Attribute   /org/openbmc/LogManager/rsyslog   ipaddr
     ${old_port}=   Read Attribute   /org/openbmc/LogManager/rsyslog   port
