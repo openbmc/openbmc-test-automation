@@ -20,3 +20,15 @@ Test Firmware Version
     ${jsondata}=    To Json    ${resp.content}
     Should not be empty     ${jsondata["data"]["version"]}
     Should Match Regexp     ${jsondata["data"]["version"]}      ^v\\d+\.\\d+
+
+
+Test Bios Version
+    [Documentation]     This testcase is for testing the BIOS version.\n
+    ...     Expected in following format:
+    ...     open-power-barreleye-v1.8
+    ...     $
+    ${resp} =    OpenBMC Get Request    /org/openbmc/inventory/system/bios
+    Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
+    ${jsondata}=    To Json    ${resp.content}
+    Should not be empty     ${jsondata["data"]["Version"]}
+    Should Match Regexp     ${jsondata["data"]["Version"]}      ^open+\-\power+\-\
