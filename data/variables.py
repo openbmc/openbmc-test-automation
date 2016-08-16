@@ -1,3 +1,30 @@
+import os
+
+'''
+  QEMU HTTPS variable:
+
+  By default lib/resource.txt AUTH URI construct is as
+  ${AUTH_URI}   https://${OPENBMC_HOST}${AUTH_SUFFIX}
+  ${AUTH_SUFFIX} is populated here by default EMPTY else
+  the port from the OS environment
+'''
+def get_qemu_https_port():
+    # defaulted to empty string
+    l_suffix = ''
+    try:
+        l_https_port = os.getenv('HTTPS_PORT')
+        if l_https_port:
+           l_suffix = ':' + l_https_port
+    except:
+        print "Environment variable HTTPS_PORT not set"
+    return l_suffix
+
+AUTH_SUFFIX={
+    "https_ports":[get_qemu_https_port()],
+}
+
+# Update the ':Port number' to this variable
+AUTH_SUFFIX = AUTH_SUFFIX['https_ports'][0]
 
 # Here contains a list of valid Properties bases on fru_type after a boot.
 INVENTORY_ITEMS={
