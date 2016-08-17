@@ -47,6 +47,10 @@ Use the following variables for Qemu test run
     $ export SSH_PORT=<ssh port number>
     $ export HTTPS_PORT=<https port number>
 
+Use the following variables for BIOS update testing
+==========================================================
+    $ export PNOR_IMAGE_PATH=<path to>/barreleye.pnor
+
 ```
 
 Run tests
