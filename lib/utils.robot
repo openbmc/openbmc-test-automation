@@ -129,3 +129,49 @@ Get Power State
     Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=  to json  ${resp.content}
     [return]  ${content["data"]}
+
+Clear BMC Record Log
+    [Documentation]  Clears all the event logs on the BMC. This would be
+    ...              equivalent to ipmitool sel clear.
+    @{arglist}=   Create List
+    ${args}=     Create Dictionary    data=@{arglist}
+    ${resp}=   Call Method    /org/openbmc/records/events/    clear  data=${args}
+    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+
+Copy PNOR to BMC
+    Import Library      SCPLibrary      WITH NAME       scp
+    Open Connection for SCP
+    Log    Copying ${PNOR_IMAGE_PATH} to /tmp
+    scp.Put File    ${PNOR_IMAGE_PATH}   /tmp
+
+Flash PNOR
+    [Documentation]    Calls flash bios update method to flash PNOR image
+    [arguments]    ${pnor_image}
+    @{arglist}=   Create List    ${pnor_image}
+    ${args}=     Create Dictionary    data=@{arglist}
+    ${resp}=   Call Method    /org/openbmc/control/flash/bios/    update  data=${args}
+    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+    Wait Until Keyword Succeeds    2 min   10 sec    Is PNOR Flashing
+
+Get Flash BIOS Status
+    [Documentation]  Returns the status of the flash BIOS API as a string. For
+    ...              example 'Flashing', 'Flash Done', etc
+    ${data}=      Read Properties     /org/openbmc/control/flash/bios
+    [return]    ${data['status']}
+
+Is PNOR Flashing
+    [Documentation]  Get BIOS 'Flashing' status. This indicates that PNOR
+    ...              flashing has started.
+    ${status}=    Get Flash BIOS Status
+    should be equal as strings     ${status}     Flashing
+
+Is PNOR Flash Done
+    [Documentation]  Get BIOS 'Flash Done' status.  This indicates that the
+    ...              PNOR flashing has completed.
+    ${status}=    Get Flash BIOS Status
+    should be equal as strings     ${status}     Flash Done
+
+Is System State Host Booted
+    [Documentation]  Checks whether system state is HOST_BOOTED.
+    ${state}=    Get BMC State
+    should be equal as strings     ${state}     HOST_BOOTED
