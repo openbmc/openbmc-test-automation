@@ -93,3 +93,46 @@ Wait for OS
 
     Wait Until Keyword Succeeds  ${timeout} sec  ${interval}  Check OS
     ...                          ${os_host}  ${os_username}  ${os_password}
+
+Clear BMC Record Log
+    [Documentation]  Clears all the event logs on the BMC. This would be
+    ...             equivalent to ipmitool sel clear
+    @{arglist}=   Create List
+    ${args}=     Create Dictionary    data=@{arglist}
+    ${resp}=   Call Method    /org/openbmc/records/events/    clear  data=${args}
+    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+
+Copy PNOR to BMC
+    Import Library      SCPLibrary      WITH NAME       scp
+    scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}
+    Log    Copying %{PNOR} to /tmp
+    scp.Put File    %{PNOR}   /tmp
+
+Flash PNOR
+    [Documentation]    Calls flash bios update method to flash PNOR image
+    [arguments]    ${pnor_image}
+    @{arglist}=   Create List
+    Append To List   ${arglist}    ${pnor_image}
+    ${args}=     Create Dictionary    data=@{arglist}
+    ${resp}=   Call Method    /org/openbmc/control/flash/bios/    update  data=${args}
+    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+    Wait Until Keyword Succeeds    1 min   10 sec    Is PNOR Flashing
+
+Is PNOR Flashing
+    [Documentation]  Get PNOR flashing status
+    ${data}=      Read Properties     /org/openbmc/control/flash/bios
+    should be equal as strings      ${data['status']}     Flashing
+
+Is PNOR Flash Done
+    [Documentation]  Get PNOR flash completedstatus
+    ${data}=      Read Properties     /org/openbmc/control/flash/bios
+    should be equal as strings      ${data['status']}     Flash Done
+
+Is HOST Booted
+    [Documentation]  Checks whether system is state is HOST_BOOTED
+    @{arglist}=   Create List
+    ${args}=     Create Dictionary    data=@{arglist}
+    ${resp}=      Call Method    /org/openbmc/managers/System/    getSystemState  data=${args}
+    ${content}=     To Json    ${resp.content}
+    should be equal as strings      ${content["data"]}     HOST_BOOTED
+
