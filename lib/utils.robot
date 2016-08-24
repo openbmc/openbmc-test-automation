@@ -1,6 +1,7 @@
 *** Settings ***
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
+Resource                ../lib/connection_client.robot
 
 Library                 OperatingSystem
 
@@ -129,3 +130,21 @@ Get Power State
     Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=  to json  ${resp.content}
     [return]  ${content["data"]}
+
+
+Verify Ping and REST Authentication
+    ${l_ping} =   Run Keyword And Return Status
+    ...    Ping Host  ${OPENBMC_HOST}
+    Return From Keyword If  '${l_ping}' == '${False}'    ${False}
+
+    ${l_rest} =   Run Keyword And Return Status
+    ...    Initialize OpenBMC
+    Return From Keyword If  '${l_rest}' == '${False}'    ${False}
+
+    # Just to make sure the SSH is working for SCP
+    Open Connection And Log In
+    ${system}   ${stderr}=    Execute Command   hostname   return_stderr=True
+    Should Be Empty     ${stderr}
+
+    [return]    ${True}
+
