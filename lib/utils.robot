@@ -20,6 +20,7 @@ Wait For Host To Ping
 
 Ping Host
     [Arguments]     ${host}
+    Should Not Be Empty    ${host}   msg=No host provided
     ${RC}   ${output} =     Run and return RC and Output    ping -c 4 ${host}
     Log     RC: ${RC}\nOutput:\n${output}
     Should be equal     ${RC}   ${0}
