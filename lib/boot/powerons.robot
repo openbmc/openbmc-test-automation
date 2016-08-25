@@ -14,7 +14,7 @@ BMC Power On
 
     Open Connection and Log In  &{bmc_connection_args}
     Initiate Power On
-    Wait For OS
+    Run Keyword If   '${OS_HOST}' != '${EMPTY}'   Wait For OS
     Switch Connection  bmc_connection
     Check Power On States
     Close Connection
@@ -23,9 +23,7 @@ Check Power On States
     [Documentation]  Checks that the BMC state, power state, and boot progress
     ...  are correctly powered on.
 
-    ${bmc_state}=  Get BMC State
-    Should Contain  ${bmc_state}  HOST_BOOTED
-    Log to Console  BMC State: ${bmc_state}
+    Wait Until Keyword Succeeds   3min  10sec  Is Host booted
 
     ${boot_progress}=  Get Boot Progress
     Should Be Equal  ${boot_progress}  FW Progress, Starting OS
@@ -34,3 +32,9 @@ Check Power On States
     ${power_state}=  Get Power State
     Should Be Equal  ${power_state}  ${1}
     Log to Console  Power State: ${power_state}
+
+Is Host booted
+    ${bmc_state}=  Get BMC State
+    Should Contain  ${bmc_state}  HOST_BOOTED
+    Log to Console  BMC State: ${bmc_state}
+

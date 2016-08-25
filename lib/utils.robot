@@ -20,6 +20,7 @@ Wait For Host To Ping
 
 Ping Host
     [Arguments]     ${host}
+    Should Not Be Empty    ${host}   msg=Host parameter is Empty
     ${RC}   ${output} =     Run and return RC and Output    ping -c 4 ${host}
     Log     RC: ${RC}\nOutput:\n${output}
     Should be equal     ${RC}   ${0}
@@ -76,6 +77,7 @@ Check OS
 
     # Attempt to ping the OS. Store the return code to check later.
     ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${os_host}
+    Return From Keyword If  '${ping_rc}' == '${False}'   ${False}
 
     Open connection  ${os_host}
     Login  ${os_username}  ${os_password}
