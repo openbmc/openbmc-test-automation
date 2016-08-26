@@ -5,6 +5,7 @@ Library           RequestsLibrary.RequestsKeywords
 Library           OperatingSystem
 Resource          ../lib/resource.txt
 Library           ../lib/disable_warning_urllib.py
+Resource          openbmc_ffdc.robot
 
 *** Variables ***
 # Response codes

@@ -11,6 +11,7 @@ Library         ../data/model.py
 
 Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
+Test Teardown          Log FFDC
 
 
 *** Variables ***

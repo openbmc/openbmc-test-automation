@@ -10,6 +10,8 @@ Library           Collections
 Suite Setup       Open Connection And Log In
 Suite Teardown    Close All Connections
 
+Test Teardown     Log FFDC
+
 *** Variables ***
 
 ${SYSTEM_SHUTDOWN_TIME}           1min

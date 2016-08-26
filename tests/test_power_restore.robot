@@ -10,6 +10,7 @@ Resource        ../lib/utils.robot
 
 Library         SSHLibrary
 
+Test Teardown   Log FFDC
 Force Tags      chassisboot  bmcreboot
 
 ***test cases***

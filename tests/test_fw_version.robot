@@ -3,6 +3,7 @@ Documentation       This suite is for Verifying BMC & BIOS version exposed part
 ...                 of system inventory
 
 Resource            ../lib/rest_client.robot
+Test Teardown       Log FFDC
 
 
 *** Variables ***

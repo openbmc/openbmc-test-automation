@@ -5,6 +5,7 @@ Documentation     This module is for SSH connection override to QEMU
 Library           SSHLibrary
 Library           OperatingSystem
 Library           Collections
+Resource          openbmc_ffdc.robot
 
 *** Variables ***
 

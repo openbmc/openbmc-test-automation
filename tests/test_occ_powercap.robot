@@ -6,6 +6,7 @@ Resource                ../lib/resource.txt
 Resource                ../lib/utils.robot
 
 Suite Setup            Initiate Power On
+Test Teardown          Log FFDC
 
 *** Test Cases ***
 

@@ -2,11 +2,12 @@
 
 Documentation   This testsuite is for testing the Boot Device Functions
 
-Resource        ../lib/rest_client.robot
-Resource        ../lib/ipmi_client.robot
+Resource          ../lib/rest_client.robot
+Resource          ../lib/ipmi_client.robot
 
-Suite Setup     Open Connection And Log In
-Suite Teardown  Close All Connections
+Suite Setup       Open Connection And Log In
+Suite Teardown    Close All Connections
+Test Teardown     Log FFDC
 
 *** Test Cases ***
 

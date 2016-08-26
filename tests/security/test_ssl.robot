@@ -4,6 +4,7 @@ Suite Teardown    Delete All Sessions
 
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/resource.txt
+Test Teardown     Log FFDC
 
 *** Test Cases ***
 Test SSL Connection

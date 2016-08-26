@@ -6,6 +6,7 @@ Resource          ../lib/utils.robot
 Library           ../lib/utilities.py
 Library           String
 Library           Collections
+Test Teardown     Log FFDC
 
 Variables         ../data/variables.py
 

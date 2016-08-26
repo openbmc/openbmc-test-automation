@@ -7,6 +7,7 @@ Resource             ../lib/connection_client.robot
 
 Suite Setup          Open Connection And Log In
 Suite Teardown       Close All Connections
+Test Teardown        Log FFDC
 
 *** Test Cases ***
 Test OpenBMC Services Autorestart Policy

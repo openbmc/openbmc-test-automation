@@ -8,6 +8,7 @@ Library                DateTime
 
 Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
+Test Teardown          Log FFDC
 
 *** Variables ***
 ${SYSTEM_TIME_INVALID}     01/01/1969 00:00:00

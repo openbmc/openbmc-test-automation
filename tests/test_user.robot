@@ -8,6 +8,7 @@ Resource            ../lib/utils.robot
 Library             OperatingSystem
 Library             SSHLibrary
 Library             String
+Test Teardown       Log FFDC
 
 *** Variables ***
 ${RANDOM_STRING_LENGTH}    ${8}
