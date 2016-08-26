@@ -1,9 +1,11 @@
 *** Settings ***
-Documentation		This suite will verifiy the Generic Configuration Rest Interfaces
-...					Details of valid interfaces can be found here...
-...					https://github.com/openbmc/docs/blob/master/rest-api.md
+Documentatio   This suite will verifiy the Generic Configuration Rest Interfaces
+...            Details of valid interfaces can be found here...
+...            https://github.com/openbmc/docs/blob/master/rest-api.md
 
-Resource		../lib/rest_client.robot
+Resource          ../lib/rest_client.robot
+Resource          ../lib/openbmc_ffdc.robot
+Test Teardown     Log FFDC
 
 
 *** Variables ***

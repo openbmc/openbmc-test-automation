@@ -4,8 +4,10 @@ Documentation           This suite is for testing OCC: Power capping setting
 Resource                ../lib/rest_client.robot
 Resource                ../lib/resource.txt
 Resource                ../lib/utils.robot
+Resource                ../lib/openbmc_ffdc.robot
 
 Suite Setup            Initiate Power On
+Test Teardown          Log FFDC
 
 *** Test Cases ***
 

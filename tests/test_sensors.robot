@@ -7,10 +7,12 @@ Documentation          This example demonstrates executing commands on a remote 
 
 Resource        ../lib/rest_client.robot
 Resource        ../lib/ipmi_client.robot
+Resource        ../lib/openbmc_ffdc.robot
 Library         ../data/model.py
 
 Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
+Test Teardown          Log FFDC
 
 
 *** Variables ***

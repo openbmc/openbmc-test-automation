@@ -2,6 +2,7 @@
 Documentation       This module will test basic power on use cases for CI
 
 Resource            ../lib/boot/boot_resource_master.robot
+Test Teardown       Log FFDC
 
 Force Tags  chassisboot
 
