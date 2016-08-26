@@ -122,7 +122,7 @@ Set boot policy to invalid value
     Set Boot Policy   abc
 
     ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
-    Should Be Not Equal    ${boot}    abc
+    Should Not Be Equal    ${boot}    abc
     
 *** Keywords ***
 

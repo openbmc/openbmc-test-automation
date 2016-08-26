@@ -48,8 +48,8 @@ Open Connection And Log In
     Run Keyword If  '${SSH_PORT}' != '${EMPTY}' and ${has_port} == ${FALSE}
     ...            Run Keywords
     ...            Set To Dictionary  ${connection_args}  port=${SSH_PORT}  AND
-    ...            Open connection  &{connection_args}
-    ...   ELSE  Run Keyword  Open connection  &{connection_args}
+    ...            SSHLibrary.Open connection  &{connection_args}
+    ...   ELSE  Run Keyword   SSHLibrary.Open connection  &{connection_args}
 
     Login  ${username}  ${password}
 
