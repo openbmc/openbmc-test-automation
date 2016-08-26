@@ -4,11 +4,14 @@ Documentation     This suite is used for testing eventlog association.
 Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
+Resource          ../lib/openbmc_ffdc.robot
 
 Library           Collections
 
 Suite Setup       Open Connection And Log In
 Suite Teardown    Close All Connections
+
+Test Teardown     Log FFDC
 
 *** Variables ***
 

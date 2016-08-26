@@ -5,9 +5,11 @@ Documentation   This testsuite is for testing file corruption on hard power cycl
 Resource          ../lib/pdu/pdu.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
+Resource          ../lib/openbmc_ffdc.robot
 
 Suite Setup       Open Connection And Log In
 Suite Teardown    Close All Connections
+Test Teardown     Log FFDC
 
 *** Test Cases ***
 Test openbmc buster

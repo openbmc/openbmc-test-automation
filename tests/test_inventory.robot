@@ -3,9 +3,11 @@ Documentation     This testsuite is for testing inventory
 Suite Teardown    Delete All Sessions
 Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
+Resource          ../lib/openbmc_ffdc.robot
 Library           ../lib/utilities.py
 Library           String
 Library           Collections
+Test Teardown     Log FFDC
 
 Variables         ../data/variables.py
 

@@ -5,9 +5,11 @@ Documentation   This testsuite is for testing boot policy function.
 Resource           ../lib/rest_client.robot
 Resource           ../lib/ipmi_client.robot
 Resource           ../lib/utils.robot
+Resource          ../lib/openbmc_ffdc.robot
 
 Suite Setup        Open Connection And Log In
 Suite Teardown     Close All Connections
+Test Teardown      Log FFDC
 
 *** Variables ***
 

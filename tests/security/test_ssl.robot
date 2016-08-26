@@ -4,6 +4,8 @@ Suite Teardown    Delete All Sessions
 
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/resource.txt
+Resource          ../../lib/openbmc_ffdc.robot
+Test Teardown     Log FFDC
 
 *** Test Cases ***
 Test SSL Connection

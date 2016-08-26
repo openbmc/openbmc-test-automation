@@ -6,10 +6,12 @@ Documentation		This suite will verifiy the Network Configuration Rest Interfaces
 Resource            ../lib/rest_client.robot
 Resource            ../lib/connection_client.robot
 Resource            ../lib/utils.robot
+Resource            ../lib/openbmc_ffdc.robot
 Library             ../lib/pythonutil.py
 
 Suite Setup         Open Connection And Log In
 Suite Teardown      Close All Connections
+Test Teardown       Log FFDC
 
 *** Test Cases ***
 

@@ -4,10 +4,12 @@ Documentation       This suite is for testing Open BMC user account management.
 
 Resource            ../lib/rest_client.robot
 Resource            ../lib/utils.robot
+Resource            ../lib/openbmc_ffdc.robot
 
 Library             OperatingSystem
 Library             SSHLibrary
 Library             String
+Test Teardown       Log FFDC
 
 *** Variables ***
 ${RANDOM_STRING_LENGTH}    ${8}
