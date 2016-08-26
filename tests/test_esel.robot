@@ -2,10 +2,12 @@
 
 Documentation   This suite is for testing esel's mechanism of checking Reservation_ID.
 
-Resource        ../lib/ipmi_client.robot
+Resource          ../lib/ipmi_client.robot
+Resource          ../lib/openbmc_ffdc.robot
 
 Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
+Test Teardown          Log FFDC
 
 *** Test Cases ***
 

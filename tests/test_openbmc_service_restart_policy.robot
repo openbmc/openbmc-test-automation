@@ -4,9 +4,11 @@ Documentation        This testsuites tests the autorestart policy for
 
 Resource             ../lib/resource.txt
 Resource             ../lib/connection_client.robot
+Resource             ../lib/openbmc_ffdc.robot
 
 Suite Setup          Open Connection And Log In
 Suite Teardown       Close All Connections
+Test Teardown        Log FFDC
 
 *** Test Cases ***
 Test OpenBMC Services Autorestart Policy

@@ -5,6 +5,8 @@ Documentation     This testsuite is for testing the functions of Heartbeat,
 
 Resource          ../lib/rest_client.robot
 Resource          ../lib/resource.txt
+Resource          ../lib/openbmc_ffdc.robot
+Test Teardown     Log FFDC
 
 *** Variables ***
 

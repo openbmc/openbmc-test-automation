@@ -4,11 +4,13 @@ Documentation           This suite is for testing OCC: Power capping setting
 Resource                ../lib/rest_client.robot
 Resource                ../lib/utils.robot
 Resource                ../lib/connection_client.robot
+Resource                ../lib/openbmc_ffdc.robot
 
 Force Tags  bmcreboot
 
 Suite Setup             Open Connection And Log In
 Suite Teardown          Close All Connections
+Test Teardown           Log FFDC
 
 *** Variables ***
 ${SYSTEM_SHUTDOWN_TIME}    ${5}

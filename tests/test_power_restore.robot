@@ -6,10 +6,12 @@ Documentation                This suite will verifiy the power restore policy re
 Resource        ../lib/rest_client.robot
 Resource        ../lib/pdu/pdu.robot
 Resource        ../lib/utils.robot
+Resource        ../lib/openbmc_ffdc.robot
 
 
 Library         SSHLibrary
 
+Test Teardown   Log FFDC
 Force Tags      chassisboot  bmcreboot
 
 ***test cases***

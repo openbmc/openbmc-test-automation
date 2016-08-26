@@ -5,11 +5,13 @@ Documentation     This suite is used for testing the error logging
 Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
+Resource          ../lib/openbmc_ffdc.robot
 
 Library           Collections
 
 Suite Setup       Open Connection And Log In
 Suite Teardown    Close All Connections
+Test Teardown     Log FFDC
 
 *** Variables ***
 &{NIL}  data=@{EMPTY}
