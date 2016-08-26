@@ -18,7 +18,7 @@ Test Teardown      Log FFDC
 Set Onetime boot policy using REST
     [Documentation]   This testcase is to set onetime boot policy using REST
     ...               URI and then verify using REST API and ipmitool.\n
- 
+
     Set Boot Policy   ONETIME
 
     ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
@@ -46,7 +46,7 @@ Set Onetime boot policy using IPMITOOL
     Should Be Equal    ${boot}    ONETIME
     ${output} =   Run IPMI Standard command   chassis bootparam get 5
     Should Contain   ${output}   Options apply to only next boot
- 
+
 Set Permanent boot policy using IPMITOOL
     [Documentation]   This testcase is to set boot policy to permanent using ipmitool
     ...               and then verify using REST URI and ipmitool.
@@ -97,7 +97,7 @@ Onetime boot order after warm reset
     Should Be Equal    ${flag}    Network
 
 Permanent boot order after warm reset
-    [Documentation]   This testcase is to verify that boot policy and order does not change  
+    [Documentation]   This testcase is to verify that boot policy and order does not change
     ...               after warm reset on a system with permanent boot policy.
     [Tags]  chassisboot
 
@@ -114,16 +114,16 @@ Permanent boot order after warm reset
 
     ${flag} =   Read Attribute  /org/openbmc/settings/host0    boot_flags
     Should Be Equal    ${flag}    CDROM
- 
+
 Set boot policy to invalid value
-    [Documentation]   This testcase is to verify that proper error message is prompted  
+    [Documentation]   This testcase is to verify that proper error message is prompted
     ...               when invalid value to provided to boot policy.
-   
+
     Set Boot Policy   abc
 
     ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
-    Should Be Not Equal    ${boot}    abc
-    
+    Should Not Be Equal    ${boot}    abc
+
 *** Keywords ***
 
 Set Boot Policy
