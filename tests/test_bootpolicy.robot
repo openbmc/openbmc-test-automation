@@ -12,6 +12,9 @@ Suite Teardown     Close All Connections
 Test Teardown      Log FFDC
 
 *** Variables ***
+${dbuscmdBase} =    dbus-send --system --print-reply --dest=org.openbmc.settings.Host
+${dbuscmdGet} =   /org/openbmc/settings/host0  org.freedesktop.DBus.Properties.Get
+${dbuscmdString} =   string:"org.openbmc.settings.Host" string:"boot_policy"
 
 *** Test Cases ***
 
@@ -23,8 +26,12 @@ Set Onetime boot policy using REST
 
     ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
     Should Be Equal    ${boot}    ONETIME
-    ${output} =    Run IPMI Standard command   chassis bootparam get 5
-    Should Contain   ${output}   Options apply to only next boot
+    ${dbuscmd} =     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
+    ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
+    Should Be Empty     ${stderr}
+    Log to Console   \n ${output}
+    Should Contain   ${output}   ONETIME
+
 
 Set Permanent boot policy using REST
     [Documentation]   This testcase is to set permanent boot policy using REST
@@ -34,8 +41,11 @@ Set Permanent boot policy using REST
 
     ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
     Should Be Equal    ${boot}    PERMANENT
-    ${output} =    Run IPMI Standard command   chassis bootparam get 5
-    Should Contain   ${output}   Options apply to all future boots
+    ${dbuscmd} =     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
+    ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
+    Should Be Empty     ${stderr}
+    Log to Console   \n ${output}
+    Should Contain   ${output}   PERMANENT
 
 Set Onetime boot policy using IPMITOOL
     [Documentation]   This testcase is to set boot policy to onetime boot using ipmitool
@@ -44,8 +54,11 @@ Set Onetime boot policy using IPMITOOL
     Run IPMI command   0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
     ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
     Should Be Equal    ${boot}    ONETIME
-    ${output} =   Run IPMI Standard command   chassis bootparam get 5
-    Should Contain   ${output}   Options apply to only next boot
+    ${dbuscmd} =     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
+    ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
+    Should Be Empty     ${stderr}
+    Log to Console   \n ${output}
+    Should Contain   ${output}   ONETIME
 
 Set Permanent boot policy using IPMITOOL
     [Documentation]   This testcase is to set boot policy to permanent using ipmitool
@@ -54,21 +67,23 @@ Set Permanent boot policy using IPMITOOL
     Run IPMI command   0x0 0x8 0x05 0xC0 0x00 0x00 0x00 0x00
     ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
     Should Be Equal    ${boot}    PERMANENT
-    ${output} =   Run IPMI Standard command   chassis bootparam get 5
-    Should Contain   ${output}   Options apply to all future boots
+    ${dbuscmd} =     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
+    ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
+    Should Be Empty     ${stderr}
+    Log to Console   \n ${output}
+    Should Contain   ${output}   PERMANENT
 
 Boot order with permanent boot policy
     [Documentation]   This testcase is to verify that boot order does not change
     ...               after first boot when boot policy set to permanent
-    [Tags]  chassisboot
 
-    Initiate Power Off
+    Power Off Host
 
     Set Boot Policy   PERMANENT
 
     Set Boot Device   CDROM
 
-    Initiate Power On
+    Power On Host
 
     ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
     Should Be Equal    ${boot}    PERMANENT
@@ -80,9 +95,7 @@ Onetime boot order after warm reset
     [Documentation]   This testcase is to verify that boot policy and order does not change
     ...               after warm reset on a system with onetime boot policy.
 
-    [Tags]  chassisboot
-
-    Initiate Power On
+    Power On Host
 
     Set Boot Policy   ONETIME
 
@@ -99,9 +112,8 @@ Onetime boot order after warm reset
 Permanent boot order after warm reset
     [Documentation]   This testcase is to verify that boot policy and order does not change
     ...               after warm reset on a system with permanent boot policy.
-    [Tags]  chassisboot
 
-    Initiate Power On
+    Power On Host
 
     Set Boot Policy   PERMANENT
 
