@@ -7,6 +7,9 @@ Library                 OperatingSystem
 
 *** Variables ***
 ${SYSTEM_SHUTDOWN_TIME}       ${5}
+${dbuscmdBase} =    dbus-send --system --print-reply --dest=org.openbmc.settings.Host
+${dbuscmdGet} =   /org/openbmc/settings/host0  org.freedesktop.DBus.Properties.Get
+${dbuscmdString} =   string:"org.openbmc.settings.Host" string:
 
 *** Keywords ***
 Wait For Host To Ping
@@ -210,4 +213,11 @@ Check If warmReset is Initiated
 Flush REST Sessions
     [Documentation]   Removes all the active session objects
     Delete All Sessions
+
+Initialize DBUS cmd
+    [Documentation]  Initialize dbus string with property string to extract
+    [arguments]   ${boot_property}
+    ${cmd} =     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
+    ${cmd} =     Catenate  ${cmd}${boot_property}
+    Set Global Variable   ${dbuscmd}     ${cmd}
 
