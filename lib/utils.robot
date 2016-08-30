@@ -193,3 +193,10 @@ Verify Ping and REST Authentication
     Should Be Empty     ${stderr}
 
     [return]    ${True}
+
+Flush REST sessions
+    [Documentation]   Removes all the session objects and sink time to
+    ...               allow to flush objects clean
+    Delete All Sessions
+    sleep   15 sec
+
