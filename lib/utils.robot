@@ -193,3 +193,8 @@ Verify Ping and REST Authentication
     Should Be Empty     ${stderr}
 
     [return]    ${True}
+
+Flush REST Sessions
+    [Documentation]   Removes all the active session objects
+    Delete All Sessions
+
