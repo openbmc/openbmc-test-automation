@@ -207,4 +207,7 @@ Check If warmReset is Initiated
     Return From Keyword If   '${alive}' == '${False}'    ${False}
     [return]    ${True}
 
+Flush REST Sessions
+    [Documentation]   Removes all the active session objects
+    Delete All Sessions
 
