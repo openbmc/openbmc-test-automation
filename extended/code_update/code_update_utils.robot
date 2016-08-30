@@ -32,10 +32,9 @@ Activate BMC flash image
     ${data} =   create dictionary   data=@{img_path}
     ${resp}=    openbmc post request    ${BMC_UPD_METHOD}   data=${data}
     should be equal as strings   ${resp.status_code}   ${HTTP_OK}
-    ${content}=     To Json    ${resp.content}
-    should be equal as strings   ${content["data"]["filename"]}   /tmp/flashimg
 
     ${data}=      Read Properties     ${BMC_UPD_ATTR}
+    should be equal as strings   ${data["filename"]}   /tmp/flashimg
     should contain    ${data['status']}   to apply
 
 
