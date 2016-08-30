@@ -100,7 +100,7 @@ OpenBMC Delete Request
     [Return]    ${ret}
 
 Initialize OpenBMC
-    Create Session    openbmc    ${AUTH_URI}  timeout=5   max_retries=1
+    Create Session    openbmc    ${AUTH_URI}  timeout=5   max_retries=3
     ${headers}=     Create Dictionary   Content-Type=application/json
     @{credentials} =   Create List     ${OPENBMC_USERNAME}      ${OPENBMC_PASSWORD}
     ${data} =   create dictionary   data=@{credentials}
@@ -132,7 +132,7 @@ Write Attribute
     [Arguments]    ${uri}      ${attr}    &{kwargs}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${resp} =       openbmc put request    ${base_uri}/attr/${attr}     &{kwargs}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}  
+    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
 
 Read Properties
