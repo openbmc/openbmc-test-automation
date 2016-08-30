@@ -11,6 +11,7 @@ Library             ../lib/pythonutil.py
 
 Suite Setup         Open Connection And Log In
 Suite Teardown      Close All Connections
+Test Setup          Cleanup REST Sessions
 Test Teardown       Log FFDC
 
 *** Test Cases ***
@@ -25,7 +26,7 @@ Get the Mac address
     should not be empty    ${resp.content}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}      ok
-    set suite variable   ${OLD_MAC_ADDRESS}  ${json['data']}   
+    set suite variable   ${OLD_MAC_ADDRESS}  ${json['data']}
 
 
 Get IP Address with invalid interface
@@ -128,7 +129,7 @@ Set IP address on valid Interface
     ${arglist}=    Create List    eth0    ${NEW_IP}   ${NEW_MASK}   ${NEW_GATEWAY}
     ${args}=     Create Dictionary   data=@{arglist}
     run keyword and ignore error    Call Method    /org/openbmc/NetworkManager/Interface/   SetAddress4    data=${args}
-  
+
     Wait For Host To Ping       ${NEW_IP}
     Set Suite Variable      ${AUTH_URI}       https://${NEW_IP}
     log to console    ${AUTH_URI}
@@ -171,8 +172,8 @@ Revert the last ip address change
 
 Get IP Address type
     [Tags]   GOOD-PATH
-    [Documentation]   This test case tries to set existing ipaddress address and 
-    ...               later tries to verify that ip address type is set to static 
+    [Documentation]   This test case tries to set existing ipaddress address and
+    ...               later tries to verify that ip address type is set to static
     ...               due to the operation.
 
     ${networkInfo}=    Get networkInfo from the interface    eth0
@@ -187,7 +188,7 @@ Get IP Address type
     run keyword and ignore error    Call Method    /org/openbmc/NetworkManager/Interface/   SetAddress4    data=${args}
 
     Wait For Host To Ping       ${CURRENT_IP}
-    
+
     @{arglist}=   Create List   eth0
     ${args}=     Create Dictionary   data=@{arglist}
     ${resp}=    Call Method    /org/openbmc/NetworkManager/Interface/   GetAddressType    data=${args}
@@ -202,7 +203,7 @@ Persistency check for ip address
     ...               will request for the ip address to check the persistency
     ...               of the ip address.
     ...               Expectation is the ip address should persist.
-  
+
     Open Connection And Log In
     Execute Command    reboot
 #    sleep  100sec
@@ -223,7 +224,7 @@ Persistency check for ip address
 Set invalid Mac address     eth0     gg:hh:jj:kk:ll:mm    error
     [Tags]   network_test
     [Template]  SetMacAddress_bad
-    [Documentation]   This test case tries to set the invalid mac address 
+    [Documentation]   This test case tries to set the invalid mac address
     ...               on the eth0 interface.
     ...               Expectation is that it should throw error.
 
@@ -235,7 +236,7 @@ Set valid Mac address     eth0     00:21:cc:73:91:dd   ok
     ...               This test case add the ip addresson the  interface and validates
     ...               that ip address has been added or not.
     ...               Expectation is the ip address should get added.
-     
+
 Revert old Mac address     eth0     ${OLD_MAC_ADDRESS}   ok
     [Tags]   network_test
     [Template]  SetMacAddress_good
@@ -290,7 +291,7 @@ SetMacAddress_bad
 
 SetMacAddress_good
     [Arguments]    ${intf}      ${address}   ${result}
-    ${arglist}=    Create List    ${intf}    ${address}  
+    ${arglist}=    Create List    ${intf}    ${address}
     ${args}=       Create Dictionary   data=@{arglist}
     ${resp}=       Call Method    /org/openbmc/NetworkManager/Interface/   SetHwAddress    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
@@ -303,7 +304,7 @@ SetMacAddress_good
     ${resp}=   Call Method    /org/openbmc/NetworkManager/Interface/    GetHwAddress    data=${args}
     ${json} =   to json         ${resp.content}
     should be equal as strings   ${json['data']}    ${address}
-    
+
 
 validateEnvVariables
 
@@ -311,7 +312,12 @@ validateEnvVariables
     ${NEW_SUBNET_MASK}=   Get Environment Variable    NEW_SUBNET_MASK
     ${NEW_GATEWAY}=       Get Environment Variable    NEW_GATEWAY
 
-    
-    should not be empty  ${NEW_BMC_IP}    
-    should not be empty  ${NEW_GATEWAY} 
-    should not be empty  ${NEW_SUBNET_MASK} 
+
+    should not be empty  ${NEW_BMC_IP}
+    should not be empty  ${NEW_GATEWAY}
+    should not be empty  ${NEW_SUBNET_MASK}
+
+
+Cleanup REST Sessions
+    Run keyword If   '${PREV_TEST_STATUS}' == 'FAIL'   Flush REST Sessions
+
