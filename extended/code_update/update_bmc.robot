@@ -35,12 +35,13 @@ Initiate Code update BMC
 
     Activate BMC flash image
 
-    Trigger Warm Reset
     # TODO: openbmc/openbmc#519
+    Run Keyword And Ignore Error    Trigger Warm Reset
     ${session_active}=   Check If warmReset is Initiated
     Run Keyword If   '${session_active}' == '${True}'
     ...    Trigger Warm Reset via Reboot
 
-    Wait for BMC to respond
+    Wait Until Keyword Succeeds
+    ...  30 min   10 sec     Wait for BMC to respond
     Sleep  1 min
     Validate BMC Version
