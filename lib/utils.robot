@@ -61,6 +61,10 @@ Trigger Warm Reset
     ${data} =   create dictionary   data=@{EMPTY}
     ${resp} =   openbmc post request    /org/openbmc/control/bmc0/action/warmReset     data=${data}
     Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
+    ${session_active}=   Check If warmReset is Initiated
+    Run Keyword If   '${session_active}' == '${True}'
+    ...    Fail   msg=warm reset didn't occur
+
     Sleep   ${SYSTEM_SHUTDOWN_TIME}min
     Wait For Host To Ping   ${OPENBMC_HOST}
 
@@ -193,3 +197,13 @@ Verify Ping and REST Authentication
     Should Be Empty     ${stderr}
 
     [return]    ${True}
+
+Check If warmReset is Initiated
+    # Ping would be still alive, so try SSH to connect if fails
+    # the ports are down indicating reboot in progress
+    ${alive}=   Run Keyword and Return Status
+    ...    Open Connection And Log In
+    Return From Keyword If   '${alive}' == '${False}'    ${False}
+    [return]    ${True}
+
+
