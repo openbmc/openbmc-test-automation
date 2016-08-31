@@ -44,15 +44,6 @@ SCP Tar Image File to BMC
     scp.Put File      ${filepath}   /tmp/flashimg
 
 
-Check If warmReset is Initiated
-    # Ping would be still alive, so try SSH to connect if fails
-    # the ports are down indicating reboot in progress
-    ${alive}=   Run Keyword and Return Status
-    ...    Open Connection And Log In
-    Return From Keyword If   '${alive}' == '${False}'    ${False}
-    [return]    ${True}
-
-
 Check If File Exist
     [Arguments]  ${filepath}
     Log   \n PATH: ${filepath}
@@ -68,10 +59,10 @@ System Readiness Test
     ...   Fail  msg=System not in ideal state to use [ERROR]
 
 
-Wait for BMC to respond
-    # Average code update takes from 15 -20 minutes
-    # For worse case 30 minutes, check every 1 min
-    Wait For Host To Ping  ${OPENBMC_HOST}  30 min   1 min
+Check If BMC is Up
+    ${status}=    Verify Ping and REST Authentication
+    Run Keyword If   '${status}' == '${False}'
+    ...     Fail   msg=Ping and REST auth failed
 
 
 Validate BMC Version
@@ -91,8 +82,10 @@ Validate BMC Version
 
 
 Trigger Warm Reset via Reboot
+    [Documentation]    The reboot commands execute successfully but
+    ...                returns negative value 1
     Open Connection And Log In
 
     ${rc}=  SSHLibrary.Execute Command
     ...     /sbin/reboot  return_stdout=False   return_rc=True
-    Should Be Equal As Integers   ${rc}   0
+    Should Be Equal As Integers   ${rc}   ${-1}
