@@ -2,7 +2,7 @@
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
-
+Library                 Process
 Library                 OperatingSystem
 
 *** Variables ***
@@ -211,3 +211,32 @@ Flush REST Sessions
     [Documentation]   Removes all the active session objects
     Delete All Sessions
 
+Start OS Console Logging
+    [Documentation]  Start logging to a file in /tmp so that it can
+    ...              be read by any other test cases
+    Open Connection And Log In
+    Start Command
+    ...  /usr/bin/nohup obmc-console-client > /tmp/obmc-console.log
+
+Stop OS Console Logging
+    [Documentation]  Stop the obmc-console-client process
+    Open Connection And Log In
+
+    ${pid}  ${stderr} =
+    ...  Execute Command
+    ...  /bin/pidof obmc-console-client
+    ...  return_stderr=True
+    Should Be Empty     ${stderr}
+
+    ${console}  ${stderr}=
+    ...  Execute Command   kill ${pid}
+    ...  return_stderr=True
+    Should Be Empty     ${stderr}
+
+    ${console}  ${stderr}=
+    ...  Execute Command
+    ...  cat /tmp/obmc-console.log
+    ...  return_stderr=True
+    Should Be Empty     ${stderr}
+
+    [Return]    ${console}
