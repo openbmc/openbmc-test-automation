@@ -2,7 +2,8 @@
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
-
+Library                 DateTime
+Library                 Process
 Library                 OperatingSystem
 
 *** Variables ***
@@ -220,4 +221,63 @@ Initialize DBUS cmd
     ${cmd} =     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
     ${cmd} =     Catenate  ${cmd}${boot_property}
     Set Global Variable   ${dbuscmd}     ${cmd}
+
+
+Start SOL Console Logging
+    [Documentation]   Start logging to a file in /tmp so that it can
+    ...               be read by any other test cases. Stop existing
+    ...               running client processes if there is any.
+    ...               By default logging at /tmp/obmc-console.log else
+    ...               user input location.
+    ...               The File is appended with datetime and pid of
+    ...               process which created this log file.
+    [Arguments]       ${file_path}=/tmp/obmc-console.log
+
+    Open Connection And Log In
+
+    ${cur_time}=    Get Time Stamp
+    Set Global Variable   ${LOG_TIME}   ${cur_time}
+    Start Command
+    ...  obmc-console-client > ${file_path}-${LOG_TIME}_$$
+
+
+Stop SOL Console Logging
+    [Documentation]   Login to BMC and Stop the obmc-console-client process.
+    ...               Find the pids from the log to filter the one started by
+    ...               specific test datetime and stop that process only.
+    ...               Ignore if there is no process running and return message
+    ...               "No obmc-console-client process running"
+    ...               By default retrieving log from /tmp/obmc-console.log else
+    ...               user input location.
+    [Arguments]       ${file_path}=/tmp/obmc-console.log
+
+    Open Connection And Log In
+
+    ${pid}  ${stderr} =
+    ...  Execute Command
+    ...  ls ${file_path}-${LOG_TIME}_* | cut -d'_' -f 2
+    ...  return_stderr=True
+    Return From Keyword If   '${pid}' == '${EMPTY}'
+    ...   No obmc-console-client process running
+    Should Be Empty     ${stderr}
+
+    ${console}  ${stderr}=
+    ...  Execute Command   kill -s KILL ${pid}
+    ...  return_stderr=True
+    Should Be Empty     ${stderr}
+    Log    Current Client PID:${pid}
+
+    ${console}  ${stderr}=
+    ...  Execute Command
+    ...  cat ${file_path}-${LOG_TIME}_${pid}
+    ...  return_stderr=True
+    Should Be Empty     ${stderr}
+
+    [Return]    ${console}
+
+
+Get Time Stamp
+    [Documentation]     Get the current time stamp data
+    ${cur_time}=    Get Current Date   result_format=%Y%m%d%H%M%S%f
+    [return]   ${cur_time}
 
