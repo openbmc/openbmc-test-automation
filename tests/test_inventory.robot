@@ -4,6 +4,7 @@ Suite Teardown    Delete All Sessions
 Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/boot/boot_resource_master.robot
 Library           ../lib/utilities.py
 Library           String
 Library           Collections
@@ -65,7 +66,7 @@ Verify System VPD Properties
 *** Keywords ***
 
 Setup The Suite
-	Initiate Power On
+	BMC Power On
 
 	@{ret} = 	Get Inventory List 	${OPENBMC_MODEL}
 	Set Suite Variable 	@{sys_inv} 	@{ret}
