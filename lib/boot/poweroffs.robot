@@ -27,6 +27,7 @@ Check Power Off States
     Should Be Equal  ${boot_progress}  Off
     Log to Console  Boot Progress: ${boot_progress}
 
+    @{states}=     Create List   BMC_READY   HOST_POWERED_OFF
     ${bmc_state}=  Get BMC State
-    Should Contain  ${bmc_state}  HOST_POWERED_OFF
+    Should Contain  ${states}   ${bmc_state}
     Log to Console  BMC State: ${bmc_state}
