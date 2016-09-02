@@ -2,7 +2,7 @@
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
-
+Library                 Process
 Library                 OperatingSystem
 
 *** Variables ***
@@ -211,3 +211,47 @@ Flush REST Sessions
     [Documentation]   Removes all the active session objects
     Delete All Sessions
 
+
+Start SOL Console Logging
+    [Documentation]   Start logging to a file in /tmp so that it can
+    ...               be read by any other test cases. Stop existing
+    ...               running client processes if there is any.
+    ...               By default logging at /tmp/obmc-console.log else
+    ...               user input location.
+    [Arguments]       ${file_path}=/tmp/obmc-console.log
+
+    Run Keyword And Ignore Error    Stop SOL Console Logging
+    Start Command
+    ...  /usr/bin/nohup obmc-console-client > ${file_path}
+
+
+Stop SOL Console Logging
+    [Documentation]   Login to BMC and Stop the obmc-console-client process.
+    ...               Ignore if there is no process running and return message
+    ...               "No obmc-console-client process running"
+    ...               By default retrieving log from /tmp/obmc-console.log else
+    ...               user input location.
+    [Arguments]       ${file_path}=/tmp/obmc-console.log
+
+    Open Connection And Log In
+
+    ${pid}  ${stderr} =
+    ...  Execute Command
+    ...  /bin/pidof obmc-console-client
+    ...  return_stderr=True
+    Return From Keyword If   '${pid}' == '${EMPTY}'
+    ...   No obmc-console-client process running
+    Should Be Empty     ${stderr}
+
+    ${console}  ${stderr}=
+    ...  Execute Command   kill -s KILL ${pid}
+    ...  return_stderr=True
+    Should Be Empty     ${stderr}
+
+    ${console}  ${stderr}=
+    ...  Execute Command
+    ...  cat ${file_path}
+    ...  return_stderr=True
+    Should Be Empty     ${stderr}
+
+    [Return]    ${console}
