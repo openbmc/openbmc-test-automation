@@ -188,6 +188,9 @@ Get IP Address type
 
     Wait For Host To Ping       ${CURRENT_IP}
 
+    # Added sleep for server restart to complete after IP address change
+    sleep  30sec
+
     @{arglist}=   Create List   eth0
     ${args}=     Create Dictionary   data=@{arglist}
     ${resp}=    Call Method    /org/openbmc/NetworkManager/Interface/   GetAddressType    data=${args}
