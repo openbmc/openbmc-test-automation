@@ -188,6 +188,8 @@ Get IP Address type
 
     Wait For Host To Ping       ${CURRENT_IP}
 
+    Wait Until Keyword Succeeds    30 sec    5 sec    Initialize OpenBMC
+
     @{arglist}=   Create List   eth0
     ${args}=     Create Dictionary   data=@{arglist}
     ${resp}=    Call Method    /org/openbmc/NetworkManager/Interface/   GetAddressType    data=${args}
@@ -297,6 +299,8 @@ SetMacAddress_good
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       ${result}
     Wait For Host To Ping      ${OPENBMC_HOST}
+
+    Wait Until Keyword Succeeds    30 sec    5 sec    Initialize OpenBMC
 
     @{arglist}=   Create List   ${intf}
     ${args}=     Create Dictionary   data=@{arglist}
