@@ -19,13 +19,13 @@ Initilize the following environment variable which will used while testing
     $ export OPENBMC_PASSWORD=<openbmc username>
     $ export OPENBMC_USERNAME=<openbmc password>
     $ export OPENBMC_MODEL=[./data/Barreleye.py, ./data/Palmetto.py, etc]
-
+    $ export IPMI_COMMAND=<Dbus/External>
 
 Use Following Variables for networking test cases
-===========================================================    
+===========================================================
     $export NEW_BMC_IP=<openbmc machine ip address>
     $export NEW_SUBNET_MASK=<openbmc new subnet mask>
-    $export NEW_GATEWAY=<openbmc new gateway>    
+    $export NEW_GATEWAY=<openbmc new gateway>
 ==========================================================
 
     Use following parameters for PDU:
@@ -75,5 +75,12 @@ How to test individual test
 
 It can also be run by pasing variables from the cli...
 ```shell
-    $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc -v OPENBMC_MODEL:<model path>
+    Run one test suite using using pybot
+    $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc -v OPENBMC_MODEL:<model path> tests/test_time.robot
+
+    Run entire test suite using using pybot
+    $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc -v OPENBMC_MODEL:<model path> tests
+
+    Run entire test suite using external ipmitool
+    $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc -v IPMI_COMMAND:External -v OPENBMC_MODEL:<model path> tests
 ```
