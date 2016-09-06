@@ -19,7 +19,7 @@ Initilize the following environment variable which will used while testing
     $ export OPENBMC_PASSWORD=<openbmc username>
     $ export OPENBMC_USERNAME=<openbmc password>
     $ export OPENBMC_MODEL=[./data/Barreleye.py, ./data/Palmetto.py, etc]
-
+    $ export IPMI_COMMAND=<Dbus/External>
 
 Use Following Variables for networking test cases
 ===========================================================    

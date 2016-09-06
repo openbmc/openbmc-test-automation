@@ -16,6 +16,7 @@ ${OPENBMC_PASSWORD}    0penBmc
 ${MACHINE_TYPE}    palmetto
 ${DBUS_POLL_INTERVAL}      15s
 ${OPENBMC_REBOOT_TIMEOUT}   ${10}
+${IPMI_COMMAND}    Dbus
 
 # PDU related parameters
 ${PDU_TYPE}         ${EMPTY}
