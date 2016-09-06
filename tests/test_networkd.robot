@@ -99,76 +99,6 @@ Set empty gateway                                 eth0       2.2.2.2        255.
    ...               with empty gateway,Expectation is it should get error.
 
 
-Set IP address on valid Interface
-    [Tags]   network_test
-    [Documentation]   This test case sets the ip  on the interface and validates
-    ...               that ip address has been set or not.
-    ...               Expectation is the ip address should get added.
-
-    validateEnvVariables
-
-
-    ${networkInfo}=    Get networkInfo from the interface    eth0
-    ${result}=  convert to integer     ${networkInfo['data'][1]}
-
-    ${MASK}=    calcDottedNetmask     ${result}
-    set suite variable   ${OLD_MASK}   ${MASK}
-    log to console  ${OLD_MASK}
-    set suite variable   ${OLD_IP}          ${networkInfo['data'][2]}
-    set suite variable   ${OLD_GATEWAY}     ${networkInfo['data'][3]}
-
-    log to console    ${OLD_IP}
-    log to console    ${OLD_GATEWAY}
-
-
-    ${NEW_IP}=        Get Environment Variable    NEW_BMC_IP
-    ${NEW_MASK}=   Get Environment Variable    NEW_SUBNET_MASK
-    ${NEW_GATEWAY}=       Get Environment Variable    NEW_GATEWAY
-
-    ${arglist}=    Create List    eth0    ${NEW_IP}   ${NEW_MASK}   ${NEW_GATEWAY}
-    ${args}=     Create Dictionary   data=@{arglist}
-    run keyword and ignore error    Call Method    /org/openbmc/NetworkManager/Interface/   SetAddress4    data=${args}
-
-    Wait For Host To Ping       ${NEW_IP}
-    Set Suite Variable      ${AUTH_URI}       https://${NEW_IP}
-    log to console    ${AUTH_URI}
-
-    ${networkInfo}=    Get networkInfo from the interface    eth0
-    ${ipaddress}=      set variable    ${networkInfo['data'][2]}
-    ${gateway}=        set variable    ${networkInfo['data'][3]}
-
-    ${isgatewayfound} =    Set Variable If   '${gateway}'=='${NEW_GATEWAY}'  true    false
-    log to console   ${isgatewayfound}
-    ${isIPfound}=    Set Variable if    '${ipaddress}' == '${NEW_IP}'    true   false
-    should be true   '${isIPfound}' == 'true' and '${isgatewayfound}' == 'true'
-
-
-Revert the last ip address change
-    [Tags]   network_test
-    [Documentation]   This test case sets the ip  on the interface and validates
-    ...               that ip address has been set or not.
-    ...               Expectation is the ip address should get added.
-
-
-    ${arglist}=    Create List    eth0       ${OLD_IP}    ${OLD_MASK}   ${OLD_GATEWAY}
-    ${args}=     Create Dictionary   data=@{arglist}
-    run keyword and ignore error    Call Method    /org/openbmc/NetworkManager/Interface/   SetAddress4    data=${args}
-
-    Wait For Host To Ping       ${OLD_IP}
-    Set Suite Variable      ${AUTH_URI}    https://${OLD_IP}
-    log to console    ${AUTH_URI}
-
-
-    ${networkInfo}=    Get networkInfo from the interface    eth0
-    ${ipaddress}=      set variable    ${networkInfo['data'][2]}
-    ${gateway}=        set variable    ${networkInfo['data'][3]}
-
-    ${isgatewayfound} =    Set Variable If   '${gateway}'=='${OLD_GATEWAY}'  true    false
-    log to console   ${isgatewayfound}
-    ${isIPfound}=    Set Variable if    '${ipaddress}' == '${OLD_IP}'    true   false
-    should be true   '${isIPfound}' == 'true' and '${isgatewayfound}' == 'true'
-
-
 Get IP Address type
     [Tags]   GOOD-PATH
     [Documentation]   This test case tries to set existing ipaddress address and
@@ -196,30 +126,6 @@ Get IP Address type
     ${json} =   to json         ${resp.content}
     Should Be Equal    ${json['data']}    STATIC
     should be equal as strings      ${json['status']}      ok
-
-
-Persistency check for ip address
-    [Tags]   reboot_test
-    [Documentation]   we reboot the service processor and after reboot
-    ...               will request for the ip address to check the persistency
-    ...               of the ip address.
-    ...               Expectation is the ip address should persist.
-
-    Open Connection And Log In
-    Execute Command    reboot
-#    sleep  100sec
-    log to console    "System is getting rebooted wait for few seconds"
-    ${networkInfo}=    Get networkInfo from the interface    eth0
-    ${ipaddress}=      set variable    ${networkInfo['data'][2]}
-    ${gateway}=        set variable    ${networkInfo['data'][3]}
-
-    ${isgatewayfound} =    Set Variable If   '${gateway}'=='${OLD_GATEWAY}'  true    false
-    log to console   ${isgatewayfound}
-    ${isIPfound}=    Set Variable if    '${ipaddress}' == '${OLD_IP}'    true   false
-    should be true   '${isIPfound}' == 'true' and '${isgatewayfound}' == 'true'
-
-
-
 
 
 Set invalid Mac address     eth0     gg:hh:jj:kk:ll:mm    error
@@ -307,15 +213,3 @@ SetMacAddress_good
     ${resp}=   Call Method    /org/openbmc/NetworkManager/Interface/    GetHwAddress    data=${args}
     ${json} =   to json         ${resp.content}
     should be equal as strings   ${json['data']}    ${address}
-
-
-validateEnvVariables
-
-    ${NEW_BMC_IP}=        Get Environment Variable    NEW_BMC_IP
-    ${NEW_SUBNET_MASK}=   Get Environment Variable    NEW_SUBNET_MASK
-    ${NEW_GATEWAY}=       Get Environment Variable    NEW_GATEWAY
-
-
-    should not be empty  ${NEW_BMC_IP}
-    should not be empty  ${NEW_GATEWAY}
-    should not be empty  ${NEW_SUBNET_MASK}
