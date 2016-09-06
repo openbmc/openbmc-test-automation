@@ -19,6 +19,7 @@ Initilize the following environment variable which will used while testing
     $ export OPENBMC_PASSWORD=<openbmc username>
     $ export OPENBMC_USERNAME=<openbmc password>
     $ export OPENBMC_MODEL=[./data/Barreleye.py, ./data/Palmetto.py, etc]
+    $ export IPMI_COMMAND=<Dbus/External>
 ```
 
 There are two different set of test suite existing based on the usage.
@@ -86,7 +87,14 @@ How to test individual test
 
 It can also be run by pasing variables from the cli...
 ```shell
-    $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc -v OPENBMC_MODEL:<model path>
+    Run one test suite using using pybot
+    $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc -v OPENBMC_MODEL:<model path> tests/test_time.robot
+
+    Run entire test suite using using pybot
+    $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc -v OPENBMC_MODEL:<model path> tests
+
+    Run entire test suite using external ipmitool
+    $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc -v IPMI_COMMAND:External -v OPENBMC_MODEL:<model path> tests
 ```
 
 Run extended tests
