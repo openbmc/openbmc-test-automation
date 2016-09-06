@@ -9,12 +9,37 @@ Library         String
 *** Variables ***
 ${dbusHostIpmicmd1} =   dbus-send --system  /org/openbmc/HostIpmi/1
 ${dbusHostIpmiCmdReceivedMsg} =   org.openbmc.HostIpmi.ReceivedMessage
-${netfnByte} =    ${EMPTY}
-${cmdByte}   =    ${EMPTY}
-${arrayByte} =       array:byte:
+${netfnByte} =          ${EMPTY}
+${cmdByte}   =          ${EMPTY}
+${arrayByte} =          array:byte:
+${IPMI_EXT_CMD} =       ipmitool -I lanplus -C 1 -P
+${HOST} =               -H
+${RAW} =                raw
 
 *** Keywords ***
+
 Run IPMI Command
+    [arguments]    ${args}
+    ${resp}=     Run Keyword If   '${IPMI_COMMAND}'=='External'
+    ...    Run External IPMI RAW Command   ${args}
+    ...          ELSE IF          '${IPMI_COMMAND}'=='Dbus'
+    ...    Run Dbus IPMI RAW Command   ${args}
+    ...          ELSE             Fail
+    ...    msg=Invalid IPMI Command type provided : ${IPMI_COMMAND}
+    [return]    ${resp}
+
+Run IPMI Standard Command
+    [arguments]    ${args}
+    ${resp}=     Run Keyword If   '${IPMI_COMMAND}'=='External'
+    ...    Run External IPMI Standard Command   ${args}
+    ...          ELSE IF          '${IPMI_COMMAND}'=='Dbus'
+    ...    Run Dbus IPMI Standard Command   ${args}
+    ...          ELSE             Fail
+    ...    msg=Invalid IPMI Command type provided : ${IPMI_COMMAND}
+
+    [return]    ${resp}
+
+Run Dbus IPMI RAW Command
     [arguments]    ${args}
     ${valueinBytes} =   Byte Conversion  ${args}
     ${cmd} =   Catenate   ${dbushostipmicmd1} ${dbusHostIpmiCmdReceivedMsg}
@@ -23,12 +48,33 @@ Run IPMI Command
     Should Be Empty      ${stderr}
     set test variable    ${OUTPUT}     "${output}"
 
-Run IPMI Standard Command
+Run Dbus IPMI Standard Command
     [arguments]    ${args}
     Copy ipmitool
-    ${stdout}    ${stderr}    ${output}=  Execute Command    /tmp/ipmitool -I dbus ${args}    return_stdout=True    return_stderr= True    return_rc=True
+    ${stdout}    ${stderr}    ${output}=  Execute Command
+    ...    /tmp/ipmitool -I dbus ${args}    return_stdout=True
+    ...    return_stderr= True    return_rc=True
     Should Be Equal    ${output}    ${0}    msg=${stderr}
     [return]    ${stdout}
+
+Run External IPMI RAW Command
+    [arguments]    ${args}
+    ${ipmi_raw_cmd}=   Catenate  SEPARATOR=
+    ...    ${IPMI_EXT_CMD}${SPACE}${IPMI_PASSWORD}${SPACE}
+    ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${RAW}${SPACE}${args}
+    ${rc}    ${output}=    Run and Return RC and Output    ${ipmi_raw_cmd}
+    Should Be Equal    ${rc}    ${0}    msg=${output}
+    [return]    ${output}
+
+Run External IPMI Standard Command
+    [arguments]    ${args}
+    ${ipmi_cmd}=   Catenate  SEPARATOR=
+    ...    ${IPMI_EXT_CMD}${SPACE}${IPMI_PASSWORD}${SPACE}
+    ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${args}
+    ${rc}    ${output}=    Run and Return RC and Output    ${ipmi_cmd}
+    Should Be Equal    ${rc}    ${0}    msg=${output}
+    [return]   ${output}
+
 
 Byte Conversion
     [Documentation]   Byte Conversion method receives IPMI RAW commands as
