@@ -20,25 +20,28 @@ ${SYSTEM_SHUTDOWN_TIME}    ${5}
 Test WarmReset via REST
     ${warm_test_file}=  Set Variable    /tmp/before_warmreset
     Open Connection And Log In
-    ${stdout}   ${stderr}   ${rc}=  Execute Command     touch ${warm_test_file}     return_stderr=True  return_rc=True
-    Should Be Equal     ${rc}   ${0}    Unable to create file - ${warm_test_file}
+    ${stdout}   ${stderr}   ${rc}=
+    ...   Execute Command   touch ${warm_test_file}
+    ...   return_stderr=True  return_rc=True
+    Should Be Equal   ${rc}   ${0}   Unable to create file - ${warm_test_file}
 
     ${bmc_uri}=     Get BMC Link
-    ${data} =   create dictionary   data=@{EMPTY}
-    ${resp} =   openbmc post request    ${bmc_uri}/action/warmReset     data=${data}
-    Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
-    Sleep   ${SYSTEM_SHUTDOWN_TIME}min
-    Wait For Host To Ping   ${OPENBMC_HOST}
-    ${max_wait_time}=   Evaluate    ${SYSTEM_SHUTDOWN_TIME}+${OPENBMC_REBOOT_TIMEOUT}
+    Trigger Warm Reset
+    ${max_wait_time}=
+    ...   Evaluate    ${SYSTEM_SHUTDOWN_TIME}+${OPENBMC_REBOOT_TIMEOUT}
 
     Open Connection And Log In
-    ${uptime}=  Execute Command    cut -d " " -f 1 /proc/uptime| cut -d "." -f 1
+    ${uptime}=
+    ...   Execute Command    cut -d " " -f 1 /proc/uptime| cut -d "." -f 1
     ${uptime}=  Convert To Integer  ${uptime}
     ${uptime}=  Evaluate   ${uptime}/60
     Should Be True  ${uptime}<${max_wait_time}
     Open Connection And Log In
-    ${stdout}   ${stderr}   ${rc}=  Execute Command     ls ${warm_test_file}    return_stderr=True  return_rc=True
-    Should Be Equal     ${rc}   ${1}    File ${warm_test_file} does exist even after reboot of BMC, error:${stderr}, stdput: ${stdout}
+    ${stdout}   ${stderr}   ${rc}=
+    ...   Execute Command     ls ${warm_test_file}
+    ...   return_stderr=True  return_rc=True
+    Should Be Equal    ${rc}   ${1}
+    ...    File ${warm_test_file} persist after BMC rebooted
 
 *** Keywords ***
 Get BMC Link
@@ -47,5 +50,5 @@ Get BMC Link
     log     ${jsondata}
     : FOR    ${ELEMENT}    IN    @{jsondata["data"]}
     \   log     ${ELEMENT}
-    \   ${found}=   Get Lines Matching Pattern      ${ELEMENT}      *control/bmc*
+    \   ${found}=   Get Lines Matching Pattern    ${ELEMENT}    *control/bmc*
     \   Return From Keyword If     '${found}' != ''     ${found}
