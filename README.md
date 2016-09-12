@@ -19,13 +19,24 @@ Initilize the following environment variable which will used while testing
     $ export OPENBMC_PASSWORD=<openbmc username>
     $ export OPENBMC_USERNAME=<openbmc password>
     $ export OPENBMC_MODEL=[./data/Barreleye.py, ./data/Palmetto.py, etc]
+```
 
+There are two different set of test suite existing based on the usage.
+The test suites are distinctly separated by directory as under
+    tests/
+    extended/
 
+`tests`: directory contains the general test cases
+
+`extended`: directory contains the use cases for new IP network testing,PDU,
+BIOS and BMC code update.
+
+```shell
 Use Following Variables for networking test cases
-===========================================================    
+===========================================================
     $export NEW_BMC_IP=<openbmc machine ip address>
     $export NEW_SUBNET_MASK=<openbmc new subnet mask>
-    $export NEW_GATEWAY=<openbmc new gateway>    
+    $export NEW_GATEWAY=<openbmc new gateway>
 ==========================================================
 
     Use following parameters for PDU:
@@ -76,4 +87,18 @@ How to test individual test
 It can also be run by pasing variables from the cli...
 ```shell
     $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc -v OPENBMC_MODEL:<model path>
+```
+
+Run extended tests
+```shell
+    Set the preset environment variables, run test suite for a barreleye system
+    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- extended/test_power_restore.robot
+
+    Similarly for Network, PDU and update BIOS
+
+    For BMC code update, download the system type *.all.tar image from https://openpower.xyz
+    and run as follows:
+
+    For Barreleye system
+    python -m robot -v OPENBMC_HOST:x.x.x.x -v FILE_PATH:downloaded_path/barreleye-xxxx.all.tar  extended/code_update/update_bmc.robot
 ```
