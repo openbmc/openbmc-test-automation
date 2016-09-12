@@ -1,0 +1,136 @@
+*** Settings ***
+Documentation      Methods to execute commands on BMC and collect
+...                data to a list of FFDC files
+
+Resource           openbmc_ffdc_utils.robot
+
+*** Keywords ***
+
+################################################################
+# Method : Call FFDC Methods                                   #
+#          Execute the user define keywords from the FFDC List #
+#          Unlike any other keywords this will call into the   #
+#          list of keywords defined in the FFDC list at one go #
+################################################################
+
+Call FFDC Methods
+    [Documentation]   Calls into FFDC Keyword index list
+
+    @{entries}=     Get ffdc method index
+    :FOR  ${index}  IN   @{entries}
+    \     Method Call Keyword List   ${index}
+
+
+Method Call Keyword List
+    [Documentation]   Iterate the list through keyword index
+    [Arguments]       ${index}
+
+    @{method_list}=      Get ffdc method call   ${index}
+    :FOR  ${method}  IN  @{method_list}
+    \    Execute Keyword Method   ${method[1]}
+
+
+Execute Keyword Method
+    [Documentation]   Calls into BMC method keywords. Don't let one
+    ...               failure skips the remaining. Get whatever data
+    ...               it could gather at worse case scenario.
+    [Arguments]   ${keyword_name}
+
+    Run Keyword And Continue On Failure   ${keyword_name}
+
+
+################################################################
+# Method : BMC FFDC Manifest                                   #
+#          Execute command on BMC and write to ffdc_report.txt #
+################################################################
+
+BMC FFDC Manifest
+    [Documentation]    Get the commands index for the FFDC_BMC_CMD,
+    ...                login to BMC and execute commands.
+    Open Connection And Log In
+
+    @{entries}=     Get ffdc cmd index
+    :FOR  ${index}  IN   @{entries}
+    \     Iterate BMC Command List Pairs   ${index}
+
+
+Iterate BMC Command List Pairs
+    [Documentation]    Feed in key pair list from dictionary to execute
+    [Arguments]        ${key_index}
+
+    @{cmd_list}=      Get ffdc bmc cmd    ${key_index}
+    Set Suite Variable   ${ENTRY_INDEX}   ${key_index}
+    :FOR  ${cmd}  IN  @{cmd_list}
+    \    Execute Command and Write FFDC    ${cmd[0]}  ${cmd[1]}
+
+
+Execute Command and Write FFDC
+    [Documentation]    Execute command on BMC and write to ffdc
+    ...                By default to ffdc_report.txt file else to
+    ...                specified file path.
+    [Arguments]        ${key_index}
+    ...                ${cmd}
+    ...                ${logpath}=${FFDC_FILE_PATH}
+
+    Run Keyword If   '${logpath}' == '${FFDC_FILE_PATH}'
+    ...    Write Cmd Output to FFDC File   ${key_index}  ${cmd}
+
+    ${stdout}  ${stderr}=
+    ...   Execute Command    ${cmd}   return_stderr=True
+
+    # Write stdout data on success and error msg to the file on failure
+    Run Keyword If   '${stderr}' == '${EMPTY}'
+    ...   Write Data to File   ${stdout}${\n}   ${logpath}
+    ...   ELSE   Run Keyword   Write Data to File   ${stderr}${\n}   ${logpath}
+
+
+################################################################
+# Method : BMC FFDC Files                                      #
+#          Execute command on BMC and write to individual file #
+#          based on the file name pre-defined in the list      #
+################################################################
+
+BMC FFDC Files
+    [Documentation]    Get the command list and iterate
+    Open Connection And Log In
+    @{entries}=     Get ffdc file index
+    :FOR  ${index}  IN   @{entries}
+    \     Create File and Write Data   ${index}
+
+
+Create File and Write Data
+    [Documentation]    Create files to current FFDC log directory,
+    ...                executes command and write to corresponding
+    ...                file name in the current FFDC directory.
+    [Arguments]        ${key_index}
+
+    @{cmd_list}=      Get ffdc bmc file   ${key_index}
+    :FOR  ${cmd}  IN  @{cmd_list}
+    \   ${logpath}=  Catenate  SEPARATOR=   ${LOG_PREFIX}   ${cmd[0]}
+    \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
+
+
+################################################################
+# Method : Log Test Case Status                                #
+#          Creates test result history footprint for reference #
+################################################################
+
+Log Test Case Status
+    [Documentation]    Test case execution result history.
+    ...                Create once and append to this file
+    ...                logs/test_history.txt
+    ...                Format   Date:Test suite:Test case:Status
+    ...                20160909214053719992:Test Warmreset:Test WarmReset via REST:FAIL
+    Create Directory   ${FFDC_LOG_PATH}
+
+    ${exist}=   Run Keyword and Return Status
+    ...   OperatingSystem.File Should Exist   ${TEST_HISTORY}
+
+    Run Keyword If  '${exist}' == '${False}'
+    ...   Create File  ${TEST_HISTORY}
+
+    ${cur_time}=      Get Current Time Stamp
+
+    Append To File    ${TEST_HISTORY}
+    ...   ${cur_time}:${SUITE_NAME}:${TEST_NAME}:${TEST_STATUS}${\n}
+
