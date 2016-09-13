@@ -2,7 +2,7 @@
 Documentation     This module is for SSH connection override to QEMU
 ...               based openbmc systems.
 
-Library           SSHLibrary
+Library           SSHLibrary   timeout=30 seconds
 Library           OperatingSystem
 Library           Collections
 
