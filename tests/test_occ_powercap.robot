@@ -5,9 +5,10 @@ Resource                ../lib/rest_client.robot
 Resource                ../lib/resource.txt
 Resource                ../lib/utils.robot
 Resource                ../lib/openbmc_ffdc.robot
+Resource                ../lib/boot/boot_resource_master.robot
 
-Suite Setup            Initiate Power On
-Test Teardown          Log FFDC
+Suite Setup             Check OCC Readiness
+Test Teardown           Log FFDC
 
 *** Test Cases ***
 
@@ -69,9 +70,9 @@ Disable PowerCap
     Should Be Equal     ${user_power_cap}    ${0}
 
 Get System Power Consumption
-    [Documentation]   Get the current system power consumption and check if the 
+    [Documentation]   Get the current system power consumption and check if the
     ...               value is greater than zero
-    
+
     ${resp} =   OpenBMC Get Request   /org/openbmc/sensors/powercap/system_power
     should be equal as strings   ${resp.status_code}   ${HTTP_OK}
     ${jsondata}=   To Json    ${resp.content}
@@ -98,11 +99,11 @@ Set PowerCap
     [Arguments]    ${powercap_value}
     @{pcap_list} =   Create List     ${powercap_value}
     ${data} =   create dictionary   data=@{pcap_list}
-    ${resp} =   openbmc post request    /org/openbmc/sensors/host/PowerCap/action/setValue      data=${data}
+    ${resp} =   openbmc post request    /org/openbmc/sensors/host/powercap/action/setValue      data=${data}
     [return]    ${resp}
 
 Get PowerCap
-    ${resp} =   OpenBMC Get Request    /org/openbmc/sensors/host/PowerCap
+    ${resp} =   OpenBMC Get Request    /org/openbmc/sensors/host/powercap
     ${jsondata}=   To Json    ${resp.content}
     [return]    ${jsondata["data"]["value"]}
 
@@ -130,3 +131,31 @@ Get Chassis URI
     \   log     ${ELEMENT}
     \   ${found}=   Get Lines Matching Pattern      ${ELEMENT}      *control/chassis*
     \   Return From Keyword If     '${found}' != ''     ${found}
+
+
+Check OCC Readiness
+    [Documentation]   Poweron If BMC power state is off. Check the OCC powercap
+    ...               if the interface attributes are activated.
+
+    ${status}=
+    ...   Run Keyword and Return Status    Check Power Off States
+    Run Keyword If   '${status}' == '${True}'
+    ...   BMC Power On
+    Wait Until Keyword Succeeds   5min  10sec
+    ...   Powercap Attributes Activated
+
+
+Powercap Attributes Activated
+    [Documentation]   Verify if the response contains the pre-define list
+
+    @{precheck}=   Create List   /org/openbmc/sensors/powercap/user_cap
+    ...                          /org/openbmc/sensors/powercap/system_power
+    ...                          /org/openbmc/sensors/powercap/curr_cap
+    ...                          /org/openbmc/sensors/powercap/max_cap
+    ...                          /org/openbmc/sensors/powercap/min_cap
+
+    ${resp}=    OpenBMC Get Request   /org/openbmc/sensors/powercap/
+    ${jsondata}=   To Json    ${resp.content}
+    List Should Contain Sub List   ${jsondata["data"]}    ${precheck}
+    ...     msg=Failed to activate powercap interface attributes
+
