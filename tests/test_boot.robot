@@ -5,6 +5,7 @@ Documentation   This testsuite is for testing the Boot Device Functions
 Resource        ../lib/rest_client.robot
 Resource        ../lib/ipmi_client.robot
 Resource        ../lib/openbmc_ffdc.robot
+Resource        ../lib/utils.robot
 
 Suite Setup     Open Connection And Log In
 Suite Teardown  Close All Connections
