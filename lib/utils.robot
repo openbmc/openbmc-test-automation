@@ -189,18 +189,30 @@ Is System State Host Booted
 Verify Ping and REST Authentication
     ${l_ping} =   Run Keyword And Return Status
     ...    Ping Host  ${OPENBMC_HOST}
-    Return From Keyword If  '${l_ping}' == '${False}'    ${False}
+    Run Keyword If  '${l_ping}' == '${False}'
+    ...    Fail   msg=Ping Failed
 
     ${l_rest} =   Run Keyword And Return Status
     ...    Initialize OpenBMC
-    Return From Keyword If  '${l_rest}' == '${False}'    ${False}
+    Run Keyword If  '${l_rest}' == '${False}'
+    ...    Fail   msg=REST Authentication Failed
 
     # Just to make sure the SSH is working for SCP
     Open Connection And Log In
     ${system}   ${stderr}=    Execute Command   hostname   return_stderr=True
     Should Be Empty     ${stderr}
 
-    [return]    ${True}
+
+Check If BMC is Up
+    [Documentation]  Wait for Host to be online. Checks every X seconds
+    ...              interval for Y minutes and fails if timed out.
+    ...              Default MAX timedout is 10 min, interval 10 seconds.
+    [arguments]      ${max_timeout}=${OPENBMC_REBOOT_TIMEOUT}
+    ...              ${interval}=10 sec
+
+    Wait Until Keyword Succeeds
+    ...   ${max_timeout}  ${interval}   Verify Ping and REST Authentication
+
 
 Check If warmReset is Initiated
     [Documentation]  Ping would be still alive, so try SSH to connect

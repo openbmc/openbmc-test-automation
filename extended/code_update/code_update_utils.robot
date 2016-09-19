@@ -54,15 +54,10 @@ Check If File Exist
 
 
 System Readiness Test
-    ${l_status} =   Run Keyword    Verify Ping and REST Authentication
+    ${l_status} =   Run Keyword and Return Status
+    ...   Verify Ping and REST Authentication
     Run Keyword If  '${l_status}' == '${False}'
     ...   Fail  msg=System not in ideal state to use [ERROR]
-
-
-Check If BMC is Up
-    ${status}=    Verify Ping and REST Authentication
-    Run Keyword If   '${status}' == '${False}'
-    ...     Fail   msg=Ping and REST auth failed
 
 
 Validate BMC Version
