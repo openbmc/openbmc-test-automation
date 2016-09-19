@@ -41,7 +41,6 @@ Initiate Code update BMC
     Run Keyword If   '${session_active}' == '${True}'
     ...    Trigger Warm Reset via Reboot
 
-    Wait Until Keyword Succeeds
-    ...  30 min   10 sec     Check If BMC is Up
+    Check If BMC is Up    30 min   10 sec
     Sleep  1 min
     Validate BMC Version
