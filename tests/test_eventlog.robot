@@ -163,9 +163,7 @@ Test events after openbmc reboot
     ${pre_reboot_event}=         create a test log
 
     ${output}=      Execute Command    /sbin/reboot
-    Sleep   ${SYSTEM_SHUTDOWN_TIME}
-    Wait For Host To Ping   ${OPENBMC_HOST}
-    Sleep   ${WAIT_FOR_SERVICES_UP}
+    Check If BMC is Up   5 min    10 sec
 
     ${resp} =    openbmc get request     ${pre_reboot_event}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
