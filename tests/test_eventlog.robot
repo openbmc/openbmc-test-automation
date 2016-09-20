@@ -83,12 +83,11 @@ delete the log
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
 
 Intermixed delete
-    [Documentation]     This testcase is for excersicing caching impleted,
+    [Documentation]     This testcase does the following sequence
     ...                 Steps:
     ...                     write three logs
     ...                     delete middle log
     ...                     middle log should not exist
-    ...                     time stamp should not match between logs(1st and 3rd)
     [Tags]  CI
     ${event1}=      create a test log
     ${event2}=      create a test log
@@ -96,9 +95,8 @@ Intermixed delete
     ${deluri} =  catenate    SEPARATOR=   ${event2}   /action/delete
     ${resp} =    openbmc post request     ${deluri}    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${time_event1}=     Read Attribute      ${event1}   time
-    ${time_event3}=     Read Attribute      ${event3}   time
-    should not be equal     ${time_event1}      ${time_event3}
+    ${resp}=   openbmc get request   ${event2}
+    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
 
 restarting event process retains logs
     [Documentation]     This is to test events are in place even after the
