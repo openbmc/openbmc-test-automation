@@ -84,8 +84,8 @@ Boot order with permanent boot policy
 Onetime boot order after warm reset
     [Documentation]   This testcase is to verify that boot policy and order does not change
     ...               after warm reset on a system with onetime boot policy.
-
-    [Tags]  chassisboot
+    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/519
+    [Tags]  chassisboot    known_issue
 
     Initiate Power On
 
@@ -104,7 +104,8 @@ Onetime boot order after warm reset
 Permanent boot order after warm reset
     [Documentation]   This testcase is to verify that boot policy and order does not change
     ...               after warm reset on a system with permanent boot policy.
-    [Tags]  chassisboot
+    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/519
+    [Tags]  chassisboot    known_issue
 
     Initiate Power On
 
@@ -123,6 +124,8 @@ Permanent boot order after warm reset
 Set boot policy to invalid value
     [Documentation]   This testcase is to verify that proper error message is prompted
     ...               when invalid value to provided to boot policy.
+    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/552
+    [Tags]  known_issue
 
     Set Boot Policy   abc
 
