@@ -16,6 +16,7 @@ Documentation     Trigger code update to a target BMC.
 ...                 - Version check post update
 
 Resource          code_update_utils.robot
+Resource          ../../lib/boot/boot_resource_master.robot
 
 *** Variables ***
 
@@ -28,7 +29,13 @@ Initiate Code update BMC
 
     Check If File Exist    ${FILE_PATH}
     System Readiness Test
-    Validate BMC Version   before
+    ${status}=   Run Keyword and Return Status
+    ...   Validate BMC Version   before
+
+    Run Keyword if  '${status}' == '${False}'
+    ...     Pass Execution   Same Driver version installed
+
+    BMC Power Off
 
     Preserve BMC Network Setting
     SCP Tar Image File to BMC   ${FILE_PATH}
