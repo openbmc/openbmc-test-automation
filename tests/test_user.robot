@@ -82,19 +82,29 @@ Create multiple users
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is to verify that multiple users creation
     ...                 in open bmc.\n
+    ...                 The randomness of the string is limited to the instance
+    ...                 of this test however if we end up running multiple test
+    ...                 and multiple iteration,we end up creating the same user
+    ...                 To avoid creating already existing user, check if there
+    ...                 already one on the BMC user list. If exists continue
+    ...                 loop else create the user.
 
     : FOR    ${INDEX}    IN RANGE    1    10
-        \    Log    ${INDEX}
-        \    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-        \    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-        \    ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-        \    ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
-        \    Should Be Equal    ${resp}    ok
-        \    ${user_list} =    Get UserList
-        \    Should Contain     ${user_list}    ${username}
-        \    Login BMC    ${username}    ${password}
-        \    ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
-        \    Should Be Equal    ${rc}    ${0}
+    \    Log    ${INDEX}
+    \    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    \    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    \    ${comment} =     Generate Random String    ${RANDOM_STRING_LENGTH}
+    \    ${user_list} =   Get UserList
+    \    ${exist}=  Run Keyword and Return Status
+         ...   Should not Contain   ${user_list}    ${username}
+    \    Run Keyword If  '${exist}' == '${False}'   Continue For Loop
+    \    ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
+    \    Should Be Equal    ${resp}    ok
+    \    ${user_list} =    Get UserList
+    \    Should Contain     ${user_list}    ${username}
+    \    Login BMC    ${username}    ${password}
+    \    ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
+    \    Should Be Equal    ${rc}    ${0}
 
 Create and delete user without password
     [Documentation]     ***GOOD PATH***
@@ -152,7 +162,7 @@ Set password for existing user
 
 Set password with empty password for existing
     [Documentation]     ***GOOD PATH***
-    ...                 This testcase is to verify that empty password can be set 
+    ...                 This testcase is to verify that empty password can be set
     ...                 for a existing user.\n
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
@@ -239,6 +249,17 @@ Create user group with no name
     Should Be Equal    ${resp}    error
     ${usergroup_list} =    Get GroupListUsr
     Should Not Contain    ${usergroup_list}    ${EMPTY}
+
+Cleanup users list
+    [Documentation]     ***GOOD PATH***
+    ...                 This testcase is to clean up multiple users created by
+    ...                 the test so as to leave the system in a cleaner state.
+    ...                 This is a no-op if there is no user list on the BMC.
+
+    ${user_list} =    Get UserList
+    : FOR   ${username}   IN   @{user_list}
+    \    ${resp} =    Delete User    ${username}
+    \    Should Be Equal    ${resp}    ok
 
 *** Keywords ***
 
