@@ -1,6 +1,12 @@
 *** Settings ***
 
 Documentation       This suite is for testing Open BMC user account management.
+...                 The randomness of the string generated is limited to the
+...                 instance per test case however we end up running multiple
+...                 test and multiple iteration. This creates scenario where
+...                 the same previous user is generated.
+...                 As a good pratice, clean up all the users at the end of
+...                 test.
 
 Resource            ../lib/rest_client.robot
 Resource            ../lib/utils.robot
@@ -152,7 +158,7 @@ Set password for existing user
 
 Set password with empty password for existing
     [Documentation]     ***GOOD PATH***
-    ...                 This testcase is to verify that empty password can be set 
+    ...                 This testcase is to verify that empty password can be set
     ...                 for a existing user.\n
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
@@ -239,6 +245,19 @@ Create user group with no name
     Should Be Equal    ${resp}    error
     ${usergroup_list} =    Get GroupListUsr
     Should Not Contain    ${usergroup_list}    ${EMPTY}
+
+Cleanup Users List
+    [Documentation]     ***GOOD PATH***
+    ...                 This testcase is to clean up multiple users created by
+    ...                 the test so as to leave the system in cleaner state.
+    ...                 This is a no-op if there is no user list on the BMC.
+    [Tags]  CleanupUsersList
+
+    ${user_list} =    Get UserList
+    : FOR   ${username}   IN   @{user_list}
+    \    ${resp} =    Delete User    ${username}
+    \    Should Be Equal    ${resp}    ok
+
 
 *** Keywords ***
 
