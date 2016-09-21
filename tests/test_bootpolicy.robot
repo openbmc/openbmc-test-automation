@@ -123,6 +123,8 @@ Permanent boot order after warm reset
 Set boot policy to invalid value
     [Documentation]   This testcase is to verify that proper error message is prompted
     ...               when invalid value to provided to boot policy.
+    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/552
+    [Tags]  known_issue
 
     Set Boot Policy   abc
 

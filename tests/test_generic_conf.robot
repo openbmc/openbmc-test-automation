@@ -38,6 +38,8 @@ Set the power with string of characters
     [Documentation]   ***BAD PATH***
     ...               This test case set the power values with string of characters
     ...               Expectation is to return error.
+    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/552
+    [Tags]  known_issue
 
     ${valueToBeSet}=   Set Variable   abcdefg
     ${valueDict}=   create dictionary   data=${valueToBeSet}
@@ -50,6 +52,8 @@ Set the power with greater then MAX_POWER_VALUE
     [Documentation]   ***BAD PATH***
     ...               This test case sets the power value which is greater 
     ...               then MAX_ALLOWED_VALUE,Expectation is to return error
+    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/552
+    [Tags]  known_issue
 
     ${valueToBeSet}=   Set Variable     ${1010}
     ${valueDict}=   create dictionary   data=${valueToBeSet}
@@ -86,6 +90,8 @@ Set the boot flags with string
     [Documentation]   ***BAD PATH***
     ...               This test case sets the boot flag with some invalid string 
     ...               Expectation is it should not be set.
+    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/552
+    [Tags]  known_issue
 
     ${valueToBeSet}=   Set Variable     3ab56f
     ${valueDict} =   create dictionary   data=${valueToBeSet}
