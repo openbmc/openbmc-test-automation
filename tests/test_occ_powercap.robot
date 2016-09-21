@@ -22,6 +22,9 @@ Set and Get PowerCap
     [Documentation]     This testcase is to test get/set powercap feature.
     ...                 In the testcase we are reading min, max value and then
     ...                 try set the random in that range.
+    ...                 Existing Issue: https://github.com/openbmc/openbmc/issues/552
+    [Tags]  known_issue
+
     ${min}=     Get Minimum PowerCap
     log     ${min}
     ${max}=     Get Maximum PowerCap
@@ -38,6 +41,9 @@ Set and Get PowerCap
 
 Set Less Than Minimum PowerCAP
     [Documentation]     Test set powercap with less than min powercap value
+    ...                 Existing Issue: https://github.com/openbmc/openbmc/issues/552
+    [Tags]  known_issue
+
     ${org_power_cap}=       Get PowerCap
     ${min}=     Get Minimum PowerCap
     ${sample_invalid_pcap}=     Evaluate    ${min}-${100}
@@ -49,6 +55,9 @@ Set Less Than Minimum PowerCAP
 
 Set More Than Maximum PowerCAP
     [Documentation]     Test set powercap with more than max powercap value
+    ...                 Existing Issue: https://github.com/openbmc/openbmc/issues/552
+    [Tags]  known_issue
+
     ${org_power_cap}=       Get PowerCap
     ${min}=     Get Maximum PowerCap
     ${sample_invalid_pcap}=     Evaluate    ${min}+${100}
