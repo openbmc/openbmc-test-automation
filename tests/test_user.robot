@@ -1,6 +1,15 @@
 *** Settings ***
 
 Documentation       This suite is for testing Open BMC user account management.
+...                 The randomness of the string generated is limited to the
+...                 instance per test case however we end up running multiple
+...                 test and multiple iteration. This creates scenario where
+...                 the same previous user is generated.
+...                 To avoid creating already existing one, check if already
+...                 there on the BMC user list. If user exists, delete it else
+...                 continue as usual.
+...                 As a good pratice, clean up all the users at the end of
+...                 test.
 
 Resource            ../lib/rest_client.robot
 Resource            ../lib/utils.robot
@@ -39,6 +48,8 @@ Create and delete user without groupname
     ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
 
+    Delete User If Exist   ${username}
+
     ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
     Should Be Equal    ${resp}    ok
     ${user_list} =    Get UserList
@@ -62,6 +73,8 @@ Create and delete user with user group name
     ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${groupname} =    Generate Random String    ${RANDOM_STRING_LENGTH}
 
+    Delete User If Exist   ${username}
+
     ${resp} =    Create UserGroup    ${groupname}
     Should Be Equal    ${resp}    ok
     ${resp} =    Create User    ${comment}    ${username}    ${groupname}    ${password}
@@ -84,17 +97,18 @@ Create multiple users
     ...                 in open bmc.\n
 
     : FOR    ${INDEX}    IN RANGE    1    10
-        \    Log    ${INDEX}
-        \    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-        \    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-        \    ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-        \    ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
-        \    Should Be Equal    ${resp}    ok
-        \    ${user_list} =    Get UserList
-        \    Should Contain     ${user_list}    ${username}
-        \    Login BMC    ${username}    ${password}
-        \    ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
-        \    Should Be Equal    ${rc}    ${0}
+    \    Log    ${INDEX}
+    \    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    \    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    \    ${comment} =     Generate Random String    ${RANDOM_STRING_LENGTH}
+    \    Delete User If Exist   ${username}
+    \    ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
+    \    Should Be Equal    ${resp}    ok
+    \    ${user_list} =    Get UserList
+    \    Should Contain     ${user_list}    ${username}
+    \    Login BMC    ${username}    ${password}
+    \    ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
+    \    Should Be Equal    ${rc}    ${0}
 
 Create and delete user without password
     [Documentation]     ***GOOD PATH***
@@ -108,6 +122,7 @@ Create and delete user without password
 
     ${resp} =    Create UserGroup    ${groupname}
     Should Be Equal    ${resp}    ok
+    Delete User If Exist   ${username}
     ${resp} =    Create User    ${comment}    ${username}    ${groupname}    ${EMPTY}
     Should Be Equal    ${resp}    ok
     ${user_list} =    Get UserList
@@ -126,10 +141,13 @@ Set password for existing user
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is for testing password set for user
     ...                 in open bmc.\n
+    ...                 To keep it simple, create new user, and try the test
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+
+    Delete User If Exist   ${username}
 
     ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
     Should Be Equal    ${resp}    ok
@@ -152,12 +170,15 @@ Set password for existing user
 
 Set password with empty password for existing
     [Documentation]     ***GOOD PATH***
-    ...                 This testcase is to verify that empty password can be set 
+    ...                 This testcase is to verify that empty password can be set
     ...                 for a existing user.\n
+    ...                 To keep it simple, create new user, and try the test
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+
+    Delete User If Exist   ${username}
 
     ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
     Should Be Equal    ${resp}    ok
@@ -240,6 +261,18 @@ Create user group with no name
     ${usergroup_list} =    Get GroupListUsr
     Should Not Contain    ${usergroup_list}    ${EMPTY}
 
+Cleanup users list
+    [Documentation]     ***GOOD PATH***
+    ...                 This testcase is to clean up multiple users created by
+    ...                 the test so as to leave the system in cleaner state.
+    ...                 This is a no-op if there is no user list on the BMC.
+
+    ${user_list} =    Get UserList
+    : FOR   ${username}   IN   @{user_list}
+    \    ${resp} =    Delete User    ${username}
+    \    Should Be Equal    ${resp}    ok
+
+
 *** Keywords ***
 
 Get UserList
@@ -301,3 +334,11 @@ Login BMC
     Open connection     ${OPENBMC_HOST}
     ${resp} =   Login   ${username}    ${password}
     [return]    ${resp}
+
+Delete User If Exist
+    [Arguments]    ${username}
+    ${user_list} =    Get UserList
+    ${exist}=  Run Keyword and Return Status
+    ...   Should not Contain   ${user_list}    ${username}
+    Run Keyword If  '${exist}' == '${False}'
+    ...    Delete User    ${username}
