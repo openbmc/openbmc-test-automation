@@ -82,6 +82,10 @@ How to test individual test
 
     No preset environment variables, the entire test suite for a barreleye system
     $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- tests
+
+    No preset environment variables, the entire test suite excluding test
+    cases failing due to known issues
+    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- tests --exclude known_issue
 ```
 
 It can also be run by pasing variables from the cli...
