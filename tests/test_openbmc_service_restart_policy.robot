@@ -11,9 +11,13 @@ Suite Teardown       Close All Connections
 Test Teardown        Log FFDC
 
 *** Test Cases ***
+*** comment ***
 Test OpenBMC Services Autorestart Policy
     [Documentation]     This testcases is for checking all the openbmc services
     ...                 restart policy is set to active
+    ...                 Disabling this test as use case is not well define and
+    ...                 developement point of view this may keep changing. So
+    ...                 untill then, this remains commented piece of test.
     @{services}=    Create List     btbridged.service
     ...                             host-ipmid.service
     ...                             inarp.service
@@ -55,6 +59,7 @@ Test OpenBMC Services Autorestart Policy
     \    Check Service Autorestart    ${SERVICE}
 
 
+*** Test Cases ***
 Test Restart Policy for openbmc service
     [Documentation]     This testcase will kill the service and make sure it
     ...                 does restart after that
