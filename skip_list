@@ -19,3 +19,5 @@
 -e Validate_Heartbeat_LEDs_Test_Cases
 -e Validate_Identify_LEDs_Test_Cases
 -e Validate_Beep_LEDs_Test_Cases
+#https://github.com/openbmc/openbmc-test-automation/issues/130
+-e Test_OpenBMC_Services_Autorestart_Policy
