@@ -15,3 +15,5 @@
 -e Set_valid_Mac_address
 #https://github.com/openbmc/openbmc-test-automation/issues/107
 -e Revert_old_Mac_address
+#https://github.com/openbmc/openbmc-test-automation/issues/130
+-e Test_OpenBMC_Services_Autorestart_Policy
