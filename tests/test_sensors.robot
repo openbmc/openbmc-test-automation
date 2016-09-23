@@ -24,6 +24,7 @@ Verify connection
     Response Should Be Equal    "hello"
 
 Execute ipmi BT capabilities command
+    [Tags]  Execute_ipmi_BT_capabilities_command
     Run IPMI command            0x06 0x36
     response Should Be Equal    " 01 40 40 0a 01"
 

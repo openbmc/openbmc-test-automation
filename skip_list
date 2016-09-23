@@ -1,0 +1,9 @@
+-e known_issue
+#https://github.com/openbmc/openbmc-test-automation/issues/110
+-e Test_non_SSL_Connection_to_port_443
+#https://github.com/openbmc/openbmc-test-automation/issues/123
+-e Execute_ipmi_BT_capabilities_command
+#https://github.com/openbmc/openbmc/issues/539
+-e Test_Wrong_Reservation_ID
+#https://github.com/openbmc/openbmc/issues/539
+-e Test_Correct_Reservation_ID

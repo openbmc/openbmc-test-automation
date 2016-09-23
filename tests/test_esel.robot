@@ -12,10 +12,11 @@ Test Teardown          Log FFDC
 *** Test Cases ***
 
 Test Wrong Reservation_ID
-   [Documentation]   This testcase is to test BMC can handle multi-requestor's
-   ...               oem partial add command with incorrect reservation id.
-   ...               It simulates sending partial add command with fake content
-   ...                and wrong Reservation ID. This command will be rejected.
+    [Documentation]   This testcase is to test BMC can handle multi-requestor's
+    ...               oem partial add command with incorrect reservation id.
+    ...               It simulates sending partial add command with fake content
+    ...                and wrong Reservation ID. This command will be rejected.
+    [Tags]  Test_Wrong_Reservation_ID
    
     ${rev_id_1} =    Run IPMI Command Returned   0x0a 0x42
     ${rev_id_ls} =   Get Substring   ${rev_id_1}   1   3
@@ -25,10 +26,11 @@ Test Wrong Reservation_ID
     Should Contain   ${output}   Reservation cancelled
 
 Test Correct Reservation_ID
-   [Documentation]   This testcase is to test BMC can handle multi-requestor's
-   ...               oem partial add command with correct reservation id. It
-   ...                simulates sending partial add command with fake content
-   ...               and correct Reservation ID. This command will be accepted.
+    [Documentation]   This testcase is to test BMC can handle multi-requestor's
+    ...               oem partial add command with correct reservation id. It
+    ...                simulates sending partial add command with fake content
+    ...               and correct Reservation ID. This command will be accepted.
+    [Tags]  Test_Correct_Reservation_ID
    
     Run IPMI command   0x0a 0x42
     ${rev_id_2} =    Run IPMI Command Returned   0x0a 0x42
