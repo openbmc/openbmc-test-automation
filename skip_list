@@ -1,0 +1,5 @@
+-e known_issue
+-e Test_non_SSL_Connection_to_port_443
+-e Execute_ipmi_BT_capabilities_command
+-e Test_Wrong_Reservation_ID
+-e Test_Correct_Reservation_ID 
