@@ -203,6 +203,7 @@ delete invalid list names /org/nothere/
     should be equal as strings      ${json['status']}       error
 
 get names /
+    [Tags]  get_names
     ${resp} =   openbmc get request     /enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
@@ -210,6 +211,7 @@ get names /
     should be equal as strings      ${json['status']}       ok
 
 get names /org/
+    [Tags]  get_names_org
     ${resp} =   openbmc get request     /org/enumerate
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}

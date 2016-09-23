@@ -7,3 +7,11 @@
 -e Test_Wrong_Reservation_ID
 #https://github.com/openbmc/openbmc/issues/539
 -e Test_Correct_Reservation_ID
+#https://github.com/openbmc/openbmc-test-automation/issues/23
+-e get_names
+#https://github.com/openbmc/openbmc-test-automation/issues/23
+-e get_names_org
+#https://github.com/openbmc/openbmc-test-automation/issues/107
+-e Set_valid_Mac_address
+#https://github.com/openbmc/openbmc-test-automation/issues/107
+-e Revert_old_Mac_address

@@ -137,7 +137,7 @@ Set invalid Mac address     eth0     gg:hh:jj:kk:ll:mm    error
 
 
 Set valid Mac address     eth0     00:21:cc:73:91:dd   ok
-    [Tags]   network_test
+    [Tags]   network_test  Set_valid_Mac_address
     [Template]  SetMacAddress_good
     [Documentation]   ***GOOD PATH***
     ...               This test case add the ip addresson the  interface and validates
@@ -145,7 +145,7 @@ Set valid Mac address     eth0     00:21:cc:73:91:dd   ok
     ...               Expectation is the ip address should get added.
 
 Revert old Mac address     eth0     ${OLD_MAC_ADDRESS}   ok
-    [Tags]   network_test
+    [Tags]   network_test  Revert_old_Mac_address
     [Template]  SetMacAddress_good
     [Documentation]   ***GOOD PATH***
     ...               This test case add the ip addresson the  interface and validates
