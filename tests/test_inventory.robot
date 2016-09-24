@@ -20,31 +20,31 @@ Force Tags  chassisboot
 *** Test Cases ***
 
 minimal cpu inventory
-	${count} = 	Get Total Present 	CPU
+	${count} = 	Get Total Present 	cpu
 	Should Be True 	${count}>${0}
 
 minimal dimm inventory
-	${count} = 	Get Total Present 	DIMM
+	${count} = 	Get Total Present 	dimm
 	Should Be True 	${count}>=${2}
 
 minimal core inventory
-	${count} = 	Get Total Present 	CORE
+	${count} = 	Get Total Present 	core
 	Should Be True 	${count}>${0}
 
 minimal memory buffer inventory
-	${count} = 	Get Total Present 	MEMORY_BUFFER
+	${count} = 	Get Total Present 	membuf
 	Should Be True 	${count}>${0}
 
 minimal fan inventory
-	${count} = 	Get Total Present 	FAN
+	${count} = 	Get Total Present 	fan
 	Should Be True 	${count}>${2}
 
 minimal main planar inventory
-	${count} = 	Get Total Present 	MAIN_PLANAR
+	${count} = 	Get Total Present 	motherboard
 	Should Be True 	${count}>${0}
 
 minimal system inventory
-	${count} = 	Get Total Present 	SYSTEM
+	${count} = 	Get Total Present 	system
 	Should Be True 	${count}>${0}
 
 Verify CPU VPD Properties
@@ -65,6 +65,7 @@ Verify System VPD Properties
 
 *** Keywords ***
 
+
 Setup The Suite
 	BMC Power On
 
@@ -75,15 +76,11 @@ Setup The Suite
 	log Dictionary  	${resp}
 
 Get Total Present
-	[arguments] 	${type}
-
-	${l} =    	Create List  	[]
-	${list} = 	Get Inventory Fru Type List 	${OPENBMC_MODEL} 	${type}
-	: FOR 	${element} 	IN  	@{list}
-	\ 	Append To List 	 ${l}  	${SYSTEM_INFO['${element}']['present']}
-
-	${sum} = 	Get Count 	${l} 	True
-	[return] 	${sum}
+        [Arguments]    ${type}
+        ${list} =    Get Dictionary Keys    ${SYSTEM_INFO}
+        ${resp} =    Get Matches    ${list}    regexp=^.*[0-9a-z_].${type}[0-9]*$
+        ${sum} =        Get Length    ${resp}
+        [return]    ${sum}
 
 Verify Properties
 	[arguments] 	${type}
