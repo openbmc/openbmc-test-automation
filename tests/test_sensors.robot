@@ -10,7 +10,7 @@ Resource        ../lib/ipmi_client.robot
 Resource        ../lib/openbmc_ffdc.robot
 Library         ../data/model.py
 
-Suite Setup            Open Connection And Log In
+Suite setup            Setup The Suite
 Suite Teardown         Close All Connections
 Test Teardown          Log FFDC
 
@@ -29,7 +29,7 @@ Execute ipmi BT capabilities command
     response Should Be Equal    " 01 40 40 0a 01"
 
 Execute Set Sensor boot count
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/BootCount
+    ${uri} =    Get System component    BootCount
     ${x} =      Get Sensor Number   ${uri}
 
     Run IPMI command   0x04 0x30 ${x} 0x01 0x00 0x35 0x00 0x00 0x00 0x00 0x00 0x00
@@ -38,7 +38,7 @@ Execute Set Sensor boot count
     Response Should Be Equal   ${val}
 
 Set Sensor Boot progress
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/BootProgress
+    ${uri} =    Get System component    BootProgress
     ${x} =      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x04 0x00 0x00 0x00 0x00 0x14 0x00
@@ -46,7 +46,7 @@ Set Sensor Boot progress
     Response Should Be Equal    FW Progress, Baseboard Init
 
 Set Sensor Boot progress Longest string
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/BootProgress
+    ${uri} =    Get System component    BootProgress
     ${x} =      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x04 0x00 0x00 0x00 0x00 0x0e 0x00
@@ -54,7 +54,7 @@ Set Sensor Boot progress Longest string
     Response Should Be Equal    FW Progress, Docking station attachment
 
 BootProgress sensor FW Hang unspecified Error
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/BootProgress
+    ${uri} =    Get System component    BootProgress
     ${x} =      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00
@@ -62,7 +62,7 @@ BootProgress sensor FW Hang unspecified Error
     Response Should Be Equal    FW Hang, Unspecified
 
 BootProgress fw hang state
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/BootProgress
+    ${uri} =    Get System component    BootProgress
     ${x} =      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
@@ -70,7 +70,7 @@ BootProgress fw hang state
     Response Should Be Equal    POST Error, unknown
 
 OperatingSystemStatus Sensor boot completed progress
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/OperatingSystemStatus
+    ${uri} =    Get System component    OperatingSystemStatus
     ${x} =      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
@@ -78,7 +78,7 @@ OperatingSystemStatus Sensor boot completed progress
     Response Should Be Equal    Boot completed (00)
 
 OperatingSystemStatus Sensor progress
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/OperatingSystemStatus
+    ${uri} =    Get System component    OperatingSystemStatus
     ${x} =      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x04 0x00 0x00 0x00 0x00 0x20 0x00
@@ -86,7 +86,7 @@ OperatingSystemStatus Sensor progress
     Response Should Be Equal    PXE boot completed
 
 OCC Active sensor on enabled
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/cpu0/OccStatus
+    ${uri} =    Get System component    OccStatus
     ${x} =      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20 0x00
@@ -94,7 +94,7 @@ OCC Active sensor on enabled
     Response Should Be Equal    Enabled
 
 OCC Active sensor on disabled
-    ${uri} =    Set Variable    /org/openbmc/sensors/host/cpu0/OccStatus
+    ${uri} =    Get System component    OccStatus
     ${x} =      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
@@ -102,71 +102,72 @@ OCC Active sensor on disabled
     Response Should Be Equal    Disabled
 
 CPU Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0
+
+    ${uri} =    Get System component    cpu
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    present
+    Read The Attribute  ${uri}    present
     Response Should Be Equal    True
 
 CPU not Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0
+    ${uri} =    Get System component    cpu
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    present
+    Read The Attribute  ${uri}    present
     Response Should Be Equal    False
 
 CPU fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0
+    ${uri} =    Get System component    cpu
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x01 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    fault
+    Read The Attribute  ${uri}    fault
     Response Should Be Equal    True
 
 CPU no fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0
+    ${uri} =    Get System component    cpu
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x20 0x00
-    Read The Attribute   ${uri}    fault
+    Read The Attribute  ${uri}    fault
     Response Should Be Equal    False
 
 core Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0/core11
+    ${uri} =    Get System component    core11
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}   present
+    Read The Attribute  ${uri}   present
     Response Should Be Equal    True
 
 core not Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0/core11
+    ${uri} =    Get System component    core11
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}   present
+    Read The Attribute  ${uri}   present
     Response Should Be Equal    False
 
 core fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0/core11
+    ${uri} =    Get System component    core11
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x01 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}    fault
+    Read The Attribute  ${uri}    fault
     Response Should Be Equal    True
 
 core no fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/cpu0/core11
+    ${uri} =    Get System component    core11
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x20 0x00
-    Read The Attribute   ${uri}    fault
+    Read The Attribute  ${uri}    fault
     Response Should Be Equal    False
 
 DIMM3 Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/dimm3
+    ${uri} =    Get System component    dimm3
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x40 0x00 0x00 0x00 0x00 0x20 0x00
@@ -174,7 +175,7 @@ DIMM3 Present
     Response Should Be Equal    True
 
 DIMM3 not Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/dimm3
+    ${uri} =    Get System component    dimm3
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x00 0x40 0x00 0x00 0x20 0x00
@@ -182,7 +183,7 @@ DIMM3 not Present
     Response Should Be Equal    False
 
 DIMM0 fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/dimm0
+    ${uri} =    Get System component    dimm0
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x10 0x00 0x00 0x00 0x00 0x20 0x00
@@ -190,7 +191,7 @@ DIMM0 fault
     Response Should Be Equal    True
 
 DIMM0 no fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/dimm0
+    ${uri} =    Get System component    dimm0
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x10 0x00 0x00 0x20 0x00
@@ -198,7 +199,7 @@ DIMM0 no fault
     Response Should Be Equal    False
 
 Centaur0 Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/membuf0
+    ${uri} =    Get System component    membuf
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x40 0x00 0x00 0x00 0x00 0x20 0x00
@@ -206,7 +207,7 @@ Centaur0 Present
     Response Should Be Equal    True
 
 Centaur0 not Present
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/membuf0
+    ${uri} =    Get System component    membuf
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x40 0x00 0x00 0x20 0x00
@@ -214,7 +215,7 @@ Centaur0 not Present
     Response Should Be Equal    False
 
 Centaur0 fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/membuf0
+    ${uri} =    Get System component    membuf
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x10 0x00 0x00 0x00 0x00 0x20 0x00
@@ -222,7 +223,7 @@ Centaur0 fault
     Response Should Be Equal    True
 
 Centaur0 no fault
-    ${uri} =    Set Variable    /org/openbmc/inventory/system/chassis/motherboard/membuf0
+    ${uri} =    Get System component    membuf
     ${x} =      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x10 0x00 0x00 0x20 0x00
@@ -230,32 +231,51 @@ Centaur0 no fault
     Response Should Be Equal    False
 
 System Present
-    Read The Attribute   /org/openbmc/inventory/system    present
+    ${uri} =    Get System component    system
+    Read The Attribute   ${uri}    present
     Response Should Be Equal    True
-    
+ 
 System Fault
-    Read The Attribute   /org/openbmc/inventory/system    fault
+    ${uri} =    Get System component    system
+    Read The Attribute   ${uri}    fault
     Response Should Be Equal    False
-    
+
 Chassis Present
+    ${uri} =    Get System component    chassis
     Read The Attribute   /org/openbmc/inventory/system/chassis    present
     Response Should Be Equal    True
-    
+
 Chassis Fault
+    ${uri} =    Get System component    chassis
     Read The Attribute   /org/openbmc/inventory/system/chassis    fault
     Response Should Be Equal    False
-    
-io_board Present
-    Read The Attribute   /org/openbmc/inventory/system/chassis/io_board    present
-    Response Should Be Equal    True
-    
-io_board Fault
-    Read The Attribute   /org/openbmc/inventory/system/chassis/io_board    fault
-    Response Should Be Equal    False
-    
 
+io_board Present
+    ${uri} =    Get System component    io_board
+    Read The Attribute   ${uri}    present
+    Response Should Be Equal    True
+
+io_board Fault
+    ${uri} =    Get System component    io_board
+    Read The Attribute   ${uri}    fault
+    Response Should Be Equal    False
 
 *** Keywords ***
+
+Setup The Suite
+
+    Open Connection And Log In
+    ${resp} =       Read Properties         /org/openbmc/enumerate
+    Set Suite Variable      ${SYSTEM_INFO}          ${resp}
+    log Dictionary          ${resp}
+
+Get System component
+    [Arguments]    ${type}
+    ${list} =    Get Dictionary Keys    ${SYSTEM_INFO}
+    ${resp} =    Get Matches    ${list}    regexp=^.*[0-9a-z_].${type}[0-9]*$
+    ${url} =    Get From List    ${resp}    0
+    [return]    ${url}
+
 Execute new Command
     [arguments]    ${args}
     ${output}=  Execute Command    ${args}
