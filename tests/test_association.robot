@@ -178,9 +178,7 @@ Association unchanged after reboot
     ${pre_reboot_association_content} =     Read Attribute    ${association_uri}    endpoints
 
     ${output}=      Execute Command    /sbin/reboot
-    Sleep   ${SYSTEM_SHUTDOWN_TIME}
-    Wait For Host To Ping   ${OPENBMC_HOST}
-    Sleep   ${WAIT_FOR_SERVICES_UP}
+    Check If BMC is Up   5 min    10 sec
 
     ${post_reboot_association_content} =     Read Attribute    ${association_uri}    endpoints
     Should Be Equal        ${pre_reboot_association_content}    ${pre_reboot_association_content}
