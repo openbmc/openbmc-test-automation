@@ -8,6 +8,8 @@ Documentation     Trigger code update to a target BMC.
 ...               Update work flow sequence:
 ...                 - User input BMC File existence check
 ...                 - Ping Test and REST authentication
+...                 - Issue poweroff
+...                 - Prepare for Update
 ...                 - Apply preserve BMC Network setting
 ...                 - SCP image to BMC
 ...                 - Activate the flash image
@@ -16,7 +18,6 @@ Documentation     Trigger code update to a target BMC.
 ...                 - Version check post update
 
 Resource          code_update_utils.robot
-Resource          ../../lib/boot/boot_resource_master.robot
 
 *** Variables ***
 
@@ -35,7 +36,8 @@ Initiate Code update BMC
     Run Keyword if  '${status}' == '${False}'
     ...     Pass Execution   Same Driver version installed
 
-    BMC Power Off
+    Initiate Power Off
+    Prepare For Update
 
     Preserve BMC Network Setting
     SCP Tar Image File to BMC   ${FILE_PATH}
