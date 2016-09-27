@@ -36,6 +36,7 @@ minimal memory buffer inventory
 	Should Be True 	${count}>${0}
 
 minimal fan inventory
+    [Tags]  minimal_fan_inventory
 	${count} = 	Get Total Present 	FAN
 	Should Be True 	${count}>${2}
 
@@ -60,6 +61,7 @@ Verify Fan VPD Properties
 	Verify Properties 	FAN
 
 Verify System VPD Properties
+    [Tags]  Verify_System_VPD_Properties
 	Verify Properties 	SYSTEM
 
 
