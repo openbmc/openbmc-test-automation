@@ -8,8 +8,9 @@ Library          OperatingSystem
 
 *** Variables ***
 
-${BMC_UPD_METHOD}   /org/openbmc/control/flash/bmc/action/update
-${BMC_UPD_ATTR}     /org/openbmc/control/flash/bmc
+${BMC_UPD_METHOD}    /org/openbmc/control/flash/bmc/action/update
+${BMC_PREP_METHOD}   /org/openbmc/control/flash/bmc/action/PrepareForUpdate
+${BMC_UPD_ATTR}      /org/openbmc/control/flash/bmc
 
 *** Keywords ***
 
@@ -36,6 +37,18 @@ Activate BMC flash image
     ${data}=      Read Properties     ${BMC_UPD_ATTR}
     should be equal as strings   ${data["filename"]}   /tmp/flashimg
     should contain    ${data['status']}   to apply
+
+
+Prepare For Update
+    [Documentation]   Switch to update mode in progress. This method calls
+    ...               the Abort method to remove the pending update if there
+    ...               is any before code activation.
+    ${data} =   create dictionary   data=@{EMPTY}
+    ${resp}=    openbmc post request    ${BMC_PREP_METHOD}   data=${data}
+    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
+
+    ${data}=      Read Properties     ${BMC_UPD_ATTR}
+    should contain    ${data['status']}   Switch to update mode in progress
 
 
 SCP Tar Image File to BMC
