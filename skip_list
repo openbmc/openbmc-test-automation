@@ -11,10 +11,6 @@
 -e get_names
 #https://github.com/openbmc/openbmc-test-automation/issues/23
 -e get_names_org
-#https://github.com/openbmc/openbmc-test-automation/issues/107
--e Set_valid_Mac_address
-#https://github.com/openbmc/openbmc-test-automation/issues/107
--e Revert_old_Mac_address
 #https://github.com/openbmc/openbmc-test-automation/issues/22
 -e Validate_Heartbeat_LEDs_Test_Cases
 -e Validate_Identify_LEDs_Test_Cases
