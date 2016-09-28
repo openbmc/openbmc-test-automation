@@ -103,6 +103,30 @@ Persistency check for ip address
     should be true   '${isIPfound}' == 'true' and '${isgatewayfound}' == 'true'
 
 
+Set invalid Mac address     eth0     gg:hh:jj:kk:ll:mm    error
+    [Tags]   network_test  Set_invalid_Mac_address
+    [Template]  SetMacAddress_bad
+    [Documentation]   This test case tries to set the invalid mac address
+    ...               on the eth0 interface.
+    ...               Expectation is that it should throw error.
+
+
+Set valid Mac address     eth0     00:21:cc:73:91:dd   ok
+    [Tags]   network_test  Set_valid_Mac_address
+    [Template]  SetMacAddress_good
+    [Documentation]   ***GOOD PATH***
+    ...               This test case add the ip addresson the  interface and validates
+    ...               that ip address has been added or not.
+    ...               Expectation is the ip address should get added.
+
+Revert old Mac address     eth0     ${OLD_MAC_ADDRESS}   ok
+    [Tags]   network_test  Revert_old_Mac_address
+    [Template]  SetMacAddress_good
+    [Documentation]   ***GOOD PATH***
+    ...               This test case add the ip addresson the  interface and validates
+    ...               that ip address has been added or not.
+    ...               Expectation is the ip address should get added.
+
 ***keywords***
 
 Get networkInfo from the interface
@@ -136,3 +160,31 @@ validateEnvVariables
     should not be empty  ${NEW_BMC_IP}
     should not be empty  ${NEW_GATEWAY}
     should not be empty  ${NEW_SUBNET_MASK}
+
+SetMacAddress_bad
+    [Arguments]    ${intf}      ${address}    ${result}
+    ${arglist}=    Create List    ${intf}    ${address}
+    ${args}=       Create Dictionary   data=@{arglist}
+    ${resp}=       Call Method    /org/openbmc/NetworkManager/Interface/   SetHwAddress    data=${args}
+    should not be equal as strings      ${resp.status_code}     ${HTTP_OK}
+    ${json} =   to json         ${resp.content}
+    should be equal as strings      ${json['status']}       ${result}
+
+
+SetMacAddress_good
+    [Arguments]    ${intf}      ${address}   ${result}
+    ${arglist}=    Create List    ${intf}    ${address}
+    ${args}=       Create Dictionary   data=@{arglist}
+    ${resp}=       Call Method    /org/openbmc/NetworkManager/Interface/   SetHwAddress    data=${args}
+    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+    ${json} =   to json         ${resp.content}
+    should be equal as strings      ${json['status']}       ${result}
+    Wait For Host To Ping      ${OPENBMC_HOST}
+
+    Wait Until Keyword Succeeds    30 sec    5 sec    Initialize OpenBMC
+
+    @{arglist}=   Create List   ${intf}
+    ${args}=     Create Dictionary   data=@{arglist}
+    ${resp}=   Call Method    /org/openbmc/NetworkManager/Interface/    GetHwAddress    data=${args}
+    ${json} =   to json         ${resp.content}
+    should be equal as strings   ${json['data']}    ${address}

@@ -14,7 +14,9 @@
 #https://github.com/openbmc/openbmc-test-automation/issues/107
 -e Set_valid_Mac_address
 #https://github.com/openbmc/openbmc-test-automation/issues/107
--e Revert_old_Mac_address
+-e Revert_old_Mac_addres
+#https://github.com/openbmc/openbmc-test-automation/issues/137
+-e Set_invalid_Mac_address
 #https://github.com/openbmc/openbmc-test-automation/issues/22
 -e Validate_Heartbeat_LEDs_Test_Cases
 -e Validate_Identify_LEDs_Test_Cases
