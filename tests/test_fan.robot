@@ -9,4 +9,5 @@ Test Teardown     Log FFDC
 Test place holder dummy
    [Documentation]   Dummy Test case. We can't have an empty test case in
    ...               the testcase directory.
+   [Tags]  Test_place_holder_dummy
    Log    This is a dummy test case.. Ignore
