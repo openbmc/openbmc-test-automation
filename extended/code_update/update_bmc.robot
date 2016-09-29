@@ -12,6 +12,7 @@ Documentation     Trigger code update to a target BMC.
 ...                 - Prepare for Update
 ...                 - Force reboot
 ...                 - Wait for BMC to come online clean
+...                 - Wait for BMC_READY state
 ...                 - Apply preserve BMC Network setting
 ...                 - SCP image to BMC
 ...                 - Activate the flash image
@@ -43,6 +44,9 @@ Initiate Code update BMC
     # TODO: openbmc/openbmc#519
     Trigger Warm Reset via Reboot
     Check If BMC is Up    5 min   10 sec
+
+    Wait Until Keyword Succeeds
+    ...    5 min   10 sec   Verify BMC State   BMC_READY
 
     Preserve BMC Network Setting
     SCP Tar Image File to BMC   ${FILE_PATH}
