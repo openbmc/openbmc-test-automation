@@ -293,3 +293,12 @@ Get Time Stamp
     ${cur_time}=    Get Current Date   result_format=%Y%m%d%H%M%S%f
     [return]   ${cur_time}
 
+
+Verify BMC State
+    [Documentation]   Get the BMC state and verify if the current
+    ...               BMC state is as expected.
+    [Arguments]       ${expected}
+
+    ${current}=  Get BMC State
+    Should Contain  ${current}   ${expected}
+
