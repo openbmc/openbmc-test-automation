@@ -29,6 +29,7 @@ FFDC_BMC_CMD = {
                         'BMC OS'     : 'uname -a',
                         'BMC Uptime' : 'uptime',
                         'BMC Proc Info' : 'cat /proc/cpuinfo',
+                        'BMC Mem Info' : 'cat /proc/meminfo',
                         'BMC File System Disk Space Usage' : 'df -hT',
                      },
              'APPLICATION DATA' :
@@ -44,8 +45,22 @@ FFDC_BMC_FILE = {
                         #File Name         Command
                         'BMC_proc_list' : 'top -n 1 -b',
                         'BMC_journalctl.log' : 'journalctl --no-pager',
+                        'BMC_dmesg' : 'dmesg',
                      },
            }
+
+# Add file name and correcponding Get Request
+FFDC_GET_REQUEST = {
+             'GET REQUESTS' :
+                     {
+                        #File Name         Command
+                        'BMC_sensor_list' : '/org/openbmc/sensors/enumerate',
+                        'BMC_inventory' : '/org/openbmc/inventory/system/enumerate',
+                        'BMC_led' : '/org/openbmc/control/led/enumerate',
+                        'BMC_record_log' : '/org/openbmc/records/events/enumerate',
+                     },
+           }
+
 
 # Define your keywords in method/utils and call here
 FFDC_METHOD_CALL = {
@@ -54,6 +69,7 @@ FFDC_METHOD_CALL = {
                         #Description             Keyword name 
                         'FFDC Generic Report' : 'BMC FFDC Manifest',
                         'BMC Specific Files'  : 'BMC FFDC Files',
+                        'Get Request FFDC'    : 'BMC FFDC Get Requests',
                      },
            }
 
@@ -80,11 +96,26 @@ class openbmc_ffdc_list():
         return FFDC_BMC_FILE[i_type].items()
 
     ########################################################################
+    #   @brief    This method returns the list from the dictionary for scp
+    #   @param    i_type: @type string: string index lookup
+    #   @return   List of key pair from the dictionary
+    ########################################################################
+    def get_ffdc_get_request(self,i_type):
+        return FFDC_GET_REQUEST[i_type].items()
+
+    ########################################################################
     #   @brief    This method returns the list index from dictionary
     #   @return   List of index to the dictionary
     ########################################################################
     def get_ffdc_cmd_index(self):
         return FFDC_BMC_CMD.keys()
+
+    ########################################################################
+    #   @brief    This method returns the list index from dictionary
+    #   @return   List of index to the dictionary
+    ########################################################################
+    def get_ffdc_get_request_index(self):
+        return FFDC_GET_REQUEST.keys()
 
     ########################################################################
     #   @brief    This method returns the list index from dictionary
