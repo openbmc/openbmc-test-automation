@@ -9,6 +9,11 @@ Documentation      This module is for data collection on test case failure
 ...                │   └── 20160909102538035251_TestWarmResetviaREST
 ...                │       ├── 20160909102538035251_BMC_journalctl.log
 ...                │       ├── 20160909102538035251_BMC_proc_list
+...                │       ├── 20160909102538035251_BMC_dmesg
+...                │       ├── 20160909102538035251_BMC_inventory
+...                │       ├── 20160909102538035251_BMC_led
+...                │       ├── 20160909102538035251_BMC_record_log
+...                │       ├── 20160909102538035251_BMC_sensor_list
 ...                │       └── 20160909102538035251_ffdc_report.txt
 ...                └── test_history.txt
 

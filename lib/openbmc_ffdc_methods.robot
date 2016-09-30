@@ -134,3 +134,24 @@ Log Test Case Status
     Append To File    ${TEST_HISTORY}
     ...   ${cur_time}:${SUITE_NAME}:${TEST_NAME}:${TEST_STATUS}${\n}
 
+
+Log FFDC Get Requests
+    [Documentation]    Create file in current FFDC log directory.
+    ...                Do openbmc get request and write to
+    ...                corresponding file name.
+    [Arguments]        ${key_index}
+
+    @{cmd_list}=  Get ffdc get request  ${key_index}
+    :FOR  ${cmd}  IN  @{cmd_list}
+    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
+    \   ${resp}=  OpenBMC Get Request  ${cmd[1]}
+    \   ${jsondata}=  to json  ${resp.content}
+    \   Write Data to File  ${jsondata["data"]}${\n}  ${logpath}
+
+
+BMC FFDC Get Requests
+    [Documentation]    Get the command list and iterate
+    Open Connection And Log In
+    @{entries}=  Get ffdc get request index
+    :FOR  ${index}  IN  @{entries}
+    \   Log FFDC Get Requests   ${index}
