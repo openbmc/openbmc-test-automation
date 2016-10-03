@@ -64,18 +64,18 @@ Test Restart Policy for openbmc service
     ...                 does restart after that
 
     ${MainPID}=   Execute Restart Policy Command
-    ...   systemctl -p MainPID show settings.service| cut -d = -f2
+    ...   systemctl -p MainPID show phosphor-settings.service| cut -d = -f2
     Should Not Be Equal     0   ${MainPID}
 
     Execute Restart Policy Command    kill -9 ${MainPID}
     Sleep   30s   reason=Wait for service to restart properly
 
     ${ActiveState}=   Execute Restart Policy Command
-    ...   systemctl -p ActiveState show settings.service| cut -d = -f2
+    ...   systemctl -p ActiveState show phosphor-settings.service| cut -d = -f2
     Should Be Equal     active   ${ActiveState}
 
     ${MainPID}=   Execute Restart Policy Command
-    ...  systemctl -p MainPID show settings.service| cut -d = -f2
+    ...  systemctl -p MainPID show phosphor-settings.service| cut -d = -f2
     Should Not Be Equal     0   ${MainPID}
 
 
