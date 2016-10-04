@@ -11,6 +11,7 @@ Force Tags  chassisboot
 
 power on test
     [Documentation]    Power OFF and power ON
+    [Tags]  power_on_test
 
     BMC Power Off
     BMC Power On

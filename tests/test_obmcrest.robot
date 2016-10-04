@@ -1,9 +1,9 @@
 *** Settings ***
-Documentation		This suite will verifiy all OpenBMC rest interfaces
-...					Details of valid interfaces can be found here...
-...					https://github.com/openbmc/docs/blob/master/rest-api.md
+Documentation     This suite will verifiy all OpenBMC rest interfaces
+...               Details of valid interfaces can be found here...
+...               https://github.com/openbmc/docs/blob/master/rest-api.md
 
-Resource	  	  ../lib/rest_client.robot
+Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Test Teardown     Log FFDC
 
@@ -13,7 +13,7 @@ Test Teardown     Log FFDC
 
 *** Test Cases ***
 Good connection for testing
-    [Tags]  CI
+    [Tags]  CI  Good_connection_for_testing
     ${content}=    Read Properties     /
     ${c}=          get from List       ${content}      0
     Should Be Equal    ${c}     /org
@@ -33,7 +33,7 @@ Get a null Property
     Should Be Equal     ${jsondata['data']['description']}      The specified property cannot be found: ''is_fru''
 
 get directory listing /
-    [Tags]  CI
+    [Tags]  CI  get_directory_listing
     ${resp} =   openbmc get request     /
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json     ${resp.content}

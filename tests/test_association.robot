@@ -41,6 +41,7 @@ Create error log on single FRU
     [Documentation]     ***GOOD PATH***
     ...                 Create an error log on single FRU and verify
     ...                 its association.\n
+    [Tags]  Create_error_log_on_single_FRU
 
     Clear all logs
 
@@ -100,6 +101,7 @@ Delete error log
     [Documentation]     ***BAD PATH***
     ...                 Delete an error log and verify that its 
     ...                 association is also removed.\n
+    [Tags]  Delete_error_log
 
     ${log_uri1} =      Create a test log
     ${association_uri1} =    catenate    SEPARATOR=   ${log_uri1}   /fru

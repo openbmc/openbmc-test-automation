@@ -11,6 +11,7 @@ Test Teardown     Log FFDC
 Test SSL Connection
     [Documentation]     This testcase is for testing the SSL connection to the
     ...     OpenBMC machine.
+    [Tags]  Test_SSL_Connection
     Create Session    openbmc    https://${OPENBMC_HOST}/
     ${headers}=     Create Dictionary   Content-Type=application/json
     @{credentials} =   Create List     ${OPENBMC_USERNAME}      ${OPENBMC_PASSWORD}
@@ -25,6 +26,7 @@ Test non-SSL Connection to port 80
     [Documentation]     This testcase is for test to check OpenBMC machine
     ...     will not accepts the non-secure connection that is with http to
     ...     port 80 and expect a connection error
+    [Tags]  Test_non_SSL_Connection_to_port_80
     Create Session    openbmc    http://${OPENBMC_HOST}/    timeout=3
     Run Keyword And Expect Error    ConnectionError*   Get Request    openbmc   /list
 

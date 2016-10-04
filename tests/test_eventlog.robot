@@ -28,7 +28,7 @@ valid path to logs
 
 clear any logs
     [Documentation]     Test delete all events
-    [Tags]  CI
+    [Tags]  CI  clear_any_logs
     ${resp} =   openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${resp} =   openbmc get request     /org/openbmc/records/events/
@@ -37,7 +37,7 @@ clear any logs
 
 write a log
     [Documentation]     Test create event
-    [Tags]  CI
+    [Tags]  CI  write_a_log
     create a test log
 
 Message attribute should match

@@ -115,3 +115,11 @@ Run extended tests
     For Barreleye system
     python -m robot -v OPENBMC_HOST:x.x.x.x -v FILE_PATH:downloaded_path/barreleye-xxxx.all.tar  extended/code_update/update_bmc.robot
 ```
+
+Jenkins jobs tox commands
+```shell
+    HW CI tox command
+    Set the preset environment variables, run HW CI test for a barreleye system
+    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile HW_CI tests
+
+```
