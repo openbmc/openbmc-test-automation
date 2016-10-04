@@ -1,12 +1,16 @@
 #!/usr/bin/env python
 
-# This module provides many valuable functions such as my_parm_file.
+r"""
+This module provides many valuable functions such as my_parm_file.
+"""
 
 # sys and os are needed to get the program dir path and program name.
 import sys
 import os
 import ConfigParser
 import StringIO
+
+import gen_print as gp
 
 
 ###############################################################################
@@ -26,7 +30,8 @@ def my_parm_file(prop_file_path):
     This one
 
     Description of arguments:
-    prop_file_path  The caller should pass the path to the properties file.
+    prop_file_path                  The caller should pass the path to the
+                                    properties file.
     """
 
     # ConfigParser expects at least one section header in the file (or you
@@ -49,5 +54,22 @@ def my_parm_file(prop_file_path):
     config_parser.readfp(string_file)
     # Return the properties as a dictionary.
     return dict(config_parser.items('dummysection'))
+
+###############################################################################
+
+
+###############################################################################
+def return_path_list():
+
+    r"""
+    This function will split the PATH environment variable into a PATH_LIST
+    and return it.  Each element in the list will be normalized and have a
+    trailing slash added.
+    """
+
+    PATH_LIST = os.environ['PATH'].split(":")
+    PATH_LIST = [os.path.normpath(path) + os.sep for path in PATH_LIST]
+
+    return PATH_LIST
 
 ###############################################################################
