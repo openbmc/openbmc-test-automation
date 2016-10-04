@@ -13,11 +13,30 @@ import re
 import grp
 import socket
 import argparse
+import __builtin__
+import logging
+
+# python puts the program's directory path in sys.path[0].  In other words,
+# the user ordinarily has no way to override python's choice of a module from
+# its own dir.  We want to have that ability in our environment.  However, we
+# don't want to break any established python modules that depend on this
+# behavior.  So, we'll save the value from sys.path[0], delete it, import our
+# modules and then restore sys.path to its original value.
+
+save_path_0 = sys.path[0]
+del sys.path[0]
+
+import gen_arg as ga
+
+# Restore sys.path[0].
+sys.path.insert(0, save_path_0)
 
 # Setting these variables for use both inside this module and by programs
 # importing this module.
 pgm_dir_path = sys.argv[0]
 pgm_name = os.path.basename(pgm_dir_path)
+pgm_dir_name = re.sub("/" + pgm_name, "", pgm_dir_path) + "/"
+
 
 # Some functions (e.g. sprint_pgm_header) have need of a program name value
 # that looks more like a valid variable name.  Therefore, we'll swap odd
@@ -53,6 +72,18 @@ if SHOW_ELAPSED_TIME == "1":
 # Initialize some time variables used in module functions.
 start_time = time.time()
 sprint_time_last_seconds = start_time
+
+
+PASS = 1
+FAIL = 0
+
+
+try:
+    # The user can set environment variable "GEN_PRINT_DEBUG" to get debug
+    # output from this module.
+    gen_print_debug = os.environ['GEN_PRINT_DEBUG']
+except KeyError:
+    gen_print_debug = 0
 
 
 ###############################################################################
@@ -193,13 +224,16 @@ def get_arg_name(var,
     composite_line = lines[0].strip()
 
     called_func_name = sprint_func_name(stack_frame_ix)
-    # 2016/09/01 Mike Walsh (xzy0065) - I added code to handle pvar alias.
-    # pvar is an alias for print_var.  However, when it is used,
-    # sprint_func_name() returns the non-alias version, i.e. "print_var".
-    # Adjusting for that here.
-    substring = composite_line[0:4]
-    if substring == "pvar":
-        called_func_name = "pvar"
+    if not re.match(r".*" + called_func_name, composite_line):
+        # The called function name was not found in the composite line.  The
+        # caller may be using a function alias.
+        # I added code to handle pvar, qpvar, dpvar, etc. aliases.
+        # pvar is an alias for print_var.  However, when it is used,
+        # sprint_func_name() returns the non-alias version, i.e. "print_var".
+        # Adjusting for that here.
+        alias = re.sub("print_var", "pvar", called_func_name)
+        called_func_name = alias
+
     arg_list_etc = re.sub(".*" + called_func_name, "", composite_line)
     if local_debug:
         print_varx("called_func_name", called_func_name, 0, debug_indent)
@@ -210,7 +244,7 @@ def get_arg_name(var,
     # Initialize...
     nest_level = -1
     arg_ix = 0
-    args_arr = [""]
+    args_list = [""]
     for ix in range(0, len(arg_list_etc)):
         char = arg_list_etc[ix]
         # Set the nest_level based on whether we've encounted a parenthesis.
@@ -224,30 +258,30 @@ def get_arg_name(var,
                 break
 
         # If we reach a comma at base nest level, we are done processing an
-        # argument so we increment arg_ix and initialize a new args_arr entry.
+        # argument so we increment arg_ix and initialize a new args_list entry.
         if char == "," and nest_level == 0:
             arg_ix += 1
-            args_arr.append("")
+            args_list.append("")
             continue
 
-        # For any other character, we append it it to the current arg array
+        # For any other character, we append it it to the current arg list
         # entry.
-        args_arr[arg_ix] += char
+        args_list[arg_ix] += char
 
     # Trim whitespace from each list entry.
-    args_arr = [arg.strip() for arg in args_arr]
+    args_list = [arg.strip() for arg in args_list]
 
-    if arg_num > len(args_arr):
+    if arg_num > len(args_list):
         print_error("Programmer error - The caller has asked for the name of" +
                     " argument number \"" + str(arg_num) + "\" but there " +
-                    "were only \"" + str(len(args_arr)) + "\" args used:\n" +
-                    sprint_varx("args_arr", args_arr))
+                    "were only \"" + str(len(args_list)) + "\" args used:\n" +
+                    sprint_varx("args_list", args_list))
         return
 
-    argument = args_arr[arg_num - 1]
+    argument = args_list[arg_num - 1]
 
     if local_debug:
-        print_varx("args_arr", args_arr, 0, debug_indent)
+        print_varx("args_list", args_list, 0, debug_indent)
         print_varx("argument", argument, 0, debug_indent)
 
     return argument
@@ -394,7 +428,8 @@ def sprint_varx(var_name,
                 var_value,
                 hex=0,
                 loc_col1_indent=col1_indent,
-                loc_col1_width=col1_width):
+                loc_col1_width=col1_width,
+                trailing_char="\n"):
 
     r"""
     Print the var name/value passed to it.  If the caller lets loc_col1_width
@@ -447,51 +482,73 @@ def sprint_varx(var_name,
                                     this is adjusted so that the var_value
                                     lines up with text printed via the
                                     print_time function.
-   """
-
-    # Adjust loc_col1_width.
-    loc_col1_width = loc_col1_width - loc_col1_indent
+    trailing_char                   The character to be used at the end of the
+                                    returned string.  The default value is a
+                                    line feed.
+    """
 
     # Determine the type
     if type(var_value) in (int, float, bool, str, unicode) \
        or var_value is None:
         # The data type is simple in the sense that it has no subordinate
         # parts.
+        # Adjust loc_col1_width.
+        loc_col1_width = loc_col1_width - loc_col1_indent
         # See if the user wants the output in hex format.
         if hex:
             value_format = "0x%08x"
         else:
             value_format = "%s"
         format_string = "%" + str(loc_col1_indent) + "s%-" \
-            + str(loc_col1_width) + "s" + value_format + "\n"
+            + str(loc_col1_width) + "s" + value_format + trailing_char
         return format_string % ("", var_name + ":", var_value)
     else:
         # The data type is complex in the sense that it has subordinate parts.
         format_string = "%" + str(loc_col1_indent) + "s%s\n"
         buffer = format_string % ("", var_name + ":")
         loc_col1_indent += 2
+        try:
+            length = len(var_value)
+        except TypeError:
+            pass
+        ix = 0
+        loc_trailing_char = "\n"
         if type(var_value) is dict:
             for key, value in var_value.iteritems():
+                ix += 1
+                if ix == length:
+                    loc_trailing_char = trailing_char
                 buffer += sprint_varx(var_name + "[" + key + "]", value, hex,
-                                      loc_col1_indent)
-        elif type(var_value) in (list, tuple):
+                                      loc_col1_indent, loc_col1_width,
+                                      loc_trailing_char)
+        elif type(var_value) in (list, tuple, set):
             for key, value in enumerate(var_value):
+                ix += 1
+                if ix == length:
+                    loc_trailing_char = trailing_char
                 buffer += sprint_varx(var_name + "[" + str(key) + "]", value,
-                                      hex, loc_col1_indent)
+                                      hex, loc_col1_indent, loc_col1_width,
+                                      loc_trailing_char)
         elif type(var_value) is argparse.Namespace:
             for key in var_value.__dict__:
+                ix += 1
+                if ix == length:
+                    loc_trailing_char = trailing_char
                 cmd_buf = "buffer += sprint_varx(var_name + \".\" + str(key)" \
-                          + ", var_value." + key + ", hex, loc_col1_indent)"
+                          + ", var_value." + key + ", hex, loc_col1_indent," \
+                          + " loc_col1_width, loc_trailing_char)"
                 exec(cmd_buf)
         else:
             var_type = type(var_value).__name__
             func_name = sys._getframe().f_code.co_name
-            var_value = "<" + var_type + " type not supported by " \
-                        + func_name + "()>"
+            var_value = "<" + var_type + " type not supported by " + \
+                        func_name + "()>"
             value_format = "%s"
             loc_col1_indent -= 2
+            # Adjust loc_col1_width.
+            loc_col1_width = loc_col1_width - loc_col1_indent
             format_string = "%" + str(loc_col1_indent) + "s%-" \
-                + str(loc_col1_width) + "s" + value_format + "\n"
+                + str(loc_col1_width) + "s" + value_format + trailing_char
             return format_string % ("", var_name + ":", var_value)
         return buffer
 
@@ -512,8 +569,8 @@ def sprint_var(*args):
 
     # Get the name of the first variable passed to this function.
     stack_frame = 2
-    calling_func_name = sprint_func_name(2)
-    if calling_func_name == "print_var":
+    caller_func_name = sprint_func_name(2)
+    if caller_func_name.endswith("print_var"):
         stack_frame += 1
     var_name = get_arg_name(None, 1, stack_frame)
     return sprint_varx(var_name, *args)
@@ -522,9 +579,49 @@ def sprint_var(*args):
 
 
 ###############################################################################
-def sprint_dashes(loc_col1_indent=col1_indent,
-                  col_width=80,
-                  line_feed=1):
+def lprint_varx(var_name,
+                var_value,
+                hex=0,
+                loc_col1_indent=col1_indent,
+                loc_col1_width=col1_width,
+                log_level=getattr(logging, 'INFO')):
+
+    r"""
+    Send sprint_varx output to logging.
+    """
+
+    logging.log(log_level, sprint_varx(var_name, var_value, hex,
+                loc_col1_indent, loc_col1_width, ""))
+
+###############################################################################
+
+
+###############################################################################
+def lprint_var(*args):
+
+    r"""
+    Figure out the name of the first argument for you and then call
+    lprint_varx with it.  Therefore, the following 2 calls are equivalent:
+    lprint_varx("var1", var1)
+    lprint_var(var1)
+    """
+
+    # Get the name of the first variable passed to this function.
+    stack_frame = 2
+    caller_func_name = sprint_func_name(2)
+    if caller_func_name.endswith("print_var"):
+        stack_frame += 1
+    var_name = get_arg_name(None, 1, stack_frame)
+    lprint_varx(var_name, *args)
+
+###############################################################################
+
+
+###############################################################################
+def sprint_dashes(indent=col1_indent,
+                  width=80,
+                  line_feed=1,
+                  char="-"):
 
     r"""
     Return a string of dashes to the caller.
@@ -535,10 +632,12 @@ def sprint_dashes(loc_col1_indent=col1_indent,
     width                           The width of the string of dashes.
     line_feed                       Indicates whether the output should end
                                     with a line feed.
+    char                            The character to be repeated in the output
+                                    string.
     """
 
-    col_width = int(col_width)
-    buffer = " "*int(loc_col1_indent) + "-"*col_width
+    width = int(width)
+    buffer = " "*int(indent) + char*width
     if line_feed:
         buffer += "\n"
 
@@ -548,7 +647,30 @@ def sprint_dashes(loc_col1_indent=col1_indent,
 
 
 ###############################################################################
-def sprint_call_stack():
+def sindent(text="",
+            indent=0):
+
+    r"""
+    Pre-pend the specified number of characters to the text string (i.e.
+    indent it) and return it.
+
+    Description of arguments:
+    text                            The string to be indented.
+    indent                          The number of characters to indent the
+                                    string.
+    """
+
+    format_string = "%" + str(indent) + "s%s"
+    buffer = format_string % ("", text)
+
+    return buffer
+
+###############################################################################
+
+
+###############################################################################
+def sprint_call_stack(indent=0,
+                      stack_frame_ix=0):
 
     r"""
     Return a call stack report for the given point in the program with line
@@ -575,18 +697,21 @@ def sprint_call_stack():
     """
 
     buffer = ""
-
-    buffer += sprint_dashes()
-    buffer += "Python function call stack\n\n"
-    buffer += "Line # Function name and arguments\n"
-    buffer += sprint_dashes(0, 6, 0) + " " + sprint_dashes(0, 73)
+    buffer += sprint_dashes(indent)
+    buffer += sindent("Python function call stack\n\n", indent)
+    buffer += sindent("Line # Function name and arguments\n", indent)
+    buffer += sprint_dashes(indent, 6, 0) + " " + sprint_dashes(0, 73)
 
     # Grab the current program stack.
     current_stack = inspect.stack()
 
     # Process each frame in turn.
     format_string = "%6s %s\n"
+    ix = 0
     for stack_frame in current_stack:
+        if ix < stack_frame_ix:
+            ix += 1
+            continue
         lineno = str(stack_frame[2])
         func_name = str(stack_frame[3])
         if func_name == "?":
@@ -594,8 +719,8 @@ def sprint_call_stack():
             func_name = "(none)"
 
         if func_name == "<module>":
-            # If the func_name is the "main" program, we simply get the command
-            # line call string.
+            # If the func_name is the "main" program, we simply get the
+            # command line call string.
             func_and_args = ' '.join(sys.argv)
         else:
             # Get the program arguments.
@@ -603,19 +728,20 @@ def sprint_call_stack():
             function_parms = arg_vals[0]
             frame_locals = arg_vals[3]
 
-            args_arr = []
+            args_list = []
             for arg_name in function_parms:
                 # Get the arg value from frame locals.
                 arg_value = frame_locals[arg_name]
-                args_arr.append(arg_name + " = " + repr(arg_value))
-            args_str = "(" + ', '.join(map(str, args_arr)) + ")"
+                args_list.append(arg_name + " = " + repr(arg_value))
+            args_str = "(" + ', '.join(map(str, args_list)) + ")"
 
             # Now we need to print this in a nicely-wrapped way.
             func_and_args = func_name + " " + args_str
 
-        buffer += format_string % (lineno, func_and_args)
+        buffer += sindent(format_string % (lineno, func_and_args), indent)
+        ix += 1
 
-    buffer += sprint_dashes()
+    buffer += sprint_dashes(indent)
 
     return buffer
 
@@ -648,7 +774,7 @@ def sprint_executing(stack_frame_ix=None):
     if stack_frame_ix is None:
         func_name = sys._getframe().f_code.co_name
         caller_func_name = sys._getframe(1).f_code.co_name
-        if func_name[1:] == caller_func_name:
+        if caller_func_name.endswith(func_name[1:]):
             stack_frame_ix = 2
         else:
             stack_frame_ix = 1
@@ -670,12 +796,12 @@ def sprint_executing(stack_frame_ix=None):
         function_parms = arg_vals[0]
         frame_locals = arg_vals[3]
 
-        args_arr = []
+        args_list = []
         for arg_name in function_parms:
             # Get the arg value from frame locals.
             arg_value = frame_locals[arg_name]
-            args_arr.append(arg_name + " = " + repr(arg_value))
-        args_str = "(" + ', '.join(map(str, args_arr)) + ")"
+            args_list.append(arg_name + " = " + repr(arg_value))
+        args_str = "(" + ', '.join(map(str, args_list)) + ")"
 
         # Now we need to print this in a nicely-wrapped way.
         func_and_args = func_name + " " + args_str
@@ -686,33 +812,83 @@ def sprint_executing(stack_frame_ix=None):
 
 
 ###############################################################################
-def sprint_pgm_header():
+def sprint_pgm_header(indent=0):
 
     r"""
     Return a standardized header that programs should print at the beginning
     of the run.  It includes useful information like command line, pid,
     userid, program parameters, etc.
 
+    Description of arguments:
+    indent                          The number of characters to indent each
+                                    line of output.
     """
 
     buffer = "\n"
-    buffer += sprint_time() + "Running " + pgm_name + ".\n"
-    buffer += sprint_time() + "Program parameter values, etc.:\n\n"
-    buffer += sprint_varx("command_line", ' '.join(sys.argv))
-    # We want the output to show a customized name for the pid and pgid but we
-    # want it to look like a valid variable name.  Therefore, we'll use
+
+    buffer += sindent(sprint_time() + "Running " + pgm_name + ".\n", indent)
+    buffer += sindent(sprint_time() + "Program parameter values, etc.:\n\n",
+                      indent)
+    buffer += sprint_varx("command_line", ' '.join(sys.argv), 0, indent)
+    # We want the output to show a customized name for the pid and pgid but
+    # we want it to look like a valid variable name.  Therefore, we'll use
     # pgm_name_var_name which was set when this module was imported.
-    buffer += sprint_varx(pgm_name_var_name + "_pid", os.getpid())
-    buffer += sprint_varx(pgm_name_var_name + "_pgid", os.getpgrp())
+    buffer += sprint_varx(pgm_name_var_name + "_pid", os.getpid(), 0, indent)
+    buffer += sprint_varx(pgm_name_var_name + "_pgid", os.getpgrp(), 0, indent)
     buffer += sprint_varx("uid", str(os.geteuid()) + " (" + os.getlogin() +
-                          ")")
+                          ")", 0, indent)
     buffer += sprint_varx("gid", str(os.getgid()) + " (" +
-                          str(grp.getgrgid(os.getgid()).gr_name) + ")")
-    buffer += sprint_varx("host_name", socket.gethostname())
-    buffer += sprint_varx("DISPLAY", os.environ['DISPLAY'])
+                          str(grp.getgrgid(os.getgid()).gr_name) + ")", 0,
+                          indent)
+    buffer += sprint_varx("host_name", socket.gethostname(), 0, indent)
+    buffer += sprint_varx("DISPLAY", os.environ['DISPLAY'], 0, indent)
     # I want to add code to print caller's parms.
 
+    # __builtin__.arg_obj is created by the get_arg module function,
+    # gen_get_options.
+    try:
+        buffer += ga.sprint_args(__builtin__.arg_obj, indent)
+    except AttributeError:
+        pass
+
     buffer += "\n"
+
+    return buffer
+
+###############################################################################
+
+
+###############################################################################
+def sprint_error_report(error_text="\n",
+                        indent=2):
+
+    r"""
+    Return a string with a standardized report which includes the caller's
+    error text, the call stack and the program header.
+
+    Description of args:
+    error_text                      The error text to be included in the
+                                    report.  The caller should include any
+                                    needed linefeeds.
+    indent                          The number of characters to indent each
+                                    line of output.
+    """
+
+    buffer = ""
+    buffer += sprint_dashes(width=120, char="=")
+    buffer += sprint_error(error_text)
+    buffer += "\n"
+    # Calling sprint_call_stack with stack_frame_ix of 0 causes it to show
+    # itself and this function in the call stack.  This is not helpful to a
+    # debugger and is therefore clutter.  We will adjust the stack_frame_ix to
+    # hide that information.
+    stack_frame_ix = 2
+    caller_func_name = sprint_func_name(2)
+    if caller_func_name.endswith("print_error_report"):
+        stack_frame_ix += 1
+    buffer += sprint_call_stack(indent, stack_frame_ix)
+    buffer += sprint_pgm_header(indent)
+    buffer += sprint_dashes(width=120, char="=")
 
     return buffer
 
@@ -752,7 +928,24 @@ def sprint_pgm_footer():
     total_time = time.time() - start_time
     total_time_string = "%0.6f" % total_time
 
-    buffer += sprint_varx(pgm_name_var_name + "runtime", total_time_string)
+    buffer += sprint_varx(pgm_name_var_name + "_runtime", total_time_string)
+
+    return buffer
+
+###############################################################################
+
+
+###############################################################################
+def sprint(buffer=""):
+
+    r"""
+    Simply return the user's buffer.  This function is used by the qprint and
+    dprint functions defined dynamically below, i.e. it would not normally be
+    called for general use.
+
+    Description of arguments.
+    buffer                          This will be returned to the caller.
+    """
 
     return buffer
 
@@ -763,8 +956,8 @@ def sprint_pgm_footer():
 # In the following section of code, we will dynamically create print versions
 # for each of the sprint functions defined above.  So, for example, where we
 # have an sprint_time() function defined above that returns the time to the
-# caller in a string, we will create a corresponding print_time() function that
-# will print that string directly to stdout.
+# caller in a string, we will create a corresponding print_time() function
+# that will print that string directly to stdout.
 
 # It can be complicated to follow what's being creaed by the exec statement
 # below.  Here is an example of the print_time() function that will be created:
@@ -778,23 +971,28 @@ def sprint_pgm_footer():
 # Calculate the "s" version of this function name (e.g. if this function name
 # is print_time, we want s_funcname to be "sprint_time".
 # Put a reference to the "s" version of this function in s_func.
-# Call the "s" version of this function passing it all of our arguments.  Write
-# the result to stdout.
+# Call the "s" version of this function passing it all of our arguments.
+# Write the result to stdout.
 
 # func_names contains a list of all print functions which should be created
 # from their sprint counterparts.
 func_names = ['print_time', 'print_timen', 'print_error', 'print_varx',
               'print_var', 'print_dashes', 'print_call_stack',
               'print_func_name', 'print_executing', 'print_pgm_header',
-              'issuing', 'print_pgm_footer']
+              'issuing', 'print_pgm_footer', 'print_error_report', 'print']
 
 for func_name in func_names:
+    if func_name == "print":
+        continue
     # Create abbreviated aliases (e.g. spvar is an alias for sprint_var).
     alias = re.sub("print_", "p", func_name)
-    exec("s" + alias + " = s" + func_name)
+    pgm_definition_string = "s" + alias + " = s" + func_name
+    if gen_print_debug:
+        print(pgm_definition_string)
+    exec(pgm_definition_string)
 
 for func_name in func_names:
-    if func_name == "print_error":
+    if func_name == "print_error" or func_name == "print_error_report":
         output_stream = "stderr"
     else:
         output_stream = "stdout"
@@ -806,11 +1004,88 @@ for func_name in func_names:
             "  sys." + output_stream + ".write(s_func(*args))",
             "  sys." + output_stream + ".flush()"
         ]
+    if func_name != "print":
+        pgm_definition_string = '\n'.join(func_def)
+        if gen_print_debug:
+            print(pgm_definition_string)
+        exec(pgm_definition_string)
+
+    # Now define "q" versions of each print function.
+    func_def = \
+        [
+            "def q" + func_name + "(*args):",
+            "  if __builtin__.quiet: return",
+            "  s_func_name = \"s" + func_name + "\"",
+            "  s_func = getattr(sys.modules[__name__], s_func_name)",
+            "  sys." + output_stream + ".write(s_func(*args))",
+            "  sys." + output_stream + ".flush()"
+        ]
+
     pgm_definition_string = '\n'.join(func_def)
+    if gen_print_debug:
+        print(pgm_definition_string)
     exec(pgm_definition_string)
+
+    # Now define "d" versions of each print function.
+    func_def = \
+        [
+            "def d" + func_name + "(*args):",
+            "  if not __builtin__.debug: return",
+            "  s_func_name = \"s" + func_name + "\"",
+            "  s_func = getattr(sys.modules[__name__], s_func_name)",
+            "  sys." + output_stream + ".write(s_func(*args))",
+            "  sys." + output_stream + ".flush()"
+        ]
+
+    pgm_definition_string = '\n'.join(func_def)
+    if gen_print_debug:
+        print(pgm_definition_string)
+    exec(pgm_definition_string)
+
+    # Now define "l" versions of each print function.
+    func_def = \
+        [
+            "def l" + func_name + "(*args):",
+            "  s_func_name = \"s" + func_name + "\"",
+            "  s_func = getattr(sys.modules[__name__], s_func_name)",
+            "  logging.log(getattr(logging, 'INFO'), s_func(*args))",
+        ]
+
+    if func_name != "print_varx" and func_name != "print_var":
+        pgm_definition_string = '\n'.join(func_def)
+        if gen_print_debug:
+            print(pgm_definition_string)
+        exec(pgm_definition_string)
+
+    if func_name == "print":
+        continue
 
     # Create abbreviated aliases (e.g. pvar is an alias for print_var).
     alias = re.sub("print_", "p", func_name)
-    exec(alias + " = " + func_name)
+    pgm_definition_string = alias + " = " + func_name
+    if gen_print_debug:
+        print(pgm_definition_string)
+    exec(pgm_definition_string)
+
+    # Create abbreviated aliases (e.g. qpvar is an alias for qprint_var).
+    alias = re.sub("print_", "p", func_name)
+    pgm_definition_string = "q" + alias + " = q" + func_name
+    if gen_print_debug:
+        print(pgm_definition_string)
+    exec(pgm_definition_string)
+
+    # Create abbreviated aliases (e.g. dpvar is an alias for dprint_var).
+    alias = re.sub("print_", "p", func_name)
+    pgm_definition_string = "d" + alias + " = d" + func_name
+    if gen_print_debug:
+        print(pgm_definition_string)
+    exec(pgm_definition_string)
+
+    # Create abbreviated aliases (e.g. lpvar is an alias for lprint_var).
+    alias = re.sub("print_", "p", func_name)
+    pgm_definition_string = "l" + alias + " = l" + func_name
+    if gen_print_debug:
+        print(pgm_definition_string)
+    exec(pgm_definition_string)
 
 ###############################################################################
