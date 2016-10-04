@@ -6,7 +6,9 @@ This file contains functions useful for printing to stdout from robot programs.
 
 import sys
 import re
+
 import gen_print as gp
+
 from robot.libraries.BuiltIn import BuiltIn
 from robot.api import logger
 
@@ -20,8 +22,8 @@ from robot.api import logger
 # string directly to stdout.
 
 # It can be complicated to follow what's being creaed by the exec statement
-# below.  Here is an example of the rprint_time() function that will be created
-# (as of the time of this writing):
+# below.  Here is an example of the rprint_time() function that will be
+# created (as of the time of this writing):
 
 # def rprint_time(*args):
 #   s_func = getattr(gp, "sprint_time")
@@ -31,13 +33,14 @@ from robot.api import logger
 
 # Here are comments describing the lines in the body of the created function.
 # Put a reference to the "s" version of this function in s_func.
-# Call the "s" version of this function passing it all of our arguments.  Write
-# the result to stdout.
+# Call the "s" version of this function passing it all of our arguments.
+# Write the result to stdout.
 
 robot_prefix = "r"
 for func_name in gp.func_names:
-    # The print_var function's job is to figure out the name of arg 1 and then
-    # call print_varx.  This is not currently supported for robot programs.
+    # The print_var function's job is to figure out the name of arg 1 and
+    # then call print_varx.  This is not currently supported for robot
+    # programs.  Though it IS supported for python modules.
     if func_name == "print_error":
         output_stream = "STDERR"
     else:
@@ -47,7 +50,7 @@ for func_name in gp.func_names:
             "def " + robot_prefix + func_name + "(*args):",
             "  s_func = getattr(gp, \"s" + func_name + "\")",
             "  BuiltIn().log_to_console(s_func(*args),"
-            " stream = '" + output_stream + "',"
+            " stream='" + output_stream + "',"
             " no_newline=True)"
         ]
 
@@ -63,37 +66,39 @@ for func_name in gp.func_names:
 
 
 ###############################################################################
-def rprint(buffer=""):
+def rprint(buffer="",
+           stream="STDOUT"):
 
     r"""
     rprint stands for "Robot Print".  This keyword will print the user's
     buffer to the console.  This keyword does not write a linefeed.  It is the
     responsibility of the caller to include a line feed if desired.  This
     keyword is essentially an alias for "Log to Console  <string>
-    no_newline=True".
+    <stream>".
 
     Description of arguments:
     buffer                          The value that is to written to stdout.
     """
 
-    BuiltIn().log_to_console(buffer, no_newline=True)
+    BuiltIn().log_to_console(buffer, no_newline=True, stream=stream)
 
 ###############################################################################
 
 
 ###############################################################################
-def rprintn(buffer=""):
+def rprintn(buffer="",
+            stream='STDOUT'):
 
     r"""
     rprintn stands for "Robot print with linefeed".  This keyword will print
     the user's buffer to the console along with a linefeed.  It is basically
-    an abbreviated form of "Log go Console  <string>"
+    an abbreviated form of "Log go Console  <string>  <stream>"
 
     Description of arguments:
     buffer                          The value that is to written to stdout.
     """
 
-    BuiltIn().log_to_console(buffer, no_newline=False)
+    BuiltIn().log_to_console(buffer, no_newline=False, stream=stream)
 
 ###############################################################################
 
@@ -157,6 +162,6 @@ def rpvars(*var_names):
 ###############################################################################
 
 
-# Define an alias.  rpvar is just a special case of rpvars where the var_names
-# list contains only one element.
+# Define an alias.  rpvar is just a special case of rpvars where the
+# var_names list contains only one element.
 rpvar = rpvars
