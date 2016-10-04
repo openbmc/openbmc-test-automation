@@ -1,0 +1,13 @@
+#REST SSL connection test
+-i Test_SSL_Connection
+#Error log create and delete test
+-i Create_error_log_on_single_FRU
+-i Delete_error_log
+#Basic poweron test
+-i power_on_test
+#Clear event and create a logs
+-i clear_any_logs
+-i write_a_log
+#Test basic REST interface
+-i Good_connection_for_testing
+-i get_directory_listing
