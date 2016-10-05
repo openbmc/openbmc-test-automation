@@ -32,6 +32,8 @@ minimal core inventory
     Should Be True     ${count}>${0}
 
 minimal memory buffer inventory
+    [Tags]    minimal_memory_buffer_inventory
+
     ${count} =     Get Total Present     membuf
     Should Be True     ${count}>${0}
 
@@ -41,10 +43,14 @@ minimal fan inventory
     Should Be True     ${count}>${2}
 
 minimal main planar inventory
+    [Tags]    minimal_main_planar_inventory
+
     ${count} =     Get Total Present     motherboard
     Should Be True     ${count}>${0}
 
 minimal system inventory
+    [Tags]    minimal_system_inventory
+
     ${count} =     Get Total Present     system
     Should Be True     ${count}>${0}
 

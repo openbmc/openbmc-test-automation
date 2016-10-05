@@ -1,0 +1,28 @@
+-e known_issue
+#https://github.com/openbmc/openbmc/issues/611
+-e Association_with_virtual_sensor
+#https://github.com/openbmc/openbmc/issues/539
+-e Test_Wrong_Reservation_ID
+#https://github.com/openbmc/openbmc/issues/539
+-e Test_Correct_Reservation_ID
+#https://github.com/openbmc/openbmc/issues/604
+-e minimal_memory_buffer_inventory
+-e minimal_main_planar_inventory
+-e Centaur0_Present
+-e Centaur0_fault
+#https://github.com/openbmc/openbmc/issues/93
+-e minimal_fan_inventory
+-e minimal_system_inventory
+-e System_Present
+-e Chassis_Present
+#https://github.com/openbmc/openbmc/issues/615
+-e Create_and_delete_user_without_group_name
+-e Create_and_delete_user_with_user_group_name
+-e Create_multiple_users
+-e Create_and_delete_user_without_password
+-e Set_password_for_existing_user
+-e Set_password_with_empty_password_for_existing
+-e Create_existing_user
+#Testcase NA for Palmetto system
+-e io_board_Present
+-e io_board_Fault
