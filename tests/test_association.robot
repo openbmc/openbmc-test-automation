@@ -159,6 +159,7 @@ Association with virtual sensor
     [Documentation]     ***GOOD PATH***
     ...                 Create an error log on virtual sensor and
     ...                 verify its association.\n
+    [Tags]              Association_with_virtual_sensor
 
     Clear all logs
 

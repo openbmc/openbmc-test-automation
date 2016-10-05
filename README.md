@@ -87,7 +87,7 @@ How to test individual test
 
     No preset environment variables, the entire test suite excluding test
     cases failing due to known issues. The skip_list file contains tag list which are to be skipped
-    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile skip_list tests
+    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile skip_list_barreleye tests
 ```
 
 It can also be run by pasing variables from the cli...

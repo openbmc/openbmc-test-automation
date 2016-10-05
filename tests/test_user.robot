@@ -40,6 +40,7 @@ Create and delete user without groupname
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is for testing user creation with
     ...                 without groupname in open bmc.\n
+    [Tags]              Create_and_delete_user_without_groupname
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
@@ -62,6 +63,7 @@ Create and delete user with user group name
     ...                 This testcase is for testing user creation with
     ...                 user name, password, comment and group name(user group)
     ...                 in open bmc.\n
+    [Tags]              Create_and_delete_user_with_user_group_name
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
@@ -88,6 +90,7 @@ Create multiple users
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is to verify that multiple users creation
     ...                 in open bmc.\n
+    [Tags]              Create_multiple_users
 
     : FOR    ${INDEX}    IN RANGE    1    10
         \    Log    ${INDEX}
@@ -106,6 +109,7 @@ Create and delete user without password
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is to create and delete a user without password
     ...                 in open bmc.\n
+    [Tags]              Create_and_delete_user_without_password
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
@@ -132,6 +136,7 @@ Set password for existing user
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is for testing password set for user
     ...                 in open bmc.\n
+    [Tags]              Set_password_for_existing_user
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
@@ -160,6 +165,7 @@ Set password with empty password for existing
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is to verify that empty password can be set
     ...                 for a existing user.\n
+    [Tags]              Set_password_with_empty_password_for_existing
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
@@ -193,6 +199,7 @@ Create existing user
     [Documentation]     ***BAD PATH***
     ...                 This testcase is for checking that user creation is not allowed
     ...                 for existing user in open bmc.\n
+    [Tags]              Create_existing_user
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
