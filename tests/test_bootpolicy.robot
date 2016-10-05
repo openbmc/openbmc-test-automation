@@ -145,6 +145,3 @@ Set Boot Device
     ${bootDevice} =   Set Variable   ${args}
     ${valueDict} =   create dictionary   data=${bootDevice}
     Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
-
-
-
