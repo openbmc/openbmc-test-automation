@@ -3,6 +3,7 @@ Documentation      Methods to execute commands on BMC and collect
 ...                data to a list of FFDC files
 
 Resource           openbmc_ffdc_utils.robot
+Resource           rest_client.robot
 
 *** Keywords ***
 
@@ -139,14 +140,18 @@ Log FFDC Get Requests
     [Documentation]    Create file in current FFDC log directory.
     ...                Do openbmc get request and write to
     ...                corresponding file name.
+    ...                JSON pretty print for logging to file.
     [Arguments]        ${key_index}
 
     @{cmd_list}=  Get ffdc get request  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
     \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
     \   ${resp}=  OpenBMC Get Request  ${cmd[1]}
-    \   ${jsondata}=  to json  ${resp.content}
-    \   Write Data to File  ${jsondata["data"]}${\n}  ${logpath}
+    \   ${status}=    Run Keyword and Return Status
+    ...   Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
+    \   Run Keyword If   '${status}' == '${False}'  Continue For Loop
+    \   ${jsondata}=  to json  ${resp.content}    pretty_print=True
+    \   Write Data to File  ${\n}${jsondata}${\n}  ${logpath}
 
 
 BMC FFDC Get Requests
