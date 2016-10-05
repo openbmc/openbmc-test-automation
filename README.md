@@ -86,8 +86,8 @@ How to test individual test
     $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- tests
 
     No preset environment variables, the entire test suite excluding test
-    cases failing due to known issues. The skip_list file contains tag list which are to be skipped
-    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile skip_list tests
+    cases using argument file.
+    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile test_lists/skip_test tests
 ```
 
 It can also be run by pasing variables from the cli...
@@ -120,6 +120,6 @@ Jenkins jobs tox commands
 ```shell
     HW CI tox command
     Set the preset environment variables, run HW CI test for a barreleye system
-    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile HW_CI tests
+    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile test_lists/HW_CI tests
 
 ```

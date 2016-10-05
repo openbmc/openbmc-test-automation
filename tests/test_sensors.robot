@@ -199,6 +199,8 @@ DIMM0 no fault
     Response Should Be Equal    False
 
 Centaur0 Present
+    [Tags]    Centaur0_Present
+
     ${uri} =    Get System component    membuf
     ${x} =      Get Inventory Sensor Number   ${uri}
 
@@ -207,6 +209,8 @@ Centaur0 Present
     Response Should Be Equal    True
 
 Centaur0 not Present
+    [Tags]    Centaur0_not_Present
+
     ${uri} =    Get System component    membuf
     ${x} =      Get Inventory Sensor Number   ${uri}
 
@@ -231,16 +235,20 @@ Centaur0 no fault
     Response Should Be Equal    False
 
 System Present
+    [Tags]    System_Present
+
     ${uri} =    Get System component    system
     Read The Attribute   ${uri}    present
     Response Should Be Equal    True
- 
+
 System Fault
     ${uri} =    Get System component    system
     Read The Attribute   ${uri}    fault
     Response Should Be Equal    False
 
 Chassis Present
+    [Tags]    Chassis_Present
+
     ${uri} =    Get System component    chassis
     Read The Attribute   /org/openbmc/inventory/system/chassis    present
     Response Should Be Equal    True
@@ -251,11 +259,13 @@ Chassis Fault
     Response Should Be Equal    False
 
 io_board Present
+    [Tags]  io_board_Present
     ${uri} =    Get System component    io_board
     Read The Attribute   ${uri}    present
     Response Should Be Equal    True
 
 io_board Fault
+    [Tags]  io_board_Fault
     ${uri} =    Get System component    io_board
     Read The Attribute   ${uri}    fault
     Response Should Be Equal    False
