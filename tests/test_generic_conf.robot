@@ -9,8 +9,8 @@ Test Teardown     Log FFDC
 
 
 *** Variables ***
-${MIN_POWER_VALUE}    0
-${MAX_POWER_VALUE}    1000
+${MIN_POWER_VALUE}    ${0}
+${MAX_POWER_VALUE}    ${1000}
 
 *** Test Cases ***
 
@@ -19,15 +19,15 @@ Get the boot_flags
 
     [Documentation]   ***GOOD PATH***
     ...               This test case tries to get the boot flags
-    ...              
+    ...
 
     ${resp}=   Read Attribute   /org/openbmc/settings/host0/   boot_flags
     should not be empty   ${resp}
 
 Get the power
- 
+
     [Documentation]   ***GOOD PATH***
-    ...               This test case tries to get the power value and it should be 
+    ...               This test case tries to get the power value and it should be
     ...               between ${MIN_POWER_VALUE} and ${MAX_POWER_VALUE}
 
     ${powerValue}=   Read Attribute   /org/openbmc/settings/host0/   power_cap
