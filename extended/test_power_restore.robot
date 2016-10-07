@@ -17,18 +17,18 @@ Force Tags      chassisboot  bmcreboot
 ***test cases***
 
 Set the power restore policy       Policy                 ExpectedSystemState       NextSystemState
-                  
+
                                    LEAVE_OFF              HOST_POWERED_OFF          HOST_POWERED_OFF
                                    LEAVE_OFF              HOST_POWERED_ON           HOST_POWERED_OFF
                                    ALWAYS_POWER_ON        HOST_POWERED_OFF          HOST_POWERED_ON
                                    ALWAYS_POWER_ON        HOST_POWERED_ON           HOST_POWERED_ON
                                    RESTORE_LAST_STATE     HOST_POWERED_ON           HOST_POWERED_ON
-                                   RESTORE_LAST_STATE     HOST_POWERED_OFF          HOST_POWERED_OFF 
-                                     
+                                   RESTORE_LAST_STATE     HOST_POWERED_OFF          HOST_POWERED_OFF
+
     [Documentation]   This test case sets the pilicy as given under the policy attribute.
     ...               ExpectedSystemState:-is the state where system should be before running the test case
-    ...               NextSystemState:-is After Power cycle system should reach to this state 
-    ...               if the system is not at the Expected System State,This test case brings the system 
+    ...               NextSystemState:-is After Power cycle system should reach to this state
+    ...               if the system is not at the Expected System State,This test case brings the system
     ...               in the Expected state then do the power cycle.
 
     [Template]    setRestorePolicy
@@ -41,14 +41,14 @@ setRestorePolicy
     ${currentPolicy}=      Read Attribute    /org/openbmc/settings/host0    power_policy
     Should Be Equal     ${currentPolicy}      ${policy}
     ${currentSystemState}=      Read Attribute    /org/openbmc/settings/host0    system_state
-    log Many   "CurrentSystemState="   ${currentSystemState}   
-    log Many   "ExpectedSystemState="  ${expectedSystemState}   
+    log Many   "CurrentSystemState="   ${currentSystemState}
+    log Many   "ExpectedSystemState="  ${expectedSystemState}
     log Many   "NextSystemState="      ${nextSystemState}
     Run Keyword If   '${currentSystemState}' != '${expectedSystemState}' and '${expectedSystemState}' == 'HOST_POWERED_ON'      powerOnHost
     Run Keyword If   '${currentSystemState}' != '${expectedSystemState}' and '${expectedSystemState}' == 'HOST_POWERED_OFF'     powerOffHost
     log to console   "Doing power cycle"
     PDU Power Cycle
-    Wait For Host To Ping   ${OPENBMC_HOST}
+    Check If BMC is Up   5 min    10 sec
     log to console   "Host is pingable now"
     Sleep   100sec
     ${afterPduSystemState}=      Read Attribute    /org/openbmc/settings/host0    system_state
@@ -56,7 +56,7 @@ setRestorePolicy
 
 powerOffHost
     log to console    "Powering off the host"
-    @{arglist}=   Create List    
+    @{arglist}=   Create List
     ${args}=     Create Dictionary   data=@{arglist}
     ${resp}=   Call Method    /org/openbmc/control/chassis0/    powerOff    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
@@ -68,7 +68,7 @@ powerOffHost
 
 powerOnHost
     log to console    "Powering on the host"
-    @{arglist}=   Create List   
+    @{arglist}=   Create List
     ${args}=     Create Dictionary    data=@{arglist}
     ${resp}=   Call Method    /org/openbmc/control/chassis0/    powerOn    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
