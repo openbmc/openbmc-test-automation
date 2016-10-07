@@ -1,0 +1,36 @@
+*** Settings ***
+Documentation  This module contains keywords within tests/obmc_boot_test that
+...  are points at which to call plug-ins.
+
+Resource  ./obmc_driver_vars.txt
+
+*** Keywords ***
+Call Point Setup
+    [Documentation]  Call any plugins that have a cp_setup program
+    [Teardown]  Log  **Plugin** end call point: cp_setup${\n}  console=True
+
+    Log  ${\n}**Plugin** start call point: cp_setup  console=True
+
+Call Point Pre Boot
+    [Documentation]  Call any plugins that have a cp_pre_boot program
+    [Teardown]  Log  **Plugin** end call point: cp_pre_boot${\n}  console=True
+
+    Log  ${\n}**Plugin** start call point: cp_pre_boot  console=True
+
+Call Point Post Boot
+    [Documentation]  Call any plugins that have a cp_post_boot program
+    [Teardown]  Log  **Plugin** end call point: cp_post_boot${\n}  console=True
+
+    Log  ${\n}**Plugin** start call point: cp_post_boot  console=True
+
+Call Point FFDC
+    [Documentation]  Call any plugins that have a cp_ffdc program
+    [Teardown]  Log  **Plugin** end call point: cp_ffdc${\n}  console=True
+
+    Log  ${\n}**Plugin** start call point: cp_ffdc  console=True
+
+Call Point Stop Check
+    [Documentation]  Call any plugins that have a cp_stop_check program
+    [Teardown]  Log  **Plugin** end call point: cp_stop_check${\n}  console=True
+
+    Log  ${\n}**Plugin** start call point: cp_stop_check  console=True
