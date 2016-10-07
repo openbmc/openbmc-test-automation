@@ -35,7 +35,20 @@ ${DIMM3_URI}                      /org/openbmc/inventory/system/chassis/motherbo
 
 &{NIL}                            data=@{EMPTY}
 
+${EVENT_RECORD}                   /org/openbmc/records/events
+
 *** Test Cases ***
+
+Clear Error Logs
+    [Documentation]     ***GOOD PATH***
+    ...                 Delete existing Error log records if there is any.
+    ...                 This is to know if delete fucntionality would cause
+    ...                 problem ahead in the test and at the same time verify
+    ...                 if CLEAR request is working as expected.
+    [Tags]  Clear_Error_Logs
+
+    Clear all logs
+
 
 Create error log on single FRU
     [Documentation]     ***GOOD PATH***
@@ -43,14 +56,21 @@ Create error log on single FRU
     ...                 its association.\n
     [Tags]  Create_error_log_on_single_FRU
 
-    Clear all logs
+    Run Keyword And Continue On Failure   Clear all logs
 
-    ${output}=      Execute Command    ${CREATE_ERROR_SINGLE_FRU}
+    ${elog}  ${stderr}=
+    ...   Execute Command    ${CREATE_ERROR_SINGLE_FRU}
+    ...   return_stderr=True
+    Should Be Empty 	${stderr}
 
     ${log_list} =     Get EventList
-    ${association_uri} =    catenate    SEPARATOR=   ${log_list[0]}   /fru
+    Should Contain   '${log_list}'   ${elog.strip('q ')}
 
-    ${association_content} =     Read Attribute    ${association_uri}    endpoints
+    ${association_uri} =
+    ...   catenate  SEPARATOR=   ${EVENT_RECORD}/${elog.strip('q ')}  /fru
+
+    ${association_content} =
+    ...     Read Attribute    ${association_uri}    endpoints
     Should Contain     ${association_content}    ${DIMM1_URI}
 
     ${dimm1_event} =     Read Attribute     ${DIMM1_URI}/event   endpoints
@@ -78,7 +98,7 @@ Create error log on two FRU
 
 Create multiple error logs
     [Documentation]     ***GOOD PATH***
-    ...                 Create multiple error logs and verify 
+    ...                 Create multiple error logs and verify
     ...                 their association.\n
 
     : FOR    ${INDEX}    IN RANGE    1    4
@@ -99,7 +119,7 @@ Create multiple error logs
 
 Delete error log
     [Documentation]     ***BAD PATH***
-    ...                 Delete an error log and verify that its 
+    ...                 Delete an error log and verify that its
     ...                 association is also removed.\n
     [Tags]  Delete_error_log
 
@@ -128,11 +148,18 @@ Association with invalid FRU
     ...                 Create an error log on invalid FRU and verify
     ...                 that its does not have any association.\n
 
-    Clear all logs
+    Run Keyword And Continue On Failure   Clear all logs
 
-    ${output}=      Execute Command    ${CREATE_ERROR_INVALID_FRU}
+    ${elog}  ${stderr}=
+    ...   Execute Command    ${CREATE_ERROR_INVALID_FRU}
+    ...   return_stderr=True
+    Should Be Empty 	${stderr}
+
     ${log_list} =     Get EventList
-    ${association_uri} =    catenate    SEPARATOR=   ${log_list[0]}   /fru
+    Should Contain   '${log_list}'   ${elog.strip('q ')}
+
+    ${association_uri} =
+    ...   catenate  SEPARATOR=  ${EVENT_RECORD}/${elog.strip('q ')}  /fru
 
     ${resp} =     openbmc get request     ${association_uri}
     ${jsondata} =    to json    ${resp.content}
@@ -144,11 +171,18 @@ Assocition with no FRU error event
     ...                 Create an error log on no FRU and verify
     ...                 that its does not have any association.\n
 
-    Clear all logs
+    Run Keyword And Continue On Failure   Clear all logs
 
-    ${output}=      Execute Command    ${CREATE_ERROR_NO_FRU}
+    ${elog}  ${stderr}=
+    ...   Execute Command    ${CREATE_ERROR_NO_FRU}
+    ...   return_stderr=True
+    Should Be Empty 	${stderr}
+
     ${log_list} =     Get EventList
-    ${association_uri} =    catenate    SEPARATOR=   ${log_list[0]}   /fru
+    Should Contain   '${log_list}'   ${elog.strip('q ')}
+
+    ${association_uri} =
+    ...   catenate    SEPARATOR=   ${EVENT_RECORD}/${elog.strip('q ')}  /fru
 
     ${resp} =     openbmc get request     ${association_uri}
     ${jsondata} =    to json    ${resp.content}
@@ -160,14 +194,23 @@ Association with virtual sensor
     ...                 Create an error log on virtual sensor and
     ...                 verify its association.\n
 
-    Clear all logs
+    Run Keyword And Continue On Failure   Clear all logs
 
-    ${output}=      Execute Command    ${CREATE_ERROR_VIRTUAL_SENSOR}
+    ${elog}  ${stderr}=
+    ...   Execute Command    ${CREATE_ERROR_VIRTUAL_SENSOR}
+    ...   return_stderr=True
+    Should Be Empty 	${stderr}
+
     ${log_list} =     Get EventList
-    ${association_uri} =    catenate    SEPARATOR=   ${log_list[0]}   /fru
+    Should Contain   '${log_list}'   ${elog.strip('q ')}
 
-    ${association_content} =     Read Attribute    ${association_uri}    endpoints
-    Should Contain     ${association_content}    /org/openbmc/inventory/system/systemevent
+    ${association_uri} =
+    ...   catenate    SEPARATOR=   ${EVENT_RECORD}/${elog.strip('q ')}  /fru
+
+    ${association_content} =
+    ...     Read Attribute    ${association_uri}    endpoints
+    Should Contain
+    ...     ${association_content}    /org/openbmc/inventory/system/systemevent
 
 Association unchanged after reboot
     [Documentation]     ***GOOD PATH***
