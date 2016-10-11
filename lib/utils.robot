@@ -302,3 +302,11 @@ Verify BMC State
     ${current}=  Get BMC State
     Should Contain  ${current}   ${expected}
 
+Open Connection To OS And Log In
+    [Documentation]   Opens a new SSH connection to the OS and logs in
+
+    [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    ...          ${os_password}=${OS_PASSWORD}
+
+    Open connection  ${os_host}
+    Login  ${os_username}  ${os_password}
