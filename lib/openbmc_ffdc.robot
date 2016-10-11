@@ -14,6 +14,10 @@ Documentation      This module is for data collection on test case failure
 ...                │       ├── 20160909102538035251_BMC_led
 ...                │       ├── 20160909102538035251_BMC_record_log
 ...                │       ├── 20160909102538035251_BMC_sensor_list
+...                │       ├── 20160909102538035251_OS_dmesg
+...                │       ├── 20160909102538035251_OS_msglog
+...                │       ├── 20160909102538035251_OS_cpufrequency
+...                │       ├── 20160909102538035251_OS_boot
 ...                │       └── 20160909102538035251_ffdc_report.txt
 ...                └── test_history.txt
 
