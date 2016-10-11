@@ -5,6 +5,7 @@ Documentation      Methods to execute commands on BMC and collect
 Resource           openbmc_ffdc_utils.robot
 Resource           rest_client.robot
 
+
 *** Keywords ***
 
 ################################################################
@@ -160,3 +161,27 @@ BMC FFDC Get Requests
     @{entries}=  Get ffdc get request index
     :FOR  ${index}  IN  @{entries}
     \   Log FFDC Get Requests   ${index}
+
+
+Log OS FFDC
+    [Documentation]    Create file in current FFDC log directory.
+    ...                Executes OS command and write to
+    ...                corresponding file name.
+    [Arguments]        ${key_index}
+
+    Open Connection And Log In  host=${OS_HOST}  username=${OS_USERNAME}
+    ...   password=${OS_PASSWORD}
+    @{cmd_list}=  get ffdc os all distros call  ${key_index}
+    :FOR  ${cmd}  IN  @{cmd_list}
+    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
+    \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
+
+
+OS FFDC
+    [Documentation]    Get the command list and iterate
+
+    Return From Keyword If  '${OS_HOST}' == '${EMPTY}'
+    ...   No OS Host Provided
+    @{entries}=  Get ffdc os all distros index
+    :FOR  ${index}  IN  @{entries}
+    \   Log OS FFDC  ${index}
