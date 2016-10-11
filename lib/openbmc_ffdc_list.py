@@ -49,6 +49,18 @@ FFDC_BMC_FILE = {
     },
 }
 
+# Add file name and correcponding command needed for all Linux distributions
+FFDC_OS_ALL_DISTROS_FILE = {
+    'OS FILES':
+    {
+        # File Name         Command
+        'OS_msglog': 'cat /sys/firmware/opal/msglog',
+        'OS_cpufrequency': 'ppc64_cpu --frequency',
+        'OS_dmesg': 'dmesg',
+        'OS_boot': 'cat /var/log/boot.log',
+    },
+}
+
 # Add file name and correcponding Get Request
 FFDC_GET_REQUEST = {
     'GET REQUESTS':
@@ -70,6 +82,7 @@ FFDC_METHOD_CALL = {
         'FFDC Generic Report': 'BMC FFDC Manifest',
         'BMC Specific Files': 'BMC FFDC Files',
         'Get Request FFDC': 'BMC FFDC Get Requests',
+        'OS FFDC': 'OS FFDC Files',
     },
 }
 
@@ -153,6 +166,24 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_METHOD_CALL[i_type].items()
+
+    def get_ffdc_os_all_distros_index(self):
+        r"""
+        ########################################################################
+        #   @brief    This method returns the key pair from the dictionary
+        #   @return   Index of the method dictionary
+        ########################################################################
+        """
+        return FFDC_OS_ALL_DISTROS_FILE.keys()
+
+    def get_ffdc_os_all_distros_call(self, i_type):
+        r"""
+        ########################################################################
+        #   @brief    This method returns the key pair from the dictionary
+        #   @return   List of key pair keywords
+        ########################################################################
+        """
+        return FFDC_OS_ALL_DISTROS_FILE[i_type].items()
 
     def get_strip_string(self, i_str):
         r"""
