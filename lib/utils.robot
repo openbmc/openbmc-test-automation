@@ -269,15 +269,21 @@ Stop SOL Console Logging
     ...  Execute Command
     ...  ls ${file_path}-${LOG_TIME}_* | cut -d'_' -f 2
     ...  return_stderr=True
-    Return From Keyword If   '${pid}' == '${EMPTY}'
-    ...   No obmc-console-client process running
     Should Be Empty     ${stderr}
+
+    ${rc}=
+    ...  Execute Command
+    ...  ps ax | grep ${pid} | grep -v grep
+    ...  return_stdout=False  return_rc=True
+
+    Return From Keyword If   '${rc}' == '${1}'
+    ...   No obmc-console-client process running
 
     ${console}  ${stderr}=
     ...  Execute Command   kill -s KILL ${pid}
     ...  return_stderr=True
     Should Be Empty     ${stderr}
-    Log    Current Client PID:${pid}
+    Log  Current Client PID:${pid}
 
     ${console}  ${stderr}=
     ...  Execute Command
