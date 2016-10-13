@@ -64,7 +64,7 @@ OpenBMC Get Request
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     Log Request    method=Get    base_uri=${base_uri}    args=&{kwargs}
     Initialize OpenBMC
-    ${ret}=    Get Request    openbmc    ${base_uri}    &{kwargs}
+    ${ret}=    Get Request    openbmc    ${base_uri}    &{kwargs}  timeout=10
     Log Response    ${ret}
     [Return]    ${ret}
 
@@ -75,7 +75,7 @@ OpenBMC Post Request
     set to dictionary   ${kwargs}       headers     ${headers}
     Log Request    method=Post    base_uri=${base_uri}    args=&{kwargs}
     Initialize OpenBMC
-    ${ret}=    Post Request    openbmc    ${base_uri}    &{kwargs}
+    ${ret}=    Post Request    openbmc    ${base_uri}    &{kwargs}  timeout=10
     Log Response    ${ret}
     [Return]    ${ret}
 
@@ -86,7 +86,7 @@ OpenBMC Put Request
     set to dictionary   ${kwargs}       headers     ${headers}
     Log Request    method=Put    base_uri=${base_uri}    args=&{kwargs}
     Initialize OpenBMC
-    ${ret}=    Put Request    openbmc    ${base_uri}    &{kwargs}
+    ${ret}=    Put Request    openbmc    ${base_uri}    &{kwargs}  timeout=10
     Log Response    ${ret}
     [Return]    ${ret}
 
@@ -95,7 +95,7 @@ OpenBMC Delete Request
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     Log Request    method=Delete    base_uri=${base_uri}    args=&{kwargs}
     Initialize OpenBMC
-    ${ret}=    Put Request    openbmc    ${base_uri}    &{kwargs}
+    ${ret}=    Put Request    openbmc    ${base_uri}    &{kwargs}  timeout=10
     Log Response    ${ret}
     [Return]    ${ret}
 
