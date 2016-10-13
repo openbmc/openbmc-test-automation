@@ -206,22 +206,30 @@ Association unchanged after reboot
     [Documentation]     ***GOOD PATH***
     ...                 This test case is to verify that error log association
     ...                 does not change after open bmc reboot.\n
-    [Tags]  bmcreboot
+    [Tags]  bmcreboot  Association_Unchanged_After_Reboot
 
     ${pre_reboot_log_uri} =      Create a test log
-    ${association_uri} =    catenate    SEPARATOR=   ${pre_reboot_log_uri}   /fru
-    ${pre_reboot_association_content} =     Read Attribute    ${association_uri}    endpoints
+    ${association_uri} =
+    ...    catenate    SEPARATOR=   ${pre_reboot_log_uri}   /fru
+    ${pre_reboot_association_content} =
+    ...   Read Attribute   ${association_uri}    endpoints
 
     ${output}=      Execute Command    /sbin/reboot
     Check If BMC is Up   5 min    10 sec
 
-    ${post_reboot_association_content} =     Read Attribute    ${association_uri}    endpoints
-    Should Be Equal        ${pre_reboot_association_content}    ${pre_reboot_association_content}
+    ${post_reboot_association_content} =
+    ...   Read Attribute    ${association_uri}    endpoints
+    Should Be Equal
+    ...   ${post_reboot_association_content}   ${pre_reboot_association_content}
 
-    ${post_reboot_dimm3_event} =     Read Attribute      ${DIMM3_URI}/event   endpoints
-    Should Contain     ${post_reboot_dimm3_event}    ${pre_reboot_log_uri}
-    ${post_reboot_dimm2_event} =     Read Attribute      ${DIMM2_URI}/event   endpoints
-    Should Contain     ${post_reboot_dimm2_event}    ${pre_reboot_log_uri}
+    ${post_reboot_dimm3_event} =
+    ...   Read Attribute   ${DIMM3_URI}/event   endpoints
+    Should Contain
+    ...   ${post_reboot_dimm3_event}   ${pre_reboot_log_uri}
+    ${post_reboot_dimm2_event} =
+    ...   Read Attribute   ${DIMM2_URI}/event   endpoints
+    Should Contain
+    ...   ${post_reboot_dimm2_event}   ${pre_reboot_log_uri}
 
 *** Keywords ***
 
