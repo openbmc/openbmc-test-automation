@@ -62,6 +62,7 @@ Test OpenBMC Services Autorestart Policy
 Test Restart Policy for openbmc service
     [Documentation]     This testcase will kill the service and make sure it
     ...                 does restart after that
+    [Tags]  Test_Restart_Policy_for_openbmc_service
 
     ${MainPID}=   Execute Restart Policy Command
     ...   systemctl -p MainPID show phosphor-settings.service| cut -d = -f2
