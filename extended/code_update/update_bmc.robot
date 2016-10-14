@@ -43,7 +43,10 @@ Initiate Code update BMC
     Prepare For Update
     # TODO: openbmc/openbmc#519
     Trigger Warm Reset via Reboot
-    Check If BMC is Up    5 min   10 sec
+
+    # Wait time is increased temporary to 10 mins due
+    # to openbmc/openbmc#673
+    Check If BMC is Up    10 min   10 sec
 
     Wait Until Keyword Succeeds
     ...    10 min   10 sec   Verify BMC State   BMC_READY
