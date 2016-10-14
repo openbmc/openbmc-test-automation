@@ -177,7 +177,7 @@ Log OS FFDC
     \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
 
 
-OS FFDC
+OS FFDC Files
     [Documentation]    Get the command list and iterate
 
     Return From Keyword If  '${OS_HOST}' == '${EMPTY}'
