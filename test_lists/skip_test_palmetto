@@ -44,3 +44,8 @@
 ##Testcase NA for Palmetto system
 -e io_board_Present
 -e io_board_Fault
+# https://github.com/openbmc/openbmc/issues/644
+-e Set_Static_Address_With_REST
+-e Set_DHCP_Address_With_REST
+-e Set_Static_Address_With_IPMI
+-e Set_DHCP_Address_With_IPMI
