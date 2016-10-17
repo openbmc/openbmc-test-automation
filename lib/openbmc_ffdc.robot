@@ -18,6 +18,13 @@ Documentation      This module is for data collection on test case failure
 ...                │       ├── 20160909102538035251_OS_msglog
 ...                │       ├── 20160909102538035251_OS_cpufrequency
 ...                │       ├── 20160909102538035251_OS_boot
+...                │       ├── 20160909102538035251_OS_isusb
+...                │       ├── 20160909102538035251_OS_kern
+...                │       ├── 20160909102538035251_OS_authlog
+...                │       ├── 20160909102538035251_OS_syslog
+...                │       ├── 20160909102538035251_OS_info
+...                │       ├── 20160909102538035251_OS_rsct
+...                │       ├── 20160909102538035251_OS_secure
 ...                │       └── 20160909102538035251_ffdc_report.txt
 ...                └── test_history.txt
 
