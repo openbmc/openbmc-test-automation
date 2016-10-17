@@ -61,6 +61,42 @@ FFDC_OS_ALL_DISTROS_FILE = {
     },
 }
 
+# Add file name and correcponding command needed for Ubuntu Linux
+FFDC_OS_UBUNTU_FILE = {
+    'OS FILES':
+    {
+        # File Name         Command
+        'OS_isusb': 'lsusb -t ; lsusb -v',
+        'OS_kern': 'tail -n 50000 /var/log/kern.log',
+        'OS_authlog': 'cat /var/log/auth.log; cat /var/log/auth.log.1',
+        'OS_syslog': 'tail -n 200000 /var/log/syslog',
+        'OS_info': 'uname -a; dpkg -s opal-prd; dpkg -s ipmitool',
+    },
+}
+
+# Add file name and correcponding command needed for RHEL Linux
+FFDC_OS_RHEL_FILE = {
+    'OS FILES':
+    {
+        # File Name         Command
+        'OS_rsct': '/usr/bin/ctversion -bv',
+        'OS_secure': 'cat /var/log/secure',
+        'OS_syslog': 'tail -n 200000 /var/log/messages',
+        'OS_info': 'lsb_release -a; cat /etc/redhat-release; uname -a; rpm -qa',
+    },
+}
+
+# Add file name and correcponding command needed for RHEL Linux
+FFDC_OS_IBM_POWERKVM_FILE = {
+    'OS FILES':
+    {
+        # File Name         Command
+        'OS_secure': 'cat /var/log/secure',
+        'OS_syslog': 'tail -n 200000 /var/log/messages',
+        'OS_info': 'lsb_release -a; uname -a; rpm -qa',
+    },
+}
+
 # Add file name and correcponding Get Request
 FFDC_GET_REQUEST = {
     'GET REQUESTS':
@@ -184,6 +220,26 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_OS_ALL_DISTROS_FILE[i_type].items()
+
+    def get_ffdc_os_distro_index(self, distro):
+        r"""
+        ########################################################################
+        #   @brief    This method returns the key pair from the dictionary
+        #   @return   Index of the method dictionary
+        ########################################################################
+        """
+        distro_file = "FFDC_OS_" + str(distro).upper() + "_FILE"
+        return eval(distro_file).keys()
+
+    def get_ffdc_os_distro_call(self, i_type, distro):
+        r"""
+        ########################################################################
+        #   @brief    This method returns the key pair from the dictionary
+        #   @return   List of key pair keywords
+        ########################################################################
+        """
+        distro_file = "FFDC_OS_" + str(distro).upper() + "_FILE"
+        return eval(distro_file)[i_type].items()
 
     def get_strip_string(self, i_str):
         r"""

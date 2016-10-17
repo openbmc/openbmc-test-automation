@@ -67,7 +67,7 @@ Iterate BMC Command List Pairs
 
 
 Execute Command and Write FFDC
-    [Documentation]    Execute command on BMC and write to ffdc
+    [Documentation]    Execute command on BMC or OS and write to ffdc
     ...                By default to ffdc_report.txt file else to
     ...                specified file path.
     [Arguments]        ${key_index}
@@ -163,18 +163,29 @@ BMC FFDC Get Requests
     \   Log FFDC Get Requests   ${index}
 
 
-Log OS FFDC
+Log OS ALL DISTROS FFDC
     [Documentation]    Create file in current FFDC log directory.
     ...                Executes OS command and write to
     ...                corresponding file name.
     [Arguments]        ${key_index}
 
-    Open Connection And Log In  host=${OS_HOST}  username=${OS_USERNAME}
-    ...   password=${OS_PASSWORD}
     @{cmd_list}=  get ffdc os all distros call  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
     \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
     \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
+
+
+Log OS SPECIFIC DISTRO FFDC
+    [Documentation]    Create file in current FFDC log directory.
+    ...                Executes OS command and write to
+    ...                corresponding file name.
+    [Arguments]        ${key_index}  ${linux_distro}
+
+    @{cmd_list}=  get ffdc os distro call  ${key_index}  ${linux_distro}
+    :FOR  ${cmd}  IN  @{cmd_list}
+    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
+    \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
+
 
 
 OS FFDC Files
@@ -182,6 +193,20 @@ OS FFDC Files
 
     Return From Keyword If  '${OS_HOST}' == '${EMPTY}'
     ...   No OS Host Provided
+    Open Connection And Log In  host=${OS_HOST}  username=${OS_USERNAME}
+    ...   password=${OS_PASSWORD}
+
     @{entries}=  Get ffdc os all distros index
     :FOR  ${index}  IN  @{entries}
-    \   Log OS FFDC  ${index}
+    \   Log OS ALL DISTROS FFDC  ${index}
+
+    ${linux_distro}=  Execute Command 
+    ...   . /etc/os-release; echo $ID
+    ...   return_stdout=True  return_stderr=False  return_rc=False
+
+    Return From Keyword If  '${linux_distro}' == '${EMPTY}' or '${linux_distro}' == 'None'
+    ...   Could not determine Linux Distribution
+
+    @{entries}=  Get ffdc os distro index  ${linux_distro}
+    :FOR  ${index}  IN  @{entries}
+    \   Log OS SPECIFIC DISTRO FFDC  ${index}  ${linux_distro}
