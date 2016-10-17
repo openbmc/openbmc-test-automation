@@ -408,3 +408,34 @@ Stop Journal Log
     Execute Command    rm ${file_path}-${LOG_TIME}
 
     [Return]    ${journal_log}
+
+Mac Address To Hex String
+    [Documentation]   Converts MAC address into hex format.
+    ...               Example
+    ...               Given the following MAC: 00:01:6C:80:02:78
+    ...               This keyword will return: 0x00 0x01 0x6C 0x80 0x02 0x78
+    ...               Description of arguments:
+    ...               i_macaddress  MAC address in the following format 00:01:6C:80:02:78
+    [Arguments]    ${i_macaddress}
+
+    ${mac_hex}=  Catenate  0x${i_macaddress.replace(':', ' 0x')}
+    [return]    ${mac_hex}
+
+IP Address To Hex String
+    [Documentation]   Converts IP address into hex format.
+    ...               Example:
+    ...               Given the following IP: 10.3.164.100
+    ...               This keyword will return: 0xa 0x3 0xa4 0xa0
+    ...               Description of arguments:
+    ...               i_ipaddress  IP address in the following format 10.10.10.10
+    [Arguments]    ${i_ipaddress}
+
+    @{ip}=  Split String  ${i_ipaddress}    .
+    ${index}=  Set Variable  ${0}
+
+    :FOR    ${item}     IN      @{ip}
+    \   ${hex}=  Convert To Hex    ${item}    prefix=0x    lowercase=yes
+    \   Set List Value    ${ip}    ${index}    ${hex}
+    \   ${index}=  Set Variable    ${index + 1}
+    ${ip_hex}=  Catenate    @{ip}
+    [return]    ${ip_hex}
