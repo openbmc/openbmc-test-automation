@@ -308,3 +308,19 @@ Verify BMC State
     ${current}=  Get BMC State
     Should Contain  ${current}   ${expected}
 
+Mac to hex mac
+    [Arguments]    ${args}
+    ${mac_hex}=    Catenate  0x${args.replace(':', ' 0x')}
+    [return]    ${mac_hex}
+
+IP to hex ip
+    [Arguments]    ${args}
+    @{ip} =    Split String    ${args}    .
+    ${index} =    Set Variable    ${0}
+
+    :FOR    ${item}     IN      @{ip}
+    \   ${hex} =    Convert To Hex    ${item}    prefix=0x    lowercase=yes
+    \   Set List Value    ${ip}    ${index}    ${hex}
+    \   ${index} =    Set Variable    ${index + 1}
+    ${ip_hex} =    Catenate    @{ip}
+    [return]    ${ip_hex}

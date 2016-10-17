@@ -3,7 +3,15 @@ import sys
 from robot.libraries.BuiltIn import BuiltIn
 import imp
 import string
+import random
 
+def random_mac():
+        return ":".join(map(lambda x: "%02x" % x, (random.randint(0x00, 0xff)
+                        for _ in range(6))))
+
+def random_ip():
+        return ".".join(map(str, (random.randint(0, 255) 
+                        for _ in range(4))))
 
 def get_sensor(module_name, value):
 	m = imp.load_source('module.name', module_name)
