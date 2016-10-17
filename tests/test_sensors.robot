@@ -275,7 +275,7 @@ io_board Fault
 Setup The Suite
 
     Open Connection And Log In
-    ${resp} =       Read Properties         /org/openbmc/enumerate
+    ${resp} =       Read Properties         /org/openbmc/enumerate   timeout=30
     Set Suite Variable      ${SYSTEM_INFO}          ${resp}
     log Dictionary          ${resp}
 
