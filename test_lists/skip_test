@@ -47,3 +47,8 @@
 -e Set_System_Time_with_no_time
 #https://github.com/openbmc/openbmc/issues/811
 -e powercapping
+# https://github.com/openbmc/openbmc/issues/644
+-e Set_Static_Address_With_REST
+-e Set_DHCP_Address_With_REST
+-e Set_Static_Address_With_IPMI
+-e Set_DHCP_Address_With_IPMI
