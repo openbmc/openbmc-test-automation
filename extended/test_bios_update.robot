@@ -4,6 +4,10 @@ Documentation   This testsuite updates the PNOR image on the host for
 
 Resource        ../lib/utils.robot
 Resource        ../lib/connection_client.robot
+Resource        ../lib/openbmc_ffdc.robot
+Test Setup          Start SOL Console Logging 
+Test Teardown       Log FFDC
+Suite Teardown      Collect SOL Log
 
 *** Variables ***
 
@@ -22,9 +26,11 @@ Host BIOS Update And Boot
 Reach System Steady State
     [Documentation]  Reboot the BMC, power off the Host and clear any previous
     ...              events
-    Trigger Warm Reset
+#TODO renable Warm Reset once open-bmc warm reset issue is fixed
+#    Trigger Warm Reset
     Initiate Power Off
-    Clear BMC Record Log
+#TODO renable Warm Reset once open-bmc warm reset issue is fixed
+#    Clear BMC Record Log
 
 Update PNOR Image
     [Documentation]  Copy the PNOR image to the BMC /tmp dir and flash it.
@@ -38,4 +44,9 @@ Validate IPL
     Initiate Power On
     Wait Until Keyword Succeeds  10 min    30 sec    Is System State Host Booted
 
+Collect SOL Log
+    [Documentation]    Log FFDC if test suite fails and collect SOL log
+    ...                for debugging purposes.
+     ${sol_out}=    Stop SOL Console Logging 
+     Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
 
