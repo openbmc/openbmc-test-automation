@@ -2,8 +2,12 @@
 Documentation   This testsuite updates the PNOR image on the host for
 ...             hostboot CI purposes.
 
-Resource        ../lib/utils.robot
-Resource        ../lib/connection_client.robot
+Resource          ../lib/utils.robot
+Resource          ../lib/connection_client.robot
+Resource          ../lib/openbmc_ffdc.robot
+Test Setup        Start SOL Console Logging
+Test Teardown     FFDC On Test Case Fail
+Suite Teardown    Collect SOL Log
 
 *** Variables ***
 
@@ -38,4 +42,9 @@ Validate IPL
     Initiate Power On
     Wait Until Keyword Succeeds  10 min    30 sec    Is System State Host Booted
 
+Collect SOL Log
+    [Documentation]    Log FFDC if test suite fails and collect SOL log
+    ...                for debugging purposes.
+     ${sol_out}=    Stop SOL Console Logging
+     Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
 
