@@ -27,6 +27,7 @@ Create and delete user group
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is for testing user group creation
     ...                 and deletion in open bmc.\n
+    [Tags]  Create_and_delete_user_group
 
     ${groupname} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${resp} =    Create UserGroup    ${groupname}
@@ -191,6 +192,7 @@ Set password for non existing user
     [Documentation]     ***BAD PATH***
     ...                 This testcase is for testing password set for non-existing user
     ...                 in open bmc.\n
+    [Tags]              Set_password_for_non_existing_user
 
     ${resp} =    Change Password    ${NON_EXISTING_USER}    ${VALID_PASSWORD}
     Should Be Equal    ${resp}    error
@@ -217,6 +219,7 @@ Create user with no name
     [Documentation]     ***BAD PATH***
     ...                 This testcase is for checking that user creation is not allowed
     ...                 with empty username in open bmc.\n
+    [Tags]              Create_user_with_no_name
 
     ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
     ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
@@ -232,6 +235,7 @@ Create existing user group
     [Documentation]     ***BAD PATH***
     ...                 This testcase is for checking that user group creation is not allowed
     ...                 for existing user group in open bmc.\n
+    [Tags]              Create_existing_user_group
 
     ${groupname} =    Generate Random String    ${RANDOM_STRING_LENGTH}
 
@@ -247,6 +251,7 @@ Create user group with no name
     [Documentation]     ***BAD PATH***
     ...                 This testcase is for checking that user group creation is not allowed
     ...                 with empty groupname in open bmc.\n
+    [Tags]              Create_user_group_with_no_name
 
     ${resp} =    Create UserGroup    ${EMPTY}
     Should Be Equal    ${resp}    error
@@ -258,7 +263,7 @@ Cleanup Users List
     ...                 This testcase is to clean up multiple users created by
     ...                 the test so as to leave the system in cleaner state.
     ...                 This is a no-op if there is no user list on the BMC.
-    [Tags]  CleanupUsersList
+    [Tags]  Cleanup_Users_List
 
     ${user_list} =    Get UserList
     : FOR   ${username}   IN   @{user_list}
