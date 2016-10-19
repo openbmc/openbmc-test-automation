@@ -165,6 +165,9 @@ Set the Boot Device as Setup using ipmitool
     Should Be Empty     ${stderr}
     Should Contain   ${output}   Setup
 
+Verify Zombie Process
+    Check Zombie Process
+
 *** Keywords ***
 
 Response Should Be Equal
