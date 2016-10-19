@@ -70,6 +70,9 @@ Verify System VPD Properties
     [Tags]  Verify_System_VPD_Properties
     Verify Properties     SYSTEM
 
+Verify Zombie Process
+    Open Connection And Log In
+    Check Zombie Process
 
 *** Keywords ***
 
