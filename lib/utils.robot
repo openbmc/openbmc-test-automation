@@ -360,7 +360,7 @@ Stop SOL Console Logging
 Get Time Stamp
     [Documentation]     Get the current time stamp data
     ${cur_time}=    Get Current Date   result_format=%Y%m%d%H%M%S%f
-    [return]   ${cur_time}
+    [Return]   ${cur_time}
 
 
 Verify BMC State
@@ -504,3 +504,10 @@ Get Endpoint Paths
     ${list}=   Get Dictionary Keys   ${resp}
     ${resp}=   Get Matches   ${list}   regexp=^.*[0-9a-z_].${endpoint}[0-9]*$
     [return]   ${resp}
+
+Check Zombie Process
+    [Documentation]    Check if any defunct process exist or not on BMC
+    ${count}   ${stderr}   ${rc}=  Execute Command     ps -o stat | grep Z | wc -l
+    ...    return_stderr=True  return_rc=True
+    Should Be True    ${count}==0
+    Should Be Empty    ${stderr}
