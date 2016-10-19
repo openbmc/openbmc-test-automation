@@ -360,7 +360,7 @@ Stop SOL Console Logging
 Get Time Stamp
     [Documentation]     Get the current time stamp data
     ${cur_time}=    Get Current Date   result_format=%Y%m%d%H%M%S%f
-    [return]   ${cur_time}
+    [Return]   ${cur_time}
 
 
 Verify BMC State
@@ -486,3 +486,9 @@ Check BMC Mem Performance
     :FOR  ${var}  IN Range  1  4
     \     BMC Mem Performance check
 
+Check Zombie Process
+    [Documentation]    Check if any defunct process exist or not on BMC
+    ${count}   ${stderr}   ${rc}=  Execute Command     ps -o stat | grep Z | wc -l
+    ...    return_stderr=True  return_rc=True
+    Should Be True    ${count}==0
+    Should Be Empty    ${stderr}
