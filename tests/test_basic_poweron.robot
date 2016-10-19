@@ -19,6 +19,9 @@ power on test
     BMC Power Off
     BMC Power On
 
+Verify Zombie Process
+    Check Zombie Process
+
 *** Keywords ***
 Test Exit Logs
     [Documentation]    Log FFDC if failed and collect SOL
