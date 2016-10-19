@@ -5,6 +5,7 @@ Documentation     This suite will verifiy all OpenBMC rest interfaces
 
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/utils.robot
 Test Teardown     FFDC On Test Case Fail
 
 
@@ -366,6 +367,10 @@ post method org/openbmc/records/events/action/acceptTestMessage no args
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       ok
+
+Verify Zombie Process
+    [Tags]  Verify_Zombie_Process
+    Check Zombie Process
 
 ***keywords***
 Get Power Control Interface

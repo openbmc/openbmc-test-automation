@@ -9,9 +9,7 @@ Library           ../lib/utilities.py
 Library           String
 Library           Collections
 Test Teardown     FFDC On Test Case Fail
-
 Variables         ../data/variables.py
-
 
 Suite setup        setup the suite
 
@@ -74,6 +72,9 @@ Verify System VPD Properties
     [Tags]  Verify_System_VPD_Properties
     Verify Properties     SYSTEM
 
+Verify Zombie Process
+    [Tags]  Verify_Zombie_Process
+    Check Zombie Process
 
 *** Keywords ***
 

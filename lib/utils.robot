@@ -294,12 +294,10 @@ Stop SOL Console Logging
 
     [Return]    ${console}
 
-
 Get Time Stamp
     [Documentation]     Get the current time stamp data
     ${cur_time}=    Get Current Date   result_format=%Y%m%d%H%M%S%f
-    [return]   ${cur_time}
-
+    [Return]   ${cur_time}
 
 Verify BMC State
     [Documentation]   Get the BMC state and verify if the current
@@ -357,3 +355,11 @@ Stop Journal Log
 
     [Return]    ${journal_log}
 
+Check Zombie Process
+
+    [Documentation]    Check if any defunct process exist or not on BMC
+
+    ${count}   ${stderr}   ${rc}=  Execute Command     ps -o stat | grep Z | wc -l
+    ...    return_stderr=True  return_rc=True
+
+    Should Be True    ${count}==0
