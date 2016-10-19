@@ -8,6 +8,7 @@ Documentation          This example demonstrates executing commands on a remote 
 Resource        ../lib/rest_client.robot
 Resource        ../lib/ipmi_client.robot
 Resource        ../lib/openbmc_ffdc.robot
+Resource        ../lib/utils.robot
 Library         ../data/model.py
 
 Suite setup            Setup The Suite
@@ -269,6 +270,9 @@ io_board Fault
     ${uri} =    Get System component    io_board
     Read The Attribute   ${uri}    fault
     Response Should Be Equal    False
+
+Verify Zombie Process
+    Check Zombie Process
 
 *** Keywords ***
 
