@@ -8,6 +8,9 @@ Documentation     Trigger code update to a target BMC.
 ...               Update work flow sequence:
 ...                 - User input BMC File existence check
 ...                 - Ping Test and REST authentication
+...                 - Set Host Power host setting Policy to LEAVE_OFF.
+...                   On reboot this policy would ensure the BMC comes
+...                   online and stays at HOST_POWERED_OFF state.
 ...                 - Issue poweroff
 ...                 - Prepare for Update
 ...                 - Wait for BMC to come online clean
@@ -37,6 +40,8 @@ Initiate Code update BMC
 
     Run Keyword if  '${status}' == '${False}'
     ...     Pass Execution   Same Driver version installed
+
+    Set Policy Setting   LEAVE_OFF
 
     Initiate Power Off
     Prepare For Update
