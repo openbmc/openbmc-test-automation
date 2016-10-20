@@ -10,7 +10,6 @@ Documentation     Trigger code update to a target BMC.
 ...                 - Ping Test and REST authentication
 ...                 - Issue poweroff
 ...                 - Prepare for Update
-...                 - Force reboot
 ...                 - Wait for BMC to come online clean
 ...                 - Wait for BMC_READY state
 ...                 - Apply preserve BMC Network setting
@@ -41,8 +40,6 @@ Initiate Code update BMC
 
     Initiate Power Off
     Prepare For Update
-    # TODO: openbmc/openbmc#519
-    Trigger Warm Reset via Reboot
 
     # Wait time is increased temporary to 10 mins due
     # to openbmc/openbmc#673
