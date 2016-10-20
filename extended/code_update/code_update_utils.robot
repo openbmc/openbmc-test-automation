@@ -11,6 +11,7 @@ Library          OperatingSystem
 ${BMC_UPD_METHOD}    /org/openbmc/control/flash/bmc/action/update
 ${BMC_PREP_METHOD}   /org/openbmc/control/flash/bmc/action/PrepareForUpdate
 ${BMC_UPD_ATTR}      /org/openbmc/control/flash/bmc
+${HOST_SETTING}      /org/openbmc/settings/host0
 
 *** Keywords ***
 
@@ -97,3 +98,12 @@ Trigger Warm Reset via Reboot
     Open Connection And Log In
 
     Start Command   /sbin/reboot
+
+Set Policy Setting
+    [Documentation]   Set the given test policy
+    [arguments]   ${policy}
+
+    ${valueDict} =     create dictionary  data=${policy}
+    Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
+    ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
+    Should Be Equal    ${currentPolicy}   ${policy}
