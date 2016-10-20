@@ -306,5 +306,5 @@ Verify BMC State
     [Arguments]       ${expected}
 
     ${current}=  Get BMC State
-    Should Contain  ${current}   ${expected}
+    Should Contain  ${expected}   ${current}
 
