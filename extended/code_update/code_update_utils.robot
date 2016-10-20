@@ -90,10 +90,10 @@ Validate BMC Version
 
 
 Trigger Warm Reset via Reboot
-    [Documentation]    The reboot commands execute successfully but
-    ...                returns negative value 1
+    [Documentation]    Execute reboot command on the remote BMC and
+    ...                returns immediately. This keyword "Start Command"
+    ...                returns nothing and does not wait for the command
+    ...                execution to be finished.
     Open Connection And Log In
 
-    ${rc}=  SSHLibrary.Execute Command
-    ...     /sbin/reboot  return_stdout=False   return_rc=True
-    Should Be Equal As Integers   ${rc}   ${-1}
+    Start Command   /sbin/reboot
