@@ -23,6 +23,16 @@
 -e Set_password_for_existing_user
 -e Set_password_with_empty_password_for_existing
 -e Create_existing_user
+#https://github.com/openbmc/openbmc/issues/700
+-e DIMM3_Present
+-e DIMM3_not_Present
+#https://github.com/openbmc/openbmc-test-automation/issues/110
+-e Test_non_SSL_Connection_to_port_443
+#https://github.com/openbmc/openbmc-test-automation/issues/123
+-e Execute_ipmi_BT_capabilities_command
+#https://github.com/openbmc/openbmc-test-automation/issues/130
+-e Test_OpenBMC_Services_Autorestart_Policy
+-e Test_Restart_Policy_for_openbmc_service
 #Testcase NA for Palmetto system
 -e io_board_Present
 -e io_board_Fault
