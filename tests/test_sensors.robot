@@ -167,6 +167,8 @@ core no fault
     Response Should Be Equal    False
 
 DIMM3 Present
+    [Tags]    DIMM3_Present
+
     ${uri} =    Get System component    dimm3
     ${x} =      Get Inventory Sensor Number   ${uri}
 
@@ -175,6 +177,8 @@ DIMM3 Present
     Response Should Be Equal    True
 
 DIMM3 not Present
+    [Tags]    DIMM3_not_Present
+
     ${uri} =    Get System component    dimm3
     ${x} =      Get Inventory Sensor Number   ${uri}
 
