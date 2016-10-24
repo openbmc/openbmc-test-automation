@@ -28,7 +28,7 @@ Test BIOS Version
     ...     open-power-barreleye-v1.8
     ...     $
 
-    [Tags]  chassisboot
+    [Tags]  chassisboot    Test_BIOS_Version
     ${resp} =    OpenBMC Get Request    /org/openbmc/inventory/system/bios
     Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    To Json    ${resp.content}

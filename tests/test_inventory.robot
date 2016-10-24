@@ -24,6 +24,8 @@ minimal cpu inventory
     Should Be True     ${count}>${0}
 
 minimal dimm inventory
+    [Tags]  minimal_dimm_inventory
+
     ${count} =     Get Total Present     dimm
     Should Be True     ${count}>=${2}
 
@@ -58,6 +60,8 @@ Verify CPU VPD Properties
     Verify Properties     CPU
 
 Verify DIMM VPD Properties
+    [Tags]    Verify_DIMM_VPD_Properties
+
     Verify Properties     DIMM
 
 Verify Memory Buffer VPD Properties
