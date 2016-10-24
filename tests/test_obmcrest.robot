@@ -23,6 +23,7 @@ Get an object with no properties
     Should Be Empty     ${content}
 
 Get a Property
+    [Tags]  Get_a_Property
     ${resp}=   Read Attribute      /org/openbmc/inventory/system/chassis/motherboard/cpu0      is_fru
     Should Be Equal    ${resp}     ${1}
 

@@ -6,10 +6,7 @@
 #https://github.com/openbmc/openbmc/issues/539
 -e Test_Correct_Reservation_ID
 #https://github.com/openbmc/openbmc/issues/604
--e minimal_memory_buffer_inventory
 -e minimal_main_planar_inventory
--e Centaur0_Present
--e Centaur0_fault
 #https://github.com/openbmc/openbmc/issues/93
 -e minimal_fan_inventory
 -e minimal_system_inventory
@@ -23,6 +20,27 @@
 -e Set_password_for_existing_user
 -e Set_password_with_empty_password_for_existing
 -e Create_existing_user
-#Testcase NA for Palmetto system
+#https://github.com/openbmc/openbmc/issues/700
+-e DIMM0_fault
+-e DIMM0_no_fault
+-e minimal_dimm_inventory
+-e Verify_DIMM_VPD_Properties
+#https://github.com/openbmc/openbmc/issues/740
+-e Test_BIOS_Version
+#https://github.com/openbmc/openbmc-test-automation/issues/208
+-e Get_a_Property
+#https://github.com/openbmc/openbmc-test-automation/issues/207
+-e Disable_PowerCap
+#https://github.com/openbmc/openbmc-test-automation/issues/110
+-e Test_non_SSL_Connection_to_port_443
+#https://github.com/openbmc/openbmc-test-automation/issues/123
+-e Execute_ipmi_BT_capabilities_command
+#https://github.com/openbmc/openbmc-test-automation/issues/130
+-e Test_OpenBMC_Services_Autorestart_Policy
+-e Test_Restart_Policy_for_openbmc_service
+#https://github.com/openbmc/openbmc-test-automation/issues/22
+-e Validate_Heartbeat_LEDs_Test_Cases
+-e Validate_Identify_LEDs_Test_Cases
+##Testcase NA for Palmetto system
 -e io_board_Present
 -e io_board_Fault

@@ -70,6 +70,8 @@ Set More Than Maximum PowerCAP
 Disable PowerCap
     [Documentation]     Test set powercap with 0 and make sure powercap is
     ...                 disabled by checking whether the value is set to 0
+    [Tags]  Disable_PowerCap
+
     ${resp}=  Set PowerCap    ${0}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     Sleep   ${DBUS_POLL_INTERVAL}
