@@ -308,3 +308,47 @@ Verify BMC State
     ${current}=  Get BMC State
     Should Contain  ${current}   ${expected}
 
+Start Journal Log
+    [Documentation]   Start capturing journal log to a file in /tmp using
+    ...               journalctl command. By default journal log is collected
+    ...               at /tmp/journal_log else user input location.
+    ...               The File is appended with datetime.
+    [Arguments]       ${file_path}=/tmp/journal_log
+
+    Open Connection And Log In
+
+    ${cur_time}=    Get Time Stamp
+    Set Global Variable   ${LOG_TIME}   ${cur_time}
+    Start Command
+    ...  journalctl -f > ${file_path}-${LOG_TIME}
+    Log to console    Journal Log Started: ${file_path}-${LOG_TIME}
+
+Stop Journal Log
+    [Documentation]   Stop journalctl process if its running.
+    ...               By default return log from /tmp/journal_log else
+    ...               user input location.
+    [Arguments]       ${file_path}=/tmp/journal_log
+
+    Open Connection And Log In
+
+    ${rc}=
+    ...  Execute Command
+    ...  ps ax | grep journalctl | grep -v grep
+    ...  return_stdout=False  return_rc=True
+
+    Return From Keyword If   '${rc}' == '${1}'
+    ...   No journal log process running
+
+    ${output}  ${stderr}=
+    ...  Execute Command   killall journalctl
+    ...  return_stderr=True
+    Should Be Empty     ${stderr}
+
+    ${journal_log}  ${stderr}=
+    ...  Execute Command
+    ...  cat ${file_path}-${LOG_TIME}
+    ...  return_stderr=True
+    Should Be Empty     ${stderr}
+
+    [Return]    ${journal_log}
+
