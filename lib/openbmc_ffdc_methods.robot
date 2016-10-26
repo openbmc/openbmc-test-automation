@@ -4,7 +4,7 @@ Documentation      Methods to execute commands on BMC and collect
 
 Resource           openbmc_ffdc_utils.robot
 Resource           rest_client.robot
-
+Resource           utils.robot
 
 *** Keywords ***
 
@@ -190,11 +190,26 @@ Log OS SPECIFIC DISTRO FFDC
 
 OS FFDC Files
     [Documentation]    Get the command list and iterate
+    [Arguments]  ${OS_HOST}=${OS_HOST}  ${OS_USERNAME}=${OS_USERNAME}
+    ...   ${OS_PASSWORD}=${OS_PASSWORD}
 
     Return From Keyword If  '${OS_HOST}' == '${EMPTY}'
     ...   No OS Host Provided
+
+    # If can't ping, return
+    ${rc}=  Run Keyword and Return Status  Ping Host  ${OS_HOST}
+    Return From Keyword If  '${rc}' == '${False}'
+    ...   Could not ping OS
+
     Open Connection And Log In  host=${OS_HOST}  username=${OS_USERNAME}
     ...   password=${OS_PASSWORD}
+
+    ${output}  ${stderr}  ${rc}=  Execute Command  uptime  return_stderr=True
+    ...   return_rc=True
+
+    # If the return code returned by "Execute Command" is non-zero, return
+    Return From Keyword If  '${rc}' != '${0}'
+    ...   Could not connect to OS
 
     @{entries}=  Get ffdc os all distros index
     :FOR  ${index}  IN  @{entries}

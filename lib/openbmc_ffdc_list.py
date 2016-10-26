@@ -28,8 +28,6 @@ FFDC_BMC_CMD = {
     {
         'BMC OS': 'uname -a',
         'BMC Uptime': 'uptime',
-        'BMC Proc Info': 'cat /proc/cpuinfo',
-        'BMC Mem Info': 'cat /proc/meminfo',
         'BMC File System Disk Space Usage': 'df -hT',
     },
     'APPLICATION DATA':
@@ -44,8 +42,10 @@ FFDC_BMC_FILE = {
     {
         # File Name         Command
         'BMC_proc_list': 'top -n 1 -b',
-        'BMC_journalctl.log': 'journalctl --no-pager',
+        'BMC_journalctl': 'journalctl --no-pager',
         'BMC_dmesg': 'dmesg',
+        'BMC_procinfo': 'cat /proc/cpuinfo',
+        'BMC_meminfo': 'cat /proc/meminfo',
     },
 }
 
@@ -58,6 +58,9 @@ FFDC_OS_ALL_DISTROS_FILE = {
         'OS_cpufrequency': 'ppc64_cpu --frequency',
         'OS_dmesg': 'dmesg',
         'OS_boot': 'cat /var/log/boot.log',
+        'OS_procinfo': 'cat /proc/cpuinfo',
+        'OS_meminfo': 'cat /proc/meminfo',
+        'OS_netstat': 'netstat -a',
     },
 }
 
