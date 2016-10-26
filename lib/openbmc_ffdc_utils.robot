@@ -43,7 +43,7 @@ Create FFDC Directory
 Create FFDC Report File
     [Documentation]     Create a generic file name for ffdc
     Set Suite Variable
-    ...  ${FFDC_FILE_PATH}   ${FFDC_DIR_PATH}${/}${FFDC_TIME}_ffdc_report.txt
+    ...  ${FFDC_FILE_PATH}   ${FFDC_DIR_PATH}${/}${FFDC_TIME}_BMC_general
     Create File         ${FFDC_FILE_PATH}
 
 
