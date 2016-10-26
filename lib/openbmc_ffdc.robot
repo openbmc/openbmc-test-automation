@@ -7,13 +7,14 @@ Documentation      This module is for data collection on test case failure
 ...                logs
 ...                ├── 20160909102538035251_TestWarmreset
 ...                │   └── 20160909102538035251_TestWarmResetviaREST
-...                │       ├── 20160909102538035251_BMC_journalctl.log
+...                │       ├── 20160909102538035251_BMC_journalctl
 ...                │       ├── 20160909102538035251_BMC_proc_list
 ...                │       ├── 20160909102538035251_BMC_dmesg
 ...                │       ├── 20160909102538035251_BMC_inventory
 ...                │       ├── 20160909102538035251_BMC_led
 ...                │       ├── 20160909102538035251_BMC_record_log
 ...                │       ├── 20160909102538035251_BMC_sensor_list
+...                │       ├── 20160909102538035251_BMC_general
 ...                │       ├── 20160909102538035251_OS_dmesg
 ...                │       ├── 20160909102538035251_OS_msglog
 ...                │       ├── 20160909102538035251_OS_cpufrequency
@@ -24,8 +25,7 @@ Documentation      This module is for data collection on test case failure
 ...                │       ├── 20160909102538035251_OS_syslog
 ...                │       ├── 20160909102538035251_OS_info
 ...                │       ├── 20160909102538035251_OS_rsct
-...                │       ├── 20160909102538035251_OS_secure
-...                │       └── 20160909102538035251_ffdc_report.txt
+...                │       └── 20160909102538035251_OS_secure
 ...                └── test_history.txt
 
 Resource           openbmc_ffdc_methods.robot
