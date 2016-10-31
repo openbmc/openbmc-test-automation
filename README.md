@@ -114,6 +114,10 @@ Run extended tests
 
     For Barreleye system
     python -m robot -v OPENBMC_HOST:x.x.x.x -v FILE_PATH:downloaded_path/barreleye-xxxx.all.tar  extended/code_update/update_bmc.robot
+
+    For loop test (Default iteration is 10)
+    python -m robot -v OPENBMC_HOST:x.x.x.x -v OPENBMC_SYSTEMMODEL:xxxxxx -v ITERATION:n -v LOOP_TEST_COMMAND:xxxxxx extended/full_suite_regression.robot
+    OPENBMC_HOST=9.3.23.32   LOOP_TEST_COMMAND="--argumentfile test_lists/skip_test tests/test_fw_version.robot" ITERATION=5  OPENBMC_SYSTEMMODEL=barreleye tox -e barreleye -- ./extended/full_suite_regression.robot
 ```
 
 Jenkins jobs tox commands
