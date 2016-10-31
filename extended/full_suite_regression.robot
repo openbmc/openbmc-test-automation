@@ -8,6 +8,7 @@ Library           OperatingSystem
 *** Variables ***
  ${ITERATION}  10
  ${RESULT_PATH}        logsdir
+ ${LOOP_TEST_COMMAND}       tests
 
 *** Test Cases ***
 Run Entire Test Suite Multiple Time
@@ -18,7 +19,8 @@ Run Entire Test Suite Multiple Time
    : FOR    ${INDEX}    IN RANGE    0    ${ITERATION}
     \    Log To Console     \n Iteration:   no_newline=True
     \    Log To Console    ${INDEX}
-    \    Run  OPENBMC_HOST=${OPENBMC_HOST} tox -e ${OPENBMC_SYSTEMMODEL} -- tests
+    \    Run  OPENBMC_HOST=${OPENBMC_HOST} tox -e ${OPENBMC_SYSTEMMODEL} -- ${LOOP_TEST_COMMAND}
+    \    Run  sed -i 's/'${OPENBMC_HOST}'/DUMMYIP/g' output.xml
     \    Copy File    output.xml   ${RESULT_PATH}/output${INDEX}.xml
     \    Copy File    log.html   ${RESULT_PATH}/log${INDEX}.html
 
