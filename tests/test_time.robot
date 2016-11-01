@@ -23,6 +23,7 @@ Get System Time
     ...               This test case tries to get system time using IPMI and
     ...               then tries to cross check with BMC date time.
     ...               Expectation is that BMC time and ipmi sel time should match.
+    [Tags]  Get_System_Time
 
     ${resp}=    Run IPMI Standard Command    sel time get
     ${ipmidate}=    Convert Date    ${resp}    date_format=%m/%d/%Y %H:%M:%S    exclude_millis=yes
@@ -35,6 +36,7 @@ Set Valid System Time
     ...               This test case tries to set system time using IPMI and
     ...               then tries to cross check if it is correctly set in BMC.
     ...               Expectation is that BMC time should match with new time.
+    [Tags]  Set_Valid_System_Time
 
     ${resp}=    Run IPMI Standard Command    sel time set "${SYSTEM_TIME_VALID}"
     ${setdate}=    Convert Date    ${SYSTEM_TIME_VALID}    date_format=%m/%d/%Y %H:%M:%S    exclude_millis=yes
@@ -46,14 +48,16 @@ Set Invalid System Time
     [Documentation]   ***BAD PATH***
     ...               This test case tries to set system time with invalid time using IPMI.
     ...               Expectation is that it should return error.
+    [Tags]  Set_Invalid_System_Time
 
     ${msg}=    Run Keyword And Expect Error    *    Run IPMI Standard Command    sel time set "${SYSTEM_TIME_INVALID}"
     Should Start With    ${msg}    Specified time could not be parsed
 
 Set System Time with no time
-    [Documentation]   ***BAD PATH*** 
+    [Documentation]   ***BAD PATH***
     ...               This test case tries to set system time with no time using IPMI.
     ...               Expectation is that it should return error.
+    [Tags]  Set_System_Time_with_no_time
 
     ${msg}=    Run Keyword And Expect Error    *    Run IPMI Standard Command    sel time set ""
     Should Start With    ${msg}    Specified time could not be parsed

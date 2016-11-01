@@ -44,3 +44,9 @@
 -e Create_existing_user_group
 -e Create_user_group_with_no_name
 -e Cleanup_Users_List
+#https://github.com/openbmc/openbmc-test-automation/issues/148
+-e Get_System_Time
+-e Set_Valid_System_Time
+-e Set_Invalid_System_Time
+-e Set_System_Time_with_no_time
+
