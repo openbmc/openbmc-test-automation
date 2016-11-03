@@ -178,7 +178,7 @@ Is PNOR Flashing
 Is PNOR Flash Done
     [Documentation]  Get BIOS 'Flash Done' status.  This indicates that the
     ...              PNOR flashing has completed.
-    ${status}=    Get Flash BIOS Status
+    {status}=    Get Flash BIOS Status
     should be equal as strings     ${status}     Flash Done
 
 Is System State Host Booted
@@ -207,7 +207,7 @@ Check If BMC is Up
     [Documentation]  Wait for Host to be online. Checks every X seconds
     ...              interval for Y minutes and fails if timed out.
     ...              Default MAX timedout is 10 min, interval 10 seconds.
-    [arguments]      ${max_timeout}=${OPENBMC_REBOOT_TIMEOUT}
+    [arguments]      ${max_timeout}=${OPENBMC_REBOOT_TIMEOUT} min
     ...              ${interval}=10 sec
 
     Wait Until Keyword Succeeds
