@@ -11,6 +11,7 @@ Resource  ../lib/list_utils.robot
 *** Test Cases ***
 Repeated Testing
     [Documentation]  Performs random, repeated IPLs.
+    [Tags]  Repeated_Testing
 
     # Call the Main keyword to prevent any dots from appearing in the console
     # due to top level keywords.
