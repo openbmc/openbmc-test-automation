@@ -217,6 +217,10 @@ Association unchanged after reboot
     ${output}=      Execute Command    /sbin/reboot
     Check If BMC is Up   5 min    10 sec
 
+    @{states}=   Create List   BMC_READY   HOST_POWERED_OFF
+    Wait Until Keyword Succeeds
+    ...    10 min   10 sec   Verify BMC State   ${states}
+
     ${post_reboot_association_content} =
     ...   Read Attribute    ${association_uri}    endpoints
     Should Be Equal
