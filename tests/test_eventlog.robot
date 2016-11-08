@@ -154,6 +154,7 @@ Test events after openbmc reboot
     ...                 Steps:
     ...                     Create event,
     ...                     Reboot openbmc,
+    ...                     Wait for BMC to READY or Powered OFF state
     ...                     Events should exist post reboot,
     ...                     Create two more events,
     ...                     Delete old and new event
@@ -163,10 +164,13 @@ Test events after openbmc reboot
     ${output}=      Execute Command    /sbin/reboot
     Check If BMC is Up   5 min    10 sec
 
+    @{states}=   Create List   BMC_READY   HOST_POWERED_OFF
+    Wait Until Keyword Succeeds
+    ...    10 min   10 sec   Verify BMC State   ${states}
+
     ${resp} =    openbmc get request     ${pre_reboot_event}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${post_reboot_event1}=         create a test log
-    ${post_reboot_event2}=         create a test log
 
     ${del_prereboot_uri} =  catenate    SEPARATOR=   ${pre_reboot_event}   /action/delete
     ${resp} =    openbmc post request     ${del_prereboot_uri}    data=${NIL}
