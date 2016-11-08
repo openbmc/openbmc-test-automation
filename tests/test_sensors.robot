@@ -20,6 +20,7 @@ ${model} =    ${OPENBMC_MODEL}
 
 *** Test Cases ***
 Verify connection
+    [Tags]  Verify_connection
     Execute new Command    echo "hello"
     Response Should Be Equal    "hello"
 
