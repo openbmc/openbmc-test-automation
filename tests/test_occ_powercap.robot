@@ -10,11 +10,14 @@ Resource                ../lib/boot/boot_resource_master.robot
 Suite Setup             Check OCC Readiness
 Test Teardown           Log FFDC
 
+Force Tags   powercapping
+
 *** Test Cases ***
 
 Get OCC status
     [Documentation]     This testcase is to test the OCCstatus for the system
     ...                 is Enabled or not
+    [Tags]  Get_OCC_status
     ${status}=  Get OCC status
     Should Be Equal     ${status}   Enabled
 
@@ -83,6 +86,7 @@ Disable PowerCap
 Get System Power Consumption
     [Documentation]   Get the current system power consumption and check if the
     ...               value is greater than zero
+    [Tags]  Get_System_Power_Consumption
 
     ${resp} =   OpenBMC Get Request   /org/openbmc/sensors/powercap/system_power
     should be equal as strings   ${resp.status_code}   ${HTTP_OK}

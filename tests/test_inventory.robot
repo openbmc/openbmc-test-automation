@@ -15,7 +15,7 @@ Variables         ../data/variables.py
 
 Suite setup        setup the suite
 
-Force Tags  chassisboot
+Force Tags  chassisboot  inventory
 
 *** Test Cases ***
 

@@ -1,0 +1,58 @@
+-e known_issue
+#https://github.com/openbmc/openbmc-test-automation/issues/110
+-e Test_non_SSL_Connection_to_port_443
+#https://github.com/openbmc/openbmc-test-automation/issues/123
+-e Execute_ipmi_BT_capabilities_command
+#https://github.com/openbmc/openbmc/issues/539
+-e Test_Wrong_Reservation_ID
+#https://github.com/openbmc/openbmc/issues/539
+-e Test_Correct_Reservation_ID
+#https://github.com/openbmc/openbmc-test-automation/issues/23
+-e get_names
+#https://github.com/openbmc/openbmc-test-automation/issues/23
+-e get_names_org
+#https://github.com/openbmc/openbmc-test-automation/issues/107
+-e Set_valid_Mac_address
+#https://github.com/openbmc/openbmc-test-automation/issues/107
+-e Revert_old_Mac_addres
+#https://github.com/openbmc/openbmc-test-automation/issues/137
+-e Set_invalid_Mac_address
+#https://github.com/openbmc/openbmc-test-automation/issues/22
+-e Validate_Heartbeat_LEDs_Test_Cases
+-e Validate_Identify_LEDs_Test_Cases
+-e Validate_Beep_LEDs_Test_Cases
+#https://github.com/openbmc/openbmc-test-automation/issues/130
+-e Test_OpenBMC_Services_Autorestart_Policy
+-e Test_Restart_Policy_for_openbmc_service
+#https://github.com/openbmc/openbmc-test-automation/issues/90
+-e Verify_System_VPD_Properties
+#https://github.com/openbmc/openbmc/issues/93
+-e minimal_fan_inventory
+#https://github.com/openbmc/openbmc-test-automation/issues/139
+-e Empty_Fan_Test
+#https://github.com/openbmc/openbmc/issues/612
+-e Create_and_delete_user_group
+-e Create_and_delete_user_without_group_name
+-e Create_and_delete_user_with_user_group_name
+-e Create_multiple_users
+-e Create_and_delete_user_without_password
+-e Set_password_for_existing_user
+-e Set_password_with_empty_password_for_existing
+-e Set_password_for_non_existing_user
+-e Create_existing_user
+-e Create_user_with_no_name
+-e Create_existing_user_group
+-e Create_user_group_with_no_name
+-e Cleanup_Users_List
+#https://github.com/openbmc/openbmc-test-automation/issues/148
+-e Get_System_Time
+-e Set_Valid_System_Time
+-e Set_Invalid_System_Time
+-e Set_System_Time_with_no_time
+#Pre bringup list
+-e Repeated_Testing
+-e power_on_test
+-e inventory
+-e powercapping
+-e io_board_Present
+-e io_board_Fault
