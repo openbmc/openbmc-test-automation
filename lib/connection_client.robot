@@ -3,6 +3,7 @@ Documentation     This module is for SSH connection override to QEMU
 ...               based openbmc systems.
 
 Library           SSHLibrary   timeout=30 seconds
+Library           Telnet  newline=LF
 Library           OperatingSystem
 Library           Collections
 
@@ -51,7 +52,7 @@ Open Connection And Log In
     ...            SSHLibrary.Open connection  &{connection_args}
     ...   ELSE  Run Keyword   SSHLibrary.Open connection  &{connection_args}
 
-    Login  ${username}  ${password}
+    SSHLibrary.Login  ${username}  ${password}
 
 Open Connection for SCP
     Import Library      SCPLibrary      WITH NAME       scp
@@ -134,3 +135,30 @@ Validate Or Open Connection
     # If no connections are found, open a connection with the provided args.
     Log  No connection with provided arguments.  Opening a connection.
     Open Connection and Log In  &{connection_args}
+
+
+Open Telnet Connection to BMC Serial Console
+    [Documentation]   Open telnet connection session to BMC serial console
+    ...               The login prompt expect for an example for barreleye
+    ...               is "barreleye login:"
+
+    Run Keyword If
+    ...  '${TELNET_HOST}' != '${EMPTY}' and '${TELNET_PORT}' != '${EMPTY}' and '${OPENBMC_MODEL}' != '${EMPTY}'
+    ...  Establish Telnet Session
+    ...  ELSE   Fail   msg=One of the paramater is EMPTY
+
+
+Establish Telnet Session
+    [Documentation]   Establish telnet session and set timeout approx
+    ...               5 mins 30 seconds as a round figure for operation
+    ...               like code update, manufacturing test and reboot
+    ...               use case else telnet .
+
+    ${promt_string}   Set Variable   ${OPENBMC_MODEL} login:
+    Telnet.Open Connection    ${TELNET_HOST}  port=${TELNET_PORT}  prompt=#
+    Set Newline    \n
+    Set Newline    CRLF
+    Telnet.Write   \n
+    Telnet.Login   ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ...    login_prompt=${promt_string}   password_prompt=Password:
+    #Telnet.Set Timeout   5 minute 30 seconds

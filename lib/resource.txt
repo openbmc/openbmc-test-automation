@@ -29,6 +29,8 @@ ${PDU_SLOT_NO}      ${EMPTY}
 # User define input SSH and HTTPS related parameters
 ${SSH_PORT}         ${EMPTY}
 ${HTTPS_PORT}       ${EMPTY}
+${TELNET_HOST}      ${EMPTY}
+${TELNET_PORT}      ${EMPTY}
 
 # OS related parameters.
 ${OS_HOST}          ${EMPTY}
