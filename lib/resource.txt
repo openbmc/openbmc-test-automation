@@ -29,6 +29,8 @@ ${PDU_SLOT_NO}      ${EMPTY}
 # User define input SSH and HTTPS related parameters
 ${SSH_PORT}         ${EMPTY}
 ${HTTPS_PORT}       ${EMPTY}
+${OPENBMC_SERIAL_HOST}      ${EMPTY}
+${OPENBMC_SERIAL_PORT}      ${EMPTY}
 
 # OS related parameters.
 ${OS_HOST}          ${EMPTY}

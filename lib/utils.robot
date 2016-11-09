@@ -308,3 +308,10 @@ Verify BMC State
     ${current}=  Get BMC State
     Should Contain  ${expected}   ${current}
 
+
+Read and Log BMC Serial Console Output
+    [Documentation]    Reads everything that is currently available
+    ...                in the output.
+    ${bmc_serial_log}=   Telnet.Read
+    Log   ${bmc_serial_log}
+
