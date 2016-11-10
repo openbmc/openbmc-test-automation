@@ -15,6 +15,13 @@ import socket
 import argparse
 import __builtin__
 import logging
+import collections
+
+running_from_robot = 1
+try:
+    from robot.utils import DotDict
+except ImportError:
+    running_from_robot = 0
 
 import gen_arg as ga
 
@@ -206,7 +213,14 @@ def get_arg_name(var,
     composite_line = lines[0].strip()
 
     called_func_name = sprint_func_name(stack_frame_ix)
-    if not re.match(r".*" + called_func_name, composite_line):
+    # Needed to add a right anchor to func_regex for cases like this where
+    # there is a arg whose name is a substring of the function name.  So the
+    # function name needs to be bounded on the right by zero or more spaces
+    # and a left parenthesis.
+    # if not valid_value(whatever, valid_values=["one", "two"]):
+    func_regex = ".*" + called_func_name + "[ ]*\("
+    # if not re.match(r".*" + called_func_name, composite_line):
+    if not re.match(func_regex, composite_line):
         # The called function name was not found in the composite line.  The
         # caller may be using a function alias.
         # I added code to handle pvar, qpvar, dpvar, etc. aliases.
@@ -214,10 +228,15 @@ def get_arg_name(var,
         # sprint_func_name() returns the non-alias version, i.e. "print_var".
         # Adjusting for that here.
         alias = re.sub("print_var", "pvar", called_func_name)
+        if local_debug:
+            print_varx("alias", alias, 0, debug_indent)
         called_func_name = alias
+        func_regex = ".*" + called_func_name + "[ ]*\("
 
-    arg_list_etc = re.sub(".*" + called_func_name, "", composite_line)
+    # arg_list_etc = re.sub(".*" + called_func_name, "", composite_line)
+    arg_list_etc = "(" + re.sub(func_regex, "", composite_line)
     if local_debug:
+        print_varx("func_regex", func_regex, 0, debug_indent)
         print_varx("called_func_name", called_func_name, 0, debug_indent)
         print_varx("composite_line", composite_line, 0, debug_indent)
         print_varx("arg_list_etc", arg_list_etc, 0, debug_indent)
@@ -457,7 +476,10 @@ def sprint_varx(var_name,
     hex                             This indicates that the value should be
                                     printed in hex format.  It is the user's
                                     responsibility to ensure that a var_value
-                                    contains a valid hex number.
+                                    contains a valid hex number.  For string
+                                    var_values, this will be interpreted as
+                                    show_blanks which means that blank values
+                                    will be printed as "<blank>".
     loc_col1_indent                 The number of spaces to indent the output.
     loc_col1_width                  The width of the output column containing
                                     the variable name.  The default value of
@@ -478,7 +500,12 @@ def sprint_varx(var_name,
         loc_col1_width = loc_col1_width - loc_col1_indent
         # See if the user wants the output in hex format.
         if hex:
-            value_format = "0x%08x"
+            if type(var_value) in (str, unicode):
+                value_format = "%s"
+                if var_value is "":
+                    var_value = "<blank>"
+            else:
+                value_format = "0x%08x"
         else:
             value_format = "%s"
         format_string = "%" + str(loc_col1_indent) + "s%-" \
@@ -495,7 +522,16 @@ def sprint_varx(var_name,
             pass
         ix = 0
         loc_trailing_char = "\n"
-        if type(var_value) is dict:
+        type_is_dict = 0
+        try:
+            if type(var_value) in (dict, collections.OrderedDict):
+                type_is_dict = 1
+        except AttributeError:
+                type_is_dict = 0
+        if running_from_robot:
+            if type(var_value) is DotDict:
+                type_is_dict = 1
+        if type_is_dict:
             for key, value in var_value.iteritems():
                 ix += 1
                 if ix == length:
@@ -794,7 +830,8 @@ def sprint_executing(stack_frame_ix=None):
 
 
 ###############################################################################
-def sprint_pgm_header(indent=0):
+def sprint_pgm_header(indent=0,
+                      linefeed=1):
 
     r"""
     Return a standardized header that programs should print at the beginning
@@ -804,26 +841,37 @@ def sprint_pgm_header(indent=0):
     Description of arguments:
     indent                          The number of characters to indent each
                                     line of output.
+    linefeed                        Indicates whether a line feed be included
+                                    at the beginning and end of the report.
     """
 
-    buffer = "\n"
+    loc_col1_width = col1_width + indent
+
+    buffer = ""
+    if linefeed:
+        buffer = "\n"
 
     buffer += sindent(sprint_time() + "Running " + pgm_name + ".\n", indent)
     buffer += sindent(sprint_time() + "Program parameter values, etc.:\n\n",
                       indent)
-    buffer += sprint_varx("command_line", ' '.join(sys.argv), 0, indent)
+    buffer += sprint_varx("command_line", ' '.join(sys.argv), 0, indent,
+                          loc_col1_width)
     # We want the output to show a customized name for the pid and pgid but
     # we want it to look like a valid variable name.  Therefore, we'll use
     # pgm_name_var_name which was set when this module was imported.
-    buffer += sprint_varx(pgm_name_var_name + "_pid", os.getpid(), 0, indent)
-    buffer += sprint_varx(pgm_name_var_name + "_pgid", os.getpgrp(), 0, indent)
+    buffer += sprint_varx(pgm_name_var_name + "_pid", os.getpid(), 0, indent,
+                          loc_col1_width)
+    buffer += sprint_varx(pgm_name_var_name + "_pgid", os.getpgrp(), 0, indent,
+                          loc_col1_width)
     buffer += sprint_varx("uid", str(os.geteuid()) + " (" + os.getlogin() +
-                          ")", 0, indent)
+                          ")", 0, indent, loc_col1_width)
     buffer += sprint_varx("gid", str(os.getgid()) + " (" +
                           str(grp.getgrgid(os.getgid()).gr_name) + ")", 0,
-                          indent)
-    buffer += sprint_varx("host_name", socket.gethostname(), 0, indent)
-    buffer += sprint_varx("DISPLAY", os.environ['DISPLAY'], 0, indent)
+                          indent, loc_col1_width)
+    buffer += sprint_varx("host_name", socket.gethostname(), 0, indent,
+                          loc_col1_width)
+    buffer += sprint_varx("DISPLAY", os.environ['DISPLAY'], 0, indent,
+                          loc_col1_width)
     # I want to add code to print caller's parms.
 
     # __builtin__.arg_obj is created by the get_arg module function,
@@ -833,7 +881,8 @@ def sprint_pgm_header(indent=0):
     except AttributeError:
         pass
 
-    buffer += "\n"
+    if linefeed:
+        buffer += "\n"
 
     return buffer
 
@@ -878,7 +927,8 @@ def sprint_error_report(error_text="\n",
 
 
 ###############################################################################
-def sissuing(cmd_buf):
+def sissuing(cmd_buf,
+             test_mode=0):
 
     r"""
     Return a line indicating a command that the program is about to execute.
@@ -886,11 +936,20 @@ def sissuing(cmd_buf):
     Sample output for a cmd_buf of "ls"
 
     #(CDT) 2016/08/25 17:57:36 - Issuing: ls
+
     Description of args:
     cmd_buf                         The command to be executed by caller.
+    test_mode                       With test_mode set, your output will look
+                                    like this:
+
+    #(CDT) 2016/08/25 17:57:36 - (test_mode) Issuing: ls
+
     """
 
-    buffer = sprint_time() + "Issuing: " + cmd_buf + "\n"
+    buffer = sprint_time()
+    if test_mode:
+        buffer += "(test_mode) "
+    buffer += "Issuing: " + cmd_buf + "\n"
 
     return buffer
 
@@ -911,6 +970,7 @@ def sprint_pgm_footer():
     total_time_string = "%0.6f" % total_time
 
     buffer += sprint_varx(pgm_name_var_name + "_runtime", total_time_string)
+    buffer += "\n"
 
     return buffer
 
@@ -928,6 +988,25 @@ def sprint(buffer=""):
     Description of arguments.
     buffer                          This will be returned to the caller.
     """
+
+    return str(buffer)
+
+###############################################################################
+
+
+###############################################################################
+def sprintn(buffer=""):
+
+    r"""
+    Simply return the user's buffer with a line feed.  This function is used
+    by the qprint and dprint functions defined dynamically below, i.e. it
+    would not normally be called for general use.
+
+    Description of arguments.
+    buffer                          This will be returned to the caller.
+    """
+
+    buffer = str(buffer) + "\n"
 
     return buffer
 
@@ -959,9 +1038,10 @@ def sprint(buffer=""):
 # func_names contains a list of all print functions which should be created
 # from their sprint counterparts.
 func_names = ['print_time', 'print_timen', 'print_error', 'print_varx',
-              'print_var', 'print_dashes', 'print_call_stack',
+              'print_var', 'print_dashes', 'indent', 'print_call_stack',
               'print_func_name', 'print_executing', 'print_pgm_header',
-              'issuing', 'print_pgm_footer', 'print_error_report', 'print']
+              'issuing', 'print_pgm_footer', 'print_error_report', 'print',
+              'printn']
 
 for func_name in func_names:
     if func_name == "print":
