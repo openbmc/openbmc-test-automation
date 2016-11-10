@@ -177,10 +177,13 @@ def sprint_args(arg_obj,
                                     of output.
     """
 
+    loc_col1_width = gp.col1_width + indent
+
     buffer = ""
 
     for key in arg_obj.__dict__:
-        buffer += gp.sprint_varx(key, getattr(arg_obj, key), 0, indent)
+        buffer += gp.sprint_varx(key, getattr(arg_obj, key), 0, indent,
+                                 loc_col1_width)
 
     return buffer
 
