@@ -12,7 +12,7 @@ Library         ../data/model.py
 
 Suite setup            Setup The Suite
 Suite Teardown         Close All Connections
-Test Teardown          Log FFDC
+Test Teardown          FFDC On Test Case Fail
 
 
 *** Variables ***

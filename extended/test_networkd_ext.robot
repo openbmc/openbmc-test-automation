@@ -9,7 +9,7 @@ Library             ../lib/pythonutil.py
 
 Suite Setup         Open Connection And Log In
 Suite Teardown      Close All Connections
-Test Teardown       Log FFDC
+Test Teardown       FFDC On Test Case Fail
 
 *** Test Cases ***
 

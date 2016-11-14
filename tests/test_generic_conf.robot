@@ -5,7 +5,7 @@ Documentation  This suite will verifiy the Generic Configuration Rest Interfaces
 
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
-Test Teardown     Log FFDC
+Test Teardown     FFDC On Test Case Fail
 
 
 *** Variables ***

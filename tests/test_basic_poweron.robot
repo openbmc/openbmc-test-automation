@@ -23,6 +23,6 @@ power on test
 Test Exit Logs
     [Documentation]    Log FFDC if failed and collect SOL
     ...                Logs for debugging purpose.
-    Log FFDC
+    FFDC On Test Case Fail
     ${sol_log}=    Stop SOL Console Logging
     Log   ${sol_log}

@@ -8,7 +8,7 @@ Resource          ../lib/boot/boot_resource_master.robot
 Library           ../lib/utilities.py
 Library           String
 Library           Collections
-Test Teardown     Log FFDC
+Test Teardown     FFDC On Test Case Fail
 
 Variables         ../data/variables.py
 

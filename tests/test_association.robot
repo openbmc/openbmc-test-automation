@@ -11,7 +11,7 @@ Library           Collections
 Suite Setup       Suite Initialization Setup
 Suite Teardown    Close All Connections
 
-Test Teardown     Log FFDC
+Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
 
