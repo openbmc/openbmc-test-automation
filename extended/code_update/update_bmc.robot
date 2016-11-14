@@ -68,3 +68,11 @@ Initiate Code update BMC
     Check If BMC is Up    30 min   10 sec
     Sleep  1 min
     Validate BMC Version
+
+Test BMC CPU Performance at Ready State
+    Wait Until Keyword Succeeds
+    ...    10 min   10 sec   Verify BMC State   BMC_READY
+    Check BMC CPU Performance
+
+Test BMC Memory Performance at Ready State
+    Check BMC Mem Performance
