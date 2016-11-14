@@ -6,31 +6,31 @@ import string
 
 
 def get_sensor(module_name, value):
-	m = imp.load_source('module.name', module_name)
+    m = imp.load_source('module.name', module_name)
 
-	for i in m.ID_LOOKUP['SENSOR']:
+    for i in m.ID_LOOKUP['SENSOR']:
 
-		if m.ID_LOOKUP['SENSOR'][i] == value:
-			return i
+        if m.ID_LOOKUP['SENSOR'][i] == value:
+            return i
 
-	return 0xFF
-	
+    return 0xFF
+
 
 def get_inventory_sensor (module_name, value):
-	m = imp.load_source('module.name', module_name)
+    m = imp.load_source('module.name', module_name)
 
-	value = string.replace(value, m.INVENTORY_ROOT, '<inventory_root>')
+    value = string.replace(value, m.INVENTORY_ROOT, '<inventory_root>')
 
-	for i in m.ID_LOOKUP['SENSOR']:
+    for i in m.ID_LOOKUP['SENSOR']:
 
-		if m.ID_LOOKUP['SENSOR'][i] == value:
-			return i
+        if m.ID_LOOKUP['SENSOR'][i] == value:
+            return i
 
-	return 0xFF
+    return 0xFF
 
 
 ################################################################
-#  This will return the URI's of the FRU type 
+#  This will return the URI's of the FRU type
 #
 #  i.e.  get_inventory_list('../data/Palmetto.py')
 #
@@ -39,20 +39,20 @@ def get_inventory_sensor (module_name, value):
 ################################################################
 def get_inventory_list(module_name):
 
-	l = []
-	m = imp.load_source('module.name', module_name)
+    l = []
+    m = imp.load_source('module.name', module_name)
 
-	
-	for i in m.ID_LOOKUP['FRU']:
-		s = m.ID_LOOKUP['FRU'][i]
-		s = s.replace('<inventory_root>',m.INVENTORY_ROOT)
-		l.append(s)
-	
-	return l
+
+    for i in m.ID_LOOKUP['FRU']:
+        s = m.ID_LOOKUP['FRU'][i]
+        s = s.replace('<inventory_root>',m.INVENTORY_ROOT)
+        l.append(s)
+
+    return l
 
 
 ################################################################
-#  This will return the URI's of the FRU type 
+#  This will return the URI's of the FRU type
 #
 #  i.e.  get_inventory_fru_type_list('../data/Barreleye.py', 'CPU')
 #
@@ -60,15 +60,15 @@ def get_inventory_list(module_name):
 #   /org/openbmc/inventory//system/chassis/motherboard/cpu1]
 ################################################################
 def  get_inventory_fru_type_list(module_name, fru):
-	l = []
-	m = imp.load_source('module.name', module_name)
+    l = []
+    m = imp.load_source('module.name', module_name)
 
-	for i in m.FRU_INSTANCES.keys():
-		if m.FRU_INSTANCES[i]['fru_type'] == fru:
-			s = i.replace('<inventory_root>',m.INVENTORY_ROOT)
-			l.append(s)
-	
-	return l
+    for i in m.FRU_INSTANCES.keys():
+        if m.FRU_INSTANCES[i]['fru_type'] == fru:
+            s = i.replace('<inventory_root>',m.INVENTORY_ROOT)
+            l.append(s)
+
+    return l
 
 
 ################################################################
@@ -80,17 +80,17 @@ def  get_inventory_fru_type_list(module_name, fru):
 #   /org/openbmc/inventory/system/chassis/motherboard/dimm1]
 ################################################################
 def  get_vpd_inventory_list(module_name, fru):
-	l = []
-	m = imp.load_source('module.name', module_name)
+    l = []
+    m = imp.load_source('module.name', module_name)
 
-	for i in m.ID_LOOKUP['FRU_STR']:
-		x = m.ID_LOOKUP['FRU_STR'][i]
+    for i in m.ID_LOOKUP['FRU_STR']:
+        x = m.ID_LOOKUP['FRU_STR'][i]
 
-		if m.FRU_INSTANCES[x]['fru_type'] == fru:
-			s = x.replace('<inventory_root>',m.INVENTORY_ROOT)
-			l.append(s)
-	
-	return l
+        if m.FRU_INSTANCES[x]['fru_type'] == fru:
+            s = x.replace('<inventory_root>',m.INVENTORY_ROOT)
+            l.append(s)
+
+    return l
 
 
 def call_keyword(keyword):
@@ -98,7 +98,7 @@ def call_keyword(keyword):
 
 
 def main():
-	print get_vpd_inventory_list('../data/Palmetto.py', 'DIMM')
+    print get_vpd_inventory_list('../data/Palmetto.py', 'DIMM')
 
 
 if __name__ == "__main__":

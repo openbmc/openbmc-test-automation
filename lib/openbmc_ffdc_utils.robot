@@ -26,7 +26,7 @@ ${TEST_HISTORY}    ${FFDC_LOG_PATH}${/}test_history.txt
 Get Test Dir and Name
     [Documentation]    SUITE_NAME and TEST_NAME are automatic variables
     ...                and is populated dynamically by the robot framework
-    ...                during execution 
+    ...                during execution
     ${suite_name}=     Get strip string   ${SUITE_NAME}
     ${suite_name}=     Catenate  SEPARATOR=    ${FFDC_TIME}_   ${suite_name}
     ${test_name}=      Get strip string   ${TEST_NAME}
@@ -64,7 +64,7 @@ Header Message
     [Documentation]     Write header message to the report document manifest.
     ...                 TEST_NAME, TEST_MESSAGE,SUITE_SOURCE,TEST_DOCUMENTATION
     ...                 are auto variables and are populated dynamically by the
-    ...                 robot framework during execution 
+    ...                 robot framework during execution
     ...                 1. Writes opening statement headers msg
     ...                 2. Add Test setup and config information
     ...                 3. Types of data collection
@@ -103,11 +103,11 @@ Write Cmd Output to FFDC File
 
 
 Test Setup Info
-    [Documentation]      BMC IP, Model and other information 
+    [Documentation]      BMC IP, Model and other information
 
-    Write Data to File   ${\n}-----------------------${\n} 
+    Write Data to File   ${\n}-----------------------${\n}
     Write Data to File   Test Setup Information:
-    Write Data to File   ${\n}-----------------------${\n} 
+    Write Data to File   ${\n}-----------------------${\n}
     Write Data to File   OPENBMC HOST \t: ${OPENBMC_HOST}${\n}
-    Write Data to File   
+    Write Data to File
     ...   SYSTEM TYPE \t: ${OPENBMC_MODEL.replace('./data/','').replace('.py','')}${\n}${\n}

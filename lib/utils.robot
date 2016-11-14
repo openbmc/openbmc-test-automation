@@ -49,7 +49,7 @@ Initiate Power On
     ${args}=     Create Dictionary    data=@{arglist}
     ${resp}=   Call Method    /org/openbmc/control/chassis0/    powerOn    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    Wait Until Keyword Succeeds	  3 min    	10 sec    Is Power On
+    Wait Until Keyword Succeeds    3 min    10 sec    Is Power On
 
 Initiate Power Off
     [Documentation]  Initiates the power off and waits until the Is Power Off
@@ -58,7 +58,7 @@ Initiate Power Off
     ${args}=     Create Dictionary    data=@{arglist}
     ${resp}=   Call Method    /org/openbmc/control/chassis0/    powerOff   data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    Wait Until Keyword Succeeds	  1 min    	10 sec    Is Power Off
+    Wait Until Keyword Succeeds    1 min    10 sec    Is Power Off
 
 Trigger Warm Reset
     log to console    "Triggering warm reset"
