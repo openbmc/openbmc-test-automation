@@ -15,7 +15,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Library             OperatingSystem
 Library             SSHLibrary
 Library             String
-Test Teardown       Log FFDC
+Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 ${RANDOM_STRING_LENGTH}    ${8}

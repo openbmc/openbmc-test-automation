@@ -7,15 +7,26 @@ Documentation      This module is for triggering data collection on demand
 ...                logs
 ...                └── 20161020045522673810_Myffdc
 ...                    └── 20161020045522673810_MyFFDCLogs
-...                        ├── 20161020045522673810_MyFFDCLogs
-...                        ├── 20161020045522673810_BMC_dmesg
-...                        ├── 20161020045522673810_BMC_inventory
-...                        ├── 20161020045522673810_BMC_journalctl.log
-...                        ├── 20161020045522673810_BMC_led
-...                        ├── 20161020045522673810_BMC_proc_list
-...                        ├── 20161020045522673810_BMC_record_log
-...                        ├── 20161020045522673810_BMC_sensor_list
-...                        └── 20161020045522673810_ffdc_report.txt
+...                        ├── 20161020045522673810_BMC_journalctl.txt
+...                        ├── 20161020045522673810_BMC_proc_list.txt
+...                        ├── 20161020045522673810_BMC_dmesg.txt
+...                        ├── 20161020045522673810_BMC_inventory.txt
+...                        ├── 20161020045522673810_BMC_led.txt
+...                        ├── 20161020045522673810_BMC_record_log.txt
+...                        ├── 20161020045522673810_BMC_sensor_list.txt
+...                        ├── 20161020045522673810_BMC_general.txt
+...                        ├── 20161020045522673810_OS_dmesg.txt
+...                        ├── 20161020045522673810_OS_msglog.txt
+...                        ├── 20161020045522673810_OS_cpufrequency.txt
+...                        ├── 20161020045522673810_OS_boot.txt
+...                        ├── 20161020045522673810_OS_isusb.txt
+...                        ├── 20161020045522673810_OS_kern.txt
+...                        ├── 20161020045522673810_OS_authlog.txt
+...                        ├── 20161020045522673810_OS_syslog.txt
+...                        ├── 20161020045522673810_OS_info.txt
+...                        ├── 20161020045522673810_OS_rsct.txt
+...                        └── 20161020045522673810_OS_secure.txt
+
 
 Resource           ../lib/openbmc_ffdc.robot
 
@@ -31,4 +42,4 @@ My FFDC Logs
 ** Keywords ***
 
 Gather FFDC
-    Run Keyword And Ignore Error   Log FFDC If Test Case Failed
+    Run Keyword And Ignore Error   FFDC

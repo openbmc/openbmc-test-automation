@@ -13,7 +13,7 @@ Resource        ../lib/boot/boot_resource_master.robot
 
 Library         SSHLibrary
 
-Test Teardown   Log FFDC
+Test Teardown   FFDC On Test Case Fail
 Force Tags      chassisboot  bmcreboot
 
 *** Variables ***

@@ -10,7 +10,7 @@ Resource        ../lib/utils.robot
 Suite Setup     Open Connection And Log In
 Suite Teardown  Close All Connections
 Test Setup      Initialize DBUS cmd   "boot_flags"
-Test Teardown   Log FFDC
+Test Teardown   FFDC On Test Case Fail
 *** Variables ***
 
 *** Test Cases ***

@@ -8,7 +8,7 @@ Resource                ../lib/openbmc_ffdc.robot
 Resource                ../lib/boot/boot_resource_master.robot
 
 Suite Setup             Check OCC Readiness
-Test Teardown           Log FFDC
+Test Teardown           FFDC On Test Case Fail
 
 Force Tags   powercapping
 

@@ -39,7 +39,7 @@ BMC Power cycle
 
 Test Exit Logs
     Ping Host  ${OPENBMC_HOST}
-    Log FFDC
+    FFDC On Test Case Fail
 
 
 Validate Parameters

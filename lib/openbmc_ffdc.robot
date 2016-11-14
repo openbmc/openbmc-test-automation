@@ -33,7 +33,7 @@ Resource           openbmc_ffdc_utils.robot
 
 *** Keywords ***
 
-Log FFDC
+FFDC On Test Case Fail
     [Documentation]   Generic FFDC entry point. Place holder to hook in
     ...               other data collection methods
     ...               1. Collect Logs if test fails
@@ -43,12 +43,12 @@ Log FFDC
     ...                      20160822041250969913:Test:Test case 2:FAIL
 
     Run Keyword If  '${TEST_STATUS}' == 'FAIL'
-    ...    Log FFDC If Test Case Failed
+    ...    FFDC
 
     Log Test Case Status
 
 
-Log FFDC If Test Case Failed
+FFDC
     [Documentation]   Main entry point to gather logs on Test case failure
     ...               1. Set global FFDC time reference for a failure
     ...               2. Create FFDC work space directory

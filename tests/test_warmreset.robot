@@ -10,7 +10,7 @@ Force Tags  bmcreboot
 
 Suite Setup             Open Connection And Log In
 Suite Teardown          Close All Connections
-Test Teardown           Log FFDC
+Test Teardown           FFDC On Test Case Fail
 
 *** Variables ***
 ${SYSTEM_SHUTDOWN_TIME}    ${5}
