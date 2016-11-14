@@ -11,6 +11,9 @@ ${SYSTEM_SHUTDOWN_TIME}       ${5}
 ${dbuscmdBase} =    dbus-send --system --print-reply --dest=org.openbmc.settings.Host
 ${dbuscmdGet} =   /org/openbmc/settings/host0  org.freedesktop.DBus.Properties.Get
 ${dbuscmdString} =   string:"org.openbmc.settings.Host" string:
+${bmcmemfree} =   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
+${bmcmemtotal} =   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
+${bmccpuusage} =   top -n 1  | grep CPU: | cut -c 8
 
 *** Keywords ***
 Wait For Host To Ping
@@ -307,4 +310,38 @@ Verify BMC State
 
     ${current}=  Get BMC State
     Should Contain  ${expected}   ${current}
+
+Check BMC CPU Performance at READY State
+    [Documentation]   Minimal 10% of proc should be free
+    # Sample 1
+    ${bmccpuusageoutput}  ${stderr}=  Execute Command  ${bmccpuusage}
+    ...                   return_stderr=True
+    Should be empty  ${stderr}
+    Should be true  ${bmccpuusageoutput} < 9
+
+    # Sample 2
+    ${bmccpuusageoutput}  ${stderr}=  Execute Command  ${bmccpuusage}
+    ...                   return_stderr=True
+    Should be empty  ${stderr}
+    Should be true  ${bmccpuusageoutput} < 9
+
+    # Sample 3
+    ${bmccpuusageoutput}  ${stderr}=  Execute Command  ${bmccpuusage}
+    ...                   return_stderr=True
+    Should be empty  ${stderr}
+    Should be true  ${bmccpuusageoutput} < 9
+
+Check BMC Mem Performance at READY State
+    [Documentation]   Minimal 10% of memory should be free
+    ${bmcmemfreeoutput}  ${stderr}=   Execute Command  ${bmcmemfree}
+    ...                   return_stderr=True
+    Should be empty  ${stderr}
+
+    ${bmcmemtotaloutput}  ${stderr}=   Execute Command  ${bmcmemtotal}
+    ...                   return_stderr=True
+    Should be empty  ${stderr}
+
+    ${bmcmempercentage}=   Evaluate  ${bmcmemfreeoutput}*100
+    ${bmcmempercentage}=  Evaluate  ${bmcmempercentage}/${bmcmemtotaloutput}
+    Should be true  ${bmcmempercentage} > 10
 
