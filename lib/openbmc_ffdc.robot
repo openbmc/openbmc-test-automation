@@ -7,25 +7,25 @@ Documentation      This module is for data collection on test case failure
 ...                logs
 ...                ├── 20160909102538035251_TestWarmreset
 ...                │   └── 20160909102538035251_TestWarmResetviaREST
-...                │       ├── 20160909102538035251_BMC_journalctl
-...                │       ├── 20160909102538035251_BMC_proc_list
-...                │       ├── 20160909102538035251_BMC_dmesg
-...                │       ├── 20160909102538035251_BMC_inventory
-...                │       ├── 20160909102538035251_BMC_led
-...                │       ├── 20160909102538035251_BMC_record_log
-...                │       ├── 20160909102538035251_BMC_sensor_list
+...                │       ├── 20160909102538035251_BMC_journalctl.txt
+...                │       ├── 20160909102538035251_BMC_proc_list.txt
+...                │       ├── 20160909102538035251_BMC_dmesg.txt
+...                │       ├── 20160909102538035251_BMC_inventory.txt
+...                │       ├── 20160909102538035251_BMC_led.txt
+...                │       ├── 20160909102538035251_BMC_record_log.txt
+...                │       ├── 20160909102538035251_BMC_sensor_list.txt
 ...                │       ├── 20160909102538035251_BMC_general.txt
-...                │       ├── 20160909102538035251_OS_dmesg
-...                │       ├── 20160909102538035251_OS_msglog
-...                │       ├── 20160909102538035251_OS_cpufrequency
-...                │       ├── 20160909102538035251_OS_boot
-...                │       ├── 20160909102538035251_OS_isusb
-...                │       ├── 20160909102538035251_OS_kern
-...                │       ├── 20160909102538035251_OS_authlog
-...                │       ├── 20160909102538035251_OS_syslog
-...                │       ├── 20160909102538035251_OS_info
-...                │       ├── 20160909102538035251_OS_rsct
-...                │       └── 20160909102538035251_OS_secure
+...                │       ├── 20160909102538035251_OS_dmesg.txt
+...                │       ├── 20160909102538035251_OS_msglog.txt
+...                │       ├── 20160909102538035251_OS_cpufrequency.txt
+...                │       ├── 20160909102538035251_OS_boot.txt
+...                │       ├── 20160909102538035251_OS_isusb.txt
+...                │       ├── 20160909102538035251_OS_kern.txt
+...                │       ├── 20160909102538035251_OS_authlog.txt
+...                │       ├── 20160909102538035251_OS_syslog.txt
+...                │       ├── 20160909102538035251_OS_info.txt
+...                │       ├── 20160909102538035251_OS_rsct.txt
+...                │       └── 20160909102538035251_OS_secure.txt
 ...                └── test_history.txt
 
 Resource           openbmc_ffdc_methods.robot

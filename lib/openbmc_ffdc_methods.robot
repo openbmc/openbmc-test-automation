@@ -108,7 +108,7 @@ Create File and Write Data
 
     @{cmd_list}=      Get ffdc bmc file   ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \   ${logpath}=  Catenate  SEPARATOR=   ${LOG_PREFIX}   ${cmd[0]}
+    \   ${logpath}=  Catenate  SEPARATOR=   ${LOG_PREFIX}   ${cmd[0]}.txt
     \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
 
 
@@ -146,7 +146,7 @@ Log FFDC Get Requests
 
     @{cmd_list}=  Get ffdc get request  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
+    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
     \   ${resp}=  OpenBMC Get Request  ${cmd[1]}
     \   ${status}=    Run Keyword and Return Status
     ...   Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
@@ -171,7 +171,7 @@ Log OS ALL DISTROS FFDC
 
     @{cmd_list}=  get ffdc os all distros call  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
+    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
     \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
 
 
@@ -183,7 +183,7 @@ Log OS SPECIFIC DISTRO FFDC
 
     @{cmd_list}=  get ffdc os distro call  ${key_index}  ${linux_distro}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
+    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
     \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
 
 
