@@ -304,7 +304,7 @@ response Should Be Equal
 Response Should Be Empty
     Should Be Empty    ${OUTPUT}
 
-Read the Attribute     
+Read the Attribute
     [arguments]    ${uri}    ${parm}
     ${output} =     Read Attribute      ${uri}    ${parm}
     set test variable    ${OUTPUT}     ${output}
