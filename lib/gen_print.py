@@ -500,7 +500,7 @@ def sprint_varx(var_name,
         loc_col1_width = loc_col1_width - loc_col1_indent
         # See if the user wants the output in hex format.
         if hex:
-            if type(var_value) in (str, unicode):
+            if type(var_value) not in (int, long):
                 value_format = "%s"
                 if var_value is "":
                     var_value = "<blank>"
@@ -592,6 +592,79 @@ def sprint_var(*args):
         stack_frame += 1
     var_name = get_arg_name(None, 1, stack_frame)
     return sprint_varx(var_name, *args)
+
+###############################################################################
+
+
+###############################################################################
+def sprint_vars(*args):
+
+    r"""
+    Sprint the values of one or more variables.
+
+    Description of args:
+    args:
+        If the first argument is an integer, it will be interpreted to be the
+        "indent" value.
+        If the second argument is an integer, it will be interpreted to be the
+        "col1_width" value.
+        If the third argument is an integer, it will be interpreted to be the
+        "hex" value.
+        All remaining parms are considered variable names which are to be
+        sprinted.
+    """
+
+    if len(args) == 0:
+        return
+
+    # Get the name of the first variable passed to this function.
+    stack_frame = 2
+    caller_func_name = sprint_func_name(2)
+    if caller_func_name.endswith("print_vars"):
+        stack_frame += 1
+
+    parm_num = 1
+
+    # Create list from args (which is a tuple) so that it can be modified.
+    args_list = list(args)
+
+    var_name = get_arg_name(None, parm_num, stack_frame)
+    # See if parm 1 is to be interpreted as "indent".
+    try:
+        if type(int(var_name)) is int:
+            indent = int(var_name)
+            args_list.pop(0)
+            parm_num += 1
+    except ValueError:
+        indent = 0
+
+    var_name = get_arg_name(None, parm_num, stack_frame)
+    # See if parm 1 is to be interpreted as "col1_width".
+    try:
+        if type(int(var_name)) is int:
+            loc_col1_width = int(var_name)
+            args_list.pop(0)
+            parm_num += 1
+    except ValueError:
+        loc_col1_width = col1_width
+
+    var_name = get_arg_name(None, parm_num, stack_frame)
+    # See if parm 1 is to be interpreted as "hex".
+    try:
+        if type(int(var_name)) is int:
+            hex = int(var_name)
+            args_list.pop(0)
+            parm_num += 1
+    except ValueError:
+        hex = 0
+
+    buffer = ""
+    for var_value in args_list:
+        var_name = get_arg_name(None, parm_num, stack_frame)
+        buffer += sprint_varx(var_name, var_value, hex, indent, loc_col1_width)
+        parm_num += 1
+
+    return buffer
 
 ###############################################################################
 
@@ -927,8 +1000,8 @@ def sprint_error_report(error_text="\n",
 
 
 ###############################################################################
-def sissuing(cmd_buf,
-             test_mode=0):
+def sprint_issuing(cmd_buf,
+                   test_mode=0):
 
     r"""
     Return a line indicating a command that the program is about to execute.
@@ -1038,10 +1111,10 @@ def sprintn(buffer=""):
 # func_names contains a list of all print functions which should be created
 # from their sprint counterparts.
 func_names = ['print_time', 'print_timen', 'print_error', 'print_varx',
-              'print_var', 'print_dashes', 'indent', 'print_call_stack',
-              'print_func_name', 'print_executing', 'print_pgm_header',
-              'issuing', 'print_pgm_footer', 'print_error_report', 'print',
-              'printn']
+              'print_var', 'print_vars', 'print_dashes', 'indent',
+              'print_call_stack', 'print_func_name', 'print_executing',
+              'print_pgm_header', 'print_issuing', 'print_pgm_footer',
+              'print_error_report', 'print', 'printn']
 
 for func_name in func_names:
     if func_name == "print":
