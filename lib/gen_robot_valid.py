@@ -1,0 +1,139 @@
+#!/usr/bin/env python
+
+r"""
+This file contains functions useful for validating variables in robot.
+"""
+
+import gen_robot_print as grp
+import gen_valid as gv
+
+from robot.libraries.BuiltIn import BuiltIn
+from robot.api import logger
+
+
+###############################################################################
+def rvalid_value(var_name,
+                 invalid_values=[],
+                 valid_values=[]):
+
+    r"""
+    rprint stands for "Robot Valid Value".  This function is the robot wrapper
+    for gen_robot_print.svalid_value.
+
+    Description of arguments:
+    var_name                        The name of the variable whose value is to
+                                    be validated.
+    invalid_values                  A list of invalid values.  If var_value is
+                                    equal to any of these, it is invalid.
+                                    Note that if you specify anything for
+                                    invalid_values (below), the valid_values
+                                    list is not even processed.
+    valid_values                    A list of invalid values.  var_value must
+                                    be equal to one of these values to be
+                                    considered valid.
+
+    Examples of robot calls and corresponding output:
+
+    Robot code...
+    rvalid_value                    MY_PARM
+
+    Output...
+    #(CDT) 2016/11/02 10:04:20 - **ERROR** Variable "MY_PARM" not found (i.e.
+    #it's undefined).
+
+    or if it is defined but blank:
+
+    Output...
+    #(CDT) 2016/11/02 10:14:24 - **ERROR** The following variable has an
+    #invalid value:
+    MY_PARM:
+
+    It must NOT be one of the following values:
+    invalid_values:
+      invalid_values[0]:         <blank>
+
+    Robot code...
+    ${invalid_values}=  Create List  one  two  three
+    ${MY_PARM}=  Set Variable  one
+    rvalid_value                    MY_PARM  invalid_values=${invalid_values}
+
+    Output...
+    #(CDT) 2016/11/02 10:20:05 - **ERROR** The following variable has an
+    #invalid value:
+    MY_PARM:                     one
+
+    It must NOT be one of the following values:
+    invalid_values:
+        invalid_values[0]:       one
+        invalid_values[1]:       two
+        invalid_values[2]:       three
+
+    """
+
+    # Note: get_variable_value() seems to have no trouble with local variables.
+    var_value = BuiltIn().get_variable_value("${" + var_name + "}")
+
+    if var_value is None:
+        var_value = ""
+        error_message = "Variable \"" + var_name +\
+                        "\" not found (i.e. it's undefined).\n"
+    else:
+        error_message = gv.svalid_value(var_value, invalid_values,
+                                        valid_values, var_name)
+    if not error_message == "":
+        error_message = grp.sprint_robot_error_report(error_message)
+        BuiltIn().fail(error_message)
+
+###############################################################################
+
+
+###############################################################################
+def rvalid_integer(var_name):
+
+    r"""
+    rprint stands for "Robot Valid Integer".  This function is the robot
+    wrapper for gen_robot_print.svalid_integer.
+
+    Description of arguments:
+    var_name                        The name of the variable whose value is to
+                                    be validated.
+
+    Examples of robot calls and corresponding output:
+
+    Robot code...
+    Rvalid Integer  MY_PARM
+
+    Output...
+    #(CDT) 2016/11/02 10:44:43 - **ERROR** Variable "MY_PARM" not found (i.e.
+    #it's undefined).
+
+    or if it is defined but blank:
+
+    Output...
+    #(CDT) 2016/11/02 10:45:37 - **ERROR** Invalid integer value:
+    MY_PARM:                     <blank>
+
+    Robot code...
+    ${MY_PARM}=  Set Variable  HELLO
+    Rvalid Integer  MY_PARM
+
+    Output...
+    #(CDT) 2016/11/02 10:46:18 - **ERROR** Invalid integer value:
+    MY_PARM:                     HELLO
+
+    """
+
+    # Note: get_variable_value() seems to have no trouble with local variables.
+    var_value = BuiltIn().get_variable_value("${" + var_name + "}")
+
+    if var_value is None:
+        var_value = ""
+        error_message = "Variable \"" + var_name +\
+                        "\" not found (i.e. it's undefined).\n"
+    else:
+        error_message = gv.svalid_integer(var_value, var_name)
+    if not error_message == "":
+        error_message = grp.sprint_robot_error_report(error_message)
+        BuiltIn().fail(error_message)
+
+###############################################################################

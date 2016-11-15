@@ -500,7 +500,7 @@ def sprint_varx(var_name,
         loc_col1_width = loc_col1_width - loc_col1_indent
         # See if the user wants the output in hex format.
         if hex:
-            if type(var_value) in (str, unicode):
+            if type(var_value) not in (int, long):
                 value_format = "%s"
                 if var_value is "":
                     var_value = "<blank>"
