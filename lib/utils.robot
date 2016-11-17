@@ -179,7 +179,7 @@ Is PNOR Flashing
 Is PNOR Flash Done
     [Documentation]  Get BIOS 'Flash Done' status.  This indicates that the
     ...              PNOR flashing has completed.
-    {status}=    Get Flash BIOS Status
+    ${status}=    Get Flash BIOS Status
     should be equal as strings     ${status}     Flash Done
 
 Is System State Host Booted
