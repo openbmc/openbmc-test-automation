@@ -5,6 +5,7 @@ Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/boot/boot_resource_master.robot
 
 Library           Collections
 
@@ -214,6 +215,10 @@ Association unchanged after reboot
     ${pre_reboot_association_content} =
     ...   Read Attribute   ${association_uri}    endpoints
 
+    BMC Power Off
+
+    # BMC power off close down the SSH session connection
+    Open Connection And Log In
     ${output}=      Execute Command    /sbin/reboot
     Check If BMC is Up   5 min    10 sec
 
