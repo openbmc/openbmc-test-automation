@@ -6,6 +6,7 @@ Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/boot/boot_resource_master.robot
 
 Library           Collections
 
@@ -153,6 +154,7 @@ Test events after openbmc reboot
     ...                 openbmc reboot
     ...                 Steps:
     ...                     Create event,
+    ...                     Power off if ON else no-op
     ...                     Reboot openbmc,
     ...                     Wait for BMC to READY or Powered OFF state
     ...                     Events should exist post reboot,
@@ -161,6 +163,10 @@ Test events after openbmc reboot
     [Tags]      bmcreboot
     ${pre_reboot_event}=         create a test log
 
+    BMC Power Off
+
+    # BMC power off close down the SSH session connection
+    Open Connection And Log In
     ${output}=      Execute Command    /sbin/reboot
     Check If BMC is Up   5 min    10 sec
 
