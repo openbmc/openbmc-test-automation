@@ -54,6 +54,9 @@ Initiate Code update BMC
     Wait Until Keyword Succeeds
     ...    10 min   10 sec   Verify BMC State   ${states}
 
+    # TODO: openbmc/openbmc#815
+    Sleep  1 min
+
     Preserve BMC Network Setting
     SCP Tar Image File to BMC   ${FILE_PATH}
 
