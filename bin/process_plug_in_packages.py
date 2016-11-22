@@ -233,9 +233,9 @@ def run_pgm(plug_in_dir_path,
 
     # Get some stats on the file.
     cmd_buf = "stat -c '%n %s %z' " + plug_in_pgm_path
-    dissuing(cmd_buf)
+    dpissuing(cmd_buf)
     sub_proc = subprocess.Popen(cmd_buf, shell=True, stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT)
+                                stderr=subprocess.STDOUT)
     out_buf, err_buf = sub_proc.communicate()
     shell_rc = sub_proc.returncode
     if shell_rc != 0:
@@ -246,15 +246,15 @@ def run_pgm(plug_in_dir_path,
         print(out_buf)
         return rc, shell_rc, failed_plug_in_name
 
-    print("------------------------------------------------ Starting plug-in" +
-          " ------------------------------------------------")
+    print("------------------------------------------------- Starting plug-" +
+          "in -----------------------------------------------")
     print(out_buf)
     cmd_buf = "PATH=" + plug_in_dir_path + ":${PATH} ; " + cp_prefix +\
               call_point
-    issuing(cmd_buf)
+    pissuing(cmd_buf)
 
     sub_proc = subprocess.Popen(cmd_buf, shell=True, stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT)
+                                stderr=subprocess.STDOUT)
     out_buf, err_buf = sub_proc.communicate()
     shell_rc = sub_proc.returncode
     if shell_rc != 0 and shell_rc != int(caller_shell_rc, 16):
@@ -306,10 +306,10 @@ def main():
                                                          mch_class)
 
     qpvar(plug_in_packages_list)
-
     qprint("\n")
 
     caller_shell_rc = shell_rc
+    shell_rc = 0
     failed_plug_in_name = ""
 
     ret_code = 0
