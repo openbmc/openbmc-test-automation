@@ -5,12 +5,19 @@ Resource                ../lib/connection_client.robot
 Library                 DateTime
 Library                 Process
 Library                 OperatingSystem
+Library                 gen_print.py
+Library                 gen_robot_print.py
 
 *** Variables ***
 ${SYSTEM_SHUTDOWN_TIME}       ${5}
-${dbuscmdBase} =    dbus-send --system --print-reply --dest=org.openbmc.settings.Host
-${dbuscmdGet} =   /org/openbmc/settings/host0  org.freedesktop.DBus.Properties.Get
-${dbuscmdString} =   string:"org.openbmc.settings.Host" string:
+${dbuscmdBase}
+...  dbus-send --system --print-reply --dest=org.openbmc.settings.Host
+${dbuscmdGet}
+...  /org/openbmc/settings/host0  org.freedesktop.DBus.Properties.Get
+${dbuscmdString}=   string:"org.openbmc.settings.Host" string:
+
+# Assign default value to QUIET for programs which may not define it.
+${QUIET}  ${0}
 
 *** Keywords ***
 Wait For Host To Ping
@@ -26,12 +33,15 @@ Wait For Host To Ping
 Ping Host
     [Arguments]     ${host}
     Should Not Be Empty    ${host}   msg=No host provided
-    ${RC}   ${output} =     Run and return RC and Output    ping -c 4 ${host}
+    ${RC}   ${output}=     Run and return RC and Output    ping -c 4 ${host}
     Log     RC: ${RC}\nOutput:\n${output}
     Should be equal     ${RC}   ${0}
 
 Get Boot Progress
-    ${state} =     Read Attribute    /org/openbmc/sensors/host/BootProgress    value
+    [Arguments]  ${quiet}=${QUIET}
+
+    ${state}=  Read Attribute  /org/openbmc/sensors/host/BootProgress
+    ...  value  quiet=${quiet}
     [return]  ${state}
 
 Is Power On
@@ -45,26 +55,33 @@ Is Power Off
 Initiate Power On
     [Documentation]  Initiates the power on and waits until the Is Power On
     ...  keyword returns that the power state has switched to on.
+    [Arguments]  ${wait}=${1}
+
     @{arglist}=   Create List
     ${args}=     Create Dictionary    data=@{arglist}
-    ${resp}=   Call Method    /org/openbmc/control/chassis0/    powerOn    data=${args}
+    ${resp}=  Call Method  /org/openbmc/control/chassis0/  powerOn
+    ...  data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    Wait Until Keyword Succeeds    3 min    10 sec    Is Power On
 
+    # Does caller want to wait for power on status?
+    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    Wait Until Keyword Succeeds  3 min  10 sec  Is Power On
 
 Initiate Power Off
     [Documentation]  Initiates the power off and waits until the Is Power Off
     ...  keyword returns that the power state has switched to off.
     @{arglist}=   Create List
     ${args}=     Create Dictionary    data=@{arglist}
-    ${resp}=   Call Method    /org/openbmc/control/chassis0/    powerOff   data=${args}
+    ${resp}=  Call Method  /org/openbmc/control/chassis0/  powerOff
+    ...  data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    Wait Until Keyword Succeeds    1 min    10 sec    Is Power Off
+    Wait Until Keyword Succeeds  1 min  10 sec  Is Power Off
 
 Trigger Warm Reset
     log to console    "Triggering warm reset"
-    ${data} =   create dictionary   data=@{EMPTY}
-    ${resp} =   openbmc post request    /org/openbmc/control/bmc0/action/warmReset     data=${data}
+    ${data}=   create dictionary   data=@{EMPTY}
+    ${resp}=  openbmc post request  /org/openbmc/control/bmc0/action/warmReset
+    ...  data=${data}
     Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
     ${session_active}=   Check If warmReset is Initiated
     Run Keyword If   '${session_active}' == '${True}'
@@ -78,35 +95,55 @@ Check OS
     ...              OS is up by running an SSH command.
 
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
-    ...          ${os_password}=${OS_PASSWORD}
+    ...          ${os_password}=${OS_PASSWORD}  ${quiet}=${QUIET}
+    ...          ${print_string}=${EMPTY}
     [Teardown]  Close Connection
 
     # os_host           The DNS name/IP of the OS host associated with our BMC.
     # os_username       The username to be used to sign on to the OS host.
     # os_password       The password to be used to sign on to the OS host.
+    # quiet             Indicates whether this keyword should write to console.
+    # print_string      A string to be printed before checking the OS.
+
+    rprint  ${print_string}
 
     # Attempt to ping the OS. Store the return code to check later.
     ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${os_host}
 
     Open connection  ${os_host}
-    Login  ${os_username}  ${os_password}
 
+    ${status}  ${msg}=  Run Keyword And Ignore Error  Login  ${os_username}
+    ...  ${os_password}
+    ${err_msg1}=  Sprint Error  ${msg}
+    ${err_msg}=  Catenate  SEPARATOR=  \n  ${err_msg1}
+    Run Keyword If  '${status}' == 'FAIL'  Fail  msg=${err_msg}
     ${output}  ${stderr}  ${rc}=  Execute Command  uptime  return_stderr=True
     ...        return_rc=True
 
-    # If the return code returned by "Execute Command" is non-zero, this keyword
-    # will fail.
-    Should Be Equal  ${rc}      ${0}
+    ${temp_msg}=  Catenate  Could not execute a command on the operating
+    ...  system.\n
+    ${err_msg1}=  Sprint Error  ${temp_msg}
+    ${err_msg}=  Catenate  SEPARATOR=  \n  ${err_msg1}
+
+    # If the return code returned by "Execute Command" is non-zero, this
+    # keyword will fail.
+    Should Be Equal  ${rc}  ${0}  msg=${err_msg}
     # We will likewise fail if there is any stderr data.
     Should Be Empty  ${stderr}
 
-    # We will likewise fail if the OS did not ping, as we could SSH but not ping
-    Should Be Equal As Strings  ${ping_rc}  ${TRUE}
+    ${temp_msg}=  Set Variable  Could not ping the operating system.\n
+    ${err_msg1}=  Sprint Error  ${temp_msg}
+    ${err_msg}=  Catenate  SEPARATOR=  \n  ${err_msg1}
+    # We will likewise fail if the OS did not ping, as we could SSH but not
+    # ping
+    Should Be Equal As Strings  ${ping_rc}  ${TRUE}  msg=${err_msg}
 
 Wait for OS
     [Documentation]  Waits for the host OS to come up via calls to "Check OS".
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}  ${timeout}=${OS_WAIT_TIMEOUT}
+    ...          ${quiet}=${0}
+    [Teardown]  rprintn
 
     # os_host           The DNS name or IP of the OS host associated with our
     #                   BMC.
@@ -114,29 +151,44 @@ Wait for OS
     # os_password       The password to be used to sign on to the OS host.
     # timeout           The timeout in seconds indicating how long you're
     #                   willing to wait for the OS to respond.
+    # quiet             Indicates whether this keyword should write to console.
 
     # The interval to be used between calls to "Check OS".
     ${interval}=  Set Variable  5
 
+    ${message}=  Catenate  Checking every ${interval} seconds for up to
+    ...  ${timeout} seconds for the operating system to communicate.
+    rqprint_timen  ${message}
+
     Wait Until Keyword Succeeds  ${timeout} sec  ${interval}  Check OS
     ...                          ${os_host}  ${os_username}  ${os_password}
+    ...                          print_string=\#
+
+    rqprintn
+
+    rqprint_timen  The operating system is now communicating.
 
 Get BMC State
     [Documentation]  Returns the state of the BMC as a string. (i.e: BMC_READY)
+    [Arguments]  ${quiet}=${QUIET}
+
     @{arglist}=  Create List
     ${args}=  Create Dictionary  data=@{arglist}
     ${resp}=  Call Method  /org/openbmc/managers/System/  getSystemState
-    ...        data=${args}
+    ...        data=${args}  quiet=${quiet}
     Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=  to json  ${resp.content}
     [return]  ${content["data"]}
 
 Get Power State
     [Documentation]  Returns the power state as an integer. Either 0 or 1.
+    [Arguments]  ${quiet}=${QUIET}
+
     @{arglist}=  Create List
     ${args}=  Create Dictionary  data=@{arglist}
+
     ${resp}=  Call Method  /org/openbmc/control/chassis0/  getPowerState
-    ...        data=${args}
+    ...        data=${args}  quiet=${quiet}
     Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=  to json  ${resp.content}
     [return]  ${content["data"]}
@@ -146,7 +198,7 @@ Clear BMC Record Log
     ...              equivalent to ipmitool sel clear.
     @{arglist}=   Create List
     ${args}=     Create Dictionary    data=@{arglist}
-    ${resp}=   Call Method    /org/openbmc/records/events/    clear  data=${args}
+    ${resp}=  Call Method  /org/openbmc/records/events/  clear  data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
 
 Copy PNOR to BMC
@@ -160,7 +212,8 @@ Flash PNOR
     [arguments]    ${pnor_image}
     @{arglist}=   Create List    ${pnor_image}
     ${args}=     Create Dictionary    data=@{arglist}
-    ${resp}=   Call Method    /org/openbmc/control/flash/bios/    update  data=${args}
+    ${resp}=  Call Method  /org/openbmc/control/flash/bios/  update
+    ...  data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     Wait Until Keyword Succeeds    2 min   10 sec    Is PNOR Flashing
 
@@ -188,12 +241,12 @@ Is System State Host Booted
     should be equal as strings     ${state}     HOST_BOOTED
 
 Verify Ping and REST Authentication
-    ${l_ping} =   Run Keyword And Return Status
+    ${l_ping}=   Run Keyword And Return Status
     ...    Ping Host  ${OPENBMC_HOST}
     Run Keyword If  '${l_ping}' == '${False}'
     ...    Fail   msg=Ping Failed
 
-    ${l_rest} =   Run Keyword And Return Status
+    ${l_rest}=   Run Keyword And Return Status
     ...    Initialize OpenBMC
     Run Keyword If  '${l_rest}' == '${False}'
     ...    Fail   msg=REST Authentication Failed
@@ -202,7 +255,6 @@ Verify Ping and REST Authentication
     Open Connection And Log In
     ${system}   ${stderr}=    Execute Command   hostname   return_stderr=True
     Should Be Empty     ${stderr}
-
 
 Check If BMC is Up
     [Documentation]  Wait for Host to be online. Checks every X seconds
@@ -231,8 +283,8 @@ Flush REST Sessions
 Initialize DBUS cmd
     [Documentation]  Initialize dbus string with property string to extract
     [arguments]   ${boot_property}
-    ${cmd} =     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
-    ${cmd} =     Catenate  ${cmd}${boot_property}
+    ${cmd}=     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
+    ${cmd}=     Catenate  ${cmd}${boot_property}
     Set Global Variable   ${dbuscmd}     ${cmd}
 
 
@@ -266,7 +318,7 @@ Stop SOL Console Logging
 
     Open Connection And Log In
 
-    ${pid}  ${stderr} =
+    ${pid}  ${stderr}=
     ...  Execute Command
     ...  ls ${file_path}-${LOG_TIME}_* | cut -d'_' -f 2
     ...  return_stderr=True
@@ -356,4 +408,3 @@ Stop Journal Log
     Execute Command    rm ${file_path}-${LOG_TIME}
 
     [Return]    ${journal_log}
-

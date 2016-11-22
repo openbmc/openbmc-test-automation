@@ -57,26 +57,31 @@ ${HTTP_GATEWAY_TIMEOUT}    504
 ${HTTP_HTTP_VERSION_NOT_SUPPORTED}    505
 ${HTTP_INSUFFICIENT_STORAGE}    507
 ${HTTP_NOT_EXTENDED}    510
+# Assign default value to QUIET for programs which may not define it.
+${QUIET}  ${0}
 
 *** Keywords ***
 OpenBMC Get Request
-    [Arguments]    ${uri}    ${timeout}=10    &{kwargs}
+    [Arguments]    ${uri}    ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
-    Log Request    method=Get    base_uri=${base_uri}    args=&{kwargs}
+    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Get
+    ...  base_uri=${base_uri}  args=&{kwargs}
     Initialize OpenBMC    ${timeout}
-    ${ret}=    Get Request    openbmc    ${base_uri}    &{kwargs}  timeout=${timeout}
-    Log Response    ${ret}
+    ${ret}=  Get Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     [Return]    ${ret}
 
 OpenBMC Post Request
-    [Arguments]    ${uri}    ${timeout}=10    &{kwargs}
+    [Arguments]    ${uri}    ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${headers}=     Create Dictionary   Content-Type=application/json
     set to dictionary   ${kwargs}       headers     ${headers}
-    Log Request    method=Post    base_uri=${base_uri}    args=&{kwargs}
+    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
+    ...  base_uri=${base_uri}  args=&{kwargs}
     Initialize OpenBMC    ${timeout}
-    ${ret}=    Post Request    openbmc    ${base_uri}    &{kwargs}  timeout=${timeout}
-    Log Response    ${ret}
+    ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     [Return]    ${ret}
 
 OpenBMC Put Request
@@ -86,7 +91,7 @@ OpenBMC Put Request
     set to dictionary   ${kwargs}       headers     ${headers}
     Log Request    method=Put    base_uri=${base_uri}    args=&{kwargs}
     Initialize OpenBMC    ${timeout}
-    ${ret}=    Put Request    openbmc    ${base_uri}    &{kwargs}  timeout=${timeout}
+    ${ret}=  Put Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Log Response    ${ret}
     [Return]    ${ret}
 
@@ -95,28 +100,29 @@ OpenBMC Delete Request
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     Log Request    method=Delete    base_uri=${base_uri}    args=&{kwargs}
     Initialize OpenBMC    ${timeout}
-    ${ret}=    Put Request    openbmc    ${base_uri}    &{kwargs}  timeout=${timeout}
+    ${ret}=  Put Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Log Response    ${ret}
     [Return]    ${ret}
 
 Initialize OpenBMC
     [Arguments]    ${timeout}=10
-    Create Session    openbmc    ${AUTH_URI}  timeout=${timeout}   max_retries=3
-    ${headers}=     Create Dictionary   Content-Type=application/json
-    @{credentials} =   Create List     ${OPENBMC_USERNAME}      ${OPENBMC_PASSWORD}
-    ${data} =   create dictionary   data=@{credentials}
-    ${resp} =   Post Request    openbmc    /login    data=${data}   headers=${headers}
+    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}   max_retries=3
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    @{credentials}=  Create List  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ${data}=  create dictionary   data=@{credentials}
+    ${resp}=  Post Request  openbmc  /login  data=${data}  headers=${headers}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
 
 Log Request
     [Arguments]    &{kwargs}
-    ${msg}=    Catenate    SEPARATOR=    URI:    ${AUTH_URI}    ${kwargs["base_uri"]}    , method:
-    ...    ${kwargs["method"]}    , args:    ${kwargs["args"]}
+    ${msg}=  Catenate  SEPARATOR=  URI:  ${AUTH_URI}  ${kwargs["base_uri"]}
+    ...  , method:  ${kwargs["method"]}  , args:  ${kwargs["args"]}
     Logging    ${msg}    console=True
 
 Log Response
     [Arguments]    ${resp}
-    ${msg}=    Catenate    SEPARATOR=    Response code:    ${resp.status_code}    , Content:    ${resp.content}
+    ${msg}=  Catenate  SEPARATOR=  Response code:  ${resp.status_code}
+    ...  , Content:  ${resp.content}
     Logging    ${msg}    console=True
 
 Logging
@@ -124,27 +130,31 @@ Logging
     Log    ${msg}    console=True
 
 Read Attribute
-    [arguments]    ${uri}    ${attr}    ${timeout}=10
-    ${resp} =   OpenBMC Get Request    ${uri}/attr/${attr}    timeout=${timeout}
+    [arguments]    ${uri}    ${attr}    ${timeout}=10  ${quiet}=${QUIET}
+    ${resp}=  OpenBMC Get Request  ${uri}/attr/${attr}  timeout=${timeout}
+    ...  quiet=${quiet}
     ${content}=     To Json    ${resp.content}
     [return]    ${content["data"]}
 
 Write Attribute
     [Arguments]    ${uri}      ${attr}    ${timeout}=10    &{kwargs}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
-    ${resp} =       openbmc put request    ${base_uri}/attr/${attr}    timeout=${timeout}    &{kwargs}
+    ${resp}=  openbmc put request  ${base_uri}/attr/${attr}
+    ...  timeout=${timeout}  &{kwargs}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
 
 Read Properties
     [arguments]    ${uri}    ${timeout}=10
-    ${resp} =   OpenBMC Get Request    ${uri}    timeout=${timeout}
+    ${resp}=   OpenBMC Get Request    ${uri}    timeout=${timeout}
     Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
     ${content}=     To Json    ${resp.content}
     [return]    ${content["data"]}
 
 Call Method
-    [arguments]    ${uri}    ${method}    ${timeout}=10    &{kwargs}
+    [arguments]  ${uri}  ${method}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
-    ${resp} =       openbmc post request    ${base_uri}/action/${method}    timeout=${timeout}    &{kwargs}
+    ${resp}=  OpenBmc Post Request  ${base_uri}/action/${method}
+    ...  timeout=${timeout}  quiet=${quiet}  &{kwargs}
     [return]     ${resp}

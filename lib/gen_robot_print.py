@@ -8,6 +8,14 @@ import sys
 import re
 import os
 
+running_from_robot = 1
+try:
+    from robot.utils import DotDict
+except ImportError:
+    running_from_robot = 0
+    from collections import OrderedDict
+
+
 import gen_print as gp
 
 from robot.libraries.BuiltIn import BuiltIn
@@ -17,7 +25,7 @@ from robot.api import logger
 try:
     # The user can set environment variable "GEN_ROBOT_PRINT_DEBUG" to get
     # debug output from this module.
-    gen_robot_print_debug = os.environ['GEN_ROBOT_PRINT_DEBUG']
+    gen_robot_print_debug = int(os.environ['GEN_ROBOT_PRINT_DEBUG'])
 except KeyError:
     gen_robot_print_debug = 0
 
@@ -180,6 +188,9 @@ def sprint_pgm_header(indent=0):
     buffer += sprint_vars(str(indent), str(loc_col1_width), *parm_list)
     buffer += "\n"
 
+    # Setting global program_pid.
+    BuiltIn().set_global_variable("${program_pid}", os.getpid())
+
     return buffer
 
 ###############################################################################
@@ -309,6 +320,18 @@ robot_func_names =\
         'print_issuing_keyword', 'print_vars', 'print_auto_vars'
     ]
 func_names = gp.func_names + robot_func_names
+
+# Eliminate duplicates from list.
+if running_from_robot:
+    func_names = list(DotDict.fromkeys(func_names))
+else:
+    func_names = list(OrderedDict.fromkeys(func_names))
+
+if gen_robot_print_debug:
+    rprintn()
+    BuiltIn().log_to_console(gp.sprint_var(func_names), no_newline=True)
+    rprintn()
+
 for func_name in func_names:
     # The print_var function's job is to figure out the name of arg 1 and
     # then call print_varx.  This is not currently supported for robot
@@ -332,6 +355,7 @@ for func_name in func_names:
 
     pgm_definition_string = '\n'.join(func_def)
     if gen_robot_print_debug:
+        rprintn()
         rprintn(pgm_definition_string)
     exec(pgm_definition_string)
 
@@ -375,17 +399,20 @@ for func_name in func_names:
         rprintn(pgm_definition_string)
     exec(pgm_definition_string)
 
-    # Create abbreviated aliases (e.g. rpvarx is an alias for rprint_varx).
+    prefixes = ["", "q", "d"]
     alias = re.sub("print_", "p", func_name)
-    cmd_buf = robot_prefix + alias + " = " + robot_prefix + func_name
-    if gen_robot_print_debug:
-        rprintn(cmd_buf)
-    exec(cmd_buf)
+    for prefix2 in prefixes:
+        cmd_buf = robot_prefix + prefix2 + alias + " = " + robot_prefix +\
+            prefix2 + func_name
+        if gen_robot_print_debug:
+            rprintn(cmd_buf)
+        exec(cmd_buf)
 
 # Define an alias.  rpvar is just a special case of rpvars where the args
 # list contains only one element.
 cmd_buf = "rpvar = rpvars"
 if gen_robot_print_debug:
+    rprintn()
     rprintn(cmd_buf)
 exec(cmd_buf)
 
