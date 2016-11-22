@@ -5,31 +5,24 @@ Documentation  This file includes all the varaibles used by obmc_boot_test.robot
 # Alias of the master connection to the BMC
 ${master_alias}  master
 
-# The count of the IPL we're currently doing - used in the FOR loop
-${IPL_COUNT}  ${0}
+# The count of the boot we're currently doing - used in the FOR loop.
+${BOOT_COUNT}  ${0}
 
-# The total number of IPLs we plan on doing
-${IPL_TOTAL}  ${3}
+# The status of the last boots that finished
+${BOOT_STATUS}  ${EMPTY}
 
-# The total number of IPLs that have passed and failed
-${IPL_PASSED}  ${0}
-${IPL_FAILED}  ${0}
-
-# The status of the last IPL that finished
-${IPL_STATUS}  ${EMPTY}
-
-# A list of the last 10 IPLs that have been performed (see Log Last Ten)
+# A list of the last 10 boots that have been performed (see Log Last Ten)
 @{LAST_TEN}
 
-# A list of keywords of valid IPLs that can be performed
+# A list of keywords of valid boots that can be performed
 @{VALID_POWER_ON}  BMC Power On
 @{VALID_POWER_OFF}  BMC Power Off
 #@{VALID_ACCYCLE}
 #@{VALID_REBOOT}
 
-# The master list of all IPLs possible, for reference. (Currently not in use).
-@{MASTER_IPL_LIST}  BMC Power On  BMC Power Off
+# The master list of all boots possible, for reference. (Currently not in use).
+@{MASTER_BOOT_LIST}  BMC Power On  BMC Power Off
 
-# The list of available IPLs - Modifying this will limit what IPLs can be done.
+# The list of available boots - Modifying this will limit what boots can be done.
 # This list is also used by: Setup Run Table, Log Run Table
-@{AVAIL_IPLS}  BMC Power On  BMC Power Off
+@{AVAIL_BOOTS}  BMC Power On  BMC Power Off

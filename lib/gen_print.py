@@ -70,7 +70,7 @@ sprint_time_last_seconds = start_time
 try:
     # The user can set environment variable "GEN_PRINT_DEBUG" to get debug
     # output from this module.
-    gen_print_debug = os.environ['GEN_PRINT_DEBUG']
+    gen_print_debug = int(os.environ['GEN_PRINT_DEBUG'])
 except KeyError:
     gen_print_debug = 0
 
