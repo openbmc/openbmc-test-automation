@@ -17,11 +17,10 @@ import __builtin__
 import logging
 import collections
 
-running_from_robot = 1
 try:
     from robot.utils import DotDict
 except ImportError:
-    running_from_robot = 0
+    pass
 
 import gen_arg as ga
 
@@ -70,7 +69,7 @@ sprint_time_last_seconds = start_time
 try:
     # The user can set environment variable "GEN_PRINT_DEBUG" to get debug
     # output from this module.
-    gen_print_debug = os.environ['GEN_PRINT_DEBUG']
+    gen_print_debug = int(os.environ['GEN_PRINT_DEBUG'])
 except KeyError:
     gen_print_debug = 0
 
@@ -527,10 +526,11 @@ def sprint_varx(var_name,
             if type(var_value) in (dict, collections.OrderedDict):
                 type_is_dict = 1
         except AttributeError:
-                type_is_dict = 0
-        if running_from_robot:
-            if type(var_value) is DotDict:
-                type_is_dict = 1
+            try:
+                if type(var_value) is DotDict:
+                    type_is_dict = 1
+            except NameError:
+                pass
         if type_is_dict:
             for key, value in var_value.iteritems():
                 ix += 1
