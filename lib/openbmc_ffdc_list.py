@@ -101,14 +101,21 @@ FFDC_OS_IBM_POWERKVM_FILE = {
 }
 
 # Add file name and correcponding Get Request
+# Enable when ready with openbmc/openbmc-test-automation#203
+# replace with new path /xyz/openbmc_project
+ENUMERATE_SENSORS = '/org/openbmc/sensors/enumerate'
+ENUMERATE_SYSTEMS = '/org/openbmc/inventory/system/enumerate'
+ENUMERATE_EVENTS = '/org/openbmc/records/events/enumerate'
+ENUMERATE_LED = '/org/openbmc/control/led/enumerate'
+
 FFDC_GET_REQUEST = {
     'GET REQUESTS':
     {
         # File Name         Command
-        'BMC_sensor_list': '/org/openbmc/sensors/enumerate',
-        'BMC_inventory': '/org/openbmc/inventory/system/enumerate',
-        'BMC_led': '/org/openbmc/control/led/enumerate',
-        'BMC_record_log': '/org/openbmc/records/events/enumerate',
+        'BMC_sensor_list': ENUMERATE_SENSORS,
+        'BMC_inventory': ENUMERATE_SYSTEMS,
+        'BMC_led': ENUMERATE_EVENTS,
+        'BMC_record_log': ENUMERATE_LED,
     },
 }
 
