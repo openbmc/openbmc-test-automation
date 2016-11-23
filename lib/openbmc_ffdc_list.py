@@ -9,6 +9,8 @@ r"""
 #############################################################
 """
 
+from robot.libraries.BuiltIn import BuiltIn
+
 # -------------------
 # FFDC default list
 # -------------------
@@ -100,15 +102,24 @@ FFDC_OS_IBM_POWERKVM_FILE = {
     },
 }
 
+# import variables from resource.txt file
+BuiltIn().import_resource('resource.txt')
+OPENBMC_BASE = BuiltIn().get_variable_value('${OPENBMC_BASE_URI}')
+
+ENUMERATE_SENSORS = OPENBMC_BASE + 'sensors/enumerate'
+ENUMERATE_SYSTEMS = OPENBMC_BASE + 'inventory/system/enumerate'
+ENUMERATE_EVENTS = OPENBMC_BASE + 'records/events/enumerate'
+ENUMERATE_LED = OPENBMC_BASE + 'control/led/enumerate'
+
 # Add file name and correcponding Get Request
 FFDC_GET_REQUEST = {
     'GET REQUESTS':
     {
         # File Name         Command
-        'BMC_sensor_list': '/org/openbmc/sensors/enumerate',
-        'BMC_inventory': '/org/openbmc/inventory/system/enumerate',
-        'BMC_led': '/org/openbmc/control/led/enumerate',
-        'BMC_record_log': '/org/openbmc/records/events/enumerate',
+        'BMC_sensor_list': ENUMERATE_SENSORS,
+        'BMC_inventory': ENUMERATE_SYSTEMS,
+        'BMC_led': ENUMERATE_EVENTS,
+        'BMC_record_log': ENUMERATE_LED,
     },
 }
 
