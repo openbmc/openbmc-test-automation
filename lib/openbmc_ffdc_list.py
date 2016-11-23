@@ -9,8 +9,6 @@ r"""
 #############################################################
 """
 
-from robot.libraries.BuiltIn import BuiltIn
-
 # -------------------
 # FFDC default list
 # -------------------
@@ -102,10 +100,9 @@ FFDC_OS_IBM_POWERKVM_FILE = {
     },
 }
 
-# import variables from resource.txt file
-BuiltIn().import_resource('resource.txt')
-OPENBMC_BASE = BuiltIn().get_variable_value('${OPENBMC_BASE_URI}')
-
+# Enable when ready with openbmc/openbmc-test-automation#203
+# replace with new path /xyz/openbmc_project
+OPENBMC_BASE = '/org/openbmc/'
 ENUMERATE_SENSORS = OPENBMC_BASE + 'sensors/enumerate'
 ENUMERATE_SYSTEMS = OPENBMC_BASE + 'inventory/system/enumerate'
 ENUMERATE_EVENTS = OPENBMC_BASE + 'records/events/enumerate'

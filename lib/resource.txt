@@ -6,7 +6,7 @@ Library           OperatingSystem
 Variables         ../data/variables.py
 
 *** Variables ***
-${OPENBMC_HOST}    9.3.164.161
+${OPENBMC_HOST}   ${EMPTY}
 ${DBUS_PREFIX}    ${EMPTY}
 ${PORT}           ${EMPTY}
 # AUTH_SUFFIX here is derived from variables.py
@@ -37,6 +37,10 @@ ${OS_HOST}          ${EMPTY}
 ${OS_USERNAME}      ${EMPTY}
 ${OS_PASSWORD}      ${EMPTY}
 ${OS_WAIT_TIMEOUT}  ${15*60}
+
+# OpenBMC base URI path is changing to /xyz/openbmc_project
+${OPENBMC_BASE_URI}    /org/openbmc/
+${OPENBMC_BASE_DBUS}   org.openbmc
 
 *** Keywords ***
 Get Inventory Schema
