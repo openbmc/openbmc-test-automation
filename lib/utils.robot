@@ -8,9 +8,11 @@ Library                 OperatingSystem
 
 *** Variables ***
 ${SYSTEM_SHUTDOWN_TIME}       ${5}
-${dbuscmdBase} =    dbus-send --system --print-reply --dest=org.openbmc.settings.Host
-${dbuscmdGet} =   /org/openbmc/settings/host0  org.freedesktop.DBus.Properties.Get
+${dbuscmdBase} =    dbus-send --system --print-reply --dest=${OPENBMC_BASE_DBUS}.settings.Host
+${dbuscmdGet} =     ${OPENBMC_BASE_URI}settings/host0  org.freedesktop.DBus.Properties.Get
+# Enable when ready with openbmc/openbmc-test-automation#203
 ${dbuscmdString} =   string:"org.openbmc.settings.Host" string:
+#${dbuscmdString} =   string:"xyz.openbmc_project.settings.Host" string:
 
 *** Keywords ***
 Wait For Host To Ping
@@ -31,7 +33,7 @@ Ping Host
     Should be equal     ${RC}   ${0}
 
 Get Boot Progress
-    ${state} =     Read Attribute    /org/openbmc/sensors/host/BootProgress    value
+    ${state} =     Read Attribute    ${OPENBMC_BASE_URI}sensors/host/BootProgress    value
     [return]  ${state}
 
 Is Power On
@@ -47,7 +49,7 @@ Initiate Power On
     ...  keyword returns that the power state has switched to on.
     @{arglist}=   Create List
     ${args}=     Create Dictionary    data=@{arglist}
-    ${resp}=   Call Method    /org/openbmc/control/chassis0/    powerOn    data=${args}
+    ${resp}=   Call Method    ${OPENBMC_BASE_URI}control/chassis0/    powerOn    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     Wait Until Keyword Succeeds    3 min    10 sec    Is Power On
 
@@ -57,14 +59,15 @@ Initiate Power Off
     ...  keyword returns that the power state has switched to off.
     @{arglist}=   Create List
     ${args}=     Create Dictionary    data=@{arglist}
-    ${resp}=   Call Method    /org/openbmc/control/chassis0/    powerOff   data=${args}
+    ${resp}=   Call Method    ${OPENBMC_BASE_URI}control/chassis0/    powerOff   data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     Wait Until Keyword Succeeds    1 min    10 sec    Is Power Off
 
 Trigger Warm Reset
     log to console    "Triggering warm reset"
     ${data} =   create dictionary   data=@{EMPTY}
-    ${resp} =   openbmc post request    /org/openbmc/control/bmc0/action/warmReset     data=${data}
+    ${resp} =   openbmc post request
+    ...   ${OPENBMC_BASE_URI}control/bmc0/action/warmReset     data=${data}
     Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
     ${session_active}=   Check If warmReset is Initiated
     Run Keyword If   '${session_active}' == '${True}'
@@ -125,7 +128,7 @@ Get BMC State
     [Documentation]  Returns the state of the BMC as a string. (i.e: BMC_READY)
     @{arglist}=  Create List
     ${args}=  Create Dictionary  data=@{arglist}
-    ${resp}=  Call Method  /org/openbmc/managers/System/  getSystemState
+    ${resp}=  Call Method  ${OPENBMC_BASE_URI}managers/System/  getSystemState
     ...        data=${args}
     Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=  to json  ${resp.content}
@@ -135,7 +138,7 @@ Get Power State
     [Documentation]  Returns the power state as an integer. Either 0 or 1.
     @{arglist}=  Create List
     ${args}=  Create Dictionary  data=@{arglist}
-    ${resp}=  Call Method  /org/openbmc/control/chassis0/  getPowerState
+    ${resp}=  Call Method  ${OPENBMC_BASE_URI}control/chassis0/  getPowerState
     ...        data=${args}
     Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=  to json  ${resp.content}
@@ -146,7 +149,7 @@ Clear BMC Record Log
     ...              equivalent to ipmitool sel clear.
     @{arglist}=   Create List
     ${args}=     Create Dictionary    data=@{arglist}
-    ${resp}=   Call Method    /org/openbmc/records/events/    clear  data=${args}
+    ${resp}=   Call Method    ${OPENBMC_BASE_URI}records/events/    clear  data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
 
 Copy PNOR to BMC
@@ -160,14 +163,14 @@ Flash PNOR
     [arguments]    ${pnor_image}
     @{arglist}=   Create List    ${pnor_image}
     ${args}=     Create Dictionary    data=@{arglist}
-    ${resp}=   Call Method    /org/openbmc/control/flash/bios/    update  data=${args}
+    ${resp}=   Call Method    ${OPENBMC_BASE_URI}control/flash/bios/    update  data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     Wait Until Keyword Succeeds    2 min   10 sec    Is PNOR Flashing
 
 Get Flash BIOS Status
     [Documentation]  Returns the status of the flash BIOS API as a string. For
     ...              example 'Flashing', 'Flash Done', etc
-    ${data}=      Read Properties     /org/openbmc/control/flash/bios
+    ${data}=      Read Properties    ${OPENBMC_BASE_URI}control/flash/bios
     [return]    ${data['status']}
 
 Is PNOR Flashing
