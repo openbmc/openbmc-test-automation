@@ -45,4 +45,5 @@
 -e Set_Valid_System_Time
 -e Set_Invalid_System_Time
 -e Set_System_Time_with_no_time
-
+#https://github.com/openbmc/openbmc/issues/811
+-e powercapping
