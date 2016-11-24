@@ -41,7 +41,9 @@ Set IP address on valid Interface
 
     ${arglist}=    Create List    eth0    ${NEW_IP}   ${NEW_MASK}   ${NEW_GATEWAY}
     ${args}=     Create Dictionary   data=@{arglist}
-    run keyword and ignore error    Call Method    /org/openbmc/NetworkManager/Interface/   SetAddress4    data=${args}
+    run keyword and ignore error
+    ...   Call Method
+    ...   ${OPENBMC_BASE_URI}NetworkManager/Interface/   SetAddress4    data=${args}
 
     Wait For Host To Ping       ${NEW_IP}
     Set Suite Variable      ${AUTH_URI}       https://${NEW_IP}
@@ -66,7 +68,9 @@ Revert the last ip address change
 
     ${arglist}=    Create List    eth0       ${OLD_IP}    ${OLD_MASK}   ${OLD_GATEWAY}
     ${args}=     Create Dictionary   data=@{arglist}
-    run keyword and ignore error    Call Method    /org/openbmc/NetworkManager/Interface/   SetAddress4    data=${args}
+    run keyword and ignore error
+    ...    Call Method
+    ...    ${OPENBMC_BASE_URI}NetworkManager/Interface/   SetAddress4    data=${args}
 
     Wait For Host To Ping       ${OLD_IP}
     Set Suite Variable      ${AUTH_URI}    https://${OLD_IP}
@@ -142,7 +146,8 @@ Get networkInfo from the interface
     [arguments]    ${intf}
     @{arglist}=    Create List   ${intf}
     ${args}=       Create Dictionary   data=@{arglist}
-    ${resp}=       Call Method    /org/openbmc/NetworkManager/Interface/   GetAddress4    data=${args}
+    ${resp}=       Call Method
+    ...    ${OPENBMC_BASE_URI}NetworkManager/Interface/   GetAddress4    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
     Log   ${json['data'][2]}
@@ -165,7 +170,8 @@ SetMacAddress_bad
     [Arguments]    ${intf}      ${address}    ${result}
     ${arglist}=    Create List    ${intf}    ${address}
     ${args}=       Create Dictionary   data=@{arglist}
-    ${resp}=       Call Method    /org/openbmc/NetworkManager/Interface/   SetHwAddress    data=${args}
+    ${resp}=       Call Method
+    ...   ${OPENBMC_BASE_URI}NetworkManager/Interface/   SetHwAddress    data=${args}
     should not be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       ${result}
@@ -175,7 +181,8 @@ SetMacAddress_good
     [Arguments]    ${intf}      ${address}   ${result}
     ${arglist}=    Create List    ${intf}    ${address}
     ${args}=       Create Dictionary   data=@{arglist}
-    ${resp}=       Call Method    /org/openbmc/NetworkManager/Interface/   SetHwAddress    data=${args}
+    ${resp}=       Call Method
+    ...    ${OPENBMC_BASE_URI}NetworkManager/Interface/   SetHwAddress    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       ${result}
@@ -185,6 +192,7 @@ SetMacAddress_good
 
     @{arglist}=   Create List   ${intf}
     ${args}=     Create Dictionary   data=@{arglist}
-    ${resp}=   Call Method    /org/openbmc/NetworkManager/Interface/    GetHwAddress    data=${args}
+    ${resp}=   Call Method
+    ...    ${OPENBMC_BASE_URI}NetworkManager/Interface/    GetHwAddress    data=${args}
     ${json} =   to json         ${resp.content}
     should be equal as strings   ${json['data']}    ${address}

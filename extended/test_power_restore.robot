@@ -17,7 +17,7 @@ Test Teardown   FFDC On Test Case Fail
 Force Tags      chassisboot  bmcreboot
 
 *** Variables ***
-${HOST_SETTING}    /org/openbmc/settings/host0
+${HOST_SETTING}    ${OPENBMC_BASE_URI}settings/host0
 
 *** Test Cases ***
 

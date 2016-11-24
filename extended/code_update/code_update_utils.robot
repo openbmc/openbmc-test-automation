@@ -8,10 +8,10 @@ Library          OperatingSystem
 
 *** Variables ***
 
-${BMC_UPD_METHOD}    /org/openbmc/control/flash/bmc/action/update
-${BMC_PREP_METHOD}   /org/openbmc/control/flash/bmc/action/PrepareForUpdate
-${BMC_UPD_ATTR}      /org/openbmc/control/flash/bmc
-${HOST_SETTING}      /org/openbmc/settings/host0
+${BMC_UPD_METHOD}    ${OPENBMC_BASE_URI}control/flash/bmc/action/update
+${BMC_PREP_METHOD}   ${OPENBMC_BASE_URI}control/flash/bmc/action/PrepareForUpdate
+${BMC_UPD_ATTR}      ${OPENBMC_BASE_URI}control/flash/bmc
+${HOST_SETTING}      ${OPENBMC_BASE_URI}settings/host0
 
 *** Keywords ***
 
