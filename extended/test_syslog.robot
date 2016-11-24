@@ -25,13 +25,16 @@ Get all Syslog settings
     ...                 This testcase is to get all syslog settings from
     ...                 open bmc system.\n
 
-    ${ip_address} =    Read Attribute    /org/openbmc/LogManager/rsyslog   ipaddr
+    ${ip_address} =    Read Attribute
+    ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   ipaddr
     Should Not Be Empty     ${ip_address}
 
-    ${port} =    Read Attribute    /org/openbmc/LogManager/rsyslog   port
+    ${port} =    Read Attribute
+    ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   port
     Should Not Be Empty     ${port}
 
-    ${status} =    Read Attribute    /org/openbmc/LogManager/rsyslog   status
+    ${status} =    Read Attribute
+    ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   status
     Should Not Be Empty     ${status}
 
 Enable syslog with port number and IP address
@@ -41,9 +44,11 @@ Enable syslog with port number and IP address
 
     ${resp} =    Enable Syslog Setting    ${SYSLOG_IP_ADDRESS}    ${SYSLOG_PORT}
     Should Be Equal    ${resp}    ok
-    ${ip}=   Read Attribute   /org/openbmc/LogManager/rsyslog   ipaddr
+    ${ip}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   ipaddr
     Should Be Equal    ${ip}    ${SYSLOG_IP_ADDRESS}
-    ${port}=   Read Attribute   /org/openbmc/LogManager/rsyslog   port
+    ${port}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   port
     Should Be Equal    ${port}    ${SYSLOG_PORT}
 
 Enable syslog without IP address and port number
@@ -53,7 +58,8 @@ Enable syslog without IP address and port number
 
     ${resp} =    Enable Syslog Setting    ${EMPTY}    ${EMPTY}
     Should Be Equal    ${resp}    ok
-    ${status}=   Read Attribute   /org/openbmc/LogManager/rsyslog   status
+    ${status}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   status
     Should Be Equal    ${status}    Enabled
 
 Enable syslog with only IP address
@@ -62,22 +68,27 @@ Enable syslog with only IP address
 
     ${resp} =    Enable Syslog Setting    ${SYSLOG_IP_ADDRESS}    ${EMPTY}
     Should Be Equal    ${resp}    ok
-    ${ip}=   Read Attribute   /org/openbmc/LogManager/rsyslog   ipaddr
+    ${ip}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   ipaddr
     Should Be Equal    ${ip}    ${SYSLOG_IP_ADDRESS}
-    ${status}=   Read Attribute   /org/openbmc/LogManager/rsyslog   status
+    ${status}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   status
     Should Be Equal    ${status}    Enabled
 
 Enable Syslog with only port number
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is to enable syslog with only port number.\n
 
-    ${status}=   Read Attribute   /org/openbmc/LogManager/rsyslog   status
+    ${status}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   status
     Should Be Equal    ${status}    Enabled
     ${resp} =    Enable Syslog Setting    ${EMPTY}    ${SYSLOG_PORT}
     Should Be Equal    ${resp}    ok
-    ${port}=   Read Attribute   /org/openbmc/LogManager/rsyslog   port
+    ${port}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   port
     Should Be Equal    ${port}    ${SYSLOG_PORT}
-    ${status}=   Read Attribute   /org/openbmc/LogManager/rsyslog   status
+    ${status}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   status
     Should Be Equal    ${status}    Enabled
 
 Disable Syslog
@@ -86,7 +97,8 @@ Disable Syslog
 
     ${resp} =    Disable Syslog Setting    ${EMPTY}
     Should Be Equal    ${resp}    ok
-    ${status}=   Read Attribute   /org/openbmc/LogManager/rsyslog   status
+    ${status}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   status
     Should Be Equal    Disable    ${status}
 
 Enable invalid ip for Syslog remote server
@@ -111,18 +123,24 @@ Persistency check for syslog setting
     ...               after service processor reboot.
     [Tags]  bmcreboot
 
-    ${old_ip}=   Read Attribute   /org/openbmc/LogManager/rsyslog   ipaddr
-    ${old_port}=   Read Attribute   /org/openbmc/LogManager/rsyslog   port
-    ${old_status} =    Read Attribute    /org/openbmc/LogManager/rsyslog   status
+    ${old_ip}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   ipaddr
+    ${old_port}=   Read Attribute
+    ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   port
+    ${old_status} =    Read Attribute
+    ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   status
     
     ${output}=      Execute Command    /sbin/reboot
     Sleep   ${SYSTEM_SHUTDOWN_TIME}
     Wait For Host To Ping   ${OPENBMC_HOST}
     Sleep   ${WAIT_FOR_SERVICES_UP}
 
-    ${ip_address} =    Read Attribute    /org/openbmc/LogManager/rsyslog   ipaddr
-    ${port} =    Read Attribute    /org/openbmc/LogManager/rsyslog   port
-    ${status} =    Read Attribute    /org/openbmc/LogManager/rsyslog   status
+    ${ip_address} =    Read Attribute
+    ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   ipaddr
+    ${port} =    Read Attribute
+    ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   port
+    ${status} =    Read Attribute
+    ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   status
 
     Should Be Equal    ${old_ip}    ${ip_address}
     Should Be Equal    ${old_port}    ${port}
@@ -135,7 +153,8 @@ Enable Syslog Setting
     ${MYDICT}=  create Dictionary   ipaddr=${ipaddr}  port=${port}
     @{rsyslog} =   Create List     ${MYDICT}
     ${data} =   create dictionary   data=@{rsyslog}
-    ${resp} =   openbmc post request    /org/openbmc/LogManager/rsyslog/action/Enable     data=${data}
+    ${resp} =   openbmc post request
+    ...    ${OPENBMC_BASE_URI}LogManager/rsyslog/action/Enable     data=${data}
     ${jsondata} =    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
@@ -143,6 +162,7 @@ Disable Syslog Setting
     [Arguments]    ${args}
     @{setting_list} =   Create List     ${args}
     ${data} =   create dictionary   data=@{setting_list}
-    ${resp} =   OpenBMC Post Request    /org/openbmc/LogManager/rsyslog/action/Disable      data=${data}
+    ${resp} =   OpenBMC Post Request
+    ...    ${OPENBMC_BASE_URI}LogManager/rsyslog/action/Disable      data=${data}
     ${jsondata} =    to json    ${resp.content}
     [return]    ${jsondata['status']}
