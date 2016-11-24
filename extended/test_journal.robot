@@ -22,10 +22,10 @@ Get Request Journal Log
 
     Start Journal Log
 
-    openbmc get request     /org/openbmc/
+    openbmc get request     ${OPENBMC_BASE_URI}
 
     ${output}=    Stop Journal Log
-    Should Contain   ${output}    GET /org/openbmc/ HTTP/1.1
+    Should Contain   ${output}    GET ${OPENBMC_BASE_URI} HTTP/1.1
 
 Post Request Journal Log
     [Documentation]   This testcase is to verify that proper log is logged in
@@ -34,10 +34,10 @@ Post Request Journal Log
 
     Start Journal Log
 
-    openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}
+    openbmc post request     ${OPENBMC_BASE_URI}records/events/action/clear    data=${NIL}
 
     ${output}=    Stop Journal Log
-    Should Contain   ${output}    POST /org/openbmc/records/events/action/clear HTTP/1.1
+    Should Contain   ${output}    POST ${OPENBMC_BASE_URI}records/events/action/clear HTTP/1.1
 
 Put Request Journal Log
     [Documentation]   This testcase is to verify that proper log is logged in
@@ -48,10 +48,10 @@ Put Request Journal Log
 
     ${bootpolicy} =   Set Variable   ONETIME
     ${valueDict} =   create dictionary   data=${bootpolicy}
-    openbmc put request  /org/openbmc/settings/host0/attr/boot_policy   data=${valueDict}
+    openbmc put request  ${OPENBMC_BASE_URI}settings/host0/attr/boot_policy   data=${valueDict}
 
     ${output}=    Stop Journal Log
-    Should Contain   ${output}    PUT /org/openbmc/settings/host0/attr/boot_policy HTTP/1.1
+    Should Contain   ${output}    PUT ${OPENBMC_BASE_URI}settings/host0/attr/boot_policy HTTP/1.1
 
 *** Keywords ***
 
