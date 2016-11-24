@@ -50,7 +50,6 @@ Run Dbus IPMI RAW Command
 
 Run Dbus IPMI Standard Command
     [arguments]    ${args}
-    Copy ipmitool
     ${stdout}    ${stderr}    ${output}=  Execute Command
     ...    /tmp/ipmitool -I dbus ${args}    return_stdout=True
     ...    return_stderr= True    return_rc=True
@@ -137,12 +136,3 @@ Set Array Byte
    ${arrayByteLocal} =   Catenate   SEPARATOR=  ${arrayByteLocal}   ,
    Set Global Variable  ${arrayByte}   ${arrayByteLocal}
 
-Copy ipmitool
-    OperatingSystem.File Should Exist   tools/ipmitool      msg=The ipmitool program could not be found in the tools directory. It is not part of the automation code by default. You must manually copy or link the correct openbmc version of the tool in to the tools directory in order to run this test suite.
-
-    Import Library      SCPLibrary      WITH NAME       scp
-    scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}
-    scp.Put File    tools/ipmitool   /tmp
-    SSHLibrary.Open Connection     ${OPENBMC_HOST}
-    Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
-    Execute Command     chmod +x /tmp/ipmitool

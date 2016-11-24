@@ -134,3 +134,17 @@ Validate Or Open Connection
     # If no connections are found, open a connection with the provided args.
     Log  No connection with provided arguments.  Opening a connection.
     Open Connection and Log In  &{connection_args}
+
+Copy ipmitool
+    SSHLibrary.Open Connection  ${IPMITOOL_HOST}
+    Login    ${IPMITOOL_HOST_USERNAME}  ${IPMITOOL_HOST_PWD}
+    OperatingSystem.File Should Exist   ${IPMITOOL_PATH}/ipmitool      msg=The ipmitool program could not be found in the tools directory. It is not part of the automation code by default. You must manually copy or link the correct openbmc version of the tool in to the tools directory in order to run this test suite.
+
+    Import Library      SCPLibrary      WITH NAME       scp
+    scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}
+    scp.Put File    ${IPMITOOL_PATH}/ipmitool   /tmp
+    SSHLibrary.Open Connection     ${OPENBMC_HOST}
+    Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
+    Execute Command     chmod +x /tmp/ipmitool
+
+

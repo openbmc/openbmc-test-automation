@@ -128,3 +128,10 @@ Jenkins jobs tox commands
     $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile test_lists/HW_CI tests
 
 ```
+
+IPMItool copy command
+```shell
+    
+    Please ensure ipmitool is build in any given system and collect system details need to set the environment variables.
+    Set the preset environment variables as follows:
+    $ IPMITOOL_HOST=x.x.x.x IPMITOOL_HOST_USERNAME=<login id> IPMITOOL_HOST_PWD=<password> IPMITOOL_PATH=<path of ipmitool> OPENBMC_HOST=x.x.x.x tox -e barreleye -- extended/test_ipmitool_copy_bmc.robot
