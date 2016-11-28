@@ -14,12 +14,12 @@ Open Telnet Connection to BMC Serial Console
     ...               The login prompt expected, for example, for barreleye
     ...               is "barreleye login:"
     [Arguments]   ${i_host}=${OPENBMC_SERIAL_HOST}
-    ...           ${i_port}=OPENBMC_SERIAL_PORT
+    ...           ${i_port}=${OPENBMC_SERIAL_PORT}
     ...           ${i_model}=${OPENBMC_MODEL}
 
     Run Keyword If
     ...  '${i_host}' != '${EMPTY}' and '${i_port}' != '${EMPTY}' and '${i_model}' != '${EMPTY}'
-    ...  Establish Telnet Session
+    ...  Establish Telnet Session on BMC Serial Console
     ...  ELSE   Fail   msg=One of the paramaters is EMPTY
 
 
@@ -28,7 +28,8 @@ Establish Telnet Session on BMC Serial Console
     ...               30 secs.
 
     ${prompt_string}   Set Variable   ${OPENBMC_MODEL} login:
-    Telnet.Open Connection    ${TELNET_HOST}  port=${TELNET_PORT}  prompt=#
+    Telnet.Open Connection
+    ...   ${OPENBMC_SERIAL_HOST}  port=${OPENBMC_SERIAL_PORT}  prompt=#
     Set Newline    \n
     Set Newline    CRLF
     Telnet.Write   \n
