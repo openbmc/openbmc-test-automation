@@ -14,7 +14,7 @@ Open Telnet Connection to BMC Serial Console
     ...               The login prompt expected, for example, for barreleye
     ...               is "barreleye login:"
     [Arguments]   ${i_host}=${OPENBMC_SERIAL_HOST}
-    ...           ${i_port}=OPENBMC_SERIAL_PORT
+    ...           ${i_port}=${OPENBMC_SERIAL_PORT}
     ...           ${i_model}=${OPENBMC_MODEL}
 
     Run Keyword If
