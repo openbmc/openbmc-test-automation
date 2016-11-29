@@ -19,8 +19,7 @@ ${SYSTEM_SHUTDOWN_TIME}    ${5}
 
 Test WarmReset via REST
     [Documentation]   This testcase is to verify warm reset using REST.
-    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/519
-    [Tags]  known_issue
+    [Tags]  Test_WarmReset_via_REST
 
     ${warm_test_file}=  Set Variable    /tmp/before_warmreset
     Open Connection And Log In
