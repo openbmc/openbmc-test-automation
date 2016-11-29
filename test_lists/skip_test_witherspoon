@@ -48,3 +48,5 @@
 -e powercapping
 -e io_board_Present
 -e io_board_Fault
+-e bmcreboot
+-e chassisboot
