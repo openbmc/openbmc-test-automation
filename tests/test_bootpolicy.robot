@@ -81,11 +81,10 @@ Boot order with permanent boot policy
     ${flag}=   Read Attribute  /org/openbmc/settings/host0    boot_flags
     Should Be Equal    ${flag}    CDROM
 
-Onetime boot order after warm reset
-    [Documentation]   This testcase is to verify that boot policy and order does not change
-    ...               after warm reset on a system with onetime boot policy.
-    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/519
-    [Tags]  chassisboot    known_issue
+Persist ONETIME Boot Policy After Reset
+    [Documentation]   Verify ONETIME boot policy order does not change
+    ...               on warm reset.
+    [Tags]  chassisboot    Test_ONETIME_Boot_Policy
 
     Initiate Power On
 
@@ -101,11 +100,10 @@ Onetime boot order after warm reset
     ${flag}=   Read Attribute  /org/openbmc/settings/host0    boot_flags
     Should Be Equal    ${flag}    Network
 
-Permanent boot order after warm reset
-    [Documentation]   This testcase is to verify that boot policy and order does not change
-    ...               after warm reset on a system with permanent boot policy.
-    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/519
-    [Tags]  chassisboot    known_issue
+Persist PERMANENT Boot Policy After Reset
+    [Documentation]   Verify PERMANENT boot policy order does not change
+    ...               on warm reset.
+    [Tags]  chassisboot    Test_PERMANENT_Boot_Policy
 
     Initiate Power On
 
