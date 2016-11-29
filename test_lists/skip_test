@@ -27,19 +27,13 @@
 #https://github.com/openbmc/openbmc-test-automation/issues/139
 -e Empty_Fan_Test
 #https://github.com/openbmc/openbmc/issues/612
--e Create_and_delete_user_group
 -e Create_and_delete_user_without_group_name
 -e Create_and_delete_user_with_user_group_name
 -e Create_multiple_users
 -e Create_and_delete_user_without_password
 -e Set_password_for_existing_user
 -e Set_password_with_empty_password_for_existing
--e Set_password_for_non_existing_user
 -e Create_existing_user
--e Create_user_with_no_name
--e Create_existing_user_group
--e Create_user_group_with_no_name
--e Cleanup_Users_List
 #https://github.com/openbmc/openbmc-test-automation/issues/148
 -e Get_System_Time
 -e Set_Valid_System_Time
