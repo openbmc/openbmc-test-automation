@@ -59,8 +59,10 @@ Initiate Code update BMC
 
     Activate BMC flash image
 
-    # TODO: openbmc/openbmc#519
     Run Keyword And Ignore Error    Trigger Warm Reset
+    # Warm reset adds 3 seconds delay before forcing reboot
+    # To minimize race conditions, we wait for 7 seconds
+    Sleep  7s
     ${session_active}=   Check If warmReset is Initiated
     Run Keyword If   '${session_active}' == '${True}'
     ...    Trigger Warm Reset via Reboot
