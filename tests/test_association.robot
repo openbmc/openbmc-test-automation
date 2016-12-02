@@ -20,23 +20,30 @@ ${SYSTEM_SHUTDOWN_TIME}           1min
 
 ${WAIT_FOR_SERVICES_UP}           3min
 
-${CREATE_ERROR_SINGLE_FRU}        busctl call org.openbmc.records.events /org/openbmc/records/events org.openbmc.recordlog acceptHostMessage sssay "Error" "Testing failure" "/org/openbmc/inventory/system/chassis/motherboard/dimm1" 1 1
+${EVENT_RECORD}        ${RECORDS_URI}events/
+${DIMM_PREFIX}         ${INVENTORY_URI}system/chassis/motherboard/
+${DIMM1_URI}           ${DIMM_PREFIX}dimm1
+${DIMM2_URI}           ${DIMM_PREFIX}dimm2
+${DIMM3_URI}           ${DIMM_PREFIX}dimm3
 
-${CREATE_ERROR_INVALID_FRU}       busctl call org.openbmc.records.events /org/openbmc/records/events org.openbmc.recordlog acceptHostMessage sssay "Error" "Testing with invalid FRU" "abc" 1 1
+${BUSCTL_PREFIX}                busctl call ${OPENBMC_BASE_DBUS}.records.events
+...                             ${OPENBMC_BASE_URI}records/events
+...                             ${OPENBMC_BASE_DBUS}.recordlog
+...                             acceptHostMessage sssay "Error"
 
-${CREATE_ERROR_NO_FRU}            busctl call org.openbmc.records.events /org/openbmc/records/events org.openbmc.recordlog acceptHostMessage sssay "Error" "Testing with no fru" "" 1 1
+${CREATE_ERROR_SINGLE_FRU}      ${BUSCTL_PREFIX} "Testing failure"
+...                             "${DIMM1_URI}" 1 1
 
-${CREATE_ERROR_VIRTUAL_SENSOR}    busctl call org.openbmc.records.events /org/openbmc/records/events org.openbmc.recordlog acceptHostMessage sssay "Error" "Testing with a virtual sensor" "/org/openbmc/inventory/system/systemevent " 1 1
+${CREATE_ERROR_INVALID_FRU}     ${BUSCTL_PREFIX} "Testing with invalid FRU"
+...                             "abc" 1 1
 
-${DIMM1_URI}                      /org/openbmc/inventory/system/chassis/motherboard/dimm1
+${CREATE_ERROR_NO_FRU}          ${BUSCTL_PREFIX} "Testing with no fru" "" 1 1
 
-${DIMM2_URI}                      /org/openbmc/inventory/system/chassis/motherboard/dimm2
+${CREATE_ERROR_VIRTUAL_SENSOR}  ${BUSCTL_PREFIX}
+...                             "Testing with a virtual sensor"
+...                             "${INVENTORY_URI}system/systemevent " 1 1
 
-${DIMM3_URI}                      /org/openbmc/inventory/system/chassis/motherboard/dimm3
-
-&{NIL}                            data=@{EMPTY}
-
-${EVENT_RECORD}                   /org/openbmc/records/events
+&{NIL}                          data=@{EMPTY}
 
 *** Test Cases ***
 
@@ -56,11 +63,11 @@ Create error log on single FRU
     ${log_list}=     Get EventList
     Should Contain   '${log_list}'   ${elog.strip('q ')}
 
-    ${association_uri} =
-    ...   catenate  SEPARATOR=   ${EVENT_RECORD}/${elog.strip('q ')}  /fru
+    ${association_uri}=
+    ...   catenate  SEPARATOR=   ${EVENT_RECORD}${elog.strip('q ')}  /fru
 
-    ${association_content} =
-    ...     Read Attribute    ${association_uri}    endpoints
+    ${association_content}=
+    ...   Read Attribute    ${association_uri}    endpoints
     Should Contain     ${association_content}    ${DIMM1_URI}
 
     ${dimm1_event}=     Read Attribute     ${DIMM1_URI}/event   endpoints
@@ -92,19 +99,17 @@ Create multiple error logs
     ...                 their association.\n
 
     : FOR    ${INDEX}    IN RANGE    1    4
-        \    Log    ${INDEX}
-        \    ${log_uri}=      Create a test log
-        \    ${association_uri}=    catenate    SEPARATOR=   ${log_uri}   /fru
-
-        \    ${association_content}=     Read Attribute    ${association_uri}    endpoints
-        \    Should Contain     ${association_content}    ${DIMM3_URI}
-        \    Should Contain     ${association_content}    ${DIMM2_URI}
-
-        \    ${dimm3_event}=     Read Attribute     ${DIMM3_URI}/event   endpoints
-        \    Should Contain     ${dimm3_event}    ${log_uri}
-
-        \    ${dimm2_event}=     Read Attribute     ${DIMM2_URI}/event   endpoints
-        \    Should Contain     ${dimm2_event}    ${log_uri}
+    \    Log    ${INDEX}
+    \    ${log_uri}=      Create a test log
+    \    ${association_uri}=   catenate    SEPARATOR=   ${log_uri}   /fru
+    \    ${association_content}=
+    ...   Read Attribute   ${association_uri}    endpoints
+    \    Should Contain    ${association_content}   ${DIMM3_URI}
+    \    Should Contain    ${association_content}   ${DIMM2_URI}
+    \    ${dimm3_event}=   Read Attribute   ${DIMM3_URI}/event   endpoints
+    \    Should Contain    ${dimm3_event}   ${log_uri}
+    \    ${dimm2_event}=   Read Attribute   ${DIMM2_URI}/event   endpoints
+    \    Should Contain    ${dimm2_event}   ${log_uri}
 
 
 Delete error log
@@ -149,7 +154,7 @@ Association with invalid FRU
     Should Contain   '${log_list}'   ${elog.strip('q ')}
 
     ${association_uri} =
-    ...   catenate  SEPARATOR=  ${EVENT_RECORD}/${elog.strip('q ')}  /fru
+    ...   catenate  SEPARATOR=  ${EVENT_RECORD}${elog.strip('q ')}  /fru
 
     ${resp}=     openbmc get request     ${association_uri}
     ${jsondata}=    to json    ${resp.content}
@@ -172,7 +177,7 @@ Assocition with no FRU error event
     Should Contain   '${log_list}'   ${elog.strip('q ')}
 
     ${association_uri} =
-    ...   catenate    SEPARATOR=   ${EVENT_RECORD}/${elog.strip('q ')}  /fru
+    ...   catenate    SEPARATOR=   ${EVENT_RECORD}${elog.strip('q ')}  /fru
 
     ${resp}=     openbmc get request     ${association_uri}
     ${jsondata}=    to json    ${resp.content}
@@ -196,12 +201,13 @@ Association with virtual sensor
     Should Contain   '${log_list}'   ${elog.strip('q ')}
 
     ${association_uri} =
-    ...   catenate    SEPARATOR=   ${EVENT_RECORD}/${elog.strip('q ')}  /fru
+    ...   catenate    SEPARATOR=   ${EVENT_RECORD}${elog.strip('q ')}  /fru
 
     ${association_content} =
-    ...     Read Attribute    ${association_uri}    endpoints
+    ...   Read Attribute    ${association_uri}    endpoints
     Should Contain
-    ...     ${association_content}    /org/openbmc/inventory/system/systemevent
+    ...  ${association_content}
+    ...  ${OPENBMC_BASE_URI}inventory/system/systemevent
 
 Association unchanged after reboot
     [Documentation]     ***GOOD PATH***
@@ -228,7 +234,8 @@ Association unchanged after reboot
     ${post_reboot_association_content} =
     ...   Read Attribute    ${association_uri}    endpoints
     Should Be Equal
-    ...   ${post_reboot_association_content}   ${pre_reboot_association_content}
+    ...   ${post_reboot_association_content}
+    ...   ${pre_reboot_association_content}
 
     ${post_reboot_dimm3_event} =
     ...   Read Attribute   ${DIMM3_URI}/event   endpoints
@@ -242,7 +249,7 @@ Association unchanged after reboot
 *** Keywords ***
 
 Get EventList
-    ${resp}=   openbmc get request     /org/openbmc/records/events/
+    ${resp} =   openbmc get request   ${EVENT_RECORD}
     should be equal as strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['data']}
@@ -250,18 +257,20 @@ Get EventList
 Create a test log
     [arguments]
     ${data}=   create dictionary   data=@{EMPTY}
-    ${resp}=   openbmc post request     /org/openbmc/records/events/action/acceptTestMessage    data=${data}
+    ${resp}=   openbmc post request
+    ...     ${EVENT_RECORD}action/acceptTestMessage    data=${data}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json}=   to json         ${resp.content}
     ${LOGID}=    convert to integer    ${json['data']}
-    ${uri}=     catenate    SEPARATOR=   /org/openbmc/records/events/   ${LOGID}
+    ${uri}=     catenate    SEPARATOR=   ${EVENT_RECORD}   ${LOGID}
     [return]  ${uri}
 
 Clear all logs
-    ${resp}=   openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}
+    ${resp} =   openbmc post request
+    ...   ${EVENT_RECORD}action/clear    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${resp}=   openbmc get request     /org/openbmc/records/events/
-    ${json}=   to json         ${resp.content}
+    ${resp} =   openbmc get request   ${EVENT_RECORD}
+    ${json} =   to json         ${resp.content}
     Should Be Empty     ${json['data']}
 
 Suite Initialization Setup
