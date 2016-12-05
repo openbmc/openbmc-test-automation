@@ -526,6 +526,8 @@ def sprint_varx(var_name,
             if type(var_value) in (dict, collections.OrderedDict):
                 type_is_dict = 1
         except AttributeError:
+            pass
+        if not type_is_dict:
             try:
                 if type(var_value) is DotDict:
                     type_is_dict = 1
@@ -936,14 +938,26 @@ def sprint_pgm_header(indent=0,
                           loc_col1_width)
     buffer += sprint_varx(pgm_name_var_name + "_pgid", os.getpgrp(), 0, indent,
                           loc_col1_width)
-    buffer += sprint_varx("uid", str(os.geteuid()) + " (" + os.getlogin() +
+    userid_num = str(os.geteuid())
+    try:
+        username = os.getlogin()
+    except OSError:
+        if userid_num == "0":
+            username = "root"
+        else:
+            username = "?"
+    buffer += sprint_varx("uid", userid_num + " (" + username +
                           ")", 0, indent, loc_col1_width)
     buffer += sprint_varx("gid", str(os.getgid()) + " (" +
                           str(grp.getgrgid(os.getgid()).gr_name) + ")", 0,
                           indent, loc_col1_width)
     buffer += sprint_varx("host_name", socket.gethostname(), 0, indent,
                           loc_col1_width)
-    buffer += sprint_varx("DISPLAY", os.environ['DISPLAY'], 0, indent,
+    try:
+        DISPLAY = os.environ['DISPLAY']
+    except KeyError:
+        DISPLAY = ""
+    buffer += sprint_varx("DISPLAY", DISPLAY, 0, indent,
                           loc_col1_width)
     # I want to add code to print caller's parms.
 
