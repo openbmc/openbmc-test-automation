@@ -24,7 +24,9 @@ Get an object with no properties
 
 Get a Property
     [Tags]  Get_a_Property
-    ${resp}=   Read Attribute      /org/openbmc/inventory/system/chassis/motherboard/cpu0      is_fru
+    #Enumerate Inventory Path
+    ${url} =    Get Inventory Path    cpu
+    ${resp}=   Read Attribute      ${url}      is_fru
     Should Be Equal    ${resp}     ${1}
 
 Get a null Property

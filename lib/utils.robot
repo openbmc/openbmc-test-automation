@@ -486,3 +486,17 @@ Check BMC Mem Performance
     :FOR  ${var}  IN Range  1  4
     \     BMC Mem Performance check
 
+Get Inventory Path
+    [Documentation]   Returns inventory path of given component.
+    ...               Description of arguments:
+    ...               component  Component type for which inventory path is
+    ...                          required.
+    [Arguments]   ${component}
+
+    ${resp}=   Read Properties         /org/openbmc/enumerate   timeout=30
+    log Dictionary   ${resp}
+
+    ${list}=   Get Dictionary Keys    ${resp}
+    ${resp}=   Get Matches    ${list}    regexp=^.*[0-9a-z_].${component}[0-9]*$
+    ${url}=   Get From List    ${resp}    0
+    [return]   ${url}
