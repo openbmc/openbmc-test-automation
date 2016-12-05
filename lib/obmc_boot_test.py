@@ -85,10 +85,12 @@ def plug_in_setup():
 
     ffdc_prefix += "." + time_string
 
-    ffdc_dir_path = OperatingSystem().get_environment_variable(
-        "FFDC_DIR_PATH")
-    # Add trailing slash.
-    ffdc_dir_path = os.path.normpath(ffdc_dir_path) + os.sep
+    try:
+        ffdc_dir_path = os.environ['FFDC_DIR_PATH']
+        # Add trailing slash.
+        ffdc_dir_path = os.path.normpath(ffdc_dir_path) + os.sep
+    except KeyError:
+        ffdc_dir_path = ""
     BuiltIn().set_global_variable("${FFDC_DIR_PATH}", ffdc_dir_path)
 
     # For each program parameter, set the corresponding AUTOBOOT_ environment
