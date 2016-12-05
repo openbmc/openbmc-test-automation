@@ -63,10 +63,6 @@ def parse_output_xml(i_source, i_dest):
     print "Writing data into csv file:", l_csvfile
 
     for testcase in collectDataObj.testData:
-        with open(l_csvfile, "w") as output:
-            writer = csv.writer(output, lineterminator='\n')
-            writer.writerows(l_csvlist)
-
         # Test category : Test case type
         l_test_name = str(testcase.parent) + ":" + str(testcase)
 
@@ -82,7 +78,11 @@ def parse_output_xml(i_source, i_dest):
                   l_test_type, l_test_result, l_test_name, l_pse_rel]
         l_csvlist.append(l_data)
 
-    l_csvlist.close()
+    # Open the file and write to the CSV file
+    l_file = open(l_csvfile, "w")
+    l_writer = csv.writer(l_file, lineterminator='\n')
+    l_writer.writerows(l_csvlist)
+    l_file.close()
 
 
 def usage():
