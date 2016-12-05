@@ -486,3 +486,20 @@ Check BMC Mem Performance
     :FOR  ${var}  IN Range  1  4
     \     BMC Mem Performance check
 
+Get Endpoint Paths
+    [Documentation]   Returns all url paths ending with given endpoint
+    ...               Example:
+    ...               Given the following endpoint: cpu
+    ...               This keyword will return: list of all urls ending with cpu -
+    ...               /org/openbmc/inventory/system/chassis/motherboard/cpu0,
+    ...               /org/openbmc/inventory/system/chassis/motherboard/cpu1
+    ...               Description of arguments:
+    ...               endpoint   string for which url path ending
+    [Arguments]   ${endpoint}
+
+    ${resp}=   Read Properties         ${OPENBMC_BASE_URI}enumerate   timeout=30
+    log Dictionary   ${resp}
+
+    ${list}=   Get Dictionary Keys    ${resp}
+    ${resp}=   Get Matches    ${list}    regexp=^.*[0-9a-z_].${endpoint}[0-9]*$
+    [return]   ${resp}
