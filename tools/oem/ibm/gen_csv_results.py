@@ -82,7 +82,7 @@ def parse_output_xml(i_source, i_dest):
                   l_test_type, l_test_result, l_test_name, l_pse_rel]
         l_csvlist.append(l_data)
 
-    l_csvlist.close()
+    output.close()
 
 
 def usage():
