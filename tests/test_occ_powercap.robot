@@ -12,6 +12,8 @@ Test Teardown           FFDC On Test Case Fail
 
 Force Tags   powercapping
 
+*** Variables ***
+
 *** Test Cases ***
 
 Get OCC status
@@ -88,7 +90,7 @@ Get System Power Consumption
     ...               value is greater than zero
     [Tags]  Get_System_Power_Consumption
 
-    ${resp}=   OpenBMC Get Request   /org/openbmc/sensors/powercap/system_power
+    ${resp}=   OpenBMC Get Request   ${SENSORS_URI}powercap/system_power
     should be equal as strings   ${resp.status_code}   ${HTTP_OK}
     ${jsondata}=   To Json    ${resp.content}
     Should Be True   ${jsondata["data"]["value"]} > 0
@@ -96,17 +98,18 @@ Get System Power Consumption
 *** Keywords ***
 
 Get Minimum PowerCap
-    ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/powercap/min_cap
+    ${resp}=   OpenBMC Get Request
+    ...    ${SENSORS_URI}powercap/min_cap
     ${jsondata}=   To Json    ${resp.content}
     [return]    ${jsondata["data"]["value"]}
 
 Get Maximum PowerCap
-    ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/powercap/max_cap
+    ${resp}=   OpenBMC Get Request   ${SENSORS_URI}powercap/max_cap
     ${jsondata}=   To Json    ${resp.content}
     [return]    ${jsondata["data"]["value"]}
 
 Get User PowerCap
-    ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/powercap/user_cap
+    ${resp}=   OpenBMC Get Request   ${SENSORS_URI}powercap/user_cap
     ${jsondata}=   To Json    ${resp.content}
     [return]    ${jsondata["data"]["value"]}
 
@@ -114,16 +117,19 @@ Set PowerCap
     [Arguments]    ${powercap_value}
     @{pcap_list}=   Create List     ${powercap_value}
     ${data}=   create dictionary   data=@{pcap_list}
-    ${resp}=   openbmc post request    /org/openbmc/sensors/host/powercap/action/setValue      data=${data}
+    ${resp}=   openbmc post request
+    ...    ${SENSORS_URI}host/powercap/action/setValue      data=${data}
     [return]    ${resp}
 
 Get PowerCap
-    ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/host/powercap
+    ${resp}=   OpenBMC Get Request
+    ...    ${SENSORS_URI}host/powercap
     ${jsondata}=   To Json    ${resp.content}
     [return]    ${jsondata["data"]["value"]}
 
 Get OCC status link
-    ${resp}=    OpenBMC Get Request     /org/openbmc/sensors/host/list
+    ${resp}=    OpenBMC Get Request
+    ...     ${SENSORS_URI}host/list
     ${jsondata}=   To Json    ${resp.content}
     log     ${jsondata}
     : FOR    ${ELEMENT}    IN    @{jsondata["data"]}
@@ -139,7 +145,7 @@ Get OCC status
     [return]    ${jsondata["data"]}
 
 Get Chassis URI
-    ${resp}=    OpenBMC Get Request     /org/openbmc/control/
+    ${resp}=    OpenBMC Get Request     ${OPENBMC_BASE_URI}control/
     ${jsondata}=   To Json    ${resp.content}
     log     ${jsondata}
     : FOR    ${ELEMENT}    IN    @{jsondata["data"]}
@@ -163,13 +169,13 @@ Check OCC Readiness
 Powercap Attributes Activated
     [Documentation]   Verify if the response contains the pre-define list
 
-    @{precheck}=   Create List   /org/openbmc/sensors/powercap/user_cap
-    ...                          /org/openbmc/sensors/powercap/system_power
-    ...                          /org/openbmc/sensors/powercap/curr_cap
-    ...                          /org/openbmc/sensors/powercap/max_cap
-    ...                          /org/openbmc/sensors/powercap/min_cap
+    @{precheck}=   Create List   ${SENSORS_URI}powercap/user_cap
+    ...                          ${SENSORS_URI}powercap/system_power
+    ...                          ${SENSORS_URI}powercap/curr_cap
+    ...                          ${SENSORS_URI}powercap/max_cap
+    ...                          ${SENSORS_URI}powercap/min_cap
 
-    ${resp}=    OpenBMC Get Request   /org/openbmc/sensors/powercap/
+    ${resp}=    OpenBMC Get Request  ${SENSORS_URI}powercap/
     ${jsondata}=   To Json    ${resp.content}
     List Should Contain Sub List   ${jsondata["data"]}    ${precheck}
     ...     msg=Failed to activate powercap interface attributes

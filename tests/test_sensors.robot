@@ -256,12 +256,14 @@ Chassis Present
     [Tags]    Chassis_Present
 
     ${uri}=    Get System component    chassis
-    Read The Attribute   /org/openbmc/inventory/system/chassis    present
+    Read The Attribute
+    ...   ${INVENTORY_URI}system/chassis    present
     Response Should Be Equal    True
 
 Chassis Fault
     ${uri}=    Get System component    chassis
-    Read The Attribute   /org/openbmc/inventory/system/chassis    fault
+    Read The Attribute
+    ...   ${INVENTORY_URI}system/chassis    fault
     Response Should Be Equal    False
 
 io_board Present
@@ -281,7 +283,7 @@ io_board Fault
 Setup The Suite
 
     Open Connection And Log In
-    ${resp}=       Read Properties         /org/openbmc/enumerate   timeout=30
+    ${resp}=   Read Properties   ${OPENBMC_BASE_URI}enumerate   timeout=30
     Set Suite Variable      ${SYSTEM_INFO}          ${resp}
     log Dictionary          ${resp}
 
