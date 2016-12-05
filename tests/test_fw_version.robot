@@ -16,7 +16,8 @@ Test BMC Version
     ...     $ git describe --dirty
     ...     v0.1-34-g95f7347
     ...     $
-    ${resp} =    OpenBMC Get Request    /org/openbmc/inventory/system/chassis/motherboard/bmc
+    ${resp} =    OpenBMC Get Request
+    ...   ${OPENBMC_BASE_URI}inventory/system/chassis/motherboard/bmc
     Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    To Json    ${resp.content}
     Should not be empty     ${jsondata["data"]["version"]}    msg=version field is empty
@@ -29,7 +30,7 @@ Test BIOS Version
     ...     $
 
     [Tags]  chassisboot    Test_BIOS_Version
-    ${resp} =    OpenBMC Get Request    /org/openbmc/inventory/system/bios
+    ${resp} =    OpenBMC Get Request    ${OPENBMC_BASE_URI}inventory/system/bios
     Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    To Json    ${resp.content}
     Should not be empty     ${jsondata["data"]["Version"]}    msg=Version field is empty

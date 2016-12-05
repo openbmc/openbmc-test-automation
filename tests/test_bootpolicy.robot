@@ -13,6 +13,7 @@ Test Setup         Initialize DBUS cmd   "boot_policy"
 Test Teardown      FFDC On Test Case Fail
 
 *** Variables ***
+${HOST_SETTINGS}    ${OPENBMC_BASE_URI}settings/host0
 
 *** Test Cases ***
 
@@ -22,7 +23,7 @@ Set Onetime boot policy using REST
 
     Set Boot Policy   ONETIME
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
+    ${boot} =   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    ONETIME
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -34,7 +35,7 @@ Set Permanent boot policy using REST
 
     Set Boot Policy   PERMANENT
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
+    ${boot} =   Read Attribute  ${HOST_SETTINGS}  boot_policy
     Should Be Equal    ${boot}    PERMANENT
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -45,7 +46,7 @@ Set Onetime boot policy using IPMITOOL
     ...               and then verify using REST URI and ipmitool.\n
 
     Run IPMI command   0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
+    ${boot} =   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    ONETIME
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -56,7 +57,7 @@ Set Permanent boot policy using IPMITOOL
     ...               and then verify using REST URI and ipmitool.
 
     Run IPMI command   0x0 0x8 0x05 0xC0 0x00 0x00 0x00 0x00
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
+    ${boot} =   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    PERMANENT
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -75,10 +76,10 @@ Boot order with permanent boot policy
 
     Initiate Power On
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
+    ${boot} =   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    PERMANENT
 
-    ${flag} =   Read Attribute  /org/openbmc/settings/host0    boot_flags
+    ${flag} =   Read Attribute  ${HOST_SETTINGS}   boot_flags
     Should Be Equal    ${flag}    CDROM
 
 Onetime boot order after warm reset
@@ -95,10 +96,10 @@ Onetime boot order after warm reset
 
     Trigger Warm Reset
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
+    ${boot} =   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    ONETIME
 
-    ${flag} =   Read Attribute  /org/openbmc/settings/host0    boot_flags
+    ${flag} =   Read Attribute  ${HOST_SETTINGS}  boot_flags
     Should Be Equal    ${flag}    Network
 
 Permanent boot order after warm reset
@@ -115,10 +116,10 @@ Permanent boot order after warm reset
 
     Trigger Warm Reset
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
+    ${boot} =   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    PERMANENT
 
-    ${flag} =   Read Attribute  /org/openbmc/settings/host0    boot_flags
+    ${flag} =   Read Attribute  ${HOST_SETTINGS}   boot_flags
     Should Be Equal    ${flag}    CDROM
 
 Set boot policy to invalid value
@@ -128,7 +129,7 @@ Set boot policy to invalid value
 
     Run Keyword and Ignore Error    Set Boot Policy   abc
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    boot_policy
+    ${boot} =   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Not Be Equal    ${boot}    abc
 
 *** Keywords ***
@@ -137,13 +138,13 @@ Set Boot Policy
     [Arguments]    ${args}
     ${bootpolicy} =   Set Variable   ${args}
     ${valueDict} =   create dictionary   data=${bootpolicy}
-    Write Attribute    /org/openbmc/settings/host0   boot_policy   data=${valueDict}
+    Write Attribute    ${HOST_SETTINGS}  boot_policy   data=${valueDict}
 
 Set Boot Device
     [Arguments]    ${args}
     ${bootDevice} =   Set Variable   ${args}
     ${valueDict} =   create dictionary   data=${bootDevice}
-    Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
+    Write Attribute    ${HOST_SETTINGS}   boot_flags   data=${valueDict}
 
 
 

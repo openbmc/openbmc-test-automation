@@ -12,6 +12,8 @@ Test Teardown     FFDC On Test Case Fail
 ${MIN_POWER_VALUE}    ${0}
 ${MAX_POWER_VALUE}    ${1000}
 
+${SETTING_HOST}       ${OPENBMC_BASE_URI}settings/host0
+
 *** Test Cases ***
 
 
@@ -21,7 +23,7 @@ Get the boot_flags
     ...               This test case tries to get the boot flags
     ...
 
-    ${resp}=   Read Attribute   /org/openbmc/settings/host0/   boot_flags
+    ${resp}=   Read Attribute   ${SETTING_HOST}   boot_flags
     should not be empty   ${resp}
 
 Get the power
@@ -30,7 +32,7 @@ Get the power
     ...               This test case tries to get the power value and it should be
     ...               between ${MIN_POWER_VALUE} and ${MAX_POWER_VALUE}
 
-    ${powerValue}=   Read Attribute   /org/openbmc/settings/host0/   power_cap
+    ${powerValue}=   Read Attribute   ${SETTING_HOST}   power_cap
     should be true   ${powerValue} >= ${MIN_POWER_VALUE} and ${powerValue} <= ${MAX_POWER_VALUE}
 
 Set the power with string of characters
@@ -43,8 +45,8 @@ Set the power with string of characters
 
     ${valueToBeSet}=   Set Variable   abcdefg
     ${valueDict}=   create dictionary   data=${valueToBeSet}
-    Write Attribute   /org/openbmc/settings/host0   power_cap   data=${valueDict}
-    ${value}=   Read Attribute    /org/openbmc/settings/host0   power_cap
+    Write Attribute   ${SETTING_HOST}   power_cap   data=${valueDict}
+    ${value}=   Read Attribute    ${SETTING_HOST}   power_cap
     should not be true    '${value}'=='${valueToBeSet}'
 
 Set the power with greater then MAX_POWER_VALUE
@@ -57,8 +59,8 @@ Set the power with greater then MAX_POWER_VALUE
 
     ${valueToBeSet}=   Set Variable     ${1010}
     ${valueDict}=   create dictionary   data=${valueToBeSet}
-    Write Attribute   /org/openbmc/settings/host0   power_cap   data=${valueDict}
-    ${value}=      Read Attribute    /org/openbmc/settings/host0   power_cap
+    Write Attribute   ${SETTING_HOST}   power_cap   data=${valueDict}
+    ${value}=      Read Attribute    ${SETTING_HOST}   power_cap
     should not be equal   ${value}   ${valueToBeSet}
 
 Set the power with MIN_POWER_VALUE
@@ -69,8 +71,8 @@ Set the power with MIN_POWER_VALUE
 
     ${valueToBeSet}=   Set Variable     ${MIN_POWER_VALUE}
     ${valueDict}=   create dictionary   data=${valueToBeSet}
-    Write Attribute   /org/openbmc/settings/host0    power_cap      data=${valueDict}
-    ${value}=      Read Attribute    /org/openbmc/settings/host0    power_cap
+    Write Attribute   ${SETTING_HOST}   power_cap      data=${valueDict}
+    ${value}=      Read Attribute   ${SETTING_HOST}    power_cap
     Should Be Equal     ${value}      ${valueToBeSet}
 
 Set the power with MAX_POWER_VALUE
@@ -81,8 +83,8 @@ Set the power with MAX_POWER_VALUE
 
     ${valueToBeSet}=   Set Variable     ${MAX_POWER_VALUE}
     ${valueDict}=   create dictionary   data=${valueToBeSet}
-    Write Attribute   /org/openbmc/settings/host0    power_cap      data=${valueDict}
-    ${value}=      Read Attribute    /org/openbmc/settings/host0    power_cap
+    Write Attribute   ${SETTING_HOST}    power_cap   data=${valueDict}
+    ${value}=      Read Attribute   ${SETTING_HOST}    power_cap
     Should Be Equal     ${value}      ${valueToBeSet}
 
 Set the boot flags with string
@@ -95,7 +97,7 @@ Set the boot flags with string
 
     ${valueToBeSet}=   Set Variable     3ab56f
     ${valueDict} =   create dictionary   data=${valueToBeSet}
-    Write Attribute  /org/openbmc/settings/host0    boot_flags      data=${valueDict}
-    ${value}=      Read Attribute    /org/openbmc/settings/host0    boot_flags
+    Write Attribute  ${SETTING_HOST}    boot_flags      data=${valueDict}
+    ${value}=      Read Attribute   ${SETTING_HOST}   boot_flags
     Should not Be Equal     ${value}      ${valueToBeSet}
 
