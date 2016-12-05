@@ -21,6 +21,7 @@ Test Teardown       FFDC On Test Case Fail
 ${RANDOM_STRING_LENGTH}    ${8}
 ${VALID_PASSWORD}          abc123
 ${NON_EXISTING_USER}       aaaaa
+
 *** Test Cases ***
 
 Create and delete user group
@@ -275,14 +276,16 @@ Cleanup Users List
 
 Get UserList
     ${data}=   create dictionary   data=@{EMPTY}
-    ${resp}=   OpenBMC Post Request   /org/openbmc/UserManager/Users/action/UserList   data=${data}
+    ${resp}=   OpenBMC Post Request
+    ...   ${USER_MANAGER_URI}Users/action/UserList   data=${data}
     should be equal as strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['data']}
 
 Get GroupListUsr
     ${data}=   create dictionary   data=@{EMPTY}
-    ${resp}=   OpenBMC Post Request   /org/openbmc/UserManager/Groups/action/GroupListUsr   data=${data}
+    ${resp}=   OpenBMC Post Request
+    ...   ${USER_MANAGER_URI}/Groups/action/GroupListUsr   data=${data}
     should be equal as strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['data']}
@@ -291,7 +294,8 @@ Create User
     [Arguments]    ${comment}    ${username}    ${groupname}    ${password}
     @{user_list}=   Create List     ${comment}    ${username}    ${groupname}    ${password}
     ${data}=   create dictionary   data=@{user_list}
-    ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/Users/action/UserAdd      data=${data}
+    ${resp}=   OpenBMC Post Request
+    ...    ${USER_MANAGER_URI}Users/action/UserAdd      data=${data}
     ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
@@ -299,7 +303,8 @@ Change Password
     [Arguments]    ${username}    ${password}
     @{user_list}=   Create List     ${username}    ${password}
     ${data}=   create dictionary   data=@{user_list}
-    ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/User/action/Passwd      data=${data}
+    ${resp}=   OpenBMC Post Request
+    ...    ${USER_MANAGER_URI}User/action/Passwd      data=${data}
     ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
@@ -307,7 +312,8 @@ Create UserGroup
     [Arguments]    ${args}
     @{group_list}=   Create List     ${args}
     ${data}=   create dictionary   data=@{group_list}
-    ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/Groups/action/GroupAddUsr      data=${data}
+    ${resp}=   OpenBMC Post Request
+    ...    ${USER_MANAGER_URI}Groups/action/GroupAddUsr      data=${data}
     ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
@@ -315,7 +321,8 @@ Delete Group
     [Arguments]    ${args}
     @{group_list}=   Create List     ${args}
     ${data}=   create dictionary   data=@{group_list}
-    ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/Group/action/GroupDel      data=${data}
+    ${resp}=   OpenBMC Post Request
+    ...    ${USER_MANAGER_URI}Group/action/GroupDel      data=${data}
     ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
@@ -323,7 +330,8 @@ Delete User
     [Arguments]    ${args}
     @{user_list}=   Create List     ${args}
     ${data}=   create dictionary   data=@{user_list}
-    ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/User/action/Userdel      data=${data}
+    ${resp}=   OpenBMC Post Request
+    ...    ${USER_MANAGER_URI}User/action/Userdel      data=${data}
     ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
