@@ -81,7 +81,7 @@ Verify System VPD Properties
 Setup The Suite
     BMC Power On
 
-    ${resp}=     Read Properties     /org/openbmc/inventory/enumerate
+    ${resp}=     Read Properties   ${INVENTORY_URI}enumerate
     Set Suite Variable     ${SYSTEM_INFO}      ${resp}
     log Dictionary      ${resp}
 
