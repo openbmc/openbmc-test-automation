@@ -13,24 +13,26 @@ Test Teardown     FFDC On Test Case Fail
 ${MIN_TOGGLE_VALUE}    0
 ${SAMPLING_FREQUENCY}  6
 
+${LED_CONTROL}    ${OPENBMC_BASE_URI}control/led/
+
 *** Test Cases ***
 
 Validate Heartbeat LEDs Test Cases
     [Documentation]   If heartbeat LED exist then execute the test set.
     [Tags]  Validate_Heartbeat_LEDs_Test_Cases
-    ${resp} =   OpenBMC Get Request   /org/openbmc/control/led/heartbeat
+    ${resp} =   OpenBMC Get Request   ${LED_CONTROL}heartbeat
     Run keyword If  ${resp.status_code} == ${HTTP_OK}   Execute Heartbeat LEDs Test Cases
 
 Validate Identify LEDs Test Cases
     [Documentation]   If identify LED exist then execute the test set.
     [Tags]  Validate_Identify_LEDs_Test_Cases
-    ${resp} =   OpenBMC Get Request   /org/openbmc/control/led/identify
+    ${resp} =   OpenBMC Get Request   ${LED_CONTROL}identify
     Run keyword If  ${resp.status_code} == ${HTTP_OK}   Execute Identify LEDs Test Cases
 
 Validate Beep LEDs Test Cases
     [Documentation]   If beep LED exist then execute the test set.
     [Tags]  Validate_Beep_LEDs_Test_Cases
-    ${resp} =   OpenBMC Get Request   /org/openbmc/control/led/beep
+    ${resp} =   OpenBMC Get Request   ${LED_CONTROL}beep
     Run keyword If  ${resp.status_code} == ${HTTP_OK}  Execute Beep LEDs Test Cases
 
 *** Keywords ***
@@ -198,7 +200,7 @@ Blink Slow the Beep LED
 Get LED State
    [arguments]    ${args}
    ${data} =   create dictionary   data=@{EMPTY}
-   ${resp} =   OpenBMC Post Request   /org/openbmc/control/led/${args}/action/GetLedState   data=${data}
+   ${resp} =   OpenBMC Post Request   ${LED_CONTROL}${args}/action/GetLedState   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
    ${json} =   to json   ${resp.content}
    [return]    ${json['data'][1]}
@@ -206,7 +208,7 @@ Get LED State
 Set On
    [arguments]    ${args}
    ${data} =   create dictionary   data=@{EMPTY}
-   ${resp} =   OpenBMC Post Request   /org/openbmc/control/led/${args}/action/setOn   data=${data}
+   ${resp} =   OpenBMC Post Request   ${LED_CONTROL}${args}/action/setOn   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
    ${json} =   to json   ${resp.content}
    should be equal as integers   ${json['data']}   0
@@ -214,7 +216,7 @@ Set On
 Set Off
    [arguments]    ${args}
    ${data} =   create dictionary   data=@{EMPTY}
-   ${resp} =   OpenBMC Post Request   /org/openbmc/control/led/${args}/action/setOff   data=${data}
+   ${resp} =   OpenBMC Post Request   ${LED_CONTROL}${args}/action/setOff   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
    ${json} =   to json   ${resp.content}
    should be equal as integers   ${json['data']}   0
@@ -222,7 +224,7 @@ Set Off
 Set Blink Fast
    [arguments]    ${args}
    ${data} =   create dictionary   data=@{EMPTY}
-   ${resp} =   OpenBMC Post Request   /org/openbmc/control/led/${args}/action/setBlinkFast   data=${data}
+   ${resp} =   OpenBMC Post Request   ${LED_CONTROL}${args}/action/setBlinkFast   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
    ${json} =   to json   ${resp.content}
    should be equal as integers   ${json['data']}   0
@@ -230,7 +232,7 @@ Set Blink Fast
 Set Blink Slow
    [arguments]    ${args}
    ${data} =   create dictionary   data=@{EMPTY}
-   ${resp} =   OpenBMC Post Request   /org/openbmc/control/led/${args}/action/setBlinkSlow   data=${data}
+   ${resp} =   OpenBMC Post Request   ${LED_CONTROL}${args}/action/setBlinkSlow   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
    ${json} =   to json   ${resp.content}
    should be equal as integers   ${json['data']}   0

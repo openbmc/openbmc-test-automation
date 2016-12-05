@@ -4,6 +4,7 @@ Documentation          This suite is for testing System time in Open BMC.
 Resource               ../lib/rest_client.robot
 Resource               ../lib/ipmi_client.robot
 Resource               ../lib/openbmc_ffdc.robot
+Resource               ../lib/resource.txt
 
 Library                OperatingSystem
 Library                DateTime
@@ -16,6 +17,8 @@ Test Teardown          Post Test Execution
 ${SYSTEM_TIME_INVALID}     01/01/1969 00:00:00
 ${SYSTEM_TIME_VALID}       02/29/2016 09:10:00
 ${ALLOWED_TIME_DIFF}       2
+
+${SETTING_HOST}     ${OPENBMC_BASE_URI}settings/host0
 
 *** Test Cases ***
 
@@ -71,7 +74,7 @@ Set NTP Time Mode
 
     Set Time Mode   NTP
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_mode
+    ${boot} =   Read Attribute  ${SETTING_HOST}   time_mode
     Should Be Equal    ${boot}    NTP
 
 Set Manual Time Mode
@@ -82,7 +85,7 @@ Set Manual Time Mode
 
     Set Time Mode   Manual
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_mode
+    ${boot} =   Read Attribute  ${SETTING_HOST}   time_mode
     Should Be Equal    ${boot}    Manual
 
 Set Time Owner as BMC
@@ -93,7 +96,7 @@ Set Time Owner as BMC
 
     Set Time Owner   BMC
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_owner
+    ${boot} =   Read Attribute  ${SETTING_HOST}   time_owner
     Should Be Equal    ${boot}    BMC
 
 Set Time Owner as Host
@@ -104,7 +107,7 @@ Set Time Owner as Host
 
     Set Time Owner   Host
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_owner
+    ${boot} =   Read Attribute  ${SETTING_HOST}    time_owner
     Should Be Equal    ${boot}    Host
 
 Set Invalid Time Mode
@@ -117,7 +120,7 @@ Set Invalid Time Mode
     ${resp} =   Set Time Mode   abc
     Should Be Equal    ${resp}    error
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_mode
+    ${boot} =   Read Attribute   ${SETTING_HOST}   time_mode
     Should Not Be Equal    ${boot}    abc
 
 Set Invalid Time Owner
@@ -130,7 +133,7 @@ Set Invalid Time Owner
     ${resp} =   Set Time Owner   xyz
     Should Be Equal    ${resp}    error
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_owner
+    ${boot} =   Read Attribute  ${SETTING_HOST}   time_owner
     Should Not Be Equal    ${boot}    xyz
 
 
@@ -153,7 +156,7 @@ Set Time Owner
     ${valueDict} =   create dictionary   data=${timeowner}
 
     ${resp} =   OpenBMC Put Request
-    ...         /org/openbmc/settings/host0/attr/time_owner    data=${valueDict}
+    ...    ${SETTING_HOST}/attr/time_owner    data=${valueDict}
     ${jsondata} =    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
@@ -163,7 +166,7 @@ Set Time Mode
     ${valueDict} =   create dictionary   data=${timemode}
 
     ${resp} =   OpenBMC Put Request
-    ...         /org/openbmc/settings/host0/attr/time_mode    data=${valueDict}
+    ...   ${SETTING_HOST}/attr/time_mode    data=${valueDict}
     ${jsondata} =    to json    ${resp.content}
     [return]    ${jsondata['status']}
 

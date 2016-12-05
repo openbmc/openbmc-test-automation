@@ -13,6 +13,10 @@ Suite Setup         Open Connection And Log In
 Suite Teardown      Close All Connections
 Test Teardown       FFDC On Test Case Fail
 
+*** Variables ***
+
+${NW_MANAGER}    ${OPENBMC_BASE_URI}NetworkManager/Interface
+
 *** Test Cases ***
 
 Get the Mac address
@@ -21,7 +25,7 @@ Get the Mac address
     [Tags]   network_test
     @{arglist}=   Create List   eth0
     ${args}=     Create Dictionary   data=@{arglist}
-    ${resp}=   Call Method    /org/openbmc/NetworkManager/Interface/    GetHwAddress    data=${args}
+    ${resp}=   Call Method    ${NW_MANAGER}   GetHwAddress    data=${args}
     should not be empty    ${resp.content}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}      ok
@@ -36,7 +40,7 @@ Get IP Address with invalid interface
 
     @{arglist}=   Create List   lo01
     ${args}=     Create Dictionary   data=@{arglist}
-    ${resp}=    Call Method    /org/openbmc/NetworkManager/Interface/   GetAddress4    data=${args}
+    ${resp}=    Call Method   ${NW_MANAGER}  GetAddress4    data=${args}
     should not be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
@@ -49,7 +53,7 @@ Get IP Address with valid interface
 
     @{arglist}=   Create List   eth0
     ${args}=     Create Dictionary   data=@{arglist}
-    ${resp}=    Call Method    /org/openbmc/NetworkManager/Interface/   GetAddress4    data=${args}
+    ${resp}=    Call Method   ${NW_MANAGER}  GetAddress4    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}      ok
@@ -114,7 +118,7 @@ Get IP Address type
 
     ${arglist}=    Create List    eth0    ${CURRENT_IP}   ${CURRENT_MASK}   ${CURRENT_GATEWAY}
     ${args}=     Create Dictionary   data=@{arglist}
-    run keyword and ignore error    Call Method    /org/openbmc/NetworkManager/Interface/   SetAddress4    data=${args}
+    run keyword and ignore error   Call Method  ${NW_MANAGER}  SetAddress4  data=${args}
 
     Wait For Host To Ping       ${CURRENT_IP}
 
@@ -122,7 +126,7 @@ Get IP Address type
 
     @{arglist}=   Create List   eth0
     ${args}=     Create Dictionary   data=@{arglist}
-    ${resp}=    Call Method    /org/openbmc/NetworkManager/Interface/   GetAddressType    data=${args}
+    ${resp}=    Call Method   ${NW_MANAGER}   GetAddressType    data=${args}
     ${json} =   to json         ${resp.content}
     Should Be Equal    ${json['data']}    STATIC
     should be equal as strings      ${json['status']}      ok
@@ -142,7 +146,7 @@ Get networkInfo from the interface
     [arguments]    ${intf}
     @{arglist}=    Create List   ${intf}
     ${args}=       Create Dictionary   data=@{arglist}
-    ${resp}=       Call Method    /org/openbmc/NetworkManager/Interface/   GetAddress4    data=${args}
+    ${resp}=       Call Method   ${NW_MANAGER}  GetAddress4    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
     log to console   ${json['data'][2]}
@@ -154,7 +158,7 @@ AddNetworkInfo
 
     ${arglist}=    Create List    ${intf}    ${address}  ${mask}   ${gateway}
     ${args}=       Create Dictionary   data=@{arglist}
-    ${resp}=       Call Method    /org/openbmc/NetworkManager/Interface/   SetAddress4    data=${args}
+    ${resp}=       Call Method   ${NW_MANAGER}  SetAddress4    data=${args}
     should not be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json} =   to json         ${resp.content}
     should be equal as strings      ${json['status']}       ${result}
