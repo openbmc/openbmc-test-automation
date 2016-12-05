@@ -11,7 +11,10 @@ Suite Setup     Open Connection And Log In
 Suite Teardown  Close All Connections
 Test Setup      Initialize DBUS cmd   "boot_flags"
 Test Teardown   FFDC On Test Case Fail
+
 *** Variables ***
+
+${HOST_SETTINGS}    ${SETTINGS_URI}host0
 
 *** Test Cases ***
 
@@ -21,8 +24,8 @@ Set the Boot Device as Default using REST API
 
     ${bootDevice}=   Set Variable   Default
     ${valueDict}=   create dictionary   data=${bootDevice}
-    Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
-    Read the Attribute  /org/openbmc/settings/host0    boot_flags
+    Write Attribute     ${HOST_SETTINGS}   boot_flags   data=${valueDict}
+    Read the Attribute  ${HOST_SETTINGS}   boot_flags
     Response Should Be Equal   Default
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -34,7 +37,7 @@ Set the Boot Device as Default using ipmitool
    ...               ipmitool.
 
     Run IPMI command   0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
-    Read the Attribute   /org/openbmc/settings/host0   boot_flags
+    Read the Attribute   ${HOST_SETTINGS}   boot_flags
     Response Should Be Equal   Default
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -46,8 +49,8 @@ Set the Boot Device as Network using REST API
 
     ${bootDevice}=   Set Variable   Network
     ${valueDict}=   create dictionary   data=${bootDevice}
-    Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
-    Read the Attribute  /org/openbmc/settings/host0    boot_flags
+    Write Attribute    ${HOST_SETTINGS}  boot_flags   data=${valueDict}
+    Read the Attribute  ${HOST_SETTINGS}    boot_flags
     Response Should Be Equal   Network
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}   return_stderr=True
     Should Be Empty     ${stderr}
@@ -59,7 +62,7 @@ Set the Boot Device as Network using ipmitool
    ...               ipmitool.
 
     Run IPMI command   0x0 0x8 0x05 0x80 0x04 0x00 0x00 0x00
-    Read the Attribute   /org/openbmc/settings/host0   boot_flags
+    Read the Attribute   ${HOST_SETTINGS}   boot_flags
     Response Should Be Equal   Network
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -71,8 +74,8 @@ Set the Boot Device as Disk using REST API
 
     ${bootDevice}=   Set Variable   Disk
     ${valueDict}=   create dictionary   data=${bootDevice}
-    Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
-    Read the Attribute  /org/openbmc/settings/host0    boot_flags
+    Write Attribute     ${HOST_SETTINGS}  boot_flags   data=${valueDict}
+    Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal   Disk
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -84,7 +87,7 @@ Set the Boot Device as Disk using ipmitool
    ...               ipmitool.
 
     Run IPMI command   0x0 0x8 0x05 0x80 0x08 0x00 0x00 0x00
-    Read the Attribute   /org/openbmc/settings/host0   boot_flags
+    Read the Attribute   ${HOST_SETTINGS}   boot_flags
     Response Should Be Equal   Disk
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -96,8 +99,8 @@ Set the Boot Device as Safe using REST API
 
     ${bootDevice}=   Set Variable   Safe
     ${valueDict}=   create dictionary   data=${bootDevice}
-    Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
-    Read the Attribute  /org/openbmc/settings/host0    boot_flags
+    Write Attribute     ${HOST_SETTINGS}   boot_flags   data=${valueDict}
+    Read the Attribute  ${HOST_SETTINGS}   boot_flags
     Response Should Be Equal   Safe
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -109,7 +112,7 @@ Set the Boot Device as Safe using ipmitool
    ...               ipmitool.
 
     Run IPMI command   0x0 0x8 0x05 0x80 0x0C 0x00 0x00 0x00
-    Read the Attribute   /org/openbmc/settings/host0   boot_flags
+    Read the Attribute   ${HOST_SETTINGS}   boot_flags
     Response Should Be Equal   Safe
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}   return_stderr=True
     Should Be Empty     ${stderr}
@@ -121,8 +124,8 @@ Set the Boot Device as CDROM using REST API
 
     ${bootDevice}=   Set Variable   CDROM
     ${valueDict}=   create dictionary   data=${bootDevice}
-    Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
-    Read the Attribute  /org/openbmc/settings/host0    boot_flags
+    Write Attribute     ${HOST_SETTINGS}   boot_flags   data=${valueDict}
+    Read the Attribute  ${HOST_SETTINGS}   boot_flags
     Response Should Be Equal   CDROM
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -134,7 +137,7 @@ Set the Boot Device as CDROM using ipmitool
    ...               ipmitool.
 
     Run IPMI command   0x0 0x8 0x05 0x80 0x14 0x00 0x00 0x00
-    Read the Attribute   /org/openbmc/settings/host0   boot_flags
+    Read the Attribute   ${HOST_SETTINGS}   boot_flags
     Response Should Be Equal   CDROM
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -146,8 +149,8 @@ Set the Boot Device as Setup using REST API
 
     ${bootDevice}=   Set Variable   Setup
     ${valueDict}=   create dictionary   data=${bootDevice}
-    Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
-    Read the Attribute  /org/openbmc/settings/host0    boot_flags
+    Write Attribute     ${HOST_SETTINGS}   boot_flags   data=${valueDict}
+    Read the Attribute  ${HOST_SETTINGS}   boot_flags
     Response Should Be Equal   Setup
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
@@ -159,7 +162,7 @@ Set the Boot Device as Setup using ipmitool
    ...               ipmitool.
 
     Run IPMI command   0x0 0x8 0x05 0x80 0x18 0x00 0x00 0x00
-    Read the Attribute   /org/openbmc/settings/host0   boot_flags
+    Read the Attribute   ${HOST_SETTINGS}   boot_flags
     Response Should Be Equal   Setup
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}   return_stderr=True
     Should Be Empty     ${stderr}

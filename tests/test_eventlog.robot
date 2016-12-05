@@ -19,20 +19,22 @@ Test Teardown     FFDC On Test Case Fail
 ${SYSTEM_SHUTDOWN_TIME}     1min
 ${WAIT_FOR_SERVICES_UP}     3min
 
+${EVENT_RECORD}     ${RECORDS_URI}events/
+
 *** Test Cases ***
 
 valid path to logs
     [Documentation]     Test list all events
     [Tags]  CI
-    ${resp}=   openbmc get request     /org/openbmc/records/events/
+    ${resp}=   openbmc get request  ${EVENT_RECORD}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
 
 clear any logs
     [Documentation]     Test delete all events
     [Tags]  CI  clear_any_logs
-    ${resp}=   openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}
+    ${resp}=   openbmc post request   ${EVENT_RECORD}action/clear    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${resp}=   openbmc get request     /org/openbmc/records/events/
+    ${resp}=   openbmc get request    ${EVENT_RECORD}
     ${json}=   to json         ${resp.content}
     Should Be Empty     ${json['data']}
 
@@ -103,14 +105,14 @@ restarting event process retains logs
     [Documentation]     This is to test events are in place even after the
     ...                 event service is restarted.
     [Tags]  CI
-    ${resp}=   openbmc get request     /org/openbmc/records/events/
+    ${resp}=   openbmc get request   ${EVENT_RECORD}
     ${json}=   to json         ${resp.content}
     ${logs_pre_restart}=    set variable    ${json['data']}
 
     ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
     Sleep   ${10}
 
-    ${resp}=   openbmc get request     /org/openbmc/records/events/
+    ${resp}=   openbmc get request   ${EVENT_RECORD}
     ${json}=   to json         ${resp.content}
     ${logs_post_restart}=   set variable    ${json['data']}
     List Should Contain Sub List    ${logs_post_restart}    ${logs_pre_restart}     msg=Failed to find all the eventlogs which are present before restart of event service
@@ -187,12 +189,12 @@ Test events after openbmc reboot
 clearing logs results in no logs
     [Documentation]     This testcase is for clearning the events when no logs present
     [Tags]  CI
-    ${resp}=   openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}
+    ${resp}=   openbmc post request   ${EVENT_RECORD}action/clear    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${resp}=   openbmc get request     /org/openbmc/records/events/
+    ${resp}=   openbmc get request    ${EVENT_RECORD}
     ${json}=   to json         ${resp.content}
     Should Be Empty     ${json['data']}
-    ${resp}=   openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}
+    ${resp} =   openbmc post request    ${EVENT_RECORD}action/clear    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
 
 
@@ -201,9 +203,9 @@ clearing logs results in no logs
 create a test log
     [arguments]
     ${data}=   create dictionary   data=@{EMPTY}
-    ${resp}=   openbmc post request     /org/openbmc/records/events/action/acceptTestMessage    data=${data}
+    ${resp}=   openbmc post request   ${EVENT_RECORD}action/acceptTestMessage    data=${data}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     ${json}=   to json         ${resp.content}
     ${LOGID}=    convert to integer    ${json['data']}
-    ${uri}=     catenate    SEPARATOR=   /org/openbmc/records/events/   ${LOGID}
+    ${uri}=     catenate    SEPARATOR=   ${EVENT_RECORD}   ${LOGID}
     [return]  ${uri}
