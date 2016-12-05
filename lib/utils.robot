@@ -486,3 +486,21 @@ Check BMC Mem Performance
     :FOR  ${var}  IN Range  1  4
     \     BMC Mem Performance check
 
+Get Inventory Path
+    [Documentation]   Returns all inventory paths of given component.
+    ...               Example:
+    ...               Given the following component: cpu
+    ...               This keyword will return: list of all cpu inventory path -
+    ...               /org/openbmc/inventory/system/chassis/motherboard/cpu0,
+    ...               /org/openbmc/inventory/system/chassis/motherboard/cpu1
+    ...               Description of arguments:
+    ...               component  Component type for which inventory path is
+    ...                          required.
+    [Arguments]   ${component}
+
+    ${resp}=   Read Properties         ${OPENBMC_BASE_URI}enumerate   timeout=30
+    log Dictionary   ${resp}
+
+    ${list}=   Get Dictionary Keys    ${resp}
+    ${resp}=   Get Matches    ${list}    regexp=^.*[0-9a-z_].${component}[0-9]*$
+    [return]   ${resp}
