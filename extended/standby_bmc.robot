@@ -31,12 +31,12 @@ Get to Stable State
     Wait For Host To Ping  ${OPENBMC_HOST}  1 mins
     Open Connection And Log In   host=${OPENBMC_HOST}
 
-    ${l_rest} =   Run Keyword And Return Status
+    ${l_rest}=   Run Keyword And Return Status
     ...    Initialize OpenBMC
     Run Keyword If  '${l_rest}' == '${False}'
     ...    Reboot and Wait for BMC Online
 
-    ${l_ready} =   Run Keyword And Return Status
+    ${l_ready}=   Run Keyword And Return Status
     ...    Get BMC State and Expect Standby
 
     Run Keyword If  '${l_ready}' == '${False}'
@@ -61,7 +61,7 @@ Reboot and Wait for BMC Online
 BMC Online Test
     [Documentation]   BMC ping, SSH, REST connection Test
 
-    ${l_status} =   Run Keyword and Return Status
+    ${l_status}=   Run Keyword and Return Status
     ...   Verify Ping and REST Authentication
     Run Keyword If  '${l_status}' == '${False}'
     ...   Fail  msg=System not in ideal state to continue [ERROR]
@@ -87,7 +87,7 @@ Update Policy Setting
     [Documentation]   Update the given restore policy
     [arguments]   ${policy}
 
-    ${valueDict} =     create dictionary  data=${policy}
+    ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}

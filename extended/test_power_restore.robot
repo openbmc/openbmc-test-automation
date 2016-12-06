@@ -74,7 +74,7 @@ Set Policy Setting
     [Documentation]   Set the given test policy
     [arguments]   ${policy}
 
-    ${valueDict} =     create dictionary  data=${policy}
+    ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}
