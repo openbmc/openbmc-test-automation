@@ -18,14 +18,15 @@ ${dbuscmdGet}
 #${dbuscmdString}=  string:"xyz.openbmc_project.settings.Host" string:
 ${dbuscmdString}=   string:"org.openbmc.settings.Host" string:
 
-
 # Assign default value to QUIET for programs which may not define it.
 ${QUIET}  ${0}
 ${bmc_mem_free_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
 ${bmc_mem_total_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
 ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
+${HOST_SETTING}    ${SETTINGS_URI}host0
 
 *** Keywords ***
+
 Wait For Host To Ping
     [Arguments]  ${host}  ${timeout}=${OPENBMC_REBOOT_TIMEOUT}min
     ...          ${interval}=5 sec
@@ -508,6 +509,7 @@ Get Endpoint Paths
     ${resp}=   Get Matches   ${list}   regexp=^.*[0-9a-z_].${endpoint}[0-9]*$
     [Return]   ${resp}
 
+
 Check Zombie Process
     [Documentation]    Check if any defunct process exist or not on BMC
     ${count}  ${stderr}  ${rc}=  Execute Command  ps -o stat | grep Z | wc -l
@@ -532,3 +534,12 @@ Prune Journal Log
 
     Should Be Equal  ${rc}  ${0}  msg=${stderr}
     Should Contain   ${stderr}  Vacuuming done
+
+Set BMC Power Policy
+    [Documentation]   Set the given BMC power policy.
+    [arguments]   ${policy}
+
+    ${valueDict}=     create dictionary  data=${policy}
+    Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
+    ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
+    Should Be Equal    ${currentPolicy}   ${policy}
