@@ -21,9 +21,9 @@ ${dbuscmdString}=   string:"org.openbmc.settings.Host" string:
 
 # Assign default value to QUIET for programs which may not define it.
 ${QUIET}  ${0}
-${dbuscmdBase} =    dbus-send --system --print-reply --dest=org.openbmc.settings.Host
-${dbuscmdGet} =   /org/openbmc/settings/host0  org.freedesktop.DBus.Properties.Get
-${dbuscmdString} =   string:"org.openbmc.settings.Host" string:
+${dbuscmdBase}=    dbus-send --system --print-reply --dest=org.openbmc.settings.Host
+${dbuscmdGet}=   /org/openbmc/settings/host0  org.freedesktop.DBus.Properties.Get
+${dbuscmdString}=   string:"org.openbmc.settings.Host" string:
 ${bmc_mem_free_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
 ${bmc_mem_total_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
 ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9

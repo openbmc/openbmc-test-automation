@@ -7,14 +7,14 @@ Resource        ../lib/connection_client.robot
 Library         String
 
 *** Variables ***
-${dbusHostIpmicmd1} =   dbus-send --system  /org/openbmc/HostIpmi/1
-${dbusHostIpmiCmdReceivedMsg} =   org.openbmc.HostIpmi.ReceivedMessage
-${netfnByte} =          ${EMPTY}
+${dbusHostIpmicmd1}=   dbus-send --system  /org/openbmc/HostIpmi/1
+${dbusHostIpmiCmdReceivedMsg}=   org.openbmc.HostIpmi.ReceivedMessage
+${netfnByte}=          ${EMPTY}
 ${cmdByte}   =          ${EMPTY}
-${arrayByte} =          array:byte:
-${IPMI_EXT_CMD} =       ipmitool -I lanplus -C 1 -P
-${HOST} =               -H
-${RAW} =                raw
+${arrayByte}=          array:byte:
+${IPMI_EXT_CMD}=       ipmitool -I lanplus -C 1 -P
+${HOST}=               -H
+${RAW}=                raw
 
 *** Keywords ***
 
@@ -41,9 +41,9 @@ Run IPMI Standard Command
 
 Run Dbus IPMI RAW Command
     [arguments]    ${args}
-    ${valueinBytes} =   Byte Conversion  ${args}
-    ${cmd} =   Catenate   ${dbushostipmicmd1} ${dbusHostIpmiCmdReceivedMsg}
-    ${cmd} =   Catenate   ${cmd} ${valueinBytes}
+    ${valueinBytes}=   Byte Conversion  ${args}
+    ${cmd}=   Catenate   ${dbushostipmicmd1} ${dbusHostIpmiCmdReceivedMsg}
+    ${cmd}=   Catenate   ${cmd} ${valueinBytes}
     ${output}   ${stderr}=  Execute Command  ${cmd}  return_stderr=True
     Should Be Empty      ${stderr}
     set test variable    ${OUTPUT}     "${output}"
@@ -92,24 +92,24 @@ Byte Conversion
     ...               byte:0x00 byte:0x04 byte:0x00 byte:0x30
     ...               array:byte:9,0x01,0x00,0x35,0x00,0x00,0x00,0x00,0x00,0x00
     [arguments]     ${args}
-    ${argLength} =   Get Length  ${args}
+    ${argLength}=   Get Length  ${args}
     Set Global Variable  ${arrayByte}   array:byte:
-    @{listargs} =   Split String  ${args}
-    ${index} =   Set Variable   ${0}
+    @{listargs}=   Split String  ${args}
+    ${index}=   Set Variable   ${0}
     :FOR   ${word}   in   @{listargs}
     \    Run Keyword if   ${index} == 0   Set NetFn Byte  ${word}
     \    Run Keyword if   ${index} == 1   Set Cmd Byte    ${word}
     \    Run Keyword if   ${index} > 1    Set Array Byte  ${word}
-    \    ${index} =    Set Variable    ${index + 1}
-    ${length} =   Get Length  ${arrayByte}
-    ${length} =   Evaluate  ${length} - 1
-    ${arrayByteLocal} =  Get Substring  ${arrayByte}  0   ${length}
+    \    ${index}=    Set Variable    ${index + 1}
+    ${length}=   Get Length  ${arrayByte}
+    ${length}=   Evaluate  ${length} - 1
+    ${arrayByteLocal}=  Get Substring  ${arrayByte}  0   ${length}
     Set Global Variable  ${arrayByte}   ${arrayByteLocal}
-    ${valueinBytesWithArray} =   Catenate  byte:0x00   ${netfnByte}  byte:0x00
-    ${valueinBytesWithArray} =   Catenate  ${valueinBytesWithArray}  ${cmdByte}
-    ${valueinBytesWithArray} =   Catenate  ${valueinBytesWithArray} ${arrayByte}
-    ${valueinBytesWithoutArray} =   Catenate  byte:0x00 ${netfnByte}  byte:0x00
-    ${valueinBytesWithoutArray} =   Catenate  ${valueinBytesWithoutArray} ${cmdByte}
+    ${valueinBytesWithArray}=   Catenate  byte:0x00   ${netfnByte}  byte:0x00
+    ${valueinBytesWithArray}=   Catenate  ${valueinBytesWithArray}  ${cmdByte}
+    ${valueinBytesWithArray}=   Catenate  ${valueinBytesWithArray} ${arrayByte}
+    ${valueinBytesWithoutArray}=   Catenate  byte:0x00 ${netfnByte}  byte:0x00
+    ${valueinBytesWithoutArray}=   Catenate  ${valueinBytesWithoutArray} ${cmdByte}
 #   To Check scenario for smaller IPMI raw commands with only 2 arguments
 #   instead of usual 12 arguments.
 #   Sample small IPMI raw command: Run IPMI command 0x06 0x36
@@ -123,18 +123,18 @@ Byte Conversion
 
 Set NetFn Byte
    [arguments]    ${word}
-   ${netfnByteLocal} =  Catenate   byte:${word}
+   ${netfnByteLocal}=  Catenate   byte:${word}
    Set Global Variable  ${netfnByte}  ${netfnByteLocal}
 
 Set Cmd Byte
    [arguments]    ${word}
-   ${cmdByteLocal} =  Catenate   byte:${word}
+   ${cmdByteLocal}=  Catenate   byte:${word}
    Set Global Variable  ${cmdByte}  ${cmdByteLocal}
 
 Set Array Byte
    [arguments]    ${word}
-   ${arrayByteLocal} =   Catenate   SEPARATOR=  ${arrayByte}  ${word}
-   ${arrayByteLocal} =   Catenate   SEPARATOR=  ${arrayByteLocal}   ,
+   ${arrayByteLocal}=   Catenate   SEPARATOR=  ${arrayByte}  ${word}
+   ${arrayByteLocal}=   Catenate   SEPARATOR=  ${arrayByteLocal}   ,
    Set Global Variable  ${arrayByte}   ${arrayByteLocal}
 
 Copy ipmitool
