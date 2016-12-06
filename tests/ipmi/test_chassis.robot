@@ -32,4 +32,31 @@ IPMI Chassis Status Off
     ${power_status}=    Get Lines Containing String    ${resp}    System Power
     Should Contain    ${power_status}    off
 
+IPMI Chassis Restore Power Policy
+     [Documentation]    This test case verfies IPMI Chassis Restore Power Policy
+
+     [Tags]    IPMI_Chassis_Restore_Power_Policy
+
+     ${inital_power_policy}=   Read Attribute  /org/openbmc/settings/host0    power_policy
+
+     Set BMC Power Policy    ALWAYS_POWER_ON
+     ${resp}=    Run IPMI Standard Command    chassis status
+     ${power_status}=    Get Lines Containing String    ${resp}    Power Restore Policy
+     Should Contain    ${power_status}    always-on
+
+
+     Set BMC Power Policy    RESTORE_LAST_STATE
+     ${resp}=    Run IPMI Standard Command    chassis status
+     ${power_status}=    Get Lines Containing String    ${resp}    Power Restore Policy
+     Should Contain    ${power_status}    previous
+
+
+     Set BMC Power Policy    LEAVE_OFF
+     ${resp}=    Run IPMI Standard Command    chassis status
+     ${power_status}=    Get Lines Containing String    ${resp}    Power Restore Policy
+     Should Contain    ${power_status}    always-off
+
+     Set BMC Power Policy    ${inital_power_policy}
+     ${power_policy}=   Read Attribute  /org/openbmc/settings/host0    power_policy
+     Should Be Equal    ${power_policy}  ${inital_power_policy}
 
