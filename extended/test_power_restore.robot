@@ -48,7 +48,7 @@ Set the power restore policy
 Set Restore Policy
     [arguments]    ${policy}   ${expectedState}   ${nextState}
 
-    Set Policy Setting   ${policy}
+    Set BMC Power Policy    ${policy}
 
     ${currentState}=
     ...   Read Attribute   ${HOST_SETTING}   system_state
@@ -68,17 +68,6 @@ Set Restore Policy
 
     Wait Until Keyword Succeeds
     ...   5 min   10 sec   System State  ${nextState}
-
-
-Set Policy Setting
-    [Documentation]   Set the given test policy
-    [arguments]   ${policy}
-
-    ${valueDict}=     create dictionary  data=${policy}
-    Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
-    ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
-    Should Be Equal    ${currentPolicy}   ${policy}
-
 
 Set Initial Test State
     [Documentation]   Poweron if ON expected, Poweroff if OFF expected
