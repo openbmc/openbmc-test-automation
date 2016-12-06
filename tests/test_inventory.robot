@@ -20,40 +20,40 @@ Force Tags  chassisboot  inventory
 *** Test Cases ***
 
 minimal cpu inventory
-    ${count} =     Get Total Present     cpu
+    ${count}=     Get Total Present     cpu
     Should Be True     ${count}>${0}
 
 minimal dimm inventory
     [Tags]  minimal_dimm_inventory
 
-    ${count} =     Get Total Present     dimm
+    ${count}=     Get Total Present     dimm
     Should Be True     ${count}>=${2}
 
 minimal core inventory
-    ${count} =     Get Total Present     core
+    ${count}=     Get Total Present     core
     Should Be True     ${count}>${0}
 
 minimal memory buffer inventory
     [Tags]    minimal_memory_buffer_inventory
 
-    ${count} =     Get Total Present     membuf
+    ${count}=     Get Total Present     membuf
     Should Be True     ${count}>${0}
 
 minimal fan inventory
     [Tags]  minimal_fan_inventory
-    ${count} =     Get Total Present     fan
+    ${count}=     Get Total Present     fan
     Should Be True     ${count}>${2}
 
 minimal main planar inventory
     [Tags]    minimal_main_planar_inventory
 
-    ${count} =     Get Total Present     motherboard
+    ${count}=     Get Total Present     motherboard
     Should Be True     ${count}>${0}
 
 minimal system inventory
     [Tags]    minimal_system_inventory
 
-    ${count} =     Get Total Present     system
+    ${count}=     Get Total Present     system
     Should Be True     ${count}>${0}
 
 Verify CPU VPD Properties
@@ -81,32 +81,32 @@ Verify System VPD Properties
 Setup The Suite
     BMC Power On
 
-    ${resp} =     Read Properties     /org/openbmc/inventory/enumerate
+    ${resp}=     Read Properties     /org/openbmc/inventory/enumerate
     Set Suite Variable     ${SYSTEM_INFO}      ${resp}
     log Dictionary      ${resp}
 
 Get Total Present
     [arguments]     ${type}
-    ${l} =          Create List     []
-    ${resp} =    Get Dictionary Keys    ${SYSTEM_INFO}
-    ${list} =    Get Matches    ${resp}    regexp=^.*[0-9a-z_].${type}[0-9]*$
+    ${l}=          Create List     []
+    ${resp}=    Get Dictionary Keys    ${SYSTEM_INFO}
+    ${list}=    Get Matches    ${resp}    regexp=^.*[0-9a-z_].${type}[0-9]*$
     : FOR   ${element}      IN      @{list}
     \       Append To List   ${l}   ${SYSTEM_INFO['${element}']['present']}
 
-    ${sum} =        Get Count       ${l}    True
+    ${sum}=        Get Count       ${l}    True
     [return]        ${sum}
 
 Verify Properties
     [arguments]     ${type}
 
-    ${list} =     Get VPD Inventory List     ${OPENBMC_MODEL}     ${type}
+    ${list}=     Get VPD Inventory List     ${OPENBMC_MODEL}     ${type}
     : FOR     ${element}     IN      @{list}
-    \     ${d} =     Get From Dictionary     ${SYSTEM_INFO}     ${element}
+    \     ${d}=     Get From Dictionary     ${SYSTEM_INFO}     ${element}
     \     Run Keyword If     ${d['present']} == True        Verify Present Properties     ${d}     ${type}
 
 Verify Present Properties
     [arguments]     ${d}     ${type}
-    ${keys} =     Get Dictionary Keys     ${d}
+    ${keys}=     Get Dictionary Keys     ${d}
     Log List     ${keys}
     Log List     ${INVENTORY_ITEMS['${type}']}
     Lists Should Be Equal  ${INVENTORY_ITEMS['${type}']}     ${keys}

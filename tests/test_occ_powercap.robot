@@ -88,7 +88,7 @@ Get System Power Consumption
     ...               value is greater than zero
     [Tags]  Get_System_Power_Consumption
 
-    ${resp} =   OpenBMC Get Request   /org/openbmc/sensors/powercap/system_power
+    ${resp}=   OpenBMC Get Request   /org/openbmc/sensors/powercap/system_power
     should be equal as strings   ${resp.status_code}   ${HTTP_OK}
     ${jsondata}=   To Json    ${resp.content}
     Should Be True   ${jsondata["data"]["value"]} > 0
@@ -96,29 +96,29 @@ Get System Power Consumption
 *** Keywords ***
 
 Get Minimum PowerCap
-    ${resp} =   OpenBMC Get Request    /org/openbmc/sensors/powercap/min_cap
+    ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/powercap/min_cap
     ${jsondata}=   To Json    ${resp.content}
     [return]    ${jsondata["data"]["value"]}
 
 Get Maximum PowerCap
-    ${resp} =   OpenBMC Get Request    /org/openbmc/sensors/powercap/max_cap
+    ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/powercap/max_cap
     ${jsondata}=   To Json    ${resp.content}
     [return]    ${jsondata["data"]["value"]}
 
 Get User PowerCap
-    ${resp} =   OpenBMC Get Request    /org/openbmc/sensors/powercap/user_cap
+    ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/powercap/user_cap
     ${jsondata}=   To Json    ${resp.content}
     [return]    ${jsondata["data"]["value"]}
 
 Set PowerCap
     [Arguments]    ${powercap_value}
-    @{pcap_list} =   Create List     ${powercap_value}
-    ${data} =   create dictionary   data=@{pcap_list}
-    ${resp} =   openbmc post request    /org/openbmc/sensors/host/powercap/action/setValue      data=${data}
+    @{pcap_list}=   Create List     ${powercap_value}
+    ${data}=   create dictionary   data=@{pcap_list}
+    ${resp}=   openbmc post request    /org/openbmc/sensors/host/powercap/action/setValue      data=${data}
     [return]    ${resp}
 
 Get PowerCap
-    ${resp} =   OpenBMC Get Request    /org/openbmc/sensors/host/powercap
+    ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/host/powercap
     ${jsondata}=   To Json    ${resp.content}
     [return]    ${jsondata["data"]["value"]}
 
@@ -133,8 +133,8 @@ Get OCC status link
 
 Get OCC status
     ${occstatus_link}=  Get OCC status link
-    ${data} =   create dictionary   data=@{EMPTY}
-    ${resp} =   openbmc post request    ${occstatus_link}/action/getValue      data=${data}
+    ${data}=   create dictionary   data=@{EMPTY}
+    ${resp}=   openbmc post request    ${occstatus_link}/action/getValue      data=${data}
     ${jsondata}=   To Json    ${resp.content}
     [return]    ${jsondata["data"]}
 

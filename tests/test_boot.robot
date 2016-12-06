@@ -19,8 +19,8 @@ Set the Boot Device as Default using REST API
    [Documentation]   This testcase is to set the boot device as Default using REST
    ...               URI. The Boot device is read using REST API and ipmitool.
 
-    ${bootDevice} =   Set Variable   Default
-    ${valueDict} =   create dictionary   data=${bootDevice}
+    ${bootDevice}=   Set Variable   Default
+    ${valueDict}=   create dictionary   data=${bootDevice}
     Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
     Read the Attribute  /org/openbmc/settings/host0    boot_flags
     Response Should Be Equal   Default
@@ -44,8 +44,8 @@ Set the Boot Device as Network using REST API
    [Documentation]   This testcase is to set the boot device as Network using REST
    ...               URI. The Boot device is read using REST API and ipmitool.
 
-    ${bootDevice} =   Set Variable   Network
-    ${valueDict} =   create dictionary   data=${bootDevice}
+    ${bootDevice}=   Set Variable   Network
+    ${valueDict}=   create dictionary   data=${bootDevice}
     Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
     Read the Attribute  /org/openbmc/settings/host0    boot_flags
     Response Should Be Equal   Network
@@ -69,8 +69,8 @@ Set the Boot Device as Disk using REST API
    [Documentation]   This testcase is to set the boot device as Disk using REST
    ...               URI. The Boot device is read using REST API and ipmitool.
 
-    ${bootDevice} =   Set Variable   Disk
-    ${valueDict} =   create dictionary   data=${bootDevice}
+    ${bootDevice}=   Set Variable   Disk
+    ${valueDict}=   create dictionary   data=${bootDevice}
     Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
     Read the Attribute  /org/openbmc/settings/host0    boot_flags
     Response Should Be Equal   Disk
@@ -94,8 +94,8 @@ Set the Boot Device as Safe using REST API
    [Documentation]   This testcase is to set the boot device as Safe using REST
    ...               URI. The Boot device is read using REST API and ipmitool.
 
-    ${bootDevice} =   Set Variable   Safe
-    ${valueDict} =   create dictionary   data=${bootDevice}
+    ${bootDevice}=   Set Variable   Safe
+    ${valueDict}=   create dictionary   data=${bootDevice}
     Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
     Read the Attribute  /org/openbmc/settings/host0    boot_flags
     Response Should Be Equal   Safe
@@ -119,8 +119,8 @@ Set the Boot Device as CDROM using REST API
    [Documentation]   This testcase is to set the boot device as CDROM using REST
    ...               URI. The Boot device is read using REST API and ipmitool.
 
-    ${bootDevice} =   Set Variable   CDROM
-    ${valueDict} =   create dictionary   data=${bootDevice}
+    ${bootDevice}=   Set Variable   CDROM
+    ${valueDict}=   create dictionary   data=${bootDevice}
     Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
     Read the Attribute  /org/openbmc/settings/host0    boot_flags
     Response Should Be Equal   CDROM
@@ -144,8 +144,8 @@ Set the Boot Device as Setup using REST API
    [Documentation]   This testcase is to set the boot device as Setup using REST
    ...               URI. The Boot device is read using REST API and ipmitool.
 
-    ${bootDevice} =   Set Variable   Setup
-    ${valueDict} =   create dictionary   data=${bootDevice}
+    ${bootDevice}=   Set Variable   Setup
+    ${valueDict}=   create dictionary   data=${bootDevice}
     Write Attribute    /org/openbmc/settings/host0   boot_flags   data=${valueDict}
     Read the Attribute  /org/openbmc/settings/host0    boot_flags
     Response Should Be Equal   Setup
@@ -173,7 +173,7 @@ Response Should Be Equal
 
 Read the Attribute
     [arguments]    ${uri}    ${parm}
-    ${output} =     Read Attribute      ${uri}    ${parm}
+    ${output}=     Read Attribute      ${uri}    ${parm}
     set test variable    ${OUTPUT}     ${output}
 
 
