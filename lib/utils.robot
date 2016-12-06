@@ -28,6 +28,8 @@ ${bmc_mem_free_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
 ${bmc_mem_total_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
 ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
 
+
+${HOST_SETTING}    ${OPENBMC_BASE_URI}settings/host0
 *** Keywords ***
 Wait For Host To Ping
     [Arguments]  ${host}  ${timeout}=${OPENBMC_REBOOT_TIMEOUT}min
@@ -486,3 +488,11 @@ Check BMC Mem Performance
     :FOR  ${var}  IN Range  1  4
     \     BMC Mem Performance check
 
+Set BMC Power Policy
+    [Documentation]   Set the given test policy
+    [arguments]   ${policy}
+
+    ${valueDict} =     create dictionary  data=${policy}
+    Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
+    ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
+    Should Be Equal    ${currentPolicy}   ${policy}
