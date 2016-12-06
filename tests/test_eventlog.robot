@@ -99,29 +99,39 @@ Intermixed delete
     ${resp}=   openbmc get request   ${event2}
     should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
 
-restarting event process retains logs
-    [Documentation]     This is to test events are in place even after the
-    ...                 event service is restarted.
-    [Tags]  CI
+Test Event Logs Persistency
+    [Documentation]   Create event logs, restart the event service
+    ...               and verify if logs persist.
+    [Tags]  CI  Test_Event_Logs_Persistency
     ${resp}=   openbmc get request     /org/openbmc/records/events/
     ${json}=   to json         ${resp.content}
     ${logs_pre_restart}=    set variable    ${json['data']}
 
-    ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
+    ${output}  ${stderr}=  Execute Command
+    ...    systemctl restart org.openbmc.records.events.service
+    ...    return_stderr=True
+    Should Be Empty   ${stderr}
     Sleep   ${10}
 
     ${resp}=   openbmc get request     /org/openbmc/records/events/
     ${json}=   to json         ${resp.content}
     ${logs_post_restart}=   set variable    ${json['data']}
-    List Should Contain Sub List    ${logs_post_restart}    ${logs_pre_restart}     msg=Failed to find all the eventlogs which are present before restart of event service
+    List Should Contain Sub List
+    ...    ${logs_post_restart}    ${logs_pre_restart}
+    ...    msg=Event Logs mismatched
 
-deleting log after obmc-phosphor-event.service restart
-    [Documentation]     This is to test event can be deleted created prior to
-    ...                 event service is restarted.
-    [Tags]  CI
-    ${uri}=         create a test log
 
-    ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
+Test Event Deletion Post Restarting Event Manager
+    [Documentation]   Create a event log, restart event service and
+    ...               delete the event created earlier.
+    [Tags]  CI   Test_Event_Deletion Post_Restarting_Event_Manager
+
+    ${uri}=   create a test log
+
+    ${output}  ${stderr}=  Execute Command
+    ...    systemctl restart org.openbmc.records.events.service
+    ...    return_stderr=True
+    Should Be Empty   ${stderr}
     Sleep   ${10}
 
     ${deluri}=  catenate    SEPARATOR=   ${uri}   /action/delete
@@ -132,16 +142,18 @@ making new log after obmc-phosphor-event.service restart
     [Documentation]     This is for testing event creation after the
     ...                 event service is restarted.
     [Tags]  CI
-    ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
+    ${uptime}=  Execute Command
+    ...    systemctl restart org.openbmc.records.events.service
     Sleep   ${10}
 
     create a test log
 
 deleting new log after obmc-phosphor-event.service restart
-    [Documentation]     This testcase is for testing deleted newly created event
-    ...                 after event service is restarted.
+    [Documentation]    This testcase is for testing deleted newly created event
+    ...                after event service is restarted.
     [Tags]  CI
-    ${uptime}=  Execute Command    systemctl restart obmc-phosphor-event.service
+    ${uptime}=  Execute Command
+    ...    systemctl restart org.openbmc.records.events.service
     Sleep   ${10}
 
     ${uri}=     create a test log
