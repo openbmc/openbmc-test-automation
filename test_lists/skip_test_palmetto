@@ -49,6 +49,7 @@
 -e Set_System_Time_with_no_time
 -e IPMI_Chassis_Status_On
 -e IPMI_Chassis_Status_Off
+-e IPMI_Chassis_Restore_Power_Policy
 #https://github.com/openbmc/openbmc/issues/830
 -e Good_connection_for_testing
 -e get_directory_listing
