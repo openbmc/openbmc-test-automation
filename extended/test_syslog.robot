@@ -25,15 +25,15 @@ Get all Syslog settings
     ...                 This testcase is to get all syslog settings from
     ...                 open bmc system.\n
 
-    ${ip_address} =    Read Attribute
+    ${ip_address}=    Read Attribute
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   ipaddr
     Should Not Be Empty     ${ip_address}
 
-    ${port} =    Read Attribute
+    ${port}=    Read Attribute
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   port
     Should Not Be Empty     ${port}
 
-    ${status} =    Read Attribute
+    ${status}=    Read Attribute
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   status
     Should Not Be Empty     ${status}
 
@@ -42,7 +42,7 @@ Enable syslog with port number and IP address
     ...                 This testcase is to enable syslog with both ip address
     ...                 and port number of remote system.\n
 
-    ${resp} =    Enable Syslog Setting    ${SYSLOG_IP_ADDRESS}    ${SYSLOG_PORT}
+    ${resp}=    Enable Syslog Setting    ${SYSLOG_IP_ADDRESS}    ${SYSLOG_PORT}
     Should Be Equal    ${resp}    ok
     ${ip}=   Read Attribute
     ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   ipaddr
@@ -56,7 +56,7 @@ Enable syslog without IP address and port number
     ...                 This testcase is to enable syslog without changing ip address
     ...                 and port number.\n
 
-    ${resp} =    Enable Syslog Setting    ${EMPTY}    ${EMPTY}
+    ${resp}=    Enable Syslog Setting    ${EMPTY}    ${EMPTY}
     Should Be Equal    ${resp}    ok
     ${status}=   Read Attribute
     ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   status
@@ -66,7 +66,7 @@ Enable syslog with only IP address
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is to enable syslog with only ip address.\n
 
-    ${resp} =    Enable Syslog Setting    ${SYSLOG_IP_ADDRESS}    ${EMPTY}
+    ${resp}=    Enable Syslog Setting    ${SYSLOG_IP_ADDRESS}    ${EMPTY}
     Should Be Equal    ${resp}    ok
     ${ip}=   Read Attribute
     ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   ipaddr
@@ -82,7 +82,7 @@ Enable Syslog with only port number
     ${status}=   Read Attribute
     ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   status
     Should Be Equal    ${status}    Enabled
-    ${resp} =    Enable Syslog Setting    ${EMPTY}    ${SYSLOG_PORT}
+    ${resp}=    Enable Syslog Setting    ${EMPTY}    ${SYSLOG_PORT}
     Should Be Equal    ${resp}    ok
     ${port}=   Read Attribute
     ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   port
@@ -95,7 +95,7 @@ Disable Syslog
     [Documentation]     ***GOOD PATH***
     ...                 This testcase is to verify disabling syslog.\n
 
-    ${resp} =    Disable Syslog Setting    ${EMPTY}
+    ${resp}=    Disable Syslog Setting    ${EMPTY}
     Should Be Equal    ${resp}    ok
     ${status}=   Read Attribute
     ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   status
@@ -106,7 +106,7 @@ Enable invalid ip for Syslog remote server
     ...                 This testcase is to verify error while enabling syslog with
     ...                 invalid ip address.\n
 
-    ${resp} =    Enable Syslog Setting    ${INVALID_SYSLOG_IP_ADDRESS}    ${SYSLOG_PORT}
+    ${resp}=    Enable Syslog Setting    ${INVALID_SYSLOG_IP_ADDRESS}    ${SYSLOG_PORT}
     Should Be Equal    ${resp}    error
 
 Enable invalid port for Syslog remote server
@@ -114,7 +114,7 @@ Enable invalid port for Syslog remote server
     ...                 This testcase is to verify error while enabling syslog with
     ...                 invalid port number.\n
 
-    ${resp} =    Enable Syslog Setting    ${SYSLOG_IP_ADDRESS}    ${INVALID_SYSLOG_PORT}
+    ${resp}=    Enable Syslog Setting    ${SYSLOG_IP_ADDRESS}    ${INVALID_SYSLOG_PORT}
     Should Be Equal    ${resp}    error
 
 
@@ -127,7 +127,7 @@ Persistency check for syslog setting
     ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   ipaddr
     ${old_port}=   Read Attribute
     ...   ${OPENBMC_BASE_URI}LogManager/rsyslog   port
-    ${old_status} =    Read Attribute
+    ${old_status}=    Read Attribute
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   status
 
     ${output}=      Execute Command    /sbin/reboot
@@ -135,11 +135,11 @@ Persistency check for syslog setting
     Wait For Host To Ping   ${OPENBMC_HOST}
     Sleep   ${WAIT_FOR_SERVICES_UP}
 
-    ${ip_address} =    Read Attribute
+    ${ip_address}=    Read Attribute
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   ipaddr
-    ${port} =    Read Attribute
+    ${port}=    Read Attribute
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   port
-    ${status} =    Read Attribute
+    ${status}=    Read Attribute
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog   status
 
     Should Be Equal    ${old_ip}    ${ip_address}
@@ -151,18 +151,18 @@ Persistency check for syslog setting
 Enable Syslog Setting
     [Arguments]    ${ipaddr}    ${port}
     ${MYDICT}=  create Dictionary   ipaddr=${ipaddr}  port=${port}
-    @{rsyslog} =   Create List     ${MYDICT}
-    ${data} =   create dictionary   data=@{rsyslog}
-    ${resp} =   openbmc post request
+    @{rsyslog}=   Create List     ${MYDICT}
+    ${data}=   create dictionary   data=@{rsyslog}
+    ${resp}=   openbmc post request
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog/action/Enable     data=${data}
-    ${jsondata} =    to json    ${resp.content}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
 Disable Syslog Setting
     [Arguments]    ${args}
-    @{setting_list} =   Create List     ${args}
-    ${data} =   create dictionary   data=@{setting_list}
-    ${resp} =   OpenBMC Post Request
+    @{setting_list}=   Create List     ${args}
+    ${data}=   create dictionary   data=@{setting_list}
+    ${resp}=   OpenBMC Post Request
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog/action/Disable      data=${data}
-    ${jsondata} =    to json    ${resp.content}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}

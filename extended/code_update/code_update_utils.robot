@@ -17,8 +17,8 @@ ${HOST_SETTING}      ${OPENBMC_BASE_URI}settings/host0
 
 Preserve BMC Network Setting
     [Documentation]   Preserve Network setting
-    ${policy} =       Set Variable   ${1}
-    ${value} =    create dictionary   data=${policy}
+    ${policy}=       Set Variable   ${1}
+    ${value}=    create dictionary   data=${policy}
     Write Attribute   ${BMC_UPD_ATTR}  preserve_network_settings  data=${value}
     ${data}=      Read Properties   ${BMC_UPD_ATTR}
     should be equal as strings    ${data['preserve_network_settings']}   ${1}
@@ -30,8 +30,8 @@ Activate BMC flash image
     ...               The status could be either one of these
     ...               'Deferred for mounted filesystem. reboot BMC to apply.'
     ...               'Image ready to apply.'
-    @{img_path} =   Create List    /tmp/flashimg
-    ${data} =   create dictionary   data=@{img_path}
+    @{img_path}=   Create List    /tmp/flashimg
+    ${data}=   create dictionary   data=@{img_path}
     ${resp}=    openbmc post request    ${BMC_UPD_METHOD}   data=${data}
     should be equal as strings   ${resp.status_code}   ${HTTP_OK}
 
@@ -44,7 +44,7 @@ Prepare For Update
     [Documentation]   Switch to update mode in progress. This method calls
     ...               the Abort method to remove the pending update if there
     ...               is any before code activation.
-    ${data} =   create dictionary   data=@{EMPTY}
+    ${data}=   create dictionary   data=@{EMPTY}
     ${resp}=    openbmc post request    ${BMC_PREP_METHOD}   data=${data}
     should be equal as strings   ${resp.status_code}   ${HTTP_OK}
 
@@ -68,7 +68,7 @@ Check If File Exist
 
 
 System Readiness Test
-    ${l_status} =   Run Keyword and Return Status
+    ${l_status}=   Run Keyword and Return Status
     ...   Verify Ping and REST Authentication
     Run Keyword If  '${l_status}' == '${False}'
     ...   Fail  msg=System not in ideal state to use [ERROR]
@@ -103,7 +103,7 @@ Set Policy Setting
     [Documentation]   Set the given test policy
     [arguments]   ${policy}
 
-    ${valueDict} =     create dictionary  data=${policy}
+    ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}

@@ -53,7 +53,7 @@ Set IP address on valid Interface
     ${ipaddress}=      set variable    ${networkInfo['data'][2]}
     ${gateway}=        set variable    ${networkInfo['data'][3]}
 
-    ${isgatewayfound} =    Set Variable If   '${gateway}'=='${NEW_GATEWAY}'  true    false
+    ${isgatewayfound}=    Set Variable If   '${gateway}'=='${NEW_GATEWAY}'  true    false
     Log   ${isgatewayfound}
     ${isIPfound}=    Set Variable if    '${ipaddress}' == '${NEW_IP}'    true   false
     should be true   '${isIPfound}' == 'true' and '${isgatewayfound}' == 'true'
@@ -81,7 +81,7 @@ Revert the last ip address change
     ${ipaddress}=      set variable    ${networkInfo['data'][2]}
     ${gateway}=        set variable    ${networkInfo['data'][3]}
 
-    ${isgatewayfound} =    Set Variable If   '${gateway}'=='${OLD_GATEWAY}'  true    false
+    ${isgatewayfound}=    Set Variable If   '${gateway}'=='${OLD_GATEWAY}'  true    false
     Log   ${isgatewayfound}
     ${isIPfound}=    Set Variable if    '${ipaddress}' == '${OLD_IP}'    true   false
     should be true   '${isIPfound}' == 'true' and '${isgatewayfound}' == 'true'
@@ -101,7 +101,7 @@ Persistency check for ip address
     ${ipaddress}=      set variable    ${networkInfo['data'][2]}
     ${gateway}=        set variable    ${networkInfo['data'][3]}
 
-    ${isgatewayfound} =    Set Variable If   '${gateway}'=='${OLD_GATEWAY}'  true    false
+    ${isgatewayfound}=    Set Variable If   '${gateway}'=='${OLD_GATEWAY}'  true    false
     Log   ${isgatewayfound}
     ${isIPfound}=    Set Variable if    '${ipaddress}' == '${OLD_IP}'    true   false
     should be true   '${isIPfound}' == 'true' and '${isgatewayfound}' == 'true'
@@ -149,7 +149,7 @@ Get networkInfo from the interface
     ${resp}=       Call Method
     ...    ${OPENBMC_BASE_URI}NetworkManager/Interface/   GetAddress4    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
     Log   ${json['data'][2]}
     Log   ${json['data'][3]}
     [return]    ${json}
@@ -173,7 +173,7 @@ SetMacAddress_bad
     ${resp}=       Call Method
     ...   ${OPENBMC_BASE_URI}NetworkManager/Interface/   SetHwAddress    data=${args}
     should not be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
     should be equal as strings      ${json['status']}       ${result}
 
 
@@ -184,7 +184,7 @@ SetMacAddress_good
     ${resp}=       Call Method
     ...    ${OPENBMC_BASE_URI}NetworkManager/Interface/   SetHwAddress    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
     should be equal as strings      ${json['status']}       ${result}
     Wait For Host To Ping      ${OPENBMC_HOST}
 
@@ -194,5 +194,5 @@ SetMacAddress_good
     ${args}=     Create Dictionary   data=@{arglist}
     ${resp}=   Call Method
     ...    ${OPENBMC_BASE_URI}NetworkManager/Interface/    GetHwAddress    data=${args}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
     should be equal as strings   ${json['data']}    ${address}

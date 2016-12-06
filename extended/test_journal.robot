@@ -46,8 +46,8 @@ Put Request Journal Log
 
     Start Journal Log
 
-    ${bootpolicy} =   Set Variable   ONETIME
-    ${valueDict} =   create dictionary   data=${bootpolicy}
+    ${bootpolicy}=   Set Variable   ONETIME
+    ${valueDict}=   create dictionary   data=${bootpolicy}
     openbmc put request  ${OPENBMC_BASE_URI}settings/host0/attr/boot_policy   data=${valueDict}
 
     ${output}=    Stop Journal Log
