@@ -41,6 +41,7 @@
 -e Set_System_Time_with_no_time
 -e IPMI_Chassis_Status_On
 -e IPMI_Chassis_Status_Off
+-e Verify_IPMI_Chassis_Restore_Power_Policy
 #Pre bringup list
 -e Repeated_Testing
 -e power_on_test
