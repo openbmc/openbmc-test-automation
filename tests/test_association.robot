@@ -53,7 +53,7 @@ Create error log on single FRU
     ...   return_stderr=True
     Should Be Empty    ${stderr}
 
-    ${log_list} =     Get EventList
+    ${log_list}=     Get EventList
     Should Contain   '${log_list}'   ${elog.strip('q ')}
 
     ${association_uri} =
@@ -63,7 +63,7 @@ Create error log on single FRU
     ...     Read Attribute    ${association_uri}    endpoints
     Should Contain     ${association_content}    ${DIMM1_URI}
 
-    ${dimm1_event} =     Read Attribute     ${DIMM1_URI}/event   endpoints
+    ${dimm1_event}=     Read Attribute     ${DIMM1_URI}/event   endpoints
     Should Contain     ${dimm1_event}    ${log_list[0]}
 
 
@@ -72,17 +72,17 @@ Create error log on two FRU
     ...                 Create an error log on two FRUs and verify
     ...                 its association.\n
 
-    ${log_uri} =      Create a test log
-    ${association_uri} =    catenate    SEPARATOR=   ${log_uri}   /fru
+    ${log_uri}=      Create a test log
+    ${association_uri}=    catenate    SEPARATOR=   ${log_uri}   /fru
 
-    ${association_content} =     Read Attribute    ${association_uri}    endpoints
+    ${association_content}=     Read Attribute    ${association_uri}    endpoints
     Should Contain     ${association_content}    ${DIMM3_URI}
     Should Contain     ${association_content}    ${DIMM2_URI}
 
-    ${dimm3_event} =     Read Attribute     ${DIMM3_URI}/event   endpoints
+    ${dimm3_event}=     Read Attribute     ${DIMM3_URI}/event   endpoints
     Should Contain     ${dimm3_event}    ${log_uri}
 
-    ${dimm2_event} =     Read Attribute     ${DIMM2_URI}/event   endpoints
+    ${dimm2_event}=     Read Attribute     ${DIMM2_URI}/event   endpoints
     Should Contain     ${dimm2_event}    ${log_uri}
 
 
@@ -93,17 +93,17 @@ Create multiple error logs
 
     : FOR    ${INDEX}    IN RANGE    1    4
         \    Log    ${INDEX}
-        \    ${log_uri} =      Create a test log
-        \    ${association_uri} =    catenate    SEPARATOR=   ${log_uri}   /fru
+        \    ${log_uri}=      Create a test log
+        \    ${association_uri}=    catenate    SEPARATOR=   ${log_uri}   /fru
 
-        \    ${association_content} =     Read Attribute    ${association_uri}    endpoints
+        \    ${association_content}=     Read Attribute    ${association_uri}    endpoints
         \    Should Contain     ${association_content}    ${DIMM3_URI}
         \    Should Contain     ${association_content}    ${DIMM2_URI}
 
-        \    ${dimm3_event} =     Read Attribute     ${DIMM3_URI}/event   endpoints
+        \    ${dimm3_event}=     Read Attribute     ${DIMM3_URI}/event   endpoints
         \    Should Contain     ${dimm3_event}    ${log_uri}
 
-        \    ${dimm2_event} =     Read Attribute     ${DIMM2_URI}/event   endpoints
+        \    ${dimm2_event}=     Read Attribute     ${DIMM2_URI}/event   endpoints
         \    Should Contain     ${dimm2_event}    ${log_uri}
 
 
@@ -113,23 +113,23 @@ Delete error log
     ...                 association is also removed.\n
     [Tags]  Delete_error_log
 
-    ${log_uri1} =      Create a test log
-    ${association_uri1} =    catenate    SEPARATOR=   ${log_uri1}   /fru
+    ${log_uri1}=      Create a test log
+    ${association_uri1}=    catenate    SEPARATOR=   ${log_uri1}   /fru
 
-    ${log_uri2} =      Create a test log
+    ${log_uri2}=      Create a test log
 
-    ${del_uri} =  catenate    SEPARATOR=   ${log_uri1}   /action/delete
-    ${resp} =    openbmc post request     ${del_uri}    data=${NIL}
+    ${del_uri}=  catenate    SEPARATOR=   ${log_uri1}   /action/delete
+    ${resp}=    openbmc post request     ${del_uri}    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
 
-    ${resp} =     openbmc get request     ${association_uri1}
-    ${jsondata} =    to json    ${resp.content}
+    ${resp}=     openbmc get request     ${association_uri1}
+    ${jsondata}=    to json    ${resp.content}
     Should Contain     ${jsondata['message']}    404 Not Found
 
-    ${dimm3_event} =     Read Attribute      ${DIMM3_URI}/event   endpoints
+    ${dimm3_event}=     Read Attribute      ${DIMM3_URI}/event   endpoints
     Should Not Contain     ${dimm3_event}    ${log_uri1}
 
-    ${dimm2_event} =     Read Attribute      ${DIMM2_URI}/event   endpoints
+    ${dimm2_event}=     Read Attribute      ${DIMM2_URI}/event   endpoints
     Should Not Contain     ${dimm2_event}    ${log_uri1}
 
 
@@ -145,14 +145,14 @@ Association with invalid FRU
     ...   return_stderr=True
     Should Be Empty    ${stderr}
 
-    ${log_list} =     Get EventList
+    ${log_list}=     Get EventList
     Should Contain   '${log_list}'   ${elog.strip('q ')}
 
     ${association_uri} =
     ...   catenate  SEPARATOR=  ${EVENT_RECORD}/${elog.strip('q ')}  /fru
 
-    ${resp} =     openbmc get request     ${association_uri}
-    ${jsondata} =    to json    ${resp.content}
+    ${resp}=     openbmc get request     ${association_uri}
+    ${jsondata}=    to json    ${resp.content}
     Should Contain     ${jsondata['message']}    404 Not Found
 
 
@@ -168,14 +168,14 @@ Assocition with no FRU error event
     ...   return_stderr=True
     Should Be Empty    ${stderr}
 
-    ${log_list} =     Get EventList
+    ${log_list}=     Get EventList
     Should Contain   '${log_list}'   ${elog.strip('q ')}
 
     ${association_uri} =
     ...   catenate    SEPARATOR=   ${EVENT_RECORD}/${elog.strip('q ')}  /fru
 
-    ${resp} =     openbmc get request     ${association_uri}
-    ${jsondata} =    to json    ${resp.content}
+    ${resp}=     openbmc get request     ${association_uri}
+    ${jsondata}=    to json    ${resp.content}
     Should Contain     ${jsondata['message']}    404 Not Found
 
 
@@ -192,7 +192,7 @@ Association with virtual sensor
     ...   return_stderr=True
     Should Be Empty    ${stderr}
 
-    ${log_list} =     Get EventList
+    ${log_list}=     Get EventList
     Should Contain   '${log_list}'   ${elog.strip('q ')}
 
     ${association_uri} =
@@ -209,7 +209,7 @@ Association unchanged after reboot
     ...                 does not change after open bmc reboot.\n
     [Tags]  bmcreboot  Association_Unchanged_After_Reboot
 
-    ${pre_reboot_log_uri} =      Create a test log
+    ${pre_reboot_log_uri}=      Create a test log
     ${association_uri} =
     ...    catenate    SEPARATOR=   ${pre_reboot_log_uri}   /fru
     ${pre_reboot_association_content} =
@@ -242,26 +242,26 @@ Association unchanged after reboot
 *** Keywords ***
 
 Get EventList
-    ${resp} =   openbmc get request     /org/openbmc/records/events/
+    ${resp}=   openbmc get request     /org/openbmc/records/events/
     should be equal as strings    ${resp.status_code}    ${HTTP_OK}
-    ${jsondata} =    to json    ${resp.content}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['data']}
 
 Create a test log
     [arguments]
-    ${data} =   create dictionary   data=@{EMPTY}
-    ${resp} =   openbmc post request     /org/openbmc/records/events/action/acceptTestMessage    data=${data}
+    ${data}=   create dictionary   data=@{EMPTY}
+    ${resp}=   openbmc post request     /org/openbmc/records/events/action/acceptTestMessage    data=${data}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json} =   to json         ${resp.content}
-    ${LOGID} =    convert to integer    ${json['data']}
+    ${json}=   to json         ${resp.content}
+    ${LOGID}=    convert to integer    ${json['data']}
     ${uri}=     catenate    SEPARATOR=   /org/openbmc/records/events/   ${LOGID}
     [return]  ${uri}
 
 Clear all logs
-    ${resp} =   openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}
+    ${resp}=   openbmc post request     /org/openbmc/records/events/action/clear    data=${NIL}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${resp} =   openbmc get request     /org/openbmc/records/events/
-    ${json} =   to json         ${resp.content}
+    ${resp}=   openbmc get request     /org/openbmc/records/events/
+    ${json}=   to json         ${resp.content}
     Should Be Empty     ${json['data']}
 
 Suite Initialization Setup

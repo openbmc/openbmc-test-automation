@@ -71,7 +71,7 @@ Set NTP Time Mode
 
     Set Time Mode   NTP
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_mode
+    ${boot}=   Read Attribute  /org/openbmc/settings/host0    time_mode
     Should Be Equal    ${boot}    NTP
 
 Set Manual Time Mode
@@ -82,7 +82,7 @@ Set Manual Time Mode
 
     Set Time Mode   Manual
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_mode
+    ${boot}=   Read Attribute  /org/openbmc/settings/host0    time_mode
     Should Be Equal    ${boot}    Manual
 
 Set Time Owner as BMC
@@ -93,7 +93,7 @@ Set Time Owner as BMC
 
     Set Time Owner   BMC
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_owner
+    ${boot}=   Read Attribute  /org/openbmc/settings/host0    time_owner
     Should Be Equal    ${boot}    BMC
 
 Set Time Owner as Host
@@ -104,7 +104,7 @@ Set Time Owner as Host
 
     Set Time Owner   Host
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_owner
+    ${boot}=   Read Attribute  /org/openbmc/settings/host0    time_owner
     Should Be Equal    ${boot}    Host
 
 Set Invalid Time Mode
@@ -114,10 +114,10 @@ Set Invalid Time Mode
     ...               REST API for the same.
     [Tags]  Set_Invalid_Time_Mode
 
-    ${resp} =   Set Time Mode   abc
+    ${resp}=   Set Time Mode   abc
     Should Be Equal    ${resp}    error
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_mode
+    ${boot}=   Read Attribute  /org/openbmc/settings/host0    time_mode
     Should Not Be Equal    ${boot}    abc
 
 Set Invalid Time Owner
@@ -127,10 +127,10 @@ Set Invalid Time Owner
     ...               REST API for the same.
     [Tags]  Set_Invalid_Time_Owner
 
-    ${resp} =   Set Time Owner   xyz
+    ${resp}=   Set Time Owner   xyz
     Should Be Equal    ${resp}    error
 
-    ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_owner
+    ${boot}=   Read Attribute  /org/openbmc/settings/host0    time_owner
     Should Not Be Equal    ${boot}    xyz
 
 
@@ -149,22 +149,22 @@ Get BMC Time And Date
 
 Set Time Owner
     [Arguments]    ${args}
-    ${timeowner} =   Set Variable   ${args}
-    ${valueDict} =   create dictionary   data=${timeowner}
+    ${timeowner}=   Set Variable   ${args}
+    ${valueDict}=   create dictionary   data=${timeowner}
 
-    ${resp} =   OpenBMC Put Request
+    ${resp}=   OpenBMC Put Request
     ...         /org/openbmc/settings/host0/attr/time_owner    data=${valueDict}
-    ${jsondata} =    to json    ${resp.content}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
 Set Time Mode
     [Arguments]    ${args}
-    ${timemode} =   Set Variable   ${args}
-    ${valueDict} =   create dictionary   data=${timemode}
+    ${timemode}=   Set Variable   ${args}
+    ${valueDict}=   create dictionary   data=${timemode}
 
-    ${resp} =   OpenBMC Put Request
+    ${resp}=   OpenBMC Put Request
     ...         /org/openbmc/settings/host0/attr/time_mode    data=${valueDict}
-    ${jsondata} =    to json    ${resp.content}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
 

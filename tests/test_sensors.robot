@@ -16,7 +16,7 @@ Test Teardown          FFDC On Test Case Fail
 
 
 *** Variables ***
-${model} =    ${OPENBMC_MODEL}
+${model}=    ${OPENBMC_MODEL}
 
 *** Test Cases ***
 Verify connection
@@ -29,73 +29,73 @@ Execute ipmi BT capabilities command
     response Should Be Equal    " 01 40 40 0a 01"
 
 Execute Set Sensor boot count
-    ${uri} =    Get System component    BootCount
-    ${x} =      Get Sensor Number   ${uri}
+    ${uri}=    Get System component    BootCount
+    ${x}=      Get Sensor Number   ${uri}
 
     Run IPMI command   0x04 0x30 ${x} 0x01 0x00 0x35 0x00 0x00 0x00 0x00 0x00 0x00
     Read the Attribute      ${uri}   value
-    ${val} =     convert to integer    53
+    ${val}=     convert to integer    53
     Response Should Be Equal   ${val}
 
 Set Sensor Boot progress
-    ${uri} =    Get System component    BootProgress
-    ${x} =      Get Sensor Number   ${uri}
+    ${uri}=    Get System component    BootProgress
+    ${x}=      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x04 0x00 0x00 0x00 0x00 0x14 0x00
     Read the Attribute  ${uri}    value
     Response Should Be Equal    FW Progress, Baseboard Init
 
 Set Sensor Boot progress Longest string
-    ${uri} =    Get System component    BootProgress
-    ${x} =      Get Sensor Number   ${uri}
+    ${uri}=    Get System component    BootProgress
+    ${x}=      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x04 0x00 0x00 0x00 0x00 0x0e 0x00
     Read The Attribute  ${uri}    value
     Response Should Be Equal    FW Progress, Docking station attachment
 
 BootProgress sensor FW Hang unspecified Error
-    ${uri} =    Get System component    BootProgress
-    ${x} =      Get Sensor Number   ${uri}
+    ${uri}=    Get System component    BootProgress
+    ${x}=      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00
     Read The Attribute  ${uri}    value
     Response Should Be Equal    FW Hang, Unspecified
 
 BootProgress fw hang state
-    ${uri} =    Get System component    BootProgress
-    ${x} =      Get Sensor Number   ${uri}
+    ${uri}=    Get System component    BootProgress
+    ${x}=      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}    value
     Response Should Be Equal    POST Error, unknown
 
 OperatingSystemStatus Sensor boot completed progress
-    ${uri} =    Get System component    OperatingSystemStatus
-    ${x} =      Get Sensor Number   ${uri}
+    ${uri}=    Get System component    OperatingSystemStatus
+    ${x}=      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}     value
     Response Should Be Equal    Boot completed (00)
 
 OperatingSystemStatus Sensor progress
-    ${uri} =    Get System component    OperatingSystemStatus
-    ${x} =      Get Sensor Number   ${uri}
+    ${uri}=    Get System component    OperatingSystemStatus
+    ${x}=      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x04 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}     value
     Response Should Be Equal    PXE boot completed
 
 OCC Active sensor on enabled
-    ${uri} =    Get System component    OccStatus
-    ${x} =      Get Sensor Number   ${uri}
+    ${uri}=    Get System component    OccStatus
+    ${x}=      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}     value
     Response Should Be Equal    Enabled
 
 OCC Active sensor on disabled
-    ${uri} =    Get System component    OccStatus
-    ${x} =      Get Sensor Number   ${uri}
+    ${uri}=    Get System component    OccStatus
+    ${x}=      Get Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}     value
@@ -103,64 +103,64 @@ OCC Active sensor on disabled
 
 CPU Present
 
-    ${uri} =    Get System component    cpu
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    cpu
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}    present
     Response Should Be Equal    True
 
 CPU not Present
-    ${uri} =    Get System component    cpu
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    cpu
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}    present
     Response Should Be Equal    False
 
 CPU fault
-    ${uri} =    Get System component    cpu
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    cpu
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x01 0x00 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}    fault
     Response Should Be Equal    True
 
 CPU no fault
-    ${uri} =    Get System component    cpu
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    cpu
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x20 0x00
     Read The Attribute  ${uri}    fault
     Response Should Be Equal    False
 
 core Present
-    ${uri} =    Get System component    core11
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    core11
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}   present
     Response Should Be Equal    True
 
 core not Present
-    ${uri} =    Get System component    core11
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    core11
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}   present
     Response Should Be Equal    False
 
 core fault
-    ${uri} =    Get System component    core11
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    core11
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x01 0x00 0x00 0x00 0x20 0x00
     Read The Attribute  ${uri}    fault
     Response Should Be Equal    True
 
 core no fault
-    ${uri} =    Get System component    core11
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    core11
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x20 0x00
     Read The Attribute  ${uri}    fault
@@ -169,8 +169,8 @@ core no fault
 DIMM3 Present
     [Tags]    DIMM3_Present
 
-    ${uri} =    Get System component    dimm3
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    dimm3
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x40 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute   ${uri}     present
@@ -179,8 +179,8 @@ DIMM3 Present
 DIMM3 not Present
     [Tags]    DIMM3_not_Present
 
-    ${uri} =    Get System component    dimm3
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    dimm3
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x00 0x40 0x00 0x00 0x20 0x00
     Read The Attribute   ${uri}     present
@@ -188,8 +188,8 @@ DIMM3 not Present
 
 DIMM0 fault
     [Tags]    DIMM0_fault
-    ${uri} =    Get System component    dimm0
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    dimm0
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x10 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute   ${uri}     fault
@@ -197,8 +197,8 @@ DIMM0 fault
 
 DIMM0 no fault
     [Tags]    DIMM0_no_fault
-    ${uri} =    Get System component    dimm0
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    dimm0
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x10 0x00 0x00 0x20 0x00
     Read The Attribute   ${uri}     fault
@@ -207,8 +207,8 @@ DIMM0 no fault
 Centaur0 Present
     [Tags]    Centaur0_Present
 
-    ${uri} =    Get System component    membuf
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    membuf
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x40 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute   ${uri}    present
@@ -217,24 +217,24 @@ Centaur0 Present
 Centaur0 not Present
     [Tags]    Centaur0_not_Present
 
-    ${uri} =    Get System component    membuf
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    membuf
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x40 0x00 0x00 0x20 0x00
     Read The Attribute   ${uri}    present
     Response Should Be Equal    False
 
 Centaur0 fault
-    ${uri} =    Get System component    membuf
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    membuf
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x10 0x00 0x00 0x00 0x00 0x20 0x00
     Read The Attribute   ${uri}    fault
     Response Should Be Equal    True
 
 Centaur0 no fault
-    ${uri} =    Get System component    membuf
-    ${x} =      Get Inventory Sensor Number   ${uri}
+    ${uri}=    Get System component    membuf
+    ${x}=      Get Inventory Sensor Number   ${uri}
 
     Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x10 0x00 0x00 0x20 0x00
     Read The Attribute   ${uri}    fault
@@ -243,36 +243,36 @@ Centaur0 no fault
 System Present
     [Tags]    System_Present
 
-    ${uri} =    Get System component    system
+    ${uri}=    Get System component    system
     Read The Attribute   ${uri}    present
     Response Should Be Equal    True
 
 System Fault
-    ${uri} =    Get System component    system
+    ${uri}=    Get System component    system
     Read The Attribute   ${uri}    fault
     Response Should Be Equal    False
 
 Chassis Present
     [Tags]    Chassis_Present
 
-    ${uri} =    Get System component    chassis
+    ${uri}=    Get System component    chassis
     Read The Attribute   /org/openbmc/inventory/system/chassis    present
     Response Should Be Equal    True
 
 Chassis Fault
-    ${uri} =    Get System component    chassis
+    ${uri}=    Get System component    chassis
     Read The Attribute   /org/openbmc/inventory/system/chassis    fault
     Response Should Be Equal    False
 
 io_board Present
     [Tags]  io_board_Present
-    ${uri} =    Get System component    io_board
+    ${uri}=    Get System component    io_board
     Read The Attribute   ${uri}    present
     Response Should Be Equal    True
 
 io_board Fault
     [Tags]  io_board_Fault
-    ${uri} =    Get System component    io_board
+    ${uri}=    Get System component    io_board
     Read The Attribute   ${uri}    fault
     Response Should Be Equal    False
 
@@ -281,15 +281,15 @@ io_board Fault
 Setup The Suite
 
     Open Connection And Log In
-    ${resp} =       Read Properties         /org/openbmc/enumerate   timeout=30
+    ${resp}=       Read Properties         /org/openbmc/enumerate   timeout=30
     Set Suite Variable      ${SYSTEM_INFO}          ${resp}
     log Dictionary          ${resp}
 
 Get System component
     [Arguments]    ${type}
-    ${list} =    Get Dictionary Keys    ${SYSTEM_INFO}
-    ${resp} =    Get Matches    ${list}    regexp=^.*[0-9a-z_].${type}[0-9]*$
-    ${url} =    Get From List    ${resp}    0
+    ${list}=    Get Dictionary Keys    ${SYSTEM_INFO}
+    ${resp}=    Get Matches    ${list}    regexp=^.*[0-9a-z_].${type}[0-9]*$
+    ${url}=    Get From List    ${resp}    0
     [return]    ${url}
 
 Execute new Command
@@ -306,15 +306,15 @@ Response Should Be Empty
 
 Read the Attribute
     [arguments]    ${uri}    ${parm}
-    ${output} =     Read Attribute      ${uri}    ${parm}
+    ${output}=     Read Attribute      ${uri}    ${parm}
     set test variable    ${OUTPUT}     ${output}
 
 Get Sensor Number
     [arguments]  ${name}
-    ${x} =       get sensor   ${OPENBMC_MODEL}   ${name}
+    ${x}=       get sensor   ${OPENBMC_MODEL}   ${name}
     [return]     ${x}
 
 Get Inventory Sensor Number
     [arguments]  ${name}
-    ${x} =       get inventory sensor   ${OPENBMC_MODEL}   ${name}
+    ${x}=       get inventory sensor   ${OPENBMC_MODEL}   ${name}
     [return]     ${x}

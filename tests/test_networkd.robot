@@ -23,7 +23,7 @@ Get the Mac address
     ${args}=     Create Dictionary   data=@{arglist}
     ${resp}=   Call Method    /org/openbmc/NetworkManager/Interface/    GetHwAddress    data=${args}
     should not be empty    ${resp.content}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
     should be equal as strings      ${json['status']}      ok
     set suite variable   ${OLD_MAC_ADDRESS}  ${json['data']}
 
@@ -38,7 +38,7 @@ Get IP Address with invalid interface
     ${args}=     Create Dictionary   data=@{arglist}
     ${resp}=    Call Method    /org/openbmc/NetworkManager/Interface/   GetAddress4    data=${args}
     should not be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
     should be equal as strings      ${json['status']}       error
 
 Get IP Address with valid interface
@@ -51,7 +51,7 @@ Get IP Address with valid interface
     ${args}=     Create Dictionary   data=@{arglist}
     ${resp}=    Call Method    /org/openbmc/NetworkManager/Interface/   GetAddress4    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
     should be equal as strings      ${json['status']}      ok
 
 
@@ -123,7 +123,7 @@ Get IP Address type
     @{arglist}=   Create List   eth0
     ${args}=     Create Dictionary   data=@{arglist}
     ${resp}=    Call Method    /org/openbmc/NetworkManager/Interface/   GetAddressType    data=${args}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
     Should Be Equal    ${json['data']}    STATIC
     should be equal as strings      ${json['status']}      ok
 
@@ -144,7 +144,7 @@ Get networkInfo from the interface
     ${args}=       Create Dictionary   data=@{arglist}
     ${resp}=       Call Method    /org/openbmc/NetworkManager/Interface/   GetAddress4    data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
     log to console   ${json['data'][2]}
     log to console   ${json['data'][3]}
     [return]    ${json}
@@ -156,5 +156,5 @@ AddNetworkInfo
     ${args}=       Create Dictionary   data=@{arglist}
     ${resp}=       Call Method    /org/openbmc/NetworkManager/Interface/   SetAddress4    data=${args}
     should not be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json} =   to json         ${resp.content}
+    ${json}=   to json         ${resp.content}
     should be equal as strings      ${json['status']}       ${result}

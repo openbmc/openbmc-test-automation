@@ -29,12 +29,12 @@ Create and delete user group
     ...                 and deletion in open bmc.\n
     [Tags]  Create_and_delete_user_group
 
-    ${groupname} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${resp} =    Create UserGroup    ${groupname}
+    ${groupname}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${resp}=    Create UserGroup    ${groupname}
     Should Be Equal    ${resp}    ok
-    ${usergroup_list} =    Get GroupListUsr
+    ${usergroup_list}=    Get GroupListUsr
     Should Contain     ${usergroup_list}    ${groupname}
-    ${resp} =    Delete Group    ${groupname}
+    ${resp}=    Delete Group    ${groupname}
     Should Be Equal    ${resp}    ok
 
 Create and delete user without group name
@@ -43,20 +43,20 @@ Create and delete user without group name
     ...                 without groupname in open bmc.\n
     [Tags]              Create_and_delete_user_without_group_name
 
-    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${username}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${password}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${comment}=    Generate Random String    ${RANDOM_STRING_LENGTH}
 
-    ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
+    ${resp}=    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
     Should Be Equal    ${resp}    ok
-    ${user_list} =    Get UserList
+    ${user_list}=    Get UserList
     Should Contain     ${user_list}    ${username}
 
     Login BMC    ${username}    ${password}
     ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
     Should Be Equal    ${rc}    ${0}
 
-    ${resp} =    Delete User    ${username}
+    ${resp}=    Delete User    ${username}
     Should Be Equal    ${resp}    ok
 
 Create and delete user with user group name
@@ -66,25 +66,25 @@ Create and delete user with user group name
     ...                 in open bmc.\n
     [Tags]              Create_and_delete_user_with_user_group_name
 
-    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${groupname} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${username}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${password}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${comment}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${groupname}=    Generate Random String    ${RANDOM_STRING_LENGTH}
 
-    ${resp} =    Create UserGroup    ${groupname}
+    ${resp}=    Create UserGroup    ${groupname}
     Should Be Equal    ${resp}    ok
-    ${resp} =    Create User    ${comment}    ${username}    ${groupname}    ${password}
+    ${resp}=    Create User    ${comment}    ${username}    ${groupname}    ${password}
     Should Be Equal    ${resp}    ok
-    ${user_list} =    Get UserList
+    ${user_list}=    Get UserList
     Should Contain     ${user_list}    ${username}
 
     Login BMC    ${username}    ${password}
     ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
     Should Be Equal    ${rc}    ${0}
 
-    ${resp} =    Delete User    ${username}
+    ${resp}=    Delete User    ${username}
     Should Be Equal    ${resp}    ok
-    ${resp} =    Delete Group    ${groupname}
+    ${resp}=    Delete Group    ${groupname}
     Should Be Equal    ${resp}    ok
 
 Create multiple users
@@ -95,12 +95,12 @@ Create multiple users
 
     : FOR    ${INDEX}    IN RANGE    1    10
         \    Log    ${INDEX}
-        \    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-        \    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-        \    ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-        \    ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
+        \    ${username}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+        \    ${password}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+        \    ${comment}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+        \    ${resp}=    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
         \    Should Be Equal    ${resp}    ok
-        \    ${user_list} =    Get UserList
+        \    ${user_list}=    Get UserList
         \    Should Contain     ${user_list}    ${username}
         \    Login BMC    ${username}    ${password}
         \    ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
@@ -112,25 +112,25 @@ Create and delete user without password
     ...                 in open bmc.\n
     [Tags]              Create_and_delete_user_without_password
 
-    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${groupname} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${username}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${password}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${comment}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${groupname}=    Generate Random String    ${RANDOM_STRING_LENGTH}
 
-    ${resp} =    Create UserGroup    ${groupname}
+    ${resp}=    Create UserGroup    ${groupname}
     Should Be Equal    ${resp}    ok
-    ${resp} =    Create User    ${comment}    ${username}    ${groupname}    ${EMPTY}
+    ${resp}=    Create User    ${comment}    ${username}    ${groupname}    ${EMPTY}
     Should Be Equal    ${resp}    ok
-    ${user_list} =    Get UserList
+    ${user_list}=    Get UserList
     Should Contain     ${user_list}    ${username}
 
     Login BMC    ${username}    ${EMPTY}
     ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
     Should Be Equal    ${rc}    ${0}
 
-    ${resp} =    Delete User    ${username}
+    ${resp}=    Delete User    ${username}
     Should Be Equal    ${resp}    ok
-    ${resp} =    Delete Group    ${groupname}
+    ${resp}=    Delete Group    ${groupname}
     Should Be Equal    ${resp}    ok
 
 Set password for existing user
@@ -139,27 +139,27 @@ Set password for existing user
     ...                 in open bmc.\n
     [Tags]              Set_password_for_existing_user
 
-    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${username}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${password}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${comment}=    Generate Random String    ${RANDOM_STRING_LENGTH}
 
-    ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
+    ${resp}=    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
     Should Be Equal    ${resp}    ok
-    ${user_list} =    Get UserList
+    ${user_list}=    Get UserList
     Should Contain     ${user_list}    ${username}
 
     Login BMC    ${username}    ${password}
     ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
     Should Be Equal    ${rc}    ${0}
 
-    ${resp} =    Change Password    ${username}    ${VALID_PASSWORD}
+    ${resp}=    Change Password    ${username}    ${VALID_PASSWORD}
     Should Be Equal    ${resp}    ok
 
     Login BMC    ${username}    ${VALID_PASSWORD}
     ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
     Should Be Equal    ${rc}    ${0}
 
-    ${resp} =    Delete User    ${username}
+    ${resp}=    Delete User    ${username}
     Should Be Equal    ${resp}    ok
 
 Set password with empty password for existing
@@ -168,20 +168,20 @@ Set password with empty password for existing
     ...                 for a existing user.\n
     [Tags]              Set_password_with_empty_password_for_existing
 
-    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${username}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${password}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${comment}=    Generate Random String    ${RANDOM_STRING_LENGTH}
 
-    ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
+    ${resp}=    Create User    ${comment}    ${username}    ${EMPTY}    ${password}
     Should Be Equal    ${resp}    ok
-    ${user_list} =    Get UserList
+    ${user_list}=    Get UserList
     Should Contain     ${user_list}    ${username}
 
     Login BMC    ${username}    ${password}
     ${rc}=    Execute Command    echo Login    return_stdout=False    return_rc=True
     Should Be Equal    ${rc}    ${0}
 
-    ${resp} =    Change Password    ${username}    ${EMPTY}
+    ${resp}=    Change Password    ${username}    ${EMPTY}
     Should Be Equal    ${resp}    ok
 
     Login BMC    ${username}    ${EMPTY}
@@ -194,7 +194,7 @@ Set password for non existing user
     ...                 in open bmc.\n
     [Tags]              Set_password_for_non_existing_user
 
-    ${resp} =    Change Password    ${NON_EXISTING_USER}    ${VALID_PASSWORD}
+    ${resp}=    Change Password    ${NON_EXISTING_USER}    ${VALID_PASSWORD}
     Should Be Equal    ${resp}    error
 
 Create existing user
@@ -203,16 +203,16 @@ Create existing user
     ...                 for existing user in open bmc.\n
     [Tags]              Create_existing_user
 
-    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${username}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${password}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${comment}=    Generate Random String    ${RANDOM_STRING_LENGTH}
 
-    ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${EMPTY}
+    ${resp}=    Create User    ${comment}    ${username}    ${EMPTY}    ${EMPTY}
     Should Be Equal    ${resp}    ok
-    ${resp} =    Create User    ${comment}    ${username}    ${EMPTY}    ${EMPTY}
+    ${resp}=    Create User    ${comment}    ${username}    ${EMPTY}    ${EMPTY}
     Should Be Equal    ${resp}    error
 
-    ${resp} =    Delete User    ${username}
+    ${resp}=    Delete User    ${username}
     Should Be Equal    ${resp}    ok
 
 Create user with no name
@@ -221,14 +221,14 @@ Create user with no name
     ...                 with empty username in open bmc.\n
     [Tags]              Create_user_with_no_name
 
-    ${username} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${password} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${comment} =    Generate Random String    ${RANDOM_STRING_LENGTH}
-    ${groupname} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${username}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${password}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${comment}=    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${groupname}=    Generate Random String    ${RANDOM_STRING_LENGTH}
 
-    ${resp} =    Create User    ${comment}    ${EMPTY}    ${groupname}    ${password}
+    ${resp}=    Create User    ${comment}    ${EMPTY}    ${groupname}    ${password}
     Should Be Equal    ${resp}    error
-    ${user_list} =    Get UserList
+    ${user_list}=    Get UserList
     Should Not Contain     ${user_list}    ${EMPTY}
 
 Create existing user group
@@ -237,14 +237,14 @@ Create existing user group
     ...                 for existing user group in open bmc.\n
     [Tags]              Create_existing_user_group
 
-    ${groupname} =    Generate Random String    ${RANDOM_STRING_LENGTH}
+    ${groupname}=    Generate Random String    ${RANDOM_STRING_LENGTH}
 
-    ${resp} =    Create UserGroup    ${groupname}
+    ${resp}=    Create UserGroup    ${groupname}
     Should Be Equal    ${resp}    ok
-    ${resp} =    Create UserGroup    ${groupname}
+    ${resp}=    Create UserGroup    ${groupname}
     Should Be Equal    ${resp}    error
 
-    ${resp} =    Delete Group    ${groupname}
+    ${resp}=    Delete Group    ${groupname}
     Should Be Equal    ${resp}    ok
 
 Create user group with no name
@@ -253,9 +253,9 @@ Create user group with no name
     ...                 with empty groupname in open bmc.\n
     [Tags]              Create_user_group_with_no_name
 
-    ${resp} =    Create UserGroup    ${EMPTY}
+    ${resp}=    Create UserGroup    ${EMPTY}
     Should Be Equal    ${resp}    error
-    ${usergroup_list} =    Get GroupListUsr
+    ${usergroup_list}=    Get GroupListUsr
     Should Not Contain    ${usergroup_list}    ${EMPTY}
 
 Cleanup Users List
@@ -265,70 +265,70 @@ Cleanup Users List
     ...                 This is a no-op if there is no user list on the BMC.
     [Tags]  Cleanup_Users_List
 
-    ${user_list} =    Get UserList
+    ${user_list}=    Get UserList
     : FOR   ${username}   IN   @{user_list}
-    \    ${resp} =    Delete User    ${username}
+    \    ${resp}=    Delete User    ${username}
     \    Should Be Equal    ${resp}    ok
 
 
 *** Keywords ***
 
 Get UserList
-    ${data} =   create dictionary   data=@{EMPTY}
-    ${resp} =   OpenBMC Post Request   /org/openbmc/UserManager/Users/action/UserList   data=${data}
+    ${data}=   create dictionary   data=@{EMPTY}
+    ${resp}=   OpenBMC Post Request   /org/openbmc/UserManager/Users/action/UserList   data=${data}
     should be equal as strings    ${resp.status_code}    ${HTTP_OK}
-    ${jsondata} =    to json    ${resp.content}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['data']}
 
 Get GroupListUsr
-    ${data} =   create dictionary   data=@{EMPTY}
-    ${resp} =   OpenBMC Post Request   /org/openbmc/UserManager/Groups/action/GroupListUsr   data=${data}
+    ${data}=   create dictionary   data=@{EMPTY}
+    ${resp}=   OpenBMC Post Request   /org/openbmc/UserManager/Groups/action/GroupListUsr   data=${data}
     should be equal as strings    ${resp.status_code}    ${HTTP_OK}
-    ${jsondata} =    to json    ${resp.content}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['data']}
 
 Create User
     [Arguments]    ${comment}    ${username}    ${groupname}    ${password}
-    @{user_list} =   Create List     ${comment}    ${username}    ${groupname}    ${password}
-    ${data} =   create dictionary   data=@{user_list}
-    ${resp} =   OpenBMC Post Request    /org/openbmc/UserManager/Users/action/UserAdd      data=${data}
-    ${jsondata} =    to json    ${resp.content}
+    @{user_list}=   Create List     ${comment}    ${username}    ${groupname}    ${password}
+    ${data}=   create dictionary   data=@{user_list}
+    ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/Users/action/UserAdd      data=${data}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
 Change Password
     [Arguments]    ${username}    ${password}
-    @{user_list} =   Create List     ${username}    ${password}
-    ${data} =   create dictionary   data=@{user_list}
-    ${resp} =   OpenBMC Post Request    /org/openbmc/UserManager/User/action/Passwd      data=${data}
-    ${jsondata} =    to json    ${resp.content}
+    @{user_list}=   Create List     ${username}    ${password}
+    ${data}=   create dictionary   data=@{user_list}
+    ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/User/action/Passwd      data=${data}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
 Create UserGroup
     [Arguments]    ${args}
-    @{group_list} =   Create List     ${args}
-    ${data} =   create dictionary   data=@{group_list}
-    ${resp} =   OpenBMC Post Request    /org/openbmc/UserManager/Groups/action/GroupAddUsr      data=${data}
-    ${jsondata} =    to json    ${resp.content}
+    @{group_list}=   Create List     ${args}
+    ${data}=   create dictionary   data=@{group_list}
+    ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/Groups/action/GroupAddUsr      data=${data}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
 Delete Group
     [Arguments]    ${args}
-    @{group_list} =   Create List     ${args}
-    ${data} =   create dictionary   data=@{group_list}
-    ${resp} =   OpenBMC Post Request    /org/openbmc/UserManager/Group/action/GroupDel      data=${data}
-    ${jsondata} =    to json    ${resp.content}
+    @{group_list}=   Create List     ${args}
+    ${data}=   create dictionary   data=@{group_list}
+    ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/Group/action/GroupDel      data=${data}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
 Delete User
     [Arguments]    ${args}
-    @{user_list} =   Create List     ${args}
-    ${data} =   create dictionary   data=@{user_list}
-    ${resp} =   OpenBMC Post Request    /org/openbmc/UserManager/User/action/Userdel      data=${data}
-    ${jsondata} =    to json    ${resp.content}
+    @{user_list}=   Create List     ${args}
+    ${data}=   create dictionary   data=@{user_list}
+    ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/User/action/Userdel      data=${data}
+    ${jsondata}=    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
 Login BMC
     [Arguments]    ${username}    ${password}
     Open connection     ${OPENBMC_HOST}
-    ${resp} =   Login   ${username}    ${password}
+    ${resp}=   Login   ${username}    ${password}
     [return]    ${resp}

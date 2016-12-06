@@ -94,7 +94,7 @@ Set the boot flags with string
     [Tags]  known_issue
 
     ${valueToBeSet}=   Set Variable     3ab56f
-    ${valueDict} =   create dictionary   data=${valueToBeSet}
+    ${valueDict}=   create dictionary   data=${valueToBeSet}
     Write Attribute  /org/openbmc/settings/host0    boot_flags      data=${valueDict}
     ${value}=      Read Attribute    /org/openbmc/settings/host0    boot_flags
     Should not Be Equal     ${value}      ${valueToBeSet}

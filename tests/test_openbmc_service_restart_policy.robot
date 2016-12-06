@@ -93,6 +93,6 @@ Check Service Autorestart
 
 Execute Restart Policy Command
     [arguments]    ${command}
-    ${stdout}   ${stderr} =   Execute Command   ${command}   return_stderr=True
+    ${stdout}   ${stderr}=   Execute Command   ${command}   return_stderr=True
     Should Be Empty    ${stderr}
     [Return]    ${stdout}
