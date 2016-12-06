@@ -17,7 +17,7 @@ Test Teardown   FFDC On Test Case Fail
 Force Tags      chassisboot  bmcreboot
 
 *** Variables ***
-${HOST_SETTING}    ${OPENBMC_BASE_URI}settings/host0
+${HOST_SETTING}    ${SETTINGS_URI}host0
 
 *** Test Cases ***
 
@@ -48,7 +48,7 @@ Set the power restore policy
 Set Restore Policy
     [Arguments]    ${policy}   ${expectedState}   ${nextState}
 
-    Set Policy Setting   ${policy}
+    Set BMC Power Policy    ${policy}
 
     ${currentState}=
     ...   Read Attribute   ${HOST_SETTING}   system_state
@@ -68,16 +68,6 @@ Set Restore Policy
 
     Wait Until Keyword Succeeds
     ...   5 min   10 sec   System State  ${nextState}
-
-
-Set Policy Setting
-    [Documentation]   Set the given test policy
-    [Arguments]   ${policy}
-
-    ${valueDict}=     create dictionary  data=${policy}
-    Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
-    ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
-    Should Be Equal    ${currentPolicy}   ${policy}
 
 
 Set Initial Test State
