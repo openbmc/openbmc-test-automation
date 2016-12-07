@@ -7,9 +7,11 @@ Documentation     This module will take whatever action is necessary
 ...                  - Power state is 0 (off)
 ...                  - BMC state is "BMC_READY" or "HOST_POWERED_OFF"
 ...                  - Boot policy is "RESTORE_LAST_STATE"
+...               Support for PDU synaccess AC cycle
 
 Resource          ../lib/boot/boot_resource_master.robot
 Resource          ../lib/utils.robot
+Resource          ../lib/pdu/pdu.robot
 
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0
@@ -18,6 +20,7 @@ ${HOST_SETTING}      /org/openbmc/settings/host0
 
 Get to Stable State
     [Documentation]    BMC cleanup drive to stable state
+    ...                1. PDU powercycle if specified
     ...                1. Ping Test
     ...                2. SSH Connection session Test
     ...                3. REST Connection session Test
@@ -27,6 +30,8 @@ Get to Stable State
     ...                   standby state
     ...                7. Update restore policy
     [Tags]  Get to Stable State
+
+    Run Keyword And Ignore Error   PDU Powercycle BMC
 
     Wait For Host To Ping  ${OPENBMC_HOST}  1 mins
     Open Connection And Log In   host=${OPENBMC_HOST}
@@ -91,4 +96,20 @@ Update Policy Setting
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}
+
+
+PDU Powercycle BMC
+    [Documentation]   AC cycle the BMC via PDU
+
+    Validate Parameters
+    PDU Power Cycle
+    Check If BMC is Up   5 min    10 sec
+
+
+Validate Parameters
+    Should Not Be Empty   ${PDU_IP}
+    Should Not Be Empty   ${PDU_TYPE}
+    Should Not Be Empty   ${PDU_SLOT_NO}
+    Should Not Be Empty   ${PDU_USERNAME}
+    Should Not Be Empty   ${PDU_PASSWORD}
 
