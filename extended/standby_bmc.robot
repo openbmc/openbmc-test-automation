@@ -92,3 +92,12 @@ Update Policy Setting
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}
 
+
+Trigger Warm Reset via Reboot
+    [Documentation]    Execute reboot command on the remote BMC and
+    ...                returns immediately. This keyword "Start Command"
+    ...                returns nothing and does not wait for the command
+    ...                execution to be finished.
+    Open Connection And Log In
+
+    Start Command   /sbin/reboot
