@@ -42,6 +42,17 @@ ${OS_WAIT_TIMEOUT}  ${15*60}
 ${OPENBMC_BASE_URI}    /org/openbmc/
 ${OPENBMC_BASE_DBUS}   org.openbmc
 
+# REST URI base endpoint paths
+${SETTINGS}           ${OPENBMC_BASE_URI}settings/
+${CONTROL}            ${OPENBMC_BASE_URI}control/
+${INVENTORY}          ${OPENBMC_BASE_URI}inventory/
+${SENSORS}            ${OPENBMC_BASE_URI}sensors/
+${RECORDS}            ${OPENBMC_BASE_URI}records/
+${WATCHDOG}           ${OPENBMC_BASE_URI}watchdog/
+${BUTTONS}            ${OPENBMC_BASE_URI}buttons/
+${USER_MANAGER}       ${OPENBMC_BASE_URI}UserManager/
+${NETWORK_MANAGER}    ${OPENBMC_BASE_URI}NetworkManager/
+
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}
