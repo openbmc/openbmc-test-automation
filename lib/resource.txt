@@ -4,6 +4,7 @@ Library           String
 Library           RequestsLibrary.RequestsKeywords
 Library           OperatingSystem
 Variables         ../data/variables.py
+Resource          variables.txt
 
 *** Variables ***
 ${OPENBMC_HOST}   ${EMPTY}
