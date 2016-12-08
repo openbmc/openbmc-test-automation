@@ -501,3 +501,21 @@ Check Zombie Process
     ...    return_stderr=True  return_rc=True
     Should Be True    ${count}==0
     Should Be Empty    ${stderr}
+
+Prune Journal Log
+    [Documentation]   Prune archived journal logs.
+    [Arguments]   ${vacuum_size}=1M
+
+    # This keyword can be used to prevent the journal
+    # log from filling up the /run filesystem.
+    # This command will retain only the latest logs
+    # of the user specified size.
+
+    Open Connection And Log In
+    ${output}  ${stderr}  ${rc}=
+    ...  Execute Command
+    ...  journalctl --vacuum-size=${vacuum_size}
+    ...  return_stderr=True  return_rc=True
+
+    Should Be Equal  ${rc}  ${0}  msg=${stderr}
+    Should Contain   ${stderr}  Vacuuming done
