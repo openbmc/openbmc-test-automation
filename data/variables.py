@@ -1,5 +1,22 @@
 import os
 
+# Enable when ready with openbmc/openbmc-test-automation#203
+# replace with new path /xyz/openbmc_project
+OPENBMC_BASE_URI = '/org/openbmc/'
+OPENBMC_BASE_DBUS = 'org.openbmc'
+
+# REST URI base endpoint paths
+CONTROL = OPENBMC_BASE_URI + 'control/'
+SENSORS = OPENBMC_BASE_URI + 'sensors/'
+RECORDS = OPENBMC_BASE_URI + 'records/'
+BUTTONS = OPENBMC_BASE_URI + 'buttons/'
+SETTINGS = OPENBMC_BASE_URI + 'settings/'
+WATCHDOG = OPENBMC_BASE_URI + 'watchdog/'
+INVENTORY = OPENBMC_BASE_URI + 'inventory/'
+USER_MANAGER = OPENBMC_BASE_URI + 'UserManager/'
+NETWORK_MANAGER = OPENBMC_BASE_URI + 'NetworkManager/'
+
+
 '''
   QEMU HTTPS variable:
 
@@ -8,26 +25,29 @@ import os
   ${AUTH_SUFFIX} is populated here by default EMPTY else
   the port from the OS environment
 '''
+
+
 def get_port_https():
     # defaulted to empty string
     l_suffix = ''
     try:
         l_https_port = os.getenv('HTTPS_PORT')
         if l_https_port:
-           l_suffix = ':' + l_https_port
+            l_suffix = ':' + l_https_port
     except:
-        print "Environment variable HTTPS_PORT not set,using default HTTPS port"
+        print "Environment variable HTTPS_PORT not set,\
+              using default HTTPS port"
     return l_suffix
 
-AUTH_SUFFIX={
-    "https_port":[get_port_https()],
+AUTH_SUFFIX = {
+    "https_port": [get_port_https()],
 }
 
 # Update the ':Port number' to this variable
 AUTH_SUFFIX = AUTH_SUFFIX['https_port'][0]
 
 # Here contains a list of valid Properties bases on fru_type after a boot.
-INVENTORY_ITEMS={
+INVENTORY_ITEMS = {
     "CPU": [
         "Custom Field 1",
         "Custom Field 2",
