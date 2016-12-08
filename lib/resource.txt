@@ -38,10 +38,6 @@ ${OS_USERNAME}      ${EMPTY}
 ${OS_PASSWORD}      ${EMPTY}
 ${OS_WAIT_TIMEOUT}  ${15*60}
 
-# OpenBMC base URI path is changing to /xyz/openbmc_project
-${OPENBMC_BASE_URI}    /org/openbmc/
-${OPENBMC_BASE_DBUS}   org.openbmc
-
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}
