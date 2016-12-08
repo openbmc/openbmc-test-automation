@@ -128,3 +128,15 @@ Jenkins jobs tox commands
     $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile test_lists/HW_CI tests
 
 ```
+
+Command to get github issues (any github repository) report in CSV format
+```shell
+python ./tools/github_issues_converstion_to_csvformat.py <github user> <password> <github repo>
+
+For example for getting openbmc issues into csv
+python ./tools/github_issues_converstion_to_csvformat.py <github user> <password>  openbmc/openbmc
+
+For example for getting openbmc-test-automation issues into csv
+python ./tools/github_issues_converstion_to_csvformat.py <github user> <password>  openbmc/openbmc-test-automation
+
+```
