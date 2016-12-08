@@ -486,3 +486,16 @@ Check BMC Mem Performance
     :FOR  ${var}  IN Range  1  4
     \     BMC Mem Performance check
 
+Prune Journal Log
+    [Documentation]   Prune archived journal logs.
+    [Arguments]   ${vacuum_size}=1M
+
+    Open Connection And Log In
+    ${output}  ${stderr}  ${rc}=
+    ...  Execute Command
+    ...  journalctl --vacuum-size=${vacuum_size}
+    ...  return_stderr=True  return_rc=True
+
+    Should Be Equal  ${rc}  ${0}  msg=${stderr}
+    Should Contain   ${stderr}  Vacuuming done
+
