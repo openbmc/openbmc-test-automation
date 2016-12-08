@@ -299,62 +299,43 @@ Initialize DBUS cmd
 
 
 Start SOL Console Logging
-    [Documentation]   Start logging to a file in /tmp so that it can
-    ...               be read by any other test cases. Stop existing
-    ...               running client processes if there is any.
-    ...               By default logging at /tmp/obmc-console.log else
-    ...               user input location.
-    ...               The File is appended with datetime and pid of
-    ...               process which created this log file.
+    [Documentation]   Stop all running obmc-console-client processes.
+    ...               Start a new obmc-console-client process, logging SOL
+    ...               to file_path, by default file_path is /tmp/obmc-console.log.
     [Arguments]       ${file_path}=/tmp/obmc-console.log
 
     Open Connection And Log In
 
-    ${cur_time}=    Get Time Stamp
-    Set Global Variable   ${LOG_TIME}   ${cur_time}
+    Execute Command
+    ...  killall -s KILL obmc-console-client
+
     Start Command
-    ...  obmc-console-client > ${file_path}-${LOG_TIME}_$$
+    ...  obmc-console-client > ${file_path}
 
 
 Stop SOL Console Logging
-    [Documentation]   Login to BMC and Stop the obmc-console-client process.
-    ...               Find the pids from the log to filter the one started by
-    ...               specific test datetime and stop that process only.
-    ...               Ignore if there is no process running and return message
-    ...               "No obmc-console-client process running"
-    ...               By default retrieving log from /tmp/obmc-console.log else
-    ...               user input location.
+    [Documentation]   Stop all running obmc-console-client processes.
+    ...               Return the SOL log, located at file_path.
+    ...               By default file_path is /tmp/obmc-console.log.
     [Arguments]       ${file_path}=/tmp/obmc-console.log
 
     Open Connection And Log In
 
-    ${pid}  ${stderr}=
-    ...  Execute Command
-    ...  ls ${file_path}-${LOG_TIME}_* | cut -d'_' -f 2
-    ...  return_stderr=True
-    Should Be Empty     ${stderr}
-
     ${rc}=
     ...  Execute Command
-    ...  ps ax | grep ${pid} | grep -v grep
+    ...  killall -s KILL obmc-console-client
     ...  return_stdout=False  return_rc=True
 
-    Return From Keyword If   '${rc}' == '${1}'
-    ...   No obmc-console-client process running
-
-    ${console}  ${stderr}=
-    ...  Execute Command   kill -s KILL ${pid}
-    ...  return_stderr=True
-    Should Be Empty     ${stderr}
-    Log  Current Client PID:${pid}
+    Run Keyword If  '${rc}' == '${1}'
+    ...  Log  "No obmc-console-client process running"
 
     ${console}  ${stderr}=
     ...  Execute Command
-    ...  cat ${file_path}-${LOG_TIME}_${pid}
+    ...  cat ${file_path}
     ...  return_stderr=True
-    Should Be Empty     ${stderr}
+    Should Be Empty  ${stderr}
 
-    [Return]    ${console}
+    [Return]  ${console}
 
 
 Get Time Stamp
