@@ -4,6 +4,7 @@ Library           String
 Library           RequestsLibrary.RequestsKeywords
 Library           OperatingSystem
 Variables         ../data/variables.py
+Resource          variables.txt
 
 *** Variables ***
 ${OPENBMC_HOST}   ${EMPTY}
@@ -37,10 +38,6 @@ ${OS_HOST}          ${EMPTY}
 ${OS_USERNAME}      ${EMPTY}
 ${OS_PASSWORD}      ${EMPTY}
 ${OS_WAIT_TIMEOUT}  ${15*60}
-
-# OpenBMC base URI path is changing to /xyz/openbmc_project
-${OPENBMC_BASE_URI}    /org/openbmc/
-${OPENBMC_BASE_DBUS}   org.openbmc
 
 *** Keywords ***
 Get Inventory Schema
