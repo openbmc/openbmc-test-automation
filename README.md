@@ -128,3 +128,45 @@ Jenkins jobs tox commands
     $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile test_lists/HW_CI tests
 
 ```
+
+Template to be used to create new stand-alone python programs.
+```shell
+
+If you wish to create a new python stand-alone program, please copy bin/python_pgm_template to your new name and then begin your work.  Example:
+
+cd bin
+cp python_pgm_template my_new_program
+
+This template has much of your preliminary work done for you and it will help us all follow a similar structure.
+
+Features:
+- Help text and argparsing started for you.
+- Support for "stock" parameters like quiet, debug, test_mode.
+- exit_function and signal_handler defined.
+- validate_parms function pre-created.
+- main function follows conventional startup:
+
+    if not gen_get_options(parser, stock_list):
+        return False
+
+    if not validate_parms():
+        return False
+
+    qprint_pgm_header()
+
+    # Your code here.
+
+```
+
+
+Command to get github issues (any github repository) report in CSV format
+```shell
+python ./tools/github_issues_converstion_to_csvformat.py <github user> <password> <github repo>
+
+For example for getting openbmc issues into csv
+python ./tools/github_issues_converstion_to_csvformat.py <github user> <password>  openbmc/openbmc
+
+For example for getting openbmc-test-automation issues into csv
+python ./tools/github_issues_converstion_to_csvformat.py <github user> <password>  openbmc/openbmc-test-automation
+
+```
