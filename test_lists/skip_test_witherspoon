@@ -48,3 +48,8 @@
 -e powercapping
 -e io_board_Present
 -e io_board_Fault
+#https://github.com/openbmc/openbmc/issues/830
+-e Good_connection_for_testing
+-e get_directory_listing
+-e get_names
+-e get_names_org
