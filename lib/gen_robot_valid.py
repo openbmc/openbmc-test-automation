@@ -81,7 +81,7 @@ def rvalid_value(var_name,
         error_message = gv.svalid_value(var_value, invalid_values,
                                         valid_values, var_name)
     if not error_message == "":
-        error_message = grp.sprint_robot_error_report(error_message)
+        error_message = grp.sprint_error_report(error_message)
         BuiltIn().fail(error_message)
 
 ###############################################################################
@@ -133,7 +133,7 @@ def rvalid_integer(var_name):
     else:
         error_message = gv.svalid_integer(var_value, var_name)
     if not error_message == "":
-        error_message = grp.sprint_robot_error_report(error_message)
+        error_message = grp.sprint_error_report(error_message)
         BuiltIn().fail(error_message)
 
 ###############################################################################
