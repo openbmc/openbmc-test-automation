@@ -253,19 +253,14 @@ def run_pgm(plug_in_dir_path,
               call_point
     pissuing(cmd_buf)
 
-    sub_proc = subprocess.Popen(cmd_buf, shell=True, stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT)
-    out_buf, err_buf = sub_proc.communicate()
+    sub_proc = subprocess.Popen(cmd_buf, shell=True)
+    sub_proc.communicate()
     shell_rc = sub_proc.returncode
     if shell_rc != 0 and shell_rc != int(caller_shell_rc, 16):
         rc = 1
         failed_plug_in_name = \
             os.path.basename(os.path.normpath(plug_in_dir_path))
 
-    print(out_buf)
-    if rc == 1 and out_buf.find('**ERROR**') == -1:
-        # Plug-in output contains no "**ERROR**" text so we'll generate it.
-        print_error_report("Plug-in failed.\n")
     print("------------------------------------------------- Ending plug-in" +
           " -------------------------------------------------")
 
