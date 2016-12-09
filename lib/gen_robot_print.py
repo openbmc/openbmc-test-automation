@@ -18,7 +18,6 @@ import gen_print as gp
 from robot.libraries.BuiltIn import BuiltIn
 from robot.api import logger
 
-
 try:
     # The user can set environment variable "GEN_ROBOT_PRINT_DEBUG" to get
     # debug output from this module.
@@ -53,6 +52,50 @@ def set_quiet_default(quiet=None,
     quiet = int(quiet)
 
     return quiet
+
+###############################################################################
+
+
+###############################################################################
+def get_quiet(default=1):
+
+    r"""
+    Get the value of robot variable "quiet" and return it.  If "quiet" is not
+    defined, the "default" value is returned.
+
+    Description of arguments:
+    default                         The value that is returned if robot
+                                    variable "quiet" is not defined.
+    """
+
+    try:
+        quiet = int(BuiltIn().get_variable_value("${quiet}"))
+    except TypeError:
+        quiet = default
+
+    return quiet
+
+###############################################################################
+
+
+###############################################################################
+def get_debug(default=0):
+
+    r"""
+    Get the value of robot variable "debug" and return it.  If "debug" is not
+    defined, the "default" value is returned.
+
+    Description of arguments:
+    default                         The value that is returned if robot
+                                    variable "debug" is not defined.
+    """
+
+    try:
+        debug = int(BuiltIn().get_variable_value("${debug}"))
+    except TypeError:
+        debug = default
+
+    return debug
 
 ###############################################################################
 
@@ -203,6 +246,21 @@ def sprint_error_report(error_text="\n"):
     @{parm_list} variable which contains the names of all program parameters.
     """
 
+    try:
+        error_report_format = int(BuiltIn().get_variable_value(
+            "${error_report_format}"))
+    except TypeError:
+        error_report_format = 0
+
+    # Currently, supported values for error_report_format are:
+    # 0 - Short form
+    # 1 - Long form
+
+    error_text = error_text.rstrip('\n') + '\n'
+
+    if error_report_format == 0:
+        return gp.sprint_error(error_text)
+
     buffer = ""
     buffer += gp.sprint_dashes(width=120, char="=")
     buffer += gp.sprint_error(error_text)
@@ -318,6 +376,8 @@ robot_func_names =\
     ]
 func_names = gp.func_names + robot_func_names
 
+explicit_definitions = ['print', 'printn']
+
 func_names = list(my_ord_dict.fromkeys(func_names))
 
 if gen_robot_print_debug:
@@ -326,31 +386,34 @@ if gen_robot_print_debug:
     rprintn()
 
 for func_name in func_names:
-    # The print_var function's job is to figure out the name of arg 1 and
-    # then call print_varx.  This is not currently supported for robot
-    # programs.  Though it IS supported for python modules.
-    if func_name == "print_error" or func_name == "print_error_report":
-        output_stream = "STDERR"
-    else:
-        output_stream = "STDIN"
-    if func_name in robot_func_names:
-        object_name = "__import__(__name__)"
-    else:
-        object_name = "gp"
-    func_def = \
-        [
-            "def " + robot_prefix + func_name + "(*args):",
-            "  s_func = getattr(" + object_name + ", \"s" + func_name + "\")",
-            "  BuiltIn().log_to_console(s_func(*args),"
-            " stream='" + output_stream + "',"
-            " no_newline=True)"
-        ]
 
-    pgm_definition_string = '\n'.join(func_def)
-    if gen_robot_print_debug:
-        rprintn()
-        rprintn(pgm_definition_string)
-    exec(pgm_definition_string)
+    if func_name not in explicit_definitions:
+        # The print_var function's job is to figure out the name of arg 1 and
+        # then call print_varx.  This is not currently supported for robot
+        # programs.  Though it IS supported for python modules.
+        if func_name == "print_error" or func_name == "print_error_report":
+            output_stream = "STDERR"
+        else:
+            output_stream = "STDIN"
+        if func_name in robot_func_names:
+            object_name = "__import__(__name__)"
+        else:
+            object_name = "gp"
+        func_def = \
+            [
+                "def " + robot_prefix + func_name + "(*args):",
+                "    s_func = getattr(" + object_name + ", \"s" + func_name +
+                "\")",
+                "    BuiltIn().log_to_console(s_func(*args),"
+                " stream='" + output_stream + "',"
+                " no_newline=True)"
+            ]
+
+        pgm_definition_string = '\n'.join(func_def)
+        if gen_robot_print_debug:
+            rprintn()
+            rprintn(pgm_definition_string)
+        exec(pgm_definition_string)
 
     # Now define "q" versions of each print function.  The q functions only
     # print if global robot var "quiet" is 0.  If the global var quiet is not
@@ -359,13 +422,9 @@ for func_name in func_names:
     func_def = \
         [
             "def rq" + func_name + "(*args):",
-            "  try:",
-            "    quiet = int(BuiltIn().get_variable_value(\"${quiet}\"))",
-            "  except TypeError:",
-            "    quiet = 1",
-            "  if quiet:",
-            "    return",
-            "  r" + func_name + "(*args)"
+            "    if get_quiet():",
+            "        return",
+            "    r" + func_name + "(*args)"
         ]
 
     pgm_definition_string = '\n'.join(func_def)
@@ -378,13 +437,9 @@ for func_name in func_names:
     func_def = \
         [
             "def rd" + func_name + "(*args):",
-            "  try:",
-            "    debug = int(BuiltIn().get_variable_value(\"${debug}\"))",
-            "  except TypeError:",
-            "    debug = 0",
-            "  if not debug:",
-            "    return",
-            "  r" + func_name + "(*args)"
+            "    if not get_debug():",
+            "        return",
+            "    r" + func_name + "(*args)"
         ]
 
     pgm_definition_string = '\n'.join(func_def)
@@ -392,6 +447,7 @@ for func_name in func_names:
         rprintn(pgm_definition_string)
     exec(pgm_definition_string)
 
+    # Create shorter aliases.
     prefixes = ["", "q", "d"]
     alias = re.sub("print_", "p", func_name)
     for prefix2 in prefixes:
