@@ -40,8 +40,8 @@ def rvalidate_plug_ins(plug_in_dir_paths,
     if rc != 0:
         message = gp.sprint_varx("rc", rc, 1) + out_buf
         grp.rprintn(out_buf, 'STDERR')
-        BuiltIn().fail("Validate plug ins call failed.  See stderr text for" +
-                       " details.\n")
+        BuiltIn().fail(gp.sprint_error("Validate plug ins call failed.  See" +
+                                       " stderr text for details.\n"))
 
     plug_in_packages_list = out_buf.split("\n")
     if len(plug_in_packages_list) == 1 and plug_in_packages_list[0] == "":
@@ -173,8 +173,9 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     if int(quiet) == 1:
         cmd_buf = sub_cmd_buf + " > " + temp_file_path + " 2>&1"
     else:
-        cmd_buf = "my_tee" + debug_string + " " + temp_file_path + " -c '" +\
-                  sub_cmd_buf + "'"
+        cmd_buf = "set -o pipefail ; " + sub_cmd_buf + " 2>&1 | tee " +\
+                  temp_file_path
+
         if int(debug) == 1:
             grp.rpissuing(cmd_buf)
 
