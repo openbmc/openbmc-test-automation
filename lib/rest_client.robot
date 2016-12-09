@@ -63,10 +63,11 @@ ${QUIET}  ${0}
 *** Keywords ***
 OpenBMC Get Request
     [Arguments]    ${uri}    ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+
+    Initialize OpenBMC    ${timeout}  quiet=${quiet}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Get
     ...  base_uri=${base_uri}  args=&{kwargs}
-    Initialize OpenBMC    ${timeout}
     ${ret}=  Get Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     [Return]    ${ret}
@@ -74,44 +75,51 @@ OpenBMC Get Request
 OpenBMC Post Request
     [Arguments]    ${uri}    ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
 
+    Initialize OpenBMC    ${timeout}  quiet=${quiet}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${headers}=     Create Dictionary   Content-Type=application/json
     set to dictionary   ${kwargs}       headers     ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
-    Initialize OpenBMC    ${timeout}
     ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     [Return]    ${ret}
 
 OpenBMC Put Request
     [Arguments]    ${uri}    ${timeout}=10    &{kwargs}
+
+    Initialize OpenBMC    ${timeout}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${headers}=     Create Dictionary   Content-Type=application/json
     set to dictionary   ${kwargs}       headers     ${headers}
     Log Request    method=Put    base_uri=${base_uri}    args=&{kwargs}
-    Initialize OpenBMC    ${timeout}
     ${ret}=  Put Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Log Response    ${ret}
     [Return]    ${ret}
 
 OpenBMC Delete Request
     [Arguments]    ${uri}    ${timeout}=10    &{kwargs}
+
+    Initialize OpenBMC    ${timeout}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     Log Request    method=Delete    base_uri=${base_uri}    args=&{kwargs}
-    Initialize OpenBMC    ${timeout}
     ${ret}=  Put Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Log Response    ${ret}
     [Return]    ${ret}
 
 Initialize OpenBMC
-    [Arguments]    ${timeout}=10
+    [Arguments]    ${timeout}=10  ${quiet}=${1}
+
     Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}   max_retries=3
     ${headers}=  Create Dictionary  Content-Type=application/json
     @{credentials}=  Create List  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     ${data}=  create dictionary   data=@{credentials}
-    ${resp}=  Post Request  openbmc  /login  data=${data}  headers=${headers}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+
+    ${status}  ${resp}=  Run Keyword And Ignore Error  Post Request  openbmc
+    ...  /login  data=${data}  headers=${headers}
+
+    Should Be Equal  ${status}  PASS  msg=${resp}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 Log Request
     [Arguments]    &{kwargs}
