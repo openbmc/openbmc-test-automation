@@ -110,6 +110,44 @@ Set Time Owner as Host
     ${boot}=   Read Attribute  ${SETTING_HOST}    time_owner
     Should Be Equal    ${boot}    Host
 
+Set BMC Time On Valid Config
+    #Time Owner   Time Mode   Expected Status   Expected BMC Time   Expected HOST Time
+    BMC           Manual      ok                Set                 Change
+    BOTH          Manual      ok                Set                 Change
+    SPLIT         Manual      ok                Set                 No Change
+    [Documentation]  Set BMC time on an valid configuration.
+    [Tags]   Set_BMC_Time_On_Valid_Config
+    [Template]    Set BMC Time
+
+Set BMC Time On Invalid Config
+    #Time Owner   Time Mode   Expected Status   Expected BMC Time   Expected HOST Time
+    BMC           NTP         error             Not Set             No Change
+    HOST          Manual      error             Not Set             No Change
+    SPLIT         NTP         error             Not Set             No Change
+
+    [Documentation]  Set BMC time on an invalid configuration.
+    [Tags]   Set_BMC_Time_On_Invalid_Config
+    [Template]    Set BMC Time
+
+Set HOST Time On Valid Config
+    #Time Owner   Time Mode   Expected Status   Expected BMC Time   Expected HOST Time
+    HOST          Manual      ok                Change              Set
+    BOTH          Manual      ok                Change              Set
+    SPLIT         Manual      ok                No Change           Set
+    SPLIT         NTP         ok                No Change           Set
+    [Documentation]  Set HOST time on an valid configuration.
+    [Tags]   Set_HOST_Time_On_Valid_Config
+    [Template]    Set HOST Time
+
+Set HOST Time On Invalid Config
+    #Time Owner   Time Mode   Expected Status   Expected BMC Time   Expected HOST Time
+    BMC           Manual      error             No Change           Not Set
+    BMC           NTP         error             No Change           Not Set
+    [Documentation]  Set HOST time on an invalid configuration.
+    [Tags]   Set_HOST_Time_On_Invalid_Config
+    [Template]    Set HOST Time
+
+
 Set Invalid Time Mode
     [Documentation]   ***BAD PATH***
     ...               This testcase is to verify that invalid value for time
@@ -168,8 +206,145 @@ Set Time Mode
     ${resp}=   OpenBMC Put Request
     ...   ${SETTING_HOST}/attr/time_mode    data=${valueDict}
     ${jsondata}=    to json    ${resp.content}
+    Sleep  5s
     [Return]    ${jsondata['status']}
 
+Get BMC Time
+    [Documentation]  Returns BMC time of the system
+    ...              Time Format : YYYY-MM-DD hh:mm:ss.mil
+    ...              eg. 2016-12-14 07:09:58.000
+
+    @{credentials}=   Create List   BMC
+    ${data}=   create dictionary   data=@{credentials}
+    ${resp}=   openbmc post request
+    ...        ${TIME_MANAGER_URI}action/GetTime   data=${data}
+    ${jsondata}=   To Json    ${resp.content}
+    ${time_epoch}=   Get From List   ${jsondata["data"]}   0
+    ${resp}=   Convert Date
+    ...        ${time_epoch}   date_format=%a %b %d %H:%M:%S %Y %Z
+    [Return]   ${resp}
+
+Get HOST Time
+    [Documentation]  Returns HOST time of the system
+    ...              Time Format : YYYY-MM-DD hh:mm:ss.mil
+    ...              eg. 2016-12-14 07:09:58.000
+
+    @{credentials}=   Create List   HOST
+    ${data}=   create dictionary   data=@{credentials}
+    ${resp}=   openbmc post request
+    ...        ${TIME_MANAGER_URI}action/GetTime   data=${data}
+    ${jsondata}=   To Json    ${resp.content}
+    ${time_epoch}=   Get From List   ${jsondata["data"]}   0
+    ${resp}=   Convert Date
+    ...   ${time_epoch}   date_format=%a %b %d %H:%M:%S %Y %Z
+    [Return]   ${resp}
+
+Set BMC Time
+    [Arguments]   ${owner}   ${mode}   ${expected_status}   ${bmc_time}   ${host_time}
+    [Documentation]  Set BMC time on system with given configuration.
+    ...              First it sets given owner and mode on the system and then
+    ...              sets BMC time via REST. Later it verifies status
+    ...              of REST URI, BMC and HOST time.
+    ...              Description of arguments:
+    ...              owner: Time owner before setting BMC time
+    ...              mode:  Time mode before setting BMC time
+    ...              expected_status:   Expected status of set BMC time URI
+    ...              bmc_time:
+    ...                     Status of BMC time after set operation
+    ...                     Set - Given time is set
+    ...                     Not Set - Given time is not set
+    ...              host_time:
+    ...                     Status of HOST time after set operation
+    ...                     Change - HOST time is change
+    ...                     No Change - HOST time is not change
+
+    Set Time Owner   ${owner}
+    Set Time Mode   ${mode}
+
+    ${setdate}=    Convert Date    ${SYSTEM_TIME_VALID}
+    ...            date_format=%m/%d/%Y %H:%M:%S    exclude_millis=yes
+
+    ${old_bmc_time}=   Get BMC Time
+    ${old_host_time}=   Get HOST Time
+
+    @{credentials}=   Create List   BMC   ${setdate}
+    ${data}=   create dictionary   data=@{credentials}
+    ${resp}=   openbmc post request
+    ...        ${TIME_MANAGER_URI}action/SetTime   data=${data}
+    ${jsondata}=   To Json    ${resp.content}
+    should be equal as strings   ${jsondata['status']}   ${expected_status}
+
+    ${new_bmc_time}=   Get BMC Time
+    ${new_host_time}=   Get HOST Time
+
+    ${bmc_diff}=   Subtract Date From Date    ${setdate}    ${new_bmc_time}
+    ${bmc_diff}=   Evaluate    abs(${bmc_diff})
+    Run Keyword If   '${bmc_time}' == 'Not Set'
+    ...   Should Be True   ${bmc_diff} >= ${ALLOWED_TIME_DIFF}
+    ...   ELSE IF    '${bmc_time}' == 'Set'
+    ...      Should Be True   ${bmc_diff} <= ${ALLOWED_TIME_DIFF}
+
+    ${host_diff}=   Subtract Date From Date   ${old_host_time}   ${new_host_time}
+    ${host_diff}=   Evaluate    abs(${host_diff})
+    Run Keyword If   '${host_time}' == 'No Change'
+    ...   Should Be True   ${host_diff} <= ${ALLOWED_TIME_DIFF}
+    ...   ELSE IF    '${host_time}' == 'Change'
+    ...      Should Be True   ${host_diff} >= ${ALLOWED_TIME_DIFF}
+
+Set HOST Time
+    [Arguments]    ${owner}   ${mode}   ${expected_status}   ${bmc_time}   ${host_time}
+    [Documentation]  Set HOST time on system with given configuration. First
+    ...              it sets given owner and mode on the system and then
+    ...              set HOST time via REST. Later it verifies status
+    ...              of REST URI, BMC and HOST time.
+    ...              Description of arguments:
+    ...              owner:  Time owner before setting HOST time
+    ...              mode:   Time mode before setting HOST time
+    ...              expected_status:   Expected status of set HOST time URI
+    ...              bmc_time:
+    ...                     Status of BMC time after set operation
+    ...                     Change - BMC time is change
+    ...                     No Change - BMC time is not change
+    ...              host_time:
+    ...                     Status of HOST time after set operation
+    ...                     Set - Given time is set
+    ...                     Not Set - Given time is not set
+
+    Set Time Owner   ${owner}
+    Set Time Mode   ${mode}
+
+    ${setdate}=   Convert Date    ${SYSTEM_TIME_VALID}
+    ...           date_format=%m/%d/%Y %H:%M:%S    exclude_millis=yes
+    ${setdate_new}=   Convert Date    ${setdate}    epoch
+    ${setdate_new}=   Set Variable   1456737000
+
+    ${old_bmc_time}=   Get BMC Time
+    ${old_host_time}=   Get HOST Time
+
+    @{credentials}=   Create List   HOST   ${setdate_new}
+    ${data}=   create dictionary   data=@{credentials}
+    ${resp}=   openbmc post request
+    ...        ${TIME_MANAGER_URI}action/SetTime   data=${data}
+    ${jsondata}=   To Json    ${resp.content}
+    should be equal as strings   ${jsondata['status']}   ${expected_status}
+
+    ${new_bmc_time}=   Get BMC Time
+    ${new_host_time}=   Get HOST Time
+
+    ${host_diff}=   Subtract Date From Date   ${setdate}   ${new_host_time}
+    ${host_diff}=   Evaluate   abs(${host_diff})
+    Run Keyword If   '${host_time}' == 'Not Set'
+    ...   Should Be True   ${host_diff} >= ${ALLOWED_TIME_DIFF}
+    ...   ELSE IF    '${host_time}' == 'Set'
+    ...   Should Be True   ${host_diff} <= ${ALLOWED_TIME_DIFF}
+
+    ${bmc_diff}=   Subtract Date From Date
+    ...            ${old_bmc_time}    ${new_bmc_time}
+    ${bmc_diff}=   Evaluate    abs(${bmc_diff})
+    Run Keyword If   '${bmc_time}' == 'No Change'
+    ...   Should Be True   ${bmc_diff} <= ${ALLOWED_TIME_DIFF}
+    ...   ELSE IF    '${bmc_time}' == 'Change'
+    ...      Should Be True   ${bmc_diff} >= ${ALLOWED_TIME_DIFF}
 
 Post Test Execution
     [Documentation]  Perform operations after test execution. It first try to
