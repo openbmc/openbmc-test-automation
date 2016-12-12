@@ -83,7 +83,7 @@ Test Restart Policy for openbmc service
 *** Keywords ***
 
 Check Service Autorestart
-    [arguments]    ${servicename}
+    [Arguments]    ${servicename}
     ${restart_policy}=
     ...  Execute Restart Policy Command
     ...  systemctl -p Restart show ${servicename} | cut -d = -f2
@@ -92,7 +92,7 @@ Check Service Autorestart
 
 
 Execute Restart Policy Command
-    [arguments]    ${command}
+    [Arguments]    ${command}
     ${stdout}   ${stderr}=   Execute Command   ${command}   return_stderr=True
     Should Be Empty    ${stderr}
     [Return]    ${stdout}

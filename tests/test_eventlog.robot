@@ -201,7 +201,7 @@ clearing logs results in no logs
 *** Keywords ***
 
 create a test log
-    [arguments]
+    [Arguments]
     ${data}=   create dictionary   data=@{EMPTY}
     ${resp}=   openbmc post request   ${EVENT_RECORD}action/acceptTestMessage    data=${data}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}

@@ -255,7 +255,7 @@ Get EventList
     [return]    ${jsondata['data']}
 
 Create a test log
-    [arguments]
+    [Arguments]
     ${data}=   create dictionary   data=@{EMPTY}
     ${resp}=   openbmc post request
     ...     ${EVENT_RECORD}action/acceptTestMessage    data=${data}

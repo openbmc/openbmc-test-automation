@@ -53,7 +53,7 @@ Prepare For Update
 
 
 SCP Tar Image File to BMC
-    [arguments]         ${filepath}
+    [Arguments]         ${filepath}
     Open Connection for SCP
     scp.Put File      ${filepath}   /tmp/flashimg
 
@@ -101,7 +101,7 @@ Trigger Warm Reset via Reboot
 
 Set Policy Setting
     [Documentation]   Set the given test policy
-    [arguments]   ${policy}
+    [Arguments]   ${policy}
 
     ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}

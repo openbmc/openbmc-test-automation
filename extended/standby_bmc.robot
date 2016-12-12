@@ -90,7 +90,7 @@ Get BMC State and Expect Standby
 
 Update Policy Setting
     [Documentation]   Update the given restore policy
-    [arguments]   ${policy}
+    [Arguments]   ${policy}
 
     ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}

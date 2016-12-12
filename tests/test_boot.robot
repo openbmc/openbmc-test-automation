@@ -171,11 +171,11 @@ Set the Boot Device as Setup using ipmitool
 *** Keywords ***
 
 Response Should Be Equal
-    [arguments]    ${args}
+    [Arguments]    ${args}
     Should Be Equal    ${OUTPUT}    ${args}
 
 Read the Attribute
-    [arguments]    ${uri}    ${parm}
+    [Arguments]    ${uri}    ${parm}
     ${output}=     Read Attribute      ${uri}    ${parm}
     set test variable    ${OUTPUT}     ${output}
 

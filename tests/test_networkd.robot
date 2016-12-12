@@ -143,7 +143,7 @@ Get networkInfo from the interface
     ...               {"data": [[[2,25,0,128,"9.3.164.177"],[2,8,254,128,"127.0.0.1"]],"9.3.164.129"],
     ...                "message": "200 OK", "status": "ok"}
 
-    [arguments]    ${intf}
+    [Arguments]    ${intf}
     @{arglist}=    Create List   ${intf}
     ${args}=       Create Dictionary   data=@{arglist}
     ${resp}=       Call Method   ${NW_MANAGER}  GetAddress4    data=${args}
