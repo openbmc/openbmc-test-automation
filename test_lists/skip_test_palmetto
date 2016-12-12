@@ -54,3 +54,7 @@
 -e get_directory_listing
 #https://github.com/openbmc/openbmc-test-automation/issues/90
 -e Verify_System_VPD_Properties
+#https://github.com/openbmc/openbmc/issues/928
+-e Set_Host_Time_With_Both_And_NTP
+#https://github.com/openbmc/openbmc/issues/901
+-e Set_BMC_Time_With_Split_And_Manual
