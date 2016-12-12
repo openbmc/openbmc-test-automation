@@ -15,7 +15,7 @@ Test Teardown          Post Test Execution
 *** Variables ***
 ${SYSTEM_TIME_INVALID}     01/01/1969 00:00:00
 ${SYSTEM_TIME_VALID}       02/29/2016 09:10:00
-${ALLOWED_TIME_DIFF}       2
+${ALLOWED_TIME_DIFF}       5
 
 *** Test Cases ***
 
@@ -107,6 +107,142 @@ Set Time Owner as Host
     ${boot} =   Read Attribute  /org/openbmc/settings/host0    time_owner
     Should Be Equal    ${boot}    Host
 
+Set The BMC Time
+    #Time Owner      Time Mode      Expected Time Status    Expected BMC Time    Expected HOST Time
+    #BMC              Manual         ok                      Change               Change
+    #BMC              NTP            error                   No Change            No Change
+    #HOST             Manual         error                   No Change            No Change
+    #HOST            NTP            NA                      NA                   NA
+    #BOTH             Manual         ok                      Change               Change
+    #BOTH            NTP            NA                      NA                   NA
+    #SPLIT            Manual         ok                      Change               No Change
+    #SPLIT            NTP            error                   No Change            No Change
+
+    [Documentation]  Test to validate set bmc time functionality via REST
+    ...              Time Owner:
+    ...                     Time owner before setting BMC time
+    ...              Time Mode:
+    ...                     Time mode before setting BMC time
+    ...              Expected Time Status:
+    ...                     Status of set BMC time
+    [Template]    Set BMC Time
+
+Set BMC Time With BMC Owner And Manual Mode
+    BMC              Manual         ok                      Change               Change
+    [Tags]   new_tests
+    [Template]    Set BMC Time
+
+Set BMC Time With BMC Owner And NTP Mode
+    BMC              NTP            error                   No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set BMC Time
+
+Set BMC Time With Host Owner And Manual Mode
+    HOST             Manual         error                   No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set BMC Time
+
+Set BMC Time With Both Owner And Manual Mode
+    BOTH             Manual         ok                      Change               Change
+    [Tags]   new_tests
+    [Template]    Set BMC Time
+
+Set BMC Time With Split Owner And Manual Mode
+    SPLIT            Manual         ok                      Change               No Change
+    [Tags]   new_tests
+    [Template]    Set BMC Time
+
+Set BMC Time With Split Owner And NTP Mode
+    SPLIT            NTP            error                   No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set BMC Time
+
+Set Host Time With BMC Owner And Manual Mode
+    BMC              Manual         error                  No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set HOST Time
+
+Set Host Time With BMC Owner And NTP Mode
+    BMC              NTP            error                  No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set HOST Time
+
+Set Host Time With Host Owner And Manual Mode
+    HOST             Manual         ok                     Change               Change
+    [Tags]   new_tests
+    [Template]    Set HOST Time
+
+Set Host Time With Both Owner And Manual Mode
+    BOTH             Manual         ok                     Change               Change
+    [Tags]   new_tests
+    [Template]    Set HOST Time
+
+Set Host Time With Split Owner And Manual Mode
+    SPLIT            Manual         ok                     No Change            Change
+    [Tags]   new_tests
+    [Template]    Set HOST Time
+
+Set Host Time With Split Owner And NTP Mode
+    SPLIT            NTP            ok                     No Change            Change
+    [Tags]   new_tests
+    [Template]    Set HOST Time
+
+Set BMC Time With BMC Owner And Manual Mode with poweron
+    BMC              Manual         ok                     No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set BMC Time
+
+Set BMC Time With Both Owner And Manual Mode with poweron
+    BOTH             Manual         ok                     No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set BMC Time
+
+Set BMC Time With Split Owner And Manual Mode with poweron
+    SPLIT            Manual         ok                     No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set BMC Time
+
+Set Host Time With Host Owner And Manual Mode with poweron
+    HOST             Manual         ok                     No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set HOST Time
+
+Set Host Time With Both Owner And Manual Mode with poweron
+    BOTH             Manual         ok                     No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set HOST Time
+
+Set Host Time With Split Owner And Manual Mode with poweron
+    SPLIT            Manual         ok                     No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set HOST Time
+
+Set Host Time With Split Owner And NTP Mode with poweron
+    SPLIT            NTP            ok                     No Change            No Change
+    [Tags]   new_tests
+    [Template]    Set HOST Time
+
+
+Set The HOST Time
+    #Time Owner      Time Mode      Expected Time Status   Expected BMC Time    Expected HOST Time
+    #BMC              Manual         error                  No Change            No Change
+    #BMC              NTP            error                  No Change            No Change
+    #HOST             Manual         ok                     Change               Change
+    #HOST            NTP            NA                     NA                   NA
+    #BOTH             Manual         ok                     Change               Change
+    #BOTH            NTP            NA                     NA                  NA
+    #SPLIT            Manual         ok                     No Change            Change
+    #SPLIT            NTP            ok                     No Change            Change
+
+    [Documentation]  Test to validate set host time functionality via REST
+    ...              Time Owner:
+    ...                     Time owner before setting HOST time
+    ...              Time Mode:
+    ...                     Time mode before setting HOST time
+    ...              Expected Time Status:
+    ...                     Status of set HOST time
+    [Template]    Set HOST Time
+
 Set Invalid Time Mode
     [Documentation]   ***BAD PATH***
     ...               This testcase is to verify that invalid value for time
@@ -167,6 +303,100 @@ Set Time Mode
     ${jsondata} =    to json    ${resp.content}
     [return]    ${jsondata['status']}
 
+Set BMC Time
+    [arguments]    ${owner}   ${mode}   ${expected_status}   ${bmc_time}   ${host_time}
+
+    Set Time Owner   ${owner}
+    Set Time Mode   ${mode}
+
+    ${old_bmc_time}=   Get BMC Time
+    ${old_host_time}=   Get HOST Time
+
+    ${setdate}=    Convert Date    ${SYSTEM_TIME_VALID}    date_format=%m/%d/%Y %H:%M:%S    exclude_millis=yes
+    @{credentials}=   Create List   BMC   ${setdate}
+    ${data}=   create dictionary   data=@{credentials}
+    ${resp}=   openbmc post request   /org/openbmc/TimeManager/action/SetTime   data=${data}
+    ${jsondata}=   To Json    ${resp.content}
+    should be equal as strings   ${jsondata['status']}   ${expected_status}
+
+    ${new_bmc_time}=   Get BMC Time
+    ${new_host_time}=   Get HOST Time
+
+    ${bmc_diff}=    Subtract Date From Date    ${setdate}    ${new_bmc_time}
+    ${bmc_diff}=    Evaluate    abs(${bmc_diff})
+    Log to console   BMC Diff : ${bmc_diff}
+    Run Keyword If   '${bmc_time}' == 'No Change'   Should Be True   ${bmc_diff} > ${ALLOWED_TIME_DIFF}
+    ...   ELSE IF    '${bmc_time}' == 'Change'      Should Be True   ${bmc_diff} < ${ALLOWED_TIME_DIFF}
+
+    ${host_diff}=    Subtract Date From Date    ${old_host_time}    ${new_host_time}
+    ${host_diff}=    Evaluate    abs(${host_diff})
+    Log to console   HOST Diff : ${host_diff}
+
+    Run Keyword If   '${host_time}' == 'No Change'   Should Be True   ${host_diff} < ${ALLOWED_TIME_DIFF}
+    ...   ELSE IF    '${host_time}' == 'Change'      Should Be True   ${host_diff} > ${ALLOWED_TIME_DIFF}
+
+Set HOST Time
+    [arguments]    ${owner}   ${mode}   ${expected_status}   ${bmc_time}   ${host_time}
+
+    Set Time Owner   ${owner}
+    Set Time Mode   ${mode}
+
+    ${old_bmc_time}=   Get BMC Time
+    ${old_host_time}=   Get HOST Time
+
+    ${setdate}=   Convert Date    ${SYSTEM_TIME_VALID}    date_format=%m/%d/%Y %H:%M:%S    exclude_millis=yes
+    Log to console   ${setdate}
+    ${setdate_new}=   Convert Date    ${setdate}    epoch
+    Log to console   ${setdate_new}
+    #${setdate_new}=   Set Variable   1456758600
+    ${setdate_new}=   Set Variable   1456737000
+    @{credentials}=   Create List   HOST   ${setdate_new}
+    ${data}=   create dictionary   data=@{credentials}
+    ${resp}=   openbmc post request   /org/openbmc/TimeManager/action/SetTime   data=${data}
+    ${jsondata}=   To Json    ${resp.content}
+    should be equal as strings   ${jsondata['status']}   ${expected_status}
+
+    ${new_bmc_time}=   Get BMC Time
+    ${new_host_time}=   Get HOST Time
+
+    ${host_diff}=    Subtract Date From Date    ${setdate}    ${new_host_time}
+    ${host_diff}=    Evaluate    abs(${host_diff})
+    Log to console   Host Diff : ${host_diff}
+    Run Keyword If   '${host_time}' == 'No Change'   Should Be True   ${host_diff} > ${ALLOWED_TIME_DIFF}
+    ...   ELSE IF    '${host_time} == Change'      Should Be True   ${host_diff} < ${ALLOWED_TIME_DIFF}
+
+    ${bmc_diff}=    Subtract Date From Date    ${old_bmc_time}    ${new_bmc_time}
+    ${bmc_diff}=    Evaluate    abs(${bmc_diff})
+    Log to console   BMC Diff : ${bmc_diff}
+    Run Keyword If   '${bmc_time}' == 'No Change'   Should Be True   ${bmc_diff} < ${ALLOWED_TIME_DIFF}
+    ...   ELSE IF    '${bmc_time}' == 'Change'      Should Be True   ${bmc_diff} > ${ALLOWED_TIME_DIFF}
+
+
+Get BMC Time
+    @{credentials}=   Create List   BMC
+    ${data}=   create dictionary   data=@{credentials}
+    ${resp}=   openbmc post request   /org/openbmc/TimeManager/action/GetTime   data=${data}
+    ${jsondata}=   To Json    ${resp.content}
+    Log to console   ${jsondata["data"]}
+    ${time_epoch}=   Get From List   ${jsondata["data"]}   0
+    Log to console   ${time_epoch}
+    #${resp}=   Convert Date   ${jsondata["data"][1]}
+    #${resp}=   Convert Date   ${1000000000}
+    ${resp}=   Convert Date   ${time_epoch}   date_format=%a %b %d %H:%M:%S %Y %Z
+    Log to console   BMC Time : ${resp}
+    [return]   ${resp}
+
+Get HOST Time
+    @{credentials}=   Create List   HOST
+    ${data}=   create dictionary   data=@{credentials}
+    ${resp}=   openbmc post request   /org/openbmc/TimeManager/action/GetTime   data=${data}
+    ${jsondata}=   To Json    ${resp.content}
+    Log to console   ${jsondata["data"]}
+    ${time_epoch}=   Get From List   ${jsondata["data"]}   0
+    Log to console   ${time_epoch}
+    ${resp}=   Convert Date   ${time_epoch}   date_format=%a %b %d %H:%M:%S %Y %Z
+    Log to console   Host Time : ${resp}
+    [return]   ${resp}
 
 Post Test Execution
     [Documentation]  Perform operations after test execution. It first try to
