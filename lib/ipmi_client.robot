@@ -19,7 +19,7 @@ ${RAW}=                raw
 *** Keywords ***
 
 Run IPMI Command
-    [arguments]    ${args}
+    [Arguments]    ${args}
     ${resp}=     Run Keyword If   '${IPMI_COMMAND}'=='External'
     ...    Run External IPMI RAW Command   ${args}
     ...          ELSE IF          '${IPMI_COMMAND}'=='Dbus'
@@ -29,7 +29,7 @@ Run IPMI Command
     [return]    ${resp}
 
 Run IPMI Standard Command
-    [arguments]    ${args}
+    [Arguments]    ${args}
     ${resp}=     Run Keyword If   '${IPMI_COMMAND}'=='External'
     ...    Run External IPMI Standard Command   ${args}
     ...          ELSE IF          '${IPMI_COMMAND}'=='Dbus'
@@ -40,7 +40,7 @@ Run IPMI Standard Command
     [return]    ${resp}
 
 Run Dbus IPMI RAW Command
-    [arguments]    ${args}
+    [Arguments]    ${args}
     ${valueinBytes}=   Byte Conversion  ${args}
     ${cmd}=   Catenate   ${dbushostipmicmd1} ${dbusHostIpmiCmdReceivedMsg}
     ${cmd}=   Catenate   ${cmd} ${valueinBytes}
@@ -49,7 +49,7 @@ Run Dbus IPMI RAW Command
     set test variable    ${OUTPUT}     "${output}"
 
 Run Dbus IPMI Standard Command
-    [arguments]    ${args}
+    [Arguments]    ${args}
     Copy ipmitool
     ${stdout}    ${stderr}    ${output}=  Execute Command
     ...    /tmp/ipmitool -I dbus ${args}    return_stdout=True
@@ -58,7 +58,7 @@ Run Dbus IPMI Standard Command
     [return]    ${stdout}
 
 Run External IPMI RAW Command
-    [arguments]    ${args}
+    [Arguments]    ${args}
     ${ipmi_raw_cmd}=   Catenate  SEPARATOR=
     ...    ${IPMI_EXT_CMD}${SPACE}${IPMI_PASSWORD}${SPACE}
     ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${RAW}${SPACE}${args}
@@ -67,7 +67,7 @@ Run External IPMI RAW Command
     [return]    ${output}
 
 Run External IPMI Standard Command
-    [arguments]    ${args}
+    [Arguments]    ${args}
     ${ipmi_cmd}=   Catenate  SEPARATOR=
     ...    ${IPMI_EXT_CMD}${SPACE}${IPMI_PASSWORD}${SPACE}
     ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${args}
@@ -91,7 +91,7 @@ Byte Conversion
     ...               Sample dbus  Host IPMI Received Message argument
     ...               byte:0x00 byte:0x04 byte:0x00 byte:0x30
     ...               array:byte:9,0x01,0x00,0x35,0x00,0x00,0x00,0x00,0x00,0x00
-    [arguments]     ${args}
+    [Arguments]     ${args}
     ${argLength}=   Get Length  ${args}
     Set Global Variable  ${arrayByte}   array:byte:
     @{listargs}=   Split String  ${args}
@@ -122,17 +122,17 @@ Byte Conversion
 
 
 Set NetFn Byte
-   [arguments]    ${word}
+   [Arguments]    ${word}
    ${netfnByteLocal}=  Catenate   byte:${word}
    Set Global Variable  ${netfnByte}  ${netfnByteLocal}
 
 Set Cmd Byte
-   [arguments]    ${word}
+   [Arguments]    ${word}
    ${cmdByteLocal}=  Catenate   byte:${word}
    Set Global Variable  ${cmdByte}  ${cmdByteLocal}
 
 Set Array Byte
-   [arguments]    ${word}
+   [Arguments]    ${word}
    ${arrayByteLocal}=   Catenate   SEPARATOR=  ${arrayByte}  ${word}
    ${arrayByteLocal}=   Catenate   SEPARATOR=  ${arrayByteLocal}   ,
    Set Global Variable  ${arrayByte}   ${arrayByteLocal}

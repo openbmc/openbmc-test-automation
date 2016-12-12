@@ -293,28 +293,28 @@ Get System component
     [return]    ${url}
 
 Execute new Command
-    [arguments]    ${args}
+    [Arguments]    ${args}
     ${output}=  Execute Command    ${args}
     set test variable    ${OUTPUT}     "${output}"
 
 response Should Be Equal
-    [arguments]    ${args}
+    [Arguments]    ${args}
     Should Be Equal    ${OUTPUT}    ${args}
 
 Response Should Be Empty
     Should Be Empty    ${OUTPUT}
 
 Read the Attribute
-    [arguments]    ${uri}    ${parm}
+    [Arguments]    ${uri}    ${parm}
     ${output}=     Read Attribute      ${uri}    ${parm}
     set test variable    ${OUTPUT}     ${output}
 
 Get Sensor Number
-    [arguments]  ${name}
+    [Arguments]  ${name}
     ${x}=       get sensor   ${OPENBMC_MODEL}   ${name}
     [return]     ${x}
 
 Get Inventory Sensor Number
-    [arguments]  ${name}
+    [Arguments]  ${name}
     ${x}=       get inventory sensor   ${OPENBMC_MODEL}   ${name}
     [return]     ${x}

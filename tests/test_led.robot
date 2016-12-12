@@ -196,7 +196,7 @@ Blink Slow the Beep LED
    should be true   ${ON_VALUE} > ${MIN_TOGGLE_VALUE} and ${OFF_VALUE} > ${MIN_TOGGLE_VALUE}
 
 Get LED State
-   [arguments]    ${args}
+   [Arguments]    ${args}
    ${data}=   create dictionary   data=@{EMPTY}
    ${resp}=   OpenBMC Post Request   /org/openbmc/control/led/${args}/action/GetLedState   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
@@ -204,7 +204,7 @@ Get LED State
    [return]    ${json['data'][1]}
 
 Set On
-   [arguments]    ${args}
+   [Arguments]    ${args}
    ${data}=   create dictionary   data=@{EMPTY}
    ${resp}=   OpenBMC Post Request   /org/openbmc/control/led/${args}/action/setOn   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
@@ -212,7 +212,7 @@ Set On
    should be equal as integers   ${json['data']}   0
 
 Set Off
-   [arguments]    ${args}
+   [Arguments]    ${args}
    ${data}=   create dictionary   data=@{EMPTY}
    ${resp}=   OpenBMC Post Request   /org/openbmc/control/led/${args}/action/setOff   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
@@ -220,7 +220,7 @@ Set Off
    should be equal as integers   ${json['data']}   0
 
 Set Blink Fast
-   [arguments]    ${args}
+   [Arguments]    ${args}
    ${data}=   create dictionary   data=@{EMPTY}
    ${resp}=   OpenBMC Post Request   /org/openbmc/control/led/${args}/action/setBlinkFast   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
@@ -228,7 +228,7 @@ Set Blink Fast
    should be equal as integers   ${json['data']}   0
 
 Set Blink Slow
-   [arguments]    ${args}
+   [Arguments]    ${args}
    ${data}=   create dictionary   data=@{EMPTY}
    ${resp}=   OpenBMC Post Request   /org/openbmc/control/led/${args}/action/setBlinkSlow   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}

@@ -86,7 +86,7 @@ Setup The Suite
     log Dictionary      ${resp}
 
 Get Total Present
-    [arguments]     ${type}
+    [Arguments]     ${type}
     ${l}=          Create List     []
     ${resp}=    Get Dictionary Keys    ${SYSTEM_INFO}
     ${list}=    Get Matches    ${resp}    regexp=^.*[0-9a-z_].${type}[0-9]*$
@@ -97,7 +97,7 @@ Get Total Present
     [return]        ${sum}
 
 Verify Properties
-    [arguments]     ${type}
+    [Arguments]     ${type}
 
     ${list}=     Get VPD Inventory List     ${OPENBMC_MODEL}     ${type}
     : FOR     ${element}     IN      @{list}
@@ -105,7 +105,7 @@ Verify Properties
     \     Run Keyword If     ${d['present']} == True        Verify Present Properties     ${d}     ${type}
 
 Verify Present Properties
-    [arguments]     ${d}     ${type}
+    [Arguments]     ${d}     ${type}
     ${keys}=     Get Dictionary Keys     ${d}
     Log List     ${keys}
     Log List     ${INVENTORY_ITEMS['${type}']}

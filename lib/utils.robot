@@ -219,7 +219,7 @@ Copy PNOR to BMC
 
 Flash PNOR
     [Documentation]    Calls flash bios update method to flash PNOR image
-    [arguments]    ${pnor_image}
+    [Arguments]    ${pnor_image}
     @{arglist}=   Create List    ${pnor_image}
     ${args}=     Create Dictionary    data=@{arglist}
     ${resp}=  Call Method  ${OPENBMC_BASE_URI}control/flash/bios/  update
@@ -270,7 +270,7 @@ Check If BMC is Up
     [Documentation]  Wait for Host to be online. Checks every X seconds
     ...              interval for Y minutes and fails if timed out.
     ...              Default MAX timedout is 10 min, interval 10 seconds.
-    [arguments]      ${max_timeout}=${OPENBMC_REBOOT_TIMEOUT} min
+    [Arguments]      ${max_timeout}=${OPENBMC_REBOOT_TIMEOUT} min
     ...              ${interval}=10 sec
 
     Wait Until Keyword Succeeds
@@ -292,7 +292,7 @@ Flush REST Sessions
 
 Initialize DBUS cmd
     [Documentation]  Initialize dbus string with property string to extract
-    [arguments]   ${boot_property}
+    [Arguments]   ${boot_property}
     ${cmd}=     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
     ${cmd}=     Catenate  ${cmd}${boot_property}
     Set Global Variable   ${dbuscmd}     ${cmd}

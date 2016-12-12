@@ -46,7 +46,7 @@ Set the power restore policy
 ***keywords***
 
 Set Restore Policy
-    [arguments]    ${policy}   ${expectedState}   ${nextState}
+    [Arguments]    ${policy}   ${expectedState}   ${nextState}
 
     Set Policy Setting   ${policy}
 
@@ -72,7 +72,7 @@ Set Restore Policy
 
 Set Policy Setting
     [Documentation]   Set the given test policy
-    [arguments]   ${policy}
+    [Arguments]   ${policy}
 
     ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
@@ -83,7 +83,7 @@ Set Policy Setting
 Set Initial Test State
     [Documentation]   Poweron if ON expected, Poweroff if OFF expected
     ...               to initial state of the test.
-    [arguments]   ${expectedState}
+    [Arguments]   ${expectedState}
 
     Run Keyword If
     ...   '${expectedState}' == 'HOST_BOOTED'
@@ -95,7 +95,7 @@ Set Initial Test State
 
 
 System State
-    [arguments]     ${nextState}
+    [Arguments]     ${nextState}
     ${afterPduSystemState}=
     ...   Read Attribute    ${HOST_SETTING}    system_state
     Should be equal   ${afterPduSystemState}    ${nextState}
