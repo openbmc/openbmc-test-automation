@@ -45,3 +45,8 @@
 #https://github.com/openbmc/openbmc-test-automation/issues/148
 -e IPMI_Chassis_Status_On
 -e IPMI_Chassis_Status_Off
+#https://github.com/openbmc/openbmc/issues/833
+-e Set_BMC_Time_On_Valid_Config
+-e Set_BMC_Time_On_Invalid_Config
+-e Set_HOST_Time_On_Valid_Config
+-e Set_HOST_Time_On_Invalid_Config
