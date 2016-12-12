@@ -48,3 +48,7 @@
 -e get_names_org
 #https://github.com/openbmc/openbmc-test-automation/issues/226
 -e Test_BIOS_Version
+#https://github.com/openbmc/openbmc/issues/928
+-e Set_Host_Time_With_Both_And_NTP    
+#https://github.com/openbmc/openbmc/issues/901
+-e Set_Host_Time_With_Split_And_Manual
