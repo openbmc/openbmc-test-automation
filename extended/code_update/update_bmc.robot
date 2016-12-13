@@ -29,7 +29,7 @@ Resource          ../../lib/boot/boot_resource_master.robot
 
 ${FILE_PATH}      ${EMPTY}
 
-*** Test cases ***
+*** Test Cases ***
 
 Initiate Code update BMC
     [Documentation]    BMC code update process initiation

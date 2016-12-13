@@ -369,7 +369,7 @@ post method org/openbmc/records/events/action/acceptTestMessage no args
     ${json}=   to json         ${resp.content}
     should be equal as strings      ${json['status']}       ok
 
-***keywords***
+*** Keywords ***
 Get Power Control Interface
     ${resp}=    OpenBMC Get Request     /org/openbmc/control/
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}     msg=Unable to get any controls - /org/openbmc/control/
