@@ -55,6 +55,7 @@ def bmc_power_on():
     final_state = state_mod.anchor_state(final_state)
 
     grp.rprintn()
-    state_mod.wait_state(final_state, wait_time="7 min", interval="3 seconds")
+    state_mod.wait_state(final_state, wait_time="14 mins",
+                         interval="3 seconds")
 
 ###############################################################################
