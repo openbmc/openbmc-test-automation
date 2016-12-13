@@ -47,7 +47,8 @@ Get to Stable State
     Run Keyword If  '${l_ready}' == '${False}'
     ...    Initiate Power Off
 
-    Update Policy Setting   RESTORE_LAST_STATE
+    Run Keyword And Ignore Error
+    ...   Update Policy Setting   RESTORE_LAST_STATE
 
 
 *** Keywords ***
