@@ -30,6 +30,7 @@ Documentation      This module is for data collection on test case failure
 
 Resource           openbmc_ffdc_methods.robot
 Resource           openbmc_ffdc_utils.robot
+Library            openbmc_ffdc.py
 
 *** Keywords ***
 
@@ -46,34 +47,3 @@ FFDC On Test Case Fail
     ...    FFDC
 
     Log Test Case Status
-
-
-FFDC
-    [Documentation]   Main entry point to gather logs on Test case failure
-    ...               1. Set global FFDC time reference for a failure
-    ...               2. Create FFDC work space directory
-    ...               3. Write test info details
-    ...               4. Calls BMC methods to write/collect FFDC data
-
-    ${cur_time}=      Get Current Time Stamp
-    Set Global Variable    ${FFDC_TIME}     ${cur_time}
-    Log To Console    ${\n}FFDC Collection Started \t: ${cur_time}
-
-    # Log directory setup
-    ${suitename}   ${testname}=    Get Test Dir and Name
-
-    Set Global Variable
-    ...   ${FFDC_DIR_PATH}  ${FFDC_LOG_PATH}${suitename}${/}${testname}
-
-    ${prefix}=   Catenate  SEPARATOR=   ${FFDC_DIR_PATH}${/}   ${FFDC_TIME}_
-    Set Global Variable    ${LOG_PREFIX}    ${prefix}
-
-    Create FFDC Directory
-    Header Message
-
-    # -- FFDC processing entry point --
-    Call FFDC Methods
-
-    ${cur_time}=       Get Current Time Stamp
-    Log To Console     FFDC Collection Completed \t: ${cur_time}
-    Log                ${\n}${FFDC_DIR_PATH}
