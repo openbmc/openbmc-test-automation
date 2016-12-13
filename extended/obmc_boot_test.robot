@@ -58,6 +58,9 @@ ${test_mode}                0
 ${quiet}                    0
 ${debug}                    0
 
+# Setting this to get new behavior from FFDC functions.
+${new_ffdc_default}         ${1}
+
 # Plug-in variables.
 ${shell_rc}                 0x00000000
 ${fail_on_plug_in_failure}  1
@@ -153,8 +156,9 @@ Validate Parms
     Rvalid Value  openbmc_username
     Rvalid Value  openbmc_password
     # os_host is optional so no validation is being done.
-    Rvalid Value  os_username
-    Rvalid Value  os_password
+    Run Keyword If  '${OS_HOST}' != '${EMPTY}'  Run Keywords
+    ...  Rvalid Value  os_username  AND
+    ...  Rvalid Value  os_password
     Rvalid Value  pdu_host
     Rvalid Value  pdu_username
     Rvalid Value  pdu_password
@@ -347,8 +351,6 @@ Print Test Start Message
 My FFDC
     [Documentation]  Collect FFDC data.
 
-    Rqprint Timen  FFDC Dump requested.
-    Rqprint Timen  Starting dump of FFDC.
     ${FFDC_DIR_PATH}=  Add Trailing Slash  ${FFDC_DIR_PATH}
     # FFDC_LOG_PATH is used by "FFDC" keyword.
     Set Global Variable  ${FFDC_LOG_PATH}  ${FFDC_DIR_PATH}
@@ -361,8 +363,6 @@ My FFDC
     ${rc}  ${shell_rc}  ${failed_plug_in_name}=  Rprocess Plug In Packages
     ...  call_point=ffdc  stop_on_plug_in_failure=1
 
-    Rqprint Timen  Finished dumping of FFDC.
-    Log FFDC Summary
     Log Defect Information
 
 ###############################################################################
@@ -410,15 +410,6 @@ Print Last Ten Boots
     :FOR  ${boot_entry}  IN  @{LAST_TEN}
     \  rqprint  ${boot_entry}
     Rqprint Dashes  ${0}  ${90}
-
-###############################################################################
-
-
-###############################################################################
-Log FFDC Summary
-    [Documentation]  Logs finding from within the FFDC files gathered.
-
-    Rqprint Timen  This is where the FFDC summary would go...
 
 ###############################################################################
 
