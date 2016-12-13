@@ -203,7 +203,7 @@ Get LED State
    ${resp}=   OpenBMC Post Request   ${LED_CONTROL}${args}/action/GetLedState   data=${data}
    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
    ${json}=   to json   ${resp.content}
-   [return]    ${json['data'][1]}
+   [Return]    ${json['data'][1]}
 
 Set On
    [Arguments]    ${args}

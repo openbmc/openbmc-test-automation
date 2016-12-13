@@ -64,7 +64,7 @@ Get Uptime In Seconds
 
     ${uptime}  ${idle_time}=  Split String  ${uptime_string}  ${SPACE}
 
-    [return]  ${uptime}
+    [Return]  ${uptime}
 
 Reboot BMC
     Start Command  /sbin/reboot

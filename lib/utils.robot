@@ -51,7 +51,7 @@ Get Boot Progress
 
     ${state}=  Read Attribute  ${OPENBMC_BASE_URI}sensors/host/BootProgress
     ...  value  quiet=${quiet}
-    [return]  ${state}
+    [Return]  ${state}
 
 Is Power On
     ${state}=  Get Power State
@@ -187,7 +187,7 @@ Get BMC State
     ...        data=${args}  quiet=${quiet}
     Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=  to json  ${resp.content}
-    [return]  ${content["data"]}
+    [Return]  ${content["data"]}
 
 Get Power State
     [Documentation]  Returns the power state as an integer. Either 0 or 1.
@@ -200,7 +200,7 @@ Get Power State
     ...        data=${args}  quiet=${quiet}
     Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=  to json  ${resp.content}
-    [return]  ${content["data"]}
+    [Return]  ${content["data"]}
 
 Clear BMC Record Log
     [Documentation]  Clears all the event logs on the BMC. This would be
@@ -231,7 +231,7 @@ Get Flash BIOS Status
     [Documentation]  Returns the status of the flash BIOS API as a string. For
     ...              example 'Flashing', 'Flash Done', etc
     ${data}=      Read Properties     ${OPENBMC_BASE_URI}control/flash/bios
-    [return]    ${data['status']}
+    [Return]    ${data['status']}
 
 Is PNOR Flashing
     [Documentation]  Get BIOS 'Flashing' status. This indicates that PNOR
@@ -288,7 +288,7 @@ Check If warmReset is Initiated
     ${alive}=   Run Keyword and Return Status
     ...    Open Connection And Log In
     Return From Keyword If   '${alive}' == '${False}'    ${False}
-    [return]    ${True}
+    [Return]    ${True}
 
 Flush REST Sessions
     [Documentation]   Removes all the active session objects
@@ -419,7 +419,7 @@ Mac Address To Hex String
     [Arguments]    ${i_macaddress}
 
     ${mac_hex}=  Catenate  0x${i_macaddress.replace(':', ' 0x')}
-    [return]    ${mac_hex}
+    [Return]    ${mac_hex}
 
 IP Address To Hex String
     [Documentation]   Converts IP address into hex format.
@@ -438,7 +438,7 @@ IP Address To Hex String
     \   Set List Value    ${ip}    ${index}    ${hex}
     \   ${index}=  Set Variable    ${index + 1}
     ${ip_hex}=  Catenate    @{ip}
-    [return]    ${ip_hex}
+    [Return]    ${ip_hex}
 
 BMC CPU Performance Check
    [Documentation]   Minimal 10% of proc should be free in this instance
@@ -493,7 +493,7 @@ Get Endpoint Paths
 
     ${list}=   Get Dictionary Keys   ${resp}
     ${resp}=   Get Matches   ${list}   regexp=^.*[0-9a-z_].${endpoint}[0-9]*$
-    [return]   ${resp}
+    [Return]   ${resp}
 
 Check Zombie Process
     [Documentation]    Check if any defunct process exist or not on BMC

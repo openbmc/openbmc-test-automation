@@ -260,7 +260,7 @@ Select Boot
     ...  **ERROR** BMC not in state to power on or off: "${power}"  AND
     ...  Fatal Error
 
-    [return]  ${boot}
+    [Return]  ${boot}
 
 ###############################################################################
 
@@ -277,7 +277,7 @@ Select Power On
     # selecting randomly.
     ${chosen}=  Set Variable  @{power_on_choices}[0]
 
-    [return]  ${chosen}
+    [Return]  ${chosen}
 
 ###############################################################################
 
@@ -294,7 +294,7 @@ Select Power Off
     # selecting randomly.
     ${chosen}=  Set Variable  @{power_off_choices}[0]
 
-    [return]  ${chosen}
+    [Return]  ${chosen}
 
 ###############################################################################
 
