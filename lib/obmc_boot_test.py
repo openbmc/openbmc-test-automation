@@ -77,8 +77,8 @@ def plug_in_setup():
     time_string = time.strftime("%y%m%d.%H%M%S.", loc_time)
 
     openbmc_nickname = BuiltIn().get_variable_value("${openbmc_nickname}")
+    openbmc_host = BuiltIn().get_variable_value("${openbmc_host}")
     if openbmc_nickname == "":
-        openbmc_host = BuiltIn().get_variable_value("${openbmc_host}")
         ffdc_prefix = openbmc_host
     else:
         ffdc_prefix = openbmc_nickname
@@ -93,12 +93,25 @@ def plug_in_setup():
         ffdc_dir_path = ""
     BuiltIn().set_global_variable("${FFDC_DIR_PATH}", ffdc_dir_path)
 
+    try:
+        base_tool_dir_path = os.environ['AUTOBOOT_BASE_TOOL_DIR_PATH']
+    except KeyError:
+        base_tool_dir_path = "/fspmount/"
+    base_tool_dir_path = os.path.normpath(base_tool_dir_path) + os.sep
+    BuiltIn().set_global_variable("${BASE_TOOL_DIR_PATH}", base_tool_dir_path)
+
+    ffdc_list_file_path = base_tool_dir_path + openbmc_host + "/FFDC_FILE_LIST"
+
+    BuiltIn().set_global_variable("${FFDC_LIST_FILE_PATH}",
+                                  ffdc_list_file_path)
+
     # For each program parameter, set the corresponding AUTOBOOT_ environment
     # variable value.  Also, set an AUTOBOOT_ environment variable for every
     # element in additional_values.
     additional_values = ["boot_type_desc", "boot_success", "boot_pass",
                          "boot_fail", "test_really_running", "program_pid",
-                         "master_pid", "ffdc_prefix", "ffdc_dir_path"]
+                         "master_pid", "ffdc_prefix", "ffdc_dir_path",
+                         "base_tool_dir_path", "ffdc_list_file_path"]
     BuiltIn().set_global_variable("${ffdc_prefix}", ffdc_prefix)
 
     parm_list = BuiltIn().get_variable_value("@{parm_list}")
