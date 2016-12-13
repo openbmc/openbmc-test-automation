@@ -278,14 +278,14 @@ Get UserList
     ${resp}=   OpenBMC Post Request   /org/openbmc/UserManager/Users/action/UserList   data=${data}
     should be equal as strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['data']}
+    [Return]    ${jsondata['data']}
 
 Get GroupListUsr
     ${data}=   create dictionary   data=@{EMPTY}
     ${resp}=   OpenBMC Post Request   /org/openbmc/UserManager/Groups/action/GroupListUsr   data=${data}
     should be equal as strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['data']}
+    [Return]    ${jsondata['data']}
 
 Create User
     [Arguments]    ${comment}    ${username}    ${groupname}    ${password}
@@ -293,7 +293,7 @@ Create User
     ${data}=   create dictionary   data=@{user_list}
     ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/Users/action/UserAdd      data=${data}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['status']}
+    [Return]    ${jsondata['status']}
 
 Change Password
     [Arguments]    ${username}    ${password}
@@ -301,7 +301,7 @@ Change Password
     ${data}=   create dictionary   data=@{user_list}
     ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/User/action/Passwd      data=${data}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['status']}
+    [Return]    ${jsondata['status']}
 
 Create UserGroup
     [Arguments]    ${args}
@@ -309,7 +309,7 @@ Create UserGroup
     ${data}=   create dictionary   data=@{group_list}
     ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/Groups/action/GroupAddUsr      data=${data}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['status']}
+    [Return]    ${jsondata['status']}
 
 Delete Group
     [Arguments]    ${args}
@@ -317,7 +317,7 @@ Delete Group
     ${data}=   create dictionary   data=@{group_list}
     ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/Group/action/GroupDel      data=${data}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['status']}
+    [Return]    ${jsondata['status']}
 
 Delete User
     [Arguments]    ${args}
@@ -325,10 +325,10 @@ Delete User
     ${data}=   create dictionary   data=@{user_list}
     ${resp}=   OpenBMC Post Request    /org/openbmc/UserManager/User/action/Userdel      data=${data}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['status']}
+    [Return]    ${jsondata['status']}
 
 Login BMC
     [Arguments]    ${username}    ${password}
     Open connection     ${OPENBMC_HOST}
     ${resp}=   Login   ${username}    ${password}
-    [return]    ${resp}
+    [Return]    ${resp}

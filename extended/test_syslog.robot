@@ -156,7 +156,7 @@ Enable Syslog Setting
     ${resp}=   openbmc post request
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog/action/Enable     data=${data}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['status']}
+    [Return]    ${jsondata['status']}
 
 Disable Syslog Setting
     [Arguments]    ${args}
@@ -165,4 +165,4 @@ Disable Syslog Setting
     ${resp}=   OpenBMC Post Request
     ...    ${OPENBMC_BASE_URI}LogManager/rsyslog/action/Disable      data=${data}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['status']}
+    [Return]    ${jsondata['status']}

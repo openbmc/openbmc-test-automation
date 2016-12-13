@@ -206,4 +206,4 @@ create a test log
     ${json}=   to json         ${resp.content}
     ${LOGID}=    convert to integer    ${json['data']}
     ${uri}=     catenate    SEPARATOR=   /org/openbmc/records/events/   ${LOGID}
-    [return]  ${uri}
+    [Return]  ${uri}

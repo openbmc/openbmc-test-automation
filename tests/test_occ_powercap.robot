@@ -98,29 +98,29 @@ Get System Power Consumption
 Get Minimum PowerCap
     ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/powercap/min_cap
     ${jsondata}=   To Json    ${resp.content}
-    [return]    ${jsondata["data"]["value"]}
+    [Return]    ${jsondata["data"]["value"]}
 
 Get Maximum PowerCap
     ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/powercap/max_cap
     ${jsondata}=   To Json    ${resp.content}
-    [return]    ${jsondata["data"]["value"]}
+    [Return]    ${jsondata["data"]["value"]}
 
 Get User PowerCap
     ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/powercap/user_cap
     ${jsondata}=   To Json    ${resp.content}
-    [return]    ${jsondata["data"]["value"]}
+    [Return]    ${jsondata["data"]["value"]}
 
 Set PowerCap
     [Arguments]    ${powercap_value}
     @{pcap_list}=   Create List     ${powercap_value}
     ${data}=   create dictionary   data=@{pcap_list}
     ${resp}=   openbmc post request    /org/openbmc/sensors/host/powercap/action/setValue      data=${data}
-    [return]    ${resp}
+    [Return]    ${resp}
 
 Get PowerCap
     ${resp}=   OpenBMC Get Request    /org/openbmc/sensors/host/powercap
     ${jsondata}=   To Json    ${resp.content}
-    [return]    ${jsondata["data"]["value"]}
+    [Return]    ${jsondata["data"]["value"]}
 
 Get OCC status link
     ${resp}=    OpenBMC Get Request     /org/openbmc/sensors/host/list
@@ -136,7 +136,7 @@ Get OCC status
     ${data}=   create dictionary   data=@{EMPTY}
     ${resp}=   openbmc post request    ${occstatus_link}/action/getValue      data=${data}
     ${jsondata}=   To Json    ${resp.content}
-    [return]    ${jsondata["data"]}
+    [Return]    ${jsondata["data"]}
 
 Get Chassis URI
     ${resp}=    OpenBMC Get Request     /org/openbmc/control/

@@ -145,7 +145,7 @@ Get BMC Time And Date
     ${resp}=     Convert Date    ${stdout}     date_format=%m/%d/%Y %H:%M:%S
     ...          exclude_millis=yes
     Should Not Be Empty    ${resp}
-    [return]    ${resp}
+    [Return]    ${resp}
 
 Set Time Owner
     [Arguments]    ${args}
@@ -155,7 +155,7 @@ Set Time Owner
     ${resp}=   OpenBMC Put Request
     ...         /org/openbmc/settings/host0/attr/time_owner    data=${valueDict}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['status']}
+    [Return]    ${jsondata['status']}
 
 Set Time Mode
     [Arguments]    ${args}
@@ -165,7 +165,7 @@ Set Time Mode
     ${resp}=   OpenBMC Put Request
     ...         /org/openbmc/settings/host0/attr/time_mode    data=${valueDict}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['status']}
+    [Return]    ${jsondata['status']}
 
 
 Post Test Execution

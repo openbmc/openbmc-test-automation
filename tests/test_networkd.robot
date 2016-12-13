@@ -147,7 +147,7 @@ Get networkInfo from the interface
     ${json}=   to json         ${resp.content}
     log to console   ${json['data'][2]}
     log to console   ${json['data'][3]}
-    [return]    ${json}
+    [Return]    ${json}
 
 AddNetworkInfo
     [Arguments]    ${intf}      ${address}    ${mask}   ${gateway}  ${result}

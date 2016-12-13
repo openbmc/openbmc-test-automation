@@ -134,7 +134,7 @@ Read Attribute
     ${resp}=  OpenBMC Get Request  ${uri}/attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
     ${content}=     To Json    ${resp.content}
-    [return]    ${content["data"]}
+    [Return]    ${content["data"]}
 
 Write Attribute
     [Arguments]    ${uri}      ${attr}    ${timeout}=10    &{kwargs}
@@ -149,7 +149,7 @@ Read Properties
     ${resp}=   OpenBMC Get Request    ${uri}    timeout=${timeout}
     Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
     ${content}=     To Json    ${resp.content}
-    [return]    ${content["data"]}
+    [Return]    ${content["data"]}
 
 Call Method
     [Arguments]  ${uri}  ${method}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
@@ -157,4 +157,4 @@ Call Method
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${resp}=  OpenBmc Post Request  ${base_uri}/action/${method}
     ...  timeout=${timeout}  quiet=${quiet}  &{kwargs}
-    [return]     ${resp}
+    [Return]     ${resp}
