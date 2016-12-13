@@ -501,7 +501,7 @@ def sprint_varx(var_name,
         if hex:
             if type(var_value) not in (int, long):
                 value_format = "%s"
-                if var_value is "":
+                if var_value == "":
                     var_value = "<blank>"
             else:
                 value_format = "0x%08x"
