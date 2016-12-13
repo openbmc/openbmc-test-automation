@@ -94,7 +94,7 @@ Get Total Present
     \       Append To List   ${l}   ${SYSTEM_INFO['${element}']['present']}
 
     ${sum}=        Get Count       ${l}    True
-    [return]        ${sum}
+    [Return]        ${sum}
 
 Verify Properties
     [Arguments]     ${type}

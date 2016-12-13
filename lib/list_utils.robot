@@ -29,4 +29,4 @@ Intersect Lists
 
     @{intersected_list}=  Remove Duplicates  ${intersected_list}
 
-    [return]  @{intersected_list}
+    [Return]  @{intersected_list}

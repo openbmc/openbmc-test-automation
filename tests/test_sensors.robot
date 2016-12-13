@@ -292,7 +292,7 @@ Get System component
     ${list}=    Get Dictionary Keys    ${SYSTEM_INFO}
     ${resp}=    Get Matches    ${list}    regexp=^.*[0-9a-z_].${type}[0-9]*$
     ${url}=    Get From List    ${resp}    0
-    [return]    ${url}
+    [Return]    ${url}
 
 Execute new Command
     [Arguments]    ${args}
@@ -314,9 +314,9 @@ Read the Attribute
 Get Sensor Number
     [Arguments]  ${name}
     ${x}=       get sensor   ${OPENBMC_MODEL}   ${name}
-    [return]     ${x}
+    [Return]     ${x}
 
 Get Inventory Sensor Number
     [Arguments]  ${name}
     ${x}=       get inventory sensor   ${OPENBMC_MODEL}   ${name}
-    [return]     ${x}
+    [Return]     ${x}

@@ -181,7 +181,7 @@ Set Network Override Setting
     ${resp}=   OpenBMC Put Request
     ...    /org/openbmc/settings/host0/attr/network_config    data=${valueDict}
     ${jsondata}=  to json    ${resp.content}
-    [return]    ${jsondata['status']}
+    [Return]    ${jsondata['status']}
 
 Post Test Execution
     [Documentation]  Perform operations after test execution. Captures FFDC

@@ -252,7 +252,7 @@ Get EventList
     ${resp}=   openbmc get request   ${EVENT_RECORD}
     should be equal as strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    to json    ${resp.content}
-    [return]    ${jsondata['data']}
+    [Return]    ${jsondata['data']}
 
 Create a test log
     [Arguments]
@@ -263,7 +263,7 @@ Create a test log
     ${json}=   to json         ${resp.content}
     ${LOGID}=    convert to integer    ${json['data']}
     ${uri}=     catenate    SEPARATOR=   ${EVENT_RECORD}   ${LOGID}
-    [return]  ${uri}
+    [Return]  ${uri}
 
 Clear all logs
     ${resp}=   openbmc post request

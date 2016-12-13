@@ -26,7 +26,7 @@ Run IPMI Command
     ...    Run Dbus IPMI RAW Command   ${args}
     ...          ELSE             Fail
     ...    msg=Invalid IPMI Command type provided : ${IPMI_COMMAND}
-    [return]    ${resp}
+    [Return]    ${resp}
 
 Run IPMI Standard Command
     [Arguments]    ${args}
@@ -37,7 +37,7 @@ Run IPMI Standard Command
     ...          ELSE             Fail
     ...    msg=Invalid IPMI Command type provided : ${IPMI_COMMAND}
 
-    [return]    ${resp}
+    [Return]    ${resp}
 
 Run Dbus IPMI RAW Command
     [Arguments]    ${args}
@@ -55,7 +55,7 @@ Run Dbus IPMI Standard Command
     ...    /tmp/ipmitool -I dbus ${args}    return_stdout=True
     ...    return_stderr= True    return_rc=True
     Should Be Equal    ${output}    ${0}    msg=${stderr}
-    [return]    ${stdout}
+    [Return]    ${stdout}
 
 Run External IPMI RAW Command
     [Arguments]    ${args}
@@ -64,7 +64,7 @@ Run External IPMI RAW Command
     ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${RAW}${SPACE}${args}
     ${rc}    ${output}=    Run and Return RC and Output    ${ipmi_raw_cmd}
     Should Be Equal    ${rc}    ${0}    msg=${output}
-    [return]    ${output}
+    [Return]    ${output}
 
 Run External IPMI Standard Command
     [Arguments]    ${args}
@@ -73,7 +73,7 @@ Run External IPMI Standard Command
     ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${args}
     ${rc}    ${output}=    Run and Return RC and Output    ${ipmi_cmd}
     Should Be Equal    ${rc}    ${0}    msg=${output}
-    [return]   ${output}
+    [Return]   ${output}
 
 
 Byte Conversion
@@ -118,7 +118,7 @@ Byte Conversion
 #   Equivalent dbus-send argument for smaller IPMI raw command:
 #   byte:0x00 byte:0x06 byte:0x00 byte:0x36
     Run Keyword if   ${argLength} == 9     Return from Keyword    ${valueinBytesWithoutArray}
-    [return]    ${valueinBytesWithArray}
+    [Return]    ${valueinBytesWithArray}
 
 
 Set NetFn Byte

@@ -152,7 +152,7 @@ Get networkInfo from the interface
     ${json}=   to json         ${resp.content}
     Log   ${json['data'][2]}
     Log   ${json['data'][3]}
-    [return]    ${json}
+    [Return]    ${json}
 
 
 validateEnvVariables

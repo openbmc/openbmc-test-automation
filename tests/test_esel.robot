@@ -50,16 +50,16 @@ Clear Test File
 Run IPMI Command Returned
     [Arguments]    ${args}
     ${output_1}=    Execute Command    /tmp/ipmitool -I dbus raw ${args}
-    [return]    ${output_1}
+    [Return]    ${output_1}
 
 Check IPMI Oempartialadd Reject
     [Arguments]    ${args}
     ${stdout}    ${stderr}    ${output_2}=  Execute Command    /tmp/ipmitool -I dbus raw ${args}    return_stdout=True    return_stderr= True    return_rc=True
-    [return]    ${stderr}
+    [Return]    ${stderr}
 
 Check IPMI Oempartialadd Accept
     [Arguments]    ${args}
     ${stdout}    ${stderr}    ${output_3}=    Execute Command    /tmp/ipmitool -I dbus raw ${args}    return_stdout=True    return_stderr= True    return_rc=True
     Should Be Equal    ${output_3}    ${0}    msg=${stderr}
-    [return]    ${stderr}
+    [Return]    ${stderr}
 
