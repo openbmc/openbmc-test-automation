@@ -27,7 +27,7 @@ Library   ../lib/obmc_boot_test.py
 ...  pdu_username  pdu_password  pdu_slot_no  openbmc_serial_host
 ...  openbmc_serial_port  boot_stack  boot_list  max_num_tests
 ...  plug_in_dir_paths  status_file_path  openbmc_model  boot_pass  boot_fail
-...  test_mode  quiet  debug
+...  ffdc_dir_path_style  ffdc_check  test_mode  quiet  debug
 
 # Initialize each program parameter.
 ${openbmc_nickname}         ${EMPTY}
@@ -54,9 +54,12 @@ ${openbmc_model}            ${EMPTY}
 # keep the grand total.
 ${boot_pass}                ${0}
 ${boot_fail}                ${0}
+${ffdc_dir_path_style}      ${EMPTY}
+${ffdc_check}               ${EMPTY}
 ${test_mode}                0
 ${quiet}                    0
 ${debug}                    0
+
 
 # Plug-in variables.
 ${shell_rc}                 0x00000000
@@ -153,8 +156,9 @@ Validate Parms
     Rvalid Value  openbmc_username
     Rvalid Value  openbmc_password
     # os_host is optional so no validation is being done.
-    Rvalid Value  os_username
-    Rvalid Value  os_password
+    Run Keyword If  '${OS_HOST}' != '${EMPTY}'  Run Keywords
+    ...  Rvalid Value  os_username  AND
+    ...  Rvalid Value  os_password
     Rvalid Value  pdu_host
     Rvalid Value  pdu_username
     Rvalid Value  pdu_password
@@ -173,6 +177,21 @@ Validate Parms
 
     ${temp_arr}=  Rvalidate Plug Ins  ${plug_in_dir_paths}
     Set Global Variable  @{plug_in_packages_list}  @{temp_arr}
+
+    Set FFDC Dir Path Style
+
+###############################################################################
+
+
+###############################################################################
+Set FFDC Dir Path Style
+
+    Run Keyword If  '${ffdc_dir_path_style}' != '${EMPTY}'  Return from Keyword
+
+    ${temp}=  Run Keyword and Continue On Failure  Get Environment Variable
+    ...  FFDC_DIR_PATH_STYLE  ${0}
+
+    Set Global Variable  ${ffdc_dir_path_style}  ${temp}
 
 ###############################################################################
 
@@ -221,7 +240,7 @@ Test Loop Body
     ${rc}  ${shell_rc}  ${failed_plug_in_name}=  Rprocess Plug In Packages
     ...  call_point=post_test_case  stop_on_plug_in_failure=1
 
-    Run Keyword If  '${BOOT_STATUS}' != 'PASS'
+    Run Keyword If  '${BOOT_STATUS}' != 'PASS' or '${FFDC_CHECK}' == 'All'
     ...  Run Keyword and Continue On Failure  My FFDC
 
     # Run plug-ins to see if we ought to stop execution.
@@ -347,9 +366,6 @@ Print Test Start Message
 My FFDC
     [Documentation]  Collect FFDC data.
 
-    Rqprint Timen  FFDC Dump requested.
-    Rqprint Timen  Starting dump of FFDC.
-    ${FFDC_DIR_PATH}=  Add Trailing Slash  ${FFDC_DIR_PATH}
     # FFDC_LOG_PATH is used by "FFDC" keyword.
     Set Global Variable  ${FFDC_LOG_PATH}  ${FFDC_DIR_PATH}
 
@@ -361,8 +377,6 @@ My FFDC
     ${rc}  ${shell_rc}  ${failed_plug_in_name}=  Rprocess Plug In Packages
     ...  call_point=ffdc  stop_on_plug_in_failure=1
 
-    Rqprint Timen  Finished dumping of FFDC.
-    Log FFDC Summary
     Log Defect Information
 
 ###############################################################################
@@ -410,15 +424,6 @@ Print Last Ten Boots
     :FOR  ${boot_entry}  IN  @{LAST_TEN}
     \  rqprint  ${boot_entry}
     Rqprint Dashes  ${0}  ${90}
-
-###############################################################################
-
-
-###############################################################################
-Log FFDC Summary
-    [Documentation]  Logs finding from within the FFDC files gathered.
-
-    Rqprint Timen  This is where the FFDC summary would go...
 
 ###############################################################################
 
