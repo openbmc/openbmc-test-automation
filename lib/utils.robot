@@ -281,6 +281,10 @@ Check If warmReset is Initiated
     [Documentation]  Ping would be still alive, so try SSH to connect
     ...              if fails the ports are down indicating reboot
     ...              is in progress
+
+    # Warm reset adds 3 seconds delay before forcing reboot
+    # To minimize race conditions, we wait for 7 seconds
+    Sleep  7s
     ${alive}=   Run Keyword and Return Status
     ...    Open Connection And Log In
     Return From Keyword If   '${alive}' == '${False}'    ${False}
