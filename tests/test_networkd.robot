@@ -127,7 +127,7 @@ Get IP Address type
     Should Be Equal    ${json['data']}    STATIC
     should be equal as strings      ${json['status']}      ok
 
-***keywords***
+*** Keywords ***
 
 Get networkInfo from the interface
 

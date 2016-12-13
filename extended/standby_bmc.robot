@@ -16,7 +16,7 @@ Resource          ../lib/pdu/pdu.robot
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0
 
-*** Test cases ***
+*** Test Cases ***
 
 Get to Stable State
     [Documentation]    BMC cleanup drive to stable state

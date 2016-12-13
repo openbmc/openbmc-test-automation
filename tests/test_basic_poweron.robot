@@ -10,7 +10,7 @@ Test Teardown       Test Exit Logs
 
 Force Tags  chassisboot
 
-*** test cases ***
+*** Test Cases ***
 
 power on test
     [Documentation]    Power OFF and power ON

@@ -131,7 +131,7 @@ Revert old Mac address     eth0     ${OLD_MAC_ADDRESS}   ok
     ...               that ip address has been added or not.
     ...               Expectation is the ip address should get added.
 
-***keywords***
+*** Keywords ***
 
 Get networkInfo from the interface
 

@@ -43,7 +43,7 @@ Set the power restore policy
 
     [Template]    Set Restore Policy
 
-***keywords***
+*** Keywords ***
 
 Set Restore Policy
     [Arguments]    ${policy}   ${expectedState}   ${nextState}
