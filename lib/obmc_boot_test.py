@@ -77,8 +77,8 @@ def plug_in_setup():
     time_string = time.strftime("%y%m%d.%H%M%S.", loc_time)
 
     openbmc_nickname = BuiltIn().get_variable_value("${openbmc_nickname}")
+    openbmc_host = BuiltIn().get_variable_value("${openbmc_host}")
     if openbmc_nickname == "":
-        openbmc_host = BuiltIn().get_variable_value("${openbmc_host}")
         ffdc_prefix = openbmc_host
     else:
         ffdc_prefix = openbmc_nickname
