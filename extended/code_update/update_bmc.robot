@@ -12,6 +12,7 @@ Documentation     Trigger code update to a target BMC.
 ...                   On reboot this policy would ensure the BMC comes
 ...                   online and stays at HOST_POWERED_OFF state.
 ...                 - Issue poweroff
+...                 - Prune archived journal logs
 ...                 - Prepare for Update
 ...                 - Wait for BMC to come online clean
 ...                 - Wait for BMC_READY state
@@ -42,6 +43,7 @@ Initiate Code update BMC
     Run Keyword if  '${status}' == '${False}'
     ...     Pass Execution   Same Driver version installed
 
+    Prune Journal Log
     Initiate Power Off
     Set Policy Setting   RESTORE_LAST_STATE
     Prepare For Update

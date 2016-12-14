@@ -8,6 +8,7 @@ Documentation     This module will take whatever action is necessary
 ...                  - BMC state is "BMC_READY" or "HOST_POWERED_OFF"
 ...                  - Boot policy is "RESTORE_LAST_STATE"
 ...               Power cycle system via PDU if specified
+...               Prune archived journal logs
 
 Resource          ../lib/boot/boot_resource_master.robot
 Resource          ../lib/utils.robot
@@ -46,6 +47,8 @@ Get to Stable State
 
     Run Keyword If  '${l_ready}' == '${False}'
     ...    Initiate Power Off
+
+    Prune Journal Log
 
     Run Keyword And Ignore Error
     ...   Update Policy Setting   RESTORE_LAST_STATE
