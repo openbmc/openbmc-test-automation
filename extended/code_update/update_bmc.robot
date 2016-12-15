@@ -79,5 +79,7 @@ Initiate Code update BMC
     ...    10 min   10 sec   Verify BMC State   BMC_READY
 
 Test BMC CPU Mem Performance at Ready State
+    [Documentation]   Check performance of memory and BMC CPU.
+    Open Connection And Log In
     Check BMC CPU Performance
     Check BMC Mem Performance
