@@ -12,7 +12,7 @@ Test Teardown     FFDC On Test Case Fail
 
 *** Test Cases ***
 Good connection for testing
-    [Tags]  CI  Good_connection_for_testing
+    [Tags]  Good_connection_for_testing
     ${content}=    Read Properties     /
     ${c}=          get from List       ${content}      0
     Should Be Equal    ${c}     /org
@@ -38,7 +38,7 @@ Get a null Property
     ...   The specified property cannot be found: ''is_fru''
 
 get directory listing /
-    [Tags]  CI  get_directory_listing
+    [Tags]  get_directory_listing
     ${resp}=   openbmc get request     /
     should be equal as strings   ${resp.status_code}     ${HTTP_OK}
     ${json}=   to json     ${resp.content}
