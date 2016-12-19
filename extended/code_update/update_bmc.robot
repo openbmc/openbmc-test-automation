@@ -45,7 +45,8 @@ Initiate Code update BMC
 
     Prune Journal Log
     Initiate Power Off
-    Set Policy Setting   RESTORE_LAST_STATE
+    Run Keyword And Ignore Error
+    ...   Set Policy Setting   RESTORE_LAST_STATE
     Prepare For Update
 
     # Wait time is increased temporary to 10 mins due
