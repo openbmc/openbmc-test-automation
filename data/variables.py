@@ -9,13 +9,17 @@ OPENBMC_BASE_DBUS = 'org.openbmc'
 CONTROL_URI = OPENBMC_BASE_URI + 'control/'
 SENSORS_URI = OPENBMC_BASE_URI + 'sensors/'
 RECORDS_URI = OPENBMC_BASE_URI + 'records/'
+EVENT_RECORD =  RECORDS_URI + 'events/'
 BUTTONS_URI = OPENBMC_BASE_URI + 'buttons/'
 SETTINGS_URI = OPENBMC_BASE_URI + 'settings/'
 WATCHDOG_URI = OPENBMC_BASE_URI + 'watchdog/'
 INVENTORY_URI = OPENBMC_BASE_URI + 'inventory/'
 USER_MANAGER_URI = OPENBMC_BASE_URI + 'UserManager/'
 NETWORK_MANAGER_URI = OPENBMC_BASE_URI + 'NetworkManager/'
-
+DIMM_URI = INVENTORY_URI + 'system/chassis/motherboard/'
+DIMM1_URI =  DIMM_URI + 'dimm1'
+DIMM2_URI = DIMM_URI + 'dimm2'
+DIMM3_URI = DIMM_URI + 'dimm3'
 
 '''
   QEMU HTTPS variable:

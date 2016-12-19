@@ -20,12 +20,6 @@ ${SYSTEM_SHUTDOWN_TIME}           1min
 
 ${WAIT_FOR_SERVICES_UP}           3min
 
-${EVENT_RECORD}        ${RECORDS_URI}events/
-${DIMM_PREFIX}         ${INVENTORY_URI}system/chassis/motherboard/
-${DIMM1_URI}           ${DIMM_PREFIX}dimm1
-${DIMM2_URI}           ${DIMM_PREFIX}dimm2
-${DIMM3_URI}           ${DIMM_PREFIX}dimm3
-
 ${BUSCTL_PREFIX}                busctl call ${OPENBMC_BASE_DBUS}.records.events
 ...                             ${OPENBMC_BASE_URI}records/events
 ...                             ${OPENBMC_BASE_DBUS}.recordlog
