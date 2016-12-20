@@ -25,6 +25,9 @@ Documentation     Trigger code update to a target BMC.
 
 Resource          code_update_utils.robot
 Resource          ../../lib/boot/boot_resource_master.robot
+Resource          ../../lib/openbmc_ffdc.robot
+
+Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
 

@@ -113,7 +113,7 @@ Run extended tests
     and run as follows:
 
     For Barreleye system
-    python -m robot -v OPENBMC_HOST:x.x.x.x -v FILE_PATH:downloaded_path/barreleye-xxxx.all.tar  extended/code_update/update_bmc.robot
+    python -m robot -v OPENBMC_HOST:x.x.x.x -v OPENBMC_MODEL:./data/barreleye.py -v FILE_PATH:downloaded_path/barreleye-xxxx.all.tar  extended/code_update/update_bmc.robot
 
     For loop test (Default iteration is 10)
     python -m robot -v OPENBMC_HOST:x.x.x.x -v OPENBMC_SYSTEMMODEL:xxxxxx -v ITERATION:n -v LOOP_TEST_COMMAND:xxxxxx extended/full_suite_regression.robot
