@@ -32,6 +32,14 @@ ${FILE_PATH}      ${EMPTY}
 
 *** Test Cases ***
 
+Test Basic BMC Performance Before Code Update
+    [Documentation]   Check performance of memory, CPU & file system of BMC.
+    [Tags]  Test_basic_bmc_performance_before_code_update
+    Open Connection And Log In
+    Check BMC CPU Performance
+    Check BMC Mem Performance
+    Check BMC File System Performance
+
 Initiate Code update BMC
     [Documentation]    BMC code update process initiation
 
@@ -79,8 +87,13 @@ Initiate Code update BMC
     Wait Until Keyword Succeeds
     ...    10 min   10 sec   Verify BMC State   BMC_READY
 
-Test BMC CPU Mem Performance at Ready State
-    [Documentation]   Check performance of memory and BMC CPU.
+
+Test Basic BMC Performance At Ready State
+    [Documentation]   Check performance of memory, CPU & file system of BMC.
+    [Tags]  Test_basic_bmc_performance_at_ready_state
     Open Connection And Log In
     Check BMC CPU Performance
     Check BMC Mem Performance
+    Check BMC File System Performance
+
+
