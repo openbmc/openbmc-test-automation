@@ -24,6 +24,9 @@ ${bmc_mem_free_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
 ${bmc_mem_total_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
 ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
 ${HOST_SETTING}    ${SETTINGS_URI}host0
+# /dev/mtdblock5 filesystem  should be 100% full always
+${bmc_file_system_usage_cmd}=
+...  df -h | grep -v /dev/mtdblock5 | cut -c 52-54 | grep 100 | wc -l
 
 *** Keywords ***
 
@@ -478,6 +481,14 @@ BMC Mem Performance Check
     ...   ${bmc_mem_percentage}/${bmc_mem_total_output}
     Should be true  ${bmc_mem_percentage} > 10
 
+BMC File System Usage Check
+    [Documentation]   Check the file system space. None should be 100% full
+    ...   except /dev/mtdblock5
+    ${bmc_fs_usage_output}  ${stderr}=   Execute Command
+    ...   ${bmc_file_system_usage_cmd}  return_stderr=True
+    Should Be Empty  ${stderr}
+    Should Be True  ${bmc_fs_usage_output}==0
+
 Check BMC CPU Performance
     [Documentation]   Minimal 10% of proc should be free in 3 sample
     :FOR  ${var}  IN Range  1  4
@@ -488,6 +499,12 @@ Check BMC Mem Performance
 
     :FOR  ${var}  IN Range  1  4
     \     BMC Mem Performance check
+
+Check BMC File System Performance
+    [Documentation]  Check for file system usage for 4 times     
+
+    :FOR  ${var}  IN Range  1  4
+    \     BMC File System Usage check
 
 Get Endpoint Paths
     [Documentation]   Returns all url paths ending with given endpoint
