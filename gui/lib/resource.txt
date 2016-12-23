@@ -1,0 +1,8 @@
+*** Settings ***
+Library  OperatingSystem
+Variables  ../tests/data/variables.py
+
+*** Variables ***
+${HOST_IP}        ${EMPTY}
+${HOST_USERNAME}  ${EMPTY}
+${HOST_PASSWORD}  ${EMPTY}
