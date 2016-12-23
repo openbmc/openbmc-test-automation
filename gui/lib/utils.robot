@@ -1,0 +1,36 @@
+*** Settings ***
+
+Library  XvfbRobot
+Library  OperatingSystem
+Library  Selenium2Library  120  120
+Library  Telnet  30 Seconds
+Library  Screenshot
+
+Resource  resource.txt
+
+*** Keywords ***
+
+Open Browser With URL
+    [Documentation]  Opens browser with specified URL.
+    [Arguments]  ${URL}
+    Start Virtual Display  1920  1080
+    ${BrowserID}=  Open Browser  ${URL}
+    Set Window Size  1920  1080
+
+Break Firewall
+    [Documentation]  Break firewall.
+    [Arguments]  ${HOST_IP}  ${HOST_USERNAME}  ${HOST_PASSWORD}
+    ${status}  ${value}=  Run Keyword And Ignore Error  Telnet.Open Connection
+    ...         ${HOST_IP}  prompt=#
+    Run Keyword If  '${status}'=='PASS'  Telnet.Login  ${HOST_USERNAME}  
+    ...  ${HOST_PASSWORD}  login_prompt=Username:  password_prompt=Password:
+
+Login To GUI
+    [Documentation]  Logs into Web GUI.
+    [Arguments]  ${URL}  ${xpath_uname}  ${username}
+    ...  ${xpath_password}  ${password}  ${xpath_signin}  ${logo}
+    Go To  ${URL}
+    Input Text  ${xpath_uname}  ${username}
+    Input Password  ${xpath_password}  ${password}
+    Click Button  ${xpath_signin}
+    Wait Until Page Contains Element  ${logo}
