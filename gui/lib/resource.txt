@@ -1,0 +1,8 @@
+*** Settings ***
+Library  OperatingSystem
+Variables  ../data/variables.py
+
+*** Variables ***
+${HOST_IP}        9.126.171.193
+${HOST_USERNAME}  ${EMPTY}
+${HOST_PASSWORD}  ${EMPTY}
