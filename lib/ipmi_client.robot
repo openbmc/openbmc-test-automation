@@ -7,10 +7,10 @@ Resource        ../lib/connection_client.robot
 Library         String
 
 *** Variables ***
-${dbusHostIpmicmd1}=   dbus-send --system  /org/openbmc/HostIpmi/1
-${dbusHostIpmiCmdReceivedMsg}=   org.openbmc.HostIpmi.ReceivedMessage
+${dbusHostIpmicmd1}=   dbus-send --system  ${OPENBMC_BASE_URI}HostIpmi/1
+${dbusHostIpmiCmdReceivedMsg}=   ${OPENBMC_BASE_DBUS}.HostIpmi.ReceivedMessage
 ${netfnByte}=          ${EMPTY}
-${cmdByte}   =          ${EMPTY}
+${cmdByte}=            ${EMPTY}
 ${arrayByte}=          array:byte:
 ${IPMI_EXT_CMD}=       ipmitool -I lanplus -C 1 -P
 ${HOST}=               -H
