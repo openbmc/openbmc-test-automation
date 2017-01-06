@@ -24,12 +24,12 @@ ${HOST_SETTING}    ${OPENBMC_BASE_URI}settings/host0
 Set the power restore policy
     #Policy                Expected System State     Next System State
 
-    LEAVE_OFF              HOST_POWERED_OFF          HOST_POWERED_OFF
-    LEAVE_OFF              HOST_BOOTED               HOST_POWERED_OFF
+    LEAVE_OFF              HOST_POWERED_OFF          BMC_READY
+    LEAVE_OFF              HOST_BOOTED               BMC_READY
     ALWAYS_POWER_ON        HOST_POWERED_OFF          HOST_BOOTED
     ALWAYS_POWER_ON        HOST_BOOTED               HOST_BOOTED
     RESTORE_LAST_STATE     HOST_BOOTED               HOST_BOOTED
-    RESTORE_LAST_STATE     HOST_POWERED_OFF          HOST_POWERED_OFF
+    RESTORE_LAST_STATE     HOST_POWERED_OFF          BMC_READY
 
     [Documentation]   Test to validate restore policy attribute functionality.
     ...               Policy:
@@ -50,8 +50,7 @@ Set Restore Policy
 
     Set Policy Setting   ${policy}
 
-    ${currentState}=
-    ...   Read Attribute   ${HOST_SETTING}   system_state
+    ${currentState}=  Get BMC State
 
     Log   Current System State= ${currentState}
     Log   Expected System State= ${expectedState}
@@ -67,7 +66,7 @@ Set Restore Policy
     Log   "BMC is Online now"
 
     Wait Until Keyword Succeeds
-    ...   5 min   10 sec   System State  ${nextState}
+    ...   5 min   10 sec   Verify BMC State  ${nextState}
 
 
 Set Policy Setting
