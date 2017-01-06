@@ -9,6 +9,7 @@ Resource        ../lib/pdu/pdu.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/boot/boot_resource_master.robot
+Resource        ../lib/state_manager.robot
 
 
 Library         SSHLibrary
@@ -17,19 +18,18 @@ Test Teardown   FFDC On Test Case Fail
 Force Tags      chassisboot  bmcreboot
 
 *** Variables ***
-${HOST_SETTING}    ${SETTINGS_URI}host0
 
 *** Test Cases ***
 
 Set the power restore policy
     #Policy                Expected System State     Next System State
 
-    LEAVE_OFF              HOST_POWERED_OFF          HOST_POWERED_OFF
-    LEAVE_OFF              HOST_BOOTED               HOST_POWERED_OFF
-    ALWAYS_POWER_ON        HOST_POWERED_OFF          HOST_BOOTED
-    ALWAYS_POWER_ON        HOST_BOOTED               HOST_BOOTED
-    RESTORE_LAST_STATE     HOST_BOOTED               HOST_BOOTED
-    RESTORE_LAST_STATE     HOST_POWERED_OFF          HOST_POWERED_OFF
+    LEAVE_OFF              Off                       Off
+    LEAVE_OFF              Running                   Off
+    ALWAYS_POWER_ON        Off                       Running
+    ALWAYS_POWER_ON        Running                   Running
+    RESTORE_LAST_STATE     Running                   Running
+    RESTORE_LAST_STATE     Off                       Off
 
     [Documentation]   Test to validate restore policy attribute functionality.
     ...               Policy:
@@ -50,8 +50,7 @@ Set Restore Policy
 
     Set BMC Power Policy    ${policy}
 
-    ${currentState}=
-    ...   Read Attribute   ${HOST_SETTING}   system_state
+    ${currentState}=  Get Host State
 
     Log   Current System State= ${currentState}
     Log   Expected System State= ${expectedState}
@@ -63,11 +62,11 @@ Set Restore Policy
 
     Log   "Doing power cycle"
     PDU Power Cycle
-    Check If BMC is Up   5 min    10 sec
+    Check If BMC is Up  5 min  10 sec
     Log   "BMC is Online now"
 
     Wait Until Keyword Succeeds
-    ...   5 min   10 sec   System State  ${nextState}
+    ...  5 min  10 sec  Is BMC Ready
 
 
 Set Initial Test State
@@ -76,17 +75,9 @@ Set Initial Test State
     [Arguments]   ${expectedState}
 
     Run Keyword If
-    ...   '${expectedState}' == 'HOST_BOOTED'
-    ...   BMC Power On
+    ...   '${expectedState}' == 'Running'
+    ...   Initiate Host Boot
 
     Run Keyword If
-    ...   '${expectedState}' == 'HOST_POWERED_OFF'
-    ...   BMC Power Off
-
-
-System State
-    [Arguments]     ${nextState}
-    ${afterPduSystemState}=
-    ...   Read Attribute    ${HOST_SETTING}    system_state
-    Should be equal   ${afterPduSystemState}    ${nextState}
-
+    ...   '${expectedState}' == 'Off'
+    ...   Initiate Host PowerOff
