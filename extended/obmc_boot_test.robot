@@ -9,6 +9,7 @@ Resource  ../lib/list_utils.robot
 Resource  ../lib/openbmc_ffdc.robot
 
 Library   ../lib/gen_robot_print.py
+Library   ../lib/gen_misc.py
 Library   ../lib/gen_robot_plug_in.py
 Library   ../lib/gen_robot_valid.py
 Library   ../lib/state.py
@@ -27,7 +28,8 @@ Library   ../lib/obmc_boot_test.py
 ...  pdu_username  pdu_password  pdu_slot_no  openbmc_serial_host
 ...  openbmc_serial_port  boot_stack  boot_list  max_num_tests
 ...  plug_in_dir_paths  status_file_path  openbmc_model  boot_pass  boot_fail
-...  ffdc_dir_path_style  ffdc_check  test_mode  quiet  debug
+...  ffdc_dir_path_style  ffdc_check  state_change_timeout  power_on_timeout
+...  power_on_timeout  test_mode  quiet  debug
 
 # Initialize each program parameter.
 ${openbmc_nickname}         ${EMPTY}
@@ -56,6 +58,9 @@ ${boot_pass}                ${0}
 ${boot_fail}                ${0}
 ${ffdc_dir_path_style}      ${EMPTY}
 ${ffdc_check}               ${EMPTY}
+${state_change_timeout}     1 min
+${power_on_timeout}         14 mins
+${power_off_timeout}        2 mins
 ${test_mode}                0
 ${quiet}                    0
 ${debug}                    0
@@ -140,7 +145,7 @@ Setup
     ${temp_state}=  Run Keyword If  '${test_mode}' == '0'  Get State
     ...  ELSE  Create Dictionary  &{default_state}
     Set Global Variable  &{state}  &{temp_state}
-    rpvars  state
+    Rpvars  state
 
 ###############################################################################
 
@@ -177,6 +182,9 @@ Validate Parms
 
     ${temp_arr}=  Rvalidate Plug Ins  ${plug_in_dir_paths}
     Set Global Variable  @{plug_in_packages_list}  @{temp_arr}
+
+    Run Keyword If  '${openbmc_nickname}' == '${EMPTY}'
+    ...  Set Global Variable  ${openbmc_nickname}  ${openbmc_host}
 
     Set FFDC Dir Path Style
 
@@ -221,6 +229,9 @@ Test Loop Body
     ${loc_next_boot}=  Select Boot  ${state['power']}
     Set Global Variable  ${next_boot}  ${loc_next_boot}
 
+    # Clear this file.  Plug-ins may now write to it.
+    Remove File  ${FFDC_LIST_FILE_PATH}
+
     ${status}  ${msg}=  Run Keyword And Ignore Error  Run Boot  ${next_boot}
     Run Keyword If  '${status}' == 'FAIL'  rprint  ${msg}
 
@@ -240,7 +251,12 @@ Test Loop Body
     ${rc}  ${shell_rc}  ${failed_plug_in_name}=  Rprocess Plug In Packages
     ...  call_point=post_test_case  stop_on_plug_in_failure=1
 
-    Run Keyword If  '${BOOT_STATUS}' != 'PASS' or '${FFDC_CHECK}' == 'All'
+    ${rc}  ${shell_rc}  ${failed_plug_in_name}=  Rprocess Plug In Packages
+    ...  call_point=ffdc_check  shell_rc=${0x00000200}
+    ...  stop_on_plug_in_failure=1  stop_on_non_zero_rc=1
+
+    Run Keyword If
+    ...  '${BOOT_STATUS}' != 'PASS' or '${FFDC_CHECK}' == 'All' or '${shell_rc}' == '${0x00000200}'
     ...  Run Keyword and Continue On Failure  My FFDC
 
     # Run plug-ins to see if we ought to stop execution.
@@ -279,7 +295,7 @@ Select Boot
     ...  **ERROR** BMC not in state to power on or off: "${power}"  AND
     ...  Fatal Error
 
-    [Return]  ${boot}
+    [return]  ${boot}
 
 ###############################################################################
 
@@ -296,7 +312,7 @@ Select Power On
     # selecting randomly.
     ${chosen}=  Set Variable  @{power_on_choices}[0]
 
-    [Return]  ${chosen}
+    [return]  ${chosen}
 
 ###############################################################################
 
@@ -313,7 +329,7 @@ Select Power Off
     # selecting randomly.
     ${chosen}=  Set Variable  @{power_off_choices}[0]
 
-    [Return]  ${chosen}
+    [return]  ${chosen}
 
 ###############################################################################
 
@@ -363,29 +379,8 @@ Print Test Start Message
 
 
 ###############################################################################
-My FFDC
-    [Documentation]  Collect FFDC data.
-
-    # FFDC_LOG_PATH is used by "FFDC" keyword.
-    Set Global Variable  ${FFDC_LOG_PATH}  ${FFDC_DIR_PATH}
-
-    @{cmd_buf}=  Create List  FFDC
-    rqpissuing_keyword  ${cmd_buf}  ${test_mode}
-    Run Keyword If  '${test_mode}' == '0'  @{cmd_buf}
-
-    Plug In Setup
-    ${rc}  ${shell_rc}  ${failed_plug_in_name}=  Rprocess Plug In Packages
-    ...  call_point=ffdc  stop_on_plug_in_failure=1
-
-    Log Defect Information
-
-###############################################################################
-
-
-###############################################################################
-Log Defect Information
-    [Documentation]  Logs information needed for a defect. This information
-    ...  can also be found within the FFDC gathered.
+Print Defect Report
+    [Documentation]  Print a defect report.
 
     Rqprintn
     # indent=0, width=90, linefeed=1, char="="
@@ -395,18 +390,29 @@ Log Defect Information
 
     Rqpvars  @{parm_list}
     Print Last Ten Boots
+    Rqprintn
+    Rqpvars  state
 
-    ${rc}  ${output}=  Run Keyword If  '${test_mode}' == '0'
-    ...  Run and return RC and Output  ls ${LOG_PREFIX}*
-    ...  ELSE  Set Variable  ${0}  ${EMPTY}
+    # At some point I'd like to have the 'Call FFDC Methods' return a list
+    # of files it has collected.  In that case, the following "ls" command
+    # would no longer be needed.  For now, however, ls shows the files
+    # named in FFDC_LIST_FILE_PATH so I will refrain from printing those
+    # out (so we don't see duplicates in the list).
+
+    ${rc}  ${output}=  Run and return RC and Output  ls ${LOG_PREFIX}*
 
     Run Keyword If  '${rc}' != '${0}' and '${rc}' != 'None'  rqpvars  rc
+    ${status}  ${ffdc_list}=  Run Keyword and Ignore Error
+    ...  OperatingSystem.Get File  ${FFDC_LIST_FILE_PATH}
 
     Rqprintn
     Rqprintn  FFDC data files:
+    Run Keyword If  '${status_file_path}' != '${EMPTY}'
+    ...  Rqprintn  ${status_file_path}
     Rqprintn  ${output}
-
+    # Run Keyword If  '${status}' == 'PASS'  Rqprintn  ${ffdc_list}
     Rqprintn
+
     Rqprint Dashes  ${0}  ${90}  ${1}  =
 
 ###############################################################################
