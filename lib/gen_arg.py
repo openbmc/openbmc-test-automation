@@ -82,8 +82,7 @@ def gen_get_options(parser,
                 help='If this parameter is set to "1", %(prog)s' +
                      ' will print only essential information, i.e. it will' +
                      ' not echo parameters, echo commands, print the total' +
-                     ' run time, etc.' + default_string
-                )
+                     ' run time, etc.' + default_string)
         elif arg_name == "test_mode":
             if default is None:
                 default = 0
@@ -95,8 +94,7 @@ def gen_get_options(parser,
                 help='This means that %(prog)s should go through all the' +
                      ' motions but not actually do anything substantial.' +
                      '  This is mainly to be used by the developer of' +
-                     ' %(prog)s.' + default_string
-                )
+                     ' %(prog)s.' + default_string)
         elif arg_name == "debug":
             if default is None:
                 default = 0
@@ -107,8 +105,7 @@ def gen_get_options(parser,
                 choices=[1, 0],
                 help='If this parameter is set to "1", %(prog)s will print' +
                      ' additional debug information.  This is mainly to be' +
-                     ' used by the developer of %(prog)s.' + default_string
-                )
+                     ' used by the developer of %(prog)s.' + default_string)
         elif arg_name == "loglevel":
             if default is None:
                 default = "info"
@@ -120,8 +117,7 @@ def gen_get_options(parser,
                          'debug', 'info', 'warning', 'error', 'critical'],
                 help='If this parameter is set to "1", %(prog)s will print' +
                      ' additional debug information.  This is mainly to be' +
-                     ' used by the developer of %(prog)s.' + default_string
-                )
+                     ' used by the developer of %(prog)s.' + default_string)
 
     arg_obj = parser.parse_args()
 
@@ -157,6 +153,37 @@ def gen_get_options(parser,
         setattr(module, key, getattr(__builtin__.arg_obj, key))
 
     return True
+
+###############################################################################
+
+
+###############################################################################
+def set_pgm_arg(var_value,
+                var_name=None):
+
+    r"""
+    Set the value of the arg_obj.__dict__ entry named in var_name with the
+    var_value provided.  Also, set corresponding global variable.
+
+    Description of arguments:
+    var_value                       The value to set in the variable.
+    var_name                        The name of the variable to set.  This
+                                    defaults to the name of the variable used
+                                    for var_value when calling this function.
+    """
+
+    if var_name is None:
+        var_name = gp.get_arg_name(None, 1, 2)
+
+    arg_obj.__dict__[var_name] = var_value
+    module = sys.modules['__main__']
+    setattr(module, var_name, var_value)
+    if var_name == "quiet":
+        __builtin__.quiet = var_value
+    elif var_name == "debug":
+        __builtin__.debug = var_value
+    elif var_name == "test_mode":
+        __builtin__.test_mode = var_value
 
 ###############################################################################
 
