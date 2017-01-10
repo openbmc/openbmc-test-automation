@@ -396,7 +396,7 @@ def check_state(match_state,
 
 
 ###############################################################################
-def wait_state(match_state,
+def wait_state(match_state=(),
                wait_time="1 min",
                interval="1 second",
                invert=0,
@@ -453,8 +453,12 @@ def wait_state(match_state,
                          alt_text + "match the state shown below.")
         grp.rprint_var(match_state)
 
+    if quiet:
+        print_string=""
+    else:
+        print_string="#"
     cmd_buf = ["Check State", match_state, "invert=${" + str(invert) + "}",
-               "print_string=#", "openbmc_host=" + openbmc_host,
+               "print_string=" + print_string, "openbmc_host=" + openbmc_host,
                "openbmc_username=" + openbmc_username,
                "openbmc_password=" + openbmc_password, "os_host=" + os_host,
                "os_username=" + os_username, "os_password=" + os_password,
