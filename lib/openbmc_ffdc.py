@@ -35,7 +35,7 @@ def ffdc(ffdc_dir_path=None,
     # Note: Several subordinate functions like 'Get Test Dir and Name' and
     # 'Header Message' expect global variable FFDC_TIME to be set.
     cmd_buf = ["Get Current Time Stamp"]
-    grp.rpissuing_keyword(cmd_buf)
+    grp.rdpissuing_keyword(cmd_buf)
     FFDC_TIME = BuiltIn().run_keyword(*cmd_buf)
     BuiltIn().set_global_variable("${FFDC_TIME}", FFDC_TIME)
 
@@ -52,7 +52,9 @@ def ffdc(ffdc_dir_path=None,
     grp.rpissuing_keyword(cmd_buf)
     status, output = BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
     if status != "PASS":
-        error_message = grp.sprint_error_report("Create Directory failed with the following error:\n" + output)
+        error_message = grp.sprint_error_report("Create Directory failed" +
+                                                " with the following" +
+                                                " error:\n" + output)
         BuiltIn().fail(error_message)
 
     # FFDC_FILE_PATH is used by Header Message.
@@ -89,7 +91,8 @@ def set_ffdc_defaults(ffdc_dir_path=None,
     will remain unchanged.
     """
 
-    ffdc_dir_path_style = BuiltIn().get_variable_value("${ffdc_dir_path_style}")
+    ffdc_dir_path_style = BuiltIn().get_variable_value(
+        "${ffdc_dir_path_style}")
 
     if ffdc_dir_path is None:
         if ffdc_dir_path_style:
@@ -126,7 +129,9 @@ def set_ffdc_defaults(ffdc_dir_path=None,
         if ffdc_prefix is None:
             if ffdc_dir_path_style:
                 OPENBMC_HOST = BuiltIn().get_variable_value("${OPENBMC_HOST}")
-                ffdc_prefix = OPENBMC_HOST + "." + FFDC_TIME[2:8] + "." +\
+                OPENBMC_NICKNAME = BuiltIn().get_variable_value(
+                    "${OPENBMC_NICKNAME}", default=OPENBMC_HOST)
+                ffdc_prefix = OPENBMC_NICKNAME + "." + FFDC_TIME[2:8] + "." +\
                     FFDC_TIME[8:14] + "."
             else:
                 ffdc_prefix = FFDC_TIME + "_"
