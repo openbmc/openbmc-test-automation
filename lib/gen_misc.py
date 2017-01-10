@@ -14,6 +14,52 @@ import gen_print as gp
 
 
 ###############################################################################
+def add_trailing_slash(path):
+
+    r"""
+    Add a trailing slash to path if it doesn't already have one and return it.
+
+    """
+
+    return os.path.normpath(path) + os.path.sep
+
+###############################################################################
+
+
+###############################################################################
+def set_mod_global(var_value,
+                   mod_name="__main__",
+                   var_name=None):
+
+    r"""
+    Set a global variable for a given module.
+
+    Description of arguments:
+    var_value                       The value to set in the variable.
+    mod_name                        The name of the module whose variable is
+                                    to be set.
+    var_name                        The name of the variable to set.  This
+                                    defaults to the name of the variable used
+                                    for var_value when calling this function.
+    """
+
+    try:
+        module = sys.modules[mod_name]
+    except KeyError:
+        gp.print_error_report("Programmer error - The mod_name passed to" +
+                              " this function is invalid:\n" +
+                              gp.sprint_var(mod_name))
+        raise ValueError('Programmer error.')
+
+    if var_name is None:
+        var_name = gp.get_arg_name(None, 1, 2)
+
+    setattr(module, var_name, var_value)
+
+###############################################################################
+
+
+###############################################################################
 def my_parm_file(prop_file_path):
 
     r"""
@@ -71,5 +117,28 @@ def return_path_list():
     PATH_LIST = [os.path.normpath(path) + os.sep for path in PATH_LIST]
 
     return PATH_LIST
+
+###############################################################################
+
+
+###############################################################################
+def quote_bash_parm(parm):
+
+    r"""
+    Return the bash command line parm with single quotes if they are needed.
+
+    Description of arguments:
+    parm                            The string to be quoted.
+    """
+
+    # If any of these characters are found in the parm string, then the
+    # string should be quoted.  This list is by no means complete and should
+    # be expanded as needed by the developer of this function.
+    bash_special_chars = set(' $')
+
+    if any((char in bash_special_chars) for char in parm):
+        return "'" + parm + "'"
+
+    return parm
 
 ###############################################################################
