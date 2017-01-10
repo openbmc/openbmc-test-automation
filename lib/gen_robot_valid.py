@@ -17,8 +17,9 @@ def rvalid_value(var_name,
                  valid_values=[]):
 
     r"""
-    rprint stands for "Robot Valid Value".  This function is the robot wrapper
-    for gen_robot_print.svalid_value.
+    Validate a robot value.
+
+    This function is the robot wrapper for gen_robot_print.svalid_value.
 
     Description of arguments:
     var_name                        The name of the variable whose value is to
@@ -91,8 +92,9 @@ def rvalid_value(var_name,
 def rvalid_integer(var_name):
 
     r"""
-    rprint stands for "Robot Valid Integer".  This function is the robot
-    wrapper for gen_robot_print.svalid_integer.
+    Validate a robot integer.
+
+    This function is the robot wrapper for gen_robot_print.svalid_integer.
 
     Description of arguments:
     var_name                        The name of the variable whose value is to
