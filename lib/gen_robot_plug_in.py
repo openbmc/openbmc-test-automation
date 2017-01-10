@@ -131,7 +131,7 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
 
     if plug_in_packages_list is None:
         plug_in_packages_list = BuiltIn().get_variable_value(
-                                "${plug_in_packages_list}")
+            "${plug_in_packages_list}")
 
     # If there are no plug-in packages to process, return successfully.
     if len(plug_in_packages_list) == 0:
@@ -178,8 +178,9 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
 
         if int(debug) == 1:
             grp.rpissuing(cmd_buf)
+        grp.rprint_timen("Processing " + call_point + " call point programs.")
 
-    ppc_rc = subprocess.call(cmd_buf, shell=True)
+    proc_plug_pkg_rc = subprocess.call(cmd_buf, shell=True)
 
     # As process_plug_in_packages.py help text states, it will print the
     # values of failed_plug_in_name and shell_rc in the following format:
@@ -194,18 +195,21 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     # - One or more non-colon characters
     # - A colon
     # - Zero or more spaces
-    cmd_buf = "egrep '^[ ]*[^:]+:[ ]*' " + temp_file_path + " > " +\
-              temp_properties_file_path
+    # I added code to exclude any line that starts with spaces and a
+    # left-square bracket (e.g. '[ ERROR ]').  These would be interpreted by
+    # my_parm_file as a new section.
+    cmd_buf = "egrep '^[ ]*[^:]+:[ ]*' " + temp_file_path +\
+              " | egrep -v '^[ ]*\[' > " + temp_properties_file_path
     if int(debug) == 1:
         grp.rpissuing(cmd_buf)
-    rc = os.system(cmd_buf)
+    gen_rc = os.system(cmd_buf)
 
     # Next we call my_parm_file to create a properties dictionary.
     properties = gm.my_parm_file(temp_properties_file_path)
 
     # Finally, we access the 2 values that we need.
     try:
-        shell_rc = properties['shell_rc']
+        shell_rc = int(properties['shell_rc'], 16)
     except KeyError:
         shell_rc = 0
     try:
@@ -213,12 +217,14 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     except KeyError:
         failed_plug_in_name = ""
 
-    if rc != 0 or ppc_rc != 0:
+    if gen_rc != 0 or proc_plug_pkg_rc != 0:
+        hex = 1
         grp.rprint_error("Call to process_plug_in_packages failed.\n")
-        grp.rprint_varx("rc", rc)
-        grp.rprint_varx("ppc_rc", ppc_rc)
-        grp.rprint_varx("shell_rc", shell_rc)
+        grp.rprint_varx("gen_rc", gen_rc, hex)
+        grp.rprint_varx("proc_plug_pkg_rc", proc_plug_pkg_rc, hex)
         grp.rprint_varx("failed_plug_in_name", failed_plug_in_name)
+        grp.rprint_varx("shell_rc", shell_rc, hex)
+        rc = 1
 
     return rc, shell_rc, failed_plug_in_name
 
