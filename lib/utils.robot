@@ -13,7 +13,7 @@ ${SYSTEM_SHUTDOWN_TIME}       ${5}
 ${dbuscmdBase}
 ...  dbus-send --system --print-reply --dest=${OPENBMC_BASE_DBUS}.settings.Host
 ${dbuscmdGet}
-...  ${OPENBMC_BASE_URI}settings/host0  org.freedesktop.DBus.Properties.Get
+...  ${SETTINGS_URI}host0  org.freedesktop.DBus.Properties.Get
 # Enable when ready with openbmc/openbmc-test-automation#203
 #${dbuscmdString}=  string:"xyz.openbmc_project.settings.Host" string:
 ${dbuscmdString}=   string:"org.openbmc.settings.Host" string:
@@ -21,9 +21,6 @@ ${dbuscmdString}=   string:"org.openbmc.settings.Host" string:
 
 # Assign default value to QUIET for programs which may not define it.
 ${QUIET}  ${0}
-${dbuscmdBase}=    dbus-send --system --print-reply --dest=org.openbmc.settings.Host
-${dbuscmdGet}=   /org/openbmc/settings/host0  org.freedesktop.DBus.Properties.Get
-${dbuscmdString}=   string:"org.openbmc.settings.Host" string:
 ${bmc_mem_free_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
 ${bmc_mem_total_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
 ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
@@ -307,9 +304,12 @@ Stop OBMC Console Client
     ...               writing to file_path.
     [Arguments]   ${file_path}=/tmp/obmc-console.log
 
+    ${cmd_buf}=  Catenate  SEPARATOR=${SPACE}
+    ...  ps ax | grep obmc-console-client | grep ${file_path} | grep -v grep
+    ...  | awk '{print $1}'
+
     ${pid}=
-    ...  Execute Command
-    ...  ps ax | grep obmc-console-client | grep ${file_path} | grep -v grep | awk '{print $1}'
+    ...  Execute Command  ${cmd_buf}
 
     Run Keyword If  '${pid}' != '${EMPTY}'
     ...  Execute Command  kill -s KILL ${pid}
@@ -330,22 +330,32 @@ Start SOL Console Logging
 
 
 Stop SOL Console Logging
-    [Documentation]   Stop obmc_console_client process, if any, and
-    ...               return the console output as a string.
-    [Arguments]   ${file_path}=/tmp/obmc-console.log
+    [Documentation]  Stop obmc_console_client process, if any, and
+    ...              return the console output as a string.
+    [Arguments]  ${file_path}=/tmp/obmc-console.log  ${targ_file_path}=${EMPTY}
+
+    # Description of arguments:
+    # file_path       The path on the obmc system where SOL output may be
+    #                 found.
+    # targ_file_path  If specified, the file path to which SOL data should be
+    #                 written.
 
     Open Connection And Log In
 
     Stop OBMC Console Client  ${file_path}
 
+    ${cmd_buf}=  Set Variable  cat ${file_path}
+
     ${console}  ${stderr}=
     ...  Execute Command
-    ...  cat ${file_path}
+    ...  if [ -f ${file_path} ] ; then cat ${file_path} ; fi
     ...  return_stderr=True
     Should Be Empty  ${stderr}
 
-    [Return]  ${console}
+    Run Keyword If  '${targ_file_path}' != '${EMPTY}'
+    ...  Append To File  ${targ_file_path}  ${console}
 
+    [Return]  ${console}
 
 Get Time Stamp
     [Documentation]     Get the current time stamp data
@@ -415,7 +425,8 @@ Mac Address To Hex String
     ...               Given the following MAC: 00:01:6C:80:02:78
     ...               This keyword will return: 0x00 0x01 0x6C 0x80 0x02 0x78
     ...               Description of arguments:
-    ...               i_macaddress  MAC address in the following format 00:01:6C:80:02:78
+    ...               i_macaddress  MAC address in the following format
+    ...               00:01:6C:80:02:78
     [Arguments]    ${i_macaddress}
 
     ${mac_hex}=  Catenate  0x${i_macaddress.replace(':', ' 0x')}
@@ -427,7 +438,8 @@ IP Address To Hex String
     ...               Given the following IP: 10.3.164.100
     ...               This keyword will return: 0xa 0x3 0xa4 0xa0
     ...               Description of arguments:
-    ...               i_ipaddress  IP address in the following format 10.10.10.10
+    ...               i_ipaddress  IP address in the following format
+    ...               10.10.10.10
     [Arguments]    ${i_ipaddress}
 
     @{ip}=  Split String  ${i_ipaddress}    .
@@ -480,7 +492,8 @@ Get Endpoint Paths
     [Documentation]   Returns all url paths ending with given endpoint
     ...               Example:
     ...               Given the following endpoint: cpu
-    ...               This keyword will return: list of all urls ending with cpu -
+    ...               This keyword will return: list of all urls ending with
+    ...               cpu -
     ...               /org/openbmc/inventory/system/chassis/motherboard/cpu0,
     ...               /org/openbmc/inventory/system/chassis/motherboard/cpu1
     ...               Description of arguments:
@@ -497,7 +510,7 @@ Get Endpoint Paths
 
 Check Zombie Process
     [Documentation]    Check if any defunct process exist or not on BMC
-    ${count}   ${stderr}   ${rc}=  Execute Command     ps -o stat | grep Z | wc -l
+    ${count}  ${stderr}  ${rc}=  Execute Command  ps -o stat | grep Z | wc -l
     ...    return_stderr=True  return_rc=True
     Should Be True    ${count}==0
     Should Be Empty    ${stderr}
