@@ -32,9 +32,12 @@ def bmc_power_off():
     grp.rpissuing_keyword(cmd_buf)
     power = BuiltIn().run_keyword(*cmd_buf)
 
+    state_change_timeout = BuiltIn().get_variable_value(
+        "${STATE_CHANGE_TIMEOUT}", default="1 min")
+
     # Wait for the state to change in any way.
-    state_mod.wait_state(match_state, wait_time="1 min", interval="3 seconds",
-                         invert=1)
+    state_mod.wait_state(match_state, wait_time=state_change_timeout,
+                         interval="3 seconds", invert=1)
 
     cmd_buf = ["Create Dictionary", "power=${0}",
                "bmc=HOST_POWERED_OFF", "boot_progress=Off"]
@@ -44,6 +47,9 @@ def bmc_power_off():
     final_state = state_mod.anchor_state(final_state)
 
     grp.rprintn()
-    state_mod.wait_state(final_state, wait_time="2 min", interval="3 seconds")
+    power_off_timeout = BuiltIn().get_variable_value(
+        "${POWER_OFF_TIMEOUT}", default="2 mins")
+    state_mod.wait_state(final_state, wait_time=power_off_timeout,
+                         interval="3 seconds")
 
 ###############################################################################
