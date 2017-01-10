@@ -32,9 +32,12 @@ def bmc_power_on():
     grp.rpissuing_keyword(cmd_buf)
     power = BuiltIn().run_keyword(*cmd_buf)
 
+    state_change_timeout = BuiltIn().get_variable_value(
+        "${STATE_CHANGE_TIMEOUT}", default="1 min")
+
     # Wait for the state to change in any way.
-    state_mod.wait_state(match_state, wait_time="1 min", interval="3 seconds",
-                         invert=1)
+    state_mod.wait_state(match_state, wait_time=state_change_timeout,
+                         interval="3 seconds", invert=1)
 
     cmd_buf = ["Create Dictionary", "power=${1}",
                "bmc=HOST_BOOTED",
@@ -42,10 +45,7 @@ def bmc_power_on():
     grp.rdpissuing_keyword(cmd_buf)
     final_state = BuiltIn().run_keyword(*cmd_buf)
 
-    try:
-        os_host = BuiltIn().get_variable_value("${OS_HOST}")
-    except TypeError:
-        os_host = ""
+    os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
 
     if os_host != "":
         final_state['os_ping'] = 1
@@ -55,7 +55,9 @@ def bmc_power_on():
     final_state = state_mod.anchor_state(final_state)
 
     grp.rprintn()
-    state_mod.wait_state(final_state, wait_time="14 mins",
+    power_on_timeout = BuiltIn().get_variable_value(
+        "${POWER_ON_TIMEOUT}", default="14 mins")
+    state_mod.wait_state(final_state, wait_time=power_on_timeout,
                          interval="3 seconds")
 
 ###############################################################################
