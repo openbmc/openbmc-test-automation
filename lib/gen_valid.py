@@ -6,6 +6,7 @@ gen_get_options and sprint_args.
 """
 
 import sys
+import os
 
 import gen_print as gp
 
@@ -99,7 +100,7 @@ def valid_value(var_value,
     print an error message to stderr.
 
     Description of arguments:
-    (See description of arguments for svalid_value (above).
+    (See description of arguments for svalid_value (above)).
     """
 
     error_message = svalid_value(var_value, invalid_values, valid_values,
@@ -132,12 +133,10 @@ def svalid_integer(var_value,
                                     ourselves.
     """
 
-    # This currently allows floats which is not good.
-
     success_message = ""
     error_message = ""
     try:
-        if type(int(var_value)) is int:
+        if type(int(str(var_value), 0)) is int:
             return success_message
     except ValueError:
         pass
@@ -165,16 +164,124 @@ def valid_integer(var_value,
     print an error message to stderr.
 
     Description of arguments:
-    var_value                       The value being validated.
+    (See description of arguments for svalid_value (above)).
     """
-
-    # This currently allows floats which is not good.
 
     error_message = svalid_integer(var_value, var_name)
 
     if not error_message == "":
         gp.print_error_report(error_message)
         return False
+    return True
+
+###############################################################################
+
+
+###############################################################################
+def svalid_dir_path(var_value,
+                    var_name=""):
+
+    r"""
+    Return an empty string if var_value is a valid directory path.  Otherwise,
+    return an error string.  Also, return the directory path.
+
+    Description of arguments:
+    var_value                       The value being validated.
+    var_name                        The name of the variable whose value is
+                                    passed in var_value.  This parameter is
+                                    normally unnecessary as this function can
+                                    figure out the var_name.  This is provided
+                                    for Robot callers.  In this scenario, we
+                                    are unable to get the variable name
+                                    ourselves.
+    """
+
+    error_message = ""
+    if not os.path.isdir(str(var_value)):
+        if var_name is "":
+            stack_index = 3
+            var_name = gp.get_arg_name(0, 1, stack_index)
+        error_message += "Invalid directory (does not exist):\n" +\
+                         gp.sprint_varx(var_name, var_value)
+
+    return error_message
+
+###############################################################################
+
+
+###############################################################################
+def valid_dir_path(var_value,
+                   var_name=""):
+
+    r"""
+    Return True if var_value is a valid integer.  Otherwise, return False and
+    print an error message to stderr.
+
+    Description of arguments:
+    (See description of arguments for svalid_value (above)).
+    """
+
+    error_message = svalid_dir_path(var_value, var_name)
+
+    if not error_message == "":
+        gp.print_error_report(error_message)
+        return False
+
+    return True
+
+###############################################################################
+
+
+###############################################################################
+def svalid_file_path(var_value,
+                     var_name=""):
+
+    r"""
+    Return an empty string if var_value is a valid file path.  Otherwise,
+    return an error string.  Also, return the file path.
+
+    Description of arguments:
+    var_value                       The value being validated.
+    var_name                        The name of the variable whose value is
+                                    passed in var_value.  This parameter is
+                                    normally unnecessary as this function can
+                                    figure out the var_name.  This is provided
+                                    for Robot callers.  In this scenario, we
+                                    are unable to get the variable name
+                                    ourselves.
+    """
+
+    error_message = ""
+    if not os.path.isfile(str(var_value)):
+        if var_name is "":
+            stack_index = 3
+            var_name = gp.get_arg_name(0, 1, stack_index)
+        error_message += "Invalid file (does not exist):\n" +\
+                         gp.sprint_varx(var_name, var_value)
+
+    return error_message
+
+###############################################################################
+
+
+###############################################################################
+def valid_file_path(var_value,
+                    var_name=""):
+
+    r"""
+    Return True if var_value is a valid integer.  Otherwise, return False and
+    print an error message to stderr.
+
+    Description of arguments:
+    (See description of arguments for svalid_value (above)).
+    """
+
+    error_message = svalid_file_path(var_value, var_name)
+
+    if not error_message == "":
+        gp.print_error_report(error_message)
+        return False
+
     return True
 
 ###############################################################################
