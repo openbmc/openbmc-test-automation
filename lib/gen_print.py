@@ -161,12 +161,14 @@ def get_arg_name(var,
     # Note: I wish to avoid recursion so I refrain from calling any function
     # that calls this function (i.e. sprint_var, valid_value, etc.).
 
-    try:
-        # The user can set environment variable "GET_ARG_NAME_DEBUG" to get
-        # debug output from this function.
-        local_debug = os.environ['GET_ARG_NAME_DEBUG']
-    except KeyError:
-        local_debug = 0
+    # The user can set environment variable "GET_ARG_NAME_DEBUG" to get debug
+    # output from this function.
+    local_debug = int(os.environ.get('GET_ARG_NAME_DEBUG', 0))
+    # In addition to GET_ARG_NAME_DEBUG, the user can set environment
+    # variable "GET_ARG_NAME_SHOW_SOURCE" to have this function include source
+    # code in the debug output.
+    local_debug_show_source = int(
+        os.environ.get('GET_ARG_NAME_SHOW_SOURCE', 0))
 
     if arg_num < 1:
         print_error("Programmer error - Variable \"arg_num\" has an invalid" +
@@ -184,59 +186,143 @@ def get_arg_name(var,
 
     if local_debug:
         debug_indent = 2
+        print("")
+        print_dashes(0, 120)
         print(sprint_func_name() + "() parms:")
         print_varx("var", var, 0, debug_indent)
         print_varx("arg_num", arg_num, 0, debug_indent)
         print_varx("stack_frame_ix", stack_frame_ix, 0, debug_indent)
+        print("")
+        print_call_stack(debug_indent, 2)
 
-    try:
-        frame, filename, cur_line_no, function_name, lines, index = \
-            inspect.stack()[stack_frame_ix]
-    except IndexError:
-        print_error("Programmer error - The caller has asked for information" +
-                    " about the stack frame at index \"" +
-                    str(stack_frame_ix) + "\".  However, the stack only" +
-                    " contains " + str(len(inspect.stack())) + " entries." +
-                    "  Therefore the stack frame index is out of range.\n")
-        return
-
-    if local_debug:
-        print("\nVariables retrieved from inspect.stack() function:")
-        print_varx("frame", frame, 0, debug_indent)
-        print_varx("filename", filename, 0, debug_indent)
-        print_varx("cur_line_no", cur_line_no, 0, debug_indent)
-        print_varx("function_name", function_name, 0, debug_indent)
-        print_varx("lines", lines, 0, debug_indent)
-        print_varx("index", index, 0, debug_indent)
-
-    composite_line = lines[0].strip()
+    for count in range(0, 2):
+        try:
+            frame, filename, cur_line_no, function_name, lines, index = \
+                inspect.stack()[stack_frame_ix]
+        except IndexError:
+            print_error("Programmer error - The caller has asked for" +
+                        " information about the stack frame at index \"" +
+                        str(stack_frame_ix) + "\".  However, the stack" +
+                        " only contains " + str(len(inspect.stack())) +
+                        " entries.  Therefore the stack frame index is out" +
+                        " of range.\n")
+            return
+        if filename != "<string>":
+            break
+        # filename of "<string>" may mean that the function in question was
+        # defined dynamically and therefore its code stack is inaccessible.
+        # This may happen with functions like "rqprint_var".  In this case,
+        # we'll increment the stack_frame_ix and try again.
+        stack_frame_ix += 1
+        if local_debug:
+            print("Adjusted stack_frame_ix...")
+            print_varx("stack_frame_ix", stack_frame_ix, 0, debug_indent)
 
     called_func_name = sprint_func_name(stack_frame_ix)
-    # Needed to add a right anchor to func_regex for cases like this where
-    # there is an arg whose name is a substring of the function name.  So the
-    # function name needs to be bounded on the right by zero or more spaces
-    # and a left parenthesis.
-    # if not valid_value(whatever, valid_values=["one", "two"]):
-    func_regex = ".*" + called_func_name + "[ ]*\("
-    # if not re.match(r".*" + called_func_name, composite_line):
-    if not re.match(func_regex, composite_line):
-        # The called function name was not found in the composite line.  The
-        # caller may be using a function alias.
-        # I added code to handle pvar, qpvar, dpvar, etc. aliases.
-        # pvar is an alias for print_var.  However, when it is used,
-        # sprint_func_name() returns the non-alias version, i.e. "print_var".
-        # Adjusting for that here.
-        alias = re.sub("print_var", "pvar", called_func_name)
-        if local_debug:
-            print_varx("alias", alias, 0, debug_indent)
-        called_func_name = alias
-        func_regex = ".*" + called_func_name + "[ ]*\("
+
+    module = inspect.getmodule(frame)
+
+    # Though I would expect inspect.getsourcelines(frame) to get all module
+    # source lines if the frame is "<module>", it doesn't do that.  Therefore,
+    # for this special case, I will do inspect.getsourcelines(module).
+    if function_name == "<module>":
+        source_lines, source_line_num =\
+            inspect.getsourcelines(module)
+        line_ix = cur_line_no - source_line_num - 1
+    else:
+        source_lines, source_line_num =\
+            inspect.getsourcelines(frame)
+        line_ix = cur_line_no - source_line_num
+
+    if local_debug:
+        print("\n  Variables retrieved from inspect.stack() function:")
+        print_varx("frame", frame, 0, debug_indent + 2)
+        print_varx("filename", filename, 0, debug_indent + 2)
+        print_varx("cur_line_no", cur_line_no, 0, debug_indent + 2)
+        print_varx("function_name", function_name, 0, debug_indent + 2)
+        print_varx("lines", lines, 0, debug_indent + 2)
+        print_varx("index", index, 0, debug_indent + 2)
+        print_varx("source_line_num", source_line_num, 0, debug_indent)
+        print_varx("line_ix", line_ix, 0, debug_indent)
+        if local_debug_show_source:
+            print_varx("source_lines", source_lines, 0, debug_indent)
+        print_varx("called_func_name", called_func_name, 0, debug_indent)
+
+    # Get a list of all functions defined for the module.  Note that this
+    # doesn't work consistently when _run_exitfuncs is at the top of the stack
+    # (i.e. if we're running an exit function).  I've coded a work-around
+    # below for this deficiency.
+    all_functions = inspect.getmembers(module, inspect.isfunction)
+
+    # Get called_func_id by searching for our function in the list of all
+    # functions.
+    called_func_id = None
+    for func_name, function in all_functions:
+        if func_name == called_func_name:
+            called_func_id = id(function)
+            break
+    # NOTE: The only time I've found that called_func_id can't be found is
+    # when we're running from an exit function.
+
+    # Look for other functions in module with matching id.
+    aliases = set([called_func_name])
+    for func_name, function in all_functions:
+        if func_name == called_func_name:
+            continue
+        func_id = id(function)
+        if func_id == called_func_id:
+            aliases.add(func_name)
+
+    # In most cases, my general purpose code above will find all aliases.
+    # However, for the odd case (i.e. running from exit function), I've added
+    # code to handle pvar, qpvar, dpvar, etc. aliases explicitly since they
+    # are defined in this module and used frequently.
+    # pvar is an alias for print_var.
+    aliases.add(re.sub("print_var", "pvar", called_func_name))
+
+    func_regex = ".*(" + '|'.join(aliases) + ")[ ]*\("
+
+    # Search backward through source lines looking for the calling function
+    # name.
+    found = False
+    for start_line_ix in range(line_ix, 0, -1):
+        # Skip comment lines.
+        if re.match(r"[ ]*#", source_lines[start_line_ix]):
+            continue
+        if re.match(func_regex, source_lines[start_line_ix]):
+            found = True
+            break
+    if not found:
+        print_error("Programmer error - Could not find the source line with" +
+                    " a reference to function \"" + called_func_name + "\".\n")
+        return
+
+    # Search forward through the source lines looking for a line with the
+    # same indentation as the start time.  The end of our composite line
+    # should be the line preceding that line.
+    start_indent = len(source_lines[start_line_ix]) -\
+        len(source_lines[start_line_ix].lstrip(' '))
+    end_line_ix = line_ix
+    for end_line_ix in range(line_ix + 1, len(source_lines)):
+        if source_lines[end_line_ix].strip() == "":
+            continue
+        line_indent = len(source_lines[end_line_ix]) -\
+            len(source_lines[end_line_ix].lstrip(' '))
+        if line_indent == start_indent:
+            end_line_ix -= 1
+            break
+
+    # Join the start line through the end line into a composite line.
+    composite_line = ''.join(map(str.strip,
+                             source_lines[start_line_ix:end_line_ix + 1]))
 
     # arg_list_etc = re.sub(".*" + called_func_name, "", composite_line)
     arg_list_etc = "(" + re.sub(func_regex, "", composite_line)
     if local_debug:
+        print_varx("aliases", aliases, 0, debug_indent)
         print_varx("func_regex", func_regex, 0, debug_indent)
-        print_varx("called_func_name", called_func_name, 0, debug_indent)
+        print_varx("start_line_ix", start_line_ix, 0, debug_indent)
+        print_varx("end_line_ix", end_line_ix, 0, debug_indent)
         print_varx("composite_line", composite_line, 0, debug_indent)
         print_varx("arg_list_etc", arg_list_etc, 0, debug_indent)
 
@@ -283,6 +369,7 @@ def get_arg_name(var,
     if local_debug:
         print_varx("args_list", args_list, 0, debug_indent)
         print_varx("argument", argument, 0, debug_indent)
+        print_dashes(0, 120)
 
     return argument
 
@@ -518,15 +605,18 @@ def sprint_varx(var_name,
         try:
             length = len(var_value)
         except TypeError:
-            pass
+            length = 0
         ix = 0
         loc_trailing_char = "\n"
         type_is_dict = 0
-        try:
-            if type(var_value) in (dict, collections.OrderedDict):
-                type_is_dict = 1
-        except AttributeError:
-            pass
+        if type(var_value) is dict:
+            type_is_dict = 1
+        if not type_is_dict:
+            try:
+                if type(var_value) is collections.OrderedDict:
+                    type_is_dict = 1
+            except AttributeError:
+                pass
         if not type_is_dict:
             try:
                 if type(var_value) is DotDict:
@@ -570,6 +660,7 @@ def sprint_varx(var_name,
             format_string = "%" + str(loc_col1_indent) + "s%-" \
                 + str(loc_col1_width) + "s" + value_format + trailing_char
             return format_string % ("", var_name + ":", var_value)
+
         return buffer
 
     return ""
@@ -730,7 +821,7 @@ def sprint_dashes(indent=col1_indent,
     """
 
     width = int(width)
-    buffer = " "*int(indent) + char*width
+    buffer = " " * int(indent) + char * width
     if line_feed:
         buffer += "\n"
 
@@ -805,7 +896,12 @@ def sprint_call_stack(indent=0,
         if ix < stack_frame_ix:
             ix += 1
             continue
-        lineno = str(stack_frame[2])
+        # I want the line number shown to be the line where you find the line
+        # shown.
+        try:
+            line_num = str(current_stack[ix + 1][2])
+        except IndexError:
+            line_num = ""
         func_name = str(stack_frame[3])
         if func_name == "?":
             # "?" is the name used when code is not in a function.
@@ -831,7 +927,7 @@ def sprint_call_stack(indent=0,
             # Now we need to print this in a nicely-wrapped way.
             func_and_args = func_name + " " + args_str
 
-        buffer += sindent(format_string % (lineno, func_and_args), indent)
+        buffer += sindent(format_string % (line_num, func_and_args), indent)
         ix += 1
 
     buffer += sprint_dashes(indent)
