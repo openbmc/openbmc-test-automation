@@ -166,3 +166,17 @@ Call Method
     ${resp}=  OpenBmc Post Request  ${base_uri}/action/${method}
     ...  timeout=${timeout}  quiet=${quiet}  &{kwargs}
     [Return]     ${resp}
+
+Write Attribute XYZ
+    [Arguments]    ${uri}      ${attr}    ${timeout}=10    &{kwargs}
+    ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
+    ${resp}=  openbmc put request  ${base_uri}/attr/${attr}
+    ...  timeout=${timeout}  &{kwargs}
+    Should Be Equal As Strings   ${resp.status_code}     ${HTTP_OK}
+
+Read Attribute XYZ
+    [Arguments]    ${uri}    ${attr}    ${timeout}=10  ${quiet}=${QUIET}
+    ${resp}=  OpenBMC Get Request  ${uri}/attr/${attr}  timeout=${timeout}
+    ...  quiet=${quiet}
+    ${content}=     To Json    ${resp.content}
+    [Return]    ${content["data"]}
