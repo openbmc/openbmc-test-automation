@@ -6,6 +6,8 @@ This module is the python counterpart to obmc_boot_test.
 
 from tally_sheet import *
 import gen_robot_print as grp
+import gen_robot_plug_in as grpi
+import state as st
 
 import os
 import time
@@ -24,19 +26,6 @@ boot_results = tally_sheet('boot type',
 
 boot_results.set_sum_fields(['total', 'pass', 'fail'])
 boot_results.set_calc_fields(['total=pass+fail'])
-
-
-###############################################################################
-def add_trailing_slash(path):
-
-    r"""
-    Add a trailing slash to path if it doesn't already have one and return it.
-
-    """
-
-    return os.path.normpath(path) + os.path.sep
-
-###############################################################################
 
 
 ###############################################################################
@@ -79,9 +68,8 @@ def plug_in_setup():
     openbmc_nickname = BuiltIn().get_variable_value("${openbmc_nickname}")
     openbmc_host = BuiltIn().get_variable_value("${openbmc_host}")
     if openbmc_nickname == "":
-        ffdc_prefix = openbmc_host
-    else:
-        ffdc_prefix = openbmc_nickname
+        openbmc_nickname = openbmc_host
+    ffdc_prefix = openbmc_nickname
 
     ffdc_prefix += "." + time_string
 
@@ -93,14 +81,18 @@ def plug_in_setup():
         ffdc_dir_path = ""
     BuiltIn().set_global_variable("${FFDC_DIR_PATH}", ffdc_dir_path)
 
-    try:
-        base_tool_dir_path = os.environ['AUTOBOOT_BASE_TOOL_DIR_PATH']
-    except KeyError:
-        base_tool_dir_path = "/tmp/"
+    status_dir_path = os.environ.get('STATUS_DIR_PATH', "")
+    if status_dir_path != "":
+        # Add trailing slash.
+        status_dir_path = os.path.normpath(status_dir_path) + os.sep
+    BuiltIn().set_global_variable("${STATUS_DIR_PATH}", status_dir_path)
+
+    base_tool_dir_path = os.environ.get('AUTOBOOT_BASE_TOOL_DIR_PATH', "/tmp")
     base_tool_dir_path = os.path.normpath(base_tool_dir_path) + os.sep
     BuiltIn().set_global_variable("${BASE_TOOL_DIR_PATH}", base_tool_dir_path)
 
-    ffdc_list_file_path = base_tool_dir_path + openbmc_host + "/FFDC_FILE_LIST"
+    ffdc_list_file_path = base_tool_dir_path + openbmc_nickname +\
+        "/FFDC_FILE_LIST"
 
     BuiltIn().set_global_variable("${FFDC_LIST_FILE_PATH}",
                                   ffdc_list_file_path)
@@ -111,7 +103,8 @@ def plug_in_setup():
     additional_values = ["boot_type_desc", "boot_success", "boot_pass",
                          "boot_fail", "test_really_running", "program_pid",
                          "master_pid", "ffdc_prefix", "ffdc_dir_path",
-                         "base_tool_dir_path", "ffdc_list_file_path"]
+                         "status_dir_path", "base_tool_dir_path",
+                         "ffdc_list_file_path"]
     BuiltIn().set_global_variable("${ffdc_prefix}", ffdc_prefix)
 
     parm_list = BuiltIn().get_variable_value("@{parm_list}")
@@ -203,5 +196,38 @@ def print_boot_results_table(header_footer="\n"):
     grp.rprint(header_footer)
     grp.rprint(boot_results.sprint_report())
     grp.rprint(header_footer)
+
+###############################################################################
+
+
+###############################################################################
+def my_ffdc():
+
+    r"""
+    Collect FFDC data.
+    """
+
+    plug_in_setup()
+    rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
+        call_point='ffdc', stop_on_plug_in_failure=1)
+
+    AUTOBOOT_FFDC_PREFIX = os.environ['AUTOBOOT_FFDC_PREFIX']
+
+    # FFDC_LOG_PATH is used by "FFDC" keyword.
+    FFDC_DIR_PATH = BuiltIn().get_variable_value("${FFDC_DIR_PATH}")
+    BuiltIn().set_global_variable("${FFDC_LOG_PATH}",
+                                  FFDC_DIR_PATH)
+
+    cmd_buf = ["FFDC", "ffdc_prefix=" + AUTOBOOT_FFDC_PREFIX]
+    grp.rpissuing_keyword(cmd_buf)
+    BuiltIn().run_keyword(*cmd_buf)
+
+    state = st.get_state()
+    BuiltIn().set_global_variable("${state}",
+                                  state)
+
+    cmd_buf = ["Print Defect Report"]
+    grp.rpissuing_keyword(cmd_buf)
+    BuiltIn().run_keyword(*cmd_buf)
 
 ###############################################################################
