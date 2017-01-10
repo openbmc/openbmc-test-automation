@@ -149,11 +149,11 @@ def sprint_vars(*args):
     Description of arguments:
     args:
         If the first argument is an integer, it will be interpreted to be the
-        "indent" value.
-        If the second argument is an integer, it will be interpreted to be the
-        "col1_width" value.
-        If the third argument is an integer, it will be interpreted to be the
         "hex" value.
+        If the second argument is an integer, it will be interpreted to be the
+        "indent" value.
+        If the third argument is an integer, it will be interpreted to be the
+        "col1_width" value.
         All remaining parms are considered variable names which are to be
         sprinted.
     """
@@ -164,7 +164,15 @@ def sprint_vars(*args):
     # Create list from args (which is a tuple) so that it can be modified.
     args_list = list(args)
 
-    # See if parm 1 is to be interpreted as "indent".
+    # See if parm 1 is to be interpreted as "hex".
+    try:
+        if type(int(args_list[0])) is int:
+            hex = int(args_list[0])
+            args_list.pop(0)
+    except ValueError:
+        hex = 0
+
+    # See if parm 2 is to be interpreted as "indent".
     try:
         if type(int(args_list[0])) is int:
             indent = int(args_list[0])
@@ -172,21 +180,13 @@ def sprint_vars(*args):
     except ValueError:
         indent = 0
 
-    # See if parm 2 is to be interpreted as "col1_width".
+    # See if parm 3 is to be interpreted as "col1_width".
     try:
         if type(int(args_list[0])) is int:
             loc_col1_width = int(args_list[0])
             args_list.pop(0)
     except ValueError:
         loc_col1_width = gp.col1_width
-
-    # See if parm 2 is to be interpreted as "hex".
-    try:
-        if type(int(args_list[0])) is int:
-            hex = int(args_list[0])
-            args_list.pop(0)
-    except ValueError:
-        hex = 0
 
     buffer = ""
     for var_name in args_list:
@@ -225,7 +225,7 @@ def sprint_pgm_header(indent=0):
     # Get value of global parm_list.
     parm_list = BuiltIn().get_variable_value("${parm_list}")
 
-    buffer += sprint_vars(str(indent), str(loc_col1_width), *parm_list)
+    buffer += sprint_vars(0, str(indent), str(loc_col1_width), *parm_list)
     buffer += "\n"
 
     # Setting global program_pid.
