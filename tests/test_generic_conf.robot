@@ -14,6 +14,8 @@ ${MAX_POWER_VALUE}    ${1000}
 
 ${SETTING_HOST}       ${SETTINGS_URI}host0
 
+${VALUE_ERROR}      ValueError: Invalid input. Data not in allowed range
+
 *** Test Cases ***
 
 
@@ -35,33 +37,33 @@ Get the power
     ${powerValue}=   Read Attribute   ${SETTING_HOST}   power_cap
     should be true   ${powerValue} >= ${MIN_POWER_VALUE} and ${powerValue} <= ${MAX_POWER_VALUE}
 
-Set the power with string of characters
 
-    [Documentation]   ***BAD PATH***
-    ...               This test case set the power values with string of characters
-    ...               Expectation is to return error.
-    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/552
-    [Tags]  known_issue
+Set Powercap Value With String
+    [Documentation]  Set the power values with string and expect error.
+    [Tags]  Set_Powercap_Value_With_String
 
-    ${valueToBeSet}=   Set Variable   abcdefg
-    ${valueDict}=   create dictionary   data=${valueToBeSet}
-    Write Attribute   ${SETTING_HOST}   power_cap   data=${valueDict}
+    ${valueToBeSet}=  Set Variable   abcdefg
+    ${error_msg}=  Run Keyword And Expect Error
+    ...  *   Write To Powercap Attribute   ${valueToBeSet}
+    Should Contain  ${error_msg}  ${VALUE_ERROR}
+
     ${value}=   Read Attribute    ${SETTING_HOST}   power_cap
-    should not be true    '${value}'=='${valueToBeSet}'
+    Should Not Be True    '${value}'=='${valueToBeSet}'
 
-Set the power with greater then MAX_POWER_VALUE
 
-    [Documentation]   ***BAD PATH***
-    ...               This test case sets the power value which is greater
-    ...               then MAX_ALLOWED_VALUE,Expectation is to return error
-    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/552
-    [Tags]  known_issue
+Set Powercap Value Greater Than Allowed Range
+    [Documentation]  Set the power value greater then MAX_ALLOWED_VALUE
+    ...              and expect error
+    [Tags]  Set_Powercap_Value_Greater_Than_Allowed_Range
 
-    ${valueToBeSet}=   Set Variable     ${1010}
-    ${valueDict}=   create dictionary   data=${valueToBeSet}
-    Write Attribute   ${SETTING_HOST}   power_cap   data=${valueDict}
-    ${value}=      Read Attribute    ${SETTING_HOST}   power_cap
-    should not be equal   ${value}   ${valueToBeSet}
+    ${valueToBeSet}=  Set Variable   ${1010}
+    ${error_msg}=  Run Keyword And Expect Error
+    ...  *   Write To Powercap Attribute  ${valueToBeSet}
+    Should Contain  ${error_msg}  ${VALUE_ERROR}
+
+    ${value}=  Read Attribute    ${SETTING_HOST}   power_cap
+    Should Not Be Equal  ${value}  ${valueToBeSet}
+
 
 Set the power with MIN_POWER_VALUE
 
@@ -100,4 +102,17 @@ Set the boot flags with string
     Write Attribute  ${SETTING_HOST}    boot_flags      data=${valueDict}
     ${value}=      Read Attribute   ${SETTING_HOST}   boot_flags
     Should not Be Equal     ${value}      ${valueToBeSet}
+
+
+*** Keywords ***
+
+Write To Powercap Attribute
+    [Documentation]  Write to Powercap value.
+    [Arguments]   ${args}
+    ${value}=  Create Dictionary   data=${args}
+    ${resp}=  OpenBMC Put Request
+    ...  ${SETTING_HOST}/attr/power_cap    data=${value}
+    ${jsondata}=  To JSON   ${resp.content}
+    Should Be Equal   ${jsondata['status']}   ${HTTP_OK}
+    ...  msg=${jsondata}
 
