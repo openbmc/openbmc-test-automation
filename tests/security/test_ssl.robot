@@ -23,11 +23,8 @@ Test non-SSL Connection to port 80
     Run Keyword And Expect Error    ConnectionError*   Get Request    openbmc   /list
 
 Test non-SSL Connection to port 443
-    [Documentation]     This testcase is for test to check OpenBMC machine
-    ...     will not accepts the non-secure connection that is with http to
-    ...     port 443 and expect 400 in response
+    [Documentation]  OpenBMC should not accept the non-secure connection
+    ...              with http to port 443 and expect connection error.
     [Tags]  Test_non_SSL_Connection_to_port_443
     Create Session    openbmc    http://${OPENBMC_HOST}:443/
-    ${resp}=    Get Request    openbmc   /list
-    Should Be Equal As Strings    ${resp.status_code}    ${HTTP_BAD_REQUEST}
-    Should Be Equal     ${resp.content}     Bad Request
+    Run Keyword And Expect Error  ConnectionError*  Get Request  openbmc  /list
