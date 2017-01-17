@@ -10,8 +10,13 @@ import state as state_mod
 
 from robot.libraries.BuiltIn import BuiltIn
 
+# We don't want global variable getting changed when an import is done
+# so we'll save it and restore it.
+quiet = int(BuiltIn().get_variable_value("${quiet}"))
+
 # We need utils.robot to get keyword "Initiate Power Off".
 BuiltIn().import_resource("utils.robot")
+BuiltIn().set_global_variable("${quiet}", quiet)
 
 
 ###############################################################################
@@ -39,8 +44,13 @@ def bmc_power_off():
     state_mod.wait_state(match_state, wait_time=state_change_timeout,
                          interval="3 seconds", invert=1)
 
-    cmd_buf = ["Create Dictionary", "power=${0}",
-               "bmc=HOST_POWERED_OFF", "boot_progress=Off"]
+    if state_mod.OBMC_STATES_VERSION == 0:
+        cmd_buf = ["Create Dictionary", "power=${0}",
+                   "bmc=HOST_POWERED_OFF", "boot_progress=Off"]
+    else:
+        cmd_buf = ["Create Dictionary", "chassis=Off",
+                   "bmc=HOST_POWERED_OFF", "boot_progress=Off",
+                   "host=Off"]
     grp.rdpissuing_keyword(cmd_buf)
     final_state = BuiltIn().run_keyword(*cmd_buf)
 

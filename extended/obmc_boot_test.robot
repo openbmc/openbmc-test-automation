@@ -7,6 +7,7 @@ Documentation  Do random repeated boots based on the state of the BMC machine.
 Resource  ../lib/dvt/obmc_driver_vars.txt
 Resource  ../lib/list_utils.robot
 Resource  ../lib/openbmc_ffdc.robot
+#Resource  ../lib/state_manager.robot
 
 Library   ../lib/gen_robot_print.py
 Library   ../lib/gen_misc.py
@@ -74,13 +75,6 @@ ${return_on_non_zero_rc}    0
 ${next_boot}                ${EMPTY}
 # State dictionary.  Initializing to a realistic state for testing in
 # test_mode.
-&{default_state}            power=1
-...                         bmc=HOST_BOOTED
-...                         boot_progress=FW Progress, Starting OS
-...                         os_ping=1
-...                         os_login=1
-...                         os_run_cmd=1
-&{state}                    &{default_state}
 
 # Flag variables.
 ${cp_setup_called}          ${0}
@@ -106,7 +100,7 @@ Main
     :For  ${BOOT_COUNT}  IN RANGE  ${max_num_tests}
     \  Test Loop Body  ${BOOT_COUNT}
 
-    Rprint Timen  Completed all requested boot tests.
+    Rqprint Timen  Completed all requested boot tests.
 
 ###############################################################################
 
@@ -114,8 +108,6 @@ Main
 ###############################################################################
 Setup
     [Documentation]  Do general program setup tasks.
-
-    Rprintn
 
     Validate Parms
 
@@ -145,7 +137,7 @@ Setup
     ${temp_state}=  Run Keyword If  '${test_mode}' == '0'  Get State
     ...  ELSE  Create Dictionary  &{default_state}
     Set Global Variable  &{state}  &{temp_state}
-    Rpvars  state
+    Rqpvars  state
 
 ###############################################################################
 
@@ -154,7 +146,7 @@ Setup
 Validate Parms
     [Documentation]  Validate all program parameters.
 
-    rprintn
+    Rqprintn
 
     Rvalid Value  AVAIL_BOOTS
     Rvalid Value  openbmc_host
@@ -187,6 +179,10 @@ Validate Parms
     ...  Set Global Variable  ${openbmc_nickname}  ${openbmc_host}
 
     Set FFDC Dir Path Style
+
+    ${default_state}=  Return Default State
+    Set Global Variable  ${state}  ${default_state}
+    Set Global Variable  ${default_state}  ${default_state}
 
 ###############################################################################
 
@@ -226,7 +222,9 @@ Test Loop Body
     Rqprintn
     Rqprint Timen  Starting boot ${BOOT_COUNT+1} of ${max_num_tests}.
 
-    ${loc_next_boot}=  Select Boot  ${state['power']}
+    Rqpvars  state
+
+    ${loc_next_boot}=  Select Boot  ${state}
     Set Global Variable  ${next_boot}  ${loc_next_boot}
 
     # Clear this file.  Plug-ins may now write to it.
@@ -235,7 +233,7 @@ Test Loop Body
     ${status}  ${msg}=  Run Keyword And Ignore Error  Run Boot  ${next_boot}
     Run Keyword If  '${status}' == 'FAIL'  rprint  ${msg}
 
-    rprintn
+    Rqprintn
     Run Keyword If  '${BOOT_STATUS}' == 'PASS'  Run Keywords
     ...    Set Global Variable  ${boot_success}  ${1}  AND
     ...    Rqprint Timen  BOOT_SUCCESS: "${next_boot}" succeeded.
@@ -276,60 +274,7 @@ Test Loop Body
     ...  quiet=${1}
     ...  ELSE  Create Dictionary  &{default_state}
     Set Global Variable  &{state}  &{temp_state}
-    rpvars  state
-
-###############################################################################
-
-
-###############################################################################
-Select Boot
-    [Documentation]  Select a boot test to be run based on our current state.
-    ...  Return the chosen boot type.
-    [Arguments]  ${power}
-
-    # power      The power state of the machine, either zero or one.
-
-    ${boot}=  Run Keyword If  ${power} == ${0}  Select Power On
-    ...  ELSE  Run Keyword If  ${power} == ${1}  Select Power Off
-    ...  ELSE  Run Keywords  Log to Console
-    ...  **ERROR** BMC not in state to power on or off: "${power}"  AND
-    ...  Fatal Error
-
-    [return]  ${boot}
-
-###############################################################################
-
-
-###############################################################################
-Select Power On
-    [Documentation]  Randomly chooses a boot from the list of Power On boots.
-
-    @{power_on_choices}=  Intersect Lists  ${VALID_POWER_ON}  ${AVAIL_BOOTS}
-
-    ${length}=  Get Length  ${power_on_choices}
-
-    # Currently selects the first boot in the list of options, rather than
-    # selecting randomly.
-    ${chosen}=  Set Variable  @{power_on_choices}[0]
-
-    [return]  ${chosen}
-
-###############################################################################
-
-
-###############################################################################
-Select Power Off
-    [Documentation]  Randomly chooses an boot from the list of Power Off boots.
-
-    @{power_off_choices}=  Intersect Lists  ${VALID_POWER_OFF}  ${AVAIL_BOOTS}
-
-    ${length}=  Get Length  ${power_off_choices}
-
-    # Currently selects the first boot in the list of options, rather than
-    # selecting randomly.
-    ${chosen}=  Set Variable  @{power_off_choices}[0]
-
-    [return]  ${chosen}
+    Rqpvars  state
 
 ###############################################################################
 
@@ -358,78 +303,6 @@ Run Boot
     ${rc}  ${shell_rc}  ${failed_plug_in_name}=  Rprocess Plug In Packages
     ...  call_point=post_boot
     Should Be Equal  '${rc}'  '${0}'
-
-###############################################################################
-
-
-###############################################################################
-Print Test Start Message
-    [Documentation]  Print a message indicating what boot test is about to run.
-    [Arguments]  ${boot_keyword}
-
-    ${doing_msg}=  Sprint Timen  Doing "${boot_keyword}".
-    rqprint  ${doing_msg}
-
-    Append to List  ${LAST_TEN}  ${doing_msg}
-    ${length}=  Get Length  ${LAST_TEN}
-
-    Run Keyword If  '${length}' > '${10}'  Remove From List  ${LAST_TEN}  0
-
-###############################################################################
-
-
-###############################################################################
-Print Defect Report
-    [Documentation]  Print a defect report.
-
-    Rqprintn
-    # indent=0, width=90, linefeed=1, char="="
-    Rqprint Dashes  ${0}  ${90}  ${1}  =
-    Rqprintn  Copy this data to the defect:
-    Rqprintn
-
-    Rqpvars  @{parm_list}
-    Print Last Ten Boots
-    Rqprintn
-    Rqpvars  state
-
-    # At some point I'd like to have the 'Call FFDC Methods' return a list
-    # of files it has collected.  In that case, the following "ls" command
-    # would no longer be needed.  For now, however, ls shows the files
-    # named in FFDC_LIST_FILE_PATH so I will refrain from printing those
-    # out (so we don't see duplicates in the list).
-
-    ${rc}  ${output}=  Run and return RC and Output  ls ${LOG_PREFIX}*
-
-    Run Keyword If  '${rc}' != '${0}' and '${rc}' != 'None'  rqpvars  rc
-    ${status}  ${ffdc_list}=  Run Keyword and Ignore Error
-    ...  OperatingSystem.Get File  ${FFDC_LIST_FILE_PATH}
-
-    Rqprintn
-    Rqprintn  FFDC data files:
-    Run Keyword If  '${status_file_path}' != '${EMPTY}'
-    ...  Rqprintn  ${status_file_path}
-    Rqprintn  ${output}
-    # Run Keyword If  '${status}' == 'PASS'  Rqprintn  ${ffdc_list}
-    Rqprintn
-
-    Rqprint Dashes  ${0}  ${90}  ${1}  =
-
-###############################################################################
-
-
-###############################################################################
-Print Last Ten Boots
-    [Documentation]  Logs the last ten boots that were performed with their
-    ...  starting time stamp.
-
-    # indent 0, 90 chars wide, linefeed, char is "="
-    Rqprint Dashes  ${0}  ${90}
-    Rqprintn  Last 10 boots:
-    Rqprintn
-    :FOR  ${boot_entry}  IN  @{LAST_TEN}
-    \  rqprint  ${boot_entry}
-    Rqprint Dashes  ${0}  ${90}
 
 ###############################################################################
 

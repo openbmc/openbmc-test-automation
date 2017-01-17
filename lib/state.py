@@ -8,13 +8,13 @@ The 'State' is a composite of many pieces of data.  Therefore, the functions
 in this module define state as an ordered dictionary.  Here is an example of
 some test output showing machine state:
 
-state:
-  state[power]:                                   1
-  state[bmc]:                                     HOST_BOOTED
-  state[boot_progress]:                           FW Progress, Starting OS
-  state[os_ping]:                                 1
-  state[os_login]:                                1
-  state[os_run_cmd]:                              1
+default_state:
+  default_state[power]:                           1
+  default_state[bmc]:                             HOST_BOOTED
+  default_state[boot_progress]:                   FW Progress, Starting OS
+  default_state[os_ping]:                         1
+  default_state[os_login]:                        1
+  default_state[os_run_cmd]:                      1
 
 Different users may very well have different needs when inquiring about
 state.  In the future, we can add code to allow a user to specify which
@@ -33,11 +33,66 @@ import gen_valid as gv
 
 import commands
 from robot.libraries.BuiltIn import BuiltIn
+from robot.utils import DotDict
 
 import re
+import os
 
+# We don't want global variable getting changed when an import is done
+# so we'll save it and restore it.
+quiet = int(BuiltIn().get_variable_value("${quiet}"))
 # We need utils.robot to get keywords like "Get Power State".
 BuiltIn().import_resource("utils.robot")
+
+###############################################################################
+# The BMC code is about to be changed as far as what states are defined and
+# what the state values can be.  I am creating a means of processing both the
+# old style state (i.e. OBMC_STATES_VERSION = 0) and the new style (i.e.
+# OBMC_STATES_VERSION >= 1.
+# The caller can set environment variable OBMC_STATES_VERSION to dictate
+# whether we're processing old or new style states.  If OBMC_STATES_VERSION is
+# not set it will default to 0.
+DEFAULT_OBMC_STATES_VERSION = 0
+try:
+    BuiltIn().import_resource("state_manager.robot")
+except RuntimeError:
+    pass
+
+try:
+    OBMC_STATES_VERSION = int(os.environ.get('OBMC_STATES_VERSION',
+                              DEFAULT_OBMC_STATES_VERSION))
+except ValueError:
+    OBMC_STATES_VERSION = DEFAULT_OBMC_STATES_VERSION
+BuiltIn().set_global_variable("${quiet}", quiet)
+quiet = int(BuiltIn().get_variable_value("${quiet}"))
+
+if OBMC_STATES_VERSION == 0:
+    default_state = DotDict([('power', '1'),
+                             ('bmc', 'HOST_BOOTED'),
+                             ('boot_progress', 'FW Progress, Starting OS'),
+                             ('os_ping', '1'),
+                             ('os_login', '1'),
+                             ('os_run_cmd', '1')])
+else:
+    default_state = DotDict([('chassis', 'On'),
+                             ('bmc', 'HOST_BOOTED'),
+                             ('boot_progress', 'FW Progress, Starting OS'),
+                             ('host', 'Ready'),
+                             ('os_ping', '1'),
+                             ('os_login', '1'),
+                             ('os_run_cmd', '1')])
+
+
+###############################################################################
+def return_default_state():
+
+    r"""
+    Return default state dictionary.
+    """
+
+    return default_state
+
+###############################################################################
 
 
 ###############################################################################
@@ -273,9 +328,16 @@ def get_state(openbmc_host="",
             os_password = ""
 
     # Get the component states.
-    cmd_buf = ["Get Power State", "quiet=${" + str(quiet) + "}"]
-    grp.rdpissuing_keyword(cmd_buf)
-    power = BuiltIn().run_keyword(*cmd_buf)
+    if OBMC_STATES_VERSION== 0:
+        cmd_buf = ["Get Power State", "quiet=${" + str(quiet) + "}"]
+        grp.rdpissuing_keyword(cmd_buf)
+        power = BuiltIn().run_keyword(*cmd_buf)
+    else:
+        cmd_buf = ["Get Chassis Power State", "quiet=${" + str(quiet) + "}"]
+        grp.rdpissuing_keyword(cmd_buf)
+        chassis = BuiltIn().run_keyword(*cmd_buf)
+        # Strip everything up to the final period.
+        chassis = re.sub(r'.*\.', "", chassis)
 
     cmd_buf = ["Get BMC State", "quiet=${" + str(quiet) + "}"]
     grp.rdpissuing_keyword(cmd_buf)
@@ -285,17 +347,36 @@ def get_state(openbmc_host="",
     grp.rdpissuing_keyword(cmd_buf)
     boot_progress = BuiltIn().run_keyword(*cmd_buf)
 
+    if OBMC_STATES_VERSION > 0:
+        cmd_buf = ["Get Host State", "quiet=${" + str(quiet) + "}"]
+        grp.rdpissuing_keyword(cmd_buf)
+        host = BuiltIn().run_keyword(*cmd_buf)
+        # Strip everything up to the final period.
+        host = re.sub(r'.*\.', "", host)
+
     # Create composite state dictionary.
-    cmd_buf = ["Create Dictionary", "power=${" + str(power) + "}",
-               "bmc=" + bmc, "boot_progress=" + boot_progress]
+    if OBMC_STATES_VERSION == 0:
+        cmd_buf = ["Create Dictionary", "power=${" + str(power) + "}",
+                   "bmc=" + bmc, "boot_progress=" + boot_progress]
+    else:
+        cmd_buf = ["Create Dictionary", "chassis=" + str(chassis),
+                   "bmc=" + bmc, "boot_progress=" + boot_progress,
+                   "host=" + host]
+
     grp.rdpissuing_keyword(cmd_buf)
     state = BuiltIn().run_keyword(*cmd_buf)
 
     if os_host != "":
         # Create an os_up_match dictionary to test whether we are booted enough
         # to get operating system info.
-        cmd_buf = ["Create Dictionary", "power=^${1}$", "bmc=^HOST_BOOTED$",
-                   "boot_progress=^FW Progress, Starting OS$"]
+        if OBMC_STATES_VERSION == 0:
+            cmd_buf = ["Create Dictionary", "power=^${1}$",
+                       "bmc=^HOST_BOOTED$",
+                       "boot_progress=^FW Progress, Starting OS$"]
+        else:
+            cmd_buf = ["Create Dictionary", "chassis=^On$",
+                       "bmc=^HOST_BOOTED$",
+                       "boot_progress=^FW Progress, Starting OS$"]
         grp.rdpissuing_keyword(cmd_buf)
         os_up_match = BuiltIn().run_keyword(*cmd_buf)
         os_up = compare_states(state, os_up_match)
@@ -338,8 +419,8 @@ def check_state(match_state,
     match_state       A dictionary whose key/value pairs are "state field"/
                       "state value".  The state value is interpreted as a
                       regular expression.  Example call from robot:
-                      ${match_state}=  Create Dictionary  power=^1$
-                      ...  bmc=^HOST_BOOTED$
+                      ${match_state}=  Create Dictionary  chassis=^On$
+                      ...  bmc=^Ready$
                       ...  boot_progress=^FW Progress, Starting OS$
                       ${state}=  Check State  &{match_state}
     invert            If this flag is set, this function will succeed if the
@@ -454,9 +535,9 @@ def wait_state(match_state=(),
         grp.rprint_var(match_state)
 
     if quiet:
-        print_string=""
+        print_string = ""
     else:
-        print_string="#"
+        print_string = "#"
     cmd_buf = ["Check State", match_state, "invert=${" + str(invert) + "}",
                "print_string=" + print_string, "openbmc_host=" + openbmc_host,
                "openbmc_username=" + openbmc_username,
