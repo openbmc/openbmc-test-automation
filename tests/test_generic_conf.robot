@@ -14,7 +14,8 @@ ${MAX_POWER_VALUE}    ${1000}
 
 ${SETTING_HOST}       ${SETTINGS_URI}host0
 
-${VALUE_ERROR}      ValueError: Invalid input. Data not in allowed range
+${RANGE_MSG_ERR}      ValueError: Invalid input. Data not in allowed range
+${VALUE_MSG_ERR}      ValueError: Invalid input. Data not in allowed values
 
 *** Test Cases ***
 
@@ -44,8 +45,8 @@ Set Powercap Value With String
 
     ${valueToBeSet}=  Set Variable   abcdefg
     ${error_msg}=  Run Keyword And Expect Error
-    ...  *   Write To Powercap Attribute   ${valueToBeSet}
-    Should Contain  ${error_msg}  ${VALUE_ERROR}
+    ...  *   Write To Power Attribute  power_cap  ${valueToBeSet}
+    Should Contain  ${error_msg}  ${RANGE_MSG_ERR}
 
     ${value}=   Read Attribute    ${SETTING_HOST}   power_cap
     Should Not Be True    '${value}'=='${valueToBeSet}'
@@ -58,8 +59,8 @@ Set Powercap Value Greater Than Allowed Range
 
     ${valueToBeSet}=  Set Variable   ${1010}
     ${error_msg}=  Run Keyword And Expect Error
-    ...  *   Write To Powercap Attribute  ${valueToBeSet}
-    Should Contain  ${error_msg}  ${VALUE_ERROR}
+    ...  *   Write To Power Attribute  power_cap  ${valueToBeSet}
+    Should Contain  ${error_msg}  ${RANGE_MSG_ERR}
 
     ${value}=  Read Attribute    ${SETTING_HOST}   power_cap
     Should Not Be Equal  ${value}  ${valueToBeSet}
@@ -89,29 +90,27 @@ Set the power with MAX_POWER_VALUE
     ${value}=      Read Attribute   ${SETTING_HOST}    power_cap
     Should Be Equal     ${value}      ${valueToBeSet}
 
-Set the boot flags with string
 
-    [Documentation]   ***BAD PATH***
-    ...               This test case sets the boot flag with some invalid string
-    ...               Expectation is it should not be set.
-    ...               Existing Issue: https://github.com/openbmc/openbmc/issues/552
-    [Tags]  known_issue
+Set Boot Flag With String
+    [Documentation]   Set boot flag with invalid string and expect error.
+    [Tags]  Set_Boot_Flag_With_String
 
     ${valueToBeSet}=   Set Variable     3ab56f
-    ${valueDict}=   create dictionary   data=${valueToBeSet}
-    Write Attribute  ${SETTING_HOST}    boot_flags      data=${valueDict}
-    ${value}=      Read Attribute   ${SETTING_HOST}   boot_flags
-    Should not Be Equal     ${value}      ${valueToBeSet}
+    ${error_msg}=  Run Keyword And Expect Error
+    ...  *   Write To Power Attribute  boot_flags  ${valueToBeSet}
+    Should Contain  ${error_msg}  ${VALUE_MSG_ERR}
+    ${value}=  Read Attribute  ${SETTING_HOST}  boot_flags
+    Should Not Be Equal  ${value}  ${valueToBeSet}
 
 
 *** Keywords ***
 
-Write To Powercap Attribute
+Write To Power Attribute
     [Documentation]  Write to Powercap value.
-    [Arguments]   ${args}
+    [Arguments]   ${attrib}  ${args}
     ${value}=  Create Dictionary   data=${args}
     ${resp}=  OpenBMC Put Request
-    ...  ${SETTING_HOST}/attr/power_cap    data=${value}
+    ...  ${SETTING_HOST}/attr/${attrib}  data=${value}
     ${jsondata}=  To JSON   ${resp.content}
     Should Be Equal   ${jsondata['status']}   ${HTTP_OK}
     ...  msg=${jsondata}
