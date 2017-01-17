@@ -7,6 +7,8 @@ Resource                ../lib/utils.robot
 # and use appropriate resource or variable file imports
 
 # State Manager States
+${BMC_READY_STATE}           READY
+${BMC_NOT_READY_STATE}       NOT.READY
 ${HOST_POWEROFF_TRANS}       xyz.openbmc_project.State.Host.Transition.Off
 ${HOST_POWERON_TRANS}        xyz.openbmc_project.State.Host.Transition.On
 ${HOST_POWEROFF_STATE}       xyz.openbmc_project.State.Host.HostState.Off
@@ -18,6 +20,7 @@ ${CHASSIS_POWEROFF_STATE}    xyz.openbmc_project.State.Chassis.PowerState.Off
 ${CHASSIS_POWERON_STATE}     xyz.openbmc_project.State.Chassis.PowerState.On
 
 # State Manager URI's
+${BMC_STATE_URI}            /xyz/openbmc_project/state/bmc0/
 ${HOST_STATE_URI}           /xyz/openbmc_project/state/host0/
 ${CHASSIS_STATE_URI}        /xyz/openbmc_project/state/chassis0/
 
@@ -80,3 +83,49 @@ Get Chassis Power State
     ...  Read Attribute  ${CHASSIS_STATE_URI}  CurrentPowerState
     ...  quiet=${quiet}
     [Return]  ${state}
+
+# Below are two main keywords for BMC state management
+
+Get BMC State
+    [Documentation]  Return the state of BMC.
+    ${state}=
+    ...  Read Attribute  ${BMC_STATE_URI}  CurrentBMCState
+    [Return]  ${state}
+
+Put BMC State
+    [Arguments]  ${expected_state}
+    ${bmc_state}=  Get BMC State
+    Run Keyword If  ${bmc_state} == ${expected_state};
+    ...  Log BMC is already in ${expected_state} state
+    ...  ELSE  Initiate BMC Reboot
+
+    Wait for BMC state  ${expected_state}
+
+# All below are supportive keyword for put BMC state.
+# These can be reduced on need basis.
+
+Initiate BMC Reboot
+    [Documentation]  Initiate BMC reboot.
+    ${resp}=  openbmc post request
+    ...  ${BMC_STATE_URI}action/Reboot   data=${NIL}
+    ${jsondata}=  To Json  ${resp.content}
+    should be equal as strings  ${jsondata['status']}  ok
+
+Is BMC Ready
+    [Documentation]  Check if BMC state is Ready.
+    ${bmc_state}=  Get BMC State
+    Should Be Equal  ${BMC_READY_STATE}   ${bmc_state}
+
+Is BMC Not Ready
+    [Documentation]  Check if BMC state is Not Ready.
+    ${bmc_state}=  Get BMC State
+    Should Be Equal  ${BMC_NOT_READY_STATE}   ${bmc_state}
+
+Wait for BMC state
+    [Arguments]  ${expected_state}
+    Run Keyword If  ${expected_state} == ${BMC_READY_STATE}
+    ...    Wait Until Keyword Succeeds
+    ...    10 min  10 sec  Is BMC Ready
+    ...  ELSE IF  ${expected_state} == ${BMC_NOT_READY_STATE}
+    ...    Wait Until Keyword Succeeds
+    ...    10 min  10 sec  Is BMC Not Ready
