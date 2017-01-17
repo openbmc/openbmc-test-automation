@@ -141,6 +141,7 @@ Read Attribute
     [Arguments]    ${uri}    ${attr}    ${timeout}=10  ${quiet}=${QUIET}
     ${resp}=  OpenBMC Get Request  ${uri}/attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=     To Json    ${resp.content}
     [Return]    ${content["data"]}
 
