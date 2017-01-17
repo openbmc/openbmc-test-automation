@@ -12,6 +12,7 @@ import state as st
 import os
 import time
 import subprocess
+import glob
 
 from robot.utils import DotDict
 from robot.libraries.BuiltIn import BuiltIn
@@ -193,9 +194,38 @@ def print_boot_results_table(header_footer="\n"):
     Print the formatted boot_resuls_table to the console.
     """
 
-    grp.rprint(header_footer)
-    grp.rprint(boot_results.sprint_report())
-    grp.rprint(header_footer)
+    grp.rqprint(header_footer)
+    grp.rqprint(boot_results.sprint_report())
+    grp.rqprint(header_footer)
+
+###############################################################################
+
+
+###############################################################################
+def select_boot(state):
+
+    r"""
+    Select a boot test to be run based on our current state and return the
+    chosen boot type.
+
+    Description of arguments:
+    state  The state of the machine, which will include the power state..
+    """
+
+    if 'chassis' in state:
+        # New style state.
+        if state['chassis'] == 'Off':
+            boot = 'BMC Power On'
+        else:
+            boot = 'BMC Power Off'
+    else:
+        # New style state.
+        if state['power'] == 0:
+            boot = 'BMC Power On'
+        else:
+            boot = 'BMC Power Off'
+
+    return boot
 
 ###############################################################################
 
@@ -229,5 +259,104 @@ def my_ffdc():
     cmd_buf = ["Print Defect Report"]
     grp.rpissuing_keyword(cmd_buf)
     BuiltIn().run_keyword(*cmd_buf)
+
+###############################################################################
+
+
+###############################################################################
+def print_last_boots():
+
+    r"""
+    Print the last ten boots done with their time stamps.
+    """
+
+    # indent 0, 90 chars wide, linefeed, char is "="
+    grp.rqprint_dashes(0, 90)
+    grp.rqprintn("Last 10 boots:\n")
+    last_ten = BuiltIn().get_variable_value("${LAST_TEN}")
+
+    for boot_entry in last_ten:
+        grp.rqprint(boot_entry)
+    grp.rqprint_dashes(0, 90)
+
+###############################################################################
+
+
+###############################################################################
+def print_test_start_message(boot_keyword):
+
+    r"""
+    Print a message indicating what boot test is about to run.
+
+    Description of arguments:
+    boot_keyword  The name of the boot which is to be run
+                  (e.g. "BMC Power On").
+    """
+
+    doing_msg = gp.sprint_timen("Doing \"" + boot_keyword + "\".")
+    grp.rqprint(doing_msg)
+
+    last_ten = BuiltIn().get_variable_value("${LAST_TEN}")
+    last_ten.append(doing_msg)
+
+    if len(last_ten) > 10:
+        del last_ten[0]
+
+###############################################################################
+
+
+###############################################################################
+def print_defect_report():
+
+    r"""
+    Print a defect report.
+    """
+
+    grp.rqprintn()
+    # indent=0, width=90, linefeed=1, char="="
+    grp.rqprint_dashes(0, 90, 1, "=")
+    grp.rqprintn("Copy this data to the defect:\n")
+
+    parm_list = BuiltIn().get_variable_value("${parm_list}")
+
+    grp.rqpvars(*parm_list)
+
+    grp.rqprintn()
+
+    print_last_boots()
+    grp.rqprintn()
+    state = BuiltIn().get_variable_value("${state}")
+    grp.rqpvar(state)
+
+    # At some point I'd like to have the 'Call FFDC Methods' return a list
+    # of files it has collected.  In that case, the following "ls" command
+    # would no longer be needed.  For now, however, glob shows the files
+    # named in FFDC_LIST_FILE_PATH so I will refrain from printing those
+    # out (so we don't see duplicates in the list).
+
+    LOG_PREFIX = BuiltIn().get_variable_value("${LOG_PREFIX}")
+
+    output = '\n'.join(glob.glob(LOG_PREFIX + '*'))
+
+    FFDC_LIST_FILE_PATH = \
+        BuiltIn().get_variable_value("${FFDC_LIST_FILE_PATH}")
+
+    try:
+        ffdc_list = open(FFDC_LIST_FILE_PATH, 'r')
+    except IOError:
+        ffdc_list = ""
+
+    status_file_path = BuiltIn().get_variable_value("${status_file_path}")
+
+    grp.rqprintn()
+    grp.rqprintn("FFDC data files:")
+    if status_file_path != "":
+        grp.rqprintn(status_file_path)
+
+    grp.rqprintn(output)
+    # grp.rqprintn(ffdc_list)
+    grp.rqprintn()
+
+    grp.rqprint_dashes(0, 90, 1, "=")
 
 ###############################################################################
