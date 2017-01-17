@@ -18,6 +18,8 @@ NETWORK_MANAGER_URI = OPENBMC_BASE_URI + 'NetworkManager/'
 TIME_MANAGER_URI = OPENBMC_BASE_URI + 'TimeManager/'
 
 # State Manager base variables.
+BMC_REBOOT_TRANS = 'xyz.openbmc_project.State.BMC.Transition.Reboot'
+
 HOST_POWEROFF_TRANS = 'xyz.openbmc_project.State.Host.Transition.Off'
 HOST_POWERON_TRANS = 'xyz.openbmc_project.State.Host.Transition.On'
 HOST_POWEROFF_STATE = 'xyz.openbmc_project.State.Host.HostState.Off'
