@@ -29,8 +29,6 @@
 -e Test_BIOS_Version
 #https://github.com/openbmc/openbmc-test-automation/issues/207
 -e Disable_PowerCap
-#https://github.com/openbmc/openbmc-test-automation/issues/110
--e Test_non_SSL_Connection_to_port_443
 #https://github.com/openbmc/openbmc-test-automation/issues/123
 -e Execute_ipmi_BT_capabilities_command
 #https://github.com/openbmc/openbmc-test-automation/issues/130
