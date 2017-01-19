@@ -1,25 +1,8 @@
 *** Settings ***
-Resource                ../lib/utils.robot
+Resource          ../lib/utils.robot
+Variables         ../data/variables.py
 
 *** Variables ***
-
-# Once the State Manager support is ready remove this variables block
-# and use appropriate resource or variable file imports
-
-# State Manager States
-${HOST_POWEROFF_TRANS}       xyz.openbmc_project.State.Host.Transition.Off
-${HOST_POWERON_TRANS}        xyz.openbmc_project.State.Host.Transition.On
-${HOST_POWEROFF_STATE}       xyz.openbmc_project.State.Host.HostState.Off
-${HOST_POWERON_STATE}        xyz.openbmc_project.State.Host.HostState.Running
-
-${CHASSIS_POWEROFF_TRANS}    xyz.openbmc_project.State.Chassis.Transition.Off
-${CHASSIS_POWERON_TRANS}     xyz.openbmc_project.State.Chassis.Transition.On
-${CHASSIS_POWEROFF_STATE}    xyz.openbmc_project.State.Chassis.PowerState.Off
-${CHASSIS_POWERON_STATE}     xyz.openbmc_project.State.Chassis.PowerState.On
-
-# State Manager URI's
-${HOST_STATE_URI}           /xyz/openbmc_project/state/host0/
-${CHASSIS_STATE_URI}        /xyz/openbmc_project/state/chassis0/
 
 ${QUIET}  ${0}
 
