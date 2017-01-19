@@ -16,6 +16,25 @@ INVENTORY_URI = OPENBMC_BASE_URI + 'inventory/'
 USER_MANAGER_URI = OPENBMC_BASE_URI + 'UserManager/'
 NETWORK_MANAGER_URI = OPENBMC_BASE_URI + 'NetworkManager/'
 
+r"""
+State Manager base variables.
+"""
+HOST_POWEROFF_TRANS = 'xyz.openbmc_project.State.Host.Transition.Off'
+HOST_POWERON_TRANS = 'xyz.openbmc_project.State.Host.Transition.On'
+HOST_POWEROFF_STATE = 'xyz.openbmc_project.State.Host.HostState.Off'
+HOST_POWERON_STATE = 'xyz.openbmc_project.State.Host.HostState.Running'
+
+CHASSIS_POWEROFF_TRANS = 'xyz.openbmc_project.State.Chassis.Transition.Off'
+CHASSIS_POWERON_TRANS = 'xyz.openbmc_project.State.Chassis.Transition.On'
+CHASSIS_POWEROFF_STATE = 'xyz.openbmc_project.State.Chassis.PowerState.Off'
+CHASSIS_POWERON_STATE = 'xyz.openbmc_project.State.Chassis.PowerState.On'
+
+r"""
+State Manager URI variables.
+"""
+BMC_STATE_URI = '/xyz/openbmc_project/state/bmc0/'
+HOST_STATE_URI = '/xyz/openbmc_project/state/host0/'
+CHASSIS_STATE_URI = '/xyz/openbmc_project/state/chassis0/'
 
 '''
   QEMU HTTPS variable:
