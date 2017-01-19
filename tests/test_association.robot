@@ -13,6 +13,7 @@ Suite Setup       Suite Initialization Setup
 Suite Teardown    Close All Connections
 
 Test Teardown     FFDC On Test Case Fail
+Force Tags  Association
 
 *** Variables ***
 
