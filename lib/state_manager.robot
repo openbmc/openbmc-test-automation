@@ -48,17 +48,17 @@ Initiate Host PowerOff
 Is Host Running
     [Documentation]  Check if Chassis and Host state is ON.
     ${power_state}=  Get Chassis Power State
-    Should Be Equal  ${CHASSIS_POWERON_STATE}   ${power_state}
+    Should Be Equal  On  ${power_state}
     ${host_state}=  Get Host State
-    Should Be Equal  ${HOST_POWERON_STATE}   ${host_state}
+    Should Be Equal  Running  ${host_state}
 
 
 Is Host Off
     [Documentation]  Check if Chassis and Host state is OFF.
     ${power_state}=  Get Chassis Power State
-    Should Be Equal  ${CHASSIS_POWEROFF_STATE}   ${power_state}
+    Should Be Equal  Off  ${power_state}
     ${host_state}=  Get Host State
-    Should Be Equal  ${HOST_POWEROFF_STATE}   ${host_state}
+    Should Be Equal  Off  ${host_state}
 
 
 Get Host State
@@ -68,7 +68,7 @@ Get Host State
     ${state}=
     ...  Read Attribute  ${HOST_STATE_URI}  CurrentHostState
     ...  quiet=${quiet}
-    [Return]  ${state}
+    [Return]  ${state.rsplit('.', 1)[1]}
 
 
 Get Chassis Power State
@@ -79,4 +79,4 @@ Get Chassis Power State
     ${state}=
     ...  Read Attribute  ${CHASSIS_STATE_URI}  CurrentPowerState
     ...  quiet=${quiet}
-    [Return]  ${state}
+    [Return]  ${state.rsplit('.', 1)[1]}
