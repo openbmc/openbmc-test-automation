@@ -17,9 +17,10 @@ ${HOST_SETTINGS}    ${SETTINGS_URI}host0
 
 *** Test Cases ***
 
-Set Onetime boot policy using REST
+Set Onetime Boot Policy Using REST
     [Documentation]   This testcase is to set onetime boot policy using REST
     ...               URI and then verify using REST API and ipmitool.\n
+    [Tags]  Set_Onetime_Boot_Policy_Using_REST
 
     Set Boot Policy   ONETIME
 
@@ -29,9 +30,10 @@ Set Onetime boot policy using REST
     Should Be Empty     ${stderr}
     Should Contain   ${output}    ONETIME
 
-Set Permanent boot policy using REST
+Set Permanent Boot Policy Using REST
     [Documentation]   This testcase is to set permanent boot policy using REST
     ...               URI and then verify using REST API and ipmitool.\n
+    [Tags]  Set_Permanent_boot_policy_using_REST
 
     Set Boot Policy   PERMANENT
 
@@ -41,9 +43,10 @@ Set Permanent boot policy using REST
     Should Be Empty     ${stderr}
     Should Contain   ${output}     PERMANENT
 
-Set Onetime boot policy using IPMITOOL
+Set Permanent Boot Policy Using IPMITOOL
     [Documentation]   This testcase is to set boot policy to onetime boot using ipmitool
     ...               and then verify using REST URI and ipmitool.\n
+    [Tags]  Set_Permanent_Boot_Policy_Using_IPMITOOL
 
     Run IPMI command   0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
@@ -52,9 +55,10 @@ Set Onetime boot policy using IPMITOOL
     Should Be Empty     ${stderr}
     Should Contain   ${output}    ONETIME
 
-Set Permanent boot policy using IPMITOOL
+Set Permanent Boot Policy Using IPMITOOL
     [Documentation]   This testcase is to set boot policy to permanent using ipmitool
     ...               and then verify using REST URI and ipmitool.
+    [Tags]  Set_Permanent_Boot_Policy_Using_IPMITOOL
 
     Run IPMI command   0x0 0x8 0x05 0xC0 0x00 0x00 0x00 0x00
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
@@ -63,10 +67,10 @@ Set Permanent boot policy using IPMITOOL
     Should Be Empty     ${stderr}
     Should Contain   ${output}     PERMANENT
 
-Boot order with permanent boot policy
+Boot Order With Permanent Boot Policy
     [Documentation]   This testcase is to verify that boot order does not change
     ...               after first boot when boot policy set to permanent
-    [Tags]  chassisboot
+    [Tags]  chassisboot  Boot_Order_With_Permanent_Boot_Policy
 
     Initiate Power Off
 
@@ -120,10 +124,10 @@ Persist PERMANENT Boot Policy After Reset
     ${flag}=   Read Attribute  ${HOST_SETTINGS}   boot_flags
     Should Be Equal    ${flag}    CDROM
 
-Set boot policy to invalid value
+Set Boot Policy To Invalid Value
     [Documentation]   This testcase verify that the boot policy doesn't get
     ...               updated with invalid policy supplied by user.
-    [Tags]  Set_boot_policy_to_invalid_value
+    [Tags]  Set_Boot_Policy_To_Invalid_Value
 
     Run Keyword and Ignore Error    Set Boot Policy   abc
 

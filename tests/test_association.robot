@@ -74,10 +74,11 @@ Create error log on single FRU
     Should Contain     ${dimm1_event}    ${log_list[0]}
 
 
-Create error log on two FRU
+Create Error Log On Two FRU
     [Documentation]     ***GOOD PATH***
     ...                 Create an error log on two FRUs and verify
     ...                 its association.\n
+    [Tags]  Create_Error_Log_On_Two_FRU
 
     ${log_uri}=      Create a test log
     ${association_uri}=    catenate    SEPARATOR=   ${log_uri}   /fru
@@ -93,10 +94,11 @@ Create error log on two FRU
     Should Contain     ${dimm2_event}    ${log_uri}
 
 
-Create multiple error logs
+Create Multiple Error Logs
     [Documentation]     ***GOOD PATH***
     ...                 Create multiple error logs and verify
     ...                 their association.\n
+    [Tags]  Create_Multiple_Error_Logs
 
     : FOR    ${INDEX}    IN RANGE    1    4
     \    Log    ${INDEX}
@@ -138,10 +140,11 @@ Delete error log
     Should Not Contain     ${dimm2_event}    ${log_uri1}
 
 
-Association with invalid FRU
+Association With Invalid FRU
     [Documentation]     ***BAD PATH***
     ...                 Create an error log on invalid FRU and verify
     ...                 that its does not have any association.\n
+    [Tags]  Association_With_Invalid_FRU
 
     Run Keyword And Continue On Failure   Clear all logs
 
@@ -161,10 +164,11 @@ Association with invalid FRU
     Should Contain     ${jsondata['message']}    404 Not Found
 
 
-Assocition with no FRU error event
+Association With No FRU Error Event
     [Documentation]     ***BAD PATH***
     ...                 Create an error log on no FRU and verify
     ...                 that its does not have any association.\n
+    [Tags]  Association_With_No_FRU_Error_Event
 
     Run Keyword And Continue On Failure   Clear all logs
 
@@ -188,7 +192,7 @@ Association with virtual sensor
     [Documentation]     ***GOOD PATH***
     ...                 Create an error log on virtual sensor and
     ...                 verify its association.\n
-    [Tags]              Association_with_virtual_sensor
+    [Tags]  Association_With_Virtual_Sensor
 
     Run Keyword And Continue On Failure   Clear all logs
 
@@ -209,7 +213,7 @@ Association with virtual sensor
     ...  ${association_content}
     ...  ${OPENBMC_BASE_URI}inventory/system/systemevent
 
-Association unchanged after reboot
+Association Unchanged After Reboot
     [Documentation]     ***GOOD PATH***
     ...                 This test case is to verify that error log association
     ...                 does not change after open bmc reboot.\n
