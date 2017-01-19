@@ -14,6 +14,8 @@ Suite Setup       Open Connection And Log In
 Suite Teardown    Close All Connections
 Test Teardown     FFDC On Test Case Fail
 
+Force Tags  Event_Logging
+
 *** Variables ***
 &{NIL}  data=@{EMPTY}
 ${SYSTEM_SHUTDOWN_TIME}     1min
