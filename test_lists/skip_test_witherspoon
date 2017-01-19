@@ -56,3 +56,5 @@
 -e get_names_org
 -e bmcreboot
 -e chassisboot
+-e Event_Logging
+-e Association
