@@ -85,7 +85,7 @@ Boot order with permanent boot policy
 Persist ONETIME Boot Policy After Reset
     [Documentation]   Verify ONETIME boot policy order does not change
     ...               on warm reset.
-    [Tags]  chassisboot   Persist_ONETIME Boot_Policy_After_Reset
+    [Tags]  chassisboot   Persist_ONETIME_Boot_Policy_After_Reset
 
     Initiate Power On
 
