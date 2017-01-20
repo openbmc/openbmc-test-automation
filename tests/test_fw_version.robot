@@ -16,6 +16,8 @@ Test BMC Version
     ...     $ git describe --dirty
     ...     v0.1-34-g95f7347
     ...     $
+    [Tags]  Test_BMC_Version
+
     ${resp}=    OpenBMC Get Request
     ...   ${INVENTORY_URI}system/chassis/motherboard/bmc
     Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
@@ -28,8 +30,8 @@ Test BIOS Version
     ...     Expected in following format:
     ...     open-power-barreleye-v1.8
     ...     $
-
     [Tags]  chassisboot    Test_BIOS_Version
+
     ${resp}=    OpenBMC Get Request    ${INVENTORY_URI}system/bios
     Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
     ${jsondata}=    To Json    ${resp.content}
