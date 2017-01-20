@@ -80,10 +80,12 @@ Execute Command and Write FFDC
     ${stdout}  ${stderr}=
     ...   Execute Command    ${cmd}   return_stderr=True
 
-    # Write stdout data on success and error msg to the file on failure
-    Run Keyword If   '${stderr}' == '${EMPTY}'
-    ...   Write Data to File   ${stdout}${\n}   ${logpath}
-    ...   ELSE   Run Keyword   Write Data to File   ${stderr}${\n}   ${logpath}
+    # Write stdout on success and stderr/stdout to the file on failure.
+    Run Keyword If  $stderr == '${EMPTY}'
+    ...    Write Data to File  ${stdout}${\n}  ${logpath}
+    ...  ELSE  Write Data to File
+    ...    ERROR output:${\n}${stderr}${\n}Output:${\n}${stdout}${\n}
+    ...    ${logpath}
 
 
 ################################################################
@@ -118,11 +120,11 @@ Create File and Write Data
 ################################################################
 
 Log Test Case Status
-    [Documentation]    Test case execution result history.
-    ...                Create once and append to this file
-    ...                logs/test_history.txt
-    ...                Format   Date:Test suite:Test case:Status
-    ...                20160909214053719992:Test Warmreset:Test WarmReset via REST:FAIL
+    [Documentation]  Test case execution result history.
+    ...  Create once and append to this file
+    ...  logs/test_history.txt
+    ...  Format   Date:Test suite:Test case:Status
+    ...  20160909214053719992:Test Warmreset:Test WarmReset via REST:FAIL
     Create Directory   ${FFDC_LOG_PATH}
 
     ${exist}=   Run Keyword and Return Status
@@ -219,8 +221,9 @@ OS FFDC Files
     ...   . /etc/os-release; echo $ID
     ...   return_stdout=True  return_stderr=False  return_rc=False
 
-    Return From Keyword If  '${linux_distro}' == '${EMPTY}' or '${linux_distro}' == 'None'
-    ...   Could not determine Linux Distribution
+    Return From Keyword If
+    ...  '${linux_distro}' == '${EMPTY}' or '${linux_distro}' == 'None'
+    ...  Could not determine Linux Distribution
 
     @{entries}=  Get ffdc os distro index  ${linux_distro}
     :FOR  ${index}  IN  @{entries}
