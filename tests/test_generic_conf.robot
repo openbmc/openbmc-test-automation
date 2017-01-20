@@ -19,11 +19,11 @@ ${VALUE_ERROR}      ValueError: Invalid input. Data not in allowed range
 *** Test Cases ***
 
 
-Get the boot_flags
+Get The Boot_Flags
 
     [Documentation]   ***GOOD PATH***
     ...               This test case tries to get the boot flags
-    ...
+    [Tags]  Get_The_Boot_Flags
 
     ${resp}=   Read Attribute   ${SETTING_HOST}   boot_flags
     should not be empty   ${resp}
@@ -65,11 +65,12 @@ Set Powercap Value Greater Than Allowed Range
     Should Not Be Equal  ${value}  ${valueToBeSet}
 
 
-Set the power with MIN_POWER_VALUE
+Set The Power With MIN_POWER_VALUE
 
     [Documentation]   ***BAD PATH***
     ...               This test case sets the power value less then
     ...               MIN_ALLOWED_VALUE,Expectation is it should get error.
+    [Tags]  Set_The_Power_With_MIN_POWER_VALUE
 
     ${valueToBeSet}=   Set Variable     ${MIN_POWER_VALUE}
     ${valueDict}=   create dictionary   data=${valueToBeSet}
@@ -77,11 +78,12 @@ Set the power with MIN_POWER_VALUE
     ${value}=      Read Attribute   ${SETTING_HOST}    power_cap
     Should Be Equal     ${value}      ${valueToBeSet}
 
-Set the power with MAX_POWER_VALUE
+Set The Power With MAX_POWER_VALUE
 
     [Documentation]   ***GOOD PATH***
     ...               This test case sets the power value with MAX_POWER_VALUE
     ...               and it should be set.
+    [Tags  Set_The_Power_With_MAX_POWER_VALUE
 
     ${valueToBeSet}=   Set Variable     ${MAX_POWER_VALUE}
     ${valueDict}=   create dictionary   data=${valueToBeSet}
