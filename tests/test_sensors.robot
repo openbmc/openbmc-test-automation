@@ -28,7 +28,9 @@ Execute ipmi BT capabilities command
     Run IPMI command            0x06 0x36
     response Should Be Equal    " 01 40 40 0a 01"
 
-Execute Set Sensor boot count
+Execute Set Sensor Boot Count
+    [Tags]  Execute_Set_Sensor_Boot_Count
+
     ${uri}=    Get System component    BootCount
     ${x}=      Get Sensor Number   ${uri}
 
@@ -37,7 +39,9 @@ Execute Set Sensor boot count
     ${val}=     convert to integer    53
     Response Should Be Equal   ${val}
 
-Set Sensor Boot progress
+Set Sensor Boot Progress
+    [Tags]  Set_Sensor_Boot_Progress
+
     ${uri}=    Get System component    BootProgress
     ${x}=      Get Sensor Number   ${uri}
 
@@ -45,7 +49,8 @@ Set Sensor Boot progress
     Read the Attribute  ${uri}    value
     Response Should Be Equal    FW Progress, Baseboard Init
 
-Set Sensor Boot progress Longest string
+Set Sensor Boot Progress Longest String
+    [Tags]  Set_Sensor_Boot_Progress_Longest_String
     ${uri}=    Get System component    BootProgress
     ${x}=      Get Sensor Number   ${uri}
 
@@ -53,7 +58,9 @@ Set Sensor Boot progress Longest string
     Read The Attribute  ${uri}    value
     Response Should Be Equal    FW Progress, Docking station attachment
 
-BootProgress sensor FW Hang unspecified Error
+Bootprogress Sensor Fw Hang Unspecified Error
+    [Tags]  Bootprogress_Sensor_Fw_Hang_Unspecified_Error
+
     ${uri}=    Get System component    BootProgress
     ${x}=      Get Sensor Number   ${uri}
 
@@ -61,7 +68,9 @@ BootProgress sensor FW Hang unspecified Error
     Read The Attribute  ${uri}    value
     Response Should Be Equal    FW Hang, Unspecified
 
-BootProgress fw hang state
+Bootprogress Fw Hang State
+    [Tags]  Bootprogress_Fw_Hang_State
+
     ${uri}=    Get System component    BootProgress
     ${x}=      Get Sensor Number   ${uri}
 
@@ -69,7 +78,9 @@ BootProgress fw hang state
     Read The Attribute  ${uri}    value
     Response Should Be Equal    POST Error, unknown
 
-OperatingSystemStatus Sensor boot completed progress
+OperatingSystemStatus Sensor Boot Completed Progress
+    [Tags]  OperatingSystemStatus_Sensor_Boot_Completed_Progress
+
     ${uri}=    Get System component    OperatingSystemStatus
     ${x}=      Get Sensor Number   ${uri}
 
@@ -77,7 +88,9 @@ OperatingSystemStatus Sensor boot completed progress
     Read The Attribute  ${uri}     value
     Response Should Be Equal    Boot completed (00)
 
-OperatingSystemStatus Sensor progress
+OperatingSystemStatus Sensor Progress
+    [Tags]  OperatingSystemStatus_Sensor_Progress
+
     ${uri}=    Get System component    OperatingSystemStatus
     ${x}=      Get Sensor Number   ${uri}
 
@@ -85,7 +98,9 @@ OperatingSystemStatus Sensor progress
     Read The Attribute  ${uri}     value
     Response Should Be Equal    PXE boot completed
 
-OCC Active sensor on enabled
+OCC Active Sensor On Enabled
+    [Tags]  OCC_Active_Sensor_On_Enabled
+
     ${uri}=    Get System component    OccStatus
     ${x}=      Get Sensor Number   ${uri}
 
@@ -93,7 +108,9 @@ OCC Active sensor on enabled
     Read The Attribute  ${uri}     value
     Response Should Be Equal    Enabled
 
-OCC Active sensor on disabled
+OCC Active Sensor On Disabled
+    [Tags]  OCC_Active_Sensor_On_Disabled
+
     ${uri}=    Get System component    OccStatus
     ${x}=      Get Sensor Number   ${uri}
 
@@ -102,6 +119,7 @@ OCC Active sensor on disabled
     Response Should Be Equal    Disabled
 
 CPU Present
+    [Tags]  CPU_Present
 
     ${uri}=    Get System component    cpu
     ${x}=      Get Inventory Sensor Number   ${uri}
@@ -110,7 +128,9 @@ CPU Present
     Read The Attribute  ${uri}    present
     Response Should Be Equal    True
 
-CPU not Present
+CPU Not Present
+    [Tags]  CPU_Not_Present
+
     ${uri}=    Get System component    cpu
     ${x}=      Get Inventory Sensor Number   ${uri}
 
@@ -118,7 +138,9 @@ CPU not Present
     Read The Attribute  ${uri}    present
     Response Should Be Equal    False
 
-CPU fault
+CPU Fault
+    [Tags]  CPU_Fault
+
     ${uri}=    Get System component    cpu
     ${x}=      Get Inventory Sensor Number   ${uri}
 
@@ -126,7 +148,9 @@ CPU fault
     Read The Attribute  ${uri}    fault
     Response Should Be Equal    True
 
-CPU no fault
+CPU No Fault
+    [Tags]  CPU_No_Fault
+
     ${uri}=    Get System component    cpu
     ${x}=      Get Inventory Sensor Number   ${uri}
 
@@ -134,7 +158,9 @@ CPU no fault
     Read The Attribute  ${uri}    fault
     Response Should Be Equal    False
 
-core Present
+Core Present
+    [Tags]  Core_Present
+
     ${uri}=    Get System component    core11
     ${x}=      Get Inventory Sensor Number   ${uri}
 
@@ -142,7 +168,9 @@ core Present
     Read The Attribute  ${uri}   present
     Response Should Be Equal    True
 
-core not Present
+Core Not Present
+    [Tags]  Core_Not_Present
+
     ${uri}=    Get System component    core11
     ${x}=      Get Inventory Sensor Number   ${uri}
 
@@ -150,7 +178,9 @@ core not Present
     Read The Attribute  ${uri}   present
     Response Should Be Equal    False
 
-core fault
+Core Fault
+    [Tags]  Core_Fault
+
     ${uri}=    Get System component    core11
     ${x}=      Get Inventory Sensor Number   ${uri}
 
@@ -158,7 +188,9 @@ core fault
     Read The Attribute  ${uri}    fault
     Response Should Be Equal    True
 
-core no fault
+Core No Fault
+    [Tags]  Core_No_Fault
+
     ${uri}=    Get System component    core11
     ${x}=      Get Inventory Sensor Number   ${uri}
 
@@ -205,7 +237,7 @@ DIMM0 no fault
     Response Should Be Equal    False
 
 Centaur0 Present
-    [Tags]    Centaur0_Present
+    [Tags]  Centaur0_Present
 
     ${uri}=    Get System component    membuf
     ${x}=      Get Inventory Sensor Number   ${uri}
@@ -215,7 +247,7 @@ Centaur0 Present
     Response Should Be Equal    True
 
 Centaur0 not Present
-    [Tags]    Centaur0_not_Present
+    [Tags]  Centaur0_not_Present
 
     ${uri}=    Get System component    membuf
     ${x}=      Get Inventory Sensor Number   ${uri}
@@ -224,7 +256,9 @@ Centaur0 not Present
     Read The Attribute   ${uri}    present
     Response Should Be Equal    False
 
-Centaur0 fault
+Centaur0 Fault
+    [Tags]  Centaur0_Fault
+
     ${uri}=    Get System component    membuf
     ${x}=      Get Inventory Sensor Number   ${uri}
 
@@ -232,7 +266,9 @@ Centaur0 fault
     Read The Attribute   ${uri}    fault
     Response Should Be Equal    True
 
-Centaur0 no fault
+Centaur0 No Fault
+    [Tags]  Centaur0_No_Fault
+
     ${uri}=    Get System component    membuf
     ${x}=      Get Inventory Sensor Number   ${uri}
 
@@ -241,19 +277,20 @@ Centaur0 no fault
     Response Should Be Equal    False
 
 System Present
-    [Tags]    System_Present
+    [Tags]  System_Present
 
     ${uri}=    Get System component    system
     Read The Attribute   ${uri}    present
     Response Should Be Equal    True
 
 System Fault
+    [Tags]  System_Fault
     ${uri}=    Get System component    system
     Read The Attribute   ${uri}    fault
     Response Should Be Equal    False
 
 Chassis Present
-    [Tags]    Chassis_Present
+    [Tags]  Chassis_Present
 
     ${uri}=    Get System component    chassis
     Read The Attribute
@@ -261,6 +298,7 @@ Chassis Present
     Response Should Be Equal    True
 
 Chassis Fault
+    [Tags]  Chassis_Fault
     ${uri}=    Get System component    chassis
     Read The Attribute
     ...   ${INVENTORY_URI}system/chassis    fault
