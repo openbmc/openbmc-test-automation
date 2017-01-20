@@ -41,6 +41,7 @@ Test Correct Reservation_ID
 
 Clear Test File
    [Documentation]   Clear /tmp/esel
+   [Tags]  Clear_Test_File
 
    Execute Command   rm /tmp/esel
    Execute Command   sync
