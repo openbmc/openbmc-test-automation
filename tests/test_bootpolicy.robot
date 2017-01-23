@@ -43,10 +43,10 @@ Set Permanent Boot Policy Using REST
     Should Be Empty     ${stderr}
     Should Contain   ${output}     PERMANENT
 
-Set Permanent Boot Policy Using IPMITOOL
+Set Permanent Boot Policy ONETIME Using IPMITOOL
     [Documentation]   This testcase is to set boot policy to onetime boot using ipmitool
     ...               and then verify using REST URI and ipmitool.\n
-    [Tags]  Set_Permanent_Boot_Policy_Using_IPMITOOL
+    [Tags]  Set_Permanent_Boot_Policy_ONETIME_Using_IPMITOOL
 
     Run IPMI command   0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
@@ -55,10 +55,10 @@ Set Permanent Boot Policy Using IPMITOOL
     Should Be Empty     ${stderr}
     Should Contain   ${output}    ONETIME
 
-Set Permanent Boot Policy Using IPMITOOL
+Set Permanent Boot Policy PERMANENT Using IPMITOOL
     [Documentation]   This testcase is to set boot policy to permanent using ipmitool
     ...               and then verify using REST URI and ipmitool.
-    [Tags]  Set_Permanent_Boot_Policy_Using_IPMITOOL
+    [Tags]  Set_Permanent_Boot_Policy_PERMANENT_Using_IPMITOOL
 
     Run IPMI command   0x0 0x8 0x05 0xC0 0x00 0x00 0x00 0x00
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
