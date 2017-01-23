@@ -43,7 +43,7 @@ Set Permanent Boot Policy Using REST
     Should Be Empty     ${stderr}
     Should Contain   ${output}     PERMANENT
 
-Set Permanent Boot Policy Using IPMITOOL
+Set Permanent Boot Policy ONETIME Using IPMITOOL
     [Documentation]   This testcase is to set boot policy to onetime boot using ipmitool
     ...               and then verify using REST URI and ipmitool.\n
     [Tags]  Set_Permanent_Boot_Policy_Using_IPMITOOL
@@ -55,7 +55,7 @@ Set Permanent Boot Policy Using IPMITOOL
     Should Be Empty     ${stderr}
     Should Contain   ${output}    ONETIME
 
-Set Permanent Boot Policy Using IPMITOOL
+Set Permanent Boot Policy PERMANENT Using IPMITOOL
     [Documentation]   This testcase is to set boot policy to permanent using ipmitool
     ...               and then verify using REST URI and ipmitool.
     [Tags]  Set_Permanent_Boot_Policy_Using_IPMITOOL
