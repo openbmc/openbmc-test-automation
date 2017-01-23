@@ -17,10 +17,10 @@ ${HOST_SETTINGS}    ${SETTINGS_URI}host0
 
 *** Test Cases ***
 
-Set Onetime Boot Policy Using REST
-    [Documentation]   This testcase is to set onetime boot policy using REST
-    ...               URI and then verify using REST API and ipmitool.\n
-    [Tags]  Set_Onetime_Boot_Policy_Using_REST
+Set Boot Policy To ONETIME via REST
+    [Documentation]   Set boot policy to ONETIME using REST URI and verify
+    ...               using ipmitool.
+    [Tags]  Set_Boot_Policy_To_ONETIME_via_REST
 
     Set Boot Policy   ONETIME
 
@@ -30,10 +30,10 @@ Set Onetime Boot Policy Using REST
     Should Be Empty     ${stderr}
     Should Contain   ${output}    ONETIME
 
-Set Permanent Boot Policy Using REST
-    [Documentation]   This testcase is to set permanent boot policy using REST
-    ...               URI and then verify using REST API and ipmitool.\n
-    [Tags]  Set_Permanent_boot_policy_using_REST
+Set Boot Policy To PERMANENT via REST
+    [Documentation]   Set boot policy to PERMANENT via REST URI and verify
+    ...               using ipmitool.
+    [Tags]  Set_Boot_Policy_To_PERMANENT_via_REST
 
     Set Boot Policy   PERMANENT
 
@@ -43,22 +43,22 @@ Set Permanent Boot Policy Using REST
     Should Be Empty     ${stderr}
     Should Contain   ${output}     PERMANENT
 
-Set Permanent Boot Policy Using IPMITOOL
-    [Documentation]   This testcase is to set boot policy to onetime boot using ipmitool
-    ...               and then verify using REST URI and ipmitool.\n
-    [Tags]  Set_Permanent_Boot_Policy_Using_IPMITOOL
+Set Boot Policy To ONETIME via IPMITOOL
+    [Documentation]   Set boot policy to ONETIME via ipmitool and verify
+    ...               using REST URI.
+    [Tags]  Set_Boot_Policy_To_ONETIME_via_IPMITOOL
 
-    Run IPMI command   0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
+    Run IPMI command  0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    ONETIME
     ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty     ${stderr}
     Should Contain   ${output}    ONETIME
 
-Set Permanent Boot Policy Using IPMITOOL
-    [Documentation]   This testcase is to set boot policy to permanent using ipmitool
-    ...               and then verify using REST URI and ipmitool.
-    [Tags]  Set_Permanent_Boot_Policy_Using_IPMITOOL
+Set Boot Policy To PERMANENT via IPMITOOL
+    [Documentation]   Set boot policy to PERMANENT via ipmitool and verify
+    ...               using REST URI.
+    [Tags]  Set_Boot_Policy_To_PERMANENT_via_IPMITOOL
 
     Run IPMI command   0x0 0x8 0x05 0xC0 0x00 0x00 0x00 0x00
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
@@ -67,10 +67,10 @@ Set Permanent Boot Policy Using IPMITOOL
     Should Be Empty     ${stderr}
     Should Contain   ${output}     PERMANENT
 
-Boot Order With Permanent Boot Policy
-    [Documentation]   This testcase is to verify that boot order does not change
-    ...               after first boot when boot policy set to permanent
-    [Tags]  chassisboot  Boot_Order_With_Permanent_Boot_Policy
+Test Boot Order via REST
+    [Documentation]   Set boot policy to PERMANENT and boot device to CDROM
+    ...               and verify that the order doesn't change post power on.
+    [Tags]  chassisboot  Test_Boot_Order_via_REST
 
     Initiate Power Off
 
