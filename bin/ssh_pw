@@ -1,0 +1,47 @@
+#!/usr/bin/expect --
+
+# ssh using the parms provided by the caller.  The benefit provided by this
+# program is that is will enter the password for you (i.e. non-interactively).
+
+# Description of arguments:
+# Arg0: The password.
+# Arg1: The ssh parm string.  This is the totality of ssh parms you wish to
+#       specify (e.g. userid, host, etc.).
+
+
+###############################################################################
+# Main
+
+  # Get arguments.
+  set password [lindex $argv 0]
+  set ssh_parms [lreplace $argv 0 0]
+
+  eval spawn ssh ${ssh_parms}
+
+  set timeout 30
+
+  expect {
+    "assword:" {send "$password\r"}
+  }
+
+  set timeout 3
+  expect {
+    "Permission denied, please try again." {
+      puts ""
+      puts "**ERROR** Incorrect userid or password provided to this program."
+      exit 1
+    }
+  }
+
+  set timeout -1
+
+  # We don't ever expect to see this string.  This will keep this program
+  # running indefinitely.
+  expect {
+    "When in the course of human events, it becomes :" {send "whatever\r"}
+  }
+
+  exit 0
+
+###############################################################################
+
