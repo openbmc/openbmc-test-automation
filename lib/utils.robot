@@ -299,64 +299,115 @@ Initialize DBUS cmd
     ${cmd}=     Catenate  ${cmd}${boot_property}
     Set Global Variable   ${dbuscmd}     ${cmd}
 
+Create OS Console File Path
+    [Documentation]  Create OS console file path name and return it.
+    [Arguments]  ${log_file_path}=${EMPTY}
 
-Stop OBMC Console Client
-    [Documentation]   Stop any running obmc_console_client
-    ...               writing to file_path.
-    [Arguments]   ${file_path}=/tmp/obmc-console.log
+    # Description of arguements:
+    # file_path  The caller's candidate value.  If this value is ${EMPTY}, this
+    #            keyword will compose a file path name.  Otherwise, this
+    #            keyword will use the caller's file_path value.  In either
+    #            case, the value will be returned.
 
-    ${cmd_buf}=  Catenate  SEPARATOR=${SPACE}
-    ...  ps ax | grep obmc-console-client | grep ${file_path} | grep -v grep
-    ...  | awk '{print $1}'
+    ${default_file_path}=  Catenate  /tmp/${OPENBMC_HOST}_os_console
+    ${log_file_path}=  Set Variable If  '${log_file_path}' == '${EMPTY}'
+    ...  ${default_file_path}  ${log_file_path}
 
-    ${pid}=
-    ...  Execute Command  ${cmd_buf}
+    [Return]  ${log_file_path}
 
-    Run Keyword If  '${pid}' != '${EMPTY}'
-    ...  Execute Command  kill -s KILL ${pid}
-    ...  ELSE  Log  "No obmc-console-client process running"
+Create OS Console Command String
+    [Documentation]  Return a command string to start OS console logging.
 
+    # First make sure that the ssh_pw program is available.
+    ${cmd_buf}=  Catenate  which ssh_pw
+    Rdpissuing  ${cmd_buf}
+    ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
+    Rdpvars  rc  output
+    Should Be Equal  ${rc}  ${0}  msg=${output}\n
 
-Start SOL Console Logging
-    [Documentation]   Start a new obmc_console_client process and direct
-    ...               output to a file.
-    [Arguments]   ${file_path}=/tmp/obmc-console.log
+    ${cmd_buf}=  Catenate  ssh_pw ${OPENBMC_PASSWORD} -p 2200
+    ...  ${OPENBMC_USERNAME}@${OPENBMC_HOST}
 
-    Open Connection And Log In
-
-    Stop OBMC Console Client  ${file_path}
-
-    Start Command
-    ...  obmc-console-client > ${file_path}
-
+    [Return]  ${cmd_buf}
 
 Stop SOL Console Logging
-    [Documentation]  Stop obmc_console_client process, if any, and
-    ...              return the console output as a string.
-    [Arguments]  ${file_path}=/tmp/obmc-console.log  ${targ_file_path}=${EMPTY}
+    [Documentation]  Stop system console logging and return log output.
+    [Arguments]  ${log_file_path}=${EMPTY}  ${targ_file_path}=${EMPTY}
+
+    # If there are muliple system console processes, they will all be stopped.
+    # If there is no existing log file this keyword will return an error
+    # message to that effect (and write that message to targ_file_path, if
+    # specified).
+    # NOTE: This keyword will not fail if there is no running system console
+    # process.
 
     # Description of arguments:
-    # file_path       The path on the obmc system where SOL output may be
-    #                 found.
-    # targ_file_path  If specified, the file path to which SOL data should be
-    #                 written.
+    # log_file_path   The file path that was used to call "Start SOL
+    #                 Console Logging".  See that keyword (above) for details.
+    # targ_file_path  If specified, the file path to which the source
+    #                 file path (i.e. "log_file_path") should be copied.
 
-    Open Connection And Log In
+    ${log_file_path}=  Create OS Console File Path  ${log_file_path}
+    # Find the pid of the active system console logging session (if any).
+    ${search_string}=  Create OS Console Command String
+    ${cmd_buf}=  Catenate  echo $(ps -ef | egrep '${search_string}'
+    ...  | egrep -v grep | cut -c10-14)
+    Rdpissuing  ${cmd_buf}
+    ${rc}  ${os_con_pid}=  Run And Return Rc And Output  ${cmd_buf}
+    Rdpvars  os_con_pid
+    # If rc is not zero it just means that there is no OS Console process
+    # running.
 
-    Stop OBMC Console Client  ${file_path}
+    ${cmd_buf}=  Catenate  kill -9 ${os_con_pid}
+    Run Keyword If  '${os_con_pid}' != '${EMPTY}'  Rdpissuing  ${cmd_buf}
+    ${rc}  ${output}=  Run Keyword If  '${os_con_pid}' != '${EMPTY}'
+    ...  Run And Return Rc And Output  ${cmd_buf}
+    Run Keyword If  '${os_con_pid}' != '${EMPTY}'  Rdpvars  rc  output
 
-    ${cmd_buf}=  Set Variable  cat ${file_path}
-
-    ${console}  ${stderr}=
-    ...  Execute Command
-    ...  if [ -f ${file_path} ] ; then cat ${file_path} ; fi
-    ...  return_stderr=True
-    Should Be Empty  ${stderr}
+    ${cmd_buf}=  Set Variable  cat ${log_file_path} 2>&1
+    Rdpissuing  ${cmd_buf}
+    ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
+    Rdpvars  rc  output
 
     Run Keyword If  '${targ_file_path}' != '${EMPTY}'
-    ...  Append To File  ${targ_file_path}  ${console}
+    ...  Run Keyword And Ignore Error
+    ...  Copy File  ${log_file_path}  ${targ_file_path}
 
-    [Return]  ${console}
+    [Return]  ${output}
+
+Start SOL Console Logging
+    [Documentation]  Start system console log to file.
+    [Arguments]  ${log_file_path}=${EMPTY}
+
+    # This keyword will first call "Stop SOL Console Logging".  Only then will
+    # it start SOL console logging.  The data returned by "Stop SOL Console
+    # Logging" will in turn be returned by this keyword.
+
+    # Description of arguments:
+    # log_file_path  The file path to which system console log data should be
+    #                written.  Note that this path is taken to be a location on
+    #                the machine where this program is running rather than on
+    #                the Open BMC system.
+
+    ${log_file_path}=  Create OS Console File Path  ${log_file_path}
+
+    ${log_output}=  Stop SOL Console Logging  ${log_file_path}
+
+    # Validate by making sure we can create the file.  Problems creating the
+    # file would not be noticed by the subsequent ssh command because we fork
+    # the command.
+    Create File  ${log_file_path}
+    ${sub_cmd_buf}=  Create OS Console Command String
+    # Routing stderr to stdout so that any startup error text will go to the
+    # output file.
+    ${cmd_buf}=  Catenate  ${sub_cmd_buf} > ${log_file_path} 2>&1 &
+    Rdpissuing  ${cmd_buf}
+    ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
+    # Because we are forking this command, we essentially will never get a
+    # non-zero return code or any output.
+    Should Be Equal  ${rc}  ${0}
+
+    [Return]  ${log_output}
 
 Get Time Stamp
     [Documentation]     Get the current time stamp data
@@ -386,6 +437,7 @@ Start Journal Log
     Start Command
     ...  journalctl -f > ${file_path}-${LOG_TIME}
     Log    Journal Log Started: ${file_path}-${LOG_TIME}
+
 
 Stop Journal Log
     [Documentation]   Stop journalctl process if its running.
@@ -509,7 +561,6 @@ Get Endpoint Paths
     ${resp}=   Get Matches   ${list}   regexp=^.*[0-9a-z_].${endpoint}[0-9]*$
     [Return]   ${resp}
 
-
 Check Zombie Process
     [Documentation]    Check if any defunct process exist or not on BMC
     ${count}  ${stderr}  ${rc}=  Execute Command  ps -o stat | grep Z | wc -l
@@ -543,3 +594,4 @@ Set BMC Power Policy
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}
+
