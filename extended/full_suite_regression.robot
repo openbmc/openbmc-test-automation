@@ -3,19 +3,25 @@ Documentation      This suite is for testing Open BMC full test suite.
 ...                Maintains log.html output.xml  for each iteration and
 ...                generate combined report
 
-Library           OperatingSystem
+Library  OperatingSystem
+Library  DateTime
 
 *** Variables ***
  ${ITERATION}  10
- ${RESULT_PATH}        logsdir
- ${LOOP_TEST_COMMAND}       tests
+ ${RESULT_DIR}  logsdir
+ ${LOOP_TEST_COMMAND}  tests
 
 *** Test Cases ***
 Run Entire Test Suite Multiple Time
    [Documentation]  Multiple iterations of Full Suite
 
    Should Be True  0<${ITERATION}
-   Create Directory   ${RESULT_PATH}
+
+   ${timestamp}=  Get Current Date  result_format=%Y%m%d%H%M%S
+   ${dir_path}=  Catenate   ${RESULT_DIR}${timestamp}
+   Set Suite Variable  ${RESULT_PATH}  ${dir_path}
+   Create Directory  ${RESULT_PATH}
+
    : FOR    ${INDEX}    IN RANGE    0    ${ITERATION}
     \    Log To Console     \n Iteration:   no_newline=True
     \    Log To Console    ${INDEX}
@@ -29,4 +35,3 @@ Create Combined Report
 
    Run  rebot --name ${OPENBMC_SYSTEMMODEL}CombinedReport ${RESULT_PATH}/output*.xml
    Move File   log.html     ${RESULT_PATH}/log${OPENBMC_SYSTEMMODEL}CombinedIterations${ITERATION}Report.html
-
