@@ -7,6 +7,7 @@ Library                 Process
 Library                 OperatingSystem
 Library                 gen_print.py
 Library                 gen_robot_print.py
+Library                 String
 
 *** Variables ***
 ${SYSTEM_SHUTDOWN_TIME}       ${5}
@@ -24,6 +25,9 @@ ${bmc_mem_free_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
 ${bmc_mem_total_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
 ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
 ${HOST_SETTING}    ${SETTINGS_URI}host0
+
+${BOOT_TIME}     ${0}
+${BOOT_COUNT}    ${0}
 
 *** Keywords ***
 
@@ -543,3 +547,29 @@ Set BMC Power Policy
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}
+
+
+Set BMC Reset Reference Time
+    [Documentation]   Set current boot time as a reference and increment
+    ...               boot count.
+
+    ${cur_btime}=  Get BMC Boot Time
+    ${status}=  Run Keyword And Return Status
+    ...  Should Be True  ${cur_btime} > ${BOOT_TIME}
+    Run Keyword If  '${status}' == '${True}'
+    ...  Run Keywords
+    ...  Set Global Variable  ${BOOT_TIME}  ${cur_btime}
+    ...  AND
+    ...  Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
+
+
+Get BMC Boot Time
+    [Documentation]   Get boot time from /proc/state.
+
+    Open Connection And Log In
+    ${output}  ${stderr}=  Execute Command  cat /proc/stat
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
+    ${output}=  Get Lines Containing String  ${output}  btime
+    ${cur_btime}=  Convert To Integer  ${output.rsplit(' ', 1)[1]}
+    [Return]  ${cur_btime}
