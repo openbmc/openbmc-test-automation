@@ -28,6 +28,9 @@ ${HOST_SETTING}    ${SETTINGS_URI}host0
 ${bmc_file_system_usage_cmd}=
 ...  df -h | grep -v /dev/mtdblock5 | cut -c 52-54 | grep 100 | wc -l
 
+${BOOT_TIME}     ${0}
+${BOOT_COUNT}    ${0}
+
 *** Keywords ***
 
 Wait For Host To Ping
@@ -560,3 +563,27 @@ Set BMC Power Policy
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}
+
+
+Set BMC Reset Reference Time
+    [Documentation]  Set current boot time as a reference and increment
+    ...               boot count.
+
+    ${cur_btime}=  Get BMC Boot Time
+    Run Keyword If  ${cur_btime} > ${BOOT_TIME}
+    ...  Run Keywords
+    ...  Set Global Variable  ${BOOT_TIME}  ${cur_btime}
+    ...  AND
+    ...  Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
+
+
+Get BMC Boot Time
+    [Documentation]  Get boot time from /proc/stat.
+
+    Open Connection And Log In
+    ${output}  ${stderr}=
+    ...  Execute Command  egrep '^btime ' /proc/stat | cut -f 2 -d ' '
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
+    ${btime}=  Convert To Integer  ${output}
+    [Return]  ${btime}
