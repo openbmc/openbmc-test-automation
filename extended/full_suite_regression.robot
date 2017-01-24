@@ -15,7 +15,14 @@ Run Entire Test Suite Multiple Time
    [Documentation]  Multiple iterations of Full Suite
 
    Should Be True  0<${ITERATION}
-   Create Directory   ${RESULT_PATH}
+
+   ${status}=  Run Keyword And Return Status
+   ...  Directory Should Exist  ${RESULT_PATH}
+   Run Keyword If   ${status} == True
+   ...  Remove File  ${RESULT_PATH}/*
+
+   Create Directory  ${RESULT_PATH}
+
    : FOR    ${INDEX}    IN RANGE    0    ${ITERATION}
     \    Log To Console     \n Iteration:   no_newline=True
     \    Log To Console    ${INDEX}
