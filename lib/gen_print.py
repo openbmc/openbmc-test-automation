@@ -19,6 +19,7 @@ import collections
 
 try:
     from robot.utils import DotDict
+    from robot.utils import NormalizedDict
 except ImportError:
     pass
 
@@ -620,6 +621,12 @@ def sprint_varx(var_name,
         if not type_is_dict:
             try:
                 if type(var_value) is DotDict:
+                    type_is_dict = 1
+            except NameError:
+                pass
+        if not type_is_dict:
+            try:
+                if type(var_value) is NormalizedDict:
                     type_is_dict = 1
             except NameError:
                 pass
