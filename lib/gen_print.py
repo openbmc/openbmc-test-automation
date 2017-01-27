@@ -19,6 +19,7 @@ import collections
 
 try:
     from robot.utils import DotDict
+    from robot.utils import NormalizedDict
 except ImportError:
     pass
 
@@ -611,18 +612,21 @@ def sprint_varx(var_name,
         type_is_dict = 0
         if type(var_value) is dict:
             type_is_dict = 1
-        if not type_is_dict:
-            try:
-                if type(var_value) is collections.OrderedDict:
-                    type_is_dict = 1
-            except AttributeError:
-                pass
-        if not type_is_dict:
-            try:
-                if type(var_value) is DotDict:
-                    type_is_dict = 1
-            except NameError:
-                pass
+        try:
+            if type(var_value) is collections.OrderedDict:
+                type_is_dict = 1
+        except AttributeError:
+            pass
+        try:
+            if type(var_value) is DotDict:
+                type_is_dict = 1
+        except NameError:
+            pass
+        try:
+            if type(var_value) is NormalizedDict:
+                type_is_dict = 1
+        except NameError:
+            pass
         if type_is_dict:
             for key, value in var_value.iteritems():
                 ix += 1
