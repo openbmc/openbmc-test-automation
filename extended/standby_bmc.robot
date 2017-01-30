@@ -5,7 +5,8 @@ Documentation     This module will take whatever action is necessary
 ...                  - BMC is communicating
 ...                   (pinging, sshing and REST commands working)
 ...                  - Power state is 0 (off)
-...                  - BMC state is "BMC_READY" or "HOST_POWERED_OFF"
+...                  - BMC state is "Ready"
+...                  - HOST state is "Off"
 ...                  - Boot policy is "RESTORE_LAST_STATE"
 ...               Power cycle system via PDU if specified
 ...               Prune archived journal logs
@@ -13,6 +14,7 @@ Documentation     This module will take whatever action is necessary
 Resource          ../lib/boot/boot_resource_master.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/pdu/pdu.robot
+Resource          ../lib/state_manager.robot
 
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0
@@ -20,38 +22,35 @@ ${HOST_SETTING}      /org/openbmc/settings/host0
 *** Test Cases ***
 
 Get to Stable State
-    [Documentation]    BMC cleanup drive to stable state
-    ...                1. PDU powercycle if specified
-    ...                1. Ping Test
-    ...                2. SSH Connection session Test
-    ...                3. REST Connection session Test
-    ...                4. Reboot BMC if REST Test failed
-    ...                5. Check BMC state for standby
-    ...                6. Issue poweroff if not already in
-    ...                   standby state
-    ...                7. Update restore policy
+    [Documentation]  BMC cleanup drive to stable state
+    ...              1. PDU powercycle if specified
+    ...              1. Ping Test
+    ...              2. SSH Connection session Test
+    ...              3. REST Connection session Test
+    ...              4. Reboot BMC if REST Test failed
+    ...              5. Get BMC in Ready state if its not in this state
+    ...              6. Get Host in Off state if its not in this state
+    ...              7. Update restore policy
     [Tags]  Get to Stable State
 
-    Run Keyword And Ignore Error   Powercycle System Via PDU
+    Run Keyword And Ignore Error  Powercycle System Via PDU
 
     Wait For Host To Ping  ${OPENBMC_HOST}  1 mins
-    Open Connection And Log In   host=${OPENBMC_HOST}
+    Open Connection And Log In  host=${OPENBMC_HOST}
 
-    ${l_rest}=   Run Keyword And Return Status
-    ...    Initialize OpenBMC
-    Run Keyword If  '${l_rest}' == '${False}'
-    ...    Reboot and Wait for BMC Online
+    ${rest_status}=  Run Keyword And Return Status  Initialize OpenBMC
+    Run Keyword If  '${rest_status}' == '${False}'
+    ...  Reboot and Wait for BMC Online
 
-    ${l_ready}=   Run Keyword And Return Status
-    ...    Get BMC State and Expect Standby
+    ${ready_status}=  Run Keyword And Return Status  Is BMC Ready
+    Run Keyword If  '${ready_status}' == '${False}'  Put BMC State  Ready
 
-    Run Keyword If  '${l_ready}' == '${False}'
-    ...    Initiate Power Off
+    ${hostoff_status}=  Run Keyword And Return Status  Is Host Off
+    Run Keyword If  '${hostoff_status}' == '${False}'  Initiate Host PowerOff
 
     Prune Journal Log
 
-    Run Keyword And Ignore Error
-    ...   Update Policy Setting   RESTORE_LAST_STATE
+    Run Keyword And Ignore Error  Update Policy Setting  RESTORE_LAST_STATE
 
 
 *** Keywords ***
@@ -82,14 +81,6 @@ Wait For BMC Standby
     @{states}=   Create List   BMC_READY   HOST_POWERED_OFF
     Wait Until Keyword Succeeds
     ...    10 min   10 sec   Verify BMC State   ${states}
-
-
-Get BMC State and Expect Standby
-    [Documentation]   Get BMC state and should be at standby
-
-    @{states}=     Create List   BMC_READY   HOST_POWERED_OFF
-    ${bmc_state}=  Get BMC State
-    Should Contain  ${states}   ${bmc_state}
 
 
 Update Policy Setting
