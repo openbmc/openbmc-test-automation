@@ -25,10 +25,14 @@ Documentation     Trigger code update to a target BMC.
 
 Resource          code_update_utils.robot
 Resource          ../../lib/boot/boot_resource_master.robot
+Resource          ../../lib/state_manager.robot
 
 *** Variables ***
 
 ${FILE_PATH}      ${EMPTY}
+
+# By default 0 indicate use the new xyz interface
+${DEFAULT_KEYWORD}    ${0}
 
 *** Test Cases ***
 
@@ -41,10 +45,11 @@ Test Basic BMC Performance Before Code Update
     Check BMC File System Performance
 
 Initiate Code Update BMC
-    [Documentation]    BMC code update process initiation
+    [Documentation]  BMC code update process initiation
+    [Setup]  Set Compatibility
     [Tags]  Initiate_Code_Update_BMC
 
-    Check If File Exist    ${FILE_PATH}
+    Check If File Exist  ${FILE_PATH}
     System Readiness Test
     ${status}=   Run Keyword and Return Status
     ...   Validate BMC Version   before
@@ -53,7 +58,7 @@ Initiate Code Update BMC
     ...     Pass Execution   Same Driver version installed
 
     Prune Journal Log
-    Initiate Power Off
+    Compatible Power Off
     Run Keyword And Ignore Error
     ...   Set Policy Setting   RESTORE_LAST_STATE
     Prepare For Update
@@ -62,9 +67,7 @@ Initiate Code Update BMC
     # to openbmc/openbmc#673
     Check If BMC is Up    10 min   10 sec
 
-    @{states}=   Create List   BMC_READY   HOST_POWERED_OFF
-    Wait Until Keyword Succeeds
-    ...    10 min   10 sec   Verify BMC State   ${states}
+    Compatible BMC Ready State
 
     # TODO: openbmc/openbmc#815
     Sleep  1 min
@@ -85,8 +88,11 @@ Initiate Code Update BMC
     Check If BMC is Up    30 min   10 sec
     Sleep  1 min
     Validate BMC Version
-    Wait Until Keyword Succeeds
-    ...    10 min   10 sec   Verify BMC State   BMC_READY
+
+    # Code update completed, make sure we use the correct interface
+    # while checking for BMC ready state.
+    Set Compatibility
+    Compatible BMC Ready State
 
 
 Test Basic BMC Performance At Ready State
@@ -97,4 +103,34 @@ Test Basic BMC Performance At Ready State
     Check BMC Mem Performance
     Check BMC File System Performance
 
+*** Keywords ***
 
+Set Compatibility
+    [Documentation]  Set to indicate which interface to use.
+    ${status}=  Run Keyword And Return Status  Check Path Property
+    Run Keyword If  '${status}' == '${True}'
+    ...  Set Global Variable  ${DEFAULT_KEYWORD}  ${1}
+    ...  ELSE
+    ...  Set Global Variable  ${DEFAULT_KEYWORD}  ${0}
+
+Check Path Property
+    [Documentation]  Check if the old URI exist or not.
+    ${resp}=  Openbmc Get Request  ${CONTROL_URI}chassis0
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+Compatible Power Off
+    [Documentation]  Select appropriate poweroff keyword.
+    Run Keyword If  '${DEFAULT_KEYWORD}' == '${1}'
+    ...  Initiate Power Off
+    ...  ELSE
+    ...  Initiate Host PowerOff
+
+Compatible BMC Ready State
+    [Documentation]  Check BMC state.
+    @{states}=   Create List   BMC_READY   HOST_POWERED_OFF
+    Run Keyword If  '${DEFAULT_KEYWORD}' == '${1}'
+    ...  Wait Until Keyword Succeeds  10 min  10 sec
+    ...  Verify BMC State  ${states}
+    ...  ELSE
+    ...  Wait Until Keyword Succeeds  10 min  10 sec
+    ...  Is BMC Ready
