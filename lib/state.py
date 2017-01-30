@@ -339,7 +339,12 @@ def get_state(openbmc_host="",
         # Strip everything up to the final period.
         chassis = re.sub(r'.*\.', "", chassis)
 
-    cmd_buf = ["Get BMC State", "quiet=${" + str(quiet) + "}"]
+    if OBMC_STATES_VERSION== 0:
+        qualifier = "utils"
+    else:
+        qualifier = "state_manager"
+
+    cmd_buf = [qualifier + ".Get BMC State", "quiet=${" + str(quiet) + "}"]
     grp.rdpissuing_keyword(cmd_buf)
     bmc = BuiltIn().run_keyword(*cmd_buf)
 
