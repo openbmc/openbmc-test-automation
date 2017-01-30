@@ -4,6 +4,7 @@ Documentation  Contains all of the keywords that do various power ons.
 Resource    ../resource.txt
 Resource    ../utils.robot
 Resource    ../connection_client.robot
+Resource    ../state_manager.robot
 
 *** Keywords ***
 BMC Power On
@@ -20,10 +21,10 @@ BMC Power On
     Close Connection
 
 Check Power On States
-    [Documentation]  Checks that the BMC state, power state, and boot progress
+    [Documentation]  Checks that the host state, power state, and boot progress
     ...  are correctly powered on.
 
-    Wait Until Keyword Succeeds   ${OS_WAIT_TIMEOUT}  10sec  Is Host Booted
+    Wait Until Keyword Succeeds   ${OS_WAIT_TIMEOUT}  10sec  Is Host Running
 
     ${boot_progress}=  Get Boot Progress
     Should Be Equal  ${boot_progress}  FW Progress, Starting OS
@@ -32,9 +33,3 @@ Check Power On States
     ${power_state}=  Get Power State
     Should Be Equal  ${power_state}  ${1}
     Log to Console  Power State: ${power_state}
-
-Is Host Booted
-    ${bmc_state}=  Get BMC State
-    Should Contain  ${bmc_state}  HOST_BOOTED
-    Log to Console  BMC State: ${bmc_state}
-

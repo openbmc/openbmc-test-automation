@@ -5,7 +5,7 @@ Documentation     This module will take whatever action is necessary
 ...                  - BMC is communicating
 ...                   (pinging, sshing and REST commands working)
 ...                  - Power state is 0 (off)
-...                  - BMC state is "BMC_READY" or "HOST_POWERED_OFF"
+...                  - BMC state is "BMC_READY"
 ...                  - Boot policy is "RESTORE_LAST_STATE"
 ...               Power cycle system via PDU if specified
 ...               Prune archived journal logs
@@ -13,6 +13,7 @@ Documentation     This module will take whatever action is necessary
 Resource          ../lib/boot/boot_resource_master.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/pdu/pdu.robot
+Resource          ../state_manager.robot
 
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0
@@ -43,10 +44,10 @@ Get to Stable State
     ...    Reboot and Wait for BMC Online
 
     ${l_ready}=   Run Keyword And Return Status
-    ...    Get BMC State and Expect Standby
+    ...    Get BMC State and Expect Ready
 
     Run Keyword If  '${l_ready}' == '${False}'
-    ...    Initiate Power Off
+    ...    Put BMC State  Ready
 
     Prune Journal Log
 
@@ -84,13 +85,11 @@ Wait For BMC Standby
     ...    10 min   10 sec   Verify BMC State   ${states}
 
 
-Get BMC State and Expect Standby
-    [Documentation]   Get BMC state and should be at standby
+Get BMC State and Expect Ready
+    [Documentation]   Get BMC state and checks if its at Ready
 
-    @{states}=     Create List   BMC_READY   HOST_POWERED_OFF
     ${bmc_state}=  Get BMC State
-    Should Contain  ${states}   ${bmc_state}
-
+    Should Be Equal  ${bmc_state}  Ready
 
 Update Policy Setting
     [Documentation]   Update the given restore policy
