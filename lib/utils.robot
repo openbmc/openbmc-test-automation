@@ -181,7 +181,7 @@ Wait for OS
 
     rqprint_timen  The operating system is now communicating.
 
-Get BMC State
+Get BMC State Deprecated
     [Documentation]  Returns the state of the BMC as a string. (i.e: BMC_READY)
     [Arguments]  ${quiet}=${QUIET}
 
@@ -251,8 +251,13 @@ Is PNOR Flash Done
 
 Is System State Host Booted
     [Documentation]  Checks whether system state is HOST_BOOTED.
-    ${state}=    Get BMC State
+    ${state}=    Get BMC State Deprecated
     should be equal as strings     ${state}     HOST_BOOTED
+
+Is OS Starting
+    [Documentation]  Check if boot progress is OS starting.
+    ${boot_progress}=  Get Boot Progress
+    Should Be Equal  ${boot_progress}  FW Progress, Starting OS
 
 Verify Ping and REST Authentication
     ${l_ping}=   Run Keyword And Return Status
@@ -375,7 +380,7 @@ Verify BMC State
     ...               BMC state is as expected.
     [Arguments]       ${expected}
 
-    ${current}=  Get BMC State
+    ${current}=  Get BMC State Deprecated
     Should Contain  ${expected}   ${current}
 
 Start Journal Log

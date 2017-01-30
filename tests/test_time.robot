@@ -4,6 +4,7 @@ Documentation          This suite is for testing System time in Open BMC.
 Resource               ../lib/rest_client.robot
 Resource               ../lib/ipmi_client.robot
 Resource               ../lib/openbmc_ffdc.robot
+Resource               ../lib/state_manager.robot
 Resource               ../lib/resource.txt
 
 Library                OperatingSystem
@@ -250,13 +251,12 @@ Set Time Owner
     ...  ${SETTING_HOST}/attr/time_owner  data=${valueDict}
     ${jsondata}=  to JSON  ${resp.content}
 
-    @{states}=  Create List  BMC_READY  HOST_POWERED_OFF
-    ${bmc_state}=  Get BMC State
+    ${host_state}=  Get Host State
 
-    Run Keyword If  '${bmc_state}' in ${states}
+    Run Keyword If  '${host_state}' == 'Off'
     ...  Log  System is in off state so owner change will get applied.
     ...  ELSE   Run keyword
-    ...  Initiate Power Off
+    ...  Initiate Host PowerOff
 
     ${owner}=  Read Attribute  ${SETTING_HOST}  time_owner
     Should Be Equal  ${owner}  ${args}
