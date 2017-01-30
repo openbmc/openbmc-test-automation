@@ -178,18 +178,6 @@ Wait for OS
 
     rqprint_timen  The operating system is now communicating.
 
-Get BMC State
-    [Documentation]  Returns the state of the BMC as a string. (i.e: BMC_READY)
-    [Arguments]  ${quiet}=${QUIET}
-
-    @{arglist}=  Create List
-    ${args}=  Create Dictionary  data=@{arglist}
-    ${resp}=  Call Method  ${OPENBMC_BASE_URI}managers/System/  getSystemState
-    ...        data=${args}  quiet=${quiet}
-    Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
-    ${content}=  to json  ${resp.content}
-    [Return]  ${content["data"]}
-
 Get Power State
     [Documentation]  Returns the power state as an integer. Either 0 or 1.
     [Arguments]  ${quiet}=${QUIET}
