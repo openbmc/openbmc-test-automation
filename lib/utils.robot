@@ -98,7 +98,7 @@ Trigger Warm Reset
     ...    Fail   msg=warm reset didn't occur
 
     Sleep   ${SYSTEM_SHUTDOWN_TIME}min
-    Wait For Host To Ping   ${OPENBMC_HOST}
+    Check If BMC is Up
 
 Check OS
     [Documentation]  Attempts to ping the host OS and then checks that the host
