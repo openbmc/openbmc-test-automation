@@ -8,6 +8,9 @@ ${BMC_READY_STATE}           Ready
 ${BMC_NOT_READY_STATE}       NotReady
 ${QUIET}  ${0}
 
+# "0" indicates that the new "xyz" interface should be used.
+${OBMC_STATES_VERSION}    ${0}
+
 *** Keywords ***
 
 Initiate Host Boot
@@ -132,3 +135,35 @@ Wait for BMC state
     ...    Wait Until Keyword Succeeds
     ...    10 min  10 sec  Is BMC Not Ready
     ...  ELSE  Fail  msg=Invalid BMC state
+
+
+Set State Interface Version
+    [Documentation]  Set version to indicate which interface to use.
+    ${resp}=  Openbmc Get Request  ${CONTROL_URI}chassis0
+    ${status}=  Run Keyword And Return Status
+    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Run Keyword If  '${status}' == '${True}'
+    ...  Set Global Variable  ${OBMC_STATES_VERSION}  ${1}
+    ...  ELSE
+    ...  Set Global Variable  ${OBMC_STATES_VERSION}  ${0}
+
+
+Power Off Request
+    [Documentation]  Select appropriate poweroff keyword.
+    Run Keyword If  '${OBMC_STATES_VERSION}' == '${1}'
+    ...  Initiate Power Off
+    ...  ELSE
+    ...  Initiate Host PowerOff
+
+
+Wait For BMC Ready
+    [Documentation]  Check BMC state and wait for BMC Ready.
+    @{states}=  Create List  BMC_READY  HOST_POWERED_OFF
+    Run Keyword If  '${OBMC_STATES_VERSION}' == '${1}'
+    ...  Wait Until Keyword Succeeds  10 min  10 sec
+    ...  Verify BMC State  ${states}
+    ...  ELSE
+    ...  Wait Until Keyword Succeeds  10 min  10 sec
+    ...  Is BMC Ready
+
+
