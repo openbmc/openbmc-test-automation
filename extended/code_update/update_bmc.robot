@@ -25,6 +25,7 @@ Documentation     Trigger code update to a target BMC.
 
 Resource          code_update_utils.robot
 Resource          ../../lib/boot/boot_resource_master.robot
+Resource          ../../lib/state_manager.robot
 
 *** Variables ***
 
@@ -41,10 +42,11 @@ Test Basic BMC Performance Before Code Update
     Check BMC File System Performance
 
 Initiate Code Update BMC
-    [Documentation]    BMC code update process initiation
+    [Documentation]  BMC code update process initiation
+    [Setup]  Set State Interface Version
     [Tags]  Initiate_Code_Update_BMC
 
-    Check If File Exist    ${FILE_PATH}
+    Check If File Exist  ${FILE_PATH}
     System Readiness Test
     ${status}=   Run Keyword and Return Status
     ...   Validate BMC Version   before
@@ -53,7 +55,7 @@ Initiate Code Update BMC
     ...     Pass Execution   Same Driver version installed
 
     Prune Journal Log
-    Initiate Power Off
+    Power Off Request
     Run Keyword And Ignore Error
     ...   Set Policy Setting   RESTORE_LAST_STATE
     Prepare For Update
@@ -62,9 +64,7 @@ Initiate Code Update BMC
     # to openbmc/openbmc#673
     Check If BMC is Up    10 min   10 sec
 
-    @{states}=   Create List   BMC_READY   HOST_POWERED_OFF
-    Wait Until Keyword Succeeds
-    ...    10 min   10 sec   Verify BMC State   ${states}
+    BMC Ready State Request
 
     # TODO: openbmc/openbmc#815
     Sleep  1 min
@@ -85,8 +85,11 @@ Initiate Code Update BMC
     Check If BMC is Up    30 min   10 sec
     Sleep  1 min
     Validate BMC Version
-    Wait Until Keyword Succeeds
-    ...    10 min   10 sec   Verify BMC State   BMC_READY
+
+    # Now that the code update is completed, make sure we use the correct
+    # interface while checking for BMC ready state.
+    Set State Interface Version
+    BMC Ready State Request
 
 
 Test Basic BMC Performance At Ready State
@@ -96,5 +99,4 @@ Test Basic BMC Performance At Ready State
     Check BMC CPU Performance
     Check BMC Mem Performance
     Check BMC File System Performance
-
 
