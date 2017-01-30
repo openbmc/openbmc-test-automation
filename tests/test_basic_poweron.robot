@@ -1,9 +1,9 @@
 *** Settings ***
-Documentation       This module will test basic power on use cases for CI
+Documentation  Test power on for HW CI.
 
-Resource            ../lib/boot/boot_resource_master.robot
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
+Resource            ../lib/state_manager.robot
 
 Test Setup          Start SOL Console Logging
 Test Teardown       Test Exit Logs
@@ -12,17 +12,17 @@ Force Tags  chassisboot
 
 *** Test Cases ***
 
-power on test
-    [Documentation]    Power OFF and power ON
-    [Tags]  power_on_test
+Power On Test
+    [Documentation]  Power OFF and power ON.
+    [Tags]  Power_On_Test
 
-    BMC Power Off
-    BMC Power On
+    Initiate Host PowerOff
+    Initiate Host Boot
 
 *** Keywords ***
+
 Test Exit Logs
-    [Documentation]    Log FFDC if failed and collect SOL
-    ...                Logs for debugging purpose.
+    [Documentation]  Collect FFDC and SOL log.
     FFDC On Test Case Fail
     ${sol_log}=    Stop SOL Console Logging
     Log   ${sol_log}
