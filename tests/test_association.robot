@@ -5,7 +5,7 @@ Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
 Resource          ../lib/openbmc_ffdc.robot
-Resource          ../lib/boot/boot_resource_master.robot
+Resource          ../lib/state_manager.robot
 
 Library           Collections
 
@@ -226,15 +226,13 @@ Association Unchanged After Reboot
     ${pre_reboot_association_content} =
     ...   Read Attribute   ${association_uri}    endpoints
 
-    Initiate Power Off
-    Check Power Off States
+    Initiate Host PowerOff
 
     ${output}=      Execute Command    /sbin/reboot
     Check If BMC is Up   5 min    10 sec
 
-    @{states}=   Create List   BMC_READY   HOST_POWERED_OFF
     Wait Until Keyword Succeeds
-    ...    10 min   10 sec   Verify BMC State   ${states}
+    ...  10 min   10 sec  Is BMC Ready
 
     ${post_reboot_association_content} =
     ...   Read Attribute    ${association_uri}    endpoints
