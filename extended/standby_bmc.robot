@@ -19,7 +19,7 @@ ${HOST_SETTING}      /org/openbmc/settings/host0
 
 *** Test Cases ***
 
-Get to Stable State
+Get To Stable State
     [Documentation]    BMC cleanup drive to stable state
     ...                1. PDU powercycle if specified
     ...                1. Ping Test
@@ -30,7 +30,7 @@ Get to Stable State
     ...                6. Issue poweroff if not already in
     ...                   standby state
     ...                7. Update restore policy
-    [Tags]  Get to Stable State
+    [Tags]  Get_To_Stable_State
 
     Run Keyword And Ignore Error   Powercycle System Via PDU
 
