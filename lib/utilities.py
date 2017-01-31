@@ -4,6 +4,9 @@ from robot.libraries.BuiltIn import BuiltIn
 import imp
 import string
 import random
+import subprocess
+from robot.utils import DotDict
+
 
 def random_mac():
     r"""
@@ -119,3 +122,112 @@ def main():
 
 if __name__ == "__main__":
    main()
+
+
+###############################################################################
+def get_mtr_report(host=""):
+
+    r"""
+    Get an mtr report and return it as a dictionary of dictionaries.
+
+    The key for the top level dictionary will be the host DNS name.  The key
+    for the next level dictionary will be the field of a given row of the
+    report.
+
+    Example result:
+
+    report:
+      report[v325vrrp9-41-164-2.aus.stgla]:
+        report[v325vrrp9-41-164-2.aus.stgla][row_num]:  1
+        report[v325vrrp9-41-164-2.aus.stgla][host]:     v325vrrp9-41-164-2.aus.stgla
+        report[v325vrrp9-41-164-2.aus.stgla][loss]:     0.0
+        report[v325vrrp9-41-164-2.aus.stgla][snt]:      10
+        report[v325vrrp9-41-164-2.aus.stgla][last]:     0.2
+        report[v325vrrp9-41-164-2.aus.stgla][avg]:      3.5
+        report[v325vrrp9-41-164-2.aus.stgla][best]:     0.2
+        report[v325vrrp9-41-164-2.aus.stgla][wrst]:     32.5
+        report[v325vrrp9-41-164-2.aus.stgla][stdev]:    10.2
+      report[beye6.aus.stglabs.ibm.com]:
+        report[beye6.aus.stglabs.ibm.com][row_num]:     2
+        report[beye6.aus.stglabs.ibm.com][host]:        beye6.aus.stglabs.ibm.com
+        report[beye6.aus.stglabs.ibm.com][loss]:        0.0
+        report[beye6.aus.stglabs.ibm.com][snt]:         10
+        report[beye6.aus.stglabs.ibm.com][last]:        0.5
+        report[beye6.aus.stglabs.ibm.com][avg]:         0.5
+        report[beye6.aus.stglabs.ibm.com][best]:        0.5
+        report[beye6.aus.stglabs.ibm.com][wrst]:        0.5
+        report[beye6.aus.stglabs.ibm.com][stdev]:       0.0
+
+    Description of arguments:
+    host   The DNS name or IP address to be passed to the mtr command.
+    """
+
+    # Run the mtr command.  Exlude the header line.  Trim leading space from
+    # each line.  Change all multiple spaces delims to single space delims.
+    cmd_buf = "mtr --report " + host +\
+        " | tail -n +2 | sed -r -e 's/^[ ]+//g' -e 's/[ ]+/ /g'"
+    sub_proc = subprocess.Popen(cmd_buf, shell=True, stdout=subprocess.PIPE,
+                                stderr=subprocess.STDOUT)
+    out_buf, err_buf = sub_proc.communicate()
+    shell_rc = sub_proc.returncode
+
+    # Split the output by line.
+    rows = out_buf.rstrip('\n').split("\n")
+
+    # Initialize report dictionary.
+    report = DotDict()
+    for row in rows:
+        # Process each row of mtr output.
+        # Create a list of fields by splitting on space delimiter.
+        row_list = row.split(" ")
+        # Create dictionary for the row.
+        row = DotDict()
+        row['row_num'] = row_list[0].rstrip('.')
+        row['host'] = row_list[1]
+        row['loss'] = row_list[2].rstrip('%')
+        row['snt'] = row_list[3]
+        row['last'] = row_list[4]
+        row['avg'] = row_list[5]
+        row['best'] = row_list[6]
+        row['wrst'] = row_list[7]
+        row['stdev'] = row_list[8]
+        report[row['host']] = row
+
+    # Return the full report as dictionary of dictionaries.
+    return report
+
+###############################################################################
+
+
+###############################################################################
+def get_mtr_row(host=""):
+
+    r"""
+    Run an mtr report and get a specified row and return it as a dictionary.
+
+    Example result:
+
+    row:
+      row[row_num]:              2
+      row[host]:                 beye6.aus.stglabs.ibm.com
+      row[loss]:                 0.0
+      row[snt]:                  10
+      row[last]:                 0.5
+      row[avg]:                  0.5
+      row[best]:                 0.4
+      row[wrst]:                 0.7
+      row[stdev]:                0.1
+
+    Description of arguments:
+    host   The DNS name or IP address to be passed to the mtr command as
+           well as the indicating which row of the report to return.
+    """
+
+    report = get_mtr_report(host)
+
+    # The max length of host in output is 28 chars.
+    row = [value for key, value in report.items() if host[0:28] in key][0]
+
+    return row
+
+###############################################################################
