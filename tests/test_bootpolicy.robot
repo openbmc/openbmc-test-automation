@@ -8,9 +8,9 @@ Resource           ../lib/utils.robot
 Resource           ../lib/openbmc_ffdc.robot
 
 Suite Setup        Open Connection And Log In
-Suite Teardown     Close All Connections
 Test Setup         Initialize DBUS cmd   "boot_policy"
 Test Teardown      FFDC On Test Case Fail
+Suite Teardown     Restore Boot Settings
 
 *** Variables ***
 ${HOST_SETTINGS}    ${SETTINGS_URI}host0
@@ -148,5 +148,8 @@ Set Boot Device
     ${valueDict} =   create dictionary   data=${bootDevice}
     Write Attribute    ${HOST_SETTINGS}   boot_flags   data=${valueDict}
 
-
-
+Restore Boot Settings
+    [Documentation]  Restore default settings.
+    Set Boot Policy  ONETIME
+    Set Boot Device  default
+    Close All Connections
