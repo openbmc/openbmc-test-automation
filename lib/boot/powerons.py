@@ -7,17 +7,12 @@ functions for communicating with the Open BMC machine.
 
 import gen_robot_print as grp
 import state as state_mod
+import gen_robot_utils as gru
 
 from robot.libraries.BuiltIn import BuiltIn
 
-# We don't want global variable getting changed when an import is done
-# so we'll save it and restore it.
-quiet = int(BuiltIn().get_variable_value("${quiet}"))
-
 # We need utils.robot to get keyword "Initiate Power On".
-BuiltIn().import_resource("utils.robot")
-
-BuiltIn().set_global_variable("${quiet}", quiet)
+gru.my_import_resource("utils.robot")
 
 
 ###############################################################################
