@@ -1,17 +1,26 @@
 -e known_issue
-#https://github.com/openbmc/openbmc/issues/611
--e Association_with_virtual_sensor
+#https://github.com/openbmc/openbmc-test-automation/issues/123
+-e Execute_ipmi_BT_capabilities_command
 #https://github.com/openbmc/openbmc/issues/539
 -e Test_Wrong_Reservation_ID
 #https://github.com/openbmc/openbmc/issues/539
 -e Test_Correct_Reservation_ID
-#https://github.com/openbmc/openbmc/issues/604
--e Minimal_Main_Planar_Inventory
+#https://github.com/openbmc/openbmc-test-automation/issues/107
+-e Set_valid_Mac_address
+#https://github.com/openbmc/openbmc-test-automation/issues/107
+-e Revert_old_Mac_addres
+#https://github.com/openbmc/openbmc-test-automation/issues/137
+-e Set_invalid_Mac_address
+#https://github.com/openbmc/openbmc-test-automation/issues/22
+-e Validate_Heartbeat_LEDs_Test_Cases
+-e Validate_Identify_LEDs_Test_Cases
+-e Validate_Beep_LEDs_Test_Cases
+#https://github.com/openbmc/openbmc-test-automation/issues/90
+-e Verify_System_VPD_Properties
 #https://github.com/openbmc/openbmc/issues/93
 -e Minimal_Fan_Inventory
--e Minimal_System_Inventory
--e System_Present
--e Chassis_Present
+#https://github.com/openbmc/openbmc-test-automation/issues/139
+-e Empty_Fan_Test
 #https://github.com/openbmc/openbmc/issues/612
 -e Create_and_delete_user_without_group_name
 -e Create_and_delete_user_with_user_group_name
@@ -20,21 +29,6 @@
 -e Set_password_for_existing_user
 -e Set_password_with_empty_password_for_existing
 -e Create_existing_user
-#https://github.com/openbmc/openbmc/issues/700
--e DIMM0_fault
--e DIMM0_no_fault
--e Minimal_DIMM_Inventory
--e Verify_DIMM_VPD_Properties
-#https://github.com/openbmc/openbmc-test-automation/issues/207
--e Disable_PowerCap
-#https://github.com/openbmc/openbmc-test-automation/issues/123
--e Execute_ipmi_BT_capabilities_command
-#https://github.com/openbmc/openbmc-test-automation/issues/22
--e Validate_Heartbeat_LEDs_Test_Cases
--e Validate_Identify_LEDs_Test_Cases
-##Testcase NA for Palmetto system
--e io_board_Present
--e io_board_Fault
 #https://github.com/openbmc/openbmc-test-automation/issues/148
 -e Get_System_Time
 -e Set_Valid_System_Time
@@ -43,17 +37,21 @@
 -e IPMI_Chassis_Status_On
 -e IPMI_Chassis_Status_Off
 -e IPMI_Chassis_Restore_Power_Policy
-#https://github.com/openbmc/openbmc-test-automation/issues/90
--e Verify_System_VPD_Properties
+#https://github.com/openbmc/openbmc/issues/830
+-e Good_connection_for_testing
+-e get_directory_listing
+-e get_directory_listing_xyz
+-e get_names
+-e get_names_org
 #https://github.com/openbmc/openbmc/issues/928
 -e Set_Host_Time_With_Both_And_NTP
 #https://github.com/openbmc/openbmc/issues/901
 -e Set_BMC_Time_With_Split_And_Manual
 #https://github.com/openbmc/openbmc/issues/1142
 -e Check_BMC_Name_Property_Is_Set
+-e Check_BMC_Clocks_Name_Property_Is_Set
+-e Check_BMC_Clocks_Compatible_Property_Is_Set
 #openbmc/openbmc-test-automation/issues/75
 -e eSEL_Logging
-#openbmc/openbmc-test-automation/issues/396
--e NetworkManager
 # Led groups test cases are NA for Barreleye and Palmetto
 -e LED_Group
