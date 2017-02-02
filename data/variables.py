@@ -43,6 +43,10 @@ BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
 SOFTWARE_VERSION_URI = '/xyz/openbmc_project/software/'
 ACTIVE = 'xyz.openbmc_project.Software.Activation.Activations.Active'
 
+# Led URI variable
+LED_GROUPS_URI = '/xyz/openbmc_project/led/groups/'
+
+
 '''
   QEMU HTTPS variable:
 
