@@ -592,3 +592,11 @@ Get BMC Boot Time
     Should Be Empty  ${stderr}
     ${btime}=  Convert To Integer  ${output}
     [Return]  ${btime}
+
+
+Execute Command On BMC
+    [Documentation]  Execute given command on BMC and return output.
+    [Arguments]  ${command}
+    ${stdout}  ${stderr}=  Execute Command  ${command}  return_stderr=True
+    Should Be Empty  ${stderr}
+    [Return]  ${stdout}
