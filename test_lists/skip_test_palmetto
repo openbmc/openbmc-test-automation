@@ -31,9 +31,6 @@
 -e Disable_PowerCap
 #https://github.com/openbmc/openbmc-test-automation/issues/123
 -e Execute_ipmi_BT_capabilities_command
-#https://github.com/openbmc/openbmc-test-automation/issues/130
--e Test_OpenBMC_Services_Autorestart_Policy
--e Test_Restart_Policy_for_openbmc_service
 #https://github.com/openbmc/openbmc-test-automation/issues/22
 -e Validate_Heartbeat_LEDs_Test_Cases
 -e Validate_Identify_LEDs_Test_Cases
