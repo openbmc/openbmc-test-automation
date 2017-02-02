@@ -1,98 +1,76 @@
 *** Settings ***
-Documentation        This testsuites tests the autorestart policy for
-...                  OpenBMC project
+Documentation  Verify Auto Restart policy for set of mission critical
+...            services needed for functioning on BMC.
 
-Resource             ../lib/resource.txt
-Resource             ../lib/connection_client.robot
-Resource             ../lib/openbmc_ffdc.robot
+Resource         ../lib/resource.txt
+Resource         ../lib/connection_client.robot
+Resource         ../lib/openbmc_ffdc.robot
 
-Suite Setup          Open Connection And Log In
-Suite Teardown       Close All Connections
-Test Teardown        FFDC On Test Case Fail
+Suite Setup      Open Connection And Log In
+Suite Teardown   Close All Connections
+Test Teardown    FFDC On Test Case Fail
 
 *** Test Cases ***
-Test OpenBMC Services Autorestart Policy
-    [Documentation]     This testcases is for checking all the openbmc services
-    ...                 restart policy is set to active
-    ...                 Disabling this test as use case is not well define and
-    ...                 developement point of view this may keep changing. So
-    ...                 untill then, this remains commented piece of test.
-    [Tags]  Test_OpenBMC_Services_Autorestart_Policy
-    @{services}=    Create List     btbridged.service
-    ...                             host-ipmid.service
-    ...                             inarp.service
-    ...                             network.service
-    ...                             network-update-dns.service
-    ...                             obmc-console.service
-    ...                             obmc-hwmon.service
-    ...                             obmc-phosphor-chassisd.service
-    ...                             obmc-phosphor-event.service
-    ...                             obmc-phosphor-fand.service
-    ...                             obmc-phosphor-flashd.service
-    ...                             obmc-phosphor-policyd.service
-    ...                             obmc-phosphor-sensord.service
-    ...                             obmc-phosphor-sysd.service
-    ...                             obmc-phosphor-user.service
-    ...                             org.openbmc.buttons.Power.service
-    ...                             org.openbmc.buttons.reset.service
-    ...                             org.openbmc.control.BmcFlash.service
-    ...                             org.openbmc.control.Bmc.service
-    ...                             org.openbmc.control.Chassis.service
-    ...                             org.openbmc.control.Checkstop.service
-    ...                             org.openbmc.control.Fans.service
-    ...                             org.openbmc.control.Flash.service
-    ...                             org.openbmc.control.Host.service
-    ...                             org.openbmc.control.led.service
-    ...                             org.openbmc.control.Power.service
-    ...                             org.openbmc.examples.PythonService.service
-    ...                             org.openbmc.examples.SDBusService.service
-    ...                             org.openbmc.Inventory.service
-    ...                             org.openbmc.managers.Download.service
-    ...                             org.openbmc.managers.System.service
-    ...                             org.openbmc.ObjectMapper.service
-    ...                             org.openbmc.Sensors.service
-    ...                             org.openbmc.watchdog.Host.service
-    ...                             phosphor-rest.service
-    ...                             rest-dbus.service
-    ...                             settings.service
-    : FOR    ${SERVICE}    IN    @{services}
-    \    Check Service Autorestart    ${SERVICE}
+
+Verify OpenBMC Services Auto Restart Policy
+    [Documentation]  Kill active services and expect auto restart.
+    [Tags]  Verify_OpenBMC_Services_Auto_Restart_Policy
+    # The services listed bellow restart policy should be "always"
+    # Command output:
+    # systemctl -p Restart show xyz.openbmc_project.Logging.service | cat
+    # Restart=always
+    @{services}=
+    ...  Create List  xyz.openbmc_project.Logging.service
+    ...               xyz.openbmc_project.ObjectMapper.service
+    ...               xyz.openbmc_project.State.BMC.service
+    ...               xyz.openbmc_project.State.Chassis.service
+    ...               xyz.openbmc_project.State.Host.service
+    : FOR  ${SERVICE}  IN  @{services}
+    \    Check Service Autorestart  ${SERVICE}
 
 
-Test Restart Policy for openbmc service
-    [Documentation]     This testcase will kill the service and make sure it
-    ...                 does restart after that
-    [Tags]  Test_Restart_Policy_for_openbmc_service
+Kill Services And Expect Service Restart
+    [Documentation]  Kill the service and it must restart.
+    [Tags]  Kill_Services_And_Expect_Service_Restart
 
-    ${MainPID}=   Execute Restart Policy Command
-    ...   systemctl -p MainPID show phosphor-settings.service| cut -d = -f2
-    Should Not Be Equal     0   ${MainPID}
+    # systemctl -p MainPID show xyz.openbmc_project.Logging.service | cat
+    # MainPID=891
+    ${MainPID}=  Execute Command On BMC
+    ...  systemctl -p MainPID show xyz.openbmc_project.Logging.service | cut -d = -f2
+    Should Not Be Equal  ${0}  ${MainPID}  msg=Logging service not restarted.
 
-    Execute Restart Policy Command    kill -9 ${MainPID}
-    Sleep   30s   reason=Wait for service to restart properly
+    # systemctl -p ActiveState show xyz.openbmc_project.Logging.service | cat
+    # ActiveState=active
+    ${ActiveState}=  Execute Command On BMC
+    ...   systemctl -p ActiveState show xyz.openbmc_project.Logging.service| cut -d = -f2
+    Should Be Equal  active  ${ActiveState}  msg=Logging Service not in active state.
 
-    ${ActiveState}=   Execute Restart Policy Command
-    ...   systemctl -p ActiveState show phosphor-settings.service| cut -d = -f2
-    Should Be Equal     active   ${ActiveState}
+    Execute Command On BMC  kill -9 ${MainPID}
+    Sleep  10s  reason=Wait for service to restart.
 
-    ${MainPID}=   Execute Restart Policy Command
-    ...  systemctl -p MainPID show phosphor-settings.service| cut -d = -f2
-    Should Not Be Equal     0   ${MainPID}
+    ${MainPID}=  Execute Command On BMC
+    ...  systemctl -p MainPID show xyz.openbmc_project.Logging.service | cut -d = -f2
+    Should Not Be Equal  ${0}  ${MainPID}  msg=Logging service not restarted.
+
+    ${ActiveState}=  Execute Command On BMC
+    ...  systemctl -p ActiveState show xyz.openbmc_project.Logging.service| cut -d = -f2
+    Should Be Equal  active  ${ActiveState}  msg=Logging service not in active state.
 
 
 *** Keywords ***
 
 Check Service Autorestart
-    [Arguments]    ${servicename}
-    ${restart_policy}=
-    ...  Execute Restart Policy Command
+    [Documentation]  Check if given policy is "always".
+    [Arguments]  ${servicename}
+    ${restart_policy}=  Execute Command On BMC
     ...  systemctl -p Restart show ${servicename} | cut -d = -f2
-    Should Be Equal     always   ${restart_policy}
-    ...  msg=restart policy is not always for ${servicename}
+    Should Be Equal  always  ${restart_policy}
+    ...  msg=Incorrect policy for ${servicename}
 
 
-Execute Restart Policy Command
-    [Arguments]    ${command}
-    ${stdout}   ${stderr}=   Execute Command   ${command}   return_stderr=True
-    Should Be Empty    ${stderr}
-    [Return]    ${stdout}
+Execute Command On BMC
+    [Documentation]  Execute given command on BMC and return output.
+    [Arguments]  ${command}
+    ${stdout}  ${stderr}=  Execute Command  ${command}  return_stderr=True
+    Should Be Empty  ${stderr}
+    [Return]  ${stdout}
