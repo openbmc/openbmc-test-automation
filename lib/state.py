@@ -30,6 +30,7 @@ compared with the expected state.
 import gen_print as gp
 import gen_robot_print as grp
 import gen_valid as gv
+import gen_robot_utils as gru
 
 import commands
 from robot.libraries.BuiltIn import BuiltIn
@@ -38,33 +39,19 @@ from robot.utils import DotDict
 import re
 import os
 
-# We don't want global variable getting changed when an import is done
-# so we'll save it and restore it.
-quiet = int(BuiltIn().get_variable_value("${quiet}"))
 # We need utils.robot to get keywords like "Get Power State".
-BuiltIn().import_resource("utils.robot")
+gru.my_import_resource("utils.robot")
+gru.my_import_resource("state_manager.robot")
 
-###############################################################################
 # The BMC code is about to be changed as far as what states are defined and
 # what the state values can be.  I am creating a means of processing both the
 # old style state (i.e. OBMC_STATES_VERSION = 0) and the new style (i.e.
-# OBMC_STATES_VERSION >= 1.
+# OBMC_STATES_VERSION = 1).
 # The caller can set environment variable OBMC_STATES_VERSION to dictate
 # whether we're processing old or new style states.  If OBMC_STATES_VERSION is
 # not set it will default to 0.
-DEFAULT_OBMC_STATES_VERSION = 0
-try:
-    BuiltIn().import_resource("state_manager.robot")
-except RuntimeError:
-    pass
 
-try:
-    OBMC_STATES_VERSION = int(os.environ.get('OBMC_STATES_VERSION',
-                              DEFAULT_OBMC_STATES_VERSION))
-except ValueError:
-    OBMC_STATES_VERSION = DEFAULT_OBMC_STATES_VERSION
-BuiltIn().set_global_variable("${quiet}", quiet)
-quiet = int(BuiltIn().get_variable_value("${quiet}"))
+OBMC_STATES_VERSION = int(os.environ.get('OBMC_STATES_VERSION', 0))
 
 if OBMC_STATES_VERSION == 0:
     default_state = DotDict([('power', '1'),
