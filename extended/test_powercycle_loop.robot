@@ -6,8 +6,8 @@ Resource        ../lib/rest_client.robot
 Resource        ../lib/pdu/pdu.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/openbmc_ffdc.robot
+Resource        ../lib/state_manager.robot
 
-Test Setup      Validate Parameters
 Test Teardown   Test Exit Logs
 
 *** Variables ***
@@ -15,26 +15,43 @@ ${LOOP_COUNT}    ${50}
 
 *** Test Cases ***
 
-Test Power Cycle
-    [Documentation]   By default run test for 50 loops, else user
-    ...               input iteration. Fails immediately if any
-    ...               of the execution rounds fail and checks if
-    ...               BMC is still pinging and FFDC is collected.
+Run Multiple Power Cycle
+    [Documentation]  Execute multiple power cycles.
+    [Setup]  Validate Parameters
+    [Tags]  Run_Multiple_Power_Cycle
 
-    Repeat Keyword    ${LOOP_COUNT} times   BMC Power cycle
+    # By default run test for 50 loops, else user input iteration.
+    # Fails immediately if any of the execution rounds fail and
+    # check if BMC is still pinging and FFDC is collected.
+    Repeat Keyword  ${LOOP_COUNT} times  BMC Power Cycle Via PDU
+
+
+Run Multiple Reboot
+    [Documentation]  Execute multiple reboots.
+    [Tags]  Run_Multiple_Reboot
+
+    # By default run test for 50 loops, else user input iteration.
+    # Fails immediately if any of the execution rounds fail and
+    # check if BMC is still pinging and FFDC is collected.
+    Repeat Keyword  ${LOOP_COUNT} times  BMC Reboot Cycle
 
 
 *** Keywords ***
 
-BMC Power cycle
-    [Documentation]    Power cycle and wait for BMC to come
-    ...                online to BMC_READY state.
-    Log   "Doing power cycle"
+Power Cycle System Via PDU
+    [Documentation]  Power cycle system and wait for BMC to reach Ready state.
+    Log  "Doing power cycle"
     PDU Power Cycle
-    Check If BMC is Up   5 min    10 sec
+    Check If BMC Is Up  5 min  10 sec
 
-    Wait Until Keyword Succeeds
-    ...    10 min   10 sec   Verify BMC State   BMC_READY
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+
+BMC Reboot Cycle
+    [Documentation]  Reboot BMC and wait for ready state.
+    Log  "Doing Reboot cycle"
+    Initiate BMC Reboot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
 
 
 Test Exit Logs
