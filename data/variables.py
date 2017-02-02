@@ -35,6 +35,9 @@ BMC_STATE_URI = '/xyz/openbmc_project/state/BMC0/'
 HOST_STATE_URI = '/xyz/openbmc_project/state/host0/'
 CHASSIS_STATE_URI = '/xyz/openbmc_project/state/chassis0/'
 
+# Led URI variable
+LED_GROUPS_URI = '/xyz/openbmc_project/ledmanager/groups/'
+
 '''
   QEMU HTTPS variable:
 

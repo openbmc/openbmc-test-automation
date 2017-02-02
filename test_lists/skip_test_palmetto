@@ -34,9 +34,6 @@
 #https://github.com/openbmc/openbmc-test-automation/issues/130
 -e Test_OpenBMC_Services_Autorestart_Policy
 -e Test_Restart_Policy_for_openbmc_service
-#https://github.com/openbmc/openbmc-test-automation/issues/22
--e Validate_Heartbeat_LEDs_Test_Cases
--e Validate_Identify_LEDs_Test_Cases
 ##Testcase NA for Palmetto system
 -e io_board_Present
 -e io_board_Fault

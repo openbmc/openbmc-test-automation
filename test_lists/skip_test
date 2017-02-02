@@ -11,10 +11,6 @@
 -e Revert_old_Mac_addres
 #https://github.com/openbmc/openbmc-test-automation/issues/137
 -e Set_invalid_Mac_address
-#https://github.com/openbmc/openbmc-test-automation/issues/22
--e Validate_Heartbeat_LEDs_Test_Cases
--e Validate_Identify_LEDs_Test_Cases
--e Validate_Beep_LEDs_Test_Cases
 #https://github.com/openbmc/openbmc-test-automation/issues/130
 -e Test_OpenBMC_Services_Autorestart_Policy
 -e Test_Restart_Policy_for_openbmc_service
