@@ -10,8 +10,8 @@ Library                OperatingSystem
 Library                DateTime
 
 Suite Setup            Open Connection And Log In
-Suite Teardown         Close All Connections
-Test Teardown          Post Test Execution
+#Suite Teardown         Close All Connections
+#Test Teardown          Post Test Execution
 
 *** Variables ***
 ${SYSTEM_TIME_INVALID}      01/01/1969 00:00:00
@@ -32,7 +32,8 @@ Get System Time
     ...  exclude_millis=yes
     ${bmcdate}=  Get BMC Time Using IPMI
     ${diff}=  Subtract Date From Date  ${bmcdate}  ${ipmidate}
-    Should Be True  ${diff} < ${ALLOWED_TIME_DIFF}
+    ${result}=  Convert To Number  ${diff} 
+    Should Be True  ${result} < ${ALLOWED_TIME_DIFF}
     ...  Open BMC time does not match with IPMI sel time
 
 Set Valid System Time
@@ -45,7 +46,8 @@ Set Valid System Time
     ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=yes
     ${bmcdate}=  Get BMC Time Using IPMI
     ${diff}=  Subtract Date From Date  ${bmcdate}  ${setdate}
-    Should Be True  ${diff} < ${ALLOWED_TIME_DIFF}
+    ${result}=  Convert To Number  ${diff} 
+    Should Be True  ${result} < ${ALLOWED_TIME_DIFF}
     ...  Open BMC time does not match with set time
 
 Set Invalid System Time
