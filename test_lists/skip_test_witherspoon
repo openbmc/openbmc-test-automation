@@ -15,13 +15,10 @@
 -e Validate_Heartbeat_LEDs_Test_Cases
 -e Validate_Identify_LEDs_Test_Cases
 -e Validate_Beep_LEDs_Test_Cases
-#https://github.com/openbmc/openbmc-test-automation/issues/130
--e Test_OpenBMC_Services_Autorestart_Policy
--e Test_Restart_Policy_for_openbmc_service
 #https://github.com/openbmc/openbmc-test-automation/issues/90
 -e Verify_System_VPD_Properties
 #https://github.com/openbmc/openbmc/issues/93
--e minimal_fan_inventory
+-e Minimal_Fan_Inventory
 #https://github.com/openbmc/openbmc-test-automation/issues/139
 -e Empty_Fan_Test
 #https://github.com/openbmc/openbmc/issues/612
@@ -42,7 +39,6 @@
 -e IPMI_Chassis_Restore_Power_Policy
 #Pre bringup list
 -e Repeated_Testing
--e power_on_test
 -e inventory
 -e powercapping
 -e io_board_Present
@@ -52,11 +48,15 @@
 -e get_directory_listing
 -e get_names
 -e get_names_org
--e bmcreboot
--e chassisboot
 -e Event_Logging
 -e Association
 #https://github.com/openbmc/openbmc/issues/928
 -e Set_Host_Time_With_Both_And_NTP
 #https://github.com/openbmc/openbmc/issues/901
 -e Set_BMC_Time_With_Split_And_Manual
+#https://github.com/openbmc/openbmc/issues/1142
+-e Check_BMC_Name_Property_Is_Set
+-e Check_BMC_Clocks_Name_Property_Is_Set
+-e Check_BMC_Clocks_Compatible_Property_Is_Set
+#openbmc/openbmc-test-automation/issues/75
+-e eSEL_Logging
