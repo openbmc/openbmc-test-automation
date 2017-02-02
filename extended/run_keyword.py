@@ -6,6 +6,8 @@ This module is the python counterpart to run_keyword.robot.
 
 import gen_robot_print as grp
 import gen_robot_valid as grv
+import gen_robot_utils as gru
+
 from robot.libraries.BuiltIn import BuiltIn
 import re
 
@@ -54,8 +56,9 @@ def main_py():
             grp.rdprint_issuing("import_library(\"" + lib_file_path + "\")")
             BuiltIn().import_library(lib_file_path)
         else:
-            grp.rdprint_issuing("import_resource(\"" + lib_file_path + "\")")
-            BuiltIn().import_resource(lib_file_path)
+            grp.rdprint_issuing("my_import_resource(\"" + lib_file_path +
+                                "\")")
+            gru.my_import_resource(lib_file_path)
         BuiltIn().set_global_variable("${quiet}", quiet)
 
     # The user can pass multiple keyword strings by separating them with " ; ".
