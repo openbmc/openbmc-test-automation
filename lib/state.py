@@ -9,9 +9,10 @@ in this module define state as an ordered dictionary.  Here is an example of
 some test output showing machine state:
 
 default_state:
-  default_state[power]:                           1
-  default_state[bmc]:                             HOST_BOOTED
+  default_state[chassis]:                         On
+  default_state[bmc]:                             Ready
   default_state[boot_progress]:                   FW Progress, Starting OS
+  default_state[host]:                            Running
   default_state[os_ping]:                         1
   default_state[os_login]:                        1
   default_state[os_run_cmd]:                      1
@@ -62,9 +63,9 @@ if OBMC_STATES_VERSION == 0:
                              ('os_run_cmd', '1')])
 else:
     default_state = DotDict([('chassis', 'On'),
-                             ('bmc', 'HOST_BOOTED'),
+                             ('bmc', 'Ready'),
                              ('boot_progress', 'FW Progress, Starting OS'),
-                             ('host', 'Ready'),
+                             ('host', 'Running'),
                              ('os_ping', '1'),
                              ('os_login', '1'),
                              ('os_run_cmd', '1')])
@@ -366,9 +367,11 @@ def get_state(openbmc_host="",
                        "bmc=^HOST_BOOTED$",
                        "boot_progress=^FW Progress, Starting OS$"]
         else:
+            # TODO: Add back boot_progress when ipmi is enabled on
+            # Witherspoon.
             cmd_buf = ["Create Dictionary", "chassis=^On$",
-                       "bmc=^HOST_BOOTED$",
-                       "boot_progress=^FW Progress, Starting OS$"]
+                       "bmc=^Ready$"]
+            #           "boot_progress=^FW Progress, Starting OS$"]
         grp.rdpissuing_keyword(cmd_buf)
         os_up_match = BuiltIn().run_keyword(*cmd_buf)
         os_up = compare_states(state, os_up_match)

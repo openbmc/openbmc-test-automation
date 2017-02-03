@@ -44,8 +44,10 @@ def bmc_power_off():
         cmd_buf = ["Create Dictionary", "power=${0}",
                    "bmc=HOST_POWERED_OFF", "boot_progress=Off"]
     else:
+        # TODO: Add back boot_progress when ipmi is enabled on Witherspoon.
         cmd_buf = ["Create Dictionary", "chassis=Off",
-                   "bmc=HOST_POWERED_OFF", "boot_progress=Off",
+                   "bmc=Ready",
+                   #  "boot_progress=Off",
                    "host=Off"]
     grp.rdpissuing_keyword(cmd_buf)
     final_state = BuiltIn().run_keyword(*cmd_buf)
