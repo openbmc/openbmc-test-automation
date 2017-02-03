@@ -8,7 +8,7 @@ Resource           ../lib/openbmc_ffdc.robot
 
 Suite Setup        Open Connection And Log In
 Suite Teardown     Close All Connections
-Test Teardown      Log FFDC
+Test Teardown      FFDC On Test Case Fail
 
 *** Variables ***
 &{NIL}  data=@{EMPTY}
