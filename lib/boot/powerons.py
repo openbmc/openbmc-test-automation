@@ -50,9 +50,10 @@ def bmc_power_on():
                    "bmc=HOST_BOOTED",
                    "boot_progress=FW Progress, Starting OS"]
     else:
+        # To-do: Add back boot_progress when ipmi is enabled on Witherspoon.
         cmd_buf = ["Create Dictionary", "chassis=On",
-                   "bmc=HOST_BOOTED",
-                   "boot_progress=FW Progress, Starting OS",
+                   "bmc=Ready",
+                   #  "boot_progress=FW Progress, Starting OS",
                    "host=Running"]
     grp.rdpissuing_keyword(cmd_buf)
     final_state = BuiltIn().run_keyword(*cmd_buf)
