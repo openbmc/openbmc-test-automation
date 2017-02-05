@@ -228,8 +228,7 @@ Association Unchanged After Reboot
 
     Initiate Host PowerOff
 
-    ${output}=      Execute Command    /sbin/reboot
-    Check If BMC is Up   5 min    10 sec
+    Initiate BMC Reboot
 
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
 
