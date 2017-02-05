@@ -7,6 +7,7 @@ Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/boot/boot_resource_master.robot
+Resource          ../lib/state_manager.robot
 
 Library           Collections
 
@@ -190,7 +191,7 @@ Test events after openbmc reboot
     Initiate Power Off
     Check Power Off States
 
-    ${output}=      Execute Command    /sbin/reboot
+    Initiate BMC Reboot
     Check If BMC is Up   5 min    10 sec
 
     @{states}=   Create List   BMC_READY   HOST_POWERED_OFF
