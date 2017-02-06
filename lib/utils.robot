@@ -569,6 +569,10 @@ Set BMC Power Policy
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}
 
+Get BMC Power Policy
+    [Documentation]  Get the BMC power policy.
+    ${currentPolicy}=  Read Attribute  ${HOST_SETTING}  power_policy
+    [Return]  ${currentPolicy}
 
 Set BMC Reset Reference Time
     [Documentation]  Set current boot time as a reference and increment
