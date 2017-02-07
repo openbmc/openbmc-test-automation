@@ -15,6 +15,8 @@ from datetime import datetime
 import robot.errors
 from robot.api import ExecutionResult
 from robot.result.visitor import ResultVisitor
+from xml.etree import ElementTree
+import re
 
 
 def parse_output_xml(i_source, i_dest):
@@ -45,13 +47,22 @@ def parse_output_xml(i_source, i_dest):
 
     # Write the result statistics attributes to CSV file
     l_csvlist = []
+
+    # Default Test data 
     l_subsys = 'OPENBMC'
     l_test_type = 'FTC'
     l_pse_rel = 'OBMC910'
+    l_env = 'HW'
+    l_proc = 'P9'
+    l_platform_type = 'witherspoon'
+
+    # BMC version data from XML meta data
+    l_driver = get_bmc_version(i_source)
 
     # Default header
     l_header = ['test_start', 'test_end', 'subsys', 'test_type',
-                'test_result', 'test_name', 'pse_rel']
+                'test_result', 'test_name', 'pse_rel', 'driver',
+                'env', 'proc', 'platform_type']
 
     l_csvlist.append(l_header)
 
@@ -73,9 +84,12 @@ def parse_output_xml(i_source, i_dest):
             l_test_result = 1
 
         # Data Sequence: test_start,test_end,subsys,test_type,
-        #                test_result,test_name,pse_rel
-        l_data = [testcase.starttime, testcase.endtime, l_subsys,
-                  l_test_type, l_test_result, l_test_name, l_pse_rel]
+        #                test_result,test_name,pse_rel,driver
+        # Format datetime from robot output.xml to "%Y-%m-%d-%H-%M-%S"
+        l_stime = format_datetime(testcase.starttime)
+        l_etime = format_datetime(testcase.endtime)
+        l_data = [l_stime, l_etime, l_subsys, l_test_type, l_test_result,
+                  l_test_name, l_pse_rel, l_driver, l_env, l_proc, l_platform_type]
         l_csvlist.append(l_data)
 
     # Open the file and write to the CSV file
@@ -83,6 +97,34 @@ def parse_output_xml(i_source, i_dest):
     l_writer = csv.writer(l_file, lineterminator='\n')
     l_writer.writerows(l_csvlist)
     l_file.close()
+
+
+def format_datetime(i_datetime):
+    # 20170206 05:05:19.342
+    l_str = datetime.strptime(i_datetime, "%Y%m%d %H:%M:%S.%f")
+    # 2017-02-06-05-05-19
+    l_str = l_str.strftime("%Y-%m-%d-%H-%M-%S")
+    return str(l_str)
+
+
+def get_bmc_version(i_source):
+    bmc_version = ""
+    with open(i_source, 'rt') as output:
+        tree = ElementTree.parse(output)
+
+    for node in tree.iter('msg'):
+        # /etc/os-release output is logged in the XML as msg
+        # ID="openbmc-phosphor"
+        # NAME="Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro)"
+        # VERSION="v1.99.1-96"
+        # VERSION_ID="v1.99.1-96-g2a46570-dirty"
+        if 'VERSION_ID' in node.text and 'openbmc-phosphor' in node.text:
+            # Get BMC version v1.99.1-96-g2a46570-dirty
+            items = re.findall("^.*VERSION_ID.*$", node.text, re.MULTILINE)
+            bmc_version = items[0].strip("VERSION_ID=")[1:-1]
+            break
+    print "BMC Version:",bmc_version
+    return str(bmc_version).strip("-dirty")
 
 
 def usage():
