@@ -566,7 +566,10 @@ def sprint_varx(var_name,
                                     contains a valid hex number.  For string
                                     var_values, this will be interpreted as
                                     show_blanks which means that blank values
-                                    will be printed as "<blank>".
+                                    will be printed as "<blank>".  For dict
+                                    var_values, this will be interpreted as
+                                    terse format where keys are not repeated
+                                    in the output.
     loc_col1_indent                 The number of spaces to indent the output.
     loc_col1_width                  The width of the output column containing
                                     the variable name.  The default value of
@@ -632,9 +635,14 @@ def sprint_varx(var_name,
                 ix += 1
                 if ix == length:
                     loc_trailing_char = trailing_char
-                buffer += sprint_varx(var_name + "[" + key + "]", value, hex,
-                                      loc_col1_indent, loc_col1_width,
-                                      loc_trailing_char)
+                if hex:
+                    buffer += sprint_varx(key, value,
+                                          hex, loc_col1_indent, loc_col1_width,
+                                          loc_trailing_char)
+                else:
+                    buffer += sprint_varx(var_name + "[" + key + "]", value,
+                                          hex, loc_col1_indent, loc_col1_width,
+                                          loc_trailing_char)
         elif type(var_value) in (list, tuple, set):
             for key, value in enumerate(var_value):
                 ix += 1
