@@ -14,6 +14,7 @@ Documentation     This module will take whatever action is necessary
 Resource          ../lib/boot/boot_resource_master.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/pdu/pdu.robot
+Resource          ../lib/state_manager.robot
 
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0
@@ -37,16 +38,15 @@ Get To Stable State
     Wait For Host To Ping  ${OPENBMC_HOST}  1 mins
     Open Connection And Log In  host=${OPENBMC_HOST}
 
-    ${l_rest}=   Run Keyword And Return Status
-    ...    Initialize OpenBMC
-    Run Keyword If  '${l_rest}' == '${False}'
-    ...    Reboot and Wait for BMC Online
+    ${rest_status}=  Run Keyword And Return Status  Initialize OpenBMC
+    Run Keyword If  '${rest_status}' == '${False}'
+    ...  Reboot and Wait for BMC Online
 
-    ${l_ready}=   Run Keyword And Return Status
-    ...    Get BMC State and Expect Standby
+    ${ready_status}=  Run Keyword And Return Status  Is BMC Ready
+    Run Keyword If  '${ready_status}' == '${False}'  Put BMC State  Ready
 
-    Run Keyword If  '${l_ready}' == '${False}'
-    ...    Initiate Power Off
+    ${host_off_status}=  Run Keyword And Return Status  Is Host Off
+    Run Keyword If  '${host_off_status}' == '${False}'  Initiate Host PowerOff
 
     Prune Journal Log
 
