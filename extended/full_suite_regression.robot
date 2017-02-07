@@ -3,8 +3,13 @@ Documentation      This suite is for testing Open BMC full test suite.
 ...                Maintains log.html output.xml  for each iteration and
 ...                generate combined report
 
+Resource  ../lib/utils.robot
+Resource  ../lib/ipmi_client.robot
 Library  OperatingSystem
 Library  DateTime
+
+Suite Setup         Open Connection And Log In
+Suite Teardown      Close All Connections
 
 *** Variables ***
 ${ITERATION}          10
@@ -12,6 +17,11 @@ ${RESULT_DIR_NAME}    logsdir
 ${LOOP_TEST_COMMAND}  tests
 
 *** Test Cases ***
+Validate the BMC Model
+   [Documentation]  Check entered OPENBMC_SYSTEMMODEL is correct.
+   ${output}=  Get BMC System Model
+   Should Not Be Empty  ${output}
+
 Run Entire Test Suite Multiple Time
    [Documentation]  Multiple iterations of Full Suite
 
