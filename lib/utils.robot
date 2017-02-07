@@ -30,8 +30,27 @@ ${bmc_file_system_usage_cmd}=
 
 ${BOOT_TIME}     ${0}
 ${BOOT_COUNT}    ${0}
+${devicetree_base}  /sys/firmware/devicetree/base/model | cut -f 1 -d ' '
 
 *** Keywords ***
+
+Get BMC System Model
+    [Documentation]  Get the BMC model from the device tree.
+
+    ${tmp_bmc_model}  ${stderr}=  Execute Command  cat ${devicetree_base}
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
+    Should Not Be Empty  ${tmp_bmc_model}
+    [Return]  ${tmp_bmc_model}
+
+Verify BMC System Model
+    [Arguments]  ${bmc_model}
+    [Documentation]  Verify the BMC model with ${OPENBMC_MODEL}
+
+    ${tmp_bmc_model}=  Fetch From Right  ${OPENBMC_MODEL}  /
+    ${tmp_bmc_model}=  Fetch From Left  ${tmp_bmc_model}  .
+    Should Contain  ${bmc_model}  ${tmp_bmc_model}  ignore_case=True
+    [Return]  ${tmp_bmc_model}
 
 Wait For Host To Ping
     [Arguments]  ${host}  ${timeout}=${OPENBMC_REBOOT_TIMEOUT}min
