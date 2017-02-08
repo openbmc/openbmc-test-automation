@@ -596,15 +596,15 @@ Get System Power Policy
 
 Set BMC Reset Reference Time
     [Documentation]  Set current boot time as a reference and increment
-    ...               boot count.
+    ...              boot count.
 
     ${cur_btime}=  Get BMC Boot Time
-    Run Keyword If  ${cur_btime} > ${BOOT_TIME}
-    ...  Run Keywords
+    Run Keyword If  ${BOOT_TIME} == ${0} and ${BOOT_COUNT} == ${0}
     ...  Set Global Variable  ${BOOT_TIME}  ${cur_btime}
+    ...  ELSE IF  ${cur_btime} > ${BOOT_TIME}
+    ...  Run Keywords  Set Global Variable  ${BOOT_TIME}  ${cur_btime}
     ...  AND
     ...  Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
-
 
 Get BMC Boot Time
     [Documentation]  Get boot time from /proc/stat.

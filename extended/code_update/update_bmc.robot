@@ -26,10 +26,14 @@ Documentation     Trigger code update to a target BMC.
 Resource          code_update_utils.robot
 Resource          ../../lib/boot/boot_resource_master.robot
 Resource          ../../lib/state_manager.robot
+Resource          ../../lib/utils.robot
 
 *** Variables ***
 
-${FILE_PATH}      ${EMPTY}
+${FILE_PATH}       ${EMPTY}
+
+# There are two reboots issued by code update.
+${MAX_BOOT_COUNT}  ${2}
 
 *** Test Cases ***
 
@@ -54,6 +58,7 @@ Initiate Code Update BMC
     Run Keyword if  '${status}' == '${False}'
     ...     Pass Execution   Same Driver version installed
 
+    Check Boot Count And Time
     Prune Journal Log
     Power Off Request
     Run Keyword And Ignore Error
@@ -63,6 +68,7 @@ Initiate Code Update BMC
     # Wait time is increased temporary to 10 mins due
     # to openbmc/openbmc#673
     Check If BMC is Up    10 min   10 sec
+    Check Boot Count And Time
 
     Wait For BMC Ready
 
@@ -83,6 +89,7 @@ Initiate Code Update BMC
     ...    Trigger Warm Reset via Reboot
 
     Check If BMC is Up    30 min   10 sec
+    Check Boot Count And Time
     Sleep  1 min
     Validate BMC Version
 
@@ -90,6 +97,9 @@ Initiate Code Update BMC
     # interface while checking for BMC ready state.
     Set State Interface Version
     Wait For BMC Ready
+    Check Boot Count And Time
+    Run Keyword If  ${BOOT_COUNT} == ${1}
+    ...  Log  Boot Time not Updated by Kernel!!!  level=WARN
 
 
 Test Basic BMC Performance At Ready State
@@ -99,4 +109,14 @@ Test Basic BMC Performance At Ready State
     Check BMC CPU Performance
     Check BMC Mem Performance
     Check BMC File System Performance
+
+*** Keywords ***
+
+Check Boot Count And Time
+    [Documentation]  Check for unexpected reboots.
+    Set BMC Reset Reference Time
+    Log To Console  \n Boot Count: ${BOOT_COUNT}
+    Log To Console  \n Boot Time: ${BOOT_TIME}
+    Run Keyword If  ${BOOT_COUNT} > ${MAX_BOOT_COUNT}
+    ...  Log  Phantom Reboot!!! Unexpected reboot detected  level=WARN
 
