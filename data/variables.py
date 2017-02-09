@@ -39,6 +39,10 @@ CHASSIS_STATE_URI = '/xyz/openbmc_project/state/chassis0/'
 BMC_LOGGING_URI = '/xyz/openbmc_project/logging/'
 BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
 
+# Software manager version
+SOFTWARE_VERSION_URI = '/xyz/openbmc_project/software/'
+ACTIVE = 'xyz.openbmc_project.Software.Activation.Activations.Active'
+
 '''
   QEMU HTTPS variable:
 
