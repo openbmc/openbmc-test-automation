@@ -1,0 +1,79 @@
+#!/usr/bin/env python
+r"""
+Generate an inventory variable file containing a list of properties
+fields from the YAML phosphor-dbus-interfaces repository.
+"""
+import sys
+import os
+import yaml
+import json
+
+lib_path = sys.path[0] + "/../lib"
+sys.path.insert(0, lib_path)
+from gen_print import *
+
+# This list will be longer when more development codes are available.
+inventory_items = ['FRU']
+print_var(inventory_items)
+fru_inventory_file_path = 'inventory.py'
+print_var(fru_inventory_file_path)
+
+# Properties master list
+yaml_master_list = []
+
+# Clone the phosphor-dbus-interfaces repository
+cmd_buf = 'git clone https://github.com/openbmc/phosphor-dbus-interfaces'
+os.system(cmd_buf)
+
+repo_subdir_path = '/phosphor-dbus-interfaces/xyz/openbmc_project/Inventory/'
+base_dir_path = os.getcwd() + repo_subdir_path
+
+# yaml paths for FRU
+item_yaml_file_path = base_dir_path + 'Item.interface.yaml'
+asset_yaml_file_path = base_dir_path + 'Decorator/Asset.interface.yaml'
+revision_yaml_file_path = base_dir_path + 'Decorator/Revision.interface.yaml'
+
+# FRU list
+yaml_fru_list = []
+yaml_fru_list.append(item_yaml_file_path)
+yaml_fru_list.append(asset_yaml_file_path)
+yaml_fru_list.append(revision_yaml_file_path)
+
+# Append to master list
+yaml_master_list.append(yaml_fru_list)
+
+# Populate Inventory data
+inventory_dict = {}
+
+for master_index in range(0, len(yaml_master_list)):
+    inventory_dict[str(inventory_items[master_index])] = []
+    for yaml_file in yaml_master_list[master_index]:
+
+        # Get the yaml dictionary data
+        print_timen("Loading " + yaml_file)
+        f = open(yaml_file)
+        yaml_data = yaml.load(f)
+        f.close()
+        for item in range(0, len(yaml_data['properties'])):
+            tmp_data = yaml_data['properties'][item]['name']
+            inventory_dict[str(inventory_items[master_index])].append(tmp_data)
+
+# Pretty print json formatter
+data = json.dumps(inventory_dict, indent=4, sort_keys=True, default=str)
+
+# Check if there is mismatch in data vs expect list
+if len(inventory_dict) != len(inventory_items):
+    print_error("Generated List doesn't match Master Inventory List.\n")
+    print data
+    print_var(inventory_items)
+    sys.exit()
+
+# Write dictionary data to inventory file
+print "\nGenerated Inventory item json format\n"
+print data
+out = open(fru_inventory_file_path, 'w')
+out.write('inventory_dict = ')
+out.write(data)
+
+out.close()
+print "\nGenerated Inventory File: ", fru_inventory_file_path
