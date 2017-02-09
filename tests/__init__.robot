@@ -4,6 +4,7 @@ Documentation  Set metadata for test suite.
 Library          SSHLibrary
 Resource         ../lib/connection_client.robot
 Resource         ../lib/rest_client.robot
+Resource         ../lib/utils.robot
 
 Suite Setup      System Driver Data
 
@@ -15,13 +16,14 @@ ${DRIVER_CMD}    cat /etc/os-release | grep ^VERSION_ID=
 
 System Driver Data
     [Documentation]  System driver information.
+    Open Connection And Log In
     Run Keyword And Ignore Error  Get BMC Driver Details
     Run Keyword And Ignore Error  Get PNOR Driver Details
+    Run Keyword And Ignore Error  Log BMC Model
 
 Get BMC Driver Details
     [Documentation]   Get BMC driver details and log.
 
-    Open Connection And Log In
     ${output}  ${stderr}=  Execute Command  ${DRIVER_CMD}
     ...  return_stderr=True
     Should Be Empty  ${stderr}
@@ -45,4 +47,10 @@ Get PNOR Driver Details
     Log  ${jsondata["data"]["Custom Field 6"]}
     Log  ${jsondata["data"]["Custom Field 7"]}
     Log  ${jsondata["data"]["Custom Field 8"]}
+
+
+Log BMC Model
+    [Documentation]  Fetch BMC Model name from system and log.
+    ${bmc_model}=  Get BMC System Model
+    Log  BMC Model=${bmc_model}
 
