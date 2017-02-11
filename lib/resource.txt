@@ -37,6 +37,7 @@ ${OS_HOST}          ${EMPTY}
 ${OS_USERNAME}      ${EMPTY}
 ${OS_PASSWORD}      ${EMPTY}
 ${OS_WAIT_TIMEOUT}  ${15*60}
+${CORE_VALUES_FROM_OS}  cat /sys/firmware/opal/msglog|grep -i chip|grep -i core
 
 *** Keywords ***
 Get Inventory Schema
