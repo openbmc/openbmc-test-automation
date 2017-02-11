@@ -35,6 +35,9 @@ BMC_STATE_URI = '/xyz/openbmc_project/state/BMC0/'
 HOST_STATE_URI = '/xyz/openbmc_project/state/host0/'
 CHASSIS_STATE_URI = '/xyz/openbmc_project/state/chassis0/'
 
+#HOST OS related variables.
+CORE_VALUES_FROM_OS = 'cat /sys/firmware/opal/msglog|grep -i chip|grep -i core'
+
 '''
   QEMU HTTPS variable:
 
