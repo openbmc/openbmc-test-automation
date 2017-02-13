@@ -33,6 +33,7 @@ Get System Time
     ...  exclude_millis=yes
     ${bmcdate}=  Get BMC Time Using IPMI
     ${diff}=  Subtract Date From Date  ${bmcdate}  ${ipmidate}
+    ${diff}=  Convert To Number  ${diff}
     Should Be True  ${diff} < ${ALLOWED_TIME_DIFF}
     ...  Open BMC time does not match with IPMI sel time
 
@@ -46,6 +47,7 @@ Set Valid System Time
     ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=yes
     ${bmcdate}=  Get BMC Time Using IPMI
     ${diff}=  Subtract Date From Date  ${bmcdate}  ${setdate}
+    ${diff}=  Convert To Number  ${diff}
     Should Be True  ${diff} < ${ALLOWED_TIME_DIFF}
     ...  Open BMC time does not match with set time
 
@@ -345,6 +347,8 @@ Set Time Using REST
     ...  '${operation}' == 'Set BMC Time'  ${bmc_date_list}
     ...  '${operation}' == 'Set Host Time'  ${host_date_list}
 
+    ${start_time}=  Get Current Date
+
     ${old_bmc_time}=  Get BMC Time Using REST
     ${old_host_time}=  Get HOST Time Using REST
 
@@ -356,6 +360,14 @@ Set Time Using REST
 
     ${new_bmc_time}=  Get BMC Time Using REST
     ${new_host_time}=  Get HOST Time Using REST
+
+    ${end_time}=  Get Current Date
+    ${diff_due_to_delay}=  Subtract Date From Date  ${start_time}  ${end_time}
+    ${diff_due_to_delay}  Evaluate  abs(${diff_due_to_delay})
+
+    ${ALLOWED_TIME_DIFF}=  Add Time To Time  ${diff_due_to_delay}  ${ALLOWED_TIME_DIFF}
+    ${ALLOWED_TIME_DIFF}=  Evaluate  abs(${ALLOWED_TIME_DIFF})
+    ${ALLOWED_TIME_DIFF}=  Convert To Number  ${ALLOWED_TIME_DIFF} 
 
     ${bmc_diff_set_new}=
     ...  Subtract Date From Date  ${setdate}  ${new_bmc_time}
