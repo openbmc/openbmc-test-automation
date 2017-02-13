@@ -570,6 +570,24 @@ Set BMC Power Policy
     Should Be Equal    ${currentPolicy}   ${policy}
 
 
+Get Auto Reboot
+    [Documentation]  Returns auto reboot setting.
+    ${setting}=  Read Attribute  ${HOST_SETTINGS}  auto_reboot
+    [Return]  ${setting}
+
+
+Set Auto Reboot
+    [Documentation]  Set the given auto reboot setting.
+    [Arguments]  ${setting}
+    # setting  auto reboot's setting, i.e. yes or no
+
+    ${valueDict}=  Set Variable  ${setting}
+    ${data}=  Create Dictionary  data=${valueDict}
+    Write Attribute  ${HOST_SETTINGS}  auto_reboot  data=${data}
+    ${current_setting}=  Get Auto Reboot
+    Should Be Equal  ${current_setting}  ${setting}
+
+
 Set BMC Reset Reference Time
     [Documentation]  Set current boot time as a reference and increment
     ...               boot count.
