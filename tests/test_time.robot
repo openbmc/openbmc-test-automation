@@ -33,6 +33,7 @@ Get System Time
     ...  exclude_millis=yes
     ${bmcdate}=  Get BMC Time Using IPMI
     ${diff}=  Subtract Date From Date  ${bmcdate}  ${ipmidate}
+    ${diff}=  Convert To Number  ${diff}
     Should Be True  ${diff} < ${ALLOWED_TIME_DIFF}
     ...  Open BMC time does not match with IPMI sel time
 
@@ -46,6 +47,7 @@ Set Valid System Time
     ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=yes
     ${bmcdate}=  Get BMC Time Using IPMI
     ${diff}=  Subtract Date From Date  ${bmcdate}  ${setdate}
+    ${diff}=  Convert To Number  ${diff}
     Should Be True  ${diff} < ${ALLOWED_TIME_DIFF}
     ...  Open BMC time does not match with set time
 
@@ -345,6 +347,8 @@ Set Time Using REST
     ...  '${operation}' == 'Set BMC Time'  ${bmc_date_list}
     ...  '${operation}' == 'Set Host Time'  ${host_date_list}
 
+    ${start_time}=  Get Current Date
+
     ${old_bmc_time}=  Get BMC Time Using REST
     ${old_host_time}=  Get HOST Time Using REST
 
@@ -356,6 +360,10 @@ Set Time Using REST
 
     ${new_bmc_time}=  Get BMC Time Using REST
     ${new_host_time}=  Get HOST Time Using REST
+
+    ${end_time}=  Get Current Date
+    ${time_duration}=  Subtract Date From Date  ${start_time}  ${end_time}
+    ${time_duration}  Evaluate  abs(${time_duration})
 
     ${bmc_diff_set_new}=
     ...  Subtract Date From Date  ${setdate}  ${new_bmc_time}
@@ -372,22 +380,22 @@ Set Time Using REST
     ${host_diff_old_new}=  Evaluate  abs(${host_diff_old_new})
 
     Run Keyword If   '${bmc_time}' == 'Not Set'
-    ...    Should Be True  ${bmc_diff_set_new} >= ${ALLOWED_TIME_DIFF}
+    ...    Should Be True  ${bmc_diff_set_new} >= ${time_duration}
     ...  ELSE IF  '${bmc_time}' == 'Set'
-    ...    Should Be True  ${bmc_diff_set_new} <= ${ALLOWED_TIME_DIFF}
+    ...    Should Be True  ${bmc_diff_set_new} <= ${time_duration}
     ...  ELSE IF  '${bmc_time}' == 'No Change'
-    ...    Should Be True  ${bmc_diff_old_new} <= ${ALLOWED_TIME_DIFF}
+    ...    Should Be True  ${bmc_diff_old_new} <= ${time_duration}
     ...  ELSE IF  '${bmc_time}' == 'Change'
-    ...    Should Be True  ${bmc_diff_old_new} >= ${ALLOWED_TIME_DIFF}
+    ...    Should Be True  ${bmc_diff_old_new} >= ${time_duration}
 
     Run Keyword If  '${host_time}' == 'No Change'
-    ...    Should Be True  ${host_diff_old_new} <= ${ALLOWED_TIME_DIFF}
+    ...    Should Be True  ${host_diff_old_new} <= ${time_duration}
     ...  ELSE IF  '${host_time}' == 'Change'
-    ...    Should Be True  ${host_diff_old_new} >= ${ALLOWED_TIME_DIFF}
+    ...    Should Be True  ${host_diff_old_new} >= ${time_duration}
     ...  ELSE IF  '${host_time}' == 'Not Set'
-    ...    Should Be True  ${host_diff_set_new} >= ${ALLOWED_TIME_DIFF}
+    ...    Should Be True  ${host_diff_set_new} >= ${time_duration}
     ...  ELSE IF  '${host_time}' == 'Set'
-    ...    Should Be True  ${host_diff_set_new} <= ${ALLOWED_TIME_DIFF}
+    ...    Should Be True  ${host_diff_set_new} <= ${time_duration}
 
 
 Post Test Execution
