@@ -33,20 +33,46 @@ Initiate Host PowerOff
     ...  3 min  10 sec  Is Host Off
 
 
+Initiate Host Reboot
+    [Documentation]  Initiate host reboot via REST.
+
+    ${args}=  Create Dictionary  data=${HOST_REBOOT_TRANS}
+    Write Attribute
+    ...  ${HOST_STATE_URI}  RequestedHostTransition  data=${args}
+    Is Host Rebooted
+
+
 Is Host Running
-    [Documentation]  Check if Chassis and Host state is ON.
-    ${power_state}=  Get Chassis Power State
-    Should Be Equal  On  ${power_state}
+    [Documentation]  Check if host state is "Running".
     ${host_state}=  Get Host State
     Should Be Equal  Running  ${host_state}
 
 
 Is Host Off
-    [Documentation]  Check if Chassis and Host state is OFF.
-    ${power_state}=  Get Chassis Power State
-    Should Be Equal  Off  ${power_state}
+    [Documentation]  Check if host state is "Off".
     ${host_state}=  Get Host State
     Should Be Equal  Off  ${host_state}
+
+
+Is Host Rebooted
+    [Documentation]  Checks if host rebooted.
+
+    ${host_trans_state}=  Get Host Trans State
+    Should Be Equal  ${host_trans_state}  Reboot
+    ${host_state}=  Get Host State
+    Should Be Equal  ${host_state}  Running
+
+
+Is Chassis On
+    [Documentation]  Check if chassis state is "On".
+    ${power_state}=  Get Chassis Power State
+    Should Be Equal  On  ${power_state}
+
+
+Is Chassis Off
+    [Documentation]  Check if chassis state is "Off".
+    ${power_state}=  Get Chassis Power State
+    Should Be Equal  Off  ${power_state}
 
 
 Get Host State
@@ -58,6 +84,17 @@ Get Host State
     ...  quiet=${quiet}
     [Return]  ${state.rsplit('.', 1)[1]}
 
+Get Host Trans State
+    [Documentation]  Return the transition state of host as a string.
+    ...              e.g. On, Off, Reboot
+    ...              Description of arguments:
+    ...              quiet : Suppress REST output logging to console
+    [Arguments]  ${quiet}=${QUIET}
+
+    ${state}=
+    ...  Read Attribute  ${HOST_STATE_URI}  RequestedHostTransition
+    ...  quiet=${quiet}
+    [Return]  ${state.rsplit('.', 1)[1]}
 
 Get Chassis Power State
     [Documentation]  Return the power state of the Chassis
