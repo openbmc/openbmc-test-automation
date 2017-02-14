@@ -24,9 +24,9 @@ ${bmc_mem_free_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
 ${bmc_mem_total_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
 ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
 ${HOST_SETTING}    ${SETTINGS_URI}host0
-# /dev/mtdblock5 filesystem  should be 100% full always
+# /run/initramfs/ro associate filesystem  should be 100% full always
 ${bmc_file_system_usage_cmd}=
-...  df -h | grep -v /dev/mtdblock5 | cut -c 52-54 | grep 100 | wc -l
+...  df -h | grep -v /run/initramfs/ro | cut -c 52-54 | grep 100 | wc -l
 
 ${BOOT_TIME}     ${0}
 ${BOOT_COUNT}    ${0}
@@ -491,7 +491,7 @@ BMC Mem Performance Check
 
 BMC File System Usage Check
     [Documentation]   Check the file system space. None should be 100% full
-    ...   except /dev/mtdblock5
+    ...   except /run/initramfs/ro
     ${bmc_fs_usage_output}  ${stderr}=   Execute Command
     ...   ${bmc_file_system_usage_cmd}  return_stderr=True
     Should Be Empty  ${stderr}
