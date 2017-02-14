@@ -321,7 +321,7 @@ io_board Fault
 Setup The Suite
 
     Open Connection And Log In
-    ${resp}=   Read Properties   ${OPENBMC_BASE_URI}enumerate   timeout=30
+    ${resp}=   Read Properties   ${OPENBMC_BASE_URI}enumerate   timeout=120
     Set Suite Variable      ${SYSTEM_INFO}          ${resp}
     log Dictionary          ${resp}
 
