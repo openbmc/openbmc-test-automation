@@ -22,6 +22,7 @@ BMC_REBOOT_TRANS = 'xyz.openbmc_project.State.BMC.Transition.Reboot'
 
 HOST_POWEROFF_TRANS = 'xyz.openbmc_project.State.Host.Transition.Off'
 HOST_POWERON_TRANS = 'xyz.openbmc_project.State.Host.Transition.On'
+HOST_REBOOT_TRANS = 'xyz.openbmc_project.State.Host.Transition.Reboot'
 HOST_POWEROFF_STATE = 'xyz.openbmc_project.State.Host.HostState.Off'
 HOST_POWERON_STATE = 'xyz.openbmc_project.State.Host.HostState.Running'
 
