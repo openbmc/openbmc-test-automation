@@ -33,6 +33,16 @@ Initiate Host PowerOff
     ...  3 min  10 sec  Is Host Off
 
 
+Initiate Host Reboot
+    [Documentation]  Initiate Host Reboot via REST.
+    ${args}=  Create Dictionary  data=${HOST_REBOOT_TRANS}
+    Write Attribute
+    ...  ${HOST_STATE_URI}  RequestedHostTransition  data=${args}
+
+    Wait Until Keyword Succeeds  3 min  1 sec  Is Host Off
+    Wait Until Keyword Succeeds  3 min  1 sec  Is Host Running
+
+
 Is Host Running
     [Documentation]  Check if Chassis and Host state is ON.
     ${power_state}=  Get Chassis Power State
