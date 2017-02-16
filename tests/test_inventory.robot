@@ -3,6 +3,7 @@ Documentation     This testsuite is for testing inventory
 Suite Teardown    Delete All Sessions
 Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
+Resource          ../lib/state_manager.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/boot/boot_resource_master.robot
 Library           ../lib/utilities.py
@@ -79,7 +80,8 @@ Verify System VPD Properties
 
 
 Setup The Suite
-    BMC Power On
+    ${host_state}=  Get Host State
+    Run Keyword If  '${host_state}' == 'Off'  Initiate Host Boot
 
     ${resp}=     Read Properties   ${INVENTORY_URI}enumerate
     Set Suite Variable     ${SYSTEM_INFO}      ${resp}
