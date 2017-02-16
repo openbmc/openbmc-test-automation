@@ -21,7 +21,7 @@
 #https://github.com/openbmc/openbmc-test-automation/issues/90
 -e Verify_System_VPD_Properties
 #https://github.com/openbmc/openbmc/issues/93
--e minimal_fan_inventory
+-e Minimal_Fan_Inventory
 #https://github.com/openbmc/openbmc-test-automation/issues/139
 -e Empty_Fan_Test
 #https://github.com/openbmc/openbmc/issues/612

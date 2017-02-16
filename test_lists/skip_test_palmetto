@@ -6,10 +6,10 @@
 #https://github.com/openbmc/openbmc/issues/539
 -e Test_Correct_Reservation_ID
 #https://github.com/openbmc/openbmc/issues/604
--e minimal_main_planar_inventory
+-e Minimal_Main_Planar_Inventory
 #https://github.com/openbmc/openbmc/issues/93
--e minimal_fan_inventory
--e minimal_system_inventory
+-e Minimal_Fan_Inventory
+-e Minimal_System_Inventory
 -e System_Present
 -e Chassis_Present
 #https://github.com/openbmc/openbmc/issues/612
@@ -23,7 +23,7 @@
 #https://github.com/openbmc/openbmc/issues/700
 -e DIMM0_fault
 -e DIMM0_no_fault
--e minimal_dimm_inventory
+-e Minimal_DIMM_Inventory
 -e Verify_DIMM_VPD_Properties
 #https://github.com/openbmc/openbmc/issues/740
 -e Test_BIOS_Version
