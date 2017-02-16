@@ -10,7 +10,7 @@ ${OPENBMC_HOST}   ${EMPTY}
 ${DBUS_PREFIX}    ${EMPTY}
 ${PORT}           ${EMPTY}
 # AUTH_SUFFIX here is derived from variables.py
-${AUTH_URI}       https://${OPENBMC_HOST}${AUTH_SUFFIX}
+#${AUTH_URI}       https://${OPENBMC_HOST}${AUTH_SUFFIX}
 ${OPENBMC_USERNAME}    root
 ${OPENBMC_PASSWORD}    0penBmc
 ${IPMI_PASSWORD}    PASSW0RD
@@ -37,6 +37,10 @@ ${OS_HOST}          ${EMPTY}
 ${OS_USERNAME}      ${EMPTY}
 ${OS_PASSWORD}      ${EMPTY}
 ${OS_WAIT_TIMEOUT}  ${15*60}
+
+# Networking related parameters
+${NETWORK_PORT}     80
+${PACKET_TYPE}      tcp
 
 *** Keywords ***
 Get Inventory Schema
