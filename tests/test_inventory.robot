@@ -3,110 +3,121 @@ Documentation     This testsuite is for testing inventory
 Suite Teardown    Delete All Sessions
 Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
+Resource          ../lib/state_manager.robot
 Resource          ../lib/openbmc_ffdc.robot
-Resource          ../lib/boot/boot_resource_master.robot
 Library           ../lib/utilities.py
 Library           String
 Library           Collections
-Test Teardown     FFDC On Test Case Fail
 
 Variables         ../data/variables.py
 
-
-Suite setup        setup the suite
+Suite setup       Setup The Suite
+Test Teardown     FFDC On Test Case Fail
 
 Force Tags  chassisboot  inventory
 
 *** Test Cases ***
 
-minimal cpu inventory
-    ${count}=     Get Total Present     cpu
-    Should Be True     ${count}>${0}
+Minimal CPU Inventory
+    [Tags]  Minimal_CPU_Inventory
 
-minimal dimm inventory
-    [Tags]  minimal_dimm_inventory
+    ${count}=  Get Total Present  cpu
+    Should Be True  ${count}>${0}
 
-    ${count}=     Get Total Present     dimm
-    Should Be True     ${count}>=${2}
+Minimal DIMM Inventory
+    [Tags]  Minimal DIMM Inventory
 
-minimal core inventory
-    ${count}=     Get Total Present     core
-    Should Be True     ${count}>${0}
+    ${count}=  Get Total Present  dimm
+    Should Be True  ${count}>=${2}
 
-minimal memory buffer inventory
-    [Tags]    minimal_memory_buffer_inventory
+Minimal Core Inventory
+    [Tags]  Minimal_Core_Inventory
 
-    ${count}=     Get Total Present     membuf
-    Should Be True     ${count}>${0}
+    ${count}=  Get Total Present  core
+    Should Be True  ${count}>${0}
 
-minimal fan inventory
-    [Tags]  minimal_fan_inventory
-    ${count}=     Get Total Present     fan
-    Should Be True     ${count}>${2}
+Minimal Memory Buffer Inventory
+    [Tags]  Minimal_Memory_Buffer_Inventory
 
-minimal main planar inventory
-    [Tags]    minimal_main_planar_inventory
+    ${count}=  Get Total Present  membuf
+    Should Be True  ${count}>${0}
 
-    ${count}=     Get Total Present     motherboard
-    Should Be True     ${count}>${0}
+Minimal Fan Inventory
+    [Tags]  Minimal_Fan_Inventory
 
-minimal system inventory
-    [Tags]    minimal_system_inventory
+    ${count}=  Get Total Present  fan
+    Should Be True  ${count}>${2}
 
-    ${count}=     Get Total Present     system
-    Should Be True     ${count}>${0}
+Minimal Main Planar Inventory
+    [Tags]  Minimal_Main_Planar_Inventory
+
+    ${count}=  Get Total Present  motherboard
+    Should Be True  ${count}>${0}
+
+Minimal System Inventory
+    [Tags]  Minimal_System_Inventory
+
+    ${count}=  Get Total Present  system
+    Should Be True  ${count}>${0}
 
 Verify CPU VPD Properties
-    Verify Properties     CPU
+    [Tags]  Verify_CPU_VPD_Properties
+
+    Verify Properties  CPU
 
 Verify DIMM VPD Properties
-    [Tags]    Verify_DIMM_VPD_Properties
+    [Tags]  Verify_DIMM_VPD_Properties
 
-    Verify Properties     DIMM
+    Verify Properties  DIMM
 
 Verify Memory Buffer VPD Properties
-    Verify Properties     MEMORY_BUFFER
+    [Tags]  Verify_Memory_Buffer_VPD_Properties
+
+    Verify Properties  MEMORY_BUFFER
 
 Verify Fan VPD Properties
-    Verify Properties     FAN
+    [Tags]  Verify_Fan_VPD_Properties
+
+    Verify Properties  FAN
 
 Verify System VPD Properties
     [Tags]  Verify_System_VPD_Properties
-    Verify Properties     SYSTEM
+
+    Verify Properties  SYSTEM
 
 
 *** Keywords ***
 
-
 Setup The Suite
-    BMC Power On
+    ${host_state}=  Get Host State
+    Run Keyword If  '${host_state}' == 'Off'  Initiate Host Boot
 
-    ${resp}=     Read Properties   ${INVENTORY_URI}enumerate
-    Set Suite Variable     ${SYSTEM_INFO}      ${resp}
-    log Dictionary      ${resp}
+    ${resp}=  Read Properties  ${INVENTORY_URI}enumerate
+    Set Suite Variable  ${SYSTEM_INFO}  ${resp}
+    Log Dictionary  ${resp}
 
 Get Total Present
-    [Arguments]     ${type}
-    ${l}=          Create List     []
-    ${resp}=    Get Dictionary Keys    ${SYSTEM_INFO}
-    ${list}=    Get Matches    ${resp}    regexp=^.*[0-9a-z_].${type}[0-9]*$
-    : FOR   ${element}      IN      @{list}
-    \       Append To List   ${l}   ${SYSTEM_INFO['${element}']['present']}
+    [Arguments]  ${type}
+    ${l}=  Create List  []
+    ${resp}=  Get Dictionary Keys  ${SYSTEM_INFO}
+    ${list}=  Get Matches  ${resp}  regexp=^.*[0-9a-z_].${type}[0-9]*$
+    : FOR  ${element}  IN  @{list}
+    \  Append To List  ${l}  ${SYSTEM_INFO['${element}']['present']}
 
-    ${sum}=        Get Count       ${l}    True
-    [Return]        ${sum}
+    ${sum}=  Get Count  ${l}  True
+    [Return]  ${sum}
 
 Verify Properties
-    [Arguments]     ${type}
+    [Arguments]  ${type}
 
-    ${list}=     Get VPD Inventory List     ${OPENBMC_MODEL}     ${type}
-    : FOR     ${element}     IN      @{list}
-    \     ${d}=     Get From Dictionary     ${SYSTEM_INFO}     ${element}
-    \     Run Keyword If     ${d['present']} == True        Verify Present Properties     ${d}     ${type}
+    ${list}=  Get VPD Inventory List  ${OPENBMC_MODEL}  ${type}
+    : FOR  ${element}  IN  @{list}
+    \  ${d}=  Get From Dictionary  ${SYSTEM_INFO}  ${element}
+    \  Run Keyword If  ${d['present']} == True  Verify Present Properties  ${d}  ${type}
 
 Verify Present Properties
-    [Arguments]     ${d}     ${type}
-    ${keys}=     Get Dictionary Keys     ${d}
-    Log List     ${keys}
-    Log List     ${INVENTORY_ITEMS['${type}']}
-    Lists Should Be Equal  ${INVENTORY_ITEMS['${type}']}     ${keys}
+    [Arguments]  ${d}  ${type}
+    ${keys}=  Get Dictionary Keys  ${d}
+    Log List  ${keys}
+    Log List  ${INVENTORY_ITEMS['${type}']}
+    Lists Should Be Equal  ${INVENTORY_ITEMS['${type}']}  ${keys}
