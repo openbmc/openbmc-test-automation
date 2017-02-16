@@ -38,6 +38,10 @@ ${OS_USERNAME}      ${EMPTY}
 ${OS_PASSWORD}      ${EMPTY}
 ${OS_WAIT_TIMEOUT}  ${15*60}
 
+# Networking related parameters
+${NETWORK_PORT}     80
+${PACKET_TYPE}      tcp
+
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}
