@@ -67,7 +67,7 @@ Initiate Code Update BMC
 
     # Wait time is increased temporary to 10 mins due
     # to openbmc/openbmc#673
-    Check If BMC is Up    10 min   10 sec
+    Check If BMC is Up  20 min  10 sec
     Check Boot Count And Time
 
     Wait For BMC Ready
