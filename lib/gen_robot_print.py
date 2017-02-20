@@ -27,6 +27,35 @@ except KeyError:
 
 
 ###############################################################################
+def get_quiet_default(var_value,
+                      default=0):
+
+    r"""
+    If var_value is not None, return it.  Otherwise, return the global
+    variable of the same name, if it exists.  If not, return default.
+
+    This is meant for use by functions needing help assigning dynamic default
+    values to their parameters.  Example:
+
+    def func1(parm1=None):
+
+        parm1 = global_default(parm1, 0)
+
+    Description of arguments:
+    var_value                       The value being evaluated.
+    default                         The value to be returned if var_value is
+                                    None AND the global
+               variable of the same name does not exist.
+    """
+
+    var_name = gp.get_arg_name(0, 1, stack_frame_ix=2)
+
+    return dft(var_value, get_mod_global(var_name, 0))
+
+###############################################################################
+
+
+###############################################################################
 def set_quiet_default(quiet=None,
                       default=0):
 
@@ -190,7 +219,7 @@ def sprint_vars(*args):
 
     buffer = ""
     for var_name in args_list:
-        var_value = BuiltIn().get_variable_value("${" + var_name + "}")
+        var_value = BuiltIn().get_variable_value("${" + str(var_name) + "}")
         buffer += gp.sprint_varx(var_name, var_value, hex, indent,
                                  loc_col1_width)
 
