@@ -9,19 +9,157 @@ import sys
 import os
 import ConfigParser
 import StringIO
+import re
 
 import gen_print as gp
+import gen_cmd as gc
+
+
+robot_env = 1
+try:
+    from robot.libraries.BuiltIn import BuiltIn
+except ImportError:
+    robot_env = 0
 
 
 ###############################################################################
-def add_trailing_slash(path):
+def add_trailing_slash(dir_path):
 
     r"""
-    Add a trailing slash to path if it doesn't already have one and return it.
+    Add a trailing slash to the directory path if it doesn't already have one
+    and return it.
 
+    Description of arguments:
+    dir_path                        A directory path.
     """
 
-    return os.path.normpath(path) + os.path.sep
+    return os.path.normpath(dir_path) + os.path.sep
+
+###############################################################################
+
+
+###############################################################################
+def which(file_path):
+
+    r"""
+    Find the full path of an executable file and return it.
+
+    The PATH environment variable dictates the results of this function.
+
+    Description of arguments:
+    file_path                       The relative file path (e.g. "my_file" or
+                                    "lib/my_file").
+    """
+
+    shell_rc, out_buf = gc.cmd_fnc_u("which " + file_path, quiet=1,
+                                     print_output=0, show_err=0)
+    if shell_rc != 0:
+        error_message = "Failed to find complete path for file \"" +\
+                        file_path + "\".\n"
+        error_message += gp.sprint_var(shell_rc, 1)
+        error_message += out_buf
+        if robot_env:
+            BuiltIn().fail(gp.sprint_error(error_message))
+        else:
+            gp.print_error_report(error_message)
+            return False
+
+    file_path = out_buf.rstrip("\n")
+
+    return file_path
+
+###############################################################################
+
+
+###############################################################################
+def dft(value, default):
+
+    r"""
+    Return default if value is None.  Otherwise, return value.
+
+    This is really just shorthand as shown below.
+
+    dft(value, default)
+
+    vs
+
+    default if value is None else value
+
+    Description of arguments:
+    value                           The value to be returned.
+    default                         The default value to return if value is
+                                    None.
+    """
+
+    return default if value is None else value
+
+###############################################################################
+
+
+###############################################################################
+def get_mod_global(var_name,
+                   default=None,
+                   mod_name="__main__"):
+
+    r"""
+    Get module global variable value and return it.
+
+    If we are running in a robot environment, the behavior will default to
+    calling get_variable_value.
+
+    Description of arguments:
+    var_name                        The name of the variable whose value is
+                                    sought.
+    default                         The value to return if the global does not
+                                    exist.
+    mod_name                        The name of the module containing the
+                                    global variable.
+    """
+
+    if robot_env:
+        return BuiltIn().get_variable_value("${" + var_name + "}", default)
+
+    try:
+        module = sys.modules[mod_name]
+    except KeyError:
+        gp.print_error_report("Programmer error - The mod_name passed to" +
+                              " this function is invalid:\n" +
+                              gp.sprint_var(mod_name))
+        raise ValueError('Programmer error.')
+
+    if default is None:
+        return getattr(module, var_name)
+    else:
+        return getattr(module, var_name, default)
+
+###############################################################################
+
+
+###############################################################################
+def global_default(var_value,
+                   default=0):
+
+    r"""
+    If var_value is not None, return it.  Otherwise, return the global
+    variable of the same name, if it exists.  If not, return default.
+
+    This is meant for use by functions needing help assigning dynamic default
+    values to their parms.  Example:
+
+    def func1(parm1=None):
+
+        parm1 = global_default(parm1, 0)
+
+    Description of arguments:
+    var_value                       The value being evaluated.
+    default                         The value to be returned if var_value is
+                                    None AND the global
+               variable of the same name does not exist.
+    """
+
+    var_name = gp.get_arg_name(0, 1, stack_frame_ix=2)
+
+    return dft(var_value, get_mod_global(var_name, 0))
 
 ###############################################################################
 
@@ -100,6 +238,46 @@ def my_parm_file(prop_file_path):
     config_parser.readfp(string_file)
     # Return the properties as a dictionary.
     return dict(config_parser.items('dummysection'))
+
+###############################################################################
+
+
+###############################################################################
+def file_to_list(file_path,
+                 newlines=0,
+                 comments=1,
+                 trim=0):
+
+    r"""
+    Return the contents of a file as a list.  Each element of the resulting
+    list is one line from the file.
+
+    Description of arguments:
+    file_path                       The path to the file (relative or
+                                    absolute).
+    newlines                        Include newlines from the file in the
+                                    results.
+    comments                        Include comment lines and blank lines in
+                                    the results.  Comment
+               lines are any that begin with 0 or more spaces followed by the
+               pound sign ("#").
+    trim                            Trim white space from the beginning and
+                                    end of each line.
+    """
+
+    lines = []
+    file = open(file_path)
+    for line in file:
+        if not comments:
+            if re.match(r"[ ]*#|^$", line):
+                continue
+        if not newlines:
+            line = line.rstrip("\n")
+        if trim:
+            line = line.strip()
+        lines.append(line)
+
+    return lines
 
 ###############################################################################
 
