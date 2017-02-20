@@ -48,6 +48,14 @@ Is Host Off
     ${host_state}=  Get Host State
     Should Be Equal  Off  ${host_state}
 
+Is Host Quiesced
+    [Documentation]  Check if host state is quiesced.
+    ${host_state}=  Get Host State
+    Should Be Equal  Quiesced  ${host_state}
+    ${status}=  Run Keyword And Return Status  Should Be Equal
+    ...  ${host_state}  Quiesced
+    [Return]  ${status}
+
 
 Get Host State
     [Documentation]  Return the state of the host as a string.
