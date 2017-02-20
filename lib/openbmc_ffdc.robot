@@ -43,7 +43,10 @@ FFDC On Test Case Fail
     ...                  EX: 20160822041250932049:Test:Test case 1:PASS
     ...                      20160822041250969913:Test:Test case 2:FAIL
 
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL'
-    ...    FFDC
+    ${status}=  Is Host In Quiesce State
+    Run Keyword If  '${TEST_STATUS}' == 'FAIL' or '${status}'=='True'  FFDC
+
+    Run Keyword If  '${status}'=='True'  Fatal Error
+    ...  msg=*** Host reached Quiesce state ***
 
     Log Test Case Status

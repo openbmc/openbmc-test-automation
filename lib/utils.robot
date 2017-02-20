@@ -616,3 +616,16 @@ Get BMC Boot Time
     Should Be Empty  ${stderr}
     ${btime}=  Convert To Integer  ${output}
     [Return]  ${btime}
+
+Is Host In Quiesce State
+    [Documentation]  Check if Host state is Quiesce.
+
+    Open Connection And Log In
+    ${output}  ${stderr}=
+    ...  Execute Command  journalctl --no-pager --lines 100
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
+
+    ${status}=  Run Keyword And Return Status  Should Contain
+    ...  ${output}  Reached target Quiesce Target  ignore_case=True
+    [Return]  ${status}
