@@ -18,9 +18,8 @@ default_state:
   default_state[os_run_cmd]:                      1
 
 Different users may very well have different needs when inquiring about
-state.  In the future, we can add code to allow a user to specify which
-pieces of info they need in the state dictionary.  Examples of such data
-might include uptime, state timestamps, boot side, etc.
+state.  Support for new pieces of state information may be added to this
+module as needed.
 
 By using the wait_state function, a caller can start a boot and then wait for
 a precisely defined state to indicate that the boot has succeeded.  If
@@ -32,6 +31,7 @@ import gen_print as gp
 import gen_robot_print as grp
 import gen_valid as gv
 import gen_robot_utils as gru
+import gen_cmd as gc
 
 import commands
 from robot.libraries.BuiltIn import BuiltIn
@@ -44,31 +44,111 @@ import os
 gru.my_import_resource("utils.robot")
 gru.my_import_resource("state_manager.robot")
 
-# The BMC code is about to be changed as far as what states are defined and
-# what the state values can be.  I am creating a means of processing both the
-# old style state (i.e. OBMC_STATES_VERSION = 0) and the new style (i.e.
+# The BMC code has recently been changed as far as what states are defined and
+# what the state values can be.  This module now has a means of processing both
+# the old style state (i.e. OBMC_STATES_VERSION = 0) and the new style (i.e.
 # OBMC_STATES_VERSION = 1).
 # The caller can set environment variable OBMC_STATES_VERSION to dictate
 # whether we're processing old or new style states.  If OBMC_STATES_VERSION is
-# not set it will default to 0.
+# not set it will default to 1.
 
-OBMC_STATES_VERSION = int(os.environ.get('OBMC_STATES_VERSION', 0))
+OBMC_STATES_VERSION = int(os.environ.get('OBMC_STATES_VERSION', 1))
 
+# TODO: Re-enable 'bmc' once it is working again.
 if OBMC_STATES_VERSION == 0:
+    # default_state is an initial value which may be of use to callers.
     default_state = DotDict([('power', '1'),
-                             ('bmc', 'HOST_BOOTED'),
+                             # ('bmc', 'HOST_BOOTED'),
                              ('boot_progress', 'FW Progress, Starting OS'),
                              ('os_ping', '1'),
                              ('os_login', '1'),
                              ('os_run_cmd', '1')])
+    # valid_req_states, default_req_states and master_os_up_match are used by
+    # the get_state function.
+    # valid_req_states is a list of state information supported by the
+    # get_state function.
+    valid_req_states = ['ping',
+                        'packet_loss',
+                        'uptime',
+                        'epoch_seconds',
+                        'power',
+                        # 'bmc',
+                        'boot_progress',
+                        'os_ping',
+                        'os_login',
+                        'os_run_cmd']
+    # When a user calls get_state w/o specifying req_states, default_req_states
+    # is used as its value.
+    default_req_states = ['power',
+                          # 'bmc',
+                          'boot_progress',
+                          'os_ping',
+                          'os_login',
+                          'os_run_cmd']
+    # A master dictionary to determine whether the os may be up.
+    master_os_up_match = DotDict([('power', 'On'),
+                                  # ('bmc', '^HOST_BOOTED$'),
+                                  ('boot_progress',
+                                   'FW Progress, Starting OS')])
+
 else:
+    # default_state is an initial value which may be of use to callers.
     default_state = DotDict([('chassis', 'On'),
-                             ('bmc', 'Ready'),
+                             # ('bmc', 'Ready'),
                              ('boot_progress', 'FW Progress, Starting OS'),
                              ('host', 'Running'),
                              ('os_ping', '1'),
                              ('os_login', '1'),
                              ('os_run_cmd', '1')])
+    # valid_req_states is a list of state information supported by the
+    # get_state function.
+    # valid_req_states, default_req_states and master_os_up_match are used by
+    # the get_state function.
+    valid_req_states = ['ping',
+                        'packet_loss',
+                        'uptime',
+                        'epoch_seconds',
+                        'chassis',
+                        # 'bmc',
+                        'boot_progress',
+                        'host',
+                        'os_ping',
+                        'os_login',
+                        'os_run_cmd']
+    # When a user calls get_state w/o specifying req_states, default_req_states
+    # is used as its value.
+    default_req_states = ['chassis',
+                          # 'bmc',
+                          'boot_progress',
+                          'host',
+                          'os_ping',
+                          'os_login',
+                          'os_run_cmd']
+
+    # TODO: Add back boot_progress when ipmi is enabled on Witherspoon.
+    # A master dictionary to determine whether the os may be up.
+    master_os_up_match = DotDict([('chassis', '^On$'), ('host', '^Running$')])
+    # ('bmc', '^Ready$'),
+    # ('boot_progress',
+    #  'FW Progress, Starting OS')])
+
+# valid_os_req_states and default_os_req_states are used by the os_get_state
+# function.
+# valid_os_req_states is a list of state information supported by the
+# get_os_state function.
+valid_os_req_states = ['os_ping',
+                       'os_login',
+                       'os_run_cmd']
+# When a user calls get_os_state w/o specifying req_states,
+# default_os_req_states is used as its value.
+default_os_req_states = ['os_ping',
+                         'os_login',
+                         'os_run_cmd']
+
+# Presently, some BMCs appear to not keep time very well.  This environment
+# variable directs the get_state function to use either the BMC's epoch time
+# or the local epoch time.
+USE_BMC_EPOCH_TIME = int(os.environ.get('USE_BMC_EPOCH_TIME', 0))
 
 
 ###############################################################################
@@ -76,6 +156,8 @@ def return_default_state():
 
     r"""
     Return default state dictionary.
+
+    default_state is an initial value which may be of use to callers.
     """
 
     return default_state
@@ -106,11 +188,33 @@ def anchor_state(state):
 
 
 ###############################################################################
+def strip_anchor_state(state):
+
+    r"""
+    Strip regular expression anchors ("^" and "$") from the beginning and end
+    of each item in the state dictionary passed in.  Return the resulting
+    dictionary.
+
+    Description of Arguments:
+    state    A dictionary such as the one returned by the get_state()
+             function.
+    """
+
+    stripped_state = state
+    for key, match_state_value in stripped_state.items():
+        stripped_state[key] = stripped_state[key].strip("^$")
+
+    return stripped_state
+
+###############################################################################
+
+
+###############################################################################
 def compare_states(state,
                    match_state):
 
     r"""
-    Compare 2 state dictionaries.  Return True if the match and False if they
+    Compare 2 state dictionaries.  Return True if they match and False if they
     don't.  Note that the match_state dictionary does not need to have an entry
     corresponding to each entry in the state dictionary.  But for each entry
     that it does have, the corresponding state entry will be checked for a
@@ -145,11 +249,15 @@ def compare_states(state,
 def get_os_state(os_host="",
                  os_username="",
                  os_password="",
+                 req_states=default_os_req_states,
+                 os_up=True,
                  quiet=None):
 
     r"""
     Get component states for the operating system such as ping, login,
     etc, put them into a dictionary and return them to the caller.
+
+    Note that all substate values are strings.
 
     Description of arguments:
     os_host      The DNS name or IP address of the operating system.
@@ -158,6 +266,12 @@ def get_os_state(os_host="",
                  This defaults to global ${OS_USERNAME}.
     os_password  The password to be used to login to the OS.
                  This defaults to global ${OS_PASSWORD}.
+    req_states   This is a list of states whose values are being requested by
+                 the caller.
+    os_up        If the caller knows that the os can't possibly be up, it can
+                 improve performance by passing os_up=False.  This function
+                 will then simply return default values for all requested os
+                 sub states.
     quiet        Indicates whether status details (e.g. curl commands) should
                  be written to the console.
                  Defaults to either global value of ${QUIET} or to 1.
@@ -187,53 +301,69 @@ def get_os_state(os_host="",
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
-    # See if the OS pings.
-    cmd_buf = "ping -c 1 -w 2 " + os_host
-    if not quiet:
-        grp.rpissuing(cmd_buf)
-    rc, out_buf = commands.getstatusoutput(cmd_buf)
-    if rc == 0:
-        pings = 1
-    else:
-        pings = 0
+    invalid_req_states = [sub_state for sub_state in req_states
+                          if sub_state not in valid_os_req_states]
+    if len(invalid_req_states) > 0:
+        error_message = "The following req_states are not supported:\n" +\
+            gp.sprint_var(invalid_req_states)
+        BuiltIn().fail(gp.sprint_error(error_message))
 
-    # Open SSH connection to OS.
-    cmd_buf = ["Open Connection", os_host]
-    if not quiet:
-        grp.rpissuing_keyword(cmd_buf)
-    ix = BuiltIn().run_keyword(*cmd_buf)
+    # Initialize all substate values supported by this function.
+    os_ping = 0
+    os_login = 0
+    os_run_cmd = 0
 
-    # Login to OS.
-    cmd_buf = ["Login", os_username, os_password]
-    if not quiet:
-        grp.rpissuing_keyword(cmd_buf)
-    status, msg = BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+    if os_up:
+        if 'os_ping' in req_states:
+            # See if the OS pings.
+            cmd_buf = "ping -c 1 -w 2 " + os_host
+            if not quiet:
+                grp.rpissuing(cmd_buf)
+            rc, out_buf = commands.getstatusoutput(cmd_buf)
+            if rc == 0:
+                os_ping = 1
 
-    if status == "PASS":
-        login = 1
-    else:
-        login = 0
+        # Programming note: All attributes which do not require an ssh login
+        # should have been processed by this point.
+        master_req_login = ['os_login', 'os_run_cmd']
+        req_login = [sub_state for sub_state in req_states if sub_state in
+                     master_req_login]
 
-    if login:
-        # Try running a simple command (uptime) on the OS.
-        cmd_buf = ["Execute Command", "uptime", "return_stderr=True",
-                   "return_rc=True"]
-        if not quiet:
-            grp.rpissuing_keyword(cmd_buf)
-        output, stderr_buf, rc = BuiltIn().run_keyword(*cmd_buf)
-        if rc == 0 and stderr_buf == "":
-            run_cmd = 1
-        else:
-            run_cmd = 0
-    else:
-        run_cmd = 0
+        must_login = (len([sub_state for sub_state in req_states
+                           if sub_state in master_req_login]) > 0)
 
-    # Create a dictionary containing the results of the prior commands.
-    cmd_buf = ["Create Dictionary", "ping=${" + str(pings) + "}",
-               "login=${" + str(login) + "}",
-               "run_cmd=${" + str(run_cmd) + "}"]
-    grp.rdpissuing_keyword(cmd_buf)
-    os_state = BuiltIn().run_keyword(*cmd_buf)
+        if must_login:
+            # Open SSH connection to OS.
+            cmd_buf = ["Open Connection", os_host]
+            if not quiet:
+                grp.rpissuing_keyword(cmd_buf)
+            ix = BuiltIn().run_keyword(*cmd_buf)
+
+            # Login to OS.
+            cmd_buf = ["Login", os_username, os_password]
+            if not quiet:
+                grp.rpissuing_keyword(cmd_buf)
+            status, msg = BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+            if status == "PASS":
+                os_login = 1
+
+            if os_login:
+                if 'os_run_cmd' in req_states:
+                    if os_login:
+                        # Try running a simple command (uptime) on the OS.
+                        cmd_buf = ["Execute Command", "uptime",
+                                   "return_stderr=True", "return_rc=True"]
+                        if not quiet:
+                            grp.rpissuing_keyword(cmd_buf)
+                        output, stderr_buf, rc = \
+                            BuiltIn().run_keyword(*cmd_buf)
+                        if rc == 0 and stderr_buf == "":
+                            os_run_cmd = 1
+
+    os_state = DotDict()
+    for sub_state in req_states:
+        cmd_buf = "os_state['" + sub_state + "'] = str(" + sub_state + ")"
+        exec(cmd_buf)
 
     return os_state
 
@@ -247,11 +377,14 @@ def get_state(openbmc_host="",
               os_host="",
               os_username="",
               os_password="",
+              req_states=default_req_states,
               quiet=None):
 
     r"""
     Get component states such as power state, bmc state, etc, put them into a
     dictionary and return them to the caller.
+
+    Note that all substate values are strings.
 
     Description of arguments:
     openbmc_host      The DNS name or IP address of the BMC.
@@ -266,6 +399,8 @@ def get_state(openbmc_host="",
                       This defaults to global ${OS_USERNAME}.
     os_password       The password to be used to login to the OS.
                       This defaults to global ${OS_PASSWORD}.
+    req_states        This is a list of states whose values are being requested
+                      by the caller.
     quiet             Indicates whether status details (e.g. curl commands)
                       should be written to the console.
                       Defaults to either global value of ${QUIET} or to 1.
@@ -298,8 +433,7 @@ def get_state(openbmc_host="",
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
-    # Set parm defaults where necessary and validate all parms.  NOTE: OS parms
-    # are optional.
+    # NOTE: OS parms are optional.
     if os_host == "":
         os_host = BuiltIn().get_variable_value("${OS_HOST}")
         if os_host is None:
@@ -315,78 +449,155 @@ def get_state(openbmc_host="",
         if os_password is None:
             os_password = ""
 
+    invalid_req_states = [sub_state for sub_state in req_states
+                          if sub_state not in valid_req_states]
+    if len(invalid_req_states) > 0:
+        error_message = "The following req_states are not supported:\n" +\
+            gp.sprint_var(invalid_req_states)
+        BuiltIn().fail(gp.sprint_error(error_message))
+
+    # Initialize all substate values supported by this function.
+    ping = 0
+    packet_loss = ''
+    uptime = ''
+    epoch_seconds = ''
+    power = '0'
+    chassis = ''
+    bmc = ''
+    boot_progress = ''
+    host = ''
+
     # Get the component states.
-    if OBMC_STATES_VERSION == 0:
+    if 'ping' in req_states:
+        # See if the OS pings.
+        cmd_buf = "ping -c 1 -w 2 " + openbmc_host
+        if not quiet:
+            grp.rpissuing(cmd_buf)
+        rc, out_buf = commands.getstatusoutput(cmd_buf)
+        if rc == 0:
+            ping = 1
+
+    if 'packet_loss' in req_states:
+        # See if the OS pings.
+        cmd_buf = "ping -c 5 -w 5 " + openbmc_host +\
+            " | egrep 'packet loss' | sed -re 's/.* ([0-9]+)%.*/\\1/g'"
+        if not quiet:
+            grp.rpissuing(cmd_buf)
+        rc, out_buf = commands.getstatusoutput(cmd_buf)
+        if rc == 0:
+            packet_loss = out_buf.rstrip("\n")
+
+    master_req_login = ['uptime', 'epoch_seconds']
+    req_login = [sub_state for sub_state in req_states if sub_state in
+                 master_req_login]
+
+    must_login = (len([sub_state for sub_state in req_states
+                       if sub_state in master_req_login]) > 0)
+
+    if must_login:
+        cmd_buf = ["Open Connection And Log In"]
+        if not quiet:
+            grp.rpissuing_keyword(cmd_buf)
+        BuiltIn().run_keyword(*cmd_buf)
+
+    if 'uptime' in req_states:
+        cmd_buf = ["Execute Command", "cat /proc/uptime | cut -f 1 -d ' '",
+                   "return_stderr=True", "return_rc=True"]
+        if not quiet:
+            grp.rpissuing_keyword(cmd_buf)
+        stdout_buf, stderr_buf, rc = BuiltIn().run_keyword(*cmd_buf)
+        if rc == 0 and stderr_buf == "":
+            uptime = stdout_buf
+
+    if 'epoch_seconds' in req_states:
+        date_cmd_buf = "date -u +%s"
+        if USE_BMC_EPOCH_TIME:
+            cmd_buf = ["Execute Command", date_cmd_buf, "return_stderr=True",
+                       "return_rc=True"]
+            if not quiet:
+                grp.rpissuing_keyword(cmd_buf)
+            stdout_buf, stderr_buf, rc = BuiltIn().run_keyword(*cmd_buf)
+            if rc == 0 and stderr_buf == "":
+                epoch_seconds = stdout_buf.rstrip("\n")
+        else:
+            shell_rc, out_buf = gc.cmd_fnc_u(date_cmd_buf,
+                                             quiet=1,
+                                             print_output=0)
+            if shell_rc == 0:
+                epoch_seconds = out_buf.rstrip("\n")
+
+    if 'power' in req_states:
         cmd_buf = ["Get Power State", "quiet=${" + str(quiet) + "}"]
         grp.rdpissuing_keyword(cmd_buf)
         power = BuiltIn().run_keyword(*cmd_buf)
-    else:
+    if 'chassis' in req_states:
         cmd_buf = ["Get Chassis Power State", "quiet=${" + str(quiet) + "}"]
         grp.rdpissuing_keyword(cmd_buf)
         chassis = BuiltIn().run_keyword(*cmd_buf)
         # Strip everything up to the final period.
         chassis = re.sub(r'.*\.', "", chassis)
 
-    if OBMC_STATES_VERSION == 0:
-        qualifier = "utils"
-    else:
-        qualifier = "state_manager"
-
-    cmd_buf = [qualifier + ".Get BMC State", "quiet=${" + str(quiet) + "}"]
-    grp.rdpissuing_keyword(cmd_buf)
-    bmc = BuiltIn().run_keyword(*cmd_buf)
-
-    cmd_buf = ["Get Boot Progress", "quiet=${" + str(quiet) + "}"]
-    grp.rdpissuing_keyword(cmd_buf)
-    boot_progress = BuiltIn().run_keyword(*cmd_buf)
-
-    if OBMC_STATES_VERSION > 0:
-        cmd_buf = ["Get Host State", "quiet=${" + str(quiet) + "}"]
-        grp.rdpissuing_keyword(cmd_buf)
-        host = BuiltIn().run_keyword(*cmd_buf)
-        # Strip everything up to the final period.
-        host = re.sub(r'.*\.', "", host)
-
-    # Create composite state dictionary.
-    if OBMC_STATES_VERSION == 0:
-        cmd_buf = ["Create Dictionary", "power=${" + str(power) + "}",
-                   "bmc=" + bmc, "boot_progress=" + boot_progress]
-    else:
-        cmd_buf = ["Create Dictionary", "chassis=" + str(chassis),
-                   "bmc=" + bmc, "boot_progress=" + boot_progress,
-                   "host=" + host]
-
-    grp.rdpissuing_keyword(cmd_buf)
-    state = BuiltIn().run_keyword(*cmd_buf)
-
-    if os_host != "":
-        # Create an os_up_match dictionary to test whether we are booted enough
-        # to get operating system info.
+    if 'bmc' in req_states:
         if OBMC_STATES_VERSION == 0:
-            cmd_buf = ["Create Dictionary", "power=^${1}$",
-                       "bmc=^HOST_BOOTED$",
-                       "boot_progress=^FW Progress, Starting OS$"]
+            qualifier = "utils"
         else:
-            # TODO: Add back boot_progress when ipmi is enabled on
-            # Witherspoon.
-            cmd_buf = ["Create Dictionary", "chassis=^On$",
-                       "bmc=^Ready$"]
-            #           "boot_progress=^FW Progress, Starting OS$"]
+            qualifier = "state_manager"
+
+        cmd_buf = [qualifier + ".Get BMC State", "quiet=${" + str(quiet) + "}"]
+        # TODO: Re-enable this code once bmc status is working.
+        # grp.rdpissuing_keyword(cmd_buf)
+        # bmc = BuiltIn().run_keyword(*cmd_buf)
+
+    if 'boot_progress' in req_states:
+        cmd_buf = ["Get Boot Progress", "quiet=${" + str(quiet) + "}"]
         grp.rdpissuing_keyword(cmd_buf)
-        os_up_match = BuiltIn().run_keyword(*cmd_buf)
+        boot_progress = BuiltIn().run_keyword(*cmd_buf)
+
+    if 'host' in req_states:
+        if OBMC_STATES_VERSION > 0:
+            cmd_buf = ["Get Host State", "quiet=${" + str(quiet) + "}"]
+            grp.rdpissuing_keyword(cmd_buf)
+            host = BuiltIn().run_keyword(*cmd_buf)
+            # Strip everything up to the final period.
+            host = re.sub(r'.*\.', "", host)
+
+    state = DotDict()
+    for sub_state in req_states:
+        if sub_state.startswith("os_"):
+            # We pass "os_" requests on to get_os_state.
+            continue
+        cmd_buf = "state['" + sub_state + "'] = str(" + sub_state + ")"
+        exec(cmd_buf)
+
+    if os_host == "":
+        # The caller has not specified an os_host so as far as we're concerned,
+        # it doesn't exist.
+        return state
+
+    os_req_states = [sub_state for sub_state in req_states
+                     if sub_state.startswith('os_')]
+
+    if len(os_req_states) > 0:
+        # The caller has specified an os_host and they have requested
+        # information on os substates.
+
+        # Based on the information gathered on bmc, we'll try to make a
+        # determination of whether the os is even up.  We'll pass the result
+        # of that assessment to get_os_state to enhance performance.
+        os_up_match = DotDict()
+        for sub_state in master_os_up_match:
+            if sub_state in req_states:
+                os_up_match[sub_state] = master_os_up_match[sub_state]
         os_up = compare_states(state, os_up_match)
 
-        if os_up:
-            # Get OS information...
-            os_state = get_os_state(os_host=os_host,
-                                    os_username=os_username,
-                                    os_password=os_password,
-                                    quiet=quiet)
-            for key, state_value in os_state.items():
-                # Add each OS value to the state dictionary, pre-pending
-                # "os_" to each key.
-                new_key = "os_" + key
-                state[new_key] = state_value
+        os_state = get_os_state(os_host=os_host,
+                                os_username=os_username,
+                                os_password=os_password,
+                                req_states=os_req_states,
+                                os_up=os_up,
+                                quiet=quiet)
+        # Append os_state dictionary to ours.
+        state.update(os_state)
 
     return state
 
@@ -443,6 +654,7 @@ def check_state(match_state,
 
     grp.rprint(print_string)
 
+    req_states = match_state.keys()
     # Initialize state.
     state = get_state(openbmc_host=openbmc_host,
                       openbmc_username=openbmc_username,
@@ -450,6 +662,7 @@ def check_state(match_state,
                       os_host=os_host,
                       os_username=os_username,
                       os_password=os_password,
+                      req_states=req_states,
                       quiet=quiet)
     if not quiet:
         grp.rprint_var(state)
@@ -533,16 +746,21 @@ def wait_state(match_state=(),
         print_string = ""
     else:
         print_string = "#"
+
+    debug = int(BuiltIn().get_variable_value("${debug}", "0"))
+    if debug:
+        # In debug we print state so no need to print the "#".
+        print_string = ""
+    check_state_quiet = 1 - debug
     cmd_buf = ["Check State", match_state, "invert=${" + str(invert) + "}",
                "print_string=" + print_string, "openbmc_host=" + openbmc_host,
                "openbmc_username=" + openbmc_username,
                "openbmc_password=" + openbmc_password, "os_host=" + os_host,
                "os_username=" + os_username, "os_password=" + os_password,
-               "quiet=${1}"]
+               "quiet=${" + str(check_state_quiet) + "}"]
     grp.rdpissuing_keyword(cmd_buf)
     state = BuiltIn().wait_until_keyword_succeeds(wait_time, interval,
                                                   *cmd_buf)
-
     if not quiet:
         grp.rprintn()
         if invert:
@@ -552,5 +770,66 @@ def wait_state(match_state=(),
         grp.rprint_var(state)
 
     return state
+
+###############################################################################
+
+
+###############################################################################
+def wait_for_comm_cycle(start_boot_seconds):
+
+    r"""
+    Wait for communications to the BMC to stop working and then resume working.
+    This function is useful when you have initiated some kind of reboot.
+
+    Description of arguments:
+    start_boot_seconds  The time that the boot test started.  The format is the
+                        epoch time in seconds, i.e. the number of seconds since
+                        1970-01-01 00:00:00 UTC.  This value should be obtained
+                        from the BMC so that it is not dependent on any kind of
+                        synchronization between this machine and the target BMC
+                        This will allow this program to work correctly even in
+                        a simulated environment.  This value should be obtained
+                        by the caller prior to initiating a reboot.  It can be
+                        obtained as follows:
+                        state = st.get_state(req_states=['epoch_seconds'])
+    """
+
+    # Validate parms.
+    error_message = gv.svalid_integer(start_boot_seconds,
+                                      var_name="start_boot_seconds")
+    if error_message != "":
+        BuiltIn().fail(gp.sprint_error(error_message))
+
+    match_state = anchor_state(DotDict([('packet_loss', '100')]))
+    # Wait for 100% packet loss trying to ping machine.
+    wait_state(match_state, wait_time="3 mins", interval="0 seconds")
+
+    match_state['packet_loss'] = '^0$'
+    # Wait for 0% packet loss trying to ping machine.
+    wait_state(match_state, wait_time="4 mins", interval="0 seconds")
+
+    # Get the uptime and epoch seconds for comparisons.  We want to be sure
+    # that the uptime is less than the elapsed boot time.  Further proof that
+    # a reboot has indeed occurred (vs random network instability giving a
+    # false positive.
+    state = get_state(req_states=['uptime', 'epoch_seconds'])
+
+    elapsed_boot_time = int(state['epoch_seconds']) - start_boot_seconds
+    grp.rprint_var(elapsed_boot_time)
+    if int(float(state['uptime'])) < elapsed_boot_time:
+        uptime = state['uptime']
+        grp.rprint_var(uptime)
+        grp.rprint_timen("The uptime is less than the elapsed boot time," +
+                         " as expected.")
+    else:
+        error_message = "The uptime is greater than the elapsed boot time," +\
+                        " which is unexpected:\n" +\
+                        gp.sprint_var(start_boot_seconds) +\
+                        gp.sprint_var(state)
+        BuiltIn().fail(gp.sprint_error(error_message))
+
+    grp.rprint_timen("Verifying that REST API interface is working.")
+    match_state = DotDict([('chassis', '.*')])
+    state = wait_state(match_state, wait_time="5 mins", interval="2 seconds")
 
 ###############################################################################
