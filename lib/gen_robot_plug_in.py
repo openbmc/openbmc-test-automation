@@ -178,7 +178,9 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
 
         if int(debug) == 1:
             grp.rpissuing(cmd_buf)
-        grp.rprint_timen("Processing " + call_point + " call point programs.")
+        else:
+            grp.rprint_timen("Processing " + call_point +
+                             " call point programs.")
 
     proc_plug_pkg_rc = subprocess.call(cmd_buf, shell=True)
 
