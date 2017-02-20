@@ -104,7 +104,9 @@ FFDC_OS_IBM_POWERKVM_FILE = {
 # replace with new path /xyz/openbmc_project
 OPENBMC_BASE = '/org/openbmc/'
 ENUMERATE_SENSORS = OPENBMC_BASE + 'sensors/enumerate'
-ENUMERATE_SYSTEMS = OPENBMC_BASE + 'inventory/system/enumerate'
+# TODO: Use the xyz enums once moved to xyz completely
+# ENUMERATE_SYSTEMS = OPENBMC_BASE + 'inventory/enumerate'
+ENUMERATE_SYSTEMS = '/xyz/openbmc_project/Inventory/enumerate'
 ENUMERATE_EVENTS = OPENBMC_BASE + 'records/events/enumerate'
 ENUMERATE_LED = OPENBMC_BASE + 'control/led/enumerate'
 
