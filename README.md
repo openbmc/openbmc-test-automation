@@ -157,3 +157,16 @@ Features:
     # Your code here.
 
 ```
+
+Command to get GitHub issues (any GitHub repository) report in CSV format
+
+```shell
+python ./tools/github_issues_to_csv <github user> <password> <github repo>
+
+Example for getting openbmc issues
+python ./tools/github_issues_to_csv <github user> <password>  openbmc/openbmc
+
+Example for getting openbmc-test-automation issues
+python ./tools/github_issues_to_csv <github user> <password>  openbmc/openbmc-test-automation
+
+```
