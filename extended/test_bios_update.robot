@@ -31,11 +31,12 @@ Prepare BMC For Update
     [Documentation]  Prepare system for PNOR update.
 
     Initiate Power Off
+
     Trigger Warm Reset
-    Check If BMC is Up    10 min   10 sec
+    Check If BMC is Up    20 min   10 sec
 
     Wait Until Keyword Succeeds
-    ...    10 min   10 sec   Verify BMC State   BMC_READY
+    ...    20 min   10 sec   Verify BMC State   BMC_READY
 
     Clear BMC Record Log
 
