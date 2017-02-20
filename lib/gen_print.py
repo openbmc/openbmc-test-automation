@@ -600,7 +600,7 @@ def sprint_varx(var_name,
             value_format = "%s"
         format_string = "%" + str(loc_col1_indent) + "s%-" \
             + str(loc_col1_width) + "s" + value_format + trailing_char
-        return format_string % ("", var_name + ":", var_value)
+        return format_string % ("", str(var_name) + ":", var_value)
     else:
         # The data type is complex in the sense that it has subordinate parts.
         format_string = "%" + str(loc_col1_indent) + "s%s\n"
@@ -636,8 +636,13 @@ def sprint_varx(var_name,
                 if ix == length:
                     loc_trailing_char = trailing_char
                 if hex:
+                    # Since hex is being used as a format type, we want it
+                    # turned off when processing integer dictionary values so
+                    # it is not interpreted as a hex indicator.
+                    loc_hex = not (type(value) is int)
                     buffer += sprint_varx(key, value,
-                                          hex, loc_col1_indent, loc_col1_width,
+                                          loc_hex, loc_col1_indent,
+                                          loc_col1_width,
                                           loc_trailing_char)
                 else:
                     buffer += sprint_varx(var_name + "[" + key + "]", value,
@@ -671,7 +676,7 @@ def sprint_varx(var_name,
             loc_col1_width = loc_col1_width - loc_col1_indent
             format_string = "%" + str(loc_col1_indent) + "s%-" \
                 + str(loc_col1_width) + "s" + value_format + trailing_char
-            return format_string % ("", var_name + ":", var_value)
+            return format_string % ("", str(var_name) + ":", var_value)
 
         return buffer
 
