@@ -1,0 +1,28 @@
+BMC oob hpm
+BMC ib hpm
+BMC oob update
+BMC ib update
+BMC pflash
+BMC Power On
+BMC Power On (mfg)
+BMC Golden PNOR
+BMC Golden PNOR (mfg)
+BMC Golden BMC
+BMC APOR
+BMC APOR (mfg)
+BMC Host Reboot
+BMC Host Reboot (mfg)
+BMC Power Reset
+BMC Power Reset (mfg)
+BMC Power Cycle
+BMC Power Cycle (mfg)
+BMC Power Off
+BMC Power Off (mfg)
+BMC Power Soft
+BMC Power Soft (mfg)
+BMC Host Off
+BMC Host Off (mfg)
+BMC MC Reset Warm
+BMC MC Reset Warm (mfg)
+BMC AC Cycle
+BMC AC Cycle (mfg)
