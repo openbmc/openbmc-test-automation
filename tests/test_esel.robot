@@ -4,12 +4,37 @@ Documentation   This suite is for testing esel's mechanism of checking Reservati
 
 Resource          ../lib/ipmi_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Variables         ../data/variables.py
 
-Suite Setup            Open Connection And Log In
-Suite Teardown         Close All Connections
-Test Teardown          FFDC On Test Case Fail
+Suite Setup         Open Connection And Log In
+Suite Teardown      Close All Connections
+Test Teardown       FFDC On Test Case Fail
+
+*** Variables ***
+
+${RESERVE_ID}       raw 0x0a 0x42
+${RAW_PREFIX}       raw 0x32 0xf0 0x
+
+${RAW_SUFFIX}       0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x00
+...  0xdf 0x00 0x00 0x00 0x00 0x20 0x00 0x04 0x12 0x35 0x6f 0xaa 0x00 0x00
+
+${RAW_SEL_COMMIT}   raw 0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20
+...  0x00 0x04 0x12 0x35 0x6f 0x02 0x00 0x01
 
 *** Test Cases ***
+
+Verify eSEL Using REST
+    [Documentation]  Generate eSEL log and Verify using REST.
+    [Tags]  Verify_eSEL_Using_REST
+
+    ${Resv_id}=  Run Dbus IPMI Standard Command  ${RESERVE_ID}
+    ${cmd}=  Catenate
+    ...  ${RAW_PREFIX}${Resv_id.strip().rsplit(' ', 1)[0]}  ${RAW_SUFFIX}
+    Run Dbus IPMI Standard Command  ${cmd}
+    Run Dbus IPMI Standard Command  ${RAW_SEL_COMMIT}
+    ${resp}=   OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
 
 Test Wrong Reservation_ID
     [Documentation]   This testcase is to test BMC can handle multi-requestor's
