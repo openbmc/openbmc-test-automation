@@ -23,9 +23,8 @@ Kernel Reboot Test
     [Documentation]  Reboot BMC and validate proc btime.
     [Tags]  Kernel_Reboot_Test
 
-    Set BMC Reset Reference Time
+    Set BMC Boot Count  ${0}
     Initiate BMC Reboot
-    Set BMC Reset Reference Time
-    Should Be Equal  ${BOOT_COUNT}  ${TEST_BOOT_COUNT}
-    ...  msg=Kernel proc boot time is persistent.
-
+    ${boot_count}=  Get BMC Boot Count
+    Should Be Equal  ${boot_count}  ${1}
+    ...  msg=Reboot did not happen.
