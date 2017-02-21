@@ -6,6 +6,7 @@ Resource           ../lib/rest_client.robot
 Resource           ../lib/ipmi_client.robot
 Resource           ../lib/utils.robot
 Resource           ../lib/openbmc_ffdc.robot
+Resource           ../lib/state_manager.robot
 
 Suite Setup        Open Connection And Log In
 Test Setup         Initialize DBUS cmd   "boot_policy"
@@ -78,7 +79,7 @@ Test Boot Order via REST
 
     Set Boot Device   CDROM
 
-    Initiate Power On
+    Initiate Host Boot
 
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    PERMANENT
@@ -91,7 +92,7 @@ Persist ONETIME Boot Policy After Reset
     ...               on warm reset.
     [Tags]  chassisboot   Persist_ONETIME_Boot_Policy_After_Reset
 
-    Initiate Power On
+    Initiate Host Boot
 
     Set Boot Policy   ONETIME
 
@@ -110,7 +111,7 @@ Persist PERMANENT Boot Policy After Reset
     ...               on warm reset.
     [Tags]  chassisboot    Persist_PERMANENT_Boot_Policy_After_Reset
 
-    Initiate Power On
+    Initiate Host Boot
 
     Set Boot Policy   PERMANENT
 
