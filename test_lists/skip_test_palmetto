@@ -56,3 +56,4 @@
 -e Set_BMC_Time_With_Split_And_Manual
 #https://github.com/openbmc/openbmc/issues/1142
 -e Check_BMC_Name_Property_Is_Set
+-e eSEL_Logging
