@@ -39,7 +39,6 @@
 -e IPMI_Chassis_Restore_Power_Policy
 #Pre bringup list
 -e Repeated_Testing
--e power_on_test
 -e inventory
 -e powercapping
 -e io_board_Present
