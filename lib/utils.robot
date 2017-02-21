@@ -30,6 +30,7 @@ ${bmc_file_system_usage_cmd}=
 
 ${BOOT_TIME}     ${0}
 ${BOOT_COUNT}    ${0}
+${count}  ${0}
 ${devicetree_base}  /sys/firmware/devicetree/base/model
 
 *** Keywords ***
@@ -756,3 +757,29 @@ Enable Core Dump On BMC
     ${core_pattern}=  Execute Command On BMC
     ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
     Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
+
+Get BMC Boot Count
+    [Documentation]  Get BMC boot count based on boot time.
+    ${cur_btime}=  Get BMC Boot Time
+    
+    # Set global variable BOOT_TIME to current boot time if current boot time
+    # is changed. Also increase value of global variable BOOT_COUNT by 1.
+    Run Keyword If  ${cur_btime} > ${BOOT_TIME}
+    ...  Run Keywords  Set Global Variable  ${BOOT_TIME}  ${cur_btime}
+    ...  AND
+    ...  Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
+    [Return]  ${BOOT_COUNT}
+
+Set BMC Boot Count
+    [Documentation]  Set BMC boot count to given value.
+    [Arguments]   ${count}
+    
+    # Description of arguments:
+    # count  boot count value.
+    ${cur_btime}=  Get BMC Boot Time
+
+    # Set global variable BOOT_COUNT to given value.
+    Set Global Variable  ${BOOT_COUNT}  ${count}
+
+    # Set BOOT_TIME variable to current boot time.
+    Set Global Variable  ${BOOT_COUNT}  ${count}
