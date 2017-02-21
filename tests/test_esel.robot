@@ -1,15 +1,50 @@
 *** Settings ***
 
-Documentation   This suite is for testing esel's mechanism of checking Reservation_ID.
+Documentation       eSEL's Test cases.
 
-Resource          ../lib/ipmi_client.robot
-Resource          ../lib/openbmc_ffdc.robot
+Resource            ../lib/ipmi_client.robot
+Resource            ../lib/openbmc_ffdc.robot
+Variables           ../data/variables.py
 
-Suite Setup            Open Connection And Log In
-Suite Teardown         Close All Connections
-Test Teardown          FFDC On Test Case Fail
+Suite Setup         Open Connection And Log In
+Suite Teardown      Close All Connections
+Test Teardown       FFDC On Test Case Fail
+
+*** Variables ***
+
+${RESERVE_ID}       raw 0x0a 0x42
+${RAW_PREFIX}       raw 0x32 0xf0 0x
+
+${RAW_SUFFIX}       0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x00
+...  0xdf 0x00 0x00 0x00 0x00 0x20 0x00 0x04 0x12 0x35 0x6f 0xaa 0x00 0x00
+
+${RAW_SEL_COMMIT}   raw 0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20
+...  0x00 0x04 0x12 0x35 0x6f 0x02 0x00 0x01
+
+${LOGGING_SERVICE}  xyz.openbmc_project.Logging.service
 
 *** Test Cases ***
+
+Verify eSEL Using REST
+    [Documentation]  Generate eSEL log and Verify using REST.
+    [setup]  Restart Logging Service
+    [Tags]  Verify_eSEL_Using_REST
+
+    # Prior eSEL log shouldn't exist
+    ${resp}=   OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
+    Open Connection And Log In
+    ${Resv_id}=  Run Dbus IPMI Standard Command  ${RESERVE_ID}
+    ${cmd}=  Catenate
+    ...  ${RAW_PREFIX}${Resv_id.strip().rsplit(' ', 1)[0]}  ${RAW_SUFFIX}
+    Run Dbus IPMI Standard Command  ${cmd}
+    Run Dbus IPMI Standard Command  ${RAW_SEL_COMMIT}
+
+    # New eSEL log should exist
+    ${resp}=   OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
 
 Test Wrong Reservation_ID
     [Documentation]   This testcase is to test BMC can handle multi-requestor's
@@ -47,6 +82,18 @@ Clear Test File
    Execute Command   sync
 
 *** Keywords ***
+
+Restart Logging Service
+    [Documentation]  Restart Logging to clear eSEL log.
+    ${MainPID}  ${stderr}=  Execute Command
+    ...  systemctl -p MainPID show ${LOGGING_SERVICE}| cut -d = -f2
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
+
+    ${stdout}  ${stderr}=  Execute Command
+    ...  kill -9 ${MainPID}  return_stderr=True
+    Should Be Empty  ${stderr}
+    Sleep  10s  reason=Wait for service to restart properly.
 
 Run IPMI Command Returned
     [Arguments]    ${args}
