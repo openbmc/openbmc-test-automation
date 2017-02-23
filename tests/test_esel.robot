@@ -7,7 +7,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Variables           ../data/variables.py
 
 Suite Setup         Open Connection And Log In
-Suite Teardown      Close All Connections
+Suite Teardown      Test Cleanup On Exit
 Test Teardown       FFDC On Test Case Fail
 
 Force Tags  eSEL_Logging
@@ -25,6 +25,8 @@ ${RAW_SEL_COMMIT}   raw 0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20
 
 ${LOGGING_SERVICE}  xyz.openbmc_project.Logging.service
 
+${ESEL_DATA}        ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00
+
 *** Test Cases ***
 
 Verify eSEL Using REST
@@ -35,17 +37,28 @@ Verify eSEL Using REST
     # Prior eSEL log shouldn't exist
     ${resp}=   OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
-
-    Open Connection And Log In
-    ${Resv_id}=  Run Dbus IPMI Standard Command  ${RESERVE_ID}
-    ${cmd}=  Catenate
-    ...  ${RAW_PREFIX}${Resv_id.strip().rsplit(' ', 1)[0]}  ${RAW_SUFFIX}
-    Run Dbus IPMI Standard Command  ${cmd}
-    Run Dbus IPMI Standard Command  ${RAW_SEL_COMMIT}
-
+    Create eSEL
     # New eSEL log should exist
     ${resp}=   OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Verify eSEL Entries Using REST
+    [Documentation]  Verify if the eSEL entries are not empty.
+    [setup]  Restart Logging Service
+    [Tags]  Verify_eSEL_Entries_Using_REST
+    Create eSEL
+    eSEL Entries
+
+
+Verify Multiple eSEL Using REST
+    [Documentation]  Generate multiple eSEL log and Verify using REST.
+    [setup]  Restart Logging Service
+    [Tags]  Verify_Multiple_eSEL_Using_REST
+    Create eSEL
+    Create eSEL
+    ${entries}=  Count eSEL Entries
+    Should Be Equal As Integers  ${entries}  ${2}
 
 
 Test Wrong Reservation_ID
@@ -84,6 +97,51 @@ Clear Test File
    Execute Command   sync
 
 *** Keywords ***
+
+Create eSEL
+    [Documentation]  Create an eSEL.
+    Open Connection And Log In
+    ${Resv_id}=  Run Dbus IPMI Standard Command  ${RESERVE_ID}
+    ${cmd}=  Catenate
+    ...  ${RAW_PREFIX}${Resv_id.strip().rsplit(' ', 1)[0]}  ${RAW_SUFFIX}
+    Run Dbus IPMI Standard Command  ${cmd}
+    Run Dbus IPMI Standard Command  ${RAW_SEL_COMMIT}
+
+
+Count eSEL Entries
+    [Documentation]  Count eSEL entries logged.
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    ${count}=  Get Length  ${jsondata["data"]}
+    [Return]  ${count}
+
+
+eSEL Entries
+    [Documentation]  Count eSEL entries logged.
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    #  "data": {
+    #       "AdditionalData": [
+    #           "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
+    #          ],
+    #       "Id": 1,
+    #       "Message": "org.open_power.Error.Host.Event.Event",
+    #       "Severity": "xyz.openbmc_project.Logging.Entry.Level.Emergency",
+    #       "Timestamp": 1485904869061
+    # }
+
+    Should Be Equal As Integers  ${jsondata["data"]["Id"]}  ${1}
+    Should Be Equal As Strings
+    ...  ${jsondata["data"]["AdditionalData"][0].rstrip()}  ${ESEL_DATA}
+
+
+Test Cleanup On Exit
+    [Documentation]  Cleanup test logs and connection.
+    Restart Logging Service
+    Close All Connections
+
 
 Restart Logging Service
     [Documentation]  Restart Logging to clear eSEL log.
