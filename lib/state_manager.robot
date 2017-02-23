@@ -49,6 +49,15 @@ Is Host Off
     Should Be Equal  Off  ${host_state}
 
 
+Recover Quiesced Host
+    [Documentation]  Recover host from quisced state.
+
+    ${resp}=  Run Keyword And Return Status  Is Host Quiesced
+    Run Keyword If  '${resp}' == 'True'
+    ...  Run Keywords  Initiate Host PowerOff  AND
+    ...  Log  HOST is recovered from quiesced state
+
+
 Get Host State
     [Documentation]  Return the state of the host as a string.
     [Arguments]  ${quiet}=${QUIET}

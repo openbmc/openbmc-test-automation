@@ -37,13 +37,16 @@ Library            openbmc_ffdc.py
 FFDC On Test Case Fail
     [Documentation]   Generic FFDC entry point. Place holder to hook in
     ...               other data collection methods
-    ...               1. Collect Logs if test fails
-    ...               2. Added Test execution history logging
+    ...               1. Collect Logs if test fails or host reaches quiesced
+    ...                  state.
+    ...               2. Recover host from quiesced state
+    ...               3. Added Test execution history logging
     ...                  By default this will log Test status PASS/FAIL format
     ...                  EX: 20160822041250932049:Test:Test case 1:PASS
     ...                      20160822041250969913:Test:Test case 2:FAIL
 
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL'
-    ...    FFDC
+    ${status}=  Is Host Quiesced
+    Run Keyword If  '${TEST_STATUS}' == 'FAIL' or '${status}'=='True'  FFDC
+    Run Keyword If  '${status}'=='True'  Recover Quiesced Host
 
     Log Test Case Status
