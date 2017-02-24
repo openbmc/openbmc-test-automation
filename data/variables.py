@@ -31,7 +31,7 @@ CHASSIS_POWEROFF_STATE = 'xyz.openbmc_project.State.Chassis.PowerState.Off'
 CHASSIS_POWERON_STATE = 'xyz.openbmc_project.State.Chassis.PowerState.On'
 
 # State Manager URI variables.
-BMC_STATE_URI = '/xyz/openbmc_project/state/BMC0/'
+BMC_STATE_URI = '/xyz/openbmc_project/state/bmc0/'
 HOST_STATE_URI = '/xyz/openbmc_project/state/host0/'
 CHASSIS_STATE_URI = '/xyz/openbmc_project/state/chassis0/'
 
