@@ -5,6 +5,7 @@ Documentation      Methods to execute commands on BMC and collect
 Resource           openbmc_ffdc_utils.robot
 Resource           rest_client.robot
 Resource           utils.robot
+Library            SSHLibrary
 
 *** Keywords ***
 
@@ -21,6 +22,7 @@ Call FFDC Methods
     @{entries}=     Get ffdc method index
     :FOR  ${index}  IN   @{entries}
     \     Method Call Keyword List   ${index}
+    SSHLibrary.Close All Connections
 
 
 Method Call Keyword List
