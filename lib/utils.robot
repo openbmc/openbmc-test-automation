@@ -700,3 +700,12 @@ Enable Core Dump On BMC
     ${core_pattern}=  Execute Command On BMC
     ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
     Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
+
+Trigger Host Watchdog Error
+    [Documentation]  Inject host watchdog error using BMC.
+
+    Execute Command On BMC
+    ...  /usr/sbin/mapper call /org/openbmc/watchdog/host0 org.openbmc.Watchdog set i 1000
+    Execute Command On BMC
+    ...  /usr/sbin/mapper call /org/openbmc/watchdog/host0 org.openbmc.Watchdog start
+    Sleep  5s
