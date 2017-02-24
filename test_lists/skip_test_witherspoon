@@ -48,7 +48,6 @@
 -e get_directory_listing
 -e get_names
 -e get_names_org
--e chassisboot
 -e Event_Logging
 -e Association
 #https://github.com/openbmc/openbmc/issues/928

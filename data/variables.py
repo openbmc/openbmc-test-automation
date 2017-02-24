@@ -36,8 +36,8 @@ HOST_STATE_URI = '/xyz/openbmc_project/state/host0/'
 CHASSIS_STATE_URI = '/xyz/openbmc_project/state/chassis0/'
 
 # Logging URI variables
-BMC_LOGGING_URI = '/xyz/openbmc_project/Logging/'
-BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'Entry/'
+BMC_LOGGING_URI = '/xyz/openbmc_project/logging/'
+BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
 
 '''
   QEMU HTTPS variable:
