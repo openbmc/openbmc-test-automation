@@ -21,6 +21,7 @@ Call FFDC Methods
     @{entries}=     Get ffdc method index
     :FOR  ${index}  IN   @{entries}
     \     Method Call Keyword List   ${index}
+    Close All Connections
 
 
 Method Call Keyword List
