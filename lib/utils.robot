@@ -647,7 +647,7 @@ Get System Power Policy
 
 Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
-    ${setting}=  Read Attribute  ${HOST_SETTINGS}  auto_reboot
+    ${setting}=  Read Attribute  ${HOST_SETTING}  auto_reboot
     [Return]  ${setting}
 
 
@@ -658,7 +658,7 @@ Set Auto Reboot
 
     ${valueDict}=  Set Variable  ${setting}
     ${data}=  Create Dictionary  data=${valueDict}
-    Write Attribute  ${HOST_SETTINGS}  auto_reboot  data=${data}
+    Write Attribute  ${HOST_SETTING}  auto_reboot  data=${data}
     ${current_setting}=  Get Auto Reboot
     Should Be Equal  ${current_setting}  ${setting}
 
@@ -700,3 +700,17 @@ Enable Core Dump On BMC
     ${core_pattern}=  Execute Command On BMC
     ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
     Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
+
+Trigger Host Watchdog Error
+    [Documentation]  Inject host watchdog error using BMC.
+    [Arguments]  ${milliseconds}=1000  ${sleep_time}=5s
+    # Description of arguments:
+    # milliseconds  The time watchdog timer value in milliseconds (e.g. 1000 = 1 second).
+    # sleep_time    Time delay for host watchdog error to get injected.
+    #               Default is 5 seconds.
+
+    Execute Command On BMC
+    ...  /usr/sbin/mapper call /org/openbmc/watchdog/host0 org.openbmc.Watchdog set i ${milliseconds}
+    Execute Command On BMC
+    ...  /usr/sbin/mapper call /org/openbmc/watchdog/host0 org.openbmc.Watchdog start
+    Sleep  ${sleep_time}
