@@ -37,8 +37,8 @@ ${devicetree_base}  /sys/firmware/devicetree/base/model
 Get BMC System Model
     [Documentation]  Get the BMC model from the device tree.
 
-    ${bmc_model}  ${stderr}=  Execute Command  cat ${devicetree_base} | cut -f 1
-    ...  -d ${SPACE}  return_stderr=True
+    ${bmc_model}  ${stderr}=  Execute Command
+    ...  cat ${devicetree_base} | cut -d " " -f 1  return_stderr=True
     Should Be Empty  ${stderr}
     Should Not Be Empty  ${bmc_model}
     [Return]  ${bmc_model}

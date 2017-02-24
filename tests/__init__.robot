@@ -11,6 +11,7 @@ Suite Setup      System Driver Data
 *** Variables ***
 
 ${DRIVER_CMD}    cat /etc/os-release | grep ^VERSION_ID=
+${PNOR_CMD}      /usr/sbin/pflash -r /tmp/out.txt -P VERSION; cat /tmp/out.txt
 
 *** Keyword ***
 
@@ -34,20 +35,10 @@ Log BMC Driver Details
 
 Log PNOR Driver Details
     [Documentation]   Get PNOR driver details and log.
-    ${resp}=
-    ...  OpenBMC Get Request  ${INVENTORY_URI}system/bios
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${jsondata}=  To Json  ${resp.content}
-    Log  ${jsondata["data"]["Name"]}
-    Log  ${jsondata["data"]["Version"]}
-    Log  ${jsondata["data"]["Custom Field 1"]}
-    Log  ${jsondata["data"]["Custom Field 2"]}
-    Log  ${jsondata["data"]["Custom Field 3"]}
-    Log  ${jsondata["data"]["Custom Field 4"]}
-    Log  ${jsondata["data"]["Custom Field 5"]}
-    Log  ${jsondata["data"]["Custom Field 6"]}
-    Log  ${jsondata["data"]["Custom Field 7"]}
-    Log  ${jsondata["data"]["Custom Field 8"]}
+    # Until the new REST interface is available using pflash to
+    # capture the PNOR details.
+    ${pnor_details}=  Execute Command On BMC  ${PNOR_CMD}
+    Log  PNOR_INFO=${pnor_details}
 
 
 Log BMC Model
