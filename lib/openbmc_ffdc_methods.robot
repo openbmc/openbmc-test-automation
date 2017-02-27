@@ -228,3 +228,20 @@ OS FFDC Files
     @{entries}=  Get ffdc os distro index  ${linux_distro}
     :FOR  ${index}  IN  @{entries}
     \   Log OS SPECIFIC DISTRO FFDC  ${index}  ${linux_distro}
+
+
+##############################################################################
+SCP Coredump Files
+    [Documentation]  Copy core dump file from BMC to local system.
+    # Check if core dump exist in the /tmp
+    Open Connection And Log In
+    ${core_files}=  Execute Command On BMC  ls /tmp/core_*
+    Should Not Contain  ${core_files}  No such file or directory
+    @{core_list} =  Split String    ${core_files}
+    # Copy the core files
+    Open Connection for SCP
+    :FOR  ${index}  IN  @{core_list}
+    \  scp.Get File  ${index}  ${LOG_PREFIX}${index.lstrip("/tmp/")}
+    # Remove the file from remote to avoid re-copying on next FFDC call
+    \  Execute Command On BMC  rm ${index}
+

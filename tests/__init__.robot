@@ -20,6 +20,7 @@ System Driver Data
     Run Keyword And Ignore Error  Log BMC Driver Details
     Run Keyword And Ignore Error  Log PNOR Driver Details
     Run Keyword And Ignore Error  Log BMC Model
+    Run Keyword And Ignore Error  Enable Core Dump On BMC
 
 Log BMC Driver Details
     [Documentation]   Get BMC driver details and log.

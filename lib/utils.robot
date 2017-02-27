@@ -693,3 +693,10 @@ Execute Command On BMC
     Should Be Empty  ${stderr}
     [Return]  ${stdout}
 
+
+Enable Core Dump On BMC
+    [Documentation]  Enable core dump collection.
+    Open Connection And Log In
+    ${core_pattern}=  Execute Command On BMC
+    ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
+    Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
