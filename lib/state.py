@@ -178,7 +178,7 @@ def anchor_state(state):
              function.
     """
 
-    anchored_state = state
+    anchored_state = state.copy()
     for key, match_state_value in anchored_state.items():
         anchored_state[key] = "^" + str(anchored_state[key]) + "$"
 
@@ -200,7 +200,7 @@ def strip_anchor_state(state):
              function.
     """
 
-    stripped_state = state
+    stripped_state = state.copy()
     for key, match_state_value in stripped_state.items():
         stripped_state[key] = stripped_state[key].strip("^$")
 
