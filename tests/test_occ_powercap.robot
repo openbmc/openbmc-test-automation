@@ -159,9 +159,12 @@ Check OCC Readiness
     [Documentation]  Poweron If BMC power state is off. Check the OCC powercap
     ...              if the interface attributes are activated.
 
-    ${status}=  Run Keyword and Return Status  Is Host Off
-    Run Keyword If  '${status}' == '${True}'  Initiate Host Boot
-    Wait Until Keyword Succeeds  5min  10sec  Powercap Attributes Activated
+    ${status}=
+    ...   Run Keyword and Return Status  Is Host Running
+    Run Keyword If   '${status}' == '${False}'
+    ...  Initiate Host Boot
+    Wait Until Keyword Succeeds   5min  10sec
+    ...   Powercap Attributes Activated
 
 
 Powercap Attributes Activated
