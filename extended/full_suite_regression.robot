@@ -47,4 +47,33 @@ Create Combined Report
    [Documentation]  Using output[?].xml and create combined log.html
 
    Run  rebot --name ${OPENBMC_SYSTEMMODEL}CombinedReport ${RESULT_DIR_PATH}/output*.xml
-   Move File  log.html  ${RESULT_DIR_PATH}/log${OPENBMC_SYSTEMMODEL}CombinedIterations${ITERATION}Report.html
+
+   ${combined_report_file}=  Catenate  SEPARATOR=  ${RESULT_DIR_PATH}
+    ...  /log${OPENBMC_SYSTEMMODEL}CombinedIterations  ${ITERATION}Report.html
+   Copy File  log.html  ${combined_report_file}
+
+   Convert HTML To PDF  ${combined_report_file}
+
+*** Keywords ***
+Convert HTML To PDF
+   [Documentation]  Convert HTML to PDF in order to support GitHub
+   ...  attachment.
+   [Arguments]  ${combined_report_html_path}
+   # combined_report_html_path  combined report file in HTML
+
+   Log To Console  \n ${combined_report_html_path}
+   ${combined_report_pdf_path}=
+   ...  Fetch From Left  ${combined_report_html_path}  .
+   # Compose combined_report_pdf_file_path
+   ${combined_report_pdf_path}=  Catenate  SEPARATOR=
+   ...  ${combined_report_pdf_path}  .pdf
+   # wkhtmltopdf tool is to convert HTML to PDF
+   ${output}=  Run  which wkhtmltopdf
+   Should Not Be Empty  ${output}
+   ...  msg=wkhtmltopdf not installed, Install from http://wkhtmltopdf.org
+   ${output}=
+   ...  Run  wkhtmltopdf ./${combined_report_html_path} ./${combined_report_pdf_path}
+   Should Not Be Empty  ${output}
+   OperatingSystem.File Should Exist  ${combined_report_pdf_path}
+
+
