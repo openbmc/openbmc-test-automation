@@ -241,6 +241,8 @@ def select_boot():
     state  The state of the machine.
     """
 
+    global boot_stack
+
     grp.rprint_timen("Selecting a boot test.")
 
     my_get_state()
@@ -440,7 +442,7 @@ def run_boot(boot):
     if test_mode:
         # In test mode, we'll pretend the boot worked by assigning its
         # required end state to the default state value.
-        state = boot_table[boot]['end']
+        state = st.strip_anchor_state(boot_table[boot]['end'])
     else:
         # Assertion:  We trust that the state data was made fresh by the
         # caller.
@@ -454,6 +456,13 @@ def run_boot(boot):
 
         if boot_table[boot]['bmc_reboot']:
             st.wait_for_comm_cycle(int(state['epoch_seconds']))
+            plug_in_setup()
+            rc, shell_rc, failed_plug_in_name = \
+                grpi.rprocess_plug_in_packages(call_point="post_reboot")
+            if rc != 0:
+                error_message = "Plug-in failed with non-zero return code.\n" +\
+                    gp.sprint_var(rc, 1)
+                BuiltIn().fail(gp.sprint_error(error_message))
         else:
             match_state = st.anchor_state(state)
             del match_state['epoch_seconds']
@@ -582,6 +591,8 @@ def main_py():
     # Process caller's boot_stack.
     while (len(boot_stack) > 0):
         test_loop_body()
+
+    grp.rprint_timen("Finished processing stack.")
 
     # Process caller's boot_list.
     if len(boot_list) > 0:
