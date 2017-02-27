@@ -48,6 +48,7 @@
 #https://github.com/openbmc/openbmc/issues/830
 -e Good_connection_for_testing
 -e get_directory_listing
+-e get_directory_listing_xyz
 #https://github.com/openbmc/openbmc-test-automation/issues/90
 -e Verify_System_VPD_Properties
 #https://github.com/openbmc/openbmc/issues/928
