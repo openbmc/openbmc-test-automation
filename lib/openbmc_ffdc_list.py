@@ -134,6 +134,7 @@ FFDC_METHOD_CALL = {
         'BMC Specific Files': 'BMC FFDC Files',
         'Get Request FFDC': 'BMC FFDC Get Requests',
         'OS FFDC': 'OS FFDC Files',
+        'Core Files': 'SCP Coredump Files',
     },
 }
 
