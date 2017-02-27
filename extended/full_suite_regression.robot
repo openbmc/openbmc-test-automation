@@ -32,7 +32,6 @@ Run Entire Test Suite Multiple Time
    ${timestamp}=  Get Current Date  result_format=%Y%m%d%H%M%S
    ${tmp_result_dir_path}=  Catenate  ${RESULT_DIR_NAME}${timestamp}
    Set Suite Variable  ${RESULT_DIR_PATH}  ${tmp_result_dir_path}
-   Log To Console  ${RESULT_DIR_PATH}
    Create Directory  ${RESULT_DIR_PATH}
 
    : FOR    ${INDEX}    IN RANGE    0    ${ITERATION}
@@ -47,4 +46,38 @@ Create Combined Report
    [Documentation]  Using output[?].xml and create combined log.html
 
    Run  rebot --name ${OPENBMC_SYSTEMMODEL}CombinedReport ${RESULT_DIR_PATH}/output*.xml
-   Move File  log.html  ${RESULT_DIR_PATH}/log${OPENBMC_SYSTEMMODEL}CombinedIterations${ITERATION}Report.html
+   #Copy File  log.html  ${RESULT_DIR_PATH}/log${OPENBMC_SYSTEMMODEL}CombinedIterations${ITERATION}Report.html
+
+   ${combined_report_file}=  Set Variable  ${RESULT_DIR_PATH}
+
+   ${combined_report_file}=  Catenate  SEPARATOR=
+   ...  ${combined_report_file}  /log${OPENBMC_SYSTEMMODEL}CombinedIterations
+   ${combined_report_file}=  Catenate  SEPARATOR=
+   ...  ${combined_report_file}  ${ITERATION}Report.html
+
+   Copy File  log.html  ${combined_report_file}
+
+   Convert HTML To PDF  ${combined_report_file}
+
+*** Keywords ***
+                                                  
+
+Convert HTML To PDF
+   [Documentation]  To convert HTML to PDF in order to support GitHub 
+   ...  attachment.
+   [Arguments]  ${combined_report_html}
+   ...  combined_report_html  combined report file in HTML
+
+   ${combined_report_pdf}=  
+   ...  Fetch From Left  ${combined_report_html}  .
+   ${combined_report_pdf}=  Catenate  SEPARATOR=
+   ...  ${combined_report_pdf}  .pdf
+   ${output}=  Run  which wkhtmltopdf
+   Should Not Be Empty  ${output}
+   ...  msg=wkhtmltopdf not installed, check at http://wkhtmltopdf.org/
+   ${output}=  
+   ...  Run  wkhtmltopdf ./${combined_report_html} ./${combined_report_pdf}
+   Should Not Be Empty  ${output}
+   OperatingSystem.File Should Exist  ${combined_report_pdf}
+
+
