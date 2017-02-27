@@ -5,7 +5,8 @@ Resource                ../lib/rest_client.robot
 Resource                ../lib/resource.txt
 Resource                ../lib/utils.robot
 Resource                ../lib/openbmc_ffdc.robot
-Resource                ../lib/boot/boot_resource_master.robot
+Resource                ../lib/state_manager.robot
+
 
 Suite Setup             Check OCC Readiness
 Test Teardown           FFDC On Test Case Fail
@@ -159,9 +160,9 @@ Check OCC Readiness
     ...               if the interface attributes are activated.
 
     ${status}=
-    ...   Run Keyword and Return Status    Check Power Off States
-    Run Keyword If   '${status}' == '${True}'
-    ...   BMC Power On
+    ...   Run Keyword and Return Status  Is Host Running
+    Run Keyword If   '${status}' == '${False}'
+    ...  Initiate Host Boot
     Wait Until Keyword Succeeds   5min  10sec
     ...   Powercap Attributes Activated
 
