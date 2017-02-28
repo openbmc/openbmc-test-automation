@@ -6,6 +6,7 @@ Library            DateTime
 Library            openbmc_ffdc_list.py
 Resource           resource.txt
 Resource           connection_client.robot
+Resource           utils.robot
 
 *** Variables ***
 
@@ -105,9 +106,9 @@ Write Cmd Output to FFDC File
 Test Setup Info
     [Documentation]      BMC IP, Model and other information
 
-    Write Data to File   ${\n}-----------------------${\n}
-    Write Data to File   Test Setup Information:
-    Write Data to File   ${\n}-----------------------${\n}
-    Write Data to File   OPENBMC HOST \t: ${OPENBMC_HOST}${\n}
-    Write Data to File
-    ...   SYSTEM TYPE \t: ${OPENBMC_MODEL.replace('./data/','').replace('.py','')}${\n}${\n}
+    Write Data To File   ${\n}-----------------------${\n}
+    Write Data To File   Test Setup Information:
+    Write Data To File   ${\n}-----------------------${\n}
+    Write Data To File   OPENBMC HOST \t: ${OPENBMC_HOST}${\n}
+    ${model_name}=  Get BMC System Model
+    Write Data To File   SYSTEM TYPE \t: ${model_name}
