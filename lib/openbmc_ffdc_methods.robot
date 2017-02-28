@@ -82,8 +82,8 @@ Execute Command and Write FFDC
 
     # Write stdout on success and stderr/stdout to the file on failure.
     Run Keyword If  $stderr == '${EMPTY}'
-    ...    Write Data to File  ${stdout}${\n}  ${logpath}
-    ...  ELSE  Write Data to File
+    ...    Write Data To File  ${stdout}${\n}  ${logpath}
+    ...  ELSE  Write Data To File
     ...    ERROR output:${\n}${stderr}${\n}Output:${\n}${stdout}${\n}
     ...    ${logpath}
 
@@ -154,7 +154,7 @@ Log FFDC Get Requests
     ...   Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
     \   Run Keyword If   '${status}' == '${False}'  Continue For Loop
     \   ${jsondata}=  to json  ${resp.content}    pretty_print=True
-    \   Write Data to File  ${\n}${jsondata}${\n}  ${logpath}
+    \   Write Data To File  ${\n}${jsondata}${\n}  ${logpath}
 
 
 BMC FFDC Get Requests

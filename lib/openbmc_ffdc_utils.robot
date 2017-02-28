@@ -6,6 +6,7 @@ Library            DateTime
 Library            openbmc_ffdc_list.py
 Resource           resource.txt
 Resource           connection_client.robot
+Resource           utils.robot
 
 *** Variables ***
 
@@ -47,7 +48,7 @@ Create FFDC Report File
     Create File         ${FFDC_FILE_PATH}
 
 
-Write Data to File
+Write Data To File
     [Documentation]     Write data to the ffdc report document
     [Arguments]         ${data}=      ${filepath}=${FFDC_FILE_PATH}
     Append To File      ${filepath}   ${data}
@@ -69,45 +70,45 @@ Header Message
     ...                 2. Add Test setup and config information
     ...                 3. Types of data collection
 
-    Write Data to File    ${HEADER_MSG}
-    Write Data to File    ${FOOTER_MSG}
-    Write Data to File    Test Suite File\t\t: ${SUITE_NAME} ${\n}
-    Write Data to File    Test Case Name\t\t: ${TEST_NAME}${\n}
-    Write Data to File    Test Source File\t: ${SUITE_SOURCE}${\n}
-    Write Data to File    Failure Time Stamp\t: ${FFDC_TIME}${\n}
-    Write Data to File    Test Error Message\t: ${TEST_MESSAGE}${\n}
-    Write Data to File    Test Documentation\t:${\n}${TEST_DOCUMENTATION}${\n}
-    Write Data to File    ${FOOTER_MSG}
+    Write Data To File    ${HEADER_MSG}
+    Write Data To File    ${FOOTER_MSG}
+    Write Data To File    Test Suite File\t\t: ${SUITE_NAME} ${\n}
+    Write Data To File    Test Case Name\t\t: ${TEST_NAME}${\n}
+    Write Data To File    Test Source File\t: ${SUITE_SOURCE}${\n}
+    Write Data To File    Failure Time Stamp\t: ${FFDC_TIME}${\n}
+    Write Data To File    Test Error Message\t: ${TEST_MESSAGE}${\n}
+    Write Data To File    Test Documentation\t:${\n}${TEST_DOCUMENTATION}${\n}
+    Write Data To File    ${FOOTER_MSG}
 
     Test Setup Info
 
-    Write Data to File    ${\n}${MSG_INTRO}${\n}
+    Write Data To File    ${\n}${MSG_INTRO}${\n}
 
     # --- FFDC header notes ---
     @{entries}=     Get ffdc cmd index
     :FOR  ${index}  IN   @{entries}
-    \   Write Data to File   * ${index.upper()}
-    \   Write Data to File   ${\n}
+    \   Write Data To File   * ${index.upper()}
+    \   Write Data To File   ${\n}
 
-    Write Data to File    ${MSG_DETAIL}
+    Write Data To File    ${MSG_DETAIL}
 
 
 Write Cmd Output to FFDC File
     [Documentation]      Write cmd output data to the report document
     [Arguments]          ${name_str}   ${cmd}
 
-    Write Data to File   ${FOOTER_MSG}
-    Write Data to File   ${ENTRY_INDEX.upper()} : ${name_str}\t
-    Write Data to File   Executed : ${cmd}
-    Write Data to File   ${FOOTER_MSG}
+    Write Data To File   ${FOOTER_MSG}
+    Write Data To File   ${ENTRY_INDEX.upper()} : ${name_str}\t
+    Write Data To File   Executed : ${cmd}
+    Write Data To File   ${FOOTER_MSG}
 
 
 Test Setup Info
     [Documentation]      BMC IP, Model and other information
 
-    Write Data to File   ${\n}-----------------------${\n}
-    Write Data to File   Test Setup Information:
-    Write Data to File   ${\n}-----------------------${\n}
-    Write Data to File   OPENBMC HOST \t: ${OPENBMC_HOST}${\n}
-    Write Data to File
-    ...   SYSTEM TYPE \t: ${OPENBMC_MODEL.replace('./data/','').replace('.py','')}${\n}${\n}
+    Write Data To File  ${\n}-----------------------${\n}
+    Write Data To File  Test Setup Information:
+    Write Data To File  ${\n}-----------------------${\n}
+    Write Data To File  OPENBMC HOST \t: ${OPENBMC_HOST}${\n}
+    ${model_name}=  Get BMC System Model
+    Write Data To File  SYSTEM TYPE \t: ${model_name}
