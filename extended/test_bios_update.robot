@@ -23,7 +23,6 @@ Host BIOS Update And Boot
     Validate Parameters
     Prepare BMC For Update
     Update PNOR Image
-    Validate IPL
 
 *** Keywords ***
 
