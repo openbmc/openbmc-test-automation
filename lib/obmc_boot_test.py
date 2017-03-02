@@ -4,6 +4,16 @@ r"""
 This module is the python counterpart to obmc_boot_test.
 """
 
+import os
+import imp
+import time
+import glob
+import random
+import cPickle as pickle
+
+from robot.utils import DotDict
+from robot.libraries.BuiltIn import BuiltIn
+
 from boot_data import *
 import gen_robot_print as grp
 import gen_robot_plug_in as grpi
@@ -11,14 +21,12 @@ import gen_robot_valid as grv
 import gen_misc as gm
 import gen_cmd as gc
 import state as st
-import random
 
-import os
-import time
-import glob
-
-from robot.utils import DotDict
-from robot.libraries.BuiltIn import BuiltIn
+base_path = os.path.dirname(os.path.dirname(
+                            imp.find_module("gen_robot_print")[1])) +\
+                            os.sep
+sys.path.append(base_path + "extended/")
+import run_keyword as rk
 
 # Program parameter processing.
 # Assign all program parms to python variables which are global to this module.
@@ -40,7 +48,16 @@ if ffdc_dir_path_style == "":
 # Set up boot data structures.
 boot_table = create_boot_table()
 valid_boot_types = create_valid_boot_list(boot_table)
-boot_results = boot_results(boot_table, boot_pass, boot_fail)
+
+boot_results_file_path = "/tmp/" + openbmc_nickname + "_boot_results"
+if (boot_pass > 0 or boot_fail > 0) and \
+   os.path.isfile(boot_results_file_path):
+    # We've been called before in this run so we'll load the saved
+    # boot_results object.
+    boot_results = pickle.load(open(boot_results_file_path, 'rb'))
+else:
+    boot_results = boot_results(boot_table, boot_pass, boot_fail)
+
 boot_lists = read_boot_lists()
 last_ten = []
 # Convert these program parms to more useable lists.
@@ -62,8 +79,8 @@ master_pid = os.environ.get('AUTOBOOT_MASTER_PID', program_pid)
 status_dir_path = os.environ.get('STATUS_DIR_PATH', "")
 if status_dir_path != "":
     status_dir_path = os.path.normpath(status_dir_path) + os.sep
-default_power_on = "BMC Power On"
-default_power_off = "BMC Power Off"
+default_power_on = "REST Power On"
+default_power_off = "REST Power Off"
 boot_count = 0
 
 
@@ -450,9 +467,8 @@ def run_boot(boot):
         grp.rprintn()
 
         if boot_table[boot]['method_type'] == "keyword":
-            cmd_buf = boot_table[boot]['method'].split("  ")
-            grp.rpissuing_keyword(cmd_buf)
-            BuiltIn().run_keyword(*cmd_buf)
+            rk.my_run_keywords(boot_table[boot].get('lib_file_path', ''),
+                               boot_table[boot]['method'])
 
         if boot_table[boot]['bmc_reboot']:
             st.wait_for_comm_cycle(int(state['epoch_seconds']))
@@ -460,8 +476,8 @@ def run_boot(boot):
             rc, shell_rc, failed_plug_in_name = \
                 grpi.rprocess_plug_in_packages(call_point="post_reboot")
             if rc != 0:
-                error_message = "Plug-in failed with non-zero return code.\n" +\
-                    gp.sprint_var(rc, 1)
+                error_message = "Plug-in failed with non-zero return code.\n"
+                error_message += gp.sprint_var(rc, 1)
                 BuiltIn().fail(gp.sprint_error(error_message))
         else:
             match_state = st.anchor_state(state)
@@ -575,6 +591,12 @@ def program_teardown():
         plug_in_setup()
         rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
             call_point='cleanup', stop_on_plug_in_failure=1)
+
+    # Save boot_results object to a file in case it is needed again.
+    grp.rprint_timen("Saving boot_results to the following path.")
+    grp.rprint_var(boot_results_file_path)
+    pickle.dump(boot_results, open(boot_results_file_path, 'wb'),
+                pickle.HIGHEST_PROTOCOL)
 
 ###############################################################################
 
