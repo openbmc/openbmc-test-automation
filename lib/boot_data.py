@@ -254,6 +254,7 @@ class boot_results:
         """
 
         self.__boot_results.inc_row_field(boot_type, boot_status.lower())
+        self.__boot_results.calc()
 
     def sprint_report(self,
                       header_footer="\n"):
