@@ -41,11 +41,11 @@ Get To Stable State
     Run Keyword If  '${rest_status}' == '${False}'
     ...  Reboot and Wait for BMC Online
 
-    ${ready_status}=  Run Keyword And Return Status  Is BMC Ready
-    Run Keyword If  '${ready_status}' == '${False}'  Put BMC State  Ready
+    # Power off using new interface
+    ${poweroff_status}=  Run Keyword And Return Status  Initiate Host PowerOff
 
-    ${host_off_status}=  Run Keyword And Return Status  Is Host Off
-    Run Keyword If  '${host_off_status}' == '${False}'  Initiate Host PowerOff
+    # If power off fails, resort to old org poweroff 
+    Run Keyword If  '${poweroff_status}' == '${False}'  Initiate Power Off
 
     Prune Journal Log
 
