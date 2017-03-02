@@ -139,13 +139,14 @@ Wait for BMC state
 
 Set State Interface Version
     [Documentation]  Set version to indicate which interface to use.
-    ${resp}=  Openbmc Get Request  ${CONTROL_URI}chassis0
+    #${resp}=  Openbmc Get Request  ${CONTROL_URI}chassis0
+    ${resp}=  Openbmc Get Request  ${CHASSIS_STATE_URI}
     ${status}=  Run Keyword And Return Status
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Run Keyword If  '${status}' == '${True}'
-    ...  Set Global Variable  ${OBMC_STATES_VERSION}  ${1}
-    ...  ELSE
     ...  Set Global Variable  ${OBMC_STATES_VERSION}  ${0}
+    ...  ELSE
+    ...  Set Global Variable  ${OBMC_STATES_VERSION}  ${1}
 
 
 Power Off Request
