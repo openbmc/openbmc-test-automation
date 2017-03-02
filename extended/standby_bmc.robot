@@ -30,6 +30,7 @@ Get To Stable State
     ...              5. Get BMC in Ready state if its not in this state
     ...              6. Get Host in Off state if its not in this state
     ...              7. Update restore policy
+    [Setup]  Set State Interface Version
     [Tags]  Get_To_Stable_State
 
     Run Keyword And Ignore Error  Powercycle System Via PDU
@@ -41,11 +42,8 @@ Get To Stable State
     Run Keyword If  '${rest_status}' == '${False}'
     ...  Reboot and Wait for BMC Online
 
-    ${ready_status}=  Run Keyword And Return Status  Is BMC Ready
-    Run Keyword If  '${ready_status}' == '${False}'  Put BMC State  Ready
-
-    ${host_off_status}=  Run Keyword And Return Status  Is Host Off
-    Run Keyword If  '${host_off_status}' == '${False}'  Initiate Host PowerOff
+    ${host_off_status}=  Run Keyword And Return Status  Is BMC Ready
+    Run Keyword If  '${host_off_status}' == '${False}'  Power Off Request
 
     Prune Journal Log
 
