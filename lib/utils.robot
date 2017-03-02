@@ -110,6 +110,67 @@ Initiate Power Off
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     Wait Until Keyword Succeeds  1 min  10 sec  Is Power Off
 
+Initiate OS Host Power Off
+    [Documentation]  Initiate an OS reboot.
+    [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    ...          ${os_password}=${OS_PASSWORD}
+
+    # Description of arguments:
+    # os_host      The DNS name or IP of the OS.
+    # os_username  The username to be used to sign in to the OS.
+    # os_password  The password to be used to sign in to the OS.
+
+    Open connection  ${os_host}
+    Login  ${os_username}  ${os_password}
+    ${cmd_buf}  Catenate  shutdown
+    Rqprint Issuing  ${cmd_buf}
+    Start Command  ${cmd_buf}
+    Close Connection
+
+Initiate OS Host Reboot
+    [Documentation]  Initiate an OS reboot.
+    [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    ...          ${os_password}=${OS_PASSWORD}
+
+    # Description of arguments:
+    # os_host      The DNS name or IP of the OS.
+    # os_username  The username to be used to sign in to the OS.
+    # os_password  The password to be used to sign in to the OS.
+
+    Open connection  ${os_host}
+    Login  ${os_username}  ${os_password}
+    ${cmd_buf}  Catenate  reboot
+    Rqprint Issuing  ${cmd_buf}
+    Start Command  ${cmd_buf}
+    Close Connection
+
+Initiate Auto Reboot
+    [Documentation]  Initiate an auto reboot.
+
+    # Set the auto reboot policy.
+    Set Auto Reboot  yes
+
+    Open connection  ${openbmc_host}
+    Login  ${openbmc_username}  ${openbmc_password}
+
+    # Set the watchdog timer.  Note: 5000 = milliseconds which is 5 seconds.
+    ${cmd_buf}=  Catenate  /usr/sbin/mapper call /org/openbmc/watchdog/host0
+    ...  org.openbmc.Watchdog set i 5000
+    Rqprint Issuing  ${cmd_buf}
+    ${output}  ${stderr}  ${rc}=  Execute Command  ${cmd_buf}
+    ...  return_stderr=True  return_rc=True
+    Should Be Empty  ${stderr}
+    Should be equal  ${rc}  ${0}
+
+    # Start the watchdog.
+    ${cmd_buf}=  Catenate  /usr/sbin/mapper call /org/openbmc/watchdog/host0
+    ...  org.openbmc.Watchdog start
+    Rqprint Issuing  ${cmd_buf}
+    ${output}  ${stderr}  ${rc}=  Execute Command  ${cmd_buf}
+    ...  return_stderr=True  return_rc=True
+    Should Be Empty  ${stderr}
+    Should be equal  ${rc}  ${0}
+
 Trigger Warm Reset
     log to console    "Triggering warm reset"
     ${data}=   create dictionary   data=@{EMPTY}
@@ -647,7 +708,7 @@ Get System Power Policy
 
 Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
-    ${setting}=  Read Attribute  ${HOST_SETTINGS}  auto_reboot
+    ${setting}=  Read Attribute  ${HOST_SETTING}  auto_reboot
     [Return]  ${setting}
 
 
@@ -658,7 +719,7 @@ Set Auto Reboot
 
     ${valueDict}=  Set Variable  ${setting}
     ${data}=  Create Dictionary  data=${valueDict}
-    Write Attribute  ${HOST_SETTINGS}  auto_reboot  data=${data}
+    Write Attribute  ${HOST_SETTING}  auto_reboot  data=${data}
     ${current_setting}=  Get Auto Reboot
     Should Be Equal  ${current_setting}  ${setting}
 
@@ -692,7 +753,6 @@ Execute Command On BMC
     ${stdout}  ${stderr}=  Execute Command  ${command}  return_stderr=True
     Should Be Empty  ${stderr}
     [Return]  ${stdout}
-
 
 Enable Core Dump On BMC
     [Documentation]  Enable core dump collection.
