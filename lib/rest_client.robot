@@ -108,7 +108,7 @@ OpenBMC Delete Request
     [Return]    ${ret}
 
 Initialize OpenBMC
-    [Arguments]    ${timeout}=10  ${quiet}=${1}
+    [Arguments]    ${timeout}=20  ${quiet}=${1}
 
     Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}   max_retries=3
     ${headers}=  Create Dictionary  Content-Type=application/json
