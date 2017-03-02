@@ -30,6 +30,20 @@ def ffdc(ffdc_dir_path=None,
     ffdc_prefix    The prefix to be given to each FFDC file name generated.
     """
 
+    # Check if Ping and SSH connection is alive
+    OPENBMC_HOST = BuiltIn().get_variable_value("${OPENBMC_HOST}")
+    cmd_buf = ["Ping Host", OPENBMC_HOST]
+    grp.rpissuing_keyword(cmd_buf)
+    status_ping = BuiltIn().run_keyword_and_return_status(*cmd_buf)
+    grp.rprint_var(status_ping)
+    if status_ping == True:
+        status_ssh = BuiltIn().run_keyword_and_return_status("Open Connection And Log In")
+        grp.rprint_var(status_ssh)
+        if status_ssh != True:
+            grp.rprint_timen("BMC is not online, Aborting FFDC")
+            BuiltIn().run_keyword_and_return_status("Close All Connections")
+            return
+
     grp.rprint_timen("Collecting FFDC.")
 
     # Note: Several subordinate functions like 'Get Test Dir and Name' and
