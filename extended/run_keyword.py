@@ -61,7 +61,22 @@ def my_run_keywords(lib_file_path,
                     test_mode=0):
 
     r"""
-    Do main program processing.
+    Run the keywords in the keyword string.
+
+    Description of arguments:
+    lib_file_path   The path to a library or resource needed to run the
+                    keywords.  This may contain a colon-delimited list of
+                    library/resource paths.
+    keyword_string  The keyword string to be run by this function.  If this
+                    keyword string contains " ; " anywhere, it will be taken to
+                    be multiple keyword strings.  Each keyword may also include
+                    a variable assignment.  Example:
+                    ${my_var}=  My Keyword
+    quiet           If this parameter is set to "1", this program will print
+                    only essential information, i.e. it will not echo
+                    parameters, echo commands, print the total run time, etc.
+    test_mode       This means that this program should go through all the
+                    motions but not actually do anything substantial.
     """
 
     # NOTE: During code review the following question was raised: Why support
@@ -83,9 +98,9 @@ def my_run_keywords(lib_file_path,
     # keywords, the user can invoke it with the following keyword string.
     # ${my_dict}=  Create Dictionary  foo=bar ; Want Dictionary  ${my_dict}
 
+
     # The user can pass multiple lib/resource paths by separating them with a
     # colon.
-
     lib_file_path_list = lib_file_path.split(":")
     # Get rid of empty entry if it exists.
     if lib_file_path_list[0] == "":
