@@ -25,8 +25,6 @@
 -e DIMM0_no_fault
 -e Minimal_DIMM_Inventory
 -e Verify_DIMM_VPD_Properties
-#https://github.com/openbmc/openbmc/issues/740
--e Test_BIOS_Version
 #https://github.com/openbmc/openbmc-test-automation/issues/207
 -e Disable_PowerCap
 #https://github.com/openbmc/openbmc-test-automation/issues/123
