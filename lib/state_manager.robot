@@ -147,7 +147,7 @@ Wait for BMC state
 
 Set State Interface Version
     [Documentation]  Set version to indicate which interface to use.
-    ${resp}=  Openbmc Get Request  ${CONTROL_URI}chassis0
+    ${resp}=  Openbmc Get Request  ${CHASSIS_STATE_URI}
     ${status}=  Run Keyword And Return Status
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Run Keyword If  '${status}' == '${True}'
@@ -158,7 +158,7 @@ Set State Interface Version
 
 Power Off Request
     [Documentation]  Select appropriate poweroff keyword.
-    Run Keyword If  '${OBMC_STATES_VERSION}' == '${1}'
+    Run Keyword If  '${OBMC_STATES_VERSION}' == '${0}'
     ...  Initiate Power Off
     ...  ELSE
     ...  Initiate Host PowerOff
@@ -167,7 +167,7 @@ Power Off Request
 Wait For BMC Ready
     [Documentation]  Check BMC state and wait for BMC Ready.
     @{states}=  Create List  BMC_READY  HOST_POWERED_OFF
-    Run Keyword If  '${OBMC_STATES_VERSION}' == '${1}'
+    Run Keyword If  '${OBMC_STATES_VERSION}' == '${0}'
     ...  Wait Until Keyword Succeeds  10 min  10 sec
     ...  Verify BMC State  ${states}
     ...  ELSE
