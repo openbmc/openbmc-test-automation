@@ -34,12 +34,12 @@ Get To Stable State
 
     Run Keyword And Ignore Error  Powercycle System Via PDU
 
-    Wait For Host To Ping  ${OPENBMC_HOST}  1 mins
-    Open Connection And Log In  host=${OPENBMC_HOST}
+    Wait For Host To Ping  ${OPENBMC_HOST}  2 mins
+    Run Keyword And Ignore Error
+    ...  Open Connection And Log In  host=${OPENBMC_HOST}
 
-    ${rest_status}=  Run Keyword And Return Status  Initialize OpenBMC
-    Run Keyword If  '${rest_status}' == '${False}'
-    ...  Reboot and Wait for BMC Online
+    Wait Until Keyword Succeeds
+    ...    1 min   10 sec    BMC Online Test
 
     ${ready_status}=  Run Keyword And Return Status  Is BMC Ready
     Run Keyword If  '${ready_status}' == '${False}'  Put BMC State  Ready
