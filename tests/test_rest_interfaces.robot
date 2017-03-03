@@ -1,382 +1,196 @@
 *** Settings ***
-Documentation     This suite will verifiy all OpenBMC rest interfaces
-...               Details of valid interfaces can be found here...
-...               https://github.com/openbmc/docs/blob/master/rest-api.md
+Documentation     Verify REST services Get/Put/Post/Delete.
 
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/resource.txt
+Library           Collections
 Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
 
 *** Test Cases ***
-Good connection for testing
-    [Tags]  Good_connection_for_testing
-    ${content}=    Read Properties     /
-    ${c}=          get from List       ${content}      0
-    Should Be Equal    ${c}     /xyz
 
-Get an object with no properties
-    ${content}=    Read Properties   ${INVENTORY_URI.rstrip("/")}
-    Should Be Empty     ${content}
+Get Response Codes
+    [Documentation]  REST Get response status test.
+    #--------------------------------------------------------------------
+    # Expect status      URL Path
+    #--------------------------------------------------------------------
+    ${HTTP_OK}           /
+    ${HTTP_OK}           /xyz/
+    ${HTTP_OK}           /xyz/openbmc_project/
+    ${HTTP_OK}           /xyz/openbmc_project/enumerate
+    ${HTTP_NOT_FOUND}    /i/dont/exist/
 
-Get a Property
-    [Tags]  Get_a_Property
-    ${url_list}=
-    ...   Get Endpoint Paths   ${INVENTORY_URI.rstrip("/")}   cpu
-    ${url}=   Get From List   ${url_list}   0
-    ${resp}=   Read Attribute   ${url}   is_fru
-    Should Be Equal   ${resp}   ${1}
-
-Get a null Property
-    ${resp}=    OpenBMC Get Request    ${INVENTORY_URI}attr/is_fru
-    Should Be Equal As Strings    ${resp.status_code}    ${HTTP_NOT_FOUND}
-    ${jsondata}=    To Json    ${resp.content}
-    Should Be Equal
-    ...   ${jsondata['data']['description']}
-    ...   The specified property cannot be found: ''is_fru''
-
-get directory listing /
-    [Tags]  get_directory_listing
-    ${resp}=   openbmc get request     /
-    should be equal as strings   ${resp.status_code}     ${HTTP_OK}
-    ${json}=   to json     ${resp.content}
-    list should contain value    ${json['data']}         /xyz
-    should be equal as strings   ${json['status']}       ok
-
-get directory listing /xyz/
-    [Tags]  get_directory_listing_xyz
-    ${resp}=   openbmc get request     /xyz/
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json}=   to json         ${resp.content}
-    list should contain value
-    ...    ${json['data']}    /xyz/openbmc_project
-    should be equal as strings   ${json['status']}       ok
-
-get invalid directory listing /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc get request     /i/dont/exist/
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings          ${json['status']}   error
-
-put directory listing /
-    [Tags]  CI
-    ${resp}=   openbmc put request     /
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings          ${json['status']}   error
-
-put directory listing /xyz/
-    [Tags]  CI
-    ${resp}=   openbmc put request     /xyz/
-    should be equal as strings
-    ...  ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings          ${json['status']}   error
-
-put invalid directory listing /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc put request     /i/dont/exist/
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings          ${json['status']}   error
-
-post directory listing /
-    [Tags]  CI
-    ${resp}=   openbmc post request    /
-    should be equal as strings
-    ...  ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings          ${json['status']}   error
-
-post directory listing /xyz/
-    [Tags]  CI
-    ${resp}=   openbmc post request    /xyz/
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings          ${json['status']}   error
-
-post invalid directory listing /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc post request    /i/dont/exist/
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings          ${json['status']}   error
-
-delete directory listing /
-    [Tags]  CI
-    ${resp}=   openbmc delete request  /
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings          ${json['status']}   error
-
-delete directory listing /xyz/
-    [Tags]  CI
-    ${resp}=   openbmc delete request  /
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings          ${json['status']}   error
-
-delete invalid directory listing /xyz/nothere/
-    [Tags]  CI
-    ${resp}=   openbmc delete request  /xyz/nothere/
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings          ${json['status']}   error
-
-get list names /
-    ${resp}=   openbmc get request     /list
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json}=   to json         ${resp.content}
-    list should contain value
-    ...  ${json['data']}  /xyz/openbmc_project/inventory
-    should be equal as strings      ${json['status']}       ok
-
-get list names /xyz/
-    ${resp}=   openbmc get request     /xyz/list
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json}=   to json         ${resp.content}
-    list should contain value
-    ...  ${json['data']}   /xyz/openbmc_project/inventory
-    should be equal as strings      ${json['status']}       ok
-
-get invalid list names /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc get request     /i/dont/exist/list
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-put list names /
-    [Tags]  CI
-    ${resp}=   openbmc put request     /list
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-put list names /xyz/
-    [Tags]  CI
-    ${resp}=   openbmc put request     /xyz/list
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-put invalid list names /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc put request     /i/dont/exist/list
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-post list names /
-    [Tags]  CI
-    ${resp}=   openbmc post request    /list
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-post list names /xyz/
-    [Tags]  CI
-    ${resp}=   openbmc post request    /xyz/list
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-post invalid list names /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc post request    /i/dont/exist/list
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-delete list names /
-    [Tags]  CI
-    ${resp}=   openbmc delete request  /list
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-delete list names /xyz/
-    [Tags]  CI
-    ${resp}=   openbmc delete request  /list
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-delete invalid list names /xyz/nothere/
-    [Tags]  CI
-    ${resp}=   openbmc delete request  /xyz/nothere/list
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-get names /
-    [Tags]  get_names
-    ${resp}=   openbmc get request     /enumerate
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json}=   to json         ${resp.content}
-    list should contain value
-    ...  ${json['data']}  /xyz/openbmc_project/inventory
-    should be equal as strings      ${json['status']}       ok
-
-get names /xyz/
-    [Tags]  get_names_xyz
-    ${resp}=   openbmc get request     /xyz/enumerate
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json}=   to json         ${resp.content}
-    list should contain value
-    ...  ${json['data']}  /xyz/openbmc_project/inventory
-    should be equal as strings      ${json['status']}       ok
-
-get invalid names /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc get request     /i/dont/exist/enumerate
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-put names /
-    [Tags]  CI
-    ${resp}=   openbmc put request     /enumerate
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-put names /xyz/
-    [Tags]  CI
-    ${resp}=   openbmc put request     /xyz/enumerate
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-put invalid names /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc put request     /i/dont/exist/enumerate
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-post names /
-    [Tags]  CI
-    ${resp}=   openbmc post request    /enumerate
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-post names /xyz/
-    [Tags]  CI
-    ${resp}=   openbmc post request    /xyz/enumerate
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-post invalid names /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc post request    /i/dont/exist/enumerate
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-delete names /
-    [Tags]  CI
-    ${resp}=   openbmc delete request  /enumerate
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-delete names /xyz/
-    [Tags]  CI
-    ${resp}=   openbmc delete request  /enumerate
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_METHOD_NOT_ALLOWED}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-delete invalid names /xyz/nothere/
-    [Tags]  CI
-    ${resp}=   openbmc delete request  /xyz/nothere/enumerate
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-get method xyz/openbmc_project/logging/entry
-    [Tags]  CI
-    ${resp}=   openbmc get request
-    ...  xyz/openbmc_project/logging/entry
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
-
-get invalid method /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc get request     /i/dont/exist/action/foo
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
+    [Tags]  Get_Response_Codes
+    [Template]  Execute Get And Check Response
 
 
-put invalid method /i/dont/exist/
-    [Tags]  CI
-    ${resp}=   openbmc put request     /i/dont/exist/action/foo
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
+Get Data
+    [Documentation]  REST Get request url and expect the
+    ...              response OK and data non empty.
+    #--------------------------------------------------------------------
+    # URL Path
+    #--------------------------------------------------------------------
+    /xyz/openbmc_project/
+    /xyz/openbmc_project/list
+    /xyz/openbmc_project/enumerate
 
-post method power/getPowerState no args
-    ${fan_uri}=     Get Power Control Interface
-    ${data}=   create dictionary   data=@{EMPTY}
-    ${resp}=   openbmc post request
-    ...   ${fan_uri}/action/getPowerState      data=${data}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       ok
+    [Tags]  Get_Data
+    [Template]  Execute Get And Check Data
 
-post method xyz/openbmc_project/sensors/host/BootCount with args
-    ${uri}=     Set Variable   ${SENSORS_URI}host/BootCount
-    ${COUNT}=   Set Variable    ${3}
-    @{count_list}=   Create List     ${COUNT}
-    ${data}=   create dictionary   data=@{count_list}
-    ${resp}=   openbmc post request    ${uri}/action/setValue      data=${data}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       ok
-    ${content}=     Read Attribute      ${uri}   value
-    Should Be Equal     ${content}      ${COUNT}
 
-delete invalid method /xyz/nothere/
-    [Tags]  CI
-    ${resp}=   openbmc delete request  /xyz/nothere/action/foomethod
-    should be equal as strings      ${resp.status_code}     ${HTTP_NOT_FOUND}
-    ${json}=   to json         ${resp.content}
-    should be equal as strings      ${json['status']}       error
+Get Data Validation
+    [Documentation]  REST Get request url and expect the
+    ...              predefine string in response data.
+    #--------------------------------------------------------------------
+    # URL Path                  Expect Data
+    #--------------------------------------------------------------------
+    /xyz/openbmc_project/       /xyz/openbmc_project/logging
+    /i/dont/exist/              path or object not found: /i/dont/exist
+
+    [Tags]  Get_Data_Validation
+    [Template]  Execute Get And Verify Data
+
+
+Put Response Codes
+    [Documentation]  REST Put request url and expect the
+    ...              REST response code pre define.
+    #--------------------------------------------------------------------
+    # Expect status                 URL Path
+    #--------------------------------------------------------------------
+    ${HTTP_METHOD_NOT_ALLOWED}      /
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
+    ${HTTP_METHOD_NOT_ALLOWED}      /i/dont/exist/
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/list
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/enumerate
+
+    [Tags]  Put_Response_Codes
+    [Template]  Execute Put And Check Response
+
+
+Put Data Validation
+    [Documentation]  REST Put request url and expect success.
+    #--------------------------------------------------------------------
+    # URL Path                      Parm Data
+    #--------------------------------------------------------------------
+    /xyz/openbmc_project/state/host0/attr/RequestedHostTransition    xyz.openbmc_project.State.Host.Transition.Off
+
+    [Tags]  Put_Data_Validation
+    [Template]  Execute Put And Expect Success
+
+
+Post Response Code
+    [Documentation]  REST Post request url and expect the
+    ...              REST response code pre define.
+    #--------------------------------------------------------------------
+    # Expect status                 URL Path
+    #--------------------------------------------------------------------
+    ${HTTP_METHOD_NOT_ALLOWED}      /
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
+    ${HTTP_METHOD_NOT_ALLOWED}      /i/dont/exist/
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/enumerate
+
+    [Tags]  Post_Response_Codes
+    [Template]  Execute Post And Check Response
+
+
+Delete Response Code
+    [Documentation]  REST Delete request url and expect the
+    ...              REST response code pre define.
+    #--------------------------------------------------------------------
+    # Expect status                 URL Path
+    #--------------------------------------------------------------------
+    ${HTTP_METHOD_NOT_ALLOWED}      /
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/nothere/
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/enumerate
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/openbmc_project/list
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/openbmc_project/enumerate
+
+    [Tags]  Delete_Response_Codes
+    [Template]  Execute Delete And Check Response
+
 
 *** Keywords ***
-Get Power Control Interface
-    ${resp}=    OpenBMC Get Request    ${CONTROL_URI}
-    should be equal as strings
-    ...   ${resp.status_code}     ${HTTP_OK}
-    ...   msg=Unable to get any controls - ${CONTROL_URI}
-    ${jsondata}=   To Json    ${resp.content}
-    log     ${jsondata}
-    : FOR    ${ELEMENT}    IN    @{jsondata["data"]}
-    \   log     ${ELEMENT}
-    \   ${found}=   Get Lines Matching Pattern    ${ELEMENT}   *control/power*
-    \   Return From Keyword If     '${found}' != ''     ${found}
+
+Execute Get And Check Response
+    [Documentation]  Request Get url path and expect REST response code.
+    [Arguments]  ${expect}  ${path}
+    # Description of arguments:
+    # expect   Expected REST status codes.
+    # path     URL path.
+    ${resp}=  Openbmc Get Request  ${path}
+    Should Be Equal As Strings  ${resp.status_code}  ${expect}
+
+Execute Get And Check Data
+    [Documentation]  Request Get url path and expect non empty data.
+    [Arguments]  ${path}
+    # Description of arguments:
+    # path     URL path.
+    ${resp}=  Openbmc Get Request  ${path}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Not Be Empty  ${jsondata["data"]}
+
+Execute Get And Verify Data
+    [Documentation]  Request Get url path and verify data.
+    [Arguments]  ${path}  ${expect}
+    # Description of arguments:
+    # expect   Expected REST status codes.
+    # path     URL path.
+    ${resp}=  Openbmc Get Request  ${path}
+    ${jsondata}=  To JSON  ${resp.content}
+    Run Keyword If  '${resp.status_code}' == '${HTTP_OK}'
+    ...  Should Contain  ${jsondata["data"]}  ${expect}
+    ...  ELSE
+    ...  Should Contain  ${jsondata["data"]["description"]}  ${expect}
+
+Execute Put And Check Response
+    [Documentation]  Request Put url path and expect REST response code.
+    [Arguments]  ${expect}  ${path}
+    # Description of arguments:
+    # expect   Expected REST status codes.
+    # path     URL path.
+    ${resp}=  Openbmc Put Request  ${path}
+    Should Be Equal As Strings  ${resp.status_code}  ${expect}
+
+Execute Put And Expect Success
+    [Documentation]  Request Put on url path.
+    [Arguments]  ${path}  ${parm}
+    # Description of arguments:
+    # path     URL path.
+    # parm     Value/string to be set.
+    # expect   Expected REST status codes.
+    ${parmDict}=  Create Dictionary  data=${parm}
+    ${resp}=  Openbmc Put Request  ${path}  data=${parmDict}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+Execute Post And Check Response
+    [Documentation]  Request Post url path and expect REST response code.
+    [Arguments]  ${expect}  ${path}
+    # Description of arguments:
+    # expect   Expected REST status codes.
+    # path     URL path.
+    ${resp}=  Openbmc Post Request  ${path}
+    Should Be Equal As Strings  ${resp.status_code}  ${expect}
+
+Execute Post And Check Data
+    [Arguments]  ${path}  ${parm}
+    [Documentation]  Request Post on url path and expect non empty data.
+    # Description of arguments:
+    # path     URL path.
+    ${data}=  Create Dictionary   data=@{data}
+    ${resp}=  Openbmc Post Request  ${path}  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Not Be Empty  ${jsondata["data"]}
+
+Execute Delete And Check Response
+    [Documentation]  Request Delete url path and expect REST response code.
+    [Arguments]  ${expect}  ${path}
+    # Description of arguments:
+    # expect   Expected REST status codes.
+    # path     URL path.
+    ${resp}=  Openbmc Delete Request  ${path}
+    Should Be Equal As Strings  ${resp.status_code}  ${expect}
