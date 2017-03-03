@@ -1,12 +1,4 @@
 #REST SSL connection test
 -i Test_SSL_Connection
-#Error log create and delete test
--i Create_error_log_on_single_FRU
--i Delete_error_log
 #Basic poweron test
 -i Power_On_Test
-#Clear event and create a logs
--i clear_any_logs
--i write_a_log
-#Test basic REST interface
--i Get_a_Property
