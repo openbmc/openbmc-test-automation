@@ -114,6 +114,8 @@ Create File and Write Data
     :FOR  ${cmd}  IN  @{cmd_list}
     \   ${logpath}=  Catenate  SEPARATOR=   ${LOG_PREFIX}   ${cmd[0]}.txt
     \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
+    #   Rename OPENBMC_HOST IP address from given file to DUMMY
+    \   Run  sed -i 's/'${OPENBMC_HOST}'/DUMMYIP/g' ${logpath}
 
 
 ################################################################
@@ -139,6 +141,8 @@ Log Test Case Status
 
     Append To File    ${TEST_HISTORY}
     ...   ${cur_time}:${SUITE_NAME}:${TEST_NAME}:${TEST_STATUS}${\n}
+    #   Rename OPENBMC_HOST IP address from given file to DUMMY
+    Run  sed -i 's/'${OPENBMC_HOST}'/DUMMYIP/g' ${TEST_HISTORY}
 
 
 Log FFDC Get Requests

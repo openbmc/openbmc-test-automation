@@ -90,6 +90,8 @@ Header Message
     \   Write Data to File   ${\n}
 
     Write Data to File    ${MSG_DETAIL}
+    #   Rename OPENBMC_HOST IP address from given file to DUMMY
+    Run  sed -i 's/'${OPENBMC_HOST}'/DUMMYIP/g' ${FFDC_FILE_PATH}
 
 
 Write Cmd Output to FFDC File
