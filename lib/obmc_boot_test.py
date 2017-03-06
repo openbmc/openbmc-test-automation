@@ -49,9 +49,14 @@ if ffdc_dir_path_style == "":
 boot_table = create_boot_table()
 valid_boot_types = create_valid_boot_list(boot_table)
 
-boot_results_file_path = "/tmp/" + openbmc_nickname + "_boot_results"
-if (boot_pass > 0 or boot_fail > 0) and \
-   os.path.isfile(boot_results_file_path):
+# Setting master_pid correctly influences the behavior of plug-ins like
+# DB_Logging
+program_pid = os.getpid()
+master_pid = os.environ.get('AUTOBOOT_MASTER_PID', program_pid)
+
+boot_results_file_path = "/tmp/" + openbmc_nickname + ":pid_" +\
+   str(master_pid) + ":boot_results"
+if os.path.isfile(boot_results_file_path):
     # We've been called before in this run so we'll load the saved
     # boot_results object.
     boot_results = pickle.load(open(boot_results_file_path, 'rb'))
@@ -72,10 +77,6 @@ base_tool_dir_path = os.path.normpath(os.environ.get(
 ffdc_dir_path = os.path.normpath(os.environ.get('FFDC_DIR_PATH', '')) + os.sep
 ffdc_list_file_path = base_tool_dir_path + openbmc_nickname + "/FFDC_FILE_LIST"
 boot_success = 0
-# Setting master_pid correctly influences the behavior of plug-ins like
-# DB_Logging
-program_pid = os.getpid()
-master_pid = os.environ.get('AUTOBOOT_MASTER_PID', program_pid)
 status_dir_path = os.environ.get('STATUS_DIR_PATH', "")
 if status_dir_path != "":
     status_dir_path = os.path.normpath(status_dir_path) + os.sep
