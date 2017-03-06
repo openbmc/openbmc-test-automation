@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
 r"""
-Exports issues from a list of repositories to individual CSV files.
-Uses basic authentication (GitHub username + password) to retrieve issues
-from a repository that username has access to. Supports GitHub API v3.
+Exports issues from a list of repositories to individual csv files.
+Uses basic authentication (Github username + password) to retrieve issues
+from a repository that username has access to. Supports Github API v3.
 """
 import argparse
 import csv
-from getpass import getpass
+import getpass
 import requests
 
 auth = None
@@ -25,16 +25,25 @@ def write_issues(response, csv_out):
         if 'pull_request' not in issue:
             labels = ', '.join([l['name'] for l in issue['labels']])
             date = issue['created_at'].split('T')[0]
+            # Below lines to overcome "TypeError: 'NoneType' object has
+            # no attribute '__getitem__'"
+            assignee_resp = issue['assignee']
+            if assignee_resp:
+                assignee_resp = issue['assignee']['login'].encode('utf-8')
+            else:
+                assignee_resp = "Not Assigned"
+
             # Change the following line to write out additional fields
             csv_out.writerow([labels.encode('utf-8'),
                              issue['title'].encode('utf-8'),
                              issue['state'].encode('utf-8'),
                              date.encode('utf-8'),
                              issue['html_url'].encode('utf-8'),
-                             issue['user']['login'].encode('utf-8')])
+                             issue['user']['login'].encode('utf-8'),
+                             assignee_resp])
 
 
-def get_github_issues(name):
+def get_issues_from_github_to_csv(name):
     r"""
     Requests issues from GitHub API and writes to CSV file.
     """
@@ -49,7 +58,8 @@ def get_github_issues(name):
     csvfilename = '{}-issues.csv'.format(name.replace('/', '-'))
     with open(csvfilename, 'w') as csvfile:
         csv_out = csv.writer(csvfile)
-        csv_out.writerow(['Labels', 'Title', 'State', 'Date', 'URL', 'Author'])
+        csv_out.writerow(['Labels', 'Title', 'State', 'Date', 'URL', 'Author',
+                         'Assignee'])
         write_issues(response, csv_out)
 
         # Multiple requests are required if response is paged
@@ -71,11 +81,8 @@ def get_github_issues(name):
 parser = argparse.ArgumentParser(description="Write GitHub repository issues "
                                              "to CSV file.")
 
-parser.add_argument('username', nargs='+', help="GitHub user name, "
+parser.add_argument('username', nargs='+', help="Github user name, "
                     "formatted as 'username'")
-
-parser.add_argument('password', nargs='+', help="GitHub username password, "
-                    "formatted as 'password'")
 
 parser.add_argument('repositories', nargs='+', help="Repository names, "
                     "formatted as 'basereponame/repo'")
@@ -90,10 +97,9 @@ if args.all:
 for argusername in args.username:
     username = argusername
 
-for argpassword in args.password:
-    password = argpassword
+password = getpass.getpass("Enter your GitHub Password:")
 
 auth = (username, password)
 
 for repository in args.repositories:
-    get_github_issues(repository)
+    get_issues_from_github_to_csv(repository)
