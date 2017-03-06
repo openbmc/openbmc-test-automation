@@ -159,14 +159,13 @@ Features:
 ```
 
 Command to get GitHub issues (any GitHub repository) report in CSV format
-
+Note: On Prompt "Enter your GitHub Password:" enter your GitHub password.
 ```shell
-python ./tools/github_issues_to_csv <github user> <password> <github repo>
+python ./tools/github_issues_to_csv <github user> <github repo>
 
 Example for getting openbmc issues
-python ./tools/github_issues_to_csv <github user> <password>  openbmc/openbmc
+python ./tools/github_issues_to_csv <github user>  openbmc/openbmc
 
 Example for getting openbmc-test-automation issues
-python ./tools/github_issues_to_csv <github user> <password>  openbmc/openbmc-test-automation
-
+python ./tools/github_issues_to_csv <github user>  openbmc/openbmc-test-automation
 ```
