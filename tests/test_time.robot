@@ -10,9 +10,8 @@ Resource               ../lib/resource.txt
 Library                OperatingSystem
 Library                DateTime
 
-Suite Setup            Open Connection And Log In
-Suite Teardown         Close All Connections
-Test Teardown          Post Test Execution
+Test Setup             Open Connection And Log In
+Test Teardown          Post Testcase Execution
 
 *** Variables ***
 ${SYSTEM_TIME_INVALID}      01/01/1969 00:00:00
@@ -398,11 +397,13 @@ Set Time Using REST
     ...    Should Be True  ${host_diff_set_new} <= ${time_duration}
 
 
-Post Test Execution
-    [Documentation]  Perform operations after test execution. Capture FFDC
-    ...  in case of test case failure and sets default values for time mode
-    ...  and owner.
+Post Testcase Execution
+    [Documentation]  Do the post test teardown.
+    ...  1. Capture FFDC on test failure.
+    ...  2. Sets defaults for time mode and owner.
+    ...  3. Close all open SSH connections.
 
-    Run Keyword If Test Failed  FFDC On Test Case Fail
+    FFDC On Test Case Fail
     Set Time Owner  BMC
     Set Time Mode  NTP
+    Close All Connections
