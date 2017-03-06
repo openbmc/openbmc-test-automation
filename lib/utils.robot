@@ -2,6 +2,7 @@
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
+Resource                ../lib/openbmc_ffdc.robot
 Library                 DateTime
 Library                 Process
 Library                 OperatingSystem
@@ -700,3 +701,11 @@ Enable Core Dump On BMC
     ${core_pattern}=  Execute Command On BMC
     ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
     Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
+
+Post Test Execution
+    [Documentation]  Perform operations after test execution.
+    ...  1. Capture FFDC in case of test case failure and
+    ...  2. Close all open connections.
+
+    Run Keyword If Test Failed  FFDC On Test Case Fail
+    Close All Connections
