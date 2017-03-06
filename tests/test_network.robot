@@ -13,6 +13,8 @@ Suite Setup         Open Connection And Log In
 Suite Teardown      Close All Connections
 Test Teardown       FFDC On Test Case Fail
 
+Force Tags  NetworkManager
+
 *** Variables ***
 
 ${NW_MANAGER}    ${NETWORK_MANAGER_URI}Interface

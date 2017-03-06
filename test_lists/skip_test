@@ -37,14 +37,17 @@
 -e IPMI_Chassis_Status_On
 -e IPMI_Chassis_Status_Off
 -e IPMI_Chassis_Restore_Power_Policy
+<<<<<<< HEAD
 #https://github.com/openbmc/openbmc/issues/830
 -e Good_connection_for_testing
 -e get_directory_listing
 -e get_directory_listing_xyz
 -e get_names
 -e get_names_org
+=======
 #https://github.com/openbmc/openbmc-test-automation/issues/226
 -e Test_BIOS_Version
+>>>>>>> 424f0fe... Refactoring REST interface test
 #https://github.com/openbmc/openbmc/issues/928
 -e Set_Host_Time_With_Both_And_NTP
 #https://github.com/openbmc/openbmc/issues/901
@@ -55,3 +58,5 @@
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
 #openbmc/openbmc-test-automation/issues/75
 -e eSEL_Logging
+#openbmc/openbmc-test-automation/issues/396
+-e NetworkManager
