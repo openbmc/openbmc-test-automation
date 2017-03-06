@@ -32,12 +32,14 @@ base_dir_path = os.getcwd() + repo_subdir_path
 item_yaml_file_path = base_dir_path + 'Item.interface.yaml'
 asset_yaml_file_path = base_dir_path + 'Decorator/Asset.interface.yaml'
 revision_yaml_file_path = base_dir_path + 'Decorator/Revision.interface.yaml'
+replaceable_yaml_file = base_dir_path + 'Decorator/Replaceable.interface.yaml'
 
 # FRU list
 yaml_fru_list = []
 yaml_fru_list.append(item_yaml_file_path)
 yaml_fru_list.append(asset_yaml_file_path)
 yaml_fru_list.append(revision_yaml_file_path)
+yaml_fru_list.append(replaceable_yaml_file)
 
 # Append to master list
 yaml_master_list.append(yaml_fru_list)

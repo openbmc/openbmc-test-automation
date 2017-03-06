@@ -1,5 +1,5 @@
 inventory_dict = {
-    "fru": [
+    "FRU": [
         "PrettyName", 
         "Present", 
         "PartNumber", 
@@ -7,6 +7,7 @@ inventory_dict = {
         "Manufacturer", 
         "BuildDate", 
         "Model", 
-        "Version"
+        "Version", 
+        "FieldReplaceable"
     ]
 }
