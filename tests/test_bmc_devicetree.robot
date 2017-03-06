@@ -1,13 +1,12 @@
 *** Settings ***
 Documentation       This suite is for Verifying BMC device tree.
 
-Resource            ../lib/openbmc_ffdc.robot
+Resource            ../lib/utils.robot
 Resource            ../lib/ipmi_client.robot
 Library             String
 
-Suite Setup         Open Connection And Log In
-Suite Teardown      Close All Connections
-Test Teardown       FFDC On Test Case Fail
+Test Setup          Open Connection And Log In
+Test Teardown       Post Testcase Execution
 
 *** Variables ***
 ${devicetree_base}  /sys/firmware/devicetree/base/
@@ -119,3 +118,11 @@ Template Check Property
     Should Be Empty  ${stderr}
     ${length}=  Get Length  ${output}
     Should Be True  ${length} > 1
+
+Post Testcase Execution
+    [Documentation]  Perform operations after test execution.
+    ...  1. Capture FFDC in case of test case failure and
+    ...  2. Close all open connections.
+
+    Run Keyword If Test Failed  FFDC On Test Case Fail
+    Close All Connections

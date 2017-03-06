@@ -5,14 +5,12 @@ Documentation     This suite is used for testing the error logging
 Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
-Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/state_manager.robot
 
 Library           Collections
 
-Suite Setup       Open Connection And Log In
-Suite Teardown    Close All Connections
-Test Teardown     FFDC On Test Case Fail
+Test Setup        Open Connection And Log In
+Test Teardown     Post Testcase Execution
 
 Force Tags  Event_Logging
 
@@ -227,3 +225,11 @@ create a test log
     ${LOGID}=    convert to integer    ${json['data']}
     ${uri}=     catenate    SEPARATOR=   ${EVENT_RECORD}   ${LOGID}
     [Return]  ${uri}
+
+Post Testcase Execution
+    [Documentation]  Perform operations after test execution.
+    ...  1. Capture FFDC in case of test case failure and
+    ...  2. Close all open connections.
+
+    Run Keyword If Test Failed  FFDC On Test Case Fail
+    Close All Connections
