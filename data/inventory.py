@@ -7,6 +7,7 @@ inventory_dict = {
         "Manufacturer", 
         "BuildDate", 
         "Model", 
-        "Version"
+        "Version", 
+        "FieldReplaceable"
     ]
 }
