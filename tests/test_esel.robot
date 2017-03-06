@@ -52,13 +52,32 @@ Verify eSEL Entries Using REST
 
 
 Verify Multiple eSEL Using REST
-    [Documentation]  Generate multiple eSEL log and Verify using REST.
+    [Documentation]  Generate multiple eSEL log and verify using REST.
     [setup]  Restart Logging Service
     [Tags]  Verify_Multiple_eSEL_Using_REST
     Create eSEL
     Create eSEL
     ${entries}=  Count eSEL Entries
     Should Be Equal As Integers  ${entries}  ${2}
+
+
+Check eSEL AdditionalData
+    [Documentation]  Generate eSEL log and verify AdditionalData is
+    ...              not empty.
+    [setup]  Restart Logging Service
+    [Tags]  Check_eSEL_AdditionalData
+    Create eSEL
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    # "/xyz/openbmc_project/logging/entry/1": {
+    #    "Timestamp": 1487743771812,
+    #    "AdditionalData": [],
+    #    "Message": "org.open_power.Error.Host.Event.Event",
+    #    "Id": 1,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Emergency"
+    # }
+    Should Not Be Empty  ${jsondata["data"]["AdditionalData"]}
 
 
 Test Wrong Reservation_ID
