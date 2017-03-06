@@ -5,9 +5,8 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/ipmi_client.robot
 Library             String
 
-Suite Setup         Open Connection And Log In
-Suite Teardown      Close All Connections
-Test Teardown       FFDC On Test Case Fail
+Test Setup          Open Connection And Log In
+Test Teardown       Post Test Case Execution
 
 *** Variables ***
 ${devicetree_base}  /sys/firmware/devicetree/base/
@@ -119,3 +118,11 @@ Template Check Property
     Should Be Empty  ${stderr}
     ${length}=  Get Length  ${output}
     Should Be True  ${length} > 1
+
+Post Test Case Execution
+    [Documentation]  Do the post test teardown.
+    ...  1. Capture FFDC on test failure.
+    ...  2. Close all open SSH connections.
+
+    FFDC On Test Case Fail
+    Close All Connections

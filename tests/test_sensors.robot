@@ -5,15 +5,14 @@ Documentation          This example demonstrates executing commands on a remote 
 ...                    Notice how connections are handled as part of the suite setup and
 ...                    teardown. This saves some time when executing several test cases.
 
-Resource        ../lib/rest_client.robot
-Resource        ../lib/ipmi_client.robot
-Resource        ../lib/openbmc_ffdc.robot
-Library         ../data/model.py
+Resource               ../lib/rest_client.robot
+Resource               ../lib/ipmi_client.robot
+Resource               ../lib/openbmc_ffdc.robot
+Library                ../data/model.py
 
 Suite setup            Setup The Suite
-Suite Teardown         Close All Connections
-Test Teardown          FFDC On Test Case Fail
-
+Test Setup             Open Connection And Log In
+Test Teardown          Post Test Case Execution
 
 *** Variables ***
 ${model}=    ${OPENBMC_MODEL}
@@ -358,3 +357,11 @@ Get Inventory Sensor Number
     [Arguments]  ${name}
     ${x}=       get inventory sensor   ${OPENBMC_MODEL}   ${name}
     [Return]     ${x}
+
+Post Test Case Execution
+    [Documentation]  Do the post test teardown.
+    ...  1. Capture FFDC on test failure.
+    ...  2. Close all open SSH connections.
+
+    FFDC On Test Case Fail
+    Close All Connections
