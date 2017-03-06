@@ -53,3 +53,5 @@
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
 #openbmc/openbmc-test-automation/issues/75
 -e eSEL_Logging
+#openbmc/openbmc-test-automation/issues/396
+-e NetworkManager
