@@ -10,9 +10,8 @@ Resource          ../lib/state_manager.robot
 
 Library           Collections
 
-Suite Setup       Open Connection And Log In
-Suite Teardown    Close All Connections
-Test Teardown     FFDC On Test Case Fail
+Test Setup        Open Connection And Log In
+Test Teardown     Post Test Case Execution
 
 Force Tags  Event_Logging
 
@@ -227,3 +226,11 @@ create a test log
     ${LOGID}=    convert to integer    ${json['data']}
     ${uri}=     catenate    SEPARATOR=   ${EVENT_RECORD}   ${LOGID}
     [Return]  ${uri}
+
+Post Test Case Execution
+    [Documentation]  Do the post test teardown.
+    ...  1. Capture FFDC on test failure.
+    ...  2. Close all open SSH connections.
+
+    FFDC On Test Case Fail
+    Close All Connections
