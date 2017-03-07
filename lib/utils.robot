@@ -120,12 +120,12 @@ Initiate OS Host Power Off
     # os_username  The username to be used to sign in to the OS.
     # os_password  The password to be used to sign in to the OS.
 
-    Open connection  ${os_host}
+    SSHLibrary.Open connection  ${os_host}
     Login  ${os_username}  ${os_password}
     ${cmd_buf}  Catenate  shutdown
     Rqprint Issuing  ${cmd_buf}
     Start Command  ${cmd_buf}
-    Close Connection
+    SSHLibrary.Close Connection
 
 Initiate OS Host Reboot
     [Documentation]  Initiate an OS reboot.
@@ -137,12 +137,12 @@ Initiate OS Host Reboot
     # os_username  The username to be used to sign in to the OS.
     # os_password  The password to be used to sign in to the OS.
 
-    Open connection  ${os_host}
+    SSHLibrary.Open connection  ${os_host}
     Login  ${os_username}  ${os_password}
     ${cmd_buf}  Catenate  reboot
     Rqprint Issuing  ${cmd_buf}
     Start Command  ${cmd_buf}
-    Close Connection
+    SSHLibrary.Close Connection
 
 Initiate Auto Reboot
     [Documentation]  Initiate an auto reboot.
@@ -150,7 +150,7 @@ Initiate Auto Reboot
     # Set the auto reboot policy.
     Set Auto Reboot  yes
 
-    Open connection  ${openbmc_host}
+    SSHLibrary.Open connection  ${openbmc_host}
     Login  ${openbmc_username}  ${openbmc_password}
 
     # Set the watchdog timer.  Note: 5000 = milliseconds which is 5 seconds.
@@ -191,7 +191,7 @@ Check OS
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}  ${quiet}=${QUIET}
     ...          ${print_string}=${EMPTY}
-    [Teardown]  Close Connection
+    [Teardown]  SSHLibrary.Close Connection
 
     # os_host           The DNS name/IP of the OS host associated with our BMC.
     # os_username       The username to be used to sign on to the OS host.
@@ -204,7 +204,7 @@ Check OS
     # Attempt to ping the OS. Store the return code to check later.
     ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${os_host}
 
-    Open connection  ${os_host}
+    SSHLibrary.Open connection  ${os_host}
 
     ${status}  ${msg}=  Run Keyword And Ignore Error  Login  ${os_username}
     ...  ${os_password}
