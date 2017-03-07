@@ -156,7 +156,7 @@ def get_system_details(xml_file_path):
 
     print "BMC Version:", bmc_version
     print "BMC Platform:", bmc_platform
-    return [str(bmc_version).strip("-dirty"), str(bmc_platform).strip(" BMC")]
+    return [str(bmc_version), str(bmc_platform)]
 
 
 def usage():
