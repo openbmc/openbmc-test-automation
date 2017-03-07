@@ -334,7 +334,7 @@ def get_os_state(os_host="",
 
         if must_login:
             # Open SSH connection to OS.
-            cmd_buf = ["Open Connection", os_host]
+            cmd_buf = ["SSHLibrary.Open Connection", os_host]
             if not quiet:
                 grp.rpissuing_keyword(cmd_buf)
             ix = BuiltIn().run_keyword(*cmd_buf)
