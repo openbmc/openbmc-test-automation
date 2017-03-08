@@ -756,3 +756,19 @@ Enable Core Dump On BMC
     ${core_pattern}=  Execute Command On BMC
     ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
     Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
+Get BMC Boot Count
+    [Documentation]  Get BMC boot count based on boot time.
+    ${cur_btime}=  Get BMC Boot Time
+    
+    Run Keyword If  ${cur_btime} > ${BOOT_TIME}
+    ...  Run Keywords  Set Global Variable  ${BOOT_TIME}  ${cur_btime}
+    ...  AND
+    ...  Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
+    [Return]  ${BOOT_COUNT}
+
+Set BMC Boot Count
+    [Documentation]  Set BMC boot count to given value.
+    [arguments]   ${count}
+    ${cur_btime}=  Get BMC Boot Time
+    Set Global Variable  ${BOOT_TIME}  ${cur_btime}
+    Set Global Variable  ${BOOT_COUNT}  ${count}
