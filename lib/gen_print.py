@@ -18,10 +18,12 @@ import logging
 import collections
 
 try:
+    robot_env = 1
     from robot.utils import DotDict
     from robot.utils import NormalizedDict
+    from robot.libraries.BuiltIn import BuiltIn
 except ImportError:
-    pass
+    robot_env = 0
 
 import gen_arg as ga
 
@@ -67,12 +69,9 @@ if SHOW_ELAPSED_TIME == "1":
 start_time = time.time()
 sprint_time_last_seconds = start_time
 
-try:
-    # The user can set environment variable "GEN_PRINT_DEBUG" to get debug
-    # output from this module.
-    gen_print_debug = int(os.environ['GEN_PRINT_DEBUG'])
-except KeyError:
-    gen_print_debug = 0
+# The user can set environment variable "GEN_PRINT_DEBUG" to get debug output
+# from this module.
+gen_print_debug = int(os.environ.get('GEN_PRINT_DEBUG', 0))
 
 
 ###############################################################################
@@ -84,7 +83,7 @@ def sprint_func_name(stack_frame_ix=None):
     Description of arguments:
     stack_frame_ix                  The index of the stack frame whose
                                     function name should be returned.  If the
-                                    caller does not specifiy a value, this
+                                    caller does not specify a value, this
                                     function will set the value to 1 which is
                                     the index of the caller's stack frame.  If
                                     the caller is the wrapper function
@@ -120,7 +119,7 @@ def get_arg_name(var,
     Return the "name" of an argument passed to a function.  This could be a
     literal or a variable name.
 
-    Description of arguements:
+    Description of arguments:
     var                             The variable whose name you want returned.
     arg_num                         The arg number (1 through n) whose name
                                     you wish to have returned.  This value
@@ -827,7 +826,7 @@ def sprint_dashes(indent=col1_indent,
     r"""
     Return a string of dashes to the caller.
 
-    Description of arguements:
+    Description of arguments:
     indent                          The number of characters to indent the
                                     output.
     width                           The width of the string of dashes.
@@ -968,7 +967,7 @@ def sprint_executing(stack_frame_ix=None):
     Description of arguments:
     stack_frame_ix                  The index of the stack frame whose
                                     function info should be returned.  If the
-                                    caller does not specifiy a value, this
+                                    caller does not specify a value, this
                                     function will set the value to 1 which is
                                     the index of the caller's stack frame.  If
                                     the caller is the wrapper function
@@ -1214,24 +1213,77 @@ def sprintn(buffer=""):
 
 
 ###############################################################################
+def gp_debug_print(buffer):
+
+    r"""
+    Print buffer to stdout only if gen_print_debug is set.
+
+    This function is intended for use only by other functions in this module.
+
+    Description of arguments:
+    buffer                          The string to be printed.
+    """
+
+    if not gen_print_debug:
+        return
+
+    if robot_env:
+        BuiltIn().log_to_console(buffer)
+    else:
+        print(buffer)
+
+###############################################################################
+
+
+###############################################################################
+def gp_get_var_value(var_name,
+                     default=1):
+
+    r"""
+    Get the value of the named variable and return it.  If the variable is not
+    defined, the default value is returned.
+
+    If we are in a robot environment, get_variable_value will be used.
+    Otherwise, the __builtin__ version of the variable is returned.
+
+    This function is intended for use only by other functions in this module.
+
+    Description of arguments:
+    var_name                        The name of the variable whose value is to
+                                    be returned.
+    default                         The value that is returned if var_name is
+                                    not defined.
+    """
+
+    if robot_env:
+        var_value = int(BuiltIn().get_variable_value("${" + var_name + "}",
+                        default))
+    else:
+        var_value = getattr(__builtin__, var_name, default)
+
+    return var_value
+
+###############################################################################
+
+
+###############################################################################
 # In the following section of code, we will dynamically create print versions
 # for each of the sprint functions defined above.  So, for example, where we
 # have an sprint_time() function defined above that returns the time to the
 # caller in a string, we will create a corresponding print_time() function
 # that will print that string directly to stdout.
 
-# It can be complicated to follow what's being creaed by the exec statement
+# It can be complicated to follow what's being created by the exec statements
 # below.  Here is an example of the print_time() function that will be created:
 
 # def print_time(*args):
-#   s_funcname = "s" + sys._getframe().f_code.co_name
-#   s_func = getattr(sys.modules[__name__], s_funcname)
-#   sys.stdout.write(s_func(*args))
+#     s_func = getattr(sys.modules[__name__], "sprint_time")
+#     sys.stdout.write(s_func(*args))
+#     sys.stdout.flush()
 
 # Here are comments describing the 3 lines in the body of the created function.
-# Calculate the "s" version of this function name (e.g. if this function name
-# is print_time, we want s_funcname to be "sprint_time".
-# Put a reference to the "s" version of this function in s_func.
+# Create a reference to the "s" version of the given function in s_func (e.g.
+# if this function name is print_time, we want s_funcname to be "sprint_time").
 # Call the "s" version of this function passing it all of our arguments.
 # Write the result to stdout.
 
@@ -1243,111 +1295,88 @@ func_names = ['print_time', 'print_timen', 'print_error', 'print_varx',
               'print_pgm_header', 'print_issuing', 'print_pgm_footer',
               'print_error_report', 'print', 'printn']
 
-for func_name in func_names:
-    if func_name == "print":
-        continue
-    # Create abbreviated aliases (e.g. spvar is an alias for sprint_var).
-    alias = re.sub("print_", "p", func_name)
-    pgm_definition_string = "s" + alias + " = s" + func_name
-    if gen_print_debug:
-        print(pgm_definition_string)
-    exec(pgm_definition_string)
+# stderr_func_names is a list of functions whose output should go to stderr
+# rather than stdout.
+stderr_func_names = ['print_error', 'print_error_report']
 
+gp_debug_print("robot_env: " + str(robot_env))
 for func_name in func_names:
-    if func_name == "print_error" or func_name == "print_error_report":
+    gp_debug_print("func_name: " + func_name)
+    if func_name in stderr_func_names:
         output_stream = "stderr"
     else:
         output_stream = "stdout"
-    func_def = \
-        [
-            "def " + func_name + "(*args):",
-            "  s_func_name = \"s\" + sys._getframe().f_code.co_name",
-            "  s_func = getattr(sys.modules[__name__], s_func_name)",
-            "  sys." + output_stream + ".write(s_func(*args))",
-            "  sys." + output_stream + ".flush()"
-        ]
+
+    func_def_line = "def " + func_name + "(*args):"
+    s_func_line = "    s_func = getattr(sys.modules[__name__], \"s" +\
+        func_name + "\")"
+    # Generate the code to do the printing.
+    if robot_env:
+        func_print_lines = \
+            [
+                "    BuiltIn().log_to_console(s_func(*args),"
+                " stream='" + output_stream + "',"
+                " no_newline=True)"
+            ]
+    else:
+        func_print_lines = \
+            [
+                "    sys." + output_stream + ".write(s_func(*args))",
+                "    sys." + output_stream + ".flush()"
+            ]
+
+    # Create an array containing the lines of the function we wish to create.
+    func_def = [func_def_line, s_func_line] + func_print_lines
+    # We don't want to try to redefine the "print" function, thus the if
+    # statement.
     if func_name != "print":
         pgm_definition_string = '\n'.join(func_def)
-        if gen_print_debug:
-            print(pgm_definition_string)
+        gp_debug_print(pgm_definition_string)
         exec(pgm_definition_string)
 
-    # Now define "q" versions of each print function.
-    func_def = \
-        [
-            "def q" + func_name + "(*args):",
-            "  if __builtin__.quiet: return",
-            "  s_func_name = \"s" + func_name + "\"",
-            "  s_func = getattr(sys.modules[__name__], s_func_name)",
-            "  sys." + output_stream + ".write(s_func(*args))",
-            "  sys." + output_stream + ".flush()"
-        ]
+    # Insert a blank line which will be overwritten by the next several
+    # definitions.
+    func_def.insert(1, "")
 
+    # Define the "q" (i.e. quiet) version of the given print function.
+    func_def[0] = "def q" + func_name + "(*args):"
+    func_def[1] = "    if gp_get_var_value(\"quiet\", 0): return"
     pgm_definition_string = '\n'.join(func_def)
-    if gen_print_debug:
-        print(pgm_definition_string)
+    gp_debug_print(pgm_definition_string)
     exec(pgm_definition_string)
 
-    # Now define "d" versions of each print function.
-    func_def = \
-        [
-            "def d" + func_name + "(*args):",
-            "  if not __builtin__.debug: return",
-            "  s_func_name = \"s" + func_name + "\"",
-            "  s_func = getattr(sys.modules[__name__], s_func_name)",
-            "  sys." + output_stream + ".write(s_func(*args))",
-            "  sys." + output_stream + ".flush()"
-        ]
-
+    # Define the "d" (i.e. debug) version of the given print function.
+    func_def[0] = "def d" + func_name + "(*args):"
+    func_def[1] = "    if not gp_get_var_value(\"debug\", 0): return"
     pgm_definition_string = '\n'.join(func_def)
-    if gen_print_debug:
-        print(pgm_definition_string)
+    gp_debug_print(pgm_definition_string)
     exec(pgm_definition_string)
 
-    # Now define "l" versions of each print function.
-    func_def = \
+    # Define the "l" (i.e. log) version of the given print function.
+    func_def_line = "def l" + func_name + "(*args):"
+    func_print_lines = \
         [
-            "def l" + func_name + "(*args):",
-            "  s_func_name = \"s" + func_name + "\"",
-            "  s_func = getattr(sys.modules[__name__], s_func_name)",
-            "  logging.log(getattr(logging, 'INFO'), s_func(*args))",
+            "    logging.log(getattr(logging, 'INFO'), s_func(*args))"
         ]
 
+    func_def = [func_def_line, s_func_line] + func_print_lines
     if func_name != "print_varx" and func_name != "print_var":
         pgm_definition_string = '\n'.join(func_def)
-        if gen_print_debug:
-            print(pgm_definition_string)
+        gp_debug_print(pgm_definition_string)
         exec(pgm_definition_string)
 
-    if func_name == "print":
+    if func_name == "print" or func_name == "printn":
+        gp_debug_print("")
         continue
 
-    # Create abbreviated aliases (e.g. pvar is an alias for print_var).
+    # Create abbreviated aliases (e.g. spvar is an alias for sprint_var).
     alias = re.sub("print_", "p", func_name)
-    pgm_definition_string = alias + " = " + func_name
-    if gen_print_debug:
-        print(pgm_definition_string)
-    exec(pgm_definition_string)
+    prefixes = ["", "s", "q", "d", "l"]
+    for prefix in prefixes:
+        pgm_definition_string = prefix + alias + " = " + prefix + func_name
+        gp_debug_print(pgm_definition_string)
+        exec(pgm_definition_string)
 
-    # Create abbreviated aliases (e.g. qpvar is an alias for qprint_var).
-    alias = re.sub("print_", "p", func_name)
-    pgm_definition_string = "q" + alias + " = q" + func_name
-    if gen_print_debug:
-        print(pgm_definition_string)
-    exec(pgm_definition_string)
-
-    # Create abbreviated aliases (e.g. dpvar is an alias for dprint_var).
-    alias = re.sub("print_", "p", func_name)
-    pgm_definition_string = "d" + alias + " = d" + func_name
-    if gen_print_debug:
-        print(pgm_definition_string)
-    exec(pgm_definition_string)
-
-    # Create abbreviated aliases (e.g. lpvar is an alias for lprint_var).
-    alias = re.sub("print_", "p", func_name)
-    pgm_definition_string = "l" + alias + " = l" + func_name
-    if gen_print_debug:
-        print(pgm_definition_string)
-    exec(pgm_definition_string)
+    gp_debug_print("")
 
 ###############################################################################
