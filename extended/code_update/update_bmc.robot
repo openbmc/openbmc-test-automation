@@ -52,11 +52,13 @@ Initiate Code Update BMC
 
     Check If File Exist  ${FILE_PATH}
     System Readiness Test
-    ${status}=   Run Keyword and Return Status
-    ...   Validate BMC Version   before
 
-    Run Keyword if  '${status}' == '${False}'
-    ...     Pass Execution   Same Driver version installed
+    # TODO: Disabling version check until new logic are in place.
+    # ${status}=   Run Keyword and Return Status
+    # ...   Validate BMC Version   before
+
+    # Run Keyword if  '${status}' == '${False}'
+    # ...     Pass Execution   Same Driver version installed
 
     Check Boot Count And Time
     Prune Journal Log
@@ -89,7 +91,7 @@ Initiate Code Update BMC
     Check If BMC is Up    30 min   10 sec
     Check Boot Count And Time
     Sleep  1 min
-    Validate BMC Version
+    # Validate BMC Version
 
     # Now that the code update is completed, make sure we use the correct
     # interface while checking for BMC ready state.
