@@ -10,7 +10,8 @@ Getscom Operations On OS
     [Documentation]  Executes getscom command on OS
     ...              with the given input command.
     [Arguments]      ${input_cmd}
-    #input_cmd       -l|--list-chips
+    # Description of arguments:
+    # input_cmd      -l|--list-chips
     #                -c|--chip <chip-id> <addr>
 
     ${output}  ${stderr}=  Execute Command  getscom ${input_cmd}
@@ -22,7 +23,8 @@ Gard Operations On OS
     [Documentation]  Executes opal-gard command on OS
     ...              with the given input command.
     [Arguments]      ${input_cmd}
-    #input_cmd       list/clear all/show <gard_record_id>
+    # Description of arguments:
+    # input_cmd      list/clear all/show <gard_record_id>
 
     ${output}  ${stderr}=  Execute Command  opal-gard ${input_cmd}
     ...        return_stderr=True
@@ -32,10 +34,29 @@ Gard Operations On OS
 Putscom Through OS
     [Documentation]  Executes putscom command on OS
     ...              with the given input arguments.
-    [Arguments]  ${chip_id}  ${fru}  ${address}
-    #chip_id           processor ID
-    #fru               FRU value
-    #address           chip address
+    [Arguments]      ${chip_id}  ${fru}  ${address}
+    # Description of arguments:
+    # chip_id        processor ID
+    # fru            FRU value
+    # address        chip address
 
     ${cmd}=  Catenate  putscom -c 0x${chip_id} 0x${fru} 0x${address}
     Start Command  ${cmd}
+
+Get Cores Values From OS
+    [Documentation]  Check if cores present on HOST OS
+    ...              and return core values.
+    ${cmd}=  Catenate  cat /sys/firmware/opal/msglog|grep -i chip|grep -i core
+    ${output}=  Execute Command  ${cmd}
+    Should Not Be Empty  ${output}
+    [Return]  ${output}
+
+Get ChipID From OS
+    [Documentation]  Get chip ID values based on the input.
+    [Arguments]      ${chip_type}
+    # Description of arguments:
+    # chip_type      The chip type (Processor/Centaur).
+
+    ${cmd}=  Catenate  -l | grep -i ${chip_type} | cut -c1-8
+    ${chip_id}=  Getscom Operations On OS  ${cmd}
+    [Return]  ${chip_id}
