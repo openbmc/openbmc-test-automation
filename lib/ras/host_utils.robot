@@ -32,10 +32,26 @@ Gard Operations On OS
 Putscom Through OS
     [Documentation]  Executes putscom command on OS
     ...              with the given input arguments.
-    [Arguments]  ${chip_id}  ${fru}  ${address}
-    #chip_id           processor ID
-    #fru               FRU value
-    #address           chip address
+    [Arguments]      ${chip_id}  ${fru}  ${address}
+    #chip_id         processor ID
+    #fru             FRU value
+    #address         chip address
 
     ${cmd}=  Catenate  putscom -c 0x${chip_id} 0x${fru} 0x${address}
     Start Command  ${cmd}
+
+Get Cores Values From OS
+    [Documentation]  Checks if cores present on HOST OS
+    ...              and returns core values
+
+    ${output}=  Execute Command  cat /sys/firmware/opal/msglog | grep -i chip | grep -i core
+    Should Not Be Empty  ${output}
+    [Return]  ${output}
+
+Get ChipID From OS
+    [Documentation]  Get chip ID values based on the input.
+    [Arguments]      ${chip_type}
+    #chip_type       Processor/Centaur
+
+    ${chip_id}=  Getscom Operations On OS  -l | grep -i ${chip_type} | cut -c1-8
+    [Return]  ${chip_id}
