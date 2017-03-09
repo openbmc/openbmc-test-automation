@@ -704,7 +704,7 @@ Get System Power Policy
 
 Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
-    ${setting}=  Read Attribute  ${HOST_SETTING}  auto_reboot
+    ${setting}=  Read Attribute  ${HOST_SETTINGS}  auto_reboot
     [Return]  ${setting}
 
 
@@ -715,7 +715,7 @@ Set Auto Reboot
 
     ${valueDict}=  Set Variable  ${setting}
     ${data}=  Create Dictionary  data=${valueDict}
-    Write Attribute  ${HOST_SETTING}  auto_reboot  data=${data}
+    Write Attribute  ${HOST_SETTINGS}  auto_reboot  data=${data}
     ${current_setting}=  Get Auto Reboot
     Should Be Equal  ${current_setting}  ${setting}
 
@@ -750,9 +750,23 @@ Execute Command On BMC
     Should Be Empty  ${stderr}
     [Return]  ${stdout}
 
+
 Enable Core Dump On BMC
     [Documentation]  Enable core dump collection.
     Open Connection And Log In
     ${core_pattern}=  Execute Command On BMC
     ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
     Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
+
+Login To OS
+    [Documentation]  Login to OS.
+    [Arguments]      ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    ...              ${os_password}=${OS_PASSWORD}
+    # Description of arguments:
+    # os_host        The DNS name/IP of the OS host associated with our BMC.
+    # os_username    The username to be used to sign on to the OS host.
+    # os_password    The password to be used to sign on to the OS host.
+
+    Open Connection  ${os_host}
+    ${resp}=  Login  ${os_username}  ${os_password}
+    [Return]  ${resp}
