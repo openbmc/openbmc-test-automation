@@ -708,7 +708,7 @@ Get System Power Policy
 
 Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
-    ${setting}=  Read Attribute  ${HOST_SETTING}  auto_reboot
+    ${setting}=  Read Attribute  ${HOST_SETTINGS}  auto_reboot
     [Return]  ${setting}
 
 
@@ -719,7 +719,7 @@ Set Auto Reboot
 
     ${valueDict}=  Set Variable  ${setting}
     ${data}=  Create Dictionary  data=${valueDict}
-    Write Attribute  ${HOST_SETTING}  auto_reboot  data=${data}
+    Write Attribute  ${HOST_SETTINGS}  auto_reboot  data=${data}
     ${current_setting}=  Get Auto Reboot
     Should Be Equal  ${current_setting}  ${setting}
 
@@ -753,6 +753,7 @@ Execute Command On BMC
     ${stdout}  ${stderr}=  Execute Command  ${command}  return_stderr=True
     Should Be Empty  ${stderr}
     [Return]  ${stdout}
+
 
 Enable Core Dump On BMC
     [Documentation]  Enable core dump collection.
@@ -791,4 +792,5 @@ Login To OS Host
     ...  Wait for OS  ${os_host}  ${os_username}  ${os_password}
 
     Open Connection  ${os_host}
-    Login  ${os_username}  ${os_password}
+    ${resp}=  Login  ${os_username}  ${os_password}
+    [Return]  ${resp}
