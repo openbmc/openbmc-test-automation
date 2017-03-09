@@ -20,6 +20,9 @@ Initiate Host Boot
     ...  ${HOST_STATE_URI}  RequestedHostTransition   data=${args}
 
     Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is Chassis On
+
+    Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is Host Running
 
 
@@ -28,6 +31,9 @@ Initiate Host PowerOff
     ${args}=  Create Dictionary   data=${HOST_POWEROFF_TRANS}
     Write Attribute
     ...  ${HOST_STATE_URI}  RequestedHostTransition   data=${args}
+
+    Wait Until Keyword Succeeds
+    ...  3 min  10 sec  Is Chassis Off
 
     Wait Until Keyword Succeeds
     ...  3 min  10 sec  Is Host Off
