@@ -211,3 +211,13 @@ Wait For BMC Ready
     ...  Is BMC Ready
 
 
+Is Host OS Started
+    [Documentation]  Check if host OS started.
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Host Boot Progress Status
+
+
+Host Boot Progress Status
+    [Documentation]  Check the host boot progress attribute value.
+    ${boot_progress}=  Get Boot Progress
+    Should Be Equal  ${boot_progress}  FW Progress, Starting OS

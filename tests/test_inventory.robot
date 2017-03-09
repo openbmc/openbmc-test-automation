@@ -59,6 +59,9 @@ Test Suite Setup
     Run Keyword If  '${current_state}' == 'Off'
     ...  Initiate Host Boot
 
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is Host OS Started
+
 
 Get Inventory
     [Documentation]  Get the properties of an endpoint.
