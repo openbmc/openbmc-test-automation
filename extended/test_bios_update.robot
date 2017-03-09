@@ -7,9 +7,7 @@ Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 
-Test Setup        Start SOL Console Logging
 Test Teardown     FFDC On Test Case Fail
-Suite Teardown    Collect SOL Log
 
 *** Variables ***
 
