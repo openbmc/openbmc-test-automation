@@ -219,3 +219,19 @@ Wait For BMC Ready
     ...  Is BMC Ready
 
 
+Get To OS
+    [Documentation]  Check if HOST OS is up else try to bring  
+    ...              HOST OS up by powering HOST off & on.
+
+    [Arguments]      ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    ...              ${os_password}=${OS_PASSWORD}
+    # os_host        The DNS name/IP of the OS host associated with our BMC.
+    # os_username    The username to be used to sign on to the OS host.
+    # os_password    The password to be used to sign on to the OS host.
+
+    ${resp}=  Run Keyword And Return Status
+    ...  Check OS  ${os_host}  ${os_username}  ${os_password} 
+    Run Keyword if  '${resp}'=='False'
+    ...  Run Keywords  Initiate Host PowerOff  AND
+    ...  Initiate Host Boot  AND
+    ...  Wait for OS  ${os_host}  ${os_username}  ${os_password} 
