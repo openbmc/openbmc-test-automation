@@ -13,14 +13,33 @@ ${OBMC_STATES_VERSION}    ${0}
 
 *** Keywords ***
 
+Boot Host
+    [Documentation]  Boot the Host.
+    Initiate Host Boot
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is Chassis On
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is Host Running
+
+
+Power Off Host
+    [Documentation]  Poweroff the Host.
+    Initiate Host Boot
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is Chassis Off
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is Host Off
+
+
 Initiate Host Boot
     [Documentation]  Initiate host power on.
     ${args}=  Create Dictionary   data=${HOST_POWERON_TRANS}
     Write Attribute
     ...  ${HOST_STATE_URI}  RequestedHostTransition   data=${args}
-
-    Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is Host Running
 
 
 Initiate Host PowerOff
@@ -28,9 +47,6 @@ Initiate Host PowerOff
     ${args}=  Create Dictionary   data=${HOST_POWEROFF_TRANS}
     Write Attribute
     ...  ${HOST_STATE_URI}  RequestedHostTransition   data=${args}
-
-    Wait Until Keyword Succeeds
-    ...  3 min  10 sec  Is Host Off
 
 
 Initiate Host Reboot
