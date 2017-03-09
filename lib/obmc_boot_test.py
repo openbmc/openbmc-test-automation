@@ -565,6 +565,9 @@ def test_loop_body():
         grp.rpissuing_keyword(cmd_buf)
         BuiltIn().run_keyword_and_continue_on_failure(*cmd_buf)
 
+    boot_results.print_report()
+    grp.rqprint_timen("Finished boot " + str(boot_count) + ".")
+
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
         call_point='stop_check')
@@ -572,9 +575,6 @@ def test_loop_body():
         error_message = "Stopping as requested by user.\n"
         grp.rprint_error_report(error_message)
         BuiltIn().fail(error_message)
-
-    boot_results.print_report()
-    grp.rqprint_timen("Finished boot " + str(boot_count) + ".")
 
     return True
 
