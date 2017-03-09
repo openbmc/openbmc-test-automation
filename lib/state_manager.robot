@@ -233,5 +233,3 @@ Wait For BMC Ready
     ...  ELSE
     ...  Wait Until Keyword Succeeds  10 min  10 sec
     ...  Is BMC Ready
-
-
