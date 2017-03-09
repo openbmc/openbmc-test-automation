@@ -30,6 +30,7 @@ Documentation      This module is for data collection on test case failure
 
 Resource           openbmc_ffdc_methods.robot
 Resource           openbmc_ffdc_utils.robot
+Resource           state_manager.robot
 Library            openbmc_ffdc.py
 
 *** Keywords ***

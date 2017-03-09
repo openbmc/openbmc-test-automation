@@ -76,7 +76,6 @@ Is Chassis Off
 Is Host Quiesced
     [Documentation]  Check if host state is quiesced.
     ${host_state}=  Get Host State
-    Should Be Equal  Quiesced  ${host_state}
     ${status}=  Run Keyword And Return Status  Should Be Equal
     ...  ${host_state}  Quiesced
     [Return]  ${status}
