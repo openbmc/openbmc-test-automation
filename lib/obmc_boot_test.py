@@ -15,6 +15,7 @@ from robot.utils import DotDict
 from robot.libraries.BuiltIn import BuiltIn
 
 from boot_data import *
+import gen_print as gp
 import gen_robot_print as grp
 import gen_robot_plug_in as grpi
 import gen_robot_valid as grv
@@ -24,7 +25,7 @@ import state as st
 
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) +\
-                            os.sep
+    os.sep
 sys.path.append(base_path + "extended/")
 import run_keyword as rk
 
@@ -55,7 +56,7 @@ program_pid = os.getpid()
 master_pid = os.environ.get('AUTOBOOT_MASTER_PID', program_pid)
 
 boot_results_file_path = "/tmp/" + openbmc_nickname + ":pid_" +\
-   str(master_pid) + ":boot_results"
+                         str(master_pid) + ":boot_results"
 if os.path.isfile(boot_results_file_path):
     # We've been called before in this run so we'll load the saved
     # boot_results object.
@@ -402,7 +403,7 @@ def my_ffdc():
 
     cmd_buf = ["FFDC", "ffdc_prefix=" + AUTOBOOT_FFDC_PREFIX]
     grp.rpissuing_keyword(cmd_buf)
-    BuiltIn().run_keyword(*cmd_buf)
+    BuiltIn().run_keyword_and_continue_on_failure(*cmd_buf)
 
     my_get_state()
 
@@ -582,10 +583,10 @@ def test_loop_body():
 
 
 ###############################################################################
-def program_teardown():
+def main_keyword_teardown():
 
     r"""
-    Clean up after this program.
+    Clean up after the Main keyword.
     """
 
     if cp_setup_called:
@@ -598,6 +599,21 @@ def program_teardown():
     grp.rprint_var(boot_results_file_path)
     pickle.dump(boot_results, open(boot_results_file_path, 'wb'),
                 pickle.HIGHEST_PROTOCOL)
+
+###############################################################################
+
+
+###############################################################################
+def test_teardown():
+
+    r"""
+    Clean up after this test case.
+    """
+
+    gp.qprintn()
+    cmd_buf = ["Print Error",
+               "A keyword timeout occurred ending this program.\n"]
+    BuiltIn().run_keyword_if_timeout_occurred(*cmd_buf)
 
 ###############################################################################
 
