@@ -13,7 +13,7 @@ Install the python dependencies for tox
     $ easy_install pip
 ```
 
-Initilize the following environment variable which will used while testing
+Initialize the following environment variable which will be used during testing
 ```shell
     $ export OPENBMC_HOST=<openbmc machine ip address>
     $ export OPENBMC_PASSWORD=<openbmc password>
@@ -30,7 +30,7 @@ The test suites are distinctly separated by directory as under
 
 `tests`: directory contains the general test cases
 
-`extended`: directory contains the use cases for new IP network testing,PDU,
+`extended`: directory contains the use cases for new IP network testing, PDU,
 BIOS and BMC code update.
 
 ```shell
@@ -90,7 +90,7 @@ How to test individual test
     $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile test_lists/skip_test tests
 ```
 
-It can also be run by pasing variables from the cli...
+It can also be run by passing variables from the cli...
 ```shell
     Run one test suite using using pybot
     $  pybot -v OPENBMC_HOST:<ip> -v OPENBMC_USERNAME:root -v OPENBMC_PASSWORD:0penBmc -v OPENBMC_MODEL:<model path> tests/test_time.robot
