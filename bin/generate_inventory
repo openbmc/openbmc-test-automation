@@ -28,32 +28,31 @@ os.system(cmd_buf)
 repo_subdir_path = '/phosphor-dbus-interfaces/xyz/openbmc_project/Inventory/'
 base_dir_path = os.getcwd() + repo_subdir_path
 
-# yaml paths for FRU
-item_yaml_file_path = base_dir_path + 'Item.interface.yaml'
-asset_yaml_file_path = base_dir_path + 'Decorator/Asset.interface.yaml'
-revision_yaml_file_path = base_dir_path + 'Decorator/Revision.interface.yaml'
-replaceable_yaml_file_path = base_dir_path + 'Decorator/Replaceable.interface.yaml'
-
-# FRU list
-yaml_fru_list = []
-yaml_fru_list.append(item_yaml_file_path)
-yaml_fru_list.append(asset_yaml_file_path)
-yaml_fru_list.append(revision_yaml_file_path)
-yaml_fru_list.append(replaceable_yaml_file_path)
+# yaml file paths for FRU
+yaml_fru_list = [ 'Item.interface.yaml',
+                  'Decorator/Asset.interface.yaml',
+                  'Decorator/Revision.interface.yaml',
+                  'Decorator/Replaceable.interface.yaml',
+                  'Decorator/Cacheable.interface.yaml',
+                 ]
 
 # Append to master list
 yaml_master_list.append(yaml_fru_list)
 
+print_var(yaml_master_list)
+
 # Populate Inventory data
 inventory_dict = {}
 
-for master_index in range(0, len(yaml_master_list)):
+for master_index in range(len(yaml_master_list)):
+    print_var(master_index)
     inventory_dict[str(inventory_items[master_index])] = []
-    for yaml_file in yaml_master_list[master_index]:
+    for rel_yaml_file_path in yaml_master_list[master_index]:
+        yaml_file_path = base_dir_path + rel_yaml_file_path
 
         # Get the yaml dictionary data
-        print_timen("Loading " + yaml_file)
-        f = open(yaml_file)
+        print_timen("Loading " + yaml_file_path)
+        f = open(yaml_file_path)
         yaml_data = yaml.load(f)
         f.close()
         for item in range(0, len(yaml_data['properties'])):
@@ -61,7 +60,11 @@ for master_index in range(0, len(yaml_master_list)):
             inventory_dict[str(inventory_items[master_index])].append(tmp_data)
 
 # Pretty print json formatter
-data = json.dumps(inventory_dict, indent=4, sort_keys=True, default=str)
+data = json.dumps(inventory_dict,
+                  indent=4,
+                  sort_keys=True,
+                  default=str,
+                  separators=(',', ':'))
 
 # Check if there is mismatch in data vs expect list
 if len(inventory_dict) != len(inventory_items):
