@@ -10,14 +10,19 @@ Test Teardown       Test Exit Logs
 
 Force Tags  chassisboot
 
+*** Variables ***
+
+# User can pass how many iteration cycle to run.
+# By default 2 cycle for CI/CT.
+${LOOP_COUNT}  ${2}
+
 *** Test Cases ***
 
 Power On Test
     [Documentation]  Power off and on.
     [Tags]  Power_On_Test
 
-    Initiate Host PowerOff
-    Initiate Host Boot
+    Repeat Keyword  ${LOOP_COUNT} times  Power Off And On
 
 *** Keywords ***
 
@@ -26,3 +31,14 @@ Test Exit Logs
     FFDC On Test Case Fail
     ${sol_log}=    Stop SOL Console Logging
     Log   ${sol_log}
+
+Power Off And On
+    [Documentation]  Verify power off and on.
+
+    Initiate Host PowerOff
+    Wait Until Keyword Succeeds
+    ...  5 min  10 sec  Is OS Off
+
+    Initiate Host Boot
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is OS Starting
