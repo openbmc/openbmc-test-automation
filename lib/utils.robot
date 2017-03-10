@@ -336,6 +336,11 @@ Is OS Starting
     ${boot_progress}=  Get Boot Progress
     Should Be Equal  ${boot_progress}  FW Progress, Starting OS
 
+Is OS Off
+    [Documentation]  Check if boot progress is "Off".
+    ${boot_progress}=  Get Boot Progress
+    Should Be Equal  ${boot_progress}  Off
+
 Verify Ping and REST Authentication
     ${l_ping}=   Run Keyword And Return Status
     ...    Ping Host  ${OPENBMC_HOST}
