@@ -60,6 +60,7 @@ ${test_really_running}      ${1}
 General Boot Testing
     [Documentation]  Performs repeated boot tests.
     [Tags]  General_boot_testing
+    [Teardown]  Test Teardown
 
     # Call the Main keyword to prevent any dots from appearing in the console
     # due to top level keywords.
@@ -68,7 +69,7 @@ General Boot Testing
 *** Keywords ***
 ###############################################################################
 Main
-    [Teardown]  Program Teardown
+    [Teardown]  Main Keyword Teardown
 
     # This is the "Main" keyword.  The advantages of having this keyword vs
     # just putting the code in the *** Test Cases *** table are:
@@ -77,3 +78,5 @@ Main
     Main Py
 
 ###############################################################################
+
+
