@@ -54,11 +54,10 @@ gru.my_import_resource("state_manager.robot")
 
 OBMC_STATES_VERSION = int(os.environ.get('OBMC_STATES_VERSION', 1))
 
-# TODO: Re-enable 'bmc' once it is working again.
 if OBMC_STATES_VERSION == 0:
     # default_state is an initial value which may be of use to callers.
     default_state = DotDict([('power', '1'),
-                             # ('bmc', 'HOST_BOOTED'),
+                             ('bmc', 'HOST_BOOTED'),
                              ('boot_progress', 'FW Progress, Starting OS'),
                              ('os_ping', '1'),
                              ('os_login', '1'),
@@ -72,7 +71,7 @@ if OBMC_STATES_VERSION == 0:
                         'uptime',
                         'epoch_seconds',
                         'power',
-                        # 'bmc',
+                        'bmc',
                         'boot_progress',
                         'os_ping',
                         'os_login',
@@ -80,21 +79,21 @@ if OBMC_STATES_VERSION == 0:
     # When a user calls get_state w/o specifying req_states, default_req_states
     # is used as its value.
     default_req_states = ['power',
-                          # 'bmc',
+                          'bmc',
                           'boot_progress',
                           'os_ping',
                           'os_login',
                           'os_run_cmd']
     # A master dictionary to determine whether the os may be up.
     master_os_up_match = DotDict([('power', 'On'),
-                                  # ('bmc', '^HOST_BOOTED$'),
+                                  ('bmc', '^HOST_BOOTED$'),
                                   ('boot_progress',
                                    'FW Progress, Starting OS')])
 
 else:
     # default_state is an initial value which may be of use to callers.
     default_state = DotDict([('chassis', 'On'),
-                             # ('bmc', 'Ready'),
+                             ('bmc', 'Ready'),
                              ('boot_progress', 'FW Progress, Starting OS'),
                              ('host', 'Running'),
                              ('os_ping', '1'),
@@ -109,7 +108,7 @@ else:
                         'uptime',
                         'epoch_seconds',
                         'chassis',
-                        # 'bmc',
+                        'bmc',
                         'boot_progress',
                         'host',
                         'os_ping',
@@ -118,19 +117,19 @@ else:
     # When a user calls get_state w/o specifying req_states, default_req_states
     # is used as its value.
     default_req_states = ['chassis',
-                          # 'bmc',
+                          'bmc',
                           'boot_progress',
                           'host',
                           'os_ping',
                           'os_login',
                           'os_run_cmd']
 
-    # TODO: Add back boot_progress when ipmi is enabled on Witherspoon.
     # A master dictionary to determine whether the os may be up.
-    master_os_up_match = DotDict([('chassis', '^On$'), ('host', '^Running$')])
-    # ('bmc', '^Ready$'),
-    # ('boot_progress',
-    #  'FW Progress, Starting OS')])
+    master_os_up_match = DotDict([('chassis', '^On$'),
+                                  ('bmc', '^Ready$'),
+                                  ('boot_progress',
+                                   'FW Progress, Starting OS'),
+                                  ('host', '^Running$')])
 
 # valid_os_req_states and default_os_req_states are used by the os_get_state
 # function.
@@ -544,9 +543,8 @@ def get_state(openbmc_host="",
             qualifier = "state_manager"
 
         cmd_buf = [qualifier + ".Get BMC State", "quiet=${" + str(quiet) + "}"]
-        # TODO: Re-enable this code once bmc status is working.
-        # grp.rdpissuing_keyword(cmd_buf)
-        # bmc = BuiltIn().run_keyword(*cmd_buf)
+        grp.rdpissuing_keyword(cmd_buf)
+        bmc = BuiltIn().run_keyword(*cmd_buf)
 
     if 'boot_progress' in req_states:
         cmd_buf = ["Get Boot Progress", "quiet=${" + str(quiet) + "}"]
