@@ -43,7 +43,7 @@
     # Run a "reboot" on the OBMC..
     "OBMC Reboot": {
         "start": {
-            "chassis": "^Off|On$"
+            "chassis": "^Off$"
         },
         "end": {
             "chassis": "^Off$",
