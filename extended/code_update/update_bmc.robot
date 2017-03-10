@@ -27,6 +27,9 @@ Resource          code_update_utils.robot
 Resource          ../../lib/boot/boot_resource_master.robot
 Resource          ../../lib/state_manager.robot
 Resource          ../../lib/utils.robot
+Resource          ../../lib/openbmc_ffdc.robot
+
+Test Teardown      FFDC On Test Case Fail
 
 *** Variables ***
 
