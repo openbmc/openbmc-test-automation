@@ -8,9 +8,10 @@ Resource          ../lib/openbmc_ffdc.robot
 
 Variables         ../data/variables.py
 Variables         ../data/inventory.py
+Library           String
 
-Suite setup       Test Suite Setup
-Test Teardown     FFDC On Test Case Fail
+#Suite setup       Test Suite Setup
+#Test Teardown     FFDC On Test Case Fail
 
 *** Test Cases ***
 
@@ -51,6 +52,56 @@ Verify Chassis Motherboard Properties
     ...  ${properties["data"]["SerialNumber"]}  000000000000
     ...  msg=motherboard serial number invalid.
 
+Verify CPU Present
+    [Tags]  Verify_CPU_Present
+    # System inventory cpu list:
+    # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
+    # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu1
+    # Example:
+    #    "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0": {
+    #    "FieldReplaceable": 1,
+    #    "BuildDate": "",
+    #    "Cached": 0,
+    #    "SerialNumber": "YA3933741574",
+    #    "Version": "10",
+    #    "Model": "",
+    #    "PrettyName": "PROCESSOR MODULE",
+    #    "PartNumber": "01HL322",
+    #    "Present": 1,
+    #    "Manufacturer": "IBM"
+    # },
+    # The CPU properties "Present" should be boolean 1.
+
+    ${cpu_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  cpu
+    :FOR  ${cpu_uri}  IN  @{cpu_list}
+    \  ${present}=  Read Attribute  ${cpu_uri}  Present
+    \  Should Be True  ${present}
+
+
+Verify DIMM Present
+    [Tags]  Verify_DIMM_Present
+    # Example:
+    #   "/xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0": {
+    #    "FieldReplaceable": 1,
+    #    "BuildDate": "",
+    #    "Cached": 0,
+    #    "SerialNumber": "0x0300cf4f",
+    #    "Version": "0x00",
+    #    "Model": "M393A1G40EB1-CRC    ",
+    #    "PrettyName": "0x0c",
+    #    "PartNumber": "",
+    #    "Present": 1,
+    #    "Manufacturer": "0xce80"
+    # },
+
+    # The DIMM properties "Present" should be boolean 1.
+
+    ${dimm_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  dimm
+    :FOR  ${dimm_uri}  IN  @{dimm_list}
+    \  ${present}=  Read Attribute  ${dimm_uri}  Present
+    \  Should Be True  ${present}
+
+
 *** Keywords ***
 
 Test Suite Setup
@@ -58,6 +109,9 @@ Test Suite Setup
     ${current_state}=  Get Host State
     Run Keyword If  '${current_state}' == 'Off'
     ...  Initiate Host Boot
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is OS Starting
 
 
 Get Inventory
