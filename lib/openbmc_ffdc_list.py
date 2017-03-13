@@ -135,6 +135,7 @@ FFDC_METHOD_CALL = {
         'Get Request FFDC': 'BMC FFDC Get Requests',
         'OS FFDC': 'OS FFDC Files',
         'Core Files': 'SCP Coredump Files',
+        'SEL Log': 'Collect eSEL Log',
     },
 }
 
