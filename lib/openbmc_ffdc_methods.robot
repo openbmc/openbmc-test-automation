@@ -6,6 +6,7 @@ Resource           openbmc_ffdc_utils.robot
 Resource           rest_client.robot
 Resource           utils.robot
 Library            SSHLibrary
+Library            OperatingSystem
 
 *** Keywords ***
 
@@ -110,10 +111,15 @@ Create File and Write Data
     ...                file name in the current FFDC directory.
     [Arguments]        ${key_index}
 
+    # To build IP address in searchable form eg: dummy\.domain\.com
+    ${OPENBMC_HOST_REGEX}=  Run  echo ${OPENBMC_HOST} | sed 's/\(\.\)/\\\1/g'
     @{cmd_list}=      Get ffdc bmc file   ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
     \   ${logpath}=  Catenate  SEPARATOR=   ${LOG_PREFIX}   ${cmd[0]}.txt
     \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
+    # Rename OPENBMC_HOST IP address from given file to DUMMYIP
+    \   Run  sed -i 's/'${OPENBMC_HOST_REGEX}'/DUMMYIP/g' ${logpath}
+
 
 
 ################################################################
@@ -140,6 +146,8 @@ Log Test Case Status
     Append To File    ${TEST_HISTORY}
     ...   ${cur_time}:${SUITE_NAME}:${TEST_NAME}:${TEST_STATUS}${\n}
 
+    # To build IP address in searchable form eg: gfw1\.aus\.stglabs\.ibm\.com
+    ${OPENBMC_HOST_REGEX}=  Run  echo ${OPENBMC_HOST} | sed 's/\(\.\)/\\\1/g'
 
 Log FFDC Get Requests
     [Documentation]    Create file in current FFDC log directory.
