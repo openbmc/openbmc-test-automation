@@ -231,3 +231,25 @@ def get_mtr_row(host=""):
     return row
 
 ###############################################################################
+
+
+###############################################################################
+def list_to_set(fru_list=""):
+    r"""
+    Pack the list into a set tuple and return.
+
+    It may seem that this function is rather trivial. However, it simplifies
+    the code and improves robot program readability and achieve the result
+    required.
+
+    Example result:
+
+    set(['Version', 'PartNumber', 'SerialNumber', 'FieldReplaceable',
+    'BuildDate', 'Present', 'Manufacturer', 'PrettyName', 'Cached', 'Model'])
+
+    # Description of arguments.
+    fru_list   List of FRU's elements.
+    """
+    return set(fru_list)
+
+###############################################################################
