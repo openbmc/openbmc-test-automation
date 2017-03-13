@@ -231,3 +231,21 @@ def get_mtr_row(host=""):
     return row
 
 ###############################################################################
+
+
+###############################################################################
+def list_to_set(fru_list=""):
+    r"""
+    Pack the list into a set tuple and return.
+
+    Example result:
+
+    set(['Version', 'PartNumber', 'SerialNumber', 'FieldReplaceable',
+    'BuildDate', 'Present', 'Manufacturer', 'PrettyName', 'Cached', 'Model'])
+
+    # Description of arguments.
+    fru_list   List of FRU's elements.
+    """
+    return set(fru_list)
+
+###############################################################################
