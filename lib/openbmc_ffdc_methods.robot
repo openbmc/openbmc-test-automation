@@ -246,3 +246,41 @@ SCP Coredump Files
     # Remove the file from remote to avoid re-copying on next FFDC call
     \  Execute Command On BMC  rm ${index}
 
+
+##############################################################################
+Collect eSEL Log
+    [Documentation]  Collect eSEL log from logging entry.
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/enumerate  quiet=${1}
+    ${status}=  Run Keyword And Return Status
+    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Return From Keyword If  '${status}' == '${False}'
+
+    ${content}=  To Json  ${resp.content}
+    # Grab the list of entries from logging/entry/
+    # Example:
+    # /xyz/openbmc_project/logging/entry/1
+    # /xyz/openbmc_project/logging/entry/2
+    ${list}=  Get Dictionary Keys  ${content['data']}
+    ${esel_list}=  Get Matches  ${list}  regexp=^.*[0-9a-z_].*[0-9]*$
+
+    ${logpath}=  Catenate  SEPARATOR=   ${LOG_PREFIX}   esel.txt
+    Create File  ${logpath}
+    # Fetch data from /xyz/openbmc_project/logging/entry/1/attr/AdditionalData
+    #  "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
+    # Sample eSEL entry:
+    #  "/xyz/openbmc_project/logging/entry/1": {
+    #    "Timestamp": 1487744317025,
+    #    "AdditionalData": [
+    #        "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
+    #    ],
+    #    "Message": "org.open_power.Error.Host.Event.Event",
+    #    "Id": 1,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Emergency"
+    # }
+
+    :FOR  ${entry_path}  IN  @{esel_list}
+    \  ${esel_data}=  Read Attribute  ${entry_path}  AdditionalData  quiet=${1}
+    \  Write Data To File  "${esel_data[0]}"  ${logpath}
+    \  Write Data To File  ${\n}  ${logpath}
+
+##############################################################################
