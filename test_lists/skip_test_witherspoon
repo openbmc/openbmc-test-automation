@@ -17,8 +17,6 @@
 -e Validate_Beep_LEDs_Test_Cases
 #https://github.com/openbmc/openbmc-test-automation/issues/90
 -e Verify_System_VPD_Properties
-#https://github.com/openbmc/openbmc/issues/93
--e Minimal_Fan_Inventory
 #https://github.com/openbmc/openbmc-test-automation/issues/139
 -e Empty_Fan_Test
 #https://github.com/openbmc/openbmc/issues/612
@@ -38,8 +36,6 @@
 -e IPMI_Chassis_Status_Off
 -e IPMI_Chassis_Restore_Power_Policy
 #Pre bringup list
--e Repeated_Testing
--e inventory
 -e powercapping
 -e io_board_Present
 -e io_board_Fault
