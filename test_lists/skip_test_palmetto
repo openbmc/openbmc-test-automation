@@ -5,11 +5,7 @@
 -e Test_Wrong_Reservation_ID
 #https://github.com/openbmc/openbmc/issues/539
 -e Test_Correct_Reservation_ID
-#https://github.com/openbmc/openbmc/issues/604
--e Minimal_Main_Planar_Inventory
 #https://github.com/openbmc/openbmc/issues/93
--e Minimal_Fan_Inventory
--e Minimal_System_Inventory
 -e System_Present
 -e Chassis_Present
 #https://github.com/openbmc/openbmc/issues/612
@@ -23,8 +19,6 @@
 #https://github.com/openbmc/openbmc/issues/700
 -e DIMM0_fault
 -e DIMM0_no_fault
--e Minimal_DIMM_Inventory
--e Verify_DIMM_VPD_Properties
 #https://github.com/openbmc/openbmc-test-automation/issues/207
 -e Disable_PowerCap
 #https://github.com/openbmc/openbmc-test-automation/issues/123
@@ -43,8 +37,6 @@
 -e IPMI_Chassis_Status_On
 -e IPMI_Chassis_Status_Off
 -e IPMI_Chassis_Restore_Power_Policy
-#https://github.com/openbmc/openbmc-test-automation/issues/90
--e Verify_System_VPD_Properties
 #https://github.com/openbmc/openbmc/issues/928
 -e Set_Host_Time_With_Both_And_NTP
 #https://github.com/openbmc/openbmc/issues/901
