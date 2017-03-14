@@ -686,7 +686,6 @@ Prune Journal Log
     ...  return_stderr=True  return_rc=True
 
     Should Be Equal  ${rc}  ${0}  msg=${stderr}
-    Should Contain   ${stderr}  Vacuuming done
 
 Set BMC Power Policy
     [Documentation]   Set the given BMC power policy.
