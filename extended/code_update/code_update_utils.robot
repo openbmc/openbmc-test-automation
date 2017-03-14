@@ -48,8 +48,9 @@ Prepare For Update
     ${resp}=    openbmc post request    ${BMC_PREP_METHOD}   data=${data}
     should be equal as strings   ${resp.status_code}   ${HTTP_OK}
 
-    ${data}=      Read Properties     ${BMC_UPD_ATTR}
-    should contain    ${data['status']}   Switch to update mode in progress
+    # Update method will reset the BMC, adding delay for reboot to
+    # come into force.
+    Sleep  10s
 
 
 SCP Tar Image File to BMC
