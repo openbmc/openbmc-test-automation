@@ -48,9 +48,6 @@ Prepare For Update
     ${resp}=    openbmc post request    ${BMC_PREP_METHOD}   data=${data}
     should be equal as strings   ${resp.status_code}   ${HTTP_OK}
 
-    ${data}=      Read Properties     ${BMC_UPD_ATTR}
-    should contain    ${data['status']}   Switch to update mode in progress
-
 
 SCP Tar Image File to BMC
     [Arguments]         ${filepath}
