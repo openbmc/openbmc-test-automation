@@ -4,6 +4,9 @@ Documentation   This module is for IPMI client for copying ipmitool to
 ...             command. IPMI raw command will use dbus-send command
 Resource        ../lib/resource.txt
 Resource        ../lib/connection_client.robot
+Resource        ../lib/utils.robot
+Resource        ../lib/state_manager.robot
+
 Library         String
 
 *** Variables ***
@@ -13,6 +16,7 @@ ${netfnByte}=          ${EMPTY}
 ${cmdByte}=            ${EMPTY}
 ${arrayByte}=          array:byte:
 ${IPMI_EXT_CMD}=       ipmitool -I lanplus -C 1 -P
+${IPMI_INBAND_CMD}=    ipmitool -C 1
 ${HOST}=               -H
 ${RAW}=                raw
 
@@ -22,6 +26,8 @@ Run IPMI Command
     [Arguments]    ${args}
     ${resp}=     Run Keyword If   '${IPMI_COMMAND}'=='External'
     ...    Run External IPMI RAW Command   ${args}
+    ...    ELSE IF  '${IPMI_COMMAND}'=='Inband'
+    ...    Run Inband IPMI RAW Command  ${args}
     ...          ELSE IF          '${IPMI_COMMAND}'=='Dbus'
     ...    Run Dbus IPMI RAW Command   ${args}
     ...          ELSE             Fail
@@ -32,6 +38,8 @@ Run IPMI Standard Command
     [Arguments]    ${args}
     ${resp}=     Run Keyword If   '${IPMI_COMMAND}'=='External'
     ...    Run External IPMI Standard Command   ${args}
+    ...    ELSE IF  '${IPMI_COMMAND}'=='Inband'
+    ...    Run Inband IPMI Standard Command  ${args}
     ...          ELSE IF          '${IPMI_COMMAND}'=='Dbus'
     ...    Run Dbus IPMI Standard Command   ${args}
     ...          ELSE             Fail
@@ -55,6 +63,40 @@ Run Dbus IPMI Standard Command
     ...    /tmp/ipmitool -I dbus ${args}    return_stdout=True
     ...    return_stderr= True    return_rc=True
     Should Be Equal    ${output}    ${0}    msg=${stderr}
+    [Return]    ${stdout}
+
+Run Inband IPMI RAW Command
+    [Documentation]  Run Inband IPMI raw command.
+    [Arguments]    ${args}  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    ...            ${os_password}=${OS_PASSWORD}
+
+    ${host_state}=  Get Host State
+    Run Keyword If  '${host_state}' == 'Off'  Initiate Host Boot
+    Is Host Running
+
+    Wait for OS  ${os_host}  ${os_username}  ${os_password}
+    Open Connection  ${os_host}
+    Login  ${os_username}  ${os_password}
+    ${inband_raw_cmd}=  Catenate  ${IPMI_INBAND_CMD}  ${RAW}  ${args}
+    ${stdout}  ${stderr}=  Execute Command  ${inband_raw_cmd}  return_stderr=True
+    Should Be Empty  ${stderr}  msg=${stdout}
+    [Return]    ${stdout}
+
+Run Inband IPMI Standard Command
+    [Documentation]  Run Inband IPMI standard command.
+    [Arguments]    ${args}  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    ...            ${os_password}=${OS_PASSWORD}
+
+    ${host_state}=  Get Host State
+    Run Keyword If  '${host_state}' == 'Off'  Initiate Host Boot
+    Is Host Running
+
+    Wait for OS  ${os_host}  ${os_username}  ${os_password}
+    Open Connection  ${os_host}
+    Login  ${os_username}  ${os_password}
+    ${inband_std_cmd}=  Catenate  ${IPMI_INBAND_CMD}  ${args}
+    ${stdout}  ${stderr}=  Execute Command  ${inband_std_cmd}  return_stderr=True
+    Should Be Empty  ${stderr}  msg=${stdout}
     [Return]    ${stdout}
 
 Run External IPMI RAW Command
