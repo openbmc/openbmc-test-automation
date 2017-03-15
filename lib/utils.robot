@@ -775,3 +775,21 @@ Trigger Host Watchdog Error
     Execute Command On BMC
     ...  /usr/sbin/mapper call /org/openbmc/watchdog/host0 org.openbmc.Watchdog start
     Sleep  ${sleep_time}
+
+Login To OS Host
+    [Documentation]  Login to OS Host.
+    [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    ...          ${os_password}=${OS_PASSWORD}
+    # Desription of arguments:
+    # ${os_host} IP address of the OS Host.
+    # ${os_username}  OS Host Login user name.
+    # ${os_password}  OS Host Login passwrd.
+
+    ${os_state}=  Run Keyword And Return Status  Ping Host  ${os_host}
+    Run Keyword If  '${os_state}' == 'False'
+    ...  Run Keywords  Initiate Host Reboot  AND
+    ...  Is Host Running  AND
+    ...  Wait for OS  ${os_host}  ${os_username}  ${os_password}
+
+    Open Connection  ${os_host}
+    Login  ${os_username}  ${os_password}
