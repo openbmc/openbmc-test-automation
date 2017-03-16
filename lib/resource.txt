@@ -13,7 +13,7 @@ ${PORT}           ${EMPTY}
 ${AUTH_URI}       https://${OPENBMC_HOST}${AUTH_SUFFIX}
 ${OPENBMC_USERNAME}    root
 ${OPENBMC_PASSWORD}    0penBmc
-${IPMI_PASSWORD}    PASSW0RD
+${IPMI_PASSWORD}       0penBmc
 ${MACHINE_TYPE}    palmetto
 ${DBUS_POLL_INTERVAL}      15s
 ${OPENBMC_REBOOT_TIMEOUT}   ${10}
