@@ -24,24 +24,34 @@ def write_issues(response, csv_out):
     for issue in response.json():
         if 'pull_request' not in issue:
             labels = ', '.join([l['name'] for l in issue['labels']])
-            date = issue.get('created_at').split('T')[0]
+
             # Below lines to overcome "TypeError: 'NoneType' object has
             # no attribute '__getitem__'"
 
-            assignee_resp = issue.get('assignee', 'Not Assigned')
+            close_date = issue.get('closed_at')
+            if close_date:
+                close_date = issue.get('closed_at').split('T')[0]
+
+            assignee_resp = issue.get('assignees', 'Not Assigned')
             if assignee_resp:
-                assignee_resp = assignee_resp.get('login').encode('utf-8')
+                owners = ','.join([assignee_login['login'] for
+                                   assignee_login in assignee_resp])
             else:
-                assignee_resp = "Not Assigned"
+                owners = "Not Assigned"
+
+            milestone_resp = issue.get('milestone', 'Not Assigned')
+            if milestone_resp:
+                milestone_resp = milestone_resp['title'].encode('utf-8')
 
             # Change the following line to write out additional fields
             csv_out.writerow([labels.encode('utf-8'),
                              issue.get('title').encode('utf-8'),
                              issue.get('state').encode('utf-8'),
-                             date.encode('utf-8'),
+                             issue.get('created_at').split('T')[0],
+                             close_date,
                              issue.get('html_url').encode('utf-8'),
                              issue.get('user').get('login').encode('utf-8'),
-                             assignee_resp])
+                             owners, milestone_resp])
 
 
 def get_issues_from_github_to_csv(name):
@@ -59,8 +69,9 @@ def get_issues_from_github_to_csv(name):
     csvfilename = '{}-issues.csv'.format(name.replace('/', '-'))
     with open(csvfilename, 'w') as csvfile:
         csv_out = csv.writer(csvfile)
-        csv_out.writerow(['Labels', 'Title', 'State', 'Date', 'URL', 'Author',
-                         'Assignee'])
+        csv_out.writerow(['Labels', 'Title', 'State', 'Open Date',
+                          'Close Date', 'URL', 'Author', 'Assignees',
+                          'Milestone'])
         write_issues(response, csv_out)
 
         # Multiple requests are required if response is paged
