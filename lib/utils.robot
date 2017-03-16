@@ -756,3 +756,15 @@ Enable Core Dump On BMC
     ${core_pattern}=  Execute Command On BMC
     ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
     Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
+
+Configure Initial Settings
+    [Documentation]  Restore old IP and route.
+    ...  This keyword requires initial settings viz IP address,
+    ...  Network Mask, default gatway and serial console IP and port
+    ...  information which should be provided in command line.
+
+    [Arguments]  ${host}=${OPENBMC_HOST}  ${mask}=${NET_MASK}  ${gw_ip}=${GW_IP}
+
+    Open Telnet Connection to BMC Serial Console
+    Telnet.write  ifconfig eth0 ${host} netmask ${mask}
+    Telnet.write  route add default gw ${gw_ip}
