@@ -691,6 +691,7 @@ Prune Journal Log
     ...  return_stderr=True  return_rc=True
 
     Should Be Equal  ${rc}  ${0}  msg=${stderr}
+    Should Contain   ${stderr}  Vacuuming done
 
 Set BMC Power Policy
     [Documentation]   Set the given BMC power policy.
@@ -774,3 +775,15 @@ Trigger Host Watchdog Error
     Execute Command On BMC
     ...  /usr/sbin/mapper call /org/openbmc/watchdog/host0 org.openbmc.Watchdog start
     Sleep  ${sleep_time}
+
+Configure Initial Settings
+    [Documentation]  Restore old IP and route.
+    ...  This keyword requires initial settings viz IP address,
+    ...  Network Mask, default gatway and serial console IP and port
+    ...  information which should be provided in command line.
+
+    [Arguments]  ${host}=${OPENBMC_HOST}  ${mask}=${NET_MASK}  ${gw_ip}=${GW_IP}
+
+    Open Telnet Connection to BMC Serial Console
+    Telnet.write  ifconfig eth0 ${host} netmask ${mask}
+    Telnet.write  route add default gw ${gw_ip}
