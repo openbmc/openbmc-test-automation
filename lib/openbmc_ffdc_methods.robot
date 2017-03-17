@@ -263,7 +263,7 @@ Collect eSEL Log
     # /xyz/openbmc_project/logging/entry/2
     ${esel_list}=  Get Dictionary Keys  ${content['data']}
 
-    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  esel.txt
+    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  esel
     Create File  ${logpath}
     # Fetch data from /xyz/openbmc_project/logging/entry/1/attr/AdditionalData
     #  "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
