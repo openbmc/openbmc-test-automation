@@ -17,7 +17,7 @@ ${IPMI_PASSWORD}    PASSW0RD
 ${MACHINE_TYPE}    palmetto
 ${DBUS_POLL_INTERVAL}      15s
 ${OPENBMC_REBOOT_TIMEOUT}   ${10}
-${IPMI_COMMAND}    Dbus             # Dbus/External
+${IPMI_COMMAND}    External             # Dbus/External
 
 # PDU related parameters
 ${PDU_TYPE}         ${EMPTY}
