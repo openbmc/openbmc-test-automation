@@ -19,7 +19,7 @@ Force Tags  NetworkManager
 
 ${NW_MANAGER}    ${NETWORK_MANAGER_URI}Interface
 
-*** Test Cases ***
+#*** Test Cases ***
 
 Get the Mac address
 
@@ -132,6 +132,58 @@ Get IP Address type
     ${json}=   to json         ${resp.content}
     Should Be Equal    ${json['data']}    STATIC
     should be equal as strings      ${json['status']}      ok
+
+### IP ADDRESS OCTET VALIDATION ###
+
+Set Broadcast IP address on the valid interface  eth0  6.6.6.255  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  This test case tries to set the Broadcast IP addrees on the interface
+     ...             Expectation is it should get error.
+    [Tags]  network_test
+    [Template]  AddNetworkInfo
+
+Set Network ID address on the valid interface  eth0  6.6.6.0  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  This test case tries to set the Network ID addrees on the interface
+     ...             Expectation is it should get error.
+    [Tags]  network_test
+    [Template]  AddNetworkInfo
+
+Set Wrong First Octet IP  eth0  224.6.6.23  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  This test case tries to set the out of range IP  address on the first octet
+     ...             of the interface Expectation is it should get error.
+    [Tags]  network_test
+    [Template]  AddNetworkInfo
+
+Set Wrong First Octet IP  eth0  127.6.6.23  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  This test case tries to set the loopback address on the first octet
+     ...             of the interface Expectation is it should get error.
+    [Tags]  network_test
+    [Template]  AddNetworkInfo
+
+Set Wrong First Octet IP  eth0  0.6.6.23  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  This test case tries to set invalid IP address on the first octet
+     ...             of the interface Expectation is it should get error.
+    [Tags]  network_test
+    [Template]  AddNetworkInfo
+
+Set Wrong Second Octet IP  eth0  6.256.6.23  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  This test case tries to set the out of range IP  address on the second octet
+     ...             of the interface Expectation is it should get error.
+    [Tags]  network_test
+    [Template]  AddNetworkInfo
+
+Set Wrong Third Octet IP  eth0  6.6.256.23  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  This test case tries to set the out of range IP  address on the third octet
+     ...             of the interface Expectation is it should get error.
+    [Tags]  network_test
+    [Template]  AddNetworkInfo
+
 
 *** Keywords ***
 
