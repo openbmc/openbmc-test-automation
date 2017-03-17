@@ -25,7 +25,8 @@ Documentation      This module is for data collection on test case failure
 ...                │       ├── 20160909102538035251_OS_syslog.txt
 ...                │       ├── 20160909102538035251_OS_info.txt
 ...                │       ├── 20160909102538035251_OS_rsct.txt
-...                │       └── 20160909102538035251_OS_secure.txt
+...                │       ├── 20160909102538035251_OS_secure.txt
+...                │       └── 20160909102538035251_OS_esel
 ...                └── test_history.txt
 
 Resource           openbmc_ffdc_methods.robot
