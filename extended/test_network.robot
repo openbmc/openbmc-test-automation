@@ -133,6 +133,51 @@ Get IP Address type
     Should Be Equal    ${json['data']}    STATIC
     should be equal as strings      ${json['status']}      ok
 
+### IP ADDRESS OCTET VALIDATION ###
+
+Set Broadcast IP address  eth0  6.6.6.255  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  Configure broadcast IP address.
+    [Tags]  Set_Broadcast_IP_address
+    [Template]  AddNetworkInfo
+
+Set Network ID address  eth0  6.6.6.0  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  Configure network ID address.
+    [Tags]  Set_Network_ID_address
+    [Template]  AddNetworkInfo
+
+Set Multicast IP address eth0  224.6.6.23  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  Configure multicast IP address.
+    [Tags]  Set_Multicast_IP_address
+    [Template]  AddNetworkInfo
+
+Set Loopback IP address  eth0  127.6.6.23  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  Configure loopback IP address.
+    [Tags]  Set_Loopback_IP_address
+    [Template]  AddNetworkInfo
+
+Set Wrong First Octet IP  eth0  0.6.6.23  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  Configure wrong first octet IP address.
+    [Tags]  Set_Wrong_First_Octet_IP
+    [Template]  AddNetworkInfo
+
+Set Wrong Second Octet IP  eth0  6.256.6.23  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  Configure wrong second octet IP address.
+    [Tags]  Set_Wrong_Second_Octet_IP
+    [Template]  AddNetworkInfo
+
+Set Wrong Third Octet IP  eth0  6.6.256.23  255.255.255.0  1.1.1.1  error
+
+    [Documentation]  Configure wrong third octet IP address.
+    [Tags]  Set_Wrong_Third_Octet_IP
+    [Template]  AddNetworkInfo
+
+
 *** Keywords ***
 
 Get networkInfo from the interface
