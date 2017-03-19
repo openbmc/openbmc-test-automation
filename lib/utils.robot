@@ -761,6 +761,25 @@ Enable Core Dump On BMC
     ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
     Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
 
+Get Number Of BMC Core Dump Files
+    [Documentation]  Get number of core dump files on BMC.
+    Open Connection And Log In
+    ${num_of_core_dump}=  Execute Command
+    ...  ls /tmp/core* 2>/dev/null | wc -l
+    [Return]  ${num_of_core_dump}
+
+Set Core Dump File Size Unlimited
+    [Documentation]  Set core dump file size to unlimited.
+    Open Connection And Log In
+    Execute Command On BMC
+    ...  ulimit -c unlimited
+
+Check For Core Dumps
+    [Documentation]  Check for any core dumps exist.
+    ${output}=  Get Number Of BMC Core Dump Files
+    Run Keyword If  ${output} > 0
+    ...  Log  **Warning** BMC core dump files exist  level=WARN
+
 Trigger Host Watchdog Error
     [Documentation]  Inject host watchdog error using BMC.
     [Arguments]  ${milliseconds}=1000  ${sleep_time}=5s

@@ -48,6 +48,11 @@ Test Basic BMC Performance Before Code Update
     Check BMC Mem Performance
     Check BMC File System Performance
 
+Check Core Dump Exist Before Code Update
+    [Documentation]  Check core dump existence on BMC before code update.
+    [Tags]  Check_Core_Dump_Exist_Before_Code_Update
+    Check For Core Dumps
+
 Initiate Code Update BMC
     [Documentation]  BMC code update process initiation
     [Setup]  Set State Interface Version
@@ -109,7 +114,6 @@ Initiate Code Update BMC
     Run Keyword If  ${BOOT_COUNT} == ${1}
     ...  Log  Boot Time not Updated by Kernel!!!  level=WARN
 
-
 Test Basic BMC Performance At Ready State
     [Documentation]   Check performance of memory, CPU & file system of BMC.
     [Tags]  Test_Basic_BMC_Performance_At_Ready_State
@@ -117,6 +121,16 @@ Test Basic BMC Performance At Ready State
     Check BMC CPU Performance
     Check BMC Mem Performance
     Check BMC File System Performance
+
+Check Core Dump Exist After Code Update
+    [Documentation]  Check core dump existence on BMC after code update.
+    [Tags]  Check_Core_Dump_Exist_After_Code_Update
+    Check For Core Dumps
+
+Enable Core Dump File Size To Be Unlimited
+    [Documentation]  Set core dump file size to unlimited.
+    [Tags]  Enable_Core_Dump_File_size_To_Be_unlimited
+    Set Core Dump File Size Unlimited
 
 *** Keywords ***
 
