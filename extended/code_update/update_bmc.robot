@@ -48,6 +48,11 @@ Test Basic BMC Performance Before Code Update
     Check BMC Mem Performance
     Check BMC File System Performance
 
+Check Core Dump Exist Before Code Update
+    [Documentation]  Check core dump existence on BMC before code update.
+    [Tags]  Check_Core_Dump_Exist_Before_Code_Update
+    Verify Any Core Dumps
+
 Initiate Code Update BMC
     [Documentation]  BMC code update process initiation
     [Setup]  Set State Interface Version
@@ -113,7 +118,23 @@ Test Basic BMC Performance At Ready State
     Check BMC Mem Performance
     Check BMC File System Performance
 
+Check Core Dump Exist After Code Update
+    [Documentation]  Check core dump existence on BMC after code update.
+    [Tags]  Check_Core_Dump_Exist_After_Code_Update
+    Verify Any Core Dumps
+
+Enable Core Dump File size to be unlimited
+    [Documentation]  Set core dump file size to unlimit.
+    [Tags]  Enable_Core_Dump_File_size_to_be_unlimited
+    Core Dump File Size Set Unlimit
+
 *** Keywords ***
+
+Verify Any Core Dumps
+    [Documentation]  Check for any core dumps exist. 
+    ${output}=  Get Number Of BMC Core Dump Files
+    Run Keyword If  ${output} > 0
+    ...  Log  **Warning** BMC core dump files exist  level=WARN
 
 Check Boot Count And Time
     [Documentation]  Check for unexpected reboots.
