@@ -48,6 +48,11 @@ Test Basic BMC Performance Before Code Update
     Check BMC Mem Performance
     Check BMC File System Performance
 
+Get Number Of BMC Core Dump Files Before Code Update 
+    [Documentation]  Get number of core dump file on BMC before code update.
+    [Tags]  Get_Number_Of_BMC_Core_Dump_Files_Before_Code_Update
+    Check Core Dump Exist On BMC
+
 Initiate Code Update BMC
     [Documentation]  BMC code update process initiation
     [Setup]  Set State Interface Version
@@ -112,6 +117,16 @@ Test Basic BMC Performance At Ready State
     Check BMC CPU Performance
     Check BMC Mem Performance
     Check BMC File System Performance
+
+Get Number Of BMC Core Dump Files After Code Update 
+    [Documentation]  Get number of core dump file on BMC after code update.
+    [Tags]  Get_Number_Of_BMC_Core_Dump_Files_After_Code_Update
+    Check Core Dump Exist On BMC
+
+Enable Core Dump File size to be unlimited
+    [Documentation]  Set core dump file size to unlimit.
+    [Tags]  Enable_Core_Dump_File_size_to_be_unlimited
+    Core Dump File Size Set Unlimit
 
 *** Keywords ***
 
