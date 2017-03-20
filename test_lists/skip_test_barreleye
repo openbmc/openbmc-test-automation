@@ -45,3 +45,5 @@
 -e eSEL_Logging
 # Led groups test cases are NA for Barreleye and Palmetto
 -e LED_Group
+#https://github.com/openbmc/openbmc/issues/1283
+-e Inventory
