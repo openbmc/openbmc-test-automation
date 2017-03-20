@@ -12,6 +12,8 @@ Variables         ../data/inventory.py
 Suite setup       Test Suite Setup
 Test Teardown     FFDC On Test Case Fail
 
+Force Tags        Inventory
+
 *** Test Cases ***
 
 Verify System Inventory Path
