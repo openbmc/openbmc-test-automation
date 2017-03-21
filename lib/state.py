@@ -312,7 +312,7 @@ def get_os_state(os_host="",
             # See if the OS pings.
             cmd_buf = "ping -c 1 -w 2 " + os_host
             if not quiet:
-                grp.rpissuing(cmd_buf)
+                gp.pissuing(cmd_buf)
             rc, out_buf = commands.getstatusoutput(cmd_buf)
             if rc == 0:
                 os_ping = 1
@@ -327,7 +327,8 @@ def get_os_state(os_host="",
                            if sub_state in master_req_login]) > 0)
 
         if must_login:
-            # Open SSH connection to OS.
+            # Open SSH connection to OS.  Note that this doesn't fail even when
+            # the OS is not up.
             cmd_buf = ["SSHLibrary.Open Connection", os_host]
             if not quiet:
                 grp.rpissuing_keyword(cmd_buf)
@@ -337,22 +338,32 @@ def get_os_state(os_host="",
             cmd_buf = ["Login", os_username, os_password]
             if not quiet:
                 grp.rpissuing_keyword(cmd_buf)
-            status, msg = BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+            status, ret_values = \
+                BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
             if status == "PASS":
                 os_login = 1
+            else:
+                gp.dprint_var(status)
+                gp.dprint_var(ret_values)
 
             if os_login:
                 if 'os_run_cmd' in req_states:
-                    if os_login:
-                        # Try running a simple command (uptime) on the OS.
-                        cmd_buf = ["Execute Command", "uptime",
-                                   "return_stderr=True", "return_rc=True"]
-                        if not quiet:
-                            grp.rpissuing_keyword(cmd_buf)
-                        output, stderr_buf, rc = \
-                            BuiltIn().run_keyword(*cmd_buf)
-                        if rc == 0 and stderr_buf == "":
+                    # Try running a simple command (uptime) on the OS.
+                    cmd_buf = ["Execute Command", "uptime",
+                               "return_stderr=True", "return_rc=True"]
+                    if not quiet:
+                        grp.rpissuing_keyword(cmd_buf)
+                    status, ret_values = \
+                        BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+                    if status == "PASS":
+                        stdout, stderr, rc = ret_values
+                        if rc == 0 and stderr == "":
                             os_run_cmd = 1
+                        else:
+                            gp.dprint_var(status)
+                            gp.dprint_var(stdout)
+                            gp.dprint_var(stderr)
+                            gp.dprint_var(rc)
 
     os_state = DotDict()
     for sub_state in req_states:
@@ -466,7 +477,7 @@ def get_state(openbmc_host="",
         # See if the OS pings.
         cmd_buf = "ping -c 1 -w 2 " + openbmc_host
         if not quiet:
-            grp.rpissuing(cmd_buf)
+            gp.pissuing(cmd_buf)
         rc, out_buf = commands.getstatusoutput(cmd_buf)
         if rc == 0:
             ping = 1
@@ -476,7 +487,7 @@ def get_state(openbmc_host="",
         cmd_buf = "ping -c 5 -w 5 " + openbmc_host +\
             " | egrep 'packet loss' | sed -re 's/.* ([0-9]+)%.*/\\1/g'"
         if not quiet:
-            grp.rpissuing(cmd_buf)
+            gp.pissuing(cmd_buf)
         rc, out_buf = commands.getstatusoutput(cmd_buf)
         if rc == 0:
             packet_loss = out_buf.rstrip("\n")
@@ -499,9 +510,9 @@ def get_state(openbmc_host="",
                    "return_stderr=True", "return_rc=True"]
         if not quiet:
             grp.rpissuing_keyword(cmd_buf)
-        stdout_buf, stderr_buf, rc = BuiltIn().run_keyword(*cmd_buf)
-        if rc == 0 and stderr_buf == "":
-            uptime = stdout_buf
+        stdout, stderr, rc = BuiltIn().run_keyword(*cmd_buf)
+        if rc == 0 and stderr == "":
+            uptime = stdout
 
     if 'epoch_seconds' in req_states:
         date_cmd_buf = "date -u +%s"
@@ -510,9 +521,9 @@ def get_state(openbmc_host="",
                        "return_rc=True"]
             if not quiet:
                 grp.rpissuing_keyword(cmd_buf)
-            stdout_buf, stderr_buf, rc = BuiltIn().run_keyword(*cmd_buf)
-            if rc == 0 and stderr_buf == "":
-                epoch_seconds = stdout_buf.rstrip("\n")
+            stdout, stderr, rc = BuiltIn().run_keyword(*cmd_buf)
+            if rc == 0 and stderr == "":
+                epoch_seconds = stdout.rstrip("\n")
         else:
             shell_rc, out_buf = gc.cmd_fnc_u(date_cmd_buf,
                                              quiet=1,
@@ -583,7 +594,6 @@ def get_state(openbmc_host="",
             if sub_state in req_states:
                 os_up_match[sub_state] = master_os_up_match[sub_state]
         os_up = compare_states(state, os_up_match)
-
         os_state = get_os_state(os_host=os_host,
                                 os_username=os_username,
                                 os_password=os_password,
@@ -659,7 +669,7 @@ def check_state(match_state,
                       req_states=req_states,
                       quiet=quiet)
     if not quiet:
-        grp.rprint_var(state)
+        gp.print_var(state)
 
     match = compare_states(state, match_state)
 
@@ -731,10 +741,10 @@ def wait_state(match_state=(),
             alt_text = "cease to "
         else:
             alt_text = ""
-        grp.rprint_timen("Checking every " + str(interval) + " for up to " +
-                         str(wait_time) + " for the state of the machine to " +
-                         alt_text + "match the state shown below.")
-        grp.rprint_var(match_state)
+        gp.print_timen("Checking every " + str(interval) + " for up to " +
+                       str(wait_time) + " for the state of the machine to " +
+                       alt_text + "match the state shown below.")
+        gp.print_var(match_state)
 
     if quiet:
         print_string = ""
@@ -756,12 +766,12 @@ def wait_state(match_state=(),
     state = BuiltIn().wait_until_keyword_succeeds(wait_time, interval,
                                                   *cmd_buf)
     if not quiet:
-        grp.rprintn()
+        gp.printn()
         if invert:
-            grp.rprint_timen("The states no longer match:")
+            gp.print_timen("The states no longer match:")
         else:
-            grp.rprint_timen("The states match:")
-        grp.rprint_var(state)
+            gp.print_timen("The states match:")
+        gp.print_var(state)
 
     return state
 
@@ -809,12 +819,12 @@ def wait_for_comm_cycle(start_boot_seconds):
     state = get_state(req_states=['uptime', 'epoch_seconds'])
 
     elapsed_boot_time = int(state['epoch_seconds']) - start_boot_seconds
-    grp.rprint_var(elapsed_boot_time)
+    gp.print_var(elapsed_boot_time)
     if int(float(state['uptime'])) < elapsed_boot_time:
         uptime = state['uptime']
-        grp.rprint_var(uptime)
-        grp.rprint_timen("The uptime is less than the elapsed boot time," +
-                         " as expected.")
+        gp.print_var(uptime)
+        gp.print_timen("The uptime is less than the elapsed boot time," +
+                       " as expected.")
     else:
         error_message = "The uptime is greater than the elapsed boot time," +\
                         " which is unexpected:\n" +\
@@ -822,7 +832,7 @@ def wait_for_comm_cycle(start_boot_seconds):
                         gp.sprint_var(state)
         BuiltIn().fail(gp.sprint_error(error_message))
 
-    grp.rprint_timen("Verifying that REST API interface is working.")
+    gp.print_timen("Verifying that REST API interface is working.")
     match_state = DotDict([('chassis', '.*')])
     state = wait_state(match_state, wait_time="5 mins", interval="2 seconds")
 
