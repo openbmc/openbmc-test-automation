@@ -403,7 +403,10 @@ def my_ffdc():
 
     cmd_buf = ["FFDC", "ffdc_prefix=" + AUTOBOOT_FFDC_PREFIX]
     grp.rpissuing_keyword(cmd_buf)
-    BuiltIn().run_keyword_and_continue_on_failure(*cmd_buf)
+    try:
+        BuiltIn().run_keyword_and_continue_on_failure(*cmd_buf)
+    except:
+        gp.print_error("Call to ffdc failed.\n")
 
     my_get_state()
 
@@ -564,7 +567,10 @@ def test_loop_body():
     if boot_status != "PASS" or ffdc_check == "All" or shell_rc == 0x00000200:
         cmd_buf = ["my_ffdc"]
         grp.rpissuing_keyword(cmd_buf)
-        BuiltIn().run_keyword_and_continue_on_failure(*cmd_buf)
+        try:
+            BuiltIn().run_keyword_and_continue_on_failure(*cmd_buf)
+        except:
+            gp.print_error("Call to my_ffdc failed.\n")
 
     boot_results.print_report()
     grp.rqprint_timen("Finished boot " + str(boot_count) + ".")
