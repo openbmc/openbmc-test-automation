@@ -7,10 +7,9 @@ Resource        ../lib/ipmi_client.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/utils.robot
 
-Suite Setup     Open Connection And Log In
-Suite Teardown  Close All Connections
-Test Setup      Initialize DBUS cmd   "boot_flags"
-Test Teardown   FFDC On Test Case Fail
+Test Setup      Pre Test Case Execution
+Test Teardown   Post Test Case Execution
+
 
 *** Variables ***
 
@@ -190,3 +189,19 @@ Read the Attribute
     [Arguments]  ${uri}  ${parm}
     ${output}=  Read Attribute  ${uri}  ${parm}
     Set Test Variable  ${OUTPUT}  ${output}
+
+Post Test Case Execution
+   [Documentation]  Do the post test teardown.
+   ...  1. Capture FFDC on test failure.
+   ...  2. Close all open SSH connections.
+
+   FFDC On Test Case Fail
+   Close All Connections
+
+Pre Test Case Execution
+   [Documentation]  Do the pre test set up.
+   ... 1. Open Connection And Log In 
+   ... 2. Initialize the DBUS to run the "boot_flags" command
+
+   Open Connection And Log In
+   Initialize DBUS cmd   "boot_flags"
