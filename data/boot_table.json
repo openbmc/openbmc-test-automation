@@ -1,7 +1,6 @@
-# 2017/02/20 Note: Commenting out 'boot_progress' requirements until they are working in product code.
-# TODO:  Uncomment the boot_progress lines when support is re-introduced.
 {
-    # Note: "IPMI Power On" will be added soon.
+    # Power on boot types:
+
     # Initiate a power on using the REST API interface.
     "REST Power On": {
         "start": {
@@ -21,6 +20,29 @@
         "method_type": "keyword",
         "method": "Initiate Power On  wait=${0}"
     },
+    # Initiate a power on using the IPMI interface.
+    "IPMI Power On": {
+        "start": {
+            "chassis": "^Off$",
+            "boot_progress": "^Off$",
+            "host": "^Off$"
+        },
+        "end": {
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  power on",
+        "lib_file_path": "ipmi_client.robot"
+    },
+
+    # Power off boot types:
+
     # Initiate a power off using the REST API interface.
     "REST Power Off": {
         "start": {
@@ -40,42 +62,45 @@
         "method_type": "keyword",
         "method": "Initiate Power Off"
     },
-    # Run a "reboot" on the OBMC..
-    "OBMC Reboot": {
+    # Initiate a power off using the IPMI interface.
+    "IPMI Power Off": {
         "start": {
-            "chassis": "^Off$"
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$"
         },
         "end": {
             "chassis": "^Off$",
             "boot_progress": "^Off$",
-            "host": "^Off$"
-        },
-        "bmc_reboot": 1,
-        "method_type": "keyword",
-        "method": "Open Connection And Log In ; Start Command  /sbin/reboot"
-    },
-    # Run a "reboot" command on the OS_HOST.
-    "Host Reboot": {
-        "start": {
-            "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
-            "host": "^Running$",
-            "os_ping": "^1$",
-            "os_login": "^1$",
-            "os_run_cmd": "^1$"
-        },
-        "end": {
-            "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
-            "host": "^Running$",
-            "os_ping": "^1$",
-            "os_login": "^1$",
-            "os_run_cmd": "^1$"
+            "host": "^Off$",
+            "os_ping": "^0$",
+            "os_login": "^0$",
+            "os_run_cmd": "^0$"
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "utils.Initiate OS Host Reboot",
-        "lib_file_path": "utils.robot"
+        "method": "Run External IPMI Standard Command  power off",
+        "lib_file_path": "ipmi_client.robot"
+    },
+    # Initiate a power soft using the IPMI interface.
+    "IPMI Power Soft": {
+        "start": {
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$"
+        },
+        "end": {
+            "chassis": "^Off$",
+            "boot_progress": "^Off$",
+            "host": "^Off$",
+            "os_ping": "^0$",
+            "os_login": "^0$",
+            "os_run_cmd": "^0$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  power soft",
+        "lib_file_path": "ipmi_client.robot"
     },
     # Run a "shutdown" command on the OS_HOST.
     "Host Power Off": {
@@ -100,6 +125,103 @@
         "method": "utils.Initiate OS Host Power Off",
         "lib_file_path": "utils.robot"
     },
+
+    # OBMC re-boot boot types:
+
+    # Run a "reboot" on the OBMC.
+    "OBMC Reboot": {
+        "start": {
+            "chassis": "^Off$"
+        },
+        "end": {
+            "chassis": "^Off$",
+            "boot_progress": "^Off$",
+            "host": "^Off$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Open Connection And Log In ; Start Command  /sbin/reboot"
+    },
+    # Cycle AC via the PDU.
+    "PDU AC Cycle": {
+        "start": {
+            "chassis": "^Off$"
+        },
+        "end": {
+            "chassis": "^Off$",
+            "boot_progress": "^Off$",
+            "host": "^Off$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Set Global Variable  ${PDU_TYPE}  pdu ; Set Global Variable  ${PDU_IP}  ${PDU_HOST} ; PDU Power Cycle",
+        "lib_file_path": "pdu/pdu.robot:pdu/synaccess.robot"
+    },
+    # Initiate an mc reset warm using the IPMI interface.
+    "IPMI MC Reset Warm": {
+        "start": {
+            "chassis": "^Off$"
+        },
+        "end": {
+            "chassis": "^Off$",
+            "boot_progress": "^Off$",
+            "host": "^Off$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  mc reset warm ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+
+    # Host OS re-boot boot types:
+
+    # Initiate a power cycle using the IPMI interface (equivalent to off/on).
+    "IPMI Power Cycle": {
+        "start": {
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  power cycle",
+        "lib_file_path": "ipmi_client.robot"
+    },
+    # Initiate a power reset using the IPMI interface (equivalent to off/on).
+    # Functionally equivalent to "IPMI Power Cycle".
+    "IPMI Power Reset": {
+        "start": {
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  power reset",
+        "lib_file_path": "ipmi_client.robot"
+    },
     # Do an auto reboot by setting auto reboot to "yes" and going to quiesce state.
     "Auto Reboot": {
         "start": {
@@ -121,6 +243,29 @@
         "bmc_reboot": 0,
         "method_type": "keyword",
         "method": "utils.Initiate Auto Reboot",
+        "lib_file_path": "utils.robot"
+    },
+    # Run a "reboot" command on the OS_HOST.
+    "Host Reboot": {
+        "start": {
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "utils.Initiate OS Host Reboot",
         "lib_file_path": "utils.robot"
     }
 }
