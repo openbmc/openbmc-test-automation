@@ -2,13 +2,27 @@ pflash
 Out of Band Code Update
 REST Power On
 REST Power On (mfg)
-Host Reboot
-Host Reboot (mfg)
-Auto Reboot
-Auto Reboot (mfg)
+IPMI Power On
+IPMI Power On (mfg)
 REST Power Off
 REST Power Off (mfg)
+IPMI Power Off
+IPMI Power Off (mfg)
+IPMI Power Soft
+IPMI Power Soft (mfg)
 Host Power Off
 Host Power Off (mfg)
 OBMC Reboot
 OBMC Reboot (mfg)
+PDU AC Cycle
+PDU AC Cycle (mfg)
+IPMI MC Reset Warm
+IPMI MC Reset Warm (mfg)
+IPMI Power Cycle
+IPMI Power Cycle (mfg)
+IPMI Power Reset
+IPMI Power Reset (mfg)
+Auto Reboot
+Auto Reboot (mfg)
+Host Reboot
+Host Reboot (mfg)
