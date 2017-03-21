@@ -38,5 +38,9 @@ Host Off And On
     Initiate Host PowerOff
     Wait Until Keyword Succeeds  5 min  10 sec  Is OS Off
 
+    # Add delay to wait for mailbox to reset before powering on
+    # to minimize the watchdog reset error.
+    Sleep  30s
+
     Initiate Host Boot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
