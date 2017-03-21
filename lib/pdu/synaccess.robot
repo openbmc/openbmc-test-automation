@@ -7,7 +7,7 @@ Library         RequestsLibrary.RequestsKeywords
 *** Keywords ***
 Connect and Login
     Validate Prereq
-    Open Connection     ${PDU_IP}
+    SSHLibrary.Open Connection  ${PDU_IP}
     ${auth}=    Create List     ${PDU_USERNAME}    ${PDU_PASSWORD}
     Create Session    pdu    http://${PDU_IP}   auth=${auth}
 
