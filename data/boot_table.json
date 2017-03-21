@@ -18,7 +18,8 @@
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "Initiate Power On  wait=${0}"
+        "method": "Initiate Host Boot  wait=${0}",
+        "lib_file_path": "state_manager.robot"
     },
     # Initiate a power on using the IPMI interface.
     "IPMI Power On": {
@@ -60,7 +61,8 @@
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "Initiate Power Off"
+        "method": "Initiate Host PowerOff  wait=${0}",
+        "lib_file_path": "state_manager.robot"
     },
     # Initiate a power off using the IPMI interface.
     "IPMI Power Off": {
