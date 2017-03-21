@@ -13,7 +13,7 @@ sys.path.insert(0, lib_path)
 from gen_print import *
 
 # This list will be longer when more development codes are available.
-inventory_items = ['fru']
+inventory_items = ['fru', 'core']
 print_var(inventory_items)
 fru_inventory_file_path = 'inventory.py'
 print_var(fru_inventory_file_path)
@@ -25,19 +25,25 @@ yaml_master_list = []
 cmd_buf = 'git clone https://github.com/openbmc/phosphor-dbus-interfaces'
 os.system(cmd_buf)
 
-repo_subdir_path = '/phosphor-dbus-interfaces/xyz/openbmc_project/Inventory/'
+repo_subdir_path = '/phosphor-dbus-interfaces/xyz/openbmc_project/'
 base_dir_path = os.getcwd() + repo_subdir_path
 
 # yaml file paths for FRU
-yaml_fru_list = [ 'Item.interface.yaml',
-                  'Decorator/Asset.interface.yaml',
-                  'Decorator/Revision.interface.yaml',
-                  'Decorator/Replaceable.interface.yaml',
-                  'Decorator/Cacheable.interface.yaml',
+yaml_fru_list = [ 'Inventory/Item.interface.yaml',
+                  'Inventory/Decorator/Asset.interface.yaml',
+                  'Inventory/Decorator/Revision.interface.yaml',
+                  'Inventory/Decorator/Replaceable.interface.yaml',
+                  'Inventory/Decorator/Cacheable.interface.yaml',
+                  'State/Decorator/OperationalStatus.interface.yaml',
                  ]
 
+# yaml file paths for CORE
+yaml_core_list = [ 'Inventory/Item.interface.yaml',
+                   'State/Decorator/OperationalStatus.interface.yaml',
+                 ]
 # Append to master list
 yaml_master_list.append(yaml_fru_list)
+yaml_master_list.append(yaml_core_list)
 
 print_var(yaml_master_list)
 

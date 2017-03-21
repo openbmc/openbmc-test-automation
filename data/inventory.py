@@ -1,4 +1,9 @@
 inventory_dict = {
+    "core":[
+        "PrettyName",
+        "Present",
+        "Functional"
+    ],
     "fru":[
         "PrettyName",
         "Present",
@@ -9,6 +14,7 @@ inventory_dict = {
         "Model",
         "Version",
         "FieldReplaceable",
-        "Cached"
+        "Cached",
+        "Functional"
     ]
 }
