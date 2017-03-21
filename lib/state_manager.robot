@@ -15,9 +15,17 @@ ${OBMC_STATES_VERSION}    ${0}
 
 Initiate Host Boot
     [Documentation]  Initiate host power on.
+    [Arguments]  ${wait}=${1}
+
+    # Description of arguments:
+    # wait  Indicates that this keyword should wait for host running state.
+
     ${args}=  Create Dictionary   data=${HOST_POWERON_TRANS}
     Write Attribute
     ...  ${HOST_STATE_URI}  RequestedHostTransition   data=${args}
+
+    # Does caller want to wait for status?
+    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is Host Running
@@ -25,9 +33,17 @@ Initiate Host Boot
 
 Initiate Host PowerOff
     [Documentation]  Initiate host power off.
+    [Arguments]  ${wait}=${1}
+
+    # Description of arguments:
+    # wait  Indicates that this keyword should wait for host off state.
+
     ${args}=  Create Dictionary   data=${HOST_POWEROFF_TRANS}
     Write Attribute
     ...  ${HOST_STATE_URI}  RequestedHostTransition   data=${args}
+
+    # Does caller want to wait for status?
+    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
 
     Wait Until Keyword Succeeds
     ...  3 min  10 sec  Is Host Off
