@@ -6,6 +6,7 @@ Resource           openbmc_ffdc_utils.robot
 Resource           rest_client.robot
 Resource           utils.robot
 Library            SSHLibrary
+Library            Collections
 
 *** Keywords ***
 
@@ -280,6 +281,9 @@ Collect eSEL Log
 
     :FOR  ${entry_path}  IN  @{esel_list}
     \  ${esel_data}=  Read Attribute  ${entry_path}  AdditionalData  quiet=${1}
+    \  ${length}=  Get Length  ${esel_data}
+    # Skip writting to file if eSEL AdditionalData is empty
+    \  Continue For Loop If  ${length} == ${0}
     \  Write Data To File  "${esel_data[0]}"  ${logpath}
     \  Write Data To File  ${\n}  ${logpath}
 
