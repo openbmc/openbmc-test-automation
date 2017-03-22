@@ -875,3 +875,8 @@ Set BMC Boot Count
 
     # Set BOOT_TIME variable to current boot time.
     Set Global Variable  ${BOOT_COUNT}  ${count}
+
+Collect SOL Log
+    [Documentation]    Collect SOL log for debugging purposes.
+     ${sol_out}=    Stop SOL Console Logging
+     Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
