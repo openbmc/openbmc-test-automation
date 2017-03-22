@@ -774,3 +774,8 @@ Trigger Host Watchdog Error
     Execute Command On BMC
     ...  /usr/sbin/mapper call /org/openbmc/watchdog/host0 org.openbmc.Watchdog start
     Sleep  ${sleep_time}
+
+Collect SOL Log
+    [Documentation]    Collect SOL log for debugging purposes.
+     ${sol_out}=    Stop SOL Console Logging
+     Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
