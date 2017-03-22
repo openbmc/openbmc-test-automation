@@ -8,9 +8,11 @@ Resource          ../lib/connection_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/state_manager.robot
 
-Test Teardown     FFDC On Test Case Fail
+#Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
+# User inout OS parameter.
+${OS_HOST}    ${EMPTY}
 
 *** Test Cases ***
 
@@ -23,7 +25,19 @@ Host BIOS Update And Boot
     Prepare BMC For Update
     Update PNOR Image
 
+    # Skip validating OS if not given.
+    Run Keyword If  '${OS_HOST}' != '${EMPTY}'
+    ...  Validate IPL And Collect SOL Data
+
+
 *** Keywords ***
+Validate IPL And Collect SOL Data
+    [Documentation]   Validate IPL and collect SOL logs from the system
+    Start SOL Console Logging
+    Validate IPL
+    Wait For Host To Ping  ${OS_HOST}
+    Collect SOL Log
+
 
 Prepare BMC For Update
     [Documentation]  Prepare system for PNOR update.
@@ -54,13 +68,6 @@ Validate IPL
     Initiate Power On
     Wait Until Keyword Succeeds
     ...  10 min    30 sec   Is System State Host Booted
-
-
-Collect SOL Log
-    [Documentation]    Log FFDC if test suite fails and collect SOL log
-    ...                for debugging purposes.
-     ${sol_out}=    Stop SOL Console Logging
-     Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
 
 
 Validate Parameters
