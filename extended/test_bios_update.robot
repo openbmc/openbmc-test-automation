@@ -21,6 +21,9 @@ Host BIOS Update And Boot
     Validate Parameters
     Prepare BMC For Update
     Update PNOR Image
+    Start SOL Console Logging
+    Validate IPL
+    Collect SOL Log
 
 *** Keywords ***
 
