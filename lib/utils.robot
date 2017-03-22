@@ -876,7 +876,6 @@ Set BMC Boot Count
     # Set BOOT_TIME variable to current boot time.
     Set Global Variable  ${BOOT_COUNT}  ${count}
 
-###############################################################################
 Delete Error logs
     [Documentation]  Delete error logs.
 
@@ -886,3 +885,8 @@ Delete Error logs
     Execute Command On BMC
     ...  systemctl restart xyz.openbmc_project.Logging.service
     Sleep  10s  reason=Wait for logging service to restart properly.
+
+Collect SOL Log
+    [Documentation]    Collect SOL log for debugging purposes.
+     ${sol_out}=    Stop SOL Console Logging
+     Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
