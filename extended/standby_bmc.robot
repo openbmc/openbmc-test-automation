@@ -37,10 +37,6 @@ Get To Stable State
     Wait For Host To Ping  ${OPENBMC_HOST}  1 mins
     Open Connection And Log In  host=${OPENBMC_HOST}
 
-    ${rest_status}=  Run Keyword And Return Status  Initialize OpenBMC
-    Run Keyword If  '${rest_status}' == '${False}'
-    ...  Reboot and Wait for BMC Online
-
     ${ready_status}=  Run Keyword And Return Status  Is BMC Ready
     Run Keyword If  '${ready_status}' == '${False}'  Put BMC State  Ready
 
