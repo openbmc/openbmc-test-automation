@@ -18,9 +18,12 @@ Host BIOS Update And Boot
     [Documentation]   Update PNOR image and verify that
     ...               host boots normally.
 
+    Start SOL Console Logging
     Validate Parameters
     Prepare BMC For Update
     Update PNOR Image
+    Validate IPL
+    Collect SOL Log
 
 *** Keywords ***
 
