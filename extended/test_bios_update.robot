@@ -18,9 +18,12 @@ Host BIOS Update And Boot
     [Documentation]   Update PNOR image and verify that
     ...               host boots normally.
 
+    Start SOL Console Logging
     Validate Parameters
-    Prepare BMC For Update
+    PowerOff the Host
     Update PNOR Image
+    Validate IPL
+    Collect SOL Log
 
 *** Keywords ***
 
@@ -37,6 +40,11 @@ Prepare BMC For Update
 
     Clear BMC Record Log
 
+PowerOff the Host
+    [Documentation]  Power the host off
+
+    Initiate Host PowerOff
+    Wait Until Keyword Succeeds  5 min  10 sec  Is Host Off
 
 Update PNOR Image
     [Documentation]  Copy the PNOR image to the BMC /tmp dir and flash it.
