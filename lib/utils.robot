@@ -807,3 +807,8 @@ Configure Initial Settings
     Run Keyword And Ignore Error  Open Telnet Connection to BMC Serial Console
     Telnet.write  ifconfig eth0 ${host} netmask ${mask}
     Telnet.write  route add default gw ${gw_ip}
+
+Collect SOL Log
+    [Documentation]    Collect SOL log for debugging purposes.
+     ${sol_out}=    Stop SOL Console Logging
+     Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
