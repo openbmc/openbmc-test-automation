@@ -21,6 +21,14 @@ Host BIOS Update And Boot
     Validate Parameters
     Prepare BMC For Update
     Update PNOR Image
+    Start SOL Console Logging
+    Validate IPL
+
+Collect SOL Data
+    [Tags]    open-power
+    [Documentation]   Collect SOL logs from the system
+    Collect SOL Log
+
 
 *** Keywords ***
 
@@ -54,13 +62,6 @@ Validate IPL
     Initiate Power On
     Wait Until Keyword Succeeds
     ...  10 min    30 sec   Is System State Host Booted
-
-
-Collect SOL Log
-    [Documentation]    Log FFDC if test suite fails and collect SOL log
-    ...                for debugging purposes.
-     ${sol_out}=    Stop SOL Console Logging
-     Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
 
 
 Validate Parameters
