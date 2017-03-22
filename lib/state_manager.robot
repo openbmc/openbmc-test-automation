@@ -61,6 +61,24 @@ Is Host Rebooted
     Should Be Equal  ${host_trans_state}  Reboot
     Is Host Running
 
+Initiate Chassis PowerOn
+    [Documentation]  Initiate chassis power on.
+    ${args}=  Create Dictionary  data=${CHASSIS_POWERON_TRANS}
+    Write Attribute
+    ...  ${CHASSIS_STATE_URI}  RequestedPowerTransition  data=${args}
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is Chassis On
+
+
+Initiate Chassis PowerOff
+    [Documentation]  Initiate chassis power off.
+    ${args}=  Create Dictionary  data=${CHASSIS_POWEROFF_TRANS}
+    Write Attribute
+    ...  ${CHASSIS_STATE_URI}  RequestedPowerTransition  data=${args}
+
+    Wait Until Keyword Succeeds
+    ...  3 min  10 sec  Is Chassis Off
 
 Is Chassis On
     [Documentation]  Check if chassis state is "On".
