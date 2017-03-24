@@ -6,6 +6,7 @@ Library           OperatingSystem
 Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/state_manager.robot
 
 Test Teardown     FFDC On Test Case Fail
 
@@ -26,14 +27,15 @@ Host BIOS Update And Boot
 
 Prepare BMC For Update
     [Documentation]  Prepare system for PNOR update.
+    [Setup]  Set State Interface Version
 
     Initiate Power Off
 
     Trigger Warm Reset
     Check If BMC is Up  20 min  10 sec
 
-    Wait Until Keyword Succeeds
-    ...  20 min  10 sec  Verify BMC State  BMC_READY
+    Set State Interface Version
+    Wait For BMC Ready
 
     Clear BMC Record Log
 
