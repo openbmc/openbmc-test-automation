@@ -40,6 +40,9 @@ ${OS_USERNAME}      ${EMPTY}
 ${OS_PASSWORD}      ${EMPTY}
 ${OS_WAIT_TIMEOUT}  ${15*60}
 
+# BMC debug tarball parameter
+${DEBUG_TARBALL_PATH}  ${EMPTY}
+
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}
