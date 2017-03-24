@@ -275,46 +275,6 @@ Centaur0 No Fault
     Read The Attribute   ${uri}    fault
     Response Should Be Equal    False
 
-System Present
-    [Tags]  System_Present
-
-    ${uri}=    Get System component    system
-    Read The Attribute   ${uri}    present
-    Response Should Be Equal    True
-
-System Fault
-    [Tags]  System_Fault
-    ${uri}=    Get System component    system
-    Read The Attribute   ${uri}    fault
-    Response Should Be Equal    False
-
-Chassis Present
-    [Tags]  Chassis_Present
-
-    ${uri}=    Get System component    chassis
-    Read The Attribute
-    ...   ${INVENTORY_URI}system/chassis    present
-    Response Should Be Equal    True
-
-Chassis Fault
-    [Tags]  Chassis_Fault
-    ${uri}=    Get System component    chassis
-    Read The Attribute
-    ...   ${INVENTORY_URI}system/chassis    fault
-    Response Should Be Equal    False
-
-io_board Present
-    [Tags]  io_board_Present
-    ${uri}=    Get System component    io_board
-    Read The Attribute   ${uri}    present
-    Response Should Be Equal    True
-
-io_board Fault
-    [Tags]  io_board_Fault
-    ${uri}=    Get System component    io_board
-    Read The Attribute   ${uri}    fault
-    Response Should Be Equal    False
-
 *** Keywords ***
 
 Setup The Suite
