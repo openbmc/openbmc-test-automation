@@ -86,6 +86,14 @@ Initiate Code Update BMC
     Run Keyword If  ${BOOT_COUNT} == ${1}
     ...  Log  Boot time not updated by kernel.  level=WARN
 
+
+Install BMC Debug Tarball
+    [Documentation]  Install the downloaded debug tarball on BMC.
+    [Tags]  Install_BMC_Debug_Tarball
+    Run Keyword If  '${DEBUG_TARBALL_PATH}' != '${EMPTY}'
+    ...  Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
+
+
 Test Basic BMC Performance At Ready State
     [Documentation]   Check performance of memory, CPU & file system of BMC.
     [Tags]  Test_Basic_BMC_Performance_At_Ready_State
