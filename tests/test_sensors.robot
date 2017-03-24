@@ -8,6 +8,7 @@ Documentation          This example demonstrates executing commands on a remote 
 Resource               ../lib/rest_client.robot
 Resource               ../lib/ipmi_client.robot
 Resource               ../lib/openbmc_ffdc.robot
+Resource               ../lib/state_manager.robot
 Library                ../data/model.py
 
 Suite setup            Setup The Suite
@@ -318,6 +319,13 @@ io_board Fault
 *** Keywords ***
 
 Setup The Suite
+    [Documentation]  Do the initial suite setup.
+    ${current_state}=  Get Host State
+    Run Keyword If  '${current_state}' == 'Off'
+    ...  Initiate Host Boot
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is OS Starting
 
     Open Connection And Log In
     ${resp}=   Read Properties   ${OPENBMC_BASE_URI}enumerate   timeout=30
