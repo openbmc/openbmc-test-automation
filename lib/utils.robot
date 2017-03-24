@@ -807,3 +807,22 @@ Configure Initial Settings
     Run Keyword And Ignore Error  Open Telnet Connection to BMC Serial Console
     Telnet.write  ifconfig eth0 ${host} netmask ${mask}
     Telnet.write  route add default gw ${gw_ip}
+
+Install Debug Tarball On BMC
+    [Documentation]  Copy the tar file to BMC and install in "/usr/".
+    [Arguments]  ${tarball_path}
+    # Description of arguments:
+    # tarball_path  Absolute path of the debug tarball file.
+    #               The tar file is downloaded from the build page
+    #               https://openpower.xyz/job/openbmc-build/665/distro=ubuntu,
+    #               target=witherspoon/artifact/images/witherspoon/
+    #               obmc-phosphor-debug-tarball-witherspoon.tar.xz
+
+    OperatingSystem.File Should Exist  ${tarball_path}
+    ...  msg=${tarball_path} doesn't exist.
+    Import Library  SCPLibrary  WITH NAME  scp
+    Open Connection for SCP
+    scp.Put File  ${tarball_path}  /tmp/debug-tarball.tar.xz
+    Open Connection And Log In
+    Execute Command On BMC  tar -xf /tmp/debug-tarball.tar.xz -C /usr/
+
