@@ -22,6 +22,7 @@ System Driver Data
     Run Keyword And Ignore Error  Log PNOR Driver Details
     Run Keyword And Ignore Error  Log BMC Model
     Run Keyword And Ignore Error  Enable Core Dump On BMC
+    Run Keyword And Ignore Error  Install BMC Debug Tarball
 
 Log BMC Driver Details
     [Documentation]   Get BMC driver details and log.
@@ -46,3 +47,8 @@ Log BMC Model
     ${bmc_model}=  Get BMC System Model
     Log  BMC Model=${bmc_model}
 
+
+Install BMC Debug Tarball
+    [Documentation]  Install the downloaded debug tarball on BMC.
+    Should Not Be Empty  ${DEBUG_TARBALL_PATH}
+    Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
