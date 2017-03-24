@@ -142,6 +142,55 @@ Verify FRU Properties
     ${fru_list}=  Qualified FRU List  @{system_list}
     Validate FRU Properties Fields  @{fru_list}
 
+
+Verify Core Functional State
+    [Documentation]  Core property "Functional" state is set then
+    ...              the "Present" should also be set.
+    [Tags]  Verify_Core_Functional_State
+    # Example:
+    #  "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0/core5": {
+    #    "Functional": 1,
+    #    "Present": 1,
+    #    "PrettyName": ""
+    # },
+    ${core_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  core
+    :FOR  ${core_uri}  IN  @{core_list}
+    \  ${status}=  Run Keyword And Return Status
+    ...  Check Endpoint If Functional  ${core_uri}
+    \  Continue For Loop If  '${status}' == '${True}'
+    \  ${present}=  Read Attribute  ${core_uri}  Present
+    \  Should Be True  ${present}
+    ...  msg=${core_uri} is functional but not present.
+
+
+Verify DIMM Functional State
+    [Documentation]  DIMM property "Functional" state is set then
+    ...              the "Present" should also be set.
+    [Tags]  Verify_DIMM_Functional_State
+    # Example:
+    #   "/xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0": {
+    #    "BuildDate": "",
+    #    "Cached": 0,
+    #    "FieldReplaceable": 1,
+    #    "Functional": 1,
+    #    "Manufacturer": "0xce80",
+    #    "Model": "M393A1G40EB1-CRC    ",
+    #    "PartNumber": "",
+    #    "Present": 1,
+    #    "PrettyName": "0x0c",
+    #    "SerialNumber": "0x0300cf4f",
+    #    "Version": "0x00"
+    # },
+
+    ${dimm_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  dimm
+    :FOR  ${dimm_uri}  IN  @{dimm_list}
+    \  ${status}=  Run Keyword And Return Status
+    ...  Check Endpoint If Functional  ${dimm_uri}
+    \  Continue For Loop If  '${status}' == '${True}'
+    \  ${present}=  Read Attribute  ${dimm_uri}  Present
+    \  Should Be True  ${present}
+    ...  msg=${dimm_uri} is functional but not present.
+
 *** Keywords ***
 
 Test Suite Setup
@@ -218,3 +267,13 @@ Validate FRU Properties Fields
     # ------------------------------------------------------------
     \  Should Be Equal  ${fru_field.viewkeys()}  ${fru_set}
 
+
+Check Endpoint If Functional
+    [Arguments]  ${enpoint}
+    # Description of arguments:
+    # endpoint  string for which url path ending.
+    #           Example: DIMM / core endpoint url's
+    # /xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0
+    # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0/core0
+    ${state}=  Read Attribute  ${endpoint}  Functional
+    Should Be True  ${state}
