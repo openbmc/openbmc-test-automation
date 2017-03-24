@@ -6,6 +6,7 @@ Library           OperatingSystem
 Resource          ../lib/utils.robot
 Resource          ../lib/connection_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/state_manager.robot
 
 Test Teardown     FFDC On Test Case Fail
 
@@ -32,8 +33,8 @@ Prepare BMC For Update
     Trigger Warm Reset
     Check If BMC is Up  20 min  10 sec
 
-    Wait Until Keyword Succeeds
-    ...  20 min  10 sec  Verify BMC State  BMC_READY
+    Wait Until Keyword Succeeds  20 min  10 sec  Is BMC Ready
+    #...  20 min  10 sec  Verify BMC State  BMC_READY
 
     Clear BMC Record Log
 
