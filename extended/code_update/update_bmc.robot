@@ -34,6 +34,7 @@ Test Teardown      FFDC On Test Case Fail
 
 ${FILE_PATH}       ${EMPTY}
 ${FORCE_UPDATE}    ${0}
+${DEBUG_TARBALL_PATH}  ${EMPTY}
 
 # There are two reboots issued by code update.
 ${MAX_BOOT_COUNT}  ${2}
@@ -98,6 +99,14 @@ Initiate Code Update BMC
     Check Boot Count And Time
     Run Keyword If  ${BOOT_COUNT} == ${1}
     ...  Log  Boot Time not Updated by Kernel!!!  level=WARN
+
+
+Install BMC Debug Tarball
+    [Documentation]  Install the downloaded debug tarball on BMC.
+    [Tags]  Install_BMC_Debug_Tarball
+    Run Keyword If  '${DEBUG_TARBALL_PATH}' != '${EMPTY}'
+    ...  Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
+
 
 Test Basic BMC Performance At Ready State
     [Documentation]   Check performance of memory, CPU & file system of BMC.
