@@ -21,3 +21,4 @@ echo "--variable LOOP_TEST_COMMAND:$LOOP_TEST_COMMAND" >> $ARG_FILE
 echo "--variable OS_HOST:$OS_HOST" >> $ARG_FILE
 echo "--variable OS_USERNAME:$OS_USERNAME" >> $ARG_FILE
 echo "--variable OS_PASSWORD:$OS_PASSWORD" >> $ARG_FILE
+echo "--variable DEBUG_TARBALL_PATH:$DEBUG_TARBALL_PATH" >> $ARG_FILE
