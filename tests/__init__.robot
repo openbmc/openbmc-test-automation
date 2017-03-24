@@ -22,6 +22,9 @@ System Driver Data
     Run Keyword And Ignore Error  Log PNOR Driver Details
     Run Keyword And Ignore Error  Log BMC Model
     Run Keyword And Ignore Error  Enable Core Dump On BMC
+    Run Keyword If  '${DEBUG_TARBALL_PATH}' != '${EMPTY}'
+    ...   Run Keyword And Ignore Error
+    ...   Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
 
 Log BMC Driver Details
     [Documentation]   Get BMC driver details and log.
