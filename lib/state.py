@@ -226,6 +226,9 @@ def compare_states(state,
 
     match = True
     for key, match_state_value in match_state.items():
+        # Blank match_state_value means "don't care".
+        if match_state_value == "":
+            continue
         try:
             if not re.match(match_state_value, str(state[key])):
                 match = False
@@ -322,9 +325,7 @@ def get_os_state(os_host="",
         master_req_login = ['os_login', 'os_run_cmd']
         req_login = [sub_state for sub_state in req_states if sub_state in
                      master_req_login]
-
-        must_login = (len([sub_state for sub_state in req_states
-                           if sub_state in master_req_login]) > 0)
+        must_login = (len(req_login) > 0)
 
         if must_login:
             # Open SSH connection to OS.  Note that this doesn't fail even when
@@ -471,7 +472,7 @@ def get_state(openbmc_host="",
     packet_loss = ''
     uptime = ''
     epoch_seconds = ''
-    power = '0'
+    power = ''
     chassis = ''
     bmc = ''
     boot_progress = ''
@@ -500,35 +501,47 @@ def get_state(openbmc_host="",
     master_req_login = ['uptime', 'epoch_seconds']
     req_login = [sub_state for sub_state in req_states if sub_state in
                  master_req_login]
+    must_login = (len(req_login) > 0)
 
-    must_login = (len([sub_state for sub_state in req_states
-                       if sub_state in master_req_login]) > 0)
-
+    bmc_login = 0
     if must_login:
         cmd_buf = ["Open Connection And Log In"]
         if not quiet:
             grp.rpissuing_keyword(cmd_buf)
-        BuiltIn().run_keyword(*cmd_buf)
+        status, ret_values = \
+            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+        if status == "PASS":
+            bmc_login = 1
+        else:
+            if re.match('^Authentication failed for user', ret_values):
+                # An authentication failure is worth failing on.
+                BuiltIn().fail(gp.sprint_error(ret_values))
 
-    if 'uptime' in req_states:
+    if 'uptime' in req_states and bmc_login:
         cmd_buf = ["Execute Command", "cat /proc/uptime | cut -f 1 -d ' '",
                    "return_stderr=True", "return_rc=True"]
         if not quiet:
             grp.rpissuing_keyword(cmd_buf)
-        stdout, stderr, rc = BuiltIn().run_keyword(*cmd_buf)
-        if rc == 0 and stderr == "":
-            uptime = stdout
+        status, ret_values = \
+            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+        if status == "PASS":
+            stdout, stderr, rc = ret_values
+            if rc == 0 and stderr == "":
+                uptime = stdout
 
-    if 'epoch_seconds' in req_states:
+    if 'epoch_seconds' in req_states and bmc_login:
         date_cmd_buf = "date -u +%s"
         if USE_BMC_EPOCH_TIME:
             cmd_buf = ["Execute Command", date_cmd_buf, "return_stderr=True",
                        "return_rc=True"]
             if not quiet:
                 grp.rpissuing_keyword(cmd_buf)
-            stdout, stderr, rc = BuiltIn().run_keyword(*cmd_buf)
-            if rc == 0 and stderr == "":
-                epoch_seconds = stdout.rstrip("\n")
+            status, ret_values = \
+                BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+            if status == "PASS":
+                stdout, stderr, rc = ret_values
+                if rc == 0 and stderr == "":
+                    epoch_seconds = stdout.rstrip("\n")
         else:
             shell_rc, out_buf = gc.cmd_fnc_u(date_cmd_buf,
                                              quiet=1,
@@ -539,13 +552,18 @@ def get_state(openbmc_host="",
     if 'power' in req_states:
         cmd_buf = ["Get Power State", "quiet=${" + str(quiet) + "}"]
         grp.rdpissuing_keyword(cmd_buf)
-        power = BuiltIn().run_keyword(*cmd_buf)
+        status, ret_values = \
+            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+        if status == "PASS":
+            power = ret_values
     if 'chassis' in req_states:
         cmd_buf = ["Get Chassis Power State", "quiet=${" + str(quiet) + "}"]
         grp.rdpissuing_keyword(cmd_buf)
-        chassis = BuiltIn().run_keyword(*cmd_buf)
-        # Strip everything up to the final period.
-        chassis = re.sub(r'.*\.', "", chassis)
+        status, ret_values = \
+            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+        if status == "PASS":
+            chassis = ret_values
+            chassis = re.sub(r'.*\.', "", chassis)
 
     if 'bmc' in req_states:
         if OBMC_STATES_VERSION == 0:
@@ -556,20 +574,29 @@ def get_state(openbmc_host="",
 
         cmd_buf = [qualifier + ".Get BMC State", "quiet=${" + str(quiet) + "}"]
         grp.rdpissuing_keyword(cmd_buf)
-        bmc = BuiltIn().run_keyword(*cmd_buf)
+        status, ret_values = \
+            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+        if status == "PASS":
+            bmc = ret_values
 
     if 'boot_progress' in req_states:
         cmd_buf = ["Get Boot Progress", "quiet=${" + str(quiet) + "}"]
         grp.rdpissuing_keyword(cmd_buf)
-        boot_progress = BuiltIn().run_keyword(*cmd_buf)
+        status, ret_values = \
+            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+        if status == "PASS":
+            boot_progress = ret_values
 
     if 'host' in req_states:
         if OBMC_STATES_VERSION > 0:
             cmd_buf = ["Get Host State", "quiet=${" + str(quiet) + "}"]
             grp.rdpissuing_keyword(cmd_buf)
-            host = BuiltIn().run_keyword(*cmd_buf)
-            # Strip everything up to the final period.
-            host = re.sub(r'.*\.', "", host)
+            status, ret_values = \
+                BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+            if status == "PASS":
+                host = ret_values
+                # Strip everything up to the final period.
+                host = re.sub(r'.*\.', "", host)
 
     state = DotDict()
     for sub_state in req_states:
