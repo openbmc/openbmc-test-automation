@@ -8,8 +8,8 @@ Resource           ../lib/utils.robot
 Resource           ../lib/openbmc_ffdc.robot
 Resource           ../lib/state_manager.robot
 
-Suite Setup        Open Connection And Log In
-Test Setup         Initialize DBUS cmd   "boot_policy"
+Suite Setup        Test Suite Setup
+Test Setup         Test Init Setup
 Test Teardown      FFDC On Test Case Fail
 Suite Teardown     Restore Boot Settings
 
@@ -154,3 +154,18 @@ Restore Boot Settings
     Set Boot Policy  ONETIME
     Set Boot Device  default
     Close All Connections
+
+Test Init Setup
+    [Documentation]  Do the initial test setup.
+    Open Connection And Log In
+    Initialize DBUS cmd  "boot_flags"
+
+Test Suite Setup
+    [Documentation]  Do the initial suite setup.
+    ${current_state}=  Get Host State
+    Run Keyword If  '${current_state}' == 'Off'
+    ...  Initiate Host Boot
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is OS Starting
+

@@ -7,10 +7,10 @@ Resource        ../lib/ipmi_client.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/utils.robot
 
-Suite Setup     Open Connection And Log In
-Suite Teardown  Close All Connections
-Test Setup      Initialize DBUS cmd   "boot_flags"
+Suite Setup     Test Suite Setup
+Test Setup      Test Init Setup
 Test Teardown   FFDC On Test Case Fail
+Suite Teardown  Close All Connections
 
 *** Variables ***
 
@@ -190,3 +190,17 @@ Read the Attribute
     [Arguments]  ${uri}  ${parm}
     ${output}=  Read Attribute  ${uri}  ${parm}
     Set Test Variable  ${OUTPUT}  ${output}
+
+Test Init Setup
+    [Documentation]  Do the initial test setup.
+    Open Connection And Log In
+    Initialize DBUS cmd  "boot_flags"
+
+Test Suite Setup
+    [Documentation]  Do the initial suite setup.
+    ${current_state}=  Get Host State
+    Run Keyword If  '${current_state}' == 'Off'
+    ...  Initiate Host Boot
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is OS Starting
