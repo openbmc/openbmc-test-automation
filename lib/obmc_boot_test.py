@@ -85,14 +85,67 @@ default_power_on = "REST Power On"
 default_power_off = "REST Power Off"
 boot_count = 0
 
+LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
+
+
+###############################################################################
+def initial_plug_in_setup():
+
+    r"""
+    Initialize all plug-in environment variables which do not change for the
+    duration of the program.
+
+    """
+
+    global LOG_LEVEL
+    BuiltIn().set_log_level("NONE")
+
+    BuiltIn().set_global_variable("${master_pid}", master_pid)
+    BuiltIn().set_global_variable("${FFDC_DIR_PATH}", ffdc_dir_path)
+    BuiltIn().set_global_variable("${STATUS_DIR_PATH}", status_dir_path)
+    BuiltIn().set_global_variable("${BASE_TOOL_DIR_PATH}", base_tool_dir_path)
+    BuiltIn().set_global_variable("${FFDC_LIST_FILE_PATH}",
+                                  ffdc_list_file_path)
+
+    BuiltIn().set_global_variable("${FFDC_DIR_PATH_STYLE}",
+                                  ffdc_dir_path_style)
+    BuiltIn().set_global_variable("${FFDC_CHECK}",
+                                  ffdc_check)
+
+    # For each program parameter, set the corresponding AUTOBOOT_ environment
+    # variable value.  Also, set an AUTOBOOT_ environment variable for every
+    # element in additional_values.
+    additional_values = ["program_pid", "master_pid", "ffdc_dir_path",
+                         "status_dir_path", "base_tool_dir_path",
+                         "ffdc_list_file_path"]
+
+    plug_in_vars = parm_list + additional_values
+
+    for var_name in plug_in_vars:
+        var_value = BuiltIn().get_variable_value("${" + var_name + "}")
+        var_name = var_name.upper()
+        if var_value is None:
+            var_value = ""
+        os.environ["AUTOBOOT_" + var_name] = str(var_value)
+
+    BuiltIn().set_log_level(LOG_LEVEL)
+
+
+###############################################################################
+
 
 ###############################################################################
 def plug_in_setup():
 
     r"""
-    Initialize all plug-in environment variables for use by the plug-in
-    programs.
+    Initialize all changing plug-in environment variables for use by the
+    plug-in programs.
     """
+
+    global LOG_LEVEL
+    global test_really_running
+
+    BuiltIn().set_log_level("NONE")
 
     boot_pass, boot_fail = boot_results.return_total_pass_fail()
     if boot_pass > 1:
@@ -109,16 +162,6 @@ def plug_in_setup():
     BuiltIn().set_global_variable("${test_really_running}",
                                   test_really_running)
     BuiltIn().set_global_variable("${boot_type_desc}", next_boot)
-    BuiltIn().set_global_variable("${master_pid}", master_pid)
-    BuiltIn().set_global_variable("${FFDC_DIR_PATH}", ffdc_dir_path)
-    BuiltIn().set_global_variable("${STATUS_DIR_PATH}", status_dir_path)
-    BuiltIn().set_global_variable("${BASE_TOOL_DIR_PATH}", base_tool_dir_path)
-    BuiltIn().set_global_variable("${FFDC_LIST_FILE_PATH}",
-                                  ffdc_list_file_path)
-    BuiltIn().set_global_variable("${FFDC_DIR_PATH_STYLE}",
-                                  ffdc_dir_path_style)
-    BuiltIn().set_global_variable("${FFDC_CHECK}",
-                                  ffdc_check)
     BuiltIn().set_global_variable("${boot_pass}", boot_pass)
     BuiltIn().set_global_variable("${boot_fail}", boot_fail)
     BuiltIn().set_global_variable("${boot_success}", boot_success)
@@ -128,12 +171,9 @@ def plug_in_setup():
     # variable value.  Also, set an AUTOBOOT_ environment variable for every
     # element in additional_values.
     additional_values = ["boot_type_desc", "boot_success", "boot_pass",
-                         "boot_fail", "test_really_running", "program_pid",
-                         "master_pid", "ffdc_prefix", "ffdc_dir_path",
-                         "status_dir_path", "base_tool_dir_path",
-                         "ffdc_list_file_path"]
+                         "boot_fail", "test_really_running", "ffdc_prefix"]
 
-    plug_in_vars = parm_list + additional_values
+    plug_in_vars = additional_values
 
     for var_name in plug_in_vars:
         var_value = BuiltIn().get_variable_value("${" + var_name + "}")
@@ -145,6 +185,8 @@ def plug_in_setup():
     if debug:
         shell_rc, out_buf = \
             gc.cmd_fnc_u("printenv | egrep AUTOBOOT_ | sort -u")
+
+    BuiltIn().set_log_level(LOG_LEVEL)
 
 ###############################################################################
 
@@ -164,6 +206,8 @@ def setup():
 
     grp.rqprint_pgm_header()
 
+    initial_plug_in_setup()
+
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
         call_point='setup')
@@ -177,6 +221,8 @@ def setup():
 
     # Keyword "FFDC" will fail if TEST_MESSAGE is not set.
     BuiltIn().set_global_variable("${TEST_MESSAGE}", "${EMPTY}")
+    # FFDC_LOG_PATH is used by "FFDC" keyword.
+    BuiltIn().set_global_variable("${FFDC_LOG_PATH}", ffdc_dir_path)
 
     grp.rdprint_var(boot_table, 1)
     grp.rdprint_var(boot_lists)
@@ -203,7 +249,7 @@ def validate_parms():
     if pdu_host != "":
         grv.rvalid_value("pdu_username")
         grv.rvalid_value("pdu_password")
-    grv.rvalid_integer("pdu_slot_no")
+        grv.rvalid_integer("pdu_slot_no")
     if openbmc_serial_host != "":
         grv.rvalid_integer("openbmc_serial_port")
     grv.rvalid_integer("max_num_tests")
@@ -397,9 +443,6 @@ def my_ffdc():
         call_point='ffdc', stop_on_plug_in_failure=1)
 
     AUTOBOOT_FFDC_PREFIX = os.environ['AUTOBOOT_FFDC_PREFIX']
-
-    # FFDC_LOG_PATH is used by "FFDC" keyword.
-    BuiltIn().set_global_variable("${FFDC_LOG_PATH}", ffdc_dir_path)
 
     cmd_buf = ["FFDC", "ffdc_prefix=" + AUTOBOOT_FFDC_PREFIX]
     grp.rpissuing_keyword(cmd_buf)
