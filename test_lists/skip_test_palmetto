@@ -29,14 +29,6 @@
 ##Testcase NA for Palmetto system
 -e io_board_Present
 -e io_board_Fault
-#https://github.com/openbmc/openbmc-test-automation/issues/148
--e Get_System_Time
--e Set_Valid_System_Time
--e Set_Invalid_System_Time
--e Set_System_Time_with_no_time
--e IPMI_Chassis_Status_On
--e IPMI_Chassis_Status_Off
--e IPMI_Chassis_Restore_Power_Policy
 #https://github.com/openbmc/openbmc/issues/928
 -e Set_Host_Time_With_Both_And_NTP
 #https://github.com/openbmc/openbmc/issues/901
