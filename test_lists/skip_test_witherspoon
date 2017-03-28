@@ -25,14 +25,6 @@
 -e Set_password_for_existing_user
 -e Set_password_with_empty_password_for_existing
 -e Create_existing_user
-#https://github.com/openbmc/openbmc-test-automation/issues/148
--e Get_System_Time
--e Set_Valid_System_Time
--e Set_Invalid_System_Time
--e Set_System_Time_with_no_time
--e IPMI_Chassis_Status_On
--e IPMI_Chassis_Status_Off
--e IPMI_Chassis_Restore_Power_Policy
 #Pre bringup list
 -e powercapping
 -e io_board_Present
