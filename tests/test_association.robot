@@ -1,279 +1,100 @@
 *** Settings ***
-Documentation     This suite is used for testing eventlog association.
+Documentation       Test Error callout association.
 
-Resource          ../lib/rest_client.robot
-Resource          ../lib/utils.robot
-Resource          ../lib/connection_client.robot
-Resource          ../lib/openbmc_ffdc.robot
-Resource          ../lib/state_manager.robot
+Resource            ../lib/connection_client.robot
+Resource            ../lib/openbmc_ffdc.robot
+Resource            ../lib/utils.robot
+Resource            ../lib/state_manager.robot
 
-Library           Collections
-
-Suite Setup       Suite Initialization Setup
-Suite Teardown    Close All Connections
-
-Test Teardown     FFDC On Test Case Fail
-Force Tags  Association
-
-*** Variables ***
-
-${SYSTEM_SHUTDOWN_TIME}           1min
-
-${WAIT_FOR_SERVICES_UP}           3min
-
-${EVENT_RECORD}        ${RECORDS_URI}events/
-${DIMM_PREFIX}         ${INVENTORY_URI}system/chassis/motherboard/
-${DIMM1_URI}           ${DIMM_PREFIX}dimm1
-${DIMM2_URI}           ${DIMM_PREFIX}dimm2
-${DIMM3_URI}           ${DIMM_PREFIX}dimm3
-
-${BUSCTL_PREFIX}                busctl call ${OPENBMC_BASE_DBUS}.records.events
-...                             ${OPENBMC_BASE_URI}records/events
-...                             ${OPENBMC_BASE_DBUS}.recordlog
-...                             acceptHostMessage sssay "Error"
-
-${CREATE_ERROR_SINGLE_FRU}      ${BUSCTL_PREFIX} "Testing failure"
-...                             "${DIMM1_URI}" 1 1
-
-${CREATE_ERROR_INVALID_FRU}     ${BUSCTL_PREFIX} "Testing with invalid FRU"
-...                             "abc" 1 1
-
-${CREATE_ERROR_NO_FRU}          ${BUSCTL_PREFIX} "Testing with no fru" "" 1 1
-
-${CREATE_ERROR_VIRTUAL_SENSOR}  ${BUSCTL_PREFIX}
-...                             "Testing with a virtual sensor"
-...                             "${INVENTORY_URI}system/systemevent " 1 1
-
-&{NIL}                          data=@{EMPTY}
+Suite Setup         Run Keywords  Verify callout-test  AND
+...                 Boot Host  AND
+...                 Clear Existing Error Logs
+Test Setup          Open Connection And Log In
+Test Teardown       Close All Connections
+Suite Teardown      Clear Existing Error Logs
 
 *** Test Cases ***
 
-Create error log on single FRU
-    [Documentation]     ***GOOD PATH***
-    ...                 Create an error log on single FRU and verify
-    ...                 its association.\n
-    [Tags]  Create_error_log_on_single_FRU
+Create Test Error Callout And Verify
+    [Documentation]  Create error log callout and verify via REST.
+    [Tags]  Create_Test_Error_Callout_And_Verify
 
-    Run Keyword And Continue On Failure   Clear all logs
+    Create Test Error With Callout
+    Verify Test Error Log And Callout
 
-    ${elog}  ${stderr}=
-    ...   Execute Command    ${CREATE_ERROR_SINGLE_FRU}
-    ...   return_stderr=True
-    Should Be Empty    ${stderr}
-
-    ${log_list}=     Get EventList
-    Should Contain   '${log_list}'   ${elog.strip('q ')}
-
-    ${association_uri}=
-    ...   catenate  SEPARATOR=   ${EVENT_RECORD}${elog.strip('q ')}  /fru
-
-    ${association_content}=
-    ...   Read Attribute    ${association_uri}    endpoints
-    Should Contain     ${association_content}    ${DIMM1_URI}
-
-    ${dimm1_event}=     Read Attribute     ${DIMM1_URI}/event   endpoints
-    Should Contain     ${dimm1_event}    ${log_list[0]}
-
-
-Create Error Log On Two FRU
-    [Documentation]     ***GOOD PATH***
-    ...                 Create an error log on two FRUs and verify
-    ...                 its association.\n
-    [Tags]  Create_Error_Log_On_Two_FRU
-
-    ${log_uri}=      Create a test log
-    ${association_uri}=    catenate    SEPARATOR=   ${log_uri}   /fru
-
-    ${association_content}=     Read Attribute    ${association_uri}    endpoints
-    Should Contain     ${association_content}    ${DIMM3_URI}
-    Should Contain     ${association_content}    ${DIMM2_URI}
-
-    ${dimm3_event}=     Read Attribute     ${DIMM3_URI}/event   endpoints
-    Should Contain     ${dimm3_event}    ${log_uri}
-
-    ${dimm2_event}=     Read Attribute     ${DIMM2_URI}/event   endpoints
-    Should Contain     ${dimm2_event}    ${log_uri}
-
-
-Create Multiple Error Logs
-    [Documentation]     ***GOOD PATH***
-    ...                 Create multiple error logs and verify
-    ...                 their association.\n
-    [Tags]  Create_Multiple_Error_Logs
-
-    : FOR    ${INDEX}    IN RANGE    1    4
-    \    Log    ${INDEX}
-    \    ${log_uri}=      Create a test log
-    \    ${association_uri}=   catenate    SEPARATOR=   ${log_uri}   /fru
-    \    ${association_content}=
-    ...   Read Attribute   ${association_uri}    endpoints
-    \    Should Contain    ${association_content}   ${DIMM3_URI}
-    \    Should Contain    ${association_content}   ${DIMM2_URI}
-    \    ${dimm3_event}=   Read Attribute   ${DIMM3_URI}/event   endpoints
-    \    Should Contain    ${dimm3_event}   ${log_uri}
-    \    ${dimm2_event}=   Read Attribute   ${DIMM2_URI}/event   endpoints
-    \    Should Contain    ${dimm2_event}   ${log_uri}
-
-
-Delete error log
-    [Documentation]     ***BAD PATH***
-    ...                 Delete an error log and verify that its
-    ...                 association is also removed.\n
-    [Tags]  Delete_error_log
-
-    ${log_uri1}=      Create a test log
-    ${association_uri1}=    catenate    SEPARATOR=   ${log_uri1}   /fru
-
-    ${log_uri2}=      Create a test log
-
-    ${del_uri}=  catenate    SEPARATOR=   ${log_uri1}   /action/delete
-    ${resp}=    openbmc post request     ${del_uri}    data=${NIL}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-
-    ${resp}=     openbmc get request     ${association_uri1}
-    ${jsondata}=    to json    ${resp.content}
-    Should Contain     ${jsondata['message']}    404 Not Found
-
-    ${dimm3_event}=     Read Attribute      ${DIMM3_URI}/event   endpoints
-    Should Not Contain     ${dimm3_event}    ${log_uri1}
-
-    ${dimm2_event}=     Read Attribute      ${DIMM2_URI}/event   endpoints
-    Should Not Contain     ${dimm2_event}    ${log_uri1}
-
-
-Association With Invalid FRU
-    [Documentation]     ***BAD PATH***
-    ...                 Create an error log on invalid FRU and verify
-    ...                 that its does not have any association.\n
-    [Tags]  Association_With_Invalid_FRU
-
-    Run Keyword And Continue On Failure   Clear all logs
-
-    ${elog}  ${stderr}=
-    ...   Execute Command    ${CREATE_ERROR_INVALID_FRU}
-    ...   return_stderr=True
-    Should Be Empty    ${stderr}
-
-    ${log_list}=     Get EventList
-    Should Contain   '${log_list}'   ${elog.strip('q ')}
-
-    ${association_uri}=
-    ...   catenate  SEPARATOR=  ${EVENT_RECORD}${elog.strip('q ')}  /fru
-
-    ${resp}=     openbmc get request     ${association_uri}
-    ${jsondata}=    to json    ${resp.content}
-    Should Contain     ${jsondata['message']}    404 Not Found
-
-
-Association With No FRU Error Event
-    [Documentation]     ***BAD PATH***
-    ...                 Create an error log on no FRU and verify
-    ...                 that its does not have any association.\n
-    [Tags]  Association_With_No_FRU_Error_Event
-
-    Run Keyword And Continue On Failure   Clear all logs
-
-    ${elog}  ${stderr}=
-    ...   Execute Command    ${CREATE_ERROR_NO_FRU}
-    ...   return_stderr=True
-    Should Be Empty    ${stderr}
-
-    ${log_list}=     Get EventList
-    Should Contain   '${log_list}'   ${elog.strip('q ')}
-
-    ${association_uri}=
-    ...   catenate    SEPARATOR=   ${EVENT_RECORD}${elog.strip('q ')}  /fru
-
-    ${resp}=     openbmc get request     ${association_uri}
-    ${jsondata}=    to json    ${resp.content}
-    Should Contain     ${jsondata['message']}    404 Not Found
-
-
-Association with virtual sensor
-    [Documentation]     ***GOOD PATH***
-    ...                 Create an error log on virtual sensor and
-    ...                 verify its association.\n
-    [Tags]  Association_With_Virtual_Sensor
-
-    Run Keyword And Continue On Failure   Clear all logs
-
-    ${elog}  ${stderr}=
-    ...   Execute Command    ${CREATE_ERROR_VIRTUAL_SENSOR}
-    ...   return_stderr=True
-    Should Be Empty    ${stderr}
-
-    ${log_list}=     Get EventList
-    Should Contain   '${log_list}'   ${elog.strip('q ')}
-
-    ${association_uri}=
-    ...   catenate    SEPARATOR=   ${EVENT_RECORD}${elog.strip('q ')}  /fru
-
-    ${association_content}=
-    ...   Read Attribute    ${association_uri}    endpoints
-    Should Contain
-    ...  ${association_content}
-    ...  ${OPENBMC_BASE_URI}inventory/system/systemevent
-
-Association Unchanged After Reboot
-    [Documentation]     ***GOOD PATH***
-    ...                 This test case is to verify that error log association
-    ...                 does not change after open bmc reboot.\n
-    [Tags]  bmcreboot  Association_Unchanged_After_Reboot
-
-    ${pre_reboot_log_uri}=      Create a test log
-    ${association_uri}=
-    ...    catenate    SEPARATOR=   ${pre_reboot_log_uri}   /fru
-    ${pre_reboot_association_content} =
-    ...   Read Attribute   ${association_uri}    endpoints
-
-    Initiate Host PowerOff
-
-    Initiate BMC Reboot
-
-    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
-
-    ${post_reboot_association_content} =
-    ...   Read Attribute    ${association_uri}    endpoints
-    Should Be Equal
-    ...   ${post_reboot_association_content}
-    ...   ${pre_reboot_association_content}
-
-    ${post_reboot_dimm3_event} =
-    ...   Read Attribute   ${DIMM3_URI}/event   endpoints
-    Should Contain
-    ...   ${post_reboot_dimm3_event}   ${pre_reboot_log_uri}
-    ${post_reboot_dimm2_event} =
-    ...   Read Attribute   ${DIMM2_URI}/event   endpoints
-    Should Contain
-    ...   ${post_reboot_dimm2_event}   ${pre_reboot_log_uri}
 
 *** Keywords ***
 
-Get EventList
-    ${resp}=   openbmc get request   ${EVENT_RECORD}
-    should be equal as strings    ${resp.status_code}    ${HTTP_OK}
-    ${jsondata}=    to json    ${resp.content}
-    [Return]    ${jsondata['data']}
+Verify callout-test
+    [Documentation]  Verify existence of prerequisite callout-test.
 
-Create a test log
-    [Arguments]
-    ${data}=   create dictionary   data=@{EMPTY}
-    ${resp}=   openbmc post request
-    ...     ${EVENT_RECORD}action/acceptTestMessage    data=${data}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json}=   to json         ${resp.content}
-    ${LOGID}=    convert to integer    ${json['data']}
-    ${uri}=     catenate    SEPARATOR=   ${EVENT_RECORD}   ${LOGID}
-    [Return]  ${uri}
-
-Clear all logs
-    ${resp}=   openbmc post request
-    ...   ${EVENT_RECORD}action/clear    data=${NIL}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${resp}=   openbmc get request   ${EVENT_RECORD}
-    ${json}=   to json         ${resp.content}
-    Should Be Empty     ${json['data']}
-
-Suite Initialization Setup
     Open Connection And Log In
-    Run Keyword And Continue On Failure   Clear all logs
+    ${out}  ${stderr}=  Execute Command  which callout-test  return_stderr=True
+    Should Be Empty  ${stderr}
+    Should Contain  ${out}  callout-test
+
+Clear Existing Error Logs
+    [Documentation]  If error log isn't empty, restart the BMC to clear the
+    ...              log.
+
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
+    Execute Command On BMC
+    ...  systemctl restart xyz.openbmc_project.Logging.service
+    Sleep  10s  reason=Wait for logging service to restart properly.
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
+
+Create Test Error With Callout
+    [Documentation]  Generate test error log with callout for CPU0.
+
+    # Test error log entry example:
+    #  "/xyz/openbmc_project/logging/entry/4": {
+    #  "AdditionalData": [
+    #      "CALLOUT_DEVICE_PATH_TEST=/sys/devices/platform/fsi-master/slave@00:00",
+    #      "CALLOUT_ERRNO_TEST=0",
+    #      "DEV_ADDR=0x0DEADEAD"
+    #    ],
+    #    "Id": 4,
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.TestCallout",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1487747332528,
+    #    "associations": [
+    #        [
+    #          "callout",
+    #          "fault",
+    #          "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #        ]
+    #    ]
+    # },
+    # "/xyz/openbmc_project/logging/entry/4/callout": {
+    #    "endpoints": [
+    #        "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #    ]
+    # },
+
+    Execute Command On BMC
+    ...  callout-test /sys/devices/platform/fsi-master/slave@00:00
+
+Verify Test Error Log And Callout
+    [Documentation]  Verify test error log entries.
+    ${content}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Message
+    Should Be Equal  ${content}
+    ...  example.xyz.openbmc_project.Example.Elog.TestCallout
+    ${content}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Severity
+    Should Be Equal  ${content}
+    ...  xyz.openbmc_project.Logging.Entry.Level.Error
+    ${content}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}/callout  endpoints
+    Should Be Equal  ${content[0]}
+    ...  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
+
+Boot Host
+    [Documentation]  Boot the host if current state is "Off".
+    ${current_state}=  Get Host State
+    Run Keyword If  '${current_state}' == 'Off'
+    ...  Initiate Host Boot
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is OS Starting
