@@ -20,64 +20,64 @@ Verify CPU Fault LEDs Group
     [Documentation]  Verify CPU's fault LEDs.
     [Tags]  Verify_CPU_Fault_LEDs_Group
 
-    Verify LED Group  cpu  Fault
+    Verify LED Group  cpu  fault
 
 Verify Fan Fault LEDs Group
     [Documentation]  Verify fan's fault LEDs.
     [Tags]  Verify_Fan_Fault_LEDs_Group
 
-    Verify LED Group  Fan  Fault
+    Verify LED Group  fan  fault
 
 Verify DIMM Fault LEDs Group
     [Documentation]  Verify DIMM's fault LEDs.
     [Tags]  Verify_DIMM_Fault_LEDs_Group
 
-    Verify LED Group  dimm  Fault
+    Verify LED Group  dimm  fault
 
 Verify GPU Fault LEDs Group
     [Documentation]  Verify GPU's fault LEDs.
     [Tags]  Verify_GPU_Fault_LEDs_Group
 
-    Verify LED Group  gpu  Fault
+    Verify LED Group  gpu  fault
 
 Verify Power Supply Fault LEDs Group
     [Documentation]  Verify power supply's fault LEDs.
     [Tags]  Verify_Power_Supply_Fault_LEDs_Group
 
-    Verify LED Group  powersupply  Fault
+    Verify LED Group  powersupply  fault
 
 Verify Enclosure Fault LED Group
     [Documentation]  Validate enclosure's fault LED.
     [Tags]  Verify_Enclosure_Fault_LED_Group
 
-    Verify LED Group  Enclosure  Fault
+    Verify LED Group  enclosure  fault
 
 Verify Power State LEDs Group
     [Documentation]  Verify power state LEDs.
     [Tags]  Verify_Power_State_LEDs_Group
 
-    Verify LED Group  Power
+    Verify LED Group  power
 
 Verify Enclosure Identify LED Group
     [Documentation]  Validate enclosure's identify LED.
     [Tags]  Verify_Enclosure_Identify_LED_Group
 
-    Verify LED Group  Enclosure  Identify
+    Verify LED Group  enclosure  identify
 
 Verify Fan Identify LEDs Group
     [Documentation]  Verify fan's identify LEDs.
     [Tags]  Verify_Fan_Identify_LEDs_Group
 
-    Verify LED Group  Fan  Identify
+    Verify LED Group  fan  identify
 
 Verify Other Fault LEDs Group
     [Documentation]  Verify other fault LEDs.
     [Tags]  Verify_Other_Fault_LEDs_Group
 
-    Verify LED Group  systemFault
-    Verify LED Group  boxelderFault
-    Verify LED Group  bmcFault
-    Verify LED Group  motherboardFault
+    Verify LED Group  system_fault
+    Verify LED Group  boxelder_fault
+    Verify LED Group  bmc_fault
+    Verify LED Group  motherboard_fault
 
 *** Keywords ***
 
