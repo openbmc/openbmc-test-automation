@@ -48,6 +48,74 @@ Test Error Persistency On Reboot
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 
+Create Test Error And Verify Resolved Field
+    [Documentation]  Create error log and verify "Resolved"
+    ...              field.
+    [Tags]  Create_Test_Error_And_Verify_Resolved_Field
+
+    # Example Error log:
+    #  "/xyz/openbmc_project/logging/entry/1": {
+    #    "AdditionalData": [
+    #        "STRING=FOO"
+    #    ],
+    #    "Id": 1,
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.AutoTestSimple",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1490817164983,
+    #    "associations": []
+    # },
+
+    # It's work in progress, but it's mnfg need. To mark an error as
+    # resolved, without deleting the error, mfg will set this bool
+    # property.
+    # In this test context we are making sure "Resolved" field is "0"
+    # by default.
+
+    Delete Error logs
+    Create Test Error Log
+    ${resolved}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Resolved
+    Should Be True  ${resolved} == 0
+
+
+Create Test Errors And Verify Time Stamp
+    [Documentation]  Create error logs and verify time stamp.
+    [Tags]  Create_Test_Error_And_Verify_Time_Stamp
+
+    # Example Error logs:
+    #  "/xyz/openbmc_project/logging/entry/1": {
+    #    "AdditionalData": [
+    #        "STRING=FOO"
+    #    ],
+    #    "Id": 1,
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.AutoTestSimple",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1490818990051,  <--- Time stamp
+    #    "associations": []
+    #  },
+    #  "/xyz/openbmc_project/logging/entry/2": {
+    #    "AdditionalData": [
+    #        "STRING=FOO"
+    #    ],
+    #    "Id": 2,
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.AutoTestSimple",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1490818992116,   <---- Time stamp
+    #    "associations": []
+    # },
+
+    Delete Error logs
+    Create Test Error Log
+    Create Test Error Log
+    # The error log generated is associated with the epoc time and unique
+    # for every error and in increasing time stamp.
+    ${time_stamp1}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Timestamp
+    ${time_stamp2}=  Read Attribute  ${BMC_LOGGING_ENTRY}${2}  Timestamp
+    Should Be True  ${time_stamp2} > ${time_stamp1}
+
+
 *** Keywords ***
 
 Verify logging-test
@@ -94,3 +162,12 @@ Verify Test Error Log
     ${content}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Severity
     Should Be Equal  ${content}
     ...  xyz.openbmc_project.Logging.Entry.Level.Error
+
+Delete Error logs
+    [Documentation]  Delete error logs.
+
+    # The REST method to delete error openbmc/openbmc#1327
+    # until then using logging restart.
+    Execute Command On BMC
+    ...  systemctl restart xyz.openbmc_project.Logging.service
+    Sleep  10s  reason=Wait for logging service to restart properly.
