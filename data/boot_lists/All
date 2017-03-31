@@ -12,12 +12,20 @@ IPMI Power Soft
 IPMI Power Soft (mfg)
 Host Power Off
 Host Power Off (mfg)
-OBMC Reboot
-OBMC Reboot (mfg)
-PDU AC Cycle
-PDU AC Cycle (mfg)
-IPMI MC Reset Warm
-IPMI MC Reset Warm (mfg)
+APOR
+APOR (mfg)
+OBMC Reboot (run)
+OBMC Reboot (run) (mfg)
+OBMC Reboot (off)
+OBMC Reboot (off) (mfg)
+PDU AC Cycle (run)
+PDU AC Cycle (run) (mfg)
+PDU AC Cycle (off)
+PDU AC Cycle (off) (mfg)
+IPMI MC Reset Warm (run)
+IPMI MC Reset Warm (run) (mfg)
+IPMI MC Reset Warm (off)
+IPMI MC Reset Warm (off) (mfg)
 IPMI Power Cycle
 IPMI Power Cycle (mfg)
 IPMI Power Reset

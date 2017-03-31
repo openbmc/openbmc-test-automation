@@ -1,4 +1,14 @@
-OBMC Reboot
-OBMC Reboot (mfg)
-PDU AC Cycle
-PDU AC Cycle (mfg)
+APOR
+APOR (mfg)
+OBMC Reboot (run)
+OBMC Reboot (run) (mfg)
+OBMC Reboot (off)
+OBMC Reboot (off) (mfg)
+PDU AC Cycle (run)
+PDU AC Cycle (run) (mfg)
+PDU AC Cycle (off)
+PDU AC Cycle (off) (mfg)
+IPMI MC Reset Warm (run)
+IPMI MC Reset Warm (run) (mfg)
+IPMI MC Reset Warm (off)
+IPMI MC Reset Warm (off) (mfg)

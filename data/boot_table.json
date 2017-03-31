@@ -4,11 +4,13 @@
     # Initiate a power on using the REST API interface.
     "REST Power On": {
         "start": {
+            "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Off$",
             "host": "^Off$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
@@ -24,11 +26,13 @@
     # Initiate a power on using the IPMI interface.
     "IPMI Power On": {
         "start": {
+            "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Off$",
             "host": "^Off$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
@@ -47,11 +51,13 @@
     # Initiate a power off using the REST API interface.
     "REST Power Off": {
         "start": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Off$",
             "host": "^Off$",
@@ -67,11 +73,13 @@
     # Initiate a power off using the IPMI interface.
     "IPMI Power Off": {
         "start": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Off$",
             "host": "^Off$",
@@ -87,11 +95,13 @@
     # Initiate a power soft using the IPMI interface.
     "IPMI Power Soft": {
         "start": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Off$",
             "host": "^Off$",
@@ -107,6 +117,7 @@
     # Run a "shutdown" command on the OS_HOST.
     "Host Power Off": {
         "start": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
@@ -115,6 +126,7 @@
             "os_run_cmd": "^1$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Off$",
             "host": "^Off$",
@@ -130,12 +142,64 @@
 
     # OBMC re-boot boot types:
 
-    # Run a "reboot" on the OBMC.
-    "OBMC Reboot": {
+    # APOR - Auto Power On Restart - Note that this is functionally equivalent
+    # to 'PDU AC Cycle (run)'.
+    "APOR": {
         "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Set Global Variable  ${PDU_TYPE}  pdu ; Set Global Variable  ${PDU_IP}  ${PDU_HOST} ; PDU Power Cycle",
+        "lib_file_path": "pdu/pdu.robot:pdu/synaccess.robot"
+    },
+    # Run a "reboot" on the OBMC while host is running.
+    "OBMC Reboot (run)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Open Connection And Log In ; Start Command  /sbin/reboot"
+    },
+    # Run a "reboot" on the OBMC while host is off.
+    "OBMC Reboot (off)": {
+        "start": {
+            "rest": "^1$",
             "chassis": "^Off$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Off$",
             "host": "^Off$"
@@ -144,12 +208,39 @@
         "method_type": "keyword",
         "method": "Open Connection And Log In ; Start Command  /sbin/reboot"
     },
-    # Cycle AC via the PDU.
-    "PDU AC Cycle": {
+    # Cycle AC via the PDU while host is off.
+    "PDU AC Cycle (run)": {
         "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Set Global Variable  ${PDU_TYPE}  pdu ; Set Global Variable  ${PDU_IP}  ${PDU_HOST} ; PDU Power Cycle",
+        "lib_file_path": "pdu/pdu.robot:pdu/synaccess.robot"
+    },
+    # Cycle AC via the PDU while host is off.
+    "PDU AC Cycle (off)": {
+        "start": {
+            "rest": "^1$",
             "chassis": "^Off$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Off$",
             "host": "^Off$"
@@ -159,12 +250,41 @@
         "method": "Set Global Variable  ${PDU_TYPE}  pdu ; Set Global Variable  ${PDU_IP}  ${PDU_HOST} ; PDU Power Cycle",
         "lib_file_path": "pdu/pdu.robot:pdu/synaccess.robot"
     },
-    # Initiate an mc reset warm using the IPMI interface.
-    "IPMI MC Reset Warm": {
+    # Initiate an mc reset warm using the IPMI interface while chassis is
+    # powered on.
+    "IPMI MC Reset Warm (run)": {
         "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  mc reset warm ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    # Initiate an mc reset warm using the IPMI interface while chassis is
+    # powered off.
+    "IPMI MC Reset Warm (off)": {
+        "start": {
+            "rest": "^1$",
             "chassis": "^Off$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Off$",
             "host": "^Off$"
@@ -180,6 +300,7 @@
     # Initiate a power cycle using the IPMI interface (equivalent to off/on).
     "IPMI Power Cycle": {
         "start": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
@@ -188,6 +309,7 @@
             "os_run_cmd": "^1$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
@@ -204,6 +326,7 @@
     # Functionally equivalent to "IPMI Power Cycle".
     "IPMI Power Reset": {
         "start": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
@@ -212,6 +335,7 @@
             "os_run_cmd": "^1$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
@@ -227,6 +351,7 @@
     # Do an auto reboot by setting auto reboot to "yes" and going to quiesce state.
     "Auto Reboot": {
         "start": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
@@ -235,6 +360,7 @@
             "os_run_cmd": "^1$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
@@ -250,6 +376,7 @@
     # Run a "reboot" command on the OS_HOST.
     "Host Reboot": {
         "start": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
@@ -258,6 +385,7 @@
             "os_run_cmd": "^1$"
         },
         "end": {
+            "rest": "^1$",
             "chassis": "^On$",
             "boot_progress": "^FW Progress, Starting OS$",
             "host": "^Running$",
