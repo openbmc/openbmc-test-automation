@@ -43,3 +43,5 @@
 -e eSEL_Logging
 #openbmc/openbmc-test-automation/issues/396
 -e NetworkManager
+# Sytem LED test are NA for Witherspoon.
+-e System_LED
