@@ -91,7 +91,8 @@ if OBMC_STATES_VERSION == 0:
 
 else:
     # default_state is an initial value which may be of use to callers.
-    default_state = DotDict([('chassis', 'On'),
+    default_state = DotDict([('rest', '1'),
+                             ('chassis', 'On'),
                              ('boot_progress', 'FW Progress, Starting OS'),
                              ('host', 'Running'),
                              ('os_ping', '1'),
@@ -105,6 +106,7 @@ else:
                         'packet_loss',
                         'uptime',
                         'epoch_seconds',
+                        'rest',
                         'chassis',
                         'boot_progress',
                         'host',
@@ -113,7 +115,8 @@ else:
                         'os_run_cmd']
     # When a user calls get_state w/o specifying req_states, default_req_states
     # is used as its value.
-    default_req_states = ['chassis',
+    default_req_states = ['rest',
+                          'chassis',
                           'boot_progress',
                           'host',
                           'os_ping',
@@ -473,6 +476,7 @@ def get_state(openbmc_host="",
     uptime = ''
     epoch_seconds = ''
     power = ''
+    rest = '1'
     chassis = ''
     bmc = ''
     boot_progress = ''
@@ -549,14 +553,16 @@ def get_state(openbmc_host="",
             if shell_rc == 0:
                 epoch_seconds = out_buf.rstrip("\n")
 
-    if 'power' in req_states:
-        cmd_buf = ["Get Power State", "quiet=${" + str(quiet) + "}"]
-        grp.rdpissuing_keyword(cmd_buf)
-        status, ret_values = \
-            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-        if status == "PASS":
-            power = ret_values
-    if 'chassis' in req_states:
+    master_req_rest = ['rest', 'power', 'chassis', 'bmc', 'boot_progress',
+                       'host']
+    req_rest = [sub_state for sub_state in req_states if sub_state in
+                master_req_rest]
+    need_rest = (len(req_rest) > 0)
+
+    # Though we could try to determine 'rest' state on any of several calls,
+    # for simplicity, we'll use 'chassis' to figure it out (even if the caller
+    # hasn't explicitly asked for 'chassis').
+    if 'chassis' in req_states or need_rest:
         cmd_buf = ["Get Chassis Power State", "quiet=${" + str(quiet) + "}"]
         grp.rdpissuing_keyword(cmd_buf)
         status, ret_values = \
@@ -564,39 +570,51 @@ def get_state(openbmc_host="",
         if status == "PASS":
             chassis = ret_values
             chassis = re.sub(r'.*\.', "", chassis)
-
-    if 'bmc' in req_states:
-        if OBMC_STATES_VERSION == 0:
-            qualifier = "utils"
+            rest = '1'
         else:
-            # This will not be supported much longer.
-            qualifier = "state_manager"
+            rest = ret_values
 
-        cmd_buf = [qualifier + ".Get BMC State", "quiet=${" + str(quiet) + "}"]
-        grp.rdpissuing_keyword(cmd_buf)
-        status, ret_values = \
-            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-        if status == "PASS":
-            bmc = ret_values
-
-    if 'boot_progress' in req_states:
-        cmd_buf = ["Get Boot Progress", "quiet=${" + str(quiet) + "}"]
-        grp.rdpissuing_keyword(cmd_buf)
-        status, ret_values = \
-            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-        if status == "PASS":
-            boot_progress = ret_values
-
-    if 'host' in req_states:
-        if OBMC_STATES_VERSION > 0:
-            cmd_buf = ["Get Host State", "quiet=${" + str(quiet) + "}"]
+    if rest == '1':
+        if 'power' in req_states:
+            cmd_buf = ["Get Power State", "quiet=${" + str(quiet) + "}"]
             grp.rdpissuing_keyword(cmd_buf)
             status, ret_values = \
                 BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
             if status == "PASS":
-                host = ret_values
-                # Strip everything up to the final period.
-                host = re.sub(r'.*\.', "", host)
+                power = ret_values
+
+        if 'bmc' in req_states:
+            if OBMC_STATES_VERSION == 0:
+                qualifier = "utils"
+            else:
+                # This will not be supported much longer.
+                qualifier = "state_manager"
+            cmd_buf = [qualifier + ".Get BMC State",
+                       "quiet=${" + str(quiet) + "}"]
+            grp.rdpissuing_keyword(cmd_buf)
+            status, ret_values = \
+                BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+            if status == "PASS":
+                bmc = ret_values
+
+        if 'boot_progress' in req_states:
+            cmd_buf = ["Get Boot Progress", "quiet=${" + str(quiet) + "}"]
+            grp.rdpissuing_keyword(cmd_buf)
+            status, ret_values = \
+                BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+            if status == "PASS":
+                boot_progress = ret_values
+
+        if 'host' in req_states:
+            if OBMC_STATES_VERSION > 0:
+                cmd_buf = ["Get Host State", "quiet=${" + str(quiet) + "}"]
+                grp.rdpissuing_keyword(cmd_buf)
+                status, ret_values = \
+                    BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+                if status == "PASS":
+                    host = ret_values
+                    # Strip everything up to the final period.
+                    host = re.sub(r'.*\.', "", host)
 
     state = DotDict()
     for sub_state in req_states:
@@ -865,7 +883,7 @@ def wait_for_comm_cycle(start_boot_seconds):
         BuiltIn().fail(gp.sprint_error(error_message))
 
     gp.print_timen("Verifying that REST API interface is working.")
-    match_state = DotDict([('chassis', '.*')])
+    match_state = DotDict([('rest', '^1$')])
     state = wait_state(match_state, wait_time="5 mins", interval="2 seconds")
 
 ###############################################################################
