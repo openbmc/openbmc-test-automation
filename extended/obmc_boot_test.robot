@@ -16,7 +16,7 @@ Resource  openbmc_ffdc.robot
 ...  openbmc_serial_port  boot_stack  boot_list  max_num_tests
 ...  plug_in_dir_paths  status_file_path  openbmc_model  boot_pass  boot_fail
 ...  ffdc_dir_path_style  ffdc_check  state_change_timeout  power_on_timeout
-...  power_off_timeout  test_mode  quiet  debug
+...  power_off_timeout  ffdc_only  test_mode  quiet  debug
 
 # Initialize each program parameter.
 ${openbmc_host}             ${EMPTY}
@@ -48,6 +48,7 @@ ${ffdc_check}               ${EMPTY}
 ${state_change_timeout}     3 mins
 ${power_on_timeout}         14 mins
 ${power_off_timeout}        2 mins
+${ffdc_only}                ${0}
 ${test_mode}                0
 ${quiet}                    0
 ${debug}                    0
