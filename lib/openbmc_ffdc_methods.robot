@@ -293,4 +293,22 @@ Collect eSEL Log
     \  Write Data To File  "${esel_data[0]}"  ${logpath}
     \  Write Data To File  ${\n}  ${logpath}
 
+    ${out}=  Run  which eSEL.pl
+    ${status}=  Run Keyword And Return Status
+    ...  Should Contain  ${out}  eSEL.pl
+    Return From Keyword If  '${status}' == '${False}'
+
+    Convert eSEL To Elog Format  ${logpath}
+
+
+##############################################################################
+Convert eSEL To Elog Format
+    [Documentation]  Execute parser tool on the eSEL data file to generate
+    ...              formated error log.
+    [Arguments]  ${esel_file_path}
+    # Desription of arguments:
+    # ${esel_file_path}  Absoulte path of the eSEL data.
+
+    Run  eSEL.pl -l ${esel_file_path}
+
 ##############################################################################
