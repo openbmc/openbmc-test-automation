@@ -11,6 +11,8 @@ Resource          ../lib/state_manager.robot
 Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
+# User inout OS parameter.
+${OS_HOST}    ${EMPTY}
 
 *** Test Cases ***
 
@@ -24,6 +26,10 @@ Host BIOS Update And Boot
     Update PNOR Image
     Start SOL Console Logging
     Validate IPL
+
+    # Skip validating OS ping check if not given.
+    Run Keyword If  '${OS_HOST}' != '${EMPTY}'
+    ...  Wait For Host To Ping  ${OS_HOST}
 
 Collect SOL Data
     [Tags]    open-power
