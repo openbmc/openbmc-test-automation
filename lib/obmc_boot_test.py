@@ -32,8 +32,8 @@ import run_keyword as rk
 # Program parameter processing.
 # Assign all program parms to python variables which are global to this module.
 parm_list = BuiltIn().get_variable_value("${parm_list}")
-int_list = ['max_num_tests', 'boot_pass', 'boot_fail', 'quiet', 'test_mode',
-            'debug']
+int_list = ['max_num_tests', 'boot_pass', 'boot_fail', 'ffdc_only', 'quiet',
+            'test_mode', 'debug']
 for parm in parm_list:
     if parm in int_list:
         sub_cmd = "int(BuiltIn().get_variable_value(\"${" + parm +\
@@ -266,7 +266,7 @@ def validate_parms():
     BuiltIn().set_global_variable("${plug_in_packages_list}",
                                   plug_in_packages_list)
 
-    if len(boot_list) == 0 and len(boot_stack) == 0:
+    if len(boot_list) == 0 and len(boot_stack) == 0 and not ffdc_only:
         error_message = "You must provide either a value for either the" +\
             " boot_list or the boot_stack parm.\n"
         BuiltIn().fail(gp.sprint_error(error_message))
@@ -690,6 +690,15 @@ def main_py():
     """
 
     setup()
+
+    if ffdc_only:
+        gp.qprint_timen("Caller requested ffdc_only.")
+        cmd_buf = ["my_ffdc"]
+        grp.rpissuing_keyword(cmd_buf)
+        try:
+            BuiltIn().run_keyword_and_continue_on_failure(*cmd_buf)
+        except:
+            gp.print_error("Call to my_ffdc failed.\n")
 
     # Process caller's boot_stack.
     while (len(boot_stack) > 0):
