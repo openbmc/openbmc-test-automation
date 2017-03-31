@@ -62,7 +62,7 @@ Validate IPL
     Initiate Power On
     Wait Until Keyword Succeeds
     ...  10 min    30 sec   Is System State Host Booted
-
+    Wait For Host To Ping
 
 Validate Parameters
     [Documentation]   Validate parameter and file existence.
