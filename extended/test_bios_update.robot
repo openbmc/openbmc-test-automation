@@ -24,6 +24,7 @@ Host BIOS Update And Boot
     Update PNOR Image
     Start SOL Console Logging
     Validate IPL
+    Wait For Host To Ping ${OS_HOST}
 
 Collect SOL Data
     [Tags]    open-power
