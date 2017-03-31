@@ -136,10 +136,10 @@ Log Test Case Status
     ...  20160909214053719992:Test Warmreset:Test WarmReset via REST:FAIL
     Create Directory   ${FFDC_LOG_PATH}
 
-    ${exist}=   Run Keyword and Return Status
+    ${out}=   Run Keyword and Return Status
     ...   OperatingSystem.File Should Exist   ${TEST_HISTORY}
 
-    Run Keyword If  '${exist}' == '${False}'
+    Run Keyword If  '${out}' == '${False}'
     ...   Create File  ${TEST_HISTORY}
 
     ${cur_time}=      Get Current Time Stamp
@@ -242,7 +242,7 @@ OS FFDC Files
 ##############################################################################
 SCP Coredump Files
     [Documentation]  Copy core dump file from BMC to local system.
-    # Check if core dump exist in the /tmp
+    # Check if core dump out in the /tmp
     Open Connection And Log In
     ${core_files}=  Execute Command  ls /tmp/core_*
     @{core_list} =  Split String    ${core_files}
@@ -292,5 +292,23 @@ Collect eSEL Log
     \  Continue For Loop If  ${length} == ${0}
     \  Write Data To File  "${esel_data[0]}"  ${logpath}
     \  Write Data To File  ${\n}  ${logpath}
+
+    ${out}=  Run  which eSEL_ami.pl
+    ${status}=  Run Keyword And Return Status
+    ...  Should Contain  ${out}  eSEL_ami.pl
+    Return From Keyword If  '${status}' == '${False}'
+
+    Convert eSEL To Elog Format  ${logpath}
+
+
+##############################################################################
+Convert eSEL To Elog Format
+    [Documentation]  Execute parser tool on the eSEL data file to generate
+    ...              formated error log.
+    [Arguments]  ${esel_file_path}
+    # Desription of arguments:
+    # ${esel_file_path}  Absoulte path of the eSEL data.
+
+    Run  eSEL_ami.pl -l ${esel_file_path}
 
 ##############################################################################
