@@ -1,238 +1,121 @@
 *** Settings ***
 
-Documentation     This testsuite is for testing the functions of Heartbeat,
-...               Identify and Power LED's
+Documentation     Test the functions of physical LEDs.
 
 Resource          ../lib/rest_client.robot
+Resource          ../lib/state_manager.robot
 Resource          ../lib/resource.txt
 Resource          ../lib/openbmc_ffdc.robot
+
 Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
 
-${MIN_TOGGLE_VALUE}    0
-${SAMPLING_FREQUENCY}  6
-
-${LED_CONTROL}    ${CONTROL_URI}led/
 
 *** Test Cases ***
 
-Validate Heartbeat LEDs Test Cases
-    [Documentation]   If heartbeat LED exist then execute the test set.
-    [Tags]  Validate_Heartbeat_LEDs_Test_Cases
-    ${resp}=   OpenBMC Get Request   ${LED_CONTROL}heartbeat
-    Run keyword If  ${resp.status_code} == ${HTTP_OK}   Execute Heartbeat LEDs Test Cases
+Turn On Off Heartbeat LED And Verify
+    [Documentation]  Turn On Off heartbeat LED and verify via REST.
+    #LED Name  LED State
+    heartbeat  On
+    heartbeat  Off
 
-Validate Identify LEDs Test Cases
-    [Documentation]   If identify LED exist then execute the test set.
-    [Tags]  Validate_Identify_LEDs_Test_Cases
-    ${resp}=   OpenBMC Get Request   ${LED_CONTROL}identify
-    Run keyword If  ${resp.status_code} == ${HTTP_OK}   Execute Identify LEDs Test Cases
+    [Tags]  Turn_On_Off_Heartbeat_LED_And_Verify
+    [Template]  Set Physical LED State
 
-Validate Beep LEDs Test Cases
-    [Documentation]   If beep LED exist then execute the test set.
-    [Tags]  Validate_Beep_LEDs_Test_Cases
-    ${resp}=   OpenBMC Get Request   ${LED_CONTROL}beep
-    Run keyword If  ${resp.status_code} == ${HTTP_OK}  Execute Beep LEDs Test Cases
+
+Turn On Off Beep LED And Verify
+    [Documentation]  Turn On Off beep LED and verify via REST.
+    #LED Name  LED State
+    beep       On
+    beep       Off
+
+    [Tags]  Turn_On_Off_Beep_LED_And_Verify
+    [Template]  Set Physical LED State
+
+
+Turn On Off Identify LED And Verify
+    [Documentation]  Turn On Off identify LED and verify via REST.
+    #LED Name  LED State
+    identify   On
+    identify   Off
+
+    [Tags]  Turn_On_Off_Identify_LED_And_Verify
+    [Template]  Set Physical LED State
+
+Verify Heartbeat LEDs On State With Host Booted
+    [Documentation]  Verify heartbeat LED's "On" state with host booted.
+    [Tags]  Verify_Heartbeat_LEDs_On_State_With_Host_Booted
+
+    Initiate Host Boot
+    Verify LED State  heartbeat  On
+
+Verify Heartbeat LEDs Off State With Host Off
+    [Documentation]  Verify heartbeat LED's "Off" state with host off.
+    [Tags]  Verify_Heartbeat_LEDs_Off_State_With_Host_Off
+
+    Initiate Host PowerOff
+    Verify LED State  heartbeat  Off
+
+Verify Beep LEDs Off State With BMC Ready
+    [Documentation]  Verify beep LED's "Off" state with BMC Ready.
+    [Tags]  Verify_Beep_LEDs_Off_State_With_BMC_Ready
+
+    Put BMC State  Ready
+    Verify LED State  beep  Off
+
+Verify Beep LEDs On State With BMC Not Ready
+    [Documentation]  Verify beep LED's "On" state with BMC Not Ready.
+    [Tags]  Verify_Beep_LEDs_On_State_With_BMC_Not_Ready
+
+    Put BMC State  NotReady
+    Verify LED State  beep  On
+
+Verify Identify LEDs Off State
+    [Documentation]  Verify identify LED's "Off" state.
+    [Tags]  Verify_Identify_LEDs_Off_State
+
+    Set LED State  Off  EnclosureIdentify
+    Verify LED State  identify  Off
+
+Verify Identify LEDs Blink State
+    [Documentation]  Verify identify LED's "Blink" state.
+    [Tags]  Verify_Identify_LEDs_Blink_State
+
+    Set LED State  On  EnclosureIdentify
+    Verify LED State  identify  Blink
 
 *** Keywords ***
 
-Execute Heartbeat LEDs Test Cases
-    [Documentation]   Executing ON/OFF/Fast/Slow Heartbeat LED test cases.
-    Turn ON the Heartbeat LED
-    Turn OFF the Heartbeat LED
-    Blink Fast the Heartbeat LED
-    Blink Slow the Heartbeat LED
+Get Physical LED State
+    [Documentation]  Returns the state of given physical LED.
+    [Arguments]  ${led_name}
+    # Description of arguments:
+    # led_name     Physical LED name.
 
-Execute Identify LEDs Test Cases
-    [Documentation]   Executing ON/OFF/Fast/Slow Identify LED test cases.
-    Turn ON the Identify LED
-    Turn OFF the Identify LED
-    Blink Fast the Identify LED
-    Blink Slow the Identify LED
+    ${state}=  Read Attribute  ${LED_PHYSICAL_URI}${led_name}  State
+    #${state}=  OpenBMC Get Request  ${LED_PHYSICAL_URI}${led_name}
+    [Return]  ${state.rsplit('.', 1)[1]}
 
-Execute Beep LEDs Test Cases
-    [Documentation]   Executing ON/OFF/Fast/Slow Beep LED test cases.
-    Turn ON the Beep LED
-    Turn OFF the Beep LED
-    Blink Fast the Beep LED
-    Blink Slow the Beep LED
+Set Physical LED State
+    [Documentation]  Set given physical LED via REST.
+    [Arguments]  ${led_name}  ${led_state}
+    # Description of arguments:
+    # led_name     Physical LED name.
+    # led_state    LED state to be set.
 
-Turn ON the Heartbeat LED
-   [Documentation]   This testcase is to test the setOn functionality of the
-   ...               Heartbeat LED. The LED state is read again to check if
-   ...               the LED is in ON state.
-   Set On   heartbeat
-   ${ledstate}=   Get LED State   heartbeat
-   should be equal as strings   ${ledstate}   On
+    ${args}=  Create Dictionary  data=xyz.openbmc_project.Led.Physical.Action.${led_state}
+    Write Attribute  ${LED_PHYSICAL_URI}${led_name}  State  data=${args}
 
-Turn OFF the Heartbeat LED
-   [Documentation]   This testcase is to test the setOff functionality of the
-   ...               Heartbeat LED. The LED state is read again to check if
-   ...               the LED is in OFF state.
-   Set Off   heartbeat
-   ${ledstate}=   Get LED State   heartbeat
-   should be equal as strings   ${ledstate}   Off
+    ${state}=  Get Physical LED State  ${led_name}
+    Should Be Equal  ${state}  ${led_state}
 
-Blink Fast the Heartbeat LED
-   [Documentation]   This testcase is to test the setBlinkFast functionality of the
-   ...               Heartbeat LED. The LED state is sampled to figure out
-   ...               whether the LED is blinking. There is no distinguishing
-   ...               between whether the LED is blinking fast or slow for
-   ...               this testcase to pass.
-   ${OFF_VALUE}=   Set Variable   ${0}
-   ${ON_VALUE}=   Set Variable   ${0}
-   Set Blink Fast   heartbeat
-   : FOR   ${INDEX}   IN RANGE   1   ${SAMPLING_FREQUENCY}
-   \   ${ledstate}=   Get LED State   heartbeat
-   \   ${ON_VALUE}=   Set Variable If   '${ledstate}'=='On'   ${ON_VALUE + 1}   ${ON_VALUE}
-   \   ${OFF_VALUE}=   Set Variable If   '${ledstate}'=='Off'   ${OFF_VALUE + 1}   ${OFF_VALUE}
-   should be true   ${ON_VALUE} > ${MIN_TOGGLE_VALUE} and ${OFF_VALUE} > ${MIN_TOGGLE_VALUE}
+Verify LED State
+    [Documentation]  Checks if LED is in given state.
+    [Arguments]  ${led_name}  ${led_state}
+    # Description of arguments:
+    # led_name     Physical LED name.
+    # led_state    LED state to be verified.
 
-Blink Slow the Heartbeat LED
-   [Documentation]   This testcase is to test the setBlinkSlow functionality of the
-   ...               Heartbeat LED. The LED state is sampled to figure out
-   ...               whether the LED is blinking. There is no distinguishing
-   ...               between whether the LED is blinking fast or slow for
-   ...               this testcase to pass.
-   ${OFF_VALUE}=   Set Variable   ${0}
-   ${ON_VALUE}=   Set Variable   ${0}
-   Set Blink Slow   heartbeat
-   : FOR   ${INDEX}   IN RANGE   1   ${SAMPLING_FREQUENCY}
-   \   ${ledstate}=   Get LED State   heartbeat
-   \   ${ON_VALUE}=   Set Variable If   '${ledstate}'=='On'   ${ON_VALUE + 1}   ${ON_VALUE}
-   \   ${OFF_VALUE}=   Set Variable If   '${ledstate}'=='Off'   ${OFF_VALUE + 1}   ${OFF_VALUE}
-   should be true   ${ON_VALUE} > ${MIN_TOGGLE_VALUE} and ${OFF_VALUE} > ${MIN_TOGGLE_VALUE}
-
-Turn ON the Identify LED
-   [Documentation]   This testcase is to test the setOn functionality of the
-   ...               Identify LED. The LED state is read again to check if
-   ...               the LED is in ON state.
-   Set On   identify
-   ${ledstate}=   Get LED State   identify
-   should be equal as strings   ${ledstate}   On
-
-Turn OFF the Identify LED
-   [Documentation]   This testcase is to test the setOff functionality of the
-   ...               Identify LED. The LED state is read again to check if
-   ...               the LED is in OFF state.
-   Set Off   identify
-   ${ledstate}=   Get LED State   identify
-   should be equal as strings   ${ledstate}   Off
-
-Blink Fast the Identify LED
-   [Documentation]   This testcase is to test the setBlinkFast functionality of the
-   ...               Identify LED. The LED state is sampled to figure out
-   ...               whether the LED is blinking. There is no distinguishing
-   ...               between whether the LED is blinking fast or slow for
-   ...               this testcase to pass.
-   ${OFF_VALUE}=   Set Variable   ${0}
-   ${ON_VALUE}=   Set Variable   ${0}
-   Set Blink Fast   identify
-   : FOR   ${INDEX}   IN RANGE   1   ${SAMPLING_FREQUENCY}
-   \   ${ledstate}=   Get LED State   identify
-   \   ${ON_VALUE}=   Set Variable If   '${ledstate}'=='On'   ${ON_VALUE + 1}   ${ON_VALUE}
-   \   ${OFF_VALUE}=   Set Variable If   '${ledstate}'=='Off'   ${OFF_VALUE + 1}   ${OFF_VALUE}
-   should be true   ${ON_VALUE} > ${MIN_TOGGLE_VALUE} and ${OFF_VALUE} > ${MIN_TOGGLE_VALUE}
-
-Blink Slow the Identify LED
-   [Documentation]   This testcase is to test the setBlinkSlow functionality of the
-   ...               Identify LED. The LED state is sampled to figure out
-   ...               whether the LED is blinking. There is no distinguishing
-   ...               between whether the LED is blinking fast or slow for
-   ...               this testcase to pass.
-   ${OFF_VALUE}=   Set Variable   ${0}
-   ${ON_VALUE}=   Set Variable   ${0}
-   Set Blink Slow   identify
-   : FOR   ${INDEX}   IN RANGE   1   ${SAMPLING_FREQUENCY}
-   \   ${ledstate}=   Get LED State   identify
-   \   ${ON_VALUE}=   Set Variable If   '${ledstate}'=='On'   ${ON_VALUE + 1}   ${ON_VALUE}
-   \   ${OFF_VALUE}=   Set Variable If   '${ledstate}'=='Off'   ${OFF_VALUE + 1}   ${OFF_VALUE}
-   should be true   ${ON_VALUE} > ${MIN_TOGGLE_VALUE} and ${OFF_VALUE} > ${MIN_TOGGLE_VALUE}
-
-Turn ON the Beep LED
-   [Documentation]   This testcase is to test the setOn functionality of the
-   ...               Beep LED. The LED state is read again to check if
-   ...               the LED is in ON state.
-   Set On   beep
-   ${ledstate}=   Get LED State   beep
-   should be equal as strings   ${ledstate}   On
-
-Turn OFF the Beep LED
-   [Documentation]   This testcase is to test the setOff functionality of the
-   ...               Beep LED. The LED state is read again to check if
-   ...               the LED is in OFF state.
-   Set Off   beep
-   ${ledstate}=   Get LED State   beep
-   should be equal as strings   ${ledstate}   Off
-
-Blink Fast the Beep LED
-   [Documentation]   This testcase is to test the setBlinkFast functionality of the
-   ...               Beep LED. The LED state is sampled to figure out
-   ...               whether the LED is blinking. There is no distinguishing
-   ...               between whether the LED is blinking fast or slow for
-   ...               this testcase to pass.
-   ${OFF_VALUE}=   Set Variable   ${0}
-   ${ON_VALUE}=   Set Variable   ${0}
-   ${data}=   create dictionary   data=@{EMPTY}
-   Set Blink Fast   beep
-   : FOR   ${INDEX}   IN RANGE   1   ${SAMPLING_FREQUENCY}
-   \   ${ledstate}=   Get LED State   beep
-   \   ${ON_VALUE}=   Set Variable If   '${ledstate}'=='On'   ${ON_VALUE + 1}   ${ON_VALUE}
-   \   ${OFF_VALUE}=   Set Variable If   '${ledstate}'=='Off'   ${OFF_VALUE + 1}   ${OFF_VALUE}
-   should be true   ${ON_VALUE} > ${MIN_TOGGLE_VALUE} and ${OFF_VALUE} > ${MIN_TOGGLE_VALUE}
-
-Blink Slow the Beep LED
-   [Documentation]   This testcase is to test the setBlinkSlow functionality of the
-   ...               Beep LED. The LED state is sampled to figure out
-   ...               whether the LED is blinking. There is no distinguishing
-   ...               between whether the LED is blinking fast or slow for
-   ...               this testcase to pass.
-   ${OFF_VALUE}=   Set Variable   ${0}
-   ${ON_VALUE}=   Set Variable   ${0}
-   Set Blink Slow   beep
-   : FOR   ${INDEX}   IN RANGE   1   ${SAMPLING_FREQUENCY}
-   \   ${ledstate}=   Get LED State   beep
-   \   ${ON_VALUE}=   Set Variable If   '${ledstate}'=='On'   ${ON_VALUE + 1}   ${ON_VALUE}
-   \   ${OFF_VALUE}=   Set Variable If   '${ledstate}'=='Off'   ${OFF_VALUE + 1}   ${OFF_VALUE}
-   should be true   ${ON_VALUE} > ${MIN_TOGGLE_VALUE} and ${OFF_VALUE} > ${MIN_TOGGLE_VALUE}
-
-Get LED State
-   [Arguments]    ${args}
-   ${data}=   create dictionary   data=@{EMPTY}
-   ${resp}=   OpenBMC Post Request   ${LED_CONTROL}${args}/action/GetLedState   data=${data}
-   should be equal as strings   ${resp.status_code}   ${HTTP_OK}
-   ${json}=   to json   ${resp.content}
-   [Return]    ${json['data'][1]}
-
-Set On
-   [Arguments]    ${args}
-   ${data}=   create dictionary   data=@{EMPTY}
-   ${resp}=   OpenBMC Post Request   ${LED_CONTROL}${args}/action/setOn   data=${data}
-   should be equal as strings   ${resp.status_code}   ${HTTP_OK}
-   ${json}=   to json   ${resp.content}
-   should be equal as integers   ${json['data']}   0
-
-Set Off
-   [Arguments]    ${args}
-   ${data}=   create dictionary   data=@{EMPTY}
-   ${resp}=   OpenBMC Post Request   ${LED_CONTROL}${args}/action/setOff   data=${data}
-   should be equal as strings   ${resp.status_code}   ${HTTP_OK}
-   ${json}=   to json   ${resp.content}
-   should be equal as integers   ${json['data']}   0
-
-Set Blink Fast
-   [Arguments]    ${args}
-   ${data}=   create dictionary   data=@{EMPTY}
-   ${resp}=   OpenBMC Post Request   ${LED_CONTROL}${args}/action/setBlinkFast   data=${data}
-   should be equal as strings   ${resp.status_code}   ${HTTP_OK}
-   ${json}=   to json   ${resp.content}
-   should be equal as integers   ${json['data']}   0
-
-Set Blink Slow
-   [Arguments]    ${args}
-   ${data}=   create dictionary   data=@{EMPTY}
-   ${resp}=   OpenBMC Post Request   ${LED_CONTROL}${args}/action/setBlinkSlow   data=${data}
-   should be equal as strings   ${resp.status_code}   ${HTTP_OK}
-   ${json}=   to json   ${resp.content}
-   should be equal as integers   ${json['data']}   0
+    ${state}=  Get Physical LED State  ${led_name}
+    Should Be Equal  ${state}  ${led_state}

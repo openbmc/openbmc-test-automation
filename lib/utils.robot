@@ -807,3 +807,20 @@ Configure Initial Settings
     Run Keyword And Ignore Error  Open Telnet Connection to BMC Serial Console
     Telnet.write  ifconfig eth0 ${host} netmask ${mask}
     Telnet.write  route add default gw ${gw_ip}
+
+Set LED State
+    [Documentation]  Set state of given LED to on or off.
+    [Arguments]  ${state}  ${led_name}
+    # Description of arguments:
+    # state     LED's state to set, i.e. On or Off
+    # led_name  Name of LED
+
+    ${data}=  Run Keyword If
+    ...  '${state}' == 'On'  Create Dictionary  data=${True}
+    ...  ELSE IF  '${state}' == 'Off'  Create Dictionary  data=${False}
+    ...  ELSE  Fail  msg=Invalid LED state
+
+    ${resp}=  OpenBMC Put Request
+    ...  ${LED_GROUPS_URI}${led_name}/attr/Asserted  data=${data}
+    ${jsondata}=  to JSON  ${resp.content}
+    Should Be Equal As Strings  ${jsondata['status']}  ok
