@@ -45,7 +45,7 @@ ${boot_pass}                ${0}
 ${boot_fail}                ${0}
 ${ffdc_dir_path_style}      ${EMPTY}
 ${ffdc_check}               ${EMPTY}
-${state_change_timeout}     1 min
+${state_change_timeout}     3 mins
 ${power_on_timeout}         14 mins
 ${power_off_timeout}        2 mins
 ${test_mode}                0
