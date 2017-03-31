@@ -121,6 +121,20 @@ Initialize OpenBMC
     Should Be Equal  ${status}  PASS  msg=${resp}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
+Log Out OpenBMC
+    [Documentation]  Log out REST connection with active session "openbmc".
+
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${data}=  Create dictionary  data=@{EMPTY}
+
+    # If there is no active sesion it will throw the following exception
+    # "Non-existing index or alias 'openbmc'"
+    ${resp}=  Post Request  openbmc
+    ...  /logout  data=${data}  headers=${headers}
+
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ...  msg=${resp}
+
 Log Request
     [Arguments]    &{kwargs}
     ${msg}=  Catenate  SEPARATOR=  URI:  ${AUTH_URI}  ${kwargs["base_uri"]}
