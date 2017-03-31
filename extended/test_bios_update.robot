@@ -8,9 +8,11 @@ Resource          ../lib/connection_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/state_manager.robot
 
-Test Teardown     FFDC On Test Case Fail
+#Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
+# User inout OS parameter.
+${OS_HOST}    ${EMPTY}
 
 *** Test Cases ***
 
@@ -22,16 +24,34 @@ Host BIOS Update And Boot
     Validate Parameters
     Prepare BMC For Update
     Update PNOR Image
-    Start SOL Console Logging
-    Validate IPL
-
-Collect SOL Data
-    [Tags]    open-power
-    [Documentation]   Collect SOL logs from the system
-    Collect SOL Log
-
+    Validate IPL And Collect SOL Data
 
 *** Keywords ***
+Validate IPL
+    [Documentation]  Power the host on, and validate the IPL.
+
+    Initiate Power On
+    Wait Until Keyword Succeeds
+    ...  10 min    30 sec   Is System State Host Booted
+
+Validate IPL And Collect SOL Data
+    [Documentation]   Validate IPL and collect SOL logs from the system
+
+    Start SOL Console Logging
+    Validate IPL
+    # Skip validating OS if not given.
+    Run Keyword If  '${OS_HOST}' != '${EMPTY}'
+    ...  Wait For Host To Ping  ${OS_HOST}
+    Collect SOL Log
+
+Update PNOR Image
+    [Documentation]  Copy the PNOR image to the BMC /tmp dir and flash it.
+
+    Copy PNOR to BMC
+    ${pnor_path}  ${pnor_basename}=   Split Path    ${PNOR_IMAGE_PATH}
+    Flash PNOR   /tmp/${pnor_basename}
+    Wait Until Keyword Succeeds
+    ...  7 min    10 sec    Is PNOR Flash Done
 
 Prepare BMC For Update
     [Documentation]  Prepare system for PNOR update.
@@ -44,24 +64,6 @@ Prepare BMC For Update
     Wait For BMC Ready
 
     Clear BMC Record Log
-
-
-Update PNOR Image
-    [Documentation]  Copy the PNOR image to the BMC /tmp dir and flash it.
-
-    Copy PNOR to BMC
-    ${pnor_path}  ${pnor_basename}=   Split Path    ${PNOR_IMAGE_PATH}
-    Flash PNOR   /tmp/${pnor_basename}
-    Wait Until Keyword Succeeds
-    ...  7 min    10 sec    Is PNOR Flash Done
-
-
-Validate IPL
-    [Documentation]  Power the host on, and validate the IPL.
-
-    Initiate Power On
-    Wait Until Keyword Succeeds
-    ...  10 min    30 sec   Is System State Host Booted
 
 
 Validate Parameters
