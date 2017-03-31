@@ -90,23 +90,6 @@ Get LED State XYZ
     ${state}=  Read Attribute  ${LED_GROUPS_URI}${led_name}  Asserted
     [Return]  ${state}
 
-Set LED State
-    [Documentation]  Set state of given LED to on or off.
-    [Arguments]  ${state}  ${led_name}
-    # Description of arguments:
-    # state     LED's state to set, i.e. On or Off
-    # led_name  Name of LED
-
-    ${data}=  Run Keyword If
-    ...  '${state}' == 'On'  Create Dictionary  data=${True}
-    ...  ELSE IF  '${state}' == 'Off'  Create Dictionary  data=${False}
-    ...  ELSE  Fail  msg=Invalid LED state
-
-    ${resp}=  OpenBMC Put Request
-    ...  ${LED_GROUPS_URI}${led_name}/attr/Asserted  data=${data}
-    ${jsondata}=  to JSON  ${resp.content}
-    Should Be Equal As Strings  ${jsondata['status']}  ok
-
 Verify LED Group
     [Documentation]  Set and validate state of all LEDs with given name.
     [Arguments]  ${led_prefix}  ${led_suffix}=${EMPTY}

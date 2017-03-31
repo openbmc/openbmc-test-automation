@@ -49,6 +49,7 @@ HOST_INVENTORY_URI = '/xyz/openbmc_project/inventory/'
 
 # Led URI variable
 LED_GROUPS_URI = '/xyz/openbmc_project/led/groups/'
+LED_PHYSICAL_URI = '/xyz/openbmc_project/led/physical/'
 
 
 '''
