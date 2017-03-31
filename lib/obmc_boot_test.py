@@ -206,6 +206,11 @@ def setup():
 
     grp.rqprint_pgm_header()
 
+    cmd_buf = ["Set BMC Power Policy", "RESTORE_LAST_STATE"]
+    grp.rpissuing_keyword(cmd_buf, test_mode)
+    if not test_mode:
+        BuiltIn().run_keyword(*cmd_buf)
+
     initial_plug_in_setup()
 
     plug_in_setup()
@@ -268,6 +273,16 @@ def validate_parms():
 
     valid_boot_list(boot_list, valid_boot_types)
     valid_boot_list(boot_stack, valid_boot_types)
+
+    selected_PDU_boots = list(set(boot_list + boot_stack) &
+                              set(boot_lists['PDU_reboot']))
+
+    if len(selected_PDU_boots) > 0 and pdu_host == "":
+        error_message = "You have selected the following boots which" +\
+                        " require a PDU host but no value for pdu_host:\n"
+        error_message += gp.sprint_var(selected_PDU_boots)
+        error_message += gp.sprint_var(pdu_host, 2)
+        BuiltIn().fail(gp.sprint_error(error_message))
 
     return
 
