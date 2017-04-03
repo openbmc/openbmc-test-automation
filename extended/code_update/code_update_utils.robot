@@ -15,6 +15,18 @@ ${HOST_SETTING}      ${OPENBMC_BASE_URI}settings/host0
 
 *** Keywords ***
 
+Validate BMC Image File Name
+    [Documentation]  Check that correct BMC image is in use.
+    [Arguments]         ${filepath}
+    # Description of arguments:
+    # Example file path:  /home/XXX/Downloads/witherspoon-XXX.all.tar
+    Open Connection And Log In
+    ${bmc_model}=  Get BMC System Model
+    ${file_name}=  Fetch From Right  ${filepath}  /
+    ${status}=  Run Keyword And Return Status  Should Contain  ${file_name}
+    ...  ${bmc_model}  ignore_case=True
+    Run Keyword If  '${status}'=='False'  Fatal Error  Wrong Image
+
 Preserve BMC Network Setting
     [Documentation]   Preserve Network setting
     ${policy}=       Set Variable   ${1}
