@@ -29,7 +29,9 @@ Resource          ../../lib/state_manager.robot
 Resource          ../../lib/utils.robot
 Resource          ../../lib/openbmc_ffdc.robot
 
-Test Teardown      FFDC On Test Case Fail
+Library  Collections
+
+# Test Teardown      FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -39,6 +41,15 @@ ${FILE_PATH}       ${EMPTY}
 ${MAX_BOOT_COUNT}  ${2}
 
 *** Test Cases ***
+
+Check Right BMC Image Used
+    [Documentation]  Check that correct BMC image is in use.
+    [Tags]  Check_Right_BMC_Image_Used
+    Open Connection And Log In
+    ${bmc_model}=  Get BMC System Model
+    ${status}=  Run Keyword And Return Status  Should Contain  ${FILE_PATH}
+    ...  ${bmc_model}  ignore_case=True
+    Run Keyword If  '${status}'=='False'  Fatal Error  Wrong Image
 
 Test Basic BMC Performance Before Code Update
     [Documentation]   Check performance of memory, CPU & file system of BMC.
