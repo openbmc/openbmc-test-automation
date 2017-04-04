@@ -847,3 +847,14 @@ Install Debug Tarball On BMC
     # Remove the tarball file from BMC
     Execute Command On BMC  rm /tmp/debug-tarball.tar.xz
 
+
+###############################################################################
+Delete Error logs
+    [Documentation]  Delete error logs.
+
+    # The REST method to delete error openbmc/openbmc#1327
+    # until then using logging restart.
+    Open Connection And Log In
+    Execute Command On BMC
+    ...  systemctl restart xyz.openbmc_project.Logging.service
+    Sleep  10s  reason=Wait for logging service to restart properly.
