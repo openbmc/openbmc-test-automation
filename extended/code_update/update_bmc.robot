@@ -34,6 +34,7 @@ Test Teardown      FFDC On Test Case Fail
 *** Variables ***
 
 ${FILE_PATH}       ${EMPTY}
+${FORCE_UPDATE}    ${0}
 
 # There are two reboots issued by code update.
 ${MAX_BOOT_COUNT}  ${2}
@@ -68,25 +69,10 @@ Initiate Code Update BMC
     # Run Keyword if  '${status}' == '${False}'
     # ...     Pass Execution   Same Driver version installed
 
-    Check Boot Count And Time
-    Prune Journal Log
-    Power Off Request
-    Run Keyword And Ignore Error
-    ...   Set Policy Setting   RESTORE_LAST_STATE
-    Prepare For Update
-
-    Check If BMC is Up  20 min  10 sec
-    Check Boot Count And Time
-
-    # Temporary fix for lab migration for driver which is booted with
-    # BMC state "/xyz/openbmc_project/state/BMC0/".
-    ${status}=  Run Keyword And Return Status  Temp BMC URI Check
-    Run Keyword If  '${status}' == '${False}'
-    ...  Wait For BMC Ready
-    ...  ELSE  Wait For Temp BMC Ready
-
-    # TODO: openbmc/openbmc#815
-    Sleep  1 min
+    # Enable user to bypass prerequisite operations.
+    # Use cases for if BMC is not in working state.
+    Run Keyword If  ${FORCE_UPDATE} == ${0}
+    ...  Prepare BMC For Update
 
     Preserve BMC Network Setting
     SCP Tar Image File to BMC   ${FILE_PATH}
@@ -133,6 +119,27 @@ Enable Core Dump File Size To Be Unlimited
     Set Core Dump File Size Unlimited
 
 *** Keywords ***
+
+Prepare BMC For Update
+    [Documentation]  Prerequisite operation before code update.
+    Check Boot Count And Time
+    Prune Journal Log
+    Power Off Request
+    Set Policy Setting   RESTORE_LAST_STATE
+    Prepare For Update
+    Check If BMC is Up  20 min  10 sec
+    Check Boot Count And Time
+
+    # Temporary fix for lab migration for driver which is booted with
+    # BMC state "/xyz/openbmc_project/state/BMC0/".
+    ${status}=  Run Keyword And Return Status  Temp BMC URI Check
+    Run Keyword If  '${status}' == '${False}'
+    ...  Wait For BMC Ready
+    ...  ELSE  Wait For Temp BMC Ready
+
+    # TODO: openbmc/openbmc#815
+    Sleep  1 min
+
 
 Check Boot Count And Time
     [Documentation]  Check for unexpected reboots.
