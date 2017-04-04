@@ -8,7 +8,6 @@ Resource        ../lib/rest_client.robot
 Resource        ../lib/pdu/pdu.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/openbmc_ffdc.robot
-Resource        ../lib/boot/boot_resource_master.robot
 Resource        ../lib/state_manager.robot
 
 
