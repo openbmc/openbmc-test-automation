@@ -24,7 +24,6 @@ Documentation     Trigger code update to a target BMC.
 ...                 - Version check post update
 
 Resource          code_update_utils.robot
-Resource          ../../lib/boot/boot_resource_master.robot
 Resource          ../../lib/state_manager.robot
 Resource          ../../lib/utils.robot
 Resource          ../../lib/openbmc_ffdc.robot
