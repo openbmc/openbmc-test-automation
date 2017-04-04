@@ -93,6 +93,7 @@ else:
     # default_state is an initial value which may be of use to callers.
     default_state = DotDict([('rest', '1'),
                              ('chassis', 'On'),
+                             ('bmc', 'Ready'),
                              ('boot_progress', 'FW Progress, Starting OS'),
                              ('host', 'Running'),
                              ('os_ping', '1'),
@@ -108,6 +109,7 @@ else:
                         'epoch_seconds',
                         'rest',
                         'chassis',
+                        'bmc',
                         'boot_progress',
                         'host',
                         'os_ping',
@@ -117,6 +119,7 @@ else:
     # is used as its value.
     default_req_states = ['rest',
                           'chassis',
+                          'bmc',
                           'boot_progress',
                           'host',
                           'os_ping',
@@ -125,6 +128,7 @@ else:
 
     # A master dictionary to determine whether the os may be up.
     master_os_up_match = DotDict([('chassis', '^On$'),
+                                  ('bmc', '^Ready$'),
                                   ('boot_progress',
                                    'FW Progress, Starting OS'),
                                   ('host', '^Running$')])
