@@ -305,11 +305,16 @@ Collect eSEL Log
 ##############################################################################
 Convert eSEL To Elog Format
     [Documentation]  Execute parser tool on the eSEL data file to generate
-    ...              formated error log.
+    ...              formatted error log.
     [Arguments]  ${esel_file_path}
     # Desription of arguments:
-    # ${esel_file_path}  Absoulte path of the eSEL data.
+    # esel_file_path  Absolute path of the eSEL data (e.g.
+    #                 /tmp/w55.170404.154820.esel).
 
-    Run  eSEL.pl -l ${esel_file_path}
+    # Note: The only way to get eSEL.pl to put the output in a particular
+    # directory is to cd to that directory.
+    ${cmd_buf}=  Catenate  cd $(dirname ${esel_file_path}) ; eSEL.pl -l
+    ...  ${esel_file_path} -p decode_obmc_data
+    Run  ${cmd_buf}
 
 ##############################################################################
