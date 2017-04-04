@@ -630,6 +630,11 @@ def test_loop_body():
         except:
             gp.print_error("Call to my_ffdc failed.\n")
 
+    # We need to purge error logs between boots or they build up.
+    cmd_buf = ["Delete Error logs"]
+    grp.rpissuing_keyword(cmd_buf, test_mode)
+    BuiltIn().run_keyword(*cmd_buf)
+
     boot_results.print_report()
     grp.rqprint_timen("Finished boot " + str(boot_count) + ".")
 
@@ -640,6 +645,11 @@ def test_loop_body():
         error_message = "Stopping as requested by user.\n"
         grp.rprint_error_report(error_message)
         BuiltIn().fail(error_message)
+
+    # This should help prevent ConnectionErrors.
+    cmd_buf = ["Delete All Sessions"]
+    grp.rpissuing_keyword(cmd_buf, test_mode)
+    BuiltIn().run_keyword(*cmd_buf)
 
     return True
 
