@@ -875,3 +875,14 @@ Set BMC Boot Count
 
     # Set BOOT_TIME variable to current boot time.
     Set Global Variable  ${BOOT_COUNT}  ${count}
+
+###############################################################################
+Delete Error logs
+    [Documentation]  Delete error logs.
+
+    # The REST method to delete error openbmc/openbmc#1327
+    # until then using logging restart.
+    Open Connection And Log In
+    Execute Command On BMC
+    ...  systemctl restart xyz.openbmc_project.Logging.service
+    Sleep  10s  reason=Wait for logging service to restart properly.
