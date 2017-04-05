@@ -22,6 +22,15 @@ Verify Channel Checkstop Through OS With Auto Reboot
     Verify Checkstop Insertion With Auto Reboot
     ...  Centaur  2011400  4000000000000000
 
+Verify Channel Checkstop Through OS With Out Auto Reboot
+
+    [Documentation]  Verify Channel Checkstop (MBS FIR REG INT PROTOCOL ERROR)
+    ...              through OS With Auto Reboot settings disabled.
+    [Tags]           Verify_Channel_Checkstop_Through_OS_With_Out_Auto_Reboot
+
+    Verify Checkstop Insertion With Out Auto Reboot
+    ...  Centaur  2011400  4000000000000000
+
 *** Keywords ***
 Inject Checkstop Through OS
     [Documentation]  Inject checkstop on processor/centaur through OS.
@@ -36,6 +45,7 @@ Inject Checkstop Through OS
     # address        chip address (e.g 4000000000000000).
 
 
+    Clear Gard Records From BMC Using Pflash Tool
     Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     # Get core values are present through OS.
     Get Cores Values From OS
@@ -75,6 +85,29 @@ Verify Checkstop Insertion With Auto Reboot
     Inject Checkstop Through OS  ${chip_type}  ${fru}  ${address}
     Wait Until Keyword Succeeds  120 sec  20 sec  Is Host Rebooted
     Wait for OS  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
+    Verify And Clear Gard Records On OS
+
+
+Verify Checkstop Insertion With Out Auto Reboot
+    [Documentation]  Inject and verify checkstop on processor/centaur through
+    ...              OS with auto reboot disabled.
+    ...              Test sequence:
+    ...              1. Disable Auto Reboot Setting
+    ...              2. Inject Checkstop on processor/centaur
+    ...              3. Check if HOST is quiesced
+    ...              3. Recover HOST from quiesced state and boot to OS
+    ...              4. Verify & clear gard records
+    [Arguments]      ${chip_type}  ${fru}  ${address}
+    # Description of arguments:
+    # chip_type      The chip type (Processor/Centaur).
+    # fru            FRU value (e.g. 2011400).
+    # address        chip address (e.g 4000000000000000).
+
+    Set Auto Reboot  no
+    Inject Checkstop Through OS  ${chip_type}  ${fru}  ${address}
+    Wait Until Keyword Succeeds  300 sec  20 sec  Is Host Quiesced
+    Recover Quiesced Host
+    Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     Verify And Clear Gard Records On OS
 
 RAS Test SetUp

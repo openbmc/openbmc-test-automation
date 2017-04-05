@@ -875,3 +875,11 @@ Set BMC Boot Count
 
     # Set BOOT_TIME variable to current boot time.
     Set Global Variable  ${BOOT_COUNT}  ${count}
+
+Clear Gard Records From BMC Using Pflash Tool
+
+    ${cmd}=  Catenate   /usr/sbin/pflash -P GUARD -c -f
+    Open Connection And Log In
+    ${output}  ${stderr}=  Execute Command  ${cmd}
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}

@@ -59,3 +59,13 @@ Get ChipID From OS
     ${cmd}=  Catenate  -l | grep -i ${chip_type} | cut -c1-8
     ${chip_id}=  Getscom Operations On OS  ${cmd}
     [Return]  ${chip_id}
+
+Disable CPU states Through OS
+
+    ${cmd}=  Catenate  sudo sh -c 'for i in /sys/devices/system/cpu/cpu*/cpuidle/state0/disable; do echo 1 > $i; done'
+    ${output}  ${stderr}=  Execute Command  ${cmd}
+    Should Be Empty  ${stderr}
+
+    ${cmd}=  Catenate  sudo sh -c 'for i in /sys/devices/system/cpu/cpu*/cpuidle/state1/disable; do echo 1 > $i; done'
+    ${output}  ${stderr}=  Execute Command
+    Should Be Empty  ${stderr}
