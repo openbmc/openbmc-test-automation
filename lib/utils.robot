@@ -876,7 +876,6 @@ Set BMC Boot Count
     # Set BOOT_TIME variable to current boot time.
     Set Global Variable  ${BOOT_COUNT}  ${count}
 
-###############################################################################
 Delete Error logs
     [Documentation]  Delete error logs.
 
@@ -886,3 +885,12 @@ Delete Error logs
     Execute Command On BMC
     ...  systemctl restart xyz.openbmc_project.Logging.service
     Sleep  10s  reason=Wait for logging service to restart properly.
+
+Clear Gard Records From BMC Using Pflash Tool
+    [Documentation]  Clear gard records from BMC using pflash tool
+
+    ${cmd}=  Catenate   /usr/sbin/pflash -P GUARD -c -f
+    Open Connection And Log In
+    ${output}  ${stderr}=  Execute Command  ${cmd}
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
