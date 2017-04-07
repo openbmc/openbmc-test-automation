@@ -27,9 +27,9 @@ Set Boot Policy To ONETIME via REST
 
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    ONETIME
-    ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty     ${stderr}
-    Should Contain   ${output}    ONETIME
+    ${output}=  Run IPMI Standard Command  chassis bootparam get 5
+    Should Contain  ${output}  Options apply to only next boot
+
 
 Set Boot Policy To PERMANENT via REST
     [Documentation]   Set boot policy to PERMANENT via REST URI and verify
@@ -40,9 +40,8 @@ Set Boot Policy To PERMANENT via REST
 
     ${boot}=   Read Attribute  ${HOST_SETTINGS}  boot_policy
     Should Be Equal    ${boot}    PERMANENT
-    ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty     ${stderr}
-    Should Contain   ${output}     PERMANENT
+    ${output}=  Run IPMI Standard Command  chassis bootparam get 5
+    Should Contain  ${output}  Options apply to all future boots
 
 Set Boot Policy To ONETIME via IPMITOOL
     [Documentation]   Set boot policy to ONETIME via ipmitool and verify
@@ -52,9 +51,8 @@ Set Boot Policy To ONETIME via IPMITOOL
     Run IPMI command  0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    ONETIME
-    ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty     ${stderr}
-    Should Contain   ${output}    ONETIME
+    ${output}=  Run IPMI Standard Command  chassis bootparam get 5
+    Should Contain  ${output}  Options apply to only next boot
 
 Set Boot Policy To PERMANENT via IPMITOOL
     [Documentation]   Set boot policy to PERMANENT via ipmitool and verify
@@ -64,9 +62,9 @@ Set Boot Policy To PERMANENT via IPMITOOL
     Run IPMI command   0x0 0x8 0x05 0xC0 0x00 0x00 0x00 0x00
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Be Equal    ${boot}    PERMANENT
-    ${output}   ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty     ${stderr}
-    Should Contain   ${output}     PERMANENT
+    ${output}=  Run IPMI Standard Command  chassis bootparam get 5
+    Should Contain  ${output}  Options apply to all future boots
+
 
 Test Boot Order via REST
     [Documentation]   Set boot policy to PERMANENT and boot device to CDROM
