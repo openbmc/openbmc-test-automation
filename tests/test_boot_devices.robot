@@ -23,14 +23,14 @@ Set The Boot Device As Default Using REST API
     ...              URI. The Boot device is read using REST API and ipmitool.
     [Tags]  Set_The_Boot_Device_As_Default_Using_REST_API
 
-    ${bootDevice}=  Set Variable  default
+    ${bootDevice}=  Set Variable  Default
     ${valueDict}=  Create Dictionary  data=${bootDevice}
     Write Attribute  ${HOST_SETTINGS}  boot_flags  data=${valueDict}
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
-    Response Should Be Equal  default
+    Response Should Be Equal  Default
     ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty  ${stderr}
-    Should Contain  ${output}  default
+    Should Contain  ${output}  Default
 
 Set The Boot Device As Default Using Ipmitool
     [Documentation]  This testcase is to set the boot device as default using
@@ -40,10 +40,10 @@ Set The Boot Device As Default Using Ipmitool
 
     Run IPMI command  0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
-    Response Should Be Equal  default
+    Response Should Be Equal  Default
     ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
     Should Be Empty  ${stderr}
-    Should Contain  ${output}  default
+    Should Contain  ${output}  Default
 
 Set The Boot Device As Network Using REST API
     [Documentation]  This testcase is to set the boot device as Network using REST

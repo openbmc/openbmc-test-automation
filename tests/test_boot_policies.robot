@@ -152,7 +152,7 @@ Set Boot Device
 Restore Boot Settings
     [Documentation]  Restore default settings.
     Set Boot Policy  ONETIME
-    Set Boot Device  default
+    Set Boot Device  Default
     Close All Connections
 
 Test Init Setup
