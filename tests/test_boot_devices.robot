@@ -23,14 +23,13 @@ Set The Boot Device As Default Using REST API
     ...              URI. The Boot device is read using REST API and ipmitool.
     [Tags]  Set_The_Boot_Device_As_Default_Using_REST_API
 
-    ${bootDevice}=  Set Variable  default
+    ${bootDevice}=  Set Variable  Default
     ${valueDict}=  Create Dictionary  data=${bootDevice}
     Write Attribute  ${HOST_SETTINGS}  boot_flags  data=${valueDict}
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
-    Response Should Be Equal  default
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  default
+    Response Should Be Equal  Default
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  No override
 
 Set The Boot Device As Default Using Ipmitool
     [Documentation]  This testcase is to set the boot device as default using
@@ -40,10 +39,9 @@ Set The Boot Device As Default Using Ipmitool
 
     Run IPMI command  0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
-    Response Should Be Equal  default
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  default
+    Response Should Be Equal  Default
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  No override
 
 Set The Boot Device As Network Using REST API
     [Documentation]  This testcase is to set the boot device as Network using REST
@@ -55,9 +53,8 @@ Set The Boot Device As Network Using REST API
     Write Attribute  ${HOST_SETTINGS}  boot_flags  data=${valueDict}
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal  Network
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  Network
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  Force PXE
 
 Set The Boot Device As Network Using Ipmitool
     [Documentation]  This testcase is to set the boot device as Network using
@@ -68,9 +65,8 @@ Set The Boot Device As Network Using Ipmitool
     Run IPMI command  0x0 0x8 0x05 0x80 0x04 0x00 0x00 0x00
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal  Network
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  Network
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  Force PXE
 
 Set The Boot Device As Disk Using REST API
     [Documentation]  This testcase is to set the boot device as Disk using REST
@@ -82,9 +78,8 @@ Set The Boot Device As Disk Using REST API
     Write Attribute  ${HOST_SETTINGS}  boot_flags  data=${valueDict}
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal  Disk
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  Disk
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  Force Boot from default Hard-Drive
 
 Set The Boot Device As Disk Using Ipmitool
     [Documentation]  This testcase is to set the boot device as Disk using
@@ -95,9 +90,8 @@ Set The Boot Device As Disk Using Ipmitool
     Run IPMI command  0x0 0x8 0x05 0x80 0x08 0x00 0x00 0x00
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal  Disk
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  Disk
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  Force Boot from default Hard-Drive
 
 Set The Boot Device As Safe Using REST API
     [Documentation]  This testcase is to set the boot device as Safe using REST
@@ -109,9 +103,8 @@ Set The Boot Device As Safe Using REST API
     Write Attribute  ${HOST_SETTINGS}  boot_flags  data=${valueDict}
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal  Safe
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  Safe
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  Safe-Mode
 
 Set The Boot Device As Safe Using Ipmitool
     [Documentation]  This testcase is to set the boot device as Safe using
@@ -122,9 +115,8 @@ Set The Boot Device As Safe Using Ipmitool
     Run IPMI command  0x0 0x8 0x05 0x80 0x0C 0x00 0x00 0x00
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal  Safe
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  Safe
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  Safe-Mode
 
 Set The Boot Device As CDROM Using REST API
     [Documentation]  This testcase is to set the boot device as CDROM using REST
@@ -136,9 +128,8 @@ Set The Boot Device As CDROM Using REST API
     Write Attribute  ${HOST_SETTINGS}  boot_flags  data=${valueDict}
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal  CDROM
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  CDROM
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  Force Boot from CD/DVD
 
 Set The Boot Device As CDROM Using Ipmitool
     [Documentation]  This testcase is to set the boot device as CDROM using
@@ -149,9 +140,8 @@ Set The Boot Device As CDROM Using Ipmitool
     Run IPMI command  0x0 0x8 0x05 0x80 0x14 0x00 0x00 0x00
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal  CDROM
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  CDROM
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  Force Boot from CD/DVD
 
 Set The Boot Device As Setup Using REST API
     [Documentation]  This testcase is to set the boot device as Setup using REST
@@ -163,9 +153,8 @@ Set The Boot Device As Setup Using REST API
     Write Attribute  ${HOST_SETTINGS}  boot_flags  data=${valueDict}
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal  Setup
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  Setup
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  Force Boot into BIOS Setup
 
 Set The Boot Device As Setup Using Ipmitool
     [Documentation]  This testcase is to set the boot device as Setup using
@@ -176,9 +165,8 @@ Set The Boot Device As Setup Using Ipmitool
     Run IPMI command  0x0 0x8 0x05 0x80 0x18 0x00 0x00 0x00
     Read the Attribute  ${HOST_SETTINGS}  boot_flags
     Response Should Be Equal  Setup
-    ${output}  ${stderr}=  Execute Command  ${dbuscmd}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${output}  Setup
+    ${output}=  Run IPMI Standard command   chassis bootparam get 5
+    Should Contain  ${output}  Force Boot into BIOS Setup
 
 *** Keywords ***
 
