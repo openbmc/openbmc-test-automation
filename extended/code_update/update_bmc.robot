@@ -23,23 +23,29 @@ Documentation     Trigger code update to a target BMC.
 ...                 - Wait for BMC to come online time out 30 minutes
 ...                 - Version check post update
 
-Resource          code_update_utils.robot
-Resource          ../../lib/state_manager.robot
-Resource          ../../lib/utils.robot
-Resource          ../../lib/openbmc_ffdc.robot
+Library                 ../../lib/gen_robot_keyword.py
+Library                 String
 
-Library   String
-Suite Setup  Validate BMC Image File Name  ${FILE_PATH}
+Resource                code_update_utils.robot
+Resource                ../../lib/boot/boot_resource_master.robot
+Resource                ../../lib/state_manager.robot
+Resource                ../../lib/utils.robot
+Resource                ../../lib/openbmc_ffdc.robot
+Resource                ../../extended/obmc_boot_test_resource.robot
 
-Test Teardown      FFDC On Test Case Fail
+Test Teardown           Run Key  FFDC On Test Case Fail
 
 *** Variables ***
 
-${FILE_PATH}       ${EMPTY}
-${FORCE_UPDATE}    ${0}
+${QUIET}                ${1}
+# Boot failures are not acceptable so we set the threshold to 0.
+${boot_fail_threshold}  ${0}
+
+${FILE_PATH}            ${EMPTY}
+${FORCE_UPDATE}         ${0}
 
 # There are two reboots issued by code update.
-${MAX_BOOT_COUNT}  ${2}
+${MAX_BOOT_COUNT}       ${2}
 
 *** Test Cases ***
 
@@ -57,12 +63,8 @@ Check Core Dump Exist Before Code Update
     Check For Core Dumps
 
 Initiate Code Update BMC
-    [Documentation]  BMC code update process initiation
-    [Setup]  Set State Interface Version
+    [Documentation]  Initiate a code update on the BMC.
     [Tags]  Initiate_Code_Update_BMC
-
-    Check If File Exist  ${FILE_PATH}
-    System Readiness Test
 
     # TODO: Disabling version check until new logic are in place.
     # ${status}=   Run Keyword and Return Status
@@ -76,31 +78,13 @@ Initiate Code Update BMC
     Run Keyword If  ${FORCE_UPDATE} == ${0}
     ...  Prepare BMC For Update
 
-    Preserve BMC Network Setting
-    SCP Tar Image File to BMC   ${FILE_PATH}
-
-    Activate BMC flash image
-
-    Run Keyword And Ignore Error    Trigger Warm Reset
-    # Warm reset adds 3 seconds delay before forcing reboot
-    # To minimize race conditions, we wait for 7 seconds
-    Sleep  7s
-    ${session_active}=   Check If warmReset is Initiated
-    Run Keyword If   '${session_active}' == '${True}'
-    ...    Trigger Warm Reset via Reboot
-
-    Check If BMC is Up    30 min   10 sec
-    Check Boot Count And Time
-    Sleep  1 min
-    # Validate BMC Version
-
-    # Now that the code update is completed, make sure we use the correct
-    # interface while checking for BMC ready state.
-    Set State Interface Version
-    Wait For BMC Ready
-    Check Boot Count And Time
+    Run Key U  Preserve BMC Network Setting
+    Run Key  SCP Tar Image File To BMC \ ${FILE_PATH}
+    Run Key  Activate BMC Flash Image
+    Run Key U  OBMC Boot Test \ OBMC Reboot (off)
+    Run Key U  Check Boot Count And Time
     Run Keyword If  ${BOOT_COUNT} == ${1}
-    ...  Log  Boot Time not Updated by Kernel!!!  level=WARN
+    ...  Log  Boot time not updated by kernel.  level=WARN
 
 Test Basic BMC Performance At Ready State
     [Documentation]   Check performance of memory, CPU & file system of BMC.
