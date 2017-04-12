@@ -8,8 +8,8 @@ ${BMC_READY_STATE}           Ready
 ${BMC_NOT_READY_STATE}       NotReady
 ${QUIET}  ${0}
 
-# "0" indicates that the new "xyz" interface should be used.
-${OBMC_STATES_VERSION}    ${0}
+# "1" indicates that the new "xyz" interface should be used.
+${OBMC_STATES_VERSION}    ${1}
 
 *** Keywords ***
 
