@@ -39,7 +39,7 @@ from robot.utils import DotDict
 import re
 import os
 
-# We need utils.robot to get keywords like "Get Power State".
+# We need utils.robot to get keywords like "Get Chassis Power State".
 gru.my_import_resource("utils.robot")
 gru.my_import_resource("state_manager.robot")
 
@@ -51,87 +51,39 @@ gru.my_import_resource("state_manager.robot")
 # whether we're processing old or new style states.  If OBMC_STATES_VERSION is
 # not set it will default to 1.
 
+# As of the present moment, OBMC_STATES_VERSION of 0 is for cold that is so old
+# that it is no longer worthwhile to maintain.  The OBMC_STATES_VERSION 0 code
+# is being removed but the OBMC_STATES_VERSION value will stay for now in the
+# event that it is needed in the future.
+
 OBMC_STATES_VERSION = int(os.environ.get('OBMC_STATES_VERSION', 1))
 
-if OBMC_STATES_VERSION == 0:
-    # default_state is an initial value which may be of use to callers.
-    default_state = DotDict([('power', '1'),
-                             ('bmc', 'HOST_BOOTED'),
-                             ('boot_progress', 'FW Progress, Starting OS'),
-                             ('os_ping', '1'),
-                             ('os_login', '1'),
-                             ('os_run_cmd', '1')])
-    # valid_req_states, default_req_states and master_os_up_match are used by
-    # the get_state function.
-    # valid_req_states is a list of state information supported by the
-    # get_state function.
-    valid_req_states = ['ping',
-                        'packet_loss',
-                        'uptime',
-                        'epoch_seconds',
-                        'power',
-                        'bmc',
-                        'boot_progress',
-                        'os_ping',
-                        'os_login',
-                        'os_run_cmd']
-    # When a user calls get_state w/o specifying req_states, default_req_states
-    # is used as its value.
-    default_req_states = ['power',
-                          'bmc',
-                          'boot_progress',
-                          'os_ping',
-                          'os_login',
-                          'os_run_cmd']
-    # A master dictionary to determine whether the os may be up.
-    master_os_up_match = DotDict([('power', 'On'),
-                                  ('bmc', '^HOST_BOOTED$'),
-                                  ('boot_progress',
-                                   'FW Progress, Starting OS')])
+# When a user calls get_state w/o specifying req_states, default_req_states
+# is used as its value.
+default_req_states = ['rest',
+                      'chassis',
+                      'bmc',
+                      'boot_progress',
+                      'host',
+                      'os_ping',
+                      'os_login',
+                      'os_run_cmd']
 
-else:
-    # default_state is an initial value which may be of use to callers.
-    default_state = DotDict([('rest', '1'),
-                             ('chassis', 'On'),
-                             ('bmc', 'Ready'),
-                             ('boot_progress', 'FW Progress, Starting OS'),
-                             ('host', 'Running'),
-                             ('os_ping', '1'),
-                             ('os_login', '1'),
-                             ('os_run_cmd', '1')])
-    # valid_req_states is a list of state information supported by the
-    # get_state function.
-    # valid_req_states, default_req_states and master_os_up_match are used by
-    # the get_state function.
-    valid_req_states = ['ping',
-                        'packet_loss',
-                        'uptime',
-                        'epoch_seconds',
-                        'rest',
-                        'chassis',
-                        'bmc',
-                        'boot_progress',
-                        'host',
-                        'os_ping',
-                        'os_login',
-                        'os_run_cmd']
-    # When a user calls get_state w/o specifying req_states, default_req_states
-    # is used as its value.
-    default_req_states = ['rest',
-                          'chassis',
-                          'bmc',
-                          'boot_progress',
-                          'host',
-                          'os_ping',
-                          'os_login',
-                          'os_run_cmd']
-
-    # A master dictionary to determine whether the os may be up.
-    master_os_up_match = DotDict([('chassis', '^On$'),
-                                  ('bmc', '^Ready$'),
-                                  ('boot_progress',
-                                   'FW Progress, Starting OS'),
-                                  ('host', '^Running$')])
+# valid_req_states is a list of sub states supported by the get_state function.
+# valid_req_states, default_req_states and master_os_up_match are used by the
+# get_state function.
+valid_req_states = ['ping',
+                    'packet_loss',
+                    'uptime',
+                    'epoch_seconds',
+                    'rest',
+                    'chassis',
+                    'bmc',
+                    'boot_progress',
+                    'host',
+                    'os_ping',
+                    'os_login',
+                    'os_run_cmd']
 
 # valid_os_req_states and default_os_req_states are used by the os_get_state
 # function.
@@ -151,6 +103,31 @@ default_os_req_states = ['os_ping',
 # or the local epoch time.
 USE_BMC_EPOCH_TIME = int(os.environ.get('USE_BMC_EPOCH_TIME', 0))
 
+# Useful state constant definition(s).
+# A match state for checking that the system is at "standby".
+standby_match_state = DotDict([('rest', '^1$'),
+                               ('chassis', '^Off$'),
+                               ('bmc', '^Ready$'),
+                               ('boot_progress', ''),
+                               ('host', '')])
+
+# default_state is an initial value which may be of use to callers.
+default_state = DotDict([('rest', '1'),
+                         ('chassis', 'On'),
+                         ('bmc', 'Ready'),
+                         ('boot_progress', 'FW Progress, Starting OS'),
+                         ('host', 'Running'),
+                         ('os_ping', '1'),
+                         ('os_login', '1'),
+                         ('os_run_cmd', '1')])
+
+# A master dictionary to determine whether the os may be up.
+master_os_up_match = DotDict([('chassis', '^On$'),
+                              ('bmc', '^Ready$'),
+                              ('boot_progress',
+                               'FW Progress, Starting OS'),
+                              ('host', '^Running$')])
+
 
 ###############################################################################
 def return_default_state():
@@ -162,6 +139,31 @@ def return_default_state():
     """
 
     return default_state
+
+###############################################################################
+
+
+valid_state_constants = ['default', 'standby_match_state']
+
+
+###############################################################################
+def return_state_constant(state_name='default'):
+
+    r"""
+    Return default state dictionary.
+
+    default_state is an initial value which may be of use to callers.
+    """
+
+    error_message = gv.svalid_value(state_name, var_name='state_name',
+                                    valid_values=valid_state_constants)
+    if error_message != "":
+        BuiltIn().fail(gp.sprint_error(error_message))
+
+    if state_name == 'default':
+        return default_state
+    elif state_name == 'standby_match_state':
+        return standby_match_state
 
 ###############################################################################
 
@@ -281,7 +283,7 @@ def get_os_state(os_host="",
                  Defaults to either global value of ${QUIET} or to 1.
     """
 
-    quiet = grp.set_quiet_default(quiet, 1)
+    quiet = int(gp.get_var_value(quiet, 0))
 
     # Set parm defaults where necessary and validate all parms.
     if os_host == "":
@@ -399,7 +401,7 @@ def get_state(openbmc_host="",
               quiet=None):
 
     r"""
-    Get component states such as power state, bmc state, etc, put them into a
+    Get component states such as chassis state, bmc state, etc, put them into a
     dictionary and return them to the caller.
 
     Note that all substate values are strings.
@@ -424,7 +426,7 @@ def get_state(openbmc_host="",
                       Defaults to either global value of ${QUIET} or to 1.
     """
 
-    quiet = grp.set_quiet_default(quiet, 1)
+    quiet = int(gp.get_var_value(quiet, 0))
 
     # Set parm defaults where necessary and validate all parms.
     if openbmc_host == "":
@@ -479,7 +481,6 @@ def get_state(openbmc_host="",
     packet_loss = ''
     uptime = ''
     epoch_seconds = ''
-    power = ''
     rest = '1'
     chassis = ''
     bmc = ''
@@ -557,7 +558,7 @@ def get_state(openbmc_host="",
             if shell_rc == 0:
                 epoch_seconds = out_buf.rstrip("\n")
 
-    master_req_rest = ['rest', 'power', 'chassis', 'bmc', 'boot_progress',
+    master_req_rest = ['rest', 'chassis', 'bmc', 'boot_progress',
                        'host']
     req_rest = [sub_state for sub_state in req_states if sub_state in
                 master_req_rest]
@@ -579,14 +580,6 @@ def get_state(openbmc_host="",
             rest = ret_values
 
     if rest == '1':
-        if 'power' in req_states:
-            cmd_buf = ["Get Power State", "quiet=${" + str(quiet) + "}"]
-            grp.rdpissuing_keyword(cmd_buf)
-            status, ret_values = \
-                BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-            if status == "PASS":
-                power = ret_values
-
         if 'bmc' in req_states:
             if OBMC_STATES_VERSION == 0:
                 qualifier = "utils"
@@ -708,7 +701,7 @@ def check_state(match_state,
                       to 1.
     """
 
-    quiet = grp.set_quiet_default(quiet, 1)
+    quiet = int(gp.get_var_value(quiet, 0))
 
     grp.rprint(print_string)
 
@@ -763,6 +756,11 @@ def wait_state(match_state=(),
     Description of arguments:
     match_state       A dictionary whose key/value pairs are "state field"/
                       "state value".  See check_state (above) for details.
+                      This value may also be any string accepted by
+                      return_state_constant (e.g. "standby_match_state").
+                      In such a case this function will call
+                      return_state_constant to convert it to a proper
+                      dictionary as described above.
     wait_time         The total amount of time to wait for the desired state.
                       This value may be expressed in Robot Framework's time
                       format (e.g. 1 minute, 2 min 3 s, 4.5).
@@ -788,7 +786,10 @@ def wait_state(match_state=(),
                       to 1.
     """
 
-    quiet = grp.set_quiet_default(quiet, 1)
+    quiet = int(gp.get_var_value(quiet, 0))
+
+    if type(match_state) in (str, unicode):
+        match_state = return_state_constant(match_state)
 
     if not quiet:
         if invert:
@@ -817,8 +818,14 @@ def wait_state(match_state=(),
                "os_username=" + os_username, "os_password=" + os_password,
                "quiet=${" + str(check_state_quiet) + "}"]
     grp.rdpissuing_keyword(cmd_buf)
-    state = BuiltIn().wait_until_keyword_succeeds(wait_time, interval,
-                                                  *cmd_buf)
+    try:
+        state = BuiltIn().wait_until_keyword_succeeds(wait_time, interval,
+                                                      *cmd_buf)
+    except AssertionError as my_assertion_error:
+        gp.printn()
+        message = my_assertion_error.args[0]
+        BuiltIn().fail(message)
+
     if not quiet:
         gp.printn()
         if invert:
@@ -833,7 +840,8 @@ def wait_state(match_state=(),
 
 
 ###############################################################################
-def wait_for_comm_cycle(start_boot_seconds):
+def wait_for_comm_cycle(start_boot_seconds,
+                        quiet=None):
 
     r"""
     Wait for communications to the BMC to stop working and then resume working.
@@ -852,6 +860,8 @@ def wait_for_comm_cycle(start_boot_seconds):
                         state = st.get_state(req_states=['epoch_seconds'])
     """
 
+    quiet = int(gp.get_var_value(quiet, 0))
+
     # Validate parms.
     error_message = gv.svalid_integer(start_boot_seconds,
                                       var_name="start_boot_seconds")
@@ -860,25 +870,25 @@ def wait_for_comm_cycle(start_boot_seconds):
 
     match_state = anchor_state(DotDict([('packet_loss', '100')]))
     # Wait for 100% packet loss trying to ping machine.
-    wait_state(match_state, wait_time="3 mins", interval="0 seconds")
+    wait_state(match_state, wait_time="8 mins", interval="0 seconds")
 
     match_state['packet_loss'] = '^0$'
     # Wait for 0% packet loss trying to ping machine.
-    wait_state(match_state, wait_time="4 mins", interval="0 seconds")
+    wait_state(match_state, wait_time="8 mins", interval="0 seconds")
 
     # Get the uptime and epoch seconds for comparisons.  We want to be sure
     # that the uptime is less than the elapsed boot time.  Further proof that
     # a reboot has indeed occurred (vs random network instability giving a
     # false positive.
-    state = get_state(req_states=['uptime', 'epoch_seconds'])
+    state = get_state(req_states=['uptime', 'epoch_seconds'], quiet=quiet)
 
     elapsed_boot_time = int(state['epoch_seconds']) - start_boot_seconds
-    gp.print_var(elapsed_boot_time)
+    gp.qprint_var(elapsed_boot_time)
     if int(float(state['uptime'])) < elapsed_boot_time:
         uptime = state['uptime']
-        gp.print_var(uptime)
-        gp.print_timen("The uptime is less than the elapsed boot time," +
-                       " as expected.")
+        gp.qprint_var(uptime)
+        gp.qprint_timen("The uptime is less than the elapsed boot time," +
+                        " as expected.")
     else:
         error_message = "The uptime is greater than the elapsed boot time," +\
                         " which is unexpected:\n" +\
@@ -886,7 +896,7 @@ def wait_for_comm_cycle(start_boot_seconds):
                         gp.sprint_var(state)
         BuiltIn().fail(gp.sprint_error(error_message))
 
-    gp.print_timen("Verifying that REST API interface is working.")
+    gp.qprint_timen("Verifying that REST API interface is working.")
     match_state = DotDict([('rest', '^1$')])
     state = wait_state(match_state, wait_time="5 mins", interval="2 seconds")
 
