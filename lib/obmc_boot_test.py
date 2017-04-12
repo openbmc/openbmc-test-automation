@@ -21,6 +21,7 @@ import gen_robot_plug_in as grpi
 import gen_robot_valid as grv
 import gen_misc as gm
 import gen_cmd as gc
+import gen_robot_keyword as grk
 import state as st
 
 base_path = os.path.dirname(os.path.dirname(
@@ -29,54 +30,25 @@ base_path = os.path.dirname(os.path.dirname(
 sys.path.append(base_path + "extended/")
 import run_keyword as rk
 
-# Program parameter processing.
-# Assign all program parms to python variables which are global to this module.
-parm_list = BuiltIn().get_variable_value("${parm_list}")
-int_list = ['max_num_tests', 'boot_pass', 'boot_fail', 'ffdc_only', 'quiet',
-            'test_mode', 'debug']
-for parm in parm_list:
-    if parm in int_list:
-        sub_cmd = "int(BuiltIn().get_variable_value(\"${" + parm +\
-                  "}\", \"0\"))"
-    else:
-        sub_cmd = "BuiltIn().get_variable_value(\"${" + parm + "}\")"
-    cmd_buf = parm + " = " + sub_cmd
-    exec(cmd_buf)
-
-if ffdc_dir_path_style == "":
-    ffdc_dir_path_style = int(os.environ.get('FFDC_DIR_PATH_STYLE', '0'))
-
-# Set up boot data structures.
-boot_table = create_boot_table()
-valid_boot_types = create_valid_boot_list(boot_table)
-
 # Setting master_pid correctly influences the behavior of plug-ins like
 # DB_Logging
 program_pid = os.getpid()
 master_pid = os.environ.get('AUTOBOOT_MASTER_PID', program_pid)
 
-boot_results_file_path = "/tmp/" + openbmc_nickname + ":pid_" +\
-                         str(master_pid) + ":boot_results"
-if os.path.isfile(boot_results_file_path):
-    # We've been called before in this run so we'll load the saved
-    # boot_results object.
-    boot_results = pickle.load(open(boot_results_file_path, 'rb'))
-else:
-    boot_results = boot_results(boot_table, boot_pass, boot_fail)
+# Set up boot data structures.
+boot_table = create_boot_table()
+valid_boot_types = create_valid_boot_list(boot_table)
 
 boot_lists = read_boot_lists()
 last_ten = []
-# Convert these program parms to more useable lists.
-boot_list = filter(None, boot_list.split(":"))
-boot_stack = filter(None, boot_stack.split(":"))
 
 state = st.return_default_state()
 cp_setup_called = 0
 next_boot = ""
 base_tool_dir_path = os.path.normpath(os.environ.get(
     'AUTOBOOT_BASE_TOOL_DIR_PATH', "/tmp")) + os.sep
+
 ffdc_dir_path = os.path.normpath(os.environ.get('FFDC_DIR_PATH', '')) + os.sep
-ffdc_list_file_path = base_tool_dir_path + openbmc_nickname + "/FFDC_FILE_LIST"
 boot_success = 0
 status_dir_path = os.environ.get('STATUS_DIR_PATH', "")
 if status_dir_path != "":
@@ -86,6 +58,62 @@ default_power_off = "REST Power Off"
 boot_count = 0
 
 LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
+
+
+###############################################################################
+def process_pgm_parms():
+
+    r"""
+    Process the program parameters by assigning them all to corresponding
+    globals.  Also, set some global values that depend on program parameters.
+    """
+
+    # Program parameter processing.
+    # Assign all program parms to python variables which are global to this
+    # module.
+
+    global parm_list
+    parm_list = BuiltIn().get_variable_value("${parm_list}")
+    # The following subset of parms should be processed as integers.
+    int_list = ['max_num_tests', 'boot_pass', 'boot_fail', 'ffdc_only',
+                'boot_fail_threshold', 'quiet', 'test_mode', 'debug']
+    for parm in parm_list:
+        if parm in int_list:
+            sub_cmd = "int(BuiltIn().get_variable_value(\"${" + parm +\
+                      "}\", \"0\"))"
+        else:
+            sub_cmd = "BuiltIn().get_variable_value(\"${" + parm + "}\")"
+        cmd_buf = "global " + parm + " ; " + parm + " = " + sub_cmd
+        exec(cmd_buf)
+
+    global ffdc_dir_path_style
+    global boot_list
+    global boot_stack
+    global boot_results_file_path
+    global boot_results
+    global ffdc_list_file_path
+
+    if ffdc_dir_path_style == "":
+        ffdc_dir_path_style = int(os.environ.get('FFDC_DIR_PATH_STYLE', '0'))
+
+    # Convert these program parms to lists for easier processing..
+    boot_list = filter(None, boot_list.split(":"))
+    boot_stack = filter(None, boot_stack.split(":"))
+
+    boot_results_file_path = "/tmp/" + openbmc_nickname + ":pid_" +\
+                             str(master_pid) + ":boot_results"
+
+    if os.path.isfile(boot_results_file_path):
+        # We've been called before in this run so we'll load the saved
+        # boot_results object.
+        boot_results = pickle.load(open(boot_results_file_path, 'rb'))
+    else:
+        boot_results = boot_results(boot_table, boot_pass, boot_fail)
+
+    ffdc_list_file_path = base_tool_dir_path + openbmc_nickname +\
+        "/FFDC_FILE_LIST"
+
+###############################################################################
 
 
 ###############################################################################
@@ -200,16 +228,13 @@ def setup():
 
     global cp_setup_called
 
-    grp.rqprintn()
+    gp.qprintn()
 
     validate_parms()
 
     grp.rqprint_pgm_header()
 
-    cmd_buf = ["Set BMC Power Policy", "RESTORE_LAST_STATE"]
-    grp.rpissuing_keyword(cmd_buf, test_mode)
-    if not test_mode:
-        BuiltIn().run_keyword(*cmd_buf)
+    grk.run_key("Set BMC Power Policy  RESTORE_LAST_STATE")
 
     initial_plug_in_setup()
 
@@ -229,8 +254,8 @@ def setup():
     # FFDC_LOG_PATH is used by "FFDC" keyword.
     BuiltIn().set_global_variable("${FFDC_LOG_PATH}", ffdc_dir_path)
 
-    grp.rdprint_var(boot_table, 1)
-    grp.rdprint_var(boot_lists)
+    gp.dprint_var(boot_table, 1)
+    gp.dprint_var(boot_lists)
 
 ###############################################################################
 
@@ -242,7 +267,9 @@ def validate_parms():
     Validate all program parameters.
     """
 
-    grp.rqprintn()
+    process_pgm_parms()
+
+    gp.qprintn()
 
     grv.rvalid_value("openbmc_host")
     grv.rvalid_value("openbmc_username")
@@ -266,6 +293,7 @@ def validate_parms():
     BuiltIn().set_global_variable("${plug_in_packages_list}",
                                   plug_in_packages_list)
 
+    grv.rvalid_value("stack_mode", valid_values=['normal', 'skip'])
     if len(boot_list) == 0 and len(boot_stack) == 0 and not ffdc_only:
         error_message = "You must provide either a value for either the" +\
             " boot_list or the boot_stack parm.\n"
@@ -300,12 +328,12 @@ def my_get_state():
 
     req_states = ['epoch_seconds'] + st.default_req_states
 
-    grp.rqprint_timen("Getting system state.")
+    gp.qprint_timen("Getting system state.")
     if test_mode:
         state['epoch_seconds'] = int(time.time())
     else:
-        state = st.get_state(req_states=req_states, quiet=0)
-    grp.rprint_var(state)
+        state = st.get_state(req_states=req_states, quiet=quiet)
+    gp.qprint_var(state)
 
 ###############################################################################
 
@@ -323,27 +351,51 @@ def select_boot():
 
     global boot_stack
 
-    grp.rprint_timen("Selecting a boot test.")
+    gp.qprint_timen("Selecting a boot test.")
 
     my_get_state()
 
     stack_popped = 0
     if len(boot_stack) > 0:
         stack_popped = 1
-        grp.rprint_dashes()
-        grp.rprint_var(boot_stack)
-        grp.rprint_dashes()
-        boot_candidate = boot_stack.pop()
+        gp.qprint_dashes()
+        gp.qprint_var(boot_stack)
+        gp.qprint_dashes()
+        skip_boot_printed = 0
+        while len(boot_stack) > 0:
+            boot_candidate = boot_stack.pop()
+            if stack_mode == 'normal':
+                break
+            else:
+                if st.compare_states(state, boot_table[boot_candidate]['end']):
+                    if not skip_boot_printed:
+                        gp.print_var(stack_mode)
+                        gp.printn()
+                        gp.print_timen("Skipping the following boot tests" +
+                                       " which are unnecessary since their" +
+                                       " required end states match the" +
+                                       " current machine state:")
+                        skip_boot_printed = 1
+                    gp.print_var(boot_candidate)
+                    boot_candidate = ""
+        if boot_candidate == "":
+            gp.qprint_dashes()
+            gp.qprint_var(boot_stack)
+            gp.qprint_dashes()
+            return boot_candidate
         if st.compare_states(state, boot_table[boot_candidate]['start']):
-            grp.rprint_timen("The machine state is valid for a '" +
-                             boot_candidate + "' boot test.")
-            grp.rprint_dashes()
-            grp.rprint_var(boot_stack)
-            grp.rprint_dashes()
+            gp.qprint_timen("The machine state is valid for a '" +
+                            boot_candidate + "' boot test.")
+            gp.qprint_dashes()
+            gp.qprint_var(boot_stack)
+            gp.qprint_dashes()
             return boot_candidate
         else:
-            grp.rprint_timen("The machine state is not valid for a '" +
-                             boot_candidate + "' boot test.")
+            gp.qprint_timen("The machine state does not match the required" +
+                            " starting state for a '" + boot_candidate +
+                            "' boot test:")
+            gp.print_varx("boot_table[" + boot_candidate + "][start]",
+                          boot_table[boot_candidate]['start'], 1)
             boot_stack.append(boot_candidate)
             popped_boot = boot_candidate
 
@@ -359,16 +411,16 @@ def select_boot():
                 boot_candidates.append(boot_candidate)
 
     if len(boot_candidates) == 0:
-        grp.rprint_timen("The user's boot list contained no boot tests" +
-                         " which are valid for the current machine state.")
+        gp.qprint_timen("The user's boot list contained no boot tests" +
+                        " which are valid for the current machine state.")
         boot_candidate = default_power_on
         if not st.compare_states(state, boot_table[default_power_on]['start']):
             boot_candidate = default_power_off
         boot_candidates.append(boot_candidate)
-        grp.rprint_timen("Using default '" + boot_candidate +
-                         "' boot type to transtion to valid state.")
+        gp.qprint_timen("Using default '" + boot_candidate +
+                        "' boot type to transition to valid state.")
 
-    grp.rdprint_var(boot_candidates)
+    gp.dprint_var(boot_candidates)
 
     # Randomly select a boot from the candidate list.
     boot = random.choice(boot_candidates)
@@ -386,12 +438,12 @@ def print_last_boots():
     """
 
     # indent 0, 90 chars wide, linefeed, char is "="
-    grp.rqprint_dashes(0, 90)
-    grp.rqprintn("Last 10 boots:\n")
+    gp.qprint_dashes(0, 90)
+    gp.qprintn("Last 10 boots:\n")
 
     for boot_entry in last_ten:
         grp.rqprint(boot_entry)
-    grp.rqprint_dashes(0, 90)
+    gp.qprint_dashes(0, 90)
 
 ###############################################################################
 
@@ -403,18 +455,18 @@ def print_defect_report():
     Print a defect report.
     """
 
-    grp.rqprintn()
+    gp.qprintn()
     # indent=0, width=90, linefeed=1, char="="
-    grp.rqprint_dashes(0, 90, 1, "=")
-    grp.rqprintn("Copy this data to the defect:\n")
+    gp.qprint_dashes(0, 90, 1, "=")
+    gp.qprintn("Copy this data to the defect:\n")
 
     grp.rqpvars(*parm_list)
 
-    grp.rqprintn()
+    gp.qprintn()
 
     print_last_boots()
-    grp.rqprintn()
-    grp.rqpvar(state)
+    gp.qprintn()
+    gp.qprint_var(state)
 
     # At some point I'd like to have the 'Call FFDC Methods' return a list
     # of files it has collected.  In that case, the following "ls" command
@@ -430,16 +482,16 @@ def print_defect_report():
     except IOError:
         ffdc_list = ""
 
-    grp.rqprintn()
-    grp.rqprintn("FFDC data files:")
+    gp.qprintn()
+    gp.qprintn("FFDC data files:")
     if status_file_path != "":
-        grp.rqprintn(status_file_path)
+        gp.qprintn(status_file_path)
 
-    grp.rqprintn(output)
-    # grp.rqprintn(ffdc_list)
-    grp.rqprintn()
+    gp.qprintn(output)
+    # gp.qprintn(ffdc_list)
+    gp.qprintn()
 
-    grp.rqprint_dashes(0, 90, 1, "=")
+    gp.qprint_dashes(0, 90, 1, "=")
 
 ###############################################################################
 
@@ -487,7 +539,7 @@ def print_test_start_message(boot_keyword):
     global last_ten
 
     doing_msg = gp.sprint_timen("Doing \"" + boot_keyword + "\".")
-    grp.rqprint(doing_msg)
+    gp.qprint(doing_msg)
 
     last_ten.append(doing_msg)
 
@@ -527,11 +579,12 @@ def run_boot(boot):
         # Assertion:  We trust that the state data was made fresh by the
         # caller.
 
-        grp.rprintn()
+        gp.qprintn()
 
         if boot_table[boot]['method_type'] == "keyword":
             rk.my_run_keywords(boot_table[boot].get('lib_file_path', ''),
-                               boot_table[boot]['method'])
+                               boot_table[boot]['method'],
+                               quiet=quiet)
 
         if boot_table[boot]['bmc_reboot']:
             st.wait_for_comm_cycle(int(state['epoch_seconds']))
@@ -549,7 +602,7 @@ def run_boot(boot):
             st.wait_state(match_state, wait_time=state_change_timeout,
                           interval="3 seconds", invert=1)
 
-        grp.rprintn()
+        gp.qprintn()
         if boot_table[boot]['end']['chassis'] == "Off":
             boot_timeout = power_off_timeout
         else:
@@ -583,13 +636,14 @@ def test_loop_body():
     global next_boot
     global boot_success
 
-    grp.rqprintn()
-
-    boot_count += 1
+    gp.qprintn()
 
     next_boot = select_boot()
+    if next_boot == "":
+        return True
 
-    grp.rqprint_timen("Starting boot " + str(boot_count) + ".")
+    boot_count += 1
+    gp.qprint_timen("Starting boot " + str(boot_count) + ".")
 
     # Clear the ffdc_list_file_path file.  Plug-ins may now write to it.
     try:
@@ -600,15 +654,15 @@ def test_loop_body():
     cmd_buf = ["run_boot", next_boot]
     boot_status, msg = BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
     if boot_status == "FAIL":
-        grp.rprint(msg)
+        gp.qprint(msg)
 
-    grp.rqprintn()
+    gp.qprintn()
     if boot_status == "PASS":
         boot_success = 1
-        grp.rqprint_timen("BOOT_SUCCESS: \"" + next_boot + "\" succeeded.")
+        gp.qprint_timen("BOOT_SUCCESS: \"" + next_boot + "\" succeeded.")
     else:
         boot_success = 0
-        grp.rqprint_timen("BOOT_FAILED: \"" + next_boot + "\" failed.")
+        gp.qprint_timen("BOOT_FAILED: \"" + next_boot + "\" failed.")
 
     boot_results.update(next_boot, boot_status)
 
@@ -631,12 +685,10 @@ def test_loop_body():
             gp.print_error("Call to my_ffdc failed.\n")
 
     # We need to purge error logs between boots or they build up.
-    cmd_buf = ["Delete Error logs"]
-    grp.rpissuing_keyword(cmd_buf, test_mode)
-    BuiltIn().run_keyword(*cmd_buf)
+    grk.run_key("Delete Error logs", ignore=1)
 
     boot_results.print_report()
-    grp.rqprint_timen("Finished boot " + str(boot_count) + ".")
+    gp.qprint_timen("Finished boot " + str(boot_count) + ".")
 
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
@@ -647,9 +699,7 @@ def test_loop_body():
         BuiltIn().fail(error_message)
 
     # This should help prevent ConnectionErrors.
-    cmd_buf = ["Delete All Sessions"]
-    grp.rpissuing_keyword(cmd_buf, test_mode)
-    BuiltIn().run_keyword(*cmd_buf)
+    grk.run_key_u("Delete All Sessions")
 
     return True
 
@@ -669,8 +719,8 @@ def main_keyword_teardown():
             call_point='cleanup', stop_on_plug_in_failure=1)
 
     # Save boot_results object to a file in case it is needed again.
-    grp.rprint_timen("Saving boot_results to the following path.")
-    grp.rprint_var(boot_results_file_path)
+    gp.qprint_timen("Saving boot_results to the following path.")
+    gp.qprint_var(boot_results_file_path)
     pickle.dump(boot_results, open(boot_results_file_path, 'wb'),
                 pickle.HIGHEST_PROTOCOL)
 
@@ -689,15 +739,20 @@ def test_teardown():
                "A keyword timeout occurred ending this program.\n"]
     BuiltIn().run_keyword_if_timeout_occurred(*cmd_buf)
 
+    grp.rqprint_pgm_footer()
+
 ###############################################################################
 
 
 ###############################################################################
-def main_py():
+def obmc_boot_test(alt_boot_stack=None):
 
     r"""
     Do main program processing.
     """
+
+    if alt_boot_stack is not None:
+        BuiltIn().set_global_variable("${boot_stack}", alt_boot_stack)
 
     setup()
 
@@ -714,13 +769,21 @@ def main_py():
     while (len(boot_stack) > 0):
         test_loop_body()
 
-    grp.rprint_timen("Finished processing stack.")
+    gp.qprint_timen("Finished processing stack.")
 
     # Process caller's boot_list.
     if len(boot_list) > 0:
         for ix in range(1, max_num_tests + 1):
             test_loop_body()
 
-    grp.rqprint_timen("Completed all requested boot tests.")
+    gp.qprint_timen("Completed all requested boot tests.")
+
+    boot_pass, boot_fail = boot_results.return_total_pass_fail()
+    if boot_fail > boot_fail_threshold:
+        error_message = "Boot failures exceed the boot failure" +\
+                        " threshold:\n" +\
+                        gp.sprint_var(boot_fail) +\
+                        gp.sprint_var(boot_fail_threshold)
+        BuiltIn().fail(gp.sprint_error(error_message))
 
 ###############################################################################
