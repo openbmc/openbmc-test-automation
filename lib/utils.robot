@@ -38,6 +38,7 @@ ${devicetree_base}  /sys/firmware/devicetree/base/model
 Get BMC System Model
     [Documentation]  Get the BMC model from the device tree.
 
+    Open Connection And Log In
     ${bmc_model}  ${stderr}=  Execute Command
     ...  cat ${devicetree_base} | cut -d " " -f 1  return_stderr=True
     Should Be Empty  ${stderr}
@@ -785,8 +786,9 @@ Check For Core Dumps
 Trigger Host Watchdog Error
     [Documentation]  Inject host watchdog error using BMC.
     [Arguments]  ${milliseconds}=1000  ${sleep_time}=5s
-    # Description of arguments:
-    # milliseconds  The time watchdog timer value in milliseconds (e.g. 1000 = 1 second).
+    # Description of argument(s):
+    # milliseconds  The time watchdog timer value in milliseconds (e.g. 1000 =
+    #               1 second).
     # sleep_time    Time delay for host watchdog error to get injected.
     #               Default is 5 seconds.
 
@@ -821,10 +823,11 @@ Configure Initial Settings
     ...  Network Mask, default gatway and serial console IP and port
     ...  information which should be provided in command line.
 
-    [Arguments]  ${host}=${OPENBMC_HOST}  ${mask}=${NET_MASK}  ${gw_ip}=${GW_IP}
+    [Arguments]  ${host}=${OPENBMC_HOST}  ${mask}=${NET_MASK}
+    ...          ${gw_ip}=${GW_IP}
 
-    # Open telnet connection and ignore the error, in case telnet session is already
-    # opened by the program calling this keyword.
+    # Open telnet connection and ignore the error, in case telnet session is
+    # already opened by the program calling this keyword.
 
     Run Keyword And Ignore Error  Open Telnet Connection to BMC Serial Console
     Telnet.write  ifconfig eth0 ${host} netmask ${mask}
