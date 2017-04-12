@@ -52,9 +52,7 @@
     "REST Power Off": {
         "start": {
             "rest": "^1$",
-            "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
-            "host": "^Running$"
+            "chassis": "^On$"
         },
         "end": {
             "rest": "^1$",
@@ -74,9 +72,7 @@
     "IPMI Power Off": {
         "start": {
             "rest": "^1$",
-            "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
-            "host": "^Running$"
+            "chassis": "^On$"
         },
         "end": {
             "rest": "^1$",
@@ -96,9 +92,7 @@
     "IPMI Power Soft": {
         "start": {
             "rest": "^1$",
-            "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
-            "host": "^Running$"
+            "chassis": "^On$"
         },
         "end": {
             "rest": "^1$",
