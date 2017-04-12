@@ -9,20 +9,21 @@ import subprocess
 
 robot_env = 1
 try:
-    import gen_robot_print as grp
     from robot.libraries.BuiltIn import BuiltIn
 except ImportError:
     robot_env = 0
 import gen_print as gp
 import gen_valid as gv
 import gen_misc as gm
+if robot_env:
+    import gen_robot_print as grp
 
 
 ###############################################################################
 def cmd_fnc(cmd_buf,
             quiet=None,
             test_mode=None,
-            debug=None,
+            debug=0,
             print_output=1,
             show_err=1):
 
@@ -49,26 +50,16 @@ def cmd_fnc(cmd_buf,
 
     quiet = int(gm.global_default(quiet, 0))
     test_mode = int(gm.global_default(test_mode, 0))
-    debug = int(gm.global_default(debug, 0))
 
     if debug:
-        if robot_env:
-            grp.rprint_var(cmd_buf)
-            grp.rprint_var(quiet)
-            grp.rprint_var(test_mode)
-            grp.rprint_var(debug)
-        else:
-            gp.print_vars(cmd_buf, quiet, test_mode, debug)
+        gp.print_vars(cmd_buf, quiet, test_mode, debug)
 
     err_msg = gv.svalid_value(cmd_buf)
     if err_msg != "":
         raise ValueError(err_msg)
 
     if not quiet:
-        if robot_env:
-            grp.rpissuing(cmd_buf, test_mode)
-        else:
-            gp.pissuing(cmd_buf, test_mode)
+        gp.pissuing(cmd_buf, test_mode)
 
     if test_mode:
         return 0, ""
