@@ -22,6 +22,12 @@ try:
     from robot.utils import DotDict
     from robot.utils import NormalizedDict
     from robot.libraries.BuiltIn import BuiltIn
+    # Having access to the robot libraries alone does not indicate that we
+    # are in a robot environment.  The following try block should confirm that.
+    try:
+        var_value = BuiltIn().get_variable_value("${SUITE_NAME}", "")
+    except:
+        robot_env = 0
 except ImportError:
     robot_env = 0
 
@@ -46,18 +52,14 @@ col1_indent = 0
 # variable settings.  The objective is to make the variable values line up
 # nicely with the time stamps.
 col1_width = 29
-if 'NANOSECONDS' in os.environ:
-    NANOSECONDS = os.environ['NANOSECONDS']
-else:
-    NANOSECONDS = 0
+
+NANOSECONDS = os.environ.get('NANOSECONDS', '1')
+
 
 if NANOSECONDS == "1":
     col1_width = col1_width + 7
 
-if 'SHOW_ELAPSED_TIME' in os.environ:
-    SHOW_ELAPSED_TIME = os.environ['SHOW_ELAPSED_TIME']
-else:
-    SHOW_ELAPSED_TIME = 0
+SHOW_ELAPSED_TIME = os.environ.get('SHOW_ELAPSED_TIME', '1')
 
 if SHOW_ELAPSED_TIME == "1":
     if NANOSECONDS == "1":
@@ -1236,24 +1238,67 @@ def gp_debug_print(buffer):
 
 
 ###############################################################################
-def gp_get_var_value(var_name,
-                     default=1):
+def get_var_value(var_value=None,
+                  default=1,
+                  var_name=None):
 
     r"""
-    Get the value of the named variable and return it.  If the variable is not
-    defined, the default value is returned.
+    Return either var_value, the corresponding global value or default.
 
-    If we are in a robot environment, get_variable_value will be used.
-    Otherwise, the __builtin__ version of the variable is returned.
+    If var_value is not None, it will simply be returned.
 
-    This function is intended for use only by other functions in this module.
+    If var_value is None, this function will return the corresponding global
+    value of the variable in question.
+
+    Note: For global values, if we are in a robot environment,
+    get_variable_value will be used.  Otherwise, the __builtin__ version of
+    the variable is returned (which are set by gen_arg.py functions).
+
+    If there is no global value associated with the variable, default is
+    returned.
+
+    This function is useful for other functions in setting default values for
+    parameters.
+
+    Example use:
+
+    def my_func(quiet=None):
+
+      quiet = int(get_var_value(quiet, 0))
+
+    Example calls to my_func():
+
+    In the following example, the caller is explicitly asking to have quiet be
+    set to 1.
+
+    my_func(quiet=1)
+
+    In the following example, quiet will be set to the global value of quiet,
+    if defined, or to 0 (the default).
+
+    my_func()
 
     Description of arguments:
+    var_value                       The value to be returned (if not equal to
+                                    None).
+    default                         The value that is returned if var_value is
+                                    None and there is no corresponding global
+                                    value defined.
     var_name                        The name of the variable whose value is to
-                                    be returned.
-    default                         The value that is returned if var_name is
-                                    not defined.
+                                    be returned.  Under most circumstances,
+                                    this value need not be provided.  This
+                                    function can figure out the name of the
+                                    variable passed as var_value.  One
+                                    exception to this would be if this
+                                    function is called directly from a .robot
+                                    file.
     """
+
+    if var_value is not None:
+        return var_value
+
+    if var_name is None:
+        var_name = get_arg_name(None, 1, 2)
 
     if robot_env:
         var_value = int(BuiltIn().get_variable_value("${" + var_name + "}",
@@ -1340,14 +1385,14 @@ for func_name in func_names:
 
     # Define the "q" (i.e. quiet) version of the given print function.
     func_def[0] = "def q" + func_name + "(*args):"
-    func_def[1] = "    if gp_get_var_value(\"quiet\", 0): return"
+    func_def[1] = "    if get_var_value(None, 0, \"quiet\"): return"
     pgm_definition_string = '\n'.join(func_def)
     gp_debug_print(pgm_definition_string)
     exec(pgm_definition_string)
 
     # Define the "d" (i.e. debug) version of the given print function.
     func_def[0] = "def d" + func_name + "(*args):"
-    func_def[1] = "    if not gp_get_var_value(\"debug\", 0): return"
+    func_def[1] = "    if not get_var_value(None, 0, \"debug\"): return"
     pgm_definition_string = '\n'.join(func_def)
     gp_debug_print(pgm_definition_string)
     exec(pgm_definition_string)
