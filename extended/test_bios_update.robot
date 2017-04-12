@@ -1,23 +1,34 @@
 *** Settings ***
-Documentation     Update the PNOR image on the host for
-...               hostboot CI purposes.
+Documentation  Update the PNOR image on the host for hostboot CI purposes.
 
-Library           OperatingSystem
-Resource          ../lib/utils.robot
-Resource          ../lib/connection_client.robot
-Resource          ../lib/openbmc_ffdc.robot
-Resource          ../lib/state_manager.robot
+Library                 OperatingSystem
+Library                 ../lib/gen_robot_keyword.py
 
-Test Teardown     FFDC On Test Case Fail
+Resource                ../extended/obmc_boot_test_resource.robot
+Resource                ../lib/utils.robot
+Resource                ../lib/connection_client.robot
+Resource                ../lib/openbmc_ffdc.robot
+Resource                ../lib/state_manager.robot
+
+Test Teardown           Run Key  FFDC On Test Case Fail
 
 *** Variables ***
+
+${QUIET}                ${1}
+# Boot failures are not acceptable so we set the threshold to 0.
+${boot_fail_threshold}  ${0}
+# "skip" indicates to OBMC Boot Test that it should only process boot stack
+# items that would change the machine state, i.e. only if the action is
+# needed.
+${stack_mode}           skip
+
+${FORCE_UPDATE}         ${0}
 
 *** Test Cases ***
 
 Host BIOS Update And Boot
-    [Tags]    open-power
-    [Documentation]   Update PNOR image and verify that
-    ...               host boots normally.
+    [Documentation]  Update PNOR image and verify.
+    [Tags]  Host_BIOS_Update_And_Boot  open-power
 
     Validate Parameters
     Prepare BMC For Update
@@ -28,25 +39,22 @@ Host BIOS Update And Boot
 Prepare BMC For Update
     [Documentation]  Prepare system for PNOR update.
 
-    Initiate Power Off
+    Run Key U  OBMC Boot Test \ REST Power Off
 
-    Trigger Warm Reset
-    Check If BMC is Up  20 min  10 sec
+    Run Keyword If  '${FORCE_UPDATE}' == '${0}'  Run Keywords
+    ...  Trigger Warm Reset  AND
+    ...  Check If BMC is Up  20 min  10 sec  AND
+    ...  Wait For BMC Ready
 
-    Wait For BMC Ready
-
-    Clear BMC Record Log
-
+    Run Key  Clear BMC Record Log
 
 Update PNOR Image
     [Documentation]  Copy the PNOR image to the BMC /tmp dir and flash it.
 
-    Copy PNOR to BMC
-    ${pnor_path}  ${pnor_basename}=   Split Path    ${PNOR_IMAGE_PATH}
-    Flash PNOR   /tmp/${pnor_basename}
-    Wait Until Keyword Succeeds
-    ...  7 min    10 sec    Is PNOR Flash Done
-
+    Run Key  Copy PNOR to BMC
+    ${pnor_path}  ${pnor_basename}=  Split Path  ${PNOR_IMAGE_PATH}
+    Run Key  Flash PNOR \ /tmp/${pnor_basename}
+    Run Key  Wait Until Keyword Succeeds \ 7 min \ 10 sec \ Is PNOR Flash Done
 
 Validate IPL
     [Documentation]  Power the host on, and validate the IPL.
