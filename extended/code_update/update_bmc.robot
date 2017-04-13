@@ -28,9 +28,6 @@ Resource          ../../lib/state_manager.robot
 Resource          ../../lib/utils.robot
 Resource          ../../lib/openbmc_ffdc.robot
 
-Library   String
-Suite Setup  Validate BMC Image File Name  ${FILE_PATH}
-
 Test Teardown      FFDC On Test Case Fail
 
 *** Variables ***
