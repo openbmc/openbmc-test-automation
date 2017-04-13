@@ -41,6 +41,9 @@ Set Valid System Time
     ...              correctly set in BMC.
     [Tags]  Set_Valid_System_Time
 
+    Set Time Owner  HOST
+    Set Time Mode  MANUAL
+
     ${resp}=  Run IPMI Standard Command  sel time set "${SYSTEM_TIME_VALID}"
     ${setdate}=  Convert Date  ${SYSTEM_TIME_VALID}
     ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=yes
@@ -55,6 +58,9 @@ Set Invalid System Time
     ...              that it should throw error.
     [Tags]  Set_Invalid_System_Time
 
+    Set Time Owner  HOST
+    Set Time Mode  MANUAL
+
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  sel time set "${SYSTEM_TIME_INVALID}"
     Should Start With  ${msg}  Specified time could not be parsed
@@ -63,6 +69,9 @@ Set System Time with no time
     [Documentation]  Set system time with no time using IPMI and verify
     ...              that it should throw error.
     [Tags]  Set_System_Time_with_no_time
+
+    Set Time Owner  HOST
+    Set Time Mode  MANUAL
 
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  sel time set ""
