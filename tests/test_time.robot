@@ -41,6 +41,9 @@ Set Valid System Time
     ...              correctly set in BMC.
     [Tags]  Set_Valid_System_Time
 
+    Set Time Owner  HOST
+    Set Time Mode  MANUAL
+
     ${resp}=  Run IPMI Standard Command  sel time set "${SYSTEM_TIME_VALID}"
     ${setdate}=  Convert Date  ${SYSTEM_TIME_VALID}
     ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=yes
