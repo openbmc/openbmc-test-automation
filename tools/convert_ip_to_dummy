@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Input: First argument is IP address, Second argument is file with path
+# Output: Wherever IP address appears will be changed to DUMMYIP
+
+VAR=`echo ${1} | sed 's/\(\.\)/\\\./g'`
+sed -i 's/'$VAR'/DUMMYIP/g'  $2
