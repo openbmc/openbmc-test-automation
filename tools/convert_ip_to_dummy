@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# This program will modify a file by substituting all instances of a specified
+# IP with "DUMMYIP".  This is useful for making the IP address generic and thus
+# searchable.
+
+# Description of argument(s):
+# ip_addr    An IP address.
+# file_path  The path to a file which is to be modified.
+
+# Get arguments.
+ip_addr="${1}" ; shift
+file_path="${1}" ; shift
+
+# Validate arguments.
+if [ -z "${ip_addr}" ] ; then
+  echo "**ERROR** You must provide an IP address as the first positional" \
+       "parameter." >&2
+  exit 1
+fi
+
+if [ -z "${file_path}" ] ; then
+  echo "**ERROR** You must provide a file path as the second positional" \
+       "parameter." >&2
+  exit 1
+fi
+
+ip_addr_regex=`echo ${ip_addr} | sed 's/\(\.\)/\\\./g'`
+sed -i 's/'${ip_addr_regex}'/DUMMYIP/g'  ${file_path}
