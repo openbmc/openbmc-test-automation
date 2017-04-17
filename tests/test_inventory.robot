@@ -187,8 +187,10 @@ Qualified FRU List
 
     ${fru_list}=  Create List
     :FOR  ${fru_uri}  IN  @{system_list}
-    \  ${is_fru}=  OpenBMC Get Request  ${fru_uri}/attr/FieldReplaceable
-    \  ${status}=  Run Keyword And Return Status  Should Be True  ${is_fru}
+    \  ${resp}=  OpenBMC Get Request  ${fru_uri}/attr/FieldReplaceable
+    \  ${jsondata}=  To JSON  ${resp.content}
+    \  ${status}=  Run Keyword And Return Status
+    ...  Should Be True  ${jsondata['data']} == ${1}
     \  Run Keyword If  '${status}' == '${True}'
     ...  Append To List  ${fru_list}  ${fru_uri}
 
