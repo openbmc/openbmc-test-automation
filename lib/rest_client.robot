@@ -103,7 +103,7 @@ OpenBMC Delete Request
     Initialize OpenBMC    ${timeout}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     Log Request    method=Delete    base_uri=${base_uri}    args=&{kwargs}
-    ${ret}=  Put Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    ${ret}=  Delete Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Log Response    ${ret}
     [Return]    ${ret}
 
