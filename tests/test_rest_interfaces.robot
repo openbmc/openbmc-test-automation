@@ -5,7 +5,7 @@ Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/resource.txt
 Library           Collections
-Test Teardown     FFDC On Test Case Fail
+#Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -180,7 +180,7 @@ Execute Post And Check Data
     [Documentation]  Request Post on url path and expected non empty data.
     # Description of arguments:
     # url_path     URL path.
-    ${data}=  Create Dictionary   data=@{data}
+    ${data}=  Create Dictionary  data=@{parm}
     ${resp}=  Openbmc Post Request  ${url_path}  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${jsondata}=  To JSON  ${resp.content}
@@ -192,5 +192,6 @@ Execute Delete And Check Response
     # Description of arguments:
     # expected_response_code   Expected REST status codes.
     # url_path     URL path.
-    ${resp}=  Openbmc Delete Request  ${url_path}
+    ${data}=  Create Dictionary  data=@{EMPTY}
+    ${resp}=  Openbmc Delete Request  ${url_path}  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${expected_response_code}
