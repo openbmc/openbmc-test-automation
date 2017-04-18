@@ -886,3 +886,16 @@ Delete Error logs
     Execute Command On BMC
     ...  systemctl restart xyz.openbmc_project.Logging.service
     Sleep  10s  reason=Wait for logging service to restart properly.
+
+###############################################################################
+Delete Error log Entry
+    [Documentation]  Delete error log entry.
+    [Arguments]  ${entry_path}
+
+    # Description of arguments:
+    # entry_path  Delete an error log entry.
+    #             Ex. /xyz/openbmc_project/logging/entry/1
+
+    ${data}=   create dictionary   data=@{EMPTY}
+    ${resp}=  Openbmc Delete Request  ${entry_path}  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
