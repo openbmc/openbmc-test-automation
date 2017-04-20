@@ -16,9 +16,9 @@ Library   ../lib/obmc_boot_test.py
 ...  pdu_username  pdu_password  pdu_slot_no  openbmc_serial_host
 ...  openbmc_serial_port  stack_mode  boot_stack  boot_list  max_num_tests
 ...  plug_in_dir_paths  status_file_path  openbmc_model  boot_pass  boot_fail
-...  ffdc_dir_path_style  ffdc_check  state_change_timeout  power_on_timeout
-...  power_off_timeout  ffdc_only  boot_fail_threshold  test_mode  quiet
-...  debug
+...  ffdc_dir_path_style  ffdc_check  ffdc_only  ffdc_function_list
+...  state_change_timeout  power_on_timeout  power_off_timeout
+...  boot_fail_threshold  test_mode  quiet  debug
 
 # Initialize each program parameter.
 ${openbmc_host}             ${EMPTY}
@@ -48,10 +48,11 @@ ${boot_pass}                ${0}
 ${boot_fail}                ${0}
 ${ffdc_dir_path_style}      ${EMPTY}
 ${ffdc_check}               ${EMPTY}
+${ffdc_only}                ${0}
+${ffdc_function_list}       ${EMPTY}
 ${state_change_timeout}     3 mins
 ${power_on_timeout}         14 mins
 ${power_off_timeout}        2 mins
-${ffdc_only}                ${0}
 # If the number of boot failures, exceeds boot_fail_threshold, this program
 # returns non-zero.
 ${boot_fail_threshold}      ${1000000}
@@ -63,3 +64,17 @@ ${debug}                    0
 # test_really_running is needed by DB_Logging plug-in.
 ${test_really_running}      ${1}
 
+
+*** Keywords ***
+###############################################################################
+OBMC Boot Test
+    [Teardown]  OBMC Boot Test Teardown
+    [Arguments]  @{arguments}
+
+    # Note: If I knew how to specify a keyword teardown in python, I would
+    # rename the "OBMC Boot Test Py" python function to "OBMC Boot Test" and
+    # do away with this robot keyword.
+
+    OBMC Boot Test Py  @{arguments}
+
+###############################################################################
