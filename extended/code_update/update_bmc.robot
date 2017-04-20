@@ -22,6 +22,7 @@ Documentation     Trigger code update to a target BMC.
 ...                 - Warm Reset BMC to activate code
 ...                 - Wait for BMC to come online time out 30 minutes
 ...                 - Version check post update
+...                 - Identify REST url post update
 
 Library                 ../../lib/gen_robot_keyword.py
 Library                 String
@@ -43,6 +44,8 @@ ${boot_fail_threshold}  ${0}
 
 ${FILE_PATH}            ${EMPTY}
 ${FORCE_UPDATE}         ${0}
+${REST_URL_FILE}        ${EMPTY}
+${IDENTIFY_REST_URL}    no
 
 # There are two reboots issued by code update.
 ${MAX_BOOT_COUNT}       ${2}
@@ -78,6 +81,8 @@ Initiate Code Update BMC
     Run Keyword If  ${FORCE_UPDATE} == ${0}
     ...  Prepare BMC For Update
 
+    ${url_before_cu}=  Collect URL List
+
     Run Key U  Preserve BMC Network Setting
     Run Key  SCP Tar Image File To BMC \ ${FILE_PATH}
     Run Key  Activate BMC Flash Image
@@ -85,6 +90,11 @@ Initiate Code Update BMC
     Run Key U  Check Boot Count And Time
     Run Keyword If  ${BOOT_COUNT} == ${1}
     ...  Log  Boot time not updated by kernel.  level=WARN
+
+    ${url_after_cu}=  Collect URL List
+    Run Keyword If  '${IDENTIFY_REST_URL}' == 'yes'
+    ...  Compare URL List After Code Update  ${url_before_cu}  ${url_after_cu}
+
 
 Test Basic BMC Performance At Ready State
     [Documentation]   Check performance of memory, CPU & file system of BMC.
@@ -103,6 +113,7 @@ Enable Core Dump File Size To Be Unlimited
     [Documentation]  Set core dump file size to unlimited.
     [Tags]  Enable_Core_Dump_File_size_To_Be_unlimited
     Set Core Dump File Size Unlimited
+
 
 *** Keywords ***
 
@@ -152,3 +163,32 @@ Wait For Temp BMC Ready
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Check Temp BMC State
 
+Collect URL List
+    [Documentation]  Collect URLs list by using enumerate.
+
+    Open Connection And Log In
+    ${resp}=   Read Properties   ${OPENBMC_BASE_URI}enumerate   timeout=30
+    ${list}=  Get Dictionary Keys  ${resp}
+    [Return]  ${list}
+
+Compare URL List After Code Update
+    [Documentation]  Compare URL list before and after code update.
+    [Arguments]  ${url_before_cu}  ${url_after_cu}
+    # Description of arguments:
+    # url_before_cu  List of URLs available before code update.
+    # url_after_cu   List of URLs available after code update.
+
+    Create File  ${REST_URL_FILE}  URL Removed${\n}
+    ${url_removed_list}=  Create List
+    :FOR  ${item}  IN  @{url_before_cu}
+    \  ${status}=  Run Keyword And Return Status  Should Contain  ${url_after_cu}  ${item}
+    \  Run Keyword If  '${status}' == '${False}'
+    ...  Append To File  ${REST_URL_FILE}  [${item}]${\n}
+
+    Append To File  ${REST_URL_FILE}  URL Added${\n}
+
+    ${url_added_list}=  Create List
+    :FOR  ${item}  IN  @{url_after_cu}
+    \  ${status}=  Run Keyword And Return Status  Should Contain  ${url_before_cu}  ${item}
+    \  Run Keyword If  '${status}' == '${False}'
+    ...  Append To File  ${REST_URL_FILE}  [${item}]${\n}
