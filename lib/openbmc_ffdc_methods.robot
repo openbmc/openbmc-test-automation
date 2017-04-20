@@ -8,6 +8,8 @@ Resource           utils.robot
 Library            SSHLibrary
 Library            OperatingSystem
 Library            Collections
+Library            String
+Library            gen_robot_keyword.py
 
 *** Keywords ***
 
@@ -19,31 +21,71 @@ Library            Collections
 ################################################################
 
 Call FFDC Methods
-    [Documentation]   Calls into FFDC Keyword index list
+    [Documentation]   Call into FFDC Keyword index list.
+    [Arguments]  ${ffdc_function_list}=${EMPTY}
 
-    @{entries}=     Get ffdc method index
-    :FOR  ${index}  IN   @{entries}
-    \     Method Call Keyword List   ${index}
+    # Description of argument(s):
+    # ffdc_function_list  A colon-delimited list naming the kinds of FFDC that
+    #                     is to be collected
+    #                     (e.g. "FFDC Generic Report:BMC Specific Files").
+    #                     Acceptable values can be found in the description
+    #                     field of FFDC_METHOD_CALL in
+    #                     lib/openbmc_ffdc_list.py.  Those values can be
+    #                     obtained via a call to 'Get FFDC Method Desc' (also
+    #                     from lib/openbmc_ffdc_list.py).
+
+    @{entries}=  Get FFDC Method Index
+    :FOR  ${index}  IN  @{entries}
+    \    Method Call Keyword List  ${index}  ${ffdc_function_list}
     SSHLibrary.Close All Connections
 
-
 Method Call Keyword List
-    [Documentation]   Iterate the list through keyword index
-    [Arguments]       ${index}
+    [Documentation]  Iterate the list through keyword index.
+    [Arguments]  ${index}  ${ffdc_function_list}=${EMPTY}
 
-    @{method_list}=      Get ffdc method call   ${index}
+    # Description of argument(s):
+    # index               The index into the FFDC_METHOD_CALL dictionary (e.g.
+    #                     'BMC LOGS').
+    # ffdc_function_list  See ffdc_function_list description in
+    #                     "Call FFDC Methods" (above).
+
+    @{method_list}=  Get ffdc method call  ${index}
+
+    # If function list is empty assign default (i.e. a list of all allowable
+    # values).  In either case, convert ffdc_function_list from a string to
+    # a list.
+    @{ffdc_function_list}=
+    ...  Run Keyword If  '${ffdc_function_list}' == '${EMPTY}'
+    ...    Get FFDC Method Desc  ${index}
+    ...  ELSE
+    ...    Split String  ${ffdc_function_list}  separator=:
+
     :FOR  ${method}  IN  @{method_list}
-    \    Execute Keyword Method   ${method[1]}
-
+    \    Execute Keyword Method  ${method[0]}  ${method[1]}
+    ...      @{ffdc_function_list}
 
 Execute Keyword Method
-    [Documentation]   Calls into BMC method keywords. Don't let one
-    ...               failure skips the remaining. Get whatever data
-    ...               it could gather at worse case scenario.
-    [Arguments]   ${keyword_name}
+    [Documentation]  Call into BMC method keywords. Don't let one
+    ...              failure skip the remaining. Get whatever data
+    ...              it could gather at worse case scenario.
+    [Arguments]  ${description}  ${keyword_name}  @{ffdc_function_list}
 
-    Run Keyword And Continue On Failure   ${keyword_name}
+    # Description of argument(s):
+    # description         The description of the FFDC to be collected.  This
+    #                     would be any value returned by
+    #                     'Get FFDC Method Desc' (e.g. "FFDC Generic Report").
+    # keyword_name        The name of the keyword to call to collect the FFDC
+    #                     data (again, see FFDC_METHOD_CALL).
+    # ffdc_function_list  See ffdc_function_list description in
+    #                     "Call FFDC Methods" (above).  The only difference is
+    #                     in this case, it should be a list rather than a
+    #                     colon-delimited value.
 
+    ${status}  ${ret_values}=  Run Keyword And Ignore Error
+    ...  List Should Contain Value  ${ffdc_function_list}  ${description}
+    Run Keyword If  '${status}' != 'PASS'  Return from Keyword
+
+    Run Key  ${keyword_name}  ignore=1
 
 ################################################################
 # Method : BMC FFDC Manifest                                   #
