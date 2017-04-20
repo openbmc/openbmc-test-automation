@@ -15,7 +15,8 @@ ${dbusHostIpmiCmdReceivedMsg}=   ${OPENBMC_BASE_DBUS}.HostIpmi.ReceivedMessage
 ${netfnByte}=          ${EMPTY}
 ${cmdByte}=            ${EMPTY}
 ${arrayByte}=          array:byte:
-${IPMI_EXT_CMD}=       ipmitool -I lanplus -C 3 -P
+${IPMI_EXT_CMD}=       ipmitool -I lanplus -C 3
+${IPMI_USER_OPTIONS}   ${EMPTY}
 ${IPMI_INBAND_CMD}=    ipmitool -C 3
 ${HOST}=               -H
 ${RAW}=                raw
@@ -104,7 +105,7 @@ Run Inband IPMI Standard Command
 Run External IPMI RAW Command
     [Arguments]    ${args}
     ${ipmi_raw_cmd}=   Catenate  SEPARATOR=
-    ...    ${IPMI_EXT_CMD}${SPACE}${IPMI_PASSWORD}${SPACE}
+    ...    ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
     ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${RAW}${SPACE}${args}
     ${rc}    ${output}=    Run and Return RC and Output    ${ipmi_raw_cmd}
     Should Be Equal    ${rc}    ${0}    msg=${output}
@@ -112,12 +113,13 @@ Run External IPMI RAW Command
 
 Run External IPMI Standard Command
     [Arguments]    ${args}
-    ${ipmi_cmd}=   Catenate  SEPARATOR=
-    ...    ${IPMI_EXT_CMD}${SPACE}${IPMI_PASSWORD}${SPACE}
-    ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${args}
-    ${rc}    ${output}=    Run and Return RC and Output    ${ipmi_cmd}
-    Should Be Equal    ${rc}    ${0}    msg=${output}
-    [Return]   ${output}
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ${IPMI_EXT_CMD} ${IPMI_USER_OPTIONS} -P${SPACE}${IPMI_PASSWORD}
+    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${args}
+    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
+    Should Be Equal  ${rc}  ${0}  msg=${output}
+    [Return]  ${output}
 
 Check If IPMI Tool Exist
     [Documentation]  Check if IPMI Tool installed or not.
