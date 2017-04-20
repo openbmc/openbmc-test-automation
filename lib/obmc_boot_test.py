@@ -234,10 +234,15 @@ def setup():
                                      show_err=0)
     if shell_rc != 0:
         robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
-        os.environ['PATH'] = robot_pgm_dir_path +\
-            "../bin:" + os.environ.get('PATH', "")
-        os.environ['PYTHONPATH'] = robot_pgm_dir_path +\
-            os.environ.get('PYTHONPATH', "")
+        repo_bin_path = robot_pgm_dir_path.replace("/lib/", "/bin/")
+        os.environ['PATH'] = repo_bin_path + ":" + os.environ.get('PATH', "")
+        PYTHONPATH = os.environ.get("PYTHONPATH", "")
+        if PYTHONPATH == "":
+            os.environ['PYTHONPATH'] = robot_pgm_dir_path
+        else:
+            os.environ['PYTHONPATH'] = robot_pgm_dir_path + ":" + PYTHONPATH
+        if robot_pgm_dir_path not in sys.path:
+            sys.path.append(robot_pgm_dir_path)
 
     validate_parms()
 
@@ -525,12 +530,11 @@ def my_ffdc():
         call_point='ffdc', stop_on_plug_in_failure=1)
 
     AUTOBOOT_FFDC_PREFIX = os.environ['AUTOBOOT_FFDC_PREFIX']
-
-    cmd_buf = ["FFDC", "ffdc_prefix=" + AUTOBOOT_FFDC_PREFIX]
-    grp.rpissuing_keyword(cmd_buf)
-    try:
-        BuiltIn().run_keyword_and_continue_on_failure(*cmd_buf)
-    except:
+    status, ret_values = grk.run_key_u("FFDC  ffdc_prefix=" +
+                                       AUTOBOOT_FFDC_PREFIX +
+                                       "  ffdc_function_list=" +
+                                       ffdc_function_list, ignore=1)
+    if status != 'PASS':
         gp.print_error("Call to ffdc failed.\n")
 
     my_get_state()
@@ -692,11 +696,8 @@ def test_loop_body():
         call_point='ffdc_check', shell_rc=0x00000200,
         stop_on_plug_in_failure=1, stop_on_non_zero_rc=1)
     if boot_status != "PASS" or ffdc_check == "All" or shell_rc == 0x00000200:
-        cmd_buf = ["my_ffdc"]
-        grp.rpissuing_keyword(cmd_buf)
-        try:
-            BuiltIn().run_keyword_and_continue_on_failure(*cmd_buf)
-        except:
+        status, ret_values = grk.run_key_u("my_ffdc", ignore=1)
+        if status != 'PASS':
             gp.print_error("Call to my_ffdc failed.\n")
 
     # We need to purge error logs between boots or they build up.
@@ -722,7 +723,7 @@ def test_loop_body():
 
 
 ###############################################################################
-def main_keyword_teardown():
+def obmc_boot_test_teardown():
 
     r"""
     Clean up after the Main keyword.
@@ -760,7 +761,7 @@ def test_teardown():
 
 
 ###############################################################################
-def obmc_boot_test(alt_boot_stack=None):
+def obmc_boot_test_py(alt_boot_stack=None):
 
     r"""
     Do main program processing.
@@ -773,12 +774,7 @@ def obmc_boot_test(alt_boot_stack=None):
 
     if ffdc_only:
         gp.qprint_timen("Caller requested ffdc_only.")
-        cmd_buf = ["my_ffdc"]
-        grp.rpissuing_keyword(cmd_buf)
-        try:
-            BuiltIn().run_keyword_and_continue_on_failure(*cmd_buf)
-        except:
-            gp.print_error("Call to my_ffdc failed.\n")
+        grk.run_key_u("my_ffdc")
 
     # Process caller's boot_stack.
     while (len(boot_stack) > 0):
