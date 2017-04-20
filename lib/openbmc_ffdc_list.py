@@ -211,6 +211,16 @@ class openbmc_ffdc_list():
         """
         return FFDC_METHOD_CALL.keys()
 
+    def get_ffdc_method_desc(self,
+                             index):
+        r"""
+        ########################################################################
+        #   @brief   This method returns the just the keys from the dictionary.
+        #   @return  List of ffdc descriptions.
+        ########################################################################
+        """
+        return FFDC_METHOD_CALL[index].keys()
+
     def get_ffdc_method_call(self, i_type):
         r"""
         ########################################################################
