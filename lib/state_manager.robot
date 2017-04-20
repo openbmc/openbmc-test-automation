@@ -162,7 +162,8 @@ Put BMC State
 Initiate BMC Reboot
     [Documentation]  Initiate BMC reboot.
     ${args}=  Create Dictionary   data=${BMC_REBOOT_TRANS}
-    Write Attribute
+
+    Run Keyword And Ignore Error  Write Attribute
     ...  ${BMC_STATE_URI}  RequestedBMCTransition   data=${args}
 
     ${session_active}=   Check If BMC Reboot Is Initiated
