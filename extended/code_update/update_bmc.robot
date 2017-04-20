@@ -22,6 +22,7 @@ Documentation     Trigger code update to a target BMC.
 ...                 - Warm Reset BMC to activate code
 ...                 - Wait for BMC to come online time out 30 minutes
 ...                 - Version check post update
+...                 - Identify REST url post update
 
 Library                 ../../lib/gen_robot_keyword.py
 Library                 String
@@ -30,6 +31,7 @@ Resource                code_update_utils.robot
 Resource                ../../lib/boot/boot_resource_master.robot
 Resource                ../../lib/state_manager.robot
 Resource                ../../lib/utils.robot
+Resource                ../../lib/list_utils.robot
 Resource                ../../lib/openbmc_ffdc.robot
 Resource                ../../extended/obmc_boot_test_resource.robot
 
@@ -43,6 +45,7 @@ ${boot_fail_threshold}  ${0}
 
 ${FILE_PATH}            ${EMPTY}
 ${FORCE_UPDATE}         ${0}
+${REST_URL_FILE_PATH}   ${EMPTY}
 
 # There are two reboots issued by code update.
 ${MAX_BOOT_COUNT}       ${2}
@@ -61,6 +64,12 @@ Check Core Dump Exist Before Code Update
     [Documentation]  Check core dump existence on BMC before code update.
     [Tags]  Check_Core_Dump_Exist_Before_Code_Update
     Check For Core Dumps
+
+Check URLs Before Code Update
+    [Documentation]  Check available URLs before code update.
+    [Tags]  Check_URLs_Before_Code_Update
+    ${url_list}=  Get URL List  ${OPENBMC_BASE_URI}
+    Set Global Variable  ${URL_BEFORE_CU}  ${url_list}
 
 Initiate Code Update BMC
     [Documentation]  Initiate a code update on the BMC.
@@ -86,13 +95,18 @@ Initiate Code Update BMC
     Run Keyword If  ${BOOT_COUNT} == ${1}
     ...  Log  Boot time not updated by kernel.  level=WARN
 
-
 Install BMC Debug Tarball
     [Documentation]  Install the downloaded debug tarball on BMC.
     [Tags]  Install_BMC_Debug_Tarball
     Run Keyword If  '${DEBUG_TARBALL_PATH}' != '${EMPTY}'
     ...  Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
 
+Compare URLs Before And After Code Update
+    [Documentation]  Compare URLs before and after code update.
+    [Tags]  Compare_URLs_Before_And_After_Code_Update
+
+    ${url_after_cu}=  Get URL List  ${OPENBMC_BASE_URI}
+    Compare URL List After Code Update  ${URL_BEFORE_CU}  ${url_after_cu}
 
 Test Basic BMC Performance At Ready State
     [Documentation]   Check performance of memory, CPU & file system of BMC.
@@ -160,3 +174,20 @@ Wait For Temp BMC Ready
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Check Temp BMC State
 
+Compare URL List After Code Update
+    [Documentation]  Compare URL list before and after code update.
+    [Arguments]  ${url_before_cu}  ${url_after_cu}
+    # Description of arguments:
+    # url_before_cu  List of URLs available before code update.
+    # url_after_cu   List of URLs available after code update.
+
+    Should Not Be Empty  ${REST_URL_FILE_PATH}
+    Create File  ${REST_URL_FILE_PATH}  URL Removed${\n}
+
+    ${url_removed_list}=  Subtract Lists  ${url_before_cu}  ${url_after_cu}
+    Append To File  ${REST_URL_FILE_PATH}  [${url_removed_list}]
+
+    Append To File  ${REST_URL_FILE_PATH}  ${\n}URL Added${\n}
+
+    ${url_added_list}=  Subtract Lists  ${url_after_cu}  ${url_before_cu}
+    Append To File  ${REST_URL_FILE_PATH}  [${url_added_list}]
