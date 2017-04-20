@@ -22,6 +22,7 @@ Documentation     Trigger code update to a target BMC.
 ...                 - Warm Reset BMC to activate code
 ...                 - Wait for BMC to come online time out 30 minutes
 ...                 - Version check post update
+...                 - Identify REST url post update
 
 Library                 ../../lib/gen_robot_keyword.py
 Library                 String
@@ -30,6 +31,7 @@ Resource                code_update_utils.robot
 Resource                ../../lib/boot/boot_resource_master.robot
 Resource                ../../lib/state_manager.robot
 Resource                ../../lib/utils.robot
+Resource                ../../lib/list_utils.robot
 Resource                ../../lib/openbmc_ffdc.robot
 Resource                ../../extended/obmc_boot_test_resource.robot
 
@@ -43,6 +45,8 @@ ${boot_fail_threshold}  ${0}
 
 ${FILE_PATH}            ${EMPTY}
 ${FORCE_UPDATE}         ${0}
+${REST_URL_FILE}        ${EMPTY}
+${IDENTIFY_REST_URL}    no
 
 # There are two reboots issued by code update.
 ${MAX_BOOT_COUNT}       ${2}
@@ -78,6 +82,8 @@ Initiate Code Update BMC
     Run Keyword If  ${FORCE_UPDATE} == ${0}
     ...  Prepare BMC For Update
 
+    ${url_before_cu}=  Get URL List  ${OPENBMC_BASE_URI}
+
     Run Key U  Preserve BMC Network Setting
     Run Key  SCP Tar Image File To BMC \ ${FILE_PATH}
     Run Key  Activate BMC Flash Image
@@ -85,6 +91,11 @@ Initiate Code Update BMC
     Run Key U  Check Boot Count And Time
     Run Keyword If  ${BOOT_COUNT} == ${1}
     ...  Log  Boot time not updated by kernel.  level=WARN
+
+    ${url_after_cu}=  Get URL List  ${OPENBMC_BASE_URI}
+    Run Keyword If  '${IDENTIFY_REST_URL}' == 'yes'
+    ...  Compare URL List After Code Update  ${url_before_cu}  ${url_after_cu}
+
 
 Test Basic BMC Performance At Ready State
     [Documentation]   Check performance of memory, CPU & file system of BMC.
@@ -103,6 +114,7 @@ Enable Core Dump File Size To Be Unlimited
     [Documentation]  Set core dump file size to unlimited.
     [Tags]  Enable_Core_Dump_File_size_To_Be_unlimited
     Set Core Dump File Size Unlimited
+
 
 *** Keywords ***
 
@@ -152,3 +164,19 @@ Wait For Temp BMC Ready
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Check Temp BMC State
 
+Compare URL List After Code Update
+    [Documentation]  Compare URL list before and after code update.
+    [Arguments]  ${url_before_cu}  ${url_after_cu}
+    # Description of arguments:
+    # url_before_cu  List of URLs available before code update.
+    # url_after_cu   List of URLs available after code update.
+
+    Create File  ${REST_URL_FILE}  URL Removed${\n}
+
+    ${url_removed_list}=  Subtract List  ${url_before_cu}  ${url_after_cu}
+    Append To File  ${REST_URL_FILE}  [${url_removed_list}]
+
+    Append To File  ${REST_URL_FILE}  ${\n}URL Added${\n}
+
+    ${url_added_list}=  Subtract List  ${url_after_cu}  ${url_before_cu}
+    Append To File  ${REST_URL_FILE}  [${url_added_list}]
