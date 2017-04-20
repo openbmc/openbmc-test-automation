@@ -68,8 +68,12 @@ def run_key(keyword_buf,
     if test_mode:
         return 'PASS', ""
 
-    status, ret_values = \
-        BuiltIn().run_keyword_and_ignore_error(*keyword_list)
+    try:
+        status, ret_values = \
+            BuiltIn().run_keyword_and_ignore_error(*keyword_list)
+    except Exception as my_assertion_error:
+        status = "FAIL"
+        ret_values = my_assertion_error.args[0]
 
     if not (status == 'PASS' or ignore):
         # Output the error message to stderr.
