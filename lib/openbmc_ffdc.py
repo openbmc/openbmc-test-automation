@@ -8,13 +8,15 @@ import os
 
 import gen_robot_print as grp
 import gen_valid as gv
+import gen_robot_keyword as grk
 
 from robot.libraries.BuiltIn import BuiltIn
 
 
 ###############################################################################
 def ffdc(ffdc_dir_path=None,
-         ffdc_prefix=None):
+         ffdc_prefix=None,
+         ffdc_function_list=""):
 
     r"""
     Gather First Failure Data Capture (FFDC).
@@ -32,15 +34,14 @@ def ffdc(ffdc_dir_path=None,
 
     # Check if Ping and SSH connection is alive
     OPENBMC_HOST = BuiltIn().get_variable_value("${OPENBMC_HOST}")
-    cmd_buf = ["Ping Host", OPENBMC_HOST]
-    grp.rpissuing_keyword(cmd_buf)
-    status_ping = BuiltIn().run_keyword_and_return_status(*cmd_buf)
+    status, status_ping = grk.run_key("Ping Host  " + OPENBMC_HOST)
     grp.rprint_var(status_ping)
-    if status_ping == True:
+    if status_ping:
         status_ssh = \
-          BuiltIn().run_keyword_and_return_status("Open Connection And Log In")
+            BuiltIn().run_keyword_and_return_status("Open Connection And" +
+                                                    " Log In")
         grp.rprint_var(status_ssh)
-        if status_ssh != True:
+        if not status_ssh:
             grp.rprint_error("BMC is not communicating. \
                               Aborting FFDC collection.\n")
             BuiltIn().run_keyword_and_return_status("Close All Connections")
@@ -77,13 +78,10 @@ def ffdc(ffdc_dir_path=None,
     FFDC_FILE_PATH = ffdc_dir_path + ffdc_prefix + "BMC_general.txt"
     BuiltIn().set_global_variable("${FFDC_FILE_PATH}", FFDC_FILE_PATH)
 
-    cmd_buf = ["Header Message"]
-    grp.rpissuing_keyword(cmd_buf)
-    BuiltIn().run_keyword(*cmd_buf)
+    grk.run_key("Header Message")
 
-    cmd_buf = ["Call FFDC Methods"]
-    grp.rpissuing_keyword(cmd_buf)
-    BuiltIn().run_keyword(*cmd_buf)
+    grk.run_key_u("Call FFDC Methods  ffdc_function_list=" +
+                  ffdc_function_list)
 
     grp.rprint_timen("Finished collecting FFDC.")
 
