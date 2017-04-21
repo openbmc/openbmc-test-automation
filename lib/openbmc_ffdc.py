@@ -55,13 +55,6 @@ def ffdc(ffdc_dir_path=None,
 
     grp.rprint_timen("Collecting FFDC.")
 
-    # Note: Several subordinate functions like 'Get Test Dir and Name' and
-    # 'Header Message' expect global variable FFDC_TIME to be set.
-    cmd_buf = ["Get Current Time Stamp"]
-    grp.rdpissuing_keyword(cmd_buf)
-    FFDC_TIME = BuiltIn().run_keyword(*cmd_buf)
-    BuiltIn().set_global_variable("${FFDC_TIME}", FFDC_TIME)
-
     # Get default values for arguments.
     ffdc_dir_path, ffdc_prefix = set_ffdc_defaults(ffdc_dir_path, ffdc_prefix)
     grp.rprint_var(ffdc_dir_path)
@@ -111,6 +104,13 @@ def set_ffdc_defaults(ffdc_dir_path=None,
     will remain unchanged.
     """
 
+    # Note: Several subordinate functions like 'Get Test Dir and Name' and
+    # 'Header Message' expect global variable FFDC_TIME to be set.
+    cmd_buf = ["Get Current Time Stamp"]
+    grp.rdpissuing_keyword(cmd_buf)
+    FFDC_TIME = BuiltIn().run_keyword(*cmd_buf)
+    BuiltIn().set_global_variable("${FFDC_TIME}", FFDC_TIME)
+
     ffdc_dir_path_style = BuiltIn().get_variable_value(
         "${ffdc_dir_path_style}")
 
@@ -155,6 +155,9 @@ def set_ffdc_defaults(ffdc_dir_path=None,
                     FFDC_TIME[8:14] + "."
             else:
                 ffdc_prefix = FFDC_TIME + "_"
+
+    BuiltIn().set_global_variable("${FFDC_DIR_PATH}", ffdc_dir_path)
+    BuiltIn().set_global_variable("${FFDC_PREFIX}", ffdc_prefix)
 
     return ffdc_dir_path, ffdc_prefix
 
