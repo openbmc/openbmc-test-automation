@@ -176,6 +176,17 @@ Log Test Case Status
     ...  logs/test_history.txt
     ...  Format   Date:Test suite:Test case:Status
     ...  20160909214053719992:Test Warmreset:Test WarmReset via REST:FAIL
+
+    ${FFDC_DIR_PATH_STYLE}=  Get Variable Value  ${FFDC_DIR_PATH_STYLE}
+    ...  ${EMPTY}
+    ${FFDC_DIR_PATH}=  Get Variable Value  ${FFDC_DIR_PATH}  ${EMPTY}
+
+    Run Keyword If  '${FFDC_DIR_PATH}' == '${EMPTY}'  Set FFDC Defaults
+
+    Run Keyword If  '${FFDC_DIR_PATH_STYLE}' == '${1}'  Run Keywords
+    ...  Set Global Variable  ${FFDC_LOG_PATH}  ${FFDC_DIR_PATH}  AND
+    ...  Set Global Variable  ${TEST_HISTORY}  ${FFDC_DIR_PATH}test_history.txt
+
     Create Directory   ${FFDC_LOG_PATH}
 
     ${exist}=   Run Keyword and Return Status
@@ -183,6 +194,8 @@ Log Test Case Status
 
     Run Keyword If  '${exist}' == '${False}'
     ...   Create File  ${TEST_HISTORY}
+
+    Rpvars  TEST_HISTORY
 
     ${cur_time}=      Get Current Time Stamp
 
