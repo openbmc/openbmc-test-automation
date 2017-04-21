@@ -10,7 +10,7 @@ Resource                ../lib/connection_client.robot
 Resource                ../lib/openbmc_ffdc.robot
 Resource                ../lib/state_manager.robot
 
-Test Teardown           Run Key  FFDC On Test Case Fail
+Test Teardown           Run Key  Test Bios Teardown
 
 *** Variables ***
 
@@ -24,13 +24,19 @@ ${stack_mode}           skip
 
 *** Test Cases ***
 
-Host BIOS Update And Boot
+Host BIOS Update
     [Documentation]  Update PNOR image and verify.
-    [Tags]  Host_BIOS_Update_And_Boot  open-power
+    [Tags]  Host_BIOS_Update_And_Boot  open-power-bios-update
 
     Validate Parameters
     Prepare BMC For Update
     Update PNOR Image
+
+Host BIOS Boot
+    [Documentation] Boots the systems and ensures we successfully make it OS
+    [Tags] Host_BIOS_Update_And_Boot open-power-boot
+
+    Validate Boot
 
 *** Keywords ***
 
@@ -50,19 +56,27 @@ Update PNOR Image
     Run Key  Flash PNOR \ /tmp/${pnor_basename}
     Run Key  Wait Until Keyword Succeeds \ 7 min \ 10 sec \ Is PNOR Flash Done
 
-Validate IPL
-    [Documentation]  Power the host on, and validate the IPL.
+Validate Boot
+    [Documentation]  Power the host on, and validate that the sytem booted.
+
+    # Have to start SOL logging here starting SOL in test setup closes the
+    # connection when bmc reboots
+    Start SOL Console Logging
 
     Initiate Power On
     Wait Until Keyword Succeeds
     ...  10 min    30 sec   Is System State Host Booted
 
+    # Skip validating OS if not given.
+    Run Keyword If  '${OS_HOST}' != '${EMPTY}'
+    ...  Wait For Host To Ping  ${OS_HOST}
 
-Collect SOL Log
+Test Bios Teardown
     [Documentation]    Log FFDC if test suite fails and collect SOL log
     ...                for debugging purposes.
-     ${sol_out}=    Stop SOL Console Logging
-     Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
+    FFDC In Test Case Fail
+    ${sol_out}=    Stop SOL Console Logging
+    Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
 
 
 Validate Parameters
