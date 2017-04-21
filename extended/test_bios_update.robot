@@ -10,7 +10,7 @@ Resource                ../lib/connection_client.robot
 Resource                ../lib/openbmc_ffdc.robot
 Resource                ../lib/state_manager.robot
 
-Test Teardown           Run Key  FFDC On Test Case Fail
+Test Teardown           Test Bios Teardown
 
 *** Variables ***
 
@@ -21,16 +21,27 @@ ${boot_fail_threshold}  ${0}
 # items that would change the machine state, i.e. only if the action is
 # needed.
 ${stack_mode}           skip
+${update_status}        true
 
 *** Test Cases ***
 
-Host BIOS Update And Boot
+Host BIOS Update
     [Documentation]  Update PNOR image and verify.
-    [Tags]  Host_BIOS_Update_And_Boot  open-power
+    [Tags]  Host_BIOS_Update  open-power
 
+    Printn
     Validate Parameters
     Prepare BMC For Update
-    Update PNOR Image
+    ${status}=  Run keyword and return status  Update PNOR Image
+    Set Global Variable  ${update_status}  ${status}
+    Run keyword if  '${update_status}' == 'False'  Fail  PNOR flash failed
+
+Host BIOS Power On
+    [Documentation]  Boot the system and ensure we successfully make it OS.
+    [Tags]  Host_BIOS_Power_On  open-power
+
+    Printn
+    Run keyword if  '${update_status}' == 'True'  Validate Power On
 
 *** Keywords ***
 
@@ -39,7 +50,6 @@ Prepare BMC For Update
 
     # Call 'OBMC Boot Test' to do a 'REST Power Off', if needed.
     Run Key U  OBMC Boot Test \ REST Power Off
-
     Run Key  Clear BMC Record Log
 
 Update PNOR Image
@@ -50,20 +60,28 @@ Update PNOR Image
     Run Key  Flash PNOR \ /tmp/${pnor_basename}
     Run Key  Wait Until Keyword Succeeds \ 7 min \ 10 sec \ Is PNOR Flash Done
 
-Validate IPL
-    [Documentation]  Power the host on, and validate the IPL.
+Validate Power On
+    [Documentation]  Power the host on, and validate that the sytem booted.
+    [Teardown]  Validate Power On Teardown
 
-    Initiate Power On
-    Wait Until Keyword Succeeds
-    ...  10 min    30 sec   Is System State Host Booted
+    # Have to start SOL logging here.  Starting SOL in test setup closes the
+    # connection when bmc reboots.
+    Run Key  Start SOL Console Logging
+    Run Key U  OBMC Boot Test \ REST Power On
 
+Validate Power On Teardown
+    [Documentation]  Teardown after Validate Power On.
 
-Collect SOL Log
-    [Documentation]    Log FFDC if test suite fails and collect SOL log
-    ...                for debugging purposes.
-     ${sol_out}=    Stop SOL Console Logging
-     Create File    ${EXECDIR}${/}logs${/}SOL.log    ${sol_out}
+    ${keyword_buf}=  Catenate  Stop SOL Console Logging
+    ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
+    Run Key  ${keyword_buf}
 
+Test Bios Teardown
+    [Documentation]  Log FFDC if test suite fails and collect SOL log for
+    ...              debugging purposes.
+
+    Printn
+    Run Key  FFDC On Test Case Fail
 
 Validate Parameters
     [Documentation]   Validate parameter and file existence.
