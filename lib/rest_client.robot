@@ -108,13 +108,27 @@ OpenBMC Delete Request
     [Return]    ${ret}
 
 Initialize OpenBMC
-    [Arguments]    ${timeout}=20  ${quiet}=${1}
+    [Arguments]  ${timeout}=20  ${quiet}=${1}
 
-    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}   max_retries=3
+    # Description of argument(s):
+    # timeout  REST login attempt time out.
+    # quiet    Supress console log if set.
+
+    # This will retry at 20 second interval.
+    Wait Until Keyword Succeeds  40 sec  20 sec
+    ...  Post Login Request  ${timeout}  ${quiet}
+
+Post Login Request
+    [Arguments]  ${timeout}=20  ${quiet}=${1}
+
+    # Description of argument(s):
+    # timeout  REST login attempt time out.
+    # quiet    Supress console log if set.
+
+    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=3
     ${headers}=  Create Dictionary  Content-Type=application/json
     @{credentials}=  Create List  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     ${data}=  create dictionary   data=@{credentials}
-
     ${status}  ${resp}=  Run Keyword And Ignore Error  Post Request  openbmc
     ...  /login  data=${data}  headers=${headers}
 
