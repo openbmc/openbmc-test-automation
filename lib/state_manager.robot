@@ -1,6 +1,7 @@
 *** Settings ***
 Resource          ../lib/utils.robot
 Variables         ../data/variables.py
+Resource          ../lib/ipmi_client.robot
 
 *** Variables ***
 
@@ -234,4 +235,13 @@ Wait For BMC Ready
     ...  Wait Until Keyword Succeeds  10 min  10 sec
     ...  Is BMC Ready
 
+Use External IPMI To Power Off Host
+    [Documentation]  Using external IPMI to power off host.
+    ${output}=  Run External IPMI Standard Command  chassis power off
+    [Return]  ${output}
 
+Use External IPMI To Power On Host
+
+    [Documentation]  Using external IPMI to power on host.
+    ${output}=  Run External IPMI Standard Command  chassis power on
+    [Return]  ${output}
