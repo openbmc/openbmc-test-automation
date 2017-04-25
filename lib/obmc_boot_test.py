@@ -158,6 +158,10 @@ def initial_plug_in_setup():
 
     BuiltIn().set_log_level(LOG_LEVEL)
 
+    # Make sure the ffdc list directory exists.
+    ffdc_list_dir_path = os.path.dirname(ffdc_list_file_path) + os.sep
+    if not os.path.exists(ffdc_list_dir_path):
+        os.makedirs(ffdc_list_dir_path)
 
 ###############################################################################
 
@@ -477,19 +481,6 @@ def print_defect_report():
     Print a defect report.
     """
 
-    gp.qprintn()
-    # indent=0, width=90, linefeed=1, char="="
-    gp.qprint_dashes(0, 90, 1, "=")
-    gp.qprintn("Copy this data to the defect:\n")
-
-    grp.rqpvars(*parm_list)
-
-    gp.qprintn()
-
-    print_last_boots()
-    gp.qprintn()
-    gp.qprint_var(state)
-
     # At some point I'd like to have the 'Call FFDC Methods' return a list
     # of files it has collected.  In that case, the following "ls" command
     # would no longer be needed.  For now, however, glob shows the files
@@ -504,16 +495,37 @@ def print_defect_report():
     except IOError:
         ffdc_list = ""
 
+    # Open ffdc_file_list for writing.  We will write a complete list of
+    # FFDC files to it for possible use by plug-ins like cp_stop_check.
+    ffdc_list_file = open(ffdc_list_file_path, 'w')
+
+    gp.qprintn()
+    # indent=0, width=90, linefeed=1, char="="
+    gp.qprint_dashes(0, 90, 1, "=")
+    gp.qprintn("Copy this data to the defect:\n")
+
+    grp.rqpvars(*parm_list)
+
+    gp.qprintn()
+
+    print_last_boots()
+    gp.qprintn()
+    gp.qprint_var(state)
+
     gp.qprintn()
     gp.qprintn("FFDC data files:")
     if status_file_path != "":
         gp.qprintn(status_file_path)
+        ffdc_list_file.write(status_file_path + "\n")
 
     gp.qprintn(output)
     # gp.qprintn(ffdc_list)
     gp.qprintn()
 
     gp.qprint_dashes(0, 90, 1, "=")
+
+    ffdc_list_file.write(output + "\n")
+    ffdc_list_file.close()
 
 ###############################################################################
 
