@@ -196,3 +196,17 @@ Copy ipmitool
     SSHLibrary.Open Connection     ${OPENBMC_HOST}
     Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
     Execute Command     chmod +x /tmp/ipmitool
+
+Initiate Host Boot Via External IPMI
+    [Documentation]  Initiate host power on using external IPMI.
+    ${output}=  Run External IPMI Standard Command  chassis power on
+    Should Not Contain  ${output}  Error
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is Host Running
+
+Initiate Host PowerOff Via External IPMI
+    [Documentation]  Initiate host power off using external IPMI.
+    ${output}=  Run External IPMI Standard Command  chassis power off
+    Should Not Contain  ${output}  Error
+    Wait Until Keyword Succeeds
+    ...  3 min  10 sec  Is Host Off
