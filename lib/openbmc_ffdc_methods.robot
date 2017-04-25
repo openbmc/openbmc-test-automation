@@ -154,15 +154,10 @@ Create File and Write Data
     ...                file name in the current FFDC directory.
     [Arguments]        ${key_index}
 
-    # To build IP address in searchable form eg: dummy\.domain\.com
-    ${OPENBMC_HOST_REGEX}=  Run  echo ${OPENBMC_HOST} | sed 's/\(\.\)/\\\1/g'
     @{cmd_list}=      Get ffdc bmc file   ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
     \   ${logpath}=  Catenate  SEPARATOR=   ${LOG_PREFIX}   ${cmd[0]}.txt
     \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
-    # Rename OPENBMC_HOST IP address from given file to DUMMYIP
-    \   Run  sed -i 's/'${OPENBMC_HOST_REGEX}'/DUMMYIP/g' ${logpath}
-
 
 
 ################################################################
