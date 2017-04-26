@@ -47,6 +47,11 @@ ${PACKET_TYPE}      tcp
 # BMC debug tarball parameter
 ${DEBUG_TARBALL_PATH}  ${EMPTY}
 
+# Upload Image parameters
+${TFTP_SERVER}       ${EMPTY}
+${TFTP_FILE_NAME}    ${EMPTY}
+${IMAGE_FILE_PATH}   ${EMPTY}
+
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}

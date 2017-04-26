@@ -22,3 +22,6 @@ echo "--variable OS_HOST:$OS_HOST" >> $ARG_FILE
 echo "--variable OS_USERNAME:$OS_USERNAME" >> $ARG_FILE
 echo "--variable OS_PASSWORD:$OS_PASSWORD" >> $ARG_FILE
 echo "--variable DEBUG_TARBALL_PATH:$DEBUG_TARBALL_PATH" >> $ARG_FILE
+echo "--variable TFTP_SERVER:$TFTP_SERVER" >> $ARG_FILE
+echo "--variable TFTP_FILE_NAME:$TFTP_FILE_NAME" >> $ARG_FILE
+echo "--variable IMAGE_FILE_PATH:$IMAGE_FILE_PATH" >> $ARG_FILE
