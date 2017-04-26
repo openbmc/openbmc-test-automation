@@ -29,7 +29,7 @@
 -e Check_BMC_Name_Property_Is_Set
 -e Check_BMC_Clocks_Name_Property_Is_Set
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
-#openbmc/openbmc-test-automation/issues/75
+#https://github.com/openbmc/openbmc-test-automation/issues/75
 -e eSEL_Logging
 # Led groups test cases are NA for Barreleye and Palmetto
 -e LED_Group

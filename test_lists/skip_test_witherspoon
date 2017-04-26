@@ -35,9 +35,9 @@
 -e Check_BMC_Name_Property_Is_Set
 -e Check_BMC_Clocks_Name_Property_Is_Set
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
-#openbmc/openbmc-test-automation/issues/75
+#https://github.com/openbmc/openbmc-test-automation/issues/75
 -e eSEL_Logging
-#openbmc/openbmc-test-automation/issues/396
+#https://github.com/openbmc/openbmc-test-automation/issues/396
 -e NetworkManager
 # System LED test are NA for Witherspoon system.
 -e System_LED
@@ -48,3 +48,5 @@
 #https://github.com/openbmc/openbmc-test-automation/issues/546
 -e CPU_Present
 -e DIMM3_Present
+#https://github.com/openbmc/openbmc/issues/1521
+-e Verify_Reset_Reload_With_Chassis_State_On

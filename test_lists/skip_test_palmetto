@@ -32,9 +32,9 @@
 -e Set_BMC_Time_With_Split_And_Manual
 #https://github.com/openbmc/openbmc/issues/1142
 -e Check_BMC_Name_Property_Is_Set
-#openbmc/openbmc-test-automation/issues/75
+#https://github.com/openbmc/openbmc-test-automation/issues/75
 -e eSEL_Logging
-#openbmc/openbmc-test-automation/issues/396
+#https://github.com/openbmc/openbmc-test-automation/issues/396
 -e NetworkManager
 # Led groups test cases are NA for Barreleye and Palmetto
 -e LED_Group
