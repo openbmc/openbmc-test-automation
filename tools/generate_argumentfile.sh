@@ -21,3 +21,6 @@ echo "--variable LOOP_TEST_COMMAND:$LOOP_TEST_COMMAND" >> $ARG_FILE
 echo "--variable OS_HOST:$OS_HOST" >> $ARG_FILE
 echo "--variable OS_USERNAME:$OS_USERNAME" >> $ARG_FILE
 echo "--variable OS_PASSWORD:$OS_PASSWORD" >> $ARG_FILE
+echo "--variable TFTP_SERVER:$TFTP_SERVER" >> $ARG_FILE
+echo "--variable TFTP_FILENAME:$TFTP_FILENAME" >> $ARG_FILE
+echo "--variable IMAGE_PATH:$IMAGE_PATH" >> $ARG_FILE
