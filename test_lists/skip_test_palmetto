@@ -47,3 +47,6 @@
 #https://github.com/openbmc/openbmc-test-automation/issues/546
 -e CPU_Present
 -e DIMM3_Present
+# System LED test cases which are NA for Palmetto system.
+-e Test_Beep_LED_And_Verify_Via_REST
+-e Test_Fault_LED_And_Verify_Via_REST

@@ -43,6 +43,23 @@ Test Identify LED And Verify Via REST
     [Tags]  Test_Identify_LED_And_Verify_Via_REST
     [Template]  Set System LED State
 
+Test Power LED And Verify Via REST
+    [Documentation]  Turn On/Off power LED and verify via REST.
+    # LED Name  LED State
+    power       On
+    power       Off
+
+    [Tags]  Test_Power_LED_And_Verify_Via_REST
+    [Template]  Set System LED State
+
+Test Fault LED And Verify Via REST
+    [Documentation]  Turn On/Off fault LED and verify via REST.
+    # LED Name  LED State
+    fault       On
+    fault       Off
+
+    [Tags]  Test_Fault_LED_And_Verify_Via_REST
+    [Template]  Set System LED State
 
 *** Keywords ***
 
