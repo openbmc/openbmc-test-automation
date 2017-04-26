@@ -34,3 +34,22 @@ Verify PGood When Power Off Using REST
 
     Should Be Equal As Integers  ${data}  0
 
+Verify PGood When Power On Using IPMI
+    [Documentation]  Verify pgood state when power on using IPMI.
+    [Tags]  Verify_PGood_When_Power_On_Using_IPMI
+
+    # Initiate Host poweron using IPMI commands.
+    Initiate Host Boot Via External IPMI
+    ${data}=  Read Attribute  ${POWER_URI}  pgood
+
+    Should Be Equal As Integers  ${data}  1
+
+Verify PGood When Power Off Using IPMI
+    [Documentation]  Verify pgood state when power off using IPMI.
+    [Tags]  Verify_PGood_When_Power_Off_Using_IPMI
+
+    # Initiate Host poweroff using IPMI commands.
+    Initiate Host PowerOff Via External IPMI
+    ${data}=  Read Attribute  ${POWER_URI}  pgood
+
+    Should Be Equal As Integers  ${data}  0
