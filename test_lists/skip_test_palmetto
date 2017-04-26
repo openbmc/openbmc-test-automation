@@ -23,9 +23,6 @@
 -e Disable_PowerCap
 #https://github.com/openbmc/openbmc-test-automation/issues/123
 -e Execute_ipmi_BT_capabilities_command
-#https://github.com/openbmc/openbmc-test-automation/issues/22
--e Validate_Heartbeat_LEDs_Test_Cases
--e Validate_Identify_LEDs_Test_Cases
 ##Testcase NA for Palmetto system
 -e io_board_Present
 -e io_board_Fault
