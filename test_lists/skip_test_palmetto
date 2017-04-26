@@ -43,3 +43,6 @@
 -e LED_Group
 #https://github.com/openbmc/openbmc/issues/1283
 -e Inventory
+# System LED test cases which are NA for Palmetto system.
+-e Test_Beep_LED_And_Verify_Via_REST
+-e Test_Fault_LED_And_Verify_Via_REST

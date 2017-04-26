@@ -39,3 +39,6 @@
 -e LED_Group
 #https://github.com/openbmc/openbmc/issues/1283
 -e Inventory
+# System LED test cases which are NA for Barreleye system.
+-e Test_Power_LED_And_Verify_Via_REST
+-e Test_Fault_LED_And_Verify_Via_REST
