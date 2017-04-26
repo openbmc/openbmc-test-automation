@@ -50,3 +50,7 @@
 -e DIMM3_Present
 #https://github.com/openbmc/openbmc/issues/1521
 -e Verify_Reset_Reload_With_Chassis_State_On
+# System LED test cases which are NA for Witherspoon system.
+-e Test_Heartbeat_LED_And_Verify_Via_REST
+-e Test_Beep_LED_And_Verify_Via_REST
+-e Test_Identify_LED_And_Verify_Via_REST

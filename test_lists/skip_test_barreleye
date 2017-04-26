@@ -42,3 +42,6 @@
 #https://github.com/openbmc/openbmc-test-automation/issues/546
 -e CPU_Present
 -e DIMM3_Present
+# System LED test cases which are NA for Barreleye system.
+-e Test_Power_LED_And_Verify_Via_REST
+-e Test_Fault_LED_And_Verify_Via_REST
