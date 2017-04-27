@@ -447,6 +447,8 @@ ID_LOOKUP = {
         0xb3 : '/org/openbmc/sensors/host/powercap',
         0x02 : '/org/openbmc/sensors/host/OperatingSystemStatus',
         0xb6 : '<inventory_root>/system/chassis/motherboard/pcielink',
+        0xD8 : '/org/openbmc/sensors/host/PowerSupplyRedundancy',
+        0xb4 : '/org/openbmc/sensors/host/PowerSupplyDerating',
     },
     'GPIO_PRESENT' : {}
 }
