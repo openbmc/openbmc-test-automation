@@ -789,6 +789,7 @@ def obmc_boot_test_py(alt_boot_stack=None):
     if ffdc_only:
         gp.qprint_timen("Caller requested ffdc_only.")
         grk.run_key_u("my_ffdc")
+        return
 
     # Process caller's boot_stack.
     while (len(boot_stack) > 0):
