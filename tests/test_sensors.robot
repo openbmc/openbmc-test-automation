@@ -118,6 +118,24 @@ OCC Active Sensor On Disabled
     Read The Attribute  ${uri}     value
     Response Should Be Equal    Disabled
 
+Verify OCC Power Supply Redundancy
+    [Documentation]  Check if OCC's power supply is set to not redundant.
+    [Tags]  Verify_OCC_Power_Supply_Redundancy
+    ${uri}=  Get System Component  PowerSupplyRedundancy
+
+    Read The Attribute  ${uri}  value
+    Response Should Be Equal  Disabled
+
+Verify OCC Power Supply Derating Value
+    [Documentation]  Check if OCC's power supply derating value
+    ...  is set correctly to a constant value 10.
+    [Tags]  Verify_OCC_Power_Supply_Derating_Value
+
+    ${uri}=  Get System Component  PowerSupplyDerating
+
+    Read The Attribute  ${uri}  value
+    Response Should Be Equal  ${10}
+
 CPU Present
     [Tags]  CPU_Present
 
