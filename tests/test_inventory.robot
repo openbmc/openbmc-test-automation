@@ -157,7 +157,7 @@ Verify Core Functional State
     :FOR  ${core_uri}  IN  @{core_list}
     \  ${status}=  Run Keyword And Return Status
     ...  Check URL Property If Functional  ${core_uri}
-    \  Continue For Loop If  '${status}' == '${True}'
+    \  Continue For Loop If  '${status}' == '${False}'
     \  ${present}=  Read Attribute  ${core_uri}  Present
     \  Should Be True  ${present}
     ...  msg=${core_uri} is functional but not present.
@@ -186,7 +186,7 @@ Verify DIMM Functional State
     :FOR  ${dimm_uri}  IN  @{dimm_list}
     \  ${status}=  Run Keyword And Return Status
     ...  Check URL Property If Functional  ${dimm_uri}
-    \  Continue For Loop If  '${status}' == '${True}'
+    \  Continue For Loop If  '${status}' == '${False}'
     \  ${present}=  Read Attribute  ${dimm_uri}  Present
     \  Should Be True  ${present}
     ...  msg=${dimm_uri} is functional but not present.
