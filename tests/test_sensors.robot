@@ -138,16 +138,6 @@ CPU Not Present
     Read The Attribute  ${uri}    present
     Response Should Be Equal    False
 
-CPU Fault
-    [Tags]  CPU_Fault
-
-    ${uri}=    Get System component    cpu
-    ${x}=      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x01 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}    fault
-    Response Should Be Equal    True
-
 CPU No Fault
     [Tags]  CPU_No_Fault
 
@@ -217,15 +207,6 @@ DIMM3 not Present
     Run IPMI command  0x04 0x30 ${x} 0xa9 0xff 0x00 0x00 0x40 0x00 0x00 0x20 0x00
     Read The Attribute   ${uri}     present
     Response Should Be Equal    False
-
-DIMM0 fault
-    [Tags]    DIMM0_fault
-    ${uri}=    Get System component    dimm0
-    ${x}=      Get Inventory Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x10 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute   ${uri}     fault
-    Response Should Be Equal    True
 
 DIMM0 no fault
     [Tags]    DIMM0_no_fault
