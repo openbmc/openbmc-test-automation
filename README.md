@@ -169,3 +169,17 @@ python ./tools/github_issues_to_csv <github user>  openbmc/openbmc
 Example for getting openbmc-test-automation issues
 python ./tools/github_issues_to_csv <github user>  openbmc/openbmc-test-automation
 ```
+
+
+Command to generate Robot test cases test documentations
+
+```shell
+./tools/generate_test_document <Robot test cases directory path> <test case document file path>
+
+Example for generating tests cases documentation for tests directory
+./tools/generate_test_document tests testsdirectoryTCdocs.html
+
+Example for generating tests cases documentation (tests,gui,extended TCs)
+# Note: Invoke the tool with out argument
+./tools/generate_test_document 
+```

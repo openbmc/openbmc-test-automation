@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# This program will generate test documenation from the robot test cases
+
+# Description of argument(s):
+# test_dir    Test directory where robot test cases available
+# test_case_doc_file  The test case document file path to be stored.
+
+function generate_all_test_document ()
+{
+  python -m robot.testdoc tests testsdirectoryTCdocs.html
+  python -m robot.testdoc extended  extendeddirectoryTCdocs.html
+  python -m robot.testdoc gui  guidirectoryTCdocs.html
+}
+
+if [ $# -eq 0 ]; then
+  generate_all_test_document
+  exit 
+fi
+ 
+# Get arguments.
+test_dir="${1}" ; shift
+test_case_doc_file="${1}" ; shift
+
+# Validate arguments.
+if [ -z "${test_dir}" ] ; then
+  echo "**ERROR** You must provide test directory as the first positional" \
+       "parameter." >&2
+  exit 1
+fi
+
+if [ -z "${test_case_doc_file}" ] ; then
+  echo "**ERROR** You must provide file path as the second positional" \
+       "parameter." >&2
+  exit 1
+fi
+
+python -m robot.testdoc ${test_dir} ${test_case_doc_file}
