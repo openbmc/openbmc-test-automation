@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# This program will generate test documenation from the robot test cases.
+
+# Description of argument(s):
+# test_dir_path            Test directory where robot test cases are available.
+# test_case_doc_file_path  The test case document file path to be stored.
+
+
+###############################################################################
+function get_parms {
+
+  # Get program parms.
+
+  test_dir_path="${1}" ; shift
+  test_case_doc_file_path="${1}" ; shift
+
+  return 0
+
+}
+###############################################################################
+
+
+###############################################################################
+function validate_parms {
+
+  # Validate program parameters.
+
+  num_parms="${1}" ; shift
+
+  (( ${num_parms} == 0 )) && return 0
+
+  if [ -z "${test_dir_path}" ] ; then
+    echo "**ERROR** You must provide test directory as the first positional" \
+         "parameter." >&2
+    return 1
+  fi
+
+  if [ -z "${test_case_doc_file_path}" ] ; then
+    echo "**ERROR** You must provide file path as the second positional" \
+         "parameter." >&2
+    return 1
+  fi
+
+  return 0
+
+}
+###############################################################################
+
+
+###############################################################################
+function generate_all_test_document {
+
+  # Generate all test case documents
+
+  local ret_code=0
+  python -m robot.testdoc tests testsdirectoryTCdocs.html || ret_code=1
+  python -m robot.testdoc extended extendeddirectoryTCdocs.html || ret_code=1
+  python -m robot.testdoc gui guidirectoryTCdocs.html || ret_code=1
+  python -m robot.testdoc systest systestdirectoryTCdocs.html || ret_code=1
+
+  return ${ret_code}
+}
+###############################################################################
+
+
+###############################################################################
+function mainfunction {
+
+  get_parms "$@" || return 1
+
+  validate_parms $# || return 1
+
+  if (( ${num_parms} == 0 )) ; then
+    generate_all_test_document || return 1
+    return 0
+  fi
+
+  echo ${test_dir_path} ${test_case_doc_file_path}
+  python -m robot.testdoc ${test_dir_path} ${test_case_doc_file_path}\
+    || return 1
+
+  return 0
+
+}
+###############################################################################
+
+
+###############################################################################
+# Main
+
+  mainfunction "${@}"
+  rc="${?}"
+  exit "${rc}"
+
+###############################################################################
