@@ -5,6 +5,7 @@ Documentation  Test LED groups in OpenBMC.
 Resource       ../lib/rest_client.robot
 Resource       ../lib/resource.txt
 Resource       ../lib/openbmc_ffdc.robot
+Resource       ../lib/utils.robot
 
 Suite Setup    Setup The Suite
 Test Teardown  FFDC On Test Case Fail
@@ -80,15 +81,6 @@ Verify Other Fault LEDs Group
     Verify LED Group  motherboard_fault
 
 *** Keywords ***
-
-Get LED State XYZ
-    [Documentation]  Returns state of given LED.
-    [Arguments]  ${led_name}
-    # Description of arguments:
-    # led_name  Name of LED
-
-    ${state}=  Read Attribute  ${LED_GROUPS_URI}${led_name}  Asserted
-    [Return]  ${state}
 
 Set LED State
     [Documentation]  Set state of given LED to on or off.
