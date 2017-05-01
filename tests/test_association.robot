@@ -9,7 +9,8 @@ Resource            ../lib/state_manager.robot
 Suite Setup         Run Keywords  Verify callout-test  AND
 ...                 Boot Host  AND
 ...                 Clear Existing Error Logs
-Test Setup          Open Connection And Log In
+Test Setup          Open Connection And Log In  AND
+...                 Delete Error logs
 Test Teardown       Close All Connections
 Suite Teardown      Clear Existing Error Logs
 
@@ -21,6 +22,17 @@ Create Test Error Callout And Verify
 
     Create Test Error With Callout
     Verify Test Error Log And Callout
+
+
+Create Test Error Callout And Verify LED
+    [Documentation]  Create an error log callout and verify respective
+    ...  LED state.
+    [Tags]  Create_Test_Error_Callout_And_Verify_LED
+
+    ${resp}=  Get LED State XYZ  cpu0_fault
+    Create Test Error With Callout
+    ${resp}=  Get LED State XYZ  cpu0_fault
+    Should Be Equal  ${resp}  ${1}
 
 
 *** Keywords ***
@@ -44,7 +56,6 @@ Clear Existing Error Logs
     Sleep  10s  reason=Wait for logging service to restart properly.
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
-
 
 Create Test Error With Callout
     [Documentation]  Generate test error log with callout for CPU0.
