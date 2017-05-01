@@ -46,38 +46,6 @@ Clear Existing Error Logs
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 
-Create Test Error With Callout
-    [Documentation]  Generate test error log with callout for CPU0.
-
-    # Test error log entry example:
-    #  "/xyz/openbmc_project/logging/entry/4": {
-    #  "AdditionalData": [
-    #      "CALLOUT_DEVICE_PATH_TEST=/sys/devices/platform/fsi-master/slave@00:00",
-    #      "CALLOUT_ERRNO_TEST=0",
-    #      "DEV_ADDR=0x0DEADEAD"
-    #    ],
-    #    "Id": 4,
-    #    "Message": "example.xyz.openbmc_project.Example.Elog.TestCallout",
-    #    "Resolved": 0,
-    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
-    #    "Timestamp": 1487747332528,
-    #    "associations": [
-    #        [
-    #          "callout",
-    #          "fault",
-    #          "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
-    #        ]
-    #    ]
-    # },
-    # "/xyz/openbmc_project/logging/entry/4/callout": {
-    #    "endpoints": [
-    #        "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
-    #    ]
-    # },
-
-    Execute Command On BMC
-    ...  callout-test /sys/devices/platform/fsi-master/slave@00:00
-
 Verify Test Error Log And Callout
     [Documentation]  Verify test error log entries.
     ${content}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Message
