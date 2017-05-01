@@ -81,15 +81,6 @@ Verify Other Fault LEDs Group
 
 *** Keywords ***
 
-Get LED State XYZ
-    [Documentation]  Returns state of given LED.
-    [Arguments]  ${led_name}
-    # Description of arguments:
-    # led_name  Name of LED
-
-    ${state}=  Read Attribute  ${LED_GROUPS_URI}${led_name}  Asserted
-    [Return]  ${state}
-
 Set LED State
     [Documentation]  Set state of given LED to on or off.
     [Arguments]  ${state}  ${led_name}
