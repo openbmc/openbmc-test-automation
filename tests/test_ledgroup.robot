@@ -79,6 +79,15 @@ Verify Other Fault LEDs Group
     Verify LED Group  bmc_fault
     Verify LED Group  motherboard_fault
 
+Create Test Error Callout And Verify LED
+    [Documentation]  Create error log callout and verify respective LED state.
+    [Tags]  Create_Test_Error_Callout_And_Verify_LED
+    
+    Create Test Error With Callout
+    ${resp}=  Get LED State XYZ  cpu0fault
+    Should Be Equal  ${resp}  ${1}
+
+
 *** Keywords ***
 
 Get LED State XYZ
