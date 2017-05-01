@@ -17,6 +17,9 @@ ${dbuscmdGet}
 # Enable when ready with openbmc/openbmc-test-automation#203
 #${dbuscmdString}=  string:"xyz.openbmc_project.settings.Host" string:
 ${dbuscmdString}=   string:"org.openbmc.settings.Host" string:
+${IPMI_EXT_CMD}=  ipmitool -I lanplus -C 3 -P 0penBmc -H 9.41.165.233 sol activate
+#${IPMI_EXT_CMD}=  ipmitool -I lanplus -C 3 -P 0penBmc -H 9.3.185.33 power status
+${IPMI_deactivate}=  ipmitool -I lanplus -C 3 -P 0penBmc -H 9.41.165.233 sol deactivate
 
 # Assign default value to QUIET for programs which may not define it.
 ${QUIET}  ${0}
@@ -565,6 +568,32 @@ Stop Journal Log
     Execute Command    rm ${file_path}-${LOG_TIME}
 
     [Return]    ${journal_log}
+
+
+Start SOL Via IPMI
+    [Documentation]   Start capturing SOL to a file in /tmp using
+    ...               external ipmi command. By default sol log is
+    ...               collected at /tmp/sol else user input location.
+    [Arguments]       ${file_path}=/tmp/sol
+
+    Run Process  ${IPMI_EXT_CMD}  shell=True  stdout=${file_path}
+    ...  timeout=5s  alias=sol_proc  on_timeout=continue
+
+
+Stop SOL
+    [Documentation]   Stop SOL if running and return log output.
+    ...               By default return log from /tmp/sol else
+    ...               user input location.
+    [Arguments]       ${file_path}=/tmp/sol
+
+    ${resp}=  Is Process Running  sol_proc
+    Run Keyword If  '${resp}' == 'True'  Terminate Process  sol_proc
+    ...  ELSE  Fail  msg=No SOL running.
+
+    ${rc}  ${output}=  Run and Return RC and Output  cat /tmp/sol
+    Should Be Equal    ${rc}    ${0}    msg=${output}
+    [Return]   ${output}
+
 
 Mac Address To Hex String
     [Documentation]   Converts MAC address into hex format.
