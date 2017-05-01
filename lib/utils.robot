@@ -902,3 +902,46 @@ Delete Error log Entry
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  Openbmc Delete Request  ${entry_path}  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Create Test Error With Callout
+    [Documentation]  Generate test error log with callout for CPU0.
+
+    # Test error log entry example:
+    #  "/xyz/openbmc_project/logging/entry/1": {
+    #  "AdditionalData": [
+    #      "CALLOUT_DEVICE_PATH_TEST=/sys/devices/platform/fsi-master/slave@00:00",
+    #      "CALLOUT_ERRNO_TEST=0",
+    #      "DEV_ADDR=0x0DEADEAD"
+    #    ],
+    #    "Id": 4,
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.TestCallout",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1487747332528,
+    #    "associations": [
+    #        [
+    #          "callout",
+    #          "fault",
+    #          "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #        ]
+    #    ]
+    # },
+    # "/xyz/openbmc_project/logging/entry/1/callout": {
+    #    "endpoints": [
+    #        "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #    ]
+    # },
+
+    Open Connection And Log In
+    Execute Command On BMC
+    ...  callout-test /sys/devices/platform/fsi-master/slave@00:00
+
+Get LED State XYZ
+    [Documentation]  Returns state of given LED.
+    [Arguments]  ${led_name}
+    # Description of arguments:
+    # led_name  Name of LED
+
+    ${state}=  Read Attribute  ${LED_GROUPS_URI}${led_name}  Asserted
+    [Return]  ${state}
