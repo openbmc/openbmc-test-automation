@@ -79,6 +79,7 @@ Verify Other Fault LEDs Group
     Verify LED Group  bmc_fault
     Verify LED Group  motherboard_fault
 
+
 *** Keywords ***
 
 Get LED State XYZ
