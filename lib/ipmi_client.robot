@@ -20,6 +20,8 @@ ${IPMI_USER_OPTIONS}   ${EMPTY}
 ${IPMI_INBAND_CMD}=    ipmitool -C 3
 ${HOST}=               -H
 ${RAW}=                raw
+${SOL_ACTIVATE}=       sol activate
+${SOL_DEACTIVATE}=     sol deactivate
 
 *** Keywords ***
 
@@ -125,6 +127,47 @@ Check If IPMI Tool Exist
     [Documentation]  Check if IPMI Tool installed or not.
     ${output}=  Execute Command  which ipmitool
     Should Not Be Empty  ${output}  msg=ipmitool not installed.
+
+Activate SOL Via IPMI
+    [Documentation]   Start capturing SOL to a file in /tmp using
+    ...               external ipmi command. By default sol log is
+    ...               collected at /tmp/sol else user input location.
+    [Arguments]       ${file_path}=/tmp/sol
+
+    ${ipmi_cmd}=   Catenate  SEPARATOR=
+    ...    ${IPMI_EXT_CMD}${SPACE}${IPMI_PASSWORD}${SPACE}
+    ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${SOL_ACTIVATE}
+
+
+    Run Process  ${ipmi_cmd}  shell=True  stdout=${file_path}
+    ...  timeout=5s  alias=sol_proc  on_timeout=continue
+
+Deactivate SOL Via IPMI
+    [Documentation]   Stop sol if its running.
+    ...               By default return log from /tmp/sol else
+    ...               user input location.
+
+    ${ipmi_cmd}=   Catenate  SEPARATOR=
+    ...    ${IPMI_EXT_CMD}${SPACE}${IPMI_PASSWORD}${SPACE}
+    ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${SOL_DEACTIVATE}
+
+    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
+    Should Be Equal    ${rc}    ${0}    msg=${output}
+    [Return]   ${output}
+
+Stop SOL session
+    [Documentation]   Stop SOL session if running and return log output.
+    ...               By default return log from /tmp/sol else user input
+    ...               location.
+    [Arguments]       ${file_path}=/tmp/sol
+
+    ${resp}=  Is Process Running  sol_proc
+    Run Keyword If  '${resp}' == 'True'  Terminate Process  sol_proc
+    ...  ELSE  Fail  msg=No SOL running.
+
+    ${rc}  ${output}=  Run and Return RC and Output  cat /tmp/sol
+    Should Be Equal    ${rc}    ${0}    msg=${output}
+    [Return]   ${output}
 
 Byte Conversion
     [Documentation]   Byte Conversion method receives IPMI RAW commands as
