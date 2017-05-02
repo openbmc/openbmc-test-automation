@@ -126,6 +126,47 @@ Check If IPMI Tool Exist
     ${output}=  Execute Command  which ipmitool
     Should Not Be Empty  ${output}  msg=ipmitool not installed.
 
+
+Activate SOL Via IPMI
+    [Documentation]  Start SOL using IPMI and route output to a file.
+    [Arguments]  ${file_path}=/tmp/sol_${OPENBMC_HOST}
+    # Description of argument(s):
+    # file_path  The file path on the local machine (vs OBMC) to collect SOL
+    #            output. By default SOL output is collected at
+    #            /tmp/sol_<BMC_IP> else user input location.
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
+    ...  ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}sol activate
+
+    Run Process  ${ipmi_cmd}  shell=True  stdout=${file_path}
+    ...  timeout=5s  on_timeout=continue
+
+
+Deactivate SOL Via IPMI
+    [Documentation]  Stop SOL using IPMI and return SOL output.
+    [Arguments]  ${file_path}=/tmp/sol_${OPENBMC_HOST}
+    # Description of argument(s):
+    # file_path  The file path on the local machine to copy SOL output
+    #            collected by above "Activate SOL Via IPMI" keyword.
+    #            By default it copies log from /tmp/sol_<BMC_IP>.
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
+    ...  ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}sol deactivate
+
+    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
+    Run Keyword If  ${rc} > 0  Return From Keyword  ${output}
+
+    ${rc}  ${output}=  Run and Return RC and Output  cat ${file_path}
+    Should Be Equal  ${rc}  ${0}  msg=${output}
+
+    # Logging SOL output for debug purpose.
+    Log  ${output}
+
+    [Return]  ${output}
+
+
 Byte Conversion
     [Documentation]   Byte Conversion method receives IPMI RAW commands as
     ...               argument in string format.
