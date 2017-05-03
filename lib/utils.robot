@@ -879,6 +879,16 @@ Set BMC Boot Count
     # Set BOOT_TIME variable to current boot time.
     Set Global Variable  ${BOOT_COUNT}  ${count}
 
+Get System LED State
+    [Documentation]  Returns the state of given system LED.
+    [Tags]  Get_System_LED_State
+    [Arguments]  ${led_name}
+    # Description of argument(s):
+    # led_name     System LED name (e.g. heartbeat, identify, beep).
+
+    ${state}=  Read Attribute  ${LED_PHYSICAL_URI}${led_name}  State
+    [Return]  ${state.rsplit('.', 1)[1]}
+
 ###############################################################################
 Delete Error logs
     [Documentation]  Delete error logs.
