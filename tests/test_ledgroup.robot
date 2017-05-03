@@ -5,6 +5,7 @@ Documentation  Test LED groups in OpenBMC.
 Resource       ../lib/rest_client.robot
 Resource       ../lib/resource.txt
 Resource       ../lib/openbmc_ffdc.robot
+Resource       test_led.robot
 
 Suite Setup    Setup The Suite
 Test Teardown  FFDC On Test Case Fail
@@ -79,7 +80,12 @@ Verify Other Fault LEDs Group
     Verify LED Group  bmc_fault
     Verify LED Group  motherboard_fault
 
-*** Keywords ***
+Verify Enclosure Fault LED State After CPU Fault
+    Set LED State  On  cpu0fault
+    ${resp}=  Get System LED State  fault
+    Should Be Equal  ${resp}  ${1}
+
+***Keywords***
 
 Get LED State XYZ
     [Documentation]  Returns state of given LED.
