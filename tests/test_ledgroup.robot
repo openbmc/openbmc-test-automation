@@ -79,7 +79,15 @@ Verify Other Fault LEDs Group
     Verify LED Group  bmc_fault
     Verify LED Group  motherboard_fault
 
-*** Keywords ***
+Verify Enclosure Fault LED On Assertion
+    [Documentation]  Verify enclosure fault LED on assertion.
+    [Tags]  Verify_Enclosure_Fault_LED_On_Assertion
+
+    Set LED State  On  cpu0_fault
+    ${resp}=  Get System LED State  rear_fault
+    Should Be Equal  ${resp}  On
+
+***Keywords***
 
 Set LED State
     [Documentation]  Set state of given LED to on or off.
