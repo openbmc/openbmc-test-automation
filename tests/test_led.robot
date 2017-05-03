@@ -63,15 +63,6 @@ Test Fault LED And Verify Via REST
 
 *** Keywords ***
 
-Get System LED State
-    [Documentation]  Returns the state of given system LED.
-    [Arguments]  ${led_name}
-    # Description of arguments:
-    # led_name     System LED name (e.g. heartbeat, identify, beep).
-
-    ${state}=  Read Attribute  ${LED_PHYSICAL_URI}${led_name}  State
-    [Return]  ${state.rsplit('.', 1)[1]}
-
 Set System LED State
     [Documentation]  Set given system LED via REST.
     [Arguments]  ${led_name}  ${led_state}
