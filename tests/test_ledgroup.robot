@@ -79,7 +79,12 @@ Verify Other Fault LEDs Group
     Verify LED Group  bmc_fault
     Verify LED Group  motherboard_fault
 
-*** Keywords ***
+Verify Enclosure Fault LED State After CPU Fault
+    Set LED State  On  cpu0fault
+    ${resp}=  Get System LED State  fault
+    Should Be Equal  ${resp}  ${1}
+
+***Keywords***
 
 Get LED State XYZ
     [Documentation]  Returns state of given LED.
@@ -151,3 +156,12 @@ Get LED List
     Sort List  ${led_list}
 
     [Return]  ${led_list}
+
+Get System LED State
+    [Documentation]  Returns the state of given system LED.
+    [Arguments]  ${led_name}
+    # Description of arguments:
+    # led_name     System LED name (e.g. heartbeat, identify, beep).
+
+    ${state}=  Read Attribute  ${LED_PHYSICAL_URI}${led_name}  State
+    [Return]  ${state.rsplit('.', 1)[1]}
