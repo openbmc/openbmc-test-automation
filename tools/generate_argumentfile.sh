@@ -18,3 +18,6 @@ echo "--variable PNOR_IMAGE_PATH:$PNOR_IMAGE_PATH" >> $ARG_FILE
 echo "--variable IPMI_COMMAND:$IPMI_COMMAND" >> $ARG_FILE
 echo "--variable ITERATION:$ITERATION" >> $ARG_FILE
 echo "--variable LOOP_TEST_COMMAND:$LOOP_TEST_COMMAND" >> $ARG_FILE
+echo "--variable OS_HOST:$OS_HOST" >> $ARG_FILE
+echo "--variable OS_USERNAME:$OS_USERNAME" >> $ARG_FILE
+echo "--variable OS_PASSWORD:$OS_PASSWORD" >> $ARG_FILE
