@@ -240,14 +240,33 @@ Copy ipmitool
 
 Initiate Host Boot Via External IPMI
     [Documentation]  Initiate host power on using external IPMI.
+    [Arguments]  ${wait}=${1}
+    # Description of argument(s):
+    # wait  Indicates that this keyword should wait for host running state.
+
     ${output}=  Run External IPMI Standard Command  chassis power on
     Should Not Contain  ${output}  Error
-    Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is Host Running
+
+    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
 
 Initiate Host PowerOff Via External IPMI
     [Documentation]  Initiate host power off using external IPMI.
+    [Arguments]  ${wait}=${1}
+    # Description of argument(s):
+    # wait  Indicates that this keyword should wait for host off state.
+
     ${output}=  Run External IPMI Standard Command  chassis power off
     Should Not Contain  ${output}  Error
-    Wait Until Keyword Succeeds
-    ...  3 min  10 sec  Is Host Off
+
+    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
+
+Get Host State Via External IPMI
+    [Documentation]  Returns host state using external IPMI.
+
+    ${output}=  Run External IPMI Standard Command  chassis power status
+    Should Not Contain  ${output}  Error
+    ${output}=  Fetch From Right  ${output}  ${SPACE}
+
+    [Return]  ${output}
