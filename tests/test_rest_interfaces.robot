@@ -11,6 +11,27 @@ Test Teardown     FFDC On Test Case Fail
 
 *** Test Cases ***
 
+REST Login Session To BMC
+    [Documentation]  Test REST session log-in.
+    [Tags]  REST_Login_Session_To_BMC
+
+    Initialize OpenBMC
+    # Raw GET REST operation to verify session is established.
+    ${resp}=  Get Request  openbmc  /xyz/openbmc_project/
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+REST Logout Session To BMC
+    [Documentation]  Test REST session log-out.
+    [Tags]  REST_Logout_Session_To_BMC
+
+    Initialize OpenBMC
+    Log Out OpenBMC
+    # Raw GET REST operation to verify session is logout.
+    ${resp}=  Get Request  openbmc  /xyz/openbmc_project/
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
+
+
 Get Response Codes
     [Documentation]  REST "Get" response status test.
     #--------------------------------------------------------------------
