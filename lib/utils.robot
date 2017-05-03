@@ -943,6 +943,16 @@ Set MAC Address
     ${bmc_mac_addr}=  Execute Command On BMC  cat /sys/class/net/eth0/address
     Should Be Equal  ${bmc_mac_addr}  ${mac_address}
 
+Get System LED State
+    [Documentation]  Return the state of given system LED.
+    [Arguments]  ${led_name}
+
+    # Description of argument(s):
+    # led_name     System LED name (e.g. heartbeat, identify, beep).
+
+    ${state}=  Read Attribute  ${LED_PHYSICAL_URI}${led_name}  State
+    [Return]  ${state.rsplit('.', 1)[1]}
+
 ###############################################################################
 Delete Error logs
     [Documentation]  Delete error logs.
