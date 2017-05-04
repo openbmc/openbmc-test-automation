@@ -50,3 +50,11 @@
 -e DIMM3_Present
 #https://github.com/openbmc/openbmc/issues/1521
 -e Verify_Reset_Reload_With_Chassis_State_On
+#https://github.com/openbmc/openbmc/issues/1461
+-e Verify_FRU_Properties
+#https://github.com/openbmc/openbmc/issues/1357
+-e Verify_Core_Functional_State
+#https://github.com/openbmc/openbmc/issues/1572
+-e Test_Restore_Policy_RESTORE_LAST_STATE_With_Host_Running
+#https://github.com/openbmc/openbmc/issues/1571
+-e Verify_Host_Quiesce_State_Without_Auto_Reboot
