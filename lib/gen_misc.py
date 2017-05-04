@@ -10,6 +10,7 @@ import os
 import ConfigParser
 import StringIO
 import re
+import socket
 
 import gen_print as gp
 import gen_cmd as gc
@@ -318,5 +319,25 @@ def quote_bash_parm(parm):
         return "'" + parm + "'"
 
     return parm
+
+###############################################################################
+
+
+###############################################################################
+def get_host_name_ip(host):
+
+    r"""
+    Get the host name and the IP address for the given host and return them as
+    a tuple.
+
+    Description of argument(s):
+    host                            The host name or IP address to be
+                                    obtained.
+    """
+
+    host_host_name = socket.getfqdn(host)
+    host_ip = socket.gethostbyname(host)
+
+    return host_host_name, host_ip
 
 ###############################################################################
