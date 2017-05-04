@@ -136,6 +136,37 @@ Verify OCC Power Supply Derating Value
     Read The Attribute  ${uri}  value
     Response Should Be Equal  ${10}
 
+
+Verify Enabling OCC Turbo Setting Via IPMI
+    [Documentation]  Set and verify OCC's turbo allowed on enable.
+    # The allowed value for turbo allowed:
+    # True  - To enable turbo allowed.
+    # False - To disable turbo allowed.
+
+    [Tags]  Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
+
+    ${uri}=  Get System Component  TurboAllowed
+    ${x}=  Get Sensor Number  ${uri}
+
+    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
+    Read The Attribute  ${uri}  value
+    Response Should Be Equal  True
+
+Verify Disabling OCC Turbo Setting Via IPMI
+    [Documentation]  Set and verify OCC's turbo allowed on disable.
+    # The allowed value for turbo allowed:
+    # True  - To enable turbo allowed.
+    # False - To disable turbo allowed.
+
+    [Tags]  Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
+
+    ${uri}=  Get System Component  TurboAllowed
+    ${x}=  Get Sensor Number  ${uri}
+
+    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x00 0x00 0x01 0x00 0x00 0x20 0x00
+    Read The Attribute  ${uri}  value
+    Response Should Be Equal  False
+
 CPU Present
     [Tags]  CPU_Present
 
