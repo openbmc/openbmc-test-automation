@@ -118,6 +118,17 @@ OCC Active Sensor On Disabled
     Read The Attribute  ${uri}     value
     Response Should Be Equal    Disabled
 
+Verify OCC Turbo Allowed True Value
+    [Documentation]  Set and verify OCC's turbo allowed true value.
+    [Tags]  Verify_OCC_Turbo_Allowed_True_Value
+
+    ${uri}=  Get System component  TurboAllowed
+    ${x}=  Get Sensor Number  ${uri}
+
+    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
+    Read The Attribute  ${uri}  value
+    Response Should Be Equal  True
+
 CPU Present
     [Tags]  CPU_Present
 
