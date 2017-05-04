@@ -2,14 +2,18 @@
 Documentation    Stress the system using HTX exerciser.
 
 Resource         ../syslib/utils_os.robot
-Suite Setup      Power Off Host
-Suite Teardown   Shutdown HTX Exerciser
+
+Suite Setup      Pre Test Case Execution
+Suite Teardown   Post Test Case Execution
 
 *** Variables ****
 
 # Default duration and interval of HTX exerciser to run.
-${HTX_DURATION}     4 hours
+${HTX_DURATION}     2 hours
 ${HTX_INTERVAL}     15 min
+
+# Default harbootme loop times HTX exerciser to run.
+${HTX_LOOP}         4
 
 *** Test Cases ***
 
@@ -17,6 +21,15 @@ Hard Bootme Test
     [Documentation]  Stress the system using HTX exerciser.
 
     Log To Console  \n HTX Test run: ${HTX_DURATION} interval: ${HTX_INTERVAL}
+
+    Repeat Keyword  ${HTX_LOOP} times  Start HTX Exerciser
+
+
+*** Keywords ***
+
+Start HTX Exerciser
+    [Documentation]  Start HTX exerciser.
+
     Login To OS
 
     Log To Console  \n *** Create HTX mdt profile ***
@@ -31,13 +44,26 @@ Hard Bootme Test
 
     Loop HTX Health Check
 
-*** Keywords ***
 
 Loop HTX Health Check
     [Documentation]  Run until keyword fails.
+    ...  Test Flow :
+    ...            - Power on
+    ...            - Check HTX status for errors
+    ...            - Power off
+
+    Boot To OS
+
+    # Post Power off and on, the OS SSH session needs to be established.
+    Login To OS
+
     Repeat Keyword  ${HTX_DURATION}
     ...  Run Keywords  Check HTX Run Status
     ...  AND  Sleep  ${HTX_INTERVAL}
+
+    Shutdown HTX Exerciser
+
+    Power Off Host
 
 
 Check HTX Run Status
@@ -61,6 +87,24 @@ Shutdown HTX Exerciser
     Log To Console  \n ${shutdown}
     Should Contain  ${shutdown}  shutdown successfully
 
-    # Power Off only if there is no error
+
+Pre Test Case Execution
+    [Documentation]  Do the initial test setup.
+    ...  1. Check if HTX tool exist.
+    ...  2. Power on
+
+    HTX Tool Exist
+    Boot To OS
+
+
+Post Test Case Execution
+    [Documentation]  Do the post test teardown.
+    ...  1. Shut down HTX exerciser if test Failed.
+    ...  2. Capture FFDC on test failure.
+    ...  3. Close all open SSH connections.
+
     Run Keyword If  '${TEST_STATUS}' == 'FAIL'
-    ...  Power Off Host
+    ...  Shutdown HTX Exerciser
+
+    FFDC On Test Case Fail
+    Close All Connections
