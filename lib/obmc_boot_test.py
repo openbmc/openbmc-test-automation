@@ -9,6 +9,7 @@ import imp
 import time
 import glob
 import random
+import re
 import cPickle as pickle
 
 from robot.utils import DotDict
@@ -61,6 +62,50 @@ LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
 
 
 ###############################################################################
+def process_host(host,
+                 host_var_name=""):
+
+    r"""
+    Process a host by getting the associated host name and IP address and
+    setting them in global variables.
+
+    If the caller does not pass the host_var_name, this function will try to
+    figure out the name of the variable used by the caller for the host parm.
+    Callers are advised to explicitly specify the host_var_name when calling
+    with an exec command.  In such cases, the get_arg_name cannot figure out
+    the host variable name.
+
+    This function will then create similar global variable names by
+    removing "_host" and appending "_host_name" or "_ip" to the host variable
+    name.
+
+    Example:
+
+    If a call is made like this:
+    process_host(openbmc_host)
+
+    Global variables openbmc_host_name and openbmc_ip will be set.
+
+    Description of argument(s):
+    host           A host name or IP.  The name of the variable used should
+                   have a suffix of "_host".
+    host_var_name  The name of the variable being used as the host parm.
+    """
+
+    if host_var_name == "":
+        host_var_name = gp.get_arg_name(0, 1, stack_frame_ix=2)
+
+    host_name_var_name = re.sub("host", "host_name", host_var_name)
+    ip_var_name = re.sub("host", "ip", host_var_name)
+    cmd_buf = "global " + host_name_var_name + ", " + ip_var_name + " ; " +\
+        host_name_var_name + ", " + ip_var_name + " = gm.get_host_name_ip('" +\
+        host + "')"
+    exec(cmd_buf)
+
+###############################################################################
+
+
+###############################################################################
 def process_pgm_parms():
 
     r"""
@@ -85,6 +130,15 @@ def process_pgm_parms():
             sub_cmd = "BuiltIn().get_variable_value(\"${" + parm + "}\")"
         cmd_buf = "global " + parm + " ; " + parm + " = " + sub_cmd
         exec(cmd_buf)
+        if re.match(r".*_host$", parm):
+            cmd_buf = "process_host(" + parm + ", '" + parm + "')"
+            exec(cmd_buf)
+        if re.match(r".*_password$", parm):
+            # Register the value of any parm whose name ends in _password.
+            # This will cause the print functions to replace passwords with
+            # asterisks in the output.
+            cmd_buf = "gp.register_passwords(" + parm + ")"
+            exec(cmd_buf)
 
     global ffdc_dir_path_style
     global boot_list
@@ -504,7 +558,12 @@ def print_defect_report():
     gp.qprint_dashes(0, 90, 1, "=")
     gp.qprintn("Copy this data to the defect:\n")
 
-    grp.rqpvars(*parm_list)
+    gp.qpvars(openbmc_nickname, openbmc_host, openbmc_host_name, openbmc_ip,
+              openbmc_username, openbmc_password, os_host, os_host_name,
+              os_ip, os_username, os_password, pdu_host, pdu_host_name,
+              pdu_ip, pdu_username, pdu_password, pdu_slot_no,
+              openbmc_serial_host, openbmc_serial_host_name, openbmc_serial_ip,
+              openbmc_serial_port)
 
     gp.qprintn()
 
