@@ -118,6 +118,17 @@ OCC Active Sensor On Disabled
     Read The Attribute  ${uri}     value
     Response Should Be Equal    Disabled
 
+Verify OCC Turbo Allowed Value
+    [Documentation]  Set and verify OCC's turbo allowed value.
+    [Tags]  Verify_OCC_Turbo_Allowed_Value
+
+    ${value}=  Set Variable  20
+    ${valueDict}=  Create Dictionary  data=${value}
+    Write Attribute  ${SENSORS_URI}host/TurboAllowed  value  data=${valueDict}
+
+    Read The Attribute  ${SENSORS_URI}host/TurboAllowed  value
+    Response Should Be Equal  20
+
 CPU Present
     [Tags]  CPU_Present
 
