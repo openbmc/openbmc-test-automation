@@ -299,9 +299,9 @@ def get_arg_name(var,
                     " a reference to function \"" + called_func_name + "\".\n")
         return
 
-    # Search forward through the source lines looking for a line with the
-    # same indentation as the start time.  The end of our composite line
-    # should be the line preceding that line.
+    # Search forward through the source lines looking for a line whose
+    # indentation is the same or less than the start line.  The end of our
+    # composite line should be the line preceding that line.
     start_indent = len(source_lines[start_line_ix]) -\
         len(source_lines[start_line_ix].lstrip(' '))
     end_line_ix = line_ix
@@ -310,7 +310,7 @@ def get_arg_name(var,
             continue
         line_indent = len(source_lines[end_line_ix]) -\
             len(source_lines[end_line_ix].lstrip(' '))
-        if line_indent == start_indent:
+        if line_indent <= start_indent:
             end_line_ix -= 1
             break
 
@@ -1311,6 +1311,70 @@ def get_var_value(var_value=None,
 ###############################################################################
 
 
+# hidden_text is a list of passwords which are to be replaced with asterisks
+# by print functions defined in this module.
+hidden_text = []
+# password_regex is created based on the contents of hidden_text.
+password_regex = ""
+
+
+###############################################################################
+def register_passwords(*args):
+
+    r"""
+    Register one or more passwords which are to be hidden in output produced
+    by the print functions in this module.
+
+    Description of argument(s):
+    args                            One or more password values.  If a given
+                                    password value is already registered, this
+                                    function will simply do nothing.
+    """
+
+    global hidden_text
+    global password_regex
+
+    for password in args:
+        if password in hidden_text:
+            break
+
+        # Place the password into the hidden_text list.
+        hidden_text.append(password)
+        # Create a corresponding password regular expression.  Escape regex
+        # special characters too.
+        password_regex = '(' +\
+            '|'.join([re.escape(x) for x in hidden_text]) + ')'
+
+###############################################################################
+
+
+###############################################################################
+def replace_passwords(buffer):
+
+    r"""
+    Return the buffer but with all registered passwords replaced by a string
+    of asterisks.
+
+
+    Description of argument(s):
+    buffer                          The string to be returned but with
+                                    passwords replaced.
+    """
+
+    global password_regex
+
+    if int(os.environ.get("DEBUG_SHOW_PASSWORDS", "0")):
+        return buffer
+
+    if password_regex == "":
+        # No passwords to replace.
+        return buffer
+
+    return re.sub(password_regex, "********", buffer)
+
+###############################################################################
+
+
 ###############################################################################
 # In the following section of code, we will dynamically create print versions
 # for each of the sprint functions defined above.  So, for example, where we
@@ -1359,14 +1423,16 @@ for func_name in func_names:
     if robot_env:
         func_print_lines = \
             [
-                "    BuiltIn().log_to_console(s_func(*args),"
+                "    BuiltIn().log_to_console(replace_passwords" +
+                "(s_func(*args)),"
                 " stream='" + output_stream + "',"
                 " no_newline=True)"
             ]
     else:
         func_print_lines = \
             [
-                "    sys." + output_stream + ".write(s_func(*args))",
+                "    sys." + output_stream +
+                ".write(replace_passwords(s_func(*args)))",
                 "    sys." + output_stream + ".flush()"
             ]
 
