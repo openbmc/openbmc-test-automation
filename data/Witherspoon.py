@@ -449,6 +449,7 @@ ID_LOOKUP = {
         0xb6 : '<inventory_root>/system/chassis/motherboard/pcielink',
         0xD8 : '/org/openbmc/sensors/host/PowerSupplyRedundancy',
         0xb4 : '/org/openbmc/sensors/host/PowerSupplyDerating',
+        0xda : '/org/openbmc/sensors/host/TurboAllowed',
     },
     'GPIO_PRESENT' : {}
 }

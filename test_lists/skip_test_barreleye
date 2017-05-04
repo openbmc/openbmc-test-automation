@@ -31,8 +31,10 @@
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
 #https://github.com/openbmc/openbmc-test-automation/issues/75
 -e eSEL_Logging
-# Led groups test cases are NA for Barreleye and Palmetto
+# Test cases are NA for Barreleye and Palmetto
 -e LED_Group
+-e Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
+-e Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
 #https://github.com/openbmc/openbmc/issues/1283
 -e Inventory
 # NA until support for debug tarball is enabled
