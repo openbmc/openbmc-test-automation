@@ -143,7 +143,8 @@ def rprint(buffer="",
     buffer                          The value that is to written to stdout.
     """
 
-    BuiltIn().log_to_console(str(buffer), no_newline=True, stream=stream)
+    BuiltIn().log_to_console(gp.replace_passwords(str(buffer)),
+                             no_newline=True, stream=stream)
 
 ###############################################################################
 
@@ -161,7 +162,8 @@ def rprintn(buffer="",
     buffer                          The value that is to written to stdout.
     """
 
-    BuiltIn().log_to_console(buffer, no_newline=False, stream=stream)
+    BuiltIn().log_to_console(gp.replace_passwords(buffer), no_newline=False,
+                             stream=stream)
 
 ###############################################################################
 
@@ -433,7 +435,8 @@ for func_name in func_names:
                 "def " + robot_prefix + func_name + "(*args):",
                 "    s_func = getattr(" + object_name + ", \"s" + func_name +
                 "\")",
-                "    BuiltIn().log_to_console(s_func(*args),"
+                "    BuiltIn().log_to_console" +
+                "(gp.replace_passwords(s_func(*args)),"
                 " stream='" + output_stream + "',"
                 " no_newline=True)"
             ]
