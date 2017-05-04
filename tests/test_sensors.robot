@@ -14,6 +14,7 @@ Library                ../data/model.py
 Suite setup            Setup The Suite
 Test Setup             Open Connection And Log In
 Test Teardown          Post Test Case Execution
+Suite Teardown         Restore System Configuration
 
 *** Variables ***
 ${model}=    ${OPENBMC_MODEL}
@@ -135,6 +136,45 @@ Verify OCC Power Supply Derating Value
 
     Read The Attribute  ${uri}  value
     Response Should Be Equal  ${10}
+
+
+Verify Enabling OCC Turbo Setting Via IPMI
+    [Documentation]  Set and verify OCC's turbo allowed on enable.
+    # The allowed value for turbo allowed:
+    # True  - To enable turbo allowed.
+    # False - To disable turbo allowed.
+
+    [Tags]  Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
+
+    ${uri}=  Get System Component  TurboAllowed
+    ${sensor_num}=  Get Sensor Number  ${uri}
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=  0x04 0x30 ${sensor_num} 0x00${SPACE}
+    ...  0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
+    Run IPMI Command  ${ipmi_cmd}
+
+    Read The Attribute  ${uri}  value
+    Response Should Be Equal  True
+
+
+Verify Disabling OCC Turbo Setting Via IPMI
+    [Documentation]  Set and verify OCC's turbo allowed on disable.
+    # The allowed value for turbo allowed:
+    # True  - To enable turbo allowed.
+    # False - To disable turbo allowed.
+
+    [Tags]  Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
+
+    ${uri}=  Get System Component  TurboAllowed
+    ${sensor_num}=  Get Sensor Number  ${uri}
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=  0x04 0x30 ${sensor_num} 0x00${SPACE}
+    ...  0x00 0x00 0x00 0x01 0x00 0x00 0x20 0x00
+    Run IPMI Command  ${ipmi_cmd}
+
+    Read The Attribute  ${uri}  value
+    Response Should Be Equal  False
+
 
 CPU Present
     [Tags]  CPU_Present
@@ -331,6 +371,9 @@ Setup The Suite
     Set Suite Variable      ${SYSTEM_INFO}          ${resp}
     log Dictionary          ${resp}
 
+    ${setting}=  Read Turbo Setting Via REST
+    Set Global Variable  ${TURBO_SETTING}  ${setting}
+
 Get System component
     [Arguments]    ${type}
     ${list}=    Get Dictionary Keys    ${SYSTEM_INFO}
@@ -365,10 +408,34 @@ Get Inventory Sensor Number
     ${x}=       get inventory sensor   ${OPENBMC_MODEL}   ${name}
     [Return]     ${x}
 
+Read Turbo Setting Via REST
+    [Documentation]  Return turbo allowed setting.
+
+    ${resp}=  OpenBMC Get Request  ${SENSORS_URI}host/TurboAllowed
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    [Return]  ${jsondata["data"]["value"]}
+
+Set Turbo Setting Via REST
+    [Documentation]  Set turbo setting via REST.
+    [Arguments]  ${setting}
+    # Description of argument(s):
+    # setting  Value which needs to be set.(i.e. False or True)
+
+    ${valueDict}=  Create Dictionary  data=${setting}
+    Write Attribute  ${SENSORS_URI}host/TurboAllowed  value  data=${valueDict}
+
 Post Test Case Execution
     [Documentation]  Do the post test teardown.
     ...  1. Capture FFDC on test failure.
     ...  2. Close all open SSH connections.
 
     FFDC On Test Case Fail
+    Close All Connections
+
+Restore System Configuration
+    [Documentation]  Restore System Configuration.
+
+    Open Connection And Log In
+    Set Turbo Setting Via REST  ${TURBO_SETTING}
     Close All Connections
