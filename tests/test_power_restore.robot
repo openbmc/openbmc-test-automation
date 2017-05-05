@@ -12,8 +12,8 @@ Resource        ../lib/state_manager.robot
 
 Library         SSHLibrary
 
-Test Teardown   FFDC On Test Case Fail
-Suite Teardown  Set BMC Power Policy  RESTORE_LAST_STATE
+Test Teardown   Post Test Case Execution
+Suite Teardown  Post Test Suite Execution
 
 Force Tags      power_restore
 
@@ -139,3 +139,20 @@ Verify Host State
     # expectedState   Expected host state.
     ${currentState}=  Get Host State
     Should Be Equal  ${currentState}  ${expectedState}
+
+
+Post Test Case Execution
+    [Documentation]  Do the post test teardown.
+    # 1. Capture FFDC on test failure.
+    # 2. Close all open SSH connections.
+
+    FFDC On Test Case Fail
+    Close All Connections
+
+
+Post Test Suite Execution
+    [Documentation]  Do the post suite teardown.
+    # 1. Set policy to default.
+
+    Run Keyword And Ignore Error  Set BMC Power Policy  RESTORE_LAST_STATE
+
