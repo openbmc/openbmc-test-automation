@@ -53,3 +53,22 @@ Power Off Host
     [Documentation]  Power off host.
     Run Key  OBMC Boot Test \ REST Power Off
 
+
+Validate Params
+    [Documentation]  Check if pre-requisite parameters are populated.
+    Should Not Be Empty  ${OPENBMC_HOST}
+    Should Not Be Empty  ${OS_HOST}
+    Should Not Be Empty  ${OS_USERNAME}
+    Should Not Be Empty  ${OS_PASSWORD}
+
+
+File Exist On OS
+    [Documentation]  Check if the given file path exist on OS.
+    [Arguments]  ${file_path}
+    # Description of argument(s):
+    # file_path   Absolute file path.
+
+    Login To OS
+    ${out}=  Execute Command On OS  ls ${file_path}
+    Log To Console  \n File Exist: ${out}
+
