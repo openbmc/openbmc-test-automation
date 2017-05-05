@@ -53,3 +53,14 @@ Power Off Host
     [Documentation]  Power off host.
     Run Key  OBMC Boot Test \ REST Power Off
 
+
+File Exist On OS
+    [Documentation]  Check if the given file path exist on OS.
+    [Arguments]  ${file_path}
+    # Description of argument(s):
+    # file_path   Absolute file path.
+
+    Login To OS
+    ${out}=  Execute Command On OS  ls ${file_path}
+    Log To Console  \n File Exist: ${out}
+
