@@ -21,11 +21,10 @@ Force Tags      power_restore
 
 *** Test Cases ***
 
-Test Restore Policy LEAVE_OFF
+Test Restore Policy LEAVE_OFF With Host Off
     #Policy                Initial Host State     Expected Host State
 
     LEAVE_OFF              Off                       Off
-    LEAVE_OFF              Running                   Off
 
     [Documentation]  Validate LEAVE_OFF restore policy functionality.
     ...              Policy:
@@ -38,13 +37,22 @@ Test Restore Policy LEAVE_OFF
     ...                    specific state.
 
     [Template]  Verify Restore Policy
+    [Tags]  Test_Restore_Policy_LEAVE_OFF_With_Host_Off
 
 
-Test Restore Policy ALWAYS_POWER_ON
+Test Restore Policy LEAVE_OFF With Host Running
+    #Policy                Initial Host State     Expected Host State
+
+    LEAVE_OFF              Running                   Off
+
+    [Template]  Verify Restore Policy
+    [Tags]  Test_Restore_Policy_LEAVE_OFF_With_Host_Running
+
+
+Test Restore Policy ALWAYS_POWER_ON With Host Off
     #Policy                Initial Host State     Expected Host State
 
     ALWAYS_POWER_ON        Off                       Running
-    ALWAYS_POWER_ON        Running                   Running
 
     [Documentation]  Validate ALWAYS_POWER_ON restore policy functionality.
     ...              Policy:
@@ -57,13 +65,22 @@ Test Restore Policy ALWAYS_POWER_ON
     ...                    specific state.
 
     [Template]  Verify Restore Policy
+    [Tags]  Test_Restore_Policy_ALWAYS_POWER_ON_With_Host_Off
 
 
-Test Restore Policy RESTORE_LAST_STATE
+Test Restore Policy ALWAYS_POWER_ON With Host Running
+    #Policy                Initial Host State     Expected Host State
+
+    ALWAYS_POWER_ON        Running                   Running
+
+    [Template]  Verify Restore Policy
+    [Tags]  Test_Restore_Policy_ALWAYS_POWER_ON_With_Host_Running
+
+
+Test Restore Policy RESTORE_LAST_STATE With Host Running
     #Policy                Initial Host State     Expected Host State
 
     RESTORE_LAST_STATE     Running                   Running
-    RESTORE_LAST_STATE     Off                       Off
 
     [Documentation]  Validate RESTORE_LAST_STATE restore policy functionality.
     ...              Policy:
@@ -76,6 +93,18 @@ Test Restore Policy RESTORE_LAST_STATE
     ...                    specific state.
 
     [Template]  Verify Restore Policy
+    [Tags]  Test_Restore_Policy_RESTORE_LAST_STATE_With_Host_Running
+
+
+Test Restore Policy RESTORE_LAST_STATE With Host Off
+    #Policy                Initial Host State     Expected Host State
+
+    RESTORE_LAST_STATE     Off                       Off
+
+
+    [Template]  Verify Restore Policy
+    [Tags]  Test_Restore_Policy_RESTORE_LAST_STATE_With_Host_Off
+
 
 *** Keywords ***
 
