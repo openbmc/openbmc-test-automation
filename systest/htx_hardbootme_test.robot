@@ -12,11 +12,14 @@ Test Teardown   Post Test Case Execution
 ${stack_mode}        skip
 
 # Default duration and interval of HTX exerciser to run.
-${HTX_DURATION}     2 hours
-${HTX_INTERVAL}     15 min
+${HTX_DURATION}      2 hours
+${HTX_INTERVAL}      15 min
 
 # Default hardbootme loop times HTX exerciser to run.
-${HTX_LOOP}         4
+${HTX_LOOP}          4
+
+# User defined halt on error.
+${HTX_KEEP_RUNNING}  ${0}
 
 *** Test Cases ***
 
@@ -112,7 +115,8 @@ Post Test Case Execution
     # 2. Capture FFDC on test failure.
     # 3. Close all open SSH connections.
 
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL'
+    # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
+    Run Keyword If  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
     ...  Shutdown HTX Exerciser
 
     FFDC On Test Case Fail
