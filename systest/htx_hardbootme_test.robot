@@ -18,6 +18,9 @@ ${HTX_INTERVAL}     15 min
 # Default hardbootme loop times HTX exerciser to run.
 ${HTX_LOOP}         4
 
+# User defined halt on error
+${HTX_HALT}         ${0}
+
 *** Test Cases ***
 
 Hard Bootme Test
@@ -112,7 +115,7 @@ Post Test Case Execution
     # 2. Capture FFDC on test failure.
     # 3. Close all open SSH connections.
 
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL'
+    Run Keyword If  '${TEST_STATUS}' == 'FAIL' and ${HTX_HALT} == ${0}
     ...  Shutdown HTX Exerciser
 
     FFDC On Test Case Fail
