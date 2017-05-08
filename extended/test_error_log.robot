@@ -113,8 +113,38 @@ Create Test Errors And Verify Time Stamp
     # for every error and in increasing time stamp.
     ${time_stamp1}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Timestamp
     ${time_stamp2}=  Read Attribute  ${BMC_LOGGING_ENTRY}${2}  Timestamp
-    Should Be True  ${time_stamp2} > ${time_stamp1}
+    Should Be True ${time_stamp2} > ${time_stamp1}
 
+Create Test Error Log and Delete Error Log
+    [Documentation]  Create an error log and delete it.
+    [Tags]  Create_Test_Error_Log_And_Delete_Error_Log
+
+    Delete Error Logs And Verify
+    Create Test Error Log
+    Delete Error Logs And Verify
+
+Create Multiple Test Error Logs and Delete All
+    [Documentation]  Create multiple error logs and delete all.
+    [Tags]  Create_Multiple_Test_Error_Logs_And_Delete_All
+
+    Delete Error Logs And Verify
+    Create Test Error Log
+    Create Test Error Log
+    Create Test Error Log
+    Delete Error Logs And Verify
+
+Create Two Test Error Logs And Delete One
+    [Documentation]  Create two error logs and delete the first entry.
+    [Tags]  Create_Two_Test_Error_Logs_And_Delete_One
+
+    Delete Error Logs And Verify
+    Create Test Error Log
+    ${entry_id}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Id
+    Create Test Error Log
+    Delete Error log Entry  ${BMC_LOGGING_ENTRY}/${entry_id}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/${entry_id}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Delete Error Logs And Verify
 
 *** Keywords ***
 
@@ -156,10 +186,16 @@ Create Test Error Log
 
 Verify Test Error Log
     [Documentation]  Verify test error log entries.
-    ${content}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Message
-    Should Be Equal  ${content}
+    ${entry_id}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Message
+    Should Be Equal  ${entry_id}
     ...  example.xyz.openbmc_project.Example.Elog.AutoTestSimple
-    ${content}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Severity
-    Should Be Equal  ${content}
+    ${entry_id}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Severity
+    Should Be Equal  ${entry_id}
     ...  xyz.openbmc_project.Logging.Entry.Level.Error
 
+Delete Error Logs And Verify
+    [Documentation]  Delete All Error Logs And Verify
+
+    Delete Error logs
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
