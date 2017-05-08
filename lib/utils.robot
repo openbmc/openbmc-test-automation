@@ -320,7 +320,7 @@ Is PNOR Flashing
     [Documentation]  Get BIOS 'Flashing' status. This indicates that PNOR
     ...              flashing has started.
     ${status}=    Get Flash BIOS Status
-    should be equal as strings     ${status}     Flashing
+    Should Contain  ${status}  Flashing
 
 Is PNOR Flash Done
     [Documentation]  Get BIOS 'Flash Done' status.  This indicates that the
