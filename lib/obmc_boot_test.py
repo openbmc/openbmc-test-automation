@@ -11,6 +11,7 @@ import glob
 import random
 import re
 import cPickle as pickle
+import socket
 
 from robot.utils import DotDict
 from robot.libraries.BuiltIn import BuiltIn
@@ -328,6 +329,12 @@ def setup():
     # FFDC_LOG_PATH is used by "FFDC" keyword.
     BuiltIn().set_global_variable("${FFDC_LOG_PATH}", ffdc_dir_path)
 
+    # Also printed by FFDC.
+    global host_name
+    global host_ip
+    host = socket.gethostname()
+    host_name, host_ip = gm.get_host_name_ip(host)
+
     gp.dprint_var(boot_table, 1)
     gp.dprint_var(boot_lists)
 
@@ -558,12 +565,12 @@ def print_defect_report():
     gp.qprint_dashes(0, 90, 1, "=")
     gp.qprintn("Copy this data to the defect:\n")
 
-    gp.qpvars(openbmc_nickname, openbmc_host, openbmc_host_name, openbmc_ip,
-              openbmc_username, openbmc_password, os_host, os_host_name,
-              os_ip, os_username, os_password, pdu_host, pdu_host_name,
-              pdu_ip, pdu_username, pdu_password, pdu_slot_no,
-              openbmc_serial_host, openbmc_serial_host_name, openbmc_serial_ip,
-              openbmc_serial_port)
+    gp.qpvars(host_name, host_ip, openbmc_nickname, openbmc_host,
+              openbmc_host_name, openbmc_ip, openbmc_username,
+              openbmc_password, os_host, os_host_name, os_ip, os_username,
+              os_password, pdu_host, pdu_host_name, pdu_ip, pdu_username,
+              pdu_password, pdu_slot_no, openbmc_serial_host,
+              openbmc_serial_host_name, openbmc_serial_ip, openbmc_serial_port)
 
     gp.qprintn()
 
