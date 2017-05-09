@@ -11,8 +11,6 @@
 -e Revert_old_Mac_addres
 #https://github.com/openbmc/openbmc-test-automation/issues/137
 -e Set_invalid_Mac_address
-#https://github.com/openbmc/openbmc-test-automation/issues/139
--e Empty_Fan_Test
 #https://github.com/openbmc/openbmc/issues/612
 -e Create_and_delete_user_without_group_name
 -e Create_and_delete_user_with_user_group_name
