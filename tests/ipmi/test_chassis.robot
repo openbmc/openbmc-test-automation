@@ -9,7 +9,7 @@ Resource               ../../lib/resource.txt
 
 Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
-Test Teardown          Test Exit Logs
+#Test Teardown          Test Exit Logs
 
 *** Variables ***
 ${HOST_SETTING}  ${SETTINGS_URI}host0
@@ -64,6 +64,19 @@ IPMI Chassis Restore Power Policy
      Set BMC Power Policy  ${initial_power_policy}
      ${power_policy}=  Read Attribute  ${HOST_SETTING}  power_policy
      Should Be Equal  ${power_policy}  ${initial_power_policy}
+
+IPMI Host PowerOn
+    [Documentation]  This test case verfies host power on status
+    ...               using external IPMI command.
+    [Tags]   IPMI_Host_PowerOn 
+    Initiate Host Boot Via External IPMI
+
+IPMI Host PowerOff
+    [Documentation]  This test case verfies host power off status
+    ...               using external IPMI command.
+    [Tags]  IPMI_Host_PowerOff
+    Initiate Host PowerOff Via External IPMI
+
 
 *** Keywords ***
 
