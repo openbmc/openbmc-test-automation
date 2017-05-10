@@ -4,6 +4,7 @@ Documentation       eSEL's Test cases.
 
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
+Resource            ../lib/utils.robot
 Variables           ../data/variables.py
 Resource            ../lib/utils.robot
 
@@ -80,7 +81,6 @@ Check eSEL AdditionalData
     # }
     Should Not Be Empty  ${jsondata["data"]["AdditionalData"]}
 
-
 Test Wrong Reservation_ID
     [Documentation]   This testcase is to test BMC can handle multi-requestor's
     ...               oem partial add command with incorrect reservation id.
@@ -88,11 +88,11 @@ Test Wrong Reservation_ID
     ...                and wrong Reservation ID. This command will be rejected.
     [Tags]  Test_Wrong_Reservation_ID
 
-    ${rev_id_1}=    Run IPMI Command Returned   0x0a 0x42
+    ${rev_id_1}=   Run Inband IPMI Raw Command  0x0a 0x42
     ${rev_id_ls}=   Get Substring   ${rev_id_1}   1   3
     ${rev_id_ms}=   Get Substring   ${rev_id_1}   -2
-    Run IPMI command   0x0a 0x42
-    ${output}=      Check IPMI Oempartialadd Reject   0x32 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
+    Run Inband IPMI Raw Command   0x0a 0x42
+    ${output}=     Check IPMI OEMpartialadd Reject  0x32 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
     Should Contain   ${output}   Reservation cancelled
 
 Test Correct Reservation_ID
@@ -102,11 +102,11 @@ Test Correct Reservation_ID
     ...               and correct Reservation ID. This command will be accepted.
     [Tags]  Test_Correct_Reservation_ID
 
-    Run IPMI command   0x0a 0x42
-    ${rev_id_2}=    Run IPMI Command Returned   0x0a 0x42
+    Run Inband IPMI Raw Command  0x0a 0x42
+    ${rev_id_2}=    Run Inband IPMI Raw Command  0x0a 0x42
     ${rev_id_ls}=   Get Substring   ${rev_id_2}   1   3
     ${rev_id_ms}=   Get Substring   ${rev_id_2}   -2
-    ${output}=      Check IPMI Oempartialadd Accept   0x32 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
+    ${output}=      Check IPMI OEMpartialadd Accept  0x32 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
     Should Be Empty    ${output}
 
 Clear Test File
@@ -175,19 +175,11 @@ Run IPMI Command Returned
     ${output_1}=    Execute Command   /tmp/ipmitool -I dbus raw ${args}
     [Return]    ${output_1}
 
-Check IPMI Oempartialadd Reject
-    [Arguments]  ${args}
-    ${cmd}=  Catenate  /tmp/ipmitool -I dbus raw ${args}
-    ${stdout}  ${stderr}  ${output_2}=  Execute Command  ${cmd}
-    ...        return_stdout=True  return_stderr= True  return_rc=True
-    [Return]  ${stderr}
-
-Check IPMI Oempartialadd Accept
-    [Arguments]  ${args}
-    ${cmd}=  Catenate  /tmp/ipmitool -I dbus raw ${args}
-    ${stdout}  ${stderr}  ${output_3}=  Execute Command  ${cmd}
-    ...        return_stdout=True  return_stderr= True  return_rc=True
-    Should Be Equal  ${output_3}  ${0}  msg=${stderr}
+Check IPMI OEMpartialadd Reject
+    [Arguments]    ${args}
+    Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
+    ${stdout}  ${stderr}  ${output_2}=  Execute Command  ipmitool raw ${args}
+    ...        return_stdout=True  return_stderr=True  return_rc=True
     [Return]  ${stderr}
 
 eSEL Test SetUp
@@ -202,3 +194,12 @@ eSEL Test SetUp
 
     Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     Open Connection And Log In
+
+Check IPMI OEMpartialadd Accept
+    [Arguments]    ${args}
+    Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
+    ${stdout}  ${stderr}  ${output_3}=  Execute Command  ipmitool raw ${args}
+    ...         return_stdout=True  return_stderr=True  return_rc=True
+    Should Be Equal  ${output_3}  ${0}  msg=${stderr}
+    [Return]  ${stderr}
+
