@@ -1,10 +1,6 @@
 -e known_issue
 #https://github.com/openbmc/openbmc-test-automation/issues/123
 -e Execute_ipmi_BT_capabilities_command
-#https://github.com/openbmc/openbmc/issues/539
--e Test_Wrong_Reservation_ID
-#https://github.com/openbmc/openbmc/issues/539
--e Test_Correct_Reservation_ID
 #https://github.com/openbmc/openbmc-test-automation/issues/107
 -e Set_valid_Mac_address
 #https://github.com/openbmc/openbmc-test-automation/issues/107
