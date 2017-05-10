@@ -32,6 +32,64 @@ REST Logout Session To BMC
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
 
 
+REST Delete All Sessions And Expect Error
+    [Documentation]  Test REST empty cache using delete operation.
+    [Tags]  REST_Delete_All_Sessions_And_Expect_Error
+
+    # Throws exception:
+    # Non-existing index or alias 'openbmc'.
+
+    Initialize OpenBMC
+    Delete All Sessions
+    # Raw GET REST operation and expect exception error.
+    Run Keyword And Expect Error
+    ...  Non-existing index or alias 'openbmc'.
+    ...  Get Request  openbmc  /xyz/openbmc_project/
+
+
+Verify REST JSON Data On Success
+    [Documentation]  Verify JSON data success response messages.
+    [Tags]  Verify_REST_JSON_Data_On_Success
+    # Example:
+    # Response code:200, Content:{
+    # "data": [
+    #         "/xyz/openbmc_project/sensors",
+    #         "/xyz/openbmc_project/inventory",
+    #         "/xyz/openbmc_project/software",
+    #         "/xyz/openbmc_project/object_mapper",
+    #         "/xyz/openbmc_project/logging"
+    #         ],
+    # "message": "200 OK",
+    # "status": "ok"
+    # }
+
+    ${resp}=  OpenBMC Get Request  /xyz/openbmc_project/
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Not Be Empty  ${jsondata["data"]}
+    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
+    Should Be Equal As Strings  ${jsondata["status"]}  ok
+
+
+Verify REST JSON Data On Failure
+    [Documentation]  Verify JSON data failure response messages.
+    [Tags]  Verify_REST_JSON_Data_On_Failure
+    # Example:
+    # Response code:404, Content:{
+    # "data": {
+    #        "description": "org.freedesktop.DBus.Error.FileNotFound: path or object not found: /xyz/idont/exist"
+    #         },
+    # "message": "404 Not Found",
+    # "status": "error"
+    # }
+
+    ${resp}=  OpenBMC Get Request  /xyz/idont/exist/
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Be Equal As Strings
+    ...  ${jsondata["data"]["description"]}  org.freedesktop.DBus.Error.FileNotFound: path or object not found: /xyz/idont/exist
+    Should Be Equal As Strings  ${jsondata["message"]}  404 Not Found
+    Should Be Equal As Strings  ${jsondata["status"]}  error
+
+
 Get Response Codes
     [Documentation]  REST "Get" response status test.
     #--------------------------------------------------------------------
