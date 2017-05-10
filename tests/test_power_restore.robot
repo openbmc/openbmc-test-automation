@@ -77,7 +77,7 @@ Test Restore Policy ALWAYS_POWER_ON With Host Running
     [Tags]  Test_Restore_Policy_ALWAYS_POWER_ON_With_Host_Running
 
 
-Test Restore Policy RESTORE_LAST_STATE With Host Running
+Test Restore Policy Restore Last State With Host Running
     # Policy                Initial Host State     Expected Host State
 
     RESTORE_LAST_STATE      Running                Running
@@ -93,17 +93,17 @@ Test Restore Policy RESTORE_LAST_STATE With Host Running
     ...                    specific state.
 
     [Template]  Verify Restore Policy
-    [Tags]  Test_Restore_Policy_RESTORE_LAST_STATE_With_Host_Running
+    [Tags]  Test_Restore_Policy_Restore_Last_State_With_Host_Running
 
 
-Test Restore Policy RESTORE_LAST_STATE With Host Off
+Test Restore Policy Restore Last State With Host Off
     # Policy                Initial Host State     Expected Host State
 
     RESTORE_LAST_STATE      Off                    Off
 
 
     [Template]  Verify Restore Policy
-    [Tags]  Test_Restore_Policy_RESTORE_LAST_STATE_With_Host_Off
+    [Tags]  Test_Restore_Policy_Restore_Last_State_With_Host_Off
 
 
 *** Keywords ***
