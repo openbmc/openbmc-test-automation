@@ -65,6 +65,19 @@ IPMI Chassis Restore Power Policy
      ${power_policy}=  Read Attribute  ${HOST_SETTING}  power_policy
      Should Be Equal  ${power_policy}  ${initial_power_policy}
 
+IPMI Host Poweron
+    [Documentation]   Verify host power on status using external IPMI command.
+    [Tags]   IPMI_Host_Poweron 
+
+    Initiate Host Boot Via External IPMI
+
+IPMI Host Poweroff
+    [Documentation]   Verify host power off status using external IPMI command. 
+    [Tags]  IPMI_Host_Poweroff
+
+    Initiate Host PowerOff Via External IPMI
+
+
 *** Keywords ***
 
 Test Exit Logs
