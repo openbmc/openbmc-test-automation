@@ -87,7 +87,7 @@ Test Wrong Reservation_ID
     ...                and wrong Reservation ID. This command will be rejected.
     [Tags]  Test_Wrong_Reservation_ID
 
-    ${rev_id_1}=    Run IPMI Command Returned   0x0a 0x42
+    ${rev_id_1}=    Run IPMI Command  0x0a 0x42
     ${rev_id_ls}=   Get Substring   ${rev_id_1}   1   3
     ${rev_id_ms}=   Get Substring   ${rev_id_1}   -2
     Run IPMI command   0x0a 0x42
@@ -101,7 +101,6 @@ Test Correct Reservation_ID
     ...               and correct Reservation ID. This command will be accepted.
     [Tags]  Test_Correct_Reservation_ID
 
-    Run IPMI command   0x0a 0x42
     ${rev_id_2}=    Run IPMI Command Returned   0x0a 0x42
     ${rev_id_ls}=   Get Substring   ${rev_id_2}   1   3
     ${rev_id_ms}=   Get Substring   ${rev_id_2}   -2

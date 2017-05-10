@@ -1,10 +1,6 @@
 -e known_issue
 #https://github.com/openbmc/openbmc/issues/611
 -e Association_with_virtual_sensor
-#https://github.com/openbmc/openbmc/issues/539
--e Test_Wrong_Reservation_ID
-#https://github.com/openbmc/openbmc/issues/539
--e Test_Correct_Reservation_ID
 #https://github.com/openbmc/openbmc/issues/93
 -e System_Present
 -e Chassis_Present
