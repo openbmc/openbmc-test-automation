@@ -55,7 +55,7 @@
 #https://github.com/openbmc/openbmc/issues/1357
 -e Verify_Core_Functional_State
 #https://github.com/openbmc/openbmc/issues/1572
--e Test_Restore_Policy_RESTORE_LAST_STATE_With_Host_Running
+-e Test_Restore_Policy_Restore_Last_State_With_Host_Running
 #https://github.com/openbmc/openbmc/issues/1571
 -e Verify_Host_Quiesce_State_Without_Auto_Reboot
 # System LED test cases which are NA for Witherspoon system.
