@@ -9,9 +9,13 @@ Resource            ../lib/state_manager.robot
 Suite Setup         Run Keywords  Verify callout-test  AND
 ...                 Boot Host  AND
 ...                 Clear Existing Error Logs
-Test Setup          Open Connection And Log In
+Test Setup          Open Connection And Log In  AND
+...                 Delete Error logs
 Test Teardown       Close All Connections
 Suite Teardown      Clear Existing Error Logs
+
+***Variables***
+${target_device_path}  /sys/devices/platform/fsi-master/slave@00:00
 
 *** Test Cases ***
 
@@ -22,6 +26,125 @@ Create Test Error Callout And Verify
     Create Test Error With Callout
     Verify Test Error Log And Callout
 
+Create Test Error Callout And Verify AdditionalData
+    [Documentation]  Create Test Error Callout And Verify AdditionalData.
+    [Tags]  Create_Test_Error_Callout_And_Verify_AdditionalData
+
+    # Test error log entry example:
+    #  "/xyz/openbmc_project/logging/entry/1": {
+    #  "AdditionalData": [
+    #      "CALLOUT_DEVICE_PATH_TEST=/sys/devices/platform/fsi-master/slave@00:00",
+    #      "CALLOUT_ERRNO_TEST=0",
+    #      "DEV_ADDR=0x0DEADEAD"
+    #    ]
+
+    Create Test Error With Callout
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Contain  ${jsondata}["data"]["AdditionalData"]}  ${target_device_path}
+    Should Contain  ${jsondata}["data"]["AdditionalData"]}  0x0DEADEAD
+
+Create Test Error Callout And Delete
+    [Documentation]  Create Test Error Callout And Delete.
+    [Tags]  Create_Test_Error_Callout_And_Delete
+
+    # Test error log entry example:
+    #  "/xyz/openbmc_project/logging/entry/1": {
+    #  "AdditionalData": [
+    #      "CALLOUT_DEVICE_PATH_TEST=/sys/devices/platform/fsi-master/slave@00:00",
+    #      "CALLOUT_ERRNO_TEST=0",
+    #      "DEV_ADDR=0x0DEADEAD"
+    #    ],
+    #    "Id": 1,
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.TestCallout",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1487747332528,
+    #    "associations": [
+    #        [
+    #          "callout",
+    #          "fault",
+    #          "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #        ]
+    #    ]
+    # },
+    # "/xyz/openbmc_project/logging/entry/1/callout": {
+    #    "endpoints": [
+    #        "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #    ]
+    # },
+
+    Create Test Error With Callout
+    Delete Error Log Entry  ${BMC_LOGGING_ENTRY}${1}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}/callout
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
+Create Two Test Error Callout And Delete
+    [Documentation]  Create Two Test Error Callout And Delete.
+    [Tags]  Create_Two_Test_Error_Callout_And_Delete
+
+    # Test error log entry example:
+    #  "/xyz/openbmc_project/logging/entry/1": {
+    #  "AdditionalData": [
+    #      "CALLOUT_DEVICE_PATH_TEST=/sys/devices/platform/fsi-master/slave@00:00",
+    #      "CALLOUT_ERRNO_TEST=0",
+    #      "DEV_ADDR=0x0DEADEAD"
+    #    ],
+    #    "Id": 1,
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.TestCallout",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1487747332528,
+    #    "associations": [
+    #        [
+    #          "callout",
+    #          "fault",
+    #          "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #        ]
+    #    ]
+    # },
+    # "/xyz/openbmc_project/logging/entry/1/callout": {
+    #    "endpoints": [
+    #        "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #    ]
+    # },
+    # "/xyz/openbmc_project/logging/entry/2": {
+    #  "AdditionalData": [
+    #      "CALLOUT_DEVICE_PATH_TEST=/sys/devices/platform/fsi-master/slave@00:00",
+    #      "CALLOUT_ERRNO_TEST=0",
+    #      "DEV_ADDR=0x0DEADEAD"
+    #    ],
+    #    "Id": 2,
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.TestCallout",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1487747332528,
+    #    "associations": [
+    #        [
+    #          "callout",
+    #          "fault",
+    #          "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #        ]
+    #    ]
+    # },
+    # "/xyz/openbmc_project/logging/entry/2/callout": {
+    #    "endpoints": [
+    #        "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #    ]
+    # },
+
+    # Create two error logs.
+    Create Test Error With Callout
+    Create Test Error With Callout
+
+    # Delete entry/2 elog entry.
+    Delete Error Log Entry  ${BMC_LOGGING_ENTRY}${2}
+
+    # Verify if entry/1 exist and entry/2 is deleted.
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Contain  ${jsondata["data"]}  ${BMC_LOGGING_ENTRY}${1}
+    Should Not Contain  ${jsondata["data"]}  ${BMC_LOGGING_ENTRY}${2}
 
 *** Keywords ***
 
@@ -44,7 +167,6 @@ Clear Existing Error Logs
     Sleep  10s  reason=Wait for logging service to restart properly.
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
-
 
 Create Test Error With Callout
     [Documentation]  Generate test error log with callout for CPU0.
