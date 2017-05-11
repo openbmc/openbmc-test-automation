@@ -53,3 +53,10 @@ Power Off Host
     [Documentation]  Power off host.
     Run Key  OBMC Boot Test \ REST Power Off
 
+
+Verify OS State
+    [Documentation]  Verify OS state.
+    [Arguments]  ${expected_os_state}
+    ${os_state_dict}=  Get OS State  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
+    ${os_state}=  Evaluate  $os_state_dict.get(${expected_os_state})
+    Should Be Equal As Integers   ${os_state}  1

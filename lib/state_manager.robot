@@ -115,6 +115,14 @@ Get Host State
     ...  quiet=${quiet}
     [Return]  ${state.rsplit('.', 1)[1]}
 
+
+Verify Host State
+    [Documentation]  Verify host state.
+    [Arguments]  ${expected_host_state}
+    ${host_state}=  Get Host State
+    Should Be Equal  ${host_state}  ${expected_host_state}
+
+
 Get Host Trans State
     [Documentation]  Return the transition state of host as a string.
     ...              e.g. On, Off, Reboot
@@ -138,6 +146,13 @@ Get Chassis Power State
     [Return]  ${state.rsplit('.', 1)[1]}
 
 
+Verify Chassis Power State
+    [Documentation]  Verify Chassis power state.
+    [Arguments]  ${expected_chassis_state}
+    ${chassis_state}=  Get Chassis Power State
+    Should Be Equal  ${chassis_state}  ${expected_chassis_state}
+
+
 Get BMC State
     [Documentation]  Return the state of the BMC.
     [Arguments]  ${quiet}=${QUIET}
@@ -157,6 +172,13 @@ Put BMC State
     ...  Log  BMC is already in ${expected_state} state
     ...  ELSE  Run Keywords  Initiate BMC Reboot  AND
     ...  Wait for BMC state  ${expected_state}
+
+
+Verify BMC State
+    [Documentation]  Verify BMC State.
+    [Arguments]  ${expected_bmc_state}
+    ${bmc_state}=  Get BMC State
+    Should Be Equal  ${bmc_state}  ${expected_bmc_state}
 
 
 Initiate BMC Reboot
