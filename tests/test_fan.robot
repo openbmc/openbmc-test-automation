@@ -28,7 +28,8 @@ Verify Fan Sensors Atrributes
    \  ${resp}=  OpenBMC Get Request  ${entry}
    \  ${json}=  To Json  ${resp.content}
    \  Should Be True  ${json["data"]["Scale"]} >= 0
-   \  Should Be True  ${json["data"]["Target"]} >= 0
+   \  Run Keyword And Ignore Error
+   ...  Should Be True  ${json["data"]["Target"]} >= 0
    \  Should Be Equal As Strings
    ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.RPMS
    \  Should Be True  ${json["data"]["Value"]} >= 0
