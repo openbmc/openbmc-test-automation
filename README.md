@@ -85,9 +85,15 @@ How to test individual test
     No preset environment variables, the entire test suite for a barreleye system
     $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- tests
 
+    Default CI test bucket list:
     No preset environment variables, the entire test suite excluding test
     cases using argument file.
     $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile test_lists/skip_test tests
+
+    Exclude test list for supported systems:
+    Barrleye:  test_lists/skip_test_barreleye
+    Palmetto:  test_lists/skip_test_palmetto
+    Witherspoon:  test_lists/skip_test_witherspoon
 ```
 
 It can also be run by passing variables from the cli...
