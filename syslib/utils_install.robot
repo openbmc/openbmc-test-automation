@@ -4,6 +4,7 @@ Documentation      Keywords for system related tools installation.
 
 
 Resource     utils_os.robot
+Resource     ../lib/boot_utils.robot
 
 ***Keywords***
 
@@ -11,7 +12,7 @@ Prep OS For HTX Installation
     [Documentation]  Prepare OS for HTX tool installation.
 
     Boot To OS
-    ${status}=  Run Keyword And Return Status  HTX Tool Exist
+    ${status}=  Run Keyword And Return Status  Tool Exist  htxcmdline
 
     Return From Keyword If  '${status}' == 'True'
     ...  HTX tool already installed.
@@ -25,6 +26,22 @@ Prep OS For HTX Installation
     # Download and install Git.
     Log To Console  \n Install Git.
     Execute Command On OS  sudo apt-get -y install git
+
+
+Prep OS For Opal Prd Installation
+    [Documentation]  Prepare OS for opal prd tool installation.
+
+    Boot To OS
+    ${status}=  Run Keyword And Return Status  Tool Exist  opal-gard
+
+    Return From Keyword If  '${status}' == 'True'  ${False}
+
+
+    # Downloads the package lists from the repositories and "updates"
+    # them to get information on the newest versions of packages and
+    # their dependencies.
+    Log To Console  \n Update package list.
+    Execute Command On OS  sudo apt-get update
 
 
 Setup HTX On OS
@@ -51,4 +68,20 @@ Setup HTX On OS
 
     Log To Console  \n Installed compiled HTX binaries.
     Execute Command On OS  sudo make install
+
+
+Setup Opal Prd On OS
+    [Documentation]  Download and install opal prd tool.
+
+    # Download and install PRD packages.
+    Execute Command  sudo apt-get install opal-prd
+    Execute Command  sudo apt-get install opal-utils
+
+    # Reboot OS to activate installation.
+    Host Reboot
+
+    # Login to OS and verify opal prd installation working.
+    Login To OS
+    ${out}=  Execute Command  opal-gard list
+    Should Contain  ${out}  No GARD entries to display
 
