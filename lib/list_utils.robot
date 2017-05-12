@@ -30,3 +30,19 @@ Intersect Lists
     @{intersected_list}=  Remove Duplicates  ${intersected_list}
 
     [Return]  @{intersected_list}
+
+Subtract List
+    [Documentation]  Subtracts the two lists passed in. Returns a list with
+    ...  items from the first list which are not present in the second list.
+    [Arguments]  ${list1}  ${list2}
+
+    # list1      The first list to subtract.
+    # list2      The second list to subtract.
+
+    ${diff_list}=  Create List
+    :FOR  ${item}  IN  @{list1}
+    \  ${status}=  Run Keyword And Return Status  Should Contain  ${list2}  ${item}
+    \  Run Keyword If  '${status}' == '${False}'
+    ...  Append To List  ${diff_list}  ${item}
+
+    [Return]  ${diff_list}
