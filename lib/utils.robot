@@ -650,6 +650,15 @@ Check BMC File System Performance
     :FOR  ${var}  IN Range  1  4
     \     BMC File System Usage check
 
+Get URL List
+    [Documentation]  Returns list of URL paths under given URL.
+    [Arguments]  ${openbmc_url}
+    # Description of arguments:
+    # openbmc_url  URL for list operation.
+
+    ${list}=  Read Properties  ${openbmc_url}/list
+    [Return]  ${list}
+
 Get Endpoint Paths
     [Documentation]   Returns all url paths ending with given endpoint
     ...               Example:
