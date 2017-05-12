@@ -21,6 +21,11 @@ ${HTX_LOOP}          4
 # User defined halt on error.
 ${HTX_KEEP_RUNNING}  ${0}
 
+# User defined MDT profile
+# There few stanza in HTX test exerciser that needs to be
+# removed temporarily and build manually and execute.
+${HTX_MDT_PROFILE}  mdt.bu
+
 *** Test Cases ***
 
 Hard Bootme Test
@@ -50,15 +55,10 @@ Start HTX Exerciser
     # Post Power off and on, the OS SSH session needs to be established.
     Login To OS
 
-    Rprint Timen  Create HTX mdt profile.
-    ${profile}=  Execute Command On OS  htxcmdline -createmdt
-    Rprint Timen  ${profile}
-    Should Contain  ${profile}  mdts are created successfully
+    Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
+    ...  Create Default MDT Profile
 
-    Rprint Timen  Start HTX mdt profile execution.
-    ${htx_run}=  Execute Command On OS  htxcmdline -run -mdt mdt.bu
-    Rprint Timen  ${htx_run}
-    Should Contain  ${htx_run}  Activated
+    Run User Defined MDT Profile
 
     Loop HTX Health Check
 
@@ -67,6 +67,7 @@ Start HTX Exerciser
     Power Off Host
 
     Rprint Timen  HTX Test ran for: ${HTX_DURATION}
+
 
 Loop HTX Health Check
     [Documentation]  Run until HTX exerciser fails.
@@ -91,11 +92,32 @@ Check HTX Run Status
     Should Contain  ${errlog}  file </tmp/htxerr> is empty
 
 
+Create Default MDT Profile
+    [Documentation]  Create default mdt.bu profile and run.
+
+    Rprint Timen  Create HTX mdt profile.
+
+    ${profile}=  Execute Command On OS  htxcmdline -createmdt
+    Rprint Timen  ${profile}
+    Should Contain  ${profile}  mdts are created successfully
+
+
+Run User Defined MDT Profile
+    [Documentation]  Load user pre-defined MDT profile.
+
+    Rprint Timen  Start HTX mdt profile execution.
+    ${htx_run}=  Execute Command On OS
+    ...  htxcmdline -run -mdt ${HTX_MDT_PROFILE}
+    Rprint Timen  ${htx_run}
+    Should Contain  ${htx_run}  Activated
+
+
 Shutdown HTX Exerciser
     [Documentation]  Shut down HTX exerciser run.
 
     Rprint Timen  Shutdown HTX Run
-    ${shutdown}=  Execute Command On OS  htxcmdline -shutdown -mdt mdt.bu
+    ${shutdown}=  Execute Command On OS
+    ...  htxcmdline -shutdown -mdt ${HTX_MDT_PROFILE}
     Rprint Timen  ${shutdown}
     Should Contain  ${shutdown}  shutdown successfully
 
@@ -121,4 +143,3 @@ Post Test Case Execution
 
     FFDC On Test Case Fail
     Close All Connections
-
