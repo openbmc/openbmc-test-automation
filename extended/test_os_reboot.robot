@@ -1,0 +1,33 @@
+*** Settings ***
+Documentation   Module to test OS reboot functionality.
+
+Resource    ../lib/boot_utils.robot
+
+Test Teardown   FFDC On Test Case Fail
+
+*** Variables ***
+
+# User defined boot test iteration.
+${BOOT_LOOP_COUNT}   ${50}
+
+*** Test Cases ***
+
+OS Reboot Test
+    [Documentation]  Boot OS and trigger reboot and expect
+    ...              OS to boot back.
+    # 1. Boot OS
+    # 2. Verify OS is booted
+    # 3. Issue "reboot" from OS
+    # 4. Verify if OS is booted back
+
+    # By default run test for 50 loops, else user input iteration.
+    # Fails immediately if any of the execution rounds fail and
+    # check if BMC is still pinging and FFDC is collected.
+    Repeat Keyword  ${BOOT_LOOP_COUNT} times  Boot OS And Reboot
+
+*** Keywords ***
+
+Boot OS And Reboot
+    [Documentation]  Boot OS and trigger reboot.
+    Host Reboot
+
