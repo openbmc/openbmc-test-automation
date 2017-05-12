@@ -1,0 +1,11 @@
+*** Variables ***
+
+       # xCAT related parameters
+#########################################
+#########################################
+
+${XCAT_IP}        ${EMPTY}
+${XCAT_USERNAME}  ${EMPTY}
+${XCAT_PASSWORD}  ${EMPTY}
+${XCAT_PORT}      31578
+${XCAT_PATH}      /opt/xcat/bin/lsxcatd
