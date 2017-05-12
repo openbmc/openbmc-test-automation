@@ -103,7 +103,7 @@ Pre Test Case Execution
     # 2. Power on
 
     Boot To OS
-    HTX Tool Exist
+    Tool Exist  htxcmdline
 
 
 Post Test Case Execution
