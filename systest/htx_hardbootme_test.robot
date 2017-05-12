@@ -129,7 +129,7 @@ Pre Test Case Execution
     # 2. Power on
 
     Boot To OS
-    HTX Tool Exist
+    Tool Exist  htxcmdline
 
     # Shutdown if HTX is running.
     ${status}=  Run Keyword And Return Status  Is HTX Running
