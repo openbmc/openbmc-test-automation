@@ -36,12 +36,15 @@ Login To OS
     Login  ${os_username}  ${os_password}
 
 
-HTX Tool Exist
-    [Documentation]  Check whether HTX exerciser is installed on OS.
+Tool Exist
+    [Documentation]  Check whether given tool is installed on OS.
+    [Arguments]  ${tool_name}
+    # Description of argument(s):
+    # tool_name   Tool name existence to be checked.
     Login To OS
-    ${output}=  Execute Command On OS  which htxcmdline
-    Should Contain  ${output}  htxcmdline
-    ...  msg=Please install HTX exerciser.
+    ${output}=  Execute Command On OS  which ${tool_name}
+    Should Contain  ${output}  ${tool_name}
+    ...  msg=Please install ${tool_name} tool.
 
 
 Boot To OS
