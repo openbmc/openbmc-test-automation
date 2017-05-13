@@ -8,7 +8,13 @@ Resource           ../extended/obmc_boot_test_resource.robot
 Resource           ../lib/utils.robot
 Resource           ../lib/state_manager.robot
 
+Library            OperatingSystem
+Library            DateTime
+
 *** Variables ***
+
+${HTX_LOG_PATH}   ${EXECDIR}${/}logs${/}
+
 
 *** Keywords ***
 
@@ -63,4 +69,34 @@ File Exist On OS
     Login To OS
     ${out}=  Execute Command On OS  ls ${file_path}
     Log To Console  \n File Exist: ${out}
+
+
+Write Log Data To File
+    [Documentation]  Write log data to the logs directory.
+    [Arguments]  ${data}=      ${log_file_path}=
+    # Description of argument(s):
+    # data            String buffer.
+    # log_file_path   Absoulte file path.
+
+    Create File  ${log_file_path}  ${data}
+
+
+Collect HTX Log Files
+    [Documentation]  Collect status and error log files.
+    # Collects the following files:
+    # HTX error log file /tmp/htxerr
+    # HTX status log file /tmp/htxstats
+
+    # Create logs directory and get current datetime.
+    Create Directory  ${HTX_LOG_PATH}
+    ${cur_datetime}=  Get Current Date  result_format=%Y%m%d%H%M%S%f
+
+    File Exist On OS  /tmp/htxerr
+    ${htx_err}=  Execute Command On BMC  cat /tmp/htxerr
+    Write Log Data To File  ${htx_err}  ${HTX_LOG_PATH}/htxerr_${cur_datetime}
+
+    File Exist On OS  /tmp/htxstats
+    ${htx_err}=  Execute Command On BMC  cat /tmp/htxerr
+    Write Log Data To File
+    ...  ${htx_err}  ${HTX_LOG_PATH}/htxstats_${cur_datetime}
 
