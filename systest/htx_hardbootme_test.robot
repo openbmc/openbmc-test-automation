@@ -79,6 +79,9 @@ Loop HTX Health Check
 Check HTX Run Status
     [Documentation]  Get HTX exerciser status and check for error.
 
+    Rprint Timen  Collect HTX status and error log files.
+    Run Key U  Collect HTX Log Files
+
     Rprint Timen  Check HTX mdt Status and error.
     ${status}=  Execute Command On OS  htxcmdline -status -mdt mdt.bu
     Log  ${status}
