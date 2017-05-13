@@ -64,3 +64,9 @@ File Exist On OS
     ${out}=  Execute Command On OS  ls ${file_path}
     Log To Console  \n File Exist: ${out}
 
+
+Is HTX Running
+    [Documentation]  Check if the HTX exerciser is currently running.
+
+    ${status}=  Execute Command On OS  htxcmdline -status
+    Should Not Contain  ${status}  Daemon state is <IDLE>
