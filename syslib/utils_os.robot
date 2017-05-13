@@ -8,7 +8,13 @@ Resource           ../extended/obmc_boot_test_resource.robot
 Resource           ../lib/utils.robot
 Resource           ../lib/state_manager.robot
 
+Library            OperatingSystem
+Library            DateTime
+
 *** Variables ***
+
+${htx_log_dir_path}   ${EXECDIR}${/}logs${/}
+
 
 *** Keywords ***
 
@@ -70,3 +76,35 @@ Is HTX Running
 
     ${status}=  Execute Command On OS  htxcmdline -status
     Should Not Contain  ${status}  Daemon state is <IDLE>
+
+
+Write Log Data To File
+    [Documentation]  Write log data to the logs directory.
+    [Arguments]  ${data}=  ${log_file_path}=
+    # Description of argument(s):
+    # data            String buffer.
+    # log_file_path   The log file path.
+
+    Create File  ${log_file_path}  ${data}
+
+
+Collect HTX Log Files
+    [Documentation]  Collect status and error log files.
+    # Collects the following files:
+    # HTX error log file /tmp/htxerr
+    # HTX status log file /tmp/htxstats
+
+    # Create logs directory and get current datetime.
+    Create Directory  ${htx_log_dir_path}
+    ${cur_datetime}=  Get Current Date  result_format=%Y%m%d%H%M%S%f
+
+    File Exist On OS  /tmp/htxerr
+    ${htx_err}=  Execute Command On BMC  cat /tmp/htxerr
+    Write Log Data To File
+    ...  ${htx_err}  ${htx_log_dir_path}/${OS_HOST}${cur_datetime}.htxerr
+
+    File Exist On OS  /tmp/htxstats
+    ${htx_stats}=  Execute Command On BMC  cat /tmp/htxstats
+    Write Log Data To File
+    ...  ${htx_stats}  ${htx_log_dir_path}/${OS_HOST}_${cur_datetime}.htxstats
+
