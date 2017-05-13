@@ -16,6 +16,9 @@ Force Tags  chassisboot
 # By default 2 cycle for CI/CT.
 ${LOOP_COUNT}  ${2}
 
+# Error strings to check from journald.
+${ERROR_STRINGS}   grep -e SEGV -e core-dump
+
 *** Test Cases ***
 
 Power On Test
@@ -23,6 +26,18 @@ Power On Test
     [Tags]  Power_On_Test
 
     Repeat Keyword  ${LOOP_COUNT} times  Host Off And On
+
+
+Check For Application Failures
+    [Documentation]  Parse the journal log and check for failures.
+    [Tags]  Check_For_Application_Failures
+
+    Open Connection And Log In
+
+    ${journal_log}=  Execute Command On BMC
+    ...  journalctl --no-pager | ${ERROR_STRINGS}
+
+    Should Be Empty  ${journal_log}
 
 *** Keywords ***
 
