@@ -191,6 +191,29 @@ Verify DIMM Functional State
     \  Should Be True  ${present}
     ...  msg=${dimm_uri} is functional but not present.
 
+
+Verify Fan Functional State
+    [Documentation]  Verify that "Present" Fan property is set if "Functional"
+    ...              fan property is set.
+    [Tags]  Verify_Fan_Functional_State
+    # Example:
+    # "/xyz/openbmc_project/inventory/system/chassis/motherboard/fan0": {
+    #     "Functional": 1,
+    #     "Present": 1,
+    #     "PrettyName": "fan0"
+    # },
+
+    ${fan_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  fan*
+    Should Not Be Empty   ${fan_list}
+    :FOR  ${fan_uri}  IN  @{fan_list}
+    \  ${status}=  Run Keyword And Return Status
+    ...  Check URL Property If Functional  ${fan_uri}
+    \  Continue For Loop If  '${status}' == '${False}'
+    \  ${present}=  Read Attribute  ${fan_uri}  Present
+    \  Should Be True  ${present}
+    ...  msg=${fan_uri} is functional but not present.
+
+
 *** Keywords ***
 
 Test Suite Setup
