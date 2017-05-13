@@ -108,6 +108,11 @@ Pre Test Case Execution
     Boot To OS
     HTX Tool Exist
 
+    # Shutdown if HTX is running.
+    ${status}=  Run Keyword And Return Status  Is HTX Running
+    Run Keyword If  '${status}' == 'True'
+    ...  Shutdown HTX Exerciser
+
 
 Post Test Case Execution
     [Documentation]  Do the post test teardown.
