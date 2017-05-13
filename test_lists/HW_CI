@@ -2,3 +2,5 @@
 -i Test_SSL_Connection
 #Basic poweron test
 -i Power_On_Test
+# Check for apps failures
+-i Check_For_Application_Failures
