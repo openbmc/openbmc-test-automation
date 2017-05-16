@@ -4,9 +4,11 @@ Documentation      Keywords for system related test. This is a subset of the
 ...                define for system test use cases.
 
 Library            ../lib/gen_robot_keyword.py
+Library            OperatingSystem
 Resource           ../extended/obmc_boot_test_resource.robot
 Resource           ../lib/utils.robot
 Resource           ../lib/state_manager.robot
+Resource           ../lib/rest_client.robot
 
 *** Variables ***
 
@@ -63,4 +65,27 @@ File Exist On OS
     Login To OS
     ${out}=  Execute Command On OS  ls ${file_path}
     Log To Console  \n File Exist: ${out}
+
+
+REST Upload File To BMC
+    [Documentation]  Upload an file via REST.
+
+    # Generate 32 MB file size
+    Run  dd if=/dev/zero of=dummyfile bs=1 count=0 seek=32MB
+    OperatingSystem.File Should Exist  dummyfile
+
+    # Get the content of the file and upload to BMC
+    ${image_data}=  OperatingSystem.Get Binary File  dummyfile
+
+    # Get REST session to BMC
+    Initialize OpenBMC
+
+    # Create the REST payload headers and data
+    ${data}=  Create Dictionary  data  ${image_data}
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  Accept=application/octet-stream
+    Set To Dictionary  ${data}  headers  ${headers}
+
+    ${resp}=  Post Request  openbmc  /upload/image  &{data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
