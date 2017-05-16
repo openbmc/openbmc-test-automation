@@ -4,9 +4,11 @@ Documentation      Keywords for system related test. This is a subset of the
 ...                define for system test use cases.
 
 Library            ../lib/gen_robot_keyword.py
+Library            OperatingSystem
 Resource           ../extended/obmc_boot_test_resource.robot
 Resource           ../lib/utils.robot
 Resource           ../lib/state_manager.robot
+Resource           ../lib/rest_client.robot
 
 Library            OperatingSystem
 Library            DateTime
@@ -27,18 +29,20 @@ Execute Command On OS
     Should Be Empty  ${stderr}
     [Return]  ${stdout}
 
-
 Login To OS
     [Documentation]  Login to OS Host.
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}
+    ...          ${alias_name}=os_connection
     # Description of argument(s):
     # os_host      IP address of the OS Host.
     # os_username  OS Host Login user name.
     # os_password  OS Host Login passwrd.
+    # alias_name   Default OS SSH session connection alias name.
+    # TODO: Generalize alias naming using openbmc/openbmc-test-automation#633
 
     Ping Host  ${os_host}
-    Open Connection  ${os_host}
+    Open Connection  ${os_host}  alias=${alias_name}
     Login  ${os_username}  ${os_password}
 
 
@@ -110,4 +114,41 @@ Collect HTX Log Files
     ${htx_stats}=  Execute Command On BMC  cat /tmp/htxstats
     Write Log Data To File
     ...  ${htx_stats}  ${htx_log_dir_path}/${OS_HOST}_${cur_datetime}.htxstats
+
+
+REST Upload File To BMC
+    [Documentation]  Upload a file via REST to BMC.
+
+    # Generate 32 MB file size
+    Run  dd if=/dev/zero of=dummyfile bs=1 count=0 seek=32MB
+    OperatingSystem.File Should Exist  dummyfile
+
+    # Get the content of the file and upload to BMC
+    ${image_data}=  OperatingSystem.Get Binary File  dummyfile
+
+    # Get REST session to BMC
+    Initialize OpenBMC
+
+    # Create the REST payload headers and data
+    ${data}=  Create Dictionary  data  ${image_data}
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  Accept=application/octet-stream
+    Set To Dictionary  ${data}  headers  ${headers}
+
+    ${resp}=  Post Request  openbmc  /upload/image  &{data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    # Delete uploaded image file.
+    # TODO: Delete via REST openbmc/openbmc#1550
+    # Take SSH connection to BMC and swtich to BMC connection to perform
+    # the task.
+    &{bmc_connection_args}=  Create Dictionary  alias=bmc_connection
+    Open Connection And Log In  &{bmc_connection_args}
+
+    # Currently OS SSH session is active, switch to BMC connection.
+    Switch Connection  bmc_connection
+    Execute Command On BMC  rm -rf /tmp/images/
+
+    # Switch back to OS SSH connection.
+    Switch Connection  os_connection
 
