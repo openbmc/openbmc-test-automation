@@ -6,12 +6,12 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 
-Suite Setup         Run Keywords  Verify callout-test  AND
-...                 Boot Host  AND
-...                 Clear Existing Error Logs
+#Suite Setup         Run Keywords  Verify callout-test  AND
+#...                 Boot Host  AND
+#...                 Clear Existing Error Logs
 Test Setup          Open Connection And Log In
 Test Teardown       Close All Connections
-Suite Teardown      Clear Existing Error Logs
+#Suite Teardown      Clear Existing Error Logs
 
 *** Test Cases ***
 
@@ -22,6 +22,23 @@ Create Test Error Callout And Verify
     Create Test Error With Callout
     Verify Test Error Log And Callout
 
+Resolved Field Testing
+    [Documentation]  Resolved Field Testing
+    [Tags]  Resolved_Field_Testing
+
+    Delete Error logs
+    Create Test Error With Callout
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Contain  ${jsondata}["data"]["AdditionalData"]  callout
+    
+    #${Resolved_variable}=  Set Variable  1
+    ${valueDict}=  Create Dictionary  data=${1}
+    #${type}=  Evaluate  type(${BMC_LOGGING_ENTRY}/${1}/attr/Resolved)
+    Write Attribute  ${BMC_LOGGING_ENTRY}/${1}  Resolved  data=${valueDict}
+    
+    #${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}/callout
+    #Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 *** Keywords ***
 
