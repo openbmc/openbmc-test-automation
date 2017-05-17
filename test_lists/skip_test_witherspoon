@@ -44,8 +44,8 @@
 #https://github.com/openbmc/openbmc-test-automation/issues/546
 -e CPU_Present
 -e DIMM3_Present
-#https://github.com/openbmc/openbmc/issues/1521
--e Verify_Reset_Reload_With_Chassis_State_On
+#https://github.com/openbmc/openbmc/issues/1322
+-e Verify_BMC_Reset_Reload_With_System_On
 #https://github.com/openbmc/openbmc/issues/1461
 -e Verify_FRU_Properties
 #https://github.com/openbmc/openbmc/issues/1357
