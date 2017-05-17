@@ -9,7 +9,7 @@ Resource           ../extended/obmc_boot_test_resource.robot
 Resource           ../lib/utils.robot
 Resource           ../lib/state_manager.robot
 Resource           ../lib/rest_client.robot
-
+Resource           resource.txt
 Library            OperatingSystem
 Library            DateTime
 
@@ -151,4 +151,62 @@ REST Upload File To BMC
 
     # Switch back to OS SSH connection.
     Switch Connection  os_connection
+
+
+Pre Test Case Execution
+    [Documentation]  Do the initial test setup.
+    # 1. Check if HTX tool exist.
+    # 2. Power on
+
+    Boot To OS
+    HTX Tool Exist
+
+    # Shutdown if HTX is running.
+    ${status}=  Run Keyword And Return Status  Is HTX Running
+    Run Keyword If  '${status}' == 'True'
+    ...  Shutdown HTX Exerciser
+
+
+Create Default MDT Profile
+    [Documentation]  Create default mdt.bu profile and run.
+
+    Rprint Timen  Create HTX mdt profile.
+
+    ${profile}=  Execute Command On OS  htxcmdline -createmdt
+    Rprintn  ${profile}
+    Should Contain  ${profile}  mdts are created successfully
+
+
+Run MDT Profile
+    [Documentation]  Load user pre-defined MDT profile.
+
+    Rprint Timen  Start HTX mdt profile execution.
+    ${htx_run}=  Execute Command On OS
+    ...  htxcmdline -run -mdt ${HTX_MDT_PROFILE}
+    Rprintn  ${htx_run}
+    Should Contain  ${htx_run}  Activated
+
+
+Check HTX Run Status
+    [Documentation]  Get HTX exerciser status and check for error.
+
+    Rprint Timen  Check HTX mdt Status and error.
+    ${status}=  Execute Command On OS
+    ...  htxcmdline -status -mdt ${HTX_MDT_PROFILE}
+    Rprintn  ${status}
+
+    ${errlog}=  Execute Command On OS  htxcmdline -geterrlog
+    Rprintn  ${errlog}
+
+    Should Contain  ${errlog}  file </tmp/htxerr> is empty
+
+
+Shutdown HTX Exerciser
+    [Documentation]  Shut down HTX exerciser run.
+
+    Rprint Timen  Shutdown HTX Run
+    ${shutdown}=  Execute Command On OS
+    ...  htxcmdline -shutdown -mdt ${HTX_MDT_PROFILE}
+    Rprintn  ${shutdown}
+    Should Contain  ${shutdown}  shutdown successfully
 
