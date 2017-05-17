@@ -147,6 +147,7 @@ def process_pgm_parms():
     global boot_results_file_path
     global boot_results
     global ffdc_list_file_path
+    global ffdc_report_list_path
 
     if ffdc_dir_path_style == "":
         ffdc_dir_path_style = int(os.environ.get('FFDC_DIR_PATH_STYLE', '0'))
@@ -167,6 +168,8 @@ def process_pgm_parms():
 
     ffdc_list_file_path = base_tool_dir_path + openbmc_nickname +\
         "/FFDC_FILE_LIST"
+    ffdc_report_list_path = base_tool_dir_path + openbmc_nickname +\
+        "/FFDC_REPORT_FILE_LIST"
 
 ###############################################################################
 
@@ -189,6 +192,8 @@ def initial_plug_in_setup():
     BuiltIn().set_global_variable("${BASE_TOOL_DIR_PATH}", base_tool_dir_path)
     BuiltIn().set_global_variable("${FFDC_LIST_FILE_PATH}",
                                   ffdc_list_file_path)
+    BuiltIn().set_global_variable("${FFDC_REPORT_LIST_PATH}",
+                                  ffdc_report_list_path)
 
     BuiltIn().set_global_variable("${FFDC_DIR_PATH_STYLE}",
                                   ffdc_dir_path_style)
@@ -200,7 +205,7 @@ def initial_plug_in_setup():
     # element in additional_values.
     additional_values = ["program_pid", "master_pid", "ffdc_dir_path",
                          "status_dir_path", "base_tool_dir_path",
-                         "ffdc_list_file_path"]
+                         "ffdc_list_file_path", "ffdc_report_list_path"]
 
     plug_in_vars = parm_list + additional_values
 
@@ -274,6 +279,24 @@ def plug_in_setup():
             gc.cmd_fnc_u("printenv | egrep AUTOBOOT_ | sort -u")
 
     BuiltIn().set_log_level(LOG_LEVEL)
+
+###############################################################################
+
+
+###############################################################################
+def pre_boot_plug_in_setup():
+
+    # Clear the ffdc_list_file_path file.  Plug-ins may now write to it.
+    try:
+        os.remove(ffdc_list_file_path)
+    except OSError:
+        pass
+
+    # Clear the ffdc_report_list_path file.  Plug-ins may now write to it.
+    try:
+        os.remove(ffdc_report_list_path)
+    except OSError:
+        pass
 
 ###############################################################################
 
@@ -548,9 +571,17 @@ def print_defect_report():
     # named in FFDC_LIST_FILE_PATH so I will refrain from printing those
     # out (so we don't see duplicates in the list).
 
+    # Get additional header data which may have been created by ffdc plug-ins.
+    # Also, delete the individual header files to cleanup.
+    cmd_buf = "file_list=$(cat " + ffdc_report_list_path + " 2>/dev/null)" +\
+              " ; [ ! -z \"${file_list}\" ] && cat ${file_list}" +\
+              " 2>/dev/null ; rm -rf ${file_list} 2>/dev/null || :"
+    shell_rc, more_header_info = gc.cmd_fnc_u(cmd_buf, print_output=0,
+                                              show_err=0)
+
     LOG_PREFIX = BuiltIn().get_variable_value("${LOG_PREFIX}")
 
-    output = '\n'.join(glob.glob(LOG_PREFIX + '*'))
+    output = '\n'.join(sorted(glob.glob(LOG_PREFIX + '*')))
     try:
         ffdc_list = open(ffdc_list_file_path, 'r')
     except IOError:
@@ -565,6 +596,8 @@ def print_defect_report():
     gp.qprint_dashes(0, 90, 1, "=")
     gp.qprintn("Copy this data to the defect:\n")
 
+    if len(more_header_info) > 0:
+        gp.printn(more_header_info)
     gp.qpvars(host_name, host_ip, openbmc_nickname, openbmc_host,
               openbmc_host_name, openbmc_ip, openbmc_username,
               openbmc_password, os_host, os_host_name, os_ip, os_username,
@@ -744,11 +777,7 @@ def test_loop_body():
     boot_count += 1
     gp.qprint_timen("Starting boot " + str(boot_count) + ".")
 
-    # Clear the ffdc_list_file_path file.  Plug-ins may now write to it.
-    try:
-        os.remove(ffdc_list_file_path)
-    except OSError:
-        pass
+    pre_boot_plug_in_setup()
 
     cmd_buf = ["run_boot", next_boot]
     boot_status, msg = BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
@@ -854,6 +883,7 @@ def obmc_boot_test_py(alt_boot_stack=None):
 
     if ffdc_only:
         gp.qprint_timen("Caller requested ffdc_only.")
+        pre_boot_plug_in_setup()
         grk.run_key_u("my_ffdc")
         return
 
