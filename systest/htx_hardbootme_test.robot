@@ -2,7 +2,6 @@
 Documentation    Stress the system using HTX exerciser.
 
 Resource         ../syslib/utils_os.robot
-Library          ../lib/gen_robot_print.py
 
 Test Setup      Pre Test Case Execution
 Test Teardown   Post Test Case Execution
@@ -10,21 +9,6 @@ Test Teardown   Post Test Case Execution
 *** Variables ****
 
 ${stack_mode}        skip
-
-# Default duration and interval of HTX exerciser to run.
-${HTX_DURATION}      2 hours
-${HTX_INTERVAL}      15 min
-
-# Default hardbootme loop times HTX exerciser to run.
-${HTX_LOOP}          4
-
-# User-defined halt on error.
-${HTX_KEEP_RUNNING}  ${0}
-
-# User-defined MDT profile.
-# There are a few stanzas in the HTX test exerciser that need to be removed
-# temporarily and manually built and executed.
-${HTX_MDT_PROFILE}  mdt.bu
 
 *** Test Cases ***
 
@@ -75,66 +59,6 @@ Loop HTX Health Check
     Repeat Keyword  ${HTX_DURATION}
     ...  Run Keywords  Check HTX Run Status
     ...  AND  Sleep  ${HTX_INTERVAL}
-
-
-Check HTX Run Status
-    [Documentation]  Get HTX exerciser status and check for error.
-
-    Rprint Timen  Check HTX mdt Status and error.
-    ${status}=  Execute Command On OS
-    ...  htxcmdline -status -mdt ${HTX_MDT_PROFILE}
-    Log  ${status}
-    Rprint Timen  ${status}
-
-    ${errlog}=  Execute Command On OS  htxcmdline -geterrlog
-    Log  ${errlog}
-    Rprint Timen  ${errlog}
-
-    Should Contain  ${errlog}  file </tmp/htxerr> is empty
-
-
-Create Default MDT Profile
-    [Documentation]  Create default mdt.bu profile and run.
-
-    Rprint Timen  Create HTX mdt profile.
-
-    ${profile}=  Execute Command On OS  htxcmdline -createmdt
-    Rprint Timen  ${profile}
-    Should Contain  ${profile}  mdts are created successfully
-
-
-Run MDT Profile
-    [Documentation]  Load user pre-defined MDT profile.
-
-    Rprint Timen  Start HTX mdt profile execution.
-    ${htx_run}=  Execute Command On OS
-    ...  htxcmdline -run -mdt ${HTX_MDT_PROFILE}
-    Rprint Timen  ${htx_run}
-    Should Contain  ${htx_run}  Activated
-
-
-Shutdown HTX Exerciser
-    [Documentation]  Shut down HTX exerciser run.
-
-    Rprint Timen  Shutdown HTX Run
-    ${shutdown}=  Execute Command On OS
-    ...  htxcmdline -shutdown -mdt ${HTX_MDT_PROFILE}
-    Rprint Timen  ${shutdown}
-    Should Contain  ${shutdown}  shutdown successfully
-
-
-Pre Test Case Execution
-    [Documentation]  Do the initial test setup.
-    # 1. Check if HTX tool exist.
-    # 2. Power on
-
-    Boot To OS
-    HTX Tool Exist
-
-    # Shutdown if HTX is running.
-    ${status}=  Run Keyword And Return Status  Is HTX Running
-    Run Keyword If  '${status}' == 'True'
-    ...  Shutdown HTX Exerciser
 
 
 Post Test Case Execution
