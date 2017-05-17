@@ -31,6 +31,17 @@ Verify Reset Reload With Chassis State On
     Should Be Equal  ${chassis_state_before}  ${chassis_state_after}
     Should Be Equal  ${rr_status}  Yes
 
+Verify Reset Reload With Host State Running
+    [Documentation]  Validate host "Running" state is unchanged after
+    ...  BMC reset reload.
+    [Tags]  Verify_Reset_Reload_With_Host_State_Running
+
+    Initiate Host Boot
+    Trigger Reset Reload via BMC Reboot
+
+    ${host_state}=  Run Keyword  Get Host State
+    Should Be Equal  ${host_state}  Running
+
 
 *** Keywords ***
 
