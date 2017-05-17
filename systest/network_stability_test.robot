@@ -12,13 +12,6 @@ Test Teardown   Post Test Case Execution
 
 ${stack_mode}        skip
 
-# Default duration and interval of HTX exerciser to run.
-${HTX_DURATION}     2 hours
-${HTX_INTERVAL}     15 min
-
-# Default iteration HTX exerciser to run.
-${HTX_LOOP}         4
-
 *** Test Cases ***
 
 Network Stability Test
@@ -47,15 +40,10 @@ Execute Network Test
     # Post Power off and on, the OS SSH session needs to be established.
     Login To OS
 
-    Rprint Timen  Create HTX mdt profile.
-    ${profile}=  Execute Command On OS  htxcmdline -createmdt
-    Rprint Timen  ${profile}
-    Should Contain  ${profile}  mdts are created successfully
+    Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
+    ...  Create Default MDT Profile
 
-    Rprint Timen  Start HTX mdt profile execution.
-    ${htx_run}=  Execute Command On OS  htxcmdline -run -mdt mdt.bu
-    Rprint Timen  ${htx_run}
-    Should Contain  ${htx_run}  Activated
+    Run MDT Profile
 
     # HTX is running, inject network traffic and check every HTX_INTERVAL
     ${status}=  Run Until Keyword Fails  ${HTX_DURATION}  ${HTX_INTERVAL}
@@ -85,48 +73,15 @@ BMC Network Payload
     REST Upload File To BMC
 
 
-Check HTX Run Status
-    [Documentation]  Get HTX exerciser status and check for error.
-
-    Rprint Timen  Check HTX mdt Status and error.
-    ${status}=  Execute Command On OS  htxcmdline -status -mdt mdt.bu
-    Log  ${status}
-    Rprint Timen  ${status}
-
-    ${errlog}=  Execute Command On OS  htxcmdline -geterrlog
-    Log  ${errlog}
-    Rprint Timen  ${errlog}
-
-    Should Contain  ${errlog}  file </tmp/htxerr> is empty
-
-
-Shutdown HTX Exerciser
-    [Documentation]  Shut down HTX exerciser run.
-
-    Rprint Timen  Shutdown HTX Run.
-    ${shutdown}=  Execute Command On OS  htxcmdline -shutdown -mdt mdt.bu
-    Rprint Timen  ${shutdown}
-    Should Contain  ${shutdown}  shutdown successfully
-
-
-Pre Test Case Execution
-    [Documentation]  Do the initial test setup.
-    # 1. Check if HTX tool exist.
-    # 2. Power on
-
-    Boot To OS
-    Tool Exist  htxcmdline
-
-
 Post Test Case Execution
     [Documentation]  Do the post test teardown.
     # 1. Shut down HTX exerciser if test Failed.
     # 2. Capture FFDC on test failure.
     # 3. Close all open SSH connections.
 
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL'
+    # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
+    Run Keyword If  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
     ...  Shutdown HTX Exerciser
 
     FFDC On Test Case Fail
     Close All Connections
-
