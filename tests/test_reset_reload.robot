@@ -14,10 +14,10 @@ Test Teardown       Post Testcase Execution
 
 *** Test Cases ***
 
-Verify Reset Reload With Chassis State On
-    [Documentation]  Validate chassis "ON" state is unchanged after
-    ...  reset reload.
-    [Tags]  Verify_Reset_Reload_With_Chassis_State_On
+Verify BMC Reset Reload With System On
+    [Documentation]  Validate chassis "ON" and host "Running" state is
+    ...  unchanged after BMC reset reload.
+    [Tags]  Verify_BMC_Reset_Reload_With_System_On
 
     Initiate Host Boot
     Wait Until Keyword Succeeds  5 min  10 sec  Is Chassis On
@@ -30,6 +30,9 @@ Verify Reset Reload With Chassis State On
 
     Should Be Equal  ${chassis_state_before}  ${chassis_state_after}
     Should Be Equal  ${rr_status}  Yes
+
+    ${host_state}=  Run Keyword  Get Host State
+    Should Be Equal  ${host_state}  Running
 
 
 *** Keywords ***
