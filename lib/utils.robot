@@ -843,24 +843,40 @@ Configure Initial Settings
     Telnet.write  route add default gw ${gw_ip}
 
 Install Debug Tarball On BMC
-    [Documentation]  Copy the tar file to BMC and install in "/usr/".
-    [Arguments]  ${tarball_path}
-    # Description of arguments:
-    # tarball_path  Absolute path of the debug tarball file.
-    #               The tar file is downloaded from the build page
-    #               https://openpower.xyz/job/openbmc-build/665/distro=ubuntu,
-    #               target=witherspoon/artifact/images/witherspoon/
-    #               obmc-phosphor-debug-tarball-witherspoon.tar.xz
+    [Documentation]  Copy the debug tar file to BMC and install.
+    [Arguments]  ${tarball_file_path}=${EXECDIR}/obmc-phosphor-debug-tarball-witherspoon.tar.xz
+    ...          ${targ_tarball_dir_path}=/home/root/tarball/
 
-    OperatingSystem.File Should Exist  ${tarball_path}
-    ...  msg=${tarball_path} doesn't exist.
+    # Description of arguments:
+    # tarball_file_path      Path of the debug tarball file.
+    #                        The tar file is downloaded from the build page
+    #                        https://openpower.xyz/job/openbmc-build/
+    #                        obmc-phosphor-debug-tarball-witherspoon.tar.xz
+    #
+    # targ_tarball_dir_path  The directory path where the tarball to be
+    #                        installed.
+
+    OperatingSystem.File Should Exist  ${tarball_file_path}
+    ...  msg=${tarball_file_path} doesn't exist.
+
+    # Upload the file to BMC.
     Import Library  SCPLibrary  WITH NAME  scp
     Open Connection for SCP
-    scp.Put File  ${tarball_path}  /tmp/debug-tarball.tar.xz
+    scp.Put File  ${tarball_file_path}  /tmp/debug-tarball.tar.xz
+
+    # Create tarball directory and install.
     Open Connection And Log In
-    Execute Command On BMC  tar -xf /tmp/debug-tarball.tar.xz -C /usr/
+    Execute Command On BMC  mkdir -p ${targ_tarball_dir_path}
+    Execute Command On BMC
+    ...  tar -xf /tmp/debug-tarball.tar.xz -C ${targ_tarball_dir_path}
+
+    # Create symlink to callout-test binary.
+    Execute Command On BMC
+    ...  ln -s ${targ_tarball_dir_path}/bin/callout-test /usr/bin/callout-test
+
     # Remove the tarball file from BMC
     Execute Command On BMC  rm /tmp/debug-tarball.tar.xz
+
 
 Get BMC Boot Count
     [Documentation]  Get BMC boot count based on boot time.
