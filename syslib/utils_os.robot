@@ -17,6 +17,11 @@ Library            DateTime
 
 ${htx_log_dir_path}   ${EXECDIR}${/}logs${/}
 
+# Error strings to check from dmesg.
+${ERROR_REGEX}     error|GPU|NVRM|nvidia
+
+# GPU specific error message from dmesg.
+${ERROR_DBE_MSG}   (DBE) has been detected on GPU
 
 *** Keywords ***
 
@@ -152,3 +157,53 @@ REST Upload File To BMC
     # Switch back to OS SSH connection.
     Switch Connection  os_connection
 
+
+Check For Errors On OS Dmesg Log
+    [Documentation]  Check if dmesg has nvidia errors logged.
+
+    ${dmesg_log}=  Execute Command On OS  dmesg | egrep '${ERROR_REGEX}'
+    # To enable multiple string check.
+    Should Not Contain Any  ${dmesg_log}  ${ERROR_DBE_MSG}
+
+
+Collect NVIDIA Log File
+    [Documentation]  Collect ndivia-smi command output.
+
+    # Collects the output of ndivia-smi cmd output.
+    # TODO: GPU current temperature threshold check.
+    #       openbmc/openbmc-test-automation#637
+    # +-----------------------------------------------------------------------------+
+    # | NVIDIA-SMI 361.89                 Driver Version: 361.89                    |
+    # |-------------------------------+----------------------+----------------------+
+    # | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    # | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    # |===============================+======================+======================|
+    # |   0  Tesla P100-SXM2...  On   | 0002:01:00.0     Off |                    0 |
+    # | N/A   25C    P0    35W / 300W |    931MiB / 16280MiB |      0%      Default |
+    # +-------------------------------+----------------------+----------------------+
+    # |   1  Tesla P100-SXM2...  On   | 0003:01:00.0     Off |                    0 |
+    # | N/A   26C    P0    40W / 300W |   1477MiB / 16280MiB |      0%      Default |
+    # +-------------------------------+----------------------+----------------------+
+    # |   2  Tesla P100-SXM2...  On   | 0006:01:00.0     Off |                    0 |
+    # | N/A   25C    P0    35W / 300W |    931MiB / 16280MiB |      0%      Default |
+    # +-------------------------------+----------------------+----------------------+
+    # |   3  Tesla P100-SXM2...  On   | 0007:01:00.0     Off |                    0 |
+    # | N/A   44C    P0   290W / 300W |    965MiB / 16280MiB |     99%      Default |
+    # +-------------------------------+----------------------+----------------------+
+    # +-----------------------------------------------------------------------------+
+    # | Processes:                                                       GPU Memory |
+    # |  GPU       PID  Type  Process name                               Usage      |
+    # |=============================================================================|
+    # |    0     28459    C   hxenvidia                                      929MiB |
+    # |    1     28460    C   hxenvidia                                     1475MiB |
+    # |    2     28461    C   hxenvidia                                      929MiB |
+    # |    3     28462    C   hxenvidia                                      963MiB |
+    # +-----------------------------------------------------------------------------+
+
+    # Create logs directory and get current datetime.
+    Create Directory  ${htx_log_dir_path}
+    ${cur_datetime}=  Get Current Date  result_format=%Y%m%d%H%M%S%f
+
+    ${nvidia_out}=  Execute Command On BMC  nvidia-smi
+    Write Log Data To File
+    ...  ${nvidia_out}  ${htx_log_dir_path}/${OS_HOST}_${cur_datetime}.nvidia
