@@ -843,24 +843,39 @@ Configure Initial Settings
     Telnet.write  route add default gw ${gw_ip}
 
 Install Debug Tarball On BMC
-    [Documentation]  Copy the tar file to BMC and install in "/usr/".
-    [Arguments]  ${tarball_path}
+    [Documentation]  Copy the tar file to BMC and install.
+    [Arguments]  ${tarball_path}=${EXECDIR}/obmc-phosphor-debug-tarball-witherspoon.tar.xz
+    ...          ${install_tarball_path}=/home/root/tarball/
+
     # Description of arguments:
-    # tarball_path  Absolute path of the debug tarball file.
-    #               The tar file is downloaded from the build page
-    #               https://openpower.xyz/job/openbmc-build/665/distro=ubuntu,
-    #               target=witherspoon/artifact/images/witherspoon/
-    #               obmc-phosphor-debug-tarball-witherspoon.tar.xz
+    # tarball_path          Absolute path of the debug tarball file.
+    #                       The tar file is downloaded from the build page
+    #                       https://openpower.xyz/job/openbmc-build/
+    #                       obmc-phosphor-debug-tarball-witherspoon.tar.xz
+    #
+    # install_tarball_path  Path where the tarball to be installed.
 
     OperatingSystem.File Should Exist  ${tarball_path}
     ...  msg=${tarball_path} doesn't exist.
+
+    # Upload the file to BMC.
     Import Library  SCPLibrary  WITH NAME  scp
     Open Connection for SCP
     scp.Put File  ${tarball_path}  /tmp/debug-tarball.tar.xz
+
+    # Create tarball directory and install.
     Open Connection And Log In
-    Execute Command On BMC  tar -xf /tmp/debug-tarball.tar.xz -C /usr/
+    Execute Command On BMC  mkdir -p ${install_tarball_path}
+    Execute Command On BMC
+    ...  tar -xf /tmp/debug-tarball.tar.xz -C ${install_tarball_path}
+
+    # Create symlink to callout-test binary.
+    Execute Command On BMC
+    ...  ln -s ${install_tarball_path}/bin/callout-test /usr/bin/callout-test
+
     # Remove the tarball file from BMC
     Execute Command On BMC  rm /tmp/debug-tarball.tar.xz
+
 
 Get BMC Boot Count
     [Documentation]  Get BMC boot count based on boot time.
