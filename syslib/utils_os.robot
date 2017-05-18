@@ -10,6 +10,12 @@ Resource           ../lib/state_manager.robot
 
 *** Variables ***
 
+# Error strings to fetch from dmesg.
+${ERROR_REGEX}     error|GPU|NVRM|nvidia
+
+# GPU specific error message from dmesg.
+${ERROR_DBE_MSG}   (DBE) has been detected on GPU
+
 *** Keywords ***
 
 Execute Command On OS
@@ -70,3 +76,12 @@ Is HTX Running
 
     ${status}=  Execute Command On OS  htxcmdline -status
     Should Not Contain  ${status}  Daemon state is <IDLE>
+
+
+Check For Errors On OS Dmesg Log
+    [Documentation]  Check if dmesg has nvidia errors logged.
+
+    ${dmesg_log}=  Execute Command On OS  dmesg | egrep '${ERROR_REGEX}'
+    # To enable multiple string check.
+    Should Not Contain Any  ${dmesg_log}  ${ERROR_DBE_MSG}
+
