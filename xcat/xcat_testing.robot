@@ -5,8 +5,13 @@ Resource        ../lib/xcat/resource.txt
 Resource        ../lib/xcat/xcat_utils.robot
 
 Library         OperatingSystem
+Library         String
 
 Suite Setup  Validate XCAT Setup
+
+*** Variables ***
+
+${poweroff_flag}  OFF
 
 *** Test Cases ***
 
@@ -14,11 +19,28 @@ Add BMC Nodes To XCAT
     [Documentation]  Connect and add BMC nodes.
     [Tags]  Add_BMC_Nodes_To_XCAT
 
-    # It reads out file having list of BMC nodes and adds
-    # those nodes into XCAT.
+    # Add BMC nodes one by one and check whether it is successfully added.
+    : FOR  ${bmc}  IN  @{BMC_LIST}
+    \  Add Nodes To XCAT  ${bmc}
+    \  Validate Added Node  ${bmc}
 
-    # TBD- Adding BMC nodes to XCAT
-    # https://github.com/openbmc/openbmc-test-automation/issues/620
+Power On Via XCAT And Validate
+    [Documentation]  Power on via XCAT and validate.
+    [Tags]  Power_On_Via_XCAT_And_Validate
+
+    # Power on each BMC node and validate the power status.
+    : FOR  ${bmc}  IN  @{BMC_LIST}
+    \  Power On Via XCAT  ${bmc}
+    \  Validate Power Status  ${bmc}
+
+Power Off Via XCAT And Validate
+    [Documentation]  Power off via XCAT and validate.
+    [Tags]  Power_Off_Via_XCAT_And_Validate
+
+    # Power off each BMC node and validate the power status.
+    : FOR  ${bmc}  IN  @{BMC_LIST}
+    \  Power Off Via XCAT  ${bmc}
+    \  Validate Power Status  ${bmc}  ${poweroff_flag}
 
 *** Keywords ***
 
@@ -32,3 +54,19 @@ Validate XCAT Setup
     Should Not Be Empty  ${cmd_output}  msg=XCAT not installed.
 
     Log  \n XCAT Version is: \n${cmd_output}
+
+    # Get all the BMC nodes from the config file.
+    ${nodes}=  Get List Of BMC Nodes
+    # Make a list of BMC nodes.
+    @{BMC_LIST}=  Split To Lines  ${nodes}
+    Log To Console  BMC nodes to be added:\n ${BMC_LIST}
+    Set Suite Variable  @{BMC_LIST}
+
+Validate Power Status
+    [Documentation]  Validate power status.
+    [Arguments]  ${node}=" "  ${flag}=ON
+
+    ${status}=  Get Power Status  ${node}
+    Run Keyword If  '${flag}' == 'ON'
+    ...  Should Contain  ${status}  on  msg=host is off.
+    ...  ELSE  Should Contain  ${status}  off  msg=host is on.
