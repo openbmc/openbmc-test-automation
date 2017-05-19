@@ -9,6 +9,7 @@ Resource        ../lib/state_manager.robot
 
 Library         String
 
+
 *** Variables ***
 ${dbusHostIpmicmd1}=   dbus-send --system  ${OPENBMC_BASE_URI}HostIpmi/1
 ${dbusHostIpmiCmdReceivedMsg}=   ${OPENBMC_BASE_DBUS}.HostIpmi.ReceivedMessage
