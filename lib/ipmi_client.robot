@@ -17,7 +17,7 @@ ${cmdByte}=            ${EMPTY}
 ${arrayByte}=          array:byte:
 ${IPMI_EXT_CMD}=       ipmitool -I lanplus -C 3
 ${IPMI_USER_OPTIONS}   ${EMPTY}
-${IPMI_INBAND_CMD}=    ipmitool -C 3
+${IPMI_INBAND_CMD}=    sudo ipmitool -C 3
 ${HOST}=               -H
 ${RAW}=                raw
 
@@ -95,6 +95,9 @@ Run Inband IPMI Standard Command
     # ${os_password}  OS Host Login passwrd.
 
     Login To OS Host  ${os_host}  ${os_username}  ${os_password}
+    Write  sudo su -
+    Write  abc123
+    
     Check If IPMI Tool Exist
 
     ${inband_std_cmd}=  Catenate  ${IPMI_INBAND_CMD}  ${args}
