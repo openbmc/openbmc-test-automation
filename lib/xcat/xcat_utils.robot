@@ -1,9 +1,11 @@
 *** Settings ***
 
 Resource    ../xcat/resource.txt
+Resource    ../../lib/resource.txt
 
 Library     SSHLibrary
 Library     OperatingSystem
+Library     String
 
 *** Keywords  ***
 
@@ -32,3 +34,62 @@ Get List Of BMC Nodes
 
     ${bmc_list} =  OperatingSystem.Get File  ${node_cfg_file_path}
     [Return]  ${bmc_list}
+
+Add Nodes To XCAT
+    [Documentation]  Add nodes to XCAT configuration.
+    [Arguments]  ${node}  ${username}=${OPENBMC_USERNAME}
+    ...          ${password}=${OPENBMC_PASSWORD}
+
+    # Description of the argument(s):
+    # node  Name of the node to be added.
+
+    ${cmd_buf}=  Catenate  ${XCAT_DIR_PATH}/mkdef ${node} bmc=${node}
+    ...  bmcusername=${username} bmcpassword=${password} mgt=openbmc groups=all
+    Execute Command  ${cmd_buf}
+
+Validate Added Node
+    [Documentation]  Validate added node.
+    [Arguments]  ${node}
+
+    # Description of the argument(s):
+    # node  Name of the node.
+
+    ${stdout}  ${stderr}=  Execute Command  ${XCAT_DIR_PATH}/nodels
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
+    Should Contain  ${std_out}  ${node}  msg=Node is not added.
+
+Power On Via XCAT
+    [Documentation]  Power on via XCAT.
+    [Arguments]  ${node}
+
+    # Description of the argument(s):
+    # node  Name of the node.
+
+    ${stdout}  ${stderr}=  Execute Command  ${XCAT_DIR_PATH}/rpower ${node} on
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
+
+Power Off Via XCAT
+    [Documentation]  Power off via XCAT.
+    [Arguments]  ${node}
+
+    # Description of the argument(s):
+    # node  Name of the node.
+
+    ${stdout}  ${stderr}=  Execute Command  ${XCAT_DIR_PATH}/rpower ${node} off
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
+
+Get Power Status
+    [Documentation]  Get power status via XCAT.
+    [Arguments]  ${node}
+
+    # Description of the argument(s):
+    # node  Name of the node.
+
+    ${stdout}  ${stderr}=  Execute Command  ${XCAT_DIR_PATH}/rpower ${node}
+    ... state  return_stderr=True
+    Should Be Empty  ${stderr}
+
+    [Return]  ${stdout}
