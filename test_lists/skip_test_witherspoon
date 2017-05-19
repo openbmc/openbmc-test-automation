@@ -36,7 +36,8 @@
 -e Check_BMC_FSI_Compatible_Property_Is_Set
 -e Check_BMC_FSI_Name_Property_Is_Set
 #https://github.com/openbmc/openbmc-test-automation/issues/75
--e eSEL_Logging
+-e Test_Wrong_Reservation_ID
+-e Test_Correct_Reservation_ID
 #https://github.com/openbmc/openbmc-test-automation/issues/396
 -e NetworkManager
 # NA until support for debug tarball is enabled
