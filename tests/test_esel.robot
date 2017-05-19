@@ -5,10 +5,12 @@ Documentation       eSEL's Test cases.
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Variables           ../data/variables.py
+Resource            ../lib/utils.robot
 
-Suite Setup         Open Connection And Log In
+Suite Setup         eSEL Test SetUp
 Suite Teardown      Test Cleanup On Exit
 Test Teardown       FFDC On Test Case Fail
+Test Setup          Delete Error logs
 
 Force Tags  eSEL_Logging
 
@@ -31,7 +33,6 @@ ${ESEL_DATA}        ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00
 
 Verify eSEL Using REST
     [Documentation]  Generate eSEL log and verify using REST.
-    [setup]  Restart Logging Service
     [Tags]  Verify_eSEL_Using_REST
 
     # Prior eSEL log shouldn't exist.
@@ -45,16 +46,16 @@ Verify eSEL Using REST
 
 Verify eSEL Entries Using REST
     [Documentation]  Verify that eSEL entries have data.
-    [setup]  Restart Logging Service
     [Tags]  Verify_eSEL_Entries_Using_REST
+
     Create eSEL
     Verify eSEL Entries
 
 
 Verify Multiple eSEL Using REST
     [Documentation]  Generate multiple eSEL log and verify using REST.
-    [setup]  Restart Logging Service
     [Tags]  Verify_Multiple_eSEL_Using_REST
+
     Create eSEL
     Create eSEL
     ${entries}=  Count eSEL Entries
@@ -64,8 +65,8 @@ Verify Multiple eSEL Using REST
 Check eSEL AdditionalData
     [Documentation]  Generate eSEL log and verify AdditionalData is
     ...              not empty.
-    [setup]  Restart Logging Service
     [Tags]  Check_eSEL_AdditionalData
+
     Create eSEL
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -120,11 +121,11 @@ Clear Test File
 Create eSEL
     [Documentation]  Create an eSEL.
     Open Connection And Log In
-    ${Resv_id}=  Run Dbus IPMI Standard Command  ${RESERVE_ID}
+    ${Resv_id}=  Run Inband IPMI Standard Command  ${RESERVE_ID}
     ${cmd}=  Catenate
     ...  ${RAW_PREFIX}${Resv_id.strip().rsplit(' ', 1)[0]}  ${RAW_SUFFIX}
-    Run Dbus IPMI Standard Command  ${cmd}
-    Run Dbus IPMI Standard Command  ${RAW_SEL_COMMIT}
+    Run Inband IPMI Standard Command  ${cmd}
+    Run Inband IPMI Standard Command  ${RAW_SEL_COMMIT}
 
 
 Count eSEL Entries
@@ -158,7 +159,6 @@ Verify eSEL Entries
 
 Test Cleanup On Exit
     [Documentation]  Cleanup test logs and connection.
-    Restart Logging Service
     Close All Connections
 
 
@@ -172,17 +172,33 @@ Restart Logging Service
 
 Run IPMI Command Returned
     [Arguments]    ${args}
-    ${output_1}=    Execute Command    /tmp/ipmitool -I dbus raw ${args}
+    ${output_1}=    Execute Command  sudo ipmitool -C 3 raw ${args}
     [Return]    ${output_1}
 
 Check IPMI Oempartialadd Reject
     [Arguments]    ${args}
-    ${stdout}    ${stderr}    ${output_2}=  Execute Command    /tmp/ipmitool -I dbus raw ${args}    return_stdout=True    return_stderr= True    return_rc=True
-    [Return]    ${stderr}
+    ${cmd}=  Catenate  sudo ipmitool -C 3 raw ${args}
+    ${stdout}  ${stderr}    ${output_2}=  Execute Command  ${cmd}
+    ...        return_stdout=True   return_stderr= True   return_rc=True
+    [Return]   ${stderr}
 
 Check IPMI Oempartialadd Accept
     [Arguments]    ${args}
-    ${stdout}    ${stderr}    ${output_3}=    Execute Command    /tmp/ipmitool -I dbus raw ${args}    return_stdout=True    return_stderr= True    return_rc=True
+    ${cmd}=  Catenate  sudo ipmitool -C 3 raw ${args}
+    ${stdout}    ${stderr}    ${output_3}=    Execute Command  ${cmd}
+    ..        return_stdout=True   return_stderr= True   return_rc=True
     Should Be Equal    ${output_3}    ${0}    msg=${stderr}
     [Return]    ${stderr}
 
+eSEL Test SetUp
+    [Documentation]  Validates input parameters & check if HOST OS is up.
+
+    Should Not Be Empty
+    ...   ${OS_HOST}  msg=You must provide DNS name/IP of the OS host.
+    Should Not Be Empty
+    ...   ${OS_USERNAME}  msg=You must provide OS host user name.
+    Should Not Be Empty
+    ...   ${OS_PASSWORD}  msg=You must provide OS host user password.
+
+    Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
+    Open Connection And Log In

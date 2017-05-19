@@ -17,7 +17,7 @@ ${cmdByte}=            ${EMPTY}
 ${arrayByte}=          array:byte:
 ${IPMI_EXT_CMD}=       ipmitool -I lanplus -C 3
 ${IPMI_USER_OPTIONS}   ${EMPTY}
-${IPMI_INBAND_CMD}=    ipmitool -C 3
+${IPMI_INBAND_CMD}=    sudo ipmitool -C 3
 ${HOST}=               -H
 ${RAW}=                raw
 
