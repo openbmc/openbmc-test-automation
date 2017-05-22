@@ -74,7 +74,10 @@ Run tests
 How to test individual test
 ```shell
     One specific test
-    $ tox -e custom -- -t '"DIMM0 no fault"' tests/test_sensors.robot
+    $ tox -e default -- -t '"DIMM0 no fault"' tests/test_sensors.robot
+
+    No preset environment variables, default configuration for all supported systems.
+    $ OPENBMC_HOST=x.x.x.x tox -e default -- tests
 
     No preset environment variables, one test case from one test suite
     $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- -t '"DIMM0 no fault"' tests/test_sensors.robot
