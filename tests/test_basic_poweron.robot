@@ -7,6 +7,7 @@ Resource            ../lib/state_manager.robot
 
 Test Setup          Start SOL Console Logging
 Test Teardown       Test Exit Logs
+Suite Setup         Verify PNOR Update
 
 Force Tags  chassisboot
 
@@ -55,5 +56,8 @@ Host Off And On
 
     Initiate Host Boot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    Verify PNOR Update
 
     Flush REST Sessions
+    SSHLibrary.Close Connection
+
