@@ -55,5 +55,7 @@ Host Off And On
 
     Initiate Host Boot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    Verify PNOR Update
 
     Flush REST Sessions
+
