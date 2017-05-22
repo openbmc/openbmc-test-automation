@@ -23,7 +23,6 @@ ${boot_fail_threshold}  ${0}
 ${stack_mode}           skip
 ${update_status}        True
 
-${pflash_cmd}           /usr/sbin/pflash -r /dev/stdout -P VERSION
 
 *** Test Cases ***
 
@@ -43,16 +42,6 @@ Host BIOS Power On
     Run Keyword If  '${PREV_TEST_STATUS}' == 'PASS'  Validate Power On
 
 *** Keywords ***
-
-Verify PNOR Update
-    [Documentation]  Verify that the PNOR is not corrupted.
-    # Example:
-    # FFS: Flash header not found. Code: 100
-    # Error 100 opening ffs !
-
-    Open Connection And Log In
-    ${pnor_info}=  Execute Command On BMC  ${pflash_cmd}
-    Should Not Contain Any  ${pnor_info}  Flash header not found  Error
 
 Prepare BMC For Update
     [Documentation]  Prepare system for PNOR update.
