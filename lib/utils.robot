@@ -12,6 +12,7 @@ Library                 gen_cmd.py
 Library                 gen_robot_keyword.py
 
 *** Variables ***
+${pflash_cmd}           /usr/sbin/pflash -r /dev/stdout -P VERSION
 ${SYSTEM_SHUTDOWN_TIME}       ${5}
 ${dbuscmdBase}
 ...  dbus-send --system --print-reply --dest=${OPENBMC_BASE_DBUS}.settings.Host
@@ -42,6 +43,16 @@ ${MAC_ADDRESS}  ${EMPTY}
 ${DEBUG}         ${0}
 
 *** Keywords ***
+
+Verify PNOR Update
+    [Documentation]  Verify that the PNOR is not corrupted.
+    # Example:
+    # FFS: Flash header not found. Code: 100
+    # Error 100 opening ffs !
+
+    Open Connection And Log In
+    ${pnor_info}=  Execute Command On BMC  ${pflash_cmd}
+    Should Not Contain Any  ${pnor_info}  Flash header not found  Error
 
 Get BMC System Model
     [Documentation]  Get the BMC model from the device tree.
