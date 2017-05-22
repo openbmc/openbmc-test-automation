@@ -46,6 +46,7 @@ Test Exit Logs
     FFDC On Test Case Fail
     ${sol_log}=    Stop SOL Console Logging
     Log   ${sol_log}
+    SSHLibrary.Close Connection
 
 Host Off And On
     [Documentation]  Verify power off and on.
@@ -55,5 +56,7 @@ Host Off And On
 
     Initiate Host Boot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    Verify PNOR Update
 
     Flush REST Sessions
+
