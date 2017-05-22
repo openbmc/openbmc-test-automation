@@ -7,6 +7,7 @@ Library                 Process
 Library                 OperatingSystem
 Library                 gen_print.py
 Library                 gen_robot_print.py
+Library                 gen_cmd.py
 
 *** Variables ***
 ${SYSTEM_SHUTDOWN_TIME}       ${5}
@@ -428,6 +429,7 @@ Create OS Console Command String
 Stop SOL Console Logging
     [Documentation]  Stop system console logging and return log output.
     [Arguments]  ${log_file_path}=${EMPTY}  ${targ_file_path}=${EMPTY}
+    ...          ${return_data}=${1}
 
     # If there are muliple system console processes, they will all be stopped.
     # If there is no existing log file this keyword will return an error
@@ -441,6 +443,8 @@ Stop SOL Console Logging
     #                 Console Logging".  See that keyword (above) for details.
     # targ_file_path  If specified, the file path to which the source
     #                 file path (i.e. "log_file_path") should be copied.
+    # return_data     If this is set to ${1}, this keyword will return the SOL
+    #                 data to the caller as a unicode string.
 
     ${log_file_path}=  Create OS Console File Path  ${log_file_path}
     # Find the pid of the active system console logging session (if any).
@@ -459,34 +463,37 @@ Stop SOL Console Logging
     ...  Run And Return Rc And Output  ${cmd_buf}
     Run Keyword If  '${os_con_pid}' != '${EMPTY}'  Rdpvars  rc  output
 
-    ${cmd_buf}=  Set Variable  cat ${log_file_path} 2>&1
-    Rdpissuing  ${cmd_buf}
-    ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
-    Rdpvars  rc
-
     Run Keyword If  '${targ_file_path}' != '${EMPTY}'
     ...  Run Keyword And Ignore Error
     ...  Copy File  ${log_file_path}  ${targ_file_path}
+
+    ${output}=  Set Variable  ${EMPTY}
+    ${loc_quiet}=  Evaluate  ${debug}^1
+    ${rc}  ${output}=  Run Keyword If  '${return_data}' == '${1}'
+    ...  Cmd Fnc  cat ${log_file_path}  quiet=${loc_quiet}  print_output=${0}
 
     [Return]  ${output}
 
 Start SOL Console Logging
     [Documentation]  Start system console log to file.
-    [Arguments]  ${log_file_path}=${EMPTY}
+    [Arguments]  ${log_file_path}=${EMPTY}  ${return_data}=${1}
 
     # This keyword will first call "Stop SOL Console Logging".  Only then will
     # it start SOL console logging.  The data returned by "Stop SOL Console
     # Logging" will in turn be returned by this keyword.
 
     # Description of arguments:
-    # log_file_path  The file path to which system console log data should be
-    #                written.  Note that this path is taken to be a location on
-    #                the machine where this program is running rather than on
-    #                the Open BMC system.
+    # log_file_path   The file path to which system console log data should be
+    #                 written.  Note that this path is taken to be a location
+    #                 on the machine where this program is running rather than
+    #                 on the Open BMC system.
+    # return_data     If this is set to ${1}, this keyword will return any SOL
+    #                 data to the caller as a unicode string.
 
     ${log_file_path}=  Create OS Console File Path  ${log_file_path}
 
     ${log_output}=  Stop SOL Console Logging  ${log_file_path}
+    ...  return_data=${return_data}
 
     # Validate by making sure we can create the file.  Problems creating the
     # file would not be noticed by the subsequent ssh command because we fork
@@ -654,7 +661,8 @@ Get URL List
     [Documentation]  Return list of URLs under given URL.
     [Arguments]  ${openbmc_url}
     # Description of argument(s):
-    # openbmc_url  URL for list operation (e.g. /xyz/openbmc_project/inventory).
+    # openbmc_url  URL for list operation (e.g.
+    #              /xyz/openbmc_project/inventory).
 
     ${url_list}=  Read Properties  ${openbmc_url}/list
     [Return]  ${url_list}
