@@ -2,12 +2,14 @@
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
+Resource                ../extended/obmc_boot_test_resource.robot
 Library                 DateTime
 Library                 Process
 Library                 OperatingSystem
 Library                 gen_print.py
 Library                 gen_robot_print.py
 Library                 gen_cmd.py
+Library                 gen_robot_keyword.py
 
 *** Variables ***
 ${SYSTEM_SHUTDOWN_TIME}       ${5}
@@ -33,6 +35,8 @@ ${BOOT_TIME}     ${0}
 ${BOOT_COUNT}    ${0}
 ${count}  ${0}
 ${devicetree_base}  /sys/firmware/devicetree/base/model
+# MAC input from Jenkins job.
+${MAC_ADDRESS}  ${EMPTY}
 
 # Initialize default debug value to 0.
 ${DEBUG}         ${0}
@@ -914,6 +918,30 @@ Set BMC Boot Count
 
     # Set BOOT_TIME variable to current boot time.
     Set Global Variable  ${BOOT_COUNT}  ${count}
+
+Check And Reset MAC
+    [Documentation]  Update BMC with user input MAC address.
+    [Arguments]  ${mac_address}=${MAC_ADDRESS}
+
+    # Description of argument(s):
+    # mac_address  The mac address (e.g. 00:01:6c:80:02:28).
+
+    Should Not Be Empty  ${mac_address}
+    Open Connection And Log In
+    ${bmc_mac_addr}=  Execute Command On BMC  cat /sys/class/net/eth0/address
+    Run Keyword If  '${mac_address}' != '${bmc_mac_addr}'
+    ...  Set MAC Address
+
+Set MAC Address
+    [Documentation]  Update eth0 with input MAC address.
+    [Arguments]  ${mac_address}=${MAC_ADDRESS}
+
+    # Description of argument(s):
+    # mac_address  The mac address (e.g. 00:01:6c:80:02:28).
+    Write  fw_setenv ethaddr ${mac_address}
+    Run Key U  OBMC Boot Test \ OBMC Reboot (off)
+    ${bmc_mac_addr}=  Execute Command On BMC  cat /sys/class/net/eth0/address
+    Should Be Equal  ${bmc_mac_addr}  ${mac_address}
 
 ###############################################################################
 Delete Error logs
