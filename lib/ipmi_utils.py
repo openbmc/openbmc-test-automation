@@ -58,3 +58,22 @@ def get_sol_info():
     return sol_info
 
 ###############################################################################
+
+
+###############################################################################
+def set_sol_setting(setting_name, setting_value):
+
+    r"""
+    Set SOL setting with given value.
+
+    # Description of argument(s):
+    # setting_name    SOL setting which needs to be set (e.g. "retry-count").
+    # setting_value   Value which needs to be set (e.g. "7").
+    """
+
+    status, ret_values = grk.run_key_u("Run IPMI Standard Command  sol set "
+                                       +setting_name +" " +setting_value)
+
+    return status
+
+###############################################################################
