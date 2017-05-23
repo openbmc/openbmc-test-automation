@@ -314,9 +314,11 @@ def setup():
 
     robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
     repo_bin_path = robot_pgm_dir_path.replace("/lib/", "/bin/")
-    # If we can't find ssh_pw, then we don't have our repo bin in PATH.
-    shell_rc, out_buf = gc.cmd_fnc_u("which ssh_pw", quiet=1, print_output=0,
-                                     show_err=0)
+    # If we can't find process_plug_in_packages.py, ssh_pw or
+    # validate_plug_ins.py, then we don't have our repo bin in PATH.
+    shell_rc, out_buf = gc.cmd_fnc_u("which process_plug_in_packages.py" +
+                                     " ssh_pw validate_plug_ins.py", quiet=1,
+                                     print_output=0, show_err=0)
     if shell_rc != 0:
         os.environ['PATH'] = repo_bin_path + ":" + os.environ.get('PATH', "")
     # Likewise, our repo lib subdir needs to be in sys.path and PYTHONPATH.
