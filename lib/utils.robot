@@ -34,6 +34,9 @@ ${BOOT_COUNT}    ${0}
 ${count}  ${0}
 ${devicetree_base}  /sys/firmware/devicetree/base/model
 
+# Initialize default debug value to 0.
+${DEBUG}         ${0}
+
 *** Keywords ***
 
 Get BMC System Model
