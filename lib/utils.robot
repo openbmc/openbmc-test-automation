@@ -935,3 +935,48 @@ Delete Error log Entry
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  Openbmc Delete Request  ${entry_path}  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+Get SOL Setting Value
+    [Documentation]  Return value for given SOL setting.
+    [Arguments]  ${setting}
+    # Description of argument(s):
+    # setting  SOL setting which needs to be read(e.g. "Retry Count").
+
+    ${resp}=  Run IPMI Standard Command  sol info
+    # Example of sel info output:
+    # Info: SOL parameter 'Nonvolatile Bitrate (5)' not supported
+    # Info: SOL parameter 'Volatile Bitrate (6)' not supported
+    # Info: SOL parameter 'Payload Channel (7)' not supported - defaulting to 0x0e
+    # Set in progress                 : set-complete
+    # Enabled                         : true
+    # Force Encryption                : true
+    # Force Authentication            : true
+    # Privilege Level                 : USER
+    # Character Accumulate Level (ms) : 100
+    # Character Send Threshold        : 1
+    # Retry Count                     : 1
+    # Retry Interval (ms)             : 100
+    # Volatile Bit Rate (kbps)        : IPMI-Over-Serial-Setting
+    # Non-Volatile Bit Rate (kbps)    : IPMI-Over-Serial-Setting
+    # Payload Channel                 : 14 (0x0e)
+    # Payload Port                    : 623
+
+    ${setting_line}=
+    ...  Get Lines Containing String  ${resp}  ${setting}  case-insensitive
+    # Example of output
+    # Retry Count                     : 1
+
+    ${setting_value}=  Fetch From Right  ${setting_line}  :
+    ${setting_value}=  Evaluate  $setting_value.replace(' ','')
+
+    [Return]  ${setting_value}
+
+Set SOL Setting Value
+    [Documentation]  Set SOL setting to given value.
+    [Arguments]  ${setting}  ${value}
+    # Description of argument(s):
+    # setting    SOL setting which needs to be set (e.g. "retry-count").
+    # value      Value which needs to be set (e.g. "7").
+
+    Run IPMI Standard Command  sol set ${setting} ${value}
+
