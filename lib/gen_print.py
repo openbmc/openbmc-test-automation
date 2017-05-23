@@ -1040,6 +1040,11 @@ def sprint_pgm_header(indent=0,
     if linefeed:
         buffer = "\n"
 
+    if robot_env:
+        suite_name = BuiltIn().get_variable_value("${suite_name}")
+        buffer += sindent(sprint_time("Running test suite \"" + suite_name +
+                          "\".\n"), indent)
+
     buffer += sindent(sprint_time() + "Running " + pgm_name + ".\n", indent)
     buffer += sindent(sprint_time() + "Program parameter values, etc.:\n\n",
                       indent)
@@ -1082,6 +1087,17 @@ def sprint_pgm_header(indent=0,
     except AttributeError:
         pass
 
+    if robot_env:
+        # Get value of global parm_list.
+        parm_list = BuiltIn().get_variable_value("${parm_list}")
+
+        for parm in parm_list:
+            parm_value = BuiltIn().get_variable_value("${" + parm + "}")
+            buffer += sprint_varx(parm, parm_value, 0, indent, loc_col1_width)
+
+        # Setting global program_pid.
+        BuiltIn().set_global_variable("${program_pid}", os.getpid())
+
     if linefeed:
         buffer += "\n"
 
@@ -1092,7 +1108,8 @@ def sprint_pgm_header(indent=0,
 
 ###############################################################################
 def sprint_error_report(error_text="\n",
-                        indent=2):
+                        indent=2,
+                        format=None):
 
     r"""
     Return a string with a standardized report which includes the caller's
@@ -1104,7 +1121,22 @@ def sprint_error_report(error_text="\n",
                                     needed linefeeds.
     indent                          The number of characters to indent each
                                     line of output.
+    format                          Long or short format.  Long includes
+                                    extras like lines of dashes, call stack,
+                                    etc.
     """
+
+    # Process input.
+    indent = int(indent)
+    if format is None:
+        if robot_env:
+            format = 'short'
+        else:
+            format = 'long'
+    error_text = error_text.rstrip('\n') + '\n'
+
+    if format == 'short':
+        return sprint_error(error_text)
 
     buffer = ""
     buffer += sprint_dashes(width=120, char="=")
@@ -1118,7 +1150,8 @@ def sprint_error_report(error_text="\n",
     caller_func_name = sprint_func_name(2)
     if caller_func_name.endswith("print_error_report"):
         stack_frame_ix += 1
-    buffer += sprint_call_stack(indent, stack_frame_ix)
+    if not robot_env:
+        buffer += sprint_call_stack(indent, stack_frame_ix)
     buffer += sprint_pgm_header(indent)
     buffer += sprint_dashes(width=120, char="=")
 
