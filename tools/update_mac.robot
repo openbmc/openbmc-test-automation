@@ -12,6 +12,13 @@ ${MAC_ADDRESS}  ${EMPTY}
 
 *** Test Cases ***
 
+Check And Reset MAC on BMC
+    [Documentation]  Verify and Update BMC MAC address.
+
+    Check And Reset MAC
+
+*** Keywords ***
+
 Check And Reset MAC
     [Documentation]  Update BMC with user input MAC address.
 
@@ -20,8 +27,6 @@ Check And Reset MAC
     ${bmc_mac_addr}=  Execute Command On BMC  cat /sys/class/net/eth0/address
     Run Keyword If  '${MAC_ADDRESS}' != '${bmc_mac_addr}'
     ...  Set MAC Address
-
-*** Keywords ***
 
 Set MAC Address
     [Documentation]  Update eth0 with input MAC address.
