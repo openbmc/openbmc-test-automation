@@ -241,28 +241,9 @@ def sprint_pgm_header(indent=0):
     parameters.
     """
 
-    loc_col1_width = gp.col1_width + indent
-
-    linefeed = 0
-    rprintn()
-    suite_name = BuiltIn().get_variable_value("${suite_name}")
-
-    buffer = "\n"
-    buffer += gp.sindent(gp.sprint_time("Running test suite \"" +
-                                        suite_name + "\".\n"),
-                         indent)
-    buffer += gp.sprint_pgm_header(indent, linefeed)
-
-    # Get value of global parm_list.
-    parm_list = BuiltIn().get_variable_value("${parm_list}")
-
-    buffer += sprint_vars(0, str(indent), str(loc_col1_width), *parm_list)
-    buffer += "\n"
-
-    # Setting global program_pid.
-    BuiltIn().set_global_variable("${program_pid}", os.getpid())
-
-    return buffer
+    # This function is deprecated since the caller may now call the gen_print
+    # version directly.
+    return gp.sprint_pgm_header(indent, linefeed=1)
 
 ###############################################################################
 
@@ -277,33 +258,10 @@ def sprint_error_report(error_text="\n"):
     @{parm_list} variable which contains the names of all program parameters.
     """
 
-    try:
-        error_report_format = int(BuiltIn().get_variable_value(
-            "${error_report_format}"))
-    except TypeError:
-        error_report_format = 0
+    # This function is deprecated.  The caller is advised to call the
+    # gen_print version of this function directly.
 
-    # Currently, supported values for error_report_format are:
-    # 0 - Short form
-    # 1 - Long form
-
-    error_text = error_text.rstrip('\n') + '\n'
-
-    if error_report_format == 0:
-        return gp.sprint_error(error_text)
-
-    buffer = ""
-    buffer += gp.sprint_dashes(width=120, char="=")
-    buffer += gp.sprint_error(error_text)
-
-    indent = 2
-    linefeed = 0
-
-    buffer += sprint_pgm_header(indent)
-
-    buffer += gp.sprint_dashes(width=120, char="=")
-
-    return buffer
+    return gp.sprint_error_report(error_text)
 
 ###############################################################################
 
