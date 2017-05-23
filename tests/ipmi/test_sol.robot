@@ -3,6 +3,7 @@ Documentation       This suite tests IPMI SOL in OpenBMC.
 
 Resource            ../../lib/ipmi_client.robot
 Resource            ../../lib/openbmc_ffdc.robot
+Library             ../../lib/ipmi_utils.py
 
 Test Teardown       Post Test Case Execution
 
@@ -32,13 +33,47 @@ Verify Deactivate Non Existing SOL
     ...  case_insensitive=True
 
 
+Set Valid SOL Retry Count
+    # Description of template fields:
+    # Setting name    Min valid value    Max valid value
+    retry-count       0                  7
+    [Documentation]  Verify valid SOL's retry count via IPMI.
+    [Tags]  Set_Valid_SOL_Retry_Count
+
+    [Template]  Verify SOL Setting
+
+
+Set Valid SOL Retry Interval
+    # Description of template fields:
+    # Setting name    Min valid value    Max valid value
+    retry-interval    0                  255
+    [Documentation]  Verify valid SOL's retry interval via IPMI.
+    [Tags]  Set_Valid_SOL_Retry_Interval
+
+    [Template]  Verify SOL Setting
+
+
+Set Valid SOL Character Accumulate Level
+    # Description of template fields:
+    # Setting name              Min valid value    Max valid value
+    character-accumulate-level  1                  255
+    [Documentation]  Verify valid SOL's character accumulate level via IPMI.
+    [Tags]  Set_Valid_SOL_Character_Accumulate_Level
+
+    [Template]  Verify SOL Setting
+
+
+Set Valid SOL Character Send Threshold
+    # Description of template fields:
+    # Setting name              Min valid value    Max valid value
+    character-send-threshold    0                  255
+    [Documentation]  Verify valid SOL's character send threshold via IPMI.
+    [Tags]  Set_Valid_SOL_Character_Send_Threshold
+
+    [Template]  Verify SOL Setting
+
+
 *** Keywords ***
-
-Post Test Case Execution
-    [Documentation]  Do the post test teardown.
-
-    Deactivate SOL Via IPMI
-    FFDC On Test Case Fail
 
 Check IPMI SOL Output Content
     [Documentation]  Check if SOL has given content.
@@ -52,3 +87,74 @@ Check IPMI SOL Output Content
     Should Be Equal  ${rc}  ${0}  msg=${output}
 
     Should Contain  ${output}  ${data}  case_insensitive=True
+
+
+Verify SOL Setting
+    [Documentation]  Verify SOL Setting via IPMI.
+    [Arguments]  ${setting_name}  ${min_value}  ${max_value}
+    # Description of Arguments:
+    # setting_name    Setting to verify (e.g. "retry-count").
+    # min_value       min valid value for given setting.
+    # max_value       max valid value for given setting.
+
+    ${value}=
+    ...  Evaluate  random.randint(${min_value}, ${max_value})  modules=random
+
+    # Character accumulate level setting is set in multiples of 5.
+    # Retry interval setting is set in multiples of 10.
+    # Reference IPMI specification v2.0
+
+    ${expected_value}=  Run Keyword If
+    ...  '${setting_name}' == 'character-accumulate-level'  Evaluate  ${value}*5
+    ...  ELSE IF  '${setting_name}' == 'retry-interval'  Evaluate  ${value}*10
+    ...  ELSE  Set Variable  ${value}
+
+    Set SOL Setting  ${setting_name}  '${value}'
+
+    # Replace "-" with space " " in setting name.
+    # E.g. "retry-count" to "retry count"
+    ${setting_name}=  Evaluate  $setting_name.replace('-',' ')
+
+    ${sol_info_dict}=  Get SOL Info
+
+    # Get exact SOL setting name from sol info output.
+    ${list}=  Get Matches  ${sol_info_dict}  ${setting_name}*
+    ...  case_insensitive=${True}
+    ${setting_name_from_dict}=  Get From List  ${list}  0
+
+    # Get SOL setting value from above setting name.
+    ${setting_value}=  Get From Dictionary
+    ...  ${sol_info_dict}  ${setting_name_from_dict}
+
+    Should Be Equal  '${setting_value}'  '${expected_value}'
+
+    # Power on host to check if SOL is working fine with new setting.
+    ${current_state}=  Get Host State Via External IPMI
+    Run Keyword If  '${current_state}' == 'on'
+    ...  Initiate Host PowerOff Via External IPMI
+    Initiate Host Boot Via External IPMI  wait=${0}
+
+    Activate SOL Via IPMI
+    Wait Until Keyword Succeeds  10 mins  30 secs
+    ...  Check IPMI SOL Output Content  Petitboot
+
+
+Restore Default SOL Configuration
+    [Documentation]  Restore default SOL configuration.
+
+    Open Connection And Log In
+
+    Set SOL Setting  retry-count  7
+    Set SOL Setting  retry-interval  10
+    Set SOL Setting  character-accumulate-level  20
+    Set SOL Setting  character-send-threshold  1
+
+    Close All Connections
+
+
+Post Test Case Execution
+    [Documentation]  Do the post test teardown.
+
+    Deactivate SOL Via IPMI
+    FFDC On Test Case Fail
+    Restore Default SOL Configuration
