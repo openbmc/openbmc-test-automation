@@ -83,8 +83,8 @@ def get_image_version(file_path):
     grk.run_key_u("Open Connection And Log In")
     status, ret_values =\
             grk.run_key("Execute Command On BMC  cat "
-            + file_path + " | grep \"version=\"")
-    return ret_values.split("=")[-1]
+            + file_path + " | grep \"version=\"", ignore=1)
+    return (ret_values.split("\n")[0]).split("=")[-1]
 
 ###############################################################################
 
@@ -102,7 +102,7 @@ def get_image_purpose(file_path):
     grk.run_key_u("Open Connection And Log In")
     status, ret_values =\
             grk.run_key("Execute Command On BMC  cat "
-            + file_path + " | grep \"purpose=\"")
+            + file_path + " | grep \"purpose=\"", ignore=1)
     return ret_values.split("=")[-1]
 
 ###############################################################################
@@ -122,7 +122,7 @@ def get_image_path(image_version):
                      of the images in the upload dir.
     """
 
-    upload_dir = BuiltIn().get_variable_value("${UPLOAD_DIR_PATH}")
+    upload_dir = BuiltIn().get_variable_value("${upload_dir_path}")
     grk.run_key_u("Open Connection And Log In")
     status, image_list =\
             grk.run_key("Execute Command On BMC  ls -d " + upload_dir
@@ -149,14 +149,16 @@ def verify_image_upload():
     a valid d-bus object
     """
 
-    image_version = BuiltIn().get_variable_value("${IMAGE_VERSION}")
+    image_version = BuiltIn().get_variable_value("${image_version}")
     image_path = get_image_path(image_version)
     image_version_id = image_path.split("/")[-2]
+    BuiltIn().set_global_variable("${version_id}", image_version_id)
 
     grk.run_key_u("Open Connection And Log In")
     image_purpose = get_image_purpose(image_path + "MANIFEST")
-    if (image_purpose == "bmc" or image_purpose == "host"):
-        uri = var.SOFTWARE_VERSION_URI + "/" + image_version_id
+    if (image_purpose == var.VERSION_PURPOSE_BMC or
+        image_purpose == var.VERSION_PURPOSE_HOST):
+        uri = var.SOFTWARE_VERSION + image_version_id
         status, ret_values =\
         grk.run_key("Read Attribute  " + uri + "  Activation")
 
@@ -167,7 +169,7 @@ def verify_image_upload():
             gp.print_var(ret_values)
             return False
     else:
-        gp.print_var(versionPurpose)
+        gp.print_var(image_purpose)
         return False
 
 ###############################################################################
