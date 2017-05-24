@@ -84,7 +84,7 @@ def get_image_version(file_path):
     status, ret_values =\
             grk.run_key("Execute Command On BMC  cat "
             + file_path + " | grep \"version=\"")
-    return ret_values.split("=")[-1]
+    return (ret_values.split("\n")[0]).split("=")[-1]
 
 ###############################################################################
 
@@ -152,6 +152,7 @@ def verify_image_upload():
     image_version = BuiltIn().get_variable_value("${IMAGE_VERSION}")
     image_path = get_image_path(image_version)
     image_version_id = image_path.split("/")[-2]
+    BuiltIn().set_global_variable("${VERSION_ID}", image_version_id)
 
     grk.run_key_u("Open Connection And Log In")
     image_purpose = get_image_purpose(image_path + "MANIFEST")

@@ -46,6 +46,13 @@ ACTIVE = 'xyz.openbmc_project.Software.Activation.Activations.Active'
 READY = 'xyz.openbmc_project.Software.Activation.Activations.Ready'
 INVALID = 'xyz.openbmc_project.Software.Activation.Activations.Invalid'
 ACTIVATING = 'xyz.openbmc_project.Software.Activation.Activations.Activating'
+NOTREADY = 'xyz.openbmc_project.Software.Activation.Activations.NotReady'
+FAILED = 'xyz.openbmc_project.Software.Activation.Activations.Faild'
+
+SOFTWARE_ACTIVATION_URI = 'xyz.openbmc_project.Software.Activation'
+REQUESTED_ACTIVATION_URI = SOFTWARE_ACTIVATION_URI + '.RequestedActivations'
+REQUESTED_ACTIVE = REQUESTED_ACTIVATION_URI + '.Active'
+REQUESTED_NONE = REQUESTED_ACTIVATION_URI + '.None'
 
 # Inventory URI
 HOST_INVENTORY_URI = '/xyz/openbmc_project/inventory/'
