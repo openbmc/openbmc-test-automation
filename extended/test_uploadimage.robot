@@ -14,7 +14,7 @@ Library               String
 Library               OperatingSystem
 Library               test_uploadimage.py
 
-Test Teardown  Upload Image Teardown
+#Test Teardown  Upload Image Teardown
 
 *** Variables ***
 ${timeout}            10
@@ -59,23 +59,3 @@ Upload Image Teardown
 
     Close All Connections
     FFDC On Test Case Fail
-
-Upload Post Request
-    [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
-
-    # Description of arguments:
-    # uri             URI for uploading image via REST.
-    # timeout         Time allocated for the REST command to return status.
-    # quiet           If enabled turns off logging to console.
-    # kwargs          A dictionary that maps each keyword to a value.
-
-    Initialize OpenBMC  ${timeout}  quiet=${quiet}
-    ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
-    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
-    ...  Accept=application/octet-stream
-    Set To Dictionary  ${kwargs}  headers  ${headers}
-    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
-    ...  base_uri=${base_uri}  args=&{kwargs}
-    ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
-    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
-    Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
