@@ -42,8 +42,23 @@ BMC_LOGGING_URI = '/xyz/openbmc_project/logging/'
 BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
 
 # Software manager version
-SOFTWARE_VERSION_URI = '/xyz/openbmc_project/software/'
+SOFTWARE_VERSION = '/xyz/openbmc_project/software/'
 ACTIVE = 'xyz.openbmc_project.Software.Activation.Activations.Active'
+READY = 'xyz.openbmc_project.Software.Activation.Activations.Ready'
+INVALID = 'xyz.openbmc_project.Software.Activation.Activations.Invalid'
+ACTIVATING = 'xyz.openbmc_project.Software.Activation.Activations.Activating'
+NOTREADY = 'xyz.openbmc_project.Software.Activation.Activations.NotReady'
+FAILED = 'xyz.openbmc_project.Software.Activation.Activations.Failed'
+
+SOFTWARE_ACTIVATION = 'xyz.openbmc_project.Software.Activation'
+REQUESTED_ACTIVATION = SOFTWARE_ACTIVATION + '.RequestedActivations'
+REQUESTED_ACTIVE = REQUESTED_ACTIVATION + '.Active'
+REQUESTED_NONE = REQUESTED_ACTIVATION + '.None'
+
+SOFTWARE_PURPOSE = 'xyz.openbmc_project.Software.Version.VersionPurpose'
+VERSION_PURPOSE_HOST = SOFTWARE_PURPOSE + '.Host'
+VERSION_PURPOSE_BMC = SOFTWARE_PURPOSE + '.BMC'
+VERSION_PURPOSE_SYSTEM = SOFTWARE_PURPOSE + '.System'
 
 # Inventory URI
 HOST_INVENTORY_URI = '/xyz/openbmc_project/inventory/'
