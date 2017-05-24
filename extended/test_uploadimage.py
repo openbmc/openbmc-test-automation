@@ -84,7 +84,7 @@ def get_image_version(file_path):
     status, ret_values =\
             grk.run_key("Execute Command On BMC  cat "
             + file_path + " | grep \"version=\"")
-    return ret_values.split("=")[-1]
+    return (ret_values.split("\n")[0]).split("=")[-1]
 
 ###############################################################################
 
@@ -122,7 +122,7 @@ def get_image_path(image_version):
                      of the images in the upload dir.
     """
 
-    upload_dir = BuiltIn().get_variable_value("${UPLOAD_DIR_PATH}")
+    upload_dir = BuiltIn().get_variable_value("${upload_dir_path}")
     grk.run_key_u("Open Connection And Log In")
     status, image_list =\
             grk.run_key("Execute Command On BMC  ls -d " + upload_dir
@@ -149,9 +149,10 @@ def verify_image_upload():
     a valid d-bus object
     """
 
-    image_version = BuiltIn().get_variable_value("${IMAGE_VERSION}")
+    image_version = BuiltIn().get_variable_value("${image_version}")
     image_path = get_image_path(image_version)
     image_version_id = image_path.split("/")[-2]
+    BuiltIn().set_global_variable("${version_id}", image_version_id)
 
     grk.run_key_u("Open Connection And Log In")
     image_purpose = get_image_purpose(image_path + "MANIFEST")
