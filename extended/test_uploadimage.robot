@@ -20,9 +20,9 @@ Force Tags  Upload_Test
 
 *** Variables ***
 ${timeout}            10
-${UPLOAD_DIR_PATH}    /tmp/images/
+${upload_dir_path}    /tmp/images/
 ${QUIET}              ${1}
-${IMAGE_VERSION}      ${EMPTY}
+${image_version}      ${EMPTY}
 
 *** Test Cases ***
 
@@ -33,7 +33,7 @@ Upload Image Via REST
     OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
     ${IMAGE_VERSION}=  Get Version Tar  ${IMAGE_FILE_PATH}
     ${image_data}=  OperatingSystem.Get Binary File  ${IMAGE_FILE_PATH}
-    Upload Post Request  /upload/image  data=${image_data}
+    Upload Image To BMC  /upload/image  data=${image_data}
     ${ret}=  Verify Image Upload
     Should Be True  True == ${ret}
 
@@ -47,37 +47,19 @@ Upload Image Via TFTP
     ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Sleep  1 minute
-    ${upload_file}=  Get Latest File  ${UPLOAD_DIR_PATH}
-    ${IMAGE_VERSION}=  Get Image Version
-    ...  ${UPLOAD_DIR_PATH}${upload_file}/MANIFEST
+    ${upload_file}=  Get Latest File  ${upload_dir_path}
+    ${image_version}=  Get Image Version
+    ...  ${upload_dir_path}${upload_file}/MANIFEST
     ${ret}=  Verify Image Upload
     Should Be True  True == ${ret}
 
 *** Keywords ***
 
 Upload Image Teardown
-    [Documentation]  Log FFDC if test suite fails and collect SOL log for
-    ...              debugging purposes.
+    [Documentation]  Log FFDC if test fails for debugging purposes.
+
+    Open Connection And Log In
+    Execute Command On BMC  rm -rf /tmp/images/*
 
     Close All Connections
     FFDC On Test Case Fail
-
-Upload Post Request
-    [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
-
-    # Description of arguments:
-    # uri             URI for uploading image via REST.
-    # timeout         Time allocated for the REST command to return status.
-    # quiet           If enabled turns off logging to console.
-    # kwargs          A dictionary that maps each keyword to a value.
-
-    Initialize OpenBMC  ${timeout}  quiet=${quiet}
-    ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
-    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
-    ...  Accept=application/octet-stream
-    Set To Dictionary  ${kwargs}  headers  ${headers}
-    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
-    ...  base_uri=${base_uri}  args=&{kwargs}
-    ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
-    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
-    Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
