@@ -24,9 +24,9 @@ Force Tags  Upload_Test
 
 *** Variables ***
 ${timeout}            10
-${UPLOAD_DIR_PATH}    /tmp/images/
+${upload_dir_path}    /tmp/images/
 ${QUIET}              ${1}
-${IMAGE_VERSION}      ${EMPTY}
+${image_version}      ${EMPTY}
 
 *** Test Cases ***
 
@@ -37,7 +37,7 @@ Upload Image Via REST
     OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
     ${IMAGE_VERSION}=  Get Version Tar  ${IMAGE_FILE_PATH}
     ${image_data}=  OperatingSystem.Get Binary File  ${IMAGE_FILE_PATH}
-    Upload Post Request  /upload/image  data=${image_data}
+    Upload Image To BMC  /upload/image  data=${image_data}
     ${ret}=  Verify Image Upload
     Should Be True  True == ${ret}
 
@@ -48,12 +48,12 @@ Upload Image Via TFTP
     @{image}=  Create List  ${TFTP_FILE_NAME}  ${TFTP_SERVER}
     ${data}=  Create Dictionary  data=@{image}
     ${resp}=  OpenBMC Post Request
-    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
+    ...  ${SOFTWARE_VERSION}/action/DownloadViaTFTP  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Sleep  1 minute
-    ${upload_file}=  Get Latest File  ${UPLOAD_DIR_PATH}
-    ${IMAGE_VERSION}=  Get Image Version
-    ...  ${UPLOAD_DIR_PATH}${upload_file}/MANIFEST
+    ${upload_file}=  Get Latest File  ${upload_dir_path}
+    ${image_version}=  Get Image Version
+    ...  ${upload_dir_path}${upload_file}/MANIFEST
     ${ret}=  Verify Image Upload
     Should Be True  True == ${ret}
 
@@ -116,11 +116,14 @@ Upload Image With No Squashfs Via TFTP
 *** Keywords ***
 
 Upload Image Teardown
-    [Documentation]  Log FFDC if test suite fails and collect SOL log for
-    ...              debugging purposes.
+    [Documentation]  Log FFDC if test fails for debugging purposes.
+
+    Open Connection And Log In
+    Execute Command On BMC  rm -rf /tmp/images/*
 
     Close All Connections
     FFDC On Test Case Fail
+
 
 Upload Post Request
     [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
@@ -159,4 +162,3 @@ Get Image Version From TFTP Server
     ${version}=  Get Version Tar  bad_image.tar
     OperatingSystem.Remove File  bad_image.tar
     [Return]  ${version}
-

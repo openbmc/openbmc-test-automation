@@ -196,3 +196,25 @@ Call Method
     ${resp}=  OpenBmc Post Request  ${base_uri}/action/${method}
     ...  timeout=${timeout}  quiet=${quiet}  &{kwargs}
     [Return]     ${resp}
+
+Upload Image To BMC
+    [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+
+    # Description of argument(s):
+    # uri             URI for uploading image via REST e.g. "/upload/image".
+    # timeout         Time allocated for the REST command to return status
+    #                 (specified in Robot Framework Time Format e.g. "3 mins").
+    # quiet           If enabled turns off logging to console.
+    # kwargs          A dictionary keys/values to be passed directly to
+    #                 Post Request.
+
+    Initialize OpenBMC  ${timeout}  quiet=${quiet}
+    ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  Accept=application/octet-stream
+    Set To Dictionary  ${kwargs}  headers  ${headers}
+    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
+    ...  base_uri=${base_uri}  args=&{kwargs}
+    ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
+    Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
