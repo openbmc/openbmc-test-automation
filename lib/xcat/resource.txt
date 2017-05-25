@@ -7,6 +7,7 @@ ${XCAT_USERNAME}  ${EMPTY}
 ${XCAT_PASSWORD}  ${EMPTY}
 ${XCAT_PORT}      31578
 ${XCAT_DIR_PATH}  /opt/xcat/bin/
+${GROUP}          openbmc
 
 # Default BMC nodes config file.
 

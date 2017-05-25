@@ -43,6 +43,15 @@ Power Off Via XCAT And Validate
     \  Power Off Via XCAT  ${bmc}
     \  Validate Power Status Via XCAT  ${bmc}  ${poweroff_flag}
 
+Add Nodes To Group List
+    [Documentation]  Add BMC nodes into group.
+    [Tags]  Move_Added_Nodes_To_Group
+
+    # Add BMC nodes to group and validate.
+    : FOR  ${bmc}  IN  @{BMC_LIST}
+    /  Add Nodes To Group  ${bmc}  ${GROUP}
+    /  Validate Node Added In Group  ${bmc}  ${GROUP}
+
 *** Keywords ***
 
 Validate XCAT Setup
