@@ -93,3 +93,36 @@ Get Power Status
     Should Be Empty  ${stderr}
 
     [Return]  ${stdout}
+
+Add Nodes To Group
+    [Documentation]  Add BMC nodes to group.
+    [Arguments]  ${node}  ${group}=${GROUP}
+
+    # Description of argument(s):
+    # node  Name of the node.
+    # group  Name of the group.
+    # By default nodes are added to group 'openbmc'.
+
+    ${stdout}  ${stderr}=  Execute Command
+    ...  ${XCAT_DIR_PATH}/chdef ${node} groups=${group}  return_stderr=True
+    Should Be Empty  ${stderr}
+
+Get List Of Nodes In Group
+    [Documentation]  Get list of nodes in BMC.
+    [Arguments]  ${group}=${GROUP}
+
+    # Description of argument(s):
+    # group  Name of the group.
+
+    # Sample output of this keyword:
+    # XXX.XXX.XXX.XXX
+    # YYY.YYY.YYY.YYY
+    # ZZZ.ZZZ.ZZZ.ZZZ
+
+    ${stdout}  ${stderr}=  Execute Command
+    ...  ${XCAT_DIR_PATH}/nodels ${group}  return_stderr=True
+    Should Be Empty  ${stderr}
+
+    [Return]  ${stdout}
+
+# TBD  Group Power On Via XCAT

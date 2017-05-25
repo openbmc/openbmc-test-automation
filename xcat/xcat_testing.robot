@@ -43,6 +43,15 @@ Power Off Via XCAT And Validate
     \  Power Off Via XCAT  ${bmc}
     \  Validate Power Status Via XCAT  ${bmc}  ${poweroff_flag}
 
+Move Added Nodes To Group
+    [Documentation]  Add BMC nodes into group.
+    [Tags]  Move_Added_Nodes_To_Group
+
+    # Group BMC nodes one by one and check whether it succesfully added.
+    : FOR  ${bmc}  IN  @{BMC_LIST}
+    /  Add Nodes To Group  ${bmc}  ${GROUP}
+    /  Validate Node Added In Group  ${bmc}  ${GROUP}
+
 *** Keywords ***
 
 Validate XCAT Setup
@@ -71,3 +80,11 @@ Validate Power Status Via XCAT
     Run Keyword If  '${flag}' == 'ON'
     ...  Should Contain  ${status}  on  msg=Host is off.
     ...  ELSE  Should Contain  ${status}  off  msg=Host is on.
+
+Validate Node Added In Group
+    [Documentation]  Validate whether node is added in group.
+    [Arguments]  ${node}  ${group}
+
+    ${nodes_in_group}=  Get List Of Nodes In Group  ${group}
+    Should Contain  ${nodes_in_group}  ${node}
+    ...  msg=BMC node is not added in a group.
