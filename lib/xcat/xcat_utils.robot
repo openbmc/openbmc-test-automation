@@ -93,3 +93,47 @@ Get Power Status
     Should Be Empty  ${stderr}
 
     [Return]  ${stdout}
+
+Add Nodes To Group
+    [Documentation]  Add BMC nodes to group.
+    [Arguments]  ${node}  ${group}=${GROUP}
+
+    # Description of argument(s):
+    # node   Name of the node (e.g. "node1").
+    # group  Name of the group (e.g. "openbmc").
+
+    ${stdout}  ${stderr}=  Execute Command
+    ...  ${XCAT_DIR_PATH}/chdef ${node} groups=${group}  return_stderr=True
+    Should Be Empty  ${stderr}
+
+Get List Of Nodes In Group
+    [Documentation]  Get list of nodes in BMC.
+    [Arguments]  ${group}=${GROUP}
+
+    # Description of argument(s):
+    # group  Name of the group (e.g. "openbmc").
+
+    # Sample output of this keyword:
+    # XXX.XXX.XXX.XXX
+    # YYY.YYY.YYY.YYY
+    # ZZZ.ZZZ.ZZZ.ZZZ
+
+    ${stdout}  ${stderr}=  Execute Command
+    ...  ${XCAT_DIR_PATH}/nodels ${group}  return_stderr=True
+    Should Be Empty  ${stderr}
+
+    [Return]  ${stdout}
+
+Validate Node Added In Group
+    [Documentation]  Validate whether node is added in group.
+    [Arguments]  ${node}  ${group}
+
+    # Description of argument(s):
+    # node   Name of the node (e.g. "node1").
+    # group  Name of the group (e.g. "openbmc").
+
+    ${nodes_in_group}=  Get List Of Nodes In Group  ${group}
+    Should Contain  ${nodes_in_group}  ${node}
+    ...  msg=BMC node is not added in a group.
+
+# TBD  openbmc/openbmc-test-automation/issues/647
