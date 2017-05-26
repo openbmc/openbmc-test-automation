@@ -128,5 +128,9 @@ Post Test Case Execution
     ...  Shutdown HTX Exerciser
 
     FFDC On Test Case Fail
+
+    # Reboot BMC to restore BMC.
+    # This is needed to ensure that BMC image verification are re-activate.
+    Trigger BMC Reset via Reboot
     Close All Connections
 

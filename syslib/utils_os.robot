@@ -123,6 +123,17 @@ REST Upload File To BMC
     Run  dd if=/dev/zero of=dummyfile bs=1 count=0 seek=32MB
     OperatingSystem.File Should Exist  dummyfile
 
+    # Take SSH connection to BMC and switch to BMC connection to perform
+    # the task.
+    &{bmc_connection_args}=  Create Dictionary  alias=bmc_connection
+    Open Connection And Log In  &{bmc_connection_args}
+
+    # Currently OS SSH session is active, switch to BMC connection.
+    # Delete /tmp/images directory to disable image verification.
+    # Post test completion, reboot the BMC to re-activate.
+    Switch Connection  bmc_connection
+    Execute Command On BMC  rm -rf /tmp/images/
+
     # Get the content of the file and upload to BMC
     ${image_data}=  OperatingSystem.Get Binary File  dummyfile
 
@@ -140,15 +151,18 @@ REST Upload File To BMC
 
     # Delete uploaded image file.
     # TODO: Delete via REST openbmc/openbmc#1550
-    # Take SSH connection to BMC and switch to BMC connection to perform
-    # the task.
-    &{bmc_connection_args}=  Create Dictionary  alias=bmc_connection
-    Open Connection And Log In  &{bmc_connection_args}
-
-    # Currently OS SSH session is active, switch to BMC connection.
-    Switch Connection  bmc_connection
     Execute Command On BMC  rm -f /tmp/images/*
 
     # Switch back to OS SSH connection.
     Switch Connection  os_connection
+
+
+Trigger BMC Reset via Reboot
+    [Documentation]    Execute reboot command on the remote BMC and
+    ...                returns immediately. This keyword "Start Command"
+    ...                returns nothing and does not wait for the command
+    ...                execution to be finished.
+    Open Connection And Log In
+
+    Start Command   /sbin/reboot
 
