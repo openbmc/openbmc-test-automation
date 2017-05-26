@@ -889,6 +889,10 @@ Install Debug Tarball On BMC
     Execute Command On BMC
     ...  ln -s ${targ_tarball_dir_path}/bin/callout-test /usr/bin/callout-test
 
+    # Create symlink to logging-test binary.
+    Execute Command On BMC
+    ...  ln -s ${targ_tarball_dir_path}/bin/logging-test /usr/bin/logging-test
+
     # Remove the tarball file from BMC
     Execute Command On BMC  rm /tmp/debug-tarball.tar.xz
 
