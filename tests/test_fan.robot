@@ -8,7 +8,7 @@ Test Teardown     FFDC On Test Case Fail
 
 *** Test Cases ***
 
-Verify Fan Sensors Atrributes
+Verify Fan Sensors Attributes
    [Documentation]  Check fan attributes.
    [Tags]  Verify_Fan_Sensor_Attributes
 
@@ -31,7 +31,7 @@ Verify Fan Sensors Atrributes
 
    :FOR  ${entry}  IN  @{fans}
    \  ${resp}=  OpenBMC Get Request  ${entry}
-   \  ${json}=  To Json  ${resp.content}
+   \  ${json}=  To JSON  ${resp.content}
    \  Should Be True  ${json["data"]["Scale"]} >= 0
    \  Run Keyword And Ignore Error
    ...  Should Be True  ${json["data"]["Target"]} >= 0
@@ -40,7 +40,7 @@ Verify Fan Sensors Atrributes
    \  Should Be True  ${json["data"]["Value"]} >= 0
 
 
-Verify PCIE Sensors Atrributes
+Verify PCIE Sensors Attributes
    [Documentation]  Probe PCIE attributes.
    [Tags]  Verify_PCIE_Sensor_Attributes
 
@@ -60,12 +60,41 @@ Verify PCIE Sensors Atrributes
 
    :FOR  ${entry}  IN  @{temp_pcie}
    \  ${resp}=  OpenBMC Get Request  ${entry}
-   \  ${json}=  To Json  ${resp.content}
+   \  ${json}=  To JSON  ${resp.content}
    \  Should Be True  ${json["data"]["Scale"]} == -3
    \  Should Be Equal As Strings
    ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
    \  ${temp_in_DegreeC}=  Evaluate  ${json["data"]["Value"]} / 1000
    \  Should Be True  ${temp_in_DegreeC} > 0
+
+
+Verify Rail Voltage Sensors Attributes
+   [Documentation]  Check rail voltage attributes.
+   [Tags]  Verify_Rail_Voltage_Sensor_Attributes
+
+   # Example of one of the entries returned by 'Get Endpoint Paths':
+   # /xyz/openbmc_project/sensors/voltage/rail_1_voltage
+   # /xyz/openbmc_project/sensors/voltage/rail_2_voltage
+   ${temp_rail}=  Get Endpoint Paths  /xyz/openbmc_project/sensors/  rail*
+
+   # Example:
+   # Access the properties of the rail voltage and it should contain
+   # the following entries:
+   # "/xyz/openbmc_project/sensors/voltage/rail_1_voltage":
+   # {
+   #    "Scale": -3,
+   #    "Unit": "xyz.openbmc_project.Sensor.Value.Unit.Volts",
+   #    "Value": 5097
+   # },
+
+   :FOR  ${entry}  IN  @{temp_rail}
+   \  ${resp}=  OpenBMC Get Request  ${entry}
+   \  ${json}=  To JSON  ${resp.content}
+   \  Should Be True  ${json["data"]["Scale"]} == -3
+   \  Should Be Equal As Strings
+   ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.Volts
+   \  ${volts}=  Evaluate  ${json["data"]["Value"]} / 1000
+   \  Should Be True  ${volts} > 0
 
 
 *** Keywords ***
