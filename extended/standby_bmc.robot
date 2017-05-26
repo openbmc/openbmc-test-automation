@@ -30,6 +30,7 @@ Get To Stable State
     ...              5. Get BMC in Ready state if its not in this state
     ...              6. Get Host in Off state if its not in this state
     ...              7. Update restore policy
+    ...              8. Verify and Update MAC address.
     [Tags]  Get_To_Stable_State
 
     Run Keyword And Ignore Error  Powercycle System Via PDU
@@ -50,6 +51,9 @@ Get To Stable State
     Prune Journal Log
 
     Run Keyword And Ignore Error  Update Policy Setting  RESTORE_LAST_STATE
+
+    Run Keyword If  '${MAC_ADDRESS}' != '${EMPTY}'
+    ...  Check And Reset MAC
 
 
 *** Keywords ***
