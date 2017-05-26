@@ -68,5 +68,31 @@ Verify PCIE Sensors Atrributes
    \  Should Be True  ${temp_in_DegreeC} > 0
 
 
+Verify Rail Voltage Sensors Atrributes
+   [Documentation]  Check rail voltage attributes.
+   [Tags]  Verify_Rail_Voltage_Sensor_Attributes
+
+   ${temp_rail}=  Get Endpoint Paths  /xyz/openbmc_project/sensors/  rail*
+
+   # Example:
+   # Access the properties of the rail voltage and it should contain
+   # the following entries:
+   # "/xyz/openbmc_project/sensors/voltage/rail_1_voltage":
+   # {
+   #    "Scale": -3,
+   #    "Unit": "xyz.openbmc_project.Sensor.Value.Unit.Volts",
+   #    "Value": 5097
+   # },
+
+   :FOR  ${entry}  IN  @{temp_rail}
+   \  ${resp}=  OpenBMC Get Request  ${entry}
+   \  ${json}=  To Json  ${resp.content}
+   \  Should Be True  ${json["data"]["Scale"]} == -3
+   \  Should Be Equal As Strings
+   ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.Volts
+   \  ${volts}=  Evaluate  ${json["data"]["Value"]} / 1000
+   \  Should Be True  ${volts} > 0
+
+
 *** Keywords ***
 
