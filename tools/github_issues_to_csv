@@ -54,46 +54,35 @@ def write_issues(response, csv_out):
                              owners, milestone_resp])
 
 
-def get_issues_from_github_to_csv(name):
+def get_issues_from_github_to_csv(name, response):
     r"""
     Requests issues from GitHub API and writes to CSV file.
+    Description of argument(s):
+    name  Name of the GitHub repository
+    response  GitHub repository response
     """
     print name
     print states
-    l_url = 'https://api.github.com/repos/{}/issues?state={}'.format(name,
-                                                                     states)
-    print l_url
-    # 'https://api.github.com/repos/{}/issues?state={}'.format(name, state)
-    response = requests.get(l_url, auth=auth)
 
-    csvfilename = '{}-issues.csv'.format(name.replace('/', '-'))
-    with open(csvfilename, 'w') as csvfile:
-        csv_out = csv.writer(csvfile)
-        csv_out.writerow(['Labels', 'Title', 'State', 'Open Date',
-                          'Close Date', 'URL', 'Author', 'Assignees',
-                          'Milestone'])
-        write_issues(response, csv_out)
-
-        # Multiple requests are required if response is paged
-        if 'link' in response.headers:
+    # Multiple requests are required if response is paged
+    if 'link' in response.headers:
+        pages = {rel[6:-1]: url[url.index('<')+1:-1] for url, rel in
+                 (link.split(';') for link in
+                 response.headers['link'].split(','))}
+        while 'last' in pages and 'next' in pages:
             pages = {rel[6:-1]: url[url.index('<')+1:-1] for url, rel in
                      (link.split(';') for link in
-                      response.headers['link'].split(','))}
-            while 'last' in pages and 'next' in pages:
-                pages = {rel[6:-1]: url[url.index('<')+1:-1] for url, rel in
-                         (link.split(';') for link in
-                          response.headers['link'].split(','))}
-                response = requests.get(pages['next'], auth=auth)
-                write_issues(response, csv_out)
-                if pages['next'] == pages['last']:
-                    break
+                     response.headers['link'].split(','))}
+            response = requests.get(pages['next'], auth=auth)
+            write_issues(response, csv_out)
+            if pages['next'] == pages['last']:
+                break
 
-        csvfile.close()
 
 parser = argparse.ArgumentParser(description="Write GitHub repository issues "
                                              "to CSV file.")
 
-parser.add_argument('username', nargs='+', help="GitHub user name, "
+parser.add_argument('username', nargs='?', help="GitHub user name, "
                     "formatted as 'username'")
 
 parser.add_argument('repositories', nargs='+', help="Repository names, "
@@ -101,17 +90,33 @@ parser.add_argument('repositories', nargs='+', help="Repository names, "
 
 parser.add_argument('--all', action='store_true', help="Returns both open "
                     "and closed issues.")
+
 args = parser.parse_args()
 
 if args.all:
     state = 'all'
 
-for argusername in args.username:
-    username = argusername
+username = args.username
 
 password = getpass.getpass("Enter your GitHub Password:")
 
 auth = (username, password)
 
+# To set the csv filename
+csvfilename = ""
 for repository in args.repositories:
-    get_issues_from_github_to_csv(repository)
+    csvfilename_temp = '{}'.format(repository.replace('/', '-'))
+    csvfilename = csvfilename+csvfilename_temp
+csvfilename = csvfilename+'-issues.csv'
+with open(csvfilename, 'wb') as csvfileout:
+    csv_out = csv.writer(csvfileout)
+    csv_out.writerow(['Labels', 'Title', 'State', 'Open Date',
+                      'Close Date', 'URL', 'Author', 'Assignees',
+                      'Milestone'])
+    for repository in args.repositories:
+        l_url = 'https://api.github.com/repos/{}/issues?state={}'
+        l_url = l_url.format(repository, states)
+        response = requests.get(l_url, auth=auth)
+        write_issues(response, csv_out)
+        get_issues_from_github_to_csv(repository, response)
+csvfileout.close()
