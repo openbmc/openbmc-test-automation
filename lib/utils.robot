@@ -2,7 +2,6 @@
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
-Resource                ../extended/obmc_boot_test_resource.robot
 Library                 DateTime
 Library                 Process
 Library                 OperatingSystem
@@ -942,6 +941,7 @@ Set MAC Address
     Run Key U  OBMC Boot Test \ OBMC Reboot (off)
     ${bmc_mac_addr}=  Execute Command On BMC  cat /sys/class/net/eth0/address
     Should Be Equal  ${bmc_mac_addr}  ${mac_address}
+
 
 ###############################################################################
 Delete Error logs
