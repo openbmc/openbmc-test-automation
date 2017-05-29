@@ -61,7 +61,7 @@ Execute Network Test
     ${status}=  Run Until Keyword Fails  ${HTX_DURATION}  ${HTX_INTERVAL}
     ...  Start Network Test
 
-    Run Keyword If  '${status}' == '{False}'
+    Run Keyword If  '${status}' == 'False'
     ...  Fail  Network is unstable. Please check for errors.
 
     Shutdown HTX Exerciser
