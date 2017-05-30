@@ -331,12 +331,17 @@ def get_host_name_ip(host):
     a tuple.
 
     Description of argument(s):
-    host                            The host name or IP address to be
-                                    obtained.
+    host                            The host name or IP address to be obtained.
     """
 
     host_host_name = socket.getfqdn(host)
-    host_ip = socket.gethostbyname(host)
+    try:
+        host_ip = socket.gethostbyname(host)
+    except socket.gaierror as my_gaierror:
+        message = "Unable to obtain the host name for the following host:" +\
+                  "\n" + gp.sprint_var(host)
+        gp.print_error_report(message)
+        raise my_gaierror
 
     return host_host_name, host_ip
 
