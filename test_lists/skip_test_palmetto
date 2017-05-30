@@ -28,6 +28,7 @@
 -e io_board_Fault
 -e Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
 -e Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
+-e Verify_Setting_OCC_Turbo_Via_REST
 #https://github.com/openbmc/openbmc/issues/928
 -e Set_Host_Time_With_Both_And_NTP
 #https://github.com/openbmc/openbmc/issues/901
