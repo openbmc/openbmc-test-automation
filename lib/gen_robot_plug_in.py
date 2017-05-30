@@ -15,6 +15,7 @@ import tempfile
 import gen_print as gp
 import gen_robot_print as grp
 import gen_misc as gm
+import gen_cmd as gc
 
 
 ###############################################################################
@@ -193,15 +194,13 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     # We want to obtain those values from the output.  To make the task
     # simpler, we'll start by grepping the output for lines that might fit
     # such a format:
-    # - Zero or more spaces
-    # - One or more non-colon characters
+    # A valid bash variable against the left margin
     # - A colon
     # - Zero or more spaces
-    # I added code to exclude any line that starts with spaces and a
-    # left-square bracket (e.g. '[ ERROR ]').  These would be interpreted by
-    # my_parm_file as a new section.
-    cmd_buf = "egrep '^[ ]*[^:]+:[ ]*' " + temp_file_path +\
-              " | egrep -v '^[ ]*\[' > " + temp_properties_file_path
+    bash_var_regex = "[_[:alpha:]][_[:alnum:]]*"
+    regex = "^" + bash_var_regex + ":[ ]*"
+    cmd_buf = "egrep '" + regex + "' " + temp_file_path + " > " +\
+              temp_properties_file_path
     if int(debug) == 1:
         grp.rpissuing(cmd_buf)
     gen_rc = os.system(cmd_buf)
@@ -224,8 +223,9 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
         grp.rprint_error("Call to process_plug_in_packages failed.\n")
         grp.rprint_varx("gen_rc", gen_rc, hex)
         grp.rprint_varx("proc_plug_pkg_rc", proc_plug_pkg_rc, hex)
-        grp.rprint_varx("failed_plug_in_name", failed_plug_in_name)
-        grp.rprint_varx("shell_rc", shell_rc, hex)
+        # Show all of the failed plug in names and shell_rcs.
+        gc.cmd_fnc_u("egrep -A 1 '^failed_plug_in_name:[ ]+' " +
+                     temp_properties_file_path, quiet=1, show_err=0)
         rc = 1
 
     return rc, shell_rc, failed_plug_in_name
