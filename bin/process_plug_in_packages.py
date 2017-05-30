@@ -20,6 +20,7 @@ from gen_print import *
 from gen_valid import *
 from gen_arg import *
 from gen_plug_in import *
+from gen_cmd import *
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)
@@ -221,10 +222,13 @@ def run_pgm(plug_in_dir_path,
                                     return codes.
     """
 
+    global autoscript
+
     rc = 0
     failed_plug_in_name = ""
     shell_rc = 0x00000000
 
+    plug_in_name = os.path.basename(os.path.normpath(plug_in_dir_path))
     cp_prefix = "cp_"
     plug_in_pgm_path = plug_in_dir_path + cp_prefix + call_point
     if not os.path.exists(plug_in_pgm_path):
@@ -242,16 +246,29 @@ def run_pgm(plug_in_dir_path,
     if shell_rc != 0:
         rc = 1
         print_var(shell_rc, hex)
-        failed_plug_in_name = \
-            os.path.basename(os.path.normpath(plug_in_dir_path))
+        failed_plug_in_name = plug_in_name
         print(out_buf)
+        print_var(failed_plug_in_name)
+        print_var(shell_rc, hex)
         return rc, shell_rc, failed_plug_in_name
 
     print("------------------------------------------------- Starting plug-" +
           "in -----------------------------------------------")
     print(out_buf)
-    cmd_buf = "PATH=" + plug_in_dir_path + ":${PATH} ; " + cp_prefix +\
-              call_point
+    if autoscript:
+        stdout = 1 - quiet
+        if AUTOBOOT_OPENBMC_NICKNAME != "":
+            autoscript_prefix = AUTOBOOT_OPENBMC_NICKNAME + "."
+        else:
+            autoscript_prefix = ""
+        autoscript_prefix += plug_in_name + ".cp_" + call_point
+        autoscript_subcmd = "autoscript --quiet=1 --show_url=y --prefix=" +\
+            autoscript_prefix + " --stdout=" + str(stdout) + " -- "
+    else:
+        autoscript_subcmd = ""
+
+    cmd_buf = "PATH=" + plug_in_dir_path + ":${PATH} ; " + autoscript_subcmd +\
+              cp_prefix + call_point
     pissuing(cmd_buf)
 
     sub_proc = subprocess.Popen(cmd_buf, shell=True)
@@ -261,11 +278,13 @@ def run_pgm(plug_in_dir_path,
     shell_rc *= 0x100
     if shell_rc != 0 and shell_rc != caller_shell_rc:
         rc = 1
-        failed_plug_in_name = \
-            os.path.basename(os.path.normpath(plug_in_dir_path))
+        failed_plug_in_name = plug_in_name
 
     print("------------------------------------------------- Ending plug-in" +
           " -------------------------------------------------")
+    if failed_plug_in_name != "":
+        print_var(failed_plug_in_name)
+    print_var(shell_rc, hex)
 
     return rc, shell_rc, failed_plug_in_name
 
@@ -310,12 +329,24 @@ def main():
     shell_rc = 0
     failed_plug_in_name = ""
 
+    # If the autoscript program is present, we will use it to direct call point
+    # program output to a separate status file.  This keeps the output of the
+    # main program (i.e. OBMC Boot Test) cleaner and yet preserves call point
+    # output if it is needed for debug.
+    global autoscript
+    global AUTOBOOT_OPENBMC_NICKNAME
+    autoscript = 0
+    AUTOBOOT_OPENBMC_NICKNAME = ""
+    rc, out_buf = cmd_fnc("which autoscript", quiet=1, print_output=0,
+                          show_err=0)
+    if rc == 0:
+        autoscript = 1
+        AUTOBOOT_OPENBMC_NICKNAME = os.environ.get("AUTOBOOT_OPENBMC_NICKNAME",
+                                                   "")
     ret_code = 0
     for plug_in_dir_path in plug_in_packages_list:
         rc, shell_rc, failed_plug_in_name = \
             run_pgm(plug_in_dir_path, call_point, caller_shell_rc)
-        print_var(failed_plug_in_name)
-        print_var(shell_rc, hex)
         if rc != 0:
             ret_code = 1
             if stop_on_plug_in_failure:
@@ -331,7 +362,7 @@ def main():
         if not stop_on_plug_in_failure:
             # We print a summary error message to make the failure more
             # obvious.
-            print_error_report("At least one plug-in failed.\n")
+            print_error("At least one plug-in failed.\n")
         return False
 
 ###############################################################################
