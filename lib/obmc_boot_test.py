@@ -148,6 +148,7 @@ def process_pgm_parms():
     global boot_results
     global ffdc_list_file_path
     global ffdc_report_list_path
+    global ffdc_summary_list_path
 
     if ffdc_dir_path_style == "":
         ffdc_dir_path_style = int(os.environ.get('FFDC_DIR_PATH_STYLE', '0'))
@@ -170,6 +171,9 @@ def process_pgm_parms():
         "/FFDC_FILE_LIST"
     ffdc_report_list_path = base_tool_dir_path + openbmc_nickname +\
         "/FFDC_REPORT_FILE_LIST"
+
+    ffdc_summary_list_path = base_tool_dir_path + openbmc_nickname +\
+        "/FFDC_SUMMARY_FILE_LIST"
 
 ###############################################################################
 
@@ -194,6 +198,8 @@ def initial_plug_in_setup():
                                   ffdc_list_file_path)
     BuiltIn().set_global_variable("${FFDC_REPORT_LIST_PATH}",
                                   ffdc_report_list_path)
+    BuiltIn().set_global_variable("${FFDC_SUMMARY_LIST_PATH}",
+                                  ffdc_summary_list_path)
 
     BuiltIn().set_global_variable("${FFDC_DIR_PATH_STYLE}",
                                   ffdc_dir_path_style)
@@ -205,7 +211,8 @@ def initial_plug_in_setup():
     # element in additional_values.
     additional_values = ["program_pid", "master_pid", "ffdc_dir_path",
                          "status_dir_path", "base_tool_dir_path",
-                         "ffdc_list_file_path", "ffdc_report_list_path"]
+                         "ffdc_list_file_path", "ffdc_report_list_path",
+                         "ffdc_summary_list_path"]
 
     plug_in_vars = parm_list + additional_values
 
@@ -295,6 +302,12 @@ def pre_boot_plug_in_setup():
     # Clear the ffdc_report_list_path file.  Plug-ins may now write to it.
     try:
         os.remove(ffdc_report_list_path)
+    except OSError:
+        pass
+
+    # Clear the ffdc_summary_list_path file.  Plug-ins may now write to it.
+    try:
+        os.remove(ffdc_summary_list_path)
     except OSError:
         pass
 
@@ -567,6 +580,11 @@ def print_defect_report():
     Print a defect report.
     """
 
+    # Making deliberate choice to NOT run plug_in_setup().  We don't want
+    # ffdc_prefix updated.
+    rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
+        call_point='ffdc_report', stop_on_plug_in_failure=0)
+
     # At some point I'd like to have the 'Call FFDC Methods' return a list
     # of files it has collected.  In that case, the following "ls" command
     # would no longer be needed.  For now, however, glob shows the files
@@ -580,6 +598,14 @@ def print_defect_report():
               " 2>/dev/null ; rm -rf ${file_list} 2>/dev/null || :"
     shell_rc, more_header_info = gc.cmd_fnc_u(cmd_buf, print_output=0,
                                               show_err=0)
+
+    # Get additional header data which may have been created by ffdc plug-ins.
+    # Also, delete the individual header files to cleanup.
+    cmd_buf = "file_list=$(cat " + ffdc_summary_list_path + " 2>/dev/null)" +\
+              " ; [ ! -z \"${file_list}\" ] && cat ${file_list}" +\
+              " 2>/dev/null ; rm -rf ${file_list} 2>/dev/null || :"
+    shell_rc, ffdc_summary_info = gc.cmd_fnc_u(cmd_buf, print_output=0,
+                                               show_err=0)
 
     LOG_PREFIX = BuiltIn().get_variable_value("${LOG_PREFIX}")
 
@@ -623,6 +649,10 @@ def print_defect_report():
     # gp.qprintn(ffdc_list)
     gp.qprintn()
 
+    if len(ffdc_summary_info) > 0:
+        gp.qprintn("FFDC summary:")
+        gp.printn(ffdc_summary_info)
+
     gp.qprint_dashes(0, 90, 1, "=")
 
     ffdc_list_file.write(output + "\n")
@@ -642,7 +672,7 @@ def my_ffdc():
 
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
-        call_point='ffdc', stop_on_plug_in_failure=1)
+        call_point='ffdc', stop_on_plug_in_failure=0)
 
     AUTOBOOT_FFDC_PREFIX = os.environ['AUTOBOOT_FFDC_PREFIX']
     status, ret_values = grk.run_key_u("FFDC  ffdc_prefix=" +
@@ -734,7 +764,7 @@ def run_boot(boot):
             del match_state['epoch_seconds']
             # Wait for the state to change in any way.
             st.wait_state(match_state, wait_time=state_change_timeout,
-                          interval="3 seconds", invert=1)
+                          interval="10 seconds", invert=1)
 
         gp.qprintn()
         if boot_table[boot]['end']['chassis'] == "Off":
@@ -742,7 +772,7 @@ def run_boot(boot):
         else:
             boot_timeout = power_on_timeout
         st.wait_state(boot_table[boot]['end'], wait_time=boot_timeout,
-                      interval="3 seconds")
+                      interval="10 seconds")
 
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = \
@@ -800,7 +830,7 @@ def test_loop_body():
     # NOTE: A post_test_case call point failure is NOT counted as a boot
     # failure.
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
-        call_point='post_test_case', stop_on_plug_in_failure=1)
+        call_point='post_test_case', stop_on_plug_in_failure=0)
 
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
@@ -843,13 +873,14 @@ def obmc_boot_test_teardown():
     if cp_setup_called:
         plug_in_setup()
         rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
-            call_point='cleanup', stop_on_plug_in_failure=1)
+            call_point='cleanup', stop_on_plug_in_failure=0)
 
-    # Save boot_results object to a file in case it is needed again.
-    gp.qprint_timen("Saving boot_results to the following path.")
-    gp.qprint_var(boot_results_file_path)
-    pickle.dump(boot_results, open(boot_results_file_path, 'wb'),
-                pickle.HIGHEST_PROTOCOL)
+    if 'boot_results_file_path' in globals():
+        # Save boot_results object to a file in case it is needed again.
+        gp.qprint_timen("Saving boot_results to the following path.")
+        gp.qprint_var(boot_results_file_path)
+        pickle.dump(boot_results, open(boot_results_file_path, 'wb'),
+                    pickle.HIGHEST_PROTOCOL)
 
 ###############################################################################
 
