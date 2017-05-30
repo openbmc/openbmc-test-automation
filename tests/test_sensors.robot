@@ -176,6 +176,23 @@ Verify Disabling OCC Turbo Setting Via IPMI
     Response Should Be Equal  False
 
 
+Verify Setting OCC Turbo Via REST
+    [Documentation]  Set and verify OCC's turbo allowed via REST.
+    # The allowed value for turbo allowed:
+    # True  - To enable turbo allowed.
+    # False - To disable turbo allowed.
+
+    [Tags]  Verify_Setting_OCC_Turbo_Via_REST
+
+    Set Turbo Setting Via REST  False
+    ${setting}=  Read Turbo Setting Via REST
+    Should Be Equal  ${setting}  False
+
+    Set Turbo Setting Via REST  True
+    ${setting}=  Read Turbo Setting Via REST
+    Should Be Equal  ${setting}  True
+
+
 CPU Present
     [Tags]  CPU_Present
 
