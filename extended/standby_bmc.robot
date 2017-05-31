@@ -14,6 +14,7 @@ Documentation     This module will take whatever action is necessary
 Resource          ../lib/utils.robot
 Resource          ../lib/pdu/pdu.robot
 Resource          ../lib/state_manager.robot
+Resource          ../lib/bmc_network_utils.robot
 
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0
