@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation  Update BMC MAC address with input MAC.
 
-Resource  ../lib/utils.robot
+Resource  ../lib/bmc_network_utils.robot
 
 *** Test Cases ***
 
