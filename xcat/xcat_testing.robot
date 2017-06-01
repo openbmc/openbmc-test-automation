@@ -49,8 +49,55 @@ Add Nodes To Group List
 
     # Add BMC nodes to group and validate.
     : FOR  ${bmc}  IN  @{BMC_LIST}
-    /  Add Nodes To Group  ${bmc}  ${GROUP}
-    /  Validate Node Added In Group  ${bmc}  ${GROUP}
+    \  Add Nodes To Group  ${bmc}  ${GROUP}
+    \  Validate Node Added In Group  ${bmc}  ${GROUP}
+
+Power On Group And Validate
+    [Documentation]  Power on all BMCs in group and validate.
+    [Tags]  Power_On_Group_And_Validate
+
+    # Sample output of this keyword:
+    # XXX.XXX.XXX.XXX
+    # YYY.YYY.YYY.YYY
+    # ZZZ.ZZZ.ZZZ.ZZZ
+
+    ${nodes}=  Get List Of Nodes In Group  ${GROUP}
+    Should Not Be Empty  ${nodes}  msg=Empty node group list.
+    Power On Via XCAT  ${GROUP}
+
+    # Validate power status by using group operation.
+    Validate group Power Status  ${GROUP}  ${poweron_flag}
+
+    # List the BMC nodes.
+
+    @{bmc_nodes}=  Split String  ${nodes}
+
+    # Validate power status on each BMC node one by one.
+    : FOR  ${bmc_node}  IN  @{bmc_nodes}
+    \  Validate Power Status Via XCAT  ${bmc_node}  ${poweron_flag}
+
+Power Off Group And Validate
+    [Documentation]  Power off all BMCs in group and validate.
+    [Tags]  Power_Off_Group_And_Validate
+
+    # Sample output of this keyword:
+    # XXX.XXX.XXX.XXX
+    # YYY.YYY.YYY.YYY
+    # ZZZ.ZZZ.ZZZ.ZZZ
+
+    ${nodes}=  Get List Of Nodes In Group  ${GROUP}
+    Should Not Be Empty  ${nodes}  msg=Empty node group list.
+    Power Off Via XCAT  ${GROUP}
+
+    # Validate power status by using group operation.
+    Validate group Power Status  ${GROUP}  ${poweroff_flag}
+
+    # List the BMC nodes.
+    @{bmc_nodes}=  Split String  ${nodes}
+
+    # Validate power status on each BMC node one by one.
+    : FOR  ${bmc_node}  IN  @{bmc_nodes}
+    \  Validate Power Status Via XCAT  ${bmc_node}  ${poweroff_flag}
 
 *** Keywords ***
 
