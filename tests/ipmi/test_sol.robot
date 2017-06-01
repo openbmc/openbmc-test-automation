@@ -15,7 +15,7 @@ Verify SOL During Boot
     [Tags]  Verify_SOL_During_Boot
 
     ${current_state}=  Get Host State Via External IPMI
-    Run Keyword If  '${current_state}' == 'On'
+    Run Keyword If  '${current_state}' == 'on'
     ...  Initiate Host PowerOff Via External IPMI
     Initiate Host Boot Via External IPMI  wait=${0}
 
