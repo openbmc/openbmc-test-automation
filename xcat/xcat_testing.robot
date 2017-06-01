@@ -49,8 +49,34 @@ Add Nodes To Group List
 
     # Add BMC nodes to group and validate.
     : FOR  ${bmc}  IN  @{BMC_LIST}
-    /  Add Nodes To Group  ${bmc}  ${GROUP}
-    /  Validate Node Added In Group  ${bmc}  ${GROUP}
+    \  Add Nodes To Group  ${bmc}  ${GROUP}
+    \  Validate Node Added In Group  ${bmc}  ${GROUP}
+
+Power On Group And Validate
+    [Documenation]  Power on group and validate.
+    [Tags]  Power_On_Group_And_Validate
+
+    ${nodes}=  Get List Of Nodes  ${GROUP}
+    Should Not Be Empty  ${nodes}  msg=Group is empty, Exit!
+    Power On Via XCAT  $Group}
+
+    # List the BMC nodes.
+    @{bmc_nodes}=  Split String  ${nodes}
+    : FOR ${bmc}  IN  @{bmc_nodes}
+    \  Validate Power Status Via XCAT  ${bmc}  ${poweron_flag}
+
+Power Off Group And Validate
+    [Documenation]  Power off group and validate.
+    [Tags]  Power_Off_Group_And_Validate
+
+    ${nodes}=  Get List Of Nodes  ${GROUP}
+    Should Not Be Empty  ${nodes}  msg=Group is empty, Exit!
+    Power Off Via XCAT  $Group}
+
+    # List the BMC nodes.
+    @{bmc_nodes}=  Split String  ${nodes}
+    : FOR ${bmc}  IN  @{bmc_nodes}
+    \  Validate Power Status Via XCAT  ${bmc}  ${poweroff_flag}
 
 *** Keywords ***
 
