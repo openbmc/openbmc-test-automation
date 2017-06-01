@@ -16,7 +16,7 @@ Suite Teardown      Close All Connections
 Zero Config
     [Documentation]   Validate Zero Config IP.
     ...               Factory-reset system and verify system comes up with Zero Config IP.
-    [Tag]             Zero_Config
+    [Tags]             Zero_Config
     Factory Reset
     Validate Zero Config IP   ${OPENBMC_HOST}
     Revert to Initial Setup   ${OPENBMC_HOST}
