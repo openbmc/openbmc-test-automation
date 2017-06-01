@@ -49,8 +49,49 @@ Add Nodes To Group List
 
     # Add BMC nodes to group and validate.
     : FOR  ${bmc}  IN  @{BMC_LIST}
-    /  Add Nodes To Group  ${bmc}  ${GROUP}
-    /  Validate Node Added In Group  ${bmc}  ${GROUP}
+    \  Add Nodes To Group  ${bmc}  ${GROUP}
+    \  Validate Node Added In Group  ${bmc}  ${GROUP}
+
+Power On Group And Validate
+    [Documentation]  Power on all BMCs in group and validate.
+    [Tags]  Power_On_Group_And_Validate
+
+    # Sample output of this keyword:
+    # XXX.XXX.XXX.XXX
+    # YYY.YYY.YYY.YYY
+    # ZZZ.ZZZ.ZZZ.ZZZ
+
+    ${nodes}=  Get List Of Nodes In Group  ${GROUP}
+    Should Not Be Empty  ${nodes}  msg=Group is empty, Exit!
+    Power On Via XCAT  ${GROUP}
+
+    # List the BMC nodes.
+
+    @{bmc_nodes}=  Split String  ${nodes}
+
+    # Validate power status on each BMC node one by one.
+    : FOR  ${bmc_node}  IN  @{bmc_nodes}
+    \  Validate Power Status Via XCAT  ${bmc_node}  ${poweron_flag}
+
+Power Off Group And Validate
+    [Documentation]  Power off all BMCs in group and validate.
+    [Tags]  Power_Off_Group_And_Validate
+
+    # Sample output of this keyword:
+    # XXX.XXX.XXX.XXX
+    # YYY.YYY.YYY.YYY
+    # ZZZ.ZZZ.ZZZ.ZZZ
+
+    ${nodes}=  Get List Of Nodes In Group  ${GROUP}
+    Should Not Be Empty  ${nodes}  msg=Group is empty, Exit!
+    Power Off Via XCAT  ${GROUP}
+
+    # List the BMC nodes.
+    @{bmc_nodes}=  Split String  ${nodes}
+
+    # Validate power status on each BMC node one by one.
+    : FOR  ${bmc_node}  IN  @{bmc_nodes}
+    \  Validate Power Status Via XCAT  ${bmc_node}  ${poweroff_flag}
 
 *** Keywords ***
 
@@ -71,6 +112,9 @@ Validate XCAT Setup
     @{BMC_LIST}=  Split To Lines  ${nodes}
     Log To Console  BMC nodes to be added:\n ${BMC_LIST}
     Set Suite Variable  @{BMC_LIST}
+
+    # GROUP should not be empty.
+    Should Not Be EMPTY  ${GROUP}  msg=Group does not exist.
 
 Validate Power Status Via XCAT
     [Documentation]  Validate power status.
