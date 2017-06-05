@@ -47,7 +47,7 @@ Login To OS
     # TODO: Generalize alias naming using openbmc/openbmc-test-automation#633
 
     Ping Host  ${os_host}
-    Open Connection  ${os_host}  alias=${alias_name}
+    SHLibrary.Open Connection  ${os_host}  alias=${alias_name}
     Login  ${os_username}  ${os_password}
 
 
