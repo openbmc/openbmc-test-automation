@@ -734,7 +734,7 @@ def run_boot(boot):
             del match_state['epoch_seconds']
             # Wait for the state to change in any way.
             st.wait_state(match_state, wait_time=state_change_timeout,
-                          interval="3 seconds", invert=1)
+                          interval="10 seconds", invert=1)
 
         gp.qprintn()
         if boot_table[boot]['end']['chassis'] == "Off":
@@ -742,7 +742,7 @@ def run_boot(boot):
         else:
             boot_timeout = power_on_timeout
         st.wait_state(boot_table[boot]['end'], wait_time=boot_timeout,
-                      interval="3 seconds")
+                      interval="10 seconds")
 
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = \
