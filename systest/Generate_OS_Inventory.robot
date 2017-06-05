@@ -8,6 +8,7 @@ Documentation      This module is for generating an inventory file using lshw
 Library            String
 Library            Collections
 Library            OperatingSystem
+Resource           ../syslib/utils_os.robot
 
 ***Variables***
 # List of I/O Devices to Collect
@@ -15,84 +16,88 @@ Library            OperatingSystem
 ...                network  printer  tape
 
 # Paths of the JSON and YAML files
-${json_file_path}  inventory.json
-${yaml_file_path}  inventory.yaml
+${json_tmp_file_path}   /tmp/inventory.json
+${json_file_path}       ${EXECDIR}${/}data${/}os_inventory.json
+${yaml_file_path}       inventory.yaml
 
 ***Test Case***
 
 Create YAML Inventory File
     [Documentation]  Create a JSON inventory file, and make a YAML copy.
     [Tags]  Create_YAML_Inventory_File
+    Login To OS
     Compile Inventory JSON
-    RUN  json2yaml ${json_file_path} ${yaml_file_path}
+    Run  json2yaml ${json_tmp_file_path} ${yaml_file_path}
+    # Format to JSON pretty print to file.
+    Run  python -m json.tool ${json_tmp_file_path} > ${json_file_path}
 
 ***Keywords***
 
 Compile Inventory JSON
     [Documentation]  Compile the Inventory into a JSON file.
-    Create File  ${json_file_path}
-    Write New JSON List  ${json_file_path}  Inventory
-    Retrieve HW Info And Write  processor  ${json_file_path}
-    Retrieve HW Info And Write  memory  ${json_file_path}
-    Retrieve HW Info And Write List  ${I/O}  ${json_file_path}  I/O  last
-    Close New JSON List  ${json_file_path}
+    Create File  ${json_tmp_file_path}
+    Write New JSON List  ${json_tmp_file_path}  Inventory
+    Retrieve HW Info And Write  processor  ${json_tmp_file_path}
+    Retrieve HW Info And Write  memory  ${json_tmp_file_path}
+    Retrieve HW Info And Write List  ${I/O}  ${json_tmp_file_path}  I/O  last
+    Close New JSON List  ${json_tmp_file_path}
 
 Write New JSON List
     [Documentation]  Start a new JSON list element in file.
-    [Arguments]  ${json_file_path}  ${json_field_name}
+    [Arguments]  ${json_tmp_file_path}  ${json_field_name}
     # Description of argument(s):
-    # json_file_path   Name of file to write to.
+    # json_tmp_file_path   Name of file to write to.
     # json_field_name  Name to give json list element.
-    Append to File  ${json_file_path}  { "${json_field_name}" : [
+    Append to File  ${json_tmp_file_path}  { "${json_field_name}" : [
 
 Close New JSON List
     [Documentation]  Close JSON list element in file.
-    [Arguments]  ${json_file_path}
+    [Arguments]  ${json_tmp_file_path}
     # Description of argument(s):
-    # json_file_path  Path of file to write to.
-    Append to File  ${json_file_path}  ]}
+    # json_tmp_file_path  Path of file to write to.
+    Append to File  ${json_tmp_file_path}  ]}
 
 Retrieve HW Info And Write
     [Documentation]  Retrieve and write info, add a comma if not last item.
-    [Arguments]  ${class}  ${json_file_path}  ${last}=false
+    [Arguments]  ${class}  ${json_tmp_file_path}  ${last}=false
     # Description of argument(s):
     # class           Device class to retrieve with lshw.
-    # json_file_path  Path of file to write to.
+    # json_tmp_file_path  Path of file to write to.
     # last            Is this the last element in the parent JSON?
-    Write New JSON List  ${json_file_path}  ${class}
+    Write New JSON List  ${json_tmp_file_path}  ${class}
     ${output} =  Retrieve Hardware Info  ${class}
     ${output} =  Clean Up String  ${output}
     Run Keyword if  ${output.__class__ is not type(None)}
-    ...  Append To File  ${json_file_path}  ${output}
-    Close New JSON List  ${json_file_path}
+    ...  Append To File  ${json_tmp_file_path}  ${output}
+    Close New JSON List  ${json_tmp_file_path}
     Run Keyword if  '${last}' == 'false'
-    ...  Append to File  ${json_file_path}  ,
+    ...  Append to File  ${json_tmp_file_path}  ,
 
 Retrieve HW Info And Write List
     [Documentation]  Does a Retrieve/Write with a list of classes and
     ...              encapsulates them into one large JSON element.
-    [Arguments]  ${list}  ${json_file_path}  ${json_field_name}  ${last}=false
+    [Arguments]  ${list}  ${json_tmp_file_path}  ${json_field_name}  ${last}=false
     # Description of argument(s):
     # list             The list of devices classes to retrieve with lshw.
-    # json_file_path   Path of file to write to.
+    # json_tmp_file_path   Path of file to write to.
     # json_field_name  Name of the JSON element to encapsulate this list.
     # last             Is this the last element in the parent JSON?
-    Write New JSON List  ${json_file_path}  ${json_field_name}
+    Write New JSON List  ${json_tmp_file_path}  ${json_field_name}
     : FOR  ${class}  IN  @{list}
     \  ${tail}  Get From List  ${list}  -1
     \  Run Keyword if  '${tail}' == '${class}'
-    \  ...  Retrieve HW Info And Write  ${class}  ${json_file_path}  true
-    \  ...  ELSE  Retrieve HW Info And Write  ${class}  ${json_file_path}
-    Close New JSON List  ${json_file_path}
+    \  ...  Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}  true
+    \  ...  ELSE  Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}
+    Close New JSON List  ${json_tmp_file_path}
     Run Keyword if  '${last}' == 'false'
-    ...  Append to File  ${json_file_path}  ,
+    ...  Append to File  ${json_tmp_file_path}  ,
 
 Retrieve Hardware Info
     [Documentation]  Retrieves the lshw output of the device class as JSON.
     [Arguments]  ${class}
     # Description of argument(s):
     # class  Device class to retrieve with lshw.
-    ${output} =  Run  lshw -c ${class} -json
+    ${output} =  Execute Command On OS  lshw -c ${class} -json
     ${output} =  Verify JSON string  ${output}
     [Return]  ${output}
 
