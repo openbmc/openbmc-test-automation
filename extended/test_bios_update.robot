@@ -59,7 +59,7 @@ Prepare BMC For Update
 
     # Call 'OBMC Boot Test' to do a 'REST Power Off', if needed.
     Run Key U  OBMC Boot Test \ REST Power Off
-    Run Key  Clear BMC Record Log
+    Run Key  Delete Error logs
 
 Update PNOR Image
     [Documentation]  Copy the PNOR image to the BMC /tmp dir and flash it.
