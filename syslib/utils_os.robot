@@ -47,7 +47,7 @@ Login To OS
     # TODO: Generalize alias naming using openbmc/openbmc-test-automation#633
 
     Ping Host  ${os_host}
-    Open Connection  ${os_host}  alias=${alias_name}
+    SSHLibrary.Open Connection  ${os_host}  alias=${alias_name}
     Login  ${os_username}  ${os_password}
 
 
@@ -168,6 +168,9 @@ Check For Errors On OS Dmesg Log
 
 Collect NVIDIA Log File
     [Documentation]  Collect ndivia-smi command output.
+    [Arguments]  ${suffix}=
+    # Description of argument(s):
+    # suffix     String name to append.
 
     # Collects the output of ndivia-smi cmd output.
     # TODO: GPU current temperature threshold check.
@@ -206,7 +209,8 @@ Collect NVIDIA Log File
 
     ${nvidia_out}=  Execute Command On BMC  nvidia-smi
     Write Log Data To File
-    ...  ${nvidia_out}  ${htx_log_dir_path}/${OS_HOST}_${cur_datetime}.nvidia
+    ...  ${nvidia_out}
+    ...  ${htx_log_dir_path}/${OS_HOST}_${cur_datetime}.nvidia_${suffix}
 
 
 Pre Test Case Execution
