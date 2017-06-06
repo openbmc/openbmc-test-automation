@@ -429,7 +429,7 @@ Create OS Console Command String
     Should Be Equal  ${rc}  ${0}  msg=${output}\n
 
     ${cmd_buf}=  Catenate  ssh_pw ${OPENBMC_PASSWORD} -p 2200
-    ...  ${OPENBMC_USERNAME}@${OPENBMC_HOST}
+    ...  -o "StrictHostKeyChecking no" ${OPENBMC_USERNAME}@${OPENBMC_HOST}
 
     [Return]  ${cmd_buf}
 
