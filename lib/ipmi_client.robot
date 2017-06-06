@@ -139,8 +139,7 @@ Activate SOL Via IPMI
     ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
     ...  ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}sol activate
 
-    Run Process  ${ipmi_cmd}  shell=True  stdout=${file_path}
-    ...  timeout=5s  on_timeout=continue
+    Start Process  ${ipmi_cmd}  shell=True  stdout=${file_path}
 
 
 Deactivate SOL Via IPMI
