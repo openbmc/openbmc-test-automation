@@ -1334,8 +1334,8 @@ def get_var_value(var_value=None,
         var_name = get_arg_name(None, 1, 2)
 
     if robot_env:
-        var_value = int(BuiltIn().get_variable_value("${" + var_name + "}",
-                        default))
+        var_value = BuiltIn().get_variable_value("${" + var_name + "}",
+                                                 default)
     else:
         var_value = getattr(__builtin__, var_name, default)
 
@@ -1488,14 +1488,14 @@ for func_name in func_names:
 
     # Define the "q" (i.e. quiet) version of the given print function.
     func_def[0] = "def q" + func_name + "(*args):"
-    func_def[1] = "    if get_var_value(None, 0, \"quiet\"): return"
+    func_def[1] = "    if int(get_var_value(None, 0, \"quiet\")): return"
     pgm_definition_string = '\n'.join(func_def)
     gp_debug_print(pgm_definition_string)
     exec(pgm_definition_string)
 
     # Define the "d" (i.e. debug) version of the given print function.
     func_def[0] = "def d" + func_name + "(*args):"
-    func_def[1] = "    if not get_var_value(None, 0, \"debug\"): return"
+    func_def[1] = "    if not int(get_var_value(None, 0, \"debug\")): return"
     pgm_definition_string = '\n'.join(func_def)
     gp_debug_print(pgm_definition_string)
     exec(pgm_definition_string)
