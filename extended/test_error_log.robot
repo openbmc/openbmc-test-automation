@@ -7,10 +7,10 @@ Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 
 Suite Setup         Run Keywords  Verify logging-test  AND
-...                 Clear Existing Error Logs
+...                 Delete Error Logs
 Test Setup          Open Connection And Log In
 Test Teardown       Close All Connections
-Suite Teardown      Clear Existing Error Logs
+Suite Teardown      Delete Error Logs
 
 *** Test Cases ***
 
@@ -72,7 +72,7 @@ Create Test Error And Verify Resolved Field
     # In this test context we are making sure "Resolved" field is "0"
     # by default.
 
-    Delete Error logs
+    Delete Error Logs
     Create Test Error Log
     ${resolved}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Resolved
     Should Be True  ${resolved} == 0
@@ -106,14 +106,14 @@ Create Test Errors And Verify Time Stamp
     #    "associations": []
     # },
 
-    Delete Error logs
+    Delete Error Logs
     Create Test Error Log
     Create Test Error Log
     # The error log generated is associated with the epoc time and unique
     # for every error and in increasing time stamp.
     ${time_stamp1}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Timestamp
     ${time_stamp2}=  Read Attribute  ${BMC_LOGGING_ENTRY}${2}  Timestamp
-    Should Be True ${time_stamp2} > ${time_stamp1}
+    Should Be True  ${time_stamp2} > ${time_stamp1}
 
 Create Test Error Log And Delete
     [Documentation]  Create an error log and delete it.
@@ -196,6 +196,6 @@ Verify Test Error Log
 Delete Error Logs And Verify
     [Documentation]  Delete all error logs and verify.
 
-    Delete Error logs
+    Delete Error Logs
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
