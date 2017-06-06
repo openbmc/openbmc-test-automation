@@ -140,7 +140,7 @@ Activate SOL Via IPMI
     ...  ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}sol activate
 
     Run Process  ${ipmi_cmd}  shell=True  stdout=${file_path}
-    ...  timeout=5s  on_timeout=continue
+    ...  timeout=5s  alias=sol_proc  on_timeout=continue
 
 
 Deactivate SOL Via IPMI
@@ -156,7 +156,8 @@ Deactivate SOL Via IPMI
     ...  ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}sol deactivate
 
     ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
-    Run Keyword If  ${rc} > 0  Return From Keyword  ${output}
+    Run Keyword If  ${rc} > 0  Run Keywords
+    ...  Terminate Process  sol_proc  AND  Return From Keyword  ${output}
 
     ${rc}  ${output}=  Run and Return RC and Output  cat ${file_path}
     Should Be Equal  ${rc}  ${0}  msg=${output}
