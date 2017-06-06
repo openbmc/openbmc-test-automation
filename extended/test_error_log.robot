@@ -7,10 +7,10 @@ Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 
 Suite Setup         Run Keywords  Verify logging-test  AND
-...                 Clear Existing Error Logs
+...                 Delete Error logs
 Test Setup          Open Connection And Log In
 Test Teardown       Close All Connections
-Suite Teardown      Clear Existing Error Logs
+Suite Teardown      Delete Error logs
 
 *** Test Cases ***
 
@@ -113,7 +113,7 @@ Create Test Errors And Verify Time Stamp
     # for every error and in increasing time stamp.
     ${time_stamp1}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Timestamp
     ${time_stamp2}=  Read Attribute  ${BMC_LOGGING_ENTRY}${2}  Timestamp
-    Should Be True ${time_stamp2} > ${time_stamp1}
+    Should Be True  ${time_stamp2} > ${time_stamp1}
 
 Create Test Error Log And Delete
     [Documentation]  Create an error log and delete it.
