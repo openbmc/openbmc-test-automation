@@ -55,3 +55,5 @@
 -e Test_Heartbeat_LED_And_Verify_Via_REST
 -e Test_Beep_LED_And_Verify_Via_REST
 -e Test_Identify_LED_And_Verify_Via_REST
+# Network tests for xyz interface.
+-e Network_Test
