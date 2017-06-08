@@ -16,6 +16,7 @@ INVENTORY_URI = OPENBMC_BASE_URI + 'inventory/'
 USER_MANAGER_URI = OPENBMC_BASE_URI + 'UserManager/'
 NETWORK_MANAGER_URI = OPENBMC_BASE_URI + 'NetworkManager/'
 TIME_MANAGER_URI = OPENBMC_BASE_URI + 'TimeManager/'
+XYZ_NETWORK_MANAGER = '/xyz/openbmc_project/network/'
 
 # State Manager base variables.
 BMC_REBOOT_TRANS = 'xyz.openbmc_project.State.BMC.Transition.Reboot'
@@ -43,9 +44,6 @@ BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
 # Software manager version
 SOFTWARE_VERSION_URI = '/xyz/openbmc_project/software/'
 ACTIVE = 'xyz.openbmc_project.Software.Activation.Activations.Active'
-READY = 'xyz.openbmc_project.Software.Activation.Activations.Ready'
-INVALID = 'xyz.openbmc_project.Software.Activation.Activations.Invalid'
-ACTIVATING = 'xyz.openbmc_project.Software.Activation.Activations.Activating'
 
 # Inventory URI
 HOST_INVENTORY_URI = '/xyz/openbmc_project/inventory/'
