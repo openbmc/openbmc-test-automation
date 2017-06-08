@@ -10,8 +10,6 @@ Suite Setup         Run Keywords  Verify callout-test  AND
 ...                 Boot Host  AND
 ...                 Clear Existing Error Logs
 Test Setup          Pre Test Case Execution
-Test Setup          Open Connection And Log In  AND
-...                 Delete Error logs
 Test Teardown       Close All Connections
 Suite Teardown      Clear Existing Error Logs
 
