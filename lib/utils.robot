@@ -964,3 +964,43 @@ Get LED State XYZ
 
     ${state}=  Read Attribute  ${LED_GROUPS_URI}${led_name}  Asserted
     [Return]  ${state}
+
+Get System IP And Prefix_Length
+    [Documentation]  Get system IP address and prefix length.
+
+    # Get system IP address and prefix length details using "ip addr"
+    # Sample Output of "ip addr":
+    # 1: eth0: <BROADCAST,MULTIAST> mtu 1500 qdisc mq state UP qlen 1000
+    #     link/ether xx:xx:xx:xx:xx:xx brd ff:ff:ff:ff:ff:ff
+    #     inet xx.xx.xx.xx/24 brd xx.xx.xx.xx scope global eth0
+
+    ${cmd_output}=  Execute Command  /sbin/ip addr | grep eth0
+
+    # Get line having IP address details.
+    ${lines}=  Get Lines Containing String  ${cmd_output}  inet
+
+    # List IP address details.
+    @{ip_components}=  Split To Lines  ${lines}
+
+    @{ip_n_prefixes}=  Create List
+
+    # Get all IP addresses and prefix lengths on system.
+    :FOR  ${ip_component}  IN  @{ip_components}
+    \  @{if_info}=  Split String  ${ip_component}
+    \  Log To Console  ${if_info[1]}
+    \  ${ip_n_prefix}=  Get From List  ${if_info}  1
+    \  Append To List  ${ip_n_prefixes}  ${ip_n_prefix}
+
+    [Return]  ${ip_n_prefixes}
+
+Get System Route details
+    [Documentation]  Get system route details.
+
+    # Sample output of "ip route":
+    # default via 9.3.20.1 dev eth0
+    # 9.3.20.0/23 dev eth0  src 9.3.21.42
+    # 10.0.6.0/24 dev eth0  src 10.0.6.6
+
+    ${cmd_output}=  Execute Command  /sbin/ip route
+
+    [Return]  ${cmd_output}
