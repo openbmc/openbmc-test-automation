@@ -42,3 +42,6 @@
 -e Test_Power_LED_And_Verify_Via_REST
 -e Test_Fault_LED_And_Verify_Via_REST
 -e Verify_Enclosure_Fault_LED_On_Assertion
+# Network tests for xyz interface.
+# https://github.com/openbmc/openbmc-test-automation/issues/729
+-e Network_Test
