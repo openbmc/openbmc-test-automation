@@ -3,6 +3,7 @@ Documentation    Stress the system using HTX exerciser.
 
 Resource         ../syslib/utils_os.robot
 
+Suite Setup     Run Key  Start SOL Console Logging
 Test Setup      Pre Test Case Execution
 Test Teardown   Post Test Case Execution
 
@@ -50,6 +51,10 @@ Start HTX Exerciser
 
     Power Off Host
 
+    # Close all SSH and REST active sessions.
+    Close All Connections
+    Flush REST Sessions
+
     Rprint Timen  HTX Test ran for: ${HTX_DURATION}
 
 
@@ -70,6 +75,10 @@ Post Test Case Execution
     # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
     Run Keyword If  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
     ...  Shutdown HTX Exerciser
+
+    ${keyword_buf}=  Catenate  Stop SOL Console Logging
+    ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
+    Run Key  ${keyword_buf}
 
     FFDC On Test Case Fail
     Close All Connections
