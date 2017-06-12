@@ -32,8 +32,6 @@
 -e Test_Correct_Reservation_ID
 #https://github.com/openbmc/openbmc-test-automation/issues/396
 -e NetworkManager
-# NA until support for debug tarball is enabled
--e Create_Test_Error_Callout_And_Verify
 # NA until VPD is programmed on systems
 -e Verify_Chassis_Motherboard_Properties
 #https://github.com/openbmc/openbmc-test-automation/issues/546
