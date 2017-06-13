@@ -245,6 +245,130 @@ Check Air Or Water Cooled
     ...  Fail  Neither AirCooled or WaterCooled.
 
 
+CPU0 Not Present
+    [Documentation]  Verify CPU0 "Present" and toggle setting value.
+    [Tags]  CPU0_Not_Present
+    [Template]  Toggle And Revert Attribute
+
+    # Example:
+    # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
+    # {
+    #     "BuildDate": "",
+    #     "Cached": 0,
+    #     "FieldReplaceable": 1,
+    #     "Functional": 1,
+    #     "Manufacturer": "IBM",
+    #     "Model": "",
+    #     "PartNumber": "01HL982",
+    #     "Present": 0,
+    #     "PrettyName": "PROCESSOR MODULE",
+    #     "SerialNumber": "YA3933817176",
+    #     "Version": "10"
+    # }
+
+    #-------------------------------------------------------------------------
+    # URI path of the inventory object                       Attribute
+    #-------------------------------------------------------------------------
+    ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0    Present
+
+
+DIMM0 Not Present
+    [Documentation]  Verify DIMM0 "Present" and toggle setting value.
+    [Tags]  DIMM0_Not_Present
+    [Template]  Toggle And Revert Attribute
+
+    # Example:
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0
+    #  {
+    #     "BuildDate": "",
+    #     "Cached": 0,
+    #     "FieldReplaceable": 1,
+    #     "Functional": 1,
+    #     "Manufacturer": "0xce80",
+    #     "Model": "M393A1G40EB2-CTD    ",
+    #     "PartNumber": "",
+    #     "Present": 0,
+    #     "PrettyName": "0x0c",
+    #     "SerialNumber": "0x030a0e76",
+    #     "Version": "0x00"
+    #  }
+
+    #-------------------------------------------------------------------------
+    # URI path of the inventory object                       Attribute
+    #-------------------------------------------------------------------------
+    ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0   Present
+
+
+Fan0 Not Present
+    [Documentation]  Verify FAN0 "Present" set to "0".
+    [Tags]  Fan0_Not_Present
+    [Template]  Toggle And Revert Attribute
+
+    # Example:
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/fan0
+    #  {
+    #     "Functional": 1,
+    #     "Present": 0,
+    #     "PrettyName": "fan0"
+    #  }
+
+    #-------------------------------------------------------------------------
+    # URI path of the inventory object                       Attribute
+    #-------------------------------------------------------------------------
+    ${HOST_INVENTORY_URI}/system/chassis/motherboard/fan0    Present
+
+DIMM0 Cached
+    [Documentation]  Verify DIMM0 "Cached" is set to "1".
+    [Tags]  DIMM0_Cached
+    [Template]  Toggle And Revert Attribute
+
+    # Example:
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0
+    #  {
+    #     "BuildDate": "",
+    #     "Cached": 1,
+    #     "FieldReplaceable": 1,
+    #     "Functional": 1,
+    #     "Manufacturer": "0xce80",
+    #     "Model": "M393A1G40EB2-CTD    ",
+    #     "PartNumber": "",
+    #     "Present": 0,
+    #     "PrettyName": "0x0c",
+    #     "SerialNumber": "0x030a0e76",
+    #     "Version": "0x00"
+    #  }
+
+    #-------------------------------------------------------------------------
+    # URI path of the inventory object                       Attribute
+    #-------------------------------------------------------------------------
+    ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0   Cached
+
+
+Reboot Host And Verify Inventory States
+    [Documentation]  Validate cpu0,dimm0 and fan0 states.
+    [Tags]  Reboot_Host_And_Verify_Inventory_States
+
+    # Read current "Cached" value.
+    ${original_value}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+
+    ${value}=  Toggle  ${original_value}
+
+    # Set attribute value.
+    ${args}=  Create Dictionary  data=${True}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+    ...  data=${args}
+
+    # Reboot Host.
+    Initiate Host Reboot
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is System State Host Booted
+
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+    Should Be True  ${present}==${original_value}
+
 *** Keywords ***
 
 Test Suite Setup
@@ -329,7 +453,7 @@ Validate FRU Properties Fields
 
 Check URL Property If Functional
     [Arguments]  ${url_path}
-    # Description of arguments:
+    # Description of argument(s):
     # url_path  Full url path of the inventory object.
     #           Example: DIMM / core property url's
     # /xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0
@@ -347,3 +471,36 @@ Verify Inventory List Before And After Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
     ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
     Lists Should Be Equal  ${inv_before}  ${inv_after}
+
+
+Toggle And Revert Attribute
+    [Documentation]  Verify given URI attribute and toggle setting value.
+    [Arguments]  ${url_path}  ${attribute}
+
+    # Description of argument(s):
+    # url_path    Full url path of the inventory object.
+    # attribute   Attribute to the object.
+
+    # Example:
+    # Check if "Present" and toggle values
+    #   - Set "Present" to 0, verify "Present" is 0
+    #   - Set "Present" to 1, verify "Present" is 1
+
+    # Read current attribute value.
+    ${present}=  Read Attribute  ${url_path}  ${attribute}
+
+    ${value}=  Toggle  ${present}
+
+    # Set attribute value.
+    ${args}=  Create Dictionary  data=${value}
+    Write Attribute  ${url_path}  ${attribute}  data=${args}
+    ${present}=  Read Attribute  ${url_path}  ${attribute}
+    Should Be True  ${present}==${value}
+
+    # Revert to original setting.
+    ${value}=  Toggle  ${present}
+    ${args}=  Create Dictionary  data=${value}
+
+    Write Attribute  ${url_path}  ${attribute}  data=${args}
+    ${present}=  Read Attribute  ${url_path}  ${attribute}
+    Should Be True  ${present}==${value}
