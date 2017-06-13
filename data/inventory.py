@@ -4,6 +4,11 @@ inventory_dict = {
         "Present",
         "Functional"
     ],
+    "fan":[
+        "PrettyName",
+        "Present",
+        "Functional"
+    ],
     "fru":[
         "PrettyName",
         "Present",
