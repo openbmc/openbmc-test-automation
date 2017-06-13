@@ -15,6 +15,7 @@ Test Teardown     FFDC On Test Case Fail
 
 Force Tags        Inventory
 
+
 *** Test Cases ***
 
 Verify System Inventory Path
@@ -214,6 +215,83 @@ Verify Fan Functional State
     ...  msg=${fan_uri} is functional but "Present" is not set.
 
 
+CPU0 Not Present
+    [Documentation]  Set the "Present" CPU0 property to "False" and verify.
+    [Tags]  CPU0_Not_Present
+
+    ${args}=  Create Dictionary   data=${False}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+    ...  data=${args}
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+    Should Not Be True  ${present}
+
+
+DIMM0 Not Present
+    [Documentation]  Set the "Present" dimm0 property to "False" and verify.
+    [Tags]  DIMM0_Not_Present
+
+    ${args}=  Create Dictionary   data=${False}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Present
+    ...  data=${args}
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Present
+    Should Not Be True  ${present}
+
+
+Fan0 Not Present
+    [Documentation]  Set the "Present" fan0 property to "False" and verify.
+    [Tags]  Fan0_Not_Present
+
+    ${args}=  Create Dictionary   data=${False}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/fan0  Present
+    ...  data=${args}
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/fan0  Present
+    Should Not Be True  ${present}
+
+
+DIMM0 Cached
+    [Documentation]  Set the "Cache" dimm0 property to True" and verify.
+    [Tags]  DIMM0_Cached
+
+    ${args}=  Create Dictionary   data=${True}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Cached
+    ...  data=${args}
+    ${cached}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Cached
+    Should Be True  ${cached}
+
+
+Reboot Host And Verify Inventory States
+    [Documentation]  Validate cpu0,dimm0 and fan0 states.
+    [Tags]  Reboot_Host_And_Verify_Inventory_States
+
+    Initiate Host Reboot
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is System State Host Booted
+
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+    Should Be True  ${present}
+
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Present
+    Should Be True  ${present}
+
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/fan0  Present
+    Should Be True  ${present}
+
+    ${cached}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Cached
+    Should Not Be True  ${cached}
+
+
 *** Keywords ***
 
 Test Suite Setup
@@ -302,3 +380,4 @@ Check URL Property If Functional
     # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0/core0
     ${state}=  Read Attribute  ${url_path}  Functional
     Should Be True  ${state}
+
