@@ -253,3 +253,18 @@ def list_to_set(fru_list=""):
     return set(fru_list)
 
 ###############################################################################
+
+
+###############################################################################
+def toggle(value):
+
+    r"""
+    Toggle boolean value and return it.
+
+    # Description of argument(s):
+    value   Boolean value.
+    """
+
+    return value ^ True
+
+###############################################################################
