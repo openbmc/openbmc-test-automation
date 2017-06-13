@@ -245,6 +245,192 @@ Check Air Or Water Cooled
     ...  Fail  Neither AirCooled or WaterCooled.
 
 
+CPU0 Not Present
+    [Documentation]  Set the "Present" CPU0 property to "False" and verify.
+    [Tags]  CPU0_Not_Present
+
+    # Example:
+    # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
+    # {
+    #     "BuildDate": "",
+    #     "Cached": 0,
+    #     "FieldReplaceable": 1,
+    #     "Functional": 1,
+    #     "Manufacturer": "IBM",
+    #     "Model": "",
+    #     "PartNumber": "01HL982",
+    #     "Present": 0,
+    #     "PrettyName": "PROCESSOR MODULE",
+    #     "SerialNumber": "YA3933817176",
+    #     "Version": "10"
+    # }
+
+    # Read current "Present" value.
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+
+    ${value}=  Toggle Bool  ${present}
+
+    # Set attribute value.
+    ${args}=  Create Dictionary   data=${value}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+    ...  data=${args}
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+    Should Be True  ${present}==${value}
+
+    # Revert to original setting.
+    ${value}=  Toggle Bool  ${present}
+    ${args}=  Create Dictionary   data=${value}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+    ...  data=${args}
+
+
+DIMM0 Not Present
+    [Documentation]  Set the "Present" dimm0 property to "False" and verify.
+    [Tags]  DIMM0_Not_Present
+
+    # Example:
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0
+    #  {
+    #     "BuildDate": "",
+    #     "Cached": 0,
+    #     "FieldReplaceable": 1,
+    #     "Functional": 1,
+    #     "Manufacturer": "0xce80",
+    #     "Model": "M393A1G40EB2-CTD    ",
+    #     "PartNumber": "",
+    #     "Present": 0,
+    #     "PrettyName": "0x0c",
+    #     "SerialNumber": "0x030a0e76",
+    #     "Version": "0x00"
+    #  }
+
+    # Read current "Present" value.
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Present
+
+    ${value}=  Toggle Bool  ${present}
+
+    # Set attribute value.
+    ${args}=  Create Dictionary   data=${False}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Present
+    ...  data=${args}
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Present
+    Should Be True  ${present}==${value}
+
+    # Revert to original setting.
+    ${value}=  Toggle Bool  ${present}
+    ${args}=  Create Dictionary   data=${value}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Present
+    ...  data=${args}
+
+Fan0 Not Present
+    [Documentation]  Set the "Present" fan0 property to "False" and verify.
+    [Tags]  Fan0_Not_Present
+
+    # Example:
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/fan0
+    #  {
+    #     "Functional": 1,
+    #     "Present": 0,
+    #     "PrettyName": "fan0"
+    #  }
+
+    # Read current "Present" value.
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/fan0  Present
+
+    ${value}=  Toggle Bool  ${present}
+
+    # Set attribute value.
+    ${args}=  Create Dictionary   data=${False}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/fan0  Present
+    ...  data=${args}
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/fan0  Present
+    Should Not Be True  ${present}
+
+    # Revert to original setting.
+    ${value}=  Toggle Bool  ${present}
+    ${args}=  Create Dictionary   data=${value}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/fan0  Present
+    ...  data=${args}
+
+DIMM0 Cached
+    [Documentation]  Set the "Cache" dimm0 property to "True" and verify.
+    [Tags]  DIMM0_Cached
+
+    # Example:
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0
+    #  {
+    #     "BuildDate": "",
+    #     "Cached": 1,
+    #     "FieldReplaceable": 1,
+    #     "Functional": 1,
+    #     "Manufacturer": "0xce80",
+    #     "Model": "M393A1G40EB2-CTD    ",
+    #     "PartNumber": "",
+    #     "Present": 0,
+    #     "PrettyName": "0x0c",
+    #     "SerialNumber": "0x030a0e76",
+    #     "Version": "0x00"
+    #  }
+
+    # Read current "Cached" value.
+    ${cached}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Cached
+
+    ${value}=  Toggle Bool  ${cached}
+
+    # Set attribute value.
+    ${args}=  Create Dictionary   data=${True}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Cached
+    ...  data=${args}
+    ${cached}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Cached
+    Should Be True  ${cached}
+
+    # Revert to original setting.
+    ${value}=  Toggle Bool  ${Cached}
+    ${args}=  Create Dictionary   data=${value}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm0  Cached
+    ...  data=${args}
+
+Reboot Host And Verify Inventory States
+    [Documentation]  Validate cpu0,dimm0 and fan0 states.
+    [Tags]  Reboot_Host_And_Verify_Inventory_States
+
+    # Read current "Cached" value.
+    ${original_value}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+
+    ${value}=  Toggle Bool  ${original_value}
+
+    # Set attribute value.
+    ${args}=  Create Dictionary   data=${True}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+    ...  data=${args}
+
+    # Reboot Host.
+    Initiate Host Reboot
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is System State Host Booted
+
+    ${present}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/cpu0  Present
+    Should Be True  ${present}==${original_value}
+
 *** Keywords ***
 
 Test Suite Setup
