@@ -55,8 +55,8 @@ Test Power LED And Verify Via REST
 Test Fault LED And Verify Via REST
     [Documentation]  Turn On/Off fault LED and verify via REST.
     # LED Name  LED State
-    fault       On
-    fault       Off
+    rear_fault       On
+    rear_fault       Off
 
     [Tags]  Test_Fault_LED_And_Verify_Via_REST
     [Template]  Set System LED State
