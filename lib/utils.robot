@@ -964,3 +964,14 @@ Get LED State XYZ
 
     ${state}=  Read Attribute  ${LED_GROUPS_URI}${led_name}  Asserted
     [Return]  ${state}
+
+
+Get BMC Version
+    [Documentation]  Returns BMC version from /etc/os-release.
+    ...              e.g. "v1.99.6-141-ge662190"
+
+    Open Connection And Log In
+    ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '='
+    ${output}=  Execute Command On BMC  ${cmd}
+    [Return]  ${output}
+
