@@ -137,26 +137,26 @@ def get_mtr_report(host=""):
     Example result:
 
     report:
-      report[v325vrrp9-41-164-2.aus.stgla]:
-        report[v325vrrp9-41-164-2.aus.stgla][row_num]:  1
-        report[v325vrrp9-41-164-2.aus.stgla][host]:     v325vrrp9-41-164-2.aus.stgla
-        report[v325vrrp9-41-164-2.aus.stgla][loss]:     0.0
-        report[v325vrrp9-41-164-2.aus.stgla][snt]:      10
-        report[v325vrrp9-41-164-2.aus.stgla][last]:     0.2
-        report[v325vrrp9-41-164-2.aus.stgla][avg]:      3.5
-        report[v325vrrp9-41-164-2.aus.stgla][best]:     0.2
-        report[v325vrrp9-41-164-2.aus.stgla][wrst]:     32.5
-        report[v325vrrp9-41-164-2.aus.stgla][stdev]:    10.2
-      report[beye6.aus.stglabs.ibm.com]:
-        report[beye6.aus.stglabs.ibm.com][row_num]:     2
-        report[beye6.aus.stglabs.ibm.com][host]:        beye6.aus.stglabs.ibm.com
-        report[beye6.aus.stglabs.ibm.com][loss]:        0.0
-        report[beye6.aus.stglabs.ibm.com][snt]:         10
-        report[beye6.aus.stglabs.ibm.com][last]:        0.5
-        report[beye6.aus.stglabs.ibm.com][avg]:         0.5
-        report[beye6.aus.stglabs.ibm.com][best]:        0.5
-        report[beye6.aus.stglabs.ibm.com][wrst]:        0.5
-        report[beye6.aus.stglabs.ibm.com][stdev]:       0.0
+      report[host_dummy-dnsname.com]:
+        report[host_dummy-dnsname.com][row_num]:  1
+        report[host_dummy-dnsname.com][host]:     host_dummy-dnsname.com
+        report[host_dummy-dnsname.com][loss]:     0.0
+        report[host_dummy-dnsname.com][snt]:      10
+        report[host_dummy-dnsname.com][last]:     0.2
+        report[host_dummy-dnsname.com][avg]:      3.5
+        report[host_dummy-dnsname.com][best]:     0.2
+        report[host_dummy-dnsname.com][wrst]:     32.5
+        report[host_dummy-dnsname.com][stdev]:    10.2
+      report[bmc-dummy-dnsname.com]:
+        report[bmc-dummy-dnsname.com][row_num]:     2
+        report[bmc-dummy-dnsname.com][host]:        bmc-dummy-dnsname.com
+        report[bmc-dummy-dnsname.com][loss]:        0.0
+        report[bmc-dummy-dnsname.com][snt]:         10
+        report[bmc-dummy-dnsname.com][last]:        0.5
+        report[bmc-dummy-dnsname.com][avg]:         0.5
+        report[bmc-dummy-dnsname.com][best]:        0.5
+        report[bmc-dummy-dnsname.com][wrst]:        0.5
+        report[bmc-dummy-dnsname.com][stdev]:       0.0
 
     Description of arguments:
     host   The DNS name or IP address to be passed to the mtr command.
@@ -209,7 +209,7 @@ def get_mtr_row(host=""):
 
     row:
       row[row_num]:              2
-      row[host]:                 beye6.aus.stglabs.ibm.com
+      row[host]:                 bmc-dummy-dnsname.com
       row[loss]:                 0.0
       row[snt]:                  10
       row[last]:                 0.5
