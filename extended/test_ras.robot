@@ -8,6 +8,8 @@ Resource            ../lib/state_manager.robot
 Test Setup          RAS Test Setup
 Test Teardown       FFDC On Test Case Fail
 
+Force Tags  Channel_checkstop
+
 *** Variables ***
 ${HOST_SETTINGS}    ${SETTINGS_URI}host0
 

@@ -1,0 +1,16 @@
+-e Initiate_Code_Update_BMC
+-e open-power
+-e Run_Keyword_Test
+-e Factory_Reset
+-e Full_Suite_Regression
+-e AC_Cycles
+-e Host_Network
+-e Networkd_Ext
+-e NetworkManager
+-e Run_Multiple_Power_Cycle
+-e General_boot_testing
+-e Upload_Test
+-e Verify_SLP_Service_Types
+-e Network_diagnostics
+-e Network_ping
+-e Channel_checkstop

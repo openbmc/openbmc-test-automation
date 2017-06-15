@@ -8,6 +8,8 @@ Library  String
 
 Suite Setup  Validate Setup
 
+Force Tags  Network_ping
+
 *** Variables ***
 
 ${delay}             200ms

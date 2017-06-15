@@ -10,6 +10,8 @@ Resource        ../lib/state_manager.robot
 
 Test Teardown   Test Exit Logs
 
+Force Tags  Run_Multiple_Power_Cycle
+
 *** Variables ***
 ${LOOP_COUNT}    ${50}
 

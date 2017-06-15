@@ -37,6 +37,8 @@ Resource                ../../extended/obmc_boot_test_resource.robot
 
 Test Teardown           Run Key  FFDC On Test Case Fail
 
+Force Tags  Initiate_Code_Update_BMC
+
 *** Variables ***
 
 ${QUIET}                ${1}
