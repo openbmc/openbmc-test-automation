@@ -68,8 +68,13 @@ Check Core Dump Exist Before Code Update
 Check URLs Before Code Update
     [Documentation]  Check available URLs before code update.
     [Tags]  Check_URLs_Before_Code_Update
+
     ${url_list}=  Get URL List  ${OPENBMC_BASE_URI}
     Set Global Variable  ${URL_BEFORE_CU}  ${url_list}
+
+    ${bmc_version}=  Get BMC Version
+    Set Global Variable  ${BMC_VERSION_BEFORE}  ${bmc_version}
+    Log  ${BMC_VERSION_BEFORE}
 
 Initiate Code Update BMC
     [Documentation]  Initiate a code update on the BMC.
@@ -104,6 +109,10 @@ Install BMC Debug Tarball
 Compare URLs Before And After Code Update
     [Documentation]  Compare URLs before and after code update.
     [Tags]  Compare_URLs_Before_And_After_Code_Update
+
+    ${bmc_version}=  Get BMC Version
+    Set Global Variable  ${BMC_VERSION_AFTER}  ${bmc_version}
+    Log  ${BMC_VERSION_AFTER}
 
     ${url_after_cu}=  Get URL List  ${OPENBMC_BASE_URI}
     Compare URL List After Code Update  ${URL_BEFORE_CU}  ${url_after_cu}
@@ -181,6 +190,9 @@ Compare URL List After Code Update
     # url_before_cu  List of URLs available before code update.
     # url_after_cu   List of URLs available after code update.
 
+    # Exit if code update is done for same firmware.
+    Return From Keyword If  '${BMC_VERSION_BEFORE}' == '${BMC_VERSION_AFTER}'
+
     ${url_removed_list}=  Subtract Lists  ${url_before_cu}  ${url_after_cu}
     ${url_added_list}=  Subtract Lists  ${url_after_cu}  ${url_before_cu}
     Log  ${url_removed_list}
@@ -188,10 +200,19 @@ Compare URL List After Code Update
 
     Return From Keyword If  '${REST_URL_FILE_PATH}' == '${EMPTY}'
 
+    # Create file with BMC firmware version before and after code update.
+    # i.e. <Before_Version>--<After_Version>
+    # Example v1.99.6-141-ge662190--v1.99.6-141-ge664242
+
+    ${file_name}=  Catenate  SEPARATOR=--
+    ...  ${BMC_VERSION_BEFORE}  ${BMC_VERSION_AFTER}
+    ${REST_URL_FILE}=  Catenate  ${REST_URL_FILE_PATH}/${file_name}
+    Create File  ${REST_URL_FILE}  URL Removed${\n}
+
     Return From Keyword If
     ...  ${url_removed_list} == [] and ${url_added_list} == []
 
-    Create File  ${REST_URL_FILE_PATH}  URL Removed${\n}
-    Append To File  ${REST_URL_FILE_PATH}  [${url_removed_list}]
-    Append To File  ${REST_URL_FILE_PATH}  ${\n}URL Added${\n}
-    Append To File  ${REST_URL_FILE_PATH}  [${url_added_list}]
+    Create File  ${REST_URL_FILE}  URL Removed${\n}
+    Append To File  ${REST_URL_FILE}  [${url_removed_list}]
+    Append To File  ${REST_URL_FILE}  ${\n}URL Added${\n}
+    Append To File  ${REST_URL_FILE}  [${url_added_list}]
