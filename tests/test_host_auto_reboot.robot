@@ -14,22 +14,6 @@ Test Teardown       Post Testcase Execution
 
 *** Test Cases ***
 
-Verify Host Quiesce State Without Auto Reboot
-    # Description of template fields:
-    # Auto Reboot   Host State     Expected Host Action
-    no              Off            No Reboot
-    [Documentation]  Validate "Quiesce" state without auto reboot.
-    [Tags]  Verify_Host_Quiesce_State_Without_Auto_Reboot
-    [Template]  Verify Host Quiesce State
-
-Verify Host Quiesce State With Auto Reboot
-    # Description of template fields:
-    # Auto Reboot   Host State     Expected Host Action
-    yes             Off            Reboot
-    [Documentation]  Validate "Quiesce" state with auto reboot.
-    [Tags]  Verify_Host_Quiesce_State_With_Auto_Reboot
-    [Template]  Verify Host Quiesce State
-
 Verify Host Quiesce State Without Auto Reboot During Boot
     # Description of template fields:
     # Auto Reboot   Host State     Expected Host Action
@@ -37,6 +21,7 @@ Verify Host Quiesce State Without Auto Reboot During Boot
     [Documentation]  Validate "Quiesce" state during IPL.
     [Tags]  Verify_Host_Quiesce_State_Without_Auto_Reboot_During_Boot
     [Template]  Verify Host Quiesce State
+
 
 Verify Host Quiesce State With Auto Reboot During Boot
     # Description of template fields:
@@ -60,7 +45,7 @@ Verify Host Quiesce State
 
     Set Auto Reboot  ${auto_reboot}
 
-    Run Keyword If  '${host_state}' == 'Off'  Initiate Host PowerOff
+    Run Keyword If  '${host_state}' == 'Off'  Initiate Host PowerOn
     ...  ELSE IF  '${host_state}' == 'Booting'
     ...  Run Keywords  Initiate Host PowerOff  AND  Initiate Host Boot
 

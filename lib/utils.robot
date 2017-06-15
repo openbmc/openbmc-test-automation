@@ -165,25 +165,8 @@ Initiate Auto Reboot
 
     # Set the auto reboot policy.
     Set Auto Reboot  yes
-
-    SSHLibrary.Open connection  ${openbmc_host}
-    Login  ${openbmc_username}  ${openbmc_password}
-
     # Set the watchdog timer.  Note: 5000 = milliseconds which is 5 seconds.
-    ${cmd_buf}=  Catenate  /usr/sbin/mapper call /org/openbmc/watchdog/host0
-    ...  org.openbmc.Watchdog set i 5000
-    ${output}  ${stderr}  ${rc}=  Execute Command  ${cmd_buf}
-    ...  return_stderr=True  return_rc=True
-    Should Be Empty  ${stderr}
-    Should be equal  ${rc}  ${0}
-
-    # Start the watchdog.
-    ${cmd_buf}=  Catenate  /usr/sbin/mapper call /org/openbmc/watchdog/host0
-    ...  org.openbmc.Watchdog start
-    ${output}  ${stderr}  ${rc}=  Execute Command  ${cmd_buf}
-    ...  return_stderr=True  return_rc=True
-    Should Be Empty  ${stderr}
-    Should be equal  ${rc}  ${0}
+    Trigger Host Watchdog Error  5000
 
 Trigger Warm Reset
     log to console    "Triggering warm reset"
@@ -824,10 +807,11 @@ Trigger Host Watchdog Error
     # sleep_time    Time delay for host watchdog error to get injected.
     #               Default is 5 seconds.
 
-    Execute Command On BMC
-    ...  /usr/sbin/mapper call /org/openbmc/watchdog/host0 org.openbmc.Watchdog set i ${milliseconds}
-    Execute Command On BMC
-    ...  /usr/sbin/mapper call /org/openbmc/watchdog/host0 org.openbmc.Watchdog start
+    ${data}=  Create Dictionary  data=${milliseconds}
+    Write Attribute  /xyz/openbmc_project/watchdog/host0  Interval  data=${data}
+
+    ${data}=  Create Dictionary  data=${True}
+    Write Attribute  /xyz/openbmc_project/watchdog/host0  Enabled  data=${data}
     Sleep  ${sleep_time}
 
 Login To OS Host
