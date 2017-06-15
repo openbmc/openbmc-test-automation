@@ -14,6 +14,8 @@ Suite Teardown      Close All Connections
 
 Test Teardown       Post Test Execution
 
+Force Tags  Host_Network
+
 *** Variables ***
 ${SET_ADDR_PREFIX}  0x00 0x08 0x61 0x80 0x21 0x70 0x62 0x21 0x00 0x01 0x06 0x04
 ${STATIC}           0x00 0x01                       #equivalent address type 1

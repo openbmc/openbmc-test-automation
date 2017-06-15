@@ -8,6 +8,8 @@ Library  String
 
 Suite Setup  Validate Setup
 
+Force Tags  Verify_Zero_Network_Packet_Loss_On_BMC
+
 *** Variables ***
 
 ${delay}             200ms
