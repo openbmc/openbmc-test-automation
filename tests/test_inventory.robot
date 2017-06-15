@@ -214,6 +214,27 @@ Verify Fan Functional State
     ...  msg=${fan_uri} is functional but "Present" is not set.
 
 
+Check Air Or Water Cooled
+    [Documentation]  Check if this system is Air or water cooled.
+    [Tags]  Check_Air_Or_Water_Cooled
+    # Example:
+    # "/xyz/openbmc_project/inventory/system/chassis": {
+    #    "AirCooled": 1,
+    #    "WaterCooled": 0
+    # },
+
+    ${air_cooled}=  Read Attribute
+    ...  /xyz/openbmc_project/inventory/system/chassis  AirCooled
+    Log  AirCooled:${air_cooled}
+
+    ${water_cooled}=  Read Attribute
+    ...  /xyz/openbmc_project/inventory/system/chassis  WaterCooled
+    Log  WaterCooled:${water_cooled}
+
+    Run Keyword If  ${air_cooled}==${0} and ${water_cooled}==${0}
+    ...  Fail  Neither AirCooled or WaterCooled.
+
+
 *** Keywords ***
 
 Test Suite Setup
