@@ -11,6 +11,8 @@ Library  DateTime
 Suite Setup         Open Connection And Log In
 Suite Teardown      Close All Connections
 
+Force Tags  Full_Suite_Regression
+
 *** Variables ***
 ${ITERATION}          10
 ${RESULT_DIR_NAME}    logsdir

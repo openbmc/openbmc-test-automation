@@ -12,6 +12,8 @@ Resource                ../lib/state_manager.robot
 
 Test Teardown           Test Bios Teardown
 
+Force Tags  open-power
+
 *** Variables ***
 
 ${QUIET}                ${1}

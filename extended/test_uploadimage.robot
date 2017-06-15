@@ -16,6 +16,8 @@ Library               test_uploadimage.py
 
 Test Teardown  Upload Image Teardown
 
+Force Tags  Upload_Test
+
 *** Variables ***
 ${timeout}            10
 ${UPLOAD_DIR_PATH}    /tmp/images/
