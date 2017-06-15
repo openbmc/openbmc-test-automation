@@ -1,0 +1,16 @@
+-e Initiate_Code_Update_BMC
+-e PNOR_BIOS_Code_Update
+-e Run_Keyword_Pgm
+-e Factory_Reset
+-e Full_Suite_Regression
+-e AC_Cycles
+-e Host_Network
+-e Networkd_Ext
+-e NetworkManager
+-e Run_Multiple_Power_Cycle
+-e General_boot_testing
+-e Upload_Test
+-e SLP_Service_Test
+-e Check_Network_Latency
+-e Verify_Zero_Network_Packet_Loss_On_BMC
+-e Verify_Channel_Checkstop_Through_OS_With_Auto_Reboot

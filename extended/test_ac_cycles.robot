@@ -11,6 +11,8 @@ Suite Setup       Open Connection And Log In
 Suite Teardown    Close All Connections
 Test Teardown     FFDC On Test Case Fail
 
+Force Tags  AC_Cycles
+
 *** Test Cases ***
 
 Test OpenBMC Buster
