@@ -5,6 +5,7 @@ Resource          ../lib/rest_client.robot
 Resource          ../lib/utils.robot
 Resource          ../lib/state_manager.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/list_utils.robot
 Library           ../lib/utilities.py
 
 Variables         ../data/variables.py
@@ -14,6 +15,10 @@ Suite setup       Test Suite Setup
 Test Teardown     FFDC On Test Case Fail
 
 Force Tags        Inventory
+
+***Variables***
+
+${LOOP_COUNT}  ${1}
 
 *** Test Cases ***
 
@@ -213,6 +218,11 @@ Verify Fan Functional State
     \  Should Be True  ${present}
     ...  msg=${fan_uri} is functional but "Present" is not set.
 
+Verify Inventory List Before And After Reboot
+    [Documentation]  Verify Inventory List Before And After Reboot
+    [Tags]  Verify_Inventory_List_Before_And_After_Reboot
+
+    Repeat Keyword  ${LOOP_COUNT} times  Inventory List Before And After Reboot
 
 *** Keywords ***
 
@@ -302,3 +312,15 @@ Check URL Property If Functional
     # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0/core0
     ${state}=  Read Attribute  ${url_path}  Functional
     Should Be True  ${state}
+
+Inventory List Before And After Reboot
+    [Documentation]  Inventory list before and after reboot.
+
+    Initiate Host Boot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    ${inv_details_before}=  Get URL List  ${HOST_INVENTORY_URI}
+    Initiate Host Reboot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    ${inv_details_after}=  Get URL List  ${HOST_INVENTORY_URI}
+    ${url_removed_list}=  Subtract Lists  ${inv_details_before}  ${inv_details_after}
+    ${url_added_list}=  Subtract Lists  ${inv_details_after}  ${inv_details_before}
