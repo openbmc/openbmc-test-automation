@@ -29,6 +29,7 @@ Documentation  Run the caller's keyword string.
 # NOTE: Robot searches PYTHONPATH for libraries.
 Library   run_keyword.py
 
+Force Tags  Run_Keyword_Pgm
 
 *** Variables ***
 # Initialize program parameters variables.
