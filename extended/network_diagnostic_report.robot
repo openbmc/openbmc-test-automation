@@ -7,6 +7,8 @@ Library       ../lib/utilities.py
 Resource      ../lib/utils.robot
 Test Setup    Check If Tool Exist
 
+Force Tags  Check_Network_Latency
+
 *** Test Cases ***
 
 Check Network Latency
