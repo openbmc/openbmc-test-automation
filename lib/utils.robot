@@ -443,7 +443,8 @@ Create OS Console Command String
 
 Stop SOL Console Logging
     [Documentation]  Stop system console logging and return log output.
-    [Arguments]  ${log_file_path}=${EMPTY}  ${targ_file_path}=${EMPTY}
+    [Arguments]  ${log_file_path}=${EMPTY}
+    ...          ${targ_file_path}=${EXECDIR}${/}logs${/}
     ...          ${return_data}=${1}
 
     # If there are muliple system console processes, they will all be stopped.
