@@ -94,6 +94,54 @@ Set Invalid SOL Privilege Level
     Should Contain  ${msg}  Invalid value  ignore_case=True
 
 
+Set Invalid SOL Retry Count
+    [Documentation]  Verify invalid SOL's retry count via IPMI.
+    [Tags]  Set_Invalid_SOL_Retry_Count
+
+    # Any interger above 7 is invalid for SOL retry count.
+    ${value}=  Evaluate  random.randint(8, 10000)  modules=random
+
+    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ...  sol set retry-count ${value}
+    Should Contain  ${msg}  Invalid value  ignore_case=True
+
+
+Set Invalid SOL Retry Interval
+    [Documentation]  Verify invalid SOL's retry interval via IPMI.
+    [Tags]  Set_Invalid_SOL_Retry_Interval
+
+    # Any interger above 255 is invalid for SOL retry interval.
+    ${value}=  Evaluate  random.randint(256, 10000)  modules=random
+
+    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ...  sol set retry-interval ${value}
+    Should Contain  ${msg}  Invalid value  ignore_case=True
+
+
+Set Invalid SOL Character Accumulate Level
+    [Documentation]  Verify invalid SOL's character accumulate level via IPMI.
+    [Tags]  Set_Invalid_SOL_Character_Accumulate_Level
+
+    # Any integer above 255 is invalid for SOL character accumulate level.
+    ${value}=  Evaluate  random.randint(256, 10000)  modules=random
+
+    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ...  sol set character-accumulate-level ${value}
+    Should Contain  ${msg}  Invalid value  ignore_case=True
+
+
+Set Invalid SOL Character Send Threshold
+    [Documentation]  Verify invalid SOL's character send threshold via IPMI.
+    [Tags]  Set_Invalid_SOL_Character_Send_Threshold
+
+    # Any interger above 255 is invalid for SOL character send threshold.
+    ${value}=  Evaluate  random.randint(256, 10000)  modules=random
+
+    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ...  sol set character-send-threshold ${value}
+    Should Contain  ${msg}  Invalid value  ignore_case=True
+
+
 *** Keywords ***
 
 Check IPMI SOL Output Content
