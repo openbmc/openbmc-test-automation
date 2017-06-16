@@ -157,7 +157,8 @@ Deactivate SOL Via IPMI
 
     ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
     Run Keyword If  ${rc} > 0  Run Keywords
-    ...  Terminate Process  sol_proc  AND  Return From Keyword  ${output}
+    ...  Run Keyword And Ignore Error  Terminate Process  sol_proc
+    ...  AND  Return From Keyword  ${output}
 
     ${rc}  ${output}=  Run and Return RC and Output  cat ${file_path}
     Should Be Equal  ${rc}  ${0}  msg=${output}
