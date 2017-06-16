@@ -10,8 +10,7 @@ Resource            ../lib/ipmi_client.robot
 Suite Setup         Run Keywords  Verify logging-test  AND
 ...                 Delete Error Logs
 Test Setup          Open Connection And Log In
-Test Teardown       Close All Connections
-Suite Teardown      Delete Error Logs
+Test Teardown       Post Test Case Execution
 
 *** Test Cases ***
 
@@ -160,6 +159,24 @@ Verify IPMI SEL Version
     Should Contain  ${version_info}  v2compliant  case_insensitive=True
 
 
+Verify Watchdog Timedout Error
+    [Documentation]  Trigger watchdog timed out and verify errorlog generated.
+    [Tags]  Verify_Watchdog_Timedout_Error
+
+    # Clear errors if there are any.
+    Delete Error Logs
+
+    Initiate Host Boot
+
+    # Check if the watchdog interface is created.
+    Wait Until Keyword Succeeds  3 min  10 sec
+    ...  Read Properties  /xyz/openbmc_project/watchdog/host0
+
+    Trigger Host Watchdog Error
+
+    Verify Watchdog Errorlog Content
+
+
 *** Keywords ***
 
 Get IPMI SEL Setting
@@ -176,6 +193,27 @@ Get IPMI SEL Setting
     ${setting_status}=  Evaluate  $setting_status.replace(' ','')
 
     [Return]  ${setting_status}
+
+
+Verify Watchdog Errorlog Content
+    [Documentation]  Verify watchdog errorlog content.
+    # Example:
+    # "/xyz/openbmc_project/logging/entry/1":
+    #  {
+    #      "AdditionalData": [],
+    #      "Id": 1,
+    #      "Message": "org.open_power.Host.Error.WatchdogTimedOut",
+    #      "Resolved": 0,
+    #      "Severity": "xyz.openbmc_project.Logging.Entry.Level.Informational",
+    #      "Timestamp": 1492715244828,
+    #      "associations": []
+    # },
+
+    ${elog}=  Read Properties  /xyz/openbmc_project/logging/entry/1
+    Should Be Equal As Strings
+    ...  ${elog["Message"]}  org.open_power.Host.Error.WatchdogTimedOut
+    Should Not Be Equal As Strings
+    ...  ${elog["Severity"]}  xyz.openbmc_project.Logging.Entry.Level.Informational
 
 
 Verify logging-test
@@ -229,3 +267,16 @@ Delete Error Logs And Verify
     Delete Error Logs
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
+Post Test Case Execution
+   [Documentation]  Do the post test teardown.
+   # 1. Capture FFDC on test failure.
+   # 2. Delete error logs.
+   # 3. Close all open SSH connections.
+   # 4. Clear all REST sessions.
+
+   FFDC On Test Case Fail
+   Delete Error Logs
+   Close All Connections
+   Flush REST Sessions
+
