@@ -15,6 +15,7 @@ Resource          ../lib/utils.robot
 Resource          ../lib/pdu/pdu.robot
 Resource          ../lib/state_manager.robot
 Resource          ../lib/bmc_network_utils.robot
+Resource          ../lib/bmc_cleanup.robot
 
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0
@@ -55,6 +56,9 @@ Get To Stable State
 
     Run Keyword If  '${MAC_ADDRESS}' != '${EMPTY}'
     ...  Check And Reset MAC
+
+    Run Keyword If  '${CLEANUP_DIR_PATH}' != '${EMPTY}'
+    ...  Cleanup Dir
 
 
 *** Keywords ***
