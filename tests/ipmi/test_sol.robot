@@ -79,8 +79,8 @@ Set Valid SOL Privilege Level
 
     ${privilege_level_list}=  Create List  user  operator  admin  oem
     : FOR  ${item}  IN  @{privilege_level_list}
-    \  Set SOL Setting Value  privilege-level  ${item}
-    \  ${output}=  Get SOL Setting Value  privilege level
+    \  Set SOL Setting  privilege-level  ${item}
+    \  ${output}=  Get SOL Setting  Privilege Level
     \  Should Contain  ${output}  ${item}  ignore_case=True
 
 
@@ -127,8 +127,7 @@ Verify SOL Setting
 
     ${expected_value}=  Run Keyword If
     ...  '${setting_name}' == 'character-accumulate-level'  Evaluate  ${value}*5
-    ...  ELSE IF  '${setting_name}' == 'retry-interval'  Evaluate  ${value}*10
-    ...  ELSE  Set Variable  ${value}
+
 
     Set SOL Setting  ${setting_name}  '${value}'
 
@@ -158,6 +157,18 @@ Verify SOL Setting
     Activate SOL Via IPMI
     Wait Until Keyword Succeeds  10 mins  30 secs
     ...  Check IPMI SOL Output Content  Petitboot
+
+Get SOL Setting
+    [Documentation]  Returns status for given SOL setting.
+    [Arguments]  ${setting}
+    # Description of argument(s):
+    # setting  SOL setting which needs to be read(e.g. "Retry Count").
+
+    ${sol_info_dict}=  Get SOL Info
+    ${setting_status}=  Get From Dictionary
+    ...  ${sol_info_dict}  ${setting}
+
+    [Return]  ${setting_status}
 
 
 Restore Default SOL Configuration
