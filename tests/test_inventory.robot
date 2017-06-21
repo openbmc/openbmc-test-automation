@@ -213,7 +213,6 @@ Verify Core Functional State
     \  Should Be True  ${present}
     ...  msg=${core_uri} is functional but not present.
 
-
 Verify DIMM Functional State
     [Documentation]  Verify that "Present" DIMM property is set if "Functional"
     ...              DIMM property is set.
@@ -264,9 +263,9 @@ Verify Fan Functional State
     \  Should Be True  ${present}
     ...  msg=${fan_uri} is functional but "Present" is not set.
 
-Verify Inventory List After Reboot
-    [Documentation]  Verify Inventory List After Reboot
-    [Tags]  Verify_Inventory_List_After_Reboot
+Verify Inventory Persistence On Host Reboot
+    [Documentation]  Verify inventory persistence on host reboot.
+    [Tags]  Verify_Inventory_Persistence_On_Host_Reboot
 
     Repeat Keyword  ${LOOP_COUNT} times  Verify Inventory List Before And After Reboot
 
@@ -290,61 +289,22 @@ Check Air Or Water Cooled
     Run Keyword If  ${air_cooled}==${0} and ${water_cooled}==${0}
     ...  Fail  Neither AirCooled or WaterCooled.
 
-Verify Minimal CPU Inventory
-    [Documentation]  Verify minimal CPU inventory.
-    [Tags]  Verify_Minimal_CPU_Inventory
+Verify Inventory Persistence On BMC Reboot
+    [Documentation]  Verify inventory persistence on BMC reboot.
+    [Tags]  Verify_Inventory_Persistence_On_BMC_Reboot
 
-    # item         minimum_count
-    cpu            1
-    [Template]     Minimum Inventory
+    Initiate Host Boot
 
-Verify Minimal DIMM Inventory
-    [Documentation]  Verify minimal DIMM inventory.
-    [Tags]  Verify_Minimal_DIMM_Inventory
+    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    ${inv_before}=  Get URL List  ${HOST_INVENTORY_URI}
 
-    # item         minimum_count
-    dimm           2
-    [Template]     Minimum Inventory
+    Initiate BMC Reboot
 
-Verify Minimal Core Inventory
-    [Documentation]  Verify minimal core inventory.
-    [Tags]  Verify_Minimal_Core_Inventory
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is BMC Ready
 
-    # item         minimum_count
-    core           1
-    [Template]     Minimum Inventory
-
-Verify Minimal Memory Buffer Inventory
-    [Documentation]  Verify minimal memory buffer inventory.
-    [Tags]  Verify_Minimal_Memory_Buffer_Inventory
-
-    # item         minimum_count
-    memory_buffer  1
-    [Template]     Minimum Inventory
-
-Verify Minimal Fan Inventory
-    [Documentation]  Verify minimal fan inventory.
-    [Tags]  Verify_Minimal_Fan_Inventory
-
-    # item         minimum_count
-    fan            2
-    [Template]     Minimum Inventory
-
-Verify Minimal Main Planar Inventory
-    [Documentation]  Verify minimal main planar inventory.
-    [Tags]  Verify_Minimal_Main_Planar_Inventory
-
-    # item         minimum_count
-    main_planar    1
-    [Template]     Minimum Inventory
-
-Verify Minimal System Inventory
-    [Documentation]  Verify minimal system inventory.
-    [Tags]  Verify_Minimal_System_Inventory
-
-    # item         minimum_count
-    system         1
-    [Template]     Minimum Inventory
+    ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
+    Lists Should Be Equal  ${inv_before}  ${inv_after}
 
 *** Keywords ***
 
