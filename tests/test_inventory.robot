@@ -167,7 +167,6 @@ Verify Core Functional State
     \  Should Be True  ${present}
     ...  msg=${core_uri} is functional but not present.
 
-
 Verify DIMM Functional State
     [Documentation]  Verify that "Present" DIMM property is set if "Functional"
     ...              DIMM property is set.
@@ -244,6 +243,19 @@ Check Air Or Water Cooled
     Run Keyword If  ${air_cooled}==${0} and ${water_cooled}==${0}
     ...  Fail  Neither AirCooled or WaterCooled.
 
+Verify Inventory Persistence On BMC Reboot
+    [Documentation]  Verify inventory persistence on BMC reboot.
+    [Tags]  Verify_Inventory_Persistence_On_BMC_Reboot
+
+    Initiate Host Boot
+
+    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    ${inv_before}=  Get URL List  ${HOST_INVENTORY_URI}
+
+    Initiate BMC Reboot
+
+    ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
+    Lists Should Be Equal  ${inv_before}  ${inv_after}
 
 *** Keywords ***
 
