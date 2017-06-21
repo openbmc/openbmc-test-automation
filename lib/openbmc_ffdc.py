@@ -122,7 +122,7 @@ def set_ffdc_defaults(ffdc_dir_path=None,
                 ffdc_dir_path = os.path.dirname(
                     BuiltIn().get_variable_value("${LOG_FILE}")) + "/"
         else:
-            FFDC_LOG_PATH = BuiltIn().get_variable_value("${FFDC_LOG_PATH}")
+            FFDC_LOG_PATH = os.getcwd() + "/logs/"
             if FFDC_LOG_PATH is None:
                 FFDC_LOG_PATH = ""
             if FFDC_LOG_PATH == "":
