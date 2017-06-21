@@ -218,12 +218,6 @@ Verify Fan Functional State
     \  Should Be True  ${present}
     ...  msg=${fan_uri} is functional but "Present" is not set.
 
-Verify Inventory List After Reboot
-    [Documentation]  Verify Inventory List After Reboot
-    [Tags]  Verify_Inventory_List_After_Reboot
-
-    Repeat Keyword  ${LOOP_COUNT} times  Verify Inventory List Before And After Reboot
-
 Check Air Or Water Cooled
     [Documentation]  Check if this system is Air or water cooled.
     [Tags]  Check_Air_Or_Water_Cooled
@@ -244,6 +238,24 @@ Check Air Or Water Cooled
     Run Keyword If  ${air_cooled}==${0} and ${water_cooled}==${0}
     ...  Fail  Neither AirCooled or WaterCooled.
 
+Verify Inventory Persistence
+    [Documentation]  Verify Inventory Persistence
+    [Tags]  Verify_Inventory_Persistence
+
+    Initiate Host Boot
+    ${inv_details_1}=  Get URL List  ${HOST_INVENTORY_URI}
+    Initiate Host Poweroff
+    ${inv_details_2}=  Get URL List  ${HOST_INVENTORY_URI}
+    Should Not Be Empty  ${inv_details_2}
+    Lists Should Be Equal  ${inv_details_1}  ${inv_details_2}
+    # Replace reboot with 'Initiate BMC Reboot' keyword
+    # Reference: openbmc/openbmc#1161
+    Open Connection And Log In
+    Start Command  /sbin/reboot
+    Wait Until Keyword Succeeds
+    ...  5 min  10 sec  Is BMC Ready
+    ${inv_details_3}=  Get URL List  ${HOST_INVENTORY_URI}
+    Lists Should Be Equal  ${inv_details_2}  ${inv_details_3}
 
 *** Keywords ***
 
