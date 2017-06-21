@@ -73,6 +73,61 @@ Set Valid SOL Character Send Threshold
     [Template]  Verify SOL Setting
 
 
+Set SOL Enabled
+    [Documentation]  Verify enabling SOL via IPMI.
+    [Tags]  Set_SOL_Enabled
+
+    ${msg}=  Run Keyword  Run IPMI Standard Command
+    ...  sol set enabled true
+
+    # Verify SOL status from ipmitool sol info command.
+    ${sol_info_dict}=  Get SOL Info
+    ${sol_enable_status}=  Get From Dictionary
+    ...  ${sol_info_dict}  Enabled
+
+    Should Be Equal  '${sol_enable_status}'  'true'
+
+
+Set SOL Disabled
+    [Documentation]  Verify disabling SOL via IPMI.
+    [Tags]  Set_SOL_Disabled
+
+    ${msg}=  Run Keyword  Run IPMI Standard Command
+    ...  sol set enabled false
+
+    # Verify SOL status from ipmitool sol info command.
+    ${sol_info_dict}=  Get SOL Info
+    ${sol_enable_status}=  Get From Dictionary
+    ...  ${sol_info_dict}  Enabled
+    Should Be Equal  '${sol_enable_status}'  'false'
+
+    # Verify error while activating SOL with SOL disabled.
+    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ...  sol activate
+    Should Contain  ${msg}  SOL payload disabled  ignore_case=True
+
+
+Set Valid SOL Privilege Level
+    [Documentation]  Verify valid SOL's privilege level via IPMI.
+    [Tags]  Set_Valid_SOL_Privilege_Level
+
+    ${privilege_level_list}=  Create List  user  operator  admin  oem
+    : FOR  ${item}  IN  @{privilege_level_list}
+    \  Set SOL Setting Value  privilege-level  ${item}
+    \  ${output}=  Get SOL Setting Value  privilege level
+    \  Should Contain  ${output}  ${item}  ignore_case=True
+
+
+Set Invalid SOL Privilege Level
+    [Documentation]  Verify invalid SOL's retry count via IPMI.
+    [Tags]  Set_Invalid_SOL_Privilege_Level
+
+    ${value}=  Generate Random String  ${8}
+    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ...  sol set privilege-level ${value}
+    Should Contain  ${msg}  Invalid value  ignore_case=True
+
+
 *** Keywords ***
 
 Check IPMI SOL Output Content
@@ -144,6 +199,7 @@ Restore Default SOL Configuration
 
     Open Connection And Log In
 
+    Set SOL Setting  enabled  true
     Set SOL Setting  retry-count  7
     Set SOL Setting  retry-interval  10
     Set SOL Setting  character-accumulate-level  20
