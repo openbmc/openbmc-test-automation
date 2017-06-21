@@ -213,6 +213,19 @@ Verify Fan Functional State
     \  Should Be True  ${present}
     ...  msg=${fan_uri} is functional but "Present" is not set.
 
+Verify Inventory Persistence
+    [Documentation]  Verify Inventory Persistence
+    [Tags]  Verify_Inventory_Persistence
+
+    Initiate Host Boot
+    ${inv_details_1}=  Get URL List  ${HOST_INVENTORY_URI}
+    Initiate Host Poweroff
+    ${inv_details_2}=  Get URL List  ${HOST_INVENTORY_URI}
+    Should Not Be Empty  ${inv_details_2}
+    Lists Should Be Equal  ${inv_details_1}  ${inv_details_2}
+    Initiate Host Reboot
+    ${inv_details_3}=  Get URL List  ${HOST_INVENTORY_URI}
+    Lists Should Be Equal  ${inv_details_2}  ${inv_details_3}
 
 *** Keywords ***
 
