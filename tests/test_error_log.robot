@@ -5,6 +5,7 @@ Resource            ../lib/connection_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
+Resource            ../lib/ipmi_client.robot
 
 Suite Setup         Run Keywords  Verify logging-test  AND
 ...                 Delete Error Logs
@@ -146,7 +147,34 @@ Create Two Test Error Logs And Delete One
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     Delete Error Logs And Verify
 
+
+Verify IPMI SEL Version
+    [Documentation]  Verify IPMI SEL's version info.
+    [Tags]  Verify_IPMI_SEL_Version
+
+    ${version_info}=  Get IPMI SEL Setting  Version
+    ${setting_status}=  Fetch From Left  ${version_info}  (
+    ${setting_status}=  Evaluate  $setting_status.replace(' ','')
+
+    Should Be True  ${setting_status} >= 1.5
+
 *** Keywords ***
+
+Get IPMI SEL Setting
+    [Documentation]  Returns status for given IPMI SEL setting.
+    [Arguments]  ${setting}
+    # Description of argument(s):
+    # setting  SEL setting which needs to be read(e.g. "Last Add Time").
+
+    ${resp}=  Run IPMI Standard Command  sel info
+
+    ${setting_line}=  Get Lines Containing String  ${resp}  ${setting}
+    ...  case-insensitive
+    ${setting_status}=  Fetch From Right  ${setting_line}  :
+    ${setting_status}=  Evaluate  $setting_status.replace(' ','')
+
+    [Return]  ${setting_status}
+
 
 Verify logging-test
     [Documentation]  Verify existence of prerequisite logging-test.
