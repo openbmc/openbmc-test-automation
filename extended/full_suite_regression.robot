@@ -49,11 +49,12 @@ Create Combined Report
 
    Run  rebot --name ${OPENBMC_SYSTEMMODEL}CombinedReport ${RESULT_DIR_PATH}/output*.xml
 
-   ${combined_report_file}=  Catenate  SEPARATOR=  ${RESULT_DIR_PATH}
-    ...  /log${OPENBMC_SYSTEMMODEL}CombinedIterations  ${ITERATION}Report.html
+   ${combined_report_file}=  Catenate  SEPARATOR=  ${EXECDIR}
+   ...  /CombinedLogReport.html
+
    Copy File  log.html  ${combined_report_file}
 
-   Convert HTML To PDF  ${combined_report_file}
+   Run Keyword And Ignore Error  Convert HTML To PDF  ${combined_report_file}
 
 *** Keywords ***
 
