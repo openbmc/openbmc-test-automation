@@ -54,6 +54,9 @@ HOST_INVENTORY_URI = '/xyz/openbmc_project/inventory/'
 LED_GROUPS_URI = '/xyz/openbmc_project/led/groups/'
 LED_PHYSICAL_URI = '/xyz/openbmc_project/led/physical/'
 
+# Dump URI variable
+DUMP_URI = '/xyz/openbmc_project/dump/'
+DUMP_ENTRY_URI = '/xyz/openbmc_project/dump/entry/'
 
 '''
   QEMU HTTPS variable:
