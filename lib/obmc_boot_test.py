@@ -855,7 +855,7 @@ def test_loop_body():
         BuiltIn().fail(error_message)
 
     # This should help prevent ConnectionErrors.
-    grk.run_key_u("Delete All Sessions")
+    grk.run_key_u("Close All Connections")
 
     return True
 
