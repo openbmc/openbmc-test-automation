@@ -1,0 +1,45 @@
+*** Settings ***
+Documentation  This module provides general keywords for dump.
+
+
+*** Variables ***
+
+*** Keywords ***
+
+Create User Initiated Dump
+    [Documentation]  Generate user initiated dump and return
+    ...  dump id (e.g 1, 2 etc).
+
+    ${data}=  Create Dictionary  data=@{EMPTY}
+    ${resp}=  OpenBMC Post Request
+    ...  ${DUMP_URI}/action/CreateDump  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${json}=  To JSON  ${resp.content}
+    ${dump_id}=  Set Variable  ${json["data"]}
+
+    # Wait until dump get created.
+    Wait Until Keyword Succeeds  1 min  10 sec  Check Dump  ${dump_id}
+
+    [Return]  ${dump_id}
+
+Check Dump
+    [Documentation]  Verify if given dump exist.
+    [Arguments]  ${dump_id}
+    # Description of Argument(s):
+    # dump_id  An ID that identifies a particular dump (e.g. 1, 3, 5).
+
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/${dump_id}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Delete Dump
+    [Documentation]  Deletes given dump.
+    [Arguments]  ${dump_id}
+    # Description of Argument(s):
+    # dump_id  An ID that identifies a particular dump (e.g. 1, 3, 5).
+
+    ${data}=  Create Dictionary  data=@{EMPTY}
+    ${resp}=  OpenBMC Post Request
+    ...  ${DUMP_ENTRY_URI}/${dump_id}/action/Delete  data=${data}
+
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
