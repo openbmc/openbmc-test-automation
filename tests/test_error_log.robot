@@ -232,6 +232,40 @@ Delete Invalid SEL Entry
     ...  case_insensitive=True
 
 
+Verify IPMI SEL Entries
+    [Documentation]  Verify IPMI SEL's entries info.
+    [Tags]  Verify_IPMI_SEL_Entries
+
+    Delete Error Logs And Verify
+
+    # Generate error logs of random count.
+    ${count}=  Evaluate  random.randint(1, 5)  modules=random
+    Repeat Keyword  ${count}  Create Test Error Log
+
+    ${sel_entries_count}=  Get IPMI SEL Setting  Entries
+    Should Be Equal As Strings  ${sel_entries_count}  ${count}
+
+
+Verify IPMI SEL Last Add Time
+    [Documentation]  Verify IPMI SEL's last added timestamp.
+    [Tags]  Verify_IPMI_SEL_Last_Add_Time
+
+    Create Test Error Log
+    ${sel_time}=  Run IPMI Standard Command  sel time get
+    ${sel_time}=  Convert Date  ${sel_time}
+    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    ${sel_last_add_time}=  Get IPMI SEL Setting  Last Add Time
+    ${sel_last_add_time}=  Convert Date  ${sel_last_add_time}
+    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    ${time-diff}=
+    ...  Subtract Date From Date  ${sel_last_add_time}  ${sel_time}
+
+    # Verify if the delay in current time check and last add SEL time
+    # is less or equals to 2 seconds.
+    Should Be True  ${time-diff} <= 2
+
 
 *** Keywords ***
 
