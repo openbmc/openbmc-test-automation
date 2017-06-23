@@ -11,6 +11,8 @@ Suite Setup         Run Keywords  Verify logging-test  AND
 ...                 Delete Error Logs
 Test Setup          Open Connection And Log In
 Test Teardown       Post Test Case Execution
+Suite Teardown      Delete Error Logs
+
 
 *** Test Cases ***
 
@@ -177,6 +179,38 @@ Verify Watchdog Timedout Error
     Verify Watchdog Errorlog Content
 
 
+Verify IPMI SEL Entries
+    [Documentation]  Verify IPMI SEL's entries info.
+    [Tags]  Verify_IPMI_SEL_Entries
+
+    Delete Error Logs And Verify
+
+    # Generate error logs of random count.
+    ${count}=  Evaluate  random.randint(1, 5)  modules=random
+    Repeat Keyword  ${count}  Create Test Error Log
+
+    ${sel_entries_count}=  Get IPMI SEL Setting  Entries
+    Should Be Equal As Strings  ${sel_entries_count}  ${count}
+
+
+Verify IPMI SEL Last Add Time
+    [Documentation]  Verify IPMI SEL's last add time.
+    [Tags]  Verify_IPMI_SEL_Last_Add_Time
+
+    Create Test Error Log
+    ${sel_time}=  Run IPMI Standard Command  sel time get
+    ${sel_time}=  Convert Date  ${sel_time}
+    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    ${sel_last_add_time}=  Get IPMI SEL Setting  Last Add Time
+    ${sel_last_add_time}=  Convert Date  ${sel_last_add_time}
+    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    ${time-diff}=
+    ...  Subtract Date From Date  ${sel_last_add_time}  ${sel_time}
+    Should Be True  ${time-diff} <= 2
+
+
 *** Keywords ***
 
 Get IPMI SEL Setting
@@ -189,8 +223,7 @@ Get IPMI SEL Setting
 
     ${setting_line}=  Get Lines Containing String  ${resp}  ${setting}
     ...  case-insensitive
-    ${setting_status}=  Fetch From Right  ${setting_line}  :
-    ${setting_status}=  Evaluate  $setting_status.replace(' ','')
+    ${setting_status}=  Fetch From Right  ${setting_line}  :${SPACE}
 
     [Return]  ${setting_status}
 
