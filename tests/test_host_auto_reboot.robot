@@ -45,7 +45,7 @@ Verify Host Quiesce State
 
     Set Auto Reboot  ${auto_reboot}
 
-    Run Keyword If  '${host_state}' == 'Off'  Initiate Host PowerOn
+    Run Keyword If  '${host_state}' == 'Off'  Initiate Host PowerOff
     ...  ELSE IF  '${host_state}' == 'Booting'
     ...  Run Keywords  Initiate Host PowerOff  AND  Initiate Host Boot
 
