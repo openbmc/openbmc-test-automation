@@ -45,8 +45,7 @@ Verify Host Quiesce State
 
     Set Auto Reboot  ${auto_reboot}
 
-    Run Keyword If  '${host_state}' == 'Off'  Initiate Host PowerOn
-    ...  ELSE IF  '${host_state}' == 'Booting'
+    Run Keyword If  '${host_state}' == 'Booting'
     ...  Run Keywords  Initiate Host PowerOff  AND  Initiate Host Boot
 
     Trigger Host Watchdog Error
