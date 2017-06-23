@@ -146,6 +146,20 @@ Create Two Test Error Logs And Delete One
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     Delete Error Logs And Verify
 
+
+Verify IPMI SEL Entries
+    [Documentation]  Verify IPMI SEL's entries info.
+    [Tags]  Verify_IPMI_SEL_Entries
+
+    # Generate error logs of random count.
+    ${count}=  Evaluate  random.randint(1, 10)  modules=random
+    Repeat Keyword  ${count}  Create Test Error Log
+
+    ${sel_entries_count}=  Get IPMI SEL Setting  Entries
+    Should Be Equal As Strings  ${sel_entries_count}  ${count}
+
+
+
 *** Keywords ***
 
 Verify logging-test
