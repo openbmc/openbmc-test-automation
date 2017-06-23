@@ -146,6 +146,50 @@ Create Two Test Error Logs And Delete One
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     Delete Error Logs And Verify
 
+
+Verify IPMI SEL Entries
+    [Documentation]  Verify IPMI SEL's entries info.
+    [Tags]  Verify_IPMI_SEL_Entries
+
+    Delete Error Logs And Verify
+
+    # Generate error logs of random count.
+    ${count}=  Evaluate  random.randint(1, 5)  modules=random
+    Repeat Keyword  ${count}  Create Test Error Log
+
+    ${sel_entries_count}=  Get IPMI SEL Setting  Entries
+    Should Be Equal As Strings  ${sel_entries_count}  ${count}
+
+
+Verify IPMI SEL Last Add Time
+    [Documentation]  Verify IPMI SEL's last add time.
+    [Tags]  Verify_IPMI_SEL_Last_Add_Time
+
+    Create Test Error Log
+    ${sel_current_time}=  Run IPMI Standard Command  sel time get
+
+    ${sel_last_add_time}=  Get IPMI SEL Setting  Last Add Time
+
+    ${time-diff}=
+    ...  Subtract Time From Time  ${sel_last_add_time}  ${sel_current_time}
+    Should Be True  ${time-diff}  <=  2
+
+
+Verify IPMI SEL Last Delete Time
+    [Documentation]  Verify IPMI SEL's last delete time.
+    [Tags]  Verify_IPMI_SEL_Last_Delete_Time
+
+    Create Test Error Log
+    Delete Error Logs And Verify
+    ${sel_current_time}=  Run IPMI Standard Command  sel time get
+
+    ${sel_last_del_time}=  Get IPMI SEL Setting  Last Del Time
+
+    ${time_diff}=
+    ...  Subtract Time From Time  ${sel_last_del_time}  ${sel_current_time}
+    Should Be True  ${time-diff}  <=  2
+
+
 *** Keywords ***
 
 Verify logging-test
