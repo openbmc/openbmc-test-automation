@@ -11,6 +11,7 @@ Suite Setup         Run Keywords  Verify logging-test  AND
 Test Setup          Open Connection And Log In
 Test Teardown       Close All Connections
 Suite Teardown      Delete Error Logs
+Resource            ../lib/ipmi_client.robot
 
 *** Test Cases ***
 
@@ -146,7 +147,94 @@ Create Two Test Error Logs And Delete One
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     Delete Error Logs And Verify
 
+
+Verify IPMI SEL Version
+    [Documentation]  Verify IPMI SEL's version info.
+    [Tags]  Verify_IPMI_SEL_Version
+
+    ${version_info}=  Get IPMI SEL Setting  Version
+    ${setting_status}=  Fetch From Left  ${version_info}  (
+    ${setting_status}=  Evaluate  $setting_status.replace(' ','')
+
+    Should Be True  ${setting_status} >= 1.5
+    Should Contain  ${version_info}  v2compliant  case_insensitive=True
+
+
+Verify IPMI SEL Entries
+    [Documentation]  Verify IPMI SEL's entries info.
+    [Tags]  Verify_IPMI_SEL_Entries
+
+    Delete Error Logs And Verify
+
+    # Generate error logs of random count.
+    ${count}=  Evaluate  random.randint(1, 5)  modules=random
+    Repeat Keyword  ${count}  Create Test Error Log
+
+    ${sel_entries_count}=  Get IPMI SEL Setting  Entries
+    Should Be Equal As Strings  ${sel_entries_count}  ${count}
+
+
+Verify IPMI SEL Last Add Time
+    [Documentation]  Verify IPMI SEL's last add time.
+    [Tags]  Verify_IPMI_SEL_Last_Add_Time
+
+    Create Test Error Log
+    ${sel_current_time}=  Run IPMI Standard Command  sel time get
+
+    ${sel_last_add_time}=  Get IPMI SEL Setting  Last Add Time
+
+    ${time-diff}=
+    ...  Subtract Time From Time  ${sel_last_add_time}  ${sel_current_time}
+    Should Be True  ${time-diff}  <=  2
+
+
+Verify IPMI SEL Last Delete Time
+    [Documentation]  Verify IPMI SEL's last delete time.
+    [Tags]  Verify_IPMI_SEL_Last_Delete_Time
+
+    Create Test Error Log
+    Delete Error Logs And Verify
+    ${sel_current_time}=  Run IPMI Standard Command  sel time get
+
+    ${sel_last_del_time}=  Get IPMI SEL Setting  Last Del Time
+
+    ${time_diff}=
+    ...  Subtract Time From Time  ${sel_last_del_time}  ${sel_current_time}
+    Should Be True  ${time-diff}  <=  2
+
+
+Verify SEL Log Persistency On BMC Reboot
+    [Documentation]  Verify SEL count remains the same after BMC reboot.
+    [Tags]  Verify_SEL_Log_Persistency_On_BMC_Reboot
+
+    ${sel_count_before}=  Get IPMI SEL Setting  Entries
+    Should Be Equal As Strings  ${sel_entries_count}  ${count}
+
+    Initiate BMC Reboot
+    Wait Until Keyword Succeeds  10 min  10 sec
+    ...  Is BMC Ready
+
+    ${sel_count_after}=  Get IPMI SEL Setting  Entries
+    Should Be Equal  ${sel_count_before}  ${sel_count_after}
+
+
 *** Keywords ***
+
+Get IPMI SEL Setting
+    [Documentation]  Returns status for given IPMI SEL setting.
+    [Arguments]  ${setting}
+    # Description of argument(s):
+    # setting  SEL setting which needs to be read(e.g. "Last Add Time").
+
+    ${resp}=  Run IPMI Standard Command  sel info
+
+    ${setting_line}=  Get Lines Containing String  ${resp}  ${setting}
+    ...  case-insensitive
+    ${setting_status}=  Fetch From Right  ${setting_line}  :
+    ${setting_status}=  Evaluate  $setting_status.replace(' ','')
+
+    [Return]  ${setting_status}
+
 
 Verify logging-test
     [Documentation]  Verify existence of prerequisite logging-test.
