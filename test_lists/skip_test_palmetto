@@ -38,6 +38,8 @@
 -e NetworkManager
 # Led groups test cases are NA for Barreleye and Palmetto
 -e LED_Group
+-e Check_BMC_GPIO_FSI_Name_Property_Is_Set
+-e Check_BMC_GPIO_FSI_Compatible_Property_Is_Set
 #https://github.com/openbmc/openbmc/issues/1283
 -e Inventory
 # NA until VPD is programmed on systems

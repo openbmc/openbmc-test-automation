@@ -31,6 +31,8 @@
 -e Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
 -e Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
 -e Verify_Setting_OCC_Turbo_Via_REST
+-e Check_BMC_GPIO_FSI_Name_Property_Is_Set
+-e Check_BMC_GPIO_FSI_Compatible_Property_Is_Set
 #https://github.com/openbmc/openbmc/issues/1283
 -e Inventory
 # NA until VPD is programmed on systems
