@@ -76,6 +76,20 @@ Check BMC FSI Compatible Property Is Set
    [Tags]  Check_BMC_FSI_Compatible_Property_Is_Set
    [Template]  Template Check Property
 
+Check BMC GPIO-FSI Name Property Is Set
+   #Property
+   gpio-fsi/name
+   [Documentation]  Verify if the BMC GPIO-FSI name property is populated.
+   [Tags]  Check_BMC_GPIO_FSI_Name_Property_Is_Set
+   [Template]  Template Check Property
+
+Check BMC GPIO-FSI Compatible Property Is Set
+   #Property
+   gpio-fsi/compatible
+   [Documentation]  Verify if the BMC GPIO-FSI compatible property is populated.
+   [Tags]  Check_BMC_GPIO_FSI_Compatible_Property_Is_Set
+   [Template]  Template Check Property
+
 Check BMC LED Name Property Is Set
    #Property
    leds/name
