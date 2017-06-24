@@ -23,6 +23,9 @@
 -e Check_BMC_Name_Property_Is_Set
 -e Check_BMC_Clocks_Name_Property_Is_Set
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
+# Below 2 TCs not applicable to this system
+-e Check_BMC_GPIO_FSI_Name_Property_Is_Set
+-e Check_BMC_GPIO_FSI_Compatible_Property_Is_Set
 #https://github.com/openbmc/openbmc-test-automation/issues/75
 -e Test_Wrong_Reservation_ID
 -e Test_Correct_Reservation_ID
