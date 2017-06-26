@@ -35,6 +35,7 @@ CHASSIS_POWERON_STATE = 'xyz.openbmc_project.State.Chassis.PowerState.On'
 BMC_STATE_URI = '/xyz/openbmc_project/state/bmc0/'
 HOST_STATE_URI = '/xyz/openbmc_project/state/host0/'
 CHASSIS_STATE_URI = '/xyz/openbmc_project/state/chassis0/'
+HOST_WATCHDOG_URI = '/xyz/openbmc_project/watchdog/host0/'
 
 # Logging URI variables
 BMC_LOGGING_URI = '/xyz/openbmc_project/logging/'
