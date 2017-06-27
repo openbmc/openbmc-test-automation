@@ -664,6 +664,7 @@ Get URL List
     #              /xyz/openbmc_project/inventory).
 
     ${url_list}=  Read Properties  ${openbmc_url}/list
+    Sort List  ${url_list}
     [Return]  ${url_list}
 
 Get Endpoint Paths
