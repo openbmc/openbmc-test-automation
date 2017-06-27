@@ -16,8 +16,8 @@ Test Teardown       Post Testcase Execution
 
 Verify Host Quiesce State Without Auto Reboot During Boot
     # Description of template fields:
-    # Auto Reboot   Host State     Expected Host Action
-    no              Booting        No Reboot
+    # Auto Reboot   Initial Host State     Expected Host Action
+    no              Booting                No Reboot
     [Documentation]  Validate "Quiesce" state during IPL.
     [Tags]  Verify_Host_Quiesce_State_Without_Auto_Reboot_During_Boot
     [Template]  Verify Host Quiesce State
@@ -25,8 +25,8 @@ Verify Host Quiesce State Without Auto Reboot During Boot
 
 Verify Host Quiesce State With Auto Reboot During Boot
     # Description of template fields:
-    # Auto Reboot   Host State     Expected Host Action
-    yes             Booting        Reboot
+    # Auto Reboot   Initial Host State     Expected Host Action
+    yes             Booting                Reboot
     [Documentation]  Validate "Quiesce" state during IPL.
     [Tags]  Verify_Host_Quiesce_State_With_Auto_Reboot_During_Boot
     [Template]  Verify Host Quiesce State
@@ -37,17 +37,18 @@ Verify Host Quiesce State With Auto Reboot During Boot
 Verify Host Quiesce State
     [Documentation]  Inject watchdog error on host to reach "Quiesce" state.
     ...  Later recover host from this state.
-    [Arguments]  ${auto_reboot}  ${host_state}  ${action}
+    [Arguments]  ${auto_reboot}  ${initial_host_state}  ${action}
     # Description of Arguments:
-    # auto_reboot  Auto reboot setting ("yes" or "no").
-    # host_state   State of host before injecting error.
-    # action       Action of host due to error ("No Reboot" or "Reboot").
+    # auto_reboot          Auto reboot setting ("yes" or "no").
+    # initial_host_state   State of host before injecting error.
+    # action               Action of host due to error ("No Reboot" or
+                           "Reboot").
 
     Set Auto Reboot  ${auto_reboot}
 
-    Run Keyword If  '${host_state}' == 'Off'  Initiate Host PowerOn
-    ...  ELSE IF  '${host_state}' == 'Booting'
-    ...  Run Keywords  Initiate Host PowerOff  AND  Initiate Host Boot
+    Run Keyword If  '${initial_host_state}' == 'Booting'
+    # Booting refers to host OS starting in progress.
+    ...  Run Keywords  Put OS Starting State
 
     Trigger Host Watchdog Error
     ${resp}=  Run Keyword And Return Status  Is Host Rebooted
