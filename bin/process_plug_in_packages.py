@@ -75,7 +75,7 @@ parser.add_argument(
          ' the plug-in directory.' + default_string)
 
 parser.add_argument(
-    '--shell_rc',
+    '--allow_shell_rc',
     default="0x00000000",
     help='The user may supply a value other than zero to indicate an' +
          ' acceptable non-zero return code.  For example, if this value' +
@@ -102,10 +102,10 @@ parser.add_argument(
     type=int,
     choices=[1, 0],
     help='If this parm is set to 1 and a plug-in call point program returns ' +
-         'a valid non-zero return code (see "shell_rc" parm above), this' +
-         ' program will stop processing and return 0 (success).  Since this' +
-         ' constitutes a successful exit, this would normally be used where' +
-         ' the caller wishes to stop processing if one of the plug-in' +
+         'a valid non-zero return code (see "allow_shell_rc" parm above),' +
+         ' this program will stop processing and return 0 (success).  Since' +
+         ' this constitutes a successful exit, this would normally be used' +
+         ' where the caller wishes to stop processing if one of the plug-in' +
          ' directory call point programs returns a special value indicating' +
          ' that some special case has been found.  An example might be in' +
          ' calling some kind of "check_errl" call point program.  Such a' +
@@ -175,13 +175,13 @@ def validate_parms():
     if not valid_value(call_point):
         return False
 
-    global shell_rc
-    if not valid_integer(shell_rc):
+    global allow_shell_rc
+    if not valid_integer(allow_shell_rc):
         return False
 
     # Convert to hex string for consistency in printout.
-    shell_rc = "0x%08x" % int(shell_rc, 0)
-    set_pgm_arg(shell_rc)
+    allow_shell_rc = "0x%08x" % int(allow_shell_rc, 0)
+    set_pgm_arg(allow_shell_rc)
 
     gen_post_validation(exit_function, signal_handler)
 
@@ -193,7 +193,7 @@ def validate_parms():
 ###############################################################################
 def run_pgm(plug_in_dir_path,
             call_point,
-            caller_shell_rc):
+            allow_shell_rc):
 
     r"""
     Run the call point program in the given plug_in_dir_path.  Return the
@@ -212,7 +212,7 @@ def run_pgm(plug_in_dir_path,
                                     plug_in_dir_path.  If no such call point
                                     program is found, this function returns an
                                     rc of 0 (i.e. success).
-    caller_shell_rc                 The user may supply a value other than
+    allow_shell_rc                  The user may supply a value other than
                                     zero to indicate an acceptable non-zero
                                     return code.  For example, if this value
                                     equals 0x00000200, it means that for each
@@ -276,7 +276,7 @@ def run_pgm(plug_in_dir_path,
     shell_rc = sub_proc.returncode
     # Shift to left.
     shell_rc *= 0x100
-    if shell_rc != 0 and shell_rc != caller_shell_rc:
+    if shell_rc != 0 and shell_rc != allow_shell_rc:
         rc = 1
         failed_plug_in_name = plug_in_name
 
@@ -315,7 +315,7 @@ def main():
     # Access program parameter globals.
     global plug_in_dir_paths
     global mch_class
-    global shell_rc
+    global allow_shell_rc
     global stop_on_plug_in_failure
     global stop_on_non_zero_rc
 
@@ -325,7 +325,7 @@ def main():
     qpvar(plug_in_packages_list)
     qprint("\n")
 
-    caller_shell_rc = int(shell_rc, 0)
+    allow_shell_rc = int(allow_shell_rc, 0)
     shell_rc = 0
     failed_plug_in_name = ""
 
@@ -346,7 +346,7 @@ def main():
     ret_code = 0
     for plug_in_dir_path in plug_in_packages_list:
         rc, shell_rc, failed_plug_in_name = \
-            run_pgm(plug_in_dir_path, call_point, caller_shell_rc)
+            run_pgm(plug_in_dir_path, call_point, allow_shell_rc)
         if rc != 0:
             ret_code = 1
             if stop_on_plug_in_failure:

@@ -167,7 +167,7 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     loc_shell_rc = 0
 
     sub_cmd_buf = "process_plug_in_packages.py" + debug_string +\
-                  " --call_point=" + call_point + " --shell_rc=" +\
+                  " --call_point=" + call_point + " --allow_shell_rc=" +\
                   str(shell_rc) + " --stop_on_plug_in_failure=" +\
                   str(stop_on_plug_in_failure) + " --stop_on_non_zero_rc=" +\
                   str(stop_on_non_zero_rc) + " " + plug_in_dir_paths
