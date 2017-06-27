@@ -45,7 +45,7 @@ Test Error Persistency On Reboot
     Wait Until Keyword Succeeds  10 min  10 sec
     ...  Is BMC Ready
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
 Create Test Error And Verify Resolved Field
