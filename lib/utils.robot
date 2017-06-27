@@ -663,6 +663,7 @@ Get URL List
     #              /xyz/openbmc_project/inventory).
 
     ${url_list}=  Read Properties  ${openbmc_url}/list
+    Sort List  ${url_list}
     [Return]  ${url_list}
 
 Get Endpoint Paths
@@ -927,18 +928,20 @@ Get System LED State
     [Return]  ${state.rsplit('.', 1)[1]}
 
 ###############################################################################
-Delete Error logs
+Delete Error Logs
     [Documentation]  Delete error logs.
 
-    # The REST method to delete error openbmc/openbmc#1327
-    # until then using logging restart.
-    Open Connection And Log In
-    Execute Command On BMC
-    ...  systemctl restart xyz.openbmc_project.Logging.service
-    Sleep  10s  reason=Wait for logging service to restart properly.
+    # Check if error logs entries exist, if not return.
+    ${resp}=  OpenBMC Get Request  /xyz/openbmc_project/logging/entry/list
+    Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
+
+    # Get the list of error logs entries and delete them all.
+    ${elog_entries}=  Get URL List  /xyz/openbmc_project/logging/entry
+    :FOR  ${entry}  IN  @{elog_entries}
+    \  Delete Error Log Entry  ${entry}
 
 ###############################################################################
-Delete Error log Entry
+Delete Error Log Entry
     [Documentation]  Delete error log entry.
     [Arguments]  ${entry_path}
 
