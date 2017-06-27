@@ -1,0 +1,15 @@
+#REST SSL connection test
+-i Test_SSL_Connection
+#Basic REST test
+-i REST_Login_Session_To_BMC
+-i Verify_REST_JSON_Data_On_Success
+-i Verify_REST_JSON_Data_On_Failure
+#Basic poweron test via REST
+-i Power_On_Test
+# Check for apps failures
+-i Check_For_Application_Failures
+#Power test via IPMI external
+-i Verify_SOL_During_Boot
+-i Verify_Host_PowerOff_Via_IPMI
+-i Verify_Deactivate_Non_Existing_SOL
+#Errolog testing without (watchdog)
