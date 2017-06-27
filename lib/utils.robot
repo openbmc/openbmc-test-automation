@@ -930,12 +930,12 @@ Get System LED State
 Delete Error logs
     [Documentation]  Delete error logs.
 
-    # The REST method to delete error openbmc/openbmc#1327
-    # until then using logging restart.
-    Open Connection And Log In
-    Execute Command On BMC
-    ...  systemctl restart xyz.openbmc_project.Logging.service
-    Sleep  10s  reason=Wait for logging service to restart properly.
+    ${resp}=  OpenBMC Get Request  /xyz/openbmc_project/logging/entry/list
+    Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
+
+    ${elog_entries}=  Get URL List  /xyz/openbmc_project/logging/entry
+    :FOR  ${entry}  IN  @{elog_entries}
+    \  Delete Error log Entry  ${entry}
 
 ###############################################################################
 Delete Error log Entry
