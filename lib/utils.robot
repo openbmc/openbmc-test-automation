@@ -342,6 +342,17 @@ Is OS Off
     ${boot_progress}=  Get Boot Progress
     Should Be Equal  ${boot_progress}  Off
 
+Get Boot Progress To OS Starting State
+    [Documentation]  Get the system to a boot progress state of 'FW Progress,
+    ...  Starting OS'.
+
+    ${boot_progress}=  Get Boot Progress
+    Run Keyword If  '${boot_progress}' == 'FW Progress, Starting OS'
+    ...  Log  Host is already in OS starting state
+    ...  ELSE
+    ...  Run Keywords  Initiate Host PowerOff  AND  Initiate Host Boot
+    ...  AND  Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+
 Verify Ping and REST Authentication
     ${l_ping}=   Run Keyword And Return Status
     ...    Ping Host  ${OPENBMC_HOST}
