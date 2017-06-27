@@ -8,9 +8,10 @@ Resource            ../lib/state_manager.robot
 Resource            ../lib/ipmi_client.robot
 
 Suite Setup         Run Keywords  Verify logging-test  AND
-...                 Delete Error Logs
+...                 Delete Error Logs And Verify
 Test Setup          Open Connection And Log In
 Test Teardown       Post Test Case Execution
+Suite Teardown      Delete Error Logs And Verify
 
 *** Test Cases ***
 
@@ -23,7 +24,7 @@ Create Test Error And Verify
 
 
 Test Error Persistency On Restart
-    [Documentation]  Restart logging service and verify error logs don't exist.
+    [Documentation]  Restart logging service and verify error logs.
     [Tags]  Test_Error_Persistency_On_Restart
 
     Create Test Error Log
@@ -31,12 +32,11 @@ Test Error Persistency On Restart
     Execute Command On BMC
     ...  systemctl restart xyz.openbmc_project.Logging.service
     Sleep  10s  reason=Wait for logging service to restart properly.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Verify Test Error Log
 
 
 Test Error Persistency On Reboot
-    [Documentation]  Reboot BMC and verify error logs don't exist.
+    [Documentation]  Reboot BMC and verify error logs.
     [Tags]  Test_Error_Persistency_On_Reboot
 
     Create Test Error Log
@@ -44,8 +44,7 @@ Test Error Persistency On Reboot
     Initiate BMC Reboot
     Wait Until Keyword Succeeds  10 min  10 sec
     ...  Is BMC Ready
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Verify Test Error Log
 
 
 Create Test Error And Verify Resolved Field
@@ -74,7 +73,8 @@ Create Test Error And Verify Resolved Field
 
     Delete Error Logs
     Create Test Error Log
-    ${resolved}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Resolved
+    ${elog_entry}=  Get URL List  /xyz/openbmc_project/logging/entry
+    ${resolved}=  Read Attribute  ${elog_entry[0]}  Resolved
     Should Be True  ${resolved} == 0
 
 
@@ -111,8 +111,9 @@ Create Test Errors And Verify Time Stamp
     Create Test Error Log
     # The error log generated is associated with the epoc time and unique
     # for every error and in increasing time stamp.
-    ${time_stamp1}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Timestamp
-    ${time_stamp2}=  Read Attribute  ${BMC_LOGGING_ENTRY}${2}  Timestamp
+    ${elog_entry}=  Get URL List  /xyz/openbmc_project/logging/entry
+    ${time_stamp1}=  Read Attribute  ${elog_entry[0]}  Timestamp
+    ${time_stamp2}=  Read Attribute  ${elog_entry[1]}  Timestamp
     Should Be True  ${time_stamp2} > ${time_stamp1}
 
 Create Test Error Log And Delete
@@ -139,12 +140,11 @@ Create Two Test Error Logs And Delete One
 
     Delete Error Logs And Verify
     Create Test Error Log
-    ${entry_id}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Id
+    ${elog_entry}=  Get URL List  /xyz/openbmc_project/logging/entry
     Create Test Error Log
-    Delete Error log Entry  ${BMC_LOGGING_ENTRY}/${entry_id}
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/${entry_id}
+    Delete Error log Entry  ${elog_entry[0]}
+    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
-    Delete Error Logs And Verify
 
 
 Verify IPMI SEL Version
@@ -254,10 +254,11 @@ Create Test Error Log
 
 Verify Test Error Log
     [Documentation]  Verify test error log entries.
-    ${entry_id}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Message
+    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
+    ${entry_id}=  Read Attribute  ${elog_entry[0]}  Message
     Should Be Equal  ${entry_id}
     ...  example.xyz.openbmc_project.Example.Elog.AutoTestSimple
-    ${entry_id}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Severity
+    ${entry_id}=  Read Attribute  ${elog_entry[0]}  Severity
     Should Be Equal  ${entry_id}
     ...  xyz.openbmc_project.Logging.Entry.Level.Error
 
