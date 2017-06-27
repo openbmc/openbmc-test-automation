@@ -32,6 +32,26 @@ Verify Host Quiesce State With Auto Reboot During Boot
     [Template]  Verify Host Quiesce State
 
 
+Verify Host Quiesce State Without Auto Reboot At Booted
+    # Description of template fields:
+    # Auto Reboot   Host State     Expected Host Action
+    no              Booted         No Reboot
+    [Documentation]  Validate "Quiesce" state at host boooted state
+    ...  without auto reboot.
+    [Tags]  Verify_Host_Quiesce_State_Without_Auto_Reboot_At_Booted
+    [Template]  Verify Host Quiesce State
+
+
+Verify Host Quiesce State With Auto Reboot At Booted
+    # Description of template fields:
+    # Auto Reboot   Host State     Expected Host Action
+    yes             Booted         Reboot
+    [Documentation]  Validate "Quiesce" state at host boooted state
+    ...  with auto reboot.
+    [Tags]  Verify_Host_Quiesce_State_With_Auto_Reboot_At_Booted
+    [Template]  Verify Host Quiesce State
+
+
 *** Keywords ***
 
 Verify Host Quiesce State
@@ -48,6 +68,8 @@ Verify Host Quiesce State
     Run Keyword If  '${host_state}' == 'Off'  Initiate Host PowerOn
     ...  ELSE IF  '${host_state}' == 'Booting'
     ...  Run Keywords  Initiate Host PowerOff  AND  Initiate Host Boot
+    ...  ELSE IF  '${host_state}' == 'Booted'
+    ...  Run Keywords  Put OS Starting State
 
     Trigger Host Watchdog Error
     ${resp}=  Run Keyword And Return Status  Is Host Rebooted
