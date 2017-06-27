@@ -7,10 +7,10 @@ Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 
 Suite Setup         Run Keywords  Verify logging-test  AND
-...                 Delete Error Logs
+...                 Delete Error Logs And Verify
 Test Setup          Open Connection And Log In
 Test Teardown       Close All Connections
-Suite Teardown      Delete Error Logs
+Suite Teardown      Delete Error Logs And Verify
 
 *** Test Cases ***
 
@@ -32,7 +32,7 @@ Test Error Persistency On Restart
     ...  systemctl restart xyz.openbmc_project.Logging.service
     Sleep  10s  reason=Wait for logging service to restart properly.
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
 Test Error Persistency On Reboot
@@ -45,7 +45,7 @@ Test Error Persistency On Reboot
     Wait Until Keyword Succeeds  10 min  10 sec
     ...  Is BMC Ready
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
 Create Test Error And Verify Resolved Field
