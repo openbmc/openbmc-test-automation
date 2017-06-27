@@ -37,7 +37,7 @@ Call FFDC Methods
     @{entries}=  Get FFDC Method Index
     :FOR  ${index}  IN  @{entries}
     \    Method Call Keyword List  ${index}  ${ffdc_function_list}
-    SSHLibrary.Close All Connections
+    Run Key U  SSHLibrary.Close All Connections
 
 Method Call Keyword List
     [Documentation]  Iterate the list through keyword index.
@@ -303,6 +303,7 @@ SCP Coredump Files
     \  scp.Get File  ${index}  ${LOG_PREFIX}${index.lstrip("/tmp/")}
     # Remove the file from remote to avoid re-copying on next FFDC call
     \  Execute Command On BMC  rm ${index}
+    Run Key U  scp.Close Connection
 
 
 ##############################################################################
