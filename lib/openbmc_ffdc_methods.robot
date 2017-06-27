@@ -34,10 +34,11 @@ Call FFDC Methods
     #                     obtained via a call to 'Get FFDC Method Desc' (also
     #                     from lib/openbmc_ffdc_list.py).
 
+    Run Key U  Open Connection And Log In
     @{entries}=  Get FFDC Method Index
     :FOR  ${index}  IN  @{entries}
     \    Method Call Keyword List  ${index}  ${ffdc_function_list}
-    SSHLibrary.Close All Connections
+    Run Key U  SSHLibrary.Close All Connections
 
 Method Call Keyword List
     [Documentation]  Iterate the list through keyword index.
@@ -95,7 +96,6 @@ Execute Keyword Method
 BMC FFDC Manifest
     [Documentation]    Get the commands index for the FFDC_BMC_CMD,
     ...                login to BMC and execute commands.
-    Open Connection And Log In
 
     @{entries}=     Get ffdc cmd index
     :FOR  ${index}  IN   @{entries}
@@ -142,7 +142,6 @@ Execute Command and Write FFDC
 
 BMC FFDC Files
     [Documentation]    Get the command list and iterate
-    Open Connection And Log In
     @{entries}=     Get ffdc file index
     :FOR  ${index}  IN   @{entries}
     \     Create File and Write Data   ${index}
@@ -219,7 +218,6 @@ Log FFDC Get Requests
 
 BMC FFDC Get Requests
     [Documentation]    Get the command list and iterate
-    Open Connection And Log In
     @{entries}=  Get ffdc get request index
     :FOR  ${index}  IN  @{entries}
     \   Log FFDC Get Requests   ${index}
@@ -294,15 +292,15 @@ OS FFDC Files
 SCP Coredump Files
     [Documentation]  Copy core dump file from BMC to local system.
     # Check if core dump exist in the /tmp
-    Open Connection And Log In
     ${core_files}=  Execute Command  ls /tmp/core_*
     @{core_list} =  Split String    ${core_files}
     # Copy the core files
-    Open Connection for SCP
+    Run Key U  Open Connection for SCP
     :FOR  ${index}  IN  @{core_list}
     \  scp.Get File  ${index}  ${LOG_PREFIX}${index.lstrip("/tmp/")}
     # Remove the file from remote to avoid re-copying on next FFDC call
     \  Execute Command On BMC  rm ${index}
+    Run Key U  scp.Close Connection
 
 
 ##############################################################################
