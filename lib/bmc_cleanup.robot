@@ -47,5 +47,7 @@ Reboot And Verify
     # cleanup_dir_path  Directory path to do the cleanup.
 
     OBMC Reboot (off)
+    # Take SSH session post BMC reboot before executing command.
+    Open Connection And Log In
     ${file_count2}=  Execute Command On BMC  find ${cleanup_dir_path} | wc -l
     Should Be True  ${file_count2} < ${file_count1}
