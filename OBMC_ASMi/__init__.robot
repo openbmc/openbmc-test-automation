@@ -1,8 +1,8 @@
 *** Settings ***
 
-Metadata  Author _Sathyajith M.S._
 Documentation  Main file for the test case It contains
 ...  initalizing steps.
+
 Resource  ${PATH_TEST_RESOURCES}${/}${RESOURCE_FILE}
 Suite Setup  Initializing Setup
 Suite Teardown  Init Teardown Steps
@@ -29,9 +29,9 @@ Initializing Setup
     Set Paths
     Initial Message
     Launch OpenBMC ASMi Browser
-    Login OpenBMC ASMi
+    Login OpenBMC GUI
     Get OpenBMC System Parameters
-    LogOut OpenBMC ASMi
+    LogOut OpenBMC GUI
 
 Set Paths
     [Documentation]  This function keyword set the path for all
@@ -54,7 +54,7 @@ Launch OpenBMC ASMi Browser
 
 Get OpenBMC System Parameters
     [Documentation]  Get Open BMC system parameters like
-    ...  system name and its IP address an all.
+    ...  system name and its IP address.
     ${l_Text_OutPut}=  Get Text    ${xpath_DISPLAY_TXT_OBMC_IP}
     ${OBMC_IP_ADDRESS}=  Fetch From Right
     ...  ${l_Text_OutPut}  marker=${SPACE}
@@ -76,6 +76,7 @@ Init Teardown Steps
     [Documentation]  Will do the end the test execution.
     ${OBMC_ASMi_END_TIME}=  Get Current Date
     ...  result_format=%Y-%m-%d %H:%M:%S,%f
-    Log To Console  Test Case Execution End Time:  ${OBMC_ASMi_END_TIME}
+    Log To Console  Test Case Execution End Time: ${OBMC_ASMi_END_TIME}
     Log To Console  ${PRINT_DOUBLE_LINE}
     Close Browser
+
