@@ -10,13 +10,13 @@ Library  DateTime
 Library  XvfbRobot
 Library  OperatingSystem
 Library  Selenium2Library  120  120
-Library  AngularJSLibrary
+#Library  AngularJSLibrary
 Library  Telnet  30 Seconds
 Library  SSHLibrary    30 Seconds
 Library  Process
 Library  Supporting_Libs.py
 Variables  OBMC_Commands_Constants.py
-Variables  RS_Variables.py
+Variables  Resource_Variables.py
 
 *** Keywords ***
 
@@ -24,7 +24,7 @@ Open Browser with mybluemix.net URL
     [Documentation]  Opens the browser in the URL
     ...  By default uses headless mode else the GUI browser.
     ${l_CurDirLowerCase}  Convert To Lowercase  ${CURDIR}
-    ${l_WindowsPlatform}  Run Keyword And Return Status  
+    ${l_WindowsPlatform}  Run Keyword And Return Status
     ...                   Should Contain  ${l_CurDirLowerCase}  c:\
     Run Keyword If  ${l_WindowsPlatform}==True
     ...             Launch Browser in Windows Platform
@@ -53,10 +53,10 @@ OpenBMC Test Setup
     ...  result_format=%Y-%m-%d %H:%M:%S,%f
     Set Global Variable  ${l_TimeStart}
     Log To Console  ${EMPTY}
-    Log To Console  ${PRINT_DOUBLE_LINE} 
+    Log To Console  ${PRINT_DOUBLE_LINE}
     Log To Console  ${l_TimeStart} ${l_TestStart}
     Login OpenBMC ASMi
-        
+
 Login OpenBMC ASMi
     [Documentation]  Performs login.
     [Arguments]  ${i_UserId}=${OBMC_ROOT_ID}
@@ -81,7 +81,7 @@ LogOut OpenBMC ASMi
     [Documentation]  This keyword just logs out the OpenBMC ASMi GUI.
     SSHLibrary.Close All Connections
     Telnet.Close All Connections
-    click button  ${xpath_BTN_LOGOUT} 
+    click button  ${xpath_BTN_LOGOUT}
     Wait Until Page Contains Element  ${xpath_BTN_LOGIN}
 
 OpenBMC Test Closure

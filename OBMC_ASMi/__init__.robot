@@ -3,6 +3,7 @@
 Metadata  Author _Sathyajith M.S._
 Documentation  Main file for the test case It contains
 ...  initalizing steps.
+
 Resource  ${PATH_TEST_RESOURCES}${/}${RESOURCE_FILE}
 Suite Setup  Initializing Setup
 Suite Teardown  Init Teardown Steps
@@ -76,6 +77,7 @@ Init Teardown Steps
     [Documentation]  Will do the end the test execution.
     ${OBMC_ASMi_END_TIME}=  Get Current Date
     ...  result_format=%Y-%m-%d %H:%M:%S,%f
-    Log To Console  Test Case Execution End Time:  ${OBMC_ASMi_END_TIME}
+    Log To Console  Test Case Execution End Time: ${OBMC_ASMi_END_TIME}
     Log To Console  ${PRINT_DOUBLE_LINE}
     Close Browser
+
