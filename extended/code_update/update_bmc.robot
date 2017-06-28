@@ -156,10 +156,6 @@ Prepare BMC For Update
     ...  Wait For BMC Ready
     ...  ELSE  Wait For Temp BMC Ready
 
-    # TODO: openbmc/openbmc#815
-    Sleep  1 min
-
-
 Check Boot Count And Time
     [Documentation]  Check for unexpected reboots.
     Set BMC Reset Reference Time
