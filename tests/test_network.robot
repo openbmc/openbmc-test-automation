@@ -12,6 +12,18 @@ Library  SSHLibrary
 
 Test Setup  Test Init Setup
 
+*** Variables ***
+${string_ip}        abc.abc.we.qw
+${valid_ip}         10.6.6.6
+${valid_gw}         10.6.6.1
+${prefix_l}         24
+${broadcast_ip}     10.6.6.255
+${loopback_ip}      127.0.0.1
+${multicast_ip}     224.6.6.255
+${out_of_range_ip}  10.6.6.256
+${less_octet_ip}    10.3.36
+${network_id}       10.6.6.0
+
 *** Test Cases ***
 
 Get BMC IPv4 Address And Verify
@@ -43,6 +55,79 @@ Verify MAC Address
     [Tags]  Verify_MAC_Address
     ${macaddr}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/eth0  MACAddress
     Validate MAC On BMC  ${macaddr}
+
+Add New Valid IP And Verify
+    [Documentation]  Add new IP address and verify.
+    [Tags]  Add_New_Valid_IP_And_Verify
+
+    Add New IP On BMC  ${valid_ip}
+
+    # Verify whether new IP address is populated on BMC system.
+    Test Init Setup
+    Validate IP On BMC  ${valid_ip}
+
+Configure Invalid IP String
+    # IP Address  Prefix_length  Gateway_IP
+    ${string_ip}  ${prefix_l}    ${valid_gw}
+
+    [Documentation]  Configure invalid IP address which is a string.
+    [Tags]  Configure_Invalid_String
+
+    [Template]  Configure_Network_Settings
+
+Configure Out Of Range IP
+    # IP Address        Prefix_length  Gateway_IP
+    ${out_of_range_ip}  ${prefix_l}    ${valid_gw}
+
+    [Documentation]  Configure out of range IP address.
+    [Tags]  Configure_Out_Of_Range_IP
+
+    [Template]  Configure_Network_Settings
+
+Configure Broadcast IP
+    # IP Address     Prefix_length  Gateway_IP
+    ${broadcast_ip}  ${prefix_l}    ${valid_gw}
+
+    [Documentation]  Configure broadcast IP address.
+    [Tags]  Configure_Broadcast_IP
+
+    [Template]  Configure_Network_Settings
+
+Configure Multicast IP
+    # IP Address     Prefix_length  Gateway_IP
+    ${multicast_ip}  ${prefix_l}    ${valid_gw}
+
+    [Documentation]  Configure multicast IP address.
+    [Tags]  Configure_Multicast_IP
+
+    [Template]  Configure_Network_Settings
+
+Configure Loopback IP
+    # IP Address     Prefix_length  Gateway_IP
+    ${loopback_ip}  ${prefix_l}    ${valid_gw}
+
+    [Documentation]  Configure loopback IP address.
+    [Tags]  Configure_Loopback_IP
+
+    [Template]  Configure_Network_Settings
+
+Configure Network ID
+    # IP Address     Prefix_length  Gateway_IP
+    ${network_id}  ${prefix_l}    ${valid_gw}
+
+    [Documentation]  Configure network ID IP address.
+    [Tags]  Configure_Network_ID
+
+    [Template]  Configure_Network_Settings
+
+Configure Less Octet IP
+    # IP Address     Prefix_length  Gateway_IP
+    ${less_octet_ip}  ${prefix_l}    ${valid_gw}
+
+    [Documentation]  Configure less octet IP address.
+    [Tags]  Configure_Less_Octet_IP
+
+    [Template]  Configure_Network_Settings
 
 *** Keywords ***
 
@@ -118,3 +203,44 @@ Validate MAC on BMC
 
     Should Contain  ${system_mac}  ${macaddr}
     ...  ignore_case=True  msg=MAC address does not exist.
+
+Add New IP On BMC
+    [Documentation]  Add new IP address on BMC.
+    [Arguments]  ${ipaddr}=10.6.6.6  ${len}=24  ${gw_ip}=${valid_gw}
+
+    # Description of argument(s):
+    # ipaddr  IP address of BMC.
+    # len     Prefix length.
+    # gw_ip   Gateway IP address.
+
+    ${len}=  Convert To Bytes  ${len}
+
+    @{ip_parms}=  Create List  xyz.openbmc_project.Network.IP.Protocol.IPv4  ${ip_addr}
+    ...  ${len}  ${gw_ip}
+
+    ${data}=  create dictionary  data=@{ip_parms}
+    ${resp}=  OpenBMC Post Request  ${XYZ_NETWORK_MANAGER}/eth0/action/IP  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+Configure Network Settings
+    [Documentation]  Configure network settings.
+    [Arguments]  ${ipaddr}=10.6.6.6  ${len}=24  ${gw_ip}=10.6.6.1
+    ...          ${scenario}=error
+
+    # Description of argument(s):
+    # ipaddr  IP address of BMC.
+    # len     Prefix length.
+    # gw_ip   Gateway IP address.
+
+    ${len}=  Convert To Bytes  ${len}
+
+    @{ip_parms}=  Create List  xyz.openbmc_project.Network.IP.Protocol.IPv4  ${ip_addr}
+    ...  ${len}  ${gw_ip}
+
+    ${data}=  create dictionary  data=@{ip_parms}
+    ${resp}=  OpenBMC Post Request  ${XYZ_NETWORK_MANAGER}/eth0/action/IP  data=${data}
+    ${json}=  to json  ${resp.content}
+
+    Run Keywords
+    ...  Should Not Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ...  AND  should be equal as strings  ${json['status']}  ${scenario}
