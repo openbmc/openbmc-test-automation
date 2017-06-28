@@ -11,6 +11,8 @@ Suite Setup         Open Connection And Log In
 Suite Teardown      Close All Connections
 Test Teardown       FFDC On Test Case Fail
 
+Force Tags  Networkd_Ext
+
 *** Test Cases ***
 
 Set IP address on valid Interface
