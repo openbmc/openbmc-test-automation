@@ -1,5 +1,5 @@
 -e Initiate_Code_Update_BMC
--e PNOR_BIOS_Code_Update
+-e BIOS_Code_Update
 -e Run_Keyword_Pgm
 -e Factory_Reset
 -e Full_Suite_Regression
@@ -7,6 +7,7 @@
 -e Host_Network
 -e Networkd_Ext
 -e NetworkManager
+-e Network_Nping
 -e Run_Multiple_Power_Cycle
 -e General_boot_testing
 -e Upload_Test
