@@ -954,6 +954,7 @@ Delete Error Log Entry
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
+###############################################################################
 Get LED State XYZ
     [Documentation]  Returns state of given LED.
     [Arguments]  ${led_name}
@@ -964,6 +965,7 @@ Get LED State XYZ
     [Return]  ${state}
 
 
+###############################################################################
 Get BMC Version
     [Documentation]  Returns BMC version from /etc/os-release.
     ...              e.g. "v1.99.6-141-ge662190"
@@ -973,3 +975,14 @@ Get BMC Version
     ${output}=  Execute Command On BMC  ${cmd}
     [Return]  ${output}
 
+
+###############################################################################
+Get Elog URL List
+    [Documentation]  Return error log entry list of URLs.
+
+    ${url_list}=  Read Properties  /xyz/openbmc_project/logging/entry/
+    Sort List  ${url_list}
+    [Return]  ${url_list}
+
+
+###############################################################################
