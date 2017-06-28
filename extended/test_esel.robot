@@ -7,6 +7,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Variables           ../data/variables.py
 Resource            ../lib/utils.robot
+Resource            ../lib/boot_utils.robot
 
 Suite Setup         eSEL Test SetUp
 Suite Teardown      Test Cleanup On Exit
@@ -16,6 +17,8 @@ Test Setup          Delete Error logs
 Force Tags  eSEL_Logging
 
 *** Variables ***
+
+${stack_mode}        skip
 
 ${RESERVE_ID}       raw 0x0a 0x42
 ${RAW_PREFIX}       raw 0x32 0xf0 0x
@@ -191,6 +194,9 @@ eSEL Test SetUp
     ...   ${OS_USERNAME}  msg=You must provide OS host user name.
     Should Not Be Empty
     ...   ${OS_PASSWORD}  msg=You must provide OS host user password.
+
+    # Boot to OS.
+    REST Power On
 
     Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     Open Connection And Log In

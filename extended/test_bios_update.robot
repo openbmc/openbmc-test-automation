@@ -12,7 +12,7 @@ Resource                ../lib/state_manager.robot
 
 Test Teardown           Test Bios Teardown
 
-Force Tags  PNOR_BIOS_Code_Update
+Force Tags  BIOS_Code_Update
 
 *** Variables ***
 
