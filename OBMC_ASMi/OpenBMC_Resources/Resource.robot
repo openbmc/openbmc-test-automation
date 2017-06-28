@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation  This is a resource file of OpenBMC ASMI
 ...  It contains the user defined keywords
 ...  and which are access to all gui modules
@@ -11,20 +10,18 @@ Library  XvfbRobot
 Library  OperatingSystem
 Library  Selenium2Library  120  120
 Library  AngularJSLibrary
-Library  Telnet  30 Seconds
 Library  SSHLibrary    30 Seconds
 Library  Process
 Library  Supporting_Libs.py
 Variables  OBMC_Commands_Constants.py
-Variables  RS_Variables.py
+Variables  Resource_Variables.py
 
 *** Keywords ***
-
 Open Browser with mybluemix.net URL
     [Documentation]  Opens the browser in the URL
     ...  By default uses headless mode else the GUI browser.
     ${l_CurDirLowerCase}  Convert To Lowercase  ${CURDIR}
-    ${l_WindowsPlatform}  Run Keyword And Return Status  
+    ${l_WindowsPlatform}  Run Keyword And Return Status
     ...                   Should Contain  ${l_CurDirLowerCase}  c:\
     Run Keyword If  ${l_WindowsPlatform}==True
     ...             Launch Browser in Windows Platform
@@ -53,11 +50,11 @@ OpenBMC Test Setup
     ...  result_format=%Y-%m-%d %H:%M:%S,%f
     Set Global Variable  ${l_TimeStart}
     Log To Console  ${EMPTY}
-    Log To Console  ${PRINT_DOUBLE_LINE} 
+    Log To Console  ${PRINT_DOUBLE_LINE}
     Log To Console  ${l_TimeStart} ${l_TestStart}
-    Login OpenBMC ASMi
-        
-Login OpenBMC ASMi
+    Login OpenBMC GUI
+
+Login OpenBMC GUI
     [Documentation]  Performs login.
     [Arguments]  ${i_UserId}=${OBMC_ROOT_ID}
     ...  ${i_Password}=${OBMC_ROOT_PASSWORD}
@@ -70,18 +67,16 @@ Login OpenBMC ASMi
     Wait Until Element Is Enabled  ${xpath_BTN_LOGOUT}
 
 Get SSH Connection
-    [Documentation]  Will set the ssh session for Open BMC to execute
-    ...  the BMC command's at CLI.
+    [Documentation]  Establish the SSH connection.
     [Arguments]  ${l_IpAddress}=${OBMC_HOST_NAME}    ${i_UserID}=${OBMC_ROOT_ID}
     ...   ${i_Passwd}=${OBMC_ROOT_PASSWORD}
     SSHLibrary.Open Connection  ${l_IpAddress}
     SSHLibrary.Login  ${i_UserID}  ${i_Passwd}
 
-LogOut OpenBMC ASMi
+LogOut OpenBMC GUI
     [Documentation]  This keyword just logs out the OpenBMC ASMi GUI.
     SSHLibrary.Close All Connections
-    Telnet.Close All Connections
-    click button  ${xpath_BTN_LOGOUT} 
+    click button  ${xpath_BTN_LOGOUT}
     Wait Until Page Contains Element  ${xpath_BTN_LOGIN}
 
 OpenBMC Test Closure
@@ -95,4 +90,4 @@ OpenBMC Test Closure
     ...  ${l_TimeEnd}  ${l_TimeStart}
     Log To Console  ${l_TimeEnd} ${l_TestEnd}[Execution Time: ${l_TimeDiff} secs]
     Log To Console  ${PRINT_DOUBLE_LINE}
-    LogOut OpenBMC ASMi
+    LogOut OpenBMC GUI
