@@ -7,9 +7,9 @@ Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 
 Suite Setup         Run Keywords  Verify callout-test  AND
-...                 Boot Host  AND
-...                 Clear Existing Error Logs
-Test Setup          Pre Test Case Execution
+...                 Boot Host
+Test Setup          Clear Existing Error Logs
+
 Test Teardown       Close All Connections
 Suite Teardown      Clear Existing Error Logs
 
@@ -25,6 +25,7 @@ Create Test Error Callout And Verify
     Create Test Error With Callout
     Verify Test Error Log And Callout
 
+
 Create Test Error Callout And Verify AdditionalData
     [Documentation]  Create Test Error Callout And Verify AdditionalData.
     [Tags]  Create_Test_Error_Callout_And_Verify_AdditionalData
@@ -38,10 +39,12 @@ Create Test Error Callout And Verify AdditionalData
     #    ]
 
     Create Test Error With Callout
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    ${elog_entry}=  Get Elog URL List
+    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
     ${jsondata}=  To JSON  ${resp.content}
     Should Contain  ${jsondata}["data"]["AdditionalData"]}  ${target_device_path}
     Should Contain  ${jsondata}["data"]["AdditionalData"]}  0x0DEADEAD
+
 
 Create Test Error Callout And Delete
     [Documentation]  Create Test Error Callout And Delete.
@@ -74,9 +77,11 @@ Create Test Error Callout And Delete
     # },
 
     Create Test Error With Callout
-    Delete Error Log Entry  ${BMC_LOGGING_ENTRY}${1}
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}/callout
+    ${elog_entry}=  Get Elog URL List
+    Delete Error Log Entry  ${elog_entry[0]}
+    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}/callout
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
 
 Create Two Test Error Callout And Delete
     [Documentation]  Create Two Test Error Callout And Delete.
@@ -137,13 +142,14 @@ Create Two Test Error Callout And Delete
     Create Test Error With Callout
 
     # Delete entry/2 elog entry.
-    Delete Error Log Entry  ${BMC_LOGGING_ENTRY}${2}
+    ${elog_entry}=  Get Elog URL List
+    Delete Error Log Entry  ${elog_entry[1]}
 
     # Verify if entry/1 exist and entry/2 is deleted.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list
-    ${jsondata}=  To JSON  ${resp.content}
-    Should Contain  ${jsondata["data"]}  ${BMC_LOGGING_ENTRY}${1}
-    Should Not Contain  ${jsondata["data"]}  ${BMC_LOGGING_ENTRY}${2}
+    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${resp}=  OpenBMC Get Request  ${elog_entry[1]}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 Create Test Error Callout And Verify LED
     [Documentation]  Create an error log callout and verify respective
@@ -158,12 +164,6 @@ Create Test Error Callout And Verify LED
 
 *** Keywords ***
 
-Pre Test Case Execution
-    [Documentation]  Do the initial test setup.
-
-    Open Connection And Log In
-    Delete Error logs
-
 Verify callout-test
     [Documentation]  Verify existence of prerequisite callout-test.
 
@@ -177,12 +177,8 @@ Clear Existing Error Logs
     ...              the BMC
 
     Open Connection And Log In
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
-    Execute Command On BMC
-    ...  systemctl restart xyz.openbmc_project.Logging.service
-    Sleep  10s  reason=Wait for logging service to restart properly.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    Delete Error Logs
+    ${resp}=  OpenBMC Get Request  /xyz/openbmc_project/logging/entry/
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 Create Test Error With Callout
@@ -219,13 +215,17 @@ Create Test Error With Callout
 
 Verify Test Error Log And Callout
     [Documentation]  Verify test error log entries.
-    ${content}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Message
-    Should Be Equal  ${content}
+    ${elog_entry}=  Get Elog URL List
+    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
+    ${json}=  To JSON  ${resp.content}
+
+    Should Be Equal  ${json["data"]["Message"]}
     ...  example.xyz.openbmc_project.Example.Elog.TestCallout
-    ${content}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}  Severity
-    Should Be Equal  ${content}
+
+    Should Be Equal  ${json["data"]["Severity"]}
     ...  xyz.openbmc_project.Logging.Entry.Level.Error
-    ${content}=  Read Attribute  ${BMC_LOGGING_ENTRY}${1}/callout  endpoints
+
+    ${content}=  Read Attribute  ${elog_entry[0]}/callout  endpoints
     Should Be Equal  ${content[0]}
     ...  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
 
