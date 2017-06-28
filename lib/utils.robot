@@ -831,7 +831,7 @@ Login To OS Host
     ...  Is Host Running  AND
     ...  Wait for OS  ${os_host}  ${os_username}  ${os_password}
 
-    Open Connection  ${os_host}
+    SSHLibrary.Open Connection  ${os_host}
     ${resp}=  Login  ${os_username}  ${os_password}
     [Return]  ${resp}
 
