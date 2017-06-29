@@ -500,15 +500,21 @@ Create OS Console File Path
 Create OS Console Command String
     [Documentation]  Return a command string to start OS console logging.
 
+    ${ssh_pw_path}=  Set Variable  ssh_pw
+
     # First make sure that the ssh_pw program is available.
     ${cmd_buf}=  Catenate  which ssh_pw 2>&1
     Rdpissuing  ${cmd_buf}
     ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
     Rdpvars  rc  output
-    Should Be Equal  ${rc}  ${0}  msg=${output}\n
 
-    ${cmd_buf}=  Catenate  ssh_pw ${OPENBMC_PASSWORD} -p 2200
+    ${ssh_pw_path}=  Run Keyword If  ${rc} != ${0}
+    ...  Set Variable  ${EXECDIR}${/}bin/ssh_pw
+
+    ${cmd_buf}=  Catenate  ${ssh_pw_path} ${OPENBMC_PASSWORD} -p 2200
     ...  -o "StrictHostKeyChecking no" ${OPENBMC_USERNAME}@${OPENBMC_HOST}
+
+    Rdpvars  ssh_pw_path   cmd_buf
 
     [Return]  ${cmd_buf}
 
