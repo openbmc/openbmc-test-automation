@@ -56,3 +56,5 @@
 -e Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
 -e Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
 -e Verify_Setting_OCC_Turbo_Via_REST
+-e Check_BMC_FSI_Compatible_Property_Is_Set
+-e Check_BMC_FSI_Name_Property_Is_Set
