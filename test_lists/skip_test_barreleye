@@ -47,3 +47,5 @@
 # Network tests for xyz interface.
 # https://github.com/openbmc/openbmc-test-automation/issues/729
 -e Network_Test
+-e Check_BMC_FSI_Compatible_Property_Is_Set
+-e Check_BMC_FSI_Name_Property_Is_Set
