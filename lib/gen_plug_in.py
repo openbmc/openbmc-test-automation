@@ -74,7 +74,7 @@ def find_plug_in_package(plug_in_name):
     for plug_in_base_dir_path in plug_in_base_path_list:
         candidate_plug_in_dir_path = os.path.normpath(plug_in_base_dir_path +
                                                       plug_in_name) + \
-                                                      os.sep
+            os.sep
         if os.path.isdir(candidate_plug_in_dir_path):
             return candidate_plug_in_dir_path
 
@@ -104,7 +104,7 @@ def validate_plug_in_package(plug_in_dir_path,
     if os.path.isabs(plug_in_dir_path):
         # plug_in_dir_path begins with a slash so it is an absolute path.
         candidate_plug_in_dir_path = os.path.normpath(plug_in_dir_path) +\
-                                     os.sep
+            os.sep
         if not os.path.isdir(candidate_plug_in_dir_path):
             gp.print_error_report("Plug-in directory path \"" +
                                   plug_in_dir_path + "\" does not exist.\n")
@@ -158,13 +158,18 @@ def return_integrated_plug_ins(mch_class="obmc"):
 
     integrated_plug_ins_list = []
 
+    DEBUG_SKIP_INTEGRATED = int(os.getenv('DEBUG_SKIP_INTEGRATED', '0'))
+
+    if DEBUG_SKIP_INTEGRATED:
+        return integrated_plug_ins_list
+
     for plug_in_base_path in plug_in_base_path_list:
         # Get a list of all plug-in paths that support our mch_class.
         mch_class_candidate_list = glob.glob(plug_in_base_path +
                                              "*/supports_" + mch_class)
         for candidate_path in mch_class_candidate_list:
             integrated_plug_in_dir_path = os.path.dirname(candidate_path) +\
-                                          os.sep
+                os.sep
             integrated_file_path = integrated_plug_in_dir_path + "integrated"
             if os.path.exists(integrated_file_path):
                 plug_in_name = \
