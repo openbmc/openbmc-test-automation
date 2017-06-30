@@ -602,6 +602,9 @@ def sprint_varx(var_name,
         format_string = "%" + str(loc_col1_indent) + "s%-" \
             + str(loc_col1_width) + "s" + value_format + trailing_char
         return format_string % ("", str(var_name) + ":", var_value)
+    elif type(var_value) is type:
+        return sprint_varx(var_name, str(var_value).split("'")[1], hex,
+                           loc_col1_indent, loc_col1_width, trailing_char)
     else:
         # The data type is complex in the sense that it has subordinate parts.
         format_string = "%" + str(loc_col1_indent) + "s%s\n"
