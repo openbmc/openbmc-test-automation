@@ -9,6 +9,7 @@ Library            SSHLibrary
 Library            OperatingSystem
 Library            Collections
 Library            String
+Library            gen_print.py
 Library            gen_robot_keyword.py
 
 *** Keywords ***
@@ -119,12 +120,16 @@ Execute Command and Write FFDC
     [Arguments]        ${key_index}
     ...                ${cmd}
     ...                ${logpath}=${FFDC_FILE_PATH}
+    ...                ${target}=BMC
 
     Run Keyword If   '${logpath}' == '${FFDC_FILE_PATH}'
     ...    Write Cmd Output to FFDC File   ${key_index}  ${cmd}
 
-    ${stdout}  ${stderr}=
-    ...   Execute Command    ${cmd}   return_stderr=True
+    ${cmd_buf}=  Catenate  ${target} Execute Command \ ${cmd} \ ignore_err=${1}
+    ${status}  ${ret_values}=  Run Key  ${cmd_buf}  ignore=${1}
+
+    ${stdout}=  Set Variable  @{ret_values}[0]
+    ${stderr}=  Set Variable  @{ret_values}[1]
 
     # Write stdout on success and stderr/stdout to the file on failure.
     Run Keyword If  $stderr == '${EMPTY}'
@@ -232,7 +237,7 @@ Log OS ALL DISTROS FFDC
     @{cmd_list}=  get ffdc os all distros call  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
     \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
-    \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
+    \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}  target=OS
 
 
 Log OS SPECIFIC DISTRO FFDC
@@ -244,7 +249,7 @@ Log OS SPECIFIC DISTRO FFDC
     @{cmd_list}=  get ffdc os distro call  ${key_index}  ${linux_distro}
     :FOR  ${cmd}  IN  @{cmd_list}
     \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
-    \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
+    \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}  target=OS
 
 
 
@@ -259,29 +264,23 @@ OS FFDC Files
     # If can't ping, return
     ${rc}=  Run Keyword and Return Status  Ping Host  ${OS_HOST}
     Return From Keyword If  '${rc}' == '${False}'
-    ...   Could not ping OS
+    ...   Could not ping OS.
 
-    Open Connection And Log In  host=${OS_HOST}  username=${OS_USERNAME}
-    ...   password=${OS_PASSWORD}
+    ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uptime  ignore_err=${1}
+    Return From Keyword If  '${rc}' != '${0}'  Could not connect to OS.
 
-    ${output}  ${stderr}  ${rc}=  Execute Command  uptime  return_stderr=True
-    ...   return_rc=True
+    ${stdout}  ${stderr}  ${rc}=  OS Execute Command  . /etc/os-release; echo $ID  ignore_err=${0}
+    Set Global Variable  ${linux_distro}  ${stdout}
 
-    # If the return code returned by "Execute Command" is non-zero, return
-    Return From Keyword If  '${rc}' != '${0}'
-    ...   Could not connect to OS
+    Rpvars  linux_distro
 
     @{entries}=  Get ffdc os all distros index
     :FOR  ${index}  IN  @{entries}
     \   Log OS ALL DISTROS FFDC  ${index}
 
-    ${linux_distro}=  Execute Command
-    ...   . /etc/os-release; echo $ID
-    ...   return_stdout=True  return_stderr=False  return_rc=False
-
     Return From Keyword If
     ...  '${linux_distro}' == '${EMPTY}' or '${linux_distro}' == 'None'
-    ...  Could not determine Linux Distribution
+    ...  Could not determine Linux Distribution.
 
     @{entries}=  Get ffdc os distro index  ${linux_distro}
     :FOR  ${index}  IN  @{entries}
