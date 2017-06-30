@@ -9,6 +9,7 @@ Library                 gen_print.py
 Library                 gen_robot_print.py
 Library                 gen_cmd.py
 Library                 gen_robot_keyword.py
+Library                 bmc_ssh_utils.py
 
 *** Variables ***
 ${pflash_cmd}           /usr/sbin/pflash -r /dev/stdout -P VERSION
@@ -54,8 +55,7 @@ Verify PNOR Update
 Get BMC System Model
     [Documentation]  Get the BMC model from the device tree.
 
-    Open Connection And Log In
-    ${bmc_model}  ${stderr}=  Execute Command
+    ${bmc_model}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat ${devicetree_base} | cut -d " " -f 1  return_stderr=True
     Should Be Empty  ${stderr}
     Should Not Be Empty  ${bmc_model}
