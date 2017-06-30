@@ -10,6 +10,7 @@ Library            OperatingSystem
 Library            Collections
 Library            String
 Library            gen_robot_keyword.py
+Library            bmc_ssh_utils.py
 
 *** Keywords ***
 
@@ -34,7 +35,6 @@ Call FFDC Methods
     #                     obtained via a call to 'Get FFDC Method Desc' (also
     #                     from lib/openbmc_ffdc_list.py).
 
-    Run Key U  Open Connection And Log In
     @{entries}=  Get FFDC Method Index
     :FOR  ${index}  IN  @{entries}
     \    Method Call Keyword List  ${index}  ${ffdc_function_list}
@@ -123,8 +123,7 @@ Execute Command and Write FFDC
     Run Keyword If   '${logpath}' == '${FFDC_FILE_PATH}'
     ...    Write Cmd Output to FFDC File   ${key_index}  ${cmd}
 
-    ${stdout}  ${stderr}=
-    ...   Execute Command    ${cmd}   return_stderr=True
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
 
     # Write stdout on success and stderr/stdout to the file on failure.
     Run Keyword If  $stderr == '${EMPTY}'
@@ -292,14 +291,14 @@ OS FFDC Files
 SCP Coredump Files
     [Documentation]  Copy core dump file from BMC to local system.
     # Check if core dump exist in the /tmp
-    ${core_files}=  Execute Command  ls /tmp/core_*
+    ${core_files}  ${stderr}  ${rc}=  BMC Execute Command  ls /tmp/core_*
     @{core_list} =  Split String    ${core_files}
     # Copy the core files
     Run Key U  Open Connection for SCP
     :FOR  ${index}  IN  @{core_list}
     \  scp.Get File  ${index}  ${LOG_PREFIX}${index.lstrip("/tmp/")}
     # Remove the file from remote to avoid re-copying on next FFDC call
-    \  Execute Command On BMC  rm ${index}
+    \  BMC Execute Command  rm ${index}
     Run Key U  scp.Close Connection
 
 
