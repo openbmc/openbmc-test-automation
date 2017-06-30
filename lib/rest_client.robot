@@ -183,11 +183,11 @@ Write Attribute
     ${json}=   to json         ${resp.content}
 
 Read Properties
-    [Arguments]    ${uri}    ${timeout}=10
-    ${resp}=   OpenBMC Get Request    ${uri}    timeout=${timeout}
-    Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
-    ${content}=     To Json    ${resp.content}
-    [Return]    ${content["data"]}
+    [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}
+    ${resp}=  OpenBMC Get Request  ${uri}  timeout=${timeout}  quiet=${quiet}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${content}=  To Json  ${resp.content}
+    [Return]  ${content["data"]}
 
 Call Method
     [Arguments]  ${uri}  ${method}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
