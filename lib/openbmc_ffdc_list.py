@@ -31,7 +31,7 @@ FFDC_BMC_CMD = {
     },
     'APPLICATION DATA':
     {
-        'BMC state': '/usr/sbin/obmcutil  state',
+        'BMC state': '/usr/sbin/obmcutil state',
     },
 }
 
