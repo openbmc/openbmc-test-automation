@@ -507,28 +507,9 @@ def get_state(openbmc_host="",
         if rc == 0:
             packet_loss = out_buf.rstrip("\n")
 
-    master_req_login = ['uptime', 'epoch_seconds']
-    req_login = [sub_state for sub_state in req_states if sub_state in
-                 master_req_login]
-    must_login = (len(req_login) > 0)
-
-    bmc_login = 0
-    if must_login:
-        cmd_buf = ["Open Connection And Log In"]
-        if not quiet:
-            grp.rpissuing_keyword(cmd_buf)
-        status, ret_values = \
-            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-        if status == "PASS":
-            bmc_login = 1
-        else:
-            if re.match('^Authentication failed for user', ret_values):
-                # An authentication failure is worth failing on.
-                BuiltIn().fail(gp.sprint_error(ret_values))
-
-    if 'uptime' in req_states and bmc_login:
-        cmd_buf = ["Execute Command", "cat /proc/uptime | cut -f 1 -d ' '",
-                   "return_stderr=True", "return_rc=True"]
+    if 'uptime' in req_states:
+        cmd_buf = ["BMC Execute Command", "cat /proc/uptime | cut -f 1 -d ' '",
+                   'quiet=${1}']
         if not quiet:
             grp.rpissuing_keyword(cmd_buf)
         status, ret_values = \
@@ -538,11 +519,10 @@ def get_state(openbmc_host="",
             if rc == 0 and stderr == "":
                 uptime = stdout
 
-    if 'epoch_seconds' in req_states and bmc_login:
+    if 'epoch_seconds' in req_states:
         date_cmd_buf = "date -u +%s"
         if USE_BMC_EPOCH_TIME:
-            cmd_buf = ["Execute Command", date_cmd_buf, "return_stderr=True",
-                       "return_rc=True"]
+            cmd_buf = ["BMC Execute Command", date_cmd_buf, 'quiet=${1}']
             if not quiet:
                 grp.rpissuing_keyword(cmd_buf)
             status, ret_values = \
