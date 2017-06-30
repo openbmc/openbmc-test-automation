@@ -663,7 +663,7 @@ Get URL List
     # openbmc_url  URL for list operation (e.g.
     #              /xyz/openbmc_project/inventory).
 
-    ${url_list}=  Read Properties  ${openbmc_url}/list
+    ${url_list}=  Read Properties  ${openbmc_url}/list  quiet=${1}
     [Return]  ${url_list}
 
 Get Endpoint Paths
@@ -932,11 +932,11 @@ Delete Error Logs
     [Documentation]  Delete error logs.
 
     # Check if error logs entries exist, if not return.
-    ${resp}=  OpenBMC Get Request  /xyz/openbmc_project/logging/entry/list
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${/}list  quiet=${1}
     Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
 
     # Get the list of error logs entries and delete them all.
-    ${elog_entries}=  Get URL List  /xyz/openbmc_project/logging/entry
+    ${elog_entries}=  Get URL List  ${BMC_LOGGING_ENTRY}
     :FOR  ${entry}  IN  @{elog_entries}
     \  Delete Error Log Entry  ${entry}
 
