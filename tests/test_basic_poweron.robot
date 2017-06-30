@@ -56,4 +56,7 @@ Host Off And On
     Initiate Host Boot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
 
+    # Wait 30 seconds before Powering Off
+    Sleep  30s
+
     Flush REST Sessions
