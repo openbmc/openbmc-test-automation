@@ -24,14 +24,14 @@ Create Test Error Callout And Verify
     Verify Test Error Log And Callout
 
 Resolved Field Testing
-    [Documentation]  Resolved Field Testing
+    [Documentation]  Resolved Field Testing.
     [Tags]  Resolved_Field_Testing
 
     Delete Error logs
     Create Test Error With Callout
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list
     ${jsondata}=  To JSON  ${resp.content}
-    Should Contain  ${jsondata}["data"]["AdditionalData"]  callout    
+    Should Contain  ${jsondata}["data"]["AdditionalData"]  callout 
 
     #Setting the Resolved Field
     ${valueDict}=   create dictionary   data=${1}
