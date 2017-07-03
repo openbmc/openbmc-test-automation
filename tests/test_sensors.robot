@@ -11,10 +11,9 @@ Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/state_manager.robot
 Library                ../data/model.py
 
-Suite setup            Setup The Suite
+Suite Setup            Setup The Suite
 Test Setup             Open Connection And Log In
 Test Teardown          Post Test Case Execution
-Suite Teardown         Restore System Configuration
 
 *** Variables ***
 ${model}=    ${OPENBMC_MODEL}
@@ -140,11 +139,12 @@ Verify OCC Power Supply Derating Value
 
 Verify Enabling OCC Turbo Setting Via IPMI
     [Documentation]  Set and verify OCC's turbo allowed on enable.
+    [Setup]  Turbo Setting Test Case Setup
+    [Tags]  Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
+    [Teardown]  Restore System Configuration
     # The allowed value for turbo allowed:
     # True  - To enable turbo allowed.
     # False - To disable turbo allowed.
-
-    [Tags]  Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
 
     ${uri}=  Get System Component  TurboAllowed
     ${sensor_num}=  Get Sensor Number  ${uri}
@@ -159,11 +159,12 @@ Verify Enabling OCC Turbo Setting Via IPMI
 
 Verify Disabling OCC Turbo Setting Via IPMI
     [Documentation]  Set and verify OCC's turbo allowed on disable.
+    [Setup]  Turbo Setting Test Case Setup
+    [Tags]  Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
+    [Teardown]  Restore System Configuration
     # The allowed value for turbo allowed:
     # True  - To enable turbo allowed.
     # False - To disable turbo allowed.
-
-    [Tags]  Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
 
     ${uri}=  Get System Component  TurboAllowed
     ${sensor_num}=  Get Sensor Number  ${uri}
@@ -179,11 +180,12 @@ Verify Disabling OCC Turbo Setting Via IPMI
 Verify Setting OCC Turbo Via REST
     [Documentation]  Verify enabling and disabling OCC's turbo allowed
     ...  via REST.
+    [Setup]  Turbo Setting Test Case Setup
+    [Tags]  Verify_Setting_OCC_Turbo_Via_REST
+    [Teardown]  Restore System Configuration
     # The allowed value for turbo allowed:
     # True  - To enable turbo allowed.
     # False - To disable turbo allowed.
-
-    [Tags]  Verify_Setting_OCC_Turbo_Via_REST
 
     Set Turbo Setting Via REST  False
     ${setting}=  Read Turbo Setting Via REST
@@ -192,7 +194,6 @@ Verify Setting OCC Turbo Via REST
     Set Turbo Setting Via REST  True
     ${setting}=  Read Turbo Setting Via REST
     Should Be Equal  ${setting}  True
-
 
 CPU Present
     [Tags]  CPU_Present
@@ -377,6 +378,20 @@ io_board Fault
 
 Setup The Suite
     [Documentation]  Do the initial suite setup.
+    ${current_state}=  Get Host State
+    Run Keyword If  '${current_state}' == 'Off'
+    ...  Initiate Host Boot
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is OS Starting
+
+    Open Connection And Log In
+    ${resp}=   Read Properties   ${OPENBMC_BASE_URI}enumerate   timeout=30
+    Set Suite Variable      ${SYSTEM_INFO}          ${resp}
+    log Dictionary          ${resp}
+
+Turbo Setting Test Case Setup
+    [Documentation]  Open Connection and turbo settings
     ${current_state}=  Get Host State
     Run Keyword If  '${current_state}' == 'Off'
     ...  Initiate Host Boot
