@@ -36,12 +36,10 @@ Verify eSEL Using REST
     [Documentation]  Generate eSEL log and verify using REST.
     [Tags]  Verify_eSEL_Using_REST
 
-    # Prior eSEL log shouldn't exist.
-    ${resp}=   OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     Create eSEL
     # New eSEL log should exist
-    ${resp}=   OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list
+#    ${resp}=  Get URL List  /xyz/openbmc_project/logging/entry
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
@@ -69,7 +67,7 @@ Check eSEL AdditionalData
     [Tags]  Check_eSEL_AdditionalData
 
     Create eSEL
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${jsondata}=  To JSON  ${resp.content}
     # "/xyz/openbmc_project/logging/entry/1": {
@@ -127,7 +125,6 @@ Create eSEL
     Run Inband IPMI Standard Command  ${cmd}
     Run Inband IPMI Standard Command  ${RAW_SEL_COMMIT}
 
-
 Count eSEL Entries
     [Documentation]  Count eSEL entries logged.
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
@@ -139,9 +136,17 @@ Count eSEL Entries
 
 Verify eSEL Entries
     [Documentation]  Verify eSEL entries logged.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${jsondata}=  To JSON  ${resp.content}
+    ${elog_entry}=  Get URL List  /xyz/openbmc_project/logging/entry
+    ${entry_id}=  Read Attribute  ${elog_entry[0]}  message
+    Should Be Equal  ${entry_id}
+    ...  org.open_power.Error.Host.Event.Event
+    ${entry_id}=  Read Attribute  ${elog_entry[0]}  Severity
+    Should Be Equal  ${entry_id}
+    ...  xyz.openbmc_project.Logging.Entry.Level.Informational 
+#    ...  xyz.openbmc_project.Logging.Entry.Level.Error
+#    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
+#    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+#    ${jsondata}=  To JSON  ${resp.content}
     #  "data": {
     #       "AdditionalData": [
     #           "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
@@ -152,9 +157,9 @@ Verify eSEL Entries
     #       "Timestamp": 1485904869061
     # }
 
-    Should Be Equal As Integers  ${jsondata["data"]["Id"]}  ${1}
-    Should Be Equal As Strings
-    ...  ${jsondata["data"]["AdditionalData"][0].rstrip()}  ${ESEL_DATA}
+#    Should Be Equal As Integers  ${jsondata["data"]["Id"]}  ${1}
+#    Should Be Equal As Strings
+#    ...  ${jsondata["data"]["AdditionalData"][0].rstrip()}  ${ESEL_DATA}
 
 
 Test Cleanup On Exit
