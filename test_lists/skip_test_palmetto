@@ -54,3 +54,8 @@
 # Network tests for xyz interface.
 # https://github.com/openbmc/openbmc-test-automation/issues/729
 -e Network_Test
+# FSI Related Test Cases NA for Palmetto System.
+ -e Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
+ -e Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
+ -e Verify_Setting_OCC_Turbo_Via_REST
+
