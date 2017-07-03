@@ -11,10 +11,9 @@ Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/state_manager.robot
 Library                ../data/model.py
 
-Suite setup            Setup The Suite
+Suite Setup            Setup The Suite
 Test Setup             Open Connection And Log In
 Test Teardown          Post Test Case Execution
-Suite Teardown         Restore System Configuration
 
 *** Variables ***
 ${model}=    ${OPENBMC_MODEL}
@@ -143,8 +142,9 @@ Verify Enabling OCC Turbo Setting Via IPMI
     # The allowed value for turbo allowed:
     # True  - To enable turbo allowed.
     # False - To disable turbo allowed.
-
+    [Setup]  Turbo Setting Test Case Setup
     [Tags]  Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
+    [Teardown]  Restore System Configuration
 
     ${uri}=  Get System Component  TurboAllowed
     ${sensor_num}=  Get Sensor Number  ${uri}
@@ -162,8 +162,9 @@ Verify Disabling OCC Turbo Setting Via IPMI
     # The allowed value for turbo allowed:
     # True  - To enable turbo allowed.
     # False - To disable turbo allowed.
-
+    [Setup]  Turbo Setting Test Case Setup
     [Tags]  Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
+    [Teardown]  Restore System Configuration
 
     ${uri}=  Get System Component  TurboAllowed
     ${sensor_num}=  Get Sensor Number  ${uri}
@@ -183,7 +184,9 @@ Verify Setting OCC Turbo Via REST
     # True  - To enable turbo allowed.
     # False - To disable turbo allowed.
 
+    [Setup]  Turbo Setting Test Case Setup
     [Tags]  Verify_Setting_OCC_Turbo_Via_REST
+    [Teardown]  Restore System Configuration
 
     Set Turbo Setting Via REST  False
     ${setting}=  Read Turbo Setting Via REST
@@ -192,7 +195,6 @@ Verify Setting OCC Turbo Via REST
     Set Turbo Setting Via REST  True
     ${setting}=  Read Turbo Setting Via REST
     Should Be Equal  ${setting}  True
-
 
 CPU Present
     [Tags]  CPU_Present
@@ -389,6 +391,10 @@ Setup The Suite
     Set Suite Variable      ${SYSTEM_INFO}          ${resp}
     log Dictionary          ${resp}
 
+Turbo Setting Test Case Setup
+    [Documentation]  Open Connection and turbo settings
+
+    Open Connection And Log In
     ${setting}=  Read Turbo Setting Via REST
     Set Global Variable  ${TURBO_SETTING}  ${setting}
 
