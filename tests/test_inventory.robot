@@ -6,6 +6,7 @@ Resource          ../lib/utils.robot
 Resource          ../lib/state_manager.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/list_utils.robot
+Resource          ../lib/boot_utils.robot
 Library           ../lib/utilities.py
 
 Variables         ../data/variables.py
@@ -18,6 +19,7 @@ Force Tags        Inventory
 
 ***Variables***
 
+${stack_mode}  normal
 ${LOOP_COUNT}  ${1}
 
 *** Test Cases ***
@@ -250,15 +252,8 @@ Check Air Or Water Cooled
 Test Suite Setup
     [Documentation]  Do the initial suite setup.
 
-    # Reboot host to re-power on clean if host is not "off".
-    ${current_state}=  Get Host State
-    Run Keyword If  '${current_state}' == 'Off'
-    ...  Initiate Host Boot
-    ...  ELSE  Initiate Host Reboot
-
-    Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is OS Starting
-
+    # Boot Host.
+    REST Power On
 
 Get Inventory
     [Documentation]  Get the properties of an endpoint.

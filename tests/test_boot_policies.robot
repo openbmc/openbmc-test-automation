@@ -7,6 +7,7 @@ Resource           ../lib/ipmi_client.robot
 Resource           ../lib/utils.robot
 Resource           ../lib/openbmc_ffdc.robot
 Resource           ../lib/state_manager.robot
+Resource           ../lib/boot_utils.robot
 
 Suite Setup        Test Suite Setup
 Test Setup         Test Init Setup
@@ -16,6 +17,7 @@ Suite Teardown     Restore Boot Settings
 Force Tags  boot_policy_test
 
 *** Variables ***
+${stack_mode}       normal
 ${HOST_SETTINGS}    ${SETTINGS_URI}host0
 
 *** Test Cases ***
@@ -163,12 +165,5 @@ Test Init Setup
 Test Suite Setup
     [Documentation]  Do the initial suite setup.
 
-    # Reboot host to re-power on clean if host is not "off".
-    ${current_state}=  Get Host State
-    Run Keyword If  '${current_state}' == 'Off'
-    ...  Initiate Host Boot
-    ...  ELSE  Initiate Host Reboot
-
-    Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is OS Starting
-
+    #Boot Host.
+    REST Power On
