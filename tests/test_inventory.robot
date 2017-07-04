@@ -6,6 +6,7 @@ Resource          ../lib/utils.robot
 Resource          ../lib/state_manager.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/list_utils.robot
+Resource          ../lib/boot_utils.robot
 Library           ../lib/utilities.py
 
 Variables         ../data/variables.py
@@ -18,6 +19,7 @@ Force Tags        Inventory
 
 ***Variables***
 
+${stack_mode}  skip
 ${LOOP_COUNT}  ${1}
 
 *** Test Cases ***
@@ -290,75 +292,13 @@ Check Air Or Water Cooled
     Run Keyword If  ${air_cooled}==${0} and ${water_cooled}==${0}
     ...  Fail  Neither AirCooled or WaterCooled.
 
-Verify Minimal CPU Inventory
-    [Documentation]  Verify minimal CPU inventory.
-    [Tags]  Verify_Minimal_CPU_Inventory
-
-    # item         minimum_count
-    cpu            1
-    [Template]     Minimum Inventory
-
-Verify Minimal DIMM Inventory
-    [Documentation]  Verify minimal DIMM inventory.
-    [Tags]  Verify_Minimal_DIMM_Inventory
-
-    # item         minimum_count
-    dimm           2
-    [Template]     Minimum Inventory
-
-Verify Minimal Core Inventory
-    [Documentation]  Verify minimal core inventory.
-    [Tags]  Verify_Minimal_Core_Inventory
-
-    # item         minimum_count
-    core           1
-    [Template]     Minimum Inventory
-
-Verify Minimal Memory Buffer Inventory
-    [Documentation]  Verify minimal memory buffer inventory.
-    [Tags]  Verify_Minimal_Memory_Buffer_Inventory
-
-    # item         minimum_count
-    memory_buffer  1
-    [Template]     Minimum Inventory
-
-Verify Minimal Fan Inventory
-    [Documentation]  Verify minimal fan inventory.
-    [Tags]  Verify_Minimal_Fan_Inventory
-
-    # item         minimum_count
-    fan            2
-    [Template]     Minimum Inventory
-
-Verify Minimal Main Planar Inventory
-    [Documentation]  Verify minimal main planar inventory.
-    [Tags]  Verify_Minimal_Main_Planar_Inventory
-
-    # item         minimum_count
-    main_planar    1
-    [Template]     Minimum Inventory
-
-Verify Minimal System Inventory
-    [Documentation]  Verify minimal system inventory.
-    [Tags]  Verify_Minimal_System_Inventory
-
-    # item         minimum_count
-    system         1
-    [Template]     Minimum Inventory
-
 *** Keywords ***
 
 Test Suite Setup
     [Documentation]  Do the initial suite setup.
 
-    # Reboot host to re-power on clean if host is not "off".
-    ${current_state}=  Get Host State
-    Run Keyword If  '${current_state}' == 'Off'
-    ...  Initiate Host Boot
-    ...  ELSE  Initiate Host Reboot
-
-    Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is OS Starting
+    # Boot Host.
+    REST Power On
 
 Get Inventory
     [Documentation]  Get the properties of an endpoint.
