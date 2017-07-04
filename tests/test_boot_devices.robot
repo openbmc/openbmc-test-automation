@@ -6,6 +6,7 @@ Resource        ../lib/rest_client.robot
 Resource        ../lib/ipmi_client.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/utils.robot
+Resource        ../lib/boot_utils.robot
 
 Suite Setup     Test Suite Setup
 Test Setup      Pre Test Case Execution
@@ -14,6 +15,7 @@ Suite Teardown  Close All Connections
 
 *** Variables ***
 
+${stack_mode}     normal
 ${HOST_SETTINGS}  ${SETTINGS_URI}host0
 
 *** Test Cases ***
@@ -193,9 +195,6 @@ Post Test Case Execution
 
 Test Suite Setup
     [Documentation]  Do the initial suite setup.
-    ${current_state}=  Get Host State
-    Run Keyword If  '${current_state}' == 'Off'
-    ...  Initiate Host Boot
 
-    Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is OS Starting
+    # Boot Host.
+    REST Power On
