@@ -18,6 +18,7 @@ Force Tags  eSEL_Logging
 
 *** Variables ***
 
+${stack_mode}       skip
 ${RESERVE_ID}       raw 0x0a 0x42
 ${RAW_PREFIX}       raw 0x32 0xf0 0x
 

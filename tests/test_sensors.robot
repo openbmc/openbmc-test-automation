@@ -10,13 +10,16 @@ Resource               ../lib/ipmi_client.robot
 Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/state_manager.robot
 Library                ../data/model.py
+Resource               ../lib/boot_utils.robot
 
 Suite Setup            Setup The Suite
 Test Setup             Open Connection And Log In
 Test Teardown          Post Test Case Execution
 
 *** Variables ***
-${model}=    ${OPENBMC_MODEL}
+
+${stack_mode}     skip
+${model}=         ${OPENBMC_MODEL}
 
 *** Test Cases ***
 Verify connection
@@ -228,14 +231,8 @@ io_board Fault
 Setup The Suite
     [Documentation]  Do the initial suite setup.
 
-    # Reboot host to re-power on clean if host is not "off".
-    ${current_state}=  Get Host State
-    Run Keyword If  '${current_state}' == 'Off'
-    ...  Initiate Host Boot
-    ...  ELSE  Initiate Host Reboot
-
-    Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is OS Starting
+    # Boot Host.
+    REST Power On
 
     Open Connection And Log In
     ${resp}=   Read Properties   ${OPENBMC_BASE_URI}enumerate   timeout=30
