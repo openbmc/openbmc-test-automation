@@ -156,7 +156,7 @@ def verify_image_upload():
     grk.run_key_u("Open Connection And Log In")
     image_purpose = get_image_purpose(image_path + "MANIFEST")
     if (image_purpose == "bmc" or image_purpose == "host"):
-        uri = var.SOFTWARE_VERSION_URI + "/" + image_version_id
+        uri = var.SOFTWARE_VERSION_URI + image_version_id
         status, ret_values =\
         grk.run_key("Read Attribute  " + uri + "  Activation")
 
@@ -169,5 +169,31 @@ def verify_image_upload():
     else:
         gp.print_var(versionPurpose)
         return False
+
+###############################################################################
+
+
+###############################################################################
+def verify_image_not_on_bmc(image_version):
+
+    r"""
+    Verify that there is no image with the given version on the BMC.
+
+    Description of argument(s):
+    image_version   The version of the image that should not be
+                    present on the BMC
+    """
+
+    image_version = BuiltIn().get_variable_value("${bad_image_version}")
+    upload_dir = BuiltIn().get_variable_value("${upload_dir_path}")
+    grk.run_key_u("Open Connection And Log In")
+    status, grep_res = grk.run_key("Execute Command On BMC  "
+            + "grep -r \"version=\" " + upload_dir)
+    bmc_version_list = grep_res.split("\n")
+    for bmc_version_line in bmc_version_list:
+        bmc_version = bmc_version_line.split("=")[-1]
+        if image_version == bmc_version:
+            return False
+    return True
 
 ###############################################################################
