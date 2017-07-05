@@ -156,7 +156,7 @@ Verify IPMI SEL Version
     ${setting_status}=  Evaluate  $setting_status.replace(' ','')
 
     Should Be True  ${setting_status} >= 1.5
-    Should Contain  ${version_info}  v2compliant  case_insensitive=True
+    Should Contain  ${version_info}  v2 compliant  case_insensitive=True
 
 
 Verify Watchdog Timedout Error
@@ -176,6 +176,60 @@ Verify Watchdog Timedout Error
 
     Verify Watchdog Errorlog Content
 
+Verify IPMI SEL Delete
+    [Documentation]  Verify IPMI SEL delete operation.
+    [Tags]  Verify_IPMI_SEL_Delete
+
+    Delete Error Logs And Verify
+    Create Test Error Log
+
+    ${sel_list}=  Run IPMI Standard Command  sel list
+    # Example of SEL List:
+    # 4 | 04/21/2017 | 10:51:16 | System Event #0x01 | Undetermined system hardware failure | Asserted
+
+    ${sel_entry}=  Fetch from Left  ${sel_list}  |
+    ${sel_entry}=  Evaluate  $sel_entry.replace(' ','')
+    ${sel_entry}=  Convert To Integer  0x${sel_entry}
+
+    ${sel_delete}=  Run IPMI Standard Command  sel delete ${sel_entry}
+    Should Be Equal As Strings  ${sel_delete}  Deleted entry ${sel_entry}
+    ...  case_insensitive=True
+
+    ${sel_list}=  Run IPMI Standard Command  sel list
+    Should Be Equal As Strings  ${sel_list}  SEL has no entries
+    ...  case_insensitive=True
+
+
+Verify Empty SEL
+    [Documentation]  Verify empty SEL list.
+    [Tags]  Verify_Empty_SEL
+
+    Delete Error Logs And Verify
+
+    ${resp}=  Run IPMI Standard Command  sel list
+    Should Contain  ${resp}  SEL has no entries  case_insensitive=True
+
+
+Delete Non Existing SEL Entry
+    [Documentation]  Delete non existing SEL entry.
+    [Tags]  Delete_Non_Existing_SEL_Entry
+
+    Delete Error Logs And Verify
+    ${sel_delete}=  Run Keyword And Expect Error  *
+    ...  Run IPMI Standard Command  sel delete 100
+    Should Contain  ${sel_delete}  Unable to delete entry
+    ...  case_insensitive=True
+
+
+Delete Invalid SEL Entry
+    [Documentation]  Delete invalid SEL entry.
+    [Tags]  Delete_Invalid_SEL_Entry
+
+    ${sel_delete}=  Run Keyword And Expect Error  *
+    ...  Run IPMI Standard Command  sel delete abc
+    Should Contain  ${sel_delete}  Given SEL ID 'abc' is invalid
+    ...  case_insensitive=True
+
 
 *** Keywords ***
 
@@ -189,8 +243,7 @@ Get IPMI SEL Setting
 
     ${setting_line}=  Get Lines Containing String  ${resp}  ${setting}
     ...  case-insensitive
-    ${setting_status}=  Fetch From Right  ${setting_line}  :
-    ${setting_status}=  Evaluate  $setting_status.replace(' ','')
+    ${setting_status}=  Fetch From Right  ${setting_line}  :${SPACE}
 
     [Return]  ${setting_status}
 
