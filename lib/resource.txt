@@ -51,6 +51,7 @@ ${DEBUG_TARBALL_PATH}  ${EMPTY}
 ${TFTP_SERVER}       ${EMPTY}
 ${TFTP_FILE_NAME}    ${EMPTY}
 ${IMAGE_FILE_PATH}   ${EMPTY}
+${BAD_IMAGES_DIR_PATH}    ${EMPTY}
 
 *** Keywords ***
 Get Inventory Schema

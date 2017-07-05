@@ -171,3 +171,30 @@ def verify_image_upload():
         return False
 
 ###############################################################################
+
+
+###############################################################################
+def verify_image_not_in_bmc_uploads_dir(image_version):
+
+    r"""
+    Check that an image with the given version is not unpacked inside of the
+    BMCs image uploads directory. If no image is found, retry every 30 seconds
+    for 3 minutes in case the BMC takes time unpacking the image.
+
+    Description of argument(s):
+    image_version  The version of the image to look for on the BMC.
+    """
+
+    grk.run_key('Open Connection And Log In')
+    upload_dir_path = BuiltIn().get_variable_value("${UPLOAD_DIR_PATH}")
+    for i in range(6):
+        stat, grep_res = grk.run_key('Execute Command On BMC  '
+                + 'ls ' + upload_dir_path + '*/MANIFEST 2>/dev/null '
+                + '| xargs grep -rl "version=' + image_version + '"')
+        image_dir = os.path.dirname(grep_res.split('\n')[0])
+        if '' != image_dir:
+            grk.run_key('Execute Command On BMC  rm -rf ' + image_dir)
+            BuiltIn().fail('Found invalid BMC Image: ' + image_dir)
+        time.sleep(30)
+
+###############################################################################
