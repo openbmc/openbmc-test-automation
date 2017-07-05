@@ -53,6 +53,68 @@ Upload Image Via TFTP
     ${ret}=  Verify Image Upload
     Should Be True  True == ${ret}
 
+Upload Image With Bad Manifest Via REST
+    [Documentation]  Upload an image with a MANIFEST with an invalid
+    ...              purpose via REST and make sure the BMC does not unpack it.
+    [Tags]  Upload_Image_With_Bad_Manifest_Via_REST
+
+    ${bad_image_file_path}=  OperatingSystem.Join Path  %{BAD_IMAGES_DIR_PATH}
+    ...  pnor_bad_manifest.tar
+    OperatingSystem.File Should Exist  ${bad_image_file_path}
+    ${bad_image_version}=  Get Version Tar  ${bad_image_file_path}
+    ${bad_image_data}=  OperatingSystem.Get Binary File  ${bad_image_file_path}
+    Upload Post Request  /upload/image  data=${bad_image_data}
+    Sleep  1 minute
+    Open Connection And Log In
+    Verify Image Not On BMC  ${bad_image_version}
+
+Upload Image With Bad Manifest Via TFTP
+    [Documentation]  Upload an image with a MANIFEST with an invalid
+    ...              purpose via TFTP and make sure the BMC does not unpack it.
+    [Tags]  Upload_Image_With_Bad_Manifest_Via_TFTP
+
+    @{image}=  Create List  pnor_bad_manifest.tar  1.1.1.1 #${TFTP_SERVER}
+    ${data}=  Create Dictionary  data=@{image}
+    ${resp}=  OpenBMC Post Request
+    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Sleep  1 minute
+    ${bad_image_version}=  Get Image Version From TFTP Server
+    ...  pnor_bad_manifest.tar
+    Open Connection And Log In
+    Verify Image Not On BMC  ${bad_image_version}
+
+Upload Image With No Squashfs Via REST
+    [Documentation]  Upload an image with no pnor.xz.suashfs file via REST and
+    ...              make sure the BMC does not unpack it.
+    [Tags]  Upload_Image_With_No_Squashfs_Via_REST
+
+    ${bad_image_file_path}=  OperatingSystem.Join Path  %{BAD_IMAGES_DIR_PATH}
+    ...  pnor_no_image.tar
+    OperatingSystem.File Should Exist  ${bad_image_file_path}
+    ${bad_image_version}=  Get Version Tar  ${bad_image_file_path}
+    ${bad_image_data}=  OperatingSystem.Get Binary File  ${bad_image_file_path}
+    Upload Post Request  /upload/image  data=${bad_image_data}
+    Sleep  1 minute
+    Open Connection And Log In
+    Verify Image Not On BMC  ${bad_image_version}
+
+Upload Image With No Squashfs Via TFTP
+    [Documentation]  Upload an image with no pnor.xz.suashfs file via TFTP and
+    ...              make sure the BMC does not unpack it.
+    [Tags]  Upload_Image_With_No_Squashfs_Via_TFTP
+
+    @{image}=  Create List  pnor_no_image.tar  ${TFTP_SERVER}
+    ${data}=  Create Dictionary  data=@{image}
+    ${resp}=  OpenBMC Post Request
+    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Sleep  1 minute
+    ${bad_image_version}=  Get Image Version From TFTP Server
+    ...  pnor_no_image.tar
+    Open Connection And Log In
+    Verify Image Not On BMC  ${bad_image_version}
+
 *** Keywords ***
 
 Upload Image Teardown
@@ -81,3 +143,35 @@ Upload Post Request
     ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
+
+Verify Image Not On BMC
+    [Documentation]  Check that an image with the given version is not unpacked
+    ...              inside of the BMCs image uploads directory.
+    [Arguments]  ${image_version}
+
+    # Description of arguments:
+    # image_version     The version of the image to look for on the BMC.
+
+    ${grep_res}=  Execute Command On BMC
+    ...  grep -rl "version=${image_version}" ${UPLOAD_DIR_PATH}
+    ${image_dir_path}  ${image_manifest}  Split Path  ${grep_res}
+    Execute Command On BMC  rm -rf ${image_dir_path}
+    Should Be Empty  ${grep_res}  msg=The BMC unpacked an invalid image.
+
+Get Image Version From TFTP Server
+    [Documentation]  Get the version dfound in the MANIFEST file of
+    ...              an image on the given TFTP server.
+    [Arguments]  ${image_file_path}
+
+    # Description of arguments:
+    # image_file_path  The path to the image on the TFTP server,
+    #                  ommitting a leading /.
+
+    ${rc}=  OperatingSystem.Run And Return RC
+    ...  curl -s tftp://${TFTP_SERVER}/${image_file_path} > bad_image.tar
+    Should Be Equal As Integers  0  ${rc}
+    ...  msg=Could not download image to check version.
+    ${version}=  Get Version Tar  bad_image.tar
+    OperatingSystem.Remove File  bad_image.tar
+    [Return]  ${version}
+
