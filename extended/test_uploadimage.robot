@@ -23,8 +23,9 @@ ${timeout}            10
 ${UPLOAD_DIR_PATH}    /tmp/images/
 ${QUIET}              ${1}
 ${IMAGE_VERSION}      ${EMPTY}
+${bad_image_version}  ${EMPTY}
 
-*** Test Cases ***
+*** old ***
 
 Upload Image Via REST
     [Documentation]  Upload an image via REST.
@@ -51,6 +52,68 @@ Upload Image Via TFTP
     ${IMAGE_VERSION}=  Get Image Version
     ...  ${UPLOAD_DIR_PATH}${upload_file}/MANIFEST
     ${ret}=  Verify Image Upload
+    Should Be True  True == ${ret}
+
+*** Test Cases ***
+
+Upload Image With Bad Manifest Via REST
+    [Documentation]  Upload an image with a MANIFEST with an invalid
+    ...              purpose via REST and make sure the BMC does not unpack it.
+    [Tags]
+
+    ${bad_image_file_path}=  OperatingSystem.Join Path  %{BAD_IMAGES_DIR_PATH}
+    ...  bad_manifest_rest.pnor.squashfs.tar
+    OperatingSystem.File Should Exist  ${bad_image_file_path}
+    ${bad_image_version}=  Get Version Tar  ${bad_image_file_path}
+    ${bad_image_data}=  OperatingSystem.Get Binary File  ${bad_image_file_path}
+    Upload Post Request  /upload/image  data=${bad_image_data}
+    ${ret}=  Verify Image Not On BMC  ${bad_image_version}
+    Should Be True  True == ${ret}
+
+Upload Image With Bad Manifest Via TFTP
+    [Documentation]  Upload an image with a MANIFEST with an invalid
+    ...              purpose via TFTP and make sure the BMC does not unpack it.
+    [Tags]
+
+    @{image}=  Create List  bad_manifest_tftp.pnor.squashfs.tar  ${TFTP_SERVER}
+    ${data}=  Create Dictionary  data=@{image}
+    ${resp}=  OpenBMC Post Request
+    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Sleep  1 minute
+    ${bad_image_version}=  Set Variable
+    ...  open-power-witherspoon-v1.16-53-gfb396b3-dirty-badmanifesttftp
+    ${ret}=  Verify Image Not On BMC  ${bad_image_version}
+    Should Be True  True == ${ret}
+
+Upload Image With No Squashfs Via REST
+    [Documentation]  Upload an image with no pnor.xz.suashfs file via REST and
+    ...              make sure the BMC does not unpack it.
+    [Tags]
+
+    ${bad_image_file_path}=  OperatingSystem.Join Path  %{BAD_IMAGES_DIR_PATH}
+    ...  no_squashfs_rest.pnor.squashfs.tar
+    OperatingSystem.File Should Exist  ${bad_image_file_path}
+    ${bad_image_version}=  Get Version Tar  ${bad_image_file_path}
+    ${bad_image_data}=  OperatingSystem.Get Binary File  ${bad_image_file_path}
+    Upload Post Request  /upload/image  data=${bad_image_data}
+    ${ret}=  Verify Image Not On BMC  ${bad_image_version}
+    Should Be True  True == ${ret}
+
+Upload Image With No Squashfs Via TFTP
+    [Documentation]  Upload an image with no pnor.xz.suashfs file via TFTP and
+    ...              make sure the BMC does not unpack it.
+    [Tags]
+
+    @{image}=  Create List  no_squashfs_tftp.pnor.squashfs.tar  ${TFTP_SERVER}
+    ${data}=  Create Dictionary  data=@{image}
+    ${resp}=  OpenBMC Post Request
+    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Sleep  1 minute
+    ${bad_image_version}=  Set Variable
+    ...  open-power-witherspoon-v1.16-53-gfb396b3-dirty-nosquashfstftp
+    ${ret}=  Verify Image Not On BMC  ${bad_image_version}
     Should Be True  True == ${ret}
 
 *** Keywords ***
@@ -81,3 +144,4 @@ Upload Post Request
     ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
+
