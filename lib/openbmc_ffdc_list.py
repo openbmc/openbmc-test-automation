@@ -61,6 +61,7 @@ FFDC_OS_ALL_DISTROS_FILE = {
         'OS_procinfo': 'cat /proc/cpuinfo',
         'OS_meminfo': 'cat /proc/meminfo',
         'OS_netstat': 'netstat -a',
+        'NVIDIA_report': 'sh /usr/bin/nvidia-bug-report.sh --output-file /usr/bin/nvidia-bug-report.log; zcat /usr/bin/nvidia-bug-report.log.gz',
     },
 }
 
