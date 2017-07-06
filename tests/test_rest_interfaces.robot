@@ -90,6 +90,39 @@ Verify REST JSON Data On Failure
     Should Be Equal As Strings  ${jsondata["status"]}  error
 
 
+Check Response Codes HTTP_UNSUPPORTED_MEDIA_TYPE
+    [Documentation]  REST "Post" response status test for
+    ...              HTTP_UNSUPPORTED_MEDIA_TYPE.
+    [Tags]  Check_Response_Codes_415
+
+    # Example:
+    # Response code:415, Content:{
+    # "data": {
+    #         "description": "Expecting content type 'application/octet-stream', got 'application/json'"
+    #         },
+    # "message": "415 Unsupported Media Type",
+    # "status": "error"
+    # }
+
+    Initialize OpenBMC
+
+    # Create the REST payload headers and EMPTY data
+    ${data}=  Create Dictionary  data  ${EMPTY}
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    Set To Dictionary  ${data}  headers  ${headers}
+
+    ${resp}=  Post Request  openbmc  /upload/image  &{data}
+    Should Be Equal As Strings
+    ...  ${resp.status_code}  ${HTTP_UNSUPPORTED_MEDIA_TYPE}
+
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Be Equal As Strings  ${jsondata["data"]["description"]}
+    ...  Expecting content type 'application/octet-stream', got 'application/json'
+    Should Be Equal As Strings
+    ...  ${jsondata["message"]}  415 Unsupported Media Type
+    Should Be Equal As Strings  ${jsondata["status"]}  error
+
+
 Get Response Codes
     [Documentation]  REST "Get" response status test.
     #--------------------------------------------------------------------
