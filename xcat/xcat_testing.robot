@@ -13,6 +13,7 @@ Suite Setup  Validate XCAT Setup
 
 ${poweron_flag}   ON
 ${poweroff_flag}  OFF
+${NUM_POWER_STATUS_CHECKS}  1000
 
 *** Test Cases ***
 
@@ -92,6 +93,89 @@ Power Off Group And Validate
     # Validate power status on each BMC node one by one.
     : FOR  ${bmc_node}  IN  @{bmc_nodes}
     \  Validate Power Status Via XCAT  ${bmc_node}  ${poweroff_flag}
+
+Continuous Node Power Status
+    [Documentation]  Continuously get the power status.
+    # This keyword verifies the REST connectivity between XCAT and the BMC node.
+    [Tags]  Continuos_Node_Power_Status
+
+    # Performing this operation only on one BMC node.
+
+    Power On Via XCAT  ${BMC_LIST[1]}
+
+    # Get the power status of the node repeatedly.
+    # By default it gets power status 1000 times.
+    # It bascially stress the BMC node and test REST implementation
+    # of the BMC node
+
+    : FOR  ${index}  IN RANGE  1  ${NUM_POWER_STATUS_CHECKS}
+    \  Validate Power Status Via XCAT  ${BMC_LIST[1]}  ${poweron_flag}
+
+Get Temperature Reading Via XCAT
+    [Documentation]  Get temperature reading via XCAT.
+    [Tags]  Get_Temperature_Reading_Via_XCAT
+
+    # Sample output of the keyword:
+    # node1: Ambient: 28.62 C
+    # node1: P0 Vcs Temp: 35 C
+    # node1: P0 Vdd Temp: 35 C
+    # node1: P0 Vddr Temp: 35 C
+    # node1: P0 Vdn Temp: 35 C
+    # node1: P1 Vcs Temp: 33 C
+    # node1: P1 Vdd Temp: 33 C
+    # node1: P1 Vddr Temp: 34 C
+    # node1: P1 Vdn Temp: 34 C
+
+    # Get temperature reading from each BMC node.
+
+    : FOR  ${bmc}  IN  @{BMC_LIST}
+    \  ${temp_reading}=  Get Hardware Vitals Via XCAT  ${bmc}  temp
+    \  Log  \n Temperature reading on $[bmc}\n ${temp_reading}
+
+Get Fanspeed Via XCAT
+    [Documentation]  Get fanspeed via XCAT.
+    [Tags]  Get_Fanspeed_Reading_Via_XCAT
+
+    # Sample output of the keyword:
+    # node1: Fan0 0: 10714 RPMS
+    # node1: Fan1 0: 10216 RPMS
+    # node1: Fan2 0: 14124 RPMS
+    # node1: Fan3 0: 11114 RPMS
+
+    # Get fanspeed from each BMC node.
+
+    : FOR  ${bmc}  IN  @{BMC_LIST}
+    \  ${fanspeed}=  Get Hardware Vitals Via XCAT  ${bmc}  fanspeed
+    \  Log  \n fanspeed on $[bmc}\n ${fanspeed}
+
+Get Voltage Reading Via XCAT
+    [Documentation]  Get voltage via XCAT.
+    [Tags]  Get_Voltage_Via_XCAT
+
+    # Sample output of the keyword:
+    # node1: No attributes returned from the BMC.
+    # BMC node is not returning anything, this will fail at present.
+
+    # Get voltage reading from each BMC node.
+
+    : FOR  ${bmc}  IN  @{BMC_LIST}
+    \  ${voltage}=  Get Hardware Vitals Via XCAT  ${bmc}  voltage
+    \  Log  \n Voltage reading on $[bmc}\n ${voltage}
+
+Get Wattage Via XCAT
+    [Documentation]  Get wattage via XCAT.
+    [Tags]  Get_Wattage_Via_XCAT
+
+    # Sample output of the keyword:
+    # node1: No attributes returned from the BMC.
+    # BMC node is not returning anything, this will fail at present.
+
+    # Get wattage reading from each BMC node.
+
+    : FOR  ${bmc}  IN  @{BMC_LIST}
+    \  ${wattage}=  Get Hardware Vitals Via XCAT  ${bmc}  wattage
+    \  Log  \n Wattage reading on $[bmc}\n ${wattage}
+
 
 *** Keywords ***
 
