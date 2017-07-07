@@ -136,4 +136,18 @@ Validate Node Added In Group
     Should Contain  ${nodes_in_group}  ${node}
     ...  msg=BMC node is not added in a group.
 
+Get Rvital Data Through XCAT
+    [Documentation]  Get rvital data through XCAT.
+    [Arguments]  ${node}  ${option}
+
+    # Description of argument(s):
+    # node    Name of the node (e.g. "node1").
+    # option  Rvital option (e.g.  temp, voltage, fanspeed etc).
+
+    ${stdout}  ${stderr}=  Execute Command  ${XCAT_DIR_PATH}/rvitals ${node} ${option}
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
+
+    [Return]  ${stdout}
+
 # TBD  openbmc/openbmc-test-automation/issues/647
