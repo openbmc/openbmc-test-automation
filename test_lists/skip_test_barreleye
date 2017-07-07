@@ -15,8 +15,6 @@
 -e Set_password_for_existing_user
 -e Set_password_with_empty_password_for_existing
 -e Create_existing_user
-#https://github.com/openbmc/openbmc/issues/928
--e Set_Host_Time_With_Both_And_NTP
 #https://github.com/openbmc/openbmc/issues/901
 -e Set_BMC_Time_With_Split_And_Manual
 #https://github.com/openbmc/openbmc/issues/1142

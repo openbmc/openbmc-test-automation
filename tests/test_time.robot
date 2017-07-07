@@ -161,7 +161,7 @@ Set Host Time With Both And Manual
 
 Set Host Time With Both And NTP
     #Operation     Owner  Mode    Status  BMC Time   Host Time
-    Set Host Time  BOTH   NTP     ok      No Change  Set
+    Set Host Time  BOTH   NTP     error   No Change  Not Set
 
     [Documentation]  Set host time when time owner is both and time mode is
     ...              NTP.
