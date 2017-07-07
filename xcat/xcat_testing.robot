@@ -13,6 +13,7 @@ Suite Setup  Validate XCAT Setup
 
 ${poweron_flag}   ON
 ${poweroff_flag}  OFF
+${range}          1000
 
 *** Test Cases ***
 
@@ -92,6 +93,22 @@ Power Off Group And Validate
     # Validate power status on each BMC node one by one.
     : FOR  ${bmc_node}  IN  @{bmc_nodes}
     \  Validate Power Status Via XCAT  ${bmc_node}  ${poweroff_flag}
+
+Continuous Node Power Status
+    [Documentation]  Contnuously get the power status.
+    [Tags]  Continuos_Node_Power_Status
+
+    # Performing this operation only on one BMC node.
+
+    Power On Via XCAT  ${BMC_LIST[1]}
+
+    # Get the power status of the node repeatedly.
+    # By default it gets power status 1000 times.
+    # It bascially stress the BMC node and test REST implementation
+    # of the BMC node
+
+    : FOR  ${index}  IN RANGE  1  ${range}
+    \  Validate Power Status Via XCAT  ${BMC_LIST[1]}  ${poweron_flag}
 
 *** Keywords ***
 
