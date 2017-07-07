@@ -155,6 +155,26 @@ Create Test Error Callout And Verify LED
     ${resp}=  Get LED State XYZ  cpu0_fault
     Should Be Equal  ${resp}  ${1}
 
+Resolved Field Testing
+    [Documentation]  Resolved Field Testing.
+    [Tags]  Resolved_Field_Testing
+
+    Delete Error logs
+    Create Test Error With Callout
+    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
+    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Contain  ${jsondata}["data"]["AdditionalData"]  callout
+
+    #Setting the Resolved Field
+    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
+    ${resolved}=  Read Attribute  ${elog_entry[0]}  Id
+    ${valueDict}=   create dictionary   data=${1}
+    OpenBMC Put Request  ${BMC_LOGGING_ENTRY}${resolved}/attr/Resolved  data=${valueDict}
+
+    #Verify if the callout error log is deleted
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${resolved}/callout
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 *** Keywords ***
 
