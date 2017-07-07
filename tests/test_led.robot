@@ -61,6 +61,16 @@ Test Fault LED And Verify Via REST
     [Tags]  Test_Fault_LED_And_Verify_Via_REST
     [Template]  Set System LED State
 
+Test Rear Identify LED And Verify Via REST
+    [Documentation]  Turn On/Off rear identify LED and verify via REST.
+    #LED Name  LED State
+    rear_id    On
+    rear_id    Off
+
+    [Tags]  Test_Rear_Identify_LED_And_Verify_Via_REST
+    [Template]  Set System LED State
+
+
 *** Keywords ***
 
 Set System LED State

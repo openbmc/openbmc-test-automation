@@ -45,6 +45,7 @@
 # System LED test cases which are NA for Barreleye system.
 -e Test_Power_LED_And_Verify_Via_REST
 -e Test_Fault_LED_And_Verify_Via_REST
+-e Test_Rear_Identify_LED_And_Verify_Via_REST
 -e Verify_Enclosure_Fault_LED_On_Assertion
 -e Verify_Rear_Power_LED_Association_With_Group_LED
 # Network tests for xyz interface.
