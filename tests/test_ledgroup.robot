@@ -87,6 +87,21 @@ Verify Enclosure Fault LED On Assertion
     ${resp}=  Get System LED State  rear_fault
     Should Be Equal  ${resp}  On
 
+
+Verify Rear Power LED Association With Group LED
+    [Documentation]  Verify rear power LED state association with
+    ...  power on group LED.
+    [Tags]  Verify_Rear_Power_LED_Association_With_Group_LED
+
+    Set LED State  On  power_on
+    ${resp}=  Get System LED State  rear_power
+    Should Be Equal  ${resp}  On
+
+    Set LED State  Off  power_on
+    ${resp}=  Get System LED State  rear_power
+    Should Be Equal  ${resp}  Off
+
+
 ***Keywords***
 
 Set LED State
