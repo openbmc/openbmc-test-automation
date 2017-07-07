@@ -37,6 +37,9 @@ Set MAC Address
 
     Write  fw_setenv ethaddr ${mac_address}
     OBMC Reboot (off)
+
+    # Take SSH session post BMC reboot.
+    Open Connection And Log In
     ${bmc_mac_addr}=  Execute Command On BMC  cat /sys/class/net/eth0/address
     Should Be Equal  ${bmc_mac_addr}  ${mac_address}  ignore_case=True
 
