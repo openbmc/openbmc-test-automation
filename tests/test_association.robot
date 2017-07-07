@@ -155,6 +155,25 @@ Create Test Error Callout And Verify LED
     ${resp}=  Get LED State XYZ  cpu0_fault
     Should Be Equal  ${resp}  ${1}
 
+Set Resolved Field And Verify Callout Deletion
+    [Documentation]  Set the "Resolved" error log and verify callout is deleted
+    [Tags]  Set_Resolved_Field_And_Verify_Callout_Deletion
+
+    Delete Error logs
+    Create Test Error With Callout
+    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
+    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Contain  ${jsondata}["data"]["AdditionalData"]  callout
+
+    # Set the error log field "Resolved".
+    # By doing so, the callout object should get deleted automatically.
+    ${valueDict}=  Create Dictionary  data=${1}
+    OpenBMC Put Request  ${elog_entry[0]}/attr/Resolved  data=${valueDict}
+
+    # Verify if the callout entry is deleted.
+    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}/callout
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 *** Keywords ***
 
