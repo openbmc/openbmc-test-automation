@@ -90,6 +90,110 @@ Verify REST JSON Data On Failure
     Should Be Equal As Strings  ${jsondata["status"]}  error
 
 
+Verify REST Get Message JSON Compliant
+    [Documentation]  Verify REST "GET" message is JSON format compliant.
+    [Tags]  Verify_REST_Get_Message_JSON_Compliant
+    # For testing if the REST message is JSON format compliant using a
+    # generic BMC state path /xyz/openbmc_project/state object and path
+    # walking through to ensure the parent object, trailing slash and
+    # attribute message response are intact.
+
+    # Object attribute data.
+    # Example:
+    # Response code:200, Content:{
+    #   "data": {
+    #      "CurrentBMCState": "xyz.openbmc_project.State.BMC.BMCState.Ready",
+    #      "RequestedBMCTransition": "xyz.openbmc_project.State.BMC.Transition.None"
+    #   },
+    #   "message": "200 OK",
+    #   "status": "ok"
+    # }
+
+    Verify JSON Response Content
+    ...  /xyz/openbmc_project/state/bmc0  DATA_NOT_EMPTY
+
+    # Object trailing slash attribute data.
+    # Example:
+    # Response code:200, Content:{
+    #    "data": [],
+    #    "message": "200 OK",
+    #    "status": "ok"
+    # }
+
+    Verify JSON Response Content  /xyz/openbmc_project/state/bmc0/
+
+    # Attribute data.
+    # Example:
+    # Response code:200, Content:{
+    #   "data": "xyz.openbmc_project.State.BMC.BMCState.Ready",
+    #   "message": "200 OK",
+    #   "status": "ok"
+    # }
+
+    Verify JSON Response Content
+    ...  /xyz/openbmc_project/state/bmc0/attr/CurrentBMCState  DATA_NOT_EMPTY
+
+
+Verify REST Post Message JSON Compliant
+    [Documentation]  Verify REST "POST" message is JSON format compliant.
+    [Tags]  Verify_REST_Post_Message_JSON_Compliant
+    # Example:
+    # Response code:200, Content:{
+    #  "data": null,
+    #  "message": "200 OK",
+    #  "status": "ok"
+    # }
+
+    # Generate 1KB file size
+    Run  dd if=/dev/zero of=dummyfile bs=1 count=0 seek=1KB
+    OperatingSystem.File Should Exist  dummyfile
+
+    # Get the content of the file and upload to BMC
+    ${image_data}=  OperatingSystem.Get Binary File  dummyfile
+
+    # Get REST session to BMC
+    Initialize OpenBMC
+
+    # Create the REST payload headers and data
+    ${data}=  Create Dictionary  data  ${image_data}
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  Accept=application/octet-stream
+    Set To Dictionary  ${data}  headers  ${headers}
+
+    ${resp}=  Post Request  openbmc  /upload/image  &{data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Be Equal  ${jsondata["data"]}  ${None}
+    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
+    Should Be Equal As Strings  ${jsondata["status"]}  ok
+
+    # Cleanup uploaded file.
+    BMC Execute Command  rm -rf /tmp/images/*
+
+
+Verify REST Put Message JSON Compliant
+    [Documentation]  Verify REST "PUT" message is JSON format compliant.
+    [Tags]  REST_Put_Message_JSON_Format_Compliance_Test
+    # Example:
+    # Response code:200, Content:{
+    #  "data": null,
+    #  "message": "200 OK",
+    #  "status": "ok"
+    # }
+
+    ${dict_data}=  Create Dictionary  data=${HOST_POWEROFF_TRANS}
+    ${resp}=  Openbmc Put Request
+    ...  ${HOST_STATE_URI}/attr/RequestedHostTransition  data=${dict_data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Be Equal  ${jsondata["data"]}  ${None}
+    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
+    Should Be Equal As Strings  ${jsondata["status"]}  ok
+    # Intention is not to test poweroff but to check the REST operation
+    # sink time allowing to kick poweroff.
+    Sleep  10s
+
+
 Check Response Codes HTTP_UNSUPPORTED_MEDIA_TYPE
     [Documentation]  REST "Post" response status test for
     ...              HTTP_UNSUPPORTED_MEDIA_TYPE.
@@ -307,3 +411,20 @@ Execute Delete And Check Response
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  Openbmc Delete Request  ${url_path}  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${expected_response_code}
+
+Verify JSON Response Content
+    [Documentation]  Verify JSON response data is intact.
+    [Arguments]  ${url_path}  ${data_empty}=${EMPTY}
+
+    # Description of argument(s):
+    # url_path     URL path.
+    # data_empty   JSON data element.
+
+    ${resp}=  OpenBMC Get Request  ${url_path}
+    ${jsondata}=  To JSON  ${resp.content}
+    Run Keyword If  '${data_empty}' == '${EMPTY}'
+    ...  Should Be Empty  ${jsondata["data"]}
+    ...  ELSE
+    ...  Should Not Be Empty  ${jsondata["data"]}
+    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
+    Should Be Equal As Strings  ${jsondata["status"]}  ok
