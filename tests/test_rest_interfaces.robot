@@ -5,7 +5,7 @@ Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/resource.txt
 Library           Collections
-Test Teardown     FFDC On Test Case Fail
+#Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -121,6 +121,58 @@ Check Response Codes HTTP_UNSUPPORTED_MEDIA_TYPE
     Should Be Equal As Strings
     ...  ${jsondata["message"]}  415 Unsupported Media Type
     Should Be Equal As Strings  ${jsondata["status"]}  error
+
+
+REST Message JSON Format Complaint Test
+    [Documentation]  Verify REST message are JSON format complaint.
+    [Tags]  REST_Message_JSON_Format_Complaint_Test
+    # For testing if the REST message is JSON format complaint using
+    # a generic BMC state path /xyz/openbmc_project/state object and
+    # walking through it to ensure the object, trailing slash, and
+    # attribute message are intact.
+
+    # Object attribute data.
+    # Example:
+    # Response code:200, Content:{
+    #   "data": {
+    #      "CurrentBMCState": "xyz.openbmc_project.State.BMC.BMCState.Ready",
+    #      "RequestedBMCTransition": "xyz.openbmc_project.State.BMC.Transition.None"
+    #   },
+    #   "message": "200 OK",
+    #   "status": "ok"
+    # }
+    ${resp}=  OpenBMC Get Request  /xyz/openbmc_project/state/bmc0
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Not Be Empty  ${jsondata["data"]}
+    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
+    Should Be Equal As Strings  ${jsondata["status"]}  ok
+
+    # Object trailing slash attribute data.
+    # Example:
+    # Response code:200, Content:{
+    #    "data": [],
+    #    "message": "200 OK",
+    #    "status": "ok"
+    # }
+    ${resp}=  OpenBMC Get Request  /xyz/openbmc_project/state/bmc0/
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Be Empty  ${jsondata["data"]}
+    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
+    Should Be Equal As Strings  ${jsondata["status"]}  ok
+
+    # Attribute data.
+    # Example:
+    # Response code:200, Content:{
+    #   "data": "xyz.openbmc_project.State.BMC.BMCState.Ready",
+    #   "message": "200 OK",
+    #   "status": "ok"
+    # }
+    ${resp}=  OpenBMC Get Request
+    ...  /xyz/openbmc_project/state/bmc0/attr/CurrentBMCState
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Not Be Empty  ${jsondata["data"]}
+    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
+    Should Be Equal As Strings  ${jsondata["status"]}  ok
 
 
 Get Response Codes
