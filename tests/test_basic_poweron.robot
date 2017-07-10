@@ -51,10 +51,8 @@ Host Off And On
     [Documentation]  Verify power off and on.
 
     Initiate Host PowerOff
-    Wait Until Keyword Succeeds  5 min  10 sec  Is OS Off
 
     Initiate Host Boot
-    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
 
     # TODO: Host shutdown race condition.
     # Wait 30 seconds before Powering Off.
