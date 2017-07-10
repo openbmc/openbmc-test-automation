@@ -45,8 +45,10 @@ Initiate Host PowerOff
     # Does caller want to wait for status?
     Run Keyword If  '${wait}' == '${0}'  Return From Keyword
 
+    # TODO: Reference to open-power/skiboot#81.
+    # Revert to 3 minutes once fixed.
     Wait Until Keyword Succeeds
-    ...  3 min  10 sec  Is Host Off
+    ...  6 min  10 sec  Is Host Off
 
 
 Initiate Host Reboot
