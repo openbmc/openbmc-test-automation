@@ -54,9 +54,35 @@ Prepare For Update
 
 
 SCP Tar Image File to BMC
-    [Arguments]         ${filepath}
+    [Arguments]  ${filepath}
+
     Open Connection for SCP
-    scp.Put File      ${filepath}   /tmp/flashimg
+    Open Connection And Log In
+    Loop SCP Retry
+
+
+Loop SCP Retry
+    [Documentation]  Try transferring the file 4 times.
+
+    : FOR  ${index}  IN RANGE  0  4
+    \  ${status}=  Retry SCP
+    \  Exit For Loop If  '${status}' == '${True}'
+
+
+Retry SCP
+    [Documentation]  Delete the incomplete file and scp file.
+
+    # TODO: Need to remove this when new code update in place.
+    # Example output:
+    # root@witherspoon:~# ls -lh /tmp/flashimg
+    # -rwxr-xr-x    1 root     root       32.0M Jun 29 01:12 /tmp/flashimg
+    Execute Command On BMC  rm -f /tmp/flashimg
+    scp.Put File  ${filepath}  /tmp/flashimg
+
+    ${file_size}=  Execute Command On BMC  ls -lh /tmp/flashimg
+    ${status}=  Run Keyword And Return Status
+    ...  Should Contain  ${file_size}  32.0M  msg=Incomplete file transfer.
+    [return]  ${status}
 
 
 Check If File Exist
