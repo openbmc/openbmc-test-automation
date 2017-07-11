@@ -54,9 +54,24 @@ Prepare For Update
 
 
 SCP Tar Image File to BMC
-    [Arguments]         ${filepath}
+    [Arguments]  ${filepath}
     Open Connection for SCP
-    scp.Put File      ${filepath}   /tmp/flashimg
+    scp.Put File  ${filepath}  /tmp/flashimg
+
+    # Example output:
+    # root@witherspoon:~# ls -lh /tmp/flashimg
+    # -rwxr-xr-x    1 root     root       32.0M Jun 29 01:12 /tmp/flashimg
+
+    Open Connection And Log In
+    ${file_size}=  Execute Command On BMC  ls -lh /tmp/flashimg
+    ${status}=  Run Keyword And Return Status
+    ...  Should Contain  ${file_size}  32.0M
+
+    # Delete the incomplete file and scp file again.
+    Run Keyword If  '${status}' == '${False}'
+    ...  Execute Command On BMC  rm -f /tmp/flashimg
+    Run Keyword If  '${status}' == '${False}'
+    ...  scp.Put File  ${filepath}  /tmp/flashimg
 
 
 Check If File Exist
