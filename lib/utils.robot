@@ -949,6 +949,10 @@ Delete Error Log Entry
     # entry_path  Delete an error log entry.
     #             Ex. /xyz/openbmc_project/logging/entry/1
 
+    # Skip delete if entry URI is a callout.
+    # Example: /xyz/openbmc_project/logging/entry/1/callout
+    Return From Keyword If  '${entry_path.rsplit('/', 1)[1]}' == 'callout'
+
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  Openbmc Delete Request  ${entry_path}  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
