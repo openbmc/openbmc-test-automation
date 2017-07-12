@@ -249,9 +249,14 @@ Check Air Or Water Cooled
 
 Test Suite Setup
     [Documentation]  Do the initial suite setup.
+
+    # We ran into situation where the previous tests powered on but didn't
+    # boot the host succesfully. To protect this test execution from such
+    # bad state, issue reboot host to re-power on clean.
     ${current_state}=  Get Host State
     Run Keyword If  '${current_state}' == 'Off'
     ...  Initiate Host Boot
+    ...  ELSE  Initiate Host Reboot
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is OS Starting
