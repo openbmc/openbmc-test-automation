@@ -56,8 +56,9 @@ Get To Stable State
 
     Run Keyword If  '${MAC_ADDRESS}' != '${EMPTY}'
     ...  Check And Reset MAC
-
-    Run Keyword If  '${CLEANUP_DIR_PATH}' != '${EMPTY}'
+    ${rc}=  Execute Command  find ${CLEANUP_DIR_PATH}
+    ...  return_stdout=False  return_rc=True
+    Run Keyword If  '${CLEANUP_DIR_PATH}' != '${EMPTY}' and ${rc} == 0
     ...  Cleanup Dir
 
 
