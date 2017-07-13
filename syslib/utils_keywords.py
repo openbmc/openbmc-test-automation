@@ -6,13 +6,184 @@ functions and use in test where generic robot keywords don't support.
 
 """
 import time
-from robot.libraries.BuiltIn import BuiltIn
-from robot.libraries import DateTime
+try:
+    from robot.libraries.BuiltIn import BuiltIn
+    from robot.libraries import DateTime
+except ImportError:
+    pass
 import re
+import os
+import fileinput
+import difflib
+import datetime as dt
+from utils_variables import *
 
+
+##########################################################################
+def inv_check_if_can_ignore_lshw_item(category, item, I_FILE_IGNORE_DICT):
+    r"""
+    Utility routeint that returns True if the category and item are 
+    found in the I_FILE_IGNORE_DICT ignore dictionary, returns
+    False otherwise.
+    """
+    low_cat = (category.lower()).strip()
+    low_item = (item.lower()).strip()
+    for k, v in I_FILE_IGNORE_DICT.iteritems():
+        if (k in low_cat) and (v in low_item):
+            return True
+    return False
+##########################################################################
+
+
+##########################################################################
+def inv_file_diff_check_lshw(initial_inv_file, final_inv_file, diff_file):
+    r"""
+     Compares the contents of two files which contain lshw inventory data.
+
+     Description of argument(s):
+     initial_inv_file   Name and path of file containing JSON formated data.
+     final_inv_file     Name and path of file to compare to the initial file.
+     diff_file          Name and path of file where differences are
+                         written to.
+
+     Returns
+     0 if both files contain the same information.
+     2 if FILES_DO_NOT_MATCH. The differences will be written to diff_file.
+     3 if INPUT_FILE_DOES_NOT_EXIST.
+     4 if IO_EXCEPTION_READING_FILE.
+     5 IO_EXCEPTION_WRITING_FILE.
+    """
+
+    now = dt.datetime.today().strftime("At %Y-%m-%d %H:%M:%S")
+
+    if (os.path.exists(initial_inv_file)
+            and os.path.exists(final_inv_file)):
+        f = open(initial_inv_file, 'r')
+        try:
+            initial = f.readlines()
+        except IOError:
+            f.close()
+            return I_IO_EXCEPTION_READING_FILE
+        except ValueError:
+            f.close()
+            return I_INPUT_FILE_MALFORMED
+        else:
+            f.close()
+
+        f = open(final_inv_file, 'r')
+        try:
+            final = f.readlines()
+        except IOError:
+            f.close()
+            return I_IO_EXCEPTION_READING_FILE
+        except ValueError:
+            f.close()
+            return I_INPUT_FILE_MALFORMED
+        else:
+            f.close()
+
+        # must have more than a trivial number of bytes and must compare
+        if ((len(initial) > 5) and (initial == final)):
+            try:
+                f = open(diff_file, 'w')
+                linetoprint = now + " found no difference between file " + \
+                    initial_inv_file + " and " + final_inv_file + "\n"
+                f.write(linetoprint)
+                f.close()
+            except IOError:
+                f.close()
+            else:
+                pass
+            return I_FILES_MATCH
+        else:
+
+            # find the differences and write them to the diff_file file
+
+            try:
+                f = open(diff_file, 'w')
+                linetoprint = now + " compared files " + \
+                    initial_inv_file + " and " + final_inv_file + "\n"
+                f.write(linetoprint)
+                #print linetoprint
+
+                diff = difflib.ndiff(initial, final)
+
+                print_header_flag = 0
+                category = ""
+                the_row = 1
+                item_we_cannot_ignore = False
+
+                for myline in diff:
+                    # get the line
+                    diffitem = myline.strip('\n')
+                    # if its a category, such as *processor or *memory, save it--we'll print it out later
+                    # categorlines begin with *
+                    if ('*' in diffitem):
+                        category = diffitem.strip()
+                    # lines beginning with minus or plus or q-mark are true difference items.
+                    # we want to look at those in more detail
+                    if ((diffitem.startswith('- ')) or (diffitem.startswith('+ '))
+                            or (diffitem.startswith('? '))):
+                        if ((diffitem.startswith('- '))
+                                or (diffitem.startswith('+ '))):
+                            # if we have not printed the header line for this
+                            # difference, print it now
+                            if (print_header_flag == 0):
+                                linetoprint = "Difference at line " + \
+                                    str(the_row) + "  (in section " + category + ")\n"
+                                #print linetoprint
+                                f.write(linetoprint)
+                            # if this is in the ignore dictionary, we'll print
+                            # it but also list it as an ignore item
+                            if inv_check_if_can_ignore_lshw_item(
+                                    category, diffitem, I_FILE_IGNORE_DICT):
+                                linetoprint = "  " + \
+                                    str(the_row) + " " + diffitem + \
+                                    "    +++ NOTE! You may want to ignore this line.  This difference" + \
+                                    " is common and may be expected. See the program's Ignore list +++\n"
+                            else:
+                                # this is an item not on the ignore list.  print the item and set the flag that we
+                                # have an item not on the ignore list.  The flag will determine the
+                                # return code we pass back to the user at the
+                                # end
+                                item_we_cannot_ignore = True
+                                linetoprint = "  " + \
+                                    str(the_row) + " " + diffitem + "\n"
+                            #print linetoprint
+                            f.write(linetoprint)
+                            print_header_flag = 1
+                        else:
+                            continue
+                    else:
+                        # adjust row numbering as a difference is only one line but it takes up several
+                        # lines in the diff file
+                        if (print_header_flag == 1):
+                            the_row = the_row + 1
+                            print_header_flag = 0
+                        the_row = the_row + 1
+
+                f.write("\n")   # make sure we end the file
+                f.close()
+
+            except IOError:
+                f.close()
+                return I_IO_EXCEPTION_WRITING_FILE
+
+            else:
+                if item_we_cannot_ignore:
+                    # we have at least one diffitem not on the ignore list
+                    return I_FILES_DO_NOT_MATCH
+                else:
+                    # any differences were on the ignore list
+                    return I_FILES_MATCH
+
+    else:
+        # os.path does not exist for one or both input files
+        return I_INPUT_FILE_DOES_NOT_EXIST
 ###############################################################################
 
 
+###############################################################################
 def run_until_keyword_fails(retry, retry_interval, name, *args):
     r"""
     Execute a robot keyword repeatedly until it either fails or the timeout
@@ -218,5 +389,4 @@ def build_error_dict(htx_error_log_output):
         error_index += 1
 
     return error_dict
-
 ###############################################################################

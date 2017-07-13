@@ -2,6 +2,7 @@
 Documentation    Stress the system using HTX exerciser.
 
 Resource         ../syslib/utils_os.robot
+Library          ../syslib/utils_keywords.py
 
 Suite Setup     Run Key  Start SOL Console Logging
 Test Setup      Pre Test Case Execution
@@ -10,6 +11,9 @@ Test Teardown   Post Test Case Execution
 *** Variables ****
 
 ${stack_mode}        skip
+${first_lshw_file}   ${EXECDIR}${/}data${/}os_inventory_initial.txt
+${last_lshw_file}    ${EXECDIR}${/}data${/}os_inventory_final.txt
+${diff_file}         ${EXECDIR}${/}data${/}os_inventory_diff.txt
 
 *** Test Cases ***
 
@@ -40,6 +44,11 @@ Start HTX Exerciser
     # Post Power off and on, the OS SSH session needs to be established.
     Login To OS
 
+    # get initial lshw inventory and write it to a file
+    ${first_lshw}=  Execute Command On OS  lshw
+    Create File     ${first_lshw_file}  ${first_lshw}
+    Append To File  ${first_lshw_file}  ${\n}
+
     Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
     ...  Create Default MDT Profile
 
@@ -49,6 +58,12 @@ Start HTX Exerciser
 
     Shutdown HTX Exerciser
 
+    # get lshw inventory after htx has completed running
+    # and save it to a file
+    ${last_lshw}      Execute Command On OS  lshw
+    Create File     ${last_lshw_file}  ${last_lshw}
+    Append To File  ${last_lshw_file}  ${\n}
+
     Power Off Host
 
     # Close all SSH and REST active sessions.
@@ -56,6 +71,10 @@ Start HTX Exerciser
     Flush REST Sessions
 
     Rprint Timen  HTX Test ran for: ${HTX_DURATION}
+
+    # check for differences in lshw inventories 
+    ${inv_rc}=   inv_file_diff_check_lshw   ${first_lshw_file}  ${last_lshw_file}  ${diff_file}
+    Should Be Equal As Integers   ${inv_rc}    0
 
 
 Loop HTX Health Check
