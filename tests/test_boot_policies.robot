@@ -162,9 +162,12 @@ Test Init Setup
 
 Test Suite Setup
     [Documentation]  Do the initial suite setup.
+
+    # Reboot host to re-power on clean if host is not "off".
     ${current_state}=  Get Host State
     Run Keyword If  '${current_state}' == 'Off'
     ...  Initiate Host Boot
+    ...  ELSE  Initiate Host Reboot
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is OS Starting
