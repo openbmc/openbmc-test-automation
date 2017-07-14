@@ -188,7 +188,7 @@ def verify_image_not_in_bmc_uploads_dir(image_version):
     """
 
     grk.run_key('Open Connection And Log In')
-    upload_dir_path = BuiltIn().get_variable_value("${UPLOAD_DIR_PATH}")
+    upload_dir_path = BuiltIn().get_variable_value("${upload_dir_path}")
     for i in range(6):
         stat, grep_res = grk.run_key('Execute Command On BMC  '
                 + 'ls ' + upload_dir_path + '*/MANIFEST 2>/dev/null '
