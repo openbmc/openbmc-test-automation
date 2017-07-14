@@ -1,8 +1,9 @@
 *** Settings ***
 Documentation         Test upload image with both valid and invalid images.
 ...                   This test expects there to be bad image tarballs named
-...                   pnor_bad_manifest.tar and pnor_no_image.tar on the TFTP
-...                   server and in the directory BAD_IMAGES_DIR_PATH.
+...                   pnor_bad_manifest.tar, pnor_no_image.tar,
+...                   bmc_bad_manifest.tar, and bmc_no_image.tar on the TFTP
+...                   server and in the BAD_IMAGES_DIR_PATH directory.
 ...                   Execution Method :
 ...                   python -m robot -v OPENBMC_HOST:<hostname>
 ...                   -v TFTP_SERVER:<TFTP server IP>
@@ -30,9 +31,9 @@ ${image_version}      ${EMPTY}
 
 *** Test Cases ***
 
-Upload Image Via REST
+Upload PNOR Image Via REST
     [Documentation]  Upload an image via REST.
-    [Tags]  Upload_Image_Via_REST
+    [Tags]  Upload_PNOR_Image_Via_REST
 
     OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
     ${IMAGE_VERSION}=  Get Version Tar  ${IMAGE_FILE_PATH}
@@ -41,9 +42,9 @@ Upload Image Via REST
     ${ret}=  Verify Image Upload
     Should Be True  True == ${ret}
 
-Upload Image Via TFTP
+Upload PNOR Image Via TFTP
     [Documentation]  Upload an image via TFTP.
-    [Tags]  Upload_Image_Via_TFTP
+    [Tags]  Upload_PNOR_Image_Via_TFTP
 
     @{image}=  Create List  ${TFTP_FILE_NAME}  ${TFTP_SERVER}
     ${data}=  Create Dictionary  data=@{image}
@@ -51,67 +52,98 @@ Upload Image Via TFTP
     ...  ${SOFTWARE_VERSION}/action/DownloadViaTFTP  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Sleep  1 minute
-    ${upload_file}=  Get Latest File  ${upload_dir_path}
-    ${image_version}=  Get Image Version
-    ...  ${upload_dir_path}${upload_file}/MANIFEST
+    ${image_version}=  Get Image Version From TFTP Server  ${TFTP_FILE_NAME}
     ${ret}=  Verify Image Upload
     Should Be True  True == ${ret}
 
-Upload Image With Bad Manifest Via REST
-    [Documentation]  Upload an image with a MANIFEST with an invalid
-    ...              purpose via REST and make sure the BMC does not unpack it.
-    [Tags]  Upload_Image_With_Bad_Manifest_Via_REST
 
-    ${bad_image_file_path}=  OperatingSystem.Join Path  ${BAD_IMAGES_DIR_PATH}
-    ...  pnor_bad_manifest.tar
-    OperatingSystem.File Should Exist  ${bad_image_file_path}
-    ...  msg=Invalid PNOR image pnor_bad_manifest.tar not found
-    ${bad_image_version}=  Get Version Tar  ${bad_image_file_path}
-    ${bad_image_data}=  OperatingSystem.Get Binary File  ${bad_image_file_path}
-    Upload Post Request  /upload/image  data=${bad_image_data}
-    Verify Image Not In BMC Uploads Dir  ${bad_image_version}
+Upload PNOR Image With Bad Manifest Via REST
+    # Image File Name
 
-Upload Image With Bad Manifest Via TFTP
-    [Documentation]  Upload an image with a MANIFEST with an invalid
-    ...              purpose via TFTP and make sure the BMC does not unpack it.
-    [Tags]  Upload_Image_With_Bad_Manifest_Via_TFTP
+    pnor_bad_manifest.tar
 
-    @{image}=  Create List  pnor_bad_manifest.tar  ${TFTP_SERVER}
-    ${data}=  Create Dictionary  data=@{image}
-    ${resp}=  OpenBMC Post Request
-    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${bad_image_version}=  Get Image Version From TFTP Server
-    ...  pnor_bad_manifest.tar
-    Verify Image Not In BMC Uploads Dir  ${bad_image_version}
+    [Documentation]  Upload a PNOR image with a bad MANIFEST via REST and
+    ...              verify that the BMC does not unpack it.
+    [Template]  Upload Image Via REST And Verify Failure
+    [Tags]  Upload_PNOR_Image_With_Bad_Manifest_Via_REST
 
-Upload Image With No Squashfs Via REST
-    [Documentation]  Upload an image with no pnor.xz.suashfs file via REST and
-    ...              make sure the BMC does not unpack it.
-    [Tags]  Upload_Image_With_No_Squashfs_Via_REST
 
-    ${bad_image_file_path}=  OperatingSystem.Join Path  ${BAD_IMAGES_DIR_PATH}
-    ...  pnor_no_image.tar
-    OperatingSystem.File Should Exist  ${bad_image_file_path}
-    ...  msg=Invalid PNOR image pnor_no_image.tar not found
-    ${bad_image_version}=  Get Version Tar  ${bad_image_file_path}
-    ${bad_image_data}=  OperatingSystem.Get Binary File  ${bad_image_file_path}
-    Upload Post Request  /upload/image  data=${bad_image_data}
-    Verify Image Not In BMC Uploads Dir  ${bad_image_version}
+Upload PNOR Image With No Squashfs Via REST
+    # Image File Name
 
-Upload Image With No Squashfs Via TFTP
-    [Documentation]  Upload an image with no pnor.xz.suashfs file via TFTP and
-    ...              make sure the BMC does not unpack it.
-    [Tags]  Upload_Image_With_No_Squashfs_Via_TFTP
+    pnor_no_image.tar
 
-    @{image}=  Create List  pnor_no_image.tar  ${TFTP_SERVER}
-    ${data}=  Create Dictionary  data=@{image}
-    ${resp}=  OpenBMC Post Request
-    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${bad_image_version}=  Get Image Version From TFTP Server
-    ...  pnor_no_image.tar
-    Verify Image Not In BMC Uploads Dir  ${bad_image_version}
+    [Documentation]  Upload a PNOR image with just a MANIFEST file via REST
+    ...              and verify that the BMC does not unpack it.
+    [Template]  Upload Image Via REST And Verify Failure
+    [Tags]  Upload_PNOR_Image_With_No_Squashfs_Via_REST
+
+
+Upload BMC Image With Bad Manifest Via REST
+    # Image File Name
+
+    bmc_bad_manifest.tar
+
+    [Documentation]  Upload a BMC image with a bad MANFIEST file via REST and
+    ...              verify that the BMC does not unpack it.
+    [Template]  Upload Image Via REST And Verify Failure
+    [Tags]  Upload_BMC_Image_With_Bad_Manifest_Via_REST
+
+
+Upload BMC Image With No Image Via REST
+    # Image File Name
+
+    bmc_no_image.tar
+
+    [Documentation]  Upload a BMC image with no just a MANIFEST file via REST
+    ...              and verify that the BMC does not unpack it.
+    [Template]  Upload Image Via REST And Verify Failure
+    [Tags]  Upload_BMC_Image_With_No_Image_Via_REST
+
+
+Upload PNOR Image With Bad Manifest Via TFTP
+    # Image File Name
+
+    pnor_bad_manifest.tar
+
+    [Documentation]  Upload a PNOR image with a bad MANIFEST file via TFTP and
+    ...              verify that the BMC does not unpack it.
+    [Template]  Upload Image Via TFTP And Verify Failure
+    [Tags]  Upload_PNOR_Image_With_Bad_Manifest_Via_TFTP
+
+
+Upload PNOR Image With No Squashfs Via TFTP
+    # Image File Name
+
+    pnor_no_image.tar
+
+    [Documentation]  Upload a PNOR image with just a MANIFEST file via TFTP and
+    ...              verify that the BMC does not unpack it.
+    [Template]  Upload Image Via TFTP And Verify Failure
+    [Tags]  Upload_PNOR_Image_With_No_Squashfs_Via_TFTP
+
+
+Upload BMC Image With Bad Manifest Via TFTP
+    # Image File Name
+
+    bmc_bad_manifest.tar
+
+    [Documentation]  Upload a BMC image with a bad MANIFEST file via TFTP and
+    ...              verify that the BMC does not unpack it.
+    [Template]  Upload Image Via TFTP And Verify Failure
+    [Tags]  Upload_BMC_Image_With_Bad_Manifest_Via_TFTP
+
+
+Upload BMC Image With No Image Via TFTP
+    # Image File Name
+
+    bmc_no_image.tar
+
+    [Documentation]  Upload a BMC image with just a MANIFEST file via TFTP and
+    ...              verify that the BMC does not unpack it.
+    [Template]  Upload Image Via TFTP And Verify Failure
+    [Tags]  Upload_BMC_Image_With_No_Image_Via_TFTP
+
 
 *** Keywords ***
 
@@ -145,20 +177,53 @@ Upload Post Request
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
 
-
 Get Image Version From TFTP Server
     [Documentation]  Get the version dfound in the MANIFEST file of
     ...              an image on the given TFTP server.
-    [Arguments]  ${image_file_path}
+    [Arguments]  ${tftp_image_file_path}
 
     # Description of argument(s):
-    # image_file_path  The path to the image on the TFTP server,
-    #                  ommitting a leading /.
+    # tftp_image_file_path  The path to the image on the TFTP server,
+    #                       ommitting a leading /.
 
     ${rc}=  OperatingSystem.Run And Return RC
-    ...  curl -s tftp://${TFTP_SERVER}/${image_file_path} > bad_image.tar
+    ...  curl -s tftp://${TFTP_SERVER}/${tftp_image_file_path} > tftp_image.tar
     Should Be Equal As Integers  0  ${rc}
     ...  msg=Could not download image to check version.
-    ${version}=  Get Version Tar  bad_image.tar
-    OperatingSystem.Remove File  bad_image.tar
+    ${version}=  Get Version Tar  tftp_image.tar
+    OperatingSystem.Remove File  tftp_image.tar
     [Return]  ${version}
+
+Upload Image Via REST And Verify Failure
+    [Documentation]  Upload the given bad image to the BMC via REST and check
+    ...              that the BMC did not unpack the invalid image.
+    [Arguments]  ${image_file_name}
+
+    # Description of argument(s):
+    # image_file_name  The name of the bad image to upload via REST
+
+    ${bad_image_file_path}=  OperatingSystem.Join Path  ${BAD_IMAGES_DIR_PATH}
+    ...  ${image_file_name}
+    OperatingSystem.File Should Exist  ${bad_image_file_path}
+    ...  msg=Bad image file ${image_file_name} not found.
+    ${bad_image_version}=  Get Version Tar  ${bad_image_file_path}
+    ${bad_image_data}=  OperatingSystem.Get Binary File  ${bad_image_file_path}
+    Upload Post Request  /upload/image  data=${bad_image_data}
+    Verify Image Not In BMC Uploads Dir  ${bad_image_version}
+
+Upload Image Via TFTP And Verify Failure
+    [Documentation]  Upload the given bad image to the BMC via TFTP and check
+    ...              that the BMC did not unpack the invalid image.
+    [Arguments]  ${image_file_name}
+
+    # Description of argument(s):
+    # image_file_name  The name of the bad image to upload via TFTP
+
+    @{image}=  Create List  ${image_file_name}  ${TFTP_SERVER}
+    ${data}=  Create Dictionary  data=@{image}
+    ${resp}=  OpenBMC Post Request
+    ...  ${SOFTWARE_VERSION}/action/DownloadViaTFTP  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${bad_image_version}=  Get Image Version From TFTP Server
+    ...  ${image_file_name}
+    Verify Image Not In BMC Uploads Dir  ${bad_image_version}
