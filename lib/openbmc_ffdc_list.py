@@ -21,7 +21,6 @@ FFDC_BMC_CMD = {
     'DRIVER INFO':
     {
         # String Name         Command
-        'Build Info': 'cat /etc/version',
         'FW Level': 'cat /etc/os-release',
     },
     'BMC DATA':
