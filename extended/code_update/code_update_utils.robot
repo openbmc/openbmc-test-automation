@@ -82,7 +82,7 @@ Retry SCP
     # Description of argument(s):
     # image_file_path  Downloaded BMC tar file image path.
 
-    ${targ_file_path}=  Set Variable /tmp/flashimg
+    ${targ_file_path}=  Set Variable  /tmp/flashimg
 
     # TODO: Need to remove this when new code update in place.
     # Example output:
