@@ -56,3 +56,5 @@
 # Network tests for xyz interface.
 # https://github.com/openbmc/openbmc-test-automation/issues/729
 -e Network_Test
+#https://github.com/openbmc/openbmc/issues/1967
+-e boot_policy_test

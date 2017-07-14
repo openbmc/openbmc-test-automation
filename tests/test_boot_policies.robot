@@ -13,6 +13,8 @@ Test Setup         Test Init Setup
 Test Teardown      FFDC On Test Case Fail
 Suite Teardown     Restore Boot Settings
 
+Force Tags  boot_policy_test
+
 *** Variables ***
 ${HOST_SETTINGS}    ${SETTINGS_URI}host0
 
