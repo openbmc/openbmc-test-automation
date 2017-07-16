@@ -2,6 +2,7 @@
 Documentation    Stress the system using HTX exerciser.
 
 Resource         ../syslib/utils_os.robot
+Library          ../syslib/utils_keywords.py 
 
 Suite Setup     Run Key  Start SOL Console Logging
 Test Setup      Pre Test Case Execution
@@ -9,7 +10,10 @@ Test Teardown   Post Test Case Execution
 
 *** Variables ****
 
-${stack_mode}        skip
+${stack_mode}           skip
+${json_file_initial}    ${EXECDIR}${/}data${/}os_inventory_initial.json
+${json_file_final}      ${EXECDIR}${/}data${/}os_inventory_final.json
+${json_diff_file}       ${EXECDIR}${/}data${/}os_inventory_diff.json
 
 *** Test Cases ***
 
@@ -39,17 +43,30 @@ Start HTX Exerciser
 
     # Post Power off and on, the OS SSH session needs to be established.
     Login To OS
+    
+    Log To Console   Getting initial OS inventory                  
+    Create JSON Inventory File   ${json_file_initial}      
 
-    Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
-    ...  Create Default MDT Profile
+    #Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
+    #...  Create Default MDT Profile
 
-    Run MDT Profile
+    #Run MDT Profile
 
-    Loop HTX Health Check
+    #Loop HTX Health Check
 
-    Shutdown HTX Exerciser
+    #Shutdown HTX Exerciser
 
-    Power Off Host
+    Log To Console   Getting final OS inventory                  
+    Create JSON Inventory File    ${json_file_final}
+
+    Log to Console   Comparing initial and final OS inventories                  
+    OperatingSystem.File Should Exist   ${json_file_initial}
+    OperatingSystem.File Should Exist   ${json_file_final}
+    ${diff_rc}=  json_inv_file_diff_check     ${json_file_initial}   
+    ...  ${json_file_final}     ${json_diff_file}
+    Should Be Equal As Integers    ${diff_rc}    0 
+
+    #Power Off Host
 
     # Close all SSH and REST active sessions.
     Close All Connections
