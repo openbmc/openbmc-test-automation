@@ -3,17 +3,237 @@
 r"""
 This module contains keyword functions to supplement robot's built in
 functions and use in test where generic robot keywords don't support.
-
 """
+
+try:
+    from robot.libraries.BuiltIn import BuiltIn
+    from robot.libraries import DateTime
+except ImportError:
+    pass
 import time
-from robot.libraries.BuiltIn import BuiltIn
-from robot.libraries import DateTime
-import re
+import os
+import difflib
+
+
+##########################################################################
+def json_inv_file_diff_check(file1_path,
+                             file2_path,
+                             diff_file_path,
+                             skip_dictionary):
+    r"""
+    Compare the contents of two files which contain inventory data in
+    JSON format.  The comparison is similar to the unix 'diff' command but
+    the output lists the hardware subsystem (category) where differences
+    are found, and some differences are selectively ignored.  The items
+    ignored are defined in the skip_dictionary dictionary.
+
+    Description of arguments:
+    file1_path       File containing JSON formatted data.
+    file2_path       File to compare to file1 to.
+    diff_file_path   File which will contain the resulting difference report.
+    skip_dictionary  Dictionary which defines what inventory items
+                     to ignore if there are differences in inventory
+                     files -- some differences are expected or
+                     immaterial.  Specify items in this dictionary
+                     if there are inventory items that should be
+                     ignored whenever a comparison between inventory
+                     files is done.  For example, assigned processor
+                     speed routinely varies depending upon the
+                     needs of OCC/tmgt/ondemand governor.
+                     Back-to-back inventory runs may show
+                     processor speed differences even if nothing
+                     else was run between them.
+                     Each dictionary entry is of the form
+                     category:leafname where category is a JSON
+                     hardware category such as "processor", "memory",
+                     "disk", "display", "network", etc.,
+                     and leafname is a leaf node (atribute name)
+                     within that category.
+                     For example: {'processor':'size'}, or
+                     {'processor':'size','memory':'claimed','display':'id'}.
+
+    Sample difference report:
+    Difference at line 102  (in section "memory":)
+     102 -   "slot": "UOPWR.BAR.1315ACA-DIMM0",
+     102 +   "slot": "0"
+    Difference at line 126  (in section "processor":)
+     126 -   "size": 2151000000,    +++ NOTE! This is an ignore item
+     126 +   "size": 2201000000,    +++ NOTE! This is an ignore item
+
+    Returns:
+    0 if both files contain the same information or they differ only in
+      items specified as those to ignore.
+    2 if FILES_DO_NOT_MATCH.
+    3 if INPUT_FILE_DOES_NOT_EXIST.
+    4 if IO_EXCEPTION_READING_FILE.
+    5 if IO_EXCEPTION_WRITING_FILE.
+    """
+
+    FILES_MATCH = 0
+    FILES_DO_NOT_MATCH = 2
+    INPUT_FILE_DOES_NOT_EXIST = 3
+    IO_EXCEPTION_READING_FILE = 4
+    IO_EXCEPTION_WRITING_FILE = 5
+
+    # Hardware categories which are reported in the JSON inventory files.
+    hardware_categories = ['\"processor\":', '\"memory\":', '\"disk\":',
+                           '\"I/O\":', '\"display\":', '\"generic\":',
+                           '\"network\":', '\"communication\":',
+                           '\"printer\":', '\"input\":', '\"multimedia\":',
+                           '\"tape\":']
+
+    # The minimum size in bytes a JSON file must be.
+    min_json_byte_size = 16
+
+    now = time.strftime("At %Y-%m-%d %H:%M:%S")
+
+    if (not os.path.exists(file1_path) or (not os.path.exists(file2_path))):
+        return INPUT_FILE_DOES_NOT_EXIST
+    try:
+        with open(file1_path, 'r') as file:
+            initial = file.readlines()
+        with open(file2_path, 'r') as file:
+            final = file.readlines()
+    except IOError:
+        file.close()
+        return IO_EXCEPTION_READING_FILE
+    except ValueError:
+        file.close()
+        return INPUT_FILE_MALFORMED
+    else:
+        file.close()
+
+    # Must have more than a trivial number of bytes.
+    if len(initial) <= min_json_byte_size:
+        return INPUT_FILE_MALFORMED
+
+    if (initial == final):
+        try:
+            file = open(diff_file_path, 'w')
+        except IOError:
+            file.close()
+        line_to_print = now + " found no difference between file " + \
+            file1_path + " and " + \
+            file2_path + "\n"
+        file.write(line_to_print)
+        file.close()
+        return FILES_MATCH
+
+    # Find the differences and write difference report to diff_file_path file.
+    try:
+        file = open(diff_file_path, 'w')
+    except IOError:
+        file.close()
+        return IO_EXCEPTION_WRITING_FILE
+
+    line_to_print = now + " compared files " + \
+        file1_path + " and " + \
+        file2_path + "\n"
+    file.write(line_to_print)
+
+    diff = difflib.ndiff(initial, final)
+    # The diff array contains both lines that match
+    # and lines that differ in the initial and final arrays.
+    # The first two characters of each line
+    # are prefixed with two letters, defined as:
+    # '- ' This line is unique to initial
+    # '+ ' This line is line unique to final
+    # '  ' This line is common to both, and
+    # '? ' This line indicates approximate differences.
+    # For example,  comparing two three-line files:
+    #  This line is in both initial and final.
+    #  This line is too but the next line is different in each file.
+    # -                     "size": 2101000000,
+    # ?                              - ^
+    # +                     "size": 2002000000,
+    # ?                               ^^
+
+    print_header_flag = False
+    category = ""
+    row_num = 1
+    item_we_cannot_ignore = False
+
+    for my_line in diff:
+        diff_item = my_line.strip('\n')
+        # If it's a Category, such as processor or memory,
+        # save it.  We will print it out later.
+        # Most lines do not explicitly contain a category.  As such the
+        # category for that line is found in a previous line, which
+        # will be the category we last found.
+        for hdw_cat in hardware_categories:
+            if (hdw_cat in diff_item):
+                # If we don't have a match we will reuse
+                # the prvious category.
+                category = hdw_cat
+        # Lines beginning with minus or plus or q-mark are
+        # true difference items.
+        # We want to look at those in more detail.
+        if diff_item.startswith('? '):
+            # we can ignore these
+            continue
+        if (diff_item.startswith('- ') or diff_item.startswith('+ ')):
+            # If we have not printed the header line for this
+            # difference, print it now.
+            if print_header_flag is False:
+                line_to_print = "Difference at line " + \
+                 str(row_num) + "  (in section " + \
+                 category + ")\n"
+                file.write(line_to_print)
+            # If this is in the ignore dictionary, we'll print
+            # it but also add text that it is an ignore item.
+            skipitem = False
+            for key, value in skip_dictionary.iteritems():
+                if ((key in category.lower().strip()) and
+                   (value in diff_item.lower().strip())):
+                    line_to_print = "  " + \
+                        str(row_num) + " " + diff_item + \
+                        "    +++ NOTE! This difference is in" + \
+                        " the inventory ignore list and" + \
+                        " can be ignored. +++\n"
+                    # set flag indicating this item is a skip item
+                    skipitem = True
+                    break
+            if skipitem is False:
+                # Its not a skip item, that is,
+                # this is not on the ignore list.
+                # Print the item and set the item_we_canot_ignore flag
+                # indicating we have an item not on the ignore list.  The
+                # flag will determine the return code we
+                # pass back to the user at the end.
+                item_we_cannot_ignore = True
+                line_to_print = "  " + \
+                    str(row_num) + " " + diff_item + "\n"
+            file.write(line_to_print)
+            print_header_flag = True
+
+        else:
+            # Adjust row numbering as a difference is only one line
+            # but it takes several lines in the diff file.
+            if print_header_flag is True:
+                row_num = row_num + 1
+                print_header_flag = False
+            row_num = row_num + 1
+
+    # Make sure we end the file.
+    file.write("\n")
+    file.close()
+
+    if item_we_cannot_ignore:
+        # We have at least one diff_item not on the ignore list.
+        return FILES_DO_NOT_MATCH
+    else:
+        # Any differences were on the ignore list.
+        return FILES_MATCH
+###############################################################################
+
 
 ###############################################################################
 
 
-def run_until_keyword_fails(retry, retry_interval, name, *args):
+def run_until_keyword_fails(retry,
+                            retry_interval,
+                            name,
+                            *args):
     r"""
     Execute a robot keyword repeatedly until it either fails or the timeout
     value is exceeded.
