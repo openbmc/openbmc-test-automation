@@ -21,16 +21,16 @@ def execute_keyword(keyword_name, return_dict):
 
     Description of argument(s):
     keyword_name    Keyword name to be executed.
-    return_dict     A dictionary consisting of pid/process output for the
+    return_dict     A dictionary consisting of pid/process status for the
                     keys/values. This function will append a new entry to
                     this dictionary.
     """
 
     pid = os.getpid()
-    output = BuiltIn().run_keyword(keyword_name)
+    status = BuiltIn().run_keyword_and_return_status(keyword_name)
 
-    # Build PID:<output> dictionary.
-    return_dict[str(pid)] = str(output)
+    # Build PID:<status> dictionary.
+    return_dict[str(pid)] = str(status)
 
 ###############################################################################
 
