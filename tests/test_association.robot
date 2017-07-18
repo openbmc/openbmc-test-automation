@@ -10,7 +10,8 @@ Suite Setup         Run Keywords  Verify callout-test  AND
 ...                 Boot Host
 Test Setup          Clear Existing Error Logs
 
-Test Teardown       Close All Connections
+Test Teardown       Close All Connections  AND
+...                 Delete All Sessions
 Suite Teardown      Clear Existing Error Logs
 
 ***Variables***

@@ -9,7 +9,8 @@ Resource        ../lib/utils.robot
 
 Suite Setup     Test Suite Setup
 Test Setup      Pre Test Case Execution
-Test Teardown   Post Test Case Execution
+Test Teardown   Post Test Case Execution  AND
+...             Delete All Sessions
 Suite Teardown  Close All Connections
 
 *** Variables ***

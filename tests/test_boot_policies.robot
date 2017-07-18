@@ -10,7 +10,8 @@ Resource           ../lib/state_manager.robot
 
 Suite Setup        Test Suite Setup
 Test Setup         Test Init Setup
-Test Teardown      FFDC On Test Case Fail
+Test Teardown      FFDC On Test Case Fail  AND
+...                Delete All Sessions
 Suite Teardown     Restore Boot Settings
 
 Force Tags  boot_policy_test

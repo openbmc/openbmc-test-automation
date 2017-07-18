@@ -6,7 +6,8 @@ Resource            ../lib/ipmi_client.robot
 Library             String
 
 Test Setup          Open Connection And Log In
-Test Teardown       Post Test Case Execution
+Test Teardown       Post Test Case Execution  AND
+...                 Delete All Sessions
 
 *** Variables ***
 ${devicetree_base}  /sys/firmware/devicetree/base/

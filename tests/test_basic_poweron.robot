@@ -6,7 +6,8 @@ Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 
 Test Setup          Start SOL Console Logging
-Test Teardown       Test Exit Logs
+Test Teardown       Test Exit Logs  AND
+...                 Delete All Sessions
 
 Force Tags  chassisboot
 
