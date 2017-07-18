@@ -69,3 +69,4 @@ Post Testcase Execution
     FFDC On Test Case Fail
     Set Auto Reboot  yes
     Close All Connections
+    Close All Sessions

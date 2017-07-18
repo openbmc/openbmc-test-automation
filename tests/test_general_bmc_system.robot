@@ -7,7 +7,8 @@ Resource           ../lib/openbmc_ffdc.robot
 Resource           ../lib/state_manager.robot
 
 Suite Setup        Open Connection And Log In
-Suite Teardown     Close All Connections
+Suite Teardown     Close All Connections  AND
+...                Close All Sessions
 
 # TODO: Collect proc data from system as part of FFDC
 # Refer openbmc/openbmc-test-automation#353
