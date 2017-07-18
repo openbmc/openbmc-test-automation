@@ -184,4 +184,3 @@ Post Test Suite Execution
     # 1. Set policy to default.
 
     Run Keyword And Ignore Error  Set BMC Power Policy  RESTORE_LAST_STATE
-
