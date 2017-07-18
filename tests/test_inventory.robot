@@ -244,6 +244,61 @@ Check Air Or Water Cooled
     Run Keyword If  ${air_cooled}==${0} and ${water_cooled}==${0}
     ...  Fail  Neither AirCooled or WaterCooled.
 
+Verify Minimal CPU Inventory
+    [Documentation]  Verify Minimal CPU Inventory
+    [Tags]  Verify_Minimal_CPU_Inventory
+
+    # item_name    minimum_count
+    cpu            2
+    [Template]     Minimum Inventory
+
+Verify Minimal DIMM Inventory
+    [Documentation]  Verify Minimal DIMM Inventory
+    [Tags]  Verify_Minimal_DIMM_Inventory
+
+    # item_name    minimum_count
+    dimm           2
+    [Template]     Minimum Inventory
+
+Verify Minimal Core Inventory
+    [Documentation]  Verify Minimal core inventory.
+    [Tags]  Verify_Minimal_Core_Inventory
+
+    # item_name    minimum_count
+    core           2
+    [Template]     Minimum Inventory
+
+Verify Minimal Memory Buffer Inventory
+    [Documentation]  Verify Minimal memory buffer inventory.
+    [Tags]  Verify_Minimal_Memory_Buffer_Inventory
+
+    # item_name    minimum_count
+    memory_buffer  0
+    [Template]     Minimum Inventory
+
+Verify Minimal Fan Inventory
+    [Documentation]  Verify Minimal fan inventory.
+    [Tags]  Verify_Minimal_Fan_Inventory
+
+    # item_name    minimum_count
+    fan            2
+    [Template]     Minimum Inventory
+
+Verify Minimal Main Planar Inventory
+    [Documentation]  Verify Minimal main planar inventory.
+    [Tags]  Verify_Minimal_Main_Planar_Inventory
+
+    # item_name    minimum_count
+    main_planar    1
+    [Template]     Minimum Inventory
+
+Verify Minimal System Inventory
+    [Documentation]  Verify Minimal system inventory.
+    [Tags]  Verify_Minimal_System_Inventory
+
+    # item_name    minimum_count
+    system         1
+    [Template]     Minimum Inventory
 
 *** Keywords ***
 
@@ -255,7 +310,6 @@ Test Suite Setup
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is OS Starting
-
 
 Get Inventory
     [Documentation]  Get the properties of an endpoint.
@@ -344,3 +398,31 @@ Verify Inventory List Before And After Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
     ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
     Lists Should Be Equal  ${inv_before}  ${inv_after}
+
+Minimum Inventory
+    [Documentation]  Check for minimum inventory.
+    [Argument]  ${item_name}  ${minimum_count}
+
+    # Description of argument(s):
+    # item_name  Inventory name (example: fan/cpu/dimm/etc).
+    # minimum_count  The minimum number of the given item_name.
+
+    ${count}=  Get Number Hardware Items  ${item_name}
+    Should Be True  ${count}>=${minimum_count}
+
+Get Number Hardware Items
+    [Documentation]  Get the count of the total present currently on inventory.
+    [Arguments]  ${item_name}
+
+    # Description of argument(s):
+    # item_name  Inventory name (example: fan/cpu/dimm/etc).
+
+    ${count_inventory}  Set Variable  ${0}
+    ${list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}/system/
+    ...  ${item_name}
+
+    : FOR  ${element}  IN  @{list}
+    \  ${present}=  Read Properties  ${element}
+    \  ${count_inventory}=  Set Variable if  ${present['Present']} == 1
+    \  ...  ${count_inventory+1}  ${count_inventory}
+    [return]  ${count_inventory}
