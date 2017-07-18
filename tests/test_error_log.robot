@@ -436,5 +436,3 @@ Post Test Case Execution
    FFDC On Test Case Fail
    Delete Error Logs
    Close All Connections
-   Flush REST Sessions
-
