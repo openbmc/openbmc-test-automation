@@ -180,6 +180,7 @@ Clear Existing Error Logs
     Delete Error Logs
     ${resp}=  OpenBMC Get Request  /xyz/openbmc_project/logging/entry/
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Delete All Sessions
 
 Create Test Error With Callout
     [Documentation]  Generate test error log with callout for CPU0.

@@ -46,6 +46,7 @@ Test Exit Logs
     FFDC On Test Case Fail
     ${sol_log}=    Stop SOL Console Logging
     Log   ${sol_log}
+    Close All Sessions
 
 Host Off And On
     [Documentation]  Verify power off and on.

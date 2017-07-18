@@ -154,6 +154,7 @@ Restore Boot Settings
     Set Boot Policy  ONETIME
     Set Boot Device  Default
     Close All Connections
+    Close All Sessions
 
 Test Init Setup
     [Documentation]  Do the initial test setup.
