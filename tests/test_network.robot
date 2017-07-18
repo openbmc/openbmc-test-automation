@@ -10,7 +10,7 @@ Force Tags  Network_Test
 Library  String
 Library  SSHLibrary
 
-Test Setup  Test Init Setup
+Test Setup     Test Init Setup
 
 *** Variables ***
 
