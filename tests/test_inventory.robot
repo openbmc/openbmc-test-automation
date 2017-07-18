@@ -12,13 +12,14 @@ Variables         ../data/variables.py
 Variables         ../data/inventory.py
 
 Suite setup       Test Suite Setup
-Test Teardown     FFDC On Test Case Fail
+#Test Teardown     FFDC On Test Case Fail
 
 Force Tags        Inventory
 
 ***Variables***
 
 ${LOOP_COUNT}  ${1}
+${OPENBMC_BASE}  /xyz/openbmc_project/inventory/
 
 *** Test Cases ***
 
@@ -244,6 +245,74 @@ Check Air Or Water Cooled
     Run Keyword If  ${air_cooled}==${0} and ${water_cooled}==${0}
     ...  Fail  Neither AirCooled or WaterCooled.
 
+Verify FRU In Inventory
+    [Documentation]  Verify FRU In Inventory.
+    [Tags]  Verify_FRU_In_Inventory
+
+    Initiate Host PowerOff
+    ${inv_before}=  Get URL List  ${HOST_INVENTORY_URI}
+
+    Initiate Host Boot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+
+    ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
+    ${inv_dimms}=  OpenBMC GET Request  ${HOST_INVENTORY_URI}/system/chassis/motherboard/dimm4
+
+Minimal Cpu Inventory
+    [Documentation]  Minimal cpu inventory.
+    [Tags]  Minimal_Cpu_Inventory
+
+    #Inventory_Name  Minimum_Count
+    cpu                2
+    [Template]  Minimum Inventory
+
+Minimal Dimm Inventory
+    [Documentation]  Minimal DIMM Inventory.
+    [Tags]  Minimal_DIMM_Inventory
+
+    #Inventory_Name  Minimum_Count
+     dimm            2
+    [Template]  Minimum Inventory
+
+Minimal Core Inventory
+    [Documentation]  Minimal core inventory.
+    [Tags]  Minimal_Core_Inventory
+
+     #Inventory_Name  Minimum_Count
+     core             2
+    [Template]  Minimum Inventory
+
+Minimal Memory Buffer Inventory
+    [Documentation]  Minimal memory buffer inventory.
+    [Tags]  Minimal_Memory_Buffer_Inventory
+
+    #Inventory_Name  Minimum_Count
+    memory_buffer    0
+    [Template]  Minimum Inventory
+
+Minimal Fan Inventory
+    [Documentation]  Minimal fan inventory.
+    [Tags]  Minimal_Fan_Inventory
+
+    #Inventory_Name  Minimum_Count
+    fan              2
+    [Template]  Minimum Inventory
+
+Minimal Main Planar Inventory
+    [Documentation]  Minimal main planar inventory.
+    [Tags]  Minimal_Main_Planar_Inventory
+
+    #Inventory_Name  Minimum_Count
+    main_planar      0
+    [Template]  Minimum Inventory
+
+Minimal System Inventory
+    [Documentation]  Minimal system inventory.
+    [Tags]  Minimal_System_Inventory
+
+    #Inventory_Name  Minimum_Count
+    system           0
+    [Template]  Minimum Inventory
 
 *** Keywords ***
 
@@ -255,7 +324,6 @@ Test Suite Setup
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is OS Starting
-
 
 Get Inventory
     [Documentation]  Get the properties of an endpoint.
@@ -344,3 +412,26 @@ Verify Inventory List Before And After Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
     ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
     Lists Should Be Equal  ${inv_before}  ${inv_after}
+
+Minimum Inventory
+    [Documentation]  Minimum inventory.
+    [Arguments]  ${Inventory_Name}  ${Minimum_count}
+
+    ${count}=  Get Total Present  ${Inventory_Name}
+    Should Be True  ${count}>=${Minimum_count}
+
+Get Total Present
+    [Documentation]  Get total present.
+    [Arguments]  ${type}
+
+    ${count_inventory}  Set Variable  ${0}
+    ${list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}/system/  ${type}
+
+    : FOR  ${element} 	IN  @{list}
+    \  ${present}=  Read Properties  ${element}
+    \  ${count_inventory}=  Set Variable if  ${present['Present']} == 1
+    \  ...  ${count_inventory+1}  ${count_inventory}
+    [return]  ${count_inventory}
+
+
+
