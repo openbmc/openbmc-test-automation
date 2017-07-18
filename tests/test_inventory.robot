@@ -244,6 +244,61 @@ Check Air Or Water Cooled
     Run Keyword If  ${air_cooled}==${0} and ${water_cooled}==${0}
     ...  Fail  Neither AirCooled or WaterCooled.
 
+Minimal CPU Inventory
+    [Documentation]  Minimal cpu inventory.
+    [Tags]  Minimal_CPU_Inventory
+
+    #inventory_name  minimum_count
+    cpu                2
+    [Template]  Minimum Inventory
+
+Minimal DIMM Inventory
+    [Documentation]  Minimal DIMM Inventory.
+    [Tags]  Minimal_DIMM_Inventory
+
+    #inventory_name  minimum_count
+     dimm            2
+    [Template]  Minimum Inventory
+
+Minimal Core Inventory
+    [Documentation]  Minimal core inventory.
+    [Tags]  Minimal_Core_Inventory
+
+     #inventory_name  minimum_count
+     core             2
+    [Template]  Minimum Inventory
+
+Minimal Memory Buffer Inventory
+    [Documentation]  Minimal memory buffer inventory.
+    [Tags]  Minimal_Memory_Buffer_Inventory
+
+    #inventory_name  minimum_count
+    memory_buffer    0
+    [Template]  Minimum Inventory
+
+Minimal Fan Inventory
+    [Documentation]  Minimal fan inventory.
+    [Tags]  Minimal_Fan_Inventory
+
+    #inventory_name  minimum_count
+    fan              2
+    [Template]  Minimum Inventory
+
+Minimal Main Planar Inventory
+    [Documentation]  Minimal main planar inventory.
+    [Tags]  Minimal_Main_Planar_Inventory
+
+    #inventory_name  minimum_count
+    main_planar      1
+    [Template]  Minimum Inventory
+
+Minimal System Inventory
+    [Documentation]  Minimal system inventory.
+    [Tags]  Minimal_System_Inventory
+
+    #inventory_name  minimum_count
+    system           1
+    [Template]  Minimum Inventory
 
 *** Keywords ***
 
@@ -255,7 +310,6 @@ Test Suite Setup
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is OS Starting
-
 
 Get Inventory
     [Documentation]  Get the properties of an endpoint.
@@ -344,3 +398,31 @@ Verify Inventory List Before And After Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
     ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
     Lists Should Be Equal  ${inv_before}  ${inv_after}
+
+Minimum Inventory
+    [Documentation]  Check for minimum inventory.
+    [Arguments]  ${inventory_name}  ${minimum_count}
+    # Description of arguments:
+    # inventory_name  Example: fan
+    # minimum_count   Example: 2
+
+    ${count}=  Get Total Present  ${inventory_name}
+    Should Be True  ${count}>=${minimum_count}
+
+Get Total Present
+    [Documentation]  Get the count of the total present.
+    [Arguments]  ${type}
+    # Description of arguments:
+    # type  Inventory Name - Example: cpu
+
+    ${count_inventory}  Set Variable  ${0}
+    ${list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}/system/  ${type}
+
+    : FOR  ${element}  IN  @{list}
+    \  ${present}=  Read Properties  ${element}
+    \  ${count_inventory}=  Set Variable if  ${present['Present']} == 1
+    \  ...  ${count_inventory+1}  ${count_inventory}
+    [return]  ${count_inventory}
+
+
+
