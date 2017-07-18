@@ -57,5 +57,3 @@ Host Off And On
     # TODO: Host shutdown race condition.
     # Wait 30 seconds before Powering Off.
     Sleep  30s
-
-    Flush REST Sessions
