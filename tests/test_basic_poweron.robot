@@ -6,7 +6,7 @@ Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 
 Test Setup          Start SOL Console Logging
-Test Teardown       Test Exit Logs
+Test Teardown       Test Exit Logs  AND
 
 Force Tags  chassisboot
 
@@ -46,6 +46,7 @@ Test Exit Logs
     FFDC On Test Case Fail
     ${sol_log}=    Stop SOL Console Logging
     Log   ${sol_log}
+    Delete All Sessions
 
 Host Off And On
     [Documentation]  Verify power off and on.

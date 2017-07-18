@@ -190,6 +190,7 @@ Post Test Case Execution
 
    FFDC On Test Case Fail
    Close All Connections
+   Delete All Sessions
 
 Test Suite Setup
     [Documentation]  Do the initial suite setup.
