@@ -53,6 +53,9 @@ ${TFTP_FILE_NAME}    ${EMPTY}
 ${IMAGE_FILE_PATH}   ${EMPTY}
 ${BAD_IMAGES_DIR_PATH}    ${EMPTY}
 
+# User key in BMC version string.
+${LAST_KNOWN_GOOD_VERSION}  ${EMPTY}
+
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}
