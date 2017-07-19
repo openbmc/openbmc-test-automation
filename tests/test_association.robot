@@ -5,6 +5,7 @@ Resource            ../lib/connection_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
+Resource            ../lib/boot_utils.robot
 
 Suite Setup         Run Keywords  Verify callout-test  AND
 ...                 Boot Host
@@ -15,6 +16,7 @@ Suite Teardown      Clear Existing Error Logs
 
 ***Variables***
 ${target_device_path}  /sys/devices/platform/fsi-master/slave@00:00
+${stack_mode}          skip
 
 *** Test Cases ***
 
@@ -231,9 +233,6 @@ Verify Test Error Log And Callout
 
 Boot Host
     [Documentation]  Boot the host if current state is "Off".
-    ${current_state}=  Get Host State
-    Run Keyword If  '${current_state}' == 'Off'
-    ...  Initiate Host Boot
 
-    Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is OS Starting
+    # Boot Host.
+    REST Power On
