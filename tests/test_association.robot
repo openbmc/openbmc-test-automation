@@ -266,12 +266,12 @@ Verify Test Error Log And Callout
 
 
 Test Setup Execution
-   [Documentation]  Do test case setup tasks.
+    [Documentation]  Do test case setup tasks.
 
-   REST Power On
-   ${status}=  Run Keyword And Return Status  Callout Test Binary Exist
-   Run Keyword If  ${status} == ${False}  Install Tarball
-   Delete All Error Logs
+    REST Power On  quiet=1
+    ${status}=  Run Keyword And Return Status  Callout Test Binary Exist
+    Run Keyword If  ${status} == ${False}  Install Tarball
+    Delete All Error Logs
 
 
 Install Tarball
@@ -280,4 +280,3 @@ Install Tarball
     Run Keyword If  '${DEBUG_TARBALL_PATH}' == '${EMPTY}'  Return from Keyword
     BMC Execute Command  rm -rf /tmp/tarball
     Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
-
