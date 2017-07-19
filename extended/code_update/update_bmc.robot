@@ -79,12 +79,12 @@ Initiate Code Update BMC
     [Documentation]  Initiate a code update on the BMC.
     [Tags]  Initiate_Code_Update_BMC
 
-    # TODO: Disabling version check until new logic are in place.
-    # ${status}=   Run Keyword and Return Status
-    # ...   Validate BMC Version   before
+    ${status}=  Run Keyword If  '${LAST_KNOWN_GOOD_VERSION}' != '${EMPTY}'
+    ...  Run Keyword And Return Status
+    ...  Validate BMC Version  ${LAST_KNOWN_GOOD_VERSION}
 
-    # Run Keyword if  '${status}' == '${False}'
-    # ...     Pass Execution   Same Driver version installed
+    Run Keyword if  '${status}' == '${True}'
+    ...  Pass Execution  The BMC already has the requested build loaded so no further action will be taken.
 
     # Enable user to bypass prerequisite operations.
     # Use cases for if BMC is not in working state.
