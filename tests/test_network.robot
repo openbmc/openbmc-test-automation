@@ -94,7 +94,7 @@ Configure Out Of Range IP
     # IP Address        Prefix_length        Gateway_IP        Expected_Result
     ${out_of_range_ip}  ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure out of range IP address.
+    [Documentation]  Configure out-of-range IP address.
     [Tags]  Configure_Out_Of_Range_IP
 
     [Template]  Configure_Network_Settings
@@ -168,6 +168,99 @@ Configure Hexadecimal IP
 
     [Documentation]  Configure invalid IP address contaning hex value.
     [Tags]  Configure_Hexadecimal_IP
+
+    [Template]  Configure_Network_Settings
+
+Add New Valid IP with Blank Gateway
+    [Documentation]  Add new IP with blank gateway.
+    [Tags]  Add_New_Valid_IP_With_Blank_Gateway
+
+    Configure Network Settings  ${valid_ip}  ${valid_prefix_len}  ${EMPTY}
+    ...  valid
+
+    # Verify whether new IP address is populated on BMC system.
+    ${ip_info}=  Get BMC IP Info
+    Validate IP On BMC  ${valid_ip}  ${ip_info}
+
+Configure Invalid Gateway String
+    # IP Address  Prefix_length        Gateway_IP   Expected_Result
+    ${valid_ip}   ${valid_prefix_len}  ${alpha_ip}  error
+
+    [Documentation]  Configure invalid IP address to a gateway which is
+    ...  an alpha string and expect an error.
+    [Tags]  Configure_Invalid_Gateway_String
+
+    [Template]  Configure_Network_Settings
+
+Configure Out Of Range IP For Gateway
+    # IP Address  Prefix_length        Gateway_IP          Expected_Result
+    ${valid_ip}   ${valid_prefix_len}  ${out_of_range_ip}  error
+
+    [Documentation]  Configure out-of-range IP for gateway and expect an error.
+    [Tags]  Configure_Out_Of_Range_IP_For_Gateway
+
+    [Template]  Configure_Network_Settings
+
+Configure Broadcast IP For Gateway
+    # IP Address  Prefix_length        Gateway_IP       Expected_Result
+    ${valid_ip}   ${valid_prefix_len}  ${broadcast_ip}  error
+
+    [Documentation]  Configure broadcast IP for gateway and expect an error.
+    [Tags]  Configure_Broadcast_IP_For_Gateway
+
+    [Template]  Configure_Network_Settings
+
+Configure Loopback IP For Gateway
+    # IP Address  Prefix_length        Gateway_IP      Expected_Result
+    ${valid_ip}   ${valid_prefix_len}  ${loopback_ip}  error
+
+    [Documentation]  Configure loopback IP for gateway and expect an error.
+    [Tags]  Configure_Loopback_IP_For_Gateway
+
+    [Template]  Configure_Network_Settings
+
+Configure Multicast IP For Gateway
+    # IP Address  Prefix_length        Gateway_IP       Expected_Result
+    ${valid_ip}   ${valid_prefix_len}  ${multicast_ip}  error
+
+    [Documentation]  Configure multicast IP for gateway and expect an error.
+    [Tags]  Configure_Multicast_IP_For_Gateway
+
+    [Template]  Configure_Network_Settings
+
+Configure Network ID For Gateway
+    # IP Address  Prefix_length        Gateway_IP     Expected_Result
+    ${valid_ip}   ${valid_prefix_len}  ${network_id}  error
+
+    [Documentation]  Configure network ID for gateway and expect an error.
+    [Tags]  Configure_Network_ID_For_Gateway
+
+    [Template]  Configure_Network_Settings
+
+Configure Less Octet IP For Gateway
+    # IP Address  Prefix_length        Gateway_IP        Expected_Result
+    ${valid_ip}   ${valid_prefix_len}  ${less_octet_ip}  error
+
+    [Documentation]  Configure less octet IP for gateway and expect an error.
+    [Tags]  Configure_Less_Octet_IP_For_Gateway
+
+    [Template]  Configure_Network_Settings
+
+Configure Special Char IP For Gateway
+    # IP Address  Prefix_length        Gateway_IP    Expected_Result
+    ${valid_ip}   ${valid_prefix_len}  @@@.%%.44.11  error
+
+    [Documentation]  Configure special char IP for gateway and expect an error.
+    [Tags]  Configure_Special_Char_IP_For_Gateway
+
+    [Template]  Configure_Network_Settings
+
+Configure Hexadecimal IP For Gateway
+    # IP Address  Prefix_length        Gateway_IP  Expected_Result
+    ${valid_ip}   ${valid_prefix_len}  ${hex_ip}   error
+
+    [Documentation]  Configure hexadecimal IP for gateway and expect an error.
+    [Tags]  Configure_Hexadecimal_IP_For_Gateway
 
     [Template]  Configure_Network_Settings
 
