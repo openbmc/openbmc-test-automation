@@ -231,9 +231,12 @@ Verify Test Error Log And Callout
 
 Boot Host
     [Documentation]  Boot the host if current state is "Off".
+
+    # Reboot host to re-power on clean if host is not "off".
     ${current_state}=  Get Host State
     Run Keyword If  '${current_state}' == 'Off'
     ...  Initiate Host Boot
+    ...  ELSE  Initiate Host Reboot
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is OS Starting
