@@ -70,6 +70,7 @@ OpenBMC Get Request
     ...  base_uri=${base_uri}  args=&{kwargs}
     ${ret}=  Get Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
+    Delete All Sessions
     [Return]    ${ret}
 
 OpenBMC Post Request
@@ -83,6 +84,7 @@ OpenBMC Post Request
     ...  base_uri=${base_uri}  args=&{kwargs}
     ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
+    Delete All Sessions
     [Return]    ${ret}
 
 OpenBMC Put Request
@@ -95,6 +97,7 @@ OpenBMC Put Request
     Log Request    method=Put    base_uri=${base_uri}    args=&{kwargs}
     ${ret}=  Put Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Log Response    ${ret}
+    Delete All Sessions
     [Return]    ${ret}
 
 OpenBMC Delete Request
@@ -105,6 +108,7 @@ OpenBMC Delete Request
     Log Request    method=Delete    base_uri=${base_uri}    args=&{kwargs}
     ${ret}=  Delete Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Log Response    ${ret}
+    Delete All Sessions
     [Return]    ${ret}
 
 Initialize OpenBMC
@@ -218,3 +222,4 @@ Upload Image To BMC
     ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
+    Delete All Sessions
