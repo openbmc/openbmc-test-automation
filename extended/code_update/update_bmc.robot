@@ -50,6 +50,10 @@ ${REST_URL_FILE_PATH}   ${EMPTY}
 # There are two reboots issued by code update.
 ${MAX_BOOT_COUNT}       ${2}
 
+# User key in BMC version string.
+# Example: v1.99.8-23-g2ad7ce3
+${LAST_KNOWN_GOOD_VERSION}  ${EMPTY}
+
 *** Test Cases ***
 
 Test Basic BMC Performance Before Code Update
@@ -79,12 +83,12 @@ Initiate Code Update BMC
     [Documentation]  Initiate a code update on the BMC.
     [Tags]  Initiate_Code_Update_BMC
 
-    # TODO: Disabling version check until new logic are in place.
-    # ${status}=   Run Keyword and Return Status
-    # ...   Validate BMC Version   before
+    ${status}=  Run Keyword If  '${LAST_KNOWN_GOOD_VERSION}' != '${EMPTY}'
+    ...  Run Keyword And Return Status
+    ...  Validate BMC Version  ${LAST_KNOWN_GOOD_VERSION}
 
-    # Run Keyword if  '${status}' == '${False}'
-    # ...     Pass Execution   Same Driver version installed
+    Run Keyword if  '${status}' == '${True}'
+    ...     Pass Execution   Same Driver version installed
 
     # Enable user to bypass prerequisite operations.
     # Use cases for if BMC is not in working state.
