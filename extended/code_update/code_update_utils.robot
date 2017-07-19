@@ -114,19 +114,14 @@ System Readiness Test
 
 
 Validate BMC Version
-    [Arguments]   ${args}=post
-    # Check BMC installed version
+    [Documentation]  Get BMC version from /etc/os-release and compare.
+    [Arguments]  ${version}
+    # Description of argument(s):
+    # version  Software version (e.g. "v1.99.2-107-g2be34d2-dirty")
     Open Connection And Log In
-    ${version}   ${stderr}=    Execute Command   cat /etc/version
-    ...    return_stderr=True
-    Should Be Empty     ${stderr}
-    # The File name contains the version installed
-    Run Keyword If   '${args}' == 'before'
-    ...    Should not Contain  ${FILE_PATH}   ${version}
-    ...    msg=Same version already installed
-    ...    ELSE
-    ...    Should Contain      ${FILE_PATH}   ${version}
-    ...    msg=Code update Failed
+    ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '='
+    ${output}=  Execute Command On BMC  ${cmd}
+    Should Be Equal As Strings  ${version}  ${output[1:-1]}
 
 
 Trigger Warm Reset via Reboot
