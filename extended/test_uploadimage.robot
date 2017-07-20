@@ -48,7 +48,7 @@ Upload Image Via TFTP
     @{image}=  Create List  ${TFTP_FILE_NAME}  ${TFTP_SERVER}
     ${data}=  Create Dictionary  data=@{image}
     ${resp}=  OpenBMC Post Request
-    ...  ${SOFTWARE_VERSION}/action/DownloadViaTFTP  data=${data}
+    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Sleep  1 minute
     ${upload_file}=  Get Latest File  ${upload_dir_path}

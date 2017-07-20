@@ -42,7 +42,7 @@ BMC_LOGGING_URI = '/xyz/openbmc_project/logging/'
 BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
 
 # Software manager version
-SOFTWARE_VERSION = '/xyz/openbmc_project/software/'
+SOFTWARE_VERSION_URI = '/xyz/openbmc_project/software/'
 ACTIVE = 'xyz.openbmc_project.Software.Activation.Activations.Active'
 READY = 'xyz.openbmc_project.Software.Activation.Activations.Ready'
 INVALID = 'xyz.openbmc_project.Software.Activation.Activations.Invalid'

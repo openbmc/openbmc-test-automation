@@ -50,20 +50,20 @@ REST PNOR Code Update
     Should Be True  ${ret}
 
     # Verify the image is 'READY' to be activated.
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION}${version_id}
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${READY}
 
     # Request the image to be activated.
     ${args}=  Create Dictionary  data=${REQUESTED_ACTIVE}
-    Write Attribute  ${SOFTWARE_VERSION}${version_id}
+    Write Attribute  ${SOFTWARE_VERSION_URI}${version_id}
     ...  RequestedActivation  data=${args}
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION}${version_id}
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[RequestedActivation]
     ...  ${REQUESTED_ACTIVE}
 
     # Verify code update was successful and Activation state is Active.
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION}${version_id}
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
 
 *** Keywords ***
