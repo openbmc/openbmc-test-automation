@@ -159,15 +159,18 @@ def verify_image_upload():
     if (image_purpose == var.VERSION_PURPOSE_BMC or
         image_purpose == var.VERSION_PURPOSE_HOST):
         uri = var.SOFTWARE_VERSION_URI + image_version_id
-        status, ret_values =\
-        grk.run_key("Read Attribute  " + uri + "  Activation")
+        for i in range(6):
+            status, ret_values = \
+                grk.run_key("Read Attribute  " + uri + "  Activation")
 
-        if ((ret_values == var.READY) or (ret_values == var.INVALID)
-            or (ret_values == var.ACTIVE)):
-            return True
-        else:
-            gp.print_var(ret_values)
-            return False
+            if ((ret_values == var.READY) or (ret_values == var.INVALID)
+                    or (ret_values == var.ACTIVE)):
+                return True
+            elif 5 == i:
+                gp.print_var(ret_values)
+                return False
+            else:
+                time.sleep(30)
     else:
         gp.print_var(image_purpose)
         return False
