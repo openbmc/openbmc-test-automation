@@ -158,7 +158,7 @@ def verify_image_upload():
     image_purpose = get_image_purpose(image_path + "MANIFEST")
     if (image_purpose == var.VERSION_PURPOSE_BMC or
         image_purpose == var.VERSION_PURPOSE_HOST):
-        uri = var.SOFTWARE_VERSION + image_version_id
+        uri = var.SOFTWARE_VERSION_URI + image_version_id
         status, ret_values =\
         grk.run_key("Read Attribute  " + uri + "  Activation")
 
