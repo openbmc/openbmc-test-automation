@@ -2,7 +2,7 @@
 Documentation     Code update to a target BMC.
 ...               Execution Method:
 ...               python -m robot -v OPENBMC_HOST:<hostname>
-...               -v IMAGE_FILE_PATH:<path/*.tar>  code_update.robot
+...               -v PNOR_IMAGE_FILE_PATH:<path/*.tar>  code_update.robot
 ...
 ...               Code update method BMC
 ...               Update work flow sequence:
