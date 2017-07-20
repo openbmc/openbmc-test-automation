@@ -142,11 +142,16 @@ def get_image_path(image_version):
 
 
 ###############################################################################
-def verify_image_upload():
+def verify_image_upload(timeout=3):
 
     r"""
     Verify the image was uploaded correctly and that it created
-    a valid d-bus object
+    a valid d-bus object. If the first check for the image
+    fails, try again until we reach the timeout.
+
+    Description of argument(s):
+    timeout  How long, in minutes, to keep trying to find the
+             image on the BMC. Default is 3 minutes.
     """
 
     image_version = BuiltIn().get_variable_value("${image_version}")
@@ -159,15 +164,20 @@ def verify_image_upload():
     if (image_purpose == var.VERSION_PURPOSE_BMC or
         image_purpose == var.VERSION_PURPOSE_HOST):
         uri = var.SOFTWARE_VERSION_URI + image_version_id
-        status, ret_values =\
-        grk.run_key("Read Attribute  " + uri + "  Activation")
+        ret_values = ""
+        for itr in range(timeout * 2):
+            status, ret_values = \
+                grk.run_key("Read Attribute  " + uri + "  Activation")
 
-        if ((ret_values == var.READY) or (ret_values == var.INVALID)
-            or (ret_values == var.ACTIVE)):
-            return True
-        else:
-            gp.print_var(ret_values)
-            return False
+            if ((ret_values == var.READY) or (ret_values == var.INVALID)
+                    or (ret_values == var.ACTIVE)):
+                return True
+            else:
+                time.sleep(30)
+
+        # If we exit the for loop, the timeout has been reached
+        gp.print_var(ret_values)
+        return False
     else:
         gp.print_var(image_purpose)
         return False
@@ -176,20 +186,23 @@ def verify_image_upload():
 
 
 ###############################################################################
-def verify_image_not_in_bmc_uploads_dir(image_version):
+def verify_image_not_in_bmc_uploads_dir(image_version, timeout=3):
 
     r"""
     Check that an image with the given version is not unpacked inside of the
     BMCs image uploads directory. If no image is found, retry every 30 seconds
-    for 3 minutes in case the BMC takes time unpacking the image.
+    until the given timeout is hit, in case the BMC takes time
+    unpacking the image.
 
     Description of argument(s):
     image_version  The version of the image to look for on the BMC.
+    timeout        How long, in minutes, to try to find an image on the BMC.
+                   Default is 3 minutes.
     """
 
     grk.run_key('Open Connection And Log In')
     upload_dir_path = BuiltIn().get_variable_value("${upload_dir_path}")
-    for i in range(6):
+    for i in range(timeout * 2):
         stat, grep_res = grk.run_key('Execute Command On BMC  '
                 + 'ls ' + upload_dir_path + '*/MANIFEST 2>/dev/null '
                 + '| xargs grep -rl "version=' + image_version + '"')
