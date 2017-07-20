@@ -7,9 +7,11 @@ Documentation         Test upload image with both valid and invalid images.
 ...                   Execution Method :
 ...                   python -m robot -v OPENBMC_HOST:<hostname>
 ...                   -v TFTP_SERVER:<TFTP server IP>
-...                   -v TFTP_FILE_NAME:<filename.tar>
-...                   -v IMAGE_FILE_PATH:<path/*.tar> test_uploadimage.robot
-...                   -v BAD_IMAGES_DIR_PATH:<path>
+...                   -v PNOR_TFTP_FILE_NAME:<filename.tar>
+...                   -v BMC_TFTP_FILE_NAME:<filename.tar>
+...                   -v PNOR_IMAGE_FILE_PATH:<path/*.tar>
+...                   -v BMC_IMAGE_FILE_PATH:<path/*.tar>
+...                   -v BAD_IMAGES_DIR_PATH:<path> test_uploadimage.robot
 
 Resource              ../lib/connection_client.robot
 Resource              ../lib/rest_client.robot
@@ -32,29 +34,43 @@ ${image_version}      ${EMPTY}
 *** Test Cases ***
 
 Upload PNOR Image Via REST
-    [Documentation]  Upload an image via REST.
+    # Image File Path
+
+    ${PNOR_IMAGE_FILE_PATH}
+
+    [Documentation]  Upload a PNOR image via REST.
+    [Template]  Upload Image Via REST And Verify Success
     [Tags]  Upload_PNOR_Image_Via_REST
 
-    OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
-    ${IMAGE_VERSION}=  Get Version Tar  ${IMAGE_FILE_PATH}
-    ${image_data}=  OperatingSystem.Get Binary File  ${IMAGE_FILE_PATH}
-    Upload Image To BMC  /upload/image  data=${image_data}
-    ${ret}=  Verify Image Upload
-    Should Be True  True == ${ret}
+
+Upload BMC Image Via REST
+    # Image File Path
+
+    ${BMC_IMAGE_FILE_PATH}
+
+    [Documentation]  Upload a BMC image via REST.
+    [Template]  Upload Image Via REST And Verify Success
+    [Tags]  Upload_BMC_Image_Via_REST
+
 
 Upload PNOR Image Via TFTP
-    [Documentation]  Upload an image via TFTP.
+    # Image File Path
+
+    ${PNOR_TFTP_FILE_NAME}
+
+    [Documentation]  Upload a PNOR image via TFTP.
+    [Template]  Upload Image Via TFTP And Verify Success
     [Tags]  Upload_PNOR_Image_Via_TFTP
 
-    @{image}=  Create List  ${TFTP_FILE_NAME}  ${TFTP_SERVER}
-    ${data}=  Create Dictionary  data=@{image}
-    ${resp}=  OpenBMC Post Request
-    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    Sleep  1 minute
-    ${image_version}=  Get Image Version From TFTP Server  ${TFTP_FILE_NAME}
-    ${ret}=  Verify Image Upload
-    Should Be True  True == ${ret}
+
+Upload BMC Image Via TFTP
+    # Image File Path
+
+    ${BMC_TFTP_FILE_NAME}
+
+    [Documentation]  Upload a BMC image via TFTP
+    [Template]  Upload Image Via TFTP And Verify Success
+    [Tags]  Upload_BMC_Image_Via_TFTP
 
 
 Upload PNOR Image With Bad Manifest Via REST
@@ -193,6 +209,41 @@ Get Image Version From TFTP Server
     ${version}=  Get Version Tar  tftp_image.tar
     OperatingSystem.Remove File  tftp_image.tar
     [Return]  ${version}
+
+Upload Image Via REST And Verify Success
+    [Documentation]  Upload the given good image to the BMC via REST, and check
+    ...              that the BMC has unpacked the image and created a valid
+    ...              D-Bus entry for it.
+    [Arguments]  ${image_file_path}
+
+    # Description of argument(s):
+    # image_file_path  The path to the image file to upload
+
+    OperatingSystem.File Should Exist  ${image_file_path}
+    ${IMAGE_VERSION}=  Get Version Tar  ${image_file_path}
+    ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
+    Upload Image To BMC  /upload/image  data=${image_data}
+    ${ret}=  Verify Image Upload
+    Should Be True  True == ${ret}
+
+Upload Image Via TFTP And Verify Success
+    [Documentation]  Upload the given good image to the BMC via TFTP, and check
+    ...              that the BMC has unpacked the image and created a valid
+    ...              D-Bus entry for it.
+    [Arguments]  ${image_file_name}
+
+    # Description of argument(s):
+    # image_file_name  The name of the image file on the TFTP server
+
+    @{image}=  Create List  ${image_file_name}  ${TFTP_SERVER}
+    ${data}=  Create Dictionary  data=@{image}
+    ${resp}=  OpenBMC Post Request
+    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Sleep  1 minute
+    ${image_version}=  Get Image Version From TFTP Server  ${image_file_name}
+    ${ret}=  Verify Image Upload
+    Should Be True  True == ${ret}
 
 Upload Image Via REST And Verify Failure
     [Documentation]  Upload the given bad image to the BMC via REST and check
