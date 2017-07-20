@@ -2,7 +2,7 @@
 Documentation     Code update to a target BMC.
 ...               Execution Method:
 ...               python -m robot -v OPENBMC_HOST:<hostname>
-...               -v IMAGE_FILE_PATH:<path/*.tar>  code_update.robot
+...               -v PNOR_IMAGE_FILE_PATH:<path/*.tar>  code_update.robot
 ...
 ...               Code update method BMC
 ...               Update work flow sequence:
@@ -33,7 +33,7 @@ ${image_version}                  ${EMPTY}
 ${image_purpose}                  ${EMPTY}
 ${activation_state}               ${EMPTY}
 ${requested_state}                ${EMPTY}
-${IMAGE_FILE_PATH}                ${EMPTY}
+${PNOR_IMAGE_FILE_PATH}                ${EMPTY}
 
 *** Test Cases ***
 
@@ -41,10 +41,10 @@ REST PNOR Code Update
     [Documentation]  Do a PNOR code update by uploading image on BMC via REST.
     [Tags]  REST_PNOR_Code_Update
 
-    OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
-    ${IMAGE_VERSION}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    OperatingSystem.File Should Exist  ${PNOR_IMAGE_FILE_PATH}
+    ${IMAGE_VERSION}=  Get Version Tar  ${PNOR_IMAGE_FILE_PATH}
 
-    ${image_data}=  OperatingSystem.Get Binary File  ${IMAGE_FILE_PATH}
+    ${image_data}=  OperatingSystem.Get Binary File  ${PNOR_IMAGE_FILE_PATH}
     Upload Image To BMC  /upload/image  data=${image_data}
     ${ret}=  Verify Image Upload
     Should Be True  ${ret}
