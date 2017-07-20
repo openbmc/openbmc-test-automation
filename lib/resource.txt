@@ -48,10 +48,12 @@ ${PACKET_TYPE}      tcp
 ${DEBUG_TARBALL_PATH}  ${EMPTY}
 
 # Upload Image parameters
-${TFTP_SERVER}       ${EMPTY}
-${TFTP_FILE_NAME}    ${EMPTY}
-${IMAGE_FILE_PATH}   ${EMPTY}
-${BAD_IMAGES_DIR_PATH}    ${EMPTY}
+${TFTP_SERVER}              ${EMPTY}
+${PNOR_TFTP_FILE_NAME}      ${EMPTY}
+${BMC_TFTP_FILE_NAME}       ${EMPTY}
+${PNOR_IMAGE_FILE_PATH}     ${EMPTY}
+${BMC_IMAGE_FILE_PATH}      ${EMPTY}
+${BAD_IMAGES_DIR_PATH}      ${EMPTY}
 
 # Caller can specify a value for LAST_KNOWN_GOOD_VERSION to indicate that if
 # the machine already has that version on it, the update should be skipped.
