@@ -1,12 +1,6 @@
 -e known_issue
 #https://github.com/openbmc/openbmc-test-automation/issues/123
 -e Execute_ipmi_BT_capabilities_command
-#https://github.com/openbmc/openbmc-test-automation/issues/107
--e Set_valid_Mac_address
-#https://github.com/openbmc/openbmc-test-automation/issues/107
--e Revert_old_Mac_addres
-#https://github.com/openbmc/openbmc-test-automation/issues/137
--e Set_invalid_Mac_address
 #https://github.com/openbmc/openbmc/issues/612
 -e Create_and_delete_user_without_group_name
 -e Create_and_delete_user_with_user_group_name
@@ -19,8 +13,6 @@
 -e powercapping
 -e io_board_Present
 -e io_board_Fault
--e Event_Logging
--e Association
 #https://github.com/openbmc/openbmc/issues/901
 -e Set_BMC_Time_With_Split_And_Manual
 #https://github.com/openbmc/openbmc/issues/1142
@@ -29,11 +21,6 @@
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
 -e Check_BMC_FSI_Compatible_Property_Is_Set
 -e Check_BMC_FSI_Name_Property_Is_Set
-#https://github.com/openbmc/openbmc-test-automation/issues/75
--e Test_Wrong_Reservation_ID
--e Test_Correct_Reservation_ID
-#https://github.com/openbmc/openbmc-test-automation/issues/396
--e NetworkManager
 # NA until VPD is programmed on systems
 -e Verify_Chassis_Motherboard_Properties
 #https://github.com/openbmc/openbmc-test-automation/issues/546
@@ -56,5 +43,3 @@
 # Network tests for xyz interface.
 # https://github.com/openbmc/openbmc-test-automation/issues/729
 -e Network_Test
-#https://github.com/openbmc/openbmc/issues/1967
--e boot_policy_test
