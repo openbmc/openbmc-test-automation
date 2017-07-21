@@ -22,6 +22,39 @@ Verify Channel Checkstop Through OS With Auto Reboot
     Verify Checkstop Insertion With Auto Reboot
     ...  Centaur  2011400  4000000000000000
 
+
+Verify Host Reboot On Host Booted System With Auto Reboot Enabled
+    [Documentation]  Verify host reboot after host watchdog error on host
+    ...  booted system with auto reboot enabled.
+    [Tags]  Verify_Host_Reboot_On_Host_Booted_System_With_Auto_Reboot_Enabled
+
+    Initiate Host Boot
+    Wait for OS  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
+
+    Set Auto Reboot  yes
+
+    Trigger Host Watchdog Error
+
+    Wait Until Keyword Succeeds  3 min  5 sec  Is Host Rebooted
+    Wait for OS  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
+
+
+Verify Host Quiesced On Host Booted System With Auto Reboot Disabled
+    [Documentation]  Verify host quiesced state after host watchdog error on
+    ...  host booted system with auto reboot disabled.
+    [Tags]  Verify_Host_Quiesced_On_Host_Booted_System_With_Auto_Reboot_Disabled
+
+    Initiate Host Boot
+    Wait for OS  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
+
+    Set Auto Reboot  no
+
+    Trigger Host Watchdog Error
+
+    Wait Until Keyword Succeeds  3 min  5 sec  Is Host Quiesced
+    Recover Quiesced Host
+
+
 *** Keywords ***
 Inject Checkstop Through OS
     [Documentation]  Inject checkstop on processor/centaur through OS.
