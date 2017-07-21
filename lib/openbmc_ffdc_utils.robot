@@ -112,3 +112,10 @@ Test Setup Info
     Write Data To File  OPENBMC HOST \t: ${OPENBMC_HOST}${\n}
     ${model_name}=  Get BMC System Model
     Write Data To File  SYSTEM TYPE \t: ${model_name}
+
+
+Error Logs Should Not Exist
+    [Documentation]  Verify erro logs should not exist.
+
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
