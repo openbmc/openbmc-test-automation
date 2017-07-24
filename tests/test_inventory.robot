@@ -30,6 +30,52 @@ Verify System Inventory Path
     Get Inventory  system
 
 
+Verify Boxelder Present Property
+    [Documentation]  Boxelder should be present by default.
+    [Tags]  Verify that boxelder 'Present' property is present by default.
+    # Example:
+    # "/xyz/openbmc_project/inventory/system/chassis/motherboard/boxelder/bmc":
+    # {
+    #     "BuildDate": "",
+    #     "FieldReplaceable": 0,
+    #     "Manufacturer": "IBM",
+    #     "Model": "",
+    #     "PartNumber": "01DH051",
+    #     "Present": 1,
+    #     "PrettyName": "BMC PLANAR  ",
+    #     "SerialNumber": "000000000000"
+    # },
+    ${json_data}=  Get Inventory  system/chassis/motherboard/boxelder/bmc
+    Should Be True  ${json_data["data"]["Present"]}
+
+
+Verify Boxelder MAC Address Property Is Populated
+    [Documentation]  Boxelder should be present by default.
+    [Tags]  Verify_Boxelder_MAC_Address_Property_Is_Populated
+    # Example:
+    # /xyz/openbmc_project/inventory/system/chassis/motherboard/boxelder/bmc/ethernet
+    # {
+    #     "FieldReplaceable": 0,
+    #     "MACAddress": "00:00:00:00:00:00",
+    #     "Present": 1,
+    #     "PrettyName": ""
+    # }
+
+    ${json_data}=  Get Inventory
+    ...  system/chassis/motherboard/boxelder/bmc/ethernet
+    Should Be True  ${json_data["data"]["Present"]}
+    Should Not Be Equal As Strings
+    ...  ${json_data["data"]["MACAddress"]}  00:00:00:00:00:00
+
+    # eth0      Link encap:Ethernet  HWaddr 70:E2:84:14:23:F9
+    ${mac_addr}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  /sbin/ifconfig -a | grep HWaddr | awk -F'HWaddr ' '{print $2}'
+    ...  return_stderr=True
+    Should Be Empty  ${stderr}
+    Should Be Equal As Strings  ${json_data["data"]["MACAddress"]}  ${mac_addr}
+    ...  msg=MAC address configured incorrectly.
+
+
 Verify Chassis Motherboard Properties
     [Documentation]  Check if chassis motherboard properties are
     ...              populated valid.
