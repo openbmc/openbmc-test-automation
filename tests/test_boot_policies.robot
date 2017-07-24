@@ -135,6 +135,30 @@ Set Boot Policy To Invalid Value
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Not Be Equal    ${boot}    abc
 
+
+Verify Boot Mode Persistency After BMC Reboot
+    [Documentation]  Verify boot mode persistency after BMC reboot.
+    [Tags]  Verify_Boot_Mode_Persistency_After_BMC_Reboot
+    [Teardown]  Run Keywords  Restore Bootmode Setting
+    ...  AND  FFDC On Test Case Fail
+
+    # Record initial bootmode setting.
+    ${boot_mode}=  Get Host Setting
+    ...  ${CONTROL_HOST_URI}/boot_mode  BootMode
+    Set Suite Variable  ${initial_boot_mode}  ${boot_mode}
+
+    # Set bootmode to non default value.
+    Set Host Setting  ${CONTROL_HOST_URI}/boot_mode  BootMode  Safe
+
+    Initiate BMC Reboot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+    ${boot_mode_after}=  Get Host Setting
+    ...  ${CONTROL_HOST_URI}/boot_mode  BootMode
+
+    Should Be Equal As Strings  ${boot_mode_after}  Safe
+
+
 *** Keywords ***
 
 Set Boot Policy
@@ -172,3 +196,8 @@ Test Suite Setup
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is OS Starting
 
+Restore Bootmode Setting
+    [Documentation]  Restore initial bootmode setting.
+
+    Set Host Setting  ${CONTROL_HOST_URI}/boot_mode  BootMode
+    ...  ${initial_boot_mode}
