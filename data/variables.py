@@ -67,6 +67,8 @@ HOST_INVENTORY_URI = '/xyz/openbmc_project/inventory/'
 LED_GROUPS_URI = '/xyz/openbmc_project/led/groups/'
 LED_PHYSICAL_URI = '/xyz/openbmc_project/led/physical/'
 
+# Host control URI variables.
+CONTROL_HOST_URI = '/xyz/openbmc_project/control/host0/'
 
 '''
   QEMU HTTPS variable:

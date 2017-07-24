@@ -135,6 +135,23 @@ Set Boot Policy To Invalid Value
     ${boot}=   Read Attribute  ${HOST_SETTINGS}   boot_policy
     Should Not Be Equal    ${boot}    abc
 
+
+Verify Boot Mode Persistency After BMC Reboot
+    [Documentation]  Verify boot mode persistency after BMC reboot.
+    [Tags]  Verify_Boot_Mode_Persistency_After_BMC_Reboot
+
+    ${boot_mode_before}=  Get Host Setting
+    ...  ${CONTROL_HOST_URI}/boot_mode  BootMode
+
+    Initiate BMC Reboot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+    ${boot_mode_after}=  Get Host Setting
+    ...  ${CONTROL_HOST_URI}/boot_mode  BootMode
+
+    Should Be Equal As Strings  ${boot_mode_before}  ${boot_mode_after}
+
+
 *** Keywords ***
 
 Set Boot Policy
