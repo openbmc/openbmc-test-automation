@@ -991,3 +991,38 @@ Get Elog URL List
 
 
 ###############################################################################
+Get Host Setting
+    [Documentation]  Return status of given host setting.
+    [Arguments]  ${setting_url}  ${setting_name}
+
+    # Description of argument(s):
+    # setting_url   URL for setting.
+    #               e.g. /xyz/openbmc_project/control/host0/boot_mode
+    # setting_name  Setting which needs to be read(e.g. "BootMode").
+    #
+    # Example of the available setting names and URLs:
+    # {
+    #   "data": {
+    #     "/xyz/openbmc_project/control/host0/auto_reboot": {
+    #       "AutoReboot": 0
+    #     },
+    #     "/xyz/openbmc_project/control/host0/boot_mode": {
+    #       "BootMode": "xyz.openbmc_project.Control.Boot.Mode.Modes.Regular"
+    #     },
+    #     "/xyz/openbmc_project/control/host0/boot_source": {
+    #       "BootSource": "xyz.openbmc_project.Control.Boot.Source.Sources.Default"
+    #     },
+    #     "/xyz/openbmc_project/control/host0/power_cap": {
+    #       "PowerCap": 0,
+    #     "PowerCapEnable": 0
+    #     },
+    #     "/xyz/openbmc_project/control/host0/power_restore_policy": {
+    #       "PowerRestorePolicy": "xyz.openbmc_project.Control.Power.RestorePolicy.Policy.Restore"
+    #    }
+    #  },
+
+    ${setting_status}=  Read Attribute  ${setting_url}  ${setting_name}
+
+    [Return]  ${setting_status.rsplit('.', 1)[1]}
+
+##############################################################################
