@@ -6,6 +6,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 Resource            ../lib/ipmi_client.robot
+Resource            ../lib/boot_utils.robot
 
 Suite Setup         Run Keywords  Verify logging-test  AND
 ...                 Delete Error Logs And Verify
@@ -13,7 +14,37 @@ Test Setup          Open Connection And Log In
 Test Teardown       Post Test Case Execution
 Suite Teardown      Delete Error Logs And Verify
 
+*** Variables ***
+
+${stack_mode}       skip
+
 *** Test Cases ***
+
+Error Log Check After BMC Reboot
+    [Documentation]  Check error log after BMC rebooted.
+    [Tags]  Error_Log_Check_At_BMC_Ready
+    # 1. Power off.
+    # 2. Delete error logs.
+    # 3. Reboot BMC.
+    # 4. Check if eror log exist.
+
+    REST Power Off
+    Delete Error Logs And Verify
+    OBMC Reboot(off)
+    Error Logs Should Not Exist
+
+
+Error Log Check After Host Poweron
+    [Documentation]  Check error log at host booted.
+    [Tags]  Error_Log_Check_At_Host_Booted
+    # 1. Delete error logs
+    # 1. Power on.
+    # 3. Check if eror log exist.
+
+    Delete Error Logs And Verify
+    REST Power On
+    Error Logs Should Not Exist
+
 
 Create Test Error And Verify
     [Documentation]  Create error logs and verify via REST.
