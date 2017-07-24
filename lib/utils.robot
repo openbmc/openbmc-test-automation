@@ -991,3 +991,45 @@ Get Elog URL List
 
 
 ###############################################################################
+Get Host Setting
+    [Documentation]  Return status of given host setting.
+    [Arguments]  ${setting_name}
+    # Description of argument(s):
+    # setting_name  setting which needs to be read(e.g. "BootMode").
+
+    # All available host setting
+    # {
+    #   "data": {
+    #     "/xyz/openbmc_project/control/host0/auto_reboot": {
+    #       "AutoReboot": 0
+    #     },
+    #     "/xyz/openbmc_project/control/host0/boot_mode": {
+    #       "BootMode": "xyz.openbmc_project.Control.Boot.Mode.Modes.Regular"
+    #     },
+    #     "/xyz/openbmc_project/control/host0/boot_source": {
+    #       "BootSource": "xyz.openbmc_project.Control.Boot.Source.Sources.Default"
+    #     },
+    #     "/xyz/openbmc_project/control/host0/power_cap": {
+    #       "PowerCap": 0,
+    #     "PowerCapEnable": 0
+    #     },
+    #     "/xyz/openbmc_project/control/host0/power_restore_policy": {
+    #       "PowerRestorePolicy": "xyz.openbmc_project.Control.Power.RestorePolicy.Policy.Restore"
+    #    }
+    #  },
+
+    # Set setting url base on setting name
+    ${setting_url}=  Set Variable If
+    ...  '${setting_name}' == 'BootMode'  ${HOST_SETTINGS_URI}/boot_mode
+    ...  ${setting_name} == BootSource  ${HOST_SETTINGS_URI}/boot_source
+    ...  ${setting_name} == AutoReboot  ${HOST_SETTINGS_URI}/auto_reboot
+    ...  ${setting_name} == PowerCap  ${HOST_SETTINGS_URI}/power_cap
+    ...  ${setting_name} == PowerCapEnable  ${HOST_SETTINGS_URI}/power_cap
+    ...  ${setting_name} == PowerRestorePolicy
+    ...  ${HOST_SETTINGS_URI}/power_restore_policy
+
+    ${setting_status}=  Read Attribute  ${setting_url}  ${setting_name}
+
+    [Return]  ${setting_status.rsplit('.', 1)[1]}
+
+##############################################################################
