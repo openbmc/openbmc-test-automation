@@ -62,12 +62,16 @@ Initiate Host Reboot
 
 Is Host Running
     [Documentation]  Check if host state is "Running".
+    # Chassis state should be "On" before we check the host state.
+    Is Chassis On
     ${host_state}=  Get Host State
     Should Be Equal  Running  ${host_state}
 
 
 Is Host Off
     [Documentation]  Check if host state is "Off".
+    # Chassis state should be "Off" before we check the host state.
+    Is Chassis Off
     ${host_state}=  Get Host State
     Should Be Equal  Off  ${host_state}
 
