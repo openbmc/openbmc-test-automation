@@ -37,6 +37,7 @@ ${less_octet_ip}     10.3.36
 
 ${network_id}        10.6.6.0
 ${hex_ip}            0xa.0xb.0xc.0xd
+${negative_ip}       10.-6.-6.6
 
 *** Test Cases ***
 
@@ -88,7 +89,7 @@ Configure Invalid IP String
     [Documentation]  Configure invalid IP address which is a string.
     [Tags]  Configure_Invalid_IP_String
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Out Of Range IP
     # IP Address        Prefix_length        Gateway_IP        Expected_Result
@@ -97,7 +98,7 @@ Configure Out Of Range IP
     [Documentation]  Configure out-of-range IP address.
     [Tags]  Configure_Out_Of_Range_IP
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Broadcast IP
     # IP Address     Prefix_length        Gateway_IP        Expected_Result
@@ -106,7 +107,7 @@ Configure Broadcast IP
     [Documentation]  Configure broadcast IP address.
     [Tags]  Configure_Broadcast_IP
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Multicast IP
     # IP Address     Prefix_length        Gateway_IP        Expected_Result
@@ -115,7 +116,7 @@ Configure Multicast IP
     [Documentation]  Configure multicast IP address.
     [Tags]  Configure_Multicast_IP
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Loopback IP
     # IP Address    Prefix_length        Gateway_IP        Expected_Result
@@ -124,7 +125,7 @@ Configure Loopback IP
     [Documentation]  Configure loopback IP address.
     [Tags]  Configure_Loopback_IP
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Network ID
     # IP Address   Prefix_length        Gateway_IP        Expected_Result
@@ -133,7 +134,7 @@ Configure Network ID
     [Documentation]  Configure network ID IP address.
     [Tags]  Configure_Network_ID
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Less Octet IP
     # IP Address      Prefix_length        Gateway_IP        Expected_Result
@@ -142,7 +143,7 @@ Configure Less Octet IP
     [Documentation]  Configure less octet IP address.
     [Tags]  Configure_Less_Octet_IP
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Empty IP
     # IP Address   Prefix_length        Gateway_IP        Expected_Result
@@ -151,7 +152,7 @@ Configure Empty IP
     [Documentation]  Configure less octet IP address.
     [Tags]  Configure_Empty_IP
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Special Char IP
     # IP Address     Prefix_length         Gateway_IP        Expected_Result
@@ -160,7 +161,7 @@ Configure Special Char IP
     [Documentation]  Configure invalid IP address contaning special chars.
     [Tags]  Configure_Special_Char_IP
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Hexadecimal IP
     # IP Address  Prefix_length        Gateway_IP        Expected_Result
@@ -169,7 +170,16 @@ Configure Hexadecimal IP
     [Documentation]  Configure invalid IP address contaning hex value.
     [Tags]  Configure_Hexadecimal_IP
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
+
+Configure Negative Octet IP
+    # IP Address    Prefix_length        Gateway_IP        Expected_Result
+    ${negative_ip}  ${valid_prefix_len}  ${valid_gateway}  error
+
+    [Documentation]  Configure invalid IP address containing negative octet.
+    [Tags]  Configure_Negative_Octet_IP
+
+    [Template]  Configure Network Settings
 
 Add New Valid IP With Blank Gateway
     [Documentation]  Add new IP with blank gateway.
@@ -190,7 +200,7 @@ Configure Invalid Gateway String
     ...  an alpha string and expect an error.
     [Tags]  Configure_Invalid_Gateway_String
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Out Of Range IP For Gateway
     # IP Address  Prefix_length        Gateway_IP          Expected_Result
@@ -199,7 +209,7 @@ Configure Out Of Range IP For Gateway
     [Documentation]  Configure out-of-range IP for gateway and expect an error.
     [Tags]  Configure_Out_Of_Range_IP_For_Gateway
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Broadcast IP For Gateway
     # IP Address  Prefix_length        Gateway_IP       Expected_Result
@@ -208,7 +218,7 @@ Configure Broadcast IP For Gateway
     [Documentation]  Configure broadcast IP for gateway and expect an error.
     [Tags]  Configure_Broadcast_IP_For_Gateway
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Loopback IP For Gateway
     # IP Address  Prefix_length        Gateway_IP      Expected_Result
@@ -217,7 +227,7 @@ Configure Loopback IP For Gateway
     [Documentation]  Configure loopback IP for gateway and expect an error.
     [Tags]  Configure_Loopback_IP_For_Gateway
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Multicast IP For Gateway
     # IP Address  Prefix_length        Gateway_IP       Expected_Result
@@ -226,7 +236,7 @@ Configure Multicast IP For Gateway
     [Documentation]  Configure multicast IP for gateway and expect an error.
     [Tags]  Configure_Multicast_IP_For_Gateway
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Network ID For Gateway
     # IP Address  Prefix_length        Gateway_IP     Expected_Result
@@ -235,7 +245,7 @@ Configure Network ID For Gateway
     [Documentation]  Configure network ID for gateway and expect an error.
     [Tags]  Configure_Network_ID_For_Gateway
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Less Octet IP For Gateway
     # IP Address  Prefix_length        Gateway_IP        Expected_Result
@@ -244,7 +254,7 @@ Configure Less Octet IP For Gateway
     [Documentation]  Configure less octet IP for gateway and expect an error.
     [Tags]  Configure_Less_Octet_IP_For_Gateway
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Special Char IP For Gateway
     # IP Address  Prefix_length        Gateway_IP    Expected_Result
@@ -253,7 +263,7 @@ Configure Special Char IP For Gateway
     [Documentation]  Configure special char IP for gateway and expect an error.
     [Tags]  Configure_Special_Char_IP_For_Gateway
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
 
 Configure Hexadecimal IP For Gateway
     # IP Address  Prefix_length        Gateway_IP  Expected_Result
@@ -262,7 +272,95 @@ Configure Hexadecimal IP For Gateway
     [Documentation]  Configure hexadecimal IP for gateway and expect an error.
     [Tags]  Configure_Hexadecimal_IP_For_Gateway
 
-    [Template]  Configure_Network_Settings
+    [Template]  Configure Network Settings
+
+Configure Out Of Range Prefix Length
+    # IP Address  Prefix_length  Gateway_IP  Expected_Result
+    ${valid_ip}   33             ${hex_ip}   error
+
+    [Documentation]  Configure out-of-range prefix length and expect an error.
+    [Tags]  Configure_Out_Of_Range_Prefix_Length
+
+    [Template]  Configure Network Settings
+
+Configure Negative Value For Prefix Length
+    # IP Address  Prefix_length  Gateway_IP  Expected_Result
+    ${valid_ip}   -10            ${hex_ip}   error
+
+    [Documentation]  Configure negative prefix length and expect an error.
+    [Tags]  Configure_Negative_Value_For_Prefix_Length
+
+    [Template]  Configure Network Settings
+
+Configure Non Numeric Value For Prefix Length
+    # IP Address  Prefix_length  Gateway_IP  Expected_Result
+    ${valid_ip}   xx             ${hex_ip}   error
+
+    [Documentation]  Configure non numeric  value prefix length and expect
+    ...  an error.
+    [Tags]  Configure_String_Value_For_Prefix_Length
+
+    [Template]  Configure Network Settings
+
+Add Fourth Octet Threshold IP And Verify
+    [Documentation]  Add fourth octet threshold IP and verify.
+    [Tags]  Add_Fourth_Octet_Threshold_IP_And_Verify
+
+    Configure Network Settings  10.6.6.254  ${valid_prefix_len}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP address is populated on BMC system.
+    ${ip_info}=  Get BMC IP Info
+    Validate IP On BMC  10.6.6.254  ${ip_info}
+
+Add Third Octet Threshold IP And Verify
+    [Documentation]  Add third octet threshold IP and verify.
+    [Tags]  Add_Third_Octet_Threshold_IP_And_Verify
+
+    Configure Network Settings  10.6.255.6  ${valid_prefix_len}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP address is populated on BMC system.
+    ${ip_info}=  Get BMC IP Info
+    Validate IP On BMC  10.6.255.6  ${ip_info}
+
+Add Second Octet Threshold IP And Verify
+    [Documentation]  Add second octet threshold IP and verify.
+    [Tags]  Add_Second_Octet_Threshold_IP_And_Verify
+
+    Configure Network Settings  10.255.6.6  ${valid_prefix_len}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP address is populated on BMC system.
+    ${ip_info}=  Get BMC IP Info
+    Validate IP On BMC  10.255.6.6  ${ip_info}
+
+Add First Octet Threshold IP And Verify
+    [Documentation]  Add first octet threshold IP and verify.
+    [Tags]  Add_First_Octet_Threshold_IP_And_Verify
+
+    Configure Network Settings  223.6.6.6  ${valid_prefix_len}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP address is populated on BMC system.
+    ${ip_info}=  Get BMC IP Info
+    Validate IP On BMC  223.6.6.6  ${ip_info}
+
+Verify Default Gateway
+    [Documentation]  Verify default gateway.
+    [Tags]  Verify that the default gateway has a valid route.
+
+    ${default_gw}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/config
+    ...  DefaultGateway
+    Validate Route On BMC  ${default_gw}
+
+Verify Hostname
+    [Documentation]  Verify that the hostname read via REST is the same as the
+    ...  hostname configured on system.
+    [Tags]  Verify_Hostname
+
+    ${hostname}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/config  HostName
+    Validate Hostname On BMC  ${hostname}
 
 *** Keywords ***
 
@@ -363,3 +461,17 @@ Configure Network Settings
     ...  AND  Should Be Equal As Strings  ${json['status']}  ${expected_result}
     ...  ELSE
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+Validate Hostname On BMC
+    [Documentation]  Verify that the hostname read via REST is the same as the
+    ...  hostname configured on system.
+    [Arguments]  ${hostname}
+
+    # Description of argument(s):
+    # hostname  A hostname value which is to be compared to the hostname
+    #           configured on system.
+
+    ${sys_hostname}=  Get BMC Hostname
+
+    Should Contain  ${sys_hostname}  ${hostname}
+    ...  ignore_case=True  msg=Hostname does not exist.
