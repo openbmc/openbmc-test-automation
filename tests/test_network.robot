@@ -37,6 +37,7 @@ ${less_octet_ip}     10.3.36
 
 ${network_id}        10.6.6.0
 ${hex_ip}            0xa.0xb.0xc.0xd
+${negative_ip}       10.-6.-6.6
 
 *** Test Cases ***
 
@@ -171,6 +172,15 @@ Configure Hexadecimal IP
 
     [Template]  Configure_Network_Settings
 
+Configure Negative Octet IP
+    # IP Address    Prefix_length        Gateway_IP        Expected_Result
+    ${negative_ip}  ${valid_prefix_len}  ${valid_gateway}  error
+
+    [Documentation]  Configure invalid IP address contaning negative octet.
+    [Tags]  Configure_Negative_Octet_IP
+
+    [Template]  Configure_Network_Settings
+
 Add New Valid IP With Blank Gateway
     [Documentation]  Add new IP with blank gateway.
     [Tags]  Add_New_Valid_IP_With_Blank_Gateway
@@ -263,6 +273,92 @@ Configure Hexadecimal IP For Gateway
     [Tags]  Configure_Hexadecimal_IP_For_Gateway
 
     [Template]  Configure_Network_Settings
+
+Configure Out Of Range Prefix Length
+    # IP Address  Prefix_length  Gateway_IP  Expected_Result
+    ${valid_ip}   33             ${hex_ip}   error
+
+    [Documentation]  Configure out-of-range prefix length and expect an error.
+    [Tags]  Configure_Out_Of_Range_Prefix_Length
+
+    [Template]  Configure_Network_Settings
+
+Configure Negative Value For Prefix Length
+    # IP Address  Prefix_length  Gateway_IP  Expected_Result
+    ${valid_ip}   -10            ${hex_ip}   error
+
+    [Documentation]  Configure negative prefix length and expect an error.
+    [Tags]  Configure_Negative_Value_For_Prefix_Length
+
+    [Template]  Configure_Network_Settings
+
+Configure String Value For Prefix Length
+    # IP Address  Prefix_length  Gateway_IP  Expected_Result
+    ${valid_ip}   xx             ${hex_ip}   error
+
+    [Documentation]  Configure string value prefix length and expect an error.
+    [Tags]  Configure_String_Value_For_Prefix_Length
+
+    [Template]  Configure_Network_Settings
+
+Add Fourth Octet Threshold IP And Verify
+    [Documentation]  Add fourth octet threshold IP and verify.
+    [Tags]  Add_Fourth_Octet_Threshold_IP_And_Verify
+
+    Configure Network Settings  10.6.6.254  ${valid_prefix_len}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP address is populated on BMC system.
+    ${ip_info}=  Get BMC IP Info
+    Validate IP On BMC  10.6.6.254  ${ip_info}
+
+Add Third Octet Threshold IP And Verify
+    [Documentation]  Add third octet threshold IP and verify.
+    [Tags]  Add_Third_Octet_Threshold_IP_And_Verify
+
+    Configure Network Settings  10.6.255.6  ${valid_prefix_len}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP address is populated on BMC system.
+    ${ip_info}=  Get BMC IP Info
+    Validate IP On BMC  10.6.255.6  ${ip_info}
+
+Add Second Octet Threshold IP And Verify
+    [Documentation]  Add second octet threshold IP and verify.
+    [Tags]  Add_Second_Octet_Threshold_IP_And_Verify
+
+    Configure Network Settings  10.255.6.6  ${valid_prefix_len}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP address is populated on BMC system.
+    ${ip_info}=  Get BMC IP Info
+    Validate IP On BMC  10.255.6.6  ${ip_info}
+
+Add First Octet Threshold IP And Verify
+    [Documentation]  Add first octet threshold IP and verify.
+    [Tags]  Add_First_Octet_Threshold_IP_And_Verify
+
+    Configure Network Settings  223.6.6.6  ${valid_prefix_len}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP address is populated on BMC system.
+    ${ip_info}=  Get BMC IP Info
+    Validate IP On BMC  223.6.6.6  ${ip_info}
+
+Verify Default Gateway
+    [Documentation]  Verify default gateway.
+    [Tags]  Verify_Default_Gateway
+
+    ${default_gw}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/config
+    ...  DefaultGateway
+    Validate Route On BMC  ${default_gw}
+
+Verify Hostname
+    [Documentation]  Verify hostname.
+    [Tags]  Verify_Hostname
+
+    ${hostname}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/config  HostName
+    Validate Hostname On BMC  ${hostname}
 
 *** Keywords ***
 
@@ -363,3 +459,12 @@ Configure Network Settings
     ...  AND  Should Be Equal As Strings  ${json['status']}  ${expected_result}
     ...  ELSE
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+Validate Hostname On BMC
+    [Documentation]  Validate hostname on BMC.
+    [Arguments]  ${hostname}
+
+    ${sys_hostname}=  Get BMC Hostname
+
+    Should Contain  ${sys_hostname}  ${hostname}
+    ...  ignore_case=True  msg=Hostname does not exist.
