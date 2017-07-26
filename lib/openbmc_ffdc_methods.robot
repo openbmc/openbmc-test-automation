@@ -309,7 +309,7 @@ SCP Coredump Files
 Collect eSEL Log
     [Documentation]  Collect eSEL log from logging entry and convert eSEL data
     ...              to elog formated string text file.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/enumerate  quiet=${1}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/enumerate  quiet=${1}  timeout=100
     ${status}=  Run Keyword And Return Status
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Return From Keyword If  '${status}' == '${False}'
