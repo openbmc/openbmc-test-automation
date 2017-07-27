@@ -55,7 +55,7 @@ ${power_on_timeout}         14 mins
 ${power_off_timeout}        2 mins
 # If the number of boot failures, exceeds boot_fail_threshold, this program
 # returns non-zero.
-${boot_fail_threshold}      ${1000000}
+${boot_fail_threshold}      ${0}
 ${test_mode}                0
 ${quiet}                    0
 ${debug}                    0
