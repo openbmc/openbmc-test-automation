@@ -342,7 +342,8 @@ Collect eSEL Log
     \  ${length}=  Get Length  ${esel_data}
     # Skip writting to file if eSEL AdditionalData is empty
     \  Continue For Loop If  ${length} == ${0}
-    \  Write Data To File  "${esel_data[0]}"  ${logpath}
+    \  ${index}=  Get Esel Index  ${esel_data}
+    \  Write Data To File  "${esel_data[${index}]}"  ${logpath}
     \  Write Data To File  ${\n}  ${logpath}
 
     ${out}=  Run  which eSEL.pl
