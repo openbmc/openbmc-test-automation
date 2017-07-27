@@ -338,11 +338,15 @@ Collect eSEL Log
     # }
 
     :FOR  ${entry_path}  IN  @{esel_list}
+    # Skip reading attribute if entry URI is a callout.
+    # Example: /xyz/openbmc_project/logging/entry/1/callout
+    \  Continue For Loop If  '${entry_path.rsplit('/', 1)[1]}' == 'callout'
     \  ${esel_data}=  Read Attribute  ${entry_path}  AdditionalData  quiet=${1}
     \  ${length}=  Get Length  ${esel_data}
     # Skip writting to file if eSEL AdditionalData is empty
     \  Continue For Loop If  ${length} == ${0}
-    \  Write Data To File  "${esel_data[0]}"  ${logpath}
+    \  ${index}=  Get Esel Index  ${esel_data}
+    \  Write Data To File  "${esel_data[${index}]}"  ${logpath}
     \  Write Data To File  ${\n}  ${logpath}
 
     ${out}=  Run  which eSEL.pl
