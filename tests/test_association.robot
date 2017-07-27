@@ -46,6 +46,30 @@ Create Test Error Callout And Verify AdditionalData
     Should Contain  ${jsondata}["data"]["AdditionalData"]}  0x0DEADEAD
 
 
+Create Test Error Callout And Verify Associations
+    [Documentation]  Create test error callout and verify associations.
+    [Tags]  Create_Test_Error_Callout_And_Verify_Associations
+
+    # Test error log association entry example:
+    # "associations": [
+    #   [
+    #        "callout",
+    #        "fault",
+    #        "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0"
+    #   ]
+    # ]
+
+    Create Test Error With Callout
+    ${elog_entry}=  Get Elog URL List
+    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
+    ${jsondata}=  To JSON  ${resp.content}
+    List Should Contain Value  ${jsondata}["data"]["associations"]}  callout
+    List Should Contain Value  ${jsondata}["data"]["associations"]}  fault
+    List Should Contain Value
+    ...  ${jsondata}["data"]["associations"]}
+    ...  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
+
+
 Create Test Error Callout And Delete
     [Documentation]  Create Test Error Callout And Delete.
     [Tags]  Create_Test_Error_Callout_And_Delete
