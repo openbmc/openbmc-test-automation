@@ -277,3 +277,14 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return ''.join(e for e in i_str if e.isalnum())
+
+    def get_esel_index(self, esel_list):
+        r"""
+        #######################################################################
+        #   @brief    Returns the eSEL binary index.
+        #   @param    esel_ist: @type list: eSEL list.
+        #   @return   Index of "ESEL=" in the list.
+        #######################################################################
+        """
+        index = [i for i, str in enumerate(esel_list) if 'ESEL=' in str]
+        return index[0]
