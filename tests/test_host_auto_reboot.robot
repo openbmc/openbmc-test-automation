@@ -17,7 +17,7 @@ Test Teardown       Post Testcase Execution
 Verify Host Quiesce State Without Auto Reboot During Boot
     # Description of template fields:
     # Auto Reboot   Initial Host State     Expected Host Action
-    no              Booting                No Reboot
+    0               Booting                No Reboot
     [Documentation]  Validate "Quiesce" state during IPL.
     [Tags]  Verify_Host_Quiesce_State_Without_Auto_Reboot_During_Boot
     [Template]  Verify Host Quiesce State
@@ -26,7 +26,7 @@ Verify Host Quiesce State Without Auto Reboot During Boot
 Verify Host Quiesce State With Auto Reboot During Boot
     # Description of template fields:
     # Auto Reboot   Initial Host State     Expected Host Action
-    yes             Booting                Reboot
+    1               Booting                Reboot
     [Documentation]  Validate "Quiesce" state during IPL.
     [Tags]  Verify_Host_Quiesce_State_With_Auto_Reboot_During_Boot
     [Template]  Verify Host Quiesce State
@@ -42,7 +42,7 @@ Verify Host Quiesce State
     # auto_reboot          Auto reboot setting ("yes" or "no").
     # initial_host_state   State of host before injecting error.
     # action               Action of host due to error ("No Reboot" or
-                           "Reboot").
+    #                       "Reboot").
 
     Set Auto Reboot  ${auto_reboot}
 
@@ -68,5 +68,5 @@ Post Testcase Execution
     ...  3. Close all open SSH connections.
 
     FFDC On Test Case Fail
-    Set Auto Reboot  yes
+    Set Auto Reboot  1
     Close All Connections
