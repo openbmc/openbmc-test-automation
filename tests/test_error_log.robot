@@ -35,6 +35,41 @@ Test Error Persistency On Restart
     Verify Test Error Log
 
 
+Test Error Entry Numbering Reset On Restart
+    [Documentation]  Restart logging service and verify error logs entry start
+    ...  from entry "Id" 1.
+    # 1. Create error log.
+    # 2. Verify error log.
+    # 3. Restart logging service.
+    # 4. Create error log.
+    # 5. Verify new error log entry starts with Id entry 1.
+
+    [Tags]  Test_Error_Entry_Numbering_Reset_On_Restart
+    # Example Error logs:
+    #  "/xyz/openbmc_project/logging/entry/1": {
+    #    "AdditionalData": [
+    #        "STRING=FOO"
+    #    ],
+    #    "Id": 1,   <--- Entry value should be 1.
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.AutoTestSimple",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1490818990051,
+    #    "associations": []
+    #  },
+
+    Create Test Error Log
+    Verify Test Error Log
+    Delete Error Logs
+    Execute Command On BMC
+    ...  systemctl restart xyz.openbmc_project.Logging.service
+    Sleep  10s  reason=Wait for logging service to restart properly.
+    Create Test Error Log
+    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
+    ${entry_id}=  Read Attribute  ${elog_entry[0]}  Id
+    Should Be Equal  ${entry_id}  ${1}
+
+
 Test Error Persistency On Reboot
     [Documentation]  Reboot BMC and verify error logs.
     [Tags]  Test_Error_Persistency_On_Reboot
