@@ -71,7 +71,7 @@ Verify Checkstop Insertion With Auto Reboot
     # fru            FRU value (e.g. 2011400).
     # address        chip address (e.g 4000000000000000).
 
-    Set Auto Reboot  yes
+    Set Auto Reboot  ${1}
     Inject Checkstop Through OS  ${chip_type}  ${fru}  ${address}
     Wait Until Keyword Succeeds  120 sec  20 sec  Is Host Rebooted
     Wait for OS  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
