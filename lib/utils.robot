@@ -738,18 +738,17 @@ Get System Power Policy
 
 Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
-    ${setting}=  Read Attribute  ${HOST_SETTING}  auto_reboot
+    ${setting}=  Read Attribute  ${BMC_CONTROL_URI}/auto_reboot  AutoReboot
     [Return]  ${setting}
-
 
 Set Auto Reboot
     [Documentation]  Set the given auto reboot setting.
     [Arguments]  ${setting}
-    # setting  auto reboot's setting, i.e. yes or no
+    # setting  auto reboot's setting, i.e. 1 or 0
 
     ${valueDict}=  Set Variable  ${setting}
     ${data}=  Create Dictionary  data=${valueDict}
-    Write Attribute  ${HOST_SETTING}  auto_reboot  data=${data}
+    Write Attribute  ${BMC_CONTROL_URI}/auto_reboot  AutoReboot   data=${data}
     ${current_setting}=  Get Auto Reboot
     Should Be Equal  ${current_setting}  ${setting}
 
