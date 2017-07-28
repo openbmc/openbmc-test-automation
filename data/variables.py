@@ -37,6 +37,9 @@ BMC_STATE_URI = '/xyz/openbmc_project/state/bmc0/'
 HOST_STATE_URI = '/xyz/openbmc_project/state/host0/'
 CHASSIS_STATE_URI = '/xyz/openbmc_project/state/chassis0/'
 
+# CONTROL URI variables
+BMC_CONTROL_URI = '/xyz/openbmc_project/control/host0/'
+
 # Logging URI variables
 BMC_LOGGING_URI = '/xyz/openbmc_project/logging/'
 BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
