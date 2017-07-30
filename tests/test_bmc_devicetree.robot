@@ -108,16 +108,16 @@ Check BMC GPIO-keys Compatible Property Is Set
 
 Check BMC IIO-HWMON Name Property Is Set
    #Property
-   iio-hwmon/name
-   [Documentation]  Verify if the BMC IIO-HWMON name property is
+   iio-hwmon-dps310/name
+   [Documentation]  Verify if the BMC IIO-HWMON-DPS310 name property is
    ...  populated.
    [Tags]  Check_BMC_IIO-HWMON_Name_Property_Is_Set
    [Template]  Template Check Property
 
 Check BMC IIO-HWMON Compatible Property Is Set
    #Property
-   iio-hwmon/compatible
-   [Documentation]  Verify if the BMC IIO-HWMON compatible property is
+   iio-hwmon-dps310/compatible
+   [Documentation]  Verify if the BMC IIO-HWMON-DPS310 compatible property is
    ...  populated.
    [Tags]  Check_BMC_IIO-HWMON_Compatible_Property_Is_Set
    [Template]  Template Check Property
