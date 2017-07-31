@@ -20,6 +20,23 @@ Open Connection And Login To XCAT
     Open Connection  ${xcat_host}  port=${xcat_port}
     Login  ${XCAT_USERNAME}  ${XCAT_PASSWORD}
 
+
+Execute Command On XCAT
+    [Documentation]  Execute command using XCAT.
+    [Arguments]  ${command_prefix}  ${command_suffix}
+
+    # Description of the argument(s):
+    # command_prefix  Command' prefix.
+    # command_suffix  Command's suffix.
+
+    ${xcat_cmd}=   Catenate  SEPARATOR=
+    ...  ${XCAT_DIR_PATH}/${command_prefix} ${OPENBMC_HOST} ${command_suffix}
+    ${stdout}  ${stderr}=  Execute Command  ${xcat_cmd}  return_stderr=True
+    Should Be Empty  ${stderr}
+
+    [Return]  ${stdout}
+
+
 Get List Of BMC Nodes
     [Documentation]  Get list of BMC nodes.
     [Arguments]  ${node_cfg_file_path}=${NODE_CFG_FILE_PATH}
@@ -80,6 +97,7 @@ Power Off Via XCAT
     ${stdout}  ${stderr}=  Execute Command  ${XCAT_DIR_PATH}/rpower ${node} off
     ...  return_stderr=True
     Should Be Empty  ${stderr}
+
 
 Get Power Status
     [Documentation]  Get power status via XCAT.
