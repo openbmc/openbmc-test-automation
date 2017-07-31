@@ -42,7 +42,7 @@ Verify Host Quiesce State
     # auto_reboot          Auto reboot setting ("yes" or "no").
     # initial_host_state   State of host before injecting error.
     # action               Action of host due to error ("No Reboot" or
-                           "Reboot").
+    #                      "Reboot").
 
     Set Auto Reboot  ${auto_reboot}
 
