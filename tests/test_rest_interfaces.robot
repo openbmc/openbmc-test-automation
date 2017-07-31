@@ -47,6 +47,21 @@ REST Delete All Sessions And Expect Error
     ...  Get Request  openbmc  /xyz/openbmc_project/
 
 
+Multiple Requests On BMC Using Single REST Session
+    [Documentation]  Trigger multiple REST operation using an active
+    ...  connection session.
+    [Tags]  Multiple_Requests_On_BMC_Using_Single_REST_Session
+
+    Initialize OpenBMC
+
+    # Session object "openbmc".
+    ${resp}=  Get Request  openbmc  /xyz/openbmc_project/state/
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    ${resp}=  Get Request  openbmc  /xyz/openbmc_project/software/enumerate
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
 Verify REST JSON Data On Success
     [Documentation]  Verify JSON data success response messages.
     [Tags]  Verify_REST_JSON_Data_On_Success
