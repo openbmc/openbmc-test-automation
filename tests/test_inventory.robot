@@ -29,7 +29,6 @@ Verify System Inventory Path
     # Example: /xyz/openbmc_project/inventory/system
     Get Inventory  system
 
-
 Verify Chassis Motherboard Properties
     [Documentation]  Check if chassis motherboard properties are
     ...              populated valid.
@@ -58,6 +57,27 @@ Verify Chassis Motherboard Properties
     Should Not Be Equal As Strings
     ...  ${properties["data"]["SerialNumber"]}  000000000000
     ...  msg=motherboard serial number invalid.
+
+Verify Boxelder Interface Present
+    [Documentation]  Verify boxelder interface present.
+    [Tags]  Verify_Boxelder_Interface_Present
+    # System inventory boxelder interface:
+    # xyz/openbmc_project/inventory/system/chassis/motherboard/boxeler/bmc:
+    #   "data"": {
+    #    "BuildDate": "",
+    #    "FieldReplaceable": 0,
+    #    "Manufacturer": "IBM",
+    #    "Model": "",
+    #    "PartNumber": "01DH051",
+    #    "Present": 1,
+    #    "PrettyName": "BMC PLANAR  ",
+    #    "SerialNumber": "000000000000"
+    #    }
+    # The Boxelder properties "Present" should be boolean 1.
+
+   ${boxelder_present}=  Read Attribute
+   ...  ${HOST_INVENTORY_URI}/system/chassis/motherboard/boxelder/bmc  Present
+   Should Be True  ${boxelder_present}
 
 Verify CPU Present
     [Documentation]  Check if the FRU "Present" is set for CPU's.
