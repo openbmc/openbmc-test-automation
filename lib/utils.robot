@@ -1002,3 +1002,54 @@ Get Elog URL List
 
 
 ###############################################################################
+Get Host Setting
+    [Documentation]  Return value of given host setting.
+    [Arguments]  ${setting_url}  ${attribute_name}
+
+    # Description of argument(s):
+    # setting_url     URL for setting.
+    #                 e.g. /xyz/openbmc_project/control/host0/boot_mode
+    # attribute_name  Setting which needs to be read(e.g. "BootMode").
+    #
+    # Example of the available setting names and URLs:
+    # {
+    #   "data": {
+    #     "/xyz/openbmc_project/control/host0/auto_reboot": {
+    #       "AutoReboot": 0
+    #     },
+    #     "/xyz/openbmc_project/control/host0/boot_mode": {
+    #       "BootMode": "xyz.openbmc_project.Control.Boot.Mode.Modes.Regular"
+    #     },
+    #     "/xyz/openbmc_project/control/host0/boot_source": {
+    #       "BootSource": "xyz.openbmc_project.Control.Boot.Source.Sources.Default"
+    #     },
+    #     "/xyz/openbmc_project/control/host0/power_cap": {
+    #       "PowerCap": 0,
+    #     "PowerCapEnable": 0
+    #     },
+    #     "/xyz/openbmc_project/control/host0/power_restore_policy": {
+    #       "PowerRestorePolicy": "xyz.openbmc_project.Control.Power.RestorePolicy.Policy.Restore"
+    #    }
+    #  },
+
+    ${attribute_value}=  Read Attribute  ${setting_url}  ${attribute_name}
+
+    [Return]  ${attribute_value.rsplit('.', 1)[1]}
+
+
+##############################################################################
+Set Host Setting
+    [Documentation]  Set value of given host setting.
+    [Arguments]  ${setting_url}  ${attribute_name}  ${attribute_value}
+
+    # Description of argument(s):
+    # setting_url      URL for setting.
+    #                  e.g. /xyz/openbmc_project/control/host0/boot_mode
+    # attribute_name   Setting which needs to be set(e.g. "BootMode").
+    # attribute_value  Value which need to set(e.g. "Safe", "Regular").
+
+    ${args}=  Create Dictionary
+    ...  data=xyz.openbmc_project.Control.Boot.Mode.Modes.${attribute_value}
+    Write Attribute  ${setting_url}  ${attribute_name}  data=${args}
+
+##############################################################################
