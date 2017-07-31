@@ -64,3 +64,5 @@
 -e Verify_Setting_OCC_Turbo_Via_REST
 -e Check_BMC_FSI_Compatible_Property_Is_Set
 -e Check_BMC_FSI_Name_Property_Is_Set
+# Boxelder Interface is not present in Palmetto
+-e Verify_Boxelder_Interface_Present
