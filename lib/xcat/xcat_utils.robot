@@ -20,6 +20,25 @@ Open Connection And Login To XCAT
     Open Connection  ${xcat_host}  port=${xcat_port}
     Login  ${XCAT_USERNAME}  ${XCAT_PASSWORD}
 
+
+Execute Command On XCAT
+    [Documentation]  Execute command using XCAT.
+    [Arguments]  ${command}  ${command_option}=${EMPTY}
+    ...  ${node}=${OPENBMC_HOST}
+
+    # Description of argument(s):
+    # command         Command to be run(e.g. "rinv").
+    # command_option  Command's option to be run(e.g. "dimm").
+    # node            Name of the node(e.g. "node1").
+
+    ${xcat_cmd}=  Catenate  SEPARATOR=
+    ...  ${XCAT_DIR_PATH}/${command} ${node} ${command_option}
+    ${stdout}  ${stderr}=  Execute Command  ${xcat_cmd}  return_stderr=True
+    Should Be Empty  ${stderr}
+
+    [Return]  ${stdout}
+
+
 Get List Of BMC Nodes
     [Documentation]  Get list of BMC nodes.
     [Arguments]  ${node_cfg_file_path}=${NODE_CFG_FILE_PATH}
