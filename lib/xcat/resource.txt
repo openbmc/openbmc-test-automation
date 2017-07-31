@@ -3,9 +3,9 @@
 # XCAT related parameters
 
 ${XCAT_HOST}      ${EMPTY}
-${XCAT_USERNAME}  ${EMPTY}
-${XCAT_PASSWORD}  ${EMPTY}
-${XCAT_PORT}      31578
+${XCAT_USERNAME}  root
+${XCAT_PASSWORD}  abcd1234
+${XCAT_PORT}      22
 ${XCAT_DIR_PATH}  /opt/xcat/bin/
 ${GROUP}          openbmc
 
