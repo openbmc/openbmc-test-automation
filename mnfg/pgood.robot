@@ -20,20 +20,20 @@ Verify PGood When Power On Using REST
     [Tags]  Verify_PGood_When_Power_On_Using_REST
 
     # Initiate Host poweron using rest commands.
-    Initiate Host Boot  1
-    ${data}=  Read Attribute  ${POWER_URI}  pgood
+    Initiate Chassis
+    ${chassis_state}=  Read Attribute  ${CHASSIS_STATE_URI}  RequestedPowerTransition
 
-    Should Be Equal As Integers  ${data}  1
+    Should Be Equal  ${chassis_state}  ${CHASSIS_POWERON_TRANS}
 
 Verify PGood When Power Off Using REST
     [Documentation]  Verify pgood state on bad power supply.
     [Tags]  Verify_PGood_When_Power_Off_Using_REST
 
     # Initiate Host poweroff using rest commands.
-    Initiate Host PowerOff  1
-    ${data}=  Read Attribute  ${POWER_URI}  pgood
+    Initiate Chassis Off
+    ${data}=  Read Attribute  ${CHASSIS_STATE_URI}  RequestedPowerTransition
 
-    Should Be Equal As Integers  ${data}  0
+    Should Be Equal  ${data}  ${CHASSIS_POWEROFF_TRANS}
 
 Verify PGood When Power On Using IPMI
     [Documentation]  Verify pgood state when power on using IPMI.
@@ -41,9 +41,9 @@ Verify PGood When Power On Using IPMI
 
     # Initiate Host poweron using IPMI commands.
     Initiate Host Boot Via External IPMI
-    ${data}=  Read Attribute  ${POWER_URI}  pgood
+    ${data}=  Read Attribute  ${CHASSIS_STATE_URI}  CurrentPowerState
 
-    Should Be Equal As Integers  ${data}  1
+    Should Be Equal  ${data}  ${CHASSIS_POWERON_STATE}
 
 Verify PGood When Power Off Using IPMI
     [Documentation]  Verify pgood state when power off using IPMI.
@@ -51,6 +51,18 @@ Verify PGood When Power Off Using IPMI
 
     # Initiate Host poweroff using IPMI commands.
     Initiate Host PowerOff Via External IPMI
-    ${data}=  Read Attribute  ${POWER_URI}  pgood
+    ${data}=  Read Attribute  ${CHASSIS_STATE_URI}  CurrentPowerState
 
-    Should Be Equal As Integers  ${data}  0
+    Should Be Equal  ${data}  ${CHASSIS_POWEROFF_STATE}
+
+*** Keywords ***
+
+Initiate Chassis
+    ${args}=  Create Dictionary   data=${CHASSIS_POWERON_TRANS}
+    Write Attribute
+    ...  ${CHASSIS_STATE_URI}  RequestedPowerTransition   data=${args}
+
+Initiate Chassis Off
+    ${args}=  Create Dictionary   data=${CHASSIS_POWEROFF_TRANS}
+    Write Attribute
+    ...  ${CHASSIS_STATE_URI}  RequestedPowerTransition   data=${args}
