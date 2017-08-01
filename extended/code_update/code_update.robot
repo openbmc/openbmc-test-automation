@@ -1,7 +1,8 @@
 *** Settings ***
 Documentation     Code update to a target BMC.
 ...               Execution Method:
-...               python -m robot -v OPENBMC_HOST:<hostname>
+...               python -m robot -v OPENBMC_HOST:<bmc hostname>
+...               -v OS_HOST:<os hostname>
 ...               -v IMAGE_FILE_PATH:<path/*.tar>  code_update.robot
 ...
 ...               Code update method BMC
@@ -21,6 +22,7 @@ Variables         ../../data/variables.py
 Resource          code_update_utils.robot
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../../lib/state_manager.robot
 
 Test Teardown     Code Update Teardown
 
@@ -66,6 +68,12 @@ REST PNOR Code Update
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
 
+    # Verify that the host boots with the new PNOR
+    Initiate Host Boot
+    Wait For Host To Ping  ${OS_HOST}
+    Initiate Host PowerOff
+
+
 *** Keywords ***
 
 Code Update Teardown
@@ -76,7 +84,7 @@ Code Update Teardown
     Execute Command On BMC  rm -rf /tmp/images/*
 
     Close All Connections
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
 
 Get PNOR Extended Version
     [Documentation]  Return the PNOR extended version.
