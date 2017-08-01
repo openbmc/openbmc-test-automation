@@ -45,10 +45,10 @@ REST Host Code Update
     [Tags]  REST_Host_Code_Update
     [Setup]  Code Update Setup
 
-    OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
-    ${IMAGE_VERSION}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    OperatingSystem.File Should Exist  ${image_file_path}
+    ${image_version}=  Get Version Tar  ${image_file_path}
 
-    ${image_data}=  OperatingSystem.Get Binary File  ${IMAGE_FILE_PATH}
+    ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
     Upload Image To BMC  /upload/image  data=${image_data}
     ${ret}=  Verify Image Upload
     Should Be True  ${ret}
@@ -93,6 +93,39 @@ Host Image Priority Attribute Test
     Priority          ${127}
 
 
+Set RequestedActivation To None
+    [Documentation]  Set the RequestedActivation of the image to None and
+    ...              verify that it is in fact set to None.
+    [Tags]  Set_RequestedActivation_To_None
+
+    ${sw_objs}=  Get Software Objects
+    Set Host Software Property  @{sw_objs}[0]  RequestedActivation
+    ...  ${REQUESTED_NONE}
+    ${sw_props}=  Get Host Software Property  @{sw_objs}[0]
+    Should Be Equal As Strings  &{sw_props}[RequestedActivation]
+    ...  ${REQUESTED_NONE}
+
+
+Set RequestedActivation To Invalid Value
+    [Documentation]  Set the RequestedActivation proprety of the image to an
+    ...              invalid value and verify that it was not changed.
+    [Template]  Set Property To Invalid Value And Verify No Change
+    [Tags]  Set_RequestedActivation_To_Invalid_Value
+
+    # Property
+    RequestedActivation
+
+
+Set Activation To Invalid Value
+    [Documentation]  Set the Activation proprety of the image to an invalid
+    ...              value and verify that it was not changed.
+    [Template]  Set Property To Invalid Value And Verify No Change
+    [Tags]  Set_Activation_To_Invalid_Value
+
+    # Property
+    Activation
+
+
 *** Keywords ***
 
 Set PNOR Attribute
@@ -123,23 +156,38 @@ Code Update Setup
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
     ...  Delete All PNOR Images
 
+
 Code Update Teardown
     [Documentation]  Do code update test case teardown.
 
-    #TODO: Use the Delete interface instead once delivered
-    Open Connection And Log In
-    Execute Command On BMC  rm -rf /tmp/images/*
-
-    Close All Connections
     FFDC On Test Case Fail
+
 
 Get PNOR Extended Version
     [Documentation]  Return the PNOR extended version.
-    ...              Description of arguments:
-    ...              path  Path of the MANIFEST file
-    [Arguments]      ${path}
+    [Arguments]  ${path}
+
+    # Description of argument(s):
+    # path  Path of the MANIFEST file.
 
     Open Connection And Log In
     ${version}= Execute Command On BMC
     ...  "grep \"extended_version=\" " + ${path}
     [return] ${version.split(",")}
+
+
+Set Property To Invalid Value And Verify No Change
+    [Documentation]  Attempt to set a property and check that the value didn't
+    ...              change.
+    [Arguments]  ${property}
+
+    # Description of argument(s):
+    # property  The property to attempt to set.
+
+    ${sw_objs}=  Get Software Objects
+    ${prev_props}=  Get Host Software Property  @{sw_objs}[0]
+    Run Keyword And Expect Error  500 != 200
+    ...  Set Host Software Property  @{sw_objs}[0]  ${property}  foo
+    ${cur_props}=  Get Host Software Property  @{sw_objs}[0]
+    Should Be Equal As Strings  &{prev_props}[${property}]
+    ...  &{cur_props}[${property}]
