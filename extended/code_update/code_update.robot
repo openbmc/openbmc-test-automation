@@ -22,6 +22,7 @@ Variables         ../../data/variables.py
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../../lib/code_update_utils.robot
+Resource          ../../lib/boot_utils.robot
 
 Test Teardown     Code Update Teardown
 
@@ -69,6 +70,17 @@ REST Host Code Update
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
 
+    OBMC Reboot (off)
+
+
+Post Update Boot To OS
+    [Documentation]  Boot the host OS
+    [Tags]  Post_Update_Boot_To_OS
+
+    Run Keyword Unless  '${PREV_TEST_STATUS}' == 'PASS'
+    ...  Fail  Code update failed. No need to boot to OS.
+    REST Power On
+
 
 Host Image Priority Attribute Test
     [Documentation]  Set "Priority" attribute.
@@ -79,6 +91,7 @@ Host Image Priority Attribute Test
     Priority          ${0}
     Priority          ${1}
     Priority          ${127}
+
 
 *** Keywords ***
 
