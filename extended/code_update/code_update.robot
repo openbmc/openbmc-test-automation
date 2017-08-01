@@ -1,7 +1,10 @@
 *** Settings ***
 Documentation     Code update to a target BMC.
 ...               Execution Method:
-...               python -m robot -v OPENBMC_HOST:<hostname>
+...               python -m robot -v OPENBMC_HOST:<bmc hostname>
+...               -v OS_HOST:<os hostname>
+...               -v OS_USERNAME:<username>
+...               -v OS_PASSWORD:<password>
 ...               -v IMAGE_FILE_PATH:<path/*.tar>  code_update.robot
 ...
 ...               Code update method BMC
@@ -21,6 +24,8 @@ Variables         ../../data/variables.py
 Resource          code_update_utils.robot
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../../lib/state_manager.robot
+Resource          ../../lib/boot_utils.robot
 
 Test Teardown     Code Update Teardown
 
@@ -65,6 +70,15 @@ REST PNOR Code Update
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+
+
+Post Update Boot To OS
+    [Documentation]  Boot the host OS
+    [Tags]  Post_Update_Boot_To_OS
+
+    Initiate Host PowerOff
+    REST Power On
+
 
 *** Keywords ***
 
