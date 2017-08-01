@@ -335,7 +335,7 @@ Verify Minimal Main Planar Inventory
     [Tags]  Verify_Minimal_Main_Planar_Inventory
 
     # item         minimum_count
-    main_planar    1
+    main_planar    0
     [Template]     Minimum Inventory
 
 Verify Minimal System Inventory
@@ -343,7 +343,7 @@ Verify Minimal System Inventory
     [Tags]  Verify_Minimal_System_Inventory
 
     # item         minimum_count
-    system         1
+    system         0
     [Template]     Minimum Inventory
 
 *** Keywords ***
