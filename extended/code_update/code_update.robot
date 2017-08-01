@@ -21,6 +21,8 @@ Variables         ../../data/variables.py
 Resource          code_update_utils.robot
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../../lib/state_manager.robot
+Resource          ../../lib/boot_utils.robot
 
 Test Teardown     Code Update Teardown
 
@@ -65,6 +67,14 @@ REST PNOR Code Update
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+
+
+Post Update Boot To OS
+    [Documentation]  Boot the host OS
+    [Tags]  Post_Update_Boot_To_OS
+
+    REST Power On
+
 
 *** Keywords ***
 
