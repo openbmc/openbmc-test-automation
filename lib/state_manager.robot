@@ -33,6 +33,19 @@ Initiate Host Boot
 
 Initiate Host PowerOff
     [Documentation]  Initiate host power off.
+    # 1. Request soft power off
+    # 2. Hard power off, if failed.
+    [Arguments]  ${wait}=${1}
+
+    # Description of arguments:
+    # wait  Indicates that this keyword should wait for host off state.
+
+    ${status}=  Run Keyword And Return Status  Power Off And Wait  ${wait}
+    Run Keyword if  '${status}' == '${False}'  Hard Power Off
+
+
+Power Off And Wait
+    [Documentation]  Power off host.
     [Arguments]  ${wait}=${1}
 
     # Description of arguments:
@@ -49,6 +62,17 @@ Initiate Host PowerOff
     # Revert to 3 minutes once fixed.
     Wait Until Keyword Succeeds
     ...  6 min  10 sec  Is Host Off
+
+
+Hard Power Off
+    [Documentation]  Hard power off request.
+
+    ${args}=  Create Dictionary  data=${CHASSIS_POWEROFF_TRANS}
+    Write Attribute
+    ...  ${CHASSIS_STATE_URI}  RequestedPowerTransition  data=${args}
+
+    Wait Until Keyword Succeeds
+    ...  1 min  10 sec  Run Keywords  Is Chassis Off  AND  Is Host Off
 
 
 Initiate Host Reboot
