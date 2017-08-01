@@ -70,6 +70,10 @@ LED_PHYSICAL_URI = '/xyz/openbmc_project/led/physical/'
 # Host control URI variables.
 CONTROL_HOST_URI = '/xyz/openbmc_project/control/host0/'
 
+# Dump URI variable
+DUMP_URI = '/xyz/openbmc_project/dump/'
+DUMP_ENTRY_URI = DUMP_URI + 'entry/'
+
 '''
   QEMU HTTPS variable:
 
