@@ -25,6 +25,36 @@ from robot.libraries.BuiltIn import BuiltIn
 
 
 ###############################################################################
+def verify_host_boots_to_os_if_available(timeout=5):
+
+    r"""
+    Attempt to boot the host if it is off, or reboot the host if it is on,
+    make sure it can be pinged, and return it to its previous state.
+
+    Description of argument(s):
+    timeout  How long, in minutes, to wait for the host to boot before failing
+    """
+
+    os_host = BuiltIn().get_variable_value("${OS_HOST}")
+    if os_host:
+        status, host_state = keyword.run_key("Get Host State")
+        print host_state
+        if 'Off' == host_state:
+            keyword.run_key("Initiate Host Boot")
+            keyword.run_key("Wait For Host To Ping  " + os_host
+                            + " ${timeout}=" + str(timeout) + "min")
+            keyword.run_key("Initiate Host PowerOff")
+        else:
+            keyword.run_key("Initiate Host PowerOff")
+            keyword.run_key("Initiate Host Boot")
+            keyword.run_key("Wait For Host To Ping  " + os_host
+                            + " ${timeout}=" + str(timeout) + "min")
+
+
+###############################################################################
+
+
+###############################################################################
 def wait_for_activation_state_change(version_id, initial_state):
 
     r"""
