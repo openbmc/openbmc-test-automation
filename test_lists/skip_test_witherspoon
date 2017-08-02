@@ -43,3 +43,5 @@
 # Network tests for xyz interface.
 # https://github.com/openbmc/openbmc-test-automation/issues/729
 -e Network_Test
+# NA until VPD is programmed on systems.
+-e Verify_Boxelder_MAC_Address_Property_Is_Populated
