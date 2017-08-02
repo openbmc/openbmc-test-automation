@@ -26,8 +26,8 @@ ${ERROR_DBE_MSG}       (DBE) has been detected on GPU
 ...                    network  printer  tape
 
 # Inventory Paths of the JSON and YAML files
-${json_tmp_file_path}  ${EXECDIR}/inventory.json
-${yaml_file_path}      ${EXECDIR}/inventory.yaml
+${json_tmp_file_path}  ${EXECDIR}/inventory_temp_file.json
+${yaml_file_path}      ${EXECDIR}/inventory_temp_file.yaml
 
 
 
