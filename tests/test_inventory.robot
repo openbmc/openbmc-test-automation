@@ -346,6 +346,17 @@ Verify Minimal System Inventory
     system         1
     [Template]     Minimum Inventory
 
+Verify Minimal Power Supply Inventory
+    [Documentation]  Verify minimal power supply inventory.
+    [Tags]  Verify_Minimal_Power_Supply_Inventory
+    # Example:
+    # "/xyz/openbmc_project/inventory/system/chassis/power_supply0",
+    # "/xyz/openbmc_project/inventory/system/chassis/power_supply1",
+
+    # item         minimum_count
+    power_supply   1
+    [Template]     Minimum Inventory
+
 *** Keywords ***
 
 Test Suite Setup
