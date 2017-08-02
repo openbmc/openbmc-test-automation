@@ -43,3 +43,5 @@
 # Network tests for xyz interface.
 # https://github.com/openbmc/openbmc-test-automation/issues/729
 -e Network_Test
+# Not applicable to witherspoon.
+-e Verify_Minimal_Memory_Buffer_Inventory
