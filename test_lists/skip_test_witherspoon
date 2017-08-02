@@ -43,3 +43,7 @@
 # Network tests for xyz interface.
 # https://github.com/openbmc/openbmc-test-automation/issues/729
 -e Network_Test
+# https://github.com/openbmc/openbmc-test-automation/issues/822
+-e Verify_Minimal_Memory_Buffer_Inventory
+-e Verify_Minimal_Main_Planar_Inventory
+-e Verify_Minimal_System_Inventory
