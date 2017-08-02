@@ -1,4 +1,3 @@
--e known_issue
 #https://github.com/openbmc/openbmc-test-automation/issues/123
 -e Execute_ipmi_BT_capabilities_command
 #https://github.com/openbmc/openbmc/issues/612
@@ -21,21 +20,9 @@
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
 -e Check_BMC_FSI_Compatible_Property_Is_Set
 -e Check_BMC_FSI_Name_Property_Is_Set
-# NA until VPD is programmed on systems
--e Verify_Chassis_Motherboard_Properties
 #https://github.com/openbmc/openbmc-test-automation/issues/546
 -e CPU_Present
 -e DIMM3_Present
-#https://github.com/openbmc/openbmc/issues/1322
--e Verify_BMC_Reset_Reload_With_System_On
-#https://github.com/openbmc/openbmc/issues/1461
--e Verify_FRU_Properties
-#https://github.com/openbmc/openbmc/issues/1357
--e Verify_Core_Functional_State
-#https://github.com/openbmc/openbmc/issues/1572
--e Test_Restore_Policy_Restore_Last_State_With_Host_Running
-#https://github.com/openbmc/openbmc/issues/1571
--e Verify_Host_Quiesce_State_Without_Auto_Reboot
 # System LED test cases which are NA for Witherspoon system.
 -e Test_Heartbeat_LED_And_Verify_Via_REST
 -e Test_Beep_LED_And_Verify_Via_REST
