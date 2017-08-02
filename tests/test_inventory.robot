@@ -319,7 +319,7 @@ Verify Minimal Memory Buffer Inventory
     [Tags]  Verify_Minimal_Memory_Buffer_Inventory
 
     # item         minimum_count
-    memory_buffer  1
+    dimm           1
     [Template]     Minimum Inventory
 
 Verify Minimal Fan Inventory
