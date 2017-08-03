@@ -40,6 +40,7 @@ ${IMAGE_FILE_PATH}                ${EMPTY}
 REST PNOR Code Update
     [Documentation]  Do a PNOR code update by uploading image on BMC via REST.
     [Tags]  REST_PNOR_Code_Update
+    [Setup]  Delete All PNOR Images
 
     OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
     ${IMAGE_VERSION}=  Get Version Tar  ${IMAGE_FILE_PATH}
@@ -76,7 +77,7 @@ Code Update Teardown
     Execute Command On BMC  rm -rf /tmp/images/*
 
     Close All Connections
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
 
 Get PNOR Extended Version
     [Documentation]  Return the PNOR extended version.
