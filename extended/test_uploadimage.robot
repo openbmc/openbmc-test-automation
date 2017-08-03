@@ -33,14 +33,14 @@ ${image_version}      ${EMPTY}
 
 *** Test Cases ***
 
-Upload PNOR Image Via REST
+Upload Host Image Via REST
     # Image File Path
 
     ${PNOR_IMAGE_FILE_PATH}
 
     [Documentation]  Upload a PNOR image via REST.
     [Template]  Upload Image Via REST And Verify Success
-    [Tags]  Upload_PNOR_Image_Via_REST
+    [Tags]  Upload_Host_Image_Via_REST
 
 
 Upload BMC Image Via REST
@@ -53,14 +53,14 @@ Upload BMC Image Via REST
     [Tags]  Upload_BMC_Image_Via_REST
 
 
-Upload PNOR Image Via TFTP
+Upload Host Image Via TFTP
     # Image File Path
 
     ${PNOR_TFTP_FILE_NAME}
 
     [Documentation]  Upload a PNOR image via TFTP.
     [Template]  Upload Image Via TFTP And Verify Success
-    [Tags]  Upload_PNOR_Image_Via_TFTP
+    [Tags]  Upload_Host_Image_Via_TFTP
 
 
 Upload BMC Image Via TFTP
@@ -73,7 +73,7 @@ Upload BMC Image Via TFTP
     [Tags]  Upload_BMC_Image_Via_TFTP
 
 
-Upload PNOR Image With Bad Manifest Via REST
+Upload Host Image With Bad Manifest Via REST
     # Image File Name
 
     pnor_bad_manifest.tar
@@ -81,10 +81,10 @@ Upload PNOR Image With Bad Manifest Via REST
     [Documentation]  Upload a PNOR image with a bad MANIFEST via REST and
     ...              verify that the BMC does not unpack it.
     [Template]  Upload Bad Image Via REST And Verify Failure
-    [Tags]  Upload_PNOR_Image_With_Bad_Manifest_Via_REST
+    [Tags]  Upload_Host_Image_With_Bad_Manifest_Via_REST
 
 
-Upload PNOR Image With No Squashfs Via REST
+Upload Host Image With No Squashfs Via REST
     # Image File Name
 
     pnor_no_image.tar
@@ -92,7 +92,7 @@ Upload PNOR Image With No Squashfs Via REST
     [Documentation]  Upload a PNOR image with just a MANIFEST file via REST
     ...              and verify that the BMC does not unpack it.
     [Template]  Upload Bad Image Via REST And Verify Failure
-    [Tags]  Upload_PNOR_Image_With_No_Squashfs_Via_REST
+    [Tags]  Upload_Host_Image_With_No_Squashfs_Via_REST
 
 
 Upload BMC Image With Bad Manifest Via REST
@@ -117,7 +117,7 @@ Upload BMC Image With No Image Via REST
     [Tags]  Upload_BMC_Image_With_No_Image_Via_REST
 
 
-Upload PNOR Image With Bad Manifest Via TFTP
+Upload Host Image With Bad Manifest Via TFTP
     # Image File Name
 
     pnor_bad_manifest.tar
@@ -125,10 +125,10 @@ Upload PNOR Image With Bad Manifest Via TFTP
     [Documentation]  Upload a PNOR image with a bad MANIFEST file via TFTP and
     ...              verify that the BMC does not unpack it.
     [Template]  Upload Bad Image Via TFTP And Verify Failure
-    [Tags]  Upload_PNOR_Image_With_Bad_Manifest_Via_TFTP
+    [Tags]  Upload_Host_Image_With_Bad_Manifest_Via_TFTP
 
 
-Upload PNOR Image With No Squashfs Via TFTP
+Upload Host Image With No Squashfs Via TFTP
     # Image File Name
 
     pnor_no_image.tar
@@ -136,7 +136,7 @@ Upload PNOR Image With No Squashfs Via TFTP
     [Documentation]  Upload a PNOR image with just a MANIFEST file via TFTP and
     ...              verify that the BMC does not unpack it.
     [Template]  Upload Bad Image Via TFTP And Verify Failure
-    [Tags]  Upload_PNOR_Image_With_No_Squashfs_Via_TFTP
+    [Tags]  Upload_Host_Image_With_No_Squashfs_Via_TFTP
 
 
 Upload BMC Image With Bad Manifest Via TFTP
