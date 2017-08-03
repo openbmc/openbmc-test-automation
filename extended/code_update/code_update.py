@@ -25,6 +25,27 @@ from robot.libraries.BuiltIn import BuiltIn
 
 
 ###############################################################################
+def delete_all_pnor_images():
+
+    r"""
+    Delete all PNOR images from the BMC.
+    """
+
+    status, images = keyword.run_key("Read Properties  "
+                                     + var.SOFTWARE_VERSION_URI + "enumerate")
+    for image_name in images:
+        image_id = image_name.split('/')[-1]
+        image_purpose = images[image_name]["Purpose"]
+        if var.VERSION_PURPOSE_HOST == image_purpose:
+            keyword.run_key("Call Method  " + var.SOFTWARE_VERSION_URI
+                            + image_id + "  delete  data={\"data\":[]}")
+            keyword.run_key("Call Method  " + var.SOFTWARE_VERSION_URI
+                            + image_id + "  delete  data={\"data\":[]}")
+
+###############################################################################
+
+
+###############################################################################
 def wait_for_activation_state_change(version_id, initial_state):
 
     r"""
