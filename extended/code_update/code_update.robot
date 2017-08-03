@@ -37,9 +37,9 @@ ${IMAGE_FILE_PATH}                ${EMPTY}
 
 *** Test Cases ***
 
-REST PNOR Code Update
+REST Host Code Update
     [Documentation]  Do a PNOR code update by uploading image on BMC via REST.
-    [Tags]  REST_PNOR_Code_Update
+    [Tags]  REST_Host_Code_Update
 
     OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
     ${IMAGE_VERSION}=  Get Version Tar  ${IMAGE_FILE_PATH}
