@@ -60,6 +60,7 @@ default_power_off = "REST Power Off"
 boot_count = 0
 
 LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
+ffdc_prefix = ""
 
 
 ###############################################################################
@@ -252,12 +253,6 @@ def plug_in_setup():
     else:
         test_really_running = 0
 
-    seconds = time.time()
-    loc_time = time.localtime(seconds)
-    time_string = time.strftime("%y%m%d.%H%M%S.", loc_time)
-
-    ffdc_prefix = openbmc_nickname + "." + time_string
-
     BuiltIn().set_global_variable("${test_really_running}",
                                   test_really_running)
     BuiltIn().set_global_variable("${boot_type_desc}", next_boot)
@@ -310,6 +305,14 @@ def pre_boot_plug_in_setup():
         os.remove(ffdc_summary_list_path)
     except OSError:
         pass
+
+    global ffdc_prefix
+
+    seconds = time.time()
+    loc_time = time.localtime(seconds)
+    time_string = time.strftime("%y%m%d.%H%M%S.", loc_time)
+
+    ffdc_prefix = openbmc_nickname + "." + time_string
 
 ###############################################################################
 
