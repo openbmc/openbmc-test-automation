@@ -56,6 +56,10 @@ ${PNOR_IMAGE_FILE_PATH}     ${EMPTY}
 ${BMC_IMAGE_FILE_PATH}      ${EMPTY}
 ${BAD_IMAGES_DIR_PATH}      ${EMPTY}
 
+# The caller must set this to the string "true" in order to delete images. The
+# code is picky.
+${DELETE_OLD_PNOR_IMAGES}   false
+
 # Caller can specify a value for LAST_KNOWN_GOOD_VERSION to indicate that if
 # the machine already has that version on it, the update should be skipped.
 ${LAST_KNOWN_GOOD_VERSION}  ${EMPTY}

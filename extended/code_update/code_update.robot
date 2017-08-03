@@ -2,6 +2,7 @@
 Documentation     Code update to a target BMC.
 ...               Execution Method:
 ...               python -m robot -v OPENBMC_HOST:<hostname>
+...               -v DELETE_OLD_PNOR_IMAGES:<"true" or "false">
 ...               -v IMAGE_FILE_PATH:<path/*.tar>  code_update.robot
 ...
 ...               Code update method BMC
@@ -34,12 +35,14 @@ ${image_purpose}                  ${EMPTY}
 ${activation_state}               ${EMPTY}
 ${requested_state}                ${EMPTY}
 ${IMAGE_FILE_PATH}                ${EMPTY}
+${DELETE_OLD_PNOR_IMAGES}         false
 
 *** Test Cases ***
 
 REST PNOR Code Update
     [Documentation]  Do a PNOR code update by uploading image on BMC via REST.
     [Tags]  REST_PNOR_Code_Update
+    [Setup]  Code Update Setup
 
     OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
     ${IMAGE_VERSION}=  Get Version Tar  ${IMAGE_FILE_PATH}
@@ -67,6 +70,12 @@ REST PNOR Code Update
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
 
 *** Keywords ***
+
+Code Update Setup
+    [Documentation]  Do code update test case setup.
+
+    Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
+    ...  Delete All PNOR Images
 
 Code Update Teardown
     [Documentation]  Do code update test case teardown.
