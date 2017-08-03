@@ -39,9 +39,9 @@ ${DELETE_OLD_PNOR_IMAGES}         false
 
 *** Test Cases ***
 
-REST PNOR Code Update
+REST Host Code Update
     [Documentation]  Do a PNOR code update by uploading image on BMC via REST.
-    [Tags]  REST_PNOR_Code_Update
+    [Tags]  REST_Host_Code_Update
     [Setup]  Code Update Setup
 
     OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
