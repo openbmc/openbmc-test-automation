@@ -143,23 +143,30 @@ Verify Boot Mode Persistency After BMC Reboot
     ...  AND  FFDC On Test Case Fail
 
     # Record initial bootmode setting.
-    ${boot_mode}=  Get Host Setting
+    ${boot_mode}=  Read Attribute
     ...  ${CONTROL_HOST_URI}/boot_mode  BootMode
     Set Suite Variable  ${initial_boot_mode}  ${boot_mode}
 
     # Set bootmode to non default value.
-    Set Host Setting  ${CONTROL_HOST_URI}/boot_mode  BootMode  Safe
+    Set Boot Mode  xyz.openbmc_project.Control.Boot.Mode.Modes.Safe
 
-    Initiate BMC Reboot
-    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+    #Initiate BMC Reboot
+    #Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
 
-    ${boot_mode_after}=  Get Host Setting
+    ${boot_mode_after}=  Read Attribute
     ...  ${CONTROL_HOST_URI}/boot_mode  BootMode
 
-    Should Be Equal As Strings  ${boot_mode_after}  Safe
+    Should Be Equal As Strings
+    ...  ${boot_mode_after}  xyz.openbmc_project.Control.Boot.Mode.Modes.Safe
 
 
 *** Keywords ***
+
+Set Boot Mode
+    [Arguments]    ${args}
+    ${bootmode}=  Set Variable   ${args}
+    ${valueDict}=  Create Dictionary  data=${bootmode}
+    Write Attribute  ${CONTROL_HOST_URI}/boot_mode  BootMode  data=${valueDict}
 
 Set Boot Policy
     [Arguments]    ${args}
@@ -199,5 +206,4 @@ Test Suite Setup
 Restore Bootmode Setting
     [Documentation]  Restore initial bootmode setting.
 
-    Set Host Setting  ${CONTROL_HOST_URI}/boot_mode  BootMode
-    ...  ${initial_boot_mode}
+    Set Boot Mode  ${initial_boot_mode}
