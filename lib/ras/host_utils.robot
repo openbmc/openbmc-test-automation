@@ -26,7 +26,9 @@ Gard Operations On OS
     # Description of arguments:
     # input_cmd      list/clear all/show <gard_record_id>
 
-    ${output}  ${stderr}=  Execute Command  opal-gard ${input_cmd}
+    Log To Console  INPUT_COMMAND  ${input_cmd}
+    ${cmd}=  Catenate  sudo skiboot/external/gard/gard ${input_cmd}
+    ${output}  ${stderr}=  Execute Command  ${cmd} 
     ...        return_stderr=True
     Should Be Empty  ${stderr}
     [Return]  ${output}
