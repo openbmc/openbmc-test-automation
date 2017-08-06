@@ -26,6 +26,7 @@ Gard Operations On OS
     # Description of arguments:
     # input_cmd      list/clear all/show <gard_record_id>
 
+    Log To Console  INPUT_COMMAND  ${input_cmd}
     ${output}  ${stderr}=  Execute Command  opal-gard ${input_cmd}
     ...        return_stderr=True
     Should Be Empty  ${stderr}
