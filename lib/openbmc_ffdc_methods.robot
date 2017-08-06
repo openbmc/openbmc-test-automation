@@ -309,6 +309,8 @@ SCP Coredump Files
 Collect eSEL Log
     [Documentation]  Collect eSEL log from logging entry and convert eSEL data
     ...              to elog formated string text file.
+    [Arguments]  ${log_prefix}=${LOG_PREFIX}
+
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/enumerate  quiet=${1}
     ${status}=  Run Keyword And Return Status
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -322,7 +324,7 @@ Collect eSEL Log
     # /xyz/openbmc_project/logging/entry/2
     ${esel_list}=  Get Dictionary Keys  ${content['data']}
 
-    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  esel
+    ${logpath}=  Catenate  SEPARATOR=  ${log_prefix}  esel
     Create File  ${logpath}
     # Fetch data from /xyz/openbmc_project/logging/entry/1/attr/AdditionalData
     #  "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
