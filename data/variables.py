@@ -50,6 +50,7 @@ INVALID = 'xyz.openbmc_project.Software.Activation.Activations.Invalid'
 ACTIVATING = 'xyz.openbmc_project.Software.Activation.Activations.Activating'
 NOTREADY = 'xyz.openbmc_project.Software.Activation.Activations.NotReady'
 FAILED = 'xyz.openbmc_project.Software.Activation.Activations.Failed'
+PURPOSE = 'xyz.openbmc_project.Software.Version.VersionPurpose.Host'
 
 SOFTWARE_ACTIVATION = 'xyz.openbmc_project.Software.Activation'
 REQUESTED_ACTIVATION = SOFTWARE_ACTIVATION + '.RequestedActivations'
