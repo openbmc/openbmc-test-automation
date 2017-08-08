@@ -19,9 +19,9 @@ Library           ../test_uploadimage.py
 Library           code_update.py
 Library           OperatingSystem
 Variables         ../../data/variables.py
-Resource          code_update_utils.robot
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../../lib/code_update_utils.robot
 
 Test Teardown     Code Update Teardown
 
@@ -69,7 +69,42 @@ REST PNOR Code Update
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
 
+
+Host Image Priority Attribute Test
+    [Documentation]  Set "Priority" attribute.
+    [tags]  Host_Image_Priority_Attribute_Test
+    [Template]  Set PNOR Attribute
+
+    #---------------------------------
+    # Property        Value
+    #---------------------------------
+    Priority          ${0}
+    Priority          ${1}
+    Priority          ${127}
+
 *** Keywords ***
+
+Set PNOR Attribute
+    [Documentation]  Update the attribute value.
+    [arguments]  ${attribute_name}  ${value}
+
+    # Description of argument(s):
+    # attribute_name   Host software attribute name.
+    # value            Value to be written.
+
+    ${image_id}=  Get Software Objects
+    ${resp}=  Get Host Software Property  ${image_id[0]}
+    ${initial_value}=  Set Variable  ${resp["Priority"]}
+
+    Set Host Software Property  ${image_id[0]}  ${attribute_name}  ${value}
+
+    ${resp}=  Get Host Software Property  ${image_id[0]}
+    Should Be Equal As Integers  ${resp["Priority"]}  ${value}
+
+    # Revert to to initial value.
+    Set Host Software Property
+    ...  ${image_id[0]}  ${attribute_name}  ${initial_value}
+
 
 Code Update Setup
     [Documentation]  Do code update test case setup.
@@ -85,7 +120,7 @@ Code Update Teardown
     Execute Command On BMC  rm -rf /tmp/images/*
 
     Close All Connections
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
 
 Get PNOR Extended Version
     [Documentation]  Return the PNOR extended version.
