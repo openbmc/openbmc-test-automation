@@ -14,9 +14,7 @@ Documentation     Code update to a target BMC.
 ...                 - Wait for code update to complete
 ...                 - Verify the new version
 
-#TODO: Move test_uploadimage.py to lib/
-Library           ../test_uploadimage.py
-Library           code_update.py
+Library           ../../lib/code_update_utils.py
 Library           OperatingSystem
 Variables         ../../data/variables.py
 Resource          ../lib/rest_client.robot
