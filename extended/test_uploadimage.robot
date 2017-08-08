@@ -19,7 +19,7 @@ Resource              ../lib/openbmc_ffdc.robot
 Library               Collections
 Library               String
 Library               OperatingSystem
-Library               test_uploadimage.py
+Library               ../lib/code_update_utils.py
 
 Test Teardown  Upload Image Teardown
 
