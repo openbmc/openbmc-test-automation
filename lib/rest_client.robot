@@ -202,7 +202,7 @@ Call Method
     [Return]     ${resp}
 
 Upload Image To BMC
-    [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+    [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${1}  &{kwargs}
 
     # Description of argument(s):
     # uri             URI for uploading image via REST e.g. "/upload/image".
