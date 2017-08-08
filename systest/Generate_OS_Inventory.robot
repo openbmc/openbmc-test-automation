@@ -12,8 +12,8 @@ Resource           ../syslib/utils_os.robot
 
 ***Variables***
 
-# Path of the JSON Inventory file
-${json_inventory_file_path}  ${EXECDIR}${/}data${/}os_inventory.json
+# Path of the JSON Inventory file.
+${json_inventory_file_path}  ${EXECDIR}/os_inventory_final.json
 
 ***Test Case***
 

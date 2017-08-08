@@ -34,15 +34,17 @@ Suite Setup     Run Key  Start SOL Console Logging
 Test Setup      Pre Test Case Execution
 Test Teardown   Post Test Case Execution
 
+
 *** Variables ****
 
 ${stack_mode}                skip
-${json_initial_file_path}    ${EXECDIR}/data/os_inventory_initial.json
-${json_final_file_path}      ${EXECDIR}/data/os_inventory_final.json
-${json_diff_file_path}       ${EXECDIR}/data/os_inventory_diff.json
+${json_initial_file_path}    ${EXECDIR}/os_inventory_initial.json
+${json_final_file_path}      ${EXECDIR}/os_inventory_final.json
+${json_diff_file_path}       ${EXECDIR}/os_inventory_diff.json
 ${last_inventory_file_path}  ${EMPTY}
 ${CHECK_INVENTORY}           True
 &{ignore_dict}               processor=size
+
 
 *** Test Cases ***
 
