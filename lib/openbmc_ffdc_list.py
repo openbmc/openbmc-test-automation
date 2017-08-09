@@ -111,12 +111,18 @@ ENUMERATE_ELOG = '/xyz/openbmc_project/logging/entry/enumerate'
 ENUMERATE_EVENTS = OPENBMC_BASE + 'records/events/enumerate'
 ENUMERATE_LED = OPENBMC_BASE + 'control/led/enumerate'
 
+# Sensors/control data.
+ENUMERATE_SENSOR = '/xyz/openbmc_project/sensors/enumerate'
+ENUMERATE_CONTROL = '/xyz/openbmc_project/control/enumerate'
+
 # Add file name and correcponding Get Request
 FFDC_GET_REQUEST = {
     'GET REQUESTS':
     {
         # File Name         Command
         'BMC_sensor_list': ENUMERATE_SENSORS,
+        'BMC_sensor_xyz_list': ENUMERATE_SENSOR,
+        'BMC_control_list': ENUMERATE_CONTROL,
         'BMC_inventory': ENUMERATE_SYSTEMS,
         'BMC_elog': ENUMERATE_ELOG,
         'BMC_led': ENUMERATE_EVENTS,
