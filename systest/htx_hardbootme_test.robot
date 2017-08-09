@@ -81,33 +81,33 @@ Run HTX Exerciser
     #   previous inventory run.
     # - Power off.
 
-    Boot To OS
+    ####Boot To OS
 
     # Post Power off and on, the OS SSH session needs to be established.
-    Login To OS
+    ####Login To OS
 
     Run Keyword If  '${CHECK_INVENTORY}' == 'True'
     ...  Do Inventory And Compare  ${json_initial_file_path}
     ...  ${last_inventory_file_path}
 
-    Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
-    ...  Create Default MDT Profile
+    ####Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
+    ####...  Create Default MDT Profile
 
-    Run MDT Profile
+    ####Run MDT Profile
 
-    Loop HTX Health Check
+    ####Loop HTX Health Check
 
-    Shutdown HTX Exerciser
+    ####Shutdown HTX Exerciser
 
     Run Keyword If  '${CHECK_INVENTORY}' == 'True'
     ...  Do Inventory And Compare  ${json_final_file_path}
     ...  ${last_inventory_file_path}
 
-    Power Off Host
+    ####Power Off Host
 
     # Close all SSH and REST active sessions.
-    Close All Connections
-    Flush REST Sessions
+    ####Close All Connections
+    ####Flush REST Sessions
 
     Rprint Timen  HTX Test ran for: ${HTX_DURATION}
 
@@ -147,12 +147,15 @@ Report Inventory Mismatch
     # diff_rc              The failing return code from the difference check.
     # json_diff_file_path  The file that has the latest inventory snapshot.
 
-    Log To Console  Difference in inventory found, return code:
-    ...  no_newline=true
-    Log to Console  ${diff_rc}
-    Log to Console  Differences are listed in file:  no_newline=true
-    Log to Console  ${json_diff_file_path}
-    Fail  Inventory mismatch, rc=${diff_rc}
+    Log To Console  Significant difference in inventory found, rc=${diff_rc}
+    Log To Console  Differences are listed in file:  no_newline=true
+    Log To Console  ${json_diff_file_path}
+    Log To Console  File Contents:
+    ${file_contents}=  OperatingSystem.Get File  ${json_diff_file_path}
+    @{lines}=  Split To Lines  ${file_contents}
+    :FOR  ${line}  IN  @{lines}
+    \  Log  ${line}  level=WARN
+    Fail  Significant difference in inventory found, rc=${diff_rc}
 
 
 Loop HTX Health Check
