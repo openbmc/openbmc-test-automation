@@ -20,6 +20,30 @@ import variables as var
 from robot.libraries.BuiltIn import BuiltIn
 
 ###############################################################################
+def get_non_running_bmc_software_object():
+
+    r"""
+    Get the URI to a BMC image from software that is not running on the BMC.
+    """
+
+    # Get the version of the image currently running on the BMC
+    _, cur_img_version = keyword.run_key("Get BMC Version")
+    cur_img_version = cur_img_version.replace('"', '')
+    _, images = keyword.run_key("Read Properties  "
+                                + var.SOFTWARE_VERSION_URI + "enumerate")
+
+    for image_name in images:
+        _, image_properties = keyword.run_key(
+                "Get Host Software Property  " + image_name)
+        print "Soft Version: " + image_properties['Version']
+        if image_properties['Version'] != cur_img_version:
+            return image_name
+    BuiltIn().fail("Did not find any non-running BMC images to delete.")
+
+
+###############################################################################
+
+###############################################################################
 def delete_all_pnor_images():
 
     r"""

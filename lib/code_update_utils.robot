@@ -57,3 +57,14 @@ Set Host Software Property
     ${args}=  Create Dictionary  data=${data}
     Write Attribute  ${host_object}  ${sw_attribute}  data=${args}
 
+Delete Software Object
+    [Documentation]  Deletes an image from the BMC
+    [Arguments]  ${software_object}
+
+    # Description of argument(s):
+    # software_objects  The URI to the software image to delete
+
+    ${arglist}=  Create List
+    ${args}=  Create Dictionary  data=${arglist}
+    ${resp}=  OpenBMC Post Request  ${software_object}/action/delete  data=${args}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
