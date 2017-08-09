@@ -16,10 +16,14 @@ Documentation     Code update to a target BMC.
 
 Library           ../../lib/code_update_utils.py
 Library           OperatingSystem
+Library           String
 Variables         ../../data/variables.py
 Resource          code_update_utils.robot
-Resource          ../../lib/rest_client.robot
-Resource          ../../lib/openbmc_ffdc.robot
+Resource          ../lib/rest_client.robot
+Resource          ../lib/openbmc_ffdc.robot
+Resource          ../../lib/boot_utils.robot
+Resource          ../../lib/code_update_utils.robot
+Resource          ../../lib/state_manager.robot
 
 Test Teardown     Code Update Teardown
 
@@ -67,6 +71,27 @@ REST Host Code Update
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
 
+
+Delete Host Image
+    [Documentation]  Delete a PNOR image from the host.
+    [Tags]  Delete_Host_Image
+    [Setup]  Initiate Host PowerOff
+
+    ${sw_objs}=  Get Software Objects  version_type=${VERSION_PURPOSE_HOST}
+    ${num_images}=  Get Length  ${sw_objs}
+    Should Be Equal As Integers  ${1}  ${num_images}
+    ...  msg=There are no PNOR images on the BMC to delete.
+    Delete Image And Verify  @{sw_objs}[0]  ${VERSION_PURPOSE_HOST}
+
+
+Delete BMC Image
+    [Documentation]  Delete a BMC image from the host.
+    [Tags]  Delete_BMC_Image
+
+    ${sw_obj}=  Get Non Running BMC Software Object
+    Delete Image And Verify  ${sw_obj}  ${VERSION_PURPOSE_BMC}
+
+
 *** Keywords ***
 
 Code Update Setup
@@ -77,10 +102,6 @@ Code Update Setup
 
 Code Update Teardown
     [Documentation]  Do code update test case teardown.
-
-    #TODO: Use the Delete interface instead once delivered
-    Open Connection And Log In
-    Execute Command On BMC  rm -rf /tmp/images/*
 
     Close All Connections
     FFDC On Test Case Fail
@@ -95,3 +116,29 @@ Get PNOR Extended Version
     ${version}= Execute Command On BMC
     ...  "grep \"extended_version=\" " + ${path}
     [return] ${version.split(",")}
+
+Delete Image And Verify
+    [Documentation]  Delete an image from the BMC and verify that it was
+    ...              removed from software and the /tmp/images directory.
+    [Arguments]  ${sw_obj}  ${version_type}
+
+    # Description of argument(s):
+    # sw_obj        The URI of the software object to delete.
+    # version_type  The type of the software object, e.g.
+    #               xyz.openbmc_project.Software.Version.VersionPurpose.Host
+    #               or xyz.openbmc_project.Software.Version.VersionPurpose.BMC.
+
+    # Delete the image
+    Delete Software Object  ${sw_obj}
+    # TODO: If/When we don't have to delete twice anymore, take this out
+    Run Keyword And Continue On Failure
+    ...  Delete Software Object  ${sw_obj}
+
+    # Verify that it's gone from software
+    ${sw_objs}=  Get Software Objects  version_type=${version_type}
+    Should Not Contain  ${sw_objs}  ${sw_obj}
+
+    # Check that there is no file in the /tmp/images directory
+    ${image_id}=  Fetch From Right  ${sw_obj}  /
+    BMC Execute Command
+    ...  if [ ! -d /tmp/images/${image_id} ]; then true; else false; fi
