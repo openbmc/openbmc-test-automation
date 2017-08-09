@@ -16,11 +16,13 @@ Documentation     Code update to a target BMC.
 
 Library           ../../lib/code_update_utils.py
 Library           OperatingSystem
+Library           String
 Variables         ../../data/variables.py
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/boot_utils.robot
+Resource          ../../lib/state_manager.robot
 
 Test Teardown     Code Update Teardown
 
@@ -91,6 +93,27 @@ Host Image Priority Attribute Test
     Priority          ${127}
 
 
+Delete Host Image
+    [Documentation]  Delete a PNOR image from the PNOR flash chip.
+    [Tags]  Delete_Host_Image
+    [Setup]  Initiate Host PowerOff
+
+    ${software_objects}=  Get Software Objects
+    ...  version_type=${VERSION_PURPOSE_HOST}
+    ${num_images}=  Get Length  ${software_objects}
+    Should Be True  0 < ${num_images}
+    ...  msg=There are no PNOR images on the BMC to delete.
+    Delete Image And Verify  @{software_objects}[0]  ${VERSION_PURPOSE_HOST}
+
+
+Delete BMC Image
+    [Documentation]  Delete a BMC image from the BMC flash chip.
+    [Tags]  Delete_BMC_Image
+
+    ${software_object}=  Get Non Running BMC Software Object
+    Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
+
+
 *** Keywords ***
 
 Set PNOR Attribute
@@ -124,10 +147,6 @@ Code Update Setup
 Code Update Teardown
     [Documentation]  Do code update test case teardown.
 
-    #TODO: Use the Delete interface instead once delivered
-    Open Connection And Log In
-    Execute Command On BMC  rm -rf /tmp/images/*
-
     Close All Connections
     FFDC On Test Case Fail
 
@@ -141,3 +160,29 @@ Get PNOR Extended Version
     ${version}= Execute Command On BMC
     ...  "grep \"extended_version=\" " + ${path}
     [return] ${version.split(",")}
+
+Delete Image And Verify
+    [Documentation]  Delete an image from the BMC and verify that it was
+    ...              removed from software and the /tmp/images directory.
+    [Arguments]  ${software_object}  ${version_type}
+
+    # Description of argument(s):
+    # software_object        The URI of the software object to delete.
+    # version_type  The type of the software object, e.g.
+    #               xyz.openbmc_project.Software.Version.VersionPurpose.Host
+    #               or xyz.openbmc_project.Software.Version.VersionPurpose.BMC.
+
+    # Delete the image.
+    Delete Software Object  ${software_object}
+    # TODO: If/when we don't have to delete twice anymore, take this out
+    Run Keyword And Continue On Failure
+    ...  Delete Software Object  ${software_object}
+
+    # Verify that it's gone from software.
+    ${software_objects}=  Get Software Objects  version_type=${version_type}
+    Should Not Contain  ${software_objects}  ${software_object}
+
+    # Check that there is no file in the /tmp/images directory.
+    ${image_id}=  Fetch From Right  ${software_object}  /
+    BMC Execute Command
+    ...  [ ! -d "/tmp/images/${image_id}" ]
