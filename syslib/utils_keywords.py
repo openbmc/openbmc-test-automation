@@ -187,7 +187,7 @@ def json_inv_file_diff_check(file1_path,
                    (value in diff_item.lower().strip())):
                     line_to_print = "  " + \
                         str(row_num) + " " + diff_item + \
-                        "    +++ NOTE! This difference is in" + \
+                        "    +++ NOTE! This line matches" + \
                         " the inventory ignore list and" + \
                         " can be ignored. +++\n"
                     # set flag indicating this item is a skip item
