@@ -67,7 +67,43 @@ Is Host Running
     ${host_state}=  Get Host State
     Should Be Equal  Running  ${host_state}
     # Check to verify that the host is really booted.
-    Is OS Starting
+    Is OS Booted
+
+
+Get Host State Attribute
+    [Documentation]  Return the state of the host as a string.
+    [Arguments]  ${host_attribute}  ${quiet}=${QUIET}
+
+    # Description of argument(s):
+    # host_attribute   Host attribute name.
+    # quiet            Suppress REST output logging to console.
+
+    ${state}=
+    ...  Read Attribute  ${HOST_STATE_URI}  ${host_attribute}  quiet=${quiet}
+    [Return]  ${state}
+
+
+Is OS Booted
+    [Documentation]  Check OS status.
+
+    # Example:
+    # "/xyz/openbmc_project/state/host0": {
+    #    "AttemptsLeft": 0,
+    #    "BootProgress": "xyz.openbmc_project.State.Boot.Progress.ProgressStages.OSStart",
+    #    "CurrentHostState": "xyz.openbmc_project.State.Host.HostState.Running",
+    #    "OperatingSystemState": "xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.BootComplete",
+    #    "RequestedHostTransition": "xyz.openbmc_project.State.Host.Transition.On"
+    # }
+
+    # TODO: Remove this logic once migration is complete.
+    ${status}=  Run Keyword And Return Status  Is OS Starting
+    Return From Keyword If   '${status}' == '${True}'    ${True}
+
+    ${boot_stage}=  Get Host State Attribute  BootProgress
+    Should Be Equal  ${OS_BOOT_START}  ${boot_stage}
+
+    ${os_state}=  Get Host State Attribute  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_COMPLETE}  ${os_state}
 
 
 Is Host Off

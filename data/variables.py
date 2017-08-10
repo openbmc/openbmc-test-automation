@@ -75,6 +75,12 @@ CONTROL_HOST_URI = '/xyz/openbmc_project/control/host0/'
 DUMP_URI = '/xyz/openbmc_project/dump/'
 DUMP_ENTRY_URI = DUMP_URI + 'entry/'
 
+# Boot progress variables.
+STATE_DBUS_BASE = 'xyz.openbmc_project.State.'
+OS_BOOT_START = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.OSStart'
+OS_BOOT_OFF = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.Unspecified'
+OS_BOOT_COMPLETE = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.BootComplete'
+
 '''
   QEMU HTTPS variable:
 
