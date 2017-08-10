@@ -61,6 +61,8 @@ boot_count = 0
 
 LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
 ffdc_prefix = ""
+boot_start_time = ""
+boot_end_time = ""
 
 
 ###############################################################################
@@ -260,12 +262,15 @@ def plug_in_setup():
     BuiltIn().set_global_variable("${boot_fail}", boot_fail)
     BuiltIn().set_global_variable("${boot_success}", boot_success)
     BuiltIn().set_global_variable("${ffdc_prefix}", ffdc_prefix)
+    BuiltIn().set_global_variable("${boot_start_time}", boot_start_time)
+    BuiltIn().set_global_variable("${boot_end_time}", boot_end_time)
 
     # For each program parameter, set the corresponding AUTOBOOT_ environment
     # variable value.  Also, set an AUTOBOOT_ environment variable for every
     # element in additional_values.
     additional_values = ["boot_type_desc", "boot_success", "boot_pass",
-                         "boot_fail", "test_really_running", "ffdc_prefix"]
+                         "boot_fail", "test_really_running", "ffdc_prefix",
+                         "boot_start_time", "boot_end_time"]
 
     plug_in_vars = additional_values
 
@@ -703,8 +708,14 @@ def print_test_start_message(boot_keyword):
     """
 
     global last_ten
+    global boot_start_time
 
     doing_msg = gp.sprint_timen("Doing \"" + boot_keyword + "\".")
+
+    # Set boot_start_time for use by plug-ins.
+    boot_start_time = doing_msg[1:33]
+    gp.qprint_var(boot_start_time)
+
     gp.qprint(doing_msg)
 
     last_ten.append(doing_msg)
@@ -801,6 +812,7 @@ def test_loop_body():
     global state
     global next_boot
     global boot_success
+    global boot_end_time
 
     gp.qprintn()
 
@@ -821,10 +833,18 @@ def test_loop_body():
     gp.qprintn()
     if boot_status == "PASS":
         boot_success = 1
-        gp.qprint_timen("BOOT_SUCCESS: \"" + next_boot + "\" succeeded.")
+        completion_msg = gp.sprint_time("BOOT_SUCCESS: \"" + next_boot +
+                                        "\" succeeded.")
     else:
         boot_success = 0
-        gp.qprint_timen("BOOT_FAILED: \"" + next_boot + "\" failed.")
+        completion_msg = gp.sprint_time("BOOT_FAILED: \"" + next_boot +
+                                        "\" failed.")
+
+    # Set boot_end_time for use by plug-ins.
+    boot_end_time = completion_msg[1:33]
+    gp.qprint_var(boot_end_time)
+
+    gp.qprint(completion_msg)
 
     boot_results.update(next_boot, boot_status)
 
