@@ -89,6 +89,15 @@ OS_BOOT_START = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.OSStart'
 OS_BOOT_OFF = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.Unspecified'
 OS_BOOT_COMPLETE = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.BootComplete'
 
+# Boot variables.
+BOOT_SOURCE_DEFAULT = 'xyz.openbmc_project.Control.Boot.Source.Sources.Default'
+BOOT_SOURCE_NETWORK = 'xyz.openbmc_project.Control.Boot.Source.Sources.Network'
+BOOT_SOURCE_DISK = 'xyz.openbmc_project.Control.Boot.Source.Sources.Disk'
+BOOT_SOURCE_CDROM = 'xyz.openbmc_project.Control.Boot.Source.Sources.ExternalMedia'
+BOOT_MODE_SAFE = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Safe'
+BOOT_MODE_SETUP = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Setup'
+BOOT_MODE_REGULAR = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Regular'
+
 '''
   QEMU HTTPS variable:
 
