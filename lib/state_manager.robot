@@ -67,7 +67,46 @@ Is Host Running
     ${host_state}=  Get Host State
     Should Be Equal  Running  ${host_state}
     # Check to verify that the host is really booted.
-    Is OS Starting
+    Is OS Booted
+
+
+Get OS BootProgress
+    [Documentation]  Return the stage of the OS as a string.
+    [Arguments]  ${quiet}=${QUIET}
+    # quiet - Suppress REST output logging to console.
+    ${state}=
+    ...  Read Attribute  ${HOST_STATE_URI}  BootProgress
+    ...  quiet=${quiet}
+    [Return]  ${state}
+
+
+Get OS State
+    [Documentation]  Return the stage of the OS as a string.
+    [Arguments]  ${quiet}=${QUIET}
+    # quiet - Suppress REST output logging to console.
+    ${state}=
+    ...  Read Attribute  ${HOST_STATE_URI}  OperatingSystemState
+    ...  quiet=${quiet}
+    [Return]  ${state}
+
+
+Is OS Booted
+    [Documentation]  Check OS status.
+
+    # Example:
+    # "/xyz/openbmc_project/state/host0": {
+    #    "AttemptsLeft": 0,
+    #    "BootProgress": "xyz.openbmc_project.State.Boot.Progress.ProgressStages.OSStart",
+    #    "CurrentHostState": "xyz.openbmc_project.State.Host.HostState.Running",
+    #    "OperatingSystemState": "xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.BootComplete",
+    #    "RequestedHostTransition": "xyz.openbmc_project.State.Host.Transition.On"
+    # }
+
+    ${boot_stage}=  Get OS BootProgress
+    Should Be Equal  ${OS_BOOT_START}  ${boot_stage}
+
+    ${os_state}=  Get OS State
+    Should Be Equal  ${OS_BOOT_COMPLETE}  ${os_state}
 
 
 Is Host Off
