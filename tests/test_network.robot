@@ -21,7 +21,7 @@ ${alpha_ip}          xx.xx.xx.xx
 
 ${valid_ip}          10.6.6.6
 ${valid_gateway}     10.6.6.1
-${valid_prefix_len}  24
+${valid_prefix_len}  ${24}
 ${broadcast_ip}      10.6.6.255
 ${loopback_ip}       127.0.0.1
 ${multicast_ip}      224.6.6.255
@@ -78,9 +78,9 @@ Add New Valid IP And Verify
     Configure Network Settings  ${valid_ip}  ${valid_prefix_len}
     ...  ${valid_gateway}  valid
 
-    # Verify whether new IP address is populated on BMC system.
-    ${ip_info}=  Get BMC IP Info
-    Validate IP On BMC  ${valid_ip}  ${ip_info}
+    # Verify whether new IP object is created for the given IP via REST.
+    # Delete IP address and IP object after verification.
+    Verify IP Address Via REST And Delete  ${valid_ip}
 
 Configure Invalid IP String
     # IP Address  Prefix_length        Gateway_IP        Expected_Result
@@ -188,9 +188,9 @@ Add New Valid IP With Blank Gateway
     Configure Network Settings  ${valid_ip}  ${valid_prefix_len}  ${EMPTY}
     ...  valid
 
-    # Verify whether new IP address is populated on BMC system.
-    ${ip_info}=  Get BMC IP Info
-    Validate IP On BMC  ${valid_ip}  ${ip_info}
+    # Verify whether new IP object is created for the given IP via REST.
+    # Delete IP address and IP object after verification.
+    Verify IP Address Via REST And Delete  ${valid_ip}
 
 Configure Invalid Gateway String
     # IP Address  Prefix_length        Gateway_IP   Expected_Result
@@ -309,9 +309,10 @@ Add Fourth Octet Threshold IP And Verify
     Configure Network Settings  10.6.6.254  ${valid_prefix_len}
     ...  ${valid_gateway}  valid
 
-    # Verify whether new IP address is populated on BMC system.
-    ${ip_info}=  Get BMC IP Info
-    Validate IP On BMC  10.6.6.254  ${ip_info}
+    # Verify whether new IP object is created for the given IP via REST.
+    # Delete IP address and IP object after verification.
+
+    Verify IP Address Via REST And Delete  10.6.6.254
 
 Add Third Octet Threshold IP And Verify
     [Documentation]  Add third octet threshold IP and verify.
@@ -320,9 +321,10 @@ Add Third Octet Threshold IP And Verify
     Configure Network Settings  10.6.255.6  ${valid_prefix_len}
     ...  ${valid_gateway}  valid
 
-    # Verify whether new IP address is populated on BMC system.
-    ${ip_info}=  Get BMC IP Info
-    Validate IP On BMC  10.6.255.6  ${ip_info}
+    # Verify whether new IP object is created for the given IP via REST.
+    # Delete IP address and IP object after verification.
+
+    Verify IP Address Via REST And Delete  10.6.255.6
 
 Add Second Octet Threshold IP And Verify
     [Documentation]  Add second octet threshold IP and verify.
@@ -331,9 +333,10 @@ Add Second Octet Threshold IP And Verify
     Configure Network Settings  10.255.6.6  ${valid_prefix_len}
     ...  ${valid_gateway}  valid
 
-    # Verify whether new IP address is populated on BMC system.
-    ${ip_info}=  Get BMC IP Info
-    Validate IP On BMC  10.255.6.6  ${ip_info}
+    # Verify whether new IP object is created for the given IP via REST.
+    # Delete IP address and IP object after verification.
+
+    Verify IP Address Via REST And Delete  10.255.6.6
 
 Add First Octet Threshold IP And Verify
     [Documentation]  Add first octet threshold IP and verify.
@@ -342,9 +345,32 @@ Add First Octet Threshold IP And Verify
     Configure Network Settings  223.6.6.6  ${valid_prefix_len}
     ...  ${valid_gateway}  valid
 
-    # Verify whether new IP address is populated on BMC system.
-    ${ip_info}=  Get BMC IP Info
-    Validate IP On BMC  223.6.6.6  ${ip_info}
+    # Verify whether new IP object is created for the given IP via REST.
+    # Delete IP address and IP object after verification.
+
+    Verify IP Address Via REST And Delete  223.6.6.6
+
+Configure Lowest Prefix Length
+    [Documentation]  Configure lowest prefix length.
+    [Tags]  Configure_Lowest_Prefix_Length
+
+    Configure Network Settings  ${valid_ip}  ${0}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP object is created for the given IP via REST.
+    # Delete IP address and IP object after verification.
+    Verify IP Address Via REST And Delete  ${valid_ip}
+
+Configure Threshold Prefix Length
+    [Documentation]  Configure threshold prefix length.
+    [Tags]  Configure_Threshold_Prefix_Length
+
+    Configure Network Settings  ${valid_ip}  ${32}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP object is created for the given IP via REST.
+    # Delete IP address and IP object after verification.
+    Verify IP Address Via REST And Delete  ${valid_ip}
 
 Verify Default Gateway
     [Documentation]  Verify default gateway.
@@ -400,6 +426,22 @@ Validate IP On BMC
     Should Contain Match  ${ip_info}  ${ip_address}*
     ...  msg=IP address does not exist.
 
+Verify IP Address Via REST And Delete
+    [Documentation]  Verify IP address via REST and delete.
+    [Arguments]  ${ip_addr}
+
+    # Description of argument(s):
+    # ip_addr      IP address to be verified.
+
+    @{ip_uri_list}=  Get IPv4 URI List
+    @{ip_list}=  Get List Of IP Address Via REST  @{ip_uri_list}
+
+    List Should Contain Value  ${ip_list}  ${ip_addr}
+    ...  msg=IP address is not configured.
+
+    # If IP address is configured, delete it.
+    Delete IP And Object  ${ip_addr}  @{ip_uri_list}
+
 Validate Prefix Length On BMC
     [Documentation]  Validate prefix length on BMC.
     [Arguments]  ${prefix_length}
@@ -446,21 +488,32 @@ Configure Network Settings
     # gateway_ip       Gateway IP address.
     # expected_result  Expected status of network setting configuration.
 
-    ${len}=  Convert To Bytes  ${prefix_len}
-
     @{ip_parm_list}=  Create List  xyz.openbmc_project.Network.IP.Protocol.IPv4
-    ...  ${ip_addr}  ${len}  ${gateway_ip}
+    ...  ${ip_addr}  ${prefix_len}  ${gateway_ip}
 
     ${data}=  Create Dictionary  data=@{ip_parm_list}
-    ${resp}=  OpenBMC Post Request
-    ...  ${XYZ_NETWORK_MANAGER}/eth0/action/IP  data=${data}
-    ${json}=  To JSON  ${resp.content}
 
-    Run Keyword If  '${expected_result}' == 'error'  Run Keywords
-    ...  Should Not Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ...  AND  Should Be Equal As Strings  ${json['status']}  ${expected_result}
+    Run Keyword And Ignore Error  OpenBMC Post Request
+    ...  ${XYZ_NETWORK_MANAGER}/eth0/action/IP  data=${data}
+
+    # After any modification on network interface, BMC restarts network
+    # module, wait until it is reachable.
+
+    Wait For Host To Ping  ${OPENBMC_HOST}  0.3  1
+
+    # Verify whether new IP address is populated on BMC system.
+    # It should not allow to configure invalid settings.
+
+    ${ip_data}=  Get BMC IP Info
+    ${status}=  Run Keyword And Return Status
+    ...  Validate IP On BMC  ${ip_addr}  ${ip_data}
+
+    Run Keyword If  '${expected_result}' == 'error'
+    ...  Should Be Equal  ${status}  ${False}
+    ...  msg=Allowing to configure invalid IP.
     ...  ELSE
-    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ...  Should Be Equal  ${status}  ${True}
+    ...  msg=Not allowing to configure valid IP.
 
 Validate Hostname On BMC
     [Documentation]  Verify that the hostname read via REST is the same as the
