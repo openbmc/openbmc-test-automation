@@ -230,10 +230,11 @@ Verify Watchdog Timedout Error
     [Documentation]  Trigger watchdog timed out and verify errorlog generated.
     [Tags]  Verify_Watchdog_Timedout_Error
 
+    Initiate Host PowerOff
+    Initiate Host Boot
+
     # Clear errors if there are any.
     Delete Error Logs
-
-    Initiate Host Boot
 
     # Check if the watchdog interface is created.
     Wait Until Keyword Succeeds  3 min  10 sec
@@ -423,7 +424,7 @@ Delete Error Logs And Verify
     [Documentation]  Delete all error logs and verify.
 
     Delete Error Logs
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 Post Test Case Execution
