@@ -21,14 +21,14 @@ Force Tags      power_restore
 
 *** Test Cases ***
 
-Test Restore Policy LEAVE_OFF With Host Off
+Test Restore Policy ALWAYS_POWER_OFF With Host Off
     # Policy                Initial Host State     Expected Host State
 
-    LEAVE_OFF               Off                    Off
+    ${ALWAYS_POWER_OFF}     Off                    Off
 
-    [Documentation]  Validate LEAVE_OFF restore policy functionality.
+    [Documentation]  Validate ALWAYS_POWER_OFF restore policy functionality.
     ...              Policy:
-    ...                    System policy set to LEAVE_OFF.
+    ...                    System policy set to ALWAYS_POWER_OFF.
     ...              Initial Host State:
     ...                    State where system should be before running the
     ...                    test case.
@@ -37,26 +37,26 @@ Test Restore Policy LEAVE_OFF With Host Off
     ...                    specific state.
 
     [Template]  Verify Restore Policy
-    [Tags]  Test_Restore_Policy_LEAVE_OFF_With_Host_Off
+    [Tags]  Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Off
 
 
-Test Restore Policy LEAVE_OFF With Host Running
+Test Restore Policy ALWAYS_POWER_OFF With Host Running
     # Policy                Initial Host State     Expected Host State
 
-    LEAVE_OFF               Running                Off
+    ${ALWAYS_POWER_OFF}     Running                Off
 
     [Template]  Verify Restore Policy
-    [Tags]  Test_Restore_Policy_LEAVE_OFF_With_Host_Running
+    [Tags]  Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Running
 
 
 Test Restore Policy ALWAYS_POWER_ON With Host Off
     # Policy                Initial Host State     Expected Host State
 
-    ALWAYS_POWER_ON         Off                    Running
+    ${ALWAYS_POWER_ON}      Off                    Running
 
     [Documentation]  Validate ALWAYS_POWER_ON restore policy functionality.
     ...              Policy:
-    ...                    System policy set to LEAVE_OFF.
+    ...                    System policy set to ALWAYS_POWER_OFF.
     ...              Initial Host State:
     ...                    State where system should be before running the
     ...                    test case.
@@ -71,7 +71,7 @@ Test Restore Policy ALWAYS_POWER_ON With Host Off
 Test Restore Policy ALWAYS_POWER_ON With Host Running
     # Policy                Initial Host State     Expected Host State
 
-    ALWAYS_POWER_ON         Running                Running
+    ${ALWAYS_POWER_ON}      Running                Running
 
     [Template]  Verify Restore Policy
     [Tags]  Test_Restore_Policy_ALWAYS_POWER_ON_With_Host_Running
@@ -80,7 +80,7 @@ Test Restore Policy ALWAYS_POWER_ON With Host Running
 Test Restore Policy Restore Last State With Host Running
     # Policy                Initial Host State     Expected Host State
 
-    RESTORE_LAST_STATE      Running                Running
+    ${RESTORE_LAST_STATE}   Running                Running
 
     [Documentation]  Validate RESTORE_LAST_STATE restore policy functionality.
     ...              Policy:
@@ -99,7 +99,7 @@ Test Restore Policy Restore Last State With Host Running
 Test Restore Policy Restore Last State With Host Off
     # Policy                Initial Host State     Expected Host State
 
-    RESTORE_LAST_STATE      Off                    Off
+    ${RESTORE_LAST_STATE}   Off                    Off
 
 
     [Template]  Verify Restore Policy
@@ -130,13 +130,7 @@ Verify Restore Policy
     ...  '${currentState}' != '${expectedState}'
     ...  Set Initial Test State  ${expectedState}
 
-    # TBD: Replace reboot with 'Initiate BMC Reboot' keyword
-    # Reference: openbmc/openbmc#1161
-    Open Connection And Log In
-    Start Command   /sbin/reboot
-
-    Wait Until Keyword Succeeds
-    ...  5 min  10 sec  Is BMC Ready
+    Initiate BMC Reboot
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Verify Host State  ${nextState}
@@ -183,5 +177,5 @@ Post Test Suite Execution
     [Documentation]  Do the post suite teardown.
     # 1. Set policy to default.
 
-    Run Keyword And Ignore Error  Set BMC Power Policy  RESTORE_LAST_STATE
+    Run Keyword And Ignore Error  Set BMC Power Policy  ${RESTORE_LAST_STATE}
 

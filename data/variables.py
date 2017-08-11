@@ -71,6 +71,14 @@ LED_PHYSICAL_URI = '/xyz/openbmc_project/led/physical/'
 # Host control URI variables.
 CONTROL_HOST_URI = '/xyz/openbmc_project/control/host0/'
 
+# Power restore variables.
+POWER_RESTORE_URI = CONTROL_HOST_URI + 'power_restore_policy'
+CONTROL_DBUS_BASE = 'xyz.openbmc_project.Control.'
+
+RESTORE_LAST_STATE = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.Restore'
+ALWAYS_POWER_ON = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOn'
+ALWAYS_POWER_OFF = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOff'
+
 # Dump URI variable
 DUMP_URI = '/xyz/openbmc_project/dump/'
 DUMP_ENTRY_URI = DUMP_URI + 'entry/'

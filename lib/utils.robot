@@ -726,14 +726,18 @@ Set BMC Power Policy
     [Documentation]   Set the given BMC power policy.
     [arguments]   ${policy}
 
-    ${valueDict}=     create dictionary  data=${policy}
-    Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
-    ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
+    # Description of argument(s):
+    # policy    Power restore policy.
+
+    ${valueDict}=  Create Dictionary  data=${policy}
+    Write Attribute
+    ...  ${POWER_RESTORE_URI}  PowerRestorePolicy  data=${valueDict}
+    ${currentPolicy}=  Read Attribute  ${POWER_RESTORE_URI}  PowerRestorePolicy
     Should Be Equal    ${currentPolicy}   ${policy}
 
 Get System Power Policy
     [Documentation]  Get the BMC power policy.
-    ${currentPolicy}=  Read Attribute  ${HOST_SETTING}  power_policy
+    ${currentPolicy}=  Read Attribute  ${POWER_RESTORE_URI}  PowerRestorePolicy
     [Return]  ${currentPolicy}
 
 Get Auto Reboot
