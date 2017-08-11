@@ -115,3 +115,45 @@ Get BMC Hostname
     ${output}=  Execute Command on BMC  hostnamectl | grep hostname
 
     [Return]  ${output}
+
+Get List Of IP Address Via REST
+    [Documentation]  Get list of IP address via REST.
+    [Arguments]  @{ip_uri_list}
+
+    # Description of argument(s):
+    # ip_uri_list  List of IP objects.
+    # Sample ip_uri_list:
+    #   "data": [
+    #     "/xyz/openbmc_project/network/eth0/ipv4/e9767624",
+    #     "/xyz/openbmc_project/network/eth0/ipv4/31f4ce8b"
+    #   ],
+
+    ${ip_list}=  Create List
+
+    : FOR  ${ip_uri}  IN  @{ip_uri_list}
+    \  ${ip_addr}=  Read Attribute  ${ip_uri}  Address
+    \  Append To List  ${ip_list}  ${ip_addr}
+
+    [Return]  @{ip_list}
+
+Delete IP And Object
+    [Documentation]  Delete IP and object.
+    [Arguments]  ${ip_addr}  @{ip_uri_list}
+
+    # Description of argument(s):
+    # ip_addr      IP address to be deleted.
+    # ip_uri_list  List of IP object URIs.
+
+    # Find IP object having this IP address.
+
+    : FOR  ${ip_uri}  IN  @{ip_uri_list}
+    \  ${ip_addr1}=  Read Attribute  ${ip_uri}  Address
+    \  Run Keyword If  '${ip_addr}' == '${ip_addr1}'  Exit For Loop
+
+    # If the given IP address is not configured, return.
+    # Otherwise, delete the IP and object.
+
+    Run Keyword And Return If  '${ip_addr}' != '${ip_addr1}'
+    ...  Pass Execution  IP address to be deleted is not configured.
+
+    Run Keyword And Ignore Error  OpenBMC Delete Request  ${ip_uri}
