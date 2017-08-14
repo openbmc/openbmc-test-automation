@@ -26,6 +26,15 @@ Documentation  Stress the system using HTX exerciser.
 #                     This parameter is optional.  If not specified, an
 #                     initial inventory snapshot will be taken before
 #                     HTX startup.
+# INV_IGNORE_LIST     What to ignore if there are inventory differences.
+#                     This is a string of one or more colon separated
+#                     pairs.  For example,
+#                     "processor:size,network:speed"
+#                     If differences are found during inventory checking
+#                     and those items are in this string, the
+#                     differences will be ignored.  This parameter is
+#                     optional.  If not specified the default value is
+#                     "processor:size".
 
 Resource        ../syslib/utils_os.robot
 Library         ../syslib/utils_keywords.py
@@ -43,7 +52,8 @@ ${json_final_file_path}      ${EXECDIR}/os_inventory_final.json
 ${json_diff_file_path}       ${EXECDIR}/os_inventory_diff.json
 ${last_inventory_file_path}  ${EMPTY}
 ${CHECK_INVENTORY}           True
-&{ignore_dict}               processor=size
+${default_ignore_string}     processor:size
+${ignore_string}             ${EMPTY}
 
 
 *** Test Cases ***
@@ -60,8 +70,19 @@ Hard Bootme Test
     ${last_inventory_file_path}=  Get Variable Value  ${PREV_INV_FILE_PATH}
     ...  ${EMPTY}
 
+    # Set the ignore string to INV_IGNORE_LIST if specified, otherwise
+    # set it to the default_ignore_string.
+    ${ignore_string}=  Get Variable Value  ${INV_IGNORE_LIST}
+    ...  ${default_ignore_string}
+
+    # Display settings to LOG
+    Log To Console  CHECK_INVENTORY = ${CHECK_INVENTORY}
+    Log To Console  The ignore string (INV_IGNORE_LIST) = ${ignore_string}
+    Log To Console
+    ...  Previous inv file (PREV_INV_FILE_PATH) = ${last_inventory_file_path}
+
     Set Suite Variable  ${last_inventory_file_path}  children=true
-    Set Suite Variable  &{ignore_dict}  children=true
+    Set Suite Variable  ${ignore_string}  children=true
 
     Repeat Keyword  ${HTX_LOOP} times  Run HTX Exerciser
 
@@ -136,7 +157,7 @@ Compare Json Inventory Files
     # file2   A file that has an inventory snapshot, to compare with file1.
 
     ${diff_rc}=  JSON_Inv_File_Diff_Check  ${file1}
-     ...  ${file2}  ${json_diff_file_path}  ${ignore_dict}
+     ...  ${file2}  ${json_diff_file_path}  ${ignore_string}
     Run Keyword If  '${diff_rc}' != '${0}'
     ...  Report Inventory Mismatch  ${diff_rc}  ${json_diff_file_path}
 

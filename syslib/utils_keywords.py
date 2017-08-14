@@ -19,38 +19,35 @@ import difflib
 def json_inv_file_diff_check(file1_path,
                              file2_path,
                              diff_file_path,
-                             skip_dictionary):
+                             skip_string):
     r"""
     Compare the contents of two files which contain inventory data in
     JSON format.  The comparison is similar to the unix 'diff' command but
     the output lists the hardware subsystem (category) where differences
     are found, and some differences are selectively ignored.  The items
-    ignored are defined in the skip_dictionary dictionary.
+    ignored are defined by the skip_string.
 
     Description of arguments:
     file1_path       File containing JSON formatted data.
     file2_path       File to compare to file1 to.
     diff_file_path   File which will contain the resulting difference report.
-    skip_dictionary  Dictionary which defines what inventory items
+    skip_string      String which defines what inventory items
                      to ignore if there are differences in inventory
                      files -- some differences are expected or
-                     immaterial.  Specify items in this dictionary
-                     if there are inventory items that should be
-                     ignored whenever a comparison between inventory
-                     files is done.  For example, assigned processor
+                     immaterial.  For example, assigned processor
                      speed routinely varies depending upon the
                      needs of OCC/tmgt/ondemand governor.
                      Back-to-back inventory runs may show
                      processor speed differences even if nothing
                      else was run between them.
-                     Each dictionary entry is of the form
+                     Each item in this string is of the form
                      category:leafname where category is a JSON
                      hardware category such as "processor", "memory",
                      "disk", "display", "network", etc.,
                      and leafname is a leaf node (atribute name)
                      within that category.
-                     For example: {'processor':'size'}, or
-                     {'processor':'size','memory':'claimed','display':'id'}.
+                     For example: "processor:size", or
+                     "processor:size,network:speed,display:id".
 
     Sample difference report:
     Difference at line 102  (in section "memory":)
@@ -112,6 +109,9 @@ def json_inv_file_diff_check(file1_path,
             file = open(diff_file_path, 'w')
         except IOError:
             file.close()
+        line_to_print = "Specified skip (ignore) string = " + \
+            skip_string + ".\n"
+        file.write(line_to_print)
         line_to_print = now + " found no difference between file " + \
             file1_path + " and " + \
             file2_path + "\n"
@@ -126,6 +126,8 @@ def json_inv_file_diff_check(file1_path,
         file.close()
         return IO_EXCEPTION_WRITING_FILE
 
+    line_to_print = "Specified skip (ignore) string = " + skip_string + ".\n"
+    file.write(line_to_print)
     line_to_print = now + " compared files " + \
         file1_path + " and " + \
         file2_path + "\n"
@@ -179,18 +181,22 @@ def json_inv_file_diff_check(file1_path,
                  str(row_num) + "  (in section " + \
                  category + ")\n"
                 file.write(line_to_print)
-            # If this is in the ignore dictionary, we'll print
+            # If this is in the ignore string, we'll print
             # it but also add text that it is an ignore item.
             skipitem = False
-            for key, value in skip_dictionary.iteritems():
-                if ((key in category.lower().strip()) and
-                   (value in diff_item.lower().strip())):
+            skip_list = skip_string.split(",")
+            for item in skip_list:
+                cat_and_value = item.split(":")
+                ignore_category = cat_and_value[0].lower().strip()
+                ignore_value = cat_and_value[1].lower().strip()
+                if ((ignore_category in category.lower().strip()) and
+                   (ignore_value in diff_item.lower().strip())):
                     line_to_print = "  " + \
                         str(row_num) + " " + diff_item + \
                         "    +++ NOTE! This line matches" + \
                         " the inventory ignore list and" + \
                         " can be ignored. +++\n"
-                    # set flag indicating this item is a skip item
+                    # set flag indicating this item is a skip item.
                     skipitem = True
                     break
             if skipitem is False:
