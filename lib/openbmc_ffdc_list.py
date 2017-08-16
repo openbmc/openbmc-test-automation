@@ -22,6 +22,7 @@ FFDC_BMC_CMD = {
     {
         # String Name         Command
         'FW Level': 'cat /etc/os-release',
+        'FW Timestamp': 'cat /etc/timestamp',
     },
     'BMC DATA':
     {
