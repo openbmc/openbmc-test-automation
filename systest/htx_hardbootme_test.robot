@@ -103,33 +103,40 @@ Run HTX Exerciser
     #   previous inventory run.
     # - Power off.
 
-    Boot To OS
+    ####Boot To OS
 
     # Post Power off and on, the OS SSH session needs to be established.
-    Login To OS
+    ####Login To OS
+  
+    #Copy Files   os_inventory_*.json  b
+    #Log To Console  DOOB=${doob}
+   
+    #Pass Execution  Steve says fail! F1=${TEST_HISTORY} F2=${LOG_FILE} F3=${FFDC_DIR_PATH} F4=${FFDC_LOG_PATH}
+    #Pass Execution  Steve says fail! 
+    Fail  Steve says fail! 
 
     Run Keyword If  '${CHECK_INVENTORY}' == 'True'
     ...  Do Inventory And Compare  ${json_initial_file_path}
     ...  ${last_inventory_file_path}
 
-    Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
-    ...  Create Default MDT Profile
+    ####Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
+    ####...  Create Default MDT Profile
 
-    Run MDT Profile
+    ####Run MDT Profile
 
-    Loop HTX Health Check
+    ####Loop HTX Health Check
 
-    Shutdown HTX Exerciser
+    ####Shutdown HTX Exerciser
 
     Run Keyword If  '${CHECK_INVENTORY}' == 'True'
     ...  Do Inventory And Compare  ${json_final_file_path}
     ...  ${last_inventory_file_path}
 
-    Power Off Host
+    ####Power Off Host
 
     # Close all SSH and REST active sessions.
-    Close All Connections
-    Flush REST Sessions
+    ####Close All Connections
+    ####Flush REST Sessions
 
     Rprint Timen  HTX Test ran for: ${HTX_DURATION}
 

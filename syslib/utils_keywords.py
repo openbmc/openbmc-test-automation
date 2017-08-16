@@ -184,21 +184,22 @@ def json_inv_file_diff_check(file1_path,
             # If this is in the ignore string, we'll print
             # it but also add text that it is an ignore item.
             skipitem = False
-            skip_list = skip_string.split(",")
-            for item in skip_list:
-                cat_and_value = item.split(":")
-                ignore_category = cat_and_value[0].lower().strip()
-                ignore_value = cat_and_value[1].lower().strip()
-                if ((ignore_category in category.lower().strip()) and
-                   (ignore_value in diff_item.lower().strip())):
-                    line_to_print = "  " + \
-                        str(row_num) + " " + diff_item + \
-                        "    +++ NOTE! This line matches" + \
-                        " the inventory ignore list and" + \
-                        " can be ignored. +++\n"
-                    # set flag indicating this item is a skip item.
-                    skipitem = True
-                    break
+            if (len(skip_string) > 0):
+                skip_list = skip_string.split(",")
+                for item in skip_list:
+                    cat_and_value = item.split(":")
+                    ignore_category = cat_and_value[0].lower().strip()
+                    ignore_value = cat_and_value[1].lower().strip()
+                    if ((ignore_category in category.lower().strip()) and
+                       (ignore_value in diff_item.lower().strip())):
+                        line_to_print = "  " + \
+                            str(row_num) + " " + diff_item + \
+                            "    +++ NOTE! This line matches" + \
+                            " the inventory ignore list and" + \
+                            " can be ignored. +++\n"
+                        # set flag indicating this item is a skip item.
+                        skipitem = True
+                        break
             if skipitem is False:
                 # Its not a skip item, that is,
                 # this is not on the ignore list.

@@ -11,6 +11,7 @@ import gen_valid as gv
 import gen_robot_keyword as grk
 
 from robot.libraries.BuiltIn import BuiltIn
+from robot.libraries.OperatingSystem import OperatingSystem
 
 
 ###############################################################################
@@ -81,6 +82,9 @@ def ffdc(ffdc_dir_path=None,
 
     grk.run_key_u("Call FFDC Methods  ffdc_function_list=" +
                   ffdc_function_list)
+
+    # Copy systest inventory files to FFDC, if they exist.
+    OperatingSystem().copy_files("os_inventory_*.json", ffdc_dir_path)
 
     grp.rprint_timen("Finished collecting FFDC.")
 
