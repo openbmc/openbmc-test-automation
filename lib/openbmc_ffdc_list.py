@@ -61,6 +61,9 @@ FFDC_OS_ALL_DISTROS_FILE = {
         'OS_procinfo': 'cat /proc/cpuinfo',
         'OS_meminfo': 'cat /proc/meminfo',
         'OS_netstat': 'netstat -a',
+        'OS_lspci': 'lspci',
+        'OS_lscpu': 'lscpu',
+        'OS_lscfg': 'lscfg',
     },
 }
 
