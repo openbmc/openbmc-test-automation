@@ -40,6 +40,8 @@ ${devicetree_base}  /sys/firmware/devicetree/base/model
 # Initialize default debug value to 0.
 ${DEBUG}         ${0}
 
+${boot_prog_method}     ${EMPTY}
+
 *** Keywords ***
 
 Verify PNOR Update
@@ -89,11 +91,77 @@ Ping Host
     Should be equal     ${RC}   ${0}
 
 Get Boot Progress
+    [Documentation]  Get the boot progress and return it.
     [Arguments]  ${quiet}=${QUIET}
+
+    # Description of argument(s):
+    # quiet   Indicates whether this keyword should run without any output to
+    #         the console.
+
+    Set Boot Progress Method
+    ${state}=  Run Keyword If  '${boot_prog_method}' == 'New'
+    ...      New Get Boot Progress  quiet=${quiet}
+    ...  ELSE
+    ...      Old Get Boot Progress  quiet=${quiet}
+
+    [Return]  ${state}
+
+Set Boot Progress Method
+    [Documentation]  Set the boot_prog_method to either 'Old' or 'New'.
+
+    # The boot progress data has moved from an 'org' location to an 'xyz'
+    # location.  This keyword will determine whether the new method of getting
+    # the boot progress is valid and will set the global boot_prog_method
+    # variable accordingly.  If boot_prog_method is already set (either by a
+    # prior call to this function or via a -v parm), this keyword will simply
+    # return.
+
+    # Note:  There are interim builds that contain boot_progress in both the old
+    # and the new location values.  It is nearly impossible for this keyword to
+    # determine whether the old boot_progress or the new one is active.  When
+    # using such builds where the old boot_progress is active, the only recourse
+    # users will have is that they may specify -v boot_prog_method:Old to force
+    # old behavior on such builds.
+
+    Run Keyword If  '${boot_prog_method}' != '${EMPTY}'  Return From Keyword
+
+    ${new_status}  ${new_value}=  Run Keyword And Ignore Error
+    ...  New Get Boot Progress
+    # If the new style read fails, the method must necessarily be "Old".
+    Run Keyword If  '${new_status}' == 'PASS'
+    ...  Run Keywords
+    ...  Set Global Variable  ${boot_prog_method}  New  AND
+    ...  Rqpvars  boot_prog_method  AND
+    ...  Return From Keyword
+
+    # Default method is "Old".
+    Set Global Variable  ${boot_prog_method}  Old
+    Rqpvars  boot_prog_method
+
+Old Get Boot Progress
+    [Documentation]  Get the boot progress the old way (via org location).
+    [Arguments]  ${quiet}=${QUIET}
+
+    # Description of argument(s):
+    # quiet   Indicates whether this keyword should run without any output to
+    #         the console.
 
     ${state}=  Read Attribute  ${OPENBMC_BASE_URI}sensors/host/BootProgress
     ...  value  quiet=${quiet}
+
     [Return]  ${state}
+
+New Get Boot Progress
+    [Documentation]  Get the boot progress the new way (via xyz location).
+    [Arguments]  ${quiet}=${QUIET}
+
+    # Description of argument(s):
+    # quiet   Indicates whether this keyword should run without any output to
+    #         the console.
+
+    ${state}=  Read Attribute  ${HOST_STATE_URI}  BootProgress  quiet=${quiet}
+
+    [Return]  ${state.rsplit('.', 1)[1]}
 
 Is Power On
     ${state}=  Get Power State
