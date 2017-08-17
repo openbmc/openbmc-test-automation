@@ -144,10 +144,7 @@ Prepare BMC For Update
     Check Boot Count And Time
     Prune Journal Log
     Power Off Request
-    ${status}=  Run Keyword And Return Status  Set BMC Power Policy
-    Run Keyword If  '${status}' == '${False}'
-    ...  Set BMC Power Policy
-    ...  ${HOST_SETTING}  power_policy  RESTORE_LAST_STATE
+    Set BMC Power Policy  RESTORE_LAST_STATE
 
     Prepare For Update
     Check If BMC is Up  20 min  10 sec
