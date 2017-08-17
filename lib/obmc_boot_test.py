@@ -350,9 +350,7 @@ def setup():
 
     grp.rqprint_pgm_header()
 
-    # TODO: Need to fix to switch between old and new.
-    # Disabling for a brief moment.
-    #grk.run_key("Set BMC Power Policy  ${RESTORE_LAST_STATE}")
+    grk.run_key("Set BMC Power Policy  RESTORE_LAST_STATE")
 
     initial_plug_in_setup()
 
