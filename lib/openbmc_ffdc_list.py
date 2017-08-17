@@ -136,6 +136,7 @@ FFDC_METHOD_CALL = {
         'OS FFDC': 'OS FFDC Files',
         'Core Files': 'SCP Coredump Files',
         'SEL Log': 'Collect eSEL Log',
+        'Sys Inventory Files': 'System Inventory Files',
     },
 }
 

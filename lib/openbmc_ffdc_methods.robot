@@ -253,7 +253,6 @@ Log OS SPECIFIC DISTRO FFDC
     \   ...  target=OS
 
 
-
 OS FFDC Files
     [Documentation]    Get the command list and iterate
     [Arguments]  ${OS_HOST}=${OS_HOST}  ${OS_USERNAME}=${OS_USERNAME}
@@ -287,6 +286,17 @@ OS FFDC Files
     @{entries}=  Get ffdc os distro index  ${linux_distro}
     :FOR  ${index}  IN  @{entries}
     \   Log OS SPECIFIC DISTRO FFDC  ${index}  ${linux_distro}
+
+
+System Inventory Files
+    [Documentation]  Copy systest os_inventory files.
+    # The os_inventory files are the result of running
+    # systest/htx_hardbootme_test.  If these files exist
+    # they are copied to the FFDC directory.
+    # Global variable ffdc_dir_path is the path name of the
+    # directory they are copied to.
+    Copy Files  os_inventory_*.json  ${ffdc_dir_path}
+    Remove Files  os_inventory_*.json
 
 
 ##############################################################################
