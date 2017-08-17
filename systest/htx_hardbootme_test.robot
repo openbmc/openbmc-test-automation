@@ -26,6 +26,14 @@ Documentation  Stress the system using HTX exerciser.
 #                     This parameter is optional.  If not specified, an
 #                     initial inventory snapshot will be taken before
 #                     HTX startup.
+# INV_IGNORE_LIST     A comma-delimted list of colon-delimeted pairs that
+#                     indicate what to ignore if there are inventory
+#                     differences.  For example, "processor:size,network:speed"
+#                     If differences are found during inventory checking
+#                     and those items are in this string, the
+#                     differences will be ignored.  This parameter is
+#                     optional.  If not specified the default value is
+#                     "processor:size".
 
 Resource        ../syslib/utils_os.robot
 Library         ../syslib/utils_keywords.py
@@ -43,7 +51,8 @@ ${json_final_file_path}      ${EXECDIR}/os_inventory_final.json
 ${json_diff_file_path}       ${EXECDIR}/os_inventory_diff.json
 ${last_inventory_file_path}  ${EMPTY}
 ${CHECK_INVENTORY}           True
-&{ignore_dict}               processor=size
+${INV_IGNORE_LIST}           processor:size
+${PREV_INV_FILE_PATH}        ${EMPTY}
 
 
 *** Test Cases ***
@@ -52,16 +61,20 @@ Hard Bootme Test
     [Documentation]  Stress the system using HTX exerciser.
     [Tags]  Hard_Bootme_Test
 
-    Rprintn
-    Rpvars  HTX_DURATION  HTX_INTERVAL
-
     # Set last inventory file to PREV_INV_FILE_PATH otherwise set it
     # to ${EMPTY}.
     ${last_inventory_file_path}=  Get Variable Value  ${PREV_INV_FILE_PATH}
     ...  ${EMPTY}
 
+    Rprintn
+    Rpvars  HTX_DURATION  HTX_INTERVAL  CHECK_INVENTORY  INV_IGNORE_LIST
+    ...  PREV_INV_FILE_PATH
+
+    Run Keyword If  '${last_inventory_file_path}' != '${EMPTY}'
+    ...  OperatingSystem.File Should Exist  ${last_inventory_file_path}
+
     Set Suite Variable  ${last_inventory_file_path}  children=true
-    Set Suite Variable  &{ignore_dict}  children=true
+    Set Suite Variable  ${INV_IGNORE_LIST}  children=true
 
     Repeat Keyword  ${HTX_LOOP} times  Run HTX Exerciser
 
@@ -86,7 +99,7 @@ Run HTX Exerciser
 
     # Post Power off and on, the OS SSH session needs to be established.
     Login To OS
-
+  
     Run Keyword If  '${CHECK_INVENTORY}' == 'True'
     ...  Do Inventory And Compare  ${json_initial_file_path}
     ...  ${last_inventory_file_path}
@@ -136,7 +149,7 @@ Compare Json Inventory Files
     # file2   A file that has an inventory snapshot, to compare with file1.
 
     ${diff_rc}=  JSON_Inv_File_Diff_Check  ${file1}
-     ...  ${file2}  ${json_diff_file_path}  ${ignore_dict}
+     ...  ${file2}  ${json_diff_file_path}  ${INV_IGNORE_LIST}
     Run Keyword If  '${diff_rc}' != '${0}'
     ...  Report Inventory Mismatch  ${diff_rc}  ${json_diff_file_path}
 
