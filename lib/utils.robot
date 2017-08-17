@@ -10,6 +10,7 @@ Library                 gen_robot_print.py
 Library                 gen_cmd.py
 Library                 gen_robot_keyword.py
 Library                 bmc_ssh_utils.py
+Library                 utils.py
 
 *** Variables ***
 ${pflash_cmd}           /usr/sbin/pflash -r /dev/stdout -P VERSION
@@ -40,9 +41,16 @@ ${devicetree_base}  /sys/firmware/devicetree/base/model
 # Initialize default debug value to 0.
 ${DEBUG}         ${0}
 
+# These variables are used to straddle between new and old methods of setting
+# values.
 ${boot_prog_method}     ${EMPTY}
 @{valid_boot_progress}  Off  FW Progress, Starting OS
 ...                     FW Progress, Baseboard Init  FW Progress, Memory Init
+
+${power_policy_setup}             ${0}
+${bmc_power_policy_method}        ${EMPTY}
+@{valid_power_policy_vars}        RESTORE_LAST_STATE  ALWAYS_POWER_ON
+...                               ALWAYS_POWER_OFF
 
 *** Keywords ***
 
@@ -792,26 +800,64 @@ Prune Journal Log
 
 Set BMC Power Policy
     [Documentation]   Set the given BMC power policy.
-    [arguments]  ${power_restore_uri}=${POWER_RESTORE_URI}
-    ...          ${policy_attribute}=PowerRestorePolicy
-    ...          ${policy}=${RESTORE_LAST_STATE}
+    [Arguments]   ${policy}
+
+    # Note that this function will translate the old style "RESTORE_LAST_STATE"
+    # policy to the new style "xyz.openbmc_project.Control.Power.RestorePolicy.
+    # Policy.Restore" for you.
 
     # Description of argument(s):
-    # power_restore_uri    Power restore policy url.
-    #                      By default "/xyz/openbmc_project/control/host0/power_restore_policy/".
-    # policy               Power restore policy.
-    #                      By default ""xyz.openbmc_project.Control.Power.RestorePolicy.Policy.Restore".
+    # policy    Power restore policy (e.g "RESTORE_LAST_STATE",
+    #           ${RESTORE_LAST_STATE}).
+
+    # Set the bmc_power_policy_method to either 'Old' or 'New'.
+    Set Power Policy Method
+    # This translation helps bridge between old and new method for calling.
+    ${policy}=  Translate Power Policy Value  ${policy}
+    # Run the appropriate keyword.
+    Run Key  ${bmc_power_policy_method} Set Power Policy \ ${policy}
+    ${currentPolicy}=  Get System Power Policy
+    Should Be Equal    ${currentPolicy}   ${policy}
+
+New Set Power Policy
+    [Documentation]   Set the given BMC power policy (new method).
+    [Arguments]   ${policy}
+
+    # Description of argument(s):
+    # policy    Power restore policy (e.g. ${RESTORE_LAST_STATE}).
 
     ${valueDict}=  Create Dictionary  data=${policy}
     Write Attribute
-    ...  ${power_restore_uri}  ${policy_attribute}  data=${valueDict}
-    ${currentPolicy}=
-    ...  Read Attribute  ${power_restore_uri}  ${policy_attribute}
-    Should Be Equal    ${currentPolicy}   ${policy}
+    ...  ${POWER_RESTORE_URI}  PowerRestorePolicy  data=${valueDict}
+
+Old Set Power Policy
+    [Documentation]   Set the given BMC power policy (old method).
+    [Arguments]   ${policy}
+
+    # Description of argument(s):
+    # policy    Power restore policy (e.g. "RESTORE_LAST_STATE").
+
+    ${valueDict}=     create dictionary  data=${policy}
+    Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
 
 Get System Power Policy
     [Documentation]  Get the BMC power policy.
+
+    # Set the bmc_power_policy_method to either 'Old' or 'New'.
+    Set Power Policy Method
+    ${cmd_buf}=  Create List  ${bmc_power_policy_method} Get Power Policy
+    # Run the appropriate keyword.
+    ${currentPolicy}=  Run Keyword  @{cmd_buf}
+    [Return]  ${currentPolicy}
+
+New Get Power Policy
+    [Documentation]  Get the BMC power policy (new method).
     ${currentPolicy}=  Read Attribute  ${POWER_RESTORE_URI}  PowerRestorePolicy
+    [Return]  ${currentPolicy}
+
+Old Get Power Policy
+    [Documentation]  Get the BMC power policy (old method).
+    ${currentPolicy}=  Read Attribute  ${HOST_SETTING}  power_policy
     [Return]  ${currentPolicy}
 
 Get Auto Reboot
