@@ -860,7 +860,16 @@ def wait_for_comm_cycle(start_boot_seconds,
     # that the uptime is less than the elapsed boot time.  Further proof that
     # a reboot has indeed occurred (vs random network instability giving a
     # false positive.
-    state = get_state(req_states=['uptime', 'epoch_seconds'], quiet=quiet)
+
+    # By waiting for a valid float and int for uptime and epoch_seconds, we
+    # effectively retry on failure to obtain data from the BMC.
+    float_regex = '[0-9]+\.[0-9]+'
+    int_regex = '[0-9]+'
+    match_state = anchor_state(DotDict([('uptime', float_regex),
+                                        ('epoch_seconds', int_regex)]))
+
+    state = wait_state(match_state, wait_time="4 mins", interval="0 seconds",
+                       quiet=1)
 
     elapsed_boot_time = int(state['epoch_seconds']) - start_boot_seconds
     gp.qprint_var(elapsed_boot_time)
