@@ -369,7 +369,7 @@ Test Suite Setup
     ...  ELSE  Initiate Host Reboot
 
     Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is OS Starting
+    ...  10 min  10 sec  Is OS Booted
 
 Get Inventory
     [Documentation]  Get the properties of an endpoint.
@@ -452,10 +452,10 @@ Verify Inventory List Before And After Reboot
     [Documentation]  Verify Inventory list before and after reboot.
 
     Initiate Host Boot
-    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Booted
     ${inv_before}=  Get URL List  ${HOST_INVENTORY_URI}
     Initiate Host Reboot
-    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Booted
     ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
     Lists Should Be Equal  ${inv_before}  ${inv_after}
 

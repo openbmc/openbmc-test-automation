@@ -201,4 +201,4 @@ Test Suite Setup
     ...  ELSE  Initiate Host Reboot
 
     Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is OS Starting
+    ...  10 min  10 sec  Is OS Booted

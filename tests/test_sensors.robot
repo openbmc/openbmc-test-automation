@@ -235,7 +235,7 @@ Setup The Suite
     ...  ELSE  Initiate Host Reboot
 
     Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is OS Starting
+    ...  10 min  10 sec  Is OS Booted
 
     Open Connection And Log In
     ${resp}=   Read Properties   ${OPENBMC_BASE_URI}enumerate   timeout=30
