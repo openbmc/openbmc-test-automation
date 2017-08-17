@@ -1,12 +1,6 @@
--e known_issue
-#https://github.com/openbmc/openbmc/issues/611
--e Association_with_virtual_sensor
 #https://github.com/openbmc/openbmc/issues/93
 -e System_Present
 -e Chassis_Present
-#https://github.com/openbmc/openbmc/issues/700
--e DIMM0_fault
--e DIMM0_no_fault
 #https://github.com/openbmc/openbmc-test-automation/issues/207
 -e Disable_PowerCap
 #https://github.com/openbmc/openbmc-test-automation/issues/123
@@ -21,9 +15,6 @@
 -e Set_BMC_Time_With_Split_And_Manual
 #https://github.com/openbmc/openbmc/issues/1142
 -e Check_BMC_Name_Property_Is_Set
-#https://github.com/openbmc/openbmc-test-automation/issues/75
--e Test_Wrong_Reservation_ID
--e Test_Correct_Reservation_ID
 #https://github.com/openbmc/openbmc-test-automation/issues/396
 -e NetworkManager
 # Test cases are NA for Barreleye and Palmetto
@@ -34,10 +25,6 @@
 -e Check_BMC_GPIO_keys_Compatible_Property_Is_Set
 -e Check_BMC_IIO-HWMON_Name_Property_Is_Set
 -e Check_BMC_IIO-HWMON_Compatible_Property_Is_Set
-#https://github.com/openbmc/openbmc/issues/1283
--e Inventory
-# NA until VPD is programmed on systems
--e Verify_Chassis_Motherboard_Properties
 #https://github.com/openbmc/openbmc-test-automation/issues/546
 -e CPU_Present
 -e DIMM3_Present
