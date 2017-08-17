@@ -70,7 +70,8 @@ REST Host Code Update
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
 
-    OBMC Reboot (off)
+    # TODO: Switch OBMC Reboot (off) once it's fixed
+    Trigger Warm Reset Via Reboot
 
 
 Post Update Boot To OS
