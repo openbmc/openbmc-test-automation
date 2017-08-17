@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     Code update to a target BMC.
+Documentation     Update the PNOR code on a target BMC.
 ...               Execution Method:
 ...               python -m robot -v OPENBMC_HOST:<hostname>
 ...               -v DELETE_OLD_PNOR_IMAGES:<"true" or "false">
@@ -15,28 +15,20 @@ Documentation     Code update to a target BMC.
 ...                 - Verify the new version
 
 Library           ../../lib/code_update_utils.py
-Library           OperatingSystem
-Library           String
 Variables         ../../data/variables.py
 Resource          ../lib/rest_client.robot
-Resource          ../lib/openbmc_ffdc.robot
-Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/boot_utils.robot
-Resource          ../../lib/utils.robot
 Resource          code_update_utils.robot
+Resource          ../../lib/code_update_utils.robot
+Resource          ../lib/openbmc_ffdc.robot
 Resource          ../../lib/state_manager.robot
 
-Test Teardown     Code Update Teardown
+Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
 
 ${QUIET}                          ${1}
-${version_id}                     ${EMPTY}
 ${upload_dir_path}                /tmp/images/
-${image_version}                  ${EMPTY}
-${image_purpose}                  ${EMPTY}
-${activation_state}               ${EMPTY}
-${requested_state}                ${EMPTY}
 ${IMAGE_FILE_PATH}                ${EMPTY}
 ${DELETE_OLD_PNOR_IMAGES}         false
 
@@ -47,31 +39,7 @@ REST Host Code Update
     [Tags]  REST_Host_Code_Update
     [Setup]  Code Update Setup
 
-    OperatingSystem.File Should Exist  ${image_file_path}
-    ${image_version}=  Get Version Tar  ${image_file_path}
-
-    ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
-    Upload Image To BMC  /upload/image  data=${image_data}
-    ${ret}=  Verify Image Upload
-    Should Be True  ${ret}
-
-    # Verify the image is 'READY' to be activated.
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
-    Should Be Equal As Strings  &{software_state}[Activation]  ${READY}
-
-    # Request the image to be activated.
-    ${args}=  Create Dictionary  data=${REQUESTED_ACTIVE}
-    Write Attribute  ${SOFTWARE_VERSION_URI}${version_id}
-    ...  RequestedActivation  data=${args}
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
-    Should Be Equal As Strings  &{software_state}[RequestedActivation]
-    ...  ${REQUESTED_ACTIVE}
-
-    # Verify code update was successful and Activation state is Active.
-    Wait For Activation State Change  ${version_id}  ${ACTIVATING}
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
-    Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
-
+    Upload And Activate Image  ${IMAGE_FILE_PATH}
     # TODO: Switch OBMC Reboot (off) once it's fixed
     Trigger Warm Reset Via Reboot
     Check If BMC is Up
@@ -117,8 +85,8 @@ Set RequestedActivation To Invalid Value
     [Template]  Set Property To Invalid Value And Verify No Change
     [Tags]  Set_RequestedActivation_To_Invalid_Value
 
-    # Property
-    RequestedActivation
+    # Property              Version Type
+    RequestedActivation     ${VERSION_PURPOSE_HOST}
 
 
 Set Activation To Invalid Value
@@ -127,8 +95,8 @@ Set Activation To Invalid Value
     [Template]  Set Property To Invalid Value And Verify No Change
     [Tags]  Set_Activation_To_Invalid_Value
 
-    # Property
-    Activation
+    # Property  Version Type
+    Activation  ${VERSION_PURPOSE_HOST}
 
 
 Delete Host Image
@@ -142,14 +110,6 @@ Delete Host Image
     Should Be True  0 < ${num_images}
     ...  msg=There are no PNOR images on the BMC to delete.
     Delete Image And Verify  @{software_objects}[0]  ${VERSION_PURPOSE_HOST}
-
-
-Delete BMC Image
-    [Documentation]  Delete a BMC image from the BMC flash chip.
-    [Tags]  Delete_BMC_Image
-
-    ${software_object}=  Get Non Running BMC Software Object
-    Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
 
 
 *** Keywords ***
@@ -183,12 +143,6 @@ Code Update Setup
     ...  Delete All PNOR Images
 
 
-Code Update Teardown
-    [Documentation]  Do code update test case teardown.
-
-    FFDC On Test Case Fail
-
-
 Get PNOR Extended Version
     [Documentation]  Return the PNOR extended version.
     [Arguments]  ${path}
@@ -200,46 +154,3 @@ Get PNOR Extended Version
     ${version}= Execute Command On BMC
     ...  "grep \"extended_version=\" " + ${path}
     [return] ${version.split(",")}
-
-
-Delete Image And Verify
-    [Documentation]  Delete an image from the BMC and verify that it was
-    ...              removed from software and the /tmp/images directory.
-    [Arguments]  ${software_object}  ${version_type}
-
-    # Description of argument(s):
-    # software_object        The URI of the software object to delete.
-    # version_type  The type of the software object, e.g.
-    #               xyz.openbmc_project.Software.Version.VersionPurpose.Host
-    #               or xyz.openbmc_project.Software.Version.VersionPurpose.BMC.
-
-    # Delete the image.
-    Delete Software Object  ${software_object}
-    # TODO: If/when we don't have to delete twice anymore, take this out
-    Run Keyword And Ignore Error  Delete Software Object  ${software_object}
-
-    # Verify that it's gone from software.
-    ${software_objects}=  Get Software Objects  version_type=${version_type}
-    Should Not Contain  ${software_objects}  ${software_object}
-
-    # Check that there is no file in the /tmp/images directory.
-    ${image_id}=  Fetch From Right  ${software_object}  /
-    BMC Execute Command
-    ...  [ ! -d "/tmp/images/${image_id}" ]
-
-
-Set Property To Invalid Value And Verify No Change
-    [Documentation]  Attempt to set a property and check that the value didn't
-    ...              change.
-    [Arguments]  ${property}
-
-    # Description of argument(s):
-    # property  The property to attempt to set.
-
-    ${sw_objs}=  Get Software Objects
-    ${prev_props}=  Get Host Software Property  @{sw_objs}[0]
-    Run Keyword And Expect Error  500 != 200
-    ...  Set Host Software Property  @{sw_objs}[0]  ${property}  foo
-    ${cur_props}=  Get Host Software Property  @{sw_objs}[0]
-    Should Be Equal As Strings  &{prev_props}[${property}]
-    ...  &{cur_props}[${property}]
