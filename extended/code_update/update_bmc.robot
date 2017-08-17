@@ -144,7 +144,7 @@ Prepare BMC For Update
     Check Boot Count And Time
     Prune Journal Log
     Power Off Request
-    Set Policy Setting   RESTORE_LAST_STATE
+    Set Policy Setting  ${RESTORE_LAST_STATE}
     Prepare For Update
     Check If BMC is Up  20 min  10 sec
     Check Boot Count And Time
