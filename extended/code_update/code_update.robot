@@ -23,6 +23,8 @@ Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/boot_utils.robot
+Resource          ../../lib/utils.robot
+Resource          code_update_utils.robot
 
 Test Teardown     Code Update Teardown
 
@@ -70,7 +72,9 @@ REST Host Code Update
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
 
-    OBMC Reboot (off)
+    # TODO: Switch OBMC Reboot (off) once it's fixed
+    Trigger Warm Reset Via Reboot
+    Check If BMC is Up
 
 
 Post Update Boot To OS
