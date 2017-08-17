@@ -724,15 +724,21 @@ Prune Journal Log
 
 Set BMC Power Policy
     [Documentation]   Set the given BMC power policy.
-    [arguments]   ${policy}
+    [arguments]  ${power_restore_uri}=${POWER_RESTORE_URI}
+    ...          ${policy_attribute}=PowerRestorePolicy
+    ...          ${policy}=${RESTORE_LAST_STATE}
 
     # Description of argument(s):
-    # policy    Power restore policy.
+    # power_restore_uri    Power restore policy url.
+    #                      By default "/xyz/openbmc_project/control/host0/power_restore_policy/".
+    # policy               Power restore policy.
+    #                      By default ""xyz.openbmc_project.Control.Power.RestorePolicy.Policy.Restore".
 
     ${valueDict}=  Create Dictionary  data=${policy}
     Write Attribute
-    ...  ${POWER_RESTORE_URI}  PowerRestorePolicy  data=${valueDict}
-    ${currentPolicy}=  Read Attribute  ${POWER_RESTORE_URI}  PowerRestorePolicy
+    ...  ${power_restore_uri}  ${policy_attribute}  data=${valueDict}
+    ${currentPolicy}=
+    ...  Read Attribute  ${power_restore_uri}  ${policy_attribute}
     Should Be Equal    ${currentPolicy}   ${policy}
 
 Get System Power Policy
