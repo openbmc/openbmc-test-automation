@@ -52,7 +52,7 @@ Get To Stable State
 
     Prune Journal Log
 
-    Run Keyword And Ignore Error  Update Policy Setting  RESTORE_LAST_STATE
+    Run Keyword And Ignore Error  Set BMC Power Policy  ${RESTORE_LAST_STATE}
 
     Run Keyword If  '${MAC_ADDRESS}' != '${EMPTY}'
     ...  Check And Reset MAC
