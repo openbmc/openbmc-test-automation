@@ -66,12 +66,16 @@ Set Host Software Property
 Set Property To Invalid Value And Verify No Change
     [Documentation]  Attempt to set a property and check that the value didn't
     ...              change.
-    [Arguments]  ${property}
+    [Arguments]  ${property}  ${version_type}
 
     # Description of argument(s):
-    # property  The property to attempt to set.
+    # property      The property to attempt to set.
+    # version_type  Either BMC or host version purpose.
+    #               By default host version purpose string.
+    #  (e.g. "xyz.openbmc_project.Software.Version.VersionPurpose.BMC"
+    #        "xyz.openbmc_project.Software.Version.VersionPurpose.Host").
 
-    ${sw_objs}=  Get Software Objects
+    ${sw_objs}=  Get Software Objects  version_type=${version_type}
     ${prev_props}=  Get Host Software Property  @{sw_objs}[0]
     Run Keyword And Expect Error  500 != 200
     ...  Set Host Software Property  @{sw_objs}[0]  ${property}  foo
