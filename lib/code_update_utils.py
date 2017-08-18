@@ -213,7 +213,7 @@ def get_image_path(image_version):
 
 
 ###############################################################################
-def verify_image_upload(timeout=3):
+def verify_image_upload(image_version, timeout=3):
 
     r"""
     Verify the image was uploaded correctly and that it created
@@ -221,14 +221,13 @@ def verify_image_upload(timeout=3):
     fails, try again until we reach the timeout.
 
     Description of argument(s):
+    image_version  The version from the image's manifest file.
     timeout  How long, in minutes, to keep trying to find the
              image on the BMC. Default is 3 minutes.
     """
 
-    image_version = BuiltIn().get_variable_value("${image_version}")
     image_path = get_image_path(image_version)
     image_version_id = image_path.split("/")[-2]
-    BuiltIn().set_global_variable("${version_id}", image_version_id)
 
     keyword.run_key_u("Open Connection And Log In")
     image_purpose = get_image_purpose(image_path + "MANIFEST")
@@ -242,16 +241,16 @@ def verify_image_upload(timeout=3):
 
             if ((ret_values == var.READY) or (ret_values == var.INVALID)
                     or (ret_values == var.ACTIVE)):
-                return True
+                return True, image_version_id
             else:
                 time.sleep(30)
 
         # If we exit the for loop, the timeout has been reached
         gp.print_var(ret_values)
-        return False
+        return False, None
     else:
         gp.print_var(image_purpose)
-        return False
+        return False, None
 
 ###############################################################################
 
