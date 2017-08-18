@@ -1,26 +1,26 @@
 *** Settings ***
-Documentation     Code update to a target BMC.
+Documentation     Update the PNOR code on a target BMC.
 ...               Execution Method:
 ...               python -m robot -v OPENBMC_HOST:<hostname>
 ...               -v DELETE_OLD_PNOR_IMAGES:<"true" or "false">
-...               -v IMAGE_FILE_PATH:<path/*.tar>  code_update.robot
+...               -v IMAGE_FILE_PATH:<path/*.tar>  host_code_update.robot
 ...
 ...               Code update method BMC
 ...               Update work flow sequence:
 ...                 - Upload image via REST
 ...                 - Verify that the file exists on the BMC
-...                 - Check software "Activation" status to be "Ready"
+...                 - Check that software "Activation" is set to "Ready"
 ...                 - Set "Requested Activation" to "Active"
 ...                 - Wait for code update to complete
 ...                 - Verify the new version
 
+Library           ../../lib/bmc_ssh_utils.py
 Library           ../../lib/code_update_utils.py
 Variables         ../../data/variables.py
-Resource          ../lib/openbmc_ffdc.robot
-Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/boot_utils.robot
-Resource          ../../lib/utils.robot
 Resource          code_update_utils.robot
+Resource          ../../lib/code_update_utils.robot
+Resource          ../lib/openbmc_ffdc.robot
 Resource          ../../lib/state_manager.robot
 
 Test Teardown     FFDC On Test Case Fail
@@ -28,7 +28,6 @@ Test Teardown     FFDC On Test Case Fail
 *** Variables ***
 
 ${QUIET}                          ${1}
-${upload_dir_path}                /tmp/images/
 ${IMAGE_FILE_PATH}                ${EMPTY}
 ${DELETE_OLD_PNOR_IMAGES}         false
 
@@ -40,7 +39,6 @@ REST Host Code Update
     [Setup]  Code Update Setup
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
-
     OBMC Reboot (off)
 
 
@@ -49,7 +47,7 @@ Post Update Boot To OS
     [Tags]  Post_Update_Boot_To_OS
     [Teardown]  Stop SOL Console Logging
 
-    Run Keyword Unless  '${PREV_TEST_STATUS}' == 'PASS'
+    Run Keyword If  '${PREV_TEST_STATUS}' == 'FAIL'
     ...  Fail  Code update failed. No need to boot to OS.
     Start SOL Console Logging
     REST Power On
@@ -58,7 +56,7 @@ Post Update Boot To OS
 Host Image Priority Attribute Test
     [Documentation]  Set "Priority" attribute.
     [Tags]  Host_Image_Priority_Attribute_Test
-    [Template]  Set PNOR Attribute
+    [Template]  Temporarily Set PNOR Attribute
 
     # Property        Value
     Priority          ${0}
@@ -71,32 +69,24 @@ Set RequestedActivation To None
     ...              verify that it is in fact set to None.
     [Tags]  Set_RequestedActivation_To_None
 
-    ${sw_objs}=  Get Software Objects
-    Set Host Software Property  @{sw_objs}[0]  RequestedActivation
+    ${software_objects}=  Get Software Objects
+    Set Host Software Property  @{software_objects}[0]  RequestedActivation
     ...  ${REQUESTED_NONE}
-    ${sw_props}=  Get Host Software Property  @{sw_objs}[0]
-    Should Be Equal As Strings  &{sw_props}[RequestedActivation]
+    ${software_properties}=  Get Host Software Property  @{software_objects}[0]
+    Should Be Equal As Strings  &{software_properties}[RequestedActivation]
     ...  ${REQUESTED_NONE}
 
 
-Set RequestedActivation To Invalid Value
-    [Documentation]  Set the RequestedActivation proprety of the image to an
-    ...              invalid value and verify that it was not changed.
+Set RequestedActivation And Activation To Invalid Value
+    [Documentation]  Set the RequestedActivation and Activation propreties of
+    ...              the image to an invalid value and verify that it was not
+    ...              changed.
     [Template]  Set Property To Invalid Value And Verify No Change
-    [Tags]  Set_RequestedActivation_To_Invalid_Value
+    [Tags]  Set_RequestedActivation_And_Activation_To_Invalid_Value
 
-    # Property
-    RequestedActivation
-
-
-Set Activation To Invalid Value
-    [Documentation]  Set the Activation proprety of the image to an invalid
-    ...              value and verify that it was not changed.
-    [Template]  Set Property To Invalid Value And Verify No Change
-    [Tags]  Set_Activation_To_Invalid_Value
-
-    # Property
-    Activation
+    # Property              Version Type
+    RequestedActivation     ${VERSION_PURPOSE_HOST}
+    Activation              ${VERSION_PURPOSE_HOST}
 
 
 Delete Host Image
@@ -112,36 +102,30 @@ Delete Host Image
     Delete Image And Verify  @{software_objects}[0]  ${VERSION_PURPOSE_HOST}
 
 
-Delete BMC Image
-    [Documentation]  Delete a BMC image from the BMC flash chip.
-    [Tags]  Delete_BMC_Image
-
-    ${software_object}=  Get Non Running BMC Software Object
-    Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
-
-
 *** Keywords ***
 
-Set PNOR Attribute
-    [Documentation]  Update the attribute value.
-    [Arguments]  ${attribute_name}  ${value}
+Temporarily Set PNOR Attribute
+    [Documentation]  Update the PNOR attribute value.
+    [Arguments]  ${attribute_name}  ${attribute_value}
 
     # Description of argument(s):
-    # attribute_name   Host software attribute name (e.g. "Priority").
-    # value            Value to be written.
+    # attribute_name    Host software attribute name (e.g. "Priority").
+    # attribute_value   Value to be written.
 
     ${image_ids}=  Get Software Objects
-    ${resp}=  Get Host Software Property  ${image_ids[0]}
-    ${initial_value}=  Set Variable  ${resp["Priority"]}
+    ${init_host_properties}=  Get Host Software Property  ${image_ids[0]}
+    ${initial_priority}=  Set Variable  ${init_host_properties["Priority"]}
 
-    Set Host Software Property  ${image_ids[0]}  ${attribute_name}  ${value}
+    Set Host Software Property  ${image_ids[0]}  ${attribute_name}
+    ...  ${attribute_value}
 
-    ${resp}=  Get Host Software Property  ${image_ids[0]}
-    Should Be Equal As Integers  ${resp["Priority"]}  ${value}
+    ${cur_host_properties}=  Get Host Software Property  ${image_ids[0]}
+    Should Be Equal As Integers  ${cur_host_properties["Priority"]}
+    ...  ${attribute_value}
 
     # Revert to to initial value.
     Set Host Software Property
-    ...  ${image_ids[0]}  ${attribute_name}  ${initial_value}
+    ...  ${image_ids[0]}  ${attribute_name}  ${initial_priority}
 
 
 Code Update Setup
@@ -153,12 +137,12 @@ Code Update Setup
 
 Get PNOR Extended Version
     [Documentation]  Return the PNOR extended version.
-    [Arguments]  ${path}
+    [Arguments]  ${manifest_path}
 
     # Description of argument(s):
-    # path  Path of the MANIFEST file.
+    # manifest_path  Path of the MANIFEST file
+    #                (e.g. "/tmp/images/abc123/MANIFEST").
 
-    Open Connection And Log In
-    ${version}= Execute Command On BMC
-    ...  "grep \"extended_version=\" " + ${path}
+    ${version}= BMC Execute Command
+    ...  grep extended_version= ${manifest_path}
     [return] ${version.split(",")}

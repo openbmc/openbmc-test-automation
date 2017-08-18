@@ -66,22 +66,26 @@ Set Host Software Property
 Set Property To Invalid Value And Verify No Change
     [Documentation]  Attempt to set a property and check that the value didn't
     ...              change.
-    [Arguments]  ${property}
+    [Arguments]  ${property}  ${version_type}
 
     # Description of argument(s):
-    # property  The property to attempt to set.
+    # property      The property to attempt to set.
+    # version_type  Either BMC or host version purpose.
+    #               By default host version purpose string.
+    #  (e.g. "xyz.openbmc_project.Software.Version.VersionPurpose.BMC"
+    #        "xyz.openbmc_project.Software.Version.VersionPurpose.Host").
 
-    ${sw_objs}=  Get Software Objects
-    ${prev_props}=  Get Host Software Property  @{sw_objs}[0]
+    ${software_objects}=  Get Software Objects  version_type=${version_type}
+    ${prev_properties}=  Get Host Software Property  @{software_objects}[0]
     Run Keyword And Expect Error  500 != 200
-    ...  Set Host Software Property  @{sw_objs}[0]  ${property}  foo
-    ${cur_props}=  Get Host Software Property  @{sw_objs}[0]
-    Should Be Equal As Strings  &{prev_props}[${property}]
-    ...  &{cur_props}[${property}]
+    ...  Set Host Software Property  @{software_objects}[0]  ${property}  foo
+    ${cur_properties}=  Get Host Software Property  @{software_objects}[0]
+    Should Be Equal As Strings  &{prev_properties}[${property}]
+    ...  &{cur_properties}[${property}]
 
 
 Upload And Activate Image
-    [Documentation]  Uploads an image to the BMC and activates it with REST.
+    [Documentation]  Upload an image to the BMC and activate it with REST.
     [Arguments]  ${image_file_path}
 
     # Description of argument(s):
@@ -137,6 +141,8 @@ Delete Image And Verify
     # version_type  The type of the software object, e.g.
     #               xyz.openbmc_project.Software.Version.VersionPurpose.Host
     #               or xyz.openbmc_project.Software.Version.VersionPurpose.BMC.
+
+    Log To Console  Deleteing ${software_object}
 
     # Delete the image.
     Delete Software Object  ${software_object}
