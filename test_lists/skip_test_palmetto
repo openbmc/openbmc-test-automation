@@ -4,14 +4,6 @@
 #https://github.com/openbmc/openbmc/issues/93
 -e System_Present
 -e Chassis_Present
-#https://github.com/openbmc/openbmc/issues/612
--e Create_and_delete_user_without_group_name
--e Create_and_delete_user_with_user_group_name
--e Create_multiple_users
--e Create_and_delete_user_without_password
--e Set_password_for_existing_user
--e Set_password_with_empty_password_for_existing
--e Create_existing_user
 #https://github.com/openbmc/openbmc/issues/700
 -e DIMM0_fault
 -e DIMM0_no_fault
@@ -67,6 +59,5 @@
 # Applicable only for witherspoon
 -e Verify_Boxelder_Present_Property
 -e Verify_Boxelder_MAC_Address_Property_Is_Populated
-# https://github.com/openbmc/openbmc-test-automation/issues/907
--e Clock_Time
-
+# https://github.com/openbmc/openbmc-test-automation/issues/874
+-e User_Management
