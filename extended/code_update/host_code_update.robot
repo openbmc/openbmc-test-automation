@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     Code update to a target BMC.
+Documentation     Update the PNOR code on a target BMC.
 ...               Execution Method:
 ...               python -m robot -v OPENBMC_HOST:<hostname>
 ...               -v DELETE_OLD_PNOR_IMAGES:<"true" or "false">
@@ -16,11 +16,10 @@ Documentation     Code update to a target BMC.
 
 Library           ../../lib/code_update_utils.py
 Variables         ../../data/variables.py
-Resource          ../lib/openbmc_ffdc.robot
-Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/boot_utils.robot
-Resource          ../../lib/utils.robot
 Resource          code_update_utils.robot
+Resource          ../../lib/code_update_utils.robot
+Resource          ../lib/openbmc_ffdc.robot
 Resource          ../../lib/state_manager.robot
 
 Test Teardown     FFDC On Test Case Fail
@@ -86,8 +85,8 @@ Set RequestedActivation To Invalid Value
     [Template]  Set Property To Invalid Value And Verify No Change
     [Tags]  Set_RequestedActivation_To_Invalid_Value
 
-    # Property
-    RequestedActivation
+    # Property              Version Type
+    RequestedActivation     ${VERSION_PURPOSE_HOST}
 
 
 Set Activation To Invalid Value
@@ -96,8 +95,8 @@ Set Activation To Invalid Value
     [Template]  Set Property To Invalid Value And Verify No Change
     [Tags]  Set_Activation_To_Invalid_Value
 
-    # Property
-    Activation
+    # Property  Version Type
+    Activation  ${VERSION_PURPOSE_HOST}
 
 
 Delete Host Image
@@ -111,14 +110,6 @@ Delete Host Image
     Should Be True  0 < ${num_images}
     ...  msg=There are no PNOR images on the BMC to delete.
     Delete Image And Verify  @{software_objects}[0]  ${VERSION_PURPOSE_HOST}
-
-
-Delete BMC Image
-    [Documentation]  Delete a BMC image from the BMC flash chip.
-    [Tags]  Delete_BMC_Image
-
-    ${software_object}=  Get Non Running BMC Software Object
-    Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
 
 
 *** Keywords ***
