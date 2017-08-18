@@ -24,7 +24,7 @@ Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/state_manager.robot
 Resource          ../../lib/dump_utils.robot
 
-Test Teardown     FFDC On Test Case Fail
+Test Teardown     Code Update Test Teardown
 
 *** Variables ***
 
@@ -37,11 +37,16 @@ ${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
 
 REST Host Code Update
     [Documentation]  Do a PNOR code update by uploading image on BMC via REST.
+    # 1. Delete error logs if there is any.
+    # 1. Do code update.
+    # 2. Do post update the following:
+    #    - Collect FFDC if error log exist and delete error logs.
     [Tags]  REST_Host_Code_Update
     [Setup]  Code Update Setup
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     OBMC Reboot (off)
+
 
 
 Post Update Boot To OS
@@ -52,6 +57,7 @@ Post Update Boot To OS
     Run Keyword If  '${PREV_TEST_STATUS}' == 'FAIL'
     ...  Fail  Code update failed. No need to boot to OS.
     Start SOL Console Logging
+    Delete Error Logs
     REST Power On
 
 
@@ -147,6 +153,7 @@ Code Update Setup
     # - Clean up all currently install PNOR images.
 
     Delete All Dumps
+    Delete Error Logs
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
     ...  Delete All PNOR Images
 
@@ -168,3 +175,12 @@ Get PNOR Extended Version
     ${version}= BMC Execute Command
     ...  grep extended_version= ${manifest_path}
     [return] ${version.split(",")}
+
+
+Code Update Test Teardown
+    [Documentation]  Do code update test case teardown.
+    # 1. Collect FFDC if test case failed.
+    # 2. Collect FFDC if test PASS but error log exists.
+
+    FFDC On Test Case Fail
+    Run Keyword If  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
