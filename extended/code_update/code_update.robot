@@ -84,6 +84,7 @@ Post Update Boot To OS
     Run Keyword Unless  '${PREV_TEST_STATUS}' == 'PASS'
     ...  Fail  Code update failed. No need to boot to OS.
     Start SOL Console Logging
+    Delete Error Logs
     REST Power On
 
 
@@ -125,6 +126,7 @@ Set PNOR Attribute
 Code Update Setup
     [Documentation]  Do code update test case setup.
 
+    Delete Error Logs
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
     ...  Delete All PNOR Images
 
