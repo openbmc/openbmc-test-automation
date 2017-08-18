@@ -27,7 +27,6 @@ Force Tags  Upload_Test
 
 *** Variables ***
 ${timeout}            10
-${upload_dir_path}    /tmp/images/
 ${QUIET}              ${1}
 
 *** Test Cases ***

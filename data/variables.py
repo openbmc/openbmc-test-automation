@@ -61,6 +61,9 @@ VERSION_PURPOSE_HOST = SOFTWARE_PURPOSE + '.Host'
 VERSION_PURPOSE_BMC = SOFTWARE_PURPOSE + '.BMC'
 VERSION_PURPOSE_SYSTEM = SOFTWARE_PURPOSE + '.System'
 
+# Image Upload Directory Path
+IMAGE_UPLOAD_DIR_PATH = '/tmp/images/'
+
 # Inventory URI
 HOST_INVENTORY_URI = '/xyz/openbmc_project/inventory/'
 
