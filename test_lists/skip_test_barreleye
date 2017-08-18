@@ -7,14 +7,6 @@
 -e Revert_old_Mac_addres
 #https://github.com/openbmc/openbmc-test-automation/issues/137
 -e Set_invalid_Mac_address
-#https://github.com/openbmc/openbmc/issues/612
--e Create_and_delete_user_without_group_name
--e Create_and_delete_user_with_user_group_name
--e Create_multiple_users
--e Create_and_delete_user_without_password
--e Set_password_for_existing_user
--e Set_password_with_empty_password_for_existing
--e Create_existing_user
 #https://github.com/openbmc/openbmc/issues/901
 -e Set_BMC_Time_With_Split_And_Manual
 #https://github.com/openbmc/openbmc/issues/1142
@@ -62,4 +54,5 @@
 -e Verify_Boxelder_MAC_Address_Property_Is_Populated
 # https://github.com/openbmc/openbmc-test-automation/issues/907
 -e Clock_Time
-
+# https://github.com/openbmc/openbmc-test-automation/issues/874
+-e User_Management
