@@ -48,13 +48,14 @@ ${PACKET_TYPE}      tcp
 ${DEBUG_TARBALL_PATH}  ${EMPTY}
 
 # Upload Image parameters
-${TFTP_SERVER}              ${EMPTY}
-${PNOR_TFTP_FILE_NAME}      ${EMPTY}
-${BMC_TFTP_FILE_NAME}       ${EMPTY}
-${IMAGE_FILE_PATH}          ${EMPTY}
-${PNOR_IMAGE_FILE_PATH}     ${EMPTY}
-${BMC_IMAGE_FILE_PATH}      ${EMPTY}
-${BAD_IMAGES_DIR_PATH}      ${EMPTY}
+${TFTP_SERVER}                  ${EMPTY}
+${PNOR_TFTP_FILE_NAME}          ${EMPTY}
+${BMC_TFTP_FILE_NAME}           ${EMPTY}
+${IMAGE_FILE_PATH}              ${EMPTY}
+${ALTERNATE_IMAGE_FILE_PATH}    ${EMPTY}
+${PNOR_IMAGE_FILE_PATH}         ${EMPTY}
+${BMC_IMAGE_FILE_PATH}          ${EMPTY}
+${BAD_IMAGES_DIR_PATH}          ${EMPTY}
 
 # The caller must set this to the string "true" in order to delete images. The
 # code is picky.
