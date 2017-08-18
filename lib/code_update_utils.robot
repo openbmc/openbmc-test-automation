@@ -58,6 +58,54 @@ Set Host Software Property
     ${args}=  Create Dictionary  data=${data}
     Write Attribute  ${host_object}  ${sw_attribute}  data=${args}
 
+
+Set Property To Invalid Value And Verify No Change
+    [Documentation]  Attempt to set a property and check that the value didn't
+    ...              change.
+    [Arguments]  ${property}
+
+    # Description of argument(s):
+    # property  The property to attempt to set.
+
+    ${sw_objs}=  Get Software Objects
+    ${prev_props}=  Get Host Software Property  @{sw_objs}[0]
+    Run Keyword And Expect Error  500 != 200
+    ...  Set Host Software Property  @{sw_objs}[0]  ${property}  foo
+    ${cur_props}=  Get Host Software Property  @{sw_objs}[0]
+    Should Be Equal As Strings  &{prev_props}[${property}]
+    ...  &{cur_props}[${property}]
+
+
+Upload And Activate Image
+    [Documentation]
+    [Arguments]  ${image_file_path}
+
+    OperatingSystem.File Should Exist  ${image_file_path}
+    ${image_version}=  Get Version Tar  ${image_file_path}
+
+    ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
+    Upload Image To BMC  /upload/image  data=${image_data}
+    ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
+    Should Be True  ${ret}
+
+    # Verify the image is 'READY' to be activated.
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    Should Be Equal As Strings  &{software_state}[Activation]  ${READY}
+
+    # Request the image to be activated.
+    ${args}=  Create Dictionary  data=${REQUESTED_ACTIVE}
+    Write Attribute  ${SOFTWARE_VERSION_URI}${version_id}
+    ...  RequestedActivation  data=${args}
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    Should Be Equal As Strings  &{software_state}[RequestedActivation]
+    ...  ${REQUESTED_ACTIVE}
+
+    # Verify code update was successful and Activation state is Active.
+    Wait For Activation State Change  ${version_id}  ${ACTIVATING}
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+
+
 Delete Software Object
     [Documentation]  Deletes an image from the BMC.
     [Arguments]  ${software_object}
@@ -70,3 +118,29 @@ Delete Software Object
     ${resp}=  OpenBMC Post Request  ${software_object}/action/delete
     ...  data=${args}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Delete Image And Verify
+    [Documentation]  Delete an image from the BMC and verify that it was
+    ...              removed from software and the /tmp/images directory.
+    [Arguments]  ${software_object}  ${version_type}
+
+    # Description of argument(s):
+    # software_object        The URI of the software object to delete.
+    # version_type  The type of the software object, e.g.
+    #               xyz.openbmc_project.Software.Version.VersionPurpose.Host
+    #               or xyz.openbmc_project.Software.Version.VersionPurpose.BMC.
+
+    # Delete the image.
+    Delete Software Object  ${software_object}
+    # TODO: If/when we don't have to delete twice anymore, take this out
+    Run Keyword And Ignore Error  Delete Software Object  ${software_object}
+
+    # Verify that it's gone from software.
+    ${software_objects}=  Get Software Objects  version_type=${version_type}
+    Should Not Contain  ${software_objects}  ${software_object}
+
+    # Check that there is no file in the /tmp/images directory.
+    ${image_id}=  Fetch From Right  ${software_object}  /
+    BMC Execute Command
+    ...  [ ! -d "/tmp/images/${image_id}" ]
