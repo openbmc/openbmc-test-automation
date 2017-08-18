@@ -117,6 +117,19 @@ Upload And Activate Image
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
 
 
+Activate Image And Verify No Duplicate Priorities
+    [Documentation]  Upload an image, and then check that no images have the
+    ...              same priority.
+    [Arguments]  ${image_file_path}  ${image_purpose}
+
+    # Description of argument(s):
+    # image_file_path  The path to the image to upload.
+    # image_purpose    The purpose in the image's MANIFEST file.
+
+    Upload And Activate Image  ${image_file_path}
+    Verify No Duplicate Image Priorities  ${image_purpose}
+
+
 Delete Software Object
     [Documentation]  Deletes an image from the BMC.
     [Arguments]  ${software_object}
