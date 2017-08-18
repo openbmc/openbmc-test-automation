@@ -3,7 +3,8 @@ Documentation     Update the PNOR code on a target BMC.
 ...               Execution Method:
 ...               python -m robot -v OPENBMC_HOST:<hostname>
 ...               -v DELETE_OLD_PNOR_IMAGES:<"true" or "false">
-...               -v IMAGE_FILE_PATH:<path/*.tar>  code_update.robot
+...               -v IMAGE_FILE_PATH:<path/*.tar>
+...               -v ALTERNATE_IMAGE_FILE_PATH:<path/*.tar>  code_update.robot
 ...
 ...               Code update method BMC
 ...               Update work flow sequence:
@@ -30,6 +31,7 @@ ${QUIET}                          ${1}
 ${upload_dir_path}                /tmp/images/
 ${IMAGE_FILE_PATH}                ${EMPTY}
 ${DELETE_OLD_PNOR_IMAGES}         false
+${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
 
 *** Test Cases ***
 
@@ -96,6 +98,16 @@ Set Activation To Invalid Value
 
     # Property  Version Type
     Activation  ${VERSION_PURPOSE_HOST}
+
+
+Upload And Activate Multiple Host Images
+    [Documentation]  Upload another PNOR image and verify that its state is
+    ...              different from all others.
+    [Tags]  Upload_And_Activate_Multiple_Host_Images
+    [Template]  Activate Image And Verify No Duplicate Priorities
+
+    # Image File Path              Image Purpose
+    ${ALTERNATE_IMAGE_FILE_PATH}   ${VERSION_PURPOSE_HOST}
 
 
 Delete Host Image
