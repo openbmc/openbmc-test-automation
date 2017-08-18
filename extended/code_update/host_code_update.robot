@@ -30,6 +30,7 @@ Test Teardown     FFDC On Test Case Fail
 ${QUIET}                          ${1}
 ${IMAGE_FILE_PATH}                ${EMPTY}
 ${DELETE_OLD_PNOR_IMAGES}         false
+${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
 
 *** Test Cases ***
 
@@ -89,6 +90,17 @@ Set RequestedActivation And Activation To Invalid Value
     Activation              ${VERSION_PURPOSE_HOST}
 
 
+Upload And Activate Multiple Host Images
+    [Documentation]  Upload another PNOR image and verify that its state is
+    ...              different from all others.
+    [Tags]  Upload_And_Activate_Multiple_Host_Images
+    [Template]  Activate Image And Verify No Duplicate Priorities
+    [Setup]  Upload And Activate Multiple BMC Images Setup
+
+    # Image File Path              Image Purpose
+    ${ALTERNATE_IMAGE_FILE_PATH}   ${VERSION_PURPOSE_HOST}
+
+
 Delete Host Image
     [Documentation]  Delete a PNOR image from the BMC and PNOR flash chip.
     [Tags]  Delete_Host_Image
@@ -133,6 +145,12 @@ Code Update Setup
 
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
     ...  Delete All PNOR Images
+
+
+Upload And Activate Multiple BMC Images Setup
+    [Documentation]  Check that the ALTERNATE_FILE_PATH variable is set.
+
+    Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
 
 
 Get PNOR Extended Version

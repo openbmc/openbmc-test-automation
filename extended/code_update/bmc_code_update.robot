@@ -17,6 +17,7 @@ Test Teardown     FFDC On Test Case Fail
 
 ${QUIET}                          ${1}
 ${IMAGE_FILE_PATH}                ${EMPTY}
+${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
 
 *** Test Cases ***
 
@@ -28,9 +29,28 @@ REST BMC Code Update
     OBMC Reboot (off)
 
 
+Upload And Activate Multiple BMC Images
+    [Documentation]  Upload another BMC image and verify that its state is
+    ...              different from all others.
+    [Tags]  Upload_And_Activate_Multiple_BMC_Images
+    [Template]  Activate Image And Verify No Duplicate Priorities
+    [Setup]  Upload And Activate Multiple BMC Images Setup
+
+    # Image File Path              Image Purpose
+    ${ALTERNATE_IMAGE_FILE_PATH}   ${VERSION_PURPOSE_BMC}
+
+
 Delete BMC Image
     [Documentation]  Delete a BMC image from the BMC flash chip.
     [Tags]  Delete_BMC_Image
 
     ${software_object}=  Get Non Running BMC Software Object
     Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
+
+
+*** Keywords ***
+
+Upload And Activate Multiple BMC Images Setup
+    [Documentation]  Check that the ALTERNATE_FILE_PATH variable is set.
+
+    Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
