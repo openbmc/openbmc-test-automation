@@ -37,7 +37,8 @@ def get_non_running_bmc_software_object():
     for image_name in images:
         _, image_properties = keyword.run_key(
                 "Get Host Software Property  " + image_name)
-        if image_properties['Version'] != cur_img_version:
+        if image_properties['Purpose'] != var.VERSION_PURPOSE_HOST \
+                and image_properties['Version'] != cur_img_version:
             return image_name
     BuiltIn().fail("Did not find any non-running BMC images.")
 
@@ -193,11 +194,10 @@ def get_image_path(image_version):
                      of the images in the upload dir.
     """
 
-    upload_dir = BuiltIn().get_variable_value("${upload_dir_path}")
     keyword.run_key_u("Open Connection And Log In")
     status, image_list =\
-            keyword.run_key("Execute Command On BMC  ls -d " + upload_dir
-            + "*/")
+            keyword.run_key("Execute Command On BMC  ls -d "
+                            + var.IMAGE_UPLOAD_DIR_PATH + "*/")
 
     image_list = image_list.split("\n")
     retry = 0
@@ -213,7 +213,8 @@ def get_image_path(image_version):
 
 
 ###############################################################################
-def verify_image_upload(image_version, timeout=3):
+def verify_image_upload(image_version,
+                        timeout=3):
 
     r"""
     Verify the image was uploaded correctly and that it created
@@ -221,9 +222,10 @@ def verify_image_upload(image_version, timeout=3):
     fails, try again until we reach the timeout.
 
     Description of argument(s):
-    image_version  The version from the image's manifest file.
-    timeout  How long, in minutes, to keep trying to find the
-             image on the BMC. Default is 3 minutes.
+    image_version  The version from the image's manifest file
+                   (e.g. "IBM-witherspoon-redbud-ibm-OP9_v1.17_1.68").
+    timeout        How long, in minutes, to keep trying to find the
+                   image on the BMC. Default is 3 minutes.
     """
 
     image_path = get_image_path(image_version)
@@ -271,10 +273,9 @@ def verify_image_not_in_bmc_uploads_dir(image_version, timeout=3):
     """
 
     keyword.run_key('Open Connection And Log In')
-    upload_dir_path = BuiltIn().get_variable_value("${upload_dir_path}")
     for i in range(timeout * 2):
         stat, grep_res = keyword.run_key('Execute Command On BMC  '
-                + 'ls ' + upload_dir_path + '*/MANIFEST 2>/dev/null '
+                + 'ls ' + var.IMAGE_UPLOAD_DIR_PATH + '*/MANIFEST 2>/dev/null '
                 + '| xargs grep -rl "version=' + image_version + '"')
         image_dir = os.path.dirname(grep_res.split('\n')[0])
         if '' != image_dir:
