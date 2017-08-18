@@ -11,7 +11,7 @@ Resource          code_update_utils.robot
 Resource          ../../lib/code_update_utils.robot
 Resource          ../lib/openbmc_ffdc.robot
 
-Test Teardown     FFDC On Test Case Fail
+Test Teardown     Check Error And Collect FFDC
 
 *** Variables ***
 
@@ -54,3 +54,12 @@ Upload And Activate Multiple BMC Images Setup
     [Documentation]  Check that the ALTERNATE_FILE_PATH variable is set.
 
     Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
+
+Code Update Test Teardown
+    [Documentation]  Do code update test case teardown.
+    # 1. Collect FFDC if test case failed.
+    # 2. Collect FFDC if test PASS but error log exists.
+
+    FFDC On Test Case Fail
+    Run Keyword If  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
+
