@@ -6,6 +6,7 @@ Library     OperatingSystem
 Library     String
 Variables   ../data/variables.py
 Resource    rest_client.robot
+Resource    openbmc_ffdc.robot
 
 *** Keywords ***
 
@@ -183,3 +184,11 @@ Delete Image And Verify
     ${image_id}=  Fetch From Right  ${software_object}  /
     BMC Execute Command
     ...  [ ! -d "/tmp/images/${image_id}" ]
+
+
+Check Error And Collect FFDC
+    [Documentation]  Collect FFDC if error log exists.
+
+    ${status}=  Run Keyword And Return Status  Error Logs Should Not Exist
+    Run Keyword If  '${status}' == 'False'  FFDC
+    Delete Error Logs
