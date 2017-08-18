@@ -29,7 +29,6 @@ Force Tags  Upload_Test
 ${timeout}            10
 ${upload_dir_path}    /tmp/images/
 ${QUIET}              ${1}
-${image_version}      ${EMPTY}
 
 *** Test Cases ***
 
@@ -225,7 +224,7 @@ Upload Image Via REST And Verify Success
     ${image_version}=  Get Version Tar  ${image_file_path}
     ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
     Upload Image To BMC  /upload/image  data=${image_data}
-    ${ret}=  Verify Image Upload
+    ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
     Should Be True  ${ret}
 
 Upload Image Via TFTP And Verify Success
@@ -246,7 +245,7 @@ Upload Image Via TFTP And Verify Success
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Sleep  1 minute
     ${image_version}=  Get Image Version From TFTP Server  ${image_file_name}
-    ${ret}=  Verify Image Upload
+    ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
     Should Be True  ${ret}
 
 Upload Bad Image Via REST And Verify Failure
