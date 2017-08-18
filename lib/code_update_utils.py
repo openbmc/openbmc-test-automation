@@ -20,6 +20,34 @@ import variables as var
 from robot.libraries.BuiltIn import BuiltIn
 
 ###############################################################################
+def verify_no_duplicate_image_priorities(image_purpose):
+
+    r"""
+    Check that there are no active images with the same purpose and priority.
+
+    Description of argument(s):
+    image_purpose  The purpose that images must have to be checked for
+                   priority duplicates.
+    """
+
+    taken_priorities = {}
+    _, image_names = keyword.run_key("Get Software Objects  "
+                                     + "version_type=" + image_purpose)
+
+    for image_name in image_names:
+        _, image = keyword.run_key("Get Host Software Property  " + image_name)
+        if image["Activation"] != var.ACTIVE:
+            continue
+        image_priority = image["Priority"]
+        if image_priority in taken_priorities:
+            BuiltIn().fail("Found active images with the same priority.\n"
+                    + gp.sprint_vars(image, taken_priorities[image_priority]))
+            taken_priorities[image_priority] = image
+
+###############################################################################
+
+
+###############################################################################
 def get_non_running_bmc_software_object():
 
     r"""
