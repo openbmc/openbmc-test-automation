@@ -61,6 +61,7 @@ Get To Stable State
     Run Keyword If  '${CLEANUP_DIR_PATH}' != '${EMPTY}' and ${rc} == 0
     ...  Cleanup Dir
 
+    Delete Error Logs
 
 *** Keywords ***
 
