@@ -17,6 +17,8 @@ Library             SSHLibrary
 Library             String
 Test Teardown       FFDC On Test Case Fail
 
+Force Tags  User_Management
+
 *** Variables ***
 ${RANDOM_STRING_LENGTH}    ${8}
 ${VALID_PASSWORD}          abc123
