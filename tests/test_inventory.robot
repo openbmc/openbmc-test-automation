@@ -96,9 +96,6 @@ Verify Chassis Motherboard Properties
     # }
     ${properties}=  Get Inventory  system/chassis/motherboard
     Should Not Be Equal As Strings
-    ...  ${properties["data"]["Manufacturer"]}  0000000000000000
-    ...  msg=motherboard field invalid.
-    Should Not Be Equal As Strings
     ...  ${properties["data"]["PartNumber"]}  0000000
     ...  msg=motherboard part number invalid.
     Should Not Be Equal As Strings
@@ -452,10 +449,10 @@ Verify Inventory List Before And After Reboot
     [Documentation]  Verify Inventory list before and after reboot.
 
     Initiate Host Boot
-    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Booted
     ${inv_before}=  Get URL List  ${HOST_INVENTORY_URI}
     Initiate Host Reboot
-    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Booted
     ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
     Lists Should Be Equal  ${inv_before}  ${inv_after}
 
