@@ -10,7 +10,7 @@ some test output showing machine state:
 
 default_state:
   default_state[chassis]:                         On
-  default_state[boot_progress]:                   FW Progress, Starting OS
+  default_state[boot_progress]:                   OSStart
   default_state[host]:                            Running
   default_state[os_ping]:                         1
   default_state[os_login]:                        1
@@ -115,7 +115,7 @@ standby_match_state = DotDict([('rest', '^1$'),
 default_state = DotDict([('rest', '1'),
                          ('chassis', 'On'),
                          ('bmc', 'Ready'),
-                         ('boot_progress', 'FW Progress, Starting OS'),
+                         ('boot_progress', 'OSStart'),
                          ('host', 'Running'),
                          ('os_ping', '1'),
                          ('os_login', '1'),
@@ -125,7 +125,7 @@ default_state = DotDict([('rest', '1'),
 master_os_up_match = DotDict([('chassis', '^On$'),
                               ('bmc', '^Ready$'),
                               ('boot_progress',
-                               'FW Progress, Starting OS'),
+                               'FW Progress, Starting OS|OSStart'),
                               ('host', '^Running$')])
 
 
@@ -658,7 +658,7 @@ def check_state(match_state,
                       regular expression.  Example call from robot:
                       ${match_state}=  Create Dictionary  chassis=^On$
                       ...  bmc=^Ready$
-                      ...  boot_progress=^FW Progress, Starting OS$
+                      ...  boot_progress=^OSStart$
                       ${state}=  Check State  &{match_state}
     invert            If this flag is set, this function will succeed if the
                       states do NOT match.
@@ -860,16 +860,7 @@ def wait_for_comm_cycle(start_boot_seconds,
     # that the uptime is less than the elapsed boot time.  Further proof that
     # a reboot has indeed occurred (vs random network instability giving a
     # false positive.
-
-    # By waiting for a valid float and int for uptime and epoch_seconds, we
-    # effectively retry on failure to obtain data from the BMC.
-    float_regex = '[0-9]+\.[0-9]+'
-    int_regex = '[0-9]+'
-    match_state = anchor_state(DotDict([('uptime', float_regex),
-                                        ('epoch_seconds', int_regex)]))
-
-    state = wait_state(match_state, wait_time="4 mins", interval="0 seconds",
-                       quiet=1)
+    state = get_state(req_states=['uptime', 'epoch_seconds'], quiet=quiet)
 
     elapsed_boot_time = int(state['epoch_seconds']) - start_boot_seconds
     gp.qprint_var(elapsed_boot_time)
