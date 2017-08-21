@@ -79,9 +79,11 @@ REST Host Code Update
 Post Update Boot To OS
     [Documentation]  Boot the host OS
     [Tags]  Post_Update_Boot_To_OS
+    [Teardown]  Stop SOL Console Logging
 
     Run Keyword Unless  '${PREV_TEST_STATUS}' == 'PASS'
     ...  Fail  Code update failed. No need to boot to OS.
+    Start SOL Console Logging
     REST Power On
 
 
