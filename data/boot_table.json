@@ -6,13 +6,15 @@
         "start": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Off$",
+# TO-DO: There is a known product code bug where boot_progress does not go to
+# 'Off'.  Once that bug is fixed, this code may be commented back in.
+#           "boot_progress": "^Off$",
             "host": "^Off$"
         },
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -28,13 +30,13 @@
         "start": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Off$",
+#           "boot_progress": "^Off$",
             "host": "^Off$"
         },
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -57,7 +59,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Off$",
+#           "boot_progress": "^Off$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -77,7 +79,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Off$",
+#           "boot_progress": "^Off$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -97,7 +99,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Off$",
+#           "boot_progress": "^Off$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -113,7 +115,7 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -122,7 +124,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Off$",
+#           "boot_progress": "^Off$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -142,7 +144,7 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -151,7 +153,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -167,7 +169,7 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -176,7 +178,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -195,7 +197,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Off$",
+#           "boot_progress": "^Off$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -207,7 +209,7 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -216,7 +218,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -236,7 +238,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Off$",
+#           "boot_progress": "^Off$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -250,7 +252,7 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -259,7 +261,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -280,7 +282,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Off$",
+#           "boot_progress": "^Off$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -296,7 +298,7 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -305,7 +307,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -322,7 +324,7 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -331,7 +333,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -347,7 +349,7 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -356,7 +358,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -372,7 +374,7 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -381,7 +383,7 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^FW Progress, Starting OS$",
+#           "boot_progress": "^FW Progress, Starting OS|OSStart$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",

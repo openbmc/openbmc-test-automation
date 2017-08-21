@@ -411,7 +411,7 @@ Is System State Host Booted
 Is OS Starting
     [Documentation]  Check if boot progress is OS starting.
     ${boot_progress}=  Get Boot Progress
-    Should Be Equal  ${boot_progress}  FW Progress, Starting OS
+    Should Be Equal  ${boot_progress}  OSStart
 
 Is OS Off
     [Documentation]  Check if boot progress is "Off".
@@ -423,7 +423,7 @@ Get Boot Progress To OS Starting State
     ...  Starting OS'.
 
     ${boot_progress}=  Get Boot Progress
-    Run Keyword If  '${boot_progress}' == 'FW Progress, Starting OS'
+    Run Keyword If  '${boot_progress}' == 'OSStart'
     ...  Log  Host is already in OS starting state
     ...  ELSE
     ...  Run Keywords  Initiate Host PowerOff  AND  Initiate Host Boot
