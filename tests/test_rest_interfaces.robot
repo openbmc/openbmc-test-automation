@@ -4,8 +4,10 @@ Documentation     Verify REST services Get/Put/Post/Delete.
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/resource.txt
+Resource          ../lib/utils.robot
 Library           Collections
-Test Teardown     FFDC On Test Case Fail
+Suite Setup       Check Basic BMC Performance
+Test Teardown     Check Basic BMC Performance
 
 *** Variables ***
 
@@ -342,8 +344,19 @@ Delete Response Code
     [Tags]  Delete_Response_Codes
     [Template]  Execute Delete And Check Response
 
-
 *** Keywords ***
+
+Check Basic BMC Performance 
+
+    [Documentation]  Check performance of memory, CPU & file system of BMC.
+    Open Connection And Log In
+    Check BMC CPU Performance
+    Check BMC Mem Performance
+    Check BMC File System Performance
+    Check For Core Dumps
+    Close Connection
+    FFDC On Test Case Fail
+
 
 Execute Get And Check Response
     [Documentation]  Request "Get" url path and expect REST response code.
