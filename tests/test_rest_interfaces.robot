@@ -4,12 +4,27 @@ Documentation     Verify REST services Get/Put/Post/Delete.
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/resource.txt
+Resource          ../lib/utils.robot
 Library           Collections
 Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
 
 *** Test Cases ***
+
+Test Basic BMC Performance Before REST Test
+    [Documentation]   Check performance of memory, CPU & file system of BMC.
+    [Tags]  Test_Basic_BMC_Performance_Before_REST_Test
+    Open Connection And Log In
+    Check BMC CPU Performance
+    Check BMC Mem Performance
+    Check BMC File System Performance
+
+Check Core Dump Exist Before REST Test
+    [Documentation]  Check core dump existence on BMC before REST execution.
+    [Tags]  Check_Core_Dump_Exist_Before_REST_Test
+    Check For Core Dumps
+
 
 REST Login Session To BMC
     [Documentation]  Test REST session log-in.
@@ -342,6 +357,19 @@ Delete Response Code
     [Tags]  Delete_Response_Codes
     [Template]  Execute Delete And Check Response
 
+
+Test Basic BMC Performance After REST Test
+    [Documentation]   Check performance of memory, CPU & file system of BMC.
+    [Tags]  Test_Basic_BMC_Performance_After_REST_Test
+    Open Connection And Log In
+    Check BMC CPU Performance
+    Check BMC Mem Performance
+    Check BMC File System Performance
+
+Check Core Dump Exist After REST Test
+    [Documentation]  Check core dump existence on BMC after REST execution.
+    [Tags]  Check_Core_Dump_Exist_After_REST_Test
+    Check For Core Dumps
 
 *** Keywords ***
 
