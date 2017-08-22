@@ -42,7 +42,6 @@ Verify User Initiated Dump Size
     Should Be True  0 < ${dump_size} < 500000
 
 
-
 Create Two User Initiated Dump And Delete One
     [Documentation]  Create two dumps and delete the first.
     [Tags]  Create_Two_User_Initiated_Dump_And_Delete_One
@@ -57,6 +56,26 @@ Create Two User Initiated Dump And Delete One
 
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/${dump_id_2}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Create And Delete BMC Dump Multiple Times
+    [Documentation]  Create and delete BMC dump multiple times.
+    [Tags]  Create_And_Delete_BMC_Dump_Multiple_Times
+
+    :FOR  ${INDEX}  IN RANGE  1  5
+    \  ${dump_id}=  Create User Initiated Dump
+    \  Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Check Dump Existence  ${dump_id}
+    \  Delete BMC Dump  ${dump_id}
+
+
+Delete All BMC Dumps And Verify
+    [Documentation]  Delete all BMC dumps and verify.
+    [Tags]  Delete_All_BMC_Dumps_And_Verify
+
+    Delete All Dumps
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 
 *** Keywords ***
