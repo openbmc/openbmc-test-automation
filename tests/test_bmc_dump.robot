@@ -32,14 +32,14 @@ Delete User Initiated BMC Dump And Verify
 
 
 Verify User Initiated Dump Size
-    [Documentation]  Verify user Initiated BMC dump size is under 500k.
+    [Documentation]  Verify user Initiated BMC dump size is under 200k.
     [Tags]  Verify_User_Initiated_Dump_Size
 
     ${dump_id}=  Create User Initiated Dump
 
     ${dump_size}=  Read Attribute  ${DUMP_ENTRY_URI}/${dump_id}  Size
-    # Max size for dump is 500k
-    Should Be True  0 < ${dump_size} < 500000
+    # Max size for dump is 200k
+    Should Be True  0 < ${dump_size} < 20000
 
 
 
