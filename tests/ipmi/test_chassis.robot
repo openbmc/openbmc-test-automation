@@ -43,7 +43,7 @@ IPMI Chassis Restore Power Policy
 
      ${initial_power_policy}=  Read Attribute  ${HOST_SETTING}  power_policy
 
-     Set BMC Power Policy  ALWAYS_POWER_ON
+     Set BMC Power Policy  ${ALWAYS_POWER_ON}
      ${resp}=  Run IPMI Standard Command  chassis status
      ${power_status}=
      ...  Get Lines Containing String  ${resp}  Power Restore Policy
@@ -55,7 +55,7 @@ IPMI Chassis Restore Power Policy
      ...  Get Lines Containing String  ${resp}  Power Restore Policy
      Should Contain  ${power_status}  previous
 
-     Set BMC Power Policy  LEAVE_OFF
+     Set BMC Power Policy  ${ALWAYS_POWER_OFF}
      ${resp}=    Run IPMI Standard Command  chassis status
      ${power_status}=
      ...  Get Lines Containing String  ${resp}  Power Restore Policy
