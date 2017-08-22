@@ -2,6 +2,7 @@
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
+Library                 String
 Library                 DateTime
 Library                 Process
 Library                 OperatingSystem
@@ -10,6 +11,7 @@ Library                 gen_robot_print.py
 Library                 gen_cmd.py
 Library                 gen_robot_keyword.py
 Library                 bmc_ssh_utils.py
+Library                 utils.py
 
 *** Variables ***
 ${pflash_cmd}           /usr/sbin/pflash -r /dev/stdout -P VERSION
@@ -30,7 +32,7 @@ ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
 ${HOST_SETTING}    ${SETTINGS_URI}host0
 # /run/initramfs/ro associate filesystem  should be 100% full always
 ${bmc_file_system_usage_cmd}=
-...  df -h | grep -v /run/initramfs/ro | cut -c 52-54 | grep 100 | wc -l
+...  df -h | cut -c 52-54 | grep 100 | wc -l
 
 ${BOOT_TIME}     ${0}
 ${BOOT_COUNT}    ${0}
@@ -39,6 +41,15 @@ ${devicetree_base}  /sys/firmware/devicetree/base/model
 
 # Initialize default debug value to 0.
 ${DEBUG}         ${0}
+
+# These variables are used to straddle between new and old methods of setting
+# values.
+${boot_prog_method}     ${EMPTY}
+
+${power_policy_setup}             ${0}
+${bmc_power_policy_method}        ${EMPTY}
+@{valid_power_policy_vars}        RESTORE_LAST_STATE  ALWAYS_POWER_ON
+...                               ALWAYS_POWER_OFF
 
 *** Keywords ***
 
@@ -89,11 +100,77 @@ Ping Host
     Should be equal     ${RC}   ${0}
 
 Get Boot Progress
+    [Documentation]  Get the boot progress and return it.
     [Arguments]  ${quiet}=${QUIET}
+
+    # Description of argument(s):
+    # quiet   Indicates whether this keyword should run without any output to
+    #         the console.
+
+    Set Boot Progress Method
+    ${state}=  Run Keyword If  '${boot_prog_method}' == 'New'
+    ...      New Get Boot Progress  quiet=${quiet}
+    ...  ELSE
+    ...      Old Get Boot Progress  quiet=${quiet}
+
+    [Return]  ${state}
+
+Set Boot Progress Method
+    [Documentation]  Set the boot_prog_method to either 'Old' or 'New'.
+
+    # The boot progress data has moved from an 'org' location to an 'xyz'
+    # location.  This keyword will determine whether the new method of getting
+    # the boot progress is valid and will set the global boot_prog_method
+    # variable accordingly.  If boot_prog_method is already set (either by a
+    # prior call to this function or via a -v parm), this keyword will simply
+    # return.
+
+    # Note:  There are interim builds that contain boot_progress in both the old
+    # and the new location values.  It is nearly impossible for this keyword to
+    # determine whether the old boot_progress or the new one is active.  When
+    # using such builds where the old boot_progress is active, the only recourse
+    # users will have is that they may specify -v boot_prog_method:Old to force
+    # old behavior on such builds.
+
+    Run Keyword If  '${boot_prog_method}' != '${EMPTY}'  Return From Keyword
+
+    ${new_status}  ${new_value}=  Run Keyword And Ignore Error
+    ...  New Get Boot Progress
+    # If the new style read fails, the method must necessarily be "Old".
+    Run Keyword If  '${new_status}' == 'PASS'
+    ...  Run Keywords
+    ...  Set Global Variable  ${boot_prog_method}  New  AND
+    ...  Rqpvars  boot_prog_method  AND
+    ...  Return From Keyword
+
+    # Default method is "Old".
+    Set Global Variable  ${boot_prog_method}  Old
+    Rqpvars  boot_prog_method
+
+Old Get Boot Progress
+    [Documentation]  Get the boot progress the old way (via org location).
+    [Arguments]  ${quiet}=${QUIET}
+
+    # Description of argument(s):
+    # quiet   Indicates whether this keyword should run without any output to
+    #         the console.
 
     ${state}=  Read Attribute  ${OPENBMC_BASE_URI}sensors/host/BootProgress
     ...  value  quiet=${quiet}
+
     [Return]  ${state}
+
+New Get Boot Progress
+    [Documentation]  Get the boot progress the new way (via xyz location).
+    [Arguments]  ${quiet}=${QUIET}
+
+    # Description of argument(s):
+    # quiet   Indicates whether this keyword should run without any output to
+    #         the console.
+
+    ${state}=  Read Attribute  ${HOST_STATE_URI}  BootProgress  quiet=${quiet}
+
+    [Return]  ${state.rsplit('.', 1)[1]}
 
 Is Power On
     ${state}=  Get Power State
@@ -138,27 +215,31 @@ Initiate OS Host Power Off
     # os_username  The username to be used to sign in to the OS.
     # os_password  The password to be used to sign in to the OS.
 
-    SSHLibrary.Open connection  ${os_host}
-    Login  ${os_username}  ${os_password}
-    ${cmd_buf}  Catenate  shutdown
-    Start Command  ${cmd_buf}
-    SSHLibrary.Close Connection
+    ${cmd_buf}=  Run Keyword If  '${os_username}' == 'root'
+    ...      Set Variable  shutdown
+    ...  ELSE
+    ...      Set Variable  echo ${os_password} | sudo -S shutdown
+
+    ${output}  ${stderr}  ${rc}=  OS Execute Command
+    ...  ${cmd_buf}  fork=${1}
 
 Initiate OS Host Reboot
     [Documentation]  Initiate an OS reboot.
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}
 
-    # Description of arguments:
-    # os_host      The DNS name or IP of the OS.
+    # Description of argument(s):
+    # os_host      The host name or IP address of the OS.
     # os_username  The username to be used to sign in to the OS.
     # os_password  The password to be used to sign in to the OS.
 
-    SSHLibrary.Open connection  ${os_host}
-    Login  ${os_username}  ${os_password}
-    ${cmd_buf}  Catenate  reboot
-    Start Command  ${cmd_buf}
-    SSHLibrary.Close Connection
+    ${cmd_buf}=  Run Keyword If  '${os_username}' == 'root'
+    ...      Set Variable  reboot
+    ...  ELSE
+    ...      Set Variable  echo ${os_password} | sudo -S reboot
+
+    ${output}  ${stderr}  ${rc}=  OS Execute Command
+    ...  ${cmd_buf}  fork=${1}
 
 Initiate Auto Reboot
     [Documentation]  Initiate an auto reboot.
@@ -335,7 +416,7 @@ Is System State Host Booted
 Is OS Starting
     [Documentation]  Check if boot progress is OS starting.
     ${boot_progress}=  Get Boot Progress
-    Should Be Equal  ${boot_progress}  FW Progress, Starting OS
+    Should Be Equal  ${boot_progress}  OSStart
 
 Is OS Off
     [Documentation]  Check if boot progress is "Off".
@@ -347,7 +428,7 @@ Get Boot Progress To OS Starting State
     ...  Starting OS'.
 
     ${boot_progress}=  Get Boot Progress
-    Run Keyword If  '${boot_progress}' == 'FW Progress, Starting OS'
+    Run Keyword If  '${boot_progress}' == 'OSStart'
     ...  Log  Host is already in OS starting state
     ...  ELSE
     ...  Run Keywords  Initiate Host PowerOff  AND  Initiate Host Boot
@@ -435,6 +516,26 @@ Create OS Console Command String
 
     [Return]  ${cmd_buf}
 
+Get SOL Console Pid
+    [Documentation]  Get the pid of the active sol conole job.
+
+    # Find the pid of the active system console logging session (if any).
+    ${search_string}=  Create OS Console Command String
+    # At least in some cases, ps output does not show double quotes so we must
+    # replace them in our search string with the regexes to indicate that they
+    # are optional.
+    ${search_string}=  Replace String  ${search_string}  "  ["]?
+    ${cmd_buf}=  Catenate  echo $(ps -ef | egrep '${search_string}'
+    ...  | egrep -v grep | cut -c10-14)
+    Rdpissuing  ${cmd_buf}
+    ${rc}  ${os_con_pid}=  Run And Return Rc And Output  ${cmd_buf}
+    Rdpvars  os_con_pid
+    # If rc is not zero it just means that there is no OS Console process
+    # running.
+
+    [Return]  ${os_con_pid}
+
+
 Stop SOL Console Logging
     [Documentation]  Stop system console logging and return log output.
     [Arguments]  ${log_file_path}=${EMPTY}
@@ -457,15 +558,8 @@ Stop SOL Console Logging
     #                 data to the caller as a unicode string.
 
     ${log_file_path}=  Create OS Console File Path  ${log_file_path}
-    # Find the pid of the active system console logging session (if any).
-    ${search_string}=  Create OS Console Command String
-    ${cmd_buf}=  Catenate  echo $(ps -ef | egrep '${search_string}'
-    ...  | egrep -v grep | cut -c10-14)
-    Rdpissuing  ${cmd_buf}
-    ${rc}  ${os_con_pid}=  Run And Return Rc And Output  ${cmd_buf}
-    Rdpvars  os_con_pid
-    # If rc is not zero it just means that there is no OS Console process
-    # running.
+
+    ${os_con_pid}=  Get SOL Console Pid
 
     ${cmd_buf}=  Catenate  kill -9 ${os_con_pid}
     Run Keyword If  '${os_con_pid}' != '${EMPTY}'  Rdpissuing  ${cmd_buf}
@@ -512,12 +606,20 @@ Start SOL Console Logging
     ${sub_cmd_buf}=  Create OS Console Command String
     # Routing stderr to stdout so that any startup error text will go to the
     # output file.
+    # TODO: Doesn't work with tox so reverting temporarily.
+    # nohup detaches the process completely from our pty.
+    #${cmd_buf}=  Catenate  nohup ${sub_cmd_buf} &> ${log_file_path} &
     ${cmd_buf}=  Catenate  ${sub_cmd_buf} > ${log_file_path} 2>&1 &
     Rdpissuing  ${cmd_buf}
     ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
     # Because we are forking this command, we essentially will never get a
     # non-zero return code or any output.
     Should Be Equal  ${rc}  ${0}
+
+    Sleep  1
+    ${os_con_pid}=  Get SOL Console Pid
+
+    Should Not Be Empty  ${os_con_pid}
 
     [Return]  ${log_output}
 
@@ -643,12 +745,17 @@ BMC Mem Performance Check
     Should be true  ${bmc_mem_percentage} > 10
 
 BMC File System Usage Check
-    [Documentation]   Check the file system space. None should be 100% full
-    ...   except /run/initramfs/ro
+    [Documentation]   Check the file system space. 4 file system should be
+    ...  100% full which is expected
+    # Filesystem                Size      Used Available Use% Mounted on
+    # /dev/root                14.4M     14.4M         0 100% / 
+    # /dev/ubiblock0_0         14.4M     14.4M         0 100% /media/rofs-c9249b0e
+    # /dev/ubiblock8_0         19.6M     19.6M         0 100% /media/pnor-ro-8764baa3
+    # /dev/ubiblock4_0         14.4M     14.4M         0 100% /media/rofs-407816c
     ${bmc_fs_usage_output}  ${stderr}=   Execute Command
     ...   ${bmc_file_system_usage_cmd}  return_stderr=True
     Should Be Empty  ${stderr}
-    Should Be True  ${bmc_fs_usage_output}==0
+    Should Be True  ${bmc_fs_usage_output}==4
 
 Check BMC CPU Performance
     [Documentation]   Minimal 10% of proc should be free in 3 sample
@@ -724,26 +831,64 @@ Prune Journal Log
 
 Set BMC Power Policy
     [Documentation]   Set the given BMC power policy.
-    [arguments]  ${power_restore_uri}=${POWER_RESTORE_URI}
-    ...          ${policy_attribute}=PowerRestorePolicy
-    ...          ${policy}=${RESTORE_LAST_STATE}
+    [Arguments]   ${policy}
+
+    # Note that this function will translate the old style "RESTORE_LAST_STATE"
+    # policy to the new style "xyz.openbmc_project.Control.Power.RestorePolicy.
+    # Policy.Restore" for you.
 
     # Description of argument(s):
-    # power_restore_uri    Power restore policy url.
-    #                      By default "/xyz/openbmc_project/control/host0/power_restore_policy/".
-    # policy               Power restore policy.
-    #                      By default ""xyz.openbmc_project.Control.Power.RestorePolicy.Policy.Restore".
+    # policy    Power restore policy (e.g "RESTORE_LAST_STATE",
+    #           ${RESTORE_LAST_STATE}).
+
+    # Set the bmc_power_policy_method to either 'Old' or 'New'.
+    Set Power Policy Method
+    # This translation helps bridge between old and new method for calling.
+    ${policy}=  Translate Power Policy Value  ${policy}
+    # Run the appropriate keyword.
+    Run Key  ${bmc_power_policy_method} Set Power Policy \ ${policy}
+    ${currentPolicy}=  Get System Power Policy
+    Should Be Equal    ${currentPolicy}   ${policy}
+
+New Set Power Policy
+    [Documentation]   Set the given BMC power policy (new method).
+    [Arguments]   ${policy}
+
+    # Description of argument(s):
+    # policy    Power restore policy (e.g. ${RESTORE_LAST_STATE}).
 
     ${valueDict}=  Create Dictionary  data=${policy}
     Write Attribute
-    ...  ${power_restore_uri}  ${policy_attribute}  data=${valueDict}
-    ${currentPolicy}=
-    ...  Read Attribute  ${power_restore_uri}  ${policy_attribute}
-    Should Be Equal    ${currentPolicy}   ${policy}
+    ...  ${POWER_RESTORE_URI}  PowerRestorePolicy  data=${valueDict}
+
+Old Set Power Policy
+    [Documentation]   Set the given BMC power policy (old method).
+    [Arguments]   ${policy}
+
+    # Description of argument(s):
+    # policy    Power restore policy (e.g. "RESTORE_LAST_STATE").
+
+    ${valueDict}=     create dictionary  data=${policy}
+    Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
 
 Get System Power Policy
     [Documentation]  Get the BMC power policy.
+
+    # Set the bmc_power_policy_method to either 'Old' or 'New'.
+    Set Power Policy Method
+    ${cmd_buf}=  Create List  ${bmc_power_policy_method} Get Power Policy
+    # Run the appropriate keyword.
+    ${currentPolicy}=  Run Keyword  @{cmd_buf}
+    [Return]  ${currentPolicy}
+
+New Get Power Policy
+    [Documentation]  Get the BMC power policy (new method).
     ${currentPolicy}=  Read Attribute  ${POWER_RESTORE_URI}  PowerRestorePolicy
+    [Return]  ${currentPolicy}
+
+Old Get Power Policy
+    [Documentation]  Get the BMC power policy (old method).
+    ${currentPolicy}=  Read Attribute  ${HOST_SETTING}  power_policy
     [Return]  ${currentPolicy}
 
 Get Auto Reboot
