@@ -12,68 +12,6 @@ Test Teardown       Post Test Case Execution
 
 *** Test Cases ***
 
-Verify SOL During Boot
-    [Documentation]  Verify SOL during boot.
-    [Tags]  Verify_SOL_During_Boot
-
-    ${current_state}=  Get Host State Via External IPMI
-    Run Keyword If  '${current_state}' == 'on'
-    ...  Initiate Host PowerOff Via External IPMI
-    Initiate Host Boot Via External IPMI  wait=${0}
-
-    Activate SOL Via IPMI
-    Wait Until Keyword Succeeds  10 mins  30 secs
-    ...  Check IPMI SOL Output Content  Petitboot
-
-Verify Deactivate Non Existing SOL
-    [Documentation]  Verify deactivate non existing SOL session.
-    [Tags]  Verify_Deactivate_Non_Existing_SOL
-
-    ${resp}=  Deactivate SOL Via IPMI
-    Should Contain  ${resp}  SOL payload already de-activated
-    ...  case_insensitive=True
-
-
-Set Valid SOL Retry Count
-    # Description of template fields:
-    # Setting name    Min valid value    Max valid value
-    retry-count       0                  7
-    [Documentation]  Verify valid SOL's retry count via IPMI.
-    [Tags]  Set_Valid_SOL_Retry_Count
-
-    [Template]  Verify SOL Setting
-
-
-Set Valid SOL Retry Interval
-    # Description of template fields:
-    # Setting name    Min valid value    Max valid value
-    retry-interval    0                  255
-    [Documentation]  Verify valid SOL's retry interval via IPMI.
-    [Tags]  Set_Valid_SOL_Retry_Interval
-
-    [Template]  Verify SOL Setting
-
-
-Set Valid SOL Character Accumulate Level
-    # Description of template fields:
-    # Setting name              Min valid value    Max valid value
-    character-accumulate-level  1                  255
-    [Documentation]  Verify valid SOL's character accumulate level via IPMI.
-    [Tags]  Set_Valid_SOL_Character_Accumulate_Level
-
-    [Template]  Verify SOL Setting
-
-
-Set Valid SOL Character Send Threshold
-    # Description of template fields:
-    # Setting name              Min valid value    Max valid value
-    character-send-threshold    0                  255
-    [Documentation]  Verify valid SOL's character send threshold via IPMI.
-    [Tags]  Set_Valid_SOL_Character_Send_Threshold
-
-    [Template]  Verify SOL Setting
-
-
 Set SOL Enabled
     [Documentation]  Verify enabling SOL via IPMI.
     [Tags]  Set_SOL_Enabled
@@ -176,6 +114,67 @@ Set Invalid SOL Character Send Threshold
     ...  sol set character-send-threshold ${value}
     Should Contain  ${msg}  Invalid value  ignore_case=True
 
+
+Verify SOL During Boot
+    [Documentation]  Verify SOL during boot.
+    [Tags]  Verify_SOL_During_Boot
+
+    ${current_state}=  Get Host State Via External IPMI
+    Run Keyword If  '${current_state}' == 'on'
+    ...  Initiate Host PowerOff Via External IPMI
+    Initiate Host Boot Via External IPMI  wait=${0}
+
+    Activate SOL Via IPMI
+    Wait Until Keyword Succeeds  10 mins  30 secs
+    ...  Check IPMI SOL Output Content  Petitboot
+
+Verify Deactivate Non Existing SOL
+    [Documentation]  Verify deactivate non existing SOL session.
+    [Tags]  Verify_Deactivate_Non_Existing_SOL
+
+    ${resp}=  Deactivate SOL Via IPMI
+    Should Contain  ${resp}  SOL payload already de-activated
+    ...  case_insensitive=True
+
+
+Set Valid SOL Retry Count
+    # Description of template fields:
+    # Setting name    Min valid value    Max valid value
+    retry-count       0                  7
+    [Documentation]  Verify valid SOL's retry count via IPMI.
+    [Tags]  Set_Valid_SOL_Retry_Count
+
+    [Template]  Verify SOL Setting
+
+
+Set Valid SOL Retry Interval
+    # Description of template fields:
+    # Setting name    Min valid value    Max valid value
+    retry-interval    0                  255
+    [Documentation]  Verify valid SOL's retry interval via IPMI.
+    [Tags]  Set_Valid_SOL_Retry_Interval
+
+    [Template]  Verify SOL Setting
+
+
+Set Valid SOL Character Accumulate Level
+    # Description of template fields:
+    # Setting name              Min valid value    Max valid value
+    character-accumulate-level  1                  255
+    [Documentation]  Verify valid SOL's character accumulate level via IPMI.
+    [Tags]  Set_Valid_SOL_Character_Accumulate_Level
+
+    [Template]  Verify SOL Setting
+
+
+Set Valid SOL Character Send Threshold
+    # Description of template fields:
+    # Setting name              Min valid value    Max valid value
+    character-send-threshold    0                  255
+    [Documentation]  Verify valid SOL's character send threshold via IPMI.
+    [Tags]  Set_Valid_SOL_Character_Send_Threshold
+
+    [Template]  Verify SOL Setting
 
 *** Keywords ***
 
