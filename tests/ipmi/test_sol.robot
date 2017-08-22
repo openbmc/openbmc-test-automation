@@ -5,6 +5,7 @@ Resource            ../../lib/ipmi_client.robot
 Resource            ../../lib/openbmc_ffdc.robot
 Library             ../../lib/ipmi_utils.py
 
+Test Setup          Start SOL Console Logging
 Test Teardown       Post Test Case Execution
 
 *** Variables ***
@@ -272,5 +273,7 @@ Post Test Case Execution
     [Documentation]  Do the post test teardown.
 
     Deactivate SOL Via IPMI
+    ${sol_log}=  Stop SOL Console Logging
+    Log   ${sol_log}
     FFDC On Test Case Fail
     Restore Default SOL Configuration
