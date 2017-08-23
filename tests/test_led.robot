@@ -48,6 +48,8 @@ Test Power LED And Verify Via REST
     # LED Name  LED State
     rear_power       On
     rear_power       Off
+    front_power      On
+    front_power      Off
 
     [Tags]  Test_Power_LED_And_Verify_Via_REST
     [Template]  Set System LED State
@@ -57,35 +59,43 @@ Test Fault LED And Verify Via REST
     # LED Name  LED State
     rear_fault       On
     rear_fault       Off
+    front_fault      On
+    front_fault      Off
 
     [Tags]  Test_Fault_LED_And_Verify_Via_REST
     [Template]  Set System LED State
 
 Test Rear Identify LED And Verify Via REST
-    [Documentation]  Turn On/Off rear identify LED and verify via REST.
+    [Documentation]  Turn On/Off identify LED and verify via REST.
     #LED Name  LED State
     rear_id    On
     rear_id    Off
+    front_id   On
+    front_id   Off
 
     [Tags]  Test_Rear_Identify_LED_And_Verify_Via_REST
     [Template]  Set System LED State
 
 
 Verify Rear Power LED With Host Power Off
-    [Documentation]  Verify rear power LED state with host power off.
+    [Documentation]  Verify power LED state with host power off.
     [Tags]  Verify_Rear_Power_LED_With_Host_Power_Off
 
     Initiate Host PowerOff
     ${resp}=  Get System LED State  rear_power
     Should Be Equal  ${resp}  Off
+    ${resp}=  Get System LED State  front_power
+    Should Be Equal  ${resp}  Off
 
 
 Verify Rear Power LED With Host Power On
-    [Documentation]  Verify rear power LED state with host power on.
+    [Documentation]  Verify power LED state with host power on.
     [Tags]  Verify_Rear_Power_LED_With_Host_Power_On
 
     Initiate Host Boot
     ${resp}=  Get System LED State  rear_power
+    Should Be Equal  ${resp}  On
+    ${resp}=  Get System LED State  front_power
     Should Be Equal  ${resp}  On
 
 *** Keywords ***
