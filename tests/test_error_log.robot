@@ -333,6 +333,16 @@ Verify IPMI SEL Last Add Time
     # is less or equals to 2 seconds.
     Should Be True  ${time-diff} <= 2
 
+Cap Number of Error Logs
+    [Documentation]  Cap number of error logs.
+    [Tags]  Cap_Number_of_Error_Log
+
+    Delete Error Logs And Verify
+    ${cmd}=  Set Variable  for i in {1..101}; do logging-test -c AutoTestSimple;done
+    Execute Command On BMC  ${cmd}
+    ${count}=  Count Error Entries
+    Run Keyword If  ${count} > 100
+    ...  Fail  Error logs created exceeded max capacity 100.
 
 *** Keywords ***
 
@@ -408,6 +418,15 @@ Create Test Error Log
     # }
 
     Execute Command On BMC  logging-test -c AutoTestSimple
+
+Count Error Entries
+    [Documentation]  Count Error Entries
+
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    ${count}=  Get Length  ${jsondata["data"]}
+    [Return]  ${count}
 
 Verify Test Error Log
     [Documentation]  Verify test error log entries.
