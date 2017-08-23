@@ -24,6 +24,8 @@ Verify Boot Count After BMC Reboot
 
     Set BMC Boot Count  ${0}
     Initiate BMC Reboot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
     ${boot_count}=  Get BMC Boot Count
     Should Be Equal  ${boot_count}  ${1}
     ...  msg=Boot count is not incremented.
