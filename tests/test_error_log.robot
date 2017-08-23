@@ -333,6 +333,15 @@ Verify IPMI SEL Last Add Time
     # is less or equals to 2 seconds.
     Should Be True  ${time-diff} <= 2
 
+Cap Number of Error Logs
+    [Documentation]  Cap number of error logs.
+    [Tags]  Cap_Number_of_Error_Log
+
+    Delete Error Logs And Verify
+    Create Test Error Logs
+    ${count}=  Count Error Log
+    Run Keyword If  ${count} > 100
+    ...  Log  Number of error logs created cannot exceed 100
 
 *** Keywords ***
 
@@ -408,6 +417,32 @@ Create Test Error Log
     # }
 
     Execute Command On BMC  logging-test -c AutoTestSimple
+
+Create Test Error Logs
+    [Documentation]  Generate test error logs.
+
+    # Test error log entry example:
+    # "/xyz/openbmc_project/logging/entry/1":  {
+    #     "AdditionalData": [
+    #         "STRING=FOO"
+    #     ],
+    #     "Id": 1,
+    #     "Message": "example.xyz.openbmc_project.Example.Elog.AutoTestSimple",
+    #     "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #     "Timestamp": 1487743963328,
+    #     "associations": []
+    # }
+
+    Execute Command On BMC  for i in {1..101}; do logging-test -c AutoTestSimple;done
+
+Count Error Logs
+    [Documentation]  Count Error Logs
+
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    ${count}=  Get Length  ${jsondata["data"]}
+    [Return]  ${count}
 
 Verify Test Error Log
     [Documentation]  Verify test error log entries.
