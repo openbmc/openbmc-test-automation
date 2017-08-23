@@ -14,7 +14,7 @@ Force Tags        System_LED
 *** Variables ***
 
 
-*** Test Cases ***
+*** Comments ***
 
 Test Heartbeat LED And Verify Via REST
     [Documentation]  Turn On Off heartbeat LED and verify via REST.
@@ -43,11 +43,15 @@ Test Identify LED And Verify Via REST
     [Tags]  Test_Identify_LED_And_Verify_Via_REST
     [Template]  Set System LED State
 
+*** Test Cases ***
+
 Test Power LED And Verify Via REST
     [Documentation]  Turn On/Off power LED and verify via REST.
     # LED Name  LED State
     rear_power       On
     rear_power       Off
+    front_power      On
+    front_power      Off
 
     [Tags]  Test_Power_LED_And_Verify_Via_REST
     [Template]  Set System LED State
@@ -57,6 +61,8 @@ Test Fault LED And Verify Via REST
     # LED Name  LED State
     rear_fault       On
     rear_fault       Off
+    front_fault      On
+    front_fault      Off
 
     [Tags]  Test_Fault_LED_And_Verify_Via_REST
     [Template]  Set System LED State
@@ -66,27 +72,29 @@ Test Rear Identify LED And Verify Via REST
     #LED Name  LED State
     rear_id    On
     rear_id    Off
+    front_id   On
+    front_id   Off
 
     [Tags]  Test_Rear_Identify_LED_And_Verify_Via_REST
     [Template]  Set System LED State
 
 
-Verify Rear Power LED With Host Power Off
-    [Documentation]  Verify rear power LED state with host power off.
-    [Tags]  Verify_Rear_Power_LED_With_Host_Power_Off
+#Verify Rear Power LED With Host Power Off
+#    [Documentation]  Verify rear power LED state with host power off.
+#    [Tags]  Verify_Rear_Power_LED_With_Host_Power_Off
 
-    Initiate Host PowerOff
-    ${resp}=  Get System LED State  rear_power
-    Should Be Equal  ${resp}  Off
+#    Initiate Host PowerOff
+#    ${resp}=  Get System LED State  rear_power
+#    Should Be Equal  ${resp}  Off
 
 
-Verify Rear Power LED With Host Power On
-    [Documentation]  Verify rear power LED state with host power on.
-    [Tags]  Verify_Rear_Power_LED_With_Host_Power_On
+#Verify Rear Power LED With Host Power On
+#    [Documentation]  Verify rear power LED state with host power on.
+#    [Tags]  Verify_Rear_Power_LED_With_Host_Power_On
 
-    Initiate Host Boot
-    ${resp}=  Get System LED State  rear_power
-    Should Be Equal  ${resp}  On
+#    Initiate Host Boot
+#    ${resp}=  Get System LED State  rear_power
+#    Should Be Equal  ${resp}  On
 
 *** Keywords ***
 
