@@ -14,7 +14,7 @@ Test Teardown       Close All Connections
 Suite Teardown      Clear Existing Error Logs
 
 ***Variables***
-${target_device_path}  /sys/devices/platform/fsi-master/slave@00:00
+${target_device_path}  /sys/devices/platform/gpio-fsi/fsi0/slave@00:00/raw
 
 *** Test Cases ***
 
@@ -254,7 +254,7 @@ Create Test Error With Callout
     # },
 
     Execute Command On BMC
-    ...  callout-test /sys/devices/platform/fsi-master/slave@00:00
+    ...  callout-test ${target_device_path}
 
 Verify Test Error Log And Callout
     [Documentation]  Verify test error log entries.
