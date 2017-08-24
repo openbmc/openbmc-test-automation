@@ -2,6 +2,7 @@
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
+Library                 String
 Library                 DateTime
 Library                 Process
 Library                 OperatingSystem
@@ -535,6 +536,10 @@ Stop SOL Console Logging
     ${log_file_path}=  Create OS Console File Path  ${log_file_path}
     # Find the pid of the active system console logging session (if any).
     ${search_string}=  Create OS Console Command String
+    # At least in some cases, ps output does not show double quotes so we must
+    # replace them in our search string with the regexes to indicate that they
+    # are optional.
+    ${search_string}=  Replace String  ${search_string}  "  ["]?
     ${cmd_buf}=  Catenate  echo $(ps -ef | egrep '${search_string}'
     ...  | egrep -v grep | cut -c10-14)
     Rdpissuing  ${cmd_buf}
