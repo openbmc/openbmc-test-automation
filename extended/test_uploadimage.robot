@@ -202,7 +202,7 @@ Get Image Version From TFTP Server
 
     ${stripped_file_path}=  Strip String  ${tftp_image_file_path}  characters=/
     ${rc}=  OperatingSystem.Run And Return RC
-    ...  curl -s tftp://${TFTP_SERVER}/${stripped_file_path} > tftp_image.tar
+    ...  curl -v -o tftp_image.tar tftp://${TFTP_SERVER}/${stripped_file_path}
     Should Be Equal As Integers  0  ${rc}
     ...  msg=Could not download image to check version.
     ${version}=  Get Version Tar  tftp_image.tar
