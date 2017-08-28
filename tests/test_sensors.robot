@@ -42,65 +42,6 @@ Execute Set Sensor Boot Count
     ${val}=     convert to integer    53
     Response Should Be Equal   ${val}
 
-Set Sensor Boot Progress
-    [Tags]  Set_Sensor_Boot_Progress
-
-    ${uri}=    Get System component    BootProgress
-    ${x}=      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x04 0x00 0x00 0x00 0x00 0x14 0x00
-    Read the Attribute  ${uri}    value
-    Response Should Be Equal    FW Progress, Baseboard Init
-
-Set Sensor Boot Progress Longest String
-    [Tags]  Set_Sensor_Boot_Progress_Longest_String
-    ${uri}=    Get System component    BootProgress
-    ${x}=      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x04 0x00 0x00 0x00 0x00 0x0e 0x00
-    Read The Attribute  ${uri}    value
-    Response Should Be Equal    FW Progress, Docking station attachment
-
-Boot Progress Sensor FW Hang Unspecified Error
-    [Tags]  Boot_Progress_Sensor_FW_Hang_Unspecified_Error
-
-    ${uri}=    Get System component    BootProgress
-    ${x}=      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00
-    Read The Attribute  ${uri}    value
-    Response Should Be Equal    FW Hang, Unspecified
-
-Boot Progress FW Hang State
-    [Tags]  Boot_Progress_FW_Hang_State
-
-    ${uri}=    Get System component    BootProgress
-    ${x}=      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0xa9 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}    value
-    Response Should Be Equal    POST Error, unknown
-
-OS Status Sensor Boot Completed Progress
-    [Tags]  OS_Status_Sensor_Boot_Completed_Progress
-
-    ${uri}=    Get System component    OperatingSystemStatus
-    ${x}=      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}     value
-    Response Should Be Equal    Boot completed (00)
-
-OS Status Sensor Progress
-    [Tags]  OS_Status_Sensor_Progress
-
-    ${uri}=    Get System component    OperatingSystemStatus
-    ${x}=      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x04 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}     value
-    Response Should Be Equal    PXE boot completed
-
 OCC Active Sensor On Enabled
     [Tags]  OCC_Active_Sensor_On_Enabled
 
