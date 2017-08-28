@@ -512,6 +512,26 @@ Create OS Console Command String
 
     [Return]  ${cmd_buf}
 
+Get SOL Console Pid
+    [Documentation]  Get the pid of the active sol conole job.
+
+    # Find the pid of the active system console logging session (if any).
+    ${search_string}=  Create OS Console Command String
+    # At least in some cases, ps output does not show double quotes so we must
+    # replace them in our search string with the regexes to indicate that they
+    # are optional.
+    ${search_string}=  Replace String  ${search_string}  "  ["]?
+    ${cmd_buf}=  Catenate  echo $(ps -ef | egrep '${search_string}'
+    ...  | egrep -v grep | cut -c10-14)
+    Rdpissuing  ${cmd_buf}
+    ${rc}  ${os_con_pid}=  Run And Return Rc And Output  ${cmd_buf}
+    Rdpvars  os_con_pid
+    # If rc is not zero it just means that there is no OS Console process
+    # running.
+
+    [Return]  ${os_con_pid}
+
+
 Stop SOL Console Logging
     [Documentation]  Stop system console logging and return log output.
     [Arguments]  ${log_file_path}=${EMPTY}
@@ -534,19 +554,8 @@ Stop SOL Console Logging
     #                 data to the caller as a unicode string.
 
     ${log_file_path}=  Create OS Console File Path  ${log_file_path}
-    # Find the pid of the active system console logging session (if any).
-    ${search_string}=  Create OS Console Command String
-    # At least in some cases, ps output does not show double quotes so we must
-    # replace them in our search string with the regexes to indicate that they
-    # are optional.
-    ${search_string}=  Replace String  ${search_string}  "  ["]?
-    ${cmd_buf}=  Catenate  echo $(ps -ef | egrep '${search_string}'
-    ...  | egrep -v grep | cut -c10-14)
-    Rdpissuing  ${cmd_buf}
-    ${rc}  ${os_con_pid}=  Run And Return Rc And Output  ${cmd_buf}
-    Rdpvars  os_con_pid
-    # If rc is not zero it just means that there is no OS Console process
-    # running.
+
+    ${os_con_pid}=  Get SOL Console Pid
 
     ${cmd_buf}=  Catenate  kill -9 ${os_con_pid}
     Run Keyword If  '${os_con_pid}' != '${EMPTY}'  Rdpissuing  ${cmd_buf}
@@ -599,6 +608,11 @@ Start SOL Console Logging
     # Because we are forking this command, we essentially will never get a
     # non-zero return code or any output.
     Should Be Equal  ${rc}  ${0}
+
+    Sleep  1
+    ${os_con_pid}=  Get SOL Console Pid
+
+    Should Not Be Empty  ${os_con_pid}
 
     [Return]  ${log_output}
 
