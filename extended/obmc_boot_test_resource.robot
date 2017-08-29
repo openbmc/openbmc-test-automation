@@ -6,6 +6,7 @@ Resource  ../lib/openbmc_ffdc.robot
 Library   ../lib/state.py
 
 Library   ../lib/obmc_boot_test.py
+Library   Collections
 
 *** Variables ***
 # Initialize program parameters variables.
@@ -69,12 +70,15 @@ ${test_really_running}      ${1}
 ###############################################################################
 OBMC Boot Test
     [Teardown]  OBMC Boot Test Teardown
-    [Arguments]  @{arguments}
+    [Arguments]  ${pos_arg1}=${EMPTY}  &{arguments}
 
     # Note: If I knew how to specify a keyword teardown in python, I would
     # rename the "OBMC Boot Test Py" python function to "OBMC Boot Test" and
     # do away with this robot keyword.
 
-    OBMC Boot Test Py  @{arguments}
+    Run Keyword If  '${pos_arg1}' != '${EMPTY}'
+    ...  Set To Dictionary  ${arguments}  loc_boot_stack=${pos_arg1}
+
+    OBMC Boot Test Py  &{arguments}
 
 ###############################################################################
