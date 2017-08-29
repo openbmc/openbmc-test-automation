@@ -644,7 +644,7 @@ def sprint_varx(var_name,
                     # turned off when processing integer dictionary values so
                     # it is not interpreted as a hex indicator.
                     loc_hex = not (type(value) is int)
-                    buffer += sprint_varx(key, value,
+                    buffer += sprint_varx("[" + key + "]", value,
                                           loc_hex, loc_col1_indent,
                                           loc_col1_width,
                                           loc_trailing_char)
