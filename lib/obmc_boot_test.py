@@ -25,6 +25,7 @@ import gen_misc as gm
 import gen_cmd as gc
 import gen_robot_keyword as grk
 import state as st
+import var_stack as vs
 
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) +\
@@ -63,6 +64,8 @@ LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
 ffdc_prefix = ""
 boot_start_time = ""
 boot_end_time = ""
+save_stack = vs.var_stack('save_stack')
+main_func_parm_list = ['boot_stack', 'stack_mode', 'quiet']
 
 
 ###############################################################################
@@ -133,6 +136,7 @@ def process_pgm_parms():
         else:
             sub_cmd = "BuiltIn().get_variable_value(\"${" + parm + "}\")"
         cmd_buf = "global " + parm + " ; " + parm + " = " + sub_cmd
+        gp.dpissuing(cmd_buf)
         exec(cmd_buf)
         if re.match(r".*_host$", parm):
             cmd_buf = "process_host(" + parm + ", '" + parm + "')"
@@ -502,14 +506,14 @@ def select_boot():
             else:
                 if st.compare_states(state, boot_table[boot_candidate]['end']):
                     if not skip_boot_printed:
-                        gp.print_var(stack_mode)
-                        gp.printn()
-                        gp.print_timen("Skipping the following boot tests" +
-                                       " which are unnecessary since their" +
-                                       " required end states match the" +
-                                       " current machine state:")
+                        gp.qprint_var(stack_mode)
+                        gp.qprintn()
+                        gp.qprint_timen("Skipping the following boot tests" +
+                                        " which are unnecessary since their" +
+                                        " required end states match the" +
+                                        " current machine state:")
                         skip_boot_printed = 1
-                    gp.print_var(boot_candidate)
+                    gp.qprint_var(boot_candidate)
                     boot_candidate = ""
         if boot_candidate == "":
             gp.qprint_dashes()
@@ -527,8 +531,8 @@ def select_boot():
             gp.qprint_timen("The machine state does not match the required" +
                             " starting state for a '" + boot_candidate +
                             "' boot test:")
-            gp.print_varx("boot_table[" + boot_candidate + "][start]",
-                          boot_table[boot_candidate]['start'], 1)
+            gp.qprint_varx("boot_table[" + boot_candidate + "][start]",
+                           boot_table[boot_candidate]['start'], 1)
             boot_stack.append(boot_candidate)
             popped_boot = boot_candidate
 
@@ -633,7 +637,7 @@ def print_defect_report():
     gp.qprintn("Copy this data to the defect:\n")
 
     if len(more_header_info) > 0:
-        gp.printn(more_header_info)
+        gp.qprintn(more_header_info)
     gp.qpvars(host_name, host_ip, openbmc_nickname, openbmc_host,
               openbmc_host_name, openbmc_ip, openbmc_username,
               openbmc_password, os_host, os_host_name, os_ip, os_username,
@@ -658,7 +662,7 @@ def print_defect_report():
     gp.qprintn()
 
     if len(ffdc_summary_info) > 0:
-        gp.printn(ffdc_summary_info)
+        gp.qprintn(ffdc_summary_info)
 
     gp.qprint_dashes(0, 90, 1, "=")
 
@@ -687,7 +691,7 @@ def my_ffdc():
                                        "  ffdc_function_list=" +
                                        ffdc_function_list, ignore=1)
     if status != 'PASS':
-        gp.print_error("Call to ffdc failed.\n")
+        gp.qprint_error("Call to ffdc failed.\n")
 
     my_get_state()
 
@@ -833,12 +837,12 @@ def test_loop_body():
     gp.qprintn()
     if boot_status == "PASS":
         boot_success = 1
-        completion_msg = gp.sprint_time("BOOT_SUCCESS: \"" + next_boot +
-                                        "\" succeeded.")
+        completion_msg = gp.sprint_timen("BOOT_SUCCESS: \"" + next_boot +
+                                         "\" succeeded.")
     else:
         boot_success = 0
-        completion_msg = gp.sprint_time("BOOT_FAILED: \"" + next_boot +
-                                        "\" failed.")
+        completion_msg = gp.sprint_timen("BOOT_FAILED: \"" + next_boot +
+                                         "\" failed.")
 
     # Set boot_end_time for use by plug-ins.
     boot_end_time = completion_msg[1:33]
@@ -861,7 +865,7 @@ def test_loop_body():
     if boot_status != "PASS" or ffdc_check == "All" or shell_rc == 0x00000200:
         status, ret_values = grk.run_key_u("my_ffdc", ignore=1)
         if status != 'PASS':
-            gp.print_error("Call to my_ffdc failed.\n")
+            gp.qprint_error("Call to my_ffdc failed.\n")
 
     # We need to purge error logs between boots or they build up.
     grk.run_key("Delete Error logs", ignore=1)
@@ -904,6 +908,24 @@ def obmc_boot_test_teardown():
         pickle.dump(boot_results, open(boot_results_file_path, 'wb'),
                     pickle.HIGHEST_PROTOCOL)
 
+    global save_stack
+    # Restore any global values saved on the save_stack.
+    for parm_name in main_func_parm_list:
+        # Get the parm_value if it was saved on the stack.
+        try:
+            parm_value = save_stack.pop(parm_name)
+        except:
+            # If it was not saved, no further action is required.
+            continue
+
+        # Restore the saved value.
+        cmd_buf = "BuiltIn().set_global_variable(\"${" + parm_name +\
+            "}\", parm_value)"
+        gp.dpissuing(cmd_buf)
+        exec(cmd_buf)
+
+    gp.dprintn(save_stack.sprint_obj())
+
 ###############################################################################
 
 
@@ -925,14 +947,47 @@ def test_teardown():
 
 
 ###############################################################################
-def obmc_boot_test_py(alt_boot_stack=None):
+def obmc_boot_test_py(loc_boot_stack=None,
+                      loc_stack_mode=None,
+                      loc_quiet=None):
 
     r"""
     Do main program processing.
     """
 
-    if alt_boot_stack is not None:
-        BuiltIn().set_global_variable("${boot_stack}", alt_boot_stack)
+    global save_stack
+
+    # Process function parms.
+    for parm_name in main_func_parm_list:
+        # Get parm's value.
+        cmd_buf = "parm_value = loc_" + parm_name
+        exec(cmd_buf)
+        gp.dpvar(parm_name)
+        gp.dpvar(parm_value)
+
+        if parm_value is None:
+            # Parm was not specified by the calling function so set it to its
+            # corresponding global value.
+            cmd_buf = "loc_" + parm_name + " = BuiltIn().get_variable_value" +\
+                "(\"${" + parm_name + "}\")"
+            gp.dpissuing(cmd_buf)
+            exec(cmd_buf)
+        else:
+            # Save the global value on a stack.
+            cmd_buf = "save_stack.push(BuiltIn().get_variable_value(\"${" +\
+                parm_name + "}\"), \"" + parm_name + "\")"
+            gp.dpissuing(cmd_buf)
+            exec(cmd_buf)
+
+            # Set the global value to the passed value.
+            cmd_buf = "BuiltIn().set_global_variable(\"${" + parm_name +\
+                "}\", loc_" + parm_name + ")"
+            gp.dpissuing(cmd_buf)
+            exec(cmd_buf)
+
+    gp.dprintn(save_stack.sprint_obj())
+
+    return
 
     setup()
 
