@@ -3,7 +3,9 @@ Documentation     Update the PNOR code on a target BMC.
 ...               Execution Method:
 ...               python -m robot -v OPENBMC_HOST:<hostname>
 ...               -v DELETE_OLD_PNOR_IMAGES:<"true" or "false">
-...               -v IMAGE_FILE_PATH:<path/*.tar>  host_code_update.robot
+...               -v IMAGE_FILE_PATH:<path/*.tar>
+...               -v ALTERNATE_IMAGE_FILE_PATH:<path/*.tar>
+...               host_code_update.robot
 ...
 ...               Code update method BMC
 ...               Update work flow sequence:
@@ -99,6 +101,16 @@ Upload And Activate Multiple Host Images
 
     # Image File Path              Image Purpose
     ${ALTERNATE_IMAGE_FILE_PATH}   ${VERSION_PURPOSE_HOST}
+
+
+Set Same Priority For Multiple Host Images
+    [Documentation]  Attempt to set the priority to be the same for two PNOR
+    ...              images and verify that the priorities are not the same.
+    [Tags]  Set_Same_Priority_For_Multiple_Host_Images
+
+    Run Keyword If  '${PREV_TEST_STATUS}' == 'FAIL'
+    ...  Fail  Activation of alternate image failed. Cannot set priority.
+    Set Same Priority For Multiple Images  ${VERSION_PURPOSE_HOST}
 
 
 Delete Host Image
