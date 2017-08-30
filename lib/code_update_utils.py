@@ -42,7 +42,7 @@ def verify_no_duplicate_image_priorities(image_purpose):
         if image_priority in taken_priorities:
             BuiltIn().fail("Found active images with the same priority.\n"
                     + gp.sprint_vars(image, taken_priorities[image_priority]))
-            taken_priorities[image_priority] = image
+        taken_priorities[image_priority] = image
 
 ###############################################################################
 
