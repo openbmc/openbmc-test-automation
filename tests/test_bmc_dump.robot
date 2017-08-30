@@ -129,6 +129,21 @@ Verify User Initiated BMC Dump When Host Booted
     Create User Initiated Dump
 
 
+Verify Core Dump Size
+    [Documentation]  Verify BMC core dump size is under 200k.
+    [Tags]  Verify_Core_Dump_Size
+
+    Delete All Dumps
+    Trigger Core Dump
+    Wait Until Keyword Succeeds  1 min  10 sec  Get Dump Entries
+
+    ${dump_entries}=  Get URL List  ${DUMP_ENTRY_URI}
+    ${dump_size}=  Read Attribute  ${dump_entries[0]}  Size
+
+    # Max size for dump is 200k = 200x1024
+    Should Be True  0 < ${dump_size} < 204800  msg=Size of dump is incorrect.
+
+
 Post Dump BMC Performance Test
     [Documentation]  Check performance of memory, CPU & file system of BMC.
     [Tags]  Post_Dump_BMC_Performance_Test
@@ -141,6 +156,7 @@ Post Dump Core Dump Check
     [Tags]  Post_Dump_Core_Dump_Check
 
     Check For Core Dumps
+
 
 *** Keywords ***
 
