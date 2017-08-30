@@ -82,6 +82,31 @@ Delete All BMC Dumps And Verify
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 
+Verify BMC Core Dump
+    [Documentation]  Create BMC core dump and verify dump
+    ...  entry for it.
+    [Tags]  Verify_BMC_Core_Dump
+
+    Delete All Dumps
+    Trigger Core Dump
+    Wait Until Keyword Succeeds  1 min  10 sec  Get Dump Entries
+
+
+Verify Core Dump Size
+    [Documentation]  Verify BMC core dump size is under 200k.
+    [Tags]  Verify_Core_Dump_Size
+
+    Delete All Dumps
+    Trigger Core Dump
+    Wait Until Keyword Succeeds  1 min  10 sec  Get Dump Entries
+
+    ${dump_entries}=  Get URL List  ${DUMP_ENTRY_URI}
+    ${dump_size}=  Read Attribute  ${dump_entries[0]}  Size
+
+    # Max size for dump is 200k = 200x1024
+    Should Be True  0 < ${dump_size} < 204800
+
+
 *** Keywords ***
 
 Post Testcase Execution
