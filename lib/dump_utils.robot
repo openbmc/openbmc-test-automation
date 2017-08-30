@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation  This module provides general keywords for dump.
 
+Library         bmc_ssh_utils.py
 
 *** Variables ***
 
@@ -109,3 +110,21 @@ Check Existence of BMC Dump file
     ${file_there}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${dump_check_cmd}/${dump_id}
     Should End With  ${file_there}  tar.xz  msg=BMC dump file not found.
+
+Get Dump Entries
+    [Documentation]  Return dump entries list.
+
+    ${dump_entries}=  Get URL List  ${DUMP_ENTRY_URI}
+    [Return]  ${dump_entries}
+
+
+Trigger Core Dump
+    [Documentation]  Trigger core dump and return dump id (e.g 1, 2 etc.).
+
+    # Find the pid of the active ipmid and kill it.
+    ${cmd_buf}=  Catenate  kill -s SEGV $(ps -ef | egrep ' ipmid$' |
+    ...  egrep -v grep | \ cut -c1-6)
+
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd_buf}
+    Should Be Empty  ${stderr}
+    Should Be Equal As Integers  ${rc}  ${0}
