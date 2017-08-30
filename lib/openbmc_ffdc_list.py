@@ -43,7 +43,8 @@ FFDC_BMC_FILE = {
         # File Name         Command
         'BMC_proc_list': 'top -n 1 -b',
         'BMC_proc_fd_active_list': 'ls -Al /proc/*/fd/',
-        'BMC_journalctl': 'journalctl --no-pager',
+        'BMC_journalctl_nopager': 'journalctl --no-pager',
+        'BMC_journalctl_pretty': 'journalctl -o json-pretty',
         'BMC_dmesg': 'dmesg',
         'BMC_procinfo': 'cat /proc/cpuinfo',
         'BMC_meminfo': 'cat /proc/meminfo',
