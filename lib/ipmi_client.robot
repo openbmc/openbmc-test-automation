@@ -136,8 +136,8 @@ Activate SOL Via IPMI
     #            /tmp/sol_<BMC_IP> else user input location.
 
     ${ipmi_cmd}=  Catenate  SEPARATOR=
-    ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
-    ...  ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}sol activate
+    ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}${HOST}
+    ...  ${SPACE}${OPENBMC_HOST}${SPACE}sol activate usesolkeepalive
 
     Start Process  ${ipmi_cmd}  shell=True  stdout=${file_path}
     ...  alias=sol_proc
