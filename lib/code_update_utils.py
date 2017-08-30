@@ -80,17 +80,15 @@ def delete_all_pnor_images():
     Delete all PNOR images from the BMC.
     """
 
-    status, images = keyword.run_key("Read Properties  "
-                                     + var.SOFTWARE_VERSION_URI + "enumerate")
+    status, images = keyword.run_key("Get Software Objects  "
+                                     + var.VERSION_PURPOSE_HOST)
     for image_name in images:
-        image_id = image_name.split('/')[-1]
-        image_purpose = images[image_name]["Purpose"]
-        if var.VERSION_PURPOSE_HOST == image_purpose:
-            # Delete twice, in case the image is in the /tmp/images directory
-            keyword.run_key("Call Method  " + var.SOFTWARE_VERSION_URI
-                            + image_id + "  delete  data={\"data\":[]}")
-            keyword.run_key("Call Method  " + var.SOFTWARE_VERSION_URI
-                            + image_id + "  delete  data={\"data\":[]}")
+        BuiltIn().log_to_console(image_name)
+        # Delete twice, in case the image is in the /tmp/images directory
+        keyword.run_key("Call Method  " + image_name
+                        + "  delete  data={\"data\":[]}")
+        keyword.run_key("Call Method  " + image_name
+                        + "  delete  data={\"data\":[]}")
 
 ###############################################################################
 
