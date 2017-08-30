@@ -130,6 +130,29 @@ Activate Image And Verify No Duplicate Priorities
     Verify No Duplicate Image Priorities  ${image_purpose}
 
 
+Set Same Priority For Multiple Images
+    [Documentation]  Find two images, set the priorities to be the same, and
+    ...              verify that the priorities are not the same.
+    [Arguments]  ${version_type}
+
+    # Description of argument(s):
+    # version_type  Either BMC or host version purpose.
+    #               By default host version purpose string.
+    #  (e.g. "xyz.openbmc_project.Software.Version.VersionPurpose.BMC"
+    #        "xyz.openbmc_project.Software.Version.VersionPurpose.Host").
+
+    # Make sure we have more than two images
+    ${software_objects}=  Get Software Objects  version_type=${version_type}
+    ${num_images}=  Get Length  ${software_objects}
+    Should Be True  1 < ${num_images}  msg=Only found one image on the BMC.
+
+    # Set the priority of the second image to the priority of the first
+    ${properties}=  Get Host Software Property  @{software_objects}[0]
+    Set Host Software Property  @{software_objects}[1]  Priority
+    ...  &{properties}[Priority]
+    Verify No Duplicate Image Priorities  ${version_type}
+
+
 Delete Software Object
     [Documentation]  Deletes an image from the BMC.
     [Arguments]  ${software_object}
