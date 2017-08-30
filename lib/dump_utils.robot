@@ -62,3 +62,30 @@ Delete All Dumps
     :FOR  ${entry}  IN  @{dump_entries}
     \  ${dump_id}=  Fetch From Right  ${entry}  /
     \  Delete BMC Dump  ${dump_id}
+
+
+Get Dump Entries
+    [Documentation]  Returns dump entries list.
+
+    #${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    ${dump_entries}=  Get URL List  ${DUMP_ENTRY_URI}
+    [Return]  ${dump_entries}
+
+
+Trigger Core Dump
+    [Documentation]  Trigger core dump and return dump id (e.g 1, 2 etc)
+
+    Open Connection And Log In
+
+    # Find the pid of the active ipmid.
+    ${cmd_prefix}=  Catenate  SEPARATOR=  ps -ef | egrep 'ipmid' |
+    ${cmd_suffix}=  Catenate  SEPARATOR=  egrep -v grep | cut -c2-6
+    ${pid}  ${stderr}=  Execute Command  ${cmd_prefix} ${cmd_suffix}
+    ...  return_stdout=True  return_stderr=True
+
+    # Kill ipmid process
+    ${cmd}=  Catenate  kill -11
+    ${stdout}  ${stderr}=  Execute Command  ${cmd} ${pid}
+    ...  return_stdout=True  return_stderr=True
+
+    SSHLibrary.Close Connection
