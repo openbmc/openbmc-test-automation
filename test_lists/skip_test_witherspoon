@@ -36,3 +36,5 @@
 -e Verify_Minimal_System_Inventory
 # https://github.com/openbmc/openbmc-test-automation/issues/907
 -e Clock_Time
+# NA test case for Witherspoon
+-e Verify_Channel_Checkstop_Through_OS_With_Auto_Reboot
