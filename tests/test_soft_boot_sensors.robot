@@ -1,0 +1,262 @@
+*** Settings ***
+Documentation   Suite for testing non sensors.
+
+Library      ../lib/state_map.py
+Resource     ../lib/utils.robot
+Resource     ../lib/boot_utils.robot
+Resource     ../lib/state_manager.robot
+Resource     ../lib/openbmc_ffdc.robot
+
+Test Teardown     Post Test Case Execution
+
+Suite Teardown    REST Power Off
+
+*** Variables ***
+
+${stack_mode}   skip
+
+*** Test Cases ***
+
+Verify Boot AttemptsLeft Counts
+    [Documentation]  Verify system boot counts on various boot states.
+    [Tags]  Verify_Boot_AttemptsLeft_Counts
+    [Template]  Validate Boot Count
+
+    # Example: Expected state
+    # "data": {
+    #    "/xyz/openbmc_project/state/host0": {
+    #      "AttemptsLeft": 3,
+    #      "BootProgress": "xyz.openbmc_project.State.Boot.Progress.ProgressStages.Unspecified",
+    #      "CurrentHostState": "xyz.openbmc_project.State.Host.HostState.Off",
+    #      "OperatingSystemState": "xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.Inactive",
+    #      "RequestedHostTransition": "xyz.openbmc_project.State.Host.Transition.Off"
+    #    }
+    # }
+
+    # System at standby    AttemptsLeft
+    Reboot                 3
+    Booted                 2
+    RebootHost             1
+    Ready                  1
+
+
+Verify Boot Sensor States At Ready
+    [Documentation]  Verify system boot states at "Ready" state.
+    [Tags]  Verify_Boot_Sensor_States_At_Ready
+    [Template]  Valid Boot States
+
+    # Example: Expected state
+    # "data": {
+    #    "/xyz/openbmc_project/state/bmc0": {
+    #      "CurrentBMCState": "xyz.openbmc_project.State.BMC.BMCState.Ready",
+    #      "RequestedBMCTransition": "xyz.openbmc_project.State.BMC.Transition.None"
+    #    },
+    #    "/xyz/openbmc_project/state/chassis0": {
+    #      "CurrentPowerState": "xyz.openbmc_project.State.Chassis.PowerState.Off",
+    #      "RequestedPowerTransition": "xyz.openbmc_project.State.Chassis.Transition.Off"
+    #    },
+    #    "/xyz/openbmc_project/state/host0": {
+    #      "AttemptsLeft": 3,
+    #      "BootProgress": "xyz.openbmc_project.State.Boot.Progress.ProgressStages.Unspecified",
+    #      "CurrentHostState": "xyz.openbmc_project.State.Host.HostState.Off",
+    #      "OperatingSystemState": "xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.Inactive",
+    #      "RequestedHostTransition": "xyz.openbmc_project.State.Host.Transition.Off"
+    #    }
+    # }
+
+    # System at standby.
+    Off
+
+
+Verify Boot Sensor States On Reboot Ready
+    [Documentation]  Verify system boot states at "Ready" state.
+    [Tags]  Verify_Boot_Sensor_States_On_Reboot_Ready
+    [Template]  Valid Boot States
+
+    # Example: Expected state
+    # "data": {
+    #    "/xyz/openbmc_project/state/bmc0": {
+    #      "CurrentBMCState": "xyz.openbmc_project.State.BMC.BMCState.Ready",
+    #      "RequestedBMCTransition": "xyz.openbmc_project.State.BMC.Transition.None"
+    #    },
+    #    "/xyz/openbmc_project/state/chassis0": {
+    #      "CurrentPowerState": "xyz.openbmc_project.State.Chassis.PowerState.Off",
+    #      "RequestedPowerTransition": "xyz.openbmc_project.State.Chassis.Transition.Off"
+    #    },
+    #    "/xyz/openbmc_project/state/host0": {
+    #      "AttemptsLeft": 3,
+    #      "BootProgress": "xyz.openbmc_project.State.Boot.Progress.ProgressStages.Unspecified",
+    #      "CurrentHostState": "xyz.openbmc_project.State.Host.HostState.Off",
+    #      "OperatingSystemState": "xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.Inactive",
+    #      "RequestedHostTransition": "xyz.openbmc_project.State.Host.Transition.Off"
+    #    }
+    # }
+
+    # BMC on reset to standby.
+    Reboot
+
+
+Verify Boot Sensor States At Running
+    [Documentation]  Verify system boot states at "Running" state.
+    [Tags]  Verify_Boot_Sensor_States_At_Running
+    [Template]  Valid Boot States
+
+    # Example: Expected state
+    # "data": {
+    #    "/xyz/openbmc_project/state/bmc0": {
+    #      "CurrentBMCState": "xyz.openbmc_project.State.BMC.BMCState.Ready",
+    #      "RequestedBMCTransition": "xyz.openbmc_project.State.BMC.Transition.None"
+    #   },
+    #   "/xyz/openbmc_project/state/chassis0": {
+    #      "CurrentPowerState": "xyz.openbmc_project.State.Chassis.PowerState.On",
+    #      "RequestedPowerTransition": "xyz.openbmc_project.State.Chassis.Transition.Off"
+    #   },
+    #   "/xyz/openbmc_project/state/host0": {
+    #      "AttemptsLeft": 2,
+    #      "BootProgress": "xyz.openbmc_project.State.Boot.Progress.ProgressStages.MotherboardInit",
+    #      "CurrentHostState": "xyz.openbmc_project.State.Host.HostState.Running",
+    #      "OperatingSystemState": "xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.Inactive",
+    #      "RequestedHostTransition": "xyz.openbmc_project.State.Host.Transition.On"
+    #   }
+    # }
+
+    # System at Running state but during initial state.
+    Running
+
+
+Verify Boot Sensor States At Host Booted
+    [Documentation]  Verify system boot states at "Running" state.
+    [Tags]  Verify_Boot_Sensor_States_At_Host_Booted
+    [Template]  Valid Boot States
+
+    # Example: Expected state
+    # "data": {
+    #    "/xyz/openbmc_project/state/bmc0": {
+    #      "CurrentBMCState": "xyz.openbmc_project.State.BMC.BMCState.Ready",
+    #      "RequestedBMCTransition": "xyz.openbmc_project.State.BMC.Transition.None"
+    #   },
+    #   "/xyz/openbmc_project/state/chassis0": {
+    #      "CurrentPowerState": "xyz.openbmc_project.State.Chassis.PowerState.On",
+    #      "RequestedPowerTransition": "xyz.openbmc_project.State.Chassis.Transition.Off"
+    #   },
+    #   "/xyz/openbmc_project/state/host0": {
+    #      "AttemptsLeft": 3,
+    #      "BootProgress": "xyz.openbmc_project.State.Boot.Progress.ProgressStages.OSStart",
+    #      "CurrentHostState": "xyz.openbmc_project.State.Host.HostState.Running",
+    #      "OperatingSystemState": "xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.BootComplete",
+    #      "RequestedHostTransition": "xyz.openbmc_project.State.Host.Transition.On"
+    #   }
+    # }
+
+    # System when host is booted.
+    Booted
+
+
+Verify Boot Sensor States RR on Host Booted
+    [Documentation]  Verify system boot states at "Running" state.
+    [Tags]  Verify_Boot_Sensor_States_RR_on_Host_Booted
+    [Template]  Valid Boot States
+
+    # Example: Expected state
+    # "data": {
+    #    "/xyz/openbmc_project/state/bmc0": {
+    #      "CurrentBMCState": "xyz.openbmc_project.State.BMC.BMCState.Ready",
+    #      "RequestedBMCTransition": "xyz.openbmc_project.State.BMC.Transition.None"
+    #   },
+    #   "/xyz/openbmc_project/state/chassis0": {
+    #      "CurrentPowerState": "xyz.openbmc_project.State.Chassis.PowerState.On",
+    #      "RequestedPowerTransition": "xyz.openbmc_project.State.Chassis.Transition.Off"
+    #   },
+    #   "/xyz/openbmc_project/state/host0": {
+    #      "AttemptsLeft": 3,
+    #      "BootProgress": "xyz.openbmc_project.State.Boot.Progress.ProgressStages.OSStart",
+    #      "CurrentHostState": "xyz.openbmc_project.State.Host.HostState.Running",
+    #      "OperatingSystemState": "xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.BootComplete",
+    #      "RequestedHostTransition": "xyz.openbmc_project.State.Host.Transition.On"
+    #   }
+    # }
+
+    # System when host is booted.
+    ResetReload
+
+
+*** Keywords ***
+
+Validate Boot Count
+    [Documentation]  Verify boot count attempts for a given system state.
+    [Arguments]  ${sys_state}  ${count}
+
+    # Description of argument(s):
+    # sys_state    Basically a user-defined boot state (e.g. Off/On etc).
+    # count        Boot count attempt left.
+
+    Choose Boot Option  ${sys_state}
+    ${boot_count}=  Read Attribute  ${HOST_STATE_URI}  AttemptsLeft
+    Should Be True  ${boot_count} == ${count}
+
+
+Valid Boot States
+    [Documentation]  Verify boot states for a given system state.
+    [Arguments]  ${sys_state}
+
+    # Description of argument(s):
+    # sys_state    Basically a user-defined boot state (e.g. Off/On etc).
+
+    Choose Boot Option  ${sys_state}
+    ${boot_states}=  Get Boot State
+    ${valid_state}=  Valid Boot State  ${sys_state}  ${boot_states}
+    Should Be True  ${valid_state}
+
+
+Choose Boot Option
+    [Documentation]  Choose system boot type.
+    [Arguments]  ${option}
+
+    # Description of argument(s):
+    # option    Boot type (e.g. Off/On/Reboot etc.).
+
+    Run Keyword If  '${option}' == 'Off'
+    ...    REST Power Off
+    ...  ELSE IF  '${option}' == 'Reboot'
+    ...    Run Keywords  REST Power Off  AND  Initiate BMC Reboot
+    ...                  AND  Wait For BMC Ready
+    ...  ELSE IF  '${option}' == 'Running'
+    ...    Power On Till Chassis Is On
+    ...  ELSE IF  '${option}' == 'Booted'
+    ...    Initiate Host Boot
+    ...  ELSE IF  '${option}' == 'RebootHost'
+    ...    Initiate Host Reboot
+    ...  ELSE IF  '${option}' == 'ResetReload'
+    ...    Reboot Host And Expect Runtime
+
+
+Power On Till Chassis Is On
+    [Documentation]  Initiate power on and check till chassis state is just
+    ...              turned "On".
+
+    REST Power Off
+    Initiate Host Boot  wait=${0}
+    Wait Until Keyword Succeeds  2 min  10 sec  Is Chassis On
+
+    # TODO: Find better mecahnism instead of wait.
+    Sleep  20 Sec
+
+
+Reboot Host And Expect Runtime
+    [Documentation]  Initiate reset reload when host is booted.
+
+    Initiate BMC Reboot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
+
+
+Post Test Case Execution
+   [Documentation]  Do the post test teardown.
+   # - Capture FFDC on test failure.
+   # - Delete error logs.
+   # - Close all open SSH connections.
+   # - Clear all REST sessions.
+
+   FFDC On Test Case Fail
+   Delete Error Logs
+   Close All Connections
+
