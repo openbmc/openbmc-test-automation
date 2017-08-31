@@ -6,6 +6,7 @@ Library     OperatingSystem
 Library     String
 Variables   ../data/variables.py
 Resource    rest_client.robot
+Resource    dump_utils.robot
 
 *** Keywords ***
 

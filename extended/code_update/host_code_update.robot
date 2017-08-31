@@ -142,7 +142,10 @@ Temporarily Set PNOR Attribute
 
 Code Update Setup
     [Documentation]  Do code update test case setup.
+    # 1. Clean up all existing BMC dumps.
+    # 2. Clean up all currently install PNOR images.
 
+    Delete All Dumps
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
     ...  Delete All PNOR Images
 

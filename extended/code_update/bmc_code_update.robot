@@ -24,6 +24,7 @@ ${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
 REST BMC Code Update
     [Documentation]  Do a BMC code update by uploading image on BMC via REST.
     [Tags]  REST_BMC_Code_Update
+    [Setup]  Code Update Setup
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     OBMC Reboot (off)
@@ -54,3 +55,9 @@ Upload And Activate Multiple BMC Images Setup
     [Documentation]  Check that the ALTERNATE_FILE_PATH variable is set.
 
     Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
+
+Code Update Setup
+    [Documentation]  Do code update test case setup.
+    # 1. Clean up all existing BMC dumps.
+
+    Delete All Dumps
