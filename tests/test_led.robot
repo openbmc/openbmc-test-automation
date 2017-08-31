@@ -83,9 +83,9 @@ Verify Rear Power LED With Host Power Off
 
     Initiate Host PowerOff
     ${resp}=  Get System LED State  rear_power
-    Should Be Equal  ${resp}  Off
+    Should Be Equal  ${resp}  Blink
     ${resp}=  Get System LED State  front_power
-    Should Be Equal  ${resp}  Off
+    Should Be Equal  ${resp}  Blink
 
 
 Verify Rear Power LED With Host Power On
