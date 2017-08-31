@@ -30,3 +30,5 @@
 -e Clock_Time
 # https://github.com/openbmc/openbmc-test-automation/issues/874
 -e User_Management
+# NA test case for Witherspoon
+-e Verify_Channel_Checkstop_Through_OS_With_Auto_Reboot
