@@ -16,6 +16,7 @@ Resource          ../lib/pdu/pdu.robot
 Resource          ../lib/state_manager.robot
 Resource          ../lib/bmc_network_utils.robot
 Resource          ../lib/bmc_cleanup.robot
+Resource          ../lib/dump_utils.robot
 
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0
@@ -62,6 +63,7 @@ Get To Stable State
     ...  Cleanup Dir
 
     Delete Error Logs
+    Delete All Dumps
 
 *** Keywords ***
 
