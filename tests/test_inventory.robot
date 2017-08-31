@@ -263,11 +263,6 @@ Verify Fan Functional State
     \  Should Be True  ${present}
     ...  msg=${fan_uri} is functional but "Present" is not set.
 
-Verify Inventory List After Reboot
-    [Documentation]  Verify Inventory List After Reboot
-    [Tags]  Verify_Inventory_List_After_Reboot
-
-    Repeat Keyword  ${LOOP_COUNT} times  Verify Inventory List Before And After Reboot
 
 Check Air Or Water Cooled
     [Documentation]  Check if this system is Air or water cooled.
@@ -356,6 +351,20 @@ Verify Minimal Power Supply Inventory
     power_supply   1
     [Template]     Minimum Inventory
 
+
+Verify Inventory List After Reboot
+    [Documentation]  Verify Inventory List After Reboot
+    [Tags]  Verify_Inventory_List_After_Reboot
+
+    Repeat Keyword  ${LOOP_COUNT} times  Choose Boot Option  reboot
+
+
+Verify Inventory List After Reset
+    [Documentation]  Verify Inventory List After Reboot
+    [Tags]  Verify_Inventory_List_After_Reset
+
+    Repeat Keyword  ${LOOP_COUNT} times  Choose Boot Option  reset
+
 *** Keywords ***
 
 Test Suite Setup
@@ -441,16 +450,41 @@ Check URL Property If Functional
     ${state}=  Read Attribute  ${url_path}  Functional
     Should Be True  ${state}
 
+Choose Boot Option
+    [Documentation]  Choose BMC reset or host reboot.
+    [Arguments]  ${option}
+
+    Run Keyword If  '${option}' == 'reboot'
+    ...  Verify Inventory List Before And After Reboot
+    ...  ELSE  Verify Inventory List Before And After Reset
+
+
 Verify Inventory List Before And After Reboot
     [Documentation]  Verify Inventory list before and after reboot.
 
-    Initiate Host Boot
-    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Booted
+    REST Power On
+    Delete Error Logs
     ${inv_before}=  Get URL List  ${HOST_INVENTORY_URI}
     Initiate Host Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Booted
+    Delete Error Logs
     ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
     Lists Should Be Equal  ${inv_before}  ${inv_after}
+
+
+Verify Inventory List Before And After Reset
+    [Documentation]  Verify Inventory list before and after BMC reset.
+
+    REST Power On
+    Delete Error Logs
+    ${inv_before}=  Get URL List  ${HOST_INVENTORY_URI}
+    Initiate BMC Reboot
+    Wait For BMC Ready
+    Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
+    Delete Error Logs
+    ${inv_after}=  Get URL List  ${HOST_INVENTORY_URI}
+    Lists Should Be Equal  ${inv_before}  ${inv_after}
+
 
 Minimum Inventory
     [Documentation]  Check for minimum inventory.
