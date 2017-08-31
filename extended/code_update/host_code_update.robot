@@ -20,8 +20,9 @@ Variables         ../../data/variables.py
 Resource          ../../lib/boot_utils.robot
 Resource          code_update_utils.robot
 Resource          ../../lib/code_update_utils.robot
-Resource          ../lib/openbmc_ffdc.robot
+Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/state_manager.robot
+Resource          ../../lib/dump_utils.robot
 
 Test Teardown     FFDC On Test Case Fail
 
@@ -142,7 +143,10 @@ Temporarily Set PNOR Attribute
 
 Code Update Setup
     [Documentation]  Do code update test case setup.
+    # - Clean up all existing BMC dumps.
+    # - Clean up all currently install PNOR images.
 
+    Delete All Dumps
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
     ...  Delete All PNOR Images
 
