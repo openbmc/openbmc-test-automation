@@ -36,3 +36,5 @@
 -e Verify_Minimal_System_Inventory
 # https://github.com/openbmc/openbmc-test-automation/issues/907
 -e Clock_Time
+# https://github.com/openbmc/openbmc-test-automation/issues/911
+-e Verify_Channel_Checkstop_Through_OS_With_Auto_Reboot
