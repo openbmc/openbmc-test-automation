@@ -15,12 +15,12 @@ VALID_STATES = {
     'reboot':
     {
          # (Power Policy, BMC state, Chassis State, Host State)
-         ('LEAVE_OFF','Ready','Off','Off'),
-         ('ALWAYS_POWER_ON','Ready','On','Running'),
-         ('ALWAYS_POWER_ON','Ready','On','Off'),
-         ('RESTORE_LAST_STATE','Ready','On','Running'),
-         ('RESTORE_LAST_STATE','Ready','On','Off'),
-         ('RESTORE_LAST_STATE','Ready','Off','Off'),
+         ('LEAVE_OFF', 'Ready', 'Off', 'Off'),
+         ('ALWAYS_POWER_ON', 'Ready', 'On', 'Running'),
+         ('ALWAYS_POWER_ON', 'Ready', 'On', 'Off'),
+         ('RESTORE_LAST_STATE', 'Ready', 'On', 'Running'),
+         ('RESTORE_LAST_STATE', 'Ready', 'On', 'Off'),
+         ('RESTORE_LAST_STATE', 'Ready', 'Off', 'Off'),
     },
 }
 
