@@ -104,33 +104,25 @@ FFDC_OS_IBM_POWERKVM_FILE = {
     },
 }
 
-# Enable when ready with openbmc/openbmc-test-automation#203
-# replace with new path /xyz/openbmc_project
-OPENBMC_BASE = '/org/openbmc/'
+OPENBMC_BASE = '/xyz/openbmc_project/'
 ENUMERATE_SENSORS = OPENBMC_BASE + 'sensors/enumerate'
-# TODO: Use the xyz enums once moved to xyz completely
-# ENUMERATE_SYSTEMS = OPENBMC_BASE + 'inventory/enumerate'
-ENUMERATE_SYSTEMS = '/xyz/openbmc_project/inventory/enumerate'
-ENUMERATE_ELOG = '/xyz/openbmc_project/logging/entry/enumerate'
-ENUMERATE_EVENTS = OPENBMC_BASE + 'records/events/enumerate'
-ENUMERATE_LED = OPENBMC_BASE + 'control/led/enumerate'
-
-# Sensors/control data.
-ENUMERATE_SENSOR = '/xyz/openbmc_project/sensors/enumerate'
-ENUMERATE_CONTROL = '/xyz/openbmc_project/control/enumerate'
+ENUMERATE_INVENTORY = OPENBMC_BASE + 'inventory/enumerate'
+ENUMERATE_ELOG = OPENBMC_BASE + 'logging/entry/enumerate'
+ENUMERATE_LED = OPENBMC_BASE + 'led/enumerate'
+ENUMERATE_SW = OPENBMC_BASE + 'software/enumerate'
+ENUMERATE_CONTROL = OPENBMC_BASE + 'control/enumerate'
 
 # Add file name and correcponding Get Request
 FFDC_GET_REQUEST = {
     'GET REQUESTS':
     {
         # File Name         Command
+        'FIRMWARE_list': ENUMERATE_SW,
         'BMC_sensor_list': ENUMERATE_SENSORS,
-        'BMC_sensor_xyz_list': ENUMERATE_SENSOR,
         'BMC_control_list': ENUMERATE_CONTROL,
-        'BMC_inventory': ENUMERATE_SYSTEMS,
+        'BMC_inventory': ENUMERATE_INVENTORY,
         'BMC_elog': ENUMERATE_ELOG,
-        'BMC_led': ENUMERATE_EVENTS,
-        'BMC_record_log': ENUMERATE_LED,
+        'BMC_led': ENUMERATE_LED,
     },
 }
 
