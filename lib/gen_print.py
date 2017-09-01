@@ -601,7 +601,11 @@ def sprint_varx(var_name,
             value_format = "%s"
         format_string = "%" + str(loc_col1_indent) + "s%-" \
             + str(loc_col1_width) + "s" + value_format + trailing_char
-        return format_string % ("", str(var_name) + ":", var_value)
+        if value_format == "0x%08x":
+            return format_string % ("", str(var_name) + ":",
+                                    var_value & 0xffffffff)
+        else:
+            return format_string % ("", str(var_name) + ":", var_value)
     elif type(var_value) is type:
         return sprint_varx(var_name, str(var_value).split("'")[1], hex,
                            loc_col1_indent, loc_col1_width, trailing_char)
