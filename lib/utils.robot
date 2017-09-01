@@ -226,16 +226,18 @@ Initiate OS Host Reboot
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}
 
-    # Description of arguments:
-    # os_host      The DNS name or IP of the OS.
+    # Description of argument(s):
+    # os_host      The host name or IP address of the OS.
     # os_username  The username to be used to sign in to the OS.
     # os_password  The password to be used to sign in to the OS.
 
-    SSHLibrary.Open connection  ${os_host}
-    Login  ${os_username}  ${os_password}
-    ${cmd_buf}  Catenate  reboot
-    Start Command  ${cmd_buf}
-    SSHLibrary.Close Connection
+    ${cmd_buf}=  Run Keyword If  '${os_username}' == 'root'
+    ...      Set Variable  reboot
+    ...  ELSE
+    ...      Set Variable  echo abc123 | sudo -S reboot
+
+    ${output}  ${stderr}  ${rc}=  OS Execute Command
+    ...  ${cmd_buf}  fork=${1}
 
 Initiate Auto Reboot
     [Documentation]  Initiate an auto reboot.
