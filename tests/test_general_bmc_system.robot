@@ -18,6 +18,15 @@ Test Teardown      FFDC On Test Case Fail
 
 *** Test Cases ***
 
+File System Read Only
+    [Documentation]  Read access read-only.
+    [Tags]  File_System_Read_Only
+    Open Connection And Log In
+    ${stdout}  ${stderr}=
+    ...  Execute Command  touch cold-play.txt  return_stderr=True
+    Should Contain  ${stderr}  Read-only file system
+
+
 Verify Boot Count After BMC Reboot
     [Documentation]  Verify boot count increments on BMC reboot.
     [Tags]  Verify_Boot_Count_After_BMC_Reboot
