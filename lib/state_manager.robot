@@ -115,10 +115,6 @@ Is OS Booted
     #    "RequestedHostTransition": "xyz.openbmc_project.State.Host.Transition.On"
     # }
 
-    # TODO: Remove this logic once migration is complete.
-    ${status}=  Run Keyword And Return Status  Is OS Starting
-    Return From Keyword If   '${status}' == '${True}'    ${True}
-
     ${boot_stage}=  Get Host State Attribute  BootProgress
     Should Be Equal  ${OS_BOOT_START}  ${boot_stage}
 
