@@ -7,7 +7,6 @@ OPENBMC_BASE_DBUS = 'org.openbmc'
 
 # REST URI base endpoint paths
 CONTROL_URI = OPENBMC_BASE_URI + 'control/'
-SENSORS_URI = OPENBMC_BASE_URI + 'sensors/'
 RECORDS_URI = OPENBMC_BASE_URI + 'records/'
 BUTTONS_URI = OPENBMC_BASE_URI + 'buttons/'
 SETTINGS_URI = OPENBMC_BASE_URI + 'settings/'
@@ -17,6 +16,9 @@ USER_MANAGER_URI = OPENBMC_BASE_URI + 'UserManager/'
 NETWORK_MANAGER_URI = OPENBMC_BASE_URI + 'NetworkManager/'
 TIME_MANAGER_URI = OPENBMC_BASE_URI + 'TimeManager/'
 XYZ_NETWORK_MANAGER = '/xyz/openbmc_project/network/'
+
+# Sensors base variables.
+SENSORS_URI = '/xyz/openbmc_project/sensors/'
 
 # State Manager base variables.
 BMC_REBOOT_TRANS = 'xyz.openbmc_project.State.BMC.Transition.Reboot'
