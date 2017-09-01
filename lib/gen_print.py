@@ -35,9 +35,9 @@ import gen_arg as ga
 
 # Setting these variables for use both inside this module and by programs
 # importing this module.
-pgm_dir_path = sys.argv[0]
-pgm_name = os.path.basename(pgm_dir_path)
-pgm_dir_name = re.sub("/" + pgm_name, "", pgm_dir_path) + "/"
+pgm_file_path = sys.argv[0]
+pgm_name = os.path.basename(pgm_file_path)
+pgm_dir_path = re.sub("/" + pgm_name, "", pgm_file_path) + "/"
 
 
 # Some functions (e.g. sprint_pgm_header) have need of a program name value
