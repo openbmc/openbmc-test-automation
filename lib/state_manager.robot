@@ -62,10 +62,17 @@ Wait For PowerOff
 
 Hard Power Off
     [Documentation]  Do a hard power off.
+    [Arguments]  ${wait}=${1}
+
+    # Description of argument(s):
+    # wait  Indicates that this keyword should wait for host off state.
 
     ${args}=  Create Dictionary  data=${CHASSIS_POWEROFF_TRANS}
     Write Attribute
     ...  ${CHASSIS_STATE_URI}  RequestedPowerTransition  data=${args}
+
+    # Does caller want to wait for status?
+    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
 
     Wait Until Keyword Succeeds
     ...  1 min  10 sec  Run Keywords  Is Chassis Off  AND  Is Host Off
