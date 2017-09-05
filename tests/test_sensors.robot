@@ -11,6 +11,7 @@ Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/state_manager.robot
 Library                ../data/model.py
 Resource               ../lib/boot_utils.robot
+Resource               ../lib/utils.robot
 
 Suite Setup            Setup The Suite
 Test Setup             Open Connection And Log In
@@ -170,7 +171,7 @@ io_board Fault
 *** Keywords ***
 
 Setup The Suite
-    [Documentation]  Do the initial suite setup.
+    [Documentation]  Initial suite setup.
 
     # Boot Host.
     REST Power On
@@ -220,23 +221,6 @@ Get Inventory Sensor Number
     [Arguments]  ${name}
     ${x}=       get inventory sensor   ${OPENBMC_MODEL}   ${name}
     [Return]     ${x}
-
-Read Turbo Setting Via REST
-    [Documentation]  Return turbo allowed setting.
-
-    ${resp}=  OpenBMC Get Request  ${SENSORS_URI}host/TurboAllowed
-    ${jsondata}=  To JSON  ${resp.content}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    [Return]  ${jsondata["data"]["value"]}
-
-Set Turbo Setting Via REST
-    [Documentation]  Set turbo setting via REST.
-    [Arguments]  ${setting}
-    # Description of argument(s):
-    # setting  Value which needs to be set.(i.e. False or True)
-
-    ${valueDict}=  Create Dictionary  data=${setting}
-    Write Attribute  ${SENSORS_URI}host/TurboAllowed  value  data=${valueDict}
 
 Post Test Case Execution
     [Documentation]  Do the post test teardown.
