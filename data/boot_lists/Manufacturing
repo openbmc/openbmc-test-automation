@@ -1,6 +1,7 @@
 REST Power On (mfg)
 IPMI Power On (mfg)
 REST Power Off (mfg)
+REST Hard Power Off (mfg)
 IPMI Power Off (mfg)
 IPMI Power Soft (mfg)
 Host Power Off (mfg)
