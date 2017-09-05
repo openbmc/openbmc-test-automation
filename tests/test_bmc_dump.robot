@@ -5,6 +5,8 @@ Documentation       Test dump functionality of OpenBMC.
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/rest_client.robot
 Resource            ../lib/dump_utils.robot
+Resource            ../lib/boot_utils.robot
+Library             ../lib/bmc_ssh_utils.py
 
 Test Setup          Open Connection And Log In
 Test Teardown       Post Testcase Execution
@@ -20,6 +22,32 @@ Verify User Initiated BMC Dump
     [Tags]  Verify_User_Initiated_Dump
 
     Create User Initiated Dump
+
+
+Verify Dump Persistency On Service Restart
+    [Documentation]  Create user dump, restart BMC service and verify dump
+    ...  persistency.
+    [Tags]  Verify_Dump_Persistency_On_Service_Restart
+
+    Delete All Dumps
+    Create User Initiated Dump
+    BMC Execute Command
+    ...  systemctl restart xyz.openbmc_project.Dump.Manager.service
+    Sleep  10s  reason=Wait for BMC dump service to restart properly.
+
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Verify Dump Persistency On Reset
+    [Documentation]  Create user dump, reset BMC and verify dump persistency.
+    [Tags]  Verify_Dump_Persistency_On_Reset
+
+    Delete All Dumps
+    Create User Initiated Dump
+    OBMC Reboot (off)
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
 Delete User Initiated BMC Dump And Verify
