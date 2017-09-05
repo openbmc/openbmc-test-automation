@@ -604,7 +604,8 @@ Start SOL Console Logging
     ${sub_cmd_buf}=  Create OS Console Command String
     # Routing stderr to stdout so that any startup error text will go to the
     # output file.
-    ${cmd_buf}=  Catenate  ${sub_cmd_buf} > ${log_file_path} 2>&1 &
+    # nohup detaches the process completely from our pty.
+    ${cmd_buf}=  Catenate  nohup ${sub_cmd_buf} &> ${log_file_path} &
     Rdpissuing  ${cmd_buf}
     ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
     # Because we are forking this command, we essentially will never get a
