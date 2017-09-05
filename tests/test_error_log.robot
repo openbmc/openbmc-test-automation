@@ -30,7 +30,7 @@ Error Log Check After BMC Reboot
 
     REST Power Off
     Delete Error Logs And Verify
-    OBMC Reboot(off)
+    OBMC Reboot (off)
     Error Logs Should Not Exist
 
 
