@@ -1144,3 +1144,21 @@ Get Elog URL List
 
 
 ###############################################################################
+Read Turbo Setting Via REST
+    [Documentation]  Return turbo setting via REST.
+
+    ${resp}=  OpenBMC Get Request  ${SENSORS_URI}host/TurboAllowed
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    [Return]  ${jsondata["data"]["value"]}
+
+
+###############################################################################
+Set Turbo Setting Via REST
+    [Documentation]  Set turbo setting via REST.
+    [Arguments]  ${setting}
+    # Description of argument(s):
+    # setting  Value which needs to be set.(i.e. False or True)
+
+    ${valueDict}=  Create Dictionary  data=${setting}
+    Write Attribute  ${SENSORS_URI}host/TurboAllowed  value  data=${valueDict}
