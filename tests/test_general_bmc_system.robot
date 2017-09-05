@@ -11,12 +11,20 @@ Suite Teardown     Close All Connections
 
 # TODO: Collect proc data from system as part of FFDC
 # Refer openbmc/openbmc-test-automation#353
-Test Teardown      FFDC On Test Case Fail
+#Test Teardown      FFDC On Test Case Fail
 
 *** Variables ***
 
 
 *** Test Cases ***
+
+File System Read Only
+    [Documentation]  Verify that file system is read-only.
+    [Tags]  File_System_Read_Only
+    ${output}  ${stderr}  ${rc}=
+    ...  BMC Execute Command  touch cold-play.txt  ignore_err=${1}
+    Should Contain  ${stderr}  Read-only file system
+
 
 Verify Boot Count After BMC Reboot
     [Documentation]  Verify boot count increments on BMC reboot.
