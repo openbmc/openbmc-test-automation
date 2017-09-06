@@ -63,6 +63,36 @@ Verify Hard Power Off Followed With Power On
     Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
 
 
+Verify XCAT Connection After BMC Reboot At Host Off
+    [Documentation]  Verify XCAT connection after BMC reboot at host off.
+    [Tags]  Verify_XCAT_Connection_After_BMC_Reboot_At_Host_Off
+
+    Execute Command On XCAT  rpower  off
+    Wait Until Keyword Succeeds  6 min  10 sec  Is Host Off
+
+    Initiate BMC Reboot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+    Open Connection And Login To XCAT
+    ${xcat_resp}=  Execute Command On XCAT  rpower  stat
+    Should contain  ${xcat_resp}  off
+
+
+Verify XCAT Connection After BMC Reboot At Host Booted
+    [Documentation]  Verify XCAT connection after BMC reboot at host booted.
+    [Tags]  Verify_XCAT_Connection_After_BMC_Reboot_At_Host_Booted
+
+    Execute Command On XCAT  rpower  on
+    Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
+
+    Initiate BMC Reboot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+    Open Connection And Login To XCAT
+    ${xcat_resp}=  Execute Command On XCAT  rpower  stat
+    Should contain  ${xcat_resp}  on
+
+
 *** Keywords ***
 
 Test Suite Setup
