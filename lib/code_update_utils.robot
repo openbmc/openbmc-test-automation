@@ -48,6 +48,19 @@ Get Host Software Property
     ${sw_attributes}=  Read Properties  ${host_object}
     [return]  ${sw_attributes}
 
+Get Host Software Objects Details
+    [Documentation]  Return software object details as a list of dictionaries.
+    [Arguments]  ${quiet}=${QUIET}
+
+    ${software}=  Create List
+
+    ${pnor_details}=  Get Software Objects  ${VERSION_PURPOSE_HOST}
+    :FOR  ${pnor}  IN  @{pnor_details}
+    \  ${resp}=  OpenBMC Get Request  ${pnor}  quiet=${1}
+    \  ${json}=  To JSON  ${resp.content}
+    \  Append To List  ${software}  ${json["data"]}
+
+    [Return]  ${software}
 
 Set Host Software Property
     [Documentation]  Set the host software properties of a given object.
