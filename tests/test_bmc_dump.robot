@@ -82,6 +82,23 @@ Delete All BMC Dumps And Verify
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 
+Verify Dump Persistency On BMC Reboot
+    [Documentation]  Verify dump persistency on BMC reboot.
+    [Tags]  Verify_Dump_Persistency_On_BMC_Reboot
+
+    # Create two dumps.
+    Create User Initiated Dump
+    Create User Initiated Dump
+
+    Initiate BMC Reboot
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    ${jsondata}=  To JSON  ${resp.content}
+    ${dump_count}=  Get Length  ${jsondata["data"]}
+    Should Be Equal  ${dump_count}  2
+
+
 *** Keywords ***
 
 Post Testcase Execution
