@@ -1,9 +1,9 @@
 *** Settings ***
 Documentation     Power management test module.
 
-Resource          ../lib/rest_client.robot
-Resource          ../lib/openbmc_ffdc.robot
-Resource          ../lib/boot_utils.robot
+Resource          ../../lib/rest_client.robot
+Resource          ../../lib/openbmc_ffdc.robot
+Resource          ../../lib/boot_utils.robot
 
 Suite Setup      Setup The Suite
 Test Teardown    Post Test Case Execution
