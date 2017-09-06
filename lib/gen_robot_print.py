@@ -27,109 +27,6 @@ except KeyError:
 
 
 ###############################################################################
-def get_quiet_default(var_value,
-                      default=0):
-
-    r"""
-    If var_value is not None, return it.  Otherwise, return the global
-    variable of the same name, if it exists.  If not, return default.
-
-    This is meant for use by functions needing help assigning dynamic default
-    values to their parameters.  Example:
-
-    def func1(parm1=None):
-
-        parm1 = global_default(parm1, 0)
-
-    Description of arguments:
-    var_value                       The value being evaluated.
-    default                         The value to be returned if var_value is
-                                    None AND the global
-               variable of the same name does not exist.
-    """
-
-    var_name = gp.get_arg_name(0, 1, stack_frame_ix=2)
-
-    return dft(var_value, get_mod_global(var_name, 0))
-
-###############################################################################
-
-
-###############################################################################
-def set_quiet_default(quiet=None,
-                      default=0):
-
-    r"""
-    Return a default value for the quiet variable based on its current value,
-    the value of global ${QUIET} and default.
-
-    Description of Arguments:
-    quiet                           If this is set already, no default value
-                                    is chosen.  Otherwise, it will be set to
-                                    either the global ${QUIET} robot variable
-                                    or to default (below).
-    default                         The default value to be used if global
-                                    ${QUIET} does not exist.
-    """
-
-    if quiet is None:
-        # Set default quiet value.
-        try:
-            quiet = int(BuiltIn().get_variable_value("${quiet}"))
-        except TypeError:
-            quiet = int(default)
-    quiet = int(quiet)
-
-    return quiet
-
-###############################################################################
-
-
-###############################################################################
-def get_quiet(default=1):
-
-    r"""
-    Get the value of robot variable "quiet" and return it.  If "quiet" is not
-    defined, the "default" value is returned.
-
-    Description of arguments:
-    default                         The value that is returned if robot
-                                    variable "quiet" is not defined.
-    """
-
-    try:
-        quiet = int(BuiltIn().get_variable_value("${quiet}"))
-    except TypeError:
-        quiet = default
-
-    return quiet
-
-###############################################################################
-
-
-###############################################################################
-def get_debug(default=0):
-
-    r"""
-    Get the value of robot variable "debug" and return it.  If "debug" is not
-    defined, the "default" value is returned.
-
-    Description of arguments:
-    default                         The value that is returned if robot
-                                    variable "debug" is not defined.
-    """
-
-    try:
-        debug = int(BuiltIn().get_variable_value("${debug}"))
-    except TypeError:
-        debug = default
-
-    return debug
-
-###############################################################################
-
-
-###############################################################################
 def rprint(buffer="",
            stream="STDOUT"):
 
@@ -412,8 +309,7 @@ for func_name in func_names:
     func_def = \
         [
             "def rq" + func_name + "(*args):",
-            "    if get_quiet():",
-            "        return",
+            "    if int(gp.get_var_value(None, 0, \"quiet\")): return",
             "    r" + func_name + "(*args)"
         ]
 
@@ -427,8 +323,7 @@ for func_name in func_names:
     func_def = \
         [
             "def rd" + func_name + "(*args):",
-            "    if not get_debug():",
-            "        return",
+            "    if not int(gp.get_var_value(None, 0, \"debug\")): return",
             "    r" + func_name + "(*args)"
         ]
 
