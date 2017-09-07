@@ -5,7 +5,11 @@ import os
 OPENBMC_BASE_URI = '/org/openbmc/'
 OPENBMC_BASE_DBUS = 'org.openbmc'
 
-# REST URI base endpoint paths
+# org open power base URI.
+OPENPOWER_BASE_URI = '/org/open_power/'
+OPENPOWER_CONTROL = OPENPOWER_BASE_URI + 'control/'
+
+# REST URI base endpoint paths.
 CONTROL_URI = OPENBMC_BASE_URI + 'control/'
 RECORDS_URI = OPENBMC_BASE_URI + 'records/'
 BUTTONS_URI = OPENBMC_BASE_URI + 'buttons/'
