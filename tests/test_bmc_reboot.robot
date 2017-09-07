@@ -5,6 +5,7 @@ Resource                ../lib/rest_client.robot
 Resource                ../lib/utils.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/openbmc_ffdc.robot
+Resource                ../lib/boot_utils.robot
 
 Force Tags  bmcreboot
 
@@ -17,9 +18,9 @@ ${SYSTEM_SHUTDOWN_TIME}    ${5}
 
 *** Test Cases ***
 
-Test WarmReset via REST
-    [Documentation]   This testcase is to verify warm reset using REST.
-    [Tags]  Test_WarmReset_via_REST
+Test BMCReboot via REST
+    [Documentation]   This testcase is to verify bmc reboot using REST.
+    [Tags]  Test_BMCReboot_via_REST
 
     ${warm_test_file}=  Set Variable    /tmp/before_warmreset
     Open Connection And Log In
@@ -28,7 +29,7 @@ Test WarmReset via REST
     ...   return_stderr=True  return_rc=True
     Should Be Equal   ${rc}   ${0}   Unable to create file - ${warm_test_file}
 
-    Trigger Warm Reset
+    OBMC Reboot (off)
     ${max_wait_time}=
     ...   Evaluate    ${SYSTEM_SHUTDOWN_TIME}+${OPENBMC_REBOOT_TIMEOUT}
 
