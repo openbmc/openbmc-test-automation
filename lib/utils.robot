@@ -215,11 +215,13 @@ Initiate OS Host Power Off
     # os_username  The username to be used to sign in to the OS.
     # os_password  The password to be used to sign in to the OS.
 
-    SSHLibrary.Open connection  ${os_host}
-    Login  ${os_username}  ${os_password}
-    ${cmd_buf}  Catenate  shutdown
-    Start Command  ${cmd_buf}
-    SSHLibrary.Close Connection
+    ${cmd_buf}=  Run Keyword If  '${os_username}' == 'root'
+    ...      Set Variable  shutdown
+    ...  ELSE
+    ...      Set Variable  echo ${os_password} | sudo -S shutdown
+
+    ${output}  ${stderr}  ${rc}=  OS Execute Command
+    ...  ${cmd_buf}  fork=${1}
 
 Initiate OS Host Reboot
     [Documentation]  Initiate an OS reboot.
