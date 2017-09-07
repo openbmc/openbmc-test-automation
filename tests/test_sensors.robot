@@ -141,21 +141,6 @@ Verify Setting OCC Turbo Via REST
     ${setting}=  Read Turbo Setting Via REST
     Should Be Equal  ${setting}  True
 
-Chassis Present
-    [Tags]  Chassis_Present
-
-    ${uri}=    Get System component    chassis
-    Read The Attribute
-    ...   ${INVENTORY_URI}system/chassis    present
-    Response Should Be Equal    True
-
-Chassis Fault
-    [Tags]  Chassis_Fault
-    ${uri}=    Get System component    chassis
-    Read The Attribute
-    ...   ${INVENTORY_URI}system/chassis    fault
-    Response Should Be Equal    False
-
 io_board Present
     [Tags]  io_board_Present
     ${uri}=    Get System component    io_board
