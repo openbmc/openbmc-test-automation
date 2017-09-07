@@ -63,6 +63,20 @@ Verify Hard Power Off Followed With Power On
     Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
 
 
+Verify Continuous Power Status Via XCAT
+    [Documentation]  Verify continuously power status via XCAT.
+    [Tags]  Verify_Continuous_Power_Status_Via_XCAT
+
+
+    Execute Command On XCAT  rpower  off
+    Wait Until Keyword Succeeds  10 min  10 sec  Is Host Off
+
+    # Get power status of the node for 100 times.
+    : FOR  ${index}  IN RANGE  1  100
+    \  ${xcat_resp}=  Execute Command On XCAT  rpower  stat
+    \  Should contain  ${xcat_resp}  off
+
+
 *** Keywords ***
 
 Test Suite Setup
