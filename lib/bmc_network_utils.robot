@@ -166,5 +166,5 @@ Delete IP And Object
     # Verify whether deleted IP address is removed from BMC system.
 
     ${ip_data}=  Get BMC IP Info
-    Should Not Contain Match  ${ip_info}  ${ip_addr}*
+    Should Not Contain Match  ${ip_data}  ${ip_addr}*
     ...  msg=IP address not deleted.
