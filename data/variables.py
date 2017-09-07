@@ -1,9 +1,7 @@
 import os
 
-# Enable when ready with openbmc/openbmc-test-automation#203
-# replace with new path /xyz/openbmc_project
-OPENBMC_BASE_URI = '/org/openbmc/'
-OPENBMC_BASE_DBUS = 'org.openbmc'
+OPENBMC_BASE_URI = '/xyz/openbmc_project/'
+OPENBMC_BASE_DBUS = 'xyz.openbmc_project.'
 
 # REST URI base endpoint paths
 CONTROL_URI = OPENBMC_BASE_URI + 'control/'
@@ -16,47 +14,47 @@ INVENTORY_URI = OPENBMC_BASE_URI + 'inventory/'
 USER_MANAGER_URI = OPENBMC_BASE_URI + 'UserManager/'
 NETWORK_MANAGER_URI = OPENBMC_BASE_URI + 'NetworkManager/'
 TIME_MANAGER_URI = OPENBMC_BASE_URI + 'TimeManager/'
-XYZ_NETWORK_MANAGER = '/xyz/openbmc_project/network/'
+XYZ_NETWORK_MANAGER = OPENBMC_BASE_URI + '/network/'
 
-# State Manager base variables.
-BMC_REBOOT_TRANS = 'xyz.openbmc_project.State.BMC.Transition.Reboot'
+# State Manager base variables
+BMC_REBOOT_TRANS = OPENBMC_BASE_DBUS +'State.BMC.Transition.Reboot'
 
-HOST_POWEROFF_TRANS = 'xyz.openbmc_project.State.Host.Transition.Off'
-HOST_POWERON_TRANS = 'xyz.openbmc_project.State.Host.Transition.On'
-HOST_REBOOT_TRANS = 'xyz.openbmc_project.State.Host.Transition.Reboot'
-HOST_POWEROFF_STATE = 'xyz.openbmc_project.State.Host.HostState.Off'
-HOST_POWERON_STATE = 'xyz.openbmc_project.State.Host.HostState.Running'
+HOST_POWEROFF_TRANS = OPENBMC_BASE_DBUS + 'State.Host.Transition.Off'
+HOST_POWERON_TRANS = OPENBMC_BASE_DBUS + 'State.Host.Transition.On'
+HOST_REBOOT_TRANS = OPENBMC_BASE_DBUS + 'State.Host.Transition.Reboot'
+HOST_POWEROFF_STATE = OPENBMC_BASE_DBUS + '.State.Host.HostState.Off'
+HOST_POWERON_STATE = OPENBMC_BASE_DBUS + 'State.Host.HostState.Running'
 
-CHASSIS_POWEROFF_TRANS = 'xyz.openbmc_project.State.Chassis.Transition.Off'
-CHASSIS_POWERON_TRANS = 'xyz.openbmc_project.State.Chassis.Transition.On'
-CHASSIS_POWEROFF_STATE = 'xyz.openbmc_project.State.Chassis.PowerState.Off'
-CHASSIS_POWERON_STATE = 'xyz.openbmc_project.State.Chassis.PowerState.On'
+CHASSIS_POWEROFF_TRANS = OPENBMC_BASE_DBUS + 'State.Chassis.Transition.Off'
+CHASSIS_POWERON_TRANS = OPENBMC_BASE_DBUS + 'State.Chassis.Transition.On'
+CHASSIS_POWEROFF_STATE = OPENBMC_BASE_DBUS + 'State.Chassis.PowerState.Off'
+CHASSIS_POWERON_STATE = OPENBMC_BASE_DBUS + 'State.Chassis.PowerState.On'
 
 # State Manager URI variables.
-BMC_STATE_URI = '/xyz/openbmc_project/state/bmc0/'
-HOST_STATE_URI = '/xyz/openbmc_project/state/host0/'
-CHASSIS_STATE_URI = '/xyz/openbmc_project/state/chassis0/'
-HOST_WATCHDOG_URI = '/xyz/openbmc_project/watchdog/host0/'
+BMC_STATE_URI = OPENBMC_BASE_URI + '/state/bmc0/'
+HOST_STATE_URI = OPENBMC_BASE_URI + '/state/host0/'
+CHASSIS_STATE_URI = OPENBMC_BASE_URI + '/state/chassis0/'
+HOST_WATCHDOG_URI = OPENBMC_BASE_URI + '/watchdog/host0/'
 
 # Logging URI variables
-BMC_LOGGING_URI = '/xyz/openbmc_project/logging/'
-BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
+BMC_LOGGING_URI = OPENBMC_BASE_URI + '/logging/'
+BMC_LOGGING_ENTRY = BMC_LOGGING_URI + '/entry/'
 
 # Software manager version
-SOFTWARE_VERSION_URI = '/xyz/openbmc_project/software/'
-ACTIVE = 'xyz.openbmc_project.Software.Activation.Activations.Active'
-READY = 'xyz.openbmc_project.Software.Activation.Activations.Ready'
-INVALID = 'xyz.openbmc_project.Software.Activation.Activations.Invalid'
-ACTIVATING = 'xyz.openbmc_project.Software.Activation.Activations.Activating'
-NOTREADY = 'xyz.openbmc_project.Software.Activation.Activations.NotReady'
-FAILED = 'xyz.openbmc_project.Software.Activation.Activations.Failed'
+SOFTWARE_VERSION_URI = OPENBMC_BASE_URI + '/software/'
+ACTIVE = OPENBMC_BASE_DBUS + 'Software.Activation.Activations.Active'
+READY = OPENBMC_BASE_DBUS + 'Software.Activation.Activations.Ready'
+INVALID = OPENBMC_BASE_DBUS + 'Software.Activation.Activations.Invalid'
+ACTIVATING = OPENBMC_BASE_DBUS + 'Software.Activation.Activations.Activating'
+NOTREADY = OPENBMC_BASE_DBUS + 'Software.Activation.Activations.NotReady'
+FAILED = OPENBMC_BASE_DBUS + 'Software.Activation.Activations.Failed'
 
-SOFTWARE_ACTIVATION = 'xyz.openbmc_project.Software.Activation'
+SOFTWARE_ACTIVATION = OPENBMC_BASE_DBUS + 'Software.Activation'
 REQUESTED_ACTIVATION = SOFTWARE_ACTIVATION + '.RequestedActivations'
 REQUESTED_ACTIVE = REQUESTED_ACTIVATION + '.Active'
 REQUESTED_NONE = REQUESTED_ACTIVATION + '.None'
 
-SOFTWARE_PURPOSE = 'xyz.openbmc_project.Software.Version.VersionPurpose'
+SOFTWARE_PURPOSE = OPENBMC_BASE_DBUS + 'Software.Version.VersionPurpose'
 VERSION_PURPOSE_HOST = SOFTWARE_PURPOSE + '.Host'
 VERSION_PURPOSE_BMC = SOFTWARE_PURPOSE + '.BMC'
 VERSION_PURPOSE_SYSTEM = SOFTWARE_PURPOSE + '.System'
@@ -65,41 +63,41 @@ VERSION_PURPOSE_SYSTEM = SOFTWARE_PURPOSE + '.System'
 IMAGE_UPLOAD_DIR_PATH = '/tmp/images/'
 
 # Inventory URI
-HOST_INVENTORY_URI = '/xyz/openbmc_project/inventory/'
+HOST_INVENTORY_URI = OPENBMC_BASE_URI + '/inventory/'
 
 # Led URI variable
-LED_GROUPS_URI = '/xyz/openbmc_project/led/groups/'
-LED_PHYSICAL_URI = '/xyz/openbmc_project/led/physical/'
+LED_GROUPS_URI = OPENBMC_BASE_URI + '/led/groups/'
+LED_PHYSICAL_URI = OPENBMC_BASE_URI + '/led/physical/'
 
 # Host control URI variables.
-CONTROL_HOST_URI = '/xyz/openbmc_project/control/host0/'
+CONTROL_HOST_URI = OPENBMC_BASE_URI + '/control/host0/'
 
 # Power restore variables.
 POWER_RESTORE_URI = CONTROL_HOST_URI + 'power_restore_policy'
-CONTROL_DBUS_BASE = 'xyz.openbmc_project.Control.'
+CONTROL_DBUS_BASE = OPENBMC_BASE_DBUS + 'Control.'
 
 RESTORE_LAST_STATE = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.Restore'
 ALWAYS_POWER_ON = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOn'
 ALWAYS_POWER_OFF = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOff'
 
 # Dump URI variable
-DUMP_URI = '/xyz/openbmc_project/dump/'
+DUMP_URI = OPENBMC_BASE_URI +'/dump/'
 DUMP_ENTRY_URI = DUMP_URI + 'entry/'
 
 # Boot progress variables.
-STATE_DBUS_BASE = 'xyz.openbmc_project.State.'
+STATE_DBUS_BASE = OPENBMC_BASE_DBUS + 'State.'
 OS_BOOT_START = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.OSStart'
 OS_BOOT_OFF = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.Unspecified'
 OS_BOOT_COMPLETE = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.BootComplete'
 
 # Boot variables.
-BOOT_SOURCE_DEFAULT = 'xyz.openbmc_project.Control.Boot.Source.Sources.Default'
-BOOT_SOURCE_NETWORK = 'xyz.openbmc_project.Control.Boot.Source.Sources.Network'
-BOOT_SOURCE_DISK = 'xyz.openbmc_project.Control.Boot.Source.Sources.Disk'
-BOOT_SOURCE_CDROM = 'xyz.openbmc_project.Control.Boot.Source.Sources.ExternalMedia'
-BOOT_MODE_SAFE = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Safe'
-BOOT_MODE_SETUP = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Setup'
-BOOT_MODE_REGULAR = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Regular'
+BOOT_SOURCE_DEFAULT = OPENBMC_BASE_DBUS + 'Control.Boot.Source.Sources.Default'
+BOOT_SOURCE_NETWORK = OPENBMC_BASE_DBUS + 'Control.Boot.Source.Sources.Network'
+BOOT_SOURCE_DISK = OPENBMC_BASE_DBUS + 'Control.Boot.Source.Sources.Disk'
+BOOT_SOURCE_CDROM = OPENBMC_BASE_DBUS + 'Control.Boot.Source.Sources.ExternalMedia'
+BOOT_MODE_SAFE = OPENBMC_BASE_DBUS + 'Control.Boot.Mode.Modes.Safe'
+BOOT_MODE_SETUP = OPENBMC_BASE_DBUS + 'Control.Boot.Mode.Modes.Setup'
+BOOT_MODE_REGULAR = OPENBMC_BASE_DBUS + 'Control.Boot.Mode.Modes.Regular'
 
 '''
   QEMU HTTPS variable:
