@@ -1,24 +1,18 @@
 import os
 
-# Enable when ready with openbmc/openbmc-test-automation#203
-# replace with new path /xyz/openbmc_project
-OPENBMC_BASE_URI = '/org/openbmc/'
-OPENBMC_BASE_DBUS = 'org.openbmc'
+OPENBMC_BASE_URI = '/xyz/openbmc_project/'
+OPENBMC_BASE_DBUS = 'xyz.openbmc_project.'
 
 # REST URI base endpoint paths
 CONTROL_URI = OPENBMC_BASE_URI + 'control/'
 SENSORS_URI = OPENBMC_BASE_URI + 'sensors/'
-RECORDS_URI = OPENBMC_BASE_URI + 'records/'
-BUTTONS_URI = OPENBMC_BASE_URI + 'buttons/'
 SETTINGS_URI = OPENBMC_BASE_URI + 'settings/'
 WATCHDOG_URI = OPENBMC_BASE_URI + 'watchdog/'
-INVENTORY_URI = OPENBMC_BASE_URI + 'inventory/'
-USER_MANAGER_URI = OPENBMC_BASE_URI + 'UserManager/'
 NETWORK_MANAGER_URI = OPENBMC_BASE_URI + 'NetworkManager/'
 TIME_MANAGER_URI = OPENBMC_BASE_URI + 'TimeManager/'
-XYZ_NETWORK_MANAGER = '/xyz/openbmc_project/network/'
+XYZ_NETWORK_MANAGER = OPENBMC_BASE_URI + '/network/'
 
-# State Manager base variables.
+# State Manager base variables
 BMC_REBOOT_TRANS = 'xyz.openbmc_project.State.BMC.Transition.Reboot'
 
 HOST_POWEROFF_TRANS = 'xyz.openbmc_project.State.Host.Transition.Off'
@@ -33,17 +27,17 @@ CHASSIS_POWEROFF_STATE = 'xyz.openbmc_project.State.Chassis.PowerState.Off'
 CHASSIS_POWERON_STATE = 'xyz.openbmc_project.State.Chassis.PowerState.On'
 
 # State Manager URI variables.
-BMC_STATE_URI = '/xyz/openbmc_project/state/bmc0/'
-HOST_STATE_URI = '/xyz/openbmc_project/state/host0/'
-CHASSIS_STATE_URI = '/xyz/openbmc_project/state/chassis0/'
-HOST_WATCHDOG_URI = '/xyz/openbmc_project/watchdog/host0/'
+BMC_STATE_URI = OPENBMC_BASE_URI + '/state/bmc0/'
+HOST_STATE_URI = OPENBMC_BASE_URI + '/state/host0/'
+CHASSIS_STATE_URI = OPENBMC_BASE_URI + '/state/chassis0/'
+HOST_WATCHDOG_URI = OPENBMC_BASE_URI + '/watchdog/host0/'
 
 # Logging URI variables
-BMC_LOGGING_URI = '/xyz/openbmc_project/logging/'
-BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
+BMC_LOGGING_URI = OPENBMC_BASE_URI + '/logging/'
+BMC_LOGGING_ENTRY = BMC_LOGGING_URI + '/entry/'
 
 # Software manager version
-SOFTWARE_VERSION_URI = '/xyz/openbmc_project/software/'
+SOFTWARE_VERSION_URI = OPENBMC_BASE_URI + '/software/'
 ACTIVE = 'xyz.openbmc_project.Software.Activation.Activations.Active'
 READY = 'xyz.openbmc_project.Software.Activation.Activations.Ready'
 INVALID = 'xyz.openbmc_project.Software.Activation.Activations.Invalid'
@@ -52,8 +46,6 @@ NOTREADY = 'xyz.openbmc_project.Software.Activation.Activations.NotReady'
 FAILED = 'xyz.openbmc_project.Software.Activation.Activations.Failed'
 
 SOFTWARE_ACTIVATION = 'xyz.openbmc_project.Software.Activation'
-REQUESTED_ACTIVATION = SOFTWARE_ACTIVATION + '.RequestedActivations'
-REQUESTED_ACTIVE = REQUESTED_ACTIVATION + '.Active'
 REQUESTED_NONE = REQUESTED_ACTIVATION + '.None'
 
 SOFTWARE_PURPOSE = 'xyz.openbmc_project.Software.Version.VersionPurpose'
@@ -65,14 +57,14 @@ VERSION_PURPOSE_SYSTEM = SOFTWARE_PURPOSE + '.System'
 IMAGE_UPLOAD_DIR_PATH = '/tmp/images/'
 
 # Inventory URI
-HOST_INVENTORY_URI = '/xyz/openbmc_project/inventory/'
+HOST_INVENTORY_URI = OPENBMC_BASE_URI + '/inventory/'
 
 # Led URI variable
-LED_GROUPS_URI = '/xyz/openbmc_project/led/groups/'
-LED_PHYSICAL_URI = '/xyz/openbmc_project/led/physical/'
+LED_GROUPS_URI = OPENBMC_BASE_URI + '/led/groups/'
+LED_PHYSICAL_URI = OPENBMC_BASE_URI + '/led/physical/'
 
 # Host control URI variables.
-CONTROL_HOST_URI = '/xyz/openbmc_project/control/host0/'
+CONTROL_HOST_URI = OPENBMC_BASE_URI + '/control/host0/'
 
 # Power restore variables.
 POWER_RESTORE_URI = CONTROL_HOST_URI + 'power_restore_policy'
@@ -83,7 +75,7 @@ ALWAYS_POWER_ON = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOn'
 ALWAYS_POWER_OFF = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOff'
 
 # Dump URI variable
-DUMP_URI = '/xyz/openbmc_project/dump/'
+DUMP_URI = OPENBMC_BASE_URI +'/dump/'
 DUMP_ENTRY_URI = DUMP_URI + 'entry/'
 
 # Boot progress variables.
