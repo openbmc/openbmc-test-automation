@@ -232,17 +232,24 @@ Put BMC State
     ...  ELSE  Run Keywords  Initiate BMC Reboot  AND
     ...  Wait for BMC state  ${expected_state}
 
-
 Initiate BMC Reboot
     [Documentation]  Initiate BMC reboot.
-    ${args}=  Create Dictionary   data=${BMC_REBOOT_TRANS}
+    [Arguments]  ${wait}=${1}
+
+    # Description of argument(s):
+    # wait  Indicates that this keyword should wait for ending state..
+
+    ${args}=  Create Dictionary  data=${BMC_REBOOT_TRANS}
 
     Run Keyword And Ignore Error  Write Attribute
-    ...  ${BMC_STATE_URI}  RequestedBMCTransition   data=${args}
+    ...  ${BMC_STATE_URI}  RequestedBMCTransition  data=${args}
 
-    ${session_active}=   Check If BMC Reboot Is Initiated
-    Run Keyword If   '${session_active}' == '${True}'
-    ...    Fail   msg=BMC Reboot didn't occur
+    # Does caller want to wait for status?
+    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+
+    ${session_active}=  Check If BMC Reboot Is Initiated
+    Run Keyword If  '${session_active}' == '${True}'
+    ...  Fail  msg=BMC Reboot didn't occur.
 
     Check If BMC is Up
 
