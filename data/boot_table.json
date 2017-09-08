@@ -206,6 +206,31 @@
         "method_type": "keyword",
         "method": "BMC Execute Command  /sbin/reboot  fork=${1}"
     },
+    # Run a REST "reboot" on the OBMC while host is running.
+    "REST OBMC Reboot (run)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Initiate BMC Reboot  wait=${0}",
+        "lib_file_path": "state_manager.robot"
+    },
     # Run a "reboot" on the OBMC while host is off.
     "OBMC Reboot (off)": {
         "start": {
@@ -221,6 +246,23 @@
         "bmc_reboot": 1,
         "method_type": "keyword",
         "method": "BMC Execute Command  /sbin/reboot  fork=${1}"
+    },
+    # Run a "reboot" on the OBMC while host is off.
+    "REST OBMC Reboot (off)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^Off|Unspecified$",
+            "host": "^Off$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Initiate BMC Reboot  wait=${0}",
+        "lib_file_path": "state_manager.robot"
     },
     # Cycle AC via the PDU while host is off.
     "PDU AC Cycle (run)": {
