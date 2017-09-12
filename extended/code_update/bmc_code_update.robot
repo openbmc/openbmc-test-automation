@@ -50,7 +50,43 @@ Delete BMC Image
     Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
 
 
+BMC Image Priority Attribute Test
+    [Documentation]  Set "Priority" attribute.
+    [Tags]  BMC_Image_Priority_Attribute_Test
+    [Template]  Temporarily Set BMC Attribute
+
+    # Property        Value
+    Priority          ${0}
+    Priority          ${1}
+    Priority          ${127}
+    Priority          ${255}
+
+
 *** Keywords ***
+
+Temporarily Set BMC Attribute
+    [Documentation]  Update the BMC attribute value.
+    [Arguments]  ${attribute_name}  ${attribute_value}
+
+    # Description of argument(s):
+    # attribute_name    BMC software attribute name (e.g. "Priority").
+    # attribute_value   Value to be written.
+
+    ${image_ids}=  Get Software Objects  ${VERSION_PURPOSE_BMC}
+    ${init_bmc_properties}=  Get Host Software Property  ${image_ids[0]}
+    ${initial_priority}=  Set Variable  ${init_bmc_properties["Priority"]}
+
+    Set Host Software Property  ${image_ids[0]}  ${attribute_name}
+    ...  ${attribute_value}
+
+    ${cur_bmc_properties}=  Get Host Software Property  ${image_ids[0]}
+    Should Be Equal As Integers  ${cur_bmc_properties["Priority"]}
+    ...  ${attribute_value}
+
+    # Revert to to initial value.
+    Set Host Software Property
+    ...  ${image_ids[0]}  ${attribute_name}  ${initial_priority}
+
 
 Upload And Activate Multiple BMC Images Setup
     [Documentation]  Check that the ALTERNATE_FILE_PATH variable is set.

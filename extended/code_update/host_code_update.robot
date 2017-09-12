@@ -72,6 +72,7 @@ Host Image Priority Attribute Test
     Priority          ${0}
     Priority          ${1}
     Priority          ${127}
+    Priority          ${255}
 
 
 Set RequestedActivation To None
