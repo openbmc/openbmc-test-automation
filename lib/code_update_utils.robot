@@ -98,6 +98,26 @@ Set Property To Invalid Value And Verify No Change
     ...  &{cur_properties}[${property}]
 
 
+Set Priority To Invalid Value And Expect Error
+    [Documentation]  Set the priority of an image to an invalid value and
+    ...              check that an error was returned.
+    [Arguments]  ${version_type}  ${priority}
+
+    # Description of argument(s):
+    # version_type  Either BMC or host version purpose.
+    #               (e.g. "xyz.openbmc_project.Software.Version.VersionPurpose.BMC"
+    #                     "xyz.openbmc_project.Software.Version.VersionPurpose.Host").
+    # priority      The priority value to set. Should be an integer outside of
+    #               the range of 0 through 255.
+
+    ${images}=  Get Software Objects  version_type=${version_type}
+    ${num_images}=  Get Length  ${images}
+    Should Be True  0 < ${num_images}
+
+    Run Keyword And Expect Error  403 != 200
+    ...  Set Host Software Property  @{images}[0]  Priority  ${priority}
+
+
 Upload And Activate Image
     [Documentation]  Upload an image to the BMC and activate it with REST.
     [Arguments]  ${image_file_path}
