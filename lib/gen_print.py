@@ -1153,7 +1153,7 @@ def sprint_error_report(error_text="\n",
     # itself and this function in the call stack.  This is not helpful to a
     # debugger and is therefore clutter.  We will adjust the stack_frame_ix to
     # hide that information.
-    stack_frame_ix = 2
+    stack_frame_ix = 1
     caller_func_name = sprint_func_name(2)
     if caller_func_name.endswith("print_error_report"):
         stack_frame_ix += 1
