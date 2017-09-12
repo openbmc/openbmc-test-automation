@@ -1,0 +1,149 @@
+#!/usr/bin/env python
+
+r"""
+This program will get the system serial number from an OBMC machine and print
+it to stdout.
+"""
+
+import sys
+import os
+import requests
+
+save_path_0 = sys.path[0]
+del sys.path[0]
+
+from gen_arg import *
+from gen_print import *
+from gen_valid import *
+
+# Restore sys.path[0].
+sys.path.insert(0, save_path_0)
+
+logging.captureWarnings(True)
+
+parser = argparse.ArgumentParser(
+    usage='%(prog)s [OPTIONS]',
+    description="%(prog)s will get the system serial number from an OBMC" +
+                " machine and print it to stdout as follows:\n\n" +
+                "mch_ser_num:<ser num>",
+    formatter_class=argparse.RawTextHelpFormatter,
+    prefix_chars='-+')
+
+parser.add_argument(
+    '--openbmc_username',
+    default="root",
+    help='The username for communicating with the OpenBMC machine.')
+
+parser.add_argument(
+    '--openbmc_password',
+    default="0penBmc",
+    help='The password for communicating with the OpenBMC machine.')
+
+parser.add_argument(
+    'openbmc_host',
+    help='The host name or IP address of the OpenBMC machine.')
+
+# Populate stock_list with options we want.
+stock_list = [("test_mode", 0), ("quiet", 1)]
+
+
+def exit_function(signal_number=0,
+                  frame=None):
+
+    r"""
+    Execute whenever the program ends normally or with the signals that we
+    catch (i.e. TERM, INT).
+    """
+
+    dprint_executing()
+    dprint_var(signal_number)
+
+    qprint_pgm_footer()
+
+
+def signal_handler(signal_number,
+                   frame):
+
+    r"""
+    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our
+    program would terminate immediately with return code 143 and without
+    calling our exit_function.
+    """
+
+    # Our convention is to set up exit_function with atexit.register() so
+    # there is no need to explicitly call exit_function from here.
+
+    dprint_executing()
+
+    # Calling exit prevents us from returning to the code that was running
+    # when we received the signal.
+    exit(0)
+
+
+def validate_parms():
+
+    r"""
+    Validate program parameters, etc.  Return True or False (i.e. pass/fail)
+    accordingly.
+    """
+
+    gen_post_validation(exit_function, signal_handler)
+
+    return True
+
+
+def create_http_prefix(host):
+
+    r"""
+    Create and return an http prefix string.
+
+    Description of argument(s):
+    host                            The host being communicated with via the
+                                    curl command.
+    """
+
+    return "https://" + host + "/"
+
+
+def main():
+
+    if not gen_get_options(parser, stock_list):
+        return False
+
+    if not validate_parms():
+        return False
+
+    qprint_pgm_header()
+
+    session = requests.Session()
+
+    http_prefix = create_http_prefix(openbmc_host)
+
+    command = http_prefix + 'login'
+    qprint_issuing(command)
+    resp = session.post(command,
+                        json={'data': [openbmc_username, openbmc_password]},
+                        verify=False)
+    if resp.json()['status'] != 'ok':
+        json = resp.json()
+        print_error_report("http request failed:\n" + sprint_var(command, 1))
+        raise Exception("Login failed.\n")
+
+    command = http_prefix + "xyz/openbmc_project/inventory/system"
+    qprint_issuing(command)
+    resp = session.get(command, verify=False)
+    json = resp.json()
+    if json['status'] != 'ok':
+        print_error_report("http request failed:\n" + sprint_var(command, 1))
+        raise Exception("http request failed.\n")
+
+    mch_ser_num = json['data']['SerialNumber']
+    pvar(mch_ser_num, 0, 0, 0)
+
+    return True
+
+
+# Main
+
+if not main():
+    exit(1)
