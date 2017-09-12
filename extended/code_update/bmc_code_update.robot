@@ -42,6 +42,17 @@ Upload And Activate Multiple BMC Images
     ${ALTERNATE_IMAGE_FILE_PATH}   ${VERSION_PURPOSE_BMC}
 
 
+BMC Set Priority To Invalid Values
+    [Documentation]  Attempt to set the priority of an image to an invalid
+    ...              value and expect an error.
+    [Tags]  BMC_Set_Priority_To_Invalid_Values
+    [Template]  Set Priority To Invalid Value And Expect Error
+
+    # Version Type              Priority
+    ${SOFTWARE_PURPOSE_BMC}     ${-1}
+    ${SOFTWARE_PURPOSE_BMC}     ${256}
+
+
 Delete BMC Image
     [Documentation]  Delete a BMC image from the BMC flash chip.
     [Tags]  Delete_BMC_Image
