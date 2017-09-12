@@ -75,6 +75,17 @@ Host Image Priority Attribute Test
     Priority          ${127}
 
 
+Host Set Priority To Invalid Values
+    [Documentation]  Attempt to set the priority of an image to an invalid
+    ...              value and expect an error.
+    [Tags]  Host_Set_Priority_To_Invalid_Values
+    [Template]  Set Priority To Invalid Value And Expect Error
+
+    # Version Type              Priority
+    ${VERSION_PURPOSE_HOST}    ${-1}
+    ${VERSION_PURPOSE_HOST}    ${256}
+
+
 Set RequestedActivation To None
     [Documentation]  Set the RequestedActivation of the image to None and
     ...              verify that it is in fact set to None.
