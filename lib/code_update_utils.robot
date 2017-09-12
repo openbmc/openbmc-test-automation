@@ -35,7 +35,26 @@ Get Software Objects
     \  Continue For Loop If  '${attr_purpose}' != '${version_type}'
     \  Append To List  ${host_list}  ${index}
 
-    [return]  ${host_list}
+    [Return]  ${host_list}
+
+
+Get Software Objects Id
+    [Documentation]  Get the host software objects id and return as a list.
+    [Arguments]  ${version_type}=${VERSION_PURPOSE_HOST}
+
+    # Description of argument(s):
+    # version_type  Either BMC or host version purpose.
+    #               By default host version purpose string.
+    #  (e.g. "xyz.openbmc_project.Software.Version.VersionPurpose.BMC"
+    #        "xyz.openbmc_project.Software.Version.VersionPurpose.Host").
+
+    ${sw_id_list}=  Create List
+    ${sw_list}=  Get Software Objects  ${version_type}
+
+    :FOR  ${index}  IN  @{sw_list}
+    \  Append To List  ${sw_id_list}  ${index.rsplit('/', 1)[1]}
+
+    [Return]  ${sw_id_list}
 
 
 Get Host Software Property
