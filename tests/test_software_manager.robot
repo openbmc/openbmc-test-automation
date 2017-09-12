@@ -9,6 +9,11 @@ Resource            ../lib/code_update_utils.robot
 Test Teardown       FFDC On Test Case Fail
 
 
+*** Variables ***
+
+${BMC_SW_PATH}   ${HOST_INVENTORY_URI}system/chassis/motherboard/boxelder/bmc
+${HOST_SW_PATH}  ${HOST_INVENTORY_URI}system/chassis
+
 *** Test Cases ***
 
 BMC Software Version
@@ -19,6 +24,16 @@ BMC Software Version
     # Software Version Purpose
     ${VERSION_PURPOSE_BMC}
 
+
+BMC Software Activation Association
+    [Documentation]  Verify BMC association.
+    [Tags]  BMC_Software_Activation_Association
+    [Template]  Verify Software Activation Association
+
+    # Software Version Purpose   Inventory path
+    ${VERSION_PURPOSE_BMC}       ${BMC_SW_PATH}
+
+
 Host Software Version
     [Documentation]  Verify host version and activation status.
     [Tags]  Host_Software_Version
@@ -28,7 +43,84 @@ Host Software Version
     ${VERSION_PURPOSE_HOST}
 
 
+Host Software Activation Association
+    [Documentation]  Verify Host association.
+    [Tags]  Host_Software_Activation_Association
+    [Template]  Verify Software Activation Association
+
+    # Software Version Purpose   Inventory path
+    ${VERSION_PURPOSE_HOST}      ${HOST_SW_PATH}
+
+
 *** Keywords ***
+
+Verify Software Activation Association
+    [Documentation]  Verify software activation association.
+    [Arguments]  ${software_purpose}  ${assoiation_path}
+
+    # Description of argument(s):
+    # software_purpose    BMC or host software purpose.
+    # assoiation_path     BMC or host inventory path.
+
+    # Example:
+    # "/xyz/openbmc_project/software/a0d9ba0d": {
+    #     "Activation": "xyz.openbmc_project.Software.Activation.Activations.Active",
+    #     "Path": "",
+    #     "Priority": 0,
+    #     "Purpose": "xyz.openbmc_project.Software.Version.VersionPurpose.BMC",
+    #     "RequestedActivation": "xyz.openbmc_project.Software.Activation.RequestedActivations.None",
+    #     "Version": "v1.99.9-143-g69cab69",
+    #     "associations": [
+    #        [
+    #            "inventory",
+    #            "activation",
+    #            "/xyz/openbmc_project/inventory/system/chassis/motherboard/boxelder/bmc"
+    #        ]
+    #    ]
+    # },
+    # "/xyz/openbmc_project/software/a0d9ba0d/inventory": {
+    #    "endpoints": [
+    #        "/xyz/openbmc_project/inventory/system/chassis/motherboard/boxelder/bmc"
+    #    ]
+    # },
+
+    ${obj_id_list}=  Get Software Objects Id  ${software_purpose}
+
+    : FOR  ${index}  IN  @{obj_id_list}
+    \  Verify Inventory Association  ${index}  ${assoiation_path}
+
+
+Verify Inventory Association
+    [Documentation]  Verify software inventory association.
+    [Arguments]  ${software_id}  ${assoiation_path}
+
+    # Description of argument(s):
+    # software_id         BMC or host software id.
+    # assoiation_path     BMC or host inventory path.
+
+    # Example:
+    #    "/xyz/openbmc_project/inventory/system/chassis/motherboard/boxelder/bmc/activation": {
+    #    "endpoints": [
+    #        "/xyz/openbmc_project/software/e42627b5",
+    #        "/xyz/openbmc_project/software/a0d9ba0d"
+    #    ]
+    # },
+
+    ${sw_attr_data}=  Read Attribute
+    ...  ${SOFTWARE_VERSION_URI}${software_id}  associations
+    List Should Contain Value  @{sw_attr_data}  ${assoiation_path}
+
+    # Verify the inventory path in software manager entry.
+    ${sw_endpoint_data}=  Read Attribute
+    ...  ${SOFTWARE_VERSION_URI}${software_id}${/}inventory  endpoints
+    List Should Contain Value  ${sw_endpoint_data}  ${assoiation_path}
+
+    # Verify the inventory path.
+    ${inv_endpoint_data}=  Read Attribute
+    ...  ${assoiation_path}${/}activation  endpoints
+    List Should Contain Value
+    ...  ${inv_endpoint_data}  ${SOFTWARE_VERSION_URI}${software_id}
+
 
 Verify Software Version
     [Documentation]  Verify version and activation status.
