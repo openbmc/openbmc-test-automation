@@ -33,6 +33,7 @@ Test Teardown     Code Update Test Teardown
 ${QUIET}                          ${1}
 ${IMAGE_FILE_PATH}                ${EMPTY}
 ${DELETE_OLD_PNOR_IMAGES}         false
+${DELETE_OLD_GUARD_FILE}          false
 ${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
 
 *** Test Cases ***
@@ -48,7 +49,6 @@ REST Host Code Update
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     OBMC Reboot (off)
-
 
 
 Post Update Boot To OS
@@ -164,10 +164,13 @@ Code Update Setup
     # - Clean up all existing BMC dumps.
     # - Clean up all currently install PNOR images.
 
+    REST Power Off
     Delete All Dumps
     Delete Error Logs
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
     ...  Delete All PNOR Images
+    Run Keyword If  'true' == '${DELETE_OLD_GUARD_FILE}'  BMC Execute Command
+    ...  rm -f /var/lib/phosphor-software-manager/pnor/prsv/GUARD
 
 
 Upload And Activate Multiple BMC Images Setup
