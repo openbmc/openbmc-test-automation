@@ -48,6 +48,9 @@ Verify Boxelder Present Property
     # },
     ${json_data}=  Get Inventory  system/chassis/motherboard/boxelder/bmc
     Should Be True  ${json_data["data"]["Present"]}
+    Should Not Be Equal As Strings
+    ...  ${json_data["data"]["SerialNumber"]}  000000000000
+    ...  msg=BM planar serial number invalid.
 
 
 Verify Boxelder MAC Address Property Is Populated
