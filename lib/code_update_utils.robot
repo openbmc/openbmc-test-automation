@@ -31,11 +31,27 @@ Get Software Objects
     ${sw_list}=  Read Properties  ${SOFTWARE_VERSION_URI}
 
     :FOR  ${index}  IN  @{sw_list}
-    \  ${attr_purpose}=  Read Attribute  ${index}  Purpose  quiet=${1}
+    \  ${attr_purpose}=  Read Software Attribute  ${index}  Purpose
     \  Continue For Loop If  '${attr_purpose}' != '${version_type}'
     \  Append To List  ${host_list}  ${index}
 
-    [return]  ${host_list}
+    [Return]  ${host_list}
+
+
+Read Software Attribute
+    [Documentation]  Return software attribute data.
+    [Arguments]  ${software_object}  ${attribute_name}
+
+    # Description of argument(s):
+    # software_object   Software object path.
+    #                   (e.g. "/xyz/openbmc_project/software/f3b29aa8").
+    # attribute_name    Software object attribute name.
+
+    ${resp}=  OpenBMC Get Request  ${software_object}/attr/${attribute_name}
+    ...  quiet=${1}
+    Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
+    ${content}=  To JSON  ${resp.content}
+    [Return]  ${content["data"]}
 
 
 Get Host Software Property
