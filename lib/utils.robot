@@ -1033,6 +1033,8 @@ Install Debug Tarball On BMC
     OperatingSystem.File Should Exist  ${tarball_file_path}
     ...  msg=${tarball_file_path} doesn't exist.
 
+    ${bmc_usr_local_path}=  Set Variable  /usr/local/bin/
+
     # Upload the file to BMC.
     Import Library  SCPLibrary  WITH NAME  scp
     Open Connection for SCP
@@ -1040,20 +1042,23 @@ Install Debug Tarball On BMC
 
     # Create tarball directory and install.
     Open Connection And Log In
-    Execute Command On BMC  mkdir -p ${targ_tarball_dir_path}
-    Execute Command On BMC
+    BMC Execute Command
+    ...  mkdir -p ${targ_tarball_dir_path} ${bmc_usr_local_path}
+    BMC Execute Command
     ...  tar -xf /tmp/debug-tarball.tar.xz -C ${targ_tarball_dir_path}
 
     # Create symlink to callout-test binary.
-    Execute Command On BMC
-    ...  ln -s ${targ_tarball_dir_path}/bin/callout-test /usr/bin/callout-test
+    BMC Execute Command
+    ...  ln -sf ${targ_tarball_dir_path}/bin/callout-test
+    ...  ${bmc_usr_local_path}callout-test
 
     # Create symlink to logging-test binary.
-    Execute Command On BMC
-    ...  ln -s ${targ_tarball_dir_path}/bin/logging-test /usr/bin/logging-test
+    BMC Execute Command
+    ...  ln -sf ${targ_tarball_dir_path}/bin/logging-test
+    ...  ${bmc_usr_local_path}logging-test
 
     # Remove the tarball file from BMC
-    Execute Command On BMC  rm /tmp/debug-tarball.tar.xz
+    BMC Execute Command  rm -f /tmp/debug-tarball.tar.xz
 
 
 Get BMC Boot Count
