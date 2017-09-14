@@ -8,9 +8,7 @@ Resource            ../lib/state_manager.robot
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/boot_utils.robot
 
-Suite Setup         Run Keywords  Verify logging-test  AND
-...                 Delete Error Logs And Verify
-Test Setup          Open Connection And Log In
+Test Setup          Pre Test Case Execution
 Test Teardown       Post Test Case Execution
 Suite Teardown      Delete Error Logs And Verify
 
@@ -442,6 +440,23 @@ Delete Error Logs And Verify
     Delete Error Logs
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
+
+Pre Test Case Execution
+   [Documentation]  Do test case setup tasks.
+
+   ${status}=  Run Keyword And Return Status  Verify logging-test
+   Run Keyword If  ${status} == ${False}  Install Tarball
+   Delete Error Logs And Verify
+
+
+Install Tarball
+    [Documentation]  Install tarball on BMC.
+    Run Keyword If  '${DEBUG_TARBALL_PATH}' == '${EMPTY}'  Return From Keyword
+    BMC Execute Command  rm -f /tmp/tarball
+    Run Keyword If  '${DEBUG_TARBALL_PATH}' != '${EMPTY}'
+    ...   Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
+
 
 Post Test Case Execution
    [Documentation]  Do the post test teardown.
