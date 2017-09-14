@@ -54,7 +54,8 @@ REST Host Code Update
 Post Update Boot To OS
     [Documentation]  Boot the host OS
     [Tags]  Post_Update_Boot_To_OS
-    [Teardown]  Stop SOL Console Logging
+    [Teardown]  Run Keywords  Stop SOL Console Logging
+    ...         AND  Code Update Test Teardown
 
     Run Keyword If  '${PREV_TEST_STATUS}' == 'FAIL'
     ...  Fail  Code update failed. No need to boot to OS.
