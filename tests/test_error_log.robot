@@ -8,9 +8,7 @@ Resource            ../lib/state_manager.robot
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/boot_utils.robot
 
-Suite Setup         Run Keywords  Verify logging-test  AND
-...                 Delete Error Logs And Verify
-Test Setup          Open Connection And Log In
+Test Setup          Test Setup Execution
 Test Teardown       Post Test Case Execution
 Suite Teardown      Delete Error Logs And Verify
 
@@ -336,7 +334,7 @@ Verify Error Logs Capping
 
     Delete Error Logs And Verify
     ${cmd}=  Set Variable
-    ...  for i in {1..101}; do logging-test -c AutoTestSimple;done
+    ...  for i in {1..101}; do /tmp/tarball/bin/logging-test -c AutoTestSimple;done
     Execute Command On BMC  ${cmd}
     ${count}=  Count Error Entries
     Run Keyword If  ${count} > 100
@@ -381,11 +379,12 @@ Verify Watchdog Errorlog Content
     ...  ${elog["Severity"]}  xyz.openbmc_project.Logging.Entry.Level.Informational
 
 
-Verify logging-test
+Logging Test Binary Exist
     [Documentation]  Verify existence of prerequisite logging-test.
 
     Open Connection And Log In
-    ${out}  ${stderr}=  Execute Command  which logging-test  return_stderr=True
+    ${out}  ${stderr}=  Execute Command
+    ...  which /tmp/tarball/bin/logging-test  return_stderr=True
     Should Be Empty  ${stderr}
     Should Contain  ${out}  logging-test
 
@@ -415,7 +414,7 @@ Create Test Error Log
     #     "associations": []
     # }
 
-    Execute Command On BMC  logging-test -c AutoTestSimple
+    Execute Command On BMC  /tmp/tarball/bin/logging-test -c AutoTestSimple
 
 Count Error Entries
     [Documentation]  Count Error entries.
@@ -442,6 +441,23 @@ Delete Error Logs And Verify
     Delete Error Logs
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
+
+Test Setup Execution
+   [Documentation]  Do test case setup tasks.
+
+   ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
+   Run Keyword If  ${status} == ${False}  Install Tarball
+   Delete Error Logs And Verify
+
+
+Install Tarball
+    [Documentation]  Install tarball on BMC.
+
+    Run Keyword If  '${DEBUG_TARBALL_PATH}' == '${EMPTY}'  Return From Keyword
+    BMC Execute Command  rm -rf /tmp/tarball
+    Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
+
 
 Post Test Case Execution
    [Documentation]  Do the post test teardown.
