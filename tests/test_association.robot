@@ -5,16 +5,15 @@ Resource            ../lib/connection_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
+Resource            ../lib/boot_utils.robot
 
-Suite Setup         Run Keywords  Verify callout-test  AND
-...                 Boot Host
-Test Setup          Clear Existing Error Logs
-
+Test Setup          Test Setup Execution
 Test Teardown       Close All Connections
-Suite Teardown      Clear Existing Error Logs
 
 ***Variables***
 ${target_device_path}  /sys/devices/platform/gpio-fsi/fsi0/slave@00:00/raw
+
+${stack_mode}          skip
 
 *** Test Cases ***
 
@@ -207,22 +206,15 @@ Set Resolved Field And Verify Callout Deletion
 
 *** Keywords ***
 
-Verify callout-test
+Callout Test Binary Exist
     [Documentation]  Verify existence of prerequisite callout-test.
 
     Open Connection And Log In
-    ${out}  ${stderr}=  Execute Command  which callout-test  return_stderr=True
+    ${out}  ${stderr}=  Execute Command
+    ...  which /tmp/tarball/bin/callout-test  return_stderr=True
     Should Be Empty  ${stderr}
     Should Contain  ${out}  callout-test
 
-Clear Existing Error Logs
-    [Documentation]  If error log isn't empty, restart the logging service on
-    ...              the BMC
-
-    Open Connection And Log In
-    Delete Error Logs
-    ${resp}=  OpenBMC Get Request  /xyz/openbmc_project/logging/entry/
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 Create Test Error With Callout
     [Documentation]  Generate test error log with callout for CPU0.
@@ -254,7 +246,7 @@ Create Test Error With Callout
     # },
 
     Execute Command On BMC
-    ...  callout-test ${target_device_path}
+    ...  /tmp/tarball/bin/callout-test ${target_device_path}
 
 Verify Test Error Log And Callout
     [Documentation]  Verify test error log entries.
@@ -272,8 +264,20 @@ Verify Test Error Log And Callout
     Should Be Equal  ${content[0]}
     ...  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
 
-Boot Host
-    [Documentation]  Boot the host if current state is "Off".
-    ${current_state}=  Get Host State
-    Run Keyword If  '${current_state}' == 'Off'
-    ...  Initiate Host Boot
+
+Test Setup Execution
+   [Documentation]  Do test case setup tasks.
+
+   REST Power On
+   ${status}=  Run Keyword And Return Status  Callout Test Binary Exist
+   Run Keyword If  ${status} == ${False}  Install Tarball
+   Delete Error Logs
+
+
+Install Tarball
+    [Documentation]  Install tarball on BMC.
+
+    Run Keyword If  '${DEBUG_TARBALL_PATH}' == '${EMPTY}'  Return from Keyword
+    BMC Execute Command  rm -rf /tmp/tarball
+    Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
+

@@ -1039,21 +1039,12 @@ Install Debug Tarball On BMC
     scp.Put File  ${tarball_file_path}  /tmp/debug-tarball.tar.xz
 
     # Create tarball directory and install.
-    Open Connection And Log In
-    Execute Command On BMC  mkdir -p ${targ_tarball_dir_path}
-    Execute Command On BMC
+    BMC Execute Command  mkdir -p ${targ_tarball_dir_path}
+    BMC Execute Command
     ...  tar -xf /tmp/debug-tarball.tar.xz -C ${targ_tarball_dir_path}
 
-    # Create symlink to callout-test binary.
-    Execute Command On BMC
-    ...  ln -s ${targ_tarball_dir_path}/bin/callout-test /usr/bin/callout-test
-
-    # Create symlink to logging-test binary.
-    Execute Command On BMC
-    ...  ln -s ${targ_tarball_dir_path}/bin/logging-test /usr/bin/logging-test
-
-    # Remove the tarball file from BMC
-    Execute Command On BMC  rm /tmp/debug-tarball.tar.xz
+    # Remove the tarball file from BMC.
+    BMC Execute Command  rm -f /tmp/debug-tarball.tar.xz
 
 
 Get BMC Boot Count
