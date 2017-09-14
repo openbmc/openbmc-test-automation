@@ -6,6 +6,8 @@
 Documentation  Base to get a start on a robot program.
 
 Library                     pgm_template.py
+Library                     gen_print.py
+Library                     gen_robot_print.py
 
 Suite Setup                 Suite Setup
 Suite Teardown              Suite Teardown
@@ -23,9 +25,6 @@ ${DEBUG}                    0
 
 
 *** Test Cases ***
-###############################################################################
 Test Case 1
 
     Print Timen  First test case.
-
-###############################################################################
