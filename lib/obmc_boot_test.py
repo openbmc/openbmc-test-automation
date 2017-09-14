@@ -476,6 +476,22 @@ def my_get_state():
 
 
 ###############################################################################
+def valid_state():
+
+    r"""
+    Verify that our state dictionary contains no blank values.  If we don't get
+    valid state data, we cannot continue to work.
+    """
+
+    if st.compare_states(state, st.invalid_state_match, 'or'):
+        error_message = "The state dictionary contains blank fields which" +\
+            " is illegal.\n" + gp.sprint_var(state)
+        BuiltIn().fail(gp.sprint_error(error_message))
+
+###############################################################################
+
+
+###############################################################################
 def select_boot():
 
     r"""
@@ -491,6 +507,7 @@ def select_boot():
     gp.qprint_timen("Selecting a boot test.")
 
     my_get_state()
+    valid_state()
 
     stack_popped = 0
     if len(boot_stack) > 0:
