@@ -31,7 +31,7 @@ Documentation      This module is for data collection on test case failure
 
 Resource           openbmc_ffdc_methods.robot
 Resource           openbmc_ffdc_utils.robot
-Resource           state_manager.robot
+Resource           dump_utils.robot
 Library            openbmc_ffdc.py
 
 *** Keywords ***
@@ -41,14 +41,16 @@ FFDC On Test Case Fail
     ...               other data collection methods
     ...               1. Collect Logs if test fails or host reaches quiesced
     ...                  state.
-    ...               2. Recover host from quiesced state
-    ...               3. Added Test execution history logging
+    ...               2. Added test execution history logging.
     ...                  By default this will log Test status PASS/FAIL format
     ...                  EX: 20160822041250932049:Test:Test case 1:PASS
     ...                      20160822041250969913:Test:Test case 2:FAIL
+    ...               3. Delete error logs and BMC dumps post FFDC collection.
 
-    ${status}=  Is Host Quiesced
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL' or '${status}'=='True'  FFDC
-    Run Keyword If  '${status}'=='True'  Recover Quiesced Host
+    Run Keyword If  '${TEST_STATUS}' == 'FAIL'  FFDC
 
     Log Test Case Status
+
+    # Clean up error logs and BMC dumps.
+    Run Keyword If  '${TEST_STATUS}' == 'FAIL'
+    ...  Run Keywords  Delete Error Logs  AND  Delete All Dumps

@@ -53,8 +53,7 @@ Delete All Dumps
     [Documentation]  Delete all dumps.
 
     # Check if dump entries exist, if not return.
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
-    #  quiet=${1}
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list  quiet=${1}
     Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
 
     # Get the list of dump entries and delete them all.
