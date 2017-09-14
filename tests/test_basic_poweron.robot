@@ -32,6 +32,7 @@ Check For Application Failures
     [Documentation]  Parse the journal log and check for failures.
     [Tags]  Check_For_Application_Failures
 
+    Should Be Equal  oops  testing
     Open Connection And Log In
 
     ${journal_log}=  Execute Command On BMC
