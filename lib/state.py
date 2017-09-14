@@ -128,6 +128,12 @@ master_os_up_match = DotDict([('chassis', '^On$'),
                                'FW Progress, Starting OS|OSStart'),
                               ('host', '^Running$')])
 
+invalid_state_match = DotDict([('rest', '^$'),
+                               ('chassis', '^$'),
+                               ('bmc', '^$'),
+                               ('boot_progress', '^$'),
+                               ('host', '^$')])
+
 
 ###############################################################################
 def return_default_state():
@@ -214,7 +220,8 @@ def strip_anchor_state(state):
 
 ###############################################################################
 def compare_states(state,
-                   match_state):
+                   match_state,
+                   match_type='and'):
 
     r"""
     Compare 2 state dictionaries.  Return True if they match and False if they
@@ -229,24 +236,33 @@ def compare_states(state,
     match_state     A dictionary whose key/value pairs are "state field"/
                     "state value".  The state value is interpreted as a
                     regular expression.  Every value in this dictionary is
-                    considered.  If each and every one matches, the 2
-                    dictionaries are considered to be matching.
+                    considered.  When match_type is 'and', if each and every
+                    comparison matches, the two dictionaries are considered to
+                    be matching.  If match_type is 'or', if any two of the
+                    elements compared match, the two dictionaries are
+                    considered to be matching.
+    match_type      This may be 'and' or 'or'.
     """
 
-    match = True
+    error_message = gv.svalid_value(match_type, var_name="match_type",
+                                    valid_values=['and', 'or'])
+    if error_message != "":
+        BuiltIn().fail(gp.sprint_error(error_message))
+
+    default_match = (match_type == 'and')
     for key, match_state_value in match_state.items():
         # Blank match_state_value means "don't care".
         if match_state_value == "":
             continue
         try:
-            if not re.match(match_state_value, str(state[key])):
-                match = False
-                break
+            match = (re.match(match_state_value, str(state[key])) is not None)
         except KeyError:
             match = False
-            break
 
-    return match
+        if match != default_match:
+            return match
+
+    return default_match
 
 ###############################################################################
 
