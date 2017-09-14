@@ -495,7 +495,7 @@ Create OS Console File Path
     #            keyword will use the caller's file_path value.  In either
     #            case, the value will be returned.
 
-    ${default_file_path}=  Catenate  /tmp/${OPENBMC_HOST}_os_console
+    ${default_file_path}=  Catenate  /tmp/${OPENBMC_HOST}_os_console.txt
     ${log_file_path}=  Set Variable If  '${log_file_path}' == '${EMPTY}'
     ...  ${default_file_path}  ${log_file_path}
 
