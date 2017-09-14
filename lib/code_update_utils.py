@@ -65,7 +65,8 @@ def get_non_running_bmc_software_object():
     for image_name in images:
         _, image_properties = keyword.run_key(
                 "Get Host Software Property  " + image_name)
-        if image_properties['Purpose'] != var.VERSION_PURPOSE_HOST \
+        if 'Purpose' in image_properties and 'Version' in image_properties \
+                and image_properties['Purpose'] != var.VERSION_PURPOSE_HOST \
                 and image_properties['Version'] != cur_img_version:
             return image_name
     BuiltIn().fail("Did not find any non-running BMC images.")
