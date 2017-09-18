@@ -17,6 +17,8 @@ Open Telnet Connection to BMC Serial Console
     ...           ${i_port}=${OPENBMC_SERIAL_PORT}
     ...           ${i_model}=${OPENBMC_MODEL}
 
+    Log To Console    SMS001 *******************************************************
+
     Run Keyword If
     ...  '${i_host}' != '${EMPTY}' and '${i_port}' != '${EMPTY}' and '${i_model}' != '${EMPTY}'
     ...  Establish Telnet Session on BMC Serial Console
@@ -28,11 +30,15 @@ Establish Telnet Session on BMC Serial Console
     ...               30 secs.
 
     ${prompt_string}   Set Variable   ${OPENBMC_MODEL} login:
+    Log To Console  SMS003 **HOST=${OPENBMC_SERIAL_HOST} port=${OPENBMC_SERIAL_PORT} ***************************************************
     Telnet.Open Connection
     ...   ${OPENBMC_SERIAL_HOST}  port=${OPENBMC_SERIAL_PORT}  prompt=#
     Set Newline    \n
     Set Newline    CRLF
     Telnet.Write   \n
+    Log To Console  SMS004 *****************************************************
+
+    Log TO Console   SMS005 ********** PS=${prompt_string} PW=${OPENBMC_PASSWORD} **************************
     Telnet.Login   ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     ...    login_prompt=${prompt_string}   password_prompt=Password:
     Telnet.Set Timeout   30 minute 30 seconds
