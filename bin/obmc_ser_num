@@ -137,7 +137,12 @@ def main():
         print_error_report("http request failed:\n" + sprint_var(command, 1))
         raise Exception("http request failed.\n")
 
-    mch_ser_num = json['data']['SerialNumber']
+    try:
+        mch_ser_num = json['data']['SerialNumber']
+    except KeyError:
+        print_error_report("Failed to find 'SerialNumber' key in the" +
+                           " following data:\n" + sprint_var(json))
+        return False
     pvar(mch_ser_num, 0, 0, 0)
 
     return True
