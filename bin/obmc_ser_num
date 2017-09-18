@@ -20,7 +20,6 @@ from gen_valid import *
 sys.path.insert(0, save_path_0)
 
 logging.captureWarnings(True)
-
 parser = argparse.ArgumentParser(
     usage='%(prog)s [OPTIONS]',
     description="%(prog)s will get the system serial number from an OBMC" +
@@ -32,16 +31,16 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     '--openbmc_username',
     default="root",
-    help='The username for communicating with the OpenBMC machine.')
+    help='The username for communicating with the Open BMC machine.')
 
 parser.add_argument(
     '--openbmc_password',
     default="0penBmc",
-    help='The password for communicating with the OpenBMC machine.')
+    help='The password for communicating with the Open BMC machine.')
 
 parser.add_argument(
     'openbmc_host',
-    help='The host name or IP address of the OpenBMC machine.')
+    help='The host name or IP address of the Open BMC machine.')
 
 # Populate stock_list with options we want.
 stock_list = [("test_mode", 0), ("quiet", 1)]
@@ -137,7 +136,12 @@ def main():
         print_error_report("http request failed:\n" + sprint_var(command, 1))
         raise Exception("http request failed.\n")
 
-    mch_ser_num = json['data']['SerialNumber']
+    try:
+        mch_ser_num = json['data']['SerialNumber']
+    except KeyError:
+        print_error_report("Failed to find 'SerialNumber' key in the" +
+                           " following data:\n" + sprint_var(json))
+        return False
     pvar(mch_ser_num, 0, 0, 0)
 
     return True
