@@ -73,8 +73,9 @@ Verify Boxelder MAC Address Property Is Populated
     ...  /sbin/ifconfig -a | grep HWaddr | awk -F'HWaddr ' '{print $2}'
     ...  return_stderr=True
     Should Be Empty  ${stderr}
-    Should Be Equal As Strings  ${json_data["data"]["MACAddress"]}  ${mac_addr}
-    ...  msg=MAC address configured incorrectly.
+    Should Be Equal As Strings  ${json_data["data"]["MACAddress"]}
+    ...  ${mac_addr.strip()}  msg=MAC address configured incorrectly.
+    ...  ignore_case=True
 
 
 Verify Chassis Motherboard Properties
