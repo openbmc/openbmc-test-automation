@@ -28,7 +28,6 @@ Library                 ../../lib/gen_robot_keyword.py
 Library                 String
 
 Resource                code_update_utils.robot
-Resource                ../../lib/boot/boot_resource_master.robot
 Resource                ../../lib/state_manager.robot
 Resource                ../../lib/utils.robot
 Resource                ../../lib/list_utils.robot
