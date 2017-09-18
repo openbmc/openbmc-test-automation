@@ -11,8 +11,8 @@ Initializing Setup
     [Documentation]  Initialize test environment.
     Launch OpenBMC GUI Browser
     Login OpenBMC GUI
-    Get OpenBMC System Info
     Initial Message
+    Get OpenBMC System Info
     LogOut OpenBMC GUI
 
 Initial Message
