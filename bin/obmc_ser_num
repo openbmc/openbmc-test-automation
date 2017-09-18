@@ -9,6 +9,13 @@ import sys
 import os
 import requests
 
+# python puts the program's directory path in sys.path[0].  In other words,
+# the user ordinarily has no way to override python's choice of a module from
+# its own dir.  We want to have that ability in our environment.  However, we
+# don't want to break any established python modules that depend on this
+# behavior.  So, we'll save the value from sys.path[0], delete it, import our
+# modules and then restore sys.path to its original value.
+
 save_path_0 = sys.path[0]
 del sys.path[0]
 
@@ -20,7 +27,10 @@ from gen_valid import *
 sys.path.insert(0, save_path_0)
 
 logging.captureWarnings(True)
+###############################################################################
+# Create parser object to process command line parameters and args.
 
+# Create parser object.
 parser = argparse.ArgumentParser(
     usage='%(prog)s [OPTIONS]',
     description="%(prog)s will get the system serial number from an OBMC" +
@@ -29,24 +39,31 @@ parser = argparse.ArgumentParser(
     formatter_class=argparse.RawTextHelpFormatter,
     prefix_chars='-+')
 
+# Create arguments.
 parser.add_argument(
     '--openbmc_username',
     default="root",
-    help='The username for communicating with the OpenBMC machine.')
+    help='The username for communicating with the Open BMC machine.')
 
+# Create arguments.
 parser.add_argument(
     '--openbmc_password',
     default="0penBmc",
-    help='The password for communicating with the OpenBMC machine.')
+    help='The password for communicating with the Open BMC machine.')
 
+# Create arguments.
 parser.add_argument(
     'openbmc_host',
-    help='The host name or IP address of the OpenBMC machine.')
+    help='The host name or IP address of the Open BMC machine.')
 
-# Populate stock_list with options we want.
+# The stock_list will be passed to gen_get_options.  We populate it with the
+# names of stock parm options we want.  These stock parms are pre-defined by
+# gen_get_options.
 stock_list = [("test_mode", 0), ("quiet", 1)]
+###############################################################################
 
 
+###############################################################################
 def exit_function(signal_number=0,
                   frame=None):
 
@@ -60,7 +77,10 @@ def exit_function(signal_number=0,
 
     qprint_pgm_footer()
 
+###############################################################################
 
+
+###############################################################################
 def signal_handler(signal_number,
                    frame):
 
@@ -79,7 +99,10 @@ def signal_handler(signal_number,
     # when we received the signal.
     exit(0)
 
+###############################################################################
 
+
+###############################################################################
 def validate_parms():
 
     r"""
@@ -91,7 +114,10 @@ def validate_parms():
 
     return True
 
+###############################################################################
 
+
+###############################################################################
 def create_http_prefix(host):
 
     r"""
@@ -104,8 +130,21 @@ def create_http_prefix(host):
 
     return "https://" + host + "/"
 
+###############################################################################
 
+
+###############################################################################
 def main():
+
+    r"""
+    This is the "main" function.  The advantage of having this function vs
+    just doing this in the true mainline is that you can:
+    - Declare local variables
+    - Use "return" instead of "exit".
+    - Indent 4 chars like you would in any function.
+    This makes coding more consistent, i.e. it's easy to move code from here
+    into a function and vice versa.
+    """
 
     if not gen_get_options(parser, stock_list):
         return False
@@ -137,13 +176,23 @@ def main():
         print_error_report("http request failed:\n" + sprint_var(command, 1))
         raise Exception("http request failed.\n")
 
-    mch_ser_num = json['data']['SerialNumber']
+    try:
+        mch_ser_num = json['data']['SerialNumber']
+    except KeyError:
+        print_error_report("Failed to find 'SerialNumber' key in the" +
+                           " following data:\n" + sprint_var(json))
+        return False
     pvar(mch_ser_num, 0, 0, 0)
 
     return True
 
+###############################################################################
 
+
+###############################################################################
 # Main
 
 if not main():
     exit(1)
+
+###############################################################################
