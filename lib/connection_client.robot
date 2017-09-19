@@ -7,6 +7,7 @@ Library           OperatingSystem
 Library           Collections
 
 *** Variables ***
+${CLEAR_SYSTEM_ENTRY}    sed '/${OPENBMC_HOST}/d' -i  ~/.ssh/known_hosts
 
 *** Keywords ***
 Open Connection And Log In
@@ -134,3 +135,9 @@ Validate Or Open Connection
     # If no connections are found, open a connection with the provided args.
     Log  No connection with provided arguments.  Opening a connection.
     Open Connection and Log In  &{connection_args}
+
+
+Clear System Entry From Knownhosts
+    [Documentation]   It deletes an existing system entry from known_hosts file
+    ${rc}    ${output}=    Run and Return RC and Output   ${CLEAR_SYSTEM_ENTRY}
+
