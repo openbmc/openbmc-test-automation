@@ -134,3 +134,10 @@ Validate Or Open Connection
     # If no connections are found, open a connection with the provided args.
     Log  No connection with provided arguments.  Opening a connection.
     Open Connection and Log In  &{connection_args}
+
+
+Clear System Entry From Knownhosts
+    [Documentation]   Delete OPENBMC_HOST entry from known_hosts file.
+    ${cmd}=  Set Variable  sed '/${OPENBMC_HOST}/d' -i ~/.ssh/known_hosts
+    ${rc}  ${output}=  Run and Return RC and Output  ${cmd}
+
