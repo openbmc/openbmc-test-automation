@@ -17,6 +17,7 @@ ${DRIVER_CMD}    cat /etc/os-release | grep ^VERSION_ID=
 
 System Driver Data
     [Documentation]  System driver information.
+    Clear System Entry From Knownhosts
     Open Connection And Log In
     Run Keyword And Ignore Error  Log BMC Driver Details
     Run Keyword And Ignore Error  Log PNOR Driver Details
