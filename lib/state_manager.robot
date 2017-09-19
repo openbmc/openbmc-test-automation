@@ -304,12 +304,6 @@ Power Off Request
 
 Wait For BMC Ready
     [Documentation]  Check BMC state and wait for BMC Ready.
-    @{states}=  Create List  BMC_READY  HOST_POWERED_OFF
-    Run Keyword If  '${OBMC_STATES_VERSION}' == '${0}'
-    ...  Wait Until Keyword Succeeds  10 min  10 sec
-    ...  Verify BMC State  ${states}
-    ...  ELSE
-    ...  Wait Until Keyword Succeeds  10 min  10 sec
-    ...  Is BMC Ready
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
 
 
