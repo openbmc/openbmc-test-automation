@@ -106,12 +106,14 @@ FFDC_OS_IBM_POWERKVM_FILE = {
 }
 
 OPENBMC_BASE = '/xyz/openbmc_project/'
+OPENPOWER_BASE = '/org/open_power/'
 ENUMERATE_SENSORS = OPENBMC_BASE + 'sensors/enumerate'
 ENUMERATE_INVENTORY = OPENBMC_BASE + 'inventory/enumerate'
 ENUMERATE_ELOG = OPENBMC_BASE + 'logging/entry/enumerate'
 ENUMERATE_LED = OPENBMC_BASE + 'led/enumerate'
 ENUMERATE_SW = OPENBMC_BASE + 'software/enumerate'
 ENUMERATE_CONTROL = OPENBMC_BASE + 'control/enumerate'
+ENUMERATE_OCC = OPENPOWER_BASE + 'control/enumerate'
 
 # Add file name and correcponding Get Request
 FFDC_GET_REQUEST = {
@@ -124,6 +126,7 @@ FFDC_GET_REQUEST = {
         'BMC_inventory': ENUMERATE_INVENTORY,
         'BMC_elog': ENUMERATE_ELOG,
         'BMC_led': ENUMERATE_LED,
+        'OCC_state': ENUMERATE_OCC,
     },
 }
 
