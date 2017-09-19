@@ -7,6 +7,7 @@ Library           OperatingSystem
 Library           Collections
 
 *** Variables ***
+${CLEAR_ENTRY_IN_KNOWNHOSTS}    sed '/${OPENBMC_HOST}/d' -i  ~/.ssh/known_hosts
 
 *** Keywords ***
 Open Connection And Log In
@@ -27,6 +28,8 @@ Open Connection And Log In
     #                   Of the above arguments to Open Connection, this keyword
     #                   will provide the following default values:
     #                   host             ${OPENBMC_HOST}
+
+    ${rc}    ${output}=    Run and Return RC and Output    ${CLEAR_ENTRY_IN_KNOWNHOSTS}
 
     # If no host was provided, add ${OPENBMC_HOST} to the dictionary
     ${has_host}=  Run Keyword and Return Status
