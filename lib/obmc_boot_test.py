@@ -37,6 +37,7 @@ import run_keyword as rk
 # DB_Logging
 program_pid = os.getpid()
 master_pid = os.environ.get('AUTOBOOT_MASTER_PID', program_pid)
+pgm_name = re.sub('\.py$', '', os.path.basename(__file__))
 
 # Set up boot data structures.
 boot_table = create_boot_table()
@@ -164,8 +165,10 @@ def process_pgm_parms():
     boot_list = filter(None, boot_list.split(":"))
     boot_stack = filter(None, boot_stack.split(":"))
 
-    boot_results_file_path = "/tmp/" + openbmc_nickname + ":pid_" +\
-                             str(master_pid) + ":boot_results"
+    cleanup_boot_results_file()
+    boot_results_file_path = create_boot_results_file_path(pgm_name,
+                                                           openbmc_nickname,
+                                                           master_pid)
 
     if os.path.isfile(boot_results_file_path):
         # We've been called before in this run so we'll load the saved
