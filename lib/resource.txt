@@ -58,6 +58,10 @@ ${BMC_IMAGE_FILE_PATH}          ${EMPTY}
 ${BAD_IMAGES_DIR_PATH}          ${EMPTY}
 ${SKIP_UPDATE_IF_ACTIVE}        false
 
+# Parameters for doing N-1 and N+1 code updates.
+${N_MINUS_ONE_IMAGE_FILE_PATH}    ${EMPTY}
+${N_PLUS_ONE_IMAGE_FILE_PATH}     ${EMPTY}
+
 # The caller must set this to the string "true" in order to delete images. The
 # code is picky.
 ${DELETE_OLD_PNOR_IMAGES}   false
