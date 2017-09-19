@@ -6,6 +6,7 @@ This module provides many valuable functions such as my_parm_file.
 
 # sys and os are needed to get the program dir path and program name.
 import sys
+import errno
 import os
 import ConfigParser
 import StringIO
@@ -23,7 +24,6 @@ except ImportError:
     robot_env = 0
 
 
-###############################################################################
 def add_trailing_slash(dir_path):
 
     r"""
@@ -36,10 +36,7 @@ def add_trailing_slash(dir_path):
 
     return os.path.normpath(dir_path) + os.path.sep
 
-###############################################################################
 
-
-###############################################################################
 def which(file_path):
 
     r"""
@@ -69,10 +66,7 @@ def which(file_path):
 
     return file_path
 
-###############################################################################
 
-
-###############################################################################
 def dft(value, default):
 
     r"""
@@ -94,10 +88,7 @@ def dft(value, default):
 
     return default if value is None else value
 
-###############################################################################
 
-
-###############################################################################
 def get_mod_global(var_name,
                    default=None,
                    mod_name="__main__"):
@@ -133,10 +124,7 @@ def get_mod_global(var_name,
     else:
         return getattr(module, var_name, default)
 
-###############################################################################
 
-
-###############################################################################
 def global_default(var_value,
                    default=0):
 
@@ -162,10 +150,7 @@ def global_default(var_value,
 
     return dft(var_value, get_mod_global(var_name, 0))
 
-###############################################################################
 
-
-###############################################################################
 def set_mod_global(var_value,
                    mod_name="__main__",
                    var_name=None):
@@ -195,10 +180,7 @@ def set_mod_global(var_value,
 
     setattr(module, var_name, var_value)
 
-###############################################################################
 
-
-###############################################################################
 def my_parm_file(prop_file_path):
 
     r"""
@@ -240,10 +222,7 @@ def my_parm_file(prop_file_path):
     # Return the properties as a dictionary.
     return dict(config_parser.items('dummysection'))
 
-###############################################################################
 
-
-###############################################################################
 def file_to_list(file_path,
                  newlines=0,
                  comments=1,
@@ -280,10 +259,7 @@ def file_to_list(file_path,
 
     return lines
 
-###############################################################################
 
-
-###############################################################################
 def return_path_list():
 
     r"""
@@ -297,10 +273,7 @@ def return_path_list():
 
     return PATH_LIST
 
-###############################################################################
 
-
-###############################################################################
 def quote_bash_parm(parm):
 
     r"""
@@ -320,10 +293,7 @@ def quote_bash_parm(parm):
 
     return parm
 
-###############################################################################
 
-
-###############################################################################
 def get_host_name_ip(host):
 
     r"""
@@ -345,4 +315,28 @@ def get_host_name_ip(host):
 
     return host_host_name, host_ip
 
-###############################################################################
+
+def pid_active(pid):
+
+    r"""
+    Return true if pid represents an active pid and false otherwise.
+
+    Description of argument(s):
+    pid                             The pid whose status is being sought.
+    """
+
+    try:
+        os.kill(int(pid), 0)
+    except OSError as err:
+        if err.errno == errno.ESRCH:
+            # ESRCH == No such process
+            return False
+        elif err.errno == errno.EPERM:
+            # EPERM clearly means there's a process to deny access to
+            return True
+        else:
+            # According to "man 2 kill" possible error values are
+            # (EINVAL, EPERM, ESRCH)
+            raise
+
+    return True
