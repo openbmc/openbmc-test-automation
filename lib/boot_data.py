@@ -8,6 +8,7 @@ boot_table, valid_boot_list and boot_results_table.
 import os
 import tempfile
 import json
+import glob
 from tally_sheet import *
 
 from robot.libraries.BuiltIn import BuiltIn
@@ -21,6 +22,7 @@ import gen_robot_print as grp
 import gen_valid as gv
 import gen_misc as gm
 import gen_cmd as gc
+import var_funcs as vf
 
 # The code base directory will be one level up from the directory containing
 # this module.
@@ -311,5 +313,52 @@ class boot_results:
         """
 
         grp.rprint(self.sprint_obj())
+
+###############################################################################
+
+
+###############################################################################
+def create_boot_results_file_path(pgm_name,
+                                  openbmc_nickname,
+                                  master_pid):
+
+    r"""
+    Create a file path to be used to store a boot_results object.
+
+    Description of argument(s):
+    pgm_name          The name of the program.  This will form part of the
+                      resulting file name.
+    openbmc_nickname  The name of the system.  This could be a nickname, a
+                      hostname, an IP, etc.  This will form part of the
+                      resulting file name.
+    master_pid        The master process id which will form part of the file
+                      name.
+    """
+
+    file_name_dict = vf.create_var_dict(pgm_name, openbmc_nickname, master_pid)
+    return vf.create_file_path(file_name_dict, file_suffix=":boot_results")
+
+###############################################################################
+
+
+###############################################################################
+def cleanup_boot_results_file():
+
+    r"""
+    Delete all boot results files whose corresponding pids are no longer
+    active.
+    """
+
+    # Use create_boot_results_file_path to create a globex to find all of the
+    # existing boot results files.
+    globex = create_boot_results_file_path("*", "*", "*")
+    file_list = sorted(glob.glob(globex))
+    for file_path in file_list:
+        # Use parse_file_path to extract info from the file path.
+        file_dict = vf.parse_file_path(file_path)
+        if gm.pid_active(file_dict['master_pid']):
+            gp.qprint_timen("Preserving " + file_path + ".")
+        else:
+            gc.cmd_fnc("rm -f " + file_path)
 
 ###############################################################################
