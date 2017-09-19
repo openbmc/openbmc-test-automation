@@ -67,17 +67,6 @@ Get To Stable State
 
 *** Keywords ***
 
-Reboot and Wait for BMC Online
-    [Documentation]    Reboot BMC and wait for it to come online
-    ...                and boot to standby
-
-    Trigger Warm Reset via Reboot
-    Wait Until Keyword Succeeds
-    ...    5 min   10 sec    BMC Online Test
-
-    Wait For BMC Standby
-
-
 BMC Online Test
     [Documentation]   BMC ping, SSH, REST connection Test
 
@@ -85,22 +74,6 @@ BMC Online Test
     ...   Verify Ping and REST Authentication
     Run Keyword If  '${l_status}' == '${False}'
     ...   Fail  msg=System not in ideal state to continue [ERROR]
-
-
-Wait For BMC Standby
-    [Documentation]   Wait Until BMC standby post BMC reboot
-
-    @{states}=   Create List   BMC_READY   HOST_POWERED_OFF
-    Wait Until Keyword Succeeds
-    ...    10 min   10 sec   Verify BMC State   ${states}
-
-
-Get BMC State and Expect Standby
-    [Documentation]   Get BMC state and should be at standby
-
-    @{states}=     Create List   BMC_READY   HOST_POWERED_OFF
-    ${bmc_state}=  Get BMC State Deprecated
-    Should Contain  ${states}   ${bmc_state}
 
 
 Update Policy Setting

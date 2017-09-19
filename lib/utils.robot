@@ -340,17 +340,6 @@ Wait for OS
 
     rqprint_timen  The operating system is now communicating.
 
-Get BMC State Deprecated
-    [Documentation]  Returns the state of the BMC as a string. (i.e: BMC_READY)
-    [Arguments]  ${quiet}=${QUIET}
-
-    @{arglist}=  Create List
-    ${args}=  Create Dictionary  data=@{arglist}
-    ${resp}=  Call Method  ${OPENBMC_BASE_URI}managers/System/  getSystemState
-    ...        data=${args}  quiet=${quiet}
-    Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
-    ${content}=  to json  ${resp.content}
-    [Return]  ${content["data"]}
 
 Get Power State
     [Documentation]  Returns the power state as an integer. Either 0 or 1.
@@ -408,10 +397,6 @@ Is PNOR Flash Done
     ${status}=    Get Flash BIOS Status
     should be equal as strings     ${status}     Flash Done
 
-Is System State Host Booted
-    [Documentation]  Checks whether system state is HOST_BOOTED.
-    ${state}=    Get BMC State Deprecated
-    should be equal as strings     ${state}     HOST_BOOTED
 
 Is OS Starting
     [Documentation]  Check if boot progress is OS starting.
@@ -632,14 +617,6 @@ Get Time Stamp
     ${cur_time}=    Get Current Date   result_format=%Y%m%d%H%M%S%f
     [Return]   ${cur_time}
 
-
-Verify BMC State
-    [Documentation]   Get the BMC state and verify if the current
-    ...               BMC state is as expected.
-    [Arguments]       ${expected}
-
-    ${current}=  Get BMC State Deprecated
-    Should Contain  ${expected}   ${current}
 
 Start Journal Log
     [Documentation]   Start capturing journal log to a file in /tmp using
