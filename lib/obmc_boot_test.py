@@ -1006,6 +1006,8 @@ def obmc_boot_test_py(loc_boot_stack=None,
 
     setup()
 
+    init_boot_pass, init_boot_fail = boot_results.return_total_pass_fail()
+
     if ffdc_only:
         gp.qprint_timen("Caller requested ffdc_only.")
         pre_boot_plug_in_setup()
@@ -1026,10 +1028,11 @@ def obmc_boot_test_py(loc_boot_stack=None,
     gp.qprint_timen("Completed all requested boot tests.")
 
     boot_pass, boot_fail = boot_results.return_total_pass_fail()
-    if boot_fail > boot_fail_threshold:
+    new_fail = boot_fail - init_boot_fail
+    if new_fail > boot_fail_threshold:
         error_message = "Boot failures exceed the boot failure" +\
                         " threshold:\n" +\
-                        gp.sprint_var(boot_fail) +\
+                        gp.sprint_var(new_fail) +\
                         gp.sprint_var(boot_fail_threshold)
         BuiltIn().fail(gp.sprint_error(error_message))
 
