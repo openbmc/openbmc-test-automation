@@ -37,7 +37,7 @@ Verify Dump Persistency On Service Restart
     ...  persistency.
     [Tags]  Verify_Dump_Persistency_On_Service_Restart
 
-    Delete All Dumps
+    Delete All BMC Dump
     Create User Initiated Dump
     BMC Execute Command
     ...  systemctl restart xyz.openbmc_project.Dump.Manager.service
@@ -51,7 +51,7 @@ Verify Dump Persistency On Reset
     [Documentation]  Create user dump, reset BMC and verify dump persistency.
     [Tags]  Verify_Dump_Persistency_On_Reset
 
-    Delete All Dumps
+    Delete All BMC Dump
     Create User Initiated Dump
     OBMC Reboot (off)
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
@@ -113,7 +113,7 @@ Delete All BMC Dumps And Verify
     Create User Initiated Dump
     Create User Initiated Dump
 
-    Delete All Dumps
+    Delete All BMC Dump
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
@@ -135,6 +135,6 @@ Post Dump Core Dump Check
 Post Testcase Execution
     [Documentation]  Do the post test teardown.
 
-    Delete All Dumps
+    Delete All BMC Dump
     FFDC On Test Case Fail
     Close All Connections
