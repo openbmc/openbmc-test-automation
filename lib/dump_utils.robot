@@ -61,3 +61,11 @@ Delete All Dumps
     :FOR  ${entry}  IN  @{dump_entries}
     \  ${dump_id}=  Fetch From Right  ${entry}  /
     \  Delete BMC Dump  ${dump_id}
+
+
+Delete All BMC Dump
+    [Documentation]  Delete all BMC dump entries using "DeleteAll" interface.
+
+    ${data}=  Create Dictionary  data=@{EMPTY}
+    ${resp}=  Openbmc Post Request  ${DUMP_URI}action/DeleteAll  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
