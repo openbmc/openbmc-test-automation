@@ -1124,6 +1124,16 @@ Delete Error Log Entry
 
 
 ###############################################################################
+Delete All Error Log
+    [Documentation]  Delete all error log entries using "DeleteAll" interface.
+
+    ${data}=  Create Dictionary  data=@{EMPTY}
+    ${resp}=  Openbmc Post Request  ${BMC_LOGGING_URI}action/DeleteAll
+    ...  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+###############################################################################
 Get LED State XYZ
     [Documentation]  Returns state of given LED.
     [Arguments]  ${led_name}
