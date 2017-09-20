@@ -1091,7 +1091,7 @@ Delete Error Log Entry
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
-Delete All Error Log
+Delete All Error Logs
     [Documentation]  Delete all error log entries using "DeleteAll" interface.
 
     ${data}=  Create Dictionary  data=@{EMPTY}

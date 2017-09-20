@@ -188,7 +188,7 @@ Set Resolved Field And Verify Callout Deletion
     [Documentation]  Set the "Resolved" error log and verify callout is deleted
     [Tags]  Set_Resolved_Field_And_Verify_Callout_Deletion
 
-    Delete Error logs
+    Delete All Error Logs
     Create Test Error With Callout
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
@@ -271,7 +271,7 @@ Test Setup Execution
    REST Power On
    ${status}=  Run Keyword And Return Status  Callout Test Binary Exist
    Run Keyword If  ${status} == ${False}  Install Tarball
-   Delete Error Logs
+   Delete All Error Logs
 
 
 Install Tarball

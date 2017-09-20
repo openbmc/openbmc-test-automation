@@ -90,7 +90,7 @@ Test Error Entry Numbering Reset On Restart
 
     Create Test Error Log
     Verify Test Error Log
-    Delete Error Logs
+    Delete All Error Logs
     Execute Command On BMC
     ...  systemctl restart xyz.openbmc_project.Logging.service
     Sleep  10s  reason=Wait for logging service to restart properly.
@@ -136,7 +136,7 @@ Create Test Error And Verify Resolved Field
     # In this test context we are making sure "Resolved" field is "0"
     # by default.
 
-    Delete Error Logs
+    Delete All Error Logs
     Create Test Error Log
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
     ${resolved}=  Read Attribute  ${elog_entry[0]}  Resolved
@@ -171,7 +171,7 @@ Create Test Errors And Verify Time Stamp
     #    "associations": []
     # },
 
-    Delete Error Logs
+    Delete All Error Logs
     Create Test Error Log
     Create Test Error Log
     # The error log generated is associated with the epoc time and unique
@@ -232,7 +232,7 @@ Verify Watchdog Timedout Error
     REST Power On
 
     # Clear errors if there are any.
-    Delete Error Logs
+    Delete All Error Logs
 
     Trigger Host Watchdog Error
 
@@ -438,7 +438,7 @@ Verify Test Error Log
 Delete Error Logs And Verify
     [Documentation]  Delete all error logs and verify.
 
-    Delete Error Logs
+    Delete All Error Logs
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
@@ -467,5 +467,5 @@ Post Test Case Execution
    # 4. Clear all REST sessions.
 
    FFDC On Test Case Fail
-   Delete Error Logs
+   Delete All Error Logs
    Close All Connections
