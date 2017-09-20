@@ -5,6 +5,7 @@ Define variable manipulation functions.
 """
 
 import os
+import re
 
 try:
     from robot.utils import DotDict
@@ -206,3 +207,169 @@ def parse_file_path(file_path):
     result_dict.update(split_to_dict(file_path))
 
     return result_dict
+
+
+def parse_key_value(string,
+                    delim=":",
+                    strip=" ",
+                    to_lower=1,
+                    underscores=1):
+
+    r"""
+    Parse a key/value string and return as a key/value tuple.
+
+    This function is useful for parsing a line of program output or data that
+    is in the following form:
+    <key or variable name><delimiter><value>
+
+    An example of a key/value string would be as follows:
+
+    Current Limit State: No Active Power Limit
+
+    In the example shown, the delimiter is ":".  The resulting key would be as
+    follows:
+    Current Limit State
+
+    Note: If one were to take the default values of to_lower=1 and
+    underscores=1, the resulting key would be as follows:
+    current_limit_state
+
+    The to_lower and underscores arguments are provided for those who wish to
+    have their key names have the look and feel of python variable names.
+
+    The resulting value for the example above would be as follows:
+    No Active Power Limit
+
+    Another example:
+    name=Mike
+
+    In this case, the delim would be "=", the key is "name" and the value is
+    "Mike".
+
+    Description of argument(s):
+    string                          The string to be parsed.
+    delim                           The delimiter which separates the key from
+                                    the value.
+    strip                           The characters (if any) to strip from the
+                                    beginning and end of both the key and the
+                                    value.
+    to_lower                        Change the key name to lower case.
+    underscores                     Change any blanks found in the key name to
+                                    underscores.
+    """
+
+    pair = string.split(delim)
+
+    key = pair[0].strip(strip)
+    if len(pair) == 0:
+        value = ""
+    else:
+        value = "".join(pair[1:]).strip(strip)
+
+    if to_lower:
+        key = key.lower()
+    if underscores:
+        key = re.sub(r" ", "_", key)
+
+    return key, value
+
+
+def key_value_list_to_dict(list,
+                           **args):
+
+    r"""
+    Convert a list containing key/value strings to a dictionary and return it.
+
+    See docstring of parse_key_value function for details on key/value strings.
+
+    Example usage:
+
+    For the following value of list:
+
+    list:
+      list[0]:          Current Limit State: No Active Power Limit
+      list[1]:          Exception actions:   Hard Power Off & Log Event to SEL
+      list[2]:          Power Limit:         0 Watts
+      list[3]:          Correction time:     0 milliseconds
+      list[4]:          Sampling period:     0 seconds
+
+    And the following call in python:
+
+    power_limit = key_value_outbuf_to_dict(list)
+
+    The resulting power_limit directory would look like this:
+
+    power_limit:
+      [current_limit_state]:        No Active Power Limit
+      [exception_actions]:          Hard Power Off & Log Event to SEL
+      [power_limit]:                0 Watts
+      [correction_time]:            0 milliseconds
+      [sampling_period]:            0 seconds
+
+    Description of argument(s):
+    list                            A list of key/value strings.  (See
+                                    docstring of parse_key_value function for
+                                    details).
+    **args                          Arguments to be interpreted by
+                                    parse_key_value.  (See docstring of
+                                    parse_key_value function for details).
+    """
+
+    try:
+        result_dict = collections.OrderedDict()
+    except AttributeError:
+        result_dict = DotDict()
+
+    for entry in list:
+        key, value = parse_key_value(entry, *args)
+        result_dict[key] = value
+
+    return result_dict
+
+
+def key_value_outbuf_to_dict(out_buf,
+                             **args):
+
+    r"""
+    Convert a buffer with a key/value string on each line to a dictionary and
+    return it.
+
+    Each line in the out_buf should end with a \n.
+
+    See docstring of parse_key_value function for details on key/value strings.
+
+    Example usage:
+
+    For the following value of out_buf:
+
+    Current Limit State: No Active Power Limit
+    Exception actions:   Hard Power Off & Log Event to SEL
+    Power Limit:         0 Watts
+    Correction time:     0 milliseconds
+    Sampling period:     0 seconds
+
+    And the following call in python:
+
+    power_limit = key_value_outbuf_to_dict(out_buf)
+
+    The resulting power_limit directory would look like this:
+
+    power_limit:
+      [current_limit_state]:        No Active Power Limit
+      [exception_actions]:          Hard Power Off & Log Event to SEL
+      [power_limit]:                0 Watts
+      [correction_time]:            0 milliseconds
+      [sampling_period]:            0 seconds
+
+    Description of argument(s):
+    out_buf                         A buffer with a key/value string on each
+                                    line. (See docstring of parse_key_value
+                                    function for details).
+    **args                          Arguments to be interpreted by
+                                    parse_key_value.  (See docstring of
+                                    parse_key_value function for details).
+    """
+
+    # Create key_var_list and remove null entries.
+    key_var_list = list(filter(None, out_buf.split("\n")))
+    return key_value_list_to_dict(key_var_list, *args)
