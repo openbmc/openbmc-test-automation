@@ -5,6 +5,7 @@ Define variable manipulation functions.
 """
 
 import os
+import re
 
 try:
     from robot.utils import DotDict
@@ -206,3 +207,115 @@ def parse_file_path(file_path):
     result_dict.update(split_to_dict(file_path))
 
     return result_dict
+
+
+def parse_key_value(string,
+                    delim=":",
+                    strip=" ",
+                    tolower=1,
+                    underscores=1):
+
+    r"""
+    Parse a key/value string and return as a key/value tuple.
+
+    This function is useful for parsing a line of program output or data that
+    is in the following form:
+    <key or variable name><delimiter><value>
+
+    An example of a key/value string would be as follows:
+
+    Current Limit State: No Active Power Limit
+
+    In the example shown, the delimiter is ":".  The resultings key would be
+    as follows:
+    Current Limit State
+
+    And the resulting value would be as follows:
+    No Active Power Limit
+
+    Another example:
+    name=Mike
+
+    In this case, the delim would be "=", the key is "name" and the value is
+    "Mike".
+
+    Description of argument(s):
+    string                          The string to be parsed.
+    delim                           The delimiter which separates the key from
+                                    the value.
+    strip                           The characters (if any) to strip from the
+                                    beginning and end of both the key and the
+                                    value.
+    tolower                         Change the key name to lower case.
+    underscores                     Change any blanks found in the key name to
+                                    underscores.
+    """
+
+    pair = string.split(delim)
+
+    key = pair[0].strip(strip)
+    if len(pair) == 0:
+        value = ""
+    else:
+        value = "".join(pair[1:]).strip(strip)
+
+    if tolower:
+        key = key.lower()
+    if underscores:
+        key = re.sub(r" ", "_", key)
+
+    return key, value
+
+
+def key_value_list_to_dict(list,
+                           **args):
+
+    r"""
+    Convert a list containing key/value strings to a dictionary and return it.
+
+    See docstring of parse_key_value function for details.
+
+    Description of argument(s):
+    list                            A list of key/value strings.  (See
+                                    docstring of parse_key_value function for
+                                    details).
+    **args  Arguments to be interpreted by parse_key_value.  (See docstring of
+    parse_key_value function for details).
+    """
+
+    try:
+        result_dict = collections.OrderedDict()
+    except AttributeError:
+        result_dict = DotDict()
+
+    for entry in list:
+        key, value = parse_key_value(entry, *args)
+        result_dict[key] = value
+
+    return result_dict
+
+
+def key_value_outbuf_to_dict(out_buf,
+                             **args):
+
+    r"""
+    Convert a buffer with a key/value string on each line to a dictionary and
+    return it.
+
+    Each line in the out_buf should end with a \n.
+
+    See docstring of parse_key_value function for details.
+
+    Description of argument(s):
+    out_buf                         A buffer with a key/value string on each
+                                    line. (See docstring of parse_key_value
+                                    function for details).
+    **args   Arguments to be interpreted by parse_key_value.  (See docstring
+    of parse_key_value function for details).
+    """
+
+    list = out_buf.split("\n")
+    # Handle special case of null string.
+    if list[-1] == "":
+        list.pop()
+    return key_value_list_to_dict(list, *args)
