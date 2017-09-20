@@ -189,7 +189,7 @@ Set Resolved Field And Verify Callout Deletion
     [Documentation]  Set the "Resolved" error log and verify callout is deleted
     [Tags]  Set_Resolved_Field_And_Verify_Callout_Deletion
 
-    Delete Error logs
+    Delete All Error Log
     Create Test Error With Callout
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
