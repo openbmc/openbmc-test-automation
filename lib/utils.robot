@@ -1060,7 +1060,7 @@ Get System LED State
     ${state}=  Read Attribute  ${LED_PHYSICAL_URI}${led_name}  State
     [Return]  ${state.rsplit('.', 1)[1]}
 
-###############################################################################
+
 Delete Error Logs
     [Documentation]  Delete error logs.
 
@@ -1073,7 +1073,7 @@ Delete Error Logs
     :FOR  ${entry}  IN  @{elog_entries}
     \  Delete Error Log Entry  ${entry}
 
-###############################################################################
+
 Delete Error Log Entry
     [Documentation]  Delete error log entry.
     [Arguments]  ${entry_path}
@@ -1091,7 +1091,15 @@ Delete Error Log Entry
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
-###############################################################################
+Delete All Error Log
+    [Documentation]  Delete all error log entries using "DeleteAll" interface.
+
+    ${data}=  Create Dictionary  data=@{EMPTY}
+    ${resp}=  Openbmc Post Request  ${BMC_LOGGING_URI}action/DeleteAll
+    ...  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
 Get LED State XYZ
     [Documentation]  Returns state of given LED.
     [Arguments]  ${led_name}
@@ -1102,7 +1110,6 @@ Get LED State XYZ
     [Return]  ${state}
 
 
-###############################################################################
 Get BMC Version
     [Documentation]  Returns BMC version from /etc/os-release.
     ...              e.g. "v1.99.6-141-ge662190"
@@ -1113,7 +1120,6 @@ Get BMC Version
     [Return]  ${output}
 
 
-###############################################################################
 Get Elog URL List
     [Documentation]  Return error log entry list of URLs.
 
@@ -1122,7 +1128,6 @@ Get Elog URL List
     [Return]  ${url_list}
 
 
-###############################################################################
 Read Turbo Setting Via REST
     [Documentation]  Return turbo setting via REST.
 
@@ -1132,7 +1137,6 @@ Read Turbo Setting Via REST
     [Return]  ${jsondata["data"]["value"]}
 
 
-###############################################################################
 Set Turbo Setting Via REST
     [Documentation]  Set turbo setting via REST.
     [Arguments]  ${setting}
