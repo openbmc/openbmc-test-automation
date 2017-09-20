@@ -129,7 +129,8 @@ def process_pgm_parms():
     parm_list = BuiltIn().get_variable_value("${parm_list}")
     # The following subset of parms should be processed as integers.
     int_list = ['max_num_tests', 'boot_pass', 'boot_fail', 'ffdc_only',
-                'boot_fail_threshold', 'quiet', 'test_mode', 'debug']
+                'boot_fail_threshold', 'delete_errlogs', 'quiet', 'test_mode',
+                'debug']
     for parm in parm_list:
         if parm in int_list:
             sub_cmd = "int(BuiltIn().get_variable_value(\"${" + parm +\
@@ -887,8 +888,9 @@ def test_loop_body():
         if status != 'PASS':
             gp.qprint_error("Call to my_ffdc failed.\n")
 
-    # We need to purge error logs between boots or they build up.
-    grk.run_key("Delete Error logs", ignore=1)
+    if delete_errlogs:
+        # We need to purge error logs between boots or they build up.
+        grk.run_key("Delete Error logs", ignore=1)
 
     boot_results.print_report()
     gp.qprint_timen("Finished boot " + str(boot_count) + ".")

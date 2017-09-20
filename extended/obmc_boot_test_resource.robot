@@ -57,6 +57,7 @@ ${power_off_timeout}        2 mins
 # If the number of boot failures, exceeds boot_fail_threshold, this program
 # returns non-zero.
 ${boot_fail_threshold}      ${0}
+${delete_errlogs}           ${0}
 ${test_mode}                0
 ${quiet}                    0
 ${debug}                    0
