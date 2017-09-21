@@ -13,6 +13,7 @@ Library                 gen_robot_keyword.py
 Library                 bmc_ssh_utils.py
 Library                 utils.py
 Library                 var_funcs.py
+Library                 SCPLibrary  WITH NAME  scp
 
 *** Variables ***
 ${pflash_cmd}           /usr/sbin/pflash -r /dev/stdout -P VERSION
@@ -51,6 +52,10 @@ ${power_policy_setup}             ${0}
 ${bmc_power_policy_method}        ${EMPTY}
 @{valid_power_policy_vars}        RESTORE_LAST_STATE  ALWAYS_POWER_ON
 ...                               ALWAYS_POWER_OFF
+
+${probe_cpu_tool_path}     ${EXECDIR}/tools/ras/probe_cpus.sh
+${scom_addrs_tool_path}    ${EXECDIR}/tools/ras/scom_addr_p9.sh
+${target_file_path}        /root/
 
 *** Keywords ***
 
@@ -1180,7 +1185,6 @@ Set Turbo Setting Via REST
     ${valueDict}=  Create Dictionary  data=${setting}
     Write Attribute  ${SENSORS_URI}host/TurboAllowed  value  data=${valueDict}
 
-
 Set Control Boot Mode
     [Documentation]  Set given boot mode on the boot object path attribute.
     [Arguments]  ${boot_path}  ${boot_mode}
@@ -1196,3 +1200,16 @@ Set Control Boot Mode
 
     ${valueDict}=  Create Dictionary  data=${boot_mode}
     Write Attribute  ${boot_path}  BootMode  data=${valueDict}
+
+Copy Address Translation Utils To HOST OS
+    [Documentation]  Copy address translation utils to host OS.
+
+    OperatingSystem.File Should Exist  ${probe_cpu_tool_path}
+    ...  msg=${probe_cpu_tool_path} doesn't exist.
+    OperatingSystem.File Should Exist  ${probe_cpu_tool_path}
+    ...  msg=${probe_cpu_tool_path} doesn't exist.
+
+    scp.Open connection  ${OS_HOST}  username=${OS_USERNAME}
+    ...  password=${OS_PASSWORD}
+    scp.Put File  ${probe_cpu_tool_path}  ${target_file_path}
+    scp.Put File  ${scom_addrs_tool_path}  ${target_file_path}
