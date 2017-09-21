@@ -4,42 +4,59 @@ Documentation     Module for capturing BMC serial output
 Library           Telnet  newline=LF
 Library           OperatingSystem
 Library           Collections
+Library           String
 
-*** Variables ***
 
 *** Keywords ***
 
-Open Telnet Connection to BMC Serial Console
+Open Telnet Connection To BMC Serial Console
     [Documentation]   Open telnet connection session to BMC serial console
     ...               The login prompt expected, for example, for barreleye
-    ...               is "barreleye login:"
+    ...               is "barreleye login:".
     [Arguments]   ${i_host}=${OPENBMC_SERIAL_HOST}
     ...           ${i_port}=${OPENBMC_SERIAL_PORT}
     ...           ${i_model}=${OPENBMC_MODEL}
 
-    Run Keyword If
-    ...  '${i_host}' != '${EMPTY}' and '${i_port}' != '${EMPTY}' and '${i_model}' != '${EMPTY}'
-    ...  Establish Telnet Session on BMC Serial Console
-    ...  ELSE   Fail   msg=One of the paramaters is EMPTY
+    # Description of argument(s):
+    # i_host    The host name or IP of the serial console.
+    # i_port    The port of the serial console.
+    # i_model   The path to the system data, i.e. "./data/Witherspoon.py".
 
-
-Establish Telnet Session on BMC Serial Console
-    [Documentation]   Establish telnet session and set timeout to 30 mins
-    ...               30 secs.
-
-    ${prompt_string}   Set Variable   ${OPENBMC_MODEL} login:
+    ${prompt_string}=  Remove String  ${i_model}  ./data/  .py
+    ${prompt_string}=  Convert To Lowercase  ${prompt_string} login:
     Telnet.Open Connection
-    ...   ${OPENBMC_SERIAL_HOST}  port=${OPENBMC_SERIAL_PORT}  prompt=#
-    Set Newline    \n
-    Set Newline    CRLF
-    Telnet.Write   \n
-    Telnet.Login   ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-    ...    login_prompt=${prompt_string}   password_prompt=Password:
-    Telnet.Set Timeout   30 minute 30 seconds
+    ...  ${i_host}  port=${i_port}  prompt=#
+    Telnet.Set Newline  \n
+    Telnet.Set Newline  CRLF
+    Telnet.Write  \n
+    Telnet.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ...  login_prompt=${prompt_string}  password_prompt=Password:
+    Telnet.Set Timeout  30 minute 30 seconds
 
 
 Read and Log BMC Serial Console Output
     [Documentation]    Reads everything that is currently available
     ...                in the output.
+
     ${bmc_serial_log}=   Telnet.Read
     Log   ${bmc_serial_log}
+
+
+Execute Command On Serial Console
+    [Documentation]  Execute a command on the BMC serial console.
+    [Arguments]  ${command_string}
+
+    # Description of argument(s):
+    # command   The command to execute on the BMC.
+
+    Open Telnet Connection To BMC Serial Console
+    Telnet.Write  \n
+    Telnet.Execute Command  ${command_string}
+    Close Serial Console Connection
+
+
+Close Serial Console Connection
+    [Documentation]  Log out of the BMC and close telnet.
+
+    Execute Command On Serial Console  exit
+    Telnet.Close Connection
