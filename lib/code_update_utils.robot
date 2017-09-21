@@ -5,8 +5,10 @@ Library     code_update_utils.py
 Library     OperatingSystem
 Library     String
 Variables   ../data/variables.py
+Resource    boot_utils.robot
 Resource    rest_client.robot
 Resource    openbmc_ffdc.robot
+Resource    oem/ibm/serial_console_client.robot
 
 *** Keywords ***
 
@@ -134,14 +136,12 @@ Set Priority To Invalid Value And Expect Error
     ...  Set Host Software Property  @{images}[0]  Priority  ${priority}
 
 
-Upload And Activate Image
-    [Documentation]  Upload an image to the BMC and activate it with REST.
-    [Arguments]  ${image_file_path}  ${wait}=${1}
+Upload Image And Begin Activation
+    [Documentation]  Upload an image and verify that it is in the ready state.
+    [Arguments]  ${image_file_path}
 
     # Description of argument(s):
     # image_file_path     The path to the image tarball to upload and activate.
-    # wait                Indicates that this keyword should wait for host or
-    #                     BMC activation is completed.
 
     OperatingSystem.File Should Exist  ${image_file_path}
     ${image_version}=  Get Version Tar  ${image_file_path}
@@ -162,6 +162,20 @@ Upload And Activate Image
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[RequestedActivation]
     ...  ${REQUESTED_ACTIVE}
+
+    [Return]  ${version_id}
+
+
+Upload And Activate Image
+    [Documentation]  Upload an image to the BMC and activate it with REST.
+    [Arguments]  ${image_file_path}  ${wait}=${1}
+
+    # Description of argument(s):
+    # image_file_path  The path to the image tarball to upload and activate.
+    # wait             Indicates that this keyword should wait for host or
+    #                  BMC activation is completed.
+
+    ${version_id}=  Upload Image And Begin Activation  ${image_file_path}
 
     # Does caller want to wait for activation to complete?
     Run Keyword If  '${wait}' == '${0}'  Return From Keyword
@@ -260,3 +274,31 @@ Check Error And Collect FFDC
     ${status}=  Run Keyword And Return Status  Error Logs Should Not Exist
     Run Keyword If  '${status}' == 'False'  FFDC
     Delete Error Logs
+
+
+Reset Network During Code Update
+    [Documentation]  Disable and re-enable the network while doing code update.
+    [Arguments]  ${image_file_path}  ${reboot}
+
+    # Description of argument(s):
+    # image_file_path   Path to the image file to update to.
+    # reboot            If set to true, will reboot the BMC after the code
+    #                   update is finished.
+
+    Set Library Search Order  SSHLibrary  Telnet
+    Open Serial Console Connection
+    ${version_id}=  Upload Image And Begin Activation  ${image_file_path}
+
+    # Reset the network
+    Execute Command On Serial Console  echo hello
+    Execute Command On Serial Console  ifconfig eth0 down
+    Execute Command On Serial Console  ifconfig eth0 up
+    Read and Log BMC Serial Console Output
+    Close Serial Console Connection
+
+    # Verify code update was successful and Activation state is Active.
+    Wait For Activation State Change  ${version_id}  ${ACTIVATING}
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+
+    Run Keyword If  '${reboot}'  OBMC Reboot (off)
