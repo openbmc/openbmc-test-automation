@@ -5,6 +5,7 @@ Library     code_update_utils.py
 Library     OperatingSystem
 Library     String
 Variables   ../data/variables.py
+Resource    boot_utils.robot
 Resource    rest_client.robot
 Resource    openbmc_ffdc.robot
 
@@ -139,9 +140,9 @@ Upload And Activate Image
     [Arguments]  ${image_file_path}  ${wait}=${1}
 
     # Description of argument(s):
-    # image_file_path     The path to the image tarball to upload and activate.
-    # wait                Indicates that this keyword should wait for host or
-    #                     BMC activation is completed.
+    # image_file_path  The path to the image tarball to upload and activate.
+    # wait             Indicates that this keyword should wait for host or
+    #                  BMC activation is completed.
 
     OperatingSystem.File Should Exist  ${image_file_path}
     ${image_version}=  Get Version Tar  ${image_file_path}
@@ -164,12 +165,14 @@ Upload And Activate Image
     ...  ${REQUESTED_ACTIVE}
 
     # Does caller want to wait for activation to complete?
-    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    Return From Keyword If  '${wait}' == '${0}'  ${version_id}
 
     # Verify code update was successful and Activation state is Active.
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+
+    [Return]  ${version_id}
 
 
 Activate Image And Verify No Duplicate Priorities
@@ -260,3 +263,33 @@ Check Error And Collect FFDC
     ${status}=  Run Keyword And Return Status  Error Logs Should Not Exist
     Run Keyword If  '${status}' == 'False'  FFDC
     Delete Error Logs
+
+
+Reset Network During Code Update
+    [Documentation]  Disable and re-enable the network while doing code update.
+    [Arguments]  ${image_file_path}  ${reboot}
+
+    # Reseting the network will be done via the serial console.
+    #
+    # Description of argument(s):
+    # image_file_path   Path to the image file to update to.
+    # reboot            If set to true, will reboot the BMC after the code
+    #                   update is finished.
+
+    ${version_id}=  Upload And Activate Image  ${image_file_path}  wait=${0}
+    Import Resource  ${CURDIR}/oem/ibm/serial_console_client.robot
+    Set Library Search Order  SSHLibrary  Telnet
+    Open Telnet Connection To BMC Serial Console
+
+    # Reset the network
+    Execute Command On Serial Console  ifconfig eth0 down
+    Execute Command On Serial Console  ifconfig eth0 up
+    Read and Log BMC Serial Console Output
+    Close Serial Console Connection
+
+    # Verify code update was successful and 'Activation' state is 'Active'.
+    Wait For Activation State Change  ${version_id}  ${ACTIVATING}
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+
+    Run Keyword If  '${reboot}'  OBMC Reboot (off)  stack_mode=normal
