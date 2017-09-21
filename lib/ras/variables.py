@@ -44,3 +44,6 @@ ERROR_INJECT_DICT = {'MCACALIFIR_RECV1': ['07010900', '8000000000000000',\
              'NPU0_RECV32': ['05011400', '8000000000000000', DES_NPU0_RECV32]
              }
 
+# Address translation files
+probe_cpu_file = '/root/probe_cpus.sh'
+Adrs_translation_file = '/root/scom_addr_p9.sh'
