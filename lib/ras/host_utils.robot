@@ -2,6 +2,7 @@
 Documentation       This module is for OS checkstop opertions.
 Resource            ../../lib/rest_client.robot
 Resource            ../../lib/utils.robot
+Resource            ../../lib/ras/variables.py
 Library             OperatingSystem
 
 *** Keywords ***
@@ -43,13 +44,6 @@ Putscom Through OS
     ${cmd}=  Catenate  putscom -c 0x${chip_id} 0x${fru} 0x${address}
     Start Command  ${cmd}
 
-Get Cores Values From OS
-    [Documentation]  Check if cores present on HOST OS & return core values.
-    ${cmd}=  Catenate  cat /sys/firmware/opal/msglog|grep -i chip|grep -i core
-    ${output}=  Execute Command  ${cmd}
-    Should Not Be Empty  ${output}
-    [Return]  ${output}
-
 Get ChipID From OS
     [Documentation]  Get chip ID values based on the input.
     [Arguments]      ${chip_type}
@@ -59,3 +53,36 @@ Get ChipID From OS
     ${cmd}=  Catenate  -l | grep -i ${chip_type} | cut -c1-8
     ${chip_id}=  Getscom Operations On OS  ${cmd}
     [Return]  ${chip_id}
+
+
+Get Core IDs From OS
+    [Documentation]  Get Core IDs corresponding to the input processor chip ID.
+    [Arguments]      ${chip_ID}
+    # Description of argument(s):
+    # chip_id        processor ID (e.g 0/8).
+
+    SSHLibrary.File Should Exist  ${probe_cpu_file}
+    ${cmd}=  Catenate  ${probe_cpu_file} | grep -i 'CHIP ID: ${chip_ID}'
+    ...      | cut -c21-22
+    ${output}  ${stderr}=  Execute Command  ${cmd}  return_stderr=True
+    ${core_ids}=  Split String  ${output}
+    [Return]  ${core_ids}
+
+FIR Address Translation Through HOST
+    [Documentation]  Do FIR address translation through host with given FRI,
+    ...              core value & target type.
+    [Arguments]  ${fir}  ${core_ID}  ${target_type}
+    # Description of argument(s):
+    # fri          FRI value (e.g. 2011400).
+    # core_ID      core ID (e.g. 9).
+    # target_type  target type (e.g. EX/EQ/C).
+
+
+    SSHLibrary.File Should Exist  ${Adrs_translation_file}
+    ${cmd}=  Catenate  ${Adrs_translation_file} ${fir} ${core_ID}
+    ...       | grep -i ${target_type}
+    ${output}  ${stderr}=  Execute Command  ${cmd}
+    ...        return_stderr=True
+    ${translated_adrs}=  Split String  ${output}  :${SPACE}0x
+    ${translated_adrs}=  Get From List  ${translated_adrs}  1
+    [Return]  ${translated_adrs}

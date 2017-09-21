@@ -75,6 +75,7 @@ Verify Unrecoverable Callout Handling For MCI
     Inject Unrecoverable Error Through Host
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
+*** comments ***
 #  Nest accelerator NXDMAENGFIR related error injection.
 
 Verify Recoverable Callout Handling For NXDMAENG With Threshold 1
@@ -251,6 +252,24 @@ Inject Unrecoverable Error Through Host
     Verify And Clear Gard Records On HOST
     Verify Error Log Entry  ${signature_desc}  ${log_prefix}
 
+Fetch FIR Address Translation Value
+    [Documentation]  Fetch FIR address translation value through HOST.
+    [Arguments]  ${chip_id}  ${fir}  ${target_type}
+    # Description of argument(s):
+    # chip_id        processor ID (e.g 0/8).
+    # fri          FRI value (e.g. 2011400).
+    # core_ID      core ID (e.g. 9).
+    # target_type  target type (e.g. EX/EQ/C).
+
+
+    Login To OS Host
+    ${core_ids}=  Get Core IDs From OS  0
+    ${core_id}=  Get From List  ${core_ids}  1
+
+    ${translated_fir_adrs}=  FIR Address Translation Through HOST
+    ...  ${fir}  ${core_id}  ${target_type}
+
+    [Return]  ${translated_fir_adrs}
 
 RAS Test SetUp
     [Documentation]  Validates input parameters.
@@ -264,7 +283,7 @@ RAS Test SetUp
 
     # Boot to OS.
 
-     REST Power On
+     REST Power On  quiet=${1}
 
 RAS Suite Setup
     [Documentation]  Create RAS log directory to store all RAS test logs.
