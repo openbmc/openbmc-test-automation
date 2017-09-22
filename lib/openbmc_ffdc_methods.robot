@@ -354,9 +354,8 @@ Collect eSEL Log
     # Example: /xyz/openbmc_project/logging/entry/1/callout
     \  Continue For Loop If  '${entry_path.rsplit('/', 1)[1]}' == 'callout'
     \  ${esel_data}=  Read Attribute  ${entry_path}  AdditionalData  quiet=${1}
-    \  ${length}=  Get Length  ${esel_data}
-    # Skip writting to file if eSEL AdditionalData is empty
-    \  Continue For Loop If  ${length} == ${0}
+    \  ${status}=  List Should Contain Value  ${esel_data}  ESEL
+    \  Continue For Loop If  ${status} == ${False}
     \  ${index}=  Get Esel Index  ${esel_data}
     \  Write Data To File  "${esel_data[${index}]}"  ${logpath}
     \  Write Data To File  ${\n}  ${logpath}
