@@ -19,6 +19,7 @@ Test Teardown     Code Update Test Teardown
 ${QUIET}                          ${1}
 ${IMAGE_FILE_PATH}                ${EMPTY}
 ${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
+${SKIP_UPDATE_IF_ACTIVE}          false
 
 *** Test Cases ***
 
@@ -27,7 +28,7 @@ REST BMC Code Update
     [Tags]  REST_BMC_Code_Update
     [Setup]  Code Update Setup
 
-    Upload And Activate Image  ${IMAGE_FILE_PATH}
+    Upload And Activate Image  ${IMAGE_FILE_PATH}  ${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
 
 
