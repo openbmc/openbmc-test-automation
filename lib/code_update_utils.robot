@@ -136,12 +136,14 @@ Set Priority To Invalid Value And Expect Error
 
 Upload And Activate Image
     [Documentation]  Upload an image to the BMC and activate it with REST.
-    [Arguments]  ${image_file_path}  ${wait}=${1}
+    [Arguments]  ${image_file_path}  ${wait}=${1}  ${skip_if_active}=false
 
     # Description of argument(s):
     # image_file_path     The path to the image tarball to upload and activate.
     # wait                Indicates that this keyword should wait for host or
     #                     BMC activation is completed.
+    # skip_if_active      If set to true, will skip the code update if this
+    #                     image is already on the BMC.
 
     OperatingSystem.File Should Exist  ${image_file_path}
     ${image_version}=  Get Version Tar  ${image_file_path}
@@ -151,8 +153,13 @@ Upload And Activate Image
     ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
     Should Be True  ${ret}
 
-    # Verify the image is 'READY' to be activated.
+    # Verify the image is 'READY' to be activated or if it's already active,
+    # set priority to 0 and reboot the BMC.
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    ${activation}=  Set Variable  &{software_state}[Activation]
+    Run Keyword If
+    ...  '${skip_if_active}' == 'true' and '${activation}' == '${ACTIVE}'
+    ...  Switch To Active Image And Pass  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${READY}
 
     # Request the image to be activated.
@@ -170,6 +177,20 @@ Upload And Activate Image
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+
+
+Switch To Active Image And Pass
+    [Documentation]  Make the given active image the image running on the BMC
+    ...              and pass the test.
+    [Arguments]  ${software_object}
+
+    # Description of argument(s):
+    # software_object  Software object path.
+    #                  (e.g. "/xyz/openbmc_project/software/f3b29aa8").
+
+    Set Host Software Property  ${software_object}  Priority  ${0}
+    OBMC Reboot (off)
+    Pass Execution  ${software_object} was already on the BMC.
 
 
 Activate Image And Verify No Duplicate Priorities
