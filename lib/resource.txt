@@ -56,6 +56,7 @@ ${ALTERNATE_IMAGE_FILE_PATH}    ${EMPTY}
 ${PNOR_IMAGE_FILE_PATH}         ${EMPTY}
 ${BMC_IMAGE_FILE_PATH}          ${EMPTY}
 ${BAD_IMAGES_DIR_PATH}          ${EMPTY}
+${SKIP_UPDATE_IF_ACTIVE}        false
 
 # The caller must set this to the string "true" in order to delete images. The
 # code is picky.
