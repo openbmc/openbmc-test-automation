@@ -136,10 +136,12 @@ Set Priority To Invalid Value And Expect Error
 
 Upload And Activate Image
     [Documentation]  Upload an image to the BMC and activate it with REST.
-    [Arguments]  ${image_file_path}
+    [Arguments]  ${image_file_path}  ${wait}=${1}
 
     # Description of argument(s):
-    # image_file_path  The path to the image tarball to upload and activate.
+    # image_file_path     The path to the image tarball to upload and activate.
+    # wait                Indicates that this keyword should wait for host or
+    #                     BMC activation is completed.
 
     OperatingSystem.File Should Exist  ${image_file_path}
     ${image_version}=  Get Version Tar  ${image_file_path}
@@ -160,6 +162,9 @@ Upload And Activate Image
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[RequestedActivation]
     ...  ${REQUESTED_ACTIVE}
+
+    # Does caller want to wait for activation to complete?
+    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
 
     # Verify code update was successful and Activation state is Active.
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
