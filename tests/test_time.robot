@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation          This suite is for testing System time in Open BMC.
+Documentation          This is is  suite for testing System time in Open BMC.
 
 Resource               ../lib/rest_client.robot
 Resource               ../lib/ipmi_client.robot
