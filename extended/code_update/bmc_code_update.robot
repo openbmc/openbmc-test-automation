@@ -6,6 +6,7 @@ Documentation     Update the BMC code on a target BMC.
 
 Library           ../../lib/code_update_utils.py
 Variables         ../../data/variables.py
+Resource          ../../lib/utils.robot
 Resource          ../../lib/boot_utils.robot
 Resource          code_update_utils.robot
 Resource          ../../lib/code_update_utils.robot
@@ -21,6 +22,13 @@ ${IMAGE_FILE_PATH}                ${EMPTY}
 ${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
 
 *** Test Cases ***
+
+Test Basic BMC Performance Before BMC Code Update
+    [Documentation]  Check performance of memory, CPU & file system of BMC.
+    [Tags]  Test_Basic_BMC_Performance_Before_BMC_Code_Update
+
+    Open Connection And Log In
+    Check BMC Performance
 
 REST BMC Code Update
     [Documentation]  Do a BMC code update by uploading image on BMC via REST.
@@ -72,8 +80,34 @@ BMC Image Priority Attribute Test
     Priority          ${127}
     Priority          ${255}
 
+Test Basic BMC Performance At Ready State
+    [Documentation]  Check performance of memory, CPU & file system of BMC.
+    [Tags]  Test_Basic_BMC_Performance_At_Ready_State
+
+    Open Connection And Log In
+    Check BMC Performance
+
+Check Core Dump Exist After Code Update
+    [Documentation]  Check core dump existence on BMC after code update.
+    [Tags]  Check_Core_Dump_Exist_After_Code_Update
+
+    Check For Core Dumps
+
+Enable Core Dump File Size To Be Unlimited
+    [Documentation]  Set core dump file size to unlimited.
+    [Tags]  Enable_Core_Dump_File_size_To_Be_unlimited
+
+    Set Core Dump File Size Unlimited
+
 
 *** Keywords ***
+
+Check BMC Performance
+    [Documentation]  Check BMC basic CPU Mem File system performance.
+
+    Check BMC CPU Performance
+    Check BMC Mem Performance
+    Check BMC File System Performance
 
 Temporarily Set BMC Attribute
     [Documentation]  Update the BMC attribute value.
@@ -117,3 +151,4 @@ Code Update Test Teardown
 
     FFDC On Test Case Fail
     Run Keyword If  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
+    Close All Connections
