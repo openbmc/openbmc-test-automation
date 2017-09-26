@@ -26,9 +26,9 @@ Error Log Check After BMC Reboot
     # 3. Reboot BMC.
     # 4. Check if eror log exists.
 
-    REST Power Off
+    Smart Power Off
     Delete Error Logs And Verify
-    OBMC Reboot (off)
+    OBMC Reboot (off)  stack_mode=normal
     Error Logs Should Not Exist
 
 
