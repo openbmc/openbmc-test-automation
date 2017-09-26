@@ -1120,6 +1120,25 @@ Get BMC Version
     [Return]  ${output}
 
 
+Get PNOR Version
+    [Documentation]  Get the PNOR version from the BMC.
+
+    ${pnor_attrs}=  Get PNOR Attributes
+    [Return]  ${pnor_attrs['version']}
+
+
+Get PNOR Attributes
+    [Documentation]  Return PNOR software attributes as a dictionary.
+
+    # This keyword parses /var/lib/phosphor-software-manager/pnor/ro/pnor.toc into key/value pairs.
+
+    ${outbuf}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  cat /var/lib/phosphor-software-manager/pnor/ro/pnor.toc
+    ${pnor_attrs}=  Key Value Outbuf To Dict  ${outbuf}  delim==
+
+    [Return]  ${pnor_attrs}
+
+
 Get Elog URL List
     [Documentation]  Return error log entry list of URLs.
 
