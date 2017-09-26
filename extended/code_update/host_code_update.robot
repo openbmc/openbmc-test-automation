@@ -62,6 +62,7 @@ Post Update Boot To OS
     Start SOL Console Logging
     Delete Error Logs
     REST Power On
+    Verify Running Host Image  ${IMAGE_FILE_PATH}
 
 
 Host Image Priority Attribute Test

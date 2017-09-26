@@ -300,3 +300,30 @@ Check Error And Collect FFDC
     ${status}=  Run Keyword And Return Status  Error Logs Should Not Exist
     Run Keyword If  '${status}' == 'False'  FFDC
     Delete Error Logs
+
+
+Verify Running BMC Image
+    [Documentation]  Verify that the version on the BMC is the same as the
+    ...              version in the given image.
+    [Arguments]  ${image_file_path}
+
+    # Description of argument(s):
+    # image_file_path   Path to the BMC image tarball.
+
+    ${tar_version}=  Get Version Tar  ${image_file_path}
+    ${bmc_version}=  Get BMC Version
+    ${bmc_version}=  Remove String  ${bmc_version}  "
+    Should Be Equal  ${tar_version}  ${bmc_version}
+
+
+Verify Running Host Image
+    [Documentation]  Verify that the version of the PNOR image that is on the
+    ...              BMC is the same as the one in the given image.
+    [Arguments]  ${image_file_path}
+
+    # Description of argument(s):
+    # image_file_path   Path to the PNOR image tarball.
+
+    ${tar_version}=  Get Version Tar  ${image_file_path}
+    ${pnor_version}=  Get PNOR Version
+    Should Be Equal  ${tar_version}  ${pnor_version}
