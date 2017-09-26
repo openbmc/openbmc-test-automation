@@ -1120,6 +1120,19 @@ Get BMC Version
     [Return]  ${output}
 
 
+Get PNOR Version
+    [Documentation]  Get the PNOR version from
+    ...  /var/lib/phosphor-software-manager/pnor/ro/pnor.toc.
+
+    ${cmd}=  Catenate  grep ^version=
+    ...  /var/lib/phosphor-software-manager/pnor/ro/pnor.toc | cut -f 2 -d '='
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
+    Should Be Equal As Strings  ${rc}  0
+    ...  msg=Error when executing ${cmd}: ${stderr}
+    Should Not Be Empty  ${stdout}
+    [Return]  ${stdout}
+
+
 Get Elog URL List
     [Documentation]  Return error log entry list of URLs.
 

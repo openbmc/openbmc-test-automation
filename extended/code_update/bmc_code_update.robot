@@ -29,6 +29,7 @@ REST BMC Code Update
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     OBMC Reboot (off)
+    Verify Running BMC Image  ${IMAGE_FILE_PATH}
 
 
 Upload And Activate Multiple BMC Images
