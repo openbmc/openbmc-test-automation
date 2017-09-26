@@ -321,7 +321,7 @@ def key_value_list_to_dict(list,
         result_dict = DotDict()
 
     for entry in list:
-        key, value = parse_key_value(entry, *args)
+        key, value = parse_key_value(entry, **args)
         result_dict[key] = value
 
     return result_dict
@@ -372,4 +372,4 @@ def key_value_outbuf_to_dict(out_buf,
 
     # Create key_var_list and remove null entries.
     key_var_list = list(filter(None, out_buf.split("\n")))
-    return key_value_list_to_dict(key_var_list, *args)
+    return key_value_list_to_dict(key_var_list, **args)
