@@ -108,15 +108,24 @@ def wait_for_activation_state_change(version_id, initial_state):
 
     keyword.run_key_u("Open Connection And Log In")
     retry = 0
+    read_errors = 0
     while (retry < 20):
         status, software_state = keyword.run_key("Read Properties  " +
-                                    var.SOFTWARE_VERSION_URI + str(version_id))
-        current_state = (software_state)["Activation"]
-        if (initial_state == current_state):
-            time.sleep(60)
-            retry += 1
+                                    var.SOFTWARE_VERSION_URI + str(version_id),
+                                    ignore=1)
+        if 'FAIL' == status:
+            read_errors += 1
+            if read_errors > 1:
+                BuiltIn().fail("More than one Read Properties errors in a row")
+            time.sleep(30)
         else:
-            return
+            current_state = (software_state)["Activation"]
+            if (initial_state == current_state):
+                time.sleep(60)
+                retry += 1
+                read_errors = 0
+            else:
+                return
     return
 
 ###############################################################################
