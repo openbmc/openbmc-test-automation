@@ -13,13 +13,13 @@ Documentation         Test upload image with both valid and invalid images.
 ...                   -v BMC_IMAGE_FILE_PATH:<path/*.tar>
 ...                   -v BAD_IMAGES_DIR_PATH:<path> test_uploadimage.robot
 
-Resource              ../lib/connection_client.robot
-Resource              ../lib/rest_client.robot
-Resource              ../lib/openbmc_ffdc.robot
+Resource              ../../lib/connection_client.robot
+Resource              ../../lib/rest_client.robot
+Resource              ../../lib/openbmc_ffdc.robot
 Library               Collections
 Library               String
 Library               OperatingSystem
-Library               ../lib/code_update_utils.py
+Library               ../../lib/code_update_utils.py
 
 Test Teardown  Upload Image Teardown
 
