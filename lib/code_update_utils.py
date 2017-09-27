@@ -108,12 +108,12 @@ def wait_for_activation_state_change(version_id, initial_state):
 
     keyword.run_key_u("Open Connection And Log In")
     retry = 0
-    while (retry < 20):
+    while (retry < 30):
         status, software_state = keyword.run_key("Read Properties  " +
                                     var.SOFTWARE_VERSION_URI + str(version_id))
         current_state = (software_state)["Activation"]
         if (initial_state == current_state):
-            time.sleep(60)
+            time.sleep(10)
             retry += 1
         else:
             return
