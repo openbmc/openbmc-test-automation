@@ -67,6 +67,7 @@ boot_start_time = ""
 boot_end_time = ""
 save_stack = vs.var_stack('save_stack')
 main_func_parm_list = ['boot_stack', 'stack_mode', 'quiet']
+transitional_boot_selected = 0
 
 
 ###############################################################################
@@ -506,13 +507,27 @@ def select_boot():
     state  The state of the machine.
     """
 
+    global transitional_boot_selected
     global boot_stack
 
     gp.qprint_timen("Selecting a boot test.")
 
+    if transitional_boot_selected and not boot_success:
+        prior_boot = next_boot
+        boot_candidate = boot_stack.pop()
+        gp.qprint_timen("The prior '" + next_boot + "' was chosen to" +
+                        " transition to a valid state for '" + boot_candidate +
+                        "' which was at the top of the boot_stack.  Since" +
+                        " the '" + next_boot + "' failed, the '" +
+                        boot_candidate + "' has been removed from the stack" +
+                        " to avoid and endless failure loop.")
+        if len(boot_stack) == 0:
+            return ""
+
     my_get_state()
     valid_state()
 
+    transitional_boot_selected = 0
     stack_popped = 0
     if len(boot_stack) > 0:
         stack_popped = 1
@@ -555,6 +570,7 @@ def select_boot():
             gp.qprint_varx("boot_table[" + boot_candidate + "][start]",
                            boot_table[boot_candidate]['start'], 1)
             boot_stack.append(boot_candidate)
+            transitional_boot_selected = 1
             popped_boot = boot_candidate
 
     # Loop through your list selecting a boot_candidates
