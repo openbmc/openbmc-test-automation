@@ -148,7 +148,7 @@ Verify eSEL Entries
     # }
     ${entry_id}=  Read Attribute  ${elog_entry[0]}  message
     Should Be Equal  ${entry_id}
-    ...  org.open_power.Error.Host.Event.Event
+    ...  org.open_power.Host.Event.Error.Event
     ${entry_id}=  Read Attribute  ${elog_entry[0]}  Severity
     Should Be Equal  ${entry_id}
     ...  xyz.openbmc_project.Logging.Entry.Level.Error
