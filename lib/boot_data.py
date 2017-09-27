@@ -335,8 +335,14 @@ def create_boot_results_file_path(pgm_name,
                       name.
     """
 
+    USER = os.environ.get("USER", "")
+    dir_path = "/tmp/" + USER + "/"
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
+
     file_name_dict = vf.create_var_dict(pgm_name, openbmc_nickname, master_pid)
-    return vf.create_file_path(file_name_dict, file_suffix=":boot_results")
+    return vf.create_file_path(file_name_dict, dir_path=dir_path,
+                               file_suffix=":boot_results")
 
 ###############################################################################
 
