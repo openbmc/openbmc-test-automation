@@ -110,7 +110,7 @@ def wait_for_activation_state_change(version_id, initial_state):
     retry = 0
     num_read_errors = 0
     read_fail_threshold = 1
-    while (retry < 20):
+    while (retry < 30):
         # TODO: Use retry option in run_key when available.
         status, software_state = keyword.run_key("Read Properties  " +
                                     var.SOFTWARE_VERSION_URI + str(version_id),
@@ -121,12 +121,12 @@ def wait_for_activation_state_change(version_id, initial_state):
                 message = "Read errors exceeds threshold:\n " \
                         + gp.sprint_vars(num_read_errors, read_fail_threshold)
                 BuiltIn().fail(message)
-            time.sleep(30)
+            time.sleep(10)
             continue
 
         current_state = (software_state)["Activation"]
         if (initial_state == current_state):
-            time.sleep(60)
+            time.sleep(10)
             retry += 1
             num_read_errors = 0
         else:
