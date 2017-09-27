@@ -28,7 +28,8 @@ REST BMC Code Update
     [Tags]  REST_BMC_Code_Update
     [Setup]  Code Update Setup
 
-    Upload And Activate Image  ${IMAGE_FILE_PATH}  ${SKIP_UPDATE_IF_ACTIVE}
+    Upload And Activate Image  ${IMAGE_FILE_PATH}
+    ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
 
 
