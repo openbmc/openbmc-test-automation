@@ -18,7 +18,7 @@ Create User Initiated Dump
     ${json}=  To JSON  ${resp.content}
     ${dump_id}=  Set Variable  ${json["data"]}
 
-    Wait Until Keyword Succeeds  1 min  10 sec  Check Dump Existence
+    Wait Until Keyword Succeeds  3 min  15 sec  Check Dump Existence
     ...  ${dump_id}
 
     [Return]  ${dump_id}
