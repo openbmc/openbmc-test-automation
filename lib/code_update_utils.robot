@@ -4,6 +4,7 @@ Documentation  BMC and PNOR update utilities keywords.
 Library     code_update_utils.py
 Library     OperatingSystem
 Library     String
+Library     utilities.py
 Variables   ../data/variables.py
 Resource    boot_utils.robot
 Resource    rest_client.robot
@@ -331,7 +332,6 @@ Verify Running Host Image
     ${pnor_version}=  Get PNOR Version
     Should Be Equal  ${tar_version}  ${pnor_version}
 
-
 Reset Network Interface During Code Update
     [Documentation]  Disable and re-enable the network while doing code update.
     [Arguments]  ${image_file_path}  ${reboot}
@@ -364,3 +364,23 @@ Reset Network Interface
     Sleep  30s
     Execute Command On Serial Console  ifconfig eth0 up
     Read and Log BMC Serial Console Output
+
+
+Get Least Value Priority Image
+    [Documentation]  Find the least value in "Priority" attribute and return.
+    [Arguments]  ${version_type}
+
+    # Description of argument(s):
+    # version_type  Either BMC or host version purpose.
+
+    ${priority_value_list}=  Create List
+    ${sw_list}=  Get Software Objects  version_type=${version_type}
+
+    :FOR  ${index}  IN  @{sw_list}
+    \  ${priority_value}=
+    ...  Read Software Attribute  ${index}  Priority
+    \  Append To List  ${priority_value_list}  ${priority_value}
+
+    ${min_value}=  Min List Value  ${priority_value_list}
+
+    [Return]  ${min_value}
