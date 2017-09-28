@@ -1,11 +1,11 @@
 *** Settings ***
 Documentation     Energy scale power capping tests.
 
-Resource          ../../lib/energy_scale_utils.robot
-Resource          ../../lib/rest_client.robot
-Resource          ../../lib/openbmc_ffdc.robot
-Resource          ../../lib/boot_utils.robot
-Resource          ../../lib/ipmi_client.robot
+Resource          ../lib/energy_scale_utils.robot
+Resource          ../lib/rest_client.robot
+Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/boot_utils.robot
+Resource          ../lib/ipmi_client.robot
 
 Suite Setup      Suite Setup Execution
 Test Teardown    Test Teardown Execution
@@ -15,11 +15,9 @@ Test Teardown    Test Teardown Execution
 
 
 Escale System On And PL Enabled
-    [Documentation]  With system power on, check values with occtoolp9.
+    [Documentation]  Change active power limit with system power on and
+    ...  Power limit active.
     [Tags]  Escale_System_On_And_PL_Enabled
-
-    # Implements:
-    # - Change Active Power Limit with System Power On and Power Limit Active.
 
     REST Power On  stack_mode=skip
 
@@ -45,12 +43,9 @@ Escale System On And PL Enabled
 
 
 Escale System On And PL Disabled
-    [Documentation]  With system power on, check values with occtoolp9.
+    [Documentation] Change active power limit with system power on and
+    ...  deactivate power limit prior to change.
     [Tags]  Escale_System_On_And_PL_Disabled
-
-    # Implements:
-    # - Change Active Power Limit with System Power On and Deactivate Power
-    #   Limit Prior to Change.
 
     ${power_setting}=  Set Variable  ${600}
 
@@ -72,12 +67,9 @@ Escale System On And PL Disabled
 
 
 Escale Check Settings System On Then Off
-    [Documentation]  Set power activitation and limit when system
-    ...  on, then check at power off.
+    [Documentation]  Set power limit and activate power limit before
+    ...  BMC state is power on.
     [Tags]  Escale_Check_Settings_System_On_Then_Off
-
-    # Implements:
-    # - Set Power Limit and Activate Power Limit Before BMC State is Power On.
 
     ${power_setting}=  Set Variable  ${800}
 
@@ -105,12 +97,9 @@ Escale Check Settings System On Then Off
 
 
 Escale Check Settings System Off Then On
-    [Documentation]  Set power activitation and limit when system
-    ...  off, then check at power on.
+    [Documentation]  Set and activate power limit with system power
+    ...  off.
     [Tags]  Escale_Check_Settings_System_Off_Then_On
-
-    # Implements:
-    # - Set and Activate Power Limit with System Power Off.
 
     ${power_setting}=  Set Variable  ${500}
 
@@ -136,11 +125,8 @@ Escale Check Settings System Off Then On
 
 
 Escale Change Limit At Runtime
-    [Documentation]  Change power setting while at runtime.
+    [Documentation]  Change power limit at runtime.
     [Tags]  Escale_Change_Limit_At_Runtime
-
-    # Implements:
-    # - Change Power Limit at Runtime.
 
     ${power_setting}=  Set Variable  ${600}
 
@@ -160,11 +146,8 @@ Escale Change Limit At Runtime
 
 
 Escale Disable And Enable At Runtime
-    [Documentation]  Disable and enable power at runtime.
+    [Documentation]  Disable/enable power limit at runtime.
     [Tags]  Escale_Disable_And_Enable_At_Runtime
-
-    # Implements:
-    # - Disable/Enable Power Limit at Runtime.
 
     ${power_setting}=  Set Variable  ${500}
 
