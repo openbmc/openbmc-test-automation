@@ -125,8 +125,11 @@ Verify SOL During Boot
     Initiate Host Boot Via External IPMI  wait=${0}
 
     Activate SOL Via IPMI
-    Wait Until Keyword Succeeds  10 mins  30 secs
-    ...  Check IPMI SOL Output Content  Petitboot
+    Wait Until Keyword Succeeds  3 mins  30 secs
+    ...  Check IPMI SOL Output Content  Welcome to Hostboot hostboot
+
+    Wait Until Keyword Succeeds  3 mins  30 secs
+    ...  Check IPMI SOL Output Content  ISTEP
 
 Verify Deactivate Non Existing SOL
     [Documentation]  Verify deactivate non existing SOL session.
