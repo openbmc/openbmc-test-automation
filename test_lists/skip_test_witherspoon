@@ -32,3 +32,5 @@
 -e User_Management
 # NA test case for Witherspoon
 -e Verify_Channel_Checkstop_Through_OS_With_Auto_Reboot
+# https://github.com/openbmc/openbmc-test-automation/issues/1021
+-e Escale_System_On_And_PL_Disabled
