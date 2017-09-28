@@ -4,6 +4,7 @@ Documentation  BMC and PNOR update utilities keywords.
 Library     code_update_utils.py
 Library     OperatingSystem
 Library     String
+Library     utilities.py
 Variables   ../data/variables.py
 Resource    rest_client.robot
 Resource    openbmc_ffdc.robot
@@ -300,3 +301,23 @@ Check Error And Collect FFDC
     ${status}=  Run Keyword And Return Status  Error Logs Should Not Exist
     Run Keyword If  '${status}' == 'False'  FFDC
     Delete Error Logs
+
+
+Get Least Value Priority Image
+    [Documentation]  Find the least value in "Priority" attribute and return.
+    [Arguments]  ${version_type}
+
+    # Description of argument(s):
+    # version_type  Either BMC or host version purpose.
+
+    ${priority_value_list}=  Create List
+    ${sw_list}=  Get Software Objects  version_type=${version_type}
+
+    :FOR  ${index}  IN  @{sw_list}
+    \  ${priority_value}=
+    ...  Read Software Attribute  ${index}  Priority
+    \  Append To List  ${priority_value_list}  ${priority_value}
+
+    ${min_value}=  Min List Value  ${priority_value_list}
+
+    [Return]  ${min_value}
