@@ -253,3 +253,10 @@ def list_to_set(fru_list=""):
     return set(fru_list)
 
 ###############################################################################
+
+
+def min_list_value(value_list):
+    r"""
+    Returns the element from the list with minimum value.
+    """
+    return min(value_list)

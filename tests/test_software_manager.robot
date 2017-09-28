@@ -137,6 +137,8 @@ Verify Software Version
     : FOR  ${index}  IN  @{obj_list}
     \  ${resp}=  Get Host Software Property  ${index}
     \  Verify Software Properties  ${resp}  ${software_purpose}
+    \  Run Keyword If  '${software_purpose}' == '${VERSION_PURPOSE_BMC}'
+    ...  Check BMC Version  ${index}  ${resp["Version"]}
 
 
 Verify Software Properties
@@ -150,16 +152,20 @@ Verify Software Properties
     #              "xyz.openbmc_project.Software.Version.VersionPurpose.Host").
 
     Check Activation Status  ${software_property["Activation"]}
-    Run Keyword If  '${software_purpose}' == '${VERSION_PURPOSE_BMC}'
-    ...  Check BMC Version  ${software_property["Version"]}
 
 
 Check BMC Version
     [Documentation]  Get BMC version from /etc/os-release and compare.
-    [Arguments]  ${version}
+    [Arguments]  ${software_object}  ${version}
 
     # Description of argument(s):
-    # version  Software version (e.g. "v1.99.2-107-g2be34d2-dirty")
+    # software_object   Software object path.
+    # version           Software version (e.g. "v1.99.2-107-g2be34d2-dirty")
+
+    ${min_value}=  Get Least Value Priority Image  ${VERSION_PURPOSE_BMC}
+    ${priority_value}=  Read Software Attribute  ${software_object}  Priority
+
+    Return From Keyword If  ${priority_value} != ${min_value}
 
     Open Connection And Log In
     ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '='
