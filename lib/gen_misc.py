@@ -274,6 +274,30 @@ def return_path_list():
     return PATH_LIST
 
 
+def escape_bash_quotes(buffer):
+
+    r"""
+    Escape quotes in string and return it.
+
+    The escape style implemented will be for use on the bash command line.
+
+    Example:
+    That's all.
+
+    Result:
+    That'\''s all.
+
+    The result may then be single quoted on a bash command.  Example:
+
+    echo 'That'\''s all.'
+
+    Description of argument(s):
+    buffer                          The string whose quotes are to be escaped.
+    """
+
+    return re.sub("\'", "\'\\\'\'", buffer)
+
+
 def quote_bash_parm(parm):
 
     r"""
