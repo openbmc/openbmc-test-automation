@@ -1,12 +1,12 @@
 *** Settings ***
-Documentation           This suite is for testing OCC: Power capping setting
+Documentation           Verify BMC reboot using REST.
 
 Resource                ../lib/rest_client.robot
 Resource                ../lib/utils.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/openbmc_ffdc.robot
 Resource                ../lib/boot_utils.robot
-Resource                ../lib/bmc_ssh_utils.py
+Library                 ../lib/bmc_ssh_utils.py
 
 Force Tags  bmcreboot
 
