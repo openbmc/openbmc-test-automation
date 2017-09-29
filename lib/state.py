@@ -11,6 +11,7 @@ some test output showing machine state:
 default_state:
   default_state[chassis]:                         On
   default_state[boot_progress]:                   OSStart
+  default_state[operating_system]:                BootComplete
   default_state[host]:                            Running
   default_state[os_ping]:                         1
   default_state[os_login]:                        1
@@ -43,6 +44,9 @@ import os
 gru.my_import_resource("utils.robot")
 gru.my_import_resource("state_manager.robot")
 
+# I really should get this from variables.py.
+SYSTEM_STATE_URI = '/xyz/openbmc_project/state/'
+
 # The BMC code has recently been changed as far as what states are defined and
 # what the state values can be.  This module now has a means of processing both
 # the old style state (i.e. OBMC_STATES_VERSION = 0) and the new style (i.e.
@@ -64,6 +68,7 @@ default_req_states = ['rest',
                       'chassis',
                       'bmc',
                       'boot_progress',
+                      'operating_system',
                       'host',
                       'os_ping',
                       'os_login',
@@ -78,9 +83,14 @@ valid_req_states = ['ping',
                     'epoch_seconds',
                     'rest',
                     'chassis',
+                    'requested_chassis',
                     'bmc',
+                    'requested_bmc',
                     'boot_progress',
+                    'operating_system',
                     'host',
+                    'requested_host',
+                    'attempts_left',
                     'os_ping',
                     'os_login',
                     'os_run_cmd']
@@ -109,6 +119,7 @@ standby_match_state = DotDict([('rest', '^1$'),
                                ('chassis', '^Off$'),
                                ('bmc', '^Ready$'),
                                ('boot_progress', ''),
+                               ('operating_system', ''),
                                ('host', '')])
 
 # default_state is an initial value which may be of use to callers.
@@ -116,6 +127,7 @@ default_state = DotDict([('rest', '1'),
                          ('chassis', 'On'),
                          ('bmc', 'Ready'),
                          ('boot_progress', 'OSStart'),
+                         ('operating_system', 'BootComplete'),
                          ('host', 'Running'),
                          ('os_ping', '1'),
                          ('os_login', '1'),
@@ -126,12 +138,15 @@ master_os_up_match = DotDict([('chassis', '^On$'),
                               ('bmc', '^Ready$'),
                               ('boot_progress',
                                'FW Progress, Starting OS|OSStart'),
+                              ('operating_system',
+                               'BootComplete'),
                               ('host', '^Running$')])
 
 invalid_state_match = DotDict([('rest', '^$'),
                                ('chassis', '^$'),
                                ('bmc', '^$'),
                                ('boot_progress', '^$'),
+                               ('operating_system', '^$'),
                                ('host', '^$')])
 
 
@@ -497,11 +512,6 @@ def get_state(openbmc_host="",
     packet_loss = ''
     uptime = ''
     epoch_seconds = ''
-    rest = '1'
-    chassis = ''
-    bmc = ''
-    boot_progress = ''
-    host = ''
 
     # Get the component states.
     if 'ping' in req_states:
@@ -554,63 +564,44 @@ def get_state(openbmc_host="",
             if shell_rc == 0:
                 epoch_seconds = out_buf.rstrip("\n")
 
-    master_req_rest = ['rest', 'chassis', 'bmc', 'boot_progress',
-                       'host']
+    master_req_rest = ['rest', 'host', 'requested_host', 'operating_system',
+                       'attempts_left', 'boot_progress', 'chassis',
+                       'requested_chassis' 'bmc' 'requested_bmc']
+
     req_rest = [sub_state for sub_state in req_states if sub_state in
                 master_req_rest]
     need_rest = (len(req_rest) > 0)
-
-    # Though we could try to determine 'rest' state on any of several calls,
-    # for simplicity, we'll use 'chassis' to figure it out (even if the caller
-    # hasn't explicitly asked for 'chassis').
-    if 'chassis' in req_states or need_rest:
-        cmd_buf = ["Get Chassis Power State", "quiet=${" + str(quiet) + "}"]
+    state = DotDict()
+    if need_rest:
+        cmd_buf = ["Read Properties", SYSTEM_STATE_URI + "enumerate",
+                   "quiet=${" + str(quiet) + "}"]
         grp.rdpissuing_keyword(cmd_buf)
         status, ret_values = \
             BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
         if status == "PASS":
-            chassis = ret_values
-            chassis = re.sub(r'.*\.', "", chassis)
-            rest = '1'
+            state['rest'] = '1'
         else:
-            rest = ret_values
+            state['rest'] = '0'
 
-    if rest == '1':
-        if 'bmc' in req_states:
-            if OBMC_STATES_VERSION == 0:
-                qualifier = "utils"
-            else:
-                # This will not be supported much longer.
-                qualifier = "state_manager"
-            cmd_buf = [qualifier + ".Get BMC State",
-                       "quiet=${" + str(quiet) + "}"]
-            grp.rdpissuing_keyword(cmd_buf)
-            status, ret_values = \
-                BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-            if status == "PASS":
-                bmc = ret_values
+        for url_path in ret_values:
+            for attr_name in ret_values[url_path]:
+                # Create a state key value based on the attr_name.
+                if type(ret_values[url_path][attr_name]) is unicode:
+                    ret_values[url_path][attr_name] = \
+                        re.sub(r'.*\.', "", ret_values[url_path][attr_name])
+                # Do some key name manipulations.
+                new_attr_name = re.sub(r'^Current|(State|Transition)$',
+                                       "", attr_name)
+                new_attr_name = re.sub(r'BMC', r'Bmc', new_attr_name)
+                new_attr_name = re.sub(r'([A-Z][a-z])', r'_\1', new_attr_name)
+                new_attr_name = new_attr_name.lower().lstrip("_")
+                new_attr_name = re.sub(r'power', r'chassis', new_attr_name)
+                if new_attr_name in req_states:
+                    state[new_attr_name] = ret_values[url_path][attr_name]
 
-        if 'boot_progress' in req_states:
-            cmd_buf = ["Get Boot Progress", "quiet=${" + str(quiet) + "}"]
-            grp.rdpissuing_keyword(cmd_buf)
-            status, ret_values = \
-                BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-            if status == "PASS":
-                boot_progress = ret_values
-
-        if 'host' in req_states:
-            if OBMC_STATES_VERSION > 0:
-                cmd_buf = ["Get Host State", "quiet=${" + str(quiet) + "}"]
-                grp.rdpissuing_keyword(cmd_buf)
-                status, ret_values = \
-                    BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-                if status == "PASS":
-                    host = ret_values
-                    # Strip everything up to the final period.
-                    host = re.sub(r'.*\.', "", host)
-
-    state = DotDict()
     for sub_state in req_states:
+        if sub_state in state:
+            continue
         if sub_state.startswith("os_"):
             # We pass "os_" requests on to get_os_state.
             continue
