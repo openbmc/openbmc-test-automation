@@ -20,10 +20,31 @@ ${QUIET}                          ${1}
 ${IMAGE_FILE_PATH}                ${EMPTY}
 ${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
 ${SKIP_UPDATE_IF_ACTIVE}          false
+${dump_id}                        ${EMPTY}
 
 *** Test Cases ***
 
-REST BMC Code Update
+Prepare Persistent Data
+    [Documentation]  Set data that should persist across the code update.
+    [Tags]  Prepare_Persistent_Data
+
+    # Install the debug tarball.
+    BMC Execute Command  rm -rf /tmp/tarball
+    Install Debug Tarball On BMC  tarball_file_path=${DEBUG_TARBALL_PATH}
+
+    # Create a dummy error log and dump.
+    BMC Execute Command  /tmp/tarball/bin/logging-test -c AutoTestSimple
+    ${dump_id}=  Create User Initiated Dump
+
+    # Set persistent settings.
+    ${autoreboot_dict}=  Create Dictionary  data=${0}
+    Write Attribute  ${CONTROL_HOST_URI}auto_reboot  AutoReboot
+    ...  data=${autoreboot_dict}
+    ${onetime_dict}=  Create Dictionary  data=${0}
+    Write Attribute  ${CONTROL_HOST_URI}boot/one_time  Enabled
+    ...  data=${onetime_dict}
+
+
     [Documentation]  Do a BMC code update by uploading image on BMC via REST.
     [Tags]  REST_BMC_Code_Update
     [Setup]  Code Update Setup
@@ -32,6 +53,41 @@ REST BMC Code Update
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
     Verify Running BMC Image  ${IMAGE_FILE_PATH}
+
+
+Verify Error Log Persistency
+    [Documentation]  Check that the error log is still present after a
+    ...              code update.
+    [Tags]  Verify_Error_Log_Persistency
+
+    ${error_log_paths}=  Read Properties  ${BMC_LOGGING_URI}/list
+    ${test_error_message}=  Read Attribute  @{error_log_paths}[-1]  Message
+    Should Be Equal  ${test_error_message}
+    ...  example.xyz.openbmc_project.Example.Elog.AutoTestSimple
+    Delete Error Log Entry  @{error_log_paths}[-1]
+
+
+Verify BMC Dump Persistency
+    [Documentation]  Check that the BMC dump present after a code update.
+    [Tags]  Verify_BMC_Dump_Persistency
+    [Teardown]  Code Update Test Teardown
+
+    Should Not Be Empty  ${dump_id}
+    Check Dump Existence  ${dump_id}
+    Delete BMC Dump  ${dump_id}
+
+
+Verify Settings Persistency
+    [Documentation]  Verify that the settings from 'Prepare Persistent Data'
+    ...              are still set correctly after the code update.
+    [Tags]  Verify_Settings_Persistency
+
+    ${autoreboot_enabled}=  Read Attribute  ${CONTROL_HOST_URI}auto_reboot
+    ...  AutoReboot
+    Should Be Equal  ${autoreboot_enabled}  ${0}
+    ${onetime_enabled}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time
+    ...  Enabled
+    Should Be Equal  ${onetime_enabled}  ${0}
 
 
 Upload And Activate Multiple BMC Images
