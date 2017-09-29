@@ -15,9 +15,9 @@ ${stack_mode}   skip
 
 *** Test Cases ***
 
-Verify Boot AttemptsLeft
+Verify Boot AttemptsLeft At Standby
     [Documentation]  Verify system boot attempts on various boot states.
-    [Tags]  Verify_Boot_AttemptsLeft
+    [Tags]  Verify_Boot_AttemptsLeft_At_Standby
     [Template]  Validate Boot AttemptsLeft
 
     # Example: Expected state
@@ -33,9 +33,30 @@ Verify Boot AttemptsLeft
 
     # System at standby    AttemptsLeft
     Reboot                 3
-    Booted                 2
-    RebootHost             1
-    Ready                  1
+
+
+Verify Boot AttemptsLeft At Host Booted
+    [Tags]  Verify_Boot_AttemptsLeft_At_Host_Booted
+    [Template]  Validate Boot AttemptsLeft
+
+    # System at standby    AttemptsLeft
+    Booted                 3
+
+
+Verify Boot AttemptsLeft When Host Reboot
+    [Tags]  Verify_Boot_AttemptsLeft_When_Host_Reboot
+    [Template]  Validate Boot AttemptsLeft
+
+    # System at standby    AttemptsLeft
+    RebootHost             2
+
+
+Verify Boot AttemptsLeft When Power Off
+    [Tags]  Validate Boot AttemptsLeft_When_Power_Off
+    [Template]  Validate Boot AttemptsLeft
+
+    # System at standby    AttemptsLeft
+    Ready                  2
 
 
 Verify Boot Sensor States At Ready
