@@ -12,7 +12,9 @@ Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/dump_utils.robot
 
-Test Teardown     Code Update Test Teardown
+Suite Setup       Suite Setup Execution
+
+Test Teardown     Test Teardown Execution
 
 *** Variables ***
 
@@ -20,18 +22,101 @@ ${QUIET}                          ${1}
 ${IMAGE_FILE_PATH}                ${EMPTY}
 ${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
 ${SKIP_UPDATE_IF_ACTIVE}          false
+${dump_id}                        ${EMPTY}
+${update_failed}                  ${TRUE}
+${running_persistence_test}       ${FALSE}
+${test_errlog_text}               AutoTestSimple
 
 *** Test Cases ***
+
+Prepare Persistent Data
+    [Documentation]  Set data that should persist across the code update.
+    [Tags]  Prepare_Persistent_Data
+
+    # Install the debug tarball.
+    BMC Execute Command  rm -rf /tmp/tarball
+    Install Debug Tarball On BMC  tarball_file_path=${DEBUG_TARBALL_PATH}
+
+    # Create a dummy error log and dump.
+    BMC Execute Command  /tmp/tarball/bin/logging-test -c ${test_errlog_text}
+    ${dump_id}=  Create User Initiated Dump
+    Check Dump Existence  ${dump_id}
+    Set Suite Variable  ${dump_id}
+
+    # Set persistent settings.
+    ${autoreboot_dict}=  Create Dictionary  data=${0}
+    Write Attribute  ${CONTROL_HOST_URI}auto_reboot  AutoReboot
+    ...  data=${autoreboot_dict}
+    ${onetime_dict}=  Create Dictionary  data=${0}
+    Write Attribute  ${CONTROL_HOST_URI}boot/one_time  Enabled
+    ...  data=${onetime_dict}
+
+    # Let the remaining test cases know we are doing a persistence test so we
+    # do not delete logs.
+    Set Suite Variable  ${running_persistence_test}  ${TRUE}
+
 
 REST BMC Code Update
     [Documentation]  Do a BMC code update by uploading image on BMC via REST.
     [Tags]  REST_BMC_Code_Update
-    [Setup]  Code Update Setup
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
     Verify Running BMC Image  ${IMAGE_FILE_PATH}
+    Set Suite Variable  ${update_failed}  ${FALSE}
+
+
+Verify Error Log Persistency
+    [Documentation]  Check that the error log is still present after a
+    ...              code update.
+    [Tags]  Verify_Error_Log_Persistency
+
+    Run Keyword If  ${update_failed}  Fail
+    ...  msg=Code update was unsuccessful. No need to verify error log.
+
+    ${error_log_paths}=  Read Properties  ${BMC_LOGGING_URI}/list
+    Log To Console  ${error_log_paths}
+    ${test_error_message}=  Read Attribute  @{error_log_paths}[-1]  Message
+    Should Be Equal  ${test_error_message}
+    ...  example.xyz.openbmc_project.Example.Elog.${test_errlog_text}
+    Delete Error Log Entry  @{error_log_paths}[-1]
+
+
+Verify BMC Dump Persistency
+    [Documentation]  Check that the BMC dump present after a code update.
+    [Tags]  Verify_BMC_Dump_Persistency
+    [Teardown]  Set Suite Variable  ${running_persistence_test}  ${FALSE}
+
+    Run Keyword If  ${update_failed}  Fail
+    ...  msg=Code update was unsuccessful. No need to verify BMC dump.
+
+    Check Dump Existence  ${dump_id}
+    Delete BMC Dump  ${dump_id}
+
+
+Verify Settings Persistency
+    [Documentation]  Verify that the settings from 'Prepare Persistent Data'
+    ...              are still set correctly after the code update.
+    [Tags]  Verify_Settings_Persistency
+
+    Run Keyword If  ${update_failed}  Fail
+    ...  msg=Code update was unsuccessful. No need to verify settings.
+
+    ${autoreboot_enabled}=  Read Attribute  ${CONTROL_HOST_URI}auto_reboot
+    ...  AutoReboot
+    Should Be Equal  ${autoreboot_enabled}  ${0}
+    ${onetime_enabled}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time
+    ...  Enabled
+    Should Be Equal  ${onetime_enabled}  ${0}
+
+    # Set values back to their defaults
+    ${autoreboot_dict}=  Create Dictionary  data=${1}
+    Write Attribute  ${CONTROL_HOST_URI}auto_reboot  AutoReboot
+    ...  data=${autoreboot_dict}
+    ${onetime_dict}=  Create Dictionary  data=${1}
+    Write Attribute  ${CONTROL_HOST_URI}boot/one_time  Enabled
+    ...  data=${onetime_dict}
 
 
 Upload And Activate Multiple BMC Images
@@ -107,17 +192,20 @@ Upload And Activate Multiple BMC Images Setup
 
     Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
 
-Code Update Setup
+Suite Setup Execution
     [Documentation]  Do code update test case setup.
     # - Clean up all existing BMC dumps.
 
     Delete All Dumps
     Run Keyword And Ignore Error  Smart Power Off
 
-Code Update Test Teardown
+Test Teardown Execution
     [Documentation]  Do code update test case teardown.
     # 1. Collect FFDC if test case failed.
     # 2. Collect FFDC if test PASS but error log exists.
+
+    # Don't delete our logs if we want to persist them for tests.
+    Return From Keyword If  ${running_persistence_test}
 
     FFDC On Test Case Fail
     Run Keyword If  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
