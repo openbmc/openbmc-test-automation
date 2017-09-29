@@ -26,7 +26,7 @@ Test BMC Reboot via REST
     ${test_file_path}=  Set Variable  /tmp/before_bmcreboot
     BMC Execute Command  touch ${test_file_path}
 
-    REST OBMC Reboot (off)  stack_mode=normal
+    OBMC Reboot (off)  stack_mode=normal
 
     BMC Execute Command  if [ -f ${test_file_path} ] ; then false ; fi
 
