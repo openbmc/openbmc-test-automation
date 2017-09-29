@@ -112,6 +112,7 @@ Code Update Setup
     # - Clean up all existing BMC dumps.
 
     Delete All Dumps
+    Run Keyword And Ignore Error  Smart Power Off
 
 Code Update Test Teardown
     [Documentation]  Do code update test case teardown.

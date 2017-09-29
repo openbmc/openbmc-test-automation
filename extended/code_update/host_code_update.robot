@@ -178,7 +178,7 @@ Code Update Setup
     # - Clean up all existing BMC dumps.
     # - Clean up all currently install PNOR images.
 
-    Initiate Host PowerOff
+    Run Keyword And Ignore Error  Smart Power Off
     Delete All Dumps
     Delete Error Logs
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
