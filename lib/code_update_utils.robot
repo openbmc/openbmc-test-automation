@@ -202,6 +202,31 @@ Upload And Activate Image
     [Return]  ${version_id}
 
 
+Attempt To Reboot BMC During Image Activation
+    [Documentation]  Attempt to reboot the BMC while an image is activating and
+    ...              check that the BMC ignores the reboot command and finishes
+    ...              activation.
+    [Arguments]  ${image_file_path}
+
+    # Description of argument(s):
+    # image_file_path  Path to the image to update to.
+
+    # Attempt to reboot during activation.
+    ${version_id}=  Upload And Activate Image  ${image_file_path}
+    ...  wait=${0}
+    BMC Execute Command  /sbin/reboot
+
+    # Wait for activation to finish.
+    Wait For Activation State Change  ${version_id}  ${ACTIVATING}
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+
+    # Verify the image priority is 0.
+    ${priority}=  Read Software Attribute  ${SOFTWARE_VERSION_URI}${version_id}
+    ...  Priority
+    Should Be Equal  ${priority}  ${0}
+
+
 Switch To Active Image And Pass
     [Documentation]  Make the given active image the image running on the BMC
     ...              and pass the test.
