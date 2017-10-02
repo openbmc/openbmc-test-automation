@@ -12,6 +12,7 @@ Library                 gen_cmd.py
 Library                 gen_robot_keyword.py
 Library                 bmc_ssh_utils.py
 Library                 utils.py
+Library                 var_funcs.py
 
 *** Variables ***
 ${pflash_cmd}           /usr/sbin/pflash -r /dev/stdout -P VERSION
