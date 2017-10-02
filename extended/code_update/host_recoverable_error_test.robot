@@ -7,9 +7,11 @@ Resource        ../../lib/openbmc_ffdc.robot
 
 Suite Setup     Suite Setup Execution
 
+Test Setup      Test Setup Execution
 Test Teardown   FFDC On Test Case Fail
 
 *** Variables ***
+
 ${QUIET}            ${1}
 ${IMAGE_FILE_PATH}  ${EMPTY}
 
@@ -25,6 +27,17 @@ Reset Network During Host Code Update
     ${IMAGE_FILE_PATH}  ${FALSE}
 
 
+Reboot BMC During Host Code Update
+    [Documentation]  Reboot the BMC during a host code update.
+    [Tags]  Reboot_BMC_During_Host_Code_Update
+
+    ${version_id}=  Upload And Activate Image  ${IMAGE_FILE_PATH}  wait=${0}
+    OBMC Reboot (off)
+    ${priority}=  Read Software Attribute  ${SOFTWARE_VERSION_URI}${version_id}
+    ...  Priority
+    Should Be Equal  ${priority}  ${0}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -36,3 +49,9 @@ Suite Setup Execution
     ...  msg=OPENBMC_SERIAL_HOST should be set.
     Should Not Be Empty  ${OPENBMC_SERIAL_PORT}
     ...  msg=OPENBMC_SERIAL_PORT should be set.
+
+
+Test Setup Execution
+    [Documentation]  Do setup tasks for every test case.
+
+    Delete All PNOR Images
