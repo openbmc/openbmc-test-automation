@@ -5,9 +5,11 @@ Documentation       Test auto reboot functionality of host.
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/rest_client.robot
 Resource            ../lib/state_manager.robot
+Resource            ../lib/boot_utils.robot
 
 Test Setup          Open Connection And Log In
 Test Teardown       Post Testcase Execution
+Suite Teardown      Smart Power Off
 
 *** Variables ***
 
