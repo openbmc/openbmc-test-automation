@@ -126,12 +126,12 @@ Set Boot Progress Method
     # prior call to this function or via a -v parm), this keyword will simply
     # return.
 
-    # Note:  There are interim builds that contain boot_progress in both the old
-    # and the new location values.  It is nearly impossible for this keyword to
-    # determine whether the old boot_progress or the new one is active.  When
-    # using such builds where the old boot_progress is active, the only recourse
-    # users will have is that they may specify -v boot_prog_method:Old to force
-    # old behavior on such builds.
+    # Note:  There are interim builds that contain boot_progress in both the
+    # old and the new location values.  It is nearly impossible for this
+    # keyword to determine whether the old boot_progress or the new one is
+    # active.  When using such builds where the old boot_progress is active,
+    # the only recourse users will have is that they may specify
+    # -v boot_prog_method:Old to force old behavior on such builds.
 
     Run Keyword If  '${boot_prog_method}' != '${EMPTY}'  Return From Keyword
 
@@ -491,15 +491,14 @@ Create OS Console Command String
     [Documentation]  Return a command string to start OS console logging.
 
     # First make sure that the ssh_pw program is available.
-    ${cmd_buf}=  Catenate  which ssh_pw 2>&1
+    ${cmd_buf}=  Catenate  which ssh_pw 2>/dev/null || find ${EXECDIR} -name 'ssh_pw'
     Rdpissuing  ${cmd_buf}
     ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
     Rdpvars  rc  output
 
-    ${ssh_pw_file_path}=  Run Keyword If  ${rc} != ${0}
-    ...    Set Variable  ${EXECDIR}${/}bin/ssh_pw
-    ...  ELSE
-    ...    Set Variable  ssh_pw
+    Should Be Equal As Integers  0  ${rc}  msg=Could not find ssh_pw.
+
+    ${ssh_pw_file_path}=  Set Variable  ${output}
 
     ${cmd_buf}=  Catenate  ${ssh_pw_file_path} ${OPENBMC_PASSWORD} -p 2200
     ...  -o "StrictHostKeyChecking no" ${OPENBMC_USERNAME}@${OPENBMC_HOST}
@@ -564,7 +563,8 @@ Stop SOL Console Logging
     ${output}=  Set Variable  ${EMPTY}
     ${loc_quiet}=  Evaluate  ${debug}^1
     ${rc}  ${output}=  Run Keyword If  '${return_data}' == '${1}'
-    ...  Cmd Fnc  cat ${log_file_path}  quiet=${loc_quiet}  print_output=${0}
+    ...  Cmd Fnc  cat ${log_file_path} 2>/dev/null  quiet=${loc_quiet}
+    ...  print_output=${0}  show_err=${0}
 
     [Return]  ${output}
 
@@ -955,7 +955,8 @@ Trigger Host Watchdog Error
     Write Attribute  /xyz/openbmc_project/watchdog/host0  Enabled  data=${data}
 
     ${data}=  Create Dictionary  data=${milliseconds}
-    Write Attribute  /xyz/openbmc_project/watchdog/host0  TimeRemaining  data=${data}
+    Write Attribute  /xyz/openbmc_project/watchdog/host0  TimeRemaining
+    ...  data=${data}
 
     Sleep  ${sleep_time}
 
@@ -1131,7 +1132,8 @@ Get PNOR Version
 Get PNOR Attributes
     [Documentation]  Return PNOR software attributes as a dictionary.
 
-    # This keyword parses /var/lib/phosphor-software-manager/pnor/ro/pnor.toc into key/value pairs.
+    # This keyword parses /var/lib/phosphor-software-manager/pnor/ro/pnor.toc
+    # into key/value pairs.
 
     ${outbuf}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat /var/lib/phosphor-software-manager/pnor/ro/pnor.toc
