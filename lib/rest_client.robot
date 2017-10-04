@@ -179,12 +179,34 @@ Read Attribute
     [Return]    ${content["data"]}
 
 Write Attribute
-    [Arguments]    ${uri}      ${attr}    ${timeout}=10    &{kwargs}
-    ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
-    ${resp}=  openbmc put request  ${base_uri}/attr/${attr}
+    [Documentation]  Write a D-Bus attribute with REST.
+    [Arguments]  ${uri}  ${attr}  ${timeout}=10  ${verify}=${FALSE}
+    ...  ${verify_attr}=${EMPTY}  &{kwargs}
+
+    # Description of argument(s):
+    # uri           URI of the object that the attribute lives on
+    # attr          Name of the attribute
+    # timeout       Timeout for the REST call
+    # verify        If set to ${TRUE}, the attribute will be read back to
+    #               ensure that its value is set to ${verify_attr}
+    # verify_attr   Only used if verify is set to ${TRUE}. The value that
+    #               ${attr} should be set to.
+    # kwargs        Arguments to the REST call, the first of which should be
+    #               the value of the attribute to set.
+
+    ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
+    ${resp}=  Openbmc Put Request  ${base_uri}/attr/${attr}
     ...  timeout=${timeout}  &{kwargs}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
-    ${json}=   to json         ${resp.content}
+    Should Be Equal As Strings  ${resp.status_code}     ${HTTP_OK}
+    ${json}=  To Json  ${resp.content}
+
+    # Verify the attribute was set correctly if the caller requested it
+    Return From Keyword If  ${verify} == ${FALSE}
+
+    Should Not Be Empty  ${verify_attr}
+    ${value}=  Read Attribute  ${uri}  ${attr}
+    Should Be Equal  ${value}  ${verify_attr}
+
 
 Read Properties
     [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}
