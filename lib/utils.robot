@@ -609,8 +609,6 @@ Start SOL Console Logging
     Sleep  1
     ${os_con_pid}=  Get SOL Console Pid
 
-    Should Not Be Empty  ${os_con_pid}
-
     [Return]  ${log_output}
 
 Get Time Stamp
