@@ -6,6 +6,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/rest_client.robot
 Resource            ../lib/dump_utils.robot
 Resource            ../lib/boot_utils.robot
+Resource            ../lib/utils.robot
 Library             ../lib/bmc_ssh_utils.py
 
 Test Setup          Open Connection And Log In
@@ -15,6 +16,13 @@ Test Teardown       Post Testcase Execution
 
 
 *** Test Cases ***
+
+Pre Dump BMC Performance Test
+    [Documentation]  Check performance of memory, CPU & file system of BMC.
+    [Tags]  Pre_Dump_BMC_Performance_Test
+
+    Open Connection And Log In
+    Check BMC Performance
 
 Verify User Initiated BMC Dump
     [Documentation]  Create user initiated BMC dump and verify dump
@@ -109,6 +117,18 @@ Delete All BMC Dumps And Verify
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
+Post Dump BMC Performance Test
+    [Documentation]  Check performance of memory, CPU & file system of BMC.
+    [Tags]  Post_Dump_BMC_Performance_Test
+
+    Open Connection And Log In
+    Check BMC Performance
+
+Post Dump Core Dump Check
+    [Documentation]  Check core dump existence on BMC after code update.
+    [Tags]  Post_Dump_Core_Dump_Check
+
+    Check For Core Dumps
 
 *** Keywords ***
 
