@@ -26,19 +26,19 @@ Documentation  Stress the system using HTX exerciser.
 #                     This parameter is optional.  If not specified, an
 #                     initial inventory snapshot will be taken before
 #                     HTX startup.
-# INV_IGNORE_LIST     A comma-delimited list of colon-delimited pairs that
+# INV_IGNORE_LIST     A comma-delimited list of string that
 #                     indicate what to ignore if there are inventory
-#                     differences.  For example, "processor:size,network:speed"
+#                     differences.  For example, processor "size".
 #                     If differences are found during inventory checking
-#                     and those items are in this string, the
+#                     and those items are in this list, the
 #                     differences will be ignored.  This parameter is
 #                     optional.  If not specified the default value is
-#                     "processor:size".
+#                     "size".
 
 Resource        ../syslib/utils_os.robot
 Library         ../syslib/utils_keywords.py
 
-Suite Setup     Run Key  Start SOL Console Logging
+Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
 Test Setup      Pre Test Case Execution
 Test Teardown   Post Test Case Execution
 
@@ -51,7 +51,7 @@ ${json_final_file_path}      ${EXECDIR}/os_inventory_final.json
 ${json_diff_file_path}       ${EXECDIR}/os_inventory_diff.json
 ${last_inventory_file_path}  ${EMPTY}
 ${CHECK_INVENTORY}           True
-${INV_IGNORE_LIST}           processor:size
+${INV_IGNORE_LIST}           size
 ${PREV_INV_FILE_PATH}        ${EMPTY}
 
 
