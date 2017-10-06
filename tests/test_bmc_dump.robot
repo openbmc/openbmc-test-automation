@@ -6,6 +6,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/rest_client.robot
 Resource            ../lib/dump_utils.robot
 Resource            ../lib/boot_utils.robot
+Resource            ../lib/utils.robot
 Library             ../lib/bmc_ssh_utils.py
 
 Test Setup          Open Connection And Log In
@@ -15,6 +16,13 @@ Test Teardown       Post Testcase Execution
 
 
 *** Test Cases ***
+
+Test Basic BMC Performance Before BMC Dump Tests
+    [Documentation]  Check performance of memory, CPU & file system of BMC.
+    [Tags]  Test_Basic_BMC_Performance_Before_BMC_Dump_Tests
+
+    Open Connection And Log In
+    Check BMC Performance
 
 Verify User Initiated BMC Dump
     [Documentation]  Create user initiated BMC dump and verify dump
@@ -109,8 +117,33 @@ Delete All BMC Dumps And Verify
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
+Test Basic BMC Performance After BMC Dump Tests
+    [Documentation]  Check performance of memory, CPU & file system of BMC.
+    [Tags]  Test_Basic_BMC_Performance_After_BMC_Dump_tests
+
+    Open Connection And Log In
+    Check BMC Performance
+
+Check Core Dump Exist After BMC Dump Tests
+    [Documentation]  Check core dump existence on BMC after code update.
+    [Tags]  Check_Core_Dump_Exist_After_BMC_Dump_Tests
+
+    Check For Core Dumps
+
+Enable Core Dump File Size To Be Unlimited
+    [Documentation]  Set core dump file size to unlimited.
+    [Tags]  Enable_Core_Dump_File_size_To_Be_unlimited
+
+    Set Core Dump File Size Unlimited
 
 *** Keywords ***
+
+Check BMC Performance
+    [Documentation]  Check BMC basic CPU Mem File system performance.
+
+    Check BMC CPU Performance
+    Check BMC Mem Performance
+    Check BMC File System Performance
 
 Post Testcase Execution
     [Documentation]  Do the post test teardown.
