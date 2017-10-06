@@ -6,8 +6,8 @@ Resource            ../lib/rest_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/connection_client.robot
 Resource            ../lib/code_update_utils.robot
-Test Teardown       FFDC On Test Case Fail
 
+#Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -16,10 +16,53 @@ ${HOST_SW_PATH}  ${HOST_INVENTORY_URI}system/chassis
 
 *** Test Cases ***
 
+Verify Software Purposes
+    [Documentation]  Verify that all software has a valid purpose.
+    [Tags]  Verify_Software_Purpose
+
+    ${object_uris}=  Read Properties  ${SOFTWARE_VERSION_URI}/list
+
+    :FOR  ${uri}  IN  @{object_uris}
+    \  ${object}=  Read Properties  ${uri}
+    \  Continue For Loop If  not 'Purpose' in ${object}
+    \  Log  Look for purpose in: ${object}
+    \  Should Contain Any  &{object}[Purpose]
+    ...  xyz.openbmc_project.Software.Version.VersionPurpose.Host
+    ...  xyz.openbmc_project.Software.Version.VersionPurpose.BMC
+
+
+BMC Software Hex ID
+    [Documentation]  Verify BMC images have valid 8-digit hex IDs.
+    [Tags]  BMC_Software_Hex_ID
+    [Template]  Verify Software Hex ID
+
+    # Software Purpose
+    ${VERSION_PURPOSE_BMC}
+
+
 BMC Software Version
     [Documentation]  Verify BMC version and activation status.
     [Tags]  BMC_Software_Version
     [Template]  Verify Software Version
+
+    # Software Purpose
+    ${VERSION_PURPOSE_BMC}
+
+
+BMC Software Path
+    [Documentation]  Verify BMC images have valid 'Path' properties.
+    [Tags]  BMC_Software_Path
+    [Template]  Verify Software Path
+
+    # Software Version
+    ${VERSION_PURPOSE_BMC}
+
+
+BMC Software RequestedActivation
+    [Documentation]  Veriify BMC images have valid 'RequestedActivation'
+    ...  properties.
+    [Tags]  BMC_Software_RequestedActivation
+    [Template]  Verify Software RequestedActivation
 
     # Software Purpose
     ${VERSION_PURPOSE_BMC}
@@ -34,10 +77,38 @@ BMC Software Activation Association
     ${VERSION_PURPOSE_BMC}       ${BMC_SW_PATH}
 
 
+Host Software Hex ID
+    [Documentation]  Verify host images have valid 8-digit hex IDs.
+    [Tags]  Host_Software_Hex_ID
+    [Template]  Verify Software Hex ID
+
+    # Software Purpose
+    ${VERSION_PURPOSE_HOST}
+
+
 Host Software Version
     [Documentation]  Verify host version and activation status.
     [Tags]  Host_Software_Version
     [Template]  Verify Software Version
+
+    # Software Purpose
+    ${VERSION_PURPOSE_HOST}
+
+
+Host Software Path
+    [Documentation]  Verify host images have valid 'Path' properties.
+    [Tags]  Host_Software_Path
+    [Template]  Verify Software Path
+
+    # Software Version
+    ${VERSION_PURPOSE_HOST}
+
+
+Host Software RequestedActivation
+    [Documentation]  Veriify host images have valid 'RequestedActivation'
+    ...  properties.
+    [Tags]  BMC_Software_RequestedActivation
+    [Template]  Verify Software RequestedActivation
 
     # Software Purpose
     ${VERSION_PURPOSE_HOST}
@@ -53,6 +124,42 @@ Host Software Activation Association
 
 
 *** Keywords ***
+
+Verify Software Hex ID
+    [Documentation]  Verify software has valid hex IDs.
+    [Arguments]  ${software_purpose}
+
+    ${software_ids}=  Get Software Objects Id  ${software_purpose}
+
+    : FOR  ${id}  IN  @{software_ids}
+    \  Length Should Be  ${id}  ${8}
+    \  Should Match Regexp  ${id}  [0-9a-f]*
+
+
+Verify Software Path
+    [Documentation]  Verify software has valid 'Path' properties.
+    [Arguments]  ${software_purpose}
+
+    ${software_uris}=  Get Software Objects  ${software_purpose}
+
+    : FOR  ${uri}  IN  @{software_uris}
+    \  ${software_object}=  Get Host Software Property  ${uri}
+    \  Return From Keyword If  len('&{software_object}[Path]') == ${0}
+    \  BMC Execute Command  [ -d "${path}" ]
+
+
+Verify Software RequestedActivation
+    [Documentation]  Verify that software has valid 'Purpose' properties.
+    [Arguments]  ${software_purpose}
+
+    ${software_uris}=  Get Software Objects  ${software_purpose}
+
+    : FOR  ${uri}  IN  @{software_uris}
+    \  ${software_object}=  Get Host Software Property  ${uri}
+    \  Should Contain Any  &{software_object}[RequestedActivation]
+    ...  xyz.openbmc_project.Software.Activation.RequestedActivations.None
+    ...  xyz.openbmc_project.Software.Activation.RequestedActivations.Active
+
 
 Verify Software Activation Association
     [Documentation]  Verify software activation association.
