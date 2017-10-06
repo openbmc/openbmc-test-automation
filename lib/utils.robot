@@ -54,6 +54,13 @@ ${bmc_power_policy_method}        ${EMPTY}
 
 *** Keywords ***
 
+Check BMC Performance
+    [Documentation]  Check BMC basic CPU Mem File system performance.
+
+    Check BMC CPU Performance
+    Check BMC Mem Performance
+    Check BMC File System Performance
+
 Verify PNOR Update
     [Documentation]  Verify that the PNOR is not corrupted.
     # Example:
@@ -727,12 +734,17 @@ BMC Mem Performance Check
     Should be true  ${bmc_mem_percentage} > 10
 
 BMC File System Usage Check
-    [Documentation]   Check the file system space. None should be 100% full
-    ...   except /run/initramfs/ro
+    [Documentation]   Check the file system space. 4 file system should be
+    ...  100% full which is expected
+    # Filesystem                Size      Used Available Use% Mounted on
+    # /dev/root                14.4M     14.4M         0 100% / 
+    # /dev/ubiblock0_0         14.4M     14.4M         0 100% /media/rofs-c9249b0e
+    # /dev/ubiblock8_0         19.6M     19.6M         0 100% /media/pnor-ro-8764baa3
+    # /dev/ubiblock4_0         14.4M     14.4M         0 100% /media/rofs-407816c
     ${bmc_fs_usage_output}  ${stderr}=   Execute Command
     ...   ${bmc_file_system_usage_cmd}  return_stderr=True
     Should Be Empty  ${stderr}
-    Should Be True  ${bmc_fs_usage_output}==0
+    Should Be True  ${bmc_fs_usage_output}==4
 
 Check BMC CPU Performance
     [Documentation]   Minimal 10% of proc should be free in 3 sample
