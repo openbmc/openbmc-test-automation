@@ -588,6 +588,7 @@ def get_state(openbmc_host="",
         else:
             state['rest'] = '0'
 
+    if int(state['rest']):
         for url_path in ret_values:
             for attr_name in ret_values[url_path]:
                 # Create a state key value based on the attr_name.
