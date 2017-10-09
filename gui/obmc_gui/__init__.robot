@@ -9,9 +9,9 @@ Suite Teardown    Init Teardown Steps
 *** Keywords ***
 Initializing Setup
     [Documentation]  Initialize test environment.
+    Get OpenBMC System Info
     Launch OpenBMC GUI Browser
     Login OpenBMC GUI
-    Get OpenBMC System Info
     Initial Message
     LogOut OpenBMC GUI
 
@@ -28,6 +28,7 @@ Get OpenBMC System Info
     ${build_info}  ${stderr}  ${rc}=  BMC Execute Command  cat /etc/os-release
     ...  print_output=1
     Print Dashes  0  100  1  =
+    Set Global Variable  ${OPENBMC_HOST_NAME}
 
 Init Teardown Steps
     [Documentation]  End the test execution by closing browser.
