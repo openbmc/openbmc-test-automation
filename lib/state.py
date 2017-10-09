@@ -517,6 +517,16 @@ def get_state(openbmc_host="",
     packet_loss = ''
     uptime = ''
     epoch_seconds = ''
+    rest = ''
+    chassis = ''
+    requested_chassis = ''
+    bmc = ''
+    requested_bmc = ''
+    boot_progress = ''
+    operating_system = ''
+    host = ''
+    requested_host = ''
+    attempts_left = ''
 
     # Get the component states.
     if 'ping' in req_states:
@@ -588,21 +598,24 @@ def get_state(openbmc_host="",
         else:
             state['rest'] = '0'
 
-        for url_path in ret_values:
-            for attr_name in ret_values[url_path]:
-                # Create a state key value based on the attr_name.
-                if type(ret_values[url_path][attr_name]) is unicode:
-                    ret_values[url_path][attr_name] = \
-                        re.sub(r'.*\.', "", ret_values[url_path][attr_name])
-                # Do some key name manipulations.
-                new_attr_name = re.sub(r'^Current|(State|Transition)$',
-                                       "", attr_name)
-                new_attr_name = re.sub(r'BMC', r'Bmc', new_attr_name)
-                new_attr_name = re.sub(r'([A-Z][a-z])', r'_\1', new_attr_name)
-                new_attr_name = new_attr_name.lower().lstrip("_")
-                new_attr_name = re.sub(r'power', r'chassis', new_attr_name)
-                if new_attr_name in req_states:
-                    state[new_attr_name] = ret_values[url_path][attr_name]
+        if int(state['rest']):
+            for url_path in ret_values:
+                for attr_name in ret_values[url_path]:
+                    # Create a state key value based on the attr_name.
+                    if type(ret_values[url_path][attr_name]) is unicode:
+                        ret_values[url_path][attr_name] = \
+                            re.sub(r'.*\.', "",
+                                   ret_values[url_path][attr_name])
+                    # Do some key name manipulations.
+                    new_attr_name = re.sub(r'^Current|(State|Transition)$',
+                                           "", attr_name)
+                    new_attr_name = re.sub(r'BMC', r'Bmc', new_attr_name)
+                    new_attr_name = re.sub(r'([A-Z][a-z])', r'_\1',
+                                           new_attr_name)
+                    new_attr_name = new_attr_name.lower().lstrip("_")
+                    new_attr_name = re.sub(r'power', r'chassis', new_attr_name)
+                    if new_attr_name in req_states:
+                        state[new_attr_name] = ret_values[url_path][attr_name]
 
     for sub_state in req_states:
         if sub_state in state:
