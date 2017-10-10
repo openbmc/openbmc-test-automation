@@ -76,6 +76,18 @@ BMC Image Priority Attribute Test
     Priority          ${255}
 
 
+Delete All Non Running BMC Images
+    [Documentation]  Delete all non running BMC images.
+    [Tags]  Delete_All_Non_Running_BMC_Images
+
+    ${version_id}=  Upload And Activate Image  ${ALTERNATE_IMAGE_FILE_PATH}
+    Delete All Non Running BMC Images
+
+    ${software_ids}=  Get Software Objects Id
+    ...  version_type=${VERSION_PURPOSE_BMC}
+    Should Not Contain  ${software_ids}  ${version_id}
+
+
 *** Keywords ***
 
 Temporarily Set BMC Attribute
