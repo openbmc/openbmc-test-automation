@@ -323,6 +323,14 @@ Delete Image And Verify
     ...  [ ! -d "/tmp/images/${image_id}" ]
 
 
+Delete All Non Running BMC Images
+    [Documentation]  Delete all BMC images that are not running on the BMC.
+
+    @{datalist}=  Create List
+    ${data}=  Create Dictionary  data=@{datalist}
+    Call Method  ${SOFTWARE_VERSION_URI}  DeleteAll  data=${data}
+
+
 Check Error And Collect FFDC
     [Documentation]  Collect FFDC if error log exists.
 
