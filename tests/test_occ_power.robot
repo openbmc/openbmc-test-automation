@@ -37,6 +37,66 @@ Verify OCC Object Count
     Should Be Equal  ${occ_count}  ${inventory_count}
     ...  msg=OCC and inventory entry counts are mismatched.
 
+Verify OCC State After Reboot
+    [Documentation]  Verify OCC state after host boot.
+    [Tags]  Verify_OCC_State_After_Host_Reboot
+
+    ${occ_count_before} =  Count OCC Object Entry
+    Verify OCC Active State
+    Initiate Host Reboot
+    Verify OCC Active State
+    ${occ_count_after} =  Count OCC Object Entry
+    Should be Equal  ${occ_count_before}  ${occ_count_after}
+
+Verify OCC State After Reset
+    [Documentation]  Verify OCC state after reboot.
+    [Tags]  Verify_OCC_State_After_Reset
+
+    ${occ_count_before} =  Count OCC Object Entry
+    Verify OCC Active State
+    OBMC Reboot (off)
+    Verify OCC Active State
+    ${occ_count_after} =  Count OCC Object Entry
+    Should be Equal  ${occ_count_before}  ${occ_count_after}
+
+Verify OCC State After Standby
+    [Documentation]  Verify OCC state after host boot.
+    [Tags]  Verify_OCC_State_After_Standby
+
+   ${occ_count_before} =  Count OCC Object Entry
+   Verify OCC Active State
+   Initiate Host PowerOff
+   Verify OCC In Inactive State
+   ${occ_count_after} =  Count OCC Object Entry
+   Should be Equal  ${occ_count_before}  ${occ_count_after}
+
+*** Keywords ***
+
+Suite Setup Execution
+    [Documentation]  Do the initial test suite setup.
+    # - Power off.
+    # - Boot Host.
+
+    Smart Power Off
+    REST Power On
+    Count OCC Object Entry
+
+Count OCC Object Entry
+    [Documentation]  Count OCC object entry and set count.
+
+    ${object_count}=  Count Object Entries  ${OPENPOWER_CONTROL}  occ*
+    Set Suite Variable  ${occ_count]  ${object_count}
+
+
+Test Teardown Execution
+    [Documentation]  Do the post test teardown.
+    # - Capture FFDC on test failure.
+    # - Delete error logs.
+    # - Close all open SSH connections.
+
+    FFDC On Test Case Fail
+    Delete Error Logs
+    Close All Connections
 
 Verify OCC Active State
     [Documentation]  Check OCC active state.
@@ -55,33 +115,20 @@ Verify OCC Active State
     \  ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
     \  Should Be True  ${occ_active}  msg=OCC ${num} is not active.
 
+Verify OCC In Inactive State
+    [Documentation]  Check OCC is not in active state.
+    [Tags]  Verify_OCC_In_Inactive_State
 
-*** Keywords ***
+    # Example cpu_list data output:
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu1
+    ${cpu_list}=  Get Endpoint Paths
+    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard/  cpu*
 
-Suite Setup Execution
-    [Documentation]  Do the initial test suite setup.
-    # - Power off.
-    # - Boot Host.
-
-    Smart Power Off
-    REST Power On
-    Count OCC Object Entry
-
-
-Count OCC Object Entry
-    [Documentation]  Count OCC object entry and set count.
-
-    ${object_count}=  Count Object Entries  ${OPENPOWER_CONTROL}  occ*
-    Set Suite Variable  ${occ_count]  ${object_count}
-
-
-Test Teardown Execution
-    [Documentation]  Do the post test teardown.
-    # - Capture FFDC on test failure.
-    # - Delete error logs.
-    # - Close all open SSH connections.
-
-    FFDC On Test Case Fail
-    Delete Error Logs
-    Close All Connections
+    :FOR  ${endpoint_path}  IN  @{cpu_list}
+    \  ${is_functional}=  Read Object Attribute  ${endpoint_path}  Functional
+    \  Continue For Loop If  ${is_functional} == ${0}
+    \  ${num}=  Set Variable  ${endpoint_path[-1]}
+    \  ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
+    \  Should Not Be True  ${occ_active}  msg=OCC ${num} is active.
 
