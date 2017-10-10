@@ -55,6 +55,32 @@ Verify OCC Active State
     \  ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
     \  Should Be True  ${occ_active}  msg=OCC ${num} is not active.
 
+Verify OCC State After Standby
+    [Documentation]  Verify OCC state after host boot.
+    [Tags]  Verify_OCC_State_After_Standby
+
+   ${occ_count_before} =  Count OCC Object Entry
+   Initiate Host PowerOff
+   ${occ_count_after} =  Count OCC Object Entry
+   Should be Equal  ${occ_count_before}  ${occ_count_after}
+
+Verify OCC State After Host Boot
+    [Documentation]  Verify OCC state after host boot.
+    [Tags]  Verify_OCC_State_After_Host_Boot
+
+    ${occ_count_before} =  Count OCC Object Entry
+    Initiate Host Boot
+    ${occ_count_after} =  Count OCC Object Entry
+    Should be Equal  ${occ_count_before}  ${occ_count_after}
+
+Verify OCC State After Reboot
+    [Documentation]  Verify OCC state after reboot.
+    [Tags]  Verify_OCC_State_After_Reboot
+
+    ${occ_count_before} =  Count OCC Object Entry
+    OBMC Reboot (off)
+    ${occ_count_after} =  Count OCC Object Entry
+    Should be Equal  ${occ_count_before}  ${occ_count_after}
 
 *** Keywords ***
 
