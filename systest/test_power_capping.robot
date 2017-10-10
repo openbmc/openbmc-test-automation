@@ -68,8 +68,8 @@ Escale System On And PL Disabled
     Run External IPMI Standard Command  ${cmd}
     ${power}=  Get DCMI Power Limit
 
-    Should Be True  ${power} == ${power_setting}
-    ...  msg=Could set power limit when power limiting deactivated.
+    Should Be True  ${power} == ${500}
+    ...  msg=Could not set power limit when power limiting deactivated.
 
 
 Escale Check Settings System On Then Off
