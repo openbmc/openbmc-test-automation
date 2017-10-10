@@ -75,28 +75,6 @@ Verify Unrecoverable Callout Handling For MCI
     Inject Unrecoverable Error Through Host
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
-#  Nest accelerator NXDMAENGFIR related error injection.
-
-Verify Recoverable Callout Handling For NXDMAENG With Threshold 1
-    [Documentation]  Verify recoverable callout handling for  NXDMAENG with
-    ...              threshold 1.
-    [Tags]  Verify_Recoverable_Callout_Handling_For_NXDMAENG_With_Threshold_1
-
-    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_RECV1
-    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_th1
-    Inject Recoverable Error With Threshold Limit Through Host
-    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
-
-
-Verify Recoverable Callout Handling For NXDMAENG With Threshold 32
-    [Documentation]  Verify recoverable callout handling for  NXDMAENG with
-    ...              threshold 32.
-    [Tags]  Verify_Recoverable_Callout_Handling_For_NXDMAENG_With_Threshold_32
-
-    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_RECV32
-    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_th32
-    Inject Recoverable Error With Threshold Limit Through Host
-    ...  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
 
 # CAPP accelerator (CXAFIR) related error injection.
 
@@ -144,6 +122,38 @@ Verify Recoverable Callout Handling For NPU0 With Threshold 32
     Inject Recoverable Error With Threshold Limit Through Host
     ...  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
 
+#  Nest accelerator NXDMAENGFIR related error injection.
+
+Verify Recoverable Callout Handling For NXDMAENG With Threshold 1
+    [Documentation]  Verify recoverable callout handling for  NXDMAENG with
+    ...              threshold 1.
+    [Tags]  Verify_Recoverable_Callout_Handling_For_NXDMAENG_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_RECV1
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_th1
+    Inject Recoverable Error With Threshold Limit Through Host
+    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+
+Verify Recoverable Callout Handling For NXDMAENG With Threshold 32
+    [Documentation]  Verify recoverable callout handling for  NXDMAENG with
+    ...              threshold 32.
+    [Tags]  Verify_Recoverable_Callout_Handling_For_NXDMAENG_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_RECV32
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_th32
+    Inject Recoverable Error With Threshold Limit Through Host
+    ...  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+Verify Unrecoverable Callout Handling For NXDMAENG
+    [Documentation]  Verify unrecoverable callout handling for NXDMAENG.
+    [Tags]  Verify_Unrecoverable_Callout_Handling_For_NXDMAENG
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_UE
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_ue
+    Inject Unrecoverable Error Through Host
+    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
 *** Keywords ***
 
 Inject Error Through HOST
@@ -171,9 +181,9 @@ Inject Error Through HOST
     :FOR  ${i}  IN RANGE  ${threshold_limit}
     \  Run Keyword  Putscom Through OS  ${proc_id}  ${fri}  ${chip_address}
     # Adding delay after each error injection.
-    \  Sleep  3s
+    \  Sleep  10s
     # Adding delay to get error log after error injection.
-    Sleep  20s
+    Sleep  120s
 
 Verify And Clear Gard Records On HOST
     [Documentation]  Verify And Clear gard records on HOST.
@@ -196,7 +206,7 @@ Verify Error Log Entry
     Collect eSEL Log  ${log_prefix}
     ${error_log_file_path}=  Catenate  ${log_prefix}esel.txt
     ${rc}  ${output} =  Run and Return RC and Output
-    ...  grep ${signature_desc} ${error_log_file_path}
+    ...  grep -i ${signature_desc} ${error_log_file_path}
     Should Not Be Empty  ${output}
 
 Inject Recoverable Error With Threshold Limit Through Host
@@ -264,7 +274,7 @@ RAS Test SetUp
 
     # Boot to OS.
 
-     REST Power On
+    REST Power On  quiet=${1}
 
 RAS Suite Setup
     [Documentation]  Create RAS log directory to store all RAS test logs.
@@ -280,7 +290,7 @@ RAS Suite Cleanup
     ...              boots after test suite run.
 
     # Boot to OS.
-    REST Power On
+    REST Power On  quiet=${1}
     Delete Error Logs
     Login To OS Host
     Gard Operations On OS  clear all
