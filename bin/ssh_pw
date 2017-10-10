@@ -61,8 +61,17 @@
 
   # We don't ever expect to see this string.  This will keep this program
   # running indefinitely.
-  expect {
-    "When in the course of human events, it becomes :" {send "whatever\r"}
+  set never_string "When in the course of human events, it becomes :"
+  if { [ catch {expect { "${never_string}" {send "whatever\r"} }} result ] } {
+    set child_died {expect:[ ]spawn[ ]id[ ]exp4[ ]not[ ]open}
+    if { [regexp -expanded ${child_died} $result] } {
+      # The child died.  This is not necessarily an error (for example, the
+      # user may have included a command string to run on the target).
+      exit 0
+    } else {
+      puts $result
+      exit 1
+    }
   }
 
   exit 0
