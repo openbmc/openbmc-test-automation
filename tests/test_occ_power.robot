@@ -37,24 +37,42 @@ Verify OCC Object Count
     Should Be Equal  ${occ_count}  ${inventory_count}
     ...  msg=OCC and inventory entry counts are mismatched.
 
+Verify When Host Is Booted
+    [Documentation]  Verify When Host Is Booted
+    [Tags]  Verify_When_Host_Is_Booted
 
-Verify OCC Active State
-    [Documentation]  Check OCC active state.
-    [Tags]  Verify_OCC_Active_State
+    Verify OCC State  ${1}
 
-    # Example cpu_list data output:
-    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
-    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu1
-    ${cpu_list}=  Get Endpoint Paths
-    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard/  cpu*
+Verify OCC State After Host Reboot
+    [Documentation]  Verify OCC state after host reboot.
+    [Tags]  Verify_OCC_State_After_Host_Reboot
 
-    :FOR  ${endpoint_path}  IN  @{cpu_list}
-    \  ${is_functional}=  Read Object Attribute  ${endpoint_path}  Functional
-    \  Continue For Loop If  ${is_functional} == ${0}
-    \  ${num}=  Set Variable  ${endpoint_path[-1]}
-    \  ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
-    \  Should Be True  ${occ_active}  msg=OCC ${num} is not active.
+    ${occ_count_before} =  Count OCC Object Entry
+    Verify OCC State  ${1}
+    REST OBMC Reboot (run)  stack_mode=normal  quiet=1
+    Verify OCC State  ${1}
+    ${occ_count_after} =  Count OCC Object Entry
+    Should be Equal  ${occ_count_before}  ${occ_count_after}
 
+Verify OCC State After BMC Reset
+    [Documentation]  Verify OCC state after reset.
+    [Tags]  Verify_OCC_State_After_BMC_Reset
+
+    ${occ_count_before} =  Count OCC Object Entry
+    OBMC Reboot (run)
+    Verify OCC State  ${1}
+    ${occ_count_after} =  Count OCC Object Entry
+    Should be Equal  ${occ_count_before}  ${occ_count_after}
+
+Verify OCC State At Standby
+    [Documentation]  Verify OCC state at standby.
+    [Tags]  Verify_OCC_State_At_Standby
+
+    ${occ_count_before} =  Count OCC Object Entry
+    REST Power Off  stack_mode=normal
+    Verify OCC State  ${0}
+    ${occ_count_after} =  Count OCC Object Entry
+    Should be Equal  ${occ_count_before}  ${occ_count_after}
 
 *** Keywords ***
 
@@ -66,7 +84,6 @@ Suite Setup Execution
     Smart Power Off
     REST Power On
     Count OCC Object Entry
-
 
 Count OCC Object Entry
     [Documentation]  Count OCC object entry and set count.
@@ -85,3 +102,21 @@ Test Teardown Execution
     Delete Error Logs
     Close All Connections
 
+Verify OCC State
+    [Documentation]  Check OCC active state.
+    [Arguments]  ${expected_occ_active}=${1}
+    # Description of Argument(s):
+    # expected_occ_active  The expected occ_active value (i.e. 1/0).
+
+    # Example cpu_list data output:
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu1
+    ${cpu_list}=  Get Endpoint Paths
+    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard/  cpu*
+
+    :FOR  ${endpoint_path}  IN  @{cpu_list}
+    \  ${is_functional}=  Read Object Attribute  ${endpoint_path}  Functional
+    \  Continue For Loop If  ${is_functional} == ${0}
+    \  ${num}=  Set Variable  ${endpoint_path[-1]}
+    \  ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
+    \  Should Be Equal  ${occ_active}  ${expected_occ_active}  msg=OCC not in right state
