@@ -363,7 +363,6 @@ Reset Network Interface
     Execute Command On Serial Console  ifconfig eth0 down
     Sleep  30s
     Execute Command On Serial Console  ifconfig eth0 up
-    Read and Log BMC Serial Console Output
 
 
 Get Least Value Priority Image
