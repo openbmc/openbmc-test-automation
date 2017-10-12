@@ -155,6 +155,19 @@ Set Priority To Invalid Value And Expect Error
     ...  Set Host Software Property  @{images}[0]  Priority  ${priority}
 
 
+Upload Image Without Retry
+    [Documentation]  Upload an image to the BMC and verify.
+    [Arguments]  ${image_data}
+
+    # Description of argument(s):
+    # image_data  The image data.
+
+    Upload Image To BMC  /upload/image  data=${image_data}
+    ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
+
+    [Return]  ${ret}  ${version_id}
+
+
 Upload And Activate Image
     [Documentation]  Upload an image to the BMC and activate it with REST.
     [Arguments]  ${image_file_path}  ${wait}=${1}  ${skip_if_active}=false
@@ -170,8 +183,9 @@ Upload And Activate Image
     ${image_version}=  Get Version Tar  ${image_file_path}
 
     ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
-    Upload Image To BMC  /upload/image  data=${image_data}
-    ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
+
+    ${ret}  ${version_id}=  Wait Until Keyword Succeeds  3 times  20 sec
+    ...  Upload Image Without Retry  ${image_data}
     Should Be True  ${ret}
 
     # Verify the image is 'READY' to be activated or if it's already active,
