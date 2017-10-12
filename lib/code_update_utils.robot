@@ -169,9 +169,8 @@ Upload And Activate Image
     OperatingSystem.File Should Exist  ${image_file_path}
     ${image_version}=  Get Version Tar  ${image_file_path}
 
-    ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
-    Upload Image To BMC  /upload/image  data=${image_data}
-    ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
+
+    ${ret}=  Wait Until Keyword Succeeds  3 times  20 sec  Upload And Activate Image  ${image_file_path}
     Should Be True  ${ret}
 
     # Verify the image is 'READY' to be activated or if it's already active,
