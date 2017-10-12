@@ -34,7 +34,7 @@ Open Telnet Connection To BMC Serial Console
     Telnet.Set Timeout  30 minute 30 seconds
 
 
-Read and Log BMC Serial Console Output
+Read And Log BMC Serial Console Output
     [Documentation]    Reads everything that is currently available
     ...                in the output.
 
@@ -52,11 +52,13 @@ Execute Command On Serial Console
     Open Telnet Connection To BMC Serial Console
     Telnet.Write  \n
     Telnet.Execute Command  ${command_string}
+    Read And Log BMC Serial Console Output
     Close Serial Console Connection
 
 
 Close Serial Console Connection
     [Documentation]  Log out of the BMC and close telnet.
 
-    Execute Command On Serial Console  exit
+    Telnet.Write  \n
+    Telnet.Write  exit
     Telnet.Close Connection

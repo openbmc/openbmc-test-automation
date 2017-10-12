@@ -19,7 +19,7 @@ Reset Network During BMC Code Update
     [Documentation]  Disable and re-enable the network while doing a BMC
     ...              code update.
     [Tags]  Reset_Network_During_BMC_Code_Update
-    [Template]  Reset Network During Code Update
+    [Template]  Reset Network Interface During Code Update
 
     # Image File Path   Reboot
     ${IMAGE_FILE_PATH}  ${TRUE}
