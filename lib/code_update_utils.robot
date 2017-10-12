@@ -170,7 +170,9 @@ Upload And Activate Image
     ${image_version}=  Get Version Tar  ${image_file_path}
 
     ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
-    Upload Image To BMC  /upload/image  data=${image_data}
+
+    Wait Until Keyword Succeeds  3 times  60 sec
+    ...   Upload Image To BMC  /upload/image  data=${image_data}
     ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
     Should Be True  ${ret}
 
