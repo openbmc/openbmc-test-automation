@@ -156,6 +156,26 @@ Set Priority To Invalid Value And Expect Error
 
 
 Upload And Activate Image
+    [Documentation]  Attemps to upload an image to the BMC and activate it
+    ...              with REST.  Retries up to 3 times if it fails, waiting
+    ...              20 seconds between retries.
+    [Arguments]  ${image_file_path}  ${wait}=${1}  ${skip_if_active}=false
+
+    # Description of argument(s):
+    # image_file_path     The path to the image tarball to upload and activate.
+    # wait                Indicates that this keyword should wait for host or
+    #                     BMC activation is completed.
+    # skip_if_active      If set to true, will skip the code update if this
+    #                     image is already on the BMC.
+
+    ${version_id}=  Wait Until Keyword Succeeds  3 times  20 sec
+    ...  Upload Activate And Verify Image
+    ...  ${image_file_path}  ${wait}  ${skip_if_active}
+
+    [Return]  ${version_id}
+
+
+Upload Activate And Verify Image
     [Documentation]  Upload an image to the BMC and activate it with REST.
     [Arguments]  ${image_file_path}  ${wait}=${1}  ${skip_if_active}=false
 
