@@ -549,16 +549,23 @@ def get_state(openbmc_host="",
             packet_loss = out_buf.rstrip("\n")
 
     if 'uptime' in req_states:
-        cmd_buf = ["BMC Execute Command", "cat /proc/uptime | cut -f 1 -d ' '",
-                   'quiet=${1}']
+        # Sometimes reading uptime results in a blank value. Call with
+        # wait_until_keyword_succeeds to ensure a non-blank value is obtained.
+        remote_cmd_buf = "read uptime filler 2>/dev/null < /proc/uptime" +\
+            " && [ ! -z \"${uptime}\" ] && echo ${uptime}"
+        cmd_buf = ["BMC Execute Command", re.sub(r'\$', '\$', remote_cmd_buf),
+                   'quiet=1']
         if not quiet:
             grp.rpissuing_keyword(cmd_buf)
-        status, ret_values = \
-            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-        if status == "PASS":
-            stdout, stderr, rc = ret_values
+            grp.rpissuing(remote_cmd_buf)
+        try:
+            stdout, stderr, rc =\
+                BuiltIn().wait_until_keyword_succeeds("5 sec", "0 sec",
+                                                      *cmd_buf)
             if rc == 0 and stderr == "":
                 uptime = stdout
+        except AssertionError as my_assertion_error:
+            pass
 
     if 'epoch_seconds' in req_states:
         date_cmd_buf = "date -u +%s"
@@ -574,7 +581,7 @@ def get_state(openbmc_host="",
                     epoch_seconds = stdout.rstrip("\n")
         else:
             shell_rc, out_buf = gc.cmd_fnc_u(date_cmd_buf,
-                                             quiet=1,
+                                             quiet=quiet,
                                              print_output=0)
             if shell_rc == 0:
                 epoch_seconds = out_buf.rstrip("\n")
