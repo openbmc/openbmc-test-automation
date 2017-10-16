@@ -14,6 +14,8 @@ Resource          ../../lib/dump_utils.robot
 
 Test Teardown     Code Update Test Teardown
 
+Force Tags        BMC_Code_Update
+
 *** Variables ***
 
 ${QUIET}                          ${1}
