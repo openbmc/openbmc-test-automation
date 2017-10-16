@@ -49,7 +49,7 @@ Escale System On And PL Enabled
 
 
 Escale System On And PL Disabled
-    [Documentation] Change active power limit with system power on and
+    [Documentation]  Change active power limit with system power on and
     ...  deactivate power limit prior to change.
     [Tags]  Escale_System_On_And_PL_Disabled
 
