@@ -28,6 +28,8 @@ Resource          ../../lib/dump_utils.robot
 
 Test Teardown     Code Update Test Teardown
 
+Force Tags        Host_Code_Update
+
 *** Variables ***
 
 ${QUIET}                          ${1}
