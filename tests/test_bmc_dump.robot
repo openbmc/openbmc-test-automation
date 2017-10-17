@@ -24,11 +24,21 @@ Pre Dump BMC Performance Test
     Open Connection And Log In
     Check BMC Performance
 
-Verify User Initiated BMC Dump
-    [Documentation]  Create user initiated BMC dump and verify dump
-    ...  entry for it.
-    [Tags]  Verify_User_Initiated_Dump
+Verify User Initiated BMC Dump At Host Off
+    [Documentation]  Create user initiated BMC dump at host off state and
+    ...  verify dump entry for it.
+    [Tags]  Verify_User_Initiated_Dump_At_Host_Off
 
+    REST Power Off  stack_mode=skip  quiet=1
+    Create User Initiated Dump
+
+
+Verify User Initiated BMC Dump At Host Booted
+    [Documentation]  Create user initiated BMC dump at host booted state and
+    ...  verify dump entry for it.
+    [Tags]  Verify_User_Initiated_Dump_At_Host_Booted
+
+    REST Power On  stack_mode=skip  quiet=1
     Create User Initiated Dump
 
 
