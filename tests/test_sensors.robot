@@ -43,26 +43,6 @@ Execute Set Sensor Boot Count
     ${val}=     convert to integer    53
     Response Should Be Equal   ${val}
 
-OCC Active Sensor On Enabled
-    [Tags]  OCC_Active_Sensor_On_Enabled
-
-    ${uri}=    Get System component    OccStatus
-    ${x}=      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}     value
-    Response Should Be Equal    Enabled
-
-OCC Active Sensor On Disabled
-    [Tags]  OCC_Active_Sensor_On_Disabled
-
-    ${uri}=    Get System component    OccStatus
-    ${x}=      Get Sensor Number   ${uri}
-
-    Run IPMI command  0x04 0x30 ${x} 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x20 0x00
-    Read The Attribute  ${uri}     value
-    Response Should Be Equal    Disabled
-
 Verify OCC Power Supply Redundancy
     [Documentation]  Check if OCC's power supply is set to not redundant.
     [Tags]  Verify_OCC_Power_Supply_Redundancy
