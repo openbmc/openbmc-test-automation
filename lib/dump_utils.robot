@@ -24,6 +24,15 @@ Create User Initiated Dump
     [Return]  ${dump_id}
 
 
+Verify No Dump In Progress
+    [Documentation]  Verify no dump in progress.
+
+    ${dump_progress}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  [ -d /tmp/obmcdump* ] && echo 'In Progress' || echo 'No Progress'
+
+    Should Be Equal As Strings  ${dump_progress}  No Progress
+
+
 Check Dump Existence
     [Documentation]  Verify if given dump exist.
     [Arguments]  ${dump_id}

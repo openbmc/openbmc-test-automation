@@ -31,7 +31,6 @@ Verify User Initiated BMC Dump
 
     Create User Initiated Dump
 
-
 Verify Dump Persistency On Service Restart
     [Documentation]  Create user dump, restart BMC service and verify dump
     ...  persistency.
@@ -134,6 +133,8 @@ Post Dump Core Dump Check
 
 Post Testcase Execution
     [Documentation]  Do the post test teardown.
+
+    Wait Until Keyword Succeeds  3 min  15 sec  Verify No Dump In Progress
 
     Delete All BMC Dump
     FFDC On Test Case Fail
