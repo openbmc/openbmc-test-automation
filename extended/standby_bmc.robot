@@ -67,8 +67,8 @@ Get To Stable State
     #Run Keyword If  '${CLEANUP_DIR_PATH}' != '${EMPTY}' and ${rc} == 0
     #...  Cleanup Dir
 
-    Delete Error Logs
-    Delete All Dumps
+    Run Keyword And Ignore Error  Delete All Error Logs
+    Run Keyword And Ignore Error  Delete All Dumps
 
 *** Keywords ***
 
