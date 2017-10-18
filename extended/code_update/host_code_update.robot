@@ -67,6 +67,19 @@ Post Update Boot To OS
     Verify Running Host Image  ${IMAGE_FILE_PATH}
 
 
+REST Host Code Update While OS Is Running
+    [Documentation]  Do a PNOR code update while the host is running.
+    [Tags]  REST_Host_Code_Update_While_OS_Is_Running
+
+    Run Keyword If  '${PREV_TEST_STATUS}' == 'FAIL'
+    ...  Fail  Cannot boot the OS.
+
+    REST Power On  stack_mode=skip
+    Upload And Activate Image  ${ALTERNATE_IMAGE_FILE_PATH}
+    REST Power On  stack_mode=normal
+    Verify Running Host Image  ${ALTERNATE_IMAGE_FILE_PATH}
+
+
 Host Image Priority Attribute Test
     [Documentation]  Set "Priority" attribute.
     [Tags]  Host_Image_Priority_Attribute_Test
