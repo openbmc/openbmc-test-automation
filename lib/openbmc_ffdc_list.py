@@ -114,6 +114,7 @@ ENUMERATE_LED = OPENBMC_BASE + 'led/enumerate'
 ENUMERATE_SW = OPENBMC_BASE + 'software/enumerate'
 ENUMERATE_CONTROL = OPENBMC_BASE + 'control/enumerate'
 ENUMERATE_OCC = OPENPOWER_BASE + 'control/enumerate'
+ENUMERATE_DUMPS = OPENBMC_BASE + 'dumps/enumerate'
 
 # Add file name and correcponding Get Request
 FFDC_GET_REQUEST = {
@@ -127,6 +128,7 @@ FFDC_GET_REQUEST = {
         'BMC_elog': ENUMERATE_ELOG,
         'BMC_led': ENUMERATE_LED,
         'OCC_state': ENUMERATE_OCC,
+        'BMC_dumps': ENUMERATE_DUMPS,
     },
 }
 
@@ -143,6 +145,8 @@ FFDC_METHOD_CALL = {
         'Core Files': 'SCP Coredump Files',
         'SEL Log': 'Collect eSEL Log',
         'Sys Inventory Files': 'System Inventory Files',
+        'Dump Log': 'Collect Dump Log',
+        'Dump Files': 'SCP Dump Files'
     },
 }
 
@@ -295,3 +299,15 @@ class openbmc_ffdc_list():
         """
         index = [i for i, str in enumerate(esel_list) if 'ESEL=' in str]
         return index[0]
+
+    def get_dump_index(self, dump_list):
+        r"""
+        #######################################################################
+        #   @brief    Returns the eSEL binary index.
+        #   @param    esel_ist: @type list: eSEL list.
+        #   @return   Index of "ESEL=" in the list.
+        #######################################################################
+        """
+        index = [i for i, str in enumerate(dump_list) if 'DUMP=' in str]
+        return index[0]
+
