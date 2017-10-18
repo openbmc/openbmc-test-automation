@@ -11,6 +11,7 @@ Library            Collections
 Library            String
 Library            gen_print.py
 Library            gen_robot_keyword.py
+Library            dump_utils.py
 
 *** Keywords ***
 
@@ -314,8 +315,30 @@ SCP Coredump Files
     \  BMC Execute Command  rm ${index}
     # I can't find a way to do this: scp.Close Connection
 
+#############################################################################
+SCP Dump Files
+    [Documentation]  Copy all dump files from BMC to local system.
+
+    # Check if dumps exist
+    Scp Dumps  ${FFDC_DIR_PATH}  ${FFDC_PREFIX}
 
 ##############################################################################
+Collect Dump Log
+    [Documentation]  Collect dumps from dump entry.
+    [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
+
+    ${data}=  Read Properties  ${DUMP_ENTRY_URI}/enumerate  quiet=${1}
+
+    # Grab the list of entries from dump/entry/
+    # The data shown below is the result of the "Get Dictionary Keys".
+    # Example:
+    # /xyz/openbmc_project/dump/entry/1
+    # /xyz/openbmc_project/dump/entry/2
+
+    ${dump_list}=  Get Dictionary Keys  ${data}
+
+###########################################################################
+
 Collect eSEL Log
     [Documentation]  Collect eSEL log from logging entry and convert eSEL data
     ...              to elog formatted string text file.
