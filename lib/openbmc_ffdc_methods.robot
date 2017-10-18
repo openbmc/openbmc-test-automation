@@ -314,8 +314,38 @@ SCP Coredump Files
     \  BMC Execute Command  rm ${index}
     # I can't find a way to do this: scp.Close Connection
 
+#############################################################################
+SCP Dump Files
+    [Documentation]  Copy all dump file from BMC to local system.
+
+    # Check if dump exist in /var/lib/phosphor-debug-collector/dumps/
+    ${dump_files}  ${stderr}  ${rc}=  BMC Execute Command  ls /var/lib/phosphor-debug-collector/dumps/*/obmcdump_*
+    @{dump_list} =  Split String  ${dump_files}
+    #Copy the dump files
+    Run Key U  Open Connection for SCP
+    :FOR  ${index}  IN  @{dump_list}
+    \  scp.Get File  ${index}  ${LOG_PREFIX}${index.lstrip("/var/lib/phosphor-debug-collector/dumps/${index}/*")}
 
 ##############################################################################
+Collect Dump Log
+    [Documentation]  Collect dumps from dump entry.
+    [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
+
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/enumerate  quiet=${1}
+    ${status}=  Run Keyword And Return Status
+    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Return From Keyword If  '${status}' == '${False}'
+
+    ${content}=  To Json  ${resp.content}
+    # Grab the list of entries from dump/entry/
+    # The data shown below is the result of the "Get Dictionary Keys".
+    # Example:
+    # /xyz/openbmc_project/dump/entry/1
+    # /xyz/openbmc_project/dump/entry/2
+    ${dump_list}=  Get Dictionary Keys  ${content['data']}
+
+###########################################################################
+
 Collect eSEL Log
     [Documentation]  Collect eSEL log from logging entry and convert eSEL data
     ...              to elog formatted string text file.
