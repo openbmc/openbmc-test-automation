@@ -11,6 +11,7 @@ Library  String
 Library  SSHLibrary
 
 Test Setup     Test Init Setup
+Test Teardown  Close All Connections
 
 *** Variables ***
 
@@ -275,8 +276,8 @@ Configure Hexadecimal IP For Gateway
     [Template]  Configure Network Settings
 
 Configure Out Of Range Prefix Length
-    # IP Address  Prefix_length  Gateway_IP  Expected_Result
-    ${valid_ip}   33             ${hex_ip}   error
+    # IP Address  Prefix_length  Gateway_IP        Expected_Result
+    ${valid_ip}   33             ${valid_gateway}  error
 
     [Documentation]  Configure out-of-range prefix length and expect an error.
     [Tags]  Configure_Out_Of_Range_Prefix_Length
@@ -284,8 +285,8 @@ Configure Out Of Range Prefix Length
     [Template]  Configure Network Settings
 
 Configure Negative Value For Prefix Length
-    # IP Address  Prefix_length  Gateway_IP  Expected_Result
-    ${valid_ip}   -10            ${hex_ip}   error
+    # IP Address  Prefix_length  Gateway_IP        Expected_Result
+    ${valid_ip}   -10            ${valid_gateway}  error
 
     [Documentation]  Configure negative prefix length and expect an error.
     [Tags]  Configure_Negative_Value_For_Prefix_Length
@@ -293,8 +294,8 @@ Configure Negative Value For Prefix Length
     [Template]  Configure Network Settings
 
 Configure Non Numeric Value For Prefix Length
-    # IP Address  Prefix_length  Gateway_IP  Expected_Result
-    ${valid_ip}   xx             ${hex_ip}   error
+    # IP Address  Prefix_length  Gateway_IP        Expected_Result
+    ${valid_ip}   xx             ${valid_gateway}  error
 
     [Documentation]  Configure non numeric  value prefix length and expect
     ...  an error.
