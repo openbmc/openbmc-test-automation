@@ -29,7 +29,8 @@ Verify User Initiated BMC Dump
     ...  entry for it.
     [Tags]  Verify_User_Initiated_Dump
 
-    Create User Initiated Dump
+    ${dump_id}=  Create User Initiated Dump
+    Check Existence of BMC Dump file  ${dump_id}
 
 
 Verify Dump Persistency On Service Restart
@@ -37,25 +38,27 @@ Verify Dump Persistency On Service Restart
     ...  persistency.
     [Tags]  Verify_Dump_Persistency_On_Service_Restart
 
-    Delete All BMC Dump
-    Create User Initiated Dump
+    Delete All Dumps
+    ${dump_id}=  Create User Initiated Dump
     BMC Execute Command
     ...  systemctl restart xyz.openbmc_project.Dump.Manager.service
     Sleep  10s  reason=Wait for BMC dump service to restart properly.
 
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Check Existence of BMC Dump file  ${dump_id}
 
 
 Verify Dump Persistency On Reset
     [Documentation]  Create user dump, reset BMC and verify dump persistency.
     [Tags]  Verify_Dump_Persistency_On_Reset
 
-    Delete All BMC Dump
-    Create User Initiated Dump
+    Delete All Dumps
+    ${dump_id}=  Create User Initiated Dump
     OBMC Reboot (off)
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Check Existence of BMC Dump file  ${dump_id}
 
 
 Delete User Initiated BMC Dump And Verify
@@ -63,6 +66,7 @@ Delete User Initiated BMC Dump And Verify
     [Tags]  Delete_User_Initiated_Dump_And_Verify
 
     ${dump_id}=  Create User Initiated Dump
+    Check Existence of BMC Dump file  ${dump_id}
 
     Delete BMC Dump  ${dump_id}
 
@@ -76,6 +80,7 @@ Verify User Initiated Dump Size
     ${dump_size}=  Read Attribute  ${DUMP_ENTRY_URI}/${dump_id}  Size
     # Max size for dump is 200k = 200x1024
     Should Be True  0 < ${dump_size} < 204800
+    Check Existence of BMC Dump file  ${dump_id}
 
 
 Create Two User Initiated Dump And Delete One
@@ -92,6 +97,7 @@ Create Two User Initiated Dump And Delete One
 
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/${dump_id_2}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Check Existence of BMC Dump file  ${dump_id_2}
 
 
 Create And Delete BMC Dump Multiple Times
@@ -113,7 +119,7 @@ Delete All BMC Dumps And Verify
     Create User Initiated Dump
     Create User Initiated Dump
 
-    Delete All BMC Dump
+    Delete All Dumps
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
@@ -135,6 +141,6 @@ Post Dump Core Dump Check
 Post Testcase Execution
     [Documentation]  Do the post test teardown.
 
-    Delete All BMC Dump
+    Delete All Dumps
     FFDC On Test Case Fail
     Close All Connections
