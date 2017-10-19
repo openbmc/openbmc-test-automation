@@ -87,10 +87,24 @@ Delete All BMC Dump
     ${resp}=  Openbmc Post Request  ${DUMP_URI}action/DeleteAll  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
-
 Dump Should Not Exist
     [Documentation]  Verify that BMC dumps do not exist.
 
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
+
+Check Existence of BMC Dump file
+    [Documentation]  Verify existence of BMC dump file.
+    [Arguments]  ${dump_id}
+
+    # Description of argument(s):
+    # dump_id  BMC dump identifier
+
+    ${dump_check_cmd}=  Set Variable
+    ...  ls /var/lib/phosphor-debug-collector/dumps/
+
+    ${file_there}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ${dump_check_cmd}/${dump_id}
+    Should End With  ${file_there}  tar.xz
 
