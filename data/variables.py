@@ -87,6 +87,8 @@ ALWAYS_POWER_OFF = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOff'
 # Dump URI variable
 DUMP_URI = OPENBMC_BASE_URI +'/dump/'
 DUMP_ENTRY_URI = DUMP_URI + 'entry/'
+# The path on the BMC where dumps are stored.
+DUMP_DIR_PATH = "/var/lib/phosphor-debug-collector/dumps/"
 
 # Boot progress variables.
 STATE_DBUS_BASE = 'xyz.openbmc_project.State.'
