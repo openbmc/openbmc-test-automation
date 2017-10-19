@@ -5,8 +5,11 @@ This file contains functions which are useful for processing BMC dumps.
 """
 
 import gen_print as gp
+import gen_misc as gm
+import gen_robot_keyword as grk
 import bmc_ssh_utils as bsu
 import var_funcs as vf
+import os
 from robot.libraries.BuiltIn import BuiltIn
 
 
@@ -81,3 +84,43 @@ def valid_dump(dump_id,
         dump_file_path = dump_dict[dump_id]
         message += gp.sprint_var(dump_file_path)
         BuiltIn().fail(gp.sprint_error(message))
+
+
+def scp_dumps(targ_dir_path,
+              targ_file_prefix="",
+              dump_dict=None,
+              quiet=None):
+
+    r"""
+    SCP all dumps from the BMC to the indicated directory on the local system
+    and return a list of the new files.
+
+    Description of argument(s):
+    targ_dir_path                   The path of the directory to receive the
+                                    dump files.
+    targ_file_prefix                Prefix which will be pre-pended to each
+                                    target file's name.
+    dump_dict                       A dump dictionary such as the one returned
+                                    by get_dump_dict.  If this value is None,
+                                    this function will call get_dump_dict on
+                                    the caller's behalf.
+    quiet                           If quiet is set to 1, this function will
+                                    NOT write status messages to stdout.
+    """
+
+    targ_dir_path = gm.add_trailing_slash(targ_dir_path)
+
+    if dump_dict is None:
+        dump_dict = get_dump_dict(quiet=quiet)
+
+    status, ret_values = grk.run_key("Open Connection for SCP", quiet=quiet)
+
+    dump_file_list = []
+    for dump_id, source_file_path in dump_dict.iteritems():
+        targ_file_path = targ_dir_path + targ_file_prefix +\
+            os.path.basename(source_file_path)
+        status, ret_values = grk.run_key("scp.Get File  " + source_file_path +
+                                         "  " + targ_file_path, quiet=quiet)
+        dump_file_list.append(targ_file_path)
+
+    return dump_file_list
