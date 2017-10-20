@@ -81,6 +81,7 @@ Get BMC System Model
 
     ${bmc_model}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat ${devicetree_base} | cut -d " " -f 1  return_stderr=True
+    ...  test_mode=0
     Should Be Empty  ${stderr}
     Should Not Be Empty  ${bmc_model}
     [Return]  ${bmc_model}
