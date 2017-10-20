@@ -26,6 +26,17 @@
   while { 1 } {
     incr attempts 1
     expect {
+      -re "Offending RSA key in (.*?)\[\r\n\]" {
+        set fields [split $expect_out(1,string) ":"]
+        set file_path [lindex $fields 0]
+        set line_num [lindex $fields 1]
+        set cmd_buf "sed -i ${line_num}d ${file_path}"
+        puts "Issuing: ${cmd_buf}"
+        eval exec bash -c {$cmd_buf}
+        exec kill -9 [exp_pid]
+        eval spawn ssh ${ssh_parms}
+        continue
+      }
       -re "assword:" {
         send "$password\r"
         break
