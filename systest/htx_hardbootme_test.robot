@@ -40,7 +40,7 @@ Library         ../syslib/utils_keywords.py
 Library         ../lib/utils_files.py
 
 
-Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
+Suite Setup     Run Keyword  Start SOL Console Logging
 Test Setup      Pre Test Case Execution
 Test Teardown   Post Test Case Execution
 
@@ -77,11 +77,13 @@ Hard Bootme Test
 
     Set Suite Variable  ${last_inventory_file_path}  children=true
     Set Suite Variable  ${INV_IGNORE_LIST}  children=true
+    Set Suite Variable  ${iteration}  ${0}  children=true
 
     Repeat Keyword  ${HTX_LOOP} times  Run HTX Exerciser
 
 
 *** Keywords ***
+
 
 Run HTX Exerciser
     [Documentation]  Run HTX exerciser.
@@ -96,6 +98,10 @@ Run HTX Exerciser
     # - Do inventory collection, compare with
     #   previous inventory run.
     # - Power off.
+
+    Set Suite Variable  ${iteration}  ${iteration + 1}
+    ${loop_count}=  Catenate  Starting iteration: ${iteration}
+    Rpvars  loop_count
 
     Boot To OS
 
@@ -126,6 +132,9 @@ Run HTX Exerciser
     Flush REST Sessions
 
     Rprint Timen  HTX Test ran for: ${HTX_DURATION}
+
+    ${loop_count}=  Catenate  Ending iteration: ${iteration}
+    Rpvars  loop_count
 
 
 Do Inventory And Compare
