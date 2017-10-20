@@ -23,6 +23,12 @@ System Driver Data
     Run Keyword And Ignore Error  Log PNOR Driver Details
     Run Keyword And Ignore Error  Log BMC Model
     Run Keyword And Ignore Error  Enable Core Dump On BMC
+    Run Keyword And Ignore Error  Set Boot Defaults
+
+Set Boot Defaults
+    Set Control Boot Mode  ${CONTROL_HOST_URI}/boot  ${BOOT_MODE_REGULAR}
+    Set Control Boot Mode
+    ...  ${CONTROL_HOST_URI}/boot/one_time  ${BOOT_MODE_REGULAR}
 
 Log BMC Driver Details
     [Documentation]   Get BMC driver details and log.
