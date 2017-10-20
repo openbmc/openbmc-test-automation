@@ -26,6 +26,22 @@
   while { 1 } {
     incr attempts 1
     expect {
+      -re "Offending RSA key in (.*?)\[\r\n\]" {
+        # We have been informed by ssh that we have a bad key.
+        # Retreive the file path and line number from the ssh output.
+        set fields [split $expect_out(1,string) ":"]
+        set file_path [lindex $fields 0]
+        set line_num [lindex $fields 1]
+        # Use sed to delete the bad key.
+        set cmd_buf "sed -i ${line_num}d ${file_path}"
+        puts "Issuing: ${cmd_buf}"
+        eval exec bash -c {$cmd_buf}
+        # Kill the failed spawned ssh process.
+        exec kill -9 [exp_pid]
+        # Start a new process now that our stale key problem is fixed.
+        eval spawn ssh ${ssh_parms}
+        continue
+      }
       -re "assword:" {
         send "$password\r"
         break
