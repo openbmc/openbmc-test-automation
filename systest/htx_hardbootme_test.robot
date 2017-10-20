@@ -40,7 +40,7 @@ Library         ../syslib/utils_keywords.py
 Library         ../lib/utils_files.py
 
 
-Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
+Suite Setup     Run Keyword  Start SOL Console Logging
 Test Setup      Pre Test Case Execution
 Test Teardown   Post Test Case Execution
 
