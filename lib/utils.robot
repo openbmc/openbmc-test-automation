@@ -521,8 +521,8 @@ Get SOL Console Pid
     # replace them in our search string with the regexes to indicate that they
     # are optional.
     ${search_string}=  Replace String  ${search_string}  "  ["]?
-    ${cmd_buf}=  Catenate  echo $(ps -ef | egrep '${search_string}'
-    ...  | egrep -v grep | cut -c10-14)
+    ${cmd_buf}=  Catenate  echo $(ps awwo user,pid,cmd | egrep
+    ...  '${search_string}' | egrep -v grep | cut -c10-14)
     Rdpissuing  ${cmd_buf}
     ${rc}  ${os_con_pid}=  Run And Return Rc And Output  ${cmd_buf}
     Rdpvars  os_con_pid
