@@ -1179,3 +1179,20 @@ Set Turbo Setting Via REST
 
     ${valueDict}=  Create Dictionary  data=${setting}
     Write Attribute  ${SENSORS_URI}host/TurboAllowed  value  data=${valueDict}
+
+
+Set Control Boot Mode
+    [Documentation]  Set given boot mode on the boot object path attribute.
+    [Arguments]  ${boot_path}  ${boot_mode}
+
+    # Description of argument(s):
+    # boot_path  Boot object path.
+    #            Example:
+    #            /xyz/openbmc_project/control/host0/boot
+    #            /xyz/openbmc_project/control/host0/boot/one_time
+    # boot_mode  Boot mode which need to be set.
+    #            Example:
+    #            "xyz.openbmc_project.Control.Boot.Mode.Modes.Regular"
+
+    ${valueDict}=  Create Dictionary  data=${boot_mode}
+    Write Attribute  ${boot_path}  BootMode  data=${valueDict}
