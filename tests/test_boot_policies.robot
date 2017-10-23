@@ -20,6 +20,8 @@ Force Tags  boot_policy_test
 ${ONETIME}    ${1}
 ${PERMANENT}  ${0}
 
+${stack_mode}       skip
+
 *** Test Cases ***
 
 Set Boot Policy To ONETIME via REST
@@ -71,7 +73,7 @@ Test Boot Order via REST
     ...               and verify that the order doesn't change post power on.
     [Tags]  chassisboot  Test_Boot_Order_via_REST
 
-    Initiate Power Off
+    Initiate Host PowerOff
 
     Set Boot Policy  ${PERMANENT}
 
@@ -158,7 +160,8 @@ Set Boot Policy
     [Arguments]    ${args}
     ${bootpolicy}=  Set Variable  ${args}
     ${valueDict}=  Create Dictionary   data=${bootpolicy}
-    Write Attribute  ${CONTROL_URI}/host0/boot/one_time  Enabled  data=${valueDict}
+    Write Attribute
+    ...  ${CONTROL_HOST_URI}/boot/one_time  Enabled  data=${valueDict}
 
 Set Boot Source
     [Documentation]  Set given boot source.
@@ -183,14 +186,7 @@ Test Setup Execution
 Suite Setup Execution
     [Documentation]  Do the initial suite setup.
 
-    # Reboot host to re-power on clean if host is not "off".
-    ${current_state}=  Get Host State
-    Run Keyword If  '${current_state}' == 'Off'
-    ...  Initiate Host Boot
-    ...  ELSE  Initiate Host Reboot
-
-    Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Is OS Starting
+    REST Power On
 
 Restore Bootmode Setting
     [Documentation]  Restore initial bootmode setting.
