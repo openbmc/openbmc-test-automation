@@ -6,6 +6,7 @@ Resource               ../../lib/ipmi_client.robot
 Resource               ../../lib/openbmc_ffdc.robot
 Resource               ../../lib/utils.robot
 Resource               ../../lib/resource.txt
+Resource               ../../lib/state_manager.robot
 
 Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
@@ -21,7 +22,7 @@ IPMI Chassis Status On
     ...               using IPMI Get Chassis status command.
     [Tags]  IPMI_Chassis_Status_On
 
-    Initiate Power On
+    Initiate Host Boot
     ${resp}=  Run IPMI Standard Command  chassis status
     ${power_status}=  Get Lines Containing String  ${resp}  System Power
     Should Contain  ${power_status}  on
@@ -31,7 +32,7 @@ IPMI Chassis Status Off
     ...               using IPMI Get Chassis status command.
     [Tags]  IPMI_Chassis_Status_Off
 
-    Initiate Power Off
+    Initiate Host PowerOff
     ${resp}=  Run IPMI Standard Command  chassis status
     ${power_status}=  Get Lines Containing String  ${resp}  System Power
     Should Contain  ${power_status}    off
@@ -49,7 +50,7 @@ IPMI Chassis Restore Power Policy
      ...  Get Lines Containing String  ${resp}  Power Restore Policy
      Should Contain  ${power_status}  always-on
 
-     Set BMC Power Policy  RESTORE_LAST_STATE
+     Set BMC Power Policy  ${RESTORE_LAST_STATE}
      ${resp}=  Run IPMI Standard Command  chassis status
      ${power_status}=
      ...  Get Lines Containing String  ${resp}  Power Restore Policy
@@ -83,8 +84,6 @@ Verify Host PowerOff Via IPMI
 Test Exit Logs
     [Documentation]    Log FFDC if test failed.
 
-    Set BMC Power Policy  RESTORE_LAST_STATE
-    ${power_policy}=  Read Attribute  ${HOST_SETTING}  power_policy
-    Should Be Equal  ${power_policy}  RESTORE_LAST_STATE
+    Set BMC Power Policy  ${RESTORE_LAST_STATE}
 
     FFDC On Test Case Fail
