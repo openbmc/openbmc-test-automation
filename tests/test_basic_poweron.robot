@@ -14,7 +14,7 @@ Force Tags  chassisboot
 
 # User may pass LOOP_COUNT.
 # By default 2 cycle for CI/CT.
-${LOOP_COUNT}  ${2}
+${LOOP_COUNT}  ${1}
 
 # Error strings to check from journald.
 ${ERROR_REGEX}   SEGV|core-dump
@@ -52,8 +52,11 @@ Host Off And On
 
     Initiate Host PowerOff
 
+    Delete All Error Logs
     Initiate Host Boot
 
     # TODO: Host shutdown race condition.
     # Wait 30 seconds before Powering Off.
     Sleep  30s
+
+    Error Logs Should Not Exist
