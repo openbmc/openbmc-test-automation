@@ -76,16 +76,6 @@ Verify Unrecoverable Callout Handling For MCI
     Inject Unrecoverable Error Through Host
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
-
-Verify Unrecoverable Callout Handling For NXDMAENG
-    [Documentation]  Verify unrecoverable callout handling for NXDMAENG.
-    [Tags]  Verify_Unrecoverable_Callout_Handling_For_NXDMAENG
-
-    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_UE
-    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_ue
-    Inject Unrecoverable Error Through Host
-    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
-
 # CAPP accelerator (CXAFIR) related error injection.
 
 Verify Recoverable Callout Handling For CXA With Threshold 5
