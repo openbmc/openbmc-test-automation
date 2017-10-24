@@ -101,6 +101,15 @@ BOOT_MODE_SAFE = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Safe'
 BOOT_MODE_SETUP = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Setup'
 BOOT_MODE_REGULAR = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Regular'
 
+# Time variables.
+TIME_DBUS_BASE = 'xyz.openbmc_project.Time.'
+BMC_OWNER = TIME_DBUS_BASE + 'Owner.Owners.BMC'
+HOST_OWNER = TIME_DBUS_BASE + 'Owner.Owners.Host'
+SPLIT_OWNER = TIME_DBUS_BASE + 'Owner.Owners.Split'
+BOTH_OWNER = TIME_DBUS_BASE + 'Owner.Owners.Both'
+NTP_MODE = TIME_DBUS_BASE + 'Synchronization.Method.NTP'
+MANUAL_MODE = TIME_DBUS_BASE + 'Synchronization.Method.Manual'
+
 '''
   QEMU HTTPS variable:
 

@@ -23,8 +23,6 @@
 -e Verify_Minimal_Memory_Buffer_Inventory
 -e Verify_Minimal_Main_Planar_Inventory
 -e Verify_Minimal_System_Inventory
-# https://github.com/openbmc/openbmc-test-automation/issues/907
--e Clock_Time
 # https://github.com/openbmc/openbmc-test-automation/issues/874
 -e User_Management
 # NA test case for Witherspoon
