@@ -154,6 +154,69 @@ Verify Unrecoverable Callout Handling For NXDMAENG
     Inject Unrecoverable Error Through Host
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
+
+#  L2FIR related error injection.
+
+Verify Recoverable Callout Handling For L2FIR With Threshold 1
+    [Documentation]  Verify recoverable callout handling for L2FIR with
+    ...              threshold 1.
+    [Tags]  Verify_Recoverable_Callout_Handling_For_L2FIR_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L2FIR_RECV1
+    ${translated_fir}=  Fetch FIR Address Translation Value  0  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l2fir_th1
+    Inject Recoverable Error With Threshold Limit Through Host
+    ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+#  L3FIR related error injection.
+
+Verify Recoverable Callout Handling For L3FIR With Threshold 1
+    [Documentation]  Verify recoverable callout handling for L3FIR with
+    ...              threshold 1.
+    [Tags]  Verify_Recoverable_Callout_Handling_For_L3FIR_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L3FIR_RECV1
+    ${translated_fir}=  Fetch FIR Address Translation Value  0  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l3fir_th1
+    Inject Recoverable Error With Threshold Limit Through Host
+    ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+Verify Recoverable Callout Handling For L3FIR With Threshold 32
+    [Documentation]  Verify recoverable callout handling for L3FIR with
+    ...              threshold 32.
+    [Tags]  Verify_Recoverable_Callout_Handling_For_L3FIR_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L3FIR_RECV32
+    ${translated_fir}=  Fetch FIR Address Translation Value  0  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l3fir_th32
+    Inject Recoverable Error With Threshold Limit Through Host
+    ...  ${translated_fir}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+# On chip controller (OCCFIR) related error injection.
+
+Verify Recoverable Callout Handling For OCC With Threshold 1
+    [Documentation]  Verify recoverable callout handling for OCCFIR with
+    ...              threshold 1.
+    [Tags]  Verify_Recoverable_Callout_Handling_For_OCC_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  OCCFIR_RECV1
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}occfir_th1
+    Inject Recoverable Error With Threshold Limit Through Host
+    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+# Core management engine (CMEFIR) related error injection.
+
+Verify Recoverable Callout Handling For CMEFIR With Threshold 1
+    [Documentation]  Verify recoverable callout handling for CMEFIR with
+    ...              threshold 1.
+    [Tags]  Verify_Recoverable_Callout_Handling_For_CMEFIR_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  CMEFIR_RECV1
+    ${translated_fir}=  Fetch FIR Address Translation Value  0  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}cmefir_th1
+    Inject Recoverable Error With Threshold Limit Through Host
+    ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
 *** Keywords ***
 
 Inject Error Through HOST
