@@ -8,10 +8,12 @@ Library          OperatingSystem
 
 *** Variables ***
 
-${BMC_UPD_METHOD}    ${OPENBMC_BASE_URI}control/flash/bmc/action/update
-${BMC_PREP_METHOD}   ${OPENBMC_BASE_URI}control/flash/bmc/action/PrepareForUpdate
-${BMC_UPD_ATTR}      ${OPENBMC_BASE_URI}control/flash/bmc
-${HOST_SETTING}      ${OPENBMC_BASE_URI}settings/host0
+# Fix old org path locally for non-witherspoon system.
+${ORG_OPENBMC_BASE_URI}  /org/openbmc/
+${BMC_UPD_METHOD}    ${ORG_OPENBMC_BASE_URI}control/flash/bmc/action/update
+${BMC_PREP_METHOD}   ${ORG_OPENBMC_BASE_URI}control/flash/bmc/action/PrepareForUpdate
+${BMC_UPD_ATTR}      ${ORG_OPENBMC_BASE_URI}control/flash/bmc
+${HOST_SETTING}      ${ORG_OPENBMC_BASE_URI}settings/host0
 
 *** Keywords ***
 
