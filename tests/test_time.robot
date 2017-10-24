@@ -18,9 +18,8 @@ Force Tags  Clock_Time
 *** Variables ***
 ${SYSTEM_TIME_INVALID}      01/01/1969 00:00:00
 ${SYSTEM_TIME_VALID}        02/29/2016 09:10:00
-${SYSTEM_TIME_VALID_EPOCH}  1456737000  #Equivalent epoch time for 02/29/2016 09:10:00
+${SYSTEM_TIME_VALID_EPOCH}  ${1487304700000000} #Equivalent epoch time for 02/17/2017 04:11:40
 ${ALLOWED_TIME_DIFF}        3
-${SETTING_HOST}             ${SETTINGS_URI}host0
 
 *** Test Cases ***
 
@@ -43,8 +42,8 @@ Set Valid System Time
     ...              correctly set in BMC.
     [Tags]  Set_Valid_System_Time
 
-    Set Time Owner  HOST
-    Set Time Mode  MANUAL
+    Set Time Owner  ${HOST_OWNER}
+    Set Time Mode  ${MANUAL_MODE}
 
     ${resp}=  Run IPMI Standard Command  sel time set "${SYSTEM_TIME_VALID}"
     ${setdate}=  Convert Date  ${SYSTEM_TIME_VALID}
@@ -60,8 +59,8 @@ Set Invalid System Time
     ...              that it should throw error.
     [Tags]  Set_Invalid_System_Time
 
-    Set Time Owner  HOST
-    Set Time Mode  MANUAL
+    Set Time Owner  ${HOST_OWNER}
+    Set Time Mode  ${MANUAL_MODE}
 
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  sel time set "${SYSTEM_TIME_INVALID}"
@@ -72,8 +71,8 @@ Set System Time with no time
     ...              that it should throw error.
     [Tags]  Set_System_Time_with_no_time
 
-    Set Time Owner  HOST
-    Set Time Mode  MANUAL
+    Set Time Owner  ${HOST_OWNER}
+    Set Time Mode  ${MANUAL_MODE}
 
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  sel time set ""
@@ -81,8 +80,8 @@ Set System Time with no time
 
 
 Set BMC Time With BMC And Manual
-    #Operation    Owner  Mode    Status  BMC Time  Host Time
-    Set BMC Time  BMC    MANUAL  ok      Set       Change
+    #Operation    Owner          Mode            Status  BMC Time  Host Time
+    Set BMC Time  ${BMC_OWNER}   ${MANUAL_MODE}  ok      Set       Change
 
     [Documentation]  Set BMC time when time owner is BMC and time mode is
     ...              manual.
@@ -90,8 +89,8 @@ Set BMC Time With BMC And Manual
     [Template]  Set Time Using REST
 
 Set BMC Time With Both And Manual
-    #Operation    Owner  Mode    Status  BMC Time  Host Time
-    Set BMC Time  BOTH   MANUAL  ok      Set       Change
+    #Operation    Owner          Mode            Status  BMC Time  Host Time
+    Set BMC Time  ${BOTH_OWNER}  ${MANUAL_MODE}  ok      Set       Change
 
     [Documentation]  Set BMC time when time owner is Both and time mode is
     ...              manual.
@@ -100,8 +99,8 @@ Set BMC Time With Both And Manual
 
 
 Set BMC Time With Split And Manual
-    #Operation    Owner  Mode    Status  BMC Time  Host Time
-    Set BMC Time  SPLIT  MANUAL  ok      Set       No Change
+    #Operation    Owner           Mode            Status  BMC Time  Host Time
+    Set BMC Time  ${SPLIT_OWNER}  ${MANUAL_MODE}  ok      Set       No Change
 
     [Documentation]  Set BMC time when time owner is Split and time mode is
     ...              manual.
@@ -109,8 +108,8 @@ Set BMC Time With Split And Manual
     [Template]  Set Time Using REST
 
 Set BMC Time With BMC And NTP
-    #Operation    Owner  Mode    Status  BMC Time  Host Time
-    Set BMC Time  BMC    NTP     error   Not Set   No Change
+    #Operation    Owner           Mode            Status  BMC Time  Host Time
+    Set BMC Time  ${BMC_OWNER}    ${NTP_MODE}     error   Not Set   No Change
 
     [Documentation]  Set BMC time when time owner is BMC and time mode is
     ...              NTP.
@@ -118,16 +117,16 @@ Set BMC Time With BMC And NTP
     [Template]  Set Time Using REST
 
 Set BMC Time With Host And Manual
-    #Operation    Owner  Mode    Status  BMC Time  Host Time
-    Set BMC Time  HOST   MANUAL  error   Not Set   No Change
+    #Operation    Owner           Mode            Status  BMC Time  Host Time
+    Set BMC Time  ${HOST_OWNER}   ${MANUAL_MODE}  error   Not Set   No Change
     [Documentation]  Set BMC time when time owner is Host and time mode is
     ...              Manual.
     [Tags]  Set_BMC_Time_With_Host_And_Manual
     [Template]  Set Time Using REST
 
 Set BMC Time With Both And NTP
-    #Operation    Owner  Mode    Status  BMC Time  Host Time
-    Set BMC Time  BOTH   NTP     error   Not Set   No Change
+    #Operation    Owner           Mode            Status  BMC Time  Host Time
+    Set BMC Time  ${BOTH_OWNER}   ${NTP_MODE}     error   Not Set   No Change
 
     [Documentation]  Set BMC time when time owner is Both and time mode is
     ...              NTP.
@@ -135,8 +134,8 @@ Set BMC Time With Both And NTP
     [Template]  Set Time Using REST
 
 Set BMC Time With Split And NTP
-    #Operation    Owner  Mode    Status  BMC Time  Host Time
-    Set BMC Time  SPLIT  NTP     error   Not Set   No Change
+    #Operation    Owner           Mode            Status  BMC Time  Host Time
+    Set BMC Time  ${SPLIT_OWNER}  ${NTP_MODE}     error   Not Set   No Change
 
     [Documentation]  Set BMC time when time owner is Split and time mode is
     ...              NTP.
@@ -144,8 +143,8 @@ Set BMC Time With Split And NTP
     [Template]  Set Time Using REST
 
 Set Host Time With Host And Manual
-    #Operation     Owner  Mode    Status  BMC Time  Host Time
-    Set Host Time  HOST   MANUAL  ok      Change    Set
+    #Operation     Owner          Mode            Status  BMC Time  Host Time
+    Set Host Time  ${HOST_OWNER}  ${MANUAL_MODE}  ok      Change    Set
 
     [Documentation]  Set host time when time owner is host and time mode is
     ...              manual.
@@ -153,8 +152,8 @@ Set Host Time With Host And Manual
     [Template]  Set Time Using REST
 
 Set Host Time With Both And Manual
-    #Operation     Owner  Mode    Status  BMC Time  Host Time
-    Set Host Time  BOTH   MANUAL  ok      Change    Set
+    #Operation     Owner          Mode            Status  BMC Time  Host Time
+    Set Host Time  ${BOTH_OWNER}  ${MANUAL_MODE}  ok      Change    Set
 
     [Documentation]  Set host time when time owner is both and time mode is
     ...              manual.
@@ -162,8 +161,8 @@ Set Host Time With Both And Manual
     [Template]  Set Time Using REST
 
 Set Host Time With Both And NTP
-    #Operation     Owner  Mode    Status  BMC Time   Host Time
-    Set Host Time  BOTH   NTP     error   No Change  Not Set
+    #Operation     Owner           Mode           Status  BMC Time   Host Time
+    Set Host Time  ${BOTH_OWNER}   ${NTP_MODE}    error   No Change  Not Set
 
     [Documentation]  Set host time when time owner is both and time mode is
     ...              NTP.
@@ -171,8 +170,8 @@ Set Host Time With Both And NTP
     [Template]  Set Time Using REST
 
 Set Host Time With Split And Manual
-    #Operation     Owner  Mode    Status  BMC Time   Host Time
-    Set Host Time  SPLIT  MANUAL  ok      No Change  Set
+    #Operation     Owner           Mode            Status  BMC Time   Host Time
+    Set Host Time  ${SPLIT_OWNER}  ${MANUAL_MODE}  ok      No Change  Set
 
     [Documentation]  Set host time when time owner is split and time mode is
     ...              manual.
@@ -180,8 +179,8 @@ Set Host Time With Split And Manual
     [Template]  Set Time Using REST
 
 Set Host Time With Split And NTP
-    #Operation     Owner  Mode    Status   BMC Time   HOST Time
-    Set Host Time  SPLIT  NTP     ok       No Change  Set
+    #Operation     Owner           Mode            Status   BMC Time   HOST Time
+    Set Host Time  ${SPLIT_OWNER}  ${NTP_MODE}     ok       No Change  Set
 
     [Documentation]  Set host time when time owner is split and time mode is
     ...              NTP.
@@ -189,16 +188,16 @@ Set Host Time With Split And NTP
     [Template]  Set Time Using REST
 
 Set Host Time With BMC And Manual
-    #Operation     Owner  Mode    Status   BMC Time   HOST Time
-    Set Host Time  BMC    MANUAL  error    No Change  Not Set
+    #Operation     Owner           Mode            Status   BMC Time   HOST Time
+    Set Host Time  ${BMC_OWNER}    ${MANUAL_MODE}  error    No Change  Not Set
     [Documentation]  Set host time when time owner is BMC and time mode is
     ...              Manual.
     [Tags]  Set_Host_Time_With_BMC_And_Manual
     [Template]  Set Time Using REST
 
 Set Host Time With BMC Owner NTP
-    #Operation     Owner  Mode    Status   BMC Time   HOST Time
-    Set Host Time  BMC    NTP     error    No Change  Not Set
+    #Operation     Owner           Mode            Status   BMC Time   HOST Time
+    Set Host Time  ${BMC_OWNER}    ${NTP_MODE}     error    No Change  Not Set
     [Documentation]  Set host time when time owner is BMC and time mode is
     ...              NTP.
     [Tags]  Set_Host_Time_With_BMC_And_NTP
@@ -209,32 +208,32 @@ Set Invalid Time Mode
     ...              that it should throw error.
     [Tags]  Set_Invalid_Time_Mode
 
-    ${timemode}=  Set Variable  abc
+    ${timemode}=  Set Variable  xyz.openbmc_project.Time.Synchronization.Method.abc
     ${valueDict}=  Create Dictionary  data=${timemode}
 
     ${resp}=  OpenBMC Put Request
-    ...  ${SETTING_HOST}/attr/time_mode  data=${valueDict}
+    ...  ${TIME_MANAGER_URI}sync_method/attr/TimeSyncMethod  data=${valueDict}
     ${jsondata}=  to JSON  ${resp.content}
     Should Be Equal  ${jsondata['status']}  error
 
-    ${mode}=  Read Attribute  ${SETTING_HOST}  time_mode
-    Should Not Be Equal  ${mode}  abc
+    ${mode}=  Read Attribute  ${TIME_MANAGER_URI}sync_method  TimeSyncMethod
+    Should Not Be Equal  ${mode}  xyz.openbmc_project.Time.Synchronization.Method.abc
 
 Set Invalid Time Owner
     [Documentation]  Set time owner with invalid value using REST and verify
     ...              that it should throw error.
     [Tags]  Set_Invalid_Time_Owner
 
-    ${timeowner}=  Set Variable  xyz
+    ${timeowner}=  Set Variable  xyz.openbmc_project.Time.Owner.Owners.xyz
     ${valueDict}=  Create Dictionary  data=${timeowner}
 
     ${resp}=  OpenBMC Put Request
-    ...  ${SETTING_HOST}/attr/time_owner  data=${valueDict}
+    ...  ${TIME_MANAGER_URI}owner/attr/TimeOwner  data=${valueDict}
     ${jsondata}=  to JSON  ${resp.content}
     Should Be Equal  ${jsondata['status']}  error
 
-    ${owner}=  Read Attribute  ${SETTING_HOST}  time_owner
-    Should Not Be Equal  ${owner}  xyz
+    ${owner}=  Read Attribute  ${TIME_MANAGER_URI}owner  TimeOwner
+    Should Not Be Equal  ${owner}  xyz.openbmc_project.Time.Owner.Owners.xyz
 
 
 *** Keywords ***
@@ -260,7 +259,7 @@ Set Time Owner
     ${valueDict}=  Create Dictionary  data=${timeowner}
 
     ${resp}=  OpenBMC Put Request
-    ...  ${SETTING_HOST}/attr/time_owner  data=${valueDict}
+    ...  ${TIME_MANAGER_URI}owner/attr/TimeOwner  data=${valueDict}
     ${jsondata}=  to JSON  ${resp.content}
 
     ${host_state}=  Get Host State
@@ -270,14 +269,11 @@ Set Time Owner
     ...  ELSE   Run keyword
     ...  Initiate Host PowerOff
 
-    ${owner}=  Read Attribute  ${SETTING_HOST}  time_owner
+    ${owner}=  Read Attribute  ${TIME_MANAGER_URI}owner  TimeOwner
     Should Be Equal  ${owner}  ${args}
 
-    ${current_mode}=
-    ...  Read Attribute  ${TIME_MANAGER_URI.rstrip("/")}  curr_time_owner
-    Should Be Equal  ${current_mode}  ${args}
-
     [Return]  ${jsondata['status']}
+
 
 Set Time Mode
     [Arguments]  ${args}
@@ -287,46 +283,31 @@ Set Time Mode
     ${valueDict}=  Create Dictionary  data=${timemode}
 
     ${resp}=  OpenBMC Put Request
-    ...  ${SETTING_HOST}/attr/time_mode  data=${valueDict}
+    ...  ${TIME_MANAGER_URI}sync_method/attr/TimeSyncMethod  data=${valueDict}
     ${jsondata}=  to JSON  ${resp.content}
     Sleep  5s
 
-    ${mode}=  Read Attribute  ${SETTING_HOST}  time_mode
+    ${mode}=  Read Attribute  ${TIME_MANAGER_URI}sync_method  TimeSyncMethod
     Should Be Equal  ${mode}  ${args}
 
-    ${current_mode}=
-    ...  Read Attribute  ${TIME_MANAGER_URI.rstrip("/")}  curr_time_mode
-    Should Be Equal  ${current_mode}  ${args}
 
 Get BMC Time Using REST
     [Documentation]  Returns BMC time of the system via REST
-    ...              Time Format : YYYY-MM-DD hh:mm:ss.mil
-    ...              eg. 2016-12-14 07:09:58.000
+    ...              Time Format : epoch time in microseconds
+    ...              e.g 1507809604687329
 
-    @{time_owner}=  Create List  BMC
-    ${data}=  Create Dictionary  data=@{time_owner}
-    ${resp}=  OpenBMC Post Request
-    ...  ${TIME_MANAGER_URI}action/GetTime  data=${data}
-    ${jsondata}=  To JSON  ${resp.content}
-    ${time_epoch}=  Get From List  ${jsondata["data"]}  0
-    ${resp}=  Convert Date
-    ...  ${time_epoch}  date_format=%a %b %d %H:%M:%S %Y %Z
+    ${resp}=  Read Attribute  ${TIME_MANAGER_URI}/bmc  Elapsed
     [Return]  ${resp}
+
 
 Get HOST Time Using REST
     [Documentation]  Returns HOST time of the system via REST
-    ...              Time Format : YYYY-MM-DD hh:mm:ss.mil
-    ...              eg. 2016-12-14 07:09:58.000
+    ...              Time Format : epoch time in microseconds
+    ...              e.g 1507809604687329
 
-    @{time_owner}=  Create List  HOST
-    ${data}=  Create Dictionary  data=@{time_owner}
-    ${resp}=  OpenBMC Post Request
-    ...  ${TIME_MANAGER_URI}action/GetTime  data=${data}
-    ${jsondata}=  To JSON  ${resp.content}
-    ${time_epoch}=  Get From List  ${jsondata["data"]}   0
-    ${resp}=  Convert Date
-    ...  ${time_epoch}  date_format=%a %b %d %H:%M:%S %Y %Z
+    ${resp}=  Read Attribute  ${TIME_MANAGER_URI}/host  Elapsed
     [Return]  ${resp}
+
 
 Set Time Using REST
     [Arguments]  ${operation}  ${owner}  ${mode}  ${status}  ${bmc_time}
@@ -347,25 +328,22 @@ Set Time Using REST
     Set Time Owner  ${owner}
     Set Time Mode  ${mode}
 
-    ${setdate}=  Convert Date  ${SYSTEM_TIME_VALID}
-    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=yes
+    ${setdate}=  Set Variable  ${SYSTEM_TIME_VALID_EPOCH}
 
-    @{bmc_date_list}=  Create List  BMC  ${setdate}
-    @{host_date_list}=  Create List  HOST  ${SYSTEM_TIME_VALID_EPOCH}
-
-    ${time_owner_date}=  Set Variable If
-    ...  '${operation}' == 'Set BMC Time'  ${bmc_date_list}
-    ...  '${operation}' == 'Set Host Time'  ${host_date_list}
+    ${time_owner_url}=  Set Variable If
+    ...  '${operation}' == 'Set BMC Time'  ${TIME_MANAGER_URI}bmc
+    ...  '${operation}' == 'Set Host Time'  ${TIME_MANAGER_URI}host
 
     ${start_time}=  Get Current Date
 
     ${old_bmc_time}=  Get BMC Time Using REST
     ${old_host_time}=  Get HOST Time Using REST
 
-    ${data}=  Create Dictionary  data=${time_owner_date}
-    ${resp}=  OpenBMC Post Request
-    ...  ${TIME_MANAGER_URI}action/SetTime  data=${data}
-    ${jsondata}=  To JSON  ${resp.content}
+    ${data}=  Set Variable  ${SYSTEM_TIME_VALID_EPOCH}
+    ${valueDict}=  Create Dictionary  data=${data}
+    ${resp}=  OpenBMC Put Request
+    ...  ${time_owner_url}/attr/Elapsed  data=${valueDict}
+    ${jsondata}=  to JSON  ${resp.content}
     Should Be Equal As Strings  ${jsondata['status']}  ${status}
 
     ${new_bmc_time}=  Get BMC Time Using REST
@@ -374,6 +352,21 @@ Set Time Using REST
     ${end_time}=  Get Current Date
     ${time_duration}=  Subtract Date From Date  ${start_time}  ${end_time}
     ${time_duration}  Evaluate  abs(${time_duration})
+
+    # Convert epoch time from microseconds to seconds
+    ${setdate}=  Evaluate  ${SYSTEM_TIME_VALID_EPOCH}/1000000
+    ${new_bmc_time}=  Evaluate  ${new_bmc_time}/1000000
+    ${old_bmc_time}=  Evaluate  ${old_bmc_time}/1000000
+    ${new_host_time}=  Evaluate  ${new_host_time}/1000000
+    ${old_host_time}=  Evaluate  ${old_host_time}/1000000
+
+    # Convert epoch time to date format: YYYY-MM-DD hh:mm:ss.mil
+    # e.g. 2017-02-16 22:14:11.000
+    ${setdate}=  Convert Date  ${setdate}
+    ${new_bmc_time}=  Convert Date  ${new_bmc_time}
+    ${old_bmc_time}=  Convert Date  ${old_bmc_time}
+    ${new_host_time}=  Convert Date  ${new_host_time}
+    ${old_host_time}=  Convert Date  ${old_host_time}
 
     ${bmc_diff_set_new}=
     ...  Subtract Date From Date  ${setdate}  ${new_bmc_time}
@@ -415,6 +408,6 @@ Post Test Case Execution
     ...  3. Close all open SSH connections.
 
     FFDC On Test Case Fail
-    Set Time Owner  BMC
-    Set Time Mode  NTP
+    Set Time Owner  ${BMC_OWNER}
+    Set Time Mode  ${NTP_MODE}
     Close All Connections
