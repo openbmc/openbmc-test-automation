@@ -2,8 +2,8 @@
 Documentation       This module is for OS checkstop opertions.
 Resource            ../../lib/rest_client.robot
 Resource            ../../lib/utils.robot
-Resource            ../../lib/ras/variables.py
-Resource            ../../lib/bmc_ssh_utils.py
+Variables           ../../lib/ras/variables.py
+Library             ../../lib/bmc_ssh_utils.py
 Library             OperatingSystem
 
 *** Keywords ***
