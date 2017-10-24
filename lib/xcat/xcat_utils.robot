@@ -17,7 +17,7 @@ Open Connection And Login To XCAT
     # xcat_host  IP address of the XCAT server.
     # xcat_port  Network port on which XCAT server accepts ssh session.
 
-    Open Connection  ${xcat_host}  port=${xcat_port}
+    SSHLibrary.Open Connection  ${xcat_host}  port=${xcat_port}
     Login  ${XCAT_USERNAME}  ${XCAT_PASSWORD}
 
 
