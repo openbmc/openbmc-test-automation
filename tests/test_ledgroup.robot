@@ -99,7 +99,7 @@ Verify Rear Power LED Association With Group LED
 
     Set LED State  Off  power_on
     ${resp}=  Get System LED State  rear_power
-    Should Be Equal  ${resp}  Off
+    Should Be Equal  ${resp}  Blink
 
 
 ***Keywords***
