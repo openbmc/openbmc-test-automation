@@ -52,8 +52,11 @@ Host Off And On
 
     Initiate Host PowerOff
 
+    Delete All Error Logs
     Initiate Host Boot
 
     # TODO: Host shutdown race condition.
     # Wait 30 seconds before Powering Off.
     Sleep  30s
+
+    Error Logs Should Not Exist
