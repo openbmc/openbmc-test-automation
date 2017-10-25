@@ -36,7 +36,7 @@ Get OCC Active State
 
 
 Count Object Entries
-    [Documentation]  Count the occurence number of a given object.
+    [Documentation]  Count the occurrence number of a given object.
     [Arguments]  ${object_base_uri_path}  ${object_name}
 
     # Description of argument(s):

@@ -488,7 +488,7 @@ Create OS Console File Path
     [Documentation]  Create OS console file path name and return it.
     [Arguments]  ${log_file_path}=${EMPTY}
 
-    # Description of arguements:
+    # Description of arguments:
     # file_path  The caller's candidate value.  If this value is ${EMPTY}, this
     #            keyword will compose a file path name.  Otherwise, this
     #            keyword will use the caller's file_path value.  In either
@@ -982,7 +982,7 @@ Login To OS Host
     [Documentation]  Login to OS Host.
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}
-    # Desription of arguments:
+    # Description of arguments:
     # ${os_host} IP address of the OS Host.
     # ${os_username}  OS Host Login user name.
     # ${os_password}  OS Host Login passwrd.

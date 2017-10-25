@@ -61,7 +61,7 @@ Update PNOR Image
     Run Key  Wait Until Keyword Succeeds \ 7 min \ 10 sec \ Is PNOR Flash Done
 
 Validate Power On
-    [Documentation]  Power the host on, and validate that the sytem booted.
+    [Documentation]  Power the host on, and validate that the system booted.
     [Teardown]  Validate Power On Teardown
 
     # Have to start SOL logging here.  Starting SOL in test setup closes the

@@ -38,7 +38,7 @@ Verify BMC Reset Reload With System On
 *** Keywords ***
 
 Check Reset Reload Status
-    [Documentation]  Retuns reset reload status based on file presence.
+    [Documentation]  Returns reset reload status based on file presence.
 
     ${rr_status}=  Execute Command On BMC
     ...  test -e /run/openbmc/chassis@0-on && echo "Yes" || echo "No"

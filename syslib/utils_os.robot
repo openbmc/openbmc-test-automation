@@ -363,7 +363,7 @@ Retrieve Hardware Info
     [Return]  ${output}
 
 Verify JSON String
-    [Documentation]  Ensure the JSON string content is seperated by commas.
+    [Documentation]  Ensure the JSON string content is separated by commas.
     [Arguments]  ${unver_string}
     # Description of argument(s):
     # unver_string  JSON String we will be checking for lshw comma errors.
