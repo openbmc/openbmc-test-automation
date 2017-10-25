@@ -144,6 +144,6 @@ Post Testcase Execution
 
     Wait Until Keyword Succeeds  3 min  15 sec  Verify No Dump In Progress
 
-    Delete All BMC Dump
     FFDC On Test Case Fail
+    Delete All BMC Dump
     Close All Connections
