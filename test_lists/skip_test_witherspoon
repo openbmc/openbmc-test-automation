@@ -29,6 +29,3 @@
 -e User_Management
 # NA test case for Witherspoon
 -e Verify_Channel_Checkstop_Through_OS_With_Auto_Reboot
-# https://w3.rchland.ibm.com/projects/bestquest/?defect=SW397623
--e Verify_Recoverable_Callout_Handling_For_CXA_With_Threshold_5
--e Verify_Recoverable_Callout_Handling_For_CXA_With_Threshold_32
