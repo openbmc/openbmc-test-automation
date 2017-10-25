@@ -71,7 +71,7 @@ Set Invalid SOL Retry Count
     [Documentation]  Verify invalid SOL's retry count via IPMI.
     [Tags]  Set_Invalid_SOL_Retry_Count
 
-    # Any interger above 7 is invalid for SOL retry count.
+    # Any integer above 7 is invalid for SOL retry count.
     ${value}=  Evaluate  random.randint(8, 10000)  modules=random
 
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
@@ -83,7 +83,7 @@ Set Invalid SOL Retry Interval
     [Documentation]  Verify invalid SOL's retry interval via IPMI.
     [Tags]  Set_Invalid_SOL_Retry_Interval
 
-    # Any interger above 255 is invalid for SOL retry interval.
+    # Any integer above 255 is invalid for SOL retry interval.
     ${value}=  Evaluate  random.randint(256, 10000)  modules=random
 
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
@@ -107,7 +107,7 @@ Set Invalid SOL Character Send Threshold
     [Documentation]  Verify invalid SOL's character send threshold via IPMI.
     [Tags]  Set_Invalid_SOL_Character_Send_Threshold
 
-    # Any interger above 255 is invalid for SOL character send threshold.
+    # Any integer above 255 is invalid for SOL character send threshold.
     ${value}=  Evaluate  random.randint(256, 10000)  modules=random
 
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command

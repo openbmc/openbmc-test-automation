@@ -369,7 +369,7 @@ Reset Network Interface During Code Update
     [Documentation]  Disable and re-enable the network while doing code update.
     [Arguments]  ${image_file_path}  ${reboot}
 
-    # Reseting the network will be done via the serial console.
+    # Resetting the network will be done via the serial console.
     #
     # Description of argument(s):
     # image_file_path   Path to the image file to update to.

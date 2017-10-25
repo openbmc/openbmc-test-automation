@@ -116,7 +116,7 @@ Initialize OpenBMC
 
     # Description of argument(s):
     # timeout  REST login attempt time out.
-    # quiet    Supress console log if set.
+    # quiet    Suppress console log if set.
 
     # TODO : Task to revert this changes openbmc/openbmc-test-automation#532
     # This will retry at 20 second interval.
@@ -128,7 +128,7 @@ Post Login Request
 
     # Description of argument(s):
     # timeout  REST login attempt time out.
-    # quiet    Supress console log if set.
+    # quiet    Suppress console log if set.
 
     Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=3
     ${headers}=  Create Dictionary  Content-Type=application/json

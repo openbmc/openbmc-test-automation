@@ -48,7 +48,7 @@ Delete BMC Dump
     [Arguments]  ${dump_id}
 
     # Description of Argument(s):
-    # dump_id  An interger value that identifies a particular dump (e.g. 1, 3).
+    # dump_id  An integer value that identifies a particular dump (e.g. 1, 3).
 
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  OpenBMC Post Request

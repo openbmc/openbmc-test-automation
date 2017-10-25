@@ -5,7 +5,7 @@ Documentation       This suite is for testing Open BMC user account management.
 ...                 instance per test case however we end up running multiple
 ...                 test and multiple iteration. This creates scenario where
 ...                 the same previous user is generated.
-...                 As a good pratice, clean up all the users at the end of
+...                 As a good practice, clean up all the users at the end of
 ...                 test.
 
 Resource            ../lib/rest_client.robot

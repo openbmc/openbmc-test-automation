@@ -69,7 +69,7 @@ Run Inband IPMI Raw Command
     [Arguments]  ${args}  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}
 
-    # Desription of arguments:
+    # Description of arguments:
     # ${args}  parameters to IPMI command.
     # ${os_host} IP address of the OS Host.
     # ${os_username}  OS Host Login user name.
@@ -88,7 +88,7 @@ Run Inband IPMI Standard Command
     [Arguments]  ${args}  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}
 
-    # Desription of arguments:
+    # Description of arguments:
     # ${args}  parameters to IPMI command.
     # ${os_host} IP address of the OS Host.
     # ${os_username}  OS Host Login user name.

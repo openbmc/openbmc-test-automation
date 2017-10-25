@@ -75,7 +75,7 @@ Validate Or Open Connection
 
     # alias            The alias of the connection to validate.
     # host             The DNS name or IP of the host to validate.
-    # connection_args  A dictionary of arguments to pass to Open Conection
+    # connection_args  A dictionary of arguments to pass to Open Connection
     #                  and Log In (see above) if the connection is not open. May
     #                  contain, but does not need to contain, the host or alias.
 

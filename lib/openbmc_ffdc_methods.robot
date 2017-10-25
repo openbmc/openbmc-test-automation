@@ -318,7 +318,7 @@ SCP Coredump Files
 ##############################################################################
 Collect eSEL Log
     [Documentation]  Collect eSEL log from logging entry and convert eSEL data
-    ...              to elog formated string text file.
+    ...              to elog formatted string text file.
     [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
 
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/enumerate  quiet=${1}
@@ -374,7 +374,7 @@ Convert eSEL To Elog Format
     [Documentation]  Execute parser tool on the eSEL data file to generate
     ...              formatted error log.
     [Arguments]  ${esel_file_path}
-    # Desription of arguments:
+    # Description of arguments:
     # esel_file_path  Absolute path of the eSEL data (e.g.
     #                 /tmp/w55.170404.154820.esel).
 

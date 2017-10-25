@@ -25,7 +25,7 @@
 -e Full_Suite_Regression
 -e AC_Cycles
 -e Network_Nping
-# Mutliple runs only needed for stability.
+# Multiple runs only needed for stability.
 -e Run_Multiple_Power_Cycle
 -e Run_Multiple_Reboot
 -e General_boot_testing

@@ -14,7 +14,7 @@ r"""
 # -------------------
 
 # -----------------------------------------------------------------
-# Dict Name {  Index string : { Key String :  Comand string} }
+# Dict Name {  Index string : { Key String :  Command string} }
 # -----------------------------------------------------------------
 # Add cmd's needed to be part of the ffdc report manifest file
 FFDC_BMC_CMD = {
