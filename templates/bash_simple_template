@@ -8,7 +8,6 @@
 # parm1            Bla, bla, bla (e.g. "example data").
 
 
-###############################################################################
 function get_parms {
 
   # Get program parms.
@@ -18,10 +17,8 @@ function get_parms {
   return 0
 
 }
-###############################################################################
 
 
-###############################################################################
 function validate_parms {
 
   # Validate program parameters.
@@ -36,20 +33,9 @@ function validate_parms {
   return 0
 
 }
-###############################################################################
 
 
-###############################################################################
 function mainf {
-
-  # We create a mainf for a couple of reasons:
-  # The coding rules in a template are slightly different than for the true
-  # mainline.  We wish to eliminate those inconsistencies.  Examples:
-  # - The "local" builtin is allowed in functions but not in the mainline.
-  # - It is good practice to have functions return 1 rather than exit 1.
-  #   return is not valid in the mainline.  Again, we don't want to have to
-  #   care when we code things about whether we are in the mainline or a
-  #   function.
 
   get_parms "$@" || return 1
 
@@ -60,14 +46,10 @@ function mainf {
   return 0
 
 }
-###############################################################################
 
 
-###############################################################################
 # Main
 
   mainf "${@}"
   rc="${?}"
   exit "${rc}"
-
-###############################################################################
