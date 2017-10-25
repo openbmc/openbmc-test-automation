@@ -28,7 +28,7 @@ Verify No Dump In Progress
     [Documentation]  Verify no dump in progress.
 
     ${dump_progress}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  [ -d /tmp/obmcdump* ] && echo 'In Progress' || echo 'No Progress'
+    ...  [ -f /tmp/obmcdump*.tar.xz ] && echo 'In Progress' || echo 'No Progress'
 
     Should Be Equal As Strings  ${dump_progress}  No Progress
 
