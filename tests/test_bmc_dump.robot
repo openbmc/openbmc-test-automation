@@ -108,9 +108,7 @@ Create And Delete BMC Dump Multiple Times
     [Tags]  Create_And_Delete_BMC_Dump_Multiple_Times
 
     :FOR  ${INDEX}  IN RANGE  1  5
-    \  ${dump_id}=  Create User Initiated Dump
-    \  Wait Until Keyword Succeeds  3 min  15 sec
-    ...  Check Dump Existence  ${dump_id}
+    \  Create User Initiated Dump
     \  Delete BMC Dump  ${dump_id}
 
 
