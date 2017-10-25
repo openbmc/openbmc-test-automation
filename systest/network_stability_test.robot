@@ -67,7 +67,8 @@ BMC Network Payload
     [Documentation]  Start creating network activity over BMC network.
 
     # REST GET enumerate call.
-    OpenBMC Get Request  /xyz/openbmc_project/enumerate  quiet=${1}
+    OpenBMC Get Request
+    ...  /xyz/openbmc_project/enumerate  timeout=${25}  quiet=${1}
 
     # Upload 32 MB data via REST to BMC.
     REST Upload File To BMC
