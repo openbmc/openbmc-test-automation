@@ -19,16 +19,6 @@ ${VALUE_MSG_ERR}      ValueError: Invalid input. Data not in allowed values
 
 *** Test Cases ***
 
-
-Get Boot Flags
-
-    [Documentation]   ***GOOD PATH***
-    ...               This test case tries to get the boot flags
-    [Tags]  Get_Boot_Flags
-
-    ${resp}=   Read Attribute   ${SETTING_HOST}   boot_flags
-    should not be empty   ${resp}
-
 Get Power Value
 
     [Documentation]   ***GOOD PATH***
@@ -92,18 +82,6 @@ Set Power With Max Power Value
     Write Attribute   ${SETTING_HOST}    power_cap   data=${valueDict}
     ${value}=      Read Attribute   ${SETTING_HOST}    power_cap
     Should Be Equal     ${value}      ${valueToBeSet}
-
-
-Set Boot Flag With String
-    [Documentation]   Set boot flag with invalid string and expect error.
-    [Tags]  Set_Boot_Flag_With_String
-
-    ${valueToBeSet}=   Set Variable     3ab56f
-    ${error_msg}=  Run Keyword And Expect Error
-    ...  *   Write To Power Attribute  boot_flags  ${valueToBeSet}
-    Should Contain  ${error_msg}  ${VALUE_MSG_ERR}
-    ${value}=  Read Attribute  ${SETTING_HOST}  boot_flags
-    Should Not Be Equal  ${value}  ${valueToBeSet}
 
 
 *** Keywords ***
