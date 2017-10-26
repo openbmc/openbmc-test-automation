@@ -45,16 +45,22 @@ Putscom Operations On OS
 
 Get ProcChipId From OS
     [Documentation]  Get processor chip ID values based on the input.
-    [Arguments]      ${chip_type}
+    [Arguments]      ${chip_type}  ${procchip_type}
     # Description of arguments:
     # chip_type      The chip type (Processor/Centaur).
+    # procchip_type  Processor chip type
+    #                (Master_Processor/Non_Master_processor).
 
     ${cmd}=  Catenate  -l | grep -i ${chip_type} | cut -c1-8
     ${proc_chip_id}=  Getscom Operations On OS  ${cmd}
+    ${proc_ids}=  Split String  ${proc_chip_id}
+    ${proc_id}=  Run Keyword If  '${procchip_type}' == 'Master_Processor'
+    \  ...  Get From List  ${proc_ids}  1
+    \  ...  ELSE  Get From List  ${proc_ids}  0
+
     # Example output:
     # 00000008
-    # 00000000
-    [Return]  ${proc_chip_id}
+    [Return]  ${proc_id}
 
 Get Core IDs From OS
     [Documentation]  Get Core IDs corresponding to the input processor chip ID.
