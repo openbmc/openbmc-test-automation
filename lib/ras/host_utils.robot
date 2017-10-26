@@ -45,16 +45,26 @@ Putscom Operations On OS
 
 Get ProcChipId From OS
     [Documentation]  Get processor chip ID values based on the input.
-    [Arguments]      ${chip_type}
+    [Arguments]      ${chip_type}  ${master_proc_chip}
     # Description of arguments:
-    # chip_type      The chip type (Processor/Centaur).
+    # chip_type         The chip type (Processor/Centaur).
+    # master_proc_chip  Processor chip type ('True' or 'False').
 
     ${cmd}=  Catenate  -l | grep -i ${chip_type} | cut -c1-8
     ${proc_chip_id}=  Getscom Operations On OS  ${cmd}
     # Example output:
+    # getscom -l | grep processor | cut -c1-8
+    # 00000008     - False
+    # 00000000     - True
+
+    ${proc_ids}=  Split String  ${proc_chip_id}
+    ${proc_id}=  Run Keyword If  '${master_proc_chip}' == 'True'
+    \  ...  Get From List  ${proc_ids}  1
+    \  ...  ELSE  Get From List  ${proc_ids}  0
+
+    # Example output:
     # 00000008
-    # 00000000
-    [Return]  ${proc_chip_id}
+    [Return]  ${proc_id}
 
 Get Core IDs From OS
     [Documentation]  Get Core IDs corresponding to the input processor chip ID.
@@ -89,7 +99,6 @@ FIR Address Translation Through HOST
     # 0x10010c00
     [Return]  ${translated_addr[1]}
 
-
 Inject Error Through HOST
     [Documentation]  Inject checkstop on processor through HOST.
     ...              Test sequence:
@@ -97,28 +106,28 @@ Inject Error Through HOST
     ...              2. Clear any existing gard records
     ...              3. Inject Error on processor/centaur
     [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
+    ...  ${master_proc_chip}=True
     # Description of argument(s):
     # fir                 FIR (Fault isolation register) value (e.g. 2011400).
     # chip_address        chip address (e.g 2000000000000000).
     # threshold_limit     Threshold limit (e.g 1, 5, 32).
+    # master_proc_chip    Processor chip type (True' or 'False').
 
     Delete Error Logs
     Login To OS Host
     Gard Operations On OS  clear all
 
     # Fetch processor chip IDs.
-    ${chip_ids}=  Get ProcChipId From OS  Processor
-    ${proc_ids}=  Split String  ${chip_ids}
-    ${proc_id}=  Get From List  ${proc_ids}  1
+    ${proc_chip_id}=  Get ProcChipId From OS  Processor  ${master_proc_chip}
 
     ${threshold_limit}=  Convert To Integer  ${threshold_limit}
     :FOR  ${i}  IN RANGE  ${threshold_limit}
-    \  Run Keyword  Putscom Operations On OS  ${proc_id}  ${fir}  ${chip_address}
+    \  Run Keyword  Putscom Operations On OS  ${proc_chip_id}  ${fir}
+    ...  ${chip_address}
     # Adding delay after each error injection.
     \  Sleep  10s
     # Adding delay to get error log after error injection.
     Sleep  120s
-
 
 Code Update Unrecoverable Error Inject
     [Documentation]  Inject UE MCACALFIR checkstop on processor through

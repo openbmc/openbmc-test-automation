@@ -23,8 +23,8 @@ Force Tags          Host_RAS
 *** Variables ***
 ${stack_mode}       normal
 
-*** Test Cases ***
 
+*** Test Cases ***
 # Memory channel (MCACALIFIR) related error injection.
 
 Verify Recoverable Callout Handling For MCA With Threshold 1
@@ -36,6 +36,7 @@ Verify Recoverable Callout Handling For MCA With Threshold 1
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcacalfir_th1
     Inject Recoverable Error With Threshold Limit Through Host
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
 
 Verify Recoverable Callout Handling For MCA With Threshold 32
     [Documentation]  Verify recoverable callout handling for MCACALIFIR with
@@ -164,7 +165,7 @@ Verify Recoverable Callout Handling For L2FIR With Threshold 1
     [Tags]  Verify_Recoverable_Callout_Handling_For_L2FIR_With_Threshold_1
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L2FIR_RECV1
-    ${translated_fir}=  Fetch FIR Address Translation Value  0  ${value[0]}  EX
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l2fir_th1
     Inject Recoverable Error With Threshold Limit Through Host
     ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
@@ -177,7 +178,7 @@ Verify Recoverable Callout Handling For L3FIR With Threshold 1
     [Tags]  Verify_Recoverable_Callout_Handling_For_L3FIR_With_Threshold_1
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L3FIR_RECV1
-    ${translated_fir}=  Fetch FIR Address Translation Value  0  ${value[0]}  EX
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l3fir_th1
     Inject Recoverable Error With Threshold Limit Through Host
     ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
@@ -188,7 +189,7 @@ Verify Recoverable Callout Handling For L3FIR With Threshold 32
     [Tags]  Verify_Recoverable_Callout_Handling_For_L3FIR_With_Threshold_32
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L3FIR_RECV32
-    ${translated_fir}=  Fetch FIR Address Translation Value  0  ${value[0]}  EX
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l3fir_th32
     Inject Recoverable Error With Threshold Limit Through Host
     ...  ${translated_fir}  ${value[1]}  32  ${value[2]}  ${err_log_path}
@@ -213,7 +214,7 @@ Verify Recoverable Callout Handling For CMEFIR With Threshold 1
     [Tags]  Verify_Recoverable_Callout_Handling_For_CMEFIR_With_Threshold_1
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  CMEFIR_RECV1
-    ${translated_fir}=  Fetch FIR Address Translation Value  0  ${value[0]}  EX
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}cmefir_th1
     Inject Recoverable Error With Threshold Limit Through Host
     ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
@@ -254,15 +255,19 @@ Inject Recoverable Error With Threshold Limit Through Host
     ...              4. Verify & clear gard records.
     [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
     ...              ${signature_desc}  ${log_prefix}
+    ...              ${master_proc_chip}=True
     # Description of argument(s):
     # fir                 FIR (Fault isolation register) value (e.g. 2011400).
     # chip_address        Chip address (e.g 2000000000000000).
     # threshold_limit     Threshold limit (e.g 1, 5, 32).
     # signature_desc      Error log signature description.
     # log_prefix          Log path prefix.
+    # master_proc_chip    Processor chip type ('True' or 'False').
 
     Set Auto Reboot  1
     Inject Error Through HOST  ${fir}  ${chip_address}  ${threshold_limit}
+    ...  ${master_proc_chip}
+
     Is Host Running
     ${output}=  Gard Operations On OS  list
     Should Contain  ${output}  No GARD
@@ -280,6 +285,7 @@ Inject Unrecoverable Error Through Host
     ...              4. Verify & clear gard records.
     [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
     ...              ${signature_desc}  ${log_prefix}
+    ...              ${master_proc_chip}=True
     # Description of argument(s):
     # fir                 FIR (Fault isolation register) value (e.g. 2011400).
     # chip_address        Chip address (e.g 2000000000000000).
@@ -287,9 +293,11 @@ Inject Unrecoverable Error Through Host
     # signature_desc      Error Log signature description.
     #                     (e.g 'mcs(n0p0c0) (MCFIR[0]) mc internal recoverable')
     # log_prefix          Log path prefix.
+    # master_proc_chip    Processor chip type ('True' or 'False').
 
     Set Auto Reboot  1
     Inject Error Through HOST  ${fir}  ${chip_address}  ${threshold_limit}
+    ...  ${master_proc_chip}
     Wait Until Keyword Succeeds  500 sec  20 sec  Is Host Rebooted
     Wait for OS
     Verify And Clear Gard Records On HOST
@@ -297,17 +305,26 @@ Inject Unrecoverable Error Through Host
 
 Fetch FIR Address Translation Value
     [Documentation]  Fetch FIR address translation value through HOST.
-    [Arguments]  ${proc_chip_id}  ${fir}  ${target_type}
+    [Arguments]  ${fir}  ${target_type}  ${master_proc_chip}=True
     # Description of argument(s):
-    # proc_chip_id      Processor chip ID (e.g '0', '8').
-    # fir               FIR (Fault isolation register) value (e.g. 2011400).
-    # core_id           Core ID (e.g. 9).
-    # target_type       Target type (e.g. 'EX', 'EQ', 'C').
+    # fir                  FIR (Fault isolation register) value (e.g. 2011400).
+    # core_id              Core ID (e.g. 9).
+    # target_type          Target type (e.g. 'EX', 'EQ', 'C').
+    # master_proc_chip     Processor chip type ('True' or 'False').
 
     Login To OS Host
     Copy Address Translation Utils To HOST OS
 
-    ${core_ids}=  Get Core IDs From OS  0
+    # Fetch processor chip IDs.
+    ${proc_chip_id}=  Get ProcChipId From OS  Processor  ${master_proc_chip}
+    # Example output:
+    # 00000000
+
+    ${core_ids}=  Get Core IDs From OS  ${proc_chip_id[-1]}
+    # Example output:
+    #./probe_cpus.sh | grep 'CHIP ID: 0' | cut -c21-22
+    # ['14', '15', '16', '17']
+
     # Ignoring master core ID.
     ${output}=  Get Slice From List  ${core_ids}  1
     # Feth random non-master core ID.
