@@ -19,6 +19,12 @@ function get_parms {
 }
 
 
+function exit_function {
+
+  return
+
+}
+
 function validate_parms {
 
   # Validate program parameters.
@@ -29,6 +35,8 @@ function validate_parms {
     echo "**ERROR** You must provide..." >&2
     return 1
   fi
+
+  trap "exit_function $signal \$?" EXIT
 
   return 0
 
