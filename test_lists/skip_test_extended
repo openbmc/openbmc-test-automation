@@ -1,14 +1,5 @@
-# Remove old code update
-# TODO: https://github.com/openbmc/openbmc-test-automation/issues/1054
--e Test_Basic_BMC_Performance_Before_Code_Update
--e Check_Core_Dump_Exist_Before_Code_Update
--e Check_URLs_Before_Code_Update
+# Skip org code update.
 -e Initiate_Code_Update_BMC
--e Install_BMC_Debug_Tarball
--e Compare_URLs_Before_And_After_Code_Update
--e Test_Basic_BMC_Performance_At_Ready_State
--e Check_Core_Dump_Exist_After_Code_Update
--e Enable_Core_Dump_File_Size_To_Be_Unlimited
 -e BIOS_Code_Update
 # Needs Jenkins setup.
 # TODO: https://github.com/openbmc/openbmc-test-automation/issues/1005
@@ -18,6 +9,8 @@
 -e Reset_Network_During_BMC_Code_Update
 -e Reset_Network_During_Host_Code_Update
 -e Host_Mult_Code_Update
+-e Enable_Field_Mode
+-e Attempt_To_Disable_Field_Mode_Via_REST
 # Others NA tests.
 -e Run_Keyword_Pgm
 # Factory reset must not run in CT.
