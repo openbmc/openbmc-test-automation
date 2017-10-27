@@ -17,7 +17,6 @@ System Driver Data
     Log BMC Driver Details
     ${software}=  Get Host Software Objects Details
     Log  ${software}
-    Log BMC Model
     ${bmc_model}=  Get BMC System Model
     Log  BMC Model=${bmc_model}
 
