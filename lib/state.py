@@ -50,8 +50,19 @@ gru.my_import_resource("state_manager.robot")
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) + os.sep
 sys.path.append(base_path + "data/")
-import variables as var
 
+# Previously, I had this coded:
+# import variables as var
+# However, we ran into a problem where a robot program did this...
+# Variables           ../../lib/ras/variables.py
+# Prior to doing this...
+# Library            ../lib/state.py
+
+# This caused the wrong variables.py file to be selected.  Attempts to fix this
+# have failed so far.  For the moment, we will hard-code the value we need from
+# the file.
+
+SYSTEM_STATE_URI = "/xyz/openbmc_project/state/"
 
 # The BMC code has recently been changed as far as what states are defined and
 # what the state values can be.  This module now has a means of processing both
@@ -595,7 +606,7 @@ def get_state(openbmc_host="",
     need_rest = (len(req_rest) > 0)
     state = DotDict()
     if need_rest:
-        cmd_buf = ["Read Properties", var.SYSTEM_STATE_URI + "enumerate",
+        cmd_buf = ["Read Properties", SYSTEM_STATE_URI + "enumerate",
                    "quiet=${" + str(quiet) + "}"]
         grp.rdpissuing_keyword(cmd_buf)
         status, ret_values = \
