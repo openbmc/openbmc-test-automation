@@ -24,10 +24,14 @@ ${model}=         ${OPENBMC_MODEL}
 
 *** Test Cases ***
 
-Execute ipmi BT capabilities command
-    [Tags]  Execute_ipmi_BT_capabilities_command
-    Run IPMI command            0x06 0x36
-    response Should Be Equal    " 01 40 40 0a 01"
+Verify IPMI BT Capabilities Command
+    [Documentation]  Verify IPMI BT capability command response.
+    [Tags]  Verify_IPMI BT_Capabilities_Command
+    [Setup]  REST Power On
+
+    ${output} =  Run IPMI command  0x06 0x36
+    Should Be Equal As Strings  "${output}"  " 01 3f 3f 0a 01"
+
 
 io_board Present
     [Tags]  io_board_Present
