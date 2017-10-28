@@ -13,21 +13,22 @@ Library                ../data/model.py
 Resource               ../lib/boot_utils.robot
 Resource               ../lib/utils.robot
 
-Suite Setup            Setup The Suite
+#Suite Setup            Setup The Suite
 Test Setup             Open Connection And Log In
-Test Teardown          Post Test Case Execution
+#Test Teardown          Post Test Case Execution
 
 *** Variables ***
 
 ${stack_mode}     skip
 ${model}=         ${OPENBMC_MODEL}
+${ipmi_bt}=       01 3f 3f 0a 01
 
 *** Test Cases ***
 
 Execute ipmi BT capabilities command
     [Tags]  Execute_ipmi_BT_capabilities_command
-    Run IPMI command            0x06 0x36
-    response Should Be Equal    " 01 40 40 0a 01"
+    ${output}=  Run External IPMI RAW command  0x06 0x36 2>&1
+    Should Contain  ${output}  ${ipmi_bt}
 
 io_board Present
     [Tags]  io_board_Present
