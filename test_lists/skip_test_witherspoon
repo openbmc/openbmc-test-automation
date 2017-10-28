@@ -1,17 +1,9 @@
-#https://github.com/openbmc/openbmc-test-automation/issues/926
--e Execute_ipmi_BT_capabilities_command
--e io_board_Present
--e io_board_Fault
 #https://github.com/openbmc/openbmc/issues/1142
 -e Check_BMC_Name_Property_Is_Set
 -e Check_BMC_Clocks_Name_Property_Is_Set
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
 -e Check_BMC_FSI_Compatible_Property_Is_Set
 -e Check_BMC_FSI_Name_Property_Is_Set
-# System LED test cases which are NA for Witherspoon system.
--e Test_Heartbeat_LED_And_Verify_Via_REST
--e Test_Beep_LED_And_Verify_Via_REST
--e Test_Identify_LED_And_Verify_Via_REST
 # https://github.com/openbmc/openbmc-test-automation/issues/822
 -e Verify_Minimal_Memory_Buffer_Inventory
 -e Verify_Minimal_Main_Planar_Inventory
@@ -23,3 +15,9 @@
 # https://github.com/openbmc/openbmc-test-automation/issues/874
 -e User_Management
 # NA test case for Witherspoon
+-e io_board_Present
+-e io_board_Fault
+# System LED test cases which are NA for Witherspoon system.
+-e Test_Heartbeat_LED_And_Verify_Via_REST
+-e Test_Beep_LED_And_Verify_Via_REST
+-e Test_Identify_LED_And_Verify_Via_REST
