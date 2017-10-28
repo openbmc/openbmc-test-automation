@@ -5,6 +5,7 @@ Documentation  This test suite verifies pgood state.
 Resource  ../lib/rest_client.robot
 Resource  ../lib/utils.robot
 Resource  ../lib/state_manager.robot
+Resource  ../lib/ipmi_client.robot
 
 Variables  ../data/variables.py
 
