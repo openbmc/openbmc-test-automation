@@ -51,7 +51,7 @@ Open Connection And Log In
     ...            SSHLibrary.Open connection  &{connection_args}
     ...   ELSE  Run Keyword   SSHLibrary.Open connection  &{connection_args}
 
-    Login  ${username}  ${password}
+    SSHLibrary.Login  ${username}  ${password}
 
 Open Connection for SCP
     Import Library      SCPLibrary      WITH NAME       scp
