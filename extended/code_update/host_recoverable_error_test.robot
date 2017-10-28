@@ -2,7 +2,7 @@
 Documentation   Test errors and changes in the environment that BMC code
 ...             update should recover from or not be effected by.
 
-Resource        ../../lib/code_update_utils.robot
+Resource        ../../lib/code_update_utils_serial.robot
 Resource        ../../lib/openbmc_ffdc.robot
 
 Suite Setup     Suite Setup Execution
