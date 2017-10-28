@@ -50,8 +50,11 @@ Power Cycle System Via PDU
 BMC Reboot Cycle
     [Documentation]  Reboot BMC and wait for ready state.
     Log  "Doing Reboot cycle"
+    ${bmc_version_before}=  Get BMC Version
     Initiate BMC Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+    ${bmc_version_after}=  Get BMC Version
+    Should Be Equal  ${bmc_version_before}  ${bmc_version_after}
 
 
 Test Exit Logs
