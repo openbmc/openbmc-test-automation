@@ -7,11 +7,12 @@ Resource        ../lib/pdu/pdu.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/state_manager.robot
+Library         ../lib/bmc_ssh_utils.py
 
 Test Teardown   Test Exit Logs
 
 *** Variables ***
-${LOOP_COUNT}    ${50}
+${LOOP_COUNT}    ${1}
 
 *** Test Cases ***
 
@@ -52,6 +53,9 @@ BMC Reboot Cycle
     Log  "Doing Reboot cycle"
     Initiate BMC Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+    Ping Host  ${OPENBMC_HOST}
+    ${uptime_output}=  BMC Execute Command  uptime
+    Log  ${uptime_output}
 
 
 Test Exit Logs
