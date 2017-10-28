@@ -9,6 +9,7 @@ Variables   ../data/variables.py
 Resource    boot_utils.robot
 Resource    rest_client.robot
 Resource    openbmc_ffdc.robot
+Resource    oem/ibm/serial_console_client.robot
 
 *** Keywords ***
 
