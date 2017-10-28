@@ -7,6 +7,7 @@ Resource        ../lib/pdu/pdu.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/state_manager.robot
+Library         ../lib/bmc_ssh_utils.py
 
 Test Teardown   Test Exit Logs
 
@@ -50,8 +51,12 @@ Power Cycle System Via PDU
 BMC Reboot Cycle
     [Documentation]  Reboot BMC and wait for ready state.
     Log  "Doing Reboot cycle"
+    ${bmc_version_before}=  Get BMC Version
     Initiate BMC Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+    Ping Host  ${OPENBMC_HOST}
+    ${bmc_version_after}=  Get BMC Version
+    Should Be Equal  ${bmc_version_before}  ${bmc_version_after}
 
 
 Test Exit Logs
