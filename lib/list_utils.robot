@@ -3,6 +3,28 @@ Documentation  This module contains keywords for list manipulation.
 Library  Collections
 
 *** Keywords ***
+Smart Combine Lists
+    [Documentation]  Combine all valid list arguments and return the result.
+    [Arguments]  @{lists}
+
+    # Description of argument(s):
+    # lists  A list of lists to be combined.  Any item in this list which is
+    #        NOT really a list will be removed.
+
+    ${list_size}=  Get Length  ${lists}
+    ${index}=  Set Variable  ${0}
+    : FOR  ${arg}  IN  @{lists}
+    \    ${type_arg}=  Evaluate  str(type($lists[${index}])).split("'")[1]
+    \    Run Keyword If  '${type_arg}' != 'list'  Run Keywords
+    ...      Remove From List  ${lists}  ${index}  AND
+    ...      Continue For Loop
+    \    ${index}=  Evaluate  ${index}+1
+
+    ${new_list}=  Combine Lists  @{lists}
+
+    [Return]  ${new_list}
+
+
 Intersect Lists
     [Documentation]  Intersects the two lists passed in. Returns a list of
     ...  values common to both lists with no duplicates.
@@ -22,8 +44,8 @@ Intersect Lists
     ...                                ${length1} < ${length2}  ${list1}
 
     :FOR  ${element}  IN  @{larger_list}
-    \  ${rc}=  Run Keyword and Return Status  List Should Contain Value  ${smaller_list}
-    ...  ${element}
+    \  ${rc}=  Run Keyword and Return Status  List Should Contain Value
+    ...  ${smaller_list}  ${element}
     \  Run Keyword If  '${rc}' == 'True'  Append to List  ${intersected_list}
     ...  ${element}
 
