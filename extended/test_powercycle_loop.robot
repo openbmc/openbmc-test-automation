@@ -26,9 +26,19 @@ Run Multiple Power Cycle
     Repeat Keyword  ${LOOP_COUNT} times  Power Cycle System Via PDU
 
 
-Run Multiple Reboot
-    [Documentation]  Execute multiple reboots.
-    [Tags]  Run_Multiple_Reboot
+Run Multiple BMC Reset Via REST
+    [Documentation]  Execute multiple reboots via REST.
+    [Tags]  Run_Multiple_BMC_Reset_Via_REST
+
+    # By default run test for 50 loops, else user input iteration.
+    # Fails immediately if any of the execution rounds fail and
+    # check if BMC is still pinging and FFDC is collected.
+    Repeat Keyword  ${LOOP_COUNT} times  BMC REST Reset Cycle
+
+
+Run Multiple BMC Reset Via Reboot
+    [Documentation]  Execute multiple reboots via "reboot".
+    [Tags]  Run_Multiple_BMC_Reset_Via_Reboot
 
     # By default run test for 50 loops, else user input iteration.
     # Fails immediately if any of the execution rounds fail and
@@ -47,11 +57,23 @@ Power Cycle System Via PDU
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
 
 
-BMC Reboot Cycle
-    [Documentation]  Reboot BMC and wait for ready state.
+BMC REST Reset Cycle
+    [Documentation]  Reset BMC via REST and wait for ready state.
     Log  "Doing Reboot cycle"
     Initiate BMC Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+
+BMC Reboot Cycle
+    [Documentation]  Reboot BMC and wait for ready state.
+    Log  "Doing Reboot cycle"
+    ${bmc_version_before}=
+    ...  BMC Execute Command  grep ^VERSION_ID= /etc/os-release
+    OBMC Reboot (off)  stack_mode=normal
+    Ping Host  ${OPENBMC_HOST}
+    ${bmc_version_after}=
+    ...  BMC Execute Command  grep ^VERSION_ID= /etc/os-release
+    Should Be Equal  ${bmc_version_before}  ${bmc_version_after}
 
 
 Test Exit Logs
