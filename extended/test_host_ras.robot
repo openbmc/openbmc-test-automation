@@ -220,35 +220,6 @@ Verify Recoverable Callout Handling For CMEFIR With Threshold 1
 
 *** Keywords ***
 
-Inject Error Through HOST
-    [Documentation]  Inject checkstop on processor through HOST.
-    ...              Test sequence:
-    ...              1. Boot To HOST
-    ...              2. Clear any existing gard records
-    ...              3. Inject Error on processor/centaur
-    [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
-    # Description of argument(s):
-    # fir                 FIR (Fault isolation register) value (e.g. 2011400).
-    # chip_address        chip address (e.g 2000000000000000).
-    # threshold_limit     Threshold limit (e.g 1, 5, 32).
-
-    Delete Error Logs
-    Login To OS Host
-    Gard Operations On OS  clear all
-
-    # Fetch processor chip IDs.
-    ${chip_ids}=  Get ProcChipId From OS  Processor
-    ${proc_ids}=  Split String  ${chip_ids}
-    ${proc_id}=  Get From List  ${proc_ids}  1
-
-    ${threshold_limit}=  Convert To Integer  ${threshold_limit}
-    :FOR  ${i}  IN RANGE  ${threshold_limit}
-    \  Run Keyword  Putscom Operations On OS  ${proc_id}  ${fir}  ${chip_address}
-    # Adding delay after each error injection.
-    \  Sleep  10s
-    # Adding delay to get error log after error injection.
-    Sleep  120s
-
 Verify And Clear Gard Records On HOST
     [Documentation]  Verify And Clear gard records on HOST.
 
