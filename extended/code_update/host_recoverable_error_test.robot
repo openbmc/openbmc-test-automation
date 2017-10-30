@@ -5,6 +5,8 @@ Documentation   Test errors and changes in the environment that BMC code
 Resource        ../../lib/code_update_utils_serial.robot
 Resource        ../../lib/openbmc_ffdc.robot
 
+Force Tags      Host_Update_Recoverable_Error
+
 Suite Setup     Suite Setup Execution
 
 Test Setup      Test Setup Execution
