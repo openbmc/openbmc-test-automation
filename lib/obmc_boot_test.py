@@ -625,22 +625,19 @@ def print_last_boots():
 
 
 ###############################################################################
-def print_defect_report():
+def print_defect_report(ffdc_file_list):
 
     r"""
     Print a defect report.
+
+    Description of argument(s):
+    ffdc_file_list  A list of files which were collected by our ffdc functions.
     """
 
     # Making deliberate choice to NOT run plug_in_setup().  We don't want
     # ffdc_prefix updated.
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
         call_point='ffdc_report', stop_on_plug_in_failure=0)
-
-    # At some point I'd like to have the 'Call FFDC Methods' return a list
-    # of files it has collected.  In that case, the following "ls" command
-    # would no longer be needed.  For now, however, glob shows the files
-    # named in FFDC_LIST_FILE_PATH so I will refrain from printing those
-    # out (so we don't see duplicates in the list).
 
     # Get additional header data which may have been created by ffdc plug-ins.
     # Also, delete the individual header files to cleanup.
@@ -650,7 +647,7 @@ def print_defect_report():
     shell_rc, more_header_info = gc.cmd_fnc_u(cmd_buf, print_output=0,
                                               show_err=0)
 
-    # Get additional header data which may have been created by ffdc plug-ins.
+    # Get additional summary data which may have been created by ffdc plug-ins.
     # Also, delete the individual header files to cleanup.
     cmd_buf = "file_list=$(cat " + ffdc_summary_list_path + " 2>/dev/null)" +\
               " ; [ ! -z \"${file_list}\" ] && cat ${file_list}" +\
@@ -658,21 +655,39 @@ def print_defect_report():
     shell_rc, ffdc_summary_info = gc.cmd_fnc_u(cmd_buf, print_output=0,
                                                show_err=0)
 
-    LOG_PREFIX = BuiltIn().get_variable_value("${LOG_PREFIX}")
-
-    output = '\n'.join(sorted(glob.glob(LOG_PREFIX + '*')))
+    # ffdc_list_file_path contains a list of any ffdc files created by plug-
+    # ins, etc.  Read that data into a list.
     try:
-        ffdc_list = open(ffdc_list_file_path, 'r')
+        plug_in_ffdc_list = \
+            open(ffdc_list_file_path, 'r').read().rstrip("\n").split("\n")
+        plug_in_ffdc_list = filter(None, plug_in_ffdc_list)
     except IOError:
-        ffdc_list = ""
+        plug_in_ffdc_list = []
+
+    # Combine the files from plug_in_ffdc_list with the ffdc_file_list passed
+    # in.  Eliminate duplicates and sort the list.
+    ffdc_file_list = list(set(ffdc_file_list + plug_in_ffdc_list))
+    ffdc_file_list.sort()
+
+    if status_file_path != "":
+        ffdc_file_list.insert(0, status_file_path)
+
+    # Convert the list to a printable list.
+    printable_ffdc_file_list = "\n".join(ffdc_file_list)
 
     # Open ffdc_file_list for writing.  We will write a complete list of
     # FFDC files to it for possible use by plug-ins like cp_stop_check.
     ffdc_list_file = open(ffdc_list_file_path, 'w')
+    ffdc_list_file.write(printable_ffdc_file_list + "\n")
+    ffdc_list_file.close()
+
+    indent = 0
+    width = 90
+    linefeed = 1
+    char = "="
 
     gp.qprintn()
-    # indent=0, width=90, linefeed=1, char="="
-    gp.qprint_dashes(0, 90, 1, "=")
+    gp.qprint_dashes(indent, width, linefeed, char)
     gp.qprintn("Copy this data to the defect:\n")
 
     if len(more_header_info) > 0:
@@ -685,28 +700,18 @@ def print_defect_report():
               openbmc_serial_host_name, openbmc_serial_ip, openbmc_serial_port)
 
     gp.qprintn()
-
     print_last_boots()
     gp.qprintn()
     gp.qprint_var(state)
-
     gp.qprintn()
     gp.qprintn("FFDC data files:")
-    if status_file_path != "":
-        gp.qprintn(status_file_path)
-        ffdc_list_file.write(status_file_path + "\n")
-
-    gp.qprintn(output)
-    # gp.qprintn(ffdc_list)
+    gp.qprintn(printable_ffdc_file_list)
     gp.qprintn()
 
     if len(ffdc_summary_info) > 0:
         gp.qprintn(ffdc_summary_info)
 
-    gp.qprint_dashes(0, 90, 1, "=")
-
-    ffdc_list_file.write(output + "\n")
-    ffdc_list_file.close()
+    gp.qprint_dashes(indent, width, linefeed, char)
 
 ###############################################################################
 
@@ -725,16 +730,16 @@ def my_ffdc():
         call_point='ffdc', stop_on_plug_in_failure=0)
 
     AUTOBOOT_FFDC_PREFIX = os.environ['AUTOBOOT_FFDC_PREFIX']
-    status, ret_values = grk.run_key_u("FFDC  ffdc_prefix=" +
-                                       AUTOBOOT_FFDC_PREFIX +
-                                       "  ffdc_function_list=" +
-                                       ffdc_function_list, ignore=1)
+    status, ffdc_file_list = grk.run_key_u("FFDC  ffdc_prefix=" +
+                                           AUTOBOOT_FFDC_PREFIX +
+                                           "  ffdc_function_list=" +
+                                           ffdc_function_list, ignore=1)
     if status != 'PASS':
         gp.qprint_error("Call to ffdc failed.\n")
 
     my_get_state()
 
-    print_defect_report()
+    print_defect_report(ffdc_file_list)
 
 ###############################################################################
 
