@@ -6,9 +6,11 @@ This module is the python counterpart to openbmc_ffdc.robot..
 
 import os
 
+import gen_print as gp
 import gen_robot_print as grp
 import gen_valid as gv
 import gen_robot_keyword as grk
+import state as st
 
 from robot.libraries.BuiltIn import BuiltIn
 
@@ -38,34 +40,35 @@ def ffdc(ffdc_dir_path=None,
                         for possible choices.
     """
 
+    ffdc_file_list = []
+
     # Check if Ping and SSH connection is alive
     OPENBMC_HOST = BuiltIn().get_variable_value("${OPENBMC_HOST}")
-    status, status_ping = grk.run_key("Ping Host  " + OPENBMC_HOST)
-    grp.rprint_var(status_ping)
-    if status_ping:
-        status_ssh = \
-            BuiltIn().run_keyword_and_return_status("Open Connection And" +
-                                                    " Log In")
-        grp.rprint_var(status_ssh)
-        if not status_ssh:
-            grp.rprint_error("BMC is not communicating. \
-                              Aborting FFDC collection.\n")
-            BuiltIn().run_keyword_and_return_status("Close All Connections")
-            return
 
-    grp.rprint_timen("Collecting FFDC.")
+    state = st.get_state(req_states=['ping', 'uptime'])
+    gp.qprint_var(state)
+    if not int(state['ping']):
+        gp.print_error("BMC is not ping-able.  Aborting FFDC collection.\n")
+        return ffdc_file_list
+
+    if state['uptime'] == "":
+        gp.print_error("BMC is not communicating.  Aborting FFDC" +
+                       " collection.\n")
+        return ffdc_file_list
+
+    gp.qprint_timen("Collecting FFDC.")
 
     # Get default values for arguments.
     ffdc_dir_path, ffdc_prefix = set_ffdc_defaults(ffdc_dir_path, ffdc_prefix)
-    grp.rprint_var(ffdc_dir_path)
-    grp.rprint_var(ffdc_prefix)
+    gp.qprint_var(ffdc_dir_path)
+    gp.qprint_var(ffdc_prefix)
 
     # LOG_PREFIX is used by subordinate functions.
     LOG_PREFIX = ffdc_dir_path + ffdc_prefix
     BuiltIn().set_global_variable("${LOG_PREFIX}", LOG_PREFIX)
 
     cmd_buf = ["Create Directory", ffdc_dir_path]
-    grp.rpissuing_keyword(cmd_buf)
+    grp.rqpissuing_keyword(cmd_buf)
     status, output = BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
     if status != "PASS":
         error_message = grp.sprint_error_report("Create Directory failed" +
@@ -77,12 +80,18 @@ def ffdc(ffdc_dir_path=None,
     FFDC_FILE_PATH = ffdc_dir_path + ffdc_prefix + "BMC_general.txt"
     BuiltIn().set_global_variable("${FFDC_FILE_PATH}", FFDC_FILE_PATH)
 
-    grk.run_key("Header Message")
+    status, ffdc_file_list = grk.run_key("Header Message")
+    status, ffdc_file_sub_list = \
+        grk.run_key_u("Call FFDC Methods  ffdc_function_list=" +
+                      ffdc_function_list)
 
-    grk.run_key_u("Call FFDC Methods  ffdc_function_list=" +
-                  ffdc_function_list)
+    # Combine lists, remove duplicates and sort.
+    ffdc_file_list = list(set(ffdc_file_list + ffdc_file_sub_list))
+    ffdc_file_list.sort()
 
-    grp.rprint_timen("Finished collecting FFDC.")
+    gp.qprint_timen("Finished collecting FFDC.")
+
+    return ffdc_file_list
 
 ###############################################################################
 
