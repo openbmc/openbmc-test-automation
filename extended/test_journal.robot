@@ -10,6 +10,8 @@ Suite Setup        Open Connection And Log In
 Suite Teardown     Close All Connections
 Test Teardown      FFDC On Test Case Fail
 
+Force Tags         Journal_Log
+
 *** Variables ***
 &{NIL}  data=@{EMPTY}
 
