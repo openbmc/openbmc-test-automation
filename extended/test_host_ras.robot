@@ -217,6 +217,7 @@ Verify Recoverable Callout Handling For CMEFIR With Threshold 1
     Inject Recoverable Error With Threshold Limit Through Host
     ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
+
 *** Keywords ***
 
 Inject Error Through HOST
@@ -358,7 +359,7 @@ RAS Test SetUp
 
     # Boot to OS.
     REST Power On  quiet=${1}
-    # Adding delay to after host bring up.
+    # Adding delay after host bring up.
     Sleep  60s
 
 RAS Suite Setup
@@ -369,6 +370,9 @@ RAS Suite Setup
     Create Directory  ${RAS_LOG_DIR_PATH}
     OperatingSystem.Directory Should Exist  ${RAS_LOG_DIR_PATH}
     Empty Directory  ${RAS_LOG_DIR_PATH}
+
+    # Boot to Os.
+    REST Power On  quiet=${1}
 
 RAS Suite Cleanup
     [Documentation]  Perform RAS suite cleanup and verify that host
