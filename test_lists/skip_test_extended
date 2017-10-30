@@ -27,3 +27,5 @@
 # TODO: https://github.com/openbmc/openbmc-test-automation/issues/1072
 -e Network_Test
 -e Host_Network_Test
+# TODO: https://github.com/openbmc/openbmc-test-automation/issues/1074 
+-e Journal_Log
