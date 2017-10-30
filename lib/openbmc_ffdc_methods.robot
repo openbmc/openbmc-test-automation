@@ -5,6 +5,7 @@ Documentation      Methods to execute commands on BMC and collect
 Resource           openbmc_ffdc_utils.robot
 Resource           rest_client.robot
 Resource           utils.robot
+Resource           list_utils.robot
 Library            SSHLibrary
 Library            OperatingSystem
 Library            Collections
@@ -27,7 +28,7 @@ Call FFDC Methods
 
     # Description of argument(s):
     # ffdc_function_list  A colon-delimited list naming the kinds of FFDC that
-    #                     is to be collected
+    #                     are to be collected
     #                     (e.g. "FFDC Generic Report:BMC Specific Files").
     #                     Acceptable values can be found in the description
     #                     field of FFDC_METHOD_CALL in
@@ -36,12 +37,23 @@ Call FFDC Methods
     #                     from lib/openbmc_ffdc_list.py).
 
     @{entries}=  Get FFDC Method Index
+    # Example entries:
+    # entries:
+    #   entries[0]:  BMC LOGS
+
+    @{ffdc_file_list}=  Create List
     :FOR  ${index}  IN  @{entries}
-    \    Method Call Keyword List  ${index}  ${ffdc_function_list}
+    \    ${ffdc_file_sub_list}=  Method Call Keyword List  ${index}
+    ...      ${ffdc_function_list}
+    \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
+    ...      ${ffdc_file_sub_list}
+
     Run Key U  SSHLibrary.Close All Connections
 
+    [Return]  ${ffdc_file_list}
+
 Method Call Keyword List
-    [Documentation]  Iterate the list through keyword index.
+    [Documentation]  Process FFDC request and return a list of generated files.
     [Arguments]  ${index}  ${ffdc_function_list}=${EMPTY}
 
     # Description of argument(s):
@@ -50,7 +62,16 @@ Method Call Keyword List
     # ffdc_function_list  See ffdc_function_list description in
     #                     "Call FFDC Methods" (above).
 
-    @{method_list}=  Get ffdc method call  ${index}
+    @{method_list}=  Get FFDC Method Call  ${index}
+    # Example method_list:
+    # method_list:
+    #   method_list[0]:
+    #     method_list[0][0]: FFDC Generic Report
+    #     method_list[0][1]: BMC FFDC Manifest
+    #   method_list[1]:
+    #     method_list[1][0]: Get Request FFDC
+    #     method_list[1][1]: BMC FFDC Get Requests
+    # (etc.)
 
     # If function list is empty assign default (i.e. a list of all allowable
     # values).  In either case, convert ffdc_function_list from a string to
@@ -61,9 +82,15 @@ Method Call Keyword List
     ...  ELSE
     ...    Split String  ${ffdc_function_list}  separator=:
 
+    @{ffdc_file_list}=  Create List
     :FOR  ${method}  IN  @{method_list}
-    \    Execute Keyword Method  ${method[0]}  ${method[1]}
-    ...      @{ffdc_function_list}
+    \    ${ffdc_file_sub_list}=  Execute Keyword Method  ${method[0]}
+    ...      ${method[1]}  @{ffdc_function_list}
+    \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
+    ...      ${ffdc_file_sub_list}
+
+    [Return]  ${ffdc_file_list}
+
 
 Execute Keyword Method
     [Documentation]  Call into BMC method keywords. Don't let one
@@ -82,11 +109,14 @@ Execute Keyword Method
     #                     in this case, it should be a list rather than a
     #                     colon-delimited value.
 
-    ${status}  ${ret_values}=  Run Keyword And Ignore Error
-    ...  List Should Contain Value  ${ffdc_function_list}  ${description}
-    Run Keyword If  '${status}' != 'PASS'  Return from Keyword
+    @{ffdc_file_list}=  Create List
 
-    Run Key  ${keyword_name}  ignore=1
+    ${index}=  Get Index From List  ${ffdc_function_list}  ${description}
+    Run Keyword If  '${index}' == '${-1}'  Return from Keyword
+    ...  ${ffdc_file_list}
+
+    ${status}  ${ffdc_file_list}=  Run Key  ${keyword_name}  ignore=1
+    [Return]  ${ffdc_file_list}
 
 ################################################################
 # Method : BMC FFDC Manifest                                   #
@@ -94,12 +124,15 @@ Execute Keyword Method
 ################################################################
 
 BMC FFDC Manifest
-    [Documentation]    Get the commands index for the FFDC_BMC_CMD,
-    ...                login to BMC and execute commands.
+    [Documentation]  Run the ssh commands from FFDC_BMC_CMD and return a list
+    ...              of generated files.
 
-    @{entries}=     Get ffdc cmd index
-    :FOR  ${index}  IN   @{entries}
-    \     Iterate BMC Command List Pairs   ${index}
+    @{ffdc_file_list}=  Create List  ${FFDC_FILE_PATH}
+    @{entries}=  Get FFDC Cmd Index
+    :FOR  ${index}  IN  @{entries}
+    \    Iterate BMC Command List Pairs  ${index}
+
+    [Return]  ${ffdc_file_list}
 
 
 Iterate BMC Command List Pairs
@@ -113,16 +146,15 @@ Iterate BMC Command List Pairs
 
 
 Execute Command and Write FFDC
-    [Documentation]    Execute command on BMC or OS and write to ffdc
-    ...                By default to ffdc_report.txt file else to
-    ...                specified file path.
-    [Arguments]        ${key_index}
-    ...                ${cmd}
-    ...                ${logpath}=${FFDC_FILE_PATH}
-    ...                ${target}=BMC
+    [Documentation]  Run a command on the BMC or OS, write the output to the
+    ...              specified file and return a list of generated files.
+    [Arguments]  ${key_index}  ${cmd}  ${logpath}=${FFDC_FILE_PATH}
+    ...          ${target}=BMC
 
-    Run Keyword If   '${logpath}' == '${FFDC_FILE_PATH}'
-    ...    Write Cmd Output to FFDC File   ${key_index}  ${cmd}
+    Run Keyword If  '${logpath}' == '${FFDC_FILE_PATH}'
+    ...    Write Cmd Output to FFDC File  ${key_index}  ${cmd}
+
+    @{ffdc_file_list}=  Create List  ${log_path}
 
     ${cmd_buf}=  Catenate  ${target} Execute Command \ ${cmd} \ ignore_err=${1}
     ${status}  ${ret_values}=  Run Key  ${cmd_buf}  ignore=${1}
@@ -137,6 +169,8 @@ Execute Command and Write FFDC
     ...    ERROR output:${\n}${stderr}${\n}Output:${\n}${stdout}${\n}
     ...    ${logpath}
 
+    [Return]  ${ffdc_file_list}
+
 
 ################################################################
 # Method : BMC FFDC Files                                      #
@@ -145,23 +179,41 @@ Execute Command and Write FFDC
 ################################################################
 
 BMC FFDC Files
-    [Documentation]    Get the command list and iterate
-    @{entries}=     Get ffdc file index
-    :FOR  ${index}  IN   @{entries}
-    \     Create File and Write Data   ${index}
+    [Documentation]  Run the commands from FFDC_BMC_FILE and return a list of
+    ...              generated files.
+
+    @{entries}=  Get FFDC File Index
+    # Example of entries:
+    # entries:
+    #   entries[0]: BMC FILES
+
+    @{ffdc_file_list}=  Create List
+    :FOR  ${index}  IN  @{entries}
+    \    ${ffdc_file_sub_list}=  Create File and Write Data  ${index}
+    \     ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
+    ...       ${ffdc_file_sub_list}
+
+    [Return]  ${ffdc_file_list}
 
 
 Create File and Write Data
-    [Documentation]    Create files to current FFDC log directory,
-    ...                executes command and write to corresponding
-    ...                file name in the current FFDC directory.
-    [Arguments]        ${key_index}
+    [Documentation]  Run commands from FFDC_BMC_FILE to create FFDC files and
+    ...              return a list of generated files.
+    [Arguments]  ${key_index}
 
-    @{cmd_list}=      Get ffdc bmc file   ${key_index}
+    # Description of argument(s):
+    # key_index  The index into the FFDC_BMC_FILE dictionary.
+
+    @{ffdc_file_list}=  Create List
+    @{cmd_list}=  Get FFDC BMC File  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \   ${logpath}=  Catenate  SEPARATOR=   ${LOG_PREFIX}   ${cmd[0]}.txt
-    \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}   ${logpath}
+    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
+    \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
+    ...      ${cmd[1]}  ${logpath}
+    \     ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
+    ...       ${ffdc_file_sub_list}
 
+    [Return]  ${ffdc_file_list}
 
 
 ################################################################
@@ -203,71 +255,111 @@ Log Test Case Status
 
 
 Log FFDC Get Requests
-    [Documentation]    Create file in current FFDC log directory.
-    ...                Do openbmc get request and write to
-    ...                corresponding file name.
-    ...                JSON pretty print for logging to file.
-    [Arguments]        ${key_index}
+    [Documentation]  Run the get requests associated with the key and return a
+    ...              list of generated files.
+    [Arguments]  ${key_index}
 
-    @{cmd_list}=  Get ffdc get request  ${key_index}
+    # Note: Output will be in JSON pretty_print format.
+
+    # Description of argument(s):
+    # key_index  The key to the FFDC_GET_REQUEST dictionary that contains the
+    #            get requests that are to be run.
+
+    @{ffdc_file_list}=  Create List
+    @{cmd_list}=  Get FFDC Get Request  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
-    \   ${resp}=  OpenBMC Get Request  ${cmd[1]}  quiet=${1}
-    \   ${status}=    Run Keyword and Return Status
-    ...   Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
-    \   Run Keyword If   '${status}' == '${False}'  Continue For Loop
-    \   ${jsondata}=  to json  ${resp.content}    pretty_print=True
-    \   Write Data To File  ${\n}${jsondata}${\n}  ${logpath}
+    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
+    \    ${resp}=  OpenBMC Get Request  ${cmd[1]}  quiet=${1}
+    \    ${status}=  Run Keyword and Return Status
+    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    \    Run Keyword If  '${status}' == '${False}'  Continue For Loop
+    \    ${jsondata}=  to json  ${resp.content}  pretty_print=True
+    \    Write Data To File  ${\n}${jsondata}${\n}  ${logpath}
+    \    Append To List  ${ffdc_file_list}  ${logpath}
 
+    [Return]  ${ffdc_file_list}
 
 BMC FFDC Get Requests
-    [Documentation]    Get the command list and iterate
+    [Documentation]  Iterate over get request list and return a list of
+    ...              generated files.
+
+    @{ffdc_file_list}=  Create List
+
     @{entries}=  Get ffdc get request index
+    # Example of entries:
+    # entries:
+    #  entries[0]:  GET REQUESTS
     :FOR  ${index}  IN  @{entries}
-    \   Log FFDC Get Requests   ${index}
+    \    ${ffdc_file_sub_list}=  Log FFDC Get Requests  ${index}
+    \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
+    ...  ${ffdc_file_sub_list}
 
+    [Return]  ${ffdc_file_list}
 
-Log OS ALL DISTROS FFDC
-    [Documentation]    Create file in current FFDC log directory.
-    ...                Executes OS command and write to
-    ...                corresponding file name.
-    [Arguments]        ${key_index}
+Log OS All distros FFDC
+    [Documentation]  Run commands from FFDC_OS_ALL_DISTROS_FILE to create FFDC
+    ...              files and return a list of generated files.
+    [Arguments]  ${key_index}
 
-    @{cmd_list}=  get ffdc os all distros call  ${key_index}
+    # Description of argument(s):
+    # key_index  The index into the FFDC_OS_ALL_DISTROS_FILE dictionary.
+
+    @{ffdc_file_list}=  Create List
+
+    @{cmd_list}=  Get FFDC OS All Distros Call  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
-    \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}
-    \   ...  target=OS
+    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
+    \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
+    ...      ${cmd[1]}  ${logpath}  target=OS
+    \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
+    ...      ${ffdc_file_sub_list}
+
+    [Return]  ${ffdc_file_list}
 
 
 Log OS SPECIFIC DISTRO FFDC
-    [Documentation]    Create file in current FFDC log directory.
-    ...                Executes OS command and write to
-    ...                corresponding file name.
-    [Arguments]        ${key_index}  ${linux_distro}
+    [Documentation]  Run commands from the FFDC_OS_<distro>_FILE to create FFDC
+    ...              files and return a list of generated files.
+    [Arguments]  ${key_index}  ${linux_distro}
 
-    @{cmd_list}=  get ffdc os distro call  ${key_index}  ${linux_distro}
+    # Description of argument(s):
+    # key_index  The index into the FFDC_OS_<distro>_FILE dictionary.
+    # linux_distro  Your OS's linux distro (e.g. "UBUNTU", "RHEL", etc).
+
+    @{ffdc_file_list}=  Create List
+
+    @{cmd_list}=  Get FFDC OS Distro Call  ${key_index}  ${linux_distro}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \   ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
-    \   Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}
-    \   ...  target=OS
+    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
+    \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
+    ...      ${cmd[1]}  ${logpath}  target=OS
+    \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
+    ...      ${ffdc_file_sub_list}
+
+    [Return]  ${ffdc_file_list}
 
 
 OS FFDC Files
-    [Documentation]    Get the command list and iterate
+    [Documentation]  Run the commands from FFDC_OS_ALL_DISTROS_FILE to create
+    ...              FFDC files and return a list of generated files.
     [Arguments]  ${OS_HOST}=${OS_HOST}  ${OS_USERNAME}=${OS_USERNAME}
-    ...   ${OS_PASSWORD}=${OS_PASSWORD}
+    ...  ${OS_PASSWORD}=${OS_PASSWORD}
 
-    Return From Keyword If  '${OS_HOST}' == '${EMPTY}'
-    ...   No OS Host Provided
+    @{ffdc_file_list}=  Create List
 
-    # If can't ping, return
-    ${rc}=  Run Keyword and Return Status  Ping Host  ${OS_HOST}
-    Return From Keyword If  '${rc}' == '${False}'
-    ...   Could not ping OS.
+    Run Keyword If  '${OS_HOST}' == '${EMPTY}'  Run Keywords
+    ...  Print Timen  No OS Host provided so no OS FFDC will be done.  AND
+    ...  Return From Keyword  ${ffdc_file_list}
 
-    ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uptime  ignore_err=${1}
-    Return From Keyword If  '${rc}' != '${0}'  Could not connect to OS.
+    ${match_state}=  Create Dictionary  os_ping=^1$  os_login=^1$
+    ...  os_run_cmd=^1$
+    ${status}  ${ret_values}=  Run Keyword and Ignore Error  Check State
+    ...  ${match_state}  quiet=0
+
+    Run Keyword If  '${status}' == 'FAIL'  Run Keywords
+    ...  Print Error  The OS is not communicating so no OS FFDC will be done.\n
+    ...  AND
+    ...  Return From Keyword  ${ffdc_file_list}
 
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command
     ...  . /etc/os-release; echo $ID  ignore_err=${0}
@@ -275,44 +367,77 @@ OS FFDC Files
 
     Rpvars  linux_distro
 
-    @{entries}=  Get ffdc os all distros index
+    @{entries}=  Get FFDC OS All Distros Index
     :FOR  ${index}  IN  @{entries}
-    \   Log OS ALL DISTROS FFDC  ${index}
+    \    ${ffdc_file_sub_list}=  Log OS All distros FFDC  ${index}
+    \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
+    ...      ${ffdc_file_sub_list}
 
     Return From Keyword If
     ...  '${linux_distro}' == '${EMPTY}' or '${linux_distro}' == 'None'
-    ...  Could not determine Linux Distribution.
+    ...  ${ffdc_file_list}
 
     @{entries}=  Get ffdc os distro index  ${linux_distro}
     :FOR  ${index}  IN  @{entries}
-    \   Log OS SPECIFIC DISTRO FFDC  ${index}  ${linux_distro}
+    \    ${ffdc_file_sub_list}=  Log OS SPECIFIC DISTRO FFDC  ${index}
+    ...      ${linux_distro}
+    \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
+    ...      ${ffdc_file_sub_list}
+
+    [Return]  ${ffdc_file_list}
 
 
 System Inventory Files
-    [Documentation]  Copy systest os_inventory files.
+    [Documentation]  Copy systest os_inventory files and return a list of
+    ...              generated files..
     # The os_inventory files are the result of running
     # systest/htx_hardbootme_test.  If these files exist
     # they are copied to the FFDC directory.
     # Global variable ffdc_dir_path is the path name of the
     # directory they are copied to.
-    Copy Files  os_inventory_*.json  ${ffdc_dir_path}
-    Remove Files  os_inventory_*.json
+
+    @{ffdc_file_list}=  Create List
+
+    ${globex}=  Set Variable  os_inventory_*.json
+
+    @{file_list}=  OperatingSystem.List Files In Directory  .  ${globex}
+
+    Copy Files  ${globex}  ${ffdc_dir_path}
+
+    : FOR  ${file_name}  IN  @{file_list}
+    \    Append To List  ${ffdc_file_list}  ${ffdc_dir_path}${file_name}
+
+    Run Keyword and Ignore Error  Remove Files  ${globex}
+
+    [Return]  ${ffdc_file_list}
 
 
 ##############################################################################
 SCP Coredump Files
-    [Documentation]  Copy core dump file from BMC to local system.
+    [Documentation]  Copy core dump files from BMC to local system and return a
+    ...              list of generated file names.
+
+    @{ffdc_file_list}=  Create List
 
     # Check if core dump exist in the /tmp
     ${core_files}  ${stderr}  ${rc}=  BMC Execute Command  ls /tmp/core_*
-    @{core_list} =  Split String    ${core_files}
+    ...  ignore_err=${1}
+    Run Keyword If  '${rc}' != '${0}'  Return From Keyword  ${ffdc_file_list}
+
+    @{core_list}=  Split String  ${core_files}
     # Copy the core files
     Run Key U  Open Connection for SCP
     :FOR  ${index}  IN  @{core_list}
-    \  scp.Get File  ${index}  ${LOG_PREFIX}${index.lstrip("/tmp/")}
+    \    ${ffdc_file_path}=  Catenate  ${LOG_PREFIX}${index.lstrip("/tmp/")}
+    \    ${status}=  Run Keyword and Return Status
+    ...  scp.Get File  ${index}  ${ffdc_file_path}
+    \    Run Keyword If  '${status}' == '${False}'  Continue For Loop
+    \    Append To List  ${ffdc_file_list}  ${ffdc_file_path}
     # Remove the file from remote to avoid re-copying on next FFDC call
-    \  BMC Execute Command  rm ${index}
+    \    BMC Execute Command  rm ${index}  ignore_err=${1}
     # I can't find a way to do this: scp.Close Connection
+
+    [Return]  ${ffdc_file_list}
 
 
 ##############################################################################
@@ -321,10 +446,12 @@ Collect eSEL Log
     ...              to elog formated string text file.
     [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
 
+    @{ffdc_file_list}=  Create List
+
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/enumerate  quiet=${1}
     ${status}=  Run Keyword And Return Status
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    Return From Keyword If  '${status}' == '${False}'
+    Return From Keyword If  '${status}' == '${False}'  ${ffdc_file_list}
 
     ${content}=  To Json  ${resp.content}
     # Grab the list of entries from logging/entry/
@@ -364,9 +491,13 @@ Collect eSEL Log
     ${out}=  Run  which eSEL.pl
     ${status}=  Run Keyword And Return Status
     ...  Should Contain  ${out}  eSEL.pl
-    Return From Keyword If  '${status}' == '${False}'
+    Return From Keyword If  '${status}' == '${False}'  ${ffdc_file_list}
 
     Convert eSEL To Elog Format  ${logpath}
+
+    Append To List  ${ffdc_file_list}  ${logpath}
+
+    [Return]  ${ffdc_file_list}
 
 
 ##############################################################################
