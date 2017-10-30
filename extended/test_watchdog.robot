@@ -6,6 +6,7 @@ Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/utils.robot
 Resource               ../lib/resource.txt
 Resource               ../lib/boot_utils.robot
+Resource               ../lib/state_manager.robot
 
 Suite Setup            Watchdog Timer Test Setup
 Suite Teardown         Restore Watchdog Default Setting
