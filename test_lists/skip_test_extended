@@ -29,3 +29,5 @@
 -e Host_Network_Test
 # TODO: https://github.com/openbmc/openbmc-test-automation/issues/1074
 -e Journal_Log
+# Skipping RAS test cases
+-e Host_RAS
