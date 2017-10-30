@@ -20,7 +20,8 @@
 -e Network_Nping
 # Multiple runs only needed for stability.
 -e Run_Multiple_Power_Cycle
--e Run_Multiple_Reboot
+-e Run_Multiple_BMC_Reset_Via_REST
+-e Run_Multiple_BMC_Reset_Via_Reboot
 -e General_boot_testing
 -e SLP_Service_Test
 -e Check_Network_Latency
