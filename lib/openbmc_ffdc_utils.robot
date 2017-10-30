@@ -62,7 +62,8 @@ Get Current Time Stamp
 
 
 Header Message
-    [Documentation]     Write header message to the report document manifest.
+    [Documentation]     Write header message to the report document manifest
+    ...                 and return a list of generated files.
     ...                 TEST_NAME, TEST_MESSAGE,SUITE_SOURCE,TEST_DOCUMENTATION
     ...                 are auto variables and are populated dynamically by the
     ...                 robot framework during execution
@@ -91,6 +92,8 @@ Header Message
     \   Write Data To File   ${\n}
 
     Write Data To File    ${MSG_DETAIL}
+    ${ffdc_file_list}=  Create List  ${FFDC_FILE_PATH}
+    [Return]  ${ffdc_file_list}
 
 
 Write Cmd Output to FFDC File
