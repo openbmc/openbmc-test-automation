@@ -7,6 +7,7 @@
 -e BMC_Code_Update
 -e Host_Code_Update
 -e Reset_Network_During_BMC_Code_Update
+-e Reboot_BMC_During_BMC_Image_Activation
 -e Reset_Network_During_Host_Code_Update
 -e Host_Mult_Code_Update
 -e Enable_Field_Mode
