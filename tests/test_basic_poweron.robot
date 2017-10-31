@@ -24,9 +24,10 @@ ${ERROR_REGEX}   SEGV|core-dump
 Power On Test
     [Documentation]  Power off and on.
     [Tags]  Power_On_Test
+    [Setup]  Set Auto Reboot  ${0}
+    [Teardown]  Set Auto Reboot  ${1}
 
     Repeat Keyword  ${LOOP_COUNT} times  Host Off And On
-
 
 Check For Application Failures
     [Documentation]  Parse the journal log and check for failures.
