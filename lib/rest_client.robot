@@ -209,8 +209,10 @@ Write Attribute
     Return From Keyword If  ${verify} == ${FALSE}
 
     ${expected_value}=  Set Variable If  '${expected_value}' == '${EMPTY}'
-    ...  ${kwargs['data']['data']}
+    ...  ${kwargs['data']['data']}  ${expected_value}
     ${value}=  Read Attribute  ${uri}  ${attr}
+    Log  Expected Value Is: ${expected_value}
+    Log  Real Value Is: ${value}
     Should Be Equal  ${value}  ${expected_value}
 
 
