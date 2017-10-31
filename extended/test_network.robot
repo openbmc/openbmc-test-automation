@@ -464,8 +464,17 @@ Validate Route On BMC
     # gateway_ip  Gateway IP address.
 
     ${route_info}=  Get BMC Route Info
-    Should Contain  ${route_info}  ${gateway_ip}
-    ...  msg=Gateway IP address not matching.
+
+    # There are two types of gateway addresses, network gateway and 
+    # default gateway. Network gateway is configured while configuring
+    # IP address along with prefix length, it can be empty or 0.0.0.0.
+    # If IP address is empty or 0.0.0.0, it will not have route entry.
+
+    Run Keyword If  '${gateway_ip}' == '0.0.0.0'
+    ...      Pass Execution  Gatway IP is "0.0.0.0".
+    ...  ELSE
+    ...      Should Contain  ${route_info}  ${gateway_ip}
+    ...      msg=Gateway IP address not matching.
 
 Validate MAC on BMC
     [Documentation]  Validate MAC on BMC.
