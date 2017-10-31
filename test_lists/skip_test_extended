@@ -24,10 +24,22 @@
 -e General_boot_testing
 -e SLP_Service_Test
 -e Check_Network_Latency
-# TODO: https://github.com/openbmc/openbmc-test-automation/issues/1072
--e Network_Test
--e Host_Network_Test
+# TODO: Configure invalid IP address use cases.
+-e Configure_Broadcast_IP
+-e Configure_Multicast_IP
+-e Configure_Loopback_IP
+-e Configure_Network_ID
+# TODO: Invalid gateway address configuration.
+-e Configure_Invalid_Gateway_String
+-e Configure_Out_Of_Range_IP_For_Gateway
+-e Configure_Broadcast_IP_For_Gateway
+-e Configure_Loopback_IP_For_Gateway
+-e Configure_Multicast_IP_For_Gateway
+-e Configure_Network_ID_For_Gateway
+-e Configure_Less_Octet_IP_For_Gateway
+-e Configure_Hexadecimal_IP_For_Gateway
 # TODO: https://github.com/openbmc/openbmc-test-automation/issues/1074
 -e Journal_Log
 # Skipping RAS test cases
 -e Host_RAS
+
