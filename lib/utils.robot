@@ -388,7 +388,7 @@ Flash PNOR
     [Arguments]    ${pnor_image}
     @{arglist}=   Create List    ${pnor_image}
     ${args}=     Create Dictionary    data=@{arglist}
-    ${resp}=  Call Method  ${OPENBMC_BASE_URI}control/flash/bios/  update
+    ${resp}=  Call Method  /org/openbmc/control/flash/bios/  update
     ...  data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     Wait Until Keyword Succeeds    2 min   10 sec    Is PNOR Flashing
@@ -396,7 +396,7 @@ Flash PNOR
 Get Flash BIOS Status
     [Documentation]  Returns the status of the flash BIOS API as a string. For
     ...              example 'Flashing', 'Flash Done', etc
-    ${data}=      Read Properties     ${OPENBMC_BASE_URI}control/flash/bios
+    ${data}=  Read Properties  /org/openbmc/control/flash/bios
     [Return]    ${data['status']}
 
 Is PNOR Flashing
