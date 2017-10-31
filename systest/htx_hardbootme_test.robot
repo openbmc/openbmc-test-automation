@@ -7,18 +7,18 @@ Documentation  Stress the system using HTX exerciser.
 # OS_HOST             The OS host name or IP Address.
 # OS_USERNAME         The OS login userid (usually root).
 # OS_PASSWORD         The password for the OS login.
-# HTX_DURATION        Duration of HTX run, for example, 8 hours, or
-#                     30 minutes.
+# HTX_DURATION        Duration of HTX run, for example, 2h, or 30m.
 # HTX_LOOP            The number of times to loop HTX.
 # HTX_INTERVAL        The time delay between consecutive checks of HTX
-#                     status, for example, 30s.
+#                     status, for example, 15m.
 #                     In summary: Run HTX for $HTX_DURATION, looping
-#                     $HTX_LOOP times checking every $HTX_INTERVAL.
+#                     $HTX_LOOP times checking for errors every $HTX_INTERVAL.
+#                     Then allow extra time for OS Boot, HTX startup, shutdown.
 # HTX_KEEP_RUNNING    If set to 1, this indicates that the HTX is to
-#                     continue running after an error.
+#                     continue running after an error was found.
 # CHECK_INVENTORY     If set to 0 or False, OS inventory checking before
 #                     and after each HTX run will be disabled.  This
-#                     parameter is optional.
+#                     parameter is optional.  The default value is True.
 # PREV_INV_FILE_PATH  The file path and name of an initial previous
 #                     inventory snapshot file in JSON format.  Inventory
 #                     snapshots taken before and after each HTX run will
@@ -76,7 +76,26 @@ Hard Bootme Test
 
     Set Suite Variable  ${last_inventory_file_path}  children=true
     Set Suite Variable  ${INV_IGNORE_LIST}  children=true
+
+    # This is the iteration (loop) counter.
     Set Suite Variable  ${iteration}  ${0}  children=true
+
+    # Estimate the time required for a single iteration loop.
+    # HTX_DURATION + 20 minutes for OS boot, HTX startup, shutdownr.
+    ${time_for_1_loop}=  Set Variable  ${HTX_DURATION}
+    ${time_for_1_loop}=  Add Time to Time
+    ...  ${time_for_1_loop}  20m  result_format=compact
+    Set Suite Variable  ${time_for_1_loop}  children=true
+
+    # Estimated time remaining = time_for_1_loop * The number of times to loop.
+    ${Estimated_Time_Remaining}=  Set Variable  ${time_for_1_loop}
+    :FOR  ${INDEX}  IN RANGE  1  ${HTX_LOOP}
+    \    ${Estimated_Time_Remaining}=  Add Time To Time
+    ...  ${Estimated_Time_Remaining}  ${time_for_1_loop}  result_format=compact
+    # Add 5 minutes to allow for teardown.
+    ${Estimated_Time_Remaining}=  Add Time to Time  ${Estimated_Time_Remaining}
+    ...  5m  result_format=compact
+    Set Suite Variable  ${Estimated_Time_Remaining}  children=true
 
     Repeat Keyword  ${HTX_LOOP} times  Run HTX Exerciser
 
@@ -99,8 +118,8 @@ Run HTX Exerciser
     # - Power off.
 
     Set Suite Variable  ${iteration}  ${iteration + 1}
-    ${loop_count}=  Catenate  Starting iteration: ${iteration}
-    Rpvars  loop_count
+    ${Loop_Count}=  Catenate  Starting iteration: ${iteration}
+    Rpvars  Loop_Count  Estimated_Time_Remaining
 
     Boot To OS
 
@@ -132,8 +151,12 @@ Run HTX Exerciser
 
     Rprint Timen  HTX Test ran for: ${HTX_DURATION}
 
-    ${loop_count}=  Catenate  Ending iteration: ${iteration}
-    Rpvars  loop_count
+    ${Loop_Count}=  Catenate  Ending iteration: ${iteration}
+
+    ${Estimated_Time_Remaining}=  Subtract Time From Time
+    ...  ${Estimated_Time_Remaining}  ${time_for_1_loop}  result_format=compact
+
+    Rpvars  Loop_Count  Estimated_Time_Remaining
 
 
 Do Inventory And Compare
