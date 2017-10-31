@@ -228,6 +228,7 @@ Pre Test Case Execution
 
     Boot To OS
     Tool Exist  htxcmdline
+    Tool Exist  lshw
 
     # Shutdown if HTX is running.
     ${status}=  Run Keyword And Return Status  Is HTX Running
