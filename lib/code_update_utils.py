@@ -19,6 +19,7 @@ import gen_print as gp
 import variables as var
 from robot.libraries.BuiltIn import BuiltIn
 
+
 def verify_no_duplicate_image_priorities(image_purpose):
 
     r"""

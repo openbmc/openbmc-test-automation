@@ -2,6 +2,7 @@
 Documentation   Test errors and changes in the environment that BMC code
 ...             update should recover from or not be effected by.
 
+Library         ../../lib/code_update_utils.py
 Resource        ../../lib/code_update_utils_serial.robot
 Resource        ../../lib/openbmc_ffdc.robot
 
@@ -62,3 +63,4 @@ Test Setup Execution
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}  skip_if_active=true
     OBMC Reboot (off)
+    Delete All Non Running BMC Images
