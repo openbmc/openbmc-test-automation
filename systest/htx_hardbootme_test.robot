@@ -7,18 +7,18 @@ Documentation  Stress the system using HTX exerciser.
 # OS_HOST             The OS host name or IP Address.
 # OS_USERNAME         The OS login userid (usually root).
 # OS_PASSWORD         The password for the OS login.
-# HTX_DURATION        Duration of HTX run, for example, 8 hours, or
-#                     30 minutes.
+# HTX_DURATION        Duration of HTX run, for example, 2h, or 30m.
 # HTX_LOOP            The number of times to loop HTX.
 # HTX_INTERVAL        The time delay between consecutive checks of HTX
-#                     status, for example, 30s.
+#                     status, for example, 15m.
 #                     In summary: Run HTX for $HTX_DURATION, looping
-#                     $HTX_LOOP times checking every $HTX_INTERVAL.
+#                     $HTX_LOOP times checking for errors every $HTX_INTERVAL.
+#                     Then allow extra time for OS Boot, HTX startup, shutdown.
 # HTX_KEEP_RUNNING    If set to 1, this indicates that the HTX is to
-#                     continue running after an error.
+#                     continue running after an error was found.
 # CHECK_INVENTORY     If set to 0 or False, OS inventory checking before
 #                     and after each HTX run will be disabled.  This
-#                     parameter is optional.
+#                     parameter is optional.  The default value is True.
 # PREV_INV_FILE_PATH  The file path and name of an initial previous
 #                     inventory snapshot file in JSON format.  Inventory
 #                     snapshots taken before and after each HTX run will
@@ -50,10 +50,9 @@ ${stack_mode}                skip
 ${json_initial_file_path}    ${EXECDIR}/os_inventory_initial.json
 ${json_final_file_path}      ${EXECDIR}/os_inventory_final.json
 ${json_diff_file_path}       ${EXECDIR}/os_inventory_diff.json
-${last_inventory_file_path}  ${EMPTY}
 ${CHECK_INVENTORY}           True
 ${INV_IGNORE_LIST}           size
-${PREV_INV_FILE_PATH}        ${EMPTY}
+${PREV_INV_FILE_PATH}        NONE
 
 
 *** Test Cases ***
@@ -62,21 +61,36 @@ Hard Bootme Test
     [Documentation]  Stress the system using HTX exerciser.
     [Tags]  Hard_Bootme_Test
 
-    # Set last inventory file to PREV_INV_FILE_PATH otherwise set it
-    # to ${EMPTY}.
-    ${last_inventory_file_path}=  Get Variable Value  ${PREV_INV_FILE_PATH}
-    ...  ${EMPTY}
-
     Rprintn
     Rpvars  HTX_DURATION  HTX_INTERVAL  CHECK_INVENTORY  INV_IGNORE_LIST
     ...  PREV_INV_FILE_PATH
 
-    Run Keyword If  '${last_inventory_file_path}' != '${EMPTY}'
-    ...  OperatingSystem.File Should Exist  ${last_inventory_file_path}
+    Run Keyword If  '${PREV_INV_FILE_PATH}' != 'NONE'
+    ...  OperatingSystem.File Should Exist  ${PREV_INV_FILE_PATH}
 
-    Set Suite Variable  ${last_inventory_file_path}  children=true
+    Set Suite Variable  ${PREV_INV_FILE_PATH}  children=true
     Set Suite Variable  ${INV_IGNORE_LIST}  children=true
+
+    # This is the iteration (loop) counter.
     Set Suite Variable  ${iteration}  ${0}  children=true
+
+    # Estimate the time required for a single iteration loop.
+    # HTX_DURATION + 10 minutes for OS boot, HTX startup, shutdownr.
+    ${Estimated_time_for_a_loop}=  Set Variable  ${HTX_DURATION}
+    ${Estimated_time_for_a_loop}=  Add Time to Time
+    ...  ${Estimated_time_for_a_loop}  10m  result_format=compact
+    Set Suite Variable  ${Estimated_time_for_a_loop}  children=true
+
+    # Estimated time remaining =  Estimated_time_for_a_loop * HTX_LOOP
+    ${Estimated_time_remaining}=  Set Variable  ${Estimated_time_for_a_loop}
+    :FOR  ${INDEX}  IN RANGE  1  ${HTX_LOOP}
+    \    ${Estimated_time_remaining}=  Add Time To Time
+    ...  ${Estimated_time_remaining}  ${Estimated_time_for_a_loop}
+    ...  result_format=compact
+    # Add 5 minutes to allow for teardown.
+    ${Estimated_time_remaining}=  Add Time to Time  ${Estimated_time_remaining}
+    ...  5m  result_format=compact
+    Set Suite Variable  ${Estimated_time_remaining}  children=true
 
     Repeat Keyword  ${HTX_LOOP} times  Run HTX Exerciser
 
@@ -100,7 +114,7 @@ Run HTX Exerciser
 
     Set Suite Variable  ${iteration}  ${iteration + 1}
     ${loop_count}=  Catenate  Starting iteration: ${iteration}
-    Rpvars  loop_count
+    Rpvars  loop_count  Estimated_time_for_a_loop  Estimated_time_remaining
 
     Boot To OS
 
@@ -109,7 +123,7 @@ Run HTX Exerciser
 
     Run Keyword If  '${CHECK_INVENTORY}' == 'True'
     ...  Do Inventory And Compare  ${json_initial_file_path}
-    ...  ${last_inventory_file_path}
+    ...  ${PREV_INV_FILE_PATH}
 
     Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
     ...  Create Default MDT Profile
@@ -122,7 +136,7 @@ Run HTX Exerciser
 
     Run Keyword If  '${CHECK_INVENTORY}' == 'True'
     ...  Do Inventory And Compare  ${json_final_file_path}
-    ...  ${last_inventory_file_path}
+    ...  ${PREV_INV_FILE_PATH}
 
     Power Off Host
 
@@ -133,22 +147,28 @@ Run HTX Exerciser
     Rprint Timen  HTX Test ran for: ${HTX_DURATION}
 
     ${loop_count}=  Catenate  Ending iteration: ${iteration}
-    Rpvars  loop_count
+
+    ${Estimated_time_remaining}=  Subtract Time From Time
+    ...  ${Estimated_time_remaining}  ${Estimated_time_for_a_loop}
+    ...  result_format=compact
+    Set Suite Variable  ${Estimated_time_remaining}  children=true
+
+    Rpvars  loop_count  Estimated_time_remaining
 
 
 Do Inventory And Compare
     [Documentation]  Do inventory and compare.
-    [Arguments]  ${inventory_file_path}  ${last_inventory_file_path}
+    [Arguments]  ${inventory_file_path}  ${PREV_INV_FILE_PATH}
     # Description of argument(s):
-    # inventory_file_path        The file to receive the inventory snapshot.
-    # last_inventory_file_path   The previous inventory to compare with.
+    # inventory_file_path  The file to receive the inventory snapshot.
+    # PREV_INV_FILE_PATH   The previous inventory to compare with.
 
     Create JSON Inventory File  ${inventory_file_path}
-    Run Keyword If  '${last_inventory_file_path}' != '${EMPTY}'
+    Run Keyword If  '${PREV_INV_FILE_PATH}' != 'NONE'
     ...  Compare Json Inventory Files  ${inventory_file_path}
-    ...  ${last_inventory_file_path}
-    ${last_inventory_file_path}=   Set Variable  ${inventory_file_path}
-    Set Suite Variable  ${last_inventory_file_path}  children=true
+    ...  ${PREV_INV_FILE_PATH}
+    ${PREV_INV_FILE_PATH}=   Set Variable  ${inventory_file_path}
+    Set Suite Variable  ${PREV_INV_FILE_PATH}  children=true
 
 
 Compare Json Inventory Files
