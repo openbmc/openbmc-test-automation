@@ -20,6 +20,36 @@ import variables as var
 from robot.libraries.BuiltIn import BuiltIn
 
 ###############################################################################
+def delete_all_non_running_bmc_images_no_deleteall():
+
+    r"""
+    Delete all BMC images from the BMC except for the one that is running. Do
+    not use the DeleteAll REST interface, but delete each image individually.
+    """
+
+    # TODO: Get rid of this keyword and use the Delete All Non Running BMC
+    # Images keyword when the DeleteAll REST interface is fixed.
+
+    # Get the version of the image currently running on the BMC.
+    _, cur_img_version = keyword.run_key("Get BMC Version")
+    # Remove the surrounding double quotes from the version.
+    cur_img_version = cur_img_version.replace('"', '')
+    _, images = keyword.run_key("Get Software Objects  version_type="
+                                + var.VERSION_PURPOSE_BMC)
+
+    for image_name in images:
+        _, image_properties = keyword.run_key(
+            "Get Host Software Property  " + image_name)
+
+        if image_properties['Purpose'] == var.VERSION_PURPOSE_BMC \
+                and image_properties['Version'] != cur_img_version:
+            gp.print_timen('Deleting: ' + image_name)
+            keyword.run_key("Delete Software Object  " + image_name)
+
+###############################################################################
+
+
+###############################################################################
 def verify_no_duplicate_image_priorities(image_purpose):
 
     r"""
