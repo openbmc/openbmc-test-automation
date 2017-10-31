@@ -180,7 +180,12 @@ Upload And Activate Image
     ${activation}=  Set Variable  &{software_state}[Activation]
     Run Keyword If
     ...  '${skip_if_active}' == 'true' and '${activation}' == '${ACTIVE}'
-    ...  Switch To Active Image And Pass  ${SOFTWARE_VERSION_URI}${version_id}
+    ...  Run Keywords
+    ...      Set Host Software Property  ${SOFTWARE_VERSION_URI}${version_id}
+    ...      Priority  ${0}
+    ...    AND
+    ...      Return From Keyword
+
     Should Be Equal As Strings  &{software_state}[Activation]  ${READY}
 
     # Request the image to be activated.
@@ -221,20 +226,6 @@ Attempt To Reboot BMC During Image Activation
 
     ${resp}=  OpenBMC Get Request  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
-
-
-Switch To Active Image And Pass
-    [Documentation]  Make the given active image the image running on the BMC
-    ...              and pass the test.
-    [Arguments]  ${software_object}
-
-    # Description of argument(s):
-    # software_object  Software object path.
-    #                  (e.g. "/xyz/openbmc_project/software/f3b29aa8").
-
-    Set Host Software Property  ${software_object}  Priority  ${0}
-    OBMC Reboot (off)
-    Pass Execution  ${software_object} was already on the BMC.
 
 
 Activate Image And Verify No Duplicate Priorities
