@@ -37,6 +37,7 @@ Enable Field Mode And Verify Unmount
 
     ${args}=  Create Dictionary  data=${1}
     Write Attribute  ${SOFTWARE_VERSION_URI}  FieldModeEnabled  data=${args}
+    Sleep  5s
     BMC Execute Command  [ ! -d "/usr/local/share" ]
 
 
