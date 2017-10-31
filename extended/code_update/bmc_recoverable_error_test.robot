@@ -62,3 +62,4 @@ Test Setup Execution
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}  skip_if_active=true
     OBMC Reboot (off)
+    Delete All Non Running BMC Images
