@@ -107,13 +107,6 @@ Test Correct Reservation_ID
     ${output}=      Check IPMI OEMpartialadd Accept  0x32 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
     Should Be Empty    ${output}
 
-Clear Test File
-   [Documentation]   Clear /tmp/esel
-   [Tags]  Clear_Test_File
-
-   BMC Execute Command   rm /tmp/esel
-   BMC Execute Command   sync
-
 *** Keywords ***
 
 Create eSEL
