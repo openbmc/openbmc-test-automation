@@ -571,7 +571,7 @@ def get_state(openbmc_host="",
             grp.rpissuing(remote_cmd_buf)
         try:
             stdout, stderr, rc =\
-                BuiltIn().wait_until_keyword_succeeds("5 sec", "0 sec",
+                BuiltIn().wait_until_keyword_succeeds("10 sec", "0 sec",
                                                       *cmd_buf)
             if rc == 0 and stderr == "":
                 uptime = stdout
