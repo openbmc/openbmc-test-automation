@@ -7,6 +7,7 @@ execute_ssh_command, etc.
 
 import sys
 import re
+import socket
 import paramiko
 import exceptions
 
@@ -272,10 +273,19 @@ def execute_ssh_command(cmd_buf,
                 # Now we must continue to next loop iteration to retry the
                 # execute_command.
                 continue
-            if except_type is paramiko.ssh_exception.SSHException and\
-               re.match(r"SSH session not active", str(except_value)):
+            if (except_type is paramiko.ssh_exception.SSHException and
+                re.match(r"SSH session not active", str(except_value))) or\
+               (except_type is socket.error and
+                re.match(r"\[Errno 104\] Connection reset by peer",
+                         str(except_value))):
                 # Close and re-open a connection.
-                sshlib.close_connection()
+                # Note: close_connection() doesn't appear to get rid of the
+                # connection.  It merely closes it.  Since there is a concern
+                # about over-consumption of resources, we use
+                # close_all_connections() which also gets rid of all
+                # connections.
+                gp.dprint_timen("Closing all connections.")
+                sshlib.close_all_connections()
                 gp.dprint_timen("Connecting to " +
                                 open_connection_args['host'] + ".")
                 cix = sshlib.open_connection(**open_connection_args)
