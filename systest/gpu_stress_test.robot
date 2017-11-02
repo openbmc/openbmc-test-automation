@@ -3,8 +3,10 @@ Documentation    Stress the system using HTX exerciser.
 
 Resource         ../syslib/utils_os.robot
 
-Test Setup      Pre Test Case Execution
-Test Teardown   Post Test Case Execution
+Suite Setup      Run Keyword  Start SOL Console Logging
+Test Setup       Pre Test Case Execution
+Test Teardown    Post Test Case Execution
+Suite Teardown   Teardown The Suite
 
 *** Variables ****
 
@@ -72,6 +74,12 @@ Post Test Case Execution
 
     # Collect nvidia-smi output data on exit.
     Collect NVIDIA Log File  end
+
+
+Teardown The Suite
+    [Documentation]  Do the final teardown and cleanup.
+
+    Stop SOL Console Logging
 
     FFDC On Test Case Fail
     Close All Connections
