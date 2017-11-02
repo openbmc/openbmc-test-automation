@@ -3,6 +3,7 @@ Documentation    Stress the system using HTX exerciser.
 
 Resource         ../syslib/utils_os.robot
 
+Suite Setup     Run Keyword  Start SOL Console Logging
 Test Setup      Pre Test Case Execution
 Test Teardown   Post Test Case Execution
 
