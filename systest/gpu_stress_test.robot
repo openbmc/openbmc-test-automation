@@ -3,8 +3,10 @@ Documentation    Stress the system using HTX exerciser.
 
 Resource         ../syslib/utils_os.robot
 
-Test Setup      Pre Test Case Execution
-Test Teardown   Post Test Case Execution
+Suite Setup      Run Keyword  Start SOL Console Logging
+Test Setup       Pre Test Case Execution
+Test Teardown    Test Teardown Execution
+Suite Teardown   Suite Teardown Execution
 
 *** Variables ****
 
@@ -60,11 +62,10 @@ Loop HTX Health Check
     ...  AND  Sleep  ${HTX_INTERVAL}
 
 
-Post Test Case Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
-    # 1. Shut down HTX exerciser if test Failed.
-    # 2. Capture FFDC on test failure.
-    # 3. Close all open SSH connections.
+    #  Shut down HTX exerciser if test Failed.
+    #  Collect NVIDIA log.
 
     # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
     Run Keyword If  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
@@ -72,6 +73,17 @@ Post Test Case Execution
 
     # Collect nvidia-smi output data on exit.
     Collect NVIDIA Log File  end
+
+
+Suite Teardown Execution
+    [Documentation]  Do the final teardown and cleanup.
+    #  Stop SOL Console Logging.
+    #  Collect FFDC if Test Case Fail.
+    #  Close Connections.
+
+    ${keyword_buf}=  Catenate  Stop SOL Console Logging
+    ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
+    Run Key  ${keyword_buf}
 
     FFDC On Test Case Fail
     Close All Connections
