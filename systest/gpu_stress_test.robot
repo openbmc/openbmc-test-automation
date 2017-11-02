@@ -3,6 +3,7 @@ Documentation    Stress the system using HTX exerciser.
 
 Resource         ../syslib/utils_os.robot
 
+Suite Setup     Run Keyword  Start SOL Console Logging
 Test Setup      Pre Test Case Execution
 Test Teardown   Post Test Case Execution
 
@@ -72,6 +73,10 @@ Post Test Case Execution
 
     # Collect nvidia-smi output data on exit.
     Collect NVIDIA Log File  end
+
+    ${keyword_buf}=  Catenate  Stop SOL Console Logging
+    ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
+    Run Key  ${keyword_buf}
 
     FFDC On Test Case Fail
     Close All Connections
