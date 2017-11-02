@@ -31,3 +31,7 @@
 -e Journal_Log
 # Skipping RAS test cases
 -e Host_RAS
+# Skip multi threading test cuasing XML parser failure.
+-e Stress_BMC_REST_Server
+-e Stress_BMC_SSH_Server
+-e Stress_BMC_IPMI_Server
