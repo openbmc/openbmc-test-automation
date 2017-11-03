@@ -70,6 +70,8 @@ Post Update Boot To OS
 REST Host Code Update While OS Is Running
     [Documentation]  Do a PNOR code update while the host is running.
     [Tags]  REST_Host_Code_Update_While_OS_Is_Running
+    [Teardown]  Run Keywords  REST Power Off  stack_mode=skip
+    ...         AND  Code Update Test Teardown
 
     Run Keyword If  '${PREV_TEST_STATUS}' == 'FAIL'
     ...  Fail  Cannot boot the OS.
@@ -78,7 +80,6 @@ REST Host Code Update While OS Is Running
     Upload And Activate Image  ${ALTERNATE_IMAGE_FILE_PATH}
     REST Power On  stack_mode=normal
     Verify Running Host Image  ${ALTERNATE_IMAGE_FILE_PATH}
-
 
 Host Image Priority Attribute Test
     [Documentation]  Set "Priority" attribute.
@@ -206,7 +207,8 @@ Upload And Activate Multiple BMC Images Setup
     [Documentation]  Check that the ALTERNATE_FILE_PATH variable is set.
 
     Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
-
+    Delete All PNOR Images
+    Upload And Activate Image  ${IMAGE_FILE_PATH}
 
 Get PNOR Extended Version
     [Documentation]  Return the PNOR extended version.
