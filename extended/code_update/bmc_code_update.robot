@@ -6,6 +6,7 @@ Documentation     Update the BMC code on a target BMC.
 
 Library           ../../lib/code_update_utils.py
 Variables         ../../data/variables.py
+Resource          ../../lib/utils.robot
 Resource          ../../lib/boot_utils.robot
 Resource          code_update_utils.robot
 Resource          ../../lib/code_update_utils.robot
@@ -29,6 +30,13 @@ ${running_persistence_test}       ${FALSE}
 ${test_errlog_text}               AutoTestSimple
 
 *** Test Cases ***
+
+Test Basic BMC Performance Before BMC Code Update
+    [Documentation]  Check performance of memory, CPU & file system of BMC.
+    [Tags]  Test_Basic_BMC_Performance_Before_BMC_Code_Update
+
+    Open Connection And Log In
+    Check BMC Performance
 
 Prepare Persistent Data
     [Documentation]  Set data that should persist across the code update.
@@ -164,6 +172,13 @@ Delete All Non Running BMC Images
     ...  version_type=${VERSION_PURPOSE_BMC}
     Should Not Contain  ${software_ids}  ${version_id}
 
+Test Basic BMC Performance After Code Update
+    [Documentation]  Check performance of memory, CPU & file system of BMC.
+    [Tags]  Test_Basic_BMC_Performance_After_Code_Update
+
+    Open Connection And Log In
+    Check BMC Performance
+
 
 *** Keywords ***
 
@@ -221,3 +236,4 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Run Keyword If  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
+    Close All Connections
