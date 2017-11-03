@@ -34,7 +34,7 @@ ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
 ${HOST_SETTING}    ${SETTINGS_URI}host0
 # /run/initramfs/ro associate filesystem  should be 100% full always
 ${bmc_file_system_usage_cmd}=
-...  df -h | grep -v /run/initramfs/ro | cut -c 52-54 | grep 100 | wc -l
+...  df -h | cut -c 52-54 | grep 100 | wc -l
 
 ${BOOT_TIME}     ${0}
 ${BOOT_COUNT}    ${0}
@@ -717,22 +717,19 @@ IP Address To Hex String
 BMC CPU Performance Check
    [Documentation]   Minimal 10% of proc should be free in this instance
 
-    ${bmc_cpu_usage_output}  ${stderr}=  Execute Command  ${bmc_cpu_usage_cmd}
-    ...                   return_stderr=True
-    Should be empty  ${stderr}
+    ${bmc_cpu_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ${bmc_cpu_usage_cmd}
     ${bmc_cpu_percentage}=  Fetch From Left  ${bmc_cpu_usage_output}  %
     Should be true  ${bmc_cpu_percentage} < 90
 
 BMC Mem Performance Check
     [Documentation]   Minimal 10% of memory should be free in this instance
 
-    ${bmc_mem_free_output}  ${stderr}=   Execute Command  ${bmc_mem_free_cmd}
-    ...                   return_stderr=True
-    Should be empty  ${stderr}
+    ${bmc_mem_free_output}  ${stderr}  ${rc}=   BMC Execute Command
+    ...  ${bmc_mem_free_cmd}
 
-    ${bmc_mem_total_output}  ${stderr}=   Execute Command  ${bmc_mem_total_cmd}
-    ...                   return_stderr=True
-    Should be empty  ${stderr}
+    ${bmc_mem_total_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ${bmc_mem_total_cmd}
 
     ${bmc_mem_percentage}=   Evaluate  ${bmc_mem_free_output}*100
     ${bmc_mem_percentage}=  Evaluate
@@ -747,9 +744,8 @@ BMC File System Usage Check
     # /dev/ubiblock0_0         14.4M     14.4M         0 100% /media/rofs-c9249b0e
     # /dev/ubiblock8_0         19.6M     19.6M         0 100% /media/pnor-ro-8764baa3
     # /dev/ubiblock4_0         14.4M     14.4M         0 100% /media/rofs-407816c
-    ${bmc_fs_usage_output}  ${stderr}=   Execute Command
-    ...   ${bmc_file_system_usage_cmd}  return_stderr=True
-    Should Be Empty  ${stderr}
+    ${bmc_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...   ${bmc_file_system_usage_cmd}
     Should Be True  ${bmc_fs_usage_output}==4
 
 Check BMC CPU Performance
@@ -1214,3 +1210,32 @@ Copy Address Translation Utils To HOST OS
     ...  password=${OS_PASSWORD}
     scp.Put File  ${probe_cpu_tool_path}  ${target_file_path}
     scp.Put File  ${scom_addrs_tool_path}  ${target_file_path}
+
+
+Verify BMC RTC And UTC Time Drift
+    [Documentation]  Verify that the RTC and UTC time difference is less than
+    ...              the given time_drift_max.
+    [Arguments]  ${time_diff_max}=${10}
+
+    # Description of argument(s):
+    # time_diff_max   The max allowable RTC and UTC time difference in seconds.
+
+    # Example:
+    # time_dict:
+    #   [local_time]:               Fri 2017-11-03 152756 UTC
+    #   [local_time_seconds]:       1509740876
+    #   [universal_time]:           Fri 2017-11-03 152756 UTC
+    #   [universal_time_seconds]:   1509740876
+    #   [rtc_time]:                 Fri 2016-05-20 163403
+    #   [rtc_time_seconds]:         1463780043
+    #   [time_zone]:                n/a (UTC, +0000)
+    #   [network_time_on]:          yes
+    #   [ntp_synchronized]:         no
+    #   [rtc_in_local_tz]:          no
+
+    ${bmc_time}=  Get BMC Date Time
+    ${time_diff}=  Evaluate
+    ...  ${bmc_time['universal_time_seconds']} - ${bmc_time['rtc_time_seconds']}
+    Should Be True  ${time_diff} < ${time_diff_max}
+
+

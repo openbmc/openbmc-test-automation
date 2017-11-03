@@ -4,8 +4,11 @@ Documentation     Verify REST services Get/Put/Post/Delete.
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/resource.txt
+Resource          ../lib/utils.robot
 Library           Collections
+Suite Setup       Run Keyword And Ignore Error  Check BMC Performance
 Test Teardown     FFDC On Test Case Fail
+Suite Teardown    Run Keyword And Ignore Error  Check BMC Performance
 
 *** Variables ***
 
