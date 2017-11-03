@@ -4,12 +4,16 @@ Documentation     Verify REST services Get/Put/Post/Delete.
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/resource.txt
+Resource          ../lib/utils.robot
 Library           Collections
+Suite Setup       Check Basic BMC Performance
 Test Teardown     FFDC On Test Case Fail
+Suite Teardown    Check Basic BMC Performance
 
 *** Variables ***
 
 *** Test Cases ***
+
 
 REST Login Session To BMC
     [Documentation]  Test REST session log-in.
@@ -342,8 +346,13 @@ Delete Response Code
     [Tags]  Delete_Response_Codes
     [Template]  Execute Delete And Check Response
 
-
 *** Keywords ***
+
+Check Basic BMC Performance
+    [Documentation]  Check performance of memory, CPU & file system of BMC.
+
+    Run Keyword And Ignore Error  Check BMC Performance
+
 
 Execute Get And Check Response
     [Documentation]  Request "Get" url path and expect REST response code.
@@ -443,3 +452,6 @@ Verify JSON Response Content
     ...  Should Not Be Empty  ${jsondata["data"]}
     Should Be Equal As Strings  ${jsondata["message"]}  200 OK
     Should Be Equal As Strings  ${jsondata["status"]}  ok
+
+
+
