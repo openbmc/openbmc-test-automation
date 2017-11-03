@@ -206,7 +206,8 @@ Upload And Activate Multiple BMC Images Setup
     [Documentation]  Check that the ALTERNATE_FILE_PATH variable is set.
 
     Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
-
+    Delete All PNOR Images
+    Upload And Activate Image  ${IMAGE_FILE_PATH}
 
 Get PNOR Extended Version
     [Documentation]  Return the PNOR extended version.
