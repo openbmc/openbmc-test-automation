@@ -41,10 +41,15 @@ def delete_all_non_running_bmc_images_no_deleteall():
         _, image_properties = keyword.run_key(
             "Get Host Software Property  " + image_name)
 
+        gp.print_timen('cur_img_version: ' + cur_img_version)
+        gp.print_timen('Purpose:' + image_properties['Purpose'])
+        gp.print_timen('Version: ' + image_properties['Version'])
+
         if image_properties['Purpose'] == var.VERSION_PURPOSE_BMC \
                 and image_properties['Version'] != cur_img_version:
             gp.print_timen('Deleting: ' + image_name)
             keyword.run_key("Delete Software Object  " + image_name)
+
 
 ###############################################################################
 

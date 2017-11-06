@@ -8,10 +8,10 @@ Resource        ../../lib/openbmc_ffdc.robot
 
 Force Tags     BMC_Update_Recoverable_Error
 
-Suite Setup     Suite Setup Execution
+#Suite Setup     Suite Setup Execution
 
-Test Setup      Test Setup Execution
-Test Teardown   FFDC On Test Case Fail
+#Test Setup      Test Setup Execution
+#Test Teardown   FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -41,6 +41,10 @@ Reboot BMC During BMC Image Activation
 
     Attempt To Reboot BMC During Image Activation  ${ALTERNATE_IMAGE_FILE_PATH}
     OBMC Reboot (off)
+
+Delete Test
+    [Tags]  Delete_Test
+    Delete All Non Running BMC Images No DeleteAll
 
 
 *** Keywords ***
