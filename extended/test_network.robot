@@ -424,7 +424,7 @@ Validate IP On BMC
     # ip_address  IP address of the system.
     # ip_info     List of IP address and prefix length values.
 
-    Should Contain Match  ${ip_info}  ${ip_address}*
+    Should Contain Match  ${ip_info}  ${ip_address}/*
     ...  msg=IP address does not exist.
 
 Verify IP Address Via REST And Delete
@@ -464,8 +464,14 @@ Validate Route On BMC
     # gateway_ip  Gateway IP address.
 
     ${route_info}=  Get BMC Route Info
-    Should Contain  ${route_info}  ${gateway_ip}
-    ...  msg=Gateway IP address not matching.
+
+    # If gateway IP is empty or 0.0.0.0 it will not have route entry.
+
+    Run Keyword If  '${gateway_ip}' == '0.0.0.0'
+    ...      Pass Execution  Gatway IP is "0.0.0.0".
+    ...  ELSE
+    ...      Should Contain  ${route_info}  ${gateway_ip}
+    ...      msg=Gateway IP address not matching.
 
 Validate MAC on BMC
     [Documentation]  Validate MAC on BMC.
