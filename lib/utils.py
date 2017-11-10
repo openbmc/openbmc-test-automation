@@ -6,7 +6,15 @@ Companion file to utils.robot.
 
 import gen_print as gp
 import gen_robot_keyword as grk
+import bmc_ssh_utils as bsu
+import var_funcs as vf
 from robot.libraries.BuiltIn import BuiltIn
+from robot.libraries import DateTime
+try:
+    from robot.utils import DotDict
+except ImportError:
+    pass
+import collections
 
 
 ###############################################################################
@@ -97,5 +105,58 @@ def translate_power_policy_value(policy):
     status, ret_values = grk.run_key_u("Get Variable Value  ${" + policy + "}",
                                        quiet=1)
     return ret_values
+
+###############################################################################
+
+
+###############################################################################
+def get_bmc_date_time():
+
+    r"""
+    Get date/time info from BMC and return as a dictionary.
+
+    Example of dictionary data returned by this keyword.
+    time_dict:
+      [local_time]:               Fri 2017-11-03 152756 UTC
+      [local_time_seconds]:       1509740876
+      [universal_time]:           Fri 2017-11-03 152756 UTC
+      [universal_time_seconds]:   1509740876
+      [rtc_time]:                 Fri 2016-05-20 163403
+      [rtc_time_seconds]:         1463780043
+      [time_zone]:                n/a (UTC, +0000)
+      [network_time_on]:          yes
+      [ntp_synchronized]:         no
+      [rtc_in_local_tz]:          no
+    """
+
+    out_buf, stderr, rc = bsu.bmc_execute_command('timedatectl')
+    # Example of output returned by call to timedatectl:
+    #       Local time: Fri 2017-11-03 15:27:56 UTC
+    #   Universal time: Fri 2017-11-03 15:27:56 UTC
+    #         RTC time: Fri 2016-05-20 16:34:03
+    #        Time zone: n/a (UTC, +0000)
+    #  Network time on: yes
+    # NTP synchronized: no
+    #  RTC in local TZ: no
+
+    # Convert the out_buf to a dictionary.
+    initial_time_dict = vf.key_value_outbuf_to_dict(out_buf)
+
+    # For each "_time" entry in the dictionary, we will create a corresponding
+    # "_time_seconds" entry.  We create a new dictionary so that the entries
+    # are kept in a nice order for printing.
+    try:
+        result_time_dict = collections.OrderedDict()
+    except AttributeError:
+        result_time_dict = DotDict()
+
+    for key, value in initial_time_dict.items():
+        result_time_dict[key] = value
+        if not key.endswith("_time"):
+            continue
+        result_time_dict[key + '_seconds'] = \
+            int(DateTime.convert_date(value, result_format='epoch'))
+
+    return result_time_dict
 
 ###############################################################################
