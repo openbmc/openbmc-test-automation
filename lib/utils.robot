@@ -1214,3 +1214,26 @@ Copy Address Translation Utils To HOST OS
     ...  password=${OS_PASSWORD}
     scp.Put File  ${probe_cpu_tool_path}  ${target_file_path}
     scp.Put File  ${scom_addrs_tool_path}  ${target_file_path}
+
+
+Validate BMC RTC And UTC Date Time Diff
+    [Documentation]  Check RTC and UTC time drift difference from the BMC.
+
+    # Example:
+    # root@witherspoon:~# timedatectl
+    #       Local time: Fri 2017-11-03 17:07:39 UTC
+    #   Universal time: Fri 2017-11-03 17:07:39 UTC
+    #         RTC time: Fri 2016-05-20 18:13:45
+    #        Time zone: n/a (UTC, +0000)
+    #  Network time on: yes
+    #  NTP synchronized: no
+    #   RTC in local TZ: no
+    # root@witherspoon:~#
+
+    ${bmc_time}=  Get BMC Date Time
+    ${time_diff}=
+    ...  Evaluate  ${bmc_time['universal_time_seconds']} - ${bmc_time['rtc_time_seconds']}
+    # The RTC and UTC time diff should be less than 10 seconds.
+    Should Be True  ${time_diff} < ${10}
+
+
