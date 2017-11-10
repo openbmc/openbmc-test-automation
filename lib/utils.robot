@@ -1214,3 +1214,32 @@ Copy Address Translation Utils To HOST OS
     ...  password=${OS_PASSWORD}
     scp.Put File  ${probe_cpu_tool_path}  ${target_file_path}
     scp.Put File  ${scom_addrs_tool_path}  ${target_file_path}
+
+
+Verify BMC RTC And UTC Time Drift
+    [Documentation]  Verify that the RTC and UTC time difference is less than
+    ...  the given time_drift_max.
+    [Arguments]  ${time_diff_max}=${10}
+
+    # Description of argument(s):
+    # time_diff_max    The RTC and UTC time difference in seconds.
+
+    # Example:
+    # time_dict:
+    #   [local_time]:               Fri 2017-11-03 152756 UTC
+    #   [local_time_seconds]:       1509740876
+    #   [universal_time]:           Fri 2017-11-03 152756 UTC
+    #   [universal_time_seconds]:   1509740876
+    #   [rtc_time]:                 Fri 2016-05-20 163403
+    #   [rtc_time_seconds]:         1463780043
+    #   [time_zone]:                n/a (UTC, +0000)
+    #   [network_time_on]:          yes
+    #   [ntp_synchronized]:         no
+    #   [rtc_in_local_tz]:          no
+
+    ${bmc_time}=  Get BMC Date Time
+    ${time_diff}=  Evaluate
+    ...  ${bmc_time['universal_time_seconds']} - ${bmc_time['rtc_time_seconds']}
+    Should Be True  ${time_diff} < ${time_diff_max}
+
+
