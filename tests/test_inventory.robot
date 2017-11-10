@@ -266,6 +266,26 @@ Verify Fan Functional State
     \  Should Be True  ${present}
     ...  msg=${fan_uri} is functional but "Present" is not set.
 
+Verify CPU Functional State
+    [Documentation]  Verify that "Present" CPU property is set if "Functional"
+    ...              CPU property is set.
+    [Tags]  Verify_CPU_Functional_State
+    # Example:
+    # "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0": {
+    #     "Functional": 1,
+    #     "Present": 1,
+    #     "PrettyName": "cpu0"
+    # },
+
+    ${cpu_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  cpu*
+    Should Not Be Empty  ${cpu_list}
+    :FOR  ${cpu_uri}  IN  @{cpu_list}
+    \  ${status}=  Run Keyword And Return Status
+    ...  Check URL Property If Functional  ${cpu_uri}
+    \  Continue For Loop If  '${status}' == '${False}'
+    \  ${present}=  Read Attribute  ${cpu_uri}  Present
+    \  Should Be True  ${present}
+    ...  msg=${cpu_uri} is functional but "Present" is not set.
 
 Check Air Or Water Cooled
     [Documentation]  Check if this system is Air or water cooled.
