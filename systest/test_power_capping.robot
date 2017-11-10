@@ -40,12 +40,12 @@ Escale System On And PL Enabled
     Should Contain  ${output}  Sensor: POWR
 
     ${power}=  Get DCMI Power Limit
-    Should Be True  ${power} == ${0}
-    ...  msg=Initial dcmi power limit should be zero.
+    Should Be True  ${power} == ${3050}
+    ...  msg=DCMI power limit should be 3050.
 
     Activate DCMI Power And Verify
 
-    Set DCMI Power Limit And Verify  300
+    Set DCMI Power Limit And Verify  3000
 
 
 Escale System On And PL Disabled
@@ -53,22 +53,22 @@ Escale System On And PL Disabled
     ...  deactivate power limit prior to change.
     [Tags]  Escale_System_On_And_PL_Disabled
 
-    ${power_setting}=  Set Variable  ${600}
+    ${power_setting}=  Set Variable  ${2950}
 
     REST Power On  stack_mode=skip
 
-    Activate DCMI Power And Verify
+    Fail If DCMI Power Is Not Activated
 
     Set DCMI Power Limit And Verify  ${power_setting}
 
     # Deactivate and check limit
     Deactivate DCMI Power And Verify
 
-    ${cmd}=  Catenate  dcmi power set_limit limit 500
+    ${cmd}=  Catenate  dcmi power set_limit limit 3000
     Run External IPMI Standard Command  ${cmd}
     ${power}=  Get DCMI Power Limit
 
-    Should Be True  ${power} == ${500}
+    Should Be True  ${power} == ${3000}
     ...  msg=Could not set power limit when power limiting deactivated.
 
 
@@ -77,7 +77,7 @@ Escale Check Settings System On Then Off
     ...  BMC state is power on.
     [Tags]  Escale_Check_Settings_System_On_Then_Off
 
-    ${power_setting}=  Set Variable  ${800}
+    ${power_setting}=  Set Variable  ${2950}
 
     REST Power On  stack_mode=skip
 
@@ -98,7 +98,6 @@ Escale Check Settings System On Then Off
     Should Be True  ${power} == ${power_setting}
     ...  msg=Power limit setting of watts not retained at Runtime.
 
-    Set DCMI Power Limit And Verify  0
     Deactivate DCMI Power And Verify
 
 
@@ -106,16 +105,15 @@ Escale Check Settings System Off Then On
     [Documentation]  Set and activate power limit with system power off.
     [Tags]  Escale_Check_Settings_System_Off_Then_On
 
-    ${power_setting}=  Set Variable  ${500}
+    ${power_setting}=  Set Variable  ${3000}
 
     Smart Power Off
 
-    # Check that DCMI power limiting is deactivated and that the initial
-    # power limit setting = 0.
+    # Check deactivated and the power limit.
     Fail If DCMI Power Is Not Deactivated
     ${power}=  Get DCMI Power Limit
-    Should Be True  ${power} == ${0}
-    ...  msg=Initial dcmi power limit should be zero.
+    Should Be True  ${power} == ${2950}
+    ...  msg=DCMI power not set at ${power_setting} as expected
 
     Activate DCMI Power And Verify
     Set DCMI Power Limit And Verify  ${power_setting}
@@ -133,12 +131,12 @@ Escale Change Limit At Runtime
     [Documentation]  Change power limit at runtime.
     [Tags]  Escale_Change_Limit_At_Runtime
 
-    ${power_setting}=  Set Variable  ${600}
+    ${power_setting}=  Set Variable  ${3050}
 
     Smart Power Off
 
     Set DCMI Power Limit And Verify  ${power_setting}
-    Activate DCMI Power And Verify
+    Fail If DCMI Power Is Not Activated
 
     REST Power On  stack_mode=skip
 
@@ -147,14 +145,14 @@ Escale Change Limit At Runtime
     Should Be True  ${power} == ${power_setting}
     ...  msg=DCMI power limit not set to ${power_setting} watts as expected.
 
-    Set DCMI Power Limit And Verify  800
+    Set DCMI Power Limit And Verify  3050
 
 
 Escale Disable And Enable At Runtime
     [Documentation]  Disable/enable power limit at runtime.
     [Tags]  Escale_Disable_And_Enable_At_Runtime
 
-    ${power_setting}=  Set Variable  ${500}
+    ${power_setting}=  Set Variable  ${3000}
 
     Smart Power Off
 
@@ -184,19 +182,43 @@ Escale Disable And Enable At Runtime
 Suite Setup Execution
     [Documentation]  Do test setup initialization.
     #  Power Off if system if not already off.
-    #  Deactivate power and set limit = 0.
+    #  Save initial settings.
+    #  Deactivate power and set limit.
+
     Smart Power Off
+
+    # Save the deactivation/activation setting.
+    ${cmd}=  Catenate  dcmi power get_limit | grep State
+    ${resp}=  Run External IPMI Standard Command  ${cmd}
+    # Response is either "Power Limit Active" or "No Active Power Limit".
+    ${initial_deactivation}=  Get Count  ${resp}  No
+    # If deactivated: initial_deactivation = 1, 0 otherwise.
+    Set Suite Variable  ${initial_deactivation}  children=true
+
+    # Save the power limit setting.
+    ${initial_power_setting}=  Get DCMI Power Limit
+    Set Suite Variable  ${initial_power_setting}  children=true
+
+    # Set power limiting deactivated.
     Deactivate DCMI Power And Verify
-    Set DCMI Power Limit And Verify  0
+
+    # Set initial power setting value.
+    Set DCMI Power Limit And Verify  3050
 
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
     # FFDC on test case fail.
     # Power off the OS and wait for power off state.
-    # Set deactivated DCMI power enablement and power limit = 0.
+    # Return the system's intial deactivation/activation setting.
+    # Return the system's intial power limit setting.
 
     FFDC On Test Case Fail
+
     Smart Power Off
-    Deactivate DCMI Power And Verify
-    Set DCMI Power Limit And Verify  0
+
+    Run Keyword If  '${initial_power_setting}' != '${0}'
+    ...  Set DCMI Power Limit And Verify  ${initial_power_setting}
+
+    Run Keyword If  '${nitial_deactivation}' == '${1}'
+    ...  Deactivate DCMI Power And Verify  ELSE  Activate DCMI Power And Verify
