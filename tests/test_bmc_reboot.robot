@@ -29,4 +29,5 @@ Test BMC Reboot via REST
     REST OBMC Reboot (off)  stack_mode=normal
 
     BMC Execute Command  if [ -f ${test_file_path} ] ; then false ; fi
+    Verify BMC RTC And UTC Time Drift
 
