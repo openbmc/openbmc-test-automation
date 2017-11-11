@@ -76,3 +76,11 @@ Delete All BMC Dump
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  Openbmc Post Request  ${DUMP_URI}action/DeleteAll  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Dump Should Not Exist
+    [Documentation]  Verify that BMC dumps do not exist.
+
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list  quiet=${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
