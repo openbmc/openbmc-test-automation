@@ -29,6 +29,7 @@ FFDC_BMC_CMD = {
         'BMC OS': 'uname -a',
         'BMC Uptime': 'uptime',
         'BMC File System Disk Space Usage': 'df -hT',
+		'BMC Date Time': 'date;/sbin/hwclock --show;/usr/bin/timedatectl'
     },
     'APPLICATION DATA':
     {
