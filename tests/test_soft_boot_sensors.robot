@@ -269,6 +269,7 @@ Reboot Host And Expect Runtime
 
     Initiate BMC Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Booted
+    Verify BMC RTC And UTC Time Drift
 
 
 Post Test Case Execution

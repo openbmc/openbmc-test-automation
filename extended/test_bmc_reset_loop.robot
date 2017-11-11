@@ -56,6 +56,7 @@ Power Cycle System Via PDU
     Check If BMC Is Up  5 min  10 sec
 
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+    Verify BMC RTC And UTC Time Drift
 
 
 BMC REST Reset Cycle
@@ -66,6 +67,7 @@ BMC REST Reset Cycle
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
     ${bmc_version_after}=  Get BMC Version
     Should Be Equal  ${bmc_version_before}  ${bmc_version_after}
+    Verify BMC RTC And UTC Time Drift
 
 
 BMC Reboot Cycle
@@ -75,6 +77,7 @@ BMC Reboot Cycle
     OBMC Reboot (off)  stack_mode=normal
     ${bmc_version_after}=  Get BMC Version
     Should Be Equal  ${bmc_version_before}  ${bmc_version_after}
+    Verify BMC RTC And UTC Time Drift
 
 
 Test Exit Logs
