@@ -11,7 +11,7 @@ Documentation         Test upload image with both valid and invalid images.
 ...                   -v BMC_TFTP_FILE_NAME:<filename.tar>
 ...                   -v PNOR_IMAGE_FILE_PATH:<path/*.tar>
 ...                   -v BMC_IMAGE_FILE_PATH:<path/*.tar>
-...                   -v BAD_IMAGES_DIR_PATH:<path> test_uploadimage.robot
+...                   -v BAD_IMAGES_DIR_PATH:<path> test_image_upload.robot
 
 Resource              ../../lib/connection_client.robot
 Resource              ../../lib/rest_client.robot
