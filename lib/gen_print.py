@@ -16,6 +16,7 @@ import argparse
 import __builtin__
 import logging
 import collections
+from wrap_utils import *
 
 try:
     robot_env = 1
@@ -694,7 +695,11 @@ def sprint_varx(var_name,
 
 
 ###############################################################################
-def sprint_var(*args):
+def sprint_var(var_value,
+               hex=0,
+               loc_col1_indent=col1_indent,
+               loc_col1_width=col1_width,
+               trailing_char="\n"):
 
     r"""
     Figure out the name of the first argument for you and then call
@@ -709,7 +714,10 @@ def sprint_var(*args):
     if caller_func_name.endswith("print_var"):
         stack_frame += 1
     var_name = get_arg_name(None, 1, stack_frame)
-    return sprint_varx(var_name, *args)
+    return sprint_varx(var_name, var_value=var_value, hex=hex,
+                       loc_col1_indent=loc_col1_indent,
+                       loc_col1_width=loc_col1_width,
+                       trailing_char=trailing_char)
 
 ###############################################################################
 
@@ -783,45 +791,6 @@ def sprint_vars(*args):
         parm_num += 1
 
     return buffer
-
-###############################################################################
-
-
-###############################################################################
-def lprint_varx(var_name,
-                var_value,
-                hex=0,
-                loc_col1_indent=col1_indent,
-                loc_col1_width=col1_width,
-                log_level=getattr(logging, 'INFO')):
-
-    r"""
-    Send sprint_varx output to logging.
-    """
-
-    logging.log(log_level, sprint_varx(var_name, var_value, hex,
-                loc_col1_indent, loc_col1_width, ""))
-
-###############################################################################
-
-
-###############################################################################
-def lprint_var(*args):
-
-    r"""
-    Figure out the name of the first argument for you and then call
-    lprint_varx with it.  Therefore, the following 2 calls are equivalent:
-    lprint_varx("var1", var1)
-    lprint_var(var1)
-    """
-
-    # Get the name of the first variable passed to this function.
-    stack_frame = 2
-    caller_func_name = sprint_func_name(2)
-    if caller_func_name.endswith("print_var"):
-        stack_frame += 1
-    var_name = get_arg_name(None, 1, stack_frame)
-    lprint_varx(var_name, *args)
 
 ###############################################################################
 
@@ -1420,25 +1389,121 @@ def replace_passwords(buffer):
 
 
 ###############################################################################
+def create_print_wrapper_funcs(func_names,
+                               stderr_func_names,
+                               replace_dict):
+
+    r"""
+    Generate code for print wrapper functions and return the generated code as
+    a string.
+
+    To illustrate, suppose there is a "print_foo_bar" function in the
+    func_names list.
+    This function will...
+    - Expect that there is an sprint_foo_bar function already in existence.
+    - Create a print_foo_bar function which calls sprint_foo_bar and prints
+    the result.
+    - Create a qprint_foo_bar function which calls upon sprint_foo_bar only if
+    global value quiet is 0.
+    - Create a dprint_foo_bar function which calls upon sprint_foo_bar only if
+    global value debug is 1.
+
+    Also, code will be generated to define aliases for each function as well.
+    Each alias will be created by replacing "print_" in the function name with
+    "p"  For example, the alias for print_foo_bar will be pfoo_bar.
+
+    Description of argument(s):
+    func_names                      A list of functions for which print
+                                    wrapper function code is to be generated.
+    stderr_func_names               A list of functions whose generated code
+                                    should print to stderr rather than to
+                                    stdout.
+    replace_dict                    Please see the create_func_def_string
+                                    function in wrap_utils.py for details on
+                                    this parameter.  This parameter will be
+                                    passed directly to create_func_def_string.
+    """
+
+    buffer = ""
+
+    for func_name in func_names:
+        if func_name in stderr_func_names:
+            replace_dict['output_stream'] = "stderr"
+        else:
+            replace_dict['output_stream'] = "stdout"
+
+        s_func_name = "s" + func_name
+        q_func_name = "q" + func_name
+        d_func_name = "d" + func_name
+
+        # We don't want to try to redefine the "print" function, thus the
+        # following if statement.
+        if func_name != "print":
+            func_def = create_func_def_string(s_func_name, func_name,
+                                              print_func_template,
+                                              replace_dict)
+            buffer += func_def
+
+        func_def = create_func_def_string(s_func_name, "q" + func_name,
+                                          qprint_func_template, replace_dict)
+        buffer += func_def
+
+        func_def = create_func_def_string(s_func_name, "d" + func_name,
+                                          dprint_func_template, replace_dict)
+        buffer += func_def
+
+        # Create abbreviated aliases (e.g. spvar is an alias for sprint_var).
+        alias = re.sub("print_", "p", func_name)
+        alias = re.sub("print", "p", alias)
+        prefixes = ["", "s", "q", "d"]
+        for prefix in prefixes:
+            if alias == "p":
+                continue
+            func_def = prefix + alias + " = " + prefix + func_name
+            buffer += func_def + "\n"
+
+    return buffer
+
+###############################################################################
+
+
+###############################################################################
 # In the following section of code, we will dynamically create print versions
 # for each of the sprint functions defined above.  So, for example, where we
 # have an sprint_time() function defined above that returns the time to the
 # caller in a string, we will create a corresponding print_time() function
 # that will print that string directly to stdout.
 
-# It can be complicated to follow what's being created by the exec statements
-# below.  Here is an example of the print_time() function that will be created:
+# It can be complicated to follow what's being created by below below.  Here
+# is an example of the print_time() function that will be created:
 
-# def print_time(*args):
-#     s_func = getattr(sys.modules[__name__], "sprint_time")
-#     sys.stdout.write(s_func(*args))
+# def print_time(buffer=''):
+#     sys.stdout.write(replace_passwords(sprint_time(buffer=buffer)))
 #     sys.stdout.flush()
 
-# Here are comments describing the 3 lines in the body of the created function.
-# Create a reference to the "s" version of the given function in s_func (e.g.
-# if this function name is print_time, we want s_funcname to be "sprint_time").
-# Call the "s" version of this function passing it all of our arguments.
-# Write the result to stdout.
+# Templates for the various print wrapper functions.
+print_func_template = \
+    [
+        "    sys.<output_stream>.write(<mod_qualifer>replace_passwords" +
+        "(<call_line>))",
+        "    sys.<output_stream>.flush()"
+    ]
+
+qprint_func_template = \
+    [
+        "    if int(<mod_qualifer>get_var_value(None, 0, \"quiet\")): return"
+    ] + print_func_template
+
+dprint_func_template = \
+    [
+        "    if not int(<mod_qualifer>get_var_value(None, 0, \"debug\")):" +
+        " return"
+    ] + print_func_template
+
+replace_dict = {'output_stream': 'stdout', 'mod_qualifer': ''}
+
+
+gp_debug_print("robot_env: " + str(robot_env))
 
 # func_names contains a list of all print functions which should be created
 # from their sprint counterparts.
@@ -1452,86 +1517,8 @@ func_names = ['print_time', 'print_timen', 'print_error', 'print_varx',
 # rather than stdout.
 stderr_func_names = ['print_error', 'print_error_report']
 
-gp_debug_print("robot_env: " + str(robot_env))
-for func_name in func_names:
-    gp_debug_print("func_name: " + func_name)
-    if func_name in stderr_func_names:
-        output_stream = "stderr"
-    else:
-        output_stream = "stdout"
 
-    func_def_line = "def " + func_name + "(*args):"
-    s_func_line = "    s_func = getattr(sys.modules[__name__], \"s" +\
-        func_name + "\")"
-    # Generate the code to do the printing.
-    if robot_env:
-        func_print_lines = \
-            [
-                "    BuiltIn().log_to_console(replace_passwords" +
-                "(s_func(*args)),"
-                " stream='" + output_stream + "',"
-                " no_newline=True)"
-            ]
-    else:
-        func_print_lines = \
-            [
-                "    sys." + output_stream +
-                ".write(replace_passwords(s_func(*args)))",
-                "    sys." + output_stream + ".flush()"
-            ]
-
-    # Create an array containing the lines of the function we wish to create.
-    func_def = [func_def_line, s_func_line] + func_print_lines
-    # We don't want to try to redefine the "print" function, thus the if
-    # statement.
-    if func_name != "print":
-        pgm_definition_string = '\n'.join(func_def)
-        gp_debug_print(pgm_definition_string)
-        exec(pgm_definition_string)
-
-    # Insert a blank line which will be overwritten by the next several
-    # definitions.
-    func_def.insert(1, "")
-
-    # Define the "q" (i.e. quiet) version of the given print function.
-    func_def[0] = "def q" + func_name + "(*args):"
-    func_def[1] = "    if int(get_var_value(None, 0, \"quiet\")): return"
-    pgm_definition_string = '\n'.join(func_def)
-    gp_debug_print(pgm_definition_string)
-    exec(pgm_definition_string)
-
-    # Define the "d" (i.e. debug) version of the given print function.
-    func_def[0] = "def d" + func_name + "(*args):"
-    func_def[1] = "    if not int(get_var_value(None, 0, \"debug\")): return"
-    pgm_definition_string = '\n'.join(func_def)
-    gp_debug_print(pgm_definition_string)
-    exec(pgm_definition_string)
-
-    # Define the "l" (i.e. log) version of the given print function.
-    func_def_line = "def l" + func_name + "(*args):"
-    func_print_lines = \
-        [
-            "    logging.log(getattr(logging, 'INFO'), s_func(*args))"
-        ]
-
-    func_def = [func_def_line, s_func_line] + func_print_lines
-    if func_name != "print_varx" and func_name != "print_var":
-        pgm_definition_string = '\n'.join(func_def)
-        gp_debug_print(pgm_definition_string)
-        exec(pgm_definition_string)
-
-    if func_name == "print" or func_name == "printn":
-        gp_debug_print("")
-        continue
-
-    # Create abbreviated aliases (e.g. spvar is an alias for sprint_var).
-    alias = re.sub("print_", "p", func_name)
-    prefixes = ["", "s", "q", "d", "l"]
-    for prefix in prefixes:
-        pgm_definition_string = prefix + alias + " = " + prefix + func_name
-        gp_debug_print(pgm_definition_string)
-        exec(pgm_definition_string)
-
-    gp_debug_print("")
-
-###############################################################################
+func_defs = create_print_wrapper_funcs(func_names, stderr_func_names,
+                                       replace_dict)
+gp_debug_print(func_defs)
+exec(func_defs)
