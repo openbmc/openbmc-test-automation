@@ -115,6 +115,7 @@ ENUMERATE_ELOG = OPENBMC_BASE + 'logging/entry/enumerate'
 ENUMERATE_LED = OPENBMC_BASE + 'led/enumerate'
 ENUMERATE_SW = OPENBMC_BASE + 'software/enumerate'
 ENUMERATE_CONTROL = OPENBMC_BASE + 'control/enumerate'
+ENUMERATE_STATE = OPENBMC_BASE + 'state/enumerate'
 ENUMERATE_OCC = OPENPOWER_BASE + 'control/enumerate'
 
 # Add file name and correcponding Get Request
@@ -128,6 +129,7 @@ FFDC_GET_REQUEST = {
         'BMC_inventory': ENUMERATE_INVENTORY,
         'BMC_elog': ENUMERATE_ELOG,
         'BMC_led': ENUMERATE_LED,
+        'BMC_state': ENUMERATE_STATE,
         'OCC_state': ENUMERATE_OCC,
     },
 }
