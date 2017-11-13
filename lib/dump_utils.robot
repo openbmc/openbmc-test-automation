@@ -16,6 +16,16 @@ Create User Initiated Dump
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${json}=  To JSON  ${resp.content}
+
+    # REST "CreateDump" JSON response.
+    # {
+    #    "data": null,
+    #    "message": "200 OK",
+    #    "status": "ok"
+    # }
+    Run Keyword If  ${json["data"]} == ${None}
+    ...  Fail  Dump id returned null.
+
     ${dump_id}=  Set Variable  ${json["data"]}
 
     Wait Until Keyword Succeeds  3 min  15 sec  Check Dump Existence
