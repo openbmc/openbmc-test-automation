@@ -48,6 +48,7 @@ FFDC_BMC_FILE = {
         'BMC_dmesg': 'dmesg',
         'BMC_procinfo': 'cat /proc/cpuinfo',
         'BMC_meminfo': 'cat /proc/meminfo',
+        'BMC_systemctl': 'systemctl status --all',
     },
 }
 
