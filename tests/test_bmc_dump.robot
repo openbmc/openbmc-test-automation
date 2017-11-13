@@ -10,10 +10,7 @@ Resource            ../lib/utils.robot
 Library             ../lib/bmc_ssh_utils.py
 
 Test Setup          Open Connection And Log In
-Test Teardown       Post Testcase Execution
-
-*** Variables ***
-
+Test Teardown       Test Teardown Execution
 
 *** Test Cases ***
 
@@ -24,6 +21,7 @@ Pre Dump BMC Performance Test
     Open Connection And Log In
     Check BMC Performance
 
+
 Verify User Initiated BMC Dump When Powered Off
     [Documentation]  Create user initiated BMC dump at host off state and
     ...  verify dump entry for it.
@@ -33,13 +31,16 @@ Verify User Initiated BMC Dump When Powered Off
     Create User Initiated Dump
 
 
-Verify User Initiated BMC Dump When Host Booted
-    [Documentation]  Create user initiated BMC dump at host booted state and
-    ...  verify dump entry for it.
-    [Tags]  Verify_User_Initiated_BMC_Dump_When_Host_Booted
+Verify Dump Persistency On Reset
+    [Documentation]  Create user dump, reset BMC and verify dump persistency.
+    [Tags]  Verify_Dump_Persistency_On_Reset
 
-    REST Power On  stack_mode=skip  quiet=1
+    Delete All BMC Dump
     Create User Initiated Dump
+    OBMC Reboot (off)
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
 
 Verify Dump Persistency On Service Restart
     [Documentation]  Create user dump, restart BMC service and verify dump
@@ -52,17 +53,6 @@ Verify Dump Persistency On Service Restart
     ...  systemctl restart xyz.openbmc_project.Dump.Manager.service
     Sleep  10s  reason=Wait for BMC dump service to restart properly.
 
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-
-
-Verify Dump Persistency On Reset
-    [Documentation]  Create user dump, reset BMC and verify dump persistency.
-    [Tags]  Verify_Dump_Persistency_On_Reset
-
-    Delete All BMC Dump
-    Create User Initiated Dump
-    OBMC Reboot (off)
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
@@ -124,6 +114,16 @@ Delete All BMC Dumps And Verify
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
+
+Verify User Initiated BMC Dump When Host Booted
+    [Documentation]  Create user initiated BMC dump at host booted state and
+    ...  verify dump entry for it.
+    [Tags]  Verify_User_Initiated_BMC_Dump_When_Host_Booted
+
+    REST Power On  stack_mode=skip  quiet=1
+    Create User Initiated Dump
+
+
 Post Dump BMC Performance Test
     [Documentation]  Check performance of memory, CPU & file system of BMC.
     [Tags]  Post_Dump_BMC_Performance_Test
@@ -139,7 +139,7 @@ Post Dump Core Dump Check
 
 *** Keywords ***
 
-Post Testcase Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     Wait Until Keyword Succeeds  3 min  15 sec  Verify No Dump In Progress
