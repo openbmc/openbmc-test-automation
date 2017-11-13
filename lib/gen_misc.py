@@ -16,12 +16,9 @@ import socket
 import gen_print as gp
 import gen_cmd as gc
 
-
-robot_env = 1
-try:
+robot_env = gp.robot_env
+if robot_env:
     from robot.libraries.BuiltIn import BuiltIn
-except ImportError:
-    robot_env = 0
 
 
 def add_trailing_slash(dir_path):
