@@ -5,6 +5,7 @@ Variables           ../../data/variables.py
 Resource            ../../lib/boot_utils.robot
 Resource            ../../lib/rest_client.robot
 Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/code_update_utils.robot
 
 Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
@@ -13,9 +14,9 @@ Test Teardown       FFDC On Test Case Fail
 
 *** Test Cases ***
 
-Enable Field Mode And Verify Unmount
-    [Documentation]  Enable field mode and check that /usr/local is unmounted.
-    [Tags]  Enable_Field_Mode
+Verify Software Field Mode
+    [Documentation]  Verify software field mode is set.
+    [Tags]  Verify_Software_Field_Mode
 
     # After running, /xyz/openbmc_project/software should look like this:
     # /xyz/openbmc_project/software
@@ -35,10 +36,7 @@ Enable Field Mode And Verify Unmount
     #     ]
     # }
 
-    ${args}=  Create Dictionary  data=${1}
-    Write Attribute  ${SOFTWARE_VERSION_URI}  FieldModeEnabled  data=${args}
-    Sleep  5s
-    BMC Execute Command  [ ! -d "/usr/local/share" ]
+    Enable Field Mode And Verify Unmount
 
 
 Attempt To Disable Field Mode Via REST And Veify
