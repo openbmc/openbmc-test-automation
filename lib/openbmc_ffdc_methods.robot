@@ -508,6 +508,7 @@ Collect eSEL Log
     Convert eSEL To Elog Format  ${logpath}
 
     Append To List  ${ffdc_file_list}  ${logpath}
+    Append To List  ${ffdc_file_list}  ${logpath}.txt
 
     [Return]  ${ffdc_file_list}
 
