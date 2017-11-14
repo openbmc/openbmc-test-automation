@@ -9,7 +9,6 @@ import re
 from robot.libraries.BuiltIn import BuiltIn
 
 
-###############################################################################
 def my_import_resource(path):
 
     r"""
@@ -75,4 +74,3 @@ def my_import_resource(path):
                 BuiltIn().set_global_variable(global_var_name,
                                               pre_var_dict[key])
 
-###############################################################################

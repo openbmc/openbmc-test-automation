@@ -14,7 +14,6 @@ import gen_robot_ssh as grs
 from robot.libraries.BuiltIn import BuiltIn
 
 
-###############################################################################
 def bmc_execute_command(cmd_buf,
                         print_out=0,
                         print_err=0,
@@ -74,10 +73,7 @@ def bmc_execute_command(cmd_buf,
                                    print_out, print_err, ignore_err, fork,
                                    quiet, test_mode)
 
-###############################################################################
 
-
-###############################################################################
 def os_execute_command(cmd_buf,
                        print_out=0,
                        print_err=0,
@@ -135,10 +131,7 @@ def os_execute_command(cmd_buf,
                                    print_out, print_err, ignore_err, fork,
                                    quiet, test_mode)
 
-###############################################################################
 
-
-###############################################################################
 def xcat_execute_command(cmd_buf,
                          print_out=0,
                          print_err=0,
@@ -201,5 +194,3 @@ def xcat_execute_command(cmd_buf,
     return grs.execute_ssh_command(cmd_buf, open_connection_args, login_args,
                                    print_out, print_err, ignore_err, fork,
                                    quiet, test_mode)
-
-###############################################################################

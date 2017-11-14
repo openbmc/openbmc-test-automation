@@ -16,7 +16,6 @@ except ImportError:
     robot_env = 0
 
 
-##########################################################################
 def file_diff(file1_path,
               file2_path,
               diff_file_path,
@@ -131,4 +130,3 @@ def file_diff(file1_path,
     else:
         # We have at least one difference not in the skip_string.
         return FILES_DO_NOT_MATCH
-###############################################################################

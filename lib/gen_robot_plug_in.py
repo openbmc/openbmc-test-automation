@@ -18,7 +18,6 @@ import gen_misc as gm
 import gen_cmd as gc
 
 
-###############################################################################
 def rvalidate_plug_ins(plug_in_dir_paths,
                        quiet=1):
 
@@ -50,10 +49,7 @@ def rvalidate_plug_ins(plug_in_dir_paths,
 
     return plug_in_packages_list
 
-###############################################################################
 
-
-###############################################################################
 def rprocess_plug_in_packages(plug_in_packages_list=None,
                               call_point="setup",
                               shell_rc="0x00000000",
@@ -229,5 +225,3 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
         rc = 1
 
     return rc, shell_rc, failed_plug_in_name
-
-###############################################################################

@@ -17,7 +17,6 @@ except ImportError:
 import collections
 
 
-###############################################################################
 def set_power_policy_method():
 
     r"""
@@ -75,10 +74,6 @@ def set_power_policy_method():
     BuiltIn().set_global_variable("${power_policy_setup}", 1)
 
 
-###############################################################################
-
-
-###############################################################################
 def translate_power_policy_value(policy):
 
     r"""
@@ -106,10 +101,7 @@ def translate_power_policy_value(policy):
                                        quiet=1)
     return ret_values
 
-###############################################################################
 
-
-###############################################################################
 def get_bmc_date_time():
 
     r"""
@@ -159,4 +151,3 @@ def get_bmc_date_time():
 
     return result_time_dict
 
-###############################################################################

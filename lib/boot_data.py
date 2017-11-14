@@ -29,7 +29,6 @@ import var_funcs as vf
 code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
 
 
-###############################################################################
 def create_boot_table(file_path=None):
 
     r"""
@@ -82,10 +81,7 @@ def create_boot_table(file_path=None):
 
     return enhanced_boot_table
 
-###############################################################################
 
-
-###############################################################################
 def create_valid_boot_list(boot_table):
 
     r"""
@@ -99,10 +95,7 @@ def create_valid_boot_list(boot_table):
 
     return list(boot_table.keys())
 
-###############################################################################
 
-
-###############################################################################
 def read_boot_lists(dir_path="data/boot_lists/"):
 
     r"""
@@ -150,10 +143,7 @@ def read_boot_lists(dir_path="data/boot_lists/"):
 
     return boot_lists
 
-###############################################################################
 
-
-###############################################################################
 def valid_boot_list(boot_list,
                     valid_boot_types):
 
@@ -175,10 +165,7 @@ def valid_boot_list(boot_list,
         if error_message != "":
             BuiltIn().fail(gp.sprint_error(error_message))
 
-###############################################################################
 
-
-###############################################################################
 class boot_results:
 
     r"""
@@ -314,10 +301,7 @@ class boot_results:
 
         grp.rprint(self.sprint_obj())
 
-###############################################################################
 
-
-###############################################################################
 def create_boot_results_file_path(pgm_name,
                                   openbmc_nickname,
                                   master_pid):
@@ -344,10 +328,7 @@ def create_boot_results_file_path(pgm_name,
     return vf.create_file_path(file_name_dict, dir_path=dir_path,
                                file_suffix=":boot_results")
 
-###############################################################################
 
-
-###############################################################################
 def cleanup_boot_results_file():
 
     r"""
@@ -367,4 +348,3 @@ def cleanup_boot_results_file():
         else:
             gc.cmd_fnc("rm -f " + file_path)
 
-###############################################################################

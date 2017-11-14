@@ -14,7 +14,6 @@ import time
 import os
 
 
-##########################################################################
 def run_until_keyword_fails(retry,
                             retry_interval,
                             name,
@@ -57,10 +56,8 @@ def run_until_keyword_fails(retry,
         BuiltIn().log(time.time())
 
     return True
-###############################################################################
 
 
-###############################################################################
 def htx_error_log_to_list(htx_error_log_output):
 
     r"""
@@ -148,10 +145,8 @@ def htx_error_log_to_list(htx_error_log_output):
             temp_error_list.append(str(line))
 
     return error_list
-###############################################################################
 
 
-###############################################################################
 def build_error_dict(htx_error_log_output):
 
     r"""
@@ -224,4 +219,3 @@ def build_error_dict(htx_error_log_output):
 
     return error_dict
 
-###############################################################################

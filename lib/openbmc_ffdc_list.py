@@ -1,18 +1,13 @@
 #!/usr/bin/python
 r"""
-#############################################################
 #    @file     openbmc_ffdc_list.py
-#
 #    @brief    List for FFDC ( First failure data capture )
 #              commands and files to be collected as a part
 #              of the test case failure.
-#############################################################
 """
-
 # -------------------
 # FFDC default list
 # -------------------
-
 # -----------------------------------------------------------------
 # Dict Name {  Index string : { Key String :  Command string} }
 # -----------------------------------------------------------------
@@ -36,7 +31,6 @@ FFDC_BMC_CMD = {
         'BMC state': '/usr/sbin/obmcutil state',
     },
 }
-
 # Add file name and correcponding command needed for BMC
 FFDC_BMC_FILE = {
     'BMC FILES':
@@ -52,7 +46,6 @@ FFDC_BMC_FILE = {
         'BMC_systemd': 'systemctl status --all',
     },
 }
-
 # Add file name and correcponding command needed for all Linux distributions
 FFDC_OS_ALL_DISTROS_FILE = {
     'OS FILES':
@@ -70,7 +63,6 @@ FFDC_OS_ALL_DISTROS_FILE = {
         'OS_lscfg': 'lscfg',
     },
 }
-
 # Add file name and correcponding command needed for Ubuntu Linux
 FFDC_OS_UBUNTU_FILE = {
     'OS FILES':
@@ -83,7 +75,6 @@ FFDC_OS_UBUNTU_FILE = {
         'OS_info': 'uname -a; dpkg -s opal-prd; dpkg -s ipmitool',
     },
 }
-
 # Add file name and correcponding command needed for RHEL Linux
 FFDC_OS_RHEL_FILE = {
     'OS FILES':
@@ -95,7 +86,6 @@ FFDC_OS_RHEL_FILE = {
         'OS_info': 'lsb_release -a; cat /etc/redhat-release; uname -a; rpm -qa',
     },
 }
-
 # Add file name and correcponding command needed for RHEL Linux
 FFDC_OS_IBM_POWERKVM_FILE = {
     'OS FILES':
@@ -106,7 +96,6 @@ FFDC_OS_IBM_POWERKVM_FILE = {
         'OS_info': 'lsb_release -a; uname -a; rpm -qa',
     },
 }
-
 OPENBMC_BASE = '/xyz/openbmc_project/'
 OPENPOWER_BASE = '/org/open_power/'
 ENUMERATE_SENSORS = OPENBMC_BASE + 'sensors/enumerate'
@@ -117,7 +106,6 @@ ENUMERATE_SW = OPENBMC_BASE + 'software/enumerate'
 ENUMERATE_CONTROL = OPENBMC_BASE + 'control/enumerate'
 ENUMERATE_STATE = OPENBMC_BASE + 'state/enumerate'
 ENUMERATE_OCC = OPENPOWER_BASE + 'control/enumerate'
-
 # Add file name and correcponding Get Request
 FFDC_GET_REQUEST = {
     'GET REQUESTS':
@@ -133,8 +121,6 @@ FFDC_GET_REQUEST = {
         'OCC_state': ENUMERATE_OCC,
     },
 }
-
-
 # Define your keywords in method/utils and call here
 FFDC_METHOD_CALL = {
     'BMC LOGS':
@@ -149,13 +135,9 @@ FFDC_METHOD_CALL = {
         'Sys Inventory Files': 'System Inventory Files',
     },
 }
-
 # -----------------------------------------------------------------
-
-
 # base class for FFDC default list
 class openbmc_ffdc_list():
-
     def get_ffdc_bmc_cmd(self, i_type):
         r"""
         ########################################################################
@@ -165,7 +147,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_BMC_CMD[i_type].items()
-
     def get_ffdc_bmc_file(self, i_type):
         r"""
         ########################################################################
@@ -175,7 +156,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_BMC_FILE[i_type].items()
-
     def get_ffdc_get_request(self, i_type):
         r"""
         ########################################################################
@@ -185,7 +165,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_GET_REQUEST[i_type].items()
-
     def get_ffdc_cmd_index(self):
         r"""
         ########################################################################
@@ -194,7 +173,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_BMC_CMD.keys()
-
     def get_ffdc_get_request_index(self):
         r"""
         ########################################################################
@@ -203,7 +181,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_GET_REQUEST.keys()
-
     def get_ffdc_file_index(self):
         r"""
         ########################################################################
@@ -212,7 +189,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_BMC_FILE.keys()
-
     def get_ffdc_method_index(self):
         r"""
         ########################################################################
@@ -221,7 +197,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_METHOD_CALL.keys()
-
     def get_ffdc_method_desc(self,
                              index):
         r"""
@@ -231,7 +206,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_METHOD_CALL[index].keys()
-
     def get_ffdc_method_call(self, i_type):
         r"""
         ########################################################################
@@ -240,7 +214,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_METHOD_CALL[i_type].items()
-
     def get_ffdc_os_all_distros_index(self):
         r"""
         ########################################################################
@@ -249,7 +222,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_OS_ALL_DISTROS_FILE.keys()
-
     def get_ffdc_os_all_distros_call(self, i_type):
         r"""
         ########################################################################
@@ -258,7 +230,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return FFDC_OS_ALL_DISTROS_FILE[i_type].items()
-
     def get_ffdc_os_distro_index(self, distro):
         r"""
         ########################################################################
@@ -268,7 +239,6 @@ class openbmc_ffdc_list():
         """
         distro_file = "FFDC_OS_" + str(distro).upper() + "_FILE"
         return eval(distro_file).keys()
-
     def get_ffdc_os_distro_call(self, i_type, distro):
         r"""
         ########################################################################
@@ -278,7 +248,6 @@ class openbmc_ffdc_list():
         """
         distro_file = "FFDC_OS_" + str(distro).upper() + "_FILE"
         return eval(distro_file)[i_type].items()
-
     def get_strip_string(self, i_str):
         r"""
         ########################################################################
@@ -288,7 +257,6 @@ class openbmc_ffdc_list():
         ########################################################################
         """
         return ''.join(e for e in i_str if e.isalnum())
-
     def get_esel_index(self, esel_list):
         r"""
         #######################################################################

@@ -27,7 +27,6 @@ sys.path.insert(0, save_path_0)
 # I use this variable in calls to print_var.
 hex = 1
 
-###############################################################################
 # Create parser object to process command line parameters and args.
 
 # Create parser object.
@@ -124,10 +123,8 @@ parser.add_argument(
 # names of stock parm options we want.  These stock parms are pre-defined by
 # gen_get_options.
 stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
-###############################################################################
 
 
-###############################################################################
 def exit_function(signal_number=0,
                   frame=None):
 
@@ -141,10 +138,7 @@ def exit_function(signal_number=0,
 
     qprint_pgm_footer()
 
-###############################################################################
 
-
-###############################################################################
 def signal_handler(signal_number, frame):
 
     r"""
@@ -162,10 +156,7 @@ def signal_handler(signal_number, frame):
     # when we received the signal.
     exit(0)
 
-###############################################################################
 
-
-###############################################################################
 def validate_parms():
 
     r"""
@@ -187,10 +178,7 @@ def validate_parms():
 
     return True
 
-###############################################################################
 
-
-###############################################################################
 def run_pgm(plug_in_dir_path,
             call_point,
             allow_shell_rc):
@@ -288,10 +276,7 @@ def run_pgm(plug_in_dir_path,
 
     return rc, shell_rc, failed_plug_in_name
 
-###############################################################################
 
-
-###############################################################################
 def main():
 
     r"""
@@ -365,13 +350,8 @@ def main():
             print_error("At least one plug-in failed.\n")
         return False
 
-###############################################################################
 
-
-###############################################################################
 # Main
 
 if not main():
     exit(1)
-
-###############################################################################

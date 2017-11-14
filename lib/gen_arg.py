@@ -16,7 +16,6 @@ import gen_print as gp
 default_string = '  The default value is "%(default)s".'
 
 
-###############################################################################
 def gen_get_options(parser,
                     stock_list=[]):
 
@@ -154,10 +153,7 @@ def gen_get_options(parser,
 
     return True
 
-###############################################################################
 
-
-###############################################################################
 def set_pgm_arg(var_value,
                 var_name=None):
 
@@ -185,11 +181,8 @@ def set_pgm_arg(var_value,
     elif var_name == "test_mode":
         __builtin__.test_mode = var_value
 
-###############################################################################
-
 
 # Put this in gen_opt.py or gen_parm.py or gen_arg.py.
-###############################################################################
 def sprint_args(arg_obj,
                 indent=0):
 
@@ -214,10 +207,7 @@ def sprint_args(arg_obj,
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def gen_post_validation(exit_function=None,
                         signal_handler=None):
 
@@ -242,5 +232,3 @@ def gen_post_validation(exit_function=None,
     if signal_handler is not None:
         signal.signal(signal.SIGINT, signal_handler)
         signal.signal(signal.SIGTERM, signal_handler)
-
-###############################################################################

@@ -19,7 +19,6 @@ import gen_print as gp
 import variables as var
 from robot.libraries.BuiltIn import BuiltIn
 
-###############################################################################
 def verify_no_duplicate_image_priorities(image_purpose):
 
     r"""
@@ -44,10 +43,7 @@ def verify_no_duplicate_image_priorities(image_purpose):
                     + gp.sprint_vars(image, taken_priorities[image_priority]))
         taken_priorities[image_priority] = image
 
-###############################################################################
 
-
-###############################################################################
 def get_non_running_bmc_software_object():
 
     r"""
@@ -71,10 +67,7 @@ def get_non_running_bmc_software_object():
             return image_name
     BuiltIn().fail("Did not find any non-running BMC images.")
 
-###############################################################################
 
-
-###############################################################################
 def delete_all_pnor_images():
 
     r"""
@@ -91,10 +84,7 @@ def delete_all_pnor_images():
         keyword.run_key("Call Method  " + image_name
                         + "  delete  data={\"data\":[]}")
 
-###############################################################################
 
-
-###############################################################################
 def wait_for_activation_state_change(version_id, initial_state):
 
     r"""
@@ -133,10 +123,7 @@ def wait_for_activation_state_change(version_id, initial_state):
             return
     return
 
-###############################################################################
 
-
-###############################################################################
 def get_latest_file(dir_path):
 
     r"""
@@ -154,10 +141,7 @@ def get_latest_file(dir_path):
             + "; stat -c '%Y %n' * | sort -k1,1nr | head -n 1", ignore=1)
     return ret_values.split(" ")[-1]
 
-###############################################################################
 
-
-###############################################################################
 def get_version_tar(tar_file_path):
 
     r"""
@@ -180,10 +164,7 @@ def get_version_tar(tar_file_path):
     tar.close()
     return version
 
-###############################################################################
 
-
-###############################################################################
 def get_image_version(file_path):
 
     r"""
@@ -199,10 +180,7 @@ def get_image_version(file_path):
             + file_path + " | grep \"version=\"", ignore=1)
     return (ret_values.split("\n")[0]).split("=")[-1]
 
-###############################################################################
 
-
-###############################################################################
 def get_image_purpose(file_path):
 
     r"""
@@ -218,10 +196,7 @@ def get_image_purpose(file_path):
             + file_path + " | grep \"purpose=\"", ignore=1)
     return ret_values.split("=")[-1]
 
-###############################################################################
 
-
-###############################################################################
 def get_image_path(image_version):
 
     r"""
@@ -250,10 +225,7 @@ def get_image_path(image_version):
         time.sleep(10)
         retry += 1
 
-###############################################################################
 
-
-###############################################################################
 def verify_image_upload(image_version,
                         timeout=3):
 
@@ -295,10 +267,7 @@ def verify_image_upload(image_version,
         gp.print_var(image_purpose)
         return False, None
 
-###############################################################################
 
-
-###############################################################################
 def verify_image_not_in_bmc_uploads_dir(image_version, timeout=3):
 
     r"""
@@ -324,4 +293,3 @@ def verify_image_not_in_bmc_uploads_dir(image_version, timeout=3):
             BuiltIn().fail('Found invalid BMC Image: ' + image_dir)
         time.sleep(30)
 
-###############################################################################

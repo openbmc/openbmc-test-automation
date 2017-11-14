@@ -12,7 +12,6 @@ import os
 import gen_print as gp
 
 
-###############################################################################
 def execute_keyword(keyword_name, return_dict):
     r"""
     Execute a robot keyword.
@@ -32,10 +31,7 @@ def execute_keyword(keyword_name, return_dict):
     # Build PID:<status> dictionary.
     return_dict[str(pid)] = str(status)
 
-###############################################################################
 
-
-###############################################################################
 def execute_process(num_process, keyword_name):
     r"""
     Execute a robot keyword via multiprocessing process.
@@ -62,4 +58,3 @@ def execute_process(num_process, keyword_name):
     # Return function return codes.
     return return_dict
 
-###############################################################################

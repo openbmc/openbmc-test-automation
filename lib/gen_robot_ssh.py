@@ -18,7 +18,6 @@ from SSHLibrary import SSHLibrary
 sshlib = SSHLibrary()
 
 
-###############################################################################
 def sprint_connection(connection,
                       indent=0):
 
@@ -50,10 +49,7 @@ def sprint_connection(connection,
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_connections(connections=None,
                        indent=0):
 
@@ -78,10 +74,7 @@ def sprint_connections(connections=None,
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def find_connection(open_connection_args={}):
 
     r"""
@@ -109,10 +102,7 @@ def find_connection(open_connection_args={}):
 
     return False
 
-###############################################################################
 
-
-###############################################################################
 def login_ssh(login_args={},
               max_login_attempts=5):
 
@@ -162,10 +152,7 @@ def login_ssh(login_args={},
     # exception will be raised again.
     raise(login_exception)
 
-###############################################################################
 
-
-###############################################################################
 def execute_ssh_command(cmd_buf,
                         open_connection_args={},
                         login_args={},
@@ -319,5 +306,3 @@ def execute_ssh_command(cmd_buf,
         BuiltIn().should_be_equal(rc, 0, message)
 
     return stdout, stderr, rc
-
-###############################################################################

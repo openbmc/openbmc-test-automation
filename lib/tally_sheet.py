@@ -17,7 +17,6 @@ except ImportError:
 import gen_print as gp
 
 
-###############################################################################
 class tally_sheet:
 
     r"""
@@ -63,7 +62,7 @@ class tally_sheet:
     BMC Power On                       2    1    1
     BMC Power Off                      1    1    0
     ==============================================
-    Totals                             3    2    1
+    Totals                          3    2    1
 
     """
 
@@ -314,5 +313,3 @@ class tally_sheet:
         """
 
         sys.stdout.write(self.sprint_report())
-
-###############################################################################

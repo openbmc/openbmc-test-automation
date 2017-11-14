@@ -26,7 +26,6 @@ except KeyError:
     gen_robot_print_debug = 0
 
 
-###############################################################################
 def rprint(buffer="",
            stream="STDOUT"):
 
@@ -43,10 +42,7 @@ def rprint(buffer="",
     BuiltIn().log_to_console(gp.replace_passwords(str(buffer)),
                              no_newline=True, stream=stream)
 
-###############################################################################
 
-
-###############################################################################
 def rprintn(buffer="",
             stream='STDOUT'):
 
@@ -62,10 +58,7 @@ def rprintn(buffer="",
     BuiltIn().log_to_console(gp.replace_passwords(buffer), no_newline=False,
                              stream=stream)
 
-###############################################################################
 
-
-###############################################################################
 def sprint_vars(*args):
 
     r"""
@@ -124,10 +117,7 @@ def sprint_vars(*args):
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_pgm_header(indent=0):
 
     r"""
@@ -142,10 +132,7 @@ def sprint_pgm_header(indent=0):
     # version directly.
     return gp.sprint_pgm_header(indent, linefeed=1)
 
-###############################################################################
 
-
-###############################################################################
 def sprint_error_report(error_text="\n"):
 
     r"""
@@ -160,10 +147,7 @@ def sprint_error_report(error_text="\n"):
 
     return gp.sprint_error_report(error_text)
 
-###############################################################################
 
-
-###############################################################################
 def sprint_issuing_keyword(cmd_buf,
                            test_mode=0):
 
@@ -191,10 +175,7 @@ def sprint_issuing_keyword(cmd_buf,
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_auto_vars(headers=0):
 
     r"""
@@ -228,10 +209,7 @@ def sprint_auto_vars(headers=0):
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 # In the following section of code, we will dynamically create robot versions
 # of print functions for each of the sprint functions defined in the
 # gen_print.py module.  So, for example, where we have an sprint_time()
@@ -349,5 +327,3 @@ if gen_robot_print_debug:
     rprintn()
     rprintn(cmd_buf)
 exec(cmd_buf)
-
-###############################################################################

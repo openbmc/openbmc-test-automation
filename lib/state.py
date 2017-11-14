@@ -166,7 +166,6 @@ invalid_state_match = DotDict([('rest', '^$'),
                                ('host', '^$')])
 
 
-###############################################################################
 def return_default_state():
 
     r"""
@@ -177,13 +176,10 @@ def return_default_state():
 
     return default_state
 
-###############################################################################
-
 
 valid_state_constants = ['default', 'standby_match_state']
 
 
-###############################################################################
 def return_state_constant(state_name='default'):
 
     r"""
@@ -202,10 +198,7 @@ def return_state_constant(state_name='default'):
     elif state_name == 'standby_match_state':
         return standby_match_state
 
-###############################################################################
 
-
-###############################################################################
 def anchor_state(state):
 
     r"""
@@ -224,10 +217,7 @@ def anchor_state(state):
 
     return anchored_state
 
-###############################################################################
 
-
-###############################################################################
 def strip_anchor_state(state):
 
     r"""
@@ -246,10 +236,7 @@ def strip_anchor_state(state):
 
     return stripped_state
 
-###############################################################################
 
-
-###############################################################################
 def compare_states(state,
                    match_state,
                    match_type='and'):
@@ -295,10 +282,7 @@ def compare_states(state,
 
     return default_match
 
-###############################################################################
 
-
-###############################################################################
 def get_os_state(os_host="",
                  os_username="",
                  os_password="",
@@ -434,10 +418,7 @@ def get_os_state(os_host="",
 
     return os_state
 
-###############################################################################
 
-
-###############################################################################
 def get_state(openbmc_host="",
               openbmc_username="",
               openbmc_password="",
@@ -675,10 +656,7 @@ def get_state(openbmc_host="",
 
     return state
 
-###############################################################################
 
-
-###############################################################################
 def check_state(match_state,
                 invert=0,
                 print_string="",
@@ -755,10 +733,7 @@ def check_state(match_state,
 
     return state
 
-###############################################################################
 
-
-###############################################################################
 def wait_state(match_state=(),
                wait_time="1 min",
                interval="1 second",
@@ -859,10 +834,7 @@ def wait_state(match_state=(),
 
     return state
 
-###############################################################################
 
-
-###############################################################################
 def wait_for_comm_cycle(start_boot_seconds,
                         quiet=None):
 
@@ -923,4 +895,3 @@ def wait_for_comm_cycle(start_boot_seconds,
     match_state = DotDict([('rest', '^1$')])
     state = wait_state(match_state, wait_time="5 mins", interval="2 seconds")
 
-###############################################################################
