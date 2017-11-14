@@ -68,7 +68,6 @@ ${test_really_running}      ${1}
 
 
 *** Keywords ***
-###############################################################################
 OBMC Boot Test
     [Teardown]  OBMC Boot Test Teardown
     [Arguments]  ${pos_arg1}=${EMPTY}  &{arguments}
@@ -81,5 +80,3 @@ OBMC Boot Test
     ...  Set To Dictionary  ${arguments}  loc_boot_stack=${pos_arg1}
 
     OBMC Boot Test Py  &{arguments}
-
-###############################################################################
