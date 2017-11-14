@@ -8,19 +8,16 @@ import sys
 import subprocess
 import collections
 
-robot_env = 1
-try:
-    from robot.libraries.BuiltIn import BuiltIn
-except ImportError:
-    robot_env = 0
 import gen_print as gp
 import gen_valid as gv
 import gen_misc as gm
+
+robot_env = gp.robot_env
+
 if robot_env:
     import gen_robot_print as grp
 
 
-###############################################################################
 def cmd_fnc(cmd_buf,
             quiet=None,
             test_mode=None,
@@ -126,10 +123,7 @@ def cmd_fnc(cmd_buf,
     else:
         return shell_rc, out_buf
 
-###############################################################################
 
-
-###############################################################################
 def cmd_fnc_u(cmd_buf,
               quiet=None,
               debug=None,
@@ -147,10 +141,7 @@ def cmd_fnc_u(cmd_buf,
                    print_output=print_output, show_err=show_err,
                    return_stderr=return_stderr)
 
-###############################################################################
 
-
-###############################################################################
 def parse_command_string(command_string):
 
     r"""
@@ -250,5 +241,3 @@ def parse_command_string(command_string):
         ix += 1
 
     return command_string_dict
-
-###############################################################################

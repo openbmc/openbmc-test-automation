@@ -11,7 +11,6 @@ from robot.libraries.BuiltIn import BuiltIn
 from robot.api import logger
 
 
-###############################################################################
 def rvalid_value(var_name,
                  invalid_values=[],
                  valid_values=[]):
@@ -85,10 +84,7 @@ def rvalid_value(var_name,
         error_message = grp.sprint_error_report(error_message)
         BuiltIn().fail(error_message)
 
-###############################################################################
 
-
-###############################################################################
 def rvalid_integer(var_name):
 
     r"""
@@ -137,5 +133,3 @@ def rvalid_integer(var_name):
     if not error_message == "":
         error_message = grp.sprint_error_report(error_message)
         BuiltIn().fail(error_message)
-
-###############################################################################

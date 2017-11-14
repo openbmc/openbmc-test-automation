@@ -30,7 +30,6 @@ mch_class_help_text = \
 PATH_LIST = gm.return_path_list()
 
 
-###############################################################################
 def get_plug_in_base_paths():
 
     r"""
@@ -52,13 +51,11 @@ def get_plug_in_base_paths():
 
     return plug_in_base_path_list
 
-###############################################################################
 # Define global plug_in_base_path_list and call get_plug_in_base_paths to set
 # its value.
 plug_in_base_path_list = get_plug_in_base_paths()
 
 
-###############################################################################
 def find_plug_in_package(plug_in_name):
 
     r"""
@@ -80,10 +77,7 @@ def find_plug_in_package(plug_in_name):
 
     return ""
 
-###############################################################################
 
-
-###############################################################################
 def validate_plug_in_package(plug_in_dir_path,
                              mch_class="obmc"):
 
@@ -135,10 +129,7 @@ def validate_plug_in_package(plug_in_dir_path,
 
     return candidate_plug_in_dir_path
 
-###############################################################################
 
-
-###############################################################################
 def return_integrated_plug_ins(mch_class="obmc"):
 
     r"""
@@ -180,10 +171,7 @@ def return_integrated_plug_ins(mch_class="obmc"):
 
     return integrated_plug_ins_list
 
-###############################################################################
 
-
-###############################################################################
 def return_plug_in_packages_list(plug_in_dir_paths,
                                  mch_class="obmc"):
 
@@ -218,5 +206,3 @@ def return_plug_in_packages_list(plug_in_dir_paths,
                   for path in plug_in_packages_list]))
 
     return plug_in_packages_list
-
-###############################################################################

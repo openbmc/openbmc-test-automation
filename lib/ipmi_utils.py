@@ -11,7 +11,6 @@ import tempfile
 gru.my_import_resource("ipmi_client.robot")
 
 
-###############################################################################
 def get_sol_info():
 
     r"""
@@ -57,10 +56,7 @@ def get_sol_info():
 
     return sol_info
 
-###############################################################################
 
-
-###############################################################################
 def set_sol_setting(setting_name, setting_value):
 
     r"""
@@ -76,5 +72,4 @@ def set_sol_setting(setting_name, setting_value):
 
     return status
 
-###############################################################################
 

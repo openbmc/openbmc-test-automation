@@ -8,7 +8,6 @@ import gen_print as gp
 from robot.libraries.BuiltIn import BuiltIn
 
 
-###############################################################################
 def run_key(keyword_buf,
             quiet=None,
             test_mode=None,
@@ -83,10 +82,7 @@ def run_key(keyword_buf,
 
     return status, ret_values
 
-###############################################################################
 
-
-###############################################################################
 def run_key_u(keyword_buf,
               quiet=None,
               ignore=0):
@@ -103,5 +99,3 @@ def run_key_u(keyword_buf,
     """
 
     return run_key(keyword_buf, test_mode=0, quiet=quiet, ignore=ignore)
-
-###############################################################################

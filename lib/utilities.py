@@ -124,7 +124,6 @@ if __name__ == "__main__":
    main()
 
 
-###############################################################################
 def get_mtr_report(host=""):
 
     r"""
@@ -196,10 +195,7 @@ def get_mtr_report(host=""):
     # Return the full report as dictionary of dictionaries.
     return report
 
-###############################################################################
 
-
-###############################################################################
 def get_mtr_row(host=""):
 
     r"""
@@ -230,10 +226,7 @@ def get_mtr_row(host=""):
 
     return row
 
-###############################################################################
 
-
-###############################################################################
 def list_to_set(fru_list=""):
     r"""
     Pack the list into a set tuple and return.
@@ -251,8 +244,6 @@ def list_to_set(fru_list=""):
     fru_list   List of FRU's elements.
     """
     return set(fru_list)
-
-###############################################################################
 
 
 def min_list_value(value_list):
