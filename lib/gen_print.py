@@ -1168,7 +1168,6 @@ def sprintn(buffer=""):
 
     return buffer
 
-
 def gp_print(buffer,
              stream='stdout'):
 
@@ -1209,6 +1208,11 @@ def gp_debug_print(buffer):
         return
 
     gp_print(buffer)
+
+    if robot_env:
+        BuiltIn().log_to_console(buffer)
+    else:
+        print(buffer)
 
 
 def get_var_value(var_value=None,
