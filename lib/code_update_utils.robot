@@ -384,3 +384,31 @@ Get Least Value Priority Image
     ${min_value}=  Min List Value  ${priority_value_list}
 
     [Return]  ${min_value}
+
+
+Enable Field Mode And Verify Unmount
+    [Documentation]  Enable field mode and check that /usr/local is unmounted.
+
+    # After running, /xyz/openbmc_project/software should look like this:
+    # /xyz/openbmc_project/software
+    # {
+    #     "FieldModeEnabled": 1,
+    #     "associations": [
+    #         [
+    #             "active",
+    #             "software_version",
+    #             "/xyz/openbmc_project/software/fcf8e182"
+    #         ],
+    #         [
+    #             "functional",
+    #             "software_version",
+    #             "/xyz/openbmc_project/software/fcf8e182"
+    #         ]
+    #     ]
+    # }
+
+    ${args}=  Create Dictionary  data=${1}
+    Write Attribute  ${SOFTWARE_VERSION_URI}  FieldModeEnabled  data=${args}
+    Sleep  5s
+    BMC Execute Command  [ ! -d "/usr/local/share" ]
+
