@@ -11,7 +11,6 @@ ${SKIP_LIST}  ${EMPTY}
 
 *** Keywords ***
 
-###############################################################################
 
 Cleanup Dir
     [Documentation]  Remove leftover files in cleanup directory path.
