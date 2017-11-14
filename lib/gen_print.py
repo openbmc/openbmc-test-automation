@@ -77,7 +77,6 @@ sprint_time_last_seconds = start_time
 gen_print_debug = int(os.environ.get('GEN_PRINT_DEBUG', 0))
 
 
-###############################################################################
 def sprint_func_name(stack_frame_ix=None):
 
     r"""
@@ -108,12 +107,9 @@ def sprint_func_name(stack_frame_ix=None):
 
     return func_name
 
-###############################################################################
-
 
 # get_arg_name is not a print function per se.  I have included it in this
 # module because it is used by sprint_var which is found in this module.
-###############################################################################
 def get_arg_name(var,
                  arg_num=1,
                  stack_frame_ix=1):
@@ -376,10 +372,7 @@ def get_arg_name(var,
 
     return argument
 
-###############################################################################
 
-
-###############################################################################
 def sprint_time(buffer=""):
 
     r"""
@@ -468,10 +461,7 @@ def sprint_time(buffer=""):
 
     return time_string + " - " + buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_timen(buffer=""):
 
     r"""
@@ -481,10 +471,7 @@ def sprint_timen(buffer=""):
 
     return sprint_time(buffer + "\n")
 
-###############################################################################
 
-
-###############################################################################
 def sprint_error(buffer=""):
 
     r"""
@@ -510,10 +497,7 @@ def sprint_error(buffer=""):
 
     return sprint_time() + "**ERROR** " + buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_varx(var_name,
                 var_value,
                 hex=0,
@@ -691,10 +675,7 @@ def sprint_varx(var_name,
 
     return ""
 
-###############################################################################
 
-
-###############################################################################
 def sprint_var(var_value,
                hex=0,
                loc_col1_indent=col1_indent,
@@ -719,10 +700,7 @@ def sprint_var(var_value,
                        loc_col1_width=loc_col1_width,
                        trailing_char=trailing_char)
 
-###############################################################################
 
-
-###############################################################################
 def sprint_vars(*args):
 
     r"""
@@ -792,10 +770,7 @@ def sprint_vars(*args):
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_dashes(indent=col1_indent,
                   width=80,
                   line_feed=1,
@@ -821,10 +796,7 @@ def sprint_dashes(indent=col1_indent,
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sindent(text="",
             indent=0):
 
@@ -843,10 +815,7 @@ def sindent(text="",
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_call_stack(indent=0,
                       stack_frame_ix=0):
 
@@ -928,10 +897,7 @@ def sprint_call_stack(indent=0,
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_executing(stack_frame_ix=None):
 
     r"""
@@ -991,10 +957,7 @@ def sprint_executing(stack_frame_ix=None):
 
     return sprint_time() + "Executing: " + func_and_args + "\n"
 
-###############################################################################
 
-
-###############################################################################
 def sprint_pgm_header(indent=0,
                       linefeed=1):
 
@@ -1079,10 +1042,7 @@ def sprint_pgm_header(indent=0,
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_error_report(error_text="\n",
                         indent=2,
                         format=None):
@@ -1133,10 +1093,7 @@ def sprint_error_report(error_text="\n",
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_issuing(cmd_buf,
                    test_mode=0):
 
@@ -1163,10 +1120,7 @@ def sprint_issuing(cmd_buf,
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint_pgm_footer():
 
     r"""
@@ -1184,10 +1138,7 @@ def sprint_pgm_footer():
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def sprint(buffer=""):
 
     r"""
@@ -1201,10 +1152,7 @@ def sprint(buffer=""):
 
     return str(buffer)
 
-###############################################################################
 
-
-###############################################################################
 def sprintn(buffer=""):
 
     r"""
@@ -1220,10 +1168,7 @@ def sprintn(buffer=""):
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 def gp_debug_print(buffer):
 
     r"""
@@ -1243,10 +1188,7 @@ def gp_debug_print(buffer):
     else:
         print(buffer)
 
-###############################################################################
 
-
-###############################################################################
 def get_var_value(var_value=None,
                   default=1,
                   var_name=None):
@@ -1317,8 +1259,6 @@ def get_var_value(var_value=None,
 
     return var_value
 
-###############################################################################
-
 
 # hidden_text is a list of passwords which are to be replaced with asterisks
 # by print functions defined in this module.
@@ -1327,7 +1267,6 @@ hidden_text = []
 password_regex = ""
 
 
-###############################################################################
 def register_passwords(*args):
 
     r"""
@@ -1358,10 +1297,7 @@ def register_passwords(*args):
         password_regex = '(' +\
             '|'.join([re.escape(x) for x in hidden_text]) + ')'
 
-###############################################################################
 
-
-###############################################################################
 def replace_passwords(buffer):
 
     r"""
@@ -1385,10 +1321,7 @@ def replace_passwords(buffer):
 
     return re.sub(password_regex, "********", buffer)
 
-###############################################################################
 
-
-###############################################################################
 def create_print_wrapper_funcs(func_names,
                                stderr_func_names,
                                replace_dict):
@@ -1464,10 +1397,7 @@ def create_print_wrapper_funcs(func_names,
 
     return buffer
 
-###############################################################################
 
-
-###############################################################################
 # In the following section of code, we will dynamically create print versions
 # for each of the sprint functions defined above.  So, for example, where we
 # have an sprint_time() function defined above that returns the time to the
