@@ -10,7 +10,6 @@ ${MAC_ADDRESS}          ${EMPTY}
 
 *** Keywords ***
 
-###############################################################################
 Check And Reset MAC
     [Documentation]  Update BMC with user input MAC address.
     [Arguments]  ${mac_address}=${MAC_ADDRESS}
@@ -24,10 +23,7 @@ Check And Reset MAC
     Run Keyword If  '${mac_address.lower()}' != '${bmc_mac_addr.lower()}'
     ...  Set MAC Address
 
-###############################################################################
 
-
-###############################################################################
 Set MAC Address
     [Documentation]  Update eth0 with input MAC address.
     [Arguments]  ${mac_address}=${MAC_ADDRESS}
@@ -43,7 +39,6 @@ Set MAC Address
     ${bmc_mac_addr}=  Execute Command On BMC  cat /sys/class/net/eth0/address
     Should Be Equal  ${bmc_mac_addr}  ${mac_address}  ignore_case=True
 
-###############################################################################
 
 Get BMC IP Info
     [Documentation]  Get system IP address and prefix length.

@@ -15,12 +15,10 @@ Library            gen_robot_keyword.py
 
 *** Keywords ***
 
-################################################################
 # Method : Call FFDC Methods                                   #
 #          Execute the user define keywords from the FFDC List #
 #          Unlike any other keywords this will call into the   #
 #          list of keywords defined in the FFDC list at one go #
-################################################################
 
 Call FFDC Methods
     [Documentation]   Call into FFDC Keyword index list.
@@ -118,10 +116,8 @@ Execute Keyword Method
     ${status}  ${ffdc_file_list}=  Run Key  ${keyword_name}  ignore=1
     [Return]  ${ffdc_file_list}
 
-################################################################
 # Method : BMC FFDC Manifest                                   #
 #          Execute command on BMC and write to ffdc_report.txt #
-################################################################
 
 BMC FFDC Manifest
     [Documentation]  Run the ssh commands from FFDC_BMC_CMD and return a list
@@ -172,11 +168,9 @@ Execute Command and Write FFDC
     [Return]  ${ffdc_file_list}
 
 
-################################################################
 # Method : BMC FFDC Files                                      #
 #          Execute command on BMC and write to individual file #
 #          based on the file name pre-defined in the list      #
-################################################################
 
 BMC FFDC Files
     [Documentation]  Run the commands from FFDC_BMC_FILE and return a list of
@@ -216,10 +210,8 @@ Create File and Write Data
     [Return]  ${ffdc_file_list}
 
 
-################################################################
 # Method : Log Test Case Status                                #
 #          Creates test result history footprint for reference #
-################################################################
 
 Log Test Case Status
     [Documentation]  Test case execution result history.
@@ -412,7 +404,6 @@ System Inventory Files
     [Return]  ${ffdc_file_list}
 
 
-##############################################################################
 SCP Coredump Files
     [Documentation]  Copy core dump files from BMC to local system and return a
     ...              list of generated file names.
@@ -440,7 +431,6 @@ SCP Coredump Files
     [Return]  ${ffdc_file_list}
 
 
-##############################################################################
 Collect eSEL Log
     [Documentation]  Collect eSEL log from logging entry and convert eSEL data
     ...              to elog formatted string text file.
@@ -500,7 +490,6 @@ Collect eSEL Log
     [Return]  ${ffdc_file_list}
 
 
-##############################################################################
 Convert eSEL To Elog Format
     [Documentation]  Execute parser tool on the eSEL data file to generate
     ...              formatted error log.
@@ -515,4 +504,3 @@ Convert eSEL To Elog Format
     ...  ${esel_file_path} -p decode_obmc_data
     Run  ${cmd_buf}
 
-##############################################################################
