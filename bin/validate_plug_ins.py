@@ -22,7 +22,6 @@ from gen_plug_in import *
 sys.path.insert(0, save_path_0)
 
 
-###############################################################################
 # Create parser object to process command line parameters and args.
 
 # Create parser object.
@@ -32,32 +31,26 @@ parser = argparse.ArgumentParser(
                 "  It will also print a list of the absolute plug-in" +
                 " directory paths for use by the calling program.",
     formatter_class=argparse.RawTextHelpFormatter,
-    prefix_chars='-+'
-    )
+    prefix_chars='-+')
 
 # Create arguments.
 parser.add_argument(
     'plug_in_dir_paths',
     nargs='?',
     default="",
-    help=plug_in_dir_paths_help_text + default_string
-    )
+    help=plug_in_dir_paths_help_text + default_string)
 
 parser.add_argument(
     '--mch_class',
     default="obmc",
-    help=mch_class_help_text + default_string
-    )
+    help=mch_class_help_text + default_string)
 
 # The stock_list will be passed to gen_get_options.  We populate it with the
 # names of stock parm options we want.  These stock parms are pre-defined by
 # gen_get_options.
 stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
 
-###############################################################################
 
-
-###############################################################################
 def exit_function(signal_number=0,
                   frame=None):
 
@@ -71,10 +64,7 @@ def exit_function(signal_number=0,
 
     qprint_pgm_footer()
 
-###############################################################################
 
-
-###############################################################################
 def signal_handler(signal_number, frame):
 
     r"""
@@ -92,10 +82,7 @@ def signal_handler(signal_number, frame):
     # when we received the signal.
     exit(0)
 
-###############################################################################
 
-
-###############################################################################
 def validate_parms():
 
     r"""
@@ -106,10 +93,7 @@ def validate_parms():
 
     return True
 
-###############################################################################
 
-
-###############################################################################
 def main():
 
     r"""
@@ -145,13 +129,8 @@ def main():
 
     return True
 
-###############################################################################
 
-
-###############################################################################
 # Main
 
 if not main():
     exit(1)
-
-###############################################################################

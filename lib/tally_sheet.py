@@ -17,7 +17,6 @@ except ImportError:
 import gen_print as gp
 
 
-###############################################################################
 class tally_sheet:
 
     r"""
@@ -314,5 +313,3 @@ class tally_sheet:
         """
 
         sys.stdout.write(self.sprint_report())
-
-###############################################################################

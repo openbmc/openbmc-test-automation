@@ -15,7 +15,6 @@ import state as st
 from robot.libraries.BuiltIn import BuiltIn
 
 
-###############################################################################
 def ffdc(ffdc_dir_path=None,
          ffdc_prefix=None,
          ffdc_function_list=""):
@@ -93,10 +92,7 @@ def ffdc(ffdc_dir_path=None,
 
     return ffdc_file_list
 
-###############################################################################
 
-
-###############################################################################
 def set_ffdc_defaults(ffdc_dir_path=None,
                       ffdc_prefix=None):
 
@@ -170,4 +166,3 @@ def set_ffdc_defaults(ffdc_dir_path=None,
 
     return ffdc_dir_path, ffdc_prefix
 
-###############################################################################
