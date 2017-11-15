@@ -62,7 +62,7 @@ ${QUIET}  ${0}
 
 *** Keywords ***
 OpenBMC Get Request
-    [Arguments]    ${uri}    ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+    [Arguments]    ${uri}    ${timeout}=30  ${quiet}=${QUIET}  &{kwargs}
 
     Initialize OpenBMC    ${timeout}  quiet=${quiet}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
