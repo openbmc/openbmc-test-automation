@@ -412,3 +412,12 @@ Enable Field Mode And Verify Unmount
     Sleep  5s
     BMC Execute Command  [ ! -d "/usr/local/share" ]
 
+
+Disable Field Mode And Verify Unmount
+    [Documentation]  Disable field mode and check that /usr/local is unmounted.
+
+    BMC Execute Command  /sbin/fw_setenv fieldmode
+    BMC Execute Command  /bin/systemctl unmask usr-local.mount
+    OBMC Reboot (off)  quiet=${1}
+    BMC Execute Command  [ -d "/usr/local/share" ]
+
