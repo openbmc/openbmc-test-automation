@@ -350,7 +350,7 @@ OS FFDC Files
     ...  ${match_state}  quiet=0
 
     Run Keyword If  '${status}' == 'FAIL'  Run Keywords
-    ...  Print Error  The OS is not communicating so no OS FFDC will be done.\n
+    ...  Print Timen  The OS is not communicating so no OS FFDC will be done.\n
     ...  AND
     ...  Return From Keyword  ${ffdc_file_list}
 
