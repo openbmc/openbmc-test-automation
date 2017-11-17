@@ -21,5 +21,10 @@ inventory_dict = {
         "FieldReplaceable",
         "Cached",
         "Functional"
+    ],
+    "gpu":[
+        "PrettyName",
+        "Present",
+        "Functional"
     ]
 }
