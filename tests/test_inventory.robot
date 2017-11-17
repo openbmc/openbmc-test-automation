@@ -288,6 +288,30 @@ Verify CPU Functional State
     \  Should Be True  ${present}
     ...  msg=${cpu_uri} is functional but "Present" is not set.
 
+
+Verify GPU Functional State
+    [Documentation]  Verify that "Present" GPU property is set if "Functional"
+    ...              CPU property is set.
+    [Tags]  Verify_GPU_Functional_State
+
+    # Example of gv* endpoint data:
+    # "/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card4": {
+    #    "Present": 1,
+    #    "PrettyName": ""
+    # },
+
+
+    ${gpu_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  gv*
+    Should Not Be Empty  ${gpu_list}
+    :FOR  ${cpu_uri}  IN  @{gpu_list}
+    \  ${status}=  Run Keyword And Return Status
+    ...  Check URL Property If Functional  ${gpu_uri}
+    \  Continue For Loop If  '${status}' == '${False}'
+    \  ${present}=  Read Attribute  ${gpu_uri}  Present
+    \  Should Be True  ${present}
+    ...  msg=${gpu_uri} is functional but "Present" is not set.
+
+
 Check Air Or Water Cooled
     [Documentation]  Check if this system is Air or water cooled.
     [Tags]  Check_Air_Or_Water_Cooled
