@@ -417,3 +417,9 @@ Disable Field Mode And Verify Unmount
     OBMC Reboot (off)  quiet=${1}
     BMC Execute Command  [ -d "/usr/local/share" ]
 
+
+Field Mode Should Be Enabled
+    [Documentation]  Check that field mode is enabled.
+
+    ${value}=  Read Attribute  ${SOFTWARE_VERSION_URI}  FieldModeEnabled
+    Should Be True  ${value}  ${1}
