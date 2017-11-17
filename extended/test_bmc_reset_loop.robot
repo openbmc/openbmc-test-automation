@@ -9,7 +9,7 @@ Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/state_manager.robot
 Resource        ../lib/boot_utils.robot
 
-Test Teardown   Test Exit Logs
+Test Teardown   Test Teardown Execution
 
 *** Variables ***
 ${LOOP_COUNT}    ${50}
@@ -80,12 +80,14 @@ BMC Reboot Cycle
     Verify BMC RTC And UTC Time Drift
 
 
-Test Exit Logs
+Test Teardown Execution
+    [Documentation]  Test exit check for ping and FFDC collection.
     Ping Host  ${OPENBMC_HOST}
     FFDC On Test Case Fail
 
 
 Validate Parameters
+    [Documentation]  Validate paratemer for PDU's.
     Should Not Be Empty   ${PDU_IP}
     Should Not Be Empty   ${PDU_TYPE}
     Should Not Be Empty   ${PDU_SLOT_NO}
