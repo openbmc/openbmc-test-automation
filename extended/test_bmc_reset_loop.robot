@@ -8,8 +8,10 @@ Resource        ../lib/utils.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/state_manager.robot
 Resource        ../lib/boot_utils.robot
+Resource        ../lib/code_update_utils.robot
 
 Test Teardown   Test Teardown Execution
+Suite Setup     Suite Setup Execution
 
 *** Variables ***
 ${LOOP_COUNT}    ${50}
@@ -57,6 +59,7 @@ Power Cycle System Via PDU
 
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
     Verify BMC RTC And UTC Time Drift
+    Field Mode Should Be Enabled
 
 
 BMC REST Reset Cycle
@@ -68,6 +71,7 @@ BMC REST Reset Cycle
     ${bmc_version_after}=  Get BMC Version
     Should Be Equal  ${bmc_version_before}  ${bmc_version_after}
     Verify BMC RTC And UTC Time Drift
+    Field Mode Should Be Enabled
 
 
 BMC Reboot Cycle
@@ -78,6 +82,7 @@ BMC Reboot Cycle
     ${bmc_version_after}=  Get BMC Version
     Should Be Equal  ${bmc_version_before}  ${bmc_version_after}
     Verify BMC RTC And UTC Time Drift
+    Field Mode Should Be Enabled
 
 
 Test Teardown Execution
@@ -94,3 +99,8 @@ Validate Parameters
     Should Not Be Empty   ${PDU_USERNAME}
     Should Not Be Empty   ${PDU_PASSWORD}
 
+
+Suite Setup Execution
+    [Documentation]  Enable field mode.
+    Enable Field Mode And Verify Unmount
+    Field Mode Should Be Enabled
