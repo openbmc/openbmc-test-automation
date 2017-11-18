@@ -364,9 +364,9 @@ Verify Watchdog Errorlog Content
     #  {
     #      "AdditionalData": [],
     #      "Id": 1,
-    #      "Message": "org.open_power.Host.Error.WatchdogTimedOut",
+    #      "Message": "org.open_power.Host.Boot.Error.WatchdogTimedOut",
     #      "Resolved": 0,
-    #      "Severity": "xyz.openbmc_project.Logging.Entry.Level.Informational",
+    #      "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     #      "Timestamp": 1492715244828,
     #      "associations": []
     # },
@@ -374,9 +374,9 @@ Verify Watchdog Errorlog Content
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
     ${elog}=  Read Properties  ${elog_entry[0]}
     Should Be Equal As Strings
-    ...  ${elog["Message"]}  org.open_power.Host.Error.WatchdogTimedOut
-    Should Not Be Equal As Strings
-    ...  ${elog["Severity"]}  xyz.openbmc_project.Logging.Entry.Level.Informational
+    ...  ${elog["Message"]}  org.open_power.Host.Boot.Error.WatchdogTimedOut
+    Should Be Equal As Strings
+    ...  ${elog["Severity"]}  xyz.openbmc_project.Logging.Entry.Level.Error
 
 
 Logging Test Binary Exist
