@@ -250,7 +250,7 @@ Activate Image And Verify No Duplicate Priorities
     # image_file_path  The path to the image to upload.
     # image_purpose    The purpose in the image's MANIFEST file.
 
-    Upload And Activate Image  ${image_file_path}
+    Upload And Activate Image  ${image_file_path}  skip_if_active=true
     Verify No Duplicate Image Priorities  ${image_purpose}
 
 
