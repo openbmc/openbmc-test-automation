@@ -208,7 +208,7 @@ Upload And Activate Multiple BMC Images Setup
 
     Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
     Delete All PNOR Images
-    Upload And Activate Image  ${IMAGE_FILE_PATH}
+    Upload And Activate Image  ${IMAGE_FILE_PATH}  skip_if_active=true
 
 Get PNOR Extended Version
     [Documentation]  Return the PNOR extended version.
