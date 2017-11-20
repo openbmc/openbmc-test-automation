@@ -151,3 +151,36 @@ def get_bmc_date_time():
 
     return result_time_dict
 
+
+def get_bmc_df(df_parm_string=""):
+
+    r"""
+    Get df report from BMC and return as a report "object".
+
+    A df report object is a list where each entry is a dictionary whose keys
+    are the field names from the first entry in report_list.
+
+    Example df report object:
+
+    df_report:
+      df_report[0]:
+        [filesystem]:    dev
+        [1k-blocks]:     247120
+        [used]:          0
+        [available]:     247120
+        [use%]:          0%
+        [mounted]:       /dev
+      df_report[1]:
+        [filesystem]:    dev
+        [1k-blocks]:     247120
+        [used]:          0
+        [available]:     247120
+        [use%]:          0%
+        [mounted]:       /dev
+
+.   Description of argument(s):
+    df_parm_string  A string containing valid df command parms.
+    """
+
+    out_buf, stderr, rc = bsu.bmc_execute_command("df " + df_parm_string)
+    return vf.outbuf_to_report(out_buf)
