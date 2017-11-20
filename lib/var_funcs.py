@@ -373,3 +373,130 @@ def key_value_outbuf_to_dict(out_buf,
     # Create key_var_list and remove null entries.
     key_var_list = list(filter(None, out_buf.split("\n")))
     return key_value_list_to_dict(key_var_list, **args)
+
+
+def list_to_report(report_list,
+                   to_lower=1):
+
+    r"""
+    Convert a list containing report text lines to a report "object" and
+    return it.
+
+    The first entry in report_list must be a header line consisting of column
+    names delimited by white space.  No column name may contain white space.
+    The remaining report_list entries should contain tabular data which
+    corresponds to the column names.
+
+    A report object is a list where each entry is a dictionary whose keys are
+    the field names from the first entry in report_list.
+
+    Example:
+    Given the following report_list as input:
+
+    rl:
+      rl[0]: Filesystem           1K-blocks      Used Available Use% Mounted on
+      rl[1]: dev                     247120         0    247120   0% /dev
+      rl[2]: tmpfs                   248408     79792    168616  32% /run
+
+    This function will return a list of dictionaries as shown below:
+
+    df_report:
+      df_report[0]:
+        [filesystem]:                  dev
+        [1k-blocks]:                   247120
+        [used]:                        0
+        [available]:                   247120
+        [use%]:                        0%
+        [mounted]:                     /dev
+      df_report[1]:
+        [filesystem]:                  dev
+        [1k-blocks]:                   247120
+        [used]:                        0
+        [available]:                   247120
+        [use%]:                        0%
+        [mounted]:                     /dev
+
+    Notice that because "Mounted on" contains a space, "on" would be
+    considered the 7th field.  In this case, there is never any data in field
+    7 so things work out nicely.  A caller could do some pre-processing if
+    desired (e.g. change "Mounted on" to "Mounted_on").
+
+    Description of argument(s):
+    report_list                     A list where each entry is one line of
+                                    output from a report.  The first entry
+                                    must be a header line which contains
+                                    column names.  Column names may not
+                                    contain spaces.
+    to_lower                        Change the resulting key names to lower
+                                    case.
+    """
+
+    # Process header line.
+    header_line = report_list[0]
+    if to_lower:
+        header_line = header_line.lower()
+    columns = header_line.split()
+
+    report_obj = []
+    for report_line in report_list[1:]:
+        line = report_list[1].split()
+        try:
+            line_dict = collections.OrderedDict(zip(columns, line))
+        except AttributeError:
+            line_dict = DotDict(zip(columns, line))
+        report_obj.append(line_dict)
+
+    return report_obj
+
+
+def outbuf_to_report(out_buf,
+                     **args):
+
+    r"""
+    Convert a text buffer containing report lines to a report "object" and
+    return it.
+
+    Refer to list_to_report (above) for more details.
+
+    Example:
+
+    Given the following out_buf:
+
+    Filesystem           1K-blocks      Used Available Use% Mounted on
+    dev                     247120         0    247120   0% /dev
+    tmpfs                   248408     79792    168616  32% /run
+
+    This function will return a list of dictionaries as shown below:
+
+    df_report:
+      df_report[0]:
+        [filesystem]:                  dev
+        [1k-blocks]:                   247120
+        [used]:                        0
+        [available]:                   247120
+        [use%]:                        0%
+        [mounted]:                     /dev
+      df_report[1]:
+        [filesystem]:                  dev
+        [1k-blocks]:                   247120
+        [used]:                        0
+        [available]:                   247120
+        [use%]:                        0%
+        [mounted]:                     /dev
+
+    Other possible uses:
+    - Process the output of a ps command.
+    - Process the output of an ls command (the caller would need to supply
+    column names)
+
+    Description of argument(s):
+    out_buf                         A text report  The first line must be a
+                                    header line which contains column names.
+                                    Column names may not contain spaces.
+    **args                          Arguments to be interpreted by
+                                    list_to_report.  (See docstring of
+                                    list_to_report function for details).
+    """
+
+    report_list = filter(None, out_buf.split("\n"))
+    return list_to_report(report_list, **args)
