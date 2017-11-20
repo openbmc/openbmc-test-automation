@@ -77,7 +77,8 @@ REST Host Code Update While OS Is Running
     ...  Fail  Cannot boot the OS.
 
     REST Power On  stack_mode=skip
-    Upload And Activate Image  ${ALTERNATE_IMAGE_FILE_PATH}
+    Upload And Activate Image
+    ...  ${ALTERNATE_IMAGE_FILE_PATH}  skip_if_active=true
     REST Power On  stack_mode=normal
     Verify Running Host Image  ${ALTERNATE_IMAGE_FILE_PATH}
 
@@ -208,7 +209,9 @@ Upload And Activate Multiple BMC Images Setup
 
     Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
     Delete All PNOR Images
-    Upload And Activate Image  ${IMAGE_FILE_PATH}
+    Upload And Activate Image
+    ...  ${ALTERNATE_IMAGE_FILE_PATH}  skip_if_active=true
+    Upload And Activate Image  ${IMAGE_FILE_PATH}  skip_if_active=true
 
 Get PNOR Extended Version
     [Documentation]  Return the PNOR extended version.
