@@ -145,7 +145,9 @@ Is Host Rebooted
 
     ${host_trans_state}=  Get Host Trans State
     Should Be Equal  ${host_trans_state}  Reboot
-    Is Host Running
+
+    Wait Until Keyword Succeeds
+    ...  10 min  10 sec  Is Host Running
 
 
 Is Chassis On
