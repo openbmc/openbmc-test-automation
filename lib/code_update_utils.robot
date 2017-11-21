@@ -214,7 +214,13 @@ Attempt To Reboot BMC During Image Activation
     # Attempt to reboot during activation.
     ${version_id}=  Upload And Activate Image  ${image_file_path}
     ...  wait=${0}
-    BMC Execute Command  /sbin/reboot
+    ${resp}=  OpenBMC Get Request  ${SOFTWARE_VERSION_URI}${version_id}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    OBMC Reboot (off)
+
+    ${resp}=  OpenBMC Get Request  ${SOFTWARE_VERSION_URI}${version_id}
+    Should Be Equal As Strings  ${resp.status_code} == ${HTTP_OK}
 
     # Wait for activation to finish.
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
