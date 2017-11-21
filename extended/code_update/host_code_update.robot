@@ -164,6 +164,28 @@ Delete Host Image
     Delete Image And Verify  @{software_objects}[0]  ${VERSION_PURPOSE_HOST}
 
 
+Reboot Host During Code Update
+    [Documentation]  Attempt to reboot the host while an image is activating.
+    [Tags]  Reboot_Host_During_Code_Update
+
+    Upload And Activate Image  ${IMAGE_FILE_PATH}
+    REST Power On
+    Delete Error Logs
+
+    # Reboot Host during activation.
+    ${version_id}=  Upload And Activate Image  ${ALTERNATE_IMAGE_FILE_PATH}
+    ...  wait=${0}
+
+    ${resp}=  OpenBMC Get Request  ${SOFTWARE_VERSION_URI}${version_id}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    # To mimic host sending down checkstop to re-poweron the system.
+    Initiate Host Reboot
+
+    ${resp}=  OpenBMC Get Request  ${SOFTWARE_VERSION_URI}${version_id}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
 *** Keywords ***
 
 Temporarily Set PNOR Attribute
