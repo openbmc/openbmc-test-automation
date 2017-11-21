@@ -35,7 +35,6 @@ Reboot BMC During Host Code Update
     [Tags]  Reboot_BMC_During_Host_Code_Update
 
     Attempt To Reboot BMC During Image Activation  ${IMAGE_FILE_PATH}
-    OBMC Reboot (off)
 
 
 *** Keywords ***
