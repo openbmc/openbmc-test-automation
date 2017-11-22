@@ -5,6 +5,7 @@ Resource        ../lib/open_power_utils.robot
 Resource        ../lib/boot_utils.robot
 Resource        ../lib/state_manager.robot
 Resource        ../lib/openbmc_ffdc.robot
+Resource        ../lib/utils.robot
 
 Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
@@ -96,7 +97,7 @@ Test Teardown Execution
     # - Close all open SSH connections.
 
     FFDC On Test Case Fail
-    Delete Error Logs
+    Delete All Error Logs
     Close All Connections
 
 Verify OCC State
