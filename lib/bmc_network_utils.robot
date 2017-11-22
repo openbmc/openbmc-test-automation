@@ -156,7 +156,8 @@ Delete IP And Object
     # After any modification on network interface, BMC restarts network
     # module, wait until it is reachable.
 
-    Wait For Host To Ping  ${OPENBMC_HOST}  0.3  1
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_RETRY_TIME}
+    ...  ${NETWORK_TIMEOUT}
 
     # Verify whether deleted IP address is removed from BMC system.
 
