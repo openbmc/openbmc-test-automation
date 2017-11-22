@@ -355,7 +355,7 @@ Configure Lowest Prefix Length
     [Documentation]  Configure lowest prefix length.
     [Tags]  Configure_Lowest_Prefix_Length
 
-    Configure Network Settings  ${valid_ip}  ${0}
+    Configure Network Settings  ${valid_ip}  ${1}
     ...  ${valid_gateway}  valid
 
     # Verify whether new IP object is created for the given IP via REST.
@@ -506,7 +506,8 @@ Configure Network Settings
     # After any modification on network interface, BMC restarts network
     # module, wait until it is reachable.
 
-    Wait For Host To Ping  ${OPENBMC_HOST}  0.3  1
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_RETRY_TIME}
+    ...  ${NETWORK_TIMEOUT}
 
     # Verify whether new IP address is populated on BMC system.
     # It should not allow to configure invalid settings.
