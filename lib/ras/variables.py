@@ -35,6 +35,11 @@ DES_OCC_RECV1 = "'OCCFIR[^45].*C405_ECC_CE'"
 DES_CME_RECV1 = "'CMEFIR[^7].*PPE SRAM Uncorrectable Err'"
 DES_EQ_RECV32 = "'EQ_LFIR[^1].*CFIR internal parity'"
 DES_NCU_RECV1 = "'NCUFIR[^8].*NCU Store Queue Data'"
+DES_NCU_UE = "'NCUFIR[^0].*NCU store queue control'"
+
+DES_CORE_RECV5 = "'COREFIR[^0].*IFU SRAM Recoverable err'"
+DES_CORE_RECV1 = "'COREFIR[^30].*LSU Set Delete Err'"
+DES_CORE_UE = "'COREFIR[^1].*TC Checkstop'"
 
 # The following is an error injection dictionary with each entry consisting of:
 # - field_name: Targettype_threshold_limit .
@@ -68,6 +73,10 @@ ERROR_INJECT_DICT = {'MCACALIFIR_RECV1': ['07010900', '8000000000000000',\
              'CMEFIR_RECV1': ['10012000', '0100000000000000', DES_CME_RECV1],
              'EQFIR_RECV32': ['1004000A', '8000000000000000', DES_EQ_RECV32],
              'NCUFIR_RECV1': ['10011400', '0080000000000000', DES_NCU_RECV1],
+             'NCUFIR_UE': ['10011400', '8000000000000000', DES_NCU_UE],
+             'COREFIR_RECV5': ['20010A40', '8000000000000000', DES_CORE_RECV5],
+             'COREFIR_RECV1': ['20010A40', '0000000200000000', DES_CORE_RECV1],
+             'COREFIR_UE': ['20010A40', '4000000000000000', DES_CORE_UE],
 
              }
 
