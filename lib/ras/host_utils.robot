@@ -5,6 +5,8 @@ Resource            ../../lib/utils.robot
 Variables           ../../lib/ras/variables.py
 Library             ../../lib/bmc_ssh_utils.py
 Library             OperatingSystem
+Library             ../../lib/gen_print.py
+Library             ../../lib/gen_robot_print.py
 
 *** Keywords ***
 
@@ -17,7 +19,6 @@ Getscom Operations On OS
     #                -c|--chip <chip-id> <addr>
 
     ${output}  ${stderr}  ${rc}=  OS Execute Command  getscom ${input_cmd}
-    Should Be Empty  ${stderr}
     [Return]  ${output}
 
 Gard Operations On OS
@@ -28,7 +29,6 @@ Gard Operations On OS
     # input_cmd      list/clear all/show <gard_record_id>
 
     ${output}  ${stderr}  ${rc}=  OS Execute Command  opal-gard ${input_cmd}
-    Should Be Empty  ${stderr}
     [Return]  ${output}
 
 Putscom Operations On OS
@@ -75,7 +75,6 @@ Get Core IDs From OS
     ${cmd}=  Catenate  set -o pipefail ; ${probe_cpu_file_path}
     ...    | grep -i 'CHIP ID: ${proc_chip_id}' | cut -c21-22
     ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    Should Be Empty  ${stderr}
     ${core_ids}=  Split String  ${output}
     # Example output:
     # ['2', '3', '4', '5', '6']
@@ -93,7 +92,6 @@ FIR Address Translation Through HOST
     ${cmd}=  Catenate  set -o pipefail ; ${addr_translation_file_path} ${fir}
     ...  ${core_id} | grep -i ${target_type}
     ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    Should Be Empty  ${stderr}
     ${translated_addr}=  Split String  ${output}  :${SPACE}0x
     # Example output:
     # 0x10010c00
@@ -134,3 +132,10 @@ Code Update Unrecoverable Error Inject
     ...   host during PNOR code update.
 
     Inject Error Through HOST  05010800  4000000000000000  1
+
+Disable CPU States Through HOST
+    [Documentation]  Disable CPU states through host.
+
+    ${cmd}=  Catenate  SEPARATOR=  for file_path in /sys/devices/system/cpu/
+    ...  cpu*/cpuidle/state*/disable; do echo 0 > $file_path; done
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
