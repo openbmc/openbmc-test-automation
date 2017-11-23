@@ -33,8 +33,10 @@ ${bmc_mem_total_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
 ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
 ${HOST_SETTING}    ${SETTINGS_URI}host0
 # /run/initramfs/ro associate filesystem  should be 100% full always
-${bmc_file_system_usage_cmd}=
-...  df -h | cut -c 52-54 | grep 100 | wc -l
+${bmc_file_system_usage_cmd}=  df -h | cut -c 52-54 | grep 100 | wc -l
+${bmc_file_system_usage_cmd}=  df -h | cut -c 52-54 | grep 100 | wc -l
+${total_pnor_ro_file_system_cmd}=  df -h | grep /media/pnor-ro | wc -l
+${total_bmc_ro_file_system_cmd}=  df -h | grep /media/rofs | wc -l
 
 ${BOOT_TIME}     ${0}
 ${BOOT_COUNT}    ${0}
@@ -719,6 +721,7 @@ BMC CPU Performance Check
 
     ${bmc_cpu_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${bmc_cpu_usage_cmd}
+    ${bmc_cpu_usage_output}  ${stderr}  ${rc}=  BMC Execute Command  ${bmc_cpu_usage_cmd}
     ${bmc_cpu_percentage}=  Fetch From Left  ${bmc_cpu_usage_output}  %
     Should be true  ${bmc_cpu_percentage} < 90
 
@@ -730,8 +733,13 @@ BMC Mem Performance Check
 
     ${bmc_mem_total_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${bmc_mem_total_cmd}
+    ${bmc_mem_free_output}  ${stderr}  ${rc}=   BMC Execute Command 
+    ...  ${bmc_mem_free_cmd}
 
-    ${bmc_mem_percentage}=   Evaluate  ${bmc_mem_free_output}*100
+    ${bmc_mem_total_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ${bmc_mem_total_cmd}
+
+    ${bmc_mem_percentage}=  Evaluate  ${bmc_mem_free_output}*100
     ${bmc_mem_percentage}=  Evaluate
     ...   ${bmc_mem_percentage}/${bmc_mem_total_output}
     Should be true  ${bmc_mem_percentage} > 10
@@ -747,6 +755,18 @@ BMC File System Usage Check
     ${bmc_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...   ${bmc_file_system_usage_cmd}
     Should Be True  ${bmc_fs_usage_output}==4
+    # /dev/ubiblock8_4         21.1M     21.1M         0 100% /media/pnor-ro-cecc64c4
+    ${bmc_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ${bmc_file_system_usage_cmd}
+    ${bmc_pnor_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ${total_pnor_ro_file_system_cmd}
+    ${bmc_bmc_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ${total_bmc_ro_file_system_cmd}
+    ${total_bmc_pnor_image}=  Evaluate
+    ...  ${bmc_pnor_fs_usage_output}+${bmc_bmc_fs_usage_output}
+    # Considering /dev/root also in total 100% used file system
+    ${total_full_fs}=  Evaluate  ${total_bmc_pnor_image}+1
+    Should Be True  ${bmc_fs_usage_output}==${total_full_fs}
 
 Check BMC CPU Performance
     [Documentation]   Minimal 10% of proc should be free in 3 sample
