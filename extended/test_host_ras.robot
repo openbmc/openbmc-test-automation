@@ -269,6 +269,55 @@ Verify Recoverable Callout Handling For NCUFIR With Threshold 1
     Inject Recoverable Error With Threshold Limit Through Host
     ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
+# Core FIR related error injection.
+
+Verify Recoverable Callout Handling For CoreFIR With Threshold 5
+    [Documentation]  Verify recoverable callout handling for CoreFIR with
+    ...              threshold 5.
+    [Tags]  Verify_Recoverable_Callout_Handling_For_CoreFIR_With_Threshold_5
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  COREFIR_RECV5
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    Disable CPU States Through HOST
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}corefir_th5
+    Inject Recoverable Error With Threshold Limit Through Host
+    ...  ${value[0]}  ${value[1]}  5  ${value[2]}  ${err_log_path}
+
+Verify Recoverable Callout Handling For CoreFIR With Threshold 1
+    [Documentation]  Verify recoverable callout handling for CoreFIR with
+    ...              threshold 1.
+    [Tags]  Verify_Recoverable_Callout_CoreFIR_Handling_For_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  COREFIR_RECV1
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    Disable CPU States Through HOST
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}corefir_th1
+    Inject Recoverable Error With Threshold Limit Through Host
+    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+Verify Unrecoverable Callout Handling For CoreFIR
+    [Documentation]  Verify unrecoverable callout handling for CoreFIR.
+    [Tags]  Verify_Unrecoverable_Callout_Handling_For_CoreFIR
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  COREFIR_UE
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    Disable CPU States Through HOST
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}corefir_ue
+    Inject Unrecoverable Error Through Host
+    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+Verify Recoverable Callout Handling For EQFIR With Threshold 32
+    [Documentation]  Verify recoverable callout handling for L3FIR with
+    ...              threshold 32.
+    [Tags]  Verify_Recoverable_Callout_Handling_For_EQFIR_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  EQFIR_RECV32
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EQ
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}eqfir_th32
+    Inject Recoverable Error With Threshold Limit Through Host
+    ...  ${translated_fir}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+
 *** Keywords ***
 
 Verify And Clear Gard Records On HOST

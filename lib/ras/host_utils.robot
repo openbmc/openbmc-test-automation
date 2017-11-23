@@ -134,3 +134,10 @@ Code Update Unrecoverable Error Inject
     ...   host during PNOR code update.
 
     Inject Error Through HOST  05010800  4000000000000000  1
+
+Disable CPU States Through HOST
+    [Documentation]  Disable CPU states through host.
+    ${cmd}=  Catenate  sh -c 'for i in /sys/devices/system/cpu/cpu*
+    ... /cpuidle/state*/disable; do echo 0 > $i; done'
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    Should Be Empty  ${stderr}
