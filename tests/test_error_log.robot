@@ -236,7 +236,9 @@ Verify Watchdog Timedout Error
 
     Trigger Host Watchdog Error
 
-    Verify Watchdog Errorlog Content
+    # Logging took time to generate the timedout error.
+    Wait Until Keyword Succeeds  2 min  30 sec
+    ...  Verify Watchdog Errorlog Content
 
 
 Verify IPMI SEL Delete
