@@ -368,11 +368,11 @@ Verify Minimal Power Supply Inventory
     [Documentation]  Verify minimal power supply inventory.
     [Tags]  Verify_Minimal_Power_Supply_Inventory
     # Example:
-    # "/xyz/openbmc_project/inventory/system/chassis/power_supply0",
-    # "/xyz/openbmc_project/inventory/system/chassis/power_supply1",
+    # "/xyz/openbmc_project/inventory/system/chassis/powersupply0",
+    # "/xyz/openbmc_project/inventory/system/chassis/powersupply1",
 
     # item         minimum_count
-    power_supply   1
+    powersupply    1
     [Template]     Minimum Inventory
 
 
