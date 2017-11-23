@@ -134,3 +134,16 @@ Code Update Unrecoverable Error Inject
     ...   host during PNOR code update.
 
     Inject Error Through HOST  05010800  4000000000000000  1
+
+Disable CPU States Through HOST
+    [Documentation]  Disable CPU states through host.
+
+    ${cpu_state_count}  ${stderr}  ${rc}=  OS Execute Command
+    ...  ${CMD_TO_FIND_CPU_STATES}
+    Should Be Empty  ${stderr}
+    :FOR  ${i}  IN RANGE  ${cpu_state_count}
+    \  ${cpu_State_number}=  Run Keyword  Convert To String  ${i}
+    \  ${cmd_disable_cpu_states}=   Run Keyword  Replace String
+    ...  ${DISABLE_CPU_STATES}  %s  ${cpu_State_number}
+    \  ${output}  ${stderr}  ${rc}=  Run Keyword  OS Execute Command
+    ...  ${cmd_disable_cpu_states}
