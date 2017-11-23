@@ -58,7 +58,8 @@ Verify Multiple eSEL Using REST
     Create eSEL
     Create eSEL
     ${entries}=  Count eSEL Entries
-    Should Be Equal As Integers  ${entries}  ${2}
+    # 1 eSEL creates 1 error log and 1 association.
+    Should Be Equal As Integers  ${entries}  ${4}
 
 Check eSEL AdditionalData
     [Documentation]  Generate eSEL log and verify AdditionalData is
@@ -135,13 +136,13 @@ Verify eSEL Entries
     #           "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
     #          ],
     #       "Id": 1,
-    #       "Message": "org.open_power.Error.Host.Event.Event",
-    #       "Severity": "xyz.openbmc_project.Logging.Entry.Level.Emergency",
+    #       "Message": "org.open_power.Host.Error.Event",
+    #       "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     #       "Timestamp": 1485904869061
     # }
     ${entry_id}=  Read Attribute  ${elog_entry[0]}  message
     Should Be Equal  ${entry_id}
-    ...  org.open_power.Host.Event.Error.Event
+    ...  org.open_power.Host.Error.Event
     ${entry_id}=  Read Attribute  ${elog_entry[0]}  Severity
     Should Be Equal  ${entry_id}
     ...  xyz.openbmc_project.Logging.Entry.Level.Error
