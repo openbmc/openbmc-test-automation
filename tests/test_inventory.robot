@@ -53,6 +53,26 @@ Verify Boxelder Present Property
     ...  msg=BMC planar serial number invalid.
 
 
+Verify UUID Entry
+    [Documentation]  UUID entry should exist in BMC planar property.
+    [Tags]  Verify_UUID_Entry
+    # Example:
+    # "/xyz/openbmc_project/inventory/system/chassis/motherboard/boxelder/bmc":
+    # {
+    #     "BuildDate": "",
+    #     "FieldReplaceable": 0,
+    #     "Manufacturer": "IBM",
+    #     "Model": "",
+    #     "PartNumber": "01DH051",
+    #     "Present": 1,
+    #     "PrettyName": "BMC PLANAR  ",
+    #     "SerialNumber": "000000000000"
+    #     "UUID": ""
+    # },
+    ${json_data}=  Get Inventory  system/chassis/motherboard/boxelder/bmc
+    Should Not Be Empty  ${json_data["data"]["UUID"]}
+
+
 Verify Boxelder MAC Address Property Is Populated
     [Documentation]  Boxelder should be present by default.
     [Tags]  Verify_Boxelder_MAC_Address_Property_Is_Populated
