@@ -13,7 +13,7 @@ Library                ../data/model.py
 Resource               ../lib/boot_utils.robot
 Resource               ../lib/utils.robot
 
-Suite Setup            Setup The Suite
+#Suite Setup            Setup The Suite
 Test Setup             Open Connection And Log In
 Test Teardown          Post Test Case Execution
 
@@ -26,24 +26,22 @@ ${model}=         ${OPENBMC_MODEL}
 
 Verify IPMI BT Capabilities Command
     [Documentation]  Verify IPMI BT capability command response.
-    [Tags]  Verify_IPMI BT_Capabilities_Command
+    [Tags]  Verify_IPMI_BT_Capabilities_Command
     [Setup]  REST Power On
 
-    ${output} =  Run IPMI command  0x06 0x36
-    Should Be Equal As Strings  "${output}"  " 01 3f 3f 0a 01"
-
+    ${output}=  Run IPMI command  0x06 0x36
+    Should Be True  "${output}" == " 01 3f 3f 0a 01"
+    ...  msg=Incorrect Output
 
 io_board Present
     [Tags]  io_board_Present
-    ${uri}=    Get System component    io_board
-    Read The Attribute   ${uri}    present
-    Response Should Be Equal    True
+    ${uri}=  Get System component  io_board
+    Verify The Attribute  ${uri}  Present  ${True}
 
 io_board Fault
     [Tags]  io_board_Fault
-    ${uri}=    Get System component    io_board
-    Read The Attribute   ${uri}    fault
-    Response Should Be Equal    False
+    ${uri}=  Get System component  io_board
+    Verify The Attribute  ${uri}  fault  ${False}
 
 *** Keywords ***
 
@@ -65,20 +63,20 @@ Get System component
     ${url}=    Get From List    ${resp}    0
     [Return]    ${url}
 
+Verify The Attribute
+    [Arguments]  ${uri}  ${parm}  ${value}
+    # Description of arguments:
+    # ${uri}  URI path.
+    # ${parm}  Attribute.
+    # ${value}  Output to be compared.
 
-response Should Be Equal
-    [Arguments]    ${args}
-    Should Be Equal    ${OUTPUT}    ${args}
-
-Read the Attribute
-    [Arguments]    ${uri}    ${parm}
-    ${output}=     Read Attribute      ${uri}    ${parm}
-    set test variable    ${OUTPUT}     ${output}
+    ${output}=  Read Attribute  ${uri}  ${parm}
+    Should Be Equal  ${value}  ${output}
 
 Post Test Case Execution
     [Documentation]  Do the post test teardown.
     ...  1. Capture FFDC on test failure.
     ...  2. Close all open SSH connections.
 
-    FFDC On Test Case Fail
+#    FFDC On Test Case Fail
     Close All Connections
