@@ -33,7 +33,7 @@ Verify System Inventory Path
 
 Verify Boxelder Present Property
     [Documentation]  Boxelder should be present by default.
-    [Tags]  Verify that boxelder 'Present' property is present by default.
+    [Tags]  Verify_Boxelder_Present_Property
     # Example:
     # "/xyz/openbmc_project/inventory/system/chassis/motherboard/boxelder/bmc":
     # {
