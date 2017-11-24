@@ -262,6 +262,7 @@ Upload Bad Image Via REST And Verify Failure
     ${bad_image_version}=  Get Version Tar  ${bad_image_file_path}
     ${bad_image_data}=  OperatingSystem.Get Binary File  ${bad_image_file_path}
     Upload Post Request  /upload/image  data=${bad_image_data}
+    Sleep  5s
     Verify Image Not In BMC Uploads Dir  ${bad_image_version}
 
 Upload Bad Image Via TFTP And Verify Failure
@@ -279,4 +280,5 @@ Upload Bad Image Via TFTP And Verify Failure
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${bad_image_version}=  Get Image Version From TFTP Server
     ...  ${bad_image_file_name}
+    Sleep  5s
     Verify Image Not In BMC Uploads Dir  ${bad_image_version}
