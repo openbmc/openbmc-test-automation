@@ -41,6 +41,8 @@ Verify Watchdog Setting With Watchdog Enabled
 
     Trigger Host Watchdog Error  2000  60
 
+    Wait Until Keyword Succeeds  3 min  10 sec  Watchdog Object Should Exist
+
     # Verify if watchdog settings are enabled and timeremaining is reduced.
     ${properties}=  Read Properties  /xyz/openbmc_project/watchdog/host0
     Should Be Equal As Strings  ${properties["Enabled"]}  1
@@ -129,3 +131,12 @@ Set Watchdog Setting Using REST
     ${resp}=  OpenBMC Put Request  ${HOST_WATCHDOG_URI}/attr/${setting_name}
     ...       data=${valueDict}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Watchdog Object Should Exist
+    [Documentation]  Check if watchdog object exist.
+
+    ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}host0  timeout=${timeout}
+    ...  quiet=${quiet}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
