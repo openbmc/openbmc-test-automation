@@ -288,6 +288,10 @@ def verify_image_not_in_bmc_uploads_dir(image_version, timeout=3):
                 + 'ls ' + var.IMAGE_UPLOAD_DIR_PATH + '*/MANIFEST 2>/dev/null '
                 + '| xargs grep -rl "version=' + image_version + '"')
         image_dir = os.path.dirname(grep_res.split('\n')[0])
+        BuiltIn.log_to_console("info here-->")
+        BuiltIn.log_to_console(image_version)
+        BuiltIn.log_to_console(grep_res)
+        BuiltIn.log_to_console(image_dir)
         if '' != image_dir:
             keyword.run_key('Execute Command On BMC  rm -rf ' + image_dir)
             BuiltIn().fail('Found invalid BMC Image: ' + image_dir)
