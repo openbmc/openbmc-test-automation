@@ -12,8 +12,8 @@ Library           ../lib/utilities.py
 Variables         ../data/variables.py
 Variables         ../data/inventory.py
 
-Suite setup       Test Suite Setup
-Test Teardown     FFDC On Test Case Fail
+#Suite setup       Test Suite Setup
+#Test Teardown     FFDC On Test Case Fail
 
 Force Tags        Inventory
 
@@ -51,6 +51,26 @@ Verify Boxelder Present Property
     Should Not Be Equal As Strings
     ...  ${json_data["data"]["SerialNumber"]}  000000000000
     ...  msg=BMC planar serial number invalid.
+
+
+Verify UUID Entry
+    [Documentation]  UUID entry should exist in BMC planar property.
+    [Tags]  Verify_UUID_Entry
+    # Example:
+    # "/xyz/openbmc_project/inventory/system/chassis/motherboard/boxelder/bmc":
+    # {
+    #     "BuildDate": "",
+    #     "FieldReplaceable": 0,
+    #     "Manufacturer": "IBM",
+    #     "Model": "",
+    #     "PartNumber": "01DH051",
+    #     "Present": 1,
+    #     "PrettyName": "BMC PLANAR  ",
+    #     "SerialNumber": "000000000000"
+    #     "UUID": ""
+    # },
+    ${json_data}=  Get Inventory  system/chassis/motherboard/boxelder/bmc
+    Should Not Be Empty  ${json_data["data"]["UUID"]}
 
 
 Verify Boxelder MAC Address Property Is Populated
