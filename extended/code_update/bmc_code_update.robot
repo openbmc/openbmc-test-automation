@@ -166,6 +166,7 @@ Delete All Non Running BMC Images
     [Tags]  Delete_All_Non_Running_BMC_Images
 
     ${version_id}=  Upload And Activate Image  ${ALTERNATE_IMAGE_FILE_PATH}
+    ...  skip_if_active=true
     Delete All Non Running BMC Images
 
     ${software_ids}=  Get Software Objects Id
