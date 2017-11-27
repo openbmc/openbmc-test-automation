@@ -117,6 +117,7 @@ Escale Check Settings System Off Then On
     ${power_setting}=  Set Variable  ${near_max_power_50}
 
     Set DCMI Power Limit And Verify  ${power_setting}
+    Deactivate DCMI Power and Verify
 
     Smart Power Off
 
