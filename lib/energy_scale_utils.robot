@@ -53,7 +53,7 @@ Set DCMI Power Limit And Verify
     Run External IPMI Standard Command  ${cmd}
     ${power}=  Get DCMI Power Limit
     Should Be True  ${power} == ${power_limit}
-    ...  msg=Faied setting dcmi power limit to ${power_limit} watts.
+    ...  msg=Failed setting dcmi power limit to ${power_limit} watts.
 
 
 Activate DCMI Power And Verify
