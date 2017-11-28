@@ -9,7 +9,7 @@ Resource            ../lib/ipmi_client.robot
 Resource            ../lib/boot_utils.robot
 
 Test Setup          Test Setup Execution
-Test Teardown       Test Teardown Execution
+Test Teardown       Post Test Case Execution
 Suite Teardown      Delete Error Logs And Verify
 
 *** Variables ***
@@ -236,9 +236,7 @@ Verify Watchdog Timedout Error
 
     Trigger Host Watchdog Error
 
-    # Logging took time to generate the timedout error.
-    Wait Until Keyword Succeeds  2 min  30 sec
-    ...  Verify Watchdog Errorlog Content
+    Verify Watchdog Errorlog Content
 
 
 Verify IPMI SEL Delete
@@ -335,45 +333,12 @@ Verify Error Logs Capping
     [Tags]  Verify_Error_Logs_Capping
 
     Delete Error Logs And Verify
-    ${cmd}=  Catenate  for i in {1..201}; do /tmp/tarball/bin/logging-test -c
-    ...  AutoTestSimple; done
+    ${cmd}=  Set Variable
+    ...  for i in {1..101}; do /tmp/tarball/bin/logging-test -c AutoTestSimple;done
     Execute Command On BMC  ${cmd}
     ${count}=  Count Error Entries
-    Run Keyword If  ${count} > 200
-    ...  Fail  Error logs created exceeded max capacity 200.
-
-Test Error Log Rotation
-    [Documentation]  Verify creation of 201 error log is replaced by entry id 1.
-    [Tags]  Test_Error_Log_Rotation
-
-    Delete Error Logs And Verify
-
-    # Restart service.
-    BMC Execute Command
-    ...  systemctl restart xyz.openbmc_project.Logging.service
-    Sleep  10s  reason=Wait for logging service to restart properly.
-
-    # Create 200 error logs.
-    ${cmd}=  Catenate  for i in {1..200}; do /tmp/tarball/bin/logging-test -c
-    ...  AutoTestSimple;done
-    BMC Execute Command  ${cmd}
-
-    # Check the response for 200th error log.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${200}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-
-    # Check if error log with id 1 exists.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-
-    # Create error log and verify the entry ID is 201 and not 1.
-    Create Test Error Log
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${201}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-
-    # Error log 1 is not present.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Run Keyword If  ${count} > 100
+    ...  Fail  Error logs created exceeded max capacity 100.
 
 *** Keywords ***
 
@@ -494,7 +459,7 @@ Install Tarball
     Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
 
 
-Test Teardown Execution
+Post Test Case Execution
    [Documentation]  Do the post test teardown.
    # 1. Capture FFDC on test failure.
    # 2. Delete error logs.
