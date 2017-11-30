@@ -6,6 +6,9 @@ Library             ../lib/utils.py
 Variables           ../data/variables.py
 Resource            ../lib/boot_utils.robot
 
+Test Setup          Test Setup Execution
+Test Teardown       FFDC On Test Case Fail
+
 *** Test Cases ***
 
 Test SBE Side Switch
@@ -13,37 +16,76 @@ Test SBE Side Switch
     ...  switches.
     [Tags]  Test_SBE_Side_Switch
 
-    Delete All Error Logs
-    Set Auto Reboot  ${1}
     REST Power On
 
-    Start Journal Log
+    ${attempts_left}=  Read Attribute  /xyz/openbmc_project/state/host0
+    ...  AttemptsLeft
+    Should Be Equal As Strings  ${attempts_left}  3
 
-    ${attempts_left}=  Read Attribute  /xyz/openbmc_project/state/host0
-    ...  AttemptsLeft
-    Should Be Equal As Strings  ${attempts_left}  2
-    Trigger Host Watchdog Error
-    Wait For Host Reboot
-    ${attempts_left}=  Read Attribute  /xyz/openbmc_project/state/host0
-    ...  AttemptsLeft
-    Should Be Equal As Strings  ${attempts_left}  1
-    Trigger Host Watchdog Error
-    Wait For Host Reboot
-    ${attempts_left}=  Read Attribute  /xyz/openbmc_project/state/host0
-    ...  AttemptsLeft
-    Should Be Equal As Strings  ${attempts_left}  0
+    # Get which side the SBE is booted with. By default 0.
+    ${sbe_string}=  BMC Execute Command
+    ...  pdbg -d p9w -p0 getcfam 0x2808 | sed -re 's/.* = //g'
+    ${sbe_orig_side} =  Get Sbe Side Bit  ${sbe_string[0]}
 
-    # Verify the side switched
-    ${journal_text}=  Stop Journal Log
-    Should Contain  ${journal_text}  Setting SBE seeprom side to 1
+    Trigger Watchdog Error To Switch SBE Boot Side
+
+    # Next Power on check if host booting is in progress.
+    Wait Until Keyword Succeeds  2 min  30 sec  Watchdog Object Should Exist
+
+    # Verify that the side has switched.
+    ${sbe_string}=  BMC Execute Command
+    ...  pdbg -d p9w -p0 getcfam 0x2808 | sed -re 's/.* = //g'
+    ${sbe_cur_side} =  Get Sbe Side Bit  ${sbe_string[0]}
+
+    Run Keyword If  ${sbe_orig_side} == ${0}
+    ...      Should Be True  ${sbe_cur_side} == ${1}
+    ...      msg=SBE seeprom side is 1.
+    ...  ELSE
+    ...      Should Be True  ${sbe_cur_side} == ${0}
+    ...      msg=SBE seeprom side is 0.
+
+    # Verify that host booted on the current SBE side.
+    Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
 
 
 *** Keywords ***
 
-Wait For Host Reboot
-    [Documentation]  Wait for the host to reboot.
+Test Setup Execution
+    [Documentation]  Do the test setup execution.
 
-    ${match_state}=  Create Dictionary  host=^Off$
-    Wait State  ${match_state}  wait_time=5 min
-    ${match_state}=  Create Dictionary  host=^Running$
-    Wait State  ${match_state}  wait_time=5 min
+    Delete All Error Logs
+    Set Auto Reboot  ${1}
+    Smart Power Off
+
+
+Watchdog Object Should Exist
+    [Documentation]  Watchdog object should exist.
+
+    ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}  quiet=${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Trigger Watchdog Error To Switch SBE Boot Side
+    [Documentation]  Trigger watchdog error to force SBE boot side switch.
+
+    # 20 seconds wait is introduce to ensure host boot progress atleast crossed
+    # the initial istep booting sequence.
+
+    Trigger Host Watchdog Error
+    ${attempts_left}=  Read Attribute  /xyz/openbmc_project/state/host0
+    ...  AttemptsLeft
+    Should Be Equal As Strings  ${attempts_left}  2
+
+    Wait Until Keyword Succeeds  2 min  30 sec  Watchdog Object Should Exist
+    Sleep  20 s
+    Trigger Host Watchdog Error
+    ${attempts_left}=  Read Attribute  /xyz/openbmc_project/state/host0
+    ...  AttemptsLeft
+    Should Be Equal As Strings  ${attempts_left}  1
+
+    Wait Until Keyword Succeeds  2 min  30 sec  Watchdog Object Should Exist
+    Sleep  20 s
+    Trigger Host Watchdog Error
+    ${attempts_left}=  Read Attribute  /xyz/openbmc_project/state/host0
+    ...  AttemptsLeft
+    Should Be Equal As Strings  ${attempts_left}  0
