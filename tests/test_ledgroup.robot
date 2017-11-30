@@ -38,7 +38,7 @@ Verify GPU Fault LEDs Group
     [Documentation]  Verify GPU's fault LEDs.
     [Tags]  Verify_GPU_Fault_LEDs_Group
 
-    Verify LED Group  gpu  fault
+    Verify LED Group  gv100card  fault
 
 Verify Power Supply Fault LEDs Group
     [Documentation]  Verify power supply's fault LEDs.
