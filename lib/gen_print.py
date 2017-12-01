@@ -1168,6 +1168,7 @@ def sprintn(buffer=""):
 
     return buffer
 
+
 def gp_print(buffer,
              stream='stdout'):
 
@@ -1193,6 +1194,24 @@ def gp_print(buffer,
             sys.stderr.flush()
 
 
+def gp_log(buffer):
+
+    r"""
+    Log the buffer using either python logging or BuiltIn().log depending on
+    whether we are running in a robot environment.
+
+    This function is intended for use only by other functions in this module.
+
+    Description of arguments:
+    buffer                          The string to be logged.
+    """
+
+    if robot_env:
+        BuiltIn().log(buffer)
+    else:
+        logging.warning(buffer)
+
+
 def gp_debug_print(buffer):
 
     r"""
@@ -1208,11 +1227,6 @@ def gp_debug_print(buffer):
         return
 
     gp_print(buffer)
-
-    if robot_env:
-        BuiltIn().log_to_console(buffer)
-    else:
-        print(buffer)
 
 
 def get_var_value(var_value=None,
@@ -1411,10 +1425,14 @@ def create_print_wrapper_funcs(func_names,
                                           dprint_func_template, replace_dict)
         buffer += func_def
 
+        func_def = create_func_def_string(s_func_name, "l" + func_name,
+                                          lprint_func_template, replace_dict)
+        buffer += func_def
+
         # Create abbreviated aliases (e.g. spvar is an alias for sprint_var).
         alias = re.sub("print_", "p", func_name)
         alias = re.sub("print", "p", alias)
-        prefixes = ["", "s", "q", "d"]
+        prefixes = ["", "s", "q", "d", "l"]
         for prefix in prefixes:
             if alias == "p":
                 continue
@@ -1454,6 +1472,11 @@ dprint_func_template = \
         "    if not int(<mod_qualifer>get_var_value(None, 0, \"debug\")):" +
         " return"
     ] + print_func_template
+
+lprint_func_template = \
+    [
+        "    gp_log(<mod_qualifer>replace_passwords(<call_line>))"
+    ]
 
 replace_dict = {'output_stream': 'stdout', 'mod_qualifer': ''}
 
