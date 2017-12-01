@@ -122,21 +122,23 @@ def login_ssh(login_args={},
                                     (in the event of login failures).
     """
 
+    gp.lprint_executing()
+
     global sshlib
 
     # Get connection data for debug output.
     connection = sshlib.get_connection()
-    gp.dprintn(sprint_connection(connection))
+    gp.lprintn(sprint_connection(connection))
     for login_attempt_num in range(1, max_login_attempts + 1):
-        gp.dprint_timen("Logging in to " + connection.host + ".")
-        gp.dprint_var(login_attempt_num)
+        gp.lprint_timen("Logging in to " + connection.host + ".")
+        gp.lprint_var(login_attempt_num)
         try:
             out_buf = sshlib.login(**login_args)
         except Exception as login_exception:
             # Login will sometimes fail if the connection is new.
             except_type, except_value, except_traceback = sys.exc_info()
-            gp.dprint_var(except_type)
-            gp.dprint_varx("except_value", str(except_value))
+            gp.lprint_var(except_type)
+            gp.lprint_varx("except_value", str(except_value))
             if except_type is paramiko.ssh_exception.SSHException and\
                     re.match(r"No existing session", str(except_value)):
                 continue
@@ -145,7 +147,7 @@ def login_ssh(login_args={},
                 # re-raise exception.
                 break
         # If we get to this point, the login has worked and we can return.
-        gp.dpvar(out_buf)
+        gp.lpvar(out_buf)
         return
 
     # If we get to this point, the login has failed on all attempts so the
@@ -203,7 +205,7 @@ def execute_ssh_command(cmd_buf,
                                     defaults to the global test_mode value.
     """
 
-    gp.dprint_executing()
+    gp.lprint_executing()
 
     # Obtain default values.
     quiet = int(gp.get_var_value(quiet, 0))
@@ -211,6 +213,8 @@ def execute_ssh_command(cmd_buf,
 
     if not quiet:
         gp.pissuing(cmd_buf, test_mode)
+    else:
+        gp.lissuing(cmd_buf, test_mode)
 
     if test_mode:
         return "", "", 0
@@ -224,23 +228,23 @@ def execute_ssh_command(cmd_buf,
     search_connection_args.pop("timeout", None)
     connection = find_connection(search_connection_args)
     if connection:
-        gp.dprint_timen("Found the following existing connection:")
-        gp.dprintn(sprint_connection(connection))
+        gp.lprint_timen("Found the following existing connection:")
+        gp.lprintn(sprint_connection(connection))
         if connection.alias == "":
             index_or_alias = connection.index
         else:
             index_or_alias = connection.alias
-        gp.dprint_timen("Switching to existing connection: \"" +
+        gp.lprint_timen("Switching to existing connection: \"" +
                         str(index_or_alias) + "\".")
         sshlib.switch_connection(index_or_alias)
     else:
-        gp.dprint_timen("Connecting to " + open_connection_args['host'] + ".")
+        gp.lprint_timen("Connecting to " + open_connection_args['host'] + ".")
         cix = sshlib.open_connection(**open_connection_args)
         login_ssh(login_args)
 
     max_exec_cmd_attempts = 2
     for exec_cmd_attempt_num in range(1, max_exec_cmd_attempts + 1):
-        gp.dprint_var(exec_cmd_attempt_num)
+        gp.lprint_var(exec_cmd_attempt_num)
         try:
             if fork:
                 sshlib.start_command(cmd_buf)
@@ -251,8 +255,8 @@ def execute_ssh_command(cmd_buf,
                                                             return_rc=True)
         except Exception as execute_exception:
             except_type, except_value, except_traceback = sys.exc_info()
-            gp.dprint_var(except_type)
-            gp.dprint_varx("except_value", str(except_value))
+            gp.lprint_var(except_type)
+            gp.lprint_varx("except_value", str(except_value))
 
             if except_type is exceptions.AssertionError and\
                re.match(r"Connection not open", str(except_value)):
@@ -271,9 +275,9 @@ def execute_ssh_command(cmd_buf,
                 # about over-consumption of resources, we use
                 # close_all_connections() which also gets rid of all
                 # connections.
-                gp.dprint_timen("Closing all connections.")
+                gp.lprint_timen("Closing all connections.")
                 sshlib.close_all_connections()
-                gp.dprint_timen("Connecting to " +
+                gp.lprint_timen("Connecting to " +
                                 open_connection_args['host'] + ".")
                 cix = sshlib.open_connection(**open_connection_args)
                 login_ssh(login_args)
