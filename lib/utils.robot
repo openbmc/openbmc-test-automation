@@ -789,12 +789,15 @@ Get Endpoint Paths
     ...               endpoint   string for which url path ending
     [Arguments]   ${path}   ${endpoint}
 
-    ${resp}=   Read Properties   ${path}/enumerate   timeout=30
-    log Dictionary   ${resp}
+    ${resp}=  Read Properties  ${path}/enumerate  timeout=30
+    Log Dictionary  ${resp}
 
-    ${list}=   Get Dictionary Keys   ${resp}
-    ${resp}=   Get Matches   ${list}   regexp=^.*[0-9a-z_].${endpoint}[0-9]*$
-    [Return]   ${resp}
+    ${list}=  Get Dictionary Keys  ${resp}
+    # For a given string, look for prefix and suffix for matching expression.
+    # Start of string followed by zero or more of any character followed by
+    # any digit or lower case character.
+    ${resp}=  Get Matches  ${list}  regexp=^.*[0-9a-z_].${endpoint}[0-9a-z]*$
+    [Return]  ${resp}
 
 Check Zombie Process
     [Documentation]    Check if any defunct process exist or not on BMC
