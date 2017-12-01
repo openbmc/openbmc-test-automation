@@ -322,7 +322,8 @@ Verify GPU Functional State
     # },
 
 
-    ${gpu_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  gv*
+    ${gpu_list}=  Get Endpoint Paths
+    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  gv*
     Should Not Be Empty  ${gpu_list}
     :FOR  ${gpu_uri}  IN  @{gpu_list}
     \  ${status}=  Run Keyword And Return Status
