@@ -1,12 +1,10 @@
 *** Settings ***
-Documentation     Power management test module.
+Documentation   Test the default value of power management enablement.
 
-Resource          ../../lib/rest_client.robot
-Resource          ../../lib/openbmc_ffdc.robot
-Resource          ../../lib/boot_utils.robot
+Resource        ../lib/openbmc_ffdc.robot
 
-Suite Setup      Setup The Suite
-Test Teardown    Post Test Case Execution
+Test Teardown   Test Teardown Execution
+
 
 *** Test Cases ***
 
@@ -22,20 +20,14 @@ Verify Powercap Disabled By Default
     # },
 
     ${powercap}=  Read Attribute  ${CONTROL_HOST_URI}power_cap  PowerCapEnable
-    Should Be Equal  ${powercap}  ${0}
+    Should Be True  ${powercap} == ${0}
+    ...  msg=Default PowerCapEnable should be off.
 
 
 *** Keywords ***
 
-Setup The Suite
-    [Documentation]  Do test setup initialization.
 
-    REST Power On
-    Delete Error Logs
-
-
-Post Test Case Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
-    ...  1. Capture FFDC on test failure.
 
     FFDC On Test Case Fail
