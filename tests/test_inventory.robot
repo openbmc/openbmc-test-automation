@@ -12,7 +12,7 @@ Library           ../lib/utilities.py
 Variables         ../data/variables.py
 Variables         ../data/inventory.py
 
-Suite setup       Test Suite Setup
+Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
 
 Force Tags        Inventory
@@ -213,7 +213,53 @@ Verify FRU Properties
 
     ${system_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  *
     ${fru_list}=  Qualified FRU List  @{system_list}
-    Validate FRU Properties Fields  @{fru_list}
+    Validate FRU Properties Fields  fru  @{fru_list}
+
+
+Verify GPU Properties
+    [Documentation]  Verify the GPU properties fields.
+    [Tags]  Verify_GPU_Properties
+    # Example:
+    # A GPU property should have the following entries:
+    # "gpu":[
+    #    "PrettyName",
+    #    "Present",
+    #    "Functional"
+    # ]
+    # GPU inventory:
+    # "/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card2": {
+    #    "Functional": 1,
+    #    "Present": 1,
+    #    "PrettyName": ""
+    # },
+
+
+    ${system_list}=  Get Endpoint Paths
+    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  gv*
+    Validate FRU Properties Fields  gpu  @{system_list}
+
+
+Verify Core Properties
+    [Documentation]  Verify the core property fields.
+    [Tags]  Verify_Core_Properties
+    # Example:
+    # A core property should have the following entries:
+    # "core":[
+    #    "PrettyName",
+    #    "Present",
+    #    "Functional"
+    # ]
+    # core inventory:
+    # "/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu1/core0": {
+    #    "Functional": 1,
+    #    "Present": 1,
+    #    "PrettyName": ""
+    # },
+
+    ${system_list}=  Get Endpoint Paths
+    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  core*
+    Validate FRU Properties Fields  core  @{system_list}
+
 
 
 Verify Core Functional State
@@ -437,11 +483,11 @@ Verify Inventory List After Reset
 
 *** Keywords ***
 
-Test Suite Setup
+Suite Setup Execution
     [Documentation]  Do the initial suite setup.
 
     # Boot Host.
-    REST Power On
+    REST Power On  stack_mode=skip  quiet=1
 
 Get Inventory
     [Documentation]  Get the properties of an endpoint.
@@ -477,6 +523,7 @@ Qualified FRU List
     ${fru_list}=  Create List
     :FOR  ${fru_uri}  IN  @{system_list}
     \  ${resp}=  OpenBMC Get Request  ${fru_uri}/attr/FieldReplaceable
+    ...  quiet=${1}
     \  ${jsondata}=  To JSON  ${resp.content}
     \  ${status}=  Run Keyword And Return Status
     ...  Should Be True  ${jsondata['data']} == ${1}
@@ -488,8 +535,10 @@ Qualified FRU List
 
 Validate FRU Properties Fields
     [Documentation]  Compare valid FRUs from system vs expected FRU set.
-    [Arguments]  @{fru_list}
+    [Arguments]  ${fru_type}  @{fru_list}
+
     # Description of arguments:
+    # fru_type  FRU type name (e.g. "gpu", "fru", "fan", etc.).
     # fru_list  List of qualified FRU URLs.
 
     # Build the pre-defined set list from data/inventory.py derived from
@@ -497,7 +546,7 @@ Validate FRU Properties Fields
     # Example:
     # set(['Version', 'PartNumber', 'SerialNumber', 'FieldReplaceable',
     # 'BuildDate', 'Present', 'Manufacturer', 'PrettyName', 'Cached', 'Model'])
-    ${fru_set}=  List To Set  ${inventory_dict['fru']}
+    ${fru_set}=  List To Set  ${inventory_dict['${fru_type}']}
 
     # Iterate through the FRU's url and compare the set dictionary keys
     # with the pre-define inventory data.
@@ -533,7 +582,7 @@ Choose Boot Option
 Verify Inventory List Before And After Reboot
     [Documentation]  Verify inventory list before and after reboot.
 
-    REST Power On
+    REST Power On  stack_mode=skip  quiet=1
     Delete Error Logs
     ${inventory_before}=  Get URL List  ${HOST_INVENTORY_URI}
     Initiate Host Reboot
@@ -546,7 +595,7 @@ Verify Inventory List Before And After Reboot
 Verify Inventory List Before And After Reset
     [Documentation]  Verify inventory list before and after BMC reset.
 
-    REST Power On
+    REST Power On  stack_mode=skip  quiet=1
     Delete Error Logs
     ${inventory_before}=  Get URL List  ${HOST_INVENTORY_URI}
     OBMC Reboot (run)
