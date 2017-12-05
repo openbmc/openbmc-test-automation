@@ -1,7 +1,28 @@
 #openbmc-automation
 
-Quickstart
-----------
+## Features of OpenBMC Test Automation ##
+
+**Interface Feature List**
+* REST
+* Out-of-band IPMI
+* SSH to BMC and Host OS
+
+**Key Feature List**
+* Power on/off
+* Reboot Host
+* Reset BMC
+* Code update BMC and host
+* Power management
+* HTX bootme
+* XCAT execution
+* Network
+
+**Debugging Supported List**
+* SOL collection
+* FFDC collection
+* Error injection from host
+
+## Quickstart ##
 
 To run openbmc-automation first you need to install the prerequisite python
 packages which will help to invoke tests through tox.  Note that tox
