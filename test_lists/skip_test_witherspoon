@@ -8,8 +8,6 @@
 -e Verify_Minimal_Memory_Buffer_Inventory
 -e Verify_Minimal_Main_Planar_Inventory
 -e Verify_Minimal_System_Inventory
-#https://github.com/openbmc/openbmc/issues/901
--e Set_BMC_Time_With_Split_And_Manual
 # NA test case for Witherspoon
 -e io_board_Present
 -e io_board_Fault
