@@ -19,6 +19,14 @@ ${IMAGE_FILE_PATH}  ${EMPTY}
 
 *** Test Cases ***
 
+Reboot BMC During Host Code Update
+    [Documentation]  Attempt to reboot the BMC while an image is activating,
+    ...              checking that the reboot has no effect.
+    [Tags]  Reboot_BMC_During_Host_Code_Update
+
+    Attempt To Reboot BMC During Image Activation  ${IMAGE_FILE_PATH}
+
+
 Reset Network During Host Code Update
     [Documentation]  Disable and re-enable the network while doing a PNOR
     ...              code update.
@@ -27,14 +35,6 @@ Reset Network During Host Code Update
 
     # Image File Path   Reboot
     ${IMAGE_FILE_PATH}  ${FALSE}
-
-
-Reboot BMC During Host Code Update
-    [Documentation]  Attempt to reboot the BMC while an image is activating,
-    ...              checking that the reboot has no effect.
-    [Tags]  Reboot_BMC_During_Host_Code_Update
-
-    Attempt To Reboot BMC During Image Activation  ${IMAGE_FILE_PATH}
 
 
 *** Keywords ***
