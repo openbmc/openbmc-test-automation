@@ -136,7 +136,6 @@ Set Watchdog Setting Using REST
 Watchdog Object Should Exist
     [Documentation]  Check if watchdog object exist.
 
-    ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}host0  timeout=${timeout}
-    ...  quiet=${quiet}
+    ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}host0  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
