@@ -1,5 +1,11 @@
-Project Coding Guidelines
-=========================
+Contributing to OpenBMC Test Automation
+=======================================
+Guide to working on OpenBMC test automation. This document will always be a
+work-in-progress, feel free to propose changes.
+
+Submitting changes via Gerrit server
+------------------------------------
+-   Reference [openbmc docs](https://github.com/openbmc/docs/blob/master/contributing.md#submitting-changes-via-gerrit-server)
 
 Robot Coding Guidelines
 -----------------------
