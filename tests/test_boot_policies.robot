@@ -73,13 +73,9 @@ Test Boot Order via REST
     ...               and verify that the order doesn't change post power on.
     [Tags]  chassisboot  Test_Boot_Order_via_REST
 
-    Initiate Host PowerOff
 
     Set Boot Policy  ${PERMANENT}
-
     Set Boot Source  ${BOOT_SOURCE_CDROM}
-
-    Initiate Host Boot
 
     ${boot}=   Read Attribute  ${CONTROL_URI}/host0/boot/one_time  Enabled
     Should Be Equal  ${boot}  ${PERMANENT}
@@ -92,10 +88,7 @@ Persist ONETIME Boot Policy After Reset
     ...               on warm reset.
     [Tags]  chassisboot   Persist_ONETIME_Boot_Policy_After_Reset
 
-    Initiate Host Boot
-
     Set Boot Policy  ${ONETIME}
-
     Set Boot Source  ${BOOT_SOURCE_NETWORK}
 
     OBMC Reboot (off)
@@ -111,10 +104,7 @@ Persist PERMANENT Boot Policy After Reset
     ...               on warm reset.
     [Tags]  chassisboot    Persist_PERMANENT_Boot_Policy_After_Reset
 
-    Initiate Host Boot
-
     Set Boot Policy  ${PERMANENT}
-
     Set Boot Source  ${BOOT_SOURCE_CDROM}
 
     OBMC Reboot (off)
@@ -139,8 +129,7 @@ Verify Boot Mode Persistency After BMC Reboot
     # Set bootmode to non default value.
     Set Boot Mode  ${BOOT_MODE_SAFE}
 
-    Initiate BMC Reboot
-    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+    OBMC Reboot (off)
 
     ${boot_mode_after}=  Read Attribute
     ...  ${CONTROL_HOST_URI}/boot  BootMode
@@ -186,7 +175,7 @@ Test Setup Execution
 Suite Setup Execution
     [Documentation]  Do the initial suite setup.
 
-    REST Power On
+    Smart Power Off
 
 Restore Bootmode Setting
     [Documentation]  Restore initial bootmode setting.
