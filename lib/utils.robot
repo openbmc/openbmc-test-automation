@@ -43,7 +43,7 @@ ${count}  ${0}
 ${devicetree_base}  /sys/firmware/devicetree/base/model
 
 # Initialize default debug value to 0.
-${DEBUG}         ${0}
+${DEBUG}         ${1}
 
 # These variables are used to straddle between new and old methods of setting
 # values.
@@ -520,7 +520,12 @@ Create OS Console Command String
     [Return]  ${cmd_buf}
 
 Get SOL Console Pid
-    [Documentation]  Get the pid of the active sol conole job.
+    [Documentation]  Get the pid of the active SOL conole job.
+    [Arguments]  ${expect_running}=${0}
+
+    # Description of argument(s):
+    # expect_running  If set and if no SOL console job is found, print debug
+    #                 info and fail.
 
     # Find the pid of the active system console logging session (if any).
     ${search_string}=  Create OS Console Command String
@@ -536,7 +541,13 @@ Get SOL Console Pid
     # If rc is not zero it just means that there is no OS Console process
     # running.
 
-    [Return]  ${os_con_pid}
+    Return From Keyword If  '${os_con_pid}' != '${EMPTY}'  ${os_con_pid}
+    Return From Keyword If  '${expect_running}' == '${0}'  ${os_con_pid}
+
+    Cmd Fnc  cat ${log_file_path} ; echo ; ps awwo user,pid,cmd  quiet=${0}
+    ...  print_output=${1}  show_err=${1}
+
+    Should Not Be Empty  ${os_con_pid}
 
 
 Stop SOL Console Logging
@@ -620,12 +631,10 @@ Start SOL Console Logging
     # non-zero return code or any output.
     Should Be Equal  ${rc}  ${0}
 
-    Sleep  1
-    ${os_con_pid}=  Get SOL Console Pid
-
-    Should Not Be Empty  ${os_con_pid}
+    Wait Until Keyword Succeeds  10 seconds  0 seconds   Get SOL Console Pid
 
     [Return]  ${log_output}
+
 
 Get Time Stamp
     [Documentation]     Get the current time stamp data
