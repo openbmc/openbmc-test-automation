@@ -151,9 +151,6 @@ Set Initial Test State
     ...  Initiate Host PowerOff
 
 
-    ${currentState}=  Get Host State
-
-
 Verify Host State
     [Documentation]  Verify expected host state.
     [Arguments]  ${expectedState}
