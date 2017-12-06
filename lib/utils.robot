@@ -623,6 +623,10 @@ Start SOL Console Logging
     Sleep  1
     ${os_con_pid}=  Get SOL Console Pid
 
+    ${loc_quiet}=  Evaluate  ${debug}^1
+    Run Keyword If  '${os_con_pid}' == '${EMPTY}'  Cmd Fnc
+    ...  cat ${log_file_path}  quiet=${0}  print_output=${1}  show_err=${1}
+
     Should Not Be Empty  ${os_con_pid}
 
     [Return]  ${log_output}
