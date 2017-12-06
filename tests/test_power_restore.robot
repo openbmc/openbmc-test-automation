@@ -12,8 +12,8 @@ Resource        ../lib/state_manager.robot
 
 Library         SSHLibrary
 
-Test Teardown   Post Test Case Execution
-Suite Teardown  Post Test Suite Execution
+Test Teardown   Test Teardown Execution
+Suite Teardown  Suite Teardown Execution
 
 Force Tags      power_restore
 
@@ -151,9 +151,6 @@ Set Initial Test State
     ...  Initiate Host PowerOff
 
 
-    ${currentState}=  Get Host State
-
-
 Verify Host State
     [Documentation]  Verify expected host state.
     [Arguments]  ${expectedState}
@@ -164,7 +161,7 @@ Verify Host State
     Should Be Equal  ${currentState}  ${expectedState}
 
 
-Post Test Case Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
     # 1. Capture FFDC on test failure.
     # 2. Close all open SSH connections.
@@ -173,7 +170,7 @@ Post Test Case Execution
     Close All Connections
 
 
-Post Test Suite Execution
+Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
     # 1. Set policy to default.
 
