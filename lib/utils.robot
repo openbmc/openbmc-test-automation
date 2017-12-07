@@ -752,9 +752,6 @@ BMC File System Usage Check
     # /dev/ubiblock0_0         14.4M     14.4M         0 100% /media/rofs-c9249b0e
     # /dev/ubiblock8_0         19.6M     19.6M         0 100% /media/pnor-ro-8764baa3
     # /dev/ubiblock4_0         14.4M     14.4M         0 100% /media/rofs-407816c
-    ${bmc_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
-    ...   ${bmc_file_system_usage_cmd}
-    Should Be True  ${bmc_fs_usage_output}==4
     # /dev/ubiblock8_4         21.1M     21.1M         0 100% /media/pnor-ro-cecc64c4
     ${bmc_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${bmc_file_system_usage_cmd}
