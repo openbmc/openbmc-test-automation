@@ -2,7 +2,6 @@
 Documentation      Keywords for system test.
 
 Library            ../lib/gen_robot_keyword.py
-Library            OperatingSystem
 Resource           ../extended/obmc_boot_test_resource.robot
 Resource           ../lib/utils.robot
 Resource           ../lib/state_manager.robot
@@ -221,12 +220,13 @@ Collect NVIDIA Log File
     ...  ${htx_log_dir_path}/${OS_HOST}_${cur_datetime}.nvidia_${suffix}
 
 
-Pre Test Case Execution
+Test Setup Execution
     [Documentation]  Do the initial test setup.
     # 1. Check if HTX tool exist.
     # 2. Power on
 
     Boot To OS
+    Delete All Error Logs
     Tool Exist  htxcmdline
     Tool Exist  lshw
 
