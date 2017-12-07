@@ -5,8 +5,8 @@ Documentation    Module to test network stability.
 Resource         ../syslib/utils_os.robot
 Library          ../syslib/utils_keywords.py
 
-Test Setup      Pre Test Case Execution
-Test Teardown   Post Test Case Execution
+Test Setup      Test Setup Execution
+Test Teardown   Test Teardown Execution
 
 *** Variables ****
 
@@ -74,7 +74,7 @@ BMC Network Payload
     REST Upload File To BMC
 
 
-Post Test Case Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
     # 1. Shut down HTX exerciser if test Failed.
     # 2. Capture FFDC on test failure.
