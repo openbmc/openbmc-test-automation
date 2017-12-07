@@ -6,8 +6,9 @@ Resource        ../lib/boot_utils.robot
 Resource        ../lib/state_manager.robot
 Resource        ../lib/openbmc_ffdc.robot
 
-Suite Setup     Pre Test Suite Execution
-Test Teardown   Post Test Case Execution
+Suite Setup     Suite Setup Execution
+Test Teardown   Test Teardown Execution
+Suite Teardown  Power Redundancy Setting  setValue  Enabled
 
 *** Test Cases ***
 
@@ -225,22 +226,79 @@ Verify VDDR Temperature Sensors Attributes
    \  ${vddr_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
    \  Should Be True  ${vddr_temp} > 0
 
+Disable Power Redundancy And Verify
+   [Documentation]  Disable power redundancy and verify that it is disabled.
+   [Tags]  Disable_Power_Redundancy_And_Verify
+
+   # Example:
+   # /xyz/openbmc_project/sensors/chassis/PowerSupplyRedundancy
+   # {
+   #     "error": 0,
+   #     "units": "",
+   #     "value": "Disabled"
+   # }
+
+   Power Redundancy Setting  setValue  Disabled
+
+   ${resp}=  Power Redundancy Setting  getValue
+   ${content}=  To Json  ${resp.content}
+   Should Be Equal As Strings  ${content["data"]}  Disabled
+
+
+Enable Power Redundancy And Verify
+   [Documentation]  Enable power redundancy and verify that it is enabled.
+   [Tags]  Enable_Power_Redundancy_And_Verify
+
+   # Example:
+   # /xyz/openbmc_project/sensors/chassis/PowerSupplyRedundancy
+   # {
+   #     "error": 0,
+   #     "units": "",
+   #     "value": "Enabled"
+   # }
+
+   Power Redundancy Setting  setValue  Enabled
+
+   ${resp}=  Power Redundancy Setting  getValue
+   ${content}=  To Json  ${resp.content}
+   Should Be Equal As Strings  ${content["data"]}  Enabled
+
+
 *** Keywords ***
 
-Pre Test Suite Execution
+Suite Setup Execution
     [Documentation]  Do the initial test suite setup.
     # - Power off.
     # - Boot Host.
     REST Power Off  stack_mode=skip
     REST Power On
 
-Post Test Case Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
     # - Capture FFDC on test failure.
     # - Delete error logs.
     # - Close all open SSH connections.
 
-   FFDC On Test Case Fail
-   Delete Error Logs
-   Close All Connections
+    FFDC On Test Case Fail
+    Delete Error Logs
+    Close All Connections
+
+Power Redundancy Setting
+    [Documentation]  "Set" or "Get" power redundancy setting.
+    [Arguments]  ${action}  ${value}=${EMPTY}
+
+    # Description of argument(s):
+    # action   "setValue" or "getValue" API request string.
+    # value    String argument for the API request (e.g. "Enabled"/"Disabled").
+
+    @{arglist}=  Create List
+    Run Keyword If  '${value}' != '${EMPTY}'
+    ...  Append To List  ${arglist}  ${value}
+
+    ${args}=  Create Dictionary  data=@{arglist}
+    ${resp}=  Call Method  ${SENSORS_URI}chassis/PowerSupplyRedundancy
+    ...  ${action}  data=${args}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    [Return]  ${resp}
 
