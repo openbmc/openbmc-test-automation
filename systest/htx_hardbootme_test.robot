@@ -36,12 +36,13 @@ Documentation  Stress the system using HTX exerciser.
 #                     "size".
 
 Resource        ../syslib/utils_os.robot
+Resource        ../lib/openbmc_ffdc_utils.robot
 Library         ../syslib/utils_keywords.py
 Library         ../lib/utils_files.py
 
 Suite Setup     Run Keyword  Start SOL Console Logging
-Test Setup      Pre Test Case Execution
-Test Teardown   Post Test Case Execution
+Test Setup      Test Setup Execution
+Test Teardown   Test Teardown Execution
 
 
 *** Variables ****
@@ -136,6 +137,7 @@ Run HTX Exerciser
     ...  Do Inventory And Compare  ${json_final_file_path}
     ...  ${PREV_INV_FILE_PATH}
 
+    Error Logs Should Not Exist
     Power Off Host
 
     # Close all SSH and REST active sessions.
@@ -206,7 +208,7 @@ Loop HTX Health Check
     ...  AND  Sleep  ${HTX_INTERVAL}
 
 
-Post Test Case Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
     # 1. Shut down HTX exerciser if test Failed.
     # 2. Capture FFDC on test failure.
