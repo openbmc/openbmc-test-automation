@@ -24,15 +24,6 @@ ${model}=         ${OPENBMC_MODEL}
 
 *** Test Cases ***
 
-Verify IPMI BT Capabilities Command
-    [Documentation]  Verify IPMI BT capability command response.
-    [Tags]  Verify_IPMI_BT_Capabilities_Command
-    [Setup]  REST Power On
-
-    ${output}=  Run IPMI command  0x06 0x36
-    Should Be True  "${output}" == " 01 3f 3f 0a 01"
-    ...  msg=Incorrect Output
-
 io_board Present
     [Tags]  io_board_Present
     ${uri}=  Get System component  io_board
