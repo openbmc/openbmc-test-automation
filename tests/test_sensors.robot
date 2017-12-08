@@ -13,9 +13,9 @@ Library                ../data/model.py
 Resource               ../lib/boot_utils.robot
 Resource               ../lib/utils.robot
 
-Suite Setup            Setup The Suite
+Suite Setup            Suite Setup Execution
 Test Setup             Open Connection And Log In
-Test Teardown          Post Test Case Execution
+Test Teardown          Test Teardown Execution
 
 *** Variables ***
 
@@ -23,15 +23,6 @@ ${stack_mode}     skip
 ${model}=         ${OPENBMC_MODEL}
 
 *** Test Cases ***
-
-Verify IPMI BT Capabilities Command
-    [Documentation]  Verify IPMI BT capability command response.
-    [Tags]  Verify_IPMI_BT_Capabilities_Command
-    [Setup]  REST Power On
-
-    ${output}=  Run IPMI command  0x06 0x36
-    Should Be True  "${output}" == " 01 3f 3f 0a 01"
-    ...  msg=Incorrect Output
 
 io_board Present
     [Tags]  io_board_Present
@@ -45,7 +36,7 @@ io_board Fault
 
 *** Keywords ***
 
-Setup The Suite
+Suite Setup Execution
     [Documentation]  Initial suite setup.
 
     # Boot Host.
@@ -73,7 +64,7 @@ Verify The Attribute
     ${output}=  Read Attribute  ${uri}  ${parm}
     Should Be Equal  ${value}  ${output}
 
-Post Test Case Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
     ...  1. Capture FFDC on test failure.
     ...  2. Close all open SSH connections.
