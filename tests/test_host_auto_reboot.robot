@@ -7,9 +7,8 @@ Resource            ../lib/rest_client.robot
 Resource            ../lib/state_manager.robot
 Resource            ../lib/boot_utils.robot
 
-Test Setup          Open Connection And Log In
-Test Teardown       Post Testcase Execution
-Suite Teardown      Smart Power Off
+Test Teardown       Test Teardown Execution
+Suite Teardown      Suite Teardown Execution
 
 *** Variables ***
 
@@ -64,7 +63,7 @@ Verify Host Quiesce State
     ...  Wait Until Keyword Succeeds  3 min  5 sec  Is Host Rebooted
 
 
-Post Testcase Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
     ...  1. Capture FFDC on test failure.
     ...  2. Set default value for auto reboot.
@@ -73,3 +72,9 @@ Post Testcase Execution
     FFDC On Test Case Fail
     Set Auto Reboot  ${1}
     Close All Connections
+
+Suite Teardown Execution
+    [Documentation]  Do the suite test teardown.
+
+    ${status}=  Is Host Quiesced
+    Run Keyword If  ${status} == ${True}  Smart Power Off
