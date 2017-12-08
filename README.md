@@ -1,5 +1,3 @@
-#openbmc-automation
-
 ## Features of OpenBMC Test Automation ##
 
 **Interface Feature List**
@@ -22,8 +20,26 @@
 * FFDC collection
 * Error injection from host
 
-## Quickstart ##
+## Installation Setup Guide ##
+* [Robot Framework Install Instruction](https://github.com/robotframework/robotframework/blob/master/INSTALL.rst)
 
+* Miscelleneous
+Packages required to be installed for OpenBmc Automation.
+Install the packages and it's dependencies via `pip`
+
+    REST base packages:
+    ```
+    $ pip install -U requests
+    $ pip install -U robotframework-requests
+    ```
+    SSH and SCP base packages:
+    For more detailed installation instructions see [robotframework-sshlibrary](https://pypi.python.org/pypi/robotframework-sshlibrary)
+    ```
+    $ pip install robotframework-sshlibrary
+    $ pip install robotframework-scplibrary
+    ```
+
+## Quickstart ##
 To run openbmc-automation first you need to install the prerequisite python
 packages which will help to invoke tests through tox.  Note that tox
 version 2.3.1 or greater is required.
