@@ -6,7 +6,7 @@ Resource            ../../lib/openbmc_ffdc.robot
 Library             ../../lib/ipmi_utils.py
 
 Test Setup          Start SOL Console Logging
-Test Teardown       Post Test Case Execution
+Test Teardown       Test Teardown Execution
 
 *** Variables ***
 
@@ -242,7 +242,10 @@ Verify SOL Setting
 
     Activate SOL Via IPMI
     Wait Until Keyword Succeeds  10 mins  30 secs
-    ...  Check IPMI SOL Output Content  Petitboot
+    ...  Check IPMI SOL Output Content  Welcome to Hostboot hostboot
+
+    Wait Until Keyword Succeeds  3 mins  30 secs
+    ...  Check IPMI SOL Output Content  ISTEP
 
 Get SOL Setting
     [Documentation]  Returns status for given SOL setting.
@@ -271,7 +274,7 @@ Restore Default SOL Configuration
     Close All Connections
 
 
-Post Test Case Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     Deactivate SOL Via IPMI
