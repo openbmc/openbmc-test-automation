@@ -84,7 +84,7 @@ RESTORE_LAST_STATE = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.Restore'
 ALWAYS_POWER_ON = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOn'
 ALWAYS_POWER_OFF = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOff'
 
-# Dump URI variable
+# Dump URI variables.
 DUMP_URI = OPENBMC_BASE_URI +'/dump/'
 DUMP_ENTRY_URI = DUMP_URI + 'entry/'
 # The path on the BMC where dumps are stored.
@@ -94,7 +94,20 @@ DUMP_DIR_PATH = "/var/lib/phosphor-debug-collector/dumps/"
 STATE_DBUS_BASE = 'xyz.openbmc_project.State.'
 OS_BOOT_START = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.OSStart'
 OS_BOOT_OFF = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.Unspecified'
+OS_BOOT_PCI = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.PCIInit'
+OS_BOOT_SECPCI = STATE_DBUS_BASE +
+     ...  'Boot.Progress.ProgressStages.SecondaryProcInit'
+OS_BOOT_MEM = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.MemoryInit'
+OS_BOOT_MOTHERBOARD = STATE_DBUS_BASE +
+     ...  'Boot.Progress.ProgressStages.MotherboardInit'
+
+# OperatingSystem status variables.
 OS_BOOT_COMPLETE = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.BootComplete'
+OS_BOOT_CDROM =  STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.CDROMBoot'
+OS_BOOT_ROM = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.ROMBoot'
+OS_BOOT_PXE = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.PXEBoot'
+OS_BOOT_CBoot = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.CBoot'
+OS_BOOT_DiagBoot = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.DiagBoot'
 
 # Boot variables.
 BOOT_SOURCE_DEFAULT = 'xyz.openbmc_project.Control.Boot.Source.Sources.Default'
