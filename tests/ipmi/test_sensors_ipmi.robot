@@ -182,27 +182,176 @@ Autoreboot Enable and Disable
     ...  0x04 0x30 0xDA 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20 0x00
     Verify The Attribute  ${CONTROL_URI}/host0/auto_reboot  AutoReboot  ${1}
 
-OS Status Sensor Progress
-    [Documentation]  OS Status Sensor Progress.
-    [Tags]  OS_Status_Sensor_Progress
+# Boot Progress Sensor Test Cases
 
-    # Set the OS Sensor Progress to PXEBoot
+Set Boot Progress Sensor To Unspecified
+    [Documentation]  Boot Progress sensor to "Unspecified" state.
+    ...  and verify using REST.
+    [Tags]  Set_Boot_Progress_Sensor_To_Unspecified
+
+    # Set the Boot Progress to Unspecified
     Run IPMI Command
-    ...  0x04 0x30 0x05 0x00 0x00 0x04 0x00 0x00 0x00 0x00 0x20 0x00
-    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
-    Should Be Equal
-    ...  xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.PXEBoot
-    ...  ${resp}
-
-Boot Progress Sensor Unspecified Error
-    [Documentation]  Boot Progress Sensor Unspecified Error.
-    [Tags]  Boot_Progress_Sensor_Unspecified_Error
-
-    # Set the Boot Progress as Unspecified
-    Run IPMI Command
-    ...  0x04 0x30 0x03 0xa9 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x00 0x00
     ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
     Should Be Equal  ${OS_BOOT_OFF}  ${resp}
+    ...  msg=Incorrect Output.
+
+Set Boot Progress Sensor To OSStart
+    [Documentation]  Set Boot Progress sensor to "OSStart" state.
+    ...  and verify using REST.
+    [Tags]  Set_Boot_Progress_Sensor_To_OSStart
+
+    # Set the Boot Progress to OSStart
+    Run IPMI Command
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x13 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    Should Be Equal  ${OS_BOOT_START}  ${resp}
+    ...  msg=Incorrect Output.
+
+Set Boot Progress Sensor To PCIinit
+    [Documentation]  Set Boot Progress sensor to "PCIinit" state.
+    ...  and verify using REST.
+    [Tags]  Set_Boot_Progress_Sensor_To_PCIInit
+
+    # Set the Boot Progress to PCIinit
+    Run IPMI Command
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x07 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    Should Be Equal  ${OS_BOOT_PCI}  ${resp}
+    ...  msg=Incorrect Output.
+
+Set Boot Progress Sensor To SecondaryProcInit
+    [Documentation]  Set Boot Progress sensor to "SecondaryProcInit" state.
+    ...  and verify using REST.
+    [Tags]  Set_Boot_Progress_Sensor_To_SecondaryProcInit
+
+    # Set the Boot Progress to SecondaryProcInit
+    Run IPMI Command
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x03 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    Should Be Equal  ${OS_BOOT_SECPCI}  ${resp}
+    ...  msg=Incorrect Output.
+
+Set Boot Progress Sensor To MemoryInit
+    [Documentation]  Set Boot Progress sensor to "MemoryInit" state.
+    ...  and verify using REST.
+    [Tags]  Set_Boot_Progress_Sensor_To_MemoryInit
+
+    # Set the Boot Progress to MemoryInit
+    Run IPMI Command
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x01 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    Should Be Equal  ${OS_BOOT_MEM}  ${resp}
+    ...  msg=Incorrect Output.
+
+Set Boot Progress Sensor To MotherboardInit
+    [Documentation]  Set Boot Progress sensor to "MotherboardInit" state
+    ...  and verify using REST.
+    [Tags]  Set_Boot_Progress_Sensor_To_MotherboardInit
+
+    # Set the Boot Progress to MotherboardInit
+    Run IPMI Command
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x14 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    Should Be Equal  ${OS_BOOT_MOTHERBOARD}  ${resp}
+    ...  msg=Incorrect Output.
+
+# OperatingSystemState Test Cases
+
+Set Operating System State To CDROMBoot
+    [Documentation]  Set Operating System State to "CDROMBoot"
+    ...  and verify using REST.
+    [Tags]  Set_Operating_System_State_To_CDROMBoot
+
+    # Set OperatingSystemState to CDROMBoot
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x10 0x00 0x00 0x00 0x00 0x00 0x000
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_CDROM}  ${resp}
+    ...  msg=Incorrect Output.
+
+Set Operating System State To ROMBoot
+    [Documentation]  Set Operating System State to "ROMBoot"
+    ...  and verify using REST.
+    [Tags]  Set_Operating_System_State_To_ROMBoot
+
+    # Set OperatingSystemState to ROMBoot
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x20 0x00 0x00 0x00 0x00 0x00 0x000
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_ROM}  ${resp}
+    ...  msg=Incorrect Output.
+
+Set Operating System State To BootComplete
+    [Documentation]  Set Operating System State to "BootComplete"
+    ...  and verify using REST.
+    [Tags]  Set_Operating_System_State_To_BootComplete
+
+    # Set OperatingSystemState to BootComplete
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x40 0x00 0x00 0x00 0x00 0x00 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_COMPLETE}  ${resp}
+    ...  msg=Incorrect Output.
+
+Set Operating System State PXEBoot
+    [Documentation]  Set Operating System State to "PXEBoot"
+    ...  and verify using REST.
+    [Tags]  Set_Operating_System_State_To_PXEBoot
+
+    # Set OperatingSystemState to PXEBoot
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x05 0x00 0x00 0x00 0x00 0x00 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_PXE}  ${resp}
+    ...  msg=Incorrect Output.
+
+Set Operating System State To CBoot
+    [Documentation]  Set Operating System State to "CBoot"
+    ...  and verify using REST.
+    [Tags]  Set_Operating_System_State_To_CBoot
+
+    # Set OperatingSystemState to CBoot
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_CBoot}  ${resp}
+    ...  msg=Incorrect Output.
+
+Set Operating System State To Diagboot
+    [Documentation]  Set OperatingSystemState to "Diagboot"
+    ...  and verify using REST.
+    [Tags]  Set_Operating_System_State_To_Diagboot
+
+    # Set OperatingSystemState to Diagboot
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x08 0x00 0x00 0x00 0x00 0x00 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_DiagBoot}  ${resp}
+    ...  msg=Incorrect Output.
+
+OccActive Enable And Disable
+    [Documentation]  OCC Active Enable And Disable.
+    [Tags]  OCC_Active_Enable_And_Disable
+
+    # Set the OccActive to 1
+    Run IPMI Command
+    ...  0x04 0x30 0x08 0xa8 0x00 0x02 0x00 0x01 0x00 0x00 0x00 0x00
+    Verify The Attribute  ${OPENPOWER_CONTROL}/occ0  OccActive  ${1}
+
+    # Set the OccActive to 0
+    Run IPMI Command
+    ...  0x04 0x30 0x08 0xa8 0x00 0x01 0x00 0x02 0x00 0x00 0x00 0x00
+    Verify The Attribute  ${OPENPOWER_CONTROL}/occ0  OccActive  ${0}
+
+Verify IPMI BT Capabilities Command
+    [Documentation]  Verify IPMI BT capability command response.
+    [Tags]  Verify_IPMI BT_Capabilities_Command
+    [Setup]  REST Power On
+
+    ${output} =  Run IPMI command  0x06 0x36
+    Should Be True  "${output}" == " 01 3f 3f 0a 01"
+    ...  msg=Incorrect Output.
 
 *** Keywords ***
 
