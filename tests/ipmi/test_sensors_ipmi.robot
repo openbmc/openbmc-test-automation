@@ -12,6 +12,18 @@ Resource               ../../lib/utils.robot
 Test Setup              Open Connection And Log In
 Test Teardown           Test Teardown Execution
 
+*** Variables ***
+
+${OS_BOOT_PCI}          xyz.openbmc_project.State.Boot.Progress.ProgressStages.PCIInit
+${OS_BOOT_SECPCI}       xyz.openbmc_project.State.Boot.Progress.ProgressStages.SecondaryProcInit
+${OS_BOOT_MEM}          xyz.openbmc_project.State.Boot.Progress.ProgressStages.MemoryInit
+${OS_BOOT_MOTHERBOARD}  xyz.openbmc_project.State.Boot.Progress.ProgressStages.MotherboardInit
+${OS_BOOT_CDROM}        xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.CDROMBoot
+${OS_BOOT_ROM}          xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.ROMBoot
+${OS_BOOT_PXE}          xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.PXEBoot
+${OS_BOOT_CBoot}        xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.CBoot
+${OS_BOOT_DiagBoot}     xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.DiagBoot
+
 *** Test Cases ***
 
 DIMM Present And Not Present
@@ -182,27 +194,152 @@ Autoreboot Enable and Disable
     ...  0x04 0x30 0xDA 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20 0x00
     Verify The Attribute  ${CONTROL_URI}/host0/auto_reboot  AutoReboot  ${1}
 
-OS Status Sensor Progress
-    [Documentation]  OS Status Sensor Progress.
-    [Tags]  OS_Status_Sensor_Progress
+# Boot Progress Sensor Test Cases
 
-    # Set the OS Sensor Progress to PXEBoot
+Set Boot Progress Sensor Unspecified
+    [Documentation]  Boot Progress Sensor to Unspecified.
+    [Tags]  Set_Boot_Progress_Sensor_Unspecified
+
+    # Set the Boot Progress to Unspecified
     Run IPMI Command
-    ...  0x04 0x30 0x05 0x00 0x00 0x04 0x00 0x00 0x00 0x00 0x20 0x00
-    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
-    Should Be Equal
-    ...  xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.PXEBoot
-    ...  ${resp}
-
-Boot Progress Sensor Unspecified Error
-    [Documentation]  Boot Progress Sensor Unspecified Error.
-    [Tags]  Boot_Progress_Sensor_Unspecified_Error
-
-    # Set the Boot Progress as Unspecified
-    Run IPMI Command
-    ...  0x04 0x30 0x03 0xa9 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x00 0x00
     ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
     Should Be Equal  ${OS_BOOT_OFF}  ${resp}
+
+Set Boot Progress Sensor OSStart
+    [Documentation]  Set Boot Progress Sensor to OSStart.
+    [Tags]  Set_Boot_Progress_Sensor_OSStart
+
+    # Set the Boot Progress to OSStart
+    Run IPMI Command
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x13 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    Should Be Equal  ${OS_BOOT_START}  ${resp}
+
+Set Boot Progress Sensor PCIinit
+    [Documentation]  Set Boot Progress Sensor to PCIinit.
+    [Tags]  Set_Boot_Progress_Sensor_PCIInit
+
+    # Set the Boot Progress to PCIinit
+    Run IPMI Command
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x07 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    Should Be Equal  ${OS_BOOT_PCI}  ${resp}
+
+Set Boot Progress Sensor SecondaryProcInit
+    [Documentation]  Set Boot Progress Sensor to SecondaryProcInit.
+    [Tags]  Set_Boot_Progress_Sensor_SecondaryProcInit
+
+    # Set the Boot Progress to SecondaryProcInit
+    Run IPMI Command
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x03 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    Should Be Equal  ${OS_BOOT_SECPCI}  ${resp}
+
+Set Boot Progress Sensor MemoryInit
+    [Documentation]  Set Boot Progress Sensor to MemoryInit.
+    [Tags]  Set_Boot_Progress_Sensor_MemoryInit
+
+    # Set the Boot Progress to MemoryInit
+    Run IPMI Command
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x01 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    Should Be Equal  ${OS_BOOT_MEM}  ${resp}
+
+Set Boot Progress Sensor MotherboardInit
+    [Documentation]  Set Boot Progress Sensor to MotherboardInit.
+    [Tags]  Set_Boot_Progress_Sensor_MotherboardInit
+
+    # Set the Boot Progress to MotherboardInit
+    Run IPMI Command
+    ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 0x14 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    Should Be Equal  ${OS_BOOT_MOTHERBOARD}  ${resp}
+
+# OperatingSystemState Test Cases
+
+Set OperatingSystemState CDROMBoot
+    [Documentation]  OperatingSystemState CDROMBoot
+    [Tags]  Set_OperatingSystemState_CDROMBoot
+
+    # Set OperatingSystemState to CDROMBoot
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x10 0x00 0x00 0x00 0x00 0x00 0x000
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_CDROM}  ${resp}
+
+Set OperatingSystemState ROMBoot
+    [Documentation]  OperatingSystemState ROMBoot
+    [Tags]  Set_OperatingSystemState_ROMBoot
+
+    # Set OperatingSystemState to ROMBoot
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x20 0x00 0x00 0x00 0x00 0x00 0x000
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_ROM}  ${resp}
+
+Set OperatingSystemState BootComplete
+    [Documentation]  OperatingSystemState BootComplete
+    [Tags]  Set_OperatingSystemState_BootComplete
+
+    # Set OperatingSystemState to BootComplete
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x40 0x00 0x00 0x00 0x00 0x00 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_COMPLETE}  ${resp}
+
+Set OperatingSystemState PXEBoot
+    [Documentation]  OperatingSystemState PXEBoot
+    [Tags]  Set_OperatingSystemState_PXEBoot
+
+    # Set OperatingSystemState to PXEBoot
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x05 0x00 0x00 0x00 0x00 0x00 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_PXE}  ${resp}
+
+Set OperatingSystemState CBoot
+    [Documentation]  OperatingSystemState CBoot
+    [Tags]  Set_OperatingSystemState_CBoot
+
+    # Set OperatingSystemState to CBoot
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_CBoot}  ${resp}
+
+Set OperatingSystemState Diagboot
+    [Documentation]  OperatingSystemState Diagboot
+    [Tags]  Set_OperatingSystemState_Diagboot
+
+    # Set OperatingSystemState to Diagboot
+    Run IPMI Command
+    ...  0x04 0x30 0x05 0xa9 0x00 0x08 0x00 0x00 0x00 0x00 0x00 0x00
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    Should Be Equal  ${OS_BOOT_DiagBoot}  ${resp}
+
+OccActive Enable And Disable
+    [Documentation]  OCC Active Enable And Disable.
+    [Tags]  OCC_Active_Enable_And_Disable
+
+    # Set the OccActive to 1
+    Run IPMI Command
+    ...  0x04 0x30 0x08 0xa8 0x00 0x02 0x00 0x01 0x00 0x00 0x00 0x00
+    Verify The Attribute  ${OPENPOWER_CONTROL}/occ0  OccActive  ${1}
+
+    # Set the OccActive to 0
+    Run IPMI Command
+    ...  0x04 0x30 0x08 0xa8 0x00 0x01 0x00 0x02 0x00 0x00 0x00 0x00
+    Verify The Attribute  ${OPENPOWER_CONTROL}/occ0  OccActive  ${0}
+
+Verify IPMI BT Capabilities Command
+    [Documentation]  Verify IPMI BT capability command response.
+    [Tags]  Verify_IPMI BT_Capabilities_Command
+    [Setup]  REST Power On
+
+    ${output} =  Run IPMI command  0x06 0x36
+    Should Be True  "${output}" == " 01 3f 3f 0a 01"
+    ...  msg=Incorrect Output
 
 *** Keywords ***
 
