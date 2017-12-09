@@ -38,6 +38,20 @@ Install the packages and it's dependencies via `pip`
     $ pip install robotframework-sshlibrary
     $ pip install robotframework-scplibrary
     ```
+## Testing Setup Steps ##
+
+To verify the installation setup is completed and ready to execute.
+
+* Download the openbmc-test-automation repository:
+    ```
+    $ git clone https://github.com/openbmc/openbmc-test-automation
+    $ cd openbmc-test-automation
+    ```
+* Execute basic setup test run:
+    ```
+    $ robot -v OPENBMC_HOST:xx.xx.xx.xx templates/test_openbmc_setup.robot
+    ```
+    where xx.xx.xx.xx is the BMC hostname or IP.
 
 ## Quickstart ##
 To run openbmc-automation first you need to install the prerequisite python
