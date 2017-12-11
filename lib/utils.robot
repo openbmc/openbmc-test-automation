@@ -523,7 +523,8 @@ Get SOL Console Pid
     [Documentation]  Get the pid of the active sol conole job.
 
     # Find the pid of the active system console logging session (if any).
-    ${search_string}=  Create OS Console Command String
+    ${search_string}=  Catenate  ssh -p 2200 -o "StrictHostKeyChecking no"
+    ...  ${OPENBMC_USERNAME}@${OPENBMC_HOST}
     # At least in some cases, ps output does not show double quotes so we must
     # replace them in our search string with the regexes to indicate that they
     # are optional.
