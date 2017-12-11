@@ -253,7 +253,7 @@ Get Response Codes
     ${HTTP_OK}           /
     ${HTTP_OK}           /xyz/
     ${HTTP_OK}           /xyz/openbmc_project/
-    ${HTTP_OK}           /xyz/openbmc_project/enumerate
+    ${HTTP_OK}           /xyz/openbmc_project/state/enumerate
     ${HTTP_NOT_FOUND}    /i/dont/exist/
 
     [Tags]  Get_Response_Codes
@@ -268,7 +268,7 @@ Get Data
     #--------------------------------------------------------------------
     /xyz/openbmc_project/
     /xyz/openbmc_project/list
-    /xyz/openbmc_project/enumerate
+    /xyz/openbmc_project/state/enumerate
 
     [Tags]  Get_Data
     [Template]  Execute Get And Check Data
@@ -296,8 +296,6 @@ Put Response Codes
     ${HTTP_METHOD_NOT_ALLOWED}      /
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
     ${HTTP_METHOD_NOT_ALLOWED}      /i/dont/exist/
-    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/list
-    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/enumerate
 
     [Tags]  Put_Response_Codes
     [Template]  Execute Put And Check Response
@@ -323,7 +321,7 @@ Post Response Code
     ${HTTP_METHOD_NOT_ALLOWED}      /
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
     ${HTTP_METHOD_NOT_ALLOWED}      /i/dont/exist/
-    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/enumerate
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/login
 
     [Tags]  Post_Response_Codes
     [Template]  Execute Post And Check Response
@@ -338,9 +336,7 @@ Delete Response Code
     ${HTTP_METHOD_NOT_ALLOWED}      /
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/nothere/
-    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/enumerate
-    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/openbmc_project/list
-    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/openbmc_project/enumerate
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/openbmc_project/state/
 
     [Tags]  Delete_Response_Codes
     [Template]  Execute Delete And Check Response
