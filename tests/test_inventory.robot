@@ -261,6 +261,29 @@ Verify Core Properties
     Validate FRU Properties Fields  core  @{system_list}
 
 
+Verify Fan Properties
+    [Documentation]  Verify the fan property fields.
+    [Tags]  Verify_Fan_Properties
+    # Example:
+    # A fan property should have the following entries:
+    # "core":[
+    #    "PrettyName",
+    #    "Present",
+    #    "MeetsMinimumShipLevel",
+    #    "Functional"
+    # ]
+    # fan inventory:
+    # "/xyz/openbmc_project/inventory/system/chassis/motherboard/fan0": {
+    #    "Functional": 1,
+    #    "MeetsMinimumShipLevel": 1,
+    #    "Present": 1,
+    #    "PrettyName": "fan0"
+    # },
+
+    ${system_list}=  Get Endpoint Paths
+    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  fan*
+    Validate FRU Properties Fields  fan  @{system_list}
+
 
 Verify Core Functional State
     [Documentation]  Verify that "Present" core property is set if "Functional"
