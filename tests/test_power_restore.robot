@@ -8,6 +8,7 @@ Resource        ../lib/rest_client.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/state_manager.robot
+Library         ../lib/state_map.py
 
 
 Library         SSHLibrary
@@ -43,7 +44,7 @@ Test Restore Policy ALWAYS_POWER_OFF With Host Off
 Test Restore Policy ALWAYS_POWER_OFF With Host Running
     # Policy                Initial Host State     Expected Host State
 
-    ${ALWAYS_POWER_OFF}     Running                Off
+    ${ALWAYS_POWER_OFF}     Running                Running
 
     [Template]  Verify Restore Policy
     [Tags]  Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Running
@@ -120,20 +121,26 @@ Verify Restore Policy
 
     Set BMC Power Policy  ${policy}
 
-    ${currentState}=  Get Host State
+    Set Initial Test State  ${expectedState}
 
-    Log  Current System State= ${currentState}
-    Log  Initial Host State= ${expectedState}
-    Log  Expected Host State= ${nextState}
-
-    Run Keyword If
-    ...  '${currentState}' != '${expectedState}'
-    ...  Set Initial Test State  ${expectedState}
+    ${initial_states}=  Get Boot State
 
     Initiate BMC Reboot
 
     Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Verify Host State  ${nextState}
+    ...  10 min  10 sec  Valid Boot States  ${initial_states}
+
+
+Valid Boot States
+    [Documentation]  Verify boot states for a given system state.
+    [Arguments]  ${sys_state}
+
+    # Description of argument(s):
+    # sys_state    system state list
+    #              (e.g.bmc,chassis,host,BootProgress,OperatingSystemState).
+
+    ${current_state}=  Get Boot State
+    Lists Should Be Equal  ${sys_state}  ${current_state}
 
 
 Set Initial Test State
@@ -154,22 +161,12 @@ Set Initial Test State
     ${currentState}=  Get Host State
 
 
-Verify Host State
-    [Documentation]  Verify expected host state.
-    [Arguments]  ${expectedState}
-
-    # Description of argument(s):
-    # expectedState   Expected host state.
-    ${currentState}=  Get Host State
-    Should Be Equal  ${currentState}  ${expectedState}
-
-
 Post Test Case Execution
     [Documentation]  Do the post test teardown.
     # 1. Capture FFDC on test failure.
     # 2. Close all open SSH connections.
 
-    FFDC On Test Case Fail
+#    FFDC On Test Case Fail
     Close All Connections
 
 
