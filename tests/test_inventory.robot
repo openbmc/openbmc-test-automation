@@ -69,8 +69,9 @@ Verify UUID Entry
     #     "SerialNumber": "000000000000"
     #     "UUID": ""
     # },
-    ${json_data}=  Get Inventory  system/chassis/motherboard/boxelder/bmc
-    Should Not Be Empty  ${json_data["data"]["UUID"]}
+    ${resp}=  OpenBMC Get Request
+    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard/boxelder/bmc/attr/UUID
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
 Verify Boxelder MAC Address Property Is Populated
