@@ -350,7 +350,7 @@ def setup():
 
     grp.rqprint_pgm_header()
 
-    grk.run_key("Set BMC Power Policy  RESTORE_LAST_STATE")
+    grk.run_key("Set BMC Power Policy  ALWAYS_POWER_OFF")
 
     initial_plug_in_setup()
 
