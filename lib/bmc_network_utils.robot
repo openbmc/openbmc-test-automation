@@ -93,7 +93,13 @@ Get BMC MAC Address
 
     ${cmd_output}=  Execute Command On BMC  /sbin/ip addr | grep ether
 
-    [Return]  ${cmd_output}
+    # Split the line and return MAC address.
+    # Split list data:
+    # link/ether | xx:xx:xx:xx:xx:xx | brd | ff:ff:ff:ff:ff:ff
+
+    @{words}=  Split String  ${cmd_output}
+
+    [Return]  ${words[1]}
 
 Get BMC Hostname
     [Documentation]  Get BMC hostname.
