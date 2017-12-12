@@ -51,7 +51,7 @@ ${boot_prog_method}     ${EMPTY}
 
 ${power_policy_setup}             ${0}
 ${bmc_power_policy_method}        ${EMPTY}
-@{valid_power_policy_vars}        RESTORE_LAST_STATE  ALWAYS_POWER_ON
+@{valid_power_policy_vars}        ALWAYS_POWER_OFF  ALWAYS_POWER_ON
 ...                               ALWAYS_POWER_OFF
 
 ${probe_cpu_tool_path}     ${EXECDIR}/tools/ras/probe_cpus.sh
@@ -855,13 +855,13 @@ Set BMC Power Policy
     [Documentation]   Set the given BMC power policy.
     [Arguments]   ${policy}
 
-    # Note that this function will translate the old style "RESTORE_LAST_STATE"
+    # Note that this function will translate the old style "ALWAYS_POWER_OFF"
     # policy to the new style "xyz.openbmc_project.Control.Power.RestorePolicy.
     # Policy.Restore" for you.
 
     # Description of argument(s):
-    # policy    Power restore policy (e.g "RESTORE_LAST_STATE",
-    #           ${RESTORE_LAST_STATE}).
+    # policy    Power restore policy (e.g "ALWAYS_POWER_OFF",
+    #           ${ALWAYS_POWER_OFF}).
 
     # Set the bmc_power_policy_method to either 'Old' or 'New'.
     Set Power Policy Method
@@ -877,7 +877,7 @@ New Set Power Policy
     [Arguments]   ${policy}
 
     # Description of argument(s):
-    # policy    Power restore policy (e.g. ${RESTORE_LAST_STATE}).
+    # policy    Power restore policy (e.g. ${ALWAYS_POWER_OFF}).
 
     ${valueDict}=  Create Dictionary  data=${policy}
     Write Attribute
@@ -888,7 +888,7 @@ Old Set Power Policy
     [Arguments]   ${policy}
 
     # Description of argument(s):
-    # policy    Power restore policy (e.g. "RESTORE_LAST_STATE").
+    # policy    Power restore policy (e.g. "ALWAYS_POWER_OFF").
 
     ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
