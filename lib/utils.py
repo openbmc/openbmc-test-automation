@@ -82,7 +82,7 @@ def translate_power_policy_value(policy):
     Using old style functions, callers might call like this with a hard-
     code value for policy:
 
-    Set BMC Power Policy  RESTORE_LAST_STATE
+    Set BMC Power Policy  ALWAYS_POWER_OFF
 
     This function will get the value of the corresponding global variable (if
     it exists) and return it.
