@@ -174,5 +174,5 @@ Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
     # 1. Set policy to default.
 
-    Run Keyword And Ignore Error  Set BMC Power Policy  ${RESTORE_LAST_STATE}
+    Run Keyword And Ignore Error  Set BMC Power Policy  ${ALWAYS_POWER_OFF}
 

@@ -8,7 +8,7 @@ Documentation     Trigger code update to a target BMC.
 ...               Update work flow sequence:
 ...                 - User input BMC File existence check
 ...                 - Ping Test and REST authentication
-...                 - Set Host Power host setting Policy to RESTORE_LAST_STATE
+...                 - Set Host Power host setting Policy to ALWAYS_POWER_OFF
 ...                   On reboot this policy would ensure the BMC comes
 ...                   online and stays at HOST_POWERED_OFF state.
 ...                 - Issue poweroff
@@ -82,7 +82,7 @@ Prepare BMC For Update
     Check Boot Count And Time
     Prune Journal Log
     Power Off Request
-    Set BMC Power Policy  RESTORE_LAST_STATE
+    Set BMC Power Policy  ALWAYS_POWER_OFF
 
     Prepare For Update
     Check If BMC is Up  20 min  10 sec
