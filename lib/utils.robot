@@ -877,7 +877,7 @@ New Set Power Policy
     [Arguments]   ${policy}
 
     # Description of argument(s):
-    # policy    Power restore policy (e.g. ${RESTORE_LAST_STATE}).
+    # policy    Power restore policy (e.g. ${ALWAYS_POWER_OFF}).
 
     ${valueDict}=  Create Dictionary  data=${policy}
     Write Attribute
@@ -888,7 +888,7 @@ Old Set Power Policy
     [Arguments]   ${policy}
 
     # Description of argument(s):
-    # policy    Power restore policy (e.g. "RESTORE_LAST_STATE").
+    # policy    Power restore policy (e.g. "ALWAYS_POWER_OFF").
 
     ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
