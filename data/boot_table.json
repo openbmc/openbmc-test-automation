@@ -1,5 +1,5 @@
 {
-    # Power on boot types:
+     # Power on boot types:
 
     # Initiate a power on using the REST API interface.
     "REST Power On": {
@@ -46,7 +46,7 @@
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "Run External IPMI Standard Command  power on",
+        "method": "Run External IPMI Standard Command  power on -N 10 -R 1",
         "lib_file_path": "ipmi_client.robot"
     },
 
@@ -112,7 +112,7 @@
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "Run External IPMI Standard Command  power off",
+        "method": "Run External IPMI Standard Command  power off -N 10 -R 1",
         "lib_file_path": "ipmi_client.robot"
     },
     # Initiate a power soft using the IPMI interface.
@@ -133,7 +133,7 @@
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "Run External IPMI Standard Command  power soft",
+        "method": "Run External IPMI Standard Command  power soft -N 10 -R 1",
         "lib_file_path": "ipmi_client.robot"
     },
     # Run a "shutdown" command on the OS_HOST.
@@ -352,7 +352,7 @@
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
-        "method": "Run External IPMI Standard Command  mc reset warm ; Printn",
+        "method": "Run External IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
     # Initiate an mc reset warm using the IPMI interface while chassis is
@@ -371,7 +371,7 @@
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
-        "method": "Run External IPMI Standard Command  mc reset warm ; Printn",
+        "method": "Run External IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
 
@@ -401,7 +401,7 @@
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "Run External IPMI Standard Command  power cycle",
+        "method": "Run External IPMI Standard Command  power cycle -N 10 -R 1",
         "lib_file_path": "ipmi_client.robot"
     },
     # Initiate a power reset using the IPMI interface (equivalent to off/on).
@@ -429,7 +429,7 @@
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "Run External IPMI Standard Command  power reset",
+        "method": "Run External IPMI Standard Command  power reset -N 10 -R 1",
         "lib_file_path": "ipmi_client.robot"
     },
     # Do an auto reboot by setting auto reboot to "yes" and going to quiesce state.
