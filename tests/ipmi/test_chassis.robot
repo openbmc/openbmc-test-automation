@@ -84,6 +84,6 @@ Verify Host PowerOff Via IPMI
 Test Exit Logs
     [Documentation]    Log FFDC if test failed.
 
-    Set BMC Power Policy  ${RESTORE_LAST_STATE}
+    Set BMC Power Policy  ${ALWAYS_POWER_OFF}
 
     FFDC On Test Case Fail

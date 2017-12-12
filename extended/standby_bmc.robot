@@ -7,7 +7,7 @@ Documentation     This module will take whatever action is necessary
 ...                  - Power state is 0 (off)
 ...                  - BMC state is "Ready"
 ...                  - HOST state is "Off"
-...                  - Boot policy is "RESTORE_LAST_STATE"
+...                  - Boot policy is "ALWAYS_POWER_OFF"
 ...               Power cycle system via PDU if specified
 ...               Prune archived journal logs
 
@@ -53,7 +53,7 @@ Get To Stable State
 
     Prune Journal Log
 
-    Run Keyword And Ignore Error  Set BMC Power Policy  ${RESTORE_LAST_STATE}
+    Run Keyword And Ignore Error  Set BMC Power Policy  ${ALWAYS_POWER_OFF}
 
     # TODO: Enable MAC AES check latter.
     # Reference : openbmc/openbmc-test-automation#998
