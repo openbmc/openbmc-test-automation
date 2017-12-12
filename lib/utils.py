@@ -29,7 +29,7 @@ def set_power_policy_method():
     call to this function), this keyword will simply return.
 
     If bmc_power_policy_method is "Old", this function will adjust the global
-    policy variables from data/variables.py: RESTORE_LAST_STATE,
+    policy variables from data/variables.py: ALWAYS_POWER_OFF,
     ALWAYS_POWER_ON, ALWAYS_POWER_OFF.
     """
 
@@ -61,8 +61,8 @@ def set_power_policy_method():
     # For old style, we will rewrite these global variable settings to old
     # values.
     if bmc_power_policy_method == "Old":
-        BuiltIn().set_global_variable("${RESTORE_LAST_STATE}",
-                                      "RESTORE_LAST_STATE")
+        BuiltIn().set_global_variable("${ALWAYS_POWER_OFF}",
+                                      "ALWAYS_POWER_OFF")
         BuiltIn().set_global_variable("${ALWAYS_POWER_ON}",
                                       "ALWAYS_POWER_ON")
         BuiltIn().set_global_variable("${ALWAYS_POWER_OFF}",
@@ -82,7 +82,7 @@ def translate_power_policy_value(policy):
     Using old style functions, callers might call like this with a hard-
     code value for policy:
 
-    Set BMC Power Policy  RESTORE_LAST_STATE
+    Set BMC Power Policy  ALWAYS_POWER_OFF
 
     This function will get the value of the corresponding global variable (if
     it exists) and return it.
