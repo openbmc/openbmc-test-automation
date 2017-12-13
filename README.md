@@ -53,10 +53,38 @@ To verify the installation setup is completed and ready to execute.
     ```
     where xx.xx.xx.xx is the BMC hostname or IP.
 
+## Test Layout ##
+
+There are several sub-directories within the openbmc-test-automation base which
+contain test suites, tools, templates, etc. These sub-directories are
+classified as follows:
+
+`tests/`: Contains the general test cases for OpenBMC stack functional
+          verification.
+
+`extended/`: Contains test cases for boot testing, network testing,
+             code update, RAS (Reliability, availability and serviceability)
+             testing, etc.
+
+`systest/`: Contains test cases for HTX bootme.
+
+`xcat/`: Contains test cases of XCAT automation.
+
+`tools/`: Contains various tools.
+
+`templates/`: Contains sample code examples and setup testing.
+`
+
 ## Quickstart ##
-To run openbmc-automation first you need to install the prerequisite python
-packages which will help to invoke tests through tox.  Note that tox
-version 2.3.1 or greater is required.
+To run openbmc-automation first you need to install the prerequisite Python
+packages which will help to invoke tests through tox (Note that tox
+version 2.3.1 or greater is required) or via Robot CLI command.
+
+**Robot Command Line**
+    ```
+    $ robot -v OPENBMC_HOST:xx.xx.xx.xx  tests
+    ```
+**Tox Command Line**
 
 Install the python dependencies for tox
 ```shell
@@ -73,16 +101,6 @@ Initialize the following environment variable which will be used during testing
     $ export IPMI_COMMAND=<Dbus/External>
     $ export IPMI_PASSWORD=<External IPMI password>
 ```
-
-There are two different set of test suite existing based on the usage.
-The test suites are distinctly separated by directory as under
-    tests/
-    extended/
-
-`tests`: directory contains the general test cases
-
-`extended`: directory contains the use cases for new IP network testing, PDU,
-BIOS and BMC code update.
 
 ```shell
 Use Following Variables for networking test cases
