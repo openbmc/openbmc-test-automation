@@ -123,12 +123,10 @@ Verify Restore Policy
 
     Set Initial Test State  ${expectedState}
 
-    ${initial_states}=  Get Boot State
-
     Initiate BMC Reboot
 
     Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Valid Boot States  ${initial_states}
+    ...  10 min  10 sec  Valid Boot States  ${nextState}
 
 
 Valid Boot States
@@ -137,10 +135,10 @@ Valid Boot States
 
     # Description of argument(s):
     # sys_state    system state list
-    #              (e.g.bmc,chassis,host,BootProgress,OperatingSystemState).
+    #              (e.g. "Off", "On", "Reboot", etc.).
 
     ${current_state}=  Get Boot State
-    Lists Should Be Equal  ${sys_state}  ${current_state}
+    Valid Boot State  ${sys_state}  ${current_state}
 
 
 Set Initial Test State
