@@ -43,6 +43,16 @@ Robot Coding Guidelines
       ...    Run Keywords  Key1  parms
       ...    AND  Key2  parms
       ```
+-   Use spaces to make conditions more readable:
+
+    Correct example:
+    ```
+    Run Keyword If  '${var1}' == '${0}'  My Keyword
+    ```
+    Incorrect example:
+    ```
+    Run Keyword If  '${var1}'=='${0}'  My Keyword
+    ```
 -   When you define or call a Robot keyword, Robot pays no attention to spaces,
     underscores or case.  However, our team will observe the following
     conventions in both our definitions and our calls:
@@ -125,6 +135,26 @@ Robot Coding Guidelines
 
             [Tags]  Create_Intermediate_File
         ```
+-   Description of argument(s):
+    -   As shown in the following example, if your keyword has any arguments, include
+        a "**Description of argument(s)**" section.  This effectively serves as the
+        help text for anyone wanting to use or understand your keyword.  Include
+        real data examples wherever possible and applicable.  Leave at least 2 spaces
+        between the argument name and the description.  Align all description text as
+        shown in the example below.
+
+        Example:
+        ```
+        Get URL List
+            [Documentation]  Return list of URLs under given URL.
+            [Arguments]  ${openbmc_url}
+
+            # Description of argument(s):
+            # openbmc_url  URL for list operation (e.g.
+            #              "/xyz/openbmc_project/inventory").
+            # policy       Power restore policy (e.g "RESTORE_LAST_STATE",
+            #              ${RESTORE_LAST_STATE}).
+        ```
 -   General variable naming conventions:
     -   Variable names should be lower case with few exceptions:
         -   Environment variables should be all upper case.
@@ -193,78 +223,85 @@ Robot Coding Guidelines
         pdu_ip
         openbmc_serial_ip
         ```
--   Files and directories:
-    -   Files:
-        -   If your variable is to contain only the file's name, use a suffix
-            of _file_name.
+    -   Files and directories:
+        -   Files:
+            -   If your variable is to contain only the file's name, use a suffix
+                of _file_name.
 
-            Examples:
-            ```
-            ffdc_file_name = "bmc1.170428.120200.ffdc"
-            ```
-        -   If your variable is to contain the path to a file, use a suffix of
-            _file_path.  Bear in mind that a file path can be relative or
-            absolute so that should not be a consideration in whether to use
-            the "_file_path" suffix.
+                Examples:
+                ```
+                ffdc_file_name = "bmc1.170428.120200.ffdc"
+                ```
+            -   If your variable is to contain the path to a file, use a suffix of
+                _file_path.  Bear in mind that a file path can be relative or
+                absolute so that should not be a consideration in whether to use
+                the "_file_path" suffix.
 
-            Examples:
-            ```
-            status_file_path = "bmc1.170428.120200.status"
-            status_file_path = "subdir/bmc1.170428.120200.status"
-            status_file_path = "./bmc1.170428.120200.status"
-            status_file_path = "../bmc1.170428.120200.status"
-            status_file_path = "/home/user1/status/bmc1.170428.120200.status"
-            ```
-            To re-iterate, it doesn't matter whether the contents of the
-            variable are a relative or absolute path (as shown in the
-            examples above).  A file path is simply a value with enough
-            information in it for the program to find the file.
+                Examples:
+                ```
+                status_file_path = "bmc1.170428.120200.status"
+                status_file_path = "subdir/bmc1.170428.120200.status"
+                status_file_path = "./bmc1.170428.120200.status"
+                status_file_path = "../bmc1.170428.120200.status"
+                status_file_path = "/home/user1/status/bmc1.170428.120200.status"
+                ```
+                To re-iterate, it doesn't matter whether the contents of the
+                variable are a relative or absolute path (as shown in the
+                examples above).  A file path is simply a value with enough
+                information in it for the program to find the file.
 
-        -   If the variable **must** contain an absolute path (which should be
-            the rare case), use a suffix _abs_file_path.
+            -   If the variable **must** contain an absolute path (which should be
+                the rare case), use a suffix _abs_file_path.
 
-    -   Directories:
-        -   Directory variables should follow the same conventions as file
-            variables.
+        -   Directories:
+            -   Directory variables should follow the same conventions as file
+                variables.
 
-        -   If your variable is to contain only the directory's name, use a
-            suffix of _dir_name.
+            -   If your variable is to contain only the directory's name, use a
+                suffix of _dir_name.
 
-            Example:
-            ```
-            ffdc_dir_name = "ffdc"
-            ```
-        -   If your variable is to contain the path to a directory, use a
-            suffix of _dir_path.  Bear in mind that a dir path can be
-            relative or absolute so that should not be a consideration in
-            whether to use _dir_path.
+                Example:
+                ```
+                ffdc_dir_name = "ffdc"
+                ```
+            -   If your variable is to contain the path to a directory, use a
+                suffix of _dir_path.  Bear in mind that a dir path can be
+                relative or absolute so that should not be a consideration in
+                whether to use _dir_path.
 
-            Examples:
-            ```
-            status_dir_path = "status/"
-            status_dir_path = "subdir/status"
-            status_dir_path = "./status/"
-            status_dir_path = "../status/"
-            status_dir_path = "/home/user1/status/"
-            ```
-            To re-iterate, it doesn't matter whether the contents of
-            the variable are a relative or absolute path (as shown in
-            the examples above).  A dir path is simply a value with
-            enough information in it for the program to find the
-            directory.
+                Examples:
+                ```
+                status_dir_path = "status/"
+                status_dir_path = "subdir/status"
+                status_dir_path = "./status/"
+                status_dir_path = "../status/"
+                status_dir_path = "/home/user1/status/"
+                ```
+                To re-iterate, it doesn't matter whether the contents of
+                the variable are a relative or absolute path (as shown in
+                the examples above).  A dir path is simply a value with
+                enough information in it for the program to find the
+                directory.
 
-        -   If the variable **must** contain an absolute path (which
-            should be the rare case), use a suffix _abs_dir_path.
-        -   IMPORTANT:  As a programming convention, do pre-
-            processing on all dir_path variables to ensure that they
-            contain a trailing slash.  If we follow that convention
-            religiously, that when changes are made in other parts of
-            the program, the programmer can count on the value having
-            a trailing slash.  Therefore they can safely do this kind
-            of thing:
-            ```
-            my_file_path = my_dir_path + my_file_name
-            ```
+            -   If the variable **must** contain an absolute path (which
+                should be the rare case), use a suffix _abs_dir_path.
+            -   IMPORTANT:  As a programming convention, do pre-
+                processing on all dir_path variables to ensure that they
+                contain a trailing slash.  If we follow that convention
+                religiously, that when changes are made in other parts of
+                the program, the programmer can count on the value having
+                a trailing slash.  Therefore they can safely do this kind
+                of thing:
+                ```
+                my_file_path = my_dir_path + my_file_name
+                ```
+    -   Setup/Teardown keywords
+
+        Use standardized names for setup and teardown keywords:
+        - Suite Setup Execution
+        - Suite Teardown Execution
+        - Test Setup Execution
+        - Test Teardown Execution
 -   Traditional comments (i.e. using the hashtag style comments)
     -   Please leave one space following the hashtag.
         ```
@@ -281,6 +318,7 @@ Robot Coding Guidelines
 
 Python Coding Guidelines
 -----------------------
+-   The minimum required Python version is 2.7.x.
 -   Run pep8 on all Python files and correct errors.
 
     Example as run from a Linux command line:
