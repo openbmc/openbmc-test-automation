@@ -322,3 +322,38 @@ Python Coding Guidelines
         ```
 -   Do not keep commented out code in your program.  Instead, remove it
     entirely.
+
+Template Usage Guidelines
+-------------------------
+Template to be used to create new stand-alone python programs.
+If you wish to create a new python stand-alone program, please copy
+bin/python_pgm_template to your new name and then begin your work.
+
+* Example:
+
+    ```
+    $ cd bin
+    $ cp python_pgm_template my_new_program
+    ```
+
+This template has much of your preliminary work done for you and it will help
+us all follow a similar structure.
+
+* Features:
+    - Help text and argparsing started for you.
+    - Support for "stock" parameters like quiet, debug, test_mode.
+    - exit_function and signal_handler defined.
+    - validate_parms function pre-created.
+    - main function follows conventional startup:
+
+    ```
+    if not gen_get_options(parser, stock_list):
+        return False
+
+    if not validate_parms():
+        return False
+
+    qprint_pgm_header()
+
+    # Your code here.
+    ```
