@@ -510,8 +510,8 @@ Verify Inventory List After Reset
 Suite Setup Execution
     [Documentation]  Do the initial suite setup.
 
-    # Boot Host.
-    REST Power On  stack_mode=skip  quiet=1
+    Smart Power Off
+    REST Power On
 
 Get Inventory
     [Documentation]  Get the properties of an endpoint.
