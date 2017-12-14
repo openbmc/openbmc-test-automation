@@ -322,3 +322,38 @@ Python Coding Guidelines
         ```
 -   Do not keep commented out code in your program.  Instead, remove it
     entirely.
+
+Template Usage Guidelines
+-------------------------
+We have several templates in the templates/ sub-directory. If there is a
+template that applies to your programming situation (Python, bash, etc.),
+it should be used to create new programs as in the following example
+
+- Example:
+
+    ```
+    $ cd templates
+    $ cp python_pgm_template my_new_program
+    ```
+
+These templates have much of your preliminary work done for you and will help
+us all follow a similar structure.
+
+- Features:
+    - Help text and arg parsing started for you.
+    - Support for "stock" parameters like "quiet", "debug", "test_mode".
+    - "exit_function" and "signal_handler" defined.
+    - "validate_parms" function pre-created.
+    - "main" function follows conventional startup sequence:
+
+    ```
+    if not gen_get_options(parser, stock_list):
+        return False
+
+    if not validate_parms():
+        return False
+
+    qprint_pgm_header()
+
+    # Your code here.
+    ```
