@@ -137,25 +137,22 @@ Run tests
 
 How to test individual test
 ```shell
-    One specific test
-    $ tox -e default -- -t '"DIMM0 no fault"' tests/test_sensors.robot
+    One specific test.
+    $ tox -e default -- --include Power_On_Test  tests/test_basic_poweron.robot
 
     No preset environment variables, default configuration for all supported systems.
     $ OPENBMC_HOST=x.x.x.x tox -e default -- tests
 
-    No preset environment variables, one test case from one test suite
-    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- -t '"DIMM0 no fault"' tests/test_sensors.robot
+    No preset environment variables, one test case from a test suite.
+    $ OPENBMC_HOST=x.x.x.x tox -e default -- --include Power_On_Test tests/test_basic_poweron.robot
 
-    No preset environment variables, one test suite  for a palmetto system
-    $ OPENBMC_HOST=x.x.x.x tox -e palmetto -- tests/test_sensors.robot
-
-    No preset environment variables, the entire test suite for a barreleye system
-    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- tests
+    No preset environment variables, the entire test suite.
+    $ OPENBMC_HOST=x.x.x.x tox -e default -- tests
 
     Default CI test bucket list:
     No preset environment variables, the entire test suite excluding test
     cases using argument file.
-    $ OPENBMC_HOST=x.x.x.x tox -e barreleye -- --argumentfile test_lists/skip_test tests
+    $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/skip_test tests
 
     Exclude test list for supported systems:
     Barrleye:  test_lists/skip_test_barreleye
@@ -202,32 +199,6 @@ Jenkins jobs tox commands
 
 ```
 
-Template to be used to create new stand-alone python programs.
-```shell
-
-If you wish to create a new python stand-alone program, please copy bin/python_pgm_template to your new name and then begin your work.  Example:
-
-cd bin
-cp python_pgm_template my_new_program
-
-This template has much of your preliminary work done for you and it will help us all follow a similar structure.
-
-Features:
-- Help text and argparsing started for you.
-- Support for "stock" parameters like quiet, debug, test_mode.
-- exit_function and signal_handler defined.
-- validate_parms function pre-created.
-- main function follows conventional startup:
-
-    if not gen_get_options(parser, stock_list):
-        return False
-
-    if not validate_parms():
-        return False
-
-    qprint_pgm_header()
-
-    # Your code here.
 
 ```
 
