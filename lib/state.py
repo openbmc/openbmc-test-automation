@@ -879,6 +879,10 @@ def wait_for_comm_cycle(start_boot_seconds,
 
     elapsed_boot_time = int(state['epoch_seconds']) - start_boot_seconds
     gp.qprint_var(elapsed_boot_time)
+    if state['uptime'] == "":
+        error_message = "Unable to obtain uptime from the BMC. BMC is not" +\
+            " communicating."
+        BuiltIn().fail(gp.sprint_error(error_message))
     if int(float(state['uptime'])) < elapsed_boot_time:
         uptime = state['uptime']
         gp.qprint_var(uptime)
