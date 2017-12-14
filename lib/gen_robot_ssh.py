@@ -284,6 +284,7 @@ def execute_ssh_command(cmd_buf,
 
             # We do not handle any other RuntimeErrors so we will raise the
             # exception again.
+            sshlib.close_all_connections()
             raise(execute_exception)
 
         # If we get to this point, the command was executed.
