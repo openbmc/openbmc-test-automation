@@ -10,7 +10,7 @@ Resource                ../lib/connection_client.robot
 Resource                ../lib/openbmc_ffdc.robot
 Resource                ../lib/state_manager.robot
 
-Test Teardown           Test Bios Teardown
+Test Teardown           Test Teardown Execution
 
 Force Tags  BIOS_Code_Update
 
@@ -76,7 +76,7 @@ Validate Power On Teardown
     ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
     Run Key  ${keyword_buf}
 
-Test Bios Teardown
+Test Teardown Execution
     [Documentation]  Log FFDC if test suite fails and collect SOL log for
     ...              debugging purposes.
 

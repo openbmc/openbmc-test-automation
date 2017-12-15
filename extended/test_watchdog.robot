@@ -8,8 +8,8 @@ Resource               ../lib/resource.txt
 Resource               ../lib/boot_utils.robot
 Resource               ../lib/state_manager.robot
 
-Suite Setup            Watchdog Timer Test Setup
-Suite Teardown         Restore Watchdog Default Setting
+Suite Setup            Suite Setup Execution
+Suite Teardown         Suite Teardown Execution
 Test Teardown          FFDC On Test Case Fail
 
 *** Variables ***
@@ -93,7 +93,7 @@ Verify Watchdog URL When Host Is On And Off
 
 *** Keywords ***
 
-Watchdog Timer Test Setup
+Suite Setup Execution
     [Documentation]   Do test initialization setup.
     # Check input parameters & check if host OS is up.
 
@@ -107,7 +107,7 @@ Watchdog Timer Test Setup
     # Boot to OS.
     REST Power On
 
-Restore Watchdog Default Setting
+Suite Teardown Execution
     [Documentation]  Restore watchdog Default setting.
 
     # Boot to OS.

@@ -5,7 +5,7 @@ Documentation  Network diagnostic tool report and logs to console
 Library       OperatingSystem
 Library       ../lib/utilities.py
 Resource      ../lib/utils.robot
-Test Setup    Check If Tool Exist
+Test Setup    Test Setup Execution
 
 Force Tags  Check_Network_Latency
 
@@ -26,7 +26,7 @@ Log Network Loss
     Log To Console  \n Network packets loss: ${report['loss']} percent
     Sleep  3s
 
-Check If Tool Exist
+Test Setup Execution
     [Documentation]  Check if mtr tool exists.
 
     ${bin_path}=  Run  which mtr
