@@ -6,7 +6,7 @@ Resource  ../lib/resource.txt
 Library  OperatingSystem
 Library  String
 
-Suite Setup  Validate Setup
+Suite Setup  Suite Setup Execution
 
 Force Tags  Network_Nping
 
@@ -30,7 +30,7 @@ Verify Zero Network Packet Loss On BMC
 
 *** Keywords ***
 
-Validate Setup
+Suite Setup Execution
     [Documentation]  Validate the setup.
 
     Should Not Be Empty  ${OPENBMC_HOST}  msg=BMC IP address not provided.

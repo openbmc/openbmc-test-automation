@@ -9,8 +9,8 @@ Variables           ../data/variables.py
 Resource            ../lib/utils.robot
 Resource            ../lib/boot_utils.robot
 
-Suite Setup         eSEL Test SetUp
-Suite Teardown      Test Cleanup On Exit
+Suite Setup         Suite Setup Execution
+Suite Teardown      Suite Teardown Execution
 Test Teardown       FFDC On Test Case Fail
 Test Setup          Delete All Error Logs
 
@@ -147,7 +147,7 @@ Verify eSEL Entries
     Should Be Equal  ${entry_id}
     ...  xyz.openbmc_project.Logging.Entry.Level.Error
 
-Test Cleanup On Exit
+Suite Teardown Execution
     [Documentation]  Cleanup test logs and connection.
     Close All Connections
 
@@ -172,7 +172,7 @@ Check IPMI OEMpartialadd Reject
     ...        return_stdout=True  return_stderr=True  return_rc=True
     [Return]  ${stderr}
 
-eSEL Test SetUp
+Suite Setup Execution
     [Documentation]  Validates input parameters & check if HOST OS is up.
 
     Should Not Be Empty
