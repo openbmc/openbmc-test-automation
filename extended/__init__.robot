@@ -7,11 +7,11 @@ Resource         ../lib/rest_client.robot
 Resource         ../lib/utils.robot
 Resource         ../lib/code_update_utils.robot
 
-Suite Setup      System Driver Data
+Suite Setup      Suite Setup Execution
 
 *** Keyword ***
 
-System Driver Data
+Suite Setup Execution
     [Documentation]  System driver information.
     Open Connection And Log In
     Log BMC Driver Details

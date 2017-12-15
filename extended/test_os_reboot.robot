@@ -5,7 +5,7 @@ Resource    ../lib/boot_utils.robot
 Resource    ../extended/obmc_boot_test_resource.robot
 
 Suite Setup     Run Key  Start SOL Console Logging
-Test Teardown   Post Test Case Execution
+Test Teardown   Test Teardown Execution
 
 *** Variables ***
 
@@ -32,7 +32,7 @@ Host Reboot Loop
 
 *** Keywords ***
 
-Post Test Case Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
     # 1. Capture FFDC on test failure.
     # 2. Stop SOL logging.
