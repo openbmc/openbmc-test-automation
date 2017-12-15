@@ -9,7 +9,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Library             ../lib/utilities.py
 
 Test Setup          Open Connection And Log In
-Test Teardown       Post Test Execution
+Test Teardown       Test Teardown Execution
 
 Force Tags          Host_Network_Test
 
@@ -74,7 +74,7 @@ Set DHCP Host Address Via IPMI
 
 *** Keywords ***
 
-Post Test Execution
+Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail

@@ -7,7 +7,7 @@ Library         String
 Resource        ../lib/utils.robot
 
 # Get the SLP services available, make it suite global.
-Suite Setup     Get Service Types Output
+Suite Setup     Suite Setup Execution
 
 Force Tags  SLP_Service_Test
 
@@ -35,7 +35,7 @@ Verify Service Agents For Service Types
 
 *** Keywords ***
 
-Get Service Types Output
+Suite Setup Execution
     [Documentation]  Get SLP services.
     ${output}=  Run  which slptool
     Should Not Be Empty  ${output}

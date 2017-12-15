@@ -7,7 +7,7 @@ Resource        ../lib/connection_client.robot
 Resource        ../lib/oem/ibm/serial_console_client.robot
 Library         OperatingSystem
 
-Suite Setup      Validate Setup
+Suite Setup      Suite Setup Execution
 Suite Teardown   Close All Connections
 
 Force Tags  Factory_Reset
@@ -42,7 +42,7 @@ Revert to Initial Setup And Verify
 
 *** Keywords ***
 
-Validate Setup
+Suite Setup Execution
     [Documentation]  Validate setup.
 
     Open Connection And Log In
