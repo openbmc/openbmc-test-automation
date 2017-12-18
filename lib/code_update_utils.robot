@@ -405,7 +405,7 @@ Disable Field Mode And Verify Unmount
 
     BMC Execute Command  /sbin/fw_setenv fieldmode
     BMC Execute Command  /bin/systemctl unmask usr-local.mount
-    OBMC Reboot (off)  quiet=${1}
+    OBMC Reboot (off)  stack_mode=normal
     BMC Execute Command  [ -d "/usr/local/share" ]
 
 
