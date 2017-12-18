@@ -369,14 +369,16 @@ Get Power State
     ${content}=  to json  ${resp.content}
     [Return]  ${content["data"]}
 
-Clear BMC Record Log
-    [Documentation]  Clears all the event logs on the BMC. This would be
-    ...              equivalent to ipmitool sel clear.
-    @{arglist}=   Create List
-    ${args}=     Create Dictionary    data=@{arglist}
+
+Clear BMC Gard Record
+    [Documentation]  Clear gard records from the system.
+
+    @{arglist}=  Create List
+    ${args}=  Create Dictionary  data=@{arglist}
     ${resp}=  Call Method
-    ...  ${OPENBMC_BASE_URI}records/events/  clear  data=${args}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+    ...  ${OPENPOWER_CONTROL}gard  Reset  data=${args}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
 
 Copy PNOR to BMC
     Import Library      SCPLibrary      WITH NAME       scp
