@@ -73,6 +73,9 @@ ${DELETE_OLD_GUARD_FILE}    false
 # the machine already has that version on it, the update should be skipped.
 ${LAST_KNOWN_GOOD_VERSION}  ${EMPTY}
 
+# By default field mode is disabled.
+${FIELD_MODE}               ${False}
+
 *** Keywords ***
 Get Inventory Schema
     [Arguments]    ${machine}
