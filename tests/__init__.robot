@@ -27,6 +27,7 @@ System Driver Data
     Set BMC Power Policy  ${ALWAYS_POWER_OFF}
     Run Keyword If  ${FIELD_MODE} == ${True}
     ...  Enable Field Mode And Verify Unmount
+    Run Keyword And Ignore Error  Clear BMC Gard Record
 
 Set Boot Defaults
     Set Control Boot Mode  ${CONTROL_HOST_URI}/boot  ${BOOT_MODE_REGULAR}
