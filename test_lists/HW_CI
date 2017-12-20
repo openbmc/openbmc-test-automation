@@ -1,6 +1,8 @@
-#REST SSL connection test
+#REST SSL connection test.
 -i Test_SSL_Connection
 #Basic poweron test
 -i Power_On_Test
-# Check for apps failures
+#Check for apps failures.
 -i Check_For_Application_Failures
+#OCC active state check.
+-i Verify_OCC_State_When_Host_Is_Booted

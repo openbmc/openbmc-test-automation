@@ -38,9 +38,9 @@ Verify OCC Object Count
     Should Be Equal  ${occ_count}  ${inventory_count}
     ...  msg=OCC and inventory entry counts are mismatched.
 
-Verify When Host Is Booted
+Verify OCC State When Host Is Booted
     [Documentation]  Verify OCC state when host is booted.
-    [Tags]  Verify_When_Host_Is_Booted
+    [Tags]  Verify_OCC_State_When_Host_Is_Booted
 
     Verify OCC State  ${1}
 
@@ -117,4 +117,5 @@ Verify OCC State
     \  Continue For Loop If  ${is_functional} == ${0}
     \  ${num}=  Set Variable  ${endpoint_path[-1]}
     \  ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
-    \  Should Be Equal  ${occ_active}  ${expected_occ_active}  msg=OCC not in right state
+    \  Should Be Equal  ${occ_active}  ${expected_occ_active}
+    ...  msg=OCC not in right state
