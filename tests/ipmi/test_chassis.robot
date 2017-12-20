@@ -12,9 +12,6 @@ Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
 Test Teardown          Test Exit Logs
 
-*** Variables ***
-${HOST_SETTING}  ${SETTINGS_URI}host0
-
 *** Test Cases ***
 
 IPMI Chassis Status On
@@ -39,10 +36,10 @@ IPMI Chassis Status Off
 
 IPMI Chassis Restore Power Policy
      [Documentation]  Verfy IPMI chassis restore power policy.
-
      [Tags]  IPMI_Chassis_Restore_Power_Policy
 
-     ${initial_power_policy}=  Read Attribute  ${HOST_SETTING}  power_policy
+     ${initial_power_policy}=  Read Attribute
+     ...  ${CONTROL_HOST_URI}/power_restore_policy  PowerRestorePolicy
 
      Set BMC Power Policy  ${ALWAYS_POWER_ON}
      ${resp}=  Run IPMI Standard Command  chassis status
@@ -63,7 +60,8 @@ IPMI Chassis Restore Power Policy
      Should Contain  ${power_status}    always-off
 
      Set BMC Power Policy  ${initial_power_policy}
-     ${power_policy}=  Read Attribute  ${HOST_SETTING}  power_policy
+     ${power_policy}=  Read Attribute
+     ...  ${CONTROL_HOST_URI}/power_restore_policy  PowerRestorePolicy
      Should Be Equal  ${power_policy}  ${initial_power_policy}
 
 Verify Host PowerOn Via IPMI
