@@ -26,7 +26,7 @@ parser = argparse.ArgumentParser(
     description="%(prog)s will get the system serial number from an OBMC" +
                 " machine and print it to stdout as follows:\n\n" +
                 "mch_ser_num:<ser num>",
-    formatter_class=argparse.RawTextHelpFormatter,
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     prefix_chars='-+')
 
 parser.add_argument(

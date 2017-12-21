@@ -20,7 +20,7 @@ sys.path.insert(0, save_path_0)
 parser = argparse.ArgumentParser(
     usage='%(prog)s [OPTIONS]',
     description="%(prog)s will...",
-    formatter_class=argparse.RawTextHelpFormatter,
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     prefix_chars='-+')
 
 parser.add_argument(

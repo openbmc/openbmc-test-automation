@@ -30,7 +30,7 @@ parser = argparse.ArgumentParser(
     description="%(prog)s will validate the plug-in packages passed to it." +
                 "  It will also print a list of the absolute plug-in" +
                 " directory paths for use by the calling program.",
-    formatter_class=argparse.RawTextHelpFormatter,
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     prefix_chars='-+')
 
 # Create arguments.
