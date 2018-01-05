@@ -1458,27 +1458,27 @@ def create_print_wrapper_funcs(func_names,
 # Templates for the various print wrapper functions.
 print_func_template = \
     [
-        "    gp_print(<mod_qualifer>replace_passwords(<call_line>), stream" +
-        "='<output_stream>')"
+        "    <mod_qualifier>gp_print(<mod_qualifier>replace_passwords(" +
+        "<call_line>), stream='<output_stream>')"
     ]
 
 qprint_func_template = \
     [
-        "    if int(<mod_qualifer>get_var_value(None, 0, \"quiet\")): return"
+        "    if int(<mod_qualifier>get_var_value(None, 0, \"quiet\")): return"
     ] + print_func_template
 
 dprint_func_template = \
     [
-        "    if not int(<mod_qualifer>get_var_value(None, 0, \"debug\")):" +
+        "    if not int(<mod_qualifier>get_var_value(None, 0, \"debug\")):" +
         " return"
     ] + print_func_template
 
 lprint_func_template = \
     [
-        "    gp_log(<mod_qualifer>replace_passwords(<call_line>))"
+        "    gp_log(<mod_qualifier>replace_passwords(<call_line>))"
     ]
 
-replace_dict = {'output_stream': 'stdout', 'mod_qualifer': ''}
+replace_dict = {'output_stream': 'stdout', 'mod_qualifier': ''}
 
 
 gp_debug_print("robot_env: " + str(robot_env))

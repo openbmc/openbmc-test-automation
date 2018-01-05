@@ -287,7 +287,7 @@ func_names = ['print_plug_vars']
 stderr_func_names = []
 
 replace_dict = dict(gp.replace_dict)
-replace_dict['mod_qualifer'] = 'gp.'
+replace_dict['mod_qualifier'] = 'gp.'
 func_defs = gp.create_print_wrapper_funcs(func_names, stderr_func_names,
                                           replace_dict)
 gp.gp_debug_print(func_defs)
