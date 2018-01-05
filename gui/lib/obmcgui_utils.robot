@@ -64,16 +64,19 @@ GUI Power On
     Model Server Power Click  ${header_wrapper}  ${header_wrapper_elt}
     Page Should Contain  Attempts to power on the server
     Controller Server Power Click  power__power-on
+    Page Should Contain  Running
 
 OpenBMC GUI Login
     [Documentation]  Log into OpenBMC GUI.
 
+    Register Keyword To Run On Failure  Reload Page
     Log  ${obmc_BMC_URL}
     Open Browser With URL  ${obmc_BMC_URL}  gc
     Page Should Contain Button  login__submit
     Wait Until Page Contains Element  ${obmc_uname}
+    Input Text  ${obmc_bmc_ip}  ${OPENBMC_HOST}
     Input Text  ${obmc_uname}  ${obmc_user_name}
     Input Password  password  ${obmc_password}
     Click Element  login__submit
-    Page Should Contain  System Overview
+    Page Should Contain  Server information
 
