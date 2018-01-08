@@ -342,6 +342,39 @@ Verify Error Logs Capping
     Run Keyword If  ${count} > 100
     ...  Fail  Error logs created exceeded max capacity 100.
 
+Test Error Log Rotation
+    [Documentation]  Verify creation of 201 error log is replaced by entry id 1.
+    [Tags]  Test_Error_Log_Rotation
+
+    Delete Error Logs And Verify
+
+    # Restart service.
+    Execute Command On BMC
+    ...  systemctl restart xyz.openbmc_project.Logging.service
+    Sleep  10s  reason=Wait for logging service to restart properly.
+
+    # Create 200 error logs.
+    ${cmd}=  Set Variable
+    ...  for i in {1..200}; do /tmp/tarball/bin/logging-test -c AutoTestSimple;done
+    Execute Command On BMC  ${cmd}
+
+    # Check the response for 200th error log.
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${200}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    # Check if error log with id 1 exists.
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    # Create Error log and verify the entry id is 201 and not 1.
+    Create Test Error Log
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${201}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    # Error log 1 is not present
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
 *** Keywords ***
 
 Get IPMI SEL Setting
