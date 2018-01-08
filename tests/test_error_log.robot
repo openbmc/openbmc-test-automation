@@ -9,7 +9,7 @@ Resource            ../lib/ipmi_client.robot
 Resource            ../lib/boot_utils.robot
 
 Test Setup          Test Setup Execution
-Test Teardown       Post Test Case Execution
+Test Teardown       Test Teardown Execution
 Suite Teardown      Delete Error Logs And Verify
 
 *** Variables ***
@@ -335,12 +335,12 @@ Verify Error Logs Capping
     [Tags]  Verify_Error_Logs_Capping
 
     Delete Error Logs And Verify
-    ${cmd}=  Set Variable
-    ...  for i in {1..101}; do /tmp/tarball/bin/logging-test -c AutoTestSimple;done
+    ${cmd}=  Catenate  for i in {1..201}; do /tmp/tarball/bin/logging-test -c
+    ...  AutoTestSimple; done
     Execute Command On BMC  ${cmd}
     ${count}=  Count Error Entries
-    Run Keyword If  ${count} > 100
-    ...  Fail  Error logs created exceeded max capacity 100.
+    Run Keyword If  ${count} > 200
+    ...  Fail  Error logs created exceeded max capacity 200.
 
 *** Keywords ***
 
@@ -461,7 +461,7 @@ Install Tarball
     Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
 
 
-Post Test Case Execution
+Test Teardown Execution
    [Documentation]  Do the post test teardown.
    # 1. Capture FFDC on test failure.
    # 2. Delete error logs.
