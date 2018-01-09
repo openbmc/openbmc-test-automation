@@ -1,16 +1,16 @@
 inventory_dict = {
-    "core":[
+    "core": [
         "PrettyName",
         "Present",
         "Functional"
     ],
-    "fan":[
+    "fan": [
         "PrettyName",
         "Present",
         "MeetsMinimumShipLevel",
         "Functional"
     ],
-    "fru":[
+    "fru": [
         "PrettyName",
         "Present",
         "PartNumber",
@@ -23,7 +23,7 @@ inventory_dict = {
         "Cached",
         "Functional"
     ],
-    "gpu":[
+    "gpu": [
         "PrettyName",
         "Present",
         "Functional"
