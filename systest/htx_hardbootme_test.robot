@@ -12,8 +12,9 @@ Documentation  Stress the system using HTX exerciser.
 # HTX_INTERVAL        The time delay between consecutive checks of HTX
 #                     status, for example, 15m.
 #                     In summary: Run HTX for $HTX_DURATION, looping
-#                     $HTX_LOOP times checking for errors every $HTX_INTERVAL.
-#                     Then allow extra time for OS Boot, HTX startup, shutdown.
+#                     $HTX_LOOP times checking for errors every
+#                     $HTX_INTERVAL.  Then allow extra time for OS
+#                     Boot, HTX startup, shutdown.
 # HTX_KEEP_RUNNING    If set to 1, this indicates that the HTX is to
 #                     continue running after an error was found.
 # CHECK_INVENTORY     If set to 0 or False, OS inventory checking before
@@ -115,7 +116,7 @@ Run HTX Exerciser
     Rprintn
     Rpvars  loop_count  estimated_loop_time   estimated_time_remaining
 
-    Boot To OS
+    REST Power On  stack_mode=skip
 
     # Post Power off and on, the OS SSH session needs to be established.
     Login To OS
@@ -206,6 +207,19 @@ Loop HTX Health Check
     Repeat Keyword  ${HTX_DURATION}
     ...  Run Keywords  Check HTX Run Status
     ...  AND  Sleep  ${HTX_INTERVAL}
+
+
+Test Setup Execution
+    [Documentation]  Do the initial test setup.
+
+    REST Power On  stack_mode=skip
+    Delete All Error Logs
+    Tool Exist  htxcmdline
+
+    # Shutdown if HTX is running.
+    ${status}=  Run Keyword And Return Status  Is HTX Running
+    Run Keyword If  '${status}' == 'True'
+    ...  Shutdown HTX Exerciser
 
 
 Test Teardown Execution
