@@ -170,7 +170,7 @@ Check For Errors On OS Dmesg Log
 
     ${dmesg_log}=  Execute Command On OS  dmesg | egrep '${ERROR_REGEX}'
     # To enable multiple string check.
-    Should Not Contain Any  ${dmesg_log}  ${ERROR_DBE_MSG}
+    Should Not Contain  ${dmesg_log}  ${ERROR_DBE_MSG}
 
 
 Collect NVIDIA Log File
@@ -180,8 +180,6 @@ Collect NVIDIA Log File
     # suffix     String name to append.
 
     # Collects the output of ndivia-smi cmd output.
-    # TODO: GPU current temperature threshold check.
-    #       openbmc/openbmc-test-automation#637
     # +-----------------------------------------------------------------------------+
     # | NVIDIA-SMI 361.89                 Driver Version: 361.89                    |
     # |-------------------------------+----------------------+----------------------+
@@ -214,26 +212,131 @@ Collect NVIDIA Log File
     Create Directory  ${htx_log_dir_path}
     ${cur_datetime}=  Get Current Date  result_format=%Y%m%d%H%M%S%f
 
-    ${nvidia_out}=  Execute Command On BMC  nvidia-smi
+    ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  nvidia-smi
     Write Log Data To File
     ...  ${nvidia_out}
     ...  ${htx_log_dir_path}/${OS_HOST}_${cur_datetime}.nvidia_${suffix}
 
 
-Test Setup Execution
-    [Documentation]  Do the initial test setup.
-    # 1. Check if HTX tool exist.
-    # 2. Power on
+Get GPU Power Limit
+    [Documentation]  Get NVIDIA GPU maximum permitted power draw.
 
-    Boot To OS
-    Delete All Error Logs
-    Tool Exist  htxcmdline
-    Tool Exist  lshw
+    # nvidia-smi --query-gpu=power.limit --format=csv returns
+    # power.limit [W]
+    # 300.00 W
+    # 300.00 W
+    # 300.00 W
+    # 300.00 W
 
-    # Shutdown if HTX is running.
-    ${status}=  Run Keyword And Return Status  Is HTX Running
-    Run Keyword If  '${status}' == 'True'
-    ...  Shutdown HTX Exerciser
+    ${cmd}=  Catenate  nvidia-smi --query-gpu=power.limit
+    ...  --format=csv | cut -f 1 -d ' ' | sort -n -u | tail -n 1
+    ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    # Allow for sensor overshoot.  That is, max power reported for
+    # a GPU could be a few watts above the limit.
+    ${power_max}=  Evaluate  ${nvidia_out}+${7.00}
+    [Return]  ${power_max}
+
+
+Get GPU Power
+    [Documentation]  Get the GPU power dissipation.
+
+    # nvidia-smi --query-gpu=power.draw --format=csv returns
+    # power.draw [W]
+    # 34.12 W
+    # 34.40 W
+    # 36.55 W
+    # 36.05 W
+
+    ${cmd}=  Catenate  nvidia-smi --query-gpu=power.draw
+    ...  --format=csv | cut -f 1 -d ' ' | sort -n -u | tail -n 1
+    ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${nvidia_out}
+
+
+Get GPU Temperature Limit
+    [Documentation]  Get NVIDIA GPU maximum permitted temperature.
+
+    # nvidia-smi -q -d TEMPERATURE  | grep "GPU Max" returns
+    #    GPU Max Operating Temp      : 83 C
+    #    GPU Max Operating Temp      : 83 C
+    #    GPU Max Operating Temp      : 83 C
+    #    GPU Max Operating Temp      : 83 C
+
+    ${cmd}=  Catenate  nvidia-smi -q -d TEMPERATURE  | grep "GPU Max"
+    ...  | cut -f 2 -d ":" |  tr -dc '0-9\n' | sort -n -u | tail -n 1
+    ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${nvidia_out}
+
+
+Get GPU Temperature
+    [Documentation]  Get the GPU temperature.
+
+    # nvidia-smi --query-gpu=temperature.gpu --format=csv returns
+    # 38
+    # 41
+    # 38
+    # 40
+
+    ${cmd}=  Catenate  nvidia-smi --query-gpu=temperature.gpu
+    ...  --format=csv | sort -n -u | tail -n 1
+    ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${nvidia_out}
+
+
+Get GPU Clock Limit
+    [Documentation]  Get NVIDIA GPU maximum permitted graphics clock.
+
+    # nvidia-smi --query-gpu=clocks.max.gr --format=csv  returns
+    # 1530 MHz
+    # 1530 MHz
+    # 1530 MHz
+    # 1530 MHz
+
+    ${cmd}=  Catenate  nvidia-smi --query-gpu=clocks.max.gr
+    ...  --format=csv | cut -f 1 -d ' ' |  sort -n -u | tail -n 1
+    ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${nvidia_out}
+
+
+Get GPU Clock
+    [Documentation]  Get the highest assigned value of the GPU graphics clock.
+
+    # nvidia-smi --query-gpu=clocks.gr --format=csv  returns
+    # 1230 MHz
+    # 1230 MHz
+    # 135 MHz
+    # 150 MHz
+
+    ${cmd}=  Catenate  nvidia-smi --query-gpu=clocks.gr
+    ...  --format=csv | cut -f 1 -d ' ' | sort -n -u | tail -n 1
+    ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${nvidia_out}
+
+
+Count GPUs From BMC
+    [Documentation]  Determine number of GPUs from the BMC.  Hostboot
+    ...  needs to have been run previously because the BMC gets GPU data
+    ...  from Hostboot.
+
+    # Example of gv* endpoint data:
+    # "/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card0": {
+    #     "Functional": 1,
+    #     "Present": 1,
+    #     "PrettyName": ""
+    # },
+
+    ${num_bmc_gpus}=  Set Variable  ${0}
+
+    ${gpu_list}=  Get Endpoint Paths
+    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  gv*
+
+    :FOR  ${gpu_uri}  IN  @{gpu_list}
+    \  ${present}=  Read Attribute  ${gpu_uri}  Present
+    \  ${state}=  Read Attribute  ${gpu_uri}  Functional
+    \  Rpvars  gpu_uri  present  state
+    \  ${num_bmc_gpus}=  Run Keyword If  ${present} and ${state}
+    ...  Evaluate  ${num_bmc_gpus}+${1}
+    [Return]  ${num_bmc_gpus}
 
 
 Create Default MDT Profile

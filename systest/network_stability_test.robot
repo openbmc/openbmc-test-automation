@@ -35,7 +35,7 @@ Execute Network Test
     #              - Check HTX status for errors
     #              - Shutdown HTX if no error when timer expires
 
-    Boot To OS
+    REST Power On  stack_mode=skip
 
     # Post Power off and on, the OS SSH session needs to be established.
     Login To OS
@@ -72,6 +72,19 @@ BMC Network Payload
 
     # Upload 32 MB data via REST to BMC.
     REST Upload File To BMC
+
+
+Test Setup Execution
+    [Documentation]  Do the initial test setup.
+
+    REST Power On  stack_mode=skip
+    Delete All Error Logs
+    Tool Exist  htxcmdline
+
+    # Shutdown if HTX is running.
+    ${status}=  Run Keyword And Return Status  Is HTX Running
+    Run Keyword If  '${status}' == 'True'
+    ...  Shutdown HTX Exerciser
 
 
 Test Teardown Execution
