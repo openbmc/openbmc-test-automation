@@ -6,7 +6,7 @@ Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/resource.txt
 Resource          ../lib/boot_utils.robot
 
-Suite Setup      Setup The Suite
+Suite Setup      Suite Setup Execution
 Test Teardown    Post Test Case Execution
 
 *** Variables ***
@@ -37,7 +37,7 @@ Enumerate Sensors And Check For Errors
     Error Logs Should Not Exist
 
 
-Setup The Suite
+Suite Setup Execution
     [Documentation]  Do test setup initialization.
 
     Should Not Be Empty

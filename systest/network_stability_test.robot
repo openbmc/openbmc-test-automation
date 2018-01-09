@@ -74,6 +74,21 @@ BMC Network Payload
     REST Upload File To BMC
 
 
+Test Setup Execution
+    [Documentation]  Do the initial test setup.
+    # 1. Check if HTX tool exist.
+    # 2. Power on
+
+    Boot To OS
+    Delete All Error Logs
+    Tool Exist  htxcmdline
+
+    # Shutdown if HTX is running.
+    ${status}=  Run Keyword And Return Status  Is HTX Running
+    Run Keyword If  '${status}' == 'True'
+    ...  Shutdown HTX Exerciser
+
+
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
     # 1. Shut down HTX exerciser if test Failed.
