@@ -29,28 +29,24 @@ repo_subdir_path = '/phosphor-dbus-interfaces/xyz/openbmc_project/'
 base_dir_path = os.getcwd() + repo_subdir_path
 
 # yaml file paths for FRU
-yaml_fru_list = [ 'Inventory/Item.interface.yaml',
-                  'Inventory/Decorator/Asset.interface.yaml',
-                  'Inventory/Decorator/Revision.interface.yaml',
-                  'Inventory/Decorator/Replaceable.interface.yaml',
-                  'Inventory/Decorator/Cacheable.interface.yaml',
-                  'State/Decorator/OperationalStatus.interface.yaml',
-                 ]
+yaml_fru_list = ['Inventory/Item.interface.yaml',
+                 'Inventory/Decorator/Asset.interface.yaml',
+                 'Inventory/Decorator/Revision.interface.yaml',
+                 'Inventory/Decorator/Replaceable.interface.yaml',
+                 'Inventory/Decorator/Cacheable.interface.yaml',
+                 'State/Decorator/OperationalStatus.interface.yaml', ]
 
-# yaml file paths for CORE
-yaml_core_list = [ 'Inventory/Item.interface.yaml',
-                   'State/Decorator/OperationalStatus.interface.yaml',
-                 ]
+# yaml file paths for CORE.
+
+yaml_core_list = ['Inventory/Item.interface.yaml',
+                  'State/Decorator/OperationalStatus.interface.yaml', ]
 
 # yaml file paths for fan.
-yaml_fan_list = [ 'Inventory/Item.interface.yaml',
-                  'Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml',
-                  'State/Decorator/OperationalStatus.interface.yaml',
-                ]
+yaml_fan_list = ['Inventory/Item.interface.yaml',
+                 'State/Decorator/OperationalStatus.interface.yaml', ]
 # yaml file paths for GPU.
-yaml_gpu_list = [ 'Inventory/Item.interface.yaml',
-                   'State/Decorator/OperationalStatus.interface.yaml',
-                ]
+yaml_gpu_list = ['Inventory/Item.interface.yaml',
+                 'State/Decorator/OperationalStatus.interface.yaml', ]
 # Append to master list
 yaml_master_list.append(yaml_fru_list)
 yaml_master_list.append(yaml_core_list)
