@@ -16,6 +16,7 @@ robot_env = gp.robot_env
 
 if robot_env:
     import gen_robot_print as grp
+    from robot.libraries.BuiltIn import BuiltIn
 
 
 def cmd_fnc(cmd_buf,
@@ -24,7 +25,8 @@ def cmd_fnc(cmd_buf,
             debug=0,
             print_output=1,
             show_err=1,
-            return_stderr=0):
+            return_stderr=0,
+            ignore_err=1):
 
     r"""
     Run the given command in a shell and return the shell return code and the
@@ -108,15 +110,22 @@ def cmd_fnc(cmd_buf,
         sys.stdout.flush()
     sub_proc.communicate()
     shell_rc = sub_proc.returncode
-    if shell_rc != 0 and show_err:
-        err_msg = "The prior command failed.\n" + gp.sprint_var(shell_rc, 1)
+    if shell_rc != 0:
+        err_msg = "The prior shell command failed.\n"
+        err_msg += gp.sprint_var(shell_rc, 1)
         if not print_output:
             err_msg += "out_buf:\n" + out_buf
 
-        if robot_env:
-            grp.rprint_error_report(err_msg)
-        else:
-            gp.print_error_report(err_msg)
+        if show_err:
+            if robot_env:
+                grp.rprint_error_report(err_msg)
+            else:
+                gp.print_error_report(err_msg)
+        if not ignore_err:
+            if robot_env:
+                BuiltIn().fail(err_msg)
+            else:
+                throw(err_msg)
 
     if return_stderr:
         return shell_rc, out_buf, err_buf
@@ -129,7 +138,8 @@ def cmd_fnc_u(cmd_buf,
               debug=None,
               print_output=1,
               show_err=1,
-              return_stderr=0):
+              return_stderr=0,
+              ignore_err=1):
 
     r"""
     Call cmd_fnc with test_mode=0.  See cmd_fnc (above) for details.
@@ -139,7 +149,7 @@ def cmd_fnc_u(cmd_buf,
 
     return cmd_fnc(cmd_buf, test_mode=0, quiet=quiet, debug=debug,
                    print_output=print_output, show_err=show_err,
-                   return_stderr=return_stderr)
+                   return_stderr=return_stderr, ignore_err=ignore_err)
 
 
 def parse_command_string(command_string):
