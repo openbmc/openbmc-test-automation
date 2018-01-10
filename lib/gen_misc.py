@@ -315,7 +315,8 @@ def quote_bash_parm(parm):
     return parm
 
 
-def get_host_name_ip(host):
+def get_host_name_ip(host,
+                     short=0):
 
     r"""
     Get the host name and the IP address for the given host and return them as
@@ -323,6 +324,8 @@ def get_host_name_ip(host):
 
     Description of argument(s):
     host                            The host name or IP address to be obtained.
+    short                           Include the short host in the returned
+                                    tuple, i.e. return host, ip and short_host.
     """
 
     host_host_name = socket.getfqdn(host)
@@ -334,7 +337,11 @@ def get_host_name_ip(host):
         gp.print_error_report(message)
         raise my_gaierror
 
-    return host_host_name, host_ip
+    if short:
+        host_short_name = host_host_name.split(".")[0]
+        return host_host_name, host_ip, host_short_name
+    else:
+        return host_host_name, host_ip
 
 
 def pid_active(pid):
