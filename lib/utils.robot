@@ -223,17 +223,21 @@ Initiate Power Off
 Initiate OS Host Power Off
     [Documentation]  Initiate an OS reboot.
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
-    ...          ${os_password}=${OS_PASSWORD}
+    ...          ${os_password}=${OS_PASSWORD}  ${hard}=${0}
 
-    # Description of arguments:
+    # Description of argument(s):
     # os_host      The DNS name or IP of the OS.
     # os_username  The username to be used to sign in to the OS.
     # os_password  The password to be used to sign in to the OS.
+    # hard         Indicates whether to do a hard vs. soft power off.
+
+    ${time_string}=  Run Keyword If  ${hard}  Set Variable  ${SPACE}now
+    ...  ELSE  Set Variable  ${EMPTY}
 
     ${cmd_buf}=  Run Keyword If  '${os_username}' == 'root'
-    ...      Set Variable  shutdown
+    ...      Set Variable  shutdown${time_string}
     ...  ELSE
-    ...      Set Variable  echo ${os_password} | sudo -S shutdown
+    ...      Set Variable  echo ${os_password} | sudo -S shutdown${time_string}
 
     ${output}  ${stderr}  ${rc}=  OS Execute Command
     ...  ${cmd_buf}  fork=${1}
