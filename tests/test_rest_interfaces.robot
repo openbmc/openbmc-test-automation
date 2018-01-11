@@ -341,8 +341,44 @@ Delete Response Code
     [Tags]  Delete_Response_Codes
     [Template]  Execute Delete And Check Response
 
+Verify Enumerated REST Uri
+    [Documentation]  This method navigates and verifies complete child list of a provided  
+    ...              uri string. For the testcase to pass, navigation must be successful for
+    ...              all of the child uri(s).
+    [Tags]           Get_REST_URI_Status
+ 
+    @{list}=     Get Uri Results      ${URI}
+    Should Be Empty     ${list}
 
 *** Keywords ***
+
+Get Uri Results
+    [Documentation]  This keyword enumerates/lists the uri string sent with the argument
+    ...              ${uri_string}, attempts to get each enumerated uri. It then consructs a list
+    ...              of enumerated uri string(s) and corresponding error code for the uri(s)  for
+    ...              unsuccessful  get operation. The list is returned to the caller. 
+    ...              Sample contents of the returned list:
+    ...              u'/xyz/openbmc_project/control' : 402,
+    ...              u'/xyz/openbmc_project/control/' : 404,
+    ...              u'/xyz/openbmc_project/inventory/system/chassis/motherboard/dimm14' : 403,
+    ...              u'/xyz/openbmc_project/inventory/system/chassis/motherboard/dimm14/': 404, 
+    [Arguments]      ${uri_string}
+
+    ${resp}=    Openbmc Get Request  ${uri_string}   quiet=${1}
+    ${token}=   Collections.Get From Dictionary    ${resp.json()}    data
+    ${MyList}=  Create List
+    ${dict}=    Create Dictionary
+    ${dict2}=   create dictionary
+    :FOR    ${ELEMENT}    IN    @{token}
+    \     ${resp}=   Openbmc Get Request  ${ELEMENT}  quiet=${1}
+    \     ${resp2}=  Openbmc Get Request  ${ELEMENT}/  quiet=${1}
+    \     Set To Dictionary    ${dict}       ${ELEMENT}=${resp.status_code}
+    \     Set To Dictionary    ${dict2}       ${ELEMENT}/=${resp2.status_code}
+    \     Run keyword if     '${resp.status_code}' != '${HTTP_OK}'
+    \     ...    Append To List       ${MyList}     ${dict}
+    \     Run keyword if     '${resp2.status_code}' != '${HTTP_OK}'
+    \     ...    Append To List       ${MyList}     ${dict2}
+    [Return]      ${MyList}
 
 Execute Get And Check Response
     [Documentation]  Request "Get" url path and expect REST response code.
