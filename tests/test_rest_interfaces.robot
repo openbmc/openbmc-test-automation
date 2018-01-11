@@ -342,7 +342,31 @@ Delete Response Code
     [Template]  Execute Delete And Check Response
 
 
+Verify All REST Objects Are Accessible
+    [Documentation]  Verify all the REST objects are accessible using "GET".
+    [Tags]           Verify_All_REST_Objects_Are_Accessible
+
+    ${uri_list}=  Get Sub URI List  ${OPENBMC_BASE_URI}
+    ${error_uri_list}=  Create List
+    :FOR  ${ELEMENT}  IN  @{uri_list}
+    \  ${resp}=  Openbmc Get Request  ${ELEMENT}  quiet=${1}
+    \  ${resp2}=  Openbmc Get Request  ${ELEMENT}/  quiet=${1}
+    \  Run keyword if  '${resp.status_code}' != '${HTTP_OK}'
+    \  ...  Append To List  ${error_uri_list}   ${ELEMENT} : ${resp.status_code}
+    \  Run keyword if  '${resp2.status_code}' != '${HTTP_OK}'
+    \  ...  Append To List  ${error_uri_list}  ${ELEMENT}/ : ${resp2.status_code}
+    Should Be Empty  ${error_uri_list}
+
 *** Keywords ***
+
+Get Sub URI List
+    [Documentation]  Returns list of sub URI(s) inside the URI sent by caller.
+    [Arguments]      ${uri_string}
+    # Description of argument(s):
+    # The uri_string Object path passed by the caller.
+    ${resp}=  Openbmc Get Request  ${uri_string}list  quiet=${1}
+    ${sub_uris}=  Collections.Get From Dictionary  ${resp.json()}  data
+    [Return]  ${sub_uris}
 
 Execute Get And Check Response
     [Documentation]  Request "Get" url path and expect REST response code.
