@@ -342,7 +342,35 @@ Delete Response Code
     [Template]  Execute Delete And Check Response
 
 
+Verify REST Objects Are Accessible
+    [Documentation]  Verify all the REST objects are accessible using "GET".
+    [Tags]           Verify_REST_Objects_Are_Accessible
+
+    @{error_list}=  Get URI Error List  ${OPENBMC_BASE_URI}
+    Should Be Empty  ${error_list}
+
 *** Keywords ***
+
+Get URI Error List
+    [Documentation]  Returns list of error URI(s), resp. codes for not HTTP_OK.
+    [Arguments]      ${uri_string}
+    # Description of argument(s):
+    # The uri_string Object path passed by the caller.
+    # Sample content of the returned list(with only two entries):
+    # u'/xyz/openbmc_project/control' : 402'
+    # u'/xyz/openbmc_project/control/' : 404'
+
+    ${resp}=  Openbmc Get Request  ${uri_string}list  quiet=${1}
+    ${uri_paths}=  Collections.Get From Dictionary  ${resp.json()}  data
+    ${error_uri_list}=  Create List
+    :FOR  ${ELEMENT}  IN  @{uri_paths}
+    \  ${resp}=   Openbmc Get Request  ${ELEMENT}  quiet=${1}
+    \  ${resp2}=  Openbmc Get Request  ${ELEMENT}/  quiet=${1}
+    \  Run keyword if  '${resp.status_code}' != '${HTTP_OK}'
+    \  ...  Append To List  ${error_uri_list}   ${ELEMENT} : ${resp.status_code}
+    \  Run keyword if  '${resp2.status_code}' != '${HTTP_OK}'
+    \  ...  Append To List  ${error_uri_list}   ${ELEMENT}/ : ${resp2.status_code}
+    [Return]  ${error_uri_list}
 
 Execute Get And Check Response
     [Documentation]  Request "Get" url path and expect REST response code.
