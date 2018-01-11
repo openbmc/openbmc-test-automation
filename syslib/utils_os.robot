@@ -28,8 +28,6 @@ ${ERROR_DBE_MSG}       (DBE) has been detected on GPU
 ${json_tmp_file_path}  ${EXECDIR}/inventory_temp_file.json
 ${yaml_file_path}      ${EXECDIR}/inventory_temp_file.yaml
 
-
-
 *** Keywords ***
 
 Execute Command On OS
@@ -77,6 +75,35 @@ Boot To OS
 Power Off Host
     [Documentation]  Power off host.
     Run Key  OBMC Boot Test \ REST Power Off
+
+
+Shutdown Host From OS
+    [Documentation]  Initiate host shutdown from OS.
+    [Arguments]  ${os_request}=soft
+
+    # Description of argument(s):
+    # os_request   OS shutdown request (soft or hard).
+    #              Default soft power-off command "shutdown -h".
+    #              Hard power-off command "shutdown -h now".
+
+    # Soft shutdown ("shutdown -h") broadcast message output:
+    # Shutdown scheduled for Wed 2018-01-10 23:10:53 CST, use 'shutdown -c' to cancel.
+    # Broadcast message from root@wsxxx (Wed 2018-01-10 23:09:53 CST):
+    # The system is going down for power-off at Wed 2018-01-10 23:10:53 CST!
+
+    ${cmd_buf}=  Run Keyword If  '${os_request}' == 'hard'
+    ...      Set Variable  shutdown -h now
+    ...  ELSE
+    ...      Set Variable  shutdown -h
+
+    Login To OS
+    ${stdout}  ${stderr}=  Execute Command  ${cmd_buf}  return_stderr=True
+
+    Run Keyword If  '${os_request}' == 'soft'
+    ...  Should Contain  ${stderr}  Shutdown scheduled
+    ...  msg=Host OS soft shutdown failed.
+
+    Wait For PowerOff
 
 
 File Exist On OS
