@@ -2,6 +2,7 @@
 Documentation      Keywords for system test.
 
 Library            ../lib/gen_robot_keyword.py
+Resource           ../lib/boot_utils.robot
 Resource           ../extended/obmc_boot_test_resource.robot
 Resource           ../lib/utils.robot
 Resource           ../lib/state_manager.robot
