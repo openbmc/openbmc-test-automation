@@ -19,7 +19,6 @@ Documentation    Stress the system GPUs using the HTX exerciser.
 
 
 Resource         ../syslib/utils_os.robot
-Resource         ../lib/boot_utils.robot
 
 Suite Setup      Run Keyword  Start SOL Console Logging
 Test Setup       Test Setup Execution

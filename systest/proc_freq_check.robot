@@ -9,7 +9,6 @@ Documentation  Compare processor speed in turbo and non-turbo modes.
 # OS_PASSWORD    The password for the OS login.
 
 Resource        ../syslib/utils_os.robot
-Resource        ../lib/boot_utils.robot
 Library         ../syslib/utils_keywords.py
 Variables       ../data/variables.py
 Library         ../lib/bmc_ssh_utils.py
