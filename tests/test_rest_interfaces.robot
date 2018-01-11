@@ -341,8 +341,29 @@ Delete Response Code
     [Tags]  Delete_Response_Codes
     [Template]  Execute Delete And Check Response
 
+Get REST URI Status
+    @{list}=     Get Uri Results      ${URI}
 
 *** Keywords ***
+
+Get Uri Results
+    [Arguments]         ${UriString}
+    ${resp}=  Openbmc Get Request  ${UriString}   quiet=${1}
+    ${token}=  Collections.Get From Dictionary    ${resp.json()}    data
+    ${MyList}=  Create List
+    ${MyList}=  Create List
+    ${dict}=  Create Dictionary
+    :FOR    ${ELEMENT}    IN    @{token}
+    \     ${resp}=  Openbmc Get Request  ${ELEMENT}  quiet=${1}
+    \     Set To Dictionary    ${dict}       ${ELEMENT}=${resp.status_code}
+    \     Run keyword if     '${resp.status_code}' != '${HTTP_OK}'
+    \     ...    Append To List       ${MyList}     ${dict}
+    \     ${ELEMENT}=   Catenate     ${ELEMENT}/
+    \     ${resp}=  Openbmc Get Request  ${ELEMENT}  quiet=${1}
+    \     Set To Dictionary    ${dict}       ${ELEMENT}=${resp.status_code}
+    \     Run keyword if     '${resp.status_code}' != '${HTTP_OK}'
+    \     ...    Append To List       ${MyList}     ${dict}
+    [Return]      ${MyList}
 
 Execute Get And Check Response
     [Documentation]  Request "Get" url path and expect REST response code.
