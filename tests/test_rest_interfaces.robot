@@ -341,8 +341,46 @@ Delete Response Code
     [Tags]  Delete_Response_Codes
     [Template]  Execute Delete And Check Response
 
+Verify Enumerated REST URI
+    [Documentation]  Navigates and verifies complete child list
+    ...              of a provided uri string.For the testcase to pass,
+    ...              navigation must be successful for all of the child uri(s).
+    [Tags]           Verify_Enumerated_REST_URI
+
+    @{error_list}=  Get URI Results  ${URI}
+    # ${URI} keeps the URI string like /xyz/openbmc_project/list
+    Should Be Empty  ${error_list}
 
 *** Keywords ***
+
+Get URI Results
+    [Documentation]  Enumerates/lists the uri string sent with the argument
+    ...              ${uri_string}, attempts to get each enumerated uri. It then
+    ...              then consructs a list of enumerated uri string(s) and
+    ...              corresponding error code for the uri(s) for unsuccessful
+    ...              get operation. The list is returned to the caller.
+    ...              Sample content of the returned list(with only two entries):
+    ...              u'/xyz/openbmc_project/control' : 402,
+    ...              u'/xyz/openbmc_project/control/' : 404,
+    [Arguments]      ${uri_string}
+    # Description of arguments:
+    # The uri string passed by the caller.
+
+    ${resp}=  Openbmc Get Request  ${uri_string}  quiet=${1}
+    ${token}=  Collections.Get From Dictionary  ${resp.json()}  data
+    ${error_uri_list}=  Create List
+    ${dict}=  Create Dictionary
+    ${dict2}=  Create Dictionary
+    :FOR  ${ELEMENT}  IN  @{token}
+    \  ${resp}=   Openbmc Get Request  ${ELEMENT}  quiet=${1}
+    \  ${resp2}=  Openbmc Get Request  ${ELEMENT}/  quiet=${1}
+    \  Set To Dictionary  ${dict}  ${ELEMENT}=${resp.status_code}
+    \  Set To Dictionary  ${dict2}  ${ELEMENT}/=${resp2.status_code}
+    \  Run keyword if  '${resp.status_code}' != '${HTTP_OK}'
+    \  ...  Append To List  ${error_uri_list}  ${dict}
+    \  Run keyword if  '${resp2.status_code}' != '${HTTP_OK}'
+    \  ...  Append To List  ${error_uri_list}  ${dict2}
+    [Return]  ${error_uri_list}
 
 Execute Get And Check Response
     [Documentation]  Request "Get" url path and expect REST response code.
