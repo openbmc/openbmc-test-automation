@@ -78,7 +78,6 @@ Login OpenBMC GUI
     Log  ${openbmc_gui_url}
     Open Browser With URL  ${openbmc_gui_url}  gc
     Page Should Contain Button  login__submit
-    #  Wait Until Page Contains Element  ${obmc_uname}
     Input Text  ${xpath_openbmc_ip}  ${OPENBMC_HOST}
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
