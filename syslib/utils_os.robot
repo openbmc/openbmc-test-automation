@@ -166,6 +166,56 @@ REST Upload File To BMC
     Switch Connection  os_connection
 
 
+Get CPU Min Frequency Limit
+    [Documentation]  Get CPU minimum assignable frequency.
+
+    # lscpu | grep min  returns
+    # CPU min MHz:           1983.0000
+
+    ${cmd}=  Catenate  lscpu | grep min  | tr -dc '0-9.\n'
+    ${cpu_freq}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${cpu_freq}
+
+
+Get CPU Min Frequency
+    [Documentation]  Get CPU assigned minimum frequency.
+
+    # ppc64_cpu --frequency -t 10  returns
+    # min:    3.295 GHz (cpu 143)
+    # max:    3.295 GHz (cpu 0)
+    # avg:    3.295 GHz
+
+    ${cmd}=  Catenate  ppc64_cpu --frequency -t 10 | grep min
+    ...  | cut -f 2 | cut -d ' ' -f 1 | tr -dc '0-9\n'
+    ${cpu_freq}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${cpu_freq}
+
+
+Get CPU Max Frequency Limit
+    [Documentation]  Get CPU maximum assignable frequency.
+
+    # lscpu | grep max  returns
+    # CPU max MHz:           3300.0000
+
+    ${cmd}=  Catenate  lscpu | grep max  | tr -dc '0-9.\n'
+    ${cpu_freq}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${cpu_freq}
+
+
+Get CPU Max Frequency
+    [Documentation]  Get CPU assigned maximum frequency.
+
+    # ppc64_cpu --frequency -t 10  returns
+    # min:    3.295 GHz (cpu 143)
+    # max:    3.295 GHz (cpu 0)
+    # avg:    3.295 GHz
+
+    ${cmd}=  Catenate  ppc64_cpu --frequency -t 10 | grep max
+    ...  | cut -f 2 | cut -d ' ' -f 1 | tr -dc '0-9\n'
+    ${cpu_freq}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${cpu_freq}
+
+
 Check For Errors On OS Dmesg Log
     [Documentation]  Check if dmesg has nvidia errors logged.
 
