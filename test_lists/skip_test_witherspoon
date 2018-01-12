@@ -15,3 +15,5 @@
 -e Test_Heartbeat_LED_And_Verify_Via_REST
 -e Test_Beep_LED_And_Verify_Via_REST
 -e Test_Identify_LED_And_Verify_Via_REST
+# NXDMAENG UE error injection is not available in latest p9dd1ffdcv104.xlsm
+-e Verify_Unrecoverable_Callout_Handling_For_NXDMAENG
