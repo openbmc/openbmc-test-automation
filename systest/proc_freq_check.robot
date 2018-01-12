@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Compare processor speed in turbo and non-turbo modes.
+Documentation  Check processor speed.
 
 # Test Parameters:
 # OPENBMC_HOST   The BMC host name or IP address.
@@ -9,97 +9,59 @@ Documentation  Compare processor speed in turbo and non-turbo modes.
 # OS_PASSWORD    The password for the OS login.
 
 Resource        ../syslib/utils_os.robot
-Library         ../syslib/utils_keywords.py
-Variables       ../data/variables.py
-Library         ../lib/bmc_ssh_utils.py
-Resource        ../lib/connection_client.robot
-Resource        ../lib/resource.txt
-Resource        ../lib/rest_client.robot
-Resource        ../lib/utils.robot
 
-
-Test Setup      Pre Test Case Execution
-Test Teardown   Post Test Case Execution
+Suite Setup      Run Keyword  Start SOL Console Logging
+Test Setup       Test Setup Execution
+Test Teardown    Test Teardown Execution
 
 
 *** Test Cases ***
 
-Turbo And Non-Turbo Processor Speed Test
-    [Documentation]  Compare processor turbo and non-turbo speeds.
-    [Tags]  Turbo_And_Non-Turbo_Processor_Speed_Test
+Processor Speed Check
+    [Documentation]  Check processor speed.
+    [Tags]  Processor_Speed_Check
 
-    Set Turbo Setting Via REST  True
-    ${mode}=  Read Turbo Setting Via REST
-    Should Be Equal  ${mode}  True
-    ...  msg=Issued call to set Turbo mode but it was not set.
-
-    # The OS governor determines the maximum processor speed at boot-up time.
-    REST Power On  stack_mode=skip
-    ${proc_speed_turbo}=  Get Processor Max Speed Setting
-
-    Smart Power Off
-
-    Set Turbo Setting Via REST  False
-    ${mode}=  Read Turbo Setting Via REST
-    Should Be Equal  ${mode}  False
-    ...  msg=Issued call to disable Turbo mode but it was not disabled.
-
-    REST Power On  stack_mode=skip
-    ${proc_speed_non_turbo}=  Get Processor Max Speed Setting
+    ${actual_min_freq}=  Get CPU Min Frequency
+    ${min_freq_designated_lower_limit}=  Get CPU Min Frequency Limit
 
     Rprintn
-    Rpvars  proc_speed_turbo  proc_speed_non_turbo
+    Rpvars  actual_min_freq  min_freq_designated_lower_limit
 
-    ${err_msg}=  Catenate  Reported turbo processor speed should be
-    ...  greater than non-turbo speed.
-    Should Be True  ${proc_speed_turbo} > ${proc_speed_non_turbo}
+    ${err_msg}=  Catenate  Reported CPU frequency below designated limit.
+    Should Be True  ${actual_min_freq} >= ${min_freq_designated_lower_limit}
     ...  msg=${err_msg}
+
+    ${actual_max_freq}=  Get CPU Max Frequency
+    ${max_freq_designated_limit}=  Get CPU Max Frequency Limit
+
+    Rprintn
+    Rpvars  actual_max_freq  max_freq_designated_limit
+
+    ${err_msg}=  Catenate  Reported CPU frequency above designated limit.
+    Should Be True  ${actual_max_freq} <= ${max_freq_designated_limit}
+    ...  msg=${err_msg}
+
+    Error Logs Should Not Exist
 
 
 *** Keywords ***
 
-Get Processor Max Speed Setting
-    [Documentation]  Get processor maximum speed setting from the OS.
-    # - On the OS run: ppc64_cpu --frequency
-    # - Return the maximum frequency value reported.
-    # The command ppc64_cpu is provided in both Ubuntu and RHEL on Power.
+Test Setup Execution
+    [Documentation]  Do the pre-test setup.
 
-    ${command}=  Set Variable
-    ...  ppc64_cpu --frequency | grep max | cut -f 2 | cut -d ' ' -f 1
-    # The ppc64_cpu --frequency command returns min, max, and average
-    # cpu frequencies. For example,
-    # min:    2.500 GHz (cpu 143)
-    # max:    2.700 GHz (cpu 1)
-    # avg:    2.600 GHz
-    # The ${command} selects the max: line, selects only the
-    # 2.700 GHz (cpu 1) part, then selects the 2.700 number.
-
-    # Get the maximum processor frequency reported.
-    ${output}  ${stderr}  ${rc}=  OS Execute Command
-    ...  ${command}  print_out=${1}
-
-    ${frequency}=  Convert To Number  ${output}
-    [Return]  ${frequency}
+    REST Power On  stack_mode=skip
+    Delete All Error Logs
+    Tool Exist  ppc64_cpu
+    Tool Exist  lscpu
 
 
-Pre Test Case Execution
-    [Documentation]  Do the pre test setup.
-    # Save the initial system turbo setting.
-    # Start (setup) console logging.
+Test Teardown Execution
+    [Documentation]  Do the post-test teardown.
 
-    ${initial_turbo_setting}=  Read Turbo Setting Via REST
-    Set Suite Variable  ${initial_turbo_setting}  children=true
-    Start SOL Console Logging
-
-
-Post Test Case Execution
-    [Documentation]  Do the post test teardown.
-    # - Restore original turbo setting on the system.
-    # - Capture FFDC on test failure.
-    # - Power off the OS and close all open SSH connections.
-
-    Set Turbo Setting Via REST  ${initial_turbo_setting}
+    ${keyword_buf}=  Catenate  Stop SOL Console Logging
+    ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
+    Run Key  ${keyword_buf}
 
     FFDC On Test Case Fail
-    Smart Power Off
+    Power Off Host
     Close All Connections
