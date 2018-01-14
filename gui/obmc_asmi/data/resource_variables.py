@@ -29,3 +29,4 @@ class resource_variables():
     power_off = "6"
     confirm_msg = "2"
     yes = "1"
+    no = "2"
