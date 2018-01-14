@@ -15,36 +15,78 @@ Power On The Host
 
     GUI Power On
 
-Immediate Power Off The Host
-    [Documentation]  Immediate power off the Host.
-    [Tags]  Immediate_Power_Off_The_Host
+Click Immediate Power Off The Host And Press No
+    [Documentation]  Click Immediate power off the Host button and the press no
+    ...  button.
+    [Tags]  Click_Immediate_Power_Off_The_Host_And_Press_No
+
+    Controller Server Power Click Button  power__hard-shutdown
+    Controller Power Operations Confirmation Click Button  ${power_operations}
+    ...  ${power_off}  ${confirm_msg}  ${No}
+    Page Should Contain  Running
+
+Click Immediate Power Off The Host And Press Yes
+    [Documentation]  Click Immediate power off the Host button and press
+    ...  yes button.
+    [Tags]  Click_Immediate_Power_Off_The_Host_And_Press_Yes
 
     Controller Server Power Click Button  power__hard-shutdown
     Controller Power Operations Confirmation Click Button  ${power_operations}
     ...  ${power_off}  ${confirm_msg}  ${yes}
+    Page Should Contain  Off
 
-Cold Boot The Host
-    [Documentation]  Cold boot the Host.
-    [Tags]  Cold_Boot_the_Host
+Click Cold Boot The Host And Press No
+    [Documentation]  Cold boot the Host button and press no button.
+    [Tags]  Click_Cold_Boot_The_Host_And_Press_No
 
     GUI Power On
     Controller Server Power Click Button  power__cold-boot
     Controller Power Operations Confirmation Click Button  ${power_operations}
-    ...  ${cold_boot}  ${confirm_msg}  ${yes}
+    ...  ${cold_boot}  ${confirm_msg}  ${No}
     Page Should Contain  Running
 
-Warm Boot The Host
-    [Documentation]  Warm boot the Host.
-    [Tags]  Warm_Boot_The_Host
+Click Cold Boot The Host And Press Yes
+    [Documentation]  Cold boot the Host button and press yes button.
+    [Tags]  Click_Cold_Boot_the_Host_And_Press_Yes
+
+    Controller Server Power Click Button  power__cold-boot
+    Controller Power Operations Confirmation Click Button  ${power_operations}
+    ...  ${cold_boot}  ${confirm_msg}  ${yes}
+    Page Should Contain  Standby
+    Page Should Contain  Running
+
+Click Warm Boot The Host And Press No
+    [Documentation]  Press Warm boot the Host button and press no button.
+    [Tags]  Click_Warm_Boot_The_Host_And_Press_No
+
+    Controller Server Power Click Button  power__warm-boot
+    Controller Power Operations Confirmation Click Button  ${power_operations}
+    ...  ${warm_boot}  ${confirm_msg}  ${No}
+    Page Should Contain  Running
+
+Click Warm Boot The Host And Press Yes
+    [Documentation]  Press Warm boot the Host button and press yes button.
+    [Tags]  Click_Warm_Boot_The_Host_And_Press_Yes
 
     Controller Server Power Click Button  power__warm-boot
     Controller Power Operations Confirmation Click Button  ${power_operations}
     ...  ${warm_boot}  ${confirm_msg}  ${yes}
     Page Should Contain  Running
 
-Orderly Shutdown The Host
-    [Documentation]  Orderly shutdown the Host.
-    [Tags]  Orderly_Shutdown_The_Host
+Click Orderly Shutdown The Host And Press No
+    [Documentation]  Press Orderly shutdown the host button and press no
+    ...  button.
+    [Tags]  Click_Orderly_Shutdown_The_Host_And_Press_No
+
+    Controller Server Power Click Button  power__soft-shutdown
+    Controller Power Operations Confirmation Click Button  ${power_operations}
+    ...  ${shut_down}  ${confirm_msg}  ${No}
+    Page Should Contain  Running
+
+Click Orderly Shutdown The Host And Press Yes
+    [Documentation]  Press Orderly shutdown the host button and press yes
+    ...  button.
+    [Tags]  Click_Orderly_Shutdown_The_Host_And_Press_Yes
 
     Controller Server Power Click Button  power__soft-shutdown
     Controller Power Operations Confirmation Click Button  ${power_operations}
