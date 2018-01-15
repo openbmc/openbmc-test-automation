@@ -49,6 +49,8 @@ REST Host Code Update
     [Tags]  REST_Host_Code_Update
     [Setup]  Code Update Setup
 
+    Run Keyword And Ignore Error  List Installed Images  Host
+
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     OBMC Reboot (off)
 
