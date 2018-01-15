@@ -23,6 +23,9 @@ ${mid_power}            1950
 ${min_power}            500
 ${below_min_power}      499
 ${zero_power}           0
+${power_1450}           1450
+${power_1700}           1700
+${power_2200}           2200
 #  The power limits are documented at
 #  open-power/witherspoon-xml/master/witherspoon.xml.
 
@@ -46,6 +49,44 @@ Escale Base Test Active Monitoring
     Activate DCMI Power And Verify
     Verify Power Limits
 
+
+Escale Base Test Using REST
+    [Documentation]  Exercise Escale settings via REST
+    [Tags]  Escale_Base_Test_Using_REST
+
+    Set DCMI Power Limit Via REST  ${power_1700}
+    ${power}=  Get DCMI Power Limit Via REST
+    Should Be True  ${power} == ${power_1700}
+    ...  msg=Readback of powercap via REST failed.
+
+    Set DCMI Power Limit Via REST  ${power_1450}
+    # read the power limit using non-REST
+    ${power}=  Get DCMI Power Limit
+    Should Be True  ${power} == ${power_1450}
+    ...  msg=Readback of powercap via DCMI after setting via REST failed.
+
+    # Set DCMI Power via non-REST.
+    Set DCMI Power Limit And Verify  ${power_2200}
+    # Read the limit via REST.
+    ${power_2200}=  Get DCMI Power Limit Via REST
+    Should Be True  ${power_2200} == ${power_2200}
+    ...  msg=Readback of powercap via REST after setting via DCMI failed.
+
+    # Activate power monitoring via REST and check via REST and DCMI.
+    Activate DCMI Power Via REST
+    ${rest_activation}=  Get DCMI Power Acivation via REST
+    Should Be True  ${rest_activation} == ${1}
+    ...  msg=Readback of power monitoring activation failed via REST.
+    # Confirm activation state using non-REST.
+    Fail If DCMI Power Is Not Activated
+
+    # Deactivate power monitoring via REST and check via REST and DCMI.
+    Deactivate DCMI Power Via REST
+    ${rest_activation}=  Get DCMI Power Acivation via REST
+    Should Be True  ${rest_activation} == ${0}
+    ...  msg=Readback of power monitoring activation failed via REST.
+    # Confirm and activation state using non-REST.
+    Fail If DCMI Power Is Not Deactivated
 
 
 *** Keywords ***
