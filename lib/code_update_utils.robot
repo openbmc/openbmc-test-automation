@@ -414,3 +414,27 @@ Field Mode Should Be Enabled
 
     ${value}=  Read Attribute  ${SOFTWARE_VERSION_URI}  FieldModeEnabled
     Should Be True  ${value}  ${1}
+
+List Installed Images
+    [Documentation]  List all the installed images.
+    [Arguments]  ${image_type}
+
+    # Desciption of argument(s):
+    # image_type  Either "BMC" or "PNOR".
+
+    # List the installed images.
+    ${installed_images}=  Get Software Objects
+    ...  ${SOFTWARE_PURPOSE}.${image_type}
+
+    Run Keyword If  ${installed_images} != []
+    ...  Get List of Images  ${installed_images}
+    ...  ELSE  Log  No ${image_type} images are present.
+
+Get List of Images
+    [Documentation]  Get List of Images
+    [Arguments]  ${installed_images}
+
+    :FOR  ${uri}  IN  @{installed_images}
+    \  ${resp}=  OpenBMC Get Request  ${uri}
+    \  ${json}=  To JSON  ${resp.content}
+    \  Log  ${json}["data"]
