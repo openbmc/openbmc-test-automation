@@ -70,6 +70,8 @@ REST BMC Code Update
     [Tags]  REST_BMC_Code_Update
     [Teardown]  REST BMC Code Update Teardown
 
+    Run Keyword And Ignore Error  List BMC images
+
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)

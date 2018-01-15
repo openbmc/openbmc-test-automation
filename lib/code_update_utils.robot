@@ -414,3 +414,22 @@ Field Mode Should Be Enabled
 
     ${value}=  Read Attribute  ${SOFTWARE_VERSION_URI}  FieldModeEnabled
     Should Be True  ${value}  ${1}
+
+List BMC Images
+    [Documentation]  List all the BMC Images available.
+
+    ${BMC_Images}=  Get Software Objects  ${SOFTWARE_PURPOSE}.BMC
+    : FOR  ${uri}  IN  @{BMC_Images}
+    \  ${resp}=  OpenBMC Get Request  ${uri}
+    \  ${json}=  To JSON  ${resp.content}
+    \  Log  ${json}["data"]
+
+List PNOR Images
+    [Documentation]  List all the PNOR Images available.
+
+    ${PNOR_Images}=  Get Software Objects  ${SOFTWARE_PURPOSE}.Host
+    : FOR  ${uri}  IN  @{PNOR_Images}
+    \  ${resp}=  OpenBMC Get Request  ${uri}
+    \  ${json}=  To JSON  ${resp.content}
+    \  Log  ${json}["data"]
+

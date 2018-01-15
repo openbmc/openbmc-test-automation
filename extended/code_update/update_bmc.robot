@@ -33,6 +33,7 @@ Resource                ../../lib/utils.robot
 Resource                ../../lib/list_utils.robot
 Resource                ../../lib/openbmc_ffdc.robot
 Resource                ../../extended/obmc_boot_test_resource.robot
+Resource                ../../lib/code_update_utils.robot
 
 Test Teardown           Run Key  FFDC On Test Case Fail
 

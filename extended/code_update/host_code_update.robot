@@ -21,10 +21,10 @@ Library           ../../lib/code_update_utils.py
 Variables         ../../data/variables.py
 Resource          ../../lib/boot_utils.robot
 Resource          code_update_utils.robot
-Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/state_manager.robot
 Resource          ../../lib/dump_utils.robot
+Resource          ../../lib/code_update_utils.robot
 
 Test Teardown     Code Update Test Teardown
 
@@ -48,6 +48,8 @@ REST Host Code Update
     #    - Collect FFDC if error log exist and delete error logs.
     [Tags]  REST_Host_Code_Update
     [Setup]  Code Update Setup
+
+    Run Keyword And Ignore Error  List PNOR Images
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     OBMC Reboot (off)
