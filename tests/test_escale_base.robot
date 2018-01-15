@@ -23,9 +23,8 @@ ${mid_power}            1950
 ${min_power}            500
 ${below_min_power}      499
 ${zero_power}           0
-#  The power limits are documented at
+#  The power limits shown above are documented at
 #  open-power/witherspoon-xml/master/witherspoon.xml.
-
 
 
 *** Test Cases ***
@@ -40,12 +39,60 @@ Escale Base Test Inactive Monitoring
 
 
 Escale Base Test Active Monitoring
-    [Documentation]  Run base power tests with DCMI power montoring on.
+    [Documentation]  Run base power tests with DCMI power monitoring on.
     [Tags]  Escale_Base_Test_Active_Monitoring
 
     Activate DCMI Power And Verify
     Verify Power Limits
 
+
+Escale Power Setting Via REST And Verify
+    [Documentation]  Set power via REST and check using IPMI.
+    [Tags]  Escale_Power_Setting_Via_REST_And_Verify
+
+    # A convenient power level bewtwwn maximum and minimum.
+    ${test_power}=  Set Variable  1700
+
+    Set DCMI Power Limit Via REST  ${test_power}
+    ${power}=  Get DCMI Power Limit Via REST
+
+    # Read the power limit using IPMI.
+    ${power}=  Get DCMI Power Limit
+    Should Be True  ${power} == ${test_power}
+    ...  msg=Reading Power limit with IPMI failed after setting it with REST.
+
+
+Escale Power Setting Via IPMI And Verify
+    [Documentation]  Set power via IPMI then check via REST.
+    [Tags]  Escale_Power_Setting_Via_IPMI_And_Verify
+
+    # A convenient power level bewtwwn maximum and minimum.
+    ${test_power}=  Set Variable  2200
+
+    # Set DCMI Power via IPMI.
+    Set DCMI Power Limit And Verify  ${test_power}
+    # Read the limit via REST.
+    ${power_limit}=  Get DCMI Power Limit Via REST
+    Should Be True  ${power_limit} == ${test_power}
+    ...  msg=Reading power limit with REST failed after setting it with IPMI.
+
+
+Escale Activation Test Via REST
+    [Documentation]  Activate power monitoring via REST then check via IPMI.
+    [Tags]  Escale_Activation_Test_Via_REST
+
+    Activate DCMI Power Via REST
+    # Confirm activation state using IPMI.
+    Fail If DCMI Power Is Not Activated
+
+
+Escale Dectivation Test Via REST
+    [Documentation]  Deactivate power monitoring via REST and check via IPMI.
+    [Tags]  Escale_Deactivation_Test_Via_REST
+
+    Deactivate DCMI Power Via REST
+    # Confirm activation state using IPMI.
+    Fail If DCMI Power Is Not Deactivated
 
 
 *** Keywords ***
