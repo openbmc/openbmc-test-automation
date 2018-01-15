@@ -23,8 +23,13 @@ ${mid_power}            1950
 ${min_power}            500
 ${below_min_power}      499
 ${zero_power}           0
-#  The power limits are documented at
+#  The power limits shown above are documented at
 #  open-power/witherspoon-xml/master/witherspoon.xml.
+
+# These next power levels are convenient values between maximum
+# and minimum.
+${power_1700}           1700
+${power_2200}           2200
 
 
 
@@ -40,12 +45,62 @@ Escale Base Test Inactive Monitoring
 
 
 Escale Base Test Active Monitoring
-    [Documentation]  Run base power tests with DCMI power montoring on.
+    [Documentation]  Run base power tests with DCMI power monitoring on.
     [Tags]  Escale_Base_Test_Active_Monitoring
 
     Activate DCMI Power And Verify
     Verify Power Limits
 
+
+Escale Power Setting Via REST And Verify
+    [Documentation]  Set power via REST and check using IPMI.
+    [Tags]  Escale_Power_Setting_Via_REST_And_Verify
+
+    Set DCMI Power Limit Via REST  ${power_1700}
+    ${power}=  Get DCMI Power Limit Via REST
+    Should Be True  ${power} == ${power_1700}
+    ...  msg=Reading power limit with REST failed after setting it with REST.
+
+    # Read the power limit using IPMI.
+    ${power}=  Get DCMI Power Limit
+    Should Be True  ${power} == ${power_1700}
+    ...  msg=Reading Power limit with IPMI failed after setting it with REST.
+
+
+Escale Power Setting Via IPMI And Verify
+    [Documentation]  Set power via IPMI then check in REST.
+    [Tags]  Escale_Power_Setting_Via_IPMI_And_Verify
+
+    # Set DCMI Power via IPMI.
+    Set DCMI Power Limit And Verify  ${power_2200}
+    # Read the limit via REST.
+    ${power_limit}=  Get DCMI Power Limit Via REST
+    Should Be True  ${power_limit} == ${power_2200}
+    ...  msg=Reading power limit with REST failed after setting it with IPMI.
+
+
+Escale Activation Test Via REST
+    [Documentation]  Activate power monitoring via REST then check via IPMI.
+    [Tags]  Escale_Activation_Test_Via_REST
+
+    Activate DCMI Power Via REST
+    ${rest_activation}=  Get DCMI Power Acivation via REST
+    Should Be True  ${rest_activation} == ${1}
+    ...  msg=Problem with set or get of power monitoring activation via REST.
+    # Confirm activation state using IPMI.
+    Fail If DCMI Power Is Not Activated
+
+
+Escale Dectivation Test Via REST
+    [Documentation]  Deactivate power monitoring via REST and check via IPMI.
+    [Tags]  Escale_Deactivation_Test_Via_REST
+
+    Deactivate DCMI Power Via REST
+    ${rest_activation}=  Get DCMI Power Acivation via REST
+    Should Be True  ${rest_activation} == ${0}
+    ...  msg=Problem with set or get of power monitoring deactivation via REST.
+    # Confirm activation state using IPMI.
+    Fail If DCMI Power Is Not Deactivated
 
 
 *** Keywords ***
