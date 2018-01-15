@@ -414,3 +414,17 @@ Field Mode Should Be Enabled
 
     ${value}=  Read Attribute  ${SOFTWARE_VERSION_URI}  FieldModeEnabled
     Should Be True  ${value}  ${1}
+
+List Installed Images
+    [Documentation]  List all the installed images available.
+    [Arguments]  ${image_type}
+
+    # Desciption of argument(s):
+    # image_type  BMC/ PNOR
+
+    ${installed_images}=  Get Software Objects  ${SOFTWARE_PURPOSE}.${image_type}
+    : FOR  ${uri}  IN  @{installed_images}
+    \  ${resp}=  OpenBMC Get Request  ${uri}
+    \  ${json}=  To JSON  ${resp.content}
+    \  Log  ${json}["data"]
+
