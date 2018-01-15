@@ -23,15 +23,20 @@ ${mid_power}            1950
 ${min_power}            500
 ${below_min_power}      499
 ${zero_power}           0
-#  The power limits are documented at
+#  The power limits above are documented at
 #  open-power/witherspoon-xml/master/witherspoon.xml.
+
+# These next power levels are convenient values between max
+# and min.
+${power_1700}           1700
+${power_2200}           2200
 
 
 
 *** Test Cases ***
 
 
-Escale Base Test Inactive Monitoring
+Ecale Base Test Inactive Monitoring
     [Documentation]  Run base power tests with DCMI power montoring off.
     [Tags]  Escale_Base_Test_Deactive_Monitoring
 
@@ -46,6 +51,57 @@ Escale Base Test Active Monitoring
     Activate DCMI Power And Verify
     Verify Power Limits
 
+
+Escale REST To Non-REST Power Setting Test
+    [Documentation]  Set power via REST and check in non-REST.
+    [Tags]  Escale_REST_To_Non-REST_Power_Setting_Test
+
+    Set DCMI Power Limit Via REST  ${power_1700}
+    ${power}=  Get DCMI Power Limit Via REST
+    Should Be True  ${power} == ${power_1700}
+    ...  msg=Readback of powercap via REST failed.
+
+    # read the power limit using non-REST
+    ${power}=  Get DCMI Power Limit
+    Should Be True  ${power} == ${power_1700}
+    ...  msg=Powercap reading via DCMI after setting it via REST failed.
+
+
+Escale Non-REST To REST Power Setting Test
+    [Documentation]  Set power via non-REST and check in REST.
+    [Tags]  Escale_Non-REST_To_REST_Power_Setting_Test
+
+    # Set DCMI Power via non-REST.
+    Set DCMI Power Limit And Verify  ${power_2200}
+    # Read the limit via REST.
+    ${power_2200}=  Get DCMI Power Limit Via REST
+    Should Be True  ${power_2200} == ${power_2200}
+    ...  msg=Powercap reading via REST after setting it via DCMI failed.
+
+
+Escale Activation Test Via REST
+    [Documentation]  Activate power monitoring via REST and check via non-REST.
+    [Tags]  Escale_Activation_Test_Via_REST
+
+    Activate DCMI Power Via REST
+    ${rest_activation}=  Get DCMI Power Acivation via REST
+    Should Be True  ${rest_activation} == ${1}
+    ...  msg=Readback of power monitoring activation failed via REST.
+    # Confirm activation state using non-REST.
+    Fail If DCMI Power Is Not Activated
+
+
+Escale Dectivation Test Via REST
+    [Documentation]  Deactivate power monitoring via REST and check via
+    ...  non-REST.
+    [Tags]  Escale_Deactivation_Test_Via_REST
+
+    Deactivate DCMI Power Via REST
+    ${rest_activation}=  Get DCMI Power Acivation via REST
+    Should Be True  ${rest_activation} == ${0}
+    ...  msg=Readback of power monitoring deactivation failed via REST.
+    # Confirm activation state using non-REST.
+    Fail If DCMI Power Is Not Deactivated
 
 
 *** Keywords ***
@@ -96,7 +152,7 @@ Suite Setup Execution
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    FFDC On Test Case Fail
+    ####FFDC On Test Case Fail
 
     # Restore the system's intial power limit setting.
     Run Keyword If  '${initial_power_setting}' != '${0}'
