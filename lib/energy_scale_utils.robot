@@ -90,6 +90,50 @@ Fail If DCMI Power Is Not Deactivated
     ...  msg=DCMI power is not deactivated.
 
 
+Get DCMI Power Limit Via REST
+    [Documentation]  Return the system's current DCMI power_limit
+    ...  watts setting using REST interface.
+
+    ${power_limit}=  Read Attribute  ${CONTROL_HOST_URI}power_cap  PowerCap
+    [Return]  ${power_limit}
+
+
+Set DCMI Power Limit Via REST
+    [Documentation]  Set system power limit via REST command.
+    [Arguments]  ${power_limit}
+
+    # Description of argument(s):
+    # power_limit      The power limit in watts
+
+    ${data}=  Create Dictionary  data=${power_limit}
+    Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCap  data=${data}
+
+
+Activate DCMI Power Via REST
+    [Documentation]  Activate DCMI power limiting vir REST.
+
+    ${data}=  Create Dictionary  data=${True}
+    Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCapEnable
+    ...  data=${data}
+
+
+Deactivate DCMI Power Via REST
+    [Documentation]  Deactivate DCMI power limiting vir REST.
+
+    ${data}=  Create Dictionary  data=${False}
+    Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCapEnable
+    ...  data=${data}
+
+
+Get DCMI Power Acivation via REST
+    [Documentation]  Return the system's current DCMI power activation
+    ...  state setting using REST interface.
+
+    ${power_activation_setting}=  Read Attribute
+    ...  ${CONTROL_HOST_URI}power_cap  PowerCapEnable
+    [Return]  ${power_activation_setting}
+
+
 OCC Tool Upload Setup
     [Documentation]  Upload occtoolp9 to /tmp on the OS.
 
