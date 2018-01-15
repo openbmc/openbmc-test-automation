@@ -145,3 +145,22 @@ Set Policy Setting
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}
+
+List BMC Images
+    [Documentation]  List all the BMC Images available.
+
+    ${BMC_Images}=  Get Software Objects  ${SOFTWARE_PURPOSE}.BMC
+    : FOR  ${uri}  IN  @{BMC_Images}
+    \  ${resp}=  OpenBMC Get Request  ${uri}
+    \  ${json}=  To JSON  ${resp.content}
+    \  Log  ${json}["data"]
+
+List PNOR Images
+    [Documentation]  List all the PNOR Images available.
+
+    ${PNOR_Images}=  Get Software Objects  ${SOFTWARE_PURPOSE}.Host
+    : FOR  ${uri}  IN  @{PNOR_Images}
+    \  ${resp}=  OpenBMC Get Request  ${uri}
+    \  ${json}=  To JSON  ${resp.content}
+    \  Log  ${json}["data"]
+

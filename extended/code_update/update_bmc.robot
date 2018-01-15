@@ -33,6 +33,7 @@ Resource                ../../lib/utils.robot
 Resource                ../../lib/list_utils.robot
 Resource                ../../lib/openbmc_ffdc.robot
 Resource                ../../extended/obmc_boot_test_resource.robot
+Resource                ../../lib/code_update_utils.robot
 
 Test Teardown           Run Key  FFDC On Test Case Fail
 
@@ -54,6 +55,8 @@ ${MAX_BOOT_COUNT}       ${2}
 Initiate Code Update BMC
     [Documentation]  Initiate a code update on the BMC.
     [Tags]  Initiate_Code_Update_BMC
+
+    Run Keyword And Ignore Error  List BMC images
 
     ${status}=  Run Keyword If  '${LAST_KNOWN_GOOD_VERSION}' != '${EMPTY}'
     ...  Run Keyword And Return Status
