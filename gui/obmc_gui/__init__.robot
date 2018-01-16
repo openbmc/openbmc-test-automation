@@ -9,9 +9,9 @@ Suite Teardown    Init Teardown Steps
 *** Keywords ***
 Initializing Setup
     [Documentation]  Initialize test environment.
+    Get OpenBMC System Info
     Launch OpenBMC GUI Browser
     Login OpenBMC GUI
-    Get OpenBMC System Info
     Initial Message
     LogOut OpenBMC GUI
 
