@@ -147,7 +147,7 @@ Robot Coding Guidelines
         ```
         Get URL List
             [Documentation]  Return list of URLs under given URL.
-            [Arguments]  ${openbmc_url}
+            [Arguments]  ${openbmc_url}  ${policy}
 
             # Description of argument(s):
             # openbmc_url  URL for list operation (e.g.
