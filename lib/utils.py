@@ -185,3 +185,33 @@ def get_bmc_df(df_parm_string=""):
 
     out_buf, stderr, rc = bsu.bmc_execute_command("df " + df_parm_string)
     return vf.outbuf_to_report(out_buf)
+
+
+def get_sbe_side_bit(hex_string):
+
+    r"""
+    Returns the SBE side bit number.
+
+    Description of argument(s):
+    hex_string  String number to be masked (e.g. '0x94000001).
+
+    Example:
+    Mask bit 0x00004000 7th bit of the 4th byte from right.
+
+    When SBE boot side is 0.
+    >>> hex(0x00080000 & 0x00004000)
+    '0x0'
+
+    When SBE boot side is 1.
+    >>> hex(0x00084000 & 0x00004000)
+    '0x4000'
+    """
+
+    sbe_side_bit_mask = 0x00004000
+    hex_num = int(hex_string, 16)
+
+    if (sbe_side_bit_mask & hex_num):
+        return 1
+    else:
+        return 0
+
