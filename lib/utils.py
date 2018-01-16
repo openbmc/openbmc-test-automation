@@ -185,3 +185,16 @@ def get_bmc_df(df_parm_string=""):
 
     out_buf, stderr, rc = bsu.bmc_execute_command("df " + df_parm_string)
     return vf.outbuf_to_report(out_buf)
+
+
+def get_sbe():
+
+    r"""
+    Returns the CFAM value containing SBE side bit number.
+    """
+
+    cmd_buf = "pdbg -d p9w -p0 getcfam 0x2808 | sed -re 's/.* = //g'"
+    out_buf, stderr, rc = bsu.bmc_execute_command(cmd_buf)
+
+    return int(out_buf, 16)
+
