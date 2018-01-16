@@ -451,6 +451,8 @@ RAS Test SetUp
     Should Not Be Empty
     ...  ${OS_PASSWORD}  msg=You must provide OS host user password.
 
+    Should Not Be Empty
+    ...  ${ESEL_BIN_PATH}
     # Boot to OS.
     REST Power On  quiet=${1}
     # Adding delay after host bring up.
