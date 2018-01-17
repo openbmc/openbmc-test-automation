@@ -1,3 +1,5 @@
+#Verify SSH and IPMI interfaces
+-i Test_SSH_and_IPMI_Connections
 #REST SSL connection test.
 -i Test_SSL_Connection
 #Basic poweron test
