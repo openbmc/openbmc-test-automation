@@ -38,6 +38,15 @@ Install the packages and it's dependencies via `pip`
     $ pip install robotframework-sshlibrary
     $ pip install robotframework-scplibrary
     ```
+
+## OpenBMC Test Development ##
+
+These documents contain details on developing OpenBMC test code and debugging.
+
+ - [CONTRIBUTING.md](CONTRIBUTING.md): Reference for codeing guidelines.
+ - [REST-cheatsheet.md](https://github.com/openbmc/docs/blob/master/REST-cheatsheet.md): Quick reference for some common
+   curl commands usage required during testing.
+
 ## Testing Setup Steps ##
 
 To verify the installation setup is completed and ready to execute.
