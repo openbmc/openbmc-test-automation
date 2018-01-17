@@ -12,6 +12,8 @@ Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/boot_utils.robot
 Resource          ../lib/ipmi_client.robot
+Resource          ../syslib/utils_os.robot
+
 
 Suite Setup      Suite Setup Execution
 Test Teardown    Test Teardown Execution
@@ -38,6 +40,7 @@ Escale System On And PL Enabled
 
     REST Power On  stack_mode=skip
 
+    Tool Exist  opal-prd
     OCC Tool Upload Setup
 
     # Get OCC data from OS.
@@ -49,6 +52,17 @@ Escale System On And PL Enabled
     Should Contain  ${output}  Sensor: TEMP
     Should Contain  ${output}  Sensor: FREQ
     Should Contain  ${output}  Sensor: POWR
+
+    # Disable OCC.
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  opal-prd occ disable
+    # With OCC disabled we should have OBSERVATION in output.
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    Should Contain  ${output}  OBSERVATION
+
+    # Re-enable OCC for remaining tests.
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  opal-prd occ enable
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    Should Contain  ${output}  ACTIVE
 
     ${power}=  Get DCMI Power Limit
     Should Be True  ${power} == ${max_power}
