@@ -23,7 +23,7 @@ Resource     ../../../lib/state_manager.robot
 Variables    ../data/resource_variables.py
 
 *** Variables ***
-${obmc_gui_url}              http://localhost:8080/#/login
+${openbmc_gui_url}              http://localhost:8080/#/login
 # Default Browser.
 ${default_browser}           chrome
 
@@ -58,7 +58,7 @@ Launch Browser in Windows Platform
     [Documentation]  Open the browser with the URL and
     ...              login on windows platform.
 
-    ${BROWSER_ID}=  Open Browser  ${obmc_gui_url}  ${default_browser}
+    ${BROWSER_ID}=  Open Browser  ${openbmc_gui_url}  ${default_browser}
     Maximize Browser Window
     Set Global Variable  ${BROWSER_ID}
 
@@ -66,7 +66,7 @@ Launch Headless Browser
     [Documentation]  Launch headless browser.
 
     Start Virtual Display  1920  1080
-    ${BROWSER_ID}=  Open Browser  ${obmc_gui_url}
+    ${BROWSER_ID}=  Open Browser  ${openbmc_gui_url}
     Set Global Variable  ${BROWSER_ID}
     Set Window Size  1920  1080
 
@@ -78,12 +78,13 @@ Login OpenBMC GUI
     # username      The username.
     # password      The password.
 
-    Go To  ${obmc_gui_url}
+    Go To  ${openbmc_gui_url}
     Input Text  ${xpath_textbox_hostname}  ${OPENBMC_HOST}
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
-    Click Button  ${xpath_button_login}
+    Click Element  login__submit
     Wait Until Element Is Enabled  ${xpath_button_logout}
+    Page Should Contain  Server information
 
 
 Test Setup Execution
@@ -179,3 +180,63 @@ Test Teardown Execution
     Rprint Pgm Footer
     Print Dashes  0  100  1  =
     LogOut OpenBMC GUI
+
+Open Browser With URL
+    [Documentation]  Open browser with specified URL and returns browser id.
+    [Arguments]  ${URL}  ${browser}=gc
+    # Description of argument(s):
+    # URL      Openbmc GUI URL to be open
+    #          (e.g. https://openbmc-test.mybluemix.net/#/login )
+    # browser  browser used to open above URL
+    #          (e.g. gc for google chrome, ff for firefox)
+    ${browser_ID}=  Open Browser  ${URL}  ${browser}
+    [Return]  ${browser_ID}
+
+Model Server Power Click Button
+    [Documentation]  Click main server power in the header section.
+    [Arguments]  ${div_element}  ${anchor_element}
+    # Description of argument(s):
+    # div_element     Server power header divisional element
+    #                 (e.g. header_wrapper.)
+    # anchor_element  Server power header anchor element
+    #                 (e.g. header_wrapper_elt.)
+    Wait Until Element Is Visible
+    ...  //*[@id='header__wrapper']/div/div[${div_element}]/a[${anchor_element}]/span
+    Click Element
+    ...  //*[@id='header__wrapper']/div/div[${div_element}]/a[${anchor_element}]/span
+
+Controller Server Power Click Button
+    [Documentation]  Click main server power in the header section.
+    [Arguments]  ${controller_element}
+    # Description of argument(s):
+    # controller_element  Server power controller element
+    #                     (e.g. power__power-on.)
+
+    Wait Until Element Is Visible  ${controller_element}
+    Page Should Contain Button  ${controller_element}
+    Click Element  ${controller_element}
+
+Controller Power Operations Confirmation Click Button
+    [Documentation]  Click Common Power Operations Confirmation.
+    [Arguments]  ${main_element}  ${sub_element}  ${confirm_msg_elt}  ${confirmation}
+    # Description of argument(s):
+    # main_element     Server power operations element
+    #                  (e.g. power_operations.)
+    # sub_element      Server power operations sub element
+    #                  (e.g. warm_boot, shut_down.)
+    # confirm_msg_elt  Server power operations confirm message element
+    #                  (e.g. confirm_msg.)
+    # confirmation     Server power operations confirmation
+    #                  (e.g. yes.)
+
+    Click Element
+    ...  //*[@id='power-operations']/div[${main_element}]/div[${sub_element}]/confirm/div/div[${confirm_msg_elt}]/button[${confirmation}]
+
+GUI Power On
+    [Documentation]  Power on the Host using GUI.
+
+    Model Server Power Click Button  ${header_wrapper}  ${header_wrapper_elt}
+    Page Should Contain  Attempts to power on the server
+    Controller Server Power Click Button  power__power-on
+    Page Should Contain  Running
+
