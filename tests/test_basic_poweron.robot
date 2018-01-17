@@ -5,6 +5,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 Resource            ../lib/open_power_utils.robot
+Resource            ../lib/ipmi_client.robot
 
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
@@ -38,6 +39,15 @@ Check For Application Failures
     ...  journalctl --no-pager | egrep '${ERROR_REGEX}'
 
     Should Be Empty  ${journal_log}
+
+Test SSH And IPMI Connections
+    [Documentation]  Try SSH and IPMI commands to verify each connection.
+    [Tags]  Test_SSH_And_IPMI_Connections
+
+    Open Connection And Log In
+    Execute Command On BMC  true
+
+    Run IPMI Standard Command  chassis status
 
 *** Keywords ***
 
