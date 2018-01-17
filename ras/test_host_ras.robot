@@ -353,6 +353,7 @@ Verify Error Log Entry
     ${error_log_file_path}=  Catenate  ${log_prefix}esel.txt
     ${rc}  ${output} =  Run and Return RC and Output
     ...  grep -i ${signature_desc} ${error_log_file_path}
+    Should Be Equal  ${rc}  ${0}
     Should Not Be Empty  ${output}
 
 Inject Recoverable Error With Threshold Limit Through Host
@@ -466,6 +467,11 @@ RAS Suite Setup
     Create Directory  ${RAS_LOG_DIR_PATH}
     OperatingSystem.Directory Should Exist  ${RAS_LOG_DIR_PATH}
     Empty Directory  ${RAS_LOG_DIR_PATH}
+
+    # Set environment variable esel binary path.
+    Should Not Be Empty
+    ...  ${ESEL_BIN_PATH}  msg=You must provide esel bin path.
+    Set Environment Variable  PATH  %{PATH}:${ESEL_BIN_PATH}
 
     # Boot to Os.
     REST Power On  quiet=${1}
