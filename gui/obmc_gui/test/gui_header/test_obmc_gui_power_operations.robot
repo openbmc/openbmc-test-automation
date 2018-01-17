@@ -2,9 +2,10 @@
 
 Documentation  Test Open BMC GUI Power Operations under GUI Header.
 
+Resource  ../../../../lib/state_manager.robot
 Resource  ../../lib/resource.robot
 
-Suite Setup  Login OpenBMC GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+Suite Setup   Login OpenBMC GUI with failure enable
 Suite Teardown  Close Browser
 
 *** Test Cases ***
@@ -13,85 +14,110 @@ Power On The Host
     [Documentation]  Power on the host.
     [Tags]  Power_On_the_Host
 
+    Expected Initial Test State  Off
     GUI Power On
+    Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
+    Wait Until Page Contains  Running
 
-Click Immediate Power Off The Host And Press No
-    [Documentation]  Click Immediate power off the host button and press no
-    ...  button.
-    [Tags]  Click_Immediate_Power_Off_The_Host_And_Press_No
+Click Immediate Shutdown Then No
+    [Documentation]  Click the "Immediate shutdown" button and then click the
+    ...  "No" button.
+    [Tags]  Click_Immediate_Shutdown_Then_No
 
+    Expected Initial Test State  Running
     Controller Server Power Click Button  power__hard-shutdown
     Controller Power Operations Confirmation Click Button  ${power_operations}
     ...  ${power_off}  ${confirm_msg}  ${no}
-    Page Should Contain  Running
 
-Click Immediate Power Off The Host And Press Yes
-    [Documentation]  Click Immediate power off the host button and press
-    ...  yes button.
-    [Tags]  Click_Immediate_Power_Off_The_Host_And_Press_Yes
+    Is Host Running
+    Wait Until Page Contains  Running
 
-    Controller Server Power Click Button  power__hard-shutdown
-    Controller Power Operations Confirmation Click Button  ${power_operations}
-    ...  ${power_off}  ${confirm_msg}  ${yes}
-    Page Should Contain  Off
+Click Cold Reboot Then No
+    [Documentation]  Click the "Cold reboot" button and then click the "No"
+    ...  button.
+    [Tags]  Click_Cold_Reboot_Then_No
 
-Click Cold Boot The Host And Press No
-    [Documentation]  Click cold boot the host button and press no button.
-    [Tags]  Click_Cold_Boot_The_Host_And_Press_No
-
-    GUI Power On
+    Expected Initial Test State  Running
     Controller Server Power Click Button  power__cold-boot
     Controller Power Operations Confirmation Click Button  ${power_operations}
     ...  ${cold_boot}  ${confirm_msg}  ${no}
+
+    Is Host Running
     Page Should Contain  Running
 
-Click Cold Boot The Host And Press Yes
-    [Documentation]  Click Cold boot the host button and press yes button.
-    [Tags]  Click_Cold_Boot_the_Host_And_Press_Yes
+Click Warm Reboot Then No
+    [Documentation]  Click the "Warm reboot" button and then click the "No"
+    ...  button.
+    [Tags]  Click_Warm_Reboot_Then_No
 
+    Expected Initial Test State  Running
+    Controller Server Power Click Button  power__warm-boot
+    Controller Power Operations Confirmation Click Button  ${power_operations}
+    ...  ${warm_boot}  ${confirm_msg}  ${no}
+    Is Host Running
+    Page Should Contain  Running
+
+Click Orderly Shutdown Then No
+    [Documentation]  Click the "Orderly shutdown" button and then click the
+    ...  "No" button.
+    [Tags]  Click_Orderly_Shutdown_Then_No
+
+    Expected Initial Test State  Running
+    Controller Server Power Click Button  power__soft-shutdown
+    Controller Power Operations Confirmation Click Button  ${power_operations}
+    ...  ${shut_down}  ${confirm_msg}  ${no}
+    Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
+    Page Should Contain  Running
+
+Click Warm Reboot Then Yes
+    [Documentation]  Click the "Warm reboot" button and then click the "Yes"
+    ...  button.
+    [Tags]  Click_Warm_Reboot_Then_Yes
+
+    Expected Initial Test State  Running
+    Controller Server Power Click Button  power__warm-boot
+    Controller Power Operations Confirmation Click Button  ${power_operations}
+    ...  ${warm_boot}  ${confirm_msg}  ${yes}
+    Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
+    Page Should Contain  Running
+
+Click Cold Reboot Then Yes
+    [Documentation]  Click the "Cold reboot" button and then click the "Yes"
+    ...  button.
+    [Tags]  Click_Cold_Reboot_Then_Yes
+
+    Expected Initial Test State  Running
     Controller Server Power Click Button  power__cold-boot
     Controller Power Operations Confirmation Click Button  ${power_operations}
     ...  ${cold_boot}  ${confirm_msg}  ${yes}
     Page Should Contain  Standby
+    Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
     Page Should Contain  Running
 
-Click Warm Boot The Host And Press No
-    [Documentation]  Click warm boot the host button and press no button.
-    [Tags]  Click_Warm_Boot_The_Host_And_Press_No
+Click Orderly Shutdown Then Yes
+    [Documentation]  Click the "Orderly shutdown" button and then click the
+    ...  "Yes" button.
+    [Tags]  Click_Orderly_Shutdown_Then_Yes
 
-    Controller Server Power Click Button  power__warm-boot
-    Controller Power Operations Confirmation Click Button  ${power_operations}
-    ...  ${warm_boot}  ${confirm_msg}  ${no}
-    Page Should Contain  Running
-
-Click Warm Boot The Host And Press Yes
-    [Documentation]  Click warm boot the host button and press yes button.
-    [Tags]  Click_Warm_Boot_The_Host_And_Press_Yes
-
-    Controller Server Power Click Button  power__warm-boot
-    Controller Power Operations Confirmation Click Button  ${power_operations}
-    ...  ${warm_boot}  ${confirm_msg}  ${yes}
-    Page Should Contain  Running
-
-Click Orderly Shutdown The Host And Press No
-    [Documentation]  Press orderly shutdown the host button and press no
-    ...  button.
-    [Tags]  Click_Orderly_Shutdown_The_Host_And_Press_No
-
-    Controller Server Power Click Button  power__soft-shutdown
-    Controller Power Operations Confirmation Click Button  ${power_operations}
-    ...  ${shut_down}  ${confirm_msg}  ${no}
-    Page Should Contain  Running
-
-Click Orderly Shutdown The Host And Press Yes
-    [Documentation]  Press orderly shutdown the host button and press yes
-    ...  button.
-    [Tags]  Click_Orderly_Shutdown_The_Host_And_Press_Yes
-
+    Expected Initial Test State  Running
     Controller Server Power Click Button  power__soft-shutdown
     Controller Power Operations Confirmation Click Button  ${power_operations}
     ...  ${shut_down}  ${confirm_msg}  ${yes}
     Page Should Contain  Off
+    Wait Until Keyword Succeeds  6 min  10 sec  Is Host Off
+
+Click Immediate Shutdown Then Yes
+    [Documentation]  Click "Immediate shutdown" button and then click the "Yes"
+    ...  button.
+    [Tags]  Click_Immediate_Shutdown_Then_Yes
+
+    Expected Initial Test State  Running
+    Controller Server Power Click Button  power__hard-shutdown
+    Controller Power Operations Confirmation Click Button  ${power_operations}
+    ...  ${power_off}  ${confirm_msg}  ${yes}
+
+    Wait Until Page Contains  Off
+    Wait Until Keyword Succeeds  6 min  10 sec  Is Host Off
 
 OpenBMC GUI Logoff
     [Documentation]  Log out from openBMC GUI.
@@ -100,6 +126,26 @@ OpenBMC GUI Logoff
     Log  ${xpath_openbmc_url}
     Log To Console  ${xpath_openbmc_url}
     Click Element  header
+
+*** Keywords ***
+
+Expected Initial Test State
+    [Documentation]  Power on the host if "Running" expected, Power off the
+    ...  host if "Off" expected as per the requirement of initial test state.
+    [Arguments]  ${expectedState}
+    # Description of argument(s):
+    # expectedState    Test initial host state.
+
+    Run Keyword If  '${expectedState}' == 'Running'
+    ...  Initiate Host Boot
+
+    Run Keyword If  '${expectedState}' == 'Off'
+    ...  Initiate Host PowerOff
+
+Login OpenBMC GUI with failure enable
+
+    Open Browser With URL  ${xpath_openbmc_url}
+    Login OpenBMC GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
 
 
 
