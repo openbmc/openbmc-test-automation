@@ -113,6 +113,8 @@ OpenBMC Delete Request
 
 Initialize OpenBMC
     [Arguments]  ${timeout}=20  ${quiet}=${1}
+    ...  ${OPENBMC_USERNAME}=${OPENBMC_USERNAME}
+    ...  ${OPENBMC_PASSWORD}=${OPENBMC_PASSWORD}
 
     # Description of argument(s):
     # timeout  REST login attempt time out.
@@ -122,9 +124,12 @@ Initialize OpenBMC
     # This will retry at 20 second interval.
     Wait Until Keyword Succeeds  40 sec  20 sec
     ...  Post Login Request  ${timeout}  ${quiet}
+    ...  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
 
 Post Login Request
     [Arguments]  ${timeout}=20  ${quiet}=${1}
+    ...  ${OPENBMC_USERNAME}=${OPENBMC_USERNAME}
+    ...  ${OPENBMC_PASSWORD}=${OPENBMC_PASSWORD}
 
     # Description of argument(s):
     # timeout  REST login attempt time out.

@@ -127,6 +127,9 @@ BOTH_OWNER = TIME_DBUS_BASE + 'Owner.Owners.Both'
 NTP_MODE = TIME_DBUS_BASE + 'Synchronization.Method.NTP'
 MANUAL_MODE = TIME_DBUS_BASE + 'Synchronization.Method.Manual'
 
+# User manager variable.
+BMC_USER_URI = OPENBMC_BASE_URI + 'user/'
+
 '''
   QEMU HTTPS variable:
 
