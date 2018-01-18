@@ -1,3 +1,5 @@
+#Clear error logs for upcoming tests
+-i Clear_All_Error_Logs
 #Verify SSH and IPMI interfaces
 -i Test_SSH_And_IPMI_Connections
 #REST SSL connection test.
@@ -18,3 +20,5 @@
 -i Multiple_Requests_On_BMC_Using_Single_REST_Session
 -i REST_Delete_All_Sessions_And_Expect_Error
 -i REST_Logout_Session_To_BMC
+#Verify no error logs generated
+-i Verify_Error_Log_Is_Clear

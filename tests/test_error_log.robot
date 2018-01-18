@@ -18,6 +18,19 @@ ${stack_mode}       skip
 
 *** Test Cases ***
 
+Clear All Error Logs
+    [Documentation]  Clear existing error logs.
+    [Tags]  Clear_All_Error_Logs
+
+    Delete Error Logs And Verify
+
+Verify Error Log Is Clear
+    [Documentation]  Verify log is still empty.
+    [Tags]  Verify_Error_Log_Is_Clear
+
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
 Error Log Check After BMC Reboot
     [Documentation]  Check error log after BMC rebooted.
     [Tags]  Error_Log_Check_At_BMC_Ready
