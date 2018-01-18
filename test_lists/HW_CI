@@ -1,3 +1,5 @@
+#Clear error logs for upcoming tests
+-i Clear_All_Error_Logs
 #Verify SSH and IPMI interfaces
 -i Test_SSH_and_IPMI_Connections
 #REST SSL connection test.
@@ -10,3 +12,5 @@
 -i Verify_OCC_State_When_Host_Is_Booted
 #Verify BMC reset with the host up
 -i Verify_OCC_State_After_BMC_Reset
+#Verify no error logs generated
+-i Verify_Error_Log_Is_Clear
