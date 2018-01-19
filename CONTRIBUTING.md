@@ -155,6 +155,22 @@ Robot Coding Guidelines
             # policy       Power restore policy (e.g "RESTORE_LAST_STATE",
             #              ${RESTORE_LAST_STATE}).
         ```
+-   Variable assignments:
+
+    When assigning a variable as output from a keyword, do not precede the
+    equal sign with a space.
+
+    Correct examples:
+    ```
+    ${var1}=  Set Variable  ${1}
+    ${var1}=  My Keyword
+    ```
+    Incorrect examples:
+
+    ```
+    ${var1} =  Set Variable  ${1}
+    ${var1} =  My Keyword
+    ```
 -   General variable naming conventions:
     -   Variable names should be lower case with few exceptions:
         -   Environment variables should be all upper case.
