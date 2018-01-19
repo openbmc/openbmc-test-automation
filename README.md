@@ -236,5 +236,5 @@ version 2.3.1 or greater is required) or via Robot CLI command.
 **Jenkins jobs tox commands**
 * HW CI tox command:
     ```
-    $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/HW_CI tests
+    $ OPENBMC_HOST=x.x.x.x IMAGE_FILE_PATH={image} SKIP_UPDATE_IF_ACTIVE=true tox -e default -- --argumentfile test_lists/HW_CI tests/ extended/
     ```
