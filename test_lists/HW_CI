@@ -20,5 +20,7 @@
 -i Multiple_Requests_On_BMC_Using_Single_REST_Session
 -i REST_Delete_All_Sessions_And_Expect_Error
 -i REST_Logout_Session_To_BMC
+#Verify code update from the image under test still works
+-i REST_BMC_Code_Update
 #Verify no error logs generated
 -i Verify_Error_Log_Is_Clear
