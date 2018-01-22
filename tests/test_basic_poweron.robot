@@ -6,7 +6,7 @@ Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 
 Test Setup          Start SOL Console Logging
-Test Teardown       Test Exit Logs
+Test Teardown       Test Teardown Execution
 
 Force Tags  chassisboot
 
@@ -25,7 +25,6 @@ Power On Test
     [Documentation]  Power off and on.
     [Tags]  Power_On_Test
     [Setup]  Set Auto Reboot  ${0}
-    [Teardown]  Set Auto Reboot  ${1}
 
     Repeat Keyword  ${LOOP_COUNT} times  Host Off And On
 
@@ -42,11 +41,12 @@ Check For Application Failures
 
 *** Keywords ***
 
-Test Exit Logs
+Test Teardown Execution
     [Documentation]  Collect FFDC and SOL log.
     FFDC On Test Case Fail
     ${sol_log}=    Stop SOL Console Logging
     Log   ${sol_log}
+    Set Auto Reboot  ${1}
 
 Host Off And On
     [Documentation]  Verify power off and on.
