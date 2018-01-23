@@ -8,6 +8,8 @@ Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
+${new_mc_id}=  HOST
+
 *** Test Cases ***
 
 Set Asset Tag With Valid String Length
@@ -47,5 +49,53 @@ Set Asset Tag With Valid String Length Via REST
     ...  AssetTag
     Should Be Equal As Strings  ${asset_tag}  ${random_string}
 
+Verify Get And Set Management Controller ID String
+    [Documentation]  Verify get and set management controller ID string.
+    [Tags]  Verify_Get_And_Set_Management_Controller_ID_String
+
+    # Get the value of the managemment controller ID string.
+    # Example:
+    # Get Management Controller Identifier String: witherspoon
+
+    ${cmd_output}=  Run IPMI Standard Command  dcmi get_mc_id_string
+
+    # Extract management controller ID from cmd_output.
+    ${initial_mc_id}=  Fetch From Right  ${cmd_output}  :${SPACE}
+
+    # Set the management controller ID string to other value.
+    # Example:
+    # Set Management Controller Identifier String Command: HOST
+
+    Set Management Controller ID String  ${new_mc_id}
+
+    # Get the management controller ID and verify.
+    Get Management Controller ID String And Verify  ${new_mc_id}
+
+    # Set the value back to the initial value and verify.
+    Set Management Controller ID String  ${initial_mc_id}
+
+    # Get the management controller ID and verify.
+    Get Management Controller ID String And Verify  ${initial_mc_id}
 
 *** Keywords ***
+
+Set Management Controller ID String
+    [Documentation]  Set the management controller ID string.
+    [Arguments]  ${string}
+
+    # Description of argument(s):
+    # string  Management Controller ID String to be set
+
+    ${set_mc_id_string}=  Run IPMI Standard Command
+    ...  dcmi set_mc_id_string ${string}
+
+Get Management Controller ID String And Verify
+    [Documentation]  Get the management controller ID sting.
+    [Arguments]  ${string}
+
+    # Description of argument(s):
+    # string  Management Controller ID string
+
+    ${get_mc_id}=  Run IPMI Standard Command  dcmi get_mc_id_string
+    Should Contain  ${get_mc_id}  ${string}
+    ...  msg=Command failed: get_mc_id.
