@@ -39,7 +39,7 @@ Verify Watchdog Setting With Watchdog Enabled
 
     ${initial_interval}=  Read Attribute  ${HOST_WATCHDOG_URI}  Interval
 
-    Trigger Host Watchdog Error  2000  60
+    Trigger Host Watchdog Error  2000  30
 
     Wait Until Keyword Succeeds  3 min  10 sec  Watchdog Object Should Exist
 
