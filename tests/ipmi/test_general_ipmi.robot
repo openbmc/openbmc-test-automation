@@ -47,5 +47,29 @@ Set Asset Tag With Valid String Length Via REST
     ...  AssetTag
     Should Be Equal As Strings  ${asset_tag}  ${random_string}
 
+Verify Get And Set Management Controller ID String
+    [Documentation]  Verify get and set management controller ID string.
+    [Tags]  Verify_Get_And_Set_Management_Controller_ID_String
+
+    # Get the value of managemment controller ID string.
+    ${get_mc_id_string}=  Run IPMI Standard Command  dcmi get_mc_id_string
+    Should Contain  ${get_mc_id_string}  witherspoon
+    ...  msg=witherspoon is not displayed
+
+    # Fetch the value of the string.
+    ${fetch_value}=  Fetch From Right  ${get_mc_id_string}  :${SPACE}
+
+    # Set the management controller ID string to other value
+    ${set_mc_id_string}=  Run IPMI Standard Command
+    ...  dcmi set_mc_id_string HOST
+    Should Contain  ${set_mc_id_string}  HOST
+    ...  msg=HOST is not displayed
+ 
+    # Set back the value to previous string and verify.
+    ${setback_mc_id_string}=  Run IPMI Standard Command
+    ...  dcmi set_mc_id_string ${fetch_value}
+    ${set_get_mc_id_string}=  Run IPMI Standard Command  dcmi get_mc_id_string
+    Should Contain  ${set_get_mc_id_string}  ${fetch_value}
+    ...  msg=witherspoon is not displayed
 
 *** Keywords ***
