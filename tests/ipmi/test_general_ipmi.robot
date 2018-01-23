@@ -8,6 +8,8 @@ Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
+${str}=  HOST
+
 *** Test Cases ***
 
 Set Asset Tag With Valid String Length
@@ -47,5 +49,50 @@ Set Asset Tag With Valid String Length Via REST
     ...  AssetTag
     Should Be Equal As Strings  ${asset_tag}  ${random_string}
 
+Verify Get And Set Management Controller ID String
+    [Documentation]  Verify get and set management controller ID string.
+    [Tags]  Verify_Get_And_Set_Management_Controller_ID_String
+
+    # Get the value of the managemment controller ID string.
+    # Example:
+    # Get Management Controller Identifier String: witherspoon
+
+    ${cmd_output}=  Run IPMI Standard Command  dcmi get_mc_id_string
+
+    # Extract mc_id from cmd_output.
+    ${initial_mc_id}=  Fetch From Right  ${cmd_output}  :${SPACE}
+
+    # Set the management controller ID string to other value.
+    # Example:
+    # Set Management Controller Identifier String Command: HOST
+
+    Set MC_ID String  ${str}
+
+    # Set the value back to the initial value and verify.
+    Set MC_ID String  ${initial_mc_id}
+
+    # Get the MC_ID and verify.
+    Get MC_ID String And Verify  ${initial_mc_id}
 
 *** Keywords ***
+
+Set MC_ID String
+    [Documentation]  Set the MD_ID string.
+    [Arguments]  ${string}
+
+    # Description of argument(s):
+    # string  MD_ID String to be set
+
+    ${set_mc_id_string}=  Run IPMI Standard Command
+    ...  dcmi set_mc_id_string ${string}
+
+Get MC_ID String And Verify
+    [Documentation]  Get the MC_ID sting.
+    [Arguments]  ${string}
+
+    # Description of argument(s):
+    # string  MC_ID string
+
+    ${get_mc_id}=  Run IPMI Standard Command  dcmi get_mc_id_string
+    Should Contain  ${get_mc_id}  ${string}
+    ...  msg=Command failed: get mc_id.
