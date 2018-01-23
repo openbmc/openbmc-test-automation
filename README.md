@@ -4,6 +4,7 @@
 * REST
 * Out-of-band IPMI
 * SSH to BMC and Host OS
+* Web UI (User interface)
 
 **Key Feature List**
 * Power on/off
