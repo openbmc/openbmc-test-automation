@@ -4,7 +4,7 @@ Documentation       This suite is for testing general IPMI functions.
 Resource            ../../lib/ipmi_client.robot
 Resource            ../../lib/openbmc_ffdc.robot
 
-Test Teardown       FFDC On Test Case Fail
+#Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -47,5 +47,48 @@ Set Asset Tag With Valid String Length Via REST
     ...  AssetTag
     Should Be Equal As Strings  ${asset_tag}  ${random_string}
 
+Verify Chassis Identify via IPMI
+    [Documentation]  Verify chassis identify using IPMI command.
+    [Tags]  Verify_Chassis_Identify_via_IPMI
+
+    # Check the state of LED.
+    Verify LED State  Off
+
+    # Set to Default chassis identify and verify if LED blinks for 15s.
+    Run IPMI Standard Command  chassis identify
+    Verify LED State  Blink
+
+    Sleep  15s
+    Verify LED State  Off
+
+    # Set chassis identify to 10s and verify if the LED blinks for 10s.
+    Run IPMI Standard Command  chassis identify 10
+    Verify LED State  Blink
+
+    Sleep  10s
+    Verify LED State  Off
+
+Verify Chassis Identify Off And Force Identify via IPMI
+    [Documentation]  Verify Chassis Identify Off and Force Identify via IPMI.
+    [Tags]  Verify_Chassis_Identify_Off_And_Force_Identify_via_IPMI
+
+    # Set the LED to "Force Identify On".
+    Run IPMI Standard Command  chassis identify force
+    Verify LED State  Blink
+
+    # Set chassis identify to 0s and verify if the LED turns Off.
+    Run IPMI Standard Command  chassis identify 0
+    Verify LED State  Off
 
 *** Keywords ***
+
+Verify LED State
+    [Documentation]  Verify LED State as Blinking or in off state
+    [Arguments]  ${state}
+
+    # Description of argument(s):
+    # state  LED in Blinking or Off state
+
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.${state}
+    ...  msg=Command failure: LED not in right state.
