@@ -1,4 +1,7 @@
 *** Settings ***
+
+Documentation  Utilities for automated testing.
+
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
@@ -16,22 +19,23 @@ Library                 var_funcs.py
 Library                 SCPLibrary  WITH NAME  scp
 
 *** Variables ***
-${pflash_cmd}           /usr/sbin/pflash -r /dev/stdout -P VERSION
-${SYSTEM_SHUTDOWN_TIME}       ${5}
+
+${pflash_cmd}             /usr/sbin/pflash -r /dev/stdout -P VERSION
+${SYSTEM_SHUTDOWN_TIME}   ${5}
 ${dbuscmdBase}
 ...  dbus-send --system --print-reply --dest=${OPENBMC_BASE_DBUS}.settings.Host
 ${dbuscmdGet}
 ...  ${SETTINGS_URI}host0  org.freedesktop.DBus.Properties.Get
-# Enable when ready with openbmc/openbmc-test-automation#203
-#${dbuscmdString}=  string:"xyz.openbmc_project.settings.Host" string:
 ${dbuscmdString}=   string:"org.openbmc.settings.Host" string:
 
 # Assign default value to QUIET for programs which may not define it.
 ${QUIET}  ${0}
+
 ${bmc_mem_free_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
 ${bmc_mem_total_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
 ${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
 ${HOST_SETTING}    ${SETTINGS_URI}host0
+
 # /run/initramfs/ro associate filesystem  should be 100% full always
 ${bmc_file_system_usage_cmd}=  df -h | cut -c 52-54 | grep 100 | wc -l
 ${total_pnor_ro_file_system_cmd}=  df -h | grep /media/pnor-ro | wc -l
@@ -45,18 +49,20 @@ ${devicetree_base}  /sys/firmware/devicetree/base/model
 # Initialize default debug value to 0.
 ${DEBUG}         ${0}
 
+${probe_cpu_tool_path}     ${EXECDIR}/tools/ras/probe_cpus.sh
+${scom_addrs_tool_path}    ${EXECDIR}/tools/ras/scom_addr_p9.sh
+${target_file_path}        /root/
+
+${default_tarball}  ${EXECDIR}/obmc-phosphor-debug-tarball-witherspoon.tar.xz
+
 # These variables are used to straddle between new and old methods of setting
 # values.
-${boot_prog_method}     ${EMPTY}
-
+${boot_prog_method}               ${EMPTY}
 ${power_policy_setup}             ${0}
 ${bmc_power_policy_method}        ${EMPTY}
 @{valid_power_policy_vars}        RESTORE_LAST_STATE  ALWAYS_POWER_ON
 ...                               ALWAYS_POWER_OFF
 
-${probe_cpu_tool_path}     ${EXECDIR}/tools/ras/probe_cpus.sh
-${scom_addrs_tool_path}    ${EXECDIR}/tools/ras/scom_addr_p9.sh
-${target_file_path}        /root/
 
 *** Keywords ***
 
@@ -66,6 +72,7 @@ Check BMC Performance
     Check BMC CPU Performance
     Check BMC Mem Performance
     Check BMC File System Performance
+
 
 Verify PNOR Update
     [Documentation]  Verify that the PNOR is not corrupted.
@@ -77,6 +84,7 @@ Verify PNOR Update
     ${pnor_info}=  Execute Command On BMC  ${pflash_cmd}
     Should Not Contain Any  ${pnor_info}  Flash header not found  Error
 
+
 Get BMC System Model
     [Documentation]  Get the BMC model from the device tree.
 
@@ -86,6 +94,7 @@ Get BMC System Model
     Should Be Empty  ${stderr}
     Should Not Be Empty  ${bmc_model}
     [Return]  ${bmc_model}
+
 
 Verify BMC System Model
     [Documentation]  Verify the BMC model with ${OPENBMC_MODEL}.
@@ -97,6 +106,7 @@ Verify BMC System Model
     ...  ${tmp_bmc_model}  ignore_case=True
     [Return]  ${ret}
 
+
 Wait For Host To Ping
     [Arguments]  ${host}  ${timeout}=${OPENBMC_REBOOT_TIMEOUT}min
     ...          ${interval}=5 sec
@@ -107,12 +117,14 @@ Wait For Host To Ping
 
     Wait Until Keyword Succeeds  ${timeout}  ${interval}  Ping Host  ${host}
 
+
 Ping Host
     [Arguments]     ${host}
     Should Not Be Empty    ${host}   msg=No host provided
     ${RC}   ${output}=     Run and return RC and Output    ping -c 4 ${host}
     Log     RC: ${RC}\nOutput:\n${output}
     Should be equal     ${RC}   ${0}
+
 
 Get Boot Progress
     [Documentation]  Get the boot progress and return it.
@@ -129,6 +141,7 @@ Get Boot Progress
     ...      Old Get Boot Progress  quiet=${quiet}
 
     [Return]  ${state}
+
 
 Set Boot Progress Method
     [Documentation]  Set the boot_prog_method to either 'Old' or 'New'.
@@ -162,6 +175,7 @@ Set Boot Progress Method
     Set Global Variable  ${boot_prog_method}  Old
     Rqpvars  boot_prog_method
 
+
 Old Get Boot Progress
     [Documentation]  Get the boot progress the old way (via org location).
     [Arguments]  ${quiet}=${QUIET}
@@ -175,6 +189,7 @@ Old Get Boot Progress
 
     [Return]  ${state}
 
+
 New Get Boot Progress
     [Documentation]  Get the boot progress the new way (via xyz location).
     [Arguments]  ${quiet}=${QUIET}
@@ -187,13 +202,16 @@ New Get Boot Progress
 
     [Return]  ${state.rsplit('.', 1)[1]}
 
+
 Is Power On
     ${state}=  Get Power State
     Should be equal  ${state}  ${1}
 
+
 Is Power Off
     ${state}=  Get Power State
     Should be equal  ${state}  ${0}
+
 
 Initiate Power On
     [Documentation]  Initiates the power on and waits until the Is Power On
@@ -210,6 +228,7 @@ Initiate Power On
     Run Keyword If  '${wait}' == '${0}'  Return From Keyword
     Wait Until Keyword Succeeds  3 min  10 sec  Is Power On
 
+
 Initiate Power Off
     [Documentation]  Initiates the power off and waits until the Is Power Off
     ...  keyword returns that the power state has switched to off.
@@ -219,6 +238,7 @@ Initiate Power Off
     ...  data=${args}
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     Wait Until Keyword Succeeds  1 min  10 sec  Is Power Off
+
 
 Initiate OS Host Power Off
     [Documentation]  Initiate an OS reboot.
@@ -242,6 +262,7 @@ Initiate OS Host Power Off
     ${output}  ${stderr}  ${rc}=  OS Execute Command
     ...  ${cmd_buf}  fork=${1}
 
+
 Initiate OS Host Reboot
     [Documentation]  Initiate an OS reboot.
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
@@ -260,6 +281,7 @@ Initiate OS Host Reboot
     ${output}  ${stderr}  ${rc}=  OS Execute Command
     ...  ${cmd_buf}  fork=${1}
 
+
 Initiate Auto Reboot
     [Documentation]  Initiate an auto reboot.
 
@@ -267,6 +289,7 @@ Initiate Auto Reboot
     Set Auto Reboot  ${1}
     # Set the watchdog timer.  Note: 5000 = milliseconds which is 5 seconds.
     Trigger Host Watchdog Error  5000
+
 
 Trigger Warm Reset
     log to console    "Triggering warm reset"
@@ -280,6 +303,7 @@ Trigger Warm Reset
 
     Sleep   ${SYSTEM_SHUTDOWN_TIME}min
     Check If BMC Is Up
+
 
 Check OS
     [Documentation]  Attempts to ping the host OS and then checks that the host
@@ -328,6 +352,7 @@ Check OS
     # We will likewise fail if the OS did not ping, as we could SSH but not
     # ping
     Should Be Equal As Strings  ${ping_rc}  ${TRUE}  msg=${err_msg}
+
 
 Wait for OS
     [Documentation]  Waits for the host OS to come up via calls to "Check OS".
@@ -390,6 +415,7 @@ Copy PNOR to BMC
     Log    Copying ${PNOR_IMAGE_PATH} to /tmp
     scp.Put File    ${PNOR_IMAGE_PATH}   /tmp
 
+
 Flash PNOR
     [Documentation]    Calls flash bios update method to flash PNOR image
     [Arguments]    ${pnor_image}
@@ -400,17 +426,20 @@ Flash PNOR
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
     Wait Until Keyword Succeeds    2 min   10 sec    Is PNOR Flashing
 
+
 Get Flash BIOS Status
     [Documentation]  Returns the status of the flash BIOS API as a string. For
     ...              example 'Flashing', 'Flash Done', etc
     ${data}=  Read Properties  /org/openbmc/control/flash/bios
     [Return]    ${data['status']}
 
+
 Is PNOR Flashing
     [Documentation]  Get BIOS 'Flashing' status. This indicates that PNOR
     ...              flashing has started.
     ${status}=    Get Flash BIOS Status
     Should Contain  ${status}  Flashing
+
 
 Is PNOR Flash Done
     [Documentation]  Get BIOS 'Flash Done' status.  This indicates that the
@@ -424,10 +453,12 @@ Is OS Starting
     ${boot_progress}=  Get Boot Progress
     Should Be Equal  ${boot_progress}  OSStart
 
+
 Is OS Off
     [Documentation]  Check if boot progress is "Off".
     ${boot_progress}=  Get Boot Progress
     Should Be Equal  ${boot_progress}  Off
+
 
 Get Boot Progress To OS Starting State
     [Documentation]  Get the system to a boot progress state of 'FW Progress,
@@ -439,6 +470,7 @@ Get Boot Progress To OS Starting State
     ...  ELSE
     ...  Run Keywords  Initiate Host PowerOff  AND  Initiate Host Boot
     ...  AND  Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+
 
 Verify Ping and REST Authentication
     ${l_ping}=   Run Keyword And Return Status
@@ -455,6 +487,7 @@ Verify Ping and REST Authentication
     Open Connection And Log In
     ${system}   ${stderr}=    Execute Command   hostname   return_stderr=True
     Should Be Empty     ${stderr}
+
 
 Check If BMC is Up
     [Documentation]  Wait for Host to be online. Checks every X seconds
@@ -480,9 +513,11 @@ Check If warmReset is Initiated
     Return From Keyword If   '${alive}' == '${False}'    ${False}
     [Return]    ${True}
 
+
 Flush REST Sessions
     [Documentation]   Removes all the active session objects
     Delete All Sessions
+
 
 Initialize DBUS cmd
     [Documentation]  Initialize dbus string with property string to extract
@@ -490,6 +525,7 @@ Initialize DBUS cmd
     ${cmd}=     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
     ${cmd}=     Catenate  ${cmd}${boot_property}
     Set Global Variable   ${dbuscmd}     ${cmd}
+
 
 Create OS Console File Path
     [Documentation]  Create OS console file path name and return it.
@@ -507,23 +543,27 @@ Create OS Console File Path
 
     [Return]  ${log_file_path}
 
+
 Create OS Console Command String
     [Documentation]  Return a command string to start OS console logging.
 
     # First make sure that the ssh_pw program is available.
-    ${cmd_buf}=  Catenate  which ssh_pw 2>/dev/null || find ${EXECDIR} -name 'ssh_pw'
-    Rdpissuing  ${cmd_buf}
-    ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
+    ${cmd}=  Catenate  which ssh_pw 2>/dev/null || find
+    ...  ${EXECDIR} -name 'ssh_pw'
+
+    Rdpissuing  ${cmd}
+    ${rc}  ${output}=  Run And Return Rc And Output  ${cmd}
     Rdpvars  rc  output
 
     Should Be Equal As Integers  0  ${rc}  msg=Could not find ssh_pw.
 
     ${ssh_pw_file_path}=  Set Variable  ${output}
 
-    ${cmd_buf}=  Catenate  ${ssh_pw_file_path} ${OPENBMC_PASSWORD} -p 2200
+    ${cmd}=  Catenate  ${ssh_pw_file_path} ${OPENBMC_PASSWORD} -p 2200
     ...  -o "StrictHostKeyChecking no" ${OPENBMC_USERNAME}@${OPENBMC_HOST}
 
-    [Return]  ${cmd_buf}
+    [Return]  ${cmd}
+
 
 Get SOL Console Pid
     [Documentation]  Get the pid of the active SOL console job.
@@ -599,6 +639,7 @@ Stop SOL Console Logging
     ...  print_output=${0}  show_err=${0}
 
     [Return]  ${output}
+
 
 Start SOL Console Logging
     [Documentation]  Start system console log to file.
@@ -699,6 +740,7 @@ Stop Journal Log
 
     [Return]    ${journal_log}
 
+
 Mac Address To Hex String
     [Documentation]   Converts MAC address into hex format.
     ...               Example
@@ -711,6 +753,7 @@ Mac Address To Hex String
 
     ${mac_hex}=  Catenate  0x${i_macaddress.replace(':', ' 0x')}
     [Return]    ${mac_hex}
+
 
 IP Address To Hex String
     [Documentation]   Converts IP address into hex format.
@@ -732,6 +775,7 @@ IP Address To Hex String
     ${ip_hex}=  Catenate    @{ip}
     [Return]    ${ip_hex}
 
+
 BMC CPU Performance Check
    [Documentation]   Minimal 10% of proc should be free in this instance
 
@@ -741,6 +785,7 @@ BMC CPU Performance Check
     ...  ${bmc_cpu_usage_cmd}
     ${bmc_cpu_percentage}=  Fetch From Left  ${bmc_cpu_usage_output}  %
     Should be true  ${bmc_cpu_percentage} < 90
+
 
 BMC Mem Performance Check
     [Documentation]   Minimal 10% of memory should be free in this instance
@@ -761,15 +806,16 @@ BMC Mem Performance Check
     ...   ${bmc_mem_percentage}/${bmc_mem_total_output}
     Should be true  ${bmc_mem_percentage} > 10
 
+
 BMC File System Usage Check
     [Documentation]   Check the file system space. 4 file system should be
     ...  100% full which is expected
-    # Filesystem                Size      Used Available Use% Mounted on
-    # /dev/root                14.4M     14.4M         0 100% /
-    # /dev/ubiblock0_0         14.4M     14.4M         0 100% /media/rofs-c9249b0e
-    # /dev/ubiblock8_0         19.6M     19.6M         0 100% /media/pnor-ro-8764baa3
-    # /dev/ubiblock4_0         14.4M     14.4M         0 100% /media/rofs-407816c
-    # /dev/ubiblock8_4         21.1M     21.1M         0 100% /media/pnor-ro-cecc64c4
+    # Filesystem            Size    Used Available Use% Mounted on
+    # /dev/root            14.4M     14.4M       0 100% /
+    # /dev/ubiblock0_0     14.4M     14.4M       0 100% /media/rofs-c9249b0e
+    # /dev/ubiblock8_0     19.6M     19.6M       0 100% /media/pnor-ro-8764baa3
+    # /dev/ubiblock4_0     14.4M     14.4M       0 100% /media/rofs-407816c
+    # /dev/ubiblock8_4     21.1M     21.1M       0 100% /media/pnor-ro-cecc64c4
     ${bmc_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${bmc_file_system_usage_cmd}
     ${bmc_pnor_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
@@ -782,10 +828,12 @@ BMC File System Usage Check
     ${total_full_fs}=  Evaluate  ${total_bmc_pnor_image}+1
     Should Be True  ${bmc_fs_usage_output}==${total_full_fs}
 
+
 Check BMC CPU Performance
     [Documentation]   Minimal 10% of proc should be free in 3 sample
     :FOR  ${var}  IN Range  1  4
     \     BMC CPU Performance check
+
 
 Check BMC Mem Performance
     [Documentation]   Minimal 10% of memory should be free
@@ -793,11 +841,13 @@ Check BMC Mem Performance
     :FOR  ${var}  IN Range  1  4
     \     BMC Mem Performance check
 
+
 Check BMC File System Performance
     [Documentation]  Check for file system usage for 4 times
 
     :FOR  ${var}  IN Range  1  4
     \     BMC File System Usage check
+
 
 Get URL List
     [Documentation]  Return list of URLs under given URL.
@@ -809,6 +859,7 @@ Get URL List
     ${url_list}=  Read Properties  ${openbmc_url}/list  quiet=${1}
     Sort List  ${url_list}
     [Return]  ${url_list}
+
 
 Get Endpoint Paths
     [Documentation]   Returns all url paths ending with given endpoint
@@ -833,12 +884,14 @@ Get Endpoint Paths
     ${resp}=  Get Matches  ${list}  regexp=^.*[0-9a-z_].${endpoint}[0-9a-z]*$
     [Return]  ${resp}
 
+
 Check Zombie Process
     [Documentation]    Check if any defunct process exist or not on BMC
     ${count}  ${stderr}  ${rc}=  Execute Command  ps -o stat | grep Z | wc -l
     ...    return_stderr=True  return_rc=True
     Should Be True    ${count}==0
     Should Be Empty    ${stderr}
+
 
 Prune Journal Log
     [Documentation]   Prune archived journal logs.
@@ -856,6 +909,7 @@ Prune Journal Log
     ...  return_stderr=True  return_rc=True
 
     Should Be Equal  ${rc}  ${0}  msg=${stderr}
+
 
 Set BMC Power Policy
     [Documentation]   Set the given BMC power policy.
@@ -878,6 +932,7 @@ Set BMC Power Policy
     ${currentPolicy}=  Get System Power Policy
     Should Be Equal    ${currentPolicy}   ${policy}
 
+
 New Set Power Policy
     [Documentation]   Set the given BMC power policy (new method).
     [Arguments]   ${policy}
@@ -889,6 +944,7 @@ New Set Power Policy
     Write Attribute
     ...  ${POWER_RESTORE_URI}  PowerRestorePolicy  data=${valueDict}
 
+
 Old Set Power Policy
     [Documentation]   Set the given BMC power policy (old method).
     [Arguments]   ${policy}
@@ -898,6 +954,7 @@ Old Set Power Policy
 
     ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
+
 
 Get System Power Policy
     [Documentation]  Get the BMC power policy.
@@ -909,20 +966,24 @@ Get System Power Policy
     ${currentPolicy}=  Run Keyword  @{cmd_buf}
     [Return]  ${currentPolicy}
 
+
 New Get Power Policy
     [Documentation]  Get the BMC power policy (new method).
     ${currentPolicy}=  Read Attribute  ${POWER_RESTORE_URI}  PowerRestorePolicy
     [Return]  ${currentPolicy}
+
 
 Old Get Power Policy
     [Documentation]  Get the BMC power policy (old method).
     ${currentPolicy}=  Read Attribute  ${HOST_SETTING}  power_policy
     [Return]  ${currentPolicy}
 
+
 Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
     ${setting}=  Read Attribute  ${CONTROL_HOST_URI}/auto_reboot  AutoReboot
     [Return]  ${setting}
+
 
 Set Auto Reboot
     [Documentation]  Set the given auto reboot setting.
@@ -948,6 +1009,7 @@ Set BMC Reset Reference Time
     ...  AND
     ...  Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
 
+
 Get BMC Boot Time
     [Documentation]  Get boot time from /proc/stat.
 
@@ -958,6 +1020,7 @@ Get BMC Boot Time
     Should Be Empty  ${stderr}
     ${btime}=  Convert To Integer  ${output}
     [Return]  ${btime}
+
 
 Execute Command On BMC
     [Documentation]  Execute given command on BMC and return output.
@@ -974,6 +1037,7 @@ Enable Core Dump On BMC
     ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
     Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
 
+
 Get Number Of BMC Core Dump Files
     [Documentation]  Get number of core dump files on BMC.
     Open Connection And Log In
@@ -981,17 +1045,20 @@ Get Number Of BMC Core Dump Files
     ...  ls /tmp/core* 2>/dev/null | wc -l
     [Return]  ${num_of_core_dump}
 
+
 Set Core Dump File Size Unlimited
     [Documentation]  Set core dump file size to unlimited.
     Open Connection And Log In
     Execute Command On BMC
     ...  ulimit -c unlimited
 
+
 Check For Core Dumps
     [Documentation]  Check for any core dumps exist.
     ${output}=  Get Number Of BMC Core Dump Files
     Run Keyword If  ${output} > 0
     ...  Log  **Warning** BMC core dump files exist  level=WARN
+
 
 Trigger Host Watchdog Error
     [Documentation]  Inject host watchdog timeout error via REST.
@@ -1010,6 +1077,7 @@ Trigger Host Watchdog Error
     ...  data=${data}
 
     Sleep  ${sleep_time}
+
 
 Login To OS Host
     [Documentation]  Login to OS Host.
@@ -1030,6 +1098,7 @@ Login To OS Host
     ${resp}=  Login  ${os_username}  ${os_password}
     [Return]  ${resp}
 
+
 Configure Initial Settings
     [Documentation]  Restore old IP and route.
     ...  This keyword requires initial settings viz IP address,
@@ -1046,10 +1115,12 @@ Configure Initial Settings
     Telnet.write  ifconfig eth0 ${host} netmask ${mask}
     Telnet.write  route add default gw ${gw_ip}
 
+
 Install Debug Tarball On BMC
     [Documentation]  Copy the debug tar file to BMC and install.
-    [Arguments]  ${tarball_file_path}=${EXECDIR}/obmc-phosphor-debug-tarball-witherspoon.tar.xz
-    ...          ${targ_tarball_dir_path}=/tmp/tarball/
+    [Arguments]
+    ...  ${tarball_file_path}=${default_tarball}
+    ...  ${targ_tarball_dir_path}=/tmp/tarball/
 
     # Description of arguments:
     # tarball_file_path      Path of the debug tarball file.
@@ -1089,6 +1160,7 @@ Get BMC Boot Count
     ...  Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
     [Return]  ${BOOT_COUNT}
 
+
 Set BMC Boot Count
     [Documentation]  Set BMC boot count to given value.
     [Arguments]  ${count}
@@ -1102,6 +1174,7 @@ Set BMC Boot Count
 
     # Set BOOT_TIME variable to current boot time.
     Set Global Variable  ${BOOT_COUNT}  ${count}
+
 
 Get System LED State
     [Documentation]  Return the state of given system LED.
@@ -1219,6 +1292,7 @@ Set Turbo Setting Via REST
     ${valueDict}=  Create Dictionary  data=${setting}
     Write Attribute  ${SENSORS_URI}host/TurboAllowed  value  data=${valueDict}
 
+
 Set Control Boot Mode
     [Documentation]  Set given boot mode on the boot object path attribute.
     [Arguments]  ${boot_path}  ${boot_mode}
@@ -1234,6 +1308,7 @@ Set Control Boot Mode
 
     ${valueDict}=  Create Dictionary  data=${boot_mode}
     Write Attribute  ${boot_path}  BootMode  data=${valueDict}
+
 
 Copy Address Translation Utils To HOST OS
     [Documentation]  Copy address translation utils to host OS.
@@ -1270,9 +1345,7 @@ Verify BMC RTC And UTC Time Drift
     #   [ntp_synchronized]:         no
     #   [rtc_in_local_tz]:          no
 
-    ${bmc_time}=  Get BMC Date Time
+    ${time}=  Get BMC Date Time
     ${time_diff}=  Evaluate
-    ...  ${bmc_time['universal_time_seconds']} - ${bmc_time['rtc_time_seconds']}
+    ...  ${time['universal_time_seconds']} - ${time['rtc_time_seconds']}
     Should Be True  ${time_diff} < ${time_diff_max}
-
-
