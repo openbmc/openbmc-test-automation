@@ -29,7 +29,7 @@ ${default_browser}           chrome
 
 ${obmc_PowerOff_state}       Off
 ${obmc_PowerRunning_state}   Running
-${obmc_PowerQuiesced_state}  Quiesced
+${obmc_PowerStandby_state}   Standby
 
 *** Keywords ***
 Launch OpenBMC GUI Browser
@@ -100,9 +100,9 @@ Test Setup Execution
     ${obmc_state}=  Run Keyword And Return Status
     ...  Should Contain  ${obmc_current_state}  ${obmc_test_setup_state}
     Return From Keyword If  '${obmc_state}' == 'True'
-    ${obmc_quiesced_state}=  Run Keyword And Return Status
-    ...  Should Contain  ${obmc_current_state}  ${obmc_quiesced_state}
-    Run Keyword If  '${obmc_quiesced_state}' == 'True'  Reboot OpenBMC
+    ${obmc_standby_state}=  Run Keyword And Return Status
+    ...  Should Contain  ${obmc_current_state}  ${obmc_standby_state}
+    Run Keyword If  '${obmc_standby_state}' == 'True'  Reboot OpenBMC
     Run Keyword If  '${obmc_test_setup_state}' == '${obmc_PowerRunning_state}'
     ...  Power On OpenBMC
     Run Keyword If  '${obmc_test_setup_state}' == '${obmc_PowerOff_state}'
@@ -114,8 +114,8 @@ Power Off OpenBMC
     Log To Console  Power Off OpenBMC...
     Click Element  ${xpath_display_server_power_status}
     Execute JavaScript  window.scrollTo(0, document.body.scrollHeight)
-    Click Button  ${xpath_select_button_orderly_power_shutdown}
-    Click Yes Button  ${xpath_select_button_orderly_power_shutdown_yes}
+    Click Button  ${xpath_select_button_orderly_shutdown}
+    Click Yes Button  ${xpath_select_button_orderly_shutdown_yes}
     Wait OpenBMC To Become Stable  ${obmc_off_state}
 
 Power On OpenBMC
@@ -131,8 +131,8 @@ Reboot OpenBMC
 
     Log To Console  Reboting the OpenBMC...
     Click Element  ${xpath_display_server_power_status}
-    Click Button  ${xpath_select_button_orderly_power_shutdown}
-    Click Yes Button  ${xpath_select_button_orderly_power_shutdown_yes}
+    Click Button  ${xpath_select_button_orderly_shutdown}
+    Click Yes Button  ${xpath_select_button_orderly_shutdown_yes}
     Wait OpenBMC To Become Stable  ${obmc_off_state}
 
 Wait OpenBMC To Become Stable
@@ -161,10 +161,10 @@ Verify OpenBMC State From REST Interface
     Should Be Equal  ${obmc_current_state_REST}  ${obmc_required_state}
 
 Click Yes Button
-    [Documentation]  Click the 'yes' button.
+    [Documentation]  Click the 'Yes' button.
     [Arguments]  ${xpath_button_yes}
     # Description of argument(s):
-    # xpath_button_yes      The xpath of 'yes' button.
+    # xpath_button_yes      The xpath of 'Yes' button.
 
     Click Button  ${xpath_button_yes}
 
@@ -179,3 +179,67 @@ Test Teardown Execution
     Rprint Pgm Footer
     Print Dashes  0  100  1  =
     LogOut OpenBMC GUI
+
+Verify Display Content
+    [Documentation]  Verify text content display.
+    [Arguments]  ${display_text}
+    # Description of argument(s):
+    # display_text   The display text on web page.
+
+    Page Should Contain  ${display_text}
+
+Warm Reboot openBMC
+    [Documentation]  Warm Rebooting the OBMC system.
+
+    Log To Console  Warm Reboting the OpenBMC...
+    Click Button  ${xpath_select_button_warm_reboot}
+    Verify Warnung Message Display Text  ${xpath_warm_reboot_warning_message}
+    ...  ${text_warm_reboot_warning_message}
+    Click Yes Button  ${xpath_select_button_warm_reboot_yes}
+    Wait OpenBMC To Become Stable  ${obmc_running_state}
+
+Click No Button
+    [Documentation]  Click the 'No' button.
+    [Arguments]  ${xpath_button_no}
+    # Description of argument(s):
+    # xpath_button_yes      The xpath of 'No' button.
+
+    Click Button  ${xpath_button_no}
+
+Cold Reboot openBMC
+    [Documentation]  Cold Rebooting the OBMC system.
+
+    Log To Console  Cold Reboting the OpenBMC...
+    Click Button  ${xpath_select_button_cold_reboot}
+    Verify Warnung Message Display Text  ${xpath_cold_reboot_warning_message}
+    ...  ${text_cold_reboot_warning_message}
+    Click Yes Button  ${xpath_select_button_cold_reboot_yes}
+    Wait OpenBMC To Become Stable  ${obmc_running_state}
+
+Orderly Shutdown OpenBMC
+    [Documentation]  Orderly Shutdown the OBMC system.
+
+    Log To Console  Orderly Shutdown the OpenBMC...
+    Click Button  ${xpath_select_button_orderly_shutdown}
+    Verify Warnung Message Display Text  ${xpath_orderly_shutdown_warning_message}
+    ...  ${text_orderly_shutdown_warning_message}
+    Click Yes Button  ${xpath_select_button_orderly_shutdown_yes}
+    Wait OpenBMC To Become Stable  ${obmc_off_state}
+
+Immediate Shutdown openBMC
+    [Documentation]  Immediate Shutdown the OBMC system.
+
+    Log To Console  Immediate Shutdown the OpenBMC...
+    Click Button  ${xpath_select_button_immediate_shutdown}
+    Verify Warnung Message Display Text  ${xpath_immediate_shutdown_warning_message}
+    ...  ${text_immediate_shutdown_warning_message}
+    Click Yes Button  ${xpath_select_button_immediate_shutdown_yes}
+    Wait OpenBMC To Become Stable  ${obmc_off_state}
+
+Verify Warnung Message Display Text
+    [Documentation]  Verify the warning message display text
+    [Arguments]  ${xpath_text_message}  ${text_message}
+    # ${xpath_text_message}   Xpath of warning message display.
+    # ${text_message}         Content of the display message info.
+
+    Element Text Should Be  ${xpath_text_message}  ${text_message}
