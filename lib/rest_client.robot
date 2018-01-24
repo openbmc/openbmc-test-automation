@@ -62,8 +62,14 @@ ${QUIET}  ${0}
 
 *** Keywords ***
 OpenBMC Get Request
+    [Documentation]  Does initial connection for subsequent REST "GET" calls.
     [Arguments]    ${uri}    ${timeout}=30  ${quiet}=${QUIET}  &{kwargs}
-
+    # Description of arguments:
+    # uri      The URI to establish connection with.
+    # timeout  Timeout in seconds to establih connection with URI.
+    # quiet    If enabled turns off logging to console.
+    # kwargs   Arguments passed to the REST call.
+ 
     Initialize OpenBMC    ${timeout}  quiet=${quiet}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Get
@@ -74,7 +80,13 @@ OpenBMC Get Request
     [Return]    ${ret}
 
 OpenBMC Post Request
+    [Documentation]  Does initial connection for subsequent REST "POST" calls. 
     [Arguments]    ${uri}    ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+    # Description of arguments:
+    # uri      The URI to establish connection with.
+    # timeout  Timeout in seconds to establih connection with URI.
+    # quiet    If enabled turns off logging to console.
+    # kwargs   Arguments passed to the REST call.
 
     Initialize OpenBMC    ${timeout}  quiet=${quiet}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
@@ -88,7 +100,12 @@ OpenBMC Post Request
     [Return]    ${ret}
 
 OpenBMC Put Request
+    [Documentation]  Does initial connection for subsequent REST "PUT" calls. 
     [Arguments]    ${uri}    ${timeout}=10    &{kwargs}
+    # Description of arguments:
+    # uri      The URI to establish connection with.
+    # timeout  Timeout in seconds to establih connection with URI.
+    # kwargs   Arguments passed to the REST call.
 
     Initialize OpenBMC    ${timeout}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
@@ -101,7 +118,12 @@ OpenBMC Put Request
     [Return]    ${ret}
 
 OpenBMC Delete Request
+    [Documentation]  Does initial connection for subsequent REST "DELETE" calls.
     [Arguments]    ${uri}    ${timeout}=10    &{kwargs}
+    # Description of arguments:
+    # uri      The URI to establish connection with.
+    # timeout  Timeout in seconds to establih connection with URI.
+    # kwargs   Arguments passed to the REST call.
 
     Initialize OpenBMC    ${timeout}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
@@ -112,8 +134,8 @@ OpenBMC Delete Request
     [Return]    ${ret}
 
 Initialize OpenBMC
+    [Documentation]  Does a REST login connection within specified time.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
-
     # Description of argument(s):
     # timeout  REST login attempt time out.
     # quiet    Suppress console log if set.
@@ -124,8 +146,8 @@ Initialize OpenBMC
     ...  Post Login Request  ${timeout}  ${quiet}
 
 Post Login Request
+    [Documentation]  Verify all the REST objects are accessible using "GET".
     [Arguments]  ${timeout}=20  ${quiet}=${1}
-
     # Description of argument(s):
     # timeout  REST login attempt time out.
     # quiet    Suppress console log if set.
@@ -155,22 +177,26 @@ Log Out OpenBMC
     ...  msg=${resp}
 
 Log Request
+    [Documentation]  Logs the specific REST URI, operation on the console.
     [Arguments]    &{kwargs}
     ${msg}=  Catenate  SEPARATOR=  URI:  ${AUTH_URI}  ${kwargs["base_uri"]}
     ...  , method:  ${kwargs["method"]}  , args:  ${kwargs["args"]}
     Logging    ${msg}    console=True
 
 Log Response
+    [Documentation]  Logs the response code on the console.
     [Arguments]    ${resp}
     ${msg}=  Catenate  SEPARATOR=  Response code:  ${resp.status_code}
     ...  , Content:  ${resp.content}
     Logging    ${msg}    console=True
 
 Logging
+    [Documentation]  Logs the speified message on the console.
     [Arguments]    ${msg}    ${console}=default False
     Log    ${msg}    console=True
 
 Read Attribute
+    [Documentation]  Verify all the REST objects are accessible using "GET".
     [Arguments]    ${uri}    ${attr}    ${timeout}=10  ${quiet}=${QUIET}
     ${resp}=  OpenBMC Get Request  ${uri}/attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
@@ -178,12 +204,10 @@ Read Attribute
     ${content}=     To Json    ${resp.content}
     [Return]    ${content["data"]}
 
-
 Write Attribute
     [Documentation]  Write a D-Bus attribute with REST.
     [Arguments]  ${uri}  ${attr}  ${timeout}=10  ${verify}=${FALSE}
     ...  ${expected_value}=${EMPTY}  &{kwargs}
-
     # Description of argument(s):
     # uri               URI of the object that the attribute lives on
     #                   (e.g. '/xyz/openbmc_project/software/').
@@ -213,7 +237,6 @@ Write Attribute
     ${value}=  Read Attribute  ${uri}  ${attr}
     Should Be Equal  ${value}  ${expected_value}
 
-
 Read Properties
     [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}
     ${resp}=  OpenBMC Get Request  ${uri}  timeout=${timeout}  quiet=${quiet}
@@ -223,6 +246,11 @@ Read Properties
 
 Call Method
     [Arguments]  ${uri}  ${method}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+    # Description of arguments:
+    # uri      The URI to establish connection with.
+    # timeout  Timeout in seconds to establih connection with URI.
+    # quiet    If enabled turns off logging to console.
+    # kwargs   Arguments passed to the REST call.
 
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${resp}=  OpenBmc Post Request  ${base_uri}/action/${method}
@@ -231,7 +259,6 @@ Call Method
 
 Upload Image To BMC
     [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${1}  &{kwargs}
-
     # Description of argument(s):
     # uri             URI for uploading image via REST e.g. "/upload/image".
     # timeout         Time allocated for the REST command to return status
