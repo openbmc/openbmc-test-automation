@@ -77,6 +77,37 @@ Verify Get And Set Management Controller ID String
     # Get the management controller ID and verify.
     Get Management Controller ID String And Verify  ${initial_mc_id}
 
+Verify Chassis Identify via IPMI
+    [Documentation]  Verify "chassis identify" using IPMI command.
+    [Tags]  Verify_Chassis_Identify_via_IPMI
+
+    # Set to default "chassis identify" and verify that LED blinks for 15s.
+    Run IPMI Standard Command  chassis identify
+    Verify Identify LED State  Blink
+
+    Sleep  15s
+    Verify Identify LED State  Off
+
+    # Set "chassis identify" to 10s and verify that the LED blinks for 10s.
+    Run IPMI Standard Command  chassis identify 10
+    Verify Identify LED State  Blink
+
+    Sleep  10s
+    Verify Identify LED State  Off
+
+Verify Chassis Identify Off And Force Identify On via IPMI
+    [Documentation]  Verify "chassis identify" off
+    ...  and "force identify on" via IPMI.
+    [Tags]  Verify_Chassis_Identify_Off_And_Force_Identify_On_via_IPMI
+
+    # Set the LED to "Force Identify On".
+    Run IPMI Standard Command  chassis identify force
+    Verify Identify LED State  Blink
+
+    # Set "chassis identify" to 0 and verify that the LED turns off.
+    Run IPMI Standard Command  chassis identify 0
+    Verify Identify LED State  Off
+
 *** Keywords ***
 
 Set Management Controller ID String
@@ -99,3 +130,20 @@ Get Management Controller ID String And Verify
     ${get_mc_id}=  Run IPMI Standard Command  dcmi get_mc_id_string
     Should Contain  ${get_mc_id}  ${string}
     ...  msg=Command failed: get_mc_id.
+
+Verify Identify LED State
+    [Documentation]  Verify the identify LED state
+    ...  matches caller's expectations.
+    [Arguments]  ${expected_state}
+
+    # Description of argument(s):
+    # expected_state  The LED state expected by the caller ("Blink" or "Off").
+
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.${expected_state}
+    ...  msg=Unexpected LED state.
+
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/rear_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.${expected_state}
+    ...  msg=Unexpected LED state.
+
