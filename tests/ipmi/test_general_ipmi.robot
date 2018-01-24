@@ -47,5 +47,49 @@ Set Asset Tag With Valid String Length Via REST
     ...  AssetTag
     Should Be Equal As Strings  ${asset_tag}  ${random_string}
 
+Verify Chassis Identify via IPMI
+    [Documentation]  Verify "chassis identify" using IPMI command.
+    [Tags]  Verify_Chassis_Identify_via_IPMI
+
+    # Check the state of the LED.
+    Verify LED State  Off
+
+    # Set to default "chassis identify" and verify that LED blinks for 15s.
+    Run IPMI Standard Command  chassis identify
+    Verify LED State  Blink
+
+    Sleep  15s
+    Verify LED State  Off
+
+    # Set "chassis identify" to 10s and verify that the LED blinks for 10s.
+    Run IPMI Standard Command  chassis identify 10
+    Verify LED State  Blink
+
+    Sleep  10s
+    Verify LED State  Off
+
+Verify Chassis Identify Off And Force Identify On via IPMI
+    [Documentation]  Verify "chassis identify" off
+    ...  and "force identify on" via IPMI.
+    [Tags]  Verify_Chassis_Identify_Off_And_Force_Identify_On_via_IPMI
+
+    # Set the LED to "Force Identify On".
+    Run IPMI Standard Command  chassis identify force
+    Verify LED State  Blink
+
+    # Set "chassis identify" to 0 and verify that the LED turns off.
+    Run IPMI Standard Command  chassis identify 0
+    Verify LED State  Off
 
 *** Keywords ***
+
+Verify LED State
+    [Documentation]  Verify that the LED state matches caller's expectations.
+    [Arguments]  ${expected_state}
+
+    # Description of argument(s):
+    # expected_state  The LED state expected by the caller ("Blink" or "Off").
+
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.${expected_state}
+    ...  msg=Command failure: Unexpected LED state.
