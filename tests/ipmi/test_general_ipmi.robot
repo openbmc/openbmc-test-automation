@@ -47,5 +47,44 @@ Set Asset Tag With Valid String Length Via REST
     ...  AssetTag
     Should Be Equal As Strings  ${asset_tag}  ${random_string}
 
+Verify Chassis Identify via IPMI
+    [Documentation]  Verify chassis identify using IPMI command.
+    [Tags]  Verify_Chassis_Identify_via_IPMI
+
+    # Check the state of LED.
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.Off
+
+    # Set to Default chassis identify and verify if LED blinks for 15s.
+    Run IPMI Standard Command  chassis identify
+
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.Blink
+    Sleep  15s
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.Off
+
+    # Set chassis identify to 10s and verify if the LED blinks for 10s.
+    Run IPMI Standard Command  chassis identify 10
+
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.Blink
+    Sleep  10s
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.Off
+
+Verify Chassis Identify Off And Force Identify via IPMI
+    [Documentation]  Verify Chassis Identify Off and Force Identify via IPMI.
+    [Tags]  Verify_Chassis_Identify_Off_And_Force_Identify_via_IPMI
+
+    # Set the LED to "Force Identify On".
+    Run IPMI Standard Command  chassis identify force
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.Blink
+
+    # Set chassis identify to 0s and verify if the LED turns Off.
+    Run IPMI Standard Command  chassis identify 0
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.Off
 
 *** Keywords ***
