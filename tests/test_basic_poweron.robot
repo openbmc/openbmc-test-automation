@@ -5,7 +5,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 
-Test Setup          Start SOL Console Logging
+Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
 
 Force Tags  chassisboot
@@ -24,7 +24,6 @@ ${ERROR_REGEX}   SEGV|core-dump
 Power On Test
     [Documentation]  Power off and on.
     [Tags]  Power_On_Test
-    [Setup]  Set Auto Reboot  ${0}
 
     Repeat Keyword  ${LOOP_COUNT} times  Host Off And On
 
@@ -40,6 +39,11 @@ Check For Application Failures
     Should Be Empty  ${journal_log}
 
 *** Keywords ***
+
+Test Setup Execution
+    [Documentation]  Do test case setup tasks.
+    Start SOL Console Logging
+    Set Auto Reboot  ${0}
 
 Test Teardown Execution
     [Documentation]  Collect FFDC and SOL log.
