@@ -366,11 +366,11 @@ Check OperatingSystemState
     [Documentation]  Set OperatingSystemState and verify.
     [Arguments]  ${Sensor_ID}  ${OperatingSystemState}
     # Description of argument(s):
-    # ${Sensor_ID}  Corresponding to OperatingSystemState
-    # ${OperatingSystemState}  OperatingSystemState to be set
+    # ${Sensor_ID}  Corresponding to OperatingSystemState.
+    # ${OperatingSystemState}  OperatingSystemState verify value.
 
     Run IPMI Command
-    ...  0x04 0x30 0x05 0xa9 0x00 ${sensor_id} 0x00 0x00 0x00 0x00 0x00 0x00
+    ...  0x04 0x30 0x05 0xa9 0x00 ${Sensor_ID} 0x00 0x00 0x00 0x00 0x00 0x00
     ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
     Should Be Equal  ${OperatingSystemState}  ${resp}
 
@@ -378,8 +378,8 @@ Check BootProgress
     [Documentation]  Set the Bootprogress and verify.
     [Arguments]  ${BootProgressID}  ${BootProgress}
     # Description of argument(s):
-    # ${Sensor_ID}  Corresponding to BootProgress
-    # ${BootProgress}  BootProgress to be set
+    # ${BootProgressID}  Corresponding to BootProgress.
+    # ${BootProgress}    BootProgress verify value.
 
     Run IPMI Command
     ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 ${BootProgressID} 0x00
