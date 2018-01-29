@@ -229,7 +229,7 @@ Set OperatingSystemState To DiagBoot And Verify
 # Boot Progress Test Cases.
 
 Set BootProgress To MemoryInit And Verify
-    [Documentation]  Set BootProgress To MemoryInit and verify.
+    [Documentation]  Set BootProgress to "MemoryInit" and verify.
 
     # BootProgressID  BootProgress
     0x01              ${OS_BOOT_MEM}
@@ -237,8 +237,8 @@ Set BootProgress To MemoryInit And Verify
     [Template]  Check BootProgress
     [Tags]  Set_BootProgress_To_MemoryInit_And_Verify
 
-Set BootProgress To MemoryInit And Verify
-    [Documentation]  Set BootProgress To MemoryInit and verify.
+Set BootProgress To MotherboardInit And Verify
+    [Documentation]  Set BootProgress to "MotherboardInit" and verify.
 
     # BootProgressID  BootProgress
     0x14              ${OS_BOOT_MOTHERBOARD}
@@ -247,7 +247,7 @@ Set BootProgress To MemoryInit And Verify
     [Tags]  Set_BootProgress_To_MotherboardInit_And_Verify
 
 Set BootProgress To SecondaryProcInit And Verify
-    [Documentation]  Set BootProgress To SecondaryProcInit and verify.
+    [Documentation]  Set BootProgress to "SecondaryProcInit" and verify.
 
     # BootProgressID  BootProgress
     0x03              ${OS_BOOT_SECPCI}
@@ -256,7 +256,7 @@ Set BootProgress To SecondaryProcInit And Verify
     [Tags]  Set_BootProgress_To_SecondaryProcInit_And_Verify
 
 Set BootProgress To PCIinit And Verify
-    [Documentation]  Set BootProgress To PCIinit and verify.
+    [Documentation]  Set BootProgress to "PCIinit" and verify.
 
     #BootProgressID  BootProgress
     0x07             ${OS_BOOT_PCI}
@@ -265,7 +265,7 @@ Set BootProgress To PCIinit And Verify
     [Tags]  Set_BootProgress_To_PCIinit_And_Verify
 
 Set BootProgress To Unspecified And Verify
-    [Documentation]  Set BootProgress To Unspecified and verify.
+    [Documentation]  Set BootProgress to "Unspecified" and verify.
 
     # BootProgressID  BootProgress
     0x00              ${OS_BOOT_OFF}
