@@ -8,6 +8,8 @@ Resource            ../lib/state_manager.robot
 Resource            ../lib/openbmc_ffdc_methods.robot
 Resource            ../lib/boot_utils.robot
 Variables           ../lib/ras/variables.py
+Variables           ../data/variables.py
+Resource            ../lib/dump_utils.robot
 
 Library             DateTime
 Library             OperatingSystem
@@ -391,8 +393,9 @@ Inject Unrecoverable Error Through Host
     ...              1. Enable Auto Reboot Setting
     ...              2. Inject Error on processor/centaur
     ...              3. Check If HOST is rebooted.
-    ...              4. Verify error log entry & signature description.
     ...              4. Verify & clear gard records.
+    ...              5. Verify error log entry & signature description.
+    ...              6. Verify & clear dump entry.
     [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
     ...              ${signature_desc}  ${log_prefix}
     # Description of argument(s):
@@ -410,6 +413,9 @@ Inject Unrecoverable Error Through Host
     Wait for OS
     Verify And Clear Gard Records On HOST
     Verify Error Log Entry  ${signature_desc}  ${log_prefix}
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    Should Not Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Delete All BMC Dump
 
 Fetch FIR Address Translation Value
     [Documentation]  Fetch FIR address translation value through HOST.
