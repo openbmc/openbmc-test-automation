@@ -10,7 +10,8 @@ Test Teardown       FFDC On Test Case Fail
 
 ${new_mc_id}=  HOST
 
-*** Test Cases ***
+#*** Test Cases ***
+*** comments ***
 
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
@@ -108,6 +109,46 @@ Verify Chassis Identify Off And Force Identify On via IPMI
     Run IPMI Standard Command  chassis identify 0
     Verify Identify LED State  Off
 
+*** Test Cases ***
+Watchdog Reset Via IPMI And Verify Using REST
+    [Documentation]  Verify watchdog reset via IPMI and verify using REST.
+    [Tags]  Verify_Watchdog_Reset_Via_IPMI_And_Verify_Using_REST
+
+#    Initiate Host Boot
+
+    Set Watchdog Enabled Using REST  ${1}
+
+    Watchdog Object Should Exist
+
+    # Resetting the watchdog via IPMI.
+    Run IPMI Standard Command  mc watchdog reset
+
+    # Verify the watchdog is reset using REST.
+    ${watchdog_timeremaining_before}=
+    ...  Read Attribute  ${HOST_WATCHDOG_URI}  TimeRemaining
+    Sleep  10ms
+    ${watchdog_timeremaining_after}=
+    ...  Read Attribute  ${HOST_WATCHDOG_URI}  TimeRemaining
+    Should Be True  ${watchdog_timeremaining_before}>${watchdog_timeremaining_after}
+    ...  msg=Watchdog timer didn't reset
+
+Watchdog Off Via IPMI And Verify Using REST
+    [Documentation]  Verify Watchdog Off Via IPMI And Verify Using REST
+    [Tags]  Verify_Watchdog_Off_Via_IPMI_And_Verify_Using_REST
+
+#    Initiate Host Boot
+
+    Set Watchdog Enabled Using REST  ${1}
+
+    Watchdog Object Should Exist
+
+    # Turn off the watchdog via IPMI.
+    Run IPMI Standard Command  mc watchdog off
+
+    # Verify the watchdog is off using REST
+    ${watchdog_off}=  Read Attribute  ${HOST_WATCHDOG_URI}  Enabled
+    Should Be Equal  ${watchdog_off}  ${0}
+
 *** Keywords ***
 
 Set Management Controller ID String
@@ -147,3 +188,12 @@ Verify Identify LED State
     Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.${expected_state}
     ...  msg=Unexpected LED state.
 
+Set Watchdog Enabled Using REST
+    [Documentation]  Set watchdog Enabled field using REST.
+    [Arguments]  ${value}
+
+    # Description of argument(s):
+    # value  Integer value (eg. "0-Disabled", "1-Enabled").
+
+    ${valueDict}=  Create Dictionary  data=${value}
+    ${resp}=  OpenBMC Put Request  ${HOST_WATCHDOG_URI}/attr/Enabled
