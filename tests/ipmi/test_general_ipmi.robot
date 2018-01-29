@@ -77,6 +77,46 @@ Verify Get And Set Management Controller ID String
     # Get the management controller ID and verify.
     Get Management Controller ID String And Verify  ${initial_mc_id}
 
+Verify Watchdog Reset Via IPMI And Verify Using REST
+    [Documentation]  Verify watchdog reset via IPMI and verify using REST.
+    [Tags]  Verify_Watchdog_Reset_Via_IPMI_And_Verify_Using_REST
+
+    Initiate Host Boot
+
+    # Setting the Enabled bit to 1
+    Set Watchdog Enabled Using REST  ${1}
+
+    # Check watchdog exists
+    Watchdog Object Should Exist
+
+    # Resetting the watchdog via IPMI.
+    Run IPMI Standard Command  mc watchdog reset
+
+    # Verify the watchdog is reset using REST.
+    ${watchdog_timeremaining}=
+    ...  Read Attribute  ${HOST_WATCHDOG_URI}  TimeRemaining
+    Should Be True  ${watchdog_timeremaining}>0
+    ...  msg=Watchdog is not reset properly
+
+Verify Watchdog Off Via IPMI And Verify Using REST
+    [Documentation]  Verify Watchdog Off Via IPMI And Verify Using REST
+    [Tags]  Verify_Watchdog_Off_Via_IPMI_And_Verify_Using_REST
+
+    Initiate Host Boot
+
+    # Setting the Enabled bit to 1
+    Set Watchdog Enabled Using REST  ${1}
+
+    # Check watchdog exists
+    Watchdog Object Should Exist
+
+    # Turn off the watchdog via IPMI.
+    Run IPMI Standard Command  mc watchdog off
+
+    # Verify the watchdog is off using REST
+    ${watchdog_off}=  Read Attribute  ${HOST_WATCHDOG_URI}  Enabled
+    Should Be Equal  ${watchdog_off}  ${0}
+
 *** Keywords ***
 
 Set Management Controller ID String
@@ -99,3 +139,21 @@ Get Management Controller ID String And Verify
     ${get_mc_id}=  Run IPMI Standard Command  dcmi get_mc_id_string
     Should Contain  ${get_mc_id}  ${string}
     ...  msg=Command failed: get_mc_id.
+
+Set Watchdog Enabled Using REST
+    [Documentation]  Set watchdog Enabled field using REST.
+    [Arguments]  ${value}
+
+    # Description of argument(s):
+    # value  Watchdog setting value
+
+    ${valueDict}=  Create Dictionary  data=${value}
+    ${resp}=  OpenBMC Put Request  ${HOST_WATCHDOG_URI}/attr/Enabled
+    ...       data=${valueDict}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+Watchdog Object Should Exist
+    [Documentation]  Check if watchdog object exists.
+
+    ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}host0
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
