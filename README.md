@@ -14,6 +14,9 @@
 * HTX bootme
 * XCAT execution
 * Network
+* IPMI support
+* Factory reset
+* RAS (Reliability, availability and serviceability)
 
 **Debugging Supported List**
 * SOL collection
@@ -72,12 +75,14 @@ classified as follows:
           verification.
 
 `extended/`: Contains test cases for boot testing, network testing,
-             code update, RAS (Reliability, availability and serviceability)
-             testing, etc.
+             code update testing etc.
 
 `systest/`: Contains test cases for HTX bootme.
 
 `xcat/`: Contains test cases for XCAT automation.
+
+`ras/`: Contains test cases for RAS (Reliability, availability and
+        serviceability).
 
 `tools/`: Contains various tools.
 
