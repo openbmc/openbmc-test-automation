@@ -62,7 +62,13 @@ ${QUIET}  ${0}
 
 *** Keywords ***
 OpenBMC Get Request
+    [Documentation]  Does initial connection for subsequent REST "GET" calls.
     [Arguments]    ${uri}    ${timeout}=30  ${quiet}=${QUIET}  &{kwargs}
+    # Description of arguments:
+    # uri      The URI to establish connection with.
+    # timeout  Timeout in seconds to establih connection with URI.
+    # quiet    If enabled turns off logging to console.
+    # kwargs   Arguments passed to the REST call.
 
     Initialize OpenBMC    ${timeout}  quiet=${quiet}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
