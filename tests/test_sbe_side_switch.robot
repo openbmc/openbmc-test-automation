@@ -72,7 +72,7 @@ Watchdog Object Should Exist
 
     ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ...  msg=Failed to get ${WATCHDOC_URI}, response = ${resp.status_code}.
+    ...  msg=Failed to get ${WATCHDOG_URI}, response = ${resp.status_code}.
 
 
 Trigger Watchdog Error To Switch SBE Boot Side
