@@ -108,6 +108,44 @@ Verify Chassis Identify Off And Force Identify On via IPMI
     Run IPMI Standard Command  chassis identify 0
     Verify Identify LED State  Off
 
+Do Watchdog Reset Via IPMI And Verify Using REST
+    [Documentation]  Do watchdog reset via IPMI and verify using REST.
+    [Tags]  Do_Watchdog_Reset_Via_IPMI_And_Verify_Using_REST
+
+    Initiate Host Boot
+
+    Set Watchdog Enabled Using REST  ${1}
+
+    Watchdog Object Should Exist
+
+    # Resetting the watchdog via IPMI.
+    Run IPMI Standard Command  mc watchdog reset
+
+    # Verify the watchdog is reset using REST after an interval of 1000ms.
+    Sleep  1000ms
+    ${watchdog_time_left}=
+    ...  Read Attribute  ${HOST_WATCHDOG_URI}  TimeRemaining
+    Should Be True
+    ...  ${watchdog_time_left}<${1200000} and ${watchdog_time_left}>${2000}
+    ...  msg=Watchdog timer didn't reset.
+
+Do Watchdog Off Via IPMI And Verify Using REST
+    [Documentation]  Do watchdog off via IPMI and verify using REST.
+    [Tags]  Do_Watchdog_Off_Via_IPMI_And_Verify_Using_REST
+
+    Initiate Host Boot
+
+    Set Watchdog Enabled Using REST  ${1}
+
+    Watchdog Object Should Exist
+
+    # Turn off the watchdog via IPMI.
+    Run IPMI Standard Command  mc watchdog off
+
+    # Verify the watchdog is off using REST
+    ${watchdog_state}=  Read Attribute  ${HOST_WATCHDOG_URI}  Enabled
+    Should Be Equal  ${watchdog_state}  ${0}
+    ...  msg=msg=Verification failed for watchdog off check.
 *** Keywords ***
 
 Set Management Controller ID String
@@ -147,3 +185,13 @@ Verify Identify LED State
     Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.${expected_state}
     ...  msg=Unexpected LED state.
 
+Set Watchdog Enabled Using REST
+    [Documentation]  Set watchdog Enabled field using REST.
+    [Arguments]  ${value}
+
+    # Description of argument(s):
+    # value  Integer value (eg. "0-Disabled", "1-Enabled").
+
+    ${value_dict}=  Create Dictionary  data=${value}
+    ${resp}=  OpenBMC Put Request  ${HOST_WATCHDOG_URI}/attr/Enabled
+    ...  data=${value_dict}
