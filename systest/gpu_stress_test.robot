@@ -109,7 +109,7 @@ Execute GPU Test
     Rpvars  power  power_max  temperature  temperature_max  clock  clock_max
     Run Keyword If  ${power} > ${power_max}  Fail
     ...  msg=GPU Power ${power} exceeds limit of ${power_max}.
-    ${errmsg}=  Canenate  GPU temperature of ${temperature} exceeds limit
+    ${errmsg}=  Catenate  GPU temperature of ${temperature} exceeds limit
     ...  of ${temperature_max}.
     Run Keyword If  ${temperature} > ${temperature_max}  Fail  msg=${errmsg}
     Run Keyword If  ${clock} > ${clock_max}  Fail
