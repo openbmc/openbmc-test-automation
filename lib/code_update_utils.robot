@@ -178,6 +178,7 @@ Upload And Activate Image
     # set priority to 0 and reboot the BMC.
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     ${activation}=  Set Variable  &{software_state}[Activation]
+
     Run Keyword If
     ...  '${skip_if_active}' == 'true' and '${activation}' == '${ACTIVE}'
     ...  Run Keywords
@@ -203,6 +204,11 @@ Upload And Activate Image
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+
+    # Uploaded and activated image should have priority set to 0. Due to timing
+    # contention, it may take upto 10 seconds to complete updating priority.
+    Wait Until Keyword Succeeds  10 sec  5 sec
+    ...  Check Software Object Attribute  ${version_id}  Priority  ${0}
 
     [Return]  ${version_id}
 
@@ -438,3 +444,20 @@ Get List of Images
     \  ${resp}=  OpenBMC Get Request  ${uri}
     \  ${json}=  To JSON  ${resp.content}
     \  Log  ${json}["data"]
+
+
+Check Software Object Attribute
+    [Documentation]  Get the software property of a given object and verify.
+    [Arguments]  ${image_object}  ${sw_attribute}  ${value}
+
+    # Description of argument(s):
+    # image_object  Image software object name.
+    # sw_attribute  Software attribute name.
+    #               (e.g. "Activation", "Priority", "RequestedActivation" etc).
+    # value         Software attribute value to compare.
+
+    ${data}=  Read Attribute
+    ...  ${SOFTWARE_VERSION_URI}${image_object}  ${sw_attribute}
+
+    Should Be True  ${data} == ${value}
+    ...  msg=Given attribute value ${data} mismatch ${value}.
