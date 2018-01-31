@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation   OpenBMC user management test.
 
-Resource         ../../lib/rest_client.robot
-Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../lib/rest_client.robot
+Resource         ../lib/openbmc_ffdc.robot
 Library          SSHLibrary
 
 Test Teardown    Test Teardown Execution
