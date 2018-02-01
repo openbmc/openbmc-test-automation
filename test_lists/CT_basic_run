@@ -12,4 +12,16 @@
 -i Verify_SOL_During_Boot
 -i Verify_Host_PowerOff_Via_IPMI
 -i Verify_Deactivate_Non_Existing_SOL
-#Errolog testing without (watchdog)
+#OCC active state check.
+-i Verify_OCC_State_When_Host_Is_Booted
+#Power restore.
+-i Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Off
+-i Test_Restore_Policy_Restore_Last_State_With_Host_Running
+#Boot sensors.
+-i Verify_Boot_Sensor_States_RR_on_Host_Booted
+#Inventory
+-i Verify_UUID_Entry
+-i Verify_FRU_Properties
+#Energy scale
+-i Escale_Power_Setting_Via_REST_And_Verify
+-i Escale_Deactivation_Test_Via_REST
