@@ -418,8 +418,11 @@ Convert epoch to date
     [Documentation]  Convert epoch time to date format.
     [Arguments]  ${epoch_time}
     # Description of argument(s):
-    # epoch_time  epoch time in miliseconds.
+    # epoch_time  epoch time in milliseconds.
     #             (e.g. 1487304700000000)
+
+    # Convert epoch_time into floating point number.
+    ${epoch_time}=  Convert To Number  ${epoch_time}
 
     # Convert epoch time from microseconds to seconds
     ${epoch_time_sec}=  Evaluate  ${epoch_time}/1000000
