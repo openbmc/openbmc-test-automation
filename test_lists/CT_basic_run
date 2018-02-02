@@ -4,6 +4,9 @@
 -i REST_Login_Session_To_BMC
 -i Verify_REST_JSON_Data_On_Success
 -i Verify_REST_JSON_Data_On_Failure
+#Software Manager test
+-i BMC_Software_Activation_Association
+-i Host_Software_Activation_Association
 #Basic poweron test via REST
 -i Power_On_Test
 # Check for apps failures
@@ -12,13 +15,17 @@
 -i Verify_SOL_During_Boot
 -i Verify_Host_PowerOff_Via_IPMI
 -i Verify_Deactivate_Non_Existing_SOL
+#DCMI test
+-i Set_Asset_Tag_With_Valid_String_Length
+-i Verify_Get_And_Set_Management_Controller_ID_String
 #Power restore.
 -i Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Off
-#OCC active state check.
--i Verify_OCC_State_When_Host_Is_Booted
 #Inventory
 -i Verify_UUID_Entry
 -i Verify_FRU_Properties
 #Energy scale
 -i Escale_Power_Setting_Via_REST_And_Verify
 -i Escale_Deactivation_Test_Via_REST
+#Power redundancy
+-i Disable_Power_Redundancy_And_Verify
+-i Enable_Power_Redundancy_And_Verify
