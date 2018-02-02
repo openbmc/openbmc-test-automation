@@ -65,3 +65,23 @@ Read Object Attribute
     ${content}=  To JSON  ${resp.content}
     [Return]  ${content["data"]}
 
+
+Verify OCC State
+    [Documentation]  Check OCC active state.
+    [Arguments]  ${expected_occ_active}=${1}
+    # Description of Argument(s):
+    # expected_occ_active  The expected occ_active value (i.e. 1/0).
+
+    # Example cpu_list data output:
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
+    #  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu1
+    ${cpu_list}=  Get Endpoint Paths
+    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard/  cpu*
+
+    :FOR  ${endpoint_path}  IN  @{cpu_list}
+    \  ${is_functional}=  Read Object Attribute  ${endpoint_path}  Functional
+    \  Continue For Loop If  ${is_functional} == ${0}
+    \  ${num}=  Set Variable  ${endpoint_path[-1]}
+    \  ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
+    \  Should Be Equal  ${occ_active}  ${expected_occ_active}
+    ...  msg=OCC not in right state
