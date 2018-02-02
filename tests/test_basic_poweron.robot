@@ -4,6 +4,7 @@ Documentation  Test power on for HW CI.
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
+Resource            ../lib/open_power_utils.robot
 
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
@@ -58,6 +59,7 @@ Host Off And On
     Initiate Host PowerOff
 
     Initiate Host Boot
+    Verify OCC State
 
     # TODO: Host shutdown race condition.
     # Wait 30 seconds before Powering Off.
