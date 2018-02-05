@@ -3,6 +3,7 @@ Documentation  Open power domain keywords.
 
 Library        ../data/variables.py
 Resource       ../lib/utils.robot
+Resource       ../lib/utils.robot
 
 *** Keywords ***
 
@@ -85,3 +86,67 @@ Verify OCC State
     \  ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
     \  Should Be Equal  ${occ_active}  ${expected_occ_active}
     ...  msg=OCC not in right state
+
+
+Get Sensors Aggregation Data
+    [Documentation]  Returns open power sensors aggregation value list.
+    [Arguments]  ${object_base_uri_path}
+
+    # Description of argument(s):
+    # object_base_uri_path  Object path.
+    #                       (e.g. "/org/open_power/sensors/aggregation/").
+
+    # Example of aggregation [epoch,time] data:
+    # "Values": [
+    #    [
+    #        1517815708479,  <-- EPOCH
+    #        282             <-- Value
+    #    ],
+    #    [
+    #        1517815678238,
+    #        282
+    #    ],
+    #    [
+    #        1517815648102,
+    #        282
+    #    ],
+    # ],
+
+    ${resp}=  Read Attribute  ${object_base_uri_path}  Values  quiet=${1}
+    ${ps_val_list}=  Create List
+    :FOR  ${index}  IN  @{resp}
+    \  Append To List  ${ps_val_list}  ${index[1]}
+    [Return]  ${ps_val_list}
+
+
+Get Sensors Aggregation URL List
+    [Documentation]  Returns open power aggregation maximum and average list
+    ...  uri(s).
+    [Arguments]  ${object_base_uri_path}
+
+    # Description of argument(s):
+    # object_base_uri_path  Object path.
+    #                       base path "/org/open_power/sensors/"
+    #        (e.g. "base path + aggregation/per_30s/ps0_input_power/average")
+    # Aggregation sensor url path list:
+    # /org/open_power/sensors/list
+    # [
+    #    "/org/open_power/sensors/aggregation/per_30s/ps0_input_power/average",
+    #    "/org/open_power/sensors/aggregation/per_30s/ps1_input_power/maximum",
+    #    "/org/open_power/sensors/aggregation/per_30s/ps0_input_power/maximum",
+    #    "/org/open_power/sensors/aggregation/per_30s/ps1_input_power/average"
+    # ]
+
+    ${ps_avg_list}=  Create List
+    ${ps_max_list}=  Create List
+    ${resp}=  OpenBMC Get Request  ${object_base_uri_path}list  quiet=${1}
+    ${content}=  To JSON  ${resp.content}
+    :FOR  ${index}  IN  @{content["data"]}
+    \  ${status}=
+    ...  Run keyword And Return Status  Should Contain  ${index}  average
+    \  Run Keyword If  ${status} == ${False}
+    ...    Append To List  ${ps_max_list}  ${index}
+    ...  ELSE
+    ...    Append To List  ${ps_avg_list}  ${index}
+
+    [Return]  ${ps_avg_list}  ${ps_max_list}
