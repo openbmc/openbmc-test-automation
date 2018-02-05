@@ -9,6 +9,7 @@ Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/state_manager.robot
 Resource        ../lib/boot_utils.robot
 Resource        ../lib/code_update_utils.robot
+Library         ../lib/bmc_ssh_utils.py
 
 Test Teardown   Test Teardown Execution
 Suite Setup     Suite Setup Execution
@@ -89,6 +90,15 @@ Test Teardown Execution
     [Documentation]  Do test case tear-down.
     Ping Host  ${OPENBMC_HOST}
     FFDC On Test Case Fail
+
+    # Example of the u-boot-env o/p:
+    # root@witherspoon:~# cat /dev/mtd/u-boot-env | grep field
+    # fieldmode=true
+    # fieldmode=true
+    ${field_mode}=
+    ...  BMC Execute Command  cat /dev/mtd/u-boot-env | grep fieldmode
+    Should Contain  "${field_mode[0]}"  fieldmode=true
+    ...  msg=u-boot-env shows "fieldmode" is not set to true.
 
 
 Validate Parameters
