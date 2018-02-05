@@ -20,3 +20,5 @@
 -i REST_Logout_Session_To_BMC
 # Check for BMC dump.
 -i Verify_No_BMC_Dump
+#Verify system boot time average
+-i Verify_Uptime_Average_Against_Threshold
