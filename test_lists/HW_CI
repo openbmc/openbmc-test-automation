@@ -18,3 +18,5 @@
 -i Multiple_Requests_On_BMC_Using_Single_REST_Session
 -i REST_Delete_All_Sessions_And_Expect_Error
 -i REST_Logout_Session_To_BMC
+#Verify system boot time average
+-i Verify_Uptime_Average_Against_Threshold

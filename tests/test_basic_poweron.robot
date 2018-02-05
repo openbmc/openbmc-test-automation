@@ -6,6 +6,7 @@ Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 Resource            ../lib/open_power_utils.robot
 Resource            ../lib/ipmi_client.robot
+Resource            ../lib/boot_utils.robot
 
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
@@ -51,6 +52,15 @@ Test SSH And IPMI Connections
     BMC Execute Command  true
     Run IPMI Standard Command  chassis status
 
+Verify Uptime Average Against Threshold
+    [Documentation]  Compare BMC average boot time to a constant threshold.
+    [Tags]  Verify_Uptime_Average_Against_Threshold
+
+    OBMC Reboot (off)
+    ${uptime}=  Measure BMC Boot Time
+    Should Be True  ${uptime} < 180
+    ...  msg=${uptime} exceeds threshold.
+
 *** Keywords ***
 
 Test Setup Execution
@@ -76,3 +86,12 @@ Host Off And On
     # TODO: Host shutdown race condition.
     # Wait 30 seconds before Powering Off.
     Sleep  30s
+
+Measure BMC Boot Time
+    [Documentation]  Reboot the BMC and collect uptime.
+
+    Open Connection And Log In
+    ${uptime}=
+    ...   Execute Command    cut -d " " -f 1 /proc/uptime| cut -d "." -f 1
+    ${uptime}=  Convert To Integer  ${uptime}
+    [return]  ${uptime}
