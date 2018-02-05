@@ -22,5 +22,7 @@
 -i REST_Logout_Session_To_BMC
 #Verify code update from the image under test still works
 -i REST_BMC_Code_Update
+#Verify system boot time average
+-i Verify_Uptime_Average_Against_Threshold
 #Verify no error logs generated
 -i Verify_Error_Log_Is_Clear
