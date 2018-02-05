@@ -1,0 +1,30 @@
+#Clear error logs for upcoming tests
+-i Clear_All_Error_Logs
+#Verify SSH and IPMI interfaces
+-i Test_SSH_and_IPMI_Connections
+#REST SSL connection test.
+-i Test_SSL_Connection
+#Basic poweron test
+-i Power_On_Test
+#Check for apps failures.
+-i Check_For_Application_Failures
+#OCC active state check.
+-i Verify_OCC_State_When_Host_Is_Booted
+#Verify BMC reset with the host up
+-i Verify_OCC_State_After_BMC_Reset
+#Additional REST API tests
+-i REST_Login_Session_To_BMC
+-i Verify_REST_Get_Message_JSON_Compliant
+-i Verify_REST_Post_Message_JSON_Compliant
+-i REST_Put_Message_JSON_Format_Compliance_Test
+-i Verify_REST_JSON_Data_On_Success
+-i Verify_REST_JSON_Data_On_Failure
+-i Multiple_Requests_On_BMC_Using_Single_REST_Session
+-i REST_Delete_All_Sessions_And_Expect_Error
+-i REST_Logout_Session_To_BMC
+#Verify code update from the image under test still works
+-i REST_BMC_Code_Update
+#Verify system boot time average
+-i Verify_Uptime_Average_Against_Threshold
+#Verify no error logs generated
+-i Verify_Error_Log_Is_Clear
