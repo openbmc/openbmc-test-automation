@@ -5,6 +5,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 Resource            ../lib/ipmi_client.robot
+Resource            ../lib/boot_utils.robot
 
 Test Setup          Start SOL Console Logging
 Test Teardown       Test Exit Logs
@@ -50,6 +51,21 @@ Test SSH and IPMI Connections
 
     Run IPMI Standard Command  chassis status
 
+Verify Uptime Average Against Threshold
+    [Documentation]  Compare BMC average boot time against a constant threshold.
+    [Tags]  Verify_Uptime_Average_Against_Threshold
+
+    ${uptime_average}=  Convert To Integer  0
+
+    : FOR  ${index}  IN RANGE  0  3
+    \  OBMC Reboot (off)
+    \  ${uptime}=  Measure BMC Boot Time
+    \  ${uptime_average}=  Evaluate  ${uptime_average}+${uptime}
+
+    ${uptime_average}=  Evaluate   ${uptime_average}/3  # 3 runs
+    Log Many  Uptime average:  ${uptime_average}
+    Should Be True  ${uptime_average} < 180
+
 *** Keywords ***
 
 Test Exit Logs
@@ -68,3 +84,12 @@ Host Off And On
     # TODO: Host shutdown race condition.
     # Wait 30 seconds before Powering Off.
     Sleep  30s
+
+Measure BMC Boot Time
+    [Documentation]  Reboot the BMC and collect uptime.
+
+    Open Connection And Log In
+    ${uptime}=
+    ...   Execute Command    cut -d " " -f 1 /proc/uptime| cut -d "." -f 1
+    ${uptime}=  Convert To Integer  ${uptime}
+    [return]  ${uptime}
