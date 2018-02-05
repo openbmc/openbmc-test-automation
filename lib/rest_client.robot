@@ -233,15 +233,19 @@ Logging
     Log    ${msg}    console=True
 
 Read Attribute
-    [Documentation]  Retrieve attribute value from URI and return result.
+    [Documentation]  Retrieve attribute value from URI, verifies and then
+    ...  return the result.
     # Example result data for the attribute 'FieldModeEnabled' in
     # "/xyz/openbmc_project/software/attr/" :
     # 0
-    [Arguments]    ${uri}    ${attr}    ${timeout}=10  ${quiet}=${QUIET}
+    [Arguments]    ${uri}    ${attr}    ${expected_value}=${EMPTY}
+    ...  ${timeout}=10  ${quiet}=${QUIET}
     # Description of argument(s):
     # uri               URI of the object that the attribute lives on
     #                   (e.g. '/xyz/openbmc_project/software/').
     # attr              Name of the attribute (e.g. 'FieldModeEnabled').
+    # expected_value    If this argument carries a value, the  attribute
+    #                   value retrieved should be same as the argument value. 
     # timeout           Timeout for the REST call.
     # quiet             If enabled, turns off logging to console.
 
@@ -249,6 +253,8 @@ Read Attribute
     ...  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=     To Json    ${resp.content}
+    Run Keyword If  '${expected_value}' != '${EMPTY}'
+    ...  Should Be Equal As Strings  ${expected_value}  ${content["data"]}
     [Return]    ${content["data"]}
 
 
