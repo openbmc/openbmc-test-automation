@@ -238,17 +238,22 @@ Read Attribute
     # "/xyz/openbmc_project/software/attr/" :
     # 0
     [Arguments]    ${uri}    ${attr}    ${timeout}=10  ${quiet}=${QUIET}
+    ...  ${expected_value}=${EMPTY}
     # Description of argument(s):
     # uri               URI of the object that the attribute lives on
     #                   (e.g. '/xyz/openbmc_project/software/').
     # attr              Name of the attribute (e.g. 'FieldModeEnabled').
     # timeout           Timeout for the REST call.
     # quiet             If enabled, turns off logging to console.
+    # expected_value    If this argument is not empty, the retrieved value
+    #                   must match this value.
 
     ${resp}=  OpenBMC Get Request  ${uri}/attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=     To Json    ${resp.content}
+    Run Keyword If  '${expected_value}' != '${EMPTY}'
+    ...  Should Be Equal As Strings  ${expected_value}  ${content["data"]}
     [Return]    ${content["data"]}
 
 
