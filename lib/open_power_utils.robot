@@ -85,3 +85,80 @@ Verify OCC State
     \  ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
     \  Should Be Equal  ${occ_active}  ${expected_occ_active}
     ...  msg=OCC not in right state
+
+
+Get Sensors Aggregation Data
+    [Documentation]  Return open power sensors aggregation value list.
+    [Arguments]  ${object_base_uri_path}
+
+    # Description of argument(s):
+    # object_base_uri_path  An object path such as one of the elements
+    #                       returned by 'Get Sensors Aggregation URL List'
+    #                       (e.g. "/org/open_power/sensors/aggregation/per_30s/ps0_input_power/average").
+
+    # Example of aggregation [epoch,time] data:
+    # "Values": [
+    #    [
+    #        1517815708479,  <-- EPOCH
+    #        282             <-- Power value in watts
+    #    ],
+    #    [
+    #        1517815678238,
+    #        282
+    #    ],
+    #    [
+    #        1517815648102,
+    #        282
+    #    ],
+    # ],
+
+    ${resp}=  Read Attribute  ${object_base_uri_path}  Values  quiet=${1}
+    ${power_sensors_value_list}=  Create List
+    :FOR  ${entry}  IN  @{resp}
+    \  Append To List  ${power_sensors_value_list}  ${entry[1]}
+    [Return]  ${power_sensors_value_list}
+
+
+Get Sensors Aggregation URL List
+    [Documentation]  Return the open power aggregation maximum list and the
+    ...  average list URIs.
+    [Arguments]  ${object_base_uri_path}
+
+    # Example of the 2 lists returned by this keyword:
+    # avgs:
+    #   avgs[0]: /org/open_power/sensors/aggregation/per_30s/ps0_input_power/average
+    #   avgs[1]: /org/open_power/sensors/aggregation/per_30s/ps1_input_power/average
+    # maxs:
+    #   maxs[0]: /org/open_power/sensors/aggregation/per_30s/ps1_input_power/maximum
+    #   maxs[1]: /org/open_power/sensors/aggregation/per_30s/ps0_input_power/maximum
+
+    # Description of argument(s):
+    # object_base_uri_path  Object path.
+    #                       base path "/org/open_power/sensors/"
+    #        (e.g. "base path + aggregation/per_30s/ps0_input_power/average")
+
+    # Example of open power sensor aggregation data as returned by the get
+    # request:
+    # /org/open_power/sensors/list
+    # [
+    #    "/org/open_power/sensors/aggregation/per_30s/ps0_input_power/average",
+    #    "/org/open_power/sensors/aggregation/per_30s/ps1_input_power/maximum",
+    #    "/org/open_power/sensors/aggregation/per_30s/ps0_input_power/maximum",
+    #    "/org/open_power/sensors/aggregation/per_30s/ps1_input_power/average"
+    # ]
+
+    ${resp}=  OpenBMC Get Request  ${object_base_uri_path}list  quiet=${1}
+    ${content}=  To JSON  ${resp.content}
+
+    ${power_supply_avg_list}=  Create List
+    ${power_supply_max_list}=  Create List
+
+    :FOR  ${entry}  IN  @{content["data"]}
+    \  ${status}=
+    ...  Run keyword And Return Status  Should Contain  ${entry}  average
+    \  Run Keyword If  ${status} == ${False}
+    ...    Append To List  ${power_supply_max_list}  ${entry}
+    ...  ELSE
+    ...    Append To List  ${power_supply_avg_list}  ${entry}
+
+    [Return]  ${power_supply_avg_list}  ${power_supply_max_list}

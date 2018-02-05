@@ -6,6 +6,7 @@ OPENBMC_BASE_DBUS = 'xyz.openbmc_project.'
 # org open power base URI.
 OPENPOWER_BASE_URI = '/org/open_power/'
 OPENPOWER_CONTROL = OPENPOWER_BASE_URI + 'control/'
+OPENPOWER_SENSORS = OPENPOWER_BASE_URI + 'sensors/'
 
 # REST URI base endpoint paths.
 CONTROL_URI = OPENBMC_BASE_URI + 'control/'
