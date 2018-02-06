@@ -3,6 +3,7 @@ Documentation       This suite is for testing general IPMI functions.
 
 Resource            ../../lib/ipmi_client.robot
 Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/bmc_network_utils.robot
 
 Test Teardown       FFDC On Test Case Fail
 
@@ -108,6 +109,60 @@ Verify Chassis Identify Off And Force Identify On via IPMI
     Run IPMI Standard Command  chassis identify 0
     Verify Identify LED State  Off
 
+Verify Default Gateway From LAN Print Using IPMI
+    [Documentation]  Verify default gateway from lan print using IPMI.
+    [Tags]  Verify_Default_Gateway_from_LAN_Print_Using_IPMI
+
+    ${std_out}=  Log Lan Print Details
+
+    # Fetch "Default Gateway" from IPMI lan print.
+    ${def_gateway}=  Fetch Details From Lan Print  Default Gateway IP
+
+    # Verify "Default Gateway" using REST.
+    ${default_gw}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/config
+    ...  DefaultGateway
+    Should Be Equal  ${def_gateway}  ${default_gw}
+
+Verify MAC Address From LAN Print Using IPMI
+    [Documentation]  Verify MAC Address From LAN Print Using IPMI.
+    [Tags]  Verify_MAC_Address_From_LAN_Print_Using_IPMI
+
+    ${std_out}=  Log Lan Print Details
+
+    # Fetch "MAC Address" from IPMI lan print.
+    ${mac_address_ipmi}=  Fetch Details From Lan Print  MAC Address
+
+    # Verify "MAC Address" using REST.
+    ${mac_address}=  Get BMC MAC Address
+    Should Be Equal  ${mac_address_ipmi}  ${mac_address}
+
+Verify Mode From LAN Print Using IPMI
+    [Documentation]  Verify Mode From LAN Print Using IPMI.
+    [Tags]  Verify_Mode_From_LAN_Print_Using_IPMI
+
+    ${std_out}=  Log Lan Print Details
+ 
+    # Fetch "Mode" from IPMI lan print.
+    ${static_mode}=  Fetch Details From Lan Print  Source
+
+    # Verify "Mode" using REST.
+    ${mode}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/eth0  DHCPEnabled
+    Run Keyword If  '${static_mode}' == 'Static Address'
+    ...  Should Be Equal  ${mode}  ${0}
+
+Verify IP Address From LAN Print Using IPMI
+    [Documentation]  Verify IP address from lan print using IPMI.
+    [Tags]  Verify_IP_Address_From_LAN_Print_Using_IPMI
+
+    ${std_out}=  Log Lan Print Details
+
+    # Fetch "IP Address" from IPMI lan print.
+    ${ip_addr}=  Fetch Details From Lan Print  IP Address
+
+    # Verify the IP Address with BMC IPs.
+    ${ip_address}=  Get BMC IP Info
+    Validate IP On BMC  ${ip_addr}  ${ip_address}
+
 *** Keywords ***
 
 Set Management Controller ID String
@@ -146,4 +201,35 @@ Verify Identify LED State
     ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/rear_id  State
     Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.${expected_state}
     ...  msg=Unexpected LED state.
+
+Log Lan Print Details
+    [Documentation]  Log lan print details.
+
+    Login To OS Host
+    Check If IPMI Tool Exist
+
+    ${inband_std_cmd}=  Catenate  ${IPMI_INBAND_CMD}  lan print
+    ${stdout}  ${stderr}=  Execute Command  ${inband_std_cmd}  return_stderr=True
+    Log  ${stdout}
+    [Return]  ${stdout}
+
+Validate IP On BMC
+    [Documentation]  Validate IP on BMC.
+    [Arguments]  ${ip_address}  ${ip_data}
+
+    Should Contain Match  ${ip_data}  ${ip_address}/*
+    ...  msg=IP address does not exist.
+
+Fetch Details From Lan Print
+    [Documentation]  Fetch Details From Lan Print.
+    [Arguments]  ${value}
+
+    # Description of argument(s):
+
+    # ${value}  Fetch from lan print.
+
+    ${stdout}=  Log Lan Print Details
+    ${fetch_value}=  Get Lines Containing String  ${stdout}  ${value}
+    ${value_fetch}=  Fetch From Right  ${fetch_value}  :${SPACE}
+    [Return]  ${value_fetch}
 
