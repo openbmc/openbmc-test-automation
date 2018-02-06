@@ -3,6 +3,7 @@ Documentation       This suite is for testing general IPMI functions.
 
 Resource            ../../lib/ipmi_client.robot
 Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/bmc_network_utils.robot
 
 Test Teardown       FFDC On Test Case Fail
 
@@ -146,6 +147,54 @@ Test Watchdog Off Via IPMI And Verify Using REST
     ${watchdog_state}=  Read Attribute  ${HOST_WATCHDOG_URI}  Enabled
     Should Be Equal  ${watchdog_state}  ${0}
     ...  msg=msg=Verification failed for watchdog off check.
+
+Retrieve Default Gateway Via IPMI And Verify Using REST
+    [Documentation]  Retrieve default gateway from lan print using IPMI.
+    [Tags]  Retrieve_Default_Gateway_Via_IPMI_And_Verify_Using_REST
+
+    # Fetch "Default Gateway" from IPMI lan print.
+    ${def_gateway_ipmi}=  Fetch Details From Lan Print  Default Gateway IP
+
+    # Verify "Default Gateway" using REST.
+    Read Attribute  ${XYZ_NETWORK_MANAGER}/config  DefaultGateway
+    ...  expected_value=${def_gateway_ipmi}
+
+Retrieve MAC Address Via IPMI And Verify Using REST
+    [Documentation]  Retrieve MAC Address from lan print using IPMI.
+    [Tags]  Retrieve_MAC_Address_Via_IPMI_And_Verify_Using_REST
+
+    # Fetch "MAC Address" from IPMI lan print.
+    ${mac_address_ipmi}=  Fetch Details From Lan Print  MAC Address
+
+    # Verify "MAC Address" using REST.
+    ${mac_address_rest}=  Get BMC MAC Address
+    Should Be Equal  ${mac_address_ipmi}  ${mac_address_rest}
+    ...  msg=Verification of MAC address from lan print using IPMI failed.
+
+Retrieve Network Mode Via IPMI And Verify Using REST
+    [Documentation]  Retrieve network mode from lan print using IPMI.
+    [Tags]  Retrieve_Network_Mode_Via_IPMI_And_Verify_Using_REST
+
+    # Fetch "Mode" from IPMI lan print.
+    ${network_mode_ipmi}=  Fetch Details From Lan Print  Source
+
+    # Verify "Mode" using REST.
+    ${network_mode_rest}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/eth0  DHCPEnabled
+    Run Keyword If  '${network_mode_ipmi}' == 'Static Address'
+    ...  Should Be Equal  ${network_mode_rest}  ${0}
+    ...  msg=Verification of DHCP network setting failed.
+
+Retrieve IP Address Via IPMI And Verify With BMC Details
+    [Documentation]  Retrieve IP address from lan print using IPMI.
+    [Tags]  Retrieve_IP_Address_Via_IPMI_And_Verify_With_BMC_Details
+
+    # Fetch "IP Address" from IPMI lan print.
+    ${ip_addr_ipmi}=  Fetch Details From Lan Print  IP Address
+
+    # Verify the IP Address with BMC IPs.
+    ${ip_address_rest}=  Get BMC IP Info
+    Validate IP On BMC  ${ip_addr_ipmi}  ${ip_address_rest}
+
 *** Keywords ***
 
 Set Management Controller ID String
@@ -195,3 +244,55 @@ Set Watchdog Enabled Using REST
     ${value_dict}=  Create Dictionary  data=${value}
     ${resp}=  OpenBMC Put Request  ${HOST_WATCHDOG_URI}/attr/Enabled
     ...  data=${value_dict}
+
+Log Lan Print Details
+    [Documentation]  Log IPMI lan print details.
+
+    # Example:
+
+    # Set in Progress        : Set Complete
+    # Auth Type Support      : MD5
+    # Auth Type Enable       : Callback : MD5
+    #                        : User     : MD5
+    #                        : Operator : MD5
+    #                        : Admin    : MD5 
+    #                        : OEM      : MD5
+    # IP Address Source      : Static Address
+    # IP Address             : 9.3.21.48
+    # Subnet Mask            : 255.255.254.0
+    # MAC Address            : 70:e2:84:14:28:e5
+    # Default Gateway IP     : 9.3.20.1
+    # 802.1q VLAN ID         : Disabled Cipher Suite
+    # Priv Max               : Not Available
+    # Bad Password Threshold : Not Available
+
+    Login To OS Host
+    Check If IPMI Tool Exist
+
+    ${inband_std_cmd}=  Catenate  ${IPMI_INBAND_CMD}  lan print
+    ${stdout}  ${stderr}=  Execute Command  ${inband_std_cmd}  return_stderr=True
+    Log  ${stdout}
+    [Return]  ${stdout}
+
+Validate IP On BMC
+    [Documentation]  Validate IP on BMC.
+    [Arguments]  ${ip_address}  ${ip_data}
+
+    # Description of argument(s):
+    # ${ip_address}  IP address to check.
+    # ${ip_data}     Set of the IP addresses present.
+
+    Should Contain Match  ${ip_data}  ${ip_address}/*
+    ...  msg=IP address does not exist.
+
+Fetch Details From Lan Print
+    [Documentation]  Fetch Details From Lan Print.
+    [Arguments]  ${value}
+
+    # Description of argument(s):
+    # ${value}  Fetch from lan print.
+
+    ${stdout}=  Log Lan Print Details
+    ${fetch_value}=  Get Lines Containing String  ${stdout}  ${value}
+    ${value_fetch}=  Fetch From Right  ${fetch_value}  :${SPACE}
+    [Return]  ${value_fetch}
