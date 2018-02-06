@@ -27,5 +27,5 @@
 -i Escale_Power_Setting_Via_REST_And_Verify
 -i Escale_Deactivation_Test_Via_REST
 #Power redundancy
--i Disable_Power_Redundancy_And_Verify
--i Enable_Power_Redundancy_And_Verify
+-i Disable_Power_Redundancy_And_Verify_Using_REST
+-i Enable_Power_Redundancy_And_Verify_Using_REST
