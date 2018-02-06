@@ -1428,9 +1428,22 @@ Verify BMC RTC And UTC Time Drift
     ...  ${time['universal_time_seconds']} - ${time['rtc_time_seconds']}
     Should Be True  ${time_diff} < ${time_diff_max}
 
+
 Watchdog Object Should Exist
     [Documentation]  Check that watchdog object exists.
 
     ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}host0
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  msg=Expected watchdog object does not exist.
+
+
+Validate IP On BMC
+    [Documentation]  Validate IP address is present in set of IP addresses.
+    [Arguments]  ${ip_address}  ${ip_data}
+
+    # Description of argument(s):
+    # ip_address  IP address to check (e.g. 9.5.25.31).
+    # ip_data     Set of the IP addresses present.
+
+    Should Contain Match  ${ip_data}  ${ip_address}/*
+    ...  msg=${ip_address} not found in the list provided.
