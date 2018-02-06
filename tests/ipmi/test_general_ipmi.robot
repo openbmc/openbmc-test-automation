@@ -9,6 +9,7 @@ Test Teardown       FFDC On Test Case Fail
 *** Variables ***
 
 ${new_mc_id}=  HOST
+${allowed_temp_diff}=  ${1}
 
 *** Test Cases ***
 
@@ -146,6 +147,45 @@ Test Watchdog Off Via IPMI And Verify Using REST
     ${watchdog_state}=  Read Attribute  ${HOST_WATCHDOG_URI}  Enabled
     Should Be Equal  ${watchdog_state}  ${0}
     ...  msg=msg=Verification failed for watchdog off check.
+
+
+Test Ambient Temperature Via IPMI
+    [Documentation]  Test ambient temperature via IPMI and verify using REST.
+    [Tags]  Test_Ambient_Temperature_Via_IPMI
+
+    #        Entity ID                       Entity Instance    Temp. Readings
+    # Inlet air temperature(40h)                      1               +19 C
+    # CPU temperature sensors(41h)                    5               +51 C
+    # CPU temperature sensors(41h)                    6               +50 C
+    # CPU temperature sensors(41h)                    7               +50 C
+    # CPU temperature sensors(41h)                    8               +50 C
+    # CPU temperature sensors(41h)                    9               +50 C
+    # CPU temperature sensors(41h)                    10              +48 C
+    # CPU temperature sensors(41h)                    11              +49 C
+    # CPU temperature sensors(41h)                    12              +47 C
+    # CPU temperature sensors(41h)                    8               +50 C
+    # CPU temperature sensors(41h)                    16              +51 C
+    # CPU temperature sensors(41h)                    24              +50 C
+    # CPU temperature sensors(41h)                    32              +43 C
+    # CPU temperature sensors(41h)                    40              +43 C
+    # Baseboard temperature sensors(42h)              1               +35 C
+
+    ${temp_reading}=  Run IPMI Standard Command  dcmi get_temp_reading -N 10
+    ${ambient_temp_line}=
+    ...  Get Lines Containing String  ${temp_reading}
+    ...  Inlet air temperature  case-insensitive
+
+    ${ambient_temp_ipmi}=  Fetch From Right  ${ambient_temp_line}  +
+    ${ambient_temp_ipmi}=  Remove String  ${ambient_temp_ipmi}  ${SPACE}C
+
+    ${ambient_temp_rest}=  Read Attribute
+    ...  ${SENSORS_URI}temperature/ambient  Value
+    ${ambient_temp_rest}=  Evaluate  ${ambient_temp_rest}/1000
+    ${ipmi_rest_temp_diff}=
+    ...  Evaluate  abs(${ambient_temp_rest} - ${ambient_temp_ipmi})
+
+    Should Be True  ${ipmi_rest_temp_diff} <= ${allowed_temp_diff}
+
 *** Keywords ***
 
 Set Management Controller ID String
