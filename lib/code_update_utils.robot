@@ -112,6 +112,9 @@ Set Host Software Property
 
     ${args}=  Create Dictionary  data=${data}
     Write Attribute  ${host_object}  ${sw_attribute}  data=${args}
+    # Sync time for software updater manager to update.
+    # TODO: openbmc/openbmc#2857
+    Sleep  10s
 
 
 Set Property To Invalid Value And Verify No Change
