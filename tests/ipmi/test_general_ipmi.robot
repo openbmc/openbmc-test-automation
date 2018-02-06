@@ -146,6 +146,52 @@ Test Watchdog Off Via IPMI And Verify Using REST
     ${watchdog_state}=  Read Attribute  ${HOST_WATCHDOG_URI}  Enabled
     Should Be Equal  ${watchdog_state}  ${0}
     ...  msg=msg=Verification failed for watchdog off check.
+
+
+Verify Get Device ID
+    [Documentation]  Verify get device ID command output.
+    [Tags]  Verify_Get_Device_ID
+
+    # Get device command output:
+    # Device ID                 : 0
+    # Device Revision           : 0
+    # Firmware Revision         : 2.01
+    # IPMI Version              : 2.0
+    # Manufacturer ID           : 42817
+    # Manufacturer Name         : Unknown (0xA741)
+    # Product ID                : 16975 (0x424f)
+    # Product Name              : Unknown (0x424F)
+    # Device Available          : yes
+    # Provides Device SDRs      : yes
+    # Additional Device Support :
+    #     Sensor Device
+    #     SEL Device
+    #     FRU Inventory Device
+    #     Chassis Device
+    # Aux Firmware Rev Info     :
+    #     0x00
+    #     0x00
+    #     0x00
+    #     0x00
+
+    Verify Get Device Command Output  Device ID  0
+    Verify Get Device Command Output  Device Revision  0
+    Verify Get Device Command Output  IPMI Version  2.0
+
+    # Get major BMC version from BMC cli i.e. 2.1 from "v2.1-51-g04ff12c"
+    ${bmc_version}=  Get BMC Version
+    ${bmc_version}=  Fetch From Left  ${bmc_version}  -
+    ${bmc_version}=  Remove String  ${bmc_version}  "v
+
+    # TODO: Verify Manufacturer and Product IDs directy from json file.
+    # Reference : openbmc/openbmc-test-automation#1244
+    Verify Get Device Command Output  Firmware Revision  ${bmc_version}
+    Verify Get Device Command Output  Manufacturer ID  42817
+    Verify Get Device Command Output  Product ID  16975
+    Verify Get Device Command Output  Device Available  yes
+    Verify Get Device Command Output  Provides Device SDRs  yes
+
+
 *** Keywords ***
 
 Set Management Controller ID String
@@ -195,3 +241,16 @@ Set Watchdog Enabled Using REST
     ${value_dict}=  Create Dictionary  data=${value}
     ${resp}=  OpenBMC Put Request  ${HOST_WATCHDOG_URI}/attr/Enabled
     ...  data=${value_dict}
+
+Verify Get Device Command Output
+    [Documentation]  Verify get device command output.
+    [Arguments]  ${field}  ${expected_value}
+
+    # Description of argument(s):
+    # field           field which need to verify.
+    # expected_value  expected value which needs to be checked.
+
+    ${cmd_output}=  Run IPMI Standard Command  mc info
+    ${field_line}=
+    ...  Get Lines Containing String  ${cmd_output}  ${field}
+    Should Contain  ${field_line}  ${expected_value}
