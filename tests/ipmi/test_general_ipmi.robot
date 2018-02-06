@@ -146,6 +146,38 @@ Test Watchdog Off Via IPMI And Verify Using REST
     ${watchdog_state}=  Read Attribute  ${HOST_WATCHDOG_URI}  Enabled
     Should Be Equal  ${watchdog_state}  ${0}
     ...  msg=msg=Verification failed for watchdog off check.
+
+
+Verify Get DCMI Capabilities
+    [Documentation]  Verify get DCMI capabilities command output.
+    [Tags]  Verify_Get_DCMI_Capabilities
+
+    ${cmd_output}=  Run IPMI Standard Command  dcmi discover
+
+    @{supported_capabilities}=  Create List
+    # Supported DCMI capabilities:
+    ...  Mandatory platform capabilties
+    ...  Optional platform capabilties
+    ...  Power management available
+    ...  Managebility access capabilties
+    ...  In-band KCS channel available
+    # Mandatory platform attributes:
+    ...  200 SEL entries
+    ...  SEL automatic rollover is enabled
+    # Optional Platform Attributes:
+    ...  Slave address of device: 0h (8bits)(Satellite/External controller)
+    ...  Channel number is 0h (Primary BMC)
+    ...  Device revision is 0
+    # Manageability Access Attributes:
+    ...  Primary LAN channel is available for OOB
+    ...  Secondary LAN channel is not available for OOB
+    ...  No serial channel is available
+
+    :FOR  ${capability}  IN  @{supported_capabilities}
+    \  Should Contain  ${cmd_output}  ${capability}  case_insensitive=True
+    ...  msg=Supported DCMI capabilities not present.
+
+
 *** Keywords ***
 
 Set Management Controller ID String
