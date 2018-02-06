@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 r"""
-IPMI raw commands table.
+IPMI raw commands table:
 
    - Define IPMI interface index, commands and expected output.
 

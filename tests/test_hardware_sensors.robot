@@ -5,6 +5,8 @@ Resource        ../lib/utils.robot
 Resource        ../lib/boot_utils.robot
 Resource        ../lib/state_manager.robot
 Resource        ../lib/openbmc_ffdc.robot
+Resource        ../lib/ipmi_client.robot
+Variables       ../data/ipmi_raw_cmd_table.py
 
 Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
@@ -227,9 +229,9 @@ Verify VDDR Temperature Sensors Attributes
    \  ${vddr_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
    \  Should Be True  ${vddr_temp} > 0
 
-Disable Power Redundancy And Verify
+Disable Power Redundancy And Verify Using REST
    [Documentation]  Disable power redundancy and verify that it is disabled.
-   [Tags]  Disable_Power_Redundancy_And_Verify
+   [Tags]  Disable_Power_Redundancy_And_Verify_Using_REST
 
    # Example:
    # /xyz/openbmc_project/sensors/chassis/PowerSupplyRedundancy
@@ -246,9 +248,9 @@ Disable Power Redundancy And Verify
    Should Be Equal As Strings  ${content["data"]}  Disabled
 
 
-Enable Power Redundancy And Verify
+Enable Power Redundancy And Verify Using REST
    [Documentation]  Enable power redundancy and verify that it is enabled.
-   [Tags]  Enable_Power_Redundancy_And_Verify
+   [Tags]  Enable_Power_Redundancy_And_Verify_Using REST
 
    # Example:
    # /xyz/openbmc_project/sensors/chassis/PowerSupplyRedundancy
@@ -263,6 +265,42 @@ Enable Power Redundancy And Verify
    ${resp}=  Power Redundancy Setting  getValue
    ${content}=  To Json  ${resp.content}
    Should Be Equal As Strings  ${content["data"]}  Enabled
+
+
+Disable Power Redundancy And Verify Using IPMI
+    [Documentation]  Disable power redundancy and verify that it is disabled.
+    [Tags]  Disable_Power_Redundancy_And_Verify_Using_IPMI
+
+    # Refer data/ipmi_raw_cmd_table.py for command definition.
+
+    Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['power_supply_redundancy']['Disabled'][0]}
+
+    ${output}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['power_supply_redundancy']['Get'][0]}
+
+    Should Be Equal As Strings
+    ...  ${output.lstrip()}
+    ...  ${IPMI_RAW_CMD['power_supply_redundancy']['Get'][1]}
+    ...  msg=${IPMI_RAW_CMD['power_supply_redundancy']['Get'][1]} = ${output}.
+
+
+Enable Power Redundancy And Verify Using IPMI
+    [Documentation]  Enable power redundancy and verify that it is enabled.
+    [Tags]  Enable_Power_Redundancy_And_Verify_Using_IPMI
+
+    # Refer data/ipmi_raw_cmd_table.py for command definition.
+
+    Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['power_supply_redundancy']['Enabled'][0]}
+
+    ${output}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['power_supply_redundancy']['Get'][0]}
+
+    Should Be Equal As Strings
+    ...  ${output.lstrip()}
+    ...  ${IPMI_RAW_CMD['power_supply_redundancy']['Get'][3]}
+    ...  msg=${IPMI_RAW_CMD['power_supply_redundancy']['Get'][3]} = ${output}.
 
 
 *** Keywords ***
