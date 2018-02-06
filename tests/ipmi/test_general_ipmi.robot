@@ -387,6 +387,60 @@ Retrieve IP Address Via IPMI And Verify With BMC Details
     Validate IP On BMC  ${ip_addr_ipmi}  ${ip_address_rest}
 
 
+Verify Get Device ID
+    [Documentation]  Verify get device ID command output.
+    [Tags]  Verify_Get_Device_ID
+
+    # Example of get device ID command output:
+    # Device ID                 : 0
+    # Device Revision           : 0
+    # Firmware Revision         : 2.01
+    # IPMI Version              : 2.0
+    # Manufacturer ID           : 42817
+    # Manufacturer Name         : Unknown (0xA741)
+    # Product ID                : 16975 (0x424f)
+    # Product Name              : Unknown (0x424F)
+    # Device Available          : yes
+    # Provides Device SDRs      : yes
+    # Additional Device Support :
+    #     Sensor Device
+    #     SEL Device
+    #     FRU Inventory Device
+    #     Chassis Device
+    # Aux Firmware Rev Info     :
+    #     0x00
+    #     0x00
+    #     0x00
+    #     0x00
+
+    ${mc_info}=  Get MC Info
+
+    Should Be Equal  ${mc_info['device_id']}  0
+    Should Be Equal  ${mc_info['device_revision']}  0
+
+    # Get major BMC version from BMC cli i.e. 2.1 from "v2.1-51-g04ff12c"
+    ${bmc_version}=  Get BMC Version
+    ${bmc_version}=  Fetch From Left  ${bmc_version}  -
+    ${bmc_version}=  Remove String  ${bmc_version}  "v
+
+    Should Be Equal  ${mc_info['firmware_revision']}  ${bmc_version}
+    Should Be Equal  ${mc_info['ipmi_version']}  2.0
+
+    # TODO: Verify Manufacturer and Product IDs directy from json file.
+    # Reference : openbmc/openbmc-test-automation#1244
+    Should Be Equal  ${mc_info['manufacturer_id']}  42817
+    Should Be Equal  ${mc_info['product_id']}  16975 (0x424f)
+
+    Should Be Equal  ${mc_info['device_available']}  yes
+    Should Be Equal  ${mc_info['provides_device_sdrs']}  yes
+    Should Contain  ${mc_info['additional_device_support']}  Sensor Device
+    Should Contain  ${mc_info['additional_device_support']}  SEL Device
+    Should Contain
+    ...  ${mc_info['additional_device_support']}  FRU Inventory Device
+    Should Contain  ${mc_info['additional_device_support']}  Chassis Device
+    Should Contain X Times  ${mc_info['aux_firmware_rev_info']}  0x00  4
+
+
 *** Keywords ***
 
 
