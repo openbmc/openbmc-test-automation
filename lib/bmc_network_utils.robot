@@ -170,3 +170,33 @@ Delete IP And Object
     ${ip_data}=  Get BMC IP Info
     Should Not Contain Match  ${ip_data}  ${ip_addr}*
     ...  msg=IP address not deleted.
+
+Get Non Pingable IP From Subnet
+    [Arguments]  ${ip_addr}=${OPENBMC_HOST}
+
+    # Description of argument(s):
+    # ip_addr  Valid IP in subnet.
+
+    # Split IP address into network part and host part.
+    ${split_ip}=  Split String From Right  ${ip_addr}  .  1
+    # First element in list is Network part.
+    ${network_part}=  Get From List  ${split_ip}  0
+
+    ${octet4}=  Set Variable  ${0}
+
+    # Increase host part by one, postfix it to Network part.
+    # Continue until we get unreachable IP.
+
+    : FOR  ${i}  IN RANGE  1  255
+    \  ${octet4}=  Evaluate  ${octet4}+${i}
+    \  ${new_ip}=  Catenate  ${network_part}.${octet4}
+
+    # Check if new IP is pingable or not.
+    # Exit loop once we get non pingable IP.
+
+    \  ${status}=  Run Keyword And Return Status  Ping Host  ${new_ip}
+    \  Should Not Be Equal  ${i}  ${255}  msg=No non pingable IP in subnet.
+    \  Exit For Loop If  '${status}' == 'False'
+
+    [Return]  ${new_ip}
+
