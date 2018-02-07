@@ -20,6 +20,7 @@ def file_diff(file1_path,
               file2_path,
               diff_file_path,
               skip_string):
+    from __builtin__ import file
     r"""
     Compare the contents of two text files.  The comparison uses the Unix
     'diff' command.  Differences can be selectively ignored by use of
