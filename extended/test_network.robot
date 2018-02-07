@@ -69,7 +69,7 @@ Verify Gateway Address
 Verify MAC Address
     [Documentation]  Get MAC address and verify.
     [Tags]  Verify_MAC_Address
-    ${macaddr}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/eth0  MACAddress
+    ${macaddr}=  Read Attribute  ${NETWORK_MANAGER}/eth0  MACAddress
     Validate MAC On BMC  ${macaddr}
 
 Add New Valid IP And Verify
@@ -377,7 +377,7 @@ Verify Default Gateway
     [Documentation]  Verify default gateway.
     [Tags]  Verify that the default gateway has a valid route.
 
-    ${default_gw}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/config
+    ${default_gw}=  Read Attribute  ${NETWORK_MANAGER}/config
     ...  DefaultGateway
     Validate Route On BMC  ${default_gw}
 
@@ -386,7 +386,7 @@ Verify Hostname
     ...  hostname configured on system.
     [Tags]  Verify_Hostname
 
-    ${hostname}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/config  HostName
+    ${hostname}=  Read Attribute  ${NETWORK_MANAGER}/config  HostName
     Validate Hostname On BMC  ${hostname}
 
 *** Keywords ***
@@ -411,7 +411,7 @@ Get IPv4 URI List
     #     "/xyz/openbmc_project/network/eth0/ipv4/31f4ce8b"
     #   ],
 
-    @{ipv4_uri_list}=  Read Properties  ${XYZ_NETWORK_MANAGER}/eth0/ipv4/
+    @{ipv4_uri_list}=  Read Properties  ${NETWORK_MANAGER}/eth0/ipv4/
     Should Not Be Empty  ${ipv4_uri_list}  msg=IPv4 URI list is empty.
 
     [Return]  @{ipv4_uri_list}
@@ -501,7 +501,7 @@ Configure Network Settings
     ${data}=  Create Dictionary  data=@{ip_parm_list}
 
     Run Keyword And Ignore Error  OpenBMC Post Request
-    ...  ${XYZ_NETWORK_MANAGER}/eth0/action/IP  data=${data}
+    ...  ${NETWORK_MANAGER}/eth0/action/IP  data=${data}
 
     # After any modification on network interface, BMC restarts network
     # module, wait until it is reachable.

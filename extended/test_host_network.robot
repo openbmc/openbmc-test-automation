@@ -43,13 +43,13 @@ Set Static Host Network Address Via IPMI
 
     Run IPMI command  ${ipmi_raw_cmd}
 
-    ${data}=  Read Properties  ${XYZ_NETWORK_MANAGER}host0/intf/addr
+    ${data}=  Read Properties  ${NETWORK_MANAGER}host0/intf/addr
     Should Contain  ${data["Origin"]}  Static
     Should Be Equal  ${data["Address"]}  ${ip_address}
     Should Be Equal  ${data["Gateway"]}  ${gateway_ip}
 
     ${new_mac_address}=
-    ...  Read Attribute  ${XYZ_NETWORK_MANAGER}host0/intf  MACAddress
+    ...  Read Attribute  ${NETWORK_MANAGER}host0/intf  MACAddress
     Should Be Equal  ${new_mac_address}  ${mac_address}
 
 
@@ -65,9 +65,9 @@ Set DHCP Host Address Via IPMI
     ...  ${SET_ADDR_PREFIX}${SPACE}${mac_address_hex}${SPACE}${DHCP}
     Run IPMI command  ${ipmi_raw_cmd}
 
-    ${origin}=  Read Attribute  ${XYZ_NETWORK_MANAGER}host0/intf/addr  Origin
+    ${origin}=  Read Attribute  ${NETWORK_MANAGER}host0/intf/addr  Origin
     ${new_mac_address}=
-    ...  Read Attribute  ${XYZ_NETWORK_MANAGER}host0/intf  MACAddress
+    ...  Read Attribute  ${NETWORK_MANAGER}host0/intf  MACAddress
     Should Contain  ${origin}  DHCP
     Should Be Equal  ${new_mac_address}  ${mac_address}
 

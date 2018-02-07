@@ -15,7 +15,7 @@ CONTROL_URI = OPENBMC_BASE_URI + 'control/'
 SETTINGS_URI = '/org/openbmc/settings/'
 WATCHDOG_URI = OPENBMC_BASE_URI + 'watchdog/'
 TIME_MANAGER_URI = OPENBMC_BASE_URI + 'time/'
-XYZ_NETWORK_MANAGER = OPENBMC_BASE_URI + 'network/'
+NETWORK_MANAGER = OPENBMC_BASE_URI + 'network/'
 
 # Sensors base variables.
 SENSORS_URI =  OPENBMC_BASE_URI + 'sensors/'
