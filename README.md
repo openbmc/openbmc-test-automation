@@ -169,7 +169,6 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     ```
     $ OPENBMC_HOST=x.x.x.x tox -e default -- tests
     ```
-    Default CI test bucket list:
 
     No preset environment variables, the entire test suite excluding test
     cases using argument file:
@@ -182,6 +181,18 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     Barrleye:  test_lists/skip_test_barreleye
     Palmetto:  test_lists/skip_test_palmetto
     Witherspoon:  test_lists/skip_test_witherspoon
+    ```
+
+* How to run CI and CT bucket test:
+
+    Default CI test bucket list:
+    ```
+    $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/HW_CI tests
+    ```
+
+    Default CI smoke test bucket list:
+    ```
+    $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/CT_basic_run tests
     ```
 
 * Run extended tests:
