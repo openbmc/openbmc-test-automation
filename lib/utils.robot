@@ -15,6 +15,7 @@ Library                 gen_cmd.py
 Library                 gen_robot_keyword.py
 Library                 bmc_ssh_utils.py
 Library                 utils.py
+Library                 utils_files.py
 Library                 var_funcs.py
 Library                 SCPLibrary  WITH NAME  scp
 
