@@ -160,6 +160,9 @@ def get_system_details(xml_file_path):
 
 
 def usage():
+    r"""
+    Provides output on console about usage.
+    """
     name = 'gen_csv_results.py'
     print 'Usage: '
     print name, '-s <source path> -d <destination path>'
