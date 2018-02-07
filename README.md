@@ -17,6 +17,7 @@
 * IPMI support
 * Factory reset
 * RAS (Reliability, availability and serviceability)
+* Web UI testing
 
 **Debugging Supported List**
 * SOL collection
@@ -49,6 +50,7 @@ These documents contain details on developing OpenBMC test code and debugging.
  - [CONTRIBUTING.md](CONTRIBUTING.md): Coding guidelines.
  - [REST-cheatsheet.md](https://github.com/openbmc/docs/blob/master/REST-cheatsheet.md): Quick reference for some common
    curl commands required for testing.
+ - [README.md](https://github.com/openbmc/phosphor-webui/blob/master/README.md): Web UI setup reference.
 
 ## Testing Setup Steps ##
 
@@ -83,6 +85,8 @@ classified as follows:
 
 `ras/`: Contains test cases for RAS (Reliability, availability and
         serviceability).
+
+`gui/`: Contains test cases for web UI and security scanning tool automation.
 
 `tools/`: Contains various tools.
 
