@@ -121,7 +121,7 @@ Suite Setup Execution
     Open Connection And Login
 
     # Get BMC MAC address.
-    ${macaddr}=  Read Attribute  ${XYZ_NETWORK_MANAGER}/eth0  MACAddress
+    ${macaddr}=  Read Attribute  ${NETWORK_MANAGER}/eth0  MACAddress
     Validate MAC On BMC  ${macaddr}
     Set Suite Variable  ${macaddr}
 
@@ -148,7 +148,7 @@ Configure MAC Settings
     ${data}=  Create Dictionary  data=${mac_addr}
 
     Run Keyword And Ignore Error  OpenBMC Put Request
-    ...  ${XYZ_NETWORK_MANAGER}/eth0/attr/MACAddress  data=${data}
+    ...  ${NETWORK_MANAGER}/eth0/attr/MACAddress  data=${data}
 
     # After any modification on network interface, BMC restarts network
     # module, wait until it is reachable.
