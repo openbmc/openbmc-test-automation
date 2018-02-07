@@ -20,6 +20,7 @@ def file_diff(file1_path,
               file2_path,
               diff_file_path,
               skip_string):
+    from __builtin__ import file
     r"""
     Compare the contents of two text files.  The comparison uses the Unix
     'diff' command.  Differences can be selectively ignored by use of
@@ -130,3 +131,34 @@ def file_diff(file1_path,
     else:
         # We have at least one difference not in the skip_string.
         return FILES_DO_NOT_MATCH
+def return_files_with_extension(string_of_files,ext):
+    '''
+    Returns files with specified extension.
+    '''
+    list = string_of_files.split()
+    final_ = []
+    for file in list:
+        if '.{}'.format(ext) in file:
+            final_.append(file)
+    return final_ 
+def select_file_with_postfix(files,postfix):
+    '''
+    Returns a file with given postfix from list or string of files, e.g 1.7TB.bin.
+    '''
+    if type(files) == str:
+        list = files.split()
+    else:
+        list = files
+    for file in list:
+        if postfix in file:
+            return file
+        else:
+            fix = postfix[:-1]
+            # 1.7
+            a = file.rfind('_')
+            b = file.rfind('.')
+            found = file[a+1:b-2]
+            if fix <= found:
+                return file
+        
+    raise ValueError("File with postfix {} not found".format(postfix))
