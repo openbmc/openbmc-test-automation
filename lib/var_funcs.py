@@ -264,7 +264,7 @@ def parse_key_value(string,
     if len(pair) == 0:
         value = ""
     else:
-        value = "".join(pair[1:]).strip(strip)
+        value = delim.join(pair[1:]).strip(strip)
 
     if to_lower:
         key = key.lower()
@@ -462,9 +462,10 @@ def outbuf_to_report(out_buf,
 
     Given the following out_buf:
 
-    Filesystem           1K-blocks      Used Available Use% Mounted on
-    dev                     247120         0    247120   0% /dev
-    tmpfs                   248408     79792    168616  32% /run
+    Filesystem                      1K-blocks      Used Available Use% Mounted
+                                    on
+    dev                             247120         0    247120   0% /dev
+    tmpfs                           248408     79792    168616  32% /run
 
     This function will return a list of dictionaries as shown below:
 
