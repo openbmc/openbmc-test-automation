@@ -4,11 +4,15 @@ r"""
 Provide useful ipmi functions.
 """
 
+import gen_print as gp
 import gen_misc as gm
 import gen_robot_keyword as grk
 import gen_robot_utils as gru
+import bmc_ssh_utils as bsu
+import var_funcs as vf
 import tempfile
 gru.my_import_resource("ipmi_client.robot")
+from robot.libraries.BuiltIn import BuiltIn
 
 
 def get_sol_info():
@@ -73,3 +77,74 @@ def set_sol_setting(setting_name, setting_value):
     return status
 
 
+def get_lan_print_dict():
+
+    r"""
+    Get IPMI 'lan print' output and return it as a dictionary.
+
+    Here is an example of the IPMI lan print output:
+
+    Set in Progress         : Set Complete
+    Auth Type Support       : MD5
+    Auth Type Enable        : Callback : MD5
+                            : User     : MD5
+                            : Operator : MD5
+                            : Admin    : MD5
+                            : OEM      : MD5
+    IP Address Source       : Static Address
+    IP Address              : x.x.x.x
+    Subnet Mask             : x.x.x.x
+    MAC Address             : xx:xx:xx:xx:xx:xx
+    Default Gateway IP      : x.x.x.x
+    802.1q VLAN ID          : Disabled
+    Cipher Suite Priv Max   : Not Available
+    Bad Password Threshold  : Not Available
+
+    Given that data, this function will return the following dictionary.
+
+    lan_print_dict:
+      [Set in Progress]:                              Set Complete
+      [Auth Type Support]:                            MD5
+      [Auth Type Enable]:
+        [Callback]:                                   MD5
+        [User]:                                       MD5
+        [Operator]:                                   MD5
+        [Admin]:                                      MD5
+        [OEM]:                                        MD5
+      [IP Address Source]:                            Static Address
+      [IP Address]:                                   x.x.x.x
+      [Subnet Mask]:                                  x.x.x.x
+      [MAC Address]:                                  xx:xx:xx:xx:xx:xx
+      [Default Gateway IP]:                           x.x.x.x
+      [802.1q VLAN ID]:                               Disabled
+      [Cipher Suite Priv Max]:                        Not Available
+      [Bad Password Threshold]:                       Not Available
+
+    """
+
+    IPMI_INBAND_CMD = BuiltIn().get_variable_value("${IPMI_INBAND_CMD}")
+
+    # Notice in the example of data above that 'Auth Type Enable' needs some
+    # special processing.  We essentially want to isolate its data and remove
+    # the 'Auth Type Enable' string so that key_value_outbuf_to_dict can
+    # process it as a sub-dictionary.
+    cmd_buf = IPMI_INBAND_CMD + " lan print | grep -E '^(Auth Type Enable)" +\
+        "?[ ]+: ' | sed -re 's/^(Auth Type Enable)?[ ]+: //g'"
+    stdout1, stderr, rc = bsu.os_execute_command(cmd_buf)
+
+    # Now get the remainder of the data and exclude the lines with no field
+    # names (i.e. the 'Auth Type Enable' sub-fields).
+    cmd_buf = IPMI_INBAND_CMD + " lan print | grep -E -v '^[ ]+: '"
+    stdout2, stderr, rc = bsu.os_execute_command(cmd_buf)
+
+    # Make auth_type_enable_dict sub-dictionary...
+    auth_type_enable_dict = vf.key_value_outbuf_to_dict(stdout1, to_lower=0,
+                                                        underscores=0)
+
+    # Create the lan_print_dict...
+    lan_print_dict = vf.key_value_outbuf_to_dict(stdout2, to_lower=0,
+                                                 underscores=0)
+    # Re-assign 'Auth Type Enable' to contain the auth_type_enable_dict.
+    lan_print_dict['Auth Type Enable'] = auth_type_enable_dict
+
+    return lan_print_dict
