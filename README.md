@@ -195,15 +195,30 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/CT_basic_run tests
     ```
 
+* Code update test:
+
+    For BMC code update, download the system type *.ubi.mdt.tar image from
+    https://openpower.xyz/job/openbmc-build/ and run as follows:
+
+    For Witherspoon system:
+    ```
+    $ cd extended/code_update/
+    $ robot -v OPENBMC_HOST:x.x.x.x -v IMAGE_FILE_PATH:<image path>/obmc-phosphor-image-witherspoon.ubi.mtd.tar --include REST_BMC_Code_Update  bmc_code_update.robot
+    ```
+
+    For host code update, download the system type *.pnor.squashfs.tar image
+    from https://openpower.xyz/job/openpower-op-build/ and run as follows:
+
+    For Witherspoon system:
+    ```
+    $ cd extended/code_update/
+    $ robot -v OPENBMC_HOST:x.x.x.x -v IMAGE_FILE_PATH:<image path>/witherspoon.pnor.squashfs.tar --include REST_Host_Code_Update  host_code_update.robot
+    ```
+
+    For manual code update and know how refer [code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
+
 * Run extended tests:
 
-    For BMC code update, download the system type *.all.tar image from https://openpower.xyz
-    and run as follows:
-
-    For Barreleye system:
-    ```
-    $ robot -v OPENBMC_HOST:x.x.x.x -v FILE_PATH:downloaded_path/barreleye-xxxx.all.tar  extended/code_update/update_bmc.robot
-    ```
     For loop test (default iteration is 10):
     ```
     $ robot -v OPENBMC_HOST:x.x.x.x -v OPENBMC_SYSTEMMODEL:xxxxxx -v ITERATION:n -v LOOP_TEST_COMMAND:xxxxxx extended/full_suite_regression.robot
