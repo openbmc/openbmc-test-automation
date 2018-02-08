@@ -264,7 +264,7 @@ def parse_key_value(string,
     if len(pair) == 0:
         value = ""
     else:
-        value = "".join(pair[1:]).strip(strip)
+        value = delim.join(pair[1:]).strip(strip)
 
     if to_lower:
         key = key.lower()
