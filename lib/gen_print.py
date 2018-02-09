@@ -1150,7 +1150,10 @@ def sprint(buffer=""):
     buffer                          This will be returned to the caller.
     """
 
-    return str(buffer)
+    try:
+        return str(buffer)
+    except UnicodeEncodeError:
+        return buffer
 
 
 def sprintn(buffer=""):
@@ -1164,7 +1167,10 @@ def sprintn(buffer=""):
     buffer                          This will be returned to the caller.
     """
 
-    buffer = str(buffer) + "\n"
+    try:
+        buffer = str(buffer) + "\n"
+    except UnicodeEncodeError:
+        buffer = buffer + "\n"
 
     return buffer
 
