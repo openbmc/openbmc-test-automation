@@ -18,6 +18,7 @@
 * Factory reset
 * RAS (Reliability, availability and serviceability)
 * Web UI testing
+* IO storage and Enhanced Error Handling testing
 
 **Debugging Supported List**
 * SOL collection
@@ -80,7 +81,8 @@ classified as follows:
 `extended/`: Contains test cases for boot testing, network testing,
              code update testing etc.
 
-`systest/`: Contains test cases for HTX bootme.
+`systest/`: Contains test cases for HTX bootme IO storage and Enhanced Error
+            Handling testing.
 
 `xcat/`: Contains test cases for XCAT automation.
 
