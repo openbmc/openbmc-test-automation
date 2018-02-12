@@ -2,6 +2,7 @@
 Resource                ../lib/utils.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
+Library                 ../lib/gen_misc.py
 
 *** Variables ***
 # MAC input from user.
@@ -171,14 +172,16 @@ Delete IP And Object
     Should Not Contain Match  ${ip_data}  ${ip_addr}*
     ...  msg=IP address not deleted.
 
-Get Non Pingable IP From Subnet
-    [Documentation]  Return non pingable IP from subnet.
-    [Arguments]  ${ip_addr}=${OPENBMC_HOST}
+Get First Non Pingable IP From Subnet
+    [Documentation]  Find first non-pingable IP from the subnet and return it.
+    [Arguments]  ${host}=${OPENBMC_HOST}
 
     # Description of argument(s):
-    # ip_addr  Valid IP in subnet.
+    # host  Any valid host name or IP address
+    #       (e.g. "machine1" or "9.xx.xx.31").
 
-    # Non pingable IP is unused IP address in the subnet.
+    # Non-pingable IP is unused IP address in the subnet.
+    ${host_name}  ${ip_addr}=  Get Host Name IP
 
     # Split IP address into network part and host part.
     # IP address will have 4 octets xx.xx.xx.xx.
@@ -189,21 +192,11 @@ Get Non Pingable IP From Subnet
     # First element in list is Network part.
     ${network_part}=  Get From List  ${split_ip}  0
 
-    ${octet4}=  Set Variable  ${0}
-
-    # Increase host part by one, postfix it to Network part.
-    # Continue until we get unreachable IP.
-
-    : FOR  ${index}  IN RANGE  1  255
-    \  ${octet4}=  Evaluate  ${octet4}+${index}
+    : FOR  ${octet4}  IN RANGE  1  255
     \  ${new_ip}=  Catenate  ${network_part}.${octet4}
-
-    # Check if new IP is pingable or not.
-    # Exit loop once we get non pingable IP.
-
     \  ${status}=  Run Keyword And Return Status  Ping Host  ${new_ip}
-    \  Should Not Be Equal  ${index}  ${255}  msg=No non pingable IP in subnet.
-    \  Exit For Loop If  '${status}' == 'False'
+    # If IP is non-pingable, return it.
+    \  Return From Keyword If  '${status}' == 'False'  ${new_ip}
 
-    [Return]  ${new_ip}
+    Fail  msg=No non-pingable IP could be found in subnet ${network_part}.
 
