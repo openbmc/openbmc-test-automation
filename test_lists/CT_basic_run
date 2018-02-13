@@ -18,6 +18,9 @@
 #DCMI test
 -i Set_Asset_Tag_With_Valid_String_Length
 -i Verify_Get_And_Set_Management_Controller_ID_String
+# IPMI SEL
+-i Verify_IPMI_SEL_Version
+-i Get_System_Time
 #Power restore.
 -i Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Off
 #Inventory
@@ -29,3 +32,5 @@
 #Power redundancy
 -i Disable_Power_Redundancy_And_Verify_Using_REST
 -i Enable_Power_Redundancy_And_Verify_Using_REST
+-i Disable_Power_Redundancy_And_Verify_Using_IPMI
+-i Enable_Power_Redundancy_And_Verify_Using_IPMI
