@@ -463,6 +463,7 @@ RAS Test SetUp
     # Adding delay after host bring up.
     Sleep  60s
 
+
 RAS Suite Setup
     [Documentation]  Create RAS log directory to store all RAS test logs.
 
@@ -479,6 +480,11 @@ RAS Suite Setup
 
     # Boot to Os.
     REST Power On  quiet=${1}
+
+    # Check opal-prd service enabled on HOST OS.
+    ${opal_prd_state}=  Check OPAL-PRD Service On HOST
+    Run Keyword If  '${opal_prd_state}' == 'disabled'
+    ...  Run And Verify OPAL-PRD Service On HOST
 
 RAS Suite Cleanup
     [Documentation]  Perform RAS suite cleanup and verify that host

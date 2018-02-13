@@ -83,3 +83,8 @@ ERROR_INJECT_DICT = {'MCACALIFIR_RECV1': ['07010900', '8000000000000000',\
 # Address translation files
 probe_cpu_file_path = '/root/probe_cpus.sh'
 addr_translation_file_path = '/root/scom_addr_p9.sh'
+
+# opal-prd related commands
+opal_state_check_cmd = 'systemctl list-unit-files | grep "opal-prd"'
+opal_service_start_cmd = 'service opal-prd start'
+opal_service_on_cmd = 'chkconfig opal-prd on'
