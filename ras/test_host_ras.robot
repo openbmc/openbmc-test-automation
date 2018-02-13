@@ -480,6 +480,11 @@ RAS Suite Setup
     # Boot to Os.
     REST Power On  quiet=${1}
 
+    # Check opal-prd service enabled on HOST OS.
+    ${opal_prd_state}=  Check OPAL-PRD Service On HOST
+    Run Keyword If  '${opal_prd_state}' == 'disabled'
+    ...  Run And Verify OPAL-PRD Service On HOST
+
 RAS Suite Cleanup
     [Documentation]  Perform RAS suite cleanup and verify that host
     ...              boots after test suite run.
