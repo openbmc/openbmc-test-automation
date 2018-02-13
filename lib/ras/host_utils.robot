@@ -139,3 +139,20 @@ Disable CPU States Through HOST
     ${cmd}=  Catenate  SEPARATOR=  for file_path in /sys/devices/system/cpu/
     ...  cpu*/cpuidle/state*/disable; do echo 0 > $file_path; done
     ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+
+Is Opal-prd Service Enabled
+    [Documentation]  Check if opal-prd service is running & return status.
+
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  ${opal_prd_state_check_cmd}
+    ${opal_prd_service}=  Split String  ${output}
+    # Example output:
+    # enabled/disabled
+    [Return]  ${opal_prd_service[1]}
+
+Enable Opal-prd Service On HOST
+    [Documentation]  Enable opal-prd service on host. 
+
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  ${opal_prd_service_start_cmd}
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  ${opal_prd_service_on_cmd}
+    ${opal_prd_service}=  Enable Opal-prd Service On HOST
+    Should Contain  ${opal_prd_service}  enabled
