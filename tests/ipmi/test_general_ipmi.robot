@@ -3,6 +3,7 @@ Documentation       This suite is for testing general IPMI functions.
 
 Resource            ../../lib/ipmi_client.robot
 Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../lib/boot_utils.robot
 
 Test Teardown       FFDC On Test Case Fail
 
@@ -10,6 +11,7 @@ Test Teardown       FFDC On Test Case Fail
 
 ${new_mc_id}=  HOST
 ${allowed_temp_diff}=  ${1}
+${allowed_power_diff}=  ${10}
 
 *** Test Cases ***
 
@@ -203,6 +205,58 @@ Test Ambient Temperature Via IPMI
 
     Should Be True  ${ipmi_rest_temp_diff} <= ${allowed_temp_diff}
     ...  msg=Ambient temperature above allowed threshold ${allowed_temp_diff}.
+
+
+Test Power Reading Via IPMI With Host Booted
+    [Documentation]  Test power reading via IPMI with host booted state and
+    ...  verify using REST.
+    [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Booted
+
+    REST Power On  stack_mode=skip  quiet=1
+
+    # Example of power reading command output via IPMI.
+    # Instantaneous power reading:                   235 Watts
+    # Minimum during sampling period:                235 Watts
+    # Maximum during sampling period:                235 Watts
+    # Average power reading over sample period:      235 Watts
+    # IPMI timestamp:                           Thu Jan  1 00:00:00 1970
+    # Sampling period:                          00000000 Seconds.
+    # Power reading state is:                   deactivated
+
+    ${power_reading}=  Run IPMI Standard Command  dcmi power reading -N 10
+    ${power_reading_line}=
+    ...  Get Lines Containing String  ${power_reading}
+    ...  Instantaneous power reading  case-insensitive
+
+    ${power_reading_ipmi}=  Fetch From Right  ${power_reading_line}  :
+    ${power_reading_ipmi}=  Remove String  ${power_reading_ipmi}  ${SPACE}Watts
+    ${power_reading_ipmi}=  Strip String  ${power_reading_ipmi}
+
+    ${power_reading_rest}=  Read Attribute
+    ...  ${SENSORS_URI}power/total_power  Value
+
+    # Example of power reading via REST
+    #  "CriticalAlarmHigh": 0,
+    #  "CriticalAlarmLow": 0,
+    #  "CriticalHigh": 3100000000,
+    #  "CriticalLow": 0,
+    #  "Scale": -6,
+    #  "Unit": "xyz.openbmc_project.Sensor.Value.Unit.Watts",
+    #  "Value": 228000000,
+    #  "WarningAlarmHigh": 0,
+    #  "WarningAlarmLow": 0,
+    #  "WarningHigh": 3050000000,
+    #  "WarningLow": 0
+
+    # Get power value based on scale i.e. Value * (10 power Scale Value)
+    # e.g. from above case 228000000 * (10 power -6) = 228000000/1000000
+
+    ${power_reading_rest}=  Evaluate  ${power_reading_rest}/1000000
+    ${ipmi_rest_power_diff}=
+    ...  Evaluate  abs(${power_reading_rest} - ${power_reading_ipmi})
+
+    Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
+    ...  msg=Power Reading above allowed threshold ${allowed_power_diff}.
 
 
 *** Keywords ***
