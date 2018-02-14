@@ -1262,6 +1262,30 @@ Get System LED State
     [Return]  ${state.rsplit('.', 1)[1]}
 
 
+Set System LED State
+    [Documentation]  Set given system LED via REST.
+    [Arguments]  ${led_name}  ${led_state}
+    # Description of arguments:
+    # led_name     System LED name (e.g. heartbeat, identify, beep).
+    # led_state    LED state to be set (e.g. On, Off).
+
+    ${args}=  Create Dictionary  data=xyz.openbmc_project.Led.Physical.Action.${led_state}
+    Write Attribute  ${LED_PHYSICAL_URI}${led_name}  State  data=${args}
+
+    Verify LED State  ${led_name}  ${led_state}
+
+
+Verify LED State
+    [Documentation]  Checks if LED is in given state.
+    [Arguments]  ${led_name}  ${led_state}
+    # Description of arguments:
+    # led_name     System LED name (e.g. heartbeat, identify, beep).
+    # led_state    LED state to be verified (e.g. On, Off).
+
+    ${state}=  Get System LED State  ${led_name}
+    Should Be Equal  ${state}  ${led_state}
+
+
 Delete Error Logs
     [Documentation]  Delete error logs.
 
