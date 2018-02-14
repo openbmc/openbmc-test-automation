@@ -185,9 +185,6 @@ Verify REST Post Message JSON Compliant
     Should Be Equal As Strings  ${jsondata["message"]}  200 OK
     Should Be Equal As Strings  ${jsondata["status"]}  ok
 
-    # Cleanup uploaded file.
-    BMC Execute Command  rm -rf /tmp/images/*
-
 
 Verify REST Put Message JSON Compliant
     [Documentation]  Verify REST "PUT" message is JSON format compliant.
