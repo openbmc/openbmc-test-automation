@@ -24,8 +24,9 @@ Variables    ../data/resource_variables.py
 
 *** Variables ***
 ${obmc_gui_url}              https://${OPENBMC_HOST}
+
 # Default Browser.
-${default_browser}           ff
+${default_browser}           chrome
 
 ${obmc_PowerOff_state}       Off
 ${obmc_PowerRunning_state}   Running
@@ -49,16 +50,29 @@ Get Operating System
     ${windows_platform}=  Run Keyword And Return Status
     ...  Should Contain  ${curdir_lower_case}  c:\
     ${op_system}=  Run Keyword If  '${windows_platform}' == 'True'
-    ...     Set Variable  windows
-    ...   ELSE
-    ...     Set Variable  linux
+    ...    Set Variable  windows
+    ...  ELSE
+    ...    Set Variable  linux
     [Return]  ${op_system}
 
 Launch Browser in Windows Platform
     [Documentation]  Open the browser with the URL and
     ...              login on windows platform.
 
-    ${BROWSER_ID}=  Open Browser  ${obmc_gui_url}  ${default_browser}
+    ${browser_choice}=  Run Keyword And Return Status
+    ...  Variable Should Exist  ${BROWSER_TYPE}
+    Run Keyword If  '${browser_choice}' == 'True'
+    ...     Launch Browser  ${BROWSER_TYPE}
+    ...  ELSE
+    ...     Launch Browser
+
+Launch Browser
+    [Documentation]  Launches the desired browser.
+    [Arguments]  ${launch_browser}=${default_browser}
+
+    # launch_browser  Open the required browser.
+
+    ${BROWSER_ID}=  Open Browser  ${obmc_gui_url}  ${launch_browser}
     Maximize Browser Window
     Set Global Variable  ${BROWSER_ID}
 
@@ -74,6 +88,7 @@ Login OpenBMC GUI
     [Documentation]  Perform login to open BMC GUI.
     [Arguments]  ${username}=${OPENBMC_USERNAME}
     ...  ${password}=${OPENBMC_PASSWORD}
+
     # Description of argument(s):
     # username      The username.
     # password      The password.
@@ -91,6 +106,7 @@ Login OpenBMC GUI
 Test Setup Execution
     [Documentation]  Verify all the preconditions to be tested.
     [Arguments]  ${obmc_test_setup_state}=${OBMC_PowerOff_state}
+
     # Description of argument(s):
     # obmc_test_setup      The OpenBMC required state.
 
@@ -143,8 +159,9 @@ Reboot OpenBMC
 
 Wait OpenBMC To Become Stable
     [Documentation]  Power off the OBMC.
-    [Arguments]  ${OBMC_expected_state}  ${retry_time}=15 min
+    [Arguments]  ${obmc_expected_state}  ${retry_time}=15 min
     ...  ${retry_interval}=45 sec
+
     # Description of argument(s):
     # OBMC_expected_state      The OBMC state which is required for test.
     # retry_time               Total wait time after executing the command.
@@ -160,6 +177,7 @@ Wait OpenBMC To Become Stable
 Verify OpenBMC State From REST Interface
     [Documentation]  Verify system state from REST Interface.
     [Arguments]  ${obmc_required_state}
+
     # Description of argument(s):
     # obmc_required_state      The OBMC state which is required for test.
 
@@ -169,6 +187,7 @@ Verify OpenBMC State From REST Interface
 Click Yes Button
     [Documentation]  Click the 'Yes' button.
     [Arguments]  ${xpath_button_yes}
+
     # Description of argument(s):
     # xpath_button_yes      The xpath of 'Yes' button.
 
@@ -189,22 +208,26 @@ Test Teardown Execution
 Open Browser With URL
     [Documentation]  Open browser with specified URL and returns browser id.
     [Arguments]  ${URL}  ${browser}=gc
+
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
     #          (e.g. https://openbmc-test.mybluemix.net/#/login )
     # browser  browser used to open above URL
     #          (e.g. gc for google chrome, ff for firefox)
+
     ${browser_ID}=  Open Browser  ${URL}  ${browser}
     [Return]  ${browser_ID}
 
 Model Server Power Click Button
     [Documentation]  Click main server power in the header section.
     [Arguments]  ${div_element}  ${anchor_element}
+
     # Description of argument(s):
     # div_element     Server power header divisional element
     #                 (e.g. header_wrapper.)
     # anchor_element  Server power header anchor element
     #                 (e.g. header_wrapper_elt.)
+
     Wait Until Element Is Visible
     ...  //*[@id='header__wrapper']/div/div[${div_element}]/a[${anchor_element}]/span
     Click Element
@@ -213,6 +236,7 @@ Model Server Power Click Button
 Controller Server Power Click Button
     [Documentation]  Click main server power in the header section.
     [Arguments]  ${controller_element}
+
     # Description of argument(s):
     # controller_element  Server power controller element
     #                     (e.g. power__power-on.)
@@ -224,6 +248,7 @@ Controller Server Power Click Button
 Controller Power Operations Confirmation Click Button
     [Documentation]  Click Common Power Operations Confirmation.
     [Arguments]  ${main_element}  ${sub_element}  ${confirm_msg_elt}  ${confirmation}
+
     # Description of argument(s):
     # main_element     Server power operations element
     #                  (e.g. power_operations.)
