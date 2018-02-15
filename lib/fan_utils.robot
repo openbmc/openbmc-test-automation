@@ -6,15 +6,6 @@ Variables     ../data/variables.py
 
 *** Keywords ***
 
-
-Is Water Cooled
-    [Documentation]  Return 1 if system is water cooled, 0 othersise.
-
-    ${water_cooled}=  Read Attribute
-    ...  ${HOST_INVENTORY_URI}/system/chassis  WaterCooled
-    [Return]  ${water_cooled}
-
-
 Get Number Of Fans
     [Documentation]  Get the number of fans currently present in inventory.
 
