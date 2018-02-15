@@ -1287,6 +1287,18 @@ Verify LED State
     Should Be Equal  ${state}  ${led_state}
 
 
+Get LED State XYZ
+    [Documentation]  Returns state of given LED.
+    [Arguments]  ${led_name}
+
+    # Description of argument(s):
+    # led_name  Name of LED.
+
+    ${state}=  Read Attribute  ${LED_GROUPS_URI}${led_name}  Asserted
+    # Returns the state of the LED, either On or Off.
+    [Return]  ${state}
+
+
 Delete Error Logs
     [Documentation]  Delete error logs.
 
@@ -1326,18 +1338,6 @@ Delete All Error Logs
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
-Get LED State XYZ
-    [Documentation]  Returns state of given LED.
-    [Arguments]  ${led_name}
-
-    # Description of argument(s):
-    # led_name  Name of LED.
-
-    ${state}=  Read Attribute  ${LED_GROUPS_URI}${led_name}  Asserted
-    # Returns the state of the LED, either On or Off.
-    [Return]  ${state}
-
-
 Get BMC Version
     [Documentation]  Returns BMC version from /etc/os-release.
     ...              e.g. "v1.99.6-141-ge662190"
@@ -1374,6 +1374,14 @@ Get Elog URL List
     ${url_list}=  Read Properties  /xyz/openbmc_project/logging/entry/
     Sort List  ${url_list}
     [Return]  ${url_list}
+
+
+Is Water Cooled
+    [Documentation]  Return 1 if system is water cooled, 0 othersise.
+
+    ${water_cooled}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}/system/chassis  WaterCooled
+    [Return]  ${water_cooled}
 
 
 Read Turbo Setting Via REST
