@@ -148,3 +148,38 @@ def get_lan_print_dict():
     lan_print_dict['Auth Type Enable'] = auth_type_enable_dict
 
     return lan_print_dict
+
+
+def get_ipmi_power_reading():
+
+    r"""
+    Get IPMI power reading data and return it as a dictionary.
+
+    The data is obtained by issuing the IPMI "power reading" command.  An
+    example is shown below:
+
+    Instantaneous power reading:                   234 Watts
+    Minimum during sampling period:                234 Watts
+    Maximum during sampling period:                234 Watts
+    Average power reading over sample period:      234 Watts
+    IPMI timestamp:                           Thu Jan  1 00:00:00 1970
+    Sampling period:                          00000000 Seconds.
+    Power reading state is:                   deactivated
+
+    For the data shown above, the following dictionary will be returned.
+
+    result:
+      [instantaneous_power_reading]:              238 Watts
+      [minimum_during_sampling_period]:           238 Watts
+      [maximum_during_sampling_period]:           238 Watts
+      [average_power_reading_over_sample_period]: 238 Watts
+      [ipmi_timestamp]:                           Thu Jan  1 00:00:00 1970
+      [sampling_period]:                          00000000 Seconds.
+      [power_reading_state_is]:                   deactivated
+    """
+
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  dcmi power reading")
+    result = vf.key_value_outbuf_to_dict(ret_values)
+
+    return result
