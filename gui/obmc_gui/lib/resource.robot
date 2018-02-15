@@ -23,7 +23,7 @@ Resource     ../../../lib/state_manager.robot
 Variables    ../data/resource_variables.py
 
 *** Variables ***
-${openbmc_gui_url}              http://localhost:8080/#/login
+${obmc_gui_url}              https://${OPENBMC_HOST}
 # Default Browser.
 ${default_browser}           ff
 
@@ -58,7 +58,7 @@ Launch Browser in Windows Platform
     [Documentation]  Open the browser with the URL and
     ...              login on windows platform.
 
-    ${BROWSER_ID}=  Open Browser  ${openbmc_gui_url}  ${default_browser}
+    ${BROWSER_ID}=  Open Browser  ${obmc_gui_url}  ${default_browser}
     Maximize Browser Window
     Set Global Variable  ${BROWSER_ID}
 
@@ -66,7 +66,7 @@ Launch Headless Browser
     [Documentation]  Launch headless browser.
 
     Start Virtual Display  1920  1080
-    ${BROWSER_ID}=  Open Browser  ${openbmc_gui_url}
+    ${BROWSER_ID}=  Open Browser  ${obmc_gui_url}
     Set Global Variable  ${BROWSER_ID}
     Set Window Size  1920  1080
 
@@ -78,7 +78,7 @@ Login OpenBMC GUI
     # username      The username.
     # password      The password.
 
-    Go To  ${openbmc_gui_url}
+    Go To  ${obmc_gui_url}
     Input Text  ${xpath_textbox_hostname}  ${OPENBMC_HOST}
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
