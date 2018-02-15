@@ -23,7 +23,7 @@ Resource     ../../../lib/state_manager.robot
 Variables    ../data/resource_variables.py
 
 *** Variables ***
-${openbmc_gui_url}              http://localhost:8080/#/login
+${obmc_gui_url}              https://${OPENBMC_HOST}
 # Default Browser.
 ${default_browser}           ff
 
@@ -78,7 +78,7 @@ Login OpenBMC GUI
     # username      The username.
     # password      The password.
 
-    Go To  ${openbmc_gui_url}
+    Go To  ${obmc_gui_url}
     Input Text  ${xpath_textbox_hostname}  ${OPENBMC_HOST}
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
