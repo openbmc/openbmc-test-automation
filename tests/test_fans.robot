@@ -22,10 +22,16 @@ Fan Base Check Number Of Fans
     [Documentation]  Verify minimum number of fans.
     [Tags]  Fan_Base_Check_Number_Of_Fans
 
+    @{fan_names}  Create List
+    # Populate the list with the names of fans in the system.
+    ${fan_names}=  Get Fan Names  ${fan_names}
+    ${number_of_fans}=  Get Length  ${fan_names}
+
     # Determine if system is water cooled.
     ${water_coooled}=  Is Water Cooled
 
-    Verify Minimum Number Of Fans With Cooling Type  ${water_coooled}
+    Verify Minimum Number Of Fans With Cooling Type  ${number_of_fans}
+    ...  ${water_coooled}
 
 
 Fan Base Check Number Of Fan Monitors
