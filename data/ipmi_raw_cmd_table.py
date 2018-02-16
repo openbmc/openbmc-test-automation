@@ -35,5 +35,15 @@ IPMI_RAW_CMD = {
             "none",
             "Enabled nibble position 6th LSB e.g. 0x1",
         ],
+    },
+    'power_reading':
+    {
+        'Get':
+        [
+            # raw command, expected output(s), comment
+            "0x2c 0x02 0xdc 0x01 0x01 0x00",
+            "dc d5 00 d5 00 d5 00 d5 00 00 00 00 00 00 00 00 00 00",
+            "Byte position 2rd LSB e.g. d5 Instantaneous power readings",
+        ], 
     }
 }
