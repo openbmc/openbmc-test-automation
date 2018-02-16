@@ -6,9 +6,11 @@ Resource            ../../lib/openbmc_ffdc.robot
 Resource            ../lib/boot_utils.robot
 Library             ../../lib/ipmi_utils.py
 Resource            ../../lib/bmc_network_utils.robot
+Variables           ../data/ipmi_raw_cmd_table.py
 
 Suite Setup         Suite Setup Execution
 Test Teardown       FFDC On Test Case Fail
+
 
 *** Variables ***
 
@@ -291,6 +293,56 @@ Test Power Reading Via IPMI With Host Booted
 
     Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
     ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
+
+
+Test Power Reading Via IPMI Raw Command
+    [Documentation]  Test power reading via IPMI raw command and verify
+    ...  using REST.
+    [Tags]  Test_Power_Reading_Via_IPMI_Raw_Command
+
+    # Response data structure of power reading command output via IPMI.
+    # 1        Completion Code. Refer to section 8, DCMI Completion Codes.
+    # 2        Group Extension Identification = DCh
+    # 3:4      Current Power in watts
+
+    ${ipmi_raw_output}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['power_reading']['Get'][0]}
+
+    @{raw_output_list}=  Split String  ${ipmi_raw_output}  ${SPACE}
+
+    # On successful execution of raw IPMI power reading command, completion
+    # code does not come in output. So current power value will start from 2
+    # byte instead of 3.
+
+    ${power_reading_ipmi_raw_3_item}=  Get From List  ${raw_output_list}  2
+    ${power_reading_ipmi_raw_3_item}=
+    ...  Convert To Integer  0x${power_reading_ipmi_raw_3_item}
+
+    ${power_reading_rest}=  Read Attribute
+    ...  ${SENSORS_URI}power/total_power  Value
+
+    # Example of power reading via REST
+    #  "CriticalAlarmHigh": 0,
+    #  "CriticalAlarmLow": 0,
+    #  "CriticalHigh": 3100000000,
+    #  "CriticalLow": 0,
+    #  "Scale": -6,
+    #  "Unit": "xyz.openbmc_project.Sensor.Value.Unit.Watts",
+    #  "Value": 228000000,
+    #  "WarningAlarmHigh": 0,
+    #  "WarningAlarmLow": 0,
+    #  "WarningHigh": 3050000000,
+    #  "WarningLow": 0
+
+    # Get power value based on scale i.e. Value * (10 power Scale Value)
+    # e.g. from above case 228000000 * (10 power -6) = 228000000/1000000
+
+    ${power_reading_rest}=  Evaluate  ${power_reading_rest}/1000000
+    ${ipmi_rest_power_diff}=
+    ...  Evaluate  abs(${power_reading_rest} - ${power_reading_ipmi_raw_3_item})
+
+    Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
+    ...  msg=Power Reading above allowed threshold ${allowed_power_diff}.
 
 
 Test Baseboard Temperature Via IPMI
