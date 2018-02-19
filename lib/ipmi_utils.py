@@ -183,3 +183,63 @@ def get_ipmi_power_reading():
     result = vf.key_value_outbuf_to_dict(ret_values)
 
     return result
+
+
+def get_mc_info():
+
+    r"""
+    Get IPMI mc info data and return it as a dictionary.
+
+    The data is obtained by issuing the IPMI "mc info" command.  An
+    example is shown below:
+
+    Device ID                 : 0
+    Device Revision           : 0
+    Firmware Revision         : 2.01
+    IPMI Version              : 2.0
+    Manufacturer ID           : 42817
+    Manufacturer Name         : Unknown (0xA741)
+    Product ID                : 16975 (0x424f)
+    Product Name              : Unknown (0x424F)
+    Device Available          : yes
+    Provides Device SDRs      : yes
+    Additional Device Support :
+        Sensor Device
+        SEL Device
+        FRU Inventory Device
+        Chassis Device
+    Aux Firmware Rev Info     : 
+        0x00
+        0x00
+        0x00
+        0x00
+
+    For the data shown above, the following dictionary will be returned.
+    mc_info:
+      [device_id]:                       0
+      [device_revision]:                 0
+      [firmware_revision]:               2.01
+      [ipmi_version]:                    2.0
+      [manufacturer_id]:                 42817
+      [manufacturer_name]:               Unknown (0xA741)
+      [product_id]:                      16975 (0x424f)
+      [product_name]:                    Unknown (0x424F)
+      [device_available]:                yes
+      [provides_device_sdrs]:            yes
+      [additional_device_support]:
+        [additional_device_support][0]:  Sensor Device
+        [additional_device_support][1]:  SEL Device
+        [additional_device_support][2]:  FRU Inventory Device
+        [additional_device_support][3]:  Chassis Device
+      [aux_firmware_rev_info]:
+        [aux_firmware_rev_info][0]:      0x00
+        [aux_firmware_rev_info][1]:      0x00
+        [aux_firmware_rev_info][2]:      0x00
+        [aux_firmware_rev_info][3]:      0x00
+    """
+
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  mc info")
+    result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
+
+    return result
