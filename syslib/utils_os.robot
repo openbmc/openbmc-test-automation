@@ -151,8 +151,6 @@ REST Upload File To BMC
     ${resp}=  Post Request  openbmc  /upload/image  &{data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
-    # Delete uploaded image file.
-    # TODO: Delete via REST openbmc/openbmc#1550
     # Take SSH connection to BMC and switch to BMC connection to perform
     # the task.
     &{bmc_connection_args}=  Create Dictionary  alias=bmc_connection
@@ -160,7 +158,6 @@ REST Upload File To BMC
 
     # Currently OS SSH session is active, switch to BMC connection.
     Switch Connection  bmc_connection
-    Execute Command On BMC  rm -f /tmp/images/*
 
     # Switch back to OS SSH connection.
     Switch Connection  os_connection

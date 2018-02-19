@@ -164,9 +164,6 @@ Upload BMC Image With No Image Via TFTP
 Upload Image Teardown
     [Documentation]  Log FFDC if test fails for debugging purposes.
 
-    Open Connection And Log In
-    Execute Command On BMC  rm -rf /tmp/images/*
-
     Close All Connections
     FFDC On Test Case Fail
 

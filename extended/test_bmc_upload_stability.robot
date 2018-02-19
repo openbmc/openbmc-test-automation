@@ -67,7 +67,5 @@ Upload Test Image File To BMC
     ${resp}=  Post Request  openbmc  /upload/image  &{data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
-    BMC Execute Command  rm -rf /tmp/images/*  quiet=${1}
-
     ${loop_count}=  Catenate  Ending iteration: ${iteration}
     Rpvars  loop_count
