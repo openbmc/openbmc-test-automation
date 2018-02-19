@@ -198,6 +198,7 @@ def get_sbe():
 
     return int(out_buf, 16)
 
+
 def compare_mac_address(sys_mac_addr, user_mac_addr):
 
     r"""
@@ -218,3 +219,15 @@ def compare_mac_address(sys_mac_addr, user_mac_addr):
         return 0
 
     return 1
+
+
+def min_max_list(list):
+    r"""
+    Return max and min value in the list.
+    """
+
+   # Example:
+   # [24, 26, 26, 26, 26, 26, 26, 26, 26, 26, 322, 364, 338, 308, 258, 240]
+   # (max, min) (364, 24)
+
+    return max(list), min(list)
