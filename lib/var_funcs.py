@@ -275,6 +275,7 @@ def parse_key_value(string,
 
 
 def key_value_list_to_dict(list,
+                           process_indent=0,
                            **args):
 
     r"""
@@ -306,10 +307,40 @@ def key_value_list_to_dict(list,
       [correction_time]:            0 milliseconds
       [sampling_period]:            0 seconds
 
+    Another example containing a sub-list (see process_indent description
+    below):
+
+    Provides Device SDRs      : yes
+    Additional Device Support :
+        Sensor Device
+        SEL Device
+        FRU Inventory Device
+        Chassis Device
+
+    Note that the 2 qualifications for containing a sub-list are met: 1)
+    'Additional Device Support' has no value and 2) The entries below it are
+    indented.  In this case those entries contain no delimiters (":") so they
+    will be processed as a list rather than as a dictionary.  The result would
+    be as follows:
+
+    mc_info:
+      mc_info[provides_device_sdrs]:            yes
+      mc_info[additional_device_support]:
+        mc_info[additional_device_support][0]:  Sensor Device
+        mc_info[additional_device_support][1]:  SEL Device
+        mc_info[additional_device_support][2]:  FRU Inventory Device
+        mc_info[additional_device_support][3]:  Chassis Device
+
     Description of argument(s):
     list                            A list of key/value strings.  (See
                                     docstring of parse_key_value function for
                                     details).
+    process_indent                  This indicates that indented
+                                    sub-dictionaries and sub-lists are to be
+                                    processed as such.  An entry may have a
+                                    sub-dict or sub-list if 1) It has no value
+                                    other than blank 2) There are entries
+                                    below it that are indented beneath it.
     **args                          Arguments to be interpreted by
                                     parse_key_value.  (See docstring of
                                     parse_key_value function for details).
@@ -320,9 +351,53 @@ def key_value_list_to_dict(list,
     except AttributeError:
         result_dict = DotDict()
 
+    if not process_indent:
+        for entry in list:
+            key, value = parse_key_value(entry, **args)
+            result_dict[key] = value
+        return result_dict
+
+    # Process list while paying heed to indentation.
+    delim = args.get("delim", ":")
+    # Initialize "parent_" indentation level variables.
+    parent_indent = len(list[0]) - len(list[0].lstrip())
+    sub_list = []
     for entry in list:
         key, value = parse_key_value(entry, **args)
+
+        indent = len(entry) - len(entry.lstrip())
+
+        if indent > parent_indent and parent_value == "":
+            # This line is indented compared to the parent entry and the
+            # parent entry has no value.
+            # Append the entry to sub_list for later processing.
+            sub_list.append(str(entry))
+            continue
+
+        # Process any outstanding sub_list and add it to
+        # result_dict[parent_key].
+        if len(sub_list) > 0:
+            if any(delim in word for word in sub_list):
+                # If delim is found anywhere in the sub_list, we'll process
+                # as a subdictionary.
+                result_dict[parent_key] = key_value_list_to_dict(sub_list,
+                                                                 **args)
+            else:
+                result_dict[parent_key] = map(str.strip, sub_list)
+            del sub_list[:]
+
         result_dict[key] = value
+
+        parent_key = key
+        parent_value = value
+        parent_indent = indent
+
+    # Any outstanding sub_list to be processed?
+    if len(sub_list) > 0:
+        if any(delim in word for word in sub_list):
+            result_dict[parent_key] = key_value_list_to_dict(sub_list, **args)
+        else:
+            result_dict[parent_key] = map(str.strip, sub_list)
 
     return result_dict
 
@@ -462,9 +537,10 @@ def outbuf_to_report(out_buf,
 
     Given the following out_buf:
 
-    Filesystem           1K-blocks      Used Available Use% Mounted on
-    dev                     247120         0    247120   0% /dev
-    tmpfs                   248408     79792    168616  32% /run
+    Filesystem                      1K-blocks      Used Available Use% Mounted
+                                    on
+    dev                             247120         0    247120   0% /dev
+    tmpfs                           248408     79792    168616  32% /run
 
     This function will return a list of dictionaries as shown below:
 
