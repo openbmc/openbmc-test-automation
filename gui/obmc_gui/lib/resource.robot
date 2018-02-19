@@ -79,6 +79,7 @@ Login OpenBMC GUI
     # password      The password.
 
     Go To  ${obmc_gui_url}
+    Wait Until Element Is Enabled  ${xpath_textbox_hostname}
     Input Text  ${xpath_textbox_hostname}  ${OPENBMC_HOST}
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}

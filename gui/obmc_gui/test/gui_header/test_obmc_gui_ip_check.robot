@@ -4,7 +4,7 @@ Documentation  Test Open BMC GUI BMC host information under GUI Header.
 
 Resource        ../../lib/resource.robot
 
-Suite Setup     Login OpenBMC GUI
+Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 
 *** Variables ***
@@ -23,9 +23,9 @@ Verify IP address
 
 *** Keywords ***
 
-Login OpenBMC GUI
+Suite Setup Execution
 
-    Open Browser With URL  ${xpath_openbmc_url}
+    Open Browser With URL  ${obmc_gui_url}
     Login OpenBMC GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
 
 
