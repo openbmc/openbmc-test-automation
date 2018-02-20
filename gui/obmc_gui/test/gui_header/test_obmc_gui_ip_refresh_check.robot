@@ -2,6 +2,7 @@
 
 Documentation  Test Open BMC GUI BMC host information under GUI Header.
 
+Resource        ../../../../lib/state_manager.robot
 Resource        ../../lib/resource.robot
 
 Suite Setup     Suite Setup Execution
@@ -9,6 +10,7 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 ${xpath_select_server_control}  //*[@id="header__wrapper"]/div/div[2]/p[2]
+${xpath_select_refresh_button}  //*[@id="header__wrapper"]/div/div[3]/button
 
 *** Test Cases ***
 
@@ -20,6 +22,18 @@ Verify IP address
     #       (e.g. "machinex" or "xx.xx.xx.xx").
     ${gui_displayed_ip}=  Get Text  ${xpath_select_server_control}
     Should Contain  ${gui_displayed_ip}  ${OPENBMC_HOST}
+
+Verify Refresh Button
+    [Documentation]  Verify Refresh Button in GUI header.
+    [Tags]  Verify_Refresh_Button
+
+    # Verify power is on after refresh button.
+
+    Expected Initial Test State  Off
+    Click Element  ${xpath_select_refresh_button}
+    GUI Power On
+    Click Element  ${xpath_select_refresh_button}
+    Wait Until Page Contains  Running
 
 *** Keywords ***
 
