@@ -129,19 +129,6 @@ OpenBMC GUI Logoff
 
 *** Keywords ***
 
-Expected Initial Test State
-    [Documentation]  Power on the host if "Running" expected, Power off the
-    ...  host if "Off" expected as per the requirement of initial test state.
-    [Arguments]  ${expectedState}
-    # Description of argument(s):
-    # expectedState    Test initial host state.
-
-    Run Keyword If  '${expectedState}' == 'Running'
-    ...  Initiate Host Boot
-
-    Run Keyword If  '${expectedState}' == 'Off'
-    ...  Initiate Host PowerOff
-
 Login OpenBMC GUI with failure enable
 
     Open Browser With URL  ${xpath_openbmc_url}

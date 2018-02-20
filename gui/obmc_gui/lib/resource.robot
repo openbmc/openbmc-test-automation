@@ -312,3 +312,17 @@ Verify Warning Message Display Text
     # text_message        Content of the display message info.
 
     Element Text Should Be  ${xpath_text_message}  ${text_message}
+
+
+Expected Initial Test State
+    [Documentation]  Power on the host if "Running" expected, Power off the
+    ...  host if "Off" expected as per the requirement of initial test state.
+    [Arguments]  ${expectedState}
+    # Description of argument(s):
+    # expectedState    Test initial host state.
+
+    Run Keyword If  '${expectedState}' == 'Running'
+    ...  Initiate Host Boot
+
+    Run Keyword If  '${expectedState}' == 'Off'
+    ...  Initiate Host PowerOff
