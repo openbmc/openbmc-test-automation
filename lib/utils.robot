@@ -1472,3 +1472,13 @@ Validate IP On BMC
 
     Should Contain Match  ${ip_data}  ${ip_address}/*
     ...  msg=${ip_address} not found in the list provided.
+
+
+Scrub Journald Logs
+    [Documentation]  Scrub all journald logs and restart service.
+
+    ${cmd}=  Catenate  systemctl stop systemd-journald.service &&
+    ...  rm -rf /var/log/journal && systemctl start systemd-journald.service
+
+    BMC Execute Command  ${cmd}
+
