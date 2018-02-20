@@ -1,0 +1,58 @@
+#!/usr/bin/expect
+
+# This file provides many valuable expect procedures like handle_timeout and
+# handle_eof.
+
+my_source [list print.tcl]
+
+
+proc handle_timeout { description } {
+
+  # Print timeout error message to stderr and exit 1.
+
+  # Description of argument(s):
+  # description                     A description of what was being expected
+  #                                 (e.g. "an SOL login prompt").
+
+  set timeout [get_stack_var timeout {} 2]
+
+  if { $timeout == 1 } {
+    set seconds "second"
+  } else {
+    set seconds "seconds"
+  }
+  puts stderr ""
+  print_error "Did not get ${description} after $timeout ${seconds}.\n"
+  puts stderr "The data returned by the spawned process is:\n"
+  # Using uplevel to be able to access expect_out(buffer).
+  uplevel { puts stderr "$expect_out(buffer)" }
+  # If caller has exit_proc defined, call it.  Otherwise, just call exit.
+  if { [info procs "exit_proc"] != "" } {
+    exit_proc 1
+  }
+  exit 1
+
+}
+
+
+proc handle_eof { description } {
+
+  # Print end-of-file error message to stderr and exit 1.
+
+  # Description of argument(s):
+  # description                     A description of what was being expected
+  #                                 (e.g. "an SOL login prompt").
+
+  # Using uplevel to be able to access expect_out(buffer).
+  puts stderr ""
+  print_error "Reached end of file before getting $description.\n"
+  puts stderr "The data returned by the spawned process is:\n"
+  # Using uplevel to be able to access expect_out(buffer).
+  uplevel { puts stderr "$expect_out(buffer)" }
+  # If caller has exit_proc defined, call it.  Otherwise, just call exit.
+  if { [info procs "exit_proc"] != "" } {
+    exit_proc 1
+  }
+  exit 1
+
+}
