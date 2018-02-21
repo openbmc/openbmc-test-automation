@@ -57,33 +57,38 @@ proc longoptions { args } {
 
   global longoptions
 
-  set debug 0
-  foreach arg $args {
+  # Note: Because this procedure manipulates global variables, we use the
+  # "_opt_<varname>_" format to minimize the possibility of naming collisions.
+  set _opt_debug_ 0
+  foreach _opt_arg_ $args {
     # Create an option record which is a 2-element list consisting of the
     # option specification and a possible default value.  Example:;
     # opt_rec:
     #   opt_rec[0]:      test_mode:
     #   opt_rec[1]:      0
-    set opt_rec [split $arg =]
+    set _opt_rec_ [split $_opt_arg_ =]
     # opt_spec will include any colons that may have been specified.
-    set opt_spec [lindex $opt_rec 0]
+    set _opt_spec_ [lindex $_opt_rec_ 0]
     # Add the option spec to the global longoptions list.
-    lappend_unique longoptions $opt_spec
+    lappend_unique longoptions $_opt_spec_
     # Strip the colons to get the option name.
-    set opt_name [string trimright $opt_spec ":"]
+    set _opt_name_ [string trimright $_opt_spec_ ":"]
     # Get the option's default value, if any.
-    set opt_default_value [lindex $opt_rec 1]
-    set arg_req [get_arg_req $opt_name]
-    if { $arg_req == "not_allowed" && $opt_default_value == "" } {
+    set _opt_default_value_ [lindex $_opt_rec_ 1]
+    set _opt_arg_req_ [get_arg_req $_opt_name_]
+    if { $_opt_arg_req_ == "not_allowed" && $_opt_default_value_ == "" } {
       # If this parm takes no arg and no default was specified by the user,
       # we will set the default to 0.
-      set opt_default_value 0
+      set _opt_default_value_ 0
     }
     # Set a global variable whose name is identical to the option name.  Set
     # the default value if there is one.
-    set cmd_buf "global ${opt_name} ; set ${opt_name} {${opt_default_value}}"
-    dpissuing
-    eval $cmd_buf
+    set _opt_cmd_buf_ "global ${_opt_name_}"
+    if { $_opt_debug_ } { print_issuing $_opt_cmd_buf_ }
+    eval $_opt_cmd_buf_
+    set _opt_cmd_buf_ "set ${_opt_name_} {${_opt_default_value_}}"
+    if { $_opt_debug_ } { print_issuing $_opt_cmd_buf_ }
+    eval $_opt_cmd_buf_
   }
 
 }
@@ -104,30 +109,32 @@ proc pos_parms { args } {
   global pos_parms
 
   set pos_parms [list]
-  set debug 0
-  foreach arg $args {
-    dprint_var arg
+  # Note: Because this procedure manipulates global variables, we use the
+  # "_opt_<varname>_" format to minimize the possibility of naming collisions.
+  set _opt_debug_ 0
+  foreach _opt_arg_ $args {
+    if { $_opt_debug_ } { print_var _opt_arg_ }
     # Create an option record which is a 2-element list consisting of the
     # option specification and a possible default value.  Example:;
     # opt_rec:
     #   opt_rec[0]:      test_mode:
     #   opt_rec[1]:      0
-    set parm_rec [split $arg =]
-    dprint_list parm_rec
+    set _opt_parm_rec_ [split $_opt_arg_ =]
+    if { $_opt_debug_ } { print_list _opt_parm_rec_ }
     # parm_spec will include any colons that may have been specified.
-    set parm_name [lindex $parm_rec 0]
-    dprint_var parm_name
+    set _opt_parm_name_ [lindex $_opt_parm_rec_ 0]
+    if { $_opt_debug_ } { print_var _opt_parm_name_ }
     # Add the option spec to the global pos_parms list.
-    lappend pos_parms $parm_name
+    lappend pos_parms $_opt_parm_name_
     # Get the option's default value, if any.
-    set parm_default_value [lindex $parm_rec 1]
-    dprint_var parm_default_value
+    set _opt_parm_default_value_ [lindex $_opt_parm_rec_ 1]
+    if { $_opt_debug_ } { print_var _opt_parm_default_value_ }
     # Set a global variable whose name is identical to the option name.  Set
     # the default value if there is one.
-    set cmd_buf "global ${parm_name} ; set ${parm_name}"
-    append cmd_buf " {${parm_default_value}}"
-    dpissuing
-    eval $cmd_buf
+    set _opt_cmd_buf_ "global ${_opt_parm_name_} ; set ${_opt_parm_name_}"
+    append _opt_cmd_buf_ " {${_opt_parm_default_value_}}"
+    if { $_opt_debug_ } { pissuing $_opt_cmd_buf_ }
+    eval $_opt_cmd_buf_
   }
 
 }
@@ -159,13 +166,17 @@ proc gen_get_options { argv } {
   global pos_parms
   global program_name
 
-  set debug 0
+  # Note: Because this procedure manipulates global variables, we use the
+  # "_opt_<varname>_" format to minimize the possibility of naming collisions.
+  set _opt_debug_ 0
 
-  set len_pos_parms [llength $pos_parms]
+  set _opt_len_pos_parms_ [llength $pos_parms]
 
-  dprint_list longoptions
-  dprint_list pos_parms
-  dprint_var len_pos_parms
+  if { $_opt_debug_ } {
+    print_list longoptions
+    print_list pos_parms
+    print_var _opt_len_pos_parms_
+  }
 
   # Rather than write the algorithm from scratch, we will call upon the bash
   # getopt program to help us.  This program has several advantages:
@@ -179,67 +190,69 @@ proc gen_get_options { argv } {
   # quotes in the argv string.  This will allow us to use the result in a bash
   # command string.  Example: {--parm3=Kathy's cat} will become
   # '--parm3=Kathy'\''s cat'.
-  dprint_var argv
-  set bash_args [curly_braces_to_quotes $argv]
-  set cmd_buf "getopt --name=${program_name} -a --longoptions=\"help"
-  append cmd_buf " ${longoptions}\" --options=\"-h\" -- ${bash_args}"
-  dpissuing
-  if { [ catch {set OPT_LIST [eval exec bash -c {$cmd_buf}]} result ] } {
+  if { $_opt_debug_ } { print_var argv }
+  set _opt_bash_args_ [curly_braces_to_quotes $argv]
+  set _opt_cmd_buf_ "getopt --name=${program_name} -a --longoptions=\"help"
+  append _opt_cmd_buf_ " ${longoptions}\" --options=\"-h\" --"
+  append _opt_cmd_buf_ " ${_opt_bash_args_}"
+  if { $_opt_debug_ } { pissuing $_opt_cmd_buf_ }
+  if { [ catch {set OPT_LIST [eval exec bash -c {$_opt_cmd_buf_}]} result ] } {
     puts stderr $result
     exit 1
   }
 
   set OPT_LIST [quotes_to_curly_braces $OPT_LIST]
-  set cmd_buf "set opt_list \[list $OPT_LIST\]"
-  dpissuing
-  eval $cmd_buf
+  set _opt_cmd_buf_ "set opt_list \[list $OPT_LIST\]"
+  if { $_opt_debug_ } { pissuing $_opt_cmd_buf_ }
+  eval $_opt_cmd_buf_
 
-  dprint_list opt_list
+  if { $_opt_debug_ } { print_list opt_list }
 
-  set longopt_regex {\-[-]?[^- ]+}
+  set _opt_longopt_regex_ {\-[-]?[^- ]+}
   global help
   global h
   set help 0
   set h 0
-  dprintn ; dprint_timen "Processing opt_list."
-  set pos_parm_ix 0
-  set current_longopt {}
+  if { $_opt_debug_ } { printn ; print_timen "Processing opt_list." }
+  set _opt_pos_parm_ix_ 0
+  set _opt_current_longopt_ {}
   foreach opt_list_entry $opt_list {
-    dprint_var opt_list_entry
+    if { $_opt_debug_ } { print_var opt_list_entry }
     if { $opt_list_entry == "--" } { break; }
-    if { $current_longopt != "" } {
-      dprint_var current_longopt
-      set cmd_buf "global ${current_longopt} ; set ${current_longopt}"
-      append cmd_buf " {${opt_list_entry}}"
-      dpissuing
-      eval $cmd_buf
-      set current_longopt {}
-      dprintn
+    if { $_opt_current_longopt_ != "" } {
+      if { $_opt_debug_ } { print_var _opt_current_longopt_ }
+      set _opt_cmd_buf_ "global ${_opt_current_longopt_} ; set"
+      append _opt_cmd_buf_ " ${_opt_current_longopt_} {${opt_list_entry}}"
+      if { $_opt_debug_ } { pissuing $_opt_cmd_buf_ }
+      eval $_opt_cmd_buf_
+      set _opt_current_longopt_ {}
+      if { $_opt_debug_ } { printn }
       continue
     }
-    set is_option [regexp -expanded $longopt_regex ${opt_list_entry}]
-    dprint_var is_option
-    if { $is_option } {
+    set _opt_is_option_ [regexp -expanded $_opt_longopt_regex_\
+      ${opt_list_entry}]
+    if { $_opt_debug_ } { print_var _opt_is_option_ }
+    if { $_opt_is_option_ } {
       regsub -all {^\-[-]?} $opt_list_entry {} opt_name
-      dprint_var opt_name
-      set arg_req [get_arg_req $opt_name]
-      dprint_var arg_req
-      if { $arg_req == "not_allowed" } {
-        set cmd_buf "global ${opt_name} ; set ${opt_name} 1"
-        dpissuing
-        eval $cmd_buf
+      if { $_opt_debug_ } { print_var opt_name }
+      set _opt_arg_req_ [get_arg_req $opt_name]
+      if { $_opt_debug_ } { print_var _opt_arg_req_ }
+      if { $_opt_arg_req_ == "not_allowed" } {
+        set _opt_cmd_buf_ "global ${opt_name} ; set ${opt_name} 1"
+        if { $_opt_debug_ } { pissuing $_opt_cmd_buf_ }
+        eval $_opt_cmd_buf_
       } else {
-        set current_longopt [string trimleft $opt_list_entry "-"]
+        set _opt_current_longopt_ [string trimleft $opt_list_entry "-"]
       }
     } else {
       # Must be a positional parm.
-      if { $pos_parm_ix >= $len_pos_parms } {
-        set is_list [regexp -expanded "_list$" ${pos_parm_name}]
-        dprint_var is_list
-        if { $is_list } {
-          set cmd_buf "lappend ${pos_parm_name} {${opt_list_entry}}"
-          dpissuing
-          eval $cmd_buf
+      if { $_opt_pos_parm_ix_ >= $_opt_len_pos_parms_ } {
+        set _opt_is_list_ [regexp -expanded "_list$" ${pos_parm_name}]
+        if { $_opt_debug_ } { print_var _opt_is_list_ }
+        if { $_opt_is_list_ } {
+          set _opt_cmd_buf_ "lappend ${pos_parm_name} {${opt_list_entry}}"
+          if { $_opt_debug_ } { pissuing $_opt_cmd_buf_ }
+          eval $_opt_cmd_buf_
           continue
         }
         append message "The caller has specified more positional parms than"
@@ -249,14 +262,14 @@ proc gen_get_options { argv } {
         print_error_report $message
         exit 1
       }
-      set pos_parm_name [lindex $pos_parms $pos_parm_ix]
-      set cmd_buf "global ${pos_parm_name} ; set ${pos_parm_name}"
-      append cmd_buf " {${opt_list_entry}}"
-      dpissuing
-      eval $cmd_buf
-      incr pos_parm_ix
+      set _opt_pos_parm_name_ [lindex $pos_parms $_opt_pos_parm_ix_]
+      set _opt_cmd_buf_ "global ${_opt_pos_parm_name_} ; set"
+      append _opt_cmd_buf_ " ${_opt_pos_parm_name_} {${opt_list_entry}}"
+      if { $_opt_debug_ } { pissuing $_opt_cmd_buf_ }
+      eval $_opt_cmd_buf_
+      incr _opt_pos_parm_ix_
     }
-    dprintn
+    if { $_opt_debug_ } { printn }
   }
 
   if { $h || $help } {
@@ -298,6 +311,7 @@ proc print_usage {} {
 }
 
 
+
 proc print_option_help { option help_text { data_desc {} } { print_default {}}\
   { width 30 } } {
 
@@ -332,8 +346,8 @@ proc print_option_help { option help_text { data_desc {} } { print_default {}}\
   if { $is_option } {
     # It is an option (vs positional parm).
     # Does it take an argument?
-    set arg_req [get_arg_req $opt_name]
-    if { $arg_req == "not_allowed" } {
+    set _opt_arg_req_ [get_arg_req $opt_name]
+    if { $_opt_arg_req_ == "not_allowed" } {
       set data_desc_default ""
     } else {
       set data_desc_default "{$opt_name}"
