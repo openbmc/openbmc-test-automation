@@ -253,45 +253,17 @@ Test Power Reading Via IPMI With Host Booted
 
     REST Power On  stack_mode=skip  quiet=1
 
-    # Example of power reading command output via IPMI.
-    # Instantaneous power reading:                   235 Watts
-    # Minimum during sampling period:                235 Watts
-    # Maximum during sampling period:                235 Watts
-    # Average power reading over sample period:      235 Watts
-    # IPMI timestamp:                           Thu Jan  1 00:00:00 1970
-    # Sampling period:                          00000000 Seconds.
-    # Power reading state is:                   deactivated
+    Verify Power Reading
 
-    ${power_reading}=  Get IPMI Power Reading
-    ${power_reading_ipmi}=  Set Variable
-    ...  ${power_reading['instantaneous_power_reading']}
-    ${power_reading_ipmi}=  Remove String  ${power_reading_ipmi}  ${SPACE}Watts
 
-    ${power_reading_rest}=  Read Attribute
-    ...  ${SENSORS_URI}power/total_power  Value
+Test Power Reading Via IPMI With Host Off
+    [Documentation]  Test power reading via IPMI with host off state and
+    ...  verify using REST.
+    [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Off
 
-    # Example of power reading via REST
-    #  "CriticalAlarmHigh": 0,
-    #  "CriticalAlarmLow": 0,
-    #  "CriticalHigh": 3100000000,
-    #  "CriticalLow": 0,
-    #  "Scale": -6,
-    #  "Unit": "xyz.openbmc_project.Sensor.Value.Unit.Watts",
-    #  "Value": 228000000,
-    #  "WarningAlarmHigh": 0,
-    #  "WarningAlarmLow": 0,
-    #  "WarningHigh": 3050000000,
-    #  "WarningLow": 0
+    REST Power Off  stack_mode=skip  quiet=1
 
-    # Get power value based on scale i.e. Value * (10 power Scale Value)
-    # e.g. from above case 228000000 * (10 power -6) = 228000000/1000000
-
-    ${power_reading_rest}=  Evaluate  ${power_reading_rest}/1000000
-    ${ipmi_rest_power_diff}=
-    ...  Evaluate  abs(${power_reading_rest} - ${power_reading_ipmi})
-
-    Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
-    ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
+    Verify Power Reading
 
 
 Test Power Reading Via IPMI Raw Command
@@ -560,3 +532,47 @@ Fetch Details From LAN Print
     ${value_fetch}=  Fetch From Right  ${fetch_value}  :${SPACE}
     [Return]  ${value_fetch}
 
+
+Verify Power Reading
+    [Documentation]  Get dcmi power reading via IPMI.
+
+    # Example of power reading command output via IPMI.
+    # Instantaneous power reading:                   235 Watts
+    # Minimum during sampling period:                235 Watts
+    # Maximum during sampling period:                235 Watts
+    # Average power reading over sample period:      235 Watts
+    # IPMI timestamp:                                Thu Jan  1 00:00:00 1970
+    # Sampling period:                               00000000 Seconds.
+    # Power reading state is:                        deactivated
+
+    ${power_reading}=  Get IPMI Power Reading
+
+    ${host_state}=  Get Host State
+    Run Keyword If  '${host_state}' == 'Off'
+    ...  Should Be Equal  ${power_reading_ipmi}  0
+
+    ${power_reading_rest}=  Read Attribute
+    ...  ${SENSORS_URI}power/total_power  Value
+
+    # Example of power reading via REST
+    #  "CriticalAlarmHigh": 0,
+    #  "CriticalAlarmLow": 0,
+    #  "CriticalHigh": 3100000000,
+    #  "CriticalLow": 0,
+    #  "Scale": -6,
+    #  "Unit": "xyz.openbmc_project.Sensor.Value.Unit.Watts",
+    #  "Value": 228000000,
+    #  "WarningAlarmHigh": 0,
+    #  "WarningAlarmLow": 0,
+    #  "WarningHigh": 3050000000,
+    #  "WarningLow": 0
+
+    # Get power value based on scale i.e. Value * (10 power Scale Value)
+    # e.g. from above case 228000000 * (10 power -6) = 228000000/1000000
+
+    ${power_reading_rest}=  Evaluate  ${power_reading_rest}/1000000
+    ${ipmi_rest_power_diff}=
+    ...  Evaluate  abs(${power_reading_rest} - ${power_reading_ipmi})
+
+    Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
+    ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
