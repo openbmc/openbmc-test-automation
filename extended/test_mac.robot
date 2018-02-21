@@ -125,18 +125,6 @@ Suite Setup Execution
     Validate MAC On BMC  ${macaddr}
     Set Suite Variable  ${macaddr}
 
-Validate MAC on BMC
-    [Documentation]  Validate MAC on BMC.
-    [Arguments]  ${mac_addr}
-
-    # Description of argument(s):
-    # mac_addr  MAC address of the BMC.
-
-    ${system_mac}=  Get BMC MAC Address
-
-    Should Contain  ${system_mac}  ${mac_addr}
-    ...  ignore_case=True  msg=MAC address does not exist.
-
 Configure MAC Settings
     [Documentation]  Configure MAC settings.
     [Arguments]  ${mac_addr}  ${expected_result}
