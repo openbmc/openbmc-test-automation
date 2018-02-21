@@ -198,3 +198,23 @@ def get_sbe():
 
     return int(out_buf, 16)
 
+def compare_mac_address(sys_mac_addr, user_mac_addr):
+
+    r"""
+    Return 1 if the MAC value matched, otherwise 0.
+
+.   Description of argument(s):
+    sys_mac_addr   A valid system MAC string (e.g. "70:e2:84:14:2a:08")
+    user_mac_addr  A user provided MAC string (e.g. "70:e2:84:14:2a:08")
+    """
+
+    index = 0
+    # Example: ['70', 'e2', '84', '14', '2a', '08']
+    mac_list = user_mac_addr.split(":")
+    for item in sys_mac_addr.split(":"):
+        if int(item, 16) == int(mac_list[index], 16):
+            index = index + 1
+            continue
+        return 0
+
+    return 1

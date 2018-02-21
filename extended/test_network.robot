@@ -473,17 +473,6 @@ Validate Route On BMC
     ...      Should Contain  ${route_info}  ${gateway_ip}
     ...      msg=Gateway IP address not matching.
 
-Validate MAC on BMC
-    [Documentation]  Validate MAC on BMC.
-    [Arguments]  ${macaddr}
-
-    # Description of argument(s):
-    # macaddr  MAC address of the BMC.
-
-    ${system_mac}=  Get BMC MAC Address
-
-    Should Contain  ${system_mac}  ${macaddr}
-    ...  ignore_case=True  msg=MAC address does not exist.
 
 Configure Network Settings
     [Documentation]  Configure network settings.

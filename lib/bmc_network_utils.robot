@@ -3,6 +3,7 @@ Resource                ../lib/utils.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
 Library                 ../lib/gen_misc.py
+Library                 ../lib/utils.py
 
 *** Variables ***
 # MAC input from user.
@@ -199,4 +200,18 @@ Get First Non Pingable IP From Subnet
     \  Return From Keyword If  '${status}' == 'False'  ${new_ip}
 
     Fail  msg=No non-pingable IP could be found in subnet ${network_part}.
+
+
+Validate MAC On BMC
+    [Documentation]  Validate MAC on BMC.
+    [Arguments]  ${mac_addr}
+
+    # Description of argument(s):
+    # mac_addr  MAC address of the BMC.
+
+    ${system_mac}=  Get BMC MAC Address
+
+    ${status}=  Compare MAC Address  ${system_mac}  ${mac_addr}
+    Should Be True  ${status}
+    ...  msg=MAC address ${system_mac} does not match ${mac_addr}.
 
