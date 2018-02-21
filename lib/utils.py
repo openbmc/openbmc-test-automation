@@ -198,3 +198,19 @@ def get_sbe():
 
     return int(out_buf, 16)
 
+def compare_mac_address(mac_addr1, mac_addr2):
+
+    r"""
+    Return 1 if the MAC value matched else 0.
+    """
+
+    index = 0
+    # Example: ['70', 'e2', '84', '14', '2a', '08']
+    mac_list = mac_addr2.split(":")
+    for item in mac_addr1.split(":"):
+        if int(item, 16) == int(mac_list[index], 16):
+            index = index + 1
+            continue
+        return 0
+
+    return 1
