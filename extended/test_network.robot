@@ -399,12 +399,12 @@ Run IPMI With Multiple IPs Configured
 
     # Configure two IPs and verify.
 
-    :FOR  ${valid_ipn}  IN  @{valid_ips}
-    \  Configure Network Settings  ${valid_ipn}  ${valid_prefix_len}
+    :FOR  ${loc_valid_ip}  IN  @{valid_ips}
+    \  Configure Network Settings  ${loc_valid_ip}  ${valid_prefix_len}
     \  ...  ${valid_gateway}  valid
     \  @{ip_uri_list}=  Get IPv4 URI List
     \  @{ip_list}=  Get List Of IP Address Via REST  @{ip_uri_list}
-    \  List Should Contain Value  ${ip_list}  ${valid_ipn}
+    \  List Should Contain Value  ${ip_list}  ${loc_valid_ip}
     \  ...  msg=IP address is not configured.
 
     Run External IPMI Standard Command  chassis bootparam get 5
@@ -413,9 +413,9 @@ Run IPMI With Multiple IPs Configured
 
 Test TeardownIPs
     [Documentation]  Delete the IPs
-    :FOR  ${valid_ipn}  IN  @{valid_ips}
+    :FOR  ${loc_valid_ip}  IN  @{valid_ips}
     \  @{ip_uri_list}=  Get IPv4 URI List
-    \  Delete IP And Object  ${valid_ipn}  @{ip_uri_list}
+    \  Delete IP And Object  ${loc_valid_ip}  @{ip_uri_list}
 
 Test Setup Execution
     [Documentation]  Network setup.
