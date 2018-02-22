@@ -7,8 +7,7 @@ Resource            ../lib/boot_utils.robot
 Library             ../../lib/ipmi_utils.py
 Resource            ../../lib/bmc_network_utils.robot
 
-Suite Setup         Suite Setup Execution
-Test Teardown       FFDC On Test Case Fail
+#Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -442,37 +441,6 @@ Set Watchdog Enabled Using REST
     ...  data=${value_dict}
 
 
-Log LAN Print Details
-    [Documentation]  Log IPMI LAN print details and return them as a string.
-
-    # Example:
-
-    # Set in Progress        : Set Complete
-    # Auth Type Support      : MD5
-    # Auth Type Enable       : Callback : MD5
-    #                        : User     : MD5
-    #                        : Operator : MD5
-    #                        : Admin    : MD5
-    #                        : OEM      : MD5
-    # IP Address Source      : Static Address
-    # IP Address             : xx.xx.xx.xx
-    # Subnet Mask            : yy.yy.yy.yy
-    # MAC Address            : xx.xx.xx.xx.xx.xx
-    # Default Gateway IP     : xx.xx.xx.xx
-    # 802.1q VLAN ID         : Disabled Cipher Suite
-    # Priv Max               : Not Available
-    # Bad Password Threshold : Not Available
-
-    Login To OS Host
-    Check If IPMI Tool Exist
-
-    ${cmd_buf}=  Catenate  ${IPMI_INBAND_CMD}  lan print
-
-    ${stdout}  ${stderr}  ${rc}=  OS Execute Command  ${cmd_buf}
-    Log  ${stdout}
-    [Return]  ${stdout}
-
-
 Fetch Details From LAN Print
     [Documentation]  Fetch details from LAN print.
     [Arguments]  ${field_name}
@@ -481,22 +449,8 @@ Fetch Details From LAN Print
     # ${field_name}   Field name to be fetched from LAN print
     #                 (e.g. "MAC Address", "Source").
 
-    ${stdout}=  Log LAN Print Details
+    ${stdout}=  Run External IPMI Standard Command  lan print
     ${fetch_value}=  Get Lines Containing String  ${stdout}  ${field_name}
     ${value_fetch}=  Fetch From Right  ${fetch_value}  :${SPACE}
     [Return]  ${value_fetch}
-
-
-Suite Setup Execution
-    [Documentation]  Do the suite setup execution tasks.
-
-    Should Not Be Empty
-    ...  ${OS_HOST}  msg=You must provide DNS name/IP of the OS host.
-    Should Not Be Empty
-    ...  ${OS_USERNAME}  msg=You must provide OS host user name.
-    Should Not Be Empty
-    ...  ${OS_PASSWORD}  msg=You must provide OS host user password.
-
-    # Boot To OS
-    REST Power On  quiet=${1}
 
