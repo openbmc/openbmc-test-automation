@@ -7,12 +7,12 @@ Documentation     Energy scale power capping tests.
 #  OCC    On Chip Controller
 
 
-Resource          ../lib/energy_scale_utils.robot
-Resource          ../lib/rest_client.robot
-Resource          ../lib/openbmc_ffdc.robot
-Resource          ../lib/boot_utils.robot
-Resource          ../lib/ipmi_client.robot
-Resource          ../syslib/utils_os.robot
+Resource          ../../lib/energy_scale_utils.robot
+Resource          ../../lib/rest_client.robot
+Resource          ../../lib/openbmc_ffdc.robot
+Resource          ../../lib/boot_utils.robot
+Resource          ../../lib/ipmi_client.robot
+Resource          ../../syslib/utils_os.robot
 
 
 Suite Setup      Suite Setup Execution
