@@ -109,10 +109,28 @@ proc cmd_fnc { cmd_buf { quiet {} } { test_mode {} } { print_output {} }\
 
 proc t_cmd_fnc { args } {
 
-  # Call cmd_fnc with test_mode=1.  See cmd_fnc (above) for details for all
-  # other argument details..
+  # Call cmd_fnc with test_mode equal to the test_mode setting found by
+  # searching up the call stack.  See cmd_fnc (above) for details for all
+  # other arguments.
 
+  # We wish to obtain a value for test_mode by searching up the call stack.
+  # This value will govern whether the command specified actually gets
+  # executed.
   set_var_default test_mode [get_stack_var test_mode 0 2]
+
+  # Since we wish to manipulate the value of test_mode, which is the third
+  # positional parm, we must make sure we have at least 3 parms.  We will now
+  # append blank values to the args list as needed to ensure that we have the
+  # minimum 3 parms.
+  set min_args 3
+  for {set ix [llength $args]} {$ix < $min_args} {incr ix} {
+    lappend args {}
+  }
+
+  # Now replace the caller's test_mode value with the value obtained from the
+  # call stack search.  It does not matter what value is specified by the
+  # caller for test_mode.  It will be replaced.  The whole point of calling
+  # t_cmd_fnc is to allow it to set the test_mode.
   set args [lreplace $args 2 2 $test_mode]
 
   return [cmd_fnc {*}$args]
