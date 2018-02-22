@@ -49,6 +49,11 @@ parser.add_argument(
     '-d',
     help='The directory path where the generated .csv files will go.')
 
+parser.add_argument(
+    '--version',
+    '-v',
+    help='Driver version of openbmc firmware which was used during test.')
+
 # Populate stock_list with options we want.
 stock_list = [("test_mode", 0), ("quiet", 0), ("debug", 0)]
 
