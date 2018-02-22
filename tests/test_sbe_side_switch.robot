@@ -5,6 +5,7 @@ Library             ../lib/state.py
 Library             ../lib/utils.py
 Variables           ../data/variables.py
 Resource            ../lib/boot_utils.robot
+Resource            ../lib/state_manager.robot
 
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
