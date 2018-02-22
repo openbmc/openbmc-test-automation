@@ -11,10 +11,11 @@
 * Reset BMC
 * Code update BMC and host
 * Power management
+* Fan controller
 * HTX bootme
 * XCAT execution
 * Network
-* IPMI support
+* IPMI support (generic and DCMI compliant)
 * Factory reset
 * RAS (Reliability, availability and serviceability)
 * Web UI testing
@@ -89,6 +90,8 @@ classified as follows:
         serviceability).
 
 `gui/`: Contains test cases for web UI and security scanning tool automation.
+
+`mnfg/`: Contains test cases for factory reset (DHCP mode) and PGOOD testing.
 
 `tools/`: Contains various tools.
 
