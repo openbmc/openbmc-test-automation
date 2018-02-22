@@ -54,7 +54,7 @@ Reboot BMC And Check For Errors
     ${journal_log}=  BMC Execute Command
     ...  journalctl --no-pager | egrep 'SEGV|core-dump'  ignore_err=1
 
-    Should Be Empty  ${journal_log}
+    Should Be Empty  ${journal_log[0]}
 
 
 Check Reset Reload Status
