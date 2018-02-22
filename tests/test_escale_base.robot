@@ -14,6 +14,8 @@ Suite Setup      Suite Setup Execution
 Test Teardown    Test Teardown Execution
 
 
+Force Tags  Energy_Scale
+
 
 *** Variables ****
 
