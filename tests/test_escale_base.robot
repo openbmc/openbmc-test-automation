@@ -14,7 +14,6 @@ Suite Setup      Suite Setup Execution
 Test Teardown    Test Teardown Execution
 
 
-
 *** Variables ****
 
 ${over_max_power}       3051
