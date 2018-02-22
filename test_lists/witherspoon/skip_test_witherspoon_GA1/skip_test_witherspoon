@@ -1,0 +1,26 @@
+#https://github.com/openbmc/openbmc/issues/1142
+-e Check_BMC_Name_Property_Is_Set
+-e Check_BMC_Clocks_Name_Property_Is_Set
+-e Check_BMC_Clocks_Compatible_Property_Is_Set
+-e Check_BMC_FSI_Compatible_Property_Is_Set
+-e Check_BMC_FSI_Name_Property_Is_Set
+# https://github.com/openbmc/openbmc-test-automation/issues/822
+-e Verify_Minimal_Memory_Buffer_Inventory
+-e Verify_Minimal_Main_Planar_Inventory
+-e Verify_Minimal_System_Inventory
+# NA test case for Witherspoon
+-e io_board_Present
+-e io_board_Fault
+# System LED test cases which are NA for Witherspoon system.
+-e Test_Heartbeat_LED_And_Verify_Via_REST
+-e Test_Beep_LED_And_Verify_Via_REST
+-e Test_Identify_LED_And_Verify_Via_REST
+# NXDMAENG UE error injection is not available in latest p9dd1ffdcv104.xlsm
+-e Verify_Unrecoverable_Callout_Handling_For_NXDMAENG
+# DCMI Test Cases NA for GA1
+-e Set_Asset_Tag_With_Valid_String_Length
+-e Set_Asset_Tag_With_Invalid_String_Length
+-e Verify_Get_And_Set_Management_Controller_ID_String
+-e Test_Ambient_Temperature_Via_IPMI
+-e Verify_Get_DCMI_Capabilities
+-e Test_Baseboard_Temperature_Via_IPMI
