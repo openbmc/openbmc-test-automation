@@ -2,8 +2,9 @@
 
 Documentation  Test Open BMC GUI BMC host information under GUI Header.
 
+Library        DateTime
+
 Resource        ../../lib/resource.robot
-Resource        ../../../../lib/boot_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
@@ -11,6 +12,7 @@ Suite Teardown  Close Browser
 *** Variables ***
 ${xpath_select_server_control}  //*[@id="header__wrapper"]/div/div[2]/p[2]
 ${xpath_select_refresh_button}  //*[@id="header__wrapper"]/div/div[3]/button
+${xpath_select_date_text}       //*[@id="header__wrapper"]/div/div[3]/p/span
 
 *** Test Cases ***
 
@@ -34,6 +36,22 @@ Verify Refresh Button
     GUI Power On
     Click Element  ${xpath_select_refresh_button}
     Wait Until Page Contains  Running
+
+Verify Date Last Refreshed
+
+    ${date_info_1st_read}=  Get Text  ${xpath_select_date_text}
+    Click Element  ${xpath_select_refresh_button}
+    Sleep  2
+    ${date_info_2nd_read}=  Get Text  ${xpath_select_date_text}
+    Should Not Be Equal As Strings  ${date_info_1st_read}
+    ...  ${date_info_2nd_read}
+
+    # Date & Time Verification
+    ${current_date}=  Get Time
+    ${date_conversion}=  Convert Date  ${current_date}  result_format=%b %d %Y
+    Should Contain  ${date_info_2nd_read}  ${date_conversion}
+    ${date_conversion}=  Convert Date  ${current_date}  result_format=%I:%M:
+    Should Contain  ${date_info_2nd_read}  ${date_conversion}
 
 *** Keywords ***
 
