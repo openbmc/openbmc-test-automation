@@ -39,8 +39,14 @@ Launch OpenBMC GUI Browser
 
     ${op_system}=  Get Operating System
     Run Keyword If  '${op_system}' == 'windows'
-    ...     Launch Browser in Windows Platform
+    ...     Launch Header Browser
+    ...  ELSE IF  '${op_system}' == 'Darwin'
+            # Mac OS is currently having some issues with firefox, so using
+            # chrome.
+            # TODO: Need to add support for other browsers. Issue #1280.
+    ...     Launch Header Browser  chrome
     ...  ELSE
+            # Linux OS.
     ...     Launch Headless Browser
 
 Get Operating System
@@ -50,29 +56,20 @@ Get Operating System
     ${windows_platform}=  Run Keyword And Return Status
     ...  Should Contain  ${curdir_lower_case}  c:\
     ${op_system}=  Run Keyword If  '${windows_platform}' == 'True'
-    ...    Set Variable  windows
-    ...  ELSE
-    ...    Set Variable  linux
+    ...     Set Variable  windows
+    ...   ELSE
+    ...     Run  uname
     [Return]  ${op_system}
 
-Launch Browser in Windows Platform
+Launch Header Browser
     [Documentation]  Open the browser with the URL and
     ...              login on windows platform.
+    [Arguments]  ${browser_type}=${default_browser}
 
-    ${browser_choice}=  Run Keyword And Return Status
-    ...  Variable Should Exist  ${BROWSER_TYPE}
-    Run Keyword If  '${browser_choice}' == 'True'
-    ...     Launch Browser  ${BROWSER_TYPE}
-    ...  ELSE
-    ...     Launch Browser
+    # Description of argument(s):
+    # browser_type  Type of browser (e.g. "firefox", "chrome", etc.).
 
-Launch Browser
-    [Documentation]  Launches the desired browser.
-    [Arguments]  ${launch_browser}=${default_browser}
-
-    # launch_browser  Open the required browser.
-
-    ${BROWSER_ID}=  Open Browser  ${obmc_gui_url}  ${launch_browser}
+    ${BROWSER_ID}=  Open Browser  ${obmc_gui_url}  ${browser_type}
     Maximize Browser Window
     Set Global Variable  ${BROWSER_ID}
 
