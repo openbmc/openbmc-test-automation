@@ -196,7 +196,7 @@ Click Yes Button
 LogOut OpenBMC GUI
     [Documentation]  Log out of OpenBMC GUI.
     SSHLibrary.Close All Connections
-    click button  ${xpath_button_logout}
+    Click Element  header
     Wait Until Page Contains Element  ${xpath_button_login}
 
 Test Teardown Execution
