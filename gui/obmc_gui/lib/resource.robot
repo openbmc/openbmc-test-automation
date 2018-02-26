@@ -193,7 +193,8 @@ Click Yes Button
 LogOut OpenBMC GUI
     [Documentation]  Log out of OpenBMC GUI.
     SSHLibrary.Close All Connections
-    click button  ${xpath_button_logout}
+    # Passing direct id element "header" as an argument to Click Element.
+    Click Element  header
     Wait Until Page Contains Element  ${xpath_button_login}
 
 Test Teardown Execution
