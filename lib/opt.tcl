@@ -436,7 +436,11 @@ proc gen_print_help { { width 30 } } {
   # Retrieve the general program help text from the help_dict and print it.
   set help_entry [dict get $help_dict ${program_name}]
   puts ""
-  puts [lindex $help_entry 0]
+
+  set cmd_buf "echo '[escape_bash_quotes [lindex $help_entry 0]]' | fold --spaces --width=80"
+  set out_buf [eval exec bash -c {$cmd_buf}]
+
+  puts "$out_buf"
 
   if { $pos_parms != "" } {
     puts ""
