@@ -30,7 +30,7 @@ Verify Software Field Mode
     #         ],
     #         [
     #             "functional",
-    #             "software_version",
+    #             "functional",
     #             "/xyz/openbmc_project/software/fcf8e182"
     #         ]
     #     ]
