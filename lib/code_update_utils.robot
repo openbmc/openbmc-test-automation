@@ -399,7 +399,7 @@ Enable Field Mode And Verify Unmount
     #         ],
     #         [
     #             "functional",
-    #             "software_version",
+    #             "functional",
     #             "/xyz/openbmc_project/software/fcf8e182"
     #         ]
     #     ]
