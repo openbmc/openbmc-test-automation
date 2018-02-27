@@ -88,3 +88,19 @@ class resource_variables():
     confirm_msg = "2"
     yes = "1"
     No = "2"
+
+    # Server health elements locators.
+    xpath_select_server_health = "//*[@id='header__wrapper']/div/div[3]/a[2]"
+    xpath_server_health_text  =  \
+        "//*[@id='header__wrapper']/div/div[3]/a[2]/span"
+    xpath_select_refresh_button = \
+        "//*[@id='header__wrapper']/div/div[3]/button"
+    xpath_event_severity_all =  "//*[@id='event-filter']/div[1]/button[1]"
+    xpath_event_severity_high = "//*[@id='event-filter']/div[1]/button[2]"
+    xpath_event_severity_medium = "//*[@id='event-filter']/div[1]/button[3]"
+    xpath_event_severity_low = "//*[@id='event-filter']/div[1]/button[4]"
+    xpath_drop_down_timezone_edt = \
+        "//*[@id='event-log']/section[1]/div/div/button"
+    xpath_refresh_circle = "/html/body/main/loader/div[1]/svg/circle"
+    xpath_drop_down_timezone_utc =  \
+        "//*[@id='event-log']/section[1]/div/div/ul/li[2]/button"

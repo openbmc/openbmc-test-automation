@@ -351,3 +351,15 @@ Expected Initial Test State
 
     Run Keyword If  '${expectedState}' == 'Off'
     ...  Initiate Host PowerOff
+
+Launch Browser And Login OpenBMC GUI
+    [Documentation]  Launch browser and log into openbmc GUI.
+
+    Open Browser With URL  ${obmc_gui_url}
+    Login OpenBMC GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+Logout And Close Browser
+    [Documentation]  Logout from openbmc application and close the browser.
+
+    Click Element  header
+    Close Browser
