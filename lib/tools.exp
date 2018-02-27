@@ -14,6 +14,9 @@ proc handle_timeout { description } {
   # description                     A description of what was being expected
   #                                 (e.g. "an SOL login prompt").
 
+  global spawn_id
+  global expect_out
+
   set timeout [get_stack_var timeout {} 2]
 
   if { $timeout == 1 } {
@@ -21,11 +24,13 @@ proc handle_timeout { description } {
   } else {
     set seconds "seconds"
   }
+
   puts stderr ""
   print_error "Did not get ${description} after $timeout ${seconds}.\n"
-  puts stderr "The data returned by the spawned process is:\n"
-  # Using uplevel to be able to access expect_out(buffer).
-  uplevel { puts stderr "$expect_out(buffer)" }
+  # Using uplevel to be able to access expect_out.
+  if { [ catch {uplevel { puts stderr [sprint_var expect_out]}} result ] } {
+    puts stderr [sprint_varx expect_out "<not set>"]
+  }
   # If caller has exit_proc defined, call it.  Otherwise, just call exit.
   if { [info procs "exit_proc"] != "" } {
     exit_proc 1
@@ -43,16 +48,142 @@ proc handle_eof { description } {
   # description                     A description of what was being expected
   #                                 (e.g. "an SOL login prompt").
 
-  # Using uplevel to be able to access expect_out(buffer).
+  global spawn_id
+
   puts stderr ""
   print_error "Reached end of file before getting $description.\n"
-  puts stderr "The data returned by the spawned process is:\n"
-  # Using uplevel to be able to access expect_out(buffer).
-  uplevel { puts stderr "$expect_out(buffer)" }
+  # Using uplevel to be able to access expect_out.
+  if { [ catch {uplevel { puts stderr [sprint_var expect_out]}} result ] } {
+    puts stderr [sprint_varx expect_out "<not set>"]
+  }
   # If caller has exit_proc defined, call it.  Otherwise, just call exit.
   if { [info procs "exit_proc"] != "" } {
     exit_proc 1
   }
   exit 1
+
+}
+
+
+proc expect_wrap {pattern_list message {timeout 15}} {
+
+  # Run the expect command for the caller and return the list index of the
+  # matching pattern.
+
+  # This function offers the following benefits over calling the expect
+  # command directly:
+  # - It makes program debug easier.  When the program is run with --debug=1,
+  # this function prints useful debug output.
+  # - It will do standardized timeout and eof handling.
+
+  # Description of argument(s):
+  # pattern_list                    A list of patterns to be matched.  If one
+  #                                 of the patterns matches, the list index of
+  #                                 the matching item will be returned.  By
+  #                                 default, each pattern is presumed to be a
+  #                                 regex.  If the caller wishes to, they may
+  #                                 precede each pattern with either of the
+  #                                 following: "-re ", "-gl " or "-ex " in
+  #                                 order to explicitly choose the kind of
+  #                                 match to be done..
+  # message                         A message explaining what is being
+  #                                 expected (e.g. "an SOL login prompt").
+  #                                 This will be included in output messages.
+  # timeout                         The expect timeout value.
+
+  # Example usage:
+  #   set result [expect_wrap\
+  #     [list $bad_user_pw_regex "sh: xauth: command not found"]\
+  #     "an SOL prompt" 10]
+  #
+  #   switch $result {
+  #     0 {
+  #       puts stderr "" ; print_error "Invalid username or password.\n"
+  #       exit_proc 1
+  #     }
+  #     1 {
+  #       dict set state ssh_logged_in 1
+  #     }
+  #   }
+
+  global spawn_id
+  global expect_out
+
+  # Recognized flags.
+  set flags [list "-re" "-ex" "-gl"]
+
+  # This helps debug efforts by removing leftover, stale entries.
+  array unset expect_out \[1-9\],string
+
+  # Prepare the expect statement.
+  append cmd_buf "global spawn_id\n"
+  append cmd_buf "global expect_out\n"
+  append cmd_buf "expect {\n"
+  set ix 0
+  foreach pattern $pattern_list {
+    # Check to see whether the caller has specified a flag (e.g. "-re",
+    # "-ex", etc.) at the beginning of the pattern.
+    set tokens [split $pattern " "]
+    if { [lsearch $flags [lindex $tokens 0]] != -1 } {
+      # Caller specified a flag.
+      set flag [lindex $tokens 0]
+      # Strip the flag from the pattern.
+      set pattern [string range $pattern 4 end]
+    } else {
+      set flag "-re"
+    }
+    append cmd_buf "  ${flag} {$pattern} {set expect_result $ix}\n"
+    incr ix
+  }
+  append cmd_buf "  timeout {handle_timeout \$message}\n"
+  append cmd_buf "  eof {handle_eof \$message}\n"
+  append cmd_buf "}\n"
+
+  dprintn ; dprint_timen "Expecting $message."
+  dprint_issuing "\n${cmd_buf}"
+  eval ${cmd_buf}
+
+  dprintn ; dprint_vars expect_out expect_result
+
+  return $expect_result
+
+}
+
+
+proc send_wrap {buffer {add_lf 1}} {
+
+  # Send the buffer to the spawned process.
+
+  # This function offers the following benefits over calling the send command
+  # directly:
+  # - It makes program debug easier.  When the program is run with --debug=1,
+  # this function prints useful debug output.
+
+  # Description of argument(s):
+  # buffer                          The string to be sent to the spawned
+  #                                 process.
+  # add_lf                          Send a line feed after sending the buffer.
+
+  # Example usage.
+  # Close the ssh session.
+  #   send_wrap "~."
+  #
+  #   set expect_result [expect_wrap\
+  #     [list "Connection to $host closed"]\
+  #     "a connection closed message" 5]
+
+  global spawn_id
+  global expect_out
+
+  set cmd_buf "send -- {${buffer}}"
+  dprintn ; dprint_issuing
+  eval ${cmd_buf}
+
+  if { $add_lf } {
+    send -- "\n"
+    set cmd_buf "send -- \"\\n\""
+    dprintn ; dprint_issuing
+    eval ${cmd_buf}
+  }
 
 }
