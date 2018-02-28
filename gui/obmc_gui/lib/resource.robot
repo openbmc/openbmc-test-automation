@@ -201,6 +201,7 @@ LogOut OpenBMC GUI
 
 Test Teardown Execution
     [Documentation]  Do final closure activities of test case execution.
+    Rprint Timen  ${TEST NAME} ==> [${TEST STATUS}ED]
     Rprint Pgm Footer
     Print Dashes  0  100  1  =
     LogOut OpenBMC GUI

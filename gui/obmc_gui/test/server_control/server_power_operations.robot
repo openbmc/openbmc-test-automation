@@ -108,6 +108,7 @@ Verify Immediate Shutdown Button Should Present At Power Running
 Verify Warm Reboot Should Not Happen By Clicking No Button
     [Documentation]  Verify functionality of warm reboot "No" button clicking.
     [Tags]  Verify_Warm_Reboot_Should_Not_Happen_By_Clicking_No_Button
+    ...  OBMC_PowerRunning_State
     [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
 
     Select Server Power Operations Sub Menu
@@ -120,6 +121,7 @@ Verify Warm Reboot Should Not Happen By Clicking No Button
 Verify Cold Reboot Should Not Happen By Clicking No Button
     [Documentation]  Verify functionality of cold reboot "No" button clicking.
     [Tags]  Verify_Cold_Reboot_Should_Not_Happen_By_Clicking_No_Button
+    ...  OBMC_PowerRunning_State
     [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
 
     Select Server Power Operations Sub Menu
@@ -132,6 +134,7 @@ Verify Cold Reboot Should Not Happen By Clicking No Button
 Verify Orderly Shutdown Should Not Happen By Clicking No Button
     [Documentation]  Verify functionality of orderly shutdown "No" button clicking.
     [Tags]  Verify_Orderly_Shutdown_Should_Not_Happen_By_Clicking_No_Button
+    ...  OBMC_PowerRunning_State
     [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
 
     Select Server Power Operations Sub Menu
@@ -144,6 +147,7 @@ Verify Orderly Shutdown Should Not Happen By Clicking No Button
 Verify Immediate Shutdown Should Not Happen By Clicking No Button
     [Documentation]  Verify functionality of immediate shutdown "No" button clicking.
     [Tags]  Verify_Immediate_Shutdown_Should_Not_Happen_By_Clicking_No_Button
+    ...  OBMC_PowerRunning_State
     [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
 
     Select Server Power Operations Sub Menu
@@ -156,6 +160,7 @@ Verify Immediate Shutdown Should Not Happen By Clicking No Button
 Verify Warm Reboot Should Happen By Clicking Yes Button
     [Documentation]  Verify functionality of warm reboot "Yes" button clicking.
     [Tags]  Verify_Warm_Reboot_Should_Happen_By_Clicking_Yes_Button
+    ...  OBMC_PowerRunning_State
     [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
 
     Select Server Power Operations Sub Menu
@@ -164,6 +169,7 @@ Verify Warm Reboot Should Happen By Clicking Yes Button
 Verify Cold Reboot Should Happen By Clicking Yes Button
     [Documentation]  Verify functionality of cold reboot "Yes" button clicking.
     [Tags]  Verify_Cold_Reboot_Should_Happen_By_Clicking_Yes_Button
+    ...  OBMC_PowerRunning_State
     [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
 
     Select Server Power Operations Sub Menu
