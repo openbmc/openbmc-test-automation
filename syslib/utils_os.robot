@@ -228,33 +228,33 @@ Collect NVIDIA Log File
     # suffix     String name to append.
 
     # Collects the output of ndivia-smi cmd output.
-    # +-----------------------------------------------------------------------------+
-    # | NVIDIA-SMI 361.89                 Driver Version: 361.89                    |
-    # |-------------------------------+----------------------+----------------------+
-    # | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-    # | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-    # |===============================+======================+======================|
-    # |   0  Tesla P100-SXM2...  On   | 0002:01:00.0     Off |                    0 |
-    # | N/A   25C    P0    35W / 300W |    931MiB / 16280MiB |      0%      Default |
-    # +-------------------------------+----------------------+----------------------+
-    # |   1  Tesla P100-SXM2...  On   | 0003:01:00.0     Off |                    0 |
-    # | N/A   26C    P0    40W / 300W |   1477MiB / 16280MiB |      0%      Default |
-    # +-------------------------------+----------------------+----------------------+
-    # |   2  Tesla P100-SXM2...  On   | 0006:01:00.0     Off |                    0 |
-    # | N/A   25C    P0    35W / 300W |    931MiB / 16280MiB |      0%      Default |
-    # +-------------------------------+----------------------+----------------------+
-    # |   3  Tesla P100-SXM2...  On   | 0007:01:00.0     Off |                    0 |
-    # | N/A   44C    P0   290W / 300W |    965MiB / 16280MiB |     99%      Default |
-    # +-------------------------------+----------------------+----------------------+
-    # +-----------------------------------------------------------------------------+
-    # | Processes:                                                       GPU Memory |
-    # |  GPU       PID  Type  Process name                               Usage      |
-    # |=============================================================================|
-    # |    0     28459    C   hxenvidia                                      929MiB |
-    # |    1     28460    C   hxenvidia                                     1475MiB |
-    # |    2     28461    C   hxenvidia                                      929MiB |
-    # |    3     28462    C   hxenvidia                                      963MiB |
-    # +-----------------------------------------------------------------------------+
+    # +--------------------------------------------------------------------+
+    # | NVIDIA-SMI 361.89                 Driver Version: 361.89           |
+    # |-------------------------------+----------------------+-------------+
+    # | GPU  Name        Persistence-M| Bus-Id        Disp.A | GPU     ECC |
+    # | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | Utiliz  err |
+    # |===============================+======================+=============|
+    # |   0  Tesla P100-SXM2...  On   | 0002:01:00.0     Off |           0 |
+    # | N/A   25C    P0    35W / 300W |    931MiB / 16280MiB | 0%  Default |
+    # +-------------------------------+----------------------+-------------+
+    # |   1  Tesla P100-SXM2...  On   | 0003:01:00.0     Off |           0 |
+    # | N/A   26C    P0    40W / 300W |   1477MiB / 16280MiB | 0%  Default |
+    # +-------------------------------+----------------------+-------------+
+    # |   2  Tesla P100-SXM2...  On   | 0006:01:00.0     Off |           0 |
+    # | N/A   25C    P0    35W / 300W |    931MiB / 16280MiB | 0%  Default |
+    # +-------------------------------+----------------------+-------------+
+    # |   3  Tesla P100-SXM2...  On   | 0007:01:00.0     Off |           0 |
+    # | N/A   44C    P0   290W / 300W |    965MiB / 16280MiB | 0%  Default |
+    # +-------------------------------+----------------------+-------------+
+    # +--------------------------------------------------------------------+
+    # | Processes:                                              GPU Memory |
+    # |  GPU       PID  Type  Process name                      Usage      |
+    # |====================================================================|
+    # |    0     28459    C   hxenvidia                             929MiB |
+    # |    1     28460    C   hxenvidia                            1475MiB |
+    # |    2     28461    C   hxenvidia                             929MiB |
+    # |    3     28462    C   hxenvidia                             963MiB |
+    # +--------------------------------------------------------------------+
 
     # Create logs directory and get current datetime.
     Create Directory  ${htx_log_dir_path}
@@ -428,7 +428,14 @@ Shutdown HTX Exerciser
     ${shutdown}=  Execute Command On OS
     ...  htxcmdline -shutdown -mdt ${HTX_MDT_PROFILE}
     Rprintn  ${shutdown}
-    Should Contain  ${shutdown}  shutdown successfully
+
+    ${match_count_no_mdt}=  Count Values In List  ${shutdown}
+    ...  No MDT is currently running
+    ${match_count_success}=  Count Values In List  ${shutdown}
+    ...  shutdown successfully
+    Run Keyword If  ${match_count_no_mdt} == 0 and ${match_count_success} == 0
+    ...  Fail  msg=Shutdown command returned unexpected message.
+
 
 
 Create JSON Inventory File
