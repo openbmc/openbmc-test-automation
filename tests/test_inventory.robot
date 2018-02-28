@@ -8,6 +8,7 @@ Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/list_utils.robot
 Resource          ../lib/boot_utils.robot
 Library           ../lib/utilities.py
+Library            Collections
 
 Variables         ../data/variables.py
 Variables         ../data/inventory.py
@@ -554,6 +555,36 @@ Qualified FRU List
     \  Run Keyword If  '${status}' == '${True}'
     ...  Append To List  ${fru_list}  ${fru_uri}
 
+    ${fru_valid_list}=  Filter GPU FRU Entries  ${fru_list}
+
+    [Return]  ${fru_valid_list}
+
+
+Filter GPU FRU Entries
+    [Documentation]  Remove GPU entries from FRU list and return the result.
+    [Arguments]  ${fru_list}
+
+    # Description of arguments:
+    # fru_list  List of FRU system inventory URIs.
+    # Example FRUs list:
+    # [u'/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0',
+    #  u'/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu1',
+    #  u'/xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0',
+    #  u'/xyz/openbmc_project/inventory/system/chassis/motherboard/dimm1',
+    #  u'/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card0',
+    #  u'/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card1',
+    #  u'/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card3',
+    #  u'/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card4']
+
+    # Example of the matched GPU FRUs entries:
+    # [u'/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card0',
+    #  u'/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card1',
+    #  u'/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card3',
+    #  u'/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card4']
+
+    ${gpu_matches}=  Get Matches  ${fru_list}  *gv*
+
+    Remove Values From List  ${fru_list}  @{gpu_matches}
     [Return]  ${fru_list}
 
 
