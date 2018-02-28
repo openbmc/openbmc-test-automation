@@ -38,3 +38,4 @@
 -e Set_Asset_Tag_With_Invalid_String_Length
 -e Set_Asset_Tag_With_Valid_String_Length_Via_REST
 -e OCC_Active_Enable_And_Disable
+-e SDR_Test
