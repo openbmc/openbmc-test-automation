@@ -4,6 +4,7 @@ r"""
 Provide useful ipmi functions.
 """
 
+import re
 import gen_print as gp
 import gen_misc as gm
 import gen_robot_keyword as grk
@@ -150,7 +151,7 @@ def get_lan_print_dict():
     return lan_print_dict
 
 
-def get_ipmi_power_reading():
+def get_ipmi_power_reading(strip_watts=1):
 
     r"""
     Get IPMI power reading data and return it as a dictionary.
@@ -176,11 +177,18 @@ def get_ipmi_power_reading():
       [ipmi_timestamp]:                           Thu Jan  1 00:00:00 1970
       [sampling_period]:                          00000000 Seconds.
       [power_reading_state_is]:                   deactivated
+
+    Description of argument(s):
+    strip_watts  Strip all dictionary values of the trailing " Watts"
+                 substring.
     """
 
     status, ret_values = \
         grk.run_key_u("Run IPMI Standard Command  dcmi power reading")
     result = vf.key_value_outbuf_to_dict(ret_values)
+
+    if strip_watts:
+        result.update((k, re.sub(' Watts$', '', v)) for k, v in result.items())
 
     return result
 
