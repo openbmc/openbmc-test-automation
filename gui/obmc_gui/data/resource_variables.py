@@ -104,3 +104,8 @@ class resource_variables():
     xpath_refresh_circle = "/html/body/main/loader/div[1]/svg/circle"
     xpath_drop_down_timezone_utc =  \
         "//*[@id='event-log']/section[1]/div/div/ul/li[2]/button"
+    xpath_event_filter_all = "//*[@id='event-filter']/div[3]/div/button"
+    xpath_event_filter_resolved =  \
+        "//*[@id='event-filter']/div[3]/div/ul/li[2]/button"
+    xpath_event_filter_unresolved = \
+        "//*[@id='event-filter']/div[3]/div/ul/li[3]/button"
