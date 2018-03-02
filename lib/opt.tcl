@@ -272,6 +272,16 @@ proc gen_get_options { argv } {
     if { $_opt_debug_ } { printn }
   }
 
+  # Automatically register any parameter whose name ends in "_password" to
+  # prevent printing of password.
+  regsub -all ":" "${longoptions} ${pos_parms}" {} parm_names
+  foreach parm_name $parm_names {
+    if { [string match *password $parm_name] } {
+      global $parm_name
+      register_passwords [set $parm_name]
+    }
+  }
+
   if { $h || $help } {
     if { [info proc help] != "" } {
       help
