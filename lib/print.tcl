@@ -119,6 +119,7 @@ proc replace_passwords {buffer} {
 
   global env
   if { [get_var ::env(GEN_PRINT_DEBUG) 0] } { return $buffer }
+  if { [get_var ::env(DEBUG_SHOW_PASSWORDS) 0] } { return $buffer }
 
   global password_regex
 
