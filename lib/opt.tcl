@@ -540,3 +540,16 @@ proc gen_post_validation {} {
   trap { exit_proc } [list SIGTERM SIGINT]
 
 }
+
+
+proc gen_exit_proc { {ret_code 0} } {
+
+  # Call exit_proc if it is defined.  Otherwise, just call exit.
+
+  if { [info procs "exit_proc"] != "" } {
+    exit_proc $ret_code
+  } else {
+    exit $ret_code
+  }
+
+}
