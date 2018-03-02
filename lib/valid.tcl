@@ -163,3 +163,146 @@ proc valid_file_path { var_name } {
   }
 
 }
+
+
+proc get_password { {password_var_name password} } {
+
+  # Prompt user for password and return result.
+
+  # On error, print to stderr and terminate the program with non-zero return
+  # code.
+
+  set prompt\
+    [string trimright [sprint_varx "Please enter $password_var_name" ""] "\n"]
+  puts -nonewline $prompt
+  flush stdout
+  stty -echo
+  gets stdin password1
+  stty echo
+  puts ""
+
+  set prompt [string\
+    trimright [sprint_varx "Please re-enter $password_var_name" ""] "\n"]
+  puts -nonewline $prompt
+  flush stdout
+  stty -echo
+  gets stdin password2
+  stty echo
+  puts ""
+
+  if { $password1 != $password2 } {
+    print_error_report "Passwords do not match.\n"
+    gen_exit_proc 1
+  }
+
+  if { $password1 == "" } {
+    print_error_report "Need a non-blank value for $password_var_name.\n"
+    gen_exit_proc 1
+  }
+
+  return $password1
+
+}
+
+
+proc valid_password { var_name { prompt_user 1 } } {
+
+  # If the value of the variable named in var_name is not a valid password,
+  # print an error message and exit the program with a non-zero return code.
+
+  # Description of arguments:
+  # var_name                        The name of the variable whose value is to
+  #                                 be validated.
+  # prompt_user                     If the variable has a blank value, prompt
+  #                                 the user for a value.
+
+  # Call get_stack_var_level to relieve the caller of the need for declaring
+  # the variable as global.
+  set stack_level [get_stack_var_level $var_name]
+  # Access the variable value.
+  upvar $stack_level $var_name var_value
+
+  if { $var_value == "" && $prompt_user } {
+    global $var_name
+    set $var_name [get_password $var_name]
+  }
+
+  if { $var_value == "" } {
+    print_error_report "Need a non-blank value for $var_name.\n"
+    gen_exit_proc 1
+  }
+
+}
+
+
+proc process_pw_file_path {pw_file_path_var_name} {
+
+  # Process a password file path parameter by setting or validating the
+  # corresponding password variable.
+
+  # For example, let's say you have an os_pw_file_path parm defined.  This
+  # procedure will set the global os_password variable.
+
+  # If there is no os_password program parm defined, then the pw_file_path
+  # must exist and will be validated by this procedure.  If there is an
+  # os_password program parm defined, then either the os_pw_file_path must be
+  # valid or the os_password must be valid.  Again, this procedure will verify
+  # all of this.
+
+  # When a valid pw_file_path exists, this program will read the password
+  # from it and set the global password variable with the value.
+  # Finally, this procedure will call valid_password which will prompt user
+  # if password has not been obtained by this point.
+
+  # Description of argument(s):
+  # pw_file_path_var_name           The name of a global variable that
+  #                                 contains a file path which in turn
+  #                                 contains a password value.  The variable
+  #                                 name must end in "pw_file_path" (e.g.
+  #                                 "os_pw_file_path").
+
+  # Verify that $pw_file_path_var_name ends with "pw_file_path".
+  if { ! [regexp -expanded "pw_file_path$" $pw_file_path_var_name] } {
+    append message "Programming error - Proc [get_stack_proc_name] its"
+    append message " pw_file_path_var_name parameter to contain a value that"
+    append message "ends in \"pw_file_path\" instead of the current value:\n"
+    append message [sprint_var pw_file_path_var_name]
+    print_error $message
+    gen_exit_proc 1
+  }
+
+  global $pw_file_path_var_name
+  expand_shell_string $pw_file_path_var_name
+
+  # Get the prefix portion of pw_file_path_var_name which is obtained by
+  # stripping "pw_file_path" from the end.
+  regsub -expanded {pw_file_path$} $pw_file_path_var_name {} var_prefix
+
+  # Create password_var_name.
+  set password_var_name ${var_prefix}password
+  global $password_var_name
+
+  global longoptions pos_parms
+  regsub -all ":" "${longoptions} ${pos_parms}" {} parm_names
+  if { [lsearch -exact parm_names $password_var_name] == -1 } {
+    # If no corresponding password program parm has been defined, then the
+    # pw_file_path must be valid.
+    valid_file_path $pw_file_path_var_name
+  }
+
+  if { [file isfile [set $pw_file_path_var_name]] } {
+    # Read the entire password file into a list, filtering comments out.
+    set file_descriptor [open [set $pw_file_path_var_name] r]
+    set file_data [list_filter_comments [split [read $file_descriptor] "\n"]]
+    close $file_descriptor
+
+    # Assign the password value to the global password variable.
+    set $password_var_name [lindex $file_data 0]
+    # Register the password to prevent printing it.
+    register_passwords [set $password_var_name]
+  }
+
+  # Validate the password, which includes prompting the user if need be.
+  valid_password $password_var_name
+
+}
