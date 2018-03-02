@@ -77,3 +77,39 @@ Verify Filter By Event Status Element Appears
     Page Should Contain Element  ${xpath_event_filter_all}  limit=1
     Page Should Contain Element  ${xpath_event_filter_resolved}  limit=1
     Page Should Contain Element  ${xpath_event_filter_unresolved}  limit=1
+
+
+Verify Event Action Bar Element Appears
+    [Documentation]  Check that "event action bar" element appears.
+    [Tags]  Verify_Event_Action_Bar_Element_Appears
+
+    # Ensure that page is not in refreshing state.
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_event_action_bars}  limit=1
+    Page Should Contain Element  class:control__indicator
+
+
+Verify Click Events Check Box
+    [Documentation]  Check that "event check box" element appears and on click
+    ...  should be able to see elements like "Delete" button and "Export"
+    ...  element.
+    [Tags]  Verify_Click_Events_Check_Box
+
+    # Ensure that page is not in refreshing state.
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Click Element  class:control__indicator
+    Page Should Contain Button  ${xpath_event_action_delete}  limit=1
+    Page Should Contain Element  ${xpath_event_action_export}  limit=1
+
+
+Verify Number of Events Appears
+    [Documentation]  Check that "number of events" element appears and value is
+    ...  visible.
+    [Tags]  Verify_Number_of_Events_Appears
+
+    # Ensure that page is not in refreshing state.
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_number_of_events}
+    Log To Console  Number of Events:
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Log To Console  ${number_of_events}
