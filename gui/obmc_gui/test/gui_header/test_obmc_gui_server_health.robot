@@ -44,3 +44,71 @@ Verify Drop Down Button User Timezone Appears
     Click Element  class:dropdown__button
     Page Should Contain Button  ${xpath_drop_down_timezone_utc}
 
+
+Verify Content Search Element Appears
+    [Documentation]  Check that event search element is available with filter
+    ...  button appears.
+    [Tags]  Verify_Content_Search_Element_Appears
+
+    Page Should Contain Element  content__search-input  limit=1
+    # Ensure that page is not in refreshing state.
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Button  content__search-submit
+
+
+Verify Filter By Date Element Appears
+    [Documentation]  Check that filter by date elements are available and
+    ...  visible.
+    [Tags]  Verify_Filter_By_Date_Element_Appears
+
+    Wait Until Element Is Visible  event-filter-start-date
+    Page Should Contain Element  event-filter-start-date  limit=1
+    Page Should Contain Element  event-filter-end-date  limit=1
+
+Verify Filter By Event Status Element Appears
+    [Documentation]  Check that filter by event status element appears.
+    [Tags]  Verify_Filter_By_Event_Status_Element_Appears
+
+    # Ensure that page is not in refreshing state.
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Wait Until Element is Visible  class:dropdown__wrapper
+    Click Element  class:dropdown__wrapper
+    Page Should Contain Element  ${xpath_event_filter_all}  limit=1
+    Page Should Contain Element  ${xpath_event_filter_resolved}  limit=1
+    Page Should Contain Element  ${xpath_event_filter_unresolved}  limit=1
+
+
+Verify Event Action Bar Element Appears
+    [Documentation]  Check that "event action bar" element appears.
+    [Tags]  Verify_Event_Action_Bar_Element_Appears
+
+    # Ensure that page is not in refreshing state.
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_event_action_bars}  limit=1
+    Page Should Contain Element  class:control__indicator
+
+
+Verify Click Events Check Box
+    [Documentation]  Check that "event check box" element appears and on click
+    ...  should be able to see elements like "Delete" button and "Export"
+    ...  element.
+    [Tags]  Verify_Click_Events_Check_Box
+
+    # Ensure that page is not in refreshing state.
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Click Element  class:control__indicator
+    Page Should Contain Button  ${xpath_event_action_delete}  limit=1
+    Page Should Contain Element  ${xpath_event_action_export}  limit=1
+
+
+Verify Number of Events Appears
+    [Documentation]  Check that "number of events" element appears and value is
+    ...  visible.
+    [Tags]  Verify_Number_of_Events_Appears
+
+    # Ensure that page is not in refreshing state.
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_number_of_events}
+    Log To Console  Number of Events:
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Log To Console  ${number_of_events}
