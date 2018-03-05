@@ -1,13 +1,11 @@
+#Verify SSH and IPMI interfaces
+-i Test_SSH_and_IPMI_Connections
 #Clear error logs for upcoming tests
 -i Clear_All_Error_Logs
-#Verify SSH and IPMI interfaces
-# This fails due to "Get SOL Console Pid" check
-#-i Test_SSH_and_IPMI_Connections
 #REST SSL connection test.
 -i Test_SSL_Connection
 #Check for apps failures.
-# This fails due to "Get SOL Console Pid" check
-#-i Check_For_Application_Failures
+-i Check_For_Application_Failures
 #Additional REST API tests
 -i REST_Login_Session_To_BMC
 -i Verify_REST_Get_Message_JSON_Compliant

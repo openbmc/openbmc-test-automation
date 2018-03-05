@@ -44,6 +44,10 @@ Test SSH And IPMI Connections
     [Documentation]  Try SSH and IPMI commands to verify each connection.
     [Tags]  Test_SSH_And_IPMI_Connections
 
+    Check If BMC Is Up  3 min  20 sec
+    Wait Until Keyword Succeeds
+    ...  3 min  30 sec  Wait for BMC state  Ready
+
     BMC Execute Command  true
     Run IPMI Standard Command  chassis status
 
