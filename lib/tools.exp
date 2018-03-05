@@ -65,7 +65,7 @@ proc handle_eof { description } {
 }
 
 
-proc expect_wrap {pattern_list message {timeout 15}} {
+proc expect_wrap {pattern_list message {timeout 15} {fail_on_timeout 1}} {
 
   # Run the expect command for the caller and return the list index of the
   # matching pattern.
@@ -90,6 +90,9 @@ proc expect_wrap {pattern_list message {timeout 15}} {
   #                                 expected (e.g. "an SOL login prompt").
   #                                 This will be included in output messages.
   # timeout                         The expect timeout value.
+  # fail_on_timeout                 A parameter for timeout. Set to 0 if you
+  #                                 don't want the program to fail on timeout,
+  #                                 returns 1000 indicating that timeout occured.
 
   # Example usage:
   #   set result [expect_wrap\
@@ -135,8 +138,12 @@ proc expect_wrap {pattern_list message {timeout 15}} {
     append cmd_buf "  ${flag} {$pattern} {set expect_result $ix}\n"
     incr ix
   }
-  append cmd_buf "  timeout {handle_timeout \$message}\n"
-  append cmd_buf "  eof {handle_eof \$message}\n"
+  if { $fail_on_timeout } {
+    append cmd_buf "  timeout {handle_timeout \$message}\n"
+    append cmd_buf "  eof {handle_eof \$message}\n"
+  } else {
+    set expect_result 1000
+  }
   append cmd_buf "}\n"
 
   dprint_timen "Expecting $message."
