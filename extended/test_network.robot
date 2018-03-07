@@ -389,6 +389,43 @@ Verify Hostname
     ${hostname}=  Read Attribute  ${NETWORK_MANAGER}/config  HostName
     Validate Hostname On BMC  ${hostname}
 
+Run IPMI With Multiple IPs Configured
+    [Documentation]  Configure multiple IPs in openbmc system, issue outband
+    ...  IPMI commands and verify that they are running fine. We configure
+    ...  two IPs in the openbmc system for doing the test.
+    [Tags]  Run_IPMI_With_Multiple_IPs_Configured
+
+    # Configure two IPs below
+    # First IP configuration
+    Configure Network Settings  ${valid_ip}  ${valid_prefix_len}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP object is created for the given IP via REST.
+    @{ip_uri_list}=  Get IPv4 URI List
+    @{ip_list}=  Get List Of IP Address Via REST  @{ip_uri_list}
+
+    List Should Contain Value  ${ip_list}  ${ip_addr}
+    ...  msg=IP address is not configured.
+
+    # Second IP configuration
+    Configure Network Settings  ${valid_ip}  ${valid_prefix_len}
+    ...  ${valid_gateway}  valid
+
+    # Verify whether new IP object is created for the given IP via REST.
+    @{ip_list}=  Get List Of IP Address Via REST  @{ip_uri_list}
+
+    List Should Contain Value  ${ip_list}  ${ip_addr}
+    ...  msg=IP address is not configured.
+ 
+    # Now test IMPI commands
+    # test 1
+    ${cmd_retn}=  Run IPMI Standard Command  ipmitool -I lanplus -H 9.41.166.231 -P 0penBmc chassis bootparam get 5
+
+    # Now delete the two IPs
+    # If IP address is configured, delete it.
+    Delete IP And Object  ${ip_addr}  @{ip_uri_list}
+    Delete IP And Object  ${ip_addr}  @{ip_uri_list}
+
 *** Keywords ***
 
 Test Setup Execution
