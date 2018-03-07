@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation  Network interface and functionalities test module on BMC.
 
+Resource  ../lib/ipmi_client.robot
 Resource  ../lib/rest_client.robot
 Resource  ../lib/utils.robot
 Resource  ../lib/bmc_network_utils.robot
@@ -21,6 +22,8 @@ ${alpha_ip}          xx.xx.xx.xx
 # our network, so this is chosen to avoid IP conflict.
 
 ${valid_ip}          10.6.6.6
+${valid_ip2}         10.6.6.7
+@{valid_ips}         ${valid_ip}  ${valid_ip2}
 ${valid_gateway}     10.6.6.1
 ${valid_prefix_len}  ${24}
 ${broadcast_ip}      10.6.6.255
@@ -389,7 +392,30 @@ Verify Hostname
     ${hostname}=  Read Attribute  ${NETWORK_MANAGER}/config  HostName
     Validate Hostname On BMC  ${hostname}
 
+Run IPMI With Multiple IPs Configured
+    [Documentation]  Test out-of-band IPMI command with multiple IPs configured.
+    [Tags]  Run_IPMI_With_Multiple_IPs_Configured
+    [Teardown]  Test TeardownIPs
+
+    # Configure two IPs and verify.
+
+    :FOR  ${valid_ipn}  IN  @{valid_ips}
+    \  Configure Network Settings  ${valid_ipn}  ${valid_prefix_len}
+    \  ...  ${valid_gateway}  valid
+    \  @{ip_uri_list}=  Get IPv4 URI List
+    \  @{ip_list}=  Get List Of IP Address Via REST  @{ip_uri_list}
+    \  List Should Contain Value  ${ip_list}  ${valid_ipn}
+    \  ...  msg=IP address is not configured.
+
+    Run External IPMI Standard Command  chassis bootparam get 5
+
 *** Keywords ***
+
+Test TeardownIPs
+    [Documentation]  Delete the IPs
+    :FOR  ${valid_ipn}  IN  @{valid_ips}
+    \  @{ip_uri_list}=  Get IPv4 URI List
+    \  Delete IP And Object  ${valid_ipn}  @{ip_uri_list}
 
 Test Setup Execution
     [Documentation]  Network setup.
