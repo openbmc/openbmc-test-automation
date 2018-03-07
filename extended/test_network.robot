@@ -389,6 +389,10 @@ Verify Hostname
     ${hostname}=  Read Attribute  ${NETWORK_MANAGER}/config  HostName
     Validate Hostname On BMC  ${hostname}
 
+Run IPMI With Multiple IPs Configured
+    [Documentation]  Configure multiple IPs in openbmc system, issue outband
+    ...  IPMI commands and verify that they are running fine.
+
 *** Keywords ***
 
 Test Setup Execution
