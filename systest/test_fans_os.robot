@@ -27,7 +27,9 @@ Test Teardown    Test Teardown Execution
 # notice a fan failure.   Allow system_response_time before checking
 # if there was a measurable response to the daemon, such as an increase
 # in RPMs of the other fans.
-${system_response_time}  30s
+# NOTE: This time are relative to the BMC performance and can change
+# at anytime.
+${system_response_time}  5s
 
 # The @{fan_names} list holds the names of the fans in the system.
 @{fan_names}
