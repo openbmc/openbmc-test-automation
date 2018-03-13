@@ -64,6 +64,27 @@ proc handle_eof { description } {
 
 }
 
+proc send_and_expect_wrap {expect_list} {
+  # Sends a command to the spawned process, then runs the expect command.
+  # Works for an embedded list with commands to be run consecutively.
+
+  # Description of arguments(s):
+  # expect_list                     An embedded list containing:
+  #                                 a string to be sent to the spawned process,
+  #                                 a pattern to be matched, a massage explaining
+  #                                 what is being expected, the expect timeout
+  #                                 value.
+
+  # Example usage:
+  # set cmd1 [list "hostname\n" "bmchost" "installer prompt" 10]
+  # set cmd2 [list "2\n" "option 2" "mode screen" 10]
+  # set expect_list [list $cmd1 $cmd2]
+
+  foreach ls $expect_list {
+    send_wrap [lindex $ls 0]
+    set expect_result [expect_wrap [lindex $ls 1] [lindex $ls 2] [lindex $ls 3]]
+  }
+}
 
 proc expect_wrap {pattern_list message {timeout 15} {fail_on_timeout 1}} {
 
