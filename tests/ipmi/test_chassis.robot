@@ -76,6 +76,32 @@ Verify Host PowerOff Via IPMI
 
     Initiate Host PowerOff Via External IPMI
 
+Verify Soft Shutdown via IPMI
+    [Documentation]   Verify Host OS shutdown softly using IPMI command.
+    [Tags]  Verify_Soft_Shutdown_via_IPMI
+
+    # Bring system to host OS and ensure system is booted to OS 
+
+    # Run IPMI command to do soft power off
+
+    Run External IPMI Standard Command  chassis power soft
+
+    # Now verify that system is shut down to off via IPMI/REST way
+
+Verify BMC Reset via IPMI
+    [Documentation]   Verify BMC resets successfully using IPMI command.
+    [Tags]  Verify_BMC_Reset_via_IPMI
+
+    # Reset the BMC device with the IPMI command
+    Run External IPMI Standard Command  chassis power reset
+
+Verify BMC Power Cycle via IPMI
+    [Documentation]  Verify IPMI power cycle command works fine.
+    [Tags]  Verify_BMC_Power_Cycle_via_IPMI
+
+Verify Diag Dump via IPMI
+    [Documentation]  Verify os dump collection happens via ipmi diag signal.
+    [Tags]  Verify_Diag_Dump_via_IPMI 
 
 *** Keywords ***
 
