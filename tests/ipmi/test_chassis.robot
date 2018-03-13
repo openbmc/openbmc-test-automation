@@ -5,6 +5,7 @@ Resource               ../../lib/rest_client.robot
 Resource               ../../lib/ipmi_client.robot
 Resource               ../../lib/openbmc_ffdc.robot
 Resource               ../../lib/utils.robot
+Resource               ../../lib/boot_utils.robot
 Resource               ../../lib/resource.txt
 Resource               ../../lib/state_manager.robot
 
@@ -76,6 +77,35 @@ Verify Host PowerOff Via IPMI
 
     Initiate Host PowerOff Via External IPMI
 
+Verify Soft Shutdown via IPMI
+    [Documentation]  Verify Host OS shutdown softly using IPMI command.
+    [Tags]  Verify_Soft_Shutdown_via_IPMI
+
+    REST Power On  stack_mode=skip
+    Run External IPMI Standard Command  chassis power soft
+    Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
+
+Verify BMC Reset via IPMI
+    [Documentation]  Verify BMC resets successfully using IPMI command.
+    [Tags]  Verify_BMC_Reset_via_IPMI
+
+    # Reset the BMC device with the IPMI command.
+    Run External IPMI Standard Command  bmc reset warm
+    # Verify if BMC is initiated to reboot
+    ${session_active}=  Check If BMC Reboot Is Initiated
+    Run Keyword If  '${session_active}' == '${True}'
+    ...  Fail  msg=BMC Reset didn't occur.
+    Check If BMC is Up   5 min    10 sec
+    # After reset completes, check BMC is in ready state.
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+Verify BMC Power Cycle via IPMI
+    [Documentation]  Verify IPMI power cycle command works fine.
+    [Tags]  Verify_BMC_Power_Cycle_via_IPMI
+
+    REST Power On  stack_mode=skip
+    Run External IPMI Standard Command  chassis power cycle
+    Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
 
 *** Keywords ***
 
