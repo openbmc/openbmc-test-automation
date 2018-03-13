@@ -76,6 +76,38 @@ Verify Host PowerOff Via IPMI
 
     Initiate Host PowerOff Via External IPMI
 
+Verify Soft Shutdown via IPMI
+    [Documentation]   Verify Host OS shutdown softly using IPMI command.
+    [Tags]  Verify_Soft_Shutdown_via_IPMI
+
+    # First ensure ensure host state is 'on' else boot to 'on' state and then
+    # apply soft command accordingly.
+
+    ${current_state}=  Get Host State Via External IPMI
+    Run Keyword If  '${current_state}' == 'on'
+    ...  Run Keywords  Run External IPMI Standard Command  chassis power soft
+    ...  AND  Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
+
+Verify BMC Reset via IPMI
+    [Documentation]   Verify BMC resets successfully using IPMI command.
+    [Tags]  Verify_BMC_Reset_via_IPMI
+
+    # Reset the BMC device with the IPMI command
+    ${output}=  Run External IPMI Standard Command  bmc reset warm
+    # After reset completes, check BMC is in ready state
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+Verify BMC Power Cycle via IPMI
+    [Documentation]  Verify IPMI power cycle command works fine.
+    [Tags]  Verify_BMC_Power_Cycle_via_IPMI
+
+    # First ensure ensure host state is 'on' else boot to 'on' state and then
+    # apply soft command accordingly.
+
+    ${current_state}=  Get Host State Via External IPMI
+    Run Keyword If  '${current_state}' == 'on'
+    ...  Run Keywords  Run External IPMI Standard Command  chassis power cycle
+    ...  AND  Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
 
 *** Keywords ***
 
