@@ -136,6 +136,10 @@ Code Update Unrecoverable Error Inject
 Disable CPU States Through HOST
     [Documentation]  Disable CPU states through host.
 
-    ${cmd}=  Catenate  SEPARATOR=  for file_path in /sys/devices/system/cpu/
-    ...  cpu*/cpuidle/state*/disable; do echo 0 > $file_path; done
+    ${cmd}=  Catenate  ls -l /sys/devices/system/cpu/cpu0/cpuidle|grep state|wc -l 
     ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    ${no_of_states}=  Convert To Integer  ${output}
+    :FOR  ${i}  IN RANGE  ${no_of_states}
+    \  ${cmd}=  Catenate  SEPARATOR=  for file_path in /sys/devices/system/cpu/
+     ...  cpu*/cpuidle/state${i}/disable; do echo 1 > $file_path; done
+    \  ${output}  ${stderr}  ${rc}=  Run Keyword  OS Execute Command  ${cmd}
