@@ -76,6 +76,13 @@ Verify Host PowerOff Via IPMI
 
     Initiate Host PowerOff Via External IPMI
 
+Verify Soft Shutdown via IPMI
+    [Documentation]   Verify Host OS should softly via IPMI command.
+    [Tags]  Verify_Soft_Shutdown_via_IPMI
+
+Verify BMC Reset via IPMI
+    [Documentation]   Verify BMC resets via the IPMI command.
+    [Tags]  Verify_Soft_Shutdown_via_IPMI
 
 *** Keywords ***
 
