@@ -5,6 +5,7 @@ Resource               ../../lib/rest_client.robot
 Resource               ../../lib/ipmi_client.robot
 Resource               ../../lib/openbmc_ffdc.robot
 Resource               ../../lib/utils.robot
+Resource               ../../lib/boot_utils.robot
 Resource               ../../lib/resource.txt
 Resource               ../../lib/state_manager.robot
 
@@ -75,6 +76,14 @@ Verify Host PowerOff Via IPMI
     [Tags]  Verify_Host_PowerOff_Via_IPMI
 
     Initiate Host PowerOff Via External IPMI
+
+Verify Soft Shutdown via IPMI
+    [Documentation]  Verify Host OS shutdown softly using IPMI command.
+    [Tags]  Verify_Soft_Shutdown_via_IPMI
+
+    REST Power On  stack_mode=skip
+    Run External IPMI Standard Command  chassis power soft
+    Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
 
 
 *** Keywords ***
