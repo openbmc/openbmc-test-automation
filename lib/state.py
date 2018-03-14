@@ -131,14 +131,6 @@ default_os_req_states = ['os_ping',
 USE_BMC_EPOCH_TIME = int(os.environ.get('USE_BMC_EPOCH_TIME', 0))
 
 # Useful state constant definition(s).
-# A match state for checking that the system is at "standby".
-standby_match_state = DotDict([('rest', '^1$'),
-                               ('chassis', '^Off$'),
-                               ('bmc', '^Ready$'),
-                               ('boot_progress', ''),
-                               ('operating_system', ''),
-                               ('host', '')])
-
 # default_state is an initial value which may be of use to callers.
 default_state = DotDict([('rest', '1'),
                          ('chassis', 'On'),
@@ -149,6 +141,25 @@ default_state = DotDict([('rest', '1'),
                          ('os_ping', '1'),
                          ('os_login', '1'),
                          ('os_run_cmd', '1')])
+
+# A match state for checking that the system is at "standby".
+standby_match_state = DotDict([('rest', '^1$'),
+                               ('chassis', '^Off$'),
+                               ('bmc', '^Ready$'),
+                               ('boot_progress', '^$'),
+                               ('operating_system', '^$'),
+                               ('host', '^$')])
+
+# A match state for checking that the system is at "os running".
+os_running_match_state = DotDict([('chassis', '^On$'),
+                                  ('bmc', '^Ready$'),
+                                  ('boot_progress',
+                                   'FW Progress, Starting OS|OSStart'),
+                                  ('operating_system', 'BootComplete'),
+                                  ('host', '^Running$'),
+                                  ('os_ping', '^1$'),
+                                  ('os_login', '^1$'),
+                                  ('os_run_cmd', '^1$')])
 
 # A master dictionary to determine whether the os may be up.
 master_os_up_match = DotDict([('chassis', '^On$'),
@@ -166,37 +177,15 @@ invalid_state_match = DotDict([('rest', '^$'),
                                ('host', '^$')])
 
 
-def return_default_state():
-
-    r"""
-    Return default state dictionary.
-
-    default_state is an initial value which may be of use to callers.
-    """
-
-    return default_state
-
-
-valid_state_constants = ['default', 'standby_match_state']
-
-
 def return_state_constant(state_name='default'):
 
     r"""
-    Return default state dictionary.
-
-    default_state is an initial value which may be of use to callers.
+    Return the named state dictionary constant.
     """
 
-    error_message = gv.svalid_value(state_name, var_name='state_name',
-                                    valid_values=valid_state_constants)
-    if error_message != "":
-        BuiltIn().fail(gp.sprint_error(error_message))
-
-    if state_name == 'default':
-        return default_state
-    elif state_name == 'standby_match_state':
-        return standby_match_state
+    cmd_buf = "state = " + state_name
+    exec(cmd_buf)
+    return state
 
 
 def anchor_state(state):
@@ -259,6 +248,11 @@ def compare_states(state,
                     be matching.  If match_type is 'or', if any two of the
                     elements compared match, the two dictionaries are
                     considered to be matching.
+                    This value may also be any string accepted by
+                    return_state_constant (e.g. "standby_match_state").
+                    In such a case this function will call
+                    return_state_constant to convert it to a proper
+                    dictionary as described above.
     match_type      This may be 'and' or 'or'.
     """
 
@@ -266,6 +260,9 @@ def compare_states(state,
                                     valid_values=['and', 'or'])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
+
+    if type(match_state) in (str, unicode):
+        match_state = return_state_constant(match_state)
 
     default_match = (match_type == 'and')
     for key, match_state_value in match_state.items():
