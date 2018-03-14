@@ -4,10 +4,17 @@ Documentation  Test Open BMC GUI server health under GUI Header.
 
 Resource        ../../lib/resource.robot
 Resource        ../../../../lib/boot_utils.robot
+Resource        ../../../../lib/utils.robot
+Resource        ../../../../lib/openbmc_ffdc.robot
+Resource        ../../../../lib/state_manager.robot
+Resource        ../../../../lib/openbmc_ffdc_methods.robot
+Resource        ../../../../lib/dump_utils.robot
 
 Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Logout And Close Browser
-Test Setup      Click Element  ${xpath_select_server_health}
+Test Setup      Test Setup Execution
+Test Teardown   Test Teardown Execution
+
 
 *** Test Cases ***
 
@@ -112,3 +119,68 @@ Verify Number of Events Appears
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Log To Console  \n Number of Events:${number_of_events}
+
+
+Select All Error Logs And Mark As Resolved
+    [Documentation]  Select all error logs and mark them as resolved.
+    [Tags]  Select_All_Error_Logs_And_Mark_As_Resolved
+
+    Create Test Error Log
+    Create Test Error Log
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_number_of_events}
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Click Element  class:control__indicator
+    Run Keyword If  ${number_of_events} > 0
+    ...  Click Element  ${xpath_mark_as_resolved}
+    Element Should Be Disabled  ${xpath_mark_as_resolved}
+
+
+Select All Error Logs And Click Export
+    [Documentation]  Select all error logs and click export element.
+    [Tags]  Select_All_Error_Logs_And_Click_Export
+
+    Create Test Error Log
+    Create Test Error Log
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_number_of_events}
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Click Element  class:control__indicator
+    Page Should Contain Element  ${xpath_events_export}
+    Run Keyword If  ${number_of_events} > 0
+    ...  Click Element  ${xpath_events_export}
+
+
+Select All Error Logs And Delete
+    [Documentation]  Select all error logs and delete them.
+    [Tags]  Select_All_Error_Logs_And_Delete
+
+    Create Test Error Log
+    Create Test Error Log
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_number_of_events}
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Click Element  class:control__indicator
+    Page Should Contain Button  ${xpath_event_action_delete}
+    Run Keyword If  ${number_of_events} > 0
+    ...  Click Element  ${xpath_event_action_delete}
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Should Be Equal  ${number_of_events}  0
+
+
+*** Keywords ***
+
+Test Setup Execution
+   [Documentation]  Do test case setup tasks.
+   ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
+   Run Keyword If  ${status} == ${False}  Install Tarball
+   Delete Error Logs And Verify
+   Click Element  ${xpath_select_server_health}
+
+
+Test Teardown Execution
+   [Documentation]  Do the post test teardown.
+
+   FFDC On Test Case Fail
+   Delete All Error Logs
+   Close All Connections
