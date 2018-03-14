@@ -109,3 +109,18 @@ class resource_variables():
         "//*[@id='event-filter']/div[3]/div/ul/li[2]/button"
     xpath_event_filter_unresolved = \
         "//*[@id='event-filter']/div[3]/div/ul/li[3]/button"
+    xpath_event_action_bars = \
+        "//*[@id='event__actions-bar']/div[1]/label/span"
+    xpath_event_action_delete = \
+        "//*[@id='event__actions-bar']/div[2]/div[2]/button[1]"
+    xpath_event_action_export = \
+        "//*[@id='event__actions-bar']/div[2]/div[2]/a"
+    xpath_number_of_events = \
+        "//*[@id='event__actions-bar']/div[2]/p[2]/span"
+    xpath_mark_as_resolved = \
+        "//*[@id='event__actions-bar']/div[2]/div[2]/button[2]"
+    xpath_events_export = "//*[@id='event__actions-bar']/div[2]/div[2]/a"
+    xpath_event_delete_no = \
+        "//*[@id='event__actions-bar']/div[2]/div[1]/div[2]/button[2]"
+    xpath_event_delete_yes = \
+        "//*[@id='event__actions-bar']/div[2]/div[1]/div[2]/button[1]"
