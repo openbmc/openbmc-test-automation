@@ -597,7 +597,7 @@
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "utils.Initiate Auto Reboot",
+        "method": "utils.Initiate Auto Reboot  1000",
         "lib_file_path": "utils.robot"
     },
     # Run a "reboot" command on the OS_HOST.
