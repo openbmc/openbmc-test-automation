@@ -302,11 +302,15 @@ Initiate OS Host Reboot
 
 Initiate Auto Reboot
     [Documentation]  Initiate an auto reboot.
+    [Arguments]  ${milliseconds}=5000
+
+    # Description of argument(s):
+    # milliseconds  The number of milliseconds for the watchdog timer.
 
     # Set the auto reboot policy.
     Set Auto Reboot  ${1}
-    # Set the watchdog timer.  Note: 5000 = milliseconds which is 5 seconds.
-    Trigger Host Watchdog Error  5000
+    # Set the watchdog timer.
+    Trigger Host Watchdog Error  ${milliseconds}
 
 
 Trigger Warm Reset
@@ -1139,12 +1143,18 @@ Trigger Host Watchdog Error
     # sleep_time    Time delay for host watchdog error to get injected.
     #               Default is 5 seconds.
 
-    ${data}=  Create Dictionary  data=${True}
-    Write Attribute  /xyz/openbmc_project/watchdog/host0  Enabled  data=${data}
+    ${data}=  Create Dictionary
+    ...  data=${xyz.openbmc_project.State.Watchdog.Action.PowerCycle}
+    ${status}  ${result}=  Run Keyword And Ignore Error
+    ...  Read Attribute  ${HOST_WATCHDOG_URI}  ExpireAction
+    Run Keyword If  $status == PASS
+    ...  Write Attribute  ${HOST_WATCHDOG_URI}  ExpireAction  data=${data}
 
     ${data}=  Create Dictionary  data=${milliseconds}
-    Write Attribute  /xyz/openbmc_project/watchdog/host0  TimeRemaining
-    ...  data=${data}
+    Write Attribute  ${HOST_WATCHDOG_URI}  Interval  data=${data}
+
+    ${data}=  Create Dictionary  data=${True}
+    Write Attribute  ${HOST_WATCHDOG_URI}  Enabled  data=${data}
 
     Sleep  ${sleep_time}
 
