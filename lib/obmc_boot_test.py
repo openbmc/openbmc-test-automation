@@ -46,7 +46,7 @@ valid_boot_types = create_valid_boot_list(boot_table)
 boot_lists = read_boot_lists()
 last_ten = []
 
-state = st.return_default_state()
+state = st.return_state_constant('default_state')
 cp_setup_called = 0
 next_boot = ""
 base_tool_dir_path = os.path.normpath(os.environ.get(
