@@ -377,121 +377,12 @@ Test Error Log Rotation
 
 *** Keywords ***
 
-Get IPMI SEL Setting
-    [Documentation]  Returns status for given IPMI SEL setting.
-    [Arguments]  ${setting}
-    # Description of argument(s):
-    # setting  SEL setting which needs to be read(e.g. "Last Add Time").
-
-    ${resp}=  Run IPMI Standard Command  sel info
-
-    ${setting_line}=  Get Lines Containing String  ${resp}  ${setting}
-    ...  case-insensitive
-    ${setting_status}=  Fetch From Right  ${setting_line}  :${SPACE}
-
-    [Return]  ${setting_status}
-
-
-Verify Watchdog Errorlog Content
-    [Documentation]  Verify watchdog errorlog content.
-    # Example:
-    # "/xyz/openbmc_project/logging/entry/1":
-    #  {
-    #      "AdditionalData": [],
-    #      "Id": 1,
-    #      "Message": "org.open_power.Host.Boot.Error.WatchdogTimedOut",
-    #      "Resolved": 0,
-    #      "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
-    #      "Timestamp": 1492715244828,
-    #      "associations": []
-    # },
-
-    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
-    ${elog}=  Read Properties  ${elog_entry[0]}
-    Should Be Equal As Strings
-    ...  ${elog["Message"]}  org.open_power.Host.Boot.Error.WatchdogTimedOut
-    Should Be Equal As Strings
-    ...  ${elog["Severity"]}  xyz.openbmc_project.Logging.Entry.Level.Error
-
-
-Logging Test Binary Exist
-    [Documentation]  Verify existence of prerequisite logging-test.
-
-    Open Connection And Log In
-    ${out}  ${stderr}=  Execute Command
-    ...  which /tmp/tarball/bin/logging-test  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${out}  logging-test
-
-Clear Existing Error Logs
-    [Documentation]  If error log isn't empty, reboot the BMC to clear the log.
-
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
-    Initiate BMC Reboot
-    Wait Until Keyword Succeeds  10 min  10 sec
-    ...  Is BMC Ready
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
-
-Create Test Error Log
-    [Documentation]  Generate test error log.
-
-    # Test error log entry example:
-    # "/xyz/openbmc_project/logging/entry/1":  {
-    #     "AdditionalData": [
-    #         "STRING=FOO"
-    #     ],
-    #     "Id": 1,
-    #     "Message": "example.xyz.openbmc_project.Example.Elog.AutoTestSimple",
-    #     "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
-    #     "Timestamp": 1487743963328,
-    #     "associations": []
-    # }
-
-    Execute Command On BMC  /tmp/tarball/bin/logging-test -c AutoTestSimple
-
-Count Error Entries
-    [Documentation]  Count Error entries.
-
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${jsondata}=  To JSON  ${resp.content}
-    ${count}=  Get Length  ${jsondata["data"]}
-    [Return]  ${count}
-
-Verify Test Error Log
-    [Documentation]  Verify test error log entries.
-    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
-    ${entry_id}=  Read Attribute  ${elog_entry[0]}  Message
-    Should Be Equal  ${entry_id}
-    ...  example.xyz.openbmc_project.Example.Elog.AutoTestSimple
-    ${entry_id}=  Read Attribute  ${elog_entry[0]}  Severity
-    Should Be Equal  ${entry_id}
-    ...  xyz.openbmc_project.Logging.Entry.Level.Error
-
-Delete Error Logs And Verify
-    [Documentation]  Delete all error logs and verify.
-
-    Delete All Error Logs
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
-
-
 Test Setup Execution
    [Documentation]  Do test case setup tasks.
 
    ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
    Run Keyword If  ${status} == ${False}  Install Tarball
    Delete Error Logs And Verify
-
-
-Install Tarball
-    [Documentation]  Install tarball on BMC.
-
-    Run Keyword If  '${DEBUG_TARBALL_PATH}' == '${EMPTY}'  Return From Keyword
-    BMC Execute Command  rm -rf /tmp/tarball
-    Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
 
 
 Test Teardown Execution
