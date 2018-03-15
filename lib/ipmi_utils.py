@@ -251,3 +251,46 @@ def get_mc_info():
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
+
+
+def get_sdr_info():
+
+    r"""
+    Get IPMI sdr info data and return it as a dictionary.
+
+    The data is obtained by issuing the IPMI "sdr info" command.  An
+    example is shown below:
+
+    SDR Version                         : 0x51
+    Record Count                        : 216
+    Free Space                          : unspecified
+    Most recent Addition                :
+    Most recent Erase                   :
+    SDR overflow                        : no
+    SDR Repository Update Support       : unspecified
+    Delete SDR supported                : no
+    Partial Add SDR supported           : no
+    Reserve SDR repository supported    : no
+    SDR Repository Alloc info supported : no
+
+    For the data shown above, the following dictionary will be returned.
+    mc_info:
+
+      [sdr_version]:                         0x51
+      [record_Count]:                        216
+      [free_space]:                          unspecified
+      [most_recent_addition]:
+      [most_recent_erase]:
+      [sdr_overflow]:                        no
+      [sdr_repository_update_support]:       unspecified
+      [delete_sdr_supported]:                no
+      [partial_add_sdr_supported]:           no
+      [reserve_sdr_repository_supported]:    no
+      [sdr_repository_alloc_info_supported]: no
+    """
+
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  sdr info")
+    result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
+
+    return result

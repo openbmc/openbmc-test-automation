@@ -492,8 +492,72 @@ Verify Get Device ID
     Should Contain X Times  ${mc_info['aux_firmware_rev_info']}  0x00  4
 
 
+Verify SDR Info
+    [Documentation]  Verify sdr info command output.
+    [Tags]  Verify_SDR_Info
+
+    # Example of SDR info command output:
+    # SDR Version                         : 0x51
+    # Record Count                        : 216
+    # Free Space                          : unspecified
+    # Most recent Addition                :
+    # Most recent Erase                   :
+    # SDR overflow                        : no
+    # SDR Repository Update Support       : unspecified
+    # Delete SDR supported                : no
+    # Partial Add SDR supported           : no
+    # Reserve SDR repository supported    : no
+    # SDR Repository Alloc info supported : no
+
+    ${sdr_info}=  Get SDR Info
+    Should Be Equal  ${sdr_info['sdr_version']}  0x51
+
+    # Get sensor count from "sdr elist all" command output.
+    ${sensor_count}=  Get Sensor Count
+    Should Be Equal As Strings
+    ...  ${sdr_info['record_count']}  ${sensor_count}
+
+    Should Be Equal  ${sdr_info['free_space']}  unspecified
+    Should Be Equal  ${sdr_info['most_recent_addition']}  ${EMPTY}
+    Should Be Equal  ${sdr_info['most_recent_erase']}  ${EMPTY}
+    Should Be Equal  ${sdr_info['sdr_overflow']}  no
+    Should Be Equal  ${sdr_info['sdr_repository_update_support']}  unspecified
+    Should Be Equal  ${sdr_info['delete_sdr_supported']}  no
+    Should Be Equal  ${sdr_info['partial_add_sdr_supported']}  no
+    Should Be Equal  ${sdr_info['reserve_sdr_repository_supported']}  no
+    Should Be Equal  ${sdr_info['sdr_repository_alloc_info_supported']}  no
+
+
 *** Keywords ***
 
+Get Sensor Count
+    [Documentation]  Get sensors count using "sdr elist all" command.
+
+    # Example of "sdr elist all" command output:
+    # BootProgress     | 03h | ok  | 34.2 |
+    # OperatingSystemS | 05h | ok  | 35.1 |
+    # AttemptsLeft     | 07h | ok  | 34.1 |
+    # occ0             | 08h | ok  | 210.1 | Device Disabled
+    # occ1             | 09h | ok  | 210.2 | Device Disabled
+    # p0_core0_temp    | 11h | ns  |  3.1 | Disabled
+    # cpu0_core0       | 12h | ok  | 208.1 | Presence detected
+    # p0_core1_temp    | 14h | ns  |  3.2 | Disabled
+    # cpu0_core1       | 15h | ok  | 208.2 | Presence detected
+    # p0_core2_temp    | 17h | ns  |  3.3 | Disabled
+    # ..
+    # ..
+    # ..
+    # ..
+    # ..
+    # ..
+    # fan3             | 00h | ns  | 29.4 | Logical FRU @35h
+    # bmc              | 00h | ns  |  6.1 | Logical FRU @3Ch
+    # ethernet         | 00h | ns  |  1.1 | Logical FRU @46h
+
+    ${output}=  Run IPMI Standard Command  sdr elist all
+    ${sensor_list}=  Split String  ${output}  \n
+    ${sensor_count}=  Get Length  ${sensor_list}
+    [Return]  ${sensor_count}
 
 Set Management Controller ID String
     [Documentation]  Set the management controller ID string.
