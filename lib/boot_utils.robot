@@ -425,6 +425,168 @@ IPMI MC Reset Warm (off)
     Run Key U  ${cmd_buf}
 
 
+IPMI MC Reset Cold (run)
+    [Documentation]  Do "IPMI MC Reset Cold (run)" boot test.
+    [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
+
+    # Description of argument(s):
+    # stack_mode                    If stack_mode is set to "skip", each test
+    #                               specified in the boot_stack is only
+    #                               performed if the machine is not already in
+    #                               the state that would normally result from
+    #                               running the given boot test.  Otherwise,
+    #                               the test is skipped.  If stack_mode is set
+    #                               to "normal", all tests from the boot_stack
+    #                               are performed.  "skip" mode is useful when
+    #                               you simply want the machine in a desired
+    #                               state.  The default value is the global
+    #                               value of "${stack_mode}"
+    # quiet                         If this parameter is set to ${1}, this
+    #                               keyword will print only essential
+    #                               information.  The default value is the
+    #                               global value of "${quiet}"
+
+    ${cmd_buf}  Catenate  OBMC Boot Test
+    ...  \ loc_boot_stack=IPMI MC Reset Cold (run)
+    ...  \ loc_stack_mode=${stack_mode} \ loc_quiet=${quiet}
+    Run Key U  ${cmd_buf}
+
+
+IPMI MC Reset Cold (off)
+    [Documentation]  Do "IPMI MC Reset Cold (off)" boot test.
+    [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
+
+    # Description of argument(s):
+    # stack_mode                    If stack_mode is set to "skip", each test
+    #                               specified in the boot_stack is only
+    #                               performed if the machine is not already in
+    #                               the state that would normally result from
+    #                               running the given boot test.  Otherwise,
+    #                               the test is skipped.  If stack_mode is set
+    #                               to "normal", all tests from the boot_stack
+    #                               are performed.  "skip" mode is useful when
+    #                               you simply want the machine in a desired
+    #                               state.  The default value is the global
+    #                               value of "${stack_mode}"
+    # quiet                         If this parameter is set to ${1}, this
+    #                               keyword will print only essential
+    #                               information.  The default value is the
+    #                               global value of "${quiet}"
+
+    ${cmd_buf}  Catenate  OBMC Boot Test
+    ...  \ loc_boot_stack=IPMI MC Reset Cold (off)
+    ...  \ loc_stack_mode=${stack_mode} \ loc_quiet=${quiet}
+    Run Key U  ${cmd_buf}
+
+
+IPMI Std MC Reset Warm (run)
+    [Documentation]  Do "IPMI Std MC Reset Warm (run)" boot test.
+    [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
+
+    # Description of argument(s):
+    # stack_mode                    If stack_mode is set to "skip", each test
+    #                               specified in the boot_stack is only
+    #                               performed if the machine is not already in
+    #                               the state that would normally result from
+    #                               running the given boot test.  Otherwise,
+    #                               the test is skipped.  If stack_mode is set
+    #                               to "normal", all tests from the boot_stack
+    #                               are performed.  "skip" mode is useful when
+    #                               you simply want the machine in a desired
+    #                               state.  The default value is the global
+    #                               value of "${stack_mode}"
+    # quiet                         If this parameter is set to ${1}, this
+    #                               keyword will print only essential
+    #                               information.  The default value is the
+    #                               global value of "${quiet}"
+
+    ${cmd_buf}  Catenate  OBMC Boot Test
+    ...  \ loc_boot_stack=IPMI Std MC Reset Warm (run)
+    ...  \ loc_stack_mode=${stack_mode} \ loc_quiet=${quiet}
+    Run Key U  ${cmd_buf}
+
+
+IPMI Std MC Reset Warm (off)
+    [Documentation]  Do "IPMI Std MC Reset Warm (off)" boot test.
+    [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
+
+    # Description of argument(s):
+    # stack_mode                    If stack_mode is set to "skip", each test
+    #                               specified in the boot_stack is only
+    #                               performed if the machine is not already in
+    #                               the state that would normally result from
+    #                               running the given boot test.  Otherwise,
+    #                               the test is skipped.  If stack_mode is set
+    #                               to "normal", all tests from the boot_stack
+    #                               are performed.  "skip" mode is useful when
+    #                               you simply want the machine in a desired
+    #                               state.  The default value is the global
+    #                               value of "${stack_mode}"
+    # quiet                         If this parameter is set to ${1}, this
+    #                               keyword will print only essential
+    #                               information.  The default value is the
+    #                               global value of "${quiet}"
+
+    ${cmd_buf}  Catenate  OBMC Boot Test
+    ...  \ loc_boot_stack=IPMI Std MC Reset Warm (off)
+    ...  \ loc_stack_mode=${stack_mode} \ loc_quiet=${quiet}
+    Run Key U  ${cmd_buf}
+
+
+IPMI Std MC Reset Cold (run)
+    [Documentation]  Do "IPMI Std MC Reset Cold (run)" boot test.
+    [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
+
+    # Description of argument(s):
+    # stack_mode                    If stack_mode is set to "skip", each test
+    #                               specified in the boot_stack is only
+    #                               performed if the machine is not already in
+    #                               the state that would normally result from
+    #                               running the given boot test.  Otherwise,
+    #                               the test is skipped.  If stack_mode is set
+    #                               to "normal", all tests from the boot_stack
+    #                               are performed.  "skip" mode is useful when
+    #                               you simply want the machine in a desired
+    #                               state.  The default value is the global
+    #                               value of "${stack_mode}"
+    # quiet                         If this parameter is set to ${1}, this
+    #                               keyword will print only essential
+    #                               information.  The default value is the
+    #                               global value of "${quiet}"
+
+    ${cmd_buf}  Catenate  OBMC Boot Test
+    ...  \ loc_boot_stack=IPMI Std MC Reset Cold (run)
+    ...  \ loc_stack_mode=${stack_mode} \ loc_quiet=${quiet}
+    Run Key U  ${cmd_buf}
+
+
+IPMI Std MC Reset Cold (off)
+    [Documentation]  Do "IPMI Std MC Reset Cold (off)" boot test.
+    [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
+
+    # Description of argument(s):
+    # stack_mode                    If stack_mode is set to "skip", each test
+    #                               specified in the boot_stack is only
+    #                               performed if the machine is not already in
+    #                               the state that would normally result from
+    #                               running the given boot test.  Otherwise,
+    #                               the test is skipped.  If stack_mode is set
+    #                               to "normal", all tests from the boot_stack
+    #                               are performed.  "skip" mode is useful when
+    #                               you simply want the machine in a desired
+    #                               state.  The default value is the global
+    #                               value of "${stack_mode}"
+    # quiet                         If this parameter is set to ${1}, this
+    #                               keyword will print only essential
+    #                               information.  The default value is the
+    #                               global value of "${quiet}"
+
+    ${cmd_buf}  Catenate  OBMC Boot Test
+    ...  \ loc_boot_stack=IPMI Std MC Reset Cold (off)
+    ...  \ loc_stack_mode=${stack_mode} \ loc_quiet=${quiet}
+    Run Key U  ${cmd_buf}
+
+
 IPMI Power Cycle
     [Documentation]  Do "IPMI Power Cycle" boot test.
     [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
