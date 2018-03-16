@@ -374,6 +374,147 @@
         "method": "Run External IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
+    # Initiate an mc reset cold using the IPMI interface while chassis is
+    # powered on.
+    "IPMI MC Reset Cold (run)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    # Initiate an mc reset cold using the IPMI interface while chassis is
+    # powered off.
+    "IPMI MC Reset Cold (off)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^Off|Unspecified$",
+            "operating_system": "^Inactive$",
+            "host": "^Off$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    # Initiate an mc reset warm using the IPMI standard interface while chassis
+    # is powered on.
+    "IPMIs MCReset Warm (run)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    # Initiate an mc reset warm using the IPMI standard interface while chassis
+    # is powered off.
+    "IPMIs MCReset Warm (off)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^Off|Unspecified$",
+            "operating_system": "^Inactive$",
+            "host": "^Off$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    # Initiate an mc reset cold using the IPMI standard interface while chassis
+    # is powered on.
+    "IPMIs MCReset Cold (run)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    # Initiate an mc reset cold using the IPMI standard interface while chassis
+    # is powered off.
+    "IPMIs MCReset Cold (off)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^Off|Unspecified$",
+            "operating_system": "^Inactive$",
+            "host": "^Off$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
 
     # Host OS re-boot boot types:
 
