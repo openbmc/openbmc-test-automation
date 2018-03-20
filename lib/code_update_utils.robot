@@ -466,3 +466,10 @@ Check Software Object Attribute
 
     Should Be True  ${data} == ${value}
     ...  msg=Given attribute value ${data} mismatch ${value}.
+
+
+Image Should Be Signed
+    [Documentation]  Fail if the image is not signed.
+
+    Directory Should Exist  ${ACTIVATION_DIR_PATH}
+    ...  msg=BMC imaged is not signed.
