@@ -49,6 +49,7 @@ Install the packages and it's dependencies via `pip`
 
 These documents contain details on developing OpenBMC test code and debugging.
 
+ - [MAINTAINERS](https://github.com/openbmc/docs/blob/master/MAINTAINERS): OpenBMC code maintainers information.
  - [CONTRIBUTING.md](CONTRIBUTING.md): Coding guidelines.
  - [REST-cheatsheet.md](https://github.com/openbmc/docs/blob/master/REST-cheatsheet.md): Quick reference for some common
    curl commands required for testing.
