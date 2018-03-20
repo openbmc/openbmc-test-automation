@@ -42,3 +42,44 @@ Logging Entry Should Exist
 
     Fail  No ${message_id} logging entry found.
 
+
+Get Error Logs Count
+    [Documentation]  Return the number of BMC error logs.  Optionally
+    ...  display the error logs on the console.
+    [Arguments]   ${show_logs}=0
+
+    # Description of argument(s):
+    # show_logs   Optional parameter to control the displaying of
+    #             error logs.  If show_logs=1 the error logs are
+    #             displayed.  The default value is 0.
+
+    ${elog_entries}=  Get Logging Entry List
+
+    # Return 0 if no error logs.
+    Run Keyword If  ${elog_entries} is None  Return From Keyword  0
+
+    # Determine the number of error logs.
+    ${number_of_logs}=  Get Length  ${elog_entries}
+    # Display the error logs unless show_logs=0.
+    Run Keyword If  '${show_logs}' == '1'  Show BMC Error Logs  ${elog_entries}
+
+    [Return]  ${number_of_logs}
+
+
+Show BMC Error Logs
+    [Documentation]  Display the BMC error logs on the Console.
+    [Arguments]   ${elog_entries}
+
+    # Description of argument(s):
+    # elog_entries  A list which contains error log entries.  The list is
+    #               usually obtained by calling Get Logging Entry List. For
+    #               example, ${elog_entries}=  Get Logging Entry List.
+
+    # Return if no error logs.
+    Run Keyword If  ${elog_entries} is None  Return From Keyword
+
+    Log To Console  \n-------------- BMC ERROR LOGS -----------------------
+    :FOR  ${error_log}  IN  @{elog_entries}
+    \  ${message}=  Read Attribute  ${error_log}  Message
+    \  Rpvars  error_log  message
+    Log To Console  ----------- END BMC ERROR LOGS ----------------------
