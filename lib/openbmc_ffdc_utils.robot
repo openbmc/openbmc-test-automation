@@ -4,6 +4,7 @@ Documentation      Utility keywords for FFDC
 Library            String
 Library            DateTime
 Library            openbmc_ffdc_list.py
+####Resource           logging_utils.robot
 Resource           resource.txt
 Resource           connection_client.robot
 Resource           utils.robot
@@ -122,6 +123,7 @@ Error Logs Should Not Exist
 
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    ...  msg=Unexpected BMC error log(s) present.
 
 
 Error Logs Should Exist
