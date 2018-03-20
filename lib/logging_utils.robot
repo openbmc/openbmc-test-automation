@@ -42,3 +42,56 @@ Logging Entry Should Exist
 
     Fail  No ${message_id} logging entry found.
 
+
+Get Error Logs
+    [Documentation]  Return a dictionary which contains the BMC error logs.
+    ...  The length of the dictionary indicates how many logs there are.
+    [Arguments]   ${quiet}=1
+
+    # Description of argument(s):
+    # quiet   Indicates whether this keyword should run without any output to
+    #         the console, 0 = verbose, 1= quiet.
+
+    ${status}  ${error_logs}=  Run Keyword And Ignore Error  Read Properties
+    ...  /xyz/openbmc_project/logging/entry/enumerate  quiet=${quiet}
+
+    ${empty_dict}=  Create Dictionary
+    Return From Keyword If  '${status}' == 'FAIL'  ${empty_dict}
+    [Return]  ${error_logs}
+
+
+Get Error Logs Count
+    [Documentation]  Return the number of BMC error logs.  Optionally
+    ...  display the error logs on the console.
+    [Arguments]   ${show_logs}=0
+
+    # Description of argument(s):
+    # show_logs   Optional parameter to control the displaying of
+    #             error logs.  If show_logs=1 the error logs are
+    #             displayed.  The default value is 0.
+
+    ${error_logs}=  Get Error Logs
+
+    # Determine the number of error logs.
+    ${number_of_logs}=  Get Length  ${error_logs}
+
+    # Return 0 if no error logs.
+    Run Keyword If  ${number_of_logs} == 0  Return From Keyword  0
+
+    # Display the error logs if show_logs=1.
+    Run Keyword If  '${show_logs}' == '1'
+    ...  Show BMC Error Logs Message  ${error_logs}
+
+    [Return]  ${number_of_logs}
+
+
+Show BMC Error Logs Message
+    [Documentation]  Display the Message field of the BMC error logs.
+    [Arguments]   ${error_logs}
+
+    # Description of argument(s):
+    # error_logs  A dictionaly which contains error log entries.  The is
+    #             typically obtained by calling Get Error Logs.
+
+    :FOR  ${error_log}  IN  @{error_logs}
+    \  Rpvars  error_logs['${error_log}']['Message']
