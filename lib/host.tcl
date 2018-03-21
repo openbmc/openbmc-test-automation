@@ -45,3 +45,128 @@ proc get_host_name_ip {host {quiet 1}} {
 
 }
 
+
+proc get_host_domain {host username password {quiet 1}} {
+  # Return the domain name of the host.
+  # If this procedure is unable to get the requested information, it will
+  # print an error message to stderr.
+
+  # Description of argument(s):
+  # host                            The host name or IP address to be obtained.
+  # username                        The host username.
+  # password                        The host password.
+  # quiet                           Indicates whether status information
+  #                                 should be printed.
+
+  if { ${quiet} } { set print_output 0 } else { set print_output 1 }
+  lassign [cmd_fnc \
+  "sshpass -p $password ssh -k $username@$host 'dnsdomainname'"] rc domain
+  return $domain
+}
+
+
+proc get_host_dns {host username password {quiet 1}} {
+  # Return the dns of the host.
+  # If this procedure is unable to get the requested information, it will
+  # print an error message to stderr.
+
+  # Description of argument(s):
+  # host                            The host name or IP address to be obtained.
+  # username                        The host username.
+  # password                        The host password.
+  # quiet                           Indicates whether status information
+  #                                 hould be printed.
+
+  if { ${quiet} } { set print_output 0 } else { set print_output 1 }
+  lassign [cmd_fnc "sshpass -p $password ssh -k $username@$host \
+  'cat /etc/resolv.conf | grep nameserver'" $quiet] rc out_buf
+  lassign [split $out_buf " "] a dns
+  return $dns
+}
+
+
+proc get_host_mac_address {host username password {quiet 1}} {
+  # Return the mac address of the host.
+  # If this procedure is unable to get the requested information, it will
+  # print an error message to stderr.
+
+  # Description of argument(s):
+  # host                            The host name or IP address to be obtained.
+  # username                        The host username.
+  # password                        The host password.
+  # quiet                           Indicates whether status information
+  #                                 hould be printed.
+
+  if { ${quiet} } { set print_output 0 } else { set print_output 1 }
+  set interface [get_host_default_interface $host $username $password $quiet]
+  lassign [cmd_fnc "sshpass -p $password ssh -k $username@$host \
+  'cat /sys/class/net/$interface/address'" $quiet] rc mac_address
+  return $mac_address
+}
+
+
+proc get_host_gateway {host username password {quiet 1}} {
+  # Return the gateway of the host.
+  # If this procedure is unable to get the requested information, it will
+  # print an error message to stderr.
+
+  # Description of argument(s):
+  # host                            The host name or IP address to be obtained.
+  # username                        The host username.
+  # password                        The host password.
+  # quiet                           Indicates whether status information
+  #                                 hould be printed.  
+
+  if { ${quiet} } { set print_output 0 } else { set print_output 1 }
+  lassign [cmd_fnc "sshpass -p $password ssh -k $username@$host \
+  'ip route | grep -i default'" $quiet] rc out_buf
+  lassign [split $out_buf " "] a0 a1 gateway
+  return $gateway
+}
+
+
+proc get_host_default_interface {host username password {quiet 1}} {
+  # Return the default interface of the host.
+  # If this procedure is unable to get the requested information, it will
+  # print an error message to stderr.
+
+  # Description of argument(s):
+  # host                            The host name or IP address to be obtained.
+  # username                        The host username.
+  # password                        The host password.
+  # quiet                           Indicates whether status information
+  #                                 hould be printed.  
+
+  if { ${quiet} } { set print_output 0 } else { set print_output 1 }
+  lassign [cmd_fnc "sshpass -p $password ssh -k $username@$host \
+  'ip route | grep -i default'" $quiet] rc out_buf
+  lassign [split $out_buf " "] a0 a1 a2 a3 interface
+  return $interface
+}
+
+
+proc get_host_netmask {host username password {quiet 1}} {
+  # Return the subnet mask the host.
+  # If this procedure is unable to get the requested information, it will
+  # print an error message to stderr.
+
+  # Description of argument(s):
+  # host                            The host name or IP address to be obtained.
+  # username                        The host username.
+  # password                        The host password.
+  # quiet                           Indicates whether status information
+  #                                 hould be printed.
+
+  if { ${quiet} } { set print_output 0 } else { set print_output 1 }
+  set sshpass_cmd "sshpass -p $password ssh -k $username@$host"
+  set interface [get_host_default_interface $host $username $password $quiet]
+  lassign [cmd_fnc \
+  "$sshpass_cmd 'ifconfig $interface | grep -i mask'" $quiet] rc out_buf
+  if {[string match *broadcast* $out_buf]} {
+    set mask_cmd "ifconfig $interface | grep ask | awk '{print \$4}'"
+  } else {
+    set mask_cmd "ifconfig $interface | grep ask | cut -d':' -f4"
+  }
+  lassign [cmd_fnc "$sshpass_cmd $mask_cmd" $quiet] rc netmask
+  return $netmask
+}
