@@ -503,7 +503,8 @@ def sprint_varx(var_name,
                 hex=0,
                 loc_col1_indent=col1_indent,
                 loc_col1_width=col1_width,
-                trailing_char="\n"):
+                trailing_char="\n",
+                key_list=None):
 
     r"""
     Print the var name/value passed to it.  If the caller lets loc_col1_width
@@ -565,6 +566,22 @@ def sprint_varx(var_name,
     trailing_char                   The character to be used at the end of the
                                     returned string.  The default value is a
                                     line feed.
+    key_list                        A list of which dictionary keys should be
+                                    printed.  All others keys will be skipped.
+                                    Each value in key_list will be regarded
+                                    as a regular expression and it will be
+                                    regarded as anchored to the beginning and
+                                    ends of the dictionary key being
+                                    referenced.  For example if key_list is
+                                    ["one", "two"], the resulting regex used
+                                    will be "^one|two$", i.e. only keys "one"
+                                    and "two" from the var_value dictionary
+                                    will be printed.  As another example, if
+                                    the caller were to specify a key_list of
+                                    ["one.*"], then only dictionary keys whose
+                                    names begin with "one" will be printed.
+                                    Note: This argument pertains only to
+                                    var_values which are dictionaries.
     """
 
     # Determine the type
@@ -593,7 +610,8 @@ def sprint_varx(var_name,
             return format_string % ("", str(var_name) + ":", var_value)
     elif type(var_value) is type:
         return sprint_varx(var_name, str(var_value).split("'")[1], hex,
-                           loc_col1_indent, loc_col1_width, trailing_char)
+                           loc_col1_indent, loc_col1_width, trailing_char,
+                           key_list)
     else:
         # The data type is complex in the sense that it has subordinate parts.
         format_string = "%" + str(loc_col1_indent) + "s%s\n"
@@ -625,6 +643,10 @@ def sprint_varx(var_name,
             pass
         if type_is_dict:
             for key, value in var_value.iteritems():
+                if key_list is not None:
+                    key_list_regex = "^" + "|".join(key_list) + "$"
+                    if not re.match(key_list_regex, key):
+                        continue
                 ix += 1
                 if ix == length:
                     loc_trailing_char = trailing_char
@@ -636,11 +658,12 @@ def sprint_varx(var_name,
                     buffer += sprint_varx("[" + key + "]", value,
                                           loc_hex, loc_col1_indent,
                                           loc_col1_width,
-                                          loc_trailing_char)
+                                          loc_trailing_char,
+                                          key_list)
                 else:
                     buffer += sprint_varx(var_name + "[" + key + "]", value,
                                           hex, loc_col1_indent, loc_col1_width,
-                                          loc_trailing_char)
+                                          loc_trailing_char, key_list)
         elif type(var_value) in (list, tuple, set):
             for key, value in enumerate(var_value):
                 ix += 1
@@ -648,7 +671,7 @@ def sprint_varx(var_name,
                     loc_trailing_char = trailing_char
                 buffer += sprint_varx(var_name + "[" + str(key) + "]", value,
                                       hex, loc_col1_indent, loc_col1_width,
-                                      loc_trailing_char)
+                                      loc_trailing_char, key_list)
         elif type(var_value) is argparse.Namespace:
             for key in var_value.__dict__:
                 ix += 1
@@ -656,7 +679,7 @@ def sprint_varx(var_name,
                     loc_trailing_char = trailing_char
                 cmd_buf = "buffer += sprint_varx(var_name + \".\" + str(key)" \
                           + ", var_value." + key + ", hex, loc_col1_indent," \
-                          + " loc_col1_width, loc_trailing_char)"
+                          + " loc_col1_width, loc_trailing_char, key_list)"
                 exec(cmd_buf)
         else:
             var_type = type(var_value).__name__
@@ -680,7 +703,8 @@ def sprint_var(var_value,
                hex=0,
                loc_col1_indent=col1_indent,
                loc_col1_width=col1_width,
-               trailing_char="\n"):
+               trailing_char="\n",
+               key_list=None):
 
     r"""
     Figure out the name of the first argument for you and then call
@@ -698,7 +722,8 @@ def sprint_var(var_value,
     return sprint_varx(var_name, var_value=var_value, hex=hex,
                        loc_col1_indent=loc_col1_indent,
                        loc_col1_width=loc_col1_width,
-                       trailing_char=trailing_char)
+                       trailing_char=trailing_char,
+                       key_list=key_list)
 
 
 def sprint_vars(*args):
