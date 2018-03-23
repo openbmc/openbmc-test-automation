@@ -625,7 +625,7 @@ Verify Power Reading Using REST
     [Documentation]  Verify power reading using REST.
     [Arguments]  ${power_reading}
 
-    # Desciption of argument(s):
+    # Description of argument(s):
     # power_reading  IPMI Power reading
 
     ${power_reading_rest}=  Read Attribute

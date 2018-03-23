@@ -182,7 +182,7 @@ proc read_properties_file {parm_file_path} {
 
   # Read properties files and return key/value pairs as a list.
 
-  # Description of arguement(s):
+  # Description of argument(s):
   # parm_file_path                  The path to the properties file.
 
   # The properties file must have the following format:
@@ -247,7 +247,7 @@ proc convert_array_keys {source_arr target_arr {convert_commands}\
   # and put the resulting array in target_arr. If this function fails for any
   # reason, it will return non-zero
 
-  # Description of arguement(s):
+  # Description of argument(s):
   # source_arr                      The source array that is to be converted.
   # target_arr                      The target array that results from the
   #                                 conversion.
@@ -325,7 +325,7 @@ proc expand_shell_string {buffer} {
   # Call upon the shell to expand the string in "buffer", i.e. the shell will
   # make substitutions for environment variables and glob expressions.
 
-  # Description of arguement(s):
+  # Description of argument(s):
   # buffer                          The buffer to be expanded.
 
   # This is done to keep echo from interpreting all of the double quotes away.
@@ -347,7 +347,7 @@ proc add_trailing_string { buffer { add_string "/" } } {
   # Add the add string to the end of the buffer if and only if it doesn't
   # already end with the add_string.
 
-  # Description of arguement(s):
+  # Description of argument(s):
   # buffer                          The buffer to be modified.
   # add_string                      The string to conditionally append to the
   #                                 buffer.
