@@ -57,7 +57,7 @@ GPU Stress Test
 
 
     # Shutdown HTX if it is already running.
-    ${status}=  Run Keyword And Return Status  Is HTX Running
+    ${status}=  Is HTX Running
     Run Keyword If  '${status}' == 'True'
     ...  Shutdown HTX Exerciser
 
