@@ -38,8 +38,10 @@ Documentation  Stress the system using HTX exerciser.
 
 Resource        ../syslib/utils_os.robot
 Resource        ../lib/openbmc_ffdc_utils.robot
+Resource        ../lib/logging_utils.robot
 Library         ../syslib/utils_keywords.py
 Library         ../lib/utils_files.py
+Library         ../lib/logging_utils.py
 
 Suite Setup     Run Keyword  Start SOL Console Logging
 Test Setup      Test Setup Execution
@@ -138,7 +140,13 @@ Run HTX Exerciser
     ...  Do Inventory And Compare  ${json_final_file_path}
     ...  ${PREV_INV_FILE_PATH}
 
-    Error Logs Should Not Exist
+    # Terminate run if there are any BMC error logs.
+    ${error_logs}=  Get Error Logs
+    ${num_logs}=  Get Length  ${error_logs}
+    Run Keyword If  ${num_logs} != 0  Run Keywords
+    ...  Print Error Logs  ${error_logs}
+    ...  AND  Fail  msg=Terminating run due to BMC error log(s).
+
     Power Off Host
 
     # Close all SSH and REST active sessions.
@@ -183,6 +191,7 @@ Compare Json Inventory Files
      ...  ${file2}  ${json_diff_file_path}  ${INV_IGNORE_LIST}
     Run Keyword If  '${diff_rc}' != '${0}'
     ...  Report Inventory Mismatch  ${diff_rc}  ${json_diff_file_path}
+    ...  ELSE  Rprint Timen  Inventoy check: No differences found.
 
 
 Report Inventory Mismatch
@@ -217,7 +226,7 @@ Test Setup Execution
     Tool Exist  htxcmdline
 
     # Shutdown if HTX is running.
-    ${status}=  Run Keyword And Return Status  Is HTX Running
+    ${status}=  Is HTX Running
     Run Keyword If  '${status}' == 'True'
     ...  Shutdown HTX Exerciser
 

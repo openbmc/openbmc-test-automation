@@ -82,7 +82,7 @@ Test Setup Execution
     Tool Exist  htxcmdline
 
     # Shutdown if HTX is running.
-    ${status}=  Run Keyword And Return Status  Is HTX Running
+    ${status}=  Is HTX Running
     Run Keyword If  '${status}' == 'True'
     ...  Shutdown HTX Exerciser
 
