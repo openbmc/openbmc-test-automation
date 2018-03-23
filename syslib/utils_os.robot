@@ -39,8 +39,9 @@ Execute Command On OS
     # Description of argument(s):
     # command  Shell command to be executed on OS.
     ${stdout}  ${stderr}=  Execute Command  ${command}  return_stderr=True
-    Should Be Empty  ${stderr}
+    Should Be Empty  ${stderr}  msg=Failed running ${command}. stderr=${stderr}
     [Return]  ${stdout}
+
 
 Login To OS
     [Documentation]  Login to OS Host.
@@ -52,7 +53,6 @@ Login To OS
     # os_username  OS Host Login user name.
     # os_password  OS Host Login passwrd.
     # alias_name   Default OS SSH session connection alias name.
-    # TODO: Generalize alias naming using openbmc/openbmc-test-automation#633
 
     Ping Host  ${os_host}
     SSHLibrary.Open Connection  ${os_host}  alias=${alias_name}
@@ -92,10 +92,23 @@ File Exist On OS
 
 
 Is HTX Running
-    [Documentation]  Check if the HTX exerciser is currently running.
+    [Documentation]  Return "True" if the HTX is running, "False"
+    ...  otherwise.
+
+    # Example usage:
+    #  ${status}=  Is HTX Running
+    #  Run Keyword If  '${status}' == 'True'  Shutdown HTX Exerciser
+
 
     ${status}=  Execute Command On OS  htxcmdline -status
-    Should Not Contain  ${status}  Daemon state is <IDLE>
+
+    ${match_count_idle}=  Count Values In List  ${status}
+    ...  Daemon state is <IDLE>
+    ${match_count_not_running}=  Count Values In List  ${status}
+    ...  No MDT is currently running
+    ${running}=  Evaluate
+    ...  not (${match_count_idle} or ${match_count_not_running})
+    [Return]  ${running}
 
 
 Write Log Data To File
@@ -150,6 +163,7 @@ REST Upload File To BMC
 
     ${resp}=  Post Request  openbmc  /upload/image  &{data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ...  msg=Openbmc /upload/image failed.
 
     # Take SSH connection to BMC and switch to BMC connection to perform
     # the task.
@@ -219,6 +233,7 @@ Check For Errors On OS Dmesg Log
     ${dmesg_log}=  Execute Command On OS  dmesg | egrep '${ERROR_REGEX}'
     # To enable multiple string check.
     Should Not Contain  ${dmesg_log}  ${ERROR_DBE_MSG}
+    ...  msg=OS dmesg shows ${ERROR_DBE_MSG}.
 
 
 Collect NVIDIA Log File
@@ -395,6 +410,7 @@ Create Default MDT Profile
     ${profile}=  Execute Command On OS  htxcmdline -createmdt
     Rprintn  ${profile}
     Should Contain  ${profile}  mdts are created successfully
+    ...  msg=Create MDT profile failed. response=${profile}
 
 
 Run MDT Profile
@@ -405,20 +421,22 @@ Run MDT Profile
     ...  htxcmdline -run -mdt ${HTX_MDT_PROFILE}
     Rprintn  ${htx_run}
     Should Contain  ${htx_run}  Activated
+    ...  msg=htxcmdline run mdt did not return Activated status.
 
 
 Check HTX Run Status
     [Documentation]  Get HTX exerciser status and check for error.
 
     Rprint Timen  Check HTX mdt Status and error.
-    ${status}=  Execute Command On OS
+    ${htx_status}=  Execute Command On OS
     ...  htxcmdline -status -mdt ${HTX_MDT_PROFILE}
-    Rprintn  ${status}
+    Rprintn  ${htx_status}
 
-    ${errlog}=  Execute Command On OS  htxcmdline -geterrlog
-    Rprintn  ${errlog}
+    ${htx_errlog}=  Execute Command On OS  htxcmdline -geterrlog
+    Rprintn  ${htx_errlog}
 
-    Should Contain  ${errlog}  file </tmp/htxerr> is empty
+    Should Contain  ${htx_errlog}  file </tmp/htxerr> is empty
+    ...  msg=HTX geterrorlog was not empty.
 
 
 Shutdown HTX Exerciser
@@ -437,7 +455,6 @@ Shutdown HTX Exerciser
     ...  Fail  msg=Shutdown command returned unexpected message.
 
 
-
 Create JSON Inventory File
     [Documentation]  Create a JSON inventory file, and make a YAML copy.
     [Arguments]  ${json_file_path}
@@ -450,6 +467,7 @@ Create JSON Inventory File
     # Format to JSON pretty print to file.
     Run  python -m json.tool ${json_tmp_file_path} > ${json_file_path}
     OperatingSystem.File Should Exist  ${json_file_path}
+    ...  msg=File ${json_file_path} does not exist.
 
 
 Compile Inventory JSON
@@ -461,6 +479,7 @@ Compile Inventory JSON
     Retrieve HW Info And Write List  ${I/O}  ${json_tmp_file_path}  I/O  last
     Close New JSON List  ${json_tmp_file_path}
 
+
 Write New JSON List
     [Documentation]  Start a new JSON list element in file.
     [Arguments]  ${json_tmp_file_path}  ${json_field_name}
@@ -469,12 +488,14 @@ Write New JSON List
     # json_field_name      Name to give json list element.
     Append to File  ${json_tmp_file_path}  { "${json_field_name}" : [
 
+
 Close New JSON List
     [Documentation]  Close JSON list element in file.
     [Arguments]  ${json_tmp_file_path}
     # Description of argument(s):
     # json_tmp_file_path  Path of file to write to.
     Append to File  ${json_tmp_file_path}  ]}
+
 
 Retrieve HW Info And Write
     [Documentation]  Retrieve and write info, add a comma if not last item.
@@ -491,6 +512,7 @@ Retrieve HW Info And Write
     Close New JSON List  ${json_tmp_file_path}
     Run Keyword if  '${last}' == 'false'
     ...  Append to File  ${json_tmp_file_path}  ,
+
 
 Retrieve HW Info And Write List
     [Documentation]  Does a Retrieve/Write with a list of classes and
@@ -512,6 +534,7 @@ Retrieve HW Info And Write List
     Run Keyword if  '${last}' == 'false'
     ...  Append to File  ${json_tmp_file_path}  ,
 
+
 Retrieve Hardware Info
     [Documentation]  Retrieves the lshw output of the device class as JSON.
     [Arguments]  ${class}
@@ -521,6 +544,7 @@ Retrieve Hardware Info
     ${output} =  Verify JSON string  ${output}
     [Return]  ${output}
 
+
 Verify JSON String
     [Documentation]  Ensure the JSON string content is separated by commas.
     [Arguments]  ${unver_string}
@@ -529,6 +553,7 @@ Verify JSON String
     ${unver_string} =  Convert to String  ${unver_string}
     ${ver_string} =  Replace String Using Regexp  ${unver_string}  }\\s*{  },{
     [Return]  ${ver_string}
+
 
 Clean Up String
     [Documentation]  Remove extra whitespace and trailing commas.
