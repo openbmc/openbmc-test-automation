@@ -42,3 +42,22 @@ Logging Entry Should Exist
 
     Fail  No ${message_id} logging entry found.
 
+
+Get Error Logs
+    [Documentation]  Return a dictionary which contains the BMC error logs.
+    [Arguments]   ${quiet}=1
+
+    # Description of argument(s):
+    # quiet   Indicates whether this keyword should run without any output to
+    #         the console, 0 = verbose, 1 = quiet.
+
+    #  The length of the returned dictionary indicates how many logs there are.
+    #  Printing of error logs can be done with the keyword Print Error Logs,
+    #  for example, Print Error Logs  ${error_logs}  Message.
+
+    ${status}  ${error_logs}=  Run Keyword And Ignore Error  Read Properties
+    ...  /xyz/openbmc_project/logging/entry/enumerate  quiet=${quiet}
+
+    ${empty_dict}=  Create Dictionary
+    Return From Keyword If  '${status}' == 'FAIL'  ${empty_dict}
+    [Return]  ${error_logs}
