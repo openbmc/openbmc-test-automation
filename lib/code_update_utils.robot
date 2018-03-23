@@ -211,7 +211,7 @@ Upload And Activate Image
     Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
 
     # Uploaded and activated image should have priority set to 0. Due to timing
-    # contention, it may take upto 10 seconds to complete updating priority.
+    # contention, it may take up to 10 seconds to complete updating priority.
     Wait Until Keyword Succeeds  10 sec  5 sec
     ...  Check Software Object Attribute  ${version_id}  Priority  ${0}
 
@@ -430,7 +430,7 @@ List Installed Images
     [Documentation]  List all the installed images.
     [Arguments]  ${image_type}
 
-    # Desciption of argument(s):
+    # Description of argument(s):
     # image_type  Either "BMC" or "PNOR".
 
     # List the installed images.

@@ -237,8 +237,8 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
     # FFDC on test case fail.
     # Power off the OS and wait for power off state.
-    # Return the system's intial deactivation/activation setting.
-    # Return the system's intial power limit setting.
+    # Return the system's initial deactivation/activation setting.
+    # Return the system's initial power limit setting.
 
     FFDC On Test Case Fail
 
