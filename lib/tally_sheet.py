@@ -62,7 +62,7 @@ class tally_sheet:
     BMC Power On                       2    1    1
     BMC Power Off                      1    1    0
     ==============================================
-    Totals                             3    2    1
+    Totals                          3    2    1
 
     """
 
