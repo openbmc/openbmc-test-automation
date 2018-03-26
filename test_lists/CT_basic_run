@@ -26,3 +26,5 @@
 #Energy scale
 -i Escale_Power_Setting_Via_REST_And_Verify
 -i Escale_Deactivation_Test_Via_REST
+# Check for BMC dump.
+-i Verify_No_BMC_Dump
