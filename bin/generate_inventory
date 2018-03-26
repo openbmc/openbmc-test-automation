@@ -47,6 +47,7 @@ yaml_fan_list = ['Inventory/Item.interface.yaml',
                  'State/Decorator/OperationalStatus.interface.yaml', ]
 # yaml file paths for GPU.
 yaml_gpu_list = ['Inventory/Item.interface.yaml',
+                 'Inventory/Decorator/Replaceable.interface.yaml',
                  'State/Decorator/OperationalStatus.interface.yaml', ]
 # Append to master list
 yaml_master_list.append(yaml_fru_list)
