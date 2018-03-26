@@ -17,13 +17,13 @@ Test Teardown    Test Teardown Execution
 
 *** Variables ****
 
-${over_max_power}       3051
+${over_max_power}       3500
 ${max_power}            3050
 ${mid_power}            1950
-${min_power}            500
+${min_power}            600
 ${below_min_power}      499
 ${zero_power}           0
-#  The power limits shown above are documented at
+#  The power limits are documented in
 #  open-power/witherspoon-xml/master/witherspoon.xml.
 
 
