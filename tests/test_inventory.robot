@@ -224,12 +224,14 @@ Verify GPU Properties
     # Example:
     # A GPU property should have the following entries:
     # "gpu":[
+    #    "FieldReplaceable",
     #    "PrettyName",
     #    "Present",
     #    "Functional"
     # ]
     # GPU inventory:
     # "/xyz/openbmc_project/inventory/system/chassis/motherboard/gv100card2": {
+    #    "FieldReplaceable": 1,
     #    "Functional": 1,
     #    "Present": 1,
     #    "PrettyName": ""
