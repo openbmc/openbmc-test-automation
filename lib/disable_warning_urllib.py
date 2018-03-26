@@ -10,7 +10,7 @@ requests_log = logging.getLogger("requests.packages.urllib3")
 requests_log.setLevel(logging.CRITICAL)
 requests_log.propagate = False
 
+
 class disable_warning_urllib():
     def do_nothing():
         return
-

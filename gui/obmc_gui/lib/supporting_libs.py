@@ -8,10 +8,8 @@ and import as a user-defined keyword.
 
 import socket
 
+
 class supporting_libs():
 
     def get_hostname_from_ip_address(self, ip):
         return socket.gethostbyaddr(ip)[0]
-
-
-

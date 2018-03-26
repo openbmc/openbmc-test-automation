@@ -9,7 +9,6 @@ import gen_robot_valid as grv
 
 
 def suite_setup():
-
     r"""
     Do test suite setup tasks.
     """
@@ -22,7 +21,6 @@ def suite_setup():
 
 
 def test_setup():
-
     r"""
     Do test case setup tasks.
     """
@@ -32,7 +30,6 @@ def test_setup():
 
 
 def validate_suite_parms():
-
     r"""
     Validate suite parameters.
     """
@@ -44,7 +41,6 @@ def validate_suite_parms():
 
 
 def suite_teardown():
-
     r"""
     Clean up after this program.
     """

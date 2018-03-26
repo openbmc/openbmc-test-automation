@@ -27,7 +27,6 @@ def cmd_fnc(cmd_buf,
             show_err=1,
             return_stderr=0,
             ignore_err=1):
-
     r"""
     Run the given command in a shell and return the shell return code and the
     output.
@@ -140,7 +139,6 @@ def cmd_fnc_u(cmd_buf,
               show_err=1,
               return_stderr=0,
               ignore_err=1):
-
     r"""
     Call cmd_fnc with test_mode=0.  See cmd_fnc (above) for details.
 
@@ -153,7 +151,6 @@ def cmd_fnc_u(cmd_buf,
 
 
 def parse_command_string(command_string):
-
     r"""
     Parse a bash command-line command string and return the result as a
     dictionary of parms.

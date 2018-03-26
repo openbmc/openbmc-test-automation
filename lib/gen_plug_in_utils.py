@@ -13,7 +13,6 @@ import gen_print as gp
 
 
 def get_plug_in_package_name(case=None):
-
     r"""
     Return the plug-in package name (e.g. "OS_Console", "DB_Logging").
 
@@ -34,7 +33,6 @@ def get_plug_in_package_name(case=None):
 
 
 def return_plug_vars():
-
     r"""
     Return an OrderedDict which is sorted by key and which contains all of the
     plug-in environment variables.
@@ -63,8 +61,8 @@ def return_plug_vars():
 
     plug_var_dict = \
         collections.OrderedDict(sorted({k: v for (k, v) in
-                                       os.environ.items()
-                                       if re.match(regex, k)}.items()))
+                                        os.environ.items()
+                                        if re.match(regex, k)}.items()))
 
     # Register password values to prevent printing them out.  Any plug var
     # whose name ends in PASSWORD will be registered.
@@ -76,7 +74,6 @@ def return_plug_vars():
 
 
 def sprint_plug_vars(headers=1):
-
     r"""
     Sprint the plug-in environment variables (i.e. those that begin with
     AUTOBOOT_ those that begin with <plug-in package_name>_ in upper case
@@ -105,7 +102,6 @@ def sprint_plug_vars(headers=1):
 
 
 def get_plug_vars():
-
     r"""
     Get all plug-in variables and put them in corresponding global variables.
 
@@ -130,7 +126,6 @@ def get_plug_vars():
 
 def get_plug_default(var_name,
                      default=None):
-
     r"""
     Derive and return a default value for the given parm variable.
 
@@ -211,7 +206,6 @@ def get_plug_default(var_name,
 
 def srequired_plug_in(req_plug_in_names,
                       plug_in_dir_paths=None):
-
     r"""
     Return an empty string if the required plug-ins are found in
     plug_in_dir_paths.  Otherwise, return an error string.
@@ -255,7 +249,6 @@ def srequired_plug_in(req_plug_in_names,
 
 def required_plug_in(req_plug_in_names,
                      plug_in_dir_paths=None):
-
     r"""
     Return True if each of the plug-ins in req_plug_in_names can be found in
     plug_in_dir_paths  Otherwise, return False and print an error message to

@@ -31,7 +31,6 @@ PATH_LIST = gm.return_path_list()
 
 
 def get_plug_in_base_paths():
-
     r"""
     Get plug-in base paths and return them as a list.
 
@@ -51,13 +50,13 @@ def get_plug_in_base_paths():
 
     return plug_in_base_path_list
 
+
 # Define global plug_in_base_path_list and call get_plug_in_base_paths to set
 # its value.
 plug_in_base_path_list = get_plug_in_base_paths()
 
 
 def find_plug_in_package(plug_in_name):
-
     r"""
     Find and return the normalized directory path of the specified plug in.
     This is done by searching the global plug_in_base_path_list.
@@ -80,7 +79,6 @@ def find_plug_in_package(plug_in_name):
 
 def validate_plug_in_package(plug_in_dir_path,
                              mch_class="obmc"):
-
     r"""
     Validate the plug in package and return the normalized plug-in directory
     path.
@@ -131,7 +129,6 @@ def validate_plug_in_package(plug_in_dir_path,
 
 
 def return_integrated_plug_ins(mch_class="obmc"):
-
     r"""
     Return a list of integrated plug-ins.  Integrated plug-ins are plug-ins
     which are selected without regard for whether the user has specified them.
@@ -174,7 +171,6 @@ def return_integrated_plug_ins(mch_class="obmc"):
 
 def return_plug_in_packages_list(plug_in_dir_paths,
                                  mch_class="obmc"):
-
     r"""
     Return a list of plug-in packages given the plug_in_dir_paths string.
     This function calls validate_plug_in_package so it will fail if

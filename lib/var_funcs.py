@@ -19,7 +19,6 @@ import gen_misc as gm
 
 
 def create_var_dict(*args):
-
     r"""
     Create a dictionary whose keys/values are the arg names/arg values passed
     to it and return it to the caller.
@@ -64,7 +63,6 @@ default_key_val_delim = '.'
 def join_dict(dict,
               record_delim=default_record_delim,
               key_val_delim=default_key_val_delim):
-
     r"""
     Join a dictionary's keys and values into a string and return the string.
 
@@ -92,13 +90,12 @@ def join_dict(dict,
 
     format_str = '%s' + key_val_delim + '%s'
     return record_delim.join([format_str % (key, value) for (key, value) in
-                             dict.items()])
+                              dict.items()])
 
 
 def split_to_dict(string,
                   record_delim=default_record_delim,
                   key_val_delim=default_key_val_delim):
-
     r"""
     Split a string into a dictionary and return it.
 
@@ -148,7 +145,6 @@ def split_to_dict(string,
 def create_file_path(file_name_dict,
                      dir_path="/tmp/",
                      file_suffix=""):
-
     r"""
     Create a file path using the given parameters and return it.
 
@@ -166,7 +162,6 @@ def create_file_path(file_name_dict,
 
 
 def parse_file_path(file_path):
-
     r"""
     Parse a file path created by create_file_path and return the result as a
     dictionary.
@@ -214,7 +209,6 @@ def parse_key_value(string,
                     strip=" ",
                     to_lower=1,
                     underscores=1):
-
     r"""
     Parse a key/value string and return as a key/value tuple.
 
@@ -277,7 +271,6 @@ def parse_key_value(string,
 def key_value_list_to_dict(list,
                            process_indent=0,
                            **args):
-
     r"""
     Convert a list containing key/value strings to a dictionary and return it.
 
@@ -406,7 +399,6 @@ def key_value_list_to_dict(list,
 
 def key_value_outbuf_to_dict(out_buf,
                              **args):
-
     r"""
     Convert a buffer with a key/value string on each line to a dictionary and
     return it.
@@ -454,7 +446,6 @@ def key_value_outbuf_to_dict(out_buf,
 
 def list_to_report(report_list,
                    to_lower=1):
-
     r"""
     Convert a list containing report text lines to a report "object" and
     return it.
@@ -528,7 +519,6 @@ def list_to_report(report_list,
 
 def outbuf_to_report(out_buf,
                      **args):
-
     r"""
     Convert a text buffer containing report lines to a report "object" and
     return it.

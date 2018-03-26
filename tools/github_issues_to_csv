@@ -45,13 +45,13 @@ def write_issues(response, csv_out):
 
             # Change the following line to write out additional fields
             csv_out.writerow([labels.encode('utf-8'),
-                             issue.get('title').encode('utf-8'),
-                             issue.get('state').encode('utf-8'),
-                             issue.get('created_at').split('T')[0],
-                             close_date,
-                             issue.get('html_url').encode('utf-8'),
-                             issue.get('user').get('login').encode('utf-8'),
-                             owners, milestone_resp])
+                              issue.get('title').encode('utf-8'),
+                              issue.get('state').encode('utf-8'),
+                              issue.get('created_at').split('T')[0],
+                              close_date,
+                              issue.get('html_url').encode('utf-8'),
+                              issue.get('user').get('login').encode('utf-8'),
+                              owners, milestone_resp])
 
 
 def get_issues_from_github_to_csv(name, response):
@@ -68,11 +68,11 @@ def get_issues_from_github_to_csv(name, response):
     if 'link' in response.headers:
         pages = {rel[6:-1]: url[url.index('<')+1:-1] for url, rel in
                  (link.split(';') for link in
-                 response.headers['link'].split(','))}
+                  response.headers['link'].split(','))}
         while 'last' in pages and 'next' in pages:
             pages = {rel[6:-1]: url[url.index('<')+1:-1] for url, rel in
                      (link.split(';') for link in
-                     response.headers['link'].split(','))}
+                      response.headers['link'].split(','))}
             response = requests.get(pages['next'], auth=auth)
             write_issues(response, csv_out)
             if pages['next'] == pages['last']:

@@ -17,7 +17,6 @@ from robot.libraries.BuiltIn import BuiltIn
 
 
 def get_sol_info():
-
     r"""
     Get all SOL info and return it as a dictionary.
 
@@ -63,7 +62,6 @@ def get_sol_info():
 
 
 def set_sol_setting(setting_name, setting_value):
-
     r"""
     Set SOL setting with given value.
 
@@ -79,7 +77,6 @@ def set_sol_setting(setting_name, setting_value):
 
 
 def get_lan_print_dict():
-
     r"""
     Get IPMI 'lan print' output and return it as a dictionary.
 
@@ -152,7 +149,6 @@ def get_lan_print_dict():
 
 
 def get_ipmi_power_reading(strip_watts=1):
-
     r"""
     Get IPMI power reading data and return it as a dictionary.
 
@@ -194,7 +190,6 @@ def get_ipmi_power_reading(strip_watts=1):
 
 
 def get_mc_info():
-
     r"""
     Get IPMI mc info data and return it as a dictionary.
 
@@ -254,7 +249,6 @@ def get_mc_info():
 
 
 def get_sdr_info():
-
     r"""
     Get IPMI sdr info data and return it as a dictionary.
 

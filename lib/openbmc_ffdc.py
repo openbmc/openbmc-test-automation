@@ -18,7 +18,6 @@ from robot.libraries.BuiltIn import BuiltIn
 def ffdc(ffdc_dir_path=None,
          ffdc_prefix=None,
          ffdc_function_list=""):
-
     r"""
     Gather First Failure Data Capture (FFDC).
 
@@ -95,7 +94,6 @@ def ffdc(ffdc_dir_path=None,
 
 def set_ffdc_defaults(ffdc_dir_path=None,
                       ffdc_prefix=None):
-
     r"""
     Set a default value for ffdc_dir_path and ffdc_prefix if they don't
     already have values.  Return both values.
@@ -165,4 +163,3 @@ def set_ffdc_defaults(ffdc_dir_path=None,
     BuiltIn().set_global_variable("${FFDC_PREFIX}", ffdc_prefix)
 
     return ffdc_dir_path, ffdc_prefix
-

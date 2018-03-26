@@ -15,7 +15,6 @@ import variables as var
 
 
 def print_error_logs(error_logs, key_list=None):
-
     r"""
     Print the error logs to the console screen.
 
