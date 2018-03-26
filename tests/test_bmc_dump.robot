@@ -21,6 +21,14 @@ Pre Dump BMC Performance Test
     Open Connection And Log In
     Check BMC Performance
 
+Delete BMC Dumps And Verify
+    [Documentation]  Delete BMC dumps and verify.
+    [Tags]  Delete_BMC_Dumps_And_Verify
+
+    Delete All BMC Dump
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+
 
 Verify User Initiated BMC Dump When Powered Off
     [Documentation]  Create user initiated BMC dump at host off state and
