@@ -20,7 +20,6 @@ import gen_cmd as gc
 
 def rvalidate_plug_ins(plug_in_dir_paths,
                        quiet=1):
-
     r"""
     Call the external validate_plug_ins.py program which validates the plug-in
     dir paths given to it.  Return a list containing a normalized path for
@@ -58,7 +57,6 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
                               release_type="obmc",
                               quiet=None,
                               debug=None):
-
     r"""
     Call the external process_plug_in_packages.py to process the plug-in
     packages.  Return the following:

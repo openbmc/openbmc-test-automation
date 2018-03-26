@@ -107,7 +107,7 @@ def file_diff(file1_path,
     skip_list = filter(None, re.split(r"[ ]*,[ ]*", skip_string))
     ignore_string = ' '.join([("-I " + '"' + x + '"') for x in skip_list])
     command = ' '.join(filter(None, ["diff", ignore_string, file1_path,
-                       file2_path]))
+                                     file2_path]))
 
     line_to_print = now + "   " + command + "\n"
     file.write(line_to_print)

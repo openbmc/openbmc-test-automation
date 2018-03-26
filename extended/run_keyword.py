@@ -13,7 +13,6 @@ import re
 
 
 def setup():
-
     r"""
     Do general program setup tasks.
     """
@@ -26,7 +25,6 @@ def setup():
 
 
 def validate_parms():
-
     r"""
     Validate all program parameters.
     """
@@ -37,7 +35,6 @@ def validate_parms():
 
 
 def program_teardown():
-
     r"""
     Clean up after this program.
     """
@@ -49,7 +46,6 @@ def my_run_keywords(lib_file_path,
                     keyword_string,
                     quiet=0,
                     test_mode=0):
-
     r"""
     Run the keywords in the keyword string.
 
@@ -87,7 +83,6 @@ def my_run_keywords(lib_file_path,
     # By having this program support variable assignments and multiple
     # keywords, the user can invoke it with the following keyword string.
     # ${my_dict}=  Create Dictionary  foo=bar ; Want Dictionary  ${my_dict}
-
 
     # The user can pass multiple lib/resource paths by separating them with a
     # colon.
@@ -133,7 +128,6 @@ def my_run_keywords(lib_file_path,
 
 
 def main_py():
-
     r"""
     Do main program processing.
     """
@@ -146,4 +140,3 @@ def main_py():
     test_mode = int(BuiltIn().get_variable_value("${test_mode}"))
 
     my_run_keywords(lib_file_path, keyword_string, quiet, test_mode)
-

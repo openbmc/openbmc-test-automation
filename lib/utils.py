@@ -18,7 +18,6 @@ import collections
 
 
 def set_power_policy_method():
-
     r"""
     Set the global bmc_power_policy_method to either 'Old' or 'New'.
 
@@ -75,7 +74,6 @@ def set_power_policy_method():
 
 
 def translate_power_policy_value(policy):
-
     r"""
     Translate the policy value and return the result.
 
@@ -103,7 +101,6 @@ def translate_power_policy_value(policy):
 
 
 def get_bmc_date_time():
-
     r"""
     Get date/time info from BMC and return as a dictionary.
 
@@ -153,7 +150,6 @@ def get_bmc_date_time():
 
 
 def get_bmc_df(df_parm_string=""):
-
     r"""
     Get df report from BMC and return as a report "object".
 
@@ -188,7 +184,6 @@ def get_bmc_df(df_parm_string=""):
 
 
 def get_sbe():
-
     r"""
     Return CFAM value which contains such things as SBE side bit.
     """
@@ -198,8 +193,8 @@ def get_sbe():
 
     return int(out_buf, 16)
 
-def compare_mac_address(sys_mac_addr, user_mac_addr):
 
+def compare_mac_address(sys_mac_addr, user_mac_addr):
     r"""
     Return 1 if the MAC value matched, otherwise 0.
 

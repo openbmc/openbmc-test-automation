@@ -15,7 +15,6 @@ def svalid_value(var_value,
                  invalid_values=[],
                  valid_values=[],
                  var_name=""):
-
     r"""
     Return an empty string if var_value is a valid value.  Otherwise, return
     an error string.
@@ -90,7 +89,6 @@ def valid_value(var_value,
                 invalid_values=[],
                 valid_values=[],
                 var_name=""):
-
     r"""
     Return True if var_value is a valid value.  Otherwise, return False and
     print an error message to stderr.
@@ -110,7 +108,6 @@ def valid_value(var_value,
 
 def svalid_integer(var_value,
                    var_name=""):
-
     r"""
     Return an empty string if var_value is a valid integer.  Otherwise, return
     an error string.
@@ -148,7 +145,6 @@ def svalid_integer(var_value,
 
 def valid_integer(var_value,
                   var_name=""):
-
     r"""
     Return True if var_value is a valid integer.  Otherwise, return False and
     print an error message to stderr.
@@ -167,7 +163,6 @@ def valid_integer(var_value,
 
 def svalid_dir_path(var_value,
                     var_name=""):
-
     r"""
     Return an empty string if var_value is a valid directory path.  Otherwise,
     return an error string.
@@ -196,7 +191,6 @@ def svalid_dir_path(var_value,
 
 def valid_dir_path(var_value,
                    var_name=""):
-
     r"""
     Return True if var_value is a valid integer.  Otherwise, return False and
     print an error message to stderr.
@@ -216,7 +210,6 @@ def valid_dir_path(var_value,
 
 def svalid_file_path(var_value,
                      var_name=""):
-
     r"""
     Return an empty string if var_value is a valid file path.  Otherwise,
     return an error string.
@@ -245,7 +238,6 @@ def svalid_file_path(var_value,
 
 def valid_file_path(var_value,
                     var_name=""):
-
     r"""
     Return True if var_value is a valid integer.  Otherwise, return False and
     print an error message to stderr.

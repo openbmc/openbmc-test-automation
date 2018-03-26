@@ -66,7 +66,6 @@ class var_stack:
 
     def __init__(self,
                  obj_name='var_stack'):
-
         r"""
         Initialize a new object of this class type.
 
@@ -83,7 +82,6 @@ class var_stack:
             self.__stack_dict = DotDict()
 
     def sprint_obj(self):
-
         r"""
         sprint the fields of this object.  This would normally be for debug
         purposes.
@@ -98,7 +96,6 @@ class var_stack:
         return buffer
 
     def print_obj(self):
-
         r"""
         print the fields of this object to stdout.  This would normally be for
         debug purposes.
@@ -109,7 +106,6 @@ class var_stack:
     def push(self,
              var_value,
              var_name=""):
-
         r"""
         push the var_name/var_value pair onto the stack.
 
@@ -136,7 +132,6 @@ class var_stack:
 
     def pop(self,
             var_name=""):
-
         r"""
         Pop the value for the given var_name from the stack and return it.
 

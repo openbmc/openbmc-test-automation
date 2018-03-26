@@ -18,7 +18,6 @@ default_string = '  The default value is "%(default)s".'
 
 def gen_get_options(parser,
                     stock_list=[]):
-
     r"""
     Parse the command line arguments using the parser object passed and return
     True/False (i.e. pass/fail).  Also set the following built in values:
@@ -156,7 +155,6 @@ def gen_get_options(parser,
 
 def set_pgm_arg(var_value,
                 var_name=None):
-
     r"""
     Set the value of the arg_obj.__dict__ entry named in var_name with the
     var_value provided.  Also, set corresponding global variable.
@@ -185,7 +183,6 @@ def set_pgm_arg(var_value,
 # Put this in gen_opt.py or gen_parm.py or gen_arg.py.
 def sprint_args(arg_obj,
                 indent=0):
-
     r"""
     sprint_var all of the arguments found in arg_obj and return the result as
     a string.
@@ -210,7 +207,6 @@ def sprint_args(arg_obj,
 
 def gen_post_validation(exit_function=None,
                         signal_handler=None):
-
     r"""
     Do generic post-validation processing.  By "post", we mean that this is to
     be called from a validation function after the caller has done any

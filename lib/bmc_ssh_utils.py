@@ -21,7 +21,6 @@ def bmc_execute_command(cmd_buf,
                         fork=0,
                         quiet=None,
                         test_mode=None):
-
     r"""
     Run the given command in an BMC SSH session and return the stdout, stderr
     and the return code.
@@ -81,7 +80,6 @@ def os_execute_command(cmd_buf,
                        fork=0,
                        quiet=None,
                        test_mode=None):
-
     r"""
     Run the given command in an OS SSH session and return the stdout, stderr
     and the return code.
@@ -139,7 +137,6 @@ def xcat_execute_command(cmd_buf,
                          fork=0,
                          quiet=None,
                          test_mode=None):
-
     r"""
     Run the given command in an XCAT SSH session and return the stdout, stderr
     and the return code.

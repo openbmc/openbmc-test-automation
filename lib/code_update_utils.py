@@ -19,8 +19,8 @@ import gen_print as gp
 import variables as var
 from robot.libraries.BuiltIn import BuiltIn
 
-def verify_no_duplicate_image_priorities(image_purpose):
 
+def verify_no_duplicate_image_priorities(image_purpose):
     r"""
     Check that there are no active images with the same purpose and priority.
 
@@ -40,12 +40,11 @@ def verify_no_duplicate_image_priorities(image_purpose):
         image_priority = image["Priority"]
         if image_priority in taken_priorities:
             BuiltIn().fail("Found active images with the same priority.\n"
-                    + gp.sprint_vars(image, taken_priorities[image_priority]))
+                           + gp.sprint_vars(image, taken_priorities[image_priority]))
         taken_priorities[image_priority] = image
 
 
 def get_non_running_bmc_software_object():
-
     r"""
     Get the URI to a BMC image from software that is not running on the BMC.
     """
@@ -60,7 +59,7 @@ def get_non_running_bmc_software_object():
 
     for image_name in images:
         _, image_properties = keyword.run_key(
-                "Get Host Software Property  " + image_name)
+            "Get Host Software Property  " + image_name)
         if 'Purpose' in image_properties and 'Version' in image_properties \
                 and image_properties['Purpose'] != var.VERSION_PURPOSE_HOST \
                 and image_properties['Version'] != cur_img_version:
@@ -69,7 +68,6 @@ def get_non_running_bmc_software_object():
 
 
 def delete_all_pnor_images():
-
     r"""
     Delete all PNOR images from the BMC.
     """
@@ -86,7 +84,6 @@ def delete_all_pnor_images():
 
 
 def wait_for_activation_state_change(version_id, initial_state):
-
     r"""
     Wait for the current activation state of ${version_id} to
     change from the state provided by the calling function.
@@ -103,13 +100,14 @@ def wait_for_activation_state_change(version_id, initial_state):
     while (retry < 30):
         # TODO: Use retry option in run_key when available.
         status, software_state = keyword.run_key("Read Properties  " +
-                                    var.SOFTWARE_VERSION_URI + str(version_id),
-                                    ignore=1)
+                                                 var.SOFTWARE_VERSION_URI +
+                                                 str(version_id),
+                                                 ignore=1)
         if status == 'FAIL':
             num_read_errors += 1
             if num_read_errors > read_fail_threshold:
                 message = "Read errors exceeds threshold:\n " \
-                        + gp.sprint_vars(num_read_errors, read_fail_threshold)
+                    + gp.sprint_vars(num_read_errors, read_fail_threshold)
                 BuiltIn().fail(message)
             time.sleep(10)
             continue
@@ -125,7 +123,6 @@ def wait_for_activation_state_change(version_id, initial_state):
 
 
 def get_latest_file(dir_path):
-
     r"""
     Get the path to the latest uploaded file.
 
@@ -137,13 +134,12 @@ def get_latest_file(dir_path):
 
     keyword.run_key_u("Open Connection And Log In")
     status, ret_values =\
-            keyword.run_key("Execute Command On BMC  cd " + dir_path
-            + "; stat -c '%Y %n' * | sort -k1,1nr | head -n 1", ignore=1)
+        keyword.run_key("Execute Command On BMC  cd " + dir_path
+                        + "; stat -c '%Y %n' * | sort -k1,1nr | head -n 1", ignore=1)
     return ret_values.split(" ")[-1]
 
 
 def get_version_tar(tar_file_path):
-
     r"""
     Read the image version from the MANIFEST inside the tarball.
 
@@ -154,8 +150,8 @@ def get_version_tar(tar_file_path):
 
     tar = tarfile.open(tar_file_path)
     for member in tar.getmembers():
-        f=tar.extractfile(member)
-        content=f.read()
+        f = tar.extractfile(member)
+        content = f.read()
         if "version=" in content:
             content = content.split("\n")
             content = [x for x in content if "version=" in x]
@@ -166,7 +162,6 @@ def get_version_tar(tar_file_path):
 
 
 def get_image_version(file_path):
-
     r"""
     Read the file for a version object.
 
@@ -176,13 +171,12 @@ def get_image_version(file_path):
 
     keyword.run_key_u("Open Connection And Log In")
     status, ret_values =\
-            keyword.run_key("Execute Command On BMC  cat "
-            + file_path + " | grep \"version=\"", ignore=1)
+        keyword.run_key("Execute Command On BMC  cat "
+                        + file_path + " | grep \"version=\"", ignore=1)
     return (ret_values.split("\n")[0]).split("=")[-1]
 
 
 def get_image_purpose(file_path):
-
     r"""
     Read the file for a purpose object.
 
@@ -192,13 +186,12 @@ def get_image_purpose(file_path):
 
     keyword.run_key_u("Open Connection And Log In")
     status, ret_values =\
-            keyword.run_key("Execute Command On BMC  cat "
-            + file_path + " | grep \"purpose=\"", ignore=1)
+        keyword.run_key("Execute Command On BMC  cat "
+                        + file_path + " | grep \"purpose=\"", ignore=1)
     return ret_values.split("=")[-1]
 
 
 def get_image_path(image_version):
-
     r"""
     Query the upload image dir for the presence of image matching
     the version that was read from the MANIFEST before uploading
@@ -212,8 +205,8 @@ def get_image_path(image_version):
 
     keyword.run_key_u("Open Connection And Log In")
     status, image_list =\
-            keyword.run_key("Execute Command On BMC  ls -d "
-                            + var.IMAGE_UPLOAD_DIR_PATH + "*/")
+        keyword.run_key("Execute Command On BMC  ls -d "
+                        + var.IMAGE_UPLOAD_DIR_PATH + "*/")
 
     image_list = image_list.split("\n")
     retry = 0
@@ -228,7 +221,6 @@ def get_image_path(image_version):
 
 def verify_image_upload(image_version,
                         timeout=3):
-
     r"""
     Verify the image was uploaded correctly and that it created
     a valid d-bus object. If the first check for the image
@@ -247,7 +239,7 @@ def verify_image_upload(image_version,
     keyword.run_key_u("Open Connection And Log In")
     image_purpose = get_image_purpose(image_path + "MANIFEST")
     if (image_purpose == var.VERSION_PURPOSE_BMC or
-        image_purpose == var.VERSION_PURPOSE_HOST):
+            image_purpose == var.VERSION_PURPOSE_HOST):
         uri = var.SOFTWARE_VERSION_URI + image_version_id
         ret_values = ""
         for itr in range(timeout * 2):
@@ -269,7 +261,6 @@ def verify_image_upload(image_version,
 
 
 def verify_image_not_in_bmc_uploads_dir(image_version, timeout=3):
-
     r"""
     Check that an image with the given version is not unpacked inside of the
     BMCs image uploads directory. If no image is found, retry every 30 seconds
@@ -285,11 +276,10 @@ def verify_image_not_in_bmc_uploads_dir(image_version, timeout=3):
     keyword.run_key('Open Connection And Log In')
     for i in range(timeout * 2):
         stat, grep_res = keyword.run_key('Execute Command On BMC  '
-                + 'ls ' + var.IMAGE_UPLOAD_DIR_PATH + '*/MANIFEST 2>/dev/null '
-                + '| xargs grep -rl "version=' + image_version + '"')
+                                         + 'ls ' + var.IMAGE_UPLOAD_DIR_PATH + '*/MANIFEST 2>/dev/null '
+                                         + '| xargs grep -rl "version=' + image_version + '"')
         image_dir = os.path.dirname(grep_res.split('\n')[0])
         if '' != image_dir:
             keyword.run_key('Execute Command On BMC  rm -rf ' + image_dir)
             BuiltIn().fail('Found invalid BMC Image: ' + image_dir)
         time.sleep(30)
-
