@@ -7,6 +7,7 @@ Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/boot_utils.robot
+Resource            ../lib/logging_utils.robot
 
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
