@@ -8,22 +8,24 @@ Documentation     Energy scale base tests.
 
 Resource          ../lib/energy_scale_utils.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/utils.robot
+Resource          ../lib/logging_utils.robot
+Library           ../lib/logging_utils.py
 
 
 Suite Setup      Suite Setup Execution
 Test Teardown    Test Teardown Execution
 
 
-
 *** Variables ****
 
-${over_max_power}       3051
+${over_max_power}       3500
 ${max_power}            3050
 ${mid_power}            1950
-${min_power}            500
+${min_power}            600
 ${below_min_power}      499
 ${zero_power}           0
-#  The power limits shown above are documented at
+#  The power limits are documented in
 #  open-power/witherspoon-xml/master/witherspoon.xml.
 
 
@@ -107,6 +109,16 @@ Verify Power Limits
     Test Power Limit  ${min_power}  ${zero_power}
     Test Power Limit  ${max_power}  ${over_max_power}
 
+    # There should be one error log entry for each attempt to set
+    # a power limit out of range.
+    ${error_logs}=  Get Error Logs
+    ${num_logs}=  Get Length  ${error_logs}
+    Run Keyword If  ${num_logs} != 3  Run Keywords
+    ...  Print Error Logs  ${error_logs}
+    ...  AND  Fail  msg=Unexpected number of error logs.
+
+    Delete Error Logs
+
 
 Test Power Limit
     [Documentation]  Set power and check limit.
@@ -118,11 +130,9 @@ Test Power Limit
 
     Set DCMI Power Limit And Verify  ${good_power}
 
-    # Try to set out of bounds.
-    ${expected_error}=  Set Variable
-    ...  Failed setting dcmi power limit to ${outside_bounds_power} watts.
-    Run Keyword and Expect Error  ${expected_error}
-    ...  Set DCMI Power Limit And Verify  ${outside_bounds_power}
+    # Attempt set power limit out of range.
+    ${data}=  Create Dictionary  data=${outside_bounds_power}
+    Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCap  data=${data}
 
 
 Suite Setup Execution
@@ -139,6 +149,8 @@ Suite Setup Execution
     # Save the power limit setting.
     ${initial_power_setting}=  Get DCMI Power Limit
     Set Suite Variable  ${initial_power_setting}  children=true
+
+    Delete Error Logs
 
 
 Test Teardown Execution
