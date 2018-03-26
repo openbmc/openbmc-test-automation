@@ -59,7 +59,6 @@ def run_until_keyword_fails(retry,
 
 
 def htx_error_log_to_list(htx_error_log_output):
-
     r"""
     Parse htx error log output string and return list of strings in the form
     "<field name>:<field value>".
@@ -148,7 +147,6 @@ def htx_error_log_to_list(htx_error_log_output):
 
 
 def build_error_dict(htx_error_log_output):
-
     r"""
     Builds error list into a list of dictionary entries.
 
@@ -218,4 +216,3 @@ def build_error_dict(htx_error_log_output):
         error_index += 1
 
     return error_dict
-

@@ -14,7 +14,6 @@ from robot.api import logger
 def rvalid_value(var_name,
                  invalid_values=[],
                  valid_values=[]):
-
     r"""
     Validate a robot value.
 
@@ -86,7 +85,6 @@ def rvalid_value(var_name,
 
 
 def rvalid_integer(var_name):
-
     r"""
     Validate a robot integer.
 

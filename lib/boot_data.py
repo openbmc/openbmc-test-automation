@@ -30,7 +30,6 @@ code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
 
 
 def create_boot_table(file_path=None):
-
     r"""
     Read the boot table JSON file, convert it to an object and return it.
 
@@ -83,7 +82,6 @@ def create_boot_table(file_path=None):
 
 
 def create_valid_boot_list(boot_table):
-
     r"""
     Return a list of all of the valid boot types (e.g. ['BMC Power On',
     'BMC Power Off', ....]
@@ -97,7 +95,6 @@ def create_valid_boot_list(boot_table):
 
 
 def read_boot_lists(dir_path="data/boot_lists/"):
-
     r"""
     Read the contents of all the boot lists files found in the given boot lists
     directory and return dictionary of the lists.
@@ -146,7 +143,6 @@ def read_boot_lists(dir_path="data/boot_lists/"):
 
 def valid_boot_list(boot_list,
                     valid_boot_types):
-
     r"""
     Verify that each entry in boot_list is a supported boot test.
 
@@ -177,7 +173,6 @@ class boot_results:
                  boot_pass=0,
                  boot_fail=0,
                  obj_name='boot_results'):
-
         r"""
         Initialize the boot results object.
 
@@ -215,7 +210,6 @@ class boot_results:
             self.__boot_results.add_row(boot_name)
 
     def return_total_pass_fail(self):
-
         r"""
         Return the total boot_pass and boot_fail values.  This information is
         comprised of the pass/fail values from the table plus the initial
@@ -229,7 +223,6 @@ class boot_results:
     def update(self,
                boot_type,
                boot_status):
-
         r"""
         Update our boot_results_table.  This includes:
         - Updating the record for the given boot_type by incrementing the pass
@@ -247,7 +240,6 @@ class boot_results:
 
     def sprint_report(self,
                       header_footer="\n"):
-
         r"""
         String-print the formatted boot_resuls_table and return them.
 
@@ -266,7 +258,6 @@ class boot_results:
 
     def print_report(self,
                      header_footer="\n"):
-
         r"""
         Print the formatted boot_resuls_table to the console.
 
@@ -276,7 +267,6 @@ class boot_results:
         grp.rqprint(self.sprint_report(header_footer))
 
     def sprint_obj(self):
-
         r"""
         sprint the fields of this object.  This would normally be for debug
         purposes only.
@@ -293,7 +283,6 @@ class boot_results:
         return buffer
 
     def print_obj(self):
-
         r"""
         Print the fields of this object to stdout.  This would normally be for
         debug purposes.
@@ -305,7 +294,6 @@ class boot_results:
 def create_boot_results_file_path(pgm_name,
                                   openbmc_nickname,
                                   master_pid):
-
     r"""
     Create a file path to be used to store a boot_results object.
 
@@ -330,7 +318,6 @@ def create_boot_results_file_path(pgm_name,
 
 
 def cleanup_boot_results_file():
-
     r"""
     Delete all boot results files whose corresponding pids are no longer
     active.
@@ -347,4 +334,3 @@ def cleanup_boot_results_file():
             gp.qprint_timen("Preserving " + file_path + ".")
         else:
             gc.cmd_fnc("rm -f " + file_path)
-

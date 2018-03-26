@@ -178,7 +178,6 @@ invalid_state_match = DotDict([('rest', '^$'),
 
 
 def return_state_constant(state_name='default'):
-
     r"""
     Return the named state dictionary constant.
     """
@@ -189,7 +188,6 @@ def return_state_constant(state_name='default'):
 
 
 def anchor_state(state):
-
     r"""
     Add regular expression anchors ("^" and "$") to the beginning and end of
     each item in the state dictionary passed in.  Return the resulting
@@ -208,7 +206,6 @@ def anchor_state(state):
 
 
 def strip_anchor_state(state):
-
     r"""
     Strip regular expression anchors ("^" and "$") from the beginning and end
     of each item in the state dictionary passed in.  Return the resulting
@@ -229,7 +226,6 @@ def strip_anchor_state(state):
 def compare_states(state,
                    match_state,
                    match_type='and'):
-
     r"""
     Compare 2 state dictionaries.  Return True if they match and False if they
     don't.  Note that the match_state dictionary does not need to have an entry
@@ -286,7 +282,6 @@ def get_os_state(os_host="",
                  req_states=default_os_req_states,
                  os_up=True,
                  quiet=None):
-
     r"""
     Get component states for the operating system such as ping, login,
     etc, put them into a dictionary and return them to the caller.
@@ -424,7 +419,6 @@ def get_state(openbmc_host="",
               os_password="",
               req_states=default_req_states,
               quiet=None):
-
     r"""
     Get component states such as chassis state, bmc state, etc, put them into a
     dictionary and return them to the caller.
@@ -664,7 +658,6 @@ def check_state(match_state,
                 os_username="",
                 os_password="",
                 quiet=None):
-
     r"""
     Check that the Open BMC machine's composite state matches the specified
     state.  On success, this keyword returns the machine's composite state as a
@@ -742,7 +735,6 @@ def wait_state(match_state=(),
                os_username="",
                os_password="",
                quiet=None):
-
     r"""
     Wait for the Open BMC machine's composite state to match the specified
     state.  On success, this keyword returns the machine's composite state as
@@ -834,7 +826,6 @@ def wait_state(match_state=(),
 
 def wait_for_comm_cycle(start_boot_seconds,
                         quiet=None):
-
     r"""
     Wait for communications to the BMC to stop working and then resume working.
     This function is useful when you have initiated some kind of reboot.
@@ -895,4 +886,3 @@ def wait_for_comm_cycle(start_boot_seconds,
     gp.qprint_timen("Verifying that REST API interface is working.")
     match_state = DotDict([('rest', '^1$')])
     state = wait_state(match_state, wait_time="5 mins", interval="2 seconds")
-

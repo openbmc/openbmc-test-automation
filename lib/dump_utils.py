@@ -21,7 +21,6 @@ import variables as var
 
 
 def get_dump_dict(quiet=None):
-
     r"""
     Get dump information and return as an ordered dictionary where the keys
     are the dump IDs and the values are the full path names of the dumps.
@@ -56,7 +55,6 @@ def get_dump_dict(quiet=None):
 def valid_dump(dump_id,
                dump_dict=None,
                quiet=None):
-
     r"""
     Verify that dump_id is a valid.  If it is not valid, issue robot failure
     message.
@@ -97,7 +95,6 @@ def scp_dumps(targ_dir_path,
               targ_file_prefix="",
               dump_dict=None,
               quiet=None):
-
     r"""
     SCP all dumps from the BMC to the indicated directory on the local system
     and return a list of the new files.

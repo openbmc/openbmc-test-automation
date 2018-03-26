@@ -22,7 +22,6 @@ if robot_env:
 
 
 def add_trailing_slash(dir_path):
-
     r"""
     Add a trailing slash to the directory path if it doesn't already have one
     and return it.
@@ -35,7 +34,6 @@ def add_trailing_slash(dir_path):
 
 
 def which(file_path):
-
     r"""
     Find the full path of an executable file and return it.
 
@@ -65,7 +63,6 @@ def which(file_path):
 
 
 def dft(value, default):
-
     r"""
     Return default if value is None.  Otherwise, return value.
 
@@ -89,7 +86,6 @@ def dft(value, default):
 def get_mod_global(var_name,
                    default=None,
                    mod_name="__main__"):
-
     r"""
     Get module global variable value and return it.
 
@@ -124,7 +120,6 @@ def get_mod_global(var_name,
 
 def global_default(var_value,
                    default=0):
-
     r"""
     If var_value is not None, return it.  Otherwise, return the global
     variable of the same name, if it exists.  If not, return default.
@@ -151,7 +146,6 @@ def global_default(var_value,
 def set_mod_global(var_value,
                    mod_name="__main__",
                    var_name=None):
-
     r"""
     Set a global variable for a given module.
 
@@ -179,7 +173,6 @@ def set_mod_global(var_value,
 
 
 def my_parm_file(prop_file_path):
-
     r"""
     Read a properties file, put the keys/values into a dictionary and return
     the dictionary.
@@ -224,7 +217,6 @@ def file_to_list(file_path,
                  newlines=0,
                  comments=1,
                  trim=0):
-
     r"""
     Return the contents of a file as a list.  Each element of the resulting
     list is one line from the file.
@@ -258,7 +250,6 @@ def file_to_list(file_path,
 
 
 def return_path_list():
-
     r"""
     This function will split the PATH environment variable into a PATH_LIST
     and return it.  Each element in the list will be normalized and have a
@@ -272,7 +263,6 @@ def return_path_list():
 
 
 def escape_bash_quotes(buffer):
-
     r"""
     Escape quotes in string and return it.
 
@@ -296,7 +286,6 @@ def escape_bash_quotes(buffer):
 
 
 def quote_bash_parm(parm):
-
     r"""
     Return the bash command line parm with single quotes if they are needed.
 
@@ -317,7 +306,6 @@ def quote_bash_parm(parm):
 
 def get_host_name_ip(host,
                      short_name=0):
-
     r"""
     Get the host name and the IP address for the given host and return them as
     a tuple.
@@ -346,7 +334,6 @@ def get_host_name_ip(host,
 
 
 def pid_active(pid):
-
     r"""
     Return true if pid represents an active pid and false otherwise.
 

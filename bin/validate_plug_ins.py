@@ -53,7 +53,6 @@ stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
 
 def exit_function(signal_number=0,
                   frame=None):
-
     r"""
     Execute whenever the program ends normally or with the signals that we
     catch (i.e. TERM, INT).
@@ -66,7 +65,6 @@ def exit_function(signal_number=0,
 
 
 def signal_handler(signal_number, frame):
-
     r"""
     Handle signals.  Without a function to catch a SIGTERM or SIGINT, our
     program would terminate immediately with return code 143 and without
@@ -84,7 +82,6 @@ def signal_handler(signal_number, frame):
 
 
 def validate_parms():
-
     r"""
     Validate program parameters, etc.  Return True or False accordingly.
     """
@@ -95,7 +92,6 @@ def validate_parms():
 
 
 def main():
-
     r"""
     This is the "main" function.  The advantage of having this function vs
     just doing this in the true mainline is that you can:

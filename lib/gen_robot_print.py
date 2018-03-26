@@ -28,7 +28,6 @@ except KeyError:
 
 def rprint(buffer="",
            stream="STDOUT"):
-
     r"""
     rprint stands for "Robot Print".  This keyword will print the user's
     buffer to the console.  This keyword does not write a linefeed.  It is the
@@ -45,7 +44,6 @@ def rprint(buffer="",
 
 def rprintn(buffer="",
             stream='STDOUT'):
-
     r"""
     rprintn stands for "Robot print with linefeed".  This keyword will print
     the user's buffer to the console along with a linefeed.  It is basically
@@ -60,7 +58,6 @@ def rprintn(buffer="",
 
 
 def sprint_vars(*args):
-
     r"""
     sprint_vars stands for "String Print Vars".  This is a robot redefinition
     of the sprint_vars function in gen_print.py.  Given a list of variable
@@ -119,7 +116,6 @@ def sprint_vars(*args):
 
 
 def sprint_pgm_header(indent=0):
-
     r"""
     Sprint a standardized header that robot programs should print at the
     beginning of the run.  The header includes useful information like command
@@ -134,7 +130,6 @@ def sprint_pgm_header(indent=0):
 
 
 def sprint_error_report(error_text="\n"):
-
     r"""
     Print a standardized error report that robot programs should print on
     failure.  The report includes useful information like error text, command
@@ -150,7 +145,6 @@ def sprint_error_report(error_text="\n"):
 
 def sprint_issuing_keyword(cmd_buf,
                            test_mode=0):
-
     r"""
     Return a line indicating a robot command (i.e. keyword + args) that the
     program is about to execute.
@@ -177,7 +171,6 @@ def sprint_issuing_keyword(cmd_buf,
 
 
 def sprint_auto_vars(headers=0):
-
     r"""
     This keyword will string print all of the Automatic Variables described in
     the Robot User's Guide using rprint_vars.

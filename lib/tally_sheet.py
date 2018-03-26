@@ -70,7 +70,6 @@ class tally_sheet:
                  row_key_field_name='Description',
                  init_fields_dict=dict(),
                  obj_name='tally_sheet'):
-
         r"""
         Create a tally sheet object.
 
@@ -108,7 +107,6 @@ class tally_sheet:
                       obj_name='tally_sheet')
 
     def set_sum_fields(self, sum_fields):
-
         r"""
         Set the sum fields, i.e. create a list of field names which are to be
         summed and included on the totals line of reports.
@@ -120,7 +118,6 @@ class tally_sheet:
         self.__sum_fields = sum_fields
 
     def set_calc_fields(self, calc_fields):
-
         r"""
         Set the calc fields, i.e. create a list of field names within a given
         row which are to be calculated for the user.
@@ -135,7 +132,6 @@ class tally_sheet:
         self.__calc_fields = calc_fields
 
     def add_row(self, row_key, init_fields_dict=None):
-
         r"""
         Add a row to the tally sheet.
 
@@ -158,7 +154,6 @@ class tally_sheet:
             self.__table[row_key] = DotDict(init_fields_dict)
 
     def update_row_field(self, row_key, field_key, value):
-
         r"""
         Update a field in a row with the specified value.
 
@@ -174,7 +169,6 @@ class tally_sheet:
         self.__table[row_key][field_key] = value
 
     def inc_row_field(self, row_key, field_key):
-
         r"""
         Increment the value of the specified field in the specified row.  The
         value of the field must be numeric.
@@ -189,7 +183,6 @@ class tally_sheet:
         self.__table[row_key][field_key] += 1
 
     def dec_row_field(self, row_key, field_key):
-
         r"""
         Decrement the value of the specified field in the specified row.  The
         value of the field must be numeric.
@@ -204,7 +197,6 @@ class tally_sheet:
         self.__table[row_key][field_key] -= 1
 
     def calc(self):
-
         r"""
         Calculate totals and row calc fields.  Also, return totals_line
         dictionary.
@@ -235,7 +227,6 @@ class tally_sheet:
         return self.__totals_line
 
     def sprint_obj(self):
-
         r"""
         sprint the fields of this object.  This would normally be for debug
         purposes.
@@ -256,7 +247,6 @@ class tally_sheet:
         return buffer
 
     def print_obj(self):
-
         r"""
         print the fields of this object to stdout.  This would normally be for
         debug purposes.
@@ -265,7 +255,6 @@ class tally_sheet:
         sys.stdout.write(self.sprint_obj())
 
     def sprint_report(self):
-
         r"""
         sprint the tally sheet in a formatted way.
         """
@@ -307,7 +296,6 @@ class tally_sheet:
         return buffer
 
     def print_report(self):
-
         r"""
         print the tally sheet in a formatted way.
         """

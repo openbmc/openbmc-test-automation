@@ -20,7 +20,6 @@ sshlib = SSHLibrary()
 
 def sprint_connection(connection,
                       indent=0):
-
     r"""
     sprint data from the connection object to a string and return it.
 
@@ -52,7 +51,6 @@ def sprint_connection(connection,
 
 def sprint_connections(connections=None,
                        indent=0):
-
     r"""
     sprint data from the connections list to a string and return it.
 
@@ -76,7 +74,6 @@ def sprint_connections(connections=None,
 
 
 def find_connection(open_connection_args={}):
-
     r"""
     Find connection that matches the given connection arguments and return
     connection object.  Return False if no matching connection is found.
@@ -105,7 +102,6 @@ def find_connection(open_connection_args={}):
 
 def login_ssh(login_args={},
               max_login_attempts=5):
-
     r"""
     Login on the latest open SSH connection.  Retry on failure up to
     max_login_attempts.
@@ -164,7 +160,6 @@ def execute_ssh_command(cmd_buf,
                         fork=0,
                         quiet=None,
                         test_mode=None):
-
     r"""
     Run the given command in an SSH session and return the stdout, stderr and
     the return code.

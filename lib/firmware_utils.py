@@ -9,7 +9,6 @@ import var_funcs as vf
 
 
 def get_hard_disk_info(device="/dev/sdb"):
-
     r"""
     Get firmware information for the given device on the OS and return it as a
     dictionary.

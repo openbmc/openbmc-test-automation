@@ -12,7 +12,6 @@ def run_key(keyword_buf,
             quiet=None,
             test_mode=None,
             ignore=0):
-
     r"""
     Run the given keyword, return the status and the keyword return values.
 
@@ -86,7 +85,6 @@ def run_key(keyword_buf,
 def run_key_u(keyword_buf,
               quiet=None,
               ignore=0):
-
     r"""
     Run keyword unconditionally (i.e. without regard to global test_mode
     setting).

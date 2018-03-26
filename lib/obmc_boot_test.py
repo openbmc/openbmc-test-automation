@@ -71,7 +71,6 @@ main_func_parm_list = ['boot_stack', 'stack_mode', 'quiet']
 
 def process_host(host,
                  host_var_name=""):
-
     r"""
     Process a host by getting the associated host name and IP address and
     setting them in global variables.
@@ -111,7 +110,6 @@ def process_host(host,
 
 
 def process_pgm_parms():
-
     r"""
     Process the program parameters by assigning them all to corresponding
     globals.  Also, set some global values that depend on program parameters.
@@ -184,7 +182,6 @@ def process_pgm_parms():
 
 
 def initial_plug_in_setup():
-
     r"""
     Initialize all plug-in environment variables which do not change for the
     duration of the program.
@@ -236,7 +233,6 @@ def initial_plug_in_setup():
 
 
 def plug_in_setup():
-
     r"""
     Initialize all changing plug-in environment variables for use by the
     plug-in programs.
@@ -316,7 +312,6 @@ def pre_boot_plug_in_setup():
 
 
 def setup():
-
     r"""
     Do general program setup tasks.
     """
@@ -381,7 +376,6 @@ def setup():
 
 
 def validate_parms():
-
     r"""
     Validate all program parameters.
     """
@@ -441,7 +435,6 @@ def validate_parms():
 
 
 def my_get_state():
-
     r"""
     Get the system state plus a little bit of wrapping.
     """
@@ -459,7 +452,6 @@ def my_get_state():
 
 
 def valid_state():
-
     r"""
     Verify that our state dictionary contains no blank values.  If we don't get
     valid state data, we cannot continue to work.
@@ -472,7 +464,6 @@ def valid_state():
 
 
 def select_boot():
-
     r"""
     Select a boot test to be run based on our current state and return the
     chosen boot type.
@@ -553,7 +544,7 @@ def select_boot():
         if st.compare_states(state, boot_table[boot_candidate]['start']):
             if stack_popped:
                 if st.compare_states(boot_table[boot_candidate]['end'],
-                   boot_table[popped_boot]['start']):
+                                     boot_table[popped_boot]['start']):
                     boot_candidates.append(boot_candidate)
             else:
                 boot_candidates.append(boot_candidate)
@@ -577,7 +568,6 @@ def select_boot():
 
 
 def print_last_boots():
-
     r"""
     Print the last ten boots done with their time stamps.
     """
@@ -592,7 +582,6 @@ def print_last_boots():
 
 
 def print_defect_report(ffdc_file_list):
-
     r"""
     Print a defect report.
 
@@ -681,7 +670,6 @@ def print_defect_report(ffdc_file_list):
 
 
 def my_ffdc():
-
     r"""
     Collect FFDC data.
     """
@@ -706,7 +694,6 @@ def my_ffdc():
 
 
 def print_test_start_message(boot_keyword):
-
     r"""
     Print a message indicating what boot test is about to run.
 
@@ -733,7 +720,6 @@ def print_test_start_message(boot_keyword):
 
 
 def run_boot(boot):
-
     r"""
     Run the specified boot.
 
@@ -802,7 +788,6 @@ def run_boot(boot):
 
 
 def test_loop_body():
-
     r"""
     The main loop body for the loop in main_py.
 
@@ -887,7 +872,6 @@ def test_loop_body():
 
 
 def obmc_boot_test_teardown():
-
     r"""
     Clean up after the Main keyword.
     """
@@ -924,7 +908,6 @@ def obmc_boot_test_teardown():
 
 
 def test_teardown():
-
     r"""
     Clean up after this test case.
     """
@@ -940,7 +923,6 @@ def test_teardown():
 def obmc_boot_test_py(loc_boot_stack=None,
                       loc_stack_mode=None,
                       loc_quiet=None):
-
     r"""
     Do main program processing.
     """
@@ -1008,4 +990,3 @@ def obmc_boot_test_py(loc_boot_stack=None,
                         gp.sprint_var(new_fail) +\
                         gp.sprint_var(boot_fail_threshold)
         BuiltIn().fail(gp.sprint_error(error_message))
-

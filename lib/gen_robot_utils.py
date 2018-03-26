@@ -10,7 +10,6 @@ from robot.libraries.BuiltIn import BuiltIn
 
 
 def my_import_resource(path):
-
     r"""
     Import the resource file specified in path.
 
@@ -73,4 +72,3 @@ def my_import_resource(path):
                 global_var_name = re.sub("[@&]", "$", key)
                 BuiltIn().set_global_variable(global_var_name,
                                               pre_var_dict[key])
-

@@ -13,7 +13,6 @@ import inspect
 
 def create_wrapper_def_and_call(base_func_name,
                                 wrap_func_name):
-
     r"""
     Return a wrapper function definition line and a base function call line.
 
@@ -113,7 +112,6 @@ def create_func_def_string(base_func_name,
                            wrap_func_name,
                            func_body_template,
                            replace_dict):
-
     r"""
     Create and return a complete function definition as a string.  The caller
     may run "exec" on the resulting string to create the desired function.
