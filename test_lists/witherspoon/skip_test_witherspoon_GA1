@@ -25,9 +25,16 @@
 -e Test_Baseboard_Temperature_Via_IPMI
 -e Test_Power_Reading_Via_IPMI_Raw_Command
 -e Test_Power_Reading_Via_IPMI_With_Host_Booted
+-e Test_Power_Reading_Via_IPMI_With_Host_Off
 -e Verify_Get_DCMI_Capabilities
 -e Test_Ambient_Temperature_Via_IPMI
 -e Test_Watchdog_Off_Via_IPMI_And_Verify_Using_REST
 -e Test_Watchdog_Reset_Via_IPMI_And_Verify_Using_REST
 -e Verify_Chassis_Identify_via_IPMI
 -e Verify_Chassis_Identify_Off_And_Force_Identify_On_via_IPMI
+-e Verify_Get_Device_ID
+-e Verify_SDR_Info
+-e Set_Asset_Tag_With_Valid_String_Length
+-e Set_Asset_Tag_With_Invalid_String_Length
+-e Set_Asset_Tag_With_Valid_String_Length_Via_REST
+-e OCC_Active_Enable_And_Disable
