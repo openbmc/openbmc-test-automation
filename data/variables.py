@@ -18,7 +18,7 @@ TIME_MANAGER_URI = OPENBMC_BASE_URI + 'time/'
 NETWORK_MANAGER = OPENBMC_BASE_URI + 'network/'
 
 # Sensors base variables.
-SENSORS_URI =  OPENBMC_BASE_URI + 'sensors/'
+SENSORS_URI = OPENBMC_BASE_URI + 'sensors/'
 
 # State Manager base variables
 BMC_REBOOT_TRANS = 'xyz.openbmc_project.State.BMC.Transition.Reboot'
@@ -86,7 +86,7 @@ ALWAYS_POWER_ON = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOn'
 ALWAYS_POWER_OFF = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOff'
 
 # Dump URI variables.
-DUMP_URI = OPENBMC_BASE_URI +'/dump/'
+DUMP_URI = OPENBMC_BASE_URI + '/dump/'
 DUMP_ENTRY_URI = DUMP_URI + 'entry/'
 # The path on the BMC where dumps are stored.
 DUMP_DIR_PATH = "/var/lib/phosphor-debug-collector/dumps/"
@@ -97,14 +97,15 @@ OS_BOOT_START = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.OSStart'
 OS_BOOT_OFF = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.Unspecified'
 OS_BOOT_PCI = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.PCIInit'
 OS_BOOT_SECPCI = STATE_DBUS_BASE + \
-      'Boot.Progress.ProgressStages.SecondaryProcInit'
+    'Boot.Progress.ProgressStages.SecondaryProcInit'
 OS_BOOT_MEM = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.MemoryInit'
 OS_BOOT_MOTHERBOARD = STATE_DBUS_BASE + \
-      'Boot.Progress.ProgressStages.MotherboardInit'
+    'Boot.Progress.ProgressStages.MotherboardInit'
 
 # OperatingSystem status variables.
-OS_BOOT_COMPLETE = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.BootComplete'
-OS_BOOT_CDROM =  STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.CDROMBoot'
+OS_BOOT_COMPLETE = STATE_DBUS_BASE + \
+    'OperatingSystem.Status.OSStatus.BootComplete'
+OS_BOOT_CDROM = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.CDROMBoot'
 OS_BOOT_ROM = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.ROMBoot'
 OS_BOOT_PXE = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.PXEBoot'
 OS_BOOT_CBoot = STATE_DBUS_BASE + 'OperatingSystem.Status.OSStatus.CBoot'
@@ -156,6 +157,7 @@ def get_port_https():
               using default HTTPS port"
     return l_suffix
 
+
 AUTH_SUFFIX = {
     "https_port": [get_port_https()],
 }
@@ -184,7 +186,7 @@ INVENTORY_ITEMS = {
         "is_fru",
         "present",
         "version",
-        ],
+    ],
 
     "DIMM": [
         "Asset Tag",
@@ -207,7 +209,7 @@ INVENTORY_ITEMS = {
         "is_fru",
         "present",
         "version",
-        ],
+    ],
     "MEMORY_BUFFER": [
         "Custom Field 1",
         "Custom Field 2",
@@ -227,14 +229,14 @@ INVENTORY_ITEMS = {
         "is_fru",
         "present",
         "version",
-        ],
+    ],
     "FAN": [
         "fault",
         "fru_type",
         "is_fru",
         "present",
         "version",
-        ],
+    ],
     "DAUGHTER_CARD": [
         "Custom Field 1",
         "Custom Field 2",
@@ -254,7 +256,7 @@ INVENTORY_ITEMS = {
         "is_fru",
         "present",
         "version",
-        ],
+    ],
     "BMC": [
         "fault",
         "fru_type",
@@ -262,7 +264,7 @@ INVENTORY_ITEMS = {
         "manufacturer",
         "present",
         "version",
-        ],
+    ],
     "MAIN_PLANAR": [
         "Custom Field 1",
         "Custom Field 2",
@@ -280,7 +282,7 @@ INVENTORY_ITEMS = {
         "is_fru",
         "present",
         "version",
-        ],
+    ],
     "SYSTEM": [
         "Custom Field 1",
         "Custom Field 2",
@@ -301,12 +303,12 @@ INVENTORY_ITEMS = {
         "is_fru",
         "present",
         "version",
-        ],
+    ],
     "CORE": [
         "fault",
         "fru_type",
         "is_fru",
         "present",
         "version",
-        ],
+    ],
 }
