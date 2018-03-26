@@ -1491,6 +1491,7 @@ Remove Journald Logs
     ...  rm -rf /var/log/journal && systemctl start systemd-journald.service
 
     BMC Execute Command  ${cmd}
+<<<<<<< HEAD
 
 Get IPMI SEL Setting
     [Documentation]  Returns status for given IPMI SEL setting.
