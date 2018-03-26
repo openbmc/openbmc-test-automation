@@ -9,6 +9,7 @@ Resource        ../../../../lib/openbmc_ffdc.robot
 Resource        ../../../../lib/state_manager.robot
 Resource        ../../../../lib/openbmc_ffdc_methods.robot
 Resource        ../../../../lib/dump_utils.robot
+Resource        ../../../../lib/logging_utils.robot
 
 Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Logout And Close Browser
