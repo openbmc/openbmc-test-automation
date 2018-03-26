@@ -52,7 +52,7 @@ def return_plug_vars():
     """
 
     plug_in_package_name = get_plug_in_package_name(case="upper")
-    regex = "^(AUTOBOOT|" + plug_in_package_name + ")_"
+    regex = "^(AUTOBOOT|AUTOGUI|" + plug_in_package_name + ")_"
 
     # Set a default for nickname.
     if os.environ.get("AUTOBOOT_OPENBMC_NICKNAME", "") == "":
