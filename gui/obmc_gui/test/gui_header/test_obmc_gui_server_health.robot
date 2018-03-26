@@ -174,7 +174,7 @@ Test Setup Execution
    [Documentation]  Do test case setup tasks.
    ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
    Run Keyword If  ${status} == ${False}  Install Tarball
-   Delete Error Logs And Verify
+#   Delete Error Logs And Verify
    Click Element  ${xpath_select_server_health}
 
 
