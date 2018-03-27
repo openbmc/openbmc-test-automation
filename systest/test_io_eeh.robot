@@ -73,17 +73,42 @@ ${HTX_INTERVAL}  15 minutes
 ${TYPE}  0
 
 *** Test Cases ***
-Test IO Adapters EEH
-    [Documentation]  Inject EEH errors in every ethernet controller and check
-    ...  if errors are logged.
+Test Integrated IO Adapters EEH
+    [Documentation]  Inject EEH errors in every integrated ethernet controller
+    ...  and check if errors are logged.
     [Tags]  Test_IO_Adapters_EEH
 
     # Setting HTX_MDT_PROFILE to be used in 'Run MDT Profile' keyword
     Set Suite Variable  ${HTX_MDT_PROFILE}  net.mdt
     # Setting lspci_cmd to be used by 'Get PCI' keyword.
     Set Test Variable  ${lspci_cmd}  lspci -D | grep "Ethernet controller"
-    # Setting pci_list to be used in 'Cycle Through PCIs' keyword
-    @{pci_list}=  Get PCI
+    # Setting pci_list2 to be used in 'Split Integrated Or External PCI'
+    # keyword.
+    @{pci_list2}=  Get PCI
+    Set Test Variable  @{pci_list2}
+    # Setting pci_list to be used in 'Cycle Through PCIs' keyword.
+    @{pci_list}=  Split Integrated Or External PCI
+    Set Test Variable  @{pci_list}
+    Preconfigure Net MDT
+    Run MDT Profile
+    Repeat Keyword  ${HTX_DURATION}  Cycle Through PCIs
+    Shutdown HTX Exerciser
+
+Test External IO Adapters EEH
+    [Documentation]  Inject EEH errors in every external ethernet controller
+    ...  and check if errors are logged.
+    [Tags]  Test_IO_Adapters_EEH
+
+    # Setting HTX_MDT_PROFILE to be used in 'Run MDT Profile' keyword
+    Set Suite Variable  ${HTX_MDT_PROFILE}  net.mdt
+    # Setting lspci_cmd to be used by 'Get PCI' keyword.
+    Set Test Variable  ${lspci_cmd}  lspci -D | grep "Ethernet controller"
+    # Setting pci_list2 to be used in 'Split Integrated Or External PCI'
+    # keyword.
+    @{pci_list2}=  Get PCI
+    Set Test Variable  @{pci_list2}
+    # Setting pci_list to be used in 'Cycle Through PCIs' keyword.
+    @{pci_list}=  Split Integrated Or External PCI  ${FALSE}
     Set Test Variable  @{pci_list}
     Preconfigure Net MDT
     Run MDT Profile
@@ -144,6 +169,23 @@ Get PCI
     ...  ${lspci_cmd} | cut -d " " -f1
     @{pci_list}=  Split To Lines  ${output}
     [Return]  @{pci_list}
+
+Split Integrated Or External PCI
+    [Documentation]  Separate a list of internal or external PCIs according to
+    ...  the test case.
+    [Arguments]  ${integrated}=${TRUE}
+
+    @{list}=  Create List
+    :FOR  ${pci}  IN  @{pci_list2}
+    \  ${output}  ${stderr}  ${rc}=  OS Execute Command
+    ...  lscfg -vl ${pci} | grep "Location Code"
+    \  ${status}  ${err_result}=  Run Keyword And Ignore Error
+    ...  Should Contain  ${output}  SLOT
+    \  Run Keyword If  '${status}' == 'PASS' and '${integrated}' == '${FALSE}'
+    ...  Append To List  ${list}  ${pci}
+    ...  ELSE IF  '${status}' == 'FAIL' and '${integrated}' == '${TRUE}'
+    ...  Append To List  ${list}  ${pci}
+    [Return]  ${list}
 
 Make Injection Command
     [Documentation]  Create the string that will inject the EEH error.
