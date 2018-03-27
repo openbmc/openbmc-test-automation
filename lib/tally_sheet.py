@@ -57,12 +57,12 @@ class tally_sheet:
 
     Example result:
 
-    Boot Type                      Total Pass Fail
-    ------------------------------ ----- ---- ----
-    BMC Power On                       2    1    1
-    BMC Power Off                      1    1    0
-    ==============================================
-    Totals                             3    2    1
+    Boot Type                           Total Pass Fail
+    ----------------------------------- ----- ---- ----
+    BMC Power On                            2    1    1
+    BMC Power Off                           1    1    0
+    ===================================================
+    Totals                                  3    2    1
 
     """
 
@@ -262,8 +262,8 @@ class tally_sheet:
         buffer = ""
         # Build format strings.
         col_names = [self.__row_key_field_name.title()]
-        report_width = 30
-        key_width = 30
+        report_width = 40
+        key_width = 40
         format_string = '{0:<' + str(key_width) + '}'
         dash_format_string = '{0:-<' + str(key_width) + '}'
         field_num = 0
