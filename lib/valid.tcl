@@ -51,6 +51,12 @@ proc valid_value { var_name { invalid_values {}} { valid_values {}} } {
     exit 1
   }
 
+  set caller [get_stack_proc_name -2]
+  if { $caller == "valid_list" } {
+    set exit_on_fail 0
+  } else {
+    set exit_on_fail 1
+  }
   if { $len_valid_values > 0 } {
     # Processing the valid_values list.
     if { [lsearch -exact $valid_values "${var_value}"] != -1 } { return }
@@ -58,8 +64,12 @@ proc valid_value { var_name { invalid_values {}} { valid_values {}} } {
     append error_message [sprint_varx $var_name $var_value "" "" 1]
     append error_message "\nIt must be one of the following values:\n"
     append error_message [sprint_list valid_values "" "" 1]
-    print_error_report $error_message
-    exit 1
+    if { $exit_on_fail } {
+      print_error_report $error_message
+      exit 1
+    } else {
+      error [sprint_error_report $error_message]
+    }
   }
 
   if { $len_invalid_values == 0 } {
@@ -73,8 +83,110 @@ proc valid_value { var_name { invalid_values {}} { valid_values {}} } {
   if { [lsearch -exact $valid_values "${var_value}"] != -1 } { return }
   append error_message "The following variable has an invalid value:\n"
   append error_message [sprint_varx $var_name $var_value "" "" 1]
-  append error_message "\nIt must NOT be one of the following values:\n"
+  append error_message "\nIt must NOT be any of the following values:\n"
   append error_message [sprint_list invalid_values "" "" 1]
+  if { $exit_on_fail } {
+    print_error_report $error_message
+    exit 1
+  } else {
+    error [sprint_error_report $error_message]
+  }
+
+}
+
+
+proc valid_list { var_name args } {
+
+  # If the value of the list variable named in var_name is not valid, print
+  # an error message and exit the program with a non-zero return code.
+
+  # Description of arguments:
+  # var_name                        The name of the variable whose value is to
+  #                                 be validated.  This variable should be a
+  #                                 list.  For each list alement, a call to
+  #                                 valid_value will be done.
+  # args                            args will be passed directly to
+  #                                 valid_value.  Please see valid_value for
+  #                                 details.
+
+  # Example call:
+
+  # set valid_procs [list "one" "two" "three"]
+  # set proc_names [list "zero" "one" "two" "three" "four"]
+  # valid_list proc_names {} ${valid_procs}
+
+  # In this example, this procedure will fail with the following message:
+
+  ##(CDT) 2018/03/27 12:26:49.904870 -    0.000867 - **ERROR** The following
+  # #list has one or more invalid values (marked with "*"):
+  # 
+  # proc_names:
+  #   proc_names[0]:                                  zero*
+  #   proc_names[1]:                                  one
+  #   proc_names[2]:                                  two
+  #   proc_names[3]:                                  three
+  #   proc_names[4]:                                  four*
+  # 
+  # It must be one of the following values:
+  # 
+  # valid_values:
+  #   valid_values[0]:                                one
+  #   valid_values[1]:                                two
+  #   valid_values[2]:                                three
+
+  # Call get_stack_var_level to relieve the caller of the need for declaring
+  # the variable as global.
+  set stack_level [get_stack_var_level $var_name]
+  # Access the variable value.
+  upvar $stack_level $var_name var_value
+
+  set ix 0
+  # Create a list of index values which point to invalid list elements.
+  set invalid_ix_list [list]
+  foreach list_entry $var_value {
+    incr ix
+    if { [catch {valid_value list_entry {*}$args} result] } {
+      lappend invalid_ix_list ${ix}
+    }
+  }
+
+  # No errors found so return.
+  if { [llength $invalid_ix_list] == 0 } { return }
+
+  # We want to do a print_list on the caller's list but we want to put an
+  # asterisk by each invalid entry (see example in prolog).
+
+  # Make the caller's variable name, contained in $var_name, directly
+  # accessible to this procedure.
+  upvar $stack_level $var_name $var_name
+  # print_list the caller's list to a string.
+  set printed_var [sprint_list $var_name "" "" 1]
+  # Now convert the caller's printed var string to a list for easy
+  # manipulation.
+  set printed_var_list [split $printed_var "\n"]
+
+  # Loop through the erroneous index list and mark corresponding entries in
+  # printed_var_list with asterisks.
+  foreach ix $invalid_ix_list {
+    set new_value "[lindex $printed_var_list $ix]*"
+    set printed_var_list [lreplace $printed_var_list ${ix} ${ix} $new_value]
+  }
+
+  # Convert the printed var list back to a string.
+  set printed_var [join $printed_var_list "\n"]
+  append error_message "The following list has one or more invalid values (marked with \"*\"):\n\n"
+  append error_message $printed_var
+  # Determine whether the caller passed invalid_values or valid_values in
+  # order to create appropriate error message.
+  if { [lindex $args 0] != "" } {
+    append error_message "\nIt must NOT be any of the following values:\n\n"
+    set invalid_values [lindex $args 0]
+    append error_message [sprint_list invalid_values "" "" 1]
+  } else {
+    append error_message "\nIt must be one of the following values:\n\n"
+    set valid_values [lindex $args 1]
+    append error_message [sprint_list valid_values "" "" 1]
+  }
   print_error_report $error_message
   exit 1
 
