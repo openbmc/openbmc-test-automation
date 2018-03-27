@@ -415,6 +415,9 @@ Create Default MDT Profile
 
 Run MDT Profile
     [Documentation]  Load user pre-defined MDT profile.
+    [Arguments]  ${HTX_MDT_PROFILE}=${HTX_MDT_PROFILE}
+    # Description of argument(s):
+    # HTX_MDT_PROFILE  MDT profile to be executed (e.g. "mdt.bu").
 
     Rprint Timen  Start HTX mdt profile execution.
     ${htx_run}=  Execute Command On OS
@@ -574,3 +577,21 @@ Get OS Network Interface Names
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command  ls /sys/class/net
     @{interface_names}=  Split String  ${stdout}
     [Return]  @{interface_names}
+
+
+Run Soft Bootme
+    [Documentation]  Run a soft bootme for a period of an hour.
+    [Arguments]  ${bootme_period}=3
+    # Description of argument(s):
+    # bootme_time     Bootme period to be rebooting the system.
+
+    ${output}=  OS Execute Command
+    ...  htxcmdline -bootme on mode:soft period:${bootme_period}
+    Should Contain  ${output}  bootme on is completed successfully
+
+
+Shutdown Bootme
+    [Documentation]  Stop the bootme process.
+
+    ${output}=  OS Execute Command  htxcmdline -bootme off
+    Should Contain  ${output}  bootme off is completed successfully
