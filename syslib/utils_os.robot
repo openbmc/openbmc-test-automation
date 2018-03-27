@@ -415,6 +415,9 @@ Create Default MDT Profile
 
 Run MDT Profile
     [Documentation]  Load user pre-defined MDT profile.
+    [Arguments]  ${HTX_MDT_PROFILE}=${HTX_MDT_PROFILE}
+    # Description of argument(s):
+    # HTX_MDT_PROFILE  MDT profile to be executed (e.g. "mdt.bu").
 
     Rprint Timen  Start HTX mdt profile execution.
     ${htx_run}=  Execute Command On OS
