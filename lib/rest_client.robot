@@ -348,3 +348,18 @@ Upload Image To BMC
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
     Delete All Sessions
+
+
+Verify The Attribute
+    [Arguments]  ${uri}  ${attribute_name}  ${attribute_value}
+
+    # Description of argument(s):
+    # uri              URI path
+    #                  (e.g. "/xyz/openbmc_project/control/host0/TPMEnable").
+    # attribute_name   Name of attribute to be verified (e.g. "TPMEnable").
+    # attribute_value  The expected value of attribute (e.g. "1", "0", etc.)
+
+    ${output}=  Read Attribute  ${uri}  ${attribute_name}
+    Should Be Equal  ${attribute_value}  ${output}
+    ...  msg=Attribute "${attribute_name}"
+    ...  does not have the expected value of "${attribute_value}".
