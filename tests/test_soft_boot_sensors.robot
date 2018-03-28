@@ -52,7 +52,7 @@ Verify Boot AttemptsLeft When Host Reboot
 
 
 Verify Boot AttemptsLeft When Power Off
-    [Tags]  Validate Boot AttemptsLeft_When_Power_Off
+    [Tags]  Verify_Boot_AttemptsLeft_When_Power_Off
     [Template]  Validate Boot AttemptsLeft
 
     # System at standby    AttemptsLeft
