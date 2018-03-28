@@ -84,8 +84,8 @@ Test Integrated IO Adapters EEH
     Set Test Variable  ${lspci_cmd}  lspci -D | grep "Ethernet controller"
     # Setting pci_list2 to be used in 'Split Integrated Or External PCI'
     # keyword.
-    @{pci_list2}=  Get PCI
-    Set Test Variable  @{pci_list2}
+    @{tmp_pci_list}=  Get PCI
+    Set Test Variable  @{tmp_pci_list}
     # Setting pci_list to be used in 'Cycle Through PCIs' keyword.
     @{pci_list}=  Split Integrated Or External PCI
     Set Test Variable  @{pci_list}
@@ -105,8 +105,8 @@ Test External IO Adapters EEH
     Set Test Variable  ${lspci_cmd}  lspci -D | grep "Ethernet controller"
     # Setting pci_list2 to be used in 'Split Integrated Or External PCI'
     # keyword.
-    @{pci_list2}=  Get PCI
-    Set Test Variable  @{pci_list2}
+    @{tmp_pci_list}=  Get PCI
+    Set Test Variable  @{tmp_pci_list}
     # Setting pci_list to be used in 'Cycle Through PCIs' keyword.
     @{pci_list}=  Split Integrated Or External PCI  ${FALSE}
     Set Test Variable  @{pci_list}
@@ -176,7 +176,7 @@ Split Integrated Or External PCI
     [Arguments]  ${integrated}=${TRUE}
 
     @{list}=  Create List
-    :FOR  ${pci}  IN  @{pci_list2}
+    :FOR  ${pci}  IN  @{tmp_pci_list}
     \  ${output}  ${stderr}  ${rc}=  OS Execute Command
     ...  lscfg -vl ${pci} | grep "Location Code"
     \  ${status}  ${err_result}=  Run Keyword And Ignore Error
