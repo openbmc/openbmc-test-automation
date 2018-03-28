@@ -162,3 +162,11 @@ Get Sensors Aggregation URL List
     ...    Append To List  ${power_supply_avg_list}  ${entry}
 
     [Return]  ${power_supply_avg_list}  ${power_supply_max_list}
+
+
+REST Verify No Gard Records
+    [Documentation]  Verify no gard records are present.
+
+    ${resp}=  Read Properties  ${OPENPOWER_CONTROL}gard/enumerate
+    Log Dictionary  ${resp}
+    Should Be Empty  ${resp}  msg=Found gard records.
