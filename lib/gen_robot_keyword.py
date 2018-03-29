@@ -73,11 +73,12 @@ def run_key(keyword_buf,
         status = "FAIL"
         ret_values = my_assertion_error.args[0]
 
-    if not (status == 'PASS' or ignore):
+    if status != 'PASS':
         # Output the error message to stderr.
         BuiltIn().log_to_console(ret_values, stream='STDERR')
-        # Fail with the given error message.
-        BuiltIn().fail(ret_values)
+        if not ignore:
+            # Fail with the given error message.
+            BuiltIn().fail(ret_values)
 
     return status, ret_values
 
