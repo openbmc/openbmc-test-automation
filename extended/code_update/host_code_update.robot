@@ -18,6 +18,7 @@ Documentation     Update the PNOR code on a target BMC.
 
 Library           ../../lib/bmc_ssh_utils.py
 Library           ../../lib/code_update_utils.py
+Library           ../../lib/gen_robot_keyword.py
 Variables         ../../data/variables.py
 Resource          ../../lib/boot_utils.robot
 Resource          code_update_utils.robot
@@ -227,8 +228,8 @@ Code Update Setup
     # - Clean up all currently install PNOR images.
 
     Run Keyword And Ignore Error  Smart Power Off
-    Delete All Dumps
-    Delete Error Logs
+    Run Key  Delete All Dumps  ignore=1
+    Run Key  Delete Error Logs  ignore=1
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
     ...  Delete All PNOR Images
     Run Keyword If  'true' == '${DELETE_OLD_GUARD_FILE}'  BMC Execute Command

@@ -5,6 +5,7 @@ Documentation     Update the BMC code on a target BMC.
 ...               -v IMAGE_FILE_PATH:<path/*.tar>  bmc_code_update.robot
 
 Library           ../../lib/code_update_utils.py
+Library           ../../lib/gen_robot_keyword.py
 Variables         ../../data/variables.py
 Resource          ../../lib/utils.robot
 Resource          ../../lib/boot_utils.robot
@@ -226,7 +227,7 @@ Suite Setup Execution
     [Documentation]  Do code update test case setup.
     # - Clean up all existing BMC dumps.
 
-    Delete All Dumps
+    Run Key  Delete All Dumps  ignore=1
     Run Keyword And Ignore Error  Smart Power Off
 
 Test Teardown Execution
