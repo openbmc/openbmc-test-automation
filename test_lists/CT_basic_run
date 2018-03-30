@@ -8,6 +8,7 @@
 -i BMC_Software_Activation_Association
 -i Host_Software_Activation_Association
 #Basic poweron test via REST
+-i Verify_Front_And_Rear_LED_At_Standby
 -i Power_On_Test
 # Check for apps failures
 -i Check_For_Application_Failures
