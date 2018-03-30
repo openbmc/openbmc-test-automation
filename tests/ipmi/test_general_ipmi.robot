@@ -3,10 +3,10 @@ Documentation       This suite is for testing general IPMI functions.
 
 Resource            ../../lib/ipmi_client.robot
 Resource            ../../lib/openbmc_ffdc.robot
-Resource            ../lib/boot_utils.robot
+Resource            ../../lib/boot_utils.robot
 Library             ../../lib/ipmi_utils.py
 Resource            ../../lib/bmc_network_utils.robot
-Variables           ../data/ipmi_raw_cmd_table.py
+Variables           ../../data/ipmi_raw_cmd_table.py
 
 Test Teardown       FFDC On Test Case Fail
 
