@@ -579,7 +579,7 @@ def sprint_varx(var_name,
     """
 
     # Determine the type
-    if type(var_value) in (int, float, bool, str, unicode) \
+    if type(var_value) in (int, long, float, bool, str, unicode) \
        or var_value is None:
         # The data type is simple in the sense that it has no subordinate
         # parts.
@@ -592,7 +592,10 @@ def sprint_varx(var_name,
                 if var_value == "":
                     var_value = "<blank>"
             else:
-                value_format = "0x%08x"
+                if type(var_value) is long or var_value >= 0x100000000:
+                    value_format = "0x%16x"
+                else:
+                    value_format = "0x%08x"
         else:
             value_format = "%s"
         format_string = "%" + str(loc_col1_indent) + "s%-" \
