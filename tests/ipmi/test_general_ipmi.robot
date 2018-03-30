@@ -4,8 +4,9 @@ Documentation       This suite is for testing general IPMI functions.
 Resource            ../../lib/ipmi_client.robot
 Resource            ../../lib/openbmc_ffdc.robot
 Resource            ../../lib/boot_utils.robot
-Library             ../../lib/ipmi_utils.py
+Resource            ../../lib/utils.robot
 Resource            ../../lib/bmc_network_utils.robot
+Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 
 Test Teardown       FFDC On Test Case Fail
@@ -554,23 +555,6 @@ Get Management Controller ID String And Verify
     ${get_mc_id}=  Run IPMI Standard Command  dcmi get_mc_id_string
     Should Contain  ${get_mc_id}  ${string}
     ...  msg=Command failed: get_mc_id.
-
-
-Verify Identify LED State
-    [Documentation]  Verify the identify LED state
-    ...  matches caller's expectations.
-    [Arguments]  ${expected_state}
-
-    # Description of argument(s):
-    # expected_state  The LED state expected by the caller ("Blink" or "Off").
-
-    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
-    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.${expected_state}
-    ...  msg=Unexpected LED state.
-
-    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/rear_id  State
-    Should Be Equal  ${resp}  xyz.openbmc_project.Led.Physical.Action.${expected_state}
-    ...  msg=Unexpected LED state.
 
 
 Set Watchdog Enabled Using REST
