@@ -1593,3 +1593,23 @@ Install Tarball
     Run Keyword If  '${DEBUG_TARBALL_PATH}' == '${EMPTY}'  Return From Keyword
     BMC Execute Command  rm -rf /tmp/tarball
     Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
+
+
+Verify Identify LED State
+    [Documentation]  Verify the identify LED state
+    ...  matches caller's expectations.
+    [Arguments]  ${expected_state}
+
+    # Description of argument(s):
+    # expected_state  The LED state expected by the caller ("Blink" or "Off").
+
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
+    Should Be Equal  ${resp}
+    ...  xyz.openbmc_project.Led.Physical.Action.${expected_state}
+    ...  msg=Unexpected LED state.
+
+    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/rear_id  State
+    Should Be Equal  ${resp}
+    ...  xyz.openbmc_project.Led.Physical.Action.${expected_state}
+    ...  msg=Unexpected LED state.
+
