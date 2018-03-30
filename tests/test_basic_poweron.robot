@@ -6,6 +6,7 @@ Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
 Resource            ../lib/open_power_utils.robot
 Resource            ../lib/ipmi_client.robot
+Resource            ../lib/boot_utils.robot
 
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
@@ -22,6 +23,13 @@ ${LOOP_COUNT}  ${2}
 ${ERROR_REGEX}   SEGV|core-dump
 
 *** Test Cases ***
+
+Verify Front And Rear LED At Standby
+    [Documentation]  Front and Read LED should be off at standby.
+    [Tags]  Verify_Front_And_Rear_LED_At_Standby
+
+    REST Power Off  stack_mode=skip  quiet=1
+    Verify Identify LED State  Off
 
 Power On Test
     [Documentation]  Power off and on.
