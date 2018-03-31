@@ -599,9 +599,10 @@ Verify Power Reading
 
     ${host_state}=  Get Host State
     Run Keyword If  '${host_state}' == 'Off'
-    ...  Should Be Equal  ${power_reading['instantaneous_power_reading']}  0 Watts
+    ...  Should Be Equal  ${power_reading['instantaneous_power_reading']}  0
+    ...  msg=Power reading not zero when power is off.
 
-    Run Keyword If  '${power_reading['instantaneous_power_reading']}' != '0 Watts'
+    Run Keyword If  '${power_reading['instantaneous_power_reading']}' != '0'
     ...  Verify Power Reading Using REST  ${power_reading['instantaneous_power_reading']}
 
 
