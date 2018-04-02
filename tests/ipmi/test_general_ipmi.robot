@@ -444,12 +444,20 @@ Verify Get Device ID
     Should Be Equal  ${mc_info['device_id']}  0
     Should Be Equal  ${mc_info['device_revision']}  0
 
-    # Get major BMC version from BMC cli i.e. 2.1 from "v2.1-51-g04ff12c"
+    # Get BMC version from BMC cli i.e. 2.1 from
+    ...  "ibm-v2.1-338-gb2b7ff6-r1-0-gbcd7765"
     ${bmc_version}=  Get BMC Version
-    ${bmc_version}=  Fetch From Left  ${bmc_version}  -
-    ${bmc_version}=  Remove String  ${bmc_version}  "v
+    ${bmc_version}=  Remove String Using Regexp  ${bmc_version}  .*v  -.*
 
-    Should Be Equal  ${mc_info['firmware_revision']}  ${bmc_version}
+    # Get major version from BMC version i.e. 2 from 2.1
+    ${bmc_major_version}=  Fetch From Left  ${bmc_version}  .
+    ${firmware_major_version}=
+    ...  Fetch From Left  ${mc_info['firmware_revision']}  .
+
+    # Compare BMC major version only.
+    # TODO: Minor version needs to be converted from BDC format to decimal
+    # before comparing.
+    Should Be Equal  ${firmware_major_version}  ${bmc_major_version}
     Should Be Equal  ${mc_info['ipmi_version']}  2.0
 
     # TODO: Verify Manufacturer and Product IDs directy from json file.
