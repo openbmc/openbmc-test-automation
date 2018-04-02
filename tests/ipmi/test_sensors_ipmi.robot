@@ -329,21 +329,6 @@ Autoreboot Enable and Disable
     Verify The Attribute  ${CONTROL_URI}/host0/auto_reboot  AutoReboot  ${1}
 
 
-OccActive Enable And Disable
-    [Documentation]  OCC Active Enable And Disable.
-    [Tags]  OCC_Active_Enable_And_Disable
-
-    # Set the OccActive to 1
-    Run IPMI Command
-    ...  0x04 0x30 0x08 0xa8 0x00 0x02 0x00 0x01 0x00 0x00 0x00 0x00
-    Verify The Attribute  ${OPENPOWER_CONTROL}/occ0  OccActive  ${1}
-
-    # Set the OccActive to 0
-    Run IPMI Command
-    ...  0x04 0x30 0x08 0xa8 0x00 0x01 0x00 0x02 0x00 0x00 0x00 0x00
-    Verify The Attribute  ${OPENPOWER_CONTROL}/occ0  OccActive  ${0}
-
-
 Verify IPMI BT Capabilities Command
     [Documentation]  Verify IPMI BT capability command response.
     [Tags]  Verify_IPMI_BT_Capabilities_Command
@@ -352,6 +337,23 @@ Verify IPMI BT Capabilities Command
     ${output} =  Run IPMI command  0x06 0x36
     Should Be True  "${output}" == " 01 3f 3f 0a 01"
     ...  msg=Incorrect Output.
+
+
+OCC Active Disable And Enable
+    [Documentation]  OCC active disable and enable.
+    [Tags]  OCC_Active_Disable_And_Enable
+
+    REST Power On  stack_mode=skip  quiet=1
+
+    # Set the OccActive to 0
+    Run IPMI Command
+    ...  0x04 0x30 0x08 0xa8 0x00 0x01 0x00 0x02 0x00 0x00 0x00 0x00
+    Verify The Attribute  ${OPENPOWER_CONTROL}/occ0  OccActive  ${0}
+
+    # Set the OccActive to 1
+    Run IPMI Command
+    ...  0x04 0x30 0x08 0xa8 0x00 0x02 0x00 0x01 0x00 0x00 0x00 0x00
+    Verify The Attribute  ${OPENPOWER_CONTROL}/occ0  OccActive  ${1}
 
 
 *** Keywords ***
