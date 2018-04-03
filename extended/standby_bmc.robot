@@ -69,6 +69,12 @@ Get To Stable State
 
     Run Keyword And Ignore Error  Delete All Error Logs
     Run Keyword And Ignore Error  Delete All Dumps
+
+    # Workaround for openbmc/openbmc#3052
+    ${cmd}=  Catenate  systemctl restart xyz.openbmc_project.Logging.service &&
+    ...  systemctl restart xyz.openbmc_project.Dump.Manager.service
+    BMC Execute Command  ${cmd}
+
     Run Keyword And Ignore Error  Remove Journald Logs
 
 *** Keywords ***
