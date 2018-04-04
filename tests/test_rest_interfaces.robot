@@ -184,6 +184,7 @@ Verify REST Post Message JSON Compliant
     Should Be Equal  ${jsondata["data"]}  ${None}
     Should Be Equal As Strings  ${jsondata["message"]}  200 OK
     Should Be Equal As Strings  ${jsondata["status"]}  ok
+    Delete All Error Logs
 
 
 Verify REST Put Message JSON Compliant
