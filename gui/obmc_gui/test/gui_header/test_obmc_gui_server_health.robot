@@ -10,6 +10,7 @@ Resource        ../../../../lib/state_manager.robot
 Resource        ../../../../lib/openbmc_ffdc_methods.robot
 Resource        ../../../../lib/dump_utils.robot
 Resource        ../../../../lib/logging_utils.robot
+Library         gen_robot_keyword.py
 
 Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Logout And Close Browser
@@ -169,7 +170,82 @@ Select All Error Logs And Delete
     Should Be Equal  ${number_of_events}  0
 
 
+Select Single Error Log And Delete
+    [Documentation]  Select single error log and delete them.
+    [Tags]  Select_Individual_Error_Log_And_Delete
+
+    Create Test Error Log
+    # Refresh the GUI to get the latest update.
+    Click Element  ${xpath_select_refresh_button}
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_number_of_events}
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Run Keyword If  ${number_of_events} > 0
+    ...  Common Event Log Click Element  ${xpath_individual_event_delete}
+    ...  ${xpath_individual_event_delete_yes}
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Should Be Equal  ${number_of_events}  0  msg=Failed to delete single error.
+
+
+Select Multiple Error Logs And Delete
+    [Documentation]  Select multiple error logs and delete them.
+    [Tags]  Select_Multiple_Error_Logs_And_Delete
+
+    Create Test Error Log
+    Create Test Error Log
+    # Refresh the GUI to get the latest update.
+    Click Element  ${xpath_select_refresh_button}
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_number_of_events}
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Run Keyword If  ${number_of_events} > 0
+    ...  Double Event Log Click Element
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Should Be Equal  ${number_of_events}  0
+    ...  msg=Failed to delete multiple errors.
+
+
+Select Single Error Log And Mark As Resolved
+    [Documentation]  Select single error log and mark as resolved.
+    [Tags]  Select_Single_Error_Log_And_Mark_As_Resolved
+
+    Create Test Error Log
+    # Refresh the GUI to get the latest update
+    Click Element  ${xpath_select_refresh_button}
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_number_of_events}
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Run Keyword If  ${number_of_events} > 0
+    ...  Common Event Log Click Element  ${xpath_individual_event_resolved}  0
+    ${number_of_events}=  Get Text  ${xpath_number_of_events}
+    Should Be Equal  ${number_of_events}  1
+    ...  msg=Failed to mark single error log as resolved.
+
 *** Keywords ***
+
+Common Event Log Click Element
+   [Documentation]  Keep common click elements associated with event log.
+   [Arguments]  ${action_element}  ${action_click_confirmation}
+
+    # Description of argument(s):
+    # action_element  xpath value of the element to be actioned.
+    # action_click_confirmation  Confirmation of action by pressing yes.
+
+    Click Element  ${xpath_individual_event_select}
+    Page Should Contain Button  ${action_element}
+    Click Element  ${action_element}
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Run Keyword If  ${action_click_confirmation} <> 0
+    ...  Click Element  ${action_click_confirmation}
+    Click Element  ${xpath_select_refresh_button}
+    Run Key  Sleep \ 50s
+
+Double Event Log Click Element
+   [Documentation]   Keep double click elements associated with event logs.
+
+   Click Element  ${xpath_second_event_select}
+   Common Event Log Click Element  ${xpath_individual_event_delete}
+   ...  ${xpath_individual_event_delete_yes}
 
 Test Setup Execution
    [Documentation]  Do test case setup tasks.
