@@ -7,8 +7,6 @@
 -i Power_On_Test
 #Check for apps failures.
 -i Check_For_Application_Failures
-#OCC active state check.
--i Verify_OCC_State_When_Host_Is_Booted
 #Additional REST API tests
 -i REST_Login_Session_To_BMC
 -i Verify_REST_Get_Message_JSON_Compliant
