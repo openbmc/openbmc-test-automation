@@ -124,3 +124,13 @@ class resource_variables():
         "//*[@id='event__actions-bar']/div[2]/div[1]/div[2]/button[2]"
     xpath_event_delete_yes = \
         "//*[@id='event__actions-bar']/div[2]/div[1]/div[2]/button[1]"
+    xpath_individual_event_select = \
+        "//*[@id='event-log__events']/log-event[1]/div/div[1]/div[2]/label/span"
+    xpath_individual_event_delete = \
+        "//*[@id='event__actions-bar']/div[2]/div[2]/button[1]"
+    xpath_individual_event_delete_yes = \
+        "//*[@id='event__actions-bar']/div[2]/div[1]/div[2]/button[1]"
+    xpath_second_event_select = \
+        "//*[@id='event-log__events']/log-event[2]/div/div[1]/div[2]/label/span"
+    xpath_individual_event_resolved = \
+        "//*[@id='event__actions-bar']/div[2]/div[2]/button[2]"
