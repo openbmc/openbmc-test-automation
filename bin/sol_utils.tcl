@@ -15,11 +15,11 @@ my_source \
 
 longoptions openbmc_host: openbmc_username:=root openbmc_password:=0penBmc\
   os_host: os_username:=root os_password: proc_name: ftp_username: \
-  ftp_password: os_repo_url: test_mode:=0 quiet:=0 debug:=0
+  ftp_password: os_repo_url: autoboot_setting: test_mode:=0 quiet:=0 debug:=0
 pos_parms
 
 set valid_proc_name [list os_login boot_to_petitboot go_to_petitboot_shell \
-  install_os time_settings software_selection root_password]
+  install_os time_settings software_selection root_password set_autoboot]
 
 # Create help dictionary for call to gen_print_help.
 set help_dict [dict create\
@@ -34,6 +34,7 @@ set help_dict [dict create\
   os_password [list "The OS password." "password"]\
   proc_name [list "The proc_name you'd like to run.  Valid values are as\
     follows: [regsub -all {\s+} $valid_proc_name {, }]."]\
+  autoboot_setting [list "The desired state of autoboot." "true/flase"]\
 ]
 
 
@@ -90,10 +91,15 @@ proc validate_parms {} {
   global valid_proc_name
   global proc_name proc_names
   set proc_names [split $proc_name " "]
-  if { $proc_name == "install_os"} {
+
+  if { [lsearch -exact $proc_names "install_os"] != -1 } {
     valid_value ftp_username
     valid_password ftp_password
     valid_value os_repo_url
+  }
+
+  if { [lsearch -exact $proc_names "set_autoboot"] != -1 } {
+    valid_value autoboot_setting {} [list "true" "false"]
   }
 
 }
@@ -320,18 +326,20 @@ proc os_logoff {} {
 }
 
 
-proc os_command {command_string { quiet {} } { test_mode {} } \
-  { show_err {} } { ignore_err {} } {trim_cr_lf 1}} {
+proc shell_command {command_string {prompt_regex} { quiet {} } \
+  { test_mode {} } { show_err {} } { ignore_err {} } {trim_cr_lf 1}} {
 
-  # Execute the command_string on the OS command line and return a list
+  # Execute the command_string on the shell command line and return a list
   # consisting of 1) the return code of the command 2) the stdout/
   # stderr.
 
   # It is the caller's responsibility to make sure we are logged into the OS.
 
   # Description of argument(s):
-  # command_string  The command string which is to be run on the OS (e.g.
+  # command_string  The command string which is to be run on the shell (e.g.
   #                 "hostname" or "grep this that").
+  # prompt_regex    The regular expression of the shell the command string is
+  #                 to run on. (e.g "os_prompt_regex").
   # quiet           Indicates whether this procedure should run the
   #                 print_issuing() procedure which prints "Issuing:
   #                 <cmd string>" to stdout. The default value is 0.
@@ -359,7 +367,6 @@ proc os_command {command_string { quiet {} } { test_mode {} } \
 
   global spawn_id
   global expect_out
-  global os_prompt_regex
 
   qprintn ; qprint_issuing ${command_string} ${test_mode}
 
@@ -377,9 +384,8 @@ proc os_command {command_string { quiet {} } { test_mode {} } \
     "one or two line feeds" 5]
   # Note the non-greedy specification in the regex below (the "?").
   set expect_result [expect_wrap\
-    [list "(.*?)$os_prompt_regex"]\
+    [list "(.*?)$prompt_regex"]\
     "command output plus prompt" -1]
-
   # The command's stdout/stderr should be captured as match #1.
   set out_buf $expect_out(1,string)
 
@@ -392,14 +398,14 @@ proc os_command {command_string { quiet {} } { test_mode {} } \
   set proc_name [get_stack_proc_name]
   set calling_proc_name [get_stack_proc_name -2]
   if { $calling_proc_name != $proc_name } {
-    set sub_result [os_command {echo ${?}} 1]
+    set sub_result [shell_command {echo ${?}} $prompt_regex 1]
     dprintn ; dprint_list sub_result
     set rc [lindex $sub_result 1]
   }
 
   if { $rc != 0 } {
     if { $show_err } {
-      puts stderr "" ; print_error_report "The prior OS command failed.\n"
+      puts stderr "" ; print_error_report "The prior shell command failed.\n"
     }
     if { ! $ignore_err } {
       if { [info procs "exit_proc"] != "" } {
@@ -424,6 +430,7 @@ proc boot_to_petitboot {} {
   global state
   global os_prompt_regex
   global petitboot_screen_regex
+  global autoboot_setting
 
   if { [dict get $state petitboot_screen] } {
     qprintn ; qprint_timen "Already at petiboot."
@@ -447,9 +454,7 @@ proc boot_to_petitboot {} {
   }
 
   # Turn off autoboot.
-  set cmd_result [os_command "nvram --update-config auto-boot?=false"]
-  set cmd_result [os_command\
-    "nvram --print-config | egrep 'auto\\-boot\\?=false'"]
+  set_autoboot "false"
 
   # Reboot and wait for petitboot.
   send_wrap "reboot"
@@ -493,6 +498,51 @@ proc go_to_petitboot_shell {} {
   dict set state petitboot_shell_prompt 1
   qprintn ; qprint_timen "Arrived at the shell prompt."
   qprintn ; qprint_timen state
+
+}
+
+
+proc set_autoboot { { autoboot_setting {}} } {
+
+  # Set the state of autoboot.
+  # Defaults to the value of the global autoboot_setting.
+
+  # This will work regardless of whether the OS is logged in or at petitboot.
+
+  # Description of argument(s):
+  # autoboot_setting  The desired state of autoboot (true/flase).
+
+  dprintn ; dprint_executing
+  global spawn_id
+  global expect_out
+  global state
+  global os_prompt_regex
+  global petitboot_shell_prompt_regex
+
+  set_var_default autoboot_setting [get_stack_var autoboot_setting 0 2]
+  set prompt_regex $petitboot_shell_prompt_regex
+
+  if { [dict get $state os_login_prompt] } {
+    set cmd_buf os_login
+    qprintn ; qprint_issuing
+    eval ${cmd_buf}
+    set prompt_regex $os_prompt_regex
+  }
+
+  if { [dict get $state petitboot_screen ] } {
+    set cmd_buf go_to_petitboot_shell
+    qprintn ; qprint_issuing
+    eval ${cmd_buf}
+  }
+
+  if { [dict get $state os_logged_in ] } {
+    set prompt_regex $os_prompt_regex
+  }
+
+
+  set cmd_result [shell_command\
+    "nvram --update-config auto-boot?=$autoboot_setting" $prompt_regex]
+  set cmd_result [shell_command "nvram --print-config" $prompt_regex]
 
 }
 
@@ -691,13 +741,14 @@ proc install_os {} {
   global os_host os_username os_password
 
   lassign [get_host_name_ip $os_host 0] os_hostname short_host_name ip_address
-  set netmask [get_host_netmask $os_host $os_username $os_password 0]
+  set netmask [get_host_netmask $os_host $os_username $os_password {} 0]
   set gateway [get_host_gateway $os_host $os_username $os_password 0]
-  set mac_address [get_host_mac_address $os_host $os_username $os_password "" 0]
-  set name_servers [get_host_name_servers $os_host $os_username $os_password "" 0]
+  set mac_address \
+    [get_host_mac_address $os_host $os_username $os_password {} 0]
+  set name_servers [get_host_name_servers $os_host $os_username $os_password 0]
   set dns [lindex $name_servers 0]
   set domain [get_host_domain $os_host $os_username $os_password 0]
-  exit_proc
+
   # Go to shell and download files for installation
   eval go_to_petitboot_shell
   after 10000
@@ -726,8 +777,7 @@ proc install_os {} {
     "the shell prompt" 10]
 
   # Turn on autoboot.
-  send_wrap "nvram --update-config auto-boot?=true"
-  send_wrap "nvram --print-config | egrep 'auto\\-boot\\?=true'"
+  set_autoboot "true"
 
   send_wrap "kexec -e"
 
