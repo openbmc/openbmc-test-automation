@@ -54,15 +54,6 @@ Get System component
     ${url}=    Get From List    ${resp}    0
     [Return]    ${url}
 
-Verify The Attribute
-    [Arguments]  ${uri}  ${parm}  ${value}
-    # Description of arguments:
-    # ${uri}  URI path.
-    # ${parm}  Attribute.
-    # ${value}  Output to be compared.
-
-    ${output}=  Read Attribute  ${uri}  ${parm}
-    Should Be Equal  ${value}  ${output}
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.

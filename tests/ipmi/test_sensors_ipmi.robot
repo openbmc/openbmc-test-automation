@@ -445,18 +445,6 @@ Check BootProgress
     Should Be Equal  ${BootProgress}  ${resp}
 
 
-Verify The Attribute
-    [Arguments]  ${uri}  ${parm}  ${value}
-
-    # Description of arguments:
-    # uri     URI path.
-    # parm    Attribute.
-    # value   Output to be compared.
-
-    ${output}=  Read Attribute  ${uri}  ${parm}
-    Should Be Equal  ${value}  ${output}
-
-
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
     ...  1. Capture FFDC on test failure.
