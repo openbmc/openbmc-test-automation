@@ -9,8 +9,6 @@ Resource               ../../lib/boot_utils.robot
 Resource               ../../lib/resource.txt
 Resource               ../../lib/state_manager.robot
 
-Suite Setup            Open Connection And Log In
-Suite Teardown         Close All Connections
 Test Teardown          Test Teardown Execution
 
 *** Test Cases ***

@@ -9,7 +9,6 @@ Library                ../../data/model.py
 Resource               ../../lib/boot_utils.robot
 Resource               ../../lib/utils.robot
 
-Test Setup              Open Connection And Log In
 Test Teardown           Test Teardown Execution
 
 *** Test Cases ***
@@ -464,5 +463,4 @@ Test Teardown Execution
     ...  2. Close all open SSH connections.
 
     FFDC On Test Case Fail
-    Close All Connections
 
