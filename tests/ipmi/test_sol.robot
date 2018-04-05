@@ -262,8 +262,6 @@ Get SOL Setting
 Restore Default SOL Configuration
     [Documentation]  Restore default SOL configuration.
 
-    Open Connection And Log In
-
     Set SOL Setting  enabled  true
     Set SOL Setting  retry-count  7
     Set SOL Setting  retry-interval  10
