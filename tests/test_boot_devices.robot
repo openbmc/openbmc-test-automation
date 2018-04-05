@@ -9,9 +9,7 @@ Resource        ../lib/utils.robot
 Resource        ../lib/boot_utils.robot
 
 Suite Setup     Test Suite Setup
-Test Setup      Pre Test Case Execution
 Test Teardown   Post Test Case Execution
-Suite Teardown  Close All Connections
 
 *** Variables ***
 
@@ -229,19 +227,12 @@ Read the Attribute
     ${output}=  Read Attribute  ${uri}  ${parm}
     Set Test Variable  ${OUTPUT}  ${output}
 
-Pre Test Case Execution
-   [Documentation]  Do the pre test setup.
-
-   Open Connection And Log In
-   Initialize DBUS cmd  "boot_flags"
-
 Post Test Case Execution
    [Documentation]  Do the post test teardown.
 
    FFDC On Test Case Fail
    Set Boot Source  ${BOOT_SOURCE_DEFAULT}
    Set Boot Mode  ${BOOT_MODE_REGULAR}
-   Close All Connections
 
 Test Suite Setup
     [Documentation]  Do the initial suite setup.

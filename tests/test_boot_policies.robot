@@ -10,7 +10,6 @@ Resource           ../lib/state_manager.robot
 Resource           ../lib/boot_utils.robot
 
 Suite Setup        Suite Setup Execution
-Test Setup         Test Setup Execution
 Test Teardown      FFDC On Test Case Fail
 Suite Teardown     Suite Teardown Execution
 
@@ -165,12 +164,6 @@ Suite Teardown Execution
     [Documentation]  Restore default settings.
     Set Boot Policy  ${ONETIME}
     Set Boot Source  ${BOOT_SOURCE_DEFAULT}
-    Close All Connections
-
-Test Setup Execution
-    [Documentation]  Do the initial test setup.
-    Open Connection And Log In
-    Initialize DBUS cmd  "boot_flags"
 
 Suite Setup Execution
     [Documentation]  Do the initial suite setup.
