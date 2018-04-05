@@ -15,11 +15,11 @@ my_source \
 
 longoptions openbmc_host: openbmc_username:=root openbmc_password:=0penBmc\
   os_host: os_username:=root os_password: proc_name: ftp_username: \
-  ftp_password: os_repo_url: test_mode:=0 quiet:=0 debug:=0
+  ftp_password: os_repo_url: flag: test_mode:=0 quiet:=0 debug:=0
 pos_parms
 
 set valid_proc_name [list os_login boot_to_petitboot go_to_petitboot_shell \
-  install_os time_settings software_selection root_password]
+  install_os time_settings software_selection root_password toggle_autoboot]
 
 # Create help dictionary for call to gen_print_help.
 set help_dict [dict create\
@@ -94,6 +94,8 @@ proc validate_parms {} {
     valid_value ftp_username
     valid_password ftp_password
     valid_value os_repo_url
+  } elseif { $proc_name == "toggle_autoboot" } {
+      valid_value flag {} [list "true" "false"]
   }
 
 }
@@ -494,6 +496,28 @@ proc go_to_petitboot_shell {} {
   qprintn ; qprint_timen "Arrived at the shell prompt."
   qprintn ; qprint_timen state
 
+}
+
+
+proc toggle_autoboot {} {
+  global spawn_id
+  global state
+  global expect_out
+  global flag
+
+  if { [dict get $state os_login_prompt] } {
+    set cmd_buf os_login
+    qprintn ; qprint_issuing
+    eval ${cmd_buf}
+    set cmd_result [os_command "nvram --update-config auto-boot?=$flag"]
+    set cmd_result [os_command\
+      "nvram --print-config | egrep 'auto\\-boot\\?=$flag'"]
+  } else {
+      eval go_to_petitboot_shell
+      # Turn on or off autoboot.
+      send_wrap "nvram --update-config auto-boot?=$flag"
+      send_wrap "nvram --print-config | egrep 'auto\\-boot\\?=$flag'"
+  }
 }
 
 
