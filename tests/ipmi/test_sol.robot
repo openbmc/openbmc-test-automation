@@ -262,16 +262,12 @@ Get SOL Setting
 Restore Default SOL Configuration
     [Documentation]  Restore default SOL configuration.
 
-    Open Connection And Log In
-
     Set SOL Setting  enabled  true
     Set SOL Setting  retry-count  7
     Set SOL Setting  retry-interval  10
     Set SOL Setting  character-accumulate-level  20
     Set SOL Setting  character-send-threshold  1
     Set SOL Setting  privilege-level  user
-
-    Close All Connections
 
 
 Test Teardown Execution
