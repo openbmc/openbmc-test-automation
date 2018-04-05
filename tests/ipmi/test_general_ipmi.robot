@@ -264,8 +264,6 @@ Test Power Reading Via IPMI With Host Off
 
     REST Power Off  stack_mode=skip  quiet=1
 
-    Wait Until Keyword Succeeds  6 min  10 sec  Is Host Off
-
     Verify Power Reading
 
 
