@@ -15,11 +15,11 @@ my_source \
 
 longoptions openbmc_host: openbmc_username:=root openbmc_password:=0penBmc\
   os_host: os_username:=root os_password: proc_name: ftp_username: \
-  ftp_password: os_repo_url: test_mode:=0 quiet:=0 debug:=0
+  ftp_password: os_repo_url: flag: test_mode:=0 quiet:=0 debug:=0
 pos_parms
 
 set valid_proc_name [list os_login boot_to_petitboot go_to_petitboot_shell \
-  install_os time_settings software_selection root_password]
+  install_os time_settings software_selection root_password toggle_autoboot]
 
 # Create help dictionary for call to gen_print_help.
 set help_dict [dict create\
@@ -34,6 +34,7 @@ set help_dict [dict create\
   os_password [list "The OS password." "password"]\
   proc_name [list "The proc_name you'd like to run.  Valid values are as\
     follows: [regsub -all {\s+} $valid_proc_name {, }]."]\
+  flag [list "The desired state of autoboot." "flag"]\
 ]
 
 
@@ -94,6 +95,8 @@ proc validate_parms {} {
     valid_value ftp_username
     valid_password ftp_password
     valid_value os_repo_url
+  } elseif { $proc_name == "toggle_autoboot" } {
+      valid_value flag {} [list "true" "false"]
   }
 
 }
@@ -447,9 +450,9 @@ proc boot_to_petitboot {} {
   }
 
   # Turn off autoboot.
-  set cmd_result [os_command "nvram --update-config auto-boot?=false"]
-  set cmd_result [os_command\
-    "nvram --print-config | egrep 'auto\\-boot\\?=false'"]
+  global flag
+  set flag "false"
+  eval toggle_autoboot
 
   # Reboot and wait for petitboot.
   send_wrap "reboot"
@@ -494,6 +497,35 @@ proc go_to_petitboot_shell {} {
   qprintn ; qprint_timen "Arrived at the shell prompt."
   qprintn ; qprint_timen state
 
+}
+
+
+proc toggle_autoboot { } {
+
+  # Toggle the state of autoboot.
+
+  # This will work regardless of whether the OS is logged in or at petitboot.
+
+  global spawn_id
+  global expect_out
+  global state
+  global flag
+
+  if { [dict get $state os_logged_in] } {
+    set cmd_result [os_command "nvram --update-config auto-boot?=$flag"]
+    set cmd_result [os_command "nvram --print-config"]
+  } elseif { [dict get $state os_login_prompt] } {
+    set cmd_buf os_login
+    qprintn ; qprint_issuing
+    eval ${cmd_buf}
+    set cmd_result [os_command "nvram --update-config auto-boot?=$flag"]
+    set cmd_result [os_command "nvram --print-config"]
+  } else {
+      eval go_to_petitboot_shell
+      send_wrap "nvram --update-config auto-boot?=$flag"
+      send_wrap "nvram --print-config"
+  }
+  expect "auto-boot?=$flag"
 }
 
 
@@ -691,13 +723,13 @@ proc install_os {} {
   global os_host os_username os_password
 
   lassign [get_host_name_ip $os_host 0] os_hostname short_host_name ip_address
-  set netmask [get_host_netmask $os_host $os_username $os_password 0]
+  set netmask [get_host_netmask $os_host $os_username $os_password {} 0]
   set gateway [get_host_gateway $os_host $os_username $os_password 0]
-  set mac_address [get_host_mac_address $os_host $os_username $os_password "" 0]
-  set name_servers [get_host_name_servers $os_host $os_username $os_password "" 0]
+  set mac_address [get_host_mac_address $os_host $os_username $os_password {} 0]
+  set name_servers [get_host_name_servers $os_host $os_username $os_password 0]
   set dns [lindex $name_servers 0]
   set domain [get_host_domain $os_host $os_username $os_password 0]
-  exit_proc
+
   # Go to shell and download files for installation
   eval go_to_petitboot_shell
   after 10000
@@ -726,8 +758,9 @@ proc install_os {} {
     "the shell prompt" 10]
 
   # Turn on autoboot.
-  send_wrap "nvram --update-config auto-boot?=true"
-  send_wrap "nvram --print-config | egrep 'auto\\-boot\\?=true'"
+  global flag
+  set flag "true"
+  eval toggle_autoboot
 
   send_wrap "kexec -e"
 
