@@ -20,6 +20,7 @@
 * RAS (Reliability, availability and serviceability)
 * Web UI testing
 * IO storage and EEH (Enhanced Error Handling) testing
+* Secure boot
 
 **Debugging Supported List**
 * SOL collection
@@ -93,6 +94,8 @@ classified as follows:
 `gui/`: Contains test cases for web UI and security scanning tool automation.
 
 `mnfg/`: Contains test cases for factory reset (DHCP mode) and PGOOD testing.
+
+`secureboot/`: Contains test cases for secure boot testing.
 
 `tools/`: Contains various tools.
 
