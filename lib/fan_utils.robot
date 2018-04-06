@@ -74,6 +74,20 @@ Set Fan State
     ...  Functional  data=${valueDict}
 
 
+Set Target Speed Of Fan
+    [Documentation]  Set the target RPM speed of a fans.
+    [Arguments]  ${fan_name}  ${fan_speed}
+
+    # Description of argument(s):
+    # fan_name    The name of the fan, e.g., "fan0".
+    # fan_speed   The target RPM to set, e.g. "9000".
+
+    ${valueDict}=  Create Dictionary  data=${fan_speed}
+    Write Attribute
+    ...  ${SENSORS_URI}fan_tach/${fan_name}_0
+    ...  Target  data=${valueDict}
+
+
 Get Target Speed Of Fans
     [Documentation]  Return the maximum target RPM speed of the system fans.
 
@@ -86,6 +100,61 @@ Get Target Speed Of Fans
     \  ${max_target}=  Run Keyword If  ${target_speed} > ${max_target}
     ...  Set Variable  ${target_speed}  ELSE  Set Variable  ${max_target}
     [Return]  ${max_target}
+
+
+Get Target And Blade Speeds
+    [Documentation]  Return the fan target speed setting, the RPM of the
+    ...  fan's clockwise blade, and the RPM of the counter-clockwise blade.
+    # Each fan unit has two counter-rotating fan blades
+    # One blade is expected to be moving but the other blade may be
+    # 0 RPM whenever the fan unit is transition to a new target RPM.
+    [Arguments]  ${fan_name}
+
+    # Description of argument(s):
+    # fan_name       The name of a fan, e.g. "fan0"
+
+    # Get the fan target speed and the clockwise blade speed.
+    ${path}=  Catenate  ${SENSORS_URI}fan_tach/${fan_name}_0
+    ${response}=  OpenBMC Get Request  ${path}
+    ${json}=  To jSON  ${response.content}
+    ${fan_cw_speed}=  Set Variable  ${json["data"]["Value"]}
+    ${target_speed}=  Set Variable  ${json["data"]["Target"]}
+
+    # Get the counter-clockwise blade speed.
+    ${path}=  Catenate  ${SENSORS_URI}fan_tach/${fan_name}_1
+    ${response}=  OpenBMC Get Request  ${path}
+    ${json}=  To jSON  ${response.content}
+    ${fan_ccw_speed}=  Set Variable  ${json["data"]["Value"]}
+
+    [Return]  ${target_speed}  ${fan_cw_speed}  ${fan_ccw_speed}
+
+
+Get Fan Target And Speed
+    [Documentation]  Return the fan target speed setting and the RPM
+    ...  of the fastest blade.
+    [Arguments]  ${fan_name}
+
+    # Description of argument(s):
+    # fan_name       The name of a fan, e.g. "fan0"
+
+    ${target_rpm}  ${cw_rpm}  ${ccw_rpm}=
+    ...  Get Target And Blade Speeds  ${fan_name}
+    ${blade_speed}=  Run Keyword If  ${cw_rpm} > ${ccw_rpm}
+    ...  Set Variable  ${cw_rpm}  ELSE  Set Variable  ${ccw_rpm}
+    [Return]  ${target_rpm}  ${blade_speed}
+
+
+
+Set Fan Daemon State
+    [Documentation]  Set the state of the fan control service.
+    [Arguments]  ${state}
+
+    # Description of argument(s):
+    # state     The desired state of the service, usually
+    #           "start", "stop", or "restart"
+
+    ${cmd}=  Catenate  systemctl  ${state}  phosphor-fan-control@0.service
+    Execute Command On BMC  ${cmd}
 
 
 Verify Minimum Number Of Fans With Cooling Type

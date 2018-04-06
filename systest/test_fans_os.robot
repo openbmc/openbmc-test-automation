@@ -10,12 +10,13 @@ Documentation  Operational checks for fans.
 # OS_USERNAME        The OS login userid (usually root).
 # OS_PASSWORD        The password for the OS login.
 #
-# Approximate run time:   8 minutes.
+# Approximate run time:   18 minutes.
 
 Resource        ../syslib/utils_os.robot
 Resource        ../lib/logging_utils.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/fan_utils.robot
+Library         ../syslib/utils_keywords.py
 
 Suite Setup      Suite Setup Execution
 Test Teardown    Test Teardown Execution
@@ -23,21 +24,16 @@ Test Teardown    Test Teardown Execution
 
 *** Variables ***
 
-# The fan speed-monitoring daemon takes less than one second to
-# notice a fan failure. This is system configurable i.e. wspoon = 30sec before
-# marking a fan non-functional.
-# Allow system_response_time before checking if there was a measurable response
-# to the daemon, such as an increase in RPMs of the other fans.
-# NOTE: This time is relative to the BMC performance and can change
-# at anytime.
-${system_response_time}  5s
-
-# The @{fan_names} list holds the names of the fans in the system.
-@{fan_names}
+# Allow system_response_time before checking if there was a
+# response by the system to an applied fault.
+${system_response_time}  30s
 
 # Fan state values.
 ${fan_functional}      ${1}
 ${fan_nonfunctional}   ${0}
+
+# Criteria for a fan to be considered to be at maximum RPM.
+${max_rpm_criteria}=  10400
 
 
 *** Test Cases ***
@@ -46,11 +42,6 @@ ${fan_nonfunctional}   ${0}
 Check Number Of Fans With Power On
     [Documentation]  Verify system has the minimum number of fans.
     [Tags]  Check_Number_Of_Fans_With_Power_On
-
-    @{fan_names}  Create List
-    # Populate the list with the names of the fans in the system.
-    ${fan_names}=  Get Fan Names  ${fan_names}
-    Set Suite Variable  ${fan_names}  children=true
 
     ${number_of_fans}=  Get Length  ${fan_names}
 
@@ -68,6 +59,101 @@ Check Number Of Fan Monitors With Power On
     Verify Fan Monitors With State  On
 
 
+Check Speed Of Fans
+    [Documentation]  Verify fans are running at or near target speed.
+    [Tags]  Check_Speed_Of_Fans
+
+    # Set the speed tolerance criteria.
+    # A tolerance value of .15 means that the fan's speed should be
+    # within 15% of its set target speed.   Fans may be accelerating
+    # or decelerating to meet a new target, so allow .10 extra.
+    ${tolerance}=  Set Variable  .25
+    Rpvars  tolerance
+
+    # Compare the fan's speed with its target RPM.
+    :FOR  ${fan_name}  IN  @{fan_names}
+    \  ${target_rpm}  ${fan_rpm}=  Get Fan Target And Speed  ${fan_name}
+    \  Rpvars  fan_name  target_rpm  fan_rpm
+    \  # Calculate tolerance, which is a % of the target speed.
+    \  ${tolerance_value}=  Evaluate  ${tolerance}*${target_rpm}
+    \  # Calculate upper and lower RPM limits.
+    \  ${max_limit}=  Evaluate   ${target_rpm}+${tolerance_value}
+    \  ${min_limit}=  Evaluate   ${target_rpm}-${tolerance_value}
+    \  Run Keyword If
+    ...  ${fan_rpm} < ${min_limit} or ${fan_rpm} > ${max_limit}
+    ...  Fail  msg=${fan_name} speed of ${fan_rpm} RPM is out of range.
+
+
+Fan Manual Speed Test
+    [Documentation]  Check direct control of fans.
+    [Tags]  Fan_Manual_Speed_Test
+
+    # Test case overview:
+    # Turn off BMC's fan control daemon, then test to confirm
+    # that fans can be controlled manually.
+    # Then verify hwmon functionality by comparing with what's on dbus
+    # (/xyz/openbmc_project/sensors/fan_tach/fan0_0, etc..)
+    # with what's in the BMC's file system (fan1_input, etc..).
+    # BTW, hwmon is the app that takes data from sysfs
+    # and updates dbus.
+
+    # The target speed used in this test case.   It's the
+    # maximum value that can be set.
+    ${max_fan_target_setting}=  Set Variable  10500
+
+    # Passing RPM criteria is 85% of max_fan_target_setting.
+    ${low_rpm_limit}=  Set Variable  8925
+
+    # Login to BMC and disable fan deamon. Disabling the daemon sets
+    # manual mode.
+    Open Connection And Log In
+    Set Fan Daemon State  stop
+
+    # For each fan, set a new target speed and wait for the fan to
+    # accelerate.  Then check that the fan is running near that
+    # target speed.
+    :FOR  ${fan_name}  IN  @{fan_names}
+    \  Set Target Speed Of Fan  ${fan_name}  ${max_fan_target_setting}
+    \  Sleep  60s
+    \  ${target_rpm}  ${cw_rpm}  ${ccw_rpm}=
+    ...  Get Target And Blade Speeds  ${fan_name}
+    \  Rpvars  fan_name  target_rpm  cw_rpm  ccw_rpm
+    \  Run Keyword If
+    ...  ${cw_rpm} < ${low_rpm_limit} or ${ccw_rpm} < ${low_rpm_limit}
+    ...  Fail  msg=${fan_name} failed manual speed test.
+
+    # Check the fan speeds in the BMC file system.
+
+    # Get the location of the fan hwmon.
+    ${controller_path}=  Execute Command On BMC
+    ...  grep -ir max31785a /sys/class/hwmon/hwmon* | grep name
+    # E.g., controller_path=/sys/class/hwmon/hwmon10/name:max31785a.
+
+    ${hwmon_path}=  Get_Path_Dirname  ${controller_path}
+    # E.g.,  /sys/class/hwmon/hwmon10  or  /sys/class/hwmon/hwmon9.
+
+    Rpvars  controller_path  hwmon_path
+
+    # Run the BMC command which gets the fan RPMs from the system file system.
+    ${cmd}=  Catenate  cat ${hwmon_path}/fan*_input
+    ${fan_speeds_from_BMC_file_system}=  Execute Command On BMC  ${cmd}
+
+    Rpvars  fan_speeds_from_BMC_file_system
+
+    ${rc}=  Are_Sysfs_Fan_Speeds_Correct
+    ...  ${fan_names}  ${fan_speeds_from_BMC_file_system}  ${low_rpm_limit}
+    Run Keyword If  ${rc} == False
+    ...  Fail  msg=hwmon daemon did not properly report fan speeds.
+
+    # Re-enable the fan daemon
+    Set Fan Daemon State  restart
+
+    # Wait 6 minutes for the daemon to take control and gracefully
+    # throttle fan speeds to normal.
+    Rprint Timen  Waiting 6 minutes for fan daemon to stabilize fans.
+    Sleep  6m
+
+
 Verify Fan RPM Increase
     [Documentation]  Verify that RPMs of working fans increase when one fan
     ...  is disabled.
@@ -75,26 +161,29 @@ Verify Fan RPM Increase
     #  A non-functional fan should cause an error log and
     #  an enclosure LED will light.  The other fans should speed up.
 
-    # Any fan at this speed or greater will be considered to be at maximum RPM.
-    ${max_fan_rpm}=  Set Variable  10400
-
-    # Choose a fan to test with, e.g., fan1.
-    ${test_fan_name}=  Get From List  ${fan_names}  1
-    Rpvars  test_fan_name
+    # Choose a fan to test with, e.g., fan0.
+    ${test_fan_name}=  Get From List  ${fan_names}  0
 
     ${initial_speed}=  Get Target Speed Of Fans
-    Rpvars  initial_speed
+    Rpvars  test_fan_name  initial_speed
 
     # If initial speed is not already at maximum, set expect_increase.
     # This flag is used later to determine if speed checking is
     # to be done or not.
     ${expect_increase}=  Run Keyword If
-    ...  ${initial_speed} < ${max_fan_rpm}
+    ...  ${initial_speed} < ${max_rpm_criteria}
     ...  Set Variable  1  ELSE  Set Variable  0
 
     Set Fan State  ${test_fan_name}  ${fan_nonfunctional}
-    Sleep  ${system_response_time}
 
+    # Wait for error to be asserted.
+    :FOR  ${n}  IN RANGE  30
+    \  ${front_fault}=  Get System LED State  front_fault
+    \  ${rear_fault}=  Get System LED State  rear_fault
+    \  Sleep  1s
+    \  Exit For Loop If  '${front_fault}' == 'On' and '${rear_fault}' == 'On'
+
+    # Fail with msg= if enclosure LEDs are not on.
     Verify System Error Indication Due To Fans
 
     # Verify the error log is for test_fan_name.
@@ -105,6 +194,8 @@ Verify Fan RPM Increase
     \  ${endpoint_name}=  Get From List  ${endpoint}  0
     \  Should Contain  ${endpoint_name}  ${test_fan_name}
     ...  msg=Error log present but not for ${test_fan_name}.
+
+    Sleep  ${system_response_time}
 
     ${new_fan_speed}=  Get Target Speed Of Fans
     Rpvars  expect_increase  initial_speed  new_fan_speed
@@ -120,9 +211,15 @@ Verify Fan RPM Increase
     Sleep  ${system_response_time}
 
     Delete Error Logs
-    Sleep  2s
 
-    # Enclosure LEDs should go off immediately after deleting the error logs.
+    # Wait for error to be removed..
+    :FOR  ${n}  IN RANGE  10
+    \  ${front_fault}=  Get System LED State  front_fault
+    \  ${rear_fault}=  Get System LED State  rear_fault
+    \  Sleep  1s
+    \  Exit For Loop If  '${front_fault}' == 'Off' and '${rear_fault}' == 'Off'
+
+    # Fail with msg= if enclosure LEDs are not off.
     Verify Front And Rear LED State  Off
 
     ${restored_fan_speed}=  Get Target Speed Of Fans
@@ -146,6 +243,8 @@ Verify System Shutdown Due To Fans
     # system.  The Wait For PowerOff keyword will time-out and report
     # an error if power off does not happen within a reasonable time.
     Wait For PowerOff
+  
+    Sleep  ${system_response_time}
 
     Verify System Error Indication Due To Fans
 
@@ -183,9 +282,17 @@ Suite Setup Execution
     [Documentation]  Do the pre-test setup.
 
     REST Power On  stack_mode=skip
-    Delete All Error Logs
+
+    Delete Error Logs
     Set System LED State  front_fault  Off
     Set System LED State  rear_fault  Off
+
+    # The @{fan_names} list holds the names of the fans in the system.
+    @{fan_names}  Create List
+    ${fan_names}=  Get Fan Names  ${fan_names}
+    Set Suite Variable  ${fan_names}  children=true
+
+    Reset Fans
 
 
 Test Teardown Execution
