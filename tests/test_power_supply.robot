@@ -21,7 +21,7 @@ Test Teardown       FFDC On Test Case Fail
 # limit. If the power drawn goes beyond the upper power limit, this test will
 # fail.
 ${upper_power_limit}  ${2104}
-${lower_power_limit}  ${0}
+${lower_power_limit}  ${100}
 ${power_data_collection_interval}  ${30}
 
 # Every n seconds, the system collects the following for each power supply
@@ -127,12 +127,12 @@ Check Power Telemetry When Host Off
     # Check for "average" aggregation.
     :FOR  ${power_path}  IN  @{power_paths[0]}
     \  ${averages}=  Get Sensors Aggregation Data  ${power_path}
-    \  Should Be True  ${averages[0]} == ${lower_power_limit}
+    \  Should Be True  ${averages[0]} < ${lower_power_limit}
     ...  msg=Wattage ${averages[0]} more than ${lower_power_limit}.
 
     # Check for "maximum" aggregation.
     :FOR  ${power_path}  IN  @{power_paths[1]}
     \  ${maximums}=  Get Sensors Aggregation Data  ${power_path}
-    \  Should Be True  ${maximums[0]} == ${lower_power_limit}
+    \  Should Be True  ${maximums[0]} < ${lower_power_limit}
     ...  msg=Wattage ${maximums[0]} more than ${lower_power_limit}.
 
