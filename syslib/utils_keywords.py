@@ -216,3 +216,62 @@ def build_error_dict(htx_error_log_output):
         error_index += 1
 
     return error_dict
+
+
+def get_path_dirname(file_path):
+    r"""
+    Return the directory name given a file name and path string.
+    For example, if file_path="/lib/utilities/myfile.py",
+    return "/lib/utilities".
+
+    Description of argument(s):
+    file path   String which contains the filepath and name.
+    """
+
+    path_name = os.path.dirname(file_path)
+    return path_name
+
+
+def are_sysfs_fan_speeds_correct(fan_names,
+                                 speeds,
+                                 lowest_speed):
+    r"""
+    For each fan, chack that its blade speeds are above lowest_speed.
+
+    Description of argument(s):
+    fan_names      List which contain the names of the fans in the system.
+    speeds         String which contain fan speeds, each speed delimited
+                   by \n.  There are two speeds for each fan unit because
+                   there are two blades, each rotating in a different
+                   direction.  The speed values are usually obtained by
+                   reading ${hwmon_path}/fan*_input on the BMC.
+    lowest_speed   String which contains the lowest acceptable fan speed.
+
+    Example:
+    fan_names = ['fan0', 'fan1']
+    speeds = '5000\n5200\n6400\n2400'
+    lowest_speed = '5000'
+
+    This routine would return False because the speed of the second blade of
+    fan1 (2400) is less than the lowest_speed of 5000.
+    """
+
+    # num_fans is the number of fans.
+    # num_fans = len(fan_names)
+
+    speed_array = speeds.split()
+    count = 0
+    for speed in speed_array:
+        try:
+            # Count number of speeds which are greater than lowest_speed.
+            if int(speed) > int(lowest_speed):
+                count = count + 1
+        except:
+            continue
+
+    if (2 * len(fan_names)) == count:
+        # Pass criteria:  The two speeds for each fan, and each of those
+        # speeds greater than the specified lowest_speed.
+        return True
+    else:
+        return False
