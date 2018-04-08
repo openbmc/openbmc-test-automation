@@ -139,7 +139,7 @@ def htx_error_log_to_list(htx_error_log_output):
             error_list.append(temp_error_list)
             parse_walk = False
             temp_error_list = []
-        # Add entry to list if line is not emtpy
+        # Add entry to list if line is not empty
         elif parse_walk:
             temp_error_list.append(str(line))
 
