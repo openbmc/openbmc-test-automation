@@ -247,7 +247,7 @@ Collect NVIDIA Log File
     # | NVIDIA-SMI 361.89                 Driver Version: 361.89           |
     # |-------------------------------+----------------------+-------------+
     # | GPU  Name        Persistence-M| Bus-Id        Disp.A | GPU     ECC |
-    # | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | Utiliz  err |
+    # | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | Utilize  err |
     # |===============================+======================+=============|
     # |   0  Tesla P100-SXM2...  On   | 0002:01:00.0     Off |           0 |
     # | N/A   25C    P0    35W / 300W |    931MiB / 16280MiB | 0%  Default |

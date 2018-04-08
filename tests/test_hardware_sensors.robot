@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   Suite to test harware sensors.
+Documentation   Suite to test hardware sensors.
 
 Resource        ../lib/utils.robot
 Resource        ../lib/boot_utils.robot

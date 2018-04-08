@@ -47,7 +47,7 @@ Send Network Packets
     # ${port}- Network port.
 
     # This program expects host, port, type and number of packets to be sent
-    # and rate at which packets to be sent, should be given in commad line
+    # and rate at which packets to be sent, should be given in command line
     # by default it sends 100 TCP packets at 5 packets/second.
 
     ${cmd_buff}=  Run Keyword If  '${packet_type}' == 'icmp'

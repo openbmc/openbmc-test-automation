@@ -464,7 +464,7 @@ Verify Get Device ID
 
     Should Be Equal  ${mc_info['ipmi_version']}  2.0
 
-    # TODO: Verify Manufacturer and Product IDs directy from json file.
+    # TODO: Verify Manufacturer and Product IDs directly from json file.
     # Reference : openbmc/openbmc-test-automation#1244
     Should Be Equal  ${mc_info['manufacturer_id']}  42817
     Should Be Equal  ${mc_info['product_id']}  16975 (0x424f)

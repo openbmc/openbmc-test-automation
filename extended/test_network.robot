@@ -162,7 +162,7 @@ Configure Special Char IP
     # IP Address     Prefix_length         Gateway_IP        Expected_Result
     @@@.%%.44.11     ${valid_prefix_len}   ${valid_gateway}  error
 
-    [Documentation]  Configure invalid IP address contaning special chars.
+    [Documentation]  Configure invalid IP address containing special chars.
     [Tags]  Configure_Special_Char_IP
 
     [Template]  Configure Network Settings
@@ -171,7 +171,7 @@ Configure Hexadecimal IP
     # IP Address  Prefix_length        Gateway_IP        Expected_Result
     ${hex_ip}     ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure invalid IP address contaning hex value.
+    [Documentation]  Configure invalid IP address containing hex value.
     [Tags]  Configure_Hexadecimal_IP
 
     [Template]  Configure Network Settings

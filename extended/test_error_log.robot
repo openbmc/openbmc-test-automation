@@ -25,7 +25,7 @@ Error Log Check After BMC Reboot
     # 1. Power off.
     # 2. Delete error logs.
     # 3. Reboot BMC.
-    # 4. Check if eror log exists.
+    # 4. Check if error log exists.
 
     Smart Power Off
     Delete Error Logs And Verify
@@ -38,7 +38,7 @@ Error Log Check After Host Poweron
     [Tags]  Error_Log_Check_At_Host_Booted
     # 1. Delete error logs
     # 1. Power on.
-    # 3. Check if eror log exists.
+    # 3. Check if error log exists.
 
     Delete Error Logs And Verify
     REST Power On
