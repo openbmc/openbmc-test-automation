@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation  This file includes all the varaibles used by obmc_boot_test.robot
+Documentation  This file includes all the variables used by obmc_boot_test.robot
 
 *** Variables ***
 # Alias of the master connection to the BMC

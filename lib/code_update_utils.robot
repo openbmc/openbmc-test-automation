@@ -304,7 +304,7 @@ Delete Image And Verify
     #               xyz.openbmc_project.Software.Version.VersionPurpose.Host
     #               or xyz.openbmc_project.Software.Version.VersionPurpose.BMC.
 
-    Log To Console  Deleteing ${software_object}
+    Log To Console  Deleting ${software_object}
 
     # Delete the image.
     Delete Software Object  ${software_object}

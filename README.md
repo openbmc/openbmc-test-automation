@@ -30,7 +30,7 @@
 ## Installation Setup Guide ##
 * [Robot Framework Install Instruction](https://github.com/robotframework/robotframework/blob/master/INSTALL.rst)
 
-* Miscelleneous
+* Miscellaneous
 Packages required to be installed for OpenBmc Automation.
 Install the packages and it's dependencies via `pip`
 

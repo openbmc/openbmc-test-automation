@@ -19,7 +19,7 @@ ${LOG_SERVICE}  xyz.openbmc_project.Logging.service
 Verify OpenBMC Services Auto Restart Policy
     [Documentation]  Kill active services and expect auto restart.
     [Tags]  Verify_OpenBMC_Services_Auto_Restart_Policy
-    # The services listed bellow restart policy should be "always"
+    # The services listed below restart policy should be "always"
     # Command output:
     # systemctl -p Restart show xyz.openbmc_project.Logging.service | cat
     # Restart=always

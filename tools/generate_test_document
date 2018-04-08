@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This program will generate test documenation from the robot test cases.
+# This program will generate test documentation from the robot test cases.
 
 # Description of argument(s):
 # test_dir_path            Test directory where robot test cases are available.
