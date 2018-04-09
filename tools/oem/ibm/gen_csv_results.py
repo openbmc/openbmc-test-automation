@@ -60,6 +60,11 @@ parser.add_argument(
     help='Openbmc platform which was used during test,\
           e.g. "Witherspoon".')
 
+parser.add_argument(
+    '--level',
+    help='Openbmc release level which was used during test,\
+          e.g. "OBMC920".')
+
 # Populate stock_list with options we want.
 stock_list = [("test_mode", 0), ("quiet", 0), ("debug", 0)]
 
@@ -113,7 +118,7 @@ def validate_parms():
     return True
 
 
-def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform):
+def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level):
     r"""
     Parse the robot-generated output.xml file and extract various test
     output data. Put the extracted information into a csv file in the "dest"
@@ -126,6 +131,7 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform):
     version_id      Version of the openbmc firmware
                     (e.g. "v2.1-215-g6e7eacb").
     platform        Platform of the openbmc system.
+    level           Release level of the openbmc system.
     """
 
     result = ExecutionResult(xml_file_path)
@@ -159,7 +165,11 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform):
     # Default Test data
     l_subsys = 'OPENBMC'
     l_test_type = 'FTC'
+
     l_pse_rel = 'OBMC910'
+    if level:
+        l_pse_rel = level
+
     l_env = 'HW'
     l_proc = 'P9'
     l_platform_type = ""
@@ -294,7 +304,7 @@ def main():
 
     qprint_pgm_header()
 
-    parse_output_xml(source, dest, version_id, platform)
+    parse_output_xml(source, dest, version_id, platform, level)
 
     return True
 
