@@ -32,7 +32,7 @@ Logging Entry Should Exist
     # message_id    Logging message string.
     #               Example: "xyz.openbmc_project.Common.Error.InternalFailure"
 
-    ${elog_entries}=  Get Logging Entry List
+    @{elog_entries}=  Get Logging Entry List
 
     :FOR  ${entry}  IN  @{elog_entries}
     \  ${resp}=  Read Properties  ${entry}

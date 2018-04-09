@@ -4,6 +4,7 @@ Documentation  Test power supply telemetry.
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/open_power_utils.robot
 Resource            ../lib/boot_utils.robot
+Resource            ../lib/logging_utils.robot
 
 Test Teardown       FFDC On Test Case Fail
 
@@ -79,6 +80,19 @@ Power Supply Test When Host On
     ...  Check Power Telemetry When Host On  ${power_sensor_path}
 
 
+Power Supply Error Logging Test At Runtime
+    [Documentation]  Check that power supply error is logged when one of the
+    ...  power supply input is unplugged.
+    [Tags]  Power_Supply_Error_Logging_Test_At_Runtime
+    [Teardown]  Set Power Supply Present  ${1}
+
+    REST Power On  stack_mode=skip
+
+    Set Power Supply Present  ${0}
+    Sleep  5s
+    Logging Entry Should Exist
+    ...  xyz.openbmc_project.Inventory.Error.NotPresent
+
 *** Keywords ***
 
 Check Power Telemetry When Host On
@@ -136,3 +150,17 @@ Check Power Telemetry When Host Off
     \  Should Be True  ${maximums[0]} < ${lower_power_limit}
     ...  msg=Wattage ${maximums[0]} more than ${lower_power_limit}.
 
+
+Set Power Supply Present
+    [Documentation]  Clears error log and set power present field.
+    [Arguments]  ${value}
+
+    # Description of argument(s):
+    # value  Enable or disable power present field (e.g. "0/1").
+
+    FFDC On Test Case Fail
+
+    ${data}=  Create Dictionary  data=${value}
+    Write Attribute
+    ...  ${HOST_INVENTORY_URI}system/chassis/motherboard/powersupply0
+    ...  Present  data=${data}
