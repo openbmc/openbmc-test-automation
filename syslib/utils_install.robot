@@ -70,6 +70,22 @@ Setup HTX On OS
     Execute Command On OS  sudo make install
 
 
+Install HTX On RedHat
+    [Documentation]  Download and install HTX on Red Hat.
+    [Arguments]  ${htx_rpm}
+    # Description of argument(s):
+    # htx_rpm    The url of the rqm file for htx.
+
+
+    OS Execute Command  wget ${htx_rpm}  ignore_err=1
+    @{str}=  Split String From Right  ${htx_rpm}  /  1
+    SSHLibrary.File Should Exist  ${str[1]}
+    # Remove the old version.
+    OS Execute Command  rpm -e `rpm -qa | grep htx`  ignore_err=1
+    OS Execute Command  rpm -Uvh ${str[1]}
+    Tool Exist  htxcmdline
+
+
 Setup Opal Prd On OS
     [Documentation]  Download and install opal prd tool.
 
