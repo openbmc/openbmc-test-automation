@@ -40,6 +40,8 @@
 -e OCC_Active_Enable_And_Disable
 -e SDR_Test
 -e Test Turbo Processor Speed
+-e Test_Management_Controller_ID_String_Status_via_IPMI
+-e Test_Management_Controller_ID_String_Status_via_Raw_IPMI
 # NA for GA1 service pack.
 -e Verify_Core_Dump_Size
 -e REST_Upload_Stability_Test
