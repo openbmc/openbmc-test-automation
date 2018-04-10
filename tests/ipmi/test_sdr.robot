@@ -32,6 +32,16 @@ Test DIMM SDR Info At Power On
     REST Power On  stack_mode=skip  quiet=1
     Test SDR Info  dimm
 
+
+Test GPU SDR Info At Power On
+    [Documentation]  Verify GPU SDR info via IPMI and REST at power on.
+
+    [Tags]  Test_GPU_SDR_Info_At_Power_On
+
+    REST Power On  stack_mode=skip  quiet=1
+    Test SDR Info  gv100card
+
+
 Test CPU Core SDR Info At Power Off
     [Documentation]  Verify CPU core SDR info via IPMI and REST at power off.
 
@@ -48,6 +58,56 @@ Test DIMM SDR Info At Power Off
 
     REST Power Off  stack_mode=skip  quiet=1
     Test SDR Info  dimm
+
+
+Test Turbo Allowed SDR Info
+    [Documentation]  Verify turbo allowed SDR info via IPMI and REST.
+    [Tags]  Test_Turbo_Allowed_SDR_Info
+
+    ${component_uri_list}=  Get Component URIs  turbo_allowed
+    ${component_uri}=  Get From List  ${component_uri_list}  0
+    ${state_rest}=  Read Attribute  ${component_uri}  TurboAllowed
+
+    ${state_ipmi}=  Get SDR Presence Via IPMI  turbo_allowed${SPACE}
+
+    Run Keyword If  '${state_ipmi}' == 'Disabled'
+    ...    Should Be True  ${state_rest} == 0
+    ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
+    ...    Should Be True  ${state_rest} == 1
+
+
+Test Auto Reboot SDR Info
+    [Documentation]  Verify auto reboot SDR info via IPMI and REST.
+    [Tags]  Test_Auto_Reboot_SDR_Info
+
+
+    ${component_uri_list}=  Get Component URIs  auto_reboot
+    ${component_uri}=  Get From List  ${component_uri_list}  0
+    ${state_rest}=  Read Attribute  ${component_uri}  AutoReboot
+
+    ${state_ipmi}=  Get SDR Presence Via IPMI  auto_reboot${SPACE}
+
+    Run Keyword If  '${state_ipmi}' == 'Disabled'
+    ...    Should Be True  ${state_rest} == 0
+    ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
+    ...    Should Be True  ${state_rest} == 1
+
+
+Test TPM Enable SDR Info
+    [Documentation]  Verify auto reboot SDR info via IPMI and REST.
+    [Tags]  Test_TPM_Enable_SDR_Info
+
+
+    ${component_uri_list}=  Get Component URIs  TPMEnable
+    ${component_uri}=  Get From List  ${component_uri_list}  0
+    ${state_rest}=  Read Attribute  ${component_uri}  TPMEnable
+
+    ${state_ipmi}=  Get SDR Presence Via IPMI  auto_reboot${SPACE}
+
+    Run Keyword If  '${state_ipmi}' == 'Disabled'
+    ...    Should Be True  ${state_rest} == 0
+    ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
+    ...    Should Be True  ${state_rest} == 1
 
 
 *** Keywords ***
