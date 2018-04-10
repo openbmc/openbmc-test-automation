@@ -91,13 +91,11 @@ proc validate_parms {} {
   global valid_proc_name
   global proc_name proc_names
   set proc_names [split $proc_name " "]
-
   if { [lsearch -exact $proc_names "install_os"] != -1 } {
     valid_value ftp_username
     valid_password ftp_password
     valid_value os_repo_url
   }
-
   if { [lsearch -exact $proc_names "set_autoboot"] != -1 } {
     valid_value autoboot_setting {} [list "true" "false"]
   }
@@ -322,99 +320,6 @@ proc os_logoff {} {
   dict set state os_logged_in 0
   qprintn ; qprint_timen "Logged off OS."
   dprintn ; dprint_dict state
-
-}
-
-
-proc shell_command {command_string {prompt_regex} { quiet {} } \
-  { test_mode {} } { show_err {} } { ignore_err {} } {trim_cr_lf 1}} {
-
-  # Execute the command_string on the shell command line and return a list
-  # consisting of 1) the return code of the command 2) the stdout/
-  # stderr.
-
-  # It is the caller's responsibility to make sure we are logged into the OS.
-
-  # Description of argument(s):
-  # command_string  The command string which is to be run on the shell (e.g.
-  #                 "hostname" or "grep this that").
-  # prompt_regex    The regular expression of the shell the command string is
-  #                 to run on. (e.g "os_prompt_regex").
-  # quiet           Indicates whether this procedure should run the
-  #                 print_issuing() procedure which prints "Issuing:
-  #                 <cmd string>" to stdout. The default value is 0.
-  # test_mode       If test_mode is set, this procedure will not actually run
-  #                 the command.  If print_output is set, it will print
-  #                 "(test_mode) Issuing: <cmd string>" to stdout.  The default
-  #                 value is 0.
-  # show_err        If show_err is set, this procedure will print a
-  #                 standardized error report if the shell command returns non-
-  #                 zero.  The default value is 1.
-  # ignore_err      If ignore_err is set, this procedure will not fail if the
-  #                 shell command fails.  However, if ignore_err is not set,
-  #                 this procedure will exit 1 if the shell command fails.  The
-  #                 default value is 1.
-  # trim_cr_lf      Trim any trailing carriage return or line feed from the
-  #                 result.
-
-  # Set defaults (this section allows users to pass blank values for certain
-  # args)
-  set_var_default quiet [get_stack_var quiet 0 2]
-  set_var_default test_mode 0
-  set_var_default show_err 1
-  set_var_default ignore_err 0
-  set_var_default acceptable_shell_rcs 0
-
-  global spawn_id
-  global expect_out
-
-  qprintn ; qprint_issuing ${command_string} ${test_mode}
-
-  if { $test_mode } {
-    return [list 0 ""]
-  }
-
-  send_wrap "${command_string}"
-
-  set expect_result [expect_wrap\
-    [list "-ex $command_string"]\
-    "the echoed command" 5]
-  set expect_result [expect_wrap\
-    [list {[\n\r]{1,2}}]\
-    "one or two line feeds" 5]
-  # Note the non-greedy specification in the regex below (the "?").
-  set expect_result [expect_wrap\
-    [list "(.*?)$prompt_regex"]\
-    "command output plus prompt" -1]
-  # The command's stdout/stderr should be captured as match #1.
-  set out_buf $expect_out(1,string)
-
-  if { $trim_cr_lf } {
-    set out_buf [ string trimright $out_buf "\r\n" ]
-  }
-
-  # Get rc via recursive call to this function.
-  set rc 0
-  set proc_name [get_stack_proc_name]
-  set calling_proc_name [get_stack_proc_name -2]
-  if { $calling_proc_name != $proc_name } {
-    set sub_result [shell_command {echo ${?}} $prompt_regex 1]
-    dprintn ; dprint_list sub_result
-    set rc [lindex $sub_result 1]
-  }
-
-  if { $rc != 0 } {
-    if { $show_err } {
-      puts stderr "" ; print_error_report "The prior shell command failed.\n"
-    }
-    if { ! $ignore_err } {
-      if { [info procs "exit_proc"] != "" } {
-        exit_proc 1
-      }
-    }
-  }
-
-  return [list $rc $out_buf]
 
 }
 
