@@ -70,6 +70,23 @@ Setup HTX On OS
     Execute Command On OS  sudo make install
 
 
+Install HTX On RedHat
+    [Documentation]  Download and install HTX on Red Hat.
+    [Arguments]  ${version}
+
+    OS Execute Command  yes | yum install wget net-tools mesa-libGLU
+    ${url}=  Catenate  SEPARATOR=
+    ...  http://ausgsa.ibm.com/gsa/ausgsa/projects/h/htx/
+    ...  public_html/htxonly/htxrhel72le-${version}-LE.ppc64le.rpm
+    OS Execute Command  wget ${url}  ignore_err=1
+    SSHLibrary.File Should Exist
+    ...  htxrhel72le-${version}-LE.ppc64le.rpm
+    # Remove the old version.
+    OS Execute Command  rpm -e `rpm -qa | grep htx`  ignore_err=1
+    OS Execute Command  rpm -Uvh htxrhel72le-${version}-LE.ppc64le.rpm
+    Tool Exist  htxcmdline
+
+
 Setup Opal Prd On OS
     [Documentation]  Download and install opal prd tool.
 
