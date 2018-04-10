@@ -87,6 +87,32 @@ Verify Get And Set Management Controller ID String
     Get Management Controller ID String And Verify  ${initial_mc_id}
 
 
+Test Management Controller ID String Status via IPMI
+    [Documentation]  Test management controller ID string status via IPMI.
+    [Tags]  Test_Management_Controller_ID_String_Status_via_IPMI
+
+    # Enable management controller ID string status via IPMI and verify.
+    Run IPMI Standard Command  dcmi set_conf_param dhcp_config 0x01
+    Verify Management Controller ID String Status  enable
+
+    # Disable management controller ID string status via IPMI and verify.
+    Run IPMI Standard Command  dcmi set_conf_param dhcp_config 0x00
+    Verify Management Controller ID String Status  disable
+
+
+Test Management Controller ID String Status via Raw IPMI
+    [Documentation]  Test management controller ID string status via IPMI.
+    [Tags]  Test_Management_Controller_ID_String_Status_via_Raw_IPMI
+
+    # Enable management controller ID string status via raw IPMI and verify.
+    Run IPMI Command  0x2c 0x12 0xdc 0x02 0x00 0x01
+    Verify Management Controller ID String Status  enable
+
+    # Disable management controller ID string status via raw IPMI and verify.
+    Run IPMI Command  0x2c 0x12 0xdc 0x02 0x00 0x00
+    Verify Management Controller ID String Status  disable
+
+
 Verify Chassis Identify via IPMI
     [Documentation]  Verify "chassis identify" using IPMI command.
     [Tags]  Verify_Chassis_Identify_via_IPMI
@@ -616,6 +642,25 @@ Verify Power Reading
 
     Run Keyword If  '${power_reading['instantaneous_power_reading']}' != '0'
     ...  Verify Power Reading Using REST  ${power_reading['instantaneous_power_reading']}
+
+
+Verify Management Controller ID String Status
+    [Documentation]  Verify management controller ID string status via IPMI.
+    [Arguments]  ${status}
+
+    # Example of dcmi get_conf_param command output:
+    # DHCP Discovery method   :
+    #           Management Controller ID String is disabled
+    #           Vendor class identifier DCMI IANA and Vendor class-specific Informationa are disabled
+    #   Initial timeout interval        : 4 seconds
+    #   Server contact timeout interval : 120 seconds
+    #   Server contact retry interval   : 64 seconds
+
+    ${resp}=  Run IPMI Standard Command  dcmi get_conf_param
+    ${resp}=  Get Lines Containing String  ${resp}
+    ...  Management Controller ID String  case_insensitive=True
+    Should Contain  ${resp}  ${status}
+    ...  msg=Management controller ID string is not ${status}
 
 
 Verify Power Reading Using REST
