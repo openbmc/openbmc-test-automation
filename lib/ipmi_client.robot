@@ -112,12 +112,17 @@ Run External IPMI RAW Command
     [Return]    ${output}
 
 Run External IPMI Standard Command
-    [Arguments]    ${args}
+    [Arguments]  ${args}  ${fail_on_err}=${1}
+
+    # Description of argument(s):
+    # args         IPMI command to be executed.
+    # fail_on_err  Fail if keyword the IPMI command fails
 
     ${ipmi_cmd}=  Catenate  SEPARATOR=
     ...  ${IPMI_EXT_CMD} ${IPMI_USER_OPTIONS} -P${SPACE}${IPMI_PASSWORD}
     ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${args}
     ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
+    Return From Keyword If  ${fail_on_err} == ${0}  ${output}
     Should Be Equal  ${rc}  ${0}  msg=${output}
     [Return]  ${output}
 
