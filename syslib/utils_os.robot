@@ -566,3 +566,11 @@ Clean Up String
     ${clean_string} =  Set Variable If  '${last_char}' == ','
     ...  ${trimmed_string}  ${clean_string}
     [Return]  ${clean_string}
+
+
+Get OS Network Interface Names
+    [Documentation]  Return a list of interface names on the OS.
+
+    ${stdout}  ${stderr}  ${rc}=  OS Execute Command  ls /sys/class/net
+    @{interface_names}=  Split String  ${stdout}
+    [Return]  @{interface_names}
