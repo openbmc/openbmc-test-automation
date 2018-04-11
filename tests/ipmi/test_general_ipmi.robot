@@ -515,6 +515,37 @@ Verify SDR Info
     Should Be Equal  ${sdr_info['sdr_repository_alloc_info_supported']}  no
 
 
+Test Valid IPMI Channels Supported
+    [Documentation]  Verify IPMI channels supported on a given system.
+    [Tags]  Test_Valid_IPMI_Channels_Supported
+
+    ${channel_count}=  Get Valid Network Interface Count
+
+    # Note: IPMI network channel logically starts from 1.
+    :FOR  ${channel_number}  IN RANGE  1  ${channel_count}
+    \  Run External IPMI Standard Command  lan print ${channel_number}
+
+
+Test Invalid IPMI Channel Response
+    [Documentation]  Verify IPMI channels supported on a given system.
+    [Tags]  Test_Invalid_IPMI_Channel_Response
+
+    ${channel_count}=  Get Valid Network Interface Count
+
+    # To target invalid channel increment count.
+    ${channel_number}=  Evaluate  ${channel_count} + 1
+
+    # Example of Invalid channel:
+    # $ ipmitool -I lanplus -H xx.xx.xx.xx -P 0penBmc lan print 3
+    # Get Channel Info command failed: Parameter out of range
+    # Invalid channel: 3
+
+    ${stdout}=  Run External IPMI Standard Command
+    ...  lan print ${channel_number}  expect_error=${1}
+    Should Contain  ${stdout}  Invalid channel
+    ...  msg=IPMI channel ${channel_number} is invalid but seen working.
+
+
 *** Keywords ***
 
 Get Sensor Count
@@ -649,3 +680,33 @@ Verify Power Reading Using REST
 
     Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
     ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
+
+
+Get Valid Network Interface Count
+    [Documentation]  Returns valid physical network interfaces count.
+
+    # Example: ['/xyz/openbmc_project/network/eth0',
+    #           '/xyz/openbmc_project/network/eth0_50']
+    ${nw_interface}=  Get Endpoint Paths  ${NETWORK_MANAGER}  eth*
+
+    # Filter interface which has "Id" attribute. Id attribute identifies the
+    # interface as VLAN and not a physical interface.
+    # "/xyz/openbmc_project/network/eth0_50": {
+    #    "AutoNeg": 0,
+    #    "DHCPEnabled": 0,
+    #    "DomainName": [],
+    #    "Id": 50,
+    #    "InterfaceName": "eth0.50",
+    #    "MACAddress": "70:e2:84:14:28:76",
+    #    "Nameservers": [],
+    # "Speed": 0
+    # },
+    ${valid_interface_list}=  Create List
+    :FOR  ${interface}  IN  ${nw_interface}
+    \  ${resp}=  OpenBMC Get Request  ${NETWORK_MANAGER}/attr/Id
+    \  Continue For Loop If  ${resp.status_code} == ${HTTP_OK}
+    \  Append To List  ${valid_interface_list}  ${interface}
+
+    ${channel_count}=  Get Length  ${valid_interface_list}
+
+    [Return]  ${channel_count}

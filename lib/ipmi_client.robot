@@ -112,12 +112,16 @@ Run External IPMI RAW Command
     [Return]    ${output}
 
 Run External IPMI Standard Command
-    [Arguments]    ${args}
+    [Arguments]  ${args}  ${expect_error}=${0}
+
+    # Description of argument(s):
+    # expect_error  If set to 1 return IPMI console output.
 
     ${ipmi_cmd}=  Catenate  SEPARATOR=
     ...  ${IPMI_EXT_CMD} ${IPMI_USER_OPTIONS} -P${SPACE}${IPMI_PASSWORD}
     ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${args}
     ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
+    Return From Keyword If  ${expect_error} == ${1}  ${output}
     Should Be Equal  ${rc}  ${0}  msg=${output}
     [Return]  ${output}
 
