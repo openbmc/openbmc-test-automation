@@ -515,6 +515,41 @@ Verify SDR Info
     Should Be Equal  ${sdr_info['sdr_repository_alloc_info_supported']}  no
 
 
+Test Valid IPMI Channels Supported
+    [Documentation]  Verify IPMI channels supported on a given system.
+    [Tags]  Test_Valid_IPMI_Channels_Supported
+
+    # Example: ['/xyz/openbmc_project/network/eth0']
+    ${nw_interface}=  Get Endpoint Paths  ${NETWORK_MANAGER}  eth0*
+    ${channel_count}=  Get Length  ${nw_interface}
+
+    # Note: IPMI network channel logically starts from 1.
+    :FOR  ${channel_number}  IN RANGE  1  ${channel_count}
+    \  Run External IPMI Standard Command  lan print ${channel_number}
+
+
+Test Invalid IPMI Channel Response
+    [Documentation]  Verify IPMI channels supported on a given system.
+    [Tags]  Test_Invalid_IPMI_Channel_Response
+
+    # Example: ['/xyz/openbmc_project/network/eth0']
+    ${nw_interface}=  Get Endpoint Paths  ${NETWORK_MANAGER}  eth0*
+
+    ${channel_count}=  Get Length  ${nw_interface}
+    # To target invalid channel increment count.
+    ${channel_number}=  Evaluate  ${channel_count} + 1
+
+    # Example of Invalid channel:
+    # $ ipmitool -I lanplus -H xx.xx.xx.xx -P 0penBmc lan print 3
+    # Get Channel Info command failed: Parameter out of range
+    # Invalid channel: 3
+
+    ${stdout}=  Run External IPMI Standard Command
+    ...  lan print ${channel_number}  expect_error=${1}
+    Should Contain  ${stdout}  Invalid channel
+    ...  msg=IPMI channel ${channel_number} is invalid but seen working.
+
+
 *** Keywords ***
 
 Get Sensor Count
