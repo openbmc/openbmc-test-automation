@@ -85,6 +85,7 @@ Get BMC Route Info
 
     [Return]  ${cmd_output}
 
+# TODO: openbmc/openbmc-test-automation#1331
 Get BMC MAC Address
     [Documentation]  Get system MAC address.
 
@@ -102,6 +103,28 @@ Get BMC MAC Address
     @{words}=  Split String  ${cmd_output}
 
     [Return]  ${words[1]}
+
+
+Get BMC MAC Address List
+    [Documentation]  Get system MAC address
+
+    # Sample output of "ip addr | grep ether":
+    # link/ether xx.xx.xx.xx.xx.xx brd ff:ff:ff:ff:ff:ff
+
+    ${cmd_output}=  BMC Execute Command  /sbin/ip addr | grep ether
+
+    # Split the line and return MAC address.
+    # Split list data:
+    # link/ether | xx:xx:xx:xx:xx:xx | brd | ff:ff:ff:ff:ff:ff
+    # link/ether | xx:xx:xx:xx:xx:xx | brd | ff:ff:ff:ff:ff:ff
+
+    ${mac_list}=  Create List
+    @{lines}=  Split To Lines  ${cmd_output[0]}
+    :FOR  ${line}  IN  @{lines}
+    \  @{words}=  Split String  ${line}
+    \   Append To List  ${mac_list}  ${words[1]}
+
+    [Return]  ${mac_list}
 
 Get BMC Hostname
     [Documentation]  Get BMC hostname.
