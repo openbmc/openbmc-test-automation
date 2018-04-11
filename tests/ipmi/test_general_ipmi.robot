@@ -9,7 +9,7 @@ Resource            ../../lib/bmc_network_utils.robot
 Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 
-Test Teardown       FFDC On Test Case Fail
+#Test Teardown       FFDC On Test Case Fail
 
 
 *** Variables ***
@@ -515,6 +515,37 @@ Verify SDR Info
     Should Be Equal  ${sdr_info['sdr_repository_alloc_info_supported']}  no
 
 
+Test Valid IPMI Channels Supported
+    [Documentation]  Verify IPMI channels supported on a given system.
+    [Tags]  Test_Valid_IPMI_Channels_Supported
+
+    ${channel_count}=  Get Physical Network Interface Count
+
+    # Note: IPMI network channel logically starts from 1.
+    :FOR  ${channel_number}  IN RANGE  1  ${channel_count}
+    \  Run External IPMI Standard Command  lan print ${channel_number}
+
+
+Test Invalid IPMI Channel Response
+    [Documentation]  Verify invalid IPMI channels supported response.
+    [Tags]  Test_Invalid_IPMI_Channel_Response
+
+    ${channel_count}=  Get Physical Network Interface Count
+
+    # To target invalid channel, increment count.
+    ${channel_number}=  Evaluate  ${channel_count} + 1
+
+    # Example of invalid channel:
+    # $ ipmitool -I lanplus -H xx.xx.xx.xx -P 0penBmc lan print 3
+    # Get Channel Info command failed: Parameter out of range
+    # Invalid channel: 3
+
+    ${stdout}=  Run External IPMI Standard Command
+    ...  lan print ${channel_number}  fail_on_err=${0}
+    Should Contain  ${stdout}  Invalid channel
+    ...  msg=IPMI channel ${channel_number} is invalid but seen working.
+
+
 *** Keywords ***
 
 Get Sensor Count
@@ -649,3 +680,17 @@ Verify Power Reading Using REST
 
     Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
     ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
+
+
+Get Physical Network Interface Count
+    [Documentation]  Return valid physical network interfaces count.
+
+    # Example:
+    # link/ether 22:3a:7f:70:92:cb brd ff:ff:ff:ff:ff:ff
+    # link/ether 0e:8e:0d:6b:e9:e4 brd ff:ff:ff:ff:ff:ff
+
+    ${mac_entry_list}=  Get BMC MAC Address List
+    ${mac_unique_list}=  Remove Duplicates  ${mac_entry_list}
+    ${physical_interface_count}=  Get Length  ${mac_unique_list}
+
+    [Return]  ${physical_interface_count}
