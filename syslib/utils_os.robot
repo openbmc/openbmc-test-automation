@@ -566,3 +566,23 @@ Clean Up String
     ${clean_string} =  Set Variable If  '${last_char}' == ','
     ...  ${trimmed_string}  ${clean_string}
     [Return]  ${clean_string}
+
+
+Get OS Network Interfaces
+    [Documentation]  Return a list of interfaces on the OS.
+
+    ${stdout}=  Execute Command On OS  ls /sys/class/net
+    @{interfaces}=  Split String  ${stdout}
+    [Return]  @{interfaces}
+
+
+Get Network Interface State
+    [Documentation]  Return the state of the given network interface
+    ...  (up/down)
+    [Arguments]  ${interface}
+    # Description of argument(s):
+    # interface        The target interface (e.g. eth0).
+    ${output}=  Execute Command On OS  ethtool ${interface} | tail -1
+    ${up}=  Evaluate  "yes" in "${output}"
+    ${state}  Set Variable If  '${up}' == "True"  up  down
+    [Return]  ${state}
