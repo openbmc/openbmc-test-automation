@@ -179,11 +179,11 @@ Verify REST Post Message JSON Compliant
     Set To Dictionary  ${data}  headers  ${headers}
 
     ${resp}=  Post Request  openbmc  /upload/image  &{data}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_BAD_REQUEST}
     ${jsondata}=  To JSON  ${resp.content}
     Should Be Equal  ${jsondata["data"]}  ${None}
-    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
-    Should Be Equal As Strings  ${jsondata["status"]}  ok
+    Should Be Equal As Strings  ${jsondata["message"]}  400 Bad Request
+    Should Be Equal As Strings  ${jsondata["status"]} error
     Delete All Error Logs
 
 
