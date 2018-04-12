@@ -416,8 +416,11 @@ Run IPMI With Multiple IPs Configured
 
 Clear IP Address
     [Documentation]  Delete the IPs
-    @{ip_uri_list}=  Get IPv4 URI List
+
+    # Get the current IPv4 list post delete and sleep 10s for sync.
     :FOR  ${loc_valid_ip}  IN  @{valid_ips}
+    \  Sleep  10s
+    \  @{ip_uri_list}=  Get IPv4 URI List
     \  Delete IP And Object  ${loc_valid_ip}  @{ip_uri_list}
 
 Test Setup Execution
