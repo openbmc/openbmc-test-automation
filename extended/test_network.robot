@@ -5,6 +5,7 @@ Resource  ../lib/ipmi_client.robot
 Resource  ../lib/rest_client.robot
 Resource  ../lib/utils.robot
 Resource  ../lib/bmc_network_utils.robot
+Resource  ../lib/openbmc_ffdc.robot
 
 Force Tags  Network_Test
 
@@ -12,7 +13,7 @@ Library  String
 Library  SSHLibrary
 
 Test Setup     Test Setup Execution
-Test Teardown  Close All Connections
+Test Teardown  Test Teardown Execution
 
 *** Variables ***
 
@@ -553,3 +554,9 @@ Validate Hostname On BMC
 
     Should Contain  ${sys_hostname}  ${hostname}
     ...  ignore_case=True  msg=Hostname does not exist.
+
+Test Teardown Execution
+    [Documentation]  Do the post test teardown.
+
+    FFDC On Test Case Fail
+    Close All Connections
