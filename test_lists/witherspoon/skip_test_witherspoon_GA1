@@ -42,3 +42,4 @@
 # NA for GA1 service pack.
 -e Verify_Core_Dump_Size
 -e REST_Upload_Stability_Test
+-e Verify_REST_Bad_Request_Post_Message_JSON_Compliant
