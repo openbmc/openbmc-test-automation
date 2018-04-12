@@ -417,6 +417,24 @@ Run IPMI With Multiple IPs Configured
 Clear IP Address
     [Documentation]  Delete the IPs
     @{ip_uri_list}=  Get IPv4 URI List
+
+    # Remove link local address.
+    # Example:
+    # /xyz/openbmc_project/network/eth0/ipv4/99b89af4
+    # {
+    #    "Address": "169.254.53.61",
+    #    "Gateway": "0.0.0.0",
+    #    "Origin": "xyz.openbmc_project.Network.IP.AddressOrigin.LinkLocal",
+    #    "PrefixLength": 16,
+    #    "Type": "xyz.openbmc_project.Network.IP.Protocol.IPv4"
+    # }
+
+    :FOR  ${ipv4}  IN  @{ip_uri_list}
+    \  ${resp}=  Read Attribute  ${ipv4}  Origin
+    \  Run Keyword If
+    ...  "${resp}" == "xyz.openbmc_project.Network.IP.AddressOrigin.LinkLocal"
+    ...  Remove From List  ${ipv4}  ${ip_uri_list}
+
     :FOR  ${loc_valid_ip}  IN  @{valid_ips}
     \  Delete IP And Object  ${loc_valid_ip}  @{ip_uri_list}
 
@@ -444,6 +462,7 @@ Get IPv4 URI List
     Should Not Be Empty  ${ipv4_uri_list}  msg=IPv4 URI list is empty.
 
     [Return]  @{ipv4_uri_list}
+
 
 Validate IP On BMC
     [Documentation]  Validate IP on BMC.
