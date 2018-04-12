@@ -152,14 +152,16 @@ Verify REST Get Message JSON Compliant
     ...  /xyz/openbmc_project/state/bmc0/attr/CurrentBMCState  DATA_NOT_EMPTY
 
 
-Verify REST Post Message JSON Compliant
+Verify REST Bad Request Post Message JSON Compliant
     [Documentation]  Verify REST "POST" message is JSON format compliant.
-    [Tags]  Verify_REST_Post_Message_JSON_Compliant
+    [Tags]  Verify_REST_Bad_Request_Post_Message_JSON_Compliant
     # Example:
-    # Response code:200, Content:{
-    #  "data": null,
-    #  "message": "200 OK",
-    #  "status": "ok"
+    # {
+    #   "data": {
+    #        "description": "Version already exists or failed to be extracted"
+    #    },
+    #    "message": "400 Bad Request",
+    #    "status": "error"
     # }
 
     # Generate 1KB file size
@@ -179,11 +181,11 @@ Verify REST Post Message JSON Compliant
     Set To Dictionary  ${data}  headers  ${headers}
 
     ${resp}=  Post Request  openbmc  /upload/image  &{data}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_BAD_REQUEST}
     ${jsondata}=  To JSON  ${resp.content}
     Should Be Equal  ${jsondata["data"]}  ${None}
-    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
-    Should Be Equal As Strings  ${jsondata["status"]}  ok
+    Should Be Equal As Strings  ${jsondata["message"]}  400 Bad Request
+    Should Be Equal As Strings  ${jsondata["status"]}  error
     Delete All Error Logs
 
 
