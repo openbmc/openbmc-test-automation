@@ -11,6 +11,7 @@
 -i REST_Login_Session_To_BMC
 -i Verify_REST_Get_Message_JSON_Compliant
 -i Verify_REST_Post_Message_JSON_Compliant
+-i Verify_REST_Bad_Request_Post_Message_JSON_Compliant
 -i REST_Put_Message_JSON_Format_Compliance_Test
 -i Verify_REST_JSON_Data_On_Success
 -i Verify_REST_JSON_Data_On_Failure
