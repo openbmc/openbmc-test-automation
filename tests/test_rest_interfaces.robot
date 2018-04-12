@@ -173,6 +173,44 @@ Verify REST Post Message JSON Compliant
     Should Be Equal As Strings  ${jsondata["status"]}  ok
 
 
+Verify REST Bad Request Post Message JSON Compliant
+    [Documentation]  Verify REST "POST" message is JSON format compliant.
+    [Tags]  Verify_REST_Bad_Request_Post_Message_JSON_Compliant
+    # Example:
+    # {
+    #   "data": {
+    #        "description": "Version already exists or failed to be extracted"
+    #    },
+    #    "message": "400 Bad Request",
+    #    "status": "error"
+    # }
+
+    # Generate 1KB file size
+    Run  dd if=/dev/zero of=dummyfile bs=1 count=0 seek=1KB
+    OperatingSystem.File Should Exist  dummyfile
+
+    # Get the content of the file and upload to BMC
+    ${image_data}=  OperatingSystem.Get Binary File  dummyfile
+
+    # Get REST session to BMC
+    Initialize OpenBMC
+
+    # Create the REST payload headers and data
+    ${data}=  Create Dictionary  data  ${image_data}
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  Accept=application/octet-stream
+    Set To Dictionary  ${data}  headers  ${headers}
+
+    ${resp}=  Post Request  openbmc  /upload/image  &{data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_BAD_REQUEST}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Be Equal  ${jsondata["data"]["description"]}
+    ...  Version already exists or failed to be extracted
+    Should Be Equal As Strings  ${jsondata["message"]}  400 Bad Request
+    Should Be Equal As Strings  ${jsondata["status"]}  error
+    Delete All Error Logs
+
+
 Verify REST Put Message JSON Compliant
     [Documentation]  Verify REST "PUT" message is JSON format compliant.
     [Tags]  REST_Put_Message_JSON_Format_Compliance_Test
