@@ -41,3 +41,4 @@
 -e SDR_Test
 # NA for GA1 service pack.
 -e Verify_Core_Dump_Size
+-e Verify_REST_Bad_Request_Post_Message_JSON_Compliant
