@@ -213,3 +213,77 @@ def compare_mac_address(sys_mac_addr, user_mac_addr):
         return 0
 
     return 1
+
+
+def get_os_ethtool(interface_name):
+    r"""
+    Get OS 'ethtool' output for the given interface_name and return it as a
+    dictionary.
+
+    Settings for enP52p1s0f0:
+          Supported ports: [ TP ]
+          Supported link modes:   10baseT/Half 10baseT/Full
+                                  100baseT/Half 100baseT/Full
+                                  1000baseT/Half 1000baseT/Full
+          Supported pause frame use: No
+          Supports auto-negotiation: Yes
+          Supported FEC modes: Not reported
+          Advertised link modes:  10baseT/Half 10baseT/Full
+                                  100baseT/Half 100baseT/Full
+                                  1000baseT/Half 1000baseT/Full
+          Advertised pause frame use: Symmetric
+          Advertised auto-negotiation: Yes
+          Advertised FEC modes: Not reported
+          Speed: Unknown!
+          Duplex: Unknown! (255)
+          Port: Twisted Pair
+          PHYAD: 1
+          Transceiver: internal
+          Auto-negotiation: on
+          MDI-X: Unknown
+          Supports Wake-on: g
+          Wake-on: g
+          Current message level: 0x000000ff (255)
+                                 drv probe link timer ifdown ifup rx_err tx_err
+          Link detected: no
+
+    Given that data, this function will return the following dictionary.
+
+    ethtool_dict:
+      [supported_ports]:             [ TP ]
+      [supported_link_modes]:
+        [supported_link_modes][0]:   10baseT/Half 10baseT/Full
+        [supported_link_modes][1]:   100baseT/Half 100baseT/Full
+        [supported_link_modes][2]:   1000baseT/Half 1000baseT/Full
+      [supported_pause_frame_use]:   No
+      [supports_auto-negotiation]:   Yes
+      [supported_fec_modes]:         Not reported
+      [advertised_link_modes]:
+        [advertised_link_modes][0]:  10baseT/Half 10baseT/Full
+        [advertised_link_modes][1]:  100baseT/Half 100baseT/Full
+        [advertised_link_modes][2]:  1000baseT/Half 1000baseT/Full
+      [advertised_pause_frame_use]:  Symmetric
+      [advertised_auto-negotiation]: Yes
+      [advertised_fec_modes]:        Not reported
+      [speed]:                       Unknown!
+      [duplex]:                      Unknown! (255)
+      [port]:                        Twisted Pair
+      [phyad]:                       1
+      [transceiver]:                 internal
+      [auto-negotiation]:            on
+      [mdi-x]:                       Unknown
+      [supports_wake-on]:            g
+      [wake-on]:                     g
+      [current_message_level]:       0x000000ff (255)
+      [drv_probe_link_timer_ifdown_ifup_rx_err_tx_err]:<blank>
+      [link_detected]:               no
+    """
+
+    # Using sed and tail to massage the data a bit before running
+    # key_value_outbuf_to_dict.
+    cmd_buf = "ethtool " + interface_name +\
+        " | sed -re 's/(.* link modes:)(.*)/\\1\\n\\2/g' | tail -n +2"
+    stdout, stderr, rc = bsu.os_execute_command(cmd_buf)
+    result = vf.key_value_outbuf_to_dict(stdout, process_indent=1, strip=" \t")
+
+    return result
