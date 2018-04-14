@@ -84,7 +84,8 @@ Power Supply Error Logging Test At Runtime
     [Documentation]  Check that power supply error is logged when one of the
     ...  power supply inputs is unplugged.
     [Tags]  Power_Supply_Error_Logging_Test_At_Runtime
-    [Teardown]  Set Power Supply Present  ${1}
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Set Power Supply Present  ${1}
 
     REST Power On  stack_mode=skip
 
@@ -157,8 +158,6 @@ Set Power Supply Present
 
     # Description of argument(s):
     # power_present_setting  Enable or disable power present field (e.g."0/1").
-
-    FFDC On Test Case Fail
 
     ${data}=  Create Dictionary  data=${power_present_setting}
     Write Attribute
