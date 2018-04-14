@@ -63,9 +63,9 @@ Upload Test Image File To BMC
     ...  Accept=application/octet-stream
     Set To Dictionary  ${data}  headers  ${headers}
 
-    # Upload to BMC and check for HTTP_OK.
+    # Upload to BMC and check for HTTP_BAD_REQUEST.
     ${resp}=  Post Request  openbmc  /upload/image  &{data}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_BAD_REQUEST}
 
     ${loop_count}=  Catenate  Ending iteration: ${iteration}
     Rpvars  loop_count
