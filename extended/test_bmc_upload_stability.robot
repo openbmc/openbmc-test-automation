@@ -65,7 +65,7 @@ Upload Test Image File To BMC
 
     # Upload to BMC and check for HTTP_OK.
     ${resp}=  Post Request  openbmc  /upload/image  &{data}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_BAD_REQUEST}
 
     ${loop_count}=  Catenate  Ending iteration: ${iteration}
     Rpvars  loop_count
