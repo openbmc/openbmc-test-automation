@@ -25,5 +25,5 @@ Test Non-SSL Connection To Port 443
     [Documentation]  Test that OpenBmc does not accept the non-secure
     ...  http connection at port 443 and would expect a connection error.
     [Tags]  Test_Non_SSL_Connection_To_Port_443
-    Create Session  openbmc  http://${OPENBMC_HOST}:443/
+    Create Session  openbmc  http://${OPENBMC_HOST}:443/  timeout=3
     Run Keyword And Expect Error  ConnectionError*  Get Request  openbmc  /list
