@@ -53,8 +53,6 @@ Verify Uptime Average Against Threshold
     [Tags]  Verify_Uptime_Average_Against_Threshold
 
     OBMC Reboot (off)
-    Wait Until Keyword Succeeds
-    ...  3 min  0 sec  Wait for BMC state  Ready
     ${uptime}=  Measure BMC Boot Time
     Should Be True  ${uptime} < 180
     ...  msg=${uptime} exceeds threshold.
