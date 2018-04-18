@@ -96,8 +96,10 @@ Verify Watchdog Errorlog Content
     ${elog}=  Read Properties  ${elog_entry[0]}
     Should Be Equal As Strings
     ...  ${elog["Message"]}  org.open_power.Host.Boot.Error.WatchdogTimedOut
+    ...  msg=Watchdog timeout error log was not found.
     Should Be Equal As Strings
     ...  ${elog["Severity"]}  xyz.openbmc_project.Logging.Entry.Level.Error
+    ...  msg=Watchdog timeout severity unexpected value.
 
 
 Logging Test Binary Exist
@@ -105,8 +107,9 @@ Logging Test Binary Exist
     Open Connection And Log In
     ${out}  ${stderr}=  Execute Command
     ...  which /tmp/tarball/bin/logging-test  return_stderr=True
-    Should Be Empty  ${stderr}
+    Should Be Empty  ${stderr}  msg=Logging Test stderr is non-empty.
     Should Contain  ${out}  logging-test
+    ...  msg=Logging test returned unexpected result.
 
 Clear Existing Error Logs
     [Documentation]  If error log isn't empty, reboot the BMC to clear the log.
@@ -117,6 +120,7 @@ Clear Existing Error Logs
     ...  Is BMC Ready
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    ...  msg=Could not clear BMC error logs.
 
 Create Test Error Log
     [Documentation]  Generate test error log.
@@ -138,6 +142,7 @@ Count Error Entries
     [Documentation]  Count Error entries.
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ...  msg=Failed to get error logs.
     ${jsondata}=  To JSON  ${resp.content}
     ${count}=  Get Length  ${jsondata["data"]}
     [Return]  ${count}
@@ -148,15 +153,18 @@ Verify Test Error Log
     ${entry_id}=  Read Attribute  ${elog_entry[0]}  Message
     Should Be Equal  ${entry_id}
     ...  example.xyz.openbmc_project.Example.Elog.AutoTestSimple
+    ...  msg=Error log not from AutoTestSimple.
     ${entry_id}=  Read Attribute  ${elog_entry[0]}  Severity
     Should Be Equal  ${entry_id}
     ...  xyz.openbmc_project.Logging.Entry.Level.Error
+    ...  msg=Error log severity mismatch.
 
 Delete Error Logs And Verify
     [Documentation]  Delete all error logs and verify.
     Delete All Error Logs
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    ...  msg=Error logs not deleted as expected.
 
 
 Install Tarball
