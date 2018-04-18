@@ -1388,11 +1388,12 @@ Get Elog URL List
 
 Read Turbo Setting Via REST
     [Documentation]  Return turbo setting via REST.
+    # Returns 1 if TurboAllowed, 0 if not.
 
-    ${resp}=  OpenBMC Get Request  ${SENSORS_URI}host/TurboAllowed
-    ${jsondata}=  To JSON  ${resp.content}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    [Return]  ${jsondata["data"]["value"]}
+    ${turbo_setting}=  Read Attribute
+    ...  ${CONTROL_HOST_URI}turbo_allowed  TurboAllowed
+    [Return]  ${turbo_setting}
+
 
 
 Set Turbo Setting Via REST
@@ -1402,8 +1403,10 @@ Set Turbo Setting Via REST
     # Description of argument(s):
     # setting  Value which needs to be set.(i.e. False or True).
 
-    ${valueDict}=  Create Dictionary  data=${setting}
-    Write Attribute  ${SENSORS_URI}host/TurboAllowed  value  data=${valueDict}
+    ${data}=  Create Dictionary  data=${${setting}}
+    Write Attribute   ${CONTROL_HOST_URI}turbo_allowed  TurboAllowed
+    ...  data=${data}
+
 
 
 Set Control Boot Mode
