@@ -1,6 +1,8 @@
 *** Settings ***
 Documentation  Test power on for HW CI.
 
+Library             DateTime
+
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Resource            ../lib/state_manager.robot
@@ -20,7 +22,8 @@ Force Tags  chassisboot
 ${LOOP_COUNT}  ${2}
 
 # Error strings to check from journald.
-${ERROR_REGEX}   SEGV|core-dump
+${ERROR_REGEX}     SEGV|core-dump
+${STANDBY_REGEX}   Startup finished in|userspace
 
 *** Test Cases ***
 
@@ -53,9 +56,18 @@ Verify Uptime Average Against Threshold
     [Tags]  Verify_Uptime_Average_Against_Threshold
 
     OBMC Reboot (off)
-    ${uptime}=  Measure BMC Boot Time
-    Should Be True  ${uptime} < 180
-    ...  msg=${uptime} exceeds threshold.
+
+    # Example output:
+    # Startup finished in 10.074s (kernel) + 2min 23.506s (userspace) = 2min 33.581s.
+    ${startup_time}=  BMC Execute Command
+    ...  journalctl --no-pager | egrep '${STANDBY_REGEX}' | tail -1
+
+    # Example time conversion:
+    # Get the "2min 33.581s" string total time taken to reach standby.
+    # Convert time "2min 33.581s" to unit 153.581.
+    ${uptime}=  Convert Time  ${startup_time[0].split("= ",1)[1].strip(".")}
+
+    Should Be True  ${uptime} < 180  msg=${uptime} exceeds threshold.
 
 Test SSH And IPMI Connections
     [Documentation]  Try SSH and IPMI commands to verify each connection.
