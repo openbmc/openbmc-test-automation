@@ -91,8 +91,8 @@ proc expect_wrap {pattern_list message {timeout 15} {fail_on_timeout 1}} {
   #                                 This will be included in output messages.
   # timeout                         The expect timeout value.
   # fail_on_timeout                 A flag governing the behavior when the
-  #                                 expect command results in a timeout.
-  #                                 If set to 1, this procedure will print an
+  #                                 expect command results in a timeout. If
+  #                                 set to 1, this procedure will print an
   #                                 error message to standard error and exit
   #                                 the program with a non-zero return code.
   #                                 If set to 0, it will return
@@ -142,7 +142,6 @@ proc expect_wrap {pattern_list message {timeout 15} {fail_on_timeout 1}} {
     append cmd_buf "  ${flag} {$pattern} {set expect_result $ix}\n"
     incr ix
   }
-
   if { $fail_on_timeout } {
     append cmd_buf "  timeout {handle_timeout \$message}\n"
   } else {
@@ -160,6 +159,7 @@ proc expect_wrap {pattern_list message {timeout 15} {fail_on_timeout 1}} {
   return $expect_result
 
 }
+
 
 proc expect_wrap_timeout {} {
 
@@ -213,37 +213,41 @@ proc shell_command {command_string {prompt_regex} { quiet {} } \
   { test_mode {} } { show_err {} } { ignore_err {} } {trim_cr_lf 1}} {
 
   # Execute the command_string on the shell command line and return a list
-  # consisting of 1) the return code of the command 2) the stdout/
-  # stderr.
+  # consisting of 1) the return code of the command 2) the stdout/stderr.
 
   # It is the caller's responsibility to spawn the appropriate process
-  # (ssh,telnet) and to get the process to a shell command line
-  # (by logging in, etc.).
+  # (ssh,telnet) and to get the process to a shell command line (by logging
+  # in, etc.).
 
   # Description of argument(s):
-  # command_string  The command string which is to be run on the shell (e.g.
-  #                 "hostname" or "grep this that").
-  # prompt_regex    A regular expression to match the prompt for current
-  #                 shell to run on (e.g "/ #").
-  # quiet           Indicates whether this procedure should run the
-  #                 print_issuing() procedure which prints "Issuing:
-  #                 <cmd string>" to stdout. The default value is 0.
-  # test_mode       If test_mode is set, this procedure will not actually run
-  #                 the command.  If print_output is set, it will print
-  #                 "(test_mode) Issuing: <cmd string>" to stdout.  The default
-  #                 value is 0.
-  # show_err        If show_err is set, this procedure will print a
-  #                 standardized error report if the shell command returns non-
-  #                 zero.  The default value is 1.
-  # ignore_err      If ignore_err is set, this procedure will not fail if the
-  #                 shell command fails.  However, if ignore_err is not set,
-  #                 this procedure will exit 1 if the shell command fails.  The
-  #                 default value is 1.
-  # trim_cr_lf      Trim any trailing carriage return or line feed from the
-  #                 result.
+  # command_string                  The command string which is to be run on
+  #                                 the shell (e.g. "hostname" or "grep this
+  #                                 that").
+  # prompt_regex                    A regular expression to match the prompt
+  #                                 for current shell to run on (e.g "/ #").
+  # quiet                           Indicates whether this procedure should
+  #                                 run the print_issuing() procedure which
+  #                                 prints "Issuing: <cmd string>" to stdout.
+  #                                 The default value is 0.
+  # test_mode                       If test_mode is set, this procedure will
+  #                                 not actually run the command.  If
+  #                                 print_output is set, it will print
+  #                                 "(test_mode) Issuing: <cmd string>" to
+  #                                 stdout.  The default value is 0.
+  # show_err                        If show_err is set, this procedure will
+  #                                 print a standardized error report if the
+  #                                 shell command returns non-zero.  The
+  #                                 default value is 1.
+  # ignore_err                      If ignore_err is set, this procedure will
+  #                                 not fail if the shell command fails.
+  #                                 However, if ignore_err is not set, this
+  #                                 procedure will exit 1 if the shell command
+  #                                 fails.  The default value is 1.
+  # trim_cr_lf                      Trim any trailing carriage return or line
+  #                                 feed from the result.
 
   # Set defaults (this section allows users to pass blank values for certain
-  # args)
+  # args).
   set_var_default quiet [get_stack_var quiet 0 2]
   set_var_default test_mode 0
   set_var_default show_err 1
