@@ -24,16 +24,16 @@
 
     Usage:
     ```
-    $ ./generate_test_document <Robot test directory path> <test case document file path>
+    $ ./tools/generate_test_document <Robot test directory path> <test case document file path>
     ```
 
     Example for generating tests cases documentation for tests directory:
     ```
-    $ ./generate_test_document tests testsdirectoryTCdocs.html
+    $ ./tools/generate_test_document tests testsdirectoryTCdocs.html
     ```
 
     Example for generating tests cases documentation:
     Note: Invoke the tool without arguments:
     ```
-    $ ./generate_test_document
+    $ ./tools/generate_test_document
     ```
