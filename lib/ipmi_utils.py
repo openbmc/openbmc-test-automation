@@ -288,3 +288,30 @@ def get_sdr_info():
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
+
+
+def get_aux_version(version_id):
+    r"""
+    Get IPMI Aux version info data and return it.
+
+    Description of argument(s):
+    version_id    The data is obtained by from BMC /etc/os-release
+                  (e.g. "xxx-v2.1-438-g0030304-r3-gfea8585").
+
+    In the prior example, the 3rd field is "438" is the commit version and
+    the 5th field is "r3" and value "3" is the release version.
+
+    Aux version return from this function 4380003.
+    """
+
+    # Commit version.
+    count = re.findall("-(\d{1,4})-", version_id)
+
+    # Release version.
+    release = re.findall("-r(\d{1,4})", version_id)
+    if release:
+        aux_version = count[0] + "{0:0>4}".format(release[0])
+    else:
+        aux_version = count[0] + "0000"
+
+    return aux_version
