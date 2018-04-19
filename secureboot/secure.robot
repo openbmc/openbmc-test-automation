@@ -30,7 +30,76 @@ Validate Secure Boot With TPM Policy Enabled
     Validate Secure Boot With TPM Policy Enabled Or Disabled  ${1}
 
 
+Verify Secure Boot Violation SRC After SBE Partition Corruption
+    [Documentation]  Verify SRC after SBE partition corruption.
+    [Tags]  Verify_Secure_Boot_Violation_SRC_After_SBE_Partition_Corruption
+
+    Verify Secure Boot Violation SRC After Partition Corruption  SBE
+
+
 *** Keywords ***
+
+Verify Secure Boot Violation SRC After Partition Corruption
+    [Documentation]  Verify secure boot violation SRC after partition corruption.
+    [Arguments]  ${partition}
+
+    # Decription of argument(s):
+    # ${partition}  Corrupted partition.
+
+    ${file_path1}=  Set Variable  /esw/san2/devindia/errorlog_decode/skiboot/
+    ${file_path2}=  Set Variable  /external/pflash/corrupted_imprint_pnor/
+    ${file_path}=  Catenate  ${file_path1}${filepath2}
+
+    REST Power Off  stack_mode=skip
+    Set And Verify TPM Policy  ${1}
+
+    # Load corrupted image to /usr/local/share/pnor.
+    Open Connection For SCP
+    scp.Put File  ${file_path}/SBE  /usr/local/share/pnor/
+
+    BMC Execute Command  /usr/sbin/obmcutil poweron
+    Wait Until Keyword Succeeds  10 min  10 sec  Verify Test Error Log
+
+    Decode Error Log And Verify  BC8A1E07
+
+    # Remove the file from /usr/local/share/pnor/.
+    BMC Execute Command  rm -rf /usr/local/share/pnor/${partition}
+
+    Run Keywords
+    ...  Wait Until Keyword Succeeds  3 min  5 sec  Is Host Quiesced  AND
+    ...  Recover Quiesced Host
+
+
+Verify Test Error Log
+    [Documentation]  Verify test error log entries.
+
+    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
+    Should Contain  ${elog_entry}[0]  OPENBMC_BASE/logging/entry/
+    ...  msg=Error log not generated.
+
+
+Decode Error Log And Verify
+    [Documentation]  Decode error log and verify.
+    [Arguments]  ${error_log_code}
+
+    ${decode_path}=  Set Variable  /esw/san2/devindia/errorlog_decode/x86/bin/
+
+    ${resp}=  OpenBMC Get Request  OPENBMC_BASE/logging/enumerate
+    Create File  ${EXEC_DIR}/esel_error.out  ${resp.content}
+
+    ${cmd}=  Catenate  ${decode_path}/eSEL.pl -p decode_obmc_data -l
+    ...   ${EXEC_DIR}/esel_error.out
+
+    ${rc}  ${output}=  Run And Return RC And Output  ${cmd}
+    Should Be Equal  ${rc}  ${0}
+    ...  msg=Unable to decode the error log.
+
+    ${cmd}=  Catenate
+    ...  cat ${EXEC_DIR}/esel_error.out.txt | grep -i ${error_log_code}
+    ${rc}  ${output}=  Run and Return RC and Output  ${cmd}
+    Should Be Equal  ${rc}  ${0}
+    ...  msg=Code not found in the decoded error log.
+
 
 Get And Verify Security Access Bit
     [Documentation]  Get and verify security access bit.
