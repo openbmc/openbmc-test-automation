@@ -1,6 +1,11 @@
 *** Settings ***
 Documentation  Secure boot related test cases.
 
+# Test Parameters:
+# HB              Host boot.
+# BC8A1E07        A problem occurred during the power on of the system.
+
+
 Resource          ../lib/utils.robot
 Resource          ../lib/boot_utils.robot
 Resource          ../lib/secure_utils.robot
@@ -13,6 +18,9 @@ Test Teardown     Test Teardown Execution
 *** Variables ***
 
 ${security_access_bit_mask}  ${0xC000000000000000}
+${pnor_corruption}           BC8A1E07
+${bmc_path_image}            /usr/local/share/pnor
+${decode_path}               ${EMPTY}
 
 *** Test Cases ***
 
@@ -30,7 +38,67 @@ Validate Secure Boot With TPM Policy Enabled
     Validate Secure Boot With TPM Policy Enabled Or Disabled  ${1}
 
 
+Verify Secure Boot Violation During HB With Corrupted Key In SBE
+    [Documentation]  Verify Secure Boot Violation Corrupted Key SBE Partition.
+    [Tags]  Verify_Secure_Boot_Violation_During_HB_With_Corrupted_Key_In_SBE
+
+    Verify Secure Boot Violation With Corrupted Key  SBE  ${pnor_corruption}
+
+
 *** Keywords ***
+
+Verify Secure Boot Violation With Corrupted Key
+    [Documentation]  Verify secure boot violation during host boot
+    ...  with corrupted key.
+    [Arguments]  ${partition}  ${error_src}
+
+    # Decription of argument(s):
+    # ${partition}   Corrupted partition
+    #                (e.g. "SBE", "HBI", "HBB", "HBRT", "HBBL", "OCC").
+    # ${error_src}   System Resource Controller.
+
+    Set And Verify TPM Policy  ${1}
+
+    # Load corrupted image to /usr/local/share/pnor.
+    Open Connection For SCP
+    scp.Put File  ${EXEC_DIR}/data/pnor_test_data/SBE  ${bmc_path_image}
+
+    BMC Execute Command  /usr/sbin/obmcutil poweron
+    Wait Until Keyword Succeeds  10 min  10 sec  Error Logs Should Exist
+
+    Generate Error Log And Verify SRC  ${error_src}
+
+    # Remove the file from /usr/local/share/pnor/.
+    BMC Execute Command  rm -rf ${bmc_path_image}/${partition}
+
+    Run Keywords
+    ...  Wait Until Keyword Succeeds  3 min  5 sec  Is Host Quiesced  AND
+    ...  Recover Quiesced Host
+
+
+Generate Error Log And Verify SRC
+    [Documentation]  Decode error log and verify.
+    [Arguments]  ${error_log_code}
+
+    # Description of argument(s):
+    # error_log_code  Src code.
+
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_URI}/enumerate
+    Create File  ${EXEC_DIR}/esel_error.out  ${resp.content}
+
+    ${cmd}=  Catenate  ${decode_path}/eSEL.pl -p decode_obmc_data -l
+    ...   ${EXEC_DIR}/esel_error.out
+
+    ${rc}  ${output}=  Run And Return RC And Output  ${cmd}
+    Should Be Equal  ${rc}  ${0}
+    ...  msg=Unable to decode the error log.
+
+    ${cmd}=  Catenate
+    ...  cat ${EXEC_DIR}/esel_error.out.txt | grep -i ${error_log_code}
+    ${rc}  ${output}=  Run and Return RC and Output  ${cmd}
+    Should Be Equal  ${rc}  ${0}
+    ...  msg=Code not found in the decoded error log.
+
 
 Get And Verify Security Access Bit
     [Documentation]  Get and verify security access bit.
