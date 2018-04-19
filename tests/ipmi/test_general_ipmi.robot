@@ -9,7 +9,7 @@ Resource            ../../lib/bmc_network_utils.robot
 Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 
-Test Teardown       FFDC On Test Case Fail
+#Test Teardown       FFDC On Test Case Fail
 
 
 *** Variables ***
@@ -432,10 +432,10 @@ Verify Get Device ID
     #     FRU Inventory Device
     #     Chassis Device
     # Aux Firmware Rev Info     :
+    #     0x04
+    #     0x38
     #     0x00
-    #     0x00
-    #     0x00
-    #     0x00
+    #     0x03
 
     ${mc_info}=  Get MC Info
 
@@ -449,9 +449,9 @@ Verify Get Device ID
     ${ipmi_fw_minor_version}=  Convert To Integer  ${ipmi_fw_minor_version}
 
     # Get BMC version from BMC CLI i.e. 2.1 from "ibm-v2.1-338-r1-0-gbcd7765"
-    ${bmc_version}=  Get BMC Version
+    ${bmc_version_full}=  Get BMC Version
     ${bmc_version}=
-    ...  Remove String Using Regexp  ${bmc_version}  ^[^0-9]+  [^0-9\.].*
+    ...  Remove String Using Regexp  ${bmc_version_full}  ^[^0-9]+  [^0-9\.].*
 
     # Get major and minor version from BMC version i.e. 2 and 1 from 2.1
     ${bmc_major_version}  ${bmc_minor_version}=
@@ -477,8 +477,29 @@ Verify Get Device ID
     ...  ${mc_info['additional_device_support']}  FRU Inventory Device
     Should Contain  ${mc_info['additional_device_support']}  Chassis Device
 
-    # TODO: openbmc/openbmc-test-automation#1297
-    # Aux firmware revision verification.
+    # Aux revision data verification.
+    # Example Aux version from "xxx-v2.1-438-g0030304-r3-0-g96d78ac"
+    # Build version "438", Level version "3".
+
+    # Aux Firmware Rev Info     :
+    #     0x04
+    #     0x38
+    ${bmc_aux_build}=  Catenate
+    ...  SEPARATOR=  ${mc_info['aux_firmware_rev_info'][0][2:]}
+    ...  ${mc_info['aux_firmware_rev_info'][1][2:]}
+
+    Should Be Equal As Integers
+    ...  ${bmc_aux_build}   ${bmc_version_full.split("-",6)[2]}
+
+    # Aux Firmware Rev Info     :
+    #     0x00
+    #     0x03
+    ${bmc_aux_level}=  Catenate
+    ...  SEPARATOR=  ${mc_info['aux_firmware_rev_info'][2][2:]}
+    ...  ${mc_info['aux_firmware_rev_info'][3][2:]}
+
+    Should Be Equal As Integers
+    ...   ${bmc_aux_level}  ${bmc_version_full.split("-",6)[4].strip("r")}
 
 
 Verify SDR Info
