@@ -476,7 +476,9 @@ Verify Get Device ID
     Should Contain
     ...  ${mc_info['additional_device_support']}  FRU Inventory Device
     Should Contain  ${mc_info['additional_device_support']}  Chassis Device
-    Should Contain X Times  ${mc_info['aux_firmware_rev_info']}  0x00  4
+
+    # TODO: openbmc/openbmc-test-automation#1297
+    # Aux firmware revision verification.
 
 
 Verify SDR Info
