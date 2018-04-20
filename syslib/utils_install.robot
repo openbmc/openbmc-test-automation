@@ -78,9 +78,11 @@ Install HTX On RedHat
     #            (e.g. http://server.com/projects/htx_package.rpm )
 
 
-    OS Execute Command  wget ${htx_rpm}  ignore_err=1
+    ${stdout}  ${stderr}  ${rc}  OS Execute Command
+    ...  wget ${htx_rpm}  ignore_err=1
+    Should Not Contain  ${stderr}  ERROR 
     @{str}=  Split String From Right  ${htx_rpm}  /  1
-    SSHLibrary.File Should Exist  ${str[1]}
+
     # Remove the old version.
     OS Execute Command  rpm -e `rpm -qa | grep htx`  ignore_err=1
     OS Execute Command  rpm -Uvh ${str[1]}
