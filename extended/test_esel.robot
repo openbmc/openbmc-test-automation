@@ -50,6 +50,42 @@ Verify eSEL Entries Using REST
     Create eSEL
     Verify eSEL Entries
 
+Verify eSEL Description And EntryID Using REST
+    [Documentation]  Create eSEL log and verify "Description" and "EntryID"
+    ...  are not empty via REST.
+    [Tags]  Verify_eSEL_Description_And_EntryID_Using_REST
+
+    # {
+    # "AdditionalData": [
+    #     "CALLOUT_INVENTORY_PATH=",
+    #     "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00",
+    #     "_PID=1175"
+    # ],
+    # "Description": "An error was detected with the base platform,
+    #  but was not able to be deciphered. Contact your next level of support.",
+    # "EventID": "FQPSPAA0011M",
+    # "Id": 1,
+    # "Message": "org.open_power.Host.Error.Event",
+    # "Resolved": 0,
+    # "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    # "Timestamp": 1524233022072,
+    # "associations": [
+    #    [
+    #        "callout",
+    #        "fault",
+    #        ""
+    #    ]
+    # ]
+
+    Create eSEL
+
+    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
+    ${desc}=  Read Attribute  ${elog_entry[0]}  Description
+    Should Not Be Empty  ${desc}  msg=${desc} is not populated.
+
+    ${event_id}=  Read Attribute  ${elog_entry[0]}  EventID
+    Should Not Be Empty  ${event_id}  msg=${event_id} is not populated.
+
 
 Verify Multiple eSEL Using REST
     [Documentation]  Generate multiple eSEL log and verify using REST.
