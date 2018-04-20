@@ -48,3 +48,5 @@
 -e Stress_BMC_REST_Server
 -e Stress_BMC_SSH_Server
 -e Stress_BMC_IPMI_Server
+# Applicable only for master build.
+-e Verify_eSEL_Description_And_EntryID_Using_REST
