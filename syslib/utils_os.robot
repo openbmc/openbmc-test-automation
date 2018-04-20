@@ -111,6 +111,16 @@ Is HTX Running
     [Return]  ${running}
 
 
+Check HTX Status And Sleep
+    [Documentation]  For the HTX duration, check its run status and
+    ...  sleep for the specified interval.
+    [Arguments]  ${HTX_DURATION}  ${HTX_INTERVAL}
+
+    Repeat Keyword  ${HTX_DURATION}  Run Keywords
+    ...  Check HTX Run Status
+    ...  AND  Sleep  ${HTX_INTERVAL}
+
+
 Write Log Data To File
     [Documentation]  Write log data to the logs directory.
     [Arguments]  ${data}=  ${log_file_path}=
