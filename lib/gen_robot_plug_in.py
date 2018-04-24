@@ -177,7 +177,8 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
             grp.rprint_timen("Processing " + call_point +
                              " call point programs.")
 
-    proc_plug_pkg_rc = subprocess.call(cmd_buf, shell=True)
+    proc_plug_pkg_rc = subprocess.call(cmd_buf, shell=True,
+                                       executable='/bin/bash')
 
     # As process_plug_in_packages.py help text states, it will print the
     # values of failed_plug_in_name and shell_rc in the following format:

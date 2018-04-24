@@ -1,0 +1,11 @@
+# "command" may contain a bash command string to be run to determine whether
+# the test program should be stopped.  If the command returns non-zero, the
+# test program should be stopped.
+command=string
+# rest_fail indicates that the Stop plug-in should fail if REST commands to
+# the BMC are failing.
+rest_fail=boolean
+# esel_stop_file_path may contain the path to a file with specifications for
+# which eSELs warrant stopping the test run.  See esel_stop_check help text
+# for details.
+esel_stop_file_path=string
