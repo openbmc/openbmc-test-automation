@@ -18,7 +18,7 @@ ${DRIVER_CMD}    cat /etc/os-release | grep ^VERSION_ID=
 System Driver Data
     [Documentation]  System driver information and enable defaults settings.
     Run Keyword And Ignore Error  Clear System Entry From Knownhosts
-    Open Connection And Log In
+    Wait Until Keyword Succeeds  2 min  30 sec  Open Connection And Log In
     Run Keyword And Ignore Error  Log BMC Driver Details
     Run Keyword And Ignore Error  Log PNOR Driver Details
     Run Keyword And Ignore Error  Log BMC Model
