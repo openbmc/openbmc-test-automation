@@ -10,6 +10,7 @@ import re
 import collections
 
 import gen_print as gp
+import gen_misc as gm
 
 
 def get_plug_in_package_name(case=None):
@@ -58,6 +59,34 @@ def return_plug_vars():
     if os.environ.get("AUTOBOOT_OPENBMC_NICKNAME", "") == "":
         os.environ['AUTOBOOT_OPENBMC_NICKNAME'] = \
             os.environ.get("AUTOBOOT_OPENBMC_HOST", "")
+
+    # For all variables specified in the parm_def file, we want them to
+    # default to "" rather than being unset.
+    # Process the parm_def file if it exists.
+    parm_def_file_path = gp.pgm_dir_path + "parm_def"
+    if os.path.exists(parm_def_file_path):
+        parm_defs = gm.my_parm_file(parm_def_file_path)
+    else:
+        parm_defs = collections.OrderedDict()
+    # Example parm_defs:
+    # parm_defs:
+    #   parm_defs[rest_fail]:           boolean
+    #   parm_defs[command]:             string
+    #   parm_defs[esel_stop_file_path]: string
+
+    # Create a list of plug-in environment variables by pre-pending <all caps
+    # plug-in package name>_<all caps var name>
+    plug_in_parm_names = [plug_in_package_name + "_" + x for x in
+                          map(str.upper, parm_defs.keys())]
+    # Example plug_in_parm_names:
+    # plug_in_parm_names:
+    #  plug_in_parm_names[0]: STOP_REST_FAIL
+    #  plug_in_parm_names[1]: STOP_COMMAND
+    #  plug_in_parm_names[2]: STOP_ESEL_STOP_FILE_PATH
+
+    # Initialize unset plug-in vars.
+    for var_name in plug_in_parm_names:
+        os.environ[var_name] = os.environ.get(var_name, "")
 
     plug_var_dict = \
         collections.OrderedDict(sorted({k: v for (k, v) in

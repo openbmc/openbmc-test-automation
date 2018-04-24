@@ -1,0 +1,6 @@
+# A command to be run to determine whether the test program should be
+# stopped.  If the command returns non-zero, the test program should be
+# stopped.
+command=string
+rest_fail=boolean
+esel_stop_file_path=string
