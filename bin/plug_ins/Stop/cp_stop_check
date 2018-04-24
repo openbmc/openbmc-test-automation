@@ -1,0 +1,194 @@
+#!/usr/bin/env python
+
+r"""
+Check for stop conditions.  Return code of 2 if stop conditions are found.
+"""
+
+import sys
+import subprocess
+
+save_path_0 = sys.path[0]
+del sys.path[0]
+
+from gen_print import *
+from gen_valid import *
+from gen_arg import *
+from gen_misc import *
+from gen_cmd import *
+from gen_plug_in_utils import *
+from gen_call_robot import *
+
+# Restore sys.path[0].
+sys.path.insert(0, save_path_0)
+
+# Initialize.
+STOP_REST_FAIL = ''
+STOP_COMMAND = ''
+stop_test_rc = 2
+
+# Create parser object to process command line parameters and args.
+
+# Create parser object.
+parser = argparse.ArgumentParser(
+    usage='%(prog)s [OPTIONS]',
+    description="If the \"Stop\" plug-in is selected by the user, %(prog)s" +
+    " is called by OBMC Boot Test after each boot test.  If %(prog)s returns" +
+    " " + str(stop_test_rc) + ", then OBMC Boot Test will stop.  The user" +
+    " may set environment variable STOP_COMMAND to contain any valid bash" +
+    " command or program.  %(prog)s will run this stop command.  If the stop" +
+    " command returns non-zero, then %(prog)s will return " +
+    str(stop_test_rc) + ".  %(prog)s recognizes some special values for" +
+    " STOP_COMMAND: 1) \"FAIL\" means that OBMC Boot Test should stop" +
+    " whenever a boot test fails. 2) \"ALL\" means that OBMC Boot Test" +
+    " should stop after any boot test.  If environment variable" +
+    " STOP_REST_FAIL is set, OBMC Boot Test will stop if REST commands are" +
+    " no longer working.",
+    formatter_class=argparse.RawTextHelpFormatter,
+    prefix_chars='-+')
+
+# The stock_list will be passed to gen_get_options.  We populate it with the
+# names of stock parm options we want.  These stock parms are pre-defined by
+# gen_get_options.
+stock_list = [("test_mode", 0),
+              ("quiet", get_plug_default("quiet", 0)),
+              ("debug", get_plug_default("debug", 0))]
+
+
+def exit_function(signal_number=0,
+                  frame=None):
+
+    r"""
+    Execute whenever the program ends normally or with the signals that we
+    catch (i.e. TERM, INT).
+    """
+
+    dprint_executing()
+    dprint_var(signal_number)
+
+    qprint_pgm_footer()
+
+
+def signal_handler(signal_number,
+                   frame):
+
+    r"""
+    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our
+    program would terminate immediately with return code 143 and without
+    calling our exit_function.
+    """
+
+    # Our convention is to set up exit_function with atexit.register() so
+    # there is no need to explicitly call exit_function from here.
+
+    dprint_executing()
+
+    # Calling exit prevents us from returning to the code that was running
+    # when we received the signal.
+    exit(0)
+
+
+def validate_parms():
+
+    r"""
+    Validate program parameters, etc.  Return True or False (i.e. pass/fail)
+    accordingly.
+    """
+
+    get_plug_vars()
+
+    if not valid_value(AUTOBOOT_OPENBMC_HOST, ["", None]):
+        return False
+
+    gen_post_validation(exit_function, signal_handler)
+
+    return True
+
+
+def rest_fail():
+
+    r"""
+    If STOP_REST_FAIL, then this function will determine whether REST commands
+    to the target are working.  If not, this function will stop the program
+    returning stop_test_rc.
+    """
+
+    if STOP_REST_FAIL != '1':
+        return
+
+    init_robot_out_parms(get_plug_in_package_name() + ".")
+
+    lib_file_path = init_robot_file_path("lib/state.py")
+    set_mod_global(lib_file_path)
+
+    timeout = '0 seconds'
+    interval = '1 second'
+
+    keyword_string = "${match_state}=  Create Dictionary  rest=1 ;" +\
+        " ${state}=  Wait State  ${match_state}  " + timeout + "  " +\
+        interval + "  quiet=${1} ; Rpvar  state"
+
+    set_mod_global(keyword_string)
+
+    cmd_buf = create_robot_cmd_string("extended/run_keyword.robot",
+                                      OPENBMC_HOST, keyword_string,
+                                      lib_file_path, quiet, test_mode, debug,
+                                      outputdir, output, log, report, loglevel)
+    if not robot_cmd_fnc(cmd_buf):
+        print_timen("The caller wishes to stop test execution if REST" +
+                    " commands are failing.")
+        exit(stop_test_rc)
+
+
+def esel_stop_check():
+
+    if STOP_ESEL_STOP_FILE_PATH == "":
+        return
+
+    cmd_buf = "esel_stop_check --esel_stop_file_path=" +\
+        STOP_ESEL_STOP_FILE_PATH
+    shell_rc, out_buf = cmd_fnc_u(cmd_buf, show_err=0)
+    if shell_rc == stop_test_rc:
+        print_timen("The caller wishes to stop test execution based on the" +
+                    " presence of certain esel entries.")
+        exit(stop_test_rc)
+
+
+def main():
+
+    if not gen_get_options(parser, stock_list):
+        return False
+
+    if not validate_parms():
+        return False
+
+    qprint_pgm_header()
+
+    if not debug:
+        qprint_vars(STOP_REST_FAIL, STOP_COMMAND, AUTOBOOT_BOOT_SUCCESS)
+
+    dprint_plug_vars()
+
+    rest_fail()
+
+    esel_stop_check()
+
+    if STOP_COMMAND.upper() == "FAIL":
+        if AUTOBOOT_BOOT_SUCCESS == "0":
+            print_timen("The caller wishes to stop after each boot failure.")
+            exit(stop_test_rc)
+    elif STOP_COMMAND.upper() == "ALL":
+        print_timen("The caller wishes to stop after each boot test.")
+        exit(stop_test_rc)
+    elif len(STOP_COMMAND) > 0:
+        shell_rc, out_buf = cmd_fnc_u(STOP_COMMAND, quiet=quiet, show_err=0)
+        if shell_rc != 0:
+            print_timen("The caller wishes to stop test execution.")
+            exit(stop_test_rc)
+
+    qprint_timen("The caller does not wish to stop the test run.")
+    return True
+
+# Main
+
+if not main():
+    exit(1)
