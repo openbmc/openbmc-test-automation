@@ -1395,18 +1395,21 @@ Read Turbo Setting Via REST
     [Return]  ${turbo_setting}
 
 
-
 Set Turbo Setting Via REST
     [Documentation]  Set turbo setting via REST.
-    [Arguments]  ${setting}
+    [Arguments]  ${setting}  ${verify}=${False}
 
     # Description of argument(s):
-    # setting  Value which needs to be set.(i.e. False or True).
+    # setting  State to set TurboAllowed, 1=allowed, 0=not allowed.
+    # verify   If True, read the TurboAllowed setting to confirm.
 
     ${data}=  Create Dictionary  data=${${setting}}
-    Write Attribute   ${CONTROL_HOST_URI}turbo_allowed  TurboAllowed
+    Write Attribute  ${CONTROL_HOST_URI}turbo_allowed  TurboAllowed
     ...  data=${data}
-
+    Return From Keyword If  ${verify} == ${False}
+    ${mode}=  Read Turbo Setting Via REST
+    Should Be True  ${setting} == ${mode}
+    ...  msg=Failed setting TurboAllowed to ${setting}.
 
 
 Set Control Boot Mode
