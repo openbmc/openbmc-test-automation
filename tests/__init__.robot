@@ -7,7 +7,8 @@ Resource         ../lib/rest_client.robot
 Resource         ../lib/utils.robot
 Resource         ../lib/code_update_utils.robot
 
-Suite Setup      System Driver Data
+Suite Setup      Wait Until Keyword Succeeds  2 min  30 sec
+                 ...  System Driver Data
 
 *** Variables ***
 
