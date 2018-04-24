@@ -85,6 +85,7 @@ def cmd_fnc(cmd_buf,
     sub_proc = subprocess.Popen(cmd_buf,
                                 bufsize=1,
                                 shell=True,
+                                executable='/bin/bash',
                                 stdout=subprocess.PIPE,
                                 stderr=stderr)
     out_buf = ""
