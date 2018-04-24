@@ -251,8 +251,8 @@ def run_pgm(plug_in_dir_path,
     else:
         autoscript_subcmd = ""
 
-    cmd_buf = "PATH=" + plug_in_dir_path + ":${PATH} ; " + autoscript_subcmd +\
-              cp_prefix + call_point
+    cmd_buf = "PATH=" + plug_in_dir_path.rstrip("/") + ":${PATH} ; " +\
+        autoscript_subcmd + cp_prefix + call_point
     pissuing(cmd_buf)
 
     sub_proc = subprocess.Popen(cmd_buf, shell=True)
@@ -262,6 +262,8 @@ def run_pgm(plug_in_dir_path,
     shell_rc *= 0x100
     if shell_rc != 0 and shell_rc != allow_shell_rc:
         rc = 1
+        failed_plug_in_name = plug_in_name
+    if shell_rc != 0:
         failed_plug_in_name = plug_in_name
 
     print("------------------------------------------------- Ending plug-in" +

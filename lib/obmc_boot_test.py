@@ -859,11 +859,11 @@ def test_loop_body():
 
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
-        call_point='stop_check')
-    if rc != 0:
-        error_message = "Stopping as requested by user.\n"
-        grp.rprint_error_report(error_message)
-        BuiltIn().fail(error_message)
+        call_point='stop_check', shell_rc=0x00000200, stop_on_non_zero_rc=1)
+    if shell_rc == 0x00000200:
+        message = "Stopping as requested by user.\n"
+        gp.print_time(message)
+        BuiltIn().fail(message)
 
     # This should help prevent ConnectionErrors.
     grk.run_key_u("Close All Connections")
