@@ -5,6 +5,7 @@ work-in-progress, feel free to propose changes.
 
 Submitting changes via Gerrit server
 ------------------------------------
+-   Reference [OpenBMC CLA signers](https://github.com/openbmc/openbmc-tools/blob/master/emilyshaffer/cla-signers/cla-signers)
 -   Reference [OpenBMC docs](https://github.com/openbmc/docs/blob/master/contributing.md#submitting-changes-via-gerrit-server)
 
 Robot Coding Guidelines
