@@ -54,7 +54,7 @@ FFDC_OS_ALL_DISTROS_FILE = {
         'OS_msglog': 'cat /sys/firmware/opal/msglog',
         'OS_cpufrequency': 'ppc64_cpu --frequency',
         'OS_dmesg': 'dmesg',
-        'OS_opal_prd': 'cat /var/log/opal-prd',
+        'OS_opal_prd': 'cat /var/log/opal-prd*',
         'OS_boot': 'cat /var/log/boot.log',
         'OS_procinfo': 'cat /proc/cpuinfo',
         'OS_meminfo': 'cat /proc/meminfo',
