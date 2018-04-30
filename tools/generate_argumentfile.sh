@@ -16,6 +16,7 @@ echo "--variable SSH_PORT:$SSH_PORT" >> $ARG_FILE
 echo "--variable HTTPS_PORT:$HTTPS_PORT" >> $ARG_FILE
 echo "--variable PNOR_IMAGE_PATH:$PNOR_IMAGE_PATH" >> $ARG_FILE
 echo "--variable IPMI_COMMAND:$IPMI_COMMAND" >> $ARG_FILE
+echo "--variable IPMI_CIPHER_LEVEL:$IPMI_CIPHER_LEVEL" >> $ARG_FILE
 echo "--variable ITERATION:$ITERATION" >> $ARG_FILE
 echo "--variable LOOP_TEST_COMMAND:$LOOP_TEST_COMMAND" >> $ARG_FILE
 echo "--variable OS_HOST:$OS_HOST" >> $ARG_FILE
