@@ -7,6 +7,10 @@ IPMI raw commands table:
 
 """
 
+# Currently supported cipher level list
+# Refer: openbmc/meta-openbmc-machines/meta-openpower/meta-ibm/meta-witherspoon/recipes-phosphor/ipmi/phosphor-ipmi-host/cipher_list.json
+cipher_list = [1, 2, 3, 15, 16, 17]
+
 IPMI_RAW_CMD = {
     # Interface name
     'power_supply_redundancy':

@@ -11,7 +11,6 @@ Variables           ../../data/ipmi_raw_cmd_table.py
 
 Test Teardown       FFDC On Test Case Fail
 
-
 *** Variables ***
 
 ${new_mc_id}=  HOST
@@ -19,6 +18,13 @@ ${allowed_temp_diff}=  ${1}
 ${allowed_power_diff}=  ${10}
 
 *** Test Cases ***
+
+Verify Supported Cipher List
+    [Documentation]  Execute all supported cipher level and verify.
+    [Tags]  Verify_Supported_Cipher_List
+
+    :FOR  ${cipher}  IN  @{cipher_list}
+    \  Execute IPMI Command With Cipher  ${cipher}
 
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
@@ -708,3 +714,20 @@ Get Physical Network Interface Count
     ${physical_interface_count}=  Get Length  ${mac_unique_list}
 
     [Return]  ${physical_interface_count}
+
+
+Execute IPMI Command With Cipher
+    [Documentation]  Execute IPMI command with a given cipher level value and
+    ...  expect to work.
+    [Arguments]  ${cipher_level}
+
+    # Description of argument(s):
+    # cipher_level  IPMI chipher level value
+    #               (e.g. "1", "2", "3", "15", "16", "17").
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ipmitool -I lanplus -C ${cipher_level} -P${SPACE}${IPMI_PASSWORD}
+    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}mc info
+
+    ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
+    Should Be Equal  ${rc}  ${0}  msg=${output}
