@@ -95,6 +95,8 @@ classified as follows:
 
 `mnfg/`: Contains test cases for factory reset (DHCP mode) and PGOOD testing.
 
+`network/`: Contains test cases network testing.
+
 `secureboot/`: Contains test cases for secure boot testing on a secure boot
                feature enabled system only.
 
