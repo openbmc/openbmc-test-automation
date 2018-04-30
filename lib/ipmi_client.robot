@@ -15,9 +15,9 @@ ${dbusHostIpmiCmdReceivedMsg}=   ${OPENBMC_BASE_DBUS}.HostIpmi.ReceivedMessage
 ${netfnByte}=          ${EMPTY}
 ${cmdByte}=            ${EMPTY}
 ${arrayByte}=          array:byte:
-${IPMI_EXT_CMD}=       ipmitool -I lanplus -C 3
+${IPMI_EXT_CMD}=       ipmitool -I lanplus -C ${IPMI_CIPHER_LEVEL}
 ${IPMI_USER_OPTIONS}   ${EMPTY}
-${IPMI_INBAND_CMD}=    ipmitool -C 3
+${IPMI_INBAND_CMD}=    ipmitool -C ${IPMI_CIPHER_LEVEL}
 ${HOST}=               -H
 ${RAW}=                raw
 
