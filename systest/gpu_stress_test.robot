@@ -104,16 +104,29 @@ Execute GPU Test
     # Check NVIDIA power, temperature, and clocks.
     ${power}=  Get GPU Power
     ${temperature}=  Get GPU Temperature
+    ${temperature_via_rest}=  Get GPU Temperature Via REST
     ${clock}=  Get GPU Clock
     Rprintn
-    Rpvars  power  power_max  temperature  temperature_max  clock  clock_max
+    Rpvars  power  power_max  temperature  temperature_via_rest
+    ...  temperature_max  clock  clock_max
+
     Run Keyword If  ${power} > ${power_max}  Fail
     ...  msg=GPU Power ${power} exceeds limit of ${power_max}.
+
     ${errmsg}=  Catenate  GPU temperature of ${temperature} exceeds limit
     ...  of ${temperature_max}.
     Run Keyword If  ${temperature} > ${temperature_max}  Fail  msg=${errmsg}
+
     Run Keyword If  ${clock} > ${clock_max}  Fail
     ...  msg=GPU clock of ${clock} exceeds limit of ${clock_max}.
+
+    ${errmsg}=  Catenate  GPU temperature reported by REST not within
+    ...  5 degrees of nvidia_smi reported temperature.
+    ${upper_limit}=  Evaluate  ${temperature_via_rest}+5
+    ${lower_limit}=  Evaluate  ${temperature_via_rest}-5
+    Run Keyword If
+    ...  ${temperature} > ${upper_limit} or ${temperature} < ${lower_limit}
+    ...  Fail  msg=${errmsg}
 
     Shutdown HTX Exerciser
 
