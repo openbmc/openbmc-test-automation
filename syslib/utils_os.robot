@@ -346,6 +346,29 @@ Get GPU Temperature
     [Return]  ${nvidia_out}
 
 
+Get GPU Temperature Via REST
+    [Documentation]  Return the temperature in degrees C of the warmest GPU
+    ...  as reportd by REST.
+
+    # NOTE: This endpoint path is not defined until system has been powered-on.
+    ${temperature_objs}=  Read Properties  ${SENSORS_URI}temperature/enumerate
+    ...  timeout=30  quiet=1
+
+    ${core_temperatures_list}=  Catenate  {k:v for k,v in $temperature_objs.iteritems()
+    ...  if re.match('${SENSORS_URI}temperature/.*_core_temp', k)}
+    ${gpu_temperature_objs_dict}=  Evaluate  ${core_temperatures_list}  modules=re
+
+    # Create a list containing all of the GPU temperatures.
+    ${gpu_temperatures}=  Evaluate
+    ...  [ x['Value'] for x in $gpu_temperature_objs_dict.values() ]
+
+    # Find the max temperature value and divide by 1000 to get just the integer
+    # portion.
+    ${max_gpu_temperature}=  Evaluate  max(map(int, $gpu_temperatures))/1000
+
+    [Return]  ${max_gpu_temperature}
+
+
 Get GPU Clock Limit
     [Documentation]  Get NVIDIA GPU maximum permitted graphics clock.
 
