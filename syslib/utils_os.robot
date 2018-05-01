@@ -346,6 +346,28 @@ Get GPU Temperature
     [Return]  ${nvidia_out}
 
 
+Get GPU Temperature Via REST
+    [Documentation]  Return the temperature in degrees C of the warmest GPU
+    ...  as reportd by REST.
+
+    # This endpoint path is not defined until system has been powered-on.
+    ${gpu_list}=  Get Endpoint Paths  ${SENSORS_URI}temperature  *_core_temp
+
+    ${max_gpu_temp}=  Set Variable  0
+    :FOR  ${gpu_uri}  IN  @{gpu_list}
+    \  ${response}=  OpenBMC Get Request  ${gpu_uri}
+    \  ${jsondata}=  To JSON  ${response.content}
+    \  ${gpu_temp}=  Set Variable  ${jsondata["data"]["Value"]}
+    \  ${max_gpu_temp}=  Run Keyword If  ${gpu_temp} > ${max_gpu_temp}
+    ...  Set Variable  ${gpu_temp}  ELSE  Set Variable  ${max_gpu_temp}
+
+    # A typical temperature value reported by REST might be 72000.
+    # Need to divide the value by 1000 to get the integer degrees C.
+    ${max_temperature}=  Evaluate  ${max_gpu_temp}/1000
+
+    [Return]  ${max_temperature}
+
+
 Get GPU Clock Limit
     [Documentation]  Get NVIDIA GPU maximum permitted graphics clock.
 
