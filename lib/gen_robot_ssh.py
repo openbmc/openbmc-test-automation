@@ -168,6 +168,12 @@ def execute_ssh_command(cmd_buf,
     Likewise, if the caller has not yet logged in to the connection, this
     function will do the login.
 
+    NOTE: There is special handling when open_connection_args['alias'] equals
+    "device_connection".
+    - A write, rather than an execute_command, is done.
+    - Only stdout is returned (no stderr or rc).
+    - print_err, ignore_err and fork are not supported.
+
     Description of arguments:
     cmd_buf                         The command string to be run in an SSH
                                     session.
@@ -243,10 +249,16 @@ def execute_ssh_command(cmd_buf,
             if fork:
                 sshlib.start_command(cmd_buf)
             else:
-                stdout, stderr, rc = sshlib.execute_command(cmd_buf,
-                                                            return_stdout=True,
-                                                            return_stderr=True,
-                                                            return_rc=True)
+                if open_connection_args['alias'] == "device_connection":
+                    stdout = sshlib.write(cmd_buf)
+                    stderr = ""
+                    rc = 0
+                else:
+                    stdout, stderr, rc = \
+                        sshlib.execute_command(cmd_buf,
+                                               return_stdout=True,
+                                               return_stderr=True,
+                                               return_rc=True)
         except Exception as execute_exception:
             except_type, except_value, except_traceback = sys.exc_info()
             gp.lprint_var(except_type)
@@ -304,4 +316,6 @@ def execute_ssh_command(cmd_buf,
                                   "\n")
         BuiltIn().should_be_equal(rc, 0, message)
 
+    if open_connection_args['alias'] == "device_connection":
+        return stdout
     return stdout, stderr, rc
