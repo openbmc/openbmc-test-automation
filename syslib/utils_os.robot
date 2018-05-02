@@ -65,7 +65,7 @@ Tool Exist
     # Description of argument(s):
     # tool_name   Tool name whose existence is to be checked.
     Login To OS
-    ${output}=  Execute Command On OS  which ${tool_name}
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  which ${tool_name}
     Should Contain  ${output}  ${tool_name}
     ...  msg=Please install ${tool_name} tool.
 
@@ -87,7 +87,7 @@ File Exist On OS
     # file_path   Absolute file path.
 
     Login To OS
-    ${out}=  Execute Command On OS  ls ${file_path}
+    ${out}  ${stderr}  ${rc}=  OS Execute Command  ls ${file_path}
     Log To Console  \n File Exist: ${out}
 
 
@@ -100,7 +100,8 @@ Is HTX Running
     #  Run Keyword If  '${status}' == 'True'  Shutdown HTX Exerciser
 
 
-    ${status}=  Execute Command On OS  htxcmdline -status
+    ${status}  ${stderr}  ${rc}=  OS Execute Command
+    ...  htxcmdline -status
 
     ${match_count_idle}=  Count Values In List  ${status}
     ...  Daemon state is <IDLE>
@@ -230,7 +231,8 @@ Get CPU Max Frequency
 Check For Errors On OS Dmesg Log
     [Documentation]  Check if dmesg has nvidia errors logged.
 
-    ${dmesg_log}=  Execute Command On OS  dmesg | egrep '${ERROR_REGEX}'
+    ${dmesg_log}  ${stderr}  ${rc}=  OS Execute Command
+    ...  dmesg | egrep '${ERROR_REGEX}'
     # To enable multiple string check.
     Should Not Contain  ${dmesg_log}  ${ERROR_DBE_MSG}
     ...  msg=OS dmesg shows ${ERROR_DBE_MSG}.
@@ -407,7 +409,8 @@ Create Default MDT Profile
 
     Rprint Timen  Create HTX mdt profile.
 
-    ${profile}=  Execute Command On OS  htxcmdline -createmdt
+    ${profile}  ${stderr}  ${rc}=  OS Execute Command
+    ...  htxcmdline -createmdt
     Rprintn  ${profile}
     Should Contain  ${profile}  mdts are created successfully
     ...  msg=Create MDT profile failed. response=${profile}
@@ -417,7 +420,7 @@ Run MDT Profile
     [Documentation]  Load user pre-defined MDT profile.
 
     Rprint Timen  Start HTX mdt profile execution.
-    ${htx_run}=  Execute Command On OS
+    ${htx_run}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -run -mdt ${HTX_MDT_PROFILE}
     Rprintn  ${htx_run}
     Should Contain  ${htx_run}  Activated
@@ -432,11 +435,12 @@ Check HTX Run Status
     # sleep_time  The amount of time to sleep after checking status.
 
     Rprint Timen  Check HTX mdt Status and error.
-    ${htx_status}=  Execute Command On OS
+    ${htx_status}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -status -mdt ${HTX_MDT_PROFILE}
     Rprintn  ${htx_status}
 
-    ${htx_errlog}=  Execute Command On OS  htxcmdline -geterrlog
+    ${htx_errlog}  ${stderr}  ${rc}=  OS Execute Command
+    ...  htxcmdline -geterrlog
     Rprintn  ${htx_errlog}
 
     Should Contain  ${htx_errlog}  file </tmp/htxerr> is empty
@@ -451,7 +455,7 @@ Shutdown HTX Exerciser
     [Documentation]  Shut down HTX exerciser run.
 
     Rprint Timen  Shutdown HTX Run
-    ${shutdown}=  Execute Command On OS
+    ${shutdown}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -shutdown -mdt ${HTX_MDT_PROFILE}
     Rprintn  ${shutdown}
 
@@ -548,7 +552,7 @@ Retrieve Hardware Info
     [Arguments]  ${class}
     # Description of argument(s):
     # class  Device class to retrieve with lshw.
-    ${output} =  Execute Command On OS  lshw -c ${class} -json
+    ${output}  ${stderr}  ${rc}=  OS Execute Command  lshw -c ${class} -json
     ${output} =  Verify JSON string  ${output}
     [Return]  ${output}
 
