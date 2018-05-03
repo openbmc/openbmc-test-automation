@@ -99,16 +99,13 @@ Is HTX Running
     #  ${status}=  Is HTX Running
     #  Run Keyword If  '${status}' == 'True'  Shutdown HTX Exerciser
 
-
     ${status}  ${stderr}  ${rc}=  OS Execute Command
-    ...  htxcmdline -status  ignore_err=1
+    ...  htxcmdline -getstats  ignore_err=1
+    # Get HTX state
+    # (idle, currently running, selected_mdt but not running).
+    ${running}=  Set Variable If
+    ...  "Currently running" in """${status}"""  ${True}  ${False}
 
-    ${match_count_idle}=  Count Values In List  ${status}
-    ...  Daemon state is <IDLE>
-    ${match_count_not_running}=  Count Values In List  ${status}
-    ...  No MDT is currently running
-    ${running}=  Evaluate
-    ...  not (${match_count_idle} or ${match_count_not_running})
     [Return]  ${running}
 
 
