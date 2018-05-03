@@ -272,7 +272,7 @@ Get Response Codes
     #--------------------------------------------------------------------
     # Expect status      URL Path
     #--------------------------------------------------------------------
-    ${HTTP_OK}           /
+    ${HTTP_OK}           /org/
     ${HTTP_OK}           /xyz/
     ${HTTP_OK}           /xyz/openbmc_project/
     ${HTTP_OK}           /xyz/openbmc_project/state/enumerate
