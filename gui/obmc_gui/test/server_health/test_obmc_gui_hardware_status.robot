@@ -14,6 +14,11 @@ ${xpath_select_hardware_status}  //a[@href='#/server-health/inventory-overview']
 ${xpath_inventory_export}  css:a.inline
 ${xpath_inventory_search}  //*[@id="content__search-input"]
 ${xpath_inventory_search_button}  //*[@id="content__search-submit"]
+${xpath_inventory_search_text_clear}  class:clear-input
+${xpath_bmc_expand}  //*[@id="inventory-categories"]/div[5]/button
+${xpath_system_expand}  //*[@id="inventory-categories"]/div[2]/button
+${xpath_motherborad_expand}  //*[@id="inventory-categories"]/div[4]/button
+${xpath_chassis_expand}  //*[@id="inventory-categories"]/div[3]/button
 
 *** Test Cases ***
 Verify Select Health Status From Server Health
@@ -33,6 +38,7 @@ Verify Inventory Export From Server Health Clickable
     Page Should Contain Element  ${xpath_inventory_export}
     Click Element  ${xpath_inventory_export}
 
+
 Verify Search Text Enterable
     [Documentation]  Verify search text input allowed from "Hardware status"
     ...  sub-menu.
@@ -44,6 +50,58 @@ Verify Search Text Enterable
     Page Should Contain Element  ${xpath_inventory_search_button}
     Click Element  ${xpath_inventory_search_button}
 
+
+Verify Search Text Clearable
+    [Documentation]  Verify search text allowed to clear from "Hardware status"
+    ...  sub-menu.
+    [Tags]  Verify_Search_Text_Clearable
+
+    Page Should Contain Element  ${xpath_inventory_search}
+    Input Text  ${xpath_inventory_search}  fan
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Page Should Contain Element  ${xpath_inventory_search_text_clear}
+    Click Element  ${xpath_inventory_search_text_clear}
+
+
+Verify System Inventory Expand
+    [Documentation]  Verify system inventory icon expandable from
+    ...  "Hardware status" sub-menu.
+    [Tags]  Verify_System_Inventory_Expand
+    [Template]  Verify Hardware Inventory Expand
+
+    # Hardware Item to expand
+    ${xpath_system_expand}
+
+
+Verify Chassis Inventory Expand
+    [Documentation]  Verify chassis inventory icon expandable from
+    ...  "Hardware status" sub-menu.
+    [Tags]  Verify_Chassis_Inventory_Expand
+    [Template]  Verify Hardware Inventory Expand
+
+    # Hardware Item to expand
+    ${xpath_chassis_expand}
+
+
+Verify BMC Inventory Expand
+    [Documentation]  Verify BMC inventory icon expandable from
+    ...  "Hardware status" sub-menu.
+    [Tags]  Verify_BMC_Inventory_Expand
+    [Template]  Verify Hardware Inventory Expand
+
+    # Hardware Item to expand
+    ${xpath_bmc_expand}
+
+
+Verify Motherboard Inventory Expand
+    [Documentation]  Verify motherboard inventory icon expandable from
+    ...  "Hardware status" sub-menu.
+    [Tags]  Verify_Motherboard_Inventory_Expand
+    [Template]  Verify Hardware Inventory Expand
+
+    # Hardware Item to expand
+    ${xpath_motherboard_expand}
+
 *** Keywords ***
 
 Test Setup Execution
@@ -53,3 +111,13 @@ Test Setup Execution
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Click Element  ${xpath_select_hardware_status}
 
+
+Verify Hardware Inventory Expand
+   [Documentation]  Verify expand individual hardware inventory item.
+   [Arguments]  ${xpath_hardware_item}
+
+   # Description of argument(s):
+   # xpath_hardware_item    Hardware inventory item to be expand. e.g. fan.
+
+   Page should contain element  ${xpath_hardware_item}
+   Click Element  ${xpath_hardware_item}
