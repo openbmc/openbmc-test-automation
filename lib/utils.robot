@@ -1526,3 +1526,17 @@ Verify The Attribute
     ${output}=  Read Attribute  ${uri}  ${attribute_name}
     Should Be Equal  ${attribute_value}  ${output}
     ...  msg=Attribute "${attribute_name} does not have the expected value.
+
+
+Get BMC Flash Chip Boot Side
+    [Documentation]  Return the BMC flash chip boot side.
+
+    # Example:
+    # 0 - indicates chip select is current side.
+    # 1 - indicates chip select is alternate side.
+
+    ${boot_side}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  echo $(($(/sbin/devmem 0x1E785030) >> 1 & 1))
+
+    [Return]  ${boot_side}
+
