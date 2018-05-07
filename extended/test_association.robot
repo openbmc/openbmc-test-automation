@@ -268,7 +268,7 @@ Verify Test Error Log And Callout
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    REST Power On  quiet=1
+    REST Power On  stack_mode=skip  quiet=1
     ${status}=  Run Keyword And Return Status  Callout Test Binary Exist
     Run Keyword If  ${status} == ${False}  Install Tarball
     Delete All Error Logs
