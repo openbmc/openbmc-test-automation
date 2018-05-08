@@ -225,6 +225,40 @@ Get CPU Max Frequency
     [Return]  ${cpu_freq}
 
 
+Get CPU Max Temperature
+    [Documentation]  Get the highest CPU Temperature.
+
+    ${temperature_objs}=  Read Properties
+    ...  ${SENSORS_URI}temperature/enumerate
+    # Filter the dictionary to get just the CPU temperature info.
+    ${cmd}=  Catenate  {k:v for k,v in $temperature_objs.iteritems()
+    ...  if re.match('${SENSORS_URI}temperature/p.*core.*temp', k)}
+    ${cpu_temperatuture_objs}  Evaluate  ${cmd}  modules=re
+    # Create a list of the CPU temperature values (current).
+    ${cpu_temperatures}=  Evaluate
+    ...  [ x['Value'] for x in $cpu_temperatuture_objs.values() ]
+
+    ${cpu_max_temp}  Evaluate  max(map(int, $cpu_temperatures))/1000
+    [Return]  ${cpu_max_temp}
+
+
+Get CPU Min Temperature
+    [Documentation]  Get the  CPU Temperature.
+
+    ${temperature_objs}=  Read Properties
+    ...  ${SENSORS_URI}temperature/enumerate
+    # Filter the dictionary to get just the CPU temperature info.
+    ${cmd}=  Catenate  {k:v for k,v in $temperature_objs.iteritems()
+    ...  if re.match('${SENSORS_URI}temperature/p.*core.*temp', k)}
+    ${cpu_temperatuture_objs}=  Evaluate  ${cmd}  modules=re
+    # Create a list of the CPU temperature values (current).
+    ${cpu_temperatures}=  Evaluate
+    ...  [ x['Value'] for x in $cpu_temperatuture_objs.values() ]
+
+    ${cpu_min_temp}  Evaluate  min(map(int, $cpu_temperatures))/1000
+    [Return]  ${cpu_min_temp}
+
+
 Check For Errors On OS Dmesg Log
     [Documentation]  Check if dmesg has nvidia errors logged.
 
@@ -299,8 +333,8 @@ Get GPU Power Limit
     [Return]  ${power_max}
 
 
-Get GPU Power
-    [Documentation]  Get the GPU power dissipation.
+Get GPU Max Power
+    [Documentation]  Get the maximum GPU power dissipation.
 
     # nvidia-smi --query-gpu=power.draw --format=csv returns
     # power.draw [W]
@@ -313,6 +347,16 @@ Get GPU Power
     ...  --format=csv | cut -f 1 -d ' ' | sort -n -u | tail -n 1
     ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
     [Return]  ${nvidia_out}
+
+
+Get GPU Min Power
+    [Documentation]  Return the minimum GPU power value as record by
+    ...  nvidia-smi.
+
+    ${cmd}=  Catenate  nvidia-smi --query-gpu=power.draw --format=csv |
+    ...  grep -v 'power.draw' | cut -f 1 -d ' ' | sort -n -u | head -1
+    ${gpu_min_power}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${gpu_min_power}
 
 
 Get GPU Temperature Limit
@@ -330,8 +374,17 @@ Get GPU Temperature Limit
     [Return]  ${nvidia_out}
 
 
-Get GPU Temperature
-    [Documentation]  Get the GPU temperature.
+Get GPU Min Temperature
+    [Documentation]  Get the minimum GPU temperature.
+
+    ${cmd}=  Catenate  nvidia-smi --query-gpu=temperature.gpu
+    ...  --format=csv | grep -v 'temperature.gpu' | sort -n -u | head -1
+    ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    [Return]  ${nvidia_out}
+
+
+Get GPU Max Temperature
+    [Documentation]  Get the maximum GPU temperature.
 
     # nvidia-smi --query-gpu=temperature.gpu --format=csv returns
     # 38
