@@ -102,8 +102,8 @@ Execute GPU Test
     Check For Errors On OS Dmesg Log
 
     # Check NVIDIA power, temperature, and clocks.
-    ${power}=  Get GPU Power
-    ${temperature}=  Get GPU Temperature
+    ${power}=  Get GPU Max Power
+    ${temperature}=  Get GPU Max Temperature
     ${temperature_via_rest}=  Get GPU Temperature Via REST
     ${clock}=  Get GPU Clock
     Rprintn
