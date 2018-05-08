@@ -17,3 +17,6 @@
 -e Test_Identify_LED_And_Verify_Via_REST
 # NXDMAENG UE error injection is not available in latest p9dd1ffdcv104.xlsm
 -e Verify_Unrecoverable_Callout_Handling_For_NXDMAENG
+# NA test case for Witherspoon with nginx support on GA2.
+-e Test_Non_SSL_Connection_To_Port_80
+-e Test_Non_SSL_Connection_To_Port_443
