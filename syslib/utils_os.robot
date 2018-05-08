@@ -225,6 +225,38 @@ Get CPU Max Frequency
     [Return]  ${cpu_freq}
 
 
+Get CPU Highest Temperature
+    [Documentation]  Get the highest CPU Temperature.
+
+    ${temps}=  Read Properties  ${SENSORS_URI}temperature/enumerate
+    # Filter the dictionary to get just the CPU temperature info.
+    ${cmd}=  Catenate  {k:v for k,v in $temps.iteritems()
+    ...  if re.match('${SENSORS_URI}temperature/p.*core.*temp', k)}
+    ${cpu_temps_dict}  Evaluate  ${cmd}  modules=re
+    # Create a list of the CPU temperature values (current).
+    ${cpu_temp_values}=  Evaluate
+    ...  [ x['Value'] for x in $cpu_temps_dict.values() ]
+
+    ${cpu_max_temp}  Evaluate  max(map(int, $cpu_temp_values))/1000
+    [Return]  ${cpu_max_temp}
+
+
+Get CPU Lowest Temperature
+    [Documentation]  Get the lowest CPU Temperature.
+
+    ${temps}=  Read Properties  ${SENSORS_URI}temperature/enumerate
+    # Filter the dictionary to get just the CPU temperature info.
+    ${cmd}=  Catenate  {k:v for k,v in $temps.iteritems()
+    ...  if re.match('${SENSORS_URI}temperature/p.*core.*temp', k)}
+    ${cpu_temps_dict}  Evaluate  ${cmd}  modules=re
+    # Create a list of the CPU temperature values (current).
+    ${cpu_temp_values}=  Evaluate
+    ...  [ x['Value'] for x in $cpu_temps_dict.values() ]
+
+    ${cpu_min_temp}  Evaluate  min(map(int, $cpu_temp_values))/1000
+    [Return]  ${cpu_min_temp}
+
+
 Check For Errors On OS Dmesg Log
     [Documentation]  Check if dmesg has nvidia errors logged.
 
