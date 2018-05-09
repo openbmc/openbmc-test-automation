@@ -90,7 +90,8 @@ Login OpenBMC GUI
     # username      The username.
     # password      The password.
 
-    Go To  ${obmc_gui_url}
+    #Go To  ${obmc_gui_url}
+    Launch OpenBMC GUI Browser
     Wait Until Element Is Enabled  ${xpath_textbox_hostname}
     Input Text  ${xpath_textbox_hostname}  ${OPENBMC_HOST}
     Input Text  ${xpath_textbox_username}  ${username}
@@ -195,7 +196,7 @@ LogOut OpenBMC GUI
     SSHLibrary.Close All Connections
     # Passing direct id element "header" as an argument to Click Element.
     Click Element  header
-    Wait Until Page Contains Element  ${xpath_button_login}
+    #Wait Until Page Contains Element  ${xpath_button_login}
 
 Test Teardown Execution
     [Documentation]  Do final closure activities of test case execution.
@@ -205,7 +206,7 @@ Test Teardown Execution
 
 Open Browser With URL
     [Documentation]  Open browser with specified URL and returns browser id.
-    [Arguments]  ${URL}  ${browser}=gc
+    [Arguments]  ${URL}  ${browser}=ff
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
@@ -213,7 +214,13 @@ Open Browser With URL
     # browser  browser used to open above URL
     #          (e.g. gc for google chrome, ff for firefox)
 
+    #${browser_ID}=  Open Browser  ${URL}  ${browser}
+
+    Start Virtual Display  1920  1080
     ${browser_ID}=  Open Browser  ${URL}  ${browser}
+    Set Global Variable  ${browser_ID}
+    Set Window Size  1920  1080
+
     [Return]  ${browser_ID}
 
 Model Server Power Click Button
