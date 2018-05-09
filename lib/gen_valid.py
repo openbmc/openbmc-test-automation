@@ -253,3 +253,113 @@ def valid_file_path(var_value,
         return False
 
     return True
+
+
+def svalid_range(var_value,
+                 range=[],
+                 var_name=""):
+    r"""
+    Return an empty string if var_value is within the range.  Otherwise,
+    return an error string.
+
+    Description of arguments:
+    var_value                       The value being validated.  This value
+                                    must be an integer.
+    range                           A list comprised of one or two elements
+                                    which are the lower and upper ends of a
+                                    range.  These values must be integers
+                                    except where noted.  Valid specifications
+                                    may be of the following forms: [lower,
+                                    upper], [lower] or [None, upper].
+    var_name                        The name of the variable whose value is
+                                    passed in var_value.  This parameter is
+                                    normally unnecessary as this function can
+                                    figure out the var_name.  This is provided
+                                    for Robot callers.  In this scenario, we
+                                    are unable to get the variable name
+                                    ourselves.
+    """
+
+    error_message = ""
+    if var_name == "":
+        var_name = gp.get_arg_name(0, 1, stack_frame_ix=3)
+
+    # Validate this function's parms:
+    # First, ensure that the value is an integer.
+    error_message = svalid_integer(var_value, var_name)
+    if not error_message == "":
+        return error_message
+    var_value = int(var_value)
+
+    len_range = len(range)
+    if len_range > 2:
+        error_message += "Programmer error - For the range parameter, you" +\
+                         " must provide a list consisting of one or two" +\
+                         " elements.\n" +\
+                         gp.sprint_var(range)
+        return error_message
+
+    if len_range == 1 or range[0] is not None:
+        # Make sure lower range value is an integer.
+        error_message = svalid_integer(range[0], "range[0]")
+        if not error_message == "":
+            error_message = "Programmer error:\n" + error_message
+            return error_message
+    if range[0] is not None:
+        range[0] = int(range[0])
+    if len_range == 2:
+        # Make sure upper range value is an integer.
+        error_message = svalid_integer(range[1], "range[1]")
+        if not error_message == "":
+            error_message = "Programmer error:\n" + error_message
+            return error_message
+        range[1] = int(range[1])
+
+    if len_range == 1:
+        if var_value < range[0]:
+            error_message += "The following variable is not within the" +\
+                             " expected range:\n" +\
+                             gp.sprint_varx(var_name, var_value) +\
+                             gp.sprint_varx("valid_range",
+                                            str(range[0]) + "..")
+            return error_message
+
+    if range[0] is None:
+        if var_value > range[1]:
+            error_message += "The following variable is not within the" +\
+                             " expected range:\n" +\
+                             gp.sprint_varx(var_name, var_value) +\
+                             gp.sprint_varx("valid_range",
+                                            ".." + str(range[1]))
+            return error_message
+
+    if var_value < range[0] or var_value > range[1]:
+        error_message += "The following variable is not within the expected" +\
+                         " range:\n" +\
+                         gp.sprint_varx(var_name, var_value) +\
+                         gp.sprint_varx("valid_range",
+                                        str(range[0]) + ".." +
+                                        str(range[1]))
+        return error_message
+
+    return error_message
+
+
+def valid_range(var_value,
+                range=[],
+                var_name=""):
+    r"""
+    Return True if var_value is within the range.  Otherwise, return False and
+    print an error message to stderr.
+
+    Description of arguments:
+    (See description of arguments for svalid_range (above)).
+    """
+
+    error_message = svalid_range(var_value, range, var_name)
+
+    if not error_message == "":
+        gp.print_error_report(error_message)
+        return False
+
+    return True
