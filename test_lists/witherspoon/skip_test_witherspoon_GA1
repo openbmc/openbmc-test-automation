@@ -18,7 +18,8 @@
 # NXDMAENG UE error injection is not available in latest p9dd1ffdcv104.xlsm
 -e Verify_Unrecoverable_Callout_Handling_For_NXDMAENG
 # GA2 Content
--e Verify_Get_Device_ID -e Retrieve_IP_Address_Via_IPMI_And_Verify_With_BMC_Details
+-e Verify_Get_Device_ID
+-e Retrieve_IP_Address_Via_IPMI_And_Verify_With_BMC_Details
 -e Retrieve_Network_Mode_Via_IPMI_And_Verify_Using_REST
 -e Retrieve_MAC_Address_Via_IPMI_And_Verify_Using_REST
 -e Retrieve_Default_Gateway_Via_IPMI_And_Verify_Using_REST
