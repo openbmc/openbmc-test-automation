@@ -59,6 +59,8 @@ function generate_all_test_document {
   python -m robot.testdoc ras rasdirectoryTCdocs.html || ret_code=1
   python -m robot.testdoc secureboot securebootdirectoryTCdocs.html ||\
   ret_code=1
+  python -m robot.testdoc network networkdirectoryTCdocs.html ||\
+  ret_code=1
 
   return ${ret_code}
 }
