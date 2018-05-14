@@ -274,7 +274,7 @@ Check BMC Version
 
     Open Connection And Log In
     ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '='
-    ${output}=  Execute Command On BMC  ${cmd}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     Should Be Equal As Strings  ${version}  ${output[1:-1]}
 
 
