@@ -46,7 +46,7 @@ Kill Services And Expect Service Restart
     Should Be Equal  active  ${ActiveState}
     ...  msg=Logging Service not in active state.
 
-    Execute Command On BMC  kill -9 ${MainPID}
+    BMC Execute Command  kill -9 ${MainPID}
     Sleep  10s  reason=Wait for service to restart.
 
     ${MainPID}=  Get Service Attribute  MainPID  ${LOG_SERVICE}
@@ -76,5 +76,5 @@ Get Service Attribute
     # servicename  Qualified service name
     ${cmd}=  Set Variable
     ...  systemctl -p ${option} show ${servicename} | cut -d = -f2
-    ${attr}=  Execute Command On BMC  ${cmd}
+    ${attr}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     [Return]  ${attr}

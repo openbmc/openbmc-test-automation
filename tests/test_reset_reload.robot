@@ -60,7 +60,7 @@ Reboot BMC And Check For Errors
 Check Reset Reload Status
     [Documentation]  Returns reset reload status based on file presence.
 
-    ${rr_status}=  Execute Command On BMC
+    ${rr_status}  ${stderr}  ${rc}=  BMC Execute Command
     ...  test -e /run/openbmc/chassis@0-on && echo "Yes" || echo "No"
     [Return]  ${rr_status}
 

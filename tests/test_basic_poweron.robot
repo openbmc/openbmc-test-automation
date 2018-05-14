@@ -47,10 +47,8 @@ Check For Application Failures
     [Documentation]  Parse the journal log and check for failures.
     [Tags]  Check_For_Application_Failures
 
-    Open Connection And Log In
-
-    ${journal_log}=  Execute Command On BMC
-    ...  journalctl --no-pager | egrep '${ERROR_REGEX}'
+    ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager | egrep '${ERROR_REGEX}'  ignore_err=1
 
     Should Be Empty  ${journal_log}
 

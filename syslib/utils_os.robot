@@ -130,12 +130,13 @@ Collect HTX Log Files
     ${cur_datetime}=  Get Current Date  result_format=%Y%m%d%H%M%S%f
 
     File Exist On OS  /tmp/htxerr
-    ${htx_err}=  Execute Command On BMC  cat /tmp/htxerr
+    ${htx_err}  ${std_err}  ${rc}=  OS Execute Command  cat /tmp/htxerr
     Write Log Data To File
     ...  ${htx_err}  ${htx_log_dir_path}/${OS_HOST}${cur_datetime}.htxerr
 
     File Exist On OS  /tmp/htxstats
-    ${htx_stats}=  Execute Command On BMC  cat /tmp/htxstats
+    ${htx_stats}  ${std_err}  ${rc}=  OS Execute Command
+    ...  cat /tmp/htxstats
     Write Log Data To File
     ...  ${htx_stats}  ${htx_log_dir_path}/${OS_HOST}_${cur_datetime}.htxstats
 
