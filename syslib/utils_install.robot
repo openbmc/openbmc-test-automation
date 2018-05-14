@@ -21,11 +21,11 @@ Prep OS For HTX Installation
     # them to get information on the newest versions of packages and
     # their dependencies.
     Log To Console  \n Update package list.
-    Execute Command On OS  sudo apt-get update
+    OS Execute Command  sudo apt-get update
 
     # Download and install Git.
     Log To Console  \n Install Git.
-    Execute Command On OS  sudo apt-get -y install git
+    OS Execute Command  sudo apt-get -y install git
 
 
 Prep OS For OPAL PRD Installation
@@ -41,7 +41,7 @@ Prep OS For OPAL PRD Installation
     # them to get information on the newest versions of packages and
     # their dependencies.
     Log To Console  \n Update package list.
-    Execute Command On OS  sudo apt-get update
+    OS Execute Command  sudo apt-get update
 
 
 Setup HTX On OS
@@ -49,25 +49,26 @@ Setup HTX On OS
 
     # Download HTX source code from github.
     Log To Console  \n Download HTX source code from github.
-    Execute Command  sudo git clone https://www.github.com/open-power/HTX
+    OS Execute Command  sudo git clone https://www.github.com/open-power/HTX
 
     # Download and install pre-requisite packages before compiling HTX.
     Log To Console  \n Download pre-requisite packages before compiling HTX.
-    Execute Command On OS
+    OS Execute Command
     ...  sudo apt-get -y install gcc make libncurses5 g++ libdapl-dev
 
     # To fix ncurse compile warning and errors.
-    Execute Command On OS
+    OS Execute Command
     ...  sudo apt-get -y install libncurses5-dev libncursesw5-dev
 
-    Execute Command On OS  sudo apt-get -y install libibverbs-dev librdmacm-dev
+    OS Execute Command
+    ...  sudo apt-get -y install libibverbs-dev librdmacm-dev
 
     # Compile HTX source code and install.
     Log To Console  \n Compile HTX source code.
-    Execute Command On OS  cd HTX && sudo make all
+    OS Execute Command  cd HTX && sudo make all
 
     Log To Console  \n Installed compiled HTX binaries.
-    Execute Command On OS  sudo make install
+    OS Execute Command  sudo make install
 
 
 Install HTX On RedHat
@@ -93,14 +94,12 @@ Setup Opal Prd On OS
     [Documentation]  Download and install opal prd tool.
 
     # Download and install PRD packages.
-    Execute Command  sudo apt-get install opal-prd
-    Execute Command  sudo apt-get install opal-utils
+    OS Execute Command  sudo apt-get install opal-prd
+    OS Execute Command  sudo apt-get install opal-utils
 
     # Reboot OS to activate installation.
     Host Reboot
 
-    # Login to OS and verify opal prd installation working.
-    Login To OS
-    ${out}=  Execute Command  opal-gard list
+    # Verify opal prd installation working.
+    ${out}  ${stderr}  ${rc}=  OS Execute Command  opal-gard list
     Should Contain  ${out}  No GARD entries to display
-
