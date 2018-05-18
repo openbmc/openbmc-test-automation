@@ -38,7 +38,8 @@ import gen_arg as ga
 # importing this module.
 pgm_file_path = sys.argv[0]
 pgm_name = os.path.basename(pgm_file_path)
-pgm_dir_path = re.sub("/" + pgm_name, "", pgm_file_path) + "/"
+pgm_dir_path = os.path.normpath(re.sub("/" + pgm_name, "", pgm_file_path)) +\
+    os.path.sep
 
 
 # Some functions (e.g. sprint_pgm_header) have need of a program name value
@@ -121,7 +122,23 @@ def get_arg_name(var,
     arg_num                         The arg number (1 through n) whose name
                                     you wish to have returned.  This value
                                     should not exceed the number of arguments
-                                    allowed by the target function.
+                                    allowed by the target function.  If
+                                    arg_num contains the special value 0,
+                                    get_arg_name will return the lvalue, which
+                                    is anything to the left of the assignment
+                                    operator (i.e. "=").  For example, if a
+                                    programmer codes "var1 = my_function", and
+                                    my_function calls this function with
+                                    "get_arg_name(0, 0, stack_frame_ix=2)",
+                                    this function will return "var1".
+                                    Likewise, if a programmer codes "var1,
+                                    var2 = my_function", and my_function calls
+                                    this function with "get_arg_name(0, 0,
+                                    stack_frame_ix=2)", this function will
+                                    return "var1, var2".  No manipulation of
+                                    the lvalue string is done by this function
+                                    (i.e. compressing spaces, converting to a
+                                    list, etc.).
     stack_frame_ix                  The stack frame index of the target
                                     function.  This value must be 1 or
                                     greater.  1 would indicate get_arg_name's
@@ -167,10 +184,10 @@ def get_arg_name(var,
     local_debug_show_source = int(
         os.environ.get('GET_ARG_NAME_SHOW_SOURCE', 0))
 
-    if arg_num < 1:
+    if arg_num < 0:
         print_error("Programmer error - Variable \"arg_num\" has an invalid" +
                     " value of \"" + str(arg_num) + "\".  The value must be" +
-                    " an integer that is greater than 0.\n")
+                    " an integer that is 0 or greater.\n")
         # What is the best way to handle errors?  Raise exception?  I'll
         # revisit later.
         return
@@ -315,12 +332,14 @@ def get_arg_name(var,
 
     # arg_list_etc = re.sub(".*" + called_func_name, "", composite_line)
     arg_list_etc = "(" + re.sub(func_regex, "", composite_line)
+    lvalue = re.sub("[ ]+=[ ]+" + called_func_name + ".*", "", composite_line)
     if local_debug:
         print_varx("aliases", aliases, 0, debug_indent)
         print_varx("func_regex", func_regex, 0, debug_indent)
         print_varx("start_line_ix", start_line_ix, 0, debug_indent)
         print_varx("end_line_ix", end_line_ix, 0, debug_indent)
         print_varx("composite_line", composite_line, 0, debug_indent)
+        print_varx("lvalue", lvalue, 0, debug_indent)
         print_varx("arg_list_etc", arg_list_etc, 0, debug_indent)
 
     # Parse arg list...
@@ -361,7 +380,10 @@ def get_arg_name(var,
                     sprint_varx("args_list", args_list))
         return
 
-    argument = args_list[arg_num - 1]
+    if arg_num == 0:
+        argument = lvalue
+    else:
+        argument = args_list[arg_num - 1]
 
     if local_debug:
         print_varx("args_list", args_list, 0, debug_indent)
