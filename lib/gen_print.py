@@ -1334,6 +1334,45 @@ def get_var_value(var_value=None,
     return var_value
 
 
+def get_stack_var(var_name,
+                  default="",
+                  init_stack_ix=2):
+
+    r"""
+    Starting with the caller's stack level, search upward in the call stack,
+    for a variable named var_name and return its value.  If the variable
+    cannot be found, return default.
+
+    Example code:
+
+    def func12():
+        my_loc_var1 = get_stack_var('my_var1', "default value")
+
+    def func11():
+        my_var1 = 11
+        func12()
+
+    In this example, get_stack_var will find the value of my_var1 in func11's
+    stack and will therefore return the value 11.  Therefore, my_loc_var1
+    would get set to 11.
+
+    Description of argument(s):
+    var_name                        The name of the variable to be searched
+                                    for.
+    default                         The value to return if the the variable
+                                    cannot be found.
+    init_stack_ix                   The initial stack index from which to
+                                    begin the search.  0 would be the index of
+                                    this func1tion ("get_stack_var"), 1 would
+                                    be the index of the function calling this
+                                    function, etc.
+    """
+
+    return next((frame[0].f_locals[var_name]
+                for frame in inspect.stack()[init_stack_ix:]
+                if var_name in frame[0].f_locals), default)
+
+
 # hidden_text is a list of passwords which are to be replaced with asterisks
 # by print functions defined in this module.
 hidden_text = []
