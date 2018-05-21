@@ -108,6 +108,14 @@ def sprint_func_name(stack_frame_ix=None):
     return func_name
 
 
+def get_line_indent(line):
+    r"""
+    Return the number of spaces at the beginning of the line.
+    """
+
+    return len(line) - len(line.lstrip(' '))
+
+
 # get_arg_name is not a print function per se.  I have included it in this
 # module because it is used by sprint_var which is found in this module.
 def get_arg_name(var,
@@ -119,26 +127,36 @@ def get_arg_name(var,
 
     Description of arguments:
     var                             The variable whose name you want returned.
-    arg_num                         The arg number (1 through n) whose name
-                                    you wish to have returned.  This value
-                                    should not exceed the number of arguments
-                                    allowed by the target function.  If
-                                    arg_num contains the special value 0,
-                                    get_arg_name will return the lvalue, which
-                                    is anything to the left of the assignment
-                                    operator (i.e. "=").  For example, if a
-                                    programmer codes "var1 = my_function", and
-                                    my_function calls this function with
-                                    "get_arg_name(0, 0, stack_frame_ix=2)",
-                                    this function will return "var1".
-                                    Likewise, if a programmer codes "var1,
-                                    var2 = my_function", and my_function calls
-                                    this function with "get_arg_name(0, 0,
-                                    stack_frame_ix=2)", this function will
-                                    return "var1, var2".  No manipulation of
-                                    the lvalue string is done by this function
-                                    (i.e. compressing spaces, converting to a
-                                    list, etc.).
+    arg_num                         The arg number whose name is to be
+                                    returned.  To illustrate how arg_num is
+                                    processed, suppose that a programmer codes
+                                    this line: "rc, outbuf = my_func(var1,
+                                    var2)" and suppose that my_func has this
+                                    line of code: "result = gp.get_arg_name(0,
+                                    arg_num, 2)".  If arg_num is positive, the
+                                    indicated argument is returned.  For
+                                    example, if arg_num is 1, "var1" would be
+                                    returned, If arg_num is 2, "var2" would be
+                                    returned.  If arg_num exceeds the number
+                                    of arguments, get_arg_name will simply
+                                    return a complete list of the arguments.
+                                    If arg_num is 0, get_arg_name will return
+                                    the name of the target function as
+                                    specified in the calling line ("my_func"
+                                    in this case).  To clarify, if the caller
+                                    of the target function uses an alias
+                                    function name, the alias name would be
+                                    returned.  If arg_num is negative, an
+                                    lvalue variable name is returned.
+                                    Continuing with the given example, if
+                                    arg_num is -2 the 2nd parm to the left of
+                                    the "=" ("rc" in this case) should be
+                                    returned.  If arg_num is -1, the 1st parm
+                                    to the left of the "=" ("out_buf" in this
+                                    case) should be returned.  If arg_num is
+                                    less than -2, an entire dictionary is
+                                    returned.  The keys to the dictionary for
+                                    this example would be -2 and -1.
     stack_frame_ix                  The stack frame index of the target
                                     function.  This value must be 1 or
                                     greater.  1 would indicate get_arg_name's
@@ -184,13 +202,6 @@ def get_arg_name(var,
     local_debug_show_source = int(
         os.environ.get('GET_ARG_NAME_SHOW_SOURCE', 0))
 
-    if arg_num < 0:
-        print_error("Programmer error - Variable \"arg_num\" has an invalid" +
-                    " value of \"" + str(arg_num) + "\".  The value must be" +
-                    " an integer that is 0 or greater.\n")
-        # What is the best way to handle errors?  Raise exception?  I'll
-        # revisit later.
-        return
     if stack_frame_ix < 1:
         print_error("Programmer error - Variable \"stack_frame_ix\" has an" +
                     " invalid value of \"" + str(stack_frame_ix) + "\".  The" +
@@ -232,7 +243,7 @@ def get_arg_name(var,
             print("Adjusted stack_frame_ix...")
             print_varx("stack_frame_ix", stack_frame_ix, 0, debug_indent)
 
-    called_func_name = sprint_func_name(stack_frame_ix)
+    real_called_func_name = sprint_func_name(stack_frame_ix)
 
     module = inspect.getmodule(frame)
 
@@ -260,7 +271,8 @@ def get_arg_name(var,
         print_varx("line_ix", line_ix, 0, debug_indent)
         if local_debug_show_source:
             print_varx("source_lines", source_lines, 0, debug_indent)
-        print_varx("called_func_name", called_func_name, 0, debug_indent)
+        print_varx("real_called_func_name", real_called_func_name, 0,
+                   debug_indent)
 
     # Get a list of all functions defined for the module.  Note that this
     # doesn't work consistently when _run_exitfuncs is at the top of the stack
@@ -272,16 +284,16 @@ def get_arg_name(var,
     # functions.
     called_func_id = None
     for func_name, function in all_functions:
-        if func_name == called_func_name:
+        if func_name == real_called_func_name:
             called_func_id = id(function)
             break
     # NOTE: The only time I've found that called_func_id can't be found is
     # when we're running from an exit function.
 
     # Look for other functions in module with matching id.
-    aliases = set([called_func_name])
+    aliases = set([real_called_func_name])
     for func_name, function in all_functions:
-        if func_name == called_func_name:
+        if func_name == real_called_func_name:
             continue
         func_id = id(function)
         if func_id == called_func_id:
@@ -292,9 +304,10 @@ def get_arg_name(var,
     # code to handle pvar, qpvar, dpvar, etc. aliases explicitly since they
     # are defined in this module and used frequently.
     # pvar is an alias for print_var.
-    aliases.add(re.sub("print_var", "pvar", called_func_name))
+    aliases.add(re.sub("print_var", "pvar", real_called_func_name))
 
-    func_regex = ".*(" + '|'.join(aliases) + ")[ ]*\("
+    func_name_regex = "(" + '|'.join(aliases) + ")"
+    pre_args_regex = ".*" + func_name_regex + "[ ]*\("
 
     # Search backward through source lines looking for the calling function
     # name.
@@ -303,43 +316,65 @@ def get_arg_name(var,
         # Skip comment lines.
         if re.match(r"[ ]*#", source_lines[start_line_ix]):
             continue
-        if re.match(func_regex, source_lines[start_line_ix]):
+        if re.match(pre_args_regex, source_lines[start_line_ix]):
             found = True
             break
     if not found:
         print_error("Programmer error - Could not find the source line with" +
-                    " a reference to function \"" + called_func_name + "\".\n")
+                    " a reference to function \"" + real_called_func_name +
+                    "\".\n")
         return
 
     # Search forward through the source lines looking for a line whose
     # indentation is the same or less than the start line.  The end of our
     # composite line should be the line preceding that line.
-    start_indent = len(source_lines[start_line_ix]) -\
-        len(source_lines[start_line_ix].lstrip(' '))
-    end_line_ix = line_ix
+    start_indent = get_line_indent(source_lines[start_line_ix])
     for end_line_ix in range(line_ix + 1, len(source_lines)):
         if source_lines[end_line_ix].strip() == "":
             continue
-        line_indent = len(source_lines[end_line_ix]) -\
-            len(source_lines[end_line_ix].lstrip(' '))
+        line_indent = get_line_indent(source_lines[end_line_ix])
         if line_indent <= start_indent:
             end_line_ix -= 1
             break
+    if start_line_ix != 0:
+        # Check to see whether the start line is a continuation of the prior
+        # line?
+        line_indent = get_line_indent(source_lines[start_line_ix - 1])
+        if line_indent < start_indent:
+            start_line_ix -= 1
+            # Remove the backslash (continuation char).
+            source_lines[start_line_ix] = re.sub(r"[ ]*\\([\r\n]$)",
+                                                 " \\1",
+                                                 source_lines[start_line_ix])
 
     # Join the start line through the end line into a composite line.
     composite_line = ''.join(map(str.strip,
                                  source_lines[start_line_ix:end_line_ix + 1]))
+    # Insert one space after first "=" if there isn't one already.
+    composite_line = re.sub("=[ ]*([^ ])", "= \\1", composite_line, 1)
 
-    # arg_list_etc = re.sub(".*" + called_func_name, "", composite_line)
-    arg_list_etc = "(" + re.sub(func_regex, "", composite_line)
-    lvalue = re.sub("[ ]+=[ ]+" + called_func_name + ".*", "", composite_line)
+    lvalue_regex = "[ ]+=[ ]*" + func_name_regex + ".*"
+    lvalue_string = re.sub(lvalue_regex, "", composite_line)
+    lvalues_list = map(str.strip, lvalue_string.split(","))
+    lvalues = collections.OrderedDict()
+    ix = len(lvalues_list) * -1
+    for lvalue in lvalues_list:
+        lvalues[ix] = lvalue
+        ix += 1
+    called_func_name = re.sub("(.*=)?[ ]+" + func_name_regex +
+                              "[ ]*\(.*", "\\2",
+                              composite_line)
+    arg_list_etc = "(" + re.sub(pre_args_regex, "", composite_line)
     if local_debug:
         print_varx("aliases", aliases, 0, debug_indent)
-        print_varx("func_regex", func_regex, 0, debug_indent)
+        print_varx("pre_args_regex", pre_args_regex, 0, debug_indent)
         print_varx("start_line_ix", start_line_ix, 0, debug_indent)
         print_varx("end_line_ix", end_line_ix, 0, debug_indent)
         print_varx("composite_line", composite_line, 0, debug_indent)
-        print_varx("lvalue", lvalue, 0, debug_indent)
+        print_varx("lvalue_regex", lvalue_regex, 0, debug_indent)
+        print_varx("lvalue_string", lvalue_string, 0, debug_indent)
+        print_varx("lvalues", lvalues, 0, debug_indent)
+        print_varx("called_func_name", called_func_name, 0, debug_indent)
         print_varx("arg_list_etc", arg_list_etc, 0, debug_indent)
 
     # Parse arg list...
@@ -373,17 +408,18 @@ def get_arg_name(var,
     # Trim whitespace from each list entry.
     args_list = [arg.strip() for arg in args_list]
 
-    if arg_num > len(args_list):
-        print_error("Programmer error - The caller has asked for the name of" +
-                    " argument number \"" + str(arg_num) + "\" but there " +
-                    "were only \"" + str(len(args_list)) + "\" args used:\n" +
-                    sprint_varx("args_list", args_list))
-        return
-
-    if arg_num == 0:
-        argument = lvalue
+    if arg_num < 0:
+        if abs(arg_num) > len(lvalues):
+            argument = lvalues
+        else:
+            argument = lvalues[arg_num]
+    elif arg_num == 0:
+        argument = called_func_name
     else:
-        argument = args_list[arg_num - 1]
+        if arg_num > len(args_list):
+            argument = args_list
+        else:
+            argument = args_list[arg_num - 1]
 
     if local_debug:
         print_varx("args_list", args_list, 0, debug_indent)
@@ -680,9 +716,10 @@ def sprint_varx(var_name,
                                           loc_trailing_char,
                                           key_list)
                 else:
-                    buffer += sprint_varx(var_name + "[" + key + "]", value,
-                                          hex, loc_col1_indent, loc_col1_width,
-                                          loc_trailing_char, key_list)
+                    buffer += sprint_varx(var_name + "[" + str(key) + "]",
+                                          value, hex, loc_col1_indent,
+                                          loc_col1_width, loc_trailing_char,
+                                          key_list)
         elif type(var_value) in (list, tuple, set):
             for key, value in enumerate(var_value):
                 ix += 1
