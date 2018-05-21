@@ -33,16 +33,6 @@ ${yaml_file_path}      ${EXECDIR}/inventory_temp_file.yaml
 
 *** Keywords ***
 
-Execute Command On OS
-    [Documentation]  Execute given command on OS and return output.
-    [Arguments]  ${command}
-    # Description of argument(s):
-    # command  Shell command to be executed on OS.
-    ${stdout}  ${stderr}=  Execute Command  ${command}  return_stderr=True
-    Should Be Empty  ${stderr}  msg=Failed running ${command}. stderr=${stderr}
-    [Return]  ${stdout}
-
-
 Login To OS
     [Documentation]  Login to OS Host.
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
