@@ -23,30 +23,18 @@ Cleanup Dir
 
     Should Not Be Empty  ${cleanup_dir_path}
     Should Not Be Empty  ${SKIP_LIST}
-    Open Connection And Log In
-    @{skip_list}=  Set Variable  ${skip_list.split()}
-    ${skip_list_string}=  Set Variable  ${EMPTY}
+
+    ${skip_list_string}=  Set Variable  cd ${cleanup_dir_path}
     :FOR  ${file}  IN  @{skip_list}
-    \  ${skip_list_string}=   Set Variable  ${skip_list_string} ! -path "${file}"
+    \  ${skip_list_string}=   Set Variable  ${skip_list_string} && rm ${file}
 
-    ${file_count1}=  Execute Command On BMC  find ${cleanup_dir_path} | wc -l
-    Set Global Variable  ${file_count1}
-    Write  find ${cleanup_dir_path} \\( ${skip_list_string} \\) | xargs rm
-    Write  find ${cleanup_dir_path} \\( ${skip_list_string} \\) | xargs rmdir
-    ${file_count2}=  Execute Command On BMC  find ${cleanup_dir_path} | wc -l
+    ${file_count1}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  find ${cleanup_dir_path} | wc -l
+    BMC Execute Command  ${skip_list_string}
 
-    Run Keyword If  ${file_count2} < ${file_count1}
-    ...  Reboot And Verify
-
-Reboot And Verify
-    [Documentation]  Reboot BMC and verify cleanup.
-    [Arguments]      ${cleanup_dir_path}=${CLEANUP_DIR_PATH}
-
-    # Description of argument(s):
-    # cleanup_dir_path  Directory path to do the cleanup.
-
-    OBMC Reboot (off)
-    # Take SSH session post BMC reboot before executing command.
-    Open Connection And Log In
-    ${file_count2}=  Execute Command On BMC  find ${cleanup_dir_path} | wc -l
+    ${file_count2}  ${stderrt}  ${rc}=  BMC Execute Command
+    ...  find ${cleanup_dir_path} | wc -l
     Should Be True  ${file_count2} < ${file_count1}
+    # Delete the directory if it is empty.
+    Run Keyword If  ${file_count2} <= 1
+    ...  BMC Execute Command  rm -r ${cleanup_dir_path}
