@@ -21,7 +21,7 @@ Check And Reset MAC
 
     Should Not Be Empty  ${mac_address}
     Open Connection And Log In
-    ${bmc_mac_addr}=  Execute Command On BMC  cat /sys/class/net/eth0/address
+    ${bmc_mac_addr}  ${stderr}  ${rc}=  BMC Execute Command  cat /sys/class/net/eth0/address
     Run Keyword If  '${mac_address.lower()}' != '${bmc_mac_addr.lower()}'
     ...  Set MAC Address
 
@@ -38,14 +38,13 @@ Set MAC Address
 
     # Take SSH session post BMC reboot.
     Open Connection And Log In
-    ${bmc_mac_addr}=  Execute Command On BMC  cat /sys/class/net/eth0/address
+    ${bmc_mac_addr}  ${stderr}  ${rc}=  BMC Execute Command  cat /sys/class/net/eth0/address
     Should Be Equal  ${bmc_mac_addr}  ${mac_address}  ignore_case=True
 
 
 Get BMC IP Info
     [Documentation]  Get system IP address and prefix length.
 
-    Open Connection And Login
 
     # Get system IP address and prefix length details using "ip addr"
     # Sample Output of "ip addr":
@@ -53,7 +52,7 @@ Get BMC IP Info
     #     link/ether xx:xx:xx:xx:xx:xx brd ff:ff:ff:ff:ff:ff
     #     inet xx.xx.xx.xx/24 brd xx.xx.xx.xx scope global eth0
 
-    ${cmd_output}=  Execute Command On BMC  /sbin/ip addr | grep eth0
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  /sbin/ip addr | grep eth0
 
     # Get line having IP address details.
     ${lines}=  Get Lines Containing String  ${cmd_output}  inet
@@ -74,14 +73,13 @@ Get BMC IP Info
 Get BMC Route Info
     [Documentation]  Get system route info.
 
-    Open Connection And Login
 
     # Sample output of "ip route":
     # default via xx.xx.xx.x dev eth0
     # xx.xx.xx.0/23 dev eth0  src xx.xx.xx.xx
     # xx.xx.xx.0/24 dev eth0  src xx.xx.xx.xx
 
-    ${cmd_output}=  Execute Command On BMC  /sbin/ip route
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  /sbin/ip route
 
     [Return]  ${cmd_output}
 
@@ -89,12 +87,11 @@ Get BMC Route Info
 Get BMC MAC Address
     [Documentation]  Get system MAC address.
 
-    Open Connection And Login
 
     # Sample output of "ip addr | grep ether":
     # link/ether xx.xx.xx.xx.xx.xx brd ff:ff:ff:ff:ff:ff
 
-    ${cmd_output}=  Execute Command On BMC  /sbin/ip addr | grep ether
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  /sbin/ip addr | grep ether
 
     # Split the line and return MAC address.
     # Split list data:
@@ -111,7 +108,7 @@ Get BMC MAC Address List
     # Sample output of "ip addr | grep ether":
     # link/ether xx.xx.xx.xx.xx.xx brd ff:ff:ff:ff:ff:ff
 
-    ${cmd_output}=  BMC Execute Command  /sbin/ip addr | grep ether
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  /sbin/ip addr | grep ether
 
     # Split the line and return MAC address.
     # Split list data:
@@ -119,7 +116,7 @@ Get BMC MAC Address List
     # link/ether | xx:xx:xx:xx:xx:xx | brd | ff:ff:ff:ff:ff:ff
 
     ${mac_list}=  Create List
-    @{lines}=  Split To Lines  ${cmd_output[0]}
+    @{lines}=  Split To Lines  ${cmd_output}
     :FOR  ${line}  IN  @{lines}
     \  @{words}=  Split String  ${line}
     \   Append To List  ${mac_list}  ${words[1]}
@@ -138,7 +135,7 @@ Get BMC Hostname
     #            Kernel: Linux 4.10.17-d6ae40dc4c4dff3265cc254d404ed6b03fcc2206
     #      Architecture: arm
 
-    ${output}=  Execute Command on BMC  hostnamectl | grep hostname
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  hostnamectl | grep hostname
 
     [Return]  ${output}
 
