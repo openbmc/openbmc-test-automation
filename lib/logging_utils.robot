@@ -135,8 +135,7 @@ Create Test Error Log
     #     "Timestamp": 1487743963328,
     #     "associations": []
     # }
-
-    Execute Command On BMC  /tmp/tarball/bin/logging-test -c AutoTestSimple
+    BMC Execute Command  /tmp/tarball/bin/logging-test -c AutoTestSimple
 
 Count Error Entries
     [Documentation]  Count Error entries.
