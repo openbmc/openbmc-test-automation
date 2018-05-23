@@ -81,8 +81,7 @@ Verify PNOR Update
     # FFS: Flash header not found. Code: 100
     # Error 100 opening ffs !
 
-    Open Connection And Log In
-    ${pnor_info}=  Execute Command On BMC  ${pflash_cmd}
+    ${pnor_info}=  OS Execute Command  ${pflash_cmd}
     Should Not Contain Any  ${pnor_info}  Flash header not found  Error
 
 
@@ -1105,8 +1104,7 @@ Execute Command On BMC
 
 Enable Core Dump On BMC
     [Documentation]  Enable core dump collection.
-    Open Connection And Log In
-    ${core_pattern}=  Execute Command On BMC
+    ${core_pattern}  ${stderr}  ${rc}=  BMC Execute Command
     ...  echo '/tmp/core_%e.%p' | tee /proc/sys/kernel/core_pattern
     Should Be Equal As Strings  ${core_pattern}  /tmp/core_%e.%p
 
@@ -1121,9 +1119,7 @@ Get Number Of BMC Core Dump Files
 
 Set Core Dump File Size Unlimited
     [Documentation]  Set core dump file size to unlimited.
-    Open Connection And Log In
-    Execute Command On BMC
-    ...  ulimit -c unlimited
+    BMC Execute Command  ulimit -c unlimited
 
 
 Check For Core Dumps
@@ -1352,9 +1348,8 @@ Get BMC Version
     [Documentation]  Returns BMC version from /etc/os-release.
     ...              e.g. "v1.99.6-141-ge662190"
 
-    Open Connection And Log In
     ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '='
-    ${output}=  Execute Command On BMC  ${cmd}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     [Return]  ${output}
 
 

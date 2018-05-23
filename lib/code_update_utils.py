@@ -14,6 +14,7 @@ robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
 repo_data_path = re.sub('/lib', '/data', robot_pgm_dir_path)
 sys.path.append(repo_data_path)
 
+import bmc_ssh_utils as bsu
 import gen_robot_keyword as keyword
 import gen_print as gp
 import variables as var
@@ -132,11 +133,11 @@ def get_latest_file(dir_path):
                 calling function.
     """
 
-    keyword.run_key_u("Open Connection And Log In")
-    status, ret_values =\
-        keyword.run_key("Execute Command On BMC  cd " + dir_path
-                        + "; stat -c '%Y %n' * | sort -k1,1nr | head -n 1", ignore=1)
-    return ret_values.split(" ")[-1]
+    stdout, stderr, rc = \
+        bsu.bmc_execute_command("cd " + dir_path +
+                                "; stat -c '%Y %n' * |" +
+                                " sort -k1,1nr | head -n 1")
+    return stdout.split(" ")[-1]
 
 
 def get_version_tar(tar_file_path):
@@ -169,11 +170,10 @@ def get_image_version(file_path):
     file_path    The path to a file that holds the image version.
     """
 
-    keyword.run_key_u("Open Connection And Log In")
-    status, ret_values =\
-        keyword.run_key("Execute Command On BMC  cat "
-                        + file_path + " | grep \"version=\"", ignore=1)
-    return (ret_values.split("\n")[0]).split("=")[-1]
+    stdout, stderr, rc = \
+        bsu.bmc_execute_command("cat "  + file_path +
+                                " | grep \"version=\"", ignore_err=1)
+    return (stdout.split("\n")[0]).split("=")[-1]
 
 
 def get_image_purpose(file_path):
@@ -184,11 +184,10 @@ def get_image_purpose(file_path):
     file_path    The path to a file that holds the image purpose.
     """
 
-    keyword.run_key_u("Open Connection And Log In")
-    status, ret_values =\
-        keyword.run_key("Execute Command On BMC  cat "
-                        + file_path + " | grep \"purpose=\"", ignore=1)
-    return ret_values.split("=")[-1]
+    stdout, stderr, rc = \
+        bsu.bmc_execute_command("cat " + file_path +
+                                " | grep \"purpose=\"", ignore_err=1)
+    return stdout.split("=")[-1]
 
 
 def get_image_path(image_version):
@@ -203,12 +202,11 @@ def get_image_path(image_version):
                      of the images in the upload dir.
     """
 
-    keyword.run_key_u("Open Connection And Log In")
-    status, image_list =\
-        keyword.run_key("Execute Command On BMC  ls -d "
-                        + var.IMAGE_UPLOAD_DIR_PATH + "*/")
+    stdout, stderr, rc = \
+        bsu.bmc_execute_command("ls -d " + var.IMAGE_UPLOAD_DIR_PATH +
+                                "*/")
 
-    image_list = image_list.split("\n")
+    image_list = stdout.split("\n")
     retry = 0
     while (retry < 10):
         for i in range(0, len(image_list)):
@@ -273,13 +271,14 @@ def verify_image_not_in_bmc_uploads_dir(image_version, timeout=3):
                    Default is 3 minutes.
     """
 
-    keyword.run_key('Open Connection And Log In')
     for i in range(timeout * 2):
-        stat, grep_res = keyword.run_key('Execute Command On BMC  '
-                                         + 'ls ' + var.IMAGE_UPLOAD_DIR_PATH + '*/MANIFEST 2>/dev/null '
-                                         + '| xargs grep -rl "version=' + image_version + '"')
-        image_dir = os.path.dirname(grep_res.split('\n')[0])
+        stdout, stderr, rc = \
+        bsu.bmc_execute_command('ls ' + var.IMAGE_UPLOAD_DIR_PATH +
+                                '*/MANIFEST 2>/dev/null ' +
+                                '| xargs grep -rl "version=' +
+                                image_version + '"')
+        image_dir = os.path.dirname(stdout.split('\n')[0])
         if '' != image_dir:
-            keyword.run_key('Execute Command On BMC  rm -rf ' + image_dir)
+            bsu.bmc_execute_command('rm -rf ' + image_dir)
             BuiltIn().fail('Found invalid BMC Image: ' + image_dir)
         time.sleep(30)
