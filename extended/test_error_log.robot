@@ -59,7 +59,7 @@ Test Error Persistency On Restart
 
     Create Test Error Log
     Verify Test Error Log
-    Execute Command On BMC
+    BMC Execute Command
     ...  systemctl restart xyz.openbmc_project.Logging.service
     Sleep  10s  reason=Wait for logging service to restart properly.
     Verify Test Error Log
@@ -92,7 +92,7 @@ Test Error Entry Numbering Reset On Restart
     Create Test Error Log
     Verify Test Error Log
     Delete All Error Logs
-    Execute Command On BMC
+    BMC Execute Command
     ...  systemctl restart xyz.openbmc_project.Logging.service
     Sleep  10s  reason=Wait for logging service to restart properly.
     Create Test Error Log
@@ -338,7 +338,7 @@ Verify Error Logs Capping
     Delete Error Logs And Verify
     ${cmd}=  Catenate  for i in {1..201}; do /tmp/tarball/bin/logging-test -c
     ...  AutoTestSimple; done
-    Execute Command On BMC  ${cmd}
+    BMC Execute Command  ${cmd}
     ${count}=  Count Error Entries
     Run Keyword If  ${count} > 200
     ...  Fail  Error logs created exceeded max capacity 200.
