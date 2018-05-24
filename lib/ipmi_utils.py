@@ -315,3 +315,56 @@ def get_aux_version(version_id):
         aux_version = count[0] + "0000"
 
     return aux_version
+
+
+def get_fru_info():
+    r"""
+    Get fru info and return it as a dictionary.
+
+    The data is obtained by issuing the IPMI "fru print -N 50" command.  An
+    example is shown below:
+
+    FRU Device Description : Builtin FRU Device (ID 0)
+     Device not present (Unspecified error)
+
+    FRU Device Description : cpu0 (ID 1)
+     Board Mfg Date        : Sun Dec 31 18:00:00 1995
+     Board Mfg             : IBM
+     Board Product         : PROCESSOR MODULE
+     Board Serial          : YA1934315964
+     Board Part Number     : 02CY209
+
+    FRU Device Description : cpu1 (ID 2)
+     Board Mfg Date        : Sun Dec 31 18:00:00 1995
+     Board Mfg             : IBM
+     Board Product         : PROCESSOR MODULE
+     Board Serial          : YA1934315965
+     Board Part Number     : 02CY209
+
+    For the data shown above, the following dictionary will be returned.
+    fru_obj:
+      fru_obj[0]:
+        [fru_device_description]:  Builtin FRU Device (ID 0)
+        [state]:                   Device not present (Unspecified error)
+      fru_obj[1]:
+        [fru_device_description]:  cpu0 (ID 1)
+        [board_mfg_date]:          Sun Dec 31 18:00:00 1995
+        [board_mfg]:               IBM
+        [board_product]:           PROCESSOR MODULE
+        [board_serial]:            YA1934315964
+        [board_part_number]:       02CY209
+      fru_obj[2]:
+        [fru_device_description]:  cpu1 (ID 2)
+        [board_mfg_date]:          Sun Dec 31 18:00:00 1995
+        [board_mfg]:               IBM
+        [board_product]:           PROCESSOR MODULE
+        [board_serial]:            YA1934315965
+        [board_part_number]:       02CY209
+    """
+
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  fru print -N 50")
+    # Manipulate the "Device not present" line to create a "state" key.
+    ret_values = re.sub("Device not present", "state : Device not present", ret_values)
+    return [vf.key_value_outbuf_to_dict(x) for x in re.split("\n\n",
+            ret_values)]
