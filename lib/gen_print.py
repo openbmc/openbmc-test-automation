@@ -329,6 +329,7 @@ def get_arg_name(var,
     # indentation is the same or less than the start line.  The end of our
     # composite line should be the line preceding that line.
     start_indent = get_line_indent(source_lines[start_line_ix])
+    end_line_ix = line_ix
     for end_line_ix in range(line_ix + 1, len(source_lines)):
         if source_lines[end_line_ix].strip() == "":
             continue
