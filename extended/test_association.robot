@@ -245,7 +245,7 @@ Create Test Error With Callout
     #    ]
     # },
 
-    Execute Command On BMC
+    BMC Execute Command
     ...  /tmp/tarball/bin/callout-test ${target_device_path}
 
 Verify Test Error Log And Callout

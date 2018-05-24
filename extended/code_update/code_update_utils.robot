@@ -90,10 +90,10 @@ Retry SCP
     # Example output:
     # root@witherspoon:~# ls -lh /tmp/flashimg
     # -rwxr-xr-x    1 root     root       32.0M Jun 29 01:12 /tmp/flashimg
-    Execute Command On BMC  rm -f /tmp/flashimg
+    BMC Execute Command  rm -f /tmp/flashimg
     scp.Put File  ${image_file_path}  ${targ_file_path}
 
-    ${file_size}=  Execute Command On BMC  ls -lh ${targ_file_path}
+    ${file_size}  ${stderr}  ${rc}=  BMC Execute Command  ls -lh ${targ_file_path}
     ${status}=  Run Keyword And Return Status
     ...  Should Contain  ${file_size}  32.0M  msg=Incomplete file transfer.
     [return]  ${status}
@@ -124,7 +124,7 @@ Validate BMC Version
 
     Open Connection And Log In
     ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '='
-    ${output}=  Execute Command On BMC  ${cmd}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     Should Be Equal As Strings  ${version}  ${output[1:-1]}
 
 
