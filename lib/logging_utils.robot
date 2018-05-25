@@ -56,7 +56,8 @@ Get Error Logs
     #  for example, Print Error Logs  ${error_logs}  Message.
 
     ${status}  ${error_logs}=  Run Keyword And Ignore Error  Read Properties
-    ...  /xyz/openbmc_project/logging/entry/enumerate  quiet=${quiet}
+    ...  /xyz/openbmc_project/logging/entry/enumerate
+    ...  timeout=30  quiet=${quiet}
 
     ${empty_dict}=  Create Dictionary
     Return From Keyword If  '${status}' == 'FAIL'  ${empty_dict}
