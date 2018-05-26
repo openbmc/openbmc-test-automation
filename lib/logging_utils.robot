@@ -169,6 +169,7 @@ Delete Error Logs And Verify
 
 Install Tarball
     [Documentation]  Install tarball on BMC.
-    Run Keyword If  '${DEBUG_TARBALL_PATH}' == '${EMPTY}'  Return From Keyword
+    Should Not Be Empty  ${DEBUG_TARBALL_PATH}
+    ...  msg=Debug tarball path value is required.
     BMC Execute Command  rm -rf /tmp/tarball
     Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
