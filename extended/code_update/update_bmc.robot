@@ -88,12 +88,7 @@ Prepare BMC For Update
     Check If BMC is Up  20 min  10 sec
     Check Boot Count And Time
 
-    # Temporary fix for lab migration for driver which is booted with
-    # BMC state "/xyz/openbmc_project/state/BMC0/".
-    ${status}=  Run Keyword And Return Status  Temp BMC URI Check
-    Run Keyword If  '${status}' == '${False}'
-    ...  Wait For BMC Ready
-    ...  ELSE  Wait For Temp BMC Ready
+    Wait For BMC Ready
 
 Check Boot Count And Time
     [Documentation]  Check for unexpected reboots.
@@ -102,13 +97,3 @@ Check Boot Count And Time
     Log To Console  \n Boot Time: ${BOOT_TIME}
     Run Keyword If  ${BOOT_COUNT} > ${MAX_BOOT_COUNT}
     ...  Log  Phantom Reboot!!! Unexpected reboot detected  level=WARN
-
-Temp BMC URI Check
-    [Documentation]  Check for transient "BMC0" interface.
-    ${resp}=  Openbmc Get Request  /xyz/openbmc_project/state/BMC0/
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-
-Wait For Temp BMC Ready
-    [Documentation]  Check for BMC "Ready" until timedout.
-    Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Check Temp BMC State
