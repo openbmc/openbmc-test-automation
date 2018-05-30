@@ -1090,18 +1090,6 @@ Get BMC Boot Time
     [Return]  ${btime}
 
 
-Execute Command On BMC
-    [Documentation]  Execute given command on BMC and return output.
-    [Arguments]  ${command}
-
-    # Description of argument(s):
-    # command    The command to execute on the BMC.
-
-    ${stdout}  ${stderr}=  Execute Command  ${command}  return_stderr=True
-    Should Be Empty  ${stderr}
-    [Return]  ${stdout}
-
-
 Enable Core Dump On BMC
     [Documentation]  Enable core dump collection.
     ${core_pattern}  ${stderr}  ${rc}=  BMC Execute Command
