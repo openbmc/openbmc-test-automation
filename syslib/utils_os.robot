@@ -49,6 +49,17 @@ Login To OS
     Login  ${os_username}  ${os_password}
 
 
+Get OS Name
+    [Documentation]  Get the running host OS name (Ubuntu/RHEL).
+
+    # Examples:
+    # NAME="Ubuntu"
+    # NAME="Red Hat Enterprise Linux Server"
+    ${os_name}  ${std_err}  ${rc}=  OS Execute Command
+    ...  . /etc/os-release && echo $NAME
+    [Return]  ${os_name}
+
+
 Tool Exist
     [Documentation]  Check whether given tool is installed on OS.
     [Arguments]  ${tool_name}
