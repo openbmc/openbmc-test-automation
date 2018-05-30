@@ -4,9 +4,21 @@ r"""
 This file contains utilities associated with the host OS.
 """
 
+import sys
+import os
+
+#Remove the python library path to restore with local project path later.
+save_path_0 = sys.path[0]
+del sys.path[0]
+sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
+
 import bmc_ssh_utils
 import var_funcs
 
+# Restore sys.path[0].
+sys.path.insert(0, save_path_0)
+
+from robot.libraries.BuiltIn import BuiltIn
 
 def get_os_release_info():
     r"""
