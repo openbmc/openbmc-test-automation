@@ -373,3 +373,21 @@ def get_fru_info():
 
     return [vf.key_value_outbuf_to_dict(x) for x in re.split("\n\n",
             ret_values)]
+
+
+def get_component_fru_info(component='cpu'):
+    r"""
+    Get fru info for the given component and return it as a list of
+    dictionaries.
+
+    This function basically calls upon get_fru_info and then filters out the
+    unwanted entries.  See get_fru_info's prolog for a layout of the data.
+
+    Description of argument(s):
+    component  The component (e.g. "cpu", "dimm", etc.).
+    """
+
+    fru_objs = get_fru_info()
+    return\
+        [x for x in fru_objs
+         if re.match(component + '[0-9] ', x['fru_device_description'])]
