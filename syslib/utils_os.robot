@@ -2,6 +2,7 @@
 Documentation      Keywords for system test.
 
 Library            ../lib/gen_robot_keyword.py
+Library            ../syslib/utils_os.py
 Resource           ../lib/boot_utils.robot
 Resource           ../extended/obmc_boot_test_resource.robot
 Resource           ../lib/utils.robot
@@ -47,6 +48,13 @@ Login To OS
     Ping Host  ${os_host}
     SSHLibrary.Open Connection  ${os_host}  alias=${alias_name}
     Login  ${os_username}  ${os_password}
+
+
+Get OS Name
+    [Documentation]  Get the running host OS name (Ubuntu/RHEL).
+
+    ${os_release_info}=  Get OS Release Info
+    [Return]  ${os_release_info["name"]}
 
 
 Tool Exist
