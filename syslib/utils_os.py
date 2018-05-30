@@ -4,9 +4,13 @@ r"""
 This file contains utilities associated with the host OS.
 """
 
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
+
 import bmc_ssh_utils
 import var_funcs
-
 
 def get_os_release_info():
     r"""
