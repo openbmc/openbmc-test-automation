@@ -109,11 +109,3 @@ Host Off And On
     # Wait 30 seconds before Powering Off.
     Sleep  30s
 
-Measure BMC Boot Time
-    [Documentation]  Reboot the BMC and collect uptime.
-
-    Open Connection And Log In
-    ${uptime}=
-    ...   Execute Command    cut -d " " -f 1 /proc/uptime| cut -d "." -f 1
-    ${uptime}=  Convert To Integer  ${uptime}
-    [return]  ${uptime}
