@@ -6,6 +6,8 @@ Library           OperatingSystem
 Variables         ../data/variables.py
 
 *** Variables ***
+
+${OPENBMC_MODEL}  ${EMPTY}
 ${OPENBMC_HOST}   ${EMPTY}
 ${DBUS_PREFIX}    ${EMPTY}
 ${PORT}           ${EMPTY}

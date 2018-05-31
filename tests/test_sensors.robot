@@ -14,7 +14,6 @@ Resource               ../lib/boot_utils.robot
 Resource               ../lib/utils.robot
 
 Suite Setup            Suite Setup Execution
-Test Setup             Open Connection And Log In
 Test Teardown          Test Teardown Execution
 
 *** Variables ***
@@ -42,7 +41,6 @@ Suite Setup Execution
     # Boot Host.
     REST Power On
 
-    Open Connection And Log In
     ${resp}=   Read Properties   ${OPENBMC_BASE_URI}enumerate   timeout=30
     Set Suite Variable      ${SYSTEM_INFO}          ${resp}
     log Dictionary          ${resp}
