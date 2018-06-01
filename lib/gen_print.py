@@ -306,7 +306,12 @@ def get_arg_name(var,
     # pvar is an alias for print_var.
     aliases.add(re.sub("print_var", "pvar", real_called_func_name))
 
-    func_name_regex = "(" + '|'.join(aliases) + ")"
+    # The call to the function could be encased in a recast (e.g.
+    # int(func_name())).
+    recast_regex = "([^ ]+\([ ]*)?"
+    import_name_regex = "([a-zA-Z0-9_]+\.)?"
+    func_name_regex = recast_regex + import_name_regex + "(" +\
+        '|'.join(aliases) + ")"
     pre_args_regex = ".*" + func_name_regex + "[ ]*\("
 
     # Search backward through source lines looking for the calling function
@@ -354,20 +359,24 @@ def get_arg_name(var,
     # Insert one space after first "=" if there isn't one already.
     composite_line = re.sub("=[ ]*([^ ])", "= \\1", composite_line, 1)
 
-    lvalue_regex = "[ ]+=[ ]*" + func_name_regex + ".*"
+    lvalue_regex = "[ ]*=[ ]+" + func_name_regex + ".*"
     lvalue_string = re.sub(lvalue_regex, "", composite_line)
-    lvalues_list = map(str.strip, lvalue_string.split(","))
+    if lvalue_string == composite_line:
+        lvalue_string = ""
+    lvalues_list = filter(None, map(str.strip, lvalue_string.split(",")))
     lvalues = collections.OrderedDict()
     ix = len(lvalues_list) * -1
     for lvalue in lvalues_list:
         lvalues[ix] = lvalue
         ix += 1
-    called_func_name = re.sub("(.*=)?[ ]+" + func_name_regex +
-                              "[ ]*\(.*", "\\2",
-                              composite_line)
+    lvalue_prefix_regex = "(.*=[ ]+)?"
+    called_func_name_regex = lvalue_prefix_regex + func_name_regex + "[ ]*\(.*"
+    called_func_name = re.sub(called_func_name_regex, "\\4", composite_line)
     arg_list_etc = "(" + re.sub(pre_args_regex, "", composite_line)
     if local_debug:
         print_varx("aliases", aliases, 0, debug_indent)
+        print_varx("import_name_regex", import_name_regex, 0, debug_indent)
+        print_varx("func_name_regex", func_name_regex, 0, debug_indent)
         print_varx("pre_args_regex", pre_args_regex, 0, debug_indent)
         print_varx("start_line_ix", start_line_ix, 0, debug_indent)
         print_varx("end_line_ix", end_line_ix, 0, debug_indent)
@@ -375,6 +384,8 @@ def get_arg_name(var,
         print_varx("lvalue_regex", lvalue_regex, 0, debug_indent)
         print_varx("lvalue_string", lvalue_string, 0, debug_indent)
         print_varx("lvalues", lvalues, 0, debug_indent)
+        print_varx("called_func_name_regex", called_func_name_regex, 0,
+                   debug_indent)
         print_varx("called_func_name", called_func_name, 0, debug_indent)
         print_varx("arg_list_etc", arg_list_etc, 0, debug_indent)
 
@@ -552,6 +563,84 @@ def sprint_error(buffer=""):
     return sprint_time() + "**ERROR** " + buffer
 
 
+# Implement "constants" with functions.
+def digit_length_in_bits():
+    r"""
+    Return the digit length in bits.
+    """
+
+    return 4
+
+
+def word_length_in_digits():
+    r"""
+    Return the word length in digits.
+    """
+
+    return 8
+
+
+def get_req_num_hex_digits(number):
+    r"""
+    Return the required number of hex digits required to display the given
+    number.
+
+    The returned value will always be rounded up to the nearest multiple of 8.
+
+    Description of argument(s):
+    number                          The number to be analyzed.
+    """
+
+    # Handle the simple special case of the number 0.
+    if number == 0:
+        return word_length_in_digits()
+
+    if number < 0:
+        # Convert negative numbers to positive and subtract one.  The
+        # following example illustrates the reason for this:
+        # Consider a single nibble whose signed values can range from -8 to 7
+        # (0x8 to 0x7).  A value of 0x7 equals 0b0111.  Therefore, its length
+        # in bits is 3.  Since the negative bit (i.e. 0b1000) is not set, the
+        # value 7 clearly will fit in one nibble.  With -8 = 0x8 = 0b1000, you
+        # have the smallest negative value that will fit.  Note that it
+        # requires 3 bits of 0.  So by converting a number value of -8 to a
+        # working_number of 7, this function can accurately calculate the
+        # number of bits and therefore nibbles required to represent the
+        # number in print.
+        working_number = abs(number) - 1
+    else:
+        working_number = number
+
+    num_length_in_bits = long.bit_length(long(working_number))
+    num_hex_digits, remainder = divmod(num_length_in_bits,
+                                       digit_length_in_bits())
+    if remainder > 0:
+        # Example: the number 7 requires 3 bits.  The div mod above produces,
+        # 0 with remainder of 3.  So because we have a remainder, we increment
+        # num_hex_digits from 0 to 1.
+        num_hex_digits += 1
+
+    # Check to see whether the negative bit is set.  This would be the
+    # left-most bit in the highest order digit.
+    negative_mask = 2 ** (num_hex_digits * 4 - 1)
+    if working_number & negative_mask:
+        # If a number that is intended to be positive has its negative bit
+        # on, an additional digit will be required to represent it correctly
+        # in print.
+        num_hex_digits += 1
+
+    num_words, remainder = divmod(num_hex_digits, word_length_in_digits())
+    if remainder > 0 or num_words == 0:
+        num_words += 1
+
+    # Round up to the next word length in digits.
+    return num_words * word_length_in_digits()
+
+
+def dft_num_hex_digits():
+    return get_req_num_hex_digits(sys.maxsize)
+
+
 def sprint_varx(var_name,
                 var_value,
                 hex=0,
@@ -651,10 +740,14 @@ def sprint_varx(var_name,
                 if var_value == "":
                     var_value = "<blank>"
             else:
-                if type(var_value) is long or var_value >= 0x100000000:
-                    value_format = "0x%16x"
-                else:
-                    value_format = "0x%08x"
+                num_hex_digits = max(dft_num_hex_digits(),
+                                     get_req_num_hex_digits(var_value))
+                # Convert negative to positive twos complement for proper
+                # printing.  For example, instead of printing -1 as
+                # "0x-000000000000001" it will be printed as
+                # "0xffffffffffffffff".
+                var_value = var_value & (2 ** (num_hex_digits * 4) - 1)
+                value_format = "0x%0" + str(num_hex_digits) + "x"
         else:
             value_format = "%s"
         format_string = "%" + str(loc_col1_indent) + "s%-" \
