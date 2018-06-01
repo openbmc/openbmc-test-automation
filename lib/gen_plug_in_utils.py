@@ -11,6 +11,9 @@ import collections
 
 import gen_print as gp
 import gen_misc as gm
+import gen_cmd as gc
+
+PLUG_VAR_PREFIX = os.environ.get("PLUG_VAR_PREFIX", "AUTOBOOT")
 
 
 def get_plug_in_package_name(case=None):
@@ -47,18 +50,31 @@ def return_plug_vars():
       ...
 
     This function also does the following:
-    - Set a default value for environment variable AUTOBOOT_OPENBMC_NICKNAME
-    if it is not already set.
+    - Set a default value for environment variable
+    AUTOBOOT_OPENBMC_NICKNAME/AUTOIPL_FSP1_NICKNAME if it is not already set.
     - Register PASSWORD variables to prevent their values from being printed.
+
+    Note: The programmer may set a default for any given env variable by
+    declaring a global variable of the same name and setting its value.  For
+    example, if the calling program has this global declaration:
+
+    PERF_EXERCISERS_TOTAL_TIMEOUT = '180'
+
+    If environment variable PERF_EXERCISERS_TOTAL_TIMEOUT is blank or not set,
+    this function will set it to 180.
     """
 
     plug_in_package_name = get_plug_in_package_name(case="upper")
-    regex = "^(AUTOBOOT|AUTOGUI|" + plug_in_package_name + ")_"
+    regex = "^(" + PLUG_VAR_PREFIX + "|AUTOGUI|" + plug_in_package_name + ")_"
 
     # Set a default for nickname.
     if os.environ.get("AUTOBOOT_OPENBMC_NICKNAME", "") == "":
         os.environ['AUTOBOOT_OPENBMC_NICKNAME'] = \
             os.environ.get("AUTOBOOT_OPENBMC_HOST", "")
+
+    if os.environ.get("AUTOIPL_FSP1_NICKNAME", "") == "":
+        os.environ['AUTOIPL_FSP1_NICKNAME'] = \
+            os.environ.get("AUTOIPL_FSP1_NAME", "").split(".")[0]
 
     # For all variables specified in the parm_def file, we want them to
     # default to "" rather than being unset.
@@ -86,7 +102,12 @@ def return_plug_vars():
 
     # Initialize unset plug-in vars.
     for var_name in plug_in_parm_names:
-        os.environ[var_name] = os.environ.get(var_name, "")
+        # Use global variable of the same name as environment variables as
+        # default value.
+        default_value = gm.get_mod_global(var_name, "")
+        os.environ[var_name] = os.environ.get(var_name, default_value)
+        if os.environ[var_name] == "":
+            os.environ[var_name] = default_value
 
     plug_var_dict = \
         collections.OrderedDict(sorted({k: v for (k, v) in
@@ -104,9 +125,9 @@ def return_plug_vars():
 
 def sprint_plug_vars(headers=1):
     r"""
-    Sprint the plug-in environment variables (i.e. those that begin with
-    AUTOBOOT_ those that begin with <plug-in package_name>_ in upper case
-    letters.).
+    Sprint the plug-in environment variables (i.e. those that begin with the
+    global PLUG_VAR_PREFIX value or those that begin with <plug-in
+    package_name>_ in upper case letters.).
 
     Example excerpt of output:
     AUTOBOOT_BASE_TOOL_DIR_PATH=/fspmount/
@@ -134,23 +155,23 @@ def get_plug_vars():
     r"""
     Get all plug-in variables and put them in corresponding global variables.
 
-    This would include all environment variables beginning with either
-    "AUTOBOOT_" or with the upper case version of the plug-in package name +
-    underscore (e.g. OP_SAMPLE_VAR1 for plug-in OP_Sample).
+    This would include all environment variables beginning with either the
+    global PLUG_VAR_PREFIX value or with the upper case version of the plug-in
+    package name + underscore (e.g. OP_SAMPLE_VAR1 for plug-in OP_Sample).
 
-    The global variables to be set will be both with and without the
-    "AUTOBOOT_" prefix.  For example, if the environment variable in question
-    is AUTOBOOT_OPENBMC_HOST, this function will set global variable
+    The global variables to be set will be both with and without the global
+    PLUG_VAR_PREFIX value prefix.  For example, if the environment variable in
+    question is AUTOBOOT_OPENBMC_HOST, this function will set global variable
     AUTOBOOT_OPENBMC_HOST and global variable OPENBMC_HOST.
     """
 
     module = sys.modules['__main__']
     plug_var_dict = return_plug_vars()
 
-    # Get all "AUTOBOOT_" environment variables and put them into globals.
+    # Get all PLUG_VAR_PREFIX environment variables and put them into globals.
     for key, value in plug_var_dict.items():
         setattr(module, key, value)
-        setattr(module, re.sub("^AUTOBOOT_", "", key), value)
+        setattr(module, re.sub("^" + PLUG_VAR_PREFIX + "_", "", key), value)
 
 
 def get_plug_default(var_name,
@@ -158,11 +179,14 @@ def get_plug_default(var_name,
     r"""
     Derive and return a default value for the given parm variable.
 
+    Dependencies:
+    Global variable PLUG_VAR_PREFIX must be set.
+
     This function will assign a default by checking the following environment
     variables in the order shown.  The first one that has a value will be used.
     - <upper case package_name>_<var_name>
-    - AUTOBOOT_OVERRIDE_<var_name>
-    - AUTOBOOT_<var_name>
+    - <PLUG_VAR_PREFIX>_OVERRIDE_<var_name>
+    - <PLUG_VAR_PREFIX>_<var_name>
 
     If none of these are found, this function will return the value passed by
     the caller in the "default" parm.
@@ -218,16 +242,18 @@ def get_plug_default(var_name,
         # A package-name version of the variable was found so return its value.
         return(default_value)
 
-    autoboot_var_name = "AUTOBOOT_OVERRIDE_" + var_name
-    default_value = os.environ.get(autoboot_var_name, None)
+    plug_var_name = PLUG_VAR_PREFIX + "_OVERRIDE_" + var_name
+    default_value = os.environ.get(plug_var_name, None)
     if default_value is not None:
-        # An AUTOBOOT_ version of the variable was found so return its value.
+        # An PLUG_VAR_PREFIX version of the variable was found so return its
+        # value.
         return default_value
 
-    autoboot_var_name = "AUTOBOOT_" + var_name
-    default_value = os.environ.get(autoboot_var_name, None)
+    plug_var_name = PLUG_VAR_PREFIX + "_" + var_name
+    default_value = os.environ.get(plug_var_name, None)
     if default_value is not None:
-        # An AUTOBOOT_ version of the variable was found so return its value.
+        # An PLUG_VAR_PREFIX version of the variable was found so return its
+        # value.
         return default_value
 
     return default
@@ -251,13 +277,14 @@ def srequired_plug_in(req_plug_in_names,
                                     values (e.g. "/home/robot/dir1") will be
                                     stripped from this list to do the
                                     analysis.  Default value is the
-                                    AUTOBOOT_PLUG_IN_DIR_PATHS environment
-                                    variable.
+                                    <PLUG_VAR_PREFIX>_PLUG_IN_DIR_PATHS
+                                    environment variable.
     """
 
     # Calculate default value for plug_in_dir_paths.
     if plug_in_dir_paths is None:
-        plug_in_dir_paths = os.environ.get("AUTOBOOT_PLUG_IN_DIR_PATHS", "")
+        plug_in_dir_paths = os.environ.get(PLUG_VAR_PREFIX +
+                                           "_PLUG_IN_DIR_PATHS", "")
 
     error_message = ""
 
@@ -297,6 +324,111 @@ def required_plug_in(req_plug_in_names,
         return False
 
     return True
+
+
+def compose_plug_in_save_dir_path():
+    r"""
+    Create and return a directory path name that is suitable for saving
+    plug-in data.
+
+    The name will be comprised of things such as plug_in package name, pid,
+    etc. in order to guarantee that it is unique for a given test run.
+    """
+
+    BASE_TOOL_DIR_PATH = \
+        gm.add_trailing_slash(os.environ.get(PLUG_VAR_PREFIX +
+                                             "BASE_TOOL_DIR_PATH",
+                                             "/fspmount/"))
+    NICKNAME = os.environ.get("AUTOBOOT_OPENBMC_NICKNAME", "")
+    if NICKNAME == "":
+        NICKNAME = os.environ["AUTOIPL_FSP1_NICKNAME"]
+    MASTER_PID = os.environ[PLUG_VAR_PREFIX + "_MASTER_PID"]
+    return BASE_TOOL_DIR_PATH + os.environ["USER"] + "/" + NICKNAME + "/" +\
+        get_plug_in_package_name() + "/" + MASTER_PID + "/"
+
+
+def create_plug_in_save_dir():
+    r"""
+    Create a directory suitable for saving plug-in processing data.  See
+    compose_plug_in_save_dir_path for details.
+    """
+
+    plug_in_save_dir_path = compose_plug_in_save_dir_path()
+    if os.path.isdir(plug_in_save_dir_path):
+        return plug_in_save_dir_path
+    gc.cmd_fnc_u("mkdir -p " + plug_in_save_dir_path)
+    return plug_in_save_dir_path
+
+
+def delete_plug_in_save_dir():
+    r"""
+    Delete the plug_in save directory.  See compose_plug_in_save_dir_path for
+    details.
+    """
+
+    gc.cmd_fnc_u("rm -rf " + compose_plug_in_save_dir_path())
+
+
+def save_plug_in_value(value):
+    r"""
+    Save a value in a plug-in save file.  The value may be retrieved later via
+    a call to the restore_plug_in_value function.
+
+    This function will figure out the variable name of the value passed and
+    use that name in creating the plug-in save file.
+
+    Example call:
+
+    my_var1 = 5
+    save_plug_in_value(my_var1)
+
+    In this example, the value "5" would be saved to the "my_var1" file in the
+    plug-in save directory.
+
+    Description of argument(s):
+    value                           The value to be saved.
+    """
+
+    # Get the name of the variable used as argument one to this function.
+    var_name = gp.get_arg_name(0, 1, stack_frame_ix=2)
+    plug_in_save_dir_path = create_plug_in_save_dir()
+    save_file_path = plug_in_save_dir_path + var_name
+    gp.qprint_timen("Saving \"" + var_name + "\" value.")
+    gc.cmd_fnc_u("echo '" + str(value) + "' > " + save_file_path)
+
+
+def restore_plug_in_value(default=""):
+    r"""
+    Return a value from a plug-in save file.
+
+    The name of the value to be restored will be determined by this function
+    based on the lvalue being assigned.  For example, if the invocation looks
+    like this:
+
+    my_var1 = restore_plug_in_value(2)
+
+    In this example, this function would look for the "my_var1" file in the
+    plug-in save directory, read its value and return it.
+
+    Description of argument(s):
+    default                         The default value to be returned if there
+                                    is no plug-in save file for the value in
+                                    question.
+    """
+
+    # Get the lvalue from the caller's invocation of this function.
+    lvalue = gp.get_arg_name(0, -1, stack_frame_ix=2)
+    plug_in_save_dir_path = create_plug_in_save_dir()
+    save_file_path = plug_in_save_dir_path + lvalue
+    if os.path.isfile(save_file_path):
+        gp.qprint_timen("Restoring " + lvalue + " value from " +
+                        save_file_path + ".")
+        return gm.file_to_list(save_file_path, newlines=0, comments=0,
+                               trim=1)[0]
+    else:
+        gp.qprint_timen("Save file " + save_file_path +
+                        " does not exist so returning default value.")
+        return default
 
 
 # Create print wrapper functions for all sprint functions defined above.
