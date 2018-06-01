@@ -82,6 +82,7 @@ Execute GPU Test
     Rpvars  loop_count
 
     REST Power On  stack_mode=skip
+    Run Key U  Sleep \ 15s
 
     # Collect data before the test starts.
     Collect NVIDIA Log File  start
@@ -155,6 +156,7 @@ Test Setup Execution
     [Documentation]  Do the initial test setup.
 
     REST Power On  stack_mode=skip
+    Run Key U  Sleep \ 15s
     Delete All Error Logs
     Tool Exist  lspci
     Tool Exist  htxcmdline

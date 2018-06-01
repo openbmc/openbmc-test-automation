@@ -119,6 +119,7 @@ Run HTX Exerciser
     Rpvars  loop_count  estimated_loop_time   estimated_time_remaining
 
     REST Power On  stack_mode=skip
+    Run Key U  Sleep \ 15s
 
     # Post Power off and on, the OS SSH session needs to be established.
     Login To OS
@@ -222,6 +223,7 @@ Test Setup Execution
     [Documentation]  Do the initial test setup.
 
     REST Power On  stack_mode=skip
+    Run Key U  Sleep \ 15s
     Delete All Error Logs
     Tool Exist  htxcmdline
 
