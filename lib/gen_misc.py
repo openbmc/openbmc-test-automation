@@ -356,3 +356,49 @@ def pid_active(pid):
             raise
 
     return True
+
+
+def to_signed(number,
+              bit_width=long.bit_length(long(sys.maxsize)) + 1):
+
+    r"""
+    Convert number to a signed number and return the result.
+
+    Examples:
+
+    With the following code:
+
+    var1 = 0xfffffffffffffff1
+    print_var(var1)
+    print_var(var1, 1)
+    var1 = to_signed(var1)
+    print_var(var1)
+    print_var(var1, 1)
+
+    The following is written to stdout:
+    var1:  18446744073709551601
+    var1:  0x00000000fffffffffffffff1
+    var1:  -15
+    var1:  0xfffffffffffffff1
+
+    The same code but with var1 set to 0x000000000000007f produces the
+    following:
+    var1:  127
+    var1:  0x000000000000007f
+    var1:  127
+    var1:  0x000000000000007f
+
+    Description of argument(s):
+    number                          The number to be converted.
+    bit_width                       The number of bits that defines a complete
+                                    hex value.  Typically, this would be a
+                                    multiple of 32.
+    """
+
+    if number < 0:
+        return number
+    neg_bit_mask = 2**(bit_width - 1)
+    if number & neg_bit_mask:
+        return ((2**bit_width) - number) * -1
+    else:
+        return number
