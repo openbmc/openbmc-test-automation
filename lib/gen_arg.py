@@ -12,6 +12,7 @@ import signal
 import argparse
 
 import gen_print as gp
+import gen_valid as gv
 
 default_string = '  The default value is "%(default)s".'
 
@@ -20,7 +21,8 @@ def gen_get_options(parser,
                     stock_list=[]):
     r"""
     Parse the command line arguments using the parser object passed and return
-    True/False (i.e. pass/fail).  Also set the following built in values:
+    True/False (i.e. pass/fail).  However, if gv.exit_on_error is set, simply
+    exit the program on failure.  Also set the following built in values:
 
     __builtin__.quiet      This value is used by the qprint functions.
     __builtin__.test_mode  This value is used by command processing functions.
@@ -49,12 +51,12 @@ def gen_get_options(parser,
     # Process stock_list.
     for ix in range(0, len(stock_list)):
         if len(stock_list[ix]) < 1:
-            gp.print_error_report("Programmer error - stock_list[" + str(ix) +
-                                  "] is supposed to be a tuple containing at" +
-                                  " least one element which is the name of" +
-                                  " the desired stock parameter:\n" +
-                                  gp.sprint_var(stock_list))
-            return False
+            error_message = "Programmer error - stock_list[" + str(ix) +\
+                            "] is supposed to be a tuple containing at" +\
+                            " least one element which is the name of" +\
+                            " the desired stock parameter:\n" +\
+                            gp.sprint_var(stock_list)
+            return gv.process_error_message(error_message)
         if type(stock_list[ix]) is tuple:
             arg_name = stock_list[ix][0]
             default = stock_list[ix][1]
@@ -63,11 +65,10 @@ def gen_get_options(parser,
             default = None
 
         if arg_name not in master_stock_list:
-            gp.pvar(arg_name)
-            gp.print_error_report("Programmer error - \"" + arg_name +
-                                  "\" not found found in stock list:\n" +
-                                  gp.sprint_var(master_stock_list))
-            return False
+            error_message = "Programmer error - arg_name \"" + arg_name +\
+                            "\" not found found in stock list:\n" +\
+                            gp.sprint_var(master_stock_list)
+            return gv.process_error_message(error_message)
 
         if arg_name == "quiet":
             if default is None:
@@ -180,7 +181,6 @@ def set_pgm_arg(var_value,
         __builtin__.test_mode = var_value
 
 
-# Put this in gen_opt.py or gen_parm.py or gen_arg.py.
 def sprint_args(arg_obj,
                 indent=0):
     r"""
