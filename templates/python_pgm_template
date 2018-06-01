@@ -17,6 +17,9 @@ from gen_valid import *
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)
 
+# Set exit_on_error for gen_valid functions.
+set_exit_on_error(True)
+
 parser = argparse.ArgumentParser(
     usage='%(prog)s [OPTIONS]',
     description="%(prog)s will...",
@@ -25,6 +28,7 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument(
     '--whatever',
+    default='',
     help='bla, bla.')
 
 # Populate stock_list with options we want.
@@ -66,33 +70,24 @@ def signal_handler(signal_number,
 
 def validate_parms():
     r"""
-    Validate program parameters, etc.  Return True or False (i.e. pass/fail)
-    accordingly.
+    Validate program parameters, etc.
     """
 
-    # Your validation code here.
+    # Your validation code here...
+    # valid_value(whatever)
 
     gen_post_validation(exit_function, signal_handler)
-
-    return True
 
 
 def main():
 
-    if not gen_get_options(parser, stock_list):
-        return False
+    gen_get_options(parser, stock_list)
 
-    if not validate_parms():
-        return False
+    validate_parms()
 
     qprint_pgm_header()
 
     # Your code here.
 
-    return True
 
-
-# Main
-
-if not main():
-    exit(1)
+main()
