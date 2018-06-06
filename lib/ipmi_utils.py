@@ -375,7 +375,8 @@ def get_fru_info():
             ret_values)]
 
 
-def get_component_fru_info(component='cpu'):
+def get_component_fru_info(component='cpu',
+                           fru_objs=None):
     r"""
     Get fru info for the given component and return it as a list of
     dictionaries.
@@ -385,9 +386,14 @@ def get_component_fru_info(component='cpu'):
 
     Description of argument(s):
     component  The component (e.g. "cpu", "dimm", etc.).
+    fru_objs   A fru_objs list such as the one returned by get_fru_info.  If
+               this is None, then this function will call get_fru_info to
+               obtain such a list.  Supplying this argument may improve
+               performance if this function is to be called multiple times.
     """
 
-    fru_objs = get_fru_info()
+    if fru_objs is None:
+        fru_objs = get_fru_info()
     return\
         [x for x in fru_objs
          if re.match(component + '([0-9]+)? ', x['fru_device_description'])]
