@@ -1,15 +1,15 @@
 *** Settings ***
 Documentation       This suite tests checkstop operations through HOST.
-Resource            ../lib/utils.robot
-Resource            ../lib/openbmc_ffdc.robot
-Resource            ../lib/ras/host_utils.robot
-Resource            ../lib/resource.txt
-Resource            ../lib/state_manager.robot
-Resource            ../lib/openbmc_ffdc_methods.robot
-Resource            ../lib/boot_utils.robot
-Variables           ../lib/ras/variables.py
-Variables           ../data/variables.py
-Resource            ../lib/dump_utils.robot
+Resource            ../../lib/utils.robot
+Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/ras/host_utils.robot
+Resource            ../../lib/resource.txt
+Resource            ../../lib/state_manager.robot
+Resource            ../../lib/openbmc_ffdc_methods.robot
+Resource            ../../lib/boot_utils.robot
+Variables           ../../lib/ras/variables.py
+Variables           ../../data/variables.py
+Resource            ../../lib/dump_utils.robot
 
 Library             DateTime
 Library             OperatingSystem
@@ -273,11 +273,11 @@ Verify Recoverable Callout Handling For NCUFIR With Threshold 1
     Inject Recoverable Error With Threshold Limit Through Host
     ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
-Verify Unrecoverable Callout Handling For NCUFIR 
+Verify Unrecoverable Callout Handling For NCUFIR
     [Documentation]  Verify unrecoverable callout handling for NCUFIR.
     [Tags]  Verify_Unrecoverable_Callout_Handling_For_NCUFIR
 
-    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NCUFIR_UE 
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NCUFIR_UE
     ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}ncufir_ue
     Inject Unrecoverable Error Through Host

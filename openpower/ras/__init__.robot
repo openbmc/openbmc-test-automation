@@ -2,10 +2,10 @@
 Documentation  Set metadata for test suite.
 
 Library          SSHLibrary
-Resource         ../lib/connection_client.robot
-Resource         ../lib/rest_client.robot
-Resource         ../lib/utils.robot
-Resource         ../lib/code_update_utils.robot
+Resource         ../../lib/connection_client.robot
+Resource         ../../lib/rest_client.robot
+Resource         ../../lib/utils.robot
+Resource         ../../lib/code_update_utils.robot
 
 Suite Setup      Log System Driver Data
 
