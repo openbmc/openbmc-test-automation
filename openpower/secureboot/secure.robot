@@ -5,14 +5,14 @@ Documentation  Secure boot related test cases.
 # FFDC_TOOL_DIR_PATH  The path to the directory containing FFDC translation
 #                     tools such as eSEL.pl.
 
-Resource          ../lib/utils.robot
-Resource          ../lib/boot_utils.robot
-Resource          ../lib/secure_utils.robot
-Resource          ../lib/open_power_utils.robot
-Resource          ../lib/logging_utils.robot
-Resource          ../lib/openbmc_ffdc_methods.robot
+Resource          ../../lib/utils.robot
+Resource          ../../lib/boot_utils.robot
+Resource          ../../lib/secure_utils.robot
+Resource          ../../lib/open_power_utils.robot
+Resource          ../../lib/logging_utils.robot
+Resource          ../../lib/openbmc_ffdc_methods.robot
 
-Library           ../lib/gen_misc.py
+Library           ../../lib/gen_misc.py
 
 Suite Setup       Suite Setup Execution
 Test Setup        Test Setup Execution
