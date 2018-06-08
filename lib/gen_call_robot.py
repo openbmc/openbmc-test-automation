@@ -17,8 +17,6 @@ import gen_valid as gv
 import gen_misc as gm
 import gen_cmd as gc
 
-auto_base_path = "/afs/rchland.ibm.com/projects/esw/dvt/autoipl/"
-
 base_path = \
     os.path.dirname(os.path.dirname(imp.find_module("gen_robot_print")[1])) +\
     os.sep
@@ -88,14 +86,11 @@ def init_robot_test_base_dir_path():
     # path>/git/openbmc-test-automation/
 
     ROBOT_TEST_BASE_DIR_PATH = os.environ.get('ROBOT_TEST_BASE_DIR_PATH', "")
-
     ROBOT_TEST_RUNNING_FROM_SB = \
         int(os.environ.get('ROBOT_TEST_RUNNING_FROM_SB', "0"))
     if ROBOT_TEST_BASE_DIR_PATH == "":
         # ROBOT_TEST_BASE_DIR_PATH was not set by user/caller.
-
         AUTOIPL_VERSION = os.environ.get('AUTOIPL_VERSION', '')
-
         if AUTOIPL_VERSION == "":
             ROBOT_TEST_BASE_DIR_PATH = base_path
         else:
@@ -103,23 +98,11 @@ def init_robot_test_base_dir_path():
 
             # Determine whether we're running out of a developer sandbox or
             # simply out of an apolloxxx/bin path.
-            cmd_buf = 'dirname $(which gen_print.py)'
-            gp.dpissuing(cmd_buf)
-            sub_proc = \
-                subprocess.Popen(cmd_buf, shell=True, stdout=subprocess.PIPE,
-                                 stderr=subprocess.STDOUT)
-            out_buf, err_buf = sub_proc.communicate()
-            shell_rc = sub_proc.returncode
-            executable_base_dir_path = out_buf.rstrip() + "/"
-
-            # Strip the "land.ibm.com" for truer comparison with
-            # apollo_dir_path.
-            executable_base_dir_path = \
-                executable_base_dir_path.replace('land.ibm.com', '')
-
-            apollo_dir_path = re.sub('land\.ibm\.com', '', auto_base_path) +\
-                AUTOIPL_VERSION + "/bin/"
-
+            shell_rc, out_buf = gc.shell_cmd('dirname $(which gen_print.py)',
+                                             quiet=(not debug), print_output=0)
+            executable_base_dir_path = os.path.realpath(out_buf.rstrip()) + "/"
+            apollo_dir_path = os.environ['AUTO_BASE_PATH'] + AUTOIPL_VERSION +\
+                "/bin/"
             developer_home_dir_path = re.sub('/sandbox.*', '',
                                              executable_base_dir_path)
             developer_home_dir_path = \
@@ -201,15 +184,10 @@ def init_robot_file_path(robot_file_path):
 
     if not abs_path:
         cmd_buf = "echo -n \"" + raw_robot_file_search_path + "\""
-        gp.dpissuing(cmd_buf)
-        sub_proc = subprocess.Popen(cmd_buf, shell=True,
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.STDOUT)
-        out_buf, err_buf = sub_proc.communicate()
-        shell_rc = sub_proc.returncode
+        shell_rc, out_buf = gc.shell_cmd(cmd_buf, quiet=(not debug),
+                                         print_output=0)
         robot_file_search_paths = out_buf
         gp.dpvar(robot_file_search_paths)
-
         robot_file_search_paths_list = robot_file_search_paths.split(':')
         for search_path in robot_file_search_paths_list:
             search_path = gm.add_trailing_slash(search_path)
@@ -238,14 +216,7 @@ def get_robot_parm_names():
     cmd_buf = "robot -h | egrep " +\
         "'^([ ]\-[a-zA-Z0-9])?[ ]+--[a-zA-Z0-9]+[ ]+' | sed -re" +\
         " s'/.*\-\-//g' -e s'/ .*//g' | sort -u"
-    sub_proc = subprocess.Popen(cmd_buf, shell=True, stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT)
-    out_buf, err_buf = sub_proc.communicate()
-    shell_rc = sub_proc.returncode
-    if shell_rc != 0:
-        hex = 1
-        print_var(shell_rc, hex)
-        print(out_buf)
+    shell_rc, out_buf = gc.shell_cmd(cmd_buf, quiet=1, print_output=0)
 
     return out_buf.split("\n")
 
