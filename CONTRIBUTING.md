@@ -208,7 +208,7 @@ Robot Coding Guidelines
         ```
     -   host names
 
-        For host names (long or short, e.g. "bmc1" or "bmc1.ibm.com"), use a
+        For host names (long or short, e.g. "bmc1" or "bmc1.domain.com"), use a
         suffix of _host_name.
 
         Examples:
@@ -495,7 +495,7 @@ Python Coding Guidelines
         ```
     -   host names
 
-        For host names (long or short, e.g. "bmc1" or "bmc1.ibm.com"), use a
+        For host names (long or short, e.g. "bmc1" or "bmc1.domain.com"), use a
         suffix of _host_name.
 
         Examples:
