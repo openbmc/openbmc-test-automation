@@ -480,7 +480,7 @@ Verify Get Device ID
     # Convert minor firmware version from BCD format to integer. i.e. 01 to 1
     ${ipmi_fw_minor_version}=  Convert To Integer  ${ipmi_fw_minor_version}
 
-    # Get BMC version from BMC CLI i.e. 2.1 from "ibm-v2.1-338-r1-0-gbcd7765"
+    # Get BMC version from BMC CLI i.e. 2.1 from "v2.2-253-g00050f1"
     ${bmc_version_full}=  Get BMC Version
     ${bmc_version}=
     ...  Remove String Using Regexp  ${bmc_version_full}  ^[^0-9]+  [^0-9\.].*
