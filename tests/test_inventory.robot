@@ -40,7 +40,7 @@ Verify Boxelder Present Property
     # {
     #     "BuildDate": "",
     #     "FieldReplaceable": 0,
-    #     "Manufacturer": "IBM",
+    #     "Manufacturer": "<Manufacturer Name>",
     #     "Model": "",
     #     "PartNumber": "01DH051",
     #     "Present": 1,
@@ -62,7 +62,7 @@ Verify UUID Entry
     # {
     #     "BuildDate": "",
     #     "FieldReplaceable": 0,
-    #     "Manufacturer": "IBM",
+    #     "Manufacturer": "<Manufacturer Name>",
     #     "Model": "",
     #     "PartNumber": "01DH051",
     #     "Present": 1,
@@ -146,7 +146,7 @@ Verify CPU Present
     #    "PrettyName": "PROCESSOR MODULE",
     #    "PartNumber": "01HL322",
     #    "Present": 1,
-    #    "Manufacturer": "IBM"
+    #    "Manufacturer": "<Manufacturer Name>"
     # },
     # The CPU properties "Present" should be boolean 1.
 

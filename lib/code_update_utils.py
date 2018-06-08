@@ -226,7 +226,7 @@ def verify_image_upload(image_version,
 
     Description of argument(s):
     image_version  The version from the image's manifest file
-                   (e.g. "IBM-witherspoon-redbud-ibm-OP9_v1.17_1.68").
+                   (e.g. "v2.2-253-g00050f1").
     timeout        How long, in minutes, to keep trying to find the
                    image on the BMC. Default is 3 minutes.
     """
