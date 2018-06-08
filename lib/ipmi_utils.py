@@ -329,14 +329,14 @@ def get_fru_info():
 
     FRU Device Description : cpu0 (ID 1)
      Board Mfg Date        : Sun Dec 31 18:00:00 1995
-     Board Mfg             : IBM
+     Board Mfg             : <Manufacturer Name>
      Board Product         : PROCESSOR MODULE
      Board Serial          : YA1934315964
      Board Part Number     : 02CY209
 
     FRU Device Description : cpu1 (ID 2)
      Board Mfg Date        : Sun Dec 31 18:00:00 1995
-     Board Mfg             : IBM
+     Board Mfg             : <Manufacturer Name>
      Board Product         : PROCESSOR MODULE
      Board Serial          : YA1934315965
      Board Part Number     : 02CY209
@@ -351,14 +351,14 @@ def get_fru_info():
       fru_obj[1]:
         [fru_device_description]:  cpu0 (ID 1)
         [board_mfg_date]:          Sun Dec 31 18:00:00 1995
-        [board_mfg]:               IBM
+        [board_mfg]:               <Manufacturer Name>
         [board_product]:           PROCESSOR MODULE
         [board_serial]:            YA1934315964
         [board_part_number]:       02CY209
       fru_obj[2]:
         [fru_device_description]:  cpu1 (ID 2)
         [board_mfg_date]:          Sun Dec 31 18:00:00 1995
-        [board_mfg]:               IBM
+        [board_mfg]:               <Manufacturer Name>
         [board_product]:           PROCESSOR MODULE
         [board_serial]:            YA1934315965
         [board_part_number]:       02CY209
