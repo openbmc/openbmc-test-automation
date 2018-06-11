@@ -222,7 +222,7 @@ def svalid_integer(var_value,
     success_message = ""
     error_message = ""
     try:
-        if type(int(str(var_value), 0)) is int:
+        if isinstance(int(str(var_value), 0), int):
             return success_message
     except ValueError:
         pass
@@ -467,8 +467,8 @@ def svalid_range(var_value,
                          " range:\n" +\
                          gp.sprint_varx(get_var_name(var_name), var_value) +\
                          gp.sprint_varx("valid_range",
-                                        str(valid_range[0]) + ".." +
-                                        str(valid_range[1]))
+                                        str(valid_range[0]) + ".."
+                                        + str(valid_range[1]))
         return error_message
 
     return error_message

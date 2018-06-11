@@ -283,8 +283,8 @@ def srequired_plug_in(req_plug_in_names,
 
     # Calculate default value for plug_in_dir_paths.
     if plug_in_dir_paths is None:
-        plug_in_dir_paths = os.environ.get(PLUG_VAR_PREFIX +
-                                           "_PLUG_IN_DIR_PATHS", "")
+        plug_in_dir_paths = os.environ.get(PLUG_VAR_PREFIX
+                                           + "_PLUG_IN_DIR_PATHS", "")
 
     error_message = ""
 
@@ -336,8 +336,8 @@ def compose_plug_in_save_dir_path():
     """
 
     BASE_TOOL_DIR_PATH = \
-        gm.add_trailing_slash(os.environ.get(PLUG_VAR_PREFIX +
-                                             "BASE_TOOL_DIR_PATH",
+        gm.add_trailing_slash(os.environ.get(PLUG_VAR_PREFIX
+                                             + "BASE_TOOL_DIR_PATH",
                                              "/fspmount/"))
     NICKNAME = os.environ.get("AUTOBOOT_OPENBMC_NICKNAME", "")
     if NICKNAME == "":
@@ -421,13 +421,13 @@ def restore_plug_in_value(default=""):
     plug_in_save_dir_path = create_plug_in_save_dir()
     save_file_path = plug_in_save_dir_path + lvalue
     if os.path.isfile(save_file_path):
-        gp.qprint_timen("Restoring " + lvalue + " value from " +
-                        save_file_path + ".")
+        gp.qprint_timen("Restoring " + lvalue + " value from "
+                        + save_file_path + ".")
         return gm.file_to_list(save_file_path, newlines=0, comments=0,
                                trim=1)[0]
     else:
-        gp.qprint_timen("Save file " + save_file_path +
-                        " does not exist so returning default value.")
+        gp.qprint_timen("Save file " + save_file_path
+                        + " does not exist so returning default value.")
         return default
 
 

@@ -26,8 +26,8 @@ def verify_no_duplicate_image_priorities(image_purpose):
     Check that there are no active images with the same purpose and priority.
 
     Description of argument(s):
-    image_purpose  The purpose that images must have to be checked for
-                   priority duplicates.
+    image_purpose                   The purpose that images must have to be
+                                    checked for priority duplicates.
     """
 
     taken_priorities = {}
@@ -41,7 +41,8 @@ def verify_no_duplicate_image_priorities(image_purpose):
         image_priority = image["Priority"]
         if image_priority in taken_priorities:
             BuiltIn().fail("Found active images with the same priority.\n"
-                           + gp.sprint_vars(image, taken_priorities[image_priority]))
+                           + gp.sprint_vars(image,
+                                            taken_priorities[image_priority]))
         taken_priorities[image_priority] = image
 
 
@@ -90,8 +91,9 @@ def wait_for_activation_state_change(version_id, initial_state):
     change from the state provided by the calling function.
 
     Description of argument(s):
-    version_id     The version ID whose state change we are waiting for.
-    initial_state  The activation state we want to wait for.
+    version_id                      The version ID whose state change we are
+                                    waiting for.
+    initial_state                   The activation state we want to wait for.
     """
 
     keyword.run_key_u("Open Connection And Log In")
@@ -100,9 +102,9 @@ def wait_for_activation_state_change(version_id, initial_state):
     read_fail_threshold = 1
     while (retry < 30):
         # TODO: Use retry option in run_key when available.
-        status, software_state = keyword.run_key("Read Properties  " +
-                                                 var.SOFTWARE_VERSION_URI +
-                                                 str(version_id),
+        status, software_state = keyword.run_key("Read Properties  "
+                                                 + var.SOFTWARE_VERSION_URI
+                                                 + str(version_id),
                                                  ignore=1)
         if status == 'FAIL':
             num_read_errors += 1
@@ -128,15 +130,15 @@ def get_latest_file(dir_path):
     Get the path to the latest uploaded file.
 
     Description of argument(s):
-    dir_path    Path to the dir from which the name of the last
-                updated file or folder will be returned to the
-                calling function.
+    dir_path                        Path to the dir from which the name of the
+                                    last updated file or folder will be
+                                    returned to the calling function.
     """
 
     stdout, stderr, rc = \
-        bsu.bmc_execute_command("cd " + dir_path +
-                                "; stat -c '%Y %n' * |" +
-                                " sort -k1,1nr | head -n 1")
+        bsu.bmc_execute_command("cd " + dir_path
+                                + "; stat -c '%Y %n' * |"
+                                + " sort -k1,1nr | head -n 1")
     return stdout.split(" ")[-1]
 
 
@@ -145,8 +147,8 @@ def get_version_tar(tar_file_path):
     Read the image version from the MANIFEST inside the tarball.
 
     Description of argument(s):
-    tar_file_path    The path to a tar file that holds the image
-                     version inside the MANIFEST.
+    tar_file_path                   The path to a tar file that holds the image
+                                    version inside the MANIFEST.
     """
 
     tar = tarfile.open(tar_file_path)
@@ -167,12 +169,13 @@ def get_image_version(file_path):
     Read the file for a version object.
 
     Description of argument(s):
-    file_path    The path to a file that holds the image version.
+    file_path                       The path to a file that holds the image
+                                    version.
     """
 
     stdout, stderr, rc = \
-        bsu.bmc_execute_command("cat "  + file_path +
-                                " | grep \"version=\"", ignore_err=1)
+        bsu.bmc_execute_command("cat " + file_path
+                                + " | grep \"version=\"", ignore_err=1)
     return (stdout.split("\n")[0]).split("=")[-1]
 
 
@@ -181,12 +184,13 @@ def get_image_purpose(file_path):
     Read the file for a purpose object.
 
     Description of argument(s):
-    file_path    The path to a file that holds the image purpose.
+    file_path                       The path to a file that holds the image
+                                    purpose.
     """
 
     stdout, stderr, rc = \
-        bsu.bmc_execute_command("cat " + file_path +
-                                " | grep \"purpose=\"", ignore_err=1)
+        bsu.bmc_execute_command("cat " + file_path
+                                + " | grep \"purpose=\"", ignore_err=1)
     return stdout.split("=")[-1]
 
 
@@ -198,13 +202,12 @@ def get_image_path(image_version):
     exists and is either READY or INVALID.
 
     Description of argument(s):
-    image_version    The version of the image that should match one
-                     of the images in the upload dir.
+    image_version                   The version of the image that should match
+                                    one of the images in the upload dir.
     """
 
     stdout, stderr, rc = \
-        bsu.bmc_execute_command("ls -d " + var.IMAGE_UPLOAD_DIR_PATH +
-                                "*/")
+        bsu.bmc_execute_command("ls -d " + var.IMAGE_UPLOAD_DIR_PATH + "*/")
 
     image_list = stdout.split("\n")
     retry = 0
@@ -225,10 +228,10 @@ def verify_image_upload(image_version,
     fails, try again until we reach the timeout.
 
     Description of argument(s):
-    image_version  The version from the image's manifest file
-                   (e.g. "v2.2-253-g00050f1").
-    timeout        How long, in minutes, to keep trying to find the
-                   image on the BMC. Default is 3 minutes.
+    image_version                   The version from the image's manifest file
+                                    (e.g. "v2.2-253-g00050f1").
+    timeout                         How long, in minutes, to keep trying to
+                                    find the image on the BMC. Default is 3 minutes.
     """
 
     image_path = get_image_path(image_version)
@@ -236,8 +239,8 @@ def verify_image_upload(image_version,
 
     keyword.run_key_u("Open Connection And Log In")
     image_purpose = get_image_purpose(image_path + "MANIFEST")
-    if (image_purpose == var.VERSION_PURPOSE_BMC or
-            image_purpose == var.VERSION_PURPOSE_HOST):
+    if (image_purpose == var.VERSION_PURPOSE_BMC
+            or image_purpose == var.VERSION_PURPOSE_HOST):
         uri = var.SOFTWARE_VERSION_URI + image_version_id
         ret_values = ""
         for itr in range(timeout * 2):
@@ -245,7 +248,7 @@ def verify_image_upload(image_version,
                 keyword.run_key("Read Attribute  " + uri + "  Activation")
 
             if ((ret_values == var.READY) or (ret_values == var.INVALID)
-                    or (ret_values == var.ACTIVE)):
+                or (ret_values == var.ACTIVE)):
                 return True, image_version_id
             else:
                 time.sleep(30)
@@ -266,17 +269,18 @@ def verify_image_not_in_bmc_uploads_dir(image_version, timeout=3):
     unpacking the image.
 
     Description of argument(s):
-    image_version  The version of the image to look for on the BMC.
-    timeout        How long, in minutes, to try to find an image on the BMC.
-                   Default is 3 minutes.
+    image_version                   The version of the image to look for on
+                                    the BMC.
+    timeout                         How long, in minutes, to try to find an
+                                    image on the BMC. Default is 3 minutes.
     """
 
     for i in range(timeout * 2):
         stdout, stderr, rc = \
-        bsu.bmc_execute_command('ls ' + var.IMAGE_UPLOAD_DIR_PATH +
-                                '*/MANIFEST 2>/dev/null ' +
-                                '| xargs grep -rl "version=' +
-                                image_version + '"')
+            bsu.bmc_execute_command('ls ' + var.IMAGE_UPLOAD_DIR_PATH
+                                    + '*/MANIFEST 2>/dev/null '
+                                    + '| xargs grep -rl "version='
+                                    + image_version + '"')
         image_dir = os.path.dirname(stdout.split('\n')[0])
         if '' != image_dir:
             bsu.bmc_execute_command('rm -rf ' + image_dir)

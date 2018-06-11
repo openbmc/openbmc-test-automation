@@ -95,8 +95,8 @@ def my_run_keywords(lib_file_path,
             grp.rdprint_issuing("import_library(\"" + lib_file_path + "\")")
             BuiltIn().import_library(lib_file_path)
         else:
-            grp.rdprint_issuing("my_import_resource(\"" + lib_file_path +
-                                "\")")
+            grp.rdprint_issuing("my_import_resource(\"" + lib_file_path
+                                + "\")")
             gru.my_import_resource(lib_file_path)
 
     # The user can pass multiple keyword strings by separating them with " ; ".

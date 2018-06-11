@@ -34,26 +34,26 @@ sys.path.insert(0, save_path_0)
 
 parser = argparse.ArgumentParser(
     usage='%(prog)s [OPTIONS]',
-    description="%(prog)s will call a program using parameters retrieved" +
-    " from the given properties file.",
+    description="%(prog)s will call a program using parameters retrieved"
+    + " from the given properties file.",
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     prefix_chars='-+')
 
 parser.add_argument(
     '--prop_dir_path',
     default=os.environ.get("PROP_DIR_PATH", os.getcwd()),
-    help='The path to the directory that contains the properties file.' +
-    '  The default value is environment variable "PROP_DIR_PATH", if' +
-    ' set.  Otherwise, it is the current working directory.')
+    help='The path to the directory that contains the properties file.'
+    + '  The default value is environment variable "PROP_DIR_PATH", if'
+    + ' set.  Otherwise, it is the current working directory.')
 
 parser.add_argument(
     '--prop_file_name',
-    help='The path to a properties file that contains the parameters to' +
-    ' pass to the program.  If the properties file has a ".properties"' +
-    ' extension, the caller need not specify the extension.  The format' +
-    ' of each line in the properties file should be as follows:' +
-    ' <parm_name=parm_value>.  Do not quote the parm value.  To specify' +
-    ' positional parms, use a parm name of "pos".  For example: pos=this'
+    help='The path to a properties file that contains the parameters to'
+    + ' pass to the program.  If the properties file has a ".properties"'
+    + ' extension, the caller need not specify the extension.  The format'
+    + ' of each line in the properties file should be as follows:'
+    + ' <parm_name=parm_value>.  Do not quote the parm value.  To specify'
+    + ' positional parms, use a parm name of "pos".  For example: pos=this'
     ' value')
 
 parser.add_argument(
@@ -66,7 +66,6 @@ stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
 
 def exit_function(signal_number=0,
                   frame=None):
-
     r"""
     Execute whenever the program ends normally or with the signals that we
     catch (i.e. TERM, INT).
@@ -80,7 +79,6 @@ def exit_function(signal_number=0,
 
 def signal_handler(signal_number,
                    frame):
-
     r"""
     Handle signals.  Without a function to catch a SIGTERM or SIGINT, our
     program would terminate immediately with return code 143 and without
@@ -98,7 +96,6 @@ def signal_handler(signal_number,
 
 
 def validate_parms():
-
     r"""
     Validate program parameters, etc.  Return True or False (i.e. pass/fail)
     accordingly.
