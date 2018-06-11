@@ -12,6 +12,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
 import bmc_ssh_utils
 import var_funcs
 
+
 def get_os_release_info():
     r"""
 
@@ -48,9 +49,11 @@ def get_os_release_info():
       [variant]:                          Server
       [variant_id]:                       server
       [version_id]:                       7.5
-      [pretty_name]:                      Red Hat Enterprise Linux Server 7.5 Beta (Maipo)
+      [pretty_name]:                      Red Hat Enterprise Linux Server 7.5
+      Beta (Maipo)
       [ansi_color]:                       0;31
-      [cpe_name]:                         cpe:/o:redhat:enterprise_linux:7.5:beta:server
+      [cpe_name]:
+      cpe:/o:redhat:enterprise_linux:7.5:beta:server
       [home_url]:                         https://www.redhat.com/
       [bug_report_url]:                   https://bugzilla.redhat.com/
       [redhat_bugzilla_product]:          Red Hat Enterprise Linux 7

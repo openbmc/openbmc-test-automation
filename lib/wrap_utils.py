@@ -85,7 +85,7 @@ def create_wrapper_def_and_call(base_func_name,
     base_arg_default_list = list(base_arg_list)
     for ix in range(num_non_defaults, len(base_arg_default_list)):
         base_default_ix = ix - num_non_defaults
-        if type(base_default_list[base_default_ix]) is str:
+        if isinstance(base_default_list[base_default_ix], str):
             default_string = "'" + base_default_list[base_default_ix] + "'"
             # Convert "\n" to "\\n".
             default_string = default_string.replace("\n", "\\n")

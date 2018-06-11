@@ -14,7 +14,8 @@ def get_hard_disk_info(device="/dev/sdb"):
     dictionary.
 
     Description of argument(s):
-    device  The device to be passed to the hdparm and lsblk commands (e.g.
+    device                          The device to be passed to the hdparm and
+                                    lsblk commands (e.g.
             "/dev/sdb").
 
     Example result:
@@ -23,8 +24,10 @@ def get_hard_disk_info(device="/dev/sdb"):
       [model_number]:                        MTFDDAK1T9TCB 00LY461 00LY570IBM
       [serial_number]:                       179C413F
       [firmware_revision]:                   MJ06
-      [transport]:                           Serial, ATA8-AST, SATA 1.0a, SATA II Extensions, SATA Rev 2.5, SATA Rev 2.6, SATA Rev 3.0
-      [used]:                                unknown (minor revision code 0x006d)
+      [transport]:                           Serial, ATA8-AST, SATA 1.0a, SATA
+      II Extensions, SATA Rev 2.5, SATA Rev 2.6, SATA Rev 3.0
+      [used]:                                unknown (minor revision code
+      0x006d)
       [supported]:                           enhanced erase
       [likely_used]:                         10
       [lba_user_addressable_sectors]:        268435455
@@ -37,11 +40,14 @@ def get_hard_disk_info(device="/dev/sdb"):
       [form_factor]:                         2.5 inch
       [nominal_media_rotation_rate]:         Solid State Device
       [queue_depth]:                         32
-      [standby_timer_values]:                spec'd by Standard, with device specific minimum
+      [standby_timer_values]:                spec'd by Standard, with device
+      specific minimum
       [r/w_multiple_sector_transfer]:        Max = 16 Current = 16
       [advanced_power_management_level]:     254
-      [dma]:                                 mdma0 mdma1 mdma2 udma0 udma1 udma2 udma3 udma4 udma5 *udma6
-      [cycle_time]:                          no flow control=120ns IORDY flow control=120ns
+      [dma]:                                 mdma0 mdma1 mdma2 udma0 udma1
+      udma2 udma3 udma4 udma5 *udma6
+      [cycle_time]:                          no flow control=120ns IORDY flow
+      control=120ns
       [pio]:                                 pio0 pio1 pio2 pio3 pio4
       [security]:
       [not_expired]:                         security count

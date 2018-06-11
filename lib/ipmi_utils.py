@@ -24,11 +24,12 @@ def get_sol_info():
 
     Robot code:
     ${sol_info}=  get_sol_info
-    Rpvars  sol_info
+    Rpvars                          sol_info
 
     Output:
     sol_info:
-      sol_info[Info]:                                SOL parameter 'Payload Channel (7)' not supported - defaulting to 0x0e
+      sol_info[Info]:                                SOL parameter 'Payload
+      Channel (7)' not supported - defaulting to 0x0e
       sol_info[Character Send Threshold]:            1
       sol_info[Force Authentication]:                true
       sol_info[Privilege Level]:                     USER
@@ -66,8 +67,9 @@ def set_sol_setting(setting_name, setting_value):
     Set SOL setting with given value.
 
     # Description of argument(s):
-    # setting_name    SOL setting which needs to be set (e.g. "retry-count").
-    # setting_value   Value which needs to be set (e.g. "7").
+    # setting_name                  SOL setting which needs to be set (e.g.
+    #                               "retry-count").
+    # setting_value                 Value which needs to be set (e.g. "7").
     """
 
     status, ret_values = grk.run_key_u("Run IPMI Standard Command  sol set " +
@@ -175,7 +177,8 @@ def get_ipmi_power_reading(strip_watts=1):
       [power_reading_state_is]:                   deactivated
 
     Description of argument(s):
-    strip_watts  Strip all dictionary values of the trailing " Watts"
+    strip_watts                     Strip all dictionary values of the
+                                    trailing " Watts"
                  substring.
     """
 
@@ -295,7 +298,8 @@ def get_aux_version(version_id):
     Get IPMI Aux version info data and return it.
 
     Description of argument(s):
-    version_id    The data is obtained by from BMC /etc/os-release
+    version_id                      The data is obtained by from BMC
+                                    /etc/os-release
                   (e.g. "xxx-v2.1-438-g0030304-r3-gfea8585").
 
     In the prior example, the 3rd field is "438" is the commit version and
@@ -372,7 +376,7 @@ def get_fru_info():
                         ret_values)
 
     return [vf.key_value_outbuf_to_dict(x) for x in re.split("\n\n",
-            ret_values)]
+                                                             ret_values)]
 
 
 def get_component_fru_info(component='cpu',
@@ -385,8 +389,9 @@ def get_component_fru_info(component='cpu',
     entries.  See get_fru_info's prolog for a layout of the data.
 
     Description of argument(s):
-    component  The component (e.g. "cpu", "dimm", etc.).
-    fru_objs   A fru_objs list such as the one returned by get_fru_info.  If
+    component                       The component (e.g. "cpu", "dimm", etc.).
+    fru_objs                        A fru_objs list such as the one returned
+                                    by get_fru_info.  If
                this is None, then this function will call get_fru_info to
                obtain such a list.  Supplying this argument may improve
                performance if this function is to be called multiple times.

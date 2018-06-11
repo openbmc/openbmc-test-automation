@@ -326,10 +326,10 @@ FRU_INSTANCES = {
     '<inventory_root>/system/chassis/io_board/pcie_slot1_riser': {'fru_type': 'PCIE_RISER', 'is_fru': True, },
     '<inventory_root>/system/chassis/io_board/pcie_slot2_riser': {'fru_type': 'PCIE_RISER', 'is_fru': True, },
     '<inventory_root>/system/chassis/io_board/pcie_slot0': {'fru_type': 'PCIE_CARD', 'is_fru': True, },
-    '<inventory_root>/system/chassis/io_board/pcie_slot1':	{'fru_type': 'PCIE_CARD', 'is_fru': True, },
-    '<inventory_root>/system/chassis/io_board/pcie_slot2':	{'fru_type': 'PCIE_CARD', 'is_fru': True, },
-    '<inventory_root>/system/chassis/io_board/pcie_mezz0':	{'fru_type': 'PCIE_CARD', 'is_fru': True, },
-    '<inventory_root>/system/chassis/io_board/pcie_mezz1':	{'fru_type': 'PCIE_CARD', 'is_fru': True, },
+    '<inventory_root>/system/chassis/io_board/pcie_slot1': {'fru_type': 'PCIE_CARD', 'is_fru': True, },
+    '<inventory_root>/system/chassis/io_board/pcie_slot2': {'fru_type': 'PCIE_CARD', 'is_fru': True, },
+    '<inventory_root>/system/chassis/io_board/pcie_mezz0': {'fru_type': 'PCIE_CARD', 'is_fru': True, },
+    '<inventory_root>/system/chassis/io_board/pcie_mezz1': {'fru_type': 'PCIE_CARD', 'is_fru': True, },
 }
 
 ID_LOOKUP = {
@@ -561,13 +561,13 @@ def convertGpio(name):
     name = name.upper()
     c = name[0:1]
     offset = int(name[1:])
-    a = ord(c)-65
-    base = a*8+GPIO_BASE
-    return base+offset
+    a = ord(c) - 65
+    base = a * 8 + GPIO_BASE
+    return base + offset
 
 
 HWMON_CONFIG = {
-    '0-004a':  {
+    '0-004a': {
         'names': {
             'temp1_input': {'object_path': 'temperature/ambient', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
         }
@@ -624,117 +624,120 @@ HWMON_CONFIG = {
             'caps_user_powerlimit': {'object_path': 'powercap/user_cap', 'poll_interval': 10000, 'scale': 1, 'units': 'W'},
         },
         'labels': {
-            '176':  {'object_path': 'temperature/cpu0/core0', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '177':  {'object_path': 'temperature/cpu0/core1', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '178':  {'object_path': 'temperature/cpu0/core2', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '179':  {'object_path': 'temperature/cpu0/core3', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '180':  {'object_path': 'temperature/cpu0/core4', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '181':  {'object_path': 'temperature/cpu0/core5', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '182':  {'object_path': 'temperature/cpu0/core6', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '183':  {'object_path': 'temperature/cpu0/core7', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '184':  {'object_path': 'temperature/cpu0/core8', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '185':  {'object_path': 'temperature/cpu0/core9', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '186':  {'object_path': 'temperature/cpu0/core10', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '187':  {'object_path': 'temperature/cpu0/core11', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '102':  {'object_path': 'temperature/dimm0', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '103':  {'object_path': 'temperature/dimm1', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '104':  {'object_path': 'temperature/dimm2', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '105':  {'object_path': 'temperature/dimm3', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '106':  {'object_path': 'temperature/dimm4', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '107':  {'object_path': 'temperature/dimm5', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '108':  {'object_path': 'temperature/dimm6', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '109':  {'object_path': 'temperature/dimm7', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '110':  {'object_path': 'temperature/dimm8', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '111':  {'object_path': 'temperature/dimm9', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '112':  {'object_path': 'temperature/dimm10', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '113':  {'object_path': 'temperature/dimm11', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '114':  {'object_path': 'temperature/dimm12', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '115':  {'object_path': 'temperature/dimm13', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '116':  {'object_path': 'temperature/dimm14', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '117':  {'object_path': 'temperature/dimm15', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '94':  {'object_path': 'temperature/membuf0', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '95':  {'object_path': 'temperature/membuf1', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '96':  {'object_path': 'temperature/membuf2', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '97':  {'object_path': 'temperature/membuf3', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '176': {'object_path': 'temperature/cpu0/core0', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '177': {'object_path': 'temperature/cpu0/core1', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '178': {'object_path': 'temperature/cpu0/core2', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '179': {'object_path': 'temperature/cpu0/core3', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '180': {'object_path': 'temperature/cpu0/core4', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '181': {'object_path': 'temperature/cpu0/core5', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '182': {'object_path': 'temperature/cpu0/core6', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '183': {'object_path': 'temperature/cpu0/core7', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '184': {'object_path': 'temperature/cpu0/core8', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '185': {'object_path': 'temperature/cpu0/core9', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '186': {'object_path': 'temperature/cpu0/core10', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '187': {'object_path': 'temperature/cpu0/core11', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '102': {'object_path': 'temperature/dimm0', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '103': {'object_path': 'temperature/dimm1', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '104': {'object_path': 'temperature/dimm2', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '105': {'object_path': 'temperature/dimm3', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '106': {'object_path': 'temperature/dimm4', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '107': {'object_path': 'temperature/dimm5', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '108': {'object_path': 'temperature/dimm6', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '109': {'object_path': 'temperature/dimm7', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '110': {'object_path': 'temperature/dimm8', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '111': {'object_path': 'temperature/dimm9', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '112': {'object_path': 'temperature/dimm10', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '113': {'object_path': 'temperature/dimm11', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '114': {'object_path': 'temperature/dimm12', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '115': {'object_path': 'temperature/dimm13', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '116': {'object_path': 'temperature/dimm14', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '117': {'object_path': 'temperature/dimm15', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '94': {'object_path': 'temperature/membuf0', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '95': {'object_path': 'temperature/membuf1', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '96': {'object_path': 'temperature/membuf2', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '97': {'object_path': 'temperature/membuf3', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
         }
     },
     '3-0051': {
-        'labels':  {
-            '188':  {'object_path': 'temperature/cpu1/core0', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '189':  {'object_path': 'temperature/cpu1/core1', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '190':  {'object_path': 'temperature/cpu1/core2', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '191':  {'object_path': 'temperature/cpu1/core3', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '192':  {'object_path': 'temperature/cpu1/core4', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '193':  {'object_path': 'temperature/cpu1/core5', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '194':  {'object_path': 'temperature/cpu1/core6', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '195':  {'object_path': 'temperature/cpu1/core7', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '196':  {'object_path': 'temperature/cpu1/core8', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '197':  {'object_path': 'temperature/cpu1/core9', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '198':  {'object_path': 'temperature/cpu1/core10', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '199':  {'object_path': 'temperature/cpu1/core11', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
-                     'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
-            '118':  {'object_path': 'temperature/dimm16', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '119':  {'object_path': 'temperature/dimm17', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '120':  {'object_path': 'temperature/dimm18', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '121':  {'object_path': 'temperature/dimm19', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '122':  {'object_path': 'temperature/dimm20', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '123':  {'object_path': 'temperature/dimm21', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '124':  {'object_path': 'temperature/dimm22', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '125':  {'object_path': 'temperature/dimm23', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '126':  {'object_path': 'temperature/dimm24', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '127':  {'object_path': 'temperature/dimm25', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '128':  {'object_path': 'temperature/dimm26', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '129':  {'object_path': 'temperature/dimm27', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '130':  {'object_path': 'temperature/dimm28', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '131':  {'object_path': 'temperature/dimm29', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '132':  {'object_path': 'temperature/dimm30', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '133':  {'object_path': 'temperature/dimm31', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '98':  {'object_path': 'temperature/membuf4', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '99':  {'object_path': 'temperature/membuf5', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '100':  {'object_path': 'temperature/membuf6', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
-            '101':  {'object_path': 'temperature/membuf7', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+        'labels': {
+            '188': {'object_path': 'temperature/cpu1/core0', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '189': {'object_path': 'temperature/cpu1/core1', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '190': {'object_path': 'temperature/cpu1/core2', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '191': {'object_path': 'temperature/cpu1/core3', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '192': {'object_path': 'temperature/cpu1/core4', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '193': {'object_path': 'temperature/cpu1/core5', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '194': {'object_path': 'temperature/cpu1/core6', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '195': {'object_path': 'temperature/cpu1/core7', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '196': {'object_path': 'temperature/cpu1/core8', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '197': {'object_path': 'temperature/cpu1/core9', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '198': {'object_path': 'temperature/cpu1/core10', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '199': {'object_path': 'temperature/cpu1/core11', 'poll_interval': 5000, 'scale': 1000, 'units': 'C',
+                    'critical_upper': 100, 'critical_lower': -100, 'warning_upper': 90, 'warning_lower': -99, 'emergency_enabled': True},
+            '118': {'object_path': 'temperature/dimm16', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '119': {'object_path': 'temperature/dimm17', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '120': {'object_path': 'temperature/dimm18', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '121': {'object_path': 'temperature/dimm19', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '122': {'object_path': 'temperature/dimm20', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '123': {'object_path': 'temperature/dimm21', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '124': {'object_path': 'temperature/dimm22', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '125': {'object_path': 'temperature/dimm23', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '126': {'object_path': 'temperature/dimm24', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '127': {'object_path': 'temperature/dimm25', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '128': {'object_path': 'temperature/dimm26', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '129': {'object_path': 'temperature/dimm27', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '130': {'object_path': 'temperature/dimm28', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '131': {'object_path': 'temperature/dimm29', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '132': {'object_path': 'temperature/dimm30', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '133': {'object_path': 'temperature/dimm31', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '98': {'object_path': 'temperature/membuf4', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '99': {'object_path': 'temperature/membuf5', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '100': {'object_path': 'temperature/membuf6', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            '101': {'object_path': 'temperature/membuf7', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
         }
     },
-    '4-0010':  {
+    '4-0010': {
         'names': {
             # Barreleye uses 0.25 millioohms sense resistor for adm1278
-            # To convert Iout register value Y to real-world value X, use an equation:
-            # X= 1/m * (Y * 10^-R - b), here m = 800 * R_sense, and R_sense is expressed in milliohms.
-            # The adm1278 driver did the conversion, but the R_sense is set here as a scale factor.
+            # To convert Iout register value Y to real-world value X, use an
+            # equation:
+            # X= 1/m * (Y * 10^-R - b), here m = 800 * R_sense, and R_sense
+            # is expressed in milliohms.
+            # The adm1278 driver did the conversion, but the R_sense is set
+            # here as a scale factor.
             'curr1_input': {'object_path': 'HSCA/Iout', 'poll_interval': 5000, 'scale': 0.25, 'units': 'mA'},
             'in2_input': {'object_path': 'HSCA/Vout', 'poll_interval': 5000, 'scale': 1, 'units': 'mV'},
         }
     },
-    '5-0010':  {
+    '5-0010': {
         'names': {
             'curr1_input': {'object_path': 'HSCB/Iout', 'poll_interval': 5000, 'scale': 0.25, 'units': 'mA'},
             'in2_input': {'object_path': 'HSCB/Vout', 'poll_interval': 5000, 'scale': 1, 'units': 'mV'},
         }
     },
-    '6-0010':  {
+    '6-0010': {
         'names': {
             'curr1_input': {'object_path': 'HSCC/Iout', 'poll_interval': 5000, 'scale': 0.25, 'units': 'mA'},
             'in2_input': {'object_path': 'HSCC/Vout', 'poll_interval': 5000, 'scale': 1, 'units': 'mV'},
