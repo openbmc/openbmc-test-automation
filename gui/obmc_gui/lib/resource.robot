@@ -75,11 +75,19 @@ Launch Header Browser
 
 Launch Headless Browser
     [Documentation]  Launch headless browser.
+    [Arguments]  ${URL}=${obmc_gui_url}  ${browser}=${default_browser}
 
-    Start Virtual Display  1920  1080
-    ${BROWSER_ID}=  Open Browser  ${obmc_gui_url}
-    Set Global Variable  ${BROWSER_ID}
+    # Description of argument(s):
+    # URL      Openbmc GUI URL to be open.
+    #          (e.g. https://openbmc-test.mybluemix.net/#/login)
+    # browser  Browser to open given URL in headless way.
+    #          (e.g. gc for google chrome, ff for firefox)
+
+    Start Virtual Display
+    ${browser_ID}=  Open Browser  ${URL}
     Set Window Size  1920  1080
+
+    [Return]  ${browser_ID}
 
 Login OpenBMC GUI
     [Documentation]  Perform login to open BMC GUI.
@@ -195,7 +203,7 @@ LogOut OpenBMC GUI
     SSHLibrary.Close All Connections
     # Passing direct id element "header" as an argument to Click Element.
     Click Element  ${xpath_button_logout}
-    Wait Until Page Contains Element  ${xpath_button_login}
+Wait Until Page Contains Element  ${xpath_button_login}
 
 Test Teardown Execution
     [Documentation]  Do final closure activities of test case execution.
@@ -206,15 +214,19 @@ Test Teardown Execution
 
 Open Browser With URL
     [Documentation]  Open browser with specified URL and returns browser id.
-    [Arguments]  ${URL}  ${browser}=ff
+    [Arguments]  ${URL}  ${browser}=ff  ${mode}=headless
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
     #          (e.g. https://openbmc-test.mybluemix.net/#/login )
     # browser  browser used to open above URL
     #          (e.g. gc for google chrome, ff for firefox)
+    # mode     Browser opening mode(e.g. headless, header)
 
-    ${browser_ID}=  Open Browser  ${URL}  ${browser}
+    ${browser_ID}=  Run Keyword If  '${mode}' == 'headless'
+    ...  Launch Headless Browser  ${URL}  ${browser}
+    ...  ELSE  Open Browser  ${URL}  ${browser}
+
     [Return]  ${browser_ID}
 
 
@@ -361,5 +373,6 @@ Launch Browser And Login OpenBMC GUI
 Logout And Close Browser
     [Documentation]  Logout from openbmc application and close the browser.
 
-    Click Element  header
+    #Click Element  header
+    #Click Element  //*[@id="header"]
     Close Browser
