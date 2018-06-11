@@ -205,7 +205,7 @@ Test Teardown Execution
 
 Open Browser With URL
     [Documentation]  Open browser with specified URL and returns browser id.
-    [Arguments]  ${URL}  ${browser}=gc
+    [Arguments]  ${URL}  ${browser}=gc  ${virtual_browser}=yes
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
@@ -213,7 +213,14 @@ Open Browser With URL
     # browser  browser used to open above URL
     #          (e.g. gc for google chrome, ff for firefox)
 
+    Run Keyword If  '${virtual_browser}' == 'yes'
+    ...  Start Virtual Display  1920  1080
+
     ${browser_ID}=  Open Browser  ${URL}  ${browser}
+
+    Run Keyword If  '${virtual_browser}' == 'yes'
+    ...  Set Window Size  1920  1080
+
     [Return]  ${browser_ID}
 
 Model Server Power Click Button
