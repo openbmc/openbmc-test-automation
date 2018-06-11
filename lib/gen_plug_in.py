@@ -68,8 +68,8 @@ def find_plug_in_package(plug_in_name):
 
     global plug_in_base_path_list
     for plug_in_base_dir_path in plug_in_base_path_list:
-        candidate_plug_in_dir_path = os.path.normpath(plug_in_base_dir_path +
-                                                      plug_in_name) + \
+        candidate_plug_in_dir_path = os.path.normpath(plug_in_base_dir_path
+                                                      + plug_in_name) + \
             os.sep
         if os.path.isdir(candidate_plug_in_dir_path):
             return candidate_plug_in_dir_path
@@ -98,8 +98,8 @@ def validate_plug_in_package(plug_in_dir_path,
         candidate_plug_in_dir_path = os.path.normpath(plug_in_dir_path) +\
             os.sep
         if not os.path.isdir(candidate_plug_in_dir_path):
-            gp.print_error_report("Plug-in directory path \"" +
-                                  plug_in_dir_path + "\" does not exist.\n")
+            gp.print_error_report("Plug-in directory path \""
+                                  + plug_in_dir_path + "\" does not exist.\n")
             exit(1)
     else:
         # The plug_in_dir_path is actually a simple name (e.g.
@@ -107,22 +107,22 @@ def validate_plug_in_package(plug_in_dir_path,
         candidate_plug_in_dir_path = find_plug_in_package(plug_in_dir_path)
         if candidate_plug_in_dir_path == "":
             global PATH_LIST
-            gp.print_error_report("Plug-in directory path \"" +
-                                  plug_in_dir_path + "\" could not be found" +
-                                  " in any of the following directories:\n" +
-                                  gp.sprint_var(PATH_LIST))
+            gp.print_error_report("Plug-in directory path \""
+                                  + plug_in_dir_path + "\" could not be found"
+                                  + " in any of the following directories:\n"
+                                  + gp.sprint_var(PATH_LIST))
             exit(1)
     # Make sure that this plug-in supports us...
     supports_file_path = candidate_plug_in_dir_path + "supports_" + mch_class
     if not os.path.exists(supports_file_path):
-        gp.print_error_report("The following file path could not be" +
-                              " found:\n" +
-                              gp.sprint_varx("supports_file_path",
-                                             supports_file_path) +
-                              "\nThis file is necessary to indicate that" +
-                              " the given plug-in supports the class of" +
-                              " machine we are testing, namely \"" +
-                              mch_class + "\".\n")
+        gp.print_error_report("The following file path could not be"
+                              + " found:\n"
+                              + gp.sprint_varx("supports_file_path",
+                                               supports_file_path)
+                              + "\nThis file is necessary to indicate that"
+                              + " the given plug-in supports the class of"
+                              + " machine we are testing, namely \""
+                              + mch_class + "\".\n")
         exit(1)
 
     return candidate_plug_in_dir_path
@@ -153,8 +153,8 @@ def return_integrated_plug_ins(mch_class="obmc"):
 
     for plug_in_base_path in plug_in_base_path_list:
         # Get a list of all plug-in paths that support our mch_class.
-        mch_class_candidate_list = glob.glob(plug_in_base_path +
-                                             "*/supports_" + mch_class)
+        mch_class_candidate_list = glob.glob(plug_in_base_path
+                                             + "*/supports_" + mch_class)
         for candidate_path in mch_class_candidate_list:
             integrated_plug_in_dir_path = os.path.dirname(candidate_path) +\
                 os.sep

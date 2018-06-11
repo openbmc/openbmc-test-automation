@@ -57,7 +57,7 @@ def gen_get_options(parser,
                             " the desired stock parameter:\n" +\
                             gp.sprint_var(stock_list)
             return gv.process_error_message(error_message)
-        if type(stock_list[ix]) is tuple:
+        if isinstance(stock_list[ix], tuple):
             arg_name = stock_list[ix][0]
             default = stock_list[ix][1]
         else:
@@ -78,10 +78,10 @@ def gen_get_options(parser,
                 default=default,
                 type=int,
                 choices=[1, 0],
-                help='If this parameter is set to "1", %(prog)s' +
-                     ' will print only essential information, i.e. it will' +
-                     ' not echo parameters, echo commands, print the total' +
-                     ' run time, etc.' + default_string)
+                help='If this parameter is set to "1", %(prog)s'
+                     + ' will print only essential information, i.e. it will'
+                     + ' not echo parameters, echo commands, print the total'
+                     + ' run time, etc.' + default_string)
         elif arg_name == "test_mode":
             if default is None:
                 default = 0
@@ -90,10 +90,10 @@ def gen_get_options(parser,
                 default=default,
                 type=int,
                 choices=[1, 0],
-                help='This means that %(prog)s should go through all the' +
-                     ' motions but not actually do anything substantial.' +
-                     '  This is mainly to be used by the developer of' +
-                     ' %(prog)s.' + default_string)
+                help='This means that %(prog)s should go through all the'
+                     + ' motions but not actually do anything substantial.'
+                     + '  This is mainly to be used by the developer of'
+                     + ' %(prog)s.' + default_string)
         elif arg_name == "debug":
             if default is None:
                 default = 0
@@ -102,9 +102,9 @@ def gen_get_options(parser,
                 default=default,
                 type=int,
                 choices=[1, 0],
-                help='If this parameter is set to "1", %(prog)s will print' +
-                     ' additional debug information.  This is mainly to be' +
-                     ' used by the developer of %(prog)s.' + default_string)
+                help='If this parameter is set to "1", %(prog)s will print'
+                     + ' additional debug information.  This is mainly to be'
+                     + ' used by the developer of %(prog)s.' + default_string)
         elif arg_name == "loglevel":
             if default is None:
                 default = "info"
@@ -114,9 +114,9 @@ def gen_get_options(parser,
                 type=str,
                 choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL',
                          'debug', 'info', 'warning', 'error', 'critical'],
-                help='If this parameter is set to "1", %(prog)s will print' +
-                     ' additional debug information.  This is mainly to be' +
-                     ' used by the developer of %(prog)s.' + default_string)
+                help='If this parameter is set to "1", %(prog)s will print'
+                     + ' additional debug information.  This is mainly to be'
+                     + ' used by the developer of %(prog)s.' + default_string)
 
     arg_obj = parser.parse_args()
 
@@ -125,7 +125,7 @@ def gen_get_options(parser,
     __builtin__.debug = 0
     __builtin__.loglevel = 'WARNING'
     for ix in range(0, len(stock_list)):
-        if type(stock_list[ix]) is tuple:
+        if isinstance(stock_list[ix], tuple):
             arg_name = stock_list[ix][0]
             default = stock_list[ix][1]
         else:

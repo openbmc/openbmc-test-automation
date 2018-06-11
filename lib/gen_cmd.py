@@ -246,7 +246,7 @@ def parse_command_string(command_string):
             key = 'positional'
             value = command_string_list[ix]
         if key in command_string_dict:
-            if type(command_string_dict[key]) is str:
+            if isinstance(command_string_dict[key], str):
                 command_string_dict[key] = [command_string_dict[key]]
             command_string_dict[key].append(value)
         else:
@@ -443,9 +443,9 @@ def shell_cmd(command_string,
                 func_stdout += gp.sprint_error_report(err_msg)
         func_history_stdout += func_stdout
         if attempt_num < max_attempts:
-            func_history_stdout += gp.sprint_issuing("time.sleep(" +
-                                                     str(retry_sleep_time) +
-                                                     ")")
+            func_history_stdout += gp.sprint_issuing("time.sleep("
+                                                     + str(retry_sleep_time)
+                                                     + ")")
             time.sleep(retry_sleep_time)
 
     if shell_rc not in allowed_shell_rcs:
