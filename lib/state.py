@@ -592,7 +592,7 @@ def get_state(openbmc_host="",
             for url_path in ret_values:
                 for attr_name in ret_values[url_path]:
                     # Create a state key value based on the attr_name.
-                    if type(ret_values[url_path][attr_name]) is unicode:
+                    if isinstance(ret_values[url_path][attr_name], unicode):
                         ret_values[url_path][attr_name] = \
                             re.sub(r'.*\.', "",
                                    ret_values[url_path][attr_name])

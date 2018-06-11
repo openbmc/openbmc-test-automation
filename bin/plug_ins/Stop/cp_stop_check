@@ -56,7 +56,6 @@ stock_list = [("test_mode", 0),
 
 def exit_function(signal_number=0,
                   frame=None):
-
     r"""
     Execute whenever the program ends normally or with the signals that we
     catch (i.e. TERM, INT).
@@ -70,7 +69,6 @@ def exit_function(signal_number=0,
 
 def signal_handler(signal_number,
                    frame):
-
     r"""
     Handle signals.  Without a function to catch a SIGTERM or SIGINT, our
     program would terminate immediately with return code 143 and without
@@ -88,7 +86,6 @@ def signal_handler(signal_number,
 
 
 def validate_parms():
-
     r"""
     Validate program parameters, etc.  Return True or False (i.e. pass/fail)
     accordingly.
@@ -105,7 +102,6 @@ def validate_parms():
 
 
 def rest_fail():
-
     r"""
     If STOP_REST_FAIL, then this function will determine whether REST commands
     to the target are working.  If not, this function will stop the program by
@@ -139,7 +135,6 @@ def rest_fail():
 
 
 def esel_stop_check():
-
     r"""
     Run the esel_stop_check program to determine whether any eSEL entries
     found warrent stopping the test run.  See esel_stop_check help text for
@@ -194,6 +189,7 @@ def main():
     return True
 
 # Main
+
 
 if not main():
     exit(1)
