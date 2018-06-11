@@ -536,8 +536,8 @@ def get_state(openbmc_host="",
         # wait_until_keyword_succeeds to ensure a non-blank value is obtained.
         remote_cmd_buf = "read uptime filler 2>/dev/null < /proc/uptime" +\
             " && [ ! -z \"${uptime}\" ] && echo ${uptime}"
-        cmd_buf = ["BMC Execute Command", re.sub(r'\$', '\$', remote_cmd_buf),
-                   'quiet=1']
+        cmd_buf = ["BMC Execute Command",
+                   re.sub(r'\\$', '\\$', remote_cmd_buf), 'quiet=1']
         if not quiet:
             grp.rpissuing_keyword(cmd_buf)
             grp.rpissuing(remote_cmd_buf)
@@ -592,7 +592,7 @@ def get_state(openbmc_host="",
             for url_path in ret_values:
                 for attr_name in ret_values[url_path]:
                     # Create a state key value based on the attr_name.
-                    if type(ret_values[url_path][attr_name]) is unicode:
+                    if isinstance(ret_values[url_path][attr_name], unicode):
                         ret_values[url_path][attr_name] = \
                             re.sub(r'.*\.', "",
                                    ret_values[url_path][attr_name])
@@ -864,7 +864,7 @@ def wait_for_comm_cycle(start_boot_seconds,
     # a reboot has indeed occurred (vs random network instability giving a
     # false positive.  We also use wait_state because the BMC may take a short
     # while to be ready to process SSH requests.
-    match_state = DotDict([('uptime', '^[0-9\.]+$'),
+    match_state = DotDict([('uptime', '^[0-9\\.]+$'),
                            ('epoch_seconds', '^[0-9]+$')])
     state = wait_state(match_state, wait_time="2 mins", interval="1 second")
 

@@ -84,8 +84,7 @@ def ffdc(ffdc_dir_path=None,
                       ffdc_function_list)
 
     # Combine lists, remove duplicates and sort.
-    ffdc_file_list = list(set(ffdc_file_list + ffdc_file_sub_list))
-    ffdc_file_list.sort()
+    ffdc_file_list = sorted(set(ffdc_file_list + ffdc_file_sub_list))
 
     gp.qprint_timen("Finished collecting FFDC.")
 

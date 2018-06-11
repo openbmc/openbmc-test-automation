@@ -360,7 +360,6 @@ def pid_active(pid):
 
 def to_signed(number,
               bit_width=gp.bit_length(long(sys.maxsize)) + 1):
-
     r"""
     Convert number to a signed number and return the result.
 

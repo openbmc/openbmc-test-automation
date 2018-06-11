@@ -37,7 +37,7 @@ import run_keyword as rk
 # DB_Logging
 program_pid = os.getpid()
 master_pid = os.environ.get('AUTOBOOT_MASTER_PID', program_pid)
-pgm_name = re.sub('\.py$', '', os.path.basename(__file__))
+pgm_name = re.sub('\\.py$', '', os.path.basename(__file__))
 
 # Set up boot data structures.
 boot_table = create_boot_table()
@@ -621,8 +621,7 @@ def print_defect_report(ffdc_file_list):
 
     # Combine the files from plug_in_ffdc_list with the ffdc_file_list passed
     # in.  Eliminate duplicates and sort the list.
-    ffdc_file_list = list(set(ffdc_file_list + plug_in_ffdc_list))
-    ffdc_file_list.sort()
+    ffdc_file_list = sorted(set(ffdc_file_list + plug_in_ffdc_list))
 
     if status_file_path != "":
         ffdc_file_list.insert(0, status_file_path)
@@ -894,7 +893,7 @@ def obmc_boot_test_teardown():
         # Get the parm_value if it was saved on the stack.
         try:
             parm_value = save_stack.pop(parm_name)
-        except:
+        except BaseException:
             # If it was not saved, no further action is required.
             continue
 
