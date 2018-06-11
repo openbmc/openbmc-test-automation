@@ -206,15 +206,23 @@ Test Teardown Execution
 
 Open Browser With URL
     [Documentation]  Open browser with specified URL and returns browser id.
-    [Arguments]  ${URL}  ${browser}=ff
+    [Arguments]  ${URL}  ${browser}=ff  ${mode}=headless
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
     #          (e.g. https://openbmc-test.mybluemix.net/#/login )
     # browser  browser used to open above URL
     #          (e.g. gc for google chrome, ff for firefox)
+    # mode     Browser opening mode(e.g. headless, header)
+
+    Run Keyword If  '${mode}' == 'headless'
+    ...  Start Virtual Display  1920  1080
 
     ${browser_ID}=  Open Browser  ${URL}  ${browser}
+
+    Run Keyword If  '${mode}' == 'headless'
+    ...  Set Window Size  1920  1080
+
     [Return]  ${browser_ID}
 
 
