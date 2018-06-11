@@ -23,7 +23,6 @@ base_path = \
 
 
 def init_robot_out_parms(extra_prefix=""):
-
     r"""
     Initialize robot output parms such as outputdir, output, etc.
 
@@ -64,7 +63,6 @@ def init_robot_out_parms(extra_prefix=""):
 
 
 def init_robot_test_base_dir_path():
-
     r"""
     Initialize and validate the environment variable, ROBOT_TEST_BASE_DIR_PATH
     and set corresponding global variable ROBOT_TEST_RUNNING_FROM_SB.
@@ -116,9 +114,9 @@ def init_robot_test_base_dir_path():
                 gp.dprint_vars(ROBOT_TEST_RUNNING_FROM_SB)
                 ROBOT_TEST_BASE_DIR_PATH = developer_home_dir_path + suffix
                 if not os.path.isdir(ROBOT_TEST_BASE_DIR_PATH):
-                    gp.dprint_timen("NOTE: Sandbox directory" +
-                                    " ${ROBOT_TEST_BASE_DIR_PATH} does not" +
-                                    " exist.")
+                    gp.dprint_timen("NOTE: Sandbox directory"
+                                    + " ${ROBOT_TEST_BASE_DIR_PATH} does not"
+                                    + " exist.")
                     # Fall back to the apollo dir path.
                     ROBOT_TEST_BASE_DIR_PATH = apollo_dir_path + suffix
             else:
@@ -145,7 +143,6 @@ raw_robot_file_search_path = "${ROBOT_TEST_BASE_DIR_PATH}:" +\
 
 
 def init_robot_file_path(robot_file_path):
-
     r"""
     Determine full path name for the file path passed in robot_file_path and
     return it.
@@ -206,7 +203,6 @@ def init_robot_file_path(robot_file_path):
 
 
 def get_robot_parm_names():
-
     r"""
     Return a list containing all of the long parm names (e.g. --outputdir)
     supported by the robot program.  Double dashes are not included in the
@@ -214,15 +210,14 @@ def get_robot_parm_names():
     """
 
     cmd_buf = "robot -h | egrep " +\
-        "'^([ ]\-[a-zA-Z0-9])?[ ]+--[a-zA-Z0-9]+[ ]+' | sed -re" +\
-        " s'/.*\-\-//g' -e s'/ .*//g' | sort -u"
+        "'^([ ]\\-[a-zA-Z0-9])?[ ]+--[a-zA-Z0-9]+[ ]+' | sed -re" +\
+        " s'/.*\\-\\-//g' -e s'/ .*//g' | sort -u"
     shell_rc, out_buf = gc.shell_cmd(cmd_buf, quiet=1, print_output=0)
 
     return out_buf.split("\n")
 
 
 def create_robot_cmd_string(robot_file_path, *parms):
-
     r"""
     Create a robot command string and return it.  On failure, return an empty
     string.
@@ -281,7 +276,6 @@ def create_robot_cmd_string(robot_file_path, *parms):
 def robot_cmd_fnc(robot_cmd_buf,
                   robot_jail=os.environ.get('ROBOT_JAIL', ''),
                   gzip=1):
-
     r"""
     Run the robot command string.
 
@@ -384,12 +378,12 @@ def robot_cmd_fnc(robot_cmd_buf,
     # Retrieve the parms from the robot command buffer.
     robot_cmd_buf_dict = gc.parse_command_string(robot_cmd_buf)
     # Get prefix from the log parm.
-    prefix = re.sub('log\.html$', '', robot_cmd_buf_dict['log'])
+    prefix = re.sub('log\\.html$', '', robot_cmd_buf_dict['log'])
     gp.qprintn()
-    rc, outbuf = gc.cmd_fnc("cd " + robot_cmd_buf_dict['outputdir'] +
-                            " ; gzip " + robot_cmd_buf_dict['output'] +
-                            " " + robot_cmd_buf_dict['log'] +
-                            " " + robot_cmd_buf_dict['report'])
+    rc, outbuf = gc.cmd_fnc("cd " + robot_cmd_buf_dict['outputdir']
+                            + " ; gzip " + robot_cmd_buf_dict['output']
+                            + " " + robot_cmd_buf_dict['log']
+                            + " " + robot_cmd_buf_dict['report'])
 
     outputdir = gm.add_trailing_slash(robot_cmd_buf_dict['outputdir'])
     Output = outputdir + robot_cmd_buf_dict['output'] + ".gz"

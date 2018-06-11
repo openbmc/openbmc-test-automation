@@ -52,4 +52,3 @@ ipmi_rest_fru_field_map = {
         # "board_mfg_date": "BuildDate",
     }
 }
-

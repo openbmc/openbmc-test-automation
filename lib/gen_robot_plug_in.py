@@ -39,8 +39,8 @@ def rvalidate_plug_ins(plug_in_dir_paths,
     if rc != 0:
         message = gp.sprint_varx("rc", rc, 1) + out_buf
         grp.rprintn(out_buf, 'STDERR')
-        BuiltIn().fail(gp.sprint_error("Validate plug ins call failed.  See" +
-                                       " stderr text for details.\n"))
+        BuiltIn().fail(gp.sprint_error("Validate plug ins call failed.  See"
+                                       + " stderr text for details.\n"))
 
     plug_in_packages_list = out_buf.split("\n")
     if len(plug_in_packages_list) == 1 and plug_in_packages_list[0] == "":
@@ -174,8 +174,8 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
         if int(debug) == 1:
             grp.rpissuing(cmd_buf)
         else:
-            grp.rprint_timen("Processing " + call_point +
-                             " call point programs.")
+            grp.rprint_timen("Processing " + call_point
+                             + " call point programs.")
 
     proc_plug_pkg_rc = subprocess.call(cmd_buf, shell=True,
                                        executable='/bin/bash')
@@ -219,8 +219,8 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
         grp.rprint_varx("grep_rc", grep_rc, hex)
         grp.rprint_varx("proc_plug_pkg_rc", proc_plug_pkg_rc, hex)
         # Show all of the failed plug in names and shell_rcs.
-        gc.cmd_fnc_u("egrep -A 1 '^failed_plug_in_name:[ ]+' " +
-                     temp_properties_file_path, quiet=1, show_err=0)
+        gc.cmd_fnc_u("egrep -A 1 '^failed_plug_in_name:[ ]+' "
+                     + temp_properties_file_path, quiet=1, show_err=0)
         rc = 1
 
     return rc, shell_rc, failed_plug_in_name

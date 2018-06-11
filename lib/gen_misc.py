@@ -107,9 +107,9 @@ def get_mod_global(var_name,
     try:
         module = sys.modules[mod_name]
     except KeyError:
-        gp.print_error_report("Programmer error - The mod_name passed to" +
-                              " this function is invalid:\n" +
-                              gp.sprint_var(mod_name))
+        gp.print_error_report("Programmer error - The mod_name passed to"
+                              + " this function is invalid:\n"
+                              + gp.sprint_var(mod_name))
         raise ValueError('Programmer error.')
 
     if default is None:
@@ -161,9 +161,9 @@ def set_mod_global(var_value,
     try:
         module = sys.modules[mod_name]
     except KeyError:
-        gp.print_error_report("Programmer error - The mod_name passed to" +
-                              " this function is invalid:\n" +
-                              gp.sprint_var(mod_name))
+        gp.print_error_report("Programmer error - The mod_name passed to"
+                              + " this function is invalid:\n"
+                              + gp.sprint_var(mod_name))
         raise ValueError('Programmer error.')
 
     if var_name is None:
@@ -360,7 +360,6 @@ def pid_active(pid):
 
 def to_signed(number,
               bit_width=gp.bit_length(long(sys.maxsize)) + 1):
-
     r"""
     Convert number to a signed number and return the result.
 

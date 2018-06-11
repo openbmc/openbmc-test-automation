@@ -33,10 +33,14 @@ def get_dump_dict(quiet=None):
     Example output:
 
     dump_dict:
-      [1]: /var/lib/phosphor-debug-collector/dumps/1/obmcdump_1_1508255216.tar.xz
-      [2]: /var/lib/phosphor-debug-collector/dumps/2/obmcdump_2_1508255245.tar.xz
-      [3]: /var/lib/phosphor-debug-collector/dumps/3/obmcdump_3_1508255267.tar.xz
-      [4]: /var/lib/phosphor-debug-collector/dumps/4/obmcdump_4_1508255283.tar.xz
+      [1]:
+      /var/lib/phosphor-debug-collector/dumps/1/obmcdump_1_1508255216.tar.xz
+      [2]:
+      /var/lib/phosphor-debug-collector/dumps/2/obmcdump_2_1508255245.tar.xz
+      [3]:
+      /var/lib/phosphor-debug-collector/dumps/3/obmcdump_3_1508255267.tar.xz
+      [4]:
+      /var/lib/phosphor-debug-collector/dumps/4/obmcdump_4_1508255283.tar.xz
 
     Description of argument(s):
     quiet                           If quiet is set to 1, this function will
@@ -123,8 +127,8 @@ def scp_dumps(targ_dir_path,
     for dump_id, source_file_path in dump_dict.iteritems():
         targ_file_path = targ_dir_path + targ_file_prefix \
             + os.path.basename(source_file_path)
-        status, ret_values = grk.run_key("scp.Get File  " + source_file_path +
-                                         "  " + targ_file_path, quiet=quiet)
+        status, ret_values = grk.run_key("scp.Get File  " + source_file_path
+                                         + "  " + targ_file_path, quiet=quiet)
         dump_file_list.append(targ_file_path)
 
     return dump_file_list

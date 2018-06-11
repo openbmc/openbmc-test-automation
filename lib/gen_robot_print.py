@@ -84,7 +84,7 @@ def sprint_vars(*args):
 
     # See if parm 1 is to be interpreted as "hex".
     try:
-        if type(int(args_list[0])) is int:
+        if isinstance(int(args_list[0]), int):
             hex = int(args_list[0])
             args_list.pop(0)
     except ValueError:
@@ -92,7 +92,7 @@ def sprint_vars(*args):
 
     # See if parm 2 is to be interpreted as "indent".
     try:
-        if type(int(args_list[0])) is int:
+        if isinstance(int(args_list[0]), int):
             indent = int(args_list[0])
             args_list.pop(0)
     except ValueError:
@@ -100,7 +100,7 @@ def sprint_vars(*args):
 
     # See if parm 3 is to be interpreted as "col1_width".
     try:
-        if type(int(args_list[0])) is int:
+        if isinstance(int(args_list[0]), int):
             loc_col1_width = int(args_list[0])
             args_list.pop(0)
     except ValueError:
@@ -259,10 +259,10 @@ for func_name in func_names:
         func_def = \
             [
                 "def " + robot_prefix + func_name + "(*args):",
-                "    s_func = getattr(" + object_name + ", \"s" + func_name +
-                "\")",
-                "    BuiltIn().log_to_console" +
-                "(gp.replace_passwords(s_func(*args)),"
+                "    s_func = getattr(" + object_name + ", \"s" + func_name
+                + "\")",
+                "    BuiltIn().log_to_console"
+                + "(gp.replace_passwords(s_func(*args)),"
                 " stream='" + output_stream + "',"
                 " no_newline=True)"
             ]

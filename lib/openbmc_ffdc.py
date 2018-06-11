@@ -50,8 +50,8 @@ def ffdc(ffdc_dir_path=None,
         return ffdc_file_list
 
     if state['uptime'] == "":
-        gp.print_error("BMC is not communicating.  Terminating FFDC" +
-                       " collection.\n")
+        gp.print_error("BMC is not communicating.  Terminating FFDC"
+                       + " collection.\n")
         return ffdc_file_list
 
     gp.qprint_timen("Collecting FFDC.")
@@ -69,9 +69,9 @@ def ffdc(ffdc_dir_path=None,
     grp.rqpissuing_keyword(cmd_buf)
     status, output = BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
     if status != "PASS":
-        error_message = grp.sprint_error_report("Create Directory failed" +
-                                                " with the following" +
-                                                " error:\n" + output)
+        error_message = grp.sprint_error_report("Create Directory failed"
+                                                + " with the following"
+                                                + " error:\n" + output)
         BuiltIn().fail(error_message)
 
     # FFDC_FILE_PATH is used by Header Message.
@@ -80,12 +80,11 @@ def ffdc(ffdc_dir_path=None,
 
     status, ffdc_file_list = grk.run_key("Header Message")
     status, ffdc_file_sub_list = \
-        grk.run_key_u("Call FFDC Methods  ffdc_function_list=" +
-                      ffdc_function_list)
+        grk.run_key_u("Call FFDC Methods  ffdc_function_list="
+                      + ffdc_function_list)
 
     # Combine lists, remove duplicates and sort.
-    ffdc_file_list = list(set(ffdc_file_list + ffdc_file_sub_list))
-    ffdc_file_list.sort()
+    ffdc_file_list = sorted(set(ffdc_file_list + ffdc_file_sub_list))
 
     gp.qprint_timen("Finished collecting FFDC.")
 

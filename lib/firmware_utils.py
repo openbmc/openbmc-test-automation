@@ -14,8 +14,8 @@ def get_hard_disk_info(device="/dev/sdb"):
     dictionary.
 
     Description of argument(s):
-    device  The device to be passed to the hdparm and lsblk commands (e.g.
-            "/dev/sdb").
+    device                          The device to be passed to the hdparm and
+                                    lsblk commands (e.g. "/dev/sdb").
 
     Example result:
 
@@ -23,7 +23,8 @@ def get_hard_disk_info(device="/dev/sdb"):
       [model_number]:                        MTFDDAK1T9TCB 00LY461 00LY570IBM
       [serial_number]:                       179C413F
       [firmware_revision]:                   MJ06
-      [transport]:                           Serial, ATA8-AST, SATA 1.0a, SATA II Extensions, SATA Rev 2.5, SATA Rev 2.6, SATA Rev 3.0
+      [transport]:                           Serial, ATA8-AST, SATA 1.0a, SATA II Extensions, SATA Rev 2.5,
+                                             SATA Rev 2.6, SATA Rev 3.0
       [used]:                                unknown (minor revision code 0x006d)
       [supported]:                           enhanced erase
       [likely_used]:                         10
