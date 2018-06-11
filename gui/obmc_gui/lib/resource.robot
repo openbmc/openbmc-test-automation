@@ -205,7 +205,7 @@ Test Teardown Execution
 
 Open Browser With URL
     [Documentation]  Open browser with specified URL and returns browser id.
-    [Arguments]  ${URL}  ${browser}=gc
+    [Arguments]  ${URL}  ${browser}=ff
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
