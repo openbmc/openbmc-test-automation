@@ -222,7 +222,7 @@ def svalid_integer(var_value,
     success_message = ""
     error_message = ""
     try:
-        if type(int(str(var_value), 0)) is int:
+        if isinstance(int(str(var_value), 0), int):
             return success_message
     except ValueError:
         pass

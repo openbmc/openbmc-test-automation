@@ -176,34 +176,53 @@ FRU_INSTANCES = {
     '<inventory_root>/system/chassis/motherboard/bmc': {'fru_type': 'BMC', 'is_fru': False,
                                                         'manufacturer': 'ASPEED'},
     '<inventory_root>/system/chassis/motherboard/cpu': {'fru_type': 'CPU', 'is_fru': True, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core0': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core1': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core2': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core3': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core4': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core5': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core6': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core7': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core8': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core9': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core10': {'fru_type': 'CORE', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/cpu/core11': {'fru_type': 'CORE', 'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core0': {'fru_type': 'CORE',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core1': {'fru_type': 'CORE',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core2': {'fru_type': 'CORE',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core3': {'fru_type': 'CORE',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core4': {'fru_type': 'CORE',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core5': {'fru_type': 'CORE',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core6': {'fru_type': 'CORE',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core7': {'fru_type': 'CORE',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core8': {'fru_type': 'CORE',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core9': {'fru_type': 'CORE',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core10': {'fru_type': 'CORE',
+                                                               'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/cpu/core11': {'fru_type': 'CORE',
+                                                               'is_fru': False, },
 
-    '<inventory_root>/system/chassis/motherboard/membuf': {'fru_type': 'MEMORY_BUFFER', 'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/membuf': {'fru_type': 'MEMORY_BUFFER',
+                                                           'is_fru': False, },
 
     '<inventory_root>/system/chassis/motherboard/dimm0': {'fru_type': 'DIMM', 'is_fru': True, },
     '<inventory_root>/system/chassis/motherboard/dimm1': {'fru_type': 'DIMM', 'is_fru': True, },
     '<inventory_root>/system/chassis/motherboard/dimm2': {'fru_type': 'DIMM', 'is_fru': True, },
     '<inventory_root>/system/chassis/motherboard/dimm3': {'fru_type': 'DIMM', 'is_fru': True, },
 
-    '<inventory_root>/system/chassis/io_board/pcie_slot0': {'fru_type': 'PCIE_CARD', 'is_fru': True, },
-    '<inventory_root>/system/chassis/io_board/pcie_slot1': {'fru_type': 'PCIE_CARD', 'is_fru': True, },
+    '<inventory_root>/system/chassis/io_board/pcie_slot0': {'fru_type': 'PCIE_CARD',
+                                                            'is_fru': True, },
+    '<inventory_root>/system/chassis/io_board/pcie_slot1': {'fru_type': 'PCIE_CARD',
+                                                            'is_fru': True, },
 
     '<inventory_root>/system/systemevent': {'fru_type': 'SYSTEM_EVENT', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/refclock': {'fru_type': 'MAIN_PLANAR', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/pcieclock': {'fru_type': 'MAIN_PLANAR', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/todclock': {'fru_type': 'MAIN_PLANAR', 'is_fru': False, },
-    '<inventory_root>/system/chassis/motherboard/apss': {'fru_type': 'MAIN_PLANAR', 'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/refclock': {'fru_type': 'MAIN_PLANAR',
+                                                             'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/pcieclock': {'fru_type': 'MAIN_PLANAR',
+                                                              'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/todclock': {'fru_type': 'MAIN_PLANAR',
+                                                             'is_fru': False, },
+    '<inventory_root>/system/chassis/motherboard/apss': {'fru_type': 'MAIN_PLANAR',
+                                                         'is_fru': False, },
 }
 
 ID_LOOKUP = {
@@ -291,25 +310,32 @@ def convertGpio(name):
     name = name.upper()
     c = name[0:1]
     offset = int(name[1:])
-    a = ord(c)-65
-    base = a*8+GPIO_BASE
-    return base+offset
+    a = ord(c) - 65
+    base = a * 8 + GPIO_BASE
+    return base + offset
 
 
 HWMON_CONFIG = {
-    '2-004c':  {
+    '2-004c': {
         'names': {
-            'temp1_input': {'object_path': 'temperature/ambient', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
+            'temp1_input': {'object_path': 'temperature/ambient', 'poll_interval': 5000,
+                            'scale': 1000, 'units': 'C'},
         }
     },
     '3-0050': {
         'names': {
-            'caps_curr_powercap': {'object_path': 'powercap/curr_cap', 'poll_interval': 10000, 'scale': 1, 'units': 'W'},
-            'caps_curr_powerreading': {'object_path': 'powercap/system_power', 'poll_interval': 10000, 'scale': 1, 'units': 'W'},
-            'caps_max_powercap': {'object_path': 'powercap/max_cap', 'poll_interval': 10000, 'scale': 1, 'units': 'W'},
-            'caps_min_powercap': {'object_path': 'powercap/min_cap', 'poll_interval': 10000, 'scale': 1, 'units': 'W'},
-            'caps_norm_powercap': {'object_path': 'powercap/n_cap', 'poll_interval': 10000, 'scale': 1, 'units': 'W'},
-            'caps_user_powerlimit': {'object_path': 'powercap/user_cap', 'poll_interval': 10000, 'scale': 1, 'units': 'W'},
+            'caps_curr_powercap': {'object_path': 'powercap/curr_cap', 'poll_interval': 10000,
+                                   'scale': 1, 'units': 'W'},
+            'caps_curr_powerreading': {'object_path': 'powercap/system_power',
+                                       'poll_interval': 10000, 'scale': 1, 'units': 'W'},
+            'caps_max_powercap': {'object_path': 'powercap/max_cap', 'poll_interval': 10000,
+                                  'scale': 1, 'units': 'W'},
+            'caps_min_powercap': {'object_path': 'powercap/min_cap', 'poll_interval': 10000,
+                                  'scale': 1, 'units': 'W'},
+            'caps_norm_powercap': {'object_path': 'powercap/n_cap', 'poll_interval': 10000,
+                                   'scale': 1, 'units': 'W'},
+            'caps_user_powerlimit': {'object_path': 'powercap/user_cap', 'poll_interval': 10000,
+                                     'scale': 1, 'units': 'W'},
         }
     }
 }

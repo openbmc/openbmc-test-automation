@@ -33,10 +33,14 @@ def get_dump_dict(quiet=None):
     Example output:
 
     dump_dict:
-      [1]: /var/lib/phosphor-debug-collector/dumps/1/obmcdump_1_1508255216.tar.xz
-      [2]: /var/lib/phosphor-debug-collector/dumps/2/obmcdump_2_1508255245.tar.xz
-      [3]: /var/lib/phosphor-debug-collector/dumps/3/obmcdump_3_1508255267.tar.xz
-      [4]: /var/lib/phosphor-debug-collector/dumps/4/obmcdump_4_1508255283.tar.xz
+      [1]:
+      /var/lib/phosphor-debug-collector/dumps/1/obmcdump_1_1508255216.tar.xz
+      [2]:
+      /var/lib/phosphor-debug-collector/dumps/2/obmcdump_2_1508255245.tar.xz
+      [3]:
+      /var/lib/phosphor-debug-collector/dumps/3/obmcdump_3_1508255267.tar.xz
+      [4]:
+      /var/lib/phosphor-debug-collector/dumps/4/obmcdump_4_1508255283.tar.xz
 
     Description of argument(s):
     quiet                           If quiet is set to 1, this function will

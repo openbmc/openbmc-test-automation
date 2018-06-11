@@ -125,9 +125,10 @@ class state_map():
         Validate a given set of states is valid.
 
         Description of argument(s):
-        boot_type   Boot type (e.g. off/running/host booted etc.)
-        state_set   State set
-                    (e.g.bmc,chassis,host,BootProgress,OperatingSystemState)
+        boot_type                   Boot type (e.g. off/running/host booted
+                                    etc.)
+        state_set                   State set (e.g.bmc,chassis,host,
+                                    BootProgress,OperatingSystemState)
         """
 
         if state_set in set(VALID_BOOT_STATES[boot_type]):

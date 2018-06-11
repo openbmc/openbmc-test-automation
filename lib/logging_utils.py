@@ -24,12 +24,14 @@ def print_error_logs(error_logs, key_list=None):
       directly from a robot script.
 
     Description of argument(s):
-    error_logs  An error log dictionary such as the one returned by the
-                'Get Error Logs' keyword.
-    key_list    The list of keys to be printed.  This may be specified as
-                either a python list or a space-delimited string.  In the
-                latter case, this function will convert it to a python list.
-                See the sprint_varx function prolog for additionatl details.
+    error_logs                      An error log dictionary such as the one
+                                    returned by the 'Get Error Logs' keyword.
+    key_list                        The list of keys to be printed.  This may
+                                    be specified as either a python list
+                                    or a space-delimited string.  In the
+                                    latter case, this function will convert
+                                    it to a python list. See the sprint_varx
+                                    function prolog for additionatl details.
 
     Example use from a python script:
 
@@ -41,16 +43,20 @@ def print_error_logs(error_logs, key_list=None):
     error_logs:
       [/xyz/openbmc_project/logging/entry/3]:
         [Timestamp]:                                  1521738335735
-        [Message]:                                    xyz.openbmc_project.Inventory.Error.Nonfunctional
+        [Message]:
+        xyz.openbmc_project.Inventory.Error.Nonfunctional
       [/xyz/openbmc_project/logging/entry/2]:
         [Timestamp]:                                  1521738334637
-        [Message]:                                    xyz.openbmc_project.Inventory.Error.Nonfunctional
+        [Message]:
+        xyz.openbmc_project.Inventory.Error.Nonfunctional
       [/xyz/openbmc_project/logging/entry/1]:
         [Timestamp]:                                  1521738300696
-        [Message]:                                    xyz.openbmc_project.Inventory.Error.Nonfunctional
+        [Message]:
+        xyz.openbmc_project.Inventory.Error.Nonfunctional
       [/xyz/openbmc_project/logging/entry/4]:
         [Timestamp]:                                  1521738337915
-        [Message]:                                    xyz.openbmc_project.Inventory.Error.Nonfunctional
+        [Message]:
+        xyz.openbmc_project.Inventory.Error.Nonfunctional
 
     Another example call using a robot list:
     ${error_logs}=  Get Error Logs
