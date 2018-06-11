@@ -291,13 +291,13 @@ def convertGpio(name):
     name = name.upper()
     c = name[0:1]
     offset = int(name[1:])
-    a = ord(c)-65
-    base = a*8+GPIO_BASE
-    return base+offset
+    a = ord(c) - 65
+    base = a * 8 + GPIO_BASE
+    return base + offset
 
 
 HWMON_CONFIG = {
-    '2-004c':  {
+    '2-004c': {
         'names': {
             'temp1_input': {'object_path': 'temperature/ambient', 'poll_interval': 5000, 'scale': 1000, 'units': 'C'},
         }

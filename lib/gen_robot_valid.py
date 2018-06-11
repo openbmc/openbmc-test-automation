@@ -173,7 +173,7 @@ def rvalid_range(var_name,
         error_message = "Variable \"" + var_name +\
                         "\" not found (i.e. it's undefined).\n"
     else:
-        if type(range) is unicode:
+        if isinstance(range, unicode):
             range = range.split("..")
         if range[0] == "":
             range[0] = None
