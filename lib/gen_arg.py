@@ -57,7 +57,7 @@ def gen_get_options(parser,
                             " the desired stock parameter:\n" +\
                             gp.sprint_var(stock_list)
             return gv.process_error_message(error_message)
-        if type(stock_list[ix]) is tuple:
+        if isinstance(stock_list[ix], tuple):
             arg_name = stock_list[ix][0]
             default = stock_list[ix][1]
         else:
@@ -125,7 +125,7 @@ def gen_get_options(parser,
     __builtin__.debug = 0
     __builtin__.loglevel = 'WARNING'
     for ix in range(0, len(stock_list)):
-        if type(stock_list[ix]) is tuple:
+        if isinstance(stock_list[ix], tuple):
             arg_name = stock_list[ix][0]
             default = stock_list[ix][1]
         else:
