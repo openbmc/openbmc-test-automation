@@ -246,7 +246,7 @@ def parse_command_string(command_string):
             key = 'positional'
             value = command_string_list[ix]
         if key in command_string_dict:
-            if type(command_string_dict[key]) is str:
+            if isinstance(command_string_dict[key], str):
                 command_string_dict[key] = [command_string_dict[key]]
             command_string_dict[key].append(value)
         else:

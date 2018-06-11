@@ -271,7 +271,7 @@ class tally_sheet:
         first_rec = next(iter(self.__table.items()))
         for row_key, value in first_rec[1].items():
             field_num += 1
-            if type(value) is int:
+            if isinstance(value, int):
                 align = ':>'
             else:
                 align = ':<'

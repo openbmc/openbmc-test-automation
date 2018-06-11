@@ -66,11 +66,11 @@ def get_issues_from_github_to_csv(name, response):
 
     # Multiple requests are required if response is paged
     if 'link' in response.headers:
-        pages = {rel[6:-1]: url[url.index('<')+1:-1] for url, rel in
+        pages = {rel[6:-1]: url[url.index('<') + 1:-1] for url, rel in
                  (link.split(';') for link in
                   response.headers['link'].split(','))}
         while 'last' in pages and 'next' in pages:
-            pages = {rel[6:-1]: url[url.index('<')+1:-1] for url, rel in
+            pages = {rel[6:-1]: url[url.index('<') + 1:-1] for url, rel in
                      (link.split(';') for link in
                       response.headers['link'].split(','))}
             response = requests.get(pages['next'], auth=auth)
@@ -106,8 +106,8 @@ auth = (username, password)
 csvfilename = ""
 for repository in args.repositories:
     csvfilename_temp = '{}'.format(repository.replace('/', '-'))
-    csvfilename = csvfilename+csvfilename_temp
-csvfilename = csvfilename+'-issues.csv'
+    csvfilename = csvfilename + csvfilename_temp
+csvfilename = csvfilename + '-issues.csv'
 with open(csvfilename, 'wb') as csvfileout:
     csv_out = csv.writer(csvfileout)
     csv_out.writerow(['Labels', 'Title', 'State', 'Open Date',

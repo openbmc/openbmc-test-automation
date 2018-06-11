@@ -27,7 +27,7 @@ try:
     # are in a robot environment.  The following try block should confirm that.
     try:
         var_value = BuiltIn().get_variable_value("${SUITE_NAME}", "")
-    except:
+    except BaseException:
         robot_env = 0
 except ImportError:
     robot_env = 0
@@ -805,7 +805,7 @@ def sprint_varx(var_name,
                                     var_value & 0xffffffff)
         else:
             return format_string % ("", str(var_name) + ":", var_value)
-    elif type(var_value) is type:
+    elif isinstance(var_value, type):
         return sprint_varx(var_name, str(var_value).split("'")[1], hex,
                            loc_col1_indent, loc_col1_width, trailing_char,
                            key_list)
@@ -821,20 +821,20 @@ def sprint_varx(var_name,
         ix = 0
         loc_trailing_char = "\n"
         type_is_dict = 0
-        if type(var_value) is dict:
+        if isinstance(var_value, dict):
             type_is_dict = 1
         try:
-            if type(var_value) is collections.OrderedDict:
+            if isinstance(var_value, collections.OrderedDict):
                 type_is_dict = 1
         except AttributeError:
             pass
         try:
-            if type(var_value) is DotDict:
+            if isinstance(var_value, DotDict):
                 type_is_dict = 1
         except NameError:
             pass
         try:
-            if type(var_value) is NormalizedDict:
+            if isinstance(var_value, NormalizedDict):
                 type_is_dict = 1
         except NameError:
             pass
@@ -851,7 +851,7 @@ def sprint_varx(var_name,
                     # Since hex is being used as a format type, we want it
                     # turned off when processing integer dictionary values so
                     # it is not interpreted as a hex indicator.
-                    loc_hex = not (type(value) is int)
+                    loc_hex = not (isinstance(value, int))
                     buffer += sprint_varx("[" + key + "]", value,
                                           loc_hex, loc_col1_indent,
                                           loc_col1_width,
@@ -870,7 +870,7 @@ def sprint_varx(var_name,
                 buffer += sprint_varx(var_name + "[" + str(key) + "]", value,
                                       hex, loc_col1_indent, loc_col1_width,
                                       loc_trailing_char, key_list)
-        elif type(var_value) is argparse.Namespace:
+        elif isinstance(var_value, argparse.Namespace):
             for key in var_value.__dict__:
                 ix += 1
                 if ix == length:
@@ -956,7 +956,7 @@ def sprint_vars(*args):
     var_name = get_arg_name(None, parm_num, stack_frame)
     # See if parm 1 is to be interpreted as "indent".
     try:
-        if type(int(var_name)) is int:
+        if isinstance(int(var_name), int):
             indent = int(var_name)
             args_list.pop(0)
             parm_num += 1
@@ -966,7 +966,7 @@ def sprint_vars(*args):
     var_name = get_arg_name(None, parm_num, stack_frame)
     # See if parm 1 is to be interpreted as "col1_width".
     try:
-        if type(int(var_name)) is int:
+        if isinstance(int(var_name), int):
             loc_col1_width = int(var_name)
             args_list.pop(0)
             parm_num += 1
@@ -976,7 +976,7 @@ def sprint_vars(*args):
     var_name = get_arg_name(None, parm_num, stack_frame)
     # See if parm 1 is to be interpreted as "hex".
     try:
-        if type(int(var_name)) is int:
+        if isinstance(int(var_name), int):
             hex = int(var_name)
             args_list.pop(0)
             parm_num += 1
@@ -1516,7 +1516,6 @@ def get_var_value(var_value=None,
 def get_stack_var(var_name,
                   default="",
                   init_stack_ix=2):
-
     r"""
     Starting with the caller's stack level, search upward in the call stack,
     for a variable named var_name and return its value.  If the variable
@@ -1548,8 +1547,8 @@ def get_stack_var(var_name,
     """
 
     return next((frame[0].f_locals[var_name]
-                for frame in inspect.stack()[init_stack_ix:]
-                if var_name in frame[0].f_locals), default)
+                 for frame in inspect.stack()[init_stack_ix:]
+                 if var_name in frame[0].f_locals), default)
 
 
 # hidden_text is a list of passwords which are to be replaced with asterisks

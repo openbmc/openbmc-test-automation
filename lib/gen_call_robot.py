@@ -23,7 +23,6 @@ base_path = \
 
 
 def init_robot_out_parms(extra_prefix=""):
-
     r"""
     Initialize robot output parms such as outputdir, output, etc.
 
@@ -64,7 +63,6 @@ def init_robot_out_parms(extra_prefix=""):
 
 
 def init_robot_test_base_dir_path():
-
     r"""
     Initialize and validate the environment variable, ROBOT_TEST_BASE_DIR_PATH
     and set corresponding global variable ROBOT_TEST_RUNNING_FROM_SB.
@@ -145,7 +143,6 @@ raw_robot_file_search_path = "${ROBOT_TEST_BASE_DIR_PATH}:" +\
 
 
 def init_robot_file_path(robot_file_path):
-
     r"""
     Determine full path name for the file path passed in robot_file_path and
     return it.
@@ -206,7 +203,6 @@ def init_robot_file_path(robot_file_path):
 
 
 def get_robot_parm_names():
-
     r"""
     Return a list containing all of the long parm names (e.g. --outputdir)
     supported by the robot program.  Double dashes are not included in the
@@ -222,7 +218,6 @@ def get_robot_parm_names():
 
 
 def create_robot_cmd_string(robot_file_path, *parms):
-
     r"""
     Create a robot command string and return it.  On failure, return an empty
     string.
@@ -281,7 +276,6 @@ def create_robot_cmd_string(robot_file_path, *parms):
 def robot_cmd_fnc(robot_cmd_buf,
                   robot_jail=os.environ.get('ROBOT_JAIL', ''),
                   gzip=1):
-
     r"""
     Run the robot command string.
 
