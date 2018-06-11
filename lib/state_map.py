@@ -104,8 +104,8 @@ class state_map():
         BootProgress and OperatingSystemState.
         """
 
-        status, state = keyword.run_key("Read Properties  " +
-                                        var.SYSTEM_STATE_URI + "enumerate")
+        status, state = keyword.run_key("Read Properties  "
+                                        + var.SYSTEM_STATE_URI + "enumerate")
         bmc_state = state[var.SYSTEM_STATE_URI + 'bmc0']['CurrentBMCState']
         chassis_state = \
             state[var.SYSTEM_STATE_URI + 'chassis0']['CurrentPowerState']
@@ -125,9 +125,10 @@ class state_map():
         Validate a given set of states is valid.
 
         Description of argument(s):
-        boot_type   Boot type (e.g. off/running/host booted etc.)
-        state_set   State set
-                    (e.g.bmc,chassis,host,BootProgress,OperatingSystemState)
+        boot_type                   Boot type (e.g. off/running/host booted
+                                    etc.)
+        state_set                   State set (e.g.bmc,chassis,host,
+                                    BootProgress,OperatingSystemState)
         """
 
         if state_set in set(VALID_BOOT_STATES[boot_type]):

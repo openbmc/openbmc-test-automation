@@ -31,20 +31,20 @@ def get_inventory_sensor(module_name, value):
 
 def get_inventory_list(module_name):
 
-    l = []
+    inventory_list = []
     m = imp.load_source('module.name', module_name)
 
     for i in m.ID_LOOKUP['FRU']:
         s = m.ID_LOOKUP['FRU'][i]
         s = s.replace('<inventory_root>', m.INVENTORY_ROOT)
-        l.append(s)
+        inventory_list.append(s)
 
-    return l
+    return inventory_list
 
 
 def get_inventory_fru_type_list(module_name, fru_type):
 
-    l = []
+    inventory_list = []
     m = imp.load_source('module.name', module_name)
 
     for i in m.FRU_INSTANCES.keys():
@@ -52,9 +52,9 @@ def get_inventory_fru_type_list(module_name, fru_type):
             print 'found one'
 
             s = i.replace('<inventory_root>', m.INVENTORY_ROOT)
-            l.append(s)
+            inventory_list.append(s)
 
-    return l
+    return inventory_list
 
 
 def call_keyword(keyword):

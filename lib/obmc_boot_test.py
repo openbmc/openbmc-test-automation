@@ -37,7 +37,7 @@ import run_keyword as rk
 # DB_Logging
 program_pid = os.getpid()
 master_pid = os.environ.get('AUTOBOOT_MASTER_PID', program_pid)
-pgm_name = re.sub('\.py$', '', os.path.basename(__file__))
+pgm_name = re.sub('\\.py$', '', os.path.basename(__file__))
 
 # Set up boot data structures.
 boot_table = create_boot_table()
@@ -327,8 +327,8 @@ def setup():
     repo_bin_path = robot_pgm_dir_path.replace("/lib/", "/bin/")
     # If we can't find process_plug_in_packages.py, ssh_pw or
     # validate_plug_ins.py, then we don't have our repo bin in PATH.
-    shell_rc, out_buf = gc.cmd_fnc_u("which process_plug_in_packages.py" +
-                                     " ssh_pw validate_plug_ins.py", quiet=1,
+    shell_rc, out_buf = gc.cmd_fnc_u("which process_plug_in_packages.py"
+                                     + " ssh_pw validate_plug_ins.py", quiet=1,
                                      print_output=0, show_err=0)
     if shell_rc != 0:
         os.environ['PATH'] = repo_bin_path + ":" + os.environ.get('PATH', "")
@@ -480,12 +480,12 @@ def select_boot():
     if transitional_boot_selected and not boot_success:
         prior_boot = next_boot
         boot_candidate = boot_stack.pop()
-        gp.qprint_timen("The prior '" + next_boot + "' was chosen to" +
-                        " transition to a valid state for '" + boot_candidate +
-                        "' which was at the top of the boot_stack.  Since" +
-                        " the '" + next_boot + "' failed, the '" +
-                        boot_candidate + "' has been removed from the stack" +
-                        " to avoid and endless failure loop.")
+        gp.qprint_timen("The prior '" + next_boot + "' was chosen to"
+                        + " transition to a valid state for '" + boot_candidate
+                        + "' which was at the top of the boot_stack.  Since"
+                        + " the '" + next_boot + "' failed, the '"
+                        + boot_candidate + "' has been removed from the stack"
+                        + " to avoid and endless failure loop.")
         if len(boot_stack) == 0:
             return ""
 
@@ -509,10 +509,10 @@ def select_boot():
                     if not skip_boot_printed:
                         gp.qprint_var(stack_mode)
                         gp.qprintn()
-                        gp.qprint_timen("Skipping the following boot tests" +
-                                        " which are unnecessary since their" +
-                                        " required end states match the" +
-                                        " current machine state:")
+                        gp.qprint_timen("Skipping the following boot tests"
+                                        + " which are unnecessary since their"
+                                        + " required end states match the"
+                                        + " current machine state:")
                         skip_boot_printed = 1
                     gp.qprint_var(boot_candidate)
                     boot_candidate = ""
@@ -522,16 +522,16 @@ def select_boot():
             gp.qprint_dashes()
             return boot_candidate
         if st.compare_states(state, boot_table[boot_candidate]['start']):
-            gp.qprint_timen("The machine state is valid for a '" +
-                            boot_candidate + "' boot test.")
+            gp.qprint_timen("The machine state is valid for a '"
+                            + boot_candidate + "' boot test.")
             gp.qprint_dashes()
             gp.qprint_var(boot_stack)
             gp.qprint_dashes()
             return boot_candidate
         else:
-            gp.qprint_timen("The machine state does not match the required" +
-                            " starting state for a '" + boot_candidate +
-                            "' boot test:")
+            gp.qprint_timen("The machine state does not match the required"
+                            + " starting state for a '" + boot_candidate
+                            + "' boot test:")
             gp.qprint_varx("boot_table[" + boot_candidate + "][start]",
                            boot_table[boot_candidate]['start'], 1)
             boot_stack.append(boot_candidate)
@@ -550,14 +550,14 @@ def select_boot():
                 boot_candidates.append(boot_candidate)
 
     if len(boot_candidates) == 0:
-        gp.qprint_timen("The user's boot list contained no boot tests" +
-                        " which are valid for the current machine state.")
+        gp.qprint_timen("The user's boot list contained no boot tests"
+                        + " which are valid for the current machine state.")
         boot_candidate = default_power_on
         if not st.compare_states(state, boot_table[default_power_on]['start']):
             boot_candidate = default_power_off
         boot_candidates.append(boot_candidate)
-        gp.qprint_timen("Using default '" + boot_candidate +
-                        "' boot type to transition to valid state.")
+        gp.qprint_timen("Using default '" + boot_candidate
+                        + "' boot type to transition to valid state.")
 
     gp.dprint_var(boot_candidates)
 
@@ -621,8 +621,7 @@ def print_defect_report(ffdc_file_list):
 
     # Combine the files from plug_in_ffdc_list with the ffdc_file_list passed
     # in.  Eliminate duplicates and sort the list.
-    ffdc_file_list = list(set(ffdc_file_list + plug_in_ffdc_list))
-    ffdc_file_list.sort()
+    ffdc_file_list = sorted(set(ffdc_file_list + plug_in_ffdc_list))
 
     if status_file_path != "":
         ffdc_file_list.insert(0, status_file_path)
@@ -681,10 +680,10 @@ def my_ffdc():
         call_point='ffdc', stop_on_plug_in_failure=0)
 
     AUTOBOOT_FFDC_PREFIX = os.environ['AUTOBOOT_FFDC_PREFIX']
-    status, ffdc_file_list = grk.run_key_u("FFDC  ffdc_prefix=" +
-                                           AUTOBOOT_FFDC_PREFIX +
-                                           "  ffdc_function_list=" +
-                                           ffdc_function_list, ignore=1)
+    status, ffdc_file_list = grk.run_key_u("FFDC  ffdc_prefix="
+                                           + AUTOBOOT_FFDC_PREFIX
+                                           + "  ffdc_function_list="
+                                           + ffdc_function_list, ignore=1)
     if status != 'PASS':
         gp.qprint_error("Call to ffdc failed.\n")
 
@@ -820,12 +819,12 @@ def test_loop_body():
     gp.qprintn()
     if boot_status == "PASS":
         boot_success = 1
-        completion_msg = gp.sprint_timen("BOOT_SUCCESS: \"" + next_boot +
-                                         "\" succeeded.")
+        completion_msg = gp.sprint_timen("BOOT_SUCCESS: \"" + next_boot
+                                         + "\" succeeded.")
     else:
         boot_success = 0
-        completion_msg = gp.sprint_timen("BOOT_FAILED: \"" + next_boot +
-                                         "\" failed.")
+        completion_msg = gp.sprint_timen("BOOT_FAILED: \"" + next_boot
+                                         + "\" failed.")
 
     # Set boot_end_time for use by plug-ins.
     boot_end_time = completion_msg[1:33]
@@ -894,7 +893,7 @@ def obmc_boot_test_teardown():
         # Get the parm_value if it was saved on the stack.
         try:
             parm_value = save_stack.pop(parm_name)
-        except:
+        except BaseException:
             # If it was not saved, no further action is required.
             continue
 

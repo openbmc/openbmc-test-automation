@@ -234,8 +234,8 @@ def execute_ssh_command(cmd_buf,
             index_or_alias = connection.index
         else:
             index_or_alias = connection.alias
-        gp.lprint_timen("Switching to existing connection: \"" +
-                        str(index_or_alias) + "\".")
+        gp.lprint_timen("Switching to existing connection: \""
+                        + str(index_or_alias) + "\".")
         sshlib.switch_connection(index_or_alias)
     else:
         gp.lprint_timen("Connecting to " + open_connection_args['host'] + ".")
@@ -283,8 +283,8 @@ def execute_ssh_command(cmd_buf,
                 # connections.
                 gp.lprint_timen("Closing all connections.")
                 sshlib.close_all_connections()
-                gp.lprint_timen("Connecting to " +
-                                open_connection_args['host'] + ".")
+                gp.lprint_timen("Connecting to "
+                                + open_connection_args['host'] + ".")
                 cix = sshlib.open_connection(**open_connection_args)
                 login_ssh(login_args)
                 continue
@@ -310,10 +310,10 @@ def execute_ssh_command(cmd_buf,
         gp.printn(stderr + stdout)
 
     if not ignore_err:
-        message = gp.sprint_error("The prior SSH" +
-                                  " command returned a non-zero return" +
-                                  " code:\n" + gp.sprint_var(rc, 1) + stderr +
-                                  "\n")
+        message = gp.sprint_error("The prior SSH"
+                                  + " command returned a non-zero return"
+                                  + " code:\n" + gp.sprint_var(rc, 1) + stderr
+                                  + "\n")
         BuiltIn().should_be_equal(rc, 0, message)
 
     if open_connection_args['alias'] == "device_connection":
