@@ -203,9 +203,10 @@ Test Teardown Execution
     Print Dashes  0  100  1  =
     LogOut OpenBMC GUI
 
+
 Open Browser With URL
     [Documentation]  Open browser with specified URL and returns browser id.
-    [Arguments]  ${URL}  ${browser}=gc
+    [Arguments]  ${URL}  ${browser}=ff
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
@@ -215,6 +216,7 @@ Open Browser With URL
 
     ${browser_ID}=  Open Browser  ${URL}  ${browser}
     [Return]  ${browser_ID}
+
 
 Model Server Power Click Button
     [Documentation]  Click main server power in the header section.
