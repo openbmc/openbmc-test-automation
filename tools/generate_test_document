@@ -56,9 +56,9 @@ function generate_all_test_document {
   python -m robot.testdoc xcat xcatdirectoryTCdocs.html || ret_code=1
   python -m robot.testdoc mnfg mnfgdirectoryTCdocs.html || ret_code=1
   python -m robot.testdoc tools toolsdirectoryTCdocs.html || ret_code=1
-  python -m robot.testdoc ras rasdirectoryTCdocs.html || ret_code=1
-  python -m robot.testdoc secureboot securebootdirectoryTCdocs.html ||\
-  ret_code=1
+  python -m robot.testdoc ./openpower/ras rasdirectoryTCdocs.html || ret_code=1
+  python -m robot.testdoc ./openpower/secureboot securebootdirectoryTCdocs.html\
+  || ret_code=1
   python -m robot.testdoc network networkdirectoryTCdocs.html ||\
   ret_code=1
 
