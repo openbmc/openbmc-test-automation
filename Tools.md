@@ -1,5 +1,12 @@
 ## Tools available in OpenBMC Test Automation ##
 
+**The Hardware Test Executive (HTX):**
+
+HTX is a suite of test tools for hardware validation of OpenPOWER system
+and we use widely for stressing system in automation for test suites under
+`systest/`. Refer [README](https://github.com/open-power/HTX)
+
+
 **This document describes the tools available in the /tools directory.**
 
 * Obtain a copy of GitHub issues in CSV format:
