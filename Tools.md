@@ -37,3 +37,16 @@
     ```
     $ ./tools/generate_test_document
     ```
+
+* The opal-prd tool:
+
+    opal-prd is a tool used by the Energy Scale test module 
+    tests/energy_scale/test_power_capping.robot.  opal-prd should be installed on 
+    the OS of the system under test before running test_power_capping.robot.  
+    opal-prd can be installed with
+      apt install opal-prd   (Ubuntu)
+       or
+      yum install opal-prd   (RedHat)
+    Further information may be found on the IBM Service and Productivity Tools website, at
+    https://www-304.ibm.com/webapp/set2/sas/f/lopdiags/toolsupport.html.
+
