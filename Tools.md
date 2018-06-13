@@ -43,3 +43,17 @@ used by the test suites under `systest/`. Refer to [README](https://github.com/o
     ```
     $ ./tools/generate_test_document
     ```
+
+* The opal-prd tool:
+
+    opal-prd is a tool used by the Energy Scale and RAS tests.  It should be
+    installed on the OS of the system under test before running those tests.
+
+    opal-prd may be installed on Ubuntu with:
+    ```
+    apt install opal-prd
+    ```
+    and on RedHat with:
+    ```
+    yum install opal-prd
+    ```
