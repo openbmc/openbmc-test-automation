@@ -537,7 +537,7 @@ def get_state(openbmc_host="",
         remote_cmd_buf = "read uptime filler 2>/dev/null < /proc/uptime" +\
             " && [ ! -z \"${uptime}\" ] && echo ${uptime}"
         cmd_buf = ["BMC Execute Command",
-                   re.sub(r'\\$', '\\$', remote_cmd_buf), 'quiet=1']
+                   re.sub(r'\$', '\$', remote_cmd_buf), 'quiet=1']
         if not quiet:
             grp.rpissuing_keyword(cmd_buf)
             grp.rpissuing(remote_cmd_buf)
