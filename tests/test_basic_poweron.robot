@@ -10,8 +10,7 @@ Resource            ../lib/open_power_utils.robot
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/boot_utils.robot
 
-Test Setup          Test Setup Execution
-Test Teardown       Test Teardown Execution
+Test Teardown       FFDC On Test Case Fail
 
 Force Tags  chassisboot
 
@@ -40,6 +39,8 @@ Verify Front And Rear LED At Standby
 Power On Test
     [Documentation]  Power off and on.
     [Tags]  Power_On_Test
+    [Setup]  Test Setup Execution
+    [Teardown]  Test Teardown Execution
 
     Repeat Keyword  ${LOOP_COUNT} times  Host Off And On
 
