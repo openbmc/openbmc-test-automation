@@ -81,7 +81,7 @@ Verify PNOR Update
     # FFS: Flash header not found. Code: 100
     # Error 100 opening ffs !
 
-    ${pnor_info}=  OS Execute Command  ${pflash_cmd}
+    ${pnor_info}=  BMC Execute Command  ${pflash_cmd}
     Should Not Contain Any  ${pnor_info}  Flash header not found  Error
 
 
