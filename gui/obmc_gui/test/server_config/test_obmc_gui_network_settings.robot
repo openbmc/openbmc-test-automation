@@ -32,7 +32,7 @@ Verify Network Settings From Server Configuration
 Verify Hostname Text Configuration
     [Documentation]  Verify hostname text is configurable from "network settings"
     ...  sub-menu.
-    [Tags]  Verify_Hostname_Configuration
+    [Tags]  Verify_Hostname_Text_Configuration
 
     Input Text  ${xpath_hostname_input}  witherspoon1
     Click Element  ${xpath_network_save_settings}
