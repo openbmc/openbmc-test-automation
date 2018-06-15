@@ -1,0 +1,22 @@
+*** Variables ***
+
+# SNMP related parameters
+# Default port is 162.
+# 10.x.x.x series is a private IP address range and does not exist in
+# our network, so this is chosen to avoid any adversary effect.
+# It can be overridden by command line arguments.
+
+${SNMP_MGR1}       10.6.6.6
+${SNMP_DFLT_PORT}  ${162}
+${SNMP_MGR2}       10.6.6.7
+${NON_DFLT_PORT1}  ${186}
+${SNMP_MGR3}       10.6.6.8
+${NON_DFLT_PORT2}  ${196}
+
+# Valid and invalid IP and ports. Valid port range is 0-65535.
+${outof_range_ip}  10.6.6.256
+${alpha_ip}        xx.xx.xx.xx
+${outof_range_port}  ${65536}
+${alpha_port}        ab
+${negative_port}     ${-12}
+${empty_port}        ${EMPTY}
