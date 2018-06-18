@@ -117,7 +117,7 @@ Verify Power Limits
     ...  Print Error Logs  ${error_logs}
     ...  AND  Fail  msg=Unexpected number of error logs.
 
-    Delete Error Logs
+    Delete All Error Logs
 
 
 Test Power Limit
@@ -150,7 +150,7 @@ Suite Setup Execution
     ${initial_power_setting}=  Get DCMI Power Limit
     Set Suite Variable  ${initial_power_setting}  children=true
 
-    Delete Error Logs
+    Delete All Error Logs
 
 
 Test Teardown Execution
