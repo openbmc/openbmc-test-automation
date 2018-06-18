@@ -17,6 +17,9 @@ ${xpath_hostname_input}  //*[@id="net-config__mac"]
 ${xpath_network_save_settings}  //*[@id="configuration-network"]/form/section[3]/div[2]/button[1]
 ${xpath_continue}  //*[@id=""]/main/section/div/div[4]/button[2]
 ${xpath_network_config_ipv4_address}  //*[@id="net-config__ipv4-address"]
+${xpath_default_gateway_input}  //*[@id="net-config__domain"]
+${xpath_mac_address_input}  //*[@id="net-config__host"]
+
 
 *** Test Cases ***
 
@@ -40,6 +43,26 @@ Verify Hostname Text Configuration
     Click Element  ${xpath_continue}
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain  witherspoon1
+
+
+Verify Default Gateway Editable
+    [Documentation]  Verify default gateway text input allowed from "network
+    ...  settings".
+    [Tags]  Verify_Default_Gateway_Editable
+
+    Page Should Contain Element  ${xpath_default_gateway_input}
+    #Click Element  ${xpath_default_gateway_input}
+    Input Text  ${xpath_default_gateway_input}  10.6.6.7
+
+
+Verify MAC Address Editable
+    [Documentation]  Verify MAC address text input allowed from "network
+    ...  settings".
+    [Tags]  Verify_MAC_Address_Editable
+
+    Page Should Contain Element  ${xpath_mac_address_input}
+    #Click Element  ${xpath_mac_address_input}
+    Input Text  ${xpath_mac_address_input}  70:e2:84:14:16:6c
 
 
 *** Keywords ***
