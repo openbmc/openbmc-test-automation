@@ -19,7 +19,9 @@ ${xpath_continue}  //*[@id=""]/main/section/div/div[4]/button[2]
 ${xpath_network_config_ipv4_address}  //*[@id="net-config__ipv4-address"]
 ${xpath_default_gateway_input}  //*[@id="net-config__domain"]
 ${xpath_mac_address_input}  //*[@id="net-config__host"]
-
+${xpath_ipv4-address-input}  //*[@id="net-config__ipv4-address"]
+${xpath_network_DHCP_button}  //*[@id="configuration-network"]/form/section[2]/fieldset/div[1]/label/span
+${xpath_network_static_button}  //*[@id="configuration-network"]/form/section[2]/fieldset/div[2]/label/span
 
 *** Test Cases ***
 
@@ -61,6 +63,28 @@ Verify MAC Address Editable
 
     Page Should Contain Element  ${xpath_mac_address_input}
     Input Text  ${xpath_mac_address_input}  70:e2:84:14:16:6c
+
+
+Verify IP Address Editable With Static IP Selection
+    [Documentation]  Verify IP address editable with static IP selection.
+    [Tags]  Verify_IP_Address_Editable_With_Static_IP_Selection
+
+    Page Should Contain Element  ${xpath_network_static_button}
+    Click Element  ${xpath_network_static_button}
+    ${status}=  Run Keyword And Return Status  Input Text
+    ...  ${xpath_ipv4-address-input}  ${OPENBMC_HOST}
+    Should Be True  '${status}' == '${True}'
+
+
+Verify IP Address Noneditable With DHCP IP Selection
+    [Documentation]  Verify IP address noneditable with DHCP IP selection.
+    [Tags]  Verify_IP_Address_Noneditable_With_DHCP_IP_Selection
+
+    Page Should Contain Element  ${xpath_network_DHCP_button}
+    Click Element  ${xpath_network_DHCP_button}
+    ${status}=  Run Keyword And Return Status  Input Text
+    ...  ${xpath_ipv4-address-input}  ${OPENBMC_HOST}
+    Should Be True  '${status}' == '${False}'
 
 
 *** Keywords ***
