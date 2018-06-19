@@ -103,3 +103,35 @@ Note: Invoke the tool without arguments:
 $ ./tools/generate_test_document
 ```
 
+
+## Non-Volatile Memory Express Command Line Interface (nvme-cli): ##
+
+nvme-cli is a linux command line tool for accessing Non-Volatile Storage (NVM) media attached via PCIe bus.
+
+Source: https://github.com/linux-nvme/nvme-cli
+
+To install nvme-cli on RedHat:
+```
+yum install name-cli
+```
+and for Ubuntu
+```
+sudo apt-get install nvme-cli
+
+* Obtaining the PPA for Ubuntu
+    - Add the sbates PPA to your sources: https://launchpad.net/~sbates/+archive/ubuntu/ppa
+
+
+## The Hdparm tool: ##
+
+hdparm is a command line utility for setting and viewing hardware parameters of hard disk drives.
+
+To install hdparm on Ubuntu:
+```
+sudo apt-get update
+sudo apt-get install hdparm
+```
+and for RedHat:
+```
+yum install hdparm
+```
