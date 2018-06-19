@@ -108,7 +108,7 @@ Test Setup Execution
     # obmc_test_setup      The OpenBMC required state.
 
     Rprint Timen  ${TEST NAME} ==> [STARTED]
-    Login OpenBMC GUI
+    Launch Browser And Login OpenBMC GUI
     Log To Console  Verifying the system state and stablity...
     ${obmc_current_state}=  Get Text  ${xpath_display_server_power_status}
     Rpvars  obmc_current_state
