@@ -22,9 +22,11 @@ Documentation  Run the caller's keyword string.
 # cd $HOME/git/openbmc-test-automation
 # export PYTHONPATH=${HOME}/git/openbmc-test-automation/lib/
 
-# robot --outputdir=/tmp -v OPENBMC_HOST:barp01 -v 'keyword_string:Log To Console  Hi.' extended/run_keyword.robot
+# robot --outputdir=/tmp -v OPENBMC_HOST:barp01 -v 'keyword_string:Log To Console
+#   Hi.' extended/run_keyword.robot
 
-# robot --outputdir=/tmp -v OPENBMC_HOST:barp01 -v 'keyword_string:${state}=  Get State  quiet=${1} ; Rpvar  state' -v lib_file_path:state.py extended/run_keyword.robot
+# robot --outputdir=/tmp -v OPENBMC_HOST:barp01 -v 'keyword_string:${state}=  Get State  quiet=${1} ;
+#   Rpvar  state' -v lib_file_path:state.py extended/run_keyword.robot
 
 # NOTE: Robot searches PYTHONPATH for libraries.
 Library   run_keyword.py
@@ -48,10 +50,12 @@ ${debug}                    0
 
 *** Test Cases ***
 Run Keyword Pgm
+    [Documentation]  Run the keyword program.
     Main
 
 *** Keywords ***
 Main
+    [Documentation]  Do main program processing.
     [Teardown]  Program Teardown
 
     Main Py

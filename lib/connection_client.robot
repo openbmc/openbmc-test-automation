@@ -54,6 +54,7 @@ Open Connection And Log In
     SSHLibrary.Login  ${username}  ${password}
 
 Open Connection for SCP
+    [Documentation]  Open a connection for SCP.
     Import Library      SCPLibrary      WITH NAME       scp
     Run Keyword If  '${SSH_PORT}' == '${EMPTY}'  scp.Open connection  ${OPENBMC_HOST}
     ...  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}

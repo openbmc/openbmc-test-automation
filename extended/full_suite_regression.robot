@@ -82,5 +82,3 @@ Convert HTML To PDF
    ...  Run  wkhtmltopdf ./${combined_report_html_file_path} ./${combined_report_pdf_file_path}
    Should Not Be Empty  ${output}
    OperatingSystem.File Should Exist  ${combined_report_pdf_file_path}
-
-
