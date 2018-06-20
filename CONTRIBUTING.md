@@ -332,6 +332,31 @@ Robot Coding Guidelines
 
     -   Do not keep commented out code in your program.  Instead, remove it
         entirely.
+-   Robot Template Test Cases
+    -   Follow this format for Robot template test cases:
+        Note: Documentation, Tags and Template lines are all required and should be coded in the order shown.
+        ```
+        Test Case Name
+            [Documentation]
+            [Tags]
+            [Template]
+            # arg1  arg2  etc.
+            <arg1>  <arg2>
+
+        Example:
+
+        Get Response Codes
+            [Documentation]  REST "Get" response status test.
+            [Tags]  Get_Response_Codes
+            [Template]  Execute Get And Check Response
+
+            # Expect status      URL Path
+            ${HTTP_OK}           /org/
+            ${HTTP_OK}           /xyz/
+            ${HTTP_OK}           /xyz/openbmc_project/
+            ${HTTP_OK}           /xyz/openbmc_project/state/enumerate
+            ${HTTP_NOT_FOUND}    /i/dont/exist/
+        ```
 
 Python Coding Guidelines
 -----------------------
