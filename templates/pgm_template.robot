@@ -26,5 +26,5 @@ ${DEBUG}                    0
 
 *** Test Cases ***
 Test Case 1
-
+    [Documentation]  <test case doc here>
     Print Timen  First test case.

@@ -16,6 +16,7 @@ Force Tags  AC_Cycles
 *** Test Cases ***
 
 Test OpenBMC Buster
+    [Documentation]  Test the OpenBMC buster.
     Validate Parameters
     ${output}=  Execute Command
     ...  find /var/lib -type f |xargs -n 1 touch
@@ -32,6 +33,7 @@ Test OpenBMC Buster
 *** Keywords ***
 
 Validate Parameters
+    [Documentation]  Validate the PDU parameters.
     Should Not Be Empty  ${PDU_IP}
     Should Not Be Empty  ${PDU_TYPE}
     Should Not Be Empty  ${PDU_SLOT_NO}

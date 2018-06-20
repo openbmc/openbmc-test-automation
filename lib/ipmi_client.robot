@@ -24,6 +24,7 @@ ${RAW}=                raw
 *** Keywords ***
 
 Run IPMI Command
+    [Documentation]  Run the given IPMI command.
     [Arguments]  ${args}
     ${resp}=  Run Keyword If  '${IPMI_COMMAND}' == 'External'
     ...  Run External IPMI RAW Command  ${args}
@@ -35,6 +36,7 @@ Run IPMI Command
     [Return]  ${resp}
 
 Run IPMI Standard Command
+    [Documentation]  Run the standard IPMI command.
     [Arguments]  ${args}
     ${resp}=  Run Keyword If  '${IPMI_COMMAND}' == 'External'
     ...  Run External IPMI Standard Command  ${args}
@@ -47,6 +49,7 @@ Run IPMI Standard Command
     [Return]  ${resp}
 
 Run Dbus IPMI RAW Command
+    [Documentation]  Run the raw IPMI command through dbus.
     [Arguments]    ${args}
     ${valueinBytes}=   Byte Conversion  ${args}
     ${cmd}=   Catenate   ${dbushostipmicmd1} ${dbusHostIpmiCmdReceivedMsg}
@@ -56,6 +59,7 @@ Run Dbus IPMI RAW Command
     set test variable    ${OUTPUT}     "${output}"
 
 Run Dbus IPMI Standard Command
+    [Documentation]  Run the standard IPMI command through dbus.
     [Arguments]    ${args}
     Copy ipmitool
     ${stdout}    ${stderr}    ${output}=  Execute Command
@@ -65,7 +69,7 @@ Run Dbus IPMI Standard Command
     [Return]    ${stdout}
 
 Run Inband IPMI Raw Command
-    [Documentation]  Run Inband IPMI raw command.
+    [Documentation]  Run the raw IPMI command in-band.
     [Arguments]  ${args}  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}
 
@@ -84,7 +88,7 @@ Run Inband IPMI Raw Command
     [Return]  ${stdout}
 
 Run Inband IPMI Standard Command
-    [Documentation]  Run Inband IPMI standard command.
+    [Documentation]  Run the standard IPMI command in-band.
     [Arguments]  ${args}  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}
 
@@ -103,6 +107,7 @@ Run Inband IPMI Standard Command
     [Return]  ${stdout}
 
 Run External IPMI RAW Command
+    [Documentation]  Run the raw IPMI command externally.
     [Arguments]    ${args}
     ${ipmi_raw_cmd}=   Catenate  SEPARATOR=
     ...    ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
@@ -112,6 +117,7 @@ Run External IPMI RAW Command
     [Return]    ${output}
 
 Run External IPMI Standard Command
+    [Documentation]  Run the standard IPMI command in-band.
     [Arguments]  ${args}  ${fail_on_err}=${1}
 
     # Description of argument(s):
@@ -220,23 +226,31 @@ Byte Conversion
 
 
 Set NetFn Byte
-   [Arguments]    ${word}
-   ${netfnByteLocal}=  Catenate   byte:${word}
-   Set Global Variable  ${netfnByte}  ${netfnByteLocal}
+    [Documentation]  Set the network function byte.
+    [Arguments]    ${word}
+    ${netfnByteLocal}=  Catenate   byte:${word}
+    Set Global Variable  ${netfnByte}  ${netfnByteLocal}
 
 Set Cmd Byte
-   [Arguments]    ${word}
-   ${cmdByteLocal}=  Catenate   byte:${word}
-   Set Global Variable  ${cmdByte}  ${cmdByteLocal}
+    [Documentation]  Set the command byte.
+    [Arguments]    ${word}
+    ${cmdByteLocal}=  Catenate   byte:${word}
+    Set Global Variable  ${cmdByte}  ${cmdByteLocal}
 
 Set Array Byte
-   [Arguments]    ${word}
-   ${arrayByteLocal}=   Catenate   SEPARATOR=  ${arrayByte}  ${word}
-   ${arrayByteLocal}=   Catenate   SEPARATOR=  ${arrayByteLocal}   ,
-   Set Global Variable  ${arrayByte}   ${arrayByteLocal}
+    [Documentation]  Set the array byte.
+    [Arguments]    ${word}
+    ${arrayByteLocal}=   Catenate   SEPARATOR=  ${arrayByte}  ${word}
+    ${arrayByteLocal}=   Catenate   SEPARATOR=  ${arrayByteLocal}   ,
+    Set Global Variable  ${arrayByte}   ${arrayByteLocal}
 
 Copy ipmitool
-    OperatingSystem.File Should Exist   tools/ipmitool      msg=The ipmitool program could not be found in the tools directory. It is not part of the automation code by default. You must manually copy or link the correct openbmc version of the tool in to the tools directory in order to run this test suite.
+    [Documentation]  Copy the ipmitool to the BMC.
+    ${ipmitool_error}=  Catenate  The ipmitool program could not be found in the tools directory.
+    ...  It is not part of the automation code by default. You must manually copy or link the correct openbmc
+    ...  version of the tool in to the tools directory in order to run this test suite.
+
+    OperatingSystem.File Should Exist  tools/ipmitool  msg=${ipmitool_error}
 
     Import Library      SCPLibrary      WITH NAME       scp
     scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}

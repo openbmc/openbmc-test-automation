@@ -24,11 +24,13 @@ ${model}=         ${OPENBMC_MODEL}
 *** Test Cases ***
 
 io_board Present
+    [Documentation]  Verify that the IO board is present.
     [Tags]  io_board_Present
     ${uri}=  Get System component  io_board
     Verify The Attribute  ${uri}  Present  ${True}
 
 io_board Fault
+    [Documentation]  Verify that the IO board signals "fault".
     [Tags]  io_board_Fault
     ${uri}=  Get System component  io_board
     Verify The Attribute  ${uri}  fault  ${False}
@@ -46,6 +48,7 @@ Suite Setup Execution
     log Dictionary          ${resp}
 
 Get System component
+    [Documentation]  Get the system component.
     [Arguments]    ${type}
     ${list}=    Get Dictionary Keys    ${SYSTEM_INFO}
     ${resp}=    Get Matches    ${list}    regexp=^.*[0-9a-z_].${type}[0-9]*$

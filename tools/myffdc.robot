@@ -42,4 +42,5 @@ My FFDC Logs
 ** Keywords ***
 
 Gather FFDC
+    [Documentation]  Collect FFDC.
     Run Keyword And Ignore Error   FFDC

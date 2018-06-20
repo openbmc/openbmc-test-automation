@@ -111,6 +111,7 @@ Verify BMC System Model
 
 
 Wait For Host To Ping
+    [Documentation]  Wait for the given host to ping.
     [Arguments]  ${host}  ${timeout}=${OPENBMC_REBOOT_TIMEOUT}min
     ...          ${interval}=5 sec
 
@@ -127,6 +128,7 @@ Wait For Host To Ping
 
 
 Ping Host
+    [Documentation]  Ping the given host.
     [Arguments]     ${host}
 
     # Description of argument(s):
@@ -216,11 +218,13 @@ New Get Boot Progress
 
 
 Is Power On
+    [Documentation]  Verify that the BMC chassis state is on.
     ${state}=  Get Power State
     Should be equal  ${state}  ${1}
 
 
 Is Power Off
+    [Documentation]  Verify that the BMC chassis state is off.
     ${state}=  Get Power State
     Should be equal  ${state}  ${0}
 
@@ -440,6 +444,7 @@ Clear BMC Gard Record
 
 
 Copy PNOR to BMC
+    [Documentation]  Copy the PNOR image to the BMC.
     Import Library      SCPLibrary      WITH NAME       scp
     Open Connection for SCP
     Log    Copying ${PNOR_IMAGE_PATH} to /tmp
@@ -508,6 +513,7 @@ Get Boot Progress To OS Starting State
 
 
 Verify Ping and REST Authentication
+    [Documentation]  Verify ping and rest authentication.
     ${l_ping}=   Run Keyword And Return Status
     ...    Ping Host  ${OPENBMC_HOST}
     Run Keyword If  '${l_ping}' == '${False}'
@@ -1498,6 +1504,7 @@ Verify Identify LED State
 
 
 Verify The Attribute
+    [Documentation]  Verify the given attribute.
     [Arguments]  ${uri}  ${attribute_name}  ${attribute_value}
 
     # Description of argument(s):

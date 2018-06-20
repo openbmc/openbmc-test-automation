@@ -169,6 +169,7 @@ Upload Image Teardown
 
 
 Upload Post Request
+    [Documentation]  Make post request.
     [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
 
     # Description of argument(s):
