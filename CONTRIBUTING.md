@@ -332,6 +332,16 @@ Robot Coding Guidelines
 
     -   Do not keep commented out code in your program.  Instead, remove it
         entirely.
+-   Robot Templates
+    -   Follow this format for Robot template test cases..
+        ```
+        Keyword Name
+            [Documentation]
+            [Tags]
+            [Template]
+            # field1  field2  etc.
+            <field1>  <field2>
+        ```
 
 Python Coding Guidelines
 -----------------------
