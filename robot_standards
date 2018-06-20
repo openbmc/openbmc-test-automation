@@ -1,0 +1,6 @@
+--configure LineTooLong: 110
+--ignore TooFewKeywordSteps
+--ignore TooFewTestSteps
+--ignore FileTooLong
+--ignore TooManyTestSteps
+--ignore TooManyTestCases

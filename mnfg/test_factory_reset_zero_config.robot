@@ -36,6 +36,7 @@ Validate Zero Config IP
     Check Host Connection   ${ip}
 
 Check Host Connection
+    [Documentation]  Verify that host can be pinged.
     [Arguments]     ${host}
     ${RC}  ${output}=  Run and return RC and Output  ping -c 4 ${host}
     Log     RC: ${RC}\nOutput:\n${output}

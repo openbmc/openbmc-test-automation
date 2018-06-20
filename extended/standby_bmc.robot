@@ -103,7 +103,7 @@ Trigger Warm Reset via Reboot
 
 
 Powercycle System Via PDU
-    [Documentation]   AC cycle the system via PDU
+    [Documentation]   AC cycle the system via PDU.
 
     Validate Parameters
     PDU Power Cycle
@@ -111,6 +111,7 @@ Powercycle System Via PDU
 
 
 Validate Parameters
+    [Documentation]  Validate PDU parameters.
     Should Not Be Empty   ${PDU_IP}
     Should Not Be Empty   ${PDU_TYPE}
     Should Not Be Empty   ${PDU_SLOT_NO}

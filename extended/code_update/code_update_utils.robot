@@ -101,6 +101,7 @@ Retry SCP
 
 
 Check If File Exist
+    [Documentation]  Verify that the file exists on this machine.
     [Arguments]  ${filepath}
     Log   \n PATH: ${filepath}
     OperatingSystem.File Should Exist  ${filepath}
@@ -110,6 +111,7 @@ Check If File Exist
 
 
 System Readiness Test
+    [Documentation]  Verify that the system can be pinged and authenticated through REST.
     ${l_status}=   Run Keyword and Return Status
     ...   Verify Ping and REST Authentication
     Run Keyword If  '${l_status}' == '${False}'

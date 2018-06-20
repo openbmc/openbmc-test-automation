@@ -271,8 +271,10 @@ Controller Power Operations Confirmation Click Button
     # confirmation     Server power operations confirmation
     #                  (e.g. yes.)
 
-    Click Element
-    ...  //*[@id='power-operations']/div[${main_element}]/div[${sub_element}]/confirm/div/div[${confirm_msg_elt}]/button[${confirmation}]
+    ${element_path}=  Catenate  //*[@id='power-operations']/div[${main_element}]/div[${sub_element}]
+    ...  /confirm/div/div[${confirm_msg_elt}]/button[${confirmation}]
+    Click Element  ${element_path.replace(" ","")}
+
 
 GUI Power On
     [Documentation]  Power on the host using GUI.

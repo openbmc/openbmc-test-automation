@@ -139,12 +139,14 @@ Verify Boot Mode Persistency After BMC Reboot
 *** Keywords ***
 
 Set Boot Mode
+    [Documentation]  Set the host boot mode via REST.
     [Arguments]    ${args}
     ${bootmode}=  Set Variable  ${args}
     ${valueDict}=  Create Dictionary  data=${bootmode}
     Write Attribute  ${CONTROL_HOST_URI}/boot/  BootMode  data=${valueDict}
 
 Set Boot Policy
+    [Documentation]  Set the host boot policy via REST.
     [Arguments]    ${args}
     ${bootpolicy}=  Set Variable  ${args}
     ${valueDict}=  Create Dictionary   data=${bootpolicy}
