@@ -219,10 +219,12 @@ Set Boot Mode
 
 
 Response Should Be Equal
+    [Documentation]  Verify that the output is equal to the given args.
     [Arguments]  ${args}
     Should Be Equal  ${OUTPUT}  ${args}
 
 Read the Attribute
+    [Documentation]  Read the given attribute.
     [Arguments]  ${uri}  ${parm}
     ${output}=  Read Attribute  ${uri}  ${parm}
     Set Test Variable  ${OUTPUT}  ${output}

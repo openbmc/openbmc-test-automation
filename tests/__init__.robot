@@ -30,6 +30,7 @@ System Driver Data
     Run Keyword And Ignore Error  Clear BMC Gard Record
 
 Set Boot Defaults
+    [Documentation]  Set boot defaults.
     Set Control Boot Mode  ${CONTROL_HOST_URI}/boot  ${BOOT_MODE_REGULAR}
     Set Control Boot Mode
     ...  ${CONTROL_HOST_URI}/boot/one_time  ${BOOT_MODE_REGULAR}
