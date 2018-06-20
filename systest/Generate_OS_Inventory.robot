@@ -19,5 +19,5 @@ ${json_inventory_file_path}  ${EXECDIR}/os_inventory_final.json
 
 Create An Inventory
     [Documentation]  Snapshot system inventory to a JSON file.
-    [Tags]  Inventory Test
+    [Tags]  Inventory_Test
     Create JSON Inventory File  ${json_inventory_file_path}

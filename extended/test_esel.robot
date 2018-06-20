@@ -128,7 +128,8 @@ Test Wrong Reservation_ID
     ${rev_id_ls}=   Get Substring   ${rev_id_1}   1   3
     ${rev_id_ms}=   Get Substring   ${rev_id_1}   -2
     Run Inband IPMI Raw Command   0x0a 0x42
-    ${output}=  Check IPMI OEMpartialadd Reject  0x3a 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
+    ${output}=  Check IPMI OEMpartialadd Reject
+    ...  0x3a 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
     Should Contain   ${output}   Reservation cancelled
 
 Test Correct Reservation_ID
@@ -142,7 +143,8 @@ Test Correct Reservation_ID
     ${rev_id_2}=    Run Inband IPMI Raw Command  0x0a 0x42
     ${rev_id_ls}=   Get Substring   ${rev_id_2}   1   3
     ${rev_id_ms}=   Get Substring   ${rev_id_2}   -2
-    ${output}=  Check IPMI OEMpartialadd Accept  0x3a 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
+    ${output}=  Check IPMI OEMpartialadd Accept
+    ...  0x3a 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
     Should Be Empty    ${output}
 
 *** Keywords ***
@@ -197,17 +199,22 @@ Restart Logging Service
 
     Sleep  10s  reason=Wait for service to restart properly.
 
+
 Run IPMI Command Returned
+    [Documentation]  Run the IPMI command and return the output.
     [Arguments]    ${args}
     ${output_1}=    Execute Command   /tmp/ipmitool -I dbus raw ${args}
     [Return]    ${output_1}
 
+
 Check IPMI OEMpartialadd Reject
+    [Documentation]  Check if IPMI rejects the OEM partial add command.
     [Arguments]    ${args}
     Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     ${stdout}  ${stderr}  ${output_2}=  Execute Command  ipmitool raw ${args}
     ...        return_stdout=True  return_stderr=True  return_rc=True
     [Return]  ${stderr}
+
 
 Suite Setup Execution
     [Documentation]  Validates input parameters & check if HOST OS is up.
@@ -225,11 +232,12 @@ Suite Setup Execution
     Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     Open Connection And Log In
 
+
 Check IPMI OEMpartialadd Accept
+    [Documentation]  Check if IPMI accepts the OEM partial add command.
     [Arguments]    ${args}
     Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     ${stdout}  ${stderr}  ${output_3}=  Execute Command  ipmitool raw ${args}
     ...         return_stdout=True  return_stderr=True  return_rc=True
     Should Be Equal  ${output_3}  ${0}  msg=${stderr}
     [Return]  ${stderr}
-

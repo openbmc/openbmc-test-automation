@@ -302,7 +302,7 @@ Verify Core Functional State
     ${core_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  core
     :FOR  ${core_uri}  IN  @{core_list}
     \  ${status}=  Run Keyword And Return Status
-    ...  Check URL Property If Functional  ${core_uri}
+    ...  Check URL Property Is Functional  ${core_uri}
     \  Continue For Loop If  '${status}' == '${False}'
     \  ${present}=  Read Attribute  ${core_uri}  Present
     \  Should Be True  ${present}
@@ -331,7 +331,7 @@ Verify DIMM Functional State
     ${dimm_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  dimm
     :FOR  ${dimm_uri}  IN  @{dimm_list}
     \  ${status}=  Run Keyword And Return Status
-    ...  Check URL Property If Functional  ${dimm_uri}
+    ...  Check URL Property Is Functional  ${dimm_uri}
     \  Continue For Loop If  '${status}' == '${False}'
     \  ${present}=  Read Attribute  ${dimm_uri}  Present
     \  Should Be True  ${present}
@@ -353,7 +353,7 @@ Verify Fan Functional State
     Should Not Be Empty  ${fan_list}
     :FOR  ${fan_uri}  IN  @{fan_list}
     \  ${status}=  Run Keyword And Return Status
-    ...  Check URL Property If Functional  ${fan_uri}
+    ...  Check URL Property Is Functional  ${fan_uri}
     \  Continue For Loop If  '${status}' == '${False}'
     \  ${present}=  Read Attribute  ${fan_uri}  Present
     \  Should Be True  ${present}
@@ -375,7 +375,7 @@ Verify CPU Functional State
     Should Not Be Empty  ${cpu_list}
     :FOR  ${cpu_uri}  IN  @{cpu_list}
     \  ${status}=  Run Keyword And Return Status
-    ...  Check URL Property If Functional  ${cpu_uri}
+    ...  Check URL Property Is Functional  ${cpu_uri}
     \  Continue For Loop If  '${status}' == '${False}'
     \  ${present}=  Read Attribute  ${cpu_uri}  Present
     \  Should Be True  ${present}
@@ -400,7 +400,7 @@ Verify GPU Functional State
     Should Not Be Empty  ${gpu_list}
     :FOR  ${gpu_uri}  IN  @{gpu_list}
     \  ${status}=  Run Keyword And Return Status
-    ...  Check URL Property If Functional  ${gpu_uri}
+    ...  Check URL Property Is Functional  ${gpu_uri}
     \  Continue For Loop If  '${status}' == '${False}'
     \  ${present}=  Read Attribute  ${gpu_uri}  Present
     \  Should Be True  ${present}
@@ -616,7 +616,8 @@ Validate FRU Properties Fields
     \  Should Be Equal  ${fru_field.viewkeys()}  ${fru_set}
 
 
-Check URL Property If Functional
+Check URL Property Is Functional
+    [Documentation]  Verify that the given url property is functional.
     [Arguments]  ${url_path}
     # Description of arguments:
     # url_path  Full url path of the inventory object.

@@ -378,8 +378,8 @@ Configure Threshold Prefix Length
     Verify IP Address Via REST And Delete  ${valid_ip}
 
 Verify Default Gateway
-    [Documentation]  Verify default gateway.
-    [Tags]  Verify that the default gateway has a valid route.
+    [Documentation]  Verify that the default gateway has a valid route.
+    [Tags]  Verify_Default_Gateway.
 
     ${default_gw}=  Read Attribute  ${NETWORK_MANAGER}/config
     ...  DefaultGateway

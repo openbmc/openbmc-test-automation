@@ -151,7 +151,6 @@ Get Fanspeed Via XCAT
     \  Should Match  ${fanspeed}  ${bmc}* RPMS
     \  Log  \n fanspeed on $[bmc}\n ${fanspeed}
 
-*** Comment ***
 
 Get Voltage Reading Via XCAT
     [Documentation]  Get voltage via XCAT.

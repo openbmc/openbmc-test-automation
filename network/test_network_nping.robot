@@ -65,9 +65,12 @@ Get Packet Loss
 
     # Sample Output from "nping" command:
     # Starting Nping 0.6.47 ( http://nmap.org/nping ) at 2017-02-21 22:05 IST
-    # SENT (0.0181s) TCP Source IP:37577 > Destination IP:80 S ttl=64 id=39113 iplen=40  seq=629782493 win=1480
-    # SENT (0.2189s) TCP Source IP:37577 > Destination IP:80 S ttl=64 id=39113 iplen=40  seq=629782493 win=1480
-    # RCVD (0.4120s) TCP Destination IP:80 > Source IP:37577 SA ttl=49 id=0 iplen=44  seq=1078301364 win=5840 <mss 1380>
+    # SENT (0.0181s) TCP Source IP:37577 >
+    #   Destination IP:80 S ttl=64 id=39113 iplen=40  seq=629782493 win=1480
+    # SENT (0.2189s) TCP Source IP:37577 >
+    #   Destination IP:80 S ttl=64 id=39113 iplen=40  seq=629782493 win=1480
+    # RCVD (0.4120s) TCP Destination IP:80 >
+    #   Source IP:37577 SA ttl=49 id=0 iplen=44  seq=1078301364 win=5840 <mss 1380>
     # Max rtt: 193.010ms | Min rtt: 193.010ms | Avg rtt: 193.010ms
     # Raw packets sent: 2 (80B) | Rcvd: 1 (46B) | Lost: 1 (50.00%)
     # Nping done: 1 IP address pinged in 0.43 seconds
