@@ -130,10 +130,7 @@ OpenBMC GUI Logoff
 *** Keywords ***
 
 Login OpenBMC GUI with failure enable
+    [Documentation]  Login to the OpenBMC GUI with failure enabled.
 
     Open Browser With URL  ${xpath_openbmc_url}
     Login OpenBMC GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-
-
-
-

@@ -82,13 +82,16 @@ ${FIELD_MODE}               ${False}
 
 *** Keywords ***
 Get Inventory Schema
+    [Documentation]  Get inventory schema.
     [Arguments]    ${machine}
     [Return]    &{INVENTORY}[${machine}]
 
 Get Inventory Items Schema
+    [Documentation]  Get inventory items schema.
     [Arguments]    ${machine}
     [Return]    &{INVENTORY_ITEMS}[${machine}]
 
 Get Sensor Schema
+    [Documentation]  Get sensors schema.
     [Arguments]    ${machine}
     [Return]    &{SENSORS}[${machine}]

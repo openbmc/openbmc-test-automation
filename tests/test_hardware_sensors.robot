@@ -250,7 +250,7 @@ Disable Power Redundancy And Verify Using REST
 
 Enable Power Redundancy And Verify Using REST
    [Documentation]  Enable power redundancy and verify that it is enabled.
-   [Tags]  Enable_Power_Redundancy_And_Verify_Using REST
+   [Tags]  Enable_Power_Redundancy_And_Verify_Using_REST
 
    # Example:
    # /xyz/openbmc_project/sensors/chassis/PowerSupplyRedundancy

@@ -69,6 +69,7 @@ ${test_really_running}      ${1}
 
 *** Keywords ***
 OBMC Boot Test
+    [Documentation]  Run the OBMC boot test.
     [Teardown]  OBMC Boot Test Teardown
     [Arguments]  ${pos_arg1}=${EMPTY}  &{arguments}
 

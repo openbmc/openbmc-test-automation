@@ -46,6 +46,7 @@ Test Restore Policy ALWAYS_POWER_OFF With Host Running
 
     ${ALWAYS_POWER_OFF}     Running                Running
 
+    [Documentation]  Verify that the BMC restore policy is ALWAYS_POWER_OFF while the Host is running.
     [Template]  Verify Restore Policy
     [Tags]  Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Running
 
@@ -74,6 +75,7 @@ Test Restore Policy ALWAYS_POWER_ON With Host Running
 
     ${ALWAYS_POWER_ON}      Running                Running
 
+    [Documentation]  Verify the BMC restore policy is ALWAYS_POWER_ON while the Host is running.
     [Template]  Verify Restore Policy
     [Tags]  Test_Restore_Policy_ALWAYS_POWER_ON_With_Host_Running
 
@@ -102,7 +104,7 @@ Test Restore Policy Restore Last State With Host Off
 
     ${RESTORE_LAST_STATE}   Off                    Off
 
-
+    [Documentation]  Verify the RESTORE_LAST_STATE restore policy functionality while the Host is off.
     [Template]  Verify Restore Policy
     [Tags]  Test_Restore_Policy_Restore_Last_State_With_Host_Off
 

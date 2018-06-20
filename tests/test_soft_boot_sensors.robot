@@ -36,6 +36,7 @@ Verify Boot AttemptsLeft At Standby
 
 
 Verify Boot AttemptsLeft At Host Booted
+    [Documentation]  Verify the number of Host boot attempts left.
     [Tags]  Verify_Boot_AttemptsLeft_At_Host_Booted
     [Template]  Validate Boot AttemptsLeft
 
@@ -44,6 +45,7 @@ Verify Boot AttemptsLeft At Host Booted
 
 
 Verify Boot AttemptsLeft When Host Reboot
+    [Documentation]  Verify the number of Host reboots left.
     [Tags]  Verify_Boot_AttemptsLeft_When_Host_Reboot
     [Template]  Validate Boot AttemptsLeft
 
@@ -52,6 +54,7 @@ Verify Boot AttemptsLeft When Host Reboot
 
 
 Verify Boot AttemptsLeft When Power Off
+    [Documentation]  Verify the number of boots left while the system is poweref off.
     [Tags]  Verify_Boot_AttemptsLeft_When_Power_Off
     [Template]  Validate Boot AttemptsLeft
 
