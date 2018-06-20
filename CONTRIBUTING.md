@@ -332,6 +332,17 @@ Robot Coding Guidelines
 
     -   Do not keep commented out code in your program.  Instead, remove it
         entirely.
+-   Robot Template Test Cases
+    -   Follow this format for Robot template test cases:
+        Note: Documentation, Tags and Template lines are all required and should be coded in the order shown.
+        ```
+        Test Case Name
+            [Documentation]
+            [Tags]
+            [Template]
+            # arg1  arg2  etc.
+            <arg1>  <arg2>
+        ```
 
 Python Coding Guidelines
 -----------------------
