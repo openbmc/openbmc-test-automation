@@ -1519,7 +1519,7 @@ Get BMC Flash Chip Boot Side
     # 1 - indicates chip select is alternate side.
 
     ${boot_side}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  echo $(($(/sbin/devmem 0x1E785030) >> 1 & 1))
+    ...  cat /sys/class/watchdog/watchdog1/bootstatus
 
     [Return]  ${boot_side}
 
