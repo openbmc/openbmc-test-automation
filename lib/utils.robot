@@ -1515,11 +1515,11 @@ Get BMC Flash Chip Boot Side
     [Documentation]  Return the BMC flash chip boot side.
 
     # Example:
-    # 0 - indicates chip select is current side.
-    # 1 - indicates chip select is alternate side.
+    # 0  - indicates chip select is current side.
+    # 32 - indicates chip select is alternate side.
 
     ${boot_side}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  echo $(($(/sbin/devmem 0x1E785030) >> 1 & 1))
+    ...  cat /sys/class/watchdog/watchdog1/bootstatus
 
     [Return]  ${boot_side}
 
