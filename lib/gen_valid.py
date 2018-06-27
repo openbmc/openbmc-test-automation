@@ -91,7 +91,7 @@ def process_error_message(error_message):
     - If the error_message contains a value:
         - Print the error_message as part of a full error report.
         - If global exit_on_error is set, then exit the program with a return
-        code of 1.
+          code of 1.
         - If exit_on_error is not set, return False.
 
     This function is designed solely for use by wrapper functions in this file

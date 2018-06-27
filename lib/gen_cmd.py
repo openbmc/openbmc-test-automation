@@ -288,7 +288,8 @@ def shell_cmd(command_string,
               retry_sleep_time=5,
               allowed_shell_rcs=[0],
               ignore_err=None,
-              return_stderr=0):
+              return_stderr=0,
+              fork=0):
     r"""
     Run the given command string in a shell and return a tuple consisting of
     the shell return code and the output.
@@ -351,6 +352,10 @@ def shell_cmd(command_string,
                                     such a case, the tuple returned by this
                                     function will consist of three values
                                     rather than just two: rc, stdout, stderr.
+    fork                            Run the command string asynchronously
+                                    (i.e. don't wait for status of the child
+                                    process and don't try to get
+                                    stdout/stderr).
     """
 
     # Assign default values to some of the arguments to this function.
@@ -398,6 +403,8 @@ def shell_cmd(command_string,
         # Output from this loop iteration is written to func_stdout for later
         # processing.
         func_stdout = ""
+        if fork:
+            break
         command_timed_out = False
         if time_out is not None:
             # Designate a SIGALRM handling function and set alarm.

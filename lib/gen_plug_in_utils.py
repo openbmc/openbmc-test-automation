@@ -51,7 +51,7 @@ def return_plug_vars():
 
     This function also does the following:
     - Set a default value for environment variable
-    AUTOBOOT_OPENBMC_NICKNAME/AUTOIPL_FSP1_NICKNAME if it is not already set.
+      AUTOBOOT_OPENBMC_NICKNAME/AUTOIPL_FSP1_NICKNAME if it is not already set.
     - Register PASSWORD variables to prevent their values from being printed.
 
     Note: The programmer may set a default for any given environment variable

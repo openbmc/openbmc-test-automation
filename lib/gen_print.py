@@ -1624,11 +1624,11 @@ def create_print_wrapper_funcs(func_names,
     This function will...
     - Expect that there is an sprint_foo_bar function already in existence.
     - Create a print_foo_bar function which calls sprint_foo_bar and prints
-    the result.
+      the result.
     - Create a qprint_foo_bar function which calls upon sprint_foo_bar only if
-    global value quiet is 0.
+      global value quiet is 0.
     - Create a dprint_foo_bar function which calls upon sprint_foo_bar only if
-    global value debug is 1.
+      global value debug is 1.
 
     Also, code will be generated to define aliases for each function as well.
     Each alias will be created by replacing "print_" in the function name with
