@@ -1,9 +1,9 @@
-#https://github.com/openbmc/openbmc/issues/93
+# https://github.com/openbmc/openbmc/issues/93
 -e System_Present
 -e Chassis_Present
-#https://github.com/openbmc/openbmc-test-automation/issues/207
+# https://github.com/openbmc/openbmc-test-automation/issues/207
 -e Disable_PowerCap
-#https://github.com/openbmc/openbmc-test-automation/issues/123
+# https://github.com/openbmc/openbmc-test-automation/issues/123
 -e Execute_ipmi_BT_capabilities_command
 ##Testcase NA for Palmetto system
 -e io_board_Present
@@ -11,11 +11,11 @@
 -e Verify_Enabling_OCC_Turbo_Setting_Via_IPMI
 -e Verify_Disabling_OCC_Turbo_Setting_Via_IPMI
 -e Verify_Setting_OCC_Turbo_Via_REST
-#https://github.com/openbmc/openbmc/issues/901
+# https://github.com/openbmc/openbmc/issues/901
 -e Set_BMC_Time_With_Split_And_Manual
-#https://github.com/openbmc/openbmc/issues/1142
+# https://github.com/openbmc/openbmc/issues/1142
 -e Check_BMC_Name_Property_Is_Set
-#https://github.com/openbmc/openbmc-test-automation/issues/396
+# https://github.com/openbmc/openbmc-test-automation/issues/396
 -e NetworkManager
 # Test cases are NA for Barreleye and Palmetto
 -e LED_Group
@@ -25,7 +25,7 @@
 -e Check_BMC_GPIO_keys_Compatible_Property_Is_Set
 -e Check_BMC_IIO-HWMON_Name_Property_Is_Set
 -e Check_BMC_IIO-HWMON_Compatible_Property_Is_Set
-#https://github.com/openbmc/openbmc-test-automation/issues/546
+# https://github.com/openbmc/openbmc-test-automation/issues/546
 -e CPU_Present
 -e DIMM3_Present
 # System LED test cases which are NA for Palmetto system.
@@ -46,3 +46,6 @@
 # Applicable only for witherspoon
 -e Verify_Boxelder_Present_Property
 -e Verify_Boxelder_MAC_Address_Property_Is_Populated
+# https://github.com/openbmc/openbmc-test-automation/issues/1411
+-e Check_BMC_Memory_Name_Property_Is_Set
+-e Check_BMC_Memory_Device_Type_Property_Is_Set
