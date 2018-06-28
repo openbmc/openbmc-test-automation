@@ -1,4 +1,4 @@
-#https://github.com/openbmc/openbmc/issues/1142
+# https://github.com/openbmc/openbmc/issues/1142
 -e Check_BMC_Name_Property_Is_Set
 -e Check_BMC_Clocks_Name_Property_Is_Set
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
@@ -20,3 +20,6 @@
 # NA test case with nginx support.
 -e Test_Non_SSL_Connection_To_Port_80
 -e Test_Non_SSL_Connection_To_Port_443
+# https://github.com/openbmc/openbmc-test-automation/issues/1411
+-e Check_BMC_Memory_Name_Property_Is_Set
+-e Check_BMC_Memory_Device_Type_Property_Is_Set
