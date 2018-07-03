@@ -1,0 +1,9 @@
+Code-Review+1: Michael Walsh <micwalsh@us.ibm.com>
+Code-Review+1: Steven Sombar <ssombar@us.ibm.com>
+Code-Review+2: George Keishing <gkeishin@in.ibm.com>
+Verified+1: George Keishing <gkeishin@in.ibm.com>
+Submitted-by: George Keishing <gkeishin@in.ibm.com>
+Submitted-at: Tue, 03 Jul 2018 06:03:35 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/11322
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
