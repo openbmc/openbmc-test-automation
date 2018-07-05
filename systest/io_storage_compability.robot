@@ -14,7 +14,7 @@ Library           ../lib/gen_robot_print.py
 Resource          ../syslib/utils_os.robot
 
 Suite Setup       Suite Setup Execution
-Suite Teardown    Collect HTX Log Files
+Suite Teardown    Suite Teardown Execution
 
 *** Variables ***
 ${LOOP_COUNT}
@@ -31,7 +31,7 @@ IO Storage Compability Stress
     Repeat Keyword  ${LOOP_COUNT} times
     ...  Run Keywords
     ...  Set Suite Variable  ${iteration}  ${iteration +1}
-    ...  AND  Rprint Vars  Iteration ${iteration}
+    ...  AND  Rprint Vars  Iteration
     ...  AND  Loop HTX
     Shutdown HTX Exerciser
 
@@ -45,5 +45,11 @@ Loop HTX
 Suite Setup Execution
     [Documentation]  Start setup tasks.
 
-    Login To OS
     Create Default MDT Profile
+
+
+Suite Teardown Execution
+    [Documentation]  Execute suite teardown tasks
+
+    Collect HTX Log Files
+    FFDC On Test Case Fail
