@@ -361,11 +361,12 @@ Robot Coding Guidelines
 Python Coding Guidelines
 -----------------------
 -   The minimum required Python version is 2.7.x.
--   Run pep8 on all Python files and correct errors.
+-   Run pycodestyle on all Python files and correct errors to follow the guidelines in
+    https://www.python.org/dev/peps/pep-0008/.
 
     Example as run from a Linux command line:
     ```
-    pep8 my_pgm.py
+    pycodestyle my_pgm.py
 
     my_pgm.py:41:1: E302 expected 2 blank lines, found 1
     my_pgm.py:58:52: W291 trailing whitespace
@@ -637,50 +638,6 @@ Python Coding Guidelines
 
     -   Do not keep commented out code in your program.  Instead, remove it
         entirely.
-
-Python Coding Guidelines
------------------------
--   Run pep8 on all Python files and correct errors.
-
-    Example as run from a Linux command line:
-    ```
-    pep8 my_pgm.py
-
-    my_pgm.py:41:1: E302 expected 2 blank lines, found 1
-    my_pgm.py:58:52: W291 trailing whitespace
-    ```
--   Include doc strings in every function and follow the guidelines in
-    https://www.python.org/dev/peps/pep-0257/.
-
-    Example:
-    ```
-        r"""
-        Return the function name associated with the indicated stack frame.
-
-        Description of argument(s):
-        stack_frame_ix                  The index of the stack frame whose
-                                        function name should be returned.  If
-                                        the caller does not specify a value,
-                                        this function will set the value to 1
-                                        which is the index of the caller's
-                                        stack frame.  If the caller is the
-                                        wrapper function "print_func_name",
-                                        this function will bump it up by 1.
-        """
-    ```
--   As shown in the prior example, if your function has any arguments, include
-    a "Description of argument(s)" section.  This effectively serves as the
-    help text for anyone wanting to use or understand your function.  Include
-    real data examples wherever possible and applicable.
--   Function definitions:
-    -   Put each function parameter on its own line:
-        ```
-        def func1(parm1,
-
-                  parm2):
-        ```
--   Do not keep commented out code in your program.  Instead, remove it
-    entirely.
 
 Template Usage Guidelines
 -------------------------
