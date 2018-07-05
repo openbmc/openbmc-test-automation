@@ -88,103 +88,103 @@ Add New Valid IP And Verify
     Verify IP Address Via REST And Delete  ${valid_ip}
 
 Configure Invalid IP String
+    [Documentation]  Configure invalid IP address which is a string.
+    [Tags]  Configure_Invalid_IP_String
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length        Gateway_IP        Expected_Result
     ${alpha_ip}   ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure invalid IP address which is a string.
-    [Tags]  Configure_Invalid_IP_String
-
-    [Template]  Configure Network Settings
 
 Configure Out Of Range IP
+    [Documentation]  Configure out-of-range IP address.
+    [Tags]  Configure_Out_Of_Range_IP
+    [Template]  Configure Network Settings
+
     # IP Address        Prefix_length        Gateway_IP        Expected_Result
     ${out_of_range_ip}  ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure out-of-range IP address.
-    [Tags]  Configure_Out_Of_Range_IP
-
-    [Template]  Configure Network Settings
 
 Configure Broadcast IP
+    [Documentation]  Configure broadcast IP address.
+    [Tags]  Configure_Broadcast_IP
+    [Template]  Configure Network Settings
+
     # IP Address     Prefix_length        Gateway_IP        Expected_Result
     ${broadcast_ip}  ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure broadcast IP address.
-    [Tags]  Configure_Broadcast_IP
-
-    [Template]  Configure Network Settings
 
 Configure Multicast IP
+    [Documentation]  Configure multicast IP address.
+    [Tags]  Configure_Multicast_IP
+    [Template]  Configure Network Settings
+
     # IP Address     Prefix_length        Gateway_IP        Expected_Result
     ${multicast_ip}  ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure multicast IP address.
-    [Tags]  Configure_Multicast_IP
-
-    [Template]  Configure Network Settings
 
 Configure Loopback IP
+    [Documentation]  Configure loopback IP address.
+    [Tags]  Configure_Loopback_IP
+    [Template]  Configure Network Settings
+
     # IP Address    Prefix_length        Gateway_IP        Expected_Result
     ${loopback_ip}  ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure loopback IP address.
-    [Tags]  Configure_Loopback_IP
-
-    [Template]  Configure Network Settings
 
 Configure Network ID
+    [Documentation]  Configure network ID IP address.
+    [Tags]  Configure_Network_ID
+    [Template]  Configure Network Settings
+
     # IP Address   Prefix_length        Gateway_IP        Expected_Result
     ${network_id}  ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure network ID IP address.
-    [Tags]  Configure_Network_ID
-
-    [Template]  Configure Network Settings
 
 Configure Less Octet IP
+    [Documentation]  Configure less octet IP address.
+    [Tags]  Configure_Less_Octet_IP
+    [Template]  Configure Network Settings
+
     # IP Address      Prefix_length        Gateway_IP        Expected_Result
     ${less_octet_ip}  ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure less octet IP address.
-    [Tags]  Configure_Less_Octet_IP
-
-    [Template]  Configure Network Settings
 
 Configure Empty IP
+    [Documentation]  Configure less octet IP address.
+    [Tags]  Configure_Empty_IP
+    [Template]  Configure Network Settings
+
     # IP Address   Prefix_length        Gateway_IP        Expected_Result
     ${EMPTY}       ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure less octet IP address.
-    [Tags]  Configure_Empty_IP
-
-    [Template]  Configure Network Settings
 
 Configure Special Char IP
+    [Documentation]  Configure invalid IP address containing special chars.
+    [Tags]  Configure_Special_Char_IP
+    [Template]  Configure Network Settings
+
     # IP Address     Prefix_length         Gateway_IP        Expected_Result
     @@@.%%.44.11     ${valid_prefix_len}   ${valid_gateway}  error
 
-    [Documentation]  Configure invalid IP address containing special chars.
-    [Tags]  Configure_Special_Char_IP
-
-    [Template]  Configure Network Settings
 
 Configure Hexadecimal IP
+    [Documentation]  Configure invalid IP address containing hex value.
+    [Tags]  Configure_Hexadecimal_IP
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length        Gateway_IP        Expected_Result
     ${hex_ip}     ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure invalid IP address containing hex value.
-    [Tags]  Configure_Hexadecimal_IP
-
-    [Template]  Configure Network Settings
 
 Configure Negative Octet IP
+    [Documentation]  Configure invalid IP address containing negative octet.
+    [Tags]  Configure_Negative_Octet_IP
+    [Template]  Configure Network Settings
+
     # IP Address    Prefix_length        Gateway_IP        Expected_Result
     ${negative_ip}  ${valid_prefix_len}  ${valid_gateway}  error
 
-    [Documentation]  Configure invalid IP address containing negative octet.
-    [Tags]  Configure_Negative_Octet_IP
-
-    [Template]  Configure Network Settings
 
 Add New Valid IP With Blank Gateway
     [Documentation]  Add new IP with blank gateway.
@@ -197,115 +197,116 @@ Add New Valid IP With Blank Gateway
     # Delete IP address and IP object after verification.
     Verify IP Address Via REST And Delete  ${valid_ip}
 
-Configure Invalid Gateway String
-    # IP Address  Prefix_length        Gateway_IP   Expected_Result
-    ${valid_ip}   ${valid_prefix_len}  ${alpha_ip}  error
 
+Configure Invalid Gateway String
     [Documentation]  Configure invalid IP address to a gateway which is
     ...  an alpha string and expect an error.
     [Tags]  Configure_Invalid_Gateway_String
-
     [Template]  Configure Network Settings
 
+    # IP Address  Prefix_length        Gateway_IP   Expected_Result
+    ${valid_ip}   ${valid_prefix_len}  ${alpha_ip}  error
+
+
 Configure Out Of Range IP For Gateway
+    [Documentation]  Configure out-of-range IP for gateway and expect an error.
+    [Tags]  Configure_Out_Of_Range_IP_For_Gateway
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length        Gateway_IP          Expected_Result
     ${valid_ip}   ${valid_prefix_len}  ${out_of_range_ip}  error
 
-    [Documentation]  Configure out-of-range IP for gateway and expect an error.
-    [Tags]  Configure_Out_Of_Range_IP_For_Gateway
-
-    [Template]  Configure Network Settings
 
 Configure Broadcast IP For Gateway
+    [Documentation]  Configure broadcast IP for gateway and expect an error.
+    [Tags]  Configure_Broadcast_IP_For_Gateway
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length        Gateway_IP       Expected_Result
     ${valid_ip}   ${valid_prefix_len}  ${broadcast_ip}  error
 
-    [Documentation]  Configure broadcast IP for gateway and expect an error.
-    [Tags]  Configure_Broadcast_IP_For_Gateway
-
-    [Template]  Configure Network Settings
 
 Configure Loopback IP For Gateway
+    [Documentation]  Configure loopback IP for gateway and expect an error.
+    [Tags]  Configure_Loopback_IP_For_Gateway
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length        Gateway_IP      Expected_Result
     ${valid_ip}   ${valid_prefix_len}  ${loopback_ip}  error
 
-    [Documentation]  Configure loopback IP for gateway and expect an error.
-    [Tags]  Configure_Loopback_IP_For_Gateway
-
-    [Template]  Configure Network Settings
 
 Configure Multicast IP For Gateway
+    [Documentation]  Configure multicast IP for gateway and expect an error.
+    [Tags]  Configure_Multicast_IP_For_Gateway
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length        Gateway_IP       Expected_Result
     ${valid_ip}   ${valid_prefix_len}  ${multicast_ip}  error
 
-    [Documentation]  Configure multicast IP for gateway and expect an error.
-    [Tags]  Configure_Multicast_IP_For_Gateway
-
-    [Template]  Configure Network Settings
 
 Configure Network ID For Gateway
+    [Documentation]  Configure network ID for gateway and expect an error.
+    [Tags]  Configure_Network_ID_For_Gateway
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length        Gateway_IP     Expected_Result
     ${valid_ip}   ${valid_prefix_len}  ${network_id}  error
 
-    [Documentation]  Configure network ID for gateway and expect an error.
-    [Tags]  Configure_Network_ID_For_Gateway
-
-    [Template]  Configure Network Settings
 
 Configure Less Octet IP For Gateway
+    [Documentation]  Configure less octet IP for gateway and expect an error.
+    [Tags]  Configure_Less_Octet_IP_For_Gateway
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length        Gateway_IP        Expected_Result
     ${valid_ip}   ${valid_prefix_len}  ${less_octet_ip}  error
 
-    [Documentation]  Configure less octet IP for gateway and expect an error.
-    [Tags]  Configure_Less_Octet_IP_For_Gateway
-
-    [Template]  Configure Network Settings
 
 Configure Special Char IP For Gateway
+    [Documentation]  Configure special char IP for gateway and expect an error.
+    [Tags]  Configure_Special_Char_IP_For_Gateway
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length        Gateway_IP    Expected_Result
     ${valid_ip}   ${valid_prefix_len}  @@@.%%.44.11  error
 
-    [Documentation]  Configure special char IP for gateway and expect an error.
-    [Tags]  Configure_Special_Char_IP_For_Gateway
-
-    [Template]  Configure Network Settings
 
 Configure Hexadecimal IP For Gateway
+    [Documentation]  Configure hexadecimal IP for gateway and expect an error.
+    [Tags]  Configure_Hexadecimal_IP_For_Gateway
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length        Gateway_IP  Expected_Result
     ${valid_ip}   ${valid_prefix_len}  ${hex_ip}   error
 
-    [Documentation]  Configure hexadecimal IP for gateway and expect an error.
-    [Tags]  Configure_Hexadecimal_IP_For_Gateway
-
-    [Template]  Configure Network Settings
 
 Configure Out Of Range Prefix Length
+    [Documentation]  Configure out-of-range prefix length and expect an error.
+    [Tags]  Configure_Out_Of_Range_Prefix_Length
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length  Gateway_IP        Expected_Result
     ${valid_ip}   33             ${valid_gateway}  error
 
-    [Documentation]  Configure out-of-range prefix length and expect an error.
-    [Tags]  Configure_Out_Of_Range_Prefix_Length
-
-    [Template]  Configure Network Settings
 
 Configure Negative Value For Prefix Length
+    [Documentation]  Configure negative prefix length and expect an error.
+    [Tags]  Configure_Negative_Value_For_Prefix_Length
+    [Template]  Configure Network Settings
+
     # IP Address  Prefix_length  Gateway_IP        Expected_Result
     ${valid_ip}   -10            ${valid_gateway}  error
 
-    [Documentation]  Configure negative prefix length and expect an error.
-    [Tags]  Configure_Negative_Value_For_Prefix_Length
-
-    [Template]  Configure Network Settings
 
 Configure Non Numeric Value For Prefix Length
-    # IP Address  Prefix_length  Gateway_IP        Expected_Result
-    ${valid_ip}   xx             ${valid_gateway}  error
-
     [Documentation]  Configure non numeric  value prefix length and expect
     ...  an error.
     [Tags]  Configure_String_Value_For_Prefix_Length
-
     [Template]  Configure Network Settings
+
+    # IP Address  Prefix_length  Gateway_IP        Expected_Result
+    ${valid_ip}   xx             ${valid_gateway}  error
+
 
 Add Fourth Octet Threshold IP And Verify
     [Documentation]  Add fourth octet threshold IP and verify.

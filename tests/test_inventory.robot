@@ -430,69 +430,69 @@ Check Air Or Water Cooled
 Verify Minimal CPU Inventory
     [Documentation]  Verify minimal CPU inventory.
     [Tags]  Verify_Minimal_CPU_Inventory
+    [Template]     Minimum Inventory
 
     # item         minimum_count
     cpu            1
-    [Template]     Minimum Inventory
 
 Verify Minimal DIMM Inventory
     [Documentation]  Verify minimal DIMM inventory.
     [Tags]  Verify_Minimal_DIMM_Inventory
+    [Template]     Minimum Inventory
 
     # item         minimum_count
     dimm           2
-    [Template]     Minimum Inventory
 
 Verify Minimal Core Inventory
     [Documentation]  Verify minimal core inventory.
     [Tags]  Verify_Minimal_Core_Inventory
+    [Template]     Minimum Inventory
 
     # item         minimum_count
     core           1
-    [Template]     Minimum Inventory
 
 Verify Minimal Memory Buffer Inventory
     [Documentation]  Verify minimal memory buffer inventory.
     [Tags]  Verify_Minimal_Memory_Buffer_Inventory
+    [Template]     Minimum Inventory
 
     # item         minimum_count
     memory_buffer  1
-    [Template]     Minimum Inventory
 
 Verify Minimal Fan Inventory
     [Documentation]  Verify minimal fan inventory.
     [Tags]  Verify_Minimal_Fan_Inventory
+    [Template]     Minimum Inventory
 
     # item         minimum_count
     fan            2
-    [Template]     Minimum Inventory
 
 Verify Minimal Main Planar Inventory
     [Documentation]  Verify minimal main planar inventory.
     [Tags]  Verify_Minimal_Main_Planar_Inventory
+    [Template]     Minimum Inventory
 
     # item         minimum_count
     main_planar    1
-    [Template]     Minimum Inventory
 
 Verify Minimal System Inventory
     [Documentation]  Verify minimal system inventory.
     [Tags]  Verify_Minimal_System_Inventory
+    [Template]     Minimum Inventory
 
     # item         minimum_count
     system         1
-    [Template]     Minimum Inventory
 
 Verify Minimal Power Supply Inventory
     [Documentation]  Verify minimal power supply inventory.
     [Tags]  Verify_Minimal_Power_Supply_Inventory
+    [Template]     Minimum Inventory
     # Example:
     # "/xyz/openbmc_project/inventory/system/chassis/motherboard/powersupply0",
     # "/xyz/openbmc_project/inventory/system/chassis/motherboard/powersupply1",
 
     # item         minimum_count
     powersupply    1
-    [Template]     Minimum Inventory
 
 
 Verify Inventory List After Reboot

@@ -19,63 +19,63 @@ Force Tags        System_LED
 
 Test Heartbeat LED And Verify Via REST
     [Documentation]  Turn On Off heartbeat LED and verify via REST.
+    [Tags]  Test_Heartbeat_LED_And_Verify_Via_REST
+    [Template]  Set System LED State
+
     #LED Name  LED State
     heartbeat  On
     heartbeat  Off
 
-    [Tags]  Test_Heartbeat_LED_And_Verify_Via_REST
-    [Template]  Set System LED State
-
 Test Beep LED And Verify Via REST
     [Documentation]  Turn On Off beep LED and verify via REST.
+    [Tags]  Test_Beep_LED_And_Verify_Via_REST
+    [Template]  Set System LED State
+
     #LED Name  LED State
     beep       On
     beep       Off
 
-    [Tags]  Test_Beep_LED_And_Verify_Via_REST
-    [Template]  Set System LED State
-
 Test Identify LED And Verify Via REST
     [Documentation]  Turn On Off identify LED and verify via REST.
+    [Tags]  Test_Identify_LED_And_Verify_Via_REST
+    [Template]  Set System LED State
+
     #LED Name  LED State
     identify   On
     identify   Off
 
-    [Tags]  Test_Identify_LED_And_Verify_Via_REST
-    [Template]  Set System LED State
-
 Test Power LED And Verify Via REST
     [Documentation]  Turn On/Off power LED and verify via REST.
+    [Tags]  Test_Power_LED_And_Verify_Via_REST
+    [Template]  Set System LED State
+
     # LED Name  LED State
     rear_power       On
     rear_power       Off
     front_power      On
     front_power      Off
 
-    [Tags]  Test_Power_LED_And_Verify_Via_REST
-    [Template]  Set System LED State
-
 Test Fault LED And Verify Via REST
     [Documentation]  Turn On/Off fault LED and verify via REST.
+    [Tags]  Test_Fault_LED_And_Verify_Via_REST
+    [Template]  Set System LED State
+
     # LED Name  LED State
     rear_fault       On
     rear_fault       Off
     front_fault      On
     front_fault      Off
 
-    [Tags]  Test_Fault_LED_And_Verify_Via_REST
-    [Template]  Set System LED State
-
 Test Rear Identify LED And Verify Via REST
     [Documentation]  Turn On/Off identify LED and verify via REST.
+    [Tags]  Test_Rear_Identify_LED_And_Verify_Via_REST
+    [Template]  Set System LED State
+
     #LED Name  LED State
     rear_id    On
     rear_id    Off
     front_id   On
     front_id   Off
-
-    [Tags]  Test_Rear_Identify_LED_And_Verify_Via_REST
-    [Template]  Set System LED State
 
 
 Verify Rear Power LED With Host Power Off
