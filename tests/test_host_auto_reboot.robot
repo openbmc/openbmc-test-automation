@@ -16,21 +16,23 @@ Suite Teardown      Suite Teardown Execution
 *** Test Cases ***
 
 Verify Host Quiesce State Without Auto Reboot During Boot
-    # Description of template fields:
-    # Auto Reboot   Initial Host State     Expected Host Action
-    ${0}               Booting                No Reboot
     [Documentation]  Validate "Quiesce" state during IPL.
     [Tags]  Verify_Host_Quiesce_State_Without_Auto_Reboot_During_Boot
     [Template]  Verify Host Quiesce State
 
-
-Verify Host Quiesce State With Auto Reboot During Boot
     # Description of template fields:
     # Auto Reboot   Initial Host State     Expected Host Action
-    ${1}               Booting                Reboot
+    ${0}               Booting                No Reboot
+
+
+Verify Host Quiesce State With Auto Reboot During Boot
     [Documentation]  Validate "Quiesce" state during IPL.
     [Tags]  Verify_Host_Quiesce_State_With_Auto_Reboot_During_Boot
     [Template]  Verify Host Quiesce State
+
+    # Description of template fields:
+    # Auto Reboot   Initial Host State     Expected Host Action
+    ${1}               Booting                Reboot
 
 
 *** Keywords ***

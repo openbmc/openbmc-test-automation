@@ -270,100 +270,86 @@ Check Response Codes HTTP_UNSUPPORTED_MEDIA_TYPE
 
 Get Response Codes
     [Documentation]  REST "Get" response status test.
-    #--------------------------------------------------------------------
+    [Tags]  Get_Response_Codes
+    [Template]  Execute Get And Check Response
+
     # Expect status      URL Path
-    #--------------------------------------------------------------------
     ${HTTP_OK}           /org/
     ${HTTP_OK}           /xyz/
     ${HTTP_OK}           /xyz/openbmc_project/
     ${HTTP_OK}           /xyz/openbmc_project/state/enumerate
     ${HTTP_NOT_FOUND}    /i/dont/exist/
 
-    [Tags]  Get_Response_Codes
-    [Template]  Execute Get And Check Response
-
 
 Get Data
     [Documentation]  REST "Get" request url and expect the
     ...              response OK and data non empty.
-    #--------------------------------------------------------------------
+    [Tags]  Get_Data
+    [Template]  Execute Get And Check Data
+
     # URL Path
-    #--------------------------------------------------------------------
     /xyz/openbmc_project/
     /xyz/openbmc_project/list
     /xyz/openbmc_project/state/enumerate
-
-    [Tags]  Get_Data
-    [Template]  Execute Get And Check Data
 
 
 Get Data Validation
     [Documentation]  REST "Get" request url and expect the
     ...              pre-defined string in response data.
-    #--------------------------------------------------------------------
-    # URL Path                  Expect Data
-    #--------------------------------------------------------------------
-    /xyz/openbmc_project/       /xyz/openbmc_project/logging
-    /i/dont/exist/              path or object not found: /i/dont/exist
-
     [Tags]  Get_Data_Validation
     [Template]  Execute Get And Verify Data
+
+    # URL Path                  Expect Data
+    /xyz/openbmc_project/       /xyz/openbmc_project/logging
+    /i/dont/exist/              path or object not found: /i/dont/exist
 
 
 Put Response Codes
     [Documentation]  REST "Put" request url and expect the REST pre-defined
     ...              codes.
-    #--------------------------------------------------------------------
+    [Tags]  Put_Response_Codes
+    [Template]  Execute Put And Check Response
+
     # Expect status                 URL Path
-    #--------------------------------------------------------------------
     ${HTTP_METHOD_NOT_ALLOWED}      /
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
     ${HTTP_METHOD_NOT_ALLOWED}      /i/dont/exist/
 
-    [Tags]  Put_Response_Codes
-    [Template]  Execute Put And Check Response
-
 
 Put Data Validation
     [Documentation]  REST "Put" request url and expect success.
-    #--------------------------------------------------------------------
-    # URL Path                      Parm Data
-    #--------------------------------------------------------------------
-    /xyz/openbmc_project/state/host0/attr/RequestedHostTransition
-    ...  xyz.openbmc_project.State.Host.Transition.Off
-
     [Tags]  Put_Data_Validation
     [Template]  Execute Put And Expect Success
+
+    # URL Path                      Parm Data
+    /xyz/openbmc_project/state/host0/attr/RequestedHostTransition
+    ...  xyz.openbmc_project.State.Host.Transition.Off
 
 
 Post Response Code
     [Documentation]  REST Post request url and expect the
     ...              REST response code pre define.
-    #--------------------------------------------------------------------
+    [Tags]  Post_Response_Codes
+    [Template]  Execute Post And Check Response
+
     # Expect status                 URL Path
-    #--------------------------------------------------------------------
     ${HTTP_METHOD_NOT_ALLOWED}      /
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
     ${HTTP_METHOD_NOT_ALLOWED}      /i/dont/exist/
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/login
 
-    [Tags]  Post_Response_Codes
-    [Template]  Execute Post And Check Response
-
 
 Delete Response Code
     [Documentation]  REST "Delete" request url and expect the
     ...              REST response code pre define.
-    #--------------------------------------------------------------------
+    [Tags]  Delete_Response_Codes
+    [Template]  Execute Delete And Check Response
+
     # Expect status                 URL Path
-    #--------------------------------------------------------------------
     ${HTTP_METHOD_NOT_ALLOWED}      /
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/nothere/
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/openbmc_project/state/
-
-    [Tags]  Delete_Response_Codes
-    [Template]  Execute Delete And Check Response
 
 
 Verify All REST Objects Are Accessible

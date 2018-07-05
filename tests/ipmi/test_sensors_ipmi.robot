@@ -50,252 +50,228 @@ DIMM Functional And Not Functional
 
 CPU Present
     [Documentation]  Verify the IPMI sensor for CPU present.
+    [Tags]  CPU_Present
+    [Template]  Check Present Bit
 
     # sensor_id  component
     0x5a          cpu0
-
-    [Template]  Check Present Bit
-    [Tags]  CPU_Present
 
 
 CPU Not Present
     [Documentation]  Verify the IPMI sensor for CPU not present.
+    [Tags]  CPU_Not_Present
+    [Template]  Check Not Present Bit
 
     # sensor_id  component
     0x5a          cpu0
-
-    [Template]  Check Not Present Bit
-    [Tags]  CPU_Not_Present
 
 
 CPU Functional
     [Documentation]  Verify the IPMI sensor for CPU functional.
+    [Tags]  CPU_Functional
+    [Template]  Check Functional Bit
 
     # sensor_id  component
     0x5a          cpu0
-
-    [Template]  Check Functional Bit
-    [Tags]  CPU_Functional
 
 
 CPU Not Functional
     [Documentation]  Verify the IPMI sensor for CPU not functional.
+    [Tags]  CPU_Not_Functional
+    [Template]  Check Not Functional Bit
 
     # sensor_id  component
     0x5a          cpu0
 
-    [Template]  Check Not Functional Bit
-    [Tags]  CPU_Not_Functional
-
 
 GPU Present
     [Documentation]  Verify the IPMI sensor for GPU present.
+    [Tags]  GPU_Present
+    [Template]  Check Present Bit
 
     # sensor_id  component
     0xC5          gv100card0
-
-    [Template]  Check Present Bit
-    [Tags]  GPU_Present
 
 
 GPU Not Present
     [Documentation]  Verify the IPMI sensor for GPU not present.
+    [Tags]  GPU_Not_Present
+    [Template]  Check Not Present Bit
 
     # sensor_id  component
     0xC5          gv100card0
-
-    [Template]  Check Not Present Bit
-    [Tags]  GPU_Not_Present
 
 
 GPU Functional
     [Documentation]  Verify the IPMI sensor GPU for functional.
+    [Tags]  GPU_Functional
+    [Template]  Check Functional Bit
 
     # sensor_id  component
     0xC5          gv100card0
-
-    [Template]  Check Functional Bit
-    [Tags]  GPU_Functional
 
 
 GPU Not Functional
     [Documentation]  Verify the IPMI sensor GPU for not functional.
+    [Tags]  GPU_Not_Functional
+    [Template]  Check Not Functional Bit
 
     # sensor_id  component
     0xC5          gv100card0
 
-    [Template]  Check Not Functional Bit
-    [Tags]  GPU_Not_Functional
-
 
 Core Present
     [Documentation]  Verify the IPMI sensor for core present.
+    [Tags]  Core_Present
+    [Template]  Check Present Bit
 
     # sensor_id  component
     0x1e          cpu0/core4
-
-    [Template]  Check Present Bit
-    [Tags]  Core_Present
 
 
 Core Not Present
     [Documentation]  Verify the IPMI sensor for core not present.
+    [Tags]  Core_Not_Present
+    [Template]  Check Not Present Bit
 
     # sensor_id  component
     0x1e          cpu0/core4
-
-    [Template]  Check Not Present Bit
-    [Tags]  Core_Not_Present
 
 
 Core Functional
     [Documentation]  Verify the IPMI sensor for core functional.
+    [Tags]  Core_Functional
+    [Template]  Check Functional Bit
 
     # sensor_id  component
     0x1e          cpu0/core4
-
-    [Template]  Check Functional Bit
-    [Tags]  Core_Functional
 
 
 Core Not Functional
     [Documentation]  Verify the IPMI sensor for core not functional.
+    [Tags]  Core_Not_Functional
+    [Template]  Check Not Functional Bit
 
     # sensor_id  component
     0x1e          cpu0/core4
-
-    [Template]  Check Not Functional Bit
-    [Tags]  Core_Not_Functional
 
 
 # Operating System State Test Cases.
 
 Set BootProgress To OSStart And Verify
     [Documentation]  Set BootProgress To OSStart and verify.
+    [Tags]  Set_BootProgress_To_OSStart_And_Verify
+    [Template]  Check BootProgress
 
     # BootProgressID  BootProgress
     0x13              ${OS_BOOT_START}
-
-    [Template]  Check BootProgress
-    [Tags]  Set_BootProgress_To_OSStart_And_Verify
 
 
 Set OperatingSystemState To CBoot And Verify
     [Documentation]  Set Operating System State to "CBoot"
     ...  and verify using REST.
+    [Tags]  Set_OperatingSystemState_To_CBoot_And_Verify
+    [Template]  Check OperatingSystemState
 
     # OperatingSystemStateID  OperatingSystemState
     0x02                      ${OS_BOOT_CBoot}
-
-    [Template]  Check OperatingSystemState
-    [Tags]  Set_OperatingSystemState_To_CBoot_And_Verify
 
 
 Set OperatingSystemState To PXEBoot And Verify
     [Documentation]  Set Operating System State to "PXEBoot"
     ...  and verify using REST.
+    [Tags]  Set_OperatingSystemState_To_PXEBoot_And_Verify
+    [Template]  Check OperatingSystemState
 
     # OperatingSystemStateID  OperatingSystemState
     0x05                      ${OS_BOOT_PXE}
-
-    [Template]  Check OperatingSystemState
-    [Tags]  Set_OperatingSystemState_To_PXEBoot_And_Verify
 
 
 Set OperatingSystemState To BootComplete And Verify
     [Documentation]  Set Operating System State to "BootComplete"
     ...  and verify using REST.
+    [Tags]  Set_OperatingSystemState_To_BootComplete_And_Verify
+    [Template]  Check OperatingSystemState
 
     # OperatingSystemStateID  OperatingSystemState
     0x40                      ${OS_BOOT_COMPLETE}
-
-    [Template]  Check OperatingSystemState
-    [Tags]  Set_OperatingSystemState_To_BootComplete_And_Verify
 
 
 Set OperatingSystemState To CDROMBoot And Verify
     [Documentation]  Set Operating System State to "CDROMBoot"
     ...  and verify using REST.
+    [Tags]  Set_OperatingSystemState_To_CDROMBoot_And_Verify
+    [Template]  Check OperatingSystemState
 
     # OperatingSystemStateID  OperatingSystemState
     0x10                      ${OS_BOOT_CDROM}
-
-    [Template]  Check OperatingSystemState
-    [Tags]  Set_OperatingSystemState_To_CDROMBoot_And_Verify
 
 
 Set OperatingSystemState To ROMBoot And Verify
     [Documentation]  Set Operating System State to "ROMBoot"
     ...  and verify using REST.
+    [Tags]  Set_OperatingSystemState_To_ROMBoot_And_Verify
+    [Template]  Check OperatingSystemState
 
     # OperatingSystemStateID  OperatingSystemState
     0x20                      ${OS_BOOT_ROM}
-
-    [Template]  Check OperatingSystemState
-    [Tags]  Set_OperatingSystemState_To_ROMBoot_And_Verify
 
 
 Set OperatingSystemState To DiagBoot And Verify
     [Documentation]  Set Operating System State to "DiagBoot"
     ...  and verify using REST.
+    [Tags]  Set_OperatingSystemState_To_DiagBoot_And_Verify
+    [Template]  Check OperatingSystemState
 
     # OperatingSystemStateID  OperatingSystemState
     0x08                      ${OS_BOOT_DiagBoot}
-
-    [Template]  Check OperatingSystemState
-    [Tags]  Set_OperatingSystemState_To_DiagBoot_And_Verify
 
 
 # Boot Progress Test Cases.
 
 Set BootProgress To MemoryInit And Verify
     [Documentation]  Set BootProgress to "MemoryInit" and verify.
+    [Tags]  Set_BootProgress_To_MemoryInit_And_Verify
+    [Template]  Check BootProgress
 
     # BootProgressID  BootProgress
     0x01              ${OS_BOOT_MEM}
 
-    [Template]  Check BootProgress
-    [Tags]  Set_BootProgress_To_MemoryInit_And_Verify
-
 
 Set BootProgress To MotherboardInit And Verify
     [Documentation]  Set BootProgress to "MotherboardInit" and verify.
+    [Tags]  Set_BootProgress_To_MotherboardInit_And_Verify
+    [Template]  Check BootProgress
 
     # BootProgressID  BootProgress
     0x14              ${OS_BOOT_MOTHERBOARD}
 
-    [Template]  Check BootProgress
-    [Tags]  Set_BootProgress_To_MotherboardInit_And_Verify
-
 
 Set BootProgress To SecondaryProcInit And Verify
     [Documentation]  Set BootProgress to "SecondaryProcInit" and verify.
+    [Tags]  Set_BootProgress_To_SecondaryProcInit_And_Verify
+    [Template]  Check BootProgress
 
     # BootProgressID  BootProgress
     0x03              ${OS_BOOT_SECPCI}
 
-    [Template]  Check BootProgress
-    [Tags]  Set_BootProgress_To_SecondaryProcInit_And_Verify
-
 
 Set BootProgress To PCIinit And Verify
     [Documentation]  Set BootProgress to "PCIinit" and verify.
+    [Tags]  Set_BootProgress_To_PCIinit_And_Verify
+    [Template]  Check BootProgress
 
     #BootProgressID  BootProgress
     0x07             ${OS_BOOT_PCI}
 
-    [Template]  Check BootProgress
-    [Tags]  Set_BootProgress_To_PCIinit_And_Verify
-
 
 Set BootProgress To Unspecified And Verify
     [Documentation]  Set BootProgress to "Unspecified" and verify.
+    [Tags]  Set_BootProgress_To_Unspecified_And_Verify
+    [Template]  Check BootProgress
 
     # BootProgressID  BootProgress
     0x00              ${OS_BOOT_OFF}
-
-    [Template]  Check BootProgress
-    [Tags]  Set_BootProgress_To_Unspecified_And_Verify
 
 
 TPM Enable and Disable
