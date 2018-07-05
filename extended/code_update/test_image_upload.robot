@@ -32,131 +32,119 @@ ${QUIET}              ${1}
 *** Test Cases ***
 
 Upload Host Image Via REST
-    # Image File Path
-
-    ${PNOR_IMAGE_FILE_PATH}
-
     [Documentation]  Upload a PNOR image via REST.
-    [Template]  Upload Image Via REST And Verify Success
     [Tags]  Upload_Host_Image_Via_REST
+    [Template]  Upload Image Via REST And Verify Success
+
+    # Image File Path
+    ${PNOR_IMAGE_FILE_PATH}
 
 
 Upload BMC Image Via REST
-    # Image File Path
-
-    ${BMC_IMAGE_FILE_PATH}
-
     [Documentation]  Upload a BMC image via REST.
-    [Template]  Upload Image Via REST And Verify Success
     [Tags]  Upload_BMC_Image_Via_REST
+    [Template]  Upload Image Via REST And Verify Success
+
+    # Image File Path
+    ${BMC_IMAGE_FILE_PATH}
 
 
 Upload Host Image Via TFTP
-    # Image File Path
-
-    ${PNOR_TFTP_FILE_NAME}
-
     [Documentation]  Upload a PNOR image via TFTP.
-    [Template]  Upload Image Via TFTP And Verify Success
     [Tags]  Upload_Host_Image_Via_TFTP
+    [Template]  Upload Image Via TFTP And Verify Success
+
+    # Image File Path
+    ${PNOR_TFTP_FILE_NAME}
 
 
 Upload BMC Image Via TFTP
-    # Image File Path
-
-    ${BMC_TFTP_FILE_NAME}
-
     [Documentation]  Upload a BMC image via TFTP
-    [Template]  Upload Image Via TFTP And Verify Success
     [Tags]  Upload_BMC_Image_Via_TFTP
+    [Template]  Upload Image Via TFTP And Verify Success
+
+    # Image File Path
+    ${BMC_TFTP_FILE_NAME}
 
 
 Upload Host Image With Bad Manifest Via REST
-    # Image File Name
-
-    pnor_bad_manifest.tar
-
     [Documentation]  Upload a PNOR image with a bad MANIFEST via REST and
     ...              verify that the BMC does not unpack it.
-    [Template]  Upload Bad Image Via REST And Verify Failure
     [Tags]  Upload_Host_Image_With_Bad_Manifest_Via_REST
+    [Template]  Upload Bad Image Via REST And Verify Failure
+
+    # Image File Name
+    pnor_bad_manifest.tar
 
 
 Upload Host Image With No Squashfs Via REST
-    # Image File Name
-
-    pnor_no_image.tar
-
     [Documentation]  Upload a PNOR image with just a MANIFEST file via REST
     ...              and verify that the BMC does not unpack it.
-    [Template]  Upload Bad Image Via REST And Verify Failure
     [Tags]  Upload_Host_Image_With_No_Squashfs_Via_REST
+    [Template]  Upload Bad Image Via REST And Verify Failure
+
+    # Image File Name
+    pnor_no_image.tar
 
 
 Upload BMC Image With Bad Manifest Via REST
-    # Image File Name
-
-    bmc_bad_manifest.tar
-
     [Documentation]  Upload a BMC image with a bad MANFIEST file via REST and
     ...              verify that the BMC does not unpack it.
-    [Template]  Upload Bad Image Via REST And Verify Failure
     [Tags]  Upload_BMC_Image_With_Bad_Manifest_Via_REST
+    [Template]  Upload Bad Image Via REST And Verify Failure
+
+    # Image File Name
+    bmc_bad_manifest.tar
 
 
 Upload BMC Image With No Image Via REST
-    # Image File Name
-
-    bmc_no_image.tar
-
     [Documentation]  Upload a BMC image with no just a MANIFEST file via REST
     ...              and verify that the BMC does not unpack it.
-    [Template]  Upload Bad Image Via REST And Verify Failure
     [Tags]  Upload_BMC_Image_With_No_Image_Via_REST
+    [Template]  Upload Bad Image Via REST And Verify Failure
+
+    # Image File Name
+    bmc_no_image.tar
 
 
 Upload Host Image With Bad Manifest Via TFTP
-    # Image File Name
-
-    pnor_bad_manifest.tar
-
     [Documentation]  Upload a PNOR image with a bad MANIFEST file via TFTP and
     ...              verify that the BMC does not unpack it.
-    [Template]  Upload Bad Image Via TFTP And Verify Failure
     [Tags]  Upload_Host_Image_With_Bad_Manifest_Via_TFTP
+    [Template]  Upload Bad Image Via TFTP And Verify Failure
+
+    # Image File Name
+    pnor_bad_manifest.tar
 
 
 Upload Host Image With No Squashfs Via TFTP
-    # Image File Name
-
-    pnor_no_image.tar
-
     [Documentation]  Upload a PNOR image with just a MANIFEST file via TFTP and
     ...              verify that the BMC does not unpack it.
-    [Template]  Upload Bad Image Via TFTP And Verify Failure
     [Tags]  Upload_Host_Image_With_No_Squashfs_Via_TFTP
+    [Template]  Upload Bad Image Via TFTP And Verify Failure
+
+    # Image File Name
+    pnor_no_image.tar
 
 
 Upload BMC Image With Bad Manifest Via TFTP
-    # Image File Name
-
-    bmc_bad_manifest.tar
-
     [Documentation]  Upload a BMC image with a bad MANIFEST file via TFTP and
     ...              verify that the BMC does not unpack it.
-    [Template]  Upload Bad Image Via TFTP And Verify Failure
     [Tags]  Upload_BMC_Image_With_Bad_Manifest_Via_TFTP
+    [Template]  Upload Bad Image Via TFTP And Verify Failure
+
+    # Image File Name
+    bmc_bad_manifest.tar
 
 
 Upload BMC Image With No Image Via TFTP
-    # Image File Name
-
-    bmc_no_image.tar
-
     [Documentation]  Upload a BMC image with just a MANIFEST file via TFTP and
     ...              verify that the BMC does not unpack it.
-    [Template]  Upload Bad Image Via TFTP And Verify Failure
     [Tags]  Upload_BMC_Image_With_No_Image_Via_TFTP
+    [Template]  Upload Bad Image Via TFTP And Verify Failure
+
+    # Image File Name
+    bmc_no_image.tar
 
 
 *** Keywords ***

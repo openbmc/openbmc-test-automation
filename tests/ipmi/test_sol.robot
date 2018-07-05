@@ -141,43 +141,39 @@ Verify Deactivate Non Existing SOL
 
 
 Set Valid SOL Retry Count
-    # Description of template fields:
-    # Setting name    Min valid value    Max valid value
-    retry-count       0                  7
     [Documentation]  Verify valid SOL's retry count via IPMI.
     [Tags]  Set_Valid_SOL_Retry_Count
-
     [Template]  Verify SOL Setting
+
+    # Setting name    Min valid value    Max valid value
+    retry-count       0                  7
 
 
 Set Valid SOL Retry Interval
-    # Description of template fields:
-    # Setting name    Min valid value    Max valid value
-    retry-interval    0                  255
     [Documentation]  Verify valid SOL's retry interval via IPMI.
     [Tags]  Set_Valid_SOL_Retry_Interval
-
     [Template]  Verify SOL Setting
+
+    # Setting name    Min valid value    Max valid value
+    retry-interval    0                  255
 
 
 Set Valid SOL Character Accumulate Level
-    # Description of template fields:
-    # Setting name              Min valid value    Max valid value
-    character-accumulate-level  1                  255
     [Documentation]  Verify valid SOL's character accumulate level via IPMI.
     [Tags]  Set_Valid_SOL_Character_Accumulate_Level
-
     [Template]  Verify SOL Setting
+
+    # Setting name              Min valid value    Max valid value
+    character-accumulate-level  1                  255
 
 
 Set Valid SOL Character Send Threshold
-    # Description of template fields:
-    # Setting name              Min valid value    Max valid value
-    character-send-threshold    0                  255
     [Documentation]  Verify valid SOL's character send threshold via IPMI.
     [Tags]  Set_Valid_SOL_Character_Send_Threshold
-
     [Template]  Verify SOL Setting
+
+    # Setting name              Min valid value    Max valid value
+    character-send-threshold    0                  255
 
 *** Keywords ***
 

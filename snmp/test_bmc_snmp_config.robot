@@ -29,44 +29,44 @@ Configure SNMP Manager On BMC With Non-default Port And Verify
     Delete SNMP Manager And Object  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
 Configure SNMP Manager On BMC With Out Of Range Port And Verify
-    # SNMP manager IP  Port                  Scenario
-    ${SNMP_MGR1_IP}    ${out_of_range_port}  error
     [Documentation]  Configure SNMP Manager On BMC with out-of range port and verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Out_Of_Range_Port_And_Verify
-
     [Template]  Configure SNMP Manager On BMC
+
+    # SNMP manager IP  Port                  Scenario
+    ${SNMP_MGR1_IP}    ${out_of_range_port}  error
 
 Configure SNMP Manager On BMC With Alpha Port And Verify
-    # SNMP manager IP  Port           Scenario
-    ${SNMP_MGR1_IP}    ${alpha_port}  error
     [Documentation]  Configure SNMP Manager On BMC with alpha port and verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Alpha_Port_And_Verify
-
     [Template]  Configure SNMP Manager On BMC
+
+    # SNMP manager IP  Port           Scenario
+    ${SNMP_MGR1_IP}    ${alpha_port}  error
 
 Configure SNMP Manager On BMC With Negative Port And Verify
-    # SNMP manager IP  Port              Scenario
-    ${SNMP_MGR1_IP}    ${negative_port}  error
     [Documentation]  Configure SNMP Manager On BMC with negative port and verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Negative_Port_And_Verify
-
     [Template]  Configure SNMP Manager On BMC
+
+    # SNMP manager IP  Port              Scenario
+    ${SNMP_MGR1_IP}    ${negative_port}  error
 
 Configure SNMP Manager On BMC With Empty Port And Verify
-    # SNMP manager IP  Port           Scenario
-    ${SNMP_MGR1_IP}    ${empty_port}  error
     [Documentation]  Configure SNMP Manager On BMC with empty port and verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Empty_Port_And_Verify
-
     [Template]  Configure SNMP Manager On BMC
+
+    # SNMP manager IP  Port           Scenario
+    ${SNMP_MGR1_IP}    ${empty_port}  error
 
 Configure SNMP Manager On BMC With Out Of Range IP And Verify
-    # SNMP manager IP   Port                  Scenario
-    ${out_of_range_ip}  ${SNMP_DEFAULT_PORT}  error
     [Documentation]  Configure SNMP Manager On BMC with out-of range IP and verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Out_Of_Range_IP_And_Verify
-
     [Template]  Configure SNMP Manager On BMC
+
+    # SNMP manager IP   Port                  Scenario
+    ${out_of_range_ip}  ${SNMP_DEFAULT_PORT}  error
 
 Configure Multiple SNMP Managers And Verify
     [Documentation]  Configure multiple SNMP Managers And Verify.

@@ -23,10 +23,6 @@ Force Tags      power_restore
 *** Test Cases ***
 
 Test Restore Policy ALWAYS_POWER_OFF With Host Off
-    # Policy                Initial Host State     Expected Host State
-
-    ${ALWAYS_POWER_OFF}     Off                    Off
-
     [Documentation]  Validate ALWAYS_POWER_OFF restore policy functionality.
     ...              Policy:
     ...                    System policy set to ALWAYS_POWER_OFF.
@@ -36,26 +32,24 @@ Test Restore Policy ALWAYS_POWER_OFF With Host Off
     ...              Expected Host State:
     ...                    After BMC reset, system should reach this
     ...                    specific state.
-
-    [Template]  Verify Restore Policy
     [Tags]  Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Off
+    [Template]  Verify Restore Policy
+
+    # Policy                Initial Host State     Expected Host State
+    ${ALWAYS_POWER_OFF}     Off                    Off
+
 
 
 Test Restore Policy ALWAYS_POWER_OFF With Host Running
-    # Policy                Initial Host State     Expected Host State
-
-    ${ALWAYS_POWER_OFF}     Running                Running
-
     [Documentation]  Verify that the BMC restore policy is ALWAYS_POWER_OFF while the Host is running.
-    [Template]  Verify Restore Policy
     [Tags]  Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Running
+    [Template]  Verify Restore Policy
+
+    # Policy                Initial Host State     Expected Host State
+    ${ALWAYS_POWER_OFF}     Running                Running
 
 
 Test Restore Policy ALWAYS_POWER_ON With Host Off
-    # Policy                Initial Host State     Expected Host State
-
-    ${ALWAYS_POWER_ON}      Off                    Running
-
     [Documentation]  Validate ALWAYS_POWER_ON restore policy functionality.
     ...              Policy:
     ...                    System policy set to ALWAYS_POWER_OFF.
@@ -65,26 +59,25 @@ Test Restore Policy ALWAYS_POWER_ON With Host Off
     ...              Expected Host State:
     ...                    After BMC reset, system should reach this
     ...                    specific state.
-
-    [Template]  Verify Restore Policy
     [Tags]  Test_Restore_Policy_ALWAYS_POWER_ON_With_Host_Off
+    [Template]  Verify Restore Policy
+
+    # Policy                Initial Host State     Expected Host State
+    ${ALWAYS_POWER_ON}      Off                    Running
+
 
 
 Test Restore Policy ALWAYS_POWER_ON With Host Running
-    # Policy                Initial Host State     Expected Host State
+    [Documentation]  Verify the BMC restore policy is ALWAYS_POWER_ON while the Host is running.
+    [Tags]  Test_Restore_Policy_ALWAYS_POWER_ON_With_Host_Running
+    [Template]  Verify Restore Policy
 
+    # Policy                Initial Host State     Expected Host State
     ${ALWAYS_POWER_ON}      Running                Running
 
-    [Documentation]  Verify the BMC restore policy is ALWAYS_POWER_ON while the Host is running.
-    [Template]  Verify Restore Policy
-    [Tags]  Test_Restore_Policy_ALWAYS_POWER_ON_With_Host_Running
 
 
 Test Restore Policy Restore Last State With Host Running
-    # Policy                Initial Host State     Expected Host State
-
-    ${RESTORE_LAST_STATE}   Running                Running
-
     [Documentation]  Validate RESTORE_LAST_STATE restore policy functionality.
     ...              Policy:
     ...                    System policy set to RESTORE_LAST_STATE.
@@ -94,19 +87,21 @@ Test Restore Policy Restore Last State With Host Running
     ...              Expected Host State:
     ...                    After BMC reset, system should reach this
     ...                    specific state.
-
-    [Template]  Verify Restore Policy
     [Tags]  Test_Restore_Policy_Restore_Last_State_With_Host_Running
+    [Template]  Verify Restore Policy
+
+    # Policy                Initial Host State     Expected Host State
+    ${RESTORE_LAST_STATE}   Running                Running
+
 
 
 Test Restore Policy Restore Last State With Host Off
-    # Policy                Initial Host State     Expected Host State
-
-    ${RESTORE_LAST_STATE}   Off                    Off
-
     [Documentation]  Verify the RESTORE_LAST_STATE restore policy functionality while the Host is off.
-    [Template]  Verify Restore Policy
     [Tags]  Test_Restore_Policy_Restore_Last_State_With_Host_Off
+    [Template]  Verify Restore Policy
+
+    # Policy                Initial Host State     Expected Host State
+    ${RESTORE_LAST_STATE}   Off                    Off
 
 
 *** Keywords ***
