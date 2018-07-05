@@ -81,147 +81,164 @@ Set System Time with no time
 
 
 Set BMC Time With BMC And Manual
-    #Operation    Owner          Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${BMC_OWNER}   ${MANUAL_MODE}  ok      Set       Change
-
     [Documentation]  Set BMC time when time owner is BMC and time mode is
     ...              manual.
     [Tags]  Set_BMC_Time_With_BMC_And_Manual
     [Template]  Set Time Using REST
 
-Set BMC Time With Both And Manual
     #Operation    Owner          Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${BOTH_OWNER}  ${MANUAL_MODE}  ok      Set       Change
+    Set BMC Time  ${BMC_OWNER}   ${MANUAL_MODE}  ok      Set       Change
 
+
+Set BMC Time With Both And Manual
     [Documentation]  Set BMC time when time owner is Both and time mode is
     ...              manual.
     [Tags]  Set_BMC_Time_With_Both_And_Manual
     [Template]  Set Time Using REST
 
+    #Operation    Owner          Mode            Status  BMC Time  Host Time
+    Set BMC Time  ${BOTH_OWNER}  ${MANUAL_MODE}  ok      Set       Change
+
 
 Set BMC Time With Split And Manual
-    #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${SPLIT_OWNER}  ${MANUAL_MODE}  ok      Set       No Change
-
     [Documentation]  Set BMC time when time owner is Split and time mode is
     ...              manual.
     [Tags]  Set_BMC_Time_With_Split_And_Manual
     [Template]  Set Time Using REST
 
-Set BMC Time With BMC And NTP
     #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${BMC_OWNER}    ${NTP_MODE}     ok      Not Set   No Change
+    Set BMC Time  ${SPLIT_OWNER}  ${MANUAL_MODE}  ok      Set       No Change
 
+
+Set BMC Time With BMC And NTP
     [Documentation]  Set BMC time when time owner is BMC and time mode is
     ...              NTP.
     [Tags]  Set_BMC_Time_With_BMC_And_NTP
     [Template]  Set Time Using REST
 
-Set BMC Time With Host And Manual
     #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${HOST_OWNER}   ${MANUAL_MODE}  ok      Not Set   No Change
+    Set BMC Time  ${BMC_OWNER}    ${NTP_MODE}     ok      Not Set   No Change
+
+
+Set BMC Time With Host And Manual
     [Documentation]  Set BMC time when time owner is Host and time mode is
     ...              Manual.
     [Tags]  Set_BMC_Time_With_Host_And_Manual
     [Template]  Set Time Using REST
 
-Set BMC Time With Both And NTP
     #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${BOTH_OWNER}   ${NTP_MODE}     ok      Not Set   No Change
+    Set BMC Time  ${HOST_OWNER}   ${MANUAL_MODE}  ok      Not Set   No Change
 
+
+Set BMC Time With Both And NTP
     [Documentation]  Set BMC time when time owner is Both and time mode is
     ...              NTP.
     [Tags]  Set_BMC_Time_With_Both_And_NTP
     [Template]  Set Time Using REST
 
-Set BMC Time With Split And NTP
     #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${SPLIT_OWNER}  ${NTP_MODE}     ok      Not Set   No Change
+    Set BMC Time  ${BOTH_OWNER}   ${NTP_MODE}     ok      Not Set   No Change
 
+
+Set BMC Time With Split And NTP
     [Documentation]  Set BMC time when time owner is Split and time mode is
     ...              NTP.
     [Tags]  Set_BMC_Time_With_Split_And_NTP
     [Template]  Set Time Using REST
 
-Set BMC Time With Host And NTP
     #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${HOST_OWNER}   ${NTP_MODE}     ok      Not Set   No Change
+    Set BMC Time  ${SPLIT_OWNER}  ${NTP_MODE}     ok      Not Set   No Change
 
+
+Set BMC Time With Host And NTP
     [Documentation]  Set BMC time when time owner is Host and time mode is
     ...              NTP.
     [Tags]  Set_BMC_Time_With_Host_And_NTP
     [Template]  Set Time Using REST
 
+    #Operation    Owner           Mode            Status  BMC Time  Host Time
+    Set BMC Time  ${HOST_OWNER}   ${NTP_MODE}     ok      Not Set   No Change
+
 
 Set Host Time With Host And Manual
-    #Operation     Owner          Mode            Status  BMC Time  Host Time
-    Set Host Time  ${HOST_OWNER}  ${MANUAL_MODE}  ok      Change    Set
-
     [Documentation]  Set host time when time owner is host and time mode is
     ...              manual.
     [Tags]  Set_Host_Time_With_Host_And_Manual
     [Template]  Set Time Using REST
 
-Set Host Time With Both And Manual
     #Operation     Owner          Mode            Status  BMC Time  Host Time
-    Set Host Time  ${BOTH_OWNER}  ${MANUAL_MODE}  ok      Change    Set
+    Set Host Time  ${HOST_OWNER}  ${MANUAL_MODE}  ok      Change    Set
 
+
+Set Host Time With Both And Manual
     [Documentation]  Set host time when time owner is both and time mode is
     ...              manual.
     [Tags]  Set_Host_Time_With_Both_And_Manual
     [Template]  Set Time Using REST
 
-Set Host Time With Both And NTP
-    #Operation     Owner           Mode           Status  BMC Time   Host Time
-    Set Host Time  ${BOTH_OWNER}   ${NTP_MODE}    ok      No Change  Not Set
+    #Operation     Owner          Mode            Status  BMC Time  Host Time
+    Set Host Time  ${BOTH_OWNER}  ${MANUAL_MODE}  ok      Change    Set
 
+
+Set Host Time With Both And NTP
     [Documentation]  Set host time when time owner is both and time mode is
     ...              NTP.
     [Tags]  Set_Host_Time_With_Both_And_NTP
     [Template]  Set Time Using REST
 
-Set Host Time With Split And Manual
-    #Operation     Owner           Mode            Status  BMC Time   Host Time
-    Set Host Time  ${SPLIT_OWNER}  ${MANUAL_MODE}  ok      No Change  Set
+    #Operation     Owner           Mode           Status  BMC Time   Host Time
+    Set Host Time  ${BOTH_OWNER}   ${NTP_MODE}    ok      No Change  Not Set
 
+
+Set Host Time With Split And Manual
     [Documentation]  Set host time when time owner is split and time mode is
     ...              manual.
     [Tags]  Set_Host_Time_With_Split_And_Manual
     [Template]  Set Time Using REST
 
-Set Host Time With Split And NTP
-    #Operation     Owner           Mode            Status   BMC Time   HOST Time
-    Set Host Time  ${SPLIT_OWNER}  ${NTP_MODE}     ok       No Change  Set
+    #Operation     Owner           Mode            Status  BMC Time   Host Time
+    Set Host Time  ${SPLIT_OWNER}  ${MANUAL_MODE}  ok      No Change  Set
 
+
+Set Host Time With Split And NTP
     [Documentation]  Set host time when time owner is split and time mode is
     ...              NTP.
     [Tags]  Set_Host_Time_With_Split_And_NTP
     [Template]  Set Time Using REST
 
-Set Host Time With BMC And Manual
     #Operation     Owner           Mode            Status   BMC Time   HOST Time
-    Set Host Time  ${BMC_OWNER}    ${MANUAL_MODE}  ok       No Change  Not Set
+    Set Host Time  ${SPLIT_OWNER}  ${NTP_MODE}     ok       No Change  Set
+
+
+Set Host Time With BMC And Manual
     [Documentation]  Set host time when time owner is BMC and time mode is
     ...              Manual.
     [Tags]  Set_Host_Time_With_BMC_And_Manual
     [Template]  Set Time Using REST
 
-Set Host Time With BMC Owner NTP
     #Operation     Owner           Mode            Status   BMC Time   HOST Time
-    Set Host Time  ${BMC_OWNER}    ${NTP_MODE}     ok       No Change  Not Set
+    Set Host Time  ${BMC_OWNER}    ${MANUAL_MODE}  ok       No Change  Not Set
+
+
+Set Host Time With BMC Owner NTP
     [Documentation]  Set host time when time owner is BMC and time mode is
     ...              NTP.
     [Tags]  Set_Host_Time_With_BMC_And_NTP
     [Template]  Set Time Using REST
 
-Set Host Time With Host And NTP
-    #Operation     Owner           Mode            Status  BMC Time    Host Time
-    Set Host Time  ${HOST_OWNER}   ${NTP_MODE}     ok      Not Change  No Set
+    #Operation     Owner           Mode            Status   BMC Time   HOST Time
+    Set Host Time  ${BMC_OWNER}    ${NTP_MODE}     ok       No Change  Not Set
 
+
+Set Host Time With Host And NTP
     [Documentation]  Set host time when time owner is Host and time mode is
     ...              NTP.
     [Tags]  Set_Host_Time_With_Host_And_NTP
     [Template]  Set Time Using REST
+
+    #Operation     Owner           Mode            Status  BMC Time    Host Time
+    Set Host Time  ${HOST_OWNER}   ${NTP_MODE}     ok      Not Change  No Set
+
 
 Set Invalid Time Mode
     [Documentation]  Set time mode with invalid value using REST and verify
