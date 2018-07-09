@@ -58,7 +58,7 @@ Update PNOR Image
     Run Key  Copy PNOR to BMC
     ${pnor_path}  ${pnor_basename}=  Split Path  ${PNOR_IMAGE_PATH}
     Run Key  Flash PNOR \ /tmp/${pnor_basename}
-    Run Key  Wait Until Keyword Succeeds \ 7 min \ 10 sec \ Is PNOR Flash Done
+    Run Key  Wait Until Keyword Succeeds \ 15 min \ 10 sec \ Is PNOR Flash Done
 
 Validate Power On
     [Documentation]  Power the host on, and validate that the system booted.
