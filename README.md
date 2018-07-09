@@ -88,17 +88,19 @@ classified as follows:
 
 `xcat/`: Contains test cases for XCAT automation.
 
-`ras/`: Contains test cases for RAS (Reliability, availability and
-        serviceability).
-
 `gui/`: Contains test cases for web UI and security scanning tool automation.
 
 `mnfg/`: Contains test cases for factory reset (DHCP mode) and PGOOD testing.
 
 `network/`: Contains test cases for network testing.
 
-`secureboot/`: Contains test cases for secure boot testing on a secure boot
-               feature enabled system only.
+`snmp/`: Contains test cases for snmp configuration testing on BMC.
+
+`openpower/ras/`: Contains test cases for RAS (Reliability, availability and
+                  serviceability).
+
+`openpower/secureboot/`: Contains test cases for secure boot testing on a
+                         secure boot feature enabled system only.
 
 `tools/`: Contains various tools.
 
