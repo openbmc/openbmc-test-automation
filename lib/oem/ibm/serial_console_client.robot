@@ -22,8 +22,7 @@ Open Telnet Connection To BMC Serial Console
     # i_port    The port of the serial console.
     # i_model   The path to the system data, i.e. "./data/Witherspoon.py".
 
-    ${prompt_string}=  Remove String  ${i_model}  ./data/  .py
-    ${prompt_string}=  Convert To Lowercase  ${prompt_string} login:
+    ${prompt_string}=  Convert To Lowercase  ${OPENBMC_MODEL} login:
     Telnet.Open Connection
     ...  ${i_host}  port=${i_port}  prompt=#
     Telnet.Set Newline  \n
