@@ -122,7 +122,7 @@ Trigger Core Dump
     [Documentation]  Trigger core dump.
 
     # Find the pid of the active ipmid and kill it.
-    ${cmd_buf}=  Catenate  kill -s SEGV $(ps -ef | egrep ' ipmid$' |
+    ${cmd_buf}=  Catenate  kill -s SEGV $(ps | egrep ' ipmid$' |
     ...  egrep -v grep | \ cut -c1-6)
 
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd_buf}
