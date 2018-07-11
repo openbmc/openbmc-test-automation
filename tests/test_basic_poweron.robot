@@ -108,5 +108,6 @@ Host Off And On
 
     # TODO: Host shutdown race condition.
     # Wait 30 seconds before Powering Off.
-    Sleep  30s
+    Log To Console  \n No Sleep anymore, We are Free!!!
+    #Sleep  30s
 
