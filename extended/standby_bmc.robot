@@ -21,6 +21,8 @@ Resource          ../lib/dump_utils.robot
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0
 
+${ERROR_REGEX}  xyz.openbmc_project.Software.BMC.Updater.service: Failed with result 'core-dump'
+
 *** Test Cases ***
 
 Get To Stable State
@@ -69,6 +71,7 @@ Get To Stable State
 
     Run Keyword And Ignore Error  Delete All Error Logs
     Run Keyword And Ignore Error  Delete All Dumps
+    Check For Application Failures
     Run Keyword And Ignore Error  Remove Journald Logs
 
 *** Keywords ***
@@ -108,6 +111,15 @@ Powercycle System Via PDU
     Validate Parameters
     PDU Power Cycle
     Check If BMC is Up   5 min    10 sec
+
+
+Check For Application Failures
+    [Documentation]  Parse the journal log and check for failures.
+
+    ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager | egrep '${ERROR_REGEX}'  ignore_err=1
+
+    Should Be Empty  ${journal_log}
 
 
 Validate Parameters
