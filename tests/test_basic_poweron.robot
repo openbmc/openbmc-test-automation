@@ -53,25 +53,16 @@ Check For Application Failures
 
     Should Be Empty  ${journal_log}
 
+
 Verify Uptime Average Against Threshold
     [Documentation]  Compare BMC average boot time to a constant threshold.
     [Tags]  Verify_Uptime_Average_Against_Threshold
 
     OBMC Reboot (off)
 
-    # Example output:
-    # Startup finished in 10.074s (kernel) + 2min 23.506s (userspace) = 2min 33.581s.
-    ${startup_time}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | egrep '${STANDBY_REGEX}' | tail -1
-    Should Not Be Empty  ${startup_time}
+    Wait Until Keyword Succeeds
+    ...  1 min  30 sec  Check BMC Uptime
 
-    # Example time conversion:
-    # Get the "2min 33.581s" string total time taken to reach standby.
-    # Convert time "2min 33.581s" to unit 153.581.
-    ${startup_time}=  Convert Time  ${startup_time.split("= ",1)[1].strip(".")}
-
-    Should Be True  ${startup_time} < ${startup_time_threshold}
-    ...  msg=${startup_time} greater than threshold value of ${startup_time_threshold}.
 
 Test SSH And IPMI Connections
     [Documentation]  Try SSH and IPMI commands to verify each connection.
@@ -109,4 +100,22 @@ Host Off And On
     # TODO: Host shutdown race condition.
     # Wait 30 seconds before Powering Off.
     Sleep  30s
+
+
+Check BMC Uptime
+    [Documentation]  Check BMC uptime from journald.
+
+    # Example output:
+    # Startup finished in 10.074s (kernel) + 2min 23.506s (userspace) = 2min 33.581s.
+    ${startup_time}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager | egrep '${STANDBY_REGEX}' | tail -1
+    Should Not Be Empty  ${startup_time}
+
+    # Example time conversion:
+    # Get the "2min 33.581s" string total time taken to reach standby.
+    # Convert time "2min 33.581s" to unit 153.581.
+    ${startup_time}=  Convert Time  ${startup_time.split("= ",1)[1].strip(".")}
+
+    Should Be True  ${startup_time} < ${startup_time_threshold}
+    ...  msg=${startup_time} greater than threshold value of ${startup_time_threshold}.
 
