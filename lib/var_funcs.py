@@ -444,6 +444,71 @@ def key_value_outbuf_to_dict(out_buf,
     return key_value_list_to_dict(key_var_list, **args)
 
 
+def create_field_desc_regex(line):
+
+    r"""
+    Create a field descriptor regular expression based on the input line and
+    return it.
+
+    This function is designed for use by the list_to_report function (defined
+    below).
+
+    Example:
+
+    Given the following input line:
+
+    --------   ------------ ------------------ ------------------------
+
+    This function will return this regular expression:
+
+    (.{8})   (.{12}) (.{18}) (.{24})
+
+    This means that other report lines interpreted using the regular
+    expression are expected to have:
+    - An 8 character field
+    - 3 spaces
+    - A 12 character field
+    - One space
+    - An 18 character field
+    - One space
+    - A 24 character field
+
+    Description of argument(s):
+    line                            A line consisting of dashes to represent
+                                    fields and spaces to delimit fields.
+    """
+
+    # Split the line into a descriptors list.  Example:
+    # descriptors:
+    #  descriptors[0]:            --------
+    #  descriptors[1]:
+    #  descriptors[2]:
+    #  descriptors[3]:            ------------
+    #  descriptors[4]:            ------------------
+    #  descriptors[5]:            ------------------------
+    descriptors = line.split(" ")
+
+    # Create regexes list.  Example:
+    # regexes:
+    #  regexes[0]:                (.{8})
+    #  regexes[1]:
+    #  regexes[2]:
+    #  regexes[3]:                (.{12})
+    #  regexes[4]:                (.{18})
+    #  regexes[5]:                (.{24})
+    regexes = []
+    for descriptor in descriptors:
+        if descriptor == "":
+            regexes.append("")
+        else:
+            regexes.append("(.{" + str(len(descriptor)) + "})")
+
+    # Join the regexes list into a regex string.
+    field_desc_regex = ' '.join(regexes)
+
+    return field_desc_regex
+
+
 def list_to_report(report_list,
                    to_lower=1):
     r"""
@@ -489,6 +554,17 @@ def list_to_report(report_list,
     7 so things work out nicely.  A caller could do some pre-processing if
     desired (e.g. change "Mounted on" to "Mounted_on").
 
+    Example 2:
+
+    If the 2nd line of report data is a series of dashes and spaces as in the
+    following example, that line will serve to delineate columns.
+
+    The 2nd line of data is like this:
+    ID                              status       size
+                                    tool,clientid,userid
+    -------- ------------ ------------------ ------------------------
+    20000001 in progress  0x7D0              ,,
+
     Description of argument(s):
     report_list                     A list where each entry is one line of
                                     output from a report.  The first entry
@@ -499,15 +575,42 @@ def list_to_report(report_list,
                                     case.
     """
 
-    # Process header line.
+    if len(report_list) <= 1:
+        # If we don't have at least a descriptor line and one line of data,
+        # return an empty array.
+        return []
+
     header_line = report_list[0]
     if to_lower:
         header_line = header_line.lower()
-    columns = header_line.split()
+
+    field_desc_regex = ""
+    if re.match(r"^-[ -]*$", report_list[1]):
+        # We have a field descriptor line (as shown in example 2 above).
+        field_desc_regex = create_field_desc_regex(report_list[1])
+        field_desc_len = len(report_list[1])
+        pad_format_string = "%-" + str(field_desc_len) + "s"
+        # The field descriptor line has served its purpose.  Deleting it.
+        del report_list[1]
+
+    # Process the header line by creating a list of column names.
+    if field_desc_regex == "":
+        columns = header_line.split()
+    else:
+        # Pad the line with spaces on the right to facilitate processing with
+        # field_desc_regex.
+        header_line = pad_format_string % header_line
+        columns = map(str.strip, re.findall(field_desc_regex, header_line)[0])
 
     report_obj = []
     for report_line in report_list[1:]:
-        line = report_list[1].split()
+        if field_desc_regex == "":
+            line = report_line.split()
+        else:
+            # Pad the line with spaces on the right to facilitate processing
+            # with field_desc_regex.
+            report_line = pad_format_string % report_line
+            line = map(str.strip, re.findall(field_desc_regex, report_line)[0])
         try:
             line_dict = collections.OrderedDict(zip(columns, line))
         except AttributeError:
@@ -529,9 +632,10 @@ def outbuf_to_report(out_buf,
 
     Given the following out_buf:
 
-    Filesystem           1K-blocks      Used Available Use% Mounted on
-    dev                     247120         0    247120   0% /dev
-    tmpfs                   248408     79792    168616  32% /run
+    Filesystem                      1K-blocks      Used Available Use% Mounted
+                                    on
+    dev                             247120         0    247120   0% /dev
+    tmpfs                           248408     79792    168616  32% /run
 
     This function will return a list of dictionaries as shown below:
 
@@ -554,10 +658,10 @@ def outbuf_to_report(out_buf,
     Other possible uses:
     - Process the output of a ps command.
     - Process the output of an ls command (the caller would need to supply
-    column names)
+      column names)
 
     Description of argument(s):
-    out_buf                         A text report  The first line must be a
+    out_buf                         A text report.  The first line must be a
                                     header line which contains column names.
                                     Column names may not contain spaces.
     **args                          Arguments to be interpreted by
