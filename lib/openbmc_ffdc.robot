@@ -53,4 +53,4 @@ FFDC On Test Case Fail
 
     # Clean up error logs and BMC dumps.
     Run Keyword If  '${TEST_STATUS}' == 'FAIL'
-    ...  Run Keywords  Delete Error Logs  AND  Delete All Dumps
+    ...  Run Keywords  Delete All Error Logs  AND  Delete All Dumps
