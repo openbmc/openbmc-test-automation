@@ -292,7 +292,7 @@ Suite Setup Execution
 
     Reset Fans
     Run Key U  Sleep \ 15s
-    Delete Error Logs
+    Delete All Error Logs
     Set System LED State  front_fault  Off
     Set System LED State  rear_fault  Off
 
@@ -303,6 +303,6 @@ Test Teardown Execution
     FFDC On Test Case Fail
     Reset Fans
     Run Key U  Sleep \ 15s
-    Delete Error Logs
+    Delete All Error Logs
     Set System LED State  front_fault  Off
     Set System LED State  rear_fault  Off
