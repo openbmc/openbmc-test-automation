@@ -319,7 +319,7 @@ Test Teardown Execution
     # - Close all open SSH connections.
 
     FFDC On Test Case Fail
-    Delete Error Logs
+    Delete All Error Logs
     Close All Connections
 
 Power Redundancy Setting

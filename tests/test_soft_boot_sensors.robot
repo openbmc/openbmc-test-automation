@@ -283,6 +283,6 @@ Post Test Case Execution
    # - Clear all REST sessions.
 
    FFDC On Test Case Fail
-   Delete Error Logs
+   Delete All Error Logs
    Close All Connections
 

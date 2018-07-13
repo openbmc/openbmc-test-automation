@@ -641,11 +641,11 @@ Verify Inventory List Before And After Reboot
     [Documentation]  Verify inventory list before and after reboot.
 
     REST Power On  stack_mode=skip  quiet=1
-    Delete Error Logs
+    Delete All Error Logs
     ${inventory_before}=  Get URL List  ${HOST_INVENTORY_URI}
     Initiate Host Reboot
     Wait Until Keyword Succeeds  10 min  10 sec  Is OS Booted
-    Delete Error Logs
+    Delete All Error Logs
     ${inventory_after}=  Get URL List  ${HOST_INVENTORY_URI}
     Lists Should Be Equal  ${inventory_before}  ${inventory_after}
 
@@ -654,10 +654,10 @@ Verify Inventory List Before And After Reset
     [Documentation]  Verify inventory list before and after BMC reset.
 
     REST Power On  stack_mode=skip  quiet=1
-    Delete Error Logs
+    Delete All Error Logs
     ${inventory_before}=  Get URL List  ${HOST_INVENTORY_URI}
     OBMC Reboot (run)
-    Delete Error Logs
+    Delete All Error Logs
     ${inventory_after}=  Get URL List  ${HOST_INVENTORY_URI}
     Lists Should Be Equal  ${inventory_before}  ${inventory_after}
 

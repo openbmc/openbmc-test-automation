@@ -65,7 +65,7 @@ Post Update Boot To OS
 
     Run Keyword If  '${PREV_TEST_STATUS}' == 'FAIL'
     ...  Fail  Code update failed. No need to boot to OS.
-    Delete Error Logs
+    Delete All Error Logs
     REST Power On
     Verify Running Host Image  ${IMAGE_FILE_PATH}
 
@@ -173,7 +173,7 @@ Verify Host Update When Host Reboot During Activation In Progress
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     REST Power On
-    Delete Error Logs
+    Delete All Error Logs
 
     ${version_id}=  Upload And Activate Image  ${ALTERNATE_IMAGE_FILE_PATH}
     ...  wait=${0}
@@ -229,7 +229,7 @@ Code Update Setup
 
     Run Keyword And Ignore Error  Smart Power Off
     Run Key  Delete All Dumps  ignore=1
-    Run Key  Delete Error Logs  ignore=1
+    Run Key  Delete All Error Logs  ignore=1
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
     ...  Delete All PNOR Images
     Run Keyword If  'true' == '${DELETE_OLD_GUARD_FILE}'  BMC Execute Command
