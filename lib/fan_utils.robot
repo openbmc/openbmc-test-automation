@@ -16,7 +16,7 @@ Is Water Cooled
 
 
 Get Fan Names
-    [Documentation]  Get the names of fans marked present in inventory.
+    [Documentation]  Get the names of the fans marked present in inventory.
     [Arguments]  ${fan_names}
     # This keyword populates the fan_names list with the names of
     # fans present in inventory e.g. fan0, fan2, fan3.
@@ -27,8 +27,10 @@ Get Fan Names
 
     ${fan_uris}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}/system  fan
     : FOR  ${fan_uri}  IN  @{fan_uris}
+
     \  ${fan_properties}=  Read Properties  ${fan_uri}
-    \  Continue For Loop If  ${fan_properties['Present']} != 1
+    \  ${fan_present}=  Get Variable Value  ${fan_properties['Present']}  0
+    \  Continue For Loop If  ${fan_present} != 1
     \  ${remaining_uri}  ${fan_name}=  Split Path  ${fan_uri}
     \  Append To List  ${fan_names}  ${fan_name}
 
