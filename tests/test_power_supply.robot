@@ -90,8 +90,9 @@ Power Supply Error Logging Test At Runtime
     REST Power On  stack_mode=skip
 
     Set Power Supply Present  ${0}
-    Sleep  5s
-    Logging Entry Should Exist
+
+    Wait Until Keyword Succeeds  30 sec  10 sec
+    ...  Logging Entry Should Exist
     ...  xyz.openbmc_project.Inventory.Error.NotPresent
 
 *** Keywords ***
