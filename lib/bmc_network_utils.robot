@@ -189,10 +189,12 @@ Delete IP And Object
     Run Keyword And Ignore Error  OpenBMC Delete Request  ${ip_uri}
 
     # After any modification on network interface, BMC restarts network
-    # module, wait until it is reachable.
+    # module, wait until it is reachable. Then wait 15 seconds for new
+    # configuration to be updated on BMC.
 
-    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_RETRY_TIME}
-    ...  ${NETWORK_TIMEOUT}
+    Run Keywords
+    ...  Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    ...  ${NETWORK_RETRY_TIME}  AND  Sleep  15s
 
     # Verify whether deleted IP address is removed from BMC system.
 
