@@ -526,10 +526,12 @@ Configure Network Settings
     ...  ${NETWORK_MANAGER}/eth0/action/IP  data=${data}
 
     # After any modification on network interface, BMC restarts network
-    # module, wait until it is reachable.
+    # module, wait until it is reachable. Then wait 15 seconds for new
+    # configuration to be updated on BMC.
 
-    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_RETRY_TIME}
-    ...  ${NETWORK_TIMEOUT}
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    ...  ${NETWORK_RETRY_TIME}
+    Sleep  15s
 
     # Verify whether new IP address is populated on BMC system.
     # It should not allow to configure invalid settings.
