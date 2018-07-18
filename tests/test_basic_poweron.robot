@@ -36,6 +36,7 @@ Verify Front And Rear LED At Standby
     REST Power Off  stack_mode=skip  quiet=1
     Verify Identify LED State  Off
 
+
 Power On Test
     [Documentation]  Power off and on.
     [Tags]  Power_On_Test
@@ -44,14 +45,12 @@ Power On Test
 
     Repeat Keyword  ${LOOP_COUNT} times  Host Off And On
 
+
 Check For Application Failures
     [Documentation]  Parse the journal log and check for failures.
     [Tags]  Check_For_Application_Failures
 
-    ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | egrep '${ERROR_REGEX}'  ignore_err=1
-
-    Should Be Empty  ${journal_log}
+    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}
 
 
 Verify Uptime Average Against Threshold
@@ -118,4 +117,3 @@ Check BMC Uptime Journald
 
     Should Be True  ${startup_time} < ${startup_time_threshold}
     ...  msg=${startup_time} greater than threshold value of ${startup_time_threshold}.
-

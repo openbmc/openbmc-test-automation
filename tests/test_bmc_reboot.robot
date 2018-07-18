@@ -17,6 +17,10 @@ Test Teardown           FFDC On Test Case Fail
 *** Variables ***
 ${SYSTEM_SHUTDOWN_TIME}    ${5}
 
+# Strings to check from journald.
+${REBOOT_REGEX}    "-- Reboot --"
+
+
 *** Test Cases ***
 
 Test BMC Reboot via REST
@@ -30,4 +34,7 @@ Test BMC Reboot via REST
 
     BMC Execute Command  if [ -f ${test_file_path} ] ; then false ; fi
     Verify BMC RTC And UTC Time Drift
+
+    # Check for journald persistency post reboot.
+    Check For Regex In Journald  ${REBOOT_REGEX}  error_check=${1}
 
