@@ -496,7 +496,7 @@ Run MDT Profile
 
 Check HTX Run Status
     [Documentation]  Get HTX exerciser status and check for error.
-    [Arguments]  ${sleep_time}=${0}
+    [Arguments]  ${sleep_time}=0
 
     # Description of argument(s):
     # sleep_time  The amount of time to sleep after checking status.
@@ -513,9 +513,9 @@ Check HTX Run Status
     Should Contain  ${htx_errlog}  file </tmp/htxerr> is empty
     ...  msg=HTX geterrorlog was not empty.
 
-    Return From Keyword If  ${sleep_time} == ${0}
+    Return From Keyword If  "${sleep_time}" == "0"
 
-    Run Key U  Sleep \ ${sleep-time}
+    Run Key U  Sleep \ ${sleep_time}
 
 
 Shutdown HTX Exerciser
