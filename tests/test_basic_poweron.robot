@@ -10,7 +10,7 @@ Resource            ../lib/open_power_utils.robot
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/boot_utils.robot
 
-Test Teardown       FFDC On Test Case Fail
+#Test Teardown       FFDC On Test Case Fail
 
 Force Tags  chassisboot
 
@@ -23,6 +23,7 @@ ${LOOP_COUNT}  ${2}
 # Error strings to check from journald.
 ${ERROR_REGEX}     SEGV|core-dump
 ${STANDBY_REGEX}   Startup finished in
+${REBOOT_REGEX}    -- Reboot --
 
 # 3 minutes standby boot time.
 ${startup_time_threshold}  180
@@ -36,6 +37,7 @@ Verify Front And Rear LED At Standby
     REST Power Off  stack_mode=skip  quiet=1
     Verify Identify LED State  Off
 
+
 Power On Test
     [Documentation]  Power off and on.
     [Tags]  Power_On_Test
@@ -44,14 +46,12 @@ Power On Test
 
     Repeat Keyword  ${LOOP_COUNT} times  Host Off And On
 
+
 Check For Application Failures
     [Documentation]  Parse the journal log and check for failures.
     [Tags]  Check_For_Application_Failures
 
-    ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | egrep '${ERROR_REGEX}'  ignore_err=1
-
-    Should Be Empty  ${journal_log}
+    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}
 
 
 Verify Uptime Average Against Threshold
@@ -62,6 +62,8 @@ Verify Uptime Average Against Threshold
 
     Wait Until Keyword Succeeds
     ...  1 min  30 sec  Check BMC Uptime Journald
+
+    Check For Regex In Journald  ${REBOOT_REGEX}  error_check=${1}
 
 
 Test SSH And IPMI Connections
@@ -119,3 +121,15 @@ Check BMC Uptime Journald
     Should Be True  ${startup_time} < ${startup_time_threshold}
     ...  msg=${startup_time} greater than threshold value of ${startup_time_threshold}.
 
+
+Check For Regex In Journald
+    [Documentation]  Parse the journal log and check for regex string.
+    [Arguments]  ${regex}=${ERROR_REGEX}  ${error_check}=${0}
+
+    ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager | egrep '${regex}'  ignore_err=1
+
+    Run Keyword If  ${error_check} == ${0}
+    ...    Should Be Empty  ${journal_log}
+    ...  ELSE
+    ...    Should Not Be Empty  ${journal_log}
