@@ -1,6 +1,6 @@
 #!/usr/bin/wish
 
-# This file provides many valuable data processing functions like
+# This file provides many valuable data processing procedures like
 # lappend_unique, get_var, etc.
 
 
@@ -238,14 +238,49 @@ proc read_properties_file {parm_file_path} {
 }
 
 
+proc convert_array_key {key {convert_commands} {prefix ""} } {
+
+  # Convert the key according to the caller's convert_commands and return the
+  # result.
+
+  # This is designed as a helper procedure to be called by convert_array_keys.
+
+  # See convert_array_keys for description of arguments.
+
+  set new_key $key
+  foreach command $convert_commands {
+    if { $command == "prefix" } {
+      regsub -all "^$prefix" $new_key {} new_key
+      set new_key "$prefix$new_key"
+    } elseif { $command == "rm_prefix" } {
+      regsub -all "^$prefix" $new_key {} new_key
+      set new_key "$new_key"
+    }
+    if { $command == "upper" } {
+      set new_key [string toupper $new_key]
+    } elseif { $command == "lower" } {
+      set new_key [string tolower $new_key]
+    }
+  }
+
+  return $new_key
+
+}
+
+
 proc convert_array_keys {source_arr target_arr {convert_commands}\
   {prefix ""} } {
   upvar $source_arr source_arr_ref
   upvar $target_arr target_arr_ref
 
   # Convert the keys of source_arr according to the caller's convert_commands
-  # and put the resulting array in target_arr. If this function fails for any
-  # reason, it will return non-zero
+  # and put the resulting array in target_arr. If this procedure fails for any
+  # reason, it will return non-zero.
+
+  # Note that despite the name of this procedure, it will also work on a
+  # dictionary.  In other words, if source_arr is NOT an array, it will be
+  # processed as a dictionary and target_arr will be created as a dictionary
+  # as well.
 
   # Description of argument(s):
   # source_arr                      The source array that is to be converted.
@@ -255,12 +290,15 @@ proc convert_array_keys {source_arr target_arr {convert_commands}\
   #                                 the type of conversion(s) the caller
   #                                 wishes to see. Currently the accepted
   #                                 values are as follows:
-  #   - upper         Convert key value to uppercase.
-  #   - lower         Convert key value to lowercase.
-  # - prefix        Prepend prefix to the key, provided that it does not
-  # already exist. If upper or lower is included in convert_commands list, the
-  # prefix will be converted to the specified case as well.
-  #   - rm_prefix   Remove a prefix that is prepended, provided that it exists.
+  #   upper                         Convert key value to uppercase.
+  #   lower                         Convert key value to lowercase.
+  #   prefix                        Prepend prefix to the key, provided that
+  #                                 it does not already exist. If upper or
+  #                                 lower is included in convert_commands
+  #                                 list, the prefix will be converted to the
+  #                                 specified case as well.
+  #   rm_prefix                     Remove a prefix that is prepended,
+  #                                 provided that it exists.
   # prefix                          The prefix to be used for "prefix" and
   #                                 "rm_prefix" commands (see convert_commands
   #                                 text above).
@@ -287,34 +325,32 @@ proc convert_array_keys {source_arr target_arr {convert_commands}\
     }
   }
 
-  # Initialize targ array.
-  array set target_arr_ref {}
+  if { [array exists source_arr_ref] } {
+    # Initialize targ array.
+    array set target_arr_ref {}
+    # Walk the source array doing the conversion specified in convert_commands.
+    set search_token [array startsearch source_arr_ref]
+    while {[array anymore source_arr_ref $search_token]} {
+      set key [array nextelement source_arr_ref $search_token]
+      set value $source_arr_ref($key)
 
-  # Walk the source array doing the conversion specified in convert_commands.
-  set search_token [array startsearch source_arr_ref]
-  while {[array anymore source_arr_ref $search_token]} {
-    set key [array nextelement source_arr_ref $search_token]
-    set arr_value $source_arr_ref($key)
-    set new_key "$key"
-
-    foreach command $convert_commands {
-      if { $command == "prefix" } {
-        regsub -all "^$prefix" $new_key {} new_key
-        set new_key "$prefix$new_key"
-      } elseif { $command == "rm_prefix" } {
-        regsub -all "^$prefix" $new_key {} new_key
-        set new_key "$new_key"
-      }
-      if { $command == "upper" } {
-        set new_key [string toupper $new_key]
-      } elseif { $command == "lower" } {
-        set new_key [string tolower $new_key]
-      }
+      set new_key [convert_array_key $key $convert_commands $prefix]
+      set cmd_buf "set target_arr_ref($new_key) $value"
+      eval $cmd_buf
     }
-    set cmd_buf "set target_arr_ref($new_key) $arr_value"
-    eval $cmd_buf
+    array donesearch source_arr_ref $search_token
+
+  } else {
+    # Initialize targ dictionary.
+    set target_arr_ref [list]
+    # Walk the source dictionary doing the conversion specified in
+    # convert_commands.
+    foreach {key value} $source_arr_ref {
+      set new_key [convert_array_key $key $convert_commands $prefix]
+      set cmd_buf "dict append target_arr_ref $new_key \$value"
+      eval $cmd_buf
+    }
   }
-  array donesearch source_arr_ref $search_token
 
 }
 
