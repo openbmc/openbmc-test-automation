@@ -499,7 +499,8 @@ Check HTX Run Status
     [Arguments]  ${sleep_time}=${0}
 
     # Description of argument(s):
-    # sleep_time  The amount of time to sleep after checking status.
+    # sleep_time  The amount of time to sleep after checking status,
+    #             for example "3s" or "2m".
 
     Rprint Timen  Check HTX mdt Status and error.
     ${htx_status}  ${stderr}  ${rc}=  OS Execute Command
@@ -513,9 +514,9 @@ Check HTX Run Status
     Should Contain  ${htx_errlog}  file </tmp/htxerr> is empty
     ...  msg=HTX geterrorlog was not empty.
 
-    Return From Keyword If  ${sleep_time} == ${0}
+    Return From Keyword If  "${sleep_time}" == "${0}"
 
-    Run Key U  Sleep \ ${sleep-time}
+    Run Key U  Sleep \ ${sleep_time}
 
 
 Shutdown HTX Exerciser
