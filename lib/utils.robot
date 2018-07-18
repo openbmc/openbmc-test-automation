@@ -1535,3 +1535,15 @@ Get BMC Flash Chip Boot Side
 
     [Return]  ${boot_side}
 
+
+Check For Regex In Journald
+    [Documentation]  Parse the journal log and check for regex string.
+    [Arguments]  ${regex}=${ERROR_REGEX}  ${error_check}=${0}
+
+    ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager | egrep '${regex}'  ignore_err=1
+
+    Run Keyword If  ${error_check} == ${0}
+    ...    Should Be Empty  ${journal_log}
+    ...  ELSE
+    ...    Should Not Be Empty  ${journal_log}
