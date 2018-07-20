@@ -59,7 +59,7 @@ Verify Boot AttemptsLeft When Power Off
     [Template]  Validate Boot AttemptsLeft
 
     # System at standby    AttemptsLeft
-    Ready                  2
+    Off                    2
 
 
 Verify Boot Sensor States At Ready
@@ -249,7 +249,7 @@ Choose Boot And Run
     ...  ELSE IF  '${option}' == 'Booted'
     ...    Initiate Host Boot
     ...  ELSE IF  '${option}' == 'RebootHost'
-    ...    Initiate Host Reboot
+    ...    Initiate Host Reboot  wait=${0}
     ...  ELSE IF  '${option}' == 'ResetReload'
     ...    Reboot Host And Expect Runtime
 

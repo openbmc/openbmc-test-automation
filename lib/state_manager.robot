@@ -80,10 +80,18 @@ Hard Power Off
 
 Initiate Host Reboot
     [Documentation]  Initiate host reboot via REST.
+    [Arguments]  ${wait}=${1}
+
+    # Description of arguments:
+    # wait  Indicates that this keyword should wait for host reboot state.
 
     ${args}=  Create Dictionary  data=${HOST_REBOOT_TRANS}
     Write Attribute
     ...  ${HOST_STATE_URI}  RequestedHostTransition  data=${args}
+
+    # Does caller want to wait for host booted status?
+    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+
     Is Host Rebooted
 
 
