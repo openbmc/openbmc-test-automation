@@ -17,7 +17,7 @@ Initiate Host Boot
     [Documentation]  Initiate host power on.
     [Arguments]  ${wait}=${1}
 
-    # Description of arguments:
+    # Description of argument(s):
     # wait  Indicates that this keyword should wait for host running state.
 
     ${args}=  Create Dictionary   data=${HOST_POWERON_TRANS}
@@ -37,7 +37,7 @@ Initiate Host PowerOff
     # 2. Hard power off, if failed.
     [Arguments]  ${wait}=${1}
 
-    # Description of arguments:
+    # Description of argument(s):
     # wait  Indicates that this keyword should wait for host off state.
 
     ${args}=  Create Dictionary   data=${HOST_POWEROFF_TRANS}
@@ -80,10 +80,18 @@ Hard Power Off
 
 Initiate Host Reboot
     [Documentation]  Initiate host reboot via REST.
+    [Arguments]  ${wait}=${1}
+
+    # Description of argument(s):
+    # wait  Indicates that this keyword should wait for host reboot state.
 
     ${args}=  Create Dictionary  data=${HOST_REBOOT_TRANS}
     Write Attribute
     ...  ${HOST_STATE_URI}  RequestedHostTransition  data=${args}
+
+    # Does caller want to wait for host booted status?
+    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+
     Is Host Rebooted
 
 
