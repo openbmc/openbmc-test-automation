@@ -515,6 +515,7 @@ Suite Setup Execution
 
     Smart Power Off
     REST Power On
+    Delete All Error Logs
 
 Get Inventory
     [Documentation]  Get the properties of an endpoint.
