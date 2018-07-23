@@ -215,6 +215,8 @@ Test Ambient Temperature Via IPMI
     # Baseboard temperature sensors(42h)              1               +35 C
 
     ${temp_reading}=  Run IPMI Standard Command  dcmi get_temp_reading -N 10
+    Should Contain  ${temp_reading}  Inlet air temperature
+    ...  msg=Unable to get DCMI information.
     ${ambient_temp_line}=
     ...  Get Lines Containing String  ${temp_reading}
     ...  Inlet air temperature  case-insensitive
@@ -372,6 +374,8 @@ Test Baseboard Temperature Via IPMI
     # Baseboard temperature sensors(42h)              1               +35 C
 
     ${temp_reading}=  Run IPMI Standard Command  dcmi get_temp_reading -N 10
+    Should Contain  ${temp_reading}  Baseboard temperature sensors
+    ...  msg=Unable to get DCMI information.
     ${baseboard_temp_line}=
     ...  Get Lines Containing String  ${temp_reading}
     ...  Baseboard temperature  case-insensitive=True
