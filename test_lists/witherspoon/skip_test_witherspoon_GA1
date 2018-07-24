@@ -50,3 +50,4 @@
 -e Verify_REST_Bad_Request_Post_Message_JSON_Compliant
 -e Test_BMC_Alt_Side_Mirroring
 -e Verify_Supported_Cipher_List
+-e REST_Upload_Stability_Test
