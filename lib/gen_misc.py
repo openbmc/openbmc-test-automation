@@ -12,6 +12,12 @@ import ConfigParser
 import StringIO
 import re
 import socket
+import tempfile
+try:
+    import psutil
+    psutil_imported = True
+except ImportError:
+    psutil_imported = False
 
 import gen_print as gp
 import gen_cmd as gc
@@ -401,3 +407,57 @@ def to_signed(number,
         return ((2**bit_width) - number) * -1
     else:
         return number
+
+
+def get_child_pids(quiet=1):
+
+    r"""
+    Get and return a list of pids representing all first-generation processes
+    that are the children of the current process.
+
+    Example:
+
+    children = get_child_pids()
+    print_var(children)
+
+    Output:
+    children:
+      children[0]:           9123
+
+    Description of argument(s):
+    quiet                           Display output to stdout detailing how
+                                    this child pids are obtained.
+    """
+
+    if psutil_imported:
+        # If "import psutil" worked, find child pids using psutil.
+        current_process = psutil.Process()
+        return [x.pid for x in current_process.children(recursive=False)]
+    else:
+        # Otherwise, find child pids using shell commands.
+        print_output = not quiet
+
+        ps_cmd_buf = "ps --no-headers --ppid " + str(os.getpid()) +\
+            " -o pid,args"
+        # Route the output of ps to a temporary file for later grepping.
+        # Avoid using " | grep" in the ps command string because it creates
+        # yet another process which is of no interest to the caller.
+        temp = tempfile.NamedTemporaryFile()
+        temp_file_path = temp.name
+        gc.shell_cmd(ps_cmd_buf + " > " + temp_file_path,
+                     print_output=print_output)
+        # Sample contents of the temporary file:
+        # 30703 sleep 2
+        # 30795 /bin/bash -c ps --no-headers --ppid 30672 -o pid,args >
+        # /tmp/tmpqqorWY
+        # Use egrep to exclude the "ps" process itself from the results
+        # collected with the prior shell_cmd invocation.  Only the other
+        # children are of interest to the caller.  Use cut on the grep results
+        # to obtain only the pid column.
+        rc, output = \
+            gc.shell_cmd("egrep -v '" + re.escape(ps_cmd_buf) + "' " +
+                         temp_file_path + " | cut -c1-5",
+                         print_output=print_output)
+        # Split the output buffer by line into a list.  Strip each element of
+        # extra spaces and convert each element to an integer.
+        return map(int, map(str.strip, filter(None, output.split("\n"))))
