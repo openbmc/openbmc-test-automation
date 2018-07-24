@@ -221,6 +221,7 @@ def execute_ssh_command(cmd_buf,
 
     global sshlib
 
+    max_exec_cmd_attempts = 2
     # Look for existing SSH connection.
     # Prepare a search connection dictionary.
     search_connection_args = open_connection_args.copy()
@@ -240,9 +241,15 @@ def execute_ssh_command(cmd_buf,
     else:
         gp.lprint_timen("Connecting to " + open_connection_args['host'] + ".")
         cix = sshlib.open_connection(**open_connection_args)
-        login_ssh(login_args)
+        try:
+            login_ssh(login_args)
+        except Exception as login_exception:
+            except_type, except_value, except_traceback = sys.exc_info()
+            rc = 1
+            stderr = str(except_value)
+            stdout = ""
+            max_exec_cmd_attempts = 0
 
-    max_exec_cmd_attempts = 2
     for exec_cmd_attempt_num in range(1, max_exec_cmd_attempts + 1):
         gp.lprint_var(exec_cmd_attempt_num)
         try:
