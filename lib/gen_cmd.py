@@ -432,6 +432,8 @@ def shell_cmd(command_string,
         if shell_rc in allowed_shell_rcs:
             break
         err_msg = "The prior shell command failed.\n"
+        if quiet:
+            err_msg += gp.sprint_var(command_string)
         if command_timed_out:
             err_msg += gp.sprint_var(command_timed_out)
             err_msg += gp.sprint_var(time_out)
