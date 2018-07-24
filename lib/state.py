@@ -32,6 +32,7 @@ import gen_robot_print as grp
 import gen_valid as gv
 import gen_robot_utils as gru
 import gen_cmd as gc
+import bmc_ssh_utils as bsu
 
 import commands
 from robot.libraries.BuiltIn import BuiltIn
@@ -360,48 +361,14 @@ def get_os_state(os_host="",
         must_login = (len(req_login) > 0)
 
         if must_login:
-            # Open SSH connection to OS.  Note that this doesn't fail even when
-            # the OS is not up.
-            cmd_buf = ["SSHLibrary.Open Connection", os_host]
-            if not quiet:
-                grp.rpissuing_keyword(cmd_buf)
-            ix = BuiltIn().run_keyword(*cmd_buf)
-
-            # Login to OS.
-            cmd_buf = ["Login", os_username, os_password]
-            if not quiet:
-                grp.rpissuing_keyword(cmd_buf)
-            status, ret_values = \
-                BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-            if status == "PASS":
+            output, stderr, rc = bsu.os_execute_command("uptime", quiet=quiet,
+                                                        ignore_err=1)
+            if rc == 0:
                 os_login = 1
+                os_run_cmd = 1
             else:
-                gp.dprint_var(status)
-                gp.dprint_var(ret_values)
-
-            if os_login:
-                if 'os_run_cmd' in req_states:
-                    # Try running a simple command (uptime) on the OS.
-                    cmd_buf = ["Execute Command", "uptime",
-                               "return_stderr=True", "return_rc=True"]
-                    if not quiet:
-                        grp.rpissuing_keyword(cmd_buf)
-                    # Note that in spite of its name, there are occasions
-                    # where run_keyword_and_ignore_error can fail.
-                    status, ret_values = \
-                        BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
-                    if status == "PASS":
-                        stdout, stderr, rc = ret_values
-                        if rc == 0 and stderr == "":
-                            os_run_cmd = 1
-                        else:
-                            gp.dprint_var(status)
-                            gp.dprint_var(stdout)
-                            gp.dprint_var(stderr)
-                            gp.dprint_var(rc)
-                    else:
-                        gp.dprint_var(status)
-                        gp.dprint_var(ret_values)
+                gp.dprint_vars(output, stderr)
+                gp.dprint_vars(rc, 1)
 
     os_state = DotDict()
     for sub_state in req_states:
