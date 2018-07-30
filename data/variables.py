@@ -136,6 +136,10 @@ BMC_USER_URI = OPENBMC_BASE_URI + 'user/'
 # The path on the BMC where signed keys are stored.
 ACTIVATION_DIR_PATH = "/etc/activationdata/"
 
+# Redfish variables.
+REDFISH_BASE_URI = '/redfish/v1/'
+REDFISH_SESSION = REDFISH_BASE_URI + 'SessionService/Sessions'
+
 '''
   QEMU HTTPS variable:
 
