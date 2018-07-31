@@ -64,6 +64,8 @@ def exit_function(signal_number=0,
     dprint_executing()
     dprint_var(signal_number)
 
+    process_robot_output_files()
+
     qprint_pgm_footer()
 
 
