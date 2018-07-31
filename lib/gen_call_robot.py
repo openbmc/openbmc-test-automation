@@ -34,24 +34,37 @@ def init_robot_out_parms(extra_prefix=""):
     create_robot_cmd_string.
     """
 
+    gp.dprint_executing()
     AUTOBOOT_OPENBMC_NICKNAME = gm.get_mod_global("AUTOBOOT_OPENBMC_NICKNAME")
 
-    FFDC_DIR_PATH_STYLE = os.environ.get('FFDC_DIR_PATH_STYLE', '0')
-    if FFDC_DIR_PATH_STYLE == '1':
-        default_ffdc_dir_path = "/tmp/"
-    else:
-        default_ffdc_dir_path = base_path
     # Set values for call to create_robot_cmd_string.
-    outputdir = gm.add_trailing_slash(os.environ.get("FFDC_DIR_PATH",
-                                                     default_ffdc_dir_path))
+    # Environment variable TMP_ROBOT_DIR_PATH can be set by the user to
+    # indicate that robot-generated output should initially be written to the
+    # specified temporary directory and then moved to the normal output
+    # location after completion.
+    outputdir =\
+        os.environ.get("TMP_ROBOT_DIR_PATH",
+                       os.environ.get("STATUS_DIR_PATH",
+                                      os.environ.get("HOME", ".")
+                                      + "/autoipl/status"))
+    outputdir = gm.add_trailing_slash(outputdir)
     seconds = time.time()
     loc_time = time.localtime(seconds)
     time_string = time.strftime("%y%m%d.%H%M%S", loc_time)
     file_prefix = AUTOBOOT_OPENBMC_NICKNAME + "." + extra_prefix +\
         time_string + "."
-    output = file_prefix + "output.xml"
-    log = file_prefix + "log.html"
-    report = file_prefix + "report.html"
+    # Environment variable SAVE_STATUS_POLICY governs when robot-generated
+    # output files (e.g. the log.html) will be moved from TMP_ROBOT_DIR_PATH
+    # to FFDC_DIR_PATH.  Valid values are "ALWAYS", "NEVER" and "FAIL".
+    SAVE_STATUS_POLICY = os.environ.get("SAVE_STATUS_POLICY", "ALWAYS")
+    if SAVE_STATUS_POLICY == "NEVER":
+        output = "NONE"
+        log = "NONE"
+        report = "NONE"
+    else:
+        output = file_prefix + "output.xml"
+        log = file_prefix + "log.html"
+        report = file_prefix + "report.html"
     loglevel = "TRACE"
 
     # Make create_robot_cmd_string values global.
@@ -114,8 +127,8 @@ def init_robot_test_base_dir_path():
                 gp.dprint_vars(ROBOT_TEST_RUNNING_FROM_SB)
                 ROBOT_TEST_BASE_DIR_PATH = developer_home_dir_path + suffix
                 if not os.path.isdir(ROBOT_TEST_BASE_DIR_PATH):
-                    gp.dprint_timen("NOTE: Sandbox directory"
-                                    + " ${ROBOT_TEST_BASE_DIR_PATH} does not"
+                    gp.dprint_timen("NOTE: Sandbox directory "
+                                    + ROBOT_TEST_BASE_DIR_PATH + " does not"
                                     + " exist.")
                     # Fall back to the apollo dir path.
                     ROBOT_TEST_BASE_DIR_PATH = apollo_dir_path + suffix
@@ -184,7 +197,7 @@ def init_robot_file_path(robot_file_path):
         shell_rc, out_buf = gc.shell_cmd(cmd_buf, quiet=(not debug),
                                          print_output=0)
         robot_file_search_paths = out_buf
-        gp.dpvar(robot_file_search_paths)
+        gp.dprint_var(robot_file_search_paths)
         robot_file_search_paths_list = robot_file_search_paths.split(':')
         for search_path in robot_file_search_paths_list:
             search_path = gm.add_trailing_slash(search_path)
@@ -273,6 +286,98 @@ def create_robot_cmd_string(robot_file_path, *parms):
     return robot_cmd_buf
 
 
+gcr_last_robot_cmd_buf = ""
+gcr_last_robot_rc = 0
+
+
+def process_robot_output_files(robot_cmd_buf=None,
+                               robot_rc=None,
+                               gzip=1):
+    r"""
+    Process robot output files which can involve several operations:
+    - If the files are in a temporary location, using SAVE_STATUS_POLICY to
+      decide whether to move them to a permanent location or to delete them.
+    - Gzipping them.
+
+    Description of argument(s):
+    robot_cmd_buf                   The complete command string used to invoke
+                                    robot.
+    robot_rc                        The return code from running the robot
+                                    command string.
+    gzip                            Indicates whether robot-generated output
+                                    should be gzipped.
+    """
+
+    gp.print_executing()
+    robot_cmd_buf = gm.dft(robot_cmd_buf, gcr_last_robot_cmd_buf)
+    robot_rc = gm.dft(robot_rc, gcr_last_robot_rc)
+
+    if robot_cmd_buf == "":
+        # This can legitimately occur if this function is called from an
+        # exit_function without the program having ever run robot_cmd_fnc.
+        return
+
+    SAVE_STATUS_POLICY = os.environ.get("SAVE_STATUS_POLICY", "ALWAYS")
+    gp.qprint_vars(SAVE_STATUS_POLICY)
+
+    # When SAVE_STATUS_POLICY is "NEVER" robot output files don't even get
+    # generated.
+    if SAVE_STATUS_POLICY == "NEVER":
+        return
+
+    # Compose file_list based on robot command buffer passed in.
+    robot_cmd_buf_dict = gc.parse_command_string(robot_cmd_buf)
+    outputdir = robot_cmd_buf_dict['outputdir']
+    outputdir = gm.add_trailing_slash(outputdir)
+    file_list = outputdir + robot_cmd_buf_dict['output'] + " " + outputdir\
+        + robot_cmd_buf_dict['log'] + " " + outputdir\
+        + robot_cmd_buf_dict['report']
+
+    # Double checking that files are present.
+    shell_rc, out_buf = gc.shell_cmd("ls -1 " + file_list + " 2>/dev/null",
+                                     show_err=0)
+    file_list = re.sub("\n", " ", out_buf.rstrip("\n"))
+
+    if file_list == "":
+        gp.qprint_timen("No robot output files were found in " + outputdir
+                        + ".")
+        return
+    gp.qprint_var(robot_rc, 1)
+    if SAVE_STATUS_POLICY == "FAIL" and robot_rc == 0:
+        gp.qprint_timen("The call to robot produced no failures."
+                        + "  Deleting robot output files.")
+        gc.shell_cmd("rm -rf " + file_list)
+        return
+
+    if gzip:
+        gc.shell_cmd("gzip " + file_list)
+        # Update the values in file_list.
+        file_list = re.sub(" ", ".gz ", file_list) + ".gz"
+
+    # It TMP_ROBOT_DIR_PATH is set, it means the caller wanted the robot
+    # output initially directed to TMP_ROBOT_DIR_PATH but later moved to
+    # FFDC_DIR_PATH.  Otherwise, we're done.
+
+    if os.environ.get("TMP_ROBOT_DIR_PATH", "") is "":
+        return
+
+    # We're directing these to the FFDC dir path so that they'll be subjected
+    # to FFDC cleanup.
+    target_dir_path = os.environ.get("FFDC_DIR_PATH",
+                                     os.environ.get("HOME", ".")
+                                     + "/autoipl/ffdc")
+    target_dir_path = gm.add_trailing_slash(target_dir_path)
+
+    targ_file_list = [re.sub(".*/", target_dir_path, x)
+                      for x in file_list.split(" ")]
+
+    gc.shell_cmd("mv " + file_list + " " + target_dir_path + " >/dev/null",
+                 time_out=600)
+
+    gp.qprint_timen("New robot log file locations:")
+    gp.qprintn('\n'.join(targ_file_list))
+
+
 def robot_cmd_fnc(robot_cmd_buf,
                   robot_jail=os.environ.get('ROBOT_JAIL', ''),
                   gzip=1):
@@ -294,6 +399,10 @@ def robot_cmd_fnc(robot_cmd_buf,
 
     if not gv.valid_value(robot_cmd_buf):
         return False
+
+    global gcr_last_robot_cmd_buf
+    global gcr_last_robot_rc
+    gcr_last_robot_cmd_buf = robot_cmd_buf
 
     # Get globals set by init_robot_test_base_dir_path().
     module = sys.modules["__main__"]
@@ -344,7 +453,6 @@ def robot_cmd_fnc(robot_cmd_buf,
 
     os.environ['FFDC_DIR_PATH_STYLE'] = os.environ.get('FFDC_DIR_PATH_STYLE',
                                                        '1')
-
     test_mode = getattr(module, "test_mode")
 
     gp.qpissuing(robot_cmd_buf, test_mode)
@@ -361,35 +469,13 @@ def robot_cmd_fnc(robot_cmd_buf,
     sub_proc = subprocess.Popen(robot_cmd_buf, stdout=stdout, shell=True)
     sub_proc.communicate()
     shell_rc = sub_proc.returncode
-    if shell_rc != 0:
-        hex = 1
-        gp.pvar(shell_rc, hex)
-        os.environ["PATH"] = os.environ.get("SAVED_PATH", "")
-        os.environ["PYTHONPATH"] = os.environ.get("SAVED_PYTHONPATH", "")
-        return False
-
     os.environ["PATH"] = os.environ.get("SAVED_PATH", "")
     os.environ["PYTHONPATH"] = os.environ.get("SAVED_PYTHONPATH", "")
-
-    if not gzip:
-        return True
-
-    # gzip the output files.
-    # Retrieve the parms from the robot command buffer.
-    robot_cmd_buf_dict = gc.parse_command_string(robot_cmd_buf)
-    # Get prefix from the log parm.
-    prefix = re.sub('log\\.html$', '', robot_cmd_buf_dict['log'])
-    gp.qprintn()
-    rc, outbuf = gc.cmd_fnc("cd " + robot_cmd_buf_dict['outputdir']
-                            + " ; gzip " + robot_cmd_buf_dict['output']
-                            + " " + robot_cmd_buf_dict['log']
-                            + " " + robot_cmd_buf_dict['report'])
-
-    outputdir = gm.add_trailing_slash(robot_cmd_buf_dict['outputdir'])
-    Output = outputdir + robot_cmd_buf_dict['output'] + ".gz"
-    Log = outputdir + robot_cmd_buf_dict['log'] + ".gz"
-    Report = outputdir + robot_cmd_buf_dict['report'] + ".gz"
-    gp.qprintn("\ngzipped output:")
-    gp.qpvars(0, 9, Output, Log, Report)
+    gcr_last_robot_rc = shell_rc
+    process_robot_output_files()
+    if shell_rc != 0:
+        hex = 1
+        gp.print_var(shell_rc, hex)
+        return False
 
     return True
