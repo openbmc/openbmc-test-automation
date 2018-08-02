@@ -154,8 +154,8 @@ def get_port_https():
         if l_https_port:
             l_suffix = ':' + l_https_port
     except BaseException:
-        print "Environment variable HTTPS_PORT not set,\
-              using default HTTPS port"
+        print ("Environment variable HTTPS_PORT not set,\
+              using default HTTPS port")
     return l_suffix
 
 

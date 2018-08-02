@@ -13,7 +13,10 @@ import re
 import grp
 import socket
 import argparse
-import __builtin__
+try:
+    import __builtin__
+except ImportError:
+    import builtins as __builtin__
 import logging
 import collections
 from wrap_utils import *
