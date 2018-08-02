@@ -9,7 +9,10 @@ import sys
 import errno
 import os
 import ConfigParser
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 import re
 import socket
 import tempfile
