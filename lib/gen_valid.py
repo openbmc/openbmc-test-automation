@@ -128,8 +128,8 @@ def svalid_value(var_value,
                                     specify nothing for both invalid_values
                                     and valid_values, invalid_values will be
                                     set to a default value of [""].
-    valid_values                    A list of invalid values.  var_value must
-                                    be equal to one of these values to be
+    valid_values                    A list of valid values.  var_value must be
+                                    equal to one of these values to be
                                     considered valid.
     var_name                        The name of the variable whose value is
                                     passed in var_value.  This parameter is
@@ -487,4 +487,66 @@ def valid_range(var_value,
     """
 
     error_message = svalid_range(var_value, valid_range, var_name)
+    return process_error_message(error_message)
+
+
+def svalid_list(var_value,
+                valid_values=[],
+                var_name=""):
+    r"""
+    Return an empty string if var_value is a valid list.  Otherwise, return an
+    error string.
+
+    Description of arguments:
+    var_value                       The value (i.e. list) being validated.
+    valid_values                    A list of valid values.  Each element in
+                                    the var_value list must be equal to one of
+                                    these values to be considered valid.
+    var_name                        The name of the variable whose value is
+                                    passed in var_value.  This parameter is
+                                    normally unnecessary as this function can
+                                    figure out the var_name.  This is provided
+                                    for Robot callers.  In this scenario, we
+                                    are unable to get the variable name
+                                    ourselves.
+    """
+
+    error_message = ""
+    if len(var_value) == 0:
+        show_blanks = 1
+        error_message += "The \"" + get_var_name(var_name)
+        error_message += "\" list is empty and is therefore invalid:\n"
+        return error_message
+
+    found_error = 0
+    display_var_value = list(var_value)
+    for ix in range(0, len(var_value)):
+        if var_value[ix] not in valid_values:
+            found_error = 1
+            display_var_value[ix] = var_value[ix] + "*"
+
+    if found_error:
+        show_blanks = 1
+        error_message += "The list entries marked with \"*\" are not valid:\n"
+        error_message += gp.sprint_varx(get_var_name(var_name),
+                                        display_var_value, show_blanks)
+        error_message += gp.sprint_var(valid_values)
+        return error_message
+
+    return ""
+
+
+def valid_list(var_value,
+               valid_values=[],
+               var_name=""):
+    r"""
+    Return True if var_value is a valid list.  Otherwise, print an error
+    message and either return False or exit(1) depending on the value of
+    exit_on_error.
+
+    Description of arguments:
+    (See description of arguments for svalid_list (above)).
+    """
+
+    error_message = svalid_list(var_value, valid_values, var_name)
     return process_error_message(error_message)
