@@ -39,6 +39,7 @@ Install the packages and it's dependencies via `pip`
     ```
     $ pip install -U requests
     $ pip install -U robotframework-requests
+    $ pip install -U robotframework-httplibrary
     ```
     SSH and SCP base packages:
     For more detailed installation instructions see [robotframework-sshlibrary](https://pypi.python.org/pypi/robotframework-sshlibrary)
