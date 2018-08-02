@@ -6,9 +6,12 @@ gen_get_options and sprint_args.
 """
 
 import sys
-import __builtin__
-import atexit
+try:
+    import __builtin__
+except ImportError:
+    import builtins as __builtin__
 import signal
+import atexit
 import argparse
 
 import gen_print as gp

@@ -1,7 +1,10 @@
 #!/usr/bin/python
 import logging
 import warnings
-import httplib
+try:
+    import httplib
+except ImportError:
+    import http.client
 
 warnings.filterwarnings("ignore")
 
