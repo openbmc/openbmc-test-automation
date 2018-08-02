@@ -8,7 +8,10 @@ gen_get_options and sprint_args.
 import sys
 import __builtin__
 import atexit
-import signal
+try:
+    import __builtin__
+except ImportError:
+    import builtins as __builtin__
 import argparse
 
 import gen_print as gp
