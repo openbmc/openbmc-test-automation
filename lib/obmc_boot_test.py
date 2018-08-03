@@ -10,7 +10,10 @@ import time
 import glob
 import random
 import re
-import cPickle as pickle
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 import socket
 
 from robot.utils import DotDict
