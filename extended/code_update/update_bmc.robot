@@ -64,8 +64,9 @@ Initiate Code Update BMC
 
     # Enable user to bypass prerequisite operations.
     # Use cases for if BMC is not in working state.
-    Run Keyword If  ${FORCE_UPDATE} == ${0}
-    ...  Prepare BMC For Update
+    Run Keyword If  ${FORCE_UPDATE} == ${0}  Run Keywords
+    ...  Prepare BMC For Update  AND
+    ...  Smart Power Off
 
     Run Key U  Preserve BMC Network Setting
     Run Key  SCP Tar Image File To BMC \ ${FILE_PATH}
