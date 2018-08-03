@@ -2,6 +2,7 @@
 
 **Interface Feature List**
 * REST
+* DMTF Redfish
 * Out-of-band IPMI
 * SSH to BMC and Host OS
 
@@ -108,7 +109,17 @@ classified as follows:
 `tools/`: Contains various tools.
 
 `templates/`: Contains sample code examples and setup testing.
-`
+
+
+## Redfish Test Layout ##
+
+OpenBMC is moving steadily towards DTMF Redfish, which is an open industry standard
+specification and schema that meets the expectations of end users for simple,
+modern and secure management of scalable platform hardware.
+
+`redfish_test`: Contains test cases for DMTF Redfish-related feature supported
+                on OpenBMC.
+
 
 ## Quickstart ##
 To run openbmc-automation first you need to install the prerequisite Python
