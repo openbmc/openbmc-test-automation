@@ -50,6 +50,7 @@ Execute Command On Serial Console
 
     Open Telnet Connection To BMC Serial Console
     Telnet.Write  \n
+    Telnet.Write  \n
     Telnet.Execute Command  ${command_string}
     Read And Log BMC Serial Console Output
     Close Serial Console Connection
