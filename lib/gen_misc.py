@@ -10,7 +10,7 @@ import errno
 import os
 import ConfigParser
 try:
-    from StringIO import StringIO
+    import StringIO
 except ImportError:
     from io import StringIO
 import re
