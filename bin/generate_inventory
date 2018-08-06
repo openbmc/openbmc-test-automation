@@ -85,16 +85,16 @@ data = json.dumps(inventory_dict,
 # Check if there is mismatch in data vs expect list
 if len(inventory_dict) != len(inventory_items):
     print_error("The generated list doesn't match Master Inventory List.\n")
-    print data
+    print (data)
     print_var(inventory_items)
     sys.exit()
 
 # Write dictionary data to inventory file
-print "\nGenerated Inventory item json format\n"
-print data
+print ("\nGenerated Inventory item json format\n")
+print (data)
 out = open(fru_inventory_file_path, 'w')
 out.write('inventory_dict = ')
 out.write(data)
 
 out.close()
-print "\nGenerated Inventory File: ", fru_inventory_file_path
+print ("\nGenerated Inventory File: %s " % fru_inventory_file_path)
