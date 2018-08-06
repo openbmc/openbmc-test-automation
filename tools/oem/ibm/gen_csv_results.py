@@ -140,14 +140,14 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level):
                                   'tag_stat_combine': 'tagANDanother'})
 
     stats = result.statistics
-    print "--------------------------------------"
-    print "Total Test Count:\t",\
-          stats.total.critical.passed + stats.total.critical.failed
-    print "Total Test Failed:\t", stats.total.critical.failed
-    print "Total Test Passed:\t", stats.total.critical.passed
-    print "Test Start Time:\t", result.suite.starttime
-    print "Test End Time:\t\t", result.suite.endtime
-    print "--------------------------------------"
+    print ("--------------------------------------")
+    total_tc = stats.total.critical.passed + stats.total.critical.failed
+    print ("Total Test Count:\t %d" % total_tc)
+    print ("Total Test Failed:\t %d" % stats.total.critical.failed)
+    print ("Total Test Passed:\t %d" % stats.total.critical.passed)
+    print ("Test Start Time:\t %s" % result.suite.starttime)
+    print ("Test End Time:\t\t %s" % result.suite.endtime)
+    print ("--------------------------------------")
 
     # Use ResultVisitor object and save off the test data info
     class TestResult(ResultVisitor):
@@ -184,8 +184,8 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level):
     if version_id and platform:
         l_driver = version_id
         l_platform_type = platform
-        print "BMC Version_id:", version_id
-        print "BMC Platform:", platform
+        print ("BMC Version_id:%s" % version_id)
+        print ("BMC Platform:%s" % platform)
     else:
         # System data from XML meta data
         l_system_info = get_system_details(xml_file_path)
@@ -196,10 +196,10 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level):
     # generation. If any one is not avaulable, exit CSV file generation
     # process.
     if l_driver and l_platform_type:
-        print "Driver and system info set."
+        print ("Driver and system info set.")
     else:
-        print "\
-        Both driver and system info need to be set. CSV file is not generated."
+        print ("Both driver and system info need to be set.\
+                CSV file is not generated.")
         sys.exit()
 
     # Default header
@@ -215,7 +215,7 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level):
     # Example: 2017-02-20-08-47-22_Witherspoon.csv
     l_csvfile = l_base_dir + l_timestamp + "_" + l_platform_type + ".csv"
 
-    print "Writing data into csv file:", l_csvfile
+    print ("Writing data into csv file:%s" % l_csvfile)
 
     for testcase in collectDataObj.testData:
         # Functional Area: Suite Name
