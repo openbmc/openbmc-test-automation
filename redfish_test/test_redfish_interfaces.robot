@@ -1,13 +1,28 @@
 *** Settings ***
 Documentation    Test Redfish interfaces supported.
 
-Resource    ../lib/redfish_client.robot
+Resource         ../lib/redfish_client.robot
+
+Test Setup       Test Setup Execution
+Test Teardown    Test Teardown Execution
+
 
 ** Test Cases **
 
-Get Redfish Response Codes
+Test Get Redfish Session Id
+    [Documentation]  Establish session to BMC and get session identifier.
+    [Tags]  Test_Get_Redfish_Session_Id
+
+    ${session_url} =
+    ...  Catenate  SEPARATOR=  ${REDFISH_SESSION_URI}  ${test_session_id}
+    ${resp} =  Redfish Get Request
+    ...  ${session_url}  xauth_token=${test_auth_token}  response_format=${0}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Test Get Redfish Response Codes
     [Documentation]  Get Redfish response codes and validate them.
-    [Tags]  Get_Redfish_Response_Codes
+    [Tags]  Test_Get_Redfish_Response_Codes
     [Template]  Execute Get And Check Response
 
     # Expected status    URL Path
@@ -16,6 +31,7 @@ Get Redfish Response Codes
     ${HTTP_OK}           Chassis/system
     ${HTTP_OK}           Managers/openbmc/EthernetInterfaces/eth0
     ${HTTP_NOT_FOUND}    /i/dont/exist/
+
 
 *** Keywords ***
 
@@ -26,5 +42,20 @@ Execute Get And Check Response
     # expected_response_code   Expected REST status codes.
     # url_path                 URL path.
 
-    ${resp} =  Redfish Get Request  ${url_path}  response_format=${0}
+    ${resp} =  Redfish Get Request
+    ...  ${url_path}  xauth_token=${test_auth_token}  response_format=${0}
     Should Be Equal As Strings  ${resp.status_code}  ${expected_response_code}
+
+
+Test Setup Execution
+    [Documentation]  Do the test setup.
+
+    ${session_id}  ${auth_token} =  Redfish Login Request
+    Set Test Variable  ${test_session_id}  ${session_id}
+    Set Test Variable  ${test_auth_token}  ${auth_token}
+
+
+Test Teardown Execution
+    [Documentation]  Do the test teardown.
+
+    Redfish Delete Request  ${test_session_id}  ${test_auth_token}
