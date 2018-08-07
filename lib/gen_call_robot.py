@@ -350,7 +350,7 @@ def process_robot_output_files(robot_cmd_buf=None,
         return
 
     if gzip:
-        gc.shell_cmd("gzip " + file_list)
+        gc.shell_cmd("gzip -f " + file_list)
         # Update the values in file_list.
         file_list = re.sub(" ", ".gz ", file_list) + ".gz"
 
@@ -379,8 +379,7 @@ def process_robot_output_files(robot_cmd_buf=None,
 
 
 def robot_cmd_fnc(robot_cmd_buf,
-                  robot_jail=os.environ.get('ROBOT_JAIL', ''),
-                  gzip=1):
+                  robot_jail=os.environ.get('ROBOT_JAIL', '')):
     r"""
     Run the robot command string.
 
@@ -392,9 +391,6 @@ def robot_cmd_fnc(robot_cmd_buf,
     robot_jail                      Indicates that this is to run in "robot
                                     jail" meaning without visibility to any
                                     apolloxxx import files, programs, etc.
-    gqip                            This indicates that the log, report and
-                                    output files produced by robot should be
-                                    gzipped to save space.
     """
 
     if not gv.valid_value(robot_cmd_buf):
