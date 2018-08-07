@@ -367,7 +367,7 @@ def get_arg_name(var,
     if lvalue_string == composite_line:
         # i.e. the regex did not match so there are no lvalues.
         lvalue_string = ""
-    lvalues_list = filter(None, map(str.strip, lvalue_string.split(",")))
+    lvalues_list = list(filter(None, map(str.strip, lvalue_string.split(","))))
     try:
         lvalues = collections.OrderedDict()
     except AttributeError:
@@ -779,7 +779,16 @@ def sprint_varx(var_name,
     """
 
     # Determine the type
-    if type(var_value) in (int, long, float, bool, str, unicode) \
+    try:
+        int_types = (int, long)
+    except NameError:
+        int_types = (int,)
+    try:
+        string_types = (str, unicode)
+    except NameError:
+        string_types = (str,)
+    simple_types = int_types + string_types + (float, bool)
+    if type(var_value) in simple_types \
        or var_value is None:
         # The data type is simple in the sense that it has no subordinate
         # parts.
@@ -787,7 +796,7 @@ def sprint_varx(var_name,
         loc_col1_width = loc_col1_width - loc_col1_indent
         # See if the user wants the output in hex format.
         if hex:
-            if type(var_value) not in (int, long):
+            if type(var_value) not in int_types:
                 value_format = "%s"
                 if var_value == "":
                     var_value = "<blank>"
@@ -843,7 +852,7 @@ def sprint_varx(var_name,
         except NameError:
             pass
         if type_is_dict:
-            for key, value in var_value.iteritems():
+            for key, value in var_value.items():
                 if key_list is not None:
                     key_list_regex = "^" + "|".join(key_list) + "$"
                     if not re.match(key_list_regex, key):
