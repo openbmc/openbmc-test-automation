@@ -88,6 +88,8 @@ Redfish Get Request
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
+    ${content} =  To JSON  ${resp.content}  pretty_print=False
+    Log To Console  \n ${content}
     ${content} =  To JSON  ${resp.content}
     [Return]  ${content}
 
