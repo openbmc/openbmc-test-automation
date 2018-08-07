@@ -669,5 +669,5 @@ def outbuf_to_report(out_buf,
                                     list_to_report function for details).
     """
 
-    report_list = filter(None, out_buf.split("\n"))
+    report_list = list(filter(None, out_buf.split("\n")))
     return list_to_report(report_list, **args)
