@@ -42,12 +42,20 @@ Install the packages and it's dependencies via `pip`
     $ pip install -U robotframework-requests
     $ pip install -U robotframework-httplibrary
     ```
+
     SSH and SCP base packages:
     For more detailed installation instructions see [robotframework-sshlibrary](https://pypi.python.org/pypi/robotframework-sshlibrary)
     ```
     $ pip install robotframework-sshlibrary
     $ pip install robotframework-scplibrary
     ```
+
+    Installing tox:
+    ```
+    $ pip install -U tox
+    ```
+
+If using Python 3 use the corresponding `pip3` to install packages.
 
 ## OpenBMC Test Development ##
 
@@ -110,6 +118,10 @@ classified as follows:
 
 `templates/`: Contains sample code examples and setup testing.
 
+`test_list/`: Contains the argument files used for skipping test cases
+              ( e.g "skip_test", "skip_test_extended" etc. ) or
+              grouping them (e.g "HW_CI", "CT_basic_run" etc.) for a purpose.
+
 
 ## Redfish Test Layout ##
 
@@ -132,16 +144,10 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     ```
     $ robot -v OPENBMC_HOST:xx.xx.xx.xx  tests
     ```
+
 * Execute a test suite:
     ```
     $ robot -v OPENBMC_HOST:xx.xx.xx.xx  tests/test_basic_poweron.robot
-    ```
-**Tox Command Line**
-
-* Install the python dependencies for tox:
-    ```
-    $ easy_install tox
-    $ easy_install pip
     ```
 
 * Initialize the following environment variables which will be used during testing:
@@ -149,28 +155,15 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     $ export OPENBMC_HOST=<openbmc machine ip address>
     $ export OPENBMC_PASSWORD=<openbmc password>
     $ export OPENBMC_USERNAME=<openbmc username>
-    $ export OPENBMC_MODEL=[./data/Barreleye.py, ./data/Palmetto.py, etc]
+    $ export OPENBMC_MODEL=[./data/Witherspoon.py, ./data/Palmetto.py, etc]
     $ export IPMI_COMMAND=<Dbus/External>
     $ export IPMI_PASSWORD=<External IPMI password>
     ```
-* For tests requiring PDU, set the following environment variables as well:
-    ```
-    $ export PDU_IP=<PDU IP address>
-    $ export PDU_USERNAME=<PDU username>
-    $ export PDU_PASSWORD=<PDU password>
-    $ export PDU_TYPE=<PDU type>
-    $ export PDU_SLOT_NO=<SLOT number>
-    ```
-    Note: For PDU_TYPE we support only synaccess at the moment.
 
 * For QEMU tests, set the following environment variables as well:
     ```
     $ export SSH_PORT=<ssh port number>
     $ export HTTPS_PORT=<https port number>
-    ```
-* For BIOS tests, set the following environment variables as well:
-    ```
-    $ export PNOR_IMAGE_PATH=<path to>/<machine>.pnor
     ```
 
 * Run tests:
@@ -206,7 +199,6 @@ version 2.3.1 or greater is required) or via Robot CLI command.
 
     Exclude test list for supported systems:
     ```
-    Barrleye:  test_lists/skip_test_barreleye
     Palmetto:  test_lists/skip_test_palmetto
     Witherspoon:  test_lists/skip_test_witherspoon
     ```
@@ -223,7 +215,31 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/CT_basic_run tests
     ```
 
-* Code update test:
+* Run extended tests:
+
+    For loop test (default iteration is 10):
+    ```
+    $ robot -v OPENBMC_HOST:x.x.x.x -v OPENBMC_SYSTEMMODEL:xxxxxx -v ITERATION:n -v LOOP_TEST_COMMAND:xxxxxx extended/full_suite_regression.robot
+    ```
+
+    Example using tox testing a test suite for 5 times "witherspoon":
+    ```
+    OPENBMC_HOST=x.x.x.x  LOOP_TEST_COMMAND="tests/test_fw_version.robot" ITERATION=5 OPENBMC_SYSTEMMODEL=witherspoon tox -e witherspoon -- ./extended/full_suite_regression.robot
+    ```
+
+**Jenkins jobs tox commands**
+* HW CI tox command:
+    ```
+    $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/HW_CI tests
+    ```
+
+## Code Update ##
+
+    Currently supported BMC and PNOR update formats are UBI and non-UBI.
+    For code update information please refer to [code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
+
+
+* UBI Format *
 
     For BMC code update, download the system type *.ubi.mdt.tar image from
     https://openpower.xyz/job/openbmc-build/ and run as follows:
@@ -243,21 +259,22 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     $ robot -v OPENBMC_HOST:x.x.x.x -v IMAGE_FILE_PATH:<image path>/witherspoon.pnor.squashfs.tar --include REST_Host_Code_Update  host_code_update.robot
     ```
 
-    For manual code update information please refer to [code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
+* Non-UBI Format *
 
-* Run extended tests:
+    For BMC code update, download the system type *all.tar image from
+    https://openpower.xyz/job/openbmc-build/ and run as follows:
 
-    For loop test (default iteration is 10):
+    For a Ziaus system:
     ```
-    $ robot -v OPENBMC_HOST:x.x.x.x -v OPENBMC_SYSTEMMODEL:xxxxxx -v ITERATION:n -v LOOP_TEST_COMMAND:xxxxxx extended/full_suite_regression.robot
-    ```
-    Example using tox testing a test suite for 5 times:
-    ```
-    OPENBMC_HOST=x.x.x.x  LOOP_TEST_COMMAND="--argumentfile test_lists/skip_test tests/test_fw_version.robot" ITERATION=5  OPENBMC_SYSTEMMODEL=barreleye tox -e barreleye -- ./extended/full_suite_regression.robot
+    $ cd extended/code_update/
+    $ robot -v OPENBMC_HOST:x.x.x.x -v FILE_PATH:<image path>/zaius-20180326133257.all.tar --include Initiate_Code_Update_BMC update_bmc.robot
     ```
 
-**Jenkins jobs tox commands**
-* HW CI tox command:
+    For host code update, download the system type *.pnor from
+    https://openpower.xyz/job/openpower-op-build/ and run as follows:
+
+    For a Ziaus system:
     ```
-    $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/HW_CI tests
+    $ cd extended/
+    $ robot -v OPENBMC_HOST:x.x.x.x -v PNOR_IMAGE_PATH:<image path>/zaius.pnor test_bios_update.robot
     ```
