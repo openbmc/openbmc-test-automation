@@ -20,7 +20,8 @@ def bmc_execute_command(cmd_buf,
                         ignore_err=0,
                         fork=0,
                         quiet=None,
-                        test_mode=None):
+                        test_mode=None,
+                        time_out=None):
     r"""
     Run the given command in an BMC SSH session and return the stdout, stderr
     and the return code.
@@ -48,6 +49,8 @@ def bmc_execute_command(cmd_buf,
     test_mode                       If test_mode is set, this function will
                                     not actually run the command.  This
                                     defaults to the global test_mode value.
+    time_out                        The amount of time to allow for the
+                                    execution of cmd_buf.
     """
 
     # Get global BMC variable values.
@@ -70,7 +73,7 @@ def bmc_execute_command(cmd_buf,
 
     return grs.execute_ssh_command(cmd_buf, open_connection_args, login_args,
                                    print_out, print_err, ignore_err, fork,
-                                   quiet, test_mode)
+                                   quiet, test_mode, time_out)
 
 
 def os_execute_command(cmd_buf,
@@ -79,7 +82,8 @@ def os_execute_command(cmd_buf,
                        ignore_err=0,
                        fork=0,
                        quiet=None,
-                       test_mode=None):
+                       test_mode=None,
+                       time_out=None):
     r"""
     Run the given command in an OS SSH session and return the stdout, stderr
     and the return code.
@@ -106,6 +110,8 @@ def os_execute_command(cmd_buf,
     test_mode                       If test_mode is set, this function will
                                     not actually run the command.  This
                                     defaults to the global test_mode value.
+    time_out                        The amount of time to allow for the
+                                    execution of cmd_buf.
     """
 
     # Get global OS variable values.
@@ -127,7 +133,7 @@ def os_execute_command(cmd_buf,
 
     return grs.execute_ssh_command(cmd_buf, open_connection_args, login_args,
                                    print_out, print_err, ignore_err, fork,
-                                   quiet, test_mode)
+                                   quiet, test_mode, time_out)
 
 
 def xcat_execute_command(cmd_buf,
