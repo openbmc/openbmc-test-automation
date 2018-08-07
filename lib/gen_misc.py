@@ -8,11 +8,15 @@ This module provides many valuable functions such as my_parm_file.
 import sys
 import errno
 import os
-import ConfigParser
+import collections
+try:
+    import ConfigParser
+except ImportError:
+    import configparser
 try:
     import StringIO
 except ImportError:
-    from io import StringIO
+    import io
 import re
 import socket
 import tempfile
@@ -28,6 +32,7 @@ import gen_cmd as gc
 robot_env = gp.robot_env
 if robot_env:
     from robot.libraries.BuiltIn import BuiltIn
+    from robot.utils import DotDict
 
 
 def add_trailing_slash(dir_path):
@@ -204,7 +209,11 @@ def my_parm_file(prop_file_path):
     # get ConfigParser.MissingSectionHeaderError).  Properties files don't
     # need those so I'll write a dummy section header.
 
-    string_file = StringIO.StringIO()
+    try:
+        string_file = StringIO.StringIO()
+    except NameError:
+        string_file = io.StringIO()
+
     # Write the dummy section header to the string file.
     string_file.write('[dummysection]\n')
     # Write the entire contents of the properties file to the string file.
@@ -213,13 +222,19 @@ def my_parm_file(prop_file_path):
     string_file.seek(0, os.SEEK_SET)
 
     # Create the ConfigParser object.
-    config_parser = ConfigParser.ConfigParser()
+    try:
+        config_parser = ConfigParser.ConfigParser()
+    except NameError:
+        config_parser = configparser.ConfigParser()
     # Make the property names case-sensitive.
     config_parser.optionxform = str
     # Read the properties from the string file.
     config_parser.readfp(string_file)
     # Return the properties as a dictionary.
-    return dict(config_parser.items('dummysection'))
+    if robot_env:
+        return DotDict(config_parser.items('dummysection'))
+    else:
+        return collections.OrderedDict(config_parser.items('dummysection'))
 
 
 def file_to_list(file_path,
@@ -368,7 +383,7 @@ def pid_active(pid):
 
 
 def to_signed(number,
-              bit_width=gp.bit_length(long(sys.maxsize)) + 1):
+              bit_width=None):
     r"""
     Convert number to a signed number and return the result.
 
@@ -402,6 +417,12 @@ def to_signed(number,
                                     hex value.  Typically, this would be a
                                     multiple of 32.
     """
+
+    if bit_width is None:
+        try:
+            bit_width = gp.bit_length(long(sys.maxsize)) + 1
+        except NameError:
+            bit_width = gp.bit_length(int(sys.maxsize)) + 1
 
     if number < 0:
         return number
