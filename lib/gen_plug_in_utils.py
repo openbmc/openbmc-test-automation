@@ -290,7 +290,7 @@ def srequired_plug_in(req_plug_in_names,
 
     # Convert plug_in_dir_paths to a list of base names.
     plug_in_dir_paths = \
-        filter(None, map(os.path.basename, plug_in_dir_paths.split(":")))
+        list(filter(None, map(os.path.basename, plug_in_dir_paths.split(":"))))
 
     # Check for each of the user's required plug-ins.
     for plug_in_name in req_plug_in_names:
