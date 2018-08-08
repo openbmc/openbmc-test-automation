@@ -56,7 +56,6 @@ Test Get Redfish Response Codes
     ${HTTP_OK}           Managers/openbmc/EthernetInterfaces/eth0
     ${HTTP_NOT_FOUND}    /i/dont/exist/
 
-
 *** Keywords ***
 
 Execute Get And Check Response
@@ -82,4 +81,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Do the test teardown.
 
-    Redfish Delete Request  ${test_session_id}  ${test_auth_token}
+    ${session_uri} =
+    ...  Catenate  SEPARATOR=  ${REDFISH_SESSION_URI}  ${test_session_id}
+
+    Redfish Delete Request  ${session_uri}  ${test_auth_token}

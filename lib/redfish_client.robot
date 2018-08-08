@@ -94,16 +94,17 @@ Redfish Get Request
 
 Redfish Delete Request
     [Documentation]  Delete the resource identified by the URI.
-    [Arguments]  ${session_id}
+    [Arguments]  ${uri_suffix}
     ...          ${xauth_token}
     ...          ${timeout}=10
 
     # Description of argument(s):
-    # session_id   Session id.
+    # uri_suffix   The URI to establish connection with
+    #             (e.g. 'SessionService/Sessions/XIApcw39QU').
     # xauth_token  Authentication token.
     # timeout      Timeout in seconds to establish connection with URI.
 
-    ${base_uri} =  Catenate  SEPARATOR=  ${REDFISH_SESSION}${/}  ${session_id}
+    ${base_uri} =  Catenate  SEPARATOR=  ${REDFISH_BASE_URI}  ${uri_suffix}
 
     # Example: "X-Auth-Token: 3la1JUf1vY4yN2dNOwun"
     ${headers} =  Create Dictionary  Content-Type=application/json
