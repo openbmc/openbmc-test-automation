@@ -42,6 +42,7 @@ Resource        ../lib/logging_utils.robot
 Library         ../syslib/utils_keywords.py
 Library         ../lib/utils_files.py
 Library         ../lib/logging_utils.py
+Library         ../syslib/utils_os.py
 
 Suite Setup     Run Keyword  Start SOL Console Logging
 Test Setup      Test Setup Execution
@@ -222,6 +223,13 @@ Loop HTX Health Check
 Test Setup Execution
     [Documentation]  Do the initial test setup.
 
+    ${os_release_info}=  Get OS Release Info
+    Rpvars  1  os_release_info
+
+    ${pnor_version}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  sed -re 's/\t//g' /var/lib/phosphor-software-manager/pnor/ro/VERSION
+    Rpvars  pnor_version
+
     REST Power On  stack_mode=skip
     Run Key U  Sleep \ 15s
     Delete All Error Logs
@@ -234,10 +242,7 @@ Test Setup Execution
 
 
 Test Teardown Execution
-    [Documentation]  Do the post test teardown.
-    # 1. Shut down HTX exerciser if test Failed.
-    # 2. Capture FFDC on test failure.
-    # 3. Close all open SSH connections.
+    [Documentation]  Do the post-test teardown.
 
     # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
     Run Keyword If
