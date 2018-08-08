@@ -235,8 +235,8 @@ version 2.3.1 or greater is required) or via Robot CLI command.
 
 ## Code Update ##
 
-    Currently supported BMC and PNOR update formats are UBI and non-UBI.
-    For code update information, please refer to [code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
+Currently supported BMC and PNOR update formats are UBI and non-UBI.
+For code update information, please refer to [code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
 
 
 * UBI Format *
