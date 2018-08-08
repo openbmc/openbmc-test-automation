@@ -234,10 +234,7 @@ Test Setup Execution
 
 
 Test Teardown Execution
-    [Documentation]  Do the post test teardown.
-    # 1. Shut down HTX exerciser if test Failed.
-    # 2. Capture FFDC on test failure.
-    # 3. Close all open SSH connections.
+    [Documentation]  Do the post-test teardown.
 
     # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
     Run Keyword If
@@ -247,6 +244,15 @@ Test Teardown Execution
     ${keyword_buf}=  Catenate  Stop SOL Console Logging
     ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
     Run Key  ${keyword_buf}
+
+    # Display BMC and PNOR version to the log.
+    ${bmc_version}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  cat /etc/os-release | grep VERSION_ID
+    ${pnor_version}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  cat /var/lib/phosphor-software-manager/pnor/ro/VERSION | head -n 1
+    Rprintn
+    Rpvars  bmc_version
+    Rpvars  pnor_version
 
     FFDC On Test Case Fail
     Close All Connections
