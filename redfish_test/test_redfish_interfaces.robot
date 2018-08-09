@@ -33,6 +33,17 @@ Test Get Redfish Session Id
     ...  /redfish/v1/${session_url}  ${resp["@odata.id"]}
 
 
+Test Delete Redfish Session With Invalid Token
+    [Documentation]  Delete valid session with invalid token.
+
+    ${session_uri} =
+    ...  Catenate  SEPARATOR=  ${REDFISH_SESSION_URI}  ${test_session_id}
+
+    ${resp} =  Redfish Delete Request
+    ...  ${session_uri}  xauth_token=InvalidToken  resp_check=${0}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
+
+
 Test Invalid Redfish Token Access
     [Documentation]  Access valid session id using invalid session token.
     [Tags]  Test_Invalid_Redfish_Token_Access
