@@ -53,7 +53,7 @@ Redfish Get Request
     [Arguments]  ${uri_suffix}
     ...          ${session_id}=${None}
     ...          ${xauth_token}=${None}
-    ...          ${response_format}="json"
+    ...          ${resp_check}=${1}
     ...          ${timeout}=30
 
     # Description of argument(s):
@@ -61,7 +61,8 @@ Redfish Get Request
     #                  (e.g. 'Systems').
     # session_id       Session id.
     # xauth_token      Authentication token.
-    # response_format  The format desired for data returned by this keyword
+    # resp_check       By default check the response status and return JSON.
+    #                  The format desired for data returned by this keyword
     #                  (json/HTTPS response).
     # timeout          Timeout in seconds to establish connection with URI.
 
@@ -84,7 +85,7 @@ Redfish Get Request
     ${resp}=  Get Request
     ...  openbmc  ${base_uri}  headers=${headers}  timeout=${timeout}
 
-    Return From Keyword If  ${response_format} != "json"  ${resp}
+    Return From Keyword If  ${resp_check} == ${0}   ${resp}
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
@@ -104,7 +105,7 @@ Redfish Delete Request
     #             (e.g. 'SessionService/Sessions/XIApcw39QU').
     # xauth_token  Authentication token.
     # timeout      Timeout in seconds to establish connection with URI.
-    # resp_check   By default check the response status
+    # resp_check   By default check the response status.
 
     ${base_uri} =  Catenate  SEPARATOR=  ${REDFISH_BASE_URI}  ${uri_suffix}
 

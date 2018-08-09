@@ -44,6 +44,15 @@ Test Delete Redfish Session With Invalid Token
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
 
 
+Test Delete Redfish Response Codes
+    [Documentation]  Get Redfish response codes and validate them.
+    [Tags]  Test_Delete_Redfish_Response_Codes
+
+    ${resp} =  Redfish Delete Request
+    ...  Systems/motherboard  xauth_token=${test_auth_token}  resp_check=${0}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_METHOD_NOT_ALLOWED}
+
+
 Test Invalid Redfish Token Access
     [Documentation]  Access valid session id using invalid session token.
     [Tags]  Test_Invalid_Redfish_Token_Access
@@ -51,7 +60,7 @@ Test Invalid Redfish Token Access
     ${session_url} =
     ...  Catenate  SEPARATOR=  ${REDFISH_SESSION_URI}  ${test_session_id}
     ${resp} =  Redfish Get Request
-    ...  ${session_url}  xauth_token=InvalidToken  response_format=${0}
+    ...  ${session_url}  xauth_token=InvalidToken  resp_check=${0}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
 
 
@@ -61,6 +70,7 @@ Test Get Redfish Response Codes
     [Template]  Execute Get And Check Response
 
     # Expected status    URL Path
+    ${HTTP_OK}           ${EMPTY}
     ${HTTP_OK}           Systems
     ${HTTP_OK}           Systems/motherboard
     ${HTTP_OK}           Chassis/system
@@ -77,7 +87,7 @@ Execute Get And Check Response
     # url_path                 URL path.
 
     ${resp} =  Redfish Get Request
-    ...  ${url_path}  xauth_token=${test_auth_token}  response_format=${0}
+    ...  ${url_path}  xauth_token=${test_auth_token}  resp_check=${0}
     Should Be Equal As Strings  ${resp.status_code}  ${expected_response_code}
 
 
