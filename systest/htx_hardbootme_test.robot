@@ -223,8 +223,10 @@ Loop HTX Health Check
 Test Setup Execution
     [Documentation]  Do the initial test setup.
 
-    ${os_release_info}=  Get OS Release Info
-    Rpvars  1  os_release_info
+    ${bmc_version}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  cat /etc/os-release
+    Rprintn
+    Rpvars  bmc_version
 
     ${pnor_version}  ${stderr}  ${rc}=  BMC Execute Command
     ...  sed -re 's/\t//g' /var/lib/phosphor-software-manager/pnor/ro/VERSION
@@ -234,6 +236,9 @@ Test Setup Execution
     Run Key U  Sleep \ 15s
     Delete All Error Logs
     Tool Exist  htxcmdline
+
+    ${os_release_info}=  Get OS Release Info
+    Rpvars  1  os_release_info
 
     # Shutdown if HTX is running.
     ${status}=  Is HTX Running
