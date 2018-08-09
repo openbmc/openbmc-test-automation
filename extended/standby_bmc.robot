@@ -120,7 +120,7 @@ Check For Application Failures
 
     ${error_regex}=  Escape Bash Quotes  ${error_regex}
     ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | egrep '${error_regex}'  ignore_err=1
+    ...  journalctl -b --no-pager | egrep '${error_regex}'  ignore_err=1
 
     Should Be Empty  ${journal_log}
 
