@@ -24,7 +24,7 @@ ${HTX_MDT_PROFILE}  mdt.hdbuster
 
 *** Test Cases ***
 
-IO Storage Compability Stress
+IO Storage Compatibility Stress
     [Documentation]  Stress storage cards.
     [Tags]  IO_Storage_Compatibility_Stress
 

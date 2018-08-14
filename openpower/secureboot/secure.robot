@@ -57,7 +57,7 @@ Violate Secure Boot Via Corrupt Key
     ...  with corrupted key.
     [Arguments]  ${partition}  ${error_src}  ${bmc_image_dir_path}
 
-    # Decription of argument(s):
+    # Description of argument(s):
     # partition            The partition which is to be corrupted
     #                      (e.g. "SBE", "HBI", "HBB", "HBRT", "HBBL", "OCC").
     # error_src            The system reference code that is expected as a

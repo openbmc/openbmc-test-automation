@@ -139,7 +139,7 @@ def rest_fail():
 def esel_stop_check():
     r"""
     Run the esel_stop_check program to determine whether any eSEL entries
-    found warrent stopping the test run.  See esel_stop_check help text for
+    found warrant stopping the test run.  See esel_stop_check help text for
     details.
     """
 

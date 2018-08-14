@@ -13,7 +13,7 @@ Documentation  Install RHEL OS and run an HTX bootme.
 #   FTP_PASSWORD                The FTP password.
 #   OS_REPO_URL                 The URL for the OS to be installed.
 #                               (e.g "ftp.com/redhat/RHEL/Server/os/").
-#   Optional Paramters:
+#   Optional Parameters:
 #     HTX_DURATION              The duration of the HTX run (e.g 2h,3m)
 #                               Defaults to 2h.
 #     HTX_INTERVAL              The time delay between checks of HTX

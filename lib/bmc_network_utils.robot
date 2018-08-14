@@ -249,6 +249,6 @@ Run Build Net
     [Documentation]  Run build_net to preconfigure the ethernet interfaces.
 
     OS Execute Command  build_net help y y
-    # Run pingum to chech if the "build_net" was run correctly done.
+    # Run pingum to check if the "build_net" was run correctly done.
     ${output}  ${stderr}  ${rc}=  OS Execute Command  pingum
     Should Contain  ${output}  All networks ping Ok

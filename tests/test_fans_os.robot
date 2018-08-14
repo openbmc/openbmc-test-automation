@@ -98,7 +98,7 @@ Check Fan Manual Control
     # fans to normal speed.
     ${minutes_to_stabilize}=  Set Variable  4
 
-    # Login to BMC and disable the fan deamon. Disabling the daemon sets
+    # Login to BMC and disable the fan daemon. Disabling the daemon sets
     # manual mode.
     Open Connection And Log In
     Set Fan Daemon State  stop

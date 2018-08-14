@@ -29,7 +29,7 @@ def set_exit_on_error(value):
 def get_var_name(var_name):
     r"""
     If var_name has a value, simply return it.  Otherwise, get the variable
-    name of the first arguement used to call the validation function (e.g.
+    name of the first argument used to call the validation function (e.g.
     valid_value, valid_integer, etc.) and return it.
 
     This function is designed solely for use by other functions in this file.
