@@ -152,6 +152,7 @@ def process_pgm_parms():
     global boot_stack
     global boot_results_file_path
     global boot_results
+    global last_ten
     global ffdc_list_file_path
     global ffdc_report_list_path
     global ffdc_summary_list_path
@@ -170,8 +171,9 @@ def process_pgm_parms():
 
     if os.path.isfile(boot_results_file_path):
         # We've been called before in this run so we'll load the saved
-        # boot_results object.
-        boot_results = pickle.load(open(boot_results_file_path, 'rb'))
+        # boot_results and last_ten objects.
+        boot_results, last_ten =\
+            pickle.load(open(boot_results_file_path, 'rb'))
     else:
         boot_results = boot_results(boot_table, boot_pass, boot_fail)
 
@@ -884,10 +886,12 @@ def obmc_boot_test_teardown():
             call_point='cleanup', stop_on_plug_in_failure=0)
 
     if 'boot_results_file_path' in globals():
-        # Save boot_results object to a file in case it is needed again.
+        # Save boot_results and last_ten objects to a file in case they are
+        # needed again.
         gp.qprint_timen("Saving boot_results to the following path.")
         gp.qprint_var(boot_results_file_path)
-        pickle.dump(boot_results, open(boot_results_file_path, 'wb'),
+        pickle.dump((boot_results, last_ten),
+                    open(boot_results_file_path, 'wb'),
                     pickle.HIGHEST_PROTOCOL)
 
     global save_stack
