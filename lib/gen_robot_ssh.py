@@ -282,10 +282,19 @@ def execute_ssh_command(cmd_buf,
 
             if except_type is exceptions.AssertionError and\
                re.match(r"Connection not open", str(except_value)):
-                login_ssh(login_args)
-                # Now we must continue to next loop iteration to retry the
-                # execute_command.
-                continue
+                try:
+                    login_ssh(login_args)
+                    # Now we must continue to next loop iteration to retry the
+                    # execute_command.
+                    continue
+                except Exception as login_exception:
+                    except_type, except_value, except_traceback =\
+                        sys.exc_info()
+                    rc = 1
+                    stderr = str(except_value)
+                    stdout = ""
+                    break
+
             if (except_type is paramiko.ssh_exception.SSHException
                 and re.match(r"SSH session not active", str(except_value))) or\
                (except_type is socket.error
