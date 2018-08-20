@@ -1,0 +1,86 @@
+#!/usr/bin/env python
+
+r"""
+See help text for details.
+"""
+
+import sys
+
+save_path_0 = sys.path[0]
+del sys.path[0]
+
+from gen_arg import *
+from gen_print import *
+from gen_valid import *
+from openbmc_ffdc_list import *
+
+# Restore sys.path[0].
+sys.path.insert(0, save_path_0)
+
+# Set exit_on_error for gen_valid functions.
+set_exit_on_error(True)
+
+parser = argparse.ArgumentParser(
+    usage='%(prog)s [OPTIONS]',
+    description="%(prog)s will print a colon-delimited list of all valid OBMC FFDC functions.\n\nExample:" +
+    "\n\n\nDump Log:FFDC Generic Report:Get Request FFDC:SEL Log:BMC Specific Files:Sys Inventory Files" +
+    ":Core Files:OS FFDC:Dump Files",
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    prefix_chars='-+')
+
+# Populate stock_list with options we want.
+stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
+
+
+def exit_function(signal_number=0,
+                  frame=None):
+    r"""
+    Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
+    """
+
+    dprint_executing()
+    dprint_var(signal_number)
+
+    qprint_pgm_footer()
+
+
+def signal_handler(signal_number,
+                   frame):
+    r"""
+    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our program would terminate immediately
+    with return code 143 and without calling our exit_function.
+    """
+
+    # Our convention is to set up exit_function with atexit.register() so there is no need to explicitly
+    # call exit_function from here.
+
+    dprint_executing()
+
+    # Calling exit prevents us from returning to the code that was running when we received the signal.
+    exit(0)
+
+
+def validate_parms():
+    r"""
+    Validate program parameters, etc.
+    """
+
+    gen_post_validation(exit_function, signal_handler)
+
+
+def main():
+
+    gen_get_options(parser, stock_list)
+
+    validate_parms()
+
+    qprint_pgm_header()
+
+    my_openbmc_ffdc_list = openbmc_ffdc_list()
+    ffdc_function_list = my_openbmc_ffdc_list.get_ffdc_method_desc('BMC LOGS')
+    # Convert from list to colon-delimited string.
+    ffdc_function_list = ':'.join(ffdc_function_list)
+    print(ffdc_function_list)
+
+
+main()
