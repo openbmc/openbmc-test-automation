@@ -74,7 +74,25 @@ if SHOW_ELAPSED_TIME == "1":
 
 # Initialize some time variables used in module functions.
 start_time = time.time()
-sprint_time_last_seconds = start_time
+# sprint_time_last_seconds is used to calculate elapsed seconds.
+sprint_time_last_seconds = [start_time]
+# Define global index for the sprint_time_last_seconds list.
+last_seconds_ix = 0
+
+
+# Since output from the lprint_ functions goes to a different location than
+# the output from the print_ functions (e.g. a file vs. the console),
+# sprint_time_last_seconds has been created as a list rather than a simple
+# integer so that it can store multiple sprint_time_last_seconds values.
+# Standard print_ functions defined in this file will use
+# sprint_time_last_seconds[0] and the lprint_ functions will use
+# sprint_time_last_seconds[1].
+def lprint_last_seconds_ix():
+    r"""
+    Return lprint last_seconds index value to the caller.
+    """
+    return 1
+
 
 # The user can set environment variable "GEN_PRINT_DEBUG" to get debug output
 # from this module.
@@ -512,6 +530,7 @@ def sprint_time(buffer=""):
     global NANOSECONDS
     global SHOW_ELAPSED_TIME
     global sprint_time_last_seconds
+    global last_seconds_ix
 
     seconds = time.time()
     loc_time = time.localtime(seconds)
@@ -526,13 +545,13 @@ def sprint_time(buffer=""):
     if SHOW_ELAPSED_TIME == "1":
         cur_time_seconds = seconds
         math_string = "%9.9f" % cur_time_seconds + " - " + "%9.9f" % \
-            sprint_time_last_seconds
+            sprint_time_last_seconds[last_seconds_ix]
         elapsed_seconds = eval(math_string)
         if NANOSECONDS == "1":
             elapsed_seconds = "%11.6f" % elapsed_seconds
         else:
             elapsed_seconds = "%4i" % elapsed_seconds
-        sprint_time_last_seconds = cur_time_seconds
+        sprint_time_last_seconds[last_seconds_ix] = cur_time_seconds
         time_string = time_string + " - " + elapsed_seconds
 
     return time_string + " - " + buffer
@@ -1736,7 +1755,14 @@ dprint_func_template = \
 
 lprint_func_template = \
     [
-        "    gp_log(<mod_qualifier>replace_passwords(<call_line>))"
+        "    global sprint_time_last_seconds",
+        "    global last_seconds_ix",
+        "    if len(sprint_time_last_seconds) <= lprint_last_seconds_ix():",
+        "        sprint_time_last_seconds.append(start_time)",
+        "    save_last_seconds_ix = last_seconds_ix",
+        "    last_seconds_ix = lprint_last_seconds_ix()",
+        "    gp_log(<mod_qualifier>replace_passwords(<call_line>))",
+        "    last_seconds_ix = save_last_seconds_ix",
     ]
 
 replace_dict = {'output_stream': 'stdout', 'mod_qualifier': ''}
