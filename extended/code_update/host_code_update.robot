@@ -70,6 +70,43 @@ Post Update Boot To OS
     Verify Running Host Image  ${IMAGE_FILE_PATH}
 
 
+Test Boot With No Cache
+    [Documentation]  After having done a PNOR updated and
+    ... OS booted, remove cached VPD files and verify OS boots.
+    [Tags]  TEST_Boot_With_No_Cache 
+
+    # Power off the system.
+    REST Power Off  stack_mode=skip
+
+    ${vpd_files}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ls /var/lib/phosphor-software-manager/pnor/prsv
+    # Typically, vpd_files = "CVPD DJVPD MVPD NVRAM".
+
+    ${count_vpd_files}=  Count Values In List  ${vpd_files}  VPD
+    Run Keyword If  ${count_vpd_files} != ${3}  Fatal Error
+    ...  msg=No VPD at /var/lib/phosphor-software-manager/pnor/prsv
+
+    # Delete the *VPD* files.
+    ${vpd_files}  ${stderr}  ${rc}=  Run Keyword If  ${count_vpd_files}
+    ...  BMC Execute Command
+    ...  rm /var/lib/phosphor-software-manager/pnor/prsv/*VPD*
+
+    # Confirm *VPD* files have been deleted.
+    ${count_vpd_files}=  Count Values In List  ${vpd_files}  VPD
+    Run Keyword If  ${count_vpd_files} != ${0}  Fatal Error
+    ...  msg=VPD files were not erased as expected.
+
+    REST Power On
+
+    # After powering-on the system, the VPD files should be present.
+    ${vpd_files}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ls /var/lib/phosphor-software-manager/pnor/prsv
+
+    ${count_vpd_files}=  Count Values In List  ${vpd_files}  VPD
+    Run Keyword If  ${count_vpd_files} != ${3}  Fatal Error
+    ...  msg=No VPD files at /var/lib/phosphor-software-manager/pnor/prsv.
+
+
 REST Host Code Update While OS Is Running
     [Documentation]  Do a PNOR code update while the host is running.
     [Tags]  REST_Host_Code_Update_While_OS_Is_Running
