@@ -326,14 +326,24 @@ def required_plug_in(req_plug_in_names,
     return True
 
 
-def compose_plug_in_save_dir_path():
+def compose_plug_in_save_dir_path(plug_in_package_name=None):
     r"""
     Create and return a directory path name that is suitable for saving
     plug-in data.
 
     The name will be comprised of things such as plug_in package name, pid,
     etc. in order to guarantee that it is unique for a given test run.
+
+    Description of argument(s):
+    plug_in_package_name            The plug-in package name.  This defaults
+                                    to the name of the caller's plug-in
+                                    package.  However, the caller can specify
+                                    another value in order to retrieve data
+                                    saved by another plug-in package.
     """
+
+    plug_in_package_name = gm.dft(plug_in_package_name,
+                                  get_plug_in_package_name())
 
     BASE_TOOL_DIR_PATH = \
         gm.add_trailing_slash(os.environ.get(PLUG_VAR_PREFIX
@@ -344,32 +354,41 @@ def compose_plug_in_save_dir_path():
         NICKNAME = os.environ["AUTOIPL_FSP1_NICKNAME"]
     MASTER_PID = os.environ[PLUG_VAR_PREFIX + "_MASTER_PID"]
     return BASE_TOOL_DIR_PATH + os.environ["USER"] + "/" + NICKNAME + "/" +\
-        get_plug_in_package_name() + "/" + MASTER_PID + "/"
+        plug_in_package_name + "/" + MASTER_PID + "/"
 
 
-def create_plug_in_save_dir():
+def create_plug_in_save_dir(plug_in_package_name=None):
     r"""
     Create a directory suitable for saving plug-in processing data.  See
     compose_plug_in_save_dir_path for details.
+
+    Description of argument(s):
+    plug_in_package_name            See compose_plug_in_save_dir_path for
+                                    details.
     """
 
-    plug_in_save_dir_path = compose_plug_in_save_dir_path()
+    plug_in_save_dir_path = compose_plug_in_save_dir_path(plug_in_package_name)
     if os.path.isdir(plug_in_save_dir_path):
         return plug_in_save_dir_path
     gc.shell_cmd("mkdir -p " + plug_in_save_dir_path)
     return plug_in_save_dir_path
 
 
-def delete_plug_in_save_dir():
+def delete_plug_in_save_dir(plug_in_package_name=None):
     r"""
     Delete the plug_in save directory.  See compose_plug_in_save_dir_path for
     details.
+
+    Description of argument(s):
+    plug_in_package_name            See compose_plug_in_save_dir_path for
+                                    details.
     """
 
-    gc.shell_cmd("rm -rf " + compose_plug_in_save_dir_path())
+    gc.shell_cmd("rm -rf "
+                 + compose_plug_in_save_dir_path(plug_in_package_name))
 
 
-def save_plug_in_value(value):
+def save_plug_in_value(value, plug_in_package_name=None):
     r"""
     Save a value in a plug-in save file.  The value may be retrieved later via
     a call to the restore_plug_in_value function.
@@ -387,17 +406,19 @@ def save_plug_in_value(value):
 
     Description of argument(s):
     value                           The value to be saved.
+    plug_in_package_name            See compose_plug_in_save_dir_path for
+                                    details.
     """
 
     # Get the name of the variable used as argument one to this function.
     var_name = gp.get_arg_name(0, 1, stack_frame_ix=2)
-    plug_in_save_dir_path = create_plug_in_save_dir()
+    plug_in_save_dir_path = create_plug_in_save_dir(plug_in_package_name)
     save_file_path = plug_in_save_dir_path + var_name
     gp.qprint_timen("Saving \"" + var_name + "\" value.")
     gc.shell_cmd("echo '" + str(value) + "' > " + save_file_path)
 
 
-def restore_plug_in_value(default=""):
+def restore_plug_in_value(default="", plug_in_package_name=None):
     r"""
     Return a value from a plug-in save file.
 
@@ -414,11 +435,13 @@ def restore_plug_in_value(default=""):
     default                         The default value to be returned if there
                                     is no plug-in save file for the value in
                                     question.
+    plug_in_package_name            See compose_plug_in_save_dir_path for
+                                    details.
     """
 
     # Get the lvalue from the caller's invocation of this function.
     lvalue = gp.get_arg_name(0, -1, stack_frame_ix=2)
-    plug_in_save_dir_path = create_plug_in_save_dir()
+    plug_in_save_dir_path = create_plug_in_save_dir(plug_in_package_name)
     save_file_path = plug_in_save_dir_path + lvalue
     if os.path.isfile(save_file_path):
         gp.qprint_timen("Restoring " + lvalue + " value from "
