@@ -33,11 +33,12 @@ Force Tags        Host_Code_Update
 
 *** Variables ***
 
-${QUIET}                          ${1}
-${IMAGE_FILE_PATH}                ${EMPTY}
-${DELETE_OLD_PNOR_IMAGES}         false
-${DELETE_OLD_GUARD_FILE}          false
-${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
+${QUIET}                         ${1}
+${IMAGE_FILE_PATH}               ${EMPTY}
+${DELETE_OLD_PNOR_IMAGES}        false
+${DELETE_OLD_GUARD_FILE}         false
+${ALTERNATE_IMAGE_FILE_PATH}     ${EMPTY}
+${cache_files_dir_path}          /var/lib/phosphor-software-manager/pnor/prsv/
 
 *** Test Cases ***
 
@@ -68,6 +69,36 @@ Post Update Boot To OS
     Delete All Error Logs
     REST Power On
     Verify Running Host Image  ${IMAGE_FILE_PATH}
+
+
+Test Boot With No VPD Cache
+    [Documentation]  After having done a PNOR update and
+    ...  booted the OS in the tests above, remove the cached
+    ...  VPD files and verify that the OS can still boot.
+    [Tags]  Test_Boot_With_No_VPD_Cache
+    [Setup]  Start SOL Console Logging
+    [Teardown]  Run Keywords  Stop SOL Console Logging
+    ...         AND  Code Update Test Teardown
+
+    ${num_vpd_files}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ls ${cache_files_dir_path} | grep VPD -c
+    # Typically, vpd files = "CVPD DJVPD MVPD NVRAM".
+    Should Be Equal As Integers  ${num_vpd_files}  ${3}
+    ...  msg=Missing VPD files at ${cache_files_dir_path}.
+
+    # Delete the *VPD* files.
+    BMC Execute Command  rm -f ${xxx_dir_path}*VPD*
+
+    REST Power On
+
+    # After powering-on the system, the VPD files should be present.
+    ${num_vpd_files}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ls ${cache_files_dir_path} | grep VPD -c
+    Should Be Equal As Integers  ${num_vpd_files}  ${3}
+    ...  msg=Three VPD files expected at ${cache_files_dir_path}.
+
+    # Power off.  The next test case will boot the OS with the new VPD files.
+    REST Power Off
 
 
 REST Host Code Update While OS Is Running
