@@ -70,6 +70,49 @@ Post Update Boot To OS
     Verify Running Host Image  ${IMAGE_FILE_PATH}
 
 
+Test Boot With No VPD Cache
+    [Documentation]  After having done a PNOR update and
+    ...  booted the OS in the tests above, remove the cached
+    ...  VPD files and verify that the OS can still boot.
+    [Tags]  Test_Boot_With_No_VPD_Cache
+    [Setup]  Start SOL Console Logging
+    [Teardown]  Run Keywords  Stop SOL Console Logging
+    ...         AND  Code Update Test Teardown
+
+    ${vpd_files}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ls /var/lib/phosphor-software-manager/pnor/prsv
+    # Typically, vpd_files = "CVPD DJVPD MVPD NVRAM".
+
+    ${count_vpd_files}=  Count Values In List  ${vpd_files}  VPD
+    Run Keyword If  ${count_vpd_files} != ${3}  Fatal Error
+    ...  msg=No VPD at /var/lib/phosphor-software-manager/pnor/prsv
+
+    # Delete the *VPD* files.
+    ${vpd_files}  ${stderr}  ${rc}=  Run Keyword If  ${count_vpd_files}
+    ...  BMC Execute Command
+    ...  rm /var/lib/phosphor-software-manager/pnor/prsv/*VPD*
+
+    # Confirm *VPD* files have been deleted.
+    ${vpd_files}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ls /var/lib/phosphor-software-manager/pnor/prsv
+    ${count_vpd_files}=  Count Values In List  ${vpd_files}  VPD
+    Run Keyword If  ${count_vpd_files} != ${0}  Fatal Error
+    ...  msg=VPD files were not erased as expected.
+
+    REST Power On
+
+    # After powering-on the system, the VPD files should be present.
+    ${vpd_files}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ls /var/lib/phosphor-software-manager/pnor/prsv
+
+    ${count_vpd_files}=  Count Values In List  ${vpd_files}  VPD
+    Run Keyword If  ${count_vpd_files} != ${3}  Fatal Error
+    ...  msg=No VPD files at /var/lib/phosphor-software-manager/pnor/prsv.
+
+    # Power off.  The next test case will boot the OS with the new VPD files.
+    REST Power Off
+
+
 REST Host Code Update While OS Is Running
     [Documentation]  Do a PNOR code update while the host is running.
     [Tags]  REST_Host_Code_Update_While_OS_Is_Running
