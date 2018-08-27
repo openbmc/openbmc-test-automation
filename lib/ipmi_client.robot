@@ -27,9 +27,9 @@ Run IPMI Command
     [Documentation]  Run the given IPMI command.
     [Arguments]  ${args}
     ${resp}=  Run Keyword If  '${IPMI_COMMAND}' == 'External'
-    ...  Run External IPMI RAW Command  ${args}
+    ...  Run External IPMI Raw Command  ${args}
     ...  ELSE IF  '${IPMI_COMMAND}' == 'Inband'
-    ...  Run Inband IPMI RAW Command  ${args}
+    ...  Run Inband IPMI Raw Command  ${args}
     ...  ELSE IF  '${IPMI_COMMAND}' == 'Dbus'
     ...  Run Dbus IPMI RAW Command  ${args}
     ...  ELSE  Fail  msg=Invalid IPMI Command type provided : ${IPMI_COMMAND}
@@ -106,7 +106,7 @@ Run Inband IPMI Standard Command
     Should Be Empty  ${stderr}  msg=${stdout}
     [Return]  ${stdout}
 
-Run External IPMI RAW Command
+Run External IPMI Raw Command
     [Documentation]  Run the raw IPMI command externally.
     [Arguments]    ${args}
     ${ipmi_raw_cmd}=   Catenate  SEPARATOR=
