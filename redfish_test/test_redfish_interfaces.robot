@@ -71,9 +71,11 @@ Test Get Redfish Response Codes
 
     # Expected status    URL Path
     ${HTTP_OK}           ${EMPTY}
+    ${HTTP_OK}           SessionService
     ${HTTP_OK}           Systems
-    ${HTTP_OK}           Systems/motherboard
-    ${HTTP_OK}           Chassis/system
+    ${HTTP_OK}           Chassis
+    ${HTTP_OK}           Managers
+    ${HTTP_OK}           AccountService
     ${HTTP_OK}           Managers/openbmc/EthernetInterfaces/eth0
     ${HTTP_NOT_FOUND}    /i/dont/exist/
 
