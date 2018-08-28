@@ -215,7 +215,7 @@ ID_LOOKUP = {
     },
     'SENSOR': {
         0x02: '/org/openbmc/sensors/host/HostStatus',
-        0x03: '/org/openbmc/sensors/host/BootProgress',
+        0x03: '/xyz/openbmc_project/state/host0/attr/BootProgress',
         0x5a: '<inventory_root>/system/chassis/motherboard/cpu0',
         0xa4: '<inventory_root>/system/chassis/motherboard/cpu1',
         0x1e: '<inventory_root>/system/chassis/motherboard/dimm3',
