@@ -74,7 +74,7 @@ def get_inventory_list(module_name):
 ################################################################
 #  This will return the URI's of the FRU type
 #
-#  i.e.  get_inventory_fru_type_list('../data/Barreleye.py', 'CPU')
+#  i.e.  get_inventory_fru_type_list('../data/Witherspoon.py', 'CPU')
 #
 #  [/org/openbmc/inventory//system/chassis/motherboard/cpu0,
 #   /org/openbmc/inventory//system/chassis/motherboard/cpu1]

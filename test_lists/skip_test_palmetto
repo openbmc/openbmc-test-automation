@@ -17,7 +17,7 @@
 -e Check_BMC_Name_Property_Is_Set
 # https://github.com/openbmc/openbmc-test-automation/issues/396
 -e NetworkManager
-# Test cases are NA for Barreleye and Palmetto
+# Test cases are NA for Palmetto
 -e LED_Group
 -e Check_BMC_GPIO_FSI_Name_Property_Is_Set
 -e Check_BMC_GPIO_FSI_Compatible_Property_Is_Set

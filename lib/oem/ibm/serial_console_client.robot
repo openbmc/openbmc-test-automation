@@ -11,8 +11,8 @@ Library           String
 
 Open Telnet Connection To BMC Serial Console
     [Documentation]   Open telnet connection session to BMC serial console
-    ...               The login prompt expected, for example, for barreleye
-    ...               is "barreleye login:".
+    ...               The login prompt expected, for example, for Witherspoon
+    ...               is "Witherspoon login:".
     [Arguments]   ${i_host}=${OPENBMC_SERIAL_HOST}
     ...           ${i_port}=${OPENBMC_SERIAL_PORT}
     ...           ${i_model}=${OPENBMC_MODEL}
