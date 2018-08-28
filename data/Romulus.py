@@ -171,7 +171,7 @@ ID_LOOKUP = {
     },
     'SENSOR': {
         0x01: '/org/openbmc/sensors/host/HostStatus',
-        0x02: '/org/openbmc/sensors/host/BootProgress',
+        0x02: '/xyz/openbmc_project/state/host0/attr/BootProgress',
         0x03: '/org/openbmc/sensors/host/cpu0/OccStatus',
         0x04: '/org/openbmc/sensors/host/cpu1/OccStatus',
         0x08: '<inventory_root>/system/chassis/motherboard/cpu0',
@@ -240,13 +240,13 @@ ID_LOOKUP = {
         0x58: '<inventory_root>/system/chassis/motherboard/cpu1/core21',
         0x59: '<inventory_root>/system/chassis/motherboard/cpu1/core22',
         0x5a: '<inventory_root>/system/chassis/motherboard/cpu1/core23',
-        0x8b: '/org/openbmc/sensors/host/BootCount',
+        0x8b: '/xyz/openbmc_project/state/host0/attr/AttemptsLeft',
         0x8c: '<inventory_root>/system/chassis/motherboard',
         0x8d: '<inventory_root>/system/chassis/motherboard/refclock',
         0x8e: '<inventory_root>/system/chassis/motherboard/pcieclock',
         0x8f: '<inventory_root>/system/chassis/motherboard/todclock',
         0x90: '<inventory_root>/system/systemevent',
-        0x91: '/org/openbmc/sensors/host/OperatingSystemStatus',
+        0x91: '/xyz/openbmc_project/state/host0/attr/OperatingSystemState',
         0x92: '<inventory_root>/system/chassis/motherboard/pcielink',
         #        0x08 : '<inventory_root>/system/powerlimit',
         #        0x10 : '<inventory_root>/system/chassis/motherboard/apss',
@@ -473,7 +473,7 @@ GPIO_CONFIGS = {
 # Miscellaneous non-poll sensor with system specific properties.
 # The sensor id is the same as those defined in ID_LOOKUP['SENSOR'].
 MISC_SENSORS = {
-    0x8b: {'class': 'BootCountSensor'},
+    0x8b: {'class': 'AttemptsLeftSensor'},
     0x02: {'class': 'BootProgressSensor'},
     # OCC active sensors aren't in the P9 XML yet.  These are wrong.
     0x03: {'class': 'OccStatusSensor',

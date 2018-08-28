@@ -110,9 +110,9 @@ class state_map():
         chassis_state = \
             state[var.SYSTEM_STATE_URI + 'chassis0']['CurrentPowerState']
         host_state = state[var.SYSTEM_STATE_URI + 'host0']['CurrentHostState']
-        boot_state = state[var.SYSTEM_STATE_URI + 'host0']['BootProgress']
+        boot_state = state[var.SYSTEM_STATE_URI + 'host0/' + 'attr']['BootProgress']
         os_state = \
-            state[var.SYSTEM_STATE_URI + 'host0']['OperatingSystemState']
+            state[var.SYSTEM_STATE_URI + 'host0/' + 'attr']['OperatingSystemState']
 
         return (str(bmc_state),
                 str(chassis_state),

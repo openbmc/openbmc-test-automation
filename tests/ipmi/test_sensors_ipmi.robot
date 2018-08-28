@@ -403,7 +403,7 @@ Check OperatingSystemState
 
     Run IPMI Command
     ...  0x04 0x30 0x05 0xa9 0x00 ${sensor_id} 0x00 0x00 0x00 0x00 0x00 0x00
-    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  OperatingSystemState
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0/attr  OperatingSystemState
     Should Be Equal  ${OperatingSystemState}  ${resp}
 
 
@@ -417,7 +417,7 @@ Check BootProgress
 
     Run IPMI Command
     ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 ${BootProgressID} 0x00
-    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0/attr  BootProgress
     Should Be Equal  ${BootProgress}  ${resp}
 
 
