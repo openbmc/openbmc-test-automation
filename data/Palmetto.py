@@ -273,9 +273,9 @@ ID_LOOKUP = {
         0x20: '<inventory_root>/system/chassis/motherboard/dimm2',
         0x21: '<inventory_root>/system/chassis/motherboard/dimm3',
         0x09: '/org/openbmc/sensors/host/BootCount',
-        0x05: '/org/openbmc/sensors/host/BootProgress',
+        0x05: '/xyz/openbmc_project/state/host0/attr/BootProgress',
         0x08: '/org/openbmc/sensors/host/cpu0/OccStatus',
-        0x32: '/org/openbmc/sensors/host/OperatingSystemStatus',
+        0x32: '/xyz/openbmc_project/state/host0/attr/OperatingSystemState',
         0x33: '/org/openbmc/sensors/host/PowerCap',
     },
     'GPIO_PRESENT': {

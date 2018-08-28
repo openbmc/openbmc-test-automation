@@ -171,7 +171,7 @@ ID_LOOKUP = {
     },
     'SENSOR': {
         0x01: '/org/openbmc/sensors/host/HostStatus',
-        0x02: '/org/openbmc/sensors/host/BootProgress',
+        0x02: '/xyz/openbmc_project/state/host0/attr/BootProgress',
         0x03: '/org/openbmc/sensors/host/cpu0/OccStatus',
         0x04: '/org/openbmc/sensors/host/cpu1/OccStatus',
         0x08: '<inventory_root>/system/chassis/motherboard/cpu0',
@@ -246,7 +246,7 @@ ID_LOOKUP = {
         0x8e: '<inventory_root>/system/chassis/motherboard/pcieclock',
         0x8f: '<inventory_root>/system/chassis/motherboard/todclock',
         0x90: '<inventory_root>/system/systemevent',
-        0x91: '/org/openbmc/sensors/host/OperatingSystemStatus',
+        0x91: '/xyz/openbmc_project/state/host0/attr/OperatingSystemState',
         0x92: '<inventory_root>/system/chassis/motherboard/pcielink',
         #        0x08 : '<inventory_root>/system/powerlimit',
         #        0x10 : '<inventory_root>/system/chassis/motherboard/apss',
