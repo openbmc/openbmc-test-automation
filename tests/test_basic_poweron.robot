@@ -37,6 +37,29 @@ Verify Front And Rear LED At Standby
     Verify Identify LED State  Off
 
 
+Verify Application Services Running At Standby
+    [Documentation]  Check if there are services failure to complete.
+    [Tags]  Verify_Application_Services_Running_At_Standby
+
+    # Application services running on the BMC are not tightly coupled.
+    # At standby, there shouldn't be any pending job waiting to complete.
+    # Examples:
+    # Failure o/p:
+    # root@witherspoon:~# systemctl list-jobs --no-pager | cat
+    #    JOB UNIT                                     TYPE  STATE
+    # 35151 xyz.openbmc_project.ObjectMapper.service start running
+    # 1 jobs listed.
+    #
+    # Success o/p:
+    # root@witherspoon:~# systemctl list-jobs --no-pager | cat
+    # No jobs running.
+
+    REST Power Off  stack_mode=skip  quiet=1
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  systemctl list-jobs --no-pager | cat
+    Should Be Equal As Strings  ${stdout}  No jobs running.
+
+
 Power On Test
     [Documentation]  Power off and on.
     [Tags]  Power_On_Test
