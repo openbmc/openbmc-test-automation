@@ -417,7 +417,7 @@ Check BootProgress
 
     Run IPMI Command
     ...  0x04 0x30 0x03 0xa8 0x00 0x04 0x00 0x00 0x00 0x00 ${BootProgressID} 0x00
-    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0  BootProgress
+    ${resp}=  Read Attribute  ${SYSTEM_STATE_URI}/host0/attr  BootProgress
     Should Be Equal  ${BootProgress}  ${resp}
 
 

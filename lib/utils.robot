@@ -198,7 +198,7 @@ Old Get Boot Progress
     # quiet   Indicates whether this keyword should run without any output to
     #         the console.
 
-    ${state}=  Read Attribute  ${OPENBMC_BASE_URI}sensors/host/BootProgress
+    ${state}=  Read Attribute  ${OPENBMC_BASE_URI}state/host0/attr/BootProgress
     ...  value  quiet=${quiet}
 
     [Return]  ${state}
@@ -212,7 +212,7 @@ New Get Boot Progress
     # quiet   Indicates whether this keyword should run without any output to
     #         the console.
 
-    ${state}=  Read Attribute  ${HOST_STATE_URI}  BootProgress  quiet=${quiet}
+    ${state}=  Read Attribute  ${HOST_STATE_URI}attr  BootProgress  quiet=${quiet}
 
     [Return]  ${state.rsplit('.', 1)[1]}
 
