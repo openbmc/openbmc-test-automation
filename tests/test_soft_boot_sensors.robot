@@ -214,7 +214,7 @@ Validate Boot AttemptsLeft
     # expected_attempts_left     Boot attempts left.
 
     Choose Boot And Run  ${sys_state}
-    ${atempts_left}=  Read Attribute  ${HOST_STATE_URI}  AttemptsLeft
+    ${atempts_left}=  Read Attribute  ${HOST_STATE_URI}/attr  AttemptsLeft
     Should Be True  ${atempts_left} == ${expected_attempts_left}
 
 
