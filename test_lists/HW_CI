@@ -4,6 +4,7 @@
 -i Test_SSL_Connection
 #Basic poweron test
 -i Verify_Front_And_Rear_LED_At_Standby
+-i Verify_Application_Services_Running_At_Standby
 -i Power_On_Test
 #Check for apps failures.
 -i Check_For_Application_Failures
