@@ -64,7 +64,7 @@ Test Turbo Allowed SDR Info
     [Documentation]  Verify turbo allowed SDR info via IPMI and REST.
     [Tags]  Test_Turbo_Allowed_SDR_Info
 
-    ${component_uri_list}=  Get Component URIs  turbo_allowed
+    ${component_uri_list}=  Get Component URIs  turbo_allowed/attr
     ${component_uri}=  Get From List  ${component_uri_list}  0
     ${state_rest}=  Read Attribute  ${component_uri}  TurboAllowed
 

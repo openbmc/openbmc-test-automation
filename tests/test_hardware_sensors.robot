@@ -234,7 +234,7 @@ Disable Power Redundancy And Verify Using REST
    [Tags]  Disable_Power_Redundancy_And_Verify_Using_REST
 
    # Example:
-   # /xyz/openbmc_project/sensors/chassis/PowerSupplyRedundancy
+   # /xyz/openbmc_project/control/power_supply_redundancy/attr/PowerSupplyRedundancyEnabled
    # {
    #     "error": 0,
    #     "units": "",
@@ -253,7 +253,7 @@ Enable Power Redundancy And Verify Using REST
    [Tags]  Enable_Power_Redundancy_And_Verify_Using_REST
 
    # Example:
-   # /xyz/openbmc_project/sensors/chassis/PowerSupplyRedundancy
+   # /xyz/openbmc_project/control/power_supply_redundancy/attr/PowerSupplyRedundancyEnabled
    # {
    #     "error": 0,
    #     "units": "",
@@ -335,7 +335,7 @@ Power Redundancy Setting
     ...  Append To List  ${arglist}  ${value}
 
     ${args}=  Create Dictionary  data=@{arglist}
-    ${resp}=  Call Method  ${SENSORS_URI}chassis/PowerSupplyRedundancy
+    ${resp}=  Call Method  ${OBMC_BASE_URI}control/power_supply_redundancy/attr/PowerSupplyRedundancyEnabled
     ...  ${action}  data=${args}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
