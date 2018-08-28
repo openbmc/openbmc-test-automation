@@ -215,7 +215,7 @@ ID_LOOKUP = {
     },
     'SENSOR': {
         0x02: '/org/openbmc/sensors/host/HostStatus',
-        0x03: '/org/openbmc/sensors/host/BootProgress',
+        0x03: '/xyz/openbmc_project/state/host0/attr/BootProgress',
         0x5a: '<inventory_root>/system/chassis/motherboard/cpu0',
         0xa4: '<inventory_root>/system/chassis/motherboard/cpu1',
         0x1e: '<inventory_root>/system/chassis/motherboard/dimm3',
@@ -282,7 +282,7 @@ ID_LOOKUP = {
         0x5b: '<inventory_root>/system/chassis/motherboard/membuf5',
         0x5c: '<inventory_root>/system/chassis/motherboard/membuf6',
         0x5d: '<inventory_root>/system/chassis/motherboard/membuf7',
-        0x07: '/org/openbmc/sensors/host/BootCount',
+        0x07: '/xyz/openbmc_project/state/host0/attr/AttemptsLeft',
         0x0c: '<inventory_root>/system/chassis/motherboard',
         0x01: '<inventory_root>/system/systemevent',
         0x08: '<inventory_root>/system/powerlimit',
@@ -290,10 +290,10 @@ ID_LOOKUP = {
         0x0e: '<inventory_root>/system/chassis/motherboard/pcieclock',
         0x0f: '<inventory_root>/system/chassis/motherboard/todclock',
         0x10: '<inventory_root>/system/chassis/motherboard/apss',
-        0x02: '/org/openbmc/sensors/host/OperatingSystemStatus',
+        0x02: '/xyz/openbmc_project/state/host0/attr/OperatingSystemState',
         0x04: '<inventory_root>/system/chassis/motherboard/pcielink',
         0x0b: '/xyz/openbmc_project/sensors/chassis/PowerSupplyRedundancy',
-        0xda: '/org/openbmc/sensors/host/TurboAllowed',
+        0xda: '/xyz/openbmc_project/control/host0/turbo_allowed/attr/TurboAllowed',
         0xD8: '/org/openbmc/sensors/host/PowerSupplyDerating',
     },
     'GPIO_PRESENT': {}
@@ -372,7 +372,7 @@ GPIO_CONFIGS = {
 # Miscellaneous non-poll sensor with system specific properties.
 # The sensor id is the same as those defined in ID_LOOKUP['SENSOR'].
 MISC_SENSORS = {
-    0x07: {'class': 'BootCountSensor'},
+    0x07: {'class': 'AttemptsLeft'},
     0x03: {'class': 'BootProgressSensor'},
     0x02: {'class': 'OperatingSystemStatusSensor'},
     # Garrison value is used, Not in P9 XML yet.
