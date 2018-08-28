@@ -272,10 +272,10 @@ ID_LOOKUP = {
         0x1f: '<inventory_root>/system/chassis/motherboard/dimm1',
         0x20: '<inventory_root>/system/chassis/motherboard/dimm2',
         0x21: '<inventory_root>/system/chassis/motherboard/dimm3',
-        0x09: '/org/openbmc/sensors/host/BootCount',
-        0x05: '/org/openbmc/sensors/host/BootProgress',
+        0x09: '/xyz/openbmc_project/state/host0/attr/AttemptsLeft',
+        0x05: '/xyz/openbmc_project/state/host0/attr/BootProgress',
         0x08: '/org/openbmc/sensors/host/cpu0/OccStatus',
-        0x32: '/org/openbmc/sensors/host/OperatingSystemStatus',
+        0x32: '/xyz/openbmc_project/state/host0/attr/OperatingSystemState',
         0x33: '/org/openbmc/sensors/host/PowerCap',
     },
     'GPIO_PRESENT': {
@@ -343,7 +343,7 @@ HWMON_CONFIG = {
 # Miscellaneous non-poll sensor with system specific properties.
 # The sensor id is the same as those defined in ID_LOOKUP['SENSOR'].
 MISC_SENSORS = {
-    0x09: {'class': 'BootCountSensor'},
+    0x09: {'class': 'AttemptsLeft'},
     0x05: {'class': 'BootProgressSensor'},
     0x08: {'class': 'OccStatusSensor',
            'os_path': '/sys/class/i2c-adapter/i2c-3/3-0050/online'},

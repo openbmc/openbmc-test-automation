@@ -198,7 +198,7 @@ Old Get Boot Progress
     # quiet   Indicates whether this keyword should run without any output to
     #         the console.
 
-    ${state}=  Read Attribute  ${OPENBMC_BASE_URI}sensors/host/BootProgress
+    ${state}=  Read Attribute  ${OPENBMC_BASE_URI}state/host0/attr/BootProgress
     ...  value  quiet=${quiet}
 
     [Return]  ${state}
@@ -212,7 +212,7 @@ New Get Boot Progress
     # quiet   Indicates whether this keyword should run without any output to
     #         the console.
 
-    ${state}=  Read Attribute  ${HOST_STATE_URI}  BootProgress  quiet=${quiet}
+    ${state}=  Read Attribute  ${HOST_STATE_URI}attr  BootProgress  quiet=${quiet}
 
     [Return]  ${state.rsplit('.', 1)[1]}
 
@@ -1385,7 +1385,7 @@ Read Turbo Setting Via REST
     # Returns 1 if TurboAllowed, 0 if not.
 
     ${turbo_setting}=  Read Attribute
-    ...  ${CONTROL_HOST_URI}turbo_allowed  TurboAllowed
+    ...  ${CONTROL_HOST_URI}turbo_allowed/attr  TurboAllowed
     [Return]  ${turbo_setting}
 
 
@@ -1398,7 +1398,7 @@ Set Turbo Setting Via REST
     # verify   If True, read the TurboAllowed setting to confirm.
 
     ${data}=  Create Dictionary  data=${${setting}}
-    Write Attribute  ${CONTROL_HOST_URI}turbo_allowed  TurboAllowed
+    Write Attribute  ${CONTROL_HOST_URI}turbo_allowed/attr  TurboAllowed
     ...  verify=${verify}  data=${data}
 
 
