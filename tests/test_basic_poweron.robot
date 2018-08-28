@@ -37,6 +37,15 @@ Verify Front And Rear LED At Standby
     Verify Identify LED State  Off
 
 
+Verify Application Services Running At Standby
+    [Documentation]  Check if there are services failure to complete.
+    [Tags]  Verify_Application_Services_Running_At_Standby
+
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  systemctl list-jobs --no-pager | cat
+    Should Not Be Equal As Strings  '${stdout}'  No jobs running.
+
+
 Power On Test
     [Documentation]  Power off and on.
     [Tags]  Power_On_Test
