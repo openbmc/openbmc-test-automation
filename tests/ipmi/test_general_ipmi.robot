@@ -24,7 +24,18 @@ Verify Supported Cipher List
     [Tags]  Verify_Supported_Cipher_List
 
     :FOR  ${cipher_level}  IN  @{valid_cipher_list}
-    \  Execute IPMI Command With Cipher  ${cipher_level}
+    \  ${status}=  Execute IPMI Command With Cipher  ${cipher_level}
+    \  Should Be Equal  ${status}  ${0}
+
+
+Verify Failure With Unsupported Cipher List
+    [Documentation]  Execute all unsupported cipher levels and verify error.
+    [Tags]  Verify_Failure_With_Unsupported_Cipher_List
+
+    :FOR  ${cipher_level}  IN  @{unsupported_cipher_list}
+    \  ${status}=  Execute IPMI Command With Cipher  ${cipher_level}
+    \  Should Be Equal  ${status}  ${1}
+
 
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
@@ -778,4 +789,4 @@ Execute IPMI Command With Cipher
     ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}mc info
 
     ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
-    Should Be Equal  ${rc}  ${0}  msg=${output}
+    [Return]  ${rc}
