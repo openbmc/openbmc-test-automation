@@ -67,14 +67,3 @@ Check Service Autorestart
     ${restart_policy}=  Get Service Attribute  Restart  ${servicename}
     Should Be Equal  always  ${restart_policy}
     ...  msg=Incorrect policy for ${servicename}
-
-
-Get Service Attribute
-    [Documentation]  Get service attribute policy output.
-    [Arguments]  ${option}  ${servicename}
-    # option  systemctl supported options
-    # servicename  Qualified service name
-    ${cmd}=  Set Variable
-    ...  systemctl -p ${option} show ${servicename} | cut -d = -f2
-    ${attr}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
-    [Return]  ${attr}
