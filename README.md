@@ -23,6 +23,7 @@
 * IO storage and EEH (Enhanced Error Handling) testing
 * Secure boot
 * SNMP (Simple Network Management Protocol)
+* Remote Logging via Rsyslog
 
 **Debugging Supported List**
 * SOL collection
