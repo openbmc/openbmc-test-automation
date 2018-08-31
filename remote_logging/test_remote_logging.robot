@@ -12,7 +12,7 @@ Resource         ../lib/resource.txt
 Resource         ../lib/rest_client.robot
 Resource         ../lib/utils.robot
 Resource         ../lib/openbmc_ffdc.robot
-Resource         ../lib/boot_utils.robot
+Library          ../lib/gen_misc.py
 
 Suite Setup      Suite Setup Execution
 Test Setup       Test Setup Execution
@@ -120,6 +120,30 @@ Verify BMC Journald Contains No Credential Data
 
     Should Not Contain Any  ${bmc_journald}  ${OPENBMC_PASSWORD}
     ...  msg=Journald logs BMC credentials/password ${OPENBMC_PASSWORD}.
+
+
+Audit BMC SSH Login And Remote Logging
+    [Documentation]  Check that the SSH login to BMC is logged and synced to
+    ...              remote logging server.
+    [Tags]  Audit_BMC_SSH_Login_And_Remote_Logging
+
+    ${test_host_name}  ${test_host_ip}=  Get Host Name IP
+
+    # Aug 31 17:22:55 wsbmc123 systemd[1]: Started SSH Per-Connection Server (xx.xx.xx.xx:51292)
+    Open Connection And Log In
+
+    ${login_footprint}=  Catenate  Started SSH Per-Connection Server.*${test_host_ip}
+
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager | grep '${login_footprint}'
+
+    ${cmd}=  Catenate SEPARATOR=  grep /var/log/syslog
+    ...  ${bmc_hostname} | ${test_host_ip} | ${login_footprint}
+
+    ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
+
+    Should Contain  ${remote_journald}  ${bmc_journald}
+    ...  msg=${remote_journald} don't contain ${bmc_journald} entry.
 
 
 *** Keywords ***
