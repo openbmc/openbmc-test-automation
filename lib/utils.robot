@@ -1547,3 +1547,14 @@ Check For Regex In Journald
     ...    Should Be Empty  ${journal_log}
     ...  ELSE
     ...    Should Not Be Empty  ${journal_log}
+
+
+Get Service Attribute
+    [Documentation]  Get service attribute policy output.
+    [Arguments]  ${option}  ${servicename}
+    # option  systemctl supported options
+    # servicename  Qualified service name
+    ${cmd}=  Set Variable
+    ...  systemctl -p ${option} show ${servicename} | cut -d = -f2
+    ${attr}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
+    [Return]  ${attr}
