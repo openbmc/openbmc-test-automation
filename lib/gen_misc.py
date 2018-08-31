@@ -328,7 +328,7 @@ def quote_bash_parm(parm):
     return parm
 
 
-def get_host_name_ip(host,
+def get_host_name_ip(host=None,
                      short_name=0):
     r"""
     Get the host name and the IP address for the given host and return them as
@@ -341,6 +341,7 @@ def get_host_name_ip(host,
                                     short_host.
     """
 
+    host = dft(host, socket.gethostname())
     host_name = socket.getfqdn(host)
     try:
         host_ip = socket.gethostbyname(host)
