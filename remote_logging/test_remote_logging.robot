@@ -3,8 +3,10 @@ Documentation    Remote logging test for rsyslog.
 
 # Program arguments:
 # REMOTE_LOG_SERVER_HOST    The host name or IP address of the remote
-#                               logging server.
+#                           logging server.
 # REMOTE_LOG_SERVER_PORT    The port number for the remote logging server.
+# REMOTE_USERNAME           The username for the remote logging server.
+# REMOTE_PASSWORD           The password for the remote logging server.
 
 Resource         ../lib/resource.txt
 Resource         ../lib/rest_client.robot
@@ -27,6 +29,33 @@ Test Remote Logging REST Interface And Verify Config
     Verify Rsyslog Config On BMC  remote_host=remote-host  remote_port=port
 
 
+Verfiy BMC Journald Synced To Remote Logging Server
+    [Documentation]  Check that BMC journald is sync to remote rsyslog.
+    [Tags]  Verfiy_BMC_Journald_Synced_To_Remote_Logging_Server
+
+    ${hostname}  ${stderr}  ${rc}=  BMC Execute Command  /bin/hostname
+    Remove Journald Logs
+
+    Configure Remote Logging Server
+    # Take a couple second to restart rsyslog service.
+    Sleep  3s
+
+    # Restart BMC dump service and get the last entry of the journald.
+    # Example:
+    # Aug 31 15:16:54 wsbmc123 systemd[1]: Started Phosphor Dump Manager
+    BMC Execute Command
+    ...  systemctl restart xyz.openbmc_project.Dump.Manager.service
+
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager | tail -1
+
+    ${cmd}=  Catenate  cat /var/log/syslog|grep ${hostname} | tail -1
+    ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
+
+    Should Be Equal As Strings   ${bmc_journald}  ${remote_journald}
+    ...  msg=${bmc_journald} and ${remote_journald} don't match.
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -34,7 +63,10 @@ Suite Setup Execution
 
     Should Not Be Empty  ${REMOTE_LOG_SERVER_HOST}
     Should Not Be Empty  ${REMOTE_LOG_SERVER_PORT}
+    Should Not Be Empty  ${REMOTE_USERNAME}
+    Should Not Be Empty  ${REMOTE_PASSWORD}
     Ping Host  ${REMOTE_LOG_SERVER_HOST}
+    Remote Logging Server Execute Command  true
     Remote Logging Interface Should Exist
 
 
@@ -99,3 +131,19 @@ Verify Rsyslog Config On BMC
 
     Should Contain  ${ryslog_conf}  ${config}
     ...  msg=${remote_host} and ${remote_port} are not configured.
+
+
+Remote Logging Server Execute Command
+    [Documentation]  Login to remote logging server.
+    [Arguments]  ${command}
+    ...          ${remote_host}=${REMOTE_LOG_SERVER_HOST}
+    ...          ${user_name}=${REMOTE_USERNAME}
+    ...          ${user_password}=${REMOTE_PASSWORD}
+
+    ${remote_dict}=  Create Dictionary  host=${remote_host}
+    Open Connection And Log In  ${user_name}  ${user_password}
+    ...  &{remote_dict}
+    ${stdout}  ${stderr}=  Execute Command  ${command}  return_stderr=True
+    Should Be Empty   ${stderr}
+    [Return]  ${stdout}
+
