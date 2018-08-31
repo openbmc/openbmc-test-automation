@@ -5,6 +5,9 @@
 HTX is a suite of test tools for stressing system hardware. It is routinely
 used by the test suites under `systest/`. Refer to [README](https://github.com/open-power/HTX)
 
+## Remote Logging via Rsyslog ##
+
+Refer to [README](https://github.com/openbmc/phosphor-logging/blob/master/README.md#remote-logging-via-rsyslog)
 
 ## Converting SELs to readable format: ##
 

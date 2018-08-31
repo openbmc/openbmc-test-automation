@@ -23,6 +23,7 @@
 * IO storage and EEH (Enhanced Error Handling) testing
 * Secure boot
 * SNMP (Simple Network Management Protocol)
+* Remote Logging via Rsyslog
 
 **Debugging Supported List**
 * SOL collection
@@ -107,6 +108,8 @@ classified as follows:
 
 `snmp/`: Contains test cases for SNMP (Simple Network Management Protocol)
          configuration testing.
+
+`remote_logging`: Contains test cases for remote logging via rsyslog.
 
 `openpower/ras/`: Contains test cases for RAS (Reliability, Availability and
                   Serviceability) for an OpenPOWER system.
