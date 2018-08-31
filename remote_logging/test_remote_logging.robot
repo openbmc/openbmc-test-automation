@@ -14,6 +14,7 @@ Resource         ../lib/utils.robot
 Resource         ../lib/openbmc_ffdc.robot
 
 Suite Setup      Suite Setup Execution
+Test Setup       Test Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
 *** Test Cases ***
@@ -22,7 +23,6 @@ Test Remote Logging REST Interface And Verify Config
     [Documentation]  Test remote logging interface and configuration.
     [Tags]  Test_Remote_Logging_REST_Interface_And_Verify_Config
 
-    Configure Remote Logging Server
     Verify Rsyslog Config On BMC
 
     Configure Remote Logging Server  remote_host=${EMPTY}  remote_port=0
@@ -33,13 +33,6 @@ Verfiy BMC Journald Synced To Remote Logging Server
     [Documentation]  Check that BMC journald is sync to remote rsyslog.
     [Tags]  Verfiy_BMC_Journald_Synced_To_Remote_Logging_Server
 
-    ${hostname}  ${stderr}  ${rc}=  BMC Execute Command  /bin/hostname
-    Remove Journald Logs
-
-    Configure Remote Logging Server
-    # Take a couple second to restart rsyslog service.
-    Sleep  3s
-
     # Restart BMC dump service and get the last entry of the journald.
     # Example:
     # Aug 31 15:16:54 wsbmc123 systemd[1]: Started Phosphor Dump Manager
@@ -49,7 +42,7 @@ Verfiy BMC Journald Synced To Remote Logging Server
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
     ...  journalctl --no-pager | tail -1
 
-    ${cmd}=  Catenate  cat /var/log/syslog|grep ${hostname} | tail -1
+    ${cmd}=  Catenate  cat /var/log/syslog|grep ${bmc_hostname} | tail -1
     ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
 
     Should Be Equal As Strings   ${bmc_journald}  ${remote_journald}
@@ -68,6 +61,23 @@ Suite Setup Execution
     Ping Host  ${REMOTE_LOG_SERVER_HOST}
     Remote Logging Server Execute Command  true
     Remote Logging Interface Should Exist
+
+    ${hostname}  ${stderr}  ${rc}=  BMC Execute Command  /bin/hostname
+    Set Suite Variable  ${bmc_hostname}  ${hostname}
+
+
+Test Setup Execution
+    [Documentation]  Do the test setup.
+
+    Remove Journald Logs
+    ${status}=  Run Keyword And Return Status
+    ...  Remote Logging Server Not Configured
+
+    Run Keyword If  ${status}==${TRUE}  Configure Remote Logging Server
+
+    ${ActiveState}=  Get Service Attribute  ActiveState  rsyslog.service
+    Should Be Equal  active  ${ActiveState}
+    ...  msg=rsyslog logging service not in active state.
 
 
 Remote Logging Interface Should Exist
@@ -106,6 +116,9 @@ Configure Remote Logging Server
     ${port_dict}=  Create Dictionary  data=${remote_port}
     Write Attribute  ${REMOTE_LOGGING_URI}  Port  data=${port_dict}
     ...  verify=${TRUE}  expected_value=${remote_port}
+
+    # Take a couple second to restart rsyslog service.
+    Sleep  3s
 
 
 Verify Rsyslog Config On BMC
@@ -147,3 +160,13 @@ Remote Logging Server Execute Command
     Should Be Empty   ${stderr}
     [Return]  ${stdout}
 
+
+Remote Logging Server Not Configured
+    [Documentation]  Check if remote logging server is configured
+
+    ${address}=  Read Attribute  ${REMOTE_LOGGING_URI}  Address
+    Should Not Be Equal  ${address}  ${REMOTE_LOG_SERVER_HOST}
+
+    ${port_number}=  Convert To Integer  ${REMOTE_LOG_SERVER_PORT}
+    ${port}=  Read Attribute  ${REMOTE_LOGGING_URI}  Port
+    Should Not Be Equal  ${port}  ${port_number}
