@@ -37,6 +37,42 @@ Verify Unsupported Cipher List
     \  Should Be Equal  ${status}  ${1}
 
 
+Verify Supported Cipher List Via Lan Print
+    [Documentation]  Verify supported cipher list via IPMI lan print command.
+    [Tags]  Verify_Supported_Cipher_List_Via_Lan_Print
+
+    ${network_info_dict}=  Get Lan Print Dict
+
+    # Example of lan print command output:
+    # Set in Progress         : Set Complete
+    # Auth Type Support       : MD5
+    # Auth Type Enable        : Callback : MD5
+    #                         : User     : MD5
+    #                         : Operator : MD5
+    #                         : Admin    : MD5
+    #                         : OEM      : MD5
+    # IP Address Source       : Static Address
+    # IP Address              : <IP>
+    # Subnet Mask             : <Subnet Mask>
+    # MAC Address             : <MAC Address>
+    # Default Gateway IP      : <Default Gateway IP>
+    # 802.1q VLAN ID          : Disabled
+    # RMCP+ Cipher Suites     : 3,17
+    # Cipher Suite Priv Max   : Not Available
+    # Bad Password Threshold  : Not Available
+
+    ${output}=  Get From Dictionary
+    ...  ${network_info_dict}  RMCP+ Cipher Suites
+
+    @{words}=  Split String  ${output}  ,
+    ${cipher_list}=  Create List
+    :FOR  ${word}  IN  @{words}
+    \  ${cipher_value}=  Convert To Integer  ${word}
+    \  Append To List  ${cipher_list}  ${cipher_value}
+
+    Lists Should Be Equal  ${cipher_list}  ${valid_cipher_list}
+
+
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
     [Tags]  Set_Asset_Tag_With_Valid_String_Length
