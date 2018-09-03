@@ -9,7 +9,7 @@ Resource            ../../lib/bmc_network_utils.robot
 Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 
-Test Teardown       FFDC On Test Case Fail
+#Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -35,6 +35,17 @@ Verify Unsupported Cipher List
     :FOR  ${cipher_level}  IN  @{unsupported_cipher_list}
     \  ${status}=  Execute IPMI Command With Cipher  ${cipher_level}
     \  Should Be Equal  ${status}  ${1}
+
+
+Verify Supported Cipher List Via Lan Print
+    [Documentation]  Verify supported chiper list via IPMI lan print command.
+    [Tags]  Verify_Supported_Cipher_List_Via_Lan_Print
+
+    ${network_info_dict}=  Get Lan Print Dict
+    ${chiper_list}=  Get From Dictionary
+    ...  ${network_info_dict}  RMCP+ Cipher Suites
+    ${expected_chiper_list}=  Create List  3  17
+    Lists Should Be Equal  ${chiper_list}  ${expected_chiper_list}
 
 
 Set Asset Tag With Valid String Length
