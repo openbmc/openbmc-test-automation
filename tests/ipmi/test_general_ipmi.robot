@@ -37,6 +37,17 @@ Verify Unsupported Cipher List
     \  Should Be Equal  ${status}  ${1}
 
 
+Verify Supported Cipher List Via Lan Print
+    [Documentation]  Verify supported chiper list via IPMI lan print command.
+    [Tags]  Verify_Supported_Cipher_List_Via_Lan_Print
+
+    ${network_info_dict}=  Get Lan Print Dict
+    ${chiper_list}=  Get From Dictionary
+    ...  ${network_info_dict}  RMCP+ Cipher Suites
+    ${expected_chiper_list}=  Create List  3  17
+    Lists Should Be Equal  ${chiper_list}  ${expected_chiper_list}
+
+
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
     [Tags]  Set_Asset_Tag_With_Valid_String_Length
