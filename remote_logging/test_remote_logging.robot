@@ -53,7 +53,19 @@ Verfiy BMC Journald Synced To Remote Logging Server
     ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
 
     Should Be Equal As Strings   ${bmc_journald}  ${remote_journald}
-    ...  msg=${bmc_journald} and ${remote_journald} don't match.
+    ...  msg=Journald logs BMC credentials/password ${OPENBMC_PASSWORD}.
+
+
+Verify BMC Journald Doesnt Log Any Credential Data
+    [Documentation]  Check that BMC journald doesnt log any credential data.
+    [Tags]  Verify_BMC_Journald_Doesnt_Log_Any_Credential_Data
+
+    Open Connection And Log In
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl -o json-pretty | cat
+
+    Should Not Contain Any  ${bmc_journald}  ${OPENBMC_PASSWORD}
+    ...  msg=${bmc_journald} contains ${OPENBMC_PASSWORD} data logged.
 
 
 *** Keywords ***
