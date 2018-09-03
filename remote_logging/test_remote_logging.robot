@@ -16,6 +16,11 @@ Resource         ../lib/openbmc_ffdc.robot
 Suite Setup      Suite Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
+*** Variables ***
+
+# Strings to check from journald.
+${RSYSLOG_REGEX}   start|exiting on signal 15
+
 *** Test Cases ***
 
 Test Remote Logging REST Interface And Verify Config
@@ -27,6 +32,22 @@ Test Remote Logging REST Interface And Verify Config
 
     Configure Remote Logging Server  remote_host=${EMPTY}  remote_port=0
     Verify Rsyslog Config On BMC  remote_host=remote-host  remote_port=port
+
+
+Verify Rsyslog Doesnt Log On BMC
+    [Documentation]  Check that rsyslog journald doesnt log on BMC.
+    [Tags]  Verify_Rsyslog_Doesnt_Log_On_BMC
+
+    # Expected filter rsyslog entries.
+    # Example:
+    # Sep 03 13:20:07 wsbmc123 rsyslogd[3356]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3356" x-info="http://www.rsyslog.com"] exiting on signal 15.
+    # Sep 03 13:20:18 wsbmc123 rsyslogd[3364]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3364" x-info="http://www.rsyslog.com"] start
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl -b --no-pager|egrep 'rsyslog'|egrep -Ev '${RSYSLOG_REGEX}'
+    ...  ignore_err=${1}
+
+    Should Be Empty  ${bmc_journald}
+    ...  msg=${bmc_journald} contains unexpected rsyslog entries.
 
 
 Verfiy BMC Journald Synced To Remote Logging Server
