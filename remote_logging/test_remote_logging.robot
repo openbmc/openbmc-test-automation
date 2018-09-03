@@ -12,9 +12,16 @@ Resource         ../lib/resource.txt
 Resource         ../lib/rest_client.robot
 Resource         ../lib/utils.robot
 Resource         ../lib/openbmc_ffdc.robot
+Resource         ../lib/boot_utils.robot
 
 Suite Setup      Suite Setup Execution
 Test Teardown    FFDC On Test Case Fail
+
+*** Variables ***
+
+${BMC_STOP_MSG}    Stopping Phosphor IPMI BT DBus Bridge
+${BMC_START_MSG}   Starting Flush Journal to Persistent Storage
+${BMC_BOOT_MSG}    Startup finished in
 
 *** Test Cases ***
 
@@ -54,6 +61,36 @@ Verfiy BMC Journald Synced To Remote Logging Server
 
     Should Be Equal As Strings   ${bmc_journald}  ${remote_journald}
     ...  msg=${bmc_journald} and ${remote_journald} don't match.
+
+
+Verify Journald Post BMC Reset
+    [Documentation]  Check that BMC journald is sync'ed to remote rsyslog after
+    ...              BMC reset.
+    [Tags]  Verify_Journald_Post_BMC_Reset
+
+    ${hostname}  ${stderr}  ${rc}=  BMC Execute Command  hostname
+    OBMC Reboot (off)
+
+    ${cmd}=  Catenate  grep ${hostname} /var/log/syslog |
+    ...  egrep '${BMC_STOP_MSG}|${BMC_START_MSG}|${BMC_BOOT_MSG}'
+    ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
+
+    # 1. Last reboot message to verify.
+    Should Contain  ${remote_journald}  ${BMC_STOP_MSG}
+    ...  msg=The remote journald doesn't contain the IPMI shutdown message: ${BMC_STOP_MSG}.
+
+    # 2. Earliest booting message on journald.
+    Should Contain  ${remote_journald}  ${BMC_START_MSG}
+    ...  msg=The remote journald doesn't contain the start message: ${BMC_START_MSG}.
+
+    # 3. Unique boot to standby message.
+    # Startup finished in 9.961s (kernel) + 1min 59.039s (userspace) = 2min 9.000s
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager | egrep '${BMC_BOOT_MSG}' | tail -1
+
+    Should Contain  ${remote_journald}
+    ...  ${bmc_journald.split('${hostname}')[1]}
+    ...  msg=The remote journald doesn't contain the boot message: ${BMC_BOOT_MSG}.
 
 
 *** Keywords ***
