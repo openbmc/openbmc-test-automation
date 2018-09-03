@@ -112,6 +112,18 @@ Verify Journald Post BMC Reset
     ...  msg=The remote journald doesn't contain the boot message: ${BMC_BOOT_MSG}.
 
 
+Verify BMC Journald Contains No Credential Data
+    [Documentation]  Check that BMC journald doesnt log any credential data.
+    [Tags]  Verify_BMC_Journald_Contains_No_Credential_Data
+
+    Open Connection And Log In
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl -o json-pretty | cat
+
+    Should Not Contain Any  ${bmc_journald}  ${OPENBMC_PASSWORD}
+    ...  msg=Journald logs BMC credentials/password ${OPENBMC_PASSWORD}.
+
+
 *** Keywords ***
 
 Suite Setup Execution
