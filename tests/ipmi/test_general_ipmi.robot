@@ -292,22 +292,22 @@ Verify Get DCMI Capabilities
     ...  msg=Supported DCMI capabilities not present.
 
 
-Test Power Reading Via IPMI With Host Booted
-    [Documentation]  Test power reading via IPMI with host booted state and
-    ...  verify using REST.
-    [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Booted
-
-    REST Power On  stack_mode=skip  quiet=1
-
-    Verify Power Reading
-
-
 Test Power Reading Via IPMI With Host Off
     [Documentation]  Test power reading via IPMI with host off state and
     ...  verify using REST.
     [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Off
 
     REST Power Off  stack_mode=skip  quiet=1
+
+    Verify Power Reading
+
+
+Test Power Reading Via IPMI With Host Booted
+    [Documentation]  Test power reading via IPMI with host booted state and
+    ...  verify using REST.
+    [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Booted
+
+    REST Power On  stack_mode=skip  quiet=1
 
     Verify Power Reading
 
@@ -321,6 +321,8 @@ Test Power Reading Via IPMI Raw Command
     # 1        Completion Code. Refer to section 8, DCMI Completion Codes.
     # 2        Group Extension Identification = DCh
     # 3:4      Current Power in watts
+
+    REST Power On  stack_mode=skip  quiet=1
 
     ${ipmi_raw_output}=  Run IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['power_reading']['Get'][0]}
