@@ -9,6 +9,7 @@ Resource            ../../lib/bmc_network_utils.robot
 Resource            ../../lib/logging_utils.robot
 Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
+Library             ../../lib/gen_misc.py
 
 Test Teardown       FFDC On Test Case Fail
 
@@ -64,7 +65,6 @@ Verify Supported Cipher List Via Lan Print
     [Documentation]  Verify supported cipher list via IPMI lan print command.
     [Tags]  Verify_Supported_Cipher_List_Via_Lan_Print
 
-
     ${network_info_dict}=  Get Lan Print Dict
     # Example 'RMCP+ Cipher Suites' entry: 3,17
     ${cipher_list}=  Evaluate
@@ -86,6 +86,25 @@ Verify Supported Cipher Via Getciphers
     # Make list from the 'id' column in the report.
     ${cipher_list}=  Evaluate  [int(x['id']) for x in $report]
     Lists Should Be Equal  ${cipher_list}  ${valid_cipher_list}
+
+
+Verify Disabling And Enabling IPMI Via Host
+    [Documentation]  Verify disabling and enabling IPMI via host.
+    [Tags]  Verify_Disabling_And_Enabling_IPMI_Via_Host
+    [Teardown]  Run Inband IPMI Standard Command  lan set 1 access on
+
+    # Disable IPMI and verify
+    Run Inband IPMI Standard Command  lan set 1 access off
+    Run Keyword and Expect Error  *Unable to establish IPMI*
+    ...  Run External IPMI Standard Command  lan print
+
+    # Enable IPMI and verify
+    Run Inband IPMI Standard Command  lan set 1 access on
+    ${lan_print_output}=  Run External IPMI Standard Command  lan print
+
+    ${openbmc_host_name}  ${openbmc_ip}  ${openbmc_short_name}=
+    ...  Get Host Name IP  host=${OPENBMC_HOST}  short_name=1
+    Should Contain  ${lan_print_output}  ${openbmc_ip}
 
 
 Set Asset Tag With Valid String Length
