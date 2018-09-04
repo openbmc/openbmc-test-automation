@@ -37,6 +37,25 @@ Verify Unsupported Cipher List
     \  Should Be Equal  ${status}  ${1}
 
 
+Verify Disabling And Enabling IPMI Via Host
+    [Documentation]  Verify disabling and enabling IPMI via host.
+    [Tags]  Verify_Disabling_And_Enabling_IPMI_Via_Host
+
+    # Disable IPMI and verify
+    Run Inband IPMI Standard Command  lan set 1 access off
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ipmitool -I lanplus -C ${IPMI_CIPHER_LEVEL} -P${SPACE}${IPMI_PASSWORD}
+    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}lan print
+
+    # Enable IPMI and verify
+    ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
+    Should Be Equal  ${status}  ${1}
+
+    Run Inband IPMI Standard Command  lan set 1 access on
+    ${lan_print_output}=  Run Keyword  Run IPMI Standard Command  lan print
+    Should Contain  ${lan_print_output}  ${OPENBMC_HOST}
+
+
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
     [Tags]  Set_Asset_Tag_With_Valid_String_Length
