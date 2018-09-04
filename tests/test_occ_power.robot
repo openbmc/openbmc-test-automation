@@ -50,7 +50,7 @@ Verify OCC State After Host Reboot
 
     ${occ_count_before} =  Count OCC Object Entry
     Verify OCC State  ${1}
-    REST OBMC Reboot (run)  stack_mode=normal  quiet=1
+    Host Reboot
     Verify OCC State  ${1}
     ${occ_count_after} =  Count OCC Object Entry
     Should be Equal  ${occ_count_before}  ${occ_count_after}
