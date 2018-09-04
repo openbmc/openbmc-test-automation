@@ -37,6 +37,21 @@ Verify Unsupported Cipher List
     \  Should Be Equal  ${status}  ${1}
 
 
+Verify Disabling And Enabling IPMI Via Host
+    [Documentation]  Verify disabling and enabling IPMI via host.
+    [Tags]  Verify_Disabling_And_Enabling_IPMI_Via_Host
+
+    # Disable IPMI and verify
+    Run Inband IPMI Standard Command  lan set 1 access off
+    Run Keyword and Expect Error  *Unable to establish IPMI*
+    ...  Run External IPMI Standard Command  lan print
+
+    # Enable IPMI and verify
+    Run Inband IPMI Standard Command  lan set 1 access on
+    ${lan_print_output}=  Run External IPMI Standard Command  lan print
+    Should Contain  ${lan_print_output}  ${OPENBMC_HOST}
+
+
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
     [Tags]  Set_Asset_Tag_With_Valid_String_Length
