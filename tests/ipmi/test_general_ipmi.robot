@@ -292,16 +292,6 @@ Verify Get DCMI Capabilities
     ...  msg=Supported DCMI capabilities not present.
 
 
-Test Power Reading Via IPMI With Host Booted
-    [Documentation]  Test power reading via IPMI with host booted state and
-    ...  verify using REST.
-    [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Booted
-
-    REST Power On  stack_mode=skip  quiet=1
-
-    Verify Power Reading
-
-
 Test Power Reading Via IPMI With Host Off
     [Documentation]  Test power reading via IPMI with host off state and
     ...  verify using REST.
@@ -309,7 +299,20 @@ Test Power Reading Via IPMI With Host Off
 
     REST Power Off  stack_mode=skip  quiet=1
 
-    Verify Power Reading
+    Wait Until Keyword Succeeds  1 min  20 sec  Verify Power Reading
+
+
+Test Power Reading Via IPMI With Host Booted
+    [Documentation]  Test power reading via IPMI with host booted state and
+    ...  verify using REST.
+    [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Booted
+
+    REST Power On  stack_mode=skip  quiet=1
+
+    # For a good power reading take a 3 samples for 15 seconds interval and
+    # average it out.
+
+    Wait Until Keyword Succeeds  1 min  20 sec  Verify Power Reading
 
 
 Test Power Reading Via IPMI Raw Command
@@ -322,44 +325,9 @@ Test Power Reading Via IPMI Raw Command
     # 2        Group Extension Identification = DCh
     # 3:4      Current Power in watts
 
-    ${ipmi_raw_output}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['power_reading']['Get'][0]}
+    REST Power On  stack_mode=skip  quiet=1
 
-    @{raw_output_list}=  Split String  ${ipmi_raw_output}  ${SPACE}
-
-    # On successful execution of raw IPMI power reading command, completion
-    # code does not come in output. So current power value will start from 2
-    # byte instead of 3.
-
-    ${power_reading_ipmi_raw_3_item}=  Get From List  ${raw_output_list}  2
-    ${power_reading_ipmi_raw_3_item}=
-    ...  Convert To Integer  0x${power_reading_ipmi_raw_3_item}
-
-    ${power_reading_rest}=  Read Attribute
-    ...  ${SENSORS_URI}power/total_power  Value
-
-    # Example of power reading via REST
-    #  "CriticalAlarmHigh": 0,
-    #  "CriticalAlarmLow": 0,
-    #  "CriticalHigh": 3100000000,
-    #  "CriticalLow": 0,
-    #  "Scale": -6,
-    #  "Unit": "xyz.openbmc_project.Sensor.Value.Unit.Watts",
-    #  "Value": 228000000,
-    #  "WarningAlarmHigh": 0,
-    #  "WarningAlarmLow": 0,
-    #  "WarningHigh": 3050000000,
-    #  "WarningLow": 0
-
-    # Get power value based on scale i.e. Value * (10 power Scale Value)
-    # e.g. from above case 228000000 * (10 power -6) = 228000000/1000000
-
-    ${power_reading_rest}=  Evaluate  ${power_reading_rest}/1000000
-    ${ipmi_rest_power_diff}=
-    ...  Evaluate  abs(${power_reading_rest} - ${power_reading_ipmi_raw_3_item})
-
-    Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
-    ...  msg=Power Reading above allowed threshold ${allowed_power_diff}.
+    Wait Until Keyword Succeeds  1 min  20 sec  Verify Power Reading Via Raw Command
 
 
 Test Baseboard Temperature Via IPMI
@@ -708,6 +676,49 @@ Verify Power Reading
 
     Run Keyword If  '${power_reading['instantaneous_power_reading']}' != '0'
     ...  Verify Power Reading Using REST  ${power_reading['instantaneous_power_reading']}
+
+
+Verify Power Reading Via Raw Command
+    [Documentation]  Get dcmi power reading via IPMI raw command.
+
+    ${ipmi_raw_output}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['power_reading']['Get'][0]}
+
+    @{raw_output_list}=  Split String  ${ipmi_raw_output}  ${SPACE}
+
+    # On successful execution of raw IPMI power reading command, completion
+    # code does not come in output. So current power value will start from 2
+    # byte instead of 3.
+
+    ${power_reading_ipmi_raw_3_item}=  Get From List  ${raw_output_list}  2
+    ${power_reading_ipmi_raw_3_item}=
+    ...  Convert To Integer  0x${power_reading_ipmi_raw_3_item}
+
+    ${power_reading_rest}=  Read Attribute
+    ...  ${SENSORS_URI}power/total_power  Value
+
+    # Example of power reading via REST
+    #  "CriticalAlarmHigh": 0,
+    #  "CriticalAlarmLow": 0,
+    #  "CriticalHigh": 3100000000,
+    #  "CriticalLow": 0,
+    #  "Scale": -6,
+    #  "Unit": "xyz.openbmc_project.Sensor.Value.Unit.Watts",
+    #  "Value": 228000000,
+    #  "WarningAlarmHigh": 0,
+    #  "WarningAlarmLow": 0,
+    #  "WarningHigh": 3050000000,
+    #  "WarningLow": 0
+
+    # Get power value based on scale i.e. Value * (10 power Scale Value)
+    # e.g. from above case 228000000 * (10 power -6) = 228000000/1000000
+
+    ${power_reading_rest}=  Evaluate  ${power_reading_rest}/1000000
+    ${ipmi_rest_power_diff}=
+    ...  Evaluate  abs(${power_reading_rest} - ${power_reading_ipmi_raw_3_item})
+
+    Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
+    ...  msg=Power Reading above allowed threshold ${allowed_power_diff}.
 
 
 Verify Management Controller ID String Status
