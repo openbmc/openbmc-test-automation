@@ -9,7 +9,7 @@ Resource            ../../lib/bmc_network_utils.robot
 Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 
-Test Teardown       FFDC On Test Case Fail
+#Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -35,6 +35,29 @@ Verify Unsupported Cipher List
     :FOR  ${cipher_level}  IN  @{unsupported_cipher_list}
     \  ${status}=  Execute IPMI Command With Cipher  ${cipher_level}
     \  Should Be Equal  ${status}  ${1}
+
+
+Verify Supported Cipher Via Getciphers
+    [Documentation]  Verify supported chiper list via IPMI getciphers command.
+    [Tags]  Verify_Supported_Cipher_Via_Getciphers
+
+    ${output}=  Run IPMI Standard Command  channel getciphers ipmi
+    # Example of getciphers command output:
+    # ID   IANA    Auth Alg        Integrity Alg   Confidentiality Alg
+    # 3    N/A     hmac_sha1       hmac_sha1_96    aes_cbc_128
+    # 17   N/A     hmac_sha256     sha256_128      aes_cbc_128
+
+    ${report}=  Outbuf To Report  ${output}
+    # Make list from the 'id' column in the report.
+    ${list}=  Evaluate  [x['id'] for x in $report]
+
+    # Convert list elements to integer value
+    ${cipher_list}=  Create List
+    :FOR  ${element}  IN  @{list}
+    \  ${cipher_value}=  Convert To Integer  ${element}
+    \  Append To List  ${cipher_list}  ${cipher_value}
+
+    Lists Should Be Equal  ${cipher_list}  ${valid_cipher_list}
 
 
 Set Asset Tag With Valid String Length
