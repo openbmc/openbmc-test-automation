@@ -25,11 +25,21 @@ Open Telnet Connection To BMC Serial Console
     ${prompt_string}=  Convert To Lowercase  ${OPENBMC_MODEL} login:
     Telnet.Open Connection
     ...  ${i_host}  port=${i_port}  prompt=#
+    Telnet.Set Timeout  30 seconds
     Telnet.Set Newline  \n
     Telnet.Set Newline  CRLF
     Telnet.Write  \n
-    Telnet.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-    ...  login_prompt=${prompt_string}  password_prompt=Password:
+    Telnet.Write  exit
+    Telnet.Write  \n
+    Telnet.Read Until Regexp  (Password:|logout)
+    Telnet.Write  \n
+    Telnet.Read Until  ${prompt_string}
+    Telnet.Write  ${OPENBMC_USERNAME}
+    Telnet.Write  \n
+    Telnet.Read Until  Password:
+    Telnet.Write  ${OPENBMC_PASSWORD}
+    Telnet.Write  \n
+    Telnet.Read Until Prompt
     Telnet.Set Timeout  30 minute 30 seconds
 
 
