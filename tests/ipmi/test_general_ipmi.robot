@@ -72,6 +72,22 @@ Verify Supported Cipher List Via Lan Print
     Lists Should Be Equal  ${cipher_list}  ${valid_cipher_list}
 
 
+Verify Supported Cipher Via Getciphers
+    [Documentation]  Verify supported chiper list via IPMI getciphers command.
+    [Tags]  Verify_Supported_Cipher_Via_Getciphers
+
+    ${output}=  Run IPMI Standard Command  channel getciphers ipmi
+    # Example of getciphers command output:
+    # ID   IANA    Auth Alg        Integrity Alg   Confidentiality Alg
+    # 3    N/A     hmac_sha1       hmac_sha1_96    aes_cbc_128
+    # 17   N/A     hmac_sha256     sha256_128      aes_cbc_128
+
+    ${report}=  Outbuf To Report  ${output}
+    # Make list from the 'id' column in the report.
+    ${cipher_list}=  Evaluate  [int(x['id']) for x in $report]
+    Lists Should Be Equal  ${cipher_list}  ${valid_cipher_list}
+
+
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
     [Tags]  Set_Asset_Tag_With_Valid_String_Length
