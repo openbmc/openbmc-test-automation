@@ -18,7 +18,7 @@ Test Inband IPMI Factory Reset
 
     REST Power On  stack_mode=skip
 
-    ${network_info}=  Get Lan Print Dict
+    ${network_info}=  Get Lan Print Dict  ipmi_cmd_type=inband
     Should Not Be Empty  ${network_info}
 
     # Call reset method.
