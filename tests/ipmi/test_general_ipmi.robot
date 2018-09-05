@@ -37,6 +37,29 @@ Verify Unsupported Cipher List
     \  Should Be Equal  ${status}  ${1}
 
 
+Verify Supported Cipher Via Getciphers
+    [Documentation]  Verify supported chiper list via IPMI getciphers command.
+    [Tags]  Verify_Supported_Cipher_Via_Getciphers
+
+    ${cmd_output}=  Run IPMI Standard Command  channel getciphers ipmi
+
+    # Example of getciphers command output:
+    # ID   IANA    Auth Alg        Integrity Alg   Confidentiality Alg
+    # 3    N/A     hmac_sha1       hmac_sha1_96    aes_cbc_128
+    # 17   N/A     hmac_sha256     sha256_128      aes_cbc_128
+
+    @{lines}=  Split To Lines  ${cmd_output}
+    Remove From List  ${lines}  0
+    ${cipher_list}=  Create List
+    :FOR  ${line}  IN  @{lines}
+    \  @{words}=  Split String  ${line}
+    \   Append To List  ${cipher_list}  ${words[0]}
+
+    ${supported_cipher_list}=  Create List  3  17
+    Lists Should Be Equal  ${cipher_list}  ${supported_cipher_list}
+    List Should Contain Sub List  ${cipher_list}  ${supported_cipher_list}
+
+
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
     [Tags]  Set_Asset_Tag_With_Valid_String_Length
