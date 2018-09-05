@@ -13,9 +13,9 @@ Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
-${new_mc_id}=  HOST
-${allowed_temp_diff}=  ${1}
-${allowed_power_diff}=  ${10}
+${new_mc_id}=              HOST
+${allowed_temp_diff}=      ${1}
+${allowed_power_diff}=     ${10}
 
 *** Test Cases ***
 
@@ -35,6 +35,28 @@ Verify Unsupported Cipher List
     :FOR  ${cipher_level}  IN  @{unsupported_cipher_list}
     \  ${status}=  Execute IPMI Command With Cipher  ${cipher_level}
     \  Should Be Equal  ${status}  ${1}
+
+
+Verify Supported Cipher Via Getciphers
+    [Documentation]  Verify supported chiper list via IPMI getciphers command.
+    [Tags]  Verify_Supported_Cipher_Via_Getciphers
+
+    ${cmd_output}=  Run IPMI Standard Command  channel getciphers ipmi
+
+    # Example of getciphers command output:
+    # ID   IANA    Auth Alg        Integrity Alg   Confidentiality Alg
+    # 3    N/A     hmac_sha1       hmac_sha1_96    aes_cbc_128
+    # 17   N/A     hmac_sha256     sha256_128      aes_cbc_128
+
+    @{lines}=  Split To Lines  ${cmd_output}
+    Remove From List  ${lines}  0
+    ${cipher_list}=  Create List
+    :FOR  ${line}  IN  @{lines}
+    \  @{words}=  Split String  ${line}
+    \  ${cipher_value}=  Convert To Integer  ${words[0]}
+    \  Append To List  ${cipher_list}  ${cipher_value}
+
+    Lists Should Be Equal  ${cipher_list}  ${valid_cipher_list}
 
 
 Set Asset Tag With Valid String Length
