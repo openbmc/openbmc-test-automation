@@ -117,7 +117,7 @@ Set BMC Time With BMC And NTP
     [Template]  Set Time Using REST
 
     #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${BMC_OWNER}    ${NTP_MODE}     ok      Not Set   No Change
+    Set BMC Time  ${BMC_OWNER}    ${NTP_MODE}     error   Not Set   No Change
 
 
 Set BMC Time With Host And Manual
@@ -127,7 +127,7 @@ Set BMC Time With Host And Manual
     [Template]  Set Time Using REST
 
     #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${HOST_OWNER}   ${MANUAL_MODE}  ok      Not Set   No Change
+    Set BMC Time  ${HOST_OWNER}   ${MANUAL_MODE}  error   Not Set   No Change
 
 
 Set BMC Time With Both And NTP
@@ -137,7 +137,7 @@ Set BMC Time With Both And NTP
     [Template]  Set Time Using REST
 
     #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${BOTH_OWNER}   ${NTP_MODE}     ok      Not Set   No Change
+    Set BMC Time  ${BOTH_OWNER}   ${NTP_MODE}     error   Not Set   No Change
 
 
 Set BMC Time With Split And NTP
@@ -147,7 +147,7 @@ Set BMC Time With Split And NTP
     [Template]  Set Time Using REST
 
     #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${SPLIT_OWNER}  ${NTP_MODE}     ok      Not Set   No Change
+    Set BMC Time  ${SPLIT_OWNER}  ${NTP_MODE}     error   Not Set   No Change
 
 
 Set BMC Time With Host And NTP
@@ -157,7 +157,7 @@ Set BMC Time With Host And NTP
     [Template]  Set Time Using REST
 
     #Operation    Owner           Mode            Status  BMC Time  Host Time
-    Set BMC Time  ${HOST_OWNER}   ${NTP_MODE}     ok      Not Set   No Change
+    Set BMC Time  ${HOST_OWNER}   ${NTP_MODE}     error   Not Set   No Change
 
 
 Set Host Time With Host And Manual
@@ -187,7 +187,7 @@ Set Host Time With Both And NTP
     [Template]  Set Time Using REST
 
     #Operation     Owner           Mode           Status  BMC Time   Host Time
-    Set Host Time  ${BOTH_OWNER}   ${NTP_MODE}    ok      No Change  Not Set
+    Set Host Time  ${BOTH_OWNER}   ${NTP_MODE}    error   No Change  Not Set
 
 
 Set Host Time With Split And Manual
@@ -217,7 +217,7 @@ Set Host Time With BMC And Manual
     [Template]  Set Time Using REST
 
     #Operation     Owner           Mode            Status   BMC Time   HOST Time
-    Set Host Time  ${BMC_OWNER}    ${MANUAL_MODE}  ok       No Change  Not Set
+    Set Host Time  ${BMC_OWNER}    ${MANUAL_MODE}  error    No Change  Not Set
 
 
 Set Host Time With BMC Owner NTP
@@ -227,7 +227,7 @@ Set Host Time With BMC Owner NTP
     [Template]  Set Time Using REST
 
     #Operation     Owner           Mode            Status   BMC Time   HOST Time
-    Set Host Time  ${BMC_OWNER}    ${NTP_MODE}     ok       No Change  Not Set
+    Set Host Time  ${BMC_OWNER}    ${NTP_MODE}     error    No Change  Not Set
 
 
 Set Host Time With Host And NTP
@@ -237,7 +237,7 @@ Set Host Time With Host And NTP
     [Template]  Set Time Using REST
 
     #Operation     Owner           Mode            Status  BMC Time    Host Time
-    Set Host Time  ${HOST_OWNER}   ${NTP_MODE}     ok      Not Change  No Set
+    Set Host Time  ${HOST_OWNER}   ${NTP_MODE}     error   Not Change  No Set
 
 
 Set Invalid Time Mode
