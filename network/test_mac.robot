@@ -141,7 +141,8 @@ Configure MAC Settings
     # After any modification on network interface, BMC restarts network
     # module, wait until it is reachable.
 
-    Wait For Host To Ping  ${OPENBMC_HOST}  5  12
+    Wait For Host To Ping  ${OPENBMC_HOST}
+    ...  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME} 
 
     # Verify whether new MAC address is populated on BMC system.
     # It should not allow to configure invalid settings.
