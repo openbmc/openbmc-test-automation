@@ -10,10 +10,9 @@ Variables       ../data/ipmi_raw_cmd_table.py
 
 Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
-Suite Teardown  Run Keyword And Ignore Error
-...             Power Redundancy Setting  setValue  Enabled
 
 *** Test Cases ***
+
 
 Verify System Ambient Temperature
     [Documentation]  Check the ambient sensor temperature.
@@ -33,6 +32,7 @@ Verify System Ambient Temperature
     ...  ${temp_data["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
     Should Be True  ${temp_data["Value"]/1000} <= ${50}
     ...  msg=System working temperature crossed 50 degree celsius.
+
 
 Verify Fan Sensors Attributes
    [Documentation]  Check fan attributes.
@@ -229,28 +229,10 @@ Verify VDDR Temperature Sensors Attributes
    \  ${vddr_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
    \  Should Be True  ${vddr_temp} > 0
 
-Disable Power Redundancy And Verify Using REST
-   [Documentation]  Disable power redundancy and verify that it is disabled.
-   [Tags]  Disable_Power_Redundancy_And_Verify_Using_REST
 
-   # Example:
-   # /xyz/openbmc_project/sensors/chassis/PowerSupplyRedundancy
-   # {
-   #     "error": 0,
-   #     "units": "",
-   #     "value": "Disabled"
-   # }
-
-   Power Redundancy Setting  setValue  Disabled
-
-   ${resp}=  Power Redundancy Setting  getValue
-   ${content}=  To Json  ${resp.content}
-   Should Be Equal As Strings  ${content["data"]}  Disabled
-
-
-Enable Power Redundancy And Verify Using REST
-   [Documentation]  Enable power redundancy and verify that it is enabled.
-   [Tags]  Enable_Power_Redundancy_And_Verify_Using_REST
+Verify Power Redundancy Using REST
+   [Documentation]  Verify power redundancy is enabled.
+   [Tags]  Verify_Power_Redundancy_Using_REST
 
    # Example:
    # /xyz/openbmc_project/sensors/chassis/PowerSupplyRedundancy
@@ -260,39 +242,18 @@ Enable Power Redundancy And Verify Using REST
    #     "value": "Enabled"
    # }
 
-   Power Redundancy Setting  setValue  Enabled
-
+   # Power Redundancy is a read-only attribute.  It cannot be set.
    ${resp}=  Power Redundancy Setting  getValue
    ${content}=  To Json  ${resp.content}
    Should Be Equal As Strings  ${content["data"]}  Enabled
 
 
-Disable Power Redundancy And Verify Using IPMI
-    [Documentation]  Disable power redundancy and verify that it is disabled.
-    [Tags]  Disable_Power_Redundancy_And_Verify_Using_IPMI
-
-    # Refer to data/ipmi_raw_cmd_table.py for command definition.
-
-    Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['power_supply_redundancy']['Disabled'][0]}
-
-    ${output}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['power_supply_redundancy']['Get'][0]}
-
-    Should Be Equal As Strings
-    ...  ${output.lstrip()}
-    ...  ${IPMI_RAW_CMD['power_supply_redundancy']['Get'][1]}
-    ...  msg=${IPMI_RAW_CMD['power_supply_redundancy']['Get'][1]} = ${output}.
-
-
-Enable Power Redundancy And Verify Using IPMI
+Verify Power Redundancy Using IPMI
     [Documentation]  Enable power redundancy and verify that it is enabled.
-    [Tags]  Enable_Power_Redundancy_And_Verify_Using_IPMI
+    [Tags]  Verify_Power_Redundancy_Using_IPMI
 
     # Refer to data/ipmi_raw_cmd_table.py for command definition.
-
-    Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['power_supply_redundancy']['Enabled'][0]}
+    # Power Redundancy is a read-only attribute.  It cannot be set.
 
     ${output}=  Run IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['power_supply_redundancy']['Get'][0]}
@@ -340,4 +301,3 @@ Power Redundancy Setting
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     [Return]  ${resp}
-
