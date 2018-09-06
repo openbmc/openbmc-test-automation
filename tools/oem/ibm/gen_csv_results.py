@@ -61,7 +61,7 @@ parser.add_argument(
 parser.add_argument(
     '--level',
     help='OpenBMC release level which was used during test,\
-          e.g. "OBMC920".')
+          e.g. "Master".')
 
 # Populate stock_list with options we want.
 stock_list = [("test_mode", 0), ("quiet", 0), ("debug", 0)]
@@ -132,7 +132,7 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level):
                                     (e.g. "v2.1-215-g6e7eacb").
     platform                        Platform of the openbmc system.
     level                           Release level of the OpenBMC system
-                                    (e.g. "OBMC920").
+                                    (e.g. "Master").
     """
 
     result = ExecutionResult(xml_file_path)
@@ -167,7 +167,7 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level):
     l_subsys = 'OPENBMC'
     l_test_type = 'FTC'
 
-    l_pse_rel = 'OBMC910'
+    l_pse_rel = 'Master'
     if level:
         l_pse_rel = level
 
@@ -234,7 +234,7 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level):
         l_etime = xml_to_csv_time(testcase.endtime)
         # Data Sequence: test_start,test_end,subsys,test_type,
         #                test_result,test_name,pse_rel,driver,
-        #                env,proc,platform_tyep,test_func_area,
+        #                env,proc,platform_type,test_func_area,
         l_data = [l_stime, l_etime, l_subsys, l_test_type, l_test_result,
                   l_test_name, l_pse_rel, l_driver, l_env, l_proc,
                   l_platform_type, l_func_area]
@@ -284,9 +284,9 @@ def get_system_details(xml_file_path):
 
     for node in tree.iter('msg'):
         # /etc/os-release output is logged in the XML as msg
-        # Example: ${output} = VERSION_ID="v1.99.2-71-gbc49f79-dirty"
+        # Example: ${output} = VERSION_ID="v1.99.2-71-gbc49f79"
         if '${output} = VERSION_ID=' in node.text:
-            # Get BMC version (e.g. v1.99.1-96-g2a46570-dirty)
+            # Get BMC version (e.g. v1.99.1-96-g2a46570)
             bmc_version_id = str(node.text.split("VERSION_ID=")[1])[1:-1]
 
         # Platform is logged in the XML as msg.
