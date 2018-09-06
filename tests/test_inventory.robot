@@ -644,8 +644,7 @@ Verify Inventory List Before And After Reboot
     REST Power On  stack_mode=skip  quiet=1
     Delete All Error Logs
     ${inventory_before}=  Get URL List  ${HOST_INVENTORY_URI}
-    Initiate Host Reboot
-    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Booted
+    Host Reboot
     Delete All Error Logs
     ${inventory_after}=  Get URL List  ${HOST_INVENTORY_URI}
     Lists Should Be Equal  ${inventory_before}  ${inventory_after}
