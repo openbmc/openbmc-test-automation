@@ -104,7 +104,8 @@ classified as follows:
 
 `mnfg/`: Contains test cases for factory reset (DHCP mode) and PGOOD testing.
 
-`network/`: Contains test cases for network testing.
+`network/`: Contains test cases for network testing. It covers IPv4 in static mode
+            and in DHCP mode.
 
 `snmp/`: Contains test cases for SNMP (Simple Network Management Protocol)
          configuration testing.
