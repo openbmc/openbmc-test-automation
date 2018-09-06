@@ -48,8 +48,7 @@ ${OS_WAIT_TIMEOUT}  ${15*60}
 ${NETWORK_PORT}        80
 ${PACKET_TYPE}         tcp
 ${NETWORK_RETRY_TIME}  6
-${NETWORK_TIMEOUT}     12
-
+${NETWORK_TIMEOUT}     18
 # BMC debug tarball parameter
 ${DEBUG_TARBALL_PATH}  ${EMPTY}
 
