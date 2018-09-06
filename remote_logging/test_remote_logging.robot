@@ -22,13 +22,13 @@ Test Teardown    FFDC On Test Case Fail
 
 *** Variables ***
 
-${BMC_STOP_MSG}    Stopping Phosphor IPMI BT DBus Bridge
-${BMC_START_MSG}   Starting Flush Journal to Persistent Storage
-${BMC_BOOT_MSG}    Startup finished in
-
 # Strings to check from journald.
-${RSYSLOG_REGEX}      start|exiting on signal 15
-${BMC_SYSLOG_REGEX}   dropbear|vrm-control.sh|
+${BMC_STOP_MSG}          Stopping Phosphor IPMI BT DBus Bridge
+${BMC_START_MSG}         Starting Flush Journal to Persistent Storage
+${BMC_BOOT_MSG}          Startup finished in
+${BMC_SYSLOG_REGEX}      dropbear|vrm-control.sh
+${RSYSLOG_REGEX}         start|exiting on signal 15
+${RSYSLOG_RETRY_REGEX}   suspended, next retry
 
 *** Test Cases ***
 
@@ -75,6 +75,24 @@ Test Remote Logging REST Interface And Verify Config
 
     Configure Remote Logging Server  remote_host=${EMPTY}  remote_port=0
     Verify Rsyslog Config On BMC  remote_host=remote-host  remote_port=port
+
+
+Test Remote Logging Invalid Port Config And Verify BMC Journald
+    [Documentation]  Test remote logging interface and configuration.
+    [Tags]  Test_Remote_Logging_Invalid_Port_Config_And_Verify_BMC_Journald
+
+    # Invalid port derived by (REMOTE_LOG_SERVER_PORT + 1) port config setting.
+    ${INVALID_PORT}=  Evaluate  ${REMOTE_LOG_SERVER_PORT} + ${1}
+    Configure Remote Logging Server
+    ...  remote_host=${REMOTE_LOG_SERVER_HOST}  remote_port=${INVALID_PORT}
+
+    Sleep  3s
+    # Sep 14 05:47:09 wsbmc123 rsyslogd[1870]: action 'action 0' suspended, next retry is Fri Sep 14 05:47:39 2018 [v8.29.0 try http://www.rsyslog.com/e/2007 ]
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl -b --no-pager | egrep 'rsyslog.*${RSYSLOG_RETRY_REGEX}'
+
+    Should Contain  ${bmc_journald}  ${RSYSLOG_RETRY_REGEX}
+    ...  msg=${bmc_journald} doesn't contain rsyslog retry entries.
 
 
 Verify Rsyslog Does Not Log On BMC
