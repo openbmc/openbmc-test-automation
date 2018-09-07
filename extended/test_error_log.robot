@@ -254,16 +254,6 @@ Verify IPMI SEL Delete
     ...  case_insensitive=True
 
 
-Verify Empty SEL
-    [Documentation]  Verify empty SEL list.
-    [Tags]  Verify_Empty_SEL
-
-    Delete Error Logs And Verify
-
-    ${resp}=  Run IPMI Standard Command  sel list
-    Should Contain  ${resp}  SEL has no entries  case_insensitive=True
-
-
 Delete Non Existing SEL Entry
     [Documentation]  Delete non existing SEL entry.
     [Tags]  Delete_Non_Existing_SEL_Entry
