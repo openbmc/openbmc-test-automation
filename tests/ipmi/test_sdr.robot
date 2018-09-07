@@ -33,15 +33,6 @@ Test DIMM SDR Info At Power On
     Test SDR Info  dimm
 
 
-Test GPU SDR Info At Power On
-    [Documentation]  Verify GPU SDR info via IPMI and REST at power on.
-
-    [Tags]  Test_GPU_SDR_Info_At_Power_On
-
-    REST Power On  stack_mode=skip  quiet=1
-    Test SDR Info  gv100card
-
-
 Test CPU Core SDR Info At Power Off
     [Documentation]  Verify CPU core SDR info via IPMI and REST at power off.
 
