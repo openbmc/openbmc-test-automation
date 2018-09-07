@@ -30,7 +30,8 @@ Get Fan Names
 
     \  ${fan_properties}=  Read Properties  ${fan_uri}
     \  ${fan_present}=  Get Variable Value  ${fan_properties['Present']}  0
-    \  Continue For Loop If  ${fan_present} != 1
+    \  ${fan_functional}=  Get Variable Value  ${fan_properties['Functional']}  0
+    \  Continue For Loop If  ${fan_present} == 0 or ${fan_functional} == 0
     \  ${remaining_uri}  ${fan_name}=  Split Path  ${fan_uri}
     \  Append To List  ${fan_names}  ${fan_name}
 

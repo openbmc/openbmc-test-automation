@@ -133,8 +133,6 @@ Check Fan Manual Control
     ${stdout}  ${stderr}  ${rc}=
     ...  BMC Execute Command  ${cmd}
 
-    Rpvars  fan_speeds_from_BMC_file_system
-
     # Convert output to integer values.
     ${speeds}=  Evaluate  map(int, $stdout.split(${\n}))
     Rpvars  speeds
@@ -152,7 +150,7 @@ Check Fan Manual Control
     # Re-enable the fan daemon
     Set Fan Daemon State  restart
 
-    Run Keyword If  ${fail_test}  Fail
+    Run Keyword If  ${fail_test} > ${0}  Fail
     ...  msg=hwmon did not properly report fan speeds.
 
     # Wait for the daemon to take control and gracefully set fan speeds
