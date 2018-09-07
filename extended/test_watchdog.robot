@@ -17,6 +17,7 @@ Test Teardown          FFDC On Test Case Fail
 ${stack_mode}  skip
 
 *** Test Cases ***
+
 Verify Watchdog Setting With Watchdog Disabled
     [Documentation]  Disable watchdog timer and verify watchdog settings
     ...              i.e Enabled, Interval, TimeRemaining.
@@ -27,9 +28,10 @@ Verify Watchdog Setting With Watchdog Disabled
 
     # Check if watchdog has default settings.
     ${properties}=  Read Properties  /xyz/openbmc_project/watchdog/host0
-    Should Be Equal As Strings  ${properties["Enabled"]}  0
+    Should Be Equal As Strings  ${properties["Enabled"]}  ${False}
     Should Be Equal As Strings  ${properties["Interval"]}  ${initial_interval}
     Should Be Equal As Strings  ${properties["TimeRemaining"]}  0
+
 
 Verify Watchdog Setting With Watchdog Enabled
     [Documentation]  Enable watchdog timer and check if host OS is rebooted
@@ -45,7 +47,7 @@ Verify Watchdog Setting With Watchdog Enabled
 
     # Verify if watchdog settings are enabled and timeremaining is reduced.
     ${properties}=  Read Properties  /xyz/openbmc_project/watchdog/host0
-    Should Be Equal As Strings  ${properties["Enabled"]}  1
+    Should Be Equal As Strings  ${properties["Enabled"]}  ${True}
     Should Not Be Equal As Strings  ${properties["TimeRemaining"]}  0
 
     Wait Until Keyword Succeeds  120 sec  20 sec  Is Host Rebooted
@@ -54,9 +56,10 @@ Verify Watchdog Setting With Watchdog Enabled
 
     # Check if watchdog settings are reset when host OS is up.
     ${properties}=  Read Properties  /xyz/openbmc_project/watchdog/host0
-    Should Be Equal As Strings  ${properties["Enabled"]}  0
+    Should Be Equal As Strings  ${properties["Enabled"]}  ${False}
     Should Be Equal As Strings  ${properties["Interval"]}  ${initial_interval}
     Should Be Equal As Strings  ${properties["TimeRemaining"]}  0
+
 
 Modify And Verify Watchdog Timer Interval
     [Documentation]  Modify and verify watchdog timer interval.
@@ -69,6 +72,7 @@ Modify And Verify Watchdog Timer Interval
     ${modified_time_interval}=  Read Attribute  ${HOST_WATCHDOG_URI}  Interval
     Should Be Equal As Strings  ${modified_time_interval}  ${random_int}
 
+
 Modify and verify Watchdog TimeRemaining
     [Documentation]  Modify and verify watchdog 'TimeRemaining'.
     [Tags]  Modify_And_Verify_Watchdog_TimeRemaining
@@ -78,6 +82,7 @@ Modify and verify Watchdog TimeRemaining
     ${modified_timeremain}=
     ...  Read Attribute  ${HOST_WATCHDOG_URI}  TimeRemaining
     Should Not Be Equal As Strings  ${random_int}  ${modified_timeremain}
+
 
 Verify Watchdog URL When Host Is On And Off
     [Documentation]  Verify watchdog URL when host is running
