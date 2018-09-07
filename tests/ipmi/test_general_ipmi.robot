@@ -10,7 +10,7 @@ Resource            ../../lib/logging_utils.robot
 Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 
-Test Teardown       FFDC On Test Case Fail
+#Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -30,6 +30,16 @@ Verify IPMI SEL Version
 
     Should Be True  ${setting_status} >= 1.5
     Should Contain  ${version_info}  v2 compliant  case_insensitive=True
+
+
+Verify Empty SEL
+    [Documentation]  Verify empty SEL list.
+    [Tags]  Verify_Empty_SEL
+
+    Delete Error Logs And Verify
+
+    ${resp}=  Run IPMI Standard Command  sel list
+    Should Contain  ${resp}  SEL has no entries  case_insensitive=True
 
 
 Verify Supported Cipher List
