@@ -6,6 +6,7 @@ Resource            ../../lib/openbmc_ffdc.robot
 Resource            ../../lib/boot_utils.robot
 Resource            ../../lib/utils.robot
 Resource            ../../lib/bmc_network_utils.robot
+Resource            ../../lib/logging_utils.robot
 Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 
@@ -18,6 +19,18 @@ ${allowed_temp_diff}=  ${1}
 ${allowed_power_diff}=  ${10}
 
 *** Test Cases ***
+
+Verify IPMI SEL Version
+    [Documentation]  Verify IPMI SEL's version info.
+    [Tags]  Verify_IPMI_SEL_Version
+
+    ${version_info}=  Get IPMI SEL Setting  Version
+    ${setting_status}=  Fetch From Left  ${version_info}  (
+    ${setting_status}=  Evaluate  $setting_status.replace(' ','')
+
+    Should Be True  ${setting_status} >= 1.5
+    Should Contain  ${version_info}  v2 compliant  case_insensitive=True
+
 
 Verify Supported Cipher List
     [Documentation]  Execute all supported cipher levels and verify.
