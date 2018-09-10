@@ -67,7 +67,7 @@ Verify eSEL Description And EntryID Using REST
     # "Id": 1,
     # "Message": "org.open_power.Host.Error.Event",
     # "Resolved": 0,
-    # "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    # "Severity": "xyz.openbmc_project.Logging.Entry.Level.Warning",
     # "Timestamp": 1524233022072,
     # "associations": [
     #    [
@@ -176,7 +176,7 @@ Verify eSEL Entries
     #          ],
     #       "Id": 1,
     #       "Message": "org.open_power.Host.Error.Event",
-    #       "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #       "Severity": "xyz.openbmc_project.Logging.Entry.Level.Warning",
     #       "Timestamp": 1485904869061
     # }
     ${entry_id}=  Read Attribute  ${elog_entry[0]}  message
@@ -184,7 +184,7 @@ Verify eSEL Entries
     ...  org.open_power.Host.Error.Event
     ${entry_id}=  Read Attribute  ${elog_entry[0]}  Severity
     Should Be Equal  ${entry_id}
-    ...  xyz.openbmc_project.Logging.Entry.Level.Error
+    ...  xyz.openbmc_project.Logging.Entry.Level.Warning
 
 Suite Teardown Execution
     [Documentation]  Cleanup test logs and connection.
