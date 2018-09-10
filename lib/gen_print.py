@@ -365,14 +365,15 @@ def get_arg_name(var,
             break
     if start_line_ix != 0:
         # Check to see whether the start line is a continuation of the prior
-        # line?
-        line_indent = get_line_indent(source_lines[start_line_ix - 1])
-        if line_indent < start_indent:
+        # line.
+        prior_line = source_lines[start_line_ix - 1]
+        prior_line_stripped = re.sub(r"[ ]*\\([\r\n]$)", " \\1", prior_line)
+        prior_line_indent = get_line_indent(prior_line)
+        if prior_line != prior_line_stripped and\
+           prior_line_indent < start_indent:
             start_line_ix -= 1
-            # Remove the backslash (continuation char).
-            source_lines[start_line_ix] = re.sub(r"[ ]*\\([\r\n]$)",
-                                                 " \\1",
-                                                 source_lines[start_line_ix])
+            # Remove the backslash (continuation char) from prior line.
+            source_lines[start_line_ix] = prior_line_stripped
 
     # Join the start line through the end line into a composite line.
     composite_line = ''.join(map(str.strip,
