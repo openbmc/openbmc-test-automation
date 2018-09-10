@@ -72,7 +72,7 @@ Get To Stable State
 
     Run Keyword And Ignore Error  Delete All Error Logs
     Run Keyword And Ignore Error  Delete All Dumps
-    Check For Application Failures
+    Check For Current Boot Application Failures
     Run Keyword And Ignore Error  Remove Journald Logs
 
 *** Keywords ***
@@ -114,7 +114,7 @@ Powercycle System Via PDU
     Check If BMC is Up   5 min    10 sec
 
 
-Check For Application Failures
+Check For Current Boot Application Failures in Journal
     [Documentation]  Parse the journal log and check for failures.
     [Arguments]  ${error_regex}=${ERROR_REGEX}
 
