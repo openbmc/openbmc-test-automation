@@ -446,11 +446,20 @@ def restore_plug_in_value(default="", plug_in_package_name=None):
     if os.path.isfile(save_file_path):
         gp.qprint_timen("Restoring " + lvalue + " value from "
                         + save_file_path + ".")
-        return gm.file_to_list(save_file_path, newlines=0, comments=0,
-                               trim=1)[0]
+        value = gm.file_to_list(save_file_path, newlines=0, comments=0,
+                                trim=1)[0]
+        if type(default) is bool:
+            # Convert from string to bool.
+            value = (value == 'True')
+        if type(default) is int:
+            # Convert from string to int.
+            value = int(value)
+        gp.qprint_varx(lvalue, value)
+        return value
     else:
         gp.qprint_timen("Save file " + save_file_path
                         + " does not exist so returning default value.")
+        gp.qprint_var(default)
         return default
 
 
