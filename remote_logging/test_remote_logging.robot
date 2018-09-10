@@ -29,6 +29,41 @@ ${RSYSLOG_REGEX}   start|exiting on signal 15
 
 *** Test Cases ***
 
+Verify REST Logging On BMC Journal When Disabled
+    [Documentation]  Enable REST logging and verify from journald.
+    [Tags]  Verify_REST_Logging_On_BMC Journal_When_Disabled
+
+    ${log_dict}=  Create Dictionary  data=${False}
+    Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled  data=${log_dict}
+    ...  verify=${True}  expected_value=${False}
+
+    Initialize OpenBMC
+
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager
+
+    Should Not Contain  ${bmc_journald}  user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    ...  msg=${bmc_journald} contains unexpected REST entries.
+
+
+Verify REST Logging On BMC Journal When Enable
+    [Documentation]  Enable REST logging and verify from journald.
+    [Tags]  Verify_REST_Logging_On_BMC Journal_When_Enable
+
+    ${log_dict}=  Create Dictionary  data=${True}
+    Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled  data=${log_dict}
+    ...  verify=${True}  expected_value=${True}
+
+    # Sep 10 14:34:35 witherspoon phosphor-gevent[1288]: 127.0.0.1 user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    Initialize OpenBMC
+
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager
+
+    Should Contain  ${bmc_journald}  user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    ...  msg=${bmc_journald} doesn't contains REST entries.
+
+
 Test Remote Logging REST Interface And Verify Config
     [Documentation]  Test remote logging interface and configuration.
     [Tags]  Test_Remote_Logging_REST_Interface_And_Verify_Config
