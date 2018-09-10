@@ -29,6 +29,41 @@ ${RSYSLOG_REGEX}   start|exiting on signal 15
 
 *** Test Cases ***
 
+Verify REST Logging On BMC Journal When Disabled
+    [Documentation]  Enable REST logging and verify from journald.
+    [Tags]  Verify_REST_Logging_On_BMC Journal_When_Disabled
+
+    ${log_dict}=  Create Dictionary  data=${False}
+    Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled  data=${log_dict}
+    ...  verify=${True}  expected_value=${False}
+
+    Initialize OpenBMC
+
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager
+
+    Should Not Contain  ${bmc_journald}  user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    ...  msg=${bmc_journald} contains unexpected REST entries.
+
+
+Verify REST Logging On BMC Journal When Enable
+    [Documentation]  Enable REST logging and verify from journald.
+    [Tags]  Verify_REST_Logging_On_BMC Journal_When_Enable
+
+    ${log_dict}=  Create Dictionary  data=${True}
+    Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled  data=${log_dict}
+    ...  verify=${True}  expected_value=${True}
+
+    # Sep 10 14:34:35 witherspoon phosphor-gevent[1288]: 127.0.0.1 user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    Initialize OpenBMC
+
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl --no-pager
+
+    Should Contain  ${bmc_journald}  user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    ...  msg=${bmc_journald} doesn't contains REST entries.
+
+
 Test Remote Logging REST Interface And Verify Config
     [Documentation]  Test remote logging interface and configuration.
     [Tags]  Test_Remote_Logging_REST_Interface_And_Verify_Config
@@ -135,9 +170,9 @@ Audit BMC SSH Login And Remote Logging
     ${login_footprint}=  Catenate  Started SSH Per-Connection Server.*${test_host_ip}
 
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | grep '${login_footprint}'
+    ...  journalctl --no-pager | grep '${login_footprint}' | tail -1
 
-    ${cmd}=  Catenate SEPARATOR=  grep '${bmc_hostname}|${test_host_ip}|${login_footprint}' /var/log/syslog
+    ${cmd}=  Catenate  SEPARATOR=  egrep '(${bmc_hostname}|${test_host_ip}).*${login_footprint}' /var/log/syslog
 
     ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
 
@@ -160,13 +195,16 @@ Suite Setup Execution
 
     ${hostname}  ${stderr}  ${rc}=  BMC Execute Command  /bin/hostname
     Set Suite Variable  ${bmc_hostname}  ${hostname}
+    Configure Remote Logging Server
 
 
 Test Setup Execution
     [Documentation]  Do the test setup.
 
-    Remove Journald Logs
-    ${cofig_status}=  Run Keyword And Return Status
+    # TODO: Enable when fixed openbmc/phosphor-rest-server#26
+    #Remove Journald Logs
+
+    ${config_status}=  Run Keyword And Return Status
     ...  Get Remote Log Server Configured
 
     Run Keyword If  ${config_status}==${FALSE}  Configure Remote Logging Server
@@ -267,7 +305,7 @@ Remote Logging Server Execute Command
     Open Connection And Log In  ${username}  ${password}
     ...  &{remote_dict}
     ${stdout}  ${stderr}=  Execute Command  ${command}  return_stderr=True
-    Should Be Empty   ${stderr}
+    Should Be Empty  ${stderr}
     [Return]  ${stdout}
 
 
