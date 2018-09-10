@@ -1,0 +1,121 @@
+# Basic power on test.
+-i Verify_Front_And_Rear_LED_At_Standby
+-i Verify_Application_Services_Running_At_Standby
+-i Power_On_Test
+-i Check_For_Application_Failures
+-i Test_SSH_And_IPMI_Connections
+# Device tree.
+-i Check_BMC_Model_Property_Is_Set
+-i Check_BMC_Compatible_Property_Is_Set
+-i Check_BMC_CPU_Name_Property_Is_Set
+-i Check_BMC_CPU_Compatible_Property_Is_Set
+-i Check_BMC_GPIO_FSI_Name_Property_Is_Set
+-i Check_BMC_GPIO_FSI_Compatible_Property_Is_Set
+-i Check_BMC_GPIO_keys_Name_Property_Is_Set
+-i Check_BMC_GPIO_keys_Compatible_Property_Is_Set
+-i Check_BMC_IIO-HWMON_Name_Property_Is_Set
+-i Check_BMC_IIO-HWMON_Compatible_Property_Is_Set
+-i Check_BMC_LED_Name_Property_Is_Set
+-i Check_BMC_LED_Compatible_Property_Is_Set
+# BMC Dump.
+# BMC File Mirroring.
+-i Test_BMC_Alt_Side_Mirroring
+# BMC boot and device policies.
+# Hardware Sensors.
+-i Verify_System_Ambient_Temperature
+-i Verify_Fan_Sensor_Attributes
+-i Verify_PCIE_Sensor_Attributes
+-i Verify_Rail_Voltage_Sensor_Attributes
+-i Verify_VDN_Temperature_Sensors_Attributes
+-i Verify_VCS_Temperature_Sensors_Attributes
+-i Verify_VDD_Temperature_Sensors_Attributes
+-i Verify_VDDR_Temperature_Sensors_Attributes
+-i Verify_Power_Redundancy_Using_REST
+-i Verify_Power_Redundancy_Using_IPMI
+# System Inventory.
+-i Verify_System_Inventory_Path
+-i Verify_Boxelder_Present_Property
+-i Verify_UUID_Entry
+-i Verify_Boxelder_MAC_Address_Property_Is_Populated
+-i Verify_Chassis_Motherboard_Properties
+-i Verify_CPU_Present
+-i Verify_DIMM_Present
+-i Verify_FRU_Properties
+-i Verify_GPU_Properties
+-i Verify_Core_Properties
+-i Verify_Fan_Properties
+-i Verify_Core_Functional_State
+-i Verify_DIMM_Functional_State
+-i Verify_Fan_Functional_State
+-i Verify_CPU_Functional_State
+-i Verify_GPU_Functional_State
+-i Check_Air_Or_Water_Cooled
+-i Verify_Minimal_CPU_Inventory
+-i Verify_Minimal_DIMM_Inventory
+-i Verify_Minimal_Core_Inventory
+-i Verify_Minimal_Fan_Inventory
+-i Verify_Minimal_Power_Supply_Inventory
+# LED
+# OCC and reset reload.
+-i Verify_OCC_State_After_BMC_Reset
+# Power Restory policy.
+-i Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Off
+# REST Test.
+-i REST_Login_Session_To_BMC
+-i REST_Logout_Session_To_BMC
+-i REST_Delete_All_Sessions_And_Expect_Error
+-i Multiple_Requests_On_BMC_Using_Single_REST_Session
+-i Verify_REST_JSON_Data_On_Success
+-i Verify_REST_JSON_Data_On_Failure
+-i Verify_REST_Get_Message_JSON_Compliant
+-i Verify_REST_Post_Message_JSON_Compliant
+-i Verify_REST_Bad_Request_Post_Message_JSON_Compliant
+-i REST_Put_Message_JSON_Format_Compliance_Test
+-i Check_Response_Codes_415
+-i Get_Response_Codes
+-i Get_Data
+-i Get_Data_Validation
+-i Put_Response_Codes
+-i Put_Data_Validation
+-i Post_Response_Codes
+-i Delete_Response_Codes
+-i Verify_All_REST_Objects_Are_Accessible
+# Soft boot sensors.
+-i Verify_Boot_Sensor_States_At_Host_Booted
+# Software manager.
+-i Verify_Software_Purpose
+-i BMC_Software_Hex_ID
+-i BMC_Software_Version
+-i BMC_Software_Path
+-i BMC_Software_RequestedActivation
+-i BMC_Software_Activation_Association
+-i Host_Software_Hex_ID
+-i Host_Software_Version
+-i Host_Software_Path
+-i BMC_Software_RequestedActivation
+-i Host_Software_Activation_Association
+# Time.
+# Logging and SEL.
+-i Verify_eSEL_Using_REST
+-i Verify_eSEL_Entries_Using_REST
+-i Verify_eSEL_Description_And_EntryID_Using_REST
+-i Verify_Multiple_eSEL_Using_REST
+-i Check_eSEL_AdditionalData
+-i Test_Wrong_Reservation_ID
+-i Test_Correct_Reservation_ID
+-i Create_Test_Error_And_Verify
+-i Test_Error_Persistency_On_Restart
+-i Test_Error_Entry_Numbering_Reset_On_Restart
+-i Create_Test_Error_And_Verify_Resolved_Field
+-i Create_Test_Error_And_Verify_Time_Stamp
+-i Create_Test_Error_Log_And_Delete
+-i Verify_IPMI_SEL_Delete
+-i Delete_Non_Existing_SEL_Entry
+-i Delete_Invalid_SEL_Entry
+-i Verify_IPMI_SEL_Entries
+-i Verify_IPMI_SEL_Last_Add_Time
+-i Create_Test_Error_Callout_And_Verify_AdditionalData
+-i Create_Test_Error_Callout_And_Verify_Associations
+-i Create_Test_Error_Callout_And_Verify_LED
+-i Set_Resolved_Field_And_Verify_Callout_Deletion
+
