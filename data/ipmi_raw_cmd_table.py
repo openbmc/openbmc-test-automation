@@ -27,6 +27,8 @@ IPMI_RAW_CMD = {
             "Byte position 3rd LSB e.g. 01 indicates disabled",
             "00 00 02 00",
             "Byte position 3rd LSB e.g. 02 indicates enabled",
+            "00 40 02 00",
+            "40 is scanning enabled and 02 indicates redundancy enabled",
         ],
         'Enabled':
         [
