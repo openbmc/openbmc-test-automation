@@ -23,8 +23,8 @@ Preserve BMC Network Setting
     ${value}=    create dictionary   data=${policy}
     Write Attribute   ${BMC_UPD_ATTR}  preserve_network_settings  data=${value}
     ${data}=      Read Properties   ${BMC_UPD_ATTR}
-    should be equal as strings    ${data['preserve_network_settings']}   ${1}
-    ...   msg=0 indicates network is not preserved
+    Should Be Equal As Strings    ${data['preserve_network_settings']}   ${True}
+    ...   msg=False indicates network is not preserved.
 
 
 Activate BMC flash image
