@@ -101,17 +101,16 @@ Verfiy BMC Journald Synced To Remote Logging Server
     ...  systemctl restart xyz.openbmc_project.Dump.Manager.service
 
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | tail -1
+    ...  journalctl --no-pager | grep 'Started Phosphor Dump Manager'
 
     # Sep 3 10:09:28 wsbmc123 systemd[1]: Started Phosphor Dump Manager.
-    ${cmd}=  Catenate  cat /var/log/syslog|grep ${bmc_hostname} | tail -1
+    ${cmd}=  Catenate  SEPARATOR=  egrep '${bmc_hostname}.*Started Phosphor Dump Manager' /var/log/syslog
     ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
 
     # TODO: rsyslog configuration and time date template to match BMC journald.
     # Compare the BMC journlad log. Example:
     # systemd[1]: Started Phosphor Dump Manager.
-    Should Be Equal As Strings   ${bmc_journald.split('${bmc_hostname}')[1]}
-    ...  ${remote_journald.split('${bmc_hostname}')[1]}
+    Should Contain  ${remote_journald}  ${bmc_journald.split('${bmc_hostname}')[1][0]}
     ...  msg= ${bmc_journald} doesn't match remote rsyslog:${remote_journald}.
 
 
@@ -166,7 +165,7 @@ Audit BMC SSH Login And Remote Logging
 
     # Aug 31 17:22:55 wsbmc123 systemd[1]: Started SSH Per-Connection Server (xx.xx.xx.xx:51292)
     Open Connection And Log In
-
+    Sleep  3s
     ${login_footprint}=  Catenate  Started SSH Per-Connection Server.*${test_host_ip}
 
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
@@ -176,7 +175,7 @@ Audit BMC SSH Login And Remote Logging
 
     ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
 
-    Should Contain  ${remote_journald}  ${bmc_journald}
+    Should Contain  ${remote_journald}  ${bmc_journald.split('${bmc_hostname}')[1][0]}
     ...  msg=${remote_journald} don't contain ${bmc_journald} entry.
 
 
