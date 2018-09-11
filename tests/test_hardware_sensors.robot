@@ -243,13 +243,17 @@ Verify Power Redundancy Using REST
    # }
 
    # Power Redundancy is a read-only attribute.  It cannot be set.
-   ${resp}=  Power Redundancy Setting  getValue
-   ${content}=  To Json  ${resp.content}
-   Should Be Equal As Strings  ${content["data"]}  Enabled
+
+   # Pass if sensor is in /xyz and it's enabled.
+   ${redundancy_setting}=  Read Attribute
+   ...  ${OPENBMC_BASE_URI}control/power_supply_redundancy
+   ...  PowerSupplyRedundancyEnabled
+   Should Be Equal As Integers  ${redundancy_setting}  ${1}
+   ...  msg=PowerSupplyRedundancyEnabled not set as expected.
 
 
 Verify Power Redundancy Using IPMI
-    [Documentation]  Enable power redundancy and verify that it is enabled.
+    [Documentation]  Verify IPMI reports Power Redundancy is enabled.
     [Tags]  Verify_Power_Redundancy_Using_IPMI
 
     # Refer to data/ipmi_raw_cmd_table.py for command definition.
@@ -258,10 +262,17 @@ Verify Power Redundancy Using IPMI
     ${output}=  Run IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['power_supply_redundancy']['Get'][0]}
 
-    Should Be Equal As Strings
-    ...  ${output.lstrip()}
+    ${scanning}=  Set Variable
+    ...  ${IPMI_RAW_CMD['power_supply_redundancy']['Get'][5]}
+    ${no_scanning}=  Set Variable
     ...  ${IPMI_RAW_CMD['power_supply_redundancy']['Get'][3]}
-    ...  msg=${IPMI_RAW_CMD['power_supply_redundancy']['Get'][3]} = ${output}.
+
+    ${enabled_scanning}=  Evaluate  $scanning in $output
+    ${enabled_no_scanning}=  Evaluate  $no_scanning in $output
+
+    # Either enabled_scanning or enabled_noscanning should be True.
+    Should Be True  ${enabled_scanning} or ${enabled_no_scanning}
+    ...  msg=Failed IPMI power redundancy check, result=${output}.
 
 
 *** Keywords ***
@@ -282,22 +293,3 @@ Test Teardown Execution
     FFDC On Test Case Fail
     Delete All Error Logs
     Close All Connections
-
-Power Redundancy Setting
-    [Documentation]  "Set" or "Get" power redundancy setting.
-    [Arguments]  ${action}  ${value}=${EMPTY}
-
-    # Description of argument(s):
-    # action   "setValue" or "getValue" API request string.
-    # value    String argument for the API request (e.g. "Enabled"/"Disabled").
-
-    @{arglist}=  Create List
-    Run Keyword If  '${value}' != '${EMPTY}'
-    ...  Append To List  ${arglist}  ${value}
-
-    ${args}=  Create Dictionary  data=@{arglist}
-    ${resp}=  Call Method  ${SENSORS_URI}chassis/PowerSupplyRedundancy
-    ...  ${action}  data=${args}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-
-    [Return]  ${resp}
