@@ -37,7 +37,6 @@ Verify BMC Reset Reload With System On
 Test Reset Reload When Host Booted
     [Documentation]  Reset reload when host is booted.
     [Tags]  Test_Reset_Reload_When_Host_Booted
-    [Setup]  Remove Journald Logs
 
     Repeat Keyword  ${LOOP_COUNT} times  Reboot BMC And Check For Errors
 
@@ -52,7 +51,7 @@ Reboot BMC And Check For Errors
     Verify OCC State  ${1}
 
     ${journal_log}=  BMC Execute Command
-    ...  journalctl --no-pager | egrep 'SEGV|core-dump'  ignore_err=1
+    ...  journalctl -b --no-pager | egrep 'SEGV|core-dump'  ignore_err=1
 
     Should Be Empty  ${journal_log[0]}
 
