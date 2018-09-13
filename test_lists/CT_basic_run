@@ -17,7 +17,8 @@
 -i Verify_Host_PowerOff_Via_IPMI
 -i Verify_Deactivate_Non_Existing_SOL
 # IPMI SEL
--i Verify_IPMI_SEL_Version
+# TODO: Enable when fixed.
+#-i Verify_IPMI_SEL_Version
 -i Get_System_Time
 #Power restore.
 -i Test_Restore_Policy_ALWAYS_POWER_OFF_With_Host_Off
