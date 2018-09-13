@@ -40,8 +40,7 @@
 -e Configure_Less_Octet_IP_For_Gateway
 -e Configure_Hexadecimal_IP_For_Gateway
 -e Configure_Special_Char_IP_For_Gateway
-# TODO: https://github.com/openbmc/openbmc-test-automation/issues/1074
--e Journal_Log
+-e Verify_Network_Interface_Recovery
 # Skipping RAS test cases
 -e Host_RAS
 # Skip multi threading test cuasing XML parser failure.

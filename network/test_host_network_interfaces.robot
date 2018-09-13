@@ -22,6 +22,7 @@ Verify Network Interfaces
     [Tags]  Verify_Network_Interfaces
 
     Rprintn
+    REST Power On
     @{interface_names}=  Get OS Network Interface Names
     :FOR  ${interface_name}  IN  @{interface_names}
     \  ${ethtool_dict}=  Get OS Ethtool  ${interface_name}
