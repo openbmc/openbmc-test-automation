@@ -8,10 +8,12 @@ Documentation    Remote logging test for rsyslog.
 # REMOTE_USERNAME           The username for the remote logging server.
 # REMOTE_PASSWORD           The password for the remote logging server.
 
+Library          String
 Resource         ../lib/resource.txt
 Resource         ../lib/rest_client.robot
 Resource         ../lib/utils.robot
 Resource         ../lib/openbmc_ffdc.robot
+Resource         ../lib/boot_utils.robot
 Library          ../lib/gen_misc.py
 
 Suite Setup      Suite Setup Execution
@@ -25,7 +27,8 @@ ${BMC_START_MSG}   Starting Flush Journal to Persistent Storage
 ${BMC_BOOT_MSG}    Startup finished in
 
 # Strings to check from journald.
-${RSYSLOG_REGEX}   start|exiting on signal 15
+${RSYSLOG_REGEX}      start|exiting on signal 15
+${BMC_SYSLOG_REGEX}   dropbear|vrm-control.sh|
 
 *** Test Cases ***
 
@@ -177,6 +180,32 @@ Audit BMC SSH Login And Remote Logging
 
     Should Contain  ${remote_journald}  ${bmc_journald.split('${bmc_hostname}')[1][0]}
     ...  msg=${remote_journald} don't contain ${bmc_journald} entry.
+
+
+Boot Host And Verify Data Is Synced To Remote Server
+    [Documentation]  Boot host and verify the power on sequence logs are synced
+    ...              to remote logging server.
+    [Tags]  Boot_Host_And_Verify_Data_Is_Synced_To_Remote_Server
+
+    ${cmd}=  Catenate  SEPARATOR=  --no-pager | egrep -Ev '${BMC_SYSLOG_REGEX}'
+    ...  | awk -F': ' '{print $2}'
+
+    # Example: Just get the message part of the syslog
+    # Started OpenPOWER OCC Active Disable.
+    Start Journal Log  filter=${cmd}
+
+    # Irrespective of the outcome, the journald should be synced.
+    Run Keyword And Ignore Error  REST Power On
+    ${bmc_journald}=  Stop Journal Log
+
+    ${cmd}=  Catenate  SEPARATOR=  egrep '${bmc_hostname}' /var/log/syslog
+    ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
+
+    @{lines}=  Split To Lines  ${bmc_journald}
+    :FOR  ${line}  IN  @{lines}
+    \  Log To Console  \n ${line}
+    \  Should Contain  ${remote_journald}  ${line}
+    ...  mgs=${line} line doesn't contain in ${remote_journald}.
 
 
 *** Keywords ***
