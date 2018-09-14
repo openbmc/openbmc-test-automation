@@ -31,7 +31,7 @@ ${RSYSLOG_REGEX}   start|exiting on signal 15
 
 Verify REST Logging On BMC Journal When Disabled
     [Documentation]  Enable REST logging and verify from journald.
-    [Tags]  Verify_REST_Logging_On_BMC Journal_When_Disabled
+    [Tags]  Verify_REST_Logging_On_BMC_Journal_When_Disabled
 
     ${log_dict}=  Create Dictionary  data=${False}
     Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled  data=${log_dict}
@@ -46,9 +46,9 @@ Verify REST Logging On BMC Journal When Disabled
     ...  msg=${bmc_journald} contains unexpected REST entries.
 
 
-Verify REST Logging On BMC Journal When Enable
+Verify REST Logging On BMC Journal When Enabled
     [Documentation]  Enable REST logging and verify from journald.
-    [Tags]  Verify_REST_Logging_On_BMC Journal_When_Enable
+    [Tags]  Verify_REST_Logging_On_BMC_Journal_When_Enabled
 
     ${log_dict}=  Create Dictionary  data=${True}
     Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled  data=${log_dict}
@@ -200,8 +200,8 @@ Suite Setup Execution
 Test Setup Execution
     [Documentation]  Do the test setup.
 
-    # TODO: Enable when fixed openbmc/phosphor-rest-server#26
-    #Remove Journald Logs
+    # Retain only the past 1 second log:
+    BMC Execute Command  journalctl --vacuum-time=1s
 
     ${config_status}=  Run Keyword And Return Status
     ...  Get Remote Log Server Configured
