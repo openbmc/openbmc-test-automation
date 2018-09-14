@@ -46,7 +46,7 @@ Verify Sub Title Text Should Be Select Power Operation At Power Off
     Select Server Power Operations Sub Menu
     Verify Display Content  ${string_Select_power_operation}
 
-Verify Power On Button Should Present At ower Off
+Verify Power On Button Should Present At Power Off
     [Documentation]  Verify presence of "Warm reboot" button.
     [Tags]  Verify_Power_On_Button_Should_Present_At_Power_Off
     ...  OBMC_PowerOff_State

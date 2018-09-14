@@ -641,7 +641,7 @@ Set Management Controller ID String
 
 
 Get Management Controller ID String And Verify
-    [Documentation]  Get the management controller ID sting.
+    [Documentation]  Get the management controller ID string.
     [Arguments]  ${string}
 
     # Description of argument(s):
