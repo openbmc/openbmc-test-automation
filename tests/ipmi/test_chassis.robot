@@ -34,7 +34,7 @@ IPMI Chassis Status Off
     Should Contain  ${power_status}    off
 
 IPMI Chassis Restore Power Policy
-     [Documentation]  Verfy IPMI chassis restore power policy.
+     [Documentation]  Verify IPMI chassis restore power policy.
      [Tags]  IPMI_Chassis_Restore_Power_Policy
 
      ${initial_power_policy}=  Read Attribute

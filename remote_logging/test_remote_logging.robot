@@ -145,7 +145,7 @@ Verify Journald Post BMC Reset
 
 
 Verify BMC Journald Contains No Credential Data
-    [Documentation]  Check that BMC journald doesnt log any credential data.
+    [Documentation]  Check that BMC journald doesn't log any credential data.
     [Tags]  Verify_BMC_Journald_Contains_No_Credential_Data
 
     Open Connection And Log In
