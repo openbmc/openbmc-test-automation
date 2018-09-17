@@ -18,7 +18,7 @@ Library          ../lib/gen_misc.py
 
 Suite Setup      Suite Setup Execution
 Test Setup       Test Setup Execution
-Test Teardown    FFDC On Test Case Fail
+#Test Teardown    FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -306,6 +306,26 @@ Configure Remote Logging Server
     # port update API.
     # Reference: https://github.com/ibm-openbmc/dev/issues/59
     Sleep  10s
+
+
+Configure Group Remote Logging Server
+    [Documentation]  Configure the remote logging server on BMC.
+    [Arguments]  ${remote_host}=${REMOTE_LOG_SERVER_HOST}
+    ...          ${remote_port}=${REMOTE_LOG_SERVER_PORT}
+
+    # Description of argument(s):
+    # remote_host  The host name or IP address of the remote logging server
+    #              (e.g. "xx.xx.xx.xx").
+    # remote_port  Remote ryslog server port number (e.g. "514").
+
+    @{remote_parm_list}=  Create List  ${remote_host}  ${remote_port}
+
+    ${data}=  Create Dictionary  data=@{snmp_parm_list}
+
+    ${resp}=  OpenBMC Post Request
+    ...  ${REMOTE_LOGGING_CONFIG_URI}/action/remote  data=${data}
+
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
 Verify Rsyslog Config On BMC
