@@ -21,6 +21,7 @@
 -i Verify_IPMI_SEL_Version
 -i Verify_Empty_SEL
 -i Verify_Supported_Cipher_List
+-i Verify_Unsupported_Cipher_List
 -i Set_Asset_Tag_With_Valid_String_Length
 -i Verify_Get_And_Set_Management_Controller_ID_String
 -i Test_Management_Controller_ID_String_Status_via_IPMI
