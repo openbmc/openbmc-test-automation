@@ -43,8 +43,7 @@ yaml_core_list = ['Inventory/Item.interface.yaml',
 
 # yaml file paths for fan.
 yaml_fan_list = ['Inventory/Item.interface.yaml',
-                 'Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml',
-                 'State/Decorator/OperationalStatus.interface.yaml', ]
+                 'Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml',]
 # yaml file paths for GPU.
 yaml_gpu_list = ['Inventory/Item.interface.yaml',
                  'Inventory/Decorator/Replaceable.interface.yaml',
