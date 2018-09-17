@@ -31,15 +31,10 @@
 -e Configure_Loopback_IP
 -e Configure_Network_ID
 # TODO: Invalid gateway address configuration.
--e Configure_Invalid_Gateway_String
--e Configure_Out_Of_Range_IP_For_Gateway
 -e Configure_Broadcast_IP_For_Gateway
 -e Configure_Loopback_IP_For_Gateway
 -e Configure_Multicast_IP_For_Gateway
 -e Configure_Network_ID_For_Gateway
--e Configure_Less_Octet_IP_For_Gateway
--e Configure_Hexadecimal_IP_For_Gateway
--e Configure_Special_Char_IP_For_Gateway
 -e Verify_Network_Interface_Recovery
 # Skipping RAS test cases
 -e Host_RAS
