@@ -7,8 +7,7 @@ inventory_dict = {
     "fan": [
         "PrettyName",
         "Present",
-        "MeetsMinimumShipLevel",
-        "Functional"
+        "MeetsMinimumShipLevel"
     ],
     "fru": [
         "PrettyName",
