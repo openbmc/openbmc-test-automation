@@ -32,6 +32,27 @@ ${RSYSLOG_RETRY_REGEX}   suspended, next retry
 
 *** Test Cases ***
 
+Test BMC Hostname Service And Verify
+    [Documentation]  Write to hostname interface and verify via REST and
+    ...              'hostname' command.
+    [Tags]  Test_BMC_Hostname_Service_And_Verify
+
+    ${openbmc_host_name}  ${openbmc_ip}  ${openbmc_short_name}=
+    ...  Get Host Name IP  host=${OPENBMC_HOST}  short_name=1
+
+    ${host_name_dict}=  Create Dictionary  data=${openbmc_short_name}
+    Write Attribute  ${NETWORK_MANAGER}config  HostName  data=${host_name_dict}
+    ...  verify=${TRUE}  expected_value=${openbmc_short_name}
+
+    ${hostname}  ${stderr}  ${rc}=  BMC Execute Command  hostname
+
+    Should Be Equal As Strings  ${hostname}  ${openbmc_short_name}
+    ...  msg=The hostname interface ${openbmc_short_name} and command value ${hostname} do not match.
+
+    # Override the suite hostname variable if this test is executed.
+    Set Suite Variable  ${bmc_hostname}  ${openbmc_short_name}
+
+
 Verify REST Logging On BMC Journal When Disabled
     [Documentation]  Enable REST logging and verify from journald.
     [Tags]  Verify_REST_Logging_On_BMC_Journal_When_Disabled
