@@ -38,6 +38,7 @@ ${IMAGE_FILE_PATH}               ${EMPTY}
 ${DELETE_OLD_PNOR_IMAGES}        false
 ${DELETE_OLD_GUARD_FILE}         false
 ${ALTERNATE_IMAGE_FILE_PATH}     ${EMPTY}
+${SKIP_UPDATE_IF_ACTIVE}         false
 ${cache_files_dir_path}          /var/lib/phosphor-software-manager/pnor/prsv/
 
 *** Test Cases ***
@@ -54,6 +55,7 @@ REST Host Code Update
     Run Keyword And Ignore Error  List Installed Images  Host
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
+    ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
 
 
