@@ -142,7 +142,8 @@ REDFISH_SESSION = REDFISH_BASE_URI + 'SessionService/Sessions'
 REDFISH_SESSION_URI = 'SessionService/Sessions/'
 
 # rsyslog variables.
-REMOTE_LOGGING_URI = OPENBMC_BASE_URI + 'logging/config/remote/'
+REMOTE_LOGGING_CONFIG_URI = BMC_LOGGING_URI + 'config/'
+REMOTE_LOGGING_URI = REMOTE_LOGGING_CONFIG_URI + 'remote/'
 
 '''
   QEMU HTTPS variable:
