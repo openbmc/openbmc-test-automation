@@ -31,7 +31,7 @@ ${RSYSLOG_RETRY_REGEX}   suspended, next retry
 *** Test Cases ***
 
 Test BMC Hostname Service And Verify
-    [Documentation]  Write to hostname interface and verify via REST and
+    [Documentation]  Write to hostname config attribute and verify via REST and
     ...              'hostname' command.
     [Tags]  Test_BMC_Hostname_Service_And_Verify
 
@@ -268,7 +268,7 @@ Suite Setup Execution
 
     ${hostname}  ${stderr}  ${rc}=  BMC Execute Command  /bin/hostname
     Set Suite Variable  ${bmc_hostname}  ${hostname}
-    Configure Remote Log Server With Parameters
+    Configure Remote Log Server
 
 
 Test Setup Execution
@@ -281,7 +281,7 @@ Test Setup Execution
     ...  Get Remote Log Server Configured
 
     Run Keyword If  ${config_status}==${FALSE}
-    ...  Configure Remote Log Server With Parameters
+    ...  Configure Remote Log Server
 
     ${ActiveState}=  Get Service Attribute  ActiveState  rsyslog.service
     Should Be Equal  active  ${ActiveState}
