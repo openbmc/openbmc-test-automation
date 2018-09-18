@@ -94,7 +94,7 @@ Test Remote Logging REST Interface And Verify Config
 
     Verify Rsyslog Config On BMC
 
-    Configure Remote Logging Server  remote_host=${EMPTY}  remote_port=0
+    Configure Group Remote Logging Server  remote_host=${EMPTY}  remote_port=0
     Verify Rsyslog Config On BMC  remote_host=remote-host  remote_port=port
 
 
@@ -262,7 +262,7 @@ Suite Setup Execution
 
     ${hostname}  ${stderr}  ${rc}=  BMC Execute Command  /bin/hostname
     Set Suite Variable  ${bmc_hostname}  ${hostname}
-    Configure Remote Logging Server
+    Configure Group Remote Logging Server
 
 
 Test Setup Execution
@@ -274,7 +274,7 @@ Test Setup Execution
     ${config_status}=  Run Keyword And Return Status
     ...  Get Remote Log Server Configured
 
-    Run Keyword If  ${config_status}==${FALSE}  Configure Remote Logging Server
+    Run Keyword If  ${config_status}==${FALSE}  Configure Group Remote Logging Server
 
     ${ActiveState}=  Get Service Attribute  ActiveState  rsyslog.service
     Should Be Equal  active  ${ActiveState}
