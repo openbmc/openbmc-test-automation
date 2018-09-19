@@ -61,12 +61,18 @@ Verify REST Logging On BMC Journal When Disabled
     Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled  data=${log_dict}
     ...  verify=${True}  expected_value=${False}
 
+    ${login_footprint}=  Catenate  user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    # Example: Just get the message part of the syslog
+    # user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    ${cmd}=  Catenate  SEPARATOR=  --no-pager | egrep '${login_footprint}'
+    ...  | awk -F': ' '{print $2}'
+
+    Start Journal Log  filter=${cmd}
     Initialize OpenBMC
+    Sleep  5s
+    ${bmc_journald}=  Stop Journal Log
 
-    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager
-
-    Should Not Contain  ${bmc_journald}  user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    Should Be Empty  ${bmc_journald}
     ...  msg=${bmc_journald} contains unexpected REST entries.
 
 
