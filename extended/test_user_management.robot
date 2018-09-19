@@ -13,6 +13,15 @@ ${test_password}   abc123
 
 *** Test Cases ***
 
+
+Verify At Least One User In List
+    [Documentation]  Verify user list API list minimum one user.
+    [Tags]  Verify_At_Least_One_User_In_List
+
+    ${bmc_user_uris}=  Read Properties  ${BMC_USER_URI}list
+    Should Not Be Empty  ${bmc_user_uris}
+
+
 Verify Root Password Update
     [Documentation]  Update system "root" user password and verify.
     [Tags]  Verify_Root_Password_Update
