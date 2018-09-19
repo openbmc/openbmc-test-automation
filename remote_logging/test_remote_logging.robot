@@ -16,9 +16,9 @@ Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/boot_utils.robot
 Library          ../lib/gen_misc.py
 
-Suite Setup      Suite Setup Execution
-Test Setup       Test Setup Execution
-Test Teardown    FFDC On Test Case Fail
+#Suite Setup      Suite Setup Execution
+#Test Setup       Test Setup Execution
+#Test Teardown    FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -203,21 +203,22 @@ Audit BMC SSH Login And Remote Logging
     ...              remote logging server.
     [Tags]  Audit_BMC_SSH_Login_And_Remote_Logging
 
-    ${test_host_name}  ${test_host_ip}=  Get Host Name IP
+    ${login_footprint}=  Catenate  Started SSH Per-Connection Server
+    # Example: Just get the message part of the syslog
+    # Started SSH Per-Connection Server (xx.xx.xx.xx:51292)
+    ${cmd}=  Catenate  SEPARATOR=  --no-pager | egrep ${login_footprint}
+    ...  | awk -F': ' '{print $2}'
 
-    # Aug 31 17:22:55 wsbmc123 systemd[1]: Started SSH Per-Connection Server (xx.xx.xx.xx:51292)
+    Start Journal Log  filter=${cmd}
     Open Connection And Log In
     Sleep  3s
-    ${login_footprint}=  Catenate  Started SSH Per-Connection Server.*${test_host_ip}
+    ${bmc_journald}=  Stop Journal Log
 
-    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | grep '${login_footprint}' | tail -1
-
-    ${cmd}=  Catenate  SEPARATOR=  egrep '(${bmc_hostname}|${test_host_ip}).*${login_footprint}' /var/log/syslog
+    ${cmd}=  Catenate  SEPARATOR=  egrep -E '*${bmc_hostname}.*${login_footprint}' /var/log/syslog
 
     ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
 
-    Should Contain  ${remote_journald}  ${bmc_journald.split('${bmc_hostname}')[1][0]}
+    Should Contain  ${remote_journald}  ${bmc_journald}
     ...  msg=${remote_journald} don't contain ${bmc_journald} entry.
 
 
