@@ -13,6 +13,17 @@ ${test_password}   abc123
 
 *** Test Cases ***
 
+
+Verify User List API List Minimum One User
+    [Documentation]  Verify user list API list minimum one user.
+    [Tags]  Verify_User_List_API_List_Minimum_One_User
+
+    ${resp}=  OpenBMC Get Request  ${BMC_USER_URI}list
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Not Be Empty  ${jsondata["data"]}
+
+
 Verify Root Password Update
     [Documentation]  Update system "root" user password and verify.
     [Tags]  Verify_Root_Password_Update
