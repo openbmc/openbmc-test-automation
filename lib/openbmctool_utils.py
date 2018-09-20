@@ -42,10 +42,11 @@ def openbmctool_execute_command(command_string,
     cpu0          | Yes       | Yes      | Yes         | No
 
     Description of arguments:
-    command_string                  The command string to be passed to the
-                                    openbmctool.py program.
-    args/kwargs     These are passed directly to shell_cmd.  See the shell_cmd
-    prolog for details.
+    command_string                  The command string to be passed to the openbmctool.py program.
+    All remaining arguments are passed directly to shell_cmd.  See the shell_cmd prolog for details on
+    allowable arguments.  The caller may code them directly as in this example:
+    openbmctool_execute_command("my command", quiet=1, max_attempts=2).
+    Python will do the work of putting these values into args/kwargs.
     """
 
     if not gv.valid_value(command_string):
