@@ -27,7 +27,7 @@ ${BMC_STOP_MSG}          Stopping Phosphor IPMI BT DBus Bridge
 ${BMC_START_MSG}         Starting Flush Journal to Persistent Storage
 ${BMC_BOOT_MSG}          Startup finished in
 ${BMC_SYSLOG_REGEX}      dropbear|vrm-control.sh
-${RSYSLOG_REGEX}         start|exiting on signal 15
+${RSYSLOG_REGEX}         start|exiting on signal 15|there are no active actions configured
 ${RSYSLOG_RETRY_REGEX}   suspended, next retry
 
 *** Test Cases ***
@@ -60,6 +60,10 @@ Verify REST Logging On BMC Journal When Disabled
     ${log_dict}=  Create Dictionary  data=${False}
     Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled  data=${log_dict}
     ...  verify=${True}  expected_value=${False}
+
+    # If it was enabled prior, this REST footprint will show up.
+    # Takes around 5 seconds for the REST to restart service when policy is changed.
+    Sleep  10s
 
     ${login_footprint}=  Catenate  user:root POST http://127.0.0.1:8081/login json:None 200 OK
     # Example: Just get the message part of the syslog
