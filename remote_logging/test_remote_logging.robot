@@ -92,6 +92,32 @@ Verify REST Logging On BMC Journal When Enabled
     ...  msg=${bmc_journald} doesn't contains REST entries.
 
 
+Test Remote API Valid Config Combination
+    [Documentation]  Verify  valid combination of address and port.
+    [Tags]  Test_Remote_API_Valid_Config_Combination
+    [Template]  Verify Remote Logging Server Interface
+    [Setup]  No Operation
+
+    # Address                    Port                        Expected result
+    ${EMPTY}                     ${REMOTE_LOG_SERVER_PORT}   ${True}
+    ${REMOTE_LOG_SERVER_HOST}    ${REMOTE_LOG_SERVER_PORT}   ${True}
+    remotelog.xzy.com            ${REMOTE_LOG_SERVER_PORT}   ${True}
+    ${REMOTE_LOG_SERVER_HOST}    ${0}                        ${True}
+
+
+Test Remote API Invalid Config Combination
+    [Documentation]  Verify invalid combination of address and port.
+    [Tags]  Test_Remote_API_Invalid_Config_Combination
+    [Template]  Verify Remote Logging Server Interface
+    [Setup]  No Operation
+
+    # Address                    Port                        Expected result
+    ${0}                         ${REMOTE_LOG_SERVER_PORT}   ${False}
+    "0"                          ${REMOTE_LOG_SERVER_PORT}   ${False}
+    ${REMOTE_LOG_SERVER_HOST}    ${EMPTY}                    ${False}
+    ${REMOTE_LOG_SERVER_HOST}    "0"                         ${False}
+
+
 Test Remote Logging REST Interface And Verify Config
     [Documentation]  Test remote logging interface and configuration.
     [Tags]  Test_Remote_Logging_REST_Interface_And_Verify_Config
@@ -293,3 +319,21 @@ Remote Logging Interface Should Exist
 
     ${resp}=  OpenBMC Get Request  ${REMOTE_LOGGING_URI}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Verify Remote Logging Server Interface
+    [Documentation]  Configure the remote logging REST interface on BMC.
+    [Arguments]  ${remote_host}  ${remote_port}  ${expectation}
+
+    # Description of argument(s):
+    # remote_host  The host name or IP address of the remote logging server
+    #              (e.g. "xx.xx.xx.xx").
+    # remote_port  Remote ryslog server port number (e.g. "514").
+    # expectation  Expect bolean True/False.
+
+
+    ${status}=  Run Keyword And Return Status
+    ...  Configure Remote Logging Server  remote_host=${remote_host}  remote_port=${remote_port}
+
+    Should Be Equal  ${status}  ${expectation}
+    ...  msg=Test result ${status} and expectation ${expectation} do not match.
