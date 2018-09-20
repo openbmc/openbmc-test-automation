@@ -27,7 +27,7 @@ ${BMC_STOP_MSG}          Stopping Phosphor IPMI BT DBus Bridge
 ${BMC_START_MSG}         Starting Flush Journal to Persistent Storage
 ${BMC_BOOT_MSG}          Startup finished in
 ${BMC_SYSLOG_REGEX}      dropbear|vrm-control.sh
-${RSYSLOG_REGEX}         start|exiting on signal 15
+${RSYSLOG_REGEX}         start|exiting on signal 15|there are no active actions configured
 ${RSYSLOG_RETRY_REGEX}   suspended, next retry
 
 *** Test Cases ***
