@@ -112,7 +112,7 @@ Test Remote Logging Invalid Port Config And Verify BMC Journald
     ...  remote_host=${REMOTE_LOG_SERVER_HOST}  remote_port=${INVALID_PORT}
 
     Sleep  3s
-    # Sep 14 05:47:09 wsbmc123 rsyslogd[1870]: action 'action 0' suspended, next retry is Fri Sep 14 05:47:39 2018 [v8.29.0 try http://www.rsyslog.com/e/2007 ]
+    # rsyslogd[1870]: action 'action 0' suspended, next retry is Fri Sep 14 05:47:39 2018 [v8.29.0 try http://www.rsyslog.com/e/2007 ]
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
     ...  journalctl -b --no-pager | egrep 'rsyslog.*${RSYSLOG_RETRY_REGEX}'
 
@@ -126,8 +126,8 @@ Verify Rsyslog Does Not Log On BMC
 
     # Expected filter rsyslog entries.
     # Example:
-    # Sep 03 13:20:07 wsbmc123 rsyslogd[3356]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3356" x-info="http://www.rsyslog.com"] exiting on signal 15.
-    # Sep 03 13:20:18 wsbmc123 rsyslogd[3364]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3364" x-info="http://www.rsyslog.com"] start
+    # syslogd[3356]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3356" x-info="http://www.rsyslog.com"] exiting on signal 15.
+    # rsyslogd[3364]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3364" x-info="http://www.rsyslog.com"] start
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
     ...  journalctl -b --no-pager | egrep 'rsyslog' | egrep -Ev '${RSYSLOG_REGEX}'
     ...  ignore_err=${1}
@@ -142,14 +142,14 @@ Verfiy BMC Journald Synced To Remote Logging Server
 
     # Restart BMC dump service and get the last entry of the journald.
     # Example:
-    # Sep 03 10:09:28 wsbmc123 systemd[1]: Started Phosphor Dump Manager.
+    # systemd[1]: Started Phosphor Dump Manager.
     BMC Execute Command
     ...  systemctl restart xyz.openbmc_project.Dump.Manager.service
 
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
     ...  journalctl --no-pager | grep 'Started Phosphor Dump Manager'
 
-    # Sep 3 10:09:28 wsbmc123 systemd[1]: Started Phosphor Dump Manager.
+    # systemd[1]: Started Phosphor Dump Manager.
     ${cmd}=  Catenate  SEPARATOR=  egrep '${bmc_hostname}.*Started Phosphor Dump Manager' /var/log/syslog
     ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
 
