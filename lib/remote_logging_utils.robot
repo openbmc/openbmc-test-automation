@@ -80,7 +80,7 @@ Verify Rsyslog Config On BMC
 
     # Example:
     # Configured:
-    # *.* @@xx.xx.xx.xx:514root@wsbmc123
+    # *.* @@xx.xx.xx.xx:514root@bmchostname
     # By default:
     # #*.* @@remote-host:port
 
