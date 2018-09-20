@@ -588,7 +588,7 @@ Test Invalid IPMI Channel Response
     ${channel_number}=  Evaluate  ${channel_count} + 1
 
     # Example of invalid channel:
-    # $ ipmitool -I lanplus -H xx.xx.xx.xx -P 0penBmc lan print 3
+    # $ ipmitool -I lanplus -H xx.xx.xx.xx -P password lan print 3
     # Get Channel Info command failed: Parameter out of range
     # Invalid channel: 3
 
