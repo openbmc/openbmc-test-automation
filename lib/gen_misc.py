@@ -9,6 +9,7 @@ import sys
 import errno
 import os
 import collections
+import json
 try:
     import ConfigParser
 except ImportError:
@@ -486,3 +487,26 @@ def get_child_pids(quiet=1):
         # Split the output buffer by line into a list.  Strip each element of
         # extra spaces and convert each element to an integer.
         return map(int, map(str.strip, filter(None, output.split("\n"))))
+
+
+def json_loads_multiple(buffer):
+    r"""
+    Convert the contents of the buffer to a JSON array, run json.loads() on it
+    and return the result.
+
+    The buffer is expected to contain one or more JSON objects.
+
+    Description of argument(s):
+    buffer                          A string containing several JSON objects.
+    """
+
+    # Any line consisting of just "}", which indicates the end of an object,
+    # should have a comma appended.
+    buffer = re.sub("([\r\n])[\}]([\r\n])", "\\1},\\2", buffer, 1)
+    # Remove the comma from after the final object and place the whole buffer
+    # inside square brackets.
+    buffer = "[" + re.sub(",([\r\n])$", "\\1}", buffer, 1) + "]"
+    if gp.robot_env:
+        return json.loads(buffer, object_pairs_hook=DotDict)
+    else:
+        return json.loads(buffer, object_pairs_hook=collections.OrderedDict)
