@@ -63,6 +63,9 @@ ${BMC_IMAGE_FILE_PATH}          ${EMPTY}
 ${BAD_IMAGES_DIR_PATH}          ${EMPTY}
 ${SKIP_UPDATE_IF_ACTIVE}        false
 
+# Certificate file parameter
+${VALID_CERTIFICATE_FILE_PATH}  ${EMPTY}
+
 # Parameters for doing N-1 and N+1 code updates.
 ${N_MINUS_ONE_IMAGE_FILE_PATH}    ${EMPTY}
 ${N_PLUS_ONE_IMAGE_FILE_PATH}     ${EMPTY}
