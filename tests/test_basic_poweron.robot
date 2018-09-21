@@ -9,6 +9,7 @@ Resource            ../lib/state_manager.robot
 Resource            ../lib/open_power_utils.robot
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/boot_utils.robot
+Resource            ../lib/remote_logging_utils.robot
 
 Test Teardown       FFDC On Test Case Fail
 
@@ -28,6 +29,21 @@ ${STANDBY_REGEX}   Startup finished in
 ${startup_time_threshold}  180
 
 *** Test Cases ***
+
+Test Remote Logging Configuration
+    [Documentation]  Configure remote log server and verify configuration.
+    [Tags]  Test_Remote_Logging_Configuration
+
+    # Dummy IP and port to update /etc/rsyslog.d/server.conf
+    Configure Remote Log Server With Parameters
+    ...  remote_host=10.10.10.10  remote_port=514
+
+    Verify Rsyslog Config On BMC  remote_host=10.10.10.10  remote_port=514
+
+    # Reset to default configuration.
+    Configure Remote Log Server With Parameters
+    ...  remote_host=${EMPTY}  remote_port=0
+
 
 Verify Front And Rear LED At Standby
     [Documentation]  Front and Rear LED should be off at standby.
