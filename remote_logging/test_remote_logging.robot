@@ -339,7 +339,7 @@ Verify Configure Remote Logging Server
 
 
     ${status}=  Run Keyword And Return Status
-    ...  Configure Remote Logging Server  remote_host=${remote_host}  remote_port=${remote_port}
+    ...  Configure Remote Log Server With Parameters  remote_host=${remote_host}  remote_port=${remote_port}
 
     Should Be Equal  ${status}  ${expectation}
     ...  msg=Test result ${status} and expectation ${expectation} do not match.
