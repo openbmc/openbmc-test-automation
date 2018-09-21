@@ -161,7 +161,7 @@ Verify Rsyslog Does Not Log On BMC
     # syslogd[3356]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3356" x-info="http://www.rsyslog.com"] exiting on signal 15.
     # rsyslogd[3364]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3364" x-info="http://www.rsyslog.com"] start
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl -b --no-pager | egrep 'rsyslog' | egrep -Ev '${RSYSLOG_REGEX}'
+    ...  journalctl -b --no-pager | egrep 'rsyslog' | egrep -Ev '${RSYSLOG_REGEX}|${RSYSLOG_RETRY_REGEX}'
     ...  ignore_err=${1}
 
     Should Be Empty  ${bmc_journald}
