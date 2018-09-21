@@ -510,7 +510,8 @@ def create_field_desc_regex(line):
 
 
 def list_to_report(report_list,
-                   to_lower=1):
+                   to_lower=1,
+                   field_delim=None):
     r"""
     Convert a list containing report text lines to a report "object" and
     return it.
@@ -573,12 +574,18 @@ def list_to_report(report_list,
                                     contain spaces.
     to_lower                        Change the resulting key names to lower
                                     case.
+    field_delim                     Indicates that there are field delimiters
+                                    in report_list entries (which should be
+                                    removed).
     """
 
     if len(report_list) <= 1:
         # If we don't have at least a descriptor line and one line of data,
         # return an empty array.
         return []
+
+    if field_delim is not None:
+        report_list = [re.sub("\|", "", line) for line in report_list]
 
     header_line = report_list[0]
     if to_lower:
