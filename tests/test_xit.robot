@@ -11,6 +11,7 @@ Test Teardown   FFDC On Test Case Fail
 
 Verify Field Mode Is Disable
     [Documentation]  Disable software manager field mode.
+    [Tags]  Verify_Field_Mode_Is_Disable
 
     # Field mode is enabled before running CT.
     # It is to ensure that the setting is not changed during CT
