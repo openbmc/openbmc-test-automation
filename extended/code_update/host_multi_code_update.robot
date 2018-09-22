@@ -23,10 +23,10 @@ ${N_PLUS_ONE_IMAGE_FILE_PATH}   ${EMPTY}
 
 *** Test Cases ***
 
-Host_Multi Code Update
+Host Multi Code Update
     [Documentation]  Do four code updates in a row. Update to N, N-1, N, and
     ...              then N+1.
-    [Tags]  Host_Mult_Code_Update
+    [Tags]  Host_Multi_Code_Update
     [Template]  Code Update And Power On Host
 
     # Image File Path
