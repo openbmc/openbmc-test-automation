@@ -8,6 +8,7 @@
 -e Host_Code_Update
 -e BMC_Update_Recoverable_Error
 -e Host_Update_Recoverable_Error
+-e BMC_Multi_Code_Update
 -e Host_Multi_Code_Update
 -e Enable_Field_Mode
 -e Attempt_To_Disable_Field_Mode_Via_REST
