@@ -6,7 +6,10 @@ bmc_execute_command.
 """
 
 import sys
-import exceptions
+try:
+    import exceptions
+except ImportError:
+    import builtins as exception
 import re
 import gen_print as gp
 import gen_valid as gv
