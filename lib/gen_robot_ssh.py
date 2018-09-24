@@ -9,7 +9,10 @@ import sys
 import re
 import socket
 import paramiko
-import exceptions
+try:
+    import exceptions
+except ImportError:
+    import builtins as exception
 
 import gen_print as gp
 import func_timer as ft
