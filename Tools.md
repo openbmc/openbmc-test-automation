@@ -139,3 +139,24 @@ To install hdparm on Ubuntu:
 sudo apt-get update
 sudo apt-get install hdparm
 ```
+
+## OpenSSL tool:
+OpenSSL is an open-source command line tool that is commonly used to generate certificates and private keys, create CSRs and identify certificate information.
+
+To generate a self-signed certificate with a private key:
+
+```
+openssl req -x509 -sha256 -newkey rsa:2048 -nodes -days <number of days a certificate is valid for> -keyout <certificate filename> -out <certificate filename> -subj "/O=<Organization Name>/CN=<Common Name>"
+```
+
+_Example:_
+```
+openssl req -x509 -sha256 -newkey rsa:2048 -nodes -days 365 -keyout certificate.pem -out certificate.pem -subj "/O=XYZ Corporation /CN=www.xyz.com"
+```
+
+To view installed certificates on a OpenBMC system:
+```
+openssl s_client -connect <BMC_IP>:443 -showcerts
+```
+
+Refer to the [OpenSSL manual](https://www.openssl.org/docs/manmaster/man1/req.html) for more details.
