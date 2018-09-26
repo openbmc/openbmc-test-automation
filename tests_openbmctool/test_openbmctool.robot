@@ -1,9 +1,10 @@
 *** Settings ***
-Documentation               Verify openbmctool.py functionality.
+Documentation     Verify openbmctool.py functionality.
 
-Library                     ../lib/gen_print.py
-Library                     ../lib/gen_robot_print.py
-Library                     ../lib/openbmctool_utils.py
+Library           ../lib/gen_print.py
+Library           ../lib/gen_robot_print.py
+Library           ../lib/openbmctool_utils.py
+Resource          ../lib/resource.txt
 
 *** Variables ***
 
