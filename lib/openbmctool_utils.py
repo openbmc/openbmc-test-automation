@@ -80,9 +80,9 @@ def openbmctool_execute_command(command_string,
     pipeline.insert(1, "tail -n +1 | egrep -v 'Attempting login|User [^ ]+ has"
                     " been logged out'")
 
-    command_string = "set -o pipefail ; python3 openbmctool.py -H " + openbmc_host\
-        + " -U " + openbmc_username + " -P " + openbmc_password + " "\
-        + " | ".join(pipeline)
+    command_string = "set -o pipefail ; python3 $(which openbmctool.py) -H "\
+        + openbmc_host + " -U " + openbmc_username + " -P " + openbmc_password\
+        + " " + " | ".join(pipeline)
 
     return gc.shell_cmd(command_string, *args, **kwargs)
 
