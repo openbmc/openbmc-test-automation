@@ -361,7 +361,10 @@ def shell_cmd(command_string,
     # Assign default values to some of the arguments to this function.
     quiet = int(gm.dft(quiet, gp.get_stack_var('quiet', 0)))
     print_output = int(gm.dft(print_output, not quiet))
-    ignore_err = int(gm.dft(ignore_err, gp.get_stack_var('ignore_err', 1)))
+    show_err = int(show_err)
+    ignore_err = int(gm.dft(ignore_err,
+                            gp.get_stack_var('ignore_err',
+                                             gp.get_var_value(ignore_err, 1))))
 
     err_msg = gv.svalid_value(command_string)
     if err_msg != "":
