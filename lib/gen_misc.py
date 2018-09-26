@@ -77,6 +77,39 @@ def which(file_path):
     return file_path
 
 
+def add_path(new_path,
+             path,
+             position=0):
+    r"""
+    Add new_path to path, provided that path doesn't already contain new_path,
+    and return the result.
+
+    Example:
+    If PATH has a value of "/bin/user:/lib/user".  The following code:
+
+    PATH = add_path("/tmp/new_path", PATH)
+
+    Will change PATH to "/tmp/new_path:/bin/user:/lib/user".
+
+    Description of argument(s):
+    new_path                        The path to be added.  This function will
+                                    strip the trailing slash.
+    path                            The path value to which the new_path
+                                    should be added.
+    position                        The position in path where the new_path
+                                    should be added.  0 means it should be
+                                    added to the beginning, 1 means add it as
+                                    the 2nd item, etc.  sys.maxsize means it
+                                    should be added to the end.
+    """
+
+    paths = list(filter(None, path.split(":")))
+    new_path = new_path.rstrip("/")
+    if new_path not in paths:
+        paths.insert(position, new_path)
+    return ":".join(paths)
+
+
 def dft(value, default):
     r"""
     Return default if value is None.  Otherwise, return value.
