@@ -12,6 +12,7 @@ import gen_misc as gm
 import var_funcs as vf
 from robot.libraries.BuiltIn import BuiltIn
 import re
+import tempfile
 
 
 def openbmctool_execute_command(command_string,
@@ -72,17 +73,18 @@ def openbmctool_execute_command(command_string,
 
     # Break the caller's command up into separate piped commands.  For
     # example, the user may have specified "fru status | head -n 2" which
-    # would be broken into 2 list elements.
-    pipeline = map(str.strip, re.split(r' \| ', str(command_string)))
+    # would be broken into 2 list elements.  We will also break on ">"
+    # (re-direct).
+    pipeline = map(str.strip, re.split(r' ([\|>]) ', str(command_string)))
     # The "tail" command below prevents a "egrep: write error: Broken pipe"
     # error if the user is piping the output to a sub-process.
     # Use "egrep -v" to get rid of editorial output from openbmctool.py.
-    pipeline.insert(1, "tail -n +1 | egrep -v 'Attempting login|User [^ ]+ has"
-                    " been logged out'")
+    pipeline.insert(1, "| tail -n +1 | egrep -v 'Attempting login|User [^ ]+"
+                    " has been logged out'")
 
     command_string = "set -o pipefail ; python3 $(which openbmctool.py) -H "\
         + openbmc_host + " -U " + openbmc_username + " -P " + openbmc_password\
-        + " " + " | ".join(pipeline)
+        + " " + " ".join(pipeline)
 
     return gc.shell_cmd(command_string, *args, **kwargs)
 
@@ -364,3 +366,122 @@ def get_openbmctool_version():
                                              print_output=False,
                                              ignore_err=False)
     return output
+
+
+def service_data_files():
+    r"""
+    Return a complete list of file names that are expected to be created by
+    the collect_service_data command.
+    """
+
+    return\
+        [
+            "inventory.txt",
+            "sensorReadings.txt",
+            "ledStatus.txt",
+            "SELshortlist.txt",
+            "parsedSELs.txt",
+            "bmcFullRaw.txt"
+        ]
+
+
+def collect_service_data(verify=False):
+    r"""
+    Run the collect_service_data command and return a list of files generated
+    by the command.
+
+    Description of argument(s):
+    verify                          If set, verify that all files which can be
+                                    created by collect_service_data did, in
+                                    fact, get created.
+    """
+
+    # Route the output of collect_service_data to a file for easier parsing.
+    temp = tempfile.NamedTemporaryFile()
+    temp_file_path = temp.name
+    openbmctool_execute_command("collect_service_data > " + temp_file_path,
+                                ignore_err=False)
+    # Isolate the file paths in the collect_service_data output.  We're
+    # looking for output lines like this from which to extract the file paths:
+    # Inventory collected and stored in /tmp/dummy--2018-09-26_17.59.18/inventory.txt
+    rc, file_paths = gc.shell_cmd("egrep 'collected and' " + temp_file_path
+                                  # + " | sed -re 's#.*/tmp#/tmp#g'",
+                                  + " | sed -re 's#[^/]*/#/#'",
+                                  quiet=1, print_output=0)
+    # Example file_paths value:
+    # /tmp/dummy--2018-09-26_17.59.18/inventory.txt
+    # /tmp/dummy--2018-09-26_17.59.18/sensorReadings.txt
+    # etc.
+    # Convert from output to list.
+    collect_service_data_file_paths =\
+        list(filter(None, file_paths.split("\n")))
+    if int(verify):
+        # Create a list of files by stripping the dir names from the elements
+        # of collect_service_data_file_paths.
+        files_obtained = [re.sub(r".*/", "", file_path)
+                          for file_path in collect_service_data_file_paths]
+        files_expected = service_data_files()
+        files_missing = list(set(files_expected) - set(files_obtained))
+        if len(files_missing) > 0:
+            gp.printn("collect_service_data output:\n"
+                      + gm.file_to_str(temp_file_path))
+            err_msg = "The following files are missing from the list of files"
+            err_msg += " returned by collect_service_data:\n"
+            err_msg += gp.sprint_var(files_missing)
+            err_msg += gp.sprint_var(collect_service_data_file_paths)
+            BuiltIn().fail(gp.sprint_error(err_msg))
+
+    return collect_service_data_file_paths
+
+
+def health_check_fields():
+    r"""
+    Return a complete list of field names returned by the health_check command.
+    """
+
+    return\
+        [
+            "hardware_status",
+            "performance"
+        ]
+
+
+def get_health_check(verify=False):
+    r"""
+    Get the health_check information and return as a dictionary.
+
+    Example robot code:
+
+    ${health_check}=  Get Health Check
+    Rpvars  1  health_check
+
+    Example result:
+
+    health_check:
+      [hardware_status]:         OK
+      [performance]:             OK
+
+    Description of argument(s):
+    verify                          If set, verify that all all expected
+                                    field_names are generated by the
+                                    health_check command.
+    """
+
+    rc, output = openbmctool_execute_command("health_check",
+                                             print_output=False,
+                                             ignore_err=False)
+    health_check = vf.key_value_outbuf_to_dict(output, delim=":")
+    if int(verify):
+        # Create a list of files by stripping the dir names from the elements
+        # of collect_service_data_file_paths.
+        fields_obtained = health_check.keys()
+        fields_expected = health_check_fields()
+        fields_missing = list(set(fields_expected) - set(fields_obtained))
+        if len(fields_missing) > 0:
+            err_msg = "The following fields are missing from the output of"
+            err_msg += " health_check:\n"
+            err_msg += gp.sprint_var(fields_missing)
+            err_msg += gp.sprint_var(health_check)
+            BuiltIn().fail(gp.sprint_error(err_msg))
+
+    return health_check
