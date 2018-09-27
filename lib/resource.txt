@@ -79,6 +79,17 @@ ${LAST_KNOWN_GOOD_VERSION}  ${EMPTY}
 # By default field mode is disabled.
 ${FIELD_MODE}               ${False}
 
+# LDAP related variables.
+${LDAP_BASE_DN}             ${EMPTY}
+${LDAP_BIND_DN}             ${EMPTY}
+${LDAP_SERVER_URI}          ${EMPTY}
+${LDAP_SECURELDAP}          ${EMPTY}
+${LDAP_BIND_DN_PASSWORD}    ${EMPTY}
+${LDAP_SEARCH_SCOPE}        ${EMPTY}
+${LDAP_TYPE}                ${EMPTY}
+${LDAP_USER}                ${EMPTY}
+${LDAP_USER_PASSWORD}       ${EMPTY}
+
 *** Keywords ***
 Get Inventory Schema
     [Documentation]  Get inventory schema.
