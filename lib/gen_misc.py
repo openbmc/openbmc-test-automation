@@ -303,8 +303,20 @@ def file_to_list(file_path,
         if trim:
             line = line.strip()
         lines.append(line)
+    file.close()
 
     return lines
+
+
+def file_to_str(*args, **kwargs):
+    r"""
+    Return the contents of a file as a string.
+
+    Description of arguments:
+    See file_to_list defined above for description of arguments.
+    """
+
+    return '\n'.join(file_to_list(*args, **kwargs))
 
 
 def return_path_list():
