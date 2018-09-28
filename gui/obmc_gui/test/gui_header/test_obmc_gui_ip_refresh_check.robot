@@ -40,7 +40,6 @@ Verify Refresh Button
     Click Element  ${xpath_select_refresh_button}
     Wait Until Page Contains  Running
 
-
 Verify Date Last Refreshed
     [Documentation]  Verify Date Last Refreshed text in GUI header.
     [Tags]  Verify_Date_Last_Refreshed
@@ -48,7 +47,10 @@ Verify Date Last Refreshed
     ${date_info_1st_read}=  Get Text  ${xpath_select_date_text}
     ${current_date}=  Get Time
     ${date_conversion}=  Convert Date  ${current_date}  result_format=%b %d %Y
-    Should Contain  ${date_info_1st_read}  ${date_conversion}
+
+    ${mmmdd}  ${yyyy}=  Split String From Right  ${date_conversion}  ${SPACE}  1
+    Should Contain  ${date_info_1st_read}  ${mmmdd}  msg=Month and day mismatch.
+    Should Contain  ${date_info_1st_read}  ${yyyy}  msg=Year mismatch.
 
     # Refresh button pressed.
     Click Element  ${xpath_select_refresh_button}
@@ -57,12 +59,14 @@ Verify Date Last Refreshed
     ${date_info_2nd_read}=  Get Text  ${xpath_select_date_text}
     ${current_date}=  Get Time
     ${date_conversion}=  Convert Date  ${current_date}  result_format=%b %d %Y
-    Should Contain  ${date_info_2nd_read}  ${date_conversion}
+
+    ${mmmdd}  ${yyyy}=  Split String From Right  ${date_conversion}  ${SPACE}  1
+    Should Contain  ${date_info_1st_read}  ${mmmdd}  msg=Month and day mismatch.
+    Should Contain  ${date_info_1st_read}  ${yyyy}  msg=Year mismatch.
 
     # Comparison between 1st and 2nd read.
     Should Not Be Equal As Strings  ${date_info_1st_read}
     ...  ${date_info_2nd_read}
-
 
 Verify GUI Header Scrolls
     [Documentation]  Verify GUI header scrolls on click "Server Info" element.
