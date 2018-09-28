@@ -35,7 +35,7 @@ Configure Remote Log Server With Parameters
     # TODO: From Dev to do bump up restart service time and bulk address and
     # port update API.
     # Reference: https://github.com/ibm-openbmc/dev/issues/59
-    Sleep  10s
+    Sleep  20s
 
     ${remote_port}=  Convert To Integer  ${remote_port}
     ${port_dict}=  Create Dictionary  data=${remote_port}
@@ -45,7 +45,7 @@ Configure Remote Log Server With Parameters
     # TODO: From Dev to do bump up restart service time and bulk address and
     # port update API.
     # Reference: https://github.com/ibm-openbmc/dev/issues/59
-    Sleep  10s
+    Sleep  20s
 
 
 Configure Remote Log Server
