@@ -72,6 +72,28 @@ save_stack = vs.var_stack('save_stack')
 main_func_parm_list = ['boot_stack', 'stack_mode', 'quiet']
 
 
+def dump_ffdc_rc():
+    r"""
+    Return the constant dump ffdc test return code value.
+
+    When a plug-in call point program returns this value, it indicates that
+    this program should collect FFDC.
+    """
+
+    return 0x00000200
+
+
+def stop_test_rc():
+    r"""
+    Return the constant stop test return code value.
+
+    When a plug-in call point program returns this value, it indicates that
+    this program should stop running.
+    """
+
+    return 0x00000200
+
+
 def process_host(host,
                  host_var_name=""):
     r"""
@@ -126,8 +148,8 @@ def process_pgm_parms():
     parm_list = BuiltIn().get_variable_value("${parm_list}")
     # The following subset of parms should be processed as integers.
     int_list = ['max_num_tests', 'boot_pass', 'boot_fail', 'ffdc_only',
-                'boot_fail_threshold', 'delete_errlogs', 'quiet', 'test_mode',
-                'debug']
+                'boot_fail_threshold', 'delete_errlogs',
+                'call_post_stack_plug', 'quiet', 'test_mode', 'debug']
     for parm in parm_list:
         if parm in int_list:
             sub_cmd = "int(BuiltIn().get_variable_value(\"${" + parm +\
@@ -847,9 +869,9 @@ def test_loop_body():
 
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
-        call_point='ffdc_check', shell_rc=0x00000200,
+        call_point='ffdc_check', shell_rc=dump_ffdc_rc(),
         stop_on_plug_in_failure=1, stop_on_non_zero_rc=1)
-    if boot_status != "PASS" or ffdc_check == "All" or shell_rc == 0x00000200:
+    if boot_status != "PASS" or ffdc_check == "All" or shell_rc == dump_ffdc_rc():
         status, ret_values = grk.run_key_u("my_ffdc", ignore=1)
         if status != 'PASS':
             gp.qprint_error("Call to my_ffdc failed.\n")
@@ -863,8 +885,8 @@ def test_loop_body():
 
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
-        call_point='stop_check', shell_rc=0x00000200, stop_on_non_zero_rc=1)
-    if shell_rc == 0x00000200:
+        call_point='stop_check', shell_rc=stop_test_rc(), stop_on_non_zero_rc=1)
+    if shell_rc == stop_test_rc():
         message = "Stopping as requested by user.\n"
         gp.print_time(message)
         BuiltIn().fail(message)
@@ -926,6 +948,44 @@ def test_teardown():
     grp.rqprint_pgm_footer()
 
 
+def post_stack():
+    r"""
+    Process post_stack plug-in programs.
+    """
+
+    if not call_post_stack_plug:
+        # The caller does not wish to have post_stack plug-in processing done.
+        return
+
+    global boot_success
+
+    # NOTE: A post_stack call-point failure is NOT counted as a boot failure.
+    pre_boot_plug_in_setup()
+    # For the purposes of the following plug-ins, mark the "boot" as a success.
+    boot_success = 1
+    plug_in_setup()
+    rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
+        call_point='post_stack', stop_on_plug_in_failure=0)
+
+    plug_in_setup()
+    if rc == 0:
+        rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
+            call_point='ffdc_check', shell_rc=dump_ffdc_rc(),
+            stop_on_plug_in_failure=1, stop_on_non_zero_rc=1)
+    if rc != 0 or shell_rc == dump_ffdc_rc():
+        status, ret_values = grk.run_key_u("my_ffdc", ignore=1)
+        if status != 'PASS':
+            gp.qprint_error("Call to my_ffdc failed.\n")
+
+    plug_in_setup()
+    rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
+        call_point='stop_check', shell_rc=stop_test_rc(), stop_on_non_zero_rc=1)
+    if shell_rc == stop_test_rc():
+        message = "Stopping as requested by user.\n"
+        gp.print_time(message)
+        BuiltIn().fail(message)
+
+
 def obmc_boot_test_py(loc_boot_stack=None,
                       loc_stack_mode=None,
                       loc_quiet=None):
@@ -980,6 +1040,8 @@ def obmc_boot_test_py(loc_boot_stack=None,
         test_loop_body()
 
     gp.qprint_timen("Finished processing stack.")
+
+    post_stack()
 
     # Process caller's boot_list.
     if len(boot_list) > 0:
