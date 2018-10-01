@@ -126,8 +126,8 @@ def process_pgm_parms():
     parm_list = BuiltIn().get_variable_value("${parm_list}")
     # The following subset of parms should be processed as integers.
     int_list = ['max_num_tests', 'boot_pass', 'boot_fail', 'ffdc_only',
-                'boot_fail_threshold', 'delete_errlogs', 'quiet', 'test_mode',
-                'debug']
+                'boot_fail_threshold', 'delete_errlogs',
+                'call_post_stack_plug', 'quiet', 'test_mode', 'debug']
     for parm in parm_list:
         if parm in int_list:
             sub_cmd = "int(BuiltIn().get_variable_value(\"${" + parm +\
@@ -926,6 +926,41 @@ def test_teardown():
     grp.rqprint_pgm_footer()
 
 
+def post_stack():
+
+    if not call_post_stack_plug:
+        # The caller does not wish to have post_stack plug-in processing done.
+        return
+
+    global boot_success
+
+    # NOTE: A post_stack call-point failure is NOT counted as a boot failure.
+    pre_boot_plug_in_setup()
+    # For the purposes of the following plug-ins, mark the "boot" as a success.
+    boot_success = 1
+    plug_in_setup()
+    rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
+        call_point='post_stack', stop_on_plug_in_failure=0)
+
+    plug_in_setup()
+    if rc == 0:
+        rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
+            call_point='ffdc_check', shell_rc=0x00000200,
+            stop_on_plug_in_failure=1, stop_on_non_zero_rc=1)
+    if rc != 0 or shell_rc == 0x00000200:
+        status, ret_values = grk.run_key_u("my_ffdc", ignore=1)
+        if status != 'PASS':
+            gp.qprint_error("Call to my_ffdc failed.\n")
+
+    plug_in_setup()
+    rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
+        call_point='stop_check', shell_rc=0x00000200, stop_on_non_zero_rc=1)
+    if shell_rc == 0x00000200:
+        message = "Stopping as requested by user.\n"
+        gp.print_time(message)
+        BuiltIn().fail(message)
+
+
 def obmc_boot_test_py(loc_boot_stack=None,
                       loc_stack_mode=None,
                       loc_quiet=None):
@@ -980,6 +1015,8 @@ def obmc_boot_test_py(loc_boot_stack=None,
         test_loop_body()
 
     gp.qprint_timen("Finished processing stack.")
+
+    post_stack()
 
     # Process caller's boot_list.
     if len(boot_list) > 0:
