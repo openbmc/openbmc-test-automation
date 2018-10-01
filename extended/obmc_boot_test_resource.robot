@@ -19,7 +19,8 @@ Library   Collections
 ...  plug_in_dir_paths  status_file_path  openbmc_model  boot_pass  boot_fail
 ...  ffdc_dir_path_style  ffdc_check  ffdc_only  ffdc_function_list
 ...  state_change_timeout  power_on_timeout  power_off_timeout
-...  boot_fail_threshold  delete_errlogs  test_mode  quiet  debug
+...  boot_fail_threshold  delete_errlogs  call_post_stack_plug  test_mode
+...  quiet  debug
 
 # Initialize each program parameter.
 ${openbmc_host}             ${EMPTY}
@@ -58,6 +59,8 @@ ${power_off_timeout}        2 mins
 # returns non-zero.
 ${boot_fail_threshold}      ${0}
 ${delete_errlogs}           ${0}
+# This variable indicates whether post_stack plug-in processing should be done.
+${call_post_stack_plug}     ${1}
 ${test_mode}                0
 ${quiet}                    0
 ${debug}                    0
