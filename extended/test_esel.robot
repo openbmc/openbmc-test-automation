@@ -6,8 +6,8 @@ Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/utils.robot
 Variables           ../data/variables.py
-Resource            ../lib/utils.robot
 Resource            ../lib/boot_utils.robot
+Resource            ../lib/esel_utils.robot
 
 Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
@@ -19,14 +19,6 @@ Force Tags  eSEL_Logging
 *** Variables ***
 
 ${stack_mode}       skip
-${RESERVE_ID}       raw 0x0a 0x42
-${RAW_PREFIX}       raw 0x3a 0xf0 0x
-
-${RAW_SUFFIX}       0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x00
-...  0xdf 0x00 0x00 0x00 0x00 0x20 0x00 0x04 0x12 0x35 0x6f 0xaa 0x00 0x00
-
-${RAW_SEL_COMMIT}   raw 0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20
-...  0x00 0x04 0x12 0xA6 0x6f 0x02 0x00 0x01
 
 ${LOGGING_SERVICE}  xyz.openbmc_project.Logging.service
 
@@ -118,10 +110,10 @@ Check eSEL AdditionalData
     Should Not Be Empty  ${jsondata["data"]["AdditionalData"]}
 
 Test Wrong Reservation_ID
-    [Documentation]   This testcase is to test BMC can handle multi-requestor's
-    ...               oem partial add command with incorrect reservation id.
-    ...               It simulates sending partial add command with fake content
-    ...                and wrong Reservation ID. This command will be rejected.
+    [Documentation]  This testcase is to test BMC can handle multi-requestor's
+    ...              oem partial add command with incorrect reservation id.
+    ...              It simulates sending partial add command with fake content
+    ...              and wrong Reservation ID. This command will be rejected.
     [Tags]  Test_Wrong_Reservation_ID
 
     ${rev_id_1}=   Run Inband IPMI Raw Command  0x0a 0x42
@@ -133,10 +125,10 @@ Test Wrong Reservation_ID
     Should Contain   ${output}   Reservation cancelled
 
 Test Correct Reservation_ID
-    [Documentation]   This testcase is to test BMC can handle multi-requestor's
-    ...               oem partial add command with correct reservation id. It
-    ...                simulates sending partial add command with fake content
-    ...               and correct Reservation ID. This command will be accepted.
+    [Documentation]  This testcase is to test BMC can handle multi-requestor's
+    ...              oem partial add command with correct reservation id. It
+    ...              simulates sending partial add command with fake content
+    ...              and correct Reservation ID. This command will be accepted.
     [Tags]  Test_Correct_Reservation_ID
 
     Run Inband IPMI Raw Command  0x0a 0x42
@@ -147,44 +139,9 @@ Test Correct Reservation_ID
     ...  0x3a 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
     Should Be Empty    ${output}
 
+
 *** Keywords ***
 
-Create eSEL
-    [Documentation]  Create an eSEL.
-    Open Connection And Log In
-    ${Resv_id}=  Run Inband IPMI Standard Command  ${RESERVE_ID}
-    ${cmd}=  Catenate
-    ...  ${RAW_PREFIX}${Resv_id.strip().rsplit(' ', 1)[0]}  ${RAW_SUFFIX}
-    Run Inband IPMI Standard Command  ${cmd}
-    Run Inband IPMI Standard Command  ${RAW_SEL_COMMIT}
-
-Count eSEL Entries
-    [Documentation]  Count eSEL entries logged.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${jsondata}=  To JSON  ${resp.content}
-    ${count}=  Get Length  ${jsondata["data"]}
-    [Return]  ${count}
-
-Verify eSEL Entries
-    [Documentation]  Verify eSEL entries logged.
-    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
-    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
-    #  "data": {
-    #       "AdditionalData": [
-    #           "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
-    #          ],
-    #       "Id": 1,
-    #       "Message": "org.open_power.Host.Error.Event",
-    #       "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
-    #       "Timestamp": 1485904869061
-    # }
-    ${entry_id}=  Read Attribute  ${elog_entry[0]}  message
-    Should Be Equal  ${entry_id}
-    ...  org.open_power.Host.Error.Event
-    ${entry_id}=  Read Attribute  ${elog_entry[0]}  Severity
-    Should Be Equal  ${entry_id}
-    ...  xyz.openbmc_project.Logging.Entry.Level.Error
 
 Suite Teardown Execution
     [Documentation]  Cleanup test logs and connection.
