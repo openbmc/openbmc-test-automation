@@ -12,6 +12,7 @@ Suite Teardown    Run Keyword And Ignore Error  Check BMC Performance
 
 *** Variables ***
 
+
 *** Test Cases ***
 
 REST Login Session To BMC
@@ -355,6 +356,12 @@ Verify All REST Objects Are Accessible
     [Tags]           Verify_All_REST_Objects_Are_Accessible
 
     ${uri_list}=  Get Sub URI List  ${OPENBMC_BASE_URI}
+
+    # URI's which won't support GET request.
+    Remove Values From List  ${uri_list}
+    ...  /xyz/openbmc_project/certs/client/ldap
+    ...  /xyz/openbmc_project/certs/server/https
+
     ${error_uri_list}=  Create List
     :FOR  ${uri}  IN  @{uri_list}
     \  ${resp}=  Openbmc Get Request  ${uri}  quiet=${1}
