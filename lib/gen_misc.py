@@ -10,6 +10,7 @@ import errno
 import os
 import collections
 import json
+import time
 try:
     import ConfigParser
 except ImportError:
@@ -556,3 +557,14 @@ def json_loads_multiple(buffer):
         return json.loads(buffer, object_pairs_hook=DotDict)
     else:
         return json.loads(buffer, object_pairs_hook=collections.OrderedDict)
+
+
+def file_date_stamp():
+    r"""
+    Return a date/time stamp in the following format: yymmdd.HHMMSS
+
+    This value is suitable for including in file names.  Example
+    file1.181001.171716.status
+    """
+
+    return time.strftime("%y%m%d.%H%M%S", time.localtime(time.time()))
