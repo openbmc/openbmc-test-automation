@@ -1,0 +1,9 @@
+Code-Review+1: Steven Sombar <ssombar@us.ibm.com>
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+2: George Keishing <gkeishin@in.ibm.com>
+Submitted-by: George Keishing <gkeishin@in.ibm.com>
+Submitted-at: Mon, 01 Oct 2018 20:11:46 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/13332
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
