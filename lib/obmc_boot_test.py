@@ -981,6 +981,23 @@ def obmc_boot_test_py(loc_boot_stack=None,
 
     gp.qprint_timen("Finished processing stack.")
 
+    # NOTE: A post_stack call-point failure is NOT counted as a boot failure.
+    pre_boot_plug_in_setup()
+    # For the purposes of the following plug-ins, the "boot" was a success.
+    boot_success = 1
+    plug_in_setup()
+    rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
+        call_point='post_stack', stop_on_plug_in_failure=0)
+    if rc != 0:
+        grk.run_key_u("my_ffdc")
+    plug_in_setup()
+    rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
+        call_point='stop_check', shell_rc=0x00000200, stop_on_non_zero_rc=1)
+    if shell_rc == 0x00000200:
+        message = "Stopping as requested by user.\n"
+        gp.print_time(message)
+        BuiltIn().fail(message)
+
     # Process caller's boot_list.
     if len(boot_list) > 0:
         for ix in range(1, max_num_tests + 1):
