@@ -9,10 +9,7 @@ import sys
 import re
 import socket
 import paramiko
-try:
-    import exceptions
-except ImportError:
-    import builtins as exception
+import exceptions
 
 import gen_print as gp
 import func_timer as ft
@@ -302,6 +299,9 @@ def execute_ssh_command(cmd_buf,
                 and re.match(r"SSH session not active", str(except_value))) or\
                (except_type is socket.error
                 and re.match(r"\[Errno 104\] Connection reset by peer",
+                             str(except_value))) or\
+               (except_type is paramiko.ssh_exception.SSHException
+                and re.match(r"Timeout opening channel\.",
                              str(except_value))):
                 # Close and re-open a connection.
                 # Note: close_connection() doesn't appear to get rid of the
