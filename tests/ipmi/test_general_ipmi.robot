@@ -107,6 +107,20 @@ Verify Disabling And Enabling IPMI Via Host
     Should Contain  ${lan_print_output}  ${openbmc_ip}
 
 
+Verify IPMI Disable Persistency After BMC Reboot
+    [Documentation]  Verify IPMI disable persistency after BMC reboot.
+    [Tags]  Verify_IPMI_Disable_Persistency_After_BMC_Reboot
+    [Teardown]  Run Inband IPMI Standard Command  lan set 1 access on
+
+    # Disable IPMI and reboot BMC
+    Run Inband IPMI Standard Command  lan set 1 access off
+    OBMC Reboot (off)
+
+    # Verify that IPMI remains disable after rebot
+    Run Keyword and Expect Error  *Unable to establish IPMI*
+    ...  Run External IPMI Standard Command  lan print
+
+
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
     [Tags]  Set_Asset_Tag_With_Valid_String_Length
