@@ -91,7 +91,8 @@ Verify Supported Cipher Via Getciphers
 Verify Disabling And Enabling IPMI Via Host
     [Documentation]  Verify disabling and enabling IPMI via host.
     [Tags]  Verify_Disabling_And_Enabling_IPMI_Via_Host
-    [Teardown]  Run Inband IPMI Standard Command  lan set 1 access on
+    [Teardown]  Run Keywords  FFDC On Test Case Fail
+    ...  AND  Run Inband IPMI Standard Command  lan set 1 access on
 
     # Disable IPMI and verify
     Run Inband IPMI Standard Command  lan set 1 access off
@@ -105,6 +106,21 @@ Verify Disabling And Enabling IPMI Via Host
     ${openbmc_host_name}  ${openbmc_ip}  ${openbmc_short_name}=
     ...  Get Host Name IP  host=${OPENBMC_HOST}  short_name=1
     Should Contain  ${lan_print_output}  ${openbmc_ip}
+
+
+Verify IPMI Disable Persistency After BMC Reboot
+    [Documentation]  Verify IPMI disable persistency after BMC reboot.
+    [Tags]  Verify_IPMI_Disable_Persistency_After_BMC_Reboot
+    [Teardown]  Run Keywords  FFDC On Test Case Fail
+    ...  AND  Run Inband IPMI Standard Command  lan set 1 access on
+
+    # Disable IPMI and reboot BMC.
+    Run Inband IPMI Standard Command  lan set 1 access off
+    OBMC Reboot (run)
+
+    # Verify that IPMI remains disabled after reboot.
+    Run Keyword and Expect Error  *Unable to establish IPMI*
+    ...  Run External IPMI Standard Command  lan print
 
 
 Set Asset Tag With Valid String Length
