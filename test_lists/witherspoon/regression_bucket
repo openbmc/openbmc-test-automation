@@ -10,7 +10,6 @@
 -i Test_IPMI_Warm_Reset
 -i Test_CPU_Core_SDR_Info_At_Power_On
 -i Test_DIMM_SDR_Info_At_Power_On
--i Test_GPU_SDR_Info_At_Power_On
 -i Test_Turbo_Allowed_SDR_Info
 -i Test_Auto_Reboot_SDR_Info
 -i Test_TPM_Enable_SDR_Info
