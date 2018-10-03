@@ -229,6 +229,27 @@ Verify Host Update When Host Reboot During Activation In Progress
     Verify Running Host Image  ${ALTERNATE_IMAGE_FILE_PATH}
 
 
+Verify IPMI Disable Policy Post Host Code Update
+    [Documentation]  Disable IPMI and update PNOR and verify post update.
+    [Tags]  Verify_IPMI_Disable_Policy_Post_Host_Code_Update
+    [Setup]  Code Update Setup
+
+    REST Power On
+
+    Run Inband IPMI Standard Command  lan set 1 access off
+    Run Keyword and Expect Error  *Unable to establish IPMI*
+    ...  Run External IPMI Standard Command  lan print
+
+    Upload And Activate Image  ${IMAGE_FILE_PATH}
+    ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
+
+    OBMC Reboot (off)
+    Verify Running Host Image  ${IMAGE_FILE_PATH}
+
+    Run Keyword and Expect Error  *Unable to establish IPMI*
+    ...  Run External IPMI Standard Command  lan print
+
+
 *** Keywords ***
 
 Temporarily Set PNOR Attribute
