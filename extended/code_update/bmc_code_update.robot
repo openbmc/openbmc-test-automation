@@ -176,6 +176,27 @@ Delete All Non Running BMC Images
     ...  version_type=${VERSION_PURPOSE_BMC}
     Should Not Contain  ${software_ids}  ${version_id}
 
+
+Verify IPMI Disable Policy Post BMC Code Update
+    [Documentation]  Disable IPMI, update BMC and verify post-update.
+    [Tags]  Verify_IPMI_Disable_Policy_Post_BMC_Code_Update
+    [Setup]  Code Update Setup
+
+    REST Power On
+
+    Run Inband IPMI Standard Command  lan set 1 access off
+    Run Keyword and Expect Error  *Unable to establish IPMI*
+    ...  Run External IPMI Standard Command  lan print
+
+    Upload And Activate Image  ${IMAGE_FILE_PATH}
+    ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
+    OBMC Reboot (off)
+    Verify Running BMC Image  ${IMAGE_FILE_PATH}
+
+    Run Keyword and Expect Error  *Unable to establish IPMI*
+    ...  Run External IPMI Standard Command  lan print
+
+
 Test Basic BMC Performance After Code Update
     [Documentation]  Check performance of memory, CPU & file system of BMC.
     [Tags]  Test_Basic_BMC_Performance_After_Code_Update
