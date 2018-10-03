@@ -519,7 +519,7 @@ Convert eSEL To Elog Format
     [Arguments]  ${esel_file_path}
     # Description of arguments:
     # esel_file_path  Absolute path of the eSEL data (e.g.
-    #                 /tmp/w55.170404.154820.esel).
+    #                 /tmp/xx.xx.xx.xx.170404.154820.esel).
 
     # Note: The only way to get eSEL.pl to put the output in a particular
     # directory is to cd to that directory.
