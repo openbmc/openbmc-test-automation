@@ -10,6 +10,7 @@ import bmc_ssh_utils as bsu
 import var_funcs as vf
 from robot.libraries.BuiltIn import BuiltIn
 from robot.libraries import DateTime
+import json
 try:
     from robot.utils import DotDict
 except ImportError:
@@ -287,3 +288,14 @@ def get_os_ethtool(interface_name):
     result = vf.key_value_outbuf_to_dict(stdout, process_indent=1, strip=" \t")
 
     return result
+
+
+def to_json_ordered(json_str):
+    r"""
+    Parse the JSON string data and return an ordered JSON dictionary object.
+
+    Description of argument(s):
+    json_str                        The string containing the JSON data.
+    """
+
+    return json.loads(json_str, object_pairs_hook=DotDict)
