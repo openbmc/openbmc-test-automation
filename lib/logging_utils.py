@@ -12,6 +12,9 @@ base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) + os.sep
 sys.path.append(base_path + "data/")
 import variables as var
+from robot.libraries.BuiltIn import BuiltIn
+import gen_robot_utils as gru
+gru.my_import_resource("logging_utils.robot")
 
 
 def print_error_logs(error_logs, key_list=None):
@@ -70,3 +73,44 @@ def print_error_logs(error_logs, key_list=None):
         key_list.insert(0, var.BMC_LOGGING_ENTRY + ".*")
 
     gp.print_var(error_logs, hex=1, key_list=key_list)
+
+
+def get_esels(error_logs=None):
+    r"""
+    Get all available esels and return as a list.
+
+    Example robot code:
+    ${esels}=  Get Esels
+    Rprint Vars  esels
+
+    Example output (excerpt):
+    esels:
+      esels[0]:                  ESEL=00 00 df 00 00...
+      esels[1]:                  ESEL=00 00 df 00 00...
+
+    Description of argument(s):
+    error_logs                      The error_log data, which can be obtained
+                                    from 'Get Error Logs'.  If this value is
+                                    None, then this function will call 'Get
+                                    Error Logs' on the caller's behalf.
+    """
+
+    if error_logs is None:
+        error_logs = BuiltIn().run_keyword('Get Error Logs')
+
+    # Look for any error log entries containing AdditionalData field which in
+    # turn contains "ESEL=".  Here is an excerpt of the error_logs that
+    # contains such an entry.
+    # error_logs:
+    #   [/xyz/openbmc_project/logging/entry/1]:
+    #     [AdditionalData]:
+    #       [AdditionalData][0]:   CALLOUT_INVENTORY_PATH=/xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
+    #       [AdditionalData][1]:   ESEL=00 00 df 00 00 00 00 20 00 04...
+    esels = []
+    for error_log in error_logs.values():
+        if 'AdditionalData' in error_log:
+            for additional_data in error_log['AdditionalData']:
+                if additional_data.startswith('ESEL='):
+                    esels.append(additional_data)
+
+    return esels
