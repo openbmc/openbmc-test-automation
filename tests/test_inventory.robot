@@ -7,6 +7,7 @@ Resource          ../lib/state_manager.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/list_utils.robot
 Resource          ../lib/boot_utils.robot
+Resource          ../lib/fan_utils.robot
 Library           ../lib/utilities.py
 Library            Collections
 
@@ -284,9 +285,20 @@ Verify Fan Properties
     #    "PrettyName": "fan0"
     # },
 
+    # Fan1 is not installed on water-cooled systems.
+    # It will be reported as 'Present' by the fan controller board
+    # because the board handles 4 fans.  But fan1 will not have
+    # a 'Functional' attribute in a water-cooled systems.
+    ${water_cooled}=  Is Water Cooled
+    ${skip_fan_if_water}=  Set Variable  "fan1"
+
     ${system_list}=  Get Endpoint Paths
     ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  fan*
-    Validate FRU Properties Fields  fan  @{system_list}
+
+    :FOR  ${fan_url}  IN  @{system_list}
+    \  ${fan1_present}=  Evaluate  ${skip_fan_if_water} in $fan_url
+    \  Continue For Loop If  ${fan1_present} and ${water_cooled}
+    \  Validate FRU Properties Fields  fan  ${fan_url}
 
 
 Verify Core Functional State
