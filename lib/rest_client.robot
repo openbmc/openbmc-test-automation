@@ -5,6 +5,7 @@ Library           RequestsLibrary.RequestsKeywords
 Library           OperatingSystem
 Resource          resource.txt
 Library           disable_warning_urllib.py
+Library           utils.py
 Resource          rest_response_code.robot
 
 *** Variables ***
@@ -258,7 +259,8 @@ Read Properties
 
     ${resp}=  OpenBMC Get Request  ${uri}  timeout=${timeout}  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${content}=  To Json  ${resp.content}
+    ${content}=  To Json Ordered  ${resp.content}
+
     [Return]  ${content["data"]}
 
 Call Method
