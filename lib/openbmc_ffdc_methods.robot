@@ -11,8 +11,10 @@ Library            OperatingSystem
 Library            Collections
 Library            String
 Library            gen_print.py
+Library            gen_cmd.py
 Library            gen_robot_keyword.py
 Library            dump_utils.py
+Library            logging_utils.py
 
 *** Keywords ***
 
@@ -453,61 +455,44 @@ Collect Dump Log
 
     ${dump_list}=  Get Dictionary Keys  ${data}
 
+
 Collect eSEL Log
-    [Documentation]  Collect eSEL log from logging entry and convert eSEL data
-    ...              to elog formatted string text file.
+    [Documentation]  Create raw and formatted eSEL files.
     [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
+
+    # NOTE: If no eSEL.pl program can be located, then no formatted eSEL file
+    # will be generated.
+
+    # Description of argument(s):
+    # log_prefix_path               The path prefix to be used in creating
+    #                               eSEL file path names.  For example, if
+    #                               log_prefix_path is
+    #                               "/tmp/user1/dummy.181001.120000.", then
+    #                               this keyword will create
+    #                               /tmp/user1/dummy.181001.120000.esel (raw)
+    #                               and
+    #                               /tmp/user1/dummy.181001.120000.esel.txt
+    #                               (formatted).
 
     @{ffdc_file_list}=  Create List
 
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/enumerate  quiet=${1}
-    ${status}=  Run Keyword And Return Status
-    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    Return From Keyword If  '${status}' == '${False}'  ${ffdc_file_list}
-
-    ${content}=  To Json  ${resp.content}
-    # Grab the list of entries from logging/entry/
-    # The data shown below is the result of the "Get Dictionary Keys".
-    # Example:
-    # /xyz/openbmc_project/logging/entry/1
-    # /xyz/openbmc_project/logging/entry/2
-    ${esel_list}=  Get Dictionary Keys  ${content['data']}
+    ${esels}=  Get Esels
+    ${num_esels}=  Evaluate  len(${esels})
+    Rprint Vars  num_esels
+    Return From Keyword If  ${num_esels} == ${0}  ${ffdc_file_list}
 
     ${logpath}=  Catenate  SEPARATOR=  ${log_prefix_path}  esel
     Create File  ${logpath}
-    # Fetch data from /xyz/openbmc_project/logging/entry/1/attr/AdditionalData
-    #  "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
-    # Sample eSEL entry:
-    #  "/xyz/openbmc_project/logging/entry/1": {
-    #    "Timestamp": 1487744317025,
-    #    "AdditionalData": [
-    #        "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
-    #    ],
-    #    "Message": "org.open_power.Error.Host.Event.Event",
-    #    "Id": 1,
-    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Emergency"
-    # }
 
-    :FOR  ${entry_path}  IN  @{esel_list}
-    # Skip reading attribute if entry URI is a callout.
-    # Example: /xyz/openbmc_project/logging/entry/1/callout
-    \  Continue For Loop If  '${entry_path.rsplit('/', 1)[1]}' == 'callout'
-    \  ${esel_data}=  Read Attribute  ${entry_path}  AdditionalData  quiet=${1}
-    \  ${status}=  Run Keyword And Return Status
-    ...  Should Contain Match  ${esel_data}  ESEL*
-    \  Continue For Loop If  ${status} == ${False}
-    \  ${index}=  Get Esel Index  ${esel_data}
-    \  Write Data To File  "${esel_data[${index}]}"  ${logpath}
-    \  Write Data To File  ${\n}  ${logpath}
-
-    ${out}=  Run  which eSEL.pl
-    ${status}=  Run Keyword And Return Status
-    ...  Should Contain  ${out}  eSEL.pl
-    Return From Keyword If  '${status}' == '${False}'  ${ffdc_file_list}
-
-    Convert eSEL To Elog Format  ${logpath}
+    :FOR  ${esel}  IN  @{esels}
+    \  Write Data To File  "${esel}"${\n}  ${logpath}
 
     Append To List  ${ffdc_file_list}  ${logpath}
+
+    ${rc}  ${output}=  Shell Cmd  which eSEL.pl  show_err=0
+    Return From Keyword If  ${rc} != ${0}  ${ffdc_file_list}
+
+    Convert eSEL To Elog Format  ${logpath}
     Append To List  ${ffdc_file_list}  ${logpath}.txt
 
     [Return]  ${ffdc_file_list}
@@ -517,13 +502,17 @@ Convert eSEL To Elog Format
     [Documentation]  Execute parser tool on the eSEL data file to generate
     ...              formatted error log.
     [Arguments]  ${esel_file_path}
-    # Description of arguments:
-    # esel_file_path  Absolute path of the eSEL data (e.g.
-    #                 /tmp/w55.170404.154820.esel).
+
+    # Description of argument(s):
+    # esel_file_path                The path to the file containg raw eSEL
+    #                               data (e.g.
+    #                               "/tmp/user1/dummy.181001.120000.esel").
 
     # Note: The only way to get eSEL.pl to put the output in a particular
     # directory is to cd to that directory.
     ${cmd_buf}=  Catenate  cd $(dirname ${esel_file_path}) ; eSEL.pl -l
     ...  ${esel_file_path} -p decode_obmc_data
+    Qprint Issuing  ${cmd_buf}
     Run  ${cmd_buf}
-
+    # The .binary file, which is generated by eSEL.pl, is of no use to us.
+    Remove File  ${esel_file_path}.binary
