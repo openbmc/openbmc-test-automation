@@ -37,6 +37,7 @@
 -i Verify_Supported_Cipher_List_Via_Lan_Print
 -i Verify_Supported_Cipher_Via_Getciphers
 -i Verify_Disabling_And_Enabling_IPMI_Via_Host
+-i Verify_IPMI_Disable_Persistency_After_BMC_Reboot
 # Device tree.
 -i Check_BMC_Model_Property_Is_Set
 -i Check_BMC_Compatible_Property_Is_Set
