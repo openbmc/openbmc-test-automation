@@ -1,5 +1,5 @@
 # Basic power on test.
--i Verify_Application_Services_Running_At_Standby
+-i Test_Remote_Logging_Configuration
 -i Check_For_Application_Failures
 -i Test_SSH_And_IPMI_Connections
 # IPMI test.
