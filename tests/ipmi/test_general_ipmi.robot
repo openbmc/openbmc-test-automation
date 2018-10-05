@@ -389,7 +389,7 @@ Test Power Reading Via IPMI With Host Off
 
     REST Power Off  stack_mode=skip  quiet=1
 
-    Wait Until Keyword Succeeds  1 min  20 sec  Verify Power Reading
+    Wait Until Keyword Succeeds  1 min  30 sec  Verify Power Reading
 
 
 Test Power Reading Via IPMI With Host Booted
@@ -402,7 +402,7 @@ Test Power Reading Via IPMI With Host Booted
     # For a good power reading take a 3 samples for 15 seconds interval and
     # average it out.
 
-    Wait Until Keyword Succeeds  1 min  20 sec  Verify Power Reading
+    Wait Until Keyword Succeeds  2 min  30 sec  Verify Power Reading
 
 
 Test Power Reading Via IPMI Raw Command
@@ -417,7 +417,7 @@ Test Power Reading Via IPMI Raw Command
 
     REST Power On  stack_mode=skip  quiet=1
 
-    Wait Until Keyword Succeeds  1 min  20 sec  Verify Power Reading Via Raw Command
+    Wait Until Keyword Succeeds  2 min  30 sec  Verify Power Reading Via Raw Command
 
 
 Test Baseboard Temperature Via IPMI
