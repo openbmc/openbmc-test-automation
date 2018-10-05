@@ -83,7 +83,8 @@ ${FIELD_MODE}               ${False}
 ${LDAP_BASE_DN}             ${EMPTY}
 ${LDAP_BIND_DN}             ${EMPTY}
 ${LDAP_SERVER_HOST}         ${EMPTY}
-${LDAP_SECURE_MODE}         ${EMPTY}
+# By default LDAP secure mode is false.
+${LDAP_SECURE_MODE}         ${False}
 ${LDAP_BIND_DN_PASSWORD}    ${EMPTY}
 ${LDAP_SEARCH_SCOPE}        ${EMPTY}
 ${LDAP_TYPE}                ${EMPTY}
