@@ -217,7 +217,7 @@ Test SDR Info
 Suite Setup Execution
     [Documentation]  Do the initial suite setup.
 
-    REST Power On
+    REST Power On  stack_mode=skip
 
     ${uri_list}=  Read Properties  ${OPENBMC_BASE_URI}list
     Set Suite Variable  ${SYSTEM_URI}  ${uri_list}
