@@ -20,3 +20,5 @@
 # NA test case for Witherspoon with nginx support on GA2.
 -e Test_Non_SSL_Connection_To_Port_80
 -e Test_Non_SSL_Connection_To_Port_443
+# MRW changes required for this to work.
+-e Test_GPU_SDR_Info_At_Power_On
