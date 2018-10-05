@@ -46,9 +46,8 @@ Prepare For Update
     [Documentation]   Switch to update mode in progress. This method calls
     ...               the Abort method to remove the pending update if there
     ...               is any before code activation.
-    ${data}=   create dictionary   data=@{EMPTY}
-    ${resp}=    openbmc post request    ${BMC_PREP_METHOD}   data=${data}
-    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
+    ${data}=  Create Dictionary  data=@{EMPTY}
+    ${resp}=  Openbmc Post Request  ${BMC_PREP_METHOD}  data=${data}
 
     # Update method will reset the BMC, adding delay for reboot to
     # come into force.
