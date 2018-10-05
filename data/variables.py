@@ -133,6 +133,9 @@ MANUAL_MODE = TIME_DBUS_BASE + 'Synchronization.Method.Manual'
 # User manager variable.
 BMC_USER_URI = OPENBMC_BASE_URI + 'user/'
 
+# LDAP User manager variable.
+BMC_LDAP_URI = BMC_USER_URI + 'ldap'
+
 # The path on the BMC where signed keys are stored.
 ACTIVATION_DIR_PATH = "/etc/activationdata/"
 
