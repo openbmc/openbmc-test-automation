@@ -63,9 +63,9 @@ Verify REST Logging On BMC Journal When Disabled
     # Takes around 5 seconds for the REST to restart service when policy is changed.
     Sleep  10s
 
-    ${login_footprint}=  Catenate  user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    ${login_footprint}=  Catenate  login json:None 200 OK
     # Example: Just get the message part of the syslog
-    # user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    # user:root POST http://xx.xx.xx.xx/login json:None 200 OK
     ${cmd}=  Catenate  SEPARATOR=  --no-pager | egrep '${login_footprint}'
     ...  | awk -F': ' '{print $2}'
 
@@ -86,13 +86,13 @@ Verify REST Logging On BMC Journal When Enabled
     Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled  data=${log_dict}
     ...  verify=${True}  expected_value=${True}
 
-    # Sep 10 14:34:35 witherspoon phosphor-gevent[1288]: 127.0.0.1 user:root POST http://127.0.0.1:8081/login json:None 200 OK
     Initialize OpenBMC
+    Log Out OpenBMC
 
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
     ...  journalctl --no-pager
 
-    Should Contain  ${bmc_journald}  user:root POST http://127.0.0.1:8081/login json:None 200 OK
+    Should Contain  ${bmc_journald}  login json:None 200 OK
     ...  msg=${bmc_journald} doesn't contains REST entries.
 
 
@@ -152,22 +152,6 @@ Test Remote Logging Invalid Port Config And Verify BMC Journald
     ...  msg=${bmc_journald} doesn't contain rsyslog retry entries.
 
 
-Verify Rsyslog Does Not Log On BMC
-    [Documentation]  Check that rsyslog journald doesn't log on BMC.
-    [Tags]  Verify_Rsyslog_Does_Not_Log_On_BMC
-
-    # Expected filter rsyslog entries.
-    # Example:
-    # syslogd[3356]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3356" x-info="http://www.rsyslog.com"] exiting on signal 15.
-    # rsyslogd[3364]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3364" x-info="http://www.rsyslog.com"] start
-    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl -b --no-pager | egrep 'rsyslog' | egrep -Ev '${RSYSLOG_REGEX}|${RSYSLOG_RETRY_REGEX}'
-    ...  ignore_err=${1}
-
-    Should Be Empty  ${bmc_journald}
-    ...  msg=${bmc_journald} contains unexpected rsyslog entries.
-
-
 Verfiy BMC Journald Synced To Remote Logging Server
     [Documentation]  Check that BMC journald is sync to remote rsyslog.
     [Tags]  Verfiy_BMC_Journald_Synced_To_Remote_Logging_Server
@@ -215,7 +199,7 @@ Verify Journald Post BMC Reset
     # 3. Unique boot to standby message.
     # Startup finished in 9.961s (kernel) + 1min 59.039s (userspace) = 2min 9.000s
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | egrep '${BMC_BOOT_MSG}' | tail -1
+    ...  journalctl -b --no-pager | egrep '${BMC_BOOT_MSG}'
 
     Should Contain  ${remote_journald}
     ...  ${bmc_journald.split('${hostname}')[1]}
@@ -257,6 +241,22 @@ Audit BMC SSH Login And Remote Logging
 
     Should Contain  ${remote_journald}  ${ssh_entry[0]}
     ...  msg=${remote_journald} don't contain ${bmc_journald} entry.
+
+
+Verify Rsyslog Does Not Log On BMC
+    [Documentation]  Check that rsyslog journald doesn't log on BMC.
+    [Tags]  Verify_Rsyslog_Does_Not_Log_On_BMC
+
+    # Expected filter rsyslog entries.
+    # Example:
+    # syslogd[3356]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3356" x-info="http://www.rsyslog.com"] exiting on signal 15.
+    # rsyslogd[3364]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3364" x-info="http://www.rsyslog.com"] start
+    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  journalctl -b --no-pager | egrep 'rsyslog' | egrep -Ev '${RSYSLOG_REGEX}|${RSYSLOG_RETRY_REGEX}'
+    ...  ignore_err=${1}
+
+    Should Be Empty  ${bmc_journald}
+    ...  msg=${bmc_journald} contains unexpected rsyslog entries.
 
 
 Boot Host And Verify Data Is Synced To Remote Server
