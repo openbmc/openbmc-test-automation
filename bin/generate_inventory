@@ -13,7 +13,7 @@ sys.path.insert(0, lib_path)
 from gen_print import *
 
 # This list will be longer when more development codes are available.
-inventory_items = ['fru', 'core', 'fan', 'gpu']
+inventory_items = ['fru', 'core', 'fan', 'fan_wc', 'gpu']
 print_var(inventory_items)
 fru_inventory_file_path = 'inventory.py'
 print_var(fru_inventory_file_path)
@@ -37,7 +37,6 @@ yaml_fru_list = ['Inventory/Item.interface.yaml',
                  'State/Decorator/OperationalStatus.interface.yaml', ]
 
 # yaml file paths for CORE.
-
 yaml_core_list = ['Inventory/Item.interface.yaml',
                   'State/Decorator/OperationalStatus.interface.yaml', ]
 
@@ -45,14 +44,21 @@ yaml_core_list = ['Inventory/Item.interface.yaml',
 yaml_fan_list = ['Inventory/Item.interface.yaml',
                  'Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml',
                  'State/Decorator/OperationalStatus.interface.yaml', ]
+
+# yaml file paths for fan_wc (fans in water-cooled system).
+yaml_fan_wc_list = ['Inventory/Item.interface.yaml',
+                    'Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml', ]
+
 # yaml file paths for GPU.
 yaml_gpu_list = ['Inventory/Item.interface.yaml',
                  'Inventory/Decorator/Replaceable.interface.yaml',
                  'State/Decorator/OperationalStatus.interface.yaml', ]
+
 # Append to master list
 yaml_master_list.append(yaml_fru_list)
 yaml_master_list.append(yaml_core_list)
 yaml_master_list.append(yaml_fan_list)
+yaml_master_list.append(yaml_fan_wc_list)
 yaml_master_list.append(yaml_gpu_list)
 
 print_var(yaml_master_list)
