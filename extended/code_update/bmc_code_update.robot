@@ -14,6 +14,7 @@ Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/dump_utils.robot
 Resource          ../../lib/ipmi_client.robot
+Resource          ../../lib/certificate_utils.robot
 
 Suite Setup       Suite Setup Execution
 
@@ -195,6 +196,30 @@ Verify IPMI Disable Policy Post BMC Code Update
 
     Run Keyword and Expect Error  *Unable to establish IPMI*
     ...  Run External IPMI Standard Command  lan print
+
+
+Test Certificate Persistency After BMC Code Update
+    [Documentation]  Test certificate persistency after BMC update.
+    [Tags]  Test_Certificate_Persistency_After_BMC_Code_Update
+
+    ${cert_file_path}=  Generate Certificate File Via Openssl
+    ...  Valid Certificate Valid Privatekey
+    ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
+
+    Install Certificate File On BMC  ${CLIENT_CERTIFICATE_URI}
+    ...  data=${file_data}
+
+    ${bmc_cert_content}=  Get Client Certificate File Content From BMC
+    Should Contain  ${cert_file_content}  ${bmc_cert_content}
+
+    Upload And Activate Image  ${IMAGE_FILE_PATH}
+    ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
+    OBMC Reboot (off)
+    Verify Running BMC Image  ${IMAGE_FILE_PATH}
+
+    ${bmc_cert_content}=  Get Client Certificate File Content From BMC
+    Should Contain  ${cert_file_content}  ${bmc_cert_content}
 
 
 Test Basic BMC Performance After Code Update
