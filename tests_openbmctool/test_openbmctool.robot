@@ -13,6 +13,7 @@ Documentation    Verify openbmctool.py functionality.
 # sensors list of a single sensor
 # health check
 # service data
+# remote logging
 #
 # It is the responsibility of the user to include openbmctool.py's
 # directory PATH in $PATH.
@@ -48,6 +49,7 @@ Suite Setup             Suite Setup Execution
 
 ${min_number_items}     ${30}
 ${min_number_sensors}   ${15}
+${verify}               ${True}
 
 
 *** Test Cases ***
@@ -79,14 +81,45 @@ Verify Openbmctool Health Check Commands
     [Documentation]  Verify health check command works.
     [Tags]  Verify_Openbmctool_Health_Check_Commands
 
-    Verify Health Check
+    ${health_results}=  Get Health Check  ${verify}
+    Rprint Vars  health_results
 
 
 Verify Openbmctool Service Data Commands
     [Documentation]  Verify collect service data command works.
     [Tags]  Verify_Openbmctool_Service Data Commands
 
-    Verify Collect Service Data
+    ${service_paths}=  Collect Service Data  ${verify}
+    Rprint Vars  service_paths
+
+
+Verify Openbmctool Remote Logging Operations
+    [Documentation]  Verify fru commands work.
+    [Tags]  Verify_Openbmctool_Remote_logging_Operations
+
+    # Settings used for this test, input parameters or defaults.
+    ${test_log_host}=  Get Variable Value  ${LOGGING_HOST}  10.10.10.10
+    ${test_log_port}=  Get Variable Value  ${LOGGING_PORT}  514
+    Rprint Vars  test_log_host  test_log_port
+
+    Verify Logging View
+
+    # Save previous remote logging settings, if any.
+    Save Current Remote Logging Settings
+    # Binary variables addr_was_set and port_was_set are set if there
+    # were any remote logging parameters set on the BMC. Their
+    # values are saved to settings['Address'] and settings['Port'].
+
+    # Enable remote logging and verify.
+    Verify Logging Parameters  ${test_log_host}  ${test_log_port}
+
+    # Disable remote logging and verify.  Disable will clear any
+    # previous settings.
+    Verify Logging Disable  ${test_log_host}
+
+    # Set original parameters back, if any.
+    Run Keyword If  ${addr_was_set} and ${port_was_set}
+    ...  Verify Logging Parameters  ${settings['Address']}  ${settings['Port']}
 
 
 *** Keywords ***
@@ -170,50 +203,83 @@ Verify Sensors List With Single Sensor
     ...  msg=Too many lines reported for list sensor ${sensor}
 
 
-Verify Health Check
-    [Documentation]  Verify health_check operation.
+Verify Logging View
+    [Documentation]  Verify remote_logging view.
 
-    ${rc}  ${health}=  Openbmctool Execute Command  health_check
-    Rprint Vars  health
-    # Sample output:
-    #  Hardware Status: OK
-    #  Performance: OK
-    # Instead of OK could also say Degraded or Critical.
-    Should Contain  ${health}  Hardware Status:
-    ...  msg=No hardware status reported by health_check.
-    Should Contain  ${health}  Performance:
-    ...  msg=No performance reported by health_check.
+    ${rc}  ${logging_status}=  Openbmctool Execute Command
+    ...  logging remote_logging view
+    Should Contain  ${logging_status}  Address
+    ...  msg=Openbmctool 'remote_logging view' returned unexpected result.
 
 
-Verify Collect Service Data
-    [Documentation]  Verify collect_service_data operation.
+Verify Logging Parameters
+    [Documentation]  Verify remote_logging_config.
+    [Arguments]  ${log_host}  ${log_port}
 
-    ${rc}  ${service_data}=  Openbmctool Execute Command  collect_service_data
-    Rprint Vars  service_data
-    # Sample output:
-    # Inventory collected and stored in /tmp/127.0.0.1/inventory.txt
-    # Sensor readings collected and stored in /tmp/127.0.0.1/sensorReadings.txt
-    # System LED status collected and stored in /tmp/127.0.0.1/ledStatus.txt
-    # sel short list collected and stored in /tmp/127.0.0.1/SELshortlist.txt
-    # fully parsed sels collected and stored in /tmp/127.0.0.1/parsedSELs.txt
-    # Attempting to get a full BMC enumeration
-    # RAW BMC data collected and saved into /tmp/127.0.0.1/bmcFullRaw.txt
-    # Collecting bmc dump files
-    # data collection complete
-    Should Contain  ${service_data}  inventory.txt
-    ...  msg=No inventory.txt collected by collect_service_data.
-    Should Contain  ${service_data}  sensorReadings.txt
-    ...  msg=No sensorReadings.txt reported by health_check.
-    Should Contain  ${service_data}  ledStatus.txt
-    ...  msg=No ledStatus.txt reported by health_check.
-    Should Contain  ${service_data}  SELshortlist.txt
-    ...  msg=No SELshortlist.txt reported by health_check.
-    Should Contain  ${service_data}  parsedSELs.txt
-    ...  msg=No parsedSELs.txt reported by health_check.
-    Should Contain  ${service_data}  bmcFullRaw.txt
-    ...  msg=No bmcFullRaw.txt reported by health_check.
-    Should Contain  ${service_data}  data collection complete
-    ...  msg='data collection complete' not reported by health_check.
+    # Description of argument(s):
+    # log_host  The host name or IP address of remote logging server.
+    # log_port  The port number for remote logging on log_host.
+
+    ${rc}  ${result}=  Openbmctool Execute Command
+    ...  logging remote_logging_config -a ${log_host} -p ${log_port}
+    Should Contain  ${result}  OK
+    ...  msg=Openbmctool 'remote_logging config' returned unexpected result.
+
+    ${rc}  ${logging_status}=  Openbmctool Execute Command
+    ...  logging remote_logging view
+    Should Contain  ${logging_status}  ${log_host}
+    ...  msg=Openbmctool 'remote_logging view' should contain ${log_host}.
+
+    ${log_port_string}=  Convert To String  ${log_port}
+    Should Contain  ${logging_status}  ${log_port_string}
+    ...  msg=Openbmctool 'remote_logging view' should contain ${log_port}.
+
+
+Verify Logging Disable
+    [Documentation]  Verify remote_logging disable
+    [Arguments]  ${log_host}
+
+    # Description of argument(s):
+    # log_host  The host name or IP address of remote logging server.
+
+    ${rc}  ${result}=  Openbmctool Execute Command
+    ...  logging remote_logging disable
+    Should Contain  ${result}  OK
+    ...  msg=Openbmctool 'remote_logging disable' returned unexpected result.
+
+    ${rc}  ${logging_status}=  Openbmctool Execute Command
+    ...  logging remote_logging view
+    Should Contain  ${logging_status}  Address
+    ...  msg=Openbmctool 'remote_logging view' returned unexpected result.
+    Should Not Contain  ${logging_status}  ${log_host}
+    ...  msg=Openbmctool 'remote_logging view' contains ${log_host}.
+
+
+Save Current Remote Logging Settings
+    [Documentation]  Save the current remote logging settings, if any.
+
+    # Save the current settings to  settings['Address'] and  settings['Port'].
+    # Set addr_was_set if settings['Address'] was non-blank and non-zero.
+    # Set port_was_set if settings['Port'] was non-blank and non-zero.
+
+    # Get current remote logging settings from the BMC.
+    ${settings}=  Read Properties  ${BMC_LOGGING_URI}config/remote
+    Rprint Vars  settings['Address']  settings['Port']
+
+    Set Suite Variable  ${settings['Address']}
+    Set Suite Variable  ${settings['Port']}
+
+    # Determine if remote logging address was previously set.
+    ${addr_was_set}=  Run Keyword If
+    ...  '${settings['Address']}' != '0' and '${settings['Address']}' != ''
+    ...  Set Variable  True  ELSE  Set Variable  False
+    Set Suite Variable  ${addr_was_set}
+
+    # Determine if remote logging port was previously set.
+    ${port_was_set}=  Run Keyword If
+    ...  '${settings['Port']}' != '0' and '${settings['Port']}' != ''
+    ...  Set Variable  True  ELSE  Set Variable  False
+    Set Suite Variable  ${port_was_set}
 
 
 Check Greater Than Minimum
