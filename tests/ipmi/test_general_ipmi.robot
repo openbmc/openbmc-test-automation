@@ -107,6 +107,26 @@ Verify Disabling And Enabling IPMI Via Host
     Should Contain  ${lan_print_output}  ${openbmc_ip}
 
 
+Verify Disabling IPMI Via OOB IPMI
+    [Documentation]  Verify disabling IPMI via out of band IPMI.
+    [Tags]  Verify_Disabling_IPMI_Via_OOB_IPMI
+    [Teardown]  Run Inband IPMI Standard Command  lan set 1 access on
+
+    # Disable IPMI via OOB IPMI and verify
+    Run Keyword and Expect Error  *IPMI response is NULL*
+    ...  Run IPMI Standard Command  lan set 1 access off
+    Run Keyword and Expect Error  *Unable to establish IPMI*
+    ...  Run External IPMI Standard Command  lan print
+
+    # Enable IPMI via Host and verify
+    Run Inband IPMI Standard Command  lan set 1 access on
+    ${lan_print_output}=  Run External IPMI Standard Command  lan print
+
+    ${openbmc_host_name}  ${openbmc_ip}  ${openbmc_short_name}=
+    ...  Get Host Name IP  host=${OPENBMC_HOST}  short_name=1
+    Should Contain  ${lan_print_output}  ${openbmc_ip}
+
+
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
     [Tags]  Set_Asset_Tag_With_Valid_String_Length
