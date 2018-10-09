@@ -7,6 +7,7 @@ Resource          ../lib/state_manager.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/list_utils.robot
 Resource          ../lib/boot_utils.robot
+Resource          ../lib/fan_utils.robot
 Library           ../lib/utilities.py
 Library            Collections
 
@@ -215,7 +216,7 @@ Verify FRU Properties
 
     ${system_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  *
     ${fru_list}=  Qualified FRU List  @{system_list}
-    Validate FRU Properties Fields  fru  @{fru_list}
+    Validate FRU Properties Fields  fru  EQU  @{fru_list}
 
 
 Verify GPU Properties
@@ -240,7 +241,7 @@ Verify GPU Properties
 
     ${system_list}=  Get Endpoint Paths
     ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  gv*
-    Validate FRU Properties Fields  gpu  @{system_list}
+    Validate FRU Properties Fields  gpu  EQU  @{system_list}
 
 
 Verify Core Properties
@@ -262,7 +263,7 @@ Verify Core Properties
 
     ${system_list}=  Get Endpoint Paths
     ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  core*
-    Validate FRU Properties Fields  core  @{system_list}
+    Validate FRU Properties Fields  core  EQU  @{system_list}
 
 
 Verify Fan Properties
@@ -284,9 +285,18 @@ Verify Fan Properties
     #    "PrettyName": "fan0"
     # },
 
+    ${water_cooled}=  Is Water Cooled
+
     ${system_list}=  Get Endpoint Paths
     ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  fan*
-    Validate FRU Properties Fields  fan  @{system_list}
+
+    Rprintn
+    Rprint Vars  water_cooled  system_list
+
+    Run Keyword If  ${water_cooled}
+    ...  Validate FRU Properties Fields  fan_wc  SUBSET  @{system_list}
+    ...  ELSE
+    ...  Validate FRU Properties Fields  fan  EQU  @{system_list}
 
 
 Verify Core Functional State
@@ -592,29 +602,33 @@ Filter GPU FRU Entries
 
 
 Validate FRU Properties Fields
-    [Documentation]  Compare valid FRUs from system vs expected FRU set.
-    [Arguments]  ${fru_type}  @{fru_list}
+    [Documentation]  Compare valid FRUs from system to expected FRU set.
+    [Arguments]  ${fru_type}  ${comparison_type}  @{fru_list}
 
-    # Description of arguments:
-    # fru_type  FRU type name (e.g. "gpu", "fru", "fan", etc.).
-    # fru_list  List of qualified FRU URLs.
+    # Description of argument(s):
+    # fru_type         FRU type name (e.g. "gpu", "fru", "fan", etc.).
+    # comparison_type  A string indicating the comparison method.
+    #                  "EQU" for equality,  "SUBSET" for subset comparison.
+    # fru_list         List of FRU URLs.
 
-    # Build the pre-defined set list from data/inventory.py derived from
-    # a group of YAML files.
-    # Example:
+    # Get the pre-defined fru_type attributes from the inventory dictionary
+    # for the fru_type.  Example:
     # set(['Version', 'PartNumber', 'SerialNumber', 'FieldReplaceable',
     # 'BuildDate', 'Present', 'Manufacturer', 'PrettyName', 'Cached', 'Model'])
     ${fru_set}=  List To Set  ${inventory_dict['${fru_type}']}
 
-    # Iterate through the FRU's url and compare the set dictionary keys
-    # with the pre-define inventory data.
+    Rprint Vars  fru_set
+
+    # Iterate through the url of the FRU and compare its attributes with
+    # the pre-defined fru_type attributes.
     :FOR  ${fru_url_path}  IN  @{fru_list}
     \  ${fru_field}=  Read Properties  ${fru_url_path}
-    # ------------------------------------------------------------
-    #  ${fru_field.viewkeys()} extracts the list of keys from the
-    #  JSON dictionary as a set.
-    # ------------------------------------------------------------
-    \  Should Be Equal  ${fru_field.viewkeys()}  ${fru_set}
+    \  ${fru_keys}=  List To Set  ${fru_field.viewkeys()}
+    \  Rprint Vars  fru_keys
+    \  Run Keyword If  '${comparison_type}' == 'EQU'
+    ...  Should Be Equal  ${fru_keys}  ${fru_set}
+    ...  ELSE
+    ...  Should Be True  $fru_set.issubset($fru_keys)
 
 
 Check URL Property Is Functional
