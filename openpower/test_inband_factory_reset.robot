@@ -22,7 +22,7 @@ Test Inband IPMI Factory Reset
     Should Not Be Empty  ${network_info}
 
     # Call reset method.
-    Run Inband IPMI Raw Command  0x32 0x20
+    Run Inband IPMI Raw Command  0x3a 0x11
 
     # Reboot BMC.
     Run Inband IPMI Raw Command  0x06 0x03
