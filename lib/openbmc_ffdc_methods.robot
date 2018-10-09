@@ -6,6 +6,7 @@ Resource           openbmc_ffdc_utils.robot
 Resource           rest_client.robot
 Resource           utils.robot
 Resource           list_utils.robot
+Resource           logging_utils.robot
 Library            SSHLibrary
 Library            OperatingSystem
 Library            Collections
