@@ -10,6 +10,11 @@ inventory_dict = {
         "MeetsMinimumShipLevel",
         "Functional"
     ],
+    "fan_wc": [
+        "PrettyName",
+        "Present",
+        "MeetsMinimumShipLevel"
+    ],
     "fru": [
         "PrettyName",
         "Present",
