@@ -250,3 +250,20 @@ def min_list_value(value_list):
     Returns the element from the list with minimum value.
     """
     return min(value_list)
+
+
+def check_set_in_list(item1, item2):
+    r"""
+    Returns True if item1, converted to a list, is a subset
+    of item2 converted to a list. False otherwise.
+    """
+    item1_set = set()
+    for x in item1 :
+        item1_set.add(x.encode('ascii','ignore'))
+    item2_set = set()
+    for x in item2:
+        item2_set.add(x.encode('ascii','ignore'))
+    if  item2_set.issuperset(item1_set) :
+        return True
+    else:
+        return False

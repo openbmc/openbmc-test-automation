@@ -7,6 +7,7 @@ Resource          ../lib/state_manager.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/list_utils.robot
 Resource          ../lib/boot_utils.robot
+Resource          ../lib/fan_utils.robot
 Library           ../lib/utilities.py
 Library            Collections
 
@@ -284,9 +285,18 @@ Verify Fan Properties
     #    "PrettyName": "fan0"
     # },
 
+    ${water_cooled}=  Is Water Cooled
+
     ${system_list}=  Get Endpoint Paths
     ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  fan*
-    Validate FRU Properties Fields  fan  @{system_list}
+
+    Rprintn
+    Rprint Vars  water_cooled  system_list
+
+    Run Keyword If  ${water_cooled}
+    ...  Validate FRU Properties Fields Subset  fan_wc  @{system_list}
+    ...  ELSE
+    ...  Validate FRU Properties Fields  fan  @{system_list}
 
 
 Verify Core Functional State
@@ -689,3 +699,35 @@ Get Number Hardware Items
     \  ${count_inventory}=  Set Variable if  ${present['Present']} == 1
     \  ...  ${count_inventory+1}  ${count_inventory}
     [return]  ${count_inventory}
+
+
+Validate FRU Properties Fields Subset
+    [Documentation]  Compare valid FRUs from system vs expected FRU set.
+    ...              The expected FRU set should be a subset of FRUS
+    ...              from the system.
+    [Arguments]  ${fru_type}  @{fru_list}
+
+    # Description of arguments:
+    # fru_type  FRU type name (e.g. "gpu", "fru", "fan", etc.).
+    # fru_list  List of qualified FRU URLs.
+
+    # Build the pre-defined set list from data/inventory.py derived from
+    # a group of YAML files.
+    # Example:
+    # set(['Version', 'PartNumber', 'SerialNumber', 'FieldReplaceable',
+    # 'BuildDate', 'Present', 'Manufacturer', 'PrettyName', 'Cached', 'Model'])
+    ${fru_set}=  List To Set  ${inventory_dict['${fru_type}']}
+
+    # Iterate through the FRU's url and compare the set dictionary keys
+    # with the pre-define inventory data.
+    :FOR  ${fru_url_path}  IN  @{fru_list}
+    \  ${fru_field}=  Read Properties  ${fru_url_path}
+    # ------------------------------------------------------------
+    #  ${fru_field.viewkeys()} extracts the list of keys from the
+    #  JSON dictionary as a set.
+    # ------------------------------------------------------------
+    \  @{fru_keys}=  Set Variable  ${fru_field.viewkeys()}
+    \  ${rc}=  Check Set In List  ${fru_set}  ${fru_keys}
+    \  Rprint Vars  fru_set  fru_keys  rc
+    \  Should Be True  ${rc}  msg=fru_set not subset of fru_keys
+
