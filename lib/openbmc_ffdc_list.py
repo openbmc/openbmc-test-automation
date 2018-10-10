@@ -108,6 +108,7 @@ ENUMERATE_CONTROL = OPENBMC_BASE + 'control/enumerate'
 ENUMERATE_STATE = OPENBMC_BASE + 'state/enumerate'
 ENUMERATE_OCC = OPENPOWER_BASE + 'control/enumerate'
 ENUMERATE_DUMPS = OPENBMC_BASE + 'dumps/enumerate'
+ENUMERATE_USER = OPENBMC_BASE + 'user/enumerate'
 
 # Add file name and correcponding Get Request
 FFDC_GET_REQUEST = {
@@ -123,6 +124,7 @@ FFDC_GET_REQUEST = {
         'BMC_state': ENUMERATE_STATE,
         'OCC_state': ENUMERATE_OCC,
         'BMC_dumps': ENUMERATE_DUMPS,
+        'BMC_USER': ENUMERATE_USER,
     },
 }
 # Define your keywords in method/utils and call here
