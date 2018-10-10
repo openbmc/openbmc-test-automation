@@ -1553,9 +1553,24 @@ Check For Regex In Journald
 Get Service Attribute
     [Documentation]  Get service attribute policy output.
     [Arguments]  ${option}  ${servicename}
+
+    # Description of argument(s):
     # option  systemctl supported options
     # servicename  Qualified service name
     ${cmd}=  Set Variable
     ...  systemctl -p ${option} show ${servicename} | cut -d = -f2
     ${attr}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     [Return]  ${attr}
+
+
+Set REST Logging
+    [Documentation]  Enable or disabled REST logging setting.
+    [Arguments]  ${value}=${True}
+
+    # Description of argument(s):
+    # value     Boolean True or False.
+
+    ${log_dict}=  Create Dictionary  data=${value}
+    Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs
+    ...  Enabled  data=${log_dict}  verify=${value}  expected_value=${value}
+
