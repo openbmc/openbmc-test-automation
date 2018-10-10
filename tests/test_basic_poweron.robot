@@ -11,7 +11,9 @@ Resource            ../lib/ipmi_client.robot
 Resource            ../lib/boot_utils.robot
 Resource            ../lib/remote_logging_utils.robot
 
+Suite Setup         Set REST Logging Policy
 Test Teardown       FFDC On Test Case Fail
+Suite Teardown      Set REST Logging Policy  ${False}
 
 Force Tags  chassisboot
 
