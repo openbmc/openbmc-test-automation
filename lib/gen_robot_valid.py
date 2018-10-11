@@ -31,6 +31,13 @@ def rvalid_value(var_name,
                                     be equal to one of these values to be
                                     considered valid.
 
+    If either the invalid_values or the valid_values parms are not of type
+    "list", they will be processed as python code in order to generate a list.
+    This allows the robot programmer to essentially specify a list literal.
+    For example, the robot code could contain the following:
+
+    Rvalid Value  var1  valid_values=['one', 'two']
+
     Examples of robot calls and corresponding output:
 
     Robot code...
@@ -71,6 +78,13 @@ def rvalid_value(var_name,
 
     # Note: get_variable_value() seems to have no trouble with local variables.
     var_value = BuiltIn().get_variable_value("${" + var_name + "}")
+
+    if type(valid_values) is not list:
+        # Evaluate python syntax to convert to a list.
+        exec("valid_values = " + valid_values)
+    if type(invalid_values) is not list:
+        # Evaluate python syntax to convert to a list.
+        exec("invalid_values = " + invalid_values)
 
     if var_value is None:
         var_value = ""
