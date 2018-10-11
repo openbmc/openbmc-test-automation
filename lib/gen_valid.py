@@ -550,3 +550,55 @@ def valid_list(var_value,
 
     error_message = svalid_list(var_value, valid_values, var_name)
     return process_error_message(error_message)
+
+
+def svalid_dict(var_value,
+                required_keys=[],
+                var_name=""):
+    r"""
+    Return an empty string if var_value is a valid dictionary.  Otherwise,
+    return an error string.
+
+    Description of arguments:
+    var_value                       The value (i.e. dictionary) being
+                                    validated.
+    required_keys                   A list of keys which must be found in the
+                                    dictionary for it to be considered valid.
+    var_name                        The name of the variable whose value is
+                                    passed in var_value.  This parameter is
+                                    normally unnecessary as this function can
+                                    figure out the var_name.  This is provided
+                                    for Robot callers.  In this scenario, we
+                                    are unable to get the variable name
+                                    ourselves.
+    """
+
+    error_message = ""
+
+    keys_missing = list(set(required_keys) - set(var_value.keys()))
+    if len(keys_missing) > 0:
+        show_blanks = 1
+        var_name = get_var_name(var_name)
+        error_message = "The following key fields are missing from "
+        error_message += var_name + ":\n"
+        error_message += gp.sprint_var(keys_missing)
+        error_message += gp.sprint_varx(var_name, var_value, show_blanks)
+        return error_message
+
+    return ""
+
+
+def valid_dict(var_value,
+               required_keys=[],
+               var_name=""):
+    r"""
+    Return True if var_value is a valid dictionary.  Otherwise, print an error
+    message and either return False or exit(1) depending on the value of
+    exit_on_error.
+
+    Description of arguments:
+    (See description of arguments for svalid_list (above)).
+    """
+
+    error_message = svalid_dict(var_value, required_keys, var_name)
+    return process_error_message(error_message)
