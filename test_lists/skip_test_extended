@@ -45,3 +45,5 @@
 -e Stress_BMC_IPMI_Server
 # Applicable only for master build.
 -e Verify_eSEL_Description_And_EntryID_Using_REST
+# Needs fix and improvement.
+-e Test_SBE_Side_Switch
