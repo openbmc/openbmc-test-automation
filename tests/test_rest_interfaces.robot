@@ -360,6 +360,7 @@ Verify All REST Objects Are Accessible
     Remove Values From List  ${uri_list}
     ...  /xyz/openbmc_project/certs/client/ldap
     ...  /xyz/openbmc_project/certs/server/https
+    ...  /xyz/openbmc_project/certs/authority/ldap
 
     ${error_uri_list}=  Create List
     :FOR  ${uri}  IN  @{uri_list}
