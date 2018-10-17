@@ -118,8 +118,8 @@ OpenBMC Delete Request
 Initialize OpenBMC
     [Documentation]  Do a REST login connection within specified time.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
-    ...  ${OPENBMC_USERNAME}=${OPENBMC_USERNAME}
-    ...  ${OPENBMC_PASSWORD}=${OPENBMC_PASSWORD}
+    ...  ${REST_USERNAME}=${REST_USERNAME}
+    ...  ${REST_PASSWORD}=${REST_PASSWORD}
 
     # Description of argument(s):
     # timeout  REST login attempt time out.
@@ -129,13 +129,13 @@ Initialize OpenBMC
     # This will retry at 20 second interval.
     Wait Until Keyword Succeeds  40 sec  20 sec
     ...  Post Login Request  ${timeout}  ${quiet}
-    ...  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ...  ${REST_USERNAME}  ${REST_PASSWORD}
 
 Post Login Request
     [Documentation]  Do REST login request.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
-    ...  ${OPENBMC_USERNAME}=${OPENBMC_USERNAME}
-    ...  ${OPENBMC_PASSWORD}=${OPENBMC_PASSWORD}
+    ...  ${REST_USERNAME}=${REST_USERNAME}
+    ...  ${REST_PASSWORD}=${REST_PASSWORD}
 
     # Description of argument(s):
     # timeout  REST login attempt time out.
@@ -143,7 +143,7 @@ Post Login Request
 
     Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=3
     ${headers}=  Create Dictionary  Content-Type=application/json
-    @{credentials}=  Create List  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    @{credentials}=  Create List  ${REST_USERNAME}  ${REST_PASSWORD}
     ${data}=  create dictionary   data=@{credentials}
     ${status}  ${resp}=  Run Keyword And Ignore Error  Post Request  openbmc
     ...  /login  data=${data}  headers=${headers}
