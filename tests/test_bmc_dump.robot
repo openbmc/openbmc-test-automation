@@ -135,7 +135,7 @@ Verify Core Dump Size
 
     Delete All Dumps
     Trigger Core Dump
-    Wait Until Keyword Succeeds  1 min  10 sec  Get Dump Entries
+    Wait Until Keyword Succeeds  2 min  10 sec  Get Dump Entries
 
     ${dump_entries}=  Get URL List  ${DUMP_ENTRY_URI}
     ${dump_size}=  Read Attribute  ${dump_entries[0]}  Size
