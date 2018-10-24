@@ -69,25 +69,29 @@ Get Client Certificate File Content From BMC
 Generate Certificate File Via Openssl
     [Documentation]  Create certificate file via openssl with required content
     ...              and returns its path.
-    [Arguments]  ${cert_format}  ${time}=365
+    [Arguments]  ${cert_format}  ${time}=365  ${cert_dir_name}=certificate_dir
 
     # Description of argument(s):
     # cert_format          Certificate file format
     #                      e.g. Valid_Certificate_Empty_Privatekey.
     # time                 Number of days to certify the certificate for.
+    # cert_dir_name        The name of the sub-directory where the certificate
+    #                      is stored.
 
     Check If Openssl Tool Exist
 
     ${openssl_cmd}=  Catenate  openssl req -x509 -sha256 -newkey rsa:2048
     ...  ${SPACE}-nodes -days ${time}
-    ...  ${SPACE}-keyout cert.pem -out cert.pem
+    ...  ${SPACE}-keyout ${cert_dir_name}/cert.pem -out ${cert_dir_name}/cert.pem
     ...  ${SPACE}-subj "/O=XYZ Corporation /CN=www.xyz.com"
 
     ${rc}  ${output}=  Run And Return RC and Output  ${openssl_cmd}
     Should Be Equal  ${rc}  ${0}  msg=${output}
-    OperatingSystem.File Should Exist  ${EXECDIR}${/}cert.pem
+    OperatingSystem.File Should Exist
+    ...  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
 
-    ${file_content}=  OperatingSystem.Get File  ${EXECDIR}${/}cert.pem
+    ${file_content}=  OperatingSystem.Get File
+    ...  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
     ${result}=  Fetch From Left  ${file_content}  -----END CERTIFICATE-----
     ${cert_content}=  Fetch From Right  ${result}  -----BEGIN CERTIFICATE-----
 
@@ -96,7 +100,7 @@ Generate Certificate File Via Openssl
 
     ${cert_data}=
     ...  Run Keyword if  '${cert_format}' == 'Valid Certificate Valid Privatekey'
-    ...  OperatingSystem.Get File  ${EXECDIR}${/}cert.pem
+    ...  OperatingSystem.Get File  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
     ...  ELSE IF  '${cert_format}' == 'Empty Certificate Valid Privatekey'
     ...  Remove String  ${file_content}  ${cert_content}
     ...  ELSE IF  '${cert_format}' == 'Valid Certificate Empty Privatekey'
@@ -104,13 +108,13 @@ Generate Certificate File Via Openssl
     ...  ELSE IF  '${cert_format}' == 'Empty Certificate Empty Privatekey'
     ...  Remove String  ${file_content}  ${cert_content}  ${private_key_content}
     ...  ELSE IF  '${cert_format}' == 'Expired Certificate'
-    ...  OperatingSystem.Get File  ${EXECDIR}${/}cert.pem
+    ...  OperatingSystem.Get File  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
 
     ${random_name}=  Generate Random String  8
     ${cert_name}=  Catenate  SEPARATOR=  ${random_name}  .pem
-    Create File  ${cert_name}  ${cert_data}
+    Create File  ${cert_dir_name}/${cert_name}  ${cert_data}
 
-    [Return]  ${EXECDIR}${/}${cert_name}
+    [Return]  ${EXECDIR}${/}${cert_dir_name}${/}${cert_name}
 
 
 Get Certificate Content From File
