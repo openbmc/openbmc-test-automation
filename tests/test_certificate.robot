@@ -142,9 +142,10 @@ Test Delete Client Certificate
     # Adding delay after certificate deletion
     Sleep  30s
 
-    ${bmc_cert_content}=  Get Client Certificate File Content From BMC
+    ${msg}=  Run Keyword And Expect Error  *
+    ...  Get Client Certificate File Content From BMC
 
-    Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
+    Should Contain  ${msg}  No such file or directory  ignore_case=True
 
 
 Test Continuous Server Certificate Install
