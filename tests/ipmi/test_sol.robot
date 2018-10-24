@@ -126,7 +126,7 @@ Verify SOL During Boot
 
     Activate SOL Via IPMI
     Wait Until Keyword Succeeds  3 mins  30 secs
-    ...  Check IPMI SOL Output Content  Welcome to Hostboot hostboot
+    ...  Check IPMI SOL Output Content  Welcome to Hostboot
 
     Wait Until Keyword Succeeds  3 mins  30 secs
     ...  Check IPMI SOL Output Content  ISTEP
@@ -238,7 +238,7 @@ Verify SOL Setting
 
     Activate SOL Via IPMI
     Wait Until Keyword Succeeds  10 mins  30 secs
-    ...  Check IPMI SOL Output Content  Welcome to Hostboot hostboot
+    ...  Check IPMI SOL Output Content  Welcome to Hostboot
 
     Wait Until Keyword Succeeds  3 mins  30 secs
     ...  Check IPMI SOL Output Content  ISTEP
