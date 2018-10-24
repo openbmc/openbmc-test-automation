@@ -43,14 +43,19 @@ def ffdc(ffdc_dir_path=None,
     # Check if Ping and SSH connection is alive
     OPENBMC_HOST = BuiltIn().get_variable_value("${OPENBMC_HOST}")
 
-    state = st.get_state(req_states=['ping', 'uptime'])
+    state = st.get_state(req_states=['ping', 'uptime', 'rest'])
     gp.qprint_var(state)
     if not int(state['ping']):
         gp.print_error("BMC is not ping-able.  Terminating FFDC collection.\n")
         return ffdc_file_list
 
+    if not int(state['rest']):
+        gp.print_error("REST commands to the BMC are failing."
+                       + "  Terminating FFDC collection.\n")
+        return ffdc_file_list
+
     if state['uptime'] == "":
-        gp.print_error("BMC is not communicating.  Terminating FFDC"
+        gp.print_error("BMC is not communicating via ssh.  Terminating FFDC"
                        + " collection.\n")
         return ffdc_file_list
 
