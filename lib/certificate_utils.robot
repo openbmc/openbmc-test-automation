@@ -76,18 +76,24 @@ Generate Certificate File Via Openssl
     #                      e.g. Valid_Certificate_Empty_Privatekey.
     # time                 Number of days to certify the certificate for.
 
+
+    # Create certificate folder
+    ${rc}  ${output}=  Run And Return RC and Output  mkdir -p cert_folder
+    Should Be Equal  ${rc}  ${0}  msg=${output}
+    OperatingSystem.Directory Should Exist  ${EXECDIR}${/}cert_folder
+
     Check If Openssl Tool Exist
 
     ${openssl_cmd}=  Catenate  openssl req -x509 -sha256 -newkey rsa:2048
     ...  ${SPACE}-nodes -days ${time}
-    ...  ${SPACE}-keyout cert.pem -out cert.pem
+    ...  ${SPACE}-keyout cert_folder/cert.pem -out cert_folder/cert.pem
     ...  ${SPACE}-subj "/O=XYZ Corporation /CN=www.xyz.com"
 
     ${rc}  ${output}=  Run And Return RC and Output  ${openssl_cmd}
     Should Be Equal  ${rc}  ${0}  msg=${output}
-    OperatingSystem.File Should Exist  ${EXECDIR}${/}cert.pem
+    OperatingSystem.File Should Exist  ${EXECDIR}${/}cert_folder${/}cert.pem
 
-    ${file_content}=  OperatingSystem.Get File  ${EXECDIR}${/}cert.pem
+    ${file_content}=  OperatingSystem.Get File  ${EXECDIR}${/}cert_folder${/}cert.pem
     ${result}=  Fetch From Left  ${file_content}  -----END CERTIFICATE-----
     ${cert_content}=  Fetch From Right  ${result}  -----BEGIN CERTIFICATE-----
 
@@ -96,7 +102,7 @@ Generate Certificate File Via Openssl
 
     ${cert_data}=
     ...  Run Keyword if  '${cert_format}' == 'Valid Certificate Valid Privatekey'
-    ...  OperatingSystem.Get File  ${EXECDIR}${/}cert.pem
+    ...  OperatingSystem.Get File  ${EXECDIR}${/}cert_folder${/}cert.pem
     ...  ELSE IF  '${cert_format}' == 'Empty Certificate Valid Privatekey'
     ...  Remove String  ${file_content}  ${cert_content}
     ...  ELSE IF  '${cert_format}' == 'Valid Certificate Empty Privatekey'
@@ -104,13 +110,13 @@ Generate Certificate File Via Openssl
     ...  ELSE IF  '${cert_format}' == 'Empty Certificate Empty Privatekey'
     ...  Remove String  ${file_content}  ${cert_content}  ${private_key_content}
     ...  ELSE IF  '${cert_format}' == 'Expired Certificate'
-    ...  OperatingSystem.Get File  ${EXECDIR}${/}cert.pem
+    ...  OperatingSystem.Get File  ${EXECDIR}${/}cert_folder${/}cert.pem
 
     ${random_name}=  Generate Random String  8
     ${cert_name}=  Catenate  SEPARATOR=  ${random_name}  .pem
-    Create File  ${cert_name}  ${cert_data}
+    Create File  cert_folder/${cert_name}  ${cert_data}
 
-    [Return]  ${EXECDIR}${/}${cert_name}
+    [Return]  ${EXECDIR}${/}cert_folder${/}${cert_name}
 
 
 Get Certificate Content From File
