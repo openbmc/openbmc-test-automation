@@ -21,7 +21,7 @@ Library                 SCPLibrary  WITH NAME  scp
 
 *** Variables ***
 
-${pflash_cmd}             /usr/sbin/pflash -r /dev/stdout -P VERSION
+${pflash_cmd}             /usr/sbin/pflash -r /dev/stdout -P VERSION --skip=4096
 ${SYSTEM_SHUTDOWN_TIME}   ${5}
 
 ${dbuscmdBase}
