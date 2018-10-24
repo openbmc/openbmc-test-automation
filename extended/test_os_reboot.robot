@@ -17,6 +17,8 @@ ${BOOT_LOOP_COUNT}   ${1}
 Host Reboot Loop
     [Documentation]  Boot OS and trigger reboot and expect
     ...              OS to boot back.
+    [Tags]  Host_Reboot_Loop
+
     # 1. Boot OS
     # 2. Verify OS is booted
     # 3. Issue "reboot" from OS
