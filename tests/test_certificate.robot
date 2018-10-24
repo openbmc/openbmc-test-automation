@@ -7,7 +7,10 @@ Resource       ../lib/resource.txt
 Resource       ../lib/openbmc_ffdc.robot
 Resource       ../lib/certificate_utils.robot
 
-Test Teardown  FFDC On Test Case Fail
+Suite Setup    Suite Setup Execution
+Test Teardown  Test Teardown Execution
+
+Force Tags     Certificate_Test
 
 
 *** Test Cases ***
@@ -120,7 +123,7 @@ Test Delete Server Certificate
 
     OpenBMC Delete Request  ${SERVER_CERTIFICATE_URI}
     # Adding delay after certificate deletion
-    Sleep  10s
+    Sleep  30s
 
     ${bmc_cert_content}=  Get Certificate Content From BMC Via Openssl
     Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
@@ -152,7 +155,7 @@ Test Continuous Server Certificate Install
     [Documentation]  Stress server certificate installtion.
     [Tags]  Test_Continuous_Server_Certificate_Install
 
-    Repeat Keyword  50 times  Certificate Install Via REST
+    Repeat Keyword  3 times  Certificate Install Via REST
     ...  Server  Valid Certificate Valid Privatekey  ok
 
 
@@ -160,7 +163,7 @@ Test Continuous Client Certificate Install
     [Documentation]  Stress client certificate installtion.
     [Tags]  Test_Continuous_Client_Certificate_Install
 
-    Repeat Keyword  50 times  Certificate Install Via REST
+    Repeat Keyword  3 times  Certificate Install Via REST
     ...  Client  Valid Certificate Valid Privatekey  ok
 
 
@@ -204,3 +207,18 @@ Certificate Install Via REST
     ...  Should Contain  ${cert_file_content}  ${bmc_cert_content}
     ...  ELSE IF  '${expected_status}' == 'error'
     ...  Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
+
+
+Suite Setup Execution
+    [Documentation]  Do suite setup tasks.
+
+    # Create certificate folder
+    Create Directory  certificate_dir
+    OperatingSystem.Directory Should Exist  ${EXECDIR}${/}certificate_dir
+
+
+Test Teardown Execution
+    [Documentation]  Do the post test teardown.
+
+    Empty Directory  ${EXECDIR}${/}certificate_dir
+    FFDC On Test Case Fail
