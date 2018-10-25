@@ -106,7 +106,6 @@ Test Remote API Valid Config Combination
     # Address                    Port                        Expected result
     ${EMPTY}                     ${REMOTE_LOG_SERVER_PORT}   ${True}
     ${REMOTE_LOG_SERVER_HOST}    ${REMOTE_LOG_SERVER_PORT}   ${True}
-    remotelog.xzy.com            ${REMOTE_LOG_SERVER_PORT}   ${True}
     ${REMOTE_LOG_SERVER_HOST}    ${0}                        ${True}
 
 
@@ -278,7 +277,14 @@ Boot Host And Verify Data Is Synced To Remote Server
     ${cmd}=  Catenate  SEPARATOR=  egrep '${bmc_hostname}' /var/log/syslog
     ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
 
+    ${openbmc_host_name}  ${openbmc_ip}  ${openbmc_short_name}=
+    ...  Get Host Name IP  host=${OPENBMC_HOST}  short_name=1
+
+    # Filter kernel dmesg from the journald log.
+    # Example: xx.xx.xx kernel:
     @{lines}=  Split To Lines  ${bmc_journald}
+    Remove Values From List  @{lines}  ${openbmc_short_name} kernel
+
     :FOR  ${line}  IN  @{lines}
     \  Log To Console  \n ${line}
     \  Should Contain  ${remote_journald}  ${line}
