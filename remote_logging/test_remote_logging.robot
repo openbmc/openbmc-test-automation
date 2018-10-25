@@ -106,7 +106,6 @@ Test Remote API Valid Config Combination
     # Address                    Port                        Expected result
     ${EMPTY}                     ${REMOTE_LOG_SERVER_PORT}   ${True}
     ${REMOTE_LOG_SERVER_HOST}    ${REMOTE_LOG_SERVER_PORT}   ${True}
-    remotelog.xzy.com            ${REMOTE_LOG_SERVER_PORT}   ${True}
     ${REMOTE_LOG_SERVER_HOST}    ${0}                        ${True}
 
 
@@ -264,8 +263,14 @@ Boot Host And Verify Data Is Synced To Remote Server
     ...              to remote logging server.
     [Tags]  Boot_Host_And_Verify_Data_Is_Synced_To_Remote_Server
 
-    ${cmd}=  Catenate  SEPARATOR=  --no-pager | egrep -Ev '${BMC_SYSLOG_REGEX}'
-    ...  | awk -F': ' '{print $2}'
+    # Filter kernel dmesg from the journald log.
+    # Example: xx.xx.xx kernel:
+
+    ${openbmc_host_name}  ${openbmc_ip}  ${openbmc_short_name}=
+    ...  Get Host Name IP  host=${OPENBMC_HOST}  short_name=1
+
+    ${cmd}=  Catenate  SEPARATOR=  --no-pager | egrep -Ev '${BMC_SYSLOG_REGEX}
+    ...  |${openbmc_short_name} kernel' | awk -F': ' '{print $2}'
 
     # Example: Just get the message part of the syslog
     # Started OpenPOWER OCC Active Disable.
@@ -279,6 +284,7 @@ Boot Host And Verify Data Is Synced To Remote Server
     ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
 
     @{lines}=  Split To Lines  ${bmc_journald}
+
     :FOR  ${line}  IN  @{lines}
     \  Log To Console  \n ${line}
     \  Should Contain  ${remote_journald}  ${line}
