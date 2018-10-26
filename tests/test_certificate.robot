@@ -109,6 +109,24 @@ Test Client Certificate Install With Expired Certificate
     Client                Expired Certificate                 error
 
 
+Test CA Certificate Install With Valid Certificate
+    [Documentation]  Test CA certificate install with valid certificate.
+    [Tags]  Test_CA_Certificate_Install_With_Valid_Certificate
+    [Template]  Certificate Install Via REST
+
+    # Certificate type    Certificate file format             Expected Status
+    CA                    Valid Certificate                   ok
+
+
+Test CA Certificate Install With Empty Certificate
+    [Documentation]  Test CA certificate install with empty certificate.
+    [Tags]  Test_CA_Certificate_Install_With_Empty_Certificate
+    [Template]  Certificate Install Via REST
+
+    # Certificate type    Certificate file format             Expected Status
+    CA                    Empty Certificate                   error
+
+
 Test Delete Server Certificate
     [Documentation]  Delete server certificate and verify.
     [Tags]  Test_Delete_Server_Certificate
@@ -146,9 +164,32 @@ Test Delete Client Certificate
     Sleep  30s
 
     ${msg}=  Run Keyword And Expect Error  *
-    ...  Get Client Certificate File Content From BMC
+    ...  Get Certificate File Content From BMC  Client
 
     Should Contain  ${msg}  No such file or directory  ignore_case=True
+
+
+Test Delete CA Certificate
+    [Documentation]  Delete CA certificate and verify.
+    [Tags]  Test_CA_Certificate
+
+    ${cert_file_path}=  Generate Certificate File Via Openssl
+    ...  Valid Certificate
+    ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
+
+    Install Certificate File On BMC  ${CA_CERTIFICATE_URI}
+    ...  data=${file_data}
+
+    OpenBMC Delete Request  ${CA_CERTIFICATE_URI}
+    # Adding delay after certificate deletion.
+    Sleep  30s
+
+    ${msg}=  Run Keyword And Expect Error  *
+    ...  Get Certificate File Content From BMC  CA
+
+    Should Contain  ${msg}  No such file or directory  ignore_case=True
+
 
 
 Test Continuous Server Certificate Install
@@ -192,6 +233,9 @@ Certificate Install Via REST
     ...  ELSE IF  '${cert_type}' == 'Client'
     ...    Install Certificate File On BMC  ${CLIENT_CERTIFICATE_URI}
     ...    ${expected_status}  ${1}  data=${file_data}
+    ...  ELSE IF  '${cert_type}' == 'CA'
+    ...    Install Certificate File On BMC  ${CA_CERTIFICATE_URI}
+    ...    ${expected_status}  ${1}  data=${file_data}
 
     # Adding delay after certificate installation.
     sleep  10s
@@ -201,7 +245,9 @@ Certificate Install Via REST
     ${bmc_cert_content}=  Run Keyword If  '${cert_type}' == 'Server'
     ...    Get Certificate Content From BMC Via Openssl
     ...  ELSE IF  '${cert_type}' == 'Client'
-    ...    Get Client Certificate File Content From BMC
+    ...    Get Certificate File Content From BMC  Client
+    ...  ELSE IF  '${cert_type}' == 'CA'
+    ...    Get Certificate File Content From BMC  CA
 
     Run Keyword if  '${expected_status}' == 'ok'
     ...  Should Contain  ${cert_file_content}  ${bmc_cert_content}

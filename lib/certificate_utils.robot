@@ -56,12 +56,17 @@ Get Certificate Content From BMC Via Openssl
     [Return]  ${result}
 
 
-Get Client Certificate File Content From BMC
-    [Documentation]  Get client certificate file content from BMC.
+Get Certificate File Content From BMC
+    [Documentation]  Get required certificate file content from BMC.
+    [Arguments]  ${cert_type}=Client
 
-    ${certificate}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  cat /etc/nslcd/certs/cert.pem
-    Should Be Equal  ${rc}  ${0}  msg=${stderr}
+    # Description of argument(s):
+    # cert_type      Certificate type (e.g. "Client" or "CA").
+
+    ${certificate}  ${stderr}  ${rc}=  Run Keyword If  '${cert_type}' == 'Client'
+    ...  BMC Execute Command  cat /etc/ssl/certs/cert.pem
+    ...  ELSE IF  '${cert_type}' == 'CA'
+    ...  BMC Execute Command  cat /etc/ssl/certs/Root-CA.pem
 
     [Return]  ${certificate}
 
@@ -109,6 +114,13 @@ Generate Certificate File Via Openssl
     ...  Remove String  ${file_content}  ${cert_content}  ${private_key_content}
     ...  ELSE IF  '${cert_format}' == 'Expired Certificate'
     ...  OperatingSystem.Get File  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
+    ...  ELSE IF  '${cert_format}' == 'Valid Certificate'
+    ...  Remove String  ${file_content}  ${private_key_content}
+    ...  -----BEGIN PRIVATE KEY-----  -----END PRIVATE KEY-----
+    ...  ELSE IF  '${cert_format}' == 'Empty Certificate'
+    ...  Remove String  ${file_content}  ${cert_content}
+    ...  ${private_key_content}  -----BEGIN PRIVATE KEY-----
+    ...  -----END PRIVATE KEY-----
 
     ${random_name}=  Generate Random String  8
     ${cert_name}=  Catenate  SEPARATOR=  ${random_name}  .pem
