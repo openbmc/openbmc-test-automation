@@ -5,6 +5,7 @@ Documentation  Utilities for Robot keywords.
 Resource                ../lib/resource.txt
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
+Resource                ../lib/boot_utils.robot
 Library                 String
 Library                 DateTime
 Library                 Process
@@ -1165,11 +1166,7 @@ Login To OS Host
     # ${os_username}  OS Host Login user name.
     # ${os_password}  OS Host Login passwrd.
 
-    ${os_state}=  Run Keyword And Return Status  Ping Host  ${os_host}
-    Run Keyword If  '${os_state}' == 'False'
-    ...  Run Keywords  Initiate Host Reboot  AND
-    ...  Is Host Running  AND
-    ...  Wait for OS  ${os_host}  ${os_username}  ${os_password}
+    REST Power On  stack_mode=skip  quiet=1
 
     SSHLibrary.Open Connection  ${os_host}
     ${resp}=  Login  ${os_username}  ${os_password}
