@@ -1561,7 +1561,7 @@ Get Service Attribute
     [Arguments]  ${option}  ${servicename}
 
     # Description of argument(s):
-    # option  systemctl supported options
+    # option       systemctl supported options
     # servicename  Qualified service name
     ${cmd}=  Set Variable
     ...  systemctl -p ${option} show ${servicename} | cut -d = -f2
