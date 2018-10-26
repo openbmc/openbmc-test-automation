@@ -66,6 +66,16 @@ Get Client Certificate File Content From BMC
     [Return]  ${certificate}
 
 
+Get Client CA Certificate File Content From BMC
+    [Documentation]  Get client CA certificate file content from BMC.
+
+    ${certificate}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  cat /etc/ssl/certs/Root-CA.pem
+    Should Be Equal  ${rc}  ${0}  msg=${stderr}
+
+    [Return]  ${certificate}
+
+
 Generate Certificate File Via Openssl
     [Documentation]  Create certificate file via openssl with required content
     ...              and returns its path.
@@ -109,6 +119,13 @@ Generate Certificate File Via Openssl
     ...  Remove String  ${file_content}  ${cert_content}  ${private_key_content}
     ...  ELSE IF  '${cert_format}' == 'Expired Certificate'
     ...  OperatingSystem.Get File  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
+    ...  ELSE IF  '${cert_format}' == 'Valid Certificate'
+    ...  Remove String  ${file_content}  ${private_key_content}
+    ...  -----BEGIN PRIVATE KEY-----  -----END PRIVATE KEY-----
+    ...  ELSE IF  '${cert_format}' == 'Empty Certificate'
+    ...  Remove String  ${file_content}  ${cert_content}
+    ...  ${private_key_content}  -----BEGIN PRIVATE KEY-----
+    ...  -----END PRIVATE KEY-----
 
     ${random_name}=  Generate Random String  8
     ${cert_name}=  Catenate  SEPARATOR=  ${random_name}  .pem

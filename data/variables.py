@@ -147,7 +147,7 @@ REMOTE_LOGGING_URI = OPENBMC_BASE_URI + 'logging/config/remote/'
 # Certificate variables.
 SERVER_CERTIFICATE_URI = OPENBMC_BASE_URI + 'certs/server/https'
 CLIENT_CERTIFICATE_URI = OPENBMC_BASE_URI + 'certs/client/ldap'
-
+CLIENT_CA_CERTIFICATE_URI = OPENBMC_BASE_URI + 'certs/authority/ldap'
 
 '''
   QEMU HTTPS variable:
