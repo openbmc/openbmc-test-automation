@@ -1539,10 +1539,16 @@ Get BMC Flash Chip Boot Side
 
 Check For Regex In Journald
     [Documentation]  Parse the journal log and check for regex string.
-    [Arguments]  ${regex}=${ERROR_REGEX}  ${error_check}=${0}
+    [Arguments]  ${regex}=${ERROR_REGEX}  ${error_check}=${0}  ${boot}=${EMPTY}
+
+    # Description of argument(s):
+    # regex            Strings to be filter.
+    # error_check      Check for errors.
+    # boot             Argument to check current or persistent full boot log
+    #                  (e.g. "-b").
 
     ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | egrep '${regex}'  ignore_err=1
+    ...  journalctl --no-pager ${boot} | egrep '${regex}'  ignore_err=1
 
     Run Keyword If  ${error_check} == ${0}
     ...    Should Be Empty  ${journal_log}

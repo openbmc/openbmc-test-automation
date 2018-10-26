@@ -91,7 +91,7 @@ Check For Application Failures
     [Documentation]  Parse the journal log and check for failures.
     [Tags]  Check_For_Application_Failures
 
-    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}
+    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
 
 
 Verify Uptime Average Against Threshold
