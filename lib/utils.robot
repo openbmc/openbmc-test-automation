@@ -1542,7 +1542,7 @@ Check For Regex In Journald
     [Arguments]  ${regex}=${ERROR_REGEX}  ${error_check}=${0}
 
     ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | egrep '${regex}'  ignore_err=1
+    ...  journalctl --no-pager -b | egrep '${regex}'  ignore_err=1
 
     Run Keyword If  ${error_check} == ${0}
     ...    Should Be Empty  ${journal_log}
