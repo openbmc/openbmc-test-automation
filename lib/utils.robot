@@ -1167,8 +1167,8 @@ Login To OS Host
 
     ${os_state}=  Run Keyword And Return Status  Ping Host  ${os_host}
     Run Keyword If  '${os_state}' == 'False'
-    ...  Run Keywords  Initiate Host Reboot  AND
-    ...  Is Host Running  AND
+    ...  Initiate Host PowerOff  AND
+    ...  Initiate Host Boot  AND
     ...  Wait for OS  ${os_host}  ${os_username}  ${os_password}
 
     SSHLibrary.Open Connection  ${os_host}
