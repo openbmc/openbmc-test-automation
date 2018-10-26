@@ -109,6 +109,24 @@ Test Client Certificate Install With Expired Certificate
     Client                Expired Certificate                 error
 
 
+Test Client CA Certificate Install With Valid Certificate
+    [Documentation]  Test client CA certificate install with valid certificate.
+    [Tags]  Test_Client_CA_Certificate_Install_With_Valid_Certificate
+    [Template]  Certificate Install Via REST
+
+    # Certificate type    Certificate file format             Expected Status
+    Client CA             Valid Certificate                   ok
+
+
+Test Client CA Certificate Install With Empty Certificate
+    [Documentation]  Test client CA certificate install with empty certificate.
+    [Tags]  Test_Client_CA_Certificate_Install_With_Empty_Certificate
+    [Template]  Certificate Install Via REST
+
+    # Certificate type    Certificate file format             Expected Status
+    Client CA             Empty Certificate                   error
+
+
 Test Delete Server Certificate
     [Documentation]  Delete server certificate and verify.
     [Tags]  Test_Delete_Server_Certificate
@@ -192,6 +210,9 @@ Certificate Install Via REST
     ...  ELSE IF  '${cert_type}' == 'Client'
     ...    Install Certificate File On BMC  ${CLIENT_CERTIFICATE_URI}
     ...    ${expected_status}  ${1}  data=${file_data}
+    ...  ELSE IF  '${cert_type}' == 'Client CA'
+    ...    Install Certificate File On BMC  ${CLIENT_CA_CERTIFICATE_URI}
+    ...    ${expected_status}  ${1}  data=${file_data}
 
     # Adding delay after certificate installation.
     sleep  10s
@@ -202,6 +223,8 @@ Certificate Install Via REST
     ...    Get Certificate Content From BMC Via Openssl
     ...  ELSE IF  '${cert_type}' == 'Client'
     ...    Get Client Certificate File Content From BMC
+    ...  ELSE IF  '${cert_type}' == 'Client CA'
+    ...    Get Client CA Certificate File Content From BMC
 
     Run Keyword if  '${expected_status}' == 'ok'
     ...  Should Contain  ${cert_file_content}  ${bmc_cert_content}
