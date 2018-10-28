@@ -39,6 +39,7 @@ Documentation  Stress the system using HTX exerciser.
 Resource        ../syslib/utils_os.robot
 Resource        ../lib/openbmc_ffdc_utils.robot
 Resource        ../lib/logging_utils.robot
+Resource        ../lib/code_update_utils.robot
 Library         ../syslib/utils_keywords.py
 Library         ../lib/utils_files.py
 Library         ../lib/logging_utils.py
@@ -228,8 +229,7 @@ Test Setup Execution
     Rprintn
     Rpvars  bmc_version
 
-    ${pnor_version}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  sed -re 's/\t//g' /var/lib/phosphor-software-manager/pnor/ro/VERSION
+    ${pnor_version}=  Get Host Software Objects Details
     Rpvars  pnor_version
 
     REST Power On  stack_mode=skip
