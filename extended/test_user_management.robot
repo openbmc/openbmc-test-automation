@@ -17,6 +17,8 @@ ${test_password}   0penBmc123
 Verify At Least One User In List
     [Documentation]  Verify user list API list minimum one user.
     [Tags]  Verify_At_Least_One_User_In_List
+    # Forego normal test teardown:
+    [Teardown]  No Operation
 
     ${bmc_user_uris}=  Read Properties  ${BMC_USER_URI}list
     Should Not Be Empty  ${bmc_user_uris}
