@@ -9,7 +9,7 @@ Test Teardown    Test Teardown Execution
 
 *** Variables ****
 
-${test_password}   abc123
+${test_password}   0penBmc123
 
 *** Test Cases ***
 
@@ -41,7 +41,7 @@ Verify Root Password Update
     Login  ${OPENBMC_USERNAME}  ${test_password}
 
     # REST Login to BMC with new "root" password.
-    Initialize OpenBMC  OPENBMC_PASSWORD=${test_password}
+    Initialize OpenBMC  REST_PASSWORD=${test_password}
 
     ${resp}=  Get Request  openbmc  ${BMC_USER_URI}enumerate
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -54,7 +54,7 @@ Test Teardown Execution
     [Documentation]  Do test teardown task.
 
     # REST Login to BMC with new "root" password.
-    Initialize OpenBMC  OPENBMC_PASSWORD=${test_password}
+    Initialize OpenBMC  REST_PASSWORD=${test_password}
     Update Root Password
     Sleep  5 s
     Delete All Sessions
