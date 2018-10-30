@@ -106,7 +106,7 @@ def process_error_message(error_message):
 
     gp.print_error_report(error_message)
     if exit_on_error:
-        exit(0)
+        exit(1)
     return False
 
 
