@@ -39,7 +39,7 @@ Redfish Login Request
     ${resp}=  Post Request  openbmc
     ...  ${REDFISH_SESSION}  data=${data}  headers=${headers}
 
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
     ${content} =  To JSON  ${resp.content}
 
     Log  ${content["Id"]}
