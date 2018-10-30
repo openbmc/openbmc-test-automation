@@ -13,7 +13,6 @@ import os
 import tempfile
 
 import gen_print as gp
-import gen_robot_print as grp
 import gen_misc as gm
 import gen_cmd as gc
 
@@ -34,11 +33,11 @@ def rvalidate_plug_ins(plug_in_dir_paths,
 
     cmd_buf = "validate_plug_ins.py \"" + plug_in_dir_paths + "\""
     if int(quiet) != 1:
-        grp.rpissuing(cmd_buf)
+        gp.print_issuing(cmd_buf)
     rc, out_buf = commands.getstatusoutput(cmd_buf)
     if rc != 0:
         message = gp.sprint_varx("rc", rc, 1) + out_buf
-        grp.rprintn(out_buf, 'STDERR')
+        gp.printn(out_buf, 'STDERR')
         BuiltIn().fail(gp.sprint_error("Validate plug ins call failed.  See"
                                        + " stderr text for details.\n"))
 
@@ -56,7 +55,8 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
                               stop_on_non_zero_rc=0,
                               release_type="obmc",
                               quiet=None,
-                              debug=None):
+                              debug=None,
+                              return_history=False):
     r"""
     Call the external process_plug_in_packages.py to process the plug-in
     packages.  Return the following:
@@ -120,29 +120,29 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
                                     the developer of this function.  This will
                                     default to the global quiet program parm
                                     or to 0.
+    return_history                  In addition to rc, shell_rc and
+                                    failed_plug_in_name, return a list
+                                    containing historical output that looks
+                                    like the following:
+
+    history:
+      history[0]:                   #(CDT) 2018/10/30 12:25:49 - Running
+      OBMC_Sample/cp_post_stack
     """
 
     rc = 0
 
-    if plug_in_packages_list is None:
-        plug_in_packages_list = BuiltIn().get_variable_value(
-            "${plug_in_packages_list}")
+    plug_in_packages_list = gp.get_var_value(plug_in_packages_list, [])
 
     # If there are no plug-in packages to process, return successfully.
     if len(plug_in_packages_list) == 0:
-        return 0, 0, ""
+        if return_history:
+            return 0, 0, "", []
+        else:
+            return 0, 0, ""
 
-    if quiet is None:
-        try:
-            quiet = int(BuiltIn().get_variable_value("${quiet}"))
-        except TypeError:
-            quiet = 0
-
-    if debug is None:
-        try:
-            debug = int(BuiltIn().get_variable_value("${debug}"))
-        except TypeError:
-            debug = 0
+    quiet = int(gp.get_var_value(quiet, 0))
+    debug = int(gp.get_var_value(debug, 0))
 
     # Create string from list.
     plug_in_dir_paths = ':'.join(plug_in_packages_list)
@@ -152,7 +152,7 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     temp2 = tempfile.NamedTemporaryFile()
     temp_properties_file_path = temp2.name
 
-    if int(debug) == 1:
+    if debug:
         os.environ["PERF_TRACE"] = "1"
         debug_string = " --quiet=0"
     else:
@@ -165,20 +165,29 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
                   str(shell_rc) + " --stop_on_plug_in_failure=" +\
                   str(stop_on_plug_in_failure) + " --stop_on_non_zero_rc=" +\
                   str(stop_on_non_zero_rc) + " " + plug_in_dir_paths
-    if int(quiet) == 1:
+    if quiet:
         cmd_buf = sub_cmd_buf + " > " + temp_file_path + " 2>&1"
     else:
         cmd_buf = "set -o pipefail ; " + sub_cmd_buf + " 2>&1 | tee " +\
                   temp_file_path
-
-        if int(debug) == 1:
-            grp.rpissuing(cmd_buf)
+        if debug:
+            gp.print_issuing(cmd_buf)
         else:
-            grp.rprint_timen("Processing " + call_point
-                             + " call point programs.")
+            gp.print_timen("Processing " + call_point
+                           + " call point programs.")
 
     proc_plug_pkg_rc = subprocess.call(cmd_buf, shell=True,
                                        executable='/bin/bash')
+
+    if return_history:
+        # Get the "Running" statements from the output.
+        regex = " Running [^/]+/cp_"
+        cmd_buf = "egrep '" + regex + "' " + temp_file_path
+        rc, history = gc.shell_cmd(cmd_buf, quiet=(not debug), print_output=0,
+                                   show_err=0, ignore_err=1)
+        history = [x + "\n" for x in filter(None, history.split("\n"))]
+    else:
+        history = []
 
     # As process_plug_in_packages.py help text states, it will print the
     # values of failed_plug_in_name and shell_rc in the following format:
@@ -189,38 +198,35 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     # We want to obtain those values from the output.  To make the task
     # simpler, we'll start by grepping the output for lines that might fit
     # such a format:
-    # A valid bash variable against the left margin
-    # - A colon
+    # A valid bash variable against the left margin followed by...
+    # - A colon followed by...
     # - Zero or more spaces
     bash_var_regex = "[_[:alpha:]][_[:alnum:]]*"
     regex = "^" + bash_var_regex + ":[ ]*"
     cmd_buf = "egrep '" + regex + "' " + temp_file_path + " > " +\
               temp_properties_file_path
-    if int(debug) == 1:
-        grp.rpissuing(cmd_buf)
+    gp.dprint_issuing(cmd_buf)
     grep_rc = os.system(cmd_buf)
 
     # Next we call my_parm_file to create a properties dictionary.
     properties = gm.my_parm_file(temp_properties_file_path)
 
     # Finally, we access the 2 values that we need.
-    try:
-        shell_rc = int(properties['shell_rc'], 16)
-    except KeyError:
-        shell_rc = 0
-    try:
-        failed_plug_in_name = properties['failed_plug_in_name']
-    except KeyError:
-        failed_plug_in_name = ""
+    shell_rc = int(properties.get('shell_rc', '0x0000000000000000'), 16)
+    failed_plug_in_name = properties.get('failed_plug_in_name', '')
 
     if proc_plug_pkg_rc != 0:
         hex = 1
-        grp.rprint_error("Call to process_plug_in_packages failed.\n")
-        grp.rprint_varx("grep_rc", grep_rc, hex)
-        grp.rprint_varx("proc_plug_pkg_rc", proc_plug_pkg_rc, hex)
-        # Show all of the failed plug in names and shell_rcs.
+        if grep_rc != 0:
+            gp.print_varx("grep_rc", grep_rc, hex)
+        gp.print_varx("proc_plug_pkg_rc", proc_plug_pkg_rc, hex)
+        gp.print_timen("Re-cap of plug-in failures:")
         gc.cmd_fnc_u("egrep -A 1 '^failed_plug_in_name:[ ]+' "
-                     + temp_properties_file_path, quiet=1, show_err=0)
+                     + temp_properties_file_path + " | egrep -v '^\--'",
+                     quiet=1, show_err=0)
         rc = 1
 
-    return rc, shell_rc, failed_plug_in_name
+    if return_history:
+        return rc, shell_rc, failed_plug_in_name, history
+    else:
+        return rc, shell_rc, failed_plug_in_name
