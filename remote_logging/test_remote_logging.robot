@@ -209,11 +209,17 @@ Verify BMC Journald Contains No Credential Data
     [Documentation]  Check that BMC journald doesn't log any credential data.
     [Tags]  Verify_BMC_Journald_Contains_No_Credential_Data
 
+    Initialize OpenBMC
+    Update Root Password  ${REST_PASSWORD}
+
+    # Time for user manager to sync.
+    Sleep  5 s
+
     Open Connection And Log In
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
     ...  journalctl -o json-pretty | cat
 
-    Should Not Contain Any  ${bmc_journald}  ${OPENBMC_PASSWORD}
+    Should Not Contain Any  ${bmc_journald}  ${OPENBMC_PASSWORD}  ${REST_PASSWORD}
     ...  msg=Journald logs BMC credentials/password ${OPENBMC_PASSWORD}.
 
 
