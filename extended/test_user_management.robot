@@ -3,6 +3,7 @@ Documentation   OpenBMC user management test.
 
 Resource         ../lib/rest_client.robot
 Resource         ../lib/openbmc_ffdc.robot
+Resource         ../lib/utils.robot
 Library          SSHLibrary
 
 Test Teardown    Test Teardown Execution
@@ -69,20 +70,3 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Close All Connections
-
-
-Update Root Password
-    [Documentation]  Update system default "root" user password.
-    [Arguments]  ${user_password}=${OPENBMC_PASSWORD}
-
-    # Description of argument(s):
-    # user_password  User password string.
-
-    @{password} =  Create List  ${user_password}
-    ${data} =  Create Dictionary  data=@{password}
-
-    ${headers} =  Create Dictionary  Content-Type=application/json
-    ${resp} =  Post Request  openbmc  ${BMC_USER_URI}root/action/SetPassword
-    ...  data=${data}  headers=${headers}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ...  msg=Updating the new root password failed, RC=${resp.status_code}.
