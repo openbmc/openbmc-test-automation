@@ -24,6 +24,17 @@ Verify At Least One User In List
     Should Not Be Empty  ${bmc_user_uris}
 
 
+Verify User Group And Privilege Created
+    [Documentation]  Verify user group and associated privilege is created.
+    [Tags]  Verify_User_Group_And_Privilege_Created
+
+    Create Group And Privilege  ${GROUP_NAME}  ${GROUP_PRIVILEGE}
+    ${bmc_user_uris}=  Read Properties  ${BMC_USER_URI}ldap/enumerate
+    Should Contain  ${bmc_user_uris}  ${GROUP_NAME}
+    Should Contain  ${bmc_user_uris}  ${GROUP_PRIVILEGE}
+
+
+
 Verify Root Password Update
     [Documentation]  Update system "root" user password and verify.
     [Tags]  Verify_Root_Password_Update
@@ -70,3 +81,20 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Close All Connections
+
+Create Group And Privilege
+    [Documentation]  Create group and privilege for users.
+    [Arguments]  ${user_group}  ${user_privilege}
+
+    # Description of argument(s):
+    # user_group  User group string.
+    # user_privilege  User privilge string  like priv-admin, priv-user.
+
+    @{ldap_parm_list}=  Create List
+    ...  ${user_group}  ${user_privilege}
+
+    ${data}=  Create Dictionary  data=@{ldap_parm_list}
+
+    ${resp}=  OpenBMC Post Request
+    ...  ${BMC_USER_URI}ldap/action/Create  data=${data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
