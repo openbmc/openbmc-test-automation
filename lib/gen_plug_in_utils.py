@@ -36,7 +36,8 @@ def get_plug_in_package_name(case=None):
         return plug_in_package_name
 
 
-def return_plug_vars():
+def return_plug_vars(general=True,
+                     custom=True):
     r"""
     Return an OrderedDict which is sorted by key and which contains all of the
     plug-in environment variables.
@@ -62,10 +63,26 @@ def return_plug_vars():
 
     If environment variable PERF_EXERCISERS_TOTAL_TIMEOUT is blank or not set,
     this function will set it to 180.
+
+    Description of argument(s):
+    general                         Return general plug-in parms (e.g. those
+                                    beginning with "AUTOBOOT" or "AUTOGUI").
+    custom                          Returen custom plug-in parms (i.e. those
+                                    beginning with the upper case name of the
+                                    plug-in package, for example
+                                    "OBMC_SAMPLE_PARM1").
     """
 
+    regex_list = []
+    if not (general or custom):
+        return collections.OrderedDict()
     plug_in_package_name = get_plug_in_package_name(case="upper")
-    regex = "^(" + PLUG_VAR_PREFIX + "|AUTOGUI|" + plug_in_package_name + ")_"
+    if general:
+        regex_list = [PLUG_VAR_PREFIX, "AUTOGUI"]
+    if custom:
+        regex_list.append(plug_in_package_name)
+
+    regex = "^(" + "|".join(regex_list) + ")_"
 
     # Set a default for nickname.
     if os.environ.get("AUTOBOOT_OPENBMC_NICKNAME", "") == "":
@@ -113,7 +130,6 @@ def return_plug_vars():
         collections.OrderedDict(sorted({k: v for (k, v) in
                                         os.environ.items()
                                         if re.match(regex, k)}.items()))
-
     # Register password values to prevent printing them out.  Any plug var
     # whose name ends in PASSWORD will be registered.
     password_vals = {k: v for (k, v) in plug_var_dict.items()
@@ -123,7 +139,7 @@ def return_plug_vars():
     return plug_var_dict
 
 
-def sprint_plug_vars(headers=1):
+def sprint_plug_vars(headers=1, **kwargs):
     r"""
     Sprint the plug-in environment variables (i.e. those that begin with the
     global PLUG_VAR_PREFIX value or those that begin with <plug-in
@@ -137,18 +153,40 @@ def sprint_plug_vars(headers=1):
 
     Description of argument(s):
     headers                         Print a header and a footer.
+    kwargs                          These are passed directly to
+                                    return_plug_vars.  See return_plug_vars
+                                    doc string for details.
     """
-
-    plug_var_dict = return_plug_vars()
+    plug_var_dict = return_plug_vars(**kwargs)
     buffer = ""
     if headers:
         buffer += "\n" + gp.sprint_dashes()
     for key, value in plug_var_dict.items():
-        buffer += key + "=" + value + "\n"
+        buffer += gp.sprint_varx(key, value)
     if headers:
         buffer += gp.sprint_dashes() + "\n"
 
     return buffer
+
+
+def print_plug_in_header():
+    r"""
+    Print plug-in header.
+
+    When debug is set, print all plug_prefix variables (e.g.
+    AUTOBOOT_OPENBMC_HOST, etc.) and all plug-in environment variables (e.g.
+    OBMC_SAMPLE_PARM1) with surrounding dashed lines.  When debug is not set,
+    print only the plug-in environment variables (e.g. OBMC_SAMPLE_PARM1) with
+    no surrounding dashed lines.
+
+    NOTE: plug-in environment variables means any variable defined in the
+    <plug-in dir>/parm_def file plus any environment variables whose names
+    begin with the upper-case plug-in package name.
+    """
+
+    dprint_plug_vars()
+    if not debug:
+        qprint_plug_vars(headers=0, general=False, custom=True)
 
 
 def get_plug_vars():
