@@ -21,6 +21,7 @@ from gen_valid import *
 from gen_arg import *
 from gen_plug_in import *
 from gen_cmd import *
+from gen_misc import *
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)
@@ -220,25 +221,10 @@ def run_pgm(plug_in_dir_path,
         # return 0, etc.
         return rc, shell_rc, failed_plug_in_name
 
-    # Get some stats on the file.
-    cmd_buf = "stat -c '%n %s %z' " + plug_in_pgm_path
-    dpissuing(cmd_buf)
-    sub_proc = subprocess.Popen(cmd_buf, shell=True, stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT)
-    out_buf, err_buf = sub_proc.communicate()
-    shell_rc = sub_proc.returncode
-    if shell_rc != 0:
-        rc = 1
-        print_var(shell_rc, hex)
-        failed_plug_in_name = plug_in_name
-        print(out_buf)
-        print_var(failed_plug_in_name)
-        print_var(shell_rc, hex)
-        return rc, shell_rc, failed_plug_in_name
-
     print("------------------------------------------------- Starting plug-"
           + "in -----------------------------------------------")
-    print(out_buf)
+
+    print_timen("Running " + plug_in_name + "/" + cp_prefix + call_point + ".")
     if autoscript:
         stdout = 1 - quiet
         if AUTOBOOT_OPENBMC_NICKNAME != "":
@@ -246,14 +232,22 @@ def run_pgm(plug_in_dir_path,
         else:
             autoscript_prefix = ""
         autoscript_prefix += plug_in_name + ".cp_" + call_point
-        autoscript_subcmd = "autoscript --quiet=1 --show_url=y --prefix=" +\
+        status_dir_path =\
+            add_trailing_slash(os.environ.get("STATUS_DIR_PATH",
+                                              os.environ['HOME']
+                                              + "/autoipl/status/"))
+        status_file_name = autoscript_prefix + "." + file_date_time_stamp() \
+            + ".status"
+        autoscript_subcmd = "autoscript --status_dir_path=" + status_dir_path\
+            + " --status_file_name=" + status_file_name\
+            + " --quiet=1 --show_url=y --prefix=" +\
             autoscript_prefix + " --stdout=" + str(stdout) + " -- "
     else:
         autoscript_subcmd = ""
 
     cmd_buf = "PATH=" + plug_in_dir_path.rstrip("/") + ":${PATH} ; " +\
         autoscript_subcmd + cp_prefix + call_point
-    pissuing(cmd_buf)
+    print_issuing(cmd_buf)
 
     sub_proc = subprocess.Popen(cmd_buf, shell=True)
     sub_proc.communicate()
@@ -262,9 +256,12 @@ def run_pgm(plug_in_dir_path,
     shell_rc *= 0x100
     if shell_rc != 0 and shell_rc != allow_shell_rc:
         rc = 1
-        failed_plug_in_name = plug_in_name
+        failed_plug_in_name = plug_in_name + "/" + cp_prefix + call_point
     if shell_rc != 0:
-        failed_plug_in_name = plug_in_name
+        failed_plug_in_name = plug_in_name + "/" + cp_prefix + call_point
+    if failed_plug_in_name != "" and autoscript and not stdout:
+        shell_cmd("cat " + status_dir_path + status_file_name, quiet=1,
+                  print_output=1)
 
     print("------------------------------------------------- Ending plug-in"
           + " -------------------------------------------------")
@@ -341,10 +338,7 @@ def main():
     if ret_code == 0:
         return True
     else:
-        if not stop_on_plug_in_failure:
-            # We print a summary error message to make the failure more
-            # obvious.
-            print_error("At least one plug-in failed.\n")
+        print_error("At least one plug-in failed.\n")
         return False
 
 
