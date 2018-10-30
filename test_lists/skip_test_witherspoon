@@ -26,3 +26,5 @@
 -e Check_BMC_Memory_Device_Type_Property_Is_Set
 # MRW changes required for this to work.
 -e Test_GPU_SDR_Info_At_Power_On
+# Core dump is disabled.
+-e Verify_Core_Dump_Size

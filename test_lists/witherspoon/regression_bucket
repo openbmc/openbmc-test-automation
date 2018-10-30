@@ -52,7 +52,6 @@
 -i Check_BMC_LED_Compatible_Property_Is_Set
 # BMC Dump.
 -i Verify_User_Initiated_Dump_Size
--i Verify_Core_Dump_Size
 -i Delete_All_BMC_Dumps_And_Verify
 -i Verify_Dump_Persistency_On_Reset
 # BMC File Mirroring.
