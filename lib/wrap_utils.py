@@ -70,6 +70,11 @@ def create_wrapper_def_and_call(base_func_name,
         var_args = []
     else:
         var_args = ["*" + var_args]
+    keyword_args = base_arg_spec[2]
+    if keyword_args is None:
+        keyword_args = []
+    else:
+        keyword_args = ["**" + keyword_args]
     if base_arg_spec[3] is None:
         base_default_list = []
     else:
@@ -92,13 +97,14 @@ def create_wrapper_def_and_call(base_func_name,
         else:
             default_string = str(base_default_list[base_default_ix])
         base_arg_default_list[ix] += "=" + default_string
-    base_arg_default_string = ', '.join(base_arg_default_list + var_args)
+    base_arg_default_string =\
+        ', '.join(base_arg_default_list + var_args + keyword_args)
 
     # Create the argument string which can be used to call the base function.
     # Example call_arg_string:
     # headers=headers, last=last, first=first
     call_arg_string = ', '.join([val + "=" + val for val in base_arg_list]
-                                + var_args)
+                                + var_args + keyword_args)
 
     # Compose the result values.
     func_def_line = "def " + wrap_func_name + "(" + base_arg_default_string +\
