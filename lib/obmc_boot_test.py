@@ -966,15 +966,23 @@ def post_stack():
     # For the purposes of the following plug-ins, mark the "boot" as a success.
     boot_success = 1
     plug_in_setup()
-    rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
-        call_point='post_stack', stop_on_plug_in_failure=0)
+    rc, shell_rc, failed_plug_in_name, history =/
+        grpi.rprocess_plug_in_packages(call_point='post_stack',
+                                       stop_on_plug_in_failure=0,
+                                       return_history=True)
+    last_ten.extend(history)
+    if len(last_ten) > 10:
+        del last_ten[0]
+    if rc != 0:
+        boot_success = 0
 
     plug_in_setup()
-    if rc == 0:
-        rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
-            call_point='ffdc_check', shell_rc=dump_ffdc_rc(),
-            stop_on_plug_in_failure=1, stop_on_non_zero_rc=1)
-    if rc != 0 or shell_rc == dump_ffdc_rc():
+    rc, shell_rc, failed_plug_in_name =\
+        grpi.rprocess_plug_in_packages(call_point='ffdc_check',
+                                       shell_rc=dump_ffdc_rc(),
+                                       stop_on_plug_in_failure=1,
+                                       stop_on_non_zero_rc=1)
+    if shell_rc == dump_ffdc_rc():
         status, ret_values = grk.run_key_u("my_ffdc", ignore=1)
         if status != 'PASS':
             gp.qprint_error("Call to my_ffdc failed.\n")
