@@ -89,6 +89,9 @@ class resource_variables():
     yes = "1"
     No = "2"
 
+    # GUI header elements locators.
+    xpath_select_server_power = "//a[@href='#/server-control/power-operations']"
+
     # Server health elements locators.
     xpath_select_server_health = "//*[@id='header__wrapper']/div/div[3]/a[2]"
     xpath_server_health_text =  \
