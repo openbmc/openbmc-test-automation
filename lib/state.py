@@ -30,7 +30,6 @@ compared with the expected state.
 import gen_print as gp
 import gen_robot_print as grp
 import gen_valid as gv
-import gen_robot_utils as gru
 import gen_cmd as gc
 import bmc_ssh_utils as bsu
 
@@ -44,9 +43,8 @@ import sys
 import imp
 
 
-# We need utils.robot to get keywords like "Get Chassis Power State".
-gru.my_import_resource("utils.robot")
-gru.my_import_resource("state_manager.robot")
+# NOTE: Avoid importing utils.robot because utils.robot imports state.py
+# (indirectly) which will cause failures.
 
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) + os.sep
