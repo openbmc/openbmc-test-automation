@@ -253,6 +253,7 @@ Controller Server Power Click Button
     # controller_element  Server power controller element
     #                     (e.g. power__power-on.)
 
+    Click Element  ${xpath_select_server_power}
     Wait Until Element Is Visible  ${controller_element}
     Page Should Contain Button  ${controller_element}
     Click Element  ${controller_element}
