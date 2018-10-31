@@ -134,3 +134,4 @@ Login OpenBMC GUI with failure enable
 
     Open Browser With URL  ${xpath_openbmc_url}
     Login OpenBMC GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
