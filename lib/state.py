@@ -44,9 +44,9 @@ import sys
 import imp
 
 
-# We need utils.robot to get keywords like "Get Chassis Power State".
-gru.my_import_resource("utils.robot")
-gru.my_import_resource("state_manager.robot")
+# NOTE: Avoid importing utils.robot because utils.robot imports state.py
+# (indirectly) which will cause failures.
+gru.my_import_resource("rest_client.robot")
 
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) + os.sep
