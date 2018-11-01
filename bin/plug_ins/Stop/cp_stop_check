@@ -114,8 +114,9 @@ def rest_fail():
         return
 
     print_timen("Checking to see whether REST commands are working.")
-    init_robot_out_parms(get_plug_in_package_name() + ".")
-    lib_file_path = init_robot_file_path("lib/state.py")
+    init_robot_out_parms(get_plug_in_package_name() + "." + pgm_name + ".")
+    lib_file_path = init_robot_file_path("lib/state.py") + ":"\
+        + init_robot_file_path("lib/gen_robot_print.py")
     set_mod_global(lib_file_path)
     timeout = '0 seconds'
     interval = '1 second'
