@@ -168,7 +168,7 @@ master_os_up_match = DotDict([('chassis', '^On$'),
                               ('boot_progress',
                                'FW Progress, Starting OS|OSStart'),
                               ('operating_system', 'BootComplete'),
-                              ('host', '^Running$')])
+                              ('host', '^Running|Quiesced$')])
 
 invalid_state_match = DotDict([('rest', '^$'),
                                ('chassis', '^$'),
