@@ -64,34 +64,37 @@ Get Current Time Stamp
 Header Message
     [Documentation]     Write header message to the report document manifest
     ...                 and return a list of generated files.
-    ...                 TEST_NAME, TEST_MESSAGE,SUITE_SOURCE,TEST_DOCUMENTATION
+    ...                 TEST_NAME, TEST_MESSAGE,SUITE_SOURCE, TEST_DOCUMENTATION
     ...                 are auto variables and are populated dynamically by the
-    ...                 robot framework during execution
-    ...                 1. Writes opening statement headers msg
-    ...                 2. Add Test setup and config information
-    ...                 3. Types of data collection
+    ...                 robot framework during execution.
+    ...                 1. Write opening statement headers message.
+    ...                 2. Add test setup and config information.
+    ...                 3. Print types of data collection.
 
-    Write Data To File    ${HEADER_MSG}
-    Write Data To File    ${FOOTER_MSG}
-    Write Data To File    Test Suite File\t\t: ${SUITE_NAME} ${\n}
-    Write Data To File    Test Case Name\t\t: ${TEST_NAME}${\n}
-    Write Data To File    Test Source File\t: ${SUITE_SOURCE}${\n}
-    Write Data To File    Failure Time Stamp\t: ${FFDC_TIME}${\n}
-    Write Data To File    Test Error Message\t: ${TEST_MESSAGE}${\n}
-    Write Data To File    Test Documentation\t:${\n}${TEST_DOCUMENTATION}${\n}
-    Write Data To File    ${FOOTER_MSG}
+    ${TEST_NAME}=  Get Variable Value  ${TEST_NAME}
+    ${TEST_MESSAGE}=  Get Variable Value  ${TEST_MESSAGE}
+    ${TEST_DOCUMENTATION}=  Get Variable Value  ${TEST_DOCUMENTATION}
+    Write Data To File  ${HEADER_MSG}
+    Write Data To File  ${FOOTER_MSG}
+    Write Data To File  Test Suite File\t\t: ${SUITE_NAME} ${\n}
+    Write Data To File  Test Case Name\t\t: ${TEST_NAME}${\n}
+    Write Data To File  Test Source File\t: ${SUITE_SOURCE}${\n}
+    Write Data To File  Failure Time Stamp\t: ${FFDC_TIME}${\n}
+    Write Data To File  Test Error Message\t: ${TEST_MESSAGE}${\n}
+    Write Data To File  Test Documentation\t:${\n}${TEST_DOCUMENTATION}${\n}
+    Write Data To File  ${FOOTER_MSG}
 
     Test Setup Info
 
-    Write Data To File    ${\n}${MSG_INTRO}${\n}
+    Write Data To File  ${\n}${MSG_INTRO}${\n}
 
     # --- FFDC header notes ---
-    @{entries}=     Get ffdc cmd index
-    :FOR  ${index}  IN   @{entries}
-    \   Write Data To File   * ${index.upper()}
-    \   Write Data To File   ${\n}
+    @{entries}=  Get ffdc cmd index
+    :FOR  ${index}  IN  @{entries}
+    \   Write Data To File  * ${index.upper()}
+    \   Write Data To File  ${\n}
 
-    Write Data To File    ${MSG_DETAIL}
+    Write Data To File  ${MSG_DETAIL}
     ${ffdc_file_list}=  Create List  ${FFDC_FILE_PATH}
     [Return]  ${ffdc_file_list}
 
