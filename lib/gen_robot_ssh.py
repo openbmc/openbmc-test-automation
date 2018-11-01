@@ -282,6 +282,11 @@ def execute_ssh_command(cmd_buf,
             except_type, except_value, except_traceback = sys.exc_info()
             gp.lprint_var(except_type)
             gp.lprint_varx("except_value", str(except_value))
+            # This may be our last time through the retry loop, so setting
+            # return variables.
+            rc = 1
+            stderr = str(except_value)
+            stdout = ""
 
             if except_type is exceptions.AssertionError and\
                re.match(r"Connection not open", str(except_value)):
