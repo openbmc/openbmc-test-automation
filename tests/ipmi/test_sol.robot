@@ -131,6 +131,10 @@ Verify SOL During Boot
     Wait Until Keyword Succeeds  3 mins  30 secs
     ...  Check IPMI SOL Output Content  ISTEP
 
+    # Allow the host to boot.
+    Wait Until Keyword Succeeds  5 min  20 sec  Is Host Running
+
+
 Verify Deactivate Non Existing SOL
     [Documentation]  Verify deactivate non existing SOL session.
     [Tags]  Verify_Deactivate_Non_Existing_SOL
