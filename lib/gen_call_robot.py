@@ -32,6 +32,10 @@ def init_robot_out_parms(extra_prefix=""):
 
     This function would typically be called prior to calling
     create_robot_cmd_string.
+
+    Description of argument(s):
+    extra_prefix                    An extra prefix to be appended to the
+                                    default prefix for output file names.
     """
 
     gp.dprint_executing()
@@ -293,7 +297,7 @@ gcr_last_robot_rc = 0
 
 def process_robot_output_files(robot_cmd_buf=None,
                                robot_rc=None,
-                               gzip=1):
+                               gzip=None):
     r"""
     Process robot output files which can involve several operations:
     - If the files are in a temporary location, using SAVE_STATUS_POLICY to
@@ -311,6 +315,7 @@ def process_robot_output_files(robot_cmd_buf=None,
 
     robot_cmd_buf = gm.dft(robot_cmd_buf, gcr_last_robot_cmd_buf)
     robot_rc = gm.dft(robot_rc, gcr_last_robot_rc)
+    gzip = gm.dft(gzip, int(os.environ.get("GZIP", "1")))
 
     if robot_cmd_buf == "":
         # This can legitimately occur if this function is called from an
