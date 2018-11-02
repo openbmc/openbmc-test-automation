@@ -2,7 +2,7 @@
 Documentation    Verify openbmctool.py functionality.
 
 # This module tests the functionality of openbmctool.py.
-# The following tests are perfomed:
+# The following tests are performed:
 #
 # FRU status
 # FRU print
@@ -163,7 +163,7 @@ Verify FRU List With Single FRU
     ${fruname}=  Set Variable  ${fru_status[0]['component']}
     Rprint Vars  fruname
     Should Not Be Empty  ${fruname}  msg=Could not find a FRU.
-    # Get a fru list specifiying just the FRU.
+    # Get a fru list specifying just the FRU.
     ${rc}  ${output}=  Openbmctool Execute Command
     ...  fru list ${fruname} | wc -l
     ${fru_detail}=  Convert to Integer  ${output}

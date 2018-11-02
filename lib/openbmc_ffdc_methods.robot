@@ -504,7 +504,7 @@ Convert eSEL To Elog Format
     ...              formatted error log.
     [Arguments]  ${esel_file_path}
     # Description of argument(s):
-    # esel_file_path                The path to the file containg raw eSEL
+    # esel_file_path                The path to the file containing raw eSEL
     #                               data (e.g.
     #                               "/tmp/user1/dummy.181001.120000.esel").
 
