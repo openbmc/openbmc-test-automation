@@ -13,7 +13,6 @@ Resource          code_update_utils.robot
 Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/dump_utils.robot
-Resource          ../../lib/ipmi_client.robot
 Resource          ../../lib/certificate_utils.robot
 
 Suite Setup       Suite Setup Execution
@@ -177,25 +176,6 @@ Delete All Non Running BMC Images
     ${software_ids}=  Get Software Objects Id
     ...  version_type=${VERSION_PURPOSE_BMC}
     Should Not Contain  ${software_ids}  ${version_id}
-
-
-Verify IPMI Disable Policy Post BMC Code Update
-    [Documentation]  Disable IPMI, update BMC and verify post-update.
-    [Tags]  Verify_IPMI_Disable_Policy_Post_BMC_Code_Update
-
-    REST Power On
-
-    Run Inband IPMI Standard Command  lan set 1 access off
-    Run Keyword and Expect Error  *Unable to establish IPMI*
-    ...  Run External IPMI Standard Command  lan print
-
-    Upload And Activate Image  ${IMAGE_FILE_PATH}
-    ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
-    OBMC Reboot (off)
-    Verify Running BMC Image  ${IMAGE_FILE_PATH}
-
-    Run Keyword and Expect Error  *Unable to establish IPMI*
-    ...  Run External IPMI Standard Command  lan print
 
 
 Test Certificate Persistency After BMC Code Update
