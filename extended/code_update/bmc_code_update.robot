@@ -202,6 +202,10 @@ Test Certificate Persistency After BMC Code Update
     [Documentation]  Test certificate persistency after BMC update.
     [Tags]  Test_Certificate_Persistency_After_BMC_Code_Update
 
+    # Create certificate sub-directory in current working directory.
+    Create Directory  certificate_dir
+    OperatingSystem.Directory Should Exist  ${EXECDIR}${/}certificate_dir
+
     ${cert_file_path}=  Generate Certificate File Via Openssl
     ...  Valid Certificate Valid Privatekey
     ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
