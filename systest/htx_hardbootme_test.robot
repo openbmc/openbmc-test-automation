@@ -143,13 +143,6 @@ Run HTX Exerciser
     ...  Do Inventory And Compare  ${json_final_file_path}
     ...  ${PREV_INV_FILE_PATH}
 
-    # Terminate run if there are any BMC error logs.
-    ${error_logs}=  Get Error Logs
-    ${num_logs}=  Get Length  ${error_logs}
-    Run Keyword If  ${num_logs} != 0  Run Keywords
-    ...  Print Error Logs  ${error_logs}
-    ...  AND  Fail  msg=Terminating run due to BMC error log(s).
-
     Power Off Host
 
     # Close all SSH and REST active sessions.
@@ -214,10 +207,20 @@ Report Inventory Mismatch
     Fail  Significant difference in inventory found, rc=${diff_rc}
 
 
+Check For ESELs
+    [Documentation]  Terminate if there is an eSEL. 
+    ${error_logs}=  Get Error Logs
+    ${num_logs}=  Get Length  ${error_logs}
+    Run Keyword If  ${num_logs} != 0  Run Keywords
+    ...  Print Error Logs  ${error_logs}
+    ...  AND  Fail  msg=Terminating run due to BMC error log(s).
+
+
 Loop HTX Health Check
     [Documentation]  Run until HTX exerciser fails.
     Repeat Keyword  ${HTX_DURATION}
     ...  Run Keywords  Check HTX Run Status
+    ...  AND  Check For ESELs
     ...  AND  Sleep  ${HTX_INTERVAL}
 
 
