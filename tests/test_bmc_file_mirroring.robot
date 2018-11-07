@@ -31,8 +31,16 @@ Test BMC Alt Side Mirroring
     ${orig_hostname}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat /etc/hostname
     Set Suite Variable  ${hostname}  ${orig_hostname}
+    ${mirro_filename}=  Set Variable  mirror-filename
 
-    BMC Execute Command  echo "mirror-file" > /etc/hostname
+    ${host_name_dict}=  Create Dictionary  data=${mirro_filename}
+    Write Attribute  ${NETWORK_MANAGER}config  HostName  data=${host_name_dict}
+    ...  verify=${TRUE}  expected_value=${mirro_filename}
+
+    ${hostname}  ${stderr}  ${rc}=  BMC Execute Command  hostname
+
+    Should Be Equal As Strings  ${hostname}  ${mirro_filename}
+    ...  msg=The hostname interface ${mirro_filename} and command value ${hostname} do not match.
 
     # File "hostname" should have synced to alt media space.
     # Example output from "ls /media/alt/var/persist/etc/":
@@ -41,7 +49,7 @@ Test BMC Alt Side Mirroring
     ${curr_hostname}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat /media/alt/var/persist/etc/hostname
 
-    Should Be Equal As Strings  ${curr_hostname}  mirror-file
+    Should Be Equal As Strings  ${curr_hostname}  ${mirro_filename}
     ...  msg=hostname primary file is not synced to the alt flash chip side.
 
 *** Keywords ***
@@ -50,5 +58,8 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
-    BMC Execute Command  echo ${hostname} > /etc/hostname
+
+    ${host_name_dict}=  Create Dictionary  data=${hostname}
+    Write Attribute  ${NETWORK_MANAGER}config  HostName  data=${host_name_dict}
+    ...  verify=${TRUE}  expected_value=${hostname}
 
