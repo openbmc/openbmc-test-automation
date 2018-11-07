@@ -41,9 +41,12 @@ Get To Stable State
 
     Run Keyword And Ignore Error  Powercycle System Via PDU
 
-    Wait For Host To Ping  ${OPENBMC_HOST}  2 mins
-    Run Keyword And Ignore Error
-    ...  Open Connection And Log In  host=${OPENBMC_HOST}
+    ${ping_status}=  Run Keyword And Return Status  MTU Ping Test
+
+    # Check if the ping works using lower MTU.
+    Run Keyword if  ${ping_status} == ${False}  MTU Ping Test  ${600}
+
+    Open Connection And Log In  host=${OPENBMC_HOST}
 
     Wait Until Keyword Succeeds
     ...  1 min  30 sec  Initialize OpenBMC
@@ -131,3 +134,17 @@ Validate Parameters
     Should Not Be Empty   ${PDU_SLOT_NO}
     Should Not Be Empty   ${PDU_USERNAME}
     Should Not Be Empty   ${PDU_PASSWORD}
+
+
+MTU Ping Test
+    [Documentation]  Ping test using MTU.
+    [Arguments]  ${mtu}=${1400}
+
+    # Description of argument(s):
+    # mtu   The maximum transmission unit (MTU) of a network interface.
+    #       Default 1400.
+
+    ${rc}  ${output}=  Run And Return RC And Output
+    ...  ping -M do -s ${mtu} -c 10 ${OPENBMC_HOST}
+    Should Be Equal As Integers  ${rc}  0
+    Should Not Contain  ${output}  100% packet loss
