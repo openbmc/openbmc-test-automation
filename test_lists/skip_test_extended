@@ -12,6 +12,7 @@
 -e Host_Multi_Code_Update
 -e Enable_Field_Mode
 -e Attempt_To_Disable_Field_Mode_Via_REST
+-e Verify_IPMI_Disable_Policy_Post_BMC_Code_Update
 # Others NA tests.
 -e Run_Keyword_Pgm
 # Factory reset must not run in CT.
