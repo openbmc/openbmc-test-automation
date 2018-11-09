@@ -214,7 +214,7 @@ Test Teardown Execution
 
 Open Browser With URL
     [Documentation]  Open browser with specified URL and returns browser id.
-    [Arguments]  ${URL}  ${browser}=ff  ${mode}=headless
+    [Arguments]  ${URL}  ${browser}=ff  ${mode}=header
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
@@ -361,10 +361,10 @@ Expected Initial Test State
     # expectedState    Test initial host state.
 
     Run Keyword If  '${expectedState}' == 'Running'
-    ...  Initiate Host Boot
+    ...  REST Power On  stack_mode=skip
 
     Run Keyword If  '${expectedState}' == 'Off'
-    ...  Initiate Host PowerOff
+    ...  REST Power Off  stack_mode=skip
 
 Launch Browser And Login OpenBMC GUI
     [Documentation]  Launch browser and log into openbmc GUI.
