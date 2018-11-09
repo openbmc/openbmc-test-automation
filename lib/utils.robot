@@ -1310,7 +1310,8 @@ Delete Error Logs
     [Documentation]  Delete error logs.
 
     # Check if error logs entries exist, if not return.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${/}list  quiet=${1}
+    # ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${/}list  quiet=${1}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${/}list  quiet=${0}
     Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
 
     # Get the list of error logs entries and delete them all.
@@ -1329,7 +1330,9 @@ Delete Error Log Entry
 
     # Skip delete if entry URI is a callout.
     # Example: /xyz/openbmc_project/logging/entry/1/callout
-    Return From Keyword If  '${entry_path.rsplit('/', 1)[1]}' == 'callout'
+    ${callout_entry}=  Run Keyword And Return Status
+    ...  Should Match Regexp  ${entry_path}  .*/callout(s/|$)
+    Return From Keyword If  ${callout_entry}
 
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  Openbmc Delete Request  ${entry_path}  data=${data}
