@@ -1328,8 +1328,12 @@ Delete Error Log Entry
     #             Ex. /xyz/openbmc_project/logging/entry/1
 
     # Skip delete if entry URI is a callout.
-    # Example: /xyz/openbmc_project/logging/entry/1/callout
-    Return From Keyword If  '${entry_path.rsplit('/', 1)[1]}' == 'callout'
+    # Examples:
+    # /xyz/openbmc_project/logging/entry/1/callout
+    # /xyz/openbmc_project/logging/entry/1/callouts/0
+    ${callout_entry}=  Run Keyword And Return Status
+    ...  Should Match Regexp  ${entry_path}  /callout[s]?(/|$)
+    Return From Keyword If  ${callout_entry}
 
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  Openbmc Delete Request  ${entry_path}  data=${data}
