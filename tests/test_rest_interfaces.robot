@@ -93,8 +93,7 @@ Verify REST JSON Data On Failure
     # Example:
     # Response code:404, Content:{
     # "data": {
-    #        "description": "org.freedesktop.DBus.Error.FileNotFound: path or object not found:
-    #         /xyz/idont/exist"
+    #        "description": "org.freedesktop.DBus.Error.FileNotFound: path or object not found"
     #         },
     # "message": "404 Not Found",
     # "status": "error"
@@ -103,7 +102,7 @@ Verify REST JSON Data On Failure
     ${resp}=  OpenBMC Get Request  /xyz/idont/exist/
     ${jsondata}=  To JSON  ${resp.content}
     Should Be Equal As Strings  ${jsondata["data"]["description"]}
-    ...  org.freedesktop.DBus.Error.FileNotFound: path or object not found: /xyz/idont/exist
+    ...  org.freedesktop.DBus.Error.FileNotFound: path or object not found
     Should Be Equal As Strings  ${jsondata["message"]}  404 Not Found
     Should Be Equal As Strings  ${jsondata["status"]}  error
 
