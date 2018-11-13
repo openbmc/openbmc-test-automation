@@ -83,9 +83,10 @@ Verify PNOR Update
     # Error 100 opening ffs !
 
     ${stdout}  ${stderr}  ${rc}=
-    ...  BMC Execute Command  /usr/sbin/pflash -h | egrep skip  ignore_err=${1}
-    ${pflash_cmd}=  Run Keyword if  ${rc} == ${0}
-    ...  Catenate  SEPARATOR=  ${pflash_cmd}  --skip=4096
+    ...  BMC Execute Command  /usr/sbin/pflash -h | egrep -q skip
+    ...  ignore_err=${1}
+    ${pflash_cmd}=  Set Variable If  ${rc} == ${0}  ${pflash_cmd} --skip=4096
+    ...  ${pflash_cmd}
     ${pnor_info}=  BMC Execute Command  ${pflash_cmd}
     Should Not Contain Any  ${pnor_info}  Flash header not found  Error
 
