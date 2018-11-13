@@ -76,7 +76,7 @@ Test Get Redfish Response Codes
     ${HTTP_OK}           Chassis
     ${HTTP_OK}           Managers
     ${HTTP_OK}           AccountService
-    ${HTTP_OK}           Managers/openbmc/EthernetInterfaces/eth0
+    ${HTTP_OK}           Managers/bmc/EthernetInterfaces/eth0
     ${HTTP_NOT_FOUND}    /i/dont/exist/
 
 *** Keywords ***
