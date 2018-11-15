@@ -46,9 +46,7 @@ Verify Watchdog Setting With Watchdog Enabled
     Wait Until Keyword Succeeds  3 min  10 sec  Watchdog Object Should Exist
 
     # Verify if watchdog settings are enabled and timeremaining is reduced.
-    ${properties}=  Read Properties  /xyz/openbmc_project/watchdog/host0
-    Should Be Equal As Strings  ${properties["Enabled"]}  ${True}
-    Should Not Be Equal As Strings  ${properties["TimeRemaining"]}  0
+    Wait Until Keyword Succeeds  3 min  10 sec  Watchdog Enabled State
 
     Wait Until Keyword Succeeds  120 sec  20 sec  Is Host Rebooted
     Wait For Host To Ping  ${OS_HOST}  5min  10
@@ -144,3 +142,10 @@ Watchdog Object Should Exist
     ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}host0
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
+
+Watchdog Enabled State
+    [Documentation]  Check if watchdog settings are enabled.
+
+    ${properties}=  Read Properties  /xyz/openbmc_project/watchdog/host0
+    Should Be Equal As Strings  ${properties["Enabled"]}  ${True}
+    Should Not Be Equal As Strings  ${properties["TimeRemaining"]}  0
