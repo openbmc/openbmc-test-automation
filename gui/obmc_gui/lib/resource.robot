@@ -83,7 +83,7 @@ Launch Headless Browser
     # browser  Browser to open given URL in headless way
     #          (e.g. gc for google chrome, ff for firefox).
 
-    Start Virtual Display
+    Start Virtual Display  1920  1080
     ${browser_ID}=  Open Browser  ${URL}
     Set Window Size  1920  1080
 
@@ -253,7 +253,8 @@ Controller Server Power Click Button
     # controller_element  Server power controller element
     #                     (e.g. power__power-on.)
 
-    Click Element  ${xpath_select_server_power}
+    #Wait Until Element Is Visible  ${xpath_select_server_power}
+    #Click Link  ${xpath_select_server_power}
     Wait Until Element Is Visible  ${controller_element}
     Page Should Contain Button  ${controller_element}
     Click Element  ${controller_element}

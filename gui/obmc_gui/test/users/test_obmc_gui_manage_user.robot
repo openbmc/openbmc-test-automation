@@ -3,6 +3,7 @@
 Documentation  Test OpenBMC GUI "Manage user account" sub-menu  of
 ...  "Users".
 
+Library         Selenium2Library  120  120
 Resource        ../../lib/resource.robot
 
 Suite Setup     Launch Browser And Login OpenBMC GUI
