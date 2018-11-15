@@ -17,6 +17,10 @@ Library            gen_robot_keyword.py
 Library            dump_utils.py
 Library            logging_utils.py
 
+*** Variables ***
+
+${FFDC_TIMEOUT}    240
+
 *** Keywords ***
 
 # Method : Call FFDC Methods                                   #
@@ -157,7 +161,10 @@ Execute Command and Write FFDC
     @{ffdc_file_list}=  Create List  ${log_path}
 
     ${cmd_buf}=  Catenate  ${target} Execute Command \ ${cmd} \ ignore_err=${1}
+    ...  \ time_out=${FFDC_TIMEOUT}
     ${status}  ${ret_values}=  Run Key  ${cmd_buf}  ignore=${1}
+    # If the command times out, status will be 'FAIL'.
+    Return From Keyword If  '${status}' == 'FAIL'  ${ffdc_file_list}
 
     ${stdout}=  Set Variable  @{ret_values}[0]
     ${stderr}=  Set Variable  @{ret_values}[1]
