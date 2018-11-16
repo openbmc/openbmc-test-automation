@@ -27,6 +27,13 @@ ${IPMI_COMMAND}    External
 # IPMI chipher default.
 ${IPMI_CIPHER_LEVEL}  ${3}
 
+# GUI related parameters.
+
+# Default GUI broswer and mode is set to "Firefox" and "headless"
+# respectively here.
+${GUI_BROWSER}      ff
+${GUI_MODE}         headless
+
 # PDU related parameters
 ${PDU_TYPE}         ${EMPTY}
 ${PDU_IP}           ${EMPTY}
