@@ -6,3 +6,10 @@ Variables  ../data/variables.py
 ${HOST}           ${EMPTY}
 ${HOST_USERNAME}  ${EMPTY}
 ${HOST_PASSWORD}  ${EMPTY}
+
+# GUI related parameters.
+
+# Default GUI broswer and mode is set to "Firefox" and "headless"
+# respectively here.
+${GUI_BROWSER}      ff
+${GUI_MODE}         headless
