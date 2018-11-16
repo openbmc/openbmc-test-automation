@@ -85,7 +85,7 @@ Verify Error Log Persistency
     ...              code update.
     [Tags]  Verify_Error_Log_Persistency
 
-    ${error_log_paths}=  Read Properties  ${BMC_LOGGING_URI}/list
+    ${error_log_paths}=  Read Properties  ${BMC_LOGGING_ENTRY}/list
     Log To Console  ${error_log_paths}
     ${test_error_message}=  Read Attribute  @{error_log_paths}[-1]  Message
     Should Be Equal  ${test_error_message}
