@@ -1334,8 +1334,7 @@ def sprint_error_report(error_text="\n",
     caller_func_name = sprint_func_name(2)
     if caller_func_name.endswith("print_error_report"):
         stack_frame_ix += 1
-    if not robot_env:
-        buffer += sprint_call_stack(indent, stack_frame_ix)
+    buffer += sprint_call_stack(indent, stack_frame_ix)
     buffer += sprint_pgm_header(indent)
     buffer += sprint_dashes(width=120, char="=")
 
