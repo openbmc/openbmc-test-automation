@@ -18,6 +18,7 @@ Library      ../../../lib/gen_valid.py
 Library      ../../../lib/gen_robot_ssh.py
 Library      ../../../lib/bmc_ssh_utils.py
 Resource     ../../../lib/resource.txt
+Resource     ../../lib/resource.txt
 Resource     ../../../lib/rest_client.robot
 Resource     ../../../lib/state_manager.robot
 Variables    ../data/resource_variables.py
@@ -25,12 +26,14 @@ Variables    ../data/resource_variables.py
 *** Variables ***
 ${obmc_gui_url}              https://${OPENBMC_HOST}
 
-# Default Browser.
-${default_browser}           ff
-
 ${obmc_PowerOff_state}       Off
 ${obmc_PowerRunning_state}   Running
 ${obmc_PowerStandby_state}   Standby
+
+# Default GUI broswer and mode is set to "Firefox" and "headless"
+# respectively here.
+${GUI_BROWSER}               ff
+${GUI_MODE}                  headless
 
 *** Keywords ***
 Launch OpenBMC GUI Browser
@@ -64,7 +67,7 @@ Get Operating System
 Launch Header Browser
     [Documentation]  Open the browser with the URL and
     ...              login on windows platform.
-    [Arguments]  ${browser_type}=${default_browser}
+    [Arguments]  ${browser_type}=${GUI_BROWSER}
 
     # Description of argument(s):
     # browser_type  Type of browser (e.g. "firefox", "chrome", etc.).
@@ -75,7 +78,7 @@ Launch Header Browser
 
 Launch Headless Browser
     [Documentation]  Launch headless browser.
-    [Arguments]  ${URL}=${obmc_gui_url}  ${browser}=${default_browser}
+    [Arguments]  ${URL}=${obmc_gui_url}  ${browser}=${GUI_BROWSER}
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
@@ -214,7 +217,7 @@ Test Teardown Execution
 
 Open Browser With URL
     [Documentation]  Open browser with specified URL and returns browser id.
-    [Arguments]  ${URL}  ${browser}=ff  ${mode}=headless
+    [Arguments]  ${URL}  ${browser}=ff  ${mode}=${GUI_MODE}
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
