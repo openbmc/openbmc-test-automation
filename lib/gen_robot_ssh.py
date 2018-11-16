@@ -6,6 +6,7 @@ execute_ssh_command, etc.
 """
 
 import sys
+import traceback
 import re
 import socket
 import paramiko
@@ -328,6 +329,7 @@ def execute_ssh_command(cmd_buf,
             # We do not handle any other RuntimeErrors so we will raise the
             # exception again.
             sshlib.close_all_connections()
+            gp.lprintn(traceback.format_exc())
             raise(execute_exception)
 
         # If we get to this point, the command was executed.
