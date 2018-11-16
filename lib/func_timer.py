@@ -10,6 +10,7 @@ import signal
 import time
 import gen_print as gp
 import gen_misc as gm
+import gen_valid as gv
 
 
 class func_timer_class:
@@ -184,13 +185,23 @@ class func_timer_class:
         # Get self.__time_out value from kwargs.  If kwargs['time_out'] is
         # not present, self.__time_out will default to None.
         self.__time_out = None
-        if len(kwargs) > 0:
-            if 'time_out' in kwargs:
-                self.__time_out = kwargs['time_out']
-                del kwargs['time_out']
-                if self.__time_out is not None:
-                    self.__time_out = int(self.__time_out)
+        if 'time_out' in kwargs:
+            self.__time_out = kwargs['time_out']
+            del kwargs['time_out']
+            # Convert "none" string to None.
+            if type(self.__time_out) in (str, unicode)\
+               and self.__time_out.lower() == "none":
+                self.__time_out = None
+            if self.__time_out is not None:
+                self.__time_out = int(self.__time_out)
+                # Ensure that time_out is non-negative.
+                message = gv.svalid_range(self.__time_out, [0], "time_out")
+                if message != "":
+                    raise ValueError("\n"
+                                     + gp.sprint_error_report(message,
+                                                              format='long'))
 
+        gp.lprint_varx("time_out", self.__time_out)
         self.__child_pid = 0
         if self.__time_out is not None:
             # Save the original SIGUSR1 handler for later restoration by this
