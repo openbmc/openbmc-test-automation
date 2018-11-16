@@ -29,7 +29,6 @@ Configure SNMP Manager On BMC
     # expected_result  Expected status of SNMP configuration.
 
     @{snmp_parm_list}=  Create List  ${snmp_ip}  ${port}
-    ...  xyz.openbmc_project.Network.Client.IPProtocol.IPv4
 
     ${data}=  Create Dictionary  data=@{snmp_parm_list}
 
