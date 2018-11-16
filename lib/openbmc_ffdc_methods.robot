@@ -2,24 +2,24 @@
 Documentation      Methods to execute commands on BMC and collect
 ...                data to a list of FFDC files
 
-Resource           openbmc_ffdc_utils.robot
-Resource           rest_client.robot
-Resource           utils.robot
-Resource           list_utils.robot
-Resource           logging_utils.robot
-Library            SSHLibrary
-Library            OperatingSystem
-Library            Collections
-Library            String
-Library            gen_print.py
-Library            gen_cmd.py
-Library            gen_robot_keyword.py
-Library            dump_utils.py
-Library            logging_utils.py
+Resource               openbmc_ffdc_utils.robot
+Resource               rest_client.robot
+Resource               utils.robot
+Resource               list_utils.robot
+Resource               logging_utils.robot
+Library                SSHLibrary
+Library                OperatingSystem
+Library                Collections
+Library                String
+Library                gen_print.py
+Library                gen_cmd.py
+Library                gen_robot_keyword.py
+Library                dump_utils.py
+Library                logging_utils.py
 
 *** Variables ***
 
-${FFDC_TIMEOUT}    240
+${FFDC_CMD_TIMEOUT}    240
 
 *** Keywords ***
 
@@ -161,7 +161,7 @@ Execute Command and Write FFDC
     @{ffdc_file_list}=  Create List  ${log_path}
 
     ${cmd_buf}=  Catenate  ${target} Execute Command \ ${cmd} \ ignore_err=${1}
-    ...  \ time_out=${FFDC_TIMEOUT}
+    ...  \ time_out=${FFDC_CMD_TIMEOUT}
     ${status}  ${ret_values}=  Run Key  ${cmd_buf}  ignore=${1}
     # If the command times out, status will be 'FAIL'.
     Return From Keyword If  '${status}' == 'FAIL'  ${ffdc_file_list}
