@@ -151,7 +151,7 @@ REST Upload File To BMC
     Set To Dictionary  ${data}  headers  ${headers}
 
     ${resp}=  Post Request  openbmc  /upload/image  &{data}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_BAD_REQUEST}
     ...  msg=Openbmc /upload/image failed.
 
     # Take SSH connection to BMC and switch to BMC connection to perform
