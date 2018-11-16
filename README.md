@@ -207,6 +207,13 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     Witherspoon:  test_lists/skip_test_witherspoon
     ```
 
+* Run GUI tests:
+
+    With chrome browser and header mode:
+    ```
+    robot -v OPENBMC_HOST:x.x.x.x -v GUI_BROWSER:gc -v GUI_MODE:header gui/obmc_gui/test/
+    ```
+
 * How to run CI and CT bucket test:
 
     Default CI test bucket list:
