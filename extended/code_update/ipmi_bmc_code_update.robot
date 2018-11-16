@@ -1,8 +1,9 @@
 *** Settings ***
 Documentation     Test BMC code update on a target BMC.
 ...               Execution Command:
-...               python -m robot -v OPENBMC_HOST:<hostname>
-...               -v IMAGE_FILE_PATH:<path/*.tar>  bmc_code_update.robot
+...               python -m robot -v OPENBMC_HOST:<hostname> -v OS_HOST:<OS IP>
+...               -v OS_USERNAME:<OS username> -v OS_PASSWORD:<OS password>
+...               -v IMAGE_FILE_PATH:<path/*.tar> ipmi_bmc_code_update.robot
 
 Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/ipmi_client.robot
