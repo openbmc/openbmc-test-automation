@@ -36,6 +36,28 @@ Verify User Group And Privilege Created
     Should Contain  ${bmc_user_uris}  ${GROUP_PRIVILEGE}
 
 
+Verify LDAP User With Privilege Admin Able To Power On
+    [Documentation]  Verify LDAP user with privilege admin able to power on.
+    [Tags]  Verify_LDAP_User_With_Privilege_Admin_Able_To_Power_On
+    [Teardown]  FFDC On Test Case Fail
+
+    Create Privilege Admin
+    Initialize OpenBMC  60  1  OPENBMC_USER=${LDAP_USER}
+    ...  OPENBMC_PASSWORD=${LDAP_USER_PASSWORD}
+    REST Power On  stack_mode=normal  quiet=1
+
+
+Verify LDAP User With Privilege Admin Able To Power Off
+    [Documentation]  Verify LDAP user with privilege admin able to power off.
+    [Tags]  Verify_LDAP_User_With_Privilege_Admin_Able_To_Power_Off
+    [Teardown]  FFDC On Test Case Fail
+
+    Create Privilege Admin
+    Initialize OpenBMC  60  1  OPENBMC_USER=${LDAP_USER}
+    ...  OPENBMC_PASSWORD=${LDAP_USER_PASSWORD}
+    REST Hard Power Off
+
+
 Verify Root Password Update
     [Documentation]  Update system "root" user password and verify.
     [Tags]  Verify_Root_Password_Update
@@ -101,3 +123,13 @@ Create Group And Privilege
     ...  ${BMC_USER_URI}ldap/action/Create  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  msg=Updating the new root password failed, RC=${resp.status_code}.
+
+
+Create Privilege Admin
+    [Documentation]  Create privilege as priv-admin.
+
+    Create Group And Privilege  ${GROUP_NAME}  priv-admin
+    ${bmc_user_uris}=  Read Properties  ${BMC_USER_URI}ldap/enumerate
+    ${bmc_user_uris}=  Convert To String  ${bmc_user_uris}
+    Should Contain  ${bmc_user_uris}  priv-admin
+    ...  msg=Could not create priv-admin privilege.
