@@ -36,6 +36,40 @@ Verify User Group And Privilege Created
     Should Contain  ${bmc_user_uris}  ${GROUP_PRIVILEGE}
 
 
+Verify LDAP User With Privilege Admin Able To Power On
+    [Documentation]  Verify LDAP user with privilege admin able to power on.
+    [Tags]  Verify_LDAP_User_With_Privilege_Admin_Able_To_Power_On
+    [Teardown]  FFDC On Test Case Fail
+
+    Create Privilege  priv-admin
+    Initialize OpenBMC  60  1  OPENBMC_USER=${LDAP_USER}
+    ...  OPENBMC_PASSWORD=${LDAP_USER_PASSWORD}
+    REST Power On  stack_mode=normal  quiet=1
+
+
+Verify LDAP User With Privilege Admin Able To Power Off
+    [Documentation]  Verify LDAP user with privilege admin able to power off.
+    [Tags]  Verify_LDAP_User_With_Privilege_Admin_Able_To_Power_Off
+    [Teardown]  FFDC On Test Case Fail
+
+    Create Privilege  priv-admin
+    Initialize OpenBMC  60  1  OPENBMC_USER=${LDAP_USER}
+    ...  OPENBMC_PASSWORD=${LDAP_USER_PASSWORD}
+    REST Hard Power Off
+
+
+Verify LDAP User With Privilege User Able To Read Inventory
+    [Documentation]  Verify LDAP user with privilege usern able to read
+    ...  inventory assettag.
+    [Tags]  Verify_LDAP_User_With_Privilege_User_Able_To_Read_Inventory
+    [Teardown]  FFDC On Test Case Fail
+
+    Create Privilege  priv-user
+    Initialize OpenBMC  60  1  OPENBMC_USER=${LDAP_USER}
+    ...  OPENBMC_PASSWORD=${LDAP_USER_PASSWORD}
+    Read Attribute  /xyz/openbmc_project/inventory/system  AssetTag
+
+
 Verify Root Password Update
     [Documentation]  Update system "root" user password and verify.
     [Tags]  Verify_Root_Password_Update
@@ -101,3 +135,14 @@ Create Group And Privilege
     ...  ${BMC_USER_URI}ldap/action/Create  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  msg=Updating the new root password failed, RC=${resp.status_code}.
+
+
+Create Privilege
+    [Documentation]  Create privilege as priv-admin.
+    [Arguments]  ${user_privilege}
+
+    Create Group And Privilege  ${GROUP_NAME}  ${user_privilege}
+    ${bmc_user_uris}=  Read Properties  ${BMC_USER_URI}ldap/enumerate
+    ${bmc_user_uris}=  Convert To String  ${bmc_user_uris}
+    Should Contain  ${bmc_user_uris}  ${user_privilege}
+    ...  msg=Could not create ${user_privilege} privilege.
