@@ -42,12 +42,12 @@ Verify LDAP User Able To Login Using REST
 
     Configure LDAP Server On BMC
     Check LDAP Config File Generated
-    Log Out OpenBMC
+    # Log Out OpenBMC
     Sleep  60s
 
     # REST Login to BMC with LDAP user and password.
-    Initialize OpenBMC  60  1  OPENBMC_USER=${LDAP_USER}
-    ...  OPENBMC_PASSWORD=${LDAP_USER_PASSWORD}
+    Initialize OpenBMC  60  1  ${LDAP_USER}
+    ...  ${LDAP_USER_PASSWORD}
 
     ${bmc_user_uris}=  Read Properties  ${BMC_USER_URI}list
     Should Not Be Empty  ${bmc_user_uris}
@@ -60,12 +60,12 @@ Verify LDAP User Able to Logout Using REST
     Configure LDAP Server On BMC
     Sleep  60s
     Check LDAP Config File Generated
-    Log Out OpenBMC
+    # Log Out OpenBMC
     Sleep  60s
 
     # REST Login to BMC with LDAP user and password.
-    Initialize OpenBMC  60  1  OPENBMC_USER=${LDAP_USER}
-    ...  OPENBMC_PASSWORD=${LDAP_USER_PASSWORD}
+    Initialize OpenBMC  60  1  ${LDAP_USER}
+    ...  ${LDAP_USER_PASSWORD}
 
     # REST Logout from BMC.
     Log Out OpenBMC
@@ -101,22 +101,50 @@ Verify LDAP Server BASE DN Is Set
     ...  verify=${True}  expected_value=${LDAP_BASE_DN}
 
 
-Verify LDAP Server Type Is Set
-    [Documentation]  Verify LDAP server type is set using REST.
-    [Tags]  Verify_LDAP_Server_Type_Is_Set
+Verify LDAP Server Type Is Set As Active Directory
+    [Documentation]  Verify LDAP server type is set as "Active Directory"
+    ...   using REST.
+    [Tags]  Verify_LDAP_Server_Type_Is_Set_As_Active_Directory
+    [Template]  Modify LDAP Server Type
 
-    ${ldap_type}=  Create Dictionary  data=${LDAP_SERVER_TYPE}
-    Write Attribute  ${BMC_LDAP_URI}/config   LDAPType  data=${ldap_type}
-    ...  verify=${True}  expected_value=${LDAP_SERVER_TYPE}
+     # Server type as ActiveDirectory
+     xyz.openbmc_project.User.Ldap.Config.Type.ActiveDirectory
 
 
-Verify LDAP Search Scope Is Set
-    [Documentation]  Verify LDAP search scope is set using REST.
-    [Tags]  Verify_LDAP_Search_Scope_Is_Set
+Verify LDAP Server Type Is Set As Open LDAP
+    [Documentation]  Verify LDAP server type is set as "OpenLDAP"
+    ...   using REST.
+    [Tags]  Verify_LDAP_Server_Type_Is_Set_As_Open_LDAP
+    [Template]  Modify LDAP Server Type
 
-    ${search_scope}=  Create Dictionary  data=${LDAP_SEARCH_SCOPE}
-    Write Attribute  ${BMC_LDAP_URI}/config   LDAPSearchScope  data=${search_scope}
-    ...  verify=${True}  expected_value=${LDAP_SEARCH_SCOPE}
+     # Server type as OpenLdap
+     xyz.openbmc_project.User.Ldap.Config.Type.OpenLdap
+
+
+Verify LDAP Search Scope Is Set As One
+    [Documentation]  Verify LDAP search scope is set as "one" using REST.
+    [Tags]  Verify_LDAP_Search_Scope_Is_Set_As_One
+    [Template]  Modify LDAP Search Scope
+
+     # Search Scope as one
+     xyz.openbmc_project.User.Ldap.Config.SearchScope.one
+
+
+Verify LDAP Search Scope Is Set As Base
+    [Documentation]  Verify LDAP search scope is set as "base" using REST.
+    [Tags]  Verify_LDAP_Search_Scope_Is_Set_As_Base
+    [Template]  Modify LDAP Search Scope
+
+     # Search Scope as base
+     xyz.openbmc_project.User.Ldap.Config.SearchScope.base
+
+Verify LDAP Search Scope Is Set As Sub
+    [Documentation]  Verify LDAP search scope is set as "sub" using REST.
+    [Tags]  Verify_LDAP_Search_Scope_Is_Set_As_Sub
+    [Template]  Modify LDAP Search Scope
+
+     # Search Scope as sub
+     xyz.openbmc_project.User.Ldap.Config.SearchScope.sub
 
 
 Verify LDAP Binddn Password Is Set
@@ -195,3 +223,27 @@ Check LDAP Config File Deleted
 
     Should Not Contain  ${ldap_server_config}  ${LDAP_SERVER_URI}
     ...  msg=${ldap_server_config} is not configured.
+
+
+
+Modify LDAP Search Scope
+    [Documentation]  Modify LDAP search scope parameter in LDAP config.
+    [Arguments]  ${search_scope}=${LDAP_SEARCH_SCOPE}
+
+    # Description of argument(s):
+    # search_scope  Contains ldap search scope (e.g. "xyz.openbmc_project.User.Ldap.Config.SearchScope.one").
+
+    ${search_scope_dict}=  Create Dictionary  data=${search_scope}
+    Write Attribute  ${BMC_LDAP_URI}/config   LDAPSearchScope  data=${search_scope_dict}
+    ...  verify=${True}  expected_value=${search_scope}
+
+
+Modify LDAP Server Type
+    [Documentation]  Modify LDAP server type parameter in LDAP config.
+    [Arguments]  ${ldap_type}=${LDAP_SERVER_TYPE}
+
+    ${ldap_type_dict}=  Create Dictionary  data=${ldap_type}
+    Write Attribute  ${BMC_LDAP_URI}/config   LDAPType  data=${ldap_type_dict}
+    ...  verify=${True}  expected_value=${ldap_type}
+
+
