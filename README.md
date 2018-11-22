@@ -214,6 +214,13 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     robot -v OPENBMC_HOST:x.x.x.x -v GUI_BROWSER:gc -v GUI_MODE:header gui/obmc_gui/test/
     ```
 
+* Run LDAP tests:
+
+    Before using LDAP test functions be sure appropriate LDAP user(s) and group(s) have been created on your LDAP server.
+    ```
+    robot -v OPENBMC_HOST:x.x.x.x v LDAP_SERVER_URI:<ldap(s)//LDAP Hostname / IP> -v LDAP_BIND_DN:<LDAP Bind DN> -v LDAP_BASE_DN:<LDAP Base DN> -v LDAP_BIND_DN_PASSWORD:<LDAP Bind password> -v LDAP_SEARCH_SCOPE:<LDAP search scope>  -v LDAP_SERVER_TYPE:<LDAP server type>  -v LDAP_USER:<LDAP user-id> -v LDAP_USER_PASSWORD:<LDAP PASSWORD> -v GROUP_NAME:<Group Name> -v GROUP_PRIVILEGE:<Privilege> ./test_user_ldap_management.robot
+    ```
+
 * How to run CI and CT bucket test:
 
     Default CI test bucket list:
