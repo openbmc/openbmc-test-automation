@@ -50,7 +50,7 @@ Verify Drop Down Button User Timezone Appears
     # Ensure that page is not in refreshing state.
     # It helps to click the drop down element.
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
-    Click Element  class:dropdown__button
+    Click Element  //*[@class='dropdown__button']
     Page Should Contain Button  ${xpath_drop_down_timezone_utc}
 
 
@@ -81,8 +81,8 @@ Verify Filter By Event Status Element Appears
 
     # Ensure that page is not in refreshing state.
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
-    Wait Until Element is Visible  class:dropdown__wrapper
-    Click Element  class:dropdown__wrapper
+    Wait Until Element is Visible  //*[@class='dropdown__wrapper']
+    Click Element  //*[@class='dropdown__wrapper']
     Page Should Contain Element  ${xpath_event_filter_all}  limit=1
     Page Should Contain Element  ${xpath_event_filter_resolved}  limit=1
     Page Should Contain Element  ${xpath_event_filter_unresolved}  limit=1
@@ -95,7 +95,7 @@ Verify Event Action Bar Element Appears
     # Ensure that page is not in refreshing state.
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_event_action_bars}  limit=1
-    Page Should Contain Element  class:control__indicator
+    Page Should Contain Element  //*[@class='control__indicator']
 
 
 Verify Click Events Check Box
@@ -106,7 +106,7 @@ Verify Click Events Check Box
 
     # Ensure that page is not in refreshing state.
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
-    Click Element  class:control__indicator
+    Click Element  //*[@class='control__indicator']
     Page Should Contain Button  ${xpath_event_action_delete}  limit=1
     Page Should Contain Element  ${xpath_event_action_export}  limit=1
 
@@ -132,7 +132,7 @@ Select All Error Logs And Mark As Resolved
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
-    Click Element  class:control__indicator
+    Click Element  //*[@class='control__indicator']
     Run Keyword If  ${number_of_events} > 0
     ...  Click Element  ${xpath_mark_as_resolved}
     Element Should Be Disabled  ${xpath_mark_as_resolved}
@@ -147,7 +147,7 @@ Select All Error Logs And Click Export
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
-    Click Element  class:control__indicator
+    Click Element  //*[@class='control__indicator']
     Page Should Contain Element  ${xpath_events_export}
     Run Keyword If  ${number_of_events} > 0
     ...  Click Element  ${xpath_events_export}
@@ -162,7 +162,7 @@ Select All Error Logs And Delete
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
-    Click Element  class:control__indicator
+    Click Element  //*[@class='control__indicator']
     Page Should Contain Button  ${xpath_event_action_delete}
     Run Keyword If  ${number_of_events} > 0
     ...  Click Element  ${xpath_event_action_delete}
