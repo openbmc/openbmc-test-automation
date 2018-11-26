@@ -378,5 +378,5 @@ Launch Browser And Login OpenBMC GUI
 Logout And Close Browser
     [Documentation]  Logout from openbmc application and close the browser.
 
-    Click Element  header
+    Click Element  //*[text()='Log out']
     Close Browser
