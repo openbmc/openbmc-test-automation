@@ -13,6 +13,7 @@ class resource_variables():
     xpath_textbox_password = "//*[@id='password']"
     xpath_button_login = "//*[@id='login__submit']"
     xpath_button_logout = "//*[@id='header']/a"
+    xpath_yes_button = "//button[text()='Yes']"
     xpath_openbmc_url = "http://localhost:8080/#/login"
     xpath_openbmc_ip = "//*[@id='login__form']/input[1]"
     xpath_display_server_power_status = \
