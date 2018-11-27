@@ -91,6 +91,43 @@ Redfish Get Request
     [Return]  ${content}
 
 
+Redfish Post Request
+    [Documentation]  Do REST POST request.
+    [Arguments]  ${uri_suffix}
+    ...          &{kwargs}
+    ...          ${timeout}=30
+
+    # Description of argument(s):
+    # uri_suffix   The URI to establish connection with
+    #             (e.g. '/Systems/1/Actions/ComputerSystem.Reset').
+    # kwargs      Arguments passed to the REST call.
+    #             Any additional arguments to be passed directly to the
+    #             Postt Request call. For example, the caller might
+    #             set kwargs as follows:
+    #             ${kwargs}=  Create Dictionary  allow_redirect=${True}.
+    # timeout     Timeout in seconds to establish connection with URI.
+
+    ${base_uri} =  Catenate  SEPARATOR=  ${REDFISH_BASE_URI}  ${uri_suffix}
+
+    # Set session and auth token variable.
+    ${session_id}  ${xauth_token} =  Redfish Login Request
+
+    # Set session URI path.
+    ${session_uri} =
+    ...  Catenate  SEPARATOR=  ${REDFISH_SESSION_URI}  ${session_id}
+
+    # Example: "X-Auth-Token: 3la1JUf1vY4yN2dNOwun"
+    ${headers} =  Create Dictionary  Content-Type=application/json
+    ...  X-Auth-Token=${xauth_token}
+
+    ${resp}=  Post Request
+    ...  openbmc  ${base_uri}  &{kwargs}  headers=${headers}  timeout=${timeout}
+
+    Redfish Delete Request  ${session_uri}  ${xauth_token}
+
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
 Redfish Delete Request
     [Documentation]  Delete the resource identified by the URI.
     [Arguments]  ${uri_suffix}
