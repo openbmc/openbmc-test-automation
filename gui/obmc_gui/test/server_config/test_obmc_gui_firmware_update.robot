@@ -6,7 +6,7 @@ Resource        ../../lib/resource.robot
 Resource        ../../../../lib/logging_utils.robot
 
 Suite Setup     Launch Browser And Login OpenBMC GUI
-Suite Teardown  Logout And Close Browser
+Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 Test Teardown   Run Keyword If Test Failed  Re-Launch GUI on Failure
 
