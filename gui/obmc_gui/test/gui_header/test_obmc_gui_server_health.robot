@@ -182,7 +182,7 @@ Select Single Error Log And Delete
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Run Keyword If  ${number_of_events} > 0
     ...  Common Event Log Click Element  ${xpath_individual_event_delete}
-    ...  ${xpath_individual_event_delete_yes}
+    ...  ${xpath_yes_button}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  0
     ...  msg=Failed to delete single error log entry.
@@ -201,7 +201,7 @@ Select Multiple Error Logs And Delete
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Run Keyword If  ${number_of_events} > 0
     ...  Double Event Log Click Element  ${xpath_individual_event_delete}
-    ...  ${xpath_individual_event_delete_yes}
+    ...  ${xpath_yes_button}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  0
     ...  msg=Failed to delete multiple error log entries.
@@ -218,7 +218,7 @@ Select Single Error Log And Mark As Resolved
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Run Keyword If  ${number_of_events} > 0
-    ...  Common Event Log Click Element  ${xpath_individual_event_resolved}  0
+    ...  Common Event Log Click Element  ${xpath_individual_event_resolved}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  1
     ...  msg=Failed to mark single error log entry as resolved.
@@ -236,7 +236,7 @@ Select Multiple Error Logs And Mark As Resolved
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Run Keyword If  ${number_of_events} > 0
-    ...  Double Event Log Click Element  ${xpath_individual_event_resolved}  0
+    ...  Double Event Log Click Element  ${xpath_individual_event_resolved}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  2
     ...  msg=Failed to mark multiple error log entries as resolved.
@@ -253,7 +253,7 @@ Select Single Error Log And Export
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Run Keyword If  ${number_of_events} > 0
-    ...  Common Event Log Click Element  ${xpath_individual_event_export}  0
+    ...  Common Event Log Click Element  ${xpath_individual_event_export}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  1
     ...  msg=Failed to export single error log entry.
@@ -271,7 +271,7 @@ Select Multiple Error Log And Export
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Run Keyword If  ${number_of_events} > 0
-    ...  Double Event Log Click Element  ${xpath_individual_event_export}  0
+    ...  Double Event Log Click Element  ${xpath_individual_event_export}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  2
     ...  msg=Failed to export multiple error log entries.
@@ -280,7 +280,7 @@ Select Multiple Error Log And Export
 
 Common Event Log Click Element
    [Documentation]  Keep common click elements associated with event log.
-   [Arguments]  ${action_element}  ${action_click_confirmation}
+   [Arguments]  ${action_element}  ${action_click_confirmation}=${None}
 
     # Description of argument(s):
     # action_element             xpath value of the element to be actioned
@@ -292,14 +292,14 @@ Common Event Log Click Element
     Page Should Contain Element  ${action_element}
     Click Element  ${action_element}
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
-    Run Keyword If  ${action_click_confirmation} <> 0
+    Run Keyword If  "${action_click_confirmation}" != "${None}"
     ...  Click Element  ${action_click_confirmation}
     Click Element  ${xpath_select_refresh_button}
     Run Key  Sleep \ 50s
 
 Double Event Log Click Element
    [Documentation]  Keep double click elements associated with event logs.
-   [Arguments]  ${action_element}  ${action_click_confirmation}
+   [Arguments]  ${action_element}  ${action_click_confirmation}=${None}
 
     # Description of argument(s):
     # action_element             xpath value of the element to be actioned

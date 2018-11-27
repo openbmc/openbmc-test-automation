@@ -13,6 +13,7 @@ class resource_variables():
     xpath_textbox_password = "//*[@id='password']"
     xpath_button_login = "//*[@id='login__submit']"
     xpath_button_logout = "//*[@id='header']/a"
+    xpath_yes_button = "//button[text()='Yes']"
     xpath_openbmc_url = "http://localhost:8080/#/login"
     xpath_openbmc_ip = "//*[@id='login__form']/input[1]"
     xpath_display_server_power_status = \
@@ -132,8 +133,6 @@ class resource_variables():
         "span"
     xpath_individual_event_delete = \
         "//*[@id='event__actions-bar']/div[2]/div[2]/button[1]"
-    xpath_individual_event_delete_yes = \
-        "//*[@id='event__actions-bar']/div[2]/div[1]/div[2]/button[1]"
     xpath_second_event_select = \
         "//*[@id='event-log__events']/log-event[2]/div/div[1]/div[2]/label/" +\
         "span"
