@@ -100,7 +100,7 @@ def wait_for_activation_state_change(version_id, initial_state):
     retry = 0
     num_read_errors = 0
     read_fail_threshold = 1
-    while (retry < 30):
+    while (retry < 60):
         # TODO: Use retry option in run_key when available.
         status, software_state = keyword.run_key("Read Properties  "
                                                  + var.SOFTWARE_VERSION_URI
