@@ -40,13 +40,13 @@ Documentation    Verify openbmctool.py functionality.
 
 Library                 String
 Library                 OperatingSystem
-Library                 ../lib/gen_print.py
-Library                 ../lib/gen_robot_print.py
-Library                 ../lib/openbmctool_utils.py
-Library                 ../lib/gen_misc.py
-Library                 ../lib/gen_robot_valid.py
-Resource                ../syslib/utils_os.robot
-Resource                ../lib/resource.txt
+Library                 ../../lib/gen_print.py
+Library                 ../../lib/gen_robot_print.py
+Library                 ../../lib/openbmctool_utils.py
+Library                 ../../lib/gen_misc.py
+Library                 ../../lib/gen_robot_valid.py
+Resource                ../../syslib/utils_os.robot
+Resource                ../../lib/resource.txt
 
 
 Suite Setup             Suite Setup Execution
