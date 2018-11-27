@@ -44,6 +44,7 @@ FFDC_BMC_FILE = {
         'BMC_procinfo': 'cat /proc/cpuinfo',
         'BMC_meminfo': 'cat /proc/meminfo',
         'BMC_systemd': 'systemctl status --all',
+        'SOL': 'cat /var/log/obmc-console.log',
     },
 }
 # Add file name and correcponding command needed for all Linux distributions
