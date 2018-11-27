@@ -7,7 +7,8 @@ Library        DateTime
 Resource        ../../lib/resource.robot
 
 Suite Setup     Launch Browser And Login OpenBMC GUI
-Suite Teardown  Logout And Close Browser
+Suite Teardown  Close Browser
+
 
 *** Variables ***
 ${xpath_select_server_control}  //*[@id="header__wrapper"]/div/div[2]/p[2]

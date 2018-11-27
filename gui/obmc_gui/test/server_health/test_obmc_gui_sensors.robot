@@ -5,7 +5,7 @@ Documentation  Test OpenBMC GUI "Sensors" sub-menu of "Server health".
 Resource        ../../lib/resource.robot
 
 Suite Setup     Launch Browser And Login OpenBMC GUI
-Suite Teardown  Logout And Close Browser
+Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
 *** Variables ***

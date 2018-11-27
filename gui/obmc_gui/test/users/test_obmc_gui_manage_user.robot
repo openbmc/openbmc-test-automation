@@ -6,7 +6,7 @@ Documentation  Test OpenBMC GUI "Manage user account" sub-menu  of
 Resource        ../../lib/resource.robot
 
 Suite Setup     Launch Browser And Login OpenBMC GUI
-Suite Teardown  Logout And Close Browser
+Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
 *** Variables ***

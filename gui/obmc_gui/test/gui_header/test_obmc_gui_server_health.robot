@@ -13,7 +13,7 @@ Resource        ../../../../lib/logging_utils.robot
 Library         ../../../../lib/gen_robot_keyword.py
 
 Suite Setup     Launch Browser And Login OpenBMC GUI
-Suite Teardown  Logout And Close Browser
+Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
