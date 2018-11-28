@@ -169,8 +169,8 @@ Robot Coding Guidelines
     Incorrect examples:
 
     ```
-    ${var1} =  Set Variable  ${1}
-    ${var1} =  My Keyword
+    ${var1}=  Set Variable  ${1}
+    ${var1}=  My Keyword
     ```
 -   General variable naming conventions:
     -   Variable names should be lower case with few exceptions:

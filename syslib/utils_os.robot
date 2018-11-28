@@ -585,8 +585,8 @@ Retrieve HW Info And Write
     # json_tmp_file_path  Path of file to write to.
     # last                Is this the last element in the parent JSON?
     Write New JSON List  ${json_tmp_file_path}  ${class}
-    ${output} =  Retrieve Hardware Info  ${class}
-    ${output} =  Clean Up String  ${output}
+    ${output}=  Retrieve Hardware Info  ${class}
+    ${output}=  Clean Up String  ${output}
     Run Keyword if  ${output.__class__ is not type(None)}
     ...  Append To File  ${json_tmp_file_path}  ${output}
     Close New JSON List  ${json_tmp_file_path}
@@ -621,7 +621,7 @@ Retrieve Hardware Info
     # Description of argument(s):
     # class  Device class to retrieve with lshw.
     ${output}  ${stderr}  ${rc}=  OS Execute Command  lshw -c ${class} -json
-    ${output} =  Verify JSON string  ${output}
+    ${output}=  Verify JSON string  ${output}
     [Return]  ${output}
 
 
@@ -630,8 +630,8 @@ Verify JSON String
     [Arguments]  ${unver_string}
     # Description of argument(s):
     # unver_string  JSON String we will be checking for lshw comma errors.
-    ${unver_string} =  Convert to String  ${unver_string}
-    ${ver_string} =  Replace String Using Regexp  ${unver_string}  }\\s*{  },{
+    ${unver_string}=  Convert to String  ${unver_string}
+    ${ver_string}=  Replace String Using Regexp  ${unver_string}  }\\s*{  },{
     [Return]  ${ver_string}
 
 
@@ -640,10 +640,10 @@ Clean Up String
     [Arguments]  ${dirty_string}
     # Description of argument(s):
     # dirty_string  String that will be space stripped and have comma removed.
-    ${clean_string} =  Strip String  ${dirty_string}
-    ${last_char} =  Get Substring  ${clean_string}  -1
-    ${trimmed_string} =  Get Substring  ${clean_string}  0  -1
-    ${clean_string} =  Set Variable If  '${last_char}' == ','
+    ${clean_string}=  Strip String  ${dirty_string}
+    ${last_char}=  Get Substring  ${clean_string}  -1
+    ${trimmed_string}=  Get Substring  ${clean_string}  0  -1
+    ${clean_string}=  Set Variable If  '${last_char}' == ','
     ...  ${trimmed_string}  ${clean_string}
     [Return]  ${clean_string}
 

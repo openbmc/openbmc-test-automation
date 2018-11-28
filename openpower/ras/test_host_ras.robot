@@ -353,7 +353,7 @@ Verify Error Log Entry
 
     Collect eSEL Log  ${log_prefix}
     ${error_log_file_path}=  Catenate  ${log_prefix}esel.txt
-    ${rc}  ${output} =  Run and Return RC and Output
+    ${rc}  ${output}=  Run and Return RC and Output
     ...  grep -i ${signature_desc} ${error_log_file_path}
     Should Be Equal  ${rc}  ${0}
     Should Not Be Empty  ${output}

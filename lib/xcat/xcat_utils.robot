@@ -51,7 +51,7 @@ Get List Of BMC Nodes
     OperatingSystem.File Should Exist  ${node_cfg_file_path}  msg=cfg file missing.
     File Should Not Be Empty  ${node_cfg_file_path}  msg=Empty config file.
 
-    ${bmc_list} =  OperatingSystem.Get File  ${node_cfg_file_path}
+    ${bmc_list}=  OperatingSystem.Get File  ${node_cfg_file_path}
     [Return]  ${bmc_list}
 
 Add Nodes To XCAT

@@ -173,7 +173,7 @@ Check LDAP Service Running
 Configure LDAP Server On BMC
     [Documentation]  Configure LDAP Server On BMC.
 
-    ${LDAP_SECURE_MODE} =   Convert To Boolean    ${LDAP_SECURE_MODE}
+    ${LDAP_SECURE_MODE}=  Convert To Boolean  ${LDAP_SECURE_MODE}
 
     @{ldap_parm_list}=  Create List
     ...  ${LDAP_SERVER_URI}  ${LDAP_BIND_DN}

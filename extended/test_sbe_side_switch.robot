@@ -29,8 +29,8 @@ Test SBE Side Switch
     ...  msg=Expects boot attempts left 3, but got ${attempts_left}.
 
     # Get which side the SBE is booted with. By default 0.
-    ${sbe_val} =  Get SBE
-    ${sbe_cur_side} =  Evaluate  ${sbe_side_bit_mask} & ${sbe_val}
+    ${sbe_val}=  Get SBE
+    ${sbe_cur_side}=  Evaluate  ${sbe_side_bit_mask} & ${sbe_val}
 
     Trigger Watchdog Error To Switch SBE Boot Side
 
@@ -38,8 +38,8 @@ Test SBE Side Switch
     Wait Until Keyword Succeeds  2 min  30 sec  Watchdog Object Should Exist
 
     # Verify that the side has switched.
-    ${sbe_val} =  Get SBE
-    ${sbe_orig_side} =  Evaluate  ${sbe_side_bit_mask} & ${sbe_val}
+    ${sbe_val}=  Get SBE
+    ${sbe_orig_side}=  Evaluate  ${sbe_side_bit_mask} & ${sbe_val}
 
     Run Keyword If  ${sbe_orig_side} == ${0}
     ...      Should Be True  ${sbe_cur_side} == ${sbe_side_bit_mask}

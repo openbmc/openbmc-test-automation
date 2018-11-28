@@ -48,21 +48,21 @@ Verify OCC State After Host Reboot
     [Documentation]  Verify OCC state and count after host reboot.
     [Tags]  Verify_OCC_State_After_Host_Reboot
 
-    ${occ_count_before} =  Count OCC Object Entry
+    ${occ_count_before}=  Count OCC Object Entry
     Verify OCC State  ${1}
     Host Reboot
     Verify OCC State  ${1}
-    ${occ_count_after} =  Count OCC Object Entry
+    ${occ_count_after}=  Count OCC Object Entry
     Should be Equal  ${occ_count_before}  ${occ_count_after}
 
 Verify OCC State After BMC Reset
     [Documentation]  Verify OCC state and count after BMC reset.
     [Tags]  Verify_OCC_State_After_BMC_Reset
 
-    ${occ_count_before} =  Count OCC Object Entry
+    ${occ_count_before}=  Count OCC Object Entry
     OBMC Reboot (run)
     Verify OCC State  ${1}
-    ${occ_count_after} =  Count OCC Object Entry
+    ${occ_count_after}=  Count OCC Object Entry
     Should be Equal  ${occ_count_before}  ${occ_count_after}
 
 Verify OCC State At Standby

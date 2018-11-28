@@ -309,7 +309,7 @@ Verify IPMI BT Capabilities Command
     [Tags]  Verify_IPMI_BT_Capabilities_Command
     [Setup]  Run Keywords  REST Hard Power Off  AND  REST Power On
 
-    ${output} =  Run IPMI command  0x06 0x36
+    ${output}=  Run IPMI command  0x06 0x36
     Should Be True  "${output}" == " 01 3f 3f 0a 01"
     ...  msg=Incorrect Output.
 
