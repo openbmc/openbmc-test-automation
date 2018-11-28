@@ -211,7 +211,7 @@ version 2.3.1 or greater is required) or via Robot CLI command.
 
     By default, GUI runs with Firefox browser and headless mode. Example with chrome browser and header mode:
     ```
-    robot -v OPENBMC_HOST:x.x.x.x -v GUI_BROWSER:gc -v GUI_MODE:header gui/obmc_gui/test/
+    $ robot -v OPENBMC_HOST:x.x.x.x -v GUI_BROWSER:gc -v GUI_MODE:header gui/obmc_gui/test/
     ```
 
 * Run LDAP tests:
@@ -222,7 +222,8 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     For ldapsearch, refer to "https://linux.die.net/man/1/ldapsearch".
     Microsoft ADS: refer to  https://searchwindowsserver.techtarget.com/definition/Microsoft-Active-Directory-Domain-Services-AD-DS
     ```
-    robot -v OPENBMC_HOST:x.x.x.x v LDAP_SERVER_URI:<ldap(s)//LDAP Hostname / IP> -v LDAP_BIND_DN:<LDAP Bind DN> -v LDAP_BASE_DN:<LDAP Base DN> -v LDAP_BIND_DN_PASSWORD:<LDAP Bind password> -v LDAP_SEARCH_SCOPE:<LDAP search scope>  -v LDAP_SERVER_TYPE:<LDAP server type>  -v LDAP_USER:<LDAP user-id> -v LDAP_USER_PASSWORD:<LDAP PASSWORD> -v GROUP_NAME:<Group Name> -v GROUP_PRIVILEGE:<Privilege> ./test_user_ldap_management.robot
+    $ cd extended/
+    $ robot -v OPENBMC_HOST:x.x.x.x -v LDAP_SERVER_URI:<ldap(s)//LDAP Hostname / IP> -v LDAP_BIND_DN:<LDAP Bind DN> -v LDAP_BASE_DN:<LDAP Base DN> -v LDAP_BIND_DN_PASSWORD:<LDAP Bind password> -v LDAP_SEARCH_SCOPE:<LDAP search scope> -v LDAP_SERVER_TYPE:<LDAP server type> -v LDAP_USER:<LDAP user-id> -v LDAP_USER_PASSWORD:<LDAP PASSWORD> -v GROUP_NAME:<Group Name> -v GROUP_PRIVILEGE:<Privilege>  test_user_ldap_management.robot
     ```
 
 * How to run CI and CT bucket test:
