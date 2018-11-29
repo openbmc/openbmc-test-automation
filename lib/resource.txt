@@ -17,6 +17,8 @@ ${OPENBMC_USERNAME}    root
 ${OPENBMC_PASSWORD}    0penBmc
 ${REST_USERNAME}       root
 ${REST_PASSWORD}       0penBmc
+$(IPMI_USER_NAME}      root
+${IPMI_USER_OPTIONS}   -U${SPACE}${IPMI_USER_NAME}
 ${IPMI_PASSWORD}       0penBmc
 ${MACHINE_TYPE}    palmetto
 ${DBUS_POLL_INTERVAL}      15s

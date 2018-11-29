@@ -902,7 +902,7 @@ Execute IPMI Command With Cipher
     #               (e.g. "1", "2", "3", "15", "16", "17").
 
     ${ipmi_cmd}=  Catenate  SEPARATOR=
-    ...  ipmitool -I lanplus -C ${cipher_level} -P${SPACE}${IPMI_PASSWORD}
+    ...  ipmitool -I lanplus -C ${cipher_level} -U${SPACE}${IPMI_USER_NAME}${SPACE} -P${SPACE}${IPMI_PASSWORD}
     ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}mc info
 
     ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
