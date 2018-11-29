@@ -2,37 +2,10 @@
 Documentation   OpenBMC user management keywords.
 
 Resource         ../lib/rest_client.robot
-Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/utils.robot
 Library          SSHLibrary
 
-Test Teardown    Test Teardown Execution
-
-*** Variables ****
-
-${test_password}   0penBmc123
-
 *** Keywords ***
-
-Test Teardown Execution
-    [Documentation]  Do test teardown task.
-
-    # REST Login to BMC with new "root" password.
-    Initialize OpenBMC  REST_PASSWORD=${test_password}
-    Update Root Password
-    Sleep  5 s
-    Delete All Sessions
-
-    # SSH Login to BMC with user default "root" password.
-    SSHLibrary.Open Connection  ${OPENBMC_HOST}
-    Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-
-    # REST Login to BMC with user default "root" password.
-    Initialize OpenBMC
-
-    FFDC On Test Case Fail
-    Close All Connections
-
 
 Create Group And Privilege
     [Documentation]  Create group and privilege for users.
