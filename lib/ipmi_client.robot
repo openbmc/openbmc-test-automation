@@ -15,7 +15,7 @@ ${dbusHostIpmiCmdReceivedMsg}=   ${OPENBMC_BASE_DBUS}.HostIpmi.ReceivedMessage
 ${netfnByte}=          ${EMPTY}
 ${cmdByte}=            ${EMPTY}
 ${arrayByte}=          array:byte:
-${IPMI_EXT_CMD}=       ipmitool -I lanplus -C ${IPMI_CIPHER_LEVEL}
+${IPMI_EXT_CMD}=       ipmitool -I lanplus -C ${IPMI_CIPHER_LEVEL} ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
 ${IPMI_USER_OPTIONS}   ${EMPTY}
 ${IPMI_INBAND_CMD}=    ipmitool -C ${IPMI_CIPHER_LEVEL}
 ${HOST}=               -H
@@ -110,14 +110,13 @@ Run External IPMI Raw Command
     [Documentation]  Run the raw IPMI command externally.
     [Arguments]    ${args}
     ${ipmi_raw_cmd}=   Catenate  SEPARATOR=
-    ...    ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
-    ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${RAW}${SPACE}${args}
+    ...    ${IPMI_EXT_CMD} ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${RAW}${SPACE}${args}
     ${rc}    ${output}=    Run and Return RC and Output    ${ipmi_raw_cmd}
     Should Be Equal    ${rc}    ${0}    msg=${output}
     [Return]    ${output}
 
 Run External IPMI Standard Command
-    [Documentation]  Run the standard IPMI command in-band.
+    [Documentation]  Run the standard IPMI command externally.
     [Arguments]  ${args}  ${fail_on_err}=${1}
 
     # Description of argument(s):
@@ -125,8 +124,7 @@ Run External IPMI Standard Command
     # fail_on_err  Fail if keyword the IPMI command fails
 
     ${ipmi_cmd}=  Catenate  SEPARATOR=
-    ...  ${IPMI_EXT_CMD} ${IPMI_USER_OPTIONS} -P${SPACE}${IPMI_PASSWORD}
-    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${args}
+    ...  ${IPMI_EXT_CMD} ${IPMI_USER_OPTIONS} ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${args}
     ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
     Return From Keyword If  ${fail_on_err} == ${0}  ${output}
     Should Be Equal  ${rc}  ${0}  msg=${output}
@@ -147,8 +145,7 @@ Activate SOL Via IPMI
     #            /tmp/sol_<BMC_IP> else user input location.
 
     ${ipmi_cmd}=  Catenate  SEPARATOR=
-    ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}${HOST}
-    ...  ${SPACE}${OPENBMC_HOST}${SPACE}sol activate usesolkeepalive
+    ...  ${IPMI_EXT_CMD} ${SPACE}${OPENBMC_HOST}${SPACE}sol activate usesolkeepalive
 
     Start Process  ${ipmi_cmd}  shell=True  stdout=${file_path}
     ...  alias=sol_proc
@@ -163,8 +160,7 @@ Deactivate SOL Via IPMI
     #            By default it copies log from /tmp/sol_<BMC_IP>.
 
     ${ipmi_cmd}=  Catenate  SEPARATOR=
-    ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
-    ...  ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}sol deactivate
+    ...  ${IPMI_EXT_CMD} ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}sol deactivate
 
     ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
     Run Keyword If  ${rc} > 0  Run Keywords
