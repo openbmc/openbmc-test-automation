@@ -94,8 +94,8 @@ Redfish Get Request
 Redfish Post Request
     [Documentation]  Do redfish POST request.
     [Arguments]  ${uri_suffix}
-    ...          &{kwargs}
     ...          ${timeout}=30
+    ...          &{kwargs}
 
     # Description of argument(s):
     # uri_suffix  The URI to establish connection with

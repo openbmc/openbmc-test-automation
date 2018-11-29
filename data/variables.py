@@ -144,6 +144,13 @@ REDFISH_BASE_URI = '/redfish/v1/'
 REDFISH_SESSION = REDFISH_BASE_URI + 'SessionService/Sessions'
 REDFISH_SESSION_URI = 'SessionService/Sessions/'
 
+# Boot options and URI variables.
+POWER_ON = 'On'
+POWER_GRACEFULL_OFF = "GracefulShutdown"
+POWER_FORCE_OFF = 'ForceOff'
+
+REDFISH_POWER_URI = 'Systems/1/Actions/ComputerSystem.Reset'
+
 # rsyslog variables.
 REMOTE_LOGGING_URI = OPENBMC_BASE_URI + 'logging/config/remote/'
 
