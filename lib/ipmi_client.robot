@@ -110,7 +110,7 @@ Run External IPMI Raw Command
     [Documentation]  Run the raw IPMI command externally.
     [Arguments]    ${args}
     ${ipmi_raw_cmd}=   Catenate  SEPARATOR=
-    ...    ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
+    ...    ${IPMI_EXT_CMD} ${IPMI_USER_OPTIONS}  -P${SPACE}${IPMI_PASSWORD}${SPACE}
     ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${RAW}${SPACE}${args}
     ${rc}    ${output}=    Run and Return RC and Output    ${ipmi_raw_cmd}
     Should Be Equal    ${rc}    ${0}    msg=${output}
@@ -147,7 +147,7 @@ Activate SOL Via IPMI
     #            /tmp/sol_<BMC_IP> else user input location.
 
     ${ipmi_cmd}=  Catenate  SEPARATOR=
-    ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}${HOST}
+    ...  ${IPMI_EXT_CMD} ${IPMI_USER_OPTIONS} -P${SPACE}${IPMI_PASSWORD}${SPACE}${HOST}
     ...  ${SPACE}${OPENBMC_HOST}${SPACE}sol activate usesolkeepalive
 
     Start Process  ${ipmi_cmd}  shell=True  stdout=${file_path}
@@ -163,7 +163,7 @@ Deactivate SOL Via IPMI
     #            By default it copies log from /tmp/sol_<BMC_IP>.
 
     ${ipmi_cmd}=  Catenate  SEPARATOR=
-    ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
+    ...  ${IPMI_EXT_CMD} ${IPMI_USER_OPTIONS} -P${SPACE}${IPMI_PASSWORD}${SPACE}
     ...  ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}sol deactivate
 
     ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
