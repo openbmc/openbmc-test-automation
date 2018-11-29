@@ -1,4 +1,13 @@
 import os
+from robot.libraries.BuiltIn import BuiltIn
+
+IPMI_USERNAME = ""
+ipmi_user = BuiltIn().get_variable_value('${IPMI_USERNAME}')
+ipmi_user_options = BuiltIn().get_variable_value('${IPMI_USER_OPTIONS}')
+# If -v IPMI_USERNAME is keyed in, append -U user + options to the variable.
+if ipmi_user:
+    IPMI_USER_OPTIONS = "-U " + ipmi_user + " " + ipmi_user_options
+    BuiltIn().set_global_variable('${IPMI_USER_OPTIONS}', IPMI_USER_OPTIONS)
 
 OPENBMC_BASE_URI = '/xyz/openbmc_project/'
 OPENBMC_BASE_DBUS = 'xyz.openbmc_project.'
