@@ -14,7 +14,7 @@ Test Teardown   Run Keyword If Test Failed  Re-Launch GUI on Failure
 ${xpath_select_server_config}   //*[@id="nav__top-level"]/li[4]/button
 ${xpath_select_firmware}        //a[@href='#/configuration/firmware']
 ${xpath_choose_file_button}     //*[@id="firmware__upload-form"]/div[1]/label/span[1]
-${xpath_scroll_down}            //a[@href='/html/body/main/div[2]/p[2]/a']
+${xpath_scroll_down}            //a[contains(text(), "Scroll down")]
 ${xpath_tftp_server_ip}         //*[@id="tftp-ip"]
 ${xpath_tftp_filename}          //*[@id="tftp-file-name"]
 ${xpath_download_firmware}      //*[@id="firmware__upload-form"]/div[2]/fieldset/div[1]/div[3]/input
