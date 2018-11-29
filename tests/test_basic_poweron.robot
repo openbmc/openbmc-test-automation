@@ -24,7 +24,7 @@ Force Tags  chassisboot
 ${LOOP_COUNT}  ${2}
 
 # Error strings to check from journald.
-${ERROR_REGEX}     SEGV|core-dump
+${ERROR_REGEX}     SEGV|core-dump|FAILURE
 ${STANDBY_REGEX}   Startup finished in
 
 # 3 minutes standby boot time.
