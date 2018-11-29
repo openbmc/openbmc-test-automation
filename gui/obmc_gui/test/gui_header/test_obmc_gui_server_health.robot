@@ -313,11 +313,15 @@ Double Event Log Click Element
 
 Test Setup Execution
    [Documentation]  Do test case setup tasks.
+
    ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
    Run Keyword If  ${status} == ${False}  Install Tarball
    Delete Error Logs And Verify
-   Click Element  ${xpath_select_server_health}
 
+   # Refresh the GUI and navigate to server health page.
+   Click Element  ${xpath_select_refresh_button}
+   Click Element  ${xpath_select_server_health}
+   Wait Until Page Contains  Event log
 
 Test Teardown Execution
    [Documentation]  Do the post test teardown.

@@ -94,7 +94,7 @@ class resource_variables():
     xpath_select_server_power = "//a[@href='#/server-control/power-operations']"
 
     # Server health elements locators.
-    xpath_select_server_health = "//*[@id='header__wrapper']/div/div[3]/a[2]"
+    xpath_select_server_health = "//a[@href='#/server-health/event-log']"
     xpath_server_health_text =  \
         "//*[@id='header__wrapper']/div/div[3]/a[2]/span"
     xpath_select_refresh_button = \

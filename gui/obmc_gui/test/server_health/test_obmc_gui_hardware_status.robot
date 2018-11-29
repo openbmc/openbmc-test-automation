@@ -12,7 +12,7 @@ Test Setup      Test Setup Execution
 
 ${xpath_select_server_health}  //*[@id="nav__top-level"]/li[2]/button
 ${xpath_select_hardware_status}  //a[@href='#/server-health/inventory-overview']
-${xpath_inventory_export}  css:a.inline
+${xpath_inventory_export}  //a[contains(text(), "Export")]
 ${xpath_inventory_search}  //*[@id="content__search-input"]
 ${xpath_inventory_search_button}  //*[@id="content__search-submit"]
 ${xpath_inventory_search_text_clear}  class:clear-input
