@@ -5,7 +5,8 @@ Documentation  Test Open BMC GUI Power Operations under GUI Header.
 Resource  ../../../../lib/state_manager.robot
 Resource  ../../lib/resource.robot
 
-Suite Setup   Login OpenBMC GUI with failure enable
+Test Setup      Test Setup Execution
+Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Close Browser
 
 *** Test Cases ***
@@ -127,10 +128,13 @@ OpenBMC GUI Logoff
     Log To Console  ${xpath_openbmc_url}
     Click Element  header
 
+
 *** Keywords ***
 
-Login OpenBMC GUI with failure enable
-    [Documentation]  Login to the OpenBMC GUI with failure enabled.
+Test Setup Execution
+   [Documentation]  Do testcase setup tasks.
 
-    Open Browser With URL  ${xpath_openbmc_url}
-    Login OpenBMC GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+   # Refresh the GUI and navigate to server power page.
+   Click Element  ${xpath_select_refresh_button}
+   Click Element  ${xpath_select_server_power}
+   Wait Until Page Contains  Server power operations
