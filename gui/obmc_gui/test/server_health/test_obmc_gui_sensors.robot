@@ -43,7 +43,7 @@ Verify Search Text Enterable
     Input Text  ${xpath_sensors_search}  Temperature
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_sensors_search_button}
-    Set Focus To Element  ${xpath_sensors_search_button}
+    Focus  ${xpath_sensors_search_button}
     Click Element  ${xpath_sensors_search_button}
 
 *** Keywords ***

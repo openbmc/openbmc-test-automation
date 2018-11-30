@@ -48,7 +48,7 @@ Test Setup Execution
    [Documentation]  Do test case setup tasks.
 
     Page Should Contain Element  ${xpath_select_users}
-    Set Focus To Element  ${xpath_select_users}
+    Focus  ${xpath_select_users}
     Click Element  ${xpath_select_users}
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Click Element  ${xpath_select_manage_users}
