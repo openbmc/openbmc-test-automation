@@ -120,7 +120,9 @@ Test Setup Execution
     Rprint Timen  ${TEST NAME} ==> [STARTED]
     Launch Browser And Login OpenBMC GUI
     Log To Console  Verifying the system state and stablity...
-    ${obmc_current_state}=  Get Text  ${xpath_display_server_power_status}
+
+    Click Button  ${xpath_select_server_power}
+    ${obmc_current_state}=  Get Text  ${xpath_power_indicator}
     Rpvars  obmc_current_state
 
     ${obmc_state_status}=  Run Keyword And Return Status
