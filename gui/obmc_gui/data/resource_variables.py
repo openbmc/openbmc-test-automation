@@ -17,7 +17,7 @@ class resource_variables():
     xpath_openbmc_url = "http://localhost:8080/#/login"
     xpath_openbmc_ip = "//*[@id='login__form']/input[1]"
     xpath_display_server_power_status = \
-        "//*[@id='header__wrapper']/div/div[3]/a[3]/span"
+        "//*[@id='power-indicator-bar']"
     xpath_select_button_power_on = "//*[@id='power__power-on']"
 
     xpath_select_button_warm_reboot = \
