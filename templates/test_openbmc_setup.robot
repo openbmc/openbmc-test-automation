@@ -27,6 +27,8 @@ Test OpenBMC Automation Setup
     Open Connection And Log In
     ${bmc_kernel}=  Execute Command  uname -a
     Log To Console  \n ${bmc_kernel}
+    ${pass_upd_msg}=  Execute command  /usr/sbin/ipmitool -I dbus user set password 1 ${IPMI_PASSWORD}
+    Log To Console  \n ${pass_upd_msg}
 
     Log To Console  \n *** Testing Out-of-band IPMI tool Setup ***
 
