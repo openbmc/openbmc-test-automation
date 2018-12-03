@@ -8,6 +8,7 @@ Resource        ../lib/utils.robot
 Resource        ../lib/state_manager.robot
 
 Library         String
+Library         ipmi_client.py
 
 *** Variables ***
 ${dbusHostIpmicmd1}=   dbus-send --system  ${OPENBMC_BASE_URI}HostIpmi/1
@@ -15,7 +16,7 @@ ${dbusHostIpmiCmdReceivedMsg}=   ${OPENBMC_BASE_DBUS}.HostIpmi.ReceivedMessage
 ${netfnByte}=          ${EMPTY}
 ${cmdByte}=            ${EMPTY}
 ${arrayByte}=          array:byte:
-${IPMI_EXT_CMD}=       ipmitool -I lanplus -C ${IPMI_CIPHER_LEVEL}
+${IPMI_EXT_CMD}        ${EMPTY}
 ${IPMI_USER_OPTIONS}   ${EMPTY}
 ${IPMI_INBAND_CMD}=    ipmitool -C ${IPMI_CIPHER_LEVEL}
 ${HOST}=               -H
@@ -109,6 +110,7 @@ Run Inband IPMI Standard Command
 Run External IPMI Raw Command
     [Documentation]  Run the raw IPMI command externally.
     [Arguments]    ${args}
+
     ${ipmi_raw_cmd}=   Catenate  SEPARATOR=
     ...    ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
     ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${RAW}${SPACE}${args}
