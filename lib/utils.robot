@@ -1602,3 +1602,13 @@ Update Root Password
     ...  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  msg=Updating the new root password failed, RC=${resp.status_code}.
+
+
+Enable IPMI Default User Password
+    [Documentation]  Set the system "root" user password.
+
+    Install Debug Tarball On BMC
+    # Set the password for the userid 1 (which is root).
+    BMC Execute Command  /tmp/tarball/bin/ipmitool -I dbus user set password 1 0penBmc
+    # Verify if the user password set is accepted.
+    BMC Execute Command  /tmp/tarball/bin/ipmitool -I lanplus -H 127.0.0.1 -U root -P 0penBmc raw 6 1
