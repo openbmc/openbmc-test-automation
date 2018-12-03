@@ -15,7 +15,8 @@ ${dbusHostIpmiCmdReceivedMsg}=   ${OPENBMC_BASE_DBUS}.HostIpmi.ReceivedMessage
 ${netfnByte}=          ${EMPTY}
 ${cmdByte}=            ${EMPTY}
 ${arrayByte}=          array:byte:
-${IPMI_EXT_CMD}=       ipmitool -I lanplus -C ${IPMI_CIPHER_LEVEL}
+#${IPMI_EXT_CMD}=       ipmitool -I lanplus -C ${IPMI_CIPHER_LEVEL}
+${IPMI_EXT_CMD}        ${EMPTY}
 ${IPMI_USER_OPTIONS}   ${EMPTY}
 ${IPMI_INBAND_CMD}=    ipmitool -C ${IPMI_CIPHER_LEVEL}
 ${HOST}=               -H
@@ -109,6 +110,8 @@ Run Inband IPMI Standard Command
 Run External IPMI Raw Command
     [Documentation]  Run the raw IPMI command externally.
     [Arguments]    ${args}
+
+    Build IPMI Ext Cmd
     ${ipmi_raw_cmd}=   Catenate  SEPARATOR=
     ...    ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
     ...    ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${RAW}${SPACE}${args}
@@ -124,6 +127,7 @@ Run External IPMI Standard Command
     # args         IPMI command to be executed.
     # fail_on_err  Fail if keyword the IPMI command fails
 
+    Build IPMI Ext Cmd
     ${ipmi_cmd}=  Catenate  SEPARATOR=
     ...  ${IPMI_EXT_CMD} ${IPMI_USER_OPTIONS} -P${SPACE}${IPMI_PASSWORD}
     ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${args}
@@ -146,6 +150,7 @@ Activate SOL Via IPMI
     #            output. By default SOL output is collected at
     #            /tmp/sol_<BMC_IP> else user input location.
 
+    Build IPMI Ext Cmd
     ${ipmi_cmd}=  Catenate  SEPARATOR=
     ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}${HOST}
     ...  ${SPACE}${OPENBMC_HOST}${SPACE}sol activate usesolkeepalive
@@ -162,6 +167,7 @@ Deactivate SOL Via IPMI
     #            collected by above "Activate SOL Via IPMI" keyword.
     #            By default it copies log from /tmp/sol_<BMC_IP>.
 
+    Build IPMI Ext Cmd
     ${ipmi_cmd}=  Catenate  SEPARATOR=
     ...  ${IPMI_EXT_CMD} -P${SPACE}${IPMI_PASSWORD}${SPACE}
     ...  ${HOST}${SPACE}${OPENBMC_HOST}${SPACE}sol deactivate
