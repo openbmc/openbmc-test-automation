@@ -2,44 +2,17 @@
 Documentation   OpenBMC user management keywords.
 
 Resource         ../lib/rest_client.robot
-Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/utils.robot
 Library          SSHLibrary
 
-Test Teardown    Test Teardown Execution
-
-*** Variables ****
-
-${test_password}   0penBmc123
-
 *** Keywords ***
-
-Test Teardown Execution
-    [Documentation]  Do test teardown task.
-
-    # REST Login to BMC with new "root" password.
-    Initialize OpenBMC  REST_PASSWORD=${test_password}
-    Update Root Password
-    Sleep  5 s
-    Delete All Sessions
-
-    # SSH Login to BMC with user default "root" password.
-    SSHLibrary.Open Connection  ${OPENBMC_HOST}
-    Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-
-    # REST Login to BMC with user default "root" password.
-    Initialize OpenBMC
-
-    FFDC On Test Case Fail
-    Close All Connections
-
 
 Create Group And Privilege
     [Documentation]  Create group and privilege for users.
     [Arguments]  ${user_group}  ${user_privilege}
 
     # Description of argument(s):
-    # user_group  User group.
+    # user_group      User group.
     # user_privilege  User privilege like priv-admin, priv-user.
 
     @{ldap_parm_list}=  Create List  ${user_group}  ${user_privilege}
@@ -56,7 +29,7 @@ Create Privilege
     [Documentation]  Create privilege as priv-admin.
     [Arguments]  ${user_privilege}
 
-    Create Group And Privilege  ${GROUP_NAME}  ${user_privilege}
+    Create Group And Privilege  ${group_name}=${GROUP_NAME}  ${user_privilege}
     ${bmc_user_uris}=  Read Properties  ${BMC_USER_URI}ldap/enumerate
     # Sample output:
     # "data": {
@@ -119,7 +92,8 @@ Check LDAP Config File Generated
     [Arguments]  ${ldap_server_uri}=${LDAP_SERVER_URI}
 
     # Description of argument(s):
-    # ldap_server_uri  The LDAP server uri (e.g. "ldap://x.x.x.x/" for non-secured or ""ldaps://x.x.x.x/"" for secured).
+    # ldap_server_uri  The LDAP server uri (e.g. "ldap://x.x.x.x/" for non-secured or 
+    # ""ldaps://x.x.x.x/"" for secured).
 
     ${ldap_server_config}=  Read Properties  ${BMC_USER_URI}ldap/enumerate
     ${ldap_server_config}=  Convert To String  ${ldap_server_config}
@@ -194,7 +168,7 @@ Defined LDAP Group Entry Should Exist
     [Arguments]  ${user_group}
 
     # Description of argument(s):
-    # user_group(s)   contain LDAP user group string. Example: "Domain Admins"
+    # user_group  A space-delimited list of user group (e.g. "Domain Admins").
 
     @{ldap_entries}=  Get LDAP Entries
 
@@ -205,6 +179,7 @@ Defined LDAP Group Entry Should Exist
     \  Return From Keyword If  ${status} == ${TRUE}  ${ldap_entry}
 
     Fail  No ${user_group} LDAP user group entry found.
+
 
 Delete Defined LDAP Group And Privilege
     [Documentation]  Delete LDAP group and its privilege.

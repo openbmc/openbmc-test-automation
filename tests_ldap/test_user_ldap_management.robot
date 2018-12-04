@@ -3,6 +3,7 @@ Documentation   OpenBMC LDAP user management test.
 
 Resource         ../lib/rest_client.robot
 Resource         ../lib/openbmc_ffdc.robot
+Resource         ../lib/user_utils.robot
 Library          ../lib/bmc_ssh_utils.py
 
 Suite Setup      Suite Setup Execution
@@ -19,6 +20,17 @@ Verify LDAP API Available
     ${resp}=  Read Properties  ${BMC_LDAP_URI}
     Should Be Empty  ${resp}
 
+
+Verify User Group And Privilege Created
+    [Documentation]  Verify user group and associated privilege is created.
+    [Tags]  Verify_User_Group_And_Privilege_Created
+    [Teardown]  FFDC On Test Case Fail
+
+    Create Group And Privilege  ${GROUP_NAME}  ${GROUP_PRIVILEGE}
+    ${bmc_user_uris}=  Read Properties  ${BMC_USER_URI}ldap/enumerate
+    ${bmc_user_uris}=  Convert To String  ${bmc_user_uris}
+    Should Contain  ${bmc_user_uris}  ${GROUP_NAME}
+    Should Contain  ${bmc_user_uris}  ${GROUP_PRIVILEGE}
 
 Verify LDAP Config Is Created
     [Documentation]  Verify LDAP config is created in BMC.
@@ -152,97 +164,8 @@ Verify LDAP Binddn Password Is Set
     ...  verify=${True}  expected_value=${LDAP_BIND_DN_PASSWORD}
 
 
-*** Keywords ***
+Delete LDAP Group
+    [Documentation]  Delete LDAP group which is configured.
+    [Tags]  Delete_LDAP_Group
 
-Suite Setup Execution
-    [Documentation]  Check for LDAP test readiness.
-
-    Should Not Be Empty  ${LDAP_SERVER_URI}
-    Should Not Be Empty  ${LDAP_BIND_DN}
-    Should Not Be Empty  ${LDAP_BASE_DN}
-    Should Not Be Empty  ${LDAP_BIND_DN_PASSWORD}
-    Should Not Be Empty  ${LDAP_SEARCH_SCOPE}
-    Should Not Be Empty  ${LDAP_SERVER_TYPE}
-
-Check LDAP Service Running
-    [Documentation]  Check LDAP service running in BMC.
-
-    BMC Execute Command  systemctl | grep -in ldap
-
-
-Configure LDAP Server On BMC
-    [Documentation]  Configure LDAP Server On BMC.
-
-    ${LDAP_SECURE_MODE}=  Convert To Boolean  ${LDAP_SECURE_MODE}
-
-    @{ldap_parm_list}=  Create List
-    ...  ${LDAP_SERVER_URI}  ${LDAP_BIND_DN}
-    ...  ${LDAP_BASE_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_SEARCH_SCOPE}
-    ...  ${LDAP_SERVER_TYPE}
-
-    ${data}=  Create Dictionary  data=@{ldap_parm_list}
-
-    ${resp}=  OpenBMC Post Request
-    ...  ${BMC_LDAP_URI}/action/CreateConfig  data=${data}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-
-
-Check LDAP Config File Generated
-    [Documentation]  Check LDAP file nslcd.conf generated.
-    [Arguments]  ${ldap_server}=${LDAP_SERVER_URI}
-
-    # Description of argument(s):
-    # Non-Secured ldap_server  Contains ldap server URI eg. (e.g. "ldap://x.x.x.x/").
-    # Secured ldap_server  Contains ldap server URI eg. (e.g. "ldaps://x.x.x.x/").
-
-    ${ldap_server_config}=  Read Properties  ${BMC_USER_URI}ldap/enumerate
-    ${ldap_server_config}=  Convert To String  ${ldap_server_config}
-    Should Contain  ${ldap_server_config}  ${ldap_server}
-    ...  msg=${ldap_server} is not configured.
-
-
-Delete LDAP Config
-    [Documentation]  Delete LDAP Config from REST.
-
-    ${data}=  Create Dictionary  data=@{EMPTY}
-    ${resp}=  OpenBMC Post Request
-    ...  ${BMC_LDAP_URI}/config/action/delete  data=${data}
-
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-
-
-Check LDAP Config File Deleted
-    [Documentation]  Check LDAP file nslcd.conf deleted.
-
-    ${ldap_server_config}=  Read Properties  ${BMC_USER_URI}ldap/enumerate
-    ${ldap_server_config}=  Convert To String  ${ldap_server_config}
-
-    Should Not Contain  ${ldap_server_config}  ${LDAP_SERVER_URI}
-    ...  msg=${ldap_server_config} is not configured.
-
-
-
-Modify LDAP Search Scope
-    [Documentation]  Modify LDAP search scope parameter in LDAP config.
-    [Arguments]  ${search_scope}=${LDAP_SEARCH_SCOPE}
-
-    # Description of argument(s):
-    # search_scope  Contains ldap search scope (e.g. "xyz.openbmc_project.User.Ldap.Config.SearchScope.one").
-
-    ${search_scope_dict}=  Create Dictionary  data=${search_scope}
-    Write Attribute  ${BMC_LDAP_URI}/config   LDAPSearchScope  data=${search_scope_dict}
-    ...  verify=${True}  expected_value=${search_scope}
-
-
-Modify LDAP Server Type
-    [Documentation]  Modify LDAP server type parameter in LDAP config.
-    [Arguments]  ${ldap_type}=${LDAP_SERVER_TYPE}
-
-    # Description of argument(s):
-    # ldap_type Contains ldap server type (e.g. "xyz.openbmc_project.User.Ldap.Config.Type.ActiveDirectory").
-
-    ${ldap_type_dict}=  Create Dictionary  data=${ldap_type}
-    Write Attribute  ${BMC_LDAP_URI}/config   LDAPType  data=${ldap_type_dict}
-    ...  verify=${True}  expected_value=${ldap_type}
-
-
+    Delete Defined LDAP Group And Privilege  ${GROUP_NAME}
