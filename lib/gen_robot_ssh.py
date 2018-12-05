@@ -219,11 +219,6 @@ def execute_ssh_command(cmd_buf,
 
     gp.lprint_executing()
 
-    # Convert to int.
-    print_out = int(print_out)
-    print_err = int(print_err)
-    ignore_err = int(ignore_err)
-    fork = int(fork)
     # Obtain default values.
     quiet = int(gp.get_var_value(quiet, 0))
     test_mode = int(gp.get_var_value(test_mode, 0))
