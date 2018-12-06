@@ -403,9 +403,10 @@ Test Power Reading Via IPMI With Host Off
     ...  verify using REST.
     [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Off
 
-    REST Power Off  stack_mode=skip  quiet=1
-
-    Wait Until Keyword Succeeds  1 min  30 sec  Verify Power Reading
+    IPMI Power Off
+    ${power_reading}=  Get IPMI Power Reading
+    Should Be Equal  ${power_reading['instantaneous_power_reading']}  0
+    ...  msg=Power reading not zero when power is off.
 
 
 Test Power Reading Via IPMI With Host Booted
