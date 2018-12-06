@@ -318,8 +318,8 @@ Test Setup Execution
    Run Keyword If  ${status} == ${False}  Install Tarball
    Delete Error Logs And Verify
 
-   # Refresh the GUI and navigate to server health page.
-   Click Element  ${xpath_select_refresh_button}
+   # Launch the GUI and navigate to server health page.
+   Launch Browser And Login OpenBMC GUI
    Click Element  ${xpath_select_server_health}
    Wait Until Page Contains  Event log
 
@@ -329,3 +329,4 @@ Test Teardown Execution
    FFDC On Test Case Fail
    Delete All Error Logs
    Close All Connections
+   Close Browser
