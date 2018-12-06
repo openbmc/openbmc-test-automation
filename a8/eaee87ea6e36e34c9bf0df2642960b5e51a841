@@ -1,0 +1,8 @@
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+2: Andrew Geissler <geissonator@yahoo.com>
+Submitted-by: Andrew Geissler <geissonator@yahoo.com>
+Submitted-at: Thu, 06 Dec 2018 23:31:53 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/16540
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
