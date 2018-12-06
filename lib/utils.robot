@@ -957,7 +957,7 @@ Get Endpoint Paths
     # For a given string, look for prefix and suffix for matching expression.
     # Start of string followed by zero or more of any character followed by
     # any digit or lower case character.
-    ${resp}=  Get Matches  ${list}  regexp=^.*[0-9a-z_].${endpoint}[0-9a-z]*$
+    ${resp}=  Get Matches  ${list}  regexp=^.*[0-9a-z_].${endpoint}\[0-9a-z]*$
 
     [Return]  ${resp}
 
