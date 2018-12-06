@@ -6,8 +6,7 @@ Resource  ../../../../lib/state_manager.robot
 Resource  ../../lib/resource.robot
 
 Test Setup      Test Setup Execution
-Suite Setup     Launch Browser And Login OpenBMC GUI
-Suite Teardown  Close Browser
+Test Teardown   Close Browser
 
 *** Test Cases ***
 
@@ -134,7 +133,8 @@ OpenBMC GUI Logoff
 Test Setup Execution
    [Documentation]  Do testcase setup tasks.
 
-   # Refresh the GUI and navigate to server power page.
-   Click Element  ${xpath_select_refresh_button}
+   # Launch the GUI and navigate to server power page.
+   Launch Browser And Login OpenBMC GUI
    Click Element  ${xpath_select_server_power}
    Wait Until Page Contains  Server power operations
+

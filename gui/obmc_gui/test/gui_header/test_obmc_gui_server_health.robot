@@ -12,8 +12,6 @@ Resource        ../../../../lib/dump_utils.robot
 Resource        ../../../../lib/logging_utils.robot
 Library         ../../../../lib/gen_robot_keyword.py
 
-Suite Setup     Launch Browser And Login OpenBMC GUI
-Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
@@ -318,8 +316,8 @@ Test Setup Execution
    Run Keyword If  ${status} == ${False}  Install Tarball
    Delete Error Logs And Verify
 
-   # Refresh the GUI and navigate to server health page.
-   Click Element  ${xpath_select_refresh_button}
+   # Launch the GUI and navigate to server health page.
+   Launch Browser And Login OpenBMC GUI
    Click Element  ${xpath_select_server_health}
    Wait Until Page Contains  Event log
 
@@ -329,3 +327,4 @@ Test Teardown Execution
    FFDC On Test Case Fail
    Delete All Error Logs
    Close All Connections
+   Close Browser
