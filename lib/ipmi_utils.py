@@ -113,7 +113,6 @@ def execute_ipmi_cmd(cmd_string,
             BuiltIn().get_variable_value("${IPMI_USER_OPTIONS}")
         if IPMI_USER_OPTIONS != "":
             cmd_buf += " " + IPMI_USER_OPTIONS
-        cmd_buf += " -P " + BuiltIn().get_variable_value("${IPMI_PASSWORD}")
         cmd_buf += " " + BuiltIn().get_variable_value("${HOST}")
         cmd_buf += " " + BuiltIn().get_variable_value("${OPENBMC_HOST}")
         cmd_buf += " " + cmd_string
