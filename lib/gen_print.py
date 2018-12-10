@@ -1127,19 +1127,23 @@ def sprint_call_stack(indent=0,
             func_and_args = ' '.join(sys.argv)
         else:
             # Get the program arguments.
-            arg_vals = inspect.getargvalues(stack_frame[0])
-            function_parms = arg_vals[0]
-            frame_locals = arg_vals[3]
+            (args, varargs, keywords, locals) =\
+                inspect.getargvalues(stack_frame[0])
 
             args_list = []
-            for arg_name in function_parms:
+            for arg_name in filter(None, args + [varargs, keywords]):
                 # Get the arg value from frame locals.
-                arg_value = frame_locals[arg_name]
-                args_list.append(arg_name + " = " + repr(arg_value))
+                arg_value = locals[arg_name]
+                if arg_name == 'self':
+                    # Manipulations to improve output for class methods.
+                    func_name = arg_value.__class__.__name__ + "." + func_name
+                    args_list.append(arg_name + " = <self>")
+                else:
+                    args_list.append(arg_name + " = " + repr(arg_value))
             args_str = "(" + ', '.join(map(str, args_list)) + ")"
 
             # Now we need to print this in a nicely-wrapped way.
-            func_and_args = func_name + " " + args_str
+            func_and_args = func_name + args_str
 
         buffer += sindent(format_string % (line_num, func_and_args), indent)
         ix += 1
@@ -1191,19 +1195,23 @@ def sprint_executing(stack_frame_ix=None):
         func_and_args = ' '.join(sys.argv)
     else:
         # Get the program arguments.
-        arg_vals = inspect.getargvalues(stack_frame[0])
-        function_parms = arg_vals[0]
-        frame_locals = arg_vals[3]
+        (args, varargs, keywords, locals) =\
+            inspect.getargvalues(stack_frame[0])
 
         args_list = []
-        for arg_name in function_parms:
+        for arg_name in filter(None, args + [varargs, keywords]):
             # Get the arg value from frame locals.
-            arg_value = frame_locals[arg_name]
-            args_list.append(arg_name + " = " + repr(arg_value))
+            arg_value = locals[arg_name]
+            if arg_name == 'self':
+                # Manipulations to improve output for class methods.
+                func_name = arg_value.__class__.__name__ + "." + func_name
+                args_list.append(arg_name + " = <self>")
+            else:
+                args_list.append(arg_name + " = " + repr(arg_value))
         args_str = "(" + ', '.join(map(str, args_list)) + ")"
 
         # Now we need to print this in a nicely-wrapped way.
-        func_and_args = func_name + " " + args_str
+        func_and_args = func_name + args_str
 
     return sprint_time() + "Executing: " + func_and_args + "\n"
 
