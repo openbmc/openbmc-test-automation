@@ -14,6 +14,7 @@ Documentation    Verify openbmctool.py functionality.
 # health check
 # service data
 # remote logging
+# local_users queryenabled
 #
 # It is the responsibility of the user to include openbmctool.py's
 # directory PATH in $PATH.
@@ -27,15 +28,6 @@ Documentation    Verify openbmctool.py functionality.
 #                       '10.10.10.10'.
 # LOGGING_PORT          The port number for remote logging on the
 #                       LOGGING_HOST.  The default value is '514'.
-
-
-# TODO:
-# chassis tests
-# sel tests
-# dump
-# bmc (same as mc)
-# gardclear
-# firmware commands
 
 
 Library                 String
@@ -58,6 +50,7 @@ ${min_number_items}     ${30}
 ${min_number_sensors}   ${15}
 ${LOGGING_HOST}         10.10.10.10
 ${LOGGING_PORT}         514
+
 
 
 *** Test Cases ***
@@ -122,6 +115,21 @@ Verify Openbmctool Remote Logging Operations
     Run Keyword If  ${remote_config}
     ...  Verify Logging Parameters
     ...  ${remote_config['Address']}  ${remote_config['Port']}
+
+
+Verify Openbmctool Local Users Queryenabled
+    [Documentation]  Verify "local_users queryenabled" function.
+    [Tags]  Verify_Openbmctool_Local_Users_Queryenabled
+
+    # Example output from "queryenabled":
+    # User: root  Enabled: 1
+    # User: freddy  Enabled: 1
+    # User: ldap4  Enabled: {'description': "The ..."
+
+    ${rc}  ${num_users}=  Openbmctool Execute Command
+    ...  local_users queryenabled | grep -c 'User.*Enabled'
+    Rprint Vars  num_users
+    Check Greater Than Minimum  ${num_users}  ${0}  local users
 
 
 *** Keywords ***
