@@ -1068,6 +1068,52 @@ def sindent(text="",
     return buffer
 
 
+def sprint_func_line(stack_frame):
+    r"""
+    For the given stack_frame, return a formatted string containing the
+    function name and all its arguments.
+
+    Example:
+
+    func1(last_name = 'walsh', first_name = 'mikey')
+
+    Description of argument(s):
+    stack_frame                     A stack frame (such as is returned by
+                                    inspect.stack()).
+    """
+
+    func_name = str(stack_frame[3])
+    if func_name == "?":
+        # "?" is the name used when code is not in a function.
+        func_name = "(none)"
+
+    if func_name == "<module>":
+        # If the func_name is the "main" program, we simply get the command
+        # line call string.
+        func_and_args = ' '.join(sys.argv)
+    else:
+        # Get the program arguments.
+        (args, varargs, keywords, locals) =\
+            inspect.getargvalues(stack_frame[0])
+
+        args_list = []
+        for arg_name in filter(None, args + [varargs, keywords]):
+            # Get the arg value from frame locals.
+            arg_value = locals[arg_name]
+            if arg_name == 'self':
+                # Manipulations to improve output for class methods.
+                func_name = arg_value.__class__.__name__ + "." + func_name
+                args_list.append(arg_name + " = <self>")
+            else:
+                args_list.append(arg_name + " = " + repr(arg_value))
+        args_str = "(" + ', '.join(map(str, args_list)) + ")"
+
+        # Now we need to print this in a nicely-wrapped way.
+        func_and_args = func_name + args_str
+
+    return func_and_args
+
+
 def sprint_call_stack(indent=0,
                       stack_frame_ix=0):
     r"""
@@ -1081,9 +1127,9 @@ def sprint_call_stack(indent=0,
 
     Line # Function name and arguments
     ------ ------------------------------------------------------------------
-       424 sprint_call_stack ()
-         4 print_call_stack ()
-        31 func1 (last_name = 'walsh', first_name = 'mikey')
+       424 sprint_call_stack()
+         4 print_call_stack()
+        31 func1(last_name = 'walsh', first_name = 'mikey')
         59 /tmp/scr5.py
     -------------------------------------------------------------------------
 
@@ -1116,30 +1162,7 @@ def sprint_call_stack(indent=0,
             line_num = str(current_stack[ix + 1][2])
         except IndexError:
             line_num = ""
-        func_name = str(stack_frame[3])
-        if func_name == "?":
-            # "?" is the name used when code is not in a function.
-            func_name = "(none)"
-
-        if func_name == "<module>":
-            # If the func_name is the "main" program, we simply get the
-            # command line call string.
-            func_and_args = ' '.join(sys.argv)
-        else:
-            # Get the program arguments.
-            arg_vals = inspect.getargvalues(stack_frame[0])
-            function_parms = arg_vals[0]
-            frame_locals = arg_vals[3]
-
-            args_list = []
-            for arg_name in function_parms:
-                # Get the arg value from frame locals.
-                arg_value = frame_locals[arg_name]
-                args_list.append(arg_name + " = " + repr(arg_value))
-            args_str = "(" + ', '.join(map(str, args_list)) + ")"
-
-            # Now we need to print this in a nicely-wrapped way.
-            func_and_args = func_name + " " + args_str
+        func_and_args = sprint_func_line(stack_frame)
 
         buffer += sindent(format_string % (line_num, func_and_args), indent)
         ix += 1
@@ -1156,7 +1179,7 @@ def sprint_executing(stack_frame_ix=None):
 
     Sample output:
 
-    #(CDT) 2016/08/25 17:54:27 - Executing: func1 (x = 1)
+    #(CDT) 2016/08/25 17:54:27 - Executing: func1(x = 1)
 
     Description of arguments:
     stack_frame_ix                  The index of the stack frame whose
@@ -1180,30 +1203,7 @@ def sprint_executing(stack_frame_ix=None):
 
     stack_frame = inspect.stack()[stack_frame_ix]
 
-    func_name = str(stack_frame[3])
-    if func_name == "?":
-        # "?" is the name used when code is not in a function.
-        func_name = "(none)"
-
-    if func_name == "<module>":
-        # If the func_name is the "main" program, we simply get the command
-        # line call string.
-        func_and_args = ' '.join(sys.argv)
-    else:
-        # Get the program arguments.
-        arg_vals = inspect.getargvalues(stack_frame[0])
-        function_parms = arg_vals[0]
-        frame_locals = arg_vals[3]
-
-        args_list = []
-        for arg_name in function_parms:
-            # Get the arg value from frame locals.
-            arg_value = frame_locals[arg_name]
-            args_list.append(arg_name + " = " + repr(arg_value))
-        args_str = "(" + ', '.join(map(str, args_list)) + ")"
-
-        # Now we need to print this in a nicely-wrapped way.
-        func_and_args = func_name + " " + args_str
+    func_and_args = sprint_func_line(stack_frame)
 
     return sprint_time() + "Executing: " + func_and_args + "\n"
 
