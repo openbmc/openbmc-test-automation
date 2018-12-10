@@ -11,7 +11,7 @@ Test Setup      Test Setup Execution
 *** Variables ***
 ${xpath_select_server_health}   //*[@id="nav__top-level"]/li[2]/button
 ${xpath_select_sensors}         //a[@href='#/server-health/sensors-overview']
-${xpath_sensors_export}         css:a.inline
+${xpath_sensors_export}         //a[contains(text(), "Export")]
 ${xpath_sensors_search}         //*[@id="content__search-input"]
 ${xpath_sensors_search_button}  //*[@id="content__search-submit"]
 
