@@ -112,6 +112,11 @@ Click Immediate Shutdown Then Yes
     [Tags]  Click_Immediate_Shutdown_Then_Yes
 
     Expected Initial Test State  Running
+
+    # By this time GUI logs out. So relaunching it.
+    Close Browser
+    Launch Browser And Login OpenBMC GUI
+
     Controller Server Power Click Button  power__hard-shutdown
     Controller Power Operations Confirmation Click Button  ${power_operations}
     ...  ${power_off}  ${confirm_msg}  ${yes}
