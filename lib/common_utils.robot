@@ -926,3 +926,11 @@ Get Service Attribute
     ...  systemctl -p ${option} show ${servicename} | cut -d = -f2
     ${attr}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     [Return]  ${attr}
+
+
+Enable IPMI Default User Password
+    [Documentation]  Set the system "root" user password.
+
+    Install Debug Tarball On BMC
+    # Set the password for the userid 1 (which is root).
+    BMC Execute Command  /tmp/tarball/bin/ipmitool -I dbus user set password 1 0penBmc
