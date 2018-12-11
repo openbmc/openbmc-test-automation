@@ -43,7 +43,7 @@ Get Component Fru Info Via REST
     # From the inventory_uris, select just the ones for the component of
     # interest.
     ${component_uris}=  Get Matches  ${inventory_uris}
-    ...  regexp=^.*[0-9a-z_].${component_name}[0-9]*$
+    ...  regexp=^.*[0-9a-z_].${component_name}\[0-9]*$
 
     # Get the component information for each record.
     ${component_frus}=  Create List
@@ -123,7 +123,7 @@ Verify FRU Info
     #     /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
     #     /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu1
     ${component_uris}=  Get Matches  ${inventory_uris}
-    ...  regexp=^.*[0-9a-z_].${component_name}[0-9]*$
+    ...  regexp=^.*[0-9a-z_].${component_name}\[0-9]*$
 
     : FOR  ${uri}  IN  @{component_uris}
     \  ${sub_component}=  Fetch From Right  ${uri}  /
