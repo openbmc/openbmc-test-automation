@@ -51,7 +51,7 @@ Get System component
     [Documentation]  Get the system component.
     [Arguments]    ${type}
     ${list}=    Get Dictionary Keys    ${SYSTEM_INFO}
-    ${resp}=    Get Matches    ${list}    regexp=^.*[0-9a-z_].${type}[0-9]*$
+    ${resp}=    Get Matches    ${list}    regexp=^.*[0-9a-z_].${type}\[0-9]*$
     ${url}=    Get From List    ${resp}    0
     [Return]    ${url}
 
