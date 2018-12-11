@@ -27,19 +27,20 @@ Preserve BMC Network Setting
     ...   msg=False indicates network is not preserved.
 
 
-Activate BMC flash image
-    [Documentation]   Activate and verify the update status
-    ...               The status could be either one of these
+Activate BMC Flash Image
+    [Documentation]   Activate and verify the update status.
+    ...               The status could be either one of these:
     ...               'Deferred for mounted filesystem. reboot BMC to apply.'
     ...               'Image ready to apply.'
-    @{img_path}=   Create List    /tmp/flashimg
-    ${data}=   create dictionary   data=@{img_path}
-    ${resp}=    openbmc post request    ${BMC_UPD_METHOD}   data=${data}
-    should be equal as strings   ${resp.status_code}   ${HTTP_OK}
+    @{img_path}=  Create List  /tmp/flashimg
+    ${data}=  Create Dictionary  data=@{img_path}
+    ${resp}=  OpenBMC Post Request  ${BMC_UPD_METHOD}  data=${data}
+    ...  timeout=${30}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
-    ${data}=      Read Properties     ${BMC_UPD_ATTR}
-    should be equal as strings   ${data["filename"]}   /tmp/flashimg
-    should contain    ${data['status']}   to apply
+    ${data}=  Read Properties  ${BMC_UPD_ATTR}
+    Should Be Equal As Strings  ${data["filename"]}  /tmp/flashimg
+    Should Contain  ${data['status']}  to apply
 
 
 Prepare For Update
