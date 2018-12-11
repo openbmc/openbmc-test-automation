@@ -24,3 +24,51 @@
 -e Test_GPU_SDR_Info_At_Power_On
 # Core dump is disabled.
 -e Verify_Core_Dump_Size
+# Skip org code update.
+-e Initiate_Code_Update_BMC
+-e BIOS_Code_Update
+-e Upload_Test
+-e BMC_Code_Update
+-e Host_Code_Update
+-e BMC_Update_Recoverable_Error
+-e Host_Update_Recoverable_Error
+-e BMC_Multi_Code_Update
+-e Host_Multi_Code_Update
+-e Enable_Field_Mode
+-e Attempt_To_Disable_Field_Mode_Via_REST
+-e Verify_IPMI_Disable_Policy_Post_BMC_Code_Update
+# Others NA tests.
+-e Run_Keyword_Pgm
+# Factory reset must not run in CT.
+-e Factory_Reset
+-e Full_Suite_Regression
+-e AC_Cycles
+-e Network_Nping
+# Multiple runs only needed for stability.
+-e Run_Multiple_Power_Cycle
+-e Run_Multiple_BMC_Reset_Via_REST
+-e Run_Multiple_BMC_Reset_Via_Reboot
+-e General_boot_testing
+-e SLP_Service_Test
+-e Check_Network_Latency
+# TODO: Configure invalid IP address use cases.
+-e Configure_Broadcast_IP
+-e Configure_Multicast_IP
+-e Configure_Loopback_IP
+-e Configure_Network_ID
+# TODO: Invalid gateway address configuration.
+-e Configure_Broadcast_IP_For_Gateway
+-e Configure_Loopback_IP_For_Gateway
+-e Configure_Multicast_IP_For_Gateway
+-e Configure_Network_ID_For_Gateway
+-e Verify_Network_Interface_Recovery
+# Skipping RAS test cases
+-e Host_RAS
+# Skip multi threading test cuasing XML parser failure.
+-e Stress_BMC_REST_Server
+-e Stress_BMC_SSH_Server
+-e Stress_BMC_IPMI_Server
+# Applicable only for master build.
+-e Verify_eSEL_Description_And_EntryID_Using_REST
+# Needs fix and improvement.
+-e Test_SBE_Side_Switch
