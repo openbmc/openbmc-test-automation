@@ -934,3 +934,10 @@ Verify Watchdog Enabled
     ${properties}=  Read Properties  /xyz/openbmc_project/watchdog/host0
     Should Be Equal As Strings  ${properties["Enabled"]}  ${True}
     Should Not Be Equal As Strings  ${properties["TimeRemaining"]}  0
+
+Enable IPMI Default User Password
+    [Documentation]  Set the system "root" user password.
+
+    Install Debug Tarball On BMC
+    # Set the password for the userid 1 (which is root).
+    BMC Execute Command  /tmp/tarball/bin/ipmitool -I dbus user set password 1 0penBmc
