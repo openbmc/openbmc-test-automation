@@ -1,30 +1,33 @@
 *** Settings ***
 Documentation    Code update utility
 
-Resource         ../../lib/rest_client.robot
-Resource         ../../lib/connection_client.robot
-Resource         ../../lib/utils.robot
-Library          OperatingSystem
+Resource                 ../../lib/rest_client.robot
+Resource                 ../../lib/connection_client.robot
+Resource                 ../../lib/utils.robot
+Library                  OperatingSystem
 
 *** Variables ***
 
 # Fix old org path locally for non-witherspoon system.
 ${ORG_OPENBMC_BASE_URI}  /org/openbmc/
-${BMC_UPD_METHOD}    ${ORG_OPENBMC_BASE_URI}control/flash/bmc/action/update
-${BMC_PREP_METHOD}   ${ORG_OPENBMC_BASE_URI}control/flash/bmc/action/PrepareForUpdate
-${BMC_UPD_ATTR}      ${ORG_OPENBMC_BASE_URI}control/flash/bmc
-${HOST_SETTING}      ${ORG_OPENBMC_BASE_URI}settings/host0
+${ORG_CONTROL_FLASH}     ${ORG_OPENBMC_BASE_URI}control/flash/
+${BMC_UPD_METHOD}        ${ORG_CONTROL_FLASH}bmc/action/update
+${BMC_PREP_METHOD}       ${ORG_CONTROL_FLASH}bmc/action/PrepareForUpdate
+${BMC_UPD_ATTR}          ${ORG_CONTROL_FLASH}bmc
+${HOST_SETTING}          ${ORG_OPENBMC_BASE_URI}settings/host0
 
 *** Keywords ***
 
 Preserve BMC Network Setting
     [Documentation]   Preserve Network setting
-    ${policy}=       Set Variable   ${1}
-    ${value}=    create dictionary   data=${policy}
-    Write Attribute   ${BMC_UPD_ATTR}  preserve_network_settings  data=${value}
-    ${data}=      Read Properties   ${BMC_UPD_ATTR}
-    Should Be Equal As Strings    ${data['preserve_network_settings']}   ${True}
-    ...   msg=False indicates network is not preserved.
+
+    ${policy}=  Set Variable  ${1}
+    ${value}=  Create Dictionary  data=${policy}
+    Write Attribute  ${BMC_UPD_ATTR}  preserve_network_settings  data=${value}
+    ${data}=  Read Properties  ${BMC_UPD_ATTR}
+    Should Be Equal As Strings
+    ...  ${data['preserve_network_settings']}   ${True}
+    ...  msg=False indicates network is not preserved.
 
 
 Activate BMC Flash Image
@@ -32,6 +35,7 @@ Activate BMC Flash Image
     ...               The status could be either one of these:
     ...               'Deferred for mounted filesystem. reboot BMC to apply.'
     ...               'Image ready to apply.'
+
     @{img_path}=  Create List  /tmp/flashimg
     ${data}=  Create Dictionary  data=@{img_path}
     ${resp}=  OpenBMC Post Request  ${BMC_UPD_METHOD}  data=${data}
@@ -47,6 +51,7 @@ Prepare For Update
     [Documentation]   Switch to update mode in progress. This method calls
     ...               the Abort method to remove the pending update if there
     ...               is any before code activation.
+
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  Openbmc Post Request  ${BMC_PREP_METHOD}  data=${data}
 
@@ -58,9 +63,9 @@ Prepare For Update
 SCP Tar Image File to BMC
     [Documentation]  Copy BMC tar image to BMC.
     [Arguments]  ${image_file_path}
+
     # Description of argument(s):
     # image_file_path  Downloaded BMC tar file image path.
-
 
     Open Connection for SCP
     Open Connection And Log In
@@ -70,6 +75,7 @@ SCP Tar Image File to BMC
 Loop SCP Retry
     [Documentation]  Try transferring the file 4 times.
     [Arguments]  ${image_file_path}
+
     # Description of argument(s):
     # image_file_path  Downloaded BMC tar file image path.
 
@@ -81,6 +87,7 @@ Loop SCP Retry
 Retry SCP
     [Documentation]  Delete the incomplete file and scp file.
     [Arguments]  ${image_file_path}
+
     # Description of argument(s):
     # image_file_path  Downloaded BMC tar file image path.
 
@@ -103,6 +110,10 @@ Retry SCP
 Check If File Exist
     [Documentation]  Verify that the file exists on this machine.
     [Arguments]  ${filepath}
+
+    # Description of argument(s):
+    # filepath  File to check for existence.
+
     Log   \n PATH: ${filepath}
     OperatingSystem.File Should Exist  ${filepath}
     ...    msg=${filepath} doesn't exist [ ERROR ]
@@ -111,11 +122,12 @@ Check If File Exist
 
 
 System Readiness Test
-    [Documentation]  Verify that the system can be pinged and authenticated through REST.
-    ${l_status}=   Run Keyword and Return Status
-    ...   Verify Ping and REST Authentication
+    [Documentation]  Verify can ping and authenticate through REST.
+
+    ${l_status}=  Run Keyword and Return Status
+    ...  Verify Ping and REST Authentication
     Run Keyword If  '${l_status}' == '${False}'
-    ...   Fail  msg=System not in ideal state to use [ERROR]
+    ...  Fail  msg=System not in ideal state to use [ERROR]
 
 
 Validate BMC Version
@@ -136,15 +148,21 @@ Trigger Warm Reset via Reboot
     ...                returns immediately. This keyword "Start Command"
     ...                returns nothing and does not wait for the command
     ...                execution to be finished.
+
     Open Connection And Log In
 
     Start Command   /sbin/reboot
+
 
 Set Policy Setting
     [Documentation]   Set the given test policy
     [Arguments]   ${policy}
 
-    ${valueDict}=     create dictionary  data=${policy}
-    Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
-    ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
-    Should Be Equal    ${currentPolicy}   ${policy}
+    # Description of argument(s):
+    # policy  Policy value to set (e.g., ${RESTORE_LAST_STATE},
+    #         ${ALWAYS_POWER_ON}, or ${ALWAYS_POWER_OFF}).
+
+    ${valueDict}=  Create Dictionary  data=${policy}
+    Write Attribute  ${HOST_SETTING}  power_policy  data=${valueDict}
+    ${currentPolicy}=  Read Attribute  ${HOST_SETTING}  power_policy
+    Should Be Equal  ${currentPolicy}  ${policy}
