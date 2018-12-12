@@ -93,7 +93,7 @@ def cmd_fnc(cmd_buf,
                                 executable='/bin/bash',
                                 stdout=subprocess.PIPE,
                                 stderr=stderr)
-    out_buf = ""
+    out_buf = b""
     if return_stderr:
         for line in sub_proc.stderr:
             err_buf += line
@@ -388,7 +388,7 @@ def shell_cmd(command_string,
         stderr = subprocess.STDOUT
 
     shell_rc = 0
-    out_buf = ""
+    out_buf = b""
     err_buf = ""
     # Write all output to func_history_stdout rather than directly to stdout.
     # This allows us to decide what to print after all attempts to run the
@@ -402,7 +402,7 @@ def shell_cmd(command_string,
                                     executable='/bin/bash',
                                     stdout=subprocess.PIPE,
                                     stderr=stderr)
-        out_buf = ""
+        out_buf = b""
         err_buf = ""
         # Output from this loop iteration is written to func_stdout for later
         # processing.

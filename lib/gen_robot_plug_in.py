@@ -8,7 +8,11 @@ robot program.
 import sys
 import subprocess
 from robot.libraries.BuiltIn import BuiltIn
-import commands
+try:
+    import commands
+except ImportError:
+    import subprocess as commands
+
 import os
 import tempfile
 

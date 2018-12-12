@@ -44,7 +44,7 @@ class func_timer_class:
         # class' methods.
         self.__original_SIGUSR1_handler = signal.getsignal(signal.SIGUSR1)
 
-    def __del__(self):
+    def __exit__(self, exception_type, exception_value, traceback):
         self.cleanup()
 
     def sprint_obj(self):

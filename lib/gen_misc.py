@@ -73,7 +73,7 @@ def which(file_path):
             gp.print_error_report(error_message)
             return False
 
-    file_path = out_buf.rstrip("\n")
+    file_path = out_buf.rstrip(b"\n")
 
     return file_path
 
