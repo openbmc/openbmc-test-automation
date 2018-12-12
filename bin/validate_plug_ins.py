@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 
 import sys
-import __builtin__
+try:
+    import __builtin__
+except ImportError:
+    import builtins as __builtin__
+
 import os
 
 # python puts the program's directory path in sys.path[0].  In other words,

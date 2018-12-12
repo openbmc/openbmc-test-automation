@@ -68,8 +68,10 @@ def print_error_logs(error_logs, key_list=None):
     """
 
     if key_list is not None:
-        if type(key_list) in (str, unicode):
+        try:
             key_list = key_list.split(" ")
+        except AttributeError:
+            pass
         key_list.insert(0, var.BMC_LOGGING_ENTRY + ".*")
 
     gp.print_var(error_logs, hex=1, key_list=key_list)

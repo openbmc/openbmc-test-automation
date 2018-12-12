@@ -66,7 +66,7 @@ def my_import_resource(path):
 
     # If any variable values were changed due to the prior import, set them
     # back to their original values.
-    for key, value in post_var_dict.iteritems():
+    for key, value in post_var_dict.items():
         if key in pre_var_dict:
             if value != pre_var_dict[key]:
                 global_var_name = re.sub("[@&]", "$", key)

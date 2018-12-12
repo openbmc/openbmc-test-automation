@@ -298,4 +298,7 @@ def to_json_ordered(json_str):
     json_str                        The string containing the JSON data.
     """
 
-    return json.loads(json_str, object_pairs_hook=DotDict)
+    try:
+        return json.loads(json_str, object_pairs_hook=DotDict)
+    except TypeError:
+        return json.loads(json_str.decode("utf-8"), object_pairs_hook=DotDict)
