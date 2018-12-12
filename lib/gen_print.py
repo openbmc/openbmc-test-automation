@@ -806,7 +806,7 @@ def sprint_varx(var_name,
     try:
         string_types = (str, unicode)
     except NameError:
-        string_types = (str,)
+        string_types = (bytes, str)
     simple_types = int_types + string_types + (float, bool)
     if type(var_value) in simple_types \
        or var_value is None:
