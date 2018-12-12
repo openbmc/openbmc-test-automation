@@ -2,6 +2,7 @@
 Documentation      Keywords for system test.
 
 Library            ../lib/gen_robot_keyword.py
+Library            ../lib/gen_robot_print.py
 Resource           ../lib/boot_utils.robot
 Resource           ../extended/obmc_boot_test_resource.robot
 Resource           ../lib/utils.robot
@@ -222,14 +223,14 @@ Get CPU Max Temperature
     ${temperature_objs}=  Read Properties
     ...  ${SENSORS_URI}temperature/enumerate
     # Filter the dictionary to get just the CPU temperature info.
-    ${cmd}=  Catenate  {k:v for k,v in $temperature_objs.iteritems()
+    ${cmd}=  Catenate  {k:v for k,v in $temperature_objs.items()
     ...  if re.match('${SENSORS_URI}temperature/p.*core.*temp', k)}
     ${cpu_temperatuture_objs}  Evaluate  ${cmd}  modules=re
     # Create a list of the CPU temperature values (current).
     ${cpu_temperatures}=  Evaluate
     ...  [ x['Value'] for x in $cpu_temperatuture_objs.values() ]
 
-    ${cpu_max_temp}  Evaluate  max(map(int, $cpu_temperatures))/1000
+    ${cpu_max_temp}  Evaluate  int(max(map(int, $cpu_temperatures))/1000)
     [Return]  ${cpu_max_temp}
 
 
@@ -239,14 +240,14 @@ Get CPU Min Temperature
     ${temperature_objs}=  Read Properties
     ...  ${SENSORS_URI}temperature/enumerate
     # Filter the dictionary to get just the CPU temperature info.
-    ${cmd}=  Catenate  {k:v for k,v in $temperature_objs.iteritems()
+    ${cmd}=  Catenate  {k:v for k,v in $temperature_objs.items()
     ...  if re.match('${SENSORS_URI}temperature/p.*core.*temp', k)}
     ${cpu_temperatuture_objs}=  Evaluate  ${cmd}  modules=re
     # Create a list of the CPU temperature values (current).
     ${cpu_temperatures}=  Evaluate
     ...  [ x['Value'] for x in $cpu_temperatuture_objs.values() ]
 
-    ${cpu_min_temp}  Evaluate  min(map(int, $cpu_temperatures))/1000
+    ${cpu_min_temp}  Evaluate  int(min(map(int, $cpu_temperatures))/1000)
     [Return]  ${cpu_min_temp}
 
 
@@ -397,7 +398,7 @@ Get GPU Temperature Via REST
     ${temperature_objs}=  Read Properties  ${SENSORS_URI}temperature/enumerate
     ...  timeout=30  quiet=1
 
-    ${core_temperatures_list}=  Catenate  {k:v for k,v in $temperature_objs.iteritems()
+    ${core_temperatures_list}=  Catenate  {k:v for k,v in $temperature_objs.items()
     ...  if re.match('${SENSORS_URI}temperature/.*_core_temp', k)}
     ${gpu_temperature_objs_dict}=  Evaluate  ${core_temperatures_list}  modules=re
 
@@ -407,7 +408,8 @@ Get GPU Temperature Via REST
 
     # Find the max temperature value and divide by 1000 to get just the integer
     # portion.
-    ${max_gpu_temperature}=  Evaluate  max(map(int, $gpu_temperatures))/1000
+    ${max_gpu_temperature}=  Evaluate
+    ...  int(max(map(int, $gpu_temperatures))/1000)
 
     [Return]  ${max_gpu_temperature}
 

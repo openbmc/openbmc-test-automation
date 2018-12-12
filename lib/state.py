@@ -34,7 +34,6 @@ import gen_robot_utils as gru
 import gen_cmd as gc
 import bmc_ssh_utils as bsu
 
-import commands
 from robot.libraries.BuiltIn import BuiltIn
 from robot.utils import DotDict
 
@@ -178,14 +177,12 @@ invalid_state_match = DotDict([('rest', '^$'),
                                ('host', '^$')])
 
 
-def return_state_constant(state_name='default'):
+def return_state_constant(state_name='default_state'):
     r"""
     Return the named state dictionary constant.
     """
 
-    cmd_buf = "state = " + state_name
-    exec(cmd_buf)
-    return state
+    return eval(state_name)
 
 
 def anchor_state(state):
@@ -258,8 +255,10 @@ def compare_states(state,
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
-    if type(match_state) in (str, unicode):
+    try:
         match_state = return_state_constant(match_state)
+    except TypeError:
+        pass
 
     default_match = (match_type == 'and')
     for key, match_state_value in match_state.items():
@@ -346,10 +345,9 @@ def get_os_state(os_host="",
     if os_up:
         if 'os_ping' in req_states:
             # See if the OS pings.
-            cmd_buf = "ping -c 1 -w 2 " + os_host
-            if not quiet:
-                gp.pissuing(cmd_buf)
-            rc, out_buf = commands.getstatusoutput(cmd_buf)
+            rc, out_buf = gc.shell_cmd("ping -c 1 -w 2 " + os_host,
+                                       print_output=0, show_err=0,
+                                       ignore_err=1)
             if rc == 0:
                 os_ping = 1
 
@@ -482,10 +480,9 @@ def get_state(openbmc_host="",
     # Get the component states.
     if 'ping' in req_states:
         # See if the OS pings.
-        cmd_buf = "ping -c 1 -w 2 " + openbmc_host
-        if not quiet:
-            gp.pissuing(cmd_buf)
-        rc, out_buf = commands.getstatusoutput(cmd_buf)
+        rc, out_buf = gc.shell_cmd("ping -c 1 -w 2 " + openbmc_host,
+                                   print_output=0, show_err=0,
+                                   ignore_err=1)
         if rc == 0:
             ping = 1
 
@@ -493,9 +490,9 @@ def get_state(openbmc_host="",
         # See if the OS pings.
         cmd_buf = "ping -c 5 -w 5 " + openbmc_host +\
             " | egrep 'packet loss' | sed -re 's/.* ([0-9]+)%.*/\\1/g'"
-        if not quiet:
-            gp.pissuing(cmd_buf)
-        rc, out_buf = commands.getstatusoutput(cmd_buf)
+        rc, out_buf = gc.shell_cmd(cmd_buf,
+                                   print_output=0, show_err=0,
+                                   ignore_err=1)
         if rc == 0:
             packet_loss = out_buf.rstrip("\n")
 
@@ -564,10 +561,12 @@ def get_state(openbmc_host="",
             for url_path in ret_values:
                 for attr_name in ret_values[url_path]:
                     # Create a state key value based on the attr_name.
-                    if isinstance(ret_values[url_path][attr_name], unicode):
+                    try:
                         ret_values[url_path][attr_name] = \
                             re.sub(r'.*\.', "",
                                    ret_values[url_path][attr_name])
+                    except TypeError:
+                        pass
                     # Do some key name manipulations.
                     new_attr_name = re.sub(r'^Current|(State|Transition)$',
                                            "", attr_name)
@@ -747,8 +746,10 @@ def wait_state(match_state=(),
 
     quiet = int(gp.get_var_value(quiet, 0))
 
-    if type(match_state) in (str, unicode):
+    try:
         match_state = return_state_constant(match_state)
+    except TypeError:
+        pass
 
     if not quiet:
         if invert:
