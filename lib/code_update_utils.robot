@@ -175,7 +175,7 @@ Upload And Activate Image
     ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
 
     Wait Until Keyword Succeeds  3 times  60 sec
-    ...   Upload Image To BMC  /upload/image  data=${image_data}
+    ...   Upload Image To BMC  /upload/image  timeout=${30}  data=${image_data}
     ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
     Should Be True  ${ret}
 

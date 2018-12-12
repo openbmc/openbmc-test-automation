@@ -155,11 +155,13 @@ def get_version_tar(tar_file_path):
     for member in tar.getmembers():
         f = tar.extractfile(member)
         content = f.read()
-        if "version=" in content:
-            content = content.split("\n")
-            content = [x for x in content if "version=" in x]
-            version = content[0].split("=")[-1]
-            break
+        if content.find(b"version=") == -1:
+            # This tar member does not contain the version.
+            continue
+        content = content.decode("utf-8").split("\n")
+        content = [x for x in content if "version=" in x]
+        version = content[0].split("=")[-1]
+        break
     tar.close()
     return version
 

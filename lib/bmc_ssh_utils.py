@@ -5,13 +5,6 @@ This module provides many valuable bmc ssh functions such as
 bmc_execute_command.
 """
 
-import sys
-try:
-    import exceptions
-except ImportError:
-    import builtins as exception
-import re
-import gen_print as gp
 import gen_valid as gv
 import gen_robot_ssh as grs
 from robot.libraries.BuiltIn import BuiltIn

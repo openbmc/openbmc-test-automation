@@ -185,8 +185,8 @@ def process_pgm_parms():
         ffdc_dir_path_style = int(os.environ.get('FFDC_DIR_PATH_STYLE', '0'))
 
     # Convert these program parms to lists for easier processing..
-    boot_list = filter(None, boot_list.split(":"))
-    boot_stack = filter(None, boot_stack.split(":"))
+    boot_list = list(filter(None, boot_list.split(":")))
+    boot_stack = list(filter(None, boot_stack.split(":")))
 
     cleanup_boot_results_file()
     boot_results_file_path = create_boot_results_file_path(pgm_name,
@@ -644,7 +644,7 @@ def print_defect_report(ffdc_file_list):
     try:
         plug_in_ffdc_list = \
             open(ffdc_list_file_path, 'r').read().rstrip("\n").split("\n")
-        plug_in_ffdc_list = filter(None, plug_in_ffdc_list)
+        plug_in_ffdc_list = list(filter(None, plug_in_ffdc_list))
     except IOError:
         plug_in_ffdc_list = []
 
@@ -1008,22 +1008,14 @@ def obmc_boot_test_py(loc_boot_stack=None,
 
     global save_stack
 
+    gp.dprintn()
     # Process function parms.
     for parm_name in main_func_parm_list:
         # Get parm's value.
-        cmd_buf = "parm_value = loc_" + parm_name
-        exec(cmd_buf)
-        gp.dpvar(parm_name)
-        gp.dpvar(parm_value)
+        parm_value = eval("loc_" + parm_name)
+        gp.dpvars(parm_name, parm_value)
 
-        if parm_value is None:
-            # Parm was not specified by the calling function so set it to its
-            # corresponding global value.
-            cmd_buf = "loc_" + parm_name + " = BuiltIn().get_variable_value" +\
-                "(\"${" + parm_name + "}\")"
-            gp.dpissuing(cmd_buf)
-            exec(cmd_buf)
-        else:
+        if parm_value is not None:
             # Save the global value on a stack.
             cmd_buf = "save_stack.push(BuiltIn().get_variable_value(\"${" +\
                 parm_name + "}\"), \"" + parm_name + "\")"

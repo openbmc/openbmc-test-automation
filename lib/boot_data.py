@@ -74,7 +74,7 @@ def create_boot_table(file_path=None):
 
     # For every boot_type we should have a corresponding mfg mode boot type.
     enhanced_boot_table = DotDict()
-    for key, value in boot_table.iteritems():
+    for key, value in boot_table.items():
         enhanced_boot_table[key] = value
         enhanced_boot_table[key + " (mfg)"] = value
 
