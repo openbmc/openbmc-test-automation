@@ -6,7 +6,6 @@ This module provides functions which are useful for running plug-ins.
 
 import sys
 import os
-import commands
 import glob
 
 import gen_print as gp

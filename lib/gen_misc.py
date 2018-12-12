@@ -260,7 +260,7 @@ def my_parm_file(prop_file_path):
     try:
         config_parser = ConfigParser.ConfigParser()
     except NameError:
-        config_parser = configparser.ConfigParser()
+        config_parser = configparser.ConfigParser(strict=False)
     # Make the property names case-sensitive.
     config_parser.optionxform = str
     # Read the properties from the string file.

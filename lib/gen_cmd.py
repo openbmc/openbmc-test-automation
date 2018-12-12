@@ -96,7 +96,11 @@ def cmd_fnc(cmd_buf,
     out_buf = ""
     if return_stderr:
         for line in sub_proc.stderr:
-            err_buf += line
+            try:
+                err_buf += line
+            except TypeError:
+                line = line.decode("utf-8")
+                err_buf += line
             if not print_output:
                 continue
             if robot_env:
@@ -104,7 +108,11 @@ def cmd_fnc(cmd_buf,
             else:
                 sys.stdout.write(line)
     for line in sub_proc.stdout:
-        out_buf += line
+        try:
+            out_buf += line
+        except TypeError:
+            line = line.decode("utf-8")
+            out_buf += line
         if not print_output:
             continue
         if robot_env:
@@ -417,12 +425,20 @@ def shell_cmd(command_string,
         try:
             if return_stderr:
                 for line in sub_proc.stderr:
-                    err_buf += line
+                    try:
+                        err_buf += line
+                    except TypeError:
+                        line = line.decode("utf-8")
+                        err_buf += line
                     if not print_output:
                         continue
                     func_stdout += line
             for line in sub_proc.stdout:
-                out_buf += line
+                try:
+                    out_buf += line
+                except TypeError:
+                    line = line.decode("utf-8")
+                    out_buf += line
                 if not print_output:
                     continue
                 func_stdout += line

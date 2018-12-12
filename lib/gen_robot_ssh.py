@@ -13,7 +13,7 @@ import paramiko
 try:
     import exceptions
 except ImportError:
-    import builtins as exception
+    import builtins as exceptions
 
 import gen_print as gp
 import func_timer as ft
@@ -99,7 +99,7 @@ def find_connection(open_connection_args={}):
     for connection in sshlib.get_connections():
         # Create connection_dict from connection object.
         connection_dict = dict((key, str(value)) for key, value in
-                               connection._config.iteritems())
+                               connection._config.items())
         if dict(connection_dict, **open_connection_args) == connection_dict:
             return connection
 
