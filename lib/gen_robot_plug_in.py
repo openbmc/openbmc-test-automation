@@ -8,7 +8,6 @@ robot program.
 import sys
 import subprocess
 from robot.libraries.BuiltIn import BuiltIn
-import commands
 import os
 import tempfile
 
@@ -32,12 +31,8 @@ def rvalidate_plug_ins(plug_in_dir_paths,
     """
 
     cmd_buf = "validate_plug_ins.py \"" + plug_in_dir_paths + "\""
-    if int(quiet) != 1:
-        gp.print_issuing(cmd_buf)
-    rc, out_buf = commands.getstatusoutput(cmd_buf)
+    rc, out_buf = gc.shell_cmd(cmd_buf, print_output=0)
     if rc != 0:
-        message = gp.sprint_varx("rc", rc, 1) + out_buf
-        gp.printn(out_buf, 'STDERR')
         BuiltIn().fail(gp.sprint_error("Validate plug ins call failed.  See"
                                        + " stderr text for details.\n"))
 
