@@ -189,9 +189,11 @@ class func_timer_class:
             self.__time_out = kwargs['time_out']
             del kwargs['time_out']
             # Convert "none" string to None.
-            if type(self.__time_out) in (str, unicode)\
-               and self.__time_out.lower() == "none":
-                self.__time_out = None
+            try:
+                if self.__time_out.lower() == "none":
+                    self.__time_out = None
+            except AttributeError:
+                pass
             if self.__time_out is not None:
                 self.__time_out = int(self.__time_out)
                 # Ensure that time_out is non-negative.

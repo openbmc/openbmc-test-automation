@@ -183,6 +183,7 @@ def return_state_constant(state_name='default'):
     Return the named state dictionary constant.
     """
 
+    state = ""
     cmd_buf = "state = " + state_name
     exec(cmd_buf)
     return state
