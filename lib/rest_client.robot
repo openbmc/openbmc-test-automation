@@ -200,7 +200,10 @@ Read Attribute
     # expected_value    If this argument is not empty, the retrieved value
     #                   must match this value.
 
-    ${resp}=  OpenBMC Get Request  ${uri}/attr/${attr}  timeout=${timeout}
+    # SMS SMS see issue 1492
+    #${resp}=  OpenBMC Get Request  ${uri}/attr/${attr}  timeout=${timeout}
+    #...  quiet=${quiet}
+    ${resp}=  OpenBMC Get Request  ${uri}attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=     To Json    ${resp.content}
