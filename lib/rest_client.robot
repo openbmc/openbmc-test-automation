@@ -6,6 +6,7 @@ Library           OperatingSystem
 Resource          resource.txt
 Library           disable_warning_urllib.py
 Library           utils.py
+Library           gen_misc.py
 Resource          rest_response_code.robot
 
 *** Variables ***
@@ -200,7 +201,10 @@ Read Attribute
     # expected_value    If this argument is not empty, the retrieved value
     #                   must match this value.
 
-    ${resp}=  OpenBMC Get Request  ${uri}/attr/${attr}  timeout=${timeout}
+    # Ensure ${uri} ends with a slash character.
+    ${uri}=  Add Trailing Slash  ${uri}
+
+    ${resp}=  OpenBMC Get Request  ${uri}attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=     To Json    ${resp.content}
