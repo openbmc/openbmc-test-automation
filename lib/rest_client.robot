@@ -200,7 +200,13 @@ Read Attribute
     # expected_value    If this argument is not empty, the retrieved value
     #                   must match this value.
 
-    ${resp}=  OpenBMC Get Request  ${uri}/attr/${attr}  timeout=${timeout}
+    # Test if ${uri} ends with a slash character.
+    ${urigood}=  Get Lines Matching Regexp  ${uri}  .*/$
+    # If no match add a slash at the end of ${uri}.
+    ${uri}=  Run Keyword If  "${urigood}" == ""
+    ...  Set Variable  ${uri}/  ELSE  Set Variable  ${uri}
+
+    ${resp}=  OpenBMC Get Request  ${uri}attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${content}=     To Json    ${resp.content}
