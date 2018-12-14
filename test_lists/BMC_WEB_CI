@@ -1,0 +1,5 @@
+#Basic GUI operations
+-i Verify_IP_address
+-i Verify_Refresh_Button
+-i Verify_Event_Log_Text_Appears_By_Clicking_Server_Health
+-i OpenBMC GUI Logoff
