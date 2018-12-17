@@ -74,3 +74,7 @@
 -e Verify_eSEL_Description_And_EntryID_Using_REST
 # Needs fix and improvement.
 -e Test_SBE_Side_Switch
+# IPMI disable and enable use cases.
+-e Verify_Disabling_And_Enabling_IPMI_Via_Host
+-e Verify_Disabling_IPMI_Via_OOB_IPMI
+-e Verify_IPMI_Disable_Persistency_After_BMC_Reboot
