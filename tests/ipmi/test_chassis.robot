@@ -80,7 +80,7 @@ Verify Soft Shutdown via IPMI
     [Tags]  Verify_Soft_Shutdown_via_IPMI
 
     REST Power On  stack_mode=skip
-    Run External IPMI Standard Command  chassis power soft
+    Run IPMI Standard Command  chassis power soft
     Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
 
 

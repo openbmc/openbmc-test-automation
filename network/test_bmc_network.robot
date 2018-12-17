@@ -411,7 +411,7 @@ Run IPMI With Multiple IPs Configured
     List Should Contain Sub List  ${ip_list}  ${valid_ips}
     ...  msg=IP address is not configured.
 
-    Run External IPMI Standard Command  chassis bootparam get 5
+    Run IPMI Standard Command  chassis bootparam get 5
 
 *** Keywords ***
 
