@@ -7,7 +7,6 @@ Resource         ../../lib/state_manager.robot
 Resource         ../../lib/utils.robot
 Resource         ../../lib/boot_utils.robot
 
-Suite Setup      Suite Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
 *** Variables ***
@@ -35,25 +34,6 @@ Verify BMC Power Cycle via IPMI
     [Tags]  Verify_BMC_Power_Cycle_via_IPMI
 
     REST Power On  stack_mode=skip
-    Run External IPMI Standard Command  chassis power cycle
+    Run IPMI Standard Command  chassis power cycle
     Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
     Wait Until Keyword Succeeds  3 min  10 sec  Is Host Running
-
-*** Keywords ***
-
-Suite Setup Execution
-    [Documentation]  Power off and wait for chassis power to be off.
-
-    ${resp}=  Run IPMI Standard Command  chassis power off
-    Should Be Equal As Strings  ${resp}  Chassis Power Control: Down/Off
-    ...  msg=Unexpected chassis power control message output.
-
-    Wait Until Keyword Succeeds  3 min  20 sec  Is Chassis Power Off
-
-
-Is Chassis Power Off
-    [Documentation]  Check for chassis power to be off.
-
-    ${resp}=  Run IPMI Standard Command  chassis power status
-    Should Be Equal As Strings  ${resp}  Chassis Power is off
-    ...  msg=Chassis power is not off as expected.
