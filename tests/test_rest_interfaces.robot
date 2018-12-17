@@ -298,7 +298,7 @@ Get Data Validation
 
     # URL Path                  Expect Data
     /xyz/openbmc_project/       /xyz/openbmc_project/logging
-    /i/dont/exist/              path or object not found: /i/dont/exist
+    /i/dont/exist/              path or object not found
 
 
 Put Response Codes
