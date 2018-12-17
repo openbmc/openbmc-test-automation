@@ -11,7 +11,6 @@
 # NA test case for Witherspoon
 -e io_board_Present
 -e io_board_Fault
--e Certificate_Test
 # System LED test cases which are NA for Witherspoon system.
 -e Test_Heartbeat_LED_And_Verify_Via_REST
 -e Test_Beep_LED_And_Verify_Via_REST
@@ -74,3 +73,7 @@
 -e Verify_eSEL_Description_And_EntryID_Using_REST
 # Needs fix and improvement.
 -e Test_SBE_Side_Switch
+# IPMI disable and enable use cases.
+-e Verify_Disabling_And_Enabling_IPMI_Via_Host
+-e Verify_Disabling_IPMI_Via_OOB_IPMI
+-e Verify_IPMI_Disable_Persistency_After_BMC_Reboot
