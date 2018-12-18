@@ -29,7 +29,7 @@ Set Boot Policy To ONETIME via REST
     [Tags]  Set_Boot_Policy_To_ONETIME_via_REST
 
     Set Boot Policy  ${ONETIME}
-    ${boot}=   Read Attribute  ${CONTROL_URI}/host0/boot/one_time  Enabled
+    ${boot}=   Read Attribute  ${CONTROL_URI}host0/boot/one_time  Enabled
     Should Be Equal  ${boot}  ${ONETIME}
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
     Should Contain  ${output}  Options apply to only next boot
@@ -40,7 +40,7 @@ Set Boot Policy To PERMANENT via REST
     [Tags]  Set_Boot_Policy_To_PERMANENT_via_REST
 
     Set Boot Policy  ${PERMANENT}
-    ${boot}=   Read Attribute  ${CONTROL_URI}/host0/boot/one_time  Enabled
+    ${boot}=   Read Attribute  ${CONTROL_URI}host0/boot/one_time  Enabled
     Should Be Equal  ${boot}  ${PERMANENT}
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
     Should Contain  ${output}  Options apply to all future boots
@@ -51,7 +51,7 @@ Set Boot Policy To ONETIME via IPMITOOL
     [Tags]  Set_Boot_Policy_To_ONETIME_via_IPMITOOL
 
     Run IPMI command  0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
-    ${boot}=   Read Attribute  ${CONTROL_URI}/host0/boot/one_time  Enabled
+    ${boot}=   Read Attribute  ${CONTROL_URI}host0/boot/one_time  Enabled
     Should Be Equal  ${boot}  ${ONETIME}
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
     Should Contain  ${output}  Options apply to only next boot
@@ -62,7 +62,7 @@ Set Boot Policy To PERMANENT via IPMITOOL
     [Tags]  Set_Boot_Policy_To_PERMANENT_via_IPMITOOL
 
     Run IPMI command   0x0 0x8 0x05 0xC0 0x00 0x00 0x00 0x0
-    ${boot}=   Read Attribute  ${CONTROL_URI}/host0/boot/one_time  Enabled
+    ${boot}=   Read Attribute  ${CONTROL_URI}host0/boot/one_time  Enabled
     Should Be Equal  ${boot}  ${PERMANENT}
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
     Should Contain  ${output}  Options apply to all future boots
@@ -76,10 +76,10 @@ Test Boot Order via REST
     Set Boot Policy  ${PERMANENT}
     Set Boot Source  ${BOOT_SOURCE_CDROM}
 
-    ${boot}=   Read Attribute  ${CONTROL_URI}/host0/boot/one_time  Enabled
+    ${boot}=   Read Attribute  ${CONTROL_URI}host0/boot/one_time  Enabled
     Should Be Equal  ${boot}  ${PERMANENT}
 
-    ${flag}=   Read Attribute  ${CONTROL_URI}/host0/boot/  BootSource
+    ${flag}=   Read Attribute  ${CONTROL_URI}host0/boot/  BootSource
     Should Be Equal  ${flag}  ${BOOT_SOURCE_CDROM}
 
 Persist ONETIME Boot Policy After Reset
@@ -92,10 +92,10 @@ Persist ONETIME Boot Policy After Reset
 
     OBMC Reboot (off)
 
-    ${boot}=   Read Attribute  ${CONTROL_URI}/host0/boot/one_time  Enabled
+    ${boot}=   Read Attribute  ${CONTROL_URI}host0/boot/one_time  Enabled
     Should Be Equal  ${boot}  ${ONETIME}
 
-    ${flag}=   Read Attribute  ${CONTROL_URI}/host0/boot/  BootSource
+    ${flag}=   Read Attribute  ${CONTROL_URI}host0/boot/  BootSource
     Should Be Equal  ${flag}  ${BOOT_SOURCE_NETWORK}
 
 Persist PERMANENT Boot Policy After Reset
@@ -108,10 +108,10 @@ Persist PERMANENT Boot Policy After Reset
 
     OBMC Reboot (off)
 
-    ${boot}=   Read Attribute  ${CONTROL_URI}/host0/boot/one_time  Enabled
+    ${boot}=   Read Attribute  ${CONTROL_URI}host0/boot/one_time  Enabled
     Should Be Equal  ${boot}  ${PERMANENT}
 
-    ${flag}=   Read Attribute  ${CONTROL_URI}/host0/boot/  BootSource
+    ${flag}=   Read Attribute  ${CONTROL_URI}host0/boot/  BootSource
     Should Be Equal  ${flag}  ${BOOT_SOURCE_CDROM}
 
 Verify Boot Mode Persistency After BMC Reboot

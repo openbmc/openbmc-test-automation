@@ -26,7 +26,7 @@ Set The Boot Source As Default Using REST API
     Set Boot Source  ${BOOT_SOURCE_DEFAULT}
 
     ${boot_source}=
-    ...  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootSource
+    ...  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootSource
     Should Be Equal As Strings  ${boot_source}  ${BOOT_SOURCE_DEFAULT}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -41,7 +41,7 @@ Set The Boot Source As Default Using Ipmitool
     Run IPMI command  0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
 
     ${boot_source}=
-    ...  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootSource
+    ...  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootSource
     Should Be Equal As Strings  ${boot_source}  ${BOOT_SOURCE_DEFAULT}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -56,7 +56,7 @@ Set The Boot Source As Network Using REST API
     Set Boot Source  ${BOOT_SOURCE_NETWORK}
 
     ${boot_source}=
-    ...  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootSource
+    ...  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootSource
     Should Be Equal As Strings  ${boot_source}  ${BOOT_SOURCE_NETWORK}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -71,7 +71,7 @@ Set The Boot Source As Network Using Ipmitool
     Run IPMI command  0x0 0x8 0x05 0x80 0x04 0x00 0x00 0x00
 
     ${boot_source}=
-    ...  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootSource
+    ...  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootSource
     Should Be Equal As Strings  ${boot_source}  ${BOOT_SOURCE_NETWORK}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -86,7 +86,7 @@ Set The Boot Source As Disk Using REST API
     Set Boot Source  ${BOOT_SOURCE_DISK}
 
     ${boot_source}=
-    ...  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootSource
+    ...  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootSource
     Should Be Equal As Strings  ${boot_source}  ${BOOT_SOURCE_DISK}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -101,7 +101,7 @@ Set The Boot Source As Disk Using Ipmitool
     Run IPMI command  0x0 0x8 0x05 0x80 0x08 0x00 0x00 0x00
 
     ${boot_source}=
-    ...  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootSource
+    ...  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootSource
     Should Be Equal As Strings  ${boot_source}  ${BOOT_SOURCE_DISK}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -115,7 +115,7 @@ Set The Boot Mode As Safe Using REST API
 
     Set Boot Mode  ${BOOT_MODE_SAFE}
 
-    ${boot_mode}=  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootMode
+    ${boot_mode}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootMode
     Should Be Equal As Strings  ${boot_mode}  ${BOOT_MODE_SAFE}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -129,7 +129,7 @@ Set The Boot Mode As Safe Using Ipmitool
 
     Run IPMI command  0x0 0x8 0x05 0x80 0x0C 0x00 0x00 0x00
 
-    ${boot_mode}=  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootMode
+    ${boot_mode}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootMode
     Should Be Equal As Strings  ${boot_mode}  ${BOOT_MODE_SAFE}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -144,7 +144,7 @@ Set The Boot Source As CDROM Using REST API
     Set Boot Source  ${BOOT_SOURCE_CDROM}
 
     ${boot_source}=
-    ...  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootSource
+    ...  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootSource
     Should Be Equal As Strings  ${boot_source}  ${BOOT_SOURCE_CDROM}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -159,7 +159,7 @@ Set The Boot Source As CDROM Using Ipmitool
     Run IPMI command  0x0 0x8 0x05 0x80 0x14 0x00 0x00 0x00
 
     ${boot_source}=
-    ...  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootSource
+    ...  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootSource
     Should Be Equal As Strings  ${boot_source}  ${BOOT_SOURCE_CDROM}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -173,7 +173,7 @@ Set The Boot Mode As Setup Using REST API
 
     Set Boot Mode  ${BOOT_MODE_SETUP}
 
-    ${boot_mode}=  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootMode
+    ${boot_mode}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootMode
     Should Be Equal As Strings  ${boot_mode}  ${BOOT_MODE_SETUP}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -187,7 +187,7 @@ Set The Boot Mode As Setup Using Ipmitool
 
     Run IPMI command  0x0 0x8 0x05 0x80 0x18 0x00 0x00 0x00
 
-    ${boot_mode}=  Read Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootMode
+    ${boot_mode}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootMode
     Should Be Equal As Strings  ${boot_mode}  ${BOOT_MODE_SETUP}
 
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
@@ -203,7 +203,7 @@ Set Boot Source
     # boot_source  Boot source which need to be set.
 
     ${valueDict}=  Create Dictionary  data=${boot_source}
-    Write Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootSource
+    Write Attribute  ${CONTROL_HOST_URI}boot/one_time  BootSource
     ...  data=${valueDict}
 
 
@@ -214,7 +214,7 @@ Set Boot Mode
     # boot_mode  Boot mode which need to be set.
 
     ${valueDict}=  Create Dictionary  data=${boot_mode}
-    Write Attribute  ${CONTROL_HOST_URI}/boot/one_time  BootMode
+    Write Attribute  ${CONTROL_HOST_URI}boot/one_time  BootMode
     ...  data=${valueDict}
 
 
@@ -243,5 +243,5 @@ Test Suite Setup
 
     # Set boot policy to default i.e. one time enabled.
     ${valueDict}=  Create Dictionary  data=${1}
-    Write Attribute  ${CONTROL_HOST_URI}/boot/one_time  Enabled
+    Write Attribute  ${CONTROL_HOST_URI}boot/one_time  Enabled
     ...  data=${valueDict}
