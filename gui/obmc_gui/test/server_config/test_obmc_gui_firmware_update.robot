@@ -98,7 +98,7 @@ Upload Firmware using TFTP Server
 Check No Error Log Exist
     [Documentation]  No error log should be logged.
 
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     ...  msg=Codeupdate Failed with error.
 

@@ -123,7 +123,7 @@ Test Setup Info
 Error Logs Should Not Exist
     [Documentation]  Verify that error logs do not exist.
 
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     ...  msg=Unexpected BMC error log(s) present.
 
@@ -131,6 +131,6 @@ Error Logs Should Not Exist
 Error Logs Should Exist
     [Documentation]  Verify that error logs exist.
 
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
     Run Keyword If  ${resp.status_code} != ${HTTP_OK}  Fail
     ...  msg=Expected BMC error log(s) are not present.

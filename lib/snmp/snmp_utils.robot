@@ -34,7 +34,7 @@ Configure SNMP Manager On BMC
     ${data}=  Create Dictionary  data=@{snmp_parm_list}
 
     ${resp}=  OpenBMC Post Request
-    ...  ${SNMP_MANAGER_URI}/action/Client  data=${data}
+    ...  ${SNMP_MANAGER_URI}action/Client  data=${data}
 
     Run Keyword If  '${expected_result}' == 'error'
     ...      Should Be Equal As Strings

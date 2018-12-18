@@ -514,7 +514,7 @@ Delete Error Logs
     [Documentation]  Delete error logs.
 
     # Check if error logs entries exist, if not return.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${/}list  quiet=${1}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
     Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
 
     # Get the list of error logs entries and delete them all.

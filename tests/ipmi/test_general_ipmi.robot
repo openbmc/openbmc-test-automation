@@ -485,7 +485,7 @@ Retrieve Default Gateway Via IPMI And Verify Using REST
     ${default_gateway_ipmi}=  Fetch Details From LAN Print  Default Gateway IP
 
     # Verify "Default Gateway" using REST.
-    Read Attribute  ${NETWORK_MANAGER}/config  DefaultGateway
+    Read Attribute  ${NETWORK_MANAGER}config  DefaultGateway
     ...  expected_value=${default_gateway_ipmi}
 
 
@@ -511,7 +511,7 @@ Retrieve Network Mode Via IPMI And Verify Using REST
 
     # Verify "Mode" using REST.
     ${network_mode_rest}=  Read Attribute
-    ...  ${NETWORK_MANAGER}/eth0  DHCPEnabled
+    ...  ${NETWORK_MANAGER}eth0  DHCPEnabled
     Run Keyword If  '${network_mode_ipmi}' == 'Static Address'
     ...  Should Be Equal  ${network_mode_rest}  ${0}
     ...  msg=Verification of network setting failed.
