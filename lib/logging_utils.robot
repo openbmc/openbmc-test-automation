@@ -162,7 +162,7 @@ Verify Test Error Log
 Delete Error Logs And Verify
     [Documentation]  Delete all error logs and verify.
     Delete All Error Logs
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list  quiet=${1}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     ...  msg=Error logs not deleted as expected.
 

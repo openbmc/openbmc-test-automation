@@ -32,7 +32,7 @@ Verify eSEL Using REST
 
     Create eSEL
     # New eSEL log should exist
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 Verify eSEL Entries Using REST

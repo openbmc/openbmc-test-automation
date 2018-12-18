@@ -348,7 +348,7 @@ Verify Error Log Entry
     # signature_desc  Error log signature description.
     # log_prefix      Log path prefix.
 
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}/list
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list
     Should Not Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
     Collect eSEL Log  ${log_prefix}
