@@ -223,7 +223,7 @@ Set REST Logging Policy
     #                   True or False.
 
     ${log_dict}=  Create Dictionary  data=${policy_setting}
-    Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled
+    Write Attribute  ${BMC_LOGGING_URI}rest_api_logs  Enabled
     ...  data=${log_dict}  verify=${1}  expected_value=${policy_setting}
 
 
