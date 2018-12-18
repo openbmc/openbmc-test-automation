@@ -13,7 +13,7 @@ Create User Initiated Dump
 
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  OpenBMC Post Request
-    ...  ${DUMP_URI}/action/CreateDump  data=${data}
+    ...  ${DUMP_URI}action/CreateDump  data=${data}
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${json}=  To JSON  ${resp.content}
@@ -50,7 +50,7 @@ Check Dump Existence
     # dump_id  An integer value that identifies a particular dump
     #          object(e.g. 1, 3, 5).
 
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/${dump_id}
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}${dump_id}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
@@ -63,7 +63,7 @@ Delete BMC Dump
 
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  OpenBMC Post Request
-    ...  ${DUMP_ENTRY_URI}/${dump_id}/action/Delete  data=${data}
+    ...  ${DUMP_ENTRY_URI}${dump_id}/action/Delete  data=${data}
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
@@ -91,7 +91,7 @@ Delete All BMC Dump
 Dump Should Not Exist
     [Documentation]  Verify that BMC dumps do not exist.
 
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list  quiet=${1}
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 Check Existence of BMC Dump file

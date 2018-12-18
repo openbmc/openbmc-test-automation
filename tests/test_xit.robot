@@ -23,6 +23,6 @@ Verify No BMC Dump
     [Documentation]  Verify no BMC dump exist.
     [Tags]  Verify_No_BMC_Dump
 
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     ...  msg=BMC dump(s) were not deleted as expected.
