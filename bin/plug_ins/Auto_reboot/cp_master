@@ -1,0 +1,120 @@
+#!/usr/bin/env python
+
+r"""
+Set the auto_boot policy according to the caller's wishes.
+"""
+
+import os
+import sys
+
+save_path_0 = sys.path[0]
+del sys.path[0]
+
+from gen_print import *
+from gen_valid import *
+from gen_arg import *
+from gen_misc import *
+from gen_cmd import *
+from gen_plug_in_utils import *
+from gen_call_robot import *
+
+# Restore sys.path[0].
+sys.path.insert(0, save_path_0)
+
+# Set exit_on_error for gen_valid functions.
+set_exit_on_error(True)
+
+parser = argparse.ArgumentParser(
+    usage='%(prog)s [OPTIONS]',
+    description="%(prog)s will set the auto_boot policy according to the"
+        + " user's wishes.",
+    formatter_class=argparse.RawTextHelpFormatter,
+    prefix_chars='-+')
+
+
+# Populate stock_list with options we want.
+stock_list = [("test_mode", get_plug_default("test_mode", 0)),
+              ("quiet", get_plug_default("quiet", 0)),
+              ("debug", get_plug_default("debug", 0))]
+
+AUTO_REBOOT_DISABLE = "1"
+
+def exit_function(signal_number=0,
+                  frame=None):
+    r"""
+    Execute whenever the program ends normally or with the signals that we
+    catch (i.e. TERM, INT).
+    """
+
+    dprint_executing()
+    dprint_var(signal_number)
+
+    # Your cleanup code here.
+
+    qprint_pgm_footer()
+
+
+def signal_handler(signal_number,
+                   frame):
+    r"""
+    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our
+    program would terminate immediately with return code 143 and without
+    calling our exit_function.
+    """
+
+    # Our convention is to set up exit_function with atexit.register() so
+    # there is no need to explicitly call exit_function from here.
+
+    dprint_executing()
+
+    # Calling exit prevents us from returning to the code that was running
+    # when we received the signal.
+    exit(0)
+
+
+def validate_parms():
+
+    r"""
+    Validate program parameters, etc.  Return True or False (i.e. pass/fail)
+    accordingly.
+    """
+
+    get_plug_vars()
+
+    valid_value(AUTOBOOT_OPENBMC_HOST, ["", None])
+    global AUTO_REBOOT_DISABLE
+    if pgm_name == "cp_cleanup":
+        AUTO_REBOOT_DISABLE = 0
+    else:
+        valid_value(AUTO_REBOOT_DISABLE, valid_values=["0", "1"])
+        AUTO_REBOOT_DISABLE = int(AUTO_REBOOT_DISABLE)
+
+    gen_post_validation(exit_function, signal_handler)
+
+
+def main():
+
+    gen_get_options(parser, stock_list)
+
+    validate_parms()
+
+    qprint_pgm_header()
+
+    dprint_plug_vars()
+
+    init_robot_out_parms(get_plug_in_package_name() + "." + pgm_name + ".")
+
+    lib_file_path = init_robot_file_path("lib/utils.robot")
+
+    keyword_string = "Set Auto Reboot  ${%i}" % AUTO_REBOOT_DISABLE
+
+    cmd_buf = create_robot_cmd_string("extended/run_keyword.robot",
+                                      OPENBMC_HOST, keyword_string,
+                                      lib_file_path, quiet, test_mode, debug,
+                                      outputdir, output, log, report)
+    if not robot_cmd_fnc(cmd_buf):
+        print_error_report("Robot command execution failed.")
+        exit(1)
+
+
+main()
