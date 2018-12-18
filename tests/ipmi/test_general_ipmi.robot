@@ -658,7 +658,7 @@ Test Valid IPMI Channels Supported
 
     # Note: IPMI network channel logically starts from 1.
     :FOR  ${channel_number}  IN RANGE  1  ${channel_count}
-    \  Run External IPMI Standard Command  lan print ${channel_number}
+    \  Run IPMI Standard Command  lan print ${channel_number}
 
 
 Test Invalid IPMI Channel Response
@@ -755,7 +755,7 @@ Fetch Details From LAN Print
     # ${field_name}   Field name to be fetched from LAN print
     #                 (e.g. "MAC Address", "Source").
 
-    ${stdout}=  Run External IPMI Standard Command  lan print
+    ${stdout}=  Run IPMI Standard Command  lan print
     ${fetch_value}=  Get Lines Containing String  ${stdout}  ${field_name}
     ${value_fetch}=  Fetch From Right  ${fetch_value}  :${SPACE}
     [Return]  ${value_fetch}
