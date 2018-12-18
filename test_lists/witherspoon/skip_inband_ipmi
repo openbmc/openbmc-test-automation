@@ -1,0 +1,5 @@
+#Skipping inband IPMI test cases to run all out-of-band IPMI test cases
+-e Verify_Disabling_And_Enabling_IPMI_Via_Host
+-e Verify_Disabling_IPMI_Via_OOB_IPMI
+-e Verify_IPMI_Disable_Persistency_After_BMC_Reboot
+-e eSEL_Logging
