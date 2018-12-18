@@ -71,7 +71,7 @@ Network Factory Reset
 
     ${data}=  Create Dictionary  data=@{EMPTY}
     Run Keyword And Ignore Error  OpenBMC Post Request
-    ...  ${NETWORK_MANAGER}/action/Reset  data=${data}
+    ...  ${NETWORK_MANAGER}action/Reset  data=${data}
 
 Software Manager Factory Reset
     [Documentation]  Software Manager Factory Reset.
