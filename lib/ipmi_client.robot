@@ -38,11 +38,16 @@ Run IPMI Command
 
 Run IPMI Standard Command
     [Documentation]  Run the standard IPMI command.
-    [Arguments]  ${args}
+    [Arguments]  ${args}  ${fail_on_err}=${1}
+
+    # Description of argument(s):
+    # args         IPMI command to be executed.
+    # fail_on_err  Fail if keyword the IPMI command fails
+
     ${resp}=  Run Keyword If  '${IPMI_COMMAND}' == 'External'
-    ...  Run External IPMI Standard Command  ${args}
+    ...  Run External IPMI Standard Command  ${args}  ${fail_on_err}
     ...  ELSE IF  '${IPMI_COMMAND}' == 'Inband'
-    ...  Run Inband IPMI Standard Command  ${args}
+    ...  Run Inband IPMI Standard Command  ${args}  ${fail_on_err}
     ...  ELSE IF  '${IPMI_COMMAND}' == 'Dbus'
     ...  Run Dbus IPMI Standard Command  ${args}
     ...  ELSE  Fail  msg=Invalid IPMI Command type provided : ${IPMI_COMMAND}
@@ -90,8 +95,8 @@ Run Inband IPMI Raw Command
 
 Run Inband IPMI Standard Command
     [Documentation]  Run the standard IPMI command in-band.
-    [Arguments]  ${args}  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
-    ...          ${os_password}=${OS_PASSWORD}
+    [Arguments]  ${args}  ${fail_on_err}=${1}  ${os_host}=${OS_HOST}
+    ...          ${os_username}=${OS_USERNAME}  ${os_password}=${OS_PASSWORD}
 
     # Description of arguments:
     # ${args}  parameters to IPMI command.
@@ -104,6 +109,7 @@ Run Inband IPMI Standard Command
 
     ${inband_std_cmd}=  Catenate  ${IPMI_INBAND_CMD}  ${args}
     ${stdout}  ${stderr}=  Execute Command  ${inband_std_cmd}  return_stderr=True
+    Return From Keyword If  ${fail_on_err} == ${0}  ${stderr}
     Should Be Empty  ${stderr}  msg=${stdout}
     [Return]  ${stdout}
 

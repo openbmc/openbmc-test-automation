@@ -658,7 +658,7 @@ Test Valid IPMI Channels Supported
 
     # Note: IPMI network channel logically starts from 1.
     :FOR  ${channel_number}  IN RANGE  1  ${channel_count}
-    \  Run External IPMI Standard Command  lan print ${channel_number}
+    \  Run IPMI Standard Command  lan print ${channel_number}
 
 
 Test Invalid IPMI Channel Response
