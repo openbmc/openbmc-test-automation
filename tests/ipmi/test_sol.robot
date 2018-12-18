@@ -8,6 +8,9 @@ Library             ../../lib/ipmi_utils.py
 Test Setup          Start SOL Console Logging
 Test Teardown       Test Teardown Execution
 
+Force Tags          SOL_Test
+
+
 *** Variables ***
 
 *** Test Cases ***
