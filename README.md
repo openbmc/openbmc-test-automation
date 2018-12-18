@@ -209,6 +209,20 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     Witherspoon:  test_lists/skip_test_witherspoon
     ```
 
+
+* Run IPMI tests:
+
+    Running only out-of-band IPMI tests:
+    ```
+    $ robot -v IPMI_COMMAND:External -v OPENBMC_HOST:x.x.x.x --argumentfile test_lists/witherspoon/skip_inband_ipmi tests/ipmi/
+    ```
+
+    Running only inband IPMI tests:
+    ```
+    $ robot -v IPMI_COMMAND:Inband -v OPENBMC_HOST:x.x.x.x -v OS_HOST:x.x.x.x -v OS_USERNAME:xxxx -v OS_PASSWORD:xxxx --argumentfile test_lists/witherspoon/skip_oob_ipmi tests/ipmi/
+    ```
+
+
 * Run GUI tests:
 
     By default, GUI runs with Firefox browser and headless mode. Example with chrome browser and header mode:
