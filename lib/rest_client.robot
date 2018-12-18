@@ -234,8 +234,11 @@ Write Attribute
     #                   contain the value to set the property to at the 'data'
     #                   key (e.g. data={"data": 1}).
 
+    # Make sure uri ends with slash.
+    ${uri}=  Add Trailing Slash  ${uri}
+
     ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
-    ${resp}=  Openbmc Put Request  ${base_uri}/attr/${attr}
+    ${resp}=  Openbmc Put Request  ${base_uri}attr/${attr}
     ...  timeout=${timeout}  &{kwargs}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 

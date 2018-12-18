@@ -223,7 +223,7 @@ Verify REST Put Message JSON Compliant
 
     ${dict_data}=  Create Dictionary  data=${HOST_POWEROFF_TRANS}
     ${resp}=  Openbmc Put Request
-    ...  ${HOST_STATE_URI}/attr/RequestedHostTransition  data=${dict_data}
+    ...  ${HOST_STATE_URI}attr/RequestedHostTransition  data=${dict_data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${jsondata}=  To JSON  ${resp.content}
     Should Be Equal  ${jsondata["data"]}  ${None}
