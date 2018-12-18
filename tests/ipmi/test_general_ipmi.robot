@@ -11,7 +11,7 @@ Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 Library             ../../lib/gen_misc.py
 
-Test Teardown       FFDC On Test Case Fail
+#Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -658,7 +658,7 @@ Test Valid IPMI Channels Supported
 
     # Note: IPMI network channel logically starts from 1.
     :FOR  ${channel_number}  IN RANGE  1  ${channel_count}
-    \  Run External IPMI Standard Command  lan print ${channel_number}
+    \  Run IPMI Standard Command  lan print ${channel_number}
 
 
 Test Invalid IPMI Channel Response
@@ -675,7 +675,8 @@ Test Invalid IPMI Channel Response
     # Get Channel Info command failed: Parameter out of range
     # Invalid channel: 3
 
-    ${stdout}=  Run External IPMI Standard Command
+    ${stdout}=  Run IPMI Standard Command
+    #...  lan print ${channel_number}
     ...  lan print ${channel_number}  fail_on_err=${0}
     Should Contain  ${stdout}  Invalid channel
     ...  msg=IPMI channel ${channel_number} is invalid but seen working.
@@ -755,7 +756,7 @@ Fetch Details From LAN Print
     # ${field_name}   Field name to be fetched from LAN print
     #                 (e.g. "MAC Address", "Source").
 
-    ${stdout}=  Run External IPMI Standard Command  lan print
+    ${stdout}=  Run IPMI Standard Command  lan print
     ${fetch_value}=  Get Lines Containing String  ${stdout}  ${field_name}
     ${value_fetch}=  Fetch From Right  ${fetch_value}  :${SPACE}
     [Return]  ${value_fetch}
