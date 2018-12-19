@@ -11,7 +11,7 @@ Is Water Cooled
     [Documentation]  Return 1 if system is water cooled, 0 othersise.
 
     ${water_cooled}=  Read Attribute
-    ...  ${HOST_INVENTORY_URI}/system/chassis  WaterCooled
+    ...  ${HOST_INVENTORY_URI}system/chassis  WaterCooled
     [Return]  ${water_cooled}
 
 
@@ -25,7 +25,7 @@ Get Fan Names
     # fan_names   The list of fan names to which new fan names are to be
     #             added to.  This list is returned to the caller.
 
-    ${fan_uris}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}/system  fan
+    ${fan_uris}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  fan
     : FOR  ${fan_uri}  IN  @{fan_uris}
 
     \  ${fan_properties}=  Read Properties  ${fan_uri}

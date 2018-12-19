@@ -42,7 +42,7 @@ Verify Dump Persistency On Service Restart
     ...  systemctl restart xyz.openbmc_project.Dump.Manager.service
     Sleep  10s  reason=Wait for BMC dump service to restart properly.
 
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Check Existence of BMC Dump file  ${dump_id}
 
@@ -54,7 +54,7 @@ Verify Dump Persistency On Reset
     Delete All BMC Dump
     ${dump_id}=  Create User Initiated Dump
     OBMC Reboot (off)
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Check Existence of BMC Dump file  ${dump_id}
 
@@ -75,7 +75,7 @@ Verify User Initiated Dump Size
 
     ${dump_id}=  Create User Initiated Dump
 
-    ${dump_size}=  Read Attribute  ${DUMP_ENTRY_URI}/${dump_id}  Size
+    ${dump_size}=  Read Attribute  ${DUMP_ENTRY_URI}${dump_id}  Size
     # Max size for dump is 200k = 200x1024
     Should Be True  0 < ${dump_size} < 204800
     Check Existence of BMC Dump file  ${dump_id}
@@ -90,10 +90,10 @@ Create Two User Initiated Dump And Delete One
 
     Delete BMC Dump  ${dump_id_1}
 
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/${dump_id_1}
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}${dump_id_1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/${dump_id_2}
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}${dump_id_2}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Check Existence of BMC Dump file  ${dump_id_2}
 
@@ -116,7 +116,7 @@ Delete All BMC Dumps And Verify
     Create User Initiated Dump
 
     Delete All BMC Dump
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 

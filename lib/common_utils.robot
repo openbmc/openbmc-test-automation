@@ -604,7 +604,7 @@ Get URL List
     # openbmc_url  URL for list operation (e.g.
     #              /xyz/openbmc_project/inventory).
 
-    ${url_list}=  Read Properties  ${openbmc_url}/list  quiet=${1}
+    ${url_list}=  Read Properties  ${openbmc_url}list  quiet=${1}
     Sort List  ${url_list}
 
     [Return]  ${url_list}

@@ -743,7 +743,7 @@ Set Watchdog Enabled Using REST
     # value  Integer value (eg. "0-Disabled", "1-Enabled").
 
     ${value_dict}=  Create Dictionary  data=${value}
-    ${resp}=  OpenBMC Put Request  ${HOST_WATCHDOG_URI}/attr/Enabled
+    ${resp}=  OpenBMC Put Request  ${HOST_WATCHDOG_URI}attr/Enabled
     ...  data=${value_dict}
 
 

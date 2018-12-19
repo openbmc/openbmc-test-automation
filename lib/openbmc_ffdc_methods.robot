@@ -453,7 +453,7 @@ Collect Dump Log
     [Documentation]  Collect dumps from dump entry.
     [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
 
-    ${data}=  Read Properties  ${DUMP_ENTRY_URI}/enumerate  quiet=${1}
+    ${data}=  Read Properties  ${DUMP_ENTRY_URI}enumerate  quiet=${1}
 
     # Grab the list of entries from dump/entry/
     # The data shown below is the result of the "Get Dictionary Keys".
