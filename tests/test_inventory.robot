@@ -695,7 +695,7 @@ Get Number Hardware Items
     # item  Inventory name (example: "fan/cpu/dimm/etc").
 
     ${count_inventory}  Set Variable  ${0}
-    ${list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}/system/
+    ${list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system/
     ...  ${item}
 
     : FOR  ${element}  IN  @{list}

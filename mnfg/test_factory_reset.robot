@@ -78,5 +78,5 @@ Software Manager Factory Reset
 
     ${data}=  Create Dictionary  data=@{EMPTY}
     Run Keyword And Ignore Error  OpenBMC Post Request
-    ...  ${SOFTWARE_VERSION_URI}/action/Reset  data=${data}
+    ...  ${SOFTWARE_VERSION_URI}action/Reset  data=${data}
 

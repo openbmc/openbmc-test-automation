@@ -226,7 +226,7 @@ Upload Image Via TFTP And Verify Success
     @{image}=  Create List  ${image_file_name}  ${TFTP_SERVER}
     ${data}=  Create Dictionary  data=@{image}
     ${resp}=  OpenBMC Post Request
-    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
+    ...  ${SOFTWARE_VERSION_URI}action/DownloadViaTFTP  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Sleep  1 minute
     ${image_version}=  Get Image Version From TFTP Server  ${image_file_name}
@@ -261,7 +261,7 @@ Upload Bad Image Via TFTP And Verify Failure
     @{image}=  Create List  ${bad_image_file_name}  ${TFTP_SERVER}
     ${data}=  Create Dictionary  data=@{image}
     ${resp}=  OpenBMC Post Request
-    ...  ${SOFTWARE_VERSION_URI}/action/DownloadViaTFTP  data=${data}
+    ...  ${SOFTWARE_VERSION_URI}action/DownloadViaTFTP  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${bad_image_version}=  Get Image Version From TFTP Server
     ...  ${bad_image_file_name}

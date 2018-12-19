@@ -413,7 +413,7 @@ Inject Unrecoverable Error Through Host
     Wait for OS
     Verify And Clear Gard Records On HOST
     Verify Error Log Entry  ${signature_desc}  ${log_prefix}
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}/list
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
     Should Not Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     Delete All BMC Dump
 

@@ -12,6 +12,7 @@ Library                 DateTime
 Library                 Process
 Library                 OperatingSystem
 Library                 gen_print.py
+Library                 gen_misc.py
 Library                 gen_robot_print.py
 Library                 gen_cmd.py
 Library                 gen_robot_keyword.py
@@ -476,7 +477,10 @@ Get Endpoint Paths
     # path       URL path for enumeration.
     # endpoint   Endpoint string (url path ending).
 
-    ${resp}=  Read Properties  ${path}/enumerate  timeout=30
+    # Make sure path ends with slash.
+    ${path}=  Add Trailing Slash  ${path}
+
+    ${resp}=  Read Properties  ${path}enumerate  timeout=30
     Log Dictionary  ${resp}
 
     ${list}=  Get Dictionary Keys  ${resp}

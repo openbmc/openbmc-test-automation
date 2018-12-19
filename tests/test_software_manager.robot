@@ -21,7 +21,7 @@ Verify Software Purposes
     ...              field.
     [Tags]  Verify_Software_Purpose
 
-    ${object_uris}=  Read Properties  ${SOFTWARE_VERSION_URI}/list
+    ${object_uris}=  Read Properties  ${SOFTWARE_VERSION_URI}list
 
     :FOR  ${uri}  IN  @{object_uris}
     \  ${object}=  Read Properties  ${uri}
