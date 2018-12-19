@@ -131,7 +131,7 @@ Set Watchdog Setting Using REST
     #               "Interval":Integer, "TimeRemaining":Integer)
 
     ${valueDict}=  Create Dictionary  data=${value}
-    ${resp}=  OpenBMC Put Request  ${HOST_WATCHDOG_URI}/attr/${setting_name}
+    ${resp}=  OpenBMC Put Request  ${HOST_WATCHDOG_URI}attr/${setting_name}
     ...       data=${valueDict}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
