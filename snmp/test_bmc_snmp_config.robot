@@ -5,9 +5,12 @@ Documentation  This testing require special setup where SNMP trapd is
 
 Resource  ../lib/snmp/resource.txt
 Resource  ../lib/snmp/snmp_utils.robot
+Resource  ../lib/openbmc_ffdc.robot
 
 Library  String
 Library  SSHLibrary
+
+Test Teardown  Test Teardown Execution
 
 *** Test Cases ***
 Configure SNMP Manager On BMC And Verify
@@ -108,3 +111,7 @@ Configure Multiple SNMP Managers With Different Ports And Verify
     Delete SNMP Manager And Object  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
     Delete SNMP Manager And Object  ${SNMP_MGR3_IP}  ${NON_DEFAULT_PORT2}
 
+Test Teardown Execution
+    [Documentation]  Do the post test teardown.
+
+    FFDC On Test Case Fail
