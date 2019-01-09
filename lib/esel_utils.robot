@@ -53,7 +53,7 @@ Verify eSEL Entries
     #       "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     #       "Timestamp": 1485904869061
     # }
-    ${entry_id}=  Read Attribute  ${elog_entry[0]}  message
+    ${entry_id}=  Read Attribute  ${elog_entry[0]}  Message
     Should Be Equal  ${entry_id}
     ...  org.open_power.Host.Error.Event
 
