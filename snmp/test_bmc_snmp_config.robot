@@ -5,9 +5,12 @@ Documentation  This testing require special setup where SNMP trapd is
 
 Resource  ../lib/snmp/resource.txt
 Resource  ../lib/snmp/snmp_utils.robot
+Resource  ../lib/openbmc_ffdc.robot
 
 Library  String
 Library  SSHLibrary
+
+Test Teardown  FFDC On Test Case Fail
 
 *** Test Cases ***
 Configure SNMP Manager On BMC And Verify
