@@ -238,6 +238,8 @@ Verify IPMI SEL Delete
     Create Test Error Log
 
     ${sel_list}=  Run IPMI Standard Command  sel list
+    Should Not Be Equal As Strings  ${sel_list}  SEL has no entries
+
     # Example of SEL List:
     # 4 | 04/21/2017 | 10:51:16 | System Event #0x01 | Undetermined system hardware failure | Asserted
 
