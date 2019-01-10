@@ -1,4 +1,5 @@
 #!/bin/bash
+# Refer to help text in the usage function for details.
 
 CPU_SYS_DIR=/sys/devices/system/cpu/
 NR_CPUS=0
@@ -8,6 +9,8 @@ SHOW_LAYOUT=0
 
 function usage()
 {
+        echo "This script runs on HOST OS and gives core-id"
+        echo "corresponding to the chip-id."
         echo "usage:"
         echo "        $0 [cpu] [-L]"
         echo

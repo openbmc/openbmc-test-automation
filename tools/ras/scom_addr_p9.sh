@@ -1,15 +1,17 @@
 #!/bin/bash
+# Refer to help text in the usage function for details.
 
 function usage()
 {
         echo
-        echo "usage: $0: <scom_addr> <core-id>"
+        echo "This script runs on HOST OS and gives translated SCOM address."
+        echo "usage: $0: <scom_addr> <core_id>"
         echo
         echo "  <scom_addr>:"
-        echo "     SCOM address that needs transaltion."
-        echo "  <core-id>:"
+        echo "     SCOM address that needs translation (e.g. '10010800')."
+        echo "  <core_id>:"
         echo "     Core id as obtained from probe_cpu.sh."
-        echo "     Should be between 0-23."
+        echo "     Should be between 0-23 (e.g. '0')."
         exit 1
 }
 
