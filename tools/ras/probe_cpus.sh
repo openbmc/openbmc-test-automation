@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This script runs on HOST OS and gives core-id
+# corresponding to the chip-id.
+
 CPU_SYS_DIR=/sys/devices/system/cpu/
 NR_CPUS=0
 CPU=

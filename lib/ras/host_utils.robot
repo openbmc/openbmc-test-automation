@@ -165,3 +165,16 @@ Enable Opal-PRD Service On HOST
     OS Execute Command  service opal-prd start
     ${opal_prd_state}=  Is Opal-PRD Service Enabled
     Should Contain  ${opal_prd_state}  enabled
+
+Putscom Operations Through BMC 
+    [Documentation]  Executes putscom command through BMC with the given
+    ...              input arguments.
+    [Arguments]      ${proc_chip_id}  ${fru}  ${address}
+    # Description of arguments:
+    # proc_chip_id        Processor ID (e.g '0', '8').
+    # fru            FRU value (e.g. 2011400).
+    # address        Chip address (e.g 4000000000000000).
+
+    ${cmd}=  Catenate  pdbg -d p9w -${proc_chip_id} putscom 0x${fru} 0x${address}
+
+    BMC Execute Command  ${cmd}
