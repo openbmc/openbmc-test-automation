@@ -49,7 +49,7 @@ Verify Supported Cipher List
 
     :FOR  ${cipher_level}  IN  @{valid_cipher_list}
     \  ${status}=  Execute IPMI Command With Cipher  ${cipher_level}
-    \  Should Be Equal  ${status}  ${0}
+    \  Should Be Equal  ${status}  ${True}
 
 
 Verify Unsupported Cipher List
@@ -58,7 +58,7 @@ Verify Unsupported Cipher List
 
     :FOR  ${cipher_level}  IN  @{unsupported_cipher_list}
     \  ${status}=  Execute IPMI Command With Cipher  ${cipher_level}
-    \  Should Be Equal  ${status}  ${1}
+    \  Should Be Equal  ${status}  ${False}
 
 
 Verify Supported Cipher List Via Lan Print
@@ -900,9 +900,6 @@ Execute IPMI Command With Cipher
     # cipher_level  IPMI chipher level value
     #               (e.g. "1", "2", "3", "15", "16", "17").
 
-    ${ipmi_cmd}=  Catenate  SEPARATOR=
-    ...  ipmitool -I lanplus -C ${cipher_level} -P${SPACE}${IPMI_PASSWORD}
-    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}mc info
+    ${status}=  Run Keyword And Return Status  Build IPMI Ext Cmd  ${cipher_level}
 
-    ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
-    [Return]  ${rc}
+    [Return]  ${status}
