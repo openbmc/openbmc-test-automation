@@ -19,7 +19,7 @@ Test Teardown    Test Teardown Execution
 
 *** Variables ****
 
-${over_max_power}       3500
+${over_max_power}       4001
 ${max_power}            3050
 ${mid_power}            1950
 ${min_power}            600
@@ -109,15 +109,9 @@ Verify Power Limits
     Test Power Limit  ${min_power}  ${zero_power}
     Test Power Limit  ${max_power}  ${over_max_power}
 
-    # There should be one error log entry for each attempt to set
-    # a power limit out of range.
-    ${error_logs}=  Get Error Logs
-    ${num_logs}=  Get Length  ${error_logs}
-    Run Keyword If  ${num_logs} != 3  Run Keywords
-    ...  Print Error Logs  ${error_logs}
-    ...  AND  Fail  msg=Unexpected number of error logs.
-
-    Delete All Error Logs
+    ${power_limit}=  Get DCMI Power Limit
+    Should Be True  ${power_limit} == ${max_power}
+    ...  msg=Power at ${power_limit}. Power should be at ${max_power}.
 
 
 Test Power Limit
@@ -165,3 +159,5 @@ Test Teardown Execution
     # Restore the system's initial deactivation/activation setting.
     Run Keyword If  '${initial_deactivation}' == '${1}'
     ...  Deactivate DCMI Power And Verify  ELSE  Activate DCMI Power And Verify
+
+    Delete All Error Logs
