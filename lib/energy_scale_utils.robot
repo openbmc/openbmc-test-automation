@@ -106,7 +106,8 @@ Set DCMI Power Limit Via REST
     # power_limit  The power limit in watts.
     # verify       If True, read the power setting to confirm.
 
-    ${data}=  Create Dictionary  data=${power_limit}
+    ${int_power_limit}=  Convert To Integer  ${power_limit}
+    ${data}=  Create Dictionary  data=${int_power_limit}
     Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCap  data=${data}
     Return From Keyword If  ${verify} == ${False}
     ${power}=  Read Attribute  ${CONTROL_HOST_URI}power_cap  PowerCap
