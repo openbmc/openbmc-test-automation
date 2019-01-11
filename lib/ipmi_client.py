@@ -9,12 +9,15 @@ import gen_cmd as gc
 from robot.libraries.BuiltIn import BuiltIn
 
 
-def build_ipmi_ext_cmd(quiet=None):
+def build_ipmi_ext_cmd(ipmi_cipher_level=None, quiet=None):
     r"""
     Build the global IPMI_EXT_CMD variable.
 
-    If global variable IPMI_EXT_CMD already has a value, this keyword will
-    simply return without taking any action.
+	If global variable IPMI_EXT_CMD already has a value, this keyword will
+    simply return without taking any action with the following exception:
+
+    If ipmi_cipher_level is is anything but None, this function will continue
+    on and re-build the IPMI_EXT_CMD variable.
 
     This keyword is designed for use by keywords which use the IPMI_EXT_CMD
     variable (e.g. 'Run External IPMI Raw Command').  This keyword is
@@ -27,12 +30,14 @@ def build_ipmi_ext_cmd(quiet=None):
     username.
 
     Description of argument(s):
+    # ipmi_cipher_level             IPMI cipher level value
+    #                               (e.g. "1", "2", "3", "15", "16", "17").
     # quiet                         Indicates whether this keyword should run
     #                               without any output to the console.
     """
 
     ipmi_ext_cmd = BuiltIn().get_variable_value("${IPMI_EXT_CMD}", "")
-    if ipmi_ext_cmd != "":
+    if ipmi_ext_cmd != "" and not ipmi_cipher_level:
         return
 
     quiet = int(gp.get_var_value(quiet, 0))
@@ -40,8 +45,9 @@ def build_ipmi_ext_cmd(quiet=None):
     ipmi_username = BuiltIn().get_variable_value("${IPMI_USERNAME}", "root")
     ipmi_password = BuiltIn().get_variable_value("${IPMI_PASSWORD}",
                                                  "0penBmc")
-    ipmi_cipher_level = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}",
-                                                     "3")
+    if not ipmi_cipher_level:
+        ipmi_cipher_level = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}",
+                                                         "3")
 
     old_ipmi_ext_cmd = "ipmitool -I lanplus -C " + str(ipmi_cipher_level)\
         + " -P " + ipmi_password
