@@ -8,7 +8,7 @@ Resource            ../lib/state_manager.robot
 Resource            ../lib/boot_utils.robot
 
 Test Setup          Test Setup Execution
-Test Teardown       Close All Connections
+Test Teardown       FFDC On Test Case Fail
 
 ***Variables***
 ${target_device_path}  /sys/devices/platform/gpio-fsi/fsi0/slave@00:00/raw
