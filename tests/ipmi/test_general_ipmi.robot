@@ -575,12 +575,11 @@ Verify Get Device ID
     ...  Remove String Using Regexp  ${bmc_version_full}  ^[^0-9]+  [^0-9\.].*
 
     # Get major and minor version from BMC version i.e. 2 and 1 from 2.1
-    ${bmc_major_version}  ${bmc_minor_version}=
-    ...  Split String  ${bmc_version}  .
+    @{major_minor_version}=  Split String  ${bmc_version}  .
 
-    Should Be Equal As Strings  ${ipmi_fw_major_version}  ${bmc_major_version}
+    Should Be Equal As Strings  ${ipmi_fw_major_version}  ${major_minor_version[0]}
     ...  msg=Major version mis-match.
-    Should Be Equal As Strings  ${ipmi_fw_minor_version}  ${bmc_minor_version}
+    Should Be Equal As Strings  ${ipmi_fw_minor_version}  ${major_minor_version[1]}
     ...  msg=Minor version mis-match.
 
     Should Be Equal  ${mc_info['ipmi_version']}  2.0
