@@ -63,7 +63,7 @@ Check BMC Memory Name Property Is Set
    [Template]  Template Check Property
 
    #Property
-   memory/name
+   memory@80000000/name
 
 
 Check BMC Memory Device Type Property Is Set
@@ -73,7 +73,7 @@ Check BMC Memory Device Type Property Is Set
    [Template]  Template Check Property
 
    #Property
-   memory/device_type
+   memory@80000000/device_type
 
 
 Check BMC FSI Name Property Is Set
