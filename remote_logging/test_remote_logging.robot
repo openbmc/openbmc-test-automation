@@ -327,10 +327,6 @@ Test Setup Execution
     Run Keyword If  ${config_status}==${FALSE}
     ...  Configure Remote Log Server With Parameters
 
-    ${ActiveState}=  Get Service Attribute  ActiveState  rsyslog.service
-    Should Be Equal  active  ${ActiveState}
-    ...  msg=rsyslog logging service not in active state.
-
 
 Remote Logging Interface Should Exist
     [Documentation]  Check that the remote logging URI exist.
