@@ -26,7 +26,7 @@ ${BMC_START_MSG}         Starting Flush Journal to Persistent Storage
 ${BMC_BOOT_MSG}          Startup finished in
 ${BMC_SYSLOG_REGEX}      dropbear|vrm-control.sh
 ${RSYSLOG_REGEX}         start|exiting on signal 15|there are no active actions configured
-${RSYSLOG_RETRY_REGEX}   suspended, next retry
+${RSYSLOG_RETRY_REGEX}   suspended
 
 *** Test Cases ***
 
@@ -86,11 +86,12 @@ Verify REST Logging On BMC Journal When Enabled
     Write Attribute  ${BMC_LOGGING_URI}${/}rest_api_logs  Enabled  data=${log_dict}
     ...  verify=${True}  expected_value=${True}
 
+    Sleep  5s
+
+    Start Journal Log
     Initialize OpenBMC
     Log Out OpenBMC
-
-    ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager
+    ${bmc_journald}=  Stop Journal Log
 
     Should Contain  ${bmc_journald}  login json:None 200 OK
     ...  msg=${bmc_journald} doesn't contains REST entries.
@@ -128,9 +129,6 @@ Test Remote Logging REST Interface And Verify Config
     [Tags]  Test_Remote_Logging_REST_Interface_And_Verify_Config
 
     Verify Rsyslog Config On BMC
-
-    Configure Remote Log Server With Parameters  remote_host=${EMPTY}  remote_port=0
-    Verify Rsyslog Config On BMC  remote_host=remote-host  remote_port=port
 
 
 Test Remote Logging Invalid Port Config And Verify BMC Journald
@@ -326,10 +324,6 @@ Test Setup Execution
 
     Run Keyword If  ${config_status}==${FALSE}
     ...  Configure Remote Log Server With Parameters
-
-    ${ActiveState}=  Get Service Attribute  ActiveState  rsyslog.service
-    Should Be Equal  active  ${ActiveState}
-    ...  msg=rsyslog logging service not in active state.
 
 
 Remote Logging Interface Should Exist
