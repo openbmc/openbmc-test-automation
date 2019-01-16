@@ -211,29 +211,6 @@ Verify REST Bad Request Post Message JSON Compliant
     Delete All Error Logs
 
 
-Verify REST Put Message JSON Compliant
-    [Documentation]  Verify REST "PUT" message is JSON format compliant.
-    [Tags]  REST_Put_Message_JSON_Format_Compliance_Test
-    # Example:
-    # Response code:200, Content:{
-    #  "data": null,
-    #  "message": "200 OK",
-    #  "status": "ok"
-    # }
-
-    ${dict_data}=  Create Dictionary  data=${HOST_POWEROFF_TRANS}
-    ${resp}=  Openbmc Put Request
-    ...  ${HOST_STATE_URI}attr/RequestedHostTransition  data=${dict_data}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${jsondata}=  To JSON  ${resp.content}
-    Should Be Equal  ${jsondata["data"]}  ${None}
-    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
-    Should Be Equal As Strings  ${jsondata["status"]}  ok
-    # Intention is not to test poweroff but to check the REST operation
-    # sink time allowing to kick poweroff.
-    Sleep  10s
-
-
 Check Response Codes HTTP_UNSUPPORTED_MEDIA_TYPE
     [Documentation]  REST "Post" response status test for
     ...              HTTP_UNSUPPORTED_MEDIA_TYPE.
@@ -367,6 +344,29 @@ Verify All REST Objects Are Accessible
     \  Run keyword if  '${resp.status_code}' != '${HTTP_OK}'
     \  ...  Append To List  ${error_uri_list}  ${uri} : ${resp.status_code}
     Should Be Empty  ${error_uri_list}
+
+
+Verify REST Put Message JSON Compliant
+    [Documentation]  Verify REST "PUT" message is JSON format compliant.
+    [Tags]  REST_Put_Message_JSON_Format_Compliance_Test
+    # Example:
+    # Response code:200, Content:{
+    #  "data": null,
+    #  "message": "200 OK",
+    #  "status": "ok"
+    # }
+
+    ${dict_data}=  Create Dictionary  data=${HOST_POWEROFF_TRANS}
+    ${resp}=  Openbmc Put Request
+    ...  ${HOST_STATE_URI}attr/RequestedHostTransition  data=${dict_data}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ${jsondata}=  To JSON  ${resp.content}
+    Should Be Equal  ${jsondata["data"]}  ${None}
+    Should Be Equal As Strings  ${jsondata["message"]}  200 OK
+    Should Be Equal As Strings  ${jsondata["status"]}  ok
+    # Intention is not to test poweroff but to check the REST operation
+    # sink time allowing to kick poweroff.
+    Sleep  10s
 
 *** Keywords ***
 
