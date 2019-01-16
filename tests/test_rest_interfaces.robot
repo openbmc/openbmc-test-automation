@@ -337,6 +337,8 @@ Verify All REST Objects Are Accessible
     ...  /xyz/openbmc_project/certs/client/ldap
     ...  /xyz/openbmc_project/certs/server/https
     ...  /xyz/openbmc_project/certs/authority/ldap
+    ...  /xyz/openbmc_project/ipmi
+    ...  /xyz/openbmc_project/ipmi/internal
 
     ${error_uri_list}=  Create List
     :FOR  ${uri}  IN  @{uri_list}
