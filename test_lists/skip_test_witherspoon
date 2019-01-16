@@ -77,3 +77,5 @@
 -e Verify_Disabling_And_Enabling_IPMI_Via_Host
 -e Verify_Disabling_IPMI_Via_OOB_IPMI
 -e Verify_IPMI_Disable_Persistency_After_BMC_Reboot
+# Remote logging
+-e Verify_BMC_Journald_Contains_No_Credential_Data
