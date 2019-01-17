@@ -9,21 +9,43 @@ Library         bmc_ssh_utils.py
 
 Create User Initiated Dump
     [Documentation]  Generate user initiated dump and return
-    ...  dump id (e.g 1, 2 etc).
+    ...  the dump id number (e.g., "5").
+    [Arguments]   ${check_out_of_space}=${False}
+
+    # Description of Argument(s):
+    # check_out_of_space   If ${False}, the normal method of creating
+    #                      a dump and checking for its existence is called.
+    #                      If ${True}, additional checking is done to
+    #                      determine if the created dump exhausted the
+    #                      available dump storage space.
 
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  OpenBMC Post Request
-    ...  ${DUMP_URI}action/CreateDump  data=${data}
+    ...  ${DUMP_URI}action/CreateDump  data=${data}  quiet=${1}
+
+    Run Keyword If  '${check_out_of_space}' == '${False}'
+    ...  Run Keyword And Return  Get The Dump Id  ${resp}
+    ...  ELSE   Run Keyword And Return  Check For Too Many Dumps  ${resp}
+
+
+Get The Dump Id
+    [Documentation]  Wait for the dump to be created. Return the
+    ...  dump id number (e.g., "5").
+    [Arguments]  ${resp}
+
+    # Description of Argument(s):
+    # resp   Response object from action/Create Dump attempt.
+    #        Example object:
+    #        {
+    #           "data": 5,
+    #           "message": "200 OK",
+    #           "status": "ok"
+    #        },
+    #        The "data" field conveys the id number of the created dump.
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${json}=  To JSON  ${resp.content}
 
-    # REST "CreateDump" JSON response.
-    # {
-    #    "data": null,
-    #    "message": "200 OK",
-    #    "status": "ok"
-    # }
     Run Keyword If  ${json["data"]} == ${None}
     ...  Fail  Dump id returned null.
 
@@ -33,6 +55,44 @@ Create User Initiated Dump
     ...  ${dump_id}
 
     [Return]  ${dump_id}
+
+
+Check For Too Many Dumps
+    [Documentation]  Return ${EMPTY} if dump creation failed due to too
+    ...  many dumps. Fail if dump creation was due to some other cause.
+    [Arguments]  ${resp}
+
+    # Description of Argument(s):
+    # resp   Response object from action/Create Dump attempt.
+    #        Example object if there are too many dumps:
+    #        {
+    #           "data": {
+    #              "description": "Internal Server Error",
+    #              "exception": "'Dump not captured due to a cap.'",
+    #              "traceback": [
+    #              "Traceback (most recent call last):",
+    #                ...
+    #              "DBusException: Create.Error.QuotaExceeded"
+    #                           ]
+    #              },
+    #           "message": "500 Internal Server Error",
+    #           "status": "error"
+    #        }
+
+    # If dump was created normally, return the dump_id number.
+    Run Keyword If  '${resp.status_code}' == '${HTTP_OK}'
+    ...  Run Keyword And Return  Get The Dump Id  ${resp}
+
+    ${exception}=  Set Variable  ${resp.json()['data']['exception']}
+    ${at_capacity}=  Set Variable  Dump not captured due to a cap
+    ${too_many_dumps}=  Evaluate  $at_capacity in $exception
+    Rprintn
+    Rprint Vars   exception  too_many_dumps
+    # If there are too many dumps, return ${EMPTY}, otherwise Fail.
+    ${status}=  Run Keyword If  ${too_many_dumps}  Set Variable  ${EMPTY}
+    ...  ELSE  Fail  msg=${exception}.
+
+    [Return]  ${status}
 
 
 Verify No Dump In Progress
