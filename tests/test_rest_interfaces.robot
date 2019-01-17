@@ -198,7 +198,7 @@ Verify REST Bad Request Post Message JSON Compliant
     # Create the REST payload headers and data
     ${data}=  Create Dictionary  data  ${image_data}
     ${headers}=  Create Dictionary  Content-Type=application/octet-stream
-    ...  Accept=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/octet-stream
     Set To Dictionary  ${data}  headers  ${headers}
 
     ${resp}=  Post Request  openbmc  /upload/image  &{data}
@@ -229,7 +229,7 @@ Check Response Codes HTTP_UNSUPPORTED_MEDIA_TYPE
 
     # Create the REST payload headers and EMPTY data
     ${data}=  Create Dictionary  data  ${EMPTY}
-    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${headers}=  Create Dictionary  Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${data}  headers  ${headers}
 
     ${resp}=  Post Request  openbmc  /upload/image  &{data}
