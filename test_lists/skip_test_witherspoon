@@ -76,3 +76,5 @@
 -e Verify_IPMI_Disable_Persistency_After_BMC_Reboot
 # Remote logging
 -e Verify_BMC_Journald_Contains_No_Credential_Data
+# Non bmcweb certificate.
+-e Certificate_Test
