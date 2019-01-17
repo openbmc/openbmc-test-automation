@@ -567,7 +567,7 @@ Update Root Password
     @{password}=  Create List  ${openbmc_password}
     ${data}=  Create Dictionary  data=@{password}
 
-    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${headers}=  Create Dictionary  Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
     ${resp}=  Post Request  openbmc  ${BMC_USER_URI}root/action/SetPassword
     ...  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
