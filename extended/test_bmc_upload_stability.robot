@@ -60,7 +60,7 @@ Upload Test Image File To BMC
     # Create the REST payload headers and data.
     ${data}=  Create Dictionary  data=${image_data}
     ${headers}=  Create Dictionary  Content-Type=application/octet-stream
-    ...  Accept=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/octet-stream
     Set To Dictionary  ${data}  headers  ${headers}
 
     # Upload to BMC and check for HTTP_BAD_REQUEST.
