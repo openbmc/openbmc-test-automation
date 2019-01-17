@@ -12,6 +12,7 @@ Library             ../lib/bmc_ssh_utils.py
 Test Setup          Open Connection And Log In
 Test Teardown       Test Teardown Execution
 
+
 *** Test Cases ***
 
 Pre Dump BMC Performance Test
@@ -27,9 +28,10 @@ Verify User Initiated BMC Dump When Powered Off
     ...  verify dump entry for it.
     [Tags]  Verify_User_Initiated_BMC_Dump_When_Powered_Off
 
-    REST Power Off  stack_mode=skip  quiet=1
+    REST Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated Dump
     Check Existence of BMC Dump file  ${dump_id}
+
 
 Verify Dump Persistency On Service Restart
     [Documentation]  Create user dump, restart BMC service and verify dump
@@ -125,7 +127,7 @@ Verify User Initiated BMC Dump When Host Booted
     ...  verify dump entry for it.
     [Tags]  Verify_User_Initiated_BMC_Dump_When_Host_Booted
 
-    REST Power On  stack_mode=skip  quiet=1
+    REST Power On  stack_mode=skip
     Create User Initiated Dump
 
 
@@ -144,12 +146,27 @@ Verify Core Dump Size
     Should Be True  0 < ${dump_size} < 204800  msg=Size of dump is incorrect.
 
 
+Dump Capping Test
+    [Documentation]  Verify that the system can hold at least
+    ...  a minimum number of valid dumps.
+    [Tags]  Dump_Capping_Test
+
+    ${min_number_of_dumps}  Set Variable  6
+
+    :FOR  ${n}  IN RANGE  ${min_number_of_dumps}
+    \  ${dump_id}=  Create User Initiated Dump
+    \  Run Keyword If  '${dump_id}' != '${EMPTY}'
+    ...  Check Existence of BMC Dump file  ${dump_id}  ELSE  Fail
+    ...  msg=Could not create minimum of ${min_number_of_dumps} dumps.
+
+
 Post Dump BMC Performance Test
     [Documentation]  Check performance of memory, CPU & file system of BMC.
     [Tags]  Post_Dump_BMC_Performance_Test
 
     Open Connection And Log In
     Check BMC Performance
+
 
 Post Dump Core Dump Check
     [Documentation]  Check core dump existence on BMC after code update.
@@ -164,6 +181,6 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     Wait Until Keyword Succeeds  3 min  15 sec  Verify No Dump In Progress
-    FFDC On Test Case Fail
+    ####FFDC On Test Case Fail
     Delete All BMC Dump
     Close All Connections
