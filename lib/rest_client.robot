@@ -7,11 +7,14 @@ Resource          resource.txt
 Library           disable_warning_urllib.py
 Library           utils.py
 Library           gen_misc.py
+Library           var_funcs.py
 Resource          rest_response_code.robot
 
 *** Variables ***
 # Assign default value to QUIET for programs which may not define it.
 ${QUIET}  ${0}
+
+${XAUTH_TOKEN}  ${EMPTY}
 
 *** Keywords ***
 OpenBMC Get Request
@@ -39,6 +42,9 @@ OpenBMC Get Request
 
     Initialize OpenBMC    ${timeout}  quiet=${quiet}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/octet-stream
+    Set To Dictionary  ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Get
     ...  base_uri=${base_uri}  args=&{kwargs}
     ${ret}=  Get Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
@@ -63,7 +69,8 @@ OpenBMC Post Request
 
     Initialize OpenBMC    ${timeout}  quiet=${quiet}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
-    ${headers}=     Create Dictionary   Content-Type=application/json
+    ${headers}=  Create Dictionary   Content-Type=application/json
+    ...  X-Auth-Token=${XAUTH_TOKEN}
     set to dictionary   ${kwargs}       headers     ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
@@ -88,6 +95,7 @@ OpenBMC Put Request
     Initialize OpenBMC    ${timeout}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${headers}=     Create Dictionary   Content-Type=application/json
+    ...  X-Auth-Token=${XAUTH_TOKEN}
     set to dictionary   ${kwargs}       headers     ${headers}
     Log Request    method=Put    base_uri=${base_uri}    args=&{kwargs}
     ${ret}=  Put Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
@@ -110,7 +118,10 @@ OpenBMC Delete Request
 
     Initialize OpenBMC    ${timeout}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
-    Log Request    method=Delete    base_uri=${base_uri}    args=&{kwargs}
+    ${headers}=  Create Dictionary   Content-Type=application/json
+    ...  X-Auth-Token=${XAUTH_TOKEN}
+    Set To Dictionary   ${kwargs}  headers   ${headers}
+    Log Request  method=Delete  base_uri=${base_uri}  args=&{kwargs}
     ${ret}=  Delete Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Log Response    ${ret}
     Delete All Sessions
@@ -126,11 +137,41 @@ Initialize OpenBMC
     # timeout  REST login attempt time out.
     # quiet    Suppress console log if set.
 
+    ${bmcweb_status}=  Run Keyword And Return Status  BMC Web Login Request
+    ...  ${timeout}  ${REST_USERNAME}  ${REST_PASSWORD}
+
+    Return From Keyword If  ${bmcweb_status} == ${True}
+
     # TODO : Task to revert this changes openbmc/openbmc-test-automation#532
     # This will retry at 20 second interval.
     Wait Until Keyword Succeeds  40 sec  20 sec
     ...  Post Login Request  ${timeout}  ${quiet}
     ...  ${REST_USERNAME}  ${REST_PASSWORD}
+
+
+BMC Web Login Request
+    [Documentation]  Do BMC web based login.
+    [Arguments]  ${timeout}=20  ${REST_USERNAME}=${REST_USERNAME}
+    ...  ${REST_PASSWORD}=${REST_PASSWORD}
+    # Description of argument(s):
+    # timeout  REST login attempt time out.
+
+    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}
+
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    @{credentials}=  Create List  ${REST_USERNAME}  ${REST_PASSWORD}
+    ${data}=  Create Dictionary  data=@{credentials}
+    ${resp}=  Post Request  openbmc  /login  data=${data}  headers=${headers}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    ${processed_token_data}=
+    ...  Evaluate  re.split(r'[;,]', '${resp.headers["Set-Cookie"]}')  modules=re
+    ${result}=  Key Value List To Dict  ${processed_token_data}  delim==
+    # Example result data:
+    # 'XSRF-TOKEN=hQuOyDJFEIbrN4aOg2CT; Secure, 
+    # SESSION=c4wloTiETumSxPI9nLeg; Secure; HttpOnly'
+    Set Global Variable  ${XAUTH_TOKEN}  ${result['session']}
+
 
 Post Login Request
     [Documentation]  Do REST login request.
@@ -143,6 +184,7 @@ Post Login Request
     # quiet    Suppress console log if set.
 
     Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=3
+
     ${headers}=  Create Dictionary  Content-Type=application/json
     @{credentials}=  Create List  ${REST_USERNAME}  ${REST_PASSWORD}
     ${data}=  create dictionary   data=@{credentials}
@@ -152,10 +194,12 @@ Post Login Request
     Should Be Equal  ${status}  PASS  msg=${resp}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
+
 Log Out OpenBMC
     [Documentation]  Log out of the openbmc REST session.
 
     ${headers}=  Create Dictionary  Content-Type=application/json
+    ...  X-Auth-Token=${XAUTH_TOKEN}
     ${data}=  Create dictionary  data=@{EMPTY}
 
     # If there is no active sesion it will throw the following exception
@@ -300,7 +344,7 @@ Upload Image To BMC
     Initialize OpenBMC  ${timeout}  quiet=${quiet}
     ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
     ${headers}=  Create Dictionary  Content-Type=application/octet-stream
-    ...  Accept=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/octet-stream
     Set To Dictionary  ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
