@@ -355,7 +355,7 @@ Robot Coding Guidelines
             ${HTTP_OK}           /xyz/
             ${HTTP_OK}           /xyz/openbmc_project/
             ${HTTP_OK}           /xyz/openbmc_project/state/enumerate
-            ${HTTP_NOT_FOUND}    /i/dont/exist/
+            ${HTTP_NOT_FOUND}    /xyz/i/dont/exist/
         ```
 
 Python Coding Guidelines

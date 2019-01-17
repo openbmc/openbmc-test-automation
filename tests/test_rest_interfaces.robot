@@ -252,7 +252,7 @@ Get Response Codes
     # Expect status      URL Path
     ${HTTP_OK}           /xyz/openbmc_project/
     ${HTTP_OK}           /xyz/openbmc_project/state/enumerate
-    ${HTTP_NOT_FOUND}    /i/dont/exist/
+    ${HTTP_NOT_FOUND}    /xyz/i/dont/exist/
 
 
 Get Data
@@ -275,7 +275,7 @@ Get Data Validation
 
     # URL Path                  Expect Data
     /xyz/openbmc_project/       /xyz/openbmc_project/logging
-    /i/dont/exist/              path or object not found
+    /org/i/dont/exist/         path or object not found
 
 
 Put Response Codes
@@ -287,7 +287,7 @@ Put Response Codes
     # Expect status                 URL Path
     ${HTTP_METHOD_NOT_ALLOWED}      /
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
-    ${HTTP_METHOD_NOT_ALLOWED}      /i/dont/exist/
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/i/dont/exist/
 
 
 Put Data Validation
@@ -309,7 +309,7 @@ Post Response Code
     # Expect status                 URL Path
     ${HTTP_METHOD_NOT_ALLOWED}      /
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
-    ${HTTP_METHOD_NOT_ALLOWED}      /i/dont/exist/
+    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/i/dont/exist/
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/login
 
 
