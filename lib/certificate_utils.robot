@@ -24,6 +24,7 @@ Install Certificate File On BMC
     Initialize OpenBMC  quiet=${quiet}
 
     ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${kwargs}  headers  ${headers}
 
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Put
