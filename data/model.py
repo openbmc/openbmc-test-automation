@@ -49,8 +49,6 @@ def get_inventory_fru_type_list(module_name, fru_type):
 
     for i in m.FRU_INSTANCES.keys():
         if m.FRU_INSTANCES[i]['fru_type'] == fru_type:
-            print 'found one'
-
             s = i.replace('<inventory_root>', m.INVENTORY_ROOT)
             inventory_list.append(s)
 
