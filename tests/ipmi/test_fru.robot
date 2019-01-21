@@ -166,9 +166,12 @@ Get Index Of FRU Sub Component Info
     : FOR  ${rest_fru_sub_component}  IN  @{fru_component_info}
     \  ${fru_component_section}=
     \  ...  Get From List  ${fru_component_info}  ${index}
-    \  ${status}=  Run Keyword And Return Status  Should Contain
-    \  ...  ${fru_component_section['fru_device_description']}
-    \  ...  ${sub_component}
+    \  # Get FRU name from IPMI's fru_device_description field.
+    \  # Example "cpu0" from "cpu0 (ID 1)".
+    \  ${fru_name}=  Fetch From Left
+    \  ...  ${fru_component_section['fru_device_description']}  ${SPACE}
+    \  ${status}=  Run Keyword And Return Status  Should Be Equal
+    \  ...  ${fru_name}  ${sub_component}
     \  Exit For Loop If  '${status}' == '${True}'
     \  ${index}=  Evaluate  ${index} + 1
     \  Exit For Loop If  ${index} >= ${sub_component_count}
