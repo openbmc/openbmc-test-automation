@@ -367,10 +367,22 @@ def quote_bash_parm(parm):
     # If any of these characters are found in the parm string, then the
     # string should be quoted.  This list is by no means complete and should
     # be expanded as needed by the developer of this function.
-    bash_special_chars = set(' $')
+    # Spaces
+    # Single or double quotes.
+    # Bash variables (therefore, any string with a "$" may need quoting).
+    # Glob characters: *, ?, []
+    # Extended Glob characters: +, @, !
+    # Bash brace expansion: {}
+    # Tilde expansion: ~
+    # Piped commands: |
+    # Bash re-direction: >, <
+    bash_special_chars = set(' \'"$*?[]+@!{}~|><')
 
     if any((char in bash_special_chars) for char in parm):
-        return "'" + parm + "'"
+        return "'" + escape_bash_quotes(parm) + "'"
+
+    if parm == '':
+        parm = "''"
 
     return parm
 
