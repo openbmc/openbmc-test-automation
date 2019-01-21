@@ -45,7 +45,6 @@ Set Valid System Time
 
     Set Time Owner  ${HOST_OWNER}
     Set Time Mode  ${MANUAL_MODE}
-
     ${resp}=  Run IPMI Standard Command  sel time set "${SYSTEM_TIME_VALID}"
     ${setdate}=  Convert Date  ${SYSTEM_TIME_VALID}
     ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=yes
@@ -290,6 +289,27 @@ Get BMC Time Using IPMI
     Should Not Be Empty  ${resp}
     [Return]  ${resp}
 
+
+Verify Set Time Via REST
+    [Documentation]  Verify set time via REST.
+    [Arguments]  ${target}  ${expected_status}
+    # Description of argument(s):
+    # target           The target of the set time operation: "bmc" or "host".
+    # expected_status  Expected status of set time operation
+
+    ${time_owner_url}=  Set Variable If
+    ...  '${target}' == 'bmc'  ${TIME_MANAGER_URI}bmc
+    ...  '${target}' == 'host'  ${TIME_MANAGER_URI}host
+
+    ${args}=  Create Dictionary  data=${SYSTEM_TIME_VALID_EPOCH}
+    ${resp}=  OpenBMC Put Request
+    ...  ${time_owner_url}/attr/Elapsed  data=${args}
+    ${jsondata}=  to Json  ${resp.content}
+    Run Keyword If  "${expected_status}" == "ok"
+    ...  Should Not Be Equal As Strings  ${jsondata['message']}  403 Forbidden
+    Should Be Equal As Strings  ${jsondata['status']}  ${expected_status}
+
+
 Set Time Owner
     [Arguments]  ${args}
     [Documentation]  Set time owner of the system via REST
@@ -369,20 +389,18 @@ Set Time Using REST
 
     ${setdate}=  Set Variable  ${SYSTEM_TIME_VALID_EPOCH}
 
-    ${time_owner_url}=  Set Variable If
-    ...  '${operation}' == 'Set BMC Time'  ${TIME_MANAGER_URI}bmc
-    ...  '${operation}' == 'Set Host Time'  ${TIME_MANAGER_URI}host
-
     ${start_time}=  Get Current Date
 
     ${old_bmc_time}=  Get BMC Time Using REST
     ${old_host_time}=  Get HOST Time Using REST
 
-    ${valueDict}=  Create Dictionary  data=${SYSTEM_TIME_VALID_EPOCH}
-    ${resp}=  OpenBMC Put Request
-    ...  ${time_owner_url}/attr/Elapsed  data=${valueDict}
-    ${jsondata}=  to JSON  ${resp.content}
-    Should Be Equal As Strings  ${jsondata['status']}  ${status}
+    Run Keyword If  '${operation}' == 'Set BMC Time'
+    ...  Wait Until Keyword Succeeds  1 min  20 sec  Verify Set Time Via REST
+    ...  bmc  ${status}
+    ...  ELSE IF  '${operation}' == 'Set Host Time'
+    ...  Wait Until Keyword Succeeds  1 min  20 sec  Verify Set Time Via REST
+    ...  host  ${status}
+
 
     ${new_bmc_time}=  Get BMC Time Using REST
     ${new_host_time}=  Get HOST Time Using REST
@@ -449,6 +467,7 @@ Convert epoch to date
     ${date}=  Convert Date  ${epoch_time_sec}
 
     [Return]  ${date}
+
 
 Post Test Case Execution
     [Documentation]  Do the post test teardown.
