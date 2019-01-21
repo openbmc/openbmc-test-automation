@@ -713,6 +713,32 @@ def dft_num_hex_digits():
         return _gen_print_dft_num_hex_digits_
 
 
+def is_dict(var_value):
+    r"""
+    Return 1 if var_value is a type of dictionary and 0 if it is not.
+    """
+
+    type_is_dict = 0
+    if isinstance(var_value, dict):
+        type_is_dict = 1
+    try:
+        if isinstance(var_value, collections.OrderedDict):
+            type_is_dict = 1
+    except AttributeError:
+        pass
+    try:
+        if isinstance(var_value, DotDict):
+            type_is_dict = 1
+    except NameError:
+        pass
+    try:
+        if isinstance(var_value, NormalizedDict):
+            type_is_dict = 1
+    except NameError:
+        pass
+    return type_is_dict
+
+
 def sprint_varx(var_name,
                 var_value,
                 hex=0,
@@ -853,25 +879,7 @@ def sprint_varx(var_name,
             length = 0
         ix = 0
         loc_trailing_char = "\n"
-        type_is_dict = 0
-        if isinstance(var_value, dict):
-            type_is_dict = 1
-        try:
-            if isinstance(var_value, collections.OrderedDict):
-                type_is_dict = 1
-        except AttributeError:
-            pass
-        try:
-            if isinstance(var_value, DotDict):
-                type_is_dict = 1
-        except NameError:
-            pass
-        try:
-            if isinstance(var_value, NormalizedDict):
-                type_is_dict = 1
-        except NameError:
-            pass
-        if type_is_dict:
+        if is_dict(var_value):
             for key, value in var_value.items():
                 if key_list is not None:
                     key_list_regex = "^" + "|".join(key_list) + "$"
