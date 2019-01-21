@@ -1,82 +1,158 @@
-#!/usr/bin/env python
-
 r"""
 A python companion file for ipmi_client.robot.
 """
 
+import collections
 import gen_print as gp
 import gen_cmd as gc
+import var_stack as vs
 from robot.libraries.BuiltIn import BuiltIn
 
 
-def build_ipmi_ext_cmd(quiet=None):
+# Set default values for required IPMI options.
+ipmi_interface = 'lanplus'
+ipmi_cipher_suite = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}", '3')
+ipmi_username = BuiltIn().get_variable_value("${IPMI_USERNAME}", "root")
+ipmi_password = BuiltIn().get_variable_value("${IPMI_PASSWORD}", "0penBmc")
+ipmi_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
+
+# Create a list of the required IPMI options.
+ipmi_required_options = ['I', 'C', 'U', 'P', 'H']
+# The following dictionary maps the ipmitool option names (e.g. "I") to our
+# more descriptive names (e.g. "interface") for the required options.
+ipmi_option_name_map = {
+    'I': 'interface',
+    'C': 'cipher_suite',
+    'U': 'username',
+    'P': 'password',
+    'H': 'host',
+}
+
+save_stack = vs.var_stack('save_stack')
+
+
+def create_ipmi_ext_command_string(command, **options):
     r"""
-    Build the global IPMI_EXT_CMD variable.
+    Create and return an IPMI external command string which is fit to be run
+    from a bash command line.
 
-    If global variable IPMI_EXT_CMD already has a value, this keyword will
-    simply return without taking any action.
+    Example:
 
-    This keyword is designed for use by keywords which use the IPMI_EXT_CMD
-    variable (e.g. 'Run External IPMI Raw Command').  This keyword is
-    warranted because the ipmitool program may or may not accept the -U (i.e.
-    username) parameter depending on the version of code loaded on the BMC.
-    This keyword will determine whether the "-U" parameter should be used and
-    create IPMI_EXT_CMD accordingly.
+    ipmi_ext_cmd = create_ipmi_ext_command_string('power status')
 
-    Furthermore, this keyword will run the command to create the 'root' IPMI
-    username.
+    Result:
+    ipmitool -I lanplus -C 3 -P ******** -H x.x.x.x power status
+
+    Example:
+
+    ipmi_ext_cmd = create_ipmi_ext_command_string('power status', C='4')
+
+    Result:
+    ipmitool -I lanplus -C 4 -P ******** -H x.x.x.x power status
 
     Description of argument(s):
-    # quiet                         Indicates whether this keyword should run
-    #                               without any output to the console.
+    command                         The ipmitool command (e.g. 'power status').
+    options                         Any desired options that are understood by
+                                    ipmitool (see iptmitool's help text for a
+                                    complete list).  If the caller does NOT
+                                    provide any of several required options
+                                    (e.g. "P", i.e.  password), this function
+                                    will include them on the caller's behalf
+                                    using default values.
     """
 
-    ipmi_ext_cmd = BuiltIn().get_variable_value("${IPMI_EXT_CMD}", "")
-    if ipmi_ext_cmd != "":
-        return
+    new_options = collections.OrderedDict()
+    for option in ipmi_required_options:
+        if option in options:
+            # If the caller has specified this particular option, use it in
+            # preference to the default value.
+            new_options[option] = options[option]
+            # Delete the value from the caller's options.
+            del options[option]
+        else:
+            # The caller hasn't specified this required option so do it for
+            # them using the global value.
+            cmd_buf = 'value = ipmi_' + ipmi_option_name_map[option]
+            exec(cmd_buf)
+            new_options[option] = value
+    # Include the remainder of the caller's options in the new options
+    # dictionary.
+    for key, value in options.items():
+        new_options[key] = value
 
-    quiet = int(gp.get_var_value(quiet, 0))
-    openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
-    ipmi_username = BuiltIn().get_variable_value("${IPMI_USERNAME}", "root")
-    ipmi_password = BuiltIn().get_variable_value("${IPMI_PASSWORD}",
-                                                 "0penBmc")
-    ipmi_cipher_level = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}",
-                                                     "3")
+    return gc.create_command_string('ipmitool', command, new_options)
 
-    old_ipmi_ext_cmd = "ipmitool -I lanplus -C " + str(ipmi_cipher_level)\
-        + " -P " + ipmi_password
-    new_ipmi_ext_cmd = "ipmitool -I lanplus -C " + str(ipmi_cipher_level)\
-        + " -U " + ipmi_username + " -P " + ipmi_password
-    # Use a basic ipmitool command to help us determine whether the BMC will
-    # accept the -U parm.
-    ipmi_cmd = "power status"
-    ipmi_cmd_suffix = " -H " + openbmc_host + " " + ipmi_cmd
+
+def verify_ipmi_user_parm_accepted():
+    r"""
+    Deterimine whether the OBMC accepts the -U ipmitool option and adjust
+    the global ipmi_required_options accordingly.
+    """
+
+    # Assumption: "U" is in ipmi_required_options.
+
+    global ipmi_required_options
+    global save_stack
+
+    new_ipmi_ext_cmd = create_ipmi_ext_command_string('power status')
+
+    save_stack.push(ipmi_required_options)
+    # Remove the "U" option from ipmi_required_options to allow us to create a
+    # command string without the "U" option.
+    if 'U' in ipmi_required_options:
+        del ipmi_required_options[ipmi_required_options.index('U')]
+    old_ipmi_ext_cmd = create_ipmi_ext_command_string('power status')
+
     print_output = 0
-    cmd_buf = new_ipmi_ext_cmd + ipmi_cmd_suffix
-    new_rc, stdout = gc.shell_cmd(cmd_buf,
+    rc, stdout = gc.shell_cmd(new_ipmi_ext_cmd,
                                   print_output=print_output,
                                   show_err=0,
                                   ignore_err=1)
-    gp.qprint_varx("rc", new_rc, 1)
-    if new_rc == 0:
-        ipmi_ext_cmd = new_ipmi_ext_cmd
-        BuiltIn().set_global_variable("${IPMI_EXT_CMD}", ipmi_ext_cmd)
+    gp.qprint_var(rc, 1)
+    if rc == 0:
+        # The original ipmi_required_options containing the "U" options shall
+        # remain.
+        ipmi_required_options = save_stack.pop("ipmi_required_options")
         return
 
-    cmd_buf = old_ipmi_ext_cmd + ipmi_cmd_suffix
-    old_rc, stdout = gc.shell_cmd(cmd_buf,
+    rc, stdout = gc.shell_cmd(old_ipmi_ext_cmd,
                                   print_output=print_output,
                                   show_err=0,
                                   ignore_err=1)
-    gp.qprint_varx("rc", old_rc, 1)
-
-    if old_rc == 0:
-        ipmi_ext_cmd = old_ipmi_ext_cmd
-        BuiltIn().set_global_variable("${IPMI_EXT_CMD}", ipmi_ext_cmd)
+    gp.qprint_var(rc, 1)
+    if rc == 0:
+        # The "U" option has been removed from the ipmi_required_options
+        # global variable.
         return
 
-    message = "Unable to run ipmitool, (with or without the '-U' parm)."
+    message = "Unable to run ipmitool, (with or without the '-U' option)."
     BuiltIn().fail(message)
 
 
-build_ipmi_ext_cmd()
+def build_ipmi_ext_cmd(**options):
+    r"""
+    Build the global IPMI_EXT_CMD variable.
+
+    This keyword is designed for use by keywords which use the IPMI_EXT_CMD
+    variable (e.g. 'Run External IPMI Raw Command').
+
+    Description of argument(s):
+    options                         All options are passed directly to
+                                    create_ipmi_ext_command_string.  See its
+                                    prolog for details.
+    """
+
+    ipmi_ext_cmd = create_ipmi_ext_command_string('', **options)
+    BuiltIn().set_global_variable("${IPMI_EXT_CMD}", ipmi_ext_cmd)
+
+
+def ipmi_setup():
+    r"""
+    Perform all required setup for running iptmitool commands.
+    """
+
+    verify_ipmi_user_parm_accepted()
+    build_ipmi_ext_cmd()
+
+
+ipmi_setup()
