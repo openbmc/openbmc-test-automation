@@ -6,6 +6,7 @@ Define the var_stack class.
 
 import sys
 import collections
+import copy
 
 try:
     from robot.utils import DotDict
@@ -128,7 +129,7 @@ class var_stack:
         if var_name in self.__stack_dict:
             self.__stack_dict[var_name].append(var_value)
         else:
-            self.__stack_dict[var_name] = [var_value]
+            self.__stack_dict[var_name] = copy.deepcopy([var_value])
 
     def pop(self,
             var_name=""):
