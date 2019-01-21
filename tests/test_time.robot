@@ -290,6 +290,27 @@ Get BMC Time Using IPMI
     Should Not Be Empty  ${resp}
     [Return]  ${resp}
 
+
+Set Time Via REST
+    [Documentation]  Set time via REST.
+    [Arguments]  ${operation}  ${status}
+    # Description of argument(s):
+    # operation    Set BMC/Host time
+    # status       Expected status of set time operation
+
+    ${time_owner_url}=  Set Variable If
+    ...  '${operation}' == 'Set BMC Time'  ${TIME_MANAGER_URI}bmc
+    ...  '${operation}' == 'Set Host Time'  ${TIME_MANAGER_URI}host
+
+    ${valueDict}=  Create Dictionary  data=${SYSTEM_TIME_VALID_EPOCH}
+    ${resp}=  OpenBMC Put Request
+    ...  ${time_owner_url}/attr/Elapsed  data=${valueDict}
+    ${jsondata}=  to JSON  ${resp.content}
+    Run Keyword If  "${status}" == "ok"
+    ...  Should Not Be Equal As Strings  ${jsondata['message']}  403 Forbidden
+    Should Be Equal As Strings  ${jsondata['status']}  ${status}
+
+
 Set Time Owner
     [Arguments]  ${args}
     [Documentation]  Set time owner of the system via REST
@@ -369,20 +390,13 @@ Set Time Using REST
 
     ${setdate}=  Set Variable  ${SYSTEM_TIME_VALID_EPOCH}
 
-    ${time_owner_url}=  Set Variable If
-    ...  '${operation}' == 'Set BMC Time'  ${TIME_MANAGER_URI}bmc
-    ...  '${operation}' == 'Set Host Time'  ${TIME_MANAGER_URI}host
-
     ${start_time}=  Get Current Date
 
     ${old_bmc_time}=  Get BMC Time Using REST
     ${old_host_time}=  Get HOST Time Using REST
 
-    ${valueDict}=  Create Dictionary  data=${SYSTEM_TIME_VALID_EPOCH}
-    ${resp}=  OpenBMC Put Request
-    ...  ${time_owner_url}/attr/Elapsed  data=${valueDict}
-    ${jsondata}=  to JSON  ${resp.content}
-    Should Be Equal As Strings  ${jsondata['status']}  ${status}
+    Wait Until Keyword Succeeds  1 min  20 sec  Set Time Via REST
+    ...  ${operation}  ${status}
 
     ${new_bmc_time}=  Get BMC Time Using REST
     ${new_host_time}=  Get HOST Time Using REST
@@ -449,6 +463,7 @@ Convert epoch to date
     ${date}=  Convert Date  ${epoch_time_sec}
 
     [Return]  ${date}
+
 
 Post Test Case Execution
     [Documentation]  Do the post test teardown.
