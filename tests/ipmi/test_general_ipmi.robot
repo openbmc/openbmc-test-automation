@@ -11,6 +11,7 @@ Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 Library             ../../lib/gen_misc.py
 
+Test Setup          Log to Console  ${EMPTY}
 Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
@@ -48,8 +49,9 @@ Verify Supported Cipher List
     [Tags]  Verify_Supported_Cipher_List
 
     :FOR  ${cipher_level}  IN  @{valid_cipher_list}
-    \  ${status}=  Execute IPMI Command With Cipher  ${cipher_level}
-    \  Should Be Equal  ${status}  ${True}
+    \  ${status}  ${output}=  Run Keyword And Ignore Error
+    ...    Run External IPMI Standard Command  power status  C=${cipher_level}
+    \  Should Be Equal  ${status}  PASS  msg=${output}  values=False
 
 
 Verify Unsupported Cipher List
@@ -57,8 +59,10 @@ Verify Unsupported Cipher List
     [Tags]  Verify_Unsupported_Cipher_List
 
     :FOR  ${cipher_level}  IN  @{unsupported_cipher_list}
-    \  ${status}=  Execute IPMI Command With Cipher  ${cipher_level}
-    \  Should Be Equal  ${status}  ${False}
+    \  ${status}  ${output}=  Run Keyword And Ignore Error
+    ...  Run External IPMI Standard Command  power status  C=${cipher_level}
+    \  Should Be Equal  ${status}  FAIL  values=False
+    ...  msg=ipmitool execution with cipher suite value of ${cipher_level} should have failed.
 
 
 Verify Supported Cipher List Via Lan Print
@@ -891,15 +895,3 @@ Get Physical Network Interface Count
 
     [Return]  ${physical_interface_count}
 
-
-Execute IPMI Command With Cipher
-    [Documentation]  Execute IPMI command with a given cipher level value.
-    [Arguments]  ${cipher_level}
-
-    # Description of argument(s):
-    # cipher_level  IPMI chipher level value
-    #               (e.g. "1", "2", "3", "15", "16", "17").
-
-    ${status}=  Run Keyword And Return Status  Build IPMI Ext Cmd  ${cipher_level}
-
-    [Return]  ${status}
