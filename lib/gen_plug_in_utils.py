@@ -45,7 +45,7 @@ def return_plug_vars(general=True,
     Example excerpt of resulting dictionary:
 
     plug_var_dict:
-      [AUTOBOOT_BASE_TOOL_DIR_PATH]:  /fspmount/
+      [AUTOBOOT_BASE_TOOL_DIR_PATH]:  /tmp/
       [AUTOBOOT_BB_LEVEL]:            <blank>
       [AUTOBOOT_BOOT_FAIL]:           0
       ...
@@ -146,7 +146,7 @@ def sprint_plug_vars(headers=1, **kwargs):
     package_name>_ in upper case letters.).
 
     Example excerpt of output:
-    AUTOBOOT_BASE_TOOL_DIR_PATH=/fspmount/
+    AUTOBOOT_BASE_TOOL_DIR_PATH=/tmp/
     AUTOBOOT_BB_LEVEL=
     AUTOBOOT_BOOT_FAIL=0
     AUTOBOOT_BOOT_FAIL_THRESHOLD=1000000
@@ -385,14 +385,15 @@ def compose_plug_in_save_dir_path(plug_in_package_name=None):
 
     BASE_TOOL_DIR_PATH = \
         gm.add_trailing_slash(os.environ.get(PLUG_VAR_PREFIX
-                                             + "BASE_TOOL_DIR_PATH",
-                                             "/fspmount/"))
+                                             + "_BASE_TOOL_DIR_PATH",
+                                             "/tmp/"))
     NICKNAME = os.environ.get("AUTOBOOT_OPENBMC_NICKNAME", "")
     if NICKNAME == "":
         NICKNAME = os.environ["AUTOIPL_FSP1_NICKNAME"]
     MASTER_PID = os.environ[PLUG_VAR_PREFIX + "_MASTER_PID"]
-    return BASE_TOOL_DIR_PATH + os.environ["USER"] + "/" + NICKNAME + "/" +\
-        plug_in_package_name + "/" + MASTER_PID + "/"
+    gp.pvars(BASE_TOOL_DIR_PATH, NICKNAME, plug_in_package_name, MASTER_PID)
+    return BASE_TOOL_DIR_PATH + gm.username() + "/" + NICKNAME + "/" +\
+        plug_in_package_name + "/" + str(MASTER_PID) + "/"
 
 
 def create_plug_in_save_dir(plug_in_package_name=None):
