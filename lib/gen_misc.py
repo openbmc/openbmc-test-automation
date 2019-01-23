@@ -11,6 +11,7 @@ import os
 import collections
 import json
 import time
+import inspect
 try:
     import ConfigParser
 except ImportError:
@@ -580,3 +581,34 @@ def file_date_time_stamp():
     """
 
     return time.strftime("%y%m%d.%H%M%S", time.localtime(time.time()))
+
+
+def get_function_stack():
+    r"""
+    Return a list of all the function names currently in the call stack.
+
+    This function's name will be at offset 0.  This function's caller's name
+    will be at offset 1 and so on.
+    """
+
+    return [str(stack_frame[3]) for stack_frame in inspect.stack()]
+
+
+def username():
+    r"""
+    Return the username for the current process.
+    """
+
+    username = os.environ.get("USER", "")
+    if username != "":
+        return username
+    user_num = str(os.geteuid())
+    try:
+        username = os.getlogin()
+    except OSError:
+        if user_num == "0":
+            username = "root"
+        else:
+            username = "?"
+
+    return username
