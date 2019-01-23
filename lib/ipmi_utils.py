@@ -12,6 +12,7 @@ import gen_robot_keyword as grk
 import gen_robot_utils as gru
 import bmc_ssh_utils as bsu
 import var_funcs as vf
+import ipmi_client as ic
 import tempfile
 gru.my_import_resource("ipmi_client.robot")
 from robot.libraries.BuiltIn import BuiltIn
@@ -82,7 +83,8 @@ def set_sol_setting(setting_name, setting_value):
 def execute_ipmi_cmd(cmd_string,
                      ipmi_cmd_type='inband',
                      print_output=1,
-                     ignore_err=0):
+                     ignore_err=0,
+                     **options):
     r"""
     Run the given command string as an IPMI command and return the stdout,
     stderr and the return code.
@@ -98,6 +100,9 @@ def execute_ipmi_cmd(cmd_string,
                                     encountered by running the command
                                     string will not be raised as a python
                                     exception.
+    options                         These are passed directly to the
+                                    create_ipmi_ext_command_string function.
+                                    See that function's prolog for details.
     """
 
     if ipmi_cmd_type == 'inband':
@@ -108,14 +113,7 @@ def execute_ipmi_cmd(cmd_string,
                                       ignore_err=ignore_err)
 
     if ipmi_cmd_type == 'external':
-        cmd_buf = BuiltIn().get_variable_value("${IPMI_EXT_CMD}")
-        IPMI_USER_OPTIONS =\
-            BuiltIn().get_variable_value("${IPMI_USER_OPTIONS}")
-        if IPMI_USER_OPTIONS != "":
-            cmd_buf += " " + IPMI_USER_OPTIONS
-        cmd_buf += " " + BuiltIn().get_variable_value("${HOST}")
-        cmd_buf += " " + BuiltIn().get_variable_value("${OPENBMC_HOST}")
-        cmd_buf += " " + cmd_string
+        cmd_buf = ic.create_ipmi_ext_command_string(cmd_string, **options)
         rc, stdout, stderr = gc.shell_cmd(cmd_buf,
                                           print_output=print_output,
                                           ignore_err=ignore_err,
