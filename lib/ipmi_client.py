@@ -71,8 +71,8 @@ def create_ipmi_ext_command_string(command, **options):
         else:
             # The caller hasn't specified this required option so specify it
             # for them using the global value.
-            cmd_buf = 'value = ipmi_' + ipmi_option_name_map[option]
-            exec(cmd_buf)
+            var_name = 'ipmi_' + ipmi_option_name_map[option]
+            value = eval(var_name)
             new_options[option] = value
     # Include the remainder of the caller's options in the new options
     # dictionary.
