@@ -46,6 +46,9 @@ Set Valid System Time
     Set Time Owner  ${HOST_OWNER}
     Set Time Mode  ${MANUAL_MODE}
 
+    # Added delay for NTP mode to get disabled fully
+    Sleep  30s
+
     ${resp}=  Run IPMI Standard Command  sel time set "${SYSTEM_TIME_VALID}"
     ${setdate}=  Convert Date  ${SYSTEM_TIME_VALID}
     ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=yes
