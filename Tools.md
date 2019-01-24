@@ -1,5 +1,13 @@
 ## Tools used in OpenBMC Test Automation ##
 
+## IPMItool considerations: ##
+
+IPMItool version 1.8.18 or later.
+```
+    $ ipmitool -V
+    ipmitool version 1.8.18
+```
+
 ## Hardware Test Executive (HTX): ##
 
 HTX is a suite of test tools for stressing system hardware. It is routinely
