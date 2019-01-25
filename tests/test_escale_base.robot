@@ -125,7 +125,8 @@ Test Power Limit
     Set DCMI Power Limit And Verify  ${good_power}
 
     # Attempt set power limit out of range.
-    ${data}=  Create Dictionary  data=${outside_bounds_power}
+    ${int_power_limit}=  Convert To Integer  ${outside_bounds_power}
+    ${data}=  Create Dictionary  data=${int_power_limit}
     Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCap  data=${data}
 
 
