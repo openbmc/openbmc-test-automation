@@ -1,6 +1,6 @@
 robotframework
 requests
 robotframework-requests>=0.3.9
-paramiko==2.0.2
+paramiko==2.4.2
 robotframework-sshlibrary
 robotframework-scplibrary
