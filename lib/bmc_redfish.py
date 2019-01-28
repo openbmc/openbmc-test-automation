@@ -73,11 +73,6 @@ class bmc_redfish(object):
         """
         self._rest_response_ = self._robj_.get('/redfish/v1/' + resource_path,
                                                *args, **kwargs)
-        if self._rest_response_.status != 200:
-            raise HTTPSBadRequestError("GET Session location: %s, "
-                                       "return code: %d"
-                                       % (self._session_location_,
-                                          self._rest_response_.status))
         return self._rest_response_
 
     def post(self, resource_path, *args, **kwargs):
@@ -92,11 +87,6 @@ class bmc_redfish(object):
         """
         self._rest_response_ = self._robj_.post('/redfish/v1/' + resource_path,
                                                 *args, **kwargs)
-        if self._rest_response_.status != 200:
-            raise HTTPSBadRequestError("POST Session location: %s, "
-                                       "return code: %d"
-                                       % (self._session_location_,
-                                          self._rest_response_.status))
         return self._rest_response_
 
     def patch(self, resource_path, *args, **kwargs):
@@ -110,11 +100,6 @@ class bmc_redfish(object):
         """
         self._rest_response_ = self._robj_.patch('/redfish/v1/' + resource_path,
                                                  *args, **kwargs)
-        if self._rest_response_.status != 200:
-            raise HTTPSBadRequestError("PATCH Session location: %s, "
-                                       "return code: %d"
-                                       % (self._session_location_,
-                                          self._rest_response_.status))
         return self._rest_response_
 
     def put(self, resource_path, actions, attr_data):
@@ -128,11 +113,6 @@ class bmc_redfish(object):
         """
         self._rest_response_ = self._robj_.put('/redfish/v1/' + resource_path,
                                                *args, **kwargs)
-        if self._rest_response_.status != 200:
-            raise HTTPSBadRequestError("PUT Session location: %s, "
-                                       "return code: %d"
-                                       % (self._session_location_,
-                                          self._rest_response_.status))
         return self._rest_response_
 
     def delete(self, resource_path):
@@ -144,11 +124,6 @@ class bmc_redfish(object):
                        (e.g. "/redfish/v1/SessionService/Sessions/8d1a9wiiNL").
         """
         self._rest_response_ = self._robj_.delete(resource_path)
-        if self._rest_response_.status != 200:
-            raise HTTPSBadRequestError("Session location: %s, "
-                                       "return code: %d"
-                                       % (self._session_location_,
-                                          self._rest_response_.status))
         return self._rest_response_
 
     def logout(self):
@@ -166,6 +141,8 @@ class bmc_redfish(object):
         """
 
         self._rest_response_ = self._robj_.get('/redfish/v1/' + resource_path)
+        if self._rest_response_.status != 200:
+            return self._rest_response_
 
         global resource_list
         resource_list = []
@@ -181,8 +158,7 @@ class bmc_redfish(object):
             self.walk_nested_dict(self._rest_response_.dict)
 
         resource_list.sort()
-        return json.dumps(resource_list, sort_keys=True,
-                          indent=4, separators=(',', ': '))
+        return resource_list
 
     def enumerate_request(self, resource_path):
         r"""
@@ -193,6 +169,8 @@ class bmc_redfish(object):
         """
 
         self._rest_response_ = self.list_request(resource_path)
+        if self._rest_response_.status != 200:
+            return self._rest_response_
 
         resource_dict = {}
         for resource in json.loads(self._rest_response_):

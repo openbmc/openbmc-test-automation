@@ -1,0 +1,78 @@
+*** Settings ***
+Resource         ../../lib/resource.txt
+Resource         ../../lib/bmc_redfish_resource.robot
+
+Suite Teardown   bmcweb_redfish.Logout
+
+
+*** Test Cases ***
+
+Test Login And Logout BMCweb
+    [Documentation]  Login to BMCweb and then logout.
+    [Tags]  Test_Login_And_Logout_BMCweb
+
+    bmcweb_redfish.Login
+    bmcweb_redfish.Logout
+
+
+Test BMCweb Hypermedia Without Login
+    [Documentation]  GET /redfish/v1 without login.
+    [Tags]  Test_BMCweb_Hypermedia_Without_Login
+
+    bmcweb_redfish.Logout
+    ${resp}=  bmcweb_redfish.Get  ${EMPTY}
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+
+
+Test GET SessionService Resource With Login
+    [Documentation]  Login to BMCweb and get /redfish/v1/SessionService.
+    [Tags]  Test_GET_SessionService_Resource_With_Login
+
+    bmcweb_redfish.Login
+    ${resp}=  bmcweb_redfish.Get  SessionService
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+
+
+Test GET SessionService Without Login
+    [Documentation]  Get /redfish/v1/SessionService without login
+    [Tags]  Test_GET_SessionService_Without_Login
+
+    bmcweb_redfish.Logout
+    ${resp}=  bmcweb_redfish.Get  SessionService
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_UNAUTHORIZED}
+
+
+Test Login Using Invalid Token
+    [Documentation]  Login to BMCweb with invalid token.
+    [Tags]  Test_Login_Using_Invalid_Token
+
+    bmcweb_redfish.Logout
+
+    Create Session  openbmc  ${AUTH_URI}
+
+    # Example: "X-Auth-Token: 3la1JUf1vY4yN2dNOwun"
+    ${headers} =  Create Dictionary  Content-Type=application/json
+    ...  X-Auth-Token=deadbeef
+
+    ${resp}=  Get Request
+    ...  openbmc  /redfish/v1/SessionService/Sessions  headers=${headers}
+
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
+
+
+Test Delete Session Using Valid login
+    [Documentation]  Delete a session using valid login.
+    [Tags]  Test_Delete_Session_Using_Valid_Login
+
+    bmcweb_redfish.Login
+
+    # Example o/p:
+    # [{'@odata.id': '/redfish/v1/SessionService/Sessions/bOol3WlCI8'},
+    #  {'@odata.id': '/redfish/v1/SessionService/Sessions/Yu3xFqjZr1'}]
+    ${resp_list}=  bmcweb_redfish.Get  SessionService/Sessions
+
+    bmcweb_redfish.Delete  ${resp_list.dict["Members"][0]["@odata.id"]}
+
+    ${resp}=  bmcweb_redfish.Get  SessionService/Sessions
+    Should Not Contain  ${resp.dict["Members"]}  ${resp_list.dict["Members"][0]["@odata.id"]}
+
