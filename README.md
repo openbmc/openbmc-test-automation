@@ -46,6 +46,12 @@ Install the packages and it's dependencies via `pip`
     $ pip install -U robotframework-httplibrary
     ```
 
+    Python redfish library packages:
+    For more detailed intstructions see [python-redfish-library](https://github.com/DMTF/python-redfish-library)
+    ```
+    $ pip install redfish
+    ```
+
     SSH and SCP base packages:
     For more detailed installation instructions see [robotframework-sshlibrary](https://pypi.python.org/pypi/robotframework-sshlibrary)
     ```
