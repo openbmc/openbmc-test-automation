@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation  Network stack stress tests using "nping" tool.
 
-Resource  ../lib/resource.txt
+Resource  ../lib/resource.robot
 
 Library  OperatingSystem
 Library  String

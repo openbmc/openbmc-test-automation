@@ -4,7 +4,7 @@ Documentation     Test the functions of system LEDs.
 
 Resource          ../lib/rest_client.robot
 Resource          ../lib/state_manager.robot
-Resource          ../lib/resource.txt
+Resource          ../lib/resource.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/utils.robot
 

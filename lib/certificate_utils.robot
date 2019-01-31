@@ -3,7 +3,7 @@ Documentation  Certificate utilities keywords.
 
 Library        OperatingSystem
 Resource       rest_client.robot
-Resource       resource.txt
+Resource       resource.robot
 
 
 *** Keywords ***

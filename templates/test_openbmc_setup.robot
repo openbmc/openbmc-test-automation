@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation    Test suite to verify if the Robot setup is ready for use.
 
-Resource         ../lib/resource.txt
+Resource         ../lib/resource.robot
 Resource         ../lib/rest_client.robot
 Resource         ../lib/connection_client.robot
 Resource         ../lib/ipmi_client.robot

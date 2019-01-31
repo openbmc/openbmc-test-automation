@@ -40,7 +40,7 @@ Documentation  Make a general hardware stress in a partition with all the
 Library         SSHLibrary
 Library         String
 Library         ../lib/bmc_ssh_utils.py
-Resource        ../lib/resource.txt
+Resource        ../lib/resource.robot
 Resource        ../syslib/utils_os.robot
 Resource        ../lib/bmc_network_utils.robot
 

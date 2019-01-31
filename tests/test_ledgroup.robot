@@ -3,7 +3,7 @@
 Documentation  Test LED groups in OpenBMC.
 
 Resource       ../lib/rest_client.robot
-Resource       ../lib/resource.txt
+Resource       ../lib/resource.robot
 Resource       ../lib/openbmc_ffdc.robot
 
 Suite Setup    Setup The Suite

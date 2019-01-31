@@ -3,7 +3,7 @@ Documentation  This testing require special setup where SNMP trapd is
 ...            configured and installed. For download, installation and
 ...            configuration refer http://www.net-snmp.org/.
 
-Resource  ../lib/snmp/resource.txt
+Resource  ../lib/snmp/resource.robot
 Resource  ../lib/snmp/snmp_utils.robot
 Resource  ../lib/openbmc_ffdc.robot
 

@@ -2,7 +2,7 @@
 
 Documentation  Utilities for Robot keywords that use REST.
 
-Resource                ../lib/resource.txt
+Resource                ../lib/resource.robot
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot

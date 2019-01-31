@@ -165,7 +165,7 @@ CA_CERTIFICATE_URI = OPENBMC_BASE_URI + 'certs/authority/ldap'
 '''
   QEMU HTTPS variable:
 
-  By default lib/resource.txt AUTH URI construct is as
+  By default lib/resource.robot AUTH URI construct is as
   ${AUTH_URI}   https://${OPENBMC_HOST}${AUTH_SUFFIX}
   ${AUTH_SUFFIX} is populated here by default EMPTY else
   the port from the OS environment

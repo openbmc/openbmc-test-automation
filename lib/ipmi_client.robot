@@ -2,7 +2,7 @@
 Documentation   This module is for IPMI client for copying ipmitool to
 ...             openbmc box and execute ipmitool IPMI standard
 ...             command. IPMI raw command will use dbus-send command
-Resource        ../lib/resource.txt
+Resource        ../lib/resource.robot
 Resource        ../lib/connection_client.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/state_manager.robot

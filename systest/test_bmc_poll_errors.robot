@@ -3,7 +3,7 @@ Documentation     BMC error polling test to check errors every 10 seconds.
 
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
-Resource          ../lib/resource.txt
+Resource          ../lib/resource.robot
 Resource          ../lib/boot_utils.robot
 
 Suite Setup      Suite Setup Execution
