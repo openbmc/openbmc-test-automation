@@ -5,7 +5,7 @@ Resource                ../lib/ipmi_client.robot
 Resource                ../lib/utils.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/oem/ibm/serial_console_client.robot
-Resource                ../lib/resource.txt
+Resource                ../lib/resource.robot
 Library                 OperatingSystem
 
 Suite Setup         Open Connection And Log In

@@ -2,7 +2,7 @@
 Documentation  Verify Auto Restart policy for set of mission critical
 ...            services needed for functioning on BMC.
 
-Resource         ../lib/resource.txt
+Resource         ../lib/resource.robot
 Resource         ../lib/connection_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/utils.robot

@@ -3,7 +3,7 @@ Documentation       This suite tests checkstop operations through HOST.
 Resource            ../../lib/utils.robot
 Resource            ../../lib/openbmc_ffdc.robot
 Resource            ../../lib/ras/host_utils.robot
-Resource            ../../lib/resource.txt
+Resource            ../../lib/resource.robot
 Resource            ../../lib/state_manager.robot
 Resource            ../../lib/openbmc_ffdc_methods.robot
 Resource            ../../lib/boot_utils.robot

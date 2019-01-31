@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation  Remote syslog utilities keywords.
 
-Resource         ../lib/resource.txt
+Resource         ../lib/resource.robot
 Resource         ../lib/rest_client.robot
 Resource         ../lib/utils.robot
 

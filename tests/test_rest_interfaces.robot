@@ -3,7 +3,7 @@ Documentation     Verify REST services Get/Put/Post/Delete.
 
 Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
-Resource          ../lib/resource.txt
+Resource          ../lib/resource.robot
 Resource          ../lib/utils.robot
 Library           Collections
 

@@ -2,7 +2,7 @@
 
 Documentation  Utilities keywords for BMC redfish.
 
-Resource       resource.txt
+Resource       resource.robot
 Resource       redfish_client.robot
 
 *** Keywords ***

@@ -6,7 +6,7 @@ Library  Selenium2Library  120  120
 Library  Telnet  30 Seconds
 Library  Screenshot
 
-Resource  resource.txt
+Resource  resource.robot
 
 *** Keywords ***
 
