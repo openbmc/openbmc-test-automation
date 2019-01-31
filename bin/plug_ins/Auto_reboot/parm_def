@@ -1,0 +1,2 @@
+# Indicates whether auto_boot should be disabled.
+disable=boolean
