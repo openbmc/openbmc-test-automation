@@ -67,12 +67,11 @@ class bmc_redfish(object):
         Perform a GET request and return response.
 
         Description of argument(s):
-        resource_path    URI resource relative path (e.g. "Systems/1").
+        resource_path    URI resource absolute path (e.g. "/redfish/v1/Systems/1").
         args/kwargs      These are passed directly to the corresponding
                          RestClientBase method.
         """
-        self._rest_response_ = self._robj_.get('/redfish/v1/' + resource_path,
-                                               *args, **kwargs)
+        self._rest_response_ = self._robj_.get(resource_path, *args, **kwargs)
         return self._rest_response_
 
     def post(self, resource_path, *args, **kwargs):
