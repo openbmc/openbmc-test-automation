@@ -1,7 +1,7 @@
 *** Settings ***
 
-Resource    ../xcat/resource.txt
-Resource    ../../lib/resource.txt
+Resource    ../xcat/resource.robot
+Resource    ../../lib/resource.robot
 
 Library     SSHLibrary
 Library     OperatingSystem

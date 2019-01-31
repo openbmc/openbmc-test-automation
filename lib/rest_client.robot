@@ -3,7 +3,7 @@ Library           Collections
 Library           String
 Library           RequestsLibrary.RequestsKeywords
 Library           OperatingSystem
-Resource          resource.txt
+Resource          resource.robot
 Library           disable_warning_urllib.py
 Library           utils.py
 Library           gen_misc.py

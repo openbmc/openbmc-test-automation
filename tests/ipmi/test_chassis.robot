@@ -6,7 +6,7 @@ Resource               ../../lib/ipmi_client.robot
 Resource               ../../lib/openbmc_ffdc.robot
 Resource               ../../lib/utils.robot
 Resource               ../../lib/boot_utils.robot
-Resource               ../../lib/resource.txt
+Resource               ../../lib/resource.robot
 Resource               ../../lib/state_manager.robot
 
 Test Teardown          Test Teardown Execution

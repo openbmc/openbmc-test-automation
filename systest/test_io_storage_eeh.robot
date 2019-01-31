@@ -3,7 +3,7 @@ Documentation  Verify EEH recovery on the integrated storage controller.
 Library     SSHLibrary
 Library     String
 Library     ../lib/bmc_ssh_utils.py
-Resource    ../lib/resource.txt
+Resource    ../lib/resource.robot
 Resource    ../syslib/utils_os.robot
 
 # Test Parameters:

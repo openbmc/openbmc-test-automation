@@ -8,7 +8,7 @@ Resource           ../extended/obmc_boot_test_resource.robot
 Resource           ../lib/utils.robot
 Resource           ../lib/state_manager.robot
 Resource           ../lib/rest_client.robot
-Resource           resource.txt
+Resource           resource.robot
 Library            OperatingSystem
 Library            DateTime
 

@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   Module for testing BMC via XCAT.
 
-Resource        ../lib/xcat/resource.txt
+Resource        ../lib/xcat/resource.robot
 Resource        ../lib/xcat/xcat_utils.robot
 
 Library         OperatingSystem

@@ -6,7 +6,7 @@ Documentation   OEM IPMI in-band BMC authentication reset.
 # - Delete the LDAP configuration if there was one.
 # - Reset the root password back to the default one.
 
-Resource        ../lib/resource.txt
+Resource        ../lib/resource.robot
 Resource        ../lib/ipmi_client.robot
 Resource        ../lib/boot_utils.robot
 Library         ../lib/ipmi_utils.py

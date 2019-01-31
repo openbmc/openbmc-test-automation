@@ -3,7 +3,7 @@ Documentation     This testsuite is for testing SSL connection to OpenBMC.
 Suite Teardown    Delete All Sessions
 
 Resource          ../../lib/rest_client.robot
-Resource          ../../lib/resource.txt
+Resource          ../../lib/resource.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Test Teardown     FFDC On Test Case Fail
 

@@ -38,7 +38,7 @@ Library                 ../../lib/openbmctool_utils.py
 Library                 ../../lib/gen_misc.py
 Library                 ../../lib/gen_robot_valid.py
 Resource                ../../syslib/utils_os.robot
-Resource                ../../lib/resource.txt
+Resource                ../../lib/resource.robot
 
 
 Suite Setup             Suite Setup Execution

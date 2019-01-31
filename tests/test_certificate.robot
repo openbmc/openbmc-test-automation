@@ -3,7 +3,7 @@
 Documentation  Test certificate in OpenBMC.
 
 Resource       ../lib/rest_client.robot
-Resource       ../lib/resource.txt
+Resource       ../lib/resource.robot
 Resource       ../lib/openbmc_ffdc.robot
 Resource       ../lib/certificate_utils.robot
 

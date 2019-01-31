@@ -4,7 +4,7 @@ Documentation          This suite tests HOST watchdog timer in Open BMC.
 Resource               ../lib/rest_client.robot
 Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/utils.robot
-Resource               ../lib/resource.txt
+Resource               ../lib/resource.robot
 Resource               ../lib/boot_utils.robot
 Resource               ../lib/state_manager.robot
 

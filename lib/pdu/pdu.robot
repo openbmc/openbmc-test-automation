@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation           Generic Protocol Distribution Unit (PDU) library
 
-Resource        ../../lib/resource.txt
+Resource        ../../lib/resource.robot
 
 *** Keywords ***
 Validate Prereq

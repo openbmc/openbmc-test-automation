@@ -4,7 +4,7 @@ Documentation      Utility keywords for FFDC
 Library            String
 Library            DateTime
 Library            openbmc_ffdc_list.py
-Resource           resource.txt
+Resource           resource.robot
 Resource           connection_client.robot
 Resource           utils.robot
 
