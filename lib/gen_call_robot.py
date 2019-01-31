@@ -50,7 +50,7 @@ def init_robot_out_parms(extra_prefix=""):
         os.environ.get("TMP_ROBOT_DIR_PATH",
                        os.environ.get("STATUS_DIR_PATH",
                                       os.environ.get("HOME", ".")
-                                      + "/autoipl/status"))
+                                      + "/status"))
     outputdir = gm.add_trailing_slash(outputdir)
     seconds = time.time()
     loc_time = time.localtime(seconds)
@@ -259,7 +259,7 @@ def create_robot_cmd_string(robot_file_path, *parms):
 
     Would return a string something like this.
     robot -v OPENBMC_HOST:beye6 -v quiet:0 -v test_mode:1 -v debug:1
-    --outputdir=/gsa/ausgsa/projects/a/autoipl/status
+    --outputdir=/gsa/ausgsa/projects/a/status
     --output=beye6.OS_Console.output.xml --log=beye6.OS_Console.log.html
     --report=beye6.OS_Console.report.html tools/start_sol_console.robot
     """
@@ -370,7 +370,7 @@ def process_robot_output_files(robot_cmd_buf=None,
     # to FFDC cleanup.
     target_dir_path = os.environ.get("FFDC_DIR_PATH",
                                      os.environ.get("HOME", ".")
-                                     + "/autoipl/ffdc")
+                                     + "/ffdc")
     target_dir_path = gm.add_trailing_slash(target_dir_path)
 
     targ_file_list = [re.sub(".*/", target_dir_path, x)

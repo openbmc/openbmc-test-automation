@@ -238,7 +238,7 @@ def run_pgm(plug_in_dir_path,
         status_dir_path =\
             add_trailing_slash(os.environ.get("STATUS_DIR_PATH",
                                               os.environ['HOME']
-                                              + "/autoipl/status/"))
+                                              + "/status/"))
         status_file_name = autoscript_prefix + "." + file_date_time_stamp() \
             + ".status"
         autoscript_subcmd = "autoscript --status_dir_path=" + status_dir_path\
