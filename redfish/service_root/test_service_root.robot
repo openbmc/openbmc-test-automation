@@ -2,9 +2,6 @@
 Resource         ../../lib/resource.txt
 Resource         ../../lib/bmc_redfish_resource.robot
 
-Suite Teardown   redfish.Logout
-
-
 *** Test Cases ***
 
 Login And Logout BMCweb
@@ -16,12 +13,14 @@ Login And Logout BMCweb
 
 
 GET BMCweb Hypermedia Without Login
-    [Documentation]  GET /redfish/v1 without login.
+    [Documentation]  GET hypermedia URL without login.
     [Tags]  GET_BMCweb_Hypermedia_Without_Login
+    [Template]  GET And Verify Redfish Response
 
-    redfish.Logout
-    ${resp}=  redfish.Get  ${EMPTY}
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    # Expect status      Resource URL Path
+    ${HTTP_OK}           /
+    ${HTTP_OK}           /redfish
+    ${HTTP_OK}           /redfish/v1
 
 
 GET SessionService Resource With Login
@@ -29,7 +28,7 @@ GET SessionService Resource With Login
     [Tags]  GET_SessionService_Resource_With_Login
 
     redfish.Login
-    ${resp}=  redfish.Get  SessionService
+    ${resp}=  redfish.Get  /redfish/v1/SessionService
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
 
 
@@ -38,7 +37,7 @@ GET SessionService Without Login
     [Tags]  GET_SessionService_Without_Login
 
     redfish.Logout
-    ${resp}=  redfish.Get  SessionService
+    ${resp}=  redfish.Get  /redfish/v1/SessionService
     Should Be Equal As Strings  ${resp.status}  ${HTTP_UNAUTHORIZED}
 
 
@@ -69,10 +68,24 @@ Delete Session Using Valid login
     # Example o/p:
     # [{'@odata.id': '/redfish/v1/SessionService/Sessions/bOol3WlCI8'},
     #  {'@odata.id': '/redfish/v1/SessionService/Sessions/Yu3xFqjZr1'}]
-    ${resp_list}=  redfish.Get  SessionService/Sessions
+    ${resp_list}=  redfish.Get  /redfish/v1/SessionService/Sessions
 
     redfish.Delete  ${resp_list.dict["Members"][0]["@odata.id"]}
 
-    ${resp}=  redfish.Get  SessionService/Sessions
+    ${resp}=  redfish.Get  /redfish/v1/SessionService/Sessions
     Should Not Contain  ${resp.dict["Members"]}  ${resp_list.dict["Members"][0]["@odata.id"]}
+    redfish.Logout
 
+
+*** Keywords ***
+
+GET And Verify Redfish Response
+    [Documentation]  GET given resource and verfiy response.
+    [Arguments]  ${expected_response_code}  ${resource_path}
+
+    # Description of arguments:
+    # expected_response_code   Expected REST status codes.
+    # resource_path            Redfish resource URL path.
+
+    ${resp}=  redfish.Get  ${resource_path}
+    Should Be Equal As Strings  ${resp.status}  ${expected_response_code}
