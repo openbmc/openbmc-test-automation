@@ -213,6 +213,8 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
 
     if proc_plug_pkg_rc != 0:
         hex = 1
+        if quiet:
+            os.system("cat " + temp_file_path + " >&2")
         if grep_rc != 0:
             gp.print_varx("grep_rc", grep_rc, hex)
         gp.print_varx("proc_plug_pkg_rc", proc_plug_pkg_rc, hex)
