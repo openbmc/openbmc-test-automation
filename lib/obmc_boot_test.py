@@ -417,6 +417,10 @@ def validate_parms():
     grv.rvalid_value("openbmc_host")
     grv.rvalid_value("openbmc_username")
     grv.rvalid_value("openbmc_password")
+    grv.rvalid_value("rest_username")
+    grv.rvalid_value("rest_password")
+    grv.rvalid_value("ipmi_username")
+    grv.rvalid_value("ipmi_password")
     if os_host != "":
         grv.rvalid_value("os_username")
         grv.rvalid_value("os_password")
@@ -677,7 +681,8 @@ def print_defect_report(ffdc_file_list):
         gp.qprintn(more_header_info)
     gp.qpvars(host_name, host_ip, openbmc_nickname, openbmc_host,
               openbmc_host_name, openbmc_ip, openbmc_username,
-              openbmc_password, os_host, os_host_name, os_ip, os_username,
+              openbmc_password, rest_username, rest_password, ipmi_username,
+              ipmi_password, os_host, os_host_name, os_ip, os_username,
               os_password, pdu_host, pdu_host_name, pdu_ip, pdu_username,
               pdu_password, pdu_slot_no, openbmc_serial_host,
               openbmc_serial_host_name, openbmc_serial_ip, openbmc_serial_port)
