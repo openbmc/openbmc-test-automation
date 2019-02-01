@@ -52,7 +52,7 @@ class bmc_redfish(object):
     def __exit__(self, exception_type, exception_value, traceback):
         self._robj_.logout()
 
-    def login(self, *args, **kwargs):
+    def login(self, username=None, password=None, *args, **kwargs):
         r"""
         Call the corresponding RestClientBase method and return the result.
 
@@ -61,6 +61,10 @@ class bmc_redfish(object):
                         RestClientBase method.
         """
         self._robj_.__init__(self._base_url_, self._username_, self._password_)
+        if username:
+            self._robj_.set_username(username)
+        if password:
+            self._robj_.set_password(password)
         self._robj_.login(auth=redfish.AuthMethod.SESSION)
 
     def get(self, resource_path, *args, **kwargs):
