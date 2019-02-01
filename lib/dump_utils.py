@@ -49,8 +49,9 @@ def get_dump_dict(quiet=None):
 
     quiet = int(gp.get_var_value(quiet, 1))
     cmd_buf = "dump_dir_path=" + var.DUMP_DIR_PATH + " ; " \
-              + "for dump_id in $(ls ${dump_dir_path} | sort -n) ; " \
-              + "do echo -n $dump_id: ; ls ${dump_dir_path}${dump_id}/* ; done"
+              + "for dump_id in $(ls ${dump_dir_path} | sort -n) ; do " \
+              + "file_path=$(ls ${dump_dir_path}${dump_id}/* 2>/dev/null)" \
+              + " || continue ; echo ${dump_id}:${file_path} ; done"
     output, stderr, rc = bsu.bmc_execute_command(cmd_buf, quiet=quiet)
 
     return vf.key_value_outbuf_to_dict(output)
