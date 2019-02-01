@@ -7,6 +7,7 @@ Refer: https://github.com/DMTF/python-redfish-library
 
 import redfish
 import json
+from robot.libraries.BuiltIn import BuiltIn
 
 
 class HTTPSBadRequestError(Exception):
@@ -140,12 +141,15 @@ class bmc_redfish(object):
         resource_path    URI resource relative path (e.g. "Systems/1").
         """
 
-        self._rest_response_ = self._robj_.get('/redfish/v1/' + resource_path)
-        if self._rest_response_.status != 200:
-            return self._rest_response_
-
         global resource_list
         resource_list = []
+
+        self._rest_response_ = self._robj_.get('/redfish/v1/' + resource_path)
+
+        # Return empty list.
+        if self._rest_response_.status != 200:
+            return resource_list
+
         self.walk_nested_dict(self._rest_response_.dict)
 
         if not resource_list:
@@ -168,12 +172,15 @@ class bmc_redfish(object):
         resource_path    URI resource relative path (e.g. "Systems/1").
         """
 
-        self._rest_response_ = self.list_request(resource_path)
-        if self._rest_response_.status != 200:
-            return self._rest_response_
+        url_list = self.list_request(resource_path)
 
         resource_dict = {}
-        for resource in json.loads(self._rest_response_):
+
+        # Return empty dict.
+        if not url_list:
+            return resource_dict
+
+        for resource in url_list:
             self._rest_response_ = self._robj_.get(resource)
             if self._rest_response_.status != 200:
                 continue
