@@ -37,14 +37,6 @@ class bmc_redfish(object):
         self._username_ = username
         self._password_ = password
         self._default_prefix_ = "/redfish/v1"
-        self._robj_ = \
-            redfish.redfish_client(base_url=self._base_url_,
-                                   username=self._username_,
-                                   password=self._password_,
-                                   default_prefix=self._default_prefix_,
-                                   *args, **kwargs)
-        self._robj_.login(auth=redfish.AuthMethod.SESSION)
-        self._session_location_ = self._robj_.get_session_location()
 
     def __enter__(self):
         return self
@@ -60,8 +52,20 @@ class bmc_redfish(object):
         args/kwargs     These are passed directly to the corresponding
                         RestClientBase method.
         """
-        self._robj_.__init__(self._base_url_, self._username_, self._password_)
+
+        for arg in args:
+            hostname = self._base_url_.strip("https://")
+            # Class object constructor reinitialized.
+            self.__init__(hostname=hostname,
+                          username=arg['username'],
+                          password=arg['password'])
+
+        self._robj_ = redfish.redfish_client(base_url=self._base_url_,
+                                             username=self._username_,
+                                             password=self._password_,
+                                             default_prefix=self._default_prefix_)
         self._robj_.login(auth=redfish.AuthMethod.SESSION)
+        self._session_location_ = self._robj_.get_session_location()
 
     def get(self, resource_path, *args, **kwargs):
         r"""
