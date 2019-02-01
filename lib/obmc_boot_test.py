@@ -10,6 +10,7 @@ import time
 import glob
 import random
 import re
+import signal
 try:
     import cPickle as pickle
 except ImportError:
@@ -340,6 +341,35 @@ def pre_boot_plug_in_setup():
     ffdc_prefix = openbmc_nickname + "." + time_string
 
 
+def default_sigusr1(signal_number=0,
+                    frame=None):
+    r"""
+    Handle SIGUSR1 by doing nothing.
+
+    This function assists in debugging SIGUSR1 processing by printing messages
+    to stdout and to the log.html file.
+
+    Description of argument(s):
+    signal_number  The signal number (should always be 10 for SIGUSR1).
+    frame          The frame data.
+    """
+
+    gp.printn()
+    gp.print_executing()
+    gp.lprint_executing()
+
+
+def set_default_siguser1():
+    r"""
+    Set the default_sigusr1 function to be the SIGUSR1 handler.
+    """
+
+    gp.printn()
+    gp.print_executing()
+    gp.lprint_executing()
+    signal.signal(signal.SIGUSR1, default_sigusr1)
+
+
 def setup():
     r"""
     Do general program setup tasks.
@@ -350,6 +380,7 @@ def setup():
 
     gp.qprintn()
 
+    set_default_siguser1()
     transitional_boot_selected = False
 
     robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
@@ -752,6 +783,33 @@ def print_test_start_message(boot_keyword):
     del last_ten[:max(0, len(last_ten) - max_boot_history)]
 
 
+def stop_boot_test(signal_number=0,
+                   frame=None):
+    r"""
+    Handle SIGUSR1 by aborting the boot test that is running.
+
+    Description of argument(s):
+    signal_number  The signal number (should always be 10 for SIGUSR1).
+    frame          The frame data.
+    """
+
+    gp.printn()
+    gp.print_executing()
+    gp.lprint_executing()
+
+    # Restore original sigusr1 handler.
+    set_default_siguser1()
+
+    message = "The caller has asked that the boot test be stopped and marked"
+    message += " as a failure."
+
+    function_stack = gm.get_function_stack()
+    if "wait_state" in function_stack:
+        st.set_wait_early_exit_message(message)
+    else:
+        BuiltIn().fail(gp.sprint_error(message))
+
+
 def run_boot(boot):
     r"""
     Run the specified boot.
@@ -762,6 +820,9 @@ def run_boot(boot):
 
     global state
 
+    signal.signal(signal.SIGUSR1, stop_boot_test)
+    gp.qprint_timen("stop_boot_test is armed.")
+
     print_test_start_message(boot)
 
     plug_in_setup()
@@ -770,6 +831,7 @@ def run_boot(boot):
     if rc != 0:
         error_message = "Plug-in failed with non-zero return code.\n" +\
             gp.sprint_var(rc, 1)
+        set_default_siguser1()
         BuiltIn().fail(gp.sprint_error(error_message))
 
     if test_mode:
@@ -795,6 +857,7 @@ def run_boot(boot):
             if rc != 0:
                 error_message = "Plug-in failed with non-zero return code.\n"
                 error_message += gp.sprint_var(rc, 1)
+                set_default_siguser1()
                 BuiltIn().fail(gp.sprint_error(error_message))
         else:
             match_state = st.anchor_state(state)
@@ -817,7 +880,11 @@ def run_boot(boot):
     if rc != 0:
         error_message = "Plug-in failed with non-zero return code.\n" +\
             gp.sprint_var(rc, 1)
+        set_default_siguser1()
         BuiltIn().fail(gp.sprint_error(error_message))
+
+    # Restore original sigusr1 handler.
+    set_default_siguser1()
 
 
 def test_loop_body():
