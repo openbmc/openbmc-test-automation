@@ -146,7 +146,8 @@ REDFISH_SESSION_URI = 'SessionService/Sessions/'
 
 # Boot options and URI variables.
 POWER_ON = 'On'
-POWER_GRACEFULL_OFF = "GracefulShutdown"
+POWER_GRACEFUL_OFF = "GracefulShutdown"
+POWER_GRACEFUL_RESTART = "GracefulRestart"
 POWER_FORCE_OFF = 'ForceOff'
 
 REDFISH_POWER_URI = 'Systems/1/Actions/ComputerSystem.Reset'
