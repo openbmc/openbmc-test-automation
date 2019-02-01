@@ -619,6 +619,25 @@ def get_state(openbmc_host="",
     return state
 
 
+wait_early_exit_message = ""
+
+
+def set_wait_early_exit_message(value):
+    r"""
+    Set global wait_early_exit_message to the indicated value.
+
+    This is a mechanism by which the programmer can do an early exit from
+    wait_until_keyword_succeeds() based on some special condition.
+
+    Description of argument(s):
+    value                           The value to assign to the global
+                                    wait_early_exit_message.
+    """
+
+    global wait_early_exit_message
+    wait_early_exit_message = value
+
+
 def check_state(match_state,
                 invert=0,
                 print_string="",
@@ -679,6 +698,13 @@ def check_state(match_state,
                       quiet=quiet)
     if not quiet:
         gp.print_var(state)
+
+    if wait_early_exit_message != "":
+        # The wait_early_exit_message has been set by a signal handler so we
+        # will exit "successfully".  It is incumbent upon the calling function
+        # (e.g. wait_state) to check/clear this variable and to fail
+        # appropriately.
+        return state
 
     match = compare_states(state, match_state)
 
@@ -784,7 +810,16 @@ def wait_state(match_state=(),
     except AssertionError as my_assertion_error:
         gp.printn()
         message = my_assertion_error.args[0]
+        gp.pvar(message)
         BuiltIn().fail(message)
+
+    if wait_early_exit_message:
+        # The global wait_early_exit_message was set by a signal handler
+        # indicating that we should fail.
+        message = wait_early_exit_message
+        # Clear the wait_early_exit_message variable for future use.
+        set_wait_early_exit_message("")
+        BuiltIn().fail(gp.sprint_error(message))
 
     if not quiet:
         gp.printn()
