@@ -67,12 +67,17 @@ Delete Session Using Valid login
     # [{'@odata.id': '/redfish/v1/SessionService/Sessions/bOol3WlCI8'},
     #  {'@odata.id': '/redfish/v1/SessionService/Sessions/Yu3xFqjZr1'}]
     ${resp_list}=  redfish.List Request  SessionService/Sessions
-
     redfish.Delete  ${resp_list[1]}
 
     ${resp}=  redfish.List Request  SessionService/Sessions
     List Should Not Contain Value  ${resp}  ${resp_list[1]}
-    redfish.Logout
+
+    # BadRequestError: Invalid session resource:
+    # /redfish/v1/SessionService/Sessions/gAEabN5Q0t, return code: 401
+
+    ${error_message}=  Catenate  SEPARATOR=  BadRequestError: Invalid session resource:
+    ...  ${SPACE}${resp_list[1]}, return code: 401
+    Run Keyword And Expect Error  ${error_message}  redfish.Logout
 
 
 *** Keywords ***
