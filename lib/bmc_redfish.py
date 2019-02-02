@@ -132,6 +132,22 @@ class bmc_redfish(object):
         """
         self._robj_.logout()
 
+    def get_attribute(self, resource_path, attribute):
+        r"""
+        Perform a GET request and return attribute value.
+
+        Description of argument(s):
+        resource_path    URI resource absolute path (e.g. "/redfish/v1/Systems/1").
+                attribute        Property name (e.g. "PowerState").
+        """
+
+        resp = self._robj_.get(resource_path)
+
+        if attribute in resp.dict:
+            return resp.dict[attribute]
+
+        return None
+
     def list_request(self, resource_path):
         r"""
         Perform a GET list request and return available resource paths.
