@@ -30,13 +30,13 @@ GET SessionService Resource With Login
     redfish.Login
     ${resp}=  redfish.Get  /redfish/v1/SessionService
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    redfish.Logout
 
 
 GET SessionService Without Login
     [Documentation]  Get /redfish/v1/SessionService without login
     [Tags]  GET_SessionService_Without_Login
 
-    redfish.Logout
     ${resp}=  redfish.Get  /redfish/v1/SessionService
     Should Be Equal As Strings  ${resp.status}  ${HTTP_UNAUTHORIZED}
 
@@ -44,8 +44,6 @@ GET SessionService Without Login
 Login Using Invalid Token
     [Documentation]  Login to BMCweb with invalid token.
     [Tags]  Login_Using_Invalid_Token
-
-    redfish.Logout
 
     Create Session  openbmc  ${AUTH_URI}
 
@@ -68,12 +66,12 @@ Delete Session Using Valid login
     # Example o/p:
     # [{'@odata.id': '/redfish/v1/SessionService/Sessions/bOol3WlCI8'},
     #  {'@odata.id': '/redfish/v1/SessionService/Sessions/Yu3xFqjZr1'}]
-    ${resp_list}=  redfish.Get  /redfish/v1/SessionService/Sessions
+    ${resp_list}=  redfish.List Request  SessionService/Sessions
 
-    redfish.Delete  ${resp_list.dict["Members"][0]["@odata.id"]}
+    redfish.Delete  ${resp_list[1]}
 
-    ${resp}=  redfish.Get  /redfish/v1/SessionService/Sessions
-    Should Not Contain  ${resp.dict["Members"]}  ${resp_list.dict["Members"][0]["@odata.id"]}
+    ${resp}=  redfish.List Request  SessionService/Sessions
+    List Should Not Contain Value  ${resp}  ${resp_list[1]}
     redfish.Logout
 
 

@@ -12,7 +12,7 @@ Verify BMC Firmware Version
     [Tags]  Verify_BMC_Firmware_Version
 
     redfish.Login
-    ${resp}=  redfish.Get  Managers/bmc
+    ${resp}=  redfish.Get  /redfish/v1/Managers/bmc
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
     ${bmc_version}=  Get BMC Version
     Should Be Equal As Strings
@@ -25,7 +25,7 @@ Verify BMC Manager Properties
     [Tags]  Verify_BMC_Manager_Properties
 
     redfish.Login
-    ${resp}=  redfish.Get  Managers/bmc
+    ${resp}=  redfish.Get  /redfish/v1/Managers/bmc
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
     # Example:
     #  "Description": "Baseboard Management Controller"
