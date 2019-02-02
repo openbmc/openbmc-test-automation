@@ -4,9 +4,9 @@ Resource         ../../lib/bmc_redfish_resource.robot
 
 *** Test Cases ***
 
-Login To BMCweb With Invalid Credentials
+Redfish Login With Invalid Credentials
     [Documentation]  Login to BMC web using invalid credential.
-    [Tags]  Login_To_BMCweb_With_Invalid_Credentials
+    [Tags]  Redfish_Login_With_Invalid_Credentials
     [Template]  Login And Verify Redfish Response
 
     # Expect status            Username               Password
@@ -17,9 +17,9 @@ Login To BMCweb With Invalid Credentials
     InvalidCredentialsError*   ${EMPTY}               ${EMPTY}
 
 
-Login To BMCweb Using Unsecured HTTP
+Redfish Login Using Unsecured HTTP
     [Documentation]  Login to BMC web through http unsecured.
-    [Tags]  Login_To_BMCweb_Using_Unsecured_HTTP
+    [Tags]  Redfish_Login_Using_Unsecured_HTTP
 
     Create Session  openbmc  http://${OPENBMC_HOST}
     ${data}=  Create Dictionary

@@ -4,17 +4,17 @@ Resource         ../../lib/bmc_redfish_resource.robot
 
 *** Test Cases ***
 
-Login And Logout BMCweb
+Redfish Login And Logout
     [Documentation]  Login to BMCweb and then logout.
-    [Tags]  Login_And_Logout_BMCweb
+    [Tags]  Redfish_Login_And_Logout
 
     redfish.Login
     redfish.Logout
 
 
-GET BMCweb Hypermedia Without Login
+GET Redfish Hypermedia Without Login
     [Documentation]  GET hypermedia URL without login.
-    [Tags]  GET_BMCweb_Hypermedia_Without_Login
+    [Tags]  GET_Redfish_Hypermedia_Without_Login
     [Template]  GET And Verify Redfish Response
 
     # Expect status      Resource URL Path
@@ -23,9 +23,9 @@ GET BMCweb Hypermedia Without Login
     ${HTTP_OK}           /redfish/v1
 
 
-GET SessionService Resource With Login
+GET Redfish SessionService Resource With Login
     [Documentation]  Login to BMCweb and get /redfish/v1/SessionService.
-    [Tags]  GET_SessionService_Resource_With_Login
+    [Tags]  GET_Redfish_SessionService_Resource_With_Login
 
     redfish.Login
     ${resp}=  redfish.Get  /redfish/v1/SessionService
@@ -33,17 +33,17 @@ GET SessionService Resource With Login
     redfish.Logout
 
 
-GET SessionService Without Login
+GET Redfish SessionService Without Login
     [Documentation]  Get /redfish/v1/SessionService without login
-    [Tags]  GET_SessionService_Without_Login
+    [Tags]  GET_Redfish_SessionService_Without_Login
 
     ${resp}=  redfish.Get  /redfish/v1/SessionService
     Should Be Equal As Strings  ${resp.status}  ${HTTP_UNAUTHORIZED}
 
 
-Login Using Invalid Token
+Redfish Login Using Invalid Token
     [Documentation]  Login to BMCweb with invalid token.
-    [Tags]  Login_Using_Invalid_Token
+    [Tags]  Redfish_Login_Using_Invalid_Token
 
     Create Session  openbmc  ${AUTH_URI}
 
@@ -57,9 +57,9 @@ Login Using Invalid Token
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
 
 
-Delete Session Using Valid login
+Delete Redfish Session Using Valid login
     [Documentation]  Delete a session using valid login.
-    [Tags]  Delete_Session_Using_Valid_Login
+    [Tags]  Delete_Redfish_Session_Using_Valid_Login
 
     redfish.Login
 
