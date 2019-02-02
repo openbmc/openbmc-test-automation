@@ -1,4 +1,4 @@
-# rsyslog test.
+#rsyslog test.
 -i Test_Remote_Logging_Configuration
 #Verify SSH and IPMI interfaces
 -i Test_SSH_And_IPMI_Connections
@@ -23,5 +23,17 @@
 -i REST_Logout_Session_To_BMC
 #Verify system boot time average
 -i Verify_Uptime_Average_Against_Threshold
-# Check for BMC dump.
+#Check for BMC dump.
 -i Verify_No_BMC_Dump
+#Redfish tests cases.
+-i Login_And_Logout_BMCweb
+-i GET_BMCweb_Hypermedia_Without_Login
+-i GET_SessionService_Resource_With_Login
+-i GET_SessionService_Without_Login
+-i Login_Using_Invalid_Token
+-i Delete_Session_Using_Valid_Login
+-i Login_To_BMCweb_With_Invalid_Credentials
+-i Verify_Update_Service_Enabled
+-i Verify_Software_Inventory_Collection
+-i Software_Inventory-Status_Check
+-i Verify_BMC_Manager_Properties
