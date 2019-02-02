@@ -7,9 +7,9 @@ Suite Teardown   redfish.Logout
 
 *** Test Cases ***
 
-Verify BMC Firmware Version
+Verify Redfish BMC Firmware Version
     [Documentation]  Get firmware version from BMC manager.
-    [Tags]  Verify_BMC_Firmware_Version
+    [Tags]  Verify_Redfish_BMC_Firmware_Version
 
     redfish.Login
     ${resp}=  redfish.Get  /redfish/v1/Managers/bmc
@@ -20,9 +20,9 @@ Verify BMC Firmware Version
     redfish.Logout
 
 
-Verify BMC Manager Properties
+Verify Redfish BMC Manager Properties
     [Documentation]  Verify BMC managers resource properties.
-    [Tags]  Verify_BMC_Manager_Properties
+    [Tags]  Verify_Redfish_BMC_Manager_Properties
 
     redfish.Login
     ${resp}=  redfish.Get  /redfish/v1/Managers/bmc
@@ -45,9 +45,9 @@ Verify BMC Manager Properties
     redfish.Logout
 
 
-Test BMC Manager GracefulRestart
+Test Redfish BMC Manager GracefulRestart
     [Documentation]  BMC graceful restart.
-    [Tags]  Test_BMC_Manager_GracefulRestart
+    [Tags]  Test_Redfish_BMC_Manager_GracefulRestart
 
     # Example:
     # "Actions": {

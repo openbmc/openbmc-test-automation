@@ -4,7 +4,7 @@ Resource         ../../lib/bmc_redfish_resource.robot
 
 *** Test Cases ***
 
-Verify Update Service Enabled
+Verify Redfish Update Service Enabled
     [Documentation]  Verify "ServiceEnabled" is enabled.
     [Tags]  Verify_Update_Service_Enabled
 
@@ -21,9 +21,9 @@ Verify Update Service Enabled
     redfish.Logout
 
 
-Verify Software Inventory Collection
+Verify Redfish Software Inventory Collection
     [Documentation]  Verify software inventory collection member and object entries.
-    [Tags]  Verify_Software_Inventory_Collection
+    [Tags]  Verify_Redfish_Software_Inventory_Collection
 
     # Example:
     # {
@@ -52,9 +52,9 @@ Verify Software Inventory Collection
     redfish.Logout
 
 
-Software Inventory Status Check
+Redfish Software Inventory Status Check
     [Documentation]  Get firmware inventory entries and do health check status.
-    [Tags]  Software_Inventory_Status_Check
+    [Tags]  Redfish_Software_Inventory_Status_Check
 
     redfish.Login
     ${resp}=  redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
