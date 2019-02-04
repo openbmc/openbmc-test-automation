@@ -681,7 +681,7 @@ Set Auto Reboot
     # Description of argument(s):
     # setting    The reboot setting, 1 for enabling and 0 for disabling.
 
-    ${valueDict}=  Set Variable  ${setting}
+    ${valueDict}=  Convert To Integer  ${setting}
     ${data}=  Create Dictionary  data=${valueDict}
     Write Attribute  ${CONTROL_HOST_URI}/auto_reboot  AutoReboot   data=${data}
     ${current_setting}=  Get Auto Reboot
