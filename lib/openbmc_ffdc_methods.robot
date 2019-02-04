@@ -7,6 +7,7 @@ Resource               rest_client.robot
 Resource               utils.robot
 Resource               list_utils.robot
 Resource               logging_utils.robot
+Resource               bmc_redfish_resource.robot
 Library                SSHLibrary
 Library                OperatingSystem
 Library                Collections
@@ -57,6 +58,7 @@ Call FFDC Methods
     Run Key U  SSHLibrary.Close All Connections
 
     [Return]  ${ffdc_file_list}
+
 
 Method Call Keyword List
     [Documentation]  Process FFDC request and return a list of generated files.
@@ -441,6 +443,7 @@ SCP Coredump Files
 
     [Return]  ${ffdc_file_list}
 
+
 SCP Dump Files
     [Documentation]  Copy all dump files from BMC to local system.
 
@@ -448,6 +451,7 @@ SCP Dump Files
     ${ffdc_file_list}=  Scp Dumps  ${FFDC_DIR_PATH}  ${FFDC_PREFIX}
 
     [Return]  ${ffdc_file_list}
+
 
 Collect Dump Log
     [Documentation]  Collect dumps from dump entry.
@@ -462,6 +466,27 @@ Collect Dump Log
     # /xyz/openbmc_project/dump/entry/2
 
     ${dump_list}=  Get Dictionary Keys  ${data}
+
+
+Enumerate Redfish Resources
+    [Documentation]  Enumerate /redfish/v1 populated resource properties to
+    ...              a file. Return a list which contains the file name.
+    [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
+
+    # Description of argument(s):
+    # log_prefix_path    The location specifying where to create FFDC file(s).
+
+    # Get the Redfish URIs.
+    ${URIs}=  enumerate_request  ${EMPTY}
+
+    @{ffdc_file_list}=  Create List
+    ${logpath}=  Catenate  SEPARATOR=  ${log_prefix_path}  redfish_uri_info.txt
+    Create File  ${logpath}
+    Write Data To File  "${\n}${URIS}${\n}"  ${logpath}
+
+    Append To List  ${ffdc_file_list}  ${logpath}
+
+    [Return]  ${ffdc_file_list}
 
 
 Collect eSEL Log
