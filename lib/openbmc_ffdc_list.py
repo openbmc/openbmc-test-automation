@@ -141,7 +141,8 @@ FFDC_METHOD_CALL = {
         'SEL Log': 'Collect eSEL Log',
         'Sys Inventory Files': 'System Inventory Files',
         'Dump Log': 'Collect Dump Log',
-        'Dump Files': 'SCP Dump Files'
+        'Dump Files': 'SCP Dump Files',
+        'Redfish URI Resources': 'FFDC Collect Redfish URIs'
     },
 }
 # -----------------------------------------------------------------
