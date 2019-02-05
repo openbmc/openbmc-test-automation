@@ -3,7 +3,7 @@
 Documentation  Test Open BMC GUI server configuration firmware update.
 
 Resource        ../../lib/resource.robot
-Resource        ../../../../lib/logging_utils.robot
+Resource        ../../../lib/logging_utils.robot
 
 Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Close Browser

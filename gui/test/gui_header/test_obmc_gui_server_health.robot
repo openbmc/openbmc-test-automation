@@ -3,14 +3,14 @@
 Documentation  Test Open BMC GUI server health under GUI Header.
 
 Resource        ../../lib/resource.robot
-Resource        ../../../../lib/boot_utils.robot
-Resource        ../../../../lib/utils.robot
-Resource        ../../../../lib/openbmc_ffdc.robot
-Resource        ../../../../lib/state_manager.robot
-Resource        ../../../../lib/openbmc_ffdc_methods.robot
-Resource        ../../../../lib/dump_utils.robot
-Resource        ../../../../lib/logging_utils.robot
-Library         ../../../../lib/gen_robot_keyword.py
+Resource        ../../../lib/boot_utils.robot
+Resource        ../../../lib/utils.robot
+Resource        ../../../lib/openbmc_ffdc.robot
+Resource        ../../../lib/state_manager.robot
+Resource        ../../../lib/openbmc_ffdc_methods.robot
+Resource        ../../../lib/dump_utils.robot
+Resource        ../../../lib/logging_utils.robot
+Library         ../../../lib/gen_robot_keyword.py
 
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
