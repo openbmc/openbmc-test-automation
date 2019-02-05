@@ -103,6 +103,17 @@ def validate_parms():
     return True
 
 
+def stop_check():
+    r"""
+    Stop this program with the stop check return code.
+    """
+
+    if MASTER_PID != PROGRAM_PID:
+        stop_check_rc = stop_test_rc
+        save_plug_in_value(stop_check_rc)
+    exit(stop_test_rc)
+
+
 def rest_fail():
     r"""
     If STOP_REST_FAIL, then this function will determine whether REST commands
@@ -126,13 +137,14 @@ def rest_fail():
     set_mod_global(keyword_string)
 
     cmd_buf = create_robot_cmd_string("extended/run_keyword.robot",
-                                      OPENBMC_HOST, keyword_string,
+                                      OPENBMC_HOST, REST_USERNAME,
+                                      REST_PASSWORD, keyword_string,
                                       lib_file_path, quiet, test_mode, debug,
                                       outputdir, output, log, report, loglevel)
     if not robot_cmd_fnc(cmd_buf):
         print_timen("The caller wishes to stop test execution if REST" +
                     " commands are failing.")
-        exit(stop_test_rc)
+        stop_check()
     print_timen("REST commands are working so no reason as of yet to stop" +
                 " the test.")
 
@@ -153,7 +165,7 @@ def esel_stop_check():
     if shell_rc == stop_test_rc:
         print_timen("The caller wishes to stop test execution based on the" +
                     " presence of certain esel entries.")
-        exit(stop_test_rc)
+        stop_check()
 
 
 def main():
@@ -178,21 +190,21 @@ def main():
     if STOP_COMMAND.upper() == "FAIL":
         if AUTOBOOT_BOOT_SUCCESS == "0":
             print_timen("The caller wishes to stop after each boot failure.")
-            exit(stop_test_rc)
+            stop_check()
     elif STOP_COMMAND.upper() == "ALL":
         print_timen("The caller wishes to stop after each boot test.")
-        exit(stop_test_rc)
+        stop_check()
     elif len(STOP_COMMAND) > 0:
         shell_rc, out_buf = cmd_fnc_u(STOP_COMMAND, quiet=quiet, show_err=0)
         if shell_rc != 0:
             print_timen("The caller wishes to stop test execution.")
-            exit(stop_test_rc)
+            stop_check()
 
     qprint_timen("The caller does not wish to stop the test run.")
     return True
 
-# Main
 
+# Main
 
 if not main():
     exit(1)
