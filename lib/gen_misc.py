@@ -592,3 +592,23 @@ def get_function_stack():
     """
 
     return [str(stack_frame[3]) for stack_frame in inspect.stack()]
+
+
+def username():
+    r"""
+    Return the username for the current process.
+    """
+
+    username = os.environ.get("USER", "")
+    if username != "":
+        return username
+    user_num = str(os.geteuid())
+    try:
+        username = os.getlogin()
+    except OSError:
+        if user_num == "0":
+            username = "root"
+        else:
+            username = "?"
+
+    return username
