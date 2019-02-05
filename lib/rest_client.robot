@@ -334,7 +334,7 @@ Call Method
     # kwargs   Arguments passed to the REST call.
 
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
-    ${resp}=  OpenBmc Post Request  ${base_uri}/action/${method}
+    ${resp}=  OpenBmc Post Request  ${base_uri}action/${method}
     ...  timeout=${timeout}  quiet=${quiet}  &{kwargs}
     [Return]     ${resp}
 
