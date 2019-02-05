@@ -72,7 +72,7 @@ Verify Supported Cipher List Via Lan Print
     ${network_info_dict}=  Get Lan Print Dict
     # Example 'RMCP+ Cipher Suites' entry: 3,17
     ${cipher_list}=  Evaluate
-    ...  map(int, $network_info_dict['RMCP+ Cipher Suites'].split(','))
+    ...  list(map(int, $network_info_dict['RMCP+ Cipher Suites'].split(',')))
     Lists Should Be Equal  ${cipher_list}  ${valid_cipher_list}
 
 
