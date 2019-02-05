@@ -2,7 +2,7 @@
 
 Documentation  Test Open BMC GUI Power Operations under GUI Header.
 
-Resource  ../../../../lib/state_manager.robot
+Resource  ../../../../../lib/state_manager.robot
 Resource  ../../lib/resource.robot
 
 Test Setup      Test Setup Execution
