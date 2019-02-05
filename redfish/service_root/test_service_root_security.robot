@@ -17,6 +17,21 @@ Login To BMCweb With Invalid Credentials
     InvalidCredentialsError*   ${EMPTY}               ${EMPTY}
 
 
+Login To BMCweb Using Unsecured HTTP
+    [Documentation]  Login to BMC web through http unsecured.
+    [Tags]  Login_To_BMCweb_Using_Unsecured_HTTP
+
+    Create Session  openbmc  http://${OPENBMC_HOST}
+    ${data}=  Create Dictionary
+    ...  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}
+
+    ${headers}=  Create Dictionary  Content-Type=application/json
+
+    Run Keyword And Expect Error  *Connection refused*
+    ...  Post Request  openbmc  /redfish/v1/SessionService/Sessions
+    ...  data=${data}  headers=${headers}
+
+
 *** Keywords ***
 
 Login And Verify Redfish Response
