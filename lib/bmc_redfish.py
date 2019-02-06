@@ -19,7 +19,7 @@ class HTTPSBadRequestError(Exception):
 
 class bmc_redfish(object):
 
-    ROBOT_LIBRARY_SCOPE = "GLOBAL"
+    ROBOT_LIBRARY_SCOPE = "TEST SUITE"
     ROBOT_EXIT_ON_FAILURE = True
 
     def __init__(self, hostname, username, password, *args, **kwargs):
@@ -42,7 +42,7 @@ class bmc_redfish(object):
         return self
 
     def __del__(self):
-        del self._robj_
+        del self
 
     def login(self, *args, **kwargs):
         r"""
