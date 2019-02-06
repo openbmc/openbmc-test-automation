@@ -54,7 +54,7 @@ Verify Software Inventory Collection
 
 Software Inventory Status Check
     [Documentation]  Get firmware inventory entries and do health check status.
-    [Tags]  Software_Inventory-Status_Check
+    [Tags]  Software_Inventory_Status_Check
 
     redfish.Login
     ${resp}=  redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
