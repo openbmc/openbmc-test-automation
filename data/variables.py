@@ -143,6 +143,8 @@ ACTIVATION_DIR_PATH = "/etc/activationdata/"
 REDFISH_BASE_URI = '/redfish/v1/'
 REDFISH_SESSION = REDFISH_BASE_URI + 'SessionService/Sessions'
 REDFISH_SESSION_URI = 'SessionService/Sessions/'
+REDFISH_ETH = 'Managers/bmc/EthernetInterfaces/eth0/'
+REDFISH_ETH_URI = REDFISH_BASE_URI + REDFISH_ETH
 
 # Boot options and URI variables.
 POWER_ON = 'On'
