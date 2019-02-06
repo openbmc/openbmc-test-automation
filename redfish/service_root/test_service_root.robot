@@ -72,13 +72,6 @@ Delete Session Using Valid login
     ${resp}=  redfish.List Request  SessionService/Sessions
     List Should Not Contain Value  ${resp}  ${resp_list[1]}
 
-    # BadRequestError: Invalid session resource:
-    # /redfish/v1/SessionService/Sessions/gAEabN5Q0t, return code: 401
-
-    ${error_message}=  Catenate  SEPARATOR=  BadRequestError: Invalid session resource:
-    ...  ${SPACE}${resp_list[1]}, return code: 401
-    Run Keyword And Expect Error  ${error_message}  redfish.Logout
-
 
 *** Keywords ***
 

@@ -46,3 +46,8 @@ Login And Verify Redfish Response
     ${data}=  Create Dictionary  username=${username}  password=${password}
     Run Keyword And Expect Error  ${expected_response}  redfish.Login  ${data}
 
+    # Update __init__ with default credentials.
+    # robot doesn't flush the object per suite if executed in sequence suites.
+    ${data}=  Create Dictionary  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+    redfish.Login  ${data}
+
