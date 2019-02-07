@@ -230,7 +230,6 @@ Get First Non Pingable IP From Subnet
 
     Fail  msg=No non-pingable IP could be found in subnet ${network_part}.
 
-
 Validate MAC On BMC
     [Documentation]  Validate MAC on BMC.
     [Arguments]  ${mac_addr}
