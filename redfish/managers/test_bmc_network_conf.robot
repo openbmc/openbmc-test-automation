@@ -2,9 +2,9 @@
 Documentation  Network interface configuration and verification
                ...  tests.
 
-Resource  ../../lib/bmc_redfish_resource.robot
-Resource  ../../lib/bmc_network_utils.robot
-Resource  ../../lib/openbmc_ffdc.robot
+Resource       ../../lib/bmc_redfish_resource.robot
+Resource       ../../lib/bmc_network_utils.robot
+Resource       ../../lib/openbmc_ffdc.robot
 
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
@@ -13,17 +13,17 @@ Test Teardown  Test Teardown Execution
 
 Get IP Address And Verify
     [Documentation]  Get IP Address And Verify.
-    [Tags]           Get_IP_Address_And_Verify
+    [Tags]  Get_IP_Address_And_Verify
 
     : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Validate IP On BMC  ${network_configuration['Address']}
+    \  Verify IP On BMC  ${network_configuration['Address']}
 
 Get Netmask And Verify
     [Documentation]  Get Netmask And Verify.
-    [Tags]           Get_Netmask_And_Verify
+    [Tags]  Get_Netmask_And_Verify
 
     : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Validate Netmask On BMC  ${network_configuration['SubnetMask']}
+    \  Verify Netmask On BMC  ${network_configuration['SubnetMask']}
 
 *** Keywords ***
 
@@ -75,8 +75,8 @@ Get Network Configuration
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4Addresses
     [Return]  @{network_configurations}
 
-Validate IP On BMC
-    [Documentation]  Validate IP on BMC.
+Verify IP On BMC
+    [Documentation]  Verify IP on BMC.
     [Arguments]  ${ip}
 
     # Description of the argument(s):
@@ -87,14 +87,35 @@ Validate IP On BMC
     Should Contain Match  ${ip_data}  ${ip}/*
     ...  msg=IP address does not exist.
 
-Validate Netmask On BMC
-    [Documentation]  Validate netmask on BMC.
+Verify Netmask On BMC
+    [Documentation]  Verify netmask on BMC.
     [Arguments]  ${netmask}
 
     # Description of the argument(s):
     # netmask  netmask value to be verified.
 
-    # TBD- openbmc/openbmc-test-automation#1541
+    ${prefix_length}=  Convert Netmask To Prefix Length  ${netmask}
+
+    Should Contain Match  ${ip_data}  */${prefix_length}
+    ...  msg=Prefix length does not exist.
+
+Convert Netmask To Prefix Length
+    [Documentation]  Convert netmask to prefix length.
+    [Arguments]  ${netmask}
+
+    # Description of argument(s):
+    # netmask  Netmask value (e.g.  "255.255.0.0", "255.252.0.0").
+
+    # Example: "255.255.0.0" to [255, 255, 0 , 0]
+    @{octets}=  Split String  ${netmask}  .
+    ${bin_mask}=  Set Variable  ${EMPTY}
+
+    : FOR  ${octet}  IN  @{octets}
+    # Example: 255 to 11111111
+    \  ${netmask}=  Convert To Binary  ${octet}
+    \  ${bin_mask}=  Catenate  ${bin_mask}  ${netmask}
+
+    run keyword and return  Get Count  ${bin_mask}  1
 
 Test Teardown Execution
     [Documentation]  Test teardown execution.
