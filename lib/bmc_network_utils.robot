@@ -230,6 +230,28 @@ Get First Non Pingable IP From Subnet
 
     Fail  msg=No non-pingable IP could be found in subnet ${network_part}.
 
+Convert Netmask To Prefix Length
+    [Documentation]  Convert netmask to prefix length.
+    [Arguments]  ${netmask}
+
+    # Description of argument(s):
+    # netmask  Netmask value (e.g.  "255.255.0.0", "255.252.0.0").
+
+    # Convert netmask into octets.
+    @{octets}=  Split String  ${netmask}  .
+
+    # Get count of octets with value 255.
+    ${full_bytes}=  Count Values In List  ${octets}  255
+
+    ${prefix_len}=  Evaluate  8 * ${full_bytes}
+
+    # Prefix length for octet which is not having 255.
+    ${partial_value}=  Get From List  ${octets}  ${full_bytes}
+    ${binary_value}=  Convert To Binary  ${partial_value}
+    ${bits}=  Get Count  ${binary_value}  1
+    ${prefix_len}=  Evaluate  ${prefix_len} + ${bits}
+
+    [Return]  ${prefix_len}
 
 Validate MAC On BMC
     [Documentation]  Validate MAC on BMC.
