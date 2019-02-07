@@ -94,7 +94,10 @@ Validate Netmask On BMC
     # Description of the argument(s):
     # netmask  netmask value to be verified.
 
-    # TBD- openbmc/openbmc-test-automation#1541
+    ${prefix_length}=  Convert Netmask To Prefix_Length  ${netmask}
+
+    Should Contain Match  ${ip_data}  */${prefix_length}
+    ...  msg=Prefix length does not exist.
 
 Test Teardown Execution
     [Documentation]  Test teardown execution.
