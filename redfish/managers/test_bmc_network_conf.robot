@@ -5,6 +5,7 @@ Documentation  Network interface configuration and verification
 Resource       ../../lib/bmc_redfish_resource.robot
 Resource       ../../lib/bmc_network_utils.robot
 Resource       ../../lib/openbmc_ffdc.robot
+Library        ../../lib/bmc_network_utils.py
 
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
@@ -16,14 +17,16 @@ Get IP Address And Verify
     [Tags]  Get_IP_Address_And_Verify
 
     : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Validate IP On BMC  ${network_configuration['Address']}
+    \  Verify IP On BMC  ${network_configuration['Address']}
+
 
 Get Netmask And Verify
     [Documentation]  Get Netmask And Verify.
     [Tags]  Get_Netmask_And_Verify
 
     : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Validate Netmask On BMC  ${network_configuration['SubnetMask']}
+    \  Verify Netmask On BMC  ${network_configuration['SubnetMask']}
+
 
 *** Keywords ***
 
@@ -38,6 +41,7 @@ Test Setup Execution
     # Get BMC IP address and prefix length.
     ${ip_data}=  Get BMC IP Info
     Set Test Variable  ${ip_data}
+
 
 Get Network Configuration
     [Documentation]  Get network configuration.
@@ -76,8 +80,8 @@ Get Network Configuration
     [Return]  @{network_configurations}
 
 
-Validate IP On BMC
-    [Documentation]  Validate IP on BMC.
+Verify IP On BMC
+    [Documentation]  Verify IP on BMC.
     [Arguments]  ${ip}
 
     # Description of the argument(s):
@@ -89,14 +93,17 @@ Validate IP On BMC
     ...  msg=IP address does not exist.
 
 
-Validate Netmask On BMC
-    [Documentation]  Validate netmask on BMC.
+Verify Netmask On BMC
+    [Documentation]  Verify netmask on BMC.
     [Arguments]  ${netmask}
 
     # Description of the argument(s):
     # netmask  netmask value to be verified.
 
-    # TBD- openbmc/openbmc-test-automation#1541
+    ${prefix_length}=  Netmask Prefix Length  ${netmask}
+
+    Should Contain Match  ${ip_data}  */${prefix_length}
+    ...  msg=Prefix length does not exist.
 
 
 Test Teardown Execution
