@@ -2,9 +2,9 @@
 Documentation  Network interface configuration and verification
                ...  tests.
 
-Resource  ../../lib/bmc_redfish_resource.robot
-Resource  ../../lib/bmc_network_utils.robot
-Resource  ../../lib/openbmc_ffdc.robot
+Resource       ../../lib/bmc_redfish_resource.robot
+Resource       ../../lib/bmc_network_utils.robot
+Resource       ../../lib/openbmc_ffdc.robot
 
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
@@ -13,14 +13,14 @@ Test Teardown  Test Teardown Execution
 
 Get IP Address And Verify
     [Documentation]  Get IP Address And Verify.
-    [Tags]           Get_IP_Address_And_Verify
+    [Tags]  Get_IP_Address_And_Verify
 
     : FOR  ${network_configuration}  IN  @{network_configurations}
     \  Validate IP On BMC  ${network_configuration['Address']}
 
 Get Netmask And Verify
     [Documentation]  Get Netmask And Verify.
-    [Tags]           Get_Netmask_And_Verify
+    [Tags]  Get_Netmask_And_Verify
 
     : FOR  ${network_configuration}  IN  @{network_configurations}
     \  Validate Netmask On BMC  ${network_configuration['SubnetMask']}
@@ -75,6 +75,7 @@ Get Network Configuration
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4Addresses
     [Return]  @{network_configurations}
 
+
 Validate IP On BMC
     [Documentation]  Validate IP on BMC.
     [Arguments]  ${ip}
@@ -87,6 +88,7 @@ Validate IP On BMC
     Should Contain Match  ${ip_data}  ${ip}/*
     ...  msg=IP address does not exist.
 
+
 Validate Netmask On BMC
     [Documentation]  Validate netmask on BMC.
     [Arguments]  ${netmask}
@@ -95,6 +97,7 @@ Validate Netmask On BMC
     # netmask  netmask value to be verified.
 
     # TBD- openbmc/openbmc-test-automation#1541
+
 
 Test Teardown Execution
     [Documentation]  Test teardown execution.

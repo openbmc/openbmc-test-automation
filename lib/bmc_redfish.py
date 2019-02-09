@@ -124,7 +124,7 @@ class bmc_redfish(object):
         Perform a DELETE request.
 
         Description of argument(s):
-        resource_path  URI resource absoulute path
+        resource_path  URI resource absolute path
                        (e.g. "/redfish/v1/SessionService/Sessions/8d1a9wiiNL").
         """
         self._rest_response_ = self._robj_.delete(resource_path)
