@@ -32,6 +32,21 @@ Redfish Login Using Unsecured HTTP
     ...  data=${data}  headers=${headers}
 
 
+Redfish Login Using HTTPS Wrong Port 80 Protocol
+    [Documentation]  Login to BMC web through wrog protocol port 80.
+    [Tags]  Redfish_Login_Using_HTTPS_Wrong_Port_80_Protocol
+
+    Create Session  openbmc  https://${OPENBMC_HOST}:80
+    ${data}=  Create Dictionary
+    ...  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}
+
+    ${headers}=  Create Dictionary  Content-Type=application/json
+
+    Run Keyword And Expect Error  *Connection refused*
+    ...  Post Request  openbmc  /redfish/v1/SessionService/Sessions
+    ...  data=${data}  headers=${headers}
+
+
 *** Keywords ***
 
 Login And Verify Redfish Response
