@@ -110,8 +110,6 @@ classified as follows:
 
 `gui/`: Contains test cases for web UI and security scanning tool automation.
 
-`mnfg/`: Contains test cases for factory reset (DHCP mode) and PGOOD testing.
-
 `network/`: Contains test cases for network testing. It covers IPv4 in static mode
             and in DHCP mode.
 
@@ -141,8 +139,7 @@ OpenBMC is moving steadily towards DTMF Redfish, which is an open industry stand
 specification and schema that meets the expectations of end users for simple,
 modern and secure management of scalable platform hardware.
 
-`redfish_test`: Contains test cases for DMTF Redfish-related feature supported
-                on OpenBMC.
+`redfish`: Contains test cases for DMTF Redfish-related feature supported on OpenBMC.
 
 
 ## Quickstart ##
