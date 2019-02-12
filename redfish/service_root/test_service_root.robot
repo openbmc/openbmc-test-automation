@@ -1,6 +1,9 @@
 *** Settings ***
 Resource         ../../lib/resource.txt
 Resource         ../../lib/bmc_redfish_resource.robot
+Resource         ../../lib/openbmc_ffdc.robot
+
+Test Teardown    FFDC On Test Case Fail
 
 *** Test Cases ***
 
