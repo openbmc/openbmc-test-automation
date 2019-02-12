@@ -2,7 +2,9 @@
 Resource         ../../lib/resource.txt
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/common_utils.robot
+Resource         ../../lib/openbmc_ffdc.robot
 
+Test Teardown    FFDC On Test Case Fail
 Suite Teardown   redfish.Logout
 
 *** Test Cases ***
