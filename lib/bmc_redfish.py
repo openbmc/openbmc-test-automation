@@ -157,13 +157,14 @@ class bmc_redfish(object):
         Perform a GET list request and return available resource paths.
 
         Description of argument(s):
-        resource_path    URI resource relative path (e.g. "Systems/1").
+        resource_path  URI resource absolute path
+                       (e.g. "/redfish/v1/SessionService/Sessions").
         """
 
         global resource_list
         resource_list = []
 
-        self._rest_response_ = self._robj_.get('/redfish/v1/' + resource_path)
+        self._rest_response_ = self._robj_.get(resource_path)
 
         # Return empty list.
         if self._rest_response_.status != 200:
@@ -188,7 +189,8 @@ class bmc_redfish(object):
         Perform a GET enumerate request and return available resource paths.
 
         Description of argument(s):
-        resource_path    URI resource relative path (e.g. "Systems/1").
+        resource_path  URI resource absolute path
+                       (e.g. "/redfish/v1/SessionService/Sessions").
         """
 
         url_list = self.list_request(resource_path)
