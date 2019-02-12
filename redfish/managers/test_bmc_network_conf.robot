@@ -16,14 +16,29 @@ Get IP Address And Verify
     [Tags]  Get_IP_Address_And_Verify
 
     : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Validate IP On BMC  ${network_configuration['Address']}
+    \  Verify IP On BMC  ${network_configuration['Address']}
 
 Get Netmask And Verify
     [Documentation]  Get Netmask And Verify.
     [Tags]  Get_Netmask_And_Verify
 
     : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Validate Netmask On BMC  ${network_configuration['SubnetMask']}
+    \  Verify Netmask On BMC  ${network_configuration['SubnetMask']}
+
+Get Gateway And Verify
+    [Documentation]  Get gateway and verify.
+    [Tags]  Get_Gateway_And_Verify
+
+    : FOR  ${network_configuration}  IN  @{network_configurations}
+    \  Verify Gateway On BMC  ${network_configuration['Gateway']}
+
+Get MAC And Verify
+    [Documentation]  Get MAC and verify.
+    [Tags]  Get_MAC_And_Verify
+
+    ${resp}=  redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ${macaddr}=  Get From Dictionary  ${resp.dict}  MACAddress
+    Validate MAC On BMC  ${macaddr}
 
 *** Keywords ***
 
@@ -76,8 +91,8 @@ Get Network Configuration
     [Return]  @{network_configurations}
 
 
-Validate IP On BMC
-    [Documentation]  Validate IP on BMC.
+Verify IP On BMC
+    [Documentation]  Verify IP on BMC.
     [Arguments]  ${ip}
 
     # Description of the argument(s):
@@ -89,8 +104,8 @@ Validate IP On BMC
     ...  msg=IP address does not exist.
 
 
-Validate Netmask On BMC
-    [Documentation]  Validate netmask on BMC.
+Verify Netmask On BMC
+    [Documentation]  Verify netmask on BMC.
     [Arguments]  ${netmask}
 
     # Description of the argument(s):
@@ -98,6 +113,22 @@ Validate Netmask On BMC
 
     # TBD- openbmc/openbmc-test-automation#1541
 
+Verify Gateway On BMC
+    [Documentation]  Verify gateway.
+    [Arguments]  ${gateway_ip}=0.0.0.0
+
+    # Description of argument(s):
+    # gateway_ip  Gateway IP address.
+
+    ${route_info}=  Get BMC Route Info
+
+    # If gateway IP is empty or 0.0.0.0 it will not have route entry.
+
+    Run Keyword If  '${gateway_ip}' == '0.0.0.0'
+    ...      Pass Execution  Gateway IP is "0.0.0.0".
+    ...  ELSE
+    ...      Should Contain  ${route_info}  ${gateway_ip}
+    ...      msg=Gateway IP address not matching.
 
 Test Teardown Execution
     [Documentation]  Test teardown execution.
