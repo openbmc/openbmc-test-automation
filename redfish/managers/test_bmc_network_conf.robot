@@ -19,7 +19,6 @@ Get IP Address And Verify
     : FOR  ${network_configuration}  IN  @{network_configurations}
     \  Verify IP On BMC  ${network_configuration['Address']}
 
-
 Get Netmask And Verify
     [Documentation]  Get Netmask And Verify.
     [Tags]  Get_Netmask_And_Verify
@@ -27,6 +26,20 @@ Get Netmask And Verify
     : FOR  ${network_configuration}  IN  @{network_configurations}
     \  Verify Netmask On BMC  ${network_configuration['SubnetMask']}
 
+Get Gateway And Verify
+    [Documentation]  Get gateway and verify it's existence on the BMC.
+    [Tags]  Get_Gateway_And_Verify
+
+    : FOR  ${network_configuration}  IN  @{network_configurations}
+    \  Verify Gateway On BMC  ${network_configuration['Gateway']}
+
+Get MAC And Verify
+    [Documentation]  Get MAC and verify it's existence on the BMC.
+    [Tags]  Get_MAC_And_Verify
+
+    ${resp}=  redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ${macaddr}=  Get From Dictionary  ${resp.dict}  MACAddress
+    Validate MAC On BMC  ${macaddr}
 
 *** Keywords ***
 
@@ -105,6 +118,22 @@ Verify Netmask On BMC
     Should Contain Match  ${ip_data}  */${prefix_length}
     ...  msg=Prefix length does not exist.
 
+Verify Gateway On BMC
+    [Documentation]  Verify gateway on BMC.
+    [Arguments]  ${gateway_ip}=0.0.0.0
+
+    # Description of argument(s):
+    # gateway_ip  Gateway IP address.
+
+    ${route_info}=  Get BMC Route Info
+
+    # If gateway IP is empty or 0.0.0.0 it will not have route entry.
+
+    Run Keyword If  '${gateway_ip}' == '0.0.0.0'
+    ...      Pass Execution  Gateway IP is "0.0.0.0".
+    ...  ELSE
+    ...      Should Contain  ${route_info}  ${gateway_ip}
+    ...      msg=Gateway IP address not matching.
 
 Test Teardown Execution
     [Documentation]  Test teardown execution.
