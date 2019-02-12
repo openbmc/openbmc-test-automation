@@ -188,7 +188,8 @@ class bmc_redfish(object):
         Perform a GET enumerate request and return available resource paths.
 
         Description of argument(s):
-        resource_path    URI resource relative path (e.g. "Systems/1").
+        resource_path  URI resource absolute path
+                       (e.g. "/redfish/v1/SessionService/Sessions").
         """
 
         url_list = self.list_request(resource_path)
