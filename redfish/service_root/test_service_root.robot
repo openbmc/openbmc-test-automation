@@ -69,10 +69,10 @@ Delete Redfish Session Using Valid login
     # Example o/p:
     # [{'@odata.id': '/redfish/v1/SessionService/Sessions/bOol3WlCI8'},
     #  {'@odata.id': '/redfish/v1/SessionService/Sessions/Yu3xFqjZr1'}]
-    ${resp_list}=  redfish.List Request  SessionService/Sessions
+    ${resp_list}=  redfish.List Request  /redfish/v1/SessionService/Sessions
     redfish.Delete  ${resp_list[1]}
 
-    ${resp}=  redfish.List Request  SessionService/Sessions
+    ${resp}=  redfish.List Request  /redfish/v1/SessionService/Sessions
     List Should Not Contain Value  ${resp}  ${resp_list[1]}
 
 
