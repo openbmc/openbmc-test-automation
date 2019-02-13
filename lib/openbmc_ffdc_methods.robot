@@ -482,7 +482,7 @@ Enumerate Redfish Resources
     Return From Keyword If   ${status} == ${False}
 
     # Get the Redfish resources and properties.
-    ${json_data}=  redfish.Enumerate Request  /redfish/v1
+    ${json_data}=  redfish_utils.Enumerate Request  /redfish/v1
     # Typical output:
     # {
     #  "@odata.id": "/redfish/v1",
