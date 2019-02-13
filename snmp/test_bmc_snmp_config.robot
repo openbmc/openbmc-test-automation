@@ -35,6 +35,7 @@ Configure SNMP Manager On BMC With Out Of Range Port And Verify
     [Documentation]  Configure SNMP Manager On BMC with out-of range port and verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Out_Of_Range_Port_And_Verify
     [Template]  Configure SNMP Manager On BMC
+    [Teardown]  SNMP Manager Deletion  ${SNMP_MGR1_IP}  ${out_of_range_port}  ${TEST STATUS}
 
     # SNMP manager IP  Port                  Scenario
     ${SNMP_MGR1_IP}    ${out_of_range_port}  error
@@ -110,4 +111,3 @@ Configure Multiple SNMP Managers With Different Ports And Verify
     Delete SNMP Manager And Object  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     Delete SNMP Manager And Object  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
     Delete SNMP Manager And Object  ${SNMP_MGR3_IP}  ${NON_DEFAULT_PORT2}
-
