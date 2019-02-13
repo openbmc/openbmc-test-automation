@@ -449,3 +449,49 @@ def get_component_fru_info(component='cpu',
     return\
         [x for x in fru_objs
          if re.match(component + '([0-9]+)? ', x['fru_device_description'])]
+
+
+def get_user_info(userid, channel_number=1):
+    r"""
+    Get user info using channel command and return it as a dictionary.
+
+    Description of argument(s):
+    userid          The userid (e.g. "1", "2", etc.).
+    channel_number  The user's channel number (e.g. "1").
+
+    The data is obtained by issuing the IPMI "channel getaccess" command.  An
+    example is shown below for user id 1 and channel number 1.
+
+    Maximum User IDs     : 15
+    Enabled User IDs     : 1
+    User ID              : 1
+    User Name            : root
+    Fixed Name           : No
+    Access Available     : callback
+    Link Authentication  : enabled
+    IPMI Messaging       : enabled
+    Privilege Level      : ADMINISTRATOR
+    Enable Status        : enabled
+
+    For the data shown above, the following dictionary will be returned.
+
+    user_info:
+      [maximum_userids]:     15
+      [enabled_userids:      1
+      [userid]               1
+      [user_name]            root
+      [fixed_name]           No
+      [access_available]     callback
+      [link_authentication]  enabled
+      [ipmi_messaging]       enabled
+      [privilege_level]      ADMINISTRATOR
+      [enable_status]        enabled
+
+    """
+
+    status, ret_values = grk.run_key_u("Run IPMI Standard Command  channel getaccess "
+                                       + str(channel_number) + " " + str(userid))
+
+    result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
+
+    return result
