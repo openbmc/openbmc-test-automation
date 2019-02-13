@@ -114,3 +114,16 @@ Delete SNMP Manager And Object
     ...  ${ip_and_port_list}  ${ip_and_port}
 
     Should Be Equal  ${status}  ${False}  msg=SNMP manager is not deleted.
+
+SNMP Manager Deletion
+    [Documentation]  Deletion of the SNMP manager which creation was not expected.
+    [Arguments]  ${snmp_ip}  ${port}  ${status}
+
+    # Description of argument(s):
+    # snmp_ip  SNMP manager IP.
+    # port     Network port where SNMP manager is listening.
+    # status   testcase result (automatic RF variable). values: PASS or FAIL
+
+    Run Keyword If  '${status}' == 'FAIL'
+    ...    Delete SNMP Manager And Object  ${snmp_ip}  ${port}
+    FFDC On Test Case Fail
