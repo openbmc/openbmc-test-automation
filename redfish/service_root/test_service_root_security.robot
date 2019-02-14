@@ -1,9 +1,9 @@
 *** Settings ***
-Resource         ../../lib/resource.txt
+Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
-Test Teardown    FFDC On Test Case Fail
+#Test Teardown    FFDC On Test Case Fail
 
 *** Test Cases ***
 
@@ -48,6 +48,19 @@ Redfish Login Using HTTPS Wrong Port 80 Protocol
     Run Keyword And Expect Error  *Connection refused*
     ...  Post Request  openbmc  /redfish/v1/SessionService/Sessions
     ...  data=${data}  headers=${headers}
+
+
+Create Multiple Session And Verify Working
+    [Documentation]  Create 50 login and verify using first instance its still
+    ...  working.
+    [Tags]  Create_Multiple_Session_And_Verify_Working
+
+    redfish.Login
+    Repeat Keyword  ${2} times  redfish.Login
+    redfish.Logout
+
+    #${resp}=  redfish.Get  /redfish/v1
+    #Log To Console  \n ${resp}
 
 
 *** Keywords ***

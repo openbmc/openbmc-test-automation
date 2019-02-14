@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   BMC redfish utils.
 
-Resource        resource.txt
+Resource        resource.robot
 Resource        bmc_redfish_resource.robot
 
 
