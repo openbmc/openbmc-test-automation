@@ -41,6 +41,14 @@ Get MAC Address And Verify
     ${macaddr}=  Get From Dictionary  ${resp.dict}  MACAddress
     Validate MAC On BMC  ${macaddr}
 
+Verify IP And Netmask
+    [Documentation]  Verify IP and netmask.
+    [Tags]  Verify_IP_And_Netmask
+
+    : FOR  ${network_configuration}  IN  @{network_configurations}
+    \  Verify IP And Netmask On BMC  ${network_configuration['Address']}
+    ...  ${network_configuration['SubnetMask']}
+
 *** Keywords ***
 
 Test Setup Execution
@@ -134,6 +142,24 @@ Verify Gateway On BMC
     ...  ELSE
     ...      Should Contain  ${route_info}  ${gateway_ip}
     ...      msg=Gateway IP address not matching.
+
+Verify IP And Netmask On BMC
+    [Documentation]  Verify IP and netmask on BMC.
+    [Arguments]  ${ip}  ${netmask}
+
+    # Description of the argument(s):
+    # ip  IP address to be verified.
+    # netmask  netmask value to be verified.
+
+    # Get prefix length value of netmask.
+    ${prefix_length}=  Netmask Prefix Length  ${netmask}
+
+    # Get IP address details on BMC using IP command.
+    @{ip_data}=  Get BMC IP Info
+
+    ${ip_with_netmask}=  Catenate  ${ip}/${prefix_length}
+    Should Contain  ${ip_data}  ${ip_with_netmask}
+    ...  msg=IP and netmask pair does not exist.
 
 Test Teardown Execution
     [Documentation]  Test teardown execution.
