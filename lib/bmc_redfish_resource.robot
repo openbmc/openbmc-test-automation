@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   BMC redfish resource keyword.
 
-Resource        resource.txt
+Resource        resource.robot
 Resource        rest_response_code.robot
 Library         bmc_redfish.py
 ...             ${OPENBMC_HOST}  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}

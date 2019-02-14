@@ -1,5 +1,5 @@
 *** Settings ***
-Resource         ../../lib/resource.txt
+Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
