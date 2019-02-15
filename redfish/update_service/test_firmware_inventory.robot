@@ -80,3 +80,4 @@ Redfish Software Inventory Status Check
     \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["Health"]}  OK
     \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["HealthRollup"]}  OK
     \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["State"]}  Enabled
+    redfish.Logout
