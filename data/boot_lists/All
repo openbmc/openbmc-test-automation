@@ -2,12 +2,18 @@ pflash
 Out of Band Code Update
 REST Power On
 REST Power On (mfg)
+Redfish Power On
+Redfish Power On (mfg)
 IPMI Power On
 IPMI Power On (mfg)
 REST Power Off
 REST Power Off (mfg)
+Redfish Power Off
+Redfish Power Off (mfg)
 REST Hard Power Off
 REST Hard Power Off (mfg)
+Redfish Hard Power Off
+Redfish Hard Power Off (mfg)
 IPMI Power Off
 IPMI Power Off (mfg)
 IPMI Power Soft
@@ -52,3 +58,5 @@ Auto Reboot
 Auto Reboot (mfg)
 Host Reboot
 Host Reboot (mfg)
+Redfish Host Reboot
+Redfish Host Reboot (mfg)
