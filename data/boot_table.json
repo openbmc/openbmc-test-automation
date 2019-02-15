@@ -25,6 +25,30 @@
         "method": "Initiate Host Boot  wait=${0}",
         "lib_file_path": "state_manager.robot"
     },
+    # Initiate a power on using the Redfish API interface.
+    "Redfish Power On": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^Off|Unspecified$",
+            "operating_system": "^Inactive$",
+            "host": "^Off$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Redfish Power Operation  On",
+        "lib_file_path": "bmc_redfish_utils.robot"
+    },
     # Initiate a power on using the IPMI interface.
     "IPMI Power On": {
         "start": {
@@ -73,6 +97,27 @@
         "method": "Initiate Host PowerOff  wait=${0}",
         "lib_file_path": "state_manager.robot"
     },
+    # Initiate a power off using the Redfish API interface.
+    "Redfish Power Off": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^On$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^Off|Unspecified$",
+            "operating_system": "^Inactive$",
+            "host": "^Off$",
+            "os_ping": "^0$",
+            "os_login": "^0$",
+            "os_run_cmd": "^0$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Redfish Power Operation  GracefulShutdown",
+        "lib_file_path": "bmc_redfish_utils.robot"
+    },
     # Initiate a hard power off using the REST API interface.
     "REST Hard Power Off": {
         "start": {
@@ -93,6 +138,27 @@
         "method_type": "keyword",
         "method": "Hard Power Off  wait=${0}",
         "lib_file_path": "state_manager.robot"
+    },
+    # Initiate a hard power off using the Redfish API interface.
+    "Redfish Hard Power Off": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^On$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^Off|Unspecified$",
+            "operating_system": "^Inactive$",
+            "host": "^Off$",
+            "os_ping": "^0$",
+            "os_login": "^0$",
+            "os_run_cmd": "^0$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Redfish Power Operation  ForceOff",
+        "lib_file_path": "bmc_redfish_utils.robot"
     },
     # Initiate a power off using the IPMI interface.
     "IPMI Power Off": {
@@ -626,5 +692,32 @@
         "method_type": "keyword",
         "method": "utils.Initiate OS Host Reboot",
         "lib_file_path": "utils.robot"
+    },
+    # Initiate host reboot using the Redfish API interface (GracefulRestart).
+    "Redfish Host Reboot": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Redfish Power Operation  GracefulRestart",
+        "lib_file_path": "bmc_redfish_utils.robot"
     }
 }
