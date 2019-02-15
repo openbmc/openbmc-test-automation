@@ -75,7 +75,7 @@ These documents contain details on developing OpenBMC test code and debugging.
  - [REST-cheatsheet.md](https://github.com/openbmc/docs/blob/master/REST-cheatsheet.md): Quick reference for some common
    curl commands required for testing.
  - [README.md](https://github.com/openbmc/phosphor-webui/blob/master/README.md): Web UI setup reference.
- - [Tools.md](Tools.md): Reference information for helper tools.
+ - [Tools.md](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/openbmc_test_tools.md): Reference information for helper tools.
 
 ## Testing Setup Steps ##
 
