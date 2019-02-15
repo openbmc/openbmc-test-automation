@@ -76,6 +76,7 @@ These documents contain details on developing OpenBMC test code and debugging.
    curl commands required for testing.
  - [README.md](https://github.com/openbmc/phosphor-webui/blob/master/README.md): Web UI setup reference.
  - [Tools.md](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/openbmc_test_tools.md): Reference information for helper tools.
+ - [Corporate CLA and Individual CLA](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server): Submitting changes via Gerrit server
 
 ## Testing Setup Steps ##
 
