@@ -380,10 +380,10 @@ Verify Get DCMI Capabilities
 
     @{supported_capabilities}=  Create List
     # Supported DCMI capabilities:
-    ...  Mandatory platform capabilties
-    ...  Optional platform capabilties
+    ...  Mandatory platform capabilities
+    ...  Optional platform capabilities
     ...  Power management available
-    ...  Managebility access capabilties
+    ...  Managebility access capabilities
     ...  In-band KCS channel available
     # Mandatory platform attributes:
     ...  200 SEL entries
@@ -582,9 +582,9 @@ Verify Get Device ID
     @{major_minor_version}=  Split String  ${bmc_version}  .
 
     Should Be Equal As Strings  ${ipmi_fw_major_version}  ${major_minor_version[0]}
-    ...  msg=Major version mis-match.
+    ...  msg=Major version mismatch.
     Should Be Equal As Strings  ${ipmi_fw_minor_version}  ${major_minor_version[1]}
-    ...  msg=Minor version mis-match.
+    ...  msg=Minor version mismatch.
 
     Should Be Equal  ${mc_info['ipmi_version']}  2.0
 
