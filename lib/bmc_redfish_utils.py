@@ -82,6 +82,10 @@ class bmc_redfish_utils(object):
             return resource_dict
 
         for resource in url_list:
+            # JsonSchemas data are not required in enumeration.
+            # Example: '/redfish/v1/JsonSchemas/' and sub resources.
+            if 'JsonSchemas' in resource:
+                continue
             self._rest_response_ = self._redfish_.get(resource)
             if self._rest_response_.status != 200:
                 continue
