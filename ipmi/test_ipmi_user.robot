@@ -113,6 +113,19 @@ Verify Setting IPMI User With Null Password
     Should Contain  ${msg}  Invalid data field in request
 
 
+Verify IPMI User Deletion
+    [Documentation]  Delete user via IPMI and verify.
+    [Tags]  Verify_IPMI_User_Deletion
+
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Delete IPMI User and verify
+    Run IPMI Standard Command  user set name ${random_userid} ""
+    Should Be Equal  ${user_info['user_name']}  ${EMPTY}
+
+
 *** Keywords ***
 
 IPMI Create User
