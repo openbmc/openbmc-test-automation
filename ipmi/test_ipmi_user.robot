@@ -83,6 +83,19 @@ Verify Setting IPMI Root User With New Name
     Should Contain  ${msg}  Set User Name command failed
 
 
+Verify IPMI User Deletion
+    [Documentation]  Delete user via IPMI and verify.
+    [Tags]  Verify_IPMI_User_Deletion
+
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(1, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Delete IPMI User and verify
+    Run IPMI Standard Command  user set name ${random_userid} ""
+    Should Be Equal  ${user_info['user_name']}  ${EMPTY}
+
+
 *** Keywords ***
 
 IPMI Create User
@@ -97,4 +110,7 @@ IPMI Create User
     ${resp}=  Run IPMI Standard Command  ${ipmi_cmd}
     ${user_info}=  Get User Info  ${userid}
     Should Be Equal  ${user_info['user_name']}  ${username}
+<<<<<<< HEAD
 
+=======
+>>>>>>> Added testcase to verify IPMI user deletion
