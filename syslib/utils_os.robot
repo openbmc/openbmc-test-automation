@@ -47,7 +47,7 @@ Login To OS
 
     Ping Host  ${os_host}
     SSHLibrary.Open Connection  ${os_host}  alias=${alias_name}
-    Login  ${os_username}  ${os_password}
+    SSHLibrary.Login  ${os_username}  ${os_password}
 
 
 Tool Exist
