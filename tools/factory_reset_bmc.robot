@@ -5,9 +5,9 @@ Documentation   Factory reset BMC and set the network config back.
 # -v OPENBMC_SERIAL_HOST:xx.xx.xx.152 -v OPENBMC_SERIAL_PORT:2002
 # -v OPENBMC_MODEL:witherspoon factory_reset.robot
 
-Resource     ../../../lib/resource.robot
-Resource     ../../../lib/oem/ibm/serial_console_client.robot
-Library      ../../../lib/bmc_ssh_utils.py
+Resource     ../lib/resource.robot
+Resource     ../lib/serial_connection/serial_console_client.robot
+Library      ../lib/bmc_ssh_utils.py
 
 Test Setup   Test Setup Execution
 
