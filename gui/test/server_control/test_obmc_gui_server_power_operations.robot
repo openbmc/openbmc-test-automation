@@ -22,6 +22,20 @@ ${string_power_on}                       Attempts to power on the server
 *** Test Case ***
 # OpenBMC @ Power Off state test cases.
 
+Verify Warm Reboot Button At Power Off
+    [Documentation]  Verify warm reboot button is not present at power Off.
+    [Tags]  Verify_Warm_Reboot_Button_At_Power_Off
+
+    Select Server Power Operations Sub Menu
+    Element Should Not Be Visible  ${xpath_select_button_warm_reboot}
+
+Verify Cold Reboot Button At Power Off
+    [Documentation]  Verify cold reboot button is not present at power Off.
+    [Tags]  Verify_Cold_Reboot_Button_At_Power_Off
+
+    Select Server Power Operations Sub Menu
+    Element Should Not Be Visible  ${xpath_select_button_cold_reboot}
+
 Verify Title Text Should Be Server Power Operations At Power Off
     [Documentation]  Verify display of title text "Server Power Operations".
     [Tags]  Verify_Title_Text_Should_Be_Server_Power_Operations_At_Power_Off
