@@ -32,6 +32,17 @@ class bmc_redfish_utils(object):
 
         return None
 
+    def get_properties(self, resource_path):
+        r"""
+        Returns dictionary of attributes for the resource.
+
+        Description of argument(s):
+        resource_path    URI resource absolute path (e.g. "/redfish/v1/Systems/1").
+        """
+
+        resp = self._redfish_.get(resource_path)
+        return resp.dict
+
     def list_request(self, resource_path):
         r"""
         Perform a GET list request and return available resource paths.
