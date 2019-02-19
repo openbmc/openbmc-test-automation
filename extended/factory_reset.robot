@@ -4,7 +4,7 @@ Documentation   This program performs Factory data reset.
 Resource        ../lib/ipmi_client.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/connection_client.robot
-Resource        ../lib/oem/ibm/serial_console_client.robot
+Resource        ../lib/serial_connection/serial_console_client.robot
 Library         OperatingSystem
 
 Suite Setup      Validate Setup

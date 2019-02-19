@@ -45,7 +45,7 @@ Create Privilege
     #  "LDAPBaseDN": "dc=ldap,dc=com",
     #  "LDAPBindDN": "cn=Administrator,dc=ldap,dc=com",
     #  "LDAPSearchScope": "xyz.openbmc_project.User.Ldap.Config.SearchScope.sub",
-    #  "LDAPServerURI": "ldaps://fspldaptest.in.ibm.com/",
+    #  "LDAPServerURI": "ldaps://xxx.xxx.xxx.xxx/",
     #  "LDAPType": "xyz.openbmc_project.User.Ldap.Config.Type.OpenLdap"
     # }
     #}

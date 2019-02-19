@@ -6,7 +6,7 @@ Documentation   Factory reset BMC and set the network config back.
 # -v OPENBMC_MODEL:witherspoon factory_reset.robot
 
 Resource     ../../../lib/resource.robot
-Resource     ../../../lib/oem/ibm/serial_console_client.robot
+Resource     ../../../lib/serial_connection/serial_console_client.robot
 Library      ../../../lib/bmc_ssh_utils.py
 
 Test Setup   Test Setup Execution
