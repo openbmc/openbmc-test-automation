@@ -107,6 +107,9 @@ Suite Setup Execution
     Should Not Be Empty
     ...   ${OS_PASSWORD}  msg=You must provide OS host user password.
 
+    # Enable auto reboot
+    Set Auto Reboot  ${1}
+
     # Boot to OS.
     REST Power On
 
