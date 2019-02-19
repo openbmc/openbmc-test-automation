@@ -48,7 +48,7 @@ Verify Watchdog Setting With Watchdog Enabled
     # Verify if watchdog settings are enabled and timeremaining is reduced.
     Wait Until Keyword Succeeds  3 min  10 sec  Verify Watchdog Enabled
 
-    Wait Until Keyword Succeeds  120 sec  20 sec  Is Host Rebooted
+    Wait Until Keyword Succeeds  300 sec  20 sec  Is Host Rebooted
     Wait For Host To Ping  ${OS_HOST}  5min  10
     Wait for OS
 
@@ -109,6 +109,9 @@ Suite Setup Execution
 
     # Boot to OS.
     REST Power On
+
+    # Enable auto reboot
+    Set Auto Reboot  ${1}
 
 Suite Teardown Execution
     [Documentation]  Restore watchdog Default setting.
