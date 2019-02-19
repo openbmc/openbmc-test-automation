@@ -2,7 +2,7 @@
 Documentation  BMC OEM serial update utilities keywords.
 
 Resource    code_update_utils.robot
-Resource    oem/ibm/serial_console_client.robot
+Resource    serial_connection/serial_console_client.robot
 
 *** Keywords ***
 
@@ -32,7 +32,7 @@ Reset Network Interface
     [Documentation]  Turn the ethernet network interface off and then on again
     ...              through the serial console.
 
-    Import Resource  ${CURDIR}/oem/ibm/serial_console_client.robot
+    Import Resource  ${CURDIR}/serial_connection/serial_console_client.robot
     Set Library Search Order  SSHLibrary  Telnet
     Execute Command On Serial Console  ifconfig eth0 down
     Sleep  30s
