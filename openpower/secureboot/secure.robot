@@ -24,6 +24,7 @@ ${security_access_bit_mask}  ${0xC000000000000000}
 # Description of BC8A1E07    A problem occurred during the IPL of the system.
 ${pnor_corruption_src}       BC8A1E07
 ${bmc_image_dir_path}        /usr/local/share/pnor
+${bmc_guard_dir_path}        /var/lib/phosphor-software-manager/pnor/prsv
 ${FFDC_TOOL_DIR_PATH}        ${EMPTY}
 
 *** Test Cases ***
@@ -170,9 +171,15 @@ Suite Setup Execution
     Run  export PATH=$PATH:${FFDC_TOOL_DIR_PATH}
     Set Environment Variable  ${FFDC_TOOL_DIR_PATH}  ${FFDC_TOOL_DIR_PATH}
     ${bmc_image_dir_path}=  Add Trailing Slash  ${bmc_image_dir_path}
+    ${bmc_guard_dir_path}=  Add Trailing Slash  ${bmc_guard_dir_path}
+
     Set Global Variable  ${bmc_image_dir_path}
     Log  ${bmc_image_dir_path}
     BMC Execute Command  rm -rf ${bmc_image_dir_path}*
+
+    Set Global Variable  ${bmc_guard_dir_path}
+    Log  ${bmc_guard_dir_path }
+    BMC Execute Command  rm -rf ${bmc_guard_dir_path}*
 
 
 Test Setup Execution
@@ -185,7 +192,7 @@ Test Setup Execution
 
     REST Power Off  stack_mode=skip  quiet=1
     Delete Error Logs And Verify
-    Clear BMC Gard record
+
 
 
 Test Teardown Execution
