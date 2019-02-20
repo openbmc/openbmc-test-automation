@@ -148,6 +148,17 @@ Verify IPMI User Deletion
     Should Be Equal  ${user_info['user_name']}  ${EMPTY}
 
 
+Verify Setting IPMI Root User With New Privilege
+    [Documentation]  Verify error while setting IPMI root user with new
+    ...  privilege.
+    [Tags]  Verify_Setting_IPMI_Root_User_With_New_Privilege
+
+    # Set new privilege for root user.
+    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ...  user priv ${root_user_id} ${operator_level_priv}
+
+    Should Contain  ${msg}  Set Privilege Level command failed
+
 
 *** Keywords ***
 
