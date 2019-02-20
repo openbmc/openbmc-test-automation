@@ -199,6 +199,55 @@ Verify IPMI User Deletion
     Should Be Equal  ${user_info['user_name']}  ${EMPTY}
 
 
+Enable IPMI User And Verify
+    [Documentation]  Enable IPMI user and verify that the user is able
+    ...  to run IPMI command.
+    [Tags]  Enable_IPMI_User_And_Verify
+
+    # Create IPMI user and set valid password.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+
+    # Set admin privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
+
+    # Enable IPMI user and verify.
+    Run IPMI Standard Command  user enable ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  enabled
+
+    # Verify that enabled IPMI  user is able to run IPMI command.
+    Verify IPMI Username And Password  ${random_username}  ${valid_password}
+
+
+Disable IPMI User And Verify
+    [Documentation]  Disable IPMI user and verify that that the user
+    ...  is unable to run IPMI command.
+    [Tags]  Disable_IPMI_User_And_Verify
+
+    # Create IPMI user and set valid password.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+
+    # Set admin privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
+
+    # Disable IPMI user and verify.
+    Run IPMI Standard Command  user disable ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  disabled
+
+    # Verify that disabled IPMI  user is unable to run IPMI command.
+    ${msg}=  Run Keyword And Expect Error  *  Verify IPMI Username And Password
+    ...  ${random_username}  ${valid_password}
+    Should Contain  ${msg}  IPMI command fails
+
 
 *** Keywords ***
 
@@ -243,7 +292,7 @@ Verify IPMI Username And Password
     ...  ${SPACE}${PASSWORD_OPTION}${SPACE}${password}
     ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${SEL_INFO_CMD}
     ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
-    Should Be Equal  ${rc}  ${0}  msg=${output}
+    Should Be Equal  ${rc}  ${0}  msg=IPMI command fails
     Should Contain  ${output}  SEL Information
 
 
