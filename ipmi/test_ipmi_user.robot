@@ -14,6 +14,8 @@ ${invalid_username}     user%
 ${invalid_password}     abc123
 ${root_userid}          1
 ${operator_level_priv}  0x3
+${valid_password}       0penBmc1
+${max_password_length}  20
 
 
 *** Test Cases ***
@@ -83,6 +85,27 @@ Verify Setting IPMI Root User With New Name
     Should Contain  ${msg}  Set User Name command failed
 
 
+Verify IPMI User Password Via Test Command
+    [Documentation]  Verify IPMI user password using test command.
+    [Tags]  Verify_IPMI_User_Password_Via_Test_Command
+
+    # Create IPMI user.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Set valid password for newly created user.
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+
+
+    # Verify newly set password using test command
+    ${msg}=  Run IPMI Standard Command
+    ...  user test ${random_userid} ${max_password_length} ${valid_password}
+
+    Should Contain  ${msg}  Success
+
+
 Verify IPMI User Creation With Same Name
     [Documentation]  Verify error while creating two IPMI user with same name.
     [Tags]  Verify_IPMI_User_Creation_With_Same_Name
@@ -124,6 +147,7 @@ Verify IPMI User Deletion
     # Delete IPMI User and verify
     Run IPMI Standard Command  user set name ${random_userid} ""
     Should Be Equal  ${user_info['user_name']}  ${EMPTY}
+
 
 
 *** Keywords ***
