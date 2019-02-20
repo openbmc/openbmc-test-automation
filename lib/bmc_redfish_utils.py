@@ -17,6 +17,21 @@ class bmc_redfish_utils(object):
         # Obtain a reference to the global redfish object.
         self._redfish_ = BuiltIn().get_library_instance('redfish')
 
+    def get_redfish_session_info(self):
+        r"""
+        Returns redfish sessions info dictionary.
+
+        {
+            'key': 'yLXotJnrh5nDhXj5lLiH' ,
+            'location': '/redfish/v1/SessionService/Sessions/nblYY4wlz0'
+        }
+        """
+        session_dict = {
+            "key": self._redfish_._session_key_,
+            "location": self._redfish_._session_location_
+        }
+        return session_dict
+
     def get_attribute(self, resource_path, attribute):
         r"""
         Get resource attribute.
