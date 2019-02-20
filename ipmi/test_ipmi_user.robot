@@ -126,6 +126,36 @@ Verify IPMI User Deletion
     Should Be Equal  ${user_info['user_name']}  ${EMPTY}
 
 
+Verify IPMI User Enable
+    [Documentation]  Enable IPMI user and verify.
+    [Tags]  Verify_IPMI_User_Enable
+
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Enable IPMI user and verify
+    Run IPMI Standard Command  user enable ${random_userid}
+
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  enabled
+
+
+Verify IPMI User Disable
+    [Documentation]  Disable IPMI user and verify.
+    [Tags]  Verify_IPMI_User_Disable
+
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Enable IPMI user and verify
+    Run IPMI Standard Command  user disable ${random_userid}
+
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  disabled
+
+
 *** Keywords ***
 
 IPMI Create User
