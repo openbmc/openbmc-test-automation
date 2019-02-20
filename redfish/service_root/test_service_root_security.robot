@@ -3,7 +3,7 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
-Test Teardown    FFDC On Test Case Fail
+#Test Teardown    FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -79,6 +79,24 @@ Create Multiple Login Sessions And Verify
     redfish.Set Session Location  ${saved_session_info["location"]}
     ${resp}=  redfish.Get  ${saved_session_info["location"]}
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+
+
+Attempt Login With Expired Session
+    [Documentation]  Authenticate to redfish, then log out and attempt to
+    ...   use the session.
+    [Tags]  Attempt_Login_With_Expired_Session
+
+    redfish.Login
+    ${saved_session_info}=   Get Redfish Session Info
+    redfish.Logout
+
+    # Attempt login with expired session.
+    # By default 60 minutes of inactivity closes the session.
+    redfish.Set Session Key  ${saved_session_info["key"]}
+    redfish.Set Session Location  ${saved_session_info["location"]}
+
+    ${resp}=  redfish.Get  ${saved_session_info["location"]}
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_UNAUTHORIZED}
 
 
 *** Keywords ***
