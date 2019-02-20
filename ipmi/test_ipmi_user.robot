@@ -14,7 +14,11 @@ ${invalid_username}     user%
 ${invalid_password}     abc123
 ${root_userid}          1
 ${operator_level_priv}  0x3
-
+${valid_password}       0penBmc1
+${IPMI_EXT_CMD}         ipmitool -I lanplus -C 3
+${PASSWORD_CMD}         -P
+${USER_CMD}             -U
+${IPMI_OPERATION}       sel info
 
 *** Test Cases ***
 
@@ -81,6 +85,31 @@ Verify Setting IPMI Root User With New Name
     ...  user set name ${root_userid} abcd
 
     Should Contain  ${msg}  Set User Name command failed
+
+
+Verify Setting Valid Password For IPMI User
+    [Documentation]  Set valid password for IPMI user and verify.
+    [Tags]  Verify_Setting_Valid_Password_For_IPMI_User
+
+    # Create IPMI user.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(6, 6)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Set valid password for newly created user.
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+
+    # Enable IPMI user and verify
+    Run IPMI Standard Command  user enable ${random_userid}
+
+    # Verify newly set password
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ${IPMI_EXT_CMD}${SPACE}${USER_CMD}${SPACE}${random_username}
+    ...  ${SPACE}${PASSWORD_CMD}${SPACE}${valid_password}
+    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${IPMI_OPERATION}
+    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
+    Should Be Equal  ${rc}  ${0}  msg=${output}
 
 
 Verify IPMI User Creation With Same Name
