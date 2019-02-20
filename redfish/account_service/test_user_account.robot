@@ -18,6 +18,27 @@ Verify AccountService Available
     ${resp} =  redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
     Should Be Equal As Strings  ${resp}  ${True}
 
+Test Create Redfish User With Admin Role
+    [Documentation]  Create Redfish User With Admin Role.
+    [Tags]  Test_Create_Redfish_User_With_Admin_Role
+
+    # Example:
+    # redfiscription": "User Account",
+    # "Enabled": true,
+    # "Id": "test1",
+    # "Links": {
+    # "Role": {
+    #  "@odata.id": "/redfish/v1/AccountService/Roles/Administrator"
+    # }
+    #  },
+
+    redfish.Login
+    ${payload}=  Create Dictionary
+    ...  UserName=abc  Password=TestPwd123  RoleId=Administrator  Enabled=${True}
+    ${resp}=  redfish.Post  AccountService/Accounts  body=&{payload}
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_CREATED}
+
+
 
 *** Keywords ***
 
@@ -32,3 +53,5 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     redfish.Logout
+
+
