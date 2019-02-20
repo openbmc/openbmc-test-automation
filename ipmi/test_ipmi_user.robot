@@ -5,7 +5,7 @@ Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Library             ../lib/ipmi_utils.py
 
-Test Teardown       FFDC On Test Case Fail
+Test Teardown       Test Teardown Execution
 
 
 *** Variables ***
@@ -140,4 +140,20 @@ IPMI Create User
     ${resp}=  Run IPMI Standard Command  ${ipmi_cmd}
     ${user_info}=  Get User Info  ${userid}
     Should Be Equal  ${user_info['user_name']}  ${username}
+
+
+Delete All Non Root IPMI User
+    [Documentation]  Delete all non-root IPMI user.
+
+    :FOR  ${userid}  IN RANGE  2  16
+    \  ${user_info}=  Get User Info  ${userid}
+    \  Run Keyword If  "${user_info['user_name']}" != ""
+    ...  Run IPMI Standard Command  user set name ${userid} ""
+
+
+Test Teardown Execution
+    [Documentation]  Do the test teardown execution.
+
+    FFDC On Test Case Fail
+    Delete All Non Root IPMI User
 
