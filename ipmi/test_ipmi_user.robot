@@ -5,7 +5,7 @@ Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Library             ../lib/ipmi_utils.py
 
-Test Teardown       FFDC On Test Case Fail
+#Test Teardown       FFDC On Test Case Fail
 
 
 *** Variables ***
@@ -14,7 +14,11 @@ ${invalid_username}     user%
 ${invalid_password}     abc123
 ${root_userid}          1
 ${operator_level_priv}  0x3
-
+${valid_password}       0penBmc1
+${IPMI_EXT_CMD}         ipmitool -I lanplus -C 3
+${PASSWORD_OPTION}      -P
+${USER_OPTION}          -U
+${SEL_INFO_CMD}         sel info
 
 *** Test Cases ***
 
@@ -83,6 +87,25 @@ Verify Setting IPMI Root User With New Name
     Should Contain  ${msg}  Set User Name command failed
 
 
+Verify Setting Valid Password For IPMI User
+    [Documentation]  Set valid password for IPMI user and verify.
+    [Tags]  Verify_Setting_Valid_Password_For_IPMI_User
+
+    # Create IPMI user.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(6, 6)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Set valid password for newly created user.
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+
+    # Enable IPMI user and verify
+    Run IPMI Standard Command  user enable ${random_userid}
+
+    Verify IPMI Username And Password  ${random_username}  ${valid_password}
+
+
 Verify IPMI User Creation With Same Name
     [Documentation]  Verify error while creating two IPMI user with same name.
     [Tags]  Verify_IPMI_User_Creation_With_Same_Name
@@ -141,3 +164,16 @@ IPMI Create User
     ${user_info}=  Get User Info  ${userid}
     Should Be Equal  ${user_info['user_name']}  ${username}
 
+
+Verify IPMI Username And Password
+    [Documentation]  Verify that user is able to run IPMI command
+    ...  with given username and password.
+    [Arguments]  ${username}  ${password}
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ${IPMI_EXT_CMD}${SPACE}${USER_OPTION}${SPACE}${username}
+    ...  ${SPACE}${PASSWORD_OPTION}${SPACE}${password}
+    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${SEL_INFO_CMD}
+    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
+    Should Be Equal  ${rc}  ${0}  msg=${output}
+    Should Contain  ${output}  SEL Information
