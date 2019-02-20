@@ -50,6 +50,21 @@ Redfish Login Using HTTPS Wrong Port 80 Protocol
     ...  data=${data}  headers=${headers}
 
 
+Attempt Login With Expired Session
+    [Documentation]  Authenticate to redfish, then log out and attempt to
+    ...   use the session.
+
+    redfish.Login
+    ${saved_session_info}=   Get Redfish Session Info
+    redfish.Logout
+
+    # Attempt login with expired session.
+    redfish.Set Session Key  ${saved_session_info["key"]}
+    redfish.Set Session Location  ${saved_session_info["location"]}
+    Run Keyword And Expect Error  *Connection refused*
+    ...  redfish.Get  ${saved_session_info["location"]}
+
+
 *** Keywords ***
 
 Login And Verify Redfish Response
