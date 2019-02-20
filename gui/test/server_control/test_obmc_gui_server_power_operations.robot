@@ -22,6 +22,20 @@ ${string_power_on}                       Attempts to power on the server
 *** Test Case ***
 # OpenBMC @ Power Off state test cases.
 
+Verify Orderly Shutdown Button At Power Off
+    [Documentation]  Verify orderly shutdown button is not present at power Off.
+    [Tags]  Verify_Orderly_Shutdown_Button_At_Power_Off
+
+    Select Server Power Operations Sub Menu
+    Element Should Not Be Visible  ${xpath_select_button_orderly_shutdown}
+
+Verify Immediate Shutdown Button At Power Off
+    [Documentation] Verify immediate shutdown button not present at power Off.
+    [Tags]  Verify_Immediate_Shutdown_Button_At_Power_Off
+
+    Select Server Power Operations Sub Menu
+    Element Should Not Be Visible  ${xpath_select_button_immediate_shutdown}
+
 Verify Warm Reboot Button At Power Off
     [Documentation]  Verify warm reboot button is not present at power Off.
     [Tags]  Verify_Warm_Reboot_Button_At_Power_Off
