@@ -64,7 +64,14 @@ class bmc_redfish(object):
                                              password=self._password_,
                                              default_prefix=self._default_prefix_)
         self._robj_.login(auth=redfish.AuthMethod.SESSION)
+        self._session_key_ = self._robj_.get_session_key()
         self._session_location_ = self._robj_.get_session_location()
+
+    def set_session_key(self, session_key):
+        r"""
+        Update the session key instance.
+        """
+        self._robj_.set_session_key(session_key)
 
     def get(self, resource_path, *args, **kwargs):
         r"""
