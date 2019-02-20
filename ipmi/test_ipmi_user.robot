@@ -29,7 +29,7 @@ Verify IPMI User Creation With Valid Name And ID
 
 Verify IPMI User Creation With Invalid Name
     [Documentation]  Verify error while creating IPMI user with invalid
-    ...  name(e.g. user name with special charaters).
+    ...  name(e.g. user name with special characters).
     [Tags]  Verify_IPMI_User_Creation_With_Invalid_Name
 
     ${random_userid}=  Evaluate  random.randint(1, 15)  modules=random

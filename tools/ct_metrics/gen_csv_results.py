@@ -20,7 +20,7 @@ from xml.etree import ElementTree
 # Remove the python library path to restore with local project path later.
 save_path_0 = sys.path[0]
 del sys.path[0]
-sys.path.append(os.path.join(os.path.dirname(__file__), "../../../lib"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "../../lib"))
 
 from gen_arg import *
 from gen_print import *
