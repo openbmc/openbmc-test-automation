@@ -742,7 +742,7 @@ def create_command_string(command, *pos_parms, **options):
 
     command_string = command
 
-    if gp.is_dict(pos_parms[-1]):
+    if len(pos_parms) > 0 and gp.is_dict(pos_parms[-1]):
         # Convert pos_parms from tuple to list.
         pos_parms = list(pos_parms)
         # Re-assign options to be the last pos_parm value (which is a
@@ -779,7 +779,8 @@ def create_command_string(command, *pos_parms, **options):
                 command_string += str(value)
             else:
                 command_string += gm.quote_bash_parm(str(value))
-    # Finally, append the pos_parms to the end of the command_string.
-    command_string = command_string + ' ' + ' '.join(pos_parms)
+    # Finally, append the pos_parms to the end of the command_string.  Use
+    # filter to eliminate blank pos parms.
+    command_string = ' '.join([command_string] + list(filter(None, pos_parms)))
 
     return command_string
