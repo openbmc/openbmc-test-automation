@@ -65,7 +65,7 @@ Create Multiple Login Sessions And Verify
     #      'key': 'L0XEsZAXpNdF147jJaOD',
     #      'location': '/redfish/v1/SessionService/Sessions/qWn2JOJSOs'
     #    }
-    ${saved_session_info}=   Get Redfish Session Info
+    ${saved_session_info}=  Get Redfish Session Info
 
     # Sessions book keeping for cleanup once done.
     ${session_list}=  Create List
@@ -79,6 +79,24 @@ Create Multiple Login Sessions And Verify
     redfish.Set Session Location  ${saved_session_info["location"]}
     ${resp}=  redfish.Get  ${saved_session_info["location"]}
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+
+
+Attempt Login With Expired Session
+    [Documentation]  Authenticate to redfish, then log out and attempt to
+    ...   use the session.
+    [Tags]  Attempt_Login_With_Expired_Session
+
+    redfish.Login
+    ${saved_session_info}=   Get Redfish Session Info
+    redfish.Logout
+
+    # Attempt login with expired session.
+    # By default 60 minutes of inactivity closes the session.
+    redfish.Set Session Key  ${saved_session_info["key"]}
+    redfish.Set Session Location  ${saved_session_info["location"]}
+
+    ${resp}=  redfish.Get  ${saved_session_info["location"]}
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_UNAUTHORIZED}
 
 
 *** Keywords ***
