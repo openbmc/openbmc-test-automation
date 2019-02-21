@@ -23,7 +23,7 @@ Verify IPMI User Creation With Valid Name And ID
     [Tags]  Test_IPMI_User_Creation_With_Valid_Name_And_ID
 
     ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(1, 15)  modules=random
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
     IPMI Create User  ${random_userid}  ${random_username}
 
 
@@ -32,7 +32,7 @@ Verify IPMI User Creation With Invalid Name
     ...  name(e.g. user name with special characters).
     [Tags]  Verify_IPMI_User_Creation_With_Invalid_Name
 
-    ${random_userid}=  Evaluate  random.randint(1, 15)  modules=random
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  user set name ${random_userid} ${invalid_username}
     Should Contain  ${msg}  Invalid data
@@ -61,7 +61,7 @@ Verify Setting IPMI User With Invalid Password
 
     # Create IPMI user.
     ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(1, 15)  modules=random
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
     IPMI Create User  ${random_userid}  ${random_username}
 
     # Set invalid password for newly created user.
@@ -103,7 +103,7 @@ Verify Setting IPMI User With Null Password
 
     # Create IPMI user.
     ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(1, 15)  modules=random
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
     IPMI Create User  ${random_userid}  ${random_username}
 
     # Set null password for newly created user.
