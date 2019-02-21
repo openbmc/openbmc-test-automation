@@ -115,14 +115,10 @@
 -i Verify_REST_Post_Message_JSON_Compliant
 -i Verify_REST_Bad_Request_Post_Message_JSON_Compliant
 -i REST_Put_Message_JSON_Format_Compliance_Test
--i Check_Response_Codes_415
 -i Get_Response_Codes
 -i Get_Data
 -i Get_Data_Validation
--i Put_Response_Codes
 -i Put_Data_Validation
--i Post_Response_Codes
--i Delete_Response_Codes
 -i Verify_All_REST_Objects_Are_Accessible
 # Soft boot sensors.
 -i Verify_Boot_Sensor_States_At_Host_Booted

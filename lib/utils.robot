@@ -121,7 +121,7 @@ Login To OS Host
     REST Power On  stack_mode=skip  quiet=1
 
     SSHLibrary.Open Connection  ${os_host}
-    ${resp}=  Login  ${os_username}  ${os_password}
+    ${resp}=  SSHLibrary.Login  ${os_username}  ${os_password}
     [Return]  ${resp}
 
 
