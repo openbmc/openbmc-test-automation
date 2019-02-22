@@ -33,4 +33,20 @@ Redfish Power Operation
     redfish.Logout
 
 
+Redfish BMC Reset Operation
+    [Documentation]  Do Redfish reset operation.
 
+    # Example:
+    # "Actions": {
+    # "#Manager.Reset": {
+    #  "ResetType@Redfish.AllowableValues": [
+    #    "GracefulRestart"
+    #  ],
+    #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
+    # }
+
+    redfish.Login
+    ${payload}=  Create Dictionary  ResetType=GracefulRestart
+    ${resp}=  redfish.Post  Managers/bmc/Actions/Manager.Reset  body=&{payload}
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    redfish.Logout
