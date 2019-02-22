@@ -16,7 +16,10 @@ ${root_userid}          1
 ${operator_level_priv}  0x3
 ${valid_password}       0penBmc1
 ${max_password_length}  20
-
+${IPMI_EXT_CMD}         ipmitool -I lanplus -C 3
+${PASSWORD_OPTION}      -P
+${USER_OPTION}          -U
+${SEL_INFO_CMD}         sel info
 
 *** Test Cases ***
 
@@ -163,6 +166,20 @@ IPMI Create User
     ${resp}=  Run IPMI Standard Command  ${ipmi_cmd}
     ${user_info}=  Get User Info  ${userid}
     Should Be Equal  ${user_info['user_name']}  ${username}
+
+
+Verify IPMI Username And Password
+    [Documentation]  Verify that user is able to run IPMI command
+    ...  with given username and password.
+    [Arguments]  ${username}  ${password}
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ${IPMI_EXT_CMD}${SPACE}${USER_OPTION}${SPACE}${username}
+    ...  ${SPACE}${PASSWORD_OPTION}${SPACE}${password}
+    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${SEL_INFO_CMD}
+    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
+    Should Be Equal  ${rc}  ${0}  msg=${output}
+    Should Contain  ${output}  SEL Information
 
 
 Delete All Non Root IPMI User
