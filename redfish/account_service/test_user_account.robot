@@ -12,23 +12,12 @@ Test Teardown    Test Teardown Execution
 ** Test Cases **
 
 Verify AccountService Available
-    [Documentation]  Verify Redfish AccountService is available.
+    [Documentation]  Verify Redfish account service is available.
     [Tags]  Verify_AccountService_Available
 
-    ${resp} =  redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
-    Should Be Equal As Strings  ${resp}  ${True}
+    ${resp} =  redfish.Get  /redfish/v1/AccountService
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    Should Be Equal As Strings  ${resp.dict["ServiceEnabled"]}  ${True}
 
 
 *** Keywords ***
-
-Test Setup Execution
-    [Documentation]  Do test case setup tasks.
-
-    redfish.Login
-
-
-Test Teardown Execution
-    [Documentation]  Do the post test teardown.
-
-    FFDC On Test Case Fail
-    redfish.Logout
