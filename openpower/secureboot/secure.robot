@@ -21,49 +21,56 @@ Test Teardown     Test Teardown Execution
 *** Variables ***
 
 ${security_access_bit_mask}  ${0xC000000000000000}
-# Description of BC8A1E07    A problem occurred during the IPL of the system.
-${pnor_corruption_src}       BC8A1E07
+# Description of BC8A1E07
+#
+# devdesc                  : ROM_verify() Call Failed
+# moduleid                 : SECUREBOOT::MOD_SECURE_ROM_VERIFY
+# reasoncode               : SECUREBOOT::RC_ROM_VERIFY
+# userdata1                : l_rc
+${pnor_corruption_rc}        SECUREBOOT::RC_ROM_VERIFY
 ${bmc_image_dir_path}        /usr/local/share/pnor
 ${bmc_guard_dir_path}        /var/lib/phosphor-software-manager/pnor/prsv
-${FFDC_TOOL_DIR_PATH}        ${EMPTY}
 
 *** Test Cases ***
 
-Validate Secure Boot With TPM Policy Disabled
-    [Documentation]  Validate secure boot with TPM policy disabled.
-    [Tags]  Validate_Secure_Boot_With_TPM_Policy_Disabled
+# All the test cases requires by default jumpers to be positioned
+# between 1 & 2. If this is not met test cases would fail
+# TODO: To validate jumper position and giving warning messages
+Validate Secure Cold Boot With TPM Policy Disabled
+    [Documentation]  Validate secure cold boot with TPM policy disabled.
+    [Tags]  Validate_Secure_Cold_Boot_With_TPM_Policy_Disabled
 
     Validate Secure Boot With TPM Policy Enabled Or Disabled  ${0}
 
 
-Validate Secure Boot With TPM Policy Enabled
-    [Documentation]  Validate secure boot with TPM policy enabled.
-    [Tags]  Validate_Secure_Boot_With_TPM_Policy_Enabled
+Validate Secure Cold Boot With TPM Policy Enabled
+    [Documentation]  Validate secure cold boot with TPM policy enabled.
+    [Tags]  Validate_Secure_Cold_Boot_With_TPM_Policy_Enabled
 
     Validate Secure Boot With TPM Policy Enabled Or Disabled  ${1}
 
 
-Violate Secure Boot Via Corrupt Key In SBE During Host Boot
-    [Documentation]  Violate secure boot via corrupt key SBE during host boot.
-    [Tags]  Violate_Secure_Boot_Via_Corrupt_Key_In_SBE_During_Host_Boot
+Secure Boot Violation Using Corrupt SBE Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt SBE image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_SBE_Image_On_Cold_Boot
 
-    Violate Secure Boot Via Corrupt Key
-    ...  SBE  ${pnor_corruption_src}  ${bmc_image_dir_path}
+    Violate Secure Boot Using Corrupt Image
+    ...  SBE  ${pnor_corruption_rc}  ${bmc_image_dir_path}
 
 
 *** Keywords ***
 
-Violate Secure Boot Via Corrupt Key
-    [Documentation]  Cause secure boot violation during host boot
-    ...  with corrupted key.
-    [Arguments]  ${partition}  ${error_src}  ${bmc_image_dir_path}
+Violate Secure Boot Using Corrupt Image
+    [Documentation]  Cause secure boot violation during cold boot
+    ...  with corrupted image.
+    [Arguments]  ${partition}  ${error_rc}  ${bmc_image_dir_path}
 
     # Description of argument(s):
     # partition            The partition which is to be corrupted
     #                      (e.g. "SBE", "HBI", "HBB", "HBRT", "HBBL", "OCC").
-    # error_src            The system reference code that is expected as a
+    # error_rc             The RC that is expected as a
     #                      result of the secure boot violation
-    #                      (e.g. "BC8A1E07").
+    #                      (e.g. "SECUREBOOT::RC_ROM_VERIFY").
     # bmc_image_dir_path   BMC image path.
 
     Set And Verify TPM Policy  ${1}
@@ -81,11 +88,13 @@ Violate Secure Boot Via Corrupt Key
     scp.Put File
     ...  ${EXEC_DIR}/data/pnor_test_data/${partition}  ${bmc_image_dir_path}
 
+    ${err_log_path}=  Catenate  ${SB_LOG_DIR_PATH}sbe-corruption
+
     # Starting a power on.
     BMC Execute Command  /usr/sbin/obmcutil poweron
     Wait Until Keyword Succeeds  10 min  10 sec  Error Logs Should Exist
 
-    Wait Until Keyword Succeeds  10 min  10 sec  Collect Error Logs and Verify SRC  ${error_src}
+    Wait Until Keyword Succeeds  10 min  10 sec  Collect Error Logs and Verify SRC  ${error_rc} ${err_log_path}
 
     # Remove the file from /usr/local/share/pnor/.
     BMC Execute Command  rm -rf ${bmc_image_dir_path}*
@@ -97,23 +106,21 @@ Violate Secure Boot Via Corrupt Key
 
 
 Collect Error Logs and Verify SRC
-    [Documentation]  Collect error logs and verify src.
-    [Arguments]  ${system_reference_code}
-
+    [Documentation]  Verify error log entry & signature description.
+    [Arguments]  ${error_rc}  ${log_prefix}
     # Description of argument(s):
-    # system_reference_code  The system reference code that the caller
-    #                        expects to be found among the existing
-    #                        error log entries (e.g. "BC8A1E07").
-    # system_reference_code  Src code.
+    # error_rc  Error log signature description.
+    # log_prefix      Log path prefix.
 
-    Convert eSEL To Elog Format  ${FFDC_TOOL_DIR_PATH}
+    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list
+    Should Not Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
-    ${cmd}=  Catenate
-    ...  grep -i ${system_reference_code} ${FFDC_TOOL_DIR_PATH}/esel.out.txt
-    ${rc}  ${output}=  Run and Return RC and Output  ${cmd}
+    Collect eSEL Log  ${log_prefix}
+    ${error_log_file_path}=  Catenate  ${log_prefix}esel.txt
+    ${rc}  ${output}=  Run and Return RC and Output
+    ...  grep -i ${error_msg} ${error_log_file_path}
     Should Be Equal  ${rc}  ${0}
-    ...  msg=${system_reference_code} not found in the existing error logs.
-
+    Should Not Be Empty  ${output}
 
 Get And Verify Security Access Bit
     [Documentation]  Get and verify security access bit.
@@ -133,6 +140,7 @@ Get And Verify Security Access Bit
     ...  msg=Return code from ${cmd} not zero.
 
     # Verify the value of "Security Access Bit".
+    # If fails, probable issue is Jumper possition
 
     ${security_access_bit}=  Convert to Integer  ${security_access_bit_str}
     ${result}=  Evaluate  ${security_access_bit_mask} & ${security_access_bit}
@@ -168,10 +176,15 @@ Validate Secure Boot
 Suite Setup Execution
     [Documentation]  Suite Setup Execution
 
-    Run  export PATH=$PATH:${FFDC_TOOL_DIR_PATH}
-    Set Environment Variable  ${FFDC_TOOL_DIR_PATH}  ${FFDC_TOOL_DIR_PATH}
     ${bmc_image_dir_path}=  Add Trailing Slash  ${bmc_image_dir_path}
     ${bmc_guard_dir_path}=  Add Trailing Slash  ${bmc_guard_dir_path}
+
+    ${SB_LOG_DIR_PATH}=  Catenate  ${EXECDIR}/SB_logs/
+    Set Suite Variable  ${SB_LOG_DIR_PATH}
+
+    Create Directory  ${SB_LOG_DIR_PATH}
+    OperatingSystem.Directory Should Exist  ${SB_LOG_DIR_PATH}
+    Empty Directory  ${SB_LOG_DIR_PATH}
 
     Set Global Variable  ${bmc_image_dir_path}
     Log  ${bmc_image_dir_path}
