@@ -12,7 +12,7 @@ Test Teardown    Test Teardown Execution
 ** Test Cases **
 
 Verify AccountService Available
-    [Documentation]  Verify Redfish AccountService is available.
+    [Documentation]  Verify Redfish account service is available.
     [Tags]  Verify_AccountService_Available
 
     ${resp} =  redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
