@@ -176,6 +176,32 @@ BMC Putscom
     # fru                 FRU (field replaceable unit) (e.g. '2011400').
     # chip_address        Chip address (e.g. '4000000000000000').
 
-    ${cmd}=  Catenate  pdbg -d p9w -${proc_chip_id} putscom 0x${fru} 0x${address}
+    ${cmd}=  Catenate  pdbg -d p9w -p${proc_chip_id} putscom 0x${fru} 0x${chip_address}
 
     BMC Execute Command  ${cmd}
+
+Inject Error Through BMC
+    [Documentation]  Inject checkstop on processor through HOST.
+    ...              Test sequence:
+    ...              1. Boot To HOST.
+    ...              2. Clear any existing gard records.
+    ...              3. Inject Error on processor/centaur.
+    [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
+    ...  ${master_proc_chip}=True
+    # Description of argument(s):
+    # fir                 FIR (Fault isolation register) value (e.g. '2011400').
+    # chip_address        chip address (e.g. '2000000000000000').
+    # threshold_limit     Threshold limit (e.g. '1', '5', '32').
+
+    Delete Error Logs
+    Login To OS Host
+    Gard Operations On OS  clear all
+
+    ${threshold_limit}=  Convert To Integer  ${threshold_limit}
+    :FOR  ${i}  IN RANGE  ${threshold_limit}
+    \  Run Keyword  BMC Putscom  0  ${fir}
+    ...  ${chip_address}
+    # Adding delay after each error injection.
+    \  Sleep  10s
+    # Adding delay to get error log after error injection.
+    Sleep  120s
