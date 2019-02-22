@@ -16,7 +16,7 @@ ${root_userid}          1
 ${operator_level_priv}  0x3
 ${valid_password}       0penBmc1
 ${max_password_length}  20
-
+${ipmi_setaccess_cmd}   channel setaccess
 
 *** Test Cases ***
 
@@ -163,6 +163,23 @@ IPMI Create User
     ${resp}=  Run IPMI Standard Command  ${ipmi_cmd}
     ${user_info}=  Get User Info  ${userid}
     Should Be Equal  ${user_info['user_name']}  ${username}
+
+
+Set Channel Access
+    [Documentation]  Verify that user is able to run IPMI command
+    ...  with given username and password.
+    [Arguments]  ${userid}  ${options}  ${channel}=1
+
+    # Description of argument(s):
+    # userid          The user ID (e.g. "1", "2", etc.).
+    # options         Set channel command options (e.g.
+    #                 "link=on", "ipmi=on", etc.).
+    # channel_number  The user's channel number (e.g. "1").
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ${ipmi_setaccess_cmd}${SPACE}${channel}${SPACE}${userid}
+    ...  ${SPACE}${options}
+    Run IPMI Standard Command  ${ipmi_cmd}
 
 
 Delete All Non Root IPMI User
