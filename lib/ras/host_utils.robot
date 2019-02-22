@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation       This module is for OS checkstop opertions.
+Documentation       Utility for error injection scenarios through HOST & BMC.
 Resource            ../../lib/rest_client.robot
 Resource            ../../lib/utils.robot
 Variables           ../../lib/ras/variables.py
@@ -98,7 +98,7 @@ FIR Address Translation Through HOST
     [Return]  ${translated_addr[1]}
 
 Inject Error Through HOST
-    [Documentation]  Inject checkstop on processor through HOST.
+    [Documentation]  Inject error on processor through HOST.
     ...              Test sequence:
     ...              1. Boot To HOST
     ...              2. Clear any existing gard records
@@ -119,7 +119,7 @@ Inject Error Through HOST
     ${proc_chip_id}=  Get ProcChipId From OS  Processor  ${master_proc_chip}
 
     ${threshold_limit}=  Convert To Integer  ${threshold_limit}
-    :FOR  ${i}  IN RANGE  ${threshold_limit}
+    :FOR  ${count}  IN RANGE  ${threshold_limit}
     \  Run Keyword  Putscom Operations On OS  ${proc_chip_id}  ${fir}
     ...  ${chip_address}
     # Adding delay after each error injection.
@@ -142,7 +142,7 @@ Disable CPU States Through HOST
     ${no_of_states}=  Convert To Integer  ${output}
 
     # Disable state for all cpus.
-    :FOR  ${i}  IN RANGE  ${no_of_states}
+    :FOR  ${count}  IN RANGE  ${no_of_states}
     \  ${cmd}=  Catenate  SEPARATOR=  for file_path in /sys/devices/system/cpu/
      ...  cpu*/cpuidle/state${i}/disable; do echo 1 > $file_path; done
     \  ${output}  ${stderr}  ${rc}=  Run Keyword  OS Execute Command  ${cmd}
@@ -176,6 +176,32 @@ BMC Putscom
     # fru                 FRU (field replaceable unit) (e.g. '2011400').
     # chip_address        Chip address (e.g. '4000000000000000').
 
-    ${cmd}=  Catenate  pdbg -d p9w -${proc_chip_id} putscom 0x${fru} 0x${address}
+    ${cmd}=  Catenate  pdbg -d p9w -p${proc_chip_id} putscom 0x${fru} 0x${chip_address}
 
     BMC Execute Command  ${cmd}
+
+Inject Error Through BMC
+    [Documentation]  Inject error on processor through BMC.
+    ...              Test sequence:
+    ...              1. Boot To HOST.
+    ...              2. Clear any existing gard records.
+    ...              3. Inject Error on processor/centaur.
+    [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
+    ...  ${master_proc_chip}=True
+    # Description of argument(s):
+    # fir                 FIR (Fault isolation register) value (e.g. '2011400').
+    # chip_address        Chip address (e.g. '2000000000000000').
+    # threshold_limit     Recoverable error threshold limit (e.g. '1', '5', '32').
+
+    Delete Error Logs
+    Login To OS Host
+    Gard Operations On OS  clear all
+
+    ${threshold_limit}=  Convert To Integer  ${threshold_limit}
+    :FOR  ${count}  IN RANGE  ${threshold_limit}
+    \  BMC Putscom  0  ${fir}
+    ...  ${chip_address}
+    # Adding delay after each error injection.
+    \  Sleep  10s
+    # Adding delay to get error log after error injection.
+    Sleep  120s
