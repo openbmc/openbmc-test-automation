@@ -5,7 +5,7 @@ Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Library             ../lib/ipmi_utils.py
 
-Test Teardown       Test Teardown Execution
+#Test Teardown       Test Teardown Execution
 
 
 *** Variables ***
@@ -116,6 +116,21 @@ Verify IPMI User Creation With Same Name
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  user set name 3 ${random_username}
     Should Contain  ${msg}  Invalid data field in request
+
+
+Verify Setting IPMI User With Null Username
+    [Documentation]  Verify that help section of user command is displayed
+    ...  while setting IPMI user with null username.
+    [Tags]  Verify_Setting_IPMI_User_With_Null_Username
+
+    # Set null username for random userid
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    ${ipmi_cmd}=  Catenate  user set name ${random_userid} ${EMPTY}
+    ${msg}=  Run IPMI Standard Command  ${ipmi_cmd}  ${0}
+
+    # Verify that help section of user command is displayed will
+    # setting null username.
+    Should Contain  ${msg}  User Commands:
 
 
 Verify Setting IPMI User With Null Password
