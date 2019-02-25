@@ -502,6 +502,38 @@ def restore_plug_in_value(default="", plug_in_package_name=None):
         return default
 
 
+def exit_not_master():
+    r"""
+    Exit the program with return code zero if this program was NOT called by
+    the master program.
+
+    There are cases where plug-ins are called by a multi-layered stack:
+
+    master_wrapper
+        obmc_boot_test.py
+            Example_plug_in/cp_setup
+
+    In a scenario like this, Example_plug_in/cp_setup may be called once
+    directly by master_wrapper (the master) and and then called again directly
+    by obmc_boot_test.py (the child).  Some plug-in programs may wish to avoid
+    doing any processing on the second such call.  This function will acheive
+    that purpose.
+
+    This function will print a standard message to stdout prior to exiting.
+    """
+
+    AUTOBOOT_MASTER_PID = gm.get_mod_global("AUTOBOOT_MASTER_PID")
+    AUTOBOOT_PROGRAM_PID = gm.get_mod_global("AUTOBOOT_PROGRAM_PID")
+
+    if AUTOBOOT_MASTER_PID != AUTOBOOT_PROGRAM_PID:
+        message = get_plug_in_package_name() + "/" + gp.pgm_name + " is not" \
+            + " being called by the master program in the stack so no action" \
+            + " will be taken."
+        gp.qprint_timen(message)
+        gp.qprint_vars(AUTOBOOT_MASTER_PID, AUTOBOOT_PROGRAM_PID)
+        exit(0)
+
+
 # Create print wrapper functions for all sprint functions defined above.
 # func_names contains a list of all print functions which should be created
 # from their sprint counterparts.
