@@ -20,6 +20,28 @@ ${max_password_length}  20
 
 *** Test Cases ***
 
+Verify IPMI User Summary
+    [Documentation]  Verify IPMI maximum supported IPMI userid and
+    ...  enabled user form user summary
+    [Tags]  Verify_IPMI_User_Summary
+
+    # Delete all non-root IPMI(i.e. except userid 1)
+    Delete All Non Root IPMI User
+
+    # Create one user and enable it.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+    Run IPMI Standard Command  user enable ${random_userid}
+
+    # Verify maximum userids and total enabled users.
+    ${resp}=  Run IPMI Standard Command  user summary
+    ${enabled_user_count}=  Get Lines Containing String  ${resp}  Enabled User Count
+    ${maximum_ids}=  Get Lines Containing String  ${resp}  Maximum IDs
+    Should Contain  ${enabled_user_count}  2
+    Should Contain  ${maximum_ids}  15
+
+
 Verify IPMI User Creation With Valid Name And ID
     [Documentation]  Create user via IPMI and verify.
     [Tags]  Test_IPMI_User_Creation_With_Valid_Name_And_ID
