@@ -926,3 +926,11 @@ Get Service Attribute
     ...  systemctl -p ${option} show ${servicename} | cut -d = -f2
     ${attr}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     [Return]  ${attr}
+
+
+Verify Watchdog Enabled
+    [Documentation]  Check that watchdog settings are enabled.
+
+    ${properties}=  Read Properties  /xyz/openbmc_project/watchdog/host0
+    Should Be Equal As Strings  ${properties["Enabled"]}  ${True}
+    Should Not Be Equal As Strings  ${properties["TimeRemaining"]}  0
