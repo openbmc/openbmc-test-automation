@@ -141,11 +141,3 @@ Watchdog Object Should Exist
 
     ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}host0
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-
-
-Verify Watchdog Enabled
-    [Documentation]  Check that watchdog settings are enabled.
-
-    ${properties}=  Read Properties  /xyz/openbmc_project/watchdog/host0
-    Should Be Equal As Strings  ${properties["Enabled"]}  ${True}
-    Should Not Be Equal As Strings  ${properties["TimeRemaining"]}  0
