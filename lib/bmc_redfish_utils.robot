@@ -23,12 +23,13 @@ Redfish Power Operation
     #    "GracefulRestart",
     #    "GracefulShutdown"
     #  ],
-    #  "target": "/redfish/v1/Systems/motherboard/Actions/ComputerSystem.Reset"
-    #  }}
+    #  "target": "/redfish/v1/Systems/system/Actions/ComputerSystem.Reset"
+    #  }
+    # }
 
     redfish.Login
     ${payload}=  Create Dictionary  ResetType=${reset_type}
-    ${resp}=  redfish.Post  Systems/1/Actions/ComputerSystem.Reset  body=&{payload}
+    ${resp}=  redfish.Post  Systems/system/Actions/ComputerSystem.Reset  body=&{payload}
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
     redfish.Logout
 
