@@ -94,6 +94,31 @@ Verify Watchdog URL When Host Is On And Off
     ${resp}=  OpenBMC Get Request  ${HOST_WATCHDOG_URI}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
+Verify Dump Generation When Watchdog Is Enabled
+    [Documentation]  Enable watchdog timer and verify whether dump is generated
+    [Tags]  Verify_Dump_Generation_When_Watchdog_Is_Enabled
+
+    Run Keyword And Ignore Error  Delete All Dumps
+
+    ${initial_interval}=  Read Attribute  ${HOST_WATCHDOG_URI}  Interval
+
+    Trigger Host Watchdog Error  2000  30
+
+    Wait Until Keyword Succeeds  30 min  10 sec  Watchdog Object Should Exist
+
+    # Verify if watchdog settings are enabled and timeremaining is reduced.
+    Wait Until Keyword Succeeds  3 min  10 sec  Verify Watchdog Enabled
+
+    Wait Until Keyword Succeeds  120 sec  20 sec  Is Host Rebooted
+    Wait For Host To Ping  ${OS_HOST}  5min  10
+    Wait for OS
+
+    &{dump_entry_list}=  Read Properties  https://$BMC_IP/xyz/openbmc_project/dump/entry/list
+    @{dump_data}=  {dump_entry_list}}.get('data')
+    ${length}=  Get Length  ${dump_data}
+    Should Be Equal As Integers  ${length}  1
+
+
 *** Keywords ***
 
 Suite Setup Execution
