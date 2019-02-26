@@ -8,6 +8,7 @@ Resource            ../lib/dump_utils.robot
 Resource            ../lib/boot_utils.robot
 Resource            ../lib/utils.robot
 Library             ../lib/bmc_ssh_utils.py
+Library             ../lib/common_utils.robot
 
 Test Setup          Open Connection And Log In
 Test Teardown       Test Teardown Execution
@@ -185,6 +186,43 @@ Post Dump Core Dump Check
     [Tags]  Post_Dump_Core_Dump_Check
 
     Check For Core Dumps
+
+
+Verify Dump Generation When Watchdog Is Enabled
+    [Documentation]  Enable watchdog timer and verify whether dump is generated
+    [Tags]  Verify_Dump_Generation_When_Watchdog_Is_Enabled
+
+    REST Power On
+
+    Run Keyword And Ignore Error  Delete All Dumps
+
+    # Enable auto reboot
+    Set Auto Reboot  ${1}
+
+    ${initial_interval}=  Read Attribute  ${HOST_WATCHDOG_URI}  Interval
+
+    Trigger Host Watchdog Error  2000  30
+
+    Wait Until Keyword Succeeds  3 min  10 sec  Watchdog Object Should Exist
+
+    # Verify if watchdog settings are enabled and timeremaining is reduced.
+    Wait Until Keyword Succeeds  3 min  10 sec  Verify Watchdog Enabled
+
+    Wait Until Keyword Succeeds  300 sec  20 sec  Is Host Rebooted
+
+    #Get dump details
+    @{dump_entry_list}=  Read Properties  ${DUMP_ENTRY_URI}
+
+    # Verifing that there is only one dump
+    ${length}=  Get length  ${dump_entry_list}
+    Should Be Equal As Integers  ${length}  1
+
+    # Max size for dump is 200k = 200x1024
+    ${value}=  Get From List  ${dump_entry_list}  0
+    @{split_value}=  Split String  ${value}  /
+    ${dump_id}=  Get From List  ${split_value}  -1
+    ${dump_size}=  Read Attribute  ${DUMP_ENTRY_URI}${dump_id}  Size
+    Should Be True  0 < ${dump_size} < 204800
 
 
 *** Keywords ***
