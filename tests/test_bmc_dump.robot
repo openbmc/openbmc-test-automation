@@ -187,6 +187,38 @@ Post Dump Core Dump Check
     Check For Core Dumps
 
 
+Verify Dump After Host Watchdog Error Injection
+    [Documentation]  Inject host watchdog error and verify whether dump is generated.
+    [Tags]  Verify_Dump_After_Host_Watchdog_Error_Injection
+
+    REST Power On
+
+    Run Keyword And Ignore Error  Delete All Dumps
+
+    # Enable auto reboot
+    Set Auto Reboot  ${1}
+
+    Trigger Host Watchdog Error  2000  30
+
+    Wait Until Keyword Succeeds  300 sec  20 sec  Is Host Rebooted
+
+    #Get dump details
+    @{dump_entry_list}=  Read Properties  ${DUMP_ENTRY_URI}
+
+    # Verifing that there is only one dump
+    ${length}=  Get length  ${dump_entry_list}
+    Should Be Equal As Integers  ${length}  ${1}
+
+    # Get dump id
+    ${value}=  Get From List  ${dump_entry_list}  0
+    @{split_value}=  Split String  ${value}  /
+    ${dump_id}=  Get From List  ${split_value}  -1
+
+    # Max size for dump is 200k = 200x1024
+    ${dump_size}=  Read Attribute  ${DUMP_ENTRY_URI}${dump_id}  Size
+    Should Be True  0 < ${dump_size} < 204800
+
+
 *** Keywords ***
 
 Test Teardown Execution
