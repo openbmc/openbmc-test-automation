@@ -58,6 +58,48 @@ class bmc_redfish_utils(object):
         resp = self._redfish_.get(resource_path)
         return resp.dict
 
+    def get_target_actions(self, resource_path, target_attribute):
+        r"""
+        Returns resource target entry of the searched target attribute.
+
+        Description of argument(s):
+        resource_path      URI resource absolute path
+                           (e.g. "/redfish/v1/Systems/system").
+        target_attribute   Name of the attribute (e.g. 'ComputerSystem.Reset').
+
+        Example:
+         "Actions": {
+         "#ComputerSystem.Reset": {
+          "ResetType@Redfish.AllowableValues": [
+            "On",
+            "ForceOff",
+            "GracefulRestart",
+            "GracefulShutdown"
+          ],
+          "target": "/redfish/v1/Systems/system/Actions/ComputerSystem.Reset"
+          }
+         }
+        """
+
+        global target_list
+        target_list = []
+
+        resp_dict = self.get_attribute(resource_path, "Actions")
+        if resp_dict is None:
+            return None
+
+        # Recursively search the "target" key in the nested dictionary.
+        # Populate the target_list of target entries.
+        self.get_key_value_nested_dict(resp_dict, "target")
+
+        # Return the matching target URL entry.
+        for target in target_list:
+            # target "/redfish/v1/Systems/system/Actions/ComputerSystem.Reset"
+            if target_attribute in target:
+                return target
+
+        return None
+
     def list_request(self, resource_path):
         r"""
         Perform a GET list request and return available resource paths.
@@ -140,3 +182,19 @@ class bmc_redfish_utils(object):
                 if '@odata.id' == key:
                     if value not in resource_list and not value.endswith('/'):
                         resource_list.append(value)
+
+    def get_key_value_nested_dict(self, data, key):
+        r"""
+        Parse through the nested dictionary and get the searched key value.
+
+        Description of argument(s):
+        data    Nested dictionary data from response message.
+        key     Search dictionary key element.
+        """
+
+        for k, v in data.items():
+            if isinstance(v, dict):
+                self.get_key_value_nested_dict(v, key)
+
+            if k == key:
+                target_list.append(v)
