@@ -20,7 +20,6 @@ Download DMTF Tool
     # rsv_github_url  Github URL link(e.g "https://github.com/DMTF/Redfish-Service-Validator").
 
     ${rc}  ${output}=  Shell Cmd  rm -rf ${rsv_dir_path} ; git clone ${rsv_github_url} ${rsv_dir_path}
-    Log  ${output}
 
 
 Run DMTF Tool
@@ -33,7 +32,23 @@ Run DMTF Tool
 
     ${rc}  ${output}=  Shell Cmd  ${command_string}
     Log  ${output}
+    [Return]  ${output}
+
+
+Redfish Service Validator Result
+    [Documentation]  Check tool output for errors.
+    [Arguments]      ${tool_output}
 
     # Example:
     # Validation has failed: 9 problems found
-    Should Not Contain  ${output}  Validation has failed
+    Should Not Contain  ${tool_output}  Validation has failed
+
+
+Redfish JsonSchema ResponseValidator Result
+    [Documentation]  Check tool output for errors.
+    [Arguments]      ${tool_output}
+
+    # Example:
+    # 0 errors
+    Should Contain  ${tool_output}  0 errors
+
