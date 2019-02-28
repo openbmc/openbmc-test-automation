@@ -196,6 +196,7 @@ Verify IPMI User Deletion
 
     # Delete IPMI User and verify
     Run IPMI Standard Command  user set name ${random_userid} ""
+    ${user_info}=  Get User Info  ${random_userid}
     Should Be Equal  ${user_info['user_name']}  ${EMPTY}
 
 
