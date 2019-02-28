@@ -23,6 +23,7 @@ ${PASSWORD_OPTION}      -P
 ${USER_OPTION}          -U
 ${SEL_INFO_CMD}         sel info
 
+
 *** Test Cases ***
 
 Verify IPMI User Summary
@@ -250,6 +251,21 @@ Disable IPMI User And Verify
     Should Contain  ${msg}  IPMI command fails
 
 
+Verify IPMI Root User Password Change
+    [Documentation]  Change IPMI root user password and verify that
+    ...  root user is able to run IPMI command.
+    [Tags]  Verify_IPMI_Root_User_Password_Change
+    [Teardown]  Wait Until Keyword Succeeds  15 sec  5 sec
+    ...  Set Default Password For IPMI Root User
+
+    # Set new password for root user.
+    Run IPMI Standard Command
+    ...  user set password ${root_userid} ${valid_password}
+
+    # Verify that root user is able to run IPMI command using new password.
+    Verify IPMI Username And Password  root  ${valid_password}
+
+
 *** Keywords ***
 
 IPMI Create User
@@ -281,6 +297,18 @@ Set Channel Access
     ...  ${ipmi_setaccess_cmd}${SPACE}${channel}${SPACE}${userid}
     ...  ${SPACE}${options}
     Run IPMI Standard Command  ${ipmi_cmd}
+
+Set Default Password For IPMI Root User
+    [Documentation]  Set default password for IPMI root user (i.e. 0penBmc).
+
+    # Set default password for root user.
+    ${result}=  Run External IPMI Standard Command
+    ...  user set password ${root_userid} ${OPENBMC_PASSWORD}
+    ...  P=${valid_password}
+    Should Contain  ${result}  Set User Password command successful
+
+    # Verify that root user is able to run IPMI command using default password.
+    Verify IPMI Username And Password  root  ${OPENBMC_PASSWORD}
 
 
 Verify IPMI Username And Password
