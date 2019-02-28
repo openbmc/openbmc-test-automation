@@ -22,4 +22,6 @@ Test BMC Redfish Using Redfish Service Validator
 
     Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
 
-    Run DMTF Tool  ${rsv_dir_path}  ${command_string}
+    ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_string}
+
+    Redfish Service Validator Result  ${output}
