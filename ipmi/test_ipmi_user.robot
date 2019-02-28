@@ -22,6 +22,7 @@ ${IPMI_EXT_CMD}         ipmitool -I lanplus -C 3
 ${PASSWORD_OPTION}      -P
 ${USER_OPTION}          -U
 ${SEL_INFO_CMD}         sel info
+${set_password_cmd}     user set password
 
 *** Test Cases ***
 
@@ -249,6 +250,23 @@ Disable IPMI User And Verify
     Should Contain  ${msg}  IPMI command fails
 
 
+Verify IPMI Root User Password Change
+    [Documentation]  Change IPMI root user password and verify that
+    ...  root user is able run IPMI command.
+    [Tags]  Verify_IPMI_Root_User_Password_Change
+    [Teardown]  Set Default Password For IPMI Root User
+
+    # Set new password for root user.
+    Run IPMI Standard Command
+    ...  user set password ${root_userid} ${valid_password}
+
+    # Delay for new password to get applied.
+    Sleep  5s
+
+    # Verify that root user is able to run IPMI command using new password.
+    Verify IPMI Username And Password  root  ${valid_password}
+
+
 *** Keywords ***
 
 IPMI Create User
@@ -281,6 +299,22 @@ Set Channel Access
     ...  ${SPACE}${options}
     Run IPMI Standard Command  ${ipmi_cmd}
 
+Set Default Password For IPMI Root User
+    [Documentation]  Set default password for IPMI root user (i.e. 0penBmc).
+
+    # Set default password for root user.
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ${IPMI_EXT_CMD}${SPACE}${USER_OPTION}${SPACE}${OPENBMC_USERNAME}
+    ...  ${SPACE}${PASSWORD_OPTION}${SPACE}${valid_password}
+    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${set_password_cmd}
+    ...  ${SPACE}${root_userid}${SPACE}${OPENBMC_PASSWORD}
+    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
+    Should Be Equal  ${rc}  ${0}  msg=${output}
+
+    # Verify that root user's password is set to default using test command.
+    ${msg}=  Run IPMI Standard Command
+    ...  user test ${root_userid} ${max_password_length} ${OPENBMC_PASSWORD}
+    Should Contain  ${msg}  Success
 
 Verify IPMI Username And Password
     [Documentation]  Verify that user is able to run IPMI command
