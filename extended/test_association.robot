@@ -41,8 +41,8 @@ Create Test Error Callout And Verify AdditionalData
     ${elog_entry}=  Get Elog URL List
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
     ${jsondata}=  To JSON  ${resp.content}
-    Should Contain  ${jsondata}["data"]["AdditionalData"]}  ${target_device_path}
-    Should Contain  ${jsondata}["data"]["AdditionalData"]}  0x0DEADEAD
+    Should Contain  ${jsondata["data"]["AdditionalData"]}  ${target_device_path}
+    Should Contain  ${jsondata["data"]["AdditionalData"]}  0x0DEADEAD
 
 
 Create Test Error Callout And Verify Associations
@@ -62,10 +62,10 @@ Create Test Error Callout And Verify Associations
     ${elog_entry}=  Get Elog URL List
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
     ${jsondata}=  To JSON  ${resp.content}
-    List Should Contain Value  ${jsondata}["data"]["associations"]}  callout
-    List Should Contain Value  ${jsondata}["data"]["associations"]}  fault
+    List Should Contain Value  ${jsondata["data"]["associations"]}  callout
+    List Should Contain Value  ${jsondata["data"]["associations"]}  fault
     List Should Contain Value
-    ...  ${jsondata}["data"]["associations"]}
+    ...  ${jsondata["data"]["associations"]}
     ...  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
 
 
@@ -193,7 +193,7 @@ Set Resolved Field And Verify Callout Deletion
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
     ${jsondata}=  To JSON  ${resp.content}
-    Should Contain  ${jsondata}["data"]["AdditionalData"]  callout
+    Should Contain  ${jsondata["data"]["AdditionalData"]}  callout
 
     # Set the error log field "Resolved".
     # By doing so, the callout object should get deleted automatically.
