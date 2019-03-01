@@ -1076,7 +1076,11 @@ def sindent(text="",
     return buffer
 
 
-def sprint_func_line(stack_frame):
+func_line_style_std = None
+func_line_style_short = 1
+
+
+def sprint_func_line(stack_frame, style=None):
     r"""
     For the given stack_frame, return a formatted string containing the
     function name and all its arguments.
@@ -1088,6 +1092,18 @@ def sprint_func_line(stack_frame):
     Description of argument(s):
     stack_frame                     A stack frame (such as is returned by
                                     inspect.stack()).
+    style                           Indicates the style or formatting of the
+                                    result string.  Acceptable values are
+                                    shown above.
+
+    Description of styles:
+    func_line_style_std             The standard formatting.
+    func_line_style_short           1) The self parm (associated with methods)
+                                    will be dropped. 2) The args and kwargs
+                                    values will be treated as special.  In
+                                    both cases the arg name ('args' or
+                                    'kwargs') will be dropped and only the
+                                    values will be shown.
     """
 
     func_name = str(stack_frame[3])
@@ -1109,9 +1125,22 @@ def sprint_func_line(stack_frame):
             # Get the arg value from frame locals.
             arg_value = locals[arg_name]
             if arg_name == 'self':
+                if style == func_line_style_short:
+                    continue
                 # Manipulations to improve output for class methods.
                 func_name = arg_value.__class__.__name__ + "." + func_name
                 args_list.append(arg_name + " = <self>")
+            elif (style == func_line_style_short
+                  and arg_name == 'args'
+                  and type(arg_value) in (list, tuple)):
+                if len(arg_value) == 0:
+                    continue
+                args_list.append(repr(', '.join(arg_value)))
+            elif (style == func_line_style_short
+                  and arg_name == 'kwargs'
+                  and type(arg_value) is dict):
+                for key, value in arg_value.items():
+                    args_list.append(key + "=" + repr(value))
             else:
                 args_list.append(arg_name + " = " + repr(arg_value))
         args_str = "(" + ', '.join(map(str, args_list)) + ")"
@@ -1123,7 +1152,8 @@ def sprint_func_line(stack_frame):
 
 
 def sprint_call_stack(indent=0,
-                      stack_frame_ix=0):
+                      stack_frame_ix=0,
+                      style=None):
     r"""
     Return a call stack report for the given point in the program with line
     numbers, function names and function parameters and arguments.
@@ -1146,6 +1176,8 @@ def sprint_call_stack(indent=0,
                                     line of output.
     stack_frame_ix                  The index of the first stack frame which
                                     is to be returned.
+    style                           See the sprint_line_func prolog above for
+                                    details.
     """
 
     buffer = ""
@@ -1170,7 +1202,7 @@ def sprint_call_stack(indent=0,
             line_num = str(current_stack[ix + 1][2])
         except IndexError:
             line_num = ""
-        func_and_args = sprint_func_line(stack_frame)
+        func_and_args = sprint_func_line(stack_frame, style=style)
 
         buffer += sindent(format_string % (line_num, func_and_args), indent)
         ix += 1
@@ -1180,7 +1212,7 @@ def sprint_call_stack(indent=0,
     return buffer
 
 
-def sprint_executing(stack_frame_ix=None):
+def sprint_executing(stack_frame_ix=None, style=None):
     r"""
     Print a line indicating what function is executing and with what parameter
     values.  This is useful for debugging.
@@ -1198,6 +1230,8 @@ def sprint_executing(stack_frame_ix=None):
                                     the caller is the wrapper function
                                     "print_executing", this function will bump
                                     it up by 1.
+    style                           See the sprint_line_func prolog above for
+                                    details.
     """
 
     # If user wants default stack_frame_ix.
@@ -1211,7 +1245,7 @@ def sprint_executing(stack_frame_ix=None):
 
     stack_frame = inspect.stack()[stack_frame_ix]
 
-    func_and_args = sprint_func_line(stack_frame)
+    func_and_args = sprint_func_line(stack_frame, style)
 
     return sprint_time() + "Executing: " + func_and_args + "\n"
 
