@@ -14,10 +14,18 @@ ${invalid_username}     user%
 ${invalid_password}     abc123
 ${root_userid}          1
 ${operator_level_priv}  0x3
+${user_priv}            2
+${operator_priv}        3
 ${admin_level_priv}     4
+${no_access_priv}       15
 ${valid_password}       0penBmc1
 ${max_password_length}  20
 ${ipmi_setaccess_cmd}   channel setaccess
+${IPMI_EXT_CMD}         ipmitool -I lanplus -C 3
+${PASSWORD_OPTION}      -P
+${USER_OPTION}          -U
+${SESSION_OPTION}       -L
+${SEL_INFO_CMD}         sel info
 
 
 *** Test Cases ***
@@ -197,6 +205,43 @@ Verify IPMI User Deletion
     Should Be Equal  ${user_info['user_name']}  ${EMPTY}
 
 
+Test IPMI User Privilege Level
+    [Documentation]  Verify IPMI user with user privilege can only run user level commands.
+    [Tags]  Test_IPMI_User_Privilege_Level
+    [Template]  Test IPMI User Privilege
+
+    #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
+    ${user_priv}         Passed           Failed               Failed    
+
+
+Test IPMI Operator Privilege Level
+    [Documentation]  Verify IPMI user with operator privilege can only run user and operator levels commands.
+    ...  level is set to operator.
+    [Tags]  Test_IPMI_Operator_Privilege_Level
+    [Template]  Test IPMI User Privilege
+
+    #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
+    ${operator_priv}     Passed           Passed               Failed
+
+
+Test IPMI Administrator Privilege Level
+    [Documentation]  Verify IPMI user with admin privilege can run all levels command.
+    [Tags]  Test_IPMI_Administrator_Privilege_Level
+    [Template]  Test IPMI User Privilege
+
+    #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
+    ${admin_level_priv}  Passed           Passed               Passed
+
+
+Test IPMI No Access Privilege Level
+    [Documentation]  Verify IPMI user with no access privilege can not run only any level command.
+    [Tags]  Test_IPMI_No_Access_Privilege_Level
+    [Template]  Test IPMI User Privilege
+
+    #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
+    ${no_access_priv}    Failed           Failed               Failed
+
+
 Enable IPMI User And Verify
     [Documentation]  Enable IPMI user and verify that the user is able
     ...  to run IPMI command.
@@ -274,6 +319,56 @@ Set Default Password For IPMI Root User
 
     # Verify that root user is able to run IPMI command using default password.
     Verify IPMI Username And Password  root  ${OPENBMC_PASSWORD}
+
+
+Test IPMI User Privilege
+    [Arguments]  ${privilege_level}  ${user_cmd_status}  ${operator_cmd_status}  ${admin_cmd_status}
+
+    # Description of argument(s):
+    # privilege_level     Privilege level of IPMI user (e.g. 4, 3).
+    # user_cmd_status     Expected status of IPMI command run with the user
+    #                     of user privilege(i.e. "Passed" or "Failed").
+    # operator_cmd_status Expected status of IPMI command run with the user
+    #                     of operator privilege(i.e. "Passed" or "Failed").
+    # admin_cmd_status    Expected status of IPMI command run with the user
+    #                     of admin privilege(i.e. "Passed" or "Failed").
+
+    # Create IPMI user and set valid password.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+
+    # Set privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege_level}
+
+    # Enable IPMI user and verify.
+    Run IPMI Standard Command  user enable ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  enabled
+
+    Verify IPMI Command  ${random_username}  ${valid_password}  User  ${user_cmd_status}
+    Verify IPMI Command  ${random_username}  ${valid_password}  Operator  ${operator_cmd_status}
+    Verify IPMI Command  ${random_username}  ${valid_password}  Administrator  ${admin_cmd_status}
+
+
+Verify IPMI Command
+    [Documentation]  Verify IPMI command execution with 
+    ...  with given username, password, privilege and expected status.
+    [Arguments]  ${username}  ${password}  ${privilege}  ${expected_status}
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ${IPMI_EXT_CMD}${SPACE}${USER_OPTION}${SPACE}${username}
+    ...  ${SPACE}${PASSWORD_OPTION}${SPACE}${password}
+    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${SESSION_OPTION}
+    ...  ${SPACE}${privilege}${SPACE}${SEL_INFO_CMD}
+
+    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
+    Run Keyword if  '${expected_status}' == 'Passed'
+    ...  Should Be Equal  ${rc}  ${0}
+    ...  ELSE IF  '${expected_status}' == 'Failed'
+    ...  Should Be Equal  ${rc}  ${1}
 
 
 Delete All Non Root IPMI User
