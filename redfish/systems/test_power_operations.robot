@@ -2,8 +2,10 @@
 Documentation    This suite tests Redfish Host power operations.
 
 Resource         ../../lib/boot_utils.robot
+Resource         ../../lib/common_utils.robot
 
-Test Teardown    FFDC On Test Case Fail
+Test Setup       Test Setup Execution
+Test Teardown    Test Teardown Execution
 
 *** Test Cases ***
 
@@ -30,3 +32,19 @@ Verify Redfish BMC PowerOff
     [Tags]  Verify_Redfish_Host_PowerOff
 
     Redfish Hard Power Off
+
+*** Keywords ***
+
+Test Setup Execution
+    [Documentation]  Do test case setup tasks.
+
+    Start SOL Console Logging
+
+
+Test Teardown Execution
+    [Documentation]  Collect FFDC and SOL log.
+
+    FFDC On Test Case Fail
+    ${sol_log}=    Stop SOL Console Logging
+    Log   ${sol_log}
+    Set Auto Reboot  ${1}
