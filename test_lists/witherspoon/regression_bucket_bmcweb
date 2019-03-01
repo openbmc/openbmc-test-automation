@@ -27,7 +27,9 @@
 -i Verify_Chassis_Identify_via_IPMI
 -i Test_Watchdog_Reset_Via_IPMI_And_Verify_Using_REST
 -i Test_Ambient_Temperature_Via_IPMI
--i Verify_Get_DCMI_Capabilities
+# Submitted IPMI PR and is merged, fix will be availble in newer ipmitool.
+# Reference: https://github.com/ipmitool/ipmitool/pull/96
+#-i Verify_Get_DCMI_Capabilities
 -i Test_Power_Reading_Via_IPMI_With_Host_Booted
 -i Retrieve_IP_Address_Via_IPMI_And_Verify_With_BMC_Details
 -i Verify_Get_Device_ID
