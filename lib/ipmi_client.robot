@@ -200,7 +200,7 @@ Byte Conversion
     Set Global Variable  ${arrayByte}   array:byte:
     @{listargs}=   Split String  ${args}
     ${index}=   Set Variable   ${0}
-    :FOR   ${word}   in   @{listargs}
+    :FOR  ${word}  IN  @{listargs}
     \    Run Keyword if   ${index} == 0   Set NetFn Byte  ${word}
     \    Run Keyword if   ${index} == 1   Set Cmd Byte    ${word}
     \    Run Keyword if   ${index} > 1    Set Array Byte  ${word}

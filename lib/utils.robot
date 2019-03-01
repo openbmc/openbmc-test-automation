@@ -899,21 +899,21 @@ BMC File System Usage Check
 
 Check BMC CPU Performance
     [Documentation]   Minimal 10% of proc should be free in 3 sample
-    :FOR  ${var}  IN Range  1  4
+    :FOR  ${var}  IN RANGE  1  4
     \     BMC CPU Performance check
 
 
 Check BMC Mem Performance
     [Documentation]   Minimal 10% of memory should be free
 
-    :FOR  ${var}  IN Range  1  4
+    :FOR  ${var}  IN RANGE  1  4
     \     BMC Mem Performance check
 
 
 Check BMC File System Performance
     [Documentation]  Check for file system usage for 4 times
 
-    :FOR  ${var}  IN Range  1  4
+    :FOR  ${var}  IN RANGE  1  4
     \     BMC File System Usage check
 
 
@@ -952,10 +952,9 @@ Get Endpoint Paths
     # For a given string, look for prefix and suffix for matching expression.
     # Start of string followed by zero or more of any character followed by
     # any digit or lower case character.
-    ${resp}=  Get Matches  ${list}  regexp=^.*[0-9a-z_].${endpoint}[0-9a-z]*$
+    ${resp}=  Get Matches  ${list}  regexp=^.*[0-9a-z_].${endpoint}\[0-9a-z]*$
 
     [Return]  ${resp}
-
 
 Check Zombie Process
     [Documentation]    Check if any defunct process exist or not on BMC
