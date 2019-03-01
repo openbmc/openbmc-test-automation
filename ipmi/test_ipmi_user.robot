@@ -14,7 +14,10 @@ ${invalid_username}     user%
 ${invalid_password}     abc123
 ${root_userid}          1
 ${operator_level_priv}  0x3
+${user_priv}            2
+${operator_priv}        3
 ${admin_level_priv}     4
+${no_access_priv}       15
 ${valid_password}       0penBmc1
 ${max_password_length}  20
 ${ipmi_setaccess_cmd}   channel setaccess
@@ -199,6 +202,46 @@ Verify IPMI User Deletion
     Should Be Equal  ${user_info['user_name']}  ${EMPTY}
 
 
+Test IPMI User Privilege Level
+    [Documentation]  Verify IPMI user does not have access when privilege
+    ...  level is set to user.
+    [Tags]  Test_IPMI_User_Privilege_Level
+    [Template]  Test IPMI User Privilege
+
+    #Privilege level           IPMI Command Status
+    ${user_priv}               Passed
+
+
+Test IPMI Operator Privilege Level
+    [Documentation]  Verify IPMI user does not have access when privilege
+    ...  level is set to operator.
+    [Tags]  Test_IPMI_Operator_Privilege_Level
+    [Template]  Test IPMI User Privilege
+
+    #Privilege level           IPMI Command Status
+    ${operator_priv}           Passed
+
+
+Test IPMI Administrator Privilege Level
+    [Documentation]  Verify IPMI user does not have access when privilege
+    ...  level is set to no access.
+    [Tags]  Test_IPMI_Administrator_Privilege_Level
+    [Template]  Test IPMI User Privilege
+
+    #Privilege level           IPMI Command Status
+    ${admin_level_priv}        Passed
+
+
+Test IPMI No Access Privilege Level
+    [Documentation]  Verify IPMI user does not have access when privilege
+    ...  level is set to no access.
+    [Tags]  Test_IPMI_No_Access_Privilege_Level
+    [Template]  Test IPMI User Privilege
+
+    #Privilege level           IPMI Command Status
+    ${no_access_priv}          Failed
+
+
 Enable IPMI User And Verify
     [Documentation]  Enable IPMI user and verify that the user is able
     ...  to run IPMI command.
@@ -280,6 +323,39 @@ Set Channel Access
     ...  ${ipmi_setaccess_cmd}${SPACE}${channel}${SPACE}${userid}
     ...  ${SPACE}${options}
     Run IPMI Standard Command  ${ipmi_cmd}
+
+Test IPMI User Privilege
+    [Arguments]  ${privilege_level}  ${expected_status}
+
+    # Description of argument(s):
+    # privilege_level     Privilege level of IPMI user (e.g. 4, 3).
+    # expected_status     Expected status of IPMI command run with the user
+    #                     of above privilege(i.e. "Passed" or "Failed").
+
+    # Create IPMI user and set valid password.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+
+    # Set privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege_level}
+
+    # Enable IPMI user and verify.
+    Run IPMI Standard Command  user enable ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  enabled
+
+    # Verify that enabled IPMI user is able to run IPMI command.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify IPMI Username And Password  ${random_username}
+    ...  ${valid_password}
+
+    Run Keyword if  '${expected_status}' == 'Passed'
+    ...  Should Be Equal  ${status}  ${True}
+    ...  ELSE IF  '${expected_status}' == 'Failed'
+    ...  Should Be Equal  ${status}  ${False}
 
 
 Verify IPMI Username And Password
