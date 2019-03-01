@@ -130,7 +130,7 @@ Get Component URIs
     # uri_list          URI list.
 
     ${component_uris}=  Get Matches  ${uri_list}
-    ...  regexp=^.*[0-9a-z_].${component_name}[0-9]*$
+    ...  regexp=^.*[0-9a-z_].${component_name}\[0-9]*$
     [Return]  ${component_uris}
 
 
