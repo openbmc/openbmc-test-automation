@@ -100,7 +100,8 @@ contain test suites, tools, templates, etc. These sub-directories are
 classified as follows:
 
 `tests/`: Contains the general test cases for OpenBMC stack functional
-          verification.
+          verification. The "tests" subdirectory uses legacy REST and will be
+          deprecated at some point and therefore no longer supported.
 
 `extended/`: Contains test cases for boot testing, network testing,
              code update testing etc.
