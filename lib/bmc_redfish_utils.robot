@@ -28,8 +28,9 @@ Redfish Power Operation
     # }
 
     redfish.Login
+    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/system/  ComputerSystem.Reset
     ${payload}=  Create Dictionary  ResetType=${reset_type}
-    ${resp}=  redfish.Post  Systems/system/Actions/ComputerSystem.Reset  body=&{payload}
+    ${resp}=  redfish.Post  ${target}  body=&{payload}
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
     redfish.Logout
 
@@ -47,7 +48,8 @@ Redfish BMC Reset Operation
     # }
 
     redfish.Login
+    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Managers/bmc/  Manager.Reset
     ${payload}=  Create Dictionary  ResetType=GracefulRestart
-    ${resp}=  redfish.Post  Managers/bmc/Actions/Manager.Reset  body=&{payload}
+    ${resp}=  redfish.Post  ${target}  body=&{payload}
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
     redfish.Logout

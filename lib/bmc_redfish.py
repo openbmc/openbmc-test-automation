@@ -107,8 +107,7 @@ class bmc_redfish(object):
         args/kwargs      These are passed directly to the corresponding
                          RestClientBase method.
         """
-        self._rest_response_ = self._robj_.post('/redfish/v1/' + resource_path,
-                                                *args, **kwargs)
+        self._rest_response_ = self._robj_.post(resource_path, *args, **kwargs)
         return self._rest_response_
 
     def patch(self, resource_path, *args, **kwargs):
@@ -120,8 +119,7 @@ class bmc_redfish(object):
         args/kwargs      These are passed directly to the corresponding
                          RestClientBase method.
         """
-        self._rest_response_ = self._robj_.patch('/redfish/v1/' + resource_path,
-                                                 *args, **kwargs)
+        self._rest_response_ = self._robj_.patch(resource_path, *args, **kwargs)
         return self._rest_response_
 
     def put(self, resource_path, actions, attr_data):
@@ -133,8 +131,7 @@ class bmc_redfish(object):
         args/kwargs      These are passed directly to the corresponding
                          RestClientBase method.
         """
-        self._rest_response_ = self._robj_.put('/redfish/v1/' + resource_path,
-                                               *args, **kwargs)
+        self._rest_response_ = self._robj_.put(resource_path, *args, **kwargs)
         return self._rest_response_
 
     def delete(self, resource_path):
