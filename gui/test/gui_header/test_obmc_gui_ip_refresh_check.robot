@@ -19,6 +19,20 @@ ${xpath_header_scroll_back}     //*[@id="header__wrapper"]/div/div[3]/a[1]/i
 
 *** Test Cases ***
 
+Verify Server Power Button
+    [Documentation]  Verify server power page on clicking server power button.
+    [Tags]  Verify_Server_Power_Button
+
+    Click Button  ${xpath_select_server_power}
+    Wait Until Page Contains  Select a power operation
+
+Verify Server Health Button
+    [Documentation]  Verify server health page on clicking server health button.
+    [Tags]  Verify_Server_Health_Button
+
+    Click Button  ${xpath_select_server_health}
+    Wait Until Page Contains  All events from the BMC    
+
 Verify IP address
     [Documentation]  Verify BMC IP address displayed in GUI header.
     [Tags]  Verify_IP_address
