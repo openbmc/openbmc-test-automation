@@ -37,7 +37,7 @@ Get MAC Address And Verify
     [Documentation]  Get MAC address and verify it's existence on the BMC.
     [Tags]  Get_MAC_Address_And_Verify
 
-    ${resp}=  redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
     ${macaddr}=  Get From Dictionary  ${resp.dict}  MACAddress
     Validate MAC On BMC  ${macaddr}
 
@@ -54,7 +54,7 @@ Verify All Configured IP And Netmask
 Test Setup Execution
     [Documentation]  Test setup execution.
 
-    redfish.Login
+    Redfish.Login
 
     @{network_configurations}=  Get Network Configuration
     Set Test Variable  @{network_configurations}
@@ -96,7 +96,7 @@ Get Network Configuration
     #    "VLANId": 0
     #  }
 
-    ${resp}=  redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4Addresses
     [Return]  @{network_configurations}
 
@@ -161,5 +161,5 @@ Verify IP And Netmask On BMC
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
-    FFDC On Test Case Fail
-    redfish.Logout
+    #FFDC On Test Case Fail
+    Redfish.Logout
