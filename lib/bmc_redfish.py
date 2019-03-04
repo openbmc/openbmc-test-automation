@@ -1,152 +1,137 @@
 #!/usr/bin/env python
 
 r"""
-Using python based redfish library.
-Refer: https://github.com/DMTF/python-redfish-library
+See bmc_redfish class prolog below for details.
 """
 
-import redfish
-from robot.libraries.BuiltIn import BuiltIn
+from redfish.rest.v1 import HttpClient
+import gen_print as gp
 
 
-class HTTPSBadRequestError(Exception):
+def valid_http_status_code(status, valid_status_codes):
     r"""
-    BMC redfish generic raised method for error(s).
+    Raise exception if status is not found in the valid_status_codes list.
+
+    Description of argument(s):
+    status                          An HTTP status code (e.g. 200, 400, etc.).
+    valid_status_codes              A list of status codes that the caller
+                                    considers acceptable.  If this is a null
+                                    list, then any status code is considered
+                                    acceptable.  Note that for the convenience
+                                    of the caller, valid_status_codes may be
+                                    either a python list or a string which can
+                                    be evaluated to become a python list (e.g.
+                                    "[200]").
     """
-    pass
+
+    if type(valid_status_codes) is not list:
+        valid_status_codes = eval(valid_status_codes)
+    if len(valid_status_codes) == 0:
+        return
+    if status in valid_status_codes:
+        return
+
+    message = "The HTTP status code was not valid:\n"
+    message += gp.sprint_vars(status, valid_status_codes)
+    raise ValueError(message)
 
 
-class bmc_redfish(object):
+class bmc_redfish(HttpClient):
+    r"""
+    bmc_redfish is a wrapper for redfish rest that provides the following
+    benefits vs. using redfish directly:
 
-    ROBOT_LIBRARY_SCOPE = "TEST SUITE"
-    ROBOT_EXIT_ON_FAILURE = True
+    For rest_request functions (e.g. get, put, post, etc.):
+        - Function-call logging to stdout.
+        - Automatic valid_status_codes processing (i.e. an exception will be
+          raised if the rest response status code is not as expected.
+        - Easily used from robot programs.
+    """
 
-    def __init__(self, hostname, username, password, *args, **kwargs):
+    #ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
+    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
+
+    def rest_request(self, func, *args, **kwargs):
         r"""
-        Establish session connection to host.
+        Perform redfish rest request and return response.
+
+        This function provides the following additional functionality.
+        - The calling function's call line is logged to standard out (provided
+          that global variable "quiet" is not set).
+        - The caller may include a valid_status_codes argument.
 
         Description of argument(s):
-        hostname       The host name or IP address of the server.
-        username       The username to be used to connect to the server.
-        password       The password to be used to connect to the server.
-        args/kwargs    Additional parms which are passed directly
-                       to the redfish_client function.
-        """
-        self._base_url_ = "https://" + hostname
-        self._username_ = username
-        self._password_ = password
-        self._default_prefix_ = "/redfish/v1"
+        func                        A reference to the parent class function
+                                    which is to be called (e.g. get, put,
+                                    etc.).
+        args                        This is passed directly to the function
+                                    referenced by the func argument (see the
+                                    documentation for the corresponding
+                                    redfish HttpClient method for details).
+        kwargs                      This is passed directly to the function
+                                    referenced by the func argument (see the
+                                    documentation for the corresponding
+                                    redfish HttpClient method for details)
+                                    with the following exception:  If kwargs
+                                    contains a valid_status_codes key, it will
+                                    be removed from kwargs and processed by
+                                    this function.  This allows the caller to
+                                    indicate what rest status codes are
+                                    acceptable.  The default value is [200].
+                                    See the valid_http_status_code function
+                                    above for details.
 
-    def __enter__(self):
-        return self
+        Example uses:
+
+        From a python program:
+
+        response =
+        bmc_redfish.get("/redfish/v1/Managers/bmc/EthernetInterfaces", [200,
+        201])
+
+        If this call to the get method generates a response.status equal to
+        anything other than 200 or 201, an exception will be raised.
+
+        From a robot program:
+
+        BMC_Redfish.logout
+        ${response}=  BMC_Redfish.Get
+        /redfish/v1/Managers/bmc/EthernetInterfaces  valid_status_codes=[401]
+
+        As part of a robot test, the programmer has logged out to verify that
+        the get request will generate a status code of 401 (i.e.
+        "Unauthorized").
+        """
+        gp.qprint_executing(stack_frame_ix=3, style=gp.func_line_style_short)
+        valid_status_codes = kwargs.pop('valid_status_codes', [200])
+        response = func(*args, **kwargs)
+        valid_http_status_code(response.status, valid_status_codes)
+        return response
+
+    # Define rest function wrappers.
+    def get(self, *args, **kwargs):
+        return self.rest_request(super(bmc_redfish, self).get, *args,
+                                 **kwargs)
+
+    def head(self, *args, **kwargs):
+        return self.rest_request(super(bmc_redfish, self).head, *args,
+                                 **kwargs)
+
+    def post(self, *args, **kwargs):
+        return self.rest_request(super(bmc_redfish, self).post, *args,
+                                 **kwargs)
+
+    def put(self, *args, **kwargs):
+        return self.rest_request(super(bmc_redfish, self).put, *args,
+                                 **kwargs)
+
+    def patch(self, *args, **kwargs):
+        return self.rest_request(super(bmc_redfish, self).patch, *args,
+                                 **kwargs)
+
+    def delete(self, *args, **kwargs):
+        return self.rest_request(super(bmc_redfish, self).delete, *args,
+                                 **kwargs)
 
     def __del__(self):
         del self
-
-    def login(self, *args, **kwargs):
-        r"""
-        Call the corresponding RestClientBase method and return the result.
-
-        Description of argument(s):
-        args/kwargs     These are passed directly to the corresponding
-                        RestClientBase method.
-        """
-
-        for arg in args:
-            hostname = self._base_url_.strip("https://")
-            # Class object constructor reinitialized.
-            self.__init__(hostname=hostname,
-                          username=arg['username'],
-                          password=arg['password'])
-
-        self._robj_ = redfish.redfish_client(base_url=self._base_url_,
-                                             username=self._username_,
-                                             password=self._password_,
-                                             default_prefix=self._default_prefix_)
-        self._robj_.login(auth=redfish.AuthMethod.SESSION)
-        self._session_key_ = self._robj_.get_session_key()
-        self._session_location_ = self._robj_.get_session_location()
-
-    def set_session_key(self, session_key):
-        r"""
-        Update the session key instance.
-
-        session_key      Redfish valid session key.
-        """
-        self._robj_.set_session_key(session_key)
-
-    def set_session_location(self, session_location):
-        r"""
-        Update the session location instance.
-
-        session_location   Redfish valid session location.
-                           Example:
-                           /redfish/v1/SessionService/Sessions/j04tD83QQn
-        """
-        self._robj_.set_session_location(session_location)
-
-    def get(self, resource_path, *args, **kwargs):
-        r"""
-        Perform a GET request and return response.
-
-        Description of argument(s):
-        resource_path    URI resource absolute path (e.g. "/redfish/v1/Systems/1").
-        args/kwargs      These are passed directly to the corresponding
-                         RestClientBase method.
-        """
-        self._rest_response_ = self._robj_.get(resource_path, *args, **kwargs)
-        return self._rest_response_
-
-    def post(self, resource_path, *args, **kwargs):
-        r"""
-        Perform a POST request.
-
-        Description of argument(s):
-        resource_path    URI resource relative path
-                         (e.g. "Systems/1/Actions/ComputerSystem.Reset").
-        args/kwargs      These are passed directly to the corresponding
-                         RestClientBase method.
-        """
-        self._rest_response_ = self._robj_.post(resource_path, *args, **kwargs)
-        return self._rest_response_
-
-    def patch(self, resource_path, *args, **kwargs):
-        r"""
-        Perform a POST request.
-
-        Description of argument(s):
-        resource_path    URI resource relative path
-        args/kwargs      These are passed directly to the corresponding
-                         RestClientBase method.
-        """
-        self._rest_response_ = self._robj_.patch(resource_path, *args, **kwargs)
-        return self._rest_response_
-
-    def put(self, resource_path, actions, attr_data):
-        r"""
-        Perform a PUT request.
-
-        Description of argument(s):
-        resource_path    URI resource relative path.
-        args/kwargs      These are passed directly to the corresponding
-                         RestClientBase method.
-        """
-        self._rest_response_ = self._robj_.put(resource_path, *args, **kwargs)
-        return self._rest_response_
-
-    def delete(self, resource_path):
-        r"""
-        Perform a DELETE request.
-
-        Description of argument(s):
-        resource_path  URI resource absolute path
-                       (e.g. "/redfish/v1/SessionService/Sessions/8d1a9wiiNL").
-        """
-        self._rest_response_ = self._robj_.delete(resource_path)
-        return self._rest_response_
-
-    def logout(self):
-        r"""
-        Logout redfish connection session.
-        """
-        self._robj_.logout()
