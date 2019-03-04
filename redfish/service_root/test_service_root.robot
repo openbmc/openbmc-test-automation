@@ -3,7 +3,7 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
-Test Teardown    FFDC On Test Case Fail
+#Test Teardown    FFDC On Test Case Fail
 
 *** Test Cases ***
 
@@ -11,8 +11,8 @@ Redfish Login And Logout
     [Documentation]  Login to BMCweb and then logout.
     [Tags]  Redfish_Login_And_Logout
 
-    redfish.Login
-    redfish.Logout
+    Redfish.Login  auth=session
+    Redfish.Logout
 
 
 GET Redfish Hypermedia Without Login
@@ -30,18 +30,17 @@ GET Redfish SessionService Resource With Login
     [Documentation]  Login to BMCweb and get /redfish/v1/SessionService.
     [Tags]  GET_Redfish_SessionService_Resource_With_Login
 
-    redfish.Login
-    ${resp}=  redfish.Get  /redfish/v1/SessionService
+    Redfish.Login  auth=session
+    ${resp}=  Redfish.Get  /redfish/v1/SessionService
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
-    redfish.Logout
+    Redfish.Logout
 
 
 GET Redfish SessionService Without Login
     [Documentation]  Get /redfish/v1/SessionService without login
     [Tags]  GET_Redfish_SessionService_Without_Login
 
-    ${resp}=  redfish.Get  /redfish/v1/SessionService
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_UNAUTHORIZED}
+    ${resp}=  Redfish.Get  /redfish/v1/SessionService  valid_status_codes=[401]
 
 
 Redfish Login Using Invalid Token
@@ -64,15 +63,15 @@ Delete Redfish Session Using Valid login
     [Documentation]  Delete a session using valid login.
     [Tags]  Delete_Redfish_Session_Using_Valid_Login
 
-    redfish.Login
+    Redfish.Login  auth=session
 
     # Example o/p:
     # [{'@odata.id': '/redfish/v1/SessionService/Sessions/bOol3WlCI8'},
     #  {'@odata.id': '/redfish/v1/SessionService/Sessions/Yu3xFqjZr1'}]
-    ${resp_list}=  redfish_utils.List Request  /redfish/v1/SessionService/Sessions
-    redfish.Delete  ${resp_list[1]}
+    ${resp_list}=  Redfish_Utils.List Request  /redfish/v1/SessionService/Sessions
+    Redfish.Delete  ${resp_list[1]}
 
-    ${resp}=  redfish_utils.List Request  /redfish/v1/SessionService/Sessions
+    ${resp}=  Redfish_Utils.List Request  /redfish/v1/SessionService/Sessions
     List Should Not Contain Value  ${resp}  ${resp_list[1]}
 
 
@@ -86,5 +85,5 @@ GET And Verify Redfish Response
     # expected_response_code   Expected REST status codes.
     # resource_path            Redfish resource URL path.
 
-    ${resp}=  redfish.Get  ${resource_path}
+    ${resp}=  Redfish.Get  ${resource_path}
     Should Be Equal As Strings  ${resp.status}  ${expected_response_code}
