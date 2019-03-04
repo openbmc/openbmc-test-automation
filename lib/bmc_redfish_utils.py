@@ -26,9 +26,10 @@ class bmc_redfish_utils(object):
             'location': '/redfish/v1/SessionService/Sessions/nblYY4wlz0'
         }
         """
+        #BuiltIn().log_to_console(self._redfish_.get_session_key())
         session_dict = {
-            "key": self._redfish_._session_key_,
-            "location": self._redfish_._session_location_
+            "key": self._redfish_.get_session_key(),
+            "location": self._redfish_.get_session_location()
         }
         return session_dict
 
