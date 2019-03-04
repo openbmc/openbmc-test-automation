@@ -27,8 +27,8 @@ class bmc_redfish_utils(object):
         }
         """
         session_dict = {
-            "key": self._redfish_._session_key_,
-            "location": self._redfish_._session_location_
+            "key": self._redfish_.get_session_key(),
+            "location": self._redfish_.get_session_location()
         }
         return session_dict
 
@@ -111,8 +111,7 @@ class bmc_redfish_utils(object):
 
         global resource_list
         resource_list = []
-
-        self._rest_response_ = self._redfish_.get(resource_path)
+        self._rest_response_ = self._redfish_.get(resource_path, valid_status_codes=[200,404,500])
 
         # Return empty list.
         if self._rest_response_.status != 200:
@@ -124,7 +123,7 @@ class bmc_redfish_utils(object):
             return uri_path
 
         for resource in resource_list:
-            self._rest_response_ = self._redfish_.get(resource)
+            self._rest_response_ = self._redfish_.get(resource, valid_status_codes=[200,404,500])
             if self._rest_response_.status != 200:
                 continue
             self.walk_nested_dict(self._rest_response_.dict)

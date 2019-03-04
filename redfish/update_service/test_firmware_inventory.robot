@@ -17,11 +17,11 @@ Verify Redfish Update Service Enabled
     # "Name": "Update Service",
     # "ServiceEnabled": true
 
-    redfish.Login
-    ${resp}=  redfish.Get  /redfish/v1/UpdateService
+    Redfish.Login
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
     Should Be Equal As Strings  ${resp.dict["ServiceEnabled"]}  ${True}
-    redfish.Logout
+    Redfish.Logout
 
 
 Verify Redfish Software Inventory Collection
@@ -46,21 +46,21 @@ Verify Redfish Software Inventory Collection
     #   "Name": "Software Inventory Collection"
     # }
 
-    redfish.Login
-    ${resp}=  redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
+    Redfish.Login
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
 
     Should Be True  ${resp.dict["Members@odata.count"]} >= ${1}
     Length Should Be  ${resp.dict["Members"]}  ${resp.dict["Members@odata.count"]}
-    redfish.Logout
+    Redfish.Logout
 
 
 Redfish Software Inventory Status Check
     [Documentation]  Get firmware inventory entries and do health check status.
     [Tags]  Redfish_Software_Inventory_Status_Check
 
-    redfish.Login
-    ${resp}=  redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
+    Redfish.Login
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
 
     # Entries "Members@odata.count": 3,
@@ -69,7 +69,7 @@ Redfish Software Inventory Status Check
     # {'@odata.id': '/redfish/v1/UpdateService/FirmwareInventory/ace821ef'}
 
     :FOR  ${entry}  IN RANGE  0  ${resp.dict["Members@odata.count"]}
-    \  ${resp_resource}=  redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
+    \  ${resp_resource}=  Redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
     \  Should Be Equal As Strings  ${resp_resource.status}  ${HTTP_OK}
     # Example:
     # "Status": {
@@ -80,4 +80,4 @@ Redfish Software Inventory Status Check
     \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["Health"]}  OK
     \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["HealthRollup"]}  OK
     \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["State"]}  Enabled
-    redfish.Logout
+    Redfish.Logout
