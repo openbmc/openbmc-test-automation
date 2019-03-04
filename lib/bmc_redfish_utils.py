@@ -27,8 +27,8 @@ class bmc_redfish_utils(object):
         }
         """
         session_dict = {
-            "key": self._redfish_._session_key_,
-            "location": self._redfish_._session_location_
+            "key": self._redfish_.get_session_key(),
+            "location": self._redfish_.get_session_location()
         }
         return session_dict
 
