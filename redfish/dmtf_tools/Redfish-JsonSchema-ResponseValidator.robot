@@ -22,9 +22,9 @@ Test BMC Redfish Using Redfish JsonSchema ResponseValidator
 
     Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
 
-    redfish.Login
+    Redfish.Login
     ${url_list}=  redfish_utils.List Request  /redfish/v1
-    redfish.Logout
+    Redfish.Logout
 
     Shell Cmd  mkdir -p logs/
 
