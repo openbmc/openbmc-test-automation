@@ -4,6 +4,7 @@ Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
 Test Teardown    FFDC On Test Case Fail
+Test Setup       Rprintn
 
 *** Variables ***
 
@@ -59,7 +60,7 @@ Create Multiple Login Sessions And Verify
     [Tags]  Create_Multiple_Login_Sessions_And_Verify
     [Teardown]  Multiple Session Cleanup
 
-    redfish.Login
+    Redfish.Login
     # Example:
     #    {
     #      'key': 'L0XEsZAXpNdF147jJaOD',
@@ -75,10 +76,9 @@ Create Multiple Login Sessions And Verify
 
     # Update the redfish session object with the first login key and location
     # and verify if it is still working.
-    redfish.Set Session Key  ${saved_session_info["key"]}
-    redfish.Set Session Location  ${saved_session_info["location"]}
-    ${resp}=  redfish.Get  ${saved_session_info["location"]}
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    Redfish.Set Session Key  ${saved_session_info["key"]}
+    Redfish.Set Session Location  ${saved_session_info["location"]}
+    Redfish.Get  ${saved_session_info["location"]}
 
 
 Attempt Login With Expired Session
@@ -86,17 +86,16 @@ Attempt Login With Expired Session
     ...   use the session.
     [Tags]  Attempt_Login_With_Expired_Session
 
-    redfish.Login
+    Redfish.Login
     ${saved_session_info}=  Get Redfish Session Info
-    redfish.Logout
+    Redfish.Logout
 
     # Attempt login with expired session.
     # By default 60 minutes of inactivity closes the session.
-    redfish.Set Session Key  ${saved_session_info["key"]}
-    redfish.Set Session Location  ${saved_session_info["location"]}
+    Redfish.Set Session Key  ${saved_session_info["key"]}
+    Redfish.Set Session Location  ${saved_session_info["location"]}
 
-    ${resp}=  redfish.Get  ${saved_session_info["location"]}
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_UNAUTHORIZED}
+    Redfish.Get  ${saved_session_info["location"]}  valid_status_codes=[${HTTP_UNAUTHORIZED}]
 
 
 *** Keywords ***
@@ -111,13 +110,13 @@ Login And Verify Redfish Response
     # password            The password to be used to connect to the server.
 
     ${data}=  Create Dictionary  username=${username}  password=${password}
-    Run Keyword And Expect Error  ${expected_response}  redfish.Login  ${data}
+    Run Keyword And Expect Error  ${expected_response}  Redfish.Login  ${data}
 
 
 Create New Login Session
     [Documentation]  Multiple login session keys.
 
-    redfish.Login
+    Redfish.Login
     ${session_info}=  Get Redfish Session Info
 
     # Append the session location to the list.
@@ -132,5 +131,5 @@ Multiple Session Cleanup
     FFDC On Test Case Fail
 
     :FOR  ${item}  IN  @{session_list}
-    \  redfish.Delete  ${item}
+    \  Redfish.Delete  ${item}
 
