@@ -1,9 +1,12 @@
 *** Settings ***
+
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
+
 Test Teardown    FFDC On Test Case Fail
+Test Setup       Rprintn
 
 *** Test Cases ***
 
@@ -11,8 +14,8 @@ Redfish Login And Logout
     [Documentation]  Login to BMCweb and then logout.
     [Tags]  Redfish_Login_And_Logout
 
-    redfish.Login
-    redfish.Logout
+    Redfish.Login
+    Redfish.Logout
 
 
 GET Redfish Hypermedia Without Login
@@ -30,18 +33,17 @@ GET Redfish SessionService Resource With Login
     [Documentation]  Login to BMCweb and get /redfish/v1/SessionService.
     [Tags]  GET_Redfish_SessionService_Resource_With_Login
 
-    redfish.Login
-    ${resp}=  redfish.Get  /redfish/v1/SessionService
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
-    redfish.Logout
+    Redfish.Login
+    ${resp}=  Redfish.Get  /redfish/v1/SessionService
+    Redfish.Logout
 
 
 GET Redfish SessionService Without Login
     [Documentation]  Get /redfish/v1/SessionService without login
     [Tags]  GET_Redfish_SessionService_Without_Login
 
-    ${resp}=  redfish.Get  /redfish/v1/SessionService
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_UNAUTHORIZED}
+    ${resp}=  Redfish.Get  /redfish/v1/SessionService
+    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
 
 
 Redfish Login Using Invalid Token
@@ -64,15 +66,17 @@ Delete Redfish Session Using Valid login
     [Documentation]  Delete a session using valid login.
     [Tags]  Delete_Redfish_Session_Using_Valid_Login
 
-    redfish.Login
+    Redfish.Login
+    Redfish.Login
 
     # Example o/p:
     # [{'@odata.id': '/redfish/v1/SessionService/Sessions/bOol3WlCI8'},
     #  {'@odata.id': '/redfish/v1/SessionService/Sessions/Yu3xFqjZr1'}]
-    ${resp_list}=  redfish_utils.List Request  /redfish/v1/SessionService/Sessions
-    redfish.Delete  ${resp_list[1]}
+    ${resp_list}=  Redfish_Utils.List Request
+    ...  /redfish/v1/SessionService/Sessions
+    Redfish.Delete  ${resp_list[1]}
 
-    ${resp}=  redfish_utils.List Request  /redfish/v1/SessionService/Sessions
+    ${resp}=  Redfish_Utils.List Request  /redfish/v1/SessionService/Sessions
     List Should Not Contain Value  ${resp}  ${resp_list[1]}
 
 
@@ -80,11 +84,12 @@ Delete Redfish Session Using Valid login
 
 GET And Verify Redfish Response
     [Documentation]  GET given resource and verfiy response.
-    [Arguments]  ${expected_response_code}  ${resource_path}
+    [Arguments]  ${valid_status_codes}  ${resource_path}
 
-    # Description of arguments:
-    # expected_response_code   Expected REST status codes.
-    # resource_path            Redfish resource URL path.
+    # Description of argument(s):
+    # valid_status_codes            A comma-separated list of acceptable
+    #                               status codes (e.g. 200).
+    # resource_path                 Redfish resource URL path.
 
-    ${resp}=  redfish.Get  ${resource_path}
-    Should Be Equal As Strings  ${resp.status}  ${expected_response_code}
+    ${resp}=  Redfish.Get  ${resource_path}
+    ...  valid_status_codes=[${valid_status_codes}]
