@@ -3,7 +3,8 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
-Test Teardown    FFDC On Test Case Fail
+Test Setup       Test Setup Execution
+Test Teardown    Test Teardown Execution
 
 *** Test Cases ***
 
@@ -17,11 +18,8 @@ Verify Redfish Update Service Enabled
     # "Name": "Update Service",
     # "ServiceEnabled": true
 
-    redfish.Login
-    ${resp}=  redfish.Get  /redfish/v1/UpdateService
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService
     Should Be Equal As Strings  ${resp.dict["ServiceEnabled"]}  ${True}
-    redfish.Logout
 
 
 Verify Redfish Software Inventory Collection
@@ -46,22 +44,17 @@ Verify Redfish Software Inventory Collection
     #   "Name": "Software Inventory Collection"
     # }
 
-    redfish.Login
-    ${resp}=  redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
 
     Should Be True  ${resp.dict["Members@odata.count"]} >= ${1}
     Length Should Be  ${resp.dict["Members"]}  ${resp.dict["Members@odata.count"]}
-    redfish.Logout
 
 
 Redfish Software Inventory Status Check
     [Documentation]  Get firmware inventory entries and do health check status.
     [Tags]  Redfish_Software_Inventory_Status_Check
 
-    redfish.Login
-    ${resp}=  redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
 
     # Entries "Members@odata.count": 3,
     # {'@odata.id': '/redfish/v1/UpdateService/FirmwareInventory/a3522998'}
@@ -69,8 +62,7 @@ Redfish Software Inventory Status Check
     # {'@odata.id': '/redfish/v1/UpdateService/FirmwareInventory/ace821ef'}
 
     :FOR  ${entry}  IN RANGE  0  ${resp.dict["Members@odata.count"]}
-    \  ${resp_resource}=  redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
-    \  Should Be Equal As Strings  ${resp_resource.status}  ${HTTP_OK}
+    \  ${resp_resource}=  Redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
     # Example:
     # "Status": {
     #     "Health": "OK",
@@ -80,4 +72,18 @@ Redfish Software Inventory Status Check
     \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["Health"]}  OK
     \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["HealthRollup"]}  OK
     \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["State"]}  Enabled
-    redfish.Logout
+
+
+*** Keywords ***
+
+Test Setup Execution
+    [Documentation]  Do test case setup tasks.
+
+    Redfish.Login
+
+
+Test Teardown Execution
+    [Documentation]  Do the post test teardown.
+
+    FFDC On Test Case Fail
+    Redfish.Logout

@@ -15,7 +15,7 @@ Verify AccountService Available
     [Documentation]  Verify Redfish account service is available.
     [Tags]  Verify_AccountService_Available
 
-    ${resp} =  redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
+    ${resp} =  Redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
     Should Be Equal As Strings  ${resp}  ${True}
 
 
@@ -24,11 +24,11 @@ Verify AccountService Available
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    redfish.Login
+    Redfish.Login
 
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
-    redfish.Logout
+    Redfish.Logout
