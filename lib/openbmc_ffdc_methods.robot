@@ -478,7 +478,7 @@ Enumerate Redfish Resources
 
     # Login is needed to fetch Redfish information.
     # If login fails, return from keyword.
-    ${status}=  Run Keyword And Return Status  redfish.Login
+    ${status}=  Run Keyword And Return Status  Redfish.Login
     Return From Keyword If   ${status} == ${False}
 
     # Get the Redfish resources and properties.
