@@ -8,6 +8,7 @@ Test Teardown    Test Teardown Execution
 
 *** Variables ***
 ${xpath_select_overview_1}         //*[@id="nav__top-level"]/li[1]/a/span
+${xpath_server_health_header}      //*[@id="header__wrapper"]/div/div[3]/a[2]
 ${string_content}                  witherspoon
 ${string_server_info}              Server information
 ${string_high_priority_events}     High priority events
@@ -20,6 +21,14 @@ ${string_launch_serial_over_lan}   Serial over LAN console
 
 *** Test Case ***
 # OpenBMC @ Power Off state test cases.
+
+Verify Server Health On Click Server Health Button
+    [Documentation]  Verify Server health page opens on clicking server health button.
+    [Tags]  Verify_Server_Health_On_Click_Server_Health_Button
+
+    Select Server Overview Menu
+    Click Button  ${xpath_server_health_header}
+    Verify Display Content  ${string_event_log}
 
 Verify Title Text Content At OBMC Power Off State
     [Documentation]  Verify display of title text from "Server Overview"
