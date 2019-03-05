@@ -165,7 +165,7 @@ Check OS
 
     SSHLibrary.Open connection  ${os_host}
 
-    ${status}  ${msg}=  Run Keyword And Ignore Error  Login  ${os_username}
+    ${status}  ${msg}=  Run Keyword And Ignore Error  SSHLibrary.Login  ${os_username}
     ...  ${os_password}
     ${err_msg1}=  Sprint Error  ${msg}
     ${err_msg}=  Catenate  SEPARATOR=  \n  ${err_msg1}
