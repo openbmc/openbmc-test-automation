@@ -18,6 +18,17 @@ Verify AccountService Available
     ${resp} =  redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
     Should Be Equal As Strings  ${resp}  ${True}
 
+Redfish Create And Verify Specified User
+    [Documentation]  Create Redfish User With Specified Role
+    [Tags]  Redfish_Login_With_Specified_Credentials
+    [Template]  Redfish Create And Verify User
+
+    #  Username               Password              RoleId                  Enabled
+       admin_user             TestPwd123            Administrator           ${True}
+       operator_user          TestPwd123            Operator                ${True}
+       user_user              TestPwd123            User                    ${True}
+       callback_user          TestPwd123            Callback                ${True}
+
 
 *** Keywords ***
 
@@ -32,3 +43,48 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     redfish.Logout
+
+Redfish Create And Verify User
+    [Documentation]  Redfish Create And Verify User
+    [Arguments]  ${Username}  ${Password}  ${RoleId}  ${Enabled}
+
+    # Description of arguments:
+    # Username            The username to be created
+    # Password            The password to be assigned
+    # Roleid              The role id of the user to be created
+    # Enabled             The decision if it should be enabled
+
+    # Example:
+    # redfiscription": "User Account",
+    # "Enabled": true,
+    # "Id": "username",
+    # "Links": {
+    # "Role": {
+    #  "@odata.id": "/redfish/v1/AccountService/Roles/Operator"
+    # }
+    # },
+
+    # Create Specified User
+    ${payload}=  Create Dictionary
+    ...  UserName=${Username}  Password=${Password}  RoleId=${RoleId}  Enabled=${Enabled}
+    ${resp}=  redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_CREATED}
+
+    ${output}=  redfish.Get  /redfish/v1/AccountService/Accounts
+    Log  ${output}
+
+    # Login with created user
+    ${data}=  Create Dictionary  username=${Username}  password=${Password}
+    redfish.Login  ${data}
+
+    # Validate Role Id of created user
+    ${resp} =  redfish_utils.Get Attribute  /redfish/v1/AccountService/Accounts/${UserName}  RoleId
+    Should Be Equal As Strings  ${resp}  ${RoleId}
+
+    # Delete Specified User
+    ${resp}=  redfish.Delete  /redfish/v1/AccountService/Accounts/${UserName}
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+
+    ${output}=  redfish.Get  /redfish/v1/AccountService/Accounts
+    Log  ${output}
+
