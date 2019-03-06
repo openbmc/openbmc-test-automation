@@ -35,12 +35,14 @@ Verify eSEL Using REST
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
+
 Verify eSEL Entries Using REST
     [Documentation]  Verify that eSEL entries have data.
     [Tags]  Verify_eSEL_Entries_Using_REST
 
     Create eSEL
     Verify eSEL Entries
+
 
 Verify eSEL Description And EntryID Using REST
     [Documentation]  Create eSEL log and verify "Description" and "EntryID"
@@ -87,8 +89,9 @@ Verify Multiple eSEL Using REST
     Create eSEL
     Create eSEL
     ${entries}=  Count eSEL Entries
-    # 1 eSEL creates 1 error log and 1 association.
-    Should Be Equal As Integers  ${entries}  ${4}
+    Should Be Equal As Integers  ${entries}  ${2}
+    ...  msg=Expecting 2 eSELs but found ${entries}.
+
 
 Check eSEL AdditionalData
     [Documentation]  Generate eSEL log and verify AdditionalData is
@@ -108,6 +111,7 @@ Check eSEL AdditionalData
     #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Emergency"
     # }
     Should Not Be Empty  ${jsondata["data"]["AdditionalData"]}
+
 
 Test Wrong Reservation_ID
     [Documentation]  This testcase is to test BMC can handle multi-requestor's
