@@ -21,6 +21,14 @@ ${string_launch_serial_over_lan}   Serial over LAN console
 *** Test Case ***
 # OpenBMC @ Power Off state test cases.
 
+Verify Serial Over LAN Button
+    [Documentation]  Verify console page on clicking serial over lan console button
+    [Tags]  Verify_Serial_Over_LAN_Button
+
+    Select Server Overview Menu
+    Click Element  ${xpath_launch_serial_over_lan}
+    Verify Display Content  Access the Serial over LAN console
+
 Verify Title Text Content At OBMC Power Off State
     [Documentation]  Verify display of title text from "Server Overview"
     ...  module of OpenBMC GUI.
