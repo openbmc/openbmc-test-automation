@@ -325,15 +325,6 @@ Verify IPMI Username And Password
     Should Contain  ${output}  SEL Information
 
 
-Delete All Non Root IPMI User
-    [Documentation]  Delete all non-root IPMI user.
-
-    :FOR  ${userid}  IN RANGE  2  16
-    \  ${user_info}=  Get User Info  ${userid}
-    \  Run Keyword If  "${user_info['user_name']}" != ""
-    ...  Run IPMI Standard Command  user set name ${userid} ""
-
-
 Test Teardown Execution
     [Documentation]  Do the test teardown execution.
 

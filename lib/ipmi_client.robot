@@ -359,3 +359,25 @@ Set BMC Network From Host
 
     Run Inband IPMI Standard Command
     ...  lan set 1 defgw ipaddr ${nw_info['Default Gateway IP']}
+
+
+Verify IPMI Username And Password
+    [Documentation]  Verify that user is able to run IPMI command
+    ...  with given username and password.
+    [Arguments]  ${username}  ${password}
+
+    # Description of argument(s):
+    # username    The user name (e.g. "root", "robert", etc.).
+    # password    The user password (e.g. "0penBmc", "0penBmc1", etc.).
+
+    ${output}=  Run External IPMI Standard Command
+    ...  sel info  U=${username}  P=${password}
+    Should Contain  ${output}  SEL Information  msg=SEL information not present
+
+
+Delete All Non Root IPMI User
+    [Documentation]  Delete all non-root IPMI user.
+    :FOR  ${userid}  IN RANGE  2  16
+    \  ${user_info}=  Get User Info  ${userid}
+    \  Run Keyword If  "${user_info['user_name']}" != ""
+    ...  Run IPMI Standard Command  user set name ${userid} ""
