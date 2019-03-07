@@ -18,10 +18,6 @@ ${admin_level_priv}     4
 ${valid_password}       0penBmc1
 ${max_password_length}  20
 ${ipmi_setaccess_cmd}   channel setaccess
-${IPMI_EXT_CMD}         ipmitool -I lanplus -C 3
-${PASSWORD_OPTION}      -P
-${USER_OPTION}          -U
-${SEL_INFO_CMD}         sel info
 
 
 *** Test Cases ***
@@ -248,7 +244,7 @@ Disable IPMI User And Verify
     # Verify that disabled IPMI  user is unable to run IPMI command.
     ${msg}=  Run Keyword And Expect Error  *  Verify IPMI Username And Password
     ...  ${random_username}  ${valid_password}
-    Should Contain  ${msg}  IPMI command fails
+    Should Contain  ${msg}  Unable to establish IPMI
 
 
 Verify IPMI Root User Password Change
@@ -309,20 +305,6 @@ Set Default Password For IPMI Root User
 
     # Verify that root user is able to run IPMI command using default password.
     Verify IPMI Username And Password  root  ${OPENBMC_PASSWORD}
-
-
-Verify IPMI Username And Password
-    [Documentation]  Verify that user is able to run IPMI command
-    ...  with given username and password.
-    [Arguments]  ${username}  ${password}
-
-    ${ipmi_cmd}=  Catenate  SEPARATOR=
-    ...  ${IPMI_EXT_CMD}${SPACE}${USER_OPTION}${SPACE}${username}
-    ...  ${SPACE}${PASSWORD_OPTION}${SPACE}${password}
-    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${SEL_INFO_CMD}
-    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
-    Should Be Equal  ${rc}  ${0}  msg=IPMI command fails
-    Should Contain  ${output}  SEL Information
 
 
 Delete All Non Root IPMI User
