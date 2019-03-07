@@ -311,20 +311,6 @@ Set Default Password For IPMI Root User
     Verify IPMI Username And Password  root  ${OPENBMC_PASSWORD}
 
 
-Verify IPMI Username And Password
-    [Documentation]  Verify that user is able to run IPMI command
-    ...  with given username and password.
-    [Arguments]  ${username}  ${password}
-
-    ${ipmi_cmd}=  Catenate  SEPARATOR=
-    ...  ${IPMI_EXT_CMD}${SPACE}${USER_OPTION}${SPACE}${username}
-    ...  ${SPACE}${PASSWORD_OPTION}${SPACE}${password}
-    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}${SEL_INFO_CMD}
-    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
-    Should Be Equal  ${rc}  ${0}  msg=IPMI command fails
-    Should Contain  ${output}  SEL Information
-
-
 Delete All Non Root IPMI User
     [Documentation]  Delete all non-root IPMI user.
 
