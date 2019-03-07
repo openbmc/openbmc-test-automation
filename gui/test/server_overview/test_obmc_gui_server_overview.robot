@@ -7,6 +7,8 @@ Test Setup       Test Setup Execution  ${OBMC_PowerOff_state}
 Test Teardown    Test Teardown Execution
 
 *** Variables ***
+${xpath_open_serial_over_lan}      //a[@href='#/server-control/remote-console']
+${string_open_serial_over_lan}     Access the Serial over LAN console
 ${xpath_select_overview_1}         //*[@id="nav__top-level"]/li[1]/a/span
 ${string_content}                  witherspoon
 ${string_server_info}              Server information
@@ -20,6 +22,16 @@ ${string_launch_serial_over_lan}   Serial over LAN console
 
 *** Test Case ***
 # OpenBMC @ Power Off state test cases.
+
+Verify Serial Over LAN Console Opens
+    [Documentation]  Verify SOL console opens from "Server Overview"
+    ...  menu to view
+    [Tags]  Verify_Serial_Over_LAN_Console_Opens
+    ...  OBMC_PowerOff_state
+
+    Select Server Overview Menu
+    Click Element  ${xpath_launch_serial_over_lan}
+    Verify Display Content  ${string_open_serial_over_lan}
 
 Verify Title Text Content At OBMC Power Off State
     [Documentation]  Verify display of title text from "Server Overview"
