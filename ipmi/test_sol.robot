@@ -3,6 +3,7 @@ Documentation       This suite tests IPMI SOL in OpenBMC.
 
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
+Resource            ../lib/state_manager.robot
 Library             ../lib/ipmi_utils.py
 
 Test Setup          Start SOL Console Logging
