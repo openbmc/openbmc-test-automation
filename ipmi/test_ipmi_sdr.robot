@@ -1,10 +1,11 @@
 *** Settings ***
 Documentation  Test IPMI sensor IDs.
 
-Resource               ../../lib/rest_client.robot
-Resource               ../../lib/ipmi_client.robot
-Resource               ../../lib/openbmc_ffdc.robot
-Resource               ../../lib/boot_utils.robot
+Resource               ../lib/rest_client.robot
+Resource               ../lib/ipmi_client.robot
+Resource               ../lib/openbmc_ffdc.robot
+Resource               ../lib/boot_utils.robot
+Resource               ../lib/bmc_redfish_resource.robot
 
 Suite setup             Suite Setup Execution
 Test Teardown           Test Teardown Execution
@@ -20,7 +21,7 @@ Test CPU Core SDR Info At Power On
 
     [Tags]  Test_CPU_Core_SDR_Info_At_Power_On
 
-    REST Power On  stack_mode=skip  quiet=1
+    Redfish Power On  stack_mode=skip  quiet=1
     Test SDR Info  core
 
 
@@ -29,7 +30,7 @@ Test DIMM SDR Info At Power On
 
     [Tags]  Test_DIMM_SDR_Info_At_Power_On
 
-    REST Power On  stack_mode=skip  quiet=1
+    Redfish Power On  stack_mode=skip  quiet=1
     Test SDR Info  dimm
 
 
@@ -38,7 +39,7 @@ Test GPU SDR Info At Power On
 
     [Tags]  Test_GPU_SDR_Info_At_Power_On
 
-    REST Power On  stack_mode=skip  quiet=1
+    Redfish Power On  stack_mode=skip  quiet=1
     Test SDR Info  gv100card
 
 
@@ -217,7 +218,7 @@ Test SDR Info
 Suite Setup Execution
     [Documentation]  Do the initial suite setup.
 
-    REST Power On  stack_mode=skip
+    Redfish Power On  stack_mode=skip  quiet=1
 
     ${uri_list}=  Read Properties  ${OPENBMC_BASE_URI}list
     Set Suite Variable  ${SYSTEM_URI}  ${uri_list}
