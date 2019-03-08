@@ -27,12 +27,11 @@ Redfish Power Operation
     #  }
     # }
 
-    redfish.Login
+    Redfish.Login
     ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/system/  ComputerSystem.Reset
     ${payload}=  Create Dictionary  ResetType=${reset_type}
-    ${resp}=  redfish.Post  ${target}  body=&{payload}
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
-    redfish.Logout
+    ${resp}=  Redfish.Post  ${target}  body=&{payload}
+    Redfish.Logout
 
 
 Redfish BMC Reset Operation
@@ -47,9 +46,10 @@ Redfish BMC Reset Operation
     #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
     # }
 
-    redfish.Login
+    Redfish.Login
     ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Managers/bmc/  Manager.Reset
     ${payload}=  Create Dictionary  ResetType=GracefulRestart
-    ${resp}=  redfish.Post  ${target}  body=&{payload}
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
-    redfish.Logout
+    ${resp}=  Redfish.Post  ${target}  body=&{payload}
+    # The logout may very well fail because the system was just asked to
+    # reset itself.
+    Run Keyword And Ignore Error  Redfish.Logout
