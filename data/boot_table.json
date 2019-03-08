@@ -313,6 +313,33 @@
         "method": "Initiate BMC Reboot  wait=${0}",
         "lib_file_path": "state_manager.robot"
     },
+    # Run a Redfish "reboot" on the OBMC while host is running.
+    "Redfish OBMC Reboot (run)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Redfish BMC Reset Operation",
+        "lib_file_path": "bmc_redfish_utils.robot"
+    },
     # Run a "reboot" on the OBMC while host is off.
     "OBMC Reboot (off)": {
         "start": {
@@ -347,6 +374,24 @@
         "method_type": "keyword",
         "method": "Initiate BMC Reboot  wait=${0}",
         "lib_file_path": "state_manager.robot"
+    },
+    # Run a "reboot" on the OBMC while host is off.
+    "Redfish OBMC Reboot (off)": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^Off|Unspecified$",
+            "operating_system": "^Inactive$",
+            "host": "^Off$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Redfish BMC Reset Operation",
+        "lib_file_path": "bmc_redfish_utils.robot"
     },
     # Cycle AC via the PDU while host is off.
     "PDU AC Cycle (run)": {

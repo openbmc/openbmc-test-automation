@@ -345,6 +345,33 @@ REST OBMC Reboot (run)
     Run Key U  ${cmd_buf}
 
 
+Redfish OBMC Reboot (run)
+    [Documentation]  Do "Redfish OBMC Reboot (run)" boot test.
+    [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
+
+    # Description of argument(s):
+    # stack_mode                    If stack_mode is set to "skip", each test
+    #                               specified in the boot_stack is only
+    #                               performed if the machine is not already in
+    #                               the state that would normally result from
+    #                               running the given boot test.  Otherwise,
+    #                               the test is skipped.  If stack_mode is set
+    #                               to "normal", all tests from the boot_stack
+    #                               are performed.  "skip" mode is useful when
+    #                               you simply want the machine in a desired
+    #                               state.  The default value is the global
+    #                               value of "${stack_mode}"
+    # quiet                         If this parameter is set to ${1}, this
+    #                               keyword will print only essential
+    #                               information.  The default value is the
+    #                               global value of "${quiet}"
+
+    ${cmd_buf}  Catenate  OBMC Boot Test
+    ...  \ loc_boot_stack=Redfish OBMC Reboot (run)
+    ...  \ loc_stack_mode=${stack_mode} \ loc_quiet=${quiet}
+    Run Key U  ${cmd_buf}
+
+
 OBMC Reboot (off)
     [Documentation]  Do "OBMC Reboot (off)" boot test.
     [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
@@ -394,6 +421,33 @@ REST OBMC Reboot (off)
 
     ${cmd_buf}  Catenate  OBMC Boot Test
     ...  \ loc_boot_stack=REST OBMC Reboot (off)
+    ...  \ loc_stack_mode=${stack_mode} \ loc_quiet=${quiet}
+    Run Key U  ${cmd_buf}
+
+
+Redfish OBMC Reboot (off)
+    [Documentation]  Do "Redfish OBMC Reboot (off)" boot test.
+    [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
+
+    # Description of argument(s):
+    # stack_mode                    If stack_mode is set to "skip", each test
+    #                               specified in the boot_stack is only
+    #                               performed if the machine is not already in
+    #                               the state that would normally result from
+    #                               running the given boot test.  Otherwise,
+    #                               the test is skipped.  If stack_mode is set
+    #                               to "normal", all tests from the boot_stack
+    #                               are performed.  "skip" mode is useful when
+    #                               you simply want the machine in a desired
+    #                               state.  The default value is the global
+    #                               value of "${stack_mode}"
+    # quiet                         If this parameter is set to ${1}, this
+    #                               keyword will print only essential
+    #                               information.  The default value is the
+    #                               global value of "${quiet}"
+
+    ${cmd_buf}  Catenate  OBMC Boot Test
+    ...  \ loc_boot_stack=Redfish OBMC Reboot (off)
     ...  \ loc_stack_mode=${stack_mode} \ loc_quiet=${quiet}
     Run Key U  ${cmd_buf}
 
