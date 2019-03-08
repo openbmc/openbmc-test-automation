@@ -49,6 +49,14 @@ Verify Root Password Update
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  msg=Verify of new root password failed, RC=${resp.status_code}.
 
+    # IPMI query using new "root" password.
+    ${ipmi_cmd}=  Catenate  SEPARATOR=  ipmitool -I lanplus -C ${IPMI_CIPHER_LEVEL}
+    ...  -P${SPACE}${test_password}  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}
+    ...  mc info
+
+    ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
+    Should Be Equal  ${status}  ${0}
+
 
 *** Keywords ***
 
