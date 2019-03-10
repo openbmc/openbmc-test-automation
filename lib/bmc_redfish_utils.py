@@ -100,6 +100,33 @@ class bmc_redfish_utils(object):
 
         return None
 
+    def get_member_list(self, resource_path):
+        r"""
+        Perform a GET list request and return available members entries.
+
+        Description of argument(s):
+        resource_path  URI resource absolute path
+                       (e.g. "/redfish/v1/SessionService/Sessions").
+        """
+        #"Members": [
+        #    {
+        #      "@odata.id": "/redfish/v1/SessionService/Sessions/Z5HummWPZ7"
+        #    }
+        #    {
+        #      "@odata.id": "/redfish/v1/SessionService/Sessions/46CmQmEL7H"
+        #    }
+        #  ],
+
+        member_list = []
+        resp_list_dict = self.get_attribute(resource_path, "Members")
+        if resp_list_dict is None:
+            return member_list
+
+        for member_id in range(0, len(resp_list_dict)):
+            member_list.append(resp_list_dict[member_id]["@odata.id"])
+
+        return member_list
+
     def list_request(self, resource_path):
         r"""
         Perform a GET list request and return available resource paths.
@@ -111,8 +138,7 @@ class bmc_redfish_utils(object):
 
         global resource_list
         resource_list = []
-        self._rest_response_ = \
-            self._redfish_.get(resource_path, valid_status_codes=[200, 404, 500])
+        self._rest_response_ = self._redfish_.get(resource_path, valid_status_codes=[200, 404, 500])
 
         # Return empty list.
         if self._rest_response_.status != 200:
@@ -124,8 +150,7 @@ class bmc_redfish_utils(object):
             return uri_path
 
         for resource in resource_list:
-            self._rest_response_ = \
-                self._redfish_.get(resource, valid_status_codes=[200, 404, 500])
+            self._rest_response_ = self._redfish_.get(resource, valid_status_codes=[200, 404, 500])
             if self._rest_response_.status != 200:
                 continue
             self.walk_nested_dict(self._rest_response_.dict)
@@ -155,8 +180,7 @@ class bmc_redfish_utils(object):
             # Example: '/redfish/v1/JsonSchemas/' and sub resources.
             if 'JsonSchemas' in resource:
                 continue
-            self._rest_response_ = \
-                self._redfish_.get(resource, valid_status_codes=[200, 404, 500])
+            self._rest_response_ = self._redfish_.get(resource, valid_status_codes=[200, 404, 500])
             if self._rest_response_.status != 200:
                 continue
             resource_dict[resource] = self._rest_response_.dict
