@@ -53,3 +53,21 @@ Redfish BMC Reset Operation
     # The logout may very well fail because the system was just asked to
     # reset itself.
     Run Keyword And Ignore Error  Redfish.Logout
+
+
+Delete All Redfish Sessions
+    [Documentation]  Delete all active redfish sessions.
+
+    Redfish.Login
+    ${saved_session_info}=  Get Redfish Session Info
+
+    ${resp_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/SessionService/Sessions
+
+    # Remove the current login session from the list.
+    Remove Values From List  ${resp_list}  ${saved_session_info["location"]}
+
+    :FOR  ${session}  IN  @{resp_list}
+    \  Redfish.Delete  ${session}
+
+    Redfish.Logout
