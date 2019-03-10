@@ -17,6 +17,8 @@ Resource          ../lib/state_manager.robot
 Resource          ../lib/bmc_network_utils.robot
 Resource          ../lib/bmc_cleanup.robot
 Resource          ../lib/dump_utils.robot
+Resource          ../lib/bmc_redfish_resource.robot
+Resource          ../lib/bmc_redfish_utils.robot
 Library           ../lib/gen_misc.py
 
 *** Variables ***
@@ -79,6 +81,7 @@ Get To Stable State
 
     Run Keyword And Ignore Error  Delete All Error Logs
     Run Keyword And Ignore Error  Delete All Dumps
+    Run Keyword And Ignore Error  Delete All Redfish Sessions
     Check For Current Boot Application Failures
 
 *** Keywords ***
