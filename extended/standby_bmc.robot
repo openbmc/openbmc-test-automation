@@ -17,6 +17,7 @@ Resource          ../lib/state_manager.robot
 Resource          ../lib/bmc_network_utils.robot
 Resource          ../lib/bmc_cleanup.robot
 Resource          ../lib/dump_utils.robot
+Resource          ../lib/bmc_redfish_resource.robot
 Library           ../lib/gen_misc.py
 
 *** Variables ***
@@ -79,6 +80,7 @@ Get To Stable State
 
     Run Keyword And Ignore Error  Delete All Error Logs
     Run Keyword And Ignore Error  Delete All Dumps
+    Run Keyword And Ignore Error  Delete All Redfish Sessions
     Check For Current Boot Application Failures
 
 *** Keywords ***
@@ -151,3 +153,21 @@ MTU Ping Test
     ...  ping -M do -s ${mtu} -c 10 ${OPENBMC_HOST}
     Should Be Equal As Integers  ${rc}  0
     Should Not Contain  ${output}  100% packet loss
+
+
+Delete All Redfish Sessions
+    [Documentation]  Delete all active redfish sessions.
+
+    Redfish.Login
+    ${saved_session_info}=  Get Redfish Session Info
+
+    ${resp_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/SessionService/Sessions
+
+    # Remove the current login session from the list.
+    Remove Values From List  ${resp_list}  ${saved_session_info["location"]}
+
+    :FOR  ${session}  IN  @{resp_list}
+    \  Redfish.Delete  ${session}
+
+    Redfish.Logout
