@@ -3,6 +3,7 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/common_utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/boot_utils.robot
 
 Test Setup       Test Setup Execution
 Test Teardown    Redfish.Logout
@@ -45,11 +46,10 @@ Verify Redfish BMC Manager Properties
     Should Be Equal As Strings  ${resp.dict["PowerState"]}  On
 
 
-Test Redfish BMC Manager GracefulRestart
-    [Documentation]  BMC graceful restart.
-    [Tags]  Test_Redfish_BMC_Manager_GracefulRestart
+Redfish BMC Manager GracefulRestart When Host Off
+    [Documentation]  BMC graceful restart when host is powered off.
+    [Tags]  Redfish_BMC_Manager_GracefulRestart_When_Host_Off
 
-    # Example:
     # "Actions": {
     # "#Manager.Reset": {
     #  "ResetType@Redfish.AllowableValues": [
@@ -58,12 +58,15 @@ Test Redfish BMC Manager GracefulRestart
     #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
     # }
 
-    Redfish.Login
-    ${payload}=  Create Dictionary  ResetType=GracefulRestart
-    ${resp}=  Redfish.Post  Managers/bmc/Actions/Manager.Reset  body=&{payload}
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    Redfish OBMC Reboot (off)
 
-    # TODO: Add logic to ping and check BMC online state
+
+Redfish BMC Manager GracefulRestart When Host Booted
+    [Documentation]  BMC graceful restart when host is running.
+    [Tags]  Redfish_BMC_Manager_GracefulRestart_When_Host_Booted
+
+    Redfish OBMC Reboot (run)
+
 
 *** Keywords ***
 
