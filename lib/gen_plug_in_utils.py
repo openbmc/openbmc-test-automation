@@ -516,7 +516,7 @@ def exit_not_master():
     In a scenario like this, Example_plug_in/cp_setup may be called once
     directly by master_wrapper (the master) and and then called again directly
     by obmc_boot_test.py (the child).  Some plug-in programs may wish to avoid
-    doing any processing on the second such call.  This function will acheive
+    doing any processing on the second such call.  This function will achieve
     that purpose.
 
     This function will print a standard message to stdout prior to exiting.
