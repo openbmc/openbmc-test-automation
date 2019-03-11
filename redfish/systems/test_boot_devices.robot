@@ -5,9 +5,8 @@ Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/common_utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
-Test Teardown    FFDC On Test Case Fail
-Test Setup       redfish.Login
-Test Teardown    redfish.Logout
+Test Setup       Test Setup Execution
+Test Teardown    Test Teardown Execution
 Suite Teardown   Suite Teardown Execution
 
 *** Test Cases ***
@@ -65,10 +64,9 @@ Set And Verify BootSource And BootType
     ...  BootSourceOverrideTarget=${override_target}
     ${payload}=  Create Dictionary  Boot=${data}
 
-    ${resp}=  redfish.patch  Systems/system  body=&{payload}
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    Redfish.patch  Systems/system  body=&{payload}
 
-    ${resp}=  redfish.Get  /redfish/v1/Systems/system
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/system
     Should Be Equal As Strings  ${resp.dict["Boot"]["BootSourceOverrideEnabled"]}
     ...  ${override_enabled}
     Should Be Equal As Strings  ${resp.dict["Boot"]["BootSourceOverrideTarget"]}
@@ -79,3 +77,17 @@ Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
 
     Set And Verify BootSource And BootType  Disabled  None
+
+
+Test Setup Execution
+    [Documentation]  Do test case setup tasks.
+
+    Redfish.Login
+
+
+Test Teardown Execution
+    [Documentation]  Do the post test teardown.
+
+    FFDC On Test Case Fail
+    Redfish.Logout
+
