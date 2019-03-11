@@ -13,7 +13,7 @@ Robot Coding Guidelines
 -   For this project, we will write Robot keyword definitions in either Robot
     or Python.  Robot code should be quite simple.  Therefore, if the algorithm
     in question is the least bit complex, please write it in Python.
--   Observe a maximum line length of 79 characters.
+-   Observe a maximum line length of 110 characters.
 -   Avoid trailing space at the end of any line of Robot code.
 -   Avoid the use of tabs.
 -   Robot supports delimiting cells with either two or more spaces or with a
