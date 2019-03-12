@@ -111,8 +111,17 @@ Login And Verify Redfish Response
     # username            The username to be used to connect to the server.
     # password            The password to be used to connect to the server.
 
-    ${data}=  Create Dictionary  username=${username}  password=${password}
-    Run Keyword And Expect Error  ${expected_response}  Redfish.Login  ${data}
+    # The redfish object may preserve a valid username or password from the
+    # last failed login attempt.  If we then try to login with a null username
+    # or password value, the redfish object may prefer the preserved value.
+    # Since we're testing bad path, we wish to avoid this scenario so we will
+    # clear these values.
+
+    Redfish.Set Username  ${EMPTY}
+    Redfish.Set Password  ${EMPTY}
+
+    Run Keyword And Expect Error  ${expected_response}
+    ...  Redfish.Login  ${username}  ${password}
 
 
 Create New Login Session
