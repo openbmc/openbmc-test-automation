@@ -7,10 +7,10 @@ Resource            ../../lib/resource.robot
 Resource            ../../lib/state_manager.robot
 Resource            ../../lib/openbmc_ffdc_methods.robot
 Resource            ../../lib/boot_utils.robot
-Variables           ../../lib/ras/variables.py
-Variables           ../../data/variables.py
 Resource            ../../lib/dump_utils.robot
 Resource            ../../openpower/ras/ras_utils.robot
+Variables           ../../lib/ras/variables.py
+Variables           ../../data/variables.py
 
 Library             DateTime
 Library             OperatingSystem
@@ -65,7 +65,7 @@ Verify Recoverable Callout Handling For MCI With Threshold 1
     ...              threshold 1.
     [Tags]  Verify_Recoverable_Callout_Handling_For_MCI_With_Threshold_1
 
-    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCS_RECV1
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCI_RECV1
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcifir_th1
     Inject Recoverable Error With Threshold Limit
     ...  HOST  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
@@ -74,7 +74,7 @@ Verify Unrecoverable Callout Handling For MCI
     [Documentation]  Verify unrecoverable callout handling for mci.
     [Tags]  Verify_Unrecoverable_Callout_Handling_For_MCI
 
-    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCS_UE
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCI_UE
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcifir
     Inject Unrecoverable Error Through Host
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
