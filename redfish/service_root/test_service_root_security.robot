@@ -111,8 +111,8 @@ Login And Verify Redfish Response
     # username            The username to be used to connect to the server.
     # password            The password to be used to connect to the server.
 
-    ${data}=  Create Dictionary  username=${username}  password=${password}
-    Run Keyword And Expect Error  ${expected_response}  Redfish.Login  ${data}
+    Run Keyword And Expect Error  ${expected_response}
+    ...  Redfish.Login  ${username}  ${password}
 
 
 Create New Login Session
