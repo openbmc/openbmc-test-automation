@@ -1,4 +1,5 @@
 *** Settings ***
+Documentation    Test Redfish to verify responses for SessionService and Hypermedia.
 
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
