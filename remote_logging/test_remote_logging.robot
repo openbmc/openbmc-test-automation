@@ -141,7 +141,8 @@ Test Remote Logging Invalid Port Config And Verify BMC Journald
     ...  remote_host=${REMOTE_LOG_SERVER_HOST}  remote_port=${INVALID_PORT}
 
     Sleep  3s
-    # rsyslogd[1870]: action 'action 0' suspended, next retry is Fri Sep 14 05:47:39 2018 [v8.29.0 try http://www.rsyslog.com/e/2007 ]
+    # rsyslogd[1870]: action 'action 0' suspended,
+    # next retry is Fri Sep 14 05:47:39 2018 [v8.29.0 try http://www.rsyslog.com/e/2007 ]
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
     ...  journalctl -b --no-pager | egrep 'rsyslog.*${RSYSLOG_RETRY_REGEX}'
 
@@ -252,8 +253,11 @@ Verify Rsyslog Does Not Log On BMC
 
     # Expected filter rsyslog entries.
     # Example:
-    # syslogd[3356]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3356" x-info="http://www.rsyslog.com"] exiting on signal 15.
-    # rsyslogd[3364]:  [origin software="rsyslogd" swVersion="8.29.0" x-pid="3364" x-info="http://www.rsyslog.com"] start
+    # syslogd[3356]:
+    #   [origin software="rsyslogd" swVersion="8.29.0" x-pid="3356" x-info="http://www.rsyslog.com"]
+    #     exiting on signal 15.
+    # rsyslogd[3364]:
+    # [origin software="rsyslogd" swVersion="8.29.0" x-pid="3364" x-info="http://www.rsyslog.com"] start
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
     ...  journalctl -b --no-pager | egrep 'rsyslog' | egrep -Ev '${RSYSLOG_REGEX}|${RSYSLOG_RETRY_REGEX}'
     ...  ignore_err=${1}

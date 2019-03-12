@@ -1,4 +1,6 @@
 *** Settings ***
+Documentation    Verify that Redfish software inventory can be collected.
+
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot

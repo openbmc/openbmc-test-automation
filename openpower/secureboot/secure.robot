@@ -99,8 +99,9 @@ Violate Secure Boot Using Corrupt Image
     BMC Execute Command  /usr/sbin/obmcutil poweron
     Wait Until Keyword Succeeds  15 min  15 sec  Error Logs Should Exist
 
-    #TODO: This will be enabled little later as more tesing required
-    #Wait Until Keyword Succeeds  5 min  5 sec  Collect Error Logs and Verify SRC  ${error_rc}  ${error_log_path}
+    # TODO: This will be enabled little later as more tesing required
+    # Wait Until Keyword Succeeds
+    # ...  5 min  5 sec  Collect Error Logs and Verify SRC  ${error_rc}  ${error_log_path}
 
     # Verify the RC 0x1E07 in the SOL logs.
     Get And Verify Partition Corruption  ${sol_log_file_path}

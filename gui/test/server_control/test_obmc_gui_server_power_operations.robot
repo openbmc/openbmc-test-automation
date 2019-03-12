@@ -31,7 +31,7 @@ Verify Orderly Shutdown Button At Power Off
 
 
 Verify Immediate Shutdown Button At Power Off
-    [Documentation] Verify immediate shutdown button not present at power Off.
+    [Documentation]  Verify immediate shutdown button not present at power Off.
     [Tags]  Verify_Immediate_Shutdown_Button_At_Power_Off
 
     Select Server Power Operations Sub Menu
