@@ -1,4 +1,5 @@
 *** Settings ***
+Documentation    Test BMC Manager functionality.
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/common_utils.robot
@@ -78,4 +79,3 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     redfish.Logout
-
