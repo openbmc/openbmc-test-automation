@@ -678,3 +678,45 @@ def outbuf_to_report(out_buf,
 
     report_list = list(filter(None, out_buf.split("\n")))
     return list_to_report(report_list, **args)
+
+
+def nested_get(key, dictionary):
+    r"""
+    Return a list of all values from the nested dictionary with the given key.
+
+    Example:
+
+    Given a dictionary named personnel with the following contents:
+
+    personnel:
+      [manager]:
+        [last_name]:             Doe
+        [first_name]:            John
+      [accountant]:
+        [last_name]:             Smith
+        [first_name]:            Will
+
+    The following code...
+
+    last_names = nested_get('last_name', personnel)
+    print_var(last_names)
+
+    Would result in the following data:
+
+    last_names:
+      last_names[0]:             Doe
+      last_names[1]:             Smith
+
+    Description of argument(s):
+    key                             The key value.
+    dictionary                      The nested dictionary.
+    """
+
+    result = []
+    for k, v in dictionary.items():
+        if isinstance(v, dict):
+            result += nested_get(key, v)
+        if k == key:
+            result.append(v)
+
+    return result
