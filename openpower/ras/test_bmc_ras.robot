@@ -1,0 +1,258 @@
+*** Settings ***
+Documentation       This suite tests checkstop operations through BMC using
+                    pdbg utility.
+Resource            ../../lib/utils.robot
+Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/ras/host_utils.robot
+Resource            ../../lib/resource.robot
+Resource            ../../lib/state_manager.robot
+Resource            ../../lib/openbmc_ffdc_methods.robot
+Resource            ../../lib/boot_utils.robot
+Variables           ../../lib/ras/variables.py
+Variables           ../../data/variables.py
+Resource            ../../lib/dump_utils.robot
+Resource            ../../openpower/ras/ras_utils.robot
+
+Library             DateTime
+Library             OperatingSystem
+Library             random
+Library             Collections
+
+Suite Setup         RAS Suite Setup
+Test Setup          RAS Test Setup
+#Test Teardown       FFDC On Test Case Fail
+Suite Teardown      RAS Suite Cleanup
+
+Force Tags          Host_RAS
+*** Variables ***
+${stack_mode}       normal
+
+
+*** Test Cases ***
+# Memory channel (MCACALIFIR) related error injection.
+
+Verify Pdbg Recoverable Callout Handling For MCA With Threshold 1
+    [Documentation]  Verify Pdbg recoverable callout handling for MCACALIFIR
+    ...              with threshold 1.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_MCA_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCACALIFIR_RECV1
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcacalfir_th1
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+Verify Pdbg Recoverable Callout Handling For MCA With Threshold 32
+    [Documentation]  Verify Pdbg recoverable callout handling for MCACALIFIR
+    ...              with threshold 32.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_MCA_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCACALIFIR_RECV32
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcacalfir_th32
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+#  Memory buffer (MCIFIR) related error injection.
+
+Verify Pdbg Recoverable Callout Handling For MCI With Threshold 1
+    [Documentation]  Verify Pdbg recoverable callout handling for mci
+    ...              with threshold 1.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_MCI_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCS_RECV1
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcifir_th1
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+# CAPP accelerator (CXAFIR) related error injection.
+
+Verify Pdbg Recoverable Callout Handling For CXA With Threshold 5
+    [Documentation]  Verify Pdbg recoverable callout handling for  CXA
+    ...              with threshold 5.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_CXA_With_Threshold_5
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  CXA_RECV5
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}cxafir_th5
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  5  ${value[2]}  ${err_log_path}
+
+Verify Pdbg Recoverable Callout Handling For CXA With Threshold 32
+    [Documentation]  Verify Pdbg recoverable callout handling for  CXA
+    ...              with threshold 32.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_CXA_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  CXA_RECV32
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}cxafir_th32
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+
+#  OBUSFIR  related error injection.
+
+Verify Pdbg Recoverable Callout Handling For OBUS With Threshold 32
+    [Documentation]  Verify Pdbg recoverable callout handling for  OBUS
+    ...              with threshold 32.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_OBUS_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  OBUS_RECV32
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}obusfir_th32
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+# Nvidia graphics processing units (NPU0FIR) related error injection.
+
+Verify Pdbg Recoverable Callout Handling For NPU0 With Threshold 32
+    [Documentation]  Verify Pdbg recoverable callout handling for  NPU0
+    ...              with threshold 32.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_NPU0_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NPU0_RECV32
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}npu0fir_th32
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+#  Nest accelerator NXDMAENGFIR related error injection.
+
+Verify Pdbg Recoverable Callout Handling For NXDMAENG With Threshold 1
+    [Documentation]  Verify Pdbg recoverable callout handling for  NXDMAENG
+    ...              with threshold 1.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_NXDMAENG_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_RECV1
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_th1
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+
+Verify Pdbg Recoverable Callout Handling For NXDMAENG With Threshold 32
+    [Documentation]  Verify Pdbg recoverable callout handling for  NXDMAENG
+    ...              with threshold 32.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_NXDMAENG_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_RECV32
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_th32
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+
+#  L2FIR related error injection.
+
+Verify Pdbg Recoverable Callout Handling For L2FIR With Threshold 1
+    [Documentation]  Verify Pdbg recoverable callout handling for L2FIR
+    ...              with threshold 1.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_L2FIR_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L2FIR_RECV1
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l2fir_th1
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+Verify Pdbg Recoverable Callout Handling For L2FIR With Threshold 32
+    [Documentation]  Verify Pdbg recoverable callout handling for L2FIR
+    ...              with threshold 32.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_L2FIR_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L2FIR_RECV32
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l2fir_th32
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${translated_fir}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+#  L3FIR related error injection.
+
+Verify Pdbg Recoverable Callout Handling For L3FIR With Threshold 1
+    [Documentation]  Verify Pdbg recoverable callout handling for L3FIR
+    ...              with threshold 1.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_L3FIR_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L3FIR_RECV1
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l3fir_th1
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+Verify Pdbg Recoverable Callout Handling For L3FIR With Threshold 32
+    [Documentation]  Verify Pdbg recoverable callout handling for L3FIR
+    ...              with threshold 32.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_L3FIR_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L3FIR_RECV32
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l3fir_th32
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${translated_fir}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+# On chip controller (OCCFIR) related error injection.
+
+Verify Pdbg Recoverable Callout Handling For OCC With Threshold 1
+    [Documentation]  Verify Pdbg recoverable callout handling for OCCFIR
+    ...              with threshold 1.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_OCC_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  OCCFIR_RECV1
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}occfir_th1
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+# Core management engine (CMEFIR) related error injection.
+
+Verify Pdbg Recoverable Callout Handling For CMEFIR With Threshold 1
+    [Documentation]  Verify Pdbg recoverable callout handling for CMEFIR
+    ...              with threshold 1.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_CMEFIR_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  CMEFIR_RECV1
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}cmefir_th1
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+# Nest control vunit (NCUFIR) related error injection.
+
+Verify Pdbg Recoverable Callout Handling For NCUFIR With Threshold 1
+    [Documentation]  Verify Pdbg recoverable callout handling for NCUFIR
+    ...              with threshold 1.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_NCUFIR_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NCUFIR_RECV1
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}ncufir_th1
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+# Core FIR related error injection.
+
+Verify Pdbg Recoverable Callout Handling For CoreFIR With Threshold 5
+    [Documentation]  Verify Pdbg recoverable callout handling for CoreFIR
+    ...              with threshold 5.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_CoreFIR_With_Threshold_5
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  COREFIR_RECV5
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    Disable CPU States Through HOST 
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}corefir_th5
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  5  ${value[2]}  ${err_log_path}
+
+Verify Pdbg Recoverable Callout Handling For CoreFIR With Threshold 1
+    [Documentation]  Verify Pdbg recoverable callout handling for CoreFIR
+    ...              with threshold 1.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_CoreFIR_Handling_For_With_Threshold_1
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  COREFIR_RECV1
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    Disable CPU States Through HOST
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}corefir_th1
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+Verify Pdbg Recoverable Callout Handling For EQFIR With Threshold 32
+    [Documentation]  Verify Pdbg recoverable callout handling for L3FIR
+    ...              with threshold 32.
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_EQFIR_With_Threshold_32
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  EQFIR_RECV32
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EQ
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}eqfir_th32
+    Inject Recoverable Error With Threshold Limit
+    ...  BMC  ${translated_fir}  ${value[1]}  32  ${value[2]}  ${err_log_path}
