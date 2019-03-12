@@ -8,8 +8,8 @@ DES_MCA_RECV32 = "'MCACALFIR[^2].*Excessive refreshes'"
 DES_MCA_UE = "'MCACALFIR[^10].*State machine'"
 
 
-DES_MCS_RECV1 = "'MCFIR[^0].*mc internal recoverable'"
-DES_MCS_UE = "'MCFIR[^1].*mc internal non recovervabl'"
+DES_MCI_RECV1 = "'MCFIR[^0].*mc internal recoverable'"
+DES_MCI_UE = "'MCFIR[^1].*mc internal non recovervabl'"
 
 DES_NX_RECV1 = "'NXDMAENGFIR[^13].*Channel 4 GZIP ECC PE'"
 DES_NX_RECV32 = "'NXDMAENGFIR[^4].*Channel 0 842 engine ECC'"
@@ -53,8 +53,8 @@ ERROR_INJECT_DICT = {'MCACALIFIR_RECV1': ['07010900', '8000000000000000',
                      'MCACALIFIR_RECV32': ['07010900', '2000000000000000',
                                            DES_MCA_RECV32],
                      'MCACALIFIR_UE': ['07010900', '0020000000000000', DES_MCA_UE],
-                     'MCS_RECV1': ['05010800', '8000000000000000', DES_MCS_RECV1],
-                     'MCS_UE': ['05010800', '4000000000000000', DES_MCS_UE],
+                     'MCI_RECV1': ['05010800', '8000000000000000', DES_MCI_RECV1],
+                     'MCI_UE': ['05010800', '4000000000000000', DES_MCI_UE],
                      'NX_RECV1': ['02011100', '0004000000000000', DES_NX_RECV1],
                      'NX_UE': ['02011100', '0400000000000000', DES_NX_UE],
                      'NX_RECV32': ['02011100', '0800000000000000', DES_NX_RECV32],
