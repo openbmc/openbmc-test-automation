@@ -7,7 +7,7 @@ Resource       ../../lib/openbmc_ffdc.robot
 Library        ../../lib/bmc_network_utils.py
 
 Suite Setup    Suite Setup Execution
-Test Teardown  Redfish.Logout
+Test Teardown  Test Teardown Execution
 
 *** Variables ***
 
@@ -28,6 +28,13 @@ Configure Valid MAC And Verify
 
 
 *** Keywords ***
+
+Test Teardown Execution
+    [Documentation]  Do the post test teardown.
+
+    FFDC On Test Case Fail
+    Redfish.Logout
+
 
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
