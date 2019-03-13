@@ -491,5 +491,5 @@ RAS Suite Cleanup
 
     # Boot to OS.
     REST Power On  quiet=${1}
-    Delete Error Logs
+    Delete All Error Logs
     Gard Operations On OS  clear all
