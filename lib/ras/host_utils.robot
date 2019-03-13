@@ -111,7 +111,7 @@ Inject Error Through HOST
     # threshold_limit     Threshold limit (e.g 1, 5, 32).
     # master_proc_chip    Processor chip type (True' or 'False').
 
-    Delete Error Logs
+    Delete All Error Logs
     Login To OS Host
     Gard Operations On OS  clear all
 
