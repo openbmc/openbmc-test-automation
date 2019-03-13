@@ -145,6 +145,8 @@ REDFISH_SESSION = REDFISH_BASE_URI + 'SessionService/Sessions'
 REDFISH_SESSION_URI = 'SessionService/Sessions/'
 REDFISH_NW_ETH0 = 'Managers/bmc/EthernetInterfaces/eth0/'
 REDFISH_NW_ETH0_URI = REDFISH_BASE_URI + REDFISH_NW_ETH0
+REDFISH_NW_PROTOCOL = 'Managers/bmc/NetworkProtocol'
+REDFISH_NW_PROTOCOL_URI = REDFISH_BASE_URI + REDFISH_NW_PROTOCOL
 
 # Boot options and URI variables.
 POWER_ON = 'On'
