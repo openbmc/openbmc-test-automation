@@ -10,6 +10,9 @@ Library        ../../lib/bmc_network_utils.py
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
 
+*** Variables ***
+${test_hostname}  openbmc
+
 *** Test Cases ***
 
 Get IP Address And Verify
@@ -48,6 +51,22 @@ Verify All Configured IP And Netmask
     : FOR  ${network_configuration}  IN  @{network_configurations}
     \  Verify IP And Netmask On BMC  ${network_configuration['Address']}
     ...  ${network_configuration['SubnetMask']}
+
+Get Hostname And Verify
+    [Documentation]  Get hostname via Redfish and verify.
+    [Tags]  Get_Hostname_And_Verify
+
+    ${hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+
+    Validate Hostname On BMC  ${hostname}
+
+Configure Hostname And Verify
+    [Documentation]  Configure hostname via Redfish and verify.
+    [Tags]  Configure_Hostname_And_Verify
+
+    Configure Hostname  ${test_hostname}
+
+    Validate Hostname On BMC  ${test_hostname}
 
 *** Keywords ***
 
@@ -157,6 +176,31 @@ Verify IP And Netmask On BMC
     ${ip_with_netmask}=  Catenate  ${ip}/${prefix_length}
     Should Contain  ${ip_data}  ${ip_with_netmask}
     ...  msg=IP and netmask pair does not exist.
+
+Configure Hostname
+    [Documentation]  Configure hostname on BMC via Redfish.
+    [Arguments]  ${hostname}
+
+    # Description of argument(s):
+    # hostname  A hostname value which is to be configured on BMC.
+
+    ${data}=  Create Dictionary  HostName=${hostname}
+
+    Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+
+Validate Hostname On BMC
+    [Documentation]  Verify that the hostname read via Redfish is the same as the
+    ...  hostname configured on system.
+    [Arguments]  ${hostname}
+
+    # Description of argument(s):
+    # hostname  A hostname value which is to be compared to the hostname
+    #           configured on system.
+
+    ${sys_hostname}=  Get BMC Hostname
+
+    Should Contain  ${sys_hostname}  ${hostname}
+    ...  ignore_case=True  msg=Hostname does not exist.
 
 Test Teardown Execution
     [Documentation]  Test teardown execution.
