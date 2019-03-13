@@ -29,6 +29,18 @@ Redfish Create and Verify Users
        user_user      TestPwd123  User            ${True}
        callback_user  TestPwd123  Callback        ${True}
 
+Verify Redfish User with Wrong Password
+    [Documentation]  Verify Redfish User with Wrong Password
+    [Tags]  Verify_Redfish_User_with_Wrong_Password
+    [Template]  Verify Redfish Users with Wrong Password
+
+     # username       password    role_id         enabled  wrong_password
+       admin_user     TestPwd123  Administrator   ${True}  alskjhfwurh
+       operator_user  TestPwd123  Operator        ${True}  12j8a8uakjhdaosiruf024
+       user_user      TestPwd123  User            ${True}  12
+       callback_user  TestPwd123  Callback        ${True}  !#@D#RF#@!D
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -91,3 +103,43 @@ Redfish Create And Verify User
 
     # Delete Specified User
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+
+Verify Redfish Users with Wrong Password
+    [Documentation]  Verify Redfish Users with Wrong Password
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}  ${wrong_password}
+
+    # Description of argument(s):
+    # Username            The username to be created
+    # Password            The password to be assigned
+    # Roleid              The role id of the user to be created
+    # Enabled             The decision if it should be enabled
+    # wrong_password      Any invalid password
+
+    # Delete if the user exist.
+    Run Keyword And Ignore Error
+    ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    Redfish.Logout
+
+    # Login with created user.
+    Redfish.Login  ${username}  ${password}
+
+    Redfish.Logout
+
+    # Login with created user with invalid password.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${username}  ${wrong_password}
+
+    Redfish.Login
+
+    # Delete Specified User
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+
+
