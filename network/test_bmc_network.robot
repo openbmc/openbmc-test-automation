@@ -557,8 +557,7 @@ Validate Hostname On BMC
     #           configured on system.
 
     ${sys_hostname}=  Get BMC Hostname
-
-    Should Contain  ${sys_hostname}  ${hostname}
+    Should Be Equal  ${sys_hostname}  ${hostname}
     ...  ignore_case=True  msg=Hostname does not exist.
 
 Test Teardown Execution
