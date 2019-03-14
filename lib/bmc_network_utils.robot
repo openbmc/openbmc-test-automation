@@ -142,7 +142,7 @@ Get BMC Hostname
     #      Architecture: arm
 
     ${output}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  hostnamectl | grep hostname
+    ...  hostnamectl | grep hostname | cut -f 2 -d : | sed -re 's/ //g'
 
     [Return]  ${output}
 
