@@ -15,6 +15,14 @@ Is Water Cooled
     [Return]  ${water_cooled}
 
 
+Is Air Cooled
+    [Documentation]  Return 0 if system is air cooled, 1 othersise.
+
+    ${air_cooled}=  Read Attribute
+    ...  ${HOST_INVENTORY_URI}system/chassis  AirCooled
+    [Return]  ${air_cooled}
+
+
 Get Fan Names
     [Documentation]  Get the names of the fans marked present in inventory.
     [Arguments]  ${fan_names}
