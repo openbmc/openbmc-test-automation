@@ -14,6 +14,8 @@ Test Teardown  Test Teardown Execution
 # AA:AA:AA:AA:AA:AA series is a valid MAC and does not exist in
 # our network, so this is chosen to avoid MAC conflict.
 ${valid_mac}         AA:E2:84:14:28:79
+${zero_mac}          00:00:00:00:00:00
+${broadcast_mac}     FF:FF:FF:FF:FF:FF
 
 *** Test Cases ***
 
@@ -25,6 +27,24 @@ Configure Valid MAC And Verify
 
     # Verify whether new MAC is configured on BMC.
     Validate MAC On BMC  ${valid_mac}
+
+
+Configure Zero MAC And Verify
+    [Documentation]  Configure zero MAC via Redfish and verify
+    [Tags]  Configure_Zero_MAC_And_Verify
+
+    [Template]  Configure MAC Settings
+    # MAC address  scenario
+    ${zero_mac}    error
+
+
+Configure Broadcast MAC And Verify
+    [Documentation]  Configure broadcast MAC via Redfish and verify
+    [Tags]  Configure_Broadcast_MAC_And_Verify
+
+    [Template]  Configure MAC Settings
+    # MAC address    scenario
+    ${broadcast_mac}  error
 
 
 *** Keywords ***
@@ -49,6 +69,7 @@ Suite Setup Execution
 
     Redfish.Logout
 
+
 Configure MAC Settings
     [Documentation]  Configure MAC settings via Redfish.
     [Arguments]  ${mac_address}  ${expected_result}
@@ -60,7 +81,8 @@ Configure MAC Settings
     Redfish.Login
     ${payload}=  Create Dictionary  MACAddress=${mac_address}
 
-    ${resp}=  Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body=&{payload}
+    Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body=&{payload}
+    ...  valid_status_codes=[200, 400]
 
     # After any modification on network interface, BMC restarts network
     # module, wait until it is reachable.
