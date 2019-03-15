@@ -16,6 +16,13 @@ Test Teardown  Test Teardown Execution
 ${valid_mac}         AA:E2:84:14:28:79
 ${zero_mac}          00:00:00:00:00:00
 ${broadcast_mac}     FF:FF:FF:FF:FF:FF
+${out_of_range_mac}  AA:FF:FF:FF:FF:100
+
+# There will be 6 bytes in MAC address (e.g. xx.xx.xx.xx.xx.xx).
+# Here trying to configure xx.xx.xx.xx.xx
+${less_byte_mac}     AA:AA:AA:AA:BB
+# Here trying to configure xx.xx.xx.xx.xx.xx.xx
+${more_byte_mac}     AA:AA:AA:AA:AA:AA:BB
 
 *** Test Cases ***
 
@@ -46,6 +53,29 @@ Configure Broadcast MAC And Verify
     # MAC address    scenario
     ${broadcast_mac}  error
 
+Configure Out Of Range MAC And Verify
+    [Documentation]  Configure out of range MAC via Redfish and verify.
+    [Tags]  Configure_Out_Of_Range_MAC_And_Verify
+
+    [Template]  Configure MAC Settings
+    # MAC address        scenario
+    ${out_of_range_mac}  error
+
+Configure Less Byte MAC And Verify
+    [Documentation]  Configure less byte MAC via Redfish and verify.
+    [Tags]  Configure_Less_Byte_MAC_And_Verify
+
+    [Template]  Configure MAC Settings
+    # MAC address     scenario
+    ${less_byte_mac}  error
+
+Configure More Byte MAC And Verify
+    [Documentation]  Configure more byte MAC via Redfish and verify.
+    [Tags]  Configure_Less_Byte_MAC_And_Verify
+
+    [Template]  Configure MAC Settings
+    # MAC address     scenario
+    ${more_byte_mac}  error
 
 *** Keywords ***
 
