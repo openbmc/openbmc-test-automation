@@ -7,6 +7,7 @@ Resource         ../lib/user_utils.robot
 Library          ../lib/bmc_ssh_utils.py
 
 Suite Setup      Suite Setup Execution
+Suite Teardown   Delete Defined LDAP Config
 Test Teardown    FFDC On Test Case Fail
 
 *** Variables ****
@@ -44,8 +45,7 @@ Verify LDAP Config Is Deleted
     [Documentation]  Verify LDAP config is deleted in BMC.
     [Tags]  Verify_LDAP_Config_Is_Deleted
 
-    Delete LDAP Config
-    Check LDAP Config File Deleted
+    Delete Defined LDAP Config
 
 
 Verify LDAP User Able To Login Using REST
@@ -169,3 +169,12 @@ Delete LDAP Group
     [Tags]  Delete_LDAP_Group
 
     Delete Defined LDAP Group And Privilege  ${GROUP_NAME}
+
+*** Keywords ***
+
+
+Delete Defined LDAP Config
+    [Documentation]  Delete LDAP configuration which is configured.
+
+    Delete LDAP Config
+    Check LDAP Config File Deleted
