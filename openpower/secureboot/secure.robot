@@ -28,6 +28,13 @@ ${security_access_bit_mask}  ${0xC000000000000000}
 ${pnor_corruption_rc}        0x1E07
 ${bmc_image_dir_path}        /usr/local/share/pnor
 ${bmc_guard_part_path}       /var/lib/phosphor-software-manager/pnor/prsv/GUARD
+${HB_BASE_PART}              HBB
+${HB_DATA_PART}              HBD
+${HB_EXT_IMG_PART}           HBI
+${HB_RUNTIME_PART}           HBI
+${HB_BASE_LOADER_PART}       HBBL
+${SBE_PART}                  SBE
+${OCC_PART}                  OCC
 
 *** Test Cases ***
 
@@ -53,8 +60,53 @@ Secure Boot Violation Using Corrupt SBE Image On Cold Boot
     [Tags]  Secure_Boot_Violation_Using_Corrupt_SBE_Image_On_Cold_Boot
 
     Violate Secure Boot Using Corrupt Image
-    ...  SBE  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+    ...  ${SBE_PART}  ${pnor_corruption_rc}  ${bmc_image_dir_path}
 
+
+Secure Boot Violation Using Corrupt HBD Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt HBD image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_HBD_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  ${HB_DATA_PART}  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+
+Secure Boot Violation Using Corrupt HBB Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt HBB image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_HBB_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  ${HB_BASE_PART}  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+
+Secure Boot Violation Using Corrupt HBBL Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt HBBL image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_HBBL_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  ${HB_BASE_LOADER_PART}  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+
+
+Secure Boot Violation Using Corrupt HBI Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt HBI image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_HBI_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  ${HB_EXT_IMG_PART}  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+
+
+Secure Boot Violation Using Corrupt HBRT Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt HBRT image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_HBRT_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  ${HB_RUNTIME_PART}  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+
+
+Secure Boot Violation Using Corrupt OCC Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt OCC image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_OCC_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  ${OCC_PART}  ${pnor_corruption_rc}  ${bmc_image_dir_path}
 
 *** Keywords ***
 
@@ -82,8 +134,6 @@ Violate Secure Boot Using Corrupt Image
 
     # Load corrupted image to /usr/local/share/pnor.
     Open Connection For SCP
-    Log  ${bmc_image_dir_path}
-    Log  ${error_rc}
 
     scp.Put File
     ...  ${EXEC_DIR}/data/pnor_test_data/${partition}  ${bmc_image_dir_path}
@@ -100,19 +150,40 @@ Violate Secure Boot Using Corrupt Image
     Wait Until Keyword Succeeds  15 min  15 sec  Error Logs Should Exist
 
     #TODO: This will be enabled little later as more tesing required
-    #Wait Until Keyword Succeeds  5 min  5 sec  Collect Error Logs and Verify SRC  ${error_rc}  ${error_log_path}
+    #Wait Until Keyword Succeeds  5 min  5 sec
+    #...  Collect Error Logs and Verify SRC  ${error_rc}  ${error_log_path}
 
+    # Expected behavior is that the error occurs early in the boot process,
+    # therefore, no entry in the error log and nothing to decode.
+    # The 1E07 error is written to PNOR & then goes into Quiesced state.
+    # On the next valid boot, the error log will sent to BMC & seen on SOL console
+    Run Keyword If  '${partition}' == '${SBE_PART}' or '${partition}' == '${OCC_PART}'
     # Verify the RC 0x1E07 in the SOL logs.
-    Get And Verify Partition Corruption  ${sol_log_file_path}
+    ...    Get And Verify Partition Corruption  ${partition}  ${sol_log_file_path}
+    ...  ELSE IF  '${partition}' == '${HB_DATA_PART}' or '${partition}' == '${HB_BASE_PART}' or '${partition}' == '${HB_EXT_IMG_PART}' or '${partition}' == '${HB_BASE_LOADER_PART}' or '${partition}' == '${HB_RUNTIME_PART}'
+    ...    Log To Console  ${partition} corrupted, Going to quiesced state.
 
     # Remove the file from /usr/local/share/pnor/.
     BMC Execute Command  rm -rf ${bmc_image_dir_path}*
 
     # Check if system reaches quiesce state.
+    # Default system will end up at power off at the end of the verification
     Run Keywords
     ...  Wait Until Keyword Succeeds  3 min  5 sec  Is Host Quiesced  AND
     ...  Recover Quiesced Host
 
+    # We will retry boot with corrupted partition removed
+    # SOL console should show previous boot fail message (1E07) on current boot
+    # HBB corruption will never get far enough to log into PNOR.
+    # so, it should be removed from consideration for this check
+    Run Keyword If  '${partition}' == '${HB_BASE_PART}'
+    ...  Log To Console  No more action on ${partition} corruption required.
+    ...  ELSE IF  '${partition}' == '${HB_DATA_PART}' or '${partition}' == '${HB_EXT_IMG_PART}' or '${partition}' == '${HB_BASE_LOADER_PART}' or '${partition}' == '${HB_RUNTIME_PART}' 
+    ...  Run Keywords
+    ...    REST Power On  stack_mode=skip  quiet=1  AND
+    ...    Wait Until Keyword Succeeds  5 min  5 sec  Error Logs Should Exist  AND
+    ...    Get And Verify Partition Corruption  ${partition}  ${sol_log_file_path}  AND
+    ...    REST Power Off  stack_mode=skip  quiet=1
 
 Collect Error Logs and Verify SRC
     [Documentation]  Verify error log entry & signature description.
@@ -158,23 +229,36 @@ Get And Verify Security Access Bit
 
 Get And Verify Partition Corruption
     [Documentation]  Get and verify partition corruption.
-    [Arguments]  ${sol_log_file_path}
+    [Arguments]  ${partition}  ${sol_log_file_path}
 
     # Description of argument(s):
+    # partition          The partition which is to be corrupted
+    #                    (e.g. "SBE", "HBI", "HBB", "HBRT", "HBBL", "OCC").
     # sol_log_file_path  The path to the file containing SOL data
     #                    which was collected during a REST Power On.
 
     # Sample output:
     #  44.47498|secure|Secureboot Failure plid = 0x90000007, rc = 0x1E07
+    #                               OR
+    #  14.94315|Error reported by secure (0x1E00) PLID 0x90000002
+    #  14.99659|  ROM_verify() Call Failed
+    #  14.99659|  ModuleId   0x03 SECUREBOOT::MOD_SECURE_ROM_VERIFY
+    #  14.99660|  ReasonCode 0x1e07 SECUREBOOT::RC_ROM_VERIFY
 
-    ${cmd}=  Catenate
+    ${cmd}=   Run Keyword If  '${partition}' == '${SBE_PART}' or '${partition}' == '${HB_DATA_PART}'
+    ...  Catenate
     ...  grep -i "Secureboot Failure"  ${sol_log_file_path} | awk '{ print $8 }'
+    ...  ELSE IF  '${partition}' == '${HB_EXT_IMG_PART}'
+    ...  Catenate
+    ...  grep -i "ReasonCode"  ${sol_log_file_path} | awk '{ print $3 }'
+
     ${rc}  ${corruption_rc_str}=  Run and Return RC and Output  ${cmd}
     Should Be Equal  ${rc}  ${0}
     ...  msg=Return code from ${cmd} not zero.
 
     # Verify the RC 0x1E07 from sol output".
-    Should Be Equal As Strings  ${corruption_rc_str}  ${pnor_corruption_rc}
+    Should Be Equal As Strings
+    ...  ${corruption_rc_str}  ${pnor_corruption_rc}  ignore_case=True
     ...  msg=SB violation due to PNOR partition corruption not reported. values=False
 
 
@@ -240,6 +324,9 @@ Test Teardown Execution
 
     Stop SOL Console Logging
     Run  rm -rf ${sol_log_file_path}
+
+    # Collect FFDC on failure
+    #FFDC On Test Case Fail
 
     # Removing the corrupted file from BMC.
     BMC Execute Command  rm -rf ${bmc_image_dir_path}*
