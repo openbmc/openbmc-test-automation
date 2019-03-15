@@ -7,6 +7,7 @@ Resource         ../lib/user_utils.robot
 Library          ../lib/bmc_ssh_utils.py
 
 Suite Setup      Suite Setup Execution
+Suite Teardown   Delete Defined LDAP Config
 Test Teardown    FFDC On Test Case Fail
 
 *** Variables ****
@@ -32,6 +33,7 @@ Verify User Group And Privilege Created
     Should Contain  ${bmc_user_uris}  ${GROUP_NAME}
     Should Contain  ${bmc_user_uris}  ${GROUP_PRIVILEGE}
 
+
 Verify LDAP Config Is Created
     [Documentation]  Verify LDAP config is created in BMC.
     [Tags]  Verify_LDAP_Config_Is_Created
@@ -44,8 +46,10 @@ Verify LDAP Config Is Deleted
     [Documentation]  Verify LDAP config is deleted in BMC.
     [Tags]  Verify_LDAP_Config_Is_Deleted
 
-    Delete LDAP Config
-    Check LDAP Config File Deleted
+    ${ldap_server_config} =  Read Properties  ${BMC_USER_URI}ldap/enumerate
+    Run Keyword If  'config' in ${ldap_server_config}
+    ...  Delete Defined LDAP Config
+    ...  ELSE  LDAP Config Define And Delete
 
 
 Verify LDAP User Able To Login Using REST
@@ -146,6 +150,7 @@ Verify LDAP Search Scope Is Set As Base
      # Search Scope as base
      xyz.openbmc_project.User.Ldap.Config.SearchScope.base
 
+
 Verify LDAP Search Scope Is Set As Sub
     [Documentation]  Verify LDAP search scope is set as "sub" using REST.
     [Tags]  Verify_LDAP_Search_Scope_Is_Set_As_Sub
@@ -169,3 +174,23 @@ Delete LDAP Group
     [Tags]  Delete_LDAP_Group
 
     Delete Defined LDAP Group And Privilege  ${GROUP_NAME}
+
+
+*** Keywords ***
+
+
+Delete Defined LDAP Config
+    [Documentation]  Delete LDAP configuration which is configured.
+
+    ${ldap_server_config} =  Read Properties  ${BMC_USER_URI}ldap/enumerate
+    Run Keyword If  'config' in ${ldap_server_config}
+    ...  Delete LDAP Config
+    Check LDAP Config File Deleted
+
+
+LDAP Config Define And Delete
+    [Documentation]  Create LDAP configuration and delete LDAP config.
+
+    Configure LDAP Server On BMC
+    Check LDAP Config File Generated
+    Delete Defined LDAP Config
