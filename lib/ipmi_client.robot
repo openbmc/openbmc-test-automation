@@ -373,3 +373,34 @@ Verify IPMI Username And Password
     ${output}=  Run External IPMI Standard Command
     ...  sel info  U=${username}  P=${password}
     Should Contain  ${output}  SEL Information  msg=SEL information not present
+
+
+IPMI Create User
+    [Documentation]  Create IPMI user with given userid and username.
+    [Arguments]  ${userid}  ${username}
+
+    # Description of argument(s):
+    # userid      The user ID (e.g. "1", "2", etc.).
+    # username    The user name (e.g. "root", "robert", etc.).
+
+    ${ipmi_cmd}=  Catenate  user set name ${userid} ${username}
+    ${resp}=  Run IPMI Standard Command  ${ipmi_cmd}
+    ${user_info}=  Get User Info  ${userid}
+    Should Be Equal  ${user_info['user_name']}  ${username}
+
+
+Set Channel Access
+    [Documentation]  Verify that user is able to run IPMI command
+    ...  with given username and password.
+    [Arguments]  ${userid}  ${options}  ${channel}=1
+
+    # Description of argument(s):
+    # userid          The user ID (e.g. "1", "2", etc.).
+    # options         Set channel command options (e.g.
+    #                 "link=on", "ipmi=on", etc.).
+    # channel_number  The user's channel number (e.g. "1").
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  channel setaccess${SPACE}${channel}${SPACE}${userid}
+    ...  ${SPACE}${options}
+    Run IPMI Standard Command  ${ipmi_cmd}
