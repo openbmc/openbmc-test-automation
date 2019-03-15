@@ -28,6 +28,8 @@ Test BMC Redfish Using Redfish JsonSchema ResponseValidator
 
     Shell Cmd  mkdir -p logs/
 
+    Set Test Variable  ${test_run_status}  ${True}
+
     :FOR  ${url}  IN  @{url_list}
     \  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_string} -i ${url}
     \  ${status}=  Run Keyword And Return Status  Redfish JsonSchema ResponseValidator Result  ${output}
