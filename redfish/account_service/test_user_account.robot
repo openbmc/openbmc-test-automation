@@ -40,6 +40,17 @@ Verify Redfish User with Wrong Password
        user_user      TestPwd123  User            ${True}  12
        callback_user  TestPwd123  Callback        ${True}  !#@D#RF#@!D
 
+Verify Login with Deleted Redfish Users
+    [Documentation]  Verify Login with Deleted Redfish Users
+    [Tags]  Verify_Login_with_Deleted_Redfish_Users
+    [Template]  Verify Login with Deleted Redfish User 
+
+     # username       password    role_id         enabled
+       admin_user     TestPwd123  Administrator   ${True}
+       operator_user  TestPwd123  Operator        ${True}
+       user_user      TestPwd123  User            ${True}
+       callback_user  TestPwd123  Callback        ${True}
+
 
 *** Keywords ***
 
@@ -142,3 +153,40 @@ Verify Redfish User with Wrong Password
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
 
 
+Verify Login with Deleted Redfish User
+    [Documentation]  Verify Login with Deleted Redfish User
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role id of the user to be created.
+    # enabled             The decision if it should be enabled.
+
+    # Delete if the user exist.
+    Run Keyword And Ignore Error
+    ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+
+    Redfish.Login
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    Redfish.Logout
+
+    # Login with created user.
+    Redfish.Login  ${username}  ${password}
+
+    Redfish.Logout
+
+    Redfish.Login
+
+    # Delete newly created user.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+
+    # Login with deleted user.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${username}  ${password}
