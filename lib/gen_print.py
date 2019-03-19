@@ -1786,13 +1786,16 @@ print_func_template = \
 
 qprint_func_template = \
     [
-        "    if int(<mod_qualifier>get_var_value(None, 0, \"quiet\")): return"
+        "    quiet_default = get_var_value(None, 0, \"quiet\")",
+        "    quiet = get_stack_var(\"quiet\", quiet_default)",
+        "    if int(quiet): return"
     ] + print_func_template
 
 dprint_func_template = \
     [
-        "    if not int(<mod_qualifier>get_var_value(None, 0, \"debug\")):"
-        + " return"
+        "    debug_default = get_var_value(None, 0, \"debug\")",
+        "    debug = get_stack_var(\"debug\", debug_default)",
+        "    if not int(debug): return"
     ] + print_func_template
 
 lprint_func_template = \
