@@ -12,6 +12,8 @@ Library          String
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/boot_utils.robot
 Resource         ../lib/remote_logging_utils.robot
+Resource         ../lib/bmc_redfish_resource.robot
+Resource         ../lib/ipmi_client.robot
 Library          ../lib/gen_misc.py
 
 Suite Setup      Suite Setup Execution
@@ -27,6 +29,7 @@ ${BMC_BOOT_MSG}          Startup finished in
 ${BMC_SYSLOG_REGEX}      dropbear|vrm-control.sh
 ${RSYSLOG_REGEX}         start|exiting on signal 15|there are no active actions configured
 ${RSYSLOG_RETRY_REGEX}   suspended
+${valid_password}        0penBmc1
 
 *** Test Cases ***
 
@@ -209,7 +212,8 @@ Verify BMC Journald Contains No Credential Data
     [Tags]  Verify_BMC_Journald_Contains_No_Credential_Data
 
     Initialize OpenBMC
-    Update Root Password  ${REST_PASSWORD}
+
+    Create Redfish And IPMI Users
 
     # Time for user manager to sync.
     Sleep  5 s
@@ -353,3 +357,35 @@ Verify Configure Remote Logging Server
 
     Should Be Equal  ${status}  ${expectation}
     ...  msg=Test result ${status} and expectation ${expectation} do not match.
+
+
+Create Redfish And IPMI Users
+    [Documentation]  Create a valid Redfish and IPMI local user accounts and
+    ...  delete them.
+
+    # Create redfish local valid user.
+    ${redfish_username}=  Generate Random String  8  [LETTERS]
+
+    Redfish.Login
+
+    ${payload}=  Create Dictionary
+    ...  UserName=${redfish_username}  Password=${valid_password}
+    ...  RoleId=Administrator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Delete newly created user.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${redfish_username}
+
+    Redfish.Logout
+
+    # Create IPMI local valid user.
+    ${ipmi_username}=  Generate Random String  8  [LETTERS]
+    Set Test Variable  ${ipmi_username}
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    ${ipmi_cmd}=  Catenate  user set name ${random_userid} ${ipmi_username}
+    Run IPMI Standard Command  ${ipmi_cmd}
+
+    # Delete IPMI user.
+    Run IPMI Standard Command  user set name ${random_userid} ""
+
