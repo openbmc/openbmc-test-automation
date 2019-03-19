@@ -6,6 +6,7 @@ BMC redfish utility functions.
 
 import json
 from robot.libraries.BuiltIn import BuiltIn
+import gen_print as gp
 
 
 class bmc_redfish_utils(object):
@@ -37,8 +38,9 @@ class bmc_redfish_utils(object):
         Get resource attribute.
 
         Description of argument(s):
-        resource_path    URI resource absolute path (e.g. "/redfish/v1/Systems/1").
-        attribute        Name of the attribute (e.g. 'PowerState').
+        resource_path               URI resource absolute path (e.g.
+                                    "/redfish/v1/Systems/1").
+        attribute                   Name of the attribute (e.g. 'PowerState').
         """
 
         resp = self._redfish_.get(resource_path)
@@ -52,7 +54,8 @@ class bmc_redfish_utils(object):
         Returns dictionary of attributes for the resource.
 
         Description of argument(s):
-        resource_path    URI resource absolute path (e.g. "/redfish/v1/Systems/1").
+        resource_path               URI resource absolute path (e.g.
+                                    "/redfish/v1/Systems/1").
         """
 
         resp = self._redfish_.get(resource_path)
@@ -137,9 +140,16 @@ class bmc_redfish_utils(object):
                        (e.g. "/redfish/v1/SessionService/Sessions").
         """
 
+        gp.qprint_executing(style=gp.func_line_style_short)
+
+        # Set quiet variable to keep subordinate get() calls quiet.
+        quiet = 1
+
         global resource_list
         resource_list = []
-        self._rest_response_ = self._redfish_.get(resource_path, valid_status_codes=[200, 404, 500])
+        self._rest_response_ = \
+            self._redfish_.get(resource_path,
+                               valid_status_codes=[200, 404, 500])
 
         # Return empty list.
         if self._rest_response_.status != 200:
@@ -151,7 +161,9 @@ class bmc_redfish_utils(object):
             return uri_path
 
         for resource in resource_list:
-            self._rest_response_ = self._redfish_.get(resource, valid_status_codes=[200, 404, 500])
+            self._rest_response_ = \
+                self._redfish_.get(resource,
+                                   valid_status_codes=[200, 404, 500])
             if self._rest_response_.status != 200:
                 continue
             self.walk_nested_dict(self._rest_response_.dict)
@@ -168,6 +180,11 @@ class bmc_redfish_utils(object):
                        (e.g. "/redfish/v1/SessionService/Sessions").
         """
 
+        gp.qprint_executing(style=gp.func_line_style_short)
+
+        # Set quiet variable to keep subordinate get() calls quiet.
+        quiet = 1
+
         url_list = self.list_request(resource_path)
 
         resource_dict = {}
@@ -181,7 +198,9 @@ class bmc_redfish_utils(object):
             # Example: '/redfish/v1/JsonSchemas/' and sub resources.
             if 'JsonSchemas' in resource:
                 continue
-            self._rest_response_ = self._redfish_.get(resource, valid_status_codes=[200, 404, 500])
+            self._rest_response_ = \
+                self._redfish_.get(resource,
+                                   valid_status_codes=[200, 404, 500])
             if self._rest_response_.status != 200:
                 continue
             resource_dict[resource] = self._rest_response_.dict
