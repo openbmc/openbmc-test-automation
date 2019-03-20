@@ -5,6 +5,15 @@ Documentation  Secure boot related test cases.
 # SEL to PEL conversion:
 # https://github.com/openbmc/openbmc-test-automation/blob/master/docs/
 # openbmc_test_tools.md#converting-sels-to-readable-format
+#
+# Definition of each partition acronyms
+# HBB:  Hostboot Base
+# HBI:  Hostboot Extended Image
+# HBRT: Hostboot Runtime
+# HBD:  Hostboot Data
+# HBBL: Bostboot Base loader
+# SBE:  Self Boot Engine
+# OCC:  On Chip Conroller
 
 Resource          ../../lib/utils.robot
 Resource          ../../lib/state_manager.robot
@@ -31,10 +40,13 @@ ${bmc_guard_part_path}       /var/lib/phosphor-software-manager/pnor/prsv/GUARD
 ${HB_BASE_PART}              HBB
 ${HB_DATA_PART}              HBD
 ${HB_EXT_IMG_PART}           HBI
-${HB_RUNTIME_PART}           HBI
+${HB_RUNTIME_PART}           HBRT
 ${HB_BASE_LOADER_PART}       HBBL
 ${SBE_PART}                  SBE
 ${OCC_PART}                  OCC
+${HB_PART_LIST}              [HBB, HBD, HBI, HBRT, HBBL]
+${NON_HB_PART_LIST}          [SBE, OCC]
+${MIXED_PART_LIST}           [SBE, HBD, OCC, HBRT, HBBL]
 
 *** Test Cases ***
 
@@ -136,7 +148,7 @@ Violate Secure Boot Using Corrupt Image
     Open Connection For SCP
 
     scp.Put File
-    ...  ${EXEC_DIR}/data/pnor_test_data/${partition}  ${bmc_image_dir_path}
+    ...  ${ENV_SB_CORRUPTED_BIN_PATH}/${partition}  ${bmc_image_dir_path}
 
     ${error_log_path}=  Catenate  ${SB_LOG_DIR_PATH}/partition-corruption
     Create Directory  ${error_log_path}
@@ -156,11 +168,11 @@ Violate Secure Boot Using Corrupt Image
     # Expected behavior is that the error occurs early in the boot process,
     # therefore, no entry in the error log and nothing to decode.
     # The 1E07 error is written to PNOR & then goes into Quiesced state.
-    # On the next valid boot, the error log will sent to BMC & seen on SOL console
-    Run Keyword If  '${partition}' == '${SBE_PART}' or '${partition}' == '${OCC_PART}'
+    # On the next valid boot, the elog will be sent to BMC & seen on SOL console
+    Run Keyword If  '${partition}' in '${NON_HB_PART_LIST}'
     # Verify the RC 0x1E07 in the SOL logs.
     ...    Get And Verify Partition Corruption  ${partition}  ${sol_log_file_path}
-    ...  ELSE IF  '${partition}' == '${HB_DATA_PART}' or '${partition}' == '${HB_BASE_PART}' or '${partition}' == '${HB_EXT_IMG_PART}' or '${partition}' == '${HB_BASE_LOADER_PART}' or '${partition}' == '${HB_RUNTIME_PART}'
+    ...  ELSE IF  '${partition}' in '${HB_PART_LIST}'
     ...    Log To Console  ${partition} corrupted, Going to quiesced state.
 
     # Remove the file from /usr/local/share/pnor/.
@@ -178,7 +190,7 @@ Violate Secure Boot Using Corrupt Image
     # so, it should be removed from consideration for this check
     Run Keyword If  '${partition}' == '${HB_BASE_PART}'
     ...  Log To Console  No more action on ${partition} corruption required.
-    ...  ELSE IF  '${partition}' == '${HB_DATA_PART}' or '${partition}' == '${HB_EXT_IMG_PART}' or '${partition}' == '${HB_BASE_LOADER_PART}' or '${partition}' == '${HB_RUNTIME_PART}'
+    ...  ELSE IF  '${partition}' in '[HBD, HBI, HBRT, HBBL]'
     ...  Run Keywords
     ...    REST Power On  stack_mode=skip  quiet=1  AND
     ...    Wait Until Keyword Succeeds  5 min  5 sec  Error Logs Should Exist  AND
@@ -245,7 +257,7 @@ Get And Verify Partition Corruption
     #  14.99659|  ModuleId   0x03 SECUREBOOT::MOD_SECURE_ROM_VERIFY
     #  14.99660|  ReasonCode 0x1e07 SECUREBOOT::RC_ROM_VERIFY
 
-    ${cmd}=   Run Keyword If  '${partition}' == '${SBE_PART}' or '${partition}' == '${HB_DATA_PART}' or '${partition}' == '${OCC_PART}'
+    ${cmd}=   Run Keyword If  '${partition}' in '${MIXED_PART_LIST}'
     ...  Catenate
     ...  grep -i "Secureboot Failure"  ${sol_log_file_path} | awk '{ print $8 }'
     ...  ELSE IF  '${partition}' == '${HB_EXT_IMG_PART}'
@@ -305,6 +317,11 @@ Suite Setup Execution
     Set Global Variable  ${bmc_guard_part_path}
     Log  ${bmc_guard_part_path}
     BMC Execute Command  rm -rf ${bmc_guard_part_path}
+
+    # All the corrupted binaries will go in here
+    # Run this as input param
+    Should Not Be Empty  ${ENV_SB_CORRUPTED_BIN_PATH}
+    Set Environment Variable  PATH  %{PATH}:${ENV_SB_CORRUPTED_BIN_PATH}
 
 
 Test Setup Execution
