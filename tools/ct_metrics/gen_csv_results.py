@@ -12,6 +12,7 @@ import getopt
 import csv
 import robot.errors
 import re
+import stat
 from datetime import datetime
 from robot.api import ExecutionResult
 from robot.result.visitor import ResultVisitor
@@ -268,6 +269,9 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level,
     l_writer = csv.writer(l_file, lineterminator='\n')
     l_writer.writerows(l_csvlist)
     l_file.close()
+    # Set file permissions 666.
+    perm = stat.S_IRUSR + stat.S_IWUSR + stat.S_IRGRP + stat.S_IWGRP + stat.S_IROTH + stat.S_IWOTH
+    os.chmod(l_csvfile, perm)
 
 
 def xml_to_csv_time(xml_datetime):
