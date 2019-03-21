@@ -17,6 +17,9 @@ ${valid_mac}         AA:E2:84:14:28:79
 ${zero_mac}          00:00:00:00:00:00
 ${broadcast_mac}     FF:FF:FF:FF:FF:FF
 
+# MAC address with special characters.
+${special_char_mac}  &A:$A:AA:AA:AA:^^
+
 *** Test Cases ***
 
 Configure Valid MAC And Verify
@@ -46,6 +49,35 @@ Configure Broadcast MAC And Verify
     # MAC address    scenario
     ${broadcast_mac}  error
 
+Configure Invalid MAC And Verify
+    [Documentation]  Configure invalid MAC address which is a string.
+    [Tags]  Configure_Invalid_MAC_And_Verify
+
+    [Template]  Configure MAC Settings
+    # MAC Address        Expected_Result
+    ${special_char_mac}  error
+
+Configure Valid MAC And Check Persistency
+    [Documentation]  Configure valid MAC and check persistency.
+    [Tags]  Configure_Valid_MAC_And_Check_Persistency
+
+    Configure MAC Settings  ${valid_mac}  valid
+
+    # Verify whether new MAC is configured on BMC.
+    Validate MAC On BMC  ${valid_mac}
+
+    # Reboot BMC and check whether MAC is persistent.
+    OBMC Reboot (off)
+    Validate MAC On BMC  ${valid_mac}
+
+Revert To Initial MAC And Verify
+    [Documentation]  Revert to initial MAC address.
+    [Tags]  Revert_To_Initial_MAC_And_Verify
+
+    Configure MAC Settings  ${initial_mac_address}  valid
+
+    # Verify whether new MAC is configured on BMC.
+    Validate MAC On BMC  ${initial_mac_address}
 
 *** Keywords ***
 
