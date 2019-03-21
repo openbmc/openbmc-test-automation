@@ -945,7 +945,7 @@ def test_loop_body():
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
         call_point='ffdc_check', shell_rc=dump_ffdc_rc(),
         stop_on_plug_in_failure=1, stop_on_non_zero_rc=1)
-    if boot_status != "PASS" or ffdc_check == "All" or\
+    if ffdc_check == "All" or\
        shell_rc == dump_ffdc_rc():
         status, ret_values = grk.run_key_u("my_ffdc", ignore=1)
         if status != 'PASS':
