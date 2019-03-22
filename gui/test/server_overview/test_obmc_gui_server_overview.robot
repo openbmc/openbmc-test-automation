@@ -3,6 +3,7 @@ Documentation  This test suite will validate the "OpenBMC ASMI Menu ->
 ...            Server Overview" module.
 
 Resource         ../../lib/resource.robot
+Resource         ../../../lib/bmc_network_utils.robot
 Test Setup       Test Setup Execution  ${OBMC_PowerOff_state}
 Test Teardown    Test Teardown Execution
 
@@ -83,6 +84,21 @@ Verify Launching Of Serial Over LAN Console At OBMC Power Off State
 
 
 # OpenBMC @ Power Running state test cases.
+
+Verify Information Under BMC Information
+    [Documentation]  Verify existence of information below the BMC area
+    [Tags]  Verify_Information_Under_BMC_Information
+
+    Select Server Overview Menu
+    ${version}=  Get BMC Version
+    ${version}=  Remove String  ${version}  "
+    Verify Display Content  ${version}
+    ${iplist}=  Get BMC IP Info
+    :FOR  ${ip}  IN  @{iplist}
+    \  ${ip}=  Fetch From Left  ${ip}  /
+    \  Verify Display Content  ${ip}
+    ${mac}=  Get BMC MAC Address
+    Verify Display Content  ${mac}    
 
 Verify High Priority Events Can Be Operated At OBMC Power Running State
     [Documentation]  Will open the "High Priority Events"
