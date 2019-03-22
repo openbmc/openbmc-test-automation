@@ -103,8 +103,7 @@ classified as follows:
           verification. The "tests" subdirectory uses legacy REST and will be
           deprecated at some point and therefore no longer supported.
 
-`extended/`: Contains test cases for boot testing, network testing,
-             code update testing etc.
+`extended/`: Contains test cases for boot testiing, code update testing, etc. 
 
 `systest/`: Contains test cases for HTX bootme, IO storage and EEH testing.
 
