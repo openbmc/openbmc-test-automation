@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     Test BMC using https://github.com/DMTF/Redfish-JsonSchema-ResponseValidator
+Documentation     Test BMC using https://github.com/DMTF/Redfish_JsonSchema_ResponseValidator
 ...               DMTF tool.
 
 Library           OperatingSystem
@@ -9,9 +9,9 @@ Resource          ../../lib/bmc_redfish_resource.robot
 *** Variables ***
 
 ${DEFAULT_PYTHON}  python3
-${rsv_dir_path}    Redfish-JsonSchema-ResponseValidator
-${rsv_github_url}  https://github.com/DMTF/Redfish-JsonSchema-ResponseValidator.git
-${command_string}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}Redfish-JsonSchema-ResponseValidator.py
+${rsv_dir_path}    Redfish_JsonSchema_ResponseValidator
+${rsv_github_url}  https://github.com/DMTF/Redfish_JsonSchema_ResponseValidator.git
+${command_string}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}Redfish_JsonSchema_ResponseValidator.py
 ...                -r https://${OPENBMC_HOST} -u ${OPENBMC_USERNAME} -p ${OPENBMC_PASSWORD} -S -v
 
 *** Test Case ***
@@ -37,7 +37,7 @@ Test BMC Redfish Using Redfish JsonSchema ResponseValidator
     \  Save Logs For Debugging  ${status}  ${url}
 
     Run Keyword If  ${test_run_status} == ${False}
-    ...  Fail  Redfish-JsonSchema-ResponseValidator detected errors.
+    ...  Fail  Redfish_JsonSchema_ResponseValidator detected errors.
 
 
 *** Keywords ***
