@@ -16,7 +16,7 @@ Download DMTF Tool
     [Arguments]      ${rsv_dir_path}  ${rsv_github_url}
 
     # Description of arguments:
-    # rsv_dir_path    Directory path for rsv tool (e.g. "Redfish-Service-Validator").
+    # rsv_dir_path    Directory path for rsv tool (e.g. "Redfish_Service_Validator").
     # rsv_github_url  Github URL link(e.g "https://github.com/DMTF/Redfish-Service-Validator").
 
     ${rc}  ${output}=  Shell Cmd  rm -rf ${rsv_dir_path} ; git clone ${rsv_github_url} ${rsv_dir_path}
@@ -27,7 +27,7 @@ Run DMTF Tool
     [Arguments]      ${rsv_dir_path}  ${command_string}
 
     # Description of arguments:
-    # rsv_dir_path    Directory path for rsv tool (e.g. "Redfish-Service-Validator").
+    # rsv_dir_path    Directory path for rsv tool (e.g. "Redfish_Service_Validator").
     # command_string  The complete rsv command string to be run.
 
     ${rc}  ${output}=  Shell Cmd  ${command_string}
