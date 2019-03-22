@@ -169,8 +169,8 @@ Robot Coding Guidelines
     Incorrect examples:
 
     ```
-    ${var1}=  Set Variable  ${1}
-    ${var1}=  My Keyword
+    ${var1} =  Set Variable  ${1}
+    ${var1} =  My Keyword
     ```
 -   General variable naming conventions:
     -   Variable names should be lower case with few exceptions:
@@ -305,9 +305,9 @@ Robot Coding Guidelines
             -   IMPORTANT:  As a programming convention, do pre-
                 processing on all dir_path variables to ensure that they
                 contain a trailing slash.  If we follow that convention
-                religiously, that when changes are made in other parts of
+                religiously, then when changes are made in other parts of
                 the program, the programmer can count on the value having
-                a trailing slash.  Therefore they can safely do this kind
+                a trailing slash.  Therefore, they can safely do this kind
                 of thing:
                 ```
                 my_file_path = my_dir_path + my_file_name
@@ -326,14 +326,15 @@ Robot Coding Guidelines
 
         # Right
         ```
-    -   Please use proper English punction:
+    -   Please use proper English punctuation:
         -   Capitalize the first word in the sentence or phrase.
         -   End sentences (or stand-alone phrases) with a period.
 
-    -   Do not keep commented out code in your program.  Instead, remove it
+    -   Do not keep commented-out code in your program.  Instead, remove it
         entirely.
 -   Robot Template Test Cases
     -   Follow this format for Robot template test cases:
+
         Note: Documentation, Tags and Template lines are all required and should be coded in the order shown.
         ```
         Test Case Name
@@ -350,19 +351,19 @@ Robot Coding Guidelines
             [Tags]  Get_Response_Codes
             [Template]  Execute Get And Check Response
 
-            # Expect status      URL Path
-            ${HTTP_OK}           /org/
-            ${HTTP_OK}           /xyz/
-            ${HTTP_OK}           /xyz/openbmc_project/
-            ${HTTP_OK}           /xyz/openbmc_project/state/enumerate
-            ${HTTP_NOT_FOUND}    /xyz/i/dont/exist/
+            # expected_response_code  url_path
+            ${HTTP_OK}                /org/
+            ${HTTP_OK}                /xyz/
+            ${HTTP_OK}                /xyz/openbmc_project/
+            ${HTTP_OK}                /xyz/openbmc_project/state/enumerate
+            ${HTTP_NOT_FOUND}         /xyz/i/dont/exist/
         ```
 
 Python Coding Guidelines
 -----------------------
 -   The minimum required Python version is 2.7.x.
 -   Run pycodestyle on all Python files and correct errors to follow the guidelines in
-    https://www.python.org/dev/peps/pep-0008/.
+    https://www.python.org/dev/peps/pep-0008/.  Note that when python code is checked into gerrit, pycodestyle is run automatically on it.
 
     Example as run from a Linux command line:
     ```
@@ -401,40 +402,29 @@ Python Coding Guidelines
 
                   parm2):
         ```
--   Do not keep commented out code in your program.  Instead, remove it
+-   Do not keep commented-out code in your program.  Instead, remove it
     entirely.
--   When you define or call a Robot keyword, Robot pays no attention to spaces,
-    underscores or case.  However, our team will observe the following
-    conventions in both our definitions and our calls:
-    - Separate words with single spaces.
-    - Capitalize the first character of each word.
-    - Capitalize all characters in any word that is an acronym (e.g. JSON, BMC,
-      etc).
+-   When you define a python function, observe the following
+    conventions:
+    - Separate words with single underscores.
+    - Use lower-case letters.
 
     Examples:
     ```
-    *** Keywords ***
 
-    This Is Correct
+    def this_is_correct():
 
-        # This keyword name is correct.
+        # This function name is correct.
 
-    this_is_incorrect
+    def This_Is_Incorrect():
 
-        # This keyword name is incorrect because of 1) the
-        # underscores instead of spaces and 2) the failure to
-        # capitalize each word in the keyword.
+        # This keyword name is incorrect because of the upper case letters used.
 
-    soisthis
+    def soisthis():
 
         # This keyword name is incorrect because of 1) a failure to
-        # separate words with spaces and 2) a failure to capitalize
-        # each word in the keyword.
+        # separate words with underscores.
 
-    BMC Is An Acronym
-
-        # This keyword name is correct.  Note that "BMC" is an
-        # acronym and as such is entirely uppercase.
     ```
 -   Documentation strings:
     -  Each documentation string should be phrased as an **English command**.
@@ -443,53 +433,48 @@ Python Coding Guidelines
 
        Correct example:
         ```
-        Boot BMC
-            [Documentation]  Boot the BMC.
+        def boot_bmc():
+            r"""
+            Boot the BMC.
+            """
         ```
         Incorrect example:
         ```
-        Boot BMC
-            [Documentation]  This keyword boots the BMC.
+        def boot_bmc():
+            r"""
+            This function boots the BMC.
+            """
 
             # The doc string above is not phrased as a command.
         ```
-    -   Doc strings should be just one terse, descriptive sentence.
-        Remember that this doc string shows up in the HTML log file.  Put
-        additional commentary below in standard comment lines.
+    -   Doc strings should begin with a summary line which one terse, descriptive sentence.
+        Put additional commentary below.
 
         Correct example:
         ```
-        Stop SOL Console Logging
+        def stop_sol_console_logging():
+            r"""
+            Stop system console logging and return log output.
 
-            [Documentation]  Stop system console logging and return log output.
+            Additional comments...
+            """
         ```
         Incorrect example:
         ```
-        Stop SOL Console Logging
-
-            [Documentation]  Stop system console logging.  If there are multiple
-            ...              system console processes, they will all be
-            ...              stopped.  If there is no existing log file this
-            ...              keyword will return an error message to that
-            ...              effect (and write that message to targ_file_path,
-            ...              if specified).  NOTE: This keyword will not fail
-            ...              if there is no running system console process.
+        def stop_sol_console_logging():
+            r"""
+            Stop system console logging.  If there are multiple system console
+            processes, they will all be stopped.  If there is no existing log file
+            this keyword will return an error message to that effect (and write that
+            message to targ_file_path, if specified).  NOTE: This keyword will not
+            fail if there is no running system console process.
+            """
 
             # This doc string is way too long.
-        ```
--   Tags:
-    -   Create a tag for every test case with a tag name that mirrors the test case
-        name as follows:
-        ```
-        Create Intermediate File
-
-            [Tags]  Create_Intermediate_File
         ```
 -   General variable naming conventions:
     -   Variable names should be lower case with few exceptions:
         -   Environment variables should be all upper case.
-        -   Variables intended to be set by Robot -v parameters may be all
-            upper case.
     -   Words within a variable name should be separated by underscores:
 
         Correct examples:
@@ -636,7 +621,7 @@ Python Coding Guidelines
         -   Capitalize the first word in the sentence or phrase.
         -   End sentences (or stand-alone phrases) with a period.
 
-    -   Do not keep commented out code in your program.  Instead, remove it
+    -   Do not keep commented-out code in your program.  Instead, remove it
         entirely.
 
 Template Usage Guidelines
@@ -649,7 +634,7 @@ it should be used to create new programs as in the following example
 
     ```
     $ cd templates
-    $ cp python_pgm_template ../bin/my_new_program
+    $ cp python_pgm_template ../bin/my_new_program.py
     ```
 
 These templates have much of your preliminary work done for you and will help
