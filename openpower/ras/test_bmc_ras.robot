@@ -2,14 +2,9 @@
 Documentation       This suite tests checkstop operations through BMC using
                     pdbg utility.
 
-Resource            ../../lib/utils.robot
 Resource            ../../lib/openbmc_ffdc.robot
-Resource            ../../lib/ras/host_utils.robot
-Resource            ../../lib/resource.robot
-Resource            ../../lib/state_manager.robot
 Resource            ../../lib/openbmc_ffdc_methods.robot
-Resource            ../../lib/boot_utils.robot
-Resource            ../../lib/dump_utils.robot
+Resource            ../../lib/openbmc_ffdc_utils.robot
 Resource            ../../openpower/ras/ras_utils.robot
 Variables           ../../lib/ras/variables.py
 Variables           ../../data/variables.py
@@ -54,6 +49,16 @@ Verify Pdbg Recoverable Callout Handling For MCA With Threshold 32
     Inject Recoverable Error With Threshold Limit
     ...  BMC  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
 
+Verify Pdbg Unrecoverable Callout Handling For MCA
+    [Documentation]  Verify unrecoverable callout handling for MCACALIFIR
+    ...              with pdbg tool.
+    [Tags]  Verify_Pdbg_Unrecoverable_Callout_Handling_For_MCA
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCACALIFIR_UE
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcacalfir
+    Inject Unrecoverable Error  BMC
+    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
 #  Memory controller Interface (MCIFIR) related error injection.
 
 Verify Pdbg Recoverable Callout Handling For MCI With Threshold 1
@@ -65,6 +70,17 @@ Verify Pdbg Recoverable Callout Handling For MCI With Threshold 1
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcifir_th1
     Inject Recoverable Error With Threshold Limit
     ...  BMC  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+Verify Pdbg Unrecoverable Callout Handling For MCI
+    [Documentation]  Verify unrecoverable callout handling for mci
+    ...              with pdbg tool.
+    [Tags]  Verify_Pdbg_Unrecoverable_Callout_Handling_For_MCI
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCI_UE
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcifir
+    Inject Unrecoverable Error  BMC
+    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
 
 # CAPP accelerator (CXAFIR) related error injection.
 
@@ -88,6 +104,15 @@ Verify Pdbg Recoverable Callout Handling For CXA With Threshold 32
     Inject Recoverable Error With Threshold Limit
     ...  BMC  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
 
+Verify Pdbg Unrecoverable Callout Handling For CXA
+    [Documentation]  Verify unrecoverable callout handling for CXAFIR
+    ...              with pdbg tool.
+    [Tags]  Verify_Pdbg_Unrecoverable_Callout_Handling_For_CXA
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  CXA_UE
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}cxafir_ue
+    Inject Unrecoverable Error  BMC
+    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 #  Optical BUS (OBUSFIR) related error injection.
 
@@ -136,6 +161,15 @@ Verify Pdbg Recoverable Callout Handling For NXDMAENG With Threshold 32
     Inject Recoverable Error With Threshold Limit
     ...  BMC  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
 
+Verify Pdbg Unrecoverable Callout Handling For NXDMAENG
+    [Documentation]  Verify unrecoverable callout handling for NXDMAENG
+    ...              with pdbg tool.
+    [Tags]  Verify_Pdbg_Unrecoverable_Callout_Handling_For_NXDMAENG
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_UE
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_ue
+    Inject Unrecoverable Error  BMC
+    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 #  L2FIR related error injection.
 
@@ -161,6 +195,17 @@ Verify Pdbg Recoverable Callout Handling For L2FIR With Threshold 32
     Inject Recoverable Error With Threshold Limit
     ...  BMC  ${translated_fir}  ${value[1]}  32  ${value[2]}  ${err_log_path}
 
+Verify Pdbg Unrecoverable Callout Handling For L2FIR
+    [Documentation]  Verify unrecoverable callout handling for L2FIR
+    ...              with pdbg tool.
+    [Tags]  Verify_Pdbg_Unrecoverable_Callout_Handling_For_L2FIR
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L2FIR_UE
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l2fir_ue
+    Inject Unrecoverable Error  BMC
+    ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
 #  L3FIR related error injection.
 
 Verify Pdbg Recoverable Callout Handling For L3FIR With Threshold 1
@@ -184,6 +229,17 @@ Verify Pdbg Recoverable Callout Handling For L3FIR With Threshold 32
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l3fir_th32
     Inject Recoverable Error With Threshold Limit
     ...  BMC  ${translated_fir}  ${value[1]}  32  ${value[2]}  ${err_log_path}
+
+Verify Pdbg Unrecoverable Callout Handling For L3FIR
+    [Documentation]  Verify unrecoverable callout handling for L3FIR
+    ...              with pdbg tool.
+    [Tags]  Verify_Pdbg_Unrecoverable_Callout_Handling_For_L3FIR
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L3FIR_UE
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l3fir_ue
+    Inject Unrecoverable Error  BMC
+    ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 # On chip controller (OCCFIR) related error injection.
 
@@ -223,6 +279,17 @@ Verify Pdbg Recoverable Callout Handling For NCUFIR With Threshold 1
     Inject Recoverable Error With Threshold Limit
     ...  BMC  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
+Verify Pdbg Unrecoverable Callout Handling For NCUFIR
+    [Documentation]  Verify unrecoverable callout handling for NCUFIR
+    ...              with pdbg tool.
+    [Tags]  Verify_Pdbg_Unrecoverable_Callout_Handling_For_NCUFIR
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NCUFIR_UE
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}ncufir_ue
+    Inject Unrecoverable Error  BMC
+    ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
 # Core FIR related error injection.
 
 Verify Pdbg Recoverable Callout Handling For CoreFIR With Threshold 5
@@ -248,6 +315,18 @@ Verify Pdbg Recoverable Callout Handling For CoreFIR With Threshold 1
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}corefir_th1
     Inject Recoverable Error With Threshold Limit
     ...  BMC  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
+
+Verify Pdbg Unrecoverable Callout Handling For CoreFIR
+    [Documentation]  Verify unrecoverable callout handling for CoreFIR
+    ...              with pdbg tool.
+    [Tags]  Verify_Pdbg_Unrecoverable_Callout_Handling_For_CoreFIR
+
+    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  COREFIR_UE
+    ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
+    Disable CPU States Through HOST
+    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}corefir_ue
+    Inject Unrecoverable Error  BMC
+    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 Verify Pdbg Recoverable Callout Handling For EQFIR With Threshold 32
     [Documentation]  Verify recoverable callout handling for L3FIR

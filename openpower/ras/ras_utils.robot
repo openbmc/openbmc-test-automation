@@ -1,9 +1,6 @@
 *** Settings ***
 Documentation       Utility for RAS test scenarios through HOST & BMC.
 Resource            ../../lib/utils.robot
-Resource            ../../lib/openbmc_ffdc.robot
-Resource            ../../lib/openbmc_ffdc_utils.robot
-Resource            ../../lib/openbmc_ffdc_methods.robot
 Resource            ../../lib/ras/host_utils.robot
 Resource            ../../lib/resource.robot
 Resource            ../../lib/state_manager.robot
@@ -49,12 +46,11 @@ Verify Error Log Entry
 
 Inject Recoverable Error With Threshold Limit
     [Documentation]  Inject and verify recoverable error on processor through
-    ...              host.
+    ...              BMC/HOST. 
     ...              Test sequence:
-    ...              1. Enable Auto Reboot Setting.
-    ...              2. Inject Error on processor/centaur.
-    ...              3. Check If HOST is running.
-    ...              4. Verify error log entry & signature description.
+    ...              1. Inject Error on processor/centaur through BMC/HOST.
+    ...              2. Check If HOST is running.
+    ...              3. Verify error log entry & signature description.
     ...              4. Verify & clear gard records.
     [Arguments]      ${interface_type}  ${fir}  ${chip_address}  ${threshold_limit}
     ...              ${signature_desc}  ${log_prefix}
@@ -66,7 +62,6 @@ Inject Recoverable Error With Threshold Limit
     # signature_desc      Error log signature description.
     # log_prefix          Log path prefix.
 
-    Set Auto Reboot  1
     Run Keyword If  '${interface_type}' == 'HOST'
     ...     Inject Error Through HOST  ${fir}  ${chip_address}  ${threshold_limit}
     ...     ${master_proc_chip}
@@ -81,19 +76,19 @@ Inject Recoverable Error With Threshold Limit
     # TODO: Verify SOL console logs.
 
 
-Inject Unrecoverable Error Through Host
-    [Documentation]  Inject and verify recoverable error on processor through
-    ...              host.
+Inject Unrecoverable Error
+    [Documentation]  Inject and verify unrecoverable error on processor through
+    ...              BMC/HOST.
     ...              Test sequence:
-    ...              1. Enable Auto Reboot Setting.
-    ...              2. Inject Error on processor/centaur.
-    ...              3. Check If HOST is rebooted.
-    ...              4. Verify & clear gard records.
-    ...              5. Verify error log entry & signature description.
-    ...              6. Verify & clear dump entry.
-    [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
+    ...              1. Inject Error on processor/centaur through BMC/HOST.
+    ...              2. Check If HOST is rebooted.
+    ...              3. Verify & clear gard records.
+    ...              4. Verify error log entry & signature description.
+    ...              5. Verify & clear dump entry.
+    [Arguments]      ${interface_type}  ${fir}  ${chip_address}  ${threshold_limit}
     ...              ${signature_desc}  ${log_prefix}
     # Description of argument(s):
+    # interface_type      Inject error through 'BMC' or 'HOST'.
     # fir                 FIR (Fault isolation register) value (e.g. 2011400).
     # chip_address        Chip address (e.g 2000000000000000).
     # threshold_limit     Threshold limit (e.g 1, 5, 32).
@@ -101,9 +96,13 @@ Inject Unrecoverable Error Through Host
     #                     (e.g 'mcs(n0p0c0) (MCFIR[0]) mc internal recoverable')
     # log_prefix          Log path prefix.
 
-    Set Auto Reboot  1
-    Inject Error Through HOST  ${fir}  ${chip_address}  ${threshold_limit}
-    ...  ${master_proc_chip}
+    Run Keyword If  '${interface_type}' == 'HOST'
+    ...     Inject Error Through HOST  ${fir}  ${chip_address}  ${threshold_limit}
+    ...     ${master_proc_chip}
+    ...  ELSE
+    ...     Inject Error Through BMC  ${fir}  ${chip_address}  ${threshold_limit}
+    ...     ${master_proc_chip}
+
     Wait Until Keyword Succeeds  500 sec  20 sec  Is Host Rebooted
     Wait for OS
     Verify Error Log Entry  ${signature_desc}  ${log_prefix}

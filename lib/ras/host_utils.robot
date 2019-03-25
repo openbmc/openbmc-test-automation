@@ -4,9 +4,10 @@ Resource            ../../lib/rest_client.robot
 Resource            ../../lib/utils.robot
 Variables           ../../lib/ras/variables.py
 Library             ../../lib/bmc_ssh_utils.py
-Library             OperatingSystem
 Library             ../../lib/gen_print.py
 Library             ../../lib/gen_robot_print.py
+
+Library             OperatingSystem
 
 *** Keywords ***
 
@@ -114,6 +115,7 @@ Inject Error Through HOST
 
     Delete Error Logs
     Login To OS Host
+    Set Auto Reboot  1
     Gard Operations On OS  clear all
 
     # Fetch processor chip IDs.
@@ -197,6 +199,8 @@ Inject Error Through BMC
 
     Delete Error Logs
     Login To OS Host
+    Set Auto Reboot  1
+
     Gard Operations On OS  clear all
 
     ${threshold_limit}=  Convert To Integer  ${threshold_limit}
