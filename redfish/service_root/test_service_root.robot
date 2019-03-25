@@ -68,6 +68,8 @@ Delete Redfish Session Using Valid login
     [Tags]  Delete_Redfish_Session_Using_Valid_Login
 
     Redfish.Login
+    ${session_info}=  Get Redfish Session Info
+
     Redfish.Login
 
     # Example o/p:
@@ -75,10 +77,11 @@ Delete Redfish Session Using Valid login
     #  {'@odata.id': '/redfish/v1/SessionService/Sessions/Yu3xFqjZr1'}]
     ${resp_list}=  Redfish_Utils.List Request
     ...  /redfish/v1/SessionService/Sessions
-    Redfish.Delete  ${resp_list[1]}
+
+    Redfish.Delete  ${session_info["location"]}
 
     ${resp}=  Redfish_Utils.List Request  /redfish/v1/SessionService/Sessions
-    List Should Not Contain Value  ${resp}  ${resp_list[1]}
+    List Should Not Contain Value  ${resp}  ${session_info["location"]}
 
 
 *** Keywords ***
