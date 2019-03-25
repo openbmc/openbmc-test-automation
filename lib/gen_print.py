@@ -129,6 +129,24 @@ def sprint_func_name(stack_frame_ix=None):
     return func_name
 
 
+def work_around_inspect_stack_cwd_failure():
+    r"""
+    Work around the inspect.stack() getcwd() failure by making "/tmp" the
+    current working directory.
+
+    If the current working directory has been deleted, inspect.stack() will
+    fail with "OSError: [Errno 2] No such file or directory" because it tries
+    to do a getcwd().
+
+    This function will try to prevent the failure that by detecting the
+    scenario in advance and making "/tmp" the current working directory.
+    """
+    try:
+        os.getcwd()
+    except OSError:
+        os.chdir("/tmp")
+
+
 def get_line_indent(line):
     r"""
     Return the number of spaces at the beginning of the line.
@@ -241,6 +259,7 @@ def get_arg_name(var,
         print("")
         print_call_stack(debug_indent, 2)
 
+    work_around_inspect_stack_cwd_failure()
     for count in range(0, 2):
         try:
             frame, filename, cur_line_no, function_name, lines, index = \
@@ -1187,6 +1206,7 @@ def sprint_call_stack(indent=0,
     buffer += sprint_dashes(indent, 6, 0) + " " + sprint_dashes(0, 73)
 
     # Grab the current program stack.
+    work_around_inspect_stack_cwd_failure()
     current_stack = inspect.stack()
 
     # Process each frame in turn.
@@ -1243,6 +1263,7 @@ def sprint_executing(stack_frame_ix=None, style=None):
         else:
             stack_frame_ix = 1
 
+    work_around_inspect_stack_cwd_failure()
     stack_frame = inspect.stack()[stack_frame_ix]
 
     func_and_args = sprint_func_line(stack_frame, style)
@@ -1620,10 +1641,10 @@ def get_stack_var(var_name,
                                     function, etc.
     """
 
+    work_around_inspect_stack_cwd_failure()
     return next((frame[0].f_locals[var_name]
                  for frame in inspect.stack()[init_stack_ix:]
                  if var_name in frame[0].f_locals), default)
-
 
 # hidden_text is a list of passwords which are to be replaced with asterisks
 # by print functions defined in this module.
