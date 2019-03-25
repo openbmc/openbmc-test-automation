@@ -1,13 +1,9 @@
 *** Settings ***
 Documentation       This suite tests checkstop operations through HOST.
-Resource            ../../lib/utils.robot
+
 Resource            ../../lib/openbmc_ffdc.robot
-Resource            ../../lib/ras/host_utils.robot
-Resource            ../../lib/resource.robot
-Resource            ../../lib/state_manager.robot
+Resource            ../../lib/openbmc_ffdc_utils.robot
 Resource            ../../lib/openbmc_ffdc_methods.robot
-Resource            ../../lib/boot_utils.robot
-Resource            ../../lib/dump_utils.robot
 Resource            ../../openpower/ras/ras_utils.robot
 Variables           ../../lib/ras/variables.py
 Variables           ../../data/variables.py
@@ -23,6 +19,7 @@ Test Teardown       FFDC On Test Case Fail
 Suite Teardown      RAS Suite Cleanup
 
 Force Tags          Host_RAS
+
 *** Variables ***
 ${stack_mode}       normal
 
@@ -55,7 +52,7 @@ Verify Unrecoverable Callout Handling For MCA
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCACALIFIR_UE
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcacalfir
-    Inject Unrecoverable Error Through Host
+    Inject Unrecoverable Error  HOST
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 #  Memory buffer (MCIFIR) related error injection.
@@ -76,7 +73,7 @@ Verify Unrecoverable Callout Handling For MCI
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  MCI_UE
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}mcifir
-    Inject Unrecoverable Error Through Host
+    Inject Unrecoverable Error  HOST
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 # CAPP accelerator (CXAFIR) related error injection.
@@ -107,7 +104,7 @@ Verify Unrecoverable Callout Handling For CXA
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  CXA_UE
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}cxafir_ue
-    Inject Unrecoverable Error Through Host
+    Inject Unrecoverable Error  HOST
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 
@@ -164,7 +161,7 @@ Verify Unrecoverable Callout Handling For NXDMAENG
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_UE
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_ue
-    Inject Unrecoverable Error Through Host
+    Inject Unrecoverable Error  HOST
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 #  L2FIR related error injection.
@@ -198,7 +195,7 @@ Verify Unrecoverable Callout Handling For L2FIR
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L2FIR_UE
     ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l2fir_ue
-    Inject Unrecoverable Error Through Host
+    Inject Unrecoverable Error  HOST
     ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 
@@ -233,7 +230,7 @@ Verify Unrecoverable Callout Handling For L3FIR
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L3FIR_UE
     ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}l3fir_ue
-    Inject Unrecoverable Error Through Host
+    Inject Unrecoverable Error  HOST
     ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 
@@ -282,7 +279,7 @@ Verify Unrecoverable Callout Handling For NCUFIR
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NCUFIR_UE
     ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}ncufir_ue
-    Inject Unrecoverable Error Through Host
+    Inject Unrecoverable Error  HOST
     ...  ${translated_fir}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 
@@ -320,7 +317,7 @@ Verify Unrecoverable Callout Handling For CoreFIR
     ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX
     Disable CPU States Through HOST
     ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}corefir_ue
-    Inject Unrecoverable Error Through Host
+    Inject Unrecoverable Error  HOST
     ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 Verify Recoverable Callout Handling For EQFIR With Threshold 32
