@@ -107,3 +107,13 @@ Get Sensor Schema
     [Documentation]  Get sensors schema.
     [Arguments]    ${machine}
     [Return]    &{SENSORS}[${machine}]
+
+Suite Setup Execution
+    [Documentation]  Get the FW version of BMC and display before test
+    ...  suite execution starts.
+
+    Redfish.Login
+    ${bmc_manager}=  Redfish.Get  /redfish/v1/Managers/bmc
+    Log to Console  BMC Version at the beginning of test suite:
+    Log to Console  ${bmc_manager.dict["FirmwareVersion"]}
+    Redfish.Logout
