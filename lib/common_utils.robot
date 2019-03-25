@@ -834,6 +834,21 @@ Get PNOR Attributes
     [Return]  ${pnor_attrs}
 
 
+GET BMC PNOR Version
+    [Documentation]  Returns BMC & PNOR version from openbmc shell.
+
+    ${bmc_version} =  GET BMC Version
+    ${pnor_version} =  GET PNOR Version
+    Log  ${bmc_version}
+    Rprint Timen  BMC Version:
+    Rprint Vars  ${bmc_version}
+    Log  ${pnor_version}
+    Rprint Timen  HOST Firmware Version:
+    Rprint Vars  ${pnor_version}
+
+    [Return]  ${bmc_version}  ${pnor_version}
+
+
 Copy Address Translation Utils To HOST OS
     [Documentation]  Copy address translation utils to host OS.
 
