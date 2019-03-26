@@ -210,8 +210,6 @@ def run_pgm(plug_in_dir_path,
                                     return codes.
     """
 
-    global autoscript
-
     rc = 0
     failed_plug_in_name = ""
     shell_rc = 0x00000000
@@ -228,34 +226,32 @@ def run_pgm(plug_in_dir_path,
           + "in -----------------------------------------------")
 
     print_timen("Running " + plug_in_name + "/" + cp_prefix + call_point + ".")
-    if autoscript:
-        stdout = 1 - quiet
-        if AUTOBOOT_OPENBMC_NICKNAME != "":
-            autoscript_prefix = AUTOBOOT_OPENBMC_NICKNAME + "."
-        else:
-            autoscript_prefix = ""
-        autoscript_prefix += plug_in_name + ".cp_" + call_point
-        status_dir_path =\
-            add_trailing_slash(os.environ.get("STATUS_DIR_PATH",
-                                              os.environ['HOME']
-                                              + "/status/"))
-        if not os.path.isdir(status_dir_path):
-            AUTOBOOT_EXECDIR = \
-                add_trailing_slash(os.environ.get("AUTOBOOT_EXECDIR", ""))
-            status_dir_path = AUTOBOOT_EXECDIR + "logs/"
-            if not os.path.exists(status_dir_path):
-                os.makedirs(status_dir_path)
-        status_file_name = autoscript_prefix + "." + file_date_time_stamp() \
-            + ".status"
-        autoscript_subcmd = "autoscript --status_dir_path=" + status_dir_path\
-            + " --status_file_name=" + status_file_name\
-            + " --quiet=1 --show_url=y --prefix=" +\
-            autoscript_prefix + " --stdout=" + str(stdout) + " -- "
+
+    stdout = 1 - quiet
+    if AUTOBOOT_OPENBMC_NICKNAME != "":
+        auto_status_file_prefix = AUTOBOOT_OPENBMC_NICKNAME + "."
     else:
-        autoscript_subcmd = ""
+        auto_status_file_prefix = ""
+    auto_status_file_prefix += plug_in_name + ".cp_" + call_point
+    status_dir_path =\
+        add_trailing_slash(os.environ.get("STATUS_DIR_PATH",
+                                          os.environ['HOME']
+                                          + "/status/"))
+    if not os.path.isdir(status_dir_path):
+        AUTOBOOT_EXECDIR = \
+            add_trailing_slash(os.environ.get("AUTOBOOT_EXECDIR", ""))
+        status_dir_path = AUTOBOOT_EXECDIR + "logs/"
+        if not os.path.exists(status_dir_path):
+            os.makedirs(status_dir_path)
+    status_file_name = auto_status_file_prefix + "." + file_date_time_stamp() \
+        + ".status"
+    auto_status_file_subcmd = "auto_status_file.py --status_dir_path=" \
+        + status_dir_path + " --status_file_name=" + status_file_name \
+        + " --quiet=1 --show_url=1 --prefix=" \
+        + auto_status_file_prefix + " --stdout=" + str(stdout) + " "
 
     cmd_buf = "PATH=" + plug_in_dir_path.rstrip("/") + ":${PATH} ; " +\
-        autoscript_subcmd + cp_prefix + call_point
+        auto_status_file_subcmd + cp_prefix + call_point
     print_issuing(cmd_buf)
 
     sub_proc = subprocess.Popen(cmd_buf, shell=True)
@@ -268,8 +264,9 @@ def run_pgm(plug_in_dir_path,
         failed_plug_in_name = plug_in_name + "/" + cp_prefix + call_point
     if shell_rc != 0:
         failed_plug_in_name = plug_in_name + "/" + cp_prefix + call_point
-    if failed_plug_in_name != "" and autoscript and not stdout:
-        shell_cmd("cat " + status_dir_path + status_file_name, quiet=1,
+    if failed_plug_in_name != "" and not stdout:
+        # Using tail to avoid double-printing of status_file_url.
+        shell_cmd("tail -n +2 " + status_dir_path + status_file_name, quiet=1,
                   print_output=1)
 
     print("------------------------------------------------- Ending plug-in"
@@ -317,20 +314,9 @@ def main():
     shell_rc = 0
     failed_plug_in_name = ""
 
-    # If the autoscript program is present, we will use it to direct call point
-    # program output to a separate status file.  This keeps the output of the
-    # main program (i.e. OBMC Boot Test) cleaner and yet preserves call point
-    # output if it is needed for debug.
-    global autoscript
     global AUTOBOOT_OPENBMC_NICKNAME
-    autoscript = 0
-    AUTOBOOT_OPENBMC_NICKNAME = ""
-    rc, out_buf = cmd_fnc("which autoscript", quiet=1, print_output=0,
-                          show_err=0)
-    if rc == 0:
-        autoscript = 1
-        AUTOBOOT_OPENBMC_NICKNAME = os.environ.get("AUTOBOOT_OPENBMC_NICKNAME",
-                                                   "")
+    AUTOBOOT_OPENBMC_NICKNAME = os.environ.get("AUTOBOOT_OPENBMC_NICKNAME", "")
+
     ret_code = 0
     for plug_in_dir_path in plug_in_packages_list:
         rc, shell_rc, failed_plug_in_name = \
