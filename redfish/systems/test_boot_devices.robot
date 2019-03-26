@@ -64,7 +64,7 @@ Set And Verify BootSource And BootType
     ...  BootSourceOverrideTarget=${override_target}
     ${payload}=  Create Dictionary  Boot=${data}
 
-    Redfish.patch  Systems/system  body=&{payload}
+    Redfish.Patch  /redfish/v1/Systems/system  body=&{payload}
 
     ${resp}=  Redfish.Get  /redfish/v1/Systems/system
     Should Be Equal As Strings  ${resp.dict["Boot"]["BootSourceOverrideEnabled"]}
@@ -76,7 +76,9 @@ Set And Verify BootSource And BootType
 Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
 
+    Redfish.Login
     Set And Verify BootSource And BootType  Disabled  None
+    Redfish.Logout
 
 
 Test Setup Execution
