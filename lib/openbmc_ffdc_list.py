@@ -65,6 +65,7 @@ FFDC_OS_ALL_DISTROS_FILE = {
         'OS_lspci': 'lspci >/tmp/OS_lspci.txt 2>&1',
         'OS_lscpu': 'lscpu >/tmp/OS_lscpu.txt 2>&1',
         'OS_lscfg': 'lscfg >/tmp/OS_lscfg.txt 2>&1',
+        'OS_journalctl_nopager': 'journalctl --no-pager -b > /tmp/OS_journalctl_nopager.txt  2>&1',
     },
 }
 # Add file name and correcponding command needed for Ubuntu Linux
