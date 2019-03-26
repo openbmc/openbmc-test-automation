@@ -7,7 +7,7 @@ Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/boot_utils.robot
 
 Test Setup       Test Setup Execution
-Test Teardown    Redfish.Logout
+Test Teardown    Test Teardown Execution
 
 *** Test Cases ***
 
