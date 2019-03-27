@@ -18,12 +18,13 @@ Documentation  Secure boot related test cases.
 Resource          ../../lib/utils.robot
 Resource          ../../lib/state_manager.robot
 Resource          ../../lib/boot_utils.robot
-Resource          ../../lib/secure_utils.robot
+Resource          ../../lib/secureboot/secureboot.robot
 Resource          ../../lib/open_power_utils.robot
 Resource          ../../lib/logging_utils.robot
 Resource          ../../lib/openbmc_ffdc_methods.robot
 
 Library           ../../lib/gen_misc.py
+Library           ../../lib/secureboot/secureboot.py
 
 Suite Setup       Suite Setup Execution
 Test Setup        Test Setup Execution
@@ -114,6 +115,17 @@ Secure Boot Violation Using Corrupt OCC Image On Cold Boot
     ...  OCC  ${pnor_corruption_rc}  ${bmc_image_dir_path}
 
 *** Keywords ***
+
+Validate Secure Boot Setup
+    [Documentation]  Validates setup to make sure it's secureboot run capable.
+
+    # Check the jumper position and Security settings before moving ahead.
+    ${num_procs}  ${secureboot_state}  ${jumper_state}=  Get Secure Boot Info
+
+    Run Keyword If  ${secureboot_state} == True and ${jumper_state} == False
+    ...  Log To Console  Jumper is OFF & SB is Enabled. Continuing execution.
+    ...  ELSE
+    ...    Fail  Jumper ON & Security disabled. Put the jumpers between pin 2&3.
 
 Violate Secure Boot Using Corrupt Image
     [Documentation]  Cause secure boot violation during cold boot
@@ -325,6 +337,11 @@ Test Setup Execution
     ${sol_log_file_path}=  Catenate  ${EXECDIR}/Secure_SOL${timestamp}
     Start SOL Console Logging  ${sol_log_file_path}
     Set Suite Variable  ${sol_log_file_path}
+
+    REST Power On  stack_mode=skip  quiet=1
+
+    # Validate the secureboot setup. If not met with required state then, fail.
+    Validate Secure Boot Setup
 
     REST Power Off  stack_mode=skip  quiet=1
     Delete Error Logs And Verify
