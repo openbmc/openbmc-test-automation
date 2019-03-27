@@ -18,7 +18,7 @@ Documentation  Secure boot related test cases.
 Resource          ../../lib/utils.robot
 Resource          ../../lib/state_manager.robot
 Resource          ../../lib/boot_utils.robot
-Resource          ../../lib/secure_utils.robot
+Resource          ../../lib/sb/sb_utils.robot
 Resource          ../../lib/open_power_utils.robot
 Resource          ../../lib/logging_utils.robot
 Resource          ../../lib/openbmc_ffdc_methods.robot
@@ -325,6 +325,14 @@ Test Setup Execution
     ${sol_log_file_path}=  Catenate  ${EXECDIR}/Secure_SOL${timestamp}
     Start SOL Console Logging  ${sol_log_file_path}
     Set Suite Variable  ${sol_log_file_path}
+
+    # Check the jumper position and SB policy before moving ahead
+    ${jumper_state}=  Get Jumper State
+    ${sb_state}=  Get SB State
+    Run Keyword If  '${jumper_state}' == 'OFF' and '${sb_state}' == 'ENABLED'
+    ...  Log To Console  Jumper is OFF & SB is Enabled. Continuing execution.
+    ...  ELSE
+    ...    Log To Console  Jumpers not in correct position. Set Jumpers between pin 2 & 3.
 
     REST Power Off  stack_mode=skip  quiet=1
     Delete Error Logs And Verify
