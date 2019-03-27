@@ -1,5 +1,10 @@
 *** Settings ***
-Documentation  Secure boot keywords.
+Documentation       Utility for getting/reading Secure Boot related settings.
+Resource            ../../lib/open_power_utils.robot
+Resource            ../../lib/utils.robot
+Resource            ../../lib/state_manager.robot
+Resource            ../../lib/boot_utils.robot
+Library             ../../lib/bmc_ssh_utils.py
 
 *** Keywords ***
 
@@ -23,5 +28,5 @@ Set And Verify TPM Policy
     # tpm_policy  Enable-1 or Disable-0.
 
     Set TPMEnable Policy  ${tpm_policy}
-    ${resp}=  Verify The Attribute
-    ...  ${CONTROL_URI}/host0/TPMEnable  TPMEnable  ${tpm_policy}
+    Verify The Attribute  ${CONTROL_URI}/host0/TPMEnable  TPMEnable  ${tpm_policy}
+
