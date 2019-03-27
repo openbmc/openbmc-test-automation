@@ -18,12 +18,13 @@ Documentation  Secure boot related test cases.
 Resource          ../../lib/utils.robot
 Resource          ../../lib/state_manager.robot
 Resource          ../../lib/boot_utils.robot
-Resource          ../../lib/secure_utils.robot
+Resource          ../../lib/secureboot/secureboot_utils.robot
 Resource          ../../lib/open_power_utils.robot
 Resource          ../../lib/logging_utils.robot
 Resource          ../../lib/openbmc_ffdc_methods.robot
 
 Library           ../../lib/gen_misc.py
+Library           ../../lib/secureboot/secureboot_utils.py
 
 Suite Setup       Suite Setup Execution
 Test Setup        Test Setup Execution
@@ -115,6 +116,19 @@ Secure Boot Violation Using Corrupt OCC Image On Cold Boot
 
 *** Keywords ***
 
+
+Validate Secure Boot Setup
+    [Documentation]  Validates setup to make sure it's secureboot run capable.
+
+    # Check the jumper position and Security settings before moving ahead.
+    ${jumper_state}=  Get Jumper State
+    ${sb_state}=  Get SB State
+
+    Run Keyword If  '${jumper_state}' == 'OFF' and '${sb_state}' == 'ENABLED'
+    ...  Log To Console  Jumper is OFF & SB is Enabled. Continuing execution.
+    ...  ELSE
+    ...    Fail  Jumper ON & Security disabled. Put the jumpers between pin 2&3.
+
 Violate Secure Boot Using Corrupt Image
     [Documentation]  Cause secure boot violation during cold boot
     ...  with corrupted image.
@@ -127,6 +141,9 @@ Violate Secure Boot Using Corrupt Image
     #                      result of the secure boot violation
     #                      (e.g. "SECUREBOOT::RC_ROM_VERIFY").
     # bmc_image_dir_path   BMC image path.
+
+    # Validate the secureboot setup. If not met with required condition then, fail.
+    Validate Secure Boot Setup
 
     Set And Verify TPM Policy  ${1}
 
@@ -274,6 +291,9 @@ Validate Secure Boot With TPM Policy Enabled Or Disabled
 
     # Description of argument(s):
     # tpm_policy  Enable-0 or Disable-1.
+
+    # Validate the secureboot setup. If not met with required condition then, fail.
+    Validate Secure Boot Setup
 
     Set And Verify TPM Policy  ${tpm_policy}
     REST Power On  quiet=1
