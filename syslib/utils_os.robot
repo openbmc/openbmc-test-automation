@@ -527,14 +527,14 @@ Shutdown HTX Exerciser
     Rprint Timen  Shutdown HTX Run
     ${shutdown}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -shutdown -mdt ${HTX_MDT_PROFILE}
+
     Rprintn  ${shutdown}
 
-    ${match_count_no_mdt}=  Count Values In List  ${shutdown}
-    ...  No MDT is currently running
-    ${match_count_success}=  Count Values In List  ${shutdown}
-    ...  shutdown successfully
-    Run Keyword If  ${match_count_no_mdt} == 0 and ${match_count_success} == 0
-    ...  Fail  msg=Shutdown command returned unexpected message.
+    ${down1}=  Evaluate  'shutdown successfully' in $shutdown
+    Return From Keyword If  '${down1}' == 'True'
+    ${down2}=  Evaluate  'No MDT is currently running' in $shutdown
+    Return From Keyword If  '${down2}' == 'True'
+    Fail  msg=Shutdown returned unexpected message.
 
 
 Create JSON Inventory File

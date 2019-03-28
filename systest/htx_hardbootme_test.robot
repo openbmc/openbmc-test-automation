@@ -7,6 +7,8 @@ Documentation  Stress the system using HTX exerciser.
 # OS_HOST             The OS host name or IP Address.
 # OS_USERNAME         The OS login userid (usually root).
 # OS_PASSWORD         The password for the OS login.
+# HTX_MDT_PROFILE     The name of the HTX profile file on the OS host.
+#                     The default is "mdt.bu".
 # HTX_DURATION        Duration of HTX run, for example, 2h, or 30m.
 # HTX_LOOP            The number of times to loop HTX.
 # HTX_INTERVAL        The time delay between consecutive checks of HTX
@@ -59,6 +61,11 @@ ${json_diff_file_path}       ${EXECDIR}/os_inventory_diff.json
 ${CHECK_INVENTORY}           True
 ${INV_IGNORE_LIST}           size
 ${PREV_INV_FILE_PATH}        NONE
+
+# Description text of eSEL(s) to be ignored.
+@{ESEL_WHITELIST}
+...  OCC metric data collected
+...  CPU 1 core 3 has failed
 
 
 *** Test Cases ***
@@ -208,12 +215,46 @@ Report Inventory Mismatch
 
 
 Check For ESELs
-    [Documentation]  Terminate if there is an eSEL.
+    [Documentation]  Terminate if there is a eSEL not on Whitelist.
     ${error_logs}=  Get Error Logs
-    ${num_logs}=  Get Length  ${error_logs}
-    Run Keyword If  ${num_logs} != 0  Run Keywords
-    ...  Print Error Logs  ${error_logs}
-    ...  AND  Fail  msg=Terminating run due to BMC error log(s).
+    ${num_error_logs}=  Get Length  ${error_logs}
+    Run Keyword If  ${num_error_logs} != 0
+    ...  Verify ESELs On Whitelist  @{error_logs}
+
+
+Verify ESELs On Whitelist
+    [Documentation]  Description field of eSELs should be in whitelst.
+    [Arguments]      @{error_logs}
+
+    # Description of argument(s):
+    # error_logs  Resouce locator of eSEL error logs, for example,
+    #             error_logs[0]: /xyz/openbmc_project/logging/entry/1
+    #             error_logs[1]: /xyz/openbmc_project/logging/entry/2
+    #             error_logs[2]: /xyz/openbmc_project/logging/entry/2/callout
+
+    :FOR  ${esel_locator}  IN  @{error_logs}
+    \  ${is_callout}=  Evaluate  "callout" in $esel_locator
+    \  # Skip the "callout" eSELs because they have no Description field.
+    \  Run Keyword If  '${is_callout}' == 'True'  Continue For Loop
+    \  ${esel_description}=  Read Attribute  ${esel_locator}  Description
+    \  Rprint Vars  esel_locator  esel_description
+    \  Description Should Be In Whitelist  ${esel_description}
+
+
+Description Should Be in Whitelist
+    [Documentation]  Fail if text does not match an entry in ESEL_WHITELIST.
+    [Arguments]  ${description_text}
+
+    # Description of argument(s):
+    # description_text  Description text string from an eSEL.
+
+    :FOR  ${whitelist_line}  IN  @{ESEL_WHITELIST}
+    \  ${found}=  Evaluate  $whitelist_line in $description_text
+    \  Return From Keyword If  '${found}' == 'True'
+
+    # Failed to find a match.  Display the whitelist and Fail.
+    Rprint Vars  ESEL_WHITELIST
+    Fail  msg=Nothing in ESEL_WHITELIST matches esel_description.
 
 
 Loop HTX Health Check
