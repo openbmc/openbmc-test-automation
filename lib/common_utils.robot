@@ -158,7 +158,7 @@ Check OS
     # quiet             Indicates whether this keyword should write to console.
     # print_string      A string to be printed before checking the OS.
 
-    rprint  ${print_string}
+    Log To Console  ${print_string}  no_newline=True
 
     # Attempt to ping the OS. Store the return code to check later.
     ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${os_host}
@@ -197,7 +197,7 @@ Wait for OS
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}  ${timeout}=${OS_WAIT_TIMEOUT}
     ...          ${quiet}=${0}
-    [Teardown]  rprintn
+    [Teardown]  Printn
 
     # Description of argument(s):
     # os_host           The DNS name or IP of the OS host associated with our
@@ -213,7 +213,7 @@ Wait for OS
 
     ${message}=  Catenate  Checking every ${interval} seconds for up to
     ...  ${timeout} seconds for the operating system to communicate.
-    rqprint_timen  ${message}
+    Qprint Timen  ${message}
 
     Wait Until Keyword Succeeds  ${timeout} sec  ${interval}  Check OS
     ...                          ${os_host}  ${os_username}  ${os_password}
@@ -221,7 +221,7 @@ Wait for OS
 
     rqprintn
 
-    rqprint_timen  The operating system is now communicating.
+    Qprint Timen  The operating system is now communicating.
 
 
 Copy PNOR to BMC

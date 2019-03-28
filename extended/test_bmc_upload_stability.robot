@@ -46,7 +46,7 @@ Upload Test Image File To BMC
 
     Set Test Variable  ${iteration}  ${iteration + 1}
     ${loop_count}=  Catenate  Starting iteration: ${iteration}
-    Rprintn
+    Printn
     Rpvars  loop_count
 
     # Generate data file.

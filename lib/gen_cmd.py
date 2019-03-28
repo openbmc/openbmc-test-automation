@@ -20,7 +20,6 @@ import gen_misc as gm
 robot_env = gp.robot_env
 
 if robot_env:
-    import gen_robot_print as grp
     from robot.libraries.BuiltIn import BuiltIn
 
 
@@ -105,10 +104,7 @@ def cmd_fnc(cmd_buf,
                 err_buf += line
             if not print_output:
                 continue
-            if robot_env:
-                grp.rprint(line)
-            else:
-                sys.stdout.write(line)
+            gp.gp_print(line)
     for line in sub_proc.stdout:
         try:
             out_buf += line
@@ -117,10 +113,7 @@ def cmd_fnc(cmd_buf,
             out_buf += line
         if not print_output:
             continue
-        if robot_env:
-            grp.rprint(line)
-        else:
-            sys.stdout.write(line)
+        gp.gp_print(line)
     if print_output and not robot_env:
         sys.stdout.flush()
     sub_proc.communicate()
@@ -132,10 +125,7 @@ def cmd_fnc(cmd_buf,
             err_msg += "out_buf:\n" + out_buf
 
         if show_err:
-            if robot_env:
-                grp.rprint_error_report(err_msg)
-            else:
-                gp.print_error_report(err_msg)
+            gp.print_error_report(err_msg)
         if not ignore_err:
             if robot_env:
                 BuiltIn().fail(err_msg)
@@ -468,10 +458,7 @@ def shell_cmd(command_string,
                 err_msg += "err_buf:\n" + err_buf
             err_msg += "out_buf:\n" + out_buf
         if show_err:
-            if robot_env:
-                func_stdout += grp.sprint_error_report(err_msg)
-            else:
-                func_stdout += gp.sprint_error_report(err_msg)
+            func_stdout += gp.sprint_error_report(err_msg)
         func_history_stdout += func_stdout
         if attempt_num < max_attempts:
             func_history_stdout += gp.sprint_issuing("time.sleep("
@@ -482,11 +469,7 @@ def shell_cmd(command_string,
     if shell_rc not in allowed_shell_rcs:
         func_stdout = func_history_stdout
 
-    if robot_env:
-        grp.rprint(func_stdout)
-    else:
-        sys.stdout.write(func_stdout)
-        sys.stdout.flush()
+    gp.gp_print(func_stdout)
 
     if shell_rc not in allowed_shell_rcs:
         if not ignore_err:
