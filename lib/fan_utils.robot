@@ -177,7 +177,7 @@ Verify Minimum Number Of Fans With Cooling Type
     # For an air cooled system.
     ${min_fans_air}=  Set Variable  3
 
-    Rprintn
+    Printn
     Rpvars  num_fans  water_cooled
 
     # If water cooled must have at least min_fans_water fans, otherwise

@@ -2,6 +2,7 @@
 Documentation      Keywords for system test.
 
 Library            ../lib/gen_robot_keyword.py
+Library            ../lib/gen_print.py
 Library            ../lib/gen_robot_print.py
 Resource           ../lib/boot_utils.robot
 Resource           ../extended/obmc_boot_test_resource.robot
@@ -473,11 +474,11 @@ Count GPUs From BMC
 Create Default MDT Profile
     [Documentation]  Create default mdt.bu profile and run.
 
-    Rprint Timen  Create HTX mdt profile.
+    Print Timen  Create HTX mdt profile.
 
     ${profile}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -createmdt
-    Rprintn  ${profile}
+    Printn  ${profile}
     Should Contain  ${profile}  mdts are created successfully
     ...  msg=Create MDT profile failed. response=${profile}
 
@@ -488,10 +489,10 @@ Run MDT Profile
     # Description of argument(s):
     # HTX_MDT_PROFILE  MDT profile to be executed (e.g. "mdt.bu").
 
-    Rprint Timen  Start HTX mdt profile execution.
+    Print Timen  Start HTX mdt profile execution.
     ${htx_run}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -run -mdt ${HTX_MDT_PROFILE}
-    Rprintn  ${htx_run}
+    Printn  ${htx_run}
     Should Contain  ${htx_run}  Activated
     ...  msg=htxcmdline run mdt did not return "Activated" status.
 
@@ -504,14 +505,14 @@ Check HTX Run Status
     # sleep_time  The amount of time to sleep after checking status,
     #             for example "3s" or "2m".
 
-    Rprint Timen  Check HTX mdt Status and error.
+    Print Timen  Check HTX mdt Status and error.
     ${htx_status}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -status -mdt ${HTX_MDT_PROFILE}
-    Rprintn  ${htx_status}
+    Printn  ${htx_status}
 
     ${htx_errlog}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -geterrlog
-    Rprintn  ${htx_errlog}
+    Printn  ${htx_errlog}
 
     Should Contain  ${htx_errlog}  file </tmp/htxerr> is empty
     ...  msg=HTX geterrorlog was not empty.
@@ -524,10 +525,10 @@ Check HTX Run Status
 Shutdown HTX Exerciser
     [Documentation]  Shut down HTX exerciser run.
 
-    Rprint Timen  Shutdown HTX Run
+    Print Timen  Shutdown HTX Run
     ${shutdown}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -shutdown -mdt ${HTX_MDT_PROFILE}
-    Rprintn  ${shutdown}
+    Printn  ${shutdown}
 
     ${match_count_no_mdt}=  Count Values In List  ${shutdown}
     ...  No MDT is currently running

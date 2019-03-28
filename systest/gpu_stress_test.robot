@@ -49,7 +49,7 @@ GPU Stress Test
     ...  Fail  msg=${failmsg01}
 
     # Show parameters for HTX stress test.
-    Rprintn
+    Printn
     Rpvars  HTX_DURATION  HTX_LOOP  HTX_INTERVAL
 
     # Set the iteration (loop) counter.
@@ -78,7 +78,7 @@ Execute GPU Test
 
     Set Suite Variable  ${iteration}  ${iteration + 1}
     ${loop_count}=  Catenate  Starting iteration: ${iteration}
-    Rprintn
+    Printn
     Rpvars  loop_count
 
     REST Power On  stack_mode=skip
@@ -107,7 +107,7 @@ Execute GPU Test
     ${temperature}=  Get GPU Max Temperature
     ${temperature_via_rest}=  Get GPU Temperature Via REST
     ${clock}=  Get GPU Clock
-    Rprintn
+    Printn
     Rpvars  power  power_max  temperature  temperature_via_rest
     ...  temperature_max  clock  clock_max
 
@@ -137,10 +137,10 @@ Execute GPU Test
 
     Flush REST Sessions
 
-    Rprint Timen  HTX Test ran for: ${HTX_DURATION}
+    Print Timen  HTX Test ran for: ${HTX_DURATION}
 
     ${loop_count}=  Catenate  Ending iteration: ${iteration}
-    Rprintn
+    Printn
     Rpvars  loop_count
 
 
@@ -165,7 +165,7 @@ Test Setup Execution
     # Get number of GPUs reported by the OS.
     ${cmd}=  Catenate  lspci | grep NVIDIA | wc -l
     ${num_os_gpus}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    Rprintn
+    Printn
     Rpvars  num_os_gpus
 
     # If no GPUs detected, we cannot continue.

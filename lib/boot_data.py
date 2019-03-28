@@ -18,7 +18,6 @@ except ImportError:
     import collections
 
 import gen_print as gp
-import gen_robot_print as grp
 import gen_valid as gv
 import gen_misc as gm
 import gen_cmd as gc
@@ -264,7 +263,7 @@ class boot_results:
         See sprint_report for details.
         """
 
-        grp.rqprint(self.sprint_report(header_footer))
+        gp.qprint(self.sprint_report(header_footer))
 
     def sprint_obj(self):
         r"""
@@ -288,7 +287,7 @@ class boot_results:
         debug purposes.
         """
 
-        grp.rprint(self.sprint_obj())
+        gp.gp_print(self.sprint_obj())
 
 
 def create_boot_results_file_path(pgm_name,

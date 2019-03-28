@@ -42,7 +42,7 @@ Resource                ../../lib/resource.robot
 
 
 Suite Setup             Suite Setup Execution
-Test Setup              Rprintn
+Test Setup              Printn
 
 *** Variables ***
 
@@ -281,7 +281,7 @@ Suite Setup Execution
 
     # Verify can find the openbmctool.
     ${openbmctool_file_path}=  which  openbmctool.py
-    Rprintn
+    Printn
     Rprint Vars  openbmctool_file_path
 
     # Get the version number from openbmctool.
