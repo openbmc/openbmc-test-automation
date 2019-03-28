@@ -29,7 +29,7 @@ IO Storage Compatibility Stress
     [Tags]  IO_Storage_Compatibility_Stress
 
     Run MDT Profile
-    Rprint Timen  Running HTX. Please wait.
+    Print Timen  Running HTX. Please wait.
     Repeat Keyword  ${LOOP_COUNT} times
     ...  Run Keywords
     ...  Set Suite Variable  ${ITERATION}  ${ITERATION +1}

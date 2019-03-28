@@ -41,7 +41,7 @@ Test Turbo Processor Speed
     REST Power On  stack_mode=normal
     ${proc_speed_turbo}=  Get CPU Max Frequency
 
-    Rprintn
+    Printn
     Rpvars   proc_speed_non_turbo  proc_speed_turbo
 
     ${err_msg}=  Catenate  Reported turbo processor speed should be

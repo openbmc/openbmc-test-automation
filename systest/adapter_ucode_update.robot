@@ -34,7 +34,7 @@ Load And Activate uCode On Adapters
     [Documentation]  Load and activate firmware on the given adapters.
     [Tags]  Load_And_Activate_uCode_On_Adapters
 
-    Rprintn
+    Printn
     # Format parms.
     # Ensure that nvme (pci-e storage utility) tool exists.
     ${device_names}=  Split String  ${DEVICE_NAMES}  ,
