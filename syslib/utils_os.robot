@@ -507,11 +507,11 @@ Check HTX Run Status
     Rprint Timen  Check HTX mdt Status and error.
     ${htx_status}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -status -mdt ${HTX_MDT_PROFILE}
-    Rprintn  ${htx_status}
+    Rprint Vars  htx_status
 
     ${htx_errlog}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -geterrlog
-    Rprintn  ${htx_errlog}
+    Rprint Vars  htx_errlog
 
     Should Contain  ${htx_errlog}  file </tmp/htxerr> is empty
     ...  msg=HTX geterrorlog was not empty.
@@ -527,14 +527,14 @@ Shutdown HTX Exerciser
     Rprint Timen  Shutdown HTX Run
     ${shutdown}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -shutdown -mdt ${HTX_MDT_PROFILE}
-    Rprintn  ${shutdown}
 
-    ${match_count_no_mdt}=  Count Values In List  ${shutdown}
-    ...  No MDT is currently running
-    ${match_count_success}=  Count Values In List  ${shutdown}
-    ...  shutdown successfully
-    Run Keyword If  ${match_count_no_mdt} == 0 and ${match_count_success} == 0
-    ...  Fail  msg=Shutdown command returned unexpected message.
+    Rprint Vars  shutdown
+
+    ${down1}=  Evaluate  'shutdown successfully' in $shutdown
+    Return From Keyword If  '${down1}' == 'True'
+    ${down2}=  Evaluate  'No MDT is currently running' in $shutdown
+    Return From Keyword If  '${down2}' == 'True'
+    Fail  msg=Shutdown returned unexpected message.
 
 
 Create JSON Inventory File
