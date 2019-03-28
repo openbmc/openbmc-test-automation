@@ -210,8 +210,9 @@ Report Inventory Mismatch
 Check For ESELs
     [Documentation]  Terminate if there is an eSEL.
     ${error_logs}=  Get Error Logs
-    ${num_logs}=  Get Length  ${error_logs}
-    Run Keyword If  ${num_logs} != 0  Run Keywords
+    ${num_error_logs}=  Get Length  ${error_logs}
+    Rprint Vars  num_error_logs
+    Run Keyword If  ${num_error_logs} != 0  Run Keywords
     ...  Print Error Logs  ${error_logs}
     ...  AND  Fail  msg=Terminating run due to BMC error log(s).
 
