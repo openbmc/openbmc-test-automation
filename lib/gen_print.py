@@ -75,9 +75,21 @@ if SHOW_ELAPSED_TIME == "1":
 # Initialize some time variables used in module functions.
 start_time = time.time()
 # sprint_time_last_seconds is used to calculate elapsed seconds.
-sprint_time_last_seconds = [start_time]
+sprint_time_last_seconds = [start_time, start_time]
 # Define global index for the sprint_time_last_seconds list.
 last_seconds_ix = 0
+
+
+def set_last_seconds_ix(ix):
+    r"""
+    Set the "last_seconds_ix" module variable to the index value.
+
+    Description of argument(s):
+    ix                              The index value to be set into the module
+                                    global last_seconds_ix variable.
+    """
+    global last_seconds_ix
+    last_seconds_ix = ix
 
 
 # Since output from the lprint_ functions goes to a different location than
@@ -87,6 +99,13 @@ last_seconds_ix = 0
 # Standard print_ functions defined in this file will use
 # sprint_time_last_seconds[0] and the lprint_ functions will use
 # sprint_time_last_seconds[1].
+def standard_print_last_seconds_ix():
+    r"""
+    Return the standard print last_seconds index value to the caller.
+    """
+    return 0
+
+
 def lprint_last_seconds_ix():
     r"""
     Return lprint last_seconds index value to the caller.
@@ -1425,6 +1444,9 @@ def sprint_issuing(cmd_buf,
     buffer = sprint_time()
     if test_mode:
         buffer += "(test_mode) "
+    if type(cmd_buf) is list:
+        # Assume this is a robot command in the form of a list.
+        cmd_buf = '  '.join([str(element) for element in cmd_buf])
     buffer += "Issuing: " + cmd_buf + "\n"
 
     return buffer
@@ -1709,7 +1731,8 @@ def replace_passwords(buffer):
 
 def create_print_wrapper_funcs(func_names,
                                stderr_func_names,
-                               replace_dict):
+                               replace_dict,
+                               func_prefix=""):
     r"""
     Generate code for print wrapper functions and return the generated code as
     a string.
@@ -1739,6 +1762,8 @@ def create_print_wrapper_funcs(func_names,
                                     function in wrap_utils.py for details on
                                     this parameter.  This parameter will be
                                     passed directly to create_func_def_string.
+    func_prefix                     Prefix to be pre-pended to the generated
+                                    function name.
     """
 
     buffer = ""
@@ -1756,27 +1781,32 @@ def create_print_wrapper_funcs(func_names,
         # We don't want to try to redefine the "print" function, thus the
         # following if statement.
         if func_name != "print":
-            func_def = create_func_def_string(s_func_name, func_name,
+            func_def = create_func_def_string(s_func_name,
+                                              func_prefix + func_name,
                                               print_func_template,
                                               replace_dict)
             buffer += func_def
 
-        func_def = create_func_def_string(s_func_name, "q" + func_name,
+        func_def = create_func_def_string(s_func_name,
+                                          func_prefix + "q" + func_name,
                                           qprint_func_template, replace_dict)
         buffer += func_def
 
-        func_def = create_func_def_string(s_func_name, "d" + func_name,
+        func_def = create_func_def_string(s_func_name,
+                                          func_prefix + "d" + func_name,
                                           dprint_func_template, replace_dict)
         buffer += func_def
 
-        func_def = create_func_def_string(s_func_name, "l" + func_name,
+        func_def = create_func_def_string(s_func_name,
+                                          func_prefix + "l" + func_name,
                                           lprint_func_template, replace_dict)
         buffer += func_def
 
         # Create abbreviated aliases (e.g. spvar is an alias for sprint_var).
         alias = re.sub("print_", "p", func_name)
         alias = re.sub("print", "p", alias)
-        prefixes = ["", "s", "q", "d", "l"]
+        prefixes = [func_prefix + "", "s", func_prefix + "q",
+                    func_prefix + "d", func_prefix + "l"]
         for prefix in prefixes:
             if alias == "p":
                 continue
@@ -1792,12 +1822,23 @@ def create_print_wrapper_funcs(func_names,
 # caller in a string, we will create a corresponding print_time() function
 # that will print that string directly to stdout.
 
-# It can be complicated to follow what's being created by below.  Here is an
+# It can be complicated to follow what's being created below.  Here is an
 # example of the print_time() function that will be created:
 
 # def print_time(buffer=''):
-#     sys.stdout.write(replace_passwords(sprint_time(buffer=buffer)))
-#     sys.stdout.flush()
+#     gp_print(replace_passwords(sprint_time(buffer=buffer)), stream='stdout')
+
+# For each print function defined below, there will also be a qprint, a
+# dprint and an lprint version defined (e.g. qprint_time, dprint_time,
+# lprint_time).
+
+# The q version of each print function will only print if the quiet variable
+# is 0.
+# The d version of each print function will only print if the debug variable
+# is 1.
+# The l version of each print function will print the contents as log data.
+# For conventional programs, this means use of the logging module.  For robot
+# programs it means use of the BuiltIn().log() function.
 
 # Templates for the various print wrapper functions.
 print_func_template = \
@@ -1822,20 +1863,17 @@ dprint_func_template = \
 
 lprint_func_template = \
     [
-        "    global sprint_time_last_seconds",
-        "    global last_seconds_ix",
-        "    if len(sprint_time_last_seconds) <= lprint_last_seconds_ix():",
-        "        sprint_time_last_seconds.append(start_time)",
-        "    save_last_seconds_ix = last_seconds_ix",
-        "    last_seconds_ix = lprint_last_seconds_ix()",
-        "    gp_log(<mod_qualifier>replace_passwords(<call_line>))",
-        "    last_seconds_ix = save_last_seconds_ix",
+        "    <mod_qualifier>set_last_seconds_ix(<mod_qualifier>"
+        + "lprint_last_seconds_ix())",
+        "    <mod_qualifier>gp_log(<mod_qualifier>replace_passwords"
+        + "(<call_line>))",
+        "    <mod_qualifier>set_last_seconds_ix(<mod_qualifier>"
+        + "standard_print_last_seconds_ix())"
     ]
 
 replace_dict = {'output_stream': 'stdout', 'mod_qualifier': ''}
 
-
-gp_debug_print("robot_env: " + str(robot_env))
+gp_debug_print("robot_env: " + str(robot_env) + "\n")
 
 # func_names contains a list of all print functions which should be created
 # from their sprint counterparts.
@@ -1848,7 +1886,6 @@ func_names = ['print_time', 'print_timen', 'print_error', 'print_varx',
 # stderr_func_names is a list of functions whose output should go to stderr
 # rather than stdout.
 stderr_func_names = ['print_error', 'print_error_report']
-
 
 func_defs = create_print_wrapper_funcs(func_names, stderr_func_names,
                                        replace_dict)
