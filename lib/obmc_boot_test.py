@@ -22,7 +22,6 @@ from robot.libraries.BuiltIn import BuiltIn
 
 from boot_data import *
 import gen_print as gp
-import gen_robot_print as grp
 import gen_robot_plug_in as grpi
 import gen_robot_valid as grv
 import gen_misc as gm
@@ -403,7 +402,7 @@ def setup():
 
     validate_parms()
 
-    grp.rqprint_pgm_header()
+    gp.qprint_pgm_header()
 
     grk.run_key("Set BMC Power Policy  ALWAYS_POWER_OFF")
 
@@ -414,7 +413,7 @@ def setup():
         call_point='setup')
     if rc != 0:
         error_message = "Plug-in setup failed.\n"
-        grp.rprint_error_report(error_message)
+        gp.print_error_report(error_message)
         BuiltIn().fail(error_message)
     # Setting cp_setup_called lets our Teardown know that it needs to call
     # the cleanup plug-in call point.
@@ -641,7 +640,7 @@ def print_last_boots():
     gp.qprintn("Last 10 boots:\n")
 
     for boot_entry in last_ten:
-        grp.rqprint(boot_entry)
+        gp.qprint(boot_entry)
     gp.qprint_dashes(0, 90)
 
 
@@ -1021,7 +1020,7 @@ def test_teardown():
                "A keyword timeout occurred ending this program.\n"]
     BuiltIn().run_keyword_if_timeout_occurred(*cmd_buf)
 
-    grp.rqprint_pgm_footer()
+    gp.qprint_pgm_footer()
 
 
 def post_stack():

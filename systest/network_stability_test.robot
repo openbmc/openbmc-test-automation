@@ -54,7 +54,7 @@ Execute Network Test
 
     Shutdown HTX Exerciser
 
-    Rprint Timen  HTX Test ran for: ${HTX_DURATION}
+    Print Timen  HTX Test ran for: ${HTX_DURATION}
 
 
 Start Network Test

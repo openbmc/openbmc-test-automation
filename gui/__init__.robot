@@ -20,7 +20,7 @@ Initial Message
     [Documentation]  Display initial info about the test cases.
 
     Rpvars  EXECDIR
-    Rprint Timen  OBMC_GUI Testing ==> [IN PROGRESS]
+    Print Timen  OBMC_GUI Testing ==> [IN PROGRESS]
     Print Dashes  0  100  1  =
 
 Get OpenBMC System Info

@@ -21,7 +21,7 @@ Verify Network Interfaces
     [Documentation]  Verify the states of all system interfaces.
     [Tags]  Verify_Network_Interfaces
 
-    Rprintn
+    Printn
     REST Power On
     @{interface_names}=  Get OS Network Interface Names
     :FOR  ${interface_name}  IN  @{interface_names}

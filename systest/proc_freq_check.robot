@@ -24,7 +24,7 @@ Processor Speed Check
     ${actual_min_freq}=  Get CPU Min Frequency
     ${min_freq_designated_lower_limit}=  Get CPU Min Frequency Limit
 
-    Rprintn
+    Printn
     Rpvars  actual_min_freq  min_freq_designated_lower_limit
 
     ${err_msg}=  Catenate  Reported CPU frequency below designated limit.

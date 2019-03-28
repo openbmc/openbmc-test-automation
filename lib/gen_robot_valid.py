@@ -4,7 +4,7 @@ r"""
 This file contains functions useful for validating variables in robot.
 """
 
-import gen_robot_print as grp
+import gen_print as gp
 import gen_valid as gv
 
 from robot.libraries.BuiltIn import BuiltIn
@@ -17,7 +17,7 @@ def rvalid_value(var_name,
     r"""
     Validate a robot value.
 
-    This function is the robot wrapper for gen_robot_print.svalid_value.
+    This function is the robot wrapper for gen_valid.svalid_value.
 
     Description of arguments:
     var_name                        The name of the variable whose value is to
@@ -94,7 +94,7 @@ def rvalid_value(var_name,
         error_message = gv.svalid_value(var_value, invalid_values,
                                         valid_values, var_name)
     if not error_message == "":
-        error_message = grp.sprint_error_report(error_message)
+        error_message = gp.sprint_error_report(error_message)
         BuiltIn().fail(error_message)
 
 
@@ -102,7 +102,7 @@ def rvalid_integer(var_name):
     r"""
     Validate a robot integer.
 
-    This function is the robot wrapper for gen_robot_print.svalid_integer.
+    This function is the robot wrapper for gen_valid.svalid_integer.
 
     Description of arguments:
     var_name                        The name of the variable whose value is to
@@ -143,7 +143,7 @@ def rvalid_integer(var_name):
     else:
         error_message = gv.svalid_integer(var_value, var_name)
     if not error_message == "":
-        error_message = grp.sprint_error_report(error_message)
+        error_message = gp.sprint_error_report(error_message)
         BuiltIn().fail(error_message)
 
 
@@ -152,7 +152,7 @@ def rvalid_range(var_name,
     r"""
     Validate that a robot integer is within the given range.
 
-    This function is the robot wrapper for gen_robot_print.svalid_range.
+    This function is the robot wrapper for gen_valid.svalid_range.
 
     Description of arguments:
     var_name                        The name of the variable whose value is to
@@ -196,5 +196,5 @@ def rvalid_range(var_name,
         range = [x for x in range if x]
         error_message = gv.svalid_range(var_value, range, var_name)
     if not error_message == "":
-        error_message = grp.sprint_error_report(error_message)
+        error_message = gp.sprint_error_report(error_message)
         BuiltIn().fail(error_message)

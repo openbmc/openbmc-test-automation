@@ -290,7 +290,7 @@ Verify Fan Properties
     ${system_list}=  Get Endpoint Paths
     ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  fan*
 
-    Rprintn
+    Printn
     Rprint Vars  water_cooled  system_list
 
     Run Keyword If  ${water_cooled}

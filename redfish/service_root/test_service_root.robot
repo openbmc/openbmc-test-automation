@@ -7,7 +7,7 @@ Resource         ../../lib/openbmc_ffdc.robot
 
 
 Test Teardown    FFDC On Test Case Fail
-Test Setup       Rprintn
+Test Setup       Printn
 
 *** Test Cases ***
 

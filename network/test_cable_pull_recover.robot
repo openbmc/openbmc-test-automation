@@ -32,7 +32,7 @@ Verify Network Interface Recovery
     ...  shutdown from the switch port.
     [Tags]  Verify_Network_Interface_Recovery
 
-    Rprintn
+    Printn
     Set Switch Port State  DOWN
     Set Switch Port State  UP
 

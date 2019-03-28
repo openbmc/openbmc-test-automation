@@ -67,7 +67,7 @@ Hard Bootme Test
     [Documentation]  Stress the system using HTX exerciser.
     [Tags]  Hard_Bootme_Test
 
-    Rprintn
+    Printn
     Rpvars  HTX_DURATION  HTX_LOOP  HTX_INTERVAL  CHECK_INVENTORY
     ...  INV_IGNORE_LIST  PREV_INV_FILE_PATH
 
@@ -117,7 +117,7 @@ Run HTX Exerciser
     ${loop_count}=  Catenate  Starting iteration: ${iteration}
     ${estimated_time_remaining}=  Convert Time
     ...  ${est_seconds_left}  result_format=compact
-    Rprintn
+    Printn
     Rpvars  loop_count  estimated_loop_time   estimated_time_remaining
 
     REST Power On  stack_mode=skip
@@ -149,7 +149,7 @@ Run HTX Exerciser
     Close All Connections
     Flush REST Sessions
 
-    Rprint Timen  HTX Test ran for: ${HTX_DURATION}
+    Print Timen  HTX Test ran for: ${HTX_DURATION}
 
     ${loop_count}=  Catenate  Ending iteration: ${iteration}
 
@@ -187,7 +187,7 @@ Compare Json Inventory Files
      ...  ${file2}  ${json_diff_file_path}  ${INV_IGNORE_LIST}
     Run Keyword If  '${diff_rc}' != '${0}'
     ...  Report Inventory Mismatch  ${diff_rc}  ${json_diff_file_path}
-    ...  ELSE  Rprint Timen  Inventoy check: No differences found.
+    ...  ELSE  Print Timen  Inventoy check: No differences found.
 
 
 Report Inventory Mismatch
@@ -230,7 +230,7 @@ Test Setup Execution
 
     ${bmc_version}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat /etc/os-release
-    Rprintn
+    Printn
     Rpvars  bmc_version
 
     ${pnor_version}=  Get Host Software Objects Details

@@ -157,7 +157,7 @@ Check Fan Manual Control
     # back to normal.
     ${msg}=  Catenate  Waiting ${minutes_to_stabilize} minutes
     ...  for fan daemon to stabilize fans.
-    Rprint Timen  ${msg}
+    Print Timen  ${msg}
     Run Key U  Sleep \ ${minutes_to_stabilize}m
 
 
