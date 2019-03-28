@@ -4,7 +4,7 @@ r"""
 This module is the python counterpart to run_keyword.robot.
 """
 
-import gen_robot_print as grp
+import gen_print as gp
 import gen_robot_valid as grv
 import gen_robot_utils as gru
 
@@ -17,11 +17,11 @@ def setup():
     Do general program setup tasks.
     """
 
-    grp.rqprintn()
+    gp.qprintn()
 
     validate_parms()
 
-    grp.rqprint_pgm_header()
+    gp.qprint_pgm_header()
 
 
 def validate_parms():
@@ -39,7 +39,7 @@ def program_teardown():
     Clean up after this program.
     """
 
-    grp.rqprint_pgm_footer()
+    gp.qprint_pgm_footer()
 
 
 def my_run_keywords(lib_file_path,
@@ -92,11 +92,10 @@ def my_run_keywords(lib_file_path,
         del lib_file_path_list[0]
     for lib_file_path in lib_file_path_list:
         if lib_file_path.endswith(".py"):
-            grp.rdprint_issuing("import_library(\"" + lib_file_path + "\")")
+            gp.dprint_issuing("import_library(\"" + lib_file_path + "\")")
             BuiltIn().import_library(lib_file_path)
         else:
-            grp.rdprint_issuing("my_import_resource(\"" + lib_file_path
-                                + "\")")
+            gp.dprint_issuing("my_import_resource(\"" + lib_file_path + "\")")
             gru.my_import_resource(lib_file_path)
 
     # The user can pass multiple keyword strings by separating them with " ; ".
@@ -114,7 +113,7 @@ def my_run_keywords(lib_file_path,
             var_name = ""
 
         if not quiet:
-            grp.rprint_issuing_keyword(cmd_buf, test_mode)
+            gp.print_issuing(cmd_buf, test_mode)
         if test_mode:
             continue
 
@@ -124,7 +123,7 @@ def my_run_keywords(lib_file_path,
             BuiltIn().set_global_variable("${" + var_name + "}", output)
         else:
             if output is not None:
-                grp.rprint(output)
+                gp.gp_print(output)
 
 
 def main_py():

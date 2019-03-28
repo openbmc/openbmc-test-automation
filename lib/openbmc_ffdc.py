@@ -7,7 +7,6 @@ This module is the python counterpart to openbmc_ffdc.robot..
 import os
 
 import gen_print as gp
-import gen_robot_print as grp
 import gen_valid as gv
 import gen_robot_keyword as grk
 import state as st
@@ -71,12 +70,12 @@ def ffdc(ffdc_dir_path=None,
     BuiltIn().set_global_variable("${LOG_PREFIX}", LOG_PREFIX)
 
     cmd_buf = ["Create Directory", ffdc_dir_path]
-    grp.rqpissuing_keyword(cmd_buf)
+    gp.qprint_issuing(cmd_buf)
     status, output = BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
     if status != "PASS":
-        error_message = grp.sprint_error_report("Create Directory failed"
-                                                + " with the following"
-                                                + " error:\n" + output)
+        error_message = gp.sprint_error_report("Create Directory failed"
+                                               + " with the following"
+                                               + " error:\n" + output)
         BuiltIn().fail(error_message)
 
     # FFDC_FILE_PATH is used by Header Message.
@@ -114,7 +113,7 @@ def set_ffdc_defaults(ffdc_dir_path=None,
     # Note: Several subordinate functions like 'Get Test Dir and Name' and
     # 'Header Message' expect global variable FFDC_TIME to be set.
     cmd_buf = ["Get Current Time Stamp"]
-    grp.rdpissuing_keyword(cmd_buf)
+    gp.dprint_issuing(cmd_buf)
     FFDC_TIME = BuiltIn().run_keyword(*cmd_buf)
     BuiltIn().set_global_variable("${FFDC_TIME}", FFDC_TIME)
 
@@ -138,12 +137,12 @@ def set_ffdc_defaults(ffdc_dir_path=None,
             error_message = gv.svalid_value(FFDC_LOG_PATH,
                                             var_name="FFDC_LOG_PATH")
             if error_message != "":
-                error_message = grp.sprint_error_report(error_message)
+                error_message = gp.sprint_error_report(error_message)
                 BuiltIn().fail(error_message)
             FFDC_LOG_PATH = os.path.normpath(FFDC_LOG_PATH) + os.sep
 
             cmd_buf = ["Get Test Dir and Name"]
-            grp.rpissuing_keyword(cmd_buf)
+            gp.print_issuing(cmd_buf)
             suitename, testname = BuiltIn().run_keyword(*cmd_buf)
 
             ffdc_dir_path = FFDC_LOG_PATH + suitename + "/" + testname + "/"

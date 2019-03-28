@@ -28,7 +28,6 @@ compared with the expected state.
 """
 
 import gen_print as gp
-import gen_robot_print as grp
 import gen_valid as gv
 import gen_robot_utils as gru
 import gen_cmd as gc
@@ -508,8 +507,8 @@ def get_state(openbmc_host="",
             # See sprint_issuing in gen_print.py for details.
             loc_test_mode = int(gp.get_var_value(var_name="test_mode",
                                                  default=0))
-            grp.rpissuing_keyword(cmd_buf, loc_test_mode)
-            gp.pissuing(remote_cmd_buf, loc_test_mode)
+            gp.print_issuing(cmd_buf, loc_test_mode)
+            gp.print_issuing(remote_cmd_buf, loc_test_mode)
         try:
             stdout, stderr, rc =\
                 BuiltIn().wait_until_keyword_succeeds("10 sec", "0 sec",
@@ -524,7 +523,7 @@ def get_state(openbmc_host="",
         if USE_BMC_EPOCH_TIME:
             cmd_buf = ["BMC Execute Command", date_cmd_buf, 'quiet=${1}']
             if not quiet:
-                grp.rpissuing_keyword(cmd_buf)
+                gp.print_issuing(cmd_buf)
             status, ret_values = \
                 BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
             if status == "PASS":
@@ -549,7 +548,7 @@ def get_state(openbmc_host="",
     if need_rest:
         cmd_buf = ["Read Properties", SYSTEM_STATE_URI + "enumerate",
                    "quiet=${" + str(quiet) + "}"]
-        grp.rdpissuing_keyword(cmd_buf)
+        gp.dprint_issuing(cmd_buf)
         status, ret_values = \
             BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
         if status == "PASS":
@@ -684,7 +683,12 @@ def check_state(match_state,
 
     quiet = int(gp.get_var_value(quiet, 0))
 
-    grp.rprint(print_string)
+    gp.gp_print(print_string)
+
+    try:
+        match_state = return_state_constant(match_state)
+    except TypeError:
+        pass
 
     req_states = match_state.keys()
     # Initialize state.
@@ -803,7 +807,7 @@ def wait_state(match_state=(),
                "openbmc_password=" + openbmc_password, "os_host=" + os_host,
                "os_username=" + os_username, "os_password=" + os_password,
                "quiet=${" + str(check_state_quiet) + "}"]
-    grp.rdpissuing_keyword(cmd_buf)
+    gp.dprint_issuing(cmd_buf)
     try:
         state = BuiltIn().wait_until_keyword_succeeds(wait_time, interval,
                                                       *cmd_buf)
