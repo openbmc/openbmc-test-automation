@@ -88,7 +88,7 @@ Check For Too Many Dumps
     ${exception}=  Set Variable  ${resp.json()['data']['exception']}
     ${at_capacity}=  Set Variable  Dump not captured due to a cap
     ${too_many_dumps}=  Evaluate  $at_capacity in $exception
-    Rprintn
+    Printn
     Rprint Vars   exception  too_many_dumps
     # If there are too many dumps, return ${EMPTY}, otherwise Fail.
     ${status}=  Run Keyword If  ${too_many_dumps}  Set Variable  ${EMPTY}

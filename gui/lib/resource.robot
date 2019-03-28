@@ -117,7 +117,7 @@ Test Setup Execution
     # Description of argument(s):
     # obmc_test_setup      The OpenBMC required state.
 
-    Rprint Timen  ${TEST NAME} ==> [STARTED]
+    Print Timen  ${TEST NAME} ==> [STARTED]
     Launch Browser And Login OpenBMC GUI
     Log To Console  Verifying the system state and stablity...
 
@@ -212,7 +212,7 @@ LogOut OpenBMC GUI
 
 Test Teardown Execution
     [Documentation]  Do final closure activities of test case execution.
-    Rprint Pgm Footer
+    Print Pgm Footer
     Print Dashes  0  100  1  =
     Close Browser
 

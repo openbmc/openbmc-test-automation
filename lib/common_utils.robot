@@ -158,7 +158,7 @@ Check OS
     # quiet             Indicates whether this keyword should write to console.
     # print_string      A string to be printed before checking the OS.
 
-    rprint  ${print_string}
+    Log To Console  ${print_string}  no_newline=True
 
     # Attempt to ping the OS. Store the return code to check later.
     ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${os_host}
@@ -197,7 +197,7 @@ Wait for OS
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}  ${timeout}=${OS_WAIT_TIMEOUT}
     ...          ${quiet}=${0}
-    [Teardown]  rprintn
+    [Teardown]  Printn
 
     # Description of argument(s):
     # os_host           The DNS name or IP of the OS host associated with our
@@ -213,15 +213,15 @@ Wait for OS
 
     ${message}=  Catenate  Checking every ${interval} seconds for up to
     ...  ${timeout} seconds for the operating system to communicate.
-    rqprint_timen  ${message}
+    Qprint Timen  ${message}
 
     Wait Until Keyword Succeeds  ${timeout} sec  ${interval}  Check OS
     ...                          ${os_host}  ${os_username}  ${os_password}
     ...                          print_string=\#
 
-    rqprintn
+    Qprintn
 
-    rqprint_timen  The operating system is now communicating.
+    Qprint Timen  The operating system is now communicating.
 
 
 Copy PNOR to BMC
@@ -289,7 +289,7 @@ Create OS Console Command String
     ${cmd}=  Catenate  which ssh_pw 2>/dev/null || find
     ...  ${EXECDIR} -name 'ssh_pw'
 
-    Rdpissuing  ${cmd}
+    Dprint Issuing  ${cmd}
     ${rc}  ${output}=  Run And Return Rc And Output  ${cmd}
     Rdpvars  rc  output
 
@@ -320,7 +320,7 @@ Get SOL Console Pid
     ${ps_cmd}=  Catenate  ps axwwo user,pid,cmd
     ${cmd_buf}=  Catenate  echo $(${ps_cmd} | egrep '${search_string}' |
     ...  egrep -v grep | cut -c10-14)
-    Rdpissuing  ${cmd_buf}
+    Dprint Issuing  ${cmd_buf}
     ${rc}  ${os_con_pid}=  Run And Return Rc And Output  ${cmd_buf}
     Rdpvars  os_con_pid
     # If rc is not zero it just means that there is no OS Console process
@@ -361,7 +361,7 @@ Stop SOL Console Logging
     ${os_con_pid}=  Get SOL Console Pid
 
     ${cmd_buf}=  Catenate  kill -9 ${os_con_pid}
-    Run Keyword If  '${os_con_pid}' != '${EMPTY}'  Rdpissuing  ${cmd_buf}
+    Run Keyword If  '${os_con_pid}' != '${EMPTY}'  Dprint Issuing  ${cmd_buf}
     ${rc}  ${output}=  Run Keyword If  '${os_con_pid}' != '${EMPTY}'
     ...  Run And Return Rc And Output  ${cmd_buf}
     Run Keyword If  '${os_con_pid}' != '${EMPTY}'  Rdpvars  rc  output
@@ -411,7 +411,7 @@ Start SOL Console Logging
     # nohup detaches the process completely from our pty.
     #${cmd_buf}=  Catenate  nohup ${sub_cmd_buf} &> ${log_file_path} &
     ${cmd_buf}=  Catenate  ${sub_cmd_buf} > ${log_file_path} 2>&1 &
-    Rdpissuing  ${cmd_buf}
+    Dprint Issuing  ${cmd_buf}
     ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
     # Because we are forking this command, we essentially will never get a
     # non-zero return code or any output.
