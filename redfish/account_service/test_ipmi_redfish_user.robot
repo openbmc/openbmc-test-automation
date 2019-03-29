@@ -5,6 +5,7 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/ipmi_client.robot
+Library          ../lib/ipmi_utils.py
 
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
@@ -14,6 +15,8 @@ Test Teardown    Test Teardown Execution
 
 ${valid_password}       0penBmc1
 ${valid_password2}      0penBmc2
+${admin_level_priv}     4
+
 
 ** Test Cases **
 
@@ -80,7 +83,79 @@ Delete User Via Redfish And Verify Using IPMI
     ...  Verify IPMI Username And Password  ${random_username}  ${valid_password}
 
 
+Create IPMI User And Verify Login Via Redfish
+    [Documentation]  Create user using IPMI and verify user login via Redfish.
+    [Tags]  Create_IPMI_User_And_Verify_Login_Via_Redfish
+
+    ${username}  ${userid}=  IPMI Create Random User Plus Password And Privilege
+    ...  ${valid_password}  ${admin_level_priv}
+
+    # Verify user login using Redfish.
+    Redfish.Login  ${username}  ${valid_password}
+
+
+Update User Password Via IPMI And Verify Using Redfish
+    [Documentation]  Update user password using IPMI and verify user
+    ...  login via Redfish.
+    [Tags]  Update_User_Password_Via_IPMI_And_Verify_Using_Redfish
+
+    ${username}  ${userid}=  IPMI Create Random User Plus Password And Privilege
+    ...  ${valid_password}  ${admin_level_priv}
+
+    # Update user password using IPMI.
+    Run IPMI Standard Command
+    ...  user set password ${userid} ${valid_password2}
+
+    # Verify that user login works with new password using Redfish.
+    Redfish.Login  ${username}  ${valid_password2}
+
+
+Delete User Via IPMI And Verify Using Redfish
+    [Documentation]  Delete user using IPMI and verify error while doing
+    ...  user login with deleted user via Redfish.
+    [Tags]  Delete_User_Via_IPMI_And_Verify_Using_Redfish
+
+    ${username}  ${userid}=  IPMI Create Random User Plus Password And Privilege
+    ...  ${valid_password}  ${admin_level_priv}
+
+    # Delete IPMI User.
+    Run IPMI Standard Command  user set name ${userid} ""
+
+    # Verify that Redfish login fails with deleted user.
+    Run Keyword And Expect Error  *InvalidCredentialsError*
+    ...  Redfish.Login  ${username}  ${valid_password}
+
+
 *** Keywords ***
+
+IPMI Create Random User Plus Password And Privilege
+    [Documentation]  Create random IPMI user with given password and privilege
+    ...  level.
+    [Arguments]  ${password}  ${privilege}
+
+    # Description of argument(s):
+    # password      Password to be assigned for the user.
+    # privilege     Privilege level for the user (e.g. "1", "2", "3", etc.).
+
+    # Create IPMI user.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    Set Suite Variable  ${random_username}
+
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Set given password for newly created user.
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${password}
+
+    # Enable IPMI user.
+    Run IPMI Standard Command  user enable ${random_userid}
+
+    # Set given privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege}
+
+    [Return]  ${random_username}  ${random_userid}
+
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
