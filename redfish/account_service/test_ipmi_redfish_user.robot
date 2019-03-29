@@ -61,6 +61,41 @@ Update User Password Via Redfish And Verify Using IPMI
     ...  Verify IPMI Username And Password  ${random_username}  ${valid_password}
 
 
+Update User Privilege Via Redfish And Verify Using IPMI
+    [Documentation]  Update user privilege via Redfish and verify using IPMI.
+    [Tags]  Update_User_Privilege_Via_Redfish_And_Verify_Using_IPMI
+
+    # Create user using Redfish with admin privilege.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    Set Test Variable  ${random_username}
+
+    ${payload}=  Create Dictionary
+    ...  UserName=${random_username}  Password=${valid_password}
+    ...  RoleId=Administrator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Update user privilege to operator using Redfish.
+    ${payload}=  Create Dictionary  RoleId=Operator
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${random_username}  body=&{payload}
+
+    # Verify new user privilege level via IPMI.
+    ${resp}=  Run IPMI Standard Command  user list
+
+    # Example of response data:
+    # ID  Name             Callin  Link Auth  IPMI Msg   Channel Priv Limit
+    # 1   root             false   true       true       ADMINISTRATOR
+    # 2   OAvCxjMv         false   true       true       OPERATOR
+    # 3                    true    false      false      NO ACCESS
+    # ..
+    # ..
+    # 15                   true    false      false      NO ACCESS
+
+    ${user_info}=
+    ...  Get Lines Containing String  ${resp}  ${random_username}
+    Should Contain  ${user_info}  OPERATOR
+
+
 Delete User Via Redfish And Verify Using IPMI
     [Documentation]  Delete user via redfish and verify using IPMI.
     [Tags]  Delete_User_Via_Redfish_And_Verify_Using_IPMI
