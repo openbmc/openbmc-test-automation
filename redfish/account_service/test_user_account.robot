@@ -51,6 +51,41 @@ Verify Login with Deleted Redfish Users
        user_user      TestPwd123  User            ${True}
        callback_user  TestPwd123  Callback        ${True}
 
+Verify Create User Without Enabling It
+    [Documentation]  Verify Create User Without Enabling It
+    [Tags]  Verify_Create_User_Without_Enabling_It
+    [Template]  Verify Create User Without Enabling
+
+     # username       password    role_id         enabled
+       admin_user     TestPwd123  Administrator   ${False}
+       operator_user  TestPwd123  Operator        ${False}
+       user_user      TestPwd123  User            ${False}
+       callback_user  TestPwd123  Callback        ${False}
+
+Verify Redfish User Persistence After Reboot
+    [Documentation]  Verify Redfish user persistence after reboot
+    [Tags]  Verify_Redfish_User_Persistence_After_Reboot
+
+    # Create Redfish users.
+    Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
+    Redfish Create User  operator_user  TestPwd123  Operator        ${True}
+    Redfish Create User  user_user      TestPwd123  User            ${True}
+    Redfish Create User  callback_user  TestPwd123  Callback        ${True}
+
+    # Reboot BMC.
+    Redfish OBMC Reboot (off)
+
+    # Verify users after reboot.
+    Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
+    Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
+    Redfish Verify User  user_user      TestPwd123  User            ${True}
+    Redfish Verify User  callback_user  TestPwd123  Callback        ${True}
+
+    # Delete created users.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/user_user
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/callback_user
 
 *** Keywords ***
 
@@ -65,6 +100,57 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Redfish.Logout
+
+Redfish Create User
+    [Documentation]  Redfish create user
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role id of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+
+    # Make sure the user account in question does not already exist.
+    Run Keyword And Ignore Error
+    ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    Redfish.Logout
+
+    # Login with created user.
+    Redfish.Login  ${username}  ${password}
+
+    # Validate Role Id of created user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/${username}  RoleId
+    Should Be Equal  ${role_id}  ${role_config}
+
+Redfish Verify User
+    [Documentation]  Redfish create user
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role id of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+
+    # Login with created user.
+    Redfish.Login  ${username}  ${password}
+
+    # Validate Role Id of created user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/${username}  RoleId
+    Should Be Equal  ${role_id}  ${role_config}
+
 
 Redfish Create And Verify User
     [Documentation]  Redfish create and verify user.
@@ -92,30 +178,14 @@ Redfish Create And Verify User
     #  }
     #},
 
-    # Make sure the user account in question does not already exist.
-    Run Keyword And Ignore Error
-    ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    Redfish.Login
 
-    # Create specified user.
-    ${payload}=  Create Dictionary
-    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
-    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
-    ...  valid_status_codes=[${HTTP_CREATED}]
+    Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
 
-    Redfish.Logout
-
-    # Login with created user.
-    Redfish.Login  ${username}  ${password}
-
-    # Validate Role Id of created user.
-    ${role_config}=  Redfish_Utils.Get Attribute
-    ...  /redfish/v1/AccountService/Accounts/${userName}  RoleId
-    Should Be Equal  ${role_id}  ${role_config}
-
-    Redfish.Get  /redfish/v1/AccountService/Accounts/${userName}
+    Redfish Verify User  ${username}  ${password}  ${role_id}  ${enabled}
 
     # Delete Specified User
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
 
 Verify Redfish User with Wrong Password
     [Documentation]  Verify Redfish User with Wrong Password
@@ -130,20 +200,9 @@ Verify Redfish User with Wrong Password
     #                     should be enabled (${True}, ${False}).
     # wrong_password      Any invalid password.
 
-    # Make sure the user account in question does not already exist.
-    Run Keyword And Ignore Error
-    ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    Redfish.Login
 
-    # Create specified user.
-    ${payload}=  Create Dictionary
-    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
-    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
-    ...  valid_status_codes=[${HTTP_CREATED}]
-
-    Redfish.Logout
-
-    # Login with created user.
-    Redfish.Login  ${username}  ${password}
+    Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
 
     Redfish.Logout
 
@@ -154,7 +213,7 @@ Verify Redfish User with Wrong Password
     Redfish.Login
 
     # Delete newly created user.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
 
 
 Verify Login with Deleted Redfish User
@@ -169,30 +228,43 @@ Verify Login with Deleted Redfish User
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
 
-    # Make sure the user account in question does not already exist.
-    Run Keyword And Ignore Error
-    ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
-
     Redfish.Login
 
-    # Create specified user.
-    ${payload}=  Create Dictionary
-    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
-    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
-    ...  valid_status_codes=[${HTTP_CREATED}]
-
-    Redfish.Logout
-
-    # Login with created user.
-    Redfish.Login  ${username}  ${password}
-
-    Redfish.Logout
+    Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
 
     Redfish.Login
 
     # Delete newly created user.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
 
     # Attempt to login with deleted user account.
     Run Keyword And Expect Error  InvalidCredentialsError*
     ...  Redfish.Login  ${username}  ${password}
+
+Verify Create User Without Enabling
+    [Documentation]  Verify Create User Without Enabling
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role id of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+
+    Redfish.Login
+
+    Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
+
+    Redfish.Logout
+
+    # Login with created user.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${username}  ${password}
+
+    Redfish.Login
+
+    # Delete newly created user.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
+
