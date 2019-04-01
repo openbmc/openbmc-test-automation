@@ -40,6 +40,33 @@ Verify Redfish User with Wrong Password
        user_user      TestPwd123  User            ${True}  12
        callback_user  TestPwd123  Callback        ${True}  !#@D#RF#@!D
 
+Verify Create User Without Enabling It
+    [Documentation]  Verify Create User Without Enabling It
+    [Tags]  Verify_Create_User_Without_Enabling_It
+
+    # Delete if the user exist.
+    Run Keyword And Ignore Error
+    ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=admin_user  Password=TestPwd123  RoleId=Administrator  Enabled=${False}
+    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    Redfish.Logout
+
+    # Login with created user.
+    ${data}=  Create Dictionary  UserName=admin_user  Password=TestPwd123
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${data}
+
+    Redfish.Login
+
+    # Delete newly created user.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
+
+
 
 *** Keywords ***
 
