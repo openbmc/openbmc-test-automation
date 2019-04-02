@@ -8,9 +8,9 @@ menus.
 
 class resource_variables():
 
-    xpath_textbox_hostname = "//*[@id='login__form']/input[1]"
-    xpath_textbox_username = "//*[@id='username']"
-    xpath_textbox_password = "//*[@id='password']"
+    xpath_textbox_hostname = "//input[@id='host']"
+    xpath_textbox_username = "//input[@id='username']"
+    xpath_textbox_password = "//input[@id='password']"
     xpath_button_login = "//*[@id='login__submit']"
     xpath_button_logout = "//*[@id='header']/a"
     xpath_yes_button = "//button[text()='Yes']"
