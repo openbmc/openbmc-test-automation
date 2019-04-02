@@ -60,6 +60,10 @@ ${CHECK_INVENTORY}           True
 ${INV_IGNORE_LIST}           size
 ${PREV_INV_FILE_PATH}        NONE
 
+# Error log Severities to ignore when checking for eSELs.
+@{ESEL_WHITELIST}
+...  xyz.openbmc_project.Logging.Entry.Level.Informational
+
 
 *** Test Cases ***
 
@@ -67,7 +71,7 @@ Hard Bootme Test
     [Documentation]  Stress the system using HTX exerciser.
     [Tags]  Hard_Bootme_Test
 
-    Rprintn
+    Printn
     Rpvars  HTX_DURATION  HTX_LOOP  HTX_INTERVAL  CHECK_INVENTORY
     ...  INV_IGNORE_LIST  PREV_INV_FILE_PATH
 
@@ -117,7 +121,7 @@ Run HTX Exerciser
     ${loop_count}=  Catenate  Starting iteration: ${iteration}
     ${estimated_time_remaining}=  Convert Time
     ...  ${est_seconds_left}  result_format=compact
-    Rprintn
+    Printn
     Rpvars  loop_count  estimated_loop_time   estimated_time_remaining
 
     REST Power On  stack_mode=skip
@@ -149,7 +153,7 @@ Run HTX Exerciser
     Close All Connections
     Flush REST Sessions
 
-    Rprint Timen  HTX Test ran for: ${HTX_DURATION}
+    Print Timen  HTX Test ran for: ${HTX_DURATION}
 
     ${loop_count}=  Catenate  Ending iteration: ${iteration}
 
@@ -187,7 +191,7 @@ Compare Json Inventory Files
      ...  ${file2}  ${json_diff_file_path}  ${INV_IGNORE_LIST}
     Run Keyword If  '${diff_rc}' != '${0}'
     ...  Report Inventory Mismatch  ${diff_rc}  ${json_diff_file_path}
-    ...  ELSE  Rprint Timen  Inventoy check: No differences found.
+    ...  ELSE  Print Timen  Inventoy check: No differences found.
 
 
 Report Inventory Mismatch
@@ -208,13 +212,28 @@ Report Inventory Mismatch
 
 
 Check For ESELs
-    [Documentation]  Terminate if there is an eSEL.
+    [Documentation]  Terminate if eSELs with Severity field not on WHITELIST.
+
+    Print Timen  Checking eSEL Error Logs
     ${error_logs}=  Get Error Logs
+
     ${num_error_logs}=  Get Length  ${error_logs}
     Rprint Vars  num_error_logs
-    Run Keyword If  ${num_error_logs} != 0  Run Keywords
-    ...  Print Error Logs  ${error_logs}
-    ...  AND  Fail  msg=Terminating run due to BMC error log(s).
+    Return From Keyword If  ${num_error_logs} == ${0}
+
+    Print Error Logs
+
+    # Get a list of the severities of the error logs.
+    ${error_log_severities}=  Nested Get  Severity  ${error_logs}
+    # Subtract the WHITELIST from the error_log_severities.
+    ${problem_error_logs}=
+    ...  Evaluate  list(set($error_log_severities) - set($ESEL_WHITELIST))
+    ${num_error_logs_not_on_whitelist}=  Get Length  ${problem_error_logs}
+
+    Return From Keyword If  ${num_error_logs_not_on_whitelist} == ${0}
+
+    Rprint Vars  ESEL_WHITELIST
+    Fail  msg=Found error logs with Severity not matching ESEL_WHITELIST.
 
 
 Loop HTX Health Check
@@ -230,7 +249,7 @@ Test Setup Execution
 
     ${bmc_version}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat /etc/os-release
-    Rprintn
+    Printn
     Rpvars  bmc_version
 
     ${pnor_version}=  Get Host Software Objects Details
