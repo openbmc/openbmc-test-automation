@@ -131,45 +131,46 @@ class bmc_redfish_utils(object):
 
         return member_list
 
-    def list_request(self, resource_path):
+    def get_response(self, url):
         r"""
-        Perform a GET list request and return available resource paths.
-
-        Description of argument(s):
-        resource_path  URI resource absolute path
-                       (e.g. "/redfish/v1/SessionService/Sessions").
+        Get response for the given resource
         """
 
-        gp.qprint_executing(style=gp.func_line_style_short)
-
-        # Set quiet variable to keep subordinate get() calls quiet.
-        quiet = 1
-
-        global resource_list
-        resource_list = []
         self._rest_response_ = \
-            self._redfish_.get(resource_path,
+            self._redfish_.get(url,
                                valid_status_codes=[200, 404, 500])
-
-        # Return empty list.
         if self._rest_response_.status != 200:
-            return resource_list
+            return {}
+        return self._rest_response_.dict
 
-        self.walk_nested_dict(self._rest_response_.dict)
+    def walk_nested_dict(self, data, url=''):
+        r"""
+        Parse through the nested dictionary and get the resource id paths.
 
-        if not resource_list:
-            return uri_path
+        Description of argument(s):
+        data    Nested dictionary data from response message.
+        url     Resource for which the response is obtained in data
+        """
 
-        for resource in resource_list:
-            self._rest_response_ = \
-                self._redfish_.get(resource,
-                                   valid_status_codes=[200, 404, 500])
-            if self._rest_response_.status != 200:
-                continue
-            self.walk_nested_dict(self._rest_response_.dict)
-
-        resource_list.sort()
-        return resource_list
+        url = url.rstrip('/')
+        for key, value in data.items():
+            # Recursion if nested dictionary found
+            if isinstance(value, dict):
+                self.walk_nested_dict(value)
+            else:
+                # Value contains a list of dictionaries having member data
+                if 'Members' == key:
+                    if isinstance(value, list):
+                        for memberDict in value:
+                            new_resources.add(memberDict['@odata.id'])
+                if '@odata.id' == key:
+                    value = value.rstrip('/')
+                    # Data for the given url
+                    if value == url:
+                        resource_dict[url] = data
+                    # Data still needs to be looked up
+                    else:
+                        new_resources.add(value)
 
     def enumerate_request(self, resource_path):
         r"""
@@ -185,49 +186,39 @@ class bmc_redfish_utils(object):
         # Set quiet variable to keep subordinate get() calls quiet.
         quiet = 1
 
-        url_list = self.list_request(resource_path)
-
+        # Dictionary to hold enumerated data
+        global resource_dict
         resource_dict = {}
 
-        # Return empty dict.
-        if not url_list:
-            return resource_dict
+        # Set to hold newly found resources
+        global new_resources
+        new_resources = set()
+        new_resources.add(resource_path)
 
-        for resource in url_list:
-            # JsonSchemas data are not required in enumeration.
-            # Example: '/redfish/v1/JsonSchemas/' and sub resources.
-            if 'JsonSchemas' in resource:
-                continue
-            self._rest_response_ = \
-                self._redfish_.get(resource,
-                                   valid_status_codes=[200, 404, 500])
-            if self._rest_response_.status != 200:
-                continue
-            resource_dict[resource] = self._rest_response_.dict
+        # Set to hold URLS whose response is obtained
+        global old_resources
+        old_resources = set()
 
+        # Tuple to iterate over to find data
+        global resource_list
+        resource_list = (resource_path,)
+
+        while True:
+            for resource in resource_list:
+                if 'JsonSchemas' in resource:
+                    continue
+                l_response = self.get_response(resource)
+                if not(l_response):
+                    continue
+                self.walk_nested_dict(l_response, resource)
+
+            old_resources.update(set(resource_list))
+            resource_list = tuple(new_resources - old_resources)
+            print(resource_dict)
+            if not(resource_list):
+                break
         return json.dumps(resource_dict, sort_keys=True,
                           indent=4, separators=(',', ': '))
-
-    def walk_nested_dict(self, data):
-        r"""
-        Parse through the nested dictionary and get the resource id paths.
-
-        Description of argument(s):
-        data    Nested dictionary data from response message.
-        """
-
-        for key, value in data.items():
-            if isinstance(value, dict):
-                self.walk_nested_dict(value)
-            else:
-                if 'Members' == key:
-                    if isinstance(value, list):
-                        for index in value:
-                            if index['@odata.id'] not in resource_list:
-                                resource_list.append(index['@odata.id'])
-                if '@odata.id' == key:
-                    if value not in resource_list and not value.endswith('/'):
-                        resource_list.append(value)
 
     def get_key_value_nested_dict(self, data, key):
         r"""
