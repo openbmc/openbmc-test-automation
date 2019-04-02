@@ -125,7 +125,7 @@ Validate Secure Boot Setup
     Rprint Vars  secureboot_state  jumper_state
 
     Should Be True  ${secureboot_state} == True and ${jumper_state} == False
-    ...  msg=Jumper is on while secureboot is disabled.  Put the jumpers between pins 2 and 3.
+    ...  msg=Jumper is on while secureboot is disabled. Put the jumpers between pins 2 and 3.
 
 Violate Secure Boot Using Corrupt Image
     [Documentation]  Cause secure boot violation during cold boot
