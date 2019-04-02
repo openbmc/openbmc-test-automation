@@ -60,6 +60,10 @@ ${CHECK_INVENTORY}           True
 ${INV_IGNORE_LIST}           size
 ${PREV_INV_FILE_PATH}        NONE
 
+# Error log Severities to ignore when checking for eSELs.
+@{ESEL_WHITELIST}
+...  xyz.openbmc_project.Logging.Entry.Level.Informational
+
 
 *** Test Cases ***
 
@@ -208,13 +212,28 @@ Report Inventory Mismatch
 
 
 Check For ESELs
-    [Documentation]  Terminate if there is an eSEL.
+    [Documentation]  Terminate if eSELs with Severity field not on WHITELIST.
+
+    Print Timen  Checking eSEL Error Logs.
     ${error_logs}=  Get Error Logs
+
     ${num_error_logs}=  Get Length  ${error_logs}
     Rprint Vars  num_error_logs
-    Run Keyword If  ${num_error_logs} != 0  Run Keywords
-    ...  Print Error Logs  ${error_logs}
-    ...  AND  Fail  msg=Terminating run due to BMC error log(s).
+    Return From Keyword If  ${num_error_logs} == ${0}
+
+    Print Error Logs
+
+    # Get a list of the severities of the error logs.
+    ${error_log_severities}=  Nested Get  Severity  ${error_logs}
+    # Subtract the WHITELIST from the error_log_severities.
+    ${problem_error_logs}=
+    ...  Evaluate  list(set($error_log_severities) - set($ESEL_WHITELIST))
+    ${num_error_logs_not_on_whitelist}=  Get Length  ${problem_error_logs}
+
+    Return From Keyword If  ${num_error_logs_not_on_whitelist} == ${0}
+
+    Rprint Vars  ESEL_WHITELIST
+    Fail  msg=Found error logs with Severity not matching ESEL_WHITELIST.
 
 
 Loop HTX Health Check
