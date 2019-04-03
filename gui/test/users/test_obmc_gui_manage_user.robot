@@ -1,7 +1,7 @@
 *** Settings ***
 
 Documentation  Test OpenBMC GUI "Manage user account" sub-menu  of
-...  "Users".
+...            "Users".
 
 Resource        ../../lib/resource.robot
 
@@ -9,47 +9,73 @@ Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
+
 *** Variables ***
-${xpath_select_users}  //*[@id="nav__top-level"]/li[5]/button/span[1]
-${xpath_select_manage_users}  //a[@href='#/users/manage-accounts']
-${xpath_current_password}  //*[@id="user-manage__current-password"]
-${xpath_new_password}  //*[@id="user-manage__new-password"]
-${xpath_retype_new_password}  //*[@id="user-manage__verify-password"]
-${xpath_save_button}  //*[@id="user-accounts"]/section/form/div/button
+
+${xpath_input_username}               //input[@name='UserName']
+${xpath_input_password}               //input[@name='Password']
+${xpath_input_retype_password}        //input[@name='VerifyPassword']
+${xpath_input_user_role}              //select[@id='user-manage__role']
+${xpath_input_enabled_checkbox}       //input[@name='Enabled']
+${xpath_input_lockout_time}           //input[@id='lockoutTime']
+${xpath_input_failed_login_attempts}  //input[@id='lockoutThreshold']
+${xpath_select_manage_users}          //a[contains(text(), "Manage user account")]
+${xpath_select_users}                 //button[contains(@class, "users")]
+${xpath_save_setting_button}          //button[text() ="Save settings"]
+${xpath_create_user_button}           //button[text() ="Create User"]
+${xpath_edit_button}                  //button[text() ="Edit"]
+${xpath_delete_button}                //button[text() ="Delete"]
+
 
 *** Test Cases ***
-Verify Select Manage Users Account From Users
-    [Documentation]  Verify ability to select "Manage Users Account" sub-menu
-    ...  option of "Users".
-    [Tags]  Verify_Select_Manage_Users_Account_From_Users
 
-    Wait Until Page Contains  Manage user account
-    Page should contain  Change password
+Verify Existence Of All Section In User Page
+    [Documentation]  Verify existence of all sections in user page..
+    [Tags]  Verify_Existence_Of_All_Section_In_User_Page
 
-
-Verify Existence Of All Password Input Boxes
-    [Documentation]  Verify all password input boxes exists.
-    [Tags]  Verify_Existence_Of_All_Password_Input_Boxes
-
-    Page Should Contain Element  ${xpath_current_password}
-    Page Should Contain Element  ${xpath_new_password}
-    Page Should Contain Element  ${xpath_retype_new_password}
+    Page should contain  User account properties
+    Page should contain  User account information
+    Page should contain  User account settings
 
 
-Verify Existence Of Save Button
-    [Documentation]  Verify save button exists.
-    [Tags]  Verify_Existence_Of_Save_Button
+Verify Existence Of All Input Boxes In User Page
+    [Documentation]  Verify existence of all input boxes in user page.
+    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_User_Page
 
-    Page Should Contain Element  ${xpath_save_button}
+    # Input boxes under user account settings
+    Page Should Contain Element  ${xpath_input_username}
+    Page Should Contain Element  ${xpath_input_password}
+    Page Should Contain Element  ${xpath_input_retype_password}
+    Page Should Contain Element  ${xpath_input_user_role}
+    Page Should Contain Element  ${xpath_input_enabled_checkbox}
+
+    # Input boxes under user account properties
+    Page Should Contain Element  ${xpath_input_lockout_time}
+    Page Should Contain Element  ${xpath_input_failed_login_attempts}
+
+
+Verify Existence Of All Button In User Page
+    [Documentation]  Verify existence of all botton in user page.
+    [Tags]  Verify_Existence_Of_All_Button_In_User_Page
+
+    # Buttons under user account properties
+    Page Should Contain Element  ${xpath_save_setting_button}
+
+    # Buttons under user account settings
+    Page Should Contain Element  ${xpath_create_user_button}
+
+    # Buttons under user account properties
+    Page Should Contain Element  ${xpath_edit_button}
+    Page Should Contain Element  ${xpath_delete_button}
+
 
 *** Keywords ***
 
 Test Setup Execution
    [Documentation]  Do test case setup tasks.
 
-    Page Should Contain Element  ${xpath_select_users}
-    Focus  ${xpath_select_users}
     Click Element  ${xpath_select_users}
-    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+    Wait Until Page Contains Element  ${xpath_select_manage_users}
     Click Element  ${xpath_select_manage_users}
+    Wait Until Page Contains  User account information
 
