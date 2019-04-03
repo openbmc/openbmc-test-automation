@@ -145,9 +145,9 @@ default_state = DotDict([('rest', '1'),
 standby_match_state = DotDict([('rest', '^1$'),
                                ('chassis', '^Off$'),
                                ('bmc', '^Ready$'),
-                               ('boot_progress', '^$'),
-                               ('operating_system', '^$'),
-                               ('host', '^$')])
+                               ('boot_progress', '^Off|Unspecified$'),
+                               ('operating_system', '^Inactive$'),
+                               ('host', '^Off$')])
 
 # A match state for checking that the system is at "os running".
 os_running_match_state = DotDict([('chassis', '^On$'),
