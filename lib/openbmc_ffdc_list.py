@@ -107,7 +107,7 @@ ENUMERATE_LED = OPENBMC_BASE + 'led/enumerate'
 ENUMERATE_SW = OPENBMC_BASE + 'software/enumerate'
 ENUMERATE_CONTROL = OPENBMC_BASE + 'control/enumerate'
 ENUMERATE_STATE = OPENBMC_BASE + 'state/enumerate'
-ENUMERATE_OCC = OPENPOWER_BASE + 'control/enumerate'
+ENUMERATE_OCC = OPENPOWER_BASE + '/enumerate'
 ENUMERATE_DUMPS = OPENBMC_BASE + 'dumps/enumerate'
 ENUMERATE_USER = OPENBMC_BASE + 'user/enumerate'
 
