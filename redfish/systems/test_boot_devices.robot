@@ -4,10 +4,22 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/common_utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/ipmi_client.robot
 
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 Suite Teardown   Suite Teardown Execution
+
+*** Variables ***
+&{redfish_ipmi_value}  Once=Options apply to only next boot
+                  ...  Continuous=Options apply to all future boots
+                  ...  Disabled=Options apply to all future boots
+                  ...  Hdd=Force Boot from default Hard-Drive
+                  ...  Pxe=Force PXE
+                  ...  Diags=Force Boot from default Hard-Drive, request Safe-Mode
+                  ...  Cd=Force Boot from CD/DVD
+                  ...  BiosSetup=Force Boot into BIOS Setup
+                  ...  None=No override
 
 *** Test Cases ***
 
@@ -60,6 +72,7 @@ Set And Verify BootSource And BootType
     # "Diags",
     # "BiosSetup"]}
 
+    Log To Console  ${redfish_ipmi_value}
     ${data}=  Create Dictionary  BootSourceOverrideEnabled=${override_enabled}
     ...  BootSourceOverrideTarget=${override_target}
     ${payload}=  Create Dictionary  Boot=${data}
@@ -71,7 +84,10 @@ Set And Verify BootSource And BootType
     ...  ${override_enabled}
     Should Be Equal As Strings  ${resp.dict["Boot"]["BootSourceOverrideTarget"]}
     ...  ${override_target}
-
+    ${output}=  Run IPMI Standard Command  chassis bootparam get 5
+    Should Contain  ${output}  ${redfish_ipmi_value['${override_enabled}']}
+    ${output}=  Run IPMI Standard Command  chassis bootparam get 5
+    Should Contain  ${output}  ${redfish_ipmi_value['${override_target}']}
 
 Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
@@ -90,6 +106,6 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish.Logout
 
