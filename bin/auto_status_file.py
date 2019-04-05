@@ -6,6 +6,7 @@ See help text for details.
 
 import sys
 import subprocess
+import re
 
 save_path_0 = sys.path[0]
 del sys.path[0]
@@ -153,6 +154,10 @@ def validate_parms():
     if status_file_name == "":
         if prefix == "":
             prefix = command_string.split(" ")[0]
+            # File extensions (e.g. ".sh", ".py", .etc), look clumsy in
+            # status file names.
+            extension_regex = "\\.[a-zA-Z0-9]{1,3}$"
+            prefix = re.sub(extension_regex, "", prefix)
             set_pgm_arg(prefix)
         status_file_name = prefix + "." + file_date_time_stamp() + ".status"
         set_pgm_arg(status_file_name)
