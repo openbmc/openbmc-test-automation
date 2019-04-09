@@ -100,6 +100,34 @@ Attempt Login With Expired Session
     Redfish.Get  ${saved_session_info["location"]}  valid_status_codes=[${HTTP_UNAUTHORIZED}]
 
 
+Login And Verify HTTP Response Header
+    [Documentation]  Login and verify redfish HTTP response header.
+    [Tags]  Login_And_Verify_HTTP_Response_Header
+
+    # HTTP redfish response header.
+    # Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+    # X-Frame-Options: DENY
+    # Pragma: no-cache
+    # Cache-Control: no-Store,no-Cache
+    # Content-Security-Policy: default-src 'self'; img-src 'self' data:
+    # X-XSS-Protection: 1; mode=block
+    # X-Content-Type-Options: nosniff
+
+    &{header_requirements}=  Create Dictionary
+    ...  Strict-Transport-Security=max-age=31536000; includeSubdomains; preload
+    ...  X-Frame-Options=DENY
+    ...  Pragma=no-cache
+    ...  Cache-Control=no-Store,no-Cache
+    ...  Content-Security-Policy=default-src 'self'; img-src 'self' data:
+    ...  X-XSS-Protection=1; mode=block
+    ...  X-Content-Type-Options=nosniff
+
+    Redfish.Login
+    ${resp}=  Redfish.Get  /redfish/v1/SessionService/Sessions
+    ${headers_dict}=  Key Value List To Dict  ${resp.getheaders()}
+    Dictionary Should Contain Sub Dictionary   ${headers_dict}  ${header_requirements}
+
+
 *** Keywords ***
 
 Login And Verify Redfish Response
