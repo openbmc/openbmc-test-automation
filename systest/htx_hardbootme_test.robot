@@ -60,6 +60,8 @@ ${CHECK_INVENTORY}           True
 ${INV_IGNORE_LIST}           size
 ${PREV_INV_FILE_PATH}        NONE
 
+${is_redfish}                False
+
 # Error log Severities to ignore when checking for eSELs.
 @{ESEL_WHITELIST}
 ...  xyz.openbmc_project.Logging.Entry.Level.Informational
@@ -124,7 +126,10 @@ Run HTX Exerciser
     Printn
     Rpvars  loop_count  estimated_loop_time   estimated_time_remaining
 
-    REST Power On  stack_mode=skip
+    Run Keyword if  ${is_redfish}
+    ...    Redfish Power On  stack_mode=skip
+    ...  ELSE
+    ...    REST Power On  stack_mode=skip
     Run Key U  Sleep \ 15s
 
     # Post Power off and on, the OS SSH session needs to be established.
@@ -147,7 +152,10 @@ Run HTX Exerciser
     ...  Do Inventory And Compare  ${json_final_file_path}
     ...  ${PREV_INV_FILE_PATH}
 
-    Power Off Host
+    Run Keyword if  ${is_redfish}
+    ...    Redfish Power Off
+    ...  ELSE
+    ...    REST Power Off
 
     # Close all SSH and REST active sessions.
     Close All Connections
@@ -255,7 +263,14 @@ Test Setup Execution
     ${pnor_version}=  Get Host Software Objects Details
     Rpvars  pnor_version
 
-    REST Power On  stack_mode=skip
+    ${is_redfish}=  Run Keyword And Return Status  Redfish.Login
+    Set Suite Variable  ${is_redfish}  children=true
+
+    Run Keyword if  ${is_redfish}
+    ...    Redfish Power On  stack_mode=skip
+    ...  ELSE
+    ...    REST Power On  stack_mode=skip
+
     Run Key U  Sleep \ 15s
     Delete All Error Logs
     Tool Exist  htxcmdline
