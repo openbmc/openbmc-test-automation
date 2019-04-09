@@ -5,7 +5,7 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
-Test Teardown    FFDC On Test Case Fail
+#Test Teardown    FFDC On Test Case Fail
 Test Setup       Printn
 
 *** Variables ***
@@ -98,6 +98,25 @@ Attempt Login With Expired Session
     Redfish.Set Session Location  ${saved_session_info["location"]}
 
     Redfish.Get  ${saved_session_info["location"]}  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+
+Login And Verify HTTP Response Header
+    [Documentation]  Login and verify redfish HTTP response header.
+    [Tags]  Login_And_Verify_HTTP_Response_Header
+
+    # HTTP redfish response header.
+    # Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+    # X-Frame-Options: DENY
+    # Pragma: no-cache
+    # Cache-Control: no-Store,no-Cache
+    # Content-Security-Policy: default-src 'self'; img-src 'self' data:
+    # X-XSS-Protection: 1; mode=block
+    # X-Content-Type-Options: nosniff
+
+    Redfish.Login
+    ${header}=  Redfish.GetHeaders
+    Log To Console  \n ${header}
+    # Add code to check the headers
 
 
 *** Keywords ***
