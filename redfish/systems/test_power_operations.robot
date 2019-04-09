@@ -3,6 +3,7 @@ Documentation    This suite tests Redfish Host power operations.
 
 Resource         ../../lib/boot_utils.robot
 Resource         ../../lib/common_utils.robot
+Resource         ../../lib/open_power_utils.robot
 
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
@@ -20,6 +21,9 @@ Verify Redfish BMC PowerOn
     [Tags]  Verify_Redfish_Host_PowerOn
 
     Redfish Power On
+
+    # TODO: Replace OCC state check with redfish property when available.
+    Verify OCC State
 
 Verify Redfish BMC GracefulRestart
     [Documentation]  Verify Redfish host graceful restart operation.
