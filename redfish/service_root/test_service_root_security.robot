@@ -12,6 +12,14 @@ Test Setup       Printn
 
 ${LOGIN_SESSION_COUNT}   ${50}
 
+&{header_requirements}  Strict-Transport-Security=max-age=31536000; includeSubdomains; preload
+...                     X-Frame-Options=DENY
+...                     Pragma=no-cache
+...                     Cache-Control=no-Store,no-Cache
+...                     Content-Security-Policy=default-src 'self'; img-src 'self' data:
+...                     X-XSS-Protection=1; mode=block
+...                     X-Content-Type-Options=nosniff
+
 *** Test Cases ***
 
 Redfish Login With Invalid Credentials
@@ -98,6 +106,45 @@ Attempt Login With Expired Session
     Redfish.Set Session Location  ${saved_session_info["location"]}
 
     Redfish.Get  ${saved_session_info["location"]}  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+
+Login And Verify HTTP Response Header
+    [Documentation]  Login and verify redfish HTTP response header.
+    [Tags]  Login_And_Verify_HTTP_Response_Header
+
+    # Example of HTTP redfish response header.
+    # Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+    # X-Frame-Options: DENY
+    # Pragma: no-cache
+    # Cache-Control: no-Store,no-Cache
+    # Content-Security-Policy: default-src 'self'; img-src 'self' data:
+    # X-XSS-Protection: 1; mode=block
+    # X-Content-Type-Options: nosniff
+
+    Rprint Vars  1  header_requirements
+
+    Redfish.Login
+    ${resp}=  Redfish.Get  /redfish/v1/SessionService/Sessions
+
+    # The getheaders() method returns the headers as a list of tuples:
+    # headers:
+    #    [Strict-Transport-Security]:        max-age=31536000; includeSubdomains; preload
+    #    [X-Frame-Options]:                  DENY
+    #    [Pragma]:                           no-cache
+    #    [Cache-Control]:                    no-Store,no-Cache
+    #    [Content-Security-Policy]:          default-src 'self'; img-src 'self' data:
+    #    [X-XSS-Protection]:                 1; mode=block
+    #    [X-Content-Type-Options]:           nosniff
+    #    [X-UA-Compatible]:                  IE=11
+    #    [Content-Type]:                     application/json
+    #    [Server]:                           iBMC
+    #    [Date]:                             Tue, 16 Apr 2019 17:49:46 GMT
+    #    [Content-Length]:                   2177
+
+    ${headers}=  Key Value List To Dict  ${resp.getheaders()}
+    Rprint Vars  1  headers
+
+    Dictionary Should Contain Sub Dictionary   ${headers}  ${header_requirements}
 
 
 *** Keywords ***
