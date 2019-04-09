@@ -12,6 +12,14 @@ Test Setup       Printn
 
 ${LOGIN_SESSION_COUNT}   ${50}
 
+&{header_requirements}  Strict-Transport-Security=max-age=31536000; includeSubdomains; preload
+...                     X-Frame-Options=DENY
+...                     Pragma=no-cache
+...                     Cache-Control=no-Store,no-Cache
+...                     Content-Security-Policy=default-src 'self'; img-src 'self' data:
+...                     X-XSS-Protection=1; mode=block
+...                     X-Content-Type-Options=nosniff
+
 *** Test Cases ***
 
 Redfish Login With Invalid Credentials
@@ -98,6 +106,45 @@ Attempt Login With Expired Session
     Redfish.Set Session Location  ${saved_session_info["location"]}
 
     Redfish.Get  ${saved_session_info["location"]}  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+
+Login And Verify HTTP Response Header
+    [Documentation]  Login and verify redfish HTTP response header.
+    [Tags]  Login_And_Verify_HTTP_Response_Header
+
+    # Example of HTTP redfish response header.
+    # Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+    # X-Frame-Options: DENY
+    # Pragma: no-cache
+    # Cache-Control: no-Store,no-Cache
+    # Content-Security-Policy: default-src 'self'; img-src 'self' data:
+    # X-XSS-Protection: 1; mode=block
+    # X-Content-Type-Options: nosniff
+
+    Rprint Vars  header_requirements
+
+    Redfish.Login
+    ${resp}=  Redfish.Get  /redfish/v1/SessionService/Sessions
+
+    # The getheaders() method returns the headers as a list of tuples:
+    # headers_dict:
+    #    headers_dict[Strict-Transport-Security]:        max-age=31536000; includeSubdomains; preload
+    #    headers_dict[X-Frame-Options]:                  DENY
+    #    headers_dict[Pragma]:                           no-cache
+    #    headers_dict[Cache-Control]:                    no-Store,no-Cache
+    #    headers_dict[Content-Security-Policy]:          default-src 'self'; img-src 'self' data:
+    #    headers_dict[X-XSS-Protection]:                 1; mode=block
+    #    headers_dict[X-Content-Type-Options]:           nosniff
+    #    headers_dict[X-UA-Compatible]:                  IE=11
+    #    headers_dict[Content-Type]:                     application/json
+    #    headers_dict[Server]:                           iBMC
+    #    headers_dict[Date]:                             Tue, 16 Apr 2019 17:49:46 GMT
+    #    headers_dict[Content-Length]:                   2177
+
+    ${headers_dict}=  Key Value List To Dict  ${resp.getheaders()}
+    Rprint Vars  headers_dict
+
+    Dictionary Should Contain Sub Dictionary   ${headers_dict}  ${header_requirements}
 
 
 *** Keywords ***
