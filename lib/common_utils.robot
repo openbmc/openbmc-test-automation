@@ -531,6 +531,7 @@ BMC CPU Performance Check
     ${bmc_cpu_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${bmc_cpu_usage_cmd}
     ${bmc_cpu_percentage}=  Fetch From Left  ${bmc_cpu_usage_output}  %
+    Rprint Vars  bmc_cpu_percentage
     Should be true  ${bmc_cpu_percentage} < 90
 
 
@@ -551,6 +552,7 @@ BMC Mem Performance Check
     ${bmc_mem_percentage}=  Evaluate  ${bmc_mem_free_output}*100
     ${bmc_mem_percentage}=  Evaluate
     ...   ${bmc_mem_percentage}/${bmc_mem_total_output}
+    Rprint Vars  bmc_mem_percentage
     Should be true  ${bmc_mem_percentage} > 10
 
 
@@ -565,14 +567,18 @@ BMC File System Usage Check
     # /dev/ubiblock8_4     21.1M     21.1M       0 100% /media/pnor-ro-cecc64c4
     ${bmc_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${bmc_file_system_usage_cmd}
+    Rprint Vars  bmc_fs_usage_output
     ${bmc_pnor_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${total_pnor_ro_file_system_cmd}
+    Rprint Vars  bmc_pnor_fs_usage_output
     ${bmc_bmc_fs_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${total_bmc_ro_file_system_cmd}
+    Rprint Vars  bmc_bmc_fs_usage_output
     ${total_bmc_pnor_image}=  Evaluate
     ...  ${bmc_pnor_fs_usage_output}+${bmc_bmc_fs_usage_output}
     # Considering /dev/root also in total 100% used file system
     ${total_full_fs}=  Evaluate  ${total_bmc_pnor_image}+1
+    Rprint Vars  total_full_fs
     Should Be True  ${bmc_fs_usage_output}==${total_full_fs}
 
 
