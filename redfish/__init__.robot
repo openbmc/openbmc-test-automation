@@ -11,5 +11,7 @@ Get System Environment
     [Documentation]  System environment details.
 
     Run Keyword And Ignore Error  Get BMC PNOR Version
+    # Run Keyword  Check BMC Performance
+    Check BMC Performance
 
 

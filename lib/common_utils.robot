@@ -531,6 +531,7 @@ BMC CPU Performance Check
     ${bmc_cpu_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${bmc_cpu_usage_cmd}
     ${bmc_cpu_percentage}=  Fetch From Left  ${bmc_cpu_usage_output}  %
+    Rprint Vars  bmc_cpu_percentage
     Should be true  ${bmc_cpu_percentage} < 90
 
 
@@ -551,6 +552,7 @@ BMC Mem Performance Check
     ${bmc_mem_percentage}=  Evaluate  ${bmc_mem_free_output}*100
     ${bmc_mem_percentage}=  Evaluate
     ...   ${bmc_mem_percentage}/${bmc_mem_total_output}
+    Rprint Vars  bmc_mem_percentage
     Should be true  ${bmc_mem_percentage} > 10
 
 
@@ -573,6 +575,8 @@ BMC File System Usage Check
     ...  ${bmc_pnor_fs_usage_output}+${bmc_bmc_fs_usage_output}
     # Considering /dev/root also in total 100% used file system
     ${total_full_fs}=  Evaluate  ${total_bmc_pnor_image}+1
+    Rprint Vars  bmc_fs_usage_output  bmc_pnor_fs_usage_output  bmc_bmc_fs_usage_output
+    ...  total_full_fs
     Should Be True  ${bmc_fs_usage_output}==${total_full_fs}
 
 
