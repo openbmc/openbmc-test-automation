@@ -63,3 +63,27 @@ Verify Supported Modes Available
 
     ${supported}=  Read Attribute  ${CONTROL_URI}thermal/0  supported
     Rprint Vars  supported
+
+
+Switch To Custom Mode If Available
+    [Documentation]  Check if custom mode available and switch.
+    [Tags]  Switch_To_Custom_Mode_If_Available
+
+    ${supported}=  Read Attribute  ${CONTROL_URI}thermal/0  supported
+
+    :FOR  ${mode}  IN  @{supported}
+    \  Should Match Regexp   ${mode}  [Custom]*
+
+    ${value_dict}=  Create Dictionary  data=${mode}
+    ${resp}=  OpenBMC Put Request
+    ...  ${CONTROL_URI}thermal/0/attr/Current  data=${value_dict}
+
+    ${current}=  Read Attribute  ${CONTROL_URI}thermal/0  current
+    Rprint Vars  current
+
+    Smart Power Off
+
+    REST Power On  stack_mode=skip
+
+    ${current}=  Read Attribute  ${CONTROL_URI}thermal/0  current
+    Should Be Equal As Strings  ${current}  ${mode}  msg=${current} mode did not remain set after OS ReIPL.
