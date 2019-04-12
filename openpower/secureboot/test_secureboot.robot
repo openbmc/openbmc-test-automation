@@ -14,6 +14,11 @@ Documentation  Secure boot related test cases.
 # HBBL: Bostboot Base loader
 # SBE:  Self Boot Engine
 # OCC:  On Chip Controller
+# PAYLOAD : OPAL Partition
+# HCODE : Hardware Code
+# BOOTKERNEL : OPAL Boot Kernel
+# WOFDATA : Workload Optimized Frequency Data
+# MEMD  : Memory VPD
 
 Resource          ../../lib/utils.robot
 Resource          ../../lib/state_manager.robot
@@ -36,11 +41,12 @@ ${security_access_bit_mask}  ${0xC000000000000000}
 # TODO: will enable this in next commit
 #${pnor_corruption_rc}        SECUREBOOT::RC_ROM_VERIFY
 ${pnor_corruption_rc}        0x1E07
+${bootkernel_corruption_rc}  log=0xffffffffffff8160
 ${bmc_image_dir_path}        /usr/local/share/pnor
 ${bmc_guard_part_path}       /var/lib/phosphor-software-manager/pnor/prsv/GUARD
 ${HB_PART_LIST}              [HBB, HBD, HBI, HBRT, HBBL]
-${NON_HB_PART_LIST}          [SBE, OCC]
-${MIXED_PART_LIST}           [SBE, HBD, OCC, HBRT, HBBL]
+${NON_HB_PART_LIST}          [SBE, OCC, HCODE, WOFDATA, MEMD, PAYLOAD]
+${MIXED_PART_LIST}           [SBE, HBD, OCC, HBRT, HBBL, HCODE, WOFDATA, MEMD, PAYLOAD]
 
 *** Test Cases ***
 
@@ -83,6 +89,7 @@ Secure Boot Violation Using Corrupt HBB Image On Cold Boot
     Violate Secure Boot Using Corrupt Image
     ...  HBB  ${pnor_corruption_rc}  ${bmc_image_dir_path}
 
+
 Secure Boot Violation Using Corrupt HBBL Image On Cold Boot
     [Documentation]  Secure boot violation using corrupt HBBL image on cold boot.
     [Tags]  Secure_Boot_Violation_Using_Corrupt_HBBL_Image_On_Cold_Boot
@@ -113,6 +120,47 @@ Secure Boot Violation Using Corrupt OCC Image On Cold Boot
 
     Violate Secure Boot Using Corrupt Image
     ...  OCC  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+
+
+Secure Boot Violation Using Corrupt HCODE Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt HCODE image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_HCODE_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  HCODE  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+
+
+Secure Boot Violation Using Corrupt WOFDATA Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt HCODE image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_WOFDATA_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  WOFDATA  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+
+
+Secure Boot Violation Using Corrupt BOOTKERNEL Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt BOOTKERNEL image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_BOOTKERNEL_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  BOOTKERNEL  ${bootkernel_corruption_rc}  ${bmc_image_dir_path}
+
+
+Secure Boot Violation Using Corrupt MEMD Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt MEMD image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_MEMD_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  MEMD  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+
+
+Secure Boot Violation Using Corrupt PAYLOAD Image On Cold Boot
+    [Documentation]  Secure boot violation using corrupt PAYLOAD image on cold boot.
+    [Tags]  Secure_Boot_Violation_Using_Corrupt_PAYLOAD_Image_On_Cold_Boot
+
+    Violate Secure Boot Using Corrupt Image
+    ...  PAYLOAD  ${pnor_corruption_rc}  ${bmc_image_dir_path}
+
 
 *** Keywords ***
 
@@ -152,7 +200,10 @@ Violate Secure Boot Using Corrupt Image
     # Load corrupted image to /usr/local/share/pnor.
     Open Connection For SCP
 
-    scp.Put File
+    # Some times it is observed that bigger size files doesn't get copied.
+    # Our intention here is to test bad image. Even if it is truncated/partial,
+    # that should be fine
+    Run Keyword And Ignore Error  scp.Put File
     ...  ${ENV_SB_CORRUPTED_BIN_PATH}/${partition}  ${bmc_image_dir_path}
 
     ${error_log_path}=  Catenate  ${SB_LOG_DIR_PATH}/partition-corruption
@@ -180,6 +231,10 @@ Violate Secure Boot Using Corrupt Image
     ...    Get And Verify Partition Corruption  ${partition}  ${sol_log_file_path}
     ...  ELSE IF  '${partition}' in '${HB_PART_LIST}'
     ...    Log To Console  ${partition} corrupted, Going to quiesced state.
+    # If the partition corrupted is BOOTKERNEL then, host will not reach quisced.
+    # It will keep rebooting in loop for ever.
+    ...  ELSE IF  '${partition}' == 'BOOTKERNEL'
+    ...    Log To Console  ${partition} corrupted, It will keep rebooting in loop.
 
     # Remove the file from /usr/local/share/pnor/.
     BMC Execute Command  rm -rf ${bmc_image_dir_path}*
@@ -262,6 +317,9 @@ Get And Verify Partition Corruption
     #  14.99659|  ROM_verify() Call Failed
     #  14.99659|  ModuleId   0x03 SECUREBOOT::MOD_SECURE_ROM_VERIFY
     #  14.99660|  ReasonCode 0x1e07 SECUREBOOT::RC_ROM_VERIFY
+    #                               OR
+    #  113.150162849,0] STB: BOOTKERNEL verification FAILED. log=0xffffffffffff8160
+    #
 
     ${cmd}=   Run Keyword If  '${partition}' in '${MIXED_PART_LIST}'
     ...  Catenate
@@ -269,6 +327,9 @@ Get And Verify Partition Corruption
     ...  ELSE IF  '${partition}' == 'HBI'
     ...  Catenate
     ...  grep -i "ReasonCode"  ${sol_log_file_path} | awk '{ print $3 }'
+    ...  ELSE IF  '{$partition}' == 'BOOTKERNEL'
+    ...  Catenate
+    ...  grep -i "STB: BOOTKERNEL verification FAILED"  ${sol_log_file_path} | awk '{ print $7}'
 
     ${rc}  ${corruption_rc_str}=  Run and Return RC and Output  ${cmd}
     Should Be Equal  ${rc}  ${0}
