@@ -223,7 +223,7 @@ Check For ESELs
     Rprint Vars  num_error_logs
     Return From Keyword If  ${num_error_logs} == ${0}
 
-    Print Error Logs
+    Print Error Logs  ${error_logs}
 
     # Get a list of the severities of the error logs.
     ${error_log_severities}=  Nested Get  Severity  ${error_logs}
