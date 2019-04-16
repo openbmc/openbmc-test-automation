@@ -6,12 +6,17 @@ Resource       ../../lib/bmc_redfish_resource.robot
 Resource       ../../lib/bmc_network_utils.robot
 Resource       ../../lib/openbmc_ffdc.robot
 Library        ../../lib/bmc_network_utils.py
+Library        Collections
 
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
 
 *** Variables ***
-${test_hostname}  openbmc
+${test_hostname}           openbmc
+${test_ipv4_addr}          10.7.7.7
+${test_ipv4_invalid_addr}  0.0.1.a
+${test_subnet_mask}        255.255.0.0
+${test_gateway}            10.7.7.1
 
 *** Test Cases ***
 
@@ -67,6 +72,21 @@ Configure Hostname And Verify
     Configure Hostname  ${test_hostname}
 
     Validate Hostname On BMC  ${test_hostname}
+
+Add Valid IPv4 Address And Verify
+    [Documentation]  Add IPv4 Address via Redfish and verify.
+    [Tags]  Add_Valid_IPv4_Addres_And_Verify
+
+     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+     Delete IP Address  ${test_ipv4_addr}
+
+Add Invalid IPv4 Address And Verify
+    [Documentation]  Add Invalid IPv4 Address via Redfish and verify.
+    [Tags]  Add_Invalid_IPv4_Addres_And_Verify
+
+    Add IP Address  ${test_ipv4_invalid_addr}  ${test_subnet_mask}
+    ...  ${test_gateway}  valid_status_codes=${HTTP_BAD_REQUEST}
+
 
 *** Keywords ***
 
@@ -124,12 +144,108 @@ Verify IP On BMC
     [Documentation]  Verify IP on BMC.
     [Arguments]  ${ip}
 
-    # Description of the argument(s):
-    # ip  IP address to be verified.
+    # Description of argument(s):
+    # ip  IP address to be verified (e.g. "10.7.7.7").
 
     # Get IP address details on BMC using IP command.
     @{ip_data}=  Get BMC IP Info
     Should Contain Match  ${ip_data}  ${ip}/*
+    ...  msg=IP address does not exist.
+
+Add IP Address
+    [Documentation]  Add IP Address To BMC.
+    [Arguments]  ${ip}  ${subnet_mask}  ${gateway}
+    ...  ${valid_status_codes}=${HTTP_OK}
+
+    # Description of argument(s):
+    # ip                  IP address to be added (e.g. "10.7.7.7").
+    # subnet_mask         Subnet mask for the IP to be added
+    #                     (e.g. "255.255.0.0").
+    # gateway             Gateway for the IP to be added (e.g. "10.7.7.1").
+    # valid_status_codes  Expected return code from patch operation
+    #                     (e.g. "200").  See prolog of rest_request
+    #                     method in redfish_plut.py for details.
+
+    ${empty_dict}=  Create Dictionary
+    ${ip_data}=  Create Dictionary  Address=${ip}
+    ...  AddressOrigin=Static  SubnetMask=${subnet_mask}
+    ...  Gateway=${gateway}
+
+    ${patch_list}=  Create List
+    ${network_configurations}=  Get Network Configuration
+    ${num_entries}=  Get Length  ${network_configurations}
+
+    : FOR  ${INDEX}  IN RANGE  0  ${num_entries}
+    \  Append To List  ${patch_list}  ${empty_dict}
+
+    # We need not check for existance of IP on BMC while adding.
+    Append To List  ${patch_list}  ${ip_data}
+    ${data}=  Create Dictionary  IPv4Addresses=${patch_list}
+
+    Redfish.patch  ${REDFISH_NW_ETH0_URI}  body=&{data}
+    ...  valid_status_codes=[${valid_status_codes}]
+
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    ${add_status}=  Run Keyword And Return Status  Verify IP On BMC  ${ip}
+    Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
+    ...  Should Be True  ${add_status} == ${True}
+    ...  ELSE  Should Be True  ${add_status} == ${False}
+
+    Validate Network Config On BMC
+
+
+Delete IP Address
+    [Documentation]  Delete IP Address Of BMC.
+    [Arguments]  ${ip}  ${valid_status_codes}=${HTTP_OK}
+
+    # Description of argument(s):
+    # ip                  IP address to be deleted (e.g. "10.7.7.7").
+    # valid_status_codes  Expected return code from patch operation
+    #                     (e.g. "200").  See prolog of rest_request
+    #                     method in redfish_plut.py for details.
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+
+    @{network_configurations}=  Get Network Configuration
+    : FOR  ${network_configuration}  IN  @{network_configurations}
+    \  Run Keyword If  '${network_configuration['Address']}' == '${ip}'
+       ...  Append To List  ${patch_list}  ${null}
+       ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
+
+    ${ip_found}=  Run Keyword And Return Status  List Should Contain Value
+    ...  ${patch_list}  ${null}  msg=${ip} does not exist on BMC
+    Pass Execution If  ${ip_found} == ${False}  ${ip} does not exist on BMC
+
+    # Run patch command only if given IP is found on BMC
+    ${data}=  Create Dictionary  IPv4Addresses=${patch_list}
+
+    Redfish.patch  ${REDFISH_NW_ETH0_URI}  body=&{data}
+    ...  valid_status_codes=[${valid_status_codes}]
+
+    # Note: Network restart takes around 15-18s after patch request processing
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    ${delete_status}=  Run Keyword And Return Status  Verify IP On BMC  ${ip}
+    Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
+    ...  Should Be True  ${delete_status} == ${False}
+    ...  ELSE  Should Be True  ${delete_status} == ${True}
+
+    Validate Network Config On BMC
+
+
+Validate Network Config On BMC
+    [Documentation]  Check that network info obtained via redfish matches info
+    ...              obtained via CLI.
+
+    @{network_configurations}=  Get Network Configuration
+    ${ip_data}=  Get BMC IP Info
+    : FOR  ${network_configuration}  IN  @{network_configurations}
+    \  Should Contain Match  ${ip_data}  ${network_configuration['Address']}/*
     ...  msg=IP address does not exist.
 
 
