@@ -6,6 +6,7 @@ Resource       ../../lib/bmc_redfish_resource.robot
 Resource       ../../lib/bmc_network_utils.robot
 Resource       ../../lib/openbmc_ffdc.robot
 Library        ../../lib/bmc_network_utils.py
+Library        Collections
 
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
@@ -67,6 +68,13 @@ Configure Hostname And Verify
     Configure Hostname  ${test_hostname}
 
     Validate Hostname On BMC  ${test_hostname}
+
+Add IPv4 Address And Verify
+    [Documentation]  Add IPv4 address via Redfish and verify.
+    [Tags]  Add_IPv4_Address_And_Verify
+
+    Add IPv4 Address  ${BMC_TEST_IPv4_ADDR}
+    Delete IPv4 Address  ${BMC_TEST_IPv4_ADDR}
 
 *** Keywords ***
 
@@ -132,6 +140,45 @@ Verify IP On BMC
     Should Contain Match  ${ip_data}  ${ip}/*
     ...  msg=IP address does not exist.
 
+Verify No IP On BMC
+    [Documentation]  Verify given IP is not set on BMC.
+    [Arguments]  ${ip}
+
+    # Description of the argument(s):
+    # ip  IP address to be verified.
+
+    # Get IP address details on BMC using IP command.
+    @{ip_data}=  Get BMC IP Info
+    Should Not Contain Match  ${ip_data}  ${ip}/*
+    ...  msg=IP address still exists.
+
+
+Add IPv4 Address
+
+    [Documentation]  Add IPv4 Address To BMC.
+    [Arguments]  ${ip}
+
+    ${empty_dict}=  Create Dictionary
+    ${ip_data}=  Create Dictionary  Address=${BMC_TEST_IPv4_ADDR}
+    ...  AddressOrigin=Static  SubnetMask=${BMC_TEST_SUBNET_MASK}
+    ...  Gateway=${BMC_TEST_GATEWAY}
+    ${list}=  Create List  ${empty_dict}  ${empty_dict}  ${ip_data}
+    ${data}=  Create Dictionary  IPv4Addresses=${list}
+    
+    Redfish.patch  ${REDFISH_NW_ETH0_URI}  body=&{data}
+
+
+Delete IPv4 Address
+    [Documentation]  Delete IPv4 Address Of BMC.
+    [Arguments]  ${ip}
+
+    ${empty_dict}=  Create Dictionary
+    ${list}=  Create List  ${null}  ${empty_dict}  ${empty_dict}
+    Log To Console  ${list}
+    ${data}=  Create Dictionary  IPv4Addresses=${list}
+    Redfish.patch  ${REDFISH_NW_ETH0_URI}  body=&{data}
+ 
+    
 
 Verify Netmask On BMC
     [Documentation]  Verify netmask on BMC.
@@ -203,5 +250,5 @@ Validate Hostname On BMC
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
-    FFDC On Test Case Fail
+   # FFDC On Test Case Fail
     Redfish.Logout
