@@ -6,12 +6,17 @@ Resource       ../../lib/bmc_redfish_resource.robot
 Resource       ../../lib/bmc_network_utils.robot
 Resource       ../../lib/openbmc_ffdc.robot
 Library        ../../lib/bmc_network_utils.py
+Library        Collections
 
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
 
 *** Variables ***
 ${test_hostname}  openbmc
+${test_ipv4_addr}  10.7.7.7
+${test_ipv4_invalid_addr}  0.0.1.a
+${test_subnet_mask}  255.255.0.0
+${test_gateway}  10.7.7.1
 
 *** Test Cases ***
 
@@ -67,6 +72,21 @@ Configure Hostname And Verify
     Configure Hostname  ${test_hostname}
 
     Validate Hostname On BMC  ${test_hostname}
+
+Add Valid IPv4Address And Verify
+    [Documentation]  Add IPv4Address via Redfish and verify.
+    [Tags]  Add_IPv4Addres_And_Verify
+
+     Add IPv4Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+     Delete IPv4Address  ${test_ipv4_addr}
+
+Add Invalid IPv4Address And Verify
+    [Documentation]  Add IPv4Address via Redfish and verify.
+    [Tags]  Add_IPv4Addres_And_Verify
+
+    Add IPv4Address  ${test_ipv4_invalid_addr}  ${test_subnet_mask}
+    ...  ${test_gateway}  expected_status=${HTTP_BAD_REQUEST}
+
 
 *** Keywords ***
 
@@ -132,6 +152,104 @@ Verify IP On BMC
     Should Contain Match  ${ip_data}  ${ip}/*
     ...  msg=IP address does not exist.
 
+Verify No IP On BMC
+    [Documentation]  Verify given IP is not set on BMC.
+    [Arguments]  ${ip}
+
+    # Description of the argument(s):
+    # ip  IP address to be verified.
+
+    # Get IP address details on BMC using IP command.
+    @{ip_data}=  Get BMC IP Info
+    Should Not Contain Match  ${ip_data}  ${ip}/*
+    ...  msg=IP address still exists.
+
+Add IPv4Address
+    [Documentation]  Add IPv4Address To BMC.
+    [Arguments]  ${ip}  ${subnet_mask}  ${gateway}
+    ...  ${expected_status}=${HTTP_OK}
+
+    # Description of the argument(s):
+    # ip  IP address to be added.
+    # subnet_mask  Subnet mask for the IP to be added
+    # gateway  Gateway for the IP to be added
+    # expected_status  Expected return code from patch operation
+
+    Should Not Be Empty  ${ip}
+    Should Not Be Empty  ${subnet_mask}
+
+    ${empty_dict}=  Create Dictionary
+    ${ip_data}=  Create Dictionary  Address=${ip}
+    ...  AddressOrigin=Static  SubnetMask=${subnet_mask}
+    ...  Gateway=${gateway}
+    ${patch_list}=  Create List  ${empty_dict}  ${empty_dict}  ${ip_data}
+    ${status}=  Run Keyword And Return Status  Patch An Element  IPv4Addresses
+    ...  ${patch_list}  ${REDFISH_NW_ETH0_URI}  ${expected_status}
+
+    # Note: Modification to network config takes time to reflect on CLI
+    Run Keyword If  '${expected_status}' == ${HTTP_OK}
+    ...  Wait Until Keyword Succeeds  2min  10sec  Verify IP On BMC  ${ip}
+    ...  ELSE  Wait Until Keyword Succeeds  2min  10sec
+    ...  Verify No IP On BMC  ${ip}
+
+    Should Be True  '${status} == 'True'    
+    Validate Network Config On BMC
+
+Delete IPv4Address
+    [Documentation]  Delete IPv4Address Of BMC.
+    [Arguments]  ${ip}  ${expected_status}=${HTTP_OK}
+
+    # Description of the argument(s):
+    # ip  IP address to be deleted.
+    # expected_status  Expected return code from patch operation
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    ${ip_found}=  Set Variable  False
+    
+    @{network_configurations}=  Get Network Configuration
+    
+    : FOR  ${network_configuration}  IN  @{network_configurations}
+    \    ${ip_found}=  Set Variable If
+         ...  '${network_configuration['Address']}' == '${ip}'  True
+    \    Run Keyword If  '${ip_found}' == 'True'
+         ...  Append To List  ${patch_list}  ${null}
+    \    ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
+
+    # Run patch command only if given IP is found on BMC
+    # Modification to network config takes time to reflect on CLI
+    # So, Wait Until Keyword Succeeds is used
+    Run Keyword If  '${ip_found}' == 'True'
+    ...  Run Keywords
+    ...  Patch An Element  IPv4Addresses  ${patch_list}  ${REDFISH_NW_ETH0_URI}
+    ...  ${expected_status}  AND
+    ...  Wait Until Keyword Succeeds  2min  10sec  Verify No IP On BMC  ${ip}
+    ...  AND  Validate Network Config On BMC
+
+Patch An Element
+    [Documentation]  Patch Operation on some element Of BMC.
+    [Arguments]  ${patch_elem}  ${patch_list}  ${patch_uri}
+    ...  ${expected_status}=${HTTP_OK}
+
+    # Description of the argument(s):
+    # patch_elem  Element name for which patch request has come
+    # patch_list  List of items to be patched for patch_elem
+    # patch_uri   URI for patch operation
+    # expected_status  Expected return code from patch operation
+
+    ${data}=  Create Dictionary  ${patch_elem}=${patch_list}
+    Redfish.patch  ${patch_uri}  body=&{data}
+    ...  valid_status_codes=[${expected_status}]
+
+Validate Network Config On BMC
+    [Documentation]  Network config from CLI and Redfish should match
+
+    @{network_configurations}=  Get Network Configuration
+
+    # Note: Network configs need some settling period after IP modification
+    : FOR  ${network_configuration}  IN  @{network_configurations}
+    \  Wait Until Keyword Succeeds  2min  10sec
+    ...  Verify IP On BMC  ${network_configuration['Address']}
 
 Verify Netmask On BMC
     [Documentation]  Verify netmask on BMC.
