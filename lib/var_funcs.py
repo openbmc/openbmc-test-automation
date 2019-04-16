@@ -272,7 +272,8 @@ def key_value_list_to_dict(list,
                            process_indent=0,
                            **args):
     r"""
-    Convert a list containing key/value strings to a dictionary and return it.
+    Convert a list containing key/value strings or tuples to a dictionary and
+    return it.
 
     See docstring of parse_key_value function for details on key/value strings.
 
@@ -299,6 +300,24 @@ def key_value_list_to_dict(list,
       [power_limit]:                0 Watts
       [correction_time]:            0 milliseconds
       [sampling_period]:            0 seconds
+
+    For the following list:
+
+    headers:
+      headers[0]:
+        headers[0][0]:           content-length
+        headers[0][1]:           559
+      headers[1]:
+        headers[1][0]:           x-xss-protection
+        headers[1][1]:           1; mode=block
+
+    headers_dict = key_value_list_to_dict(headers)
+
+    The resulting headers_dict would look like this:
+
+    headers_dict:
+      [content-length]:          559
+      [x-xss-protection]:        1; mode=block
 
     Another example containing a sub-list (see process_indent description
     below):
@@ -346,7 +365,10 @@ def key_value_list_to_dict(list,
 
     if not process_indent:
         for entry in list:
-            key, value = parse_key_value(entry, **args)
+            if type(entry) is tuple:
+                key, value = entry
+            else:
+                key, value = parse_key_value(entry, **args)
             result_dict[key] = value
         return result_dict
 
