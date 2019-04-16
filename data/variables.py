@@ -143,7 +143,7 @@ ACTIVATION_DIR_PATH = "/etc/activationdata/"
 REDFISH_BASE_URI = '/redfish/v1/'
 REDFISH_SESSION = REDFISH_BASE_URI + 'SessionService/Sessions'
 REDFISH_SESSION_URI = 'SessionService/Sessions/'
-REDFISH_NW_ETH0 = 'Managers/bmc/EthernetInterfaces/eth0/'
+REDFISH_NW_ETH0 = 'Managers/bmc/EthernetInterfaces/eth0'
 REDFISH_NW_ETH0_URI = REDFISH_BASE_URI + REDFISH_NW_ETH0
 REDFISH_NW_PROTOCOL = 'Managers/bmc/NetworkProtocol'
 REDFISH_NW_PROTOCOL_URI = REDFISH_BASE_URI + REDFISH_NW_PROTOCOL
@@ -341,3 +341,7 @@ INVENTORY_ITEMS = {
         "version",
     ],
 }
+
+BMC_TEST_IPv4_ADDR = '10.7.7.7'
+BMC_TEST_SUBNET_MASK = '255.255.0.0'
+BMC_TEST_GATEWAY = '10.7.7.1'
