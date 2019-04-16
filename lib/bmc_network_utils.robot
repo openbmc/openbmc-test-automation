@@ -132,17 +132,11 @@ Get BMC MAC Address List
 Get BMC Hostname
     [Documentation]  Get BMC hostname.
 
-    # Sample output of  "hostnamectl":
-    #   Static hostname: xxyyxxyyxx
-    #         Icon name: computer
-    #        Machine ID: 6939927dc0db409ea09289d5b56eef08
-    #           Boot ID: bb806955fd904d47b6aa4bc7c34df482
-    #  Operating System: Phosphor OpenBMC (xxx xx xx) v1.xx.x-xx
-    #            Kernel: Linux 4.10.17-d6ae40dc4c4dff3265cc254d404ed6b03fcc2206
-    #      Architecture: arm
+    # Sample output of  "hostname":
+    # test_hostname
 
     ${output}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  hostnamectl | grep hostname | cut -f 2 -d : | sed -re 's/ //g'
+    ...  hostname
 
     [Return]  ${output}
 
