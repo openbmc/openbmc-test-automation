@@ -92,6 +92,29 @@ Verify Launching Of Serial Over LAN Console At OBMC Power Off State
 
 # OpenBMC @ Power Running state test cases.
 
+Verify BMC Information
+    [Documentation]  Get BMC hostname, version, IP, and MAC address via GUI and verify using REST
+    [Tags]  Verify_BMC_Information
+
+    Select Server Overview Menu
+
+    ${hostname}=  Get BMC Hostname
+    ${hostname}=  Remove String  ${hostname}  '
+    ${hostname}=  Fetch From Right  ${hostname}  :
+    Verify Display Content  ${hostname}
+
+    ${version}=  Get BMC Version
+    ${version}=  Remove String  ${version}  "
+    Verify Display Content  ${version}
+
+    ${iplist}=  Get BMC IP Info
+    :FOR  ${ip}  IN  @{iplist}
+    \  ${ip}=  Fetch From Left  ${ip}  /
+    \  Verify Display Content  ${ip}
+
+    ${mac}=  Get BMC MAC Address
+    Verify Display Content  ${mac}
+
 Verify High Priority Events Can Be Operated At OBMC Power Running State
     [Documentation]  Will open the "High Priority Events"
     ...  menu to view and operate.
