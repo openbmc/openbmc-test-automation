@@ -96,7 +96,7 @@ Verify Boxelder MAC Address Property Is Populated
 
     # eth0      Link encap:Ethernet  HWaddr 70:E2:84:14:23:F9
     ${mac_addr}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  /sbin/ifconfig -a | grep HWaddr | awk -F'HWaddr ' '{print $2}'
+    ...  /sbin/ifconfig -a | grep eth0 | grep HWaddr | awk -F'HWaddr ' '{print $2}'
     ...  return_stderr=True
     Should Be Empty  ${stderr}
     Should Be Equal As Strings  ${json_data["data"]["MACAddress"]}
