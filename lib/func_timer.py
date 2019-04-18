@@ -86,11 +86,13 @@ class func_timer_class:
         try:
             gp.lprint_executing()
             gp.lprint_var(self.__child_pid)
-        except (AttributeError, KeyError):
+        except (AttributeError, KeyError, TypeError):
             # NOTE: In python 3, this code fails with "KeyError:
             # ('__main__',)" when calling functions like lprint_executing that
             # use inspect.stack() during object destruction.  No fixes found
-            # so tolerating the error.
+            # so tolerating the error.  In python 2.x, it may fail with
+            # TypeError.  This seems to happen when cleaning up after an
+            # exception was raised.
             pass
 
         # If self.__child_pid is 0, then we are either running as the child
