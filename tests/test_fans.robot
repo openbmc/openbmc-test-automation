@@ -13,6 +13,7 @@ Resource         ../lib/state_manager.robot
 Resource         ../lib/fan_utils.robot
 Resource         ../lib/openbmc_ffdc.robot
 
+Suite Setup      Suite Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
 
@@ -40,3 +41,13 @@ Fan Base Check Number Of Fan Monitors
 
     ${power_state}=  Get Chassis Power State
     Verify Fan Monitors With State  ${power_state}
+
+
+*** Keywords ***
+
+Suite Setup Execution
+    [Documentation]  Do the suite setup.
+
+    ${is_redfish}=  Run Keyword And Return Status  Redfish.Login
+    ${rest_keyword}=  Set Variable If  ${is_redfish}  Redfish  REST
+    Run Keyword  ${rest_keyword} Power On  stack_mode=skip
