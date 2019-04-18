@@ -398,8 +398,10 @@ def compose_plug_in_save_dir_path(plug_in_package_name=None):
 
 def create_plug_in_save_dir(plug_in_package_name=None):
     r"""
-    Create a directory suitable for saving plug-in processing data.  See
-    compose_plug_in_save_dir_path for details.
+    Create a directory suitable for saving plug-in processing data and return
+    its path name.
+
+    See compose_plug_in_save_dir_path for details.
 
     Description of argument(s):
     plug_in_package_name            See compose_plug_in_save_dir_path for
