@@ -13,8 +13,8 @@ Resource         ../lib/state_manager.robot
 Resource         ../lib/fan_utils.robot
 Resource         ../lib/openbmc_ffdc.robot
 
+Suite Setup      Suite Setup Execution
 Test Teardown    FFDC On Test Case Fail
-
 
 *** Test Cases ***
 
@@ -22,16 +22,12 @@ Fan Base Check Number Of Fans
     [Documentation]  Verify minimum number of fans.
     [Tags]  Fan_Base_Check_Number_Of_Fans
 
-    @{fan_names}  Create List
-    # Populate the list with the names of fans in the system.
-    ${fan_names}=  Get Fan Names  ${fan_names}
-    ${number_of_fans}=  Get Length  ${fan_names}
-
     # Determine if system is water cooled.
-    ${water_coooled}=  Is Water Cooled
+    ${water_cooled}=  Is Water Cooled
+    Rprint Vars  water_cooled
 
     Verify Minimum Number Of Fans With Cooling Type  ${number_of_fans}
-    ...  ${water_coooled}
+    ...  ${water_cooled}
 
 
 Fan Base Check Number Of Fan Monitors
@@ -40,3 +36,9 @@ Fan Base Check Number Of Fan Monitors
 
     ${power_state}=  Get Chassis Power State
     Verify Fan Monitors With State  ${power_state}
+
+*** Keywords ***
+
+Suite Setup Execution
+    ${number_of_fans}  ${fan_names}=  Get Fan Count And Names
+    Set Suite Variable  ${number_of_fans}  children=true
