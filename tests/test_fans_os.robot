@@ -29,6 +29,8 @@ ${fan_nonfunctional}   ${0}
 # Criteria for a fan to be considered to be at maximum speed.
 ${max_speed}=  ${10400}
 
+${rest_keyword}              REST
+
 
 *** Test Cases ***
 
@@ -231,7 +233,7 @@ Verify System Shutdown Due To Fans
     ${wait_after_poweroff}=  Set Variable  15s
 
     # The previous test may have shutdown the system.
-    REST Power On  stack_mode=skip
+    Run Keyword  ${rest_keyword} Power On  stack_mode=skip
 
     # Set fans to be non-functional.
     :FOR  ${fan_name}  IN  @{fan_names}
@@ -278,7 +280,12 @@ Reset Fans
 Suite Setup Execution
     [Documentation]  Do the pre-test setup.
 
-    REST Power On  stack_mode=skip
+    ${is_redfish}=  Run Keyword And Return Status  Redfish.Login
+    ${rest_keyword}=  Set Variable If  ${is_redfish}  Redfish  REST
+    Rprint Vars  rest_keyword
+    Set Suite Variable  ${rest_keyword}  children=true
+
+    Run Keyword  ${rest_keyword} Power On  stack_mode=skip
 
     # The @{fan_names} list holds the names of the fans in the system.
     @{fan_names}  Create List
