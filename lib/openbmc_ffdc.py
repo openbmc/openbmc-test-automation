@@ -82,7 +82,7 @@ def ffdc(ffdc_dir_path=None,
     FFDC_FILE_PATH = ffdc_dir_path + ffdc_prefix + "BMC_general.txt"
     BuiltIn().set_global_variable("${FFDC_FILE_PATH}", FFDC_FILE_PATH)
 
-    status, ffdc_file_list = grk.run_key("Header Message")
+    status, ffdc_file_list = grk.run_key_u("Header Message")
     status, ffdc_file_sub_list = \
         grk.run_key_u("Call FFDC Methods  ffdc_function_list="
                       + ffdc_function_list)
