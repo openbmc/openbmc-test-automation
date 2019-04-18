@@ -29,6 +29,7 @@ import gen_cmd as gc
 import gen_robot_keyword as grk
 import state as st
 import var_stack as vs
+import gen_plug_in_utils as gpu
 
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) +\
@@ -750,6 +751,11 @@ def my_ffdc():
                                            + ffdc_function_list, ignore=1)
     if status != 'PASS':
         gp.qprint_error("Call to ffdc failed.\n")
+        if type(ffdc_file_list) is not list:
+            ffdc_file_list = []
+        # Leave a record for caller that "soft" errors occurred.
+        soft_errors = 1
+        gpu.save_plug_in_value(soft_errors, pgm_name)
 
     my_get_state()
 
@@ -949,6 +955,9 @@ def test_loop_body():
         status, ret_values = grk.run_key_u("my_ffdc", ignore=1)
         if status != 'PASS':
             gp.qprint_error("Call to my_ffdc failed.\n")
+            # Leave a record for caller that "soft" errors occurred.
+            soft_errors = 1
+            gpu.save_plug_in_value(soft_errors, pgm_name)
 
     if delete_errlogs:
         # We need to purge error logs between boots or they build up.
@@ -1059,6 +1068,9 @@ def post_stack():
         status, ret_values = grk.run_key_u("my_ffdc", ignore=1)
         if status != 'PASS':
             gp.qprint_error("Call to my_ffdc failed.\n")
+            # Leave a record for caller that "soft" errors occurred.
+            soft_errors = 1
+            gpu.save_plug_in_value(soft_errors, pgm_name)
 
     plug_in_setup()
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(
