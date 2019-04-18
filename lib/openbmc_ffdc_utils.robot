@@ -71,6 +71,10 @@ Header Message
     ...                 2. Add test setup and config information.
     ...                 3. Print types of data collection.
 
+
+    ${ffdc_file_list}=  Create List  ${FFDC_FILE_PATH}
+    Return From Keyword If  '${TEST_MODE}'  ${ffdc_file_list}
+
     ${TEST_NAME}=  Get Variable Value  ${TEST_NAME}
     ${TEST_MESSAGE}=  Get Variable Value  ${TEST_MESSAGE}
     ${TEST_DOCUMENTATION}=  Get Variable Value  ${TEST_DOCUMENTATION}
@@ -95,7 +99,6 @@ Header Message
     \   Write Data To File  ${\n}
 
     Write Data To File  ${MSG_DETAIL}
-    ${ffdc_file_list}=  Create List  ${FFDC_FILE_PATH}
     [Return]  ${ffdc_file_list}
 
 
