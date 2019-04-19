@@ -28,7 +28,7 @@ FFDC_BMC_CMD = {
     },
     'APPLICATION DATA':
     {
-        'BMC state': '/usr/sbin/obmcutil state',
+        'BMC state': '/usr/bin/obmcutil state',
     },
 }
 # Add file name and correcponding command needed for BMC
