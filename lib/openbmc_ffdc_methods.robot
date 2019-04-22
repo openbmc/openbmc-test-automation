@@ -315,7 +315,10 @@ Log OS All distros FFDC
     :FOR  ${cmd}  IN  @{cmd_list}
     \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
     \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
-    ...      ${cmd[1]}  ${logpath}  target=OS
+    ...  ${cmd[1]}  ${logpath}  target=OS
+    \    # scp it to the LOG_PREFIX ffdc directory.
+    \    Log To Console  scp.Get File /tmp/${cmd[0]}.txt ${LOG_PREFIX}${cmd[0]}.txt
+    \    scp.Get File  /tmp/${cmd[0]}.txt  ${LOG_PREFIX}${cmd[0]}.txt
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
 
@@ -338,6 +341,8 @@ Log OS SPECIFIC DISTRO FFDC
     \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
     \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
     ...      ${cmd[1]}  ${logpath}  target=OS
+    \    Log To Console  scp.Get File /tmp/${cmd[0]}.txt ${LOG_PREFIX}${cmd[0]}.txt
+    \    scp.Get File  /tmp/${cmd[0]}.txt  ${LOG_PREFIX}${cmd[0]}.txt
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
 
@@ -372,6 +377,9 @@ OS FFDC Files
 
     Rpvars  linux_distro
 
+    scp.Open Connection
+    ...  ${OS_HOST}  username=${OS_USERNAME}  password=${OS_PASSWORD}
+
     @{entries}=  Get FFDC OS All Distros Index
     :FOR  ${index}  IN  @{entries}
     \    ${ffdc_file_sub_list}=  Log OS All distros FFDC  ${index}
@@ -388,6 +396,10 @@ OS FFDC Files
     ...      ${linux_distro}
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
+
+    # Delete ffdc files still on OS and close scp.
+    OS Execute Command  rm -rf /tmp/OS_*
+    scp.Close Connection
 
     [Return]  ${ffdc_file_list}
 
