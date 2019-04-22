@@ -5,6 +5,7 @@ Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/common_utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/boot_utils.robot
+Resource         ../../lib/open_power_utils.robot
 
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
@@ -67,6 +68,9 @@ Redfish BMC Manager GracefulRestart When Host Booted
     [Tags]  Redfish_BMC_Manager_GracefulRestart_When_Host_Booted
 
     Redfish OBMC Reboot (run)
+
+    # TODO: Replace OCC state check with redfish property when available.
+    Verify OCC State
 
 
 *** Keywords ***
