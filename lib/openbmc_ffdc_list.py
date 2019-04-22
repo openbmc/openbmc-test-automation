@@ -28,7 +28,7 @@ FFDC_BMC_CMD = {
     },
     'APPLICATION DATA':
     {
-        'BMC state': '/usr/bin/obmcutil state',
+        'BMC state': '/usr/sbin/obmcutil state',
     },
 }
 # Add file name and correcponding command needed for BMC
@@ -53,17 +53,18 @@ FFDC_OS_ALL_DISTROS_FILE = {
     'OS FILES':
     {
         # File Name         Command
-        'OS_msglog': 'cat /sys/firmware/opal/msglog',
-        'OS_cpufrequency': 'ppc64_cpu --frequency',
-        'OS_dmesg': 'dmesg',
-        'OS_opal_prd': 'cat /var/log/opal-prd*',
-        'OS_boot': 'cat /var/log/boot.log',
-        'OS_procinfo': 'cat /proc/cpuinfo',
-        'OS_meminfo': 'cat /proc/meminfo',
-        'OS_netstat': 'netstat -a',
-        'OS_lspci': 'lspci',
-        'OS_lscpu': 'lscpu',
-        'OS_lscfg': 'lscfg',
+        'OS_msglog': 'cat /sys/firmware/opal/msglog 1>/tmp/OS_msglog.txt 2>&1',
+        'OS_cpufrequency': 'ppc64_cpu --frequency ' +
+                           '1>/tmp/OS_cpufrequency.txt 2>&1',
+        'OS_dmesg': 'dmesg 1>/tmp/OS_dmesg.txt 2>&1',
+        'OS_opal_prd': 'cat /var/log/opal-prd* 1>/tmp/OS_opal_prd.txt 2>&1',
+        'OS_boot': 'cat /var/log/boot.log 1>/tmp/OS_boot.txt 2>&1',
+        'OS_procinfo': 'cat /proc/cpuinfo 1>/tmp/OS_procinfo.txt 2>&1',
+        'OS_meminfo': 'cat /proc/meminfo 1>/tmp/OS_meminfo.txt 2>&1',
+        'OS_netstat': 'netstat -a 1>/tmp/OS_netstat.txt 2>&1',
+        'OS_lspci': 'lspci 1>/tmp/OS_lspci.txt 2>&1',
+        'OS_lscpu': 'lscpu 1>/tmp/OS_lscpu.txt 2>&1',
+        'OS_lscfg': 'lscfg 1>/tmp/OS_lscfg.txt 2>&1',
     },
 }
 # Add file name and correcponding command needed for Ubuntu Linux
@@ -71,11 +72,16 @@ FFDC_OS_UBUNTU_FILE = {
     'OS FILES':
     {
         # File Name         Command
-        'OS_isusb': 'lsusb -t ; lsusb -v',
-        'OS_kern': 'tail -n 50000 /var/log/kern.log',
-        'OS_authlog': 'cat /var/log/auth.log; cat /var/log/auth.log.1',
-        'OS_syslog': 'tail -n 200000 /var/log/syslog',
-        'OS_info': 'uname -a; dpkg -s opal-prd; dpkg -s ipmitool',
+        'OS_isusb': 'lsusb -t 1>/tmp/OS_isub.txt 2>&1 ; ' +
+                    'lsusb -v 1>>/tmp/OS_isub.txt 2>&1',
+        'OS_kern': 'tail -n 50000 /var/log/kern.log 1>/tmp/OS_kern.txt 2>&1',
+        'OS_authlog': 'cat /var/log/auth.log 1>/tmp/OS_authlog.txt 2>&1 ; ' +
+                      'cat /var/log/auth.log.1 1>>/tmp/OS_authlog.txt 2>&1',
+        'OS_syslog': 'tail -n 200000 /var/log/syslog ' +
+                     '1>/tmp/OS_syslog.txt 2>&1',
+        'OS_info': 'uname -a 1>/tmp/OS_info.txt 2>&1 ; ' +
+                   'dpkg -s opal-prd 1>>/tmp/OS_info.txt 2>&1 ; ' +
+                   'dpkg -s ipmitool 1>>/tmp/OS_info.txt 2>&1',
     },
 }
 # Add file name and correcponding command needed for RHEL Linux
@@ -83,10 +89,13 @@ FFDC_OS_RHEL_FILE = {
     'OS FILES':
     {
         # File Name         Command
-        'OS_rsct': '/usr/bin/ctversion -bv',
-        'OS_secure': 'cat /var/log/secure',
-        'OS_syslog': 'tail -n 200000 /var/log/messages',
-        'OS_info': 'lsb_release -a; cat /etc/redhat-release; uname -a; rpm -qa',
+        'OS_rsct': '/usr/bin/ctversion -bv 1>/tmp/OS_rsct.txt 2>&1',
+        'OS_secure': 'cat /var/log/secure 1>/tmp/OS_secure.txt 2>&1',
+        'OS_syslog': 'tail -n 200000 /var/log/messages ' +
+                     '1>/tmp/OS_syslog.txt 2>&1',
+        'OS_info': 'cat /etc/redhat-release 1>/tmp/OS_info.txt 2>&1 ; ' +
+                   'uname -a 1>>/tmp/OS_info.txt 2>&1 ; ' +
+                   'rpm -qa 1>>/tmp/OS_info.txt 2>&1',
     },
 }
 # Add file name and correcponding command needed for RHEL Linux
@@ -94,9 +103,12 @@ FFDC_OS_IBM_POWERKVM_FILE = {
     'OS FILES':
     {
         # File Name         Command
-        'OS_secure': 'cat /var/log/secure',
-        'OS_syslog': 'tail -n 200000 /var/log/messages',
-        'OS_info': 'lsb_release -a; uname -a; rpm -qa',
+        'OS_secure': 'cat /var/log/secure 1>/tmp/OS_secure.txt 2>&1',
+        'OS_syslog': 'tail -n 200000 /var/log/messages ' +
+                     '1>/tmp/OS_syslog.txt 2>&1',
+        'OS_info': 'lsb_release -a 1>/tmp/OS_info.txt 2>&1 ; ' +
+                   'uname -a 1>>/tmp/OS_info.txt 2>&1 ; ' +
+                   'rpm -qa 1>>/tmp/OS_info.txt 2>&1',
     },
 }
 OPENBMC_BASE = '/xyz/openbmc_project/'
