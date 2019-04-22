@@ -314,8 +314,15 @@ Log OS All distros FFDC
     @{cmd_list}=  Get FFDC OS All Distros Call  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
     \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
+    \    # Add the cmd_extension to the command.  The extension is usually
+    \    # a redirect of the commmand's output to /tmp on the OS.
+    \    ${command}=  Catenate  ${cmd[1]}  ${cmd_extension}
     \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
-    ...      ${cmd[1]}  ${logpath}  target=OS
+    ...  ${command}  ${logpath}  target=OS
+    \    # If the command's output was redirected to /tmp on the OS
+    \    # scp it to the LOG_PREFIX ffdc directory.
+    \    Run Keyword If  '${cmd_extension}' != '${EMPTY}'
+    ...  Run Key  scp.Get File \ /tmp/OS_ffdc.txt \ ${LOG_PREFIX}${cmd[0]}.txt
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
 
@@ -336,8 +343,15 @@ Log OS SPECIFIC DISTRO FFDC
     @{cmd_list}=  Get FFDC OS Distro Call  ${key_index}  ${linux_distro}
     :FOR  ${cmd}  IN  @{cmd_list}
     \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
+    \    # Add the cmd_extension to the command.  The extension is usually
+    \    # a redirect of the commmand's output to /tmp on the OS.
+    \    ${command}=  Catenate  ${cmd[1]}  ${cmd_extension}
     \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
-    ...      ${cmd[1]}  ${logpath}  target=OS
+    ...      ${command}  ${logpath}  target=OS
+    \    # If the command's output was redirected to /tmp on the OS
+    \    # scp it to the LOG_PREFIX ffdc directory.
+    \    Run Keyword If  '${cmd_extension}' != '${EMPTY}'
+    ...  Run Key  scp.Get File \ /tmp/OS_ffdc.txt \ ${LOG_PREFIX}${cmd[0]}.txt
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
 
@@ -372,6 +386,22 @@ OS FFDC Files
 
     Rpvars  linux_distro
 
+    # Get amount of free space on OS /tmp.
+    ${os_df_info}=  Get_OS_Df  /tmp
+    ${os_tmp_space}=  Set Variable  ${os_df_info[0]['available']}
+
+    # If free space is sufficient then send output of OS FFDC
+    # command to OS's /tmp.  Otherwise OS /tmp will not be used.
+    ${cmd_extension}=  Run Keyword If  ${os_tmp_space} > 5000
+    ...   Set Variable  >/tmp/OS_ffdc.txt 2>&1
+    ...  ELSE
+    ...   Set Variable  ${EMPTY}
+    Set Suite Variable  ${cmd_extension}
+    Rprint Vars  os_tmp_space  cmd_extension
+
+    scp.Open Connection
+    ...  ${OS_HOST}  username=${OS_USERNAME}  password=${OS_PASSWORD}
+
     @{entries}=  Get FFDC OS All Distros Index
     :FOR  ${index}  IN  @{entries}
     \    ${ffdc_file_sub_list}=  Log OS All distros FFDC  ${index}
@@ -388,6 +418,8 @@ OS FFDC Files
     ...      ${linux_distro}
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
+
+    scp.Close Connection
 
     [Return]  ${ffdc_file_list}
 

@@ -175,12 +175,23 @@ def get_bmc_df(df_parm_string=""):
         [use%]:          0%
         [mounted]:       /dev
 
-.   Description of argument(s):
+    Description of argument(s):
     df_parm_string  A string containing valid df command parms (e.g.
                     "-h /var").
     """
 
     out_buf, stderr, rc = bsu.bmc_execute_command("df " + df_parm_string)
+    return vf.outbuf_to_report(out_buf)
+
+
+def get_os_df(df_parm_string=""):
+    r"""
+    Get df report from OS and return as a report "object".
+
+    This is the OS version of get_bmc_df. See get_bmc_df for details.
+    """
+
+    out_buf, stderr, rc = bsu.os_execute_command("df " + df_parm_string)
     return vf.outbuf_to_report(out_buf)
 
 
