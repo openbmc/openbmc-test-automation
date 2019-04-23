@@ -698,3 +698,10 @@ Is Power Off
     [Documentation]  Verify that the BMC chassis state is off.
     ${state}=  Get Power State
     Should be equal  ${state}  ${0}
+
+
+CLI Get BMC DateTime
+    [Documentation]  Returns BMC date time from date command.
+
+    ${bmc_time_via_date}  ${stderr}  ${rc}=  BMC Execute Command  date +"%Y-%m-%d %H:%M:%S"  print_err=1
+    [Return]  ${bmc_time_via_date}
