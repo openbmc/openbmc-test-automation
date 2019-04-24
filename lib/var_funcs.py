@@ -707,13 +707,15 @@ def outbuf_to_report(out_buf,
     return list_to_report(report_list, **args)
 
 
-def nested_get(key, dictionary):
+def nested_get(key, structure):
     r"""
-    Return a list of all values from the nested dictionary with the given key.
+    Return a list of all values from the nested structure with the given key.
+
+    The structure can be a dictionary or a list of dictionaries.
 
     Example:
 
-    Given a dictionary named personnel with the following contents:
+    Given a dictionary structure named personnel with the following contents:
 
     personnel:
       [manager]:
@@ -736,11 +738,16 @@ def nested_get(key, dictionary):
 
     Description of argument(s):
     key                             The key value.
-    dictionary                      The nested dictionary.
+    structure                       The nested structure.
     """
 
     result = []
-    for k, v in dictionary.items():
+    if type(structure) is list:
+        for entry in structure:
+            result += nested_get(key, entry)
+        return result
+    # Structure must be a dictionary.
+    for k, v in structure.items():
         if isinstance(v, dict):
             result += nested_get(key, v)
         if k == key:
