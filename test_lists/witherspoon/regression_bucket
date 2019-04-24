@@ -206,3 +206,6 @@
 -i Test_Client_Certificate_Install_With_Empty_Certificate_And_Empty_Private_Key
 -i Test_Delete_Server_Certificate
 -i Test_Delete_Client_Certificate
+# IPMI root default password change and restriction mode.
+-i Verify_IPMI_Default_Password_Update
+-i Test_IPMI_Restriction_Mode
