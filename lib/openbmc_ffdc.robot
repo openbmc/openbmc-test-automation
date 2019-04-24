@@ -47,6 +47,10 @@ FFDC On Test Case Fail
     ...                      20160822041250969913:Test:Test case 2:FAIL
     ...               3. Delete error logs and BMC dumps post FFDC collection.
 
+    ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}=  Get Variable Value  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}  0
+    ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}=  Convert To Integer  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}
+    Return From Keyword If  '${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}'
+
     Run Keyword If  '${TEST_STATUS}' == 'FAIL'  FFDC
 
     Log Test Case Status
