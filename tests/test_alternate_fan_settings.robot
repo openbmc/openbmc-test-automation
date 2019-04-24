@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test Suite for Suppported Fan Modules.
+Documentation  Test Suite for Supported Fan Modules.
 
 # Test Parameters:
 # OPENBMC_HOST       The BMC host name or IP address.
