@@ -686,6 +686,8 @@ Test IPMI Restriction Mode
     [Tags]  Test_IPMI_Restriction_Mode
     # Forego normal test setup:
     [Setup]  No Operation
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Set IPMI Restriction Mode  xyz.openbmc_project.Control.Security.RestrictionMode.Modes.None
 
     # By default no IPMI operations are restricted.
     # /xyz/openbmc_project/control/host0/restriction_mode/attr/RestrictionMode
@@ -704,10 +706,7 @@ Test IPMI Restriction Mode
     #    "status": "ok"
     # }
 
-    ${valueDict}=  Create Dictionary
-    ...  data=xyz.openbmc_project.Control.Security.RestrictionMode.Modes.Whitelist
-    Write Attribute  ${CONTROL_HOST_URI}restriction_mode/
-    ...  RestrictionMode  data=${valueDict}
+    Set IPMI Restriction Mode  xyz.openbmc_project.Control.Security.RestrictionMode.Modes.Whitelist
 
     # Attempt white-listed operation expecting success.
     IPMI Power On
@@ -943,3 +942,16 @@ Execute IPMI Command With Cipher
 
     ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
     [Return]  ${rc}
+
+
+Set IPMI Restriction Mode
+    [Documentation]  Set the IPMI restriction mode.
+    [Arguments]  ${restriction_mode}
+
+    # Description of argument(s):
+    # restriction_mode   IPMI valid restriction modes.
+
+    ${valueDict}=  Create Dictionary  data=${restriction_mode}
+
+    Write Attribute  ${CONTROL_HOST_URI}restriction_mode/
+    ...  RestrictionMode  data=${valueDict}
