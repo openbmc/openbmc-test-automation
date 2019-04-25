@@ -1,8 +1,6 @@
 # Skip org code update.
 -e Initiate_Code_Update_BMC
 -e BIOS_Code_Update
-# Needs Jenkins setup.
-# TODO: https://github.com/openbmc/openbmc-test-automation/issues/1005
 -e Upload_Test
 -e BMC_Code_Update
 -e Host_Code_Update
