@@ -51,6 +51,21 @@ Verify Login with Deleted Redfish Users
        user_user      TestPwd123  User            ${True}
        callback_user  TestPwd123  Callback        ${True}
 
+Verify User Creation With Invalid Role Id
+    [Documentation]  Verify User Creation With Invalid Role Id.
+    [Tags]  Verify_User_Creation_With_Invalid_Role_Id
+
+    # Make sure the user account in question does not already exist.
+    Run Keyword And Ignore Error
+    ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=test_user  Password=TestPwd123  RoleId=wrongroleid  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
 
 *** Keywords ***
 
