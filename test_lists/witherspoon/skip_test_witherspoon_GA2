@@ -4,6 +4,8 @@
 -e Check_BMC_Clocks_Compatible_Property_Is_Set
 -e Check_BMC_FSI_Compatible_Property_Is_Set
 -e Check_BMC_FSI_Name_Property_Is_Set
+-e Check_BMC_Memory_Name_Property_Is_Set
+-e Check_BMC_Memory_Device_Type_Property_Is_Set
 # https://github.com/openbmc/openbmc-test-automation/issues/822
 -e Verify_Minimal_Memory_Buffer_Inventory
 -e Verify_Minimal_Main_Planar_Inventory
@@ -71,3 +73,8 @@
 -e Verify_eSEL_Description_And_EntryID_Using_REST
 # Needs fix and improvement.
 -e Test_SBE_Side_Switch
+# Field mode cant be disabled once set.
+-e Verify_Field_Mode_Is_Disable
+# Disruptive test causing other suites to fail when it fails.
+-e Verify_Host_Quiesce_State_Without_Auto_Reboot_During_Boot
+-e Verify_Host_Quiesce_State_With_Auto_Reboot_During_Boot
