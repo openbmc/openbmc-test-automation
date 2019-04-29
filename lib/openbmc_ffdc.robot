@@ -49,7 +49,7 @@ FFDC On Test Case Fail
 
     ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}=  Get Variable Value  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}  0
     ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}=  Convert To Integer  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}
-    Return From Keyword If  '${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}'
+    Return From Keyword If  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}
 
     Run Keyword If  '${TEST_STATUS}' == 'FAIL'  FFDC
 
