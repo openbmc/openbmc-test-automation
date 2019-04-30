@@ -12,13 +12,13 @@ Test Setup       Printn
 
 ${LOGIN_SESSION_COUNT}   ${50}
 
-&{header_requirements}  Strict-Transport-Security=max-age=31536000; includeSubdomains; preload
-...                     X-Frame-Options=DENY
-...                     Pragma=no-cache
-...                     Cache-Control=no-Store,no-Cache
-...                     Content-Security-Policy=default-src 'self'; img-src 'self' data:
-...                     X-XSS-Protection=1; mode=block
-...                     X-Content-Type-Options=nosniff
+&{header_requirements}  strict-transport-security=max-age=31536000; includeSubdomains; preload
+...                     x-frame-options=DENY
+...                     pragma=no-cache
+...                     cache-control=no-Store,no-Cache
+...                     content-security-policy=default-src 'self'; img-src 'self' data:
+...                     x-xss-protection=1; mode=block
+...                     x-content-type-options=nosniff
 
 *** Test Cases ***
 
