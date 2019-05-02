@@ -189,7 +189,7 @@ def print_plug_in_header():
         qprint_plug_vars(headers=0, general=False, custom=True)
 
 
-def get_plug_vars():
+def get_plug_vars(mod_name="__main__"):
     r"""
     Get all plug-in variables and put them in corresponding global variables.
 
@@ -201,9 +201,13 @@ def get_plug_vars():
     PLUG_VAR_PREFIX value prefix.  For example, if the environment variable in
     question is AUTOBOOT_OPENBMC_HOST, this function will set global variable
     AUTOBOOT_OPENBMC_HOST and global variable OPENBMC_HOST.
+
+    Description of argument(s):
+    mod_name                        The name of the module whose global
+                                    plug-in variables should be retrieved.
     """
 
-    module = sys.modules['__main__']
+    module = sys.modules[mod_name]
     plug_var_dict = return_plug_vars()
 
     # Get all PLUG_VAR_PREFIX environment variables and put them into globals.
