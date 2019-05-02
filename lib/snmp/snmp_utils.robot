@@ -29,7 +29,6 @@ Configure SNMP Manager On BMC
     # expected_result  Expected status of SNMP configuration.
 
     @{snmp_parm_list}=  Create List  ${snmp_ip}  ${port}
-
     ${data}=  Create Dictionary  data=@{snmp_parm_list}
 
     ${resp}=  OpenBMC Post Request
@@ -42,6 +41,7 @@ Configure SNMP Manager On BMC
     ...  ELSE
     ...      Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...      msg=Not allowing the configuration of a valid SNMP.
+
 
 Get List Of SNMP Manager And Port Configured On BMC
     [Documentation]  Get list of SNMP managers and return the list.
@@ -73,12 +73,29 @@ Verify SNMP Manager
     # snmp_ip  SNMP manager IP.
     # port     Network port where SNMP manager is listening.
 
-    @{ip_and_port}=  Create List  ${snmp_ip}  ${port}
+    Get SNMP Manager Object  ${snmp_ip}  ${port}  ${TRUE}
 
-    @{ip_and_port_list}=  Get List Of SNMP Manager And Port Configured On BMC
+Get SNMP Manager Object
+    [Arguments]  ${ip}  ${port}  ${fail_on_error}=${1}
 
-    List Should Contain Sub List  ${ip_and_port_list}  ${ip_and_port}
-    ...  msg=Valid SNMP manager is not found on BMC.
+    # Description of argument(s):
+    # ip             SNMP manager IP.
+    # port           Network port where SNMP manager is listening.
+    # fail_on_error  Return empty if it is 1 else fail the keyword.
+
+    ${snmp_objs}=  Read Properties  ${SNMP_MANAGER}enumerate
+    : FOR  ${snmp_uri}  IN   @{snmp_objs}
+    \  ${obj}=  Set Variable  ${snmp_objs['${snmp_uri}']}
+    \   Run Keyword If
+    ...  '${obj['Address']}' == '${ip}' and '${obj['Port']}' == '${port}'
+    ...    Return From Keyword  ${obj}
+
+    Run Keyword If  ${fail_on_error} == ${FALSE}  Return From Keyword  ${EMPTY}
+
+    ${message}=  Catenate  No valid SNMP manager found on BMC.
+    ...  Couldn't find ${ip}:${port}.
+    Fail  ${message}
+
 
 Delete SNMP Manager And Object
     [Documentation]  Delete SNMP manager.
@@ -88,23 +105,15 @@ Delete SNMP Manager And Object
     # snmp_ip  SNMP manager IP.
     # port     Network port where SNMP manager is listening.
 
-    @{snmp_uri_list}=  Get SNMP URI List
-
-    # Find SNMP object having this IP and port.
-
-    : FOR  ${snmp_uri}  IN  @{snmp_uri_list}
-    \  ${ip}=  Read Attribute  ${snmp_uri}  Address
-    \  ${port1}=  Read Attribute  ${snmp_uri}  Port
-    \  Run Keyword If  "${snmp_ip}" == "${ip}" and "${port}" == "${port1}"
-    ...  Exit For Loop
+    ${snmp_obj}=  Get SNMP Manager Object  ${snmp_ip}  ${port}
 
     # If the given IP and port is not configured, return.
     # Otherwise, delete the IP and object.
 
-    Run Keyword And Return If  '${snmp_ip}' != '${ip}'
+    Run Keyword And Return If  ${snmp_obj} != ${EMPTY}
     ...  Pass Execution  SNMP manager to be deleted is not configured.
 
-    OpenBMC Delete Request  ${snmp_uri}
+    OpenBMC Delete Request  ${snmp_obj}
 
     # Verify whether deleted SNMP is removed from BMC system.
     @{ip_and_port}=  Create List  ${snmp_ip}  ${port}
