@@ -10,7 +10,7 @@ Resource  ../lib/openbmc_ffdc.robot
 Library  String
 Library  SSHLibrary
 
-Test Teardown  FFDC On Test Case Fail
+#Test Teardown  FFDC On Test Case Fail
 
 *** Test Cases ***
 Configure SNMP Manager On BMC And Verify
