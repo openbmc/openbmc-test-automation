@@ -235,9 +235,8 @@ Get Fan Count And Names
 
     ${number_of_fans}=  Get Length  ${fan_names}
 
-    Printn
-    Rprint Vars  number_of_fans  fan_names
     [Return]  ${number_of_fans}  ${fan_names}
+
 
 
 Reset Fans
@@ -283,7 +282,7 @@ Verify Fan Speed
 
 Verify Direct Fan Control
     [Documentation]  Verify direct control of fans.
-    [Arguments]  ${max_fan_target_setting}  ${min_speed}
+    [Arguments]  ${max_speed}  ${min_speed}
     ...  ${minutes_to_stabilize}  ${number_of_fans}  ${fan_names}
 
     # Overview:
@@ -296,7 +295,7 @@ Verify Direct Fan Control
     # /sys/class/hwmon/hwmon9/fan*_input.
 
     # Description of argument(s):
-    # max_fan_target_setting  Integer value of maximum fan speed.
+    # max_speed               Integer value of maximum fan speed.
     # min_speed               Integer value of minimum speed.
     # minutes_to_stabilize    Time to wait for fan daemons to
     #                         stabilize fan operation after
@@ -313,7 +312,7 @@ Verify Direct Fan Control
     # For each fan, set a new target speed and wait for the fan to
     # accelerate.  Then check that the fan is running near that speed.
     :FOR  ${fan_name}  IN  @{fan_names}
-    \  Set Fan Target Speed  ${fan_name}  ${max_fan_target_setting}
+    \  Set Fan Target Speed  ${fan_name}  ${max_speed}
     \  Run Key U  Sleep \ 60s
     \  ${target_speed}  ${cw_speed}  ${ccw_speed}=
     ...  Get Target And Blade Speeds  ${fan_name}
@@ -442,9 +441,6 @@ Verify System Shutdown Due To Fans
     # fan_names   A list containing the names of the fans (e.g. fan0 fan1).
 
     ${wait_after_poweroff}=  Set Variable  15s
-
-    # A previous test may have shutdown the system.
-    REST Power On  stack_mode=skip
 
     # Set fans to be non-functional.
     :FOR  ${fan_name}  IN  @{fan_names}
