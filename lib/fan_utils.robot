@@ -443,9 +443,6 @@ Verify System Shutdown Due To Fans
 
     ${wait_after_poweroff}=  Set Variable  15s
 
-    # A previous test may have shutdown the system.
-    REST Power On  stack_mode=skip
-
     # Set fans to be non-functional.
     :FOR  ${fan_name}  IN  @{fan_names}
     \  Set Fan State  ${fan_name}  ${fan_nonfunctional}
