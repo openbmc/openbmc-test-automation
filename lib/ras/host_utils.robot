@@ -2,6 +2,7 @@
 Documentation       Utility for error injection scenarios through HOST & BMC.
 Resource            ../../lib/rest_client.robot
 Resource            ../../lib/utils.robot
+Resource            ../../lib/common_utils.robot
 Variables           ../../lib/ras/variables.py
 Library             ../../lib/bmc_ssh_utils.py
 Library             ../../lib/gen_print.py
@@ -100,11 +101,11 @@ FIR Address Translation Through HOST
 
 Inject Error Through HOST
     [Documentation]  Inject checkstop on multiple targets like
-    ...              CPU/CME/OCC/NPU/CAPP/MCA etc through HOST.
+    ...              CPU/CME/OCC/NPU/CAPP/MCA etc. through HOST.
     ...              Test sequence:
-    ...              1. Boot To HOST
-    ...              2. Clear any existing gard records
-    ...              3. Inject Error on processor/centaur
+    ...              1. Boot To HOST.
+    ...              2. Clear any existing gard records.
+    ...              3. Inject Error on processor.
     [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
     ...  ${master_proc_chip}=True
     # Description of argument(s):
@@ -185,11 +186,11 @@ BMC Putscom
 
 Inject Error Through BMC
     [Documentation]  Inject checkstop on multiple targets like
-    ...              CPU/CME/OCC/NPU/CAPP/MCA etc through BMC.
+    ...              CPU/CME/OCC/NPU/CAPP/MCA etc. through BMC.
     ...              Test sequence:
     ...              1. Boot To HOST.
     ...              2. Clear any existing gard records.
-    ...              3. Inject Error on processor/centaur.
+    ...              3. Inject Error on processor.
     [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
     ...  ${master_proc_chip}=True
     # Description of argument(s):
@@ -211,3 +212,39 @@ Inject Error Through BMC
     \  Sleep  10s
     # Adding delay to get error log after error injection.
     Sleep  120s
+
+
+Inject Error Through BMC At HOST Boot
+    [Documentation]  Inject error on multiple targets like
+    ...              CPU/CME/OCC/NPU/CAPP/MCA etc. through BMC at HOST Boot.
+    ...              Test sequence:
+    ...              1. Boot To HOST.
+    ...              2. Clear any existing gard records.
+    ...              3. Power off HOST and Boot.
+    ...              4. Inject Error on processor through BMC.
+    [Arguments]      ${fir}  ${chip_address}
+    # Description of argument(s):
+    # fir                 FIR (Fault isolation register) value (e.g. '2011400').
+    # chip_address        Chip address (e.g. '2000000000000000').
+
+    Delete Error Logs
+
+    REST Power On  stack_mode=skip
+    Set Auto Reboot  1
+
+    Gard Operations On OS  clear all
+
+    REST Power Off
+    Initiate Host Boot  wait=${0}
+
+    Start SOL Console Logging   ${EXECDIR}/esol.log
+
+    Wait Until Keyword Succeeds  5 min  5 sec
+    ...  Shell Cmd  grep 'ISTEP *14' ${EXECDIR}/esol.log  quiet=1
+    ...  print_output=0  show_err=0  ignore_err=0
+
+    BMC Putscom  0  ${fir}  ${chip_address}
+    # Adding delay to get error log after error injection.
+    Sleep  10s
+
+    Stop SOL Console Logging
