@@ -2,6 +2,7 @@
 Documentation       Utility for error injection scenarios through HOST & BMC.
 Resource            ../../lib/rest_client.robot
 Resource            ../../lib/utils.robot
+Resource            ../../lib/common_utils.robot
 Variables           ../../lib/ras/variables.py
 Library             ../../lib/bmc_ssh_utils.py
 Library             ../../lib/gen_print.py
@@ -102,9 +103,9 @@ Inject Error Through HOST
     [Documentation]  Inject checkstop on multiple targets like
     ...              CPU/CME/OCC/NPU/CAPP/MCA etc through HOST.
     ...              Test sequence:
-    ...              1. Boot To HOST
-    ...              2. Clear any existing gard records
-    ...              3. Inject Error on processor/centaur
+    ...              1. Boot To HOST.
+    ...              2. Clear any existing gard records.
+    ...              3. Inject Error on processor.
     [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
     ...  ${master_proc_chip}=True
     # Description of argument(s):
@@ -189,7 +190,7 @@ Inject Error Through BMC
     ...              Test sequence:
     ...              1. Boot To HOST.
     ...              2. Clear any existing gard records.
-    ...              3. Inject Error on processor/centaur.
+    ...              3. Inject Error on processor.
     [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
     ...  ${master_proc_chip}=True
     # Description of argument(s):
@@ -211,3 +212,44 @@ Inject Error Through BMC
     \  Sleep  10s
     # Adding delay to get error log after error injection.
     Sleep  120s
+
+
+Inject Error Through BMC At HOST IPL
+    [Documentation]  Inject error on multiple targets like
+    ...              CPU/CME/OCC/NPU/CAPP/MCA etc through BMC at HOST IPL.
+    ...              Test sequence:
+    ...              1. Boot To HOST.
+    ...              2. Clear any existing gard records.
+    ...              3. Power off HOST and IPL.
+    ...              4. Inject Error on processor through BMC.
+    [Arguments]      ${fir}  ${chip_address}
+    # Description of argument(s):
+    # fir                 FIR (Fault isolation register) value (e.g. '2011400').
+    # chip_address        Chip address (e.g. '2000000000000000').
+
+    Delete Error Logs
+    Login To OS Host
+    Set Auto Reboot  1
+
+    Gard Operations On OS  clear all
+
+    Initiate Host PowerOff
+    Initiate Host Boot  wait=${0}
+
+    Start SOL Console Logging   ${EXECDIR}/esol.log
+
+    Wait Until Keyword Succeeds  5 min  5 sec  Check For Value In SOL Logs 
+
+    BMC Putscom  0  ${fir}  ${chip_address}
+    # Adding delay to get error log after error injection.
+    Sleep  120s
+
+    Stop SOL Console Logging
+
+
+Check For Value In SOL Logs
+    [Documentation]  Check for Value In SOL Logs.
+
+    ${rc}  ${output}=  Shell Cmd  grep 'ISTEP *14' ${EXECDIR}/esol.log
+    Should Not Be Empty  ${output}
+
