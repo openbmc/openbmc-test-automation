@@ -47,18 +47,20 @@ Run IPMI Command
 
 Run IPMI Standard Command
     [Documentation]  Run the standard IPMI command.
-    [Arguments]  ${command}  ${fail_on_err}=${1}  &{options}
+    [Arguments]  ${command}  ${fail_on_err}=${1}  ${expected_rc}=${0}  &{options}
 
     # Description of argument(s):
     # command                       The IPMI command string to be executed
     #                               (e.g. "0x06 0x36").
     # fail_on_err                   Fail if the IPMI command execution fails.
+    # expected_rc                   The expected return code from the ipmi
+    #                               command (e.g. ${0}, ${1}, etc.).
     # options                       Additional ipmitool command options (e.g.
     #                               -C=3, -I=lanplus, etc.).  Currently, only
     #                               used for external IPMI commands.
 
     ${resp}=  Run Keyword If  '${IPMI_COMMAND}' == 'External'
-    ...    Run External IPMI Standard Command  ${command}  ${fail_on_err}  &{options}
+    ...    Run External IPMI Standard Command  ${command}  ${fail_on_err}  ${expected_rc}  &{options}
     ...  ELSE IF  '${IPMI_COMMAND}' == 'Inband'
     ...    Run Inband IPMI Standard Command  ${command}  ${fail_on_err}
     ...  ELSE IF  '${IPMI_COMMAND}' == 'Dbus'
@@ -137,7 +139,7 @@ Run Inband IPMI Standard Command
 
 Run External IPMI Standard Command
     [Documentation]  Run the external IPMI standard command.
-    [Arguments]  ${command}  ${fail_on_err}=${1}  &{options}
+    [Arguments]  ${command}  ${fail_on_err}=${1}  ${expected_rc}=${0}  &{options}
 
     # Description of argument(s):
     # command                       The IPMI command string to be executed
@@ -146,6 +148,8 @@ Run External IPMI Standard Command
     #                               "-vvv"), it will be pre-pended to this
     #                               command string.
     # fail_on_err                   Fail if the IPMI command execution fails.
+    # expected_rc                   The expected return code from the ipmi
+    #                               command (e.g. ${0}, ${1}, etc.).
     # options                       Additional ipmitool command options (e.g.
     #                               -C=3, -I=lanplus, etc.).
 
@@ -154,7 +158,7 @@ Run External IPMI Standard Command
     Qprint Issuing  ${ipmi_cmd}
     ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
     Return From Keyword If  ${fail_on_err} == ${0}  ${output}
-    Should Be Equal  ${rc}  ${0}  msg=${output}
+    Should Be Equal  ${rc}  ${expected_rc}  msg=${output}
     [Return]  ${output}
 
 
