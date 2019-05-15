@@ -106,8 +106,8 @@ Login OpenBMC GUI
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
     Click Element  login__submit
-    Wait Until Element Is Enabled  ${xpath_button_logout}
-    Page Should Contain  Server information
+    #Wait Until Element Is Enabled  ${xpath_button_logout}
+    #Page Should Contain  Server information
 
 
 Test Setup Execution
