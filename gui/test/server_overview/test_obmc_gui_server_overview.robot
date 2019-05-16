@@ -21,6 +21,14 @@ ${string_launch_serial_over_lan}   Serial over LAN console
 *** Test Case ***
 # OpenBMC @ Power Off state test cases.
 
+Verify Display Text Power Information
+    [Documentation]  Verify display text under power information
+    [Tags]  Verify_Display_Text_Power_Information
+
+    Select Server Overview Menu
+    Verify Display Content  Power Consumption
+    Verify Display Content  Power Cap
+
 Verify Serial Over LAN Button
     [Documentation]  Verify console page on clicking serial over lan console button
     [Tags]  Verify_Serial_Over_LAN_Button
