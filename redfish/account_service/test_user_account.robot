@@ -101,6 +101,64 @@ Verify User Creation With Invalid Role Id
     Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
+Create Same Username With Different Privileges
+    [Documentation]  Create Same Username With Different Privileges.
+    [Tags]  Create_Same_Username_With_Different_Privileges
+
+    Redfish Create User  test_user  TestPwd123  Administrator  ${True}
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
+Verify Modifying User Attributes
+    [Documentation]  Verify modifying user attributes.
+    [Tags]  Verify_Modifying_User_Attributes
+
+    # Create Redfish users.
+    Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
+    Redfish Create User  operator_user  TestPwd123  Operator        ${True}
+    Redfish Create User  user_user      TestPwd123  User            ${True}
+    Redfish Create User  callback_user  TestPwd123  Callback        ${True}
+
+    Redfish.Login
+
+    # Make sure the new user account does not already exist.
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}newadmin_user
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Update admin_user username using Redfish.
+    ${payload}=  Create Dictionary  UserName=newadmin_user
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user  body=&{payload}
+
+    # Update operator_user password using Redfish.
+    ${payload}=  Create Dictionary  Password=NewTestPwd123
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/operator_user  body=&{payload}
+
+    # Update user_user role using Redfish.
+    ${payload}=  Create Dictionary  RoleId=Operator
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/user_user  body=&{payload}
+
+    # Update callback_user to disable using Redfish.
+    ${payload}=  Create Dictionary  Enabled=${False}
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/callback_user  body=&{payload}
+
+    # Verify users after updating
+    Redfish Verify User  newadmin_user  TestPwd123     Administrator   ${True}
+    Redfish Verify User  operator_user  NewTestPwd123  Operator        ${True}
+    Redfish Verify User  user_user      TestPwd123     Operator        ${True}
+    Redfish Verify User  callback_user  TestPwd123     Callback        ${False}
+
+    # Delete created users.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/newadmin_user
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/user_user
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/callback_user
+
+
 
 *** Keywords ***
 
@@ -113,7 +171,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    FFDC On Test Case Fail
+#    FFDC On Test Case Fail
     Redfish.Logout
 
 Redfish Create User
@@ -127,6 +185,8 @@ Redfish Create User
     #                     (e.g. "Administrator", "Operator", etc.).
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
+
+    Redfish.Login
 
     # Make sure the user account in question does not already exist.
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${userName}
