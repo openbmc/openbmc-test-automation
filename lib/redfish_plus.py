@@ -6,6 +6,7 @@ See redfish_plus class prolog below for details.
 
 from redfish.rest.v1 import HttpClient
 import gen_print as gp
+import func_args as fa
 
 
 def valid_http_status_code(status, valid_status_codes):
@@ -58,6 +59,17 @@ class redfish_plus(HttpClient):
         - The calling function's call line is logged to standard out (provided
           that global variable "quiet" is not set).
         - The caller may include a valid_status_codes argument.
+        - Callers may include inline python code strings to define arguments.
+          This predominantly benefits robot callers.
+
+          For example, instead of calling like this:
+            ${data}=  Create Dictionary  HostName=${hostname}
+            Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+
+          Callers may do this:
+
+            Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}
+            ...  body=[('HostName', '${hostname}')]
 
         Description of argument(s):
         func                        A reference to the parent class function
@@ -102,6 +114,10 @@ class redfish_plus(HttpClient):
         "Unauthorized").
         """
         gp.qprint_executing(stack_frame_ix=3, style=gp.func_line_style_short)
+        # Convert python string object defintions to objects (mostly useful
+        # for robot callers).
+        args = fa.args_to_objects(args)
+        kwargs = fa.args_to_objects(kwargs)
         valid_status_codes = kwargs.pop('valid_status_codes', [200])
         response = func(*args, **kwargs)
         valid_http_status_code(response.status, valid_status_codes)
