@@ -8,69 +8,42 @@ import re
 import os
 
 import gen_print as gp
-import wrap_utils as wu
+import func_args as fa
 
 from robot.libraries.BuiltIn import BuiltIn
 
 gen_robot_print_debug = int(os.environ.get('GEN_ROBOT_PRINT_DEBUG', '0'))
 
 
-def sprint_vars(*args):
+def sprint_vars(*args, **kwargs):
     r"""
     Sprint the values of one or more variables to the console.
 
-    This is a robot re=definition of the sprint_vars function in gen_print.py.
+    This is a robot re-definition of the sprint_vars function in gen_print.py.
     Given a list of variable names, this keyword will string print each
     variable name and value such that each value lines up in the same column
     as messages printed with sprint_time().
 
-    Description of arguments:
-    args:
-        If the first argument is an integer, it will be interpreted to be the
-        "hex" value.
-        If the second argument is an integer, it will be interpreted to be the
-        "indent" value.
-        If the third argument is an integer, it will be interpreted to be the
-        "col1_width" value.
-        All remaining parms are considered variable names which are to be
-        sprinted.
+    Description of argument(s):
+    args                            The names of the variables to be printed
+                                    (e.g. var1 rather than ${var1}).
+    kwargs                          See sprint_varx in gen_print.py for
+                                    descriptions of all other arguments.
     """
 
-    if len(args) == 0:
-        return
-
-    # Create list from args (which is a tuple) so that it can be modified.
-    args_list = list(args)
-
-    # See if parm 1 is to be interpreted as "hex".
-    try:
-        if isinstance(int(args_list[0]), int):
-            hex = int(args_list[0])
-            args_list.pop(0)
-    except ValueError:
-        hex = 0
-
-    # See if parm 2 is to be interpreted as "indent".
-    try:
-        if isinstance(int(args_list[0]), int):
-            indent = int(args_list[0])
-            args_list.pop(0)
-    except ValueError:
-        indent = 0
-
-    # See if parm 3 is to be interpreted as "col1_width".
-    try:
-        if isinstance(int(args_list[0]), int):
-            loc_col1_width = int(args_list[0])
-            args_list.pop(0)
-    except ValueError:
-        loc_col1_width = gp.col1_width
-
+    if 'fmt' in kwargs:
+        # Find format option names in kwargs['fmt'] and wrap them with "gp."
+        # and "()" to make them into function calls.  For example, terse would
+        # be converted to "gp.terse()".  This allows the user to simply
+        # specify "fmt=terse" (vs fmt=gp.terse()).
+        regex = "(" + "|".join(gp.valid_formats()) + ")"
+        kwargs['fmt'] = \
+            re.sub(regex, "gp.\\1()", kwargs['fmt'])
+    kwargs = fa.args_to_objects(kwargs)
     buffer = ""
-    for var_name in args_list:
+    for var_name in args:
         var_value = BuiltIn().get_variable_value("${" + str(var_name) + "}")
-        buffer += gp.sprint_varx(var_name, var_value, hex, indent,
-                                 loc_col1_width)
+        buffer += gp.sprint_varx(var_name, var_value, **kwargs)
 
     return buffer
 
@@ -82,7 +55,7 @@ def sprint_auto_vars(headers=0):
 
     NOTE: Not all automatic variables are guaranteed to exist.
 
-    Description of arguments:
+    Description of argument(s):
     headers                         This indicates that a header and footer
                                     should be printed.
     """
@@ -110,37 +83,57 @@ def sprint_auto_vars(headers=0):
 
 def gp_debug_print(buffer):
     r"""
-    Print the buffer value only if gen_print_debug is set.
+    Print the buffer value only if gen_robot_print_debug is set.
 
     This function is intended for use only by other functions in this module.
 
-    Description of arguments:
+    Description of argument(s):
     buffer                          The string to be printed.
     """
 
     if not gen_robot_print_debug:
         return
-
     gp.gp_print(buffer)
 
 
 # In the following section of code, we will dynamically create print versions
-# for several of the sprint functions defined above.  So, for example, where
-# we have an sprint_vars() function defined above that returns formatted
-# variable print outs in a string, we will create a corresponding print_vars()
+# for several of the sprint functions defined above.  For example, where we
+# have an sprint_vars() function defined above that returns formatted variable
+# print outs in a string, we will create a corresponding rprint_vars()
 # function that will print that string directly to stdout.
 
 # It can be complicated to follow what's being created below.  Here is an
 # example of the rprint_vars() function that will be created:
 
-# def rprint_vars(*args):
-#     gp.gp_print(gp.replace_passwords(sprint_vars(*args)), stream='stdout')
+# def rprint_vars(*args, **kwargs):
+# gp.gp_print(gp.replace_passwords(sprint_vars(*args, **kwargs)),
+# stream='stdout')
+
+# For sprint_vars (defined above), the following functions will be created:
+
+# rprint_vars                       Robot Print Vars
+# rqprint_vars                      Robot Print Vars if ${quiet} is set to
+#                                   ${0}.
+# rdprint_vars                      Robot Print Vars if ${debug} is set to
+#                                   ${1}.
+# rlprint_vars                      Robot Print Vars to the log instead of to
+#                                   the console.
+
+# Abbreviated names are created for all of the preceding function names:
+# rpvars
+# rqpvars
+# rdpvars
+# rlpvars
+
+# Users are encouraged to only use the abbreviated forms for development but
+# to then ultimately switch to full names.
+# Rprint Vars (instead of Rpvars)
 
 replace_dict = {'output_stream': 'stdout', 'mod_qualifier': 'gp.'}
 
 gp_debug_print("gp.robot_env: " + str(gp.robot_env) + "\n")
 
-# func_names contains a list of all print functions which should be created
+# func_names contains a list of all rprint functions which should be created
 # from their sprint counterparts.
 func_names = [
     'print_vars', 'print_auto_vars'
