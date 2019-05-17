@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 r"""
-This module provides many valuable print functions such as sprint_var,
-sprint_time, sprint_error, sprint_call_stack.
+This module provides many print functions such as sprint_var, sprint_time,
+sprint_error, sprint_call_stack.
 """
 
 import sys
@@ -13,6 +13,7 @@ import re
 import grp
 import socket
 import argparse
+import copy
 try:
     import __builtin__
 except ImportError:
@@ -51,26 +52,25 @@ pgm_dir_path = os.path.normpath(re.sub("/" + pgm_name, "", pgm_file_path)) +\
 pgm_name_var_name = pgm_name.replace(".", "_")
 
 # Initialize global values used as defaults by print_time, print_var, etc.
-col1_indent = 0
+dft_indent = 0
 
 # Calculate default column width for print_var functions based on environment
 # variable settings.  The objective is to make the variable values line up
 # nicely with the time stamps.
-col1_width = 29
+dft_col1_width = 29
 
 NANOSECONDS = os.environ.get('NANOSECONDS', '1')
 
-
 if NANOSECONDS == "1":
-    col1_width = col1_width + 7
+    dft_col1_width = dft_col1_width + 7
 
 SHOW_ELAPSED_TIME = os.environ.get('SHOW_ELAPSED_TIME', '1')
 
 if SHOW_ELAPSED_TIME == "1":
     if NANOSECONDS == "1":
-        col1_width = col1_width + 14
+        dft_col1_width = dft_col1_width + 14
     else:
-        col1_width = col1_width + 7
+        dft_col1_width = dft_col1_width + 7
 
 # Initialize some time variables used in module functions.
 start_time = time.time()
@@ -122,7 +122,7 @@ def sprint_func_name(stack_frame_ix=None):
     r"""
     Return the function name associated with the indicated stack frame.
 
-    Description of arguments:
+    Description of argument(s):
     stack_frame_ix                  The index of the stack frame whose
                                     function name should be returned.  If the
                                     caller does not specify a value, this
@@ -153,9 +153,9 @@ def work_around_inspect_stack_cwd_failure():
     Work around the inspect.stack() getcwd() failure by making "/tmp" the
     current working directory.
 
-    If the current working directory has been deleted, inspect.stack() will
-    fail with "OSError: [Errno 2] No such file or directory" because it tries
-    to do a getcwd().
+    NOTES: If the current working directory has been deleted, inspect.stack()
+    will fail with "OSError: [Errno 2] No such file or directory" because it
+    tries to do a getcwd().
 
     This function will try to prevent this failure by detecting the scenario
     in advance and making "/tmp" the current working directory.
@@ -174,8 +174,8 @@ def get_line_indent(line):
     return len(line) - len(line.lstrip(' '))
 
 
-# get_arg_name is not a print function per se.  I have included it in this
-# module because it is used by sprint_var which is found in this module.
+# get_arg_name is not a print function per se.  It has been included in this
+# module because it is used by sprint_var which is defined in this module.
 def get_arg_name(var,
                  arg_num=1,
                  stack_frame_ix=1):
@@ -183,8 +183,8 @@ def get_arg_name(var,
     Return the "name" of an argument passed to a function.  This could be a
     literal or a variable name.
 
-    Description of arguments:
-    var                             The variable whose name you want returned.
+    Description of argument(s):
+    var                             The variable whose name is to be returned.
     arg_num                         The arg number whose name is to be
                                     returned.  To illustrate how arg_num is
                                     processed, suppose that a programmer codes
@@ -232,8 +232,9 @@ def get_arg_name(var,
 
     def test1(var):
         # Getting the var name of the first arg to this function, test1.
-        # Note, in this case, it doesn't matter what you pass as the first arg
-        # to get_arg_name since it is the caller's variable name that matters.
+        # Note, in this case, it doesn't matter what is passed as the first
+        # arg to get_arg_name since it is the caller's variable name that
+        # matters.
         dummy = 1
         arg_num = 1
         stack_frame = 2
@@ -248,8 +249,8 @@ def get_arg_name(var,
 
     """
 
-    # Note: I wish to avoid recursion so I refrain from calling any function
-    # that calls this function (i.e. sprint_var, valid_value, etc.).
+    # Note: To avoid infinite recursion, avoid calling any function that
+    # calls this function (e.g. sprint_var, valid_value, etc.).
 
     # The user can set environment variable "GET_ARG_NAME_DEBUG" to get debug
     # output from this function.
@@ -272,9 +273,9 @@ def get_arg_name(var,
         print("")
         print_dashes(0, 120)
         print(sprint_func_name() + "() parms:")
-        print_varx("var", var, 0, debug_indent)
-        print_varx("arg_num", arg_num, 0, debug_indent)
-        print_varx("stack_frame_ix", stack_frame_ix, 0, debug_indent)
+        print_varx("var", var, indent=debug_indent)
+        print_varx("arg_num", arg_num, indent=debug_indent)
+        print_varx("stack_frame_ix", stack_frame_ix, indent=debug_indent)
         print("")
         print_call_stack(debug_indent, 2)
 
@@ -300,15 +301,15 @@ def get_arg_name(var,
         stack_frame_ix += 1
         if local_debug:
             print("Adjusted stack_frame_ix...")
-            print_varx("stack_frame_ix", stack_frame_ix, 0, debug_indent)
+            print_varx("stack_frame_ix", stack_frame_ix, indent=debug_indent)
 
     real_called_func_name = sprint_func_name(stack_frame_ix)
 
     module = inspect.getmodule(frame)
 
-    # Though I would expect inspect.getsourcelines(frame) to get all module
+    # Though one would expect inspect.getsourcelines(frame) to get all module
     # source lines if the frame is "<module>", it doesn't do that.  Therefore,
-    # for this special case, I will do inspect.getsourcelines(module).
+    # for this special case, do inspect.getsourcelines(module).
     if function_name == "<module>":
         source_lines, source_line_num =\
             inspect.getsourcelines(module)
@@ -320,18 +321,18 @@ def get_arg_name(var,
 
     if local_debug:
         print("\n  Variables retrieved from inspect.stack() function:")
-        print_varx("frame", frame, 0, debug_indent + 2)
-        print_varx("filename", filename, 0, debug_indent + 2)
-        print_varx("cur_line_no", cur_line_no, 0, debug_indent + 2)
-        print_varx("function_name", function_name, 0, debug_indent + 2)
-        print_varx("lines", lines, 0, debug_indent + 2)
-        print_varx("index", index, 0, debug_indent + 2)
-        print_varx("source_line_num", source_line_num, 0, debug_indent)
-        print_varx("line_ix", line_ix, 0, debug_indent)
+        print_varx("frame", frame, indent=debug_indent + 2)
+        print_varx("filename", filename, indent=debug_indent + 2)
+        print_varx("cur_line_no", cur_line_no, indent=debug_indent + 2)
+        print_varx("function_name", function_name, indent=debug_indent + 2)
+        print_varx("lines", lines, indent=debug_indent + 2)
+        print_varx("index", index, indent=debug_indent + 2)
+        print_varx("source_line_num", source_line_num, indent=debug_indent)
+        print_varx("line_ix", line_ix, indent=debug_indent)
         if local_debug_show_source:
-            print_varx("source_lines", source_lines, 0, debug_indent)
-        print_varx("real_called_func_name", real_called_func_name, 0,
-                   debug_indent)
+            print_varx("source_lines", source_lines, indent=debug_indent)
+        print_varx("real_called_func_name", real_called_func_name,
+                   indent=debug_indent)
 
     # Get a list of all functions defined for the module.  Note that this
     # doesn't work consistently when _run_exitfuncs is at the top of the stack
@@ -440,20 +441,20 @@ def get_arg_name(var,
     called_func_name = re.sub(called_func_name_regex, "\\4", composite_line)
     arg_list_etc = "(" + re.sub(pre_args_regex, "", composite_line)
     if local_debug:
-        print_varx("aliases", aliases, 0, debug_indent)
-        print_varx("import_name_regex", import_name_regex, 0, debug_indent)
-        print_varx("func_name_regex", func_name_regex, 0, debug_indent)
-        print_varx("pre_args_regex", pre_args_regex, 0, debug_indent)
-        print_varx("start_line_ix", start_line_ix, 0, debug_indent)
-        print_varx("end_line_ix", end_line_ix, 0, debug_indent)
-        print_varx("composite_line", composite_line, 0, debug_indent)
-        print_varx("lvalue_regex", lvalue_regex, 0, debug_indent)
-        print_varx("lvalue_string", lvalue_string, 0, debug_indent)
-        print_varx("lvalues", lvalues, 0, debug_indent)
-        print_varx("called_func_name_regex", called_func_name_regex, 0,
-                   debug_indent)
-        print_varx("called_func_name", called_func_name, 0, debug_indent)
-        print_varx("arg_list_etc", arg_list_etc, 0, debug_indent)
+        print_varx("aliases", aliases, indent=debug_indent)
+        print_varx("import_name_regex", import_name_regex, indent=debug_indent)
+        print_varx("func_name_regex", func_name_regex, indent=debug_indent)
+        print_varx("pre_args_regex", pre_args_regex, indent=debug_indent)
+        print_varx("start_line_ix", start_line_ix, indent=debug_indent)
+        print_varx("end_line_ix", end_line_ix, indent=debug_indent)
+        print_varx("composite_line", composite_line, indent=debug_indent)
+        print_varx("lvalue_regex", lvalue_regex, indent=debug_indent)
+        print_varx("lvalue_string", lvalue_string, indent=debug_indent)
+        print_varx("lvalues", lvalues, indent=debug_indent)
+        print_varx("called_func_name_regex", called_func_name_regex,
+                   indent=debug_indent)
+        print_varx("called_func_name", called_func_name, indent=debug_indent)
+        print_varx("arg_list_etc", arg_list_etc, indent=debug_indent)
 
     # Parse arg list...
     # Initialize...
@@ -500,8 +501,8 @@ def get_arg_name(var,
             argument = args_list[arg_num - 1]
 
     if local_debug:
-        print_varx("args_list", args_list, 0, debug_indent)
-        print_varx("argument", argument, 0, debug_indent)
+        print_varx("args_list", args_list, indent=debug_indent)
+        print_varx("argument", argument, indent=debug_indent)
         print_dashes(0, 120)
 
     return argument
@@ -561,7 +562,7 @@ def sprint_time(buffer=""):
 
     #(CDT) 2016/08/03 17:18:47.317339 -    0.000046 - Hi.
 
-    Description of arguments.
+    Description of argument(s).
     buffer                          This will be appended to the formatted
                                     time string.
     """
@@ -622,7 +623,7 @@ def sprint_error(buffer=""):
 
     #(CDT) 2016/08/03 17:12:05 - **ERROR** Oops.
 
-    Description of arguments.
+    Description of argument(s).
     buffer                          This will be appended to the formatted
                                     error string.
     """
@@ -661,8 +662,8 @@ def bit_length(number):
         # Consider a single nibble whose signed values can range from -8 to 7
         # (0x8 to 0x7).  A value of 0x7 equals 0b0111.  Therefore, its length
         # in bits is 3.  Since the negative bit (i.e. 0b1000) is not set, the
-        # value 7 clearly will fit in one nibble.  With -8 = 0x8 = 0b1000, you
-        # have the smallest negative value that will fit.  Note that it
+        # value 7 clearly will fit in one nibble.  With -8 = 0x8 = 0b1000, one
+        # has the smallest negative value that will fit.  Note that it
         # requires 3 bits of 0.  So by converting a number value of -8 to a
         # working_number of 7, this function can accurately calculate the
         # number of bits and therefore nibbles required to represent the
@@ -695,8 +696,8 @@ def get_req_num_hex_digits(number):
         # Consider a single nibble whose signed values can range from -8 to 7
         # (0x8 to 0x7).  A value of 0x7 equals 0b0111.  Therefore, its length
         # in bits is 3.  Since the negative bit (i.e. 0b1000) is not set, the
-        # value 7 clearly will fit in one nibble.  With -8 = 0x8 = 0b1000, you
-        # have the smallest negative value that will fit.  Note that it
+        # value 7 clearly will fit in one nibble.  With -8 = 0x8 = 0b1000, one
+        # has the smallest negative value that will fit.  Note that it
         # requires 3 bits of 0.  So by converting a number value of -8 to a
         # working_number of 7, this function can accurately calculate the
         # number of bits and therefore nibbles required to represent the
@@ -751,41 +752,284 @@ def dft_num_hex_digits():
         return _gen_print_dft_num_hex_digits_
 
 
+# Create constant functions to describe various types of dictionaries.
+def dict_type():
+    return 1
+
+
+def ordered_dict_type():
+    return 2
+
+
+def dot_dict_type():
+    return 3
+
+
+def normalized_dict_type():
+    return 4
+
+
 def is_dict(var_value):
     r"""
-    Return 1 if var_value is a type of dictionary and 0 if it is not.
+    Return non-zero if var_value is a type of dictionary and 0 if it is not.
+
+    The specific non-zero value returned will indicate what type of dictionary
+    var_value is (see constant functions above).
+
+    Description of argument(s):
+    var_value                       The object to be analyzed to determine
+                                    whether it is a dictionary and if so, what
+                                    type of dictionary.
     """
 
     type_is_dict = 0
     if isinstance(var_value, dict):
-        type_is_dict = 1
+        type_is_dict = dict_type()
     try:
         if isinstance(var_value, collections.OrderedDict):
-            type_is_dict = 1
+            type_is_dict = ordered_dict_type()
     except AttributeError:
         pass
     try:
         if isinstance(var_value, DotDict):
-            type_is_dict = 1
+            type_is_dict = dot_dict_type()
     except NameError:
         pass
     try:
         if isinstance(var_value, NormalizedDict):
-            type_is_dict = 1
+            type_is_dict = normalized_dict_type()
     except NameError:
         pass
     return type_is_dict
 
 
+def get_int_types():
+    r"""
+    Return a tuple consisting of the valid integer data types for the system
+    and version of python being run.
+
+    Example:
+    (int, long)
+    """
+
+    try:
+        int_types = (int, long)
+    except NameError:
+        int_types = (int,)
+    return int_types
+
+
+def get_string_types():
+    r"""
+    Return a tuple consisting of the valid string data types for the system
+    and version of python being run.
+
+    Example:
+    (str, unicode)
+    """
+
+    try:
+        string_types = (str, unicode)
+    except NameError:
+        string_types = (bytes, str)
+    return string_types
+
+
+def valid_fmts():
+    r"""
+    Return a list of the valid formats that can be specified for the fmt
+    argument of the sprint_varx function (defined below).
+    """
+
+    return [
+        'hexa',
+        'octal',
+        'binary',
+        'blank',
+        'terse',
+        'quote_keys',
+        'show_type']
+
+
+def create_fmt_definition():
+    r"""
+    Create a string of code that can be executed to create constant fmt
+    definition functions.
+
+    These functions can be used by callers of sprint_var/sprint_varx to set
+    the fmt argument correctly.
+
+    Likewise, the sprint_varx function will use these generated functions to
+    correctly interpret the fmt argument.
+
+    Example output from this function:
+
+    def hexa():
+        return 0x00000001
+    def octal_fmt():
+        return 0x00000002
+    etc.
+    """
+
+    buffer = ""
+    bits = 0x00000001
+    for fmt_name in valid_fmts():
+        buffer += "def " + fmt_name + "():\n"
+        buffer += "    return " + "0x%08x" % bits + "\n"
+        bits = bits << 1
+    return buffer
+
+
+# Dynamically create fmt definitions (for use with the fmt argument of
+# sprint_varx function):
+exec(create_fmt_definition())
+
+
+def list_pop(a_list, index=0, default=None):
+    r"""
+    Pop the list entry indicated by the index and return the entry.  If no
+    such entry exists, return default.
+
+    Note that the list passed to this function will be modified.
+
+    Description of argument(s):
+    a_list                          The list from which an entry is to be
+                                    popped.
+    index                           The index indicating which entry is to be
+                                    popped.
+    default                         The value to be returned if there is no
+                                    entry at the given index location.
+    """
+    try:
+        return a_list.pop(index)
+    except IndexError:
+        return default
+
+
+def parse_fmt(fmt):
+    r"""
+    Parse the fmt argument and return a tuple consisting of a format and a
+    child format.
+
+    This function was written for use by the sprint_varx function defined in
+    this module.
+
+    When sprint_varx is processing a multi-level object such as a list or
+    dictionary (which in turn may contain other lists or dictionaries), the
+    fmt value dictates the print formatting of the current level and the
+    child_fmt value dictates the print formatting of subordinate entries.
+    Consider the following example:
+
+    python code example:
+
+    ord_dict = \
+        collections.OrderedDict([
+            ('one', 1),
+            ('two', 2),
+            ('sub',
+             collections.OrderedDict([
+                ('three', 3), ('four', 4)]))])
+
+    print_var(ord_dict)
+
+    This would generate the following output:
+
+    ord_dict:
+      ord_dict[one]:             1
+      ord_dict[two]:             2
+      ord_dict[sub]:
+        ord_dict[sub][three]:    3
+        ord_dict[sub][four]:     4
+
+    The first level in this example is the line that simply says "ord_dict".
+    The second level is comprised of the dictionary entries with the keys
+    'one', 'two' and 'sub'.  The third level is comprised of the last 2 lines
+    (i.e. printed values 3 and 4).
+
+    Given the data structure shown above, the programmer could code the
+    following where fmt is a simple integer value set by calling the terse()
+    function.
+
+    print_var(ord_dict, fmt=terse())
+
+    The output would look like this:
+
+    ord_dict:
+      [one]:                     1
+      [two]:                     2
+      [sub]:
+        [three]:                 3
+        [four]:                  4
+
+    Note the terse format where the name of the object ("ord_dict") is not
+    repeated on every line as it was in example #1.
+
+    If the programmer wishes to get more granular with the fmt argument,
+    he/she can specify it as a list where each entry corresponds to a level of
+    the object being printed.  The last such list entry governs the print
+    formatting of all subordinate parts of the given object.
+
+    Look at each of the following code examples and their corresponding
+    output.  See how the show_type() formatting affects the printing depending
+    on which element it occupies in the fmt argument:
+
+    print_var(ord_dict, fmt=[show_type()])
+
+    ord_dict: <collections.OrderedDict>
+      ord_dict[one]:             1 <int>
+      ord_dict[two]:             2 <int>
+      ord_dict[sub]: <collections.OrderedDict>
+        ord_dict[sub][three]:    3 <int>
+        ord_dict[sub][four]:     4 <int>
+
+    print_var(ord_dict, fmt=[0, show_type()])
+
+    ord_dict:
+      ord_dict[one]:             1 <int>
+      ord_dict[two]:             2 <int>
+      ord_dict[sub]: <collections.OrderedDict>
+        ord_dict[sub][three]:    3 <int>
+        ord_dict[sub][four]:     4 <int>
+
+    print_var(ord_dict, fmt=[0, 0, show_type()])
+
+    ord_dict:
+      ord_dict[one]:             1
+      ord_dict[two]:             2
+      ord_dict[sub]:
+        ord_dict[sub][three]:    3 <int>
+        ord_dict[sub][four]:     4 <int>
+
+    Description of argument(s):
+    fmt                             The format argument such as is passed to
+                                    sprint_varx.  See the prolog of
+                                    sprint_varx for more details.
+    """
+
+    # Make a copy of the fmt list in order to avoid modifying the caller's
+    # fmt list value.
+    fmt = copy.deepcopy(fmt)
+    try:
+        # Assume fmt is a list.  Pop the first element from the list.
+        first_element = list_pop(fmt, index=0, default=0)
+        # Return the first list element along with either 1) the remainder of
+        # the fmt list if not null or 2) another copy of the first element.
+        return first_element, fmt if len(fmt) else first_element
+    except AttributeError:
+        # fmt is not a list so treat it as a simple integer value.
+        return fmt, fmt
+
+
 def sprint_varx(var_name,
                 var_value,
-                hex=0,
-                loc_col1_indent=col1_indent,
-                loc_col1_width=col1_width,
+                fmt=0,
+                indent=dft_indent,
+                col1_width=dft_col1_width,
                 trailing_char="\n",
-                key_list=None):
+                key_list=None,
+                delim=":"):
     r"""
-    Print the var name/value passed to it.  If the caller lets loc_col1_width
+    Print the var name/value passed to it.  If the caller lets col1_width
     default, the printing lines up nicely with output generated by the
     print_time functions.
 
@@ -822,21 +1066,44 @@ def sprint_varx(var_name,
       my_dict[two]:                                   2
       my_dict[one]:                                   1
 
-    Description of arguments.
+    Description of argument(s).
     var_name                        The name of the variable to be printed.
     var_value                       The value of the variable to be printed.
-    hex                             This indicates that the value should be
-                                    printed in hex format.  It is the user's
-                                    responsibility to ensure that a var_value
-                                    contains a valid hex number.  For string
-                                    var_values, this will be interpreted as
-                                    show_blanks which means that blank values
-                                    will be printed as "<blank>".  For dict
-                                    var_values, this will be interpreted as
-                                    terse format where keys are not repeated
-                                    in the output.
-    loc_col1_indent                 The number of spaces to indent the output.
-    loc_col1_width                  The width of the output column containing
+    fmt                             A bit map to dictate the format of the
+                                    output.  For printing multi-level objects
+                                    like lists and dictionaries, this argument
+                                    may also be a list of bit maps.  The first
+                                    entry pertains to the highest level of
+                                    output, the second entry pertains to the
+                                    2nd level of output, etc.  The last entry
+                                    in the list pertains to all subordinate
+                                    levels.  The bits can be set using the
+                                    dynamically created functionhs above.
+                                    Example: sprint_varx("var1", var1,
+                                    fmt=terse()).  Note that these values can
+                                    be OR'ed together: print_var(var1, hexa()
+                                    | terse()).  If the caller ORs mutually
+                                    exclusive bits (hexa() | octal()),
+                                    behavior is not guaranteed.  The following
+                                    features are supported:
+        hexa                        Print all integer values in hexadecimal
+                                    format.
+        octal                       Print all integer values in octal format.
+        binary                      Print all integer values in binary format.
+        blank                       For blank string values, print "<blank>"
+                                    instead of an actual blank.
+        terse                       For structured values like dictionaries,
+                                    lists, etc. do not repeat the name of the
+                                    variable on each line prior to the key or
+                                    subscript value.  Example: print "[key1]"
+                                    instead of "my_dict[key1]".
+        quote_keys                  Quote dictionary keys in the output.
+                                    Example: my_dict['key1'] instead of
+                                    my_dict[key1].
+        show_type                   Show the type of the data in angled
+                                    brackets just to the right of the data.
+    indent                          The number of spaces to indent the output.
+    col1_width                      The width of the output column containing
                                     the variable name.  The default value of
                                     this is adjusted so that the var_value
                                     lines up with text printed via the
@@ -860,31 +1127,31 @@ def sprint_varx(var_name,
                                     names begin with "one" will be printed.
                                     Note: This argument pertains only to
                                     var_values which are dictionaries.
+    delim                           The value to be used to delimit the
+                                    variable name from the variable value in
+                                    the output.
     """
 
-    # Determine the type
-    try:
-        int_types = (int, long)
-    except NameError:
-        int_types = (int,)
-    try:
-        string_types = (str, unicode)
-    except NameError:
-        string_types = (bytes, str)
-    simple_types = int_types + string_types + (float, bool)
-    if type(var_value) in simple_types \
-       or var_value is None:
+    fmt, child_fmt = parse_fmt(fmt)
+
+    if fmt & show_type():
+        type_str = "<" + str(type(var_value)).split("'")[1] + ">"
+    # Compose object type categories.
+    int_types = get_int_types()
+    string_types = get_string_types()
+    simple_types = int_types + string_types + (float, bool, type, type(None))
+    # Determine the type.
+    if type(var_value) in simple_types:
         # The data type is simple in the sense that it has no subordinate
         # parts.
-        # Adjust loc_col1_width.
-        loc_col1_width = loc_col1_width - loc_col1_indent
-        # See if the user wants the output in hex format.
-        if hex:
-            if type(var_value) not in int_types:
-                value_format = "%s"
-                if var_value == "":
-                    var_value = "<blank>"
-            else:
+        # Adjust col1_width.
+        col1_width = col1_width - indent
+        # Set default for value_format.
+        value_format = "%s"
+        # Process format requests.
+        if type(var_value) in int_types:
+            # Process format values pertaining to int types.
+            if fmt & hexa():
                 num_hex_digits = max(dft_num_hex_digits(),
                                      get_req_num_hex_digits(var_value))
                 # Convert a negative number to its positive twos complement
@@ -893,24 +1160,52 @@ def sprint_varx(var_name,
                 # "0xffffffffffffffff".
                 var_value = var_value & (2 ** (num_hex_digits * 4) - 1)
                 value_format = "0x%0" + str(num_hex_digits) + "x"
-        else:
-            value_format = "%s"
-        format_string = "%" + str(loc_col1_indent) + "s%-" \
-            + str(loc_col1_width) + "s" + value_format + trailing_char
+            elif fmt & octal():
+                value_format = "0o%016o"
+            elif fmt & binary():
+                num_digits, remainder = \
+                    divmod(max(bit_length(var_value), 1), 8)
+                num_digits *= 8
+                if remainder:
+                    num_digits += 8
+                num_digits += 2
+                value_format = '#0' + str(num_digits) + 'b'
+                var_value = format(var_value, value_format)
+                value_format = "%s"
+        elif type(var_value) in string_types:
+            # Process format values pertaining to string types.
+            if fmt & blank() and var_value == "":
+                value_format = "%s"
+                var_value = "<blank>"
+        elif type(var_value) is type:
+            var_value = str(var_value).split("'")[1]
+        format_string = "%" + str(indent) + "s%-" + str(col1_width) + "s" \
+            + value_format
+        if fmt & show_type():
+            if var_value != "":
+                format_string += " "
+            format_string += type_str
+        format_string += trailing_char
+        if fmt & terse():
+            # Strip everything leading up to the first square brace.
+            var_name = re.sub(r".*\[", "[", var_name)
         if value_format == "0x%08x":
-            return format_string % ("", str(var_name) + ":",
+            return format_string % ("", str(var_name) + delim,
                                     var_value & 0xffffffff)
         else:
-            return format_string % ("", str(var_name) + ":", var_value)
-    elif isinstance(var_value, type):
-        return sprint_varx(var_name, str(var_value).split("'")[1], hex,
-                           loc_col1_indent, loc_col1_width, trailing_char,
-                           key_list)
+            return format_string % ("", str(var_name) + delim, var_value)
     else:
         # The data type is complex in the sense that it has subordinate parts.
-        format_string = "%" + str(loc_col1_indent) + "s%s\n"
-        buffer = format_string % ("", var_name + ":")
-        loc_col1_indent += 2
+        if fmt & terse():
+            # Strip everything leading up to the first square brace.
+            loc_var_name = re.sub(r".*\[", "[", var_name)
+        else:
+            loc_var_name = var_name
+        format_string = "%" + str(indent) + "s%s\n"
+        buffer = format_string % ("", loc_var_name + ":")
+        if fmt & show_type():
+            buffer = buffer.replace("\n", " " + type_str + "\n")
+        indent += 2
         try:
             length = len(var_value)
         except TypeError:
@@ -918,6 +1213,10 @@ def sprint_varx(var_name,
         ix = 0
         loc_trailing_char = "\n"
         if is_dict(var_value):
+            if type(child_fmt) is list:
+                child_quote_keys = (child_fmt[0] & quote_keys())
+            else:
+                child_quote_keys = (child_fmt & quote_keys())
             for key, value in var_value.items():
                 if key_list is not None:
                     key_list_regex = "^" + "|".join(key_list) + "$"
@@ -926,37 +1225,27 @@ def sprint_varx(var_name,
                 ix += 1
                 if ix == length:
                     loc_trailing_char = trailing_char
-                if hex:
-                    # Since hex is being used as a format type, we want it
-                    # turned off when processing integer dictionary values so
-                    # it is not interpreted as a hex indicator.
-                    loc_hex = not (isinstance(value, int))
-                    buffer += sprint_varx("[" + key + "]", value,
-                                          loc_hex, loc_col1_indent,
-                                          loc_col1_width,
-                                          loc_trailing_char,
-                                          key_list)
-                else:
-                    buffer += sprint_varx(var_name + "[" + str(key) + "]",
-                                          value, hex, loc_col1_indent,
-                                          loc_col1_width, loc_trailing_char,
-                                          key_list)
+                if child_quote_keys:
+                    key = "'" + key + "'"
+                key = "[" + str(key) + "]"
+                buffer += sprint_varx(var_name + key, value, child_fmt, indent,
+                                      col1_width, loc_trailing_char, key_list)
         elif type(var_value) in (list, tuple, set):
             for key, value in enumerate(var_value):
                 ix += 1
                 if ix == length:
                     loc_trailing_char = trailing_char
-                buffer += sprint_varx(var_name + "[" + str(key) + "]", value,
-                                      hex, loc_col1_indent, loc_col1_width,
-                                      loc_trailing_char, key_list)
+                key = "[" + str(key) + "]"
+                buffer += sprint_varx(var_name + key, value, child_fmt, indent,
+                                      col1_width, loc_trailing_char, key_list)
         elif isinstance(var_value, argparse.Namespace):
             for key in var_value.__dict__:
                 ix += 1
                 if ix == length:
                     loc_trailing_char = trailing_char
                 cmd_buf = "buffer += sprint_varx(var_name + \".\" + str(key)" \
-                          + ", var_value." + key + ", hex, loc_col1_indent," \
-                          + " loc_col1_width, loc_trailing_char, key_list)"
+                          + ", var_value." + key + ", child_fmt, indent," \
+                          + " col1_width, loc_trailing_char, key_list)"
                 exec(cmd_buf)
         else:
             var_type = type(var_value).__name__
@@ -964,11 +1253,11 @@ def sprint_varx(var_name,
             var_value = "<" + var_type + " type not supported by " + \
                         func_name + "()>"
             value_format = "%s"
-            loc_col1_indent -= 2
-            # Adjust loc_col1_width.
-            loc_col1_width = loc_col1_width - loc_col1_indent
-            format_string = "%" + str(loc_col1_indent) + "s%-" \
-                + str(loc_col1_width) + "s" + value_format + trailing_char
+            indent -= 2
+            # Adjust col1_width.
+            col1_width = col1_width - indent
+            format_string = "%" + str(indent) + "s%-" \
+                + str(col1_width) + "s" + value_format + trailing_char
             return format_string % ("", str(var_name) + ":", var_value)
 
         return buffer
@@ -976,109 +1265,59 @@ def sprint_varx(var_name,
     return ""
 
 
-def sprint_var(var_value,
-               hex=0,
-               loc_col1_indent=col1_indent,
-               loc_col1_width=col1_width,
-               trailing_char="\n",
-               key_list=None):
+def sprint_var(*args, **kwargs):
     r"""
-    Figure out the name of the first argument for you and then call
+    Figure out the name of the first argument for the caller and then call
     sprint_varx with it.  Therefore, the following 2 calls are equivalent:
     sprint_varx("var1", var1)
     sprint_var(var1)
+
+    See sprint_varx for description of arguments.
     """
 
-    # Get the name of the first variable passed to this function.
     stack_frame = 2
     caller_func_name = sprint_func_name(2)
     if caller_func_name.endswith("print_var"):
         stack_frame += 1
+    # Get the name of the first variable passed to this function.
     var_name = get_arg_name(None, 1, stack_frame)
-    return sprint_varx(var_name, var_value=var_value, hex=hex,
-                       loc_col1_indent=loc_col1_indent,
-                       loc_col1_width=loc_col1_width,
-                       trailing_char=trailing_char,
-                       key_list=key_list)
+    return sprint_varx(var_name, *args, **kwargs)
 
 
-def sprint_vars(*args):
+def sprint_vars(*args, **kwargs):
     r"""
     Sprint the values of one or more variables.
 
-    Description of args:
-    args:
-        If the first argument is an integer, it will be interpreted to be the
-        "indent" value.
-        If the second argument is an integer, it will be interpreted to be the
-        "col1_width" value.
-        If the third argument is an integer, it will be interpreted to be the
-        "hex" value.
-        All remaining parms are considered variable names which are to be
-        sprinted.
+    Description of argument(s):
+    args                            The variable values which are to be
+                                    printed.
+    kwargs                          See sprint_varx (above) for description of
+                                    additional arguments.
     """
 
-    if len(args) == 0:
-        return
-
-    # Get the name of the first variable passed to this function.
     stack_frame = 2
     caller_func_name = sprint_func_name(2)
     if caller_func_name.endswith("print_vars"):
         stack_frame += 1
 
-    parm_num = 1
-
-    # Create list from args (which is a tuple) so that it can be modified.
-    args_list = list(args)
-
-    var_name = get_arg_name(None, parm_num, stack_frame)
-    # See if parm 1 is to be interpreted as "indent".
-    try:
-        if isinstance(int(var_name), int):
-            indent = int(var_name)
-            args_list.pop(0)
-            parm_num += 1
-    except ValueError:
-        indent = 0
-
-    var_name = get_arg_name(None, parm_num, stack_frame)
-    # See if parm 1 is to be interpreted as "col1_width".
-    try:
-        if isinstance(int(var_name), int):
-            loc_col1_width = int(var_name)
-            args_list.pop(0)
-            parm_num += 1
-    except ValueError:
-        loc_col1_width = col1_width
-
-    var_name = get_arg_name(None, parm_num, stack_frame)
-    # See if parm 1 is to be interpreted as "hex".
-    try:
-        if isinstance(int(var_name), int):
-            hex = int(var_name)
-            args_list.pop(0)
-            parm_num += 1
-    except ValueError:
-        hex = 0
-
     buffer = ""
-    for var_value in args_list:
-        var_name = get_arg_name(None, parm_num, stack_frame)
-        buffer += sprint_varx(var_name, var_value, hex, indent, loc_col1_width)
-        parm_num += 1
+    arg_num = 1
+    for var_value in args:
+        var_name = get_arg_name(None, arg_num, stack_frame)
+        buffer += sprint_varx(var_name, var_value, **kwargs)
+        arg_num += 1
 
     return buffer
 
 
-def sprint_dashes(indent=col1_indent,
+def sprint_dashes(indent=dft_indent,
                   width=80,
                   line_feed=1,
                   char="-"):
     r"""
     Return a string of dashes to the caller.
 
-    Description of arguments:
+    Description of argument(s):
     indent                          The number of characters to indent the
                                     output.
     width                           The width of the string of dashes.
@@ -1102,7 +1341,7 @@ def sindent(text="",
     Pre-pend the specified number of characters to the text string (i.e.
     indent it) and return it.
 
-    Description of arguments:
+    Description of argument(s):
     text                            The string to be indented.
     indent                          The number of characters to indent the
                                     string.
@@ -1209,7 +1448,7 @@ def sprint_call_stack(indent=0,
         59 /tmp/scr5.py
     -------------------------------------------------------------------------
 
-    Description of arguments:
+    Description of argument(s):
     indent                          The number of characters to indent each
                                     line of output.
     stack_frame_ix                  The index of the first stack frame which
@@ -1235,7 +1474,7 @@ def sprint_call_stack(indent=0,
         if ix < stack_frame_ix:
             ix += 1
             continue
-        # I want the line number shown to be the line where you find the line
+        # Make the line number shown to be the line where one finds the line
         # shown.
         try:
             line_num = str(current_stack[ix + 1][2])
@@ -1260,7 +1499,7 @@ def sprint_executing(stack_frame_ix=None, style=None):
 
     #(CDT) 2016/08/25 17:54:27 - Executing: func1(x = 1)
 
-    Description of arguments:
+    Description of argument(s):
     stack_frame_ix                  The index of the stack frame whose
                                     function info should be returned.  If the
                                     caller does not specify a value, this
@@ -1297,14 +1536,14 @@ def sprint_pgm_header(indent=0,
     of the run.  It includes useful information like command line, pid,
     userid, program parameters, etc.
 
-    Description of arguments:
+    Description of argument(s):
     indent                          The number of characters to indent each
                                     line of output.
     linefeed                        Indicates whether a line feed be included
                                     at the beginning and end of the report.
     """
 
-    loc_col1_width = col1_width + indent
+    col1_width = dft_col1_width + indent
 
     buffer = ""
     if linefeed:
@@ -1319,14 +1558,14 @@ def sprint_pgm_header(indent=0,
     buffer += sindent(sprint_time() + "Program parameter values, etc.:\n\n",
                       indent)
     buffer += sprint_varx("command_line", ' '.join(sys.argv), 0, indent,
-                          loc_col1_width)
+                          col1_width)
     # We want the output to show a customized name for the pid and pgid but
     # we want it to look like a valid variable name.  Therefore, we'll use
     # pgm_name_var_name which was set when this module was imported.
     buffer += sprint_varx(pgm_name_var_name + "_pid", os.getpid(), 0, indent,
-                          loc_col1_width)
+                          col1_width)
     buffer += sprint_varx(pgm_name_var_name + "_pgid", os.getpgrp(), 0, indent,
-                          loc_col1_width)
+                          col1_width)
     userid_num = str(os.geteuid())
     try:
         username = os.getlogin()
@@ -1336,19 +1575,19 @@ def sprint_pgm_header(indent=0,
         else:
             username = "?"
     buffer += sprint_varx("uid", userid_num + " (" + username
-                          + ")", 0, indent, loc_col1_width)
+                          + ")", 0, indent, col1_width)
     buffer += sprint_varx("gid", str(os.getgid()) + " ("
                           + str(grp.getgrgid(os.getgid()).gr_name) + ")", 0,
-                          indent, loc_col1_width)
+                          indent, col1_width)
     buffer += sprint_varx("host_name", socket.gethostname(), 0, indent,
-                          loc_col1_width)
+                          col1_width)
     try:
         DISPLAY = os.environ['DISPLAY']
     except KeyError:
         DISPLAY = ""
-    buffer += sprint_varx("DISPLAY", DISPLAY, 0, indent,
-                          loc_col1_width)
-    # I want to add code to print caller's parms.
+    buffer += sprint_var(DISPLAY, 0, indent,
+                         col1_width)
+    # TODO: Add code to print caller's parms.
 
     # __builtin__.arg_obj is created by the get_arg module function,
     # gen_get_options.
@@ -1363,7 +1602,7 @@ def sprint_pgm_header(indent=0,
 
         for parm in parm_list:
             parm_value = BuiltIn().get_variable_value("${" + parm + "}")
-            buffer += sprint_varx(parm, parm_value, 0, indent, loc_col1_width)
+            buffer += sprint_varx(parm, parm_value, 0, indent, col1_width)
 
         # Setting global program_pid.
         BuiltIn().set_global_variable("${program_pid}", os.getpid())
@@ -1381,7 +1620,7 @@ def sprint_error_report(error_text="\n",
     Return a string with a standardized report which includes the caller's
     error text, the call stack and the program header.
 
-    Description of args:
+    Description of argument(s):
     error_text                      The error text to be included in the
                                     report.  The caller should include any
                                     needed linefeeds.
@@ -1432,9 +1671,9 @@ def sprint_issuing(cmd_buf,
 
     #(CDT) 2016/08/25 17:57:36 - Issuing: ls
 
-    Description of args:
+    Description of argument(s):
     cmd_buf                         The command to be executed by caller.
-    test_mode                       With test_mode set, your output will look
+    test_mode                       With test_mode set, the output will look
                                     like this:
 
     #(CDT) 2016/08/25 17:57:36 - (test_mode) Issuing: ls
@@ -1475,7 +1714,7 @@ def sprint(buffer=""):
     dprint functions defined dynamically below, i.e. it would not normally be
     called for general use.
 
-    Description of arguments.
+    Description of argument(s).
     buffer                          This will be returned to the caller.
     """
 
@@ -1491,7 +1730,7 @@ def sprintn(buffer=""):
     by the qprint and dprint functions defined dynamically below, i.e. it
     would not normally be called for general use.
 
-    Description of arguments.
+    Description of argument(s).
     buffer                          This will be returned to the caller.
     """
 
@@ -1511,7 +1750,7 @@ def gp_print(buffer,
 
     This function is intended for use only by other functions in this module.
 
-    Description of arguments:
+    Description of argument(s):
     buffer                          The string to be printed.
     stream                          Either "stdout" or "stderr".
     """
@@ -1534,7 +1773,7 @@ def gp_log(buffer):
 
     This function is intended for use only by other functions in this module.
 
-    Description of arguments:
+    Description of argument(s):
     buffer                          The string to be logged.
     """
 
@@ -1550,7 +1789,7 @@ def gp_debug_print(buffer):
 
     This function is intended for use only by other functions in this module.
 
-    Description of arguments:
+    Description of argument(s):
     buffer                          The string to be printed.
     """
 
@@ -1599,7 +1838,7 @@ def get_var_value(var_value=None,
 
     my_func()
 
-    Description of arguments:
+    Description of argument(s):
     var_value                       The value to be returned (if not equal to
                                     None).
     default                         The value that is returned if var_value is
