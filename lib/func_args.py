@@ -5,6 +5,7 @@ This module provides argument manipulation functions like pop_arg.
 """
 
 import gen_print as gp
+import collections
 
 
 def pop_arg(default, *args, **kwargs):
@@ -69,3 +70,119 @@ def pop_arg(default, *args, **kwargs):
             arg_value = default
 
     return arg_value, args, kwargs
+
+
+def source_to_object(value):
+    r"""
+    Evaluate string value as python source code and return the resulting
+    object.
+
+    If value is NOT a string or can not be interpreted as a python source
+    object definition, simply return value.
+
+    The idea is to convert python object definition source code (e.g. for
+    lists, dictionaries, tuples, etc.) into an object.
+
+    Example:
+
+    Note that this first example is a special case in that it is a short-cut
+    for specifying a collections.OrderedDict.
+
+    result = source_to_object("[('one', 1), ('two', 2), ('three', 3)]")
+
+    The result is a collections.OrderedDict object:
+
+    result:
+      [one]:                     1
+      [two]:                     2
+      [three]:                   3
+
+    This is a shortcut for the long form shown here:
+
+    result = source_to_object("collections.OrderedDict([('one', 1), ('two',
+    2), ('three', 3)])")
+
+    Also note that support for this special case short-cut precludes the
+    possibility of interpreting such a string as a list of tuples.
+
+    Example:
+
+    In this example, the result will be a list:
+
+    result = source_to_object("[1, 2, 3]")
+
+    result:
+      result[0]:                 1
+      result[1]:                 2
+      result[2]:                 3
+
+    Example:
+
+    In this example, the value passed to this function is not a string so it
+    is simply returned.
+
+    result = source_to_object(1)
+
+    More examples:
+    result = source_to_object("dict(one=1, two=2, three=3)")
+    result = source_to_object("{'one':1, 'two':2, 'three':3}")
+    result = source_to_object(True)
+    etc.
+
+    Description of argument(s):
+    value                           If value is a string, it will be evaluated
+                                    as a python statement.  If the statement
+                                    is valid, the resulting object will be
+                                    returned.  In all other cases, the value
+                                    will simply be returned.
+    """
+
+    if type(value) not in gp.get_string_types():
+        return value
+
+    # Strip white space prior to attempting to interpret the string as python
+    # code.
+    value = value.strip()
+
+    # Try special case of collections.OrderedDict:
+    if value.startswith("["):
+        try:
+            return eval("collections.OrderedDict(" + value + ")")
+        except (TypeError, NameError, ValueError):
+            pass
+
+    try:
+        return eval(value)
+    except (NameError, SyntaxError):
+        pass
+
+    return value
+
+
+def args_to_objects(args):
+    r"""
+    Run source_to_object() on each element in args and return the result.
+
+    Description of argument(s):
+    args                            A type of dictionary, list, set, tuple or
+                                    simple object whose elements are to be
+                                    converted via a call to source_to_object().
+    """
+
+    type_of_dict = gp.is_dict(args)
+    if type_of_dict:
+        if type_of_dict == gp.dict_type():
+            return {k: source_to_object(v) for (k, v) in args.items()}
+        elif type_of_dict == gp.ordered_dict_type():
+            return collections.OrderedDict((k, v) for (k, v) in args.items())
+        elif type_of_dict == gp.dot_dict_type():
+            return DotDict((k, v) for (k, v) in args.items())
+        elif type_of_dict == gp.normalized_dict_type():
+            return NormalizedDict((k, v) for (k, v) in args.items())
+    # Assume args is list, tuple or set.
+    if type(args) in (list, set):
+        return [source_to_object(arg) for arg in args]
+    elif type(args) is tuple:
+        return tuple([source_to_object(arg) for arg in args])
+
+    return source_to_object(args)
