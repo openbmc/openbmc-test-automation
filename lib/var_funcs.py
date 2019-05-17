@@ -78,7 +78,7 @@ def join_dict(dict,
 
     gp.print_var(var_dict)
     str1 = join_dict(var_dict)
-    gp.pvar(str1)
+    gp.print_var(str1)
 
     Program output.
     var_dict:
@@ -172,9 +172,9 @@ def parse_file_path(file_path):
     file_path                       The file_path.
 
     Example use:
-    gp.pvar(boot_results_file_path)
+    gp.print_var(boot_results_file_path)
     file_path_data = parse_file_path(boot_results_file_path)
-    gp.pvar(file_path_data)
+    gp.print_var(file_path_data)
 
     Program output.
 

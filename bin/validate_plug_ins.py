@@ -120,7 +120,7 @@ def main():
 
     plug_in_packages_list = return_plug_in_packages_list(plug_in_dir_paths,
                                                          mch_class)
-    qpvar(plug_in_packages_list)
+    qprint_var(plug_in_packages_list)
 
     # As stated in the help text, this program must print the full paths of
     # each selected plug in.
