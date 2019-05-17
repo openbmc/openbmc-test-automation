@@ -122,7 +122,7 @@ def main():
                         verify=False)
     if resp.json()['status'] != 'ok':
         json = resp.json()
-        print_error_report("http request failed:\n" + sprint_var(command, 1))
+        print_error_report("http request failed:\n" + sprint_var(command))
         raise Exception("Login failed.\n")
 
     command = http_prefix + "xyz/openbmc_project/inventory/system"
@@ -130,7 +130,7 @@ def main():
     resp = session.get(command, verify=False)
     json = resp.json()
     if json['status'] != 'ok':
-        print_error_report("http request failed:\n" + sprint_var(command, 1))
+        print_error_report("http request failed:\n" + sprint_var(command))
         raise Exception("http request failed.\n")
 
     try:
@@ -139,7 +139,7 @@ def main():
         print_error_report("Failed to find 'SerialNumber' key in the" +
                            " following data:\n" + sprint_var(json))
         return False
-    pvar(mch_ser_num, 0, 0, 0)
+    print_var(mch_ser_num, 0, 0, 0)
 
     return True
 
