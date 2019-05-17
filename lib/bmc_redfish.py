@@ -60,7 +60,9 @@ class bmc_redfish(redfish_plus):
         """
 
         if not self.__inited__:
-            message = "bmc_redfish.__init__() was never successfully run.\n"
+            message = "bmc_redfish.__init__() was never successfully run.  It "
+            message += "is likely that the target BMC firmware code level "
+            message += "does not support redfish.\n"
             raise ValueError(message)
         # Assign default values for username, password, auth where necessary.
         openbmc_username = BuiltIn().get_variable_value("${OPENBMC_USERNAME}")
@@ -83,7 +85,7 @@ class bmc_redfish(redfish_plus):
         Example robot code:
 
         ${properties}=  Get Properties  /redfish/v1/Systems/system/
-        Rprint Vars  1  properties
+        Rprint Vars  properties  fmt=1
 
         Output:
 
