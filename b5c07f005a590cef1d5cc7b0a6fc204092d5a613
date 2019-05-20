@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "18727311_ecac1a29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-05-20T16:48:41Z",
+      "side": 1,
+      "message": "Yep. \nSummary then blank line then 1 or more lines of detail. \n\nWhy you are making the change is also important, see https://chris.beams.io/posts/git-commit/",
+      "parentUuid": "3b2b2d28_b1abe69b",
+      "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e680a8fd_a9a951eb",
         "filename": "lib/openbmc_ffdc.robot",
         "patchSetId": 2
