@@ -28,8 +28,6 @@ from gen_misc import *
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)
-# I use this variable in calls to print_var.
-hex = 1
 
 # Create parser object to process command line parameters and args.
 
@@ -273,7 +271,7 @@ def run_pgm(plug_in_dir_path,
           + " -------------------------------------------------")
     if failed_plug_in_name != "":
         print_var(failed_plug_in_name)
-    print_var(shell_rc, hex)
+    print_var(shell_rc, hexa())
 
     return rc, shell_rc, failed_plug_in_name
 
@@ -307,7 +305,7 @@ def main():
     plug_in_packages_list = return_plug_in_packages_list(plug_in_dir_paths,
                                                          mch_class)
 
-    qpvar(plug_in_packages_list)
+    qprint_var(plug_in_packages_list)
     qprint("\n")
 
     allow_shell_rc = int(allow_shell_rc, 0)
