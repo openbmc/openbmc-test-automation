@@ -66,7 +66,7 @@ def which(file_path):
     if shell_rc != 0:
         error_message = "Failed to find complete path for file \"" +\
                         file_path + "\".\n"
-        error_message += gp.sprint_var(shell_rc, 1)
+        error_message += gp.sprint_var(shell_rc, gp.hexa())
         error_message += out_buf
         if robot_env:
             BuiltIn().fail(gp.sprint_error(error_message))
@@ -454,10 +454,10 @@ def to_signed(number,
 
     var1 = 0xfffffffffffffff1
     print_var(var1)
-    print_var(var1, 1)
+    print_var(var1, hexa())
     var1 = to_signed(var1)
     print_var(var1)
-    print_var(var1, 1)
+    print_var(var1, hexa())
 
     The following is written to stdout:
     var1:  18446744073709551601

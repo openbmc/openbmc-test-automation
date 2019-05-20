@@ -92,7 +92,8 @@ class var_stack:
 
         buffer += self.__obj_name + ":\n"
         indent = 2
-        buffer += gp.sprint_varx('stack_dict', self.__stack_dict, 1, indent)
+        buffer += gp.sprint_varx('stack_dict', self.__stack_dict, gp.terse(),
+                                 indent)
 
         return buffer
 

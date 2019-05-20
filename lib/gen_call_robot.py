@@ -347,7 +347,7 @@ def process_robot_output_files(robot_cmd_buf=None,
         gp.qprint_timen("No robot output files were found in " + outputdir
                         + ".")
         return
-    gp.qprint_var(robot_rc, 1)
+    gp.qprint_var(robot_rc, gp.hexa())
     if SAVE_STATUS_POLICY == "FAIL" and robot_rc == 0:
         gp.qprint_timen("The call to robot produced no failures."
                         + "  Deleting robot output files.")
@@ -480,8 +480,7 @@ def robot_cmd_fnc(robot_cmd_buf,
     gcr_last_robot_rc = shell_rc
     process_robot_output_files()
     if shell_rc != 0:
-        hex = 1
-        gp.print_var(shell_rc, hex)
+        gp.print_var(shell_rc, gp.hexa())
         return False
 
     return True

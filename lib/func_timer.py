@@ -60,14 +60,12 @@ class func_timer_class:
             func_name = self.__func.__name__
         except AttributeError:
             func_name = ""
-        buffer += gp.sprint_var(func_name, hex=1, loc_col1_indent=indent)
-        buffer += gp.sprint_varx("time_out", self.__time_out,
-                                 loc_col1_indent=indent)
-        buffer += gp.sprint_varx("child_pid", self.__child_pid,
-                                 loc_col1_indent=indent)
+        buffer += gp.sprint_var(func_name, indent=indent)
+        buffer += gp.sprint_varx("time_out", self.__time_out, indent=indent)
+        buffer += gp.sprint_varx("child_pid", self.__child_pid, indent=indent)
         buffer += gp.sprint_varx("original_SIGUSR1_handler",
                                  self.__original_SIGUSR1_handler,
-                                 loc_col1_indent=indent)
+                                 indent=indent)
         return buffer
 
     def print_obj(self):
