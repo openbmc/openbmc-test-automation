@@ -74,7 +74,7 @@ def print_error_logs(error_logs, key_list=None):
             pass
         key_list.insert(0, var.BMC_LOGGING_ENTRY + ".*")
 
-    gp.print_var(error_logs, hex=1, key_list=key_list)
+    gp.print_var(error_logs, gp.terse(), key_list=key_list)
 
 
 def get_esels(error_logs=None):

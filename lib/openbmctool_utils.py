@@ -126,7 +126,7 @@ def get_fru_status():
     Example robot code:
 
     ${fru_status}=  Get Fru Status
-    Rprint Vars  1  fru_status
+    Rprint Vars  fru_status  fmt=1
 
     Example result (excerpt):
 
@@ -196,7 +196,7 @@ def get_fru_print(parse_json=True):
     Example robot code:
 
     ${fru_print}=  Get Fru Print
-    Rprint Vars  1  fru_print
+    Rprint Vars  fru_print  fmt=1
 
     Example result (excerpt):
 
@@ -267,7 +267,7 @@ def get_fru_list(parse_json=True):
     Example robot code:
 
     ${fru_list}=  Get Fru List
-    Rprint Vars  1  fru_list
+    Rprint Vars  fru_list  fmt=1
 
     Example result (excerpt):
 
@@ -312,7 +312,7 @@ def get_sensors_print():
     Example robot code:
 
     ${sensors_print}=  Get Sensors Print
-    Rprint Vars  1  sensors_print
+    Rprint Vars  sensors_print  fmt=1
 
     Example result (excerpt):
 
@@ -351,7 +351,7 @@ def get_sensors_list():
     Example robot code:
 
     ${sensors_list}=  Get Sensors List
-    Rprint Vars  1  sensors_list
+    Rprint Vars  sensors_list  fmt=1
 
     Example result (excerpt):
 
@@ -483,7 +483,7 @@ def get_health_check(verify=False):
     Example robot code:
 
     ${health_check}=  Get Health Check
-    Rpvars  1  health_check
+    Rprint Vars  health_check  fmt=1
 
     Example result:
 
@@ -530,7 +530,7 @@ def get_remote_logging_view(verify=False):
     Example robot code:
 
     ${remote_logging_view}=  Get Remote Logging View
-    Rpvars  1  remote_logging_view
+    Rprint Vars  remote_logging_view  fmt=1
 
     Example result:
 

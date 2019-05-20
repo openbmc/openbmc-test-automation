@@ -212,12 +212,11 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     failed_plug_in_name = properties.get('failed_plug_in_name', '')
 
     if proc_plug_pkg_rc != 0:
-        hex = 1
         if quiet:
             os.system("cat " + temp_file_path + " >&2")
         if grep_rc != 0:
-            gp.print_varx("grep_rc", grep_rc, hex)
-        gp.print_varx("proc_plug_pkg_rc", proc_plug_pkg_rc, hex)
+            gp.print_var(grep_rc, gp.hexa())
+        gp.print_var(proc_plug_pkg_rc, gp.hexa())
         gp.print_timen("Re-cap of plug-in failures:")
         gc.cmd_fnc_u("egrep -A 1 '^failed_plug_in_name:[ ]+' "
                      + temp_properties_file_path + " | egrep -v '^\\--'",

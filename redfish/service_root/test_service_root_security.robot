@@ -121,7 +121,7 @@ Login And Verify HTTP Response Header
     # X-XSS-Protection: 1; mode=block
     # X-Content-Type-Options: nosniff
 
-    Rprint Vars  1  header_requirements
+    Rprint Vars  header_requirements  fmt=1
 
     Redfish.Login
     ${resp}=  Redfish.Get  /redfish/v1/SessionService/Sessions
@@ -142,7 +142,7 @@ Login And Verify HTTP Response Header
     #    [Content-Length]:                   2177
 
     ${headers}=  Key Value List To Dict  ${resp.getheaders()}
-    Rprint Vars  1  headers
+    Rprint Vars  headers  fmt=1
 
     Dictionary Should Contain Sub Dictionary   ${headers}  ${header_requirements}
 

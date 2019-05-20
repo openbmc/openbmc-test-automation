@@ -149,7 +149,7 @@ def login_ssh(login_args={},
                 # re-raise exception.
                 break
         # If we get to this point, the login has worked and we can return.
-        gp.lpvar(out_buf)
+        gp.lprint_var(out_buf)
         return
 
     # If we get to this point, the login has failed on all attempts so the
@@ -339,7 +339,7 @@ def execute_ssh_command(cmd_buf,
         return
 
     if rc != 0 and print_err:
-        gp.print_var(rc, 1)
+        gp.print_var(rc, gp.hexa())
         if not print_out:
             gp.print_var(stderr)
             gp.print_var(stdout)
@@ -350,7 +350,8 @@ def execute_ssh_command(cmd_buf,
     if not ignore_err:
         message = gp.sprint_error("The prior SSH"
                                   + " command returned a non-zero return"
-                                  + " code:\n" + gp.sprint_var(rc, 1) + stderr
+                                  + " code:\n"
+                                  + gp.sprint_var(rc, gp.hexa()) + stderr
                                   + "\n")
         BuiltIn().should_be_equal(rc, 0, message)
 

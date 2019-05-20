@@ -74,7 +74,7 @@ Hard Bootme Test
     [Tags]  Hard_Bootme_Test
 
     Printn
-    Rpvars  HTX_DURATION  HTX_LOOP  HTX_INTERVAL  CHECK_INVENTORY
+    Rprint Vars  HTX_DURATION  HTX_LOOP  HTX_INTERVAL  CHECK_INVENTORY
     ...  INV_IGNORE_LIST  PREV_INV_FILE_PATH
 
     Run Keyword If  '${PREV_INV_FILE_PATH}' != 'NONE'
@@ -124,7 +124,7 @@ Run HTX Exerciser
     ${estimated_time_remaining}=  Convert Time
     ...  ${est_seconds_left}  result_format=compact
     Printn
-    Rpvars  loop_count  estimated_loop_time   estimated_time_remaining
+    Rprint Vars  loop_count  estimated_loop_time   estimated_time_remaining
 
     Run Keyword  ${rest_keyword} Power On  stack_mode=skip
     Run Key U  Sleep \ 15s
@@ -164,7 +164,7 @@ Run HTX Exerciser
     ${estimated_time_remaining}=  Convert Time
     ...  ${est_seconds_left}  result_format=compact
 
-    Rpvars  loop_count  estimated_time_remaining
+    Rprint Vars  loop_count  estimated_time_remaining
 
 
 Do Inventory And Compare
@@ -252,10 +252,10 @@ Test Setup Execution
     ${bmc_version}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat /etc/os-release
     Printn
-    Rpvars  bmc_version
+    Rprint Vars  bmc_version
 
     ${pnor_version}=  Get Host Software Objects Details
-    Rpvars  pnor_version
+    Rprint Vars  pnor_version
 
     ${is_redfish}=  Run Keyword And Return Status  Redfish.Login
     ${rest_keyword}=  Set Variable If  ${is_redfish}  Redfish  REST
@@ -269,7 +269,7 @@ Test Setup Execution
     Tool Exist  htxcmdline
 
     ${os_release_info}=  Get OS Release Info
-    Rpvars  1  os_release_info
+    Rprint Vars  os_release_info  fmt=1
 
     # Shutdown if HTX is running.
     ${status}=  Is HTX Running

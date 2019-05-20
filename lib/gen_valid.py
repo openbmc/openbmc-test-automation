@@ -154,7 +154,6 @@ def svalid_value(var_value,
                          gp.sprint_var(valid_values)
         return error_message
 
-    show_blanks = 1
     if len_valid_values > 0:
         # Processing the valid_values list.
         if var_value in valid_values:
@@ -162,10 +161,9 @@ def svalid_value(var_value,
         error_message += "The following variable has an invalid" +\
                          " value:\n" +\
                          gp.sprint_varx(get_var_name(var_name), var_value,
-                                        show_blanks) +\
+                                        gp.blank()) +\
                          "\nIt must be one of the following values:\n" +\
-                         gp.sprint_varx("valid_values", valid_values,
-                                        show_blanks)
+                         gp.sprint_var(valid_values, gp.blank())
         return error_message
 
     if len_invalid_values == 0:
@@ -178,10 +176,9 @@ def svalid_value(var_value,
 
     error_message += "The following variable has an invalid value:\n" +\
                      gp.sprint_varx(get_var_name(var_name), var_value,
-                                    show_blanks) +\
+                                    gp.blank()) +\
                      "\nIt must NOT be one of the following values:\n" +\
-                     gp.sprint_varx("invalid_values", invalid_values,
-                                    show_blanks)
+                     gp.sprint_var(invalid_values, gp.blank())
     return error_message
 
 
@@ -228,10 +225,9 @@ def svalid_integer(var_value,
         pass
 
     # If we get to this point, the validation has failed.
-    show_blanks = 1
     error_message +=\
         "Invalid integer value:\n" +\
-        gp.sprint_varx(get_var_name(var_name), var_value, show_blanks)
+        gp.sprint_varx(get_var_name(var_name), var_value, gp.blank())
 
     return error_message
 
@@ -437,8 +433,7 @@ def svalid_range(var_value,
         if valid_range[0] is not None and valid_range[0] > valid_range[1]:
             error_message = "Programmer error - In the following range, the" +\
                             " lower limit is greater than the upper" +\
-                            " limit:\n" + gp.sprint_varx("valid_range",
-                                                         valid_range)
+                            " limit:\n" + gp.sprint_var(valid_range)
             return error_message
 
     if len_valid_range == 1:
@@ -513,7 +508,6 @@ def svalid_list(var_value,
 
     error_message = ""
     if len(var_value) == 0:
-        show_blanks = 1
         error_message += "The \"" + get_var_name(var_name)
         error_message += "\" list is empty and is therefore invalid:\n"
         return error_message
@@ -526,10 +520,9 @@ def svalid_list(var_value,
             display_var_value[ix] = var_value[ix] + "*"
 
     if found_error:
-        show_blanks = 1
         error_message += "The list entries marked with \"*\" are not valid:\n"
         error_message += gp.sprint_varx(get_var_name(var_name),
-                                        display_var_value, show_blanks)
+                                        display_var_value, gp.blank())
         error_message += gp.sprint_var(valid_values)
         return error_message
 
@@ -577,12 +570,11 @@ def svalid_dict(var_value,
 
     keys_missing = list(set(required_keys) - set(var_value.keys()))
     if len(keys_missing) > 0:
-        show_blanks = 1
         var_name = get_var_name(var_name)
         error_message = "The following key fields are missing from "
         error_message += var_name + ":\n"
         error_message += gp.sprint_var(keys_missing)
-        error_message += gp.sprint_varx(var_name, var_value, show_blanks)
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank())
         return error_message
 
     return ""
