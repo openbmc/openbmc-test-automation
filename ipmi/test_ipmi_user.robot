@@ -302,6 +302,64 @@ Verify IPMI Root User Password Change
     Verify IPMI Username And Password  root  ${valid_password}
 
 
+Verify Administrator And No Access Privilege For Different Channels
+    [Documentation]  Set administrator and no access privilege for different channels and verify.
+    [Tags]  Verify_Administrator_And_No_Access_Privilege_For_Different_Channels
+
+    # Create IPMI user and set valid password.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+
+    # Set admin privilege for newly created user with channel 1.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}  1
+
+    # Set no access privilege for newly created user with channel 2.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${no_access_priv}  2
+
+    # Enable IPMI user and verify.
+    Run IPMI Standard Command  user enable ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  enabled
+
+    # Verify that user is able to run administrator level IPMI command with channel 1.
+    Verify IPMI Command  ${random_username}  ${valid_password}  Administrator  1
+
+    # Verify that user is unable to run IPMI command with channel 2.
+    Run IPMI Standard Command  sel info 2  expected_rc=${1}  U=${random_username}  P=${valid_password}
+
+
+Verify Operator And User Privilege For Different Channels
+    [Documentation]  Set operator and user privilege for different channels and verify.
+    [Tags]  Verify_Operator_And_User_Privilege_For_Different_Channels
+
+    # Create IPMI user and set valid password.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+
+    # Set operator privilege for newly created user with channel 1.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${operator_priv}  1
+
+    # Set user privilege for newly created user with channel 2.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${user_priv}  2
+
+    # Enable IPMI user and verify.
+    Run IPMI Standard Command  user enable ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  enabled
+
+    # Verify that user is able to run operator level IPMI command with channel 1.
+    Verify IPMI Command  ${random_username}  ${valid_password}  Operator  1
+
+    # Verify that user is able to run user level IPMI command with channel 2.
+    Verify IPMI Command  ${random_username}  ${valid_password}  User  2
+
+
 *** Keywords ***
 
 Set Default Password For IPMI Root User
@@ -352,16 +410,17 @@ Test IPMI User Privilege
 Verify IPMI Command
     [Documentation]  Verify IPMI command execution with given username,
     ...  password, privilege and expected status.
-    [Arguments]  ${username}  ${password}  ${privilege}  ${expected_status}
+    [Arguments]  ${username}  ${password}  ${privilege}  ${channel}=${1}  ${expected_status}=Passed
     # Description of argument(s):
     # username         The user name (e.g. "root", "robert", etc.).
     # password         The user password (e.g. "0penBmc", "0penBmc1", etc.).
     # privilege        The session privilge for IPMI command (e.g. "User", "Operator", etc.).
+    # channel          The user channel number (e.g. "1" or "2").
     # expected_status  Expected status of IPMI command run with the user
     #                  of above password and privilege (i.e. "Passed" or "Failed").
 
     ${expected_rc}=  Set Variable If  '${expected_status}' == 'Passed'  ${0}  ${1}
-    Run IPMI Standard Command  sel info  expected_rc=${expected_rc}  U=${username}  P=${password}
+    Run IPMI Standard Command  sel info ${channel}  expected_rc=${expected_rc}  U=${username}  P=${password}
     ...  L=${privilege}
 
 
@@ -379,4 +438,3 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Delete All Non Root IPMI User
-
