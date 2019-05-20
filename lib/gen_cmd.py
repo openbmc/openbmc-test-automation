@@ -16,6 +16,7 @@ import inspect
 import gen_print as gp
 import gen_valid as gv
 import gen_misc as gm
+import func_args as fa
 
 robot_env = gp.robot_env
 
@@ -120,7 +121,7 @@ def cmd_fnc(cmd_buf,
     shell_rc = sub_proc.returncode
     if shell_rc != 0:
         err_msg = "The prior shell command failed.\n"
-        err_msg += gp.sprint_var(shell_rc, 1)
+        err_msg += gp.sprint_var(shell_rc, gp.hexa())
         if not print_output:
             err_msg += "out_buf:\n" + out_buf
 
@@ -380,6 +381,7 @@ def shell_cmd(command_string,
             return 0, ""
 
     # Convert each list entry to a signed value.
+    allowed_shell_rcs = fa.source_to_object(allowed_shell_rcs)
     allowed_shell_rcs = [gm.to_signed(x) for x in allowed_shell_rcs]
 
     if return_stderr:
@@ -451,8 +453,8 @@ def shell_cmd(command_string,
             err_msg += gp.sprint_var(time_out)
             err_msg += gp.sprint_varx("child_pid", sub_proc.pid)
         err_msg += gp.sprint_var(attempt_num)
-        err_msg += gp.sprint_var(shell_rc, 1)
-        err_msg += gp.sprint_var(allowed_shell_rcs, 1)
+        err_msg += gp.sprint_var(shell_rc, gp.hexa())
+        err_msg += gp.sprint_var(allowed_shell_rcs, gp.hexa())
         if not print_output:
             if return_stderr:
                 err_msg += "err_buf:\n" + err_buf
