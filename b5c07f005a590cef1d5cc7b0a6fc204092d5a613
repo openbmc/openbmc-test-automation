@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b2b2d28_b1abe69b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-20T14:21:42Z",
+      "side": 1,
+      "message": "Commit can be one line like \n\"Disable FFDC collection\"\n\nAnd then next line can be \n\"resolves openbmc/openbmc-test-automation#1707\"",
+      "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e680a8fd_a9a951eb",
+        "filename": "lib/openbmc_ffdc.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-20T14:21:42Z",
+      "side": 1,
+      "message": "Remove unwanted blank space.",
+      "range": {
+        "startLine": 54,
+        "startChar": 45,
+        "endLine": 54,
+        "endChar": 48
+      },
+      "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40d713f0_6cb2ec11",
+        "filename": "lib/openbmc_ffdc.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-20T14:21:42Z",
+      "side": 1,
+      "message": "It will be helpful to initialize FFDC_DISABLE as \"NO\" some where. Because via argument, we will be passing as FFDC_DISABLE:YES.",
+      "range": {
+        "startLine": 55,
+        "startChar": 25,
+        "endLine": 55,
+        "endChar": 51
+      },
+      "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
