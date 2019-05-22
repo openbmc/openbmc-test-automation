@@ -71,3 +71,32 @@ Delete All Redfish Sessions
     \  Redfish.Delete  ${session}
 
     Redfish.Logout
+
+
+Get Valid FRUs
+    [Documentation]  Return a dictionary containing all of the valid FRU records for the given fru_type.
+    [Arguments]  ${fru_type}
+
+    # NOTE: A valid FRU record will have a "State" key of "Enabled" and a "Health" key of "OK".
+
+    # Description of argument(s):
+    # fru_type  The type of fru (e.g. "Processors", "Memory", etc.).
+
+    ${fru_records}=  Redfish_Utils.Enumerate Request
+    ...  /redfish/v1/Systems/system/${fru_type}  return_json=0
+    Filter Struct  ${fru_records}  [('State', 'Enabled'), ('Health', 'OK')]
+
+    [Return]  ${fru_records}
+
+
+Get Num Valid FRUs
+    [Documentation]  Return the number of valid FRU records for the given fru_type.
+    [Arguments]  ${fru_type}
+
+    # Description of argument(s):
+    # fru_type  The type of fru (e.g. "Processors", "Memory", etc.).
+
+    ${fru_records}=  Get Valid FRUs  ${fru_type}
+    ${num_valid_frus}=  Get length  ${fru_records}
+
+    [Return]  ${num_valid_frus}
