@@ -38,6 +38,26 @@ Verify Client Certificate Replace
     Client                Expired Certificate                 error
 
 
+Verify Server Certificate View Via Openssl
+    [Documentation]  Verify server certificate via openssl command.
+    [Tags]  Verify_Server_Certificate_View_Via_Openssl
+
+    redfish.Login
+
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
+    ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
+
+    ${certificate_dict}=  Create Dictionary
+    ...  @odata.id=/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
+    ${payload}=  Create Dictionary  CertificateString=${file_data}
+    ...  CertificateType=PEM  CertificateUri=${certificate_dict}
+
+    ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+    ...  body=${payload}
+
+    Wait Until Keyword Succeeds  2 mins  15 secs  Verify Certificate Visible Via OpenSSL  ${cert_file_path}
+
+
 *** Keywords ***
 
 Replace Certificate Via Redfish
@@ -75,6 +95,18 @@ Replace Certificate Via Redfish
     ...    Should Contain  ${cert_file_content}  ${bmc_cert_content}
     ...  ELSE
     ...    Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
+
+
+Verify Certificate Visible Via OpenSSL
+    [Documentation]  Checks if given certificate is visible via openssl's showcert command.
+    [Arguments]  ${cert_file_path}
+
+    # Description of argument(s):
+    # cert_file_path           Certificate file path.
+
+    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
+    ${openssl_cert_content}=  Get Certificate Content From BMC Via Openssl
+    Should Contain  ${cert_file_content}  ${openssl_cert_content}
 
 
 Suite Setup Execution
