@@ -17,6 +17,10 @@ ${test_ipv4_addr}          10.7.7.7
 ${test_ipv4_invalid_addr}  0.0.1.a
 ${test_subnet_mask}        255.255.0.0
 ${test_gateway}            10.7.7.1
+${broadcast_ip}            10.7.7.255
+${loopback_ip}             127.0.0.2
+${multicast_ip}            224.6.6.6
+${out_of_range_ip}         10.7.7.256
 
 *** Test Cases ***
 
@@ -87,6 +91,48 @@ Add Invalid IPv4 Address And Verify
     Add IP Address  ${test_ipv4_invalid_addr}  ${test_subnet_mask}
     ...  ${test_gateway}  valid_status_codes=${HTTP_BAD_REQUEST}
 
+Configure Out Of Range IP
+    [Documentation]  Configure out-of-range IP address.
+    [Tags]  Configure_Out_Of_Range_IP
+    [Template]  Add IP Address
+
+    # ip                subnet_mask          gateway          valid_status_code
+    ${out_of_range_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Broadcast IP
+    [Documentation]  Configure broadcast IP address.
+    [Tags]  Configure_Broadcast_IP
+    [Template]  Add IP Address
+
+    # ip             subnet_mask          gateway          valid_status_code
+    ${broadcast_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Multicast IP
+    [Documentation]  Configure multicast IP address.
+    [Tags]  Configure_Multicast_IP
+    [Template]  Add IP Address
+
+    # ip             subnet_mask          gateway          valid_status_code
+    ${multicast_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Loopback IP
+    [Documentation]  Configure loopback IP address.
+    [Tags]  Configure_Loopback_IP
+    [Template]  Add IP Address
+
+    # ip            subnet_mask          gateway          valid_status_code
+    ${loopback_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Add Valid IPv4 Address And Check Persistency
+    [Documentation]  Add IPv4 address and check peristency.
+    [Tags]  Add_Valid_IPv4_Addres_And_Check_Persistency
+
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+    Verify IP On BMC  ${test_ipv4_addr}
+    Delete IP Address  ${test_ipv4_addr}
 
 *** Keywords ***
 
