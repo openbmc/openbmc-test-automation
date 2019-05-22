@@ -16,6 +16,7 @@ import collections
 
 import gen_print as gp
 import gen_misc as gm
+import func_args as fa
 
 
 def create_var_dict(*args):
@@ -78,7 +79,7 @@ def join_dict(dict,
 
     gp.print_var(var_dict)
     str1 = join_dict(var_dict)
-    gp.pvar(str1)
+    gp.print_var(str1)
 
     Program output.
     var_dict:
@@ -172,9 +173,9 @@ def parse_file_path(file_path):
     file_path                       The file_path.
 
     Example use:
-    gp.pvar(boot_results_file_path)
+    gp.print_var(boot_results_file_path)
     file_path_data = parse_file_path(boot_results_file_path)
-    gp.pvar(file_path_data)
+    gp.print_var(file_path_data)
 
     Program output.
 
@@ -754,3 +755,80 @@ def nested_get(key, structure):
             result.append(v)
 
     return result
+
+
+def filter_struct(structure, filter_dict):
+    r"""
+    Filter the structure by removing any entries that do NOT contain the
+    keys/values specified in filter_dict.
+
+    Example:
+
+    Given a dictionary named "properties" that has the following structure:
+
+    properties:
+      [/redfish/v1/Systems/system/Processors]:
+        [Members]:
+          [0]:
+            [@odata.id]:
+            /redfish/v1/Systems/system/Processors/cpu0
+          [1]:
+            [@odata.id]:
+            /redfish/v1/Systems/system/Processors/cpu1
+      [/redfish/v1/Systems/system/Processors/cpu0]:
+        [Status]:
+          [State]:                                    Enabled
+          [Health]:                                   OK
+      [/redfish/v1/Systems/system/Processors/cpu1]:
+        [Status]:
+          [State]:                                    Enabled
+          [Health]:                                   Bad
+
+    The following call:
+
+    filter_struct(properties, "[('Health', 'OK')]")
+
+    Would change the properties dictionary to look like this:
+
+    properties:
+      [/redfish/v1/Systems/system/Processors/cpu0]:
+        [Status]:
+          [State]:                                    Enabled
+          [Health]:                                   OK
+
+    Note that the first item in the original properties directory had no key
+    anywhere in the structure named "Health".  Therefore, that item was
+    eliminated.  The next item did have a key named "Health" whose value was
+    "OK" so it was left alone.  The third item had a key named "Health" but
+    its value was not "OK" so it was eliminated.
+
+    Description of argument(s):
+    structure                       Either a list or a dictionary.  The
+                                    structure is expected to contain
+                                    sub-dictionaries.  This function will
+                                    alter the structure.
+    filter_dict                     A dictionary containing one or more
+                                    key/value pairs.  For each key value pair,
+                                    each entry in the structure must contain
+                                    the same key/value pair.
+    """
+
+    # Convert filter_dict from a string containing a python object definition
+    # to an actual python object (if warranted).
+    filter_dict = fa.source_to_object(filter_dict)
+    for filter_key, filter_value in filter_dict.items():
+        # Process one filter key/value pair.
+        if type(structure) is list:
+            new_list = []
+            for entry in structure:
+                actual_value = nested_get(filter_key, entry)
+                if len(actual_value) and actual_value[0] == filter_value:
+                    new_list.append(entry)
+            # Modify the caller's list.
+            structure[:] = new_list
+        else:
+            # Assume structure is a dictionary.
+            for struct_key, struct_value in structure.items():
+                actual_value = nested_get(filter_key, struct_value)
+                if len(actual_value) == 0 or actual_value[0] != filter_value:
+                    del structure[struct_key]
