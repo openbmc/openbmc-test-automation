@@ -162,16 +162,21 @@ class bmc_redfish_utils(object):
             self.walk_nested_dict(self._rest_response_.dict)
         return list(sorted(self.__pending_enumeration))
 
-    def enumerate_request(self, resource_path):
+    def enumerate_request(self, resource_path, return_json=1):
         r"""
         Perform a GET enumerate request and return available resource paths.
 
         Description of argument(s):
-        resource_path  URI resource absolute path
-                      (e.g. "/redfish/v1/SessionService/Sessions").
+        resource_path               URI resource absolute path (e.g.
+                                    "/redfish/v1/SessionService/Sessions").
+        return_json                 Indicates whether the result should be
+                                    returned as a json string or as a
+                                    dictionary.
         """
 
         gp.qprint_executing(style=gp.func_line_style_short)
+
+        return_json = int(return_json)
 
         # Set quiet variable to keep subordinate get() calls quiet.
         quiet = 1
@@ -210,8 +215,11 @@ class bmc_redfish_utils(object):
             resources_to_be_enumerated = \
                 tuple(self.__pending_enumeration - enumerated_resources)
 
-        return json.dumps(self.__result, sort_keys=True,
-                          indent=4, separators=(',', ': '))
+        if return_json:
+            return json.dumps(self.__result, sort_keys=True,
+                              indent=4, separators=(',', ': '))
+        else:
+            return self.__result
 
     def walk_nested_dict(self, data, url=''):
         r"""
