@@ -38,6 +38,19 @@ Verify Client Certificate Replace
     Client                Expired Certificate                 error
 
 
+Verify Client Certificate Install
+    [Documentation]  Verify client certificate install.
+    [Tags]  Verify_Client_Certificate_Install
+    [Template]  Test Client Certificate Install Via Redfish
+
+    #cert_format                         expected_status
+    Valid Certificate Valid Privatekey   ok
+    Empty Certificate Valid Privatekey  error
+    Valid Certificate Empty Privatekey  error
+    Empty Certificate Empty Privatekey  error
+    Expired Certificate                 error
+
+
 Verify Server Certificate View Via Openssl
     [Documentation]  Verify server certificate via openssl command.
     [Tags]  Verify_Server_Certificate_View_Via_Openssl
@@ -59,6 +72,66 @@ Verify Server Certificate View Via Openssl
 
 
 *** Keywords ***
+
+Test Client Certificate Install Via Redfish
+    [Documentation]  Test client certificate install in the BMC via Redfish.
+    [Arguments]  ${cert_format}  ${expected_status}
+
+    # Description of argument(s):
+    # cert_format         Certificate file format
+    #                     (e.g. Valid_Certificate_Valid_Privatekey).
+    # expected_status     Expected status of certificate replace Redfish
+    #                     request (i.e. "ok" or "error").
+
+    OpenBMC Delete Request  ${CLIENT_CERTIFICATE_URI}
+    # Adding delay after certificate deletion
+    Sleep  15s
+
+    redfish.Login
+    ${time}=  Set Variable If  '${cert_format}' == 'Expired Certificate'  -10  365
+    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
+    ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
+
+    Install Client Certificate File On BMC  /redfish/v1/AccountService/LDAP/Certificates
+    ...  ${expected_status}  data=${file_data}
+
+    # Adding delay after certificate installation
+    Sleep  15s
+
+    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
+    ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
+    ...  /redfish/v1/AccountService/LDAP/Certificates/1  CertificateString
+
+    Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
+
+
+Install Client Certificate File On BMC
+    [Documentation]  Install certificate file in BMC using POST operation.
+    [Arguments]  ${uri}  ${status}=ok  &{kwargs}
+
+    # Description of argument(s):
+    # uri         URI for installing certificate file via REST
+    #             e.g. "/xyz/openbmc_project/certs/server/https".
+    # status      Expected status of certificate installation via REST
+    #             e.g. error, ok.
+    # kwargs      A dictionary of keys/values to be passed directly to
+    #             POST Request.
+
+    Initialize OpenBMC  quiet=${quiet}
+
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}
+    Set To Dictionary  ${kwargs}  headers  ${headers}
+
+    ${ret}=  Post Request  openbmc  ${uri}  &{kwargs}
+
+    Run Keyword If  '${status}' == 'ok'
+    ...  Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
+    ...  ELSE IF  '${status}' == 'error'
+    ...  Should Be Equal As Strings  ${ret.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
+
+    Delete All Sessions
+
 
 Replace Certificate Via Redfish
     [Documentation]  Test 'replace certificate' operation in the BMC via Redfish.
@@ -85,12 +158,12 @@ Replace Certificate Via Redfish
     ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
     ${payload}=  Create Dictionary  CertificateString=${file_data}
     ...  CertificateType=PEM  CertificateUri=${certificate_dict}
-    ${resp}=  redfish.Post  CertificateService/Actions/CertificateService.ReplaceCertificate
+    ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
     ...  body=${payload}
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  redfish_utils.Get Attribute  ${certificate_uri}  CertificateString
-
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
     Run Keyword If  '${expected_status}' == 'ok'
     ...    Should Contain  ${cert_file_content}  ${bmc_cert_content}
     ...  ELSE
@@ -119,6 +192,6 @@ Suite Setup Execution
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     redfish.Logout
 
