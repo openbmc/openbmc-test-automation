@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "ddc3a015_180281e0",
+        "filename": "lib/openbmc_ffdc.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-05-23T18:55:30Z",
+      "side": 1,
+      "message": "Won\u0027t this variable meet your needs?  If OVERRIDE_FFDC_ON_TEST_CASE_FAIL is set to 1, then no FFDC is collected.",
+      "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e680a8fd_a9a951eb",
         "filename": "lib/openbmc_ffdc.robot",
         "patchSetId": 2
