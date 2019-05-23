@@ -178,7 +178,7 @@ Add IP Address
     : FOR  ${INDEX}  IN RANGE  0  ${num_entries}
     \  Append To List  ${patch_list}  ${empty_dict}
 
-    # We need not check for existance of IP on BMC while adding.
+    # We need not check for existence of IP on BMC while adding.
     Append To List  ${patch_list}  ${ip_data}
     ${data}=  Create Dictionary  IPv4Addresses=${patch_list}
 

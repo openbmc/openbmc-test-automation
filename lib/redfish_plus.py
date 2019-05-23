@@ -114,7 +114,7 @@ class redfish_plus(HttpClient):
         "Unauthorized").
         """
         gp.qprint_executing(stack_frame_ix=3, style=gp.func_line_style_short)
-        # Convert python string object defintions to objects (mostly useful
+        # Convert python string object definitions to objects (mostly useful
         # for robot callers).
         args = fa.args_to_objects(args)
         kwargs = fa.args_to_objects(kwargs)
