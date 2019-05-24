@@ -63,6 +63,15 @@ Redfish Login Using Invalid Token
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
 
 
+Verify Redfish Invalid URL Response Code
+    [Documentation]  Login to BMCweb and verify error response code.
+    [Tags]  Verify_Redfish_Invalid_URL_Response_Code
+
+    Redfish.Login
+    Redfish.Get  /redfish/v1/idontexist  valid_status_codes=[${HTTP_NOT_FOUND}]
+    Redfish.Logout
+
+
 Delete Redfish Session Using Valid login
     [Documentation]  Delete a session using valid login.
     [Tags]  Delete_Redfish_Session_Using_Valid_Login
