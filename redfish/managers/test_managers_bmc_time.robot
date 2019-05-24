@@ -6,7 +6,7 @@ Resource                     ../../lib/common_utils.robot
 Resource                     ../../lib/openbmc_ffdc.robot
 Resource                     ../../lib/utils.robot
 
-Test Setup                   Run Keywords  Printn  AND  redfish.Login
+Test Setup                   Run Keywords  redfish.Login
 Test Teardown                Test Teardown Execution
 
 *** Variables ***
@@ -34,8 +34,9 @@ Verify Set Time Using Redfish
     [Tags]  Verify_Set_Time_Using_Redfish
 
     ${old_bmc_time}=  CLI Get BMC DateTime
-    # Add 3 days to current date.
-    ${new_bmc_time}=  Add Time to Date  ${old_bmc_time}  3 Days
+    # Add 3 days to current date in seconds.
+    #${new_bmc_time}=  Add Time to Date  ${old_bmc_time}  3 days
+    ${new_bmc_time}=  Add Time to Date  ${old_bmc_time}  259200 s
     Redfish Set DateTime  ${new_bmc_time}
     ${cli_bmc_time}=  CLI Get BMC DateTime
     ${time_diff}=  Subtract Date From Date  ${cli_bmc_time}
@@ -44,8 +45,22 @@ Verify Set Time Using Redfish
     Rprint Vars   old_bmc_time  new_bmc_time  cli_bmc_time  time_diff  max_time_diff_in_seconds
     Should Be True  ${time_diff} < ${max_time_diff_in_seconds}
     ...  The difference between Redfish time and CLI time exceeds the allowed time difference.
+    # Validate the DateTime
+    ${time_diff}=  Subtract Date From Date  ${new_bmc_time}
+    ...  ${old_bmc_time}  verbose
+    Should Be Equal  ${time_diff}  3 days
     # Setting back to old bmc time.
     Redfish Set DateTime  ${old_bmc_time}
+
+
+Verify Set DateTime With Invalid Data Using Redfish
+    [Documentation]  Verify set DateTime with invalid data using redfish API.
+    [Tags]  Verify_Set_DateTime_With_Invalid_Data_Using_Redfish
+
+    ${invalid_bmc_time}=  Set Variable  "2019-04-251T12:24:46+00:00"
+    ${return_resp}=  Redfish Set DateTime  ${invalid_bmc_time}
+    Rprint Vars  return_resp  HTTP_BAD_REQUEST
+    Should Be Equal  ${return_resp}  ${HTTP_BAD_REQUEST}
 
 
 *** Keywords ***
@@ -71,7 +86,23 @@ Redfish Set DateTime
     # date_time          New time to set for BMC (eg. 2019-06-30 09:21:28).
 
     ${payload}=  Create Dictionary  DateTime=${date_time}
-    Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body=&{payload}
+    ${resp1}=  Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body=&{payload}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_BAD_REQUEST}]
+    Log to Console  "Resp:" ${resp1}
+    Rprint vars  resp1
+    [Return]  ${resp1}
 
 
+Validate Set DateTime
+    [Documentation]  Verify Set DateTime works fine.
+    [Arguments]  ${new_time}  ${old_time}  ${no_of_days}
+    # Description of argument(s):
+    # new_time            New time to set for BMC (eg. 2019-06-30 09:21:28).
+    # old_time            BMC old time (eg. 2019-06-27 09:21:28).
+    # no_of_days          Number of days to add from current date (eg. 3).
+
+
+    ${time_diff}=  Subtract Date From Date  ${new_time}
+    ...  ${old_time}  verbose
+    Should Be Equal  ${time_diff}  ${no_of_days} days
+    ...  msg=Time difference ${time_diff} not 3 days as expected.
