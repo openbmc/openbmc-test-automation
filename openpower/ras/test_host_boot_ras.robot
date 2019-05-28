@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation       This suite tests checkstop operations through BMC using
-                    pdbg utility during HOST Boot path.
+...                 pdbg utility during HOST Boot path.
 
 Resource            ../../lib/openbmc_ffdc.robot
 Resource            ../../lib/openbmc_ffdc_utils.robot
@@ -97,7 +97,7 @@ Verify Recoverable Callout Handling For OCC At Host Boot
 
 Verify Pdbg Recoverable Callout Handling For NCUFIR At Host Boot
     [Documentation]  Verify recoverable callout handling for NCUFIR
-    ...              using pdbg tool during Host Boot path. 
+    ...              using pdbg tool during Host Boot path.
     [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_NCUFIR_At_Host_Boot
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NCUFIR_RECV1

@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation       This suite tests checkstop operations through BMC using
-                    pdbg utility.
+...                 pdbg utility.
 
 Resource            ../../lib/openbmc_ffdc.robot
 Resource            ../../lib/openbmc_ffdc_methods.robot
