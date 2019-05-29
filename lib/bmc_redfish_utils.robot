@@ -84,7 +84,7 @@ Get Valid FRUs
 
     ${fru_records}=  Redfish_Utils.Enumerate Request
     ...  /redfish/v1/Systems/system/${fru_type}  return_json=0
-    Filter Struct  ${fru_records}  [('State', 'Enabled'), ('Health', 'OK')]
+    ${fru_records}=  Filter Struct  ${fru_records}  [('State', 'Enabled'), ('Health', 'OK')]
 
     [Return]  ${fru_records}
 
