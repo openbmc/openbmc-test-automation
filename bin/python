@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# This script is a wrapper for the python program.  This wrapper allows the
+# user to influence the selection of the python version by setting the
+# PYTHON_VERSION environment variable.
+
+# If PYTHON_VERSION is blank or not set, then the python version will be
+# whatever the system default python version is.  If PYTHON_VERSION is set to
+# a value, then that value will be appened to the word "python" (e.g. if
+# PYTHON_VERSION = "3", then python3 will be used.).  If PYTHON_VERSION is set
+# to some value that does not correspond to a valid python version for the
+# given system, this program will fail.
+
+
+# Source files to get required functions.
+source_files="gen_setup.sh gen_list.sh"
+source_file_paths=$(type -p ${source_files})
+for file_path in ${source_file_paths} ; do source ${file_path} ; done
+
+
+function get_python_pgm_path {
+
+  # Get the full path to the "real" python interpreter program and write it
+  # to stdout.
+
+  # Example output:
+
+  # /usr/bin/python3
+
+  # Make a local copy of PATH.
+
+  set_pgm_name
+
+  local PATH="${PATH}"
+  # Remove program_dir_path from PATH (making sure program_dir_path does NOT
+  # have a trailing slash).
+  remove_list_element "${program_dir_path%/}" PATH : || return 1
+  # Now use the "type" built-in to search the local PATH variable for the
+  # location of the desired python interpreter.
+  type -p python${PYTHON_VERSION}
+
+}
+
+
+# Main
+
+python_pgm_path=$(get_python_pgm_path)
+
+${python_pgm_path} "${@}"
