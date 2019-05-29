@@ -769,6 +769,10 @@ def normalized_dict_type():
     return 4
 
 
+def proxy_dict_type():
+    return 5
+
+
 def is_dict(var_value):
     r"""
     Return non-zero if var_value is a type of dictionary and 0 if it is not.
@@ -782,25 +786,29 @@ def is_dict(var_value):
                                     type of dictionary.
     """
 
-    type_is_dict = 0
     if isinstance(var_value, dict):
-        type_is_dict = dict_type()
+        return dict_type()
     try:
         if isinstance(var_value, collections.OrderedDict):
-            type_is_dict = ordered_dict_type()
+            return ordered_dict_type()
     except AttributeError:
         pass
     try:
         if isinstance(var_value, DotDict):
-            type_is_dict = dot_dict_type()
+            return dot_dict_type()
     except NameError:
         pass
     try:
         if isinstance(var_value, NormalizedDict):
-            type_is_dict = normalized_dict_type()
+            return normalized_dict_type()
     except NameError:
         pass
-    return type_is_dict
+    try:
+        if str(type(var_value)).split("'")[1] == "dictproxy":
+            return proxy_dict_type()
+    except NameError:
+        pass
+    return 0
 
 
 def get_int_types():
@@ -1586,8 +1594,10 @@ def sprint_pgm_header(indent=0,
         DISPLAY = os.environ['DISPLAY']
     except KeyError:
         DISPLAY = ""
-    buffer += sprint_var(DISPLAY, 0, indent,
-                         col1_width)
+    buffer += sprint_var(DISPLAY, 0, indent, col1_width)
+    python_version = sys.version.replace("\n", "")
+    buffer += sprint_var(python_version)
+
     # TODO: Add code to print caller's parms.
 
     # __builtin__.arg_obj is created by the get_arg module function,
