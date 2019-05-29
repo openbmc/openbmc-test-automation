@@ -168,7 +168,7 @@ CA_CERTIFICATE_URI = OPENBMC_BASE_URI + 'certs/authority/ldap'
 
 # EventLog variables.
 SYSTEM_BASE_URI = REDFISH_BASE_URI + 'Systems/system/'
-EVENT_LOG_ENTRY_URI = SYSTEM_BASE_URI + 'LogServices/EventLog/Entries/'
+EVENT_LOG_URI = SYSTEM_BASE_URI + 'LogServices/EventLog/'
 
 
 '''

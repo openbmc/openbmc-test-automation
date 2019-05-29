@@ -200,5 +200,13 @@ Get Event Logs
     #  "Name": "System Event Log Entries"
     #}
 
-    ${members}=  Redfish.Get Attribute  ${EVENT_LOG_ENTRY_URI}  Members
+    ${members}=  Redfish.Get Attribute  ${EVENT_LOG_URI}Entries  Members
     [Return]  ${members}
+
+
+Redfish Purge Event Log
+    [Documentation]  Do Redfish EventLog purge.
+
+    Redfish.Post  ${EVENT_LOG_URI}Actions/LogService.Reset
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+
