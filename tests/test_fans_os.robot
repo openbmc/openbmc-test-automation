@@ -50,7 +50,7 @@ Check Fans Running At Target Speed
     # A tolerance value of .15 means that the fan's speed should be
     # within 15% of its set target speed.   Fans may be accelerating
     # or decelerating to meet a new target, so allow .10 extra.
-    ${tolerance}=  Set Variable  .25
+    ${tolerance}=  Set Variable  .50
     Rpvars  tolerance
 
     Verify Fan Speed  ${tolerance}  ${fan_names}
@@ -88,6 +88,9 @@ Check Fan Speed Increase When One Disabled
 Check System Shutdown Due To Fans
     [Documentation]  Shut down when not enough fans.
     [Tags]  Check_System_Shutdown_Due_To_Fans
+
+    # Previous test may have shut down the OS.
+    REST Power On  stack_mode=skip
 
     Verify System Shutdown Due To Fans  ${fan_names}
 
