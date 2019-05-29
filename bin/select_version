@@ -1,0 +1,81 @@
+#!/bin/bash
+
+# This script is a wrapper for programs that may have alternate versions
+# (e.g. python2, python3).  This wrapper allows the user to influence the
+# selection of the program version by setting the <program name>_VERSION (e.g.
+# PYTHON_VERSION, ROBOT_VERSION, etc.) environment variable.
+
+# Users would be expected to create a link with the base name of the program
+# that points to this file.
+
+# Example:
+# cd openbmc-test-automation/bin
+# ln -s select_version python
+
+# The PATH variable should contain the expanded path to
+# openbmc-test-automation/bin.
+
+# If <program name>_VERSION is blank or not set, then the program version
+# will be whatever the system default program version is.  If <program
+# name>_VERSION is set to a value, then that value will be appened to the name
+# of the program (e.g. if PYTHON_VERSION = "3", then python3 will be used.).
+# If <program name>_VERSION is set to some value that does not correspond to a
+# valid program version for the given system, this program will fail.
+
+
+# Source files to get required functions.
+source_files="gen_setup.sh gen_list.sh"
+source_file_paths=$(type -p ${source_files})
+for file_path in ${source_file_paths} ; do source ${file_path} ; done
+
+
+function get_program_path {
+
+  # Get the full path to the "real" program and write it to stdout.
+
+  # Example output:
+
+  # /usr/bin/python3
+
+  local version_var_name
+  local alternate_program_name
+
+  # Compose the version_var_name value (e.g. PYTHON_VERSION).
+  version_var_name=${program_uppercase_name}_VERSION
+  # Compose the alternate_program_name (e.g. python3).
+  alternate_program_name=${program_name}${!version_var_name}
+
+  # Make a local copy of PATH.
+  local PATH="${PATH}"
+  # Remove program_dir_path from PATH (making sure program_dir_path does NOT
+  # have a trailing slash).
+  remove_list_element "${program_dir_path%/}" PATH : || return 1
+  # Now use the "type" built-in to search the local PATH variable for the
+  # location of the desired program.
+  type -p ${alternate_program_name}
+
+}
+
+
+function mainf {
+
+  # Make sure program_dir_path is set.
+  set_pgm_name
+  program_uppercase_name=${program_name^^}
+
+  new_program_path=$(get_program_path)
+
+  # Compose program path var name (e.g. PYTHON_PGM_PATH).
+  pgm_path_var_name=${program_uppercase_name}_PGM_PATH
+  # Set and export pgm_path_var_name (e.g. PYTHON_PGM_PATH=/usr/bin/python3).
+  # This value can be used by child programs for debug.
+  eval export ${pgm_path_var_name}=${new_program_path}
+
+  ${new_program_path} "${@}"
+
+}
+
+# Main
+
+
+  mainf "${@}"
