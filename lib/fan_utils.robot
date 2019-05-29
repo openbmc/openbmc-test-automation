@@ -396,25 +396,6 @@ Verify Fan Speed Increase
 
     Set Fan State  ${test_fan_name}  ${fan_nonfunctional}
 
-    # Wait for error to be asserted.
-
-    :FOR  ${n}  IN RANGE  30
-    \  ${front_fault}=  Get System LED State  front_fault
-    \  ${rear_fault}=  Get System LED State  rear_fault
-    \  Run Key U  Sleep \ 1s
-    \  Exit For Loop If  '${front_fault}' == 'On' and '${rear_fault}' == 'On'
-
-    Verify System Error Indication Due To Fans
-
-    # Verify the error log is for test_fan_name.
-    ${elog_entries}=  Get Logging Entry List
-    :FOR  ${elog_entry}  IN  @{elog_entries}
-    \  ${elog_entry_callout}=  Set Variable  ${elog_entry}/callout
-    \  ${endpoint}=  Read Attribute  ${elog_entry_callout}  endpoints
-    \  ${endpoint_name}=  Get From List  ${endpoint}  0
-    \  Should Contain  ${endpoint_name}  ${test_fan_name}
-    ...  msg=Error log present but not for ${test_fan_name}.
-
     Run Key U  Sleep \ ${system_response_time}
 
     # A heavily loaded system may have powered-off.
@@ -451,19 +432,3 @@ Verify System Shutdown Due To Fans
     # The Wait For PowerOff keyword will time-out and report
     # an error if power off does not happen within a reasonable time.
     Wait For PowerOff
-
-    Run Key U  Sleep \ ${wait_after_poweroff}
-
-    Verify System Error Indication Due To Fans
-
-    # Verify there is an error log because of the shutdown.
-    ${expect}=  Catenate
-    ...  xyz.openbmc_project.State.Shutdown.Inventory.Error.Fan
-    ${elog_entries}=  Get Logging Entry List
-    :FOR  ${elog_entry}  IN  @{elog_entries}
-    \  ${elog_message}=  Read Attribute  ${elog_entry}  Message
-    \  ${found}=  Set Variable  1
-    \  Run Keyword If  '${elog_message}' == '${expect}'  Exit For Loop
-    \  ${found}=  Set Variable  0
-    Run Keyword If  not ${found}  Fail
-    ...  msg=No error log for event Shutdown.Inventory.Error.Fan.
