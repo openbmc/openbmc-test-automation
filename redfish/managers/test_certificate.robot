@@ -82,7 +82,7 @@ Test Client Certificate Install Via Redfish
     # expected_status     Expected status of certificate replace Redfish
     #                     request (i.e. "ok" or "error").
 
-    OpenBMC Delete Request  ${CLIENT_CERTIFICATE_URI}
+    Delete Client Certificate Via BMC CLI
     # Adding delay after certificate deletion.
     Sleep  15s
 
@@ -179,6 +179,17 @@ Verify Certificate Visible Via OpenSSL
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${openssl_cert_content}=  Get Certificate Content From BMC Via Openssl
     Should Contain  ${cert_file_content}  ${openssl_cert_content}
+
+
+Delete Client Certificate Via BMC CLI
+    [Documentation]  Delete client certificate via BMC CLI.
+
+    ${file_status}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  [ -f /etc/nslcd/certs/cert.pem ] && echo "Found" || echo "Not Found"
+
+    Run Keyword If  "${file_status}" == "Found"
+    ...  Run Keywords  BMC Execute Command  rm /etc/nslcd/certs/cert.pem  AND
+    ...  BMC Execute Command  systemctl restart phosphor-certificate-manager@nslcd.service
 
 
 Suite Setup Execution
