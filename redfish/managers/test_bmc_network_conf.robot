@@ -87,6 +87,61 @@ Add Invalid IPv4 Address And Verify
     Add IP Address  ${test_ipv4_invalid_addr}  ${test_subnet_mask}
     ...  ${test_gateway}  valid_status_codes=${HTTP_BAD_REQUEST}
 
+Add Fourth Octet Threshold IP And Verify
+    [Documentation]  Add fourth octet threshold IP and verify.
+    [Tags]  Add_Fourth_Octet_Threshold_IP_And_Verify
+
+     Add IP Address  10.7.7.254  ${test_subnet_mask}  ${test_gateway}
+     Delete IP Address  10.7.7.254
+
+Add Fourth Octet Lowest IP And Verify
+    [Documentation]  Add fourth octet lowest IP and verify.
+    [Tags]  Add_Fourth_Octet_Lowest_IP_And_Verify
+
+     Add IP Address  10.7.7.1  ${test_subnet_mask}  ${test_gateway}
+     Delete IP Address  10.7.7.1
+
+Add Third Octet Threshold IP And Verify
+    [Documentation]  Add third octet threshold IP and verify.
+    [Tags]  Add_Third_Octet_Threshold_IP_And_Verify
+
+     Add IP Address  10.7.255.7  ${test_subnet_mask}  ${test_gateway}
+     Delete IP Address  10.7.255.7
+
+Add Third Octet Lowest IP And Verify
+    [Documentation]  Add third octet lowest IP and verify.
+    [Tags]  Add_Third_Octet_Lowest_IP_And_Verify
+
+     Add IP Address  10.7.0.7  ${test_subnet_mask}  ${test_gateway}
+     Delete IP Address  10.7.0.7
+
+Add Second Octet Threshold IP And Verify
+    [Documentation]  Add second octet threshold IP and verify.
+    [Tags]  Add_Second_Octet_Threshold_IP_And_Verify
+
+     Add IP Address  10.255.7.7  ${test_subnet_mask}  ${test_gateway}
+     Delete IP Address  10.255.7.7
+
+Add Second Octet Lowest IP And Verify
+    [Documentation]  Add second octet lowest IP and verify.
+    [Tags]  Add_Second_Octet_Lowest_IP_And_Verify
+
+     Add IP Address  10.0.7.7  ${test_subnet_mask}  ${test_gateway}
+     Delete IP Address  10.0.7.7
+
+Add First Octet Threshold IP And Verify
+    [Documentation]  Add first octet threshold IP and verify.
+    [Tags]  Add_First_Octet_Threshold_IP_And_Verify
+
+     Add IP Address  223.7.7.7  ${test_subnet_mask}  ${test_gateway}
+     Delete IP Address  223.7.7.7
+
+Add First Octet Lowest IP And Verify
+    [Documentation]  Add first octet lowest IP and verify.
+    [Tags]  Add_First_Octet_Lowest_IP_And_Verify
+
+     Add IP Address  1.7.7.7  ${test_subnet_mask}  ${test_gateway}
+     Delete IP Address  1.7.7.7
 
 *** Keywords ***
 
