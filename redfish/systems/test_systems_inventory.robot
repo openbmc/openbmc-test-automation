@@ -51,7 +51,7 @@ Count OK And Enabled
 
     # Description of Argument(s):
     # item              A hardware item within a general resource that has
-    #                   "Health" and "State" atributes,  E.g. "cpu" or "dimm".
+    #                   "Health" and "State" attributes,  E.g. "cpu" or "dimm".
     # general_resource  A systems resource type that contains these items, such
     #                   as "Processors", or "Memory".
 
@@ -85,7 +85,7 @@ Is Item Enabled And Health Ok
 
     # Description of Argument(s):
     # item          A hardware item within a general resource that has
-    #               "Health" and "State" atributes,  E.g. "dimm".
+    #               "Health" and "State" attributes,  E.g. "dimm".
     # resource      An individual resource to check, for example,
     #               "/redfish/v1/Systems/system/Memory/dimm0".
 
