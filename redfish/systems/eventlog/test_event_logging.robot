@@ -216,6 +216,61 @@ Verify IPMI SEL Event Last Add Time
     Should Be True  ${time_diff} <= 2
 
 
+Create Test Event Log And Delete
+    [Documentation]  Create an event log and delete it.
+    [Tags]  Create_Test_Event_Log_And_Delete
+
+    Create Test Error Log
+    Redfish Purge Event Log
+    Event Log Should Not Exist
+
+
+Create Multiple Test Event Logs And Delete All
+    [Documentation]  Create multiple event logs and delete all.
+    [Tags]  Create_Multiple_Test_Event_Logs_And_Delete_All
+
+    Create Test Error Log
+    Create Test Error Log
+    Create Test Error Log
+    Redfish Purge Event Log
+    Event Log Should Not Exist
+
+
+Verify Watchdog Timedout Event
+    [Documentation]  Trigger watchdog timed out and verify event log generated.
+    [Tags]  Verify_Watchdog_Timedout_Event
+
+    Redfish Power On
+
+    # Clear errors if there are any.
+    Redfish.Login
+    Redfish Purge Event Log
+
+    Trigger Host Watchdog Error
+
+    # Logging takes time to generate the timeout error.
+    Wait Until Keyword Succeeds  2 min  30 sec
+    ...  Verify Watchdog EventLog Content
+
+    Redfish Power Off
+
+
+Verify Event Logs Capping
+    [Documentation]  Verify event logs capping.
+    [Tags]  Verify_Event_Logs_Capping
+
+    Redfish Purge Event Log
+
+    ${cmd}=  Catenate  for i in {1..201}; do /tmp/tarball/bin/logging-test -c
+    ...  AutoTestSimple; done
+    BMC Execute Command  ${cmd}
+
+    ${elogs}=  Get Event Logs
+    ${count}=  Get Length  ${elogs}
+    Run Keyword If  ${count} > 200
+    ...  Fail  Error logs created exceeded max capacity 200.
+
+
 *** Keywords ***
 
 Suite Teardown Execution
@@ -254,3 +309,28 @@ Event Log Should Exist
 
     ${elogs}=  Get Event Logs
     Should Not Be Empty  ${elogs}  msg=System event log entry is not empty.
+
+
+Verify Watchdog EventLog Content
+    [Documentation]  Verify watchdog event log content.
+
+    # Example:
+    # {
+    #    "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
+    #    "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/31",
+    #    "@odata.type": "#LogEntry.v1_4_0.LogEntry",
+    #    "Created": "2019-05-31T18:41:33+00:00",
+    #    "EntryType": "Event",
+    #    "Id": "31",
+    #    "Message": "org.open_power.Host.Boot.Error.WatchdogTimedOut",
+    #    "Name": "System DBus Event Log Entry",
+    #    "Severity": "Critical"
+    # }
+
+    ${elog}=  Get Event Logs
+    Should Be Equal As Strings
+    ...  ${elog[0]["Message"]}  org.open_power.Host.Boot.Error.WatchdogTimedOut
+    ...  msg=Watchdog timeout event log was not found.
+    Should Be Equal As Strings
+    ...  ${elog[0]["Severity"]}  Critical
+    ...  msg=Watchdog timeout severity unexpected value.
