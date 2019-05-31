@@ -22,6 +22,16 @@ ${loopback_ip}             127.0.0.2
 ${multicast_ip}            224.6.6.6
 ${out_of_range_ip}         10.7.7.256
 
+# Valid netmask is 4 bytes long and has continuos block of 1s.
+# Maximum valid value in each octet is 255 and least value is 0.
+# 253 is not valid, as binary value is 11111101.
+${invalid_netmask}         255.255.253.0
+${alpha_netmask}           ff.ff.ff.ff
+# Maximum value of octet in netmask is 255.
+${out_of_range_netmask}    255.256.255.0
+${more_byte_netmask}       255.255.255.0.0
+${less_byte_netmask}       255.255.255
+
 *** Test Cases ***
 
 Get IP Address And Verify
@@ -189,6 +199,46 @@ Add First Octet Lowest IP And Verify
 
      Add IP Address  1.7.7.7  ${test_subnet_mask}  ${test_gateway}
      Delete IP Address  1.7.7.7
+
+Configure Invalid Netmask
+    [Documentation]  Verify error while setting invalid netmask.
+    [Tags]  Configure_Invalid_Netmask
+    [Template]  Add IP Address
+
+    # ip               subnet_mask         gateway          valid_status_codes
+    ${test_ipv4_addr}  ${invalid_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Out Of Range Netmask
+    [Documentation]  Verify error while setting out of range netmask.
+    [Tags]  Configure_Out_Of_Range_Netmask
+    [Template]  Add IP Address
+
+    # ip               subnet_mask              gateway          valid_status_codes
+    ${test_ipv4_addr}  ${out_of_range_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Alpha Netmask
+    [Documentation]  Verify error while setting alpha netmask.
+    [Tags]  Configure_Alpha_Netmask
+    [Template]  Add IP Address
+
+    # ip               subnet_mask       gateway          valid_status_codes
+    ${test_ipv4_addr}  ${alpha_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure More Byte Netmask
+    [Documentation]  Verify error while setting more byte netmask.
+    [Tags]  Configure_More_Byte_Netmask
+    [Template]  Add IP Address
+
+    # ip               subnet_mask           gateway          valid_status_codes
+    ${test_ipv4_addr}  ${more_byte_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Less Byte Netmask
+    [Documentation]  Verify error while setting less byte netmask.
+    [Tags]  Configure_Less_Byte_Netmask
+    [Template]  Add IP Address
+
+    # ip               subnet_mask           gateway          valid_status_codes
+    ${test_ipv4_addr}  ${less_byte_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
 *** Keywords ***
 
