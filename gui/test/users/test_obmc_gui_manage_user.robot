@@ -55,7 +55,7 @@ Verify Existence Of All Input Boxes In User Page
 
 
 Verify Existence Of All Button In User Page
-    [Documentation]  Verify existence of all botton in user page.
+    [Documentation]  Verify existence of all button in user page.
     [Tags]  Verify_Existence_Of_All_Button_In_User_Page
 
     # Buttons under user account properties
