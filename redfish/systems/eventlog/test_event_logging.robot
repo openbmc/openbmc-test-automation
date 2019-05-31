@@ -121,6 +121,48 @@ Test Event Log Persistency On Reboot
     Event Log Should Exist
 
 
+Create Test Event Log And Verify Time Stamp
+    [Documentation]  Create event logs and verify time stamp.
+    [Tags]  Create_Test_Event_Log_And_Verify_Time_Stamp
+
+    #{
+    #  "@odata.context": "/redfish/v1/$metadata#LogEntryCollection.LogEntryCollection",
+    #  "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries",
+    #  "@odata.type": "#LogEntryCollection.LogEntryCollection",
+    #  "Description": "Collection of System Event Log Entries",
+    #  "Members": [
+    #  {
+    #    "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
+    #    "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1",
+    #    "@odata.type": "#LogEntry.v1_4_0.LogEntry",
+    #    "Created": "2019-05-29T13:19:27+00:00", <--- Time stamp
+    #    "EntryType": "Event",
+    #    "Id": "1",
+    #    "Message": "org.open_power.Host.Error.Event",
+    #    "Name": "System DBus Event Log Entry",
+    #    "Severity": "Critical"
+    #  }
+    #  ],
+    #  "Members@odata.count": 1,
+    #  "Name": "System Event Log Entries"
+    #}
+
+    Redfish Purge Event Log
+
+    Create Test Error Log
+    Sleep  2s
+    Create Test Error Log
+
+    ${elog_entry}=  Get Event Logs
+
+    # The event log generated is associated with the epoc time and unique
+    # for every error and in increasing time stamp.
+    ${time_stamp1}=  Convert Date  ${elog_entry[0]["Created"]}  epoch
+    ${time_stamp2}=  Convert Date  ${elog_entry[1]["Created"]}  epoch
+
+    Should Be True  ${time_stamp2} > ${time_stamp1}
+
+
 *** Keywords ***
 
 Suite Teardown Execution
