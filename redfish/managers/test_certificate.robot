@@ -41,7 +41,7 @@ Verify Client Certificate Replace
 Verify Client Certificate Install
     [Documentation]  Verify client certificate install.
     [Tags]  Verify_Client_Certificate_Install
-    [Template]  Test Client Certificate Install Via Redfish
+    [Template]  Install And Verify Client Certificate Via Redfish
 
     # cert_format                        expected_status
     Valid Certificate Valid Privatekey   ok
@@ -72,8 +72,8 @@ Verify Server Certificate View Via Openssl
 
 *** Keywords ***
 
-Test Client Certificate Install Via Redfish
-    [Documentation]  Test client certificate install in the BMC via Redfish.
+Install And Verify Client Certificate Via Redfish
+    [Documentation]  Install and verify client certificate using Redfish.
     [Arguments]  ${cert_format}  ${expected_status}
 
     # Description of argument(s):
@@ -143,6 +143,10 @@ Replace Certificate Via Redfish
     # expected_status     Expected status of certificate replace Redfish
     #                     request (i.e. "ok" or "error").
 
+    # Install client certificate before replacing client certificate.
+    Run Keyword If  '${cert_type}' == 'Client'  Install And Verify Client Certificate Via Redfish
+    ...  Valid Certificate Valid Privatekey  ok
+
     redfish.Login
 
     ${time}=  Set Variable If  '${cert_format}' == 'Expired Certificate'  -10  365
@@ -157,7 +161,7 @@ Replace Certificate Via Redfish
     ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
     ${payload}=  Create Dictionary  CertificateString=${file_data}
     ...  CertificateType=PEM  CertificateUri=${certificate_dict}
-    ${resp}=  redfish.Post  CertificateService/Actions/CertificateService.ReplaceCertificate
+    ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
     ...  body=${payload}
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
@@ -204,4 +208,3 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     redfish.Logout
-
