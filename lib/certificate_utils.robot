@@ -47,9 +47,8 @@ Get Certificate Content From BMC Via Openssl
     Check If Openssl Tool Exist
 
     ${openssl_cmd}=  Catenate
-    ...  openssl s_client -connect ${OPENBMC_HOST}:443 -showcerts
-    ${rc}  ${output}=  Run And Return RC and Output  ${openssl_cmd}
-    Should Be Equal  ${rc}  ${0}  msg=${output}
+    ...  timeout 10  openssl s_client -connect ${OPENBMC_HOST}:443 -showcerts
+    ${output}=  Run  ${openssl_cmd}
 
     ${result}=  Fetch From Left
     ...  ${output}  -----END CERTIFICATE-----
