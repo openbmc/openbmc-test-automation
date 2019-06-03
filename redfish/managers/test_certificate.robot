@@ -38,6 +38,18 @@ Verify Client Certificate Replace
     Client                Expired Certificate                 error
 
 
+Verify CA Certificate Replace
+    [Documentation]  Verify CA certificate replace.
+    [Tags]  Verify_CA_Certificate_Replace
+    [Template]  Replace Certificate Via Redfish
+
+    # cert_type           cert_format                         expected_status
+    CA                    Valid Certificate Valid Privatekey  ok
+    CA                    Empty Certificate Valid Privatekey  error
+    CA                    Valid Certificate Empty Privatekey  error
+    CA                    Empty Certificate Empty Privatekey  error
+
+
 Verify Client Certificate Install
     [Documentation]  Verify client certificate install.
     [Tags]  Verify_Client_Certificate_Install
@@ -154,15 +166,19 @@ Replace Certificate Via Redfish
 
     ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
 
-    ${certificate_uri}=  Set Variable If  '${cert_type}' == 'Server'
-    ...  /redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
-    ...  /redfish/v1/AccountService/LDAP/Certificates/1
+    ${certificate_uri}=  Set Variable If
+    ...  '${cert_type}' == 'Server'  /redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
+    ...  '${cert_type}' == 'Client'  /redfish/v1/AccountService/LDAP/Certificates/1
+    ...  '${cert_type}' == 'CA'  /redfish/v1/Managers/bmc/Truststore/Certificates/1
 
     ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
     ${payload}=  Create Dictionary  CertificateString=${file_data}
     ...  CertificateType=PEM  CertificateUri=${certificate_dict}
+
+    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
+    ...  '${expected_status}' == 'error'  ${HTTP_INTERNAL_SERVER_ERROR}
     ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
-    ...  body=${payload}
+    ...  body=${payload}  valid_status_codes=[${expected_resp}]
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  redfish_utils.Get Attribute  ${certificate_uri}  CertificateString
