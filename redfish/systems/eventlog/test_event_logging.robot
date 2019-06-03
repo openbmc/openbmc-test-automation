@@ -163,6 +163,59 @@ Create Test Event Log And Verify Time Stamp
     Should Be True  ${time_stamp2} > ${time_stamp1}
 
 
+Delete Non Existing SEL Event Entry
+    [Documentation]  Delete non existing SEL event entry.
+    [Tags]  Delete_Non_Existing_SEL_Event_Entry
+
+    ${sel_delete}=  Run Keyword And Expect Error  *
+    ...  Run IPMI Standard Command  sel delete 100
+    Should Contain  ${sel_delete}  Unable to delete entry
+    ...  case_insensitive=True
+
+
+Delete Invalid SEL Event Entry
+    [Documentation]  Delete invalid SEL event entry.
+    [Tags]  Delete_Invalid_SEL_Event_Entry
+
+    ${sel_delete}=  Run Keyword And Expect Error  *
+    ...  Run IPMI Standard Command  sel delete abc
+    Should Contain  ${sel_delete}  Given SEL ID 'abc' is invalid
+    ...  case_insensitive=True
+
+
+Verify IPMI SEL Event Entries
+    [Documentation]  Verify IPMI SEL's entries info.
+    [Tags]  Verify_IPMI_SEL_Event_Entries
+
+    # Generate error logs of random count.
+    ${count}=  Evaluate  random.randint(1, 5)  modules=random
+    Repeat Keyword  ${count}  Create Test Error Log
+
+    ${sel_entries_count}=  Get IPMI SEL Setting  Entries
+    Should Be Equal As Strings  ${sel_entries_count}  ${count}
+
+
+Verify IPMI SEL Event Last Add Time
+    [Documentation]  Verify IPMI SEL's last added timestamp.
+    [Tags]  Verify_IPMI_SEL_Event_Last_Add_Time
+
+    Create Test Error Log
+    ${sel_time}=  Run IPMI Standard Command  sel time get
+    ${sel_time}=  Convert Date  ${sel_time}
+    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    ${sel_last_add_time}=  Get IPMI SEL Setting  Last Add Time
+    ${sel_last_add_time}=  Convert Date  ${sel_last_add_time}
+    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    ${time_diff}=
+    ...  Subtract Date From Date  ${sel_last_add_time}  ${sel_time}
+
+    # Verify if the delay in current time check and last add SEL time
+    # is less or equals to 2 seconds.
+    Should Be True  ${time_diff} <= 2
+
+
 *** Keywords ***
 
 Suite Teardown Execution
@@ -175,6 +228,8 @@ Test Setup Execution
    [Documentation]  Do test case setup tasks.
 
     Redfish.Login
+
+    Redfish Purge Event Log
 
     ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
     Run Keyword If  ${status} == ${False}  Install Tarball
