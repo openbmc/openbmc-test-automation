@@ -2,12 +2,13 @@
 
 Documentation       eSEL's Test cases.
 
-Resource            ../lib/ipmi_client.robot
-Resource            ../lib/openbmc_ffdc.robot
-Resource            ../lib/utils.robot
-Variables           ../data/variables.py
-Resource            ../lib/boot_utils.robot
-Resource            ../lib/esel_utils.robot
+Resource            ../../../lib/ipmi_client.robot
+Resource            ../../../lib/openbmc_ffdc.robot
+Resource            ../../../lib/utils.robot
+Variables           ../../../data/variables.py
+Resource            ../../../lib/boot_utils.robot
+Resource            ../../../lib/esel_utils.robot
+Resource            ../../../lib/logging_utils.robot
 
 Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
