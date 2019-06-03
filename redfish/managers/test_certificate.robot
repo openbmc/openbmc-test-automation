@@ -43,11 +43,11 @@ Verify Client Certificate Install
     [Tags]  Verify_Client_Certificate_Install
     [Template]  Install And Verify Client Certificate Via Redfish
 
-    # cert_format                        expected_status
-    Valid Certificate Valid Privatekey   ok
-    Empty Certificate Valid Privatekey   error
-    Valid Certificate Empty Privatekey   error
-    Empty Certificate Empty Privatekey   error
+    # cert_type           # cert_format                        expected_status
+    Client                Valid Certificate Valid Privatekey   ok
+    Client                Empty Certificate Valid Privatekey   error
+    Client                Valid Certificate Empty Privatekey   error
+    Client                Empty Certificate Empty Privatekey   error
 
 
 Verify Server Certificate View Via Openssl
@@ -74,15 +74,16 @@ Verify Server Certificate View Via Openssl
 
 Install And Verify Client Certificate Via Redfish
     [Documentation]  Install and verify client certificate using Redfish.
-    [Arguments]  ${cert_format}  ${expected_status}
+    [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}
 
     # Description of argument(s):
+    # cert_type           Certificate type (e.g. "Server" or "Client" or "CA").
     # cert_format         Certificate file format
     #                     (e.g. "Valid_Certificate_Valid_Privatekey").
     # expected_status     Expected status of certificate replace Redfish
     #                     request (i.e. "ok" or "error").
 
-    Delete Client Certificate Via BMC CLI
+    Delete Certificate Via BMC CLI  ${cert_type}
     # Adding delay after certificate deletion.
     Sleep  15s
 
@@ -145,7 +146,7 @@ Replace Certificate Via Redfish
 
     # Install client certificate before replacing client certificate.
     Run Keyword If  '${cert_type}' == 'Client'  Install And Verify Client Certificate Via Redfish
-    ...  Valid Certificate Valid Privatekey  ok
+    ...  ${cert_type}  Valid Certificate Valid Privatekey  ok
 
     redfish.Login
 
@@ -188,15 +189,27 @@ Verify Certificate Visible Via OpenSSL
     Should Contain  ${cert_file_content}  ${openssl_cert_content}
 
 
-Delete Client Certificate Via BMC CLI
+Delete Certificate Via BMC CLI
     [Documentation]  Delete client certificate via BMC CLI.
+    [Arguments]  ${cert_type}
+
+    # Description of argument(s):
+    # cert_type           Certificate type (e.g. "Client" or "CA").
+
+    ${certificate_file_path}=  Set Variable If
+    ...  '${cert_type}' == 'Client'  /etc/nslcd/certs/cert.pem
+    ...  '${cert_type}' == 'CA'  /etc/ssl/certs/Root-CA.pem
+
+    ${certificate_service}=  Set Variable If
+    ...  '${cert_type}' == 'Client'  phosphor-certificate-manager@nslcd.service
+    ...  '${cert_type}' == 'CA'  phosphor-certificate-manager@authority.service
 
     ${file_status}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  [ -f /etc/nslcd/certs/cert.pem ] && echo "Found" || echo "Not Found"
+    ...  [ -f ${certificate_file_path} ] && echo "Found" || echo "Not Found"
 
     Run Keyword If  "${file_status}" == "Found"
-    ...  Run Keywords  BMC Execute Command  rm /etc/nslcd/certs/cert.pem  AND
-    ...  BMC Execute Command  systemctl restart phosphor-certificate-manager@nslcd.service
+    ...  Run Keywords  BMC Execute Command  rm ${certificate_file_path}  AND
+    ...  BMC Execute Command  systemctl restart ${certificate_service}
 
 
 Suite Setup Execution
