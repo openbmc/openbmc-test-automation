@@ -36,6 +36,16 @@ Verify Client Certificate Replace
     Client       Empty Certificate Empty Privatekey  error
 
 
+Verify CA Certificate Replace
+    [Documentation]  Verify CA certificate replace.
+    [Tags]  Verify_CA_Certificate_Replace
+    [Template]  Replace Certificate Via Redfish
+
+    # cert_type  cert_format        expected_status
+    CA           Valid Certificate  ok
+    CA           Empty Certificate  error
+
+
 Verify Client Certificate Install
     [Documentation]  Verify client certificate install.
     [Tags]  Verify_Client_Certificate_Install
@@ -105,7 +115,7 @@ Install And Verify Certificate Via Redfish
     Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
 
     # Adding delay after certificate installation.
-    Sleep  15s
+    Sleep  30s
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
@@ -153,9 +163,11 @@ Replace Certificate Via Redfish
     # expected_status     Expected status of certificate replace Redfish
     #                     request (i.e. "ok" or "error").
 
-    # Install client certificate before replacing client certificate.
-    Run Keyword If  '${cert_type}' == 'Client'  Install And Verify Certificate Via Redfish
-    ...  ${cert_type}  Valid Certificate Valid Privatekey  ok
+    # Install certificate before replacing client or CA certificate.
+    Run Keyword If  '${cert_type}' == 'Client'
+    ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate Valid Privatekey  ok
+    ...  ELSE IF  '${cert_type}' == 'CA'
+    ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate  ok
 
     redfish.Login
 
@@ -164,9 +176,10 @@ Replace Certificate Via Redfish
 
     ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
 
-    ${certificate_uri}=  Set Variable If  '${cert_type}' == 'Server'
-    ...  /redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
-    ...  /redfish/v1/AccountService/LDAP/Certificates/1
+    ${certificate_uri}=  Set Variable If
+    ...  '${cert_type}' == 'Server'  ${{REDFISH_HTTPS_CERTIFICATE_URI}/1
+    ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}/1
+    ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}/1
 
     ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
     ${payload}=  Create Dictionary  CertificateString=${file_data}
