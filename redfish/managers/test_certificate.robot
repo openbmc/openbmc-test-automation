@@ -1,4 +1,4 @@
-*** Settings ***
+** Settings ***
 Documentation    Test certificate in OpenBMC.
 
 Resource         ../../lib/resource.robot
@@ -91,6 +91,9 @@ Install And Verify Client Certificate Via Redfish
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
     ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
 
+    # Added delay for certificate to expire.
+    Run Keyword If  '${cert_format}' == 'Expired Certificate'  Sleep  5s
+
     Install Client Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}
     ...  ${expected_status}  data=${file_data}
 
@@ -153,6 +156,9 @@ Replace Certificate Via Redfish
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
 
     ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
+
+    # Added delay for certificate to expire.
+    Run Keyword If  '${cert_format}' == 'Expired Certificate'  Sleep  5s
 
     ${certificate_uri}=  Set Variable If  '${cert_type}' == 'Server'
     ...  /redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
