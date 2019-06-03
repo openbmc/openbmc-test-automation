@@ -48,6 +48,16 @@ Verify Client Certificate Install
     Client       Empty Certificate Empty Privatekey  error
 
 
+Verify CA Certificate Install
+    [Documentation]  Verify CA certificate install.
+    [Tags]  Verify_CA_Certificate_Install
+    [Template]  Install And Verify Certificate Via Redfish
+
+    # cert_type  cert_format        expected_status
+    CA           Valid Certificate  ok
+    CA           Empty Certificate  error
+
+
 Verify Server Certificate View Via Openssl
     [Documentation]  Verify server certificate via openssl command.
     [Tags]  Verify_Server_Certificate_View_Via_Openssl
@@ -88,20 +98,23 @@ Install And Verify Certificate Via Redfish
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
     ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
 
-    Install Client Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}
-    ...  ${expected_status}  data=${file_data}
+    ${certificate_uri}=  Set Variable If
+    ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}
+    ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
+
+    Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
 
     # Adding delay after certificate installation.
     Sleep  15s
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
-    ...  ${REDFISH_LDAP_CERTIFICATE_URI}/1  CertificateString
+    ...  ${certificate_uri}/1  CertificateString
 
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
 
 
-Install Client Certificate File On BMC
+Install Certificate File On BMC
     [Documentation]  Install certificate file in BMC using POST operation.
     [Arguments]  ${uri}  ${status}=ok  &{kwargs}
 
