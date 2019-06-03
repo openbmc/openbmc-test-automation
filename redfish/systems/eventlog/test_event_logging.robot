@@ -271,6 +271,45 @@ Verify Event Logs Capping
     ...  Fail  Error logs created exceeded max capacity 200.
 
 
+Test Event Log Rotation
+    [Documentation]  Verify creation of 201 event log is replaced by entry id 1.
+    [Tags]  Test_Event_Log_Rotation
+
+    Redfish Purge Event Log
+
+    # Restart service.
+    BMC Execute Command
+    ...  systemctl restart xyz.openbmc_project.Logging.service
+    Sleep  10s  reason=Wait for logging service to restart properly.
+
+    # Create 200 error logs.
+    ${cmd}=  Catenate  for i in {1..200}; do /tmp/tarball/bin/logging-test -c
+    ...  AutoTestSimple;done
+
+    BMC Execute Command  ${cmd}
+
+    Sleep  10s
+
+    # Check the response for 200th event log.
+    ${elog}=  Get Event Logs
+
+    Rprint Vars  elog  fmt=1
+
+    Should Be Equal As Strings  ${elog[0]["Id"]}  1
+
+    # Check if error log with id 1 exists.
+    Should Be Equal As Strings  ${elog[199]["Id"]}  200
+
+    # Create error log and verify the entry ID is 201 and not 1.
+    Create Test Error Log
+    ${elog}=  Get Event Logs
+    Should Be Equal As Strings  ${elog[200]["Id"]}  201
+
+    # Event log 1 should not be present and next index should be 2.
+    Variable Should Not Exist  ${elog[0]["Id"]}
+    Should Be Equal As Strings  ${elog[1]["Id"]}  2
+
+
 *** Keywords ***
 
 Suite Teardown Execution
@@ -293,7 +332,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish Purge Event Log
 
 
