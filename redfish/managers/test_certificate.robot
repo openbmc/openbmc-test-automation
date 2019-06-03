@@ -22,7 +22,6 @@ Verify Server Certificate Replace
     Server                Empty Certificate Valid Privatekey  error
     Server                Valid Certificate Empty Privatekey  error
     Server                Empty Certificate Empty Privatekey  error
-    Server                Expired Certificate                 error
 
 
 Verify Client Certificate Replace
@@ -35,7 +34,6 @@ Verify Client Certificate Replace
     Client                Empty Certificate Valid Privatekey  error
     Client                Valid Certificate Empty Privatekey  error
     Client                Empty Certificate Empty Privatekey  error
-    Client                Expired Certificate                 error
 
 
 Verify Client Certificate Install
