@@ -116,3 +116,31 @@ def get_esels(error_logs=None):
                     esels.append(additional_data)
 
     return esels
+
+
+def get_event_id_log(event_list_data, id_num):
+    r"""
+    Returns event log with a matching dict value from a given list of dictionary.
+    Returns 0 if no matching value is found in the list of dictionary.
+
+    Example output:
+    elog[198]:
+    elog[198][@odata.type]:                       #LogEntry.v1_4_0.LogEntry
+    elog[198][Name]:                              System DBus Event Log Entry
+    elog[198][Id]:                                98
+    elog[198][@odata.id]:                         /redfish/v1/Systems/system/LogServices/EventLog/Entries/98
+    elog[198][Created]:                           2019-06-03T17:03:14+00:00
+    elog[198][EntryType]:                         Event
+    elog[198][Severity]:                          Critical
+    elog[198][@odata.context]:                    /redfish/v1/$metadata#LogEntry.LogEntry
+    elog[198][Message]:                           example.xyz.openbmc_project.Example.Elog.AutoTestSimple
+
+    Description of argument(s):
+    event_list_data            List of dict.
+    id_num                     Event Id value.
+    """
+
+    try:
+        return [index for index in event_list_data if index["Id"] == str(id_num)][0]
+    except IndexError:
+        return 0

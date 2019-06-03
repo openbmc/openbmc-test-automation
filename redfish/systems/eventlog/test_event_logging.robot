@@ -6,6 +6,7 @@ Resource            ../../../lib/bmc_redfish_utils.robot
 Resource            ../../../lib/logging_utils.robot
 Resource            ../../../lib/openbmc_ffdc.robot
 Resource            ../../../lib/ipmi_client.robot
+Library             ../../../lib/logging_utils.py
 
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
@@ -270,6 +271,47 @@ Verify Event Logs Capping
     ${count}=  Get Length  ${elogs}
     Run Keyword If  ${count} > 200
     ...  Fail  Error logs created exceeded max capacity 200.
+
+
+Test Event Log Rotation
+    [Documentation]  Verify event log entries rotates when 200 max cap is reached.
+    [Tags]  Test_Event_Log_Rotation
+
+    # Restart service.
+    BMC Execute Command
+    ...  systemctl restart xyz.openbmc_project.Logging.service
+    Sleep  10s  reason=Wait for logging service to restart properly.
+
+    # Create 200 event logs.
+    ${cmd}=  Catenate  for i in {1..200}; do /tmp/tarball/bin/logging-test -c
+    ...  AutoTestSimple;done
+
+    BMC Execute Command  ${cmd}
+
+    # Check if event log with id 1 and 200 exists.
+    ${elog}=  Get Event Logs
+
+    ${log_entry}=  Get Event Id Log  ${elog}  1
+    Rprint Vars  log_entry  fmt=1
+    Should Be Equal As Strings  ${log_entry["Id"]}  1
+
+    ${log_entry}=  Get Event Id Log  ${elog}  200
+    Rprint Vars  log_entry  fmt=1
+    Should Be Equal As Strings  ${log_entry["Id"]}  200
+
+    # Create event log and verify the entry Id 201.
+    Create Test Error Log
+
+    ${elog}=  Get Event Logs
+    ${log_entry}=  Get Event Id Log  ${elog}  201
+    Rprint Vars  log_entry  fmt=1
+    Should Be Equal As Strings  ${log_entry["Id"]}  201
+
+    # Event log 1 should be rotated.
+    ${log_entry}=  Get Event Id Log  ${elog}  1
+    Rprint Vars  log_entry  fmt=1
+    # 0 indicates, the given event log Id number doesn't exist.
+    Should Be True  ${log_entry} == ${0}
 
 
 *** Keywords ***
