@@ -3,6 +3,7 @@ Documentation  Utilities for eSEL testing.
 
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/utils.robot
+Resource            ../lib/logging_utils.robot
 Variables           ../data/variables.py
 
 
@@ -42,22 +43,19 @@ Count eSEL Entries
 
 Verify eSEL Entries
     [Documentation]  Verify eSEL entries logged.
-    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
-    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
-    #  "data": {
-    #       "AdditionalData": [
-    #           "ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00 "
-    #          ],
-    #       "Id": 1,
-    #       "Message": "org.open_power.Host.Error.Event",
-    #       "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
-    #       "Timestamp": 1485904869061
-    # }
-    ${entry_id}=  Read Attribute  ${elog_entry[0]}  Message
-    Should Be Equal  ${entry_id}
-    ...  org.open_power.Host.Error.Event
 
-    ${entry_id}=  Read Attribute  ${elog_entry[0]}  Severity
-    # Could be either xyz.openbmc_project.Logging.Entry.Level.Error
-    # or xyz.openbmc_project.Logging.Entry.Level.Warning.
-    Should Contain  ${entry_id}  xyz.openbmc_project.Logging.Entry.Level
+    # {
+    #    "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
+    #    "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/2",
+    #    "@odata.type": "#LogEntry.v1_4_0.LogEntry",
+    #    "Created": "2019-06-03T14:47:31+00:00",
+    #    "EntryType": "Event",
+    #    "Id": "2",
+    #    "Message": "org.open_power.Host.Error.Event",
+    #    "Name": "System DBus Event Log Entry",
+    #    "Severity": "Critical"
+    # }
+
+    ${elog_entry}=  Get Event Logs
+    Should Be Equal  ${elog_entry[0]["Message"]}  org.open_power.Host.Error.Event
+    Should Be Equal  ${elog_entry[0]["Severity"]}  Critical

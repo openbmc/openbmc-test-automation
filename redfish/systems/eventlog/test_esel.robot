@@ -5,15 +5,15 @@ Documentation       eSEL's Test cases.
 Resource            ../../../lib/ipmi_client.robot
 Resource            ../../../lib/openbmc_ffdc.robot
 Resource            ../../../lib/utils.robot
-Variables           ../../../data/variables.py
 Resource            ../../../lib/boot_utils.robot
 Resource            ../../../lib/esel_utils.robot
-Resource            ../../../lib/logging_utils.robot
+Resource            ../../../lib/boot_utils.robot
+Variables           ../../../data/variables.py
 
 Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
+Test Setup          Test Setup Execution
 Test Teardown       FFDC On Test Case Fail
-Test Setup          Delete All Error Logs
 
 Force Tags  eSEL_Logging
 
@@ -27,24 +27,24 @@ ${ESEL_DATA}        ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00
 
 *** Test Cases ***
 
-Verify eSEL Using REST
-    [Documentation]  Generate eSEL log and verify using REST.
-    [Tags]  Verify_eSEL_Using_REST
+Verify eSEL Using Redfish
+    [Documentation]  Generate eSEL log and verify using redfish.
+    [Tags]  Verify_eSEL_Using_Redfish
 
     Create eSEL
-    # New eSEL log should exist
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Event Log Should Exist
 
 
-Verify eSEL Entries Using REST
+Verify eSEL Entries Using Redfish
     [Documentation]  Verify that eSEL entries have data.
-    [Tags]  Verify_eSEL_Entries_Using_REST
+    [Tags]  Verify_eSEL_Entries_Using_Redfish
 
     Create eSEL
+    Redfish.Login
     Verify eSEL Entries
 
 
+# TODO: openbmc/openbmc-test-automation#1789
 Verify eSEL Description And EntryID Using REST
     [Documentation]  Create eSEL log and verify "Description" and "EntryID"
     ...  are not empty via REST.
@@ -83,9 +83,9 @@ Verify eSEL Description And EntryID Using REST
     ...  msg=${event_id} is populated default "None".
 
 
-Verify Multiple eSEL Using REST
-    [Documentation]  Generate multiple eSEL log and verify using REST.
-    [Tags]  Verify_Multiple_eSEL_Using_REST
+Verify Multiple eSEL Using Redfish
+    [Documentation]  Generate multiple eSEL log and verify using redfish
+    [Tags]  Verify_Multiple_eSEL_Using_Redfish
 
     Create eSEL
     Create eSEL
@@ -94,6 +94,7 @@ Verify Multiple eSEL Using REST
     ...  msg=Expecting 2 eSELs but found ${entries}.
 
 
+# TODO: openbmc/openbmc-test-automation#1789
 Check eSEL AdditionalData
     [Documentation]  Generate eSEL log and verify AdditionalData is
     ...              not empty.
@@ -178,6 +179,13 @@ Check IPMI OEMpartialadd Reject
     [Return]  ${stderr}
 
 
+Test Setup Execution
+   [Documentation]  Do test case setup tasks.
+
+    Redfish.Login
+    Redfish Purge Event Log
+
+
 Suite Setup Execution
     [Documentation]  Validates input parameters & check if HOST OS is up.
 
@@ -189,7 +197,10 @@ Suite Setup Execution
     ...   ${OS_PASSWORD}  msg=You must provide OS host user password.
 
     # Boot to OS.
-    REST Power On
+    Redfish Power On
+
+    Redfish.Login
+    Redfish Purge Event Log
 
     Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     Open Connection And Log In
@@ -203,3 +214,10 @@ Check IPMI OEMpartialadd Accept
     ...         return_stdout=True  return_stderr=True  return_rc=True
     Should Be Equal  ${output_3}  ${0}  msg=${stderr}
     [Return]  ${stderr}
+
+
+Event Log Should Exist
+    [Documentation]  Event log entries should exist.
+
+    ${elogs}=  Get Event Logs
+    Should Not Be Empty  ${elogs}  msg=System event log entry is not empty.
