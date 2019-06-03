@@ -6,10 +6,15 @@ Resource            ../../../lib/bmc_redfish_utils.robot
 Resource            ../../../lib/logging_utils.robot
 Resource            ../../../lib/openbmc_ffdc.robot
 Resource            ../../../lib/ipmi_client.robot
+Library             ../../../lib/logging_utils.py
 
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
 Suite Teardown      Suite Teardown Execution
+
+** Variables ***
+
+${max_num_event_logs}  ${200}
 
 *** Test Cases ***
 
@@ -270,6 +275,51 @@ Verify Event Logs Capping
     ${count}=  Get Length  ${elogs}
     Run Keyword If  ${count} > 200
     ...  Fail  Error logs created exceeded max capacity 200.
+
+
+Test Event Log Rotation
+    [Documentation]  Verify event log entries rotates when 200 max cap is reached.
+    [Tags]  Test_Event_Log_Rotation
+
+    # Restart service.
+    BMC Execute Command
+    ...  systemctl restart xyz.openbmc_project.Logging.service
+    Sleep  10s  reason=Wait for logging service to restart properly.
+
+    # Create ${max_num_event_logs} event logs.
+    ${cmd}=  Catenate  for i in {1..${max_num_event_logs}}; do /tmp/tarball/bin/logging-test -c
+    ...  AutoTestSimple;done
+    BMC Execute Command  ${cmd}
+
+    # Verify that event logs with IDs 1 and ${max_num_event_logs} exist.
+    ${event_log}=  Get Event Logs
+
+    ${log_entries}=  Filter Struct  ${event_log}  [('Id', '1')]
+    Rprint Vars  log_entries  fmt=terse
+    Should Be Equal As Strings  ${log_entries[0]["Id"]}  1
+
+    ${log_entries}=  Filter Struct  ${event_log}  [('Id', '${max_num_event_logs}')]
+    Rprint Vars  log_entries  fmt=terse
+    Should Be Equal As Strings  ${log_entries[0]["Id"]}  ${max_num_event_logs}
+
+    # Create event log and verify the entry ID, ${max_num_event_logs + 1}.
+    ${next_event_log_id}=  Set Variable  ${max_num_event_logs + 1}
+
+    Create Test Error Log
+
+    ${event_log}=  Get Event Logs
+
+    ${log_entries}=  Filter Struct  ${event_log}  [('Id', '${next_event_log_id}')]
+    Rprint Vars  log_entries  fmt=terse
+    Should Be Equal As Strings  ${log_entries[0]["Id"]}  ${next_event_log_id}
+
+    # Event log 1 should be rotated.
+    ${log_entries}=  Filter Struct  ${event_log}  [('Id', '1')]
+    Rprint Vars  log_entries  fmt=terse
+
+    ${length_log_entries}  Get Length  ${log_entries}
+    Should Be Equal As Integers  ${length_log_entries}  0
+    ...  msg=The event log should have wrapped such that entry ID 1 is now purged.
 
 
 *** Keywords ***
