@@ -47,13 +47,14 @@ Get Component Fru Info Via REST
 
     # Get the component information for each record.
     ${component_frus}=  Create List
-    : FOR  ${component_uri}  IN  @{component_uris}
-    \  ${result}=  Read Properties  ${component_uri}  quiet=${1}
-    \  ${component}=  Fetch From Right  ${component_uri}  /
-    \  Set To Dictionary  ${result}  fru_device_description  ${component}
-    \  Append To List  ${component_frus}  ${result}
-    [Return]  ${component_frus}
-
+    FOR    ${component_uri}    IN    @{component_uris}
+         ${result}=    Read Properties    ${component_uri}    quiet=${1}
+       ${component}=    Fetch From Right    ${component_uri}  /
+       Set To Dictionary    ${result}    fru_device_description    ${component}
+       Append To List    ${component_frus}    ${result}
+    END
+    [Return]    ${component_frus}
+    
 
 Verify FRU Info
     [Documentation]  Verify FRU information of given component.
@@ -125,18 +126,19 @@ Verify FRU Info
     ${component_uris}=  Get Matches  ${inventory_uris}
     ...  regexp=^.*[0-9a-z_].${component_name}\[0-9]*$
 
-    : FOR  ${uri}  IN  @{component_uris}
-    \  ${sub_component}=  Fetch From Right  ${uri}  /
-    \  ${ipmi_index}=  Get Index Of FRU Sub Component Info
-    \  ...  ${ipmi_fru_component_info}  ${sub_component}
-    \  ${rest_index}=  Get Index Of FRU Sub Component Info
-    \  ...  ${rest_fru_component_info}  ${sub_component}
-    \  ${ipmi_fru_sub_component}=
-    \  ...  Get From List  ${ipmi_fru_component_info}  ${ipmi_index}
-    \  ${rest_fru_sub_component}=
-    \  ...  Get From List  ${rest_fru_component_info}  ${rest_index}
-    \  Compare IPMI And REST FRU Component Info  ${ipmi_fru_sub_component}
-    \  ...  ${rest_fru_sub_component}  ${component_name}
+    FOR    ${uri}    IN    @{component_uris}
+        ${sub_component}=    Fetch From Right  ${uri}  /
+        ${ipmi_index}=    Get Index Of FRU Sub Component Info
+    ...    ${ipmi_fru_component_info}    ${sub_component}
+        ${rest_index}=    Get Index Of FRU Sub Component Info
+    ...    ${rest_fru_component_info}    ${sub_component}
+         ${ipmi_fru_sub_component}=
+    ...    Get From List    ${ipmi_fru_component_info}    ${ipmi_index}
+        ${rest_fru_sub_component}=
+    ...    Get From List    ${rest_fru_component_info}    ${rest_index}
+        Compare IPMI And REST FRU Component Info    ${ipmi_fru_sub_component}
+    ...    ${rest_fru_sub_component}    ${component_name}
+    END
 
 
 Get Index Of FRU Sub Component Info
@@ -163,19 +165,19 @@ Get Index Of FRU Sub Component Info
     ${sub_component_count}=  Get Length  ${fru_component_info}
     ${index}=  Set Variable  ${0}
 
-    : FOR  ${rest_fru_sub_component}  IN  @{fru_component_info}
-    \  ${fru_component_section}=
-    \  ...  Get From List  ${fru_component_info}  ${index}
-    \  # Get FRU name from IPMI's fru_device_description field.
-    \  # Example "cpu0" from "cpu0 (ID 1)".
-    \  ${fru_name}=  Fetch From Left
-    \  ...  ${fru_component_section['fru_device_description']}  ${SPACE}
-    \  ${status}=  Run Keyword And Return Status  Should Be Equal
-    \  ...  ${fru_name}  ${sub_component}
-    \  Exit For Loop If  '${status}' == '${True}'
-    \  ${index}=  Evaluate  ${index} + 1
-    \  Exit For Loop If  ${index} >= ${sub_component_count}
-
+    FOR    ${rest_fru_sub_component}    IN    @{fru_component_info}
+        ${fru_component_section}=
+    ...    Get From List    ${fru_component_info}    ${index}
+        # Get FRU name from IPMI's fru_device_description field.
+        # Example "cpu0" from "cpu0 (ID 1)".
+        ${fru_name}=    Fetch From Left
+    ...    ${fru_component_section['fru_device_description']}    ${SPACE}
+        ${status}=    Run Keyword And Return Status    Should Be Equal
+    ...    ${fru_name}    ${sub_component}
+       Exit For Loop If    '${status}' == '${True}'
+       ${index}=    Evaluate    ${index} + 1
+       Exit For Loop If    ${index} >= ${sub_component_count}
+    END
     [Return]  ${index}
 
 
@@ -210,11 +212,12 @@ Compare IPMI And REST FRU Component Info
 
     # Get key_map from ipmi_rest_fru_field_map.
     ${key_map}=  Set Variable  ${ipmi_rest_fru_field_map['${component_name}']}
-    : FOR  ${ipmi_key}  IN  @{ipmi_rest_fru_field_map['${component_name}'].keys()}
-    \  ${rest_key}=  Set Variable  ${key_map['${ipmi_key}']}
-    \  Should Contain  ${rest_fru_component_obj['${rest_key}']}
-    ...  ${ipmi_fru_component_obj['${ipmi_key}']}
-    ...  msg=Comparison failed.
+    FOR    ${ipmi_key}    IN    @{ipmi_rest_fru_field_map['${component_name}'].keys()}
+        ${rest_key}=    Set Variable    ${key_map['${ipmi_key}']}
+        Should Contain    ${rest_fru_component_obj['${rest_key}']}
+    ...    ${ipmi_fru_component_obj['${ipmi_key}']}
+    ...    msg=Comparison failed.
+    END
 
 
 Test Teardown Execution
