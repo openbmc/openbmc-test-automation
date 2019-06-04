@@ -343,9 +343,9 @@ Verify All REST Objects Are Accessible
 
     ${error_uri_list}=  Create List
     :FOR  ${uri}  IN  @{uri_list}
-    \  ${resp}=  Openbmc Get Request  ${uri}  quiet=${1}
-    \  Run keyword if  '${resp.status_code}' != '${HTTP_OK}'
-    \  ...  Append To List  ${error_uri_list}  ${uri} : ${resp.status_code}
+       ${resp}=  Openbmc Get Request  ${uri}  quiet=${1}
+       Run keyword if  '${resp.status_code}' != '${HTTP_OK}'
+       ...  Append To List  ${error_uri_list}  ${uri} : ${resp.status_code}
     Should Be Empty  ${error_uri_list}
 
 

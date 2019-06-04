@@ -80,9 +80,9 @@ Verify IPMI User Creation With Invalid ID
     Append To List  ${id_list}  0
 
     :FOR  ${id}  IN  @{id_list}
-    \    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
-    \    ...  user set name ${id} newuser
-    \    Should Contain  ${msg}  User ID is limited to range
+         ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+         ...  user set name ${id} newuser
+         Should Contain  ${msg}  User ID is limited to range
 
 
 Verify Setting IPMI User With Invalid Password
@@ -431,8 +431,8 @@ Delete All Non Root IPMI User
     [Documentation]  Delete all non-root IPMI user.
 
     :FOR  ${userid}  IN RANGE  2  16
-    \  ${user_info}=  Get User Info  ${userid}
-    \  Run Keyword If  "${user_info['user_name']}" != ""
+       ${user_info}=  Get User Info  ${userid}
+       Run Keyword If  "${user_info['user_name']}" != ""
     ...  Run IPMI Standard Command  user set name ${userid} ""
 
 
