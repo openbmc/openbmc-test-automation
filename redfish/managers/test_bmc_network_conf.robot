@@ -443,16 +443,6 @@ Verify IP And Netmask On BMC
     Should Contain  ${ip_data}  ${ip_with_netmask}
     ...  msg=IP and netmask pair does not exist.
 
-Configure Hostname
-    [Documentation]  Configure hostname on BMC via Redfish.
-    [Arguments]  ${hostname}
-
-    # Description of argument(s):
-    # hostname  A hostname value which is to be configured on BMC.
-
-    ${data}=  Create Dictionary  HostName=${hostname}
-    Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
-
 Validate Hostname On BMC
     [Documentation]  Verify that the hostname read via Redfish is the same as the
     ...  hostname configured on system.
