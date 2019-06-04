@@ -342,11 +342,12 @@ Verify All REST Objects Are Accessible
     ...  /xyz/openbmc_project/ipmi/internal/soft_power_off
 
     ${error_uri_list}=  Create List
-    :FOR  ${uri}  IN  @{uri_list}
-    \  ${resp}=  Openbmc Get Request  ${uri}  quiet=${1}
-    \  Run keyword if  '${resp.status_code}' != '${HTTP_OK}'
-    \  ...  Append To List  ${error_uri_list}  ${uri} : ${resp.status_code}
-    Should Be Empty  ${error_uri_list}
+    FOR    ${uri}    IN    @{uri_list}
+        ${resp}=    Openbmc Get Request    ${uri}    quiet=${1}
+        Run keyword if    '${resp.status_code}' != '${HTTP_OK}'
+    ...    Append To List    ${error_uri_list}  ${uri} : ${resp.status_code}
+    END
+    Should Be Empty    ${error_uri_list}
 
 
 Verify REST Put Message JSON Compliant
