@@ -101,6 +101,17 @@ Verify Invalid Password Error
     LogOut OpenBMC GUI
     Login And Verify Message  root  &{user_invalid_password}[root]  Invalid username or password
 
+Edit And Verify User Property
+    [Documentation]  Edits and verifies the user property.
+    [Tags]  Edit_And_Verify_User_Property
+    [Setup]  Run Keywords  Test Setup Execution  AND  Delete Given Users
+
+    Add Or Modify User  testUser1  &{user_password}[testUser1]  User
+    Reload Page
+    Edit User Role  testUser1  &{user_password}[testUser1]  Callback
+    ${user_role}=  Get User Property Value  testUser1  Role
+    Should Be Equal  ${user_role}  Callback
+
 *** Keywords ***
 
 Test Setup Execution
@@ -128,7 +139,6 @@ Add Or Modify User
               ...  Input Text  ${xpath_input_username}  ${username}
    Input Password  ${xpath_input_password}  ${password}
    Input Password  ${xpath_input_retype_password}  ${password}
-   Log  ${role}
    Select From List By Value  ${xpath_input_user_role}  ${role}
    Run Keyword If  '${enabled}' == 'True'  Click Element  ${xpath_input_enabled_checkbox}
    Run Keyword If  '${action}' == 'modify'
@@ -165,11 +175,53 @@ Delete Given Users
    \    ...  AND  Reload Page
    \    ...  AND  Exit For Loop If  '${user}' == '${delete_user}'
 
+Get User Property Value
+   [Documentation]  Returns value of the property for given user.
+   [Arguments]  ${username}  ${property}=Role
+   # Description of argument(s):
+   # username  Username.
+   # property User's property whose value is required.
+   #           Valid values - Enabled, Role
+
+   :FOR  ${rowNum}  IN RANGE  1  16
+   \    ${xpath_user}=  Set Variable  //*[@id="user-accounts"]/div[4]/div[2]/div[${rowNum}]/div[1]
+   \    ${status}=  Run Keyword And Return Status  Page Should Contain Element  ${xpath_user}
+   \    Exit For Loop If  '${status}' == 'False'
+   \    ${xpath_property}  Run Keyword If  '${property}' == 'Enabled'
+   \    ...  Set Variable  //*[@id="user-accounts"]/div[4]/div[2]/div[${rowNum}]/div[2]
+   \    ...  ELSE IF  '${property}' == 'Role'
+   \    ...  Set Variable  //*[@id="user-accounts"]/div[4]/div[2]/div[${rowNum}]/div[3]
+   \    ...  ELSE  Fail  Unknown user's property requested
+   \    ${user}=  Get Text  ${xpath_user}
+   \    Run Keyword And Return If  '${user}' == '${username}'  Get Text  ${xpath_property}
+
 Login And Verify Message
    [Documentation]  Verifies the error message displayed on screen while logging in.
    [Arguments]  ${username}  ${password}  ${msg}
+   # Description of argument(s):
+   # username  Username.
+   # password  Password.
+   # msg       Expected message while logging in which needs to be verified.
 
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
     Click Element  ${xpath_button_login}
     Page Should Contain  ${msg}
+
+Edit User Role
+   [Documentation]  Edits the given user.
+   [Arguments]  ${username}  ${password}  ${new_user_role}
+   # Description of argument(s):
+   # username  Username.
+   # password  Password.
+   # new_user_role  Value to which the given user's role needs to be changed to.
+
+   :FOR  ${rowNum}  IN RANGE  1  16
+   \    ${xpath_user}=  Set Variable  //*[@id="user-accounts"]/div[4]/div[2]/div[${rowNum}]/div[1]
+   \    ${status}=  Run Keyword And Return Status  Page Should Contain Element  ${xpath_user}
+   \    Exit For Loop If  '${status}' == 'False'
+   \    ${xpath_edit_user}=  Set Variable  //*[@id="user-accounts"]/div[4]/div[2]/div[${rowNum}]/div[5]/button[1]
+   \    ${user}=  Get Text  ${xpath_user}
+   \    Run Keyword If  '${user}' == '${username}'  Run Keywords  Click Element  ${xpath_edit_user}
+   \    ...  AND  Add Or Modify user  ${username}  ${password}  ${new_user_role}  action=modify
+   \    ...  AND  Exit For Loop
