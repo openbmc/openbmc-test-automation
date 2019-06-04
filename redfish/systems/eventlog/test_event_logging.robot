@@ -5,6 +5,7 @@ Resource            ../../../lib/bmc_redfish_resource.robot
 Resource            ../../../lib/bmc_redfish_utils.robot
 Resource            ../../../lib/logging_utils.robot
 Resource            ../../../lib/openbmc_ffdc.robot
+Resource            ../../../lib/ipmi_client.robot
 
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
