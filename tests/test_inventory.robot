@@ -152,10 +152,10 @@ Verify CPU Present
     # The CPU properties "Present" should be boolean 1.
 
     ${cpu_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  cpu
-    :FOR  ${cpu_uri}  IN  @{cpu_list}
-    \  ${present}=  Read Attribute  ${cpu_uri}  Present
-    \  Should Be True  ${present}
-
+    FOR  ${cpu_uri}  IN  @{cpu_list}
+      ${present}=  Read Attribute  ${cpu_uri}  Present
+      Should Be True  ${present}
+    END
 
 Verify DIMM Present
     [Documentation]  Check if the FRU "Present" is set for DIMM's.
@@ -177,10 +177,10 @@ Verify DIMM Present
     # The DIMM properties "Present" should be boolean 1.
 
     ${dimm_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  dimm
-    :FOR  ${dimm_uri}  IN  @{dimm_list}
-    \  ${present}=  Read Attribute  ${dimm_uri}  Present
-    \  Should Be True  ${present}
-
+    FOR  ${dimm_uri}  IN  @{dimm_list}
+      ${present}=  Read Attribute  ${dimm_uri}  Present
+      Should Be True  ${present}
+    END
 
 Verify FRU Properties
     [Documentation]  Verify the FRU properties fields.
@@ -310,13 +310,14 @@ Verify Core Functional State
     #    "PrettyName": ""
     # },
     ${core_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  core
-    :FOR  ${core_uri}  IN  @{core_list}
-    \  ${status}=  Run Keyword And Return Status
-    ...  Check URL Property Is Functional  ${core_uri}
-    \  Continue For Loop If  '${status}' == '${False}'
-    \  ${present}=  Read Attribute  ${core_uri}  Present
-    \  Should Be True  ${present}
-    ...  msg=${core_uri} is functional but not present.
+    FOR  ${core_uri}  IN  @{core_list}
+      ${status}=  Run Keyword And Return Status
+      ...  Check URL Property Is Functional  ${core_uri}
+      Continue For Loop If  '${status}' == '${False}'
+      ${present}=  Read Attribute  ${core_uri}  Present
+      Should Be True  ${present}
+      ...  msg=${core_uri} is functional but not present.
+    END
 
 
 Verify DIMM Functional State
@@ -339,13 +340,14 @@ Verify DIMM Functional State
     # },
 
     ${dimm_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  dimm
-    :FOR  ${dimm_uri}  IN  @{dimm_list}
-    \  ${status}=  Run Keyword And Return Status
-    ...  Check URL Property Is Functional  ${dimm_uri}
-    \  Continue For Loop If  '${status}' == '${False}'
-    \  ${present}=  Read Attribute  ${dimm_uri}  Present
-    \  Should Be True  ${present}
-    ...  msg=${dimm_uri} is functional but not present.
+    FOR  ${dimm_uri}  IN  @{dimm_list}
+      ${status}=  Run Keyword And Return Status
+      ...  Check URL Property Is Functional  ${dimm_uri}
+      Continue For Loop If  '${status}' == '${False}'
+      ${present}=  Read Attribute  ${dimm_uri}  Present
+      Should Be True  ${present}
+      ...  msg=${dimm_uri} is functional but not present.
+    END
 
 
 Verify Fan Functional State
@@ -361,13 +363,15 @@ Verify Fan Functional State
 
     ${fan_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  fan*
     Should Not Be Empty  ${fan_list}
-    :FOR  ${fan_uri}  IN  @{fan_list}
-    \  ${status}=  Run Keyword And Return Status
-    ...  Check URL Property Is Functional  ${fan_uri}
-    \  Continue For Loop If  '${status}' == '${False}'
-    \  ${present}=  Read Attribute  ${fan_uri}  Present
-    \  Should Be True  ${present}
-    ...  msg=${fan_uri} is functional but "Present" is not set.
+    FOR  ${fan_uri}  IN  @{fan_list}
+      ${status}=  Run Keyword And Return Status
+      ...  Check URL Property Is Functional  ${fan_uri}
+      Continue For Loop If  '${status}' == '${False}'
+      ${present}=  Read Attribute  ${fan_uri}  Present
+      Should Be True  ${present}
+      ...  msg=${fan_uri} is functional but "Present" is not set.
+    END
+
 
 Verify CPU Functional State
     [Documentation]  Verify that "Present" CPU property is set if "Functional"
@@ -383,13 +387,14 @@ Verify CPU Functional State
 
     ${cpu_list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  cpu*
     Should Not Be Empty  ${cpu_list}
-    :FOR  ${cpu_uri}  IN  @{cpu_list}
-    \  ${status}=  Run Keyword And Return Status
-    ...  Check URL Property Is Functional  ${cpu_uri}
-    \  Continue For Loop If  '${status}' == '${False}'
-    \  ${present}=  Read Attribute  ${cpu_uri}  Present
-    \  Should Be True  ${present}
-    ...  msg=${cpu_uri} is functional but "Present" is not set.
+    FOR  ${cpu_uri}  IN  @{cpu_list}
+      ${status}=  Run Keyword And Return Status
+      ...  Check URL Property Is Functional  ${cpu_uri}
+      Continue For Loop If  '${status}' == '${False}'
+      ${present}=  Read Attribute  ${cpu_uri}  Present
+      Should Be True  ${present}
+      ...  msg=${cpu_uri} is functional but "Present" is not set.
+    END
 
 
 Verify GPU Functional State
@@ -408,14 +413,14 @@ Verify GPU Functional State
     ${gpu_list}=  Get Endpoint Paths
     ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  gv*
     Should Not Be Empty  ${gpu_list}
-    :FOR  ${gpu_uri}  IN  @{gpu_list}
-    \  ${status}=  Run Keyword And Return Status
-    ...  Check URL Property Is Functional  ${gpu_uri}
-    \  Continue For Loop If  '${status}' == '${False}'
-    \  ${present}=  Read Attribute  ${gpu_uri}  Present
-    \  Should Be True  ${present}
-    ...  msg=${gpu_uri} is functional but "Present" is not set.
-
+    FOR  ${gpu_uri}  IN  @{gpu_list}
+      ${status}=  Run Keyword And Return Status
+      ...  Check URL Property Is Functional  ${gpu_uri}
+      Continue For Loop If  '${status}' == '${False}'
+      ${present}=  Read Attribute  ${gpu_uri}  Present
+      Should Be True  ${present}
+      ...  msg=${gpu_uri} is functional but "Present" is not set.
+    END
 
 Check Air Or Water Cooled
     [Documentation]  Check if this system is Air or water cooled.
@@ -559,14 +564,15 @@ Qualified FRU List
     # /xyz/openbmc_project/inventory/system/chassis/motherboard/dimm7
 
     ${fru_list}=  Create List
-    :FOR  ${fru_uri}  IN  @{system_list}
-    \  ${resp}=  OpenBMC Get Request  ${fru_uri}/attr/FieldReplaceable
-    ...  quiet=${1}
-    \  ${jsondata}=  To JSON  ${resp.content}
-    \  ${status}=  Run Keyword And Return Status
-    ...  Should Be True  ${jsondata['data']} == ${1}
-    \  Run Keyword If  '${status}' == '${True}'
-    ...  Append To List  ${fru_list}  ${fru_uri}
+    FOR  ${fru_uri}  IN  @{system_list}
+      ${resp}=  OpenBMC Get Request  ${fru_uri}/attr/FieldReplaceable
+      ...  quiet=${1}
+      ${jsondata}=  To JSON  ${resp.content}
+      ${status}=  Run Keyword And Return Status
+      ...  Should Be True  ${jsondata['data']} == ${1}
+      Run Keyword If  '${status}' == '${True}'
+      ...  Append To List  ${fru_list}  ${fru_uri}
+    END
 
     ${fru_valid_list}=  Filter GPU FRU Entries  ${fru_list}
 
@@ -621,14 +627,15 @@ Validate FRU Properties Fields
 
     # Iterate through the url of the FRU and compare its attributes with
     # the pre-defined fru_type attributes.
-    :FOR  ${fru_url_path}  IN  @{fru_list}
-    \  ${fru_field}=  Read Properties  ${fru_url_path}
-    \  ${fru_keys}=  List To Set  ${fru_field.viewkeys()}
-    \  Rprint Vars  fru_keys
-    \  Run Keyword If  '${comparison_type}' == 'EQU'
-    ...  Should Be Equal  ${fru_keys}  ${fru_set}
-    ...  ELSE
-    ...  Should Be True  $fru_set.issubset($fru_keys)
+    FOR  ${fru_url_path}  IN  @{fru_list}
+      ${fru_field}=  Read Properties  ${fru_url_path}
+      ${fru_keys}=  List To Set  ${fru_field.viewkeys()}
+      Rprint Vars  fru_keys
+      Run Keyword If  '${comparison_type}' == 'EQU'
+      ...  Should Be Equal  ${fru_keys}  ${fru_set}
+      ...  ELSE
+      ...  Should Be True  $fru_set.issubset($fru_keys)
+    END
 
 
 Check URL Property Is Functional
@@ -698,8 +705,9 @@ Get Number Hardware Items
     ${list}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system/
     ...  ${item}
 
-    : FOR  ${element}  IN  @{list}
-    \  ${present}=  Read Properties  ${element}
-    \  ${count_inventory}=  Set Variable if  ${present['Present']} == 1
-    \  ...  ${count_inventory+1}  ${count_inventory}
+    FOR  ${element}  IN  @{list}
+      ${present}=  Read Properties  ${element}
+      ${count_inventory}=  Set Variable if  ${present['Present']} == 1
+      ...  ${count_inventory+1}  ${count_inventory}
+    END
     [return]  ${count_inventory}
