@@ -295,6 +295,7 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
+    Redfish.Login
     Redfish Purge Event Log
 
 
