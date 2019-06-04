@@ -245,3 +245,15 @@ Run Build Net
     # Run pingum to check if the "build_net" was run correctly done.
     ${output}  ${stderr}  ${rc}=  OS Execute Command  pingum
     Should Contain  ${output}  All networks ping Ok
+
+
+Configure Hostname
+    [Documentation]  Configure hostname on BMC via Redfish.
+    [Arguments]  ${hostname}
+
+    # Description of argument(s):
+    # hostname  A hostname value which is to be configured on BMC.
+
+    ${data}=  Create Dictionary  HostName=${hostname}
+    Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+
