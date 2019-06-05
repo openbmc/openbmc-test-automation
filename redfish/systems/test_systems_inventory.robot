@@ -1,9 +1,10 @@
 *** Settings ***
-Documentation       Inventory of hardware resources under systems.
+Documentation       Inventory of hardware FRUs under redfixh/systems.
 
 Resource            ../../lib/bmc_redfish_resource.robot
 Resource            ../../lib/bmc_redfish_utils.robot
 Resource            ../../lib/openbmc_ffdc.robot
+Library             ../../lib/gen_robot_valid.py
 
 Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
@@ -12,8 +13,8 @@ Test Teardown       Test Teardown Execution
 *** Variables ***
 
 # The passing criteria.  Must have at least this many.
-${min_count_dimm}   2
-${min_count_cpu}    1
+${min_num_dimms}   2
+${min_num_cpus}    1
 
 
 *** Test Cases ***
@@ -22,90 +23,56 @@ Get Processor Inventory Via Redfish And Verify
     [Documentation]  Get the number of CPUs that are functional and enabled.
     [Tags]  Get_Processor_Inventory_Via_Redfish_And_Verify
 
-    ${num_cpus}=  Count OK And Enabled  cpu  Processors
-    Rprint Vars  num_cpus
-    Run Keyword If  ${num_cpus} < ${min_count_cpu}
-    ...  Fail  msg=Insufficient CPU count.
+    Verify FRU Inventory Minimums  Processors  ${min_num_cpus}
 
 
 Get Memory Inventory Via Redfish And Verify
     [Documentation]  Get the number of DIMMs that are functional and enabled.
     [Tags]  Get_Memory_Inventory_Via_Redfish_And_Verify
 
-    ${num_dimms}=  Count OK And Enabled  dimm  Memory
-    Rprint Vars  num_dimms
-    Run Keyword If  ${num_dimms} < ${min_count_dimm}
-    ...  Fail  msg=Insufficient DIMM count.
+    Verify FRU Inventory Minimums  Memory  ${min_num_dimms}
+
+
+Get Serial And Verify Populated
+    [Documentation]  Check that the SerialNumber is non-blank.
+    [Tags]  Get_Serial_And_Verify_Populated
+
+    ${serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
+    Rvalid Value  serial_number
+    Rprint Vars  serial_number
+
+
+Get Model And Verify Populated
+    [Documentation]  Check that the Model is non-blank.
+    [Tags]  Get_Model_And_Verify_Populated
+
+    ${model}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  Model
+    Rvalid Value  model
+    Rprint Vars  model
 
 
 *** Keywords ***
 
 
-Count OK And Enabled
-    [Documentation]  Return the number of items that are OK and Enabled.
-    [Arguments]  ${item}  ${general_resource}
-
-    # Count the number of OK and Enabled items within a general_resource.
-    # Example:   Count the number of cpus under
-    # /redfish/v1/Systems/system/Processors
+Verify FRU Inventory Minimums
+    [Documentation]  Verify a minimun number of FRUs.
+    [Arguments]  ${fru_type}  ${min_num_frus}
 
     # Description of Argument(s):
-    # item              A hardware item within a general resource that has
-    #                   "Health" and "State" attributes,  E.g. "cpu" or "dimm".
-    # general_resource  A systems resource type that contains these items, such
-    #                   as "Processors", or "Memory".
+    # fru_type      The name of the location under Systems/system where
+    #               individual hardware items are found.  E.g. "Processors",
+    #               or "Memory". Specifically,
+    #               /redfish/v1/Systems/system/${fru_type}.
+    # min_num_frus  The minimum acceptable number of hardware FRUs found
+    #               within the specified fru_type.
 
-    ${num_items}=  Set Variable  0
+    # A valid FRU  will have a "State" key of "Enabled" and a "Health" key
+    # of "OK".
 
-    ${resources}=  Redfish_Utils.List Request
-    ...  /redfish/v1/Systems/system/${general_resource}
-    #  Example response if general_resource = "Memory":
-    #   /redfish/v1/Systems/system/Memory
-    #   /redfish/v1/Systems/system/Memory/dimm0
-    #   /redfish/v1/Systems/system/Memory/dimm1
-    #   /redfish/v1/Systems/system/Memory/dimm2
-    #   etc.
-    #  Example response if general_resource = "Processors":
-    #   /redfish/v1/Systems/system/Processors
-    #   /redfish/v1/Systems/system/Processors/cpu0
-    #   /redfish/v1/Systems/system/Processors/cpu1
+    ${status}  ${num_valid_frus}=  Run Key U  Get Num Valid FRUs \ ${fru_type}
 
-    :FOR  ${resource}  IN  @{resources}
-    \  ${valid}=  Is Item Enabled And Health Ok  ${item}  ${resource}
-    \  ${increment}=  Run Keyword If
-    ...  ${valid}  Set Variable  ${1}  ELSE  Set Variable  ${0}
-    \  ${num_items}=  Evaluate  ${num_items}+${increment}
-
-    [Return]  ${num_items}
-
-
-Is Item Enabled And Health Ok
-    [Documentation]  Return ${True} if the item is OK and Enabled.
-    [Arguments]  ${item}  ${resource}
-
-    # Description of Argument(s):
-    # item          A hardware item within a general resource that has
-    #               "Health" and "State" attributes,  E.g. "dimm".
-    # resource      An individual resource to check, for example,
-    #               "/redfish/v1/Systems/system/Memory/dimm0".
-
-    # Return if item is not in the resource string.  This
-    # might be a top-level resource which is not a specific hardware item.
-    # Example:  Return if resource = "/redfish/v1/Systems/system/Memory" but
-    # continue if resource = "/redfish/v1/Systems/system/Memory/dimm1".
-    ${valid_parameter}=  Evaluate  "${item}" in "${resource}"
-    Return From Keyword If  not ${valid_parameter}  ${False}
-
-    ${status_detail}=  Redfish.Get
-    ...  ${resource}  valid_status_codes=[${HTTP_OK}]
-
-    ${health}=   Set Variable  ${status_detail.dict["Status"]["Health"]}
-    ${state}=  Set Variable  ${status_detail.dict["Status"]["State"]}
-
-    Return From Keyword If
-    ...  "${health}" == "OK" and "${state}" == "Enabled"  ${True}
-
-    [Return]  ${False}
+    Return From Keyword If  ${num_valid_frus} >= ${min_num_frus}
+    Fail  Too few "${fru_type}" FRUs found, found only ${num_valid_frus}.
 
 
 Suite Teardown Execution
@@ -118,6 +85,7 @@ Suite Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Redfish.Login
+    Printn
 
 
 Test Teardown Execution
