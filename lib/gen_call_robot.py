@@ -428,30 +428,32 @@ def robot_cmd_fnc(robot_cmd_buf,
     gp.dprint_vars(ROBOT_TEST_BASE_DIR_PATH, ROBOT_TEST_RUNNING_FROM_SB,
                    ROBOT_JAIL, robot_jail)
 
+    OBMC_TOOLS_BASE_DIR_PATH = \
+        os.path.dirname(ROBOT_TEST_BASE_DIR_PATH.rstrip("/")) \
+        + "/openbmc-tools/"
+    openbmctool_dir_path = OBMC_TOOLS_BASE_DIR_PATH + "thalerj"
+
     # Save PATH and PYTHONPATH to be restored later.
     os.environ["SAVED_PYTHONPATH"] = os.environ.get("PYTHONPATH", "")
     os.environ["SAVED_PATH"] = os.environ.get("PATH", "")
 
     if robot_jail:
+        required_programs = "python robot"
+        cmd_buf = "for program in " + required_programs \
+            + " ; do dirname $(${program} --print_only) ; done 2>/dev/null"
+        rc, out_buf = gc.shell_cmd(cmd_buf, quiet=1, print_output=0)
         PYTHONPATH = ROBOT_TEST_BASE_DIR_PATH + "lib"
         NEW_PATH_LIST = [ROBOT_TEST_BASE_DIR_PATH + "bin"]
-        # Coding special case to preserve python27_path.
-        python27_path = "/opt/rh/python27/root/usr/bin"
-        PATH_LIST = os.environ.get("PATH", "").split(":")
-        if python27_path in PATH_LIST:
-            NEW_PATH_LIST.append(python27_path)
-        # Make sure robot can be found in robot jail.
-        robot_dir_path = os.path.dirname(gm.which('robot'))
-        if robot_dir_path in PATH_LIST:
-            NEW_PATH_LIST.append(robot_dir_path)
+        NEW_PATH_LIST.extend(list(set(out_buf.rstrip("\n").split("\n"))))
         NEW_PATH_LIST.extend(["/usr/local/sbin", "/usr/local/bin", "/usr/sbin",
-                              "/usr/bin", "/sbin", "/bin"])
+                              "/usr/bin", "/sbin", "/bin",
+                              openbmctool_dir_path])
         PATH = ":".join(NEW_PATH_LIST)
     else:
         PYTHONPATH = os.environ.get('PYTHONPATH', '') + ":" +\
-            ROBOT_TEST_BASE_DIR_PATH + "lib/"
+            ROBOT_TEST_BASE_DIR_PATH + "lib"
         PATH = os.environ.get('PATH', '') + ":" + ROBOT_TEST_BASE_DIR_PATH +\
-            "bin/"
+            "bin" + ":" + openbmctool_dir_path
 
     os.environ['PYTHONPATH'] = PYTHONPATH
     os.environ['PATH'] = PATH
