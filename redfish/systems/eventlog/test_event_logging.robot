@@ -122,6 +122,36 @@ Test Event Log Persistency On Reboot
     Event Log Should Exist
 
 
+# TODO: openbmc/openbmc-test-automation#1789
+Create Test Event Log And Verify Resolved Field
+    [Documentation]  Create event log and verify "Resolved" field is 0.
+    [Tags]  Create_Test_Event_Log_And_Verify_Resolved_Field
+
+    # Example Error log:
+    #  "/xyz/openbmc_project/logging/entry/1": {
+    #    "AdditionalData": [
+    #        "STRING=FOO"
+    #    ],
+    #    "Id": 1,
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.AutoTestSimple",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1490817164983,
+    #    "associations": []
+    # },
+
+    # To mark an error as resolved, without deleting the error, user would
+    # set this bool property.
+    # In this test context we are making sure "Resolved" field is "0"
+    # by default.
+
+    Redfish Purge Event Log
+    Create Test Error Log
+    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
+    ${resolved}=  Read Attribute  ${elog_entry[0]}  Resolved
+    Should Be True  ${resolved} == 0
+
+
 Create Test Event Log And Verify Time Stamp
     [Documentation]  Create event logs and verify time stamp.
     [Tags]  Create_Test_Event_Log_And_Verify_Time_Stamp
@@ -162,6 +192,32 @@ Create Test Event Log And Verify Time Stamp
     ${time_stamp2}=  Convert Date  ${elog_entry[1]["Created"]}  epoch
 
     Should Be True  ${time_stamp2} > ${time_stamp1}
+
+
+Verify IPMI SEL Delete
+    [Documentation]  Verify IPMI SEL delete operation.
+    [Tags]  Verify_IPMI_SEL_Delete
+
+    Redfish Purge Event Log
+    Create Test Error Log
+
+    ${sel_list}=  Run IPMI Standard Command  sel list
+    Should Not Be Equal As Strings  ${sel_list}  SEL has no entries
+
+    # Example of SEL List:
+    # 4 | 04/21/2017 | 10:51:16 | System Event #0x01 | Undetermined system hardware failure | Asserted
+
+    ${sel_entry}=  Fetch from Left  ${sel_list}  |
+    ${sel_entry}=  Evaluate  $sel_entry.replace(' ','')
+    ${sel_entry}=  Convert To Integer  0x${sel_entry}
+
+    ${sel_delete}=  Run IPMI Standard Command  sel delete ${sel_entry}
+    Should Be Equal As Strings  ${sel_delete}  Deleted entry ${sel_entry}
+    ...  case_insensitive=True
+
+    ${sel_list}=  Run IPMI Standard Command  sel list
+    Should Be Equal As Strings  ${sel_list}  SEL has no entries
+    ...  case_insensitive=True
 
 
 Delete Non Existing SEL Event Entry
@@ -235,6 +291,20 @@ Create Multiple Test Event Logs And Delete All
     Create Test Error Log
     Redfish Purge Event Log
     Event Log Should Not Exist
+
+
+# TODO: openbmc/openbmc-test-automation#1789
+Create Two Test Event Logs And Delete One
+    [Documentation]  Create two event logs and delete the first entry.
+    [Tags]  Create_Two_Test_Eevent_Logs_And_Delete_One
+
+    Redfish Purge Event Log
+    Create Test Error Log
+    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
+    Create Test Error Log
+    Delete Error log Entry  ${elog_entry[0]}
+    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
 
 Verify Watchdog Timedout Event
