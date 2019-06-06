@@ -9,6 +9,8 @@ Suite Setup      Suite Setup Execution
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+Force Tags       LDAP_Test
+
 ** Test Cases **
 
 Verify LDAP Configuration Exist
