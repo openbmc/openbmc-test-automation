@@ -122,6 +122,38 @@ Test Event Log Persistency On Reboot
     Event Log Should Exist
 
 
+# TODO: openbmc/openbmc-test-automation#1789
+Create Test Error And Verify Resolved Field
+    [Documentation]  Create error log and verify "Resolved"
+    ...              field is 0.
+    [Tags]  Create_Test_Error_And_Verify_Resolved_Field
+
+    # Example Error log:
+    #  "/xyz/openbmc_project/logging/entry/1": {
+    #    "AdditionalData": [
+    #        "STRING=FOO"
+    #    ],
+    #    "Id": 1,
+    #    "Message": "example.xyz.openbmc_project.Example.Elog.AutoTestSimple",
+    #    "Resolved": 0,
+    #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
+    #    "Timestamp": 1490817164983,
+    #    "associations": []
+    # },
+
+    # It's work in progress, but it's mnfg need. To mark an error as
+    # resolved, without deleting the error, mfg will set this bool
+    # property.
+    # In this test context we are making sure "Resolved" field is "0"
+    # by default.
+
+    Redfish Purge Event Log
+    Create Test Error Log
+    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
+    ${resolved}=  Read Attribute  ${elog_entry[0]}  Resolved
+    Should Be True  ${resolved} == 0
+
+
 Create Test Event Log And Verify Time Stamp
     [Documentation]  Create event logs and verify time stamp.
     [Tags]  Create_Test_Event_Log_And_Verify_Time_Stamp
