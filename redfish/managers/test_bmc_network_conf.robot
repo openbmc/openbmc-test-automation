@@ -117,6 +117,8 @@ Configure Broadcast IP
     # ip             subnet_mask          gateway          valid_status_codes
     ${broadcast_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
+    [Teardown]  Clear IP Settings On Fail  ${broadcast_ip}
+
 Configure Multicast IP
     [Documentation]  Configure multicast IP address.
     [Tags]  Configure_Multicast_IP
@@ -125,6 +127,8 @@ Configure Multicast IP
     # ip             subnet_mask          gateway          valid_status_codes
     ${multicast_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
+    [Teardown]  Clear IP Settings On Fail  ${multicast_ip}
+
 Configure Loopback IP
     [Documentation]  Configure loopback IP address.
     [Tags]  Configure_Loopback_IP
@@ -132,6 +136,8 @@ Configure Loopback IP
 
     # ip            subnet_mask          gateway          valid_status_codes
     ${loopback_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+    [Teardown]  Clear IP Settings On Fail  ${loopback_ip}
 
 Add Valid IPv4 Address And Check Persistency
     [Documentation]  Add IPv4 address and check peristency.
@@ -458,6 +464,16 @@ Validate Hostname On BMC
 
 Test Teardown Execution
     [Documentation]  Test teardown execution.
-
+    
     FFDC On Test Case Fail
     Redfish.Logout
+
+Clear IP Settings On Fail
+    [Documentation]  Clear IP settings on fail.
+    [Arguments]  ${ip}
+
+    # Description of argument(s):
+    # ip  IP address to be deleted.
+
+    Run Keyword If  '${TEST STATUS}' == 'FAIL'
+    ...  Delete IP Address  ${ip}
