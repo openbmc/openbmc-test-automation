@@ -20,7 +20,6 @@
 * Factory reset
 * RAS (Reliability, availability and serviceability)
 * Web UI testing
-* IO storage and EEH (Enhanced Error Handling) testing
 * Secure boot
 * SNMP (Simple Network Management Protocol)
 * Remote Logging via Rsyslog
@@ -105,7 +104,7 @@ classified as follows:
 
 `extended/`: Contains test cases for boot testing, code update testing, etc.
 
-`systest/`: Contains test cases for HTX bootme, IO storage and EEH testing.
+`systest/`: Contains test cases for HTX bootme testing.
 
 `xcat/`: Contains test cases for XCAT automation.
 
