@@ -684,6 +684,41 @@ Test Invalid IPMI Channel Response
     ...  msg=IPMI channel ${channel_number} is invalid but seen working.
 
 
+Test IPMI Restriction Mode
+    [Documentation]  Set restricition mode via REST and verify IPMI operation.
+    [Tags]  Test_IPMI_Restriction_Mode
+    # Forego normal test setup:
+    [Setup]  No Operation
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Set IPMI Restriction Mode  xyz.openbmc_project.Control.Security.RestrictionMode.Modes.None
+
+    # By default no IPMI operations are restricted.
+    # /xyz/openbmc_project/control/host0/restriction_mode/attr/RestrictionMode
+    # {
+    #    "data": "xyz.openbmc_project.Control.Security.RestrictionMode.Modes.None",
+    #    "message": "200 OK",
+    #    "status": "ok"
+    # }
+
+    # Refer to: #openbmc/phosphor-host-ipmid/blob/master/host-ipmid-whitelist.conf
+    # Set the restriction mode to Whitelist IPMI commands only:
+    # /xyz/openbmc_project/control/host0/restriction_mode/attr/RestrictionMode
+    # {
+    #    "data": "xyz.openbmc_project.Control.Security.RestrictionMode.Modes.Whitelist",
+    #    "message": "200 OK",
+    #    "status": "ok"
+    # }
+
+    Set IPMI Restriction Mode  xyz.openbmc_project.Control.Security.RestrictionMode.Modes.Whitelist
+
+    # Attempt white-listed operation expecting success.
+    IPMI Power On
+
+    # Attempt non white-listed operation expecting failure.
+    Run Keyword And Expect Error  *Insufficient privilege level*
+    ...  Run Inband IPMI Standard Command  mc reset warm
+
+
 *** Keywords ***
 
 Get Sensor Count
@@ -895,3 +930,31 @@ Get Physical Network Interface Count
 
     [Return]  ${physical_interface_count}
 
+
+Execute IPMI Command With Cipher
+    [Documentation]  Execute IPMI command with a given cipher level value.
+    [Arguments]  ${cipher_level}
+
+    # Description of argument(s):
+    # cipher_level  IPMI chipher level value
+    #               (e.g. "1", "2", "3", "15", "16", "17").
+
+    ${ipmi_cmd}=  Catenate  SEPARATOR=
+    ...  ipmitool -I lanplus -C ${cipher_level} -P${SPACE}${IPMI_PASSWORD}
+    ...  ${SPACE}${HOST}${SPACE}${OPENBMC_HOST}${SPACE}mc info
+
+    ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
+    [Return]  ${rc}
+
+
+Set IPMI Restriction Mode
+    [Documentation]  Set the IPMI restriction mode.
+    [Arguments]  ${restriction_mode}
+
+    # Description of argument(s):
+    # restriction_mode   IPMI valid restriction modes.
+
+    ${valueDict}=  Create Dictionary  data=${restriction_mode}
+
+    Write Attribute  ${CONTROL_HOST_URI}restriction_mode/
+    ...  RestrictionMode  data=${valueDict}
