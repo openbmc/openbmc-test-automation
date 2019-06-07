@@ -48,6 +48,13 @@ Verify Set Time Using Redfish
     Redfish Set DateTime  ${old_bmc_time}
 
 
+Verify Set DateTime With Invalid Data Using Redfish
+    [Documentation]  Verify set DateTime with invalid data using redfish API.
+    [Tags]  Verify_Set_DateTime_With_Invalid_Data_Using_Redfish
+
+    Redfish Set DateTime  2019-04-251T12:24:46+00:00  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
 *** Keywords ***
 
 Test Teardown Execution
@@ -66,12 +73,16 @@ Redfish Get DateTime
 
 Redfish Set DateTime
     [Documentation]  Set DateTime using Redfish.
-    [Arguments]  ${date_time}
+    [Arguments]  ${date_time}  &{kwargs}
     # Description of argument(s):
-    # date_time          New time to set for BMC (eg. 2019-06-30 09:21:28).
+    # date_time                     New time to set for BMC (eg.
+    #                               "2019-06-30 09:21:28").
+    # kwargs                        Additional parms to be passed directly to
+    #                               th Redfish.Patch function.  A good use for
+    #                               this is when testing a bad date-time, the
+    #                               caller can specify
+    #                               valid_status_codes=[${HTTP_BAD_REQUEST}].
 
-    ${payload}=  Create Dictionary  DateTime=${date_time}
-    Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body=&{payload}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_BAD_REQUEST}]
-
+    Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
+    ...  &{kwargs} 
 
