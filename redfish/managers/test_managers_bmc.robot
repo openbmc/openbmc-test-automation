@@ -10,6 +10,14 @@ Resource         ../../lib/open_power_utils.robot
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+
+*** Variables ***
+
+${SYSTEM_SHUTDOWN_TIME}    ${5}
+
+# Strings to check from journald.
+${REBOOT_REGEX}    ^\-- Reboot --
+
 *** Test Cases ***
 
 Verify Redfish BMC Firmware Version
@@ -60,7 +68,16 @@ Redfish BMC Manager GracefulRestart When Host Off
     #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
     # }
 
+    ${test_file_path}=  Set Variable  /tmp/before_bmcreboot
+    BMC Execute Command  touch ${test_file_path}
+
     Redfish OBMC Reboot (off)
+
+    BMC Execute Command  if [ -f ${test_file_path} ] ; then false ; fi
+    Verify BMC RTC And UTC Time Drift
+
+    # Check for journald persistency post reboot.
+    Check For Regex In Journald  ${REBOOT_REGEX}  error_check=${1}
 
 
 Redfish BMC Manager GracefulRestart When Host Booted
