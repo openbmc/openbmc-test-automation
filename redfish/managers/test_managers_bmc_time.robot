@@ -12,6 +12,9 @@ Test Teardown                Test Teardown Execution
 *** Variables ***
 ${max_time_diff_in_seconds}  6
 ${invalid_datetime}          "2019-04-251T12:24:46+00:00"
+${ntp_server_1}              "9.9.9.9"
+${ntp_server_2}              "2.2.3.3"
+>>>>>>> Redfish NTP server set
 
 *** Test Cases ***
 
@@ -56,6 +59,28 @@ Verify Set DateTime With Invalid Data Using Redfish
     Redfish Set DateTime  ${invalid_datetime}  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
+Verfiy NTP Server Set
+    [Documentation]  Verify NTP server set.
+    [Tags]  Verify_NTP_Server_Set
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
+    Should Contain  ${resp.dict["NTP"]["NTPServers"]}  ${ntp_server_1}
+    ...  msg=NTP server value ${ntp_server_1} not stored.
+    Should Contain  ${resp.dict["NTP"]["NTPServers"]}  ${ntp_server_2}
+    ...  msg=NTP server value ${ntp_server_2} not stored.
+
+
+Verfiy NTP Server Value Not Duplicated
+    [Documentation]  Verify NTP servers value not same for both primary and secondary server.
+    [Tags]  Verify_NTP_Server_Value_Not_Duplicated
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTPServers': ['${ntp_server_1}', '${ntp_server_1}']}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
+    Should Contain X Times  ${resp.dict["NTP"]["NTPServers"]}  ${ntp_server_1}  1
+    ...  msg=NTP primary and seconday server values should not be same.
+
+
 *** Keywords ***
 
 Test Teardown Execution
@@ -86,4 +111,3 @@ Redfish Set DateTime
 
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
     ...  &{kwargs}
-
