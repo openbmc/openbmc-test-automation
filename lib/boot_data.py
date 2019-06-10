@@ -68,7 +68,7 @@ def create_boot_table(file_path=None):
         for boot in boot_table:
             state_keys = ['start', 'end']
             for state_key in state_keys:
-                for sub_state in boot_table[boot][state_key]:
+                for sub_state in list(boot_table[boot][state_key]):
                     if sub_state.startswith("os_"):
                         boot_table[boot][state_key].pop(sub_state, None)
 
