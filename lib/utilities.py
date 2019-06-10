@@ -118,7 +118,7 @@ def call_keyword(keyword):
 
 
 def main():
-    print get_vpd_inventory_list('../data/Palmetto.py', 'DIMM')
+    print(get_vpd_inventory_list('../data/Palmetto.py', 'DIMM'))
 
 
 if __name__ == "__main__":

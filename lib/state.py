@@ -151,9 +151,9 @@ default_state = DotDict([('rest', '1'),
 standby_match_state = DotDict([('rest', '^1$'),
                                ('chassis', '^Off$'),
                                ('bmc', '^Ready$'),
-                               ('boot_progress', '^$'),
-                               ('operating_system', '^$'),
-                               ('host', '^$')])
+                               ('boot_progress', '^Off|Unspecified$'),
+                               ('operating_system', '^Inactive$'),
+                               ('host', '^Off$')])
 
 # A match state for checking that the system is at "os running".
 os_running_match_state = DotDict([('chassis', '^On$'),
@@ -182,14 +182,12 @@ invalid_state_match = DotDict([('rest', '^$'),
                                ('host', '^$')])
 
 
-def return_state_constant(state_name='default'):
+def return_state_constant(state_name='default_state'):
     r"""
     Return the named state dictionary constant.
     """
 
-    cmd_buf = "state = " + state_name
-    exec(cmd_buf)
-    return state
+    return eval(state_name)
 
 
 def anchor_state(state):
@@ -262,8 +260,10 @@ def compare_states(state,
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
-    if type(match_state) in (str, unicode):
+    try:
         match_state = return_state_constant(match_state)
+    except TypeError:
+        pass
 
     default_match = (match_type == 'and')
     for key, match_state_value in match_state.items():
@@ -751,8 +751,10 @@ def wait_state(match_state=(),
 
     quiet = int(gp.get_var_value(quiet, 0))
 
-    if type(match_state) in (str, unicode):
+    try:
         match_state = return_state_constant(match_state)
+    except TypeError:
+        pass
 
     if not quiet:
         if invert:
