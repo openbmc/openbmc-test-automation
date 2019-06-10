@@ -1011,19 +1011,10 @@ def obmc_boot_test_py(loc_boot_stack=None,
     # Process function parms.
     for parm_name in main_func_parm_list:
         # Get parm's value.
-        cmd_buf = "parm_value = loc_" + parm_name
-        exec(cmd_buf)
-        gp.dpvar(parm_name)
-        gp.dpvar(parm_value)
+        parm_value = eval("loc_" + parm_name)
+        gp.dpvars(parm_name, parm_value)
 
-        if parm_value is None:
-            # Parm was not specified by the calling function so set it to its
-            # corresponding global value.
-            cmd_buf = "loc_" + parm_name + " = BuiltIn().get_variable_value" +\
-                "(\"${" + parm_name + "}\")"
-            gp.dpissuing(cmd_buf)
-            exec(cmd_buf)
-        else:
+        if parm_value is not None:
             # Save the global value on a stack.
             cmd_buf = "save_stack.push(BuiltIn().get_variable_value(\"${" +\
                 parm_name + "}\"), \"" + parm_name + "\")"
