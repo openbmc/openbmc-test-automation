@@ -83,9 +83,14 @@ Configure Hostname And Verify
     [Documentation]  Configure hostname via Redfish and verify.
     [Tags]  Configure_Hostname_And_Verify
 
-    Configure Hostname  ${test_hostname}
+    ${hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
 
+    Configure Hostname  ${test_hostname}
     Validate Hostname On BMC  ${test_hostname}
+
+    # Revert back to initial hostname.
+    Configure Hostname  ${hostname}
+    Validate Hostname On BMC  ${hostname}
 
 Add Valid IPv4 Address And Verify
     [Documentation]  Add IPv4 Address via Redfish and verify.
@@ -479,3 +484,4 @@ Clear IP Settings On Fail
     ...  Delete IP Address  ${ip}
 
     Test Teardown Execution
+
