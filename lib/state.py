@@ -34,7 +34,11 @@ import gen_robot_utils as gru
 import gen_cmd as gc
 import bmc_ssh_utils as bsu
 
-import commands
+try:
+    import commands
+except ImportError:
+    import subprocess
+
 from robot.libraries.BuiltIn import BuiltIn
 from robot.utils import DotDict
 
