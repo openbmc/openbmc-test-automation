@@ -80,6 +80,21 @@ Verify NTP Server Value Not Duplicated
     ...  msg=NTP primary and secondary server values should not be same.
 
 
+Verify NTP Server Setting Persist After BMC Reboot
+    [Documentation]  Verify NTP server setting persist after BMC reboot.
+    [Tags]  Verify_NTP_Server_Setting_Persist_After_BMC_Reboot
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}
+    Redfish OBMC Reboot (off)
+    Redfish.Login
+    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_1}
+    ...  msg=NTP server value ${ntp_server_1} not stored.
+    Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_2}
+    ...  msg=NTP server value ${ntp_server_2} not stored.
+    Redfish.Logout
+
+
 *** Keywords ***
 
 Test Teardown Execution
