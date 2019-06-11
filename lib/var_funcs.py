@@ -708,15 +708,14 @@ def outbuf_to_report(out_buf,
     return list_to_report(report_list, **args)
 
 
-def nested_get(key, structure):
+def nested_get(key_name, structure):
     r"""
-    Return a list of all values from the nested structure with the given key.
-
-    The structure can be a dictionary or a list of dictionaries.
+    Return a list of all values from the nested structure that have the given
+    key name.
 
     Example:
 
-    Given a dictionary structure named personnel with the following contents:
+    Given a dictionary structure named "personnel" with the following contents:
 
     personnel:
       [manager]:
@@ -731,36 +730,107 @@ def nested_get(key, structure):
     last_names = nested_get('last_name', personnel)
     print_var(last_names)
 
-    Would result in the following data:
+    Would result in the following data returned:
 
     last_names:
       last_names[0]:             Doe
       last_names[1]:             Smith
 
     Description of argument(s):
-    key                             The key value.
-    structure                       The nested structure.
+    key_name                        The key name (e.g. 'last_name').
+    structure                       Any nested combination of lists or
+                                    dictionaries (e.g. a dictionary, a
+                                    dictionary of dictionaries, a list of
+                                    dictionaries, etc.).  This function will
+                                    locate the given key at any level within
+                                    the strucutre and include its value in the
+                                    returned list.
     """
 
     result = []
     if type(structure) is list:
         for entry in structure:
-            result += nested_get(key, entry)
+            result += nested_get(key_name, entry)
         return result
-    # Structure must be a dictionary.
-    for k, v in structure.items():
-        if isinstance(v, dict):
-            result += nested_get(key, v)
-        if k == key:
-            result.append(v)
+    elif gp.is_dict(structure):
+        for key, value in structure.items():
+            result += nested_get(key_name, value)
+            if key == key_name:
+                result.append(value)
 
     return result
 
 
-def filter_struct(structure, filter_dict):
+def match_struct(structure, match_dict, regex=False):
+    r"""
+    Return True or False to indicate whether the structure matches the match
+    dictionary.
+
+    Example:
+
+    Given a dictionary structure named "personnel" with the following contents:
+
+    personnel:
+      [manager]:
+        [last_name]:             Doe
+        [first_name]:            John
+      [accountant]:
+        [last_name]:             Smith
+        [first_name]:            Will
+
+    The following call would return True.
+
+    match_struct(personnel, {'last_name': '^Doe$'}, regex=True)
+
+    Whereas the following call would return False.
+
+    match_struct(personnel, {'last_name': 'Johnson'}, regex=True)
+
+    Description of argument(s):
+    structure                       Any nested combination of lists or
+                                    dictionaries.  See the prolog of
+                                    get_nested() for details.
+    match_dict                      Each key/value pair in match_dict must
+                                    exist somewhere in the structure for the
+                                    structure to be considered a match.  A
+                                    match value of None is considered a
+                                    special case where the structure would be
+                                    considered a match only if the key in
+                                    question is found nowhere in the structure.
+    regex                           Indicates whether the values in the
+                                    match_dict should be interpreted as
+                                    regular expressions.
+    """
+
+    # The structure must match for each match_dict entry to be considered a
+    # match.  Therefore, any failure to match is grounds for returning False.
+    for match_key, match_value in match_dict.items():
+        struct_key_values = nested_get(match_key, structure)
+        if match_value is None:
+            # Handle this as special case.
+            if len(struct_key_values) != 0:
+                return False
+        else:
+            if len(struct_key_values) == 0:
+                return False
+            if regex:
+                matches = [x for x in struct_key_values
+                           if re.search(match_value, str(x))]
+                if not matches:
+                    return False
+            elif match_value not in struct_key_values:
+                return False
+
+    return True
+
+
+def filter_struct(structure, filter_dict, regex=False):
     r"""
     Filter the structure by removing any entries that do NOT contain the
     keys/values specified in filter_dict and return the result.
+
+    The selection process is directed only at the first-level entries of the
+    structure.
 
     Example:
 
@@ -804,48 +874,41 @@ def filter_struct(structure, filter_dict):
     cut.
 
     Description of argument(s):
-    structure                       Either a list or a dictionary.  The
-                                    structure is expected to contain
-                                    sub-dictionaries.
-    filter_dict                     A dictionary containing one or more
-                                    key/value pairs.  For each key value pair,
-                                    each entry in the structure must contain
-                                    the same key/value pair.
+    structure                       Any nested combination of lists or
+                                    dictionaries.  See the prolog of
+                                    get_nested() for details.
+    filter_dict                     For each key/value pair in filter_dict,
+                                    each entry in structure must contain the
+                                    same key/value pair at some level.  A
+                                    filter_dict value of None is treated as a
+                                    special case.  Taking the example shown
+                                    above, [('State', None)] would mean that
+                                    the result should only contain records
+                                    that have no State key at all.
+    regex                           Indicates whether the values in the
+                                    filter_dict should be interpreted as
+                                    regular expressions.
     """
 
     # Convert filter_dict from a string containing a python object definition
     # to an actual python object (if warranted).
     filter_dict = fa.source_to_object(filter_dict)
 
+    # Determine whether structure is a list or a dictionary and process
+    # accordingly.  The result returned will be of the same type as the
+    # structure.
     if type(structure) is list:
         result = []
-        for entry in structure:
-            valid = True
-            # The entry must pass all tests to be included in new structure.
-            for filter_key, filter_value in filter_dict.items():
-                # Process one filter key/value pair.
-                actual_value = nested_get(filter_key, entry)
-                if len(actual_value) == 0 or actual_value[0] != filter_value:
-                    valid = False
-                    break
-            if valid:
-                result.append(entry)
+        for element in structure:
+            if match_struct(element, filter_dict, regex):
+                result.append(element)
     else:
-        # Assume structure is a dictionary.
         try:
             result = collections.OrderedDict()
         except AttributeError:
             result = DotDict()
         for struct_key, struct_value in structure.items():
-            valid = True
-            # The entry must pass all tests to be included in new structure.
-            for filter_key, filter_value in filter_dict.items():
-                # Process one filter key/value pair.
-                actual_value = nested_get(filter_key, struct_value)
-                if len(actual_value) == 0 or actual_value[0] != filter_value:
-                    valid = False
-                    break
-            if valid:
+            if match_struct(struct_value, filter_dict, regex):
                 result[struct_key] = struct_value
 
     return result
