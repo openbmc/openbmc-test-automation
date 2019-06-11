@@ -121,6 +121,16 @@ Edit And Verify User Property
     Should Be Equal  ${user_role}  Callback
 
 
+Create And Verify User Without Enabling
+    [Documentation]  Verify login failure while logging into GUI with disabled user.
+    [Tags]  Create_And_Verify_User_Without_Enabling
+    [Setup]  Run Keywords  Test Setup Execution  AND  Delete Given Users
+
+    Add Or Modify User  testUser1  &{user_password}[testUser1]  role=User  enabled=False
+    LogOut OpenBMC GUI
+    Login And Verify Message  testUser1  &{user_password}[testUser1]  Invalid username or password
+
+
 *** Keywords ***
 
 Test Setup Execution
