@@ -77,7 +77,7 @@ Verify NTP Server Value Not Duplicated
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTPServers': ['${ntp_server_1}', '${ntp_server_1}']}
     ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
     Should Contain X Times  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_1}  1
-    ...  msg=NTP primary and seconday server values should not be same.
+    ...  msg=NTP primary and secondary server values should not be same.
 
 
 *** Keywords ***
