@@ -101,6 +101,16 @@ Verify Invalid Password Error
     LogOut OpenBMC GUI
     Login And Verify Message  root  &{user_invalid_password}[root]  Invalid username or password
 
+Create And Verify User Without Enabling
+    [Documentation]  Verify login failure while logging into GUI with disabled user.
+    [Tags]  Create_And_Verify_User_Without_Enabling
+    [Setup]  Run Keywords  Test Setup Execution  AND  Delete Given Users
+
+    Add Or Modify User  testUser1  &{user_password}[testUser1]  role=User  enabled=False
+    LogOut OpenBMC GUI
+    Login And Verify Message  testUser1  &{user_password}[testUser1]  Invalid username or password
+    Login OpenBMC GUI
+
 *** Keywords ***
 
 Test Setup Execution
@@ -135,7 +145,7 @@ Add Or Modify User
    ...  Click Button  ${xpath_edit_save_button}
    ...  ELSE  Click Button  ${xpath_create_user_button}
    Capture Page Screenshot
-   Page Should Contain  &{action_msg_relation}[${action}]
+   Page Should Contain &{action_msg_relation}[${action}]
 
 Delete Given Users
    [Documentation]  Deletes users based on the input.
@@ -168,6 +178,10 @@ Delete Given Users
 Login And Verify Message
    [Documentation]  Verifies the error message displayed on screen while logging in.
    [Arguments]  ${username}  ${password}  ${msg}
+   # Description of argument(s):
+   # username  BMC username.
+   # password  BMC password.
+   # msg       Expected message while logging in which needs to be verified.
 
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
