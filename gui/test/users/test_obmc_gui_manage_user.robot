@@ -108,6 +108,7 @@ Verify Invalid Password Error
     LogOut OpenBMC GUI
     Login And Verify Message  root  &{user_invalid_password}[root]  Invalid username or password
 
+
 Edit And Verify User Property
     [Documentation]  Edit and verify the user property.
     [Tags]  Edit_And_Verify_User_Property
@@ -118,6 +119,17 @@ Edit And Verify User Property
     Edit User Role  testUser1  &{user_password}[testUser1]  Callback
     ${user_role}=  Get User Property Value  testUser1  Role
     Should Be Equal  ${user_role}  Callback
+
+
+Create And Verify User Without Enabling
+    [Documentation]  Verify login failure while logging into GUI with disabled user.
+    [Tags]  Create_And_Verify_User_Without_Enabling
+    [Setup]  Run Keywords  Test Setup Execution  AND  Delete Given Users
+
+    Add Or Modify User  testUser1  &{user_password}[testUser1]  role=User  enabled=False
+    LogOut OpenBMC GUI
+    Login And Verify Message  testUser1  &{user_password}[testUser1]  Invalid username or password
+
 
 *** Keywords ***
 
