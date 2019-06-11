@@ -80,6 +80,16 @@ Redfish BMC Manager GracefulRestart When Host Off
     Check For Regex In Journald  ${REBOOT_REGEX}  error_check=${1}
 
 
+Verify Boot Count After BMC Reboot
+    [Documentation]  Verify boot count increments on BMC reboot.
+    [Tags]  Verify_Boot_Count_After_BMC_Reboot
+
+    Set BMC Boot Count  ${0}
+    Redfish OBMC Reboot (off)
+    ${boot_count}=  Get BMC Boot Count
+    Should Be Equal  ${boot_count}  ${1}  msg=Boot count is not incremented.
+
+
 Redfish BMC Manager GracefulRestart When Host Booted
     [Documentation]  BMC graceful restart when host is running.
     [Tags]  Redfish_BMC_Manager_GracefulRestart_When_Host_Booted
