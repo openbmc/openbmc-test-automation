@@ -338,7 +338,7 @@ Verify Event Logs Capping
     Redfish Purge Event Log
 
     ${cmd}=  Catenate  for i in {1..201}; do /tmp/tarball/bin/logging-test -c
-    ...  AutoTestSimple; done
+    ...  AutoTestSimple;sleep 1;done
     BMC Execute Command  ${cmd}
 
     ${elogs}=  Get Event Logs
@@ -359,7 +359,7 @@ Test Event Log Wrapping
 
     # Create ${max_num_event_logs} event logs.
     ${cmd}=  Catenate  for i in {1..${max_num_event_logs}}; do /tmp/tarball/bin/logging-test -c
-    ...  AutoTestSimple;done
+    ...  AutoTestSimple;sleep 1;done
     BMC Execute Command  ${cmd}
 
     # Verify that event logs with IDs 1 and ${max_num_event_logs} exist.
