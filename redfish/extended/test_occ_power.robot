@@ -1,11 +1,12 @@
 *** Settings ***
 Documentation   Suite to test OCC power module.
 
-Resource        ../lib/open_power_utils.robot
-Resource        ../lib/boot_utils.robot
-Resource        ../lib/state_manager.robot
-Resource        ../lib/openbmc_ffdc.robot
-Resource        ../lib/utils.robot
+Resource         ../../lib/bmc_redfish_resource.robot
+Resource        ../../lib/open_power_utils.robot
+Resource        ../../lib/boot_utils.robot
+Resource        ../../lib/state_manager.robot
+Resource        ../../lib/openbmc_ffdc.robot
+Resource        ../../lib/utils.robot
 
 Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
@@ -38,11 +39,13 @@ Verify OCC Object Count
     Should Be Equal  ${occ_count}  ${inventory_count}
     ...  msg=OCC and inventory entry counts are mismatched.
 
+
 Verify OCC State When Host Is Booted
     [Documentation]  Verify OCC state when host is booted.
     [Tags]  Verify_OCC_State_When_Host_Is_Booted
 
     Verify OCC State  ${1}
+
 
 Verify OCC State After Host Reboot
     [Documentation]  Verify OCC state and count after host reboot.
@@ -50,37 +53,36 @@ Verify OCC State After Host Reboot
 
     ${occ_count_before}=  Count OCC Object Entry
     Verify OCC State  ${1}
-    Host Reboot
+    Redfish Host Reboot
     Verify OCC State  ${1}
     ${occ_count_after}=  Count OCC Object Entry
     Should be Equal  ${occ_count_before}  ${occ_count_after}
+
 
 Verify OCC State After BMC Reset
     [Documentation]  Verify OCC state and count after BMC reset.
     [Tags]  Verify_OCC_State_After_BMC_Reset
 
     ${occ_count_before}=  Count OCC Object Entry
-    OBMC Reboot (run)
+    Redfish OBMC Reboot (run)
     Verify OCC State  ${1}
     ${occ_count_after}=  Count OCC Object Entry
     Should be Equal  ${occ_count_before}  ${occ_count_after}
+
 
 Verify OCC State At Standby
     [Documentation]  Verify OCC state at standby.
     [Tags]  Verify_OCC_State_At_Standby
 
-    REST Power Off  stack_mode=normal
+    Redfish Power Off  stack_mode=normal
     Verify OCC State  ${0}
 
 *** Keywords ***
 
 Suite Setup Execution
     [Documentation]  Do the initial test suite setup.
-    # - Power off.
-    # - Boot Host.
 
-    Smart Power Off
-    REST Power On
+    Redfish Power On
     Count OCC Object Entry
 
 Count OCC Object Entry
@@ -97,5 +99,6 @@ Test Teardown Execution
     # - Close all open SSH connections.
 
     FFDC On Test Case Fail
-    Delete All Error Logs
+    Redfish.Login
+    Redfish Purge Event Log
     Close All Connections
