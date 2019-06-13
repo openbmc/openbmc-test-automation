@@ -462,12 +462,13 @@ Count GPUs From BMC
     ${gpu_list}=  Get Endpoint Paths
     ...  ${HOST_INVENTORY_URI}system/chassis/motherboard  gv*
 
-    :FOR  ${gpu_uri}  IN  @{gpu_list}
-    \  ${present}=  Read Attribute  ${gpu_uri}  Present
-    \  ${state}=  Read Attribute  ${gpu_uri}  Functional
-    \  Rpvars  gpu_uri  present  state
-    \  ${num_bmc_gpus}=  Run Keyword If  ${present} and ${state}
-    ...  Evaluate  ${num_bmc_gpus}+${1}
+    FOR  ${gpu_uri}  IN  @{gpu_list}
+      ${present}=  Read Attribute  ${gpu_uri}  Present
+      ${state}=  Read Attribute  ${gpu_uri}  Functional
+      Rpvars  gpu_uri  present  state
+      ${num_bmc_gpus}=  Run Keyword If  ${present} and ${state}
+      ...  Evaluate  ${num_bmc_gpus}+${1}
+    END
     [Return]  ${num_bmc_gpus}
 
 
@@ -608,11 +609,12 @@ Retrieve HW Info And Write List
     # json_field_name      Name of the JSON element to encapsulate this list.
     # last                 Is this the last element in the parent JSON?
     Write New JSON List  ${json_tmp_file_path}  ${json_field_name}
-    : FOR  ${class}  IN  @{list}
-    \  ${tail}  Get From List  ${list}  -1
-    \  Run Keyword if  '${tail}' == '${class}'
-    \  ...  Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}  true
-    \  ...  ELSE  Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}
+    FOR  ${class}  IN  @{list}
+      ${tail}  Get From List  ${list}  -1
+      Run Keyword if  '${tail}' == '${class}'
+      ...  Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}  true
+      ...  ELSE  Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}
+    END
     Close New JSON List  ${json_tmp_file_path}
     Run Keyword if  '${last}' == 'false'
     ...  Append to File  ${json_tmp_file_path}  ,
