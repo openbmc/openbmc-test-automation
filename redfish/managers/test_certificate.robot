@@ -5,6 +5,7 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/certificate_utils.robot
+Library          String
 
 Suite Setup      Suite Setup Execution
 Test Teardown    Test Teardown Execution
@@ -75,7 +76,8 @@ Verify Server Certificate View Via Openssl
     redfish.Login
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
-    ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
     ${certificate_dict}=  Create Dictionary
     ...  @odata.id=/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
@@ -106,7 +108,8 @@ Install And Verify Certificate Via Redfish
 
     ${time}=  Set Variable If  '${cert_format}' == 'Expired Certificate'  -10  365
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
-    ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
     ${certificate_uri}=  Set Variable If
     ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}
@@ -174,7 +177,8 @@ Replace Certificate Via Redfish
     ${time}=  Set Variable If  '${cert_format}' == 'Expired Certificate'  -10  365
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
 
-    ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
     ${certificate_uri}=  Set Variable If
     ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
