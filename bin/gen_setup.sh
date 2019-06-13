@@ -38,7 +38,7 @@ function get_pgm_path_info {
   # The program name is the program path minus all characters up to and
   # including the first slash.
   local _spn_loc_program_name_=${_spn_loc_program_path_##*/}
-  # The program dir path is the program path minus everythin from the last
+  # The program dir path is the program path minus everything from the last
   # slash to the end of the string.
   local _spn_loc_program_dir_path_=${_spn_loc_program_path_%${_spn_loc_program_name_}}
 

@@ -51,9 +51,9 @@ Verify Login with Deleted Redfish Users
     user_user      TestPwd123  User            ${True}
     callback_user  TestPwd123  Callback        ${True}
 
-Verify User Creation Without Enabling it
+Verify User Creation Without Enabling It
     [Documentation]  Verify User Creation Without Enabling it.
-    [Tags]  Verify_User_Creation_Without_Enabling_it
+    [Tags]  Verify_User_Creation_Without_Enabling_It
     [Template]  Verify Create User Without Enabling
 
     #username      password    role_id         enabled
@@ -171,7 +171,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish.Logout
 
 Redfish Create User

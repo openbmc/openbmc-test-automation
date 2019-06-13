@@ -743,7 +743,7 @@ def nested_get(key_name, structure):
                                     dictionary of dictionaries, a list of
                                     dictionaries, etc.).  This function will
                                     locate the given key at any level within
-                                    the strucutre and include its value in the
+                                    the structure and include its value in the
                                     returned list.
     """
 
