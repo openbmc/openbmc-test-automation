@@ -177,7 +177,7 @@ Replace Certificate Via Redfish
     ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
 
     ${certificate_uri}=  Set Variable If
-    ...  '${cert_type}' == 'Server'  ${{REDFISH_HTTPS_CERTIFICATE_URI}/1
+    ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
     ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}/1
     ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}/1
 
