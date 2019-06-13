@@ -9,6 +9,8 @@ Library        ../../lib/bmc_network_utils.py
 Suite Setup    Suite Setup Execution
 Test Teardown  Test Teardown Execution
 
+Force Tags     MAC_Test
+
 *** Variables ***
 
 # AA:AA:AA:AA:AA:AA series is a valid MAC and does not exist in
