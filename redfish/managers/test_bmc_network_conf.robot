@@ -31,6 +31,20 @@ ${alpha_netmask}           ff.ff.ff.ff
 ${out_of_range_netmask}    255.256.255.0
 ${more_byte_netmask}       255.255.255.0.0
 ${less_byte_netmask}       255.255.255
+${threshold_netmask}       255.255.255.255
+${lowest_netmask}          128.0.0.0
+
+# There will be 4 octets in IP address (e.g. xx.xx.xx.xx)
+# but trying to configure xx.xx.xx
+${less_octet_ip}           10.3.36
+
+# For the address 10.6.6.6, the 10.6.6.0 portion describes the
+# network ID and the 6 describe the host.
+
+${network_id}              10.7.7.0
+${hex_ip}                  0xa.0xb.0xc.0xd
+${negative_ip}             10.-7.-7.7
+${hex_ip}                  0xa.0xb.0xc.0xd
 
 *** Test Cases ***
 
@@ -113,31 +127,28 @@ Configure Broadcast IP
     [Documentation]  Configure broadcast IP address.
     [Tags]  Configure_Broadcast_IP
     [Template]  Add IP Address
+    [Teardown]  Clear IP Settings On Fail  ${broadcast_ip}
 
     # ip             subnet_mask          gateway          valid_status_codes
     ${broadcast_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
-
-    [Teardown]  Clear IP Settings On Fail  ${broadcast_ip}
 
 Configure Multicast IP
     [Documentation]  Configure multicast IP address.
     [Tags]  Configure_Multicast_IP
     [Template]  Add IP Address
+    [Teardown]  Clear IP Settings On Fail  ${multicast_ip}
 
     # ip             subnet_mask          gateway          valid_status_codes
     ${multicast_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
-
-    [Teardown]  Clear IP Settings On Fail  ${multicast_ip}
 
 Configure Loopback IP
     [Documentation]  Configure loopback IP address.
     [Tags]  Configure_Loopback_IP
     [Template]  Add IP Address
+    [Teardown]  Clear IP Settings On Fail  ${loopback_ip}
 
     # ip            subnet_mask          gateway          valid_status_codes
     ${loopback_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
-
-    [Teardown]  Clear IP Settings On Fail  ${loopback_ip}
 
 Add Valid IPv4 Address And Check Persistency
     [Documentation]  Add IPv4 address and check peristency.
@@ -245,6 +256,69 @@ Configure Less Byte Netmask
 
     # ip               subnet_mask           gateway          valid_status_codes
     ${test_ipv4_addr}  ${less_byte_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Threshold Netmask And Verify
+    [Documentation]  Configure threshold netmask and verify.
+    [Tags]  Configure_Threshold_Netmask_And_verify
+
+     Add IP Address  ${test_ipv4_addr}  ${threshold_netmask}  ${test_gateway}
+     Delete IP Address  ${test_ipv4_addr}
+
+Configure Lowest Netmask And Verify
+    [Documentation]  Configure lowest netmask and verify.
+    [Tags]  Configure_Lowest_Netmask_And_verify
+
+     Add IP Address  ${test_ipv4_addr}  ${lowest_netmask}  ${test_gateway}
+     Delete IP Address  ${test_ipv4_addr}
+
+Configure Network ID
+    [Documentation]  Verify error while configuring network ID.
+    [Tags]  Configure_Network_ID
+    [Template]  Add IP Address
+    [Teardown]  Clear IP Settings On Fail  ${network_id}
+
+    # ip           subnet_mask          gateway          valid_status_codes
+    ${network_id}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Less Octet IP
+    [Documentation]  Verify error while Configuring less octet IP address.
+    [Tags]  Configure_Less_Octet_IP
+    [Template]  Add IP Address
+
+    # ip              subnet_mask          gateway          valid_status_codes
+    ${less_octet_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Empty IP
+    [Documentation]  Verify error while Configuring empty IP address.
+    [Tags]  Configure_Empty_IP
+    [Template]  Add IP Address
+
+    # ip      subnet_mask          gateway          valid_status_codes
+    ${EMPTY}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Special Char IP
+    [Documentation]  Configure invalid IP address containing special chars.
+    [Tags]  Configure_Special_Char_IP
+    [Template]  Add IP Address
+
+    # ip          subnet_mask          gateway          valid_status_codes
+    @@@.%%.44.11  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Hexadecimal IP
+    [Documentation]  Configure invalid IP address containing hex value.
+    [Tags]  Configure_Hexadecimal_IP
+    [Template]  Add IP Address
+
+    # ip       subnet_mask          gateway          valid_status_codes
+    ${hex_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
+Configure Negative Octet IP
+    [Documentation]  Configure invalid IP address containing negative octet.
+    [Tags]  Configure_Negative_Octet_IP
+    [Template]  Add IP Address
+
+    # ip            subnet_mask          gateway          valid_status_codes
+    ${negative_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
 *** Keywords ***
 
