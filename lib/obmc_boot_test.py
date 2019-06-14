@@ -810,7 +810,7 @@ def stop_boot_test(signal_number=0,
 
     function_stack = gm.get_function_stack()
     if "wait_state" in function_stack:
-        st.set_wait_early_exit_message(message)
+        st.set_exit_wait_early_message(message)
     else:
         BuiltIn().fail(gp.sprint_error(message))
 
