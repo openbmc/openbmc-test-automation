@@ -4,12 +4,16 @@ Documentation    Test Redfish LDAP user configuration.
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Library          ../../lib/gen_robot_valid.py
 
 Suite Setup      Suite Setup Execution
-Test Setup       Test Setup Execution
-Test Teardown    Test Teardown Execution
+Suite Teardown   Redfish.Logout
+Test Teardown    FFDC On Test Case Fail
 
 Force Tags       LDAP_Test
+
+*** Variables ***
+${old_ldap_privilege}  ${EMPTY}
 
 ** Test Cases **
 
@@ -64,26 +68,39 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
     Redfish.Logout
 
 
+Verify LDAP User With Operator Privilege Able To Do Host Poweron
+    [Documentation]  Verify LDAP user with operator privilege able to do host up.
+    [Tags]  Verify_LDAP_User_With_Operator_Privilege_Able_To_Do_Host_Poweron
+    [Teardown]  Restore LDAP Privilege
+
+    ${old_ldap_privilege}=  Get LDAP Privilege
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Operator  ${GROUP_NAME}
+    # Provide adequate time for LDAP daemon to restart after the update.
+    Sleep  10s
+
+    ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    ${new_ldap_privilege}=  Set Variable
+    ...  ${ldap_config["LDAP"]["RemoteRoleMapping"][0]["LocalRole"]}
+    Should Be Equal  ${new_ldap_privilege}  Operator
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    # Verify that the LDAP user with operator privilege is able to power the system on.
+    Redfish Power On
+    Redfish.Logout
+
+
 *** Keywords ***
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
-    Should Not Be Empty  ${LDAP_TYPE}
-    redfish.Login
+    Rvalid Value  LDAP_TYPE
+    Rvalid Value  LDAP_USER
+    Rvalid Value  LDAP_USER_PASSWORD
+    Rvalid Value  GROUP_PRIVILEGE
+    Rvalid Value  GROUP_NAME
+    Redfish.Login
+    # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
     Get LDAP Configuration  ${LDAP_TYPE}
-    redfish.Logout
-
-
-Test Setup Execution
-    [Documentation]  Do test case setup tasks.
-
-    redfish.Login
-
-
-Test Teardown Execution
-    [Documentation]  Do the post test teardown.
-    FFDC On Test Case Fail
-    redfish.Logout
 
 
 Get LDAP Configuration
@@ -112,3 +129,19 @@ Update LDAP Configuration with LDAP User Role And Group
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
 
+
+Get LDAP Privilege
+    [Documentation]  Get LDAP privilege and return it.
+
+    ${ldap_config}=  Get LDAP Configuration  ${LDAP_TYPE}
+    [Return]  ${ldap_config["RemoteRoleMapping"][0]["LocalRole"]}
+
+
+Restore LDAP Privilege
+    [Documentation]  Restore the LDAP privilege to its original value.
+
+    # Login back to update the original privilege.
+    Redfish.Login
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${old_ldap_privilege}  ${GROUP_NAME}
+    Redfish.Logout
