@@ -64,6 +64,29 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
     Redfish.Logout
 
 
+Verify LDAP User With Operator Privilege Able To Do Host Poweron
+    [Documentation]  Verify LDAP user with operator privilege able to do host up.
+    [Tags]  Verify_LDAP_User_With_Operator_Privilege_Able_To_Do_Host_Poweron
+
+    ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    ${ldap_old_privilege}=  Set Variable
+    ...  ${ldap_config["LDAP"]["RemoteRoleMapping"][0]["LocalRole"]}
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Operator  ${GROUP_NAME}
+    Sleep  10s  # Provided adequate time to get LDAP daemon get restarted after update.
+    ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    ${ldap_new_privilege}=  Set Variable
+    ...  ${ldap_config["LDAP"]["RemoteRoleMapping"][0]["LocalRole"]}
+    Should Be Equal  ${ldap_new_privilege}  Operator
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    # LDAP user and with operator privilege able to host poweron.
+    Redfish Power On
+    Redfish.Logout
+    Redfish.Login   # Login back to update the original privilege.
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${ldap_old_privilege}  ${GROUP_NAME}
+
+
 *** Keywords ***
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
