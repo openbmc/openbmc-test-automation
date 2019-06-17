@@ -5,9 +5,8 @@ Documentation  Test OpenBMC GUI "Manage user account" sub-menu  of
 
 Resource        ../../lib/resource.robot
 
-Suite Setup     Launch Browser And Login OpenBMC GUI
-Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
+Test Teardown   Close Browser
 
 
 *** Variables ***
@@ -41,11 +40,10 @@ ${xpath_table_base}                   //*[@id="user-accounts"]/div[4]/div[2]
                               ...     Delete=/div[5]/button[2]
 
 
-
 *** Test Cases ***
 
 Verify Existence Of All Section In User Page
-    [Documentation]  Verify existence of all sections in user page..
+    [Documentation]  Verify existence of all sections in user page.
     [Tags]  Verify_Existence_Of_All_Section_In_User_Page
 
     Page should contain  User account properties
@@ -83,30 +81,33 @@ Verify Existence Of All Button In User Page
     Page Should Contain Element  ${xpath_edit_button}
     Page Should Contain Element  ${xpath_delete_button}
 
+
 Verify Error When Duplicate User Is Created
     [Documentation]  Verify error when duplicate user is created.
     [Tags]  Verify_Error_When_Duplicate_User_Is_Created
-    [Setup]  Delete Given Users
+    [Setup]  Run Keywords  Test Setup Execution  AND  Delete Given Users
 
     Add Or Modify User  root  &{user_password}[root]  action=add_dup
+
 
 Delete User And Verify
     [Documentation]  Delete user and verify.
     [Tags]  Delete_User_And_Verify
-    [Setup]  Delete Given Users
+    [Setup]  Run Keywords  Test Setup Execution  AND  Delete Given Users
 
     Add Or Modify User  testUser1  &{user_password}[testUser1]
     Delete Given Users  delete_user=testUser1
     Page Should Not Contain  testUser1
 
+
 Verify Invalid Password Error
     [Documentation]  Verify the error message when user logs in with invalid password.
     [Tags]  Verify_Invalid_Password_Error
-    [Setup]  Delete Given Users
-    [Teardown]  Login OpenBMC GUI
+    [Setup]  Run Keywords  Test Setup Execution  AND  Delete Given Users
 
     LogOut OpenBMC GUI
     Login And Verify Message  root  &{user_invalid_password}[root]  Invalid username or password
+
 
 Edit And Verify User Property
     [Documentation]  Edit and verify the user property.
@@ -119,11 +120,13 @@ Edit And Verify User Property
     ${user_role}=  Get User Property Value  testUser1  Role
     Should Be Equal  ${user_role}  Callback
 
+
 *** Keywords ***
 
 Test Setup Execution
-   [Documentation]  Do test case setup tasks.
+    [Documentation]  Do test case setup tasks.
 
+    Launch Browser And Login OpenBMC GUI
     Click Button  ${xpath_select_users}
     Sleep  2s
     Wait Until Page Contains Element  ${xpath_select_manage_users}
@@ -198,16 +201,17 @@ Get User Property Value
    \    Page Should Contain Element  ${xpath_user}
    \    ${xpath_property}=  Get Xpath For User Table Attribute  ${property}  ${row_num}
    \    ${user}=  Get Text  ${xpath_user}
+   \    Capture Page Screenshot
    \    Run Keyword And Return If  '${user}' == '${username}'  Get Text  ${xpath_property}
 
 Login And Verify Message
-   [Documentation]  Verifies the error message displayed on screen while logging in.
-   [Arguments]  ${username}  ${password}  ${msg}
+    [Documentation]  Verifies the error message displayed on screen while logging in.
+    [Arguments]  ${username}  ${password}  ${msg}
 
-   # Description of argument(s):
-   # username  BMC Username.
-   # password  BMC Password.
-   # msg       Message which is expected to be found on login page after login attempt.
+    # Description of argument(s):
+    # username  BMC Username.
+    # password  BMC Password.
+    # msg       Message which is expected to be found on login page after login attempt.
 
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
@@ -221,7 +225,7 @@ Edit User Role
    # Description of argument(s):
    # username   BMC Username.
    # password   BMC Password.
-   # user_role  The user role to be assigned ("administrator", "user", "operator", "callback").
+   # user_role  The user role to be assigned ("Administrator", "User", "Operator", "Callback").
 
    # Maximum user limit is 15. Hence iterating only 15 times.
    :FOR  ${row_num}  IN RANGE  1  ${max_num_users+1}
