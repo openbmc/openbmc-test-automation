@@ -5,10 +5,6 @@ Documentation  Test OpenBMC GUI "Manage user account" sub-menu  of
 
 Resource        ../../lib/resource.robot
 
-Suite Setup     Launch Browser And Login OpenBMC GUI
-Suite Teardown  Close Browser
-Test Setup      Test Setup Execution
-
 
 *** Variables ***
 
@@ -34,12 +30,13 @@ ${xpath_edit_save_button}             //*[@id="user-accounts"]/form/section/div[
 &{user_invalid_password}              root=rootPwd1
 
 
-
 *** Test Cases ***
 
 Verify Existence Of All Section In User Page
-    [Documentation]  Verify existence of all sections in user page..
-    [Tags]  Verify_Existence_Of_All_Section_In_User_Page
+    [Documentation]  Verify existence of all sections in user page.
+    [Tags]           Verify_Existence_Of_All_Section_In_User_Page
+    [Setup]          Test Setup Execution
+    [Teardown]       Close Browser
 
     Page should contain  User account properties
     Page should contain  User account information
@@ -48,7 +45,9 @@ Verify Existence Of All Section In User Page
 
 Verify Existence Of All Input Boxes In User Page
     [Documentation]  Verify existence of all input boxes in user page.
-    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_User_Page
+    [Tags]           Verify_Existence_Of_All_Input_Boxes_In_User_Page
+    [Setup]          Test Setup Execution
+    [Teardown]       Close Browser
 
     # Input boxes under user account settings
     Page Should Contain Element  ${xpath_input_username}
@@ -64,7 +63,9 @@ Verify Existence Of All Input Boxes In User Page
 
 Verify Existence Of All Button In User Page
     [Documentation]  Verify existence of all button in user page.
-    [Tags]  Verify_Existence_Of_All_Button_In_User_Page
+    [Tags]           Verify_Existence_Of_All_Button_In_User_Page
+    [Setup]          Test Setup Execution
+    [Teardown]       Close Browser
 
     # Buttons under user account properties
     Page Should Contain Element  ${xpath_save_setting_button}
@@ -76,36 +77,43 @@ Verify Existence Of All Button In User Page
     Page Should Contain Element  ${xpath_edit_button}
     Page Should Contain Element  ${xpath_delete_button}
 
+
 Verify Error When Duplicate User Is Created
     [Documentation]  Verify error when duplicate user is created.
-    [Tags]  Verify_Error_When_Duplicate_User_Is_Created
-    [Setup]  Delete Given Users
+    [Tags]           Verify_Error_When_Duplicate_User_Is_Created
+    [Setup]          Run Keywords  Test Setup Execution  AND  Delete Given Users
+    [Teardown]       Close Browser
 
     Add Or Modify User  root  &{user_password}[root]  action=add_dup
 
+
 Delete User And Verify
     [Documentation]  Delete user and verify.
-    [Tags]  Delete_User_And_Verify
-    [Setup]  Delete Given Users
+    [Tags]           Delete_User_And_Verify
+    [Setup]          Run Keywords  Test Setup Execution  AND  Delete Given Users
+    [Teardown]       Close Browser
 
     Add Or Modify User  testUser1  &{user_password}[testUser1]
     Delete Given Users  delete_user=testUser1
     Page Should Not Contain  testUser1
 
+
 Verify Invalid Password Error
     [Documentation]  Verify the error message when user logs in with invalid password.
-    [Tags]  Verify_Invalid_Password_Error
-    [Setup]  Delete Given Users
-    [Teardown]  Login OpenBMC GUI
+    [Tags]           Verify_Invalid_Password_Error
+    [Setup]          Run Keywords  Test Setup Execution  AND  Delete Given Users
+    [Teardown]       Close Browser
 
     LogOut OpenBMC GUI
     Login And Verify Message  root  &{user_invalid_password}[root]  Invalid username or password
 
+
 *** Keywords ***
 
 Test Setup Execution
-   [Documentation]  Do test case setup tasks.
-
+    [Documentation]  Do test case setup tasks.
+    
+    Launch Browser And Login OpenBMC GUI
     Click Button  ${xpath_select_users}
     Sleep  2s
     Wait Until Page Contains Element  ${xpath_select_manage_users}
@@ -113,62 +121,69 @@ Test Setup Execution
     Wait Until Page Contains  User account information
 
 Add Or Modify User
-   [Documentation]  Creates or edits user.
-   [Arguments]  ${username}  ${password}  ${role}=Administrator  ${enabled}=${True}
-   ...          ${action}=add
-   # Description of argument(s):
-   # username  Name of the user to be created.
-   # role      Role of the new user.
-   # enabled   If True, User is enabled (Default), False, User is disabled.
-   # action    add - Creates a new user.
-   #           modify - Edits an existing user.
-   #           add_dup - Tries to add a duplicate user and verifies the error message.
-
-   Run Keyword If  '${action}' == 'add' or '${action}' == 'add_dup'
-              ...  Input Text  ${xpath_input_username}  ${username}
-   Input Password  ${xpath_input_password}  ${password}
-   Input Password  ${xpath_input_retype_password}  ${password}
-   Log  ${role}
-   Select From List By Value  ${xpath_input_user_role}  ${role}
-   Run Keyword If  '${enabled}' == 'True'  Click Element  ${xpath_input_enabled_checkbox}
-   Run Keyword If  '${action}' == 'modify'
-   ...  Click Button  ${xpath_edit_save_button}
-   ...  ELSE  Click Button  ${xpath_create_user_button}
-   Capture Page Screenshot
-   Page Should Contain  &{action_msg_relation}[${action}]
+    [Documentation]  Creates or edits user.
+    [Arguments]      ${username}  ${password}  ${role}=Administrator  
+    ...              ${enabled}=${True}  ${action}=add
+    
+    # Description of argument(s):
+    # username  Name of the user to be created.
+    # role      Role of the new user.
+    # enabled   If True, User is enabled (Default), False, User is disabled.
+    # action    add - Creates a new user.
+    #           modify - Edits an existing user.
+    #           add_dup - Tries to add a duplicate user and verifies the error message.
+    
+    Run Keyword If  '${action}' == 'add' or '${action}' == 'add_dup'
+               ...  Input Text  ${xpath_input_username}  ${username}
+    Input Password  ${xpath_input_password}  ${password}
+    Input Password  ${xpath_input_retype_password}  ${password}
+    Log  ${role}
+    Select From List By Value  ${xpath_input_user_role}  ${role}
+    Run Keyword If  '${enabled}' == 'True'  Click Element  ${xpath_input_enabled_checkbox}
+    Run Keyword If  '${action}' == 'modify'
+    ...  Click Button  ${xpath_edit_save_button}
+    ...  ELSE  Click Button  ${xpath_create_user_button}
+    Capture Page Screenshot
+    Page Should Contain  &{action_msg_relation}[${action}]
 
 Delete Given Users
-   [Documentation]  Deletes users based on the input.
-   [Arguments]  ${delete_user}=nonRoot
-   # Description of argument(s):
-   # delete_user  values - nonRoot/username
-   #              If nonRoot - Deletes all non-root users,
-   #                 username - Deletes the given user.
-
-   Wait Until Page Contains  root
-   Run Keyword If  '${delete_user}' != 'nonRoot'  Page Should Contain  ${delete_user}
-   # Row id that gets deleted in every iteration.
-   ${deleting_row_id}=  Set Variable  1
-   :FOR  ${row}  IN RANGE  1  16
-   \    ${xpath_user}=  Set Variable  //*[@id="user-accounts"]/div[4]/div[2]/div[${deleting_row_id}]/div[1]
-   \    ${status}=  Run Keyword And Return Status  Page Should Contain Element  ${xpath_user}
-   \    Exit For Loop If  '${status}' == 'False'
-   \    ${user}=  Get Text  ${xpath_user}
-   \    ${deleting_row_id}  Run Keyword If  '${user}' == 'root' or '${deleting_row_id}' == '2'  Set Variable  2
-   \    ...  ELSE  Set Variable  1
-   \    Continue For Loop If  '${user}' == 'root'
-   \    ${xpath_delete_user}  Run Keyword If  '${user}' == '${delete_user}' or '${delete_user}' == 'nonRoot'
-   \    ...  Set Variable  //*[@id="user-accounts"]/div[4]/div[2]/div[${deleting_row_id}]/div[5]/button[2]
-   \    Run Keyword If  '${user}' == '${delete_user}' or '${delete_user}' == 'nonRoot'
-   \    ...  Run Keywords  Click Button  ${xpath_delete_user}
-   \    ...  AND  Page Should Contain  User has been deleted successfully
-   \    ...  AND  Reload Page
-   \    ...  AND  Exit For Loop If  '${user}' == '${delete_user}'
+    [Documentation]  Deletes users based on the input.
+    [Arguments]      ${delete_user}=nonRoot
+    
+    # Description of argument(s):
+    # delete_user  values - nonRoot/username
+    #              If nonRoot - Deletes all non-root users,
+    #                 username - Deletes the given user.
+    
+    Wait Until Page Contains  root
+    Run Keyword If  '${delete_user}' != 'nonRoot'  Page Should Contain  ${delete_user}
+    # Row id that gets deleted in every iteration.
+    ${deleting_row_id}=  Set Variable  1
+    :FOR  ${row}  IN RANGE  1  16
+    \    ${xpath_user}=  Set Variable  //*[@id="user-accounts"]/div[4]/div[2]/div[${deleting_row_id}]/div[1]
+    \    ${status}=  Run Keyword And Return Status  Page Should Contain Element  ${xpath_user}
+    \    Exit For Loop If  '${status}' == 'False'
+    \    ${user}=  Get Text  ${xpath_user}
+    \    ${deleting_row_id}  Run Keyword If  '${user}' == 'root' or '${deleting_row_id}' == '2'  Set Variable  2
+    \    ...  ELSE  Set Variable  1
+    \    Continue For Loop If  '${user}' == 'root'
+    \    ${xpath_delete_user}  Run Keyword If  '${user}' == '${delete_user}' or '${delete_user}' == 'nonRoot'
+    \    ...  Set Variable  //*[@id="user-accounts"]/div[4]/div[2]/div[${deleting_row_id}]/div[5]/button[2]
+    \    Run Keyword If  '${user}' == '${delete_user}' or '${delete_user}' == 'nonRoot'
+    \    ...  Run Keywords  Click Button  ${xpath_delete_user}
+    \    ...  AND  Page Should Contain  User has been deleted successfully
+    \    ...  AND  Reload Page
+    \    ...  AND  Exit For Loop If  '${user}' == '${delete_user}'
 
 Login And Verify Message
-   [Documentation]  Verifies the error message displayed on screen while logging in.
-   [Arguments]  ${username}  ${password}  ${msg}
-
+    [Documentation]  Verifies the error message displayed on screen while logging in.
+    [Arguments]      ${username}  ${password}  ${msg}
+    
+    # Description of argument(s):
+    # username  BMC Username.
+    # password  BMC Password.
+    # msg       Message which is expected to be found on login page after login attempt.
+    
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
     Click Element  ${xpath_button_login}
