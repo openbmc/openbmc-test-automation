@@ -14,6 +14,9 @@ ${max_time_diff_in_seconds}  6
 ${invalid_datetime}          "2019-04-251T12:24:46+00:00"
 ${ntp_server_1}              "9.9.9.9"
 ${ntp_server_2}              "2.2.3.3"
+${original_ntp_server_1}
+${original_ntp_server_2}
+${original_ntp_enabled}
 
 *** Test Cases ***
 
@@ -95,6 +98,17 @@ Verify NTP Server Setting Persist After BMC Reboot
     Redfish.Logout
 
 
+Verify NTP Protocol Able To Set
+    [Documentation]  Verify NTP protocol mode is able to enable.
+    [Setup]  Check NTP Enabled
+    [Teardown]  Reset To Original NTP Server
+    [Tags]  Verify_NTP_Protocol_Able_To_Set
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={u'NTPEnabled': ${True}}
+    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    Should Be Equal  ${network_protocol["NTP"]["ProtocolEnabled"]}  ${True}
+
+
 *** Keywords ***
 
 Test Teardown Execution
@@ -125,3 +139,37 @@ Redfish Set DateTime
 
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
     ...  &{kwargs}
+
+
+Check NTP Enabled
+
+    Redfish.Login
+    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    Run Keyword If  ${network_protocol["NTP"]["ProtocolEnabled"]} == 'true'
+    ...  Get NTP Server Details
+
+
+Get NTP Server Details
+    [Documentation]  Get NTP server details.
+
+    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    ${original_ntp_server_1}=  Set Variable
+    ...  ${network_protocol["NTP"]["NTPServers"][0]}
+    ${original_ntp_server_2}=  Set Variable
+    ...  ${network_protocol["NTP"]["NTPServers"][1]}
+    ${original_ntp_enabled}=  Set Variable
+    ...  ${network_protocol["NTP"]["ProtocolEnabled"]}
+    ${original_ntp_enabled}=  Convert to Boolean  ${original_ntp_enabled}
+
+
+Reset To Original NTP Server
+    [Documentation]  Reset to original NTP server details.
+
+
+    Redfish.Login
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={'NTPServers': ['${original_ntp_server_1}', '${original_ntp_server_2}']}
+    ${original_ntp_enabled}=  Convert to Boolean  ${original_ntp_enabled}
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={u'NTPEnabled': ${original_ntp_enabled}}
+    Redfish.Logout
