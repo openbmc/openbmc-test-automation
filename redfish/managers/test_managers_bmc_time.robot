@@ -6,14 +6,16 @@ Resource                     ../../lib/common_utils.robot
 Resource                     ../../lib/openbmc_ffdc.robot
 Resource                     ../../lib/utils.robot
 
-Test Setup                   Run Keywords  Printn  AND  redfish.Login
 Test Teardown                Test Teardown Execution
+Suite Setup                  Suite Setup Execution
+Suite Teardown               Redfish.Logout
 
 *** Variables ***
 ${max_time_diff_in_seconds}  6
 ${invalid_datetime}          "2019-04-251T12:24:46+00:00"
 ${ntp_server_1}              "9.9.9.9"
 ${ntp_server_2}              "2.2.3.3"
+${original_ntp}              ${EMPTY}
 
 *** Test Cases ***
 
@@ -95,13 +97,25 @@ Verify NTP Server Setting Persist After BMC Reboot
     Redfish.Logout
 
 
+Verify Enable NTP
+    [Documentation]  Verify NTP protocol mode can be enabled.
+    [Teardown]  Reset To Original NTP Mode
+    [Tags]  Verify_Enable_NTP
+
+    ${original_ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
+    Set Suite Variable  ${original_ntp}
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={u'NTPEnabled': ${True}}
+    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    Should Be Equal  ${network_protocol["NTP"]["ProtocolEnabled"]}  ${True}
+    ...  msg=Not able to enable NTP protocol.
+
+
 *** Keywords ***
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
-    redfish.Logout
 
 
 Redfish Get DateTime
@@ -125,3 +139,22 @@ Redfish Set DateTime
 
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
     ...  &{kwargs}
+
+
+Reset To Original NTP Mode
+    [Documentation]  Reset to original NTP mode.
+
+    ${original_ntp_enabled}=  Convert to Boolean  ${original_ntp["ProtocolEnabled"]}
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={u'NTPEnabled': ${original_ntp_enabled}}
+    # Decided to set with null strings for NTP servers.
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTPServers': ['', '']}
+
+
+Suite Setup Execution
+    [Documentation]  Do the suite level setup.
+
+    Printn
+    Redfish.Login
+
+
