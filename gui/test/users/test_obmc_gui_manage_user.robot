@@ -79,14 +79,14 @@ Verify Existence Of All Button In User Page
 Verify Error When Duplicate User Is Created
     [Documentation]  Verify error when duplicate user is created.
     [Tags]  Verify_Error_When_Duplicate_User_Is_Created
-    [Setup]  Delete Given Users
+    [Setup]  Run Keywords  Test Setup Execution  AND  Delete Given Users
 
     Add Or Modify User  root  &{user_password}[root]  action=add_dup
 
 Delete User And Verify
     [Documentation]  Delete user and verify.
     [Tags]  Delete_User_And_Verify
-    [Setup]  Delete Given Users
+    [Setup]  Run Keywords  Test Setup Execution  AND  Delete Given Users
 
     Add Or Modify User  testUser1  &{user_password}[testUser1]
     Delete Given Users  delete_user=testUser1
@@ -95,11 +95,11 @@ Delete User And Verify
 Verify Invalid Password Error
     [Documentation]  Verify the error message when user logs in with invalid password.
     [Tags]  Verify_Invalid_Password_Error
-    [Setup]  Delete Given Users
-    [Teardown]  Login OpenBMC GUI
+    [Setup]  Run Keywords  Test Setup Execution  AND  Delete Given Users
 
     LogOut OpenBMC GUI
     Login And Verify Message  root  &{user_invalid_password}[root]  Invalid username or password
+    Login OpenBMC GUI
 
 *** Keywords ***
 
