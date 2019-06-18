@@ -8,6 +8,11 @@ Resource         ../../lib/openbmc_ffdc.robot
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+*** Variables ***
+
+${account_lockout_duration}   ${30}
+${account_lockout_threshold}  ${3}
+
 
 ** Test Cases **
 
@@ -158,6 +163,28 @@ Verify Modifying User Attributes
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}callback_user
 
+Verify User Account Locked
+    [Documentation]  Verify user account locked upon trying with invalid password.
+    [Tags]  Verify_User_Account_Locked
+
+    Redfish Create User  admin_user  TestPwd123  Administrator   ${True}
+
+    Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}
+    ...  body={'AccountLockoutThreshold': ${account_lockout_threshold}, 'AccountLockoutDuration': ${account_lockout_duration}}
+
+    # Make ${account_lockout_threshold} failed login attempts.
+    Repeat Keyword  ${account_lockout_threshold} times
+    ...  Run Keyword And Expect Error  InvalidCredentialsError*  Redfish.Login  admin_user  abc123
+
+    # Verify that legitimate login fails due to lockout.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  admin_user  TestPwd123
+
+    # Wait for lockout duration to expire and then verify that login works.
+    Sleep  ${account_lockout_duration}s
+    Redfish.Login  admin_user  TestPwd123
+
+    Redfish.Logout
 
 
 *** Keywords ***
@@ -171,7 +198,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    #FFDC On Test Case Fail
+    FFDC On Test Case Fail
     Redfish.Logout
 
 Redfish Create User
