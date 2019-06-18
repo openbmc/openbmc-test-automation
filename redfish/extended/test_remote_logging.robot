@@ -9,12 +9,13 @@ Documentation    Remote logging test for rsyslog.
 # REMOTE_PASSWORD           The password for the remote logging server.
 
 Library          String
-Resource         ../lib/openbmc_ffdc.robot
-Resource         ../lib/boot_utils.robot
-Resource         ../lib/remote_logging_utils.robot
-Resource         ../lib/bmc_redfish_resource.robot
-Resource         ../lib/ipmi_client.robot
-Library          ../lib/gen_misc.py
+Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/boot_utils.robot
+Resource         ../../lib/remote_logging_utils.robot
+Resource         ../../lib/bmc_redfish_resource.robot
+Resource         ../../lib/ipmi_client.robot
+Resource         ../../lib/bmc_redfish_resource.robot
+Library          ../../lib/gen_misc.py
 
 Suite Setup      Suite Setup Execution
 Test Setup       Test Setup Execution
@@ -289,7 +290,7 @@ Boot Host And Verify Data Is Synced To Remote Server
     Start Journal Log  filter=${cmd}
 
     # Irrespective of the outcome, the journald should be synced.
-    Run Keyword And Ignore Error  REST Power On
+    Run Keyword And Ignore Error  Redfish Power On
     ${bmc_journald}=  Stop Journal Log
 
     ${cmd}=  Catenate  SEPARATOR=  egrep '${bmc_hostname}' /var/log/syslog
