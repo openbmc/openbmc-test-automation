@@ -17,6 +17,7 @@ ${valid_password}       0penBmc1
 ${valid_password2}      0penBmc2
 ${admin_level_priv}     4
 ${operator_level_priv}  3
+${max_num_users}        ${15}
 
 ** Test Cases **
 
@@ -177,6 +178,32 @@ Delete User Via IPMI And Verify Using Redfish
     # Verify that Redfish login fails with deleted user.
     Run Keyword And Expect Error  *InvalidCredentialsError*
     ...  Redfish.Login  ${username}  ${valid_password}
+
+
+Verify Failure To Exceed Max Number Of Users
+    [Documentation]  Verify failure attempting to exceed the max number of user accounts.
+    [Tags]  Verify_Failure_To_Exceed_Max_Number_Of_Users 
+
+    # Get existing user count.
+    ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/
+    ${current_user_count}=  Get From Dictionary  ${resp.dict}  Members@odata.count
+
+    ${payload}=  Create Dictionary  Password=${valid_password}
+    ...  RoleId=Administrator  Enabled=${True}
+
+    # Create users to reach maximum users count (i.e. 15 users).
+    FOR  ${INDEX}  IN RANGE  ${current_user_count}  ${max_num_users}
+      ${random_username}=  Generate Random String  8  [LETTERS]
+      Set To Dictionary  ${payload}  UserName  ${random_username}
+      Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+      ...  valid_status_codes=[${HTTP_CREATED}]
+    END
+
+    # Verify error while creating 16th user.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    Set To Dictionary  ${payload}  UserName  ${random_username}
+    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
 *** Keywords ***
