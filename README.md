@@ -116,8 +116,6 @@ classified as follows:
 `snmp/`: Contains test cases for SNMP (Simple Network Management Protocol)
          configuration testing.
 
-`remote_logging`: Contains test cases for remote logging via rsyslog.
-
 `openpower/ras/`: Contains test cases for RAS (Reliability, Availability and
                   Serviceability) for an OpenPOWER system.
 
@@ -140,6 +138,9 @@ specification and schema that meets the expectations of end users for simple,
 modern and secure management of scalable platform hardware.
 
 `redfish`: Contains test cases for DMTF Redfish-related feature supported on OpenBMC.
+`redfish/extended/`: Contains test cases for combined legacy REST and DMTF Redfish-related
+                     feature supported on OpenBMC.
+
 
 
 ## Quickstart ##
