@@ -8,6 +8,11 @@ Resource         ../../lib/openbmc_ffdc.robot
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+*** Variables ***
+
+${account_lockout_duration}   ${30}
+${account_lockout_threshold}  ${3}
+
 
 ** Test Cases **
 
@@ -158,6 +163,44 @@ Verify Modifying User Attributes
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}callback_user
 
+Verify User Account Locked
+    [Documentation]  Verify user account locked upon trying with invalid password.
+    [Tags]  Verify_User_Account_Locked
+
+    # Create a redfish user.
+    Redfish Create User  admin_user  TestPwd123  Administrator   ${True}
+
+    Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}
+    ...  body={'AccountLockoutThreshold': ${account_lockout_threshold}, 'AccountLockoutDuration': ${account_lockout_duration}}
+
+    ${current_account_lockout_threshold}=  Redfish_Utils.Get Attribute
+    ...  ${REDFISH_ACCOUNTS_SERVICE_URI}  AccountLockoutThreshold  ${account_lockout_threshold}
+
+    ${current_account_lockout_duration}=  Redfish_Utils.Get Attribute
+    ...  ${REDFISH_ACCOUNTS_SERVICE_URI}  AccountLockoutDuration  ${account_lockout_duration}
+
+    # Try to login with created user 3 times with invalid passwords.
+    # Login with less than 8 character invalid password.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  admin_user  abc123
+
+    # Login with more than 8 character invalid password.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  admin_user  verylongpasswordtest123456789
+
+    # Login with blank password.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  admin_user
+
+    # Verify that legitimate login fails due to lockout.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  admin_user  TestPwd123
+
+    # Wait for lockout duration to expire and then verify that login works.
+    Sleep  ${account_lockout_duration}s
+    Redfish.Login  admin_user  TestPwd123
+
+    Redfish.Logout
 
 
 *** Keywords ***
@@ -171,7 +214,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    #FFDC On Test Case Fail
+    FFDC On Test Case Fail
     Redfish.Logout
 
 Redfish Create User
