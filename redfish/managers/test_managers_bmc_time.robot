@@ -36,6 +36,8 @@ Verify Set Time Using Redfish
     [Documentation]  Verify set time using redfish API.
     [Tags]  Verify_Set_Time_Using_Redfish
 
+    Set BMC Time Owner
+
     ${old_bmc_time}=  CLI Get BMC DateTime
     # Add 3 days to current date.
     ${new_bmc_time}=  Add Time to Date  ${old_bmc_time}  3 Days
@@ -125,3 +127,22 @@ Redfish Set DateTime
 
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
     ...  &{kwargs}
+
+
+Set BMC Time Owner
+    [Documentation]  Set time owner of the system via REST.
+
+    ${valueDict}=  Create Dictionary  data=${BMC_OWNER}
+
+    ${resp}=  OpenBMC Put Request
+    ...  ${TIME_MANAGER_URI}owner/attr/TimeOwner  data=${valueDict}
+    ${jsondata}=  to JSON  ${resp.content}
+
+    # To check response status of REST.
+    Should Be Equal As Strings  ${jsondata['status']}  ok  msg=Un-able to set data on REST request.
+
+    ${owner}=  Read Attribute  ${TIME_MANAGER_URI}owner  TimeOwner
+
+    # To check currect BMC time owner with set value.
+    Should Be Equal  ${owner}  ${BMC_OWNER}  msg=Un-able to set BMC time owner.
+
