@@ -179,6 +179,31 @@ Delete User Via IPMI And Verify Using Redfish
     ...  Redfish.Login  ${username}  ${valid_password}
 
 
+Verify Error While Creating User More Than Max User Limit
+    [Documentation]  Verify error while creating more than max user limit.
+    [Tags]  Verify_Error_While_Creating_User_More_Than_Max_User_Limit
+
+    Delete All Non Root IPMI User
+
+    # Create users to reach maximum user count (i.e. 15 users).
+    FOR  ${INDEX}  IN RANGE  1  15
+      ${random_username}=  Generate Random String  8  [LETTERS]
+      ${payload}=  Create Dictionary
+      ...  UserName=${random_username}  Password=${valid_password}
+      ...  RoleId=Administrator  Enabled=${True}
+      Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+       ...  valid_status_codes=[${HTTP_CREATED}]
+    END
+
+    # Verify error while creating 16th user.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${payload}=  Create Dictionary
+    ...  UserName=${random_username}  Password=${valid_password}
+    ...  RoleId=Administrator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
 *** Keywords ***
 
 IPMI Create Random User Plus Password And Privilege
