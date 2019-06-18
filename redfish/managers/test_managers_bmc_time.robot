@@ -5,6 +5,10 @@ Resource                     ../../lib/bmc_redfish_resource.robot
 Resource                     ../../lib/common_utils.robot
 Resource                     ../../lib/openbmc_ffdc.robot
 Resource                     ../../lib/utils.robot
+Resource                     ../lib/state_manager.robot
+Library                      ../data/variables.py
+Library                      BuiltIn
+Library                      String
 
 Test Setup                   Run Keywords  Printn  AND  redfish.Login
 Test Teardown                Test Teardown Execution
@@ -14,6 +18,7 @@ ${max_time_diff_in_seconds}  6
 ${invalid_datetime}          "2019-04-251T12:24:46+00:00"
 ${ntp_server_1}              "9.9.9.9"
 ${ntp_server_2}              "2.2.3.3"
+${status}                    "ok"
 
 *** Test Cases ***
 
@@ -36,6 +41,7 @@ Verify Set Time Using Redfish
     [Documentation]  Verify set time using redfish API.
     [Tags]  Verify_Set_Time_Using_Redfish
 
+    Set BMC Time Owner
     ${old_bmc_time}=  CLI Get BMC DateTime
     # Add 3 days to current date.
     ${new_bmc_time}=  Add Time to Date  ${old_bmc_time}  3 Days
@@ -125,3 +131,17 @@ Redfish Set DateTime
 
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
     ...  &{kwargs}
+
+
+Set BMC Time Owner
+    [Documentation]  Set time owner of the system via REST.
+
+    ${valueDict}=  Create Dictionary  data=${BMC_OWNER}
+
+    ${resp}=  OpenBMC Put Request
+    ...  ${TIME_MANAGER_URI}owner/attr/TimeOwner  data=${valueDict}
+
+    ${owner}=  Read Attribute  ${TIME_MANAGER_URI}owner  TimeOwner
+
+    # To check currect BMC time owner with set value
+    Should Be Equal  ${owner}  ${BMC_OWNER}  msg= Un-able to set BMC time owner.
