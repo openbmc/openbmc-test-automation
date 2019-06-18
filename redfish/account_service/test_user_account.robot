@@ -158,6 +158,51 @@ Verify Modifying User Attributes
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}callback_user
 
+Verify User Account Lock Upon Trying With Invalid Password
+    [Documentation]  Verify user account lock upon trying with invalid password
+    [Tags]  Verify_User_Account_Lock_Upon_Trying_With_Invalid_Password
+
+    #Create a redfish user
+    Redfish Create User  admin_user  TestPwd123  Administrator   ${True}
+
+    #Set account lock threshold
+    ${payload}=  Create Dictionary  AccountLockoutThreshold=${3}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=&{payload}
+
+    #Validate account lock threshold
+    ${acc_threshold}=  Redfish_Utils.Get Attribute
+    ...  ${REDFISH_ACCOUNTS_SERVICE_URI}  AccountLockoutThreshold
+    Should Be Equal  int(3)  int(${acc_threshold})
+
+    #Set account lock duration
+    ${payload}=  Create Dictionary  AccountLockoutDuration=${30}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=&{payload}
+
+    #Validate account lock duration
+    ${acc_threshold}=  Redfish_Utils.Get Attribute
+    ...  ${REDFISH_ACCOUNTS_SERVICE_URI}  AccountLockoutDuration
+    Should Be Equal  int(30)  int(${acc_threshold})
+
+    #Try to login with created user 3 times with invalid passwords
+    #Login with less than 8 character invalid password
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  admin_user  abc123
+
+    #Login with more than 8 character invalid password
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  admin_user  verylongpasswordtest123456789
+
+    #Login with blank password
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  admin_user
+
+    #Login with valid password and it should not work
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  admin_user  TestPwd123
+
+    #After timeout , validate it logs in
+    Sleep  30s
+    Redfish.Login  admin_user  TestPwd123
 
 
 *** Keywords ***
@@ -171,7 +216,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    #FFDC On Test Case Fail
+    FFDC On Test Case Fail
     Redfish.Logout
 
 Redfish Create User
