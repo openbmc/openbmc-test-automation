@@ -253,7 +253,7 @@ Configure Hostname
 
     # Description of argument(s):
     # hostname  A hostname value which is to be configured on BMC.
-
+    Log    ${hostname}
     ${data}=  Create Dictionary  HostName=${hostname}
     Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
 
