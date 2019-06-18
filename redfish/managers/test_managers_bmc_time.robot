@@ -5,6 +5,7 @@ Resource                     ../../lib/bmc_redfish_resource.robot
 Resource                     ../../lib/common_utils.robot
 Resource                     ../../lib/openbmc_ffdc.robot
 Resource                     ../../lib/utils.robot
+Resource                     ../../lib/rest_client.robot
 
 Test Setup                   Run Keywords  Printn  AND  redfish.Login
 Test Teardown                Test Teardown Execution
@@ -35,6 +36,8 @@ Verify Redfish BMC Time
 Verify Set Time Using Redfish
     [Documentation]  Verify set time using redfish API.
     [Tags]  Verify_Set_Time_Using_Redfish
+
+    Rest Set Time Owner
 
     ${old_bmc_time}=  CLI Get BMC DateTime
     # Add 3 days to current date.
@@ -125,3 +128,12 @@ Redfish Set DateTime
 
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
     ...  &{kwargs}
+
+
+Rest Set Time Owner
+    [Documentation]  Set time owner of the system via REST.
+
+    # BMC_OWNER is defined in variable.py.
+    ${data}=  Create Dictionary  data=${BMC_OWNER}
+    Write Attribute  ${TIME_MANAGER_URI}owner  TimeOwner  data=${data}  verify=${TRUE}
+
