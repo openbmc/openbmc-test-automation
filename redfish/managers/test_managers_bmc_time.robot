@@ -5,6 +5,8 @@ Resource                     ../../lib/bmc_redfish_resource.robot
 Resource                     ../../lib/common_utils.robot
 Resource                     ../../lib/openbmc_ffdc.robot
 Resource                     ../../lib/utils.robot
+Resource                     ../lib/state_manager.robot
+Library                      ../data/variables.py
 
 Test Setup                   Run Keywords  Printn  AND  redfish.Login
 Test Teardown                Test Teardown Execution
@@ -36,6 +38,7 @@ Verify Set Time Using Redfish
     [Documentation]  Verify set time using redfish API.
     [Tags]  Verify_Set_Time_Using_Redfish
 
+    Set Time Owner  ${BMC_OWNER}
     ${old_bmc_time}=  CLI Get BMC DateTime
     # Add 3 days to current date.
     ${new_bmc_time}=  Add Time to Date  ${old_bmc_time}  3 Days
@@ -125,3 +128,26 @@ Redfish Set DateTime
 
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
     ...  &{kwargs}
+
+Set Time Owner
+    [Arguments]  ${args}
+    [Documentation]  Set time owner of the system via REST
+
+    ${timeowner}=  Set Variable  ${args}
+    ${valueDict}=  Create Dictionary  data=${timeowner}
+
+    ${resp}=  OpenBMC Put Request
+    ...  ${TIME_MANAGER_URI}owner/attr/TimeOwner  data=${valueDict}
+    ${jsondata}=  to JSON  ${resp.content}
+
+    ${host_state}=  Get Host State
+
+    Run Keyword If  '${host_state}' == 'Off'
+    ...  Log  System is in off state so owner change will get applied.
+    ...  ELSE   Run keyword
+    ...  Initiate Host PowerOff
+
+    ${owner}=  Read Attribute  ${TIME_MANAGER_URI}owner  TimeOwner
+    Should Be Equal  ${owner}  ${args}
+
+    [Return]  ${jsondata['status']}
