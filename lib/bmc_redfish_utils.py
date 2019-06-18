@@ -33,7 +33,7 @@ class bmc_redfish_utils(object):
         }
         return session_dict
 
-    def get_attribute(self, resource_path, attribute):
+    def get_attribute(self, resource_path, attribute, verify=None):
         r"""
         Get resource attribute.
 
@@ -44,7 +44,13 @@ class bmc_redfish_utils(object):
         """
 
         resp = self._redfish_.get(resource_path)
-        if attribute in resp.dict:
+
+        if verify:
+            if resp.dict[attribute] == verify:
+                return resp.dict[attribute]
+            else:
+                raise ValueError("Attribute value is not equal")
+        elif attribute in resp.dict:
             return resp.dict[attribute]
 
         return None
@@ -55,7 +61,7 @@ class bmc_redfish_utils(object):
 
         Description of argument(s):
         resource_path               URI resource absolute path (e.g.
-                                    "/redfish/v1/Systems/1").
+                                    /redfish/v1/Systems/1").
         """
 
         resp = self._redfish_.get(resource_path)
@@ -94,7 +100,6 @@ class bmc_redfish_utils(object):
         # Recursively search the "target" key in the nested dictionary.
         # Populate the target_list of target entries.
         self.get_key_value_nested_dict(resp_dict, "target")
-
         # Return the matching target URL entry.
         for target in target_list:
             # target "/redfish/v1/Systems/system/Actions/ComputerSystem.Reset"
