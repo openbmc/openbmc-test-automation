@@ -1,8 +1,9 @@
 *** Settings ***
 Documentation       This suite is for Verifying BMC device tree.
 
-Resource            ../lib/openbmc_ffdc.robot
-Resource            ../lib/ipmi_client.robot
+Resource            ../../lib/utils.robot
+Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/ipmi_client.robot
 Library             String
 
 Test Setup          Open Connection And Log In
@@ -19,15 +20,6 @@ Check BMC Model Property Is Set
 
    #Property
    model
-
-
-Check BMC Name Property Is Set
-   [Documentation]  Verify if the BMC name property is populated.
-   [Tags]  Check_BMC_Name_Property_Is_Set
-   [Template]  Template Check Property
-
-   #Property
-   name
 
 
 Check BMC Compatible Property Is Set
@@ -82,7 +74,7 @@ Check BMC FSI Name Property Is Set
    [Template]  Template Check Property
 
    #Property
-   fsi-master/name
+   gpio-fsi/name
 
 
 Check BMC FSI Compatible Property Is Set
@@ -91,7 +83,7 @@ Check BMC FSI Compatible Property Is Set
    [Template]  Template Check Property
 
    #Property
-   fsi-master/compatible
+   gpio-fsi/compatible
 
 
 Check BMC GPIO-FSI Name Property Is Set
@@ -168,24 +160,6 @@ Check BMC LED Compatible Property Is Set
 
    #Property
    leds/compatible
-
-
-Check BMC Clocks Name Property Is Set
-   [Documentation]  Verify if the BMC clocks name property is populated.
-   [Tags]  Check_BMC_Clocks_Name_Property_Is_Set
-   [Template]  Template Check Property
-
-   #Property
-   clocks/name
-
-
-Check BMC Clocks Compatible Property Is Set
-   [Documentation]  Verify if the BMC clocks compatible property is populated.
-   [Tags]  Check_BMC_Clocks_Compatible_Property_Is_Set
-   [Template]  Template Check Property
-
-   #Property
-   clocks/clk_clkin/compatible
 
 
 *** Keywords ***
