@@ -55,7 +55,7 @@ Get Model And Verify Populated
 
 
 Verify FRU Inventory Minimums
-    [Documentation]  Verify a minimun number of FRUs.
+    [Documentation]  Verify a minimum number of FRUs.
     [Arguments]  ${fru_type}  ${min_num_frus}
 
     # Description of Argument(s):

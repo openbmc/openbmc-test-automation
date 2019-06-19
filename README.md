@@ -138,6 +138,7 @@ specification and schema that meets the expectations of end users for simple,
 modern and secure management of scalable platform hardware.
 
 `redfish`: Contains test cases for DMTF Redfish-related feature supported on OpenBMC.
+
 `redfish/extended/`: Contains test cases for combined legacy REST and DMTF Redfish-related
                      feature supported on OpenBMC.
 
