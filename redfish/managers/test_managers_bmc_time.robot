@@ -12,6 +12,7 @@ Test Teardown                Test Teardown Execution
 *** Variables ***
 ${max_time_diff_in_seconds}  6
 ${invalid_datetime}          "2019-04-251T12:24:46+00:00"
+${1jun2019_datetime}         "2019-06-01T00:01:01+00:00"
 ${ntp_server_1}              "9.9.9.9"
 ${ntp_server_2}              "2.2.3.3"
 
@@ -56,6 +57,29 @@ Verify Set DateTime With Invalid Data Using Redfish
     [Tags]  Verify_Set_DateTime_With_Invalid_Data_Using_Redfish
 
     Redfish Set DateTime  ${invalid_datetime}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
+Verify DateTime Persist After Reboot
+    [Documentation]  Verify date persist after BMC reboot.
+    [Tags]  Verify_DateTime_Persist_After_Reboot
+
+    ${old_bmc_time}=  CLI Get BMC DateTime
+    Redfish Set DateTime  ${1jun2019_datetime}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    ${new_bmc_time}=  CLI Get BMC DateTime
+    ${new_bmc_time}=  Convert Date  ${new_bmc_time}  datetime
+    Redfish OBMC Reboot (off)
+    Redfish.Login
+    ${reboot_new_bmc_time}=  CLI Get BMC DateTime
+    ${reboot_new_datetime}=  Convert Date  ${reboot_new_bmc_time}  datetime
+    Should Be Equal  ${new_bmc_time.year}  ${reboot_new_datetime.year}
+    ...  msg=Date is not matching.
+    Should Be Equal  ${new_bmc_time.month}  ${reboot_new_datetime.month}
+    ...  msg=Date is not matching.
+    Should Be Equal  ${new_bmc_time.day}  ${reboot_new_datetime.day}
+    ...  msg=Date is not matching.
+
+    # Setting back to old bmc time.
+    Redfish Set DateTime  ${old_bmc_time}
 
 
 Verify NTP Server Set
