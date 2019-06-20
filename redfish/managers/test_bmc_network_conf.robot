@@ -327,6 +327,30 @@ Configure Negative Octet IP
     # ip            subnet_mask          gateway          valid_status_codes
     ${negative_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
+Configure Incomplete IP For Gateway
+    [Documentation]  Configure incomplete IP for gateway and expect an error.
+    [Tags]  Configure_Incomplete_IP_For_Gateway
+    [Template]  Add IP Address
+
+    # ip               subnet_mask          gateway           valid_status_codes
+    ${test_ipv4_addr}  ${test_subnet_mask}  ${less_octet_ip}  ${HTTP_BAD_REQUEST}
+
+Configure Special Char IP For Gateway
+    [Documentation]  Configure special char IP for gateway and expect an error.
+    [Tags]  Configure_Special_Char_IP_For_Gateway
+    [Template]  Add IP Address
+
+    # ip               subnet_mask          gateway       valid_status_codes
+    ${test_ipv4_addr}  ${test_subnet_mask}  @@@.%%.44.11  ${HTTP_BAD_REQUEST}
+
+Configure Hexadecimal IP For Gateway
+    [Documentation]  Configure hexadecimal IP for gateway and expect an error.
+    [Tags]  Configure_Hexadecimal_IP_For_Gateway
+    [Template]  Add IP Address
+
+    # ip               subnet_mask          gateway    valid_status_codes
+    ${test_ipv4_addr}  ${test_subnet_mask}  ${hex_ip}  ${HTTP_BAD_REQUEST}
+
 *** Keywords ***
 
 Test Setup Execution
