@@ -58,6 +58,25 @@ Verify Set DateTime With Invalid Data Using Redfish
     Redfish Set DateTime  ${invalid_datetime}  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
+Verify DateTime Persists After Reboot
+    [Documentation]  Verify date persists after BMC reboot.
+    [Tags]  Verify_DateTime_Persists_After_Reboot
+
+    # Synchronize BMC date/time to local system date/time.
+    ${local_system_time}=  Get Current Date
+    Redfish Set DateTime  ${local_system_time}
+    Redfish OBMC Reboot (off)
+    Redfish.Login
+    ${bmc_time}=  CLI Get BMC DateTime
+    ${local_system_time}=  Get Current Date
+    ${time_diff}=  Subtract Date From Date  ${bmc_time}
+    ...  ${local_system_time}
+    ${time_diff}=  Evaluate  abs(${time_diff})
+    Rprint Vars   local_system_time  bmc_time  time_diff  max_time_diff_in_seconds
+    Should Be True  ${time_diff} < ${max_time_diff_in_seconds}
+    ...  The difference between Redfish time and CLI time exceeds the allowed time difference.
+
+
 Verify NTP Server Set
     [Documentation]  Verify NTP server set.
     [Tags]  Verify_NTP_Server_Set
@@ -96,6 +115,7 @@ Verify NTP Server Setting Persist After BMC Reboot
 
 
 *** Keywords ***
+
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
