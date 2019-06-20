@@ -11,6 +11,8 @@ Library        Collections
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
 
+Force Tags     Network_Conf_Test
+
 *** Variables ***
 ${test_hostname}           openbmc
 ${test_ipv4_addr}          10.7.7.7
