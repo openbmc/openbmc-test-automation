@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    Test Redfish LDAP user configuration.
 
+Library          ../../lib/gen_robot_valid.py
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
@@ -14,6 +15,7 @@ Force Tags       LDAP_Test
 
 *** Variables ***
 ${old_ldap_privilege}  ${EMPTY}
+&{old_account_service}  &{EMPTY}
 
 ** Test Cases **
 
@@ -89,11 +91,38 @@ Verify LDAP User With Operator Privilege Able To Do Host Poweron
     Redfish.Logout
 
 
+Verify AccountLockout Attributes Set To Zero
+    [Documentation]  Verify attribute AccountLockoutDuration and
+    ...  AccountLockoutThreshold are set to 0.
+    [Teardown]  Run Keywords  Restore AccountLockout Attributes  AND
+    ...  FFDC On Test Case Fail
+    [Tags]  Verify_AccountLockout_Attributes_Set_To_Zero
+
+    ${old_account_service}=  Redfish.Get Properties
+    ...  ${REDFISH_BASE_URI}AccountService
+    Rprint Vars  old_account_service  fmt=terse
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body=[('AccountLockoutDuration', 0)]
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body=[('AccountLockoutThreshold', 0)]
+
+
 *** Keywords ***
+
+Restore AccountLockout Attributes
+    [Documentation]  Restore AccountLockout Attributes.
+
+    Return From Keyword If  &{old_account_service} == &{EMPTY}
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body=[('AccountLockoutDuration', ${old_account_service['AccountLockoutDuration']})]
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body=[('AccountLockoutDuration', ${old_account_service['AccountLockoutThreshold']})]
+
+
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
-    Rvalid Value  LDAP_TYPE
+    Rvalid Value  LDAP_TYPE  valid_values=["ActiveDirectory", "LDAP"]
     Rvalid Value  LDAP_USER
     Rvalid Value  LDAP_USER_PASSWORD
     Rvalid Value  GROUP_PRIVILEGE
@@ -101,6 +130,12 @@ Suite Setup Execution
     Redfish.Login
     # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
     Get LDAP Configuration  ${LDAP_TYPE}
+
+
+Test Teardown Execution
+    [Documentation]  Do the post test teardown.
+    FFDC On Test Case Fail
+    Redfish.Logout
 
 
 Get LDAP Configuration
