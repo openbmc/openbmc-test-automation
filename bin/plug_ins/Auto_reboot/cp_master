@@ -100,7 +100,10 @@ def main():
 
     qprint_pgm_header()
 
-    dprint_plug_vars()
+    print_plug_in_header()
+
+    if pgm_name == "cp_setup" or pgm_name == "cp_cleanup":
+        exit_not_master()
 
     init_robot_out_parms(get_plug_in_package_name() + "." + pgm_name + ".")
 
