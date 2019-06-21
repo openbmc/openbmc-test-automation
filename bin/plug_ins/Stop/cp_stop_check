@@ -181,7 +181,7 @@ def main():
     if not debug:
         qprint_vars(STOP_REST_FAIL, STOP_COMMAND, AUTOBOOT_BOOT_SUCCESS)
 
-    dprint_plug_vars()
+    print_plug_in_header()
 
     rest_fail()
 
