@@ -359,6 +359,16 @@ Robot Coding Guidelines
             ${HTTP_NOT_FOUND}         /xyz/i/dont/exist/
         ```
 
+        Note: Normally, a template test case would have rows of data arguments as in the example above.
+              However, contributors frequently define multiple template test cases that each have only
+              one row of data which defeats the value of using templates in the first place. However, it
+              is done for these reasons:
+              1) Template tests are counted as a single test.  You may wish to have separate results for
+                 each call to the template function.
+              2) If any call to the template function fails, one would like FFDC data collected immediately
+                 and would like one set of FFDC data for EACH such failure.
+
+
 Python Coding Guidelines
 -----------------------
 -   The minimum required Python version is 2.7.x.
