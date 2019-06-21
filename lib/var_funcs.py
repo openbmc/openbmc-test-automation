@@ -824,7 +824,7 @@ def match_struct(structure, match_dict, regex=False):
     return True
 
 
-def filter_struct(structure, filter_dict, regex=False):
+def filter_struct(structure, filter_dict, regex=False, invert=False):
     r"""
     Filter the structure by removing any entries that do NOT contain the
     keys/values specified in filter_dict and return the result.
@@ -888,6 +888,10 @@ def filter_struct(structure, filter_dict, regex=False):
     regex                           Indicates whether the values in the
                                     filter_dict should be interpreted as
                                     regular expressions.
+    invert                          Invert the results.  Instead of including
+                                    only matching entries in the results,
+                                    include only NON-matching entries in the
+                                    results.
     """
 
     # Convert filter_dict from a string containing a python object definition
@@ -900,7 +904,7 @@ def filter_struct(structure, filter_dict, regex=False):
     if type(structure) is list:
         result = []
         for element in structure:
-            if match_struct(element, filter_dict, regex):
+            if match_struct(element, filter_dict, regex) != invert:
                 result.append(element)
     else:
         try:
@@ -908,7 +912,7 @@ def filter_struct(structure, filter_dict, regex=False):
         except AttributeError:
             result = DotDict()
         for struct_key, struct_value in structure.items():
-            if match_struct(struct_value, filter_dict, regex):
+            if match_struct(struct_value, filter_dict, regex) != invert:
                 result[struct_key] = struct_value
 
     return result
