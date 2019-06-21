@@ -64,6 +64,16 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
     Redfish.Logout
 
 
+Verify AccountLockout Attributes Set To Zero
+    [Documentation]  Verify attribute AccountLockoutDuration and
+    ...   AccountLockoutThreshold are set to 0.
+    [Tags]  Verify_AccountLockout_Attributes_Set_To_Zero
+    [Template]  Check AccountLockout Attribute
+
+    AccountLockoutDuration
+    AccountLockoutThreshold
+
+
 *** Keywords ***
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
@@ -111,4 +121,17 @@ Update LDAP Configuration with LDAP User Role And Group
     ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+
+
+Check AccountLockout Attribute
+    [Documentation]  Check AccountLockout Attributes.
+    [Arguments]  ${attribute_to_check}
+    # Description of argument(s):
+    # attribute_to_check AccountService account lockout attribute
+    #                    (e.g. "AccountLockoutDuration").
+
+    ${resp}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}AccountService
+    ...  ${attribute_to_check}
+    Should Be Equal  ${resp}  ${0}  msg=${attribute_to_check} is not zero.
+
 
