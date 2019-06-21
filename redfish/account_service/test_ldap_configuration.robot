@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    Test Redfish LDAP user configuration.
 
+Library          ../../lib/gen_robot_valid.py
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
@@ -64,6 +65,16 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
     Redfish.Logout
 
 
+ Verify AccountLockout Attributes Set To Zero
+    [Documentation]  Verify attribute AccountLockoutDuration and
+    ...   AccountLockoutThreshold are set to 0.
+    [Tags]  Verify_AccountLockout_Attributes_Set_To_Zero
+    ${account_service}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    Rprint Vars  account_service  fmt=terse
+    Rvalid Value  account_service['AccountLockoutDuration']  valid_values=[0]
+    Rvalid Value  account_service['AccountLockoutThreshold']  valid_values=[0]
+
+
 *** Keywords ***
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
@@ -111,4 +122,5 @@ Update LDAP Configuration with LDAP User Role And Group
     ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+
 
