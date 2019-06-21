@@ -359,6 +359,10 @@ Robot Coding Guidelines
             ${HTTP_NOT_FOUND}         /xyz/i/dont/exist/
         ```
 
+        Note: Exempted on use case where:
+              1) Test is required to individually report of results
+              2) Requires collection of FFDC for any given template test failure rather then collectively
+
 Python Coding Guidelines
 -----------------------
 -   The minimum required Python version is 2.7.x.
