@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    Test Redfish LDAP user configuration.
 
+Library          ../../lib/gen_robot_valid.py
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
@@ -10,6 +11,9 @@ Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
 Force Tags       LDAP_Test
+
+*** Variables ***
+&{old_account_service}  &{EMPTY}
 
 ** Test Cases **
 
@@ -64,26 +68,51 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
     Redfish.Logout
 
 
+Verify AccountLockout Attributes Set To Zero
+    [Documentation]  Verify attribute AccountLockoutDuration and
+    ...   AccountLockoutThreshold are set to 0.
+    [Teardown]  Restore AccountLockout Attributes
+    [Tags]  Verify_AccountLockout_Attributes_Set_To_Zero
+
+    ${old_account_service}=  Redfish.Get Properties
+    ...  ${REDFISH_BASE_URI}AccountService
+    Rprint Vars  old_account_service  fmt=terse
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body=[('AccountLockoutDuration', 0)]
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body=[('AccountLockoutThreshold', 0)]
+
+
 *** Keywords ***
+
+Restore AccountLockout Attributes
+    [Documentation]  Restore AccountLockout Attributes.
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body=[('AccountLockoutDuration', ${old_account_service['AccountLockoutDuration']})]
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body=[('AccountLockoutDuration', ${old_account_service['AccountLockoutThreshold']})]
+
+
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
-    Should Not Be Empty  ${LDAP_TYPE}
-    redfish.Login
+    Rvalid Value  LDAP_TYPE  valid_values=["ActiveDirectory", "LDAP"]
+    Redfish.Login
     Get LDAP Configuration  ${LDAP_TYPE}
-    redfish.Logout
+    Redfish.Logout
 
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    redfish.Login
+    Redfish.Login
 
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
     FFDC On Test Case Fail
-    redfish.Logout
+    Redfish.Logout
 
 
 Get LDAP Configuration
@@ -111,4 +140,5 @@ Update LDAP Configuration with LDAP User Role And Group
     ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+
 
