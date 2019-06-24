@@ -57,6 +57,14 @@ function get_target_program_path {
   base_program_path=$(readlink -f "${0}")
   base_program_name=${base_program_path##*/}
 
+  if [ "${program_name}" == "${base_program_name}" ] ; then
+    {
+      echo -n "**ERROR** ${base_program_name} should never be called directly."
+      echo "  Only links to ${base_program_name} should be called."
+    } >&2
+    exit 1
+  fi
+
   # Compose the version_var_name value (e.g. PYTHON_VERSION).
   version_var_name=${program_uppercase_name}_VERSION
   # Compose the alternate_program_name (e.g. python3).
