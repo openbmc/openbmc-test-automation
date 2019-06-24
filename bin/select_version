@@ -27,7 +27,6 @@
 program_name="${0##*/}"
 program_uppercase_name=${program_name^^}
 
-
 function get_target_program_path {
   local target_program_path_var="${1:-target_program_path}" ; shift
 
@@ -56,6 +55,14 @@ function get_target_program_path {
   # name of the link to it).
   base_program_path=$(readlink -f "${0}")
   base_program_name=${base_program_path##*/}
+
+  if [ "${program_name}" == "${base_program_name}" ] ; then
+    {
+      echo -n "**ERROR** ${base_program_name} should never be called directly."
+      echo "  Only links to ${base_program_name} should be called."
+    } >&2
+    exit 1
+  fi
 
   # Compose the version_var_name value (e.g. PYTHON_VERSION).
   version_var_name=${program_uppercase_name}_VERSION
