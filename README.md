@@ -232,12 +232,12 @@ version 2.3.1 or greater is required) or via Robot CLI command.
 
     By default, GUI runs with Firefox browser and headless mode. Example with chrome browser and header mode:
     ```
-    $ robot -v OPENBMC_HOST:x.x.x.x -v GUI_BROWSER:gc -v GUI_MODE:header gui/obmc_gui/test/
+    $ robot -v OPENBMC_HOST:x.x.x.x -v GUI_BROWSER:gc -v GUI_MODE:header gui/test/
     ```
 
     Run GUI default CI test bucket:
     ```
-    $ robot -v OPENBMC_HOST:x.x.x.x --argumentfile test_lists/BMC_WEB_CI gui/obmc_gui/test/
+    $ robot -v OPENBMC_HOST:x.x.x.x --argumentfile test_lists/BMC_WEB_CI gui/test/
     ```
 
 * Run LDAP tests:
