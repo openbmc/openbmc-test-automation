@@ -993,9 +993,10 @@ proc sprint_arg_desc { arg_title arg_desc { indent 0 } { col1_width 25 }\
 # Notes:
 # - The resulting procedures will replace all registered passwords.
 # - The resulting "quiet" and "debug" print procedures will search the stack
-# for quiet and debug, respectively.  That means that the if a procedure calls
-# qprint_var and the procedure has a local version of quiet set to 1, the
-# print will not occur, even if there is a global version of quiet set to 0.
+#   for quiet and debug, respectively.  That means that the if a procedure
+#   calls qprint_var and the procedure has a local version of quiet set to 1,
+#   the print will not occur, even if there is a global version of quiet set
+#   to 0.
 set print_proc_template "  puts -nonewline<output_stream> \[replace_passwords"
 append print_proc_template " \[<base_proc_name> {*}\$args\]\]\n}\n"
 set qprint_proc_template "  set quiet \[get_stack_var quiet 0\]\n  if {"
@@ -1017,11 +1018,11 @@ proc create_print_wrapper_procs {proc_names {stderr_proc_names {}} } {
   # This proc will...
   # - Expect that there is an sprint_foo_bar proc already in existence.
   # - Create a print_foo_bar proc which calls sprint_foo_bar and prints the
-  # result.
+  #   result.
   # - Create a qprint_foo_bar proc which calls upon sprint_foo_bar only if
-  # global value quiet is 0.
+  #   global value quiet is 0.
   # - Create a dprint_foo_bar proc which calls upon sprint_foo_bar only if
-  # global value debug is 1.
+  #   global value debug is 1.
 
   # Also, code will be generated to define aliases for each proc as well.
   # Each alias will be created by replacing "print_" in the proc name with "p"
