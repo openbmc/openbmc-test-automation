@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation    Test BMC SSH security.
 
-Resource         ../../lib/resource.robot
-Resource         ../../lib/openbmc_ffdc_methods.robot
+Resource         ../lib/resource.robot
+Resource         ../lib/openbmc_ffdc_methods.robot
 
 *** Variables ***
 
@@ -49,6 +49,7 @@ Verify BMC SSH Weak Cipher And Algorithm
     # - KEX: diffie-hellman-group1(any) , (any) SHA1
 
     Printn
-    ${ssh_cmd_buf}=  Catenate  ssh -o NumberOfPasswordPrompts=0 -vv ${OPENBMC_HOST} 2>&1
+    ${ssh_cmd_buf}=  Catenate  ssh -o NumberOfPasswordPrompts=0 UserKnownHostsFile=/dev/null
+    ...  StrictHostKeyChecking=no -vv ${OPENBMC_HOST} 2>&1
     Shell Cmd  ! ${ssh_cmd_buf} | egrep -- "${weak_key_regex}"
     Shell Cmd  ! ${ssh_cmd_buf} | egrep -- "${mac_key_regex}"
