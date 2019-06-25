@@ -5,6 +5,7 @@ Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 
 Test Teardown    FFDC On Test Case Fail
+Suite Teardown   Redfish Power Off
 
 *** Variables ***
 
