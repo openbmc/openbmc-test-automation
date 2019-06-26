@@ -4,12 +4,16 @@ Documentation    Test Redfish LDAP user configuration.
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Library          ../../lib/gen_robot_valid.py
 
 Suite Setup      Suite Setup Execution
-Test Setup       Test Setup Execution
+Test Setup       Redfish.Login
 Test Teardown    Test Teardown Execution
 
 Force Tags       LDAP_Test
+
+*** Variables ***
+${old_ldap_privilege}  ${EMPTY}
 
 ** Test Cases **
 
@@ -60,30 +64,129 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # With LDAP user and with right privilege trying to do BMC reboot.
     Redfish OBMC Reboot (off)
+    Sleep  10s
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
 
 
+Verify LDAP User With Operator Privilege Able To Do Host Poweron
+    [Documentation]  Verify LDAP user with operator privilege able to do host up.
+    [Tags]  Verify_LDAP_User_With_Operator_Privilege_Able_To_Do_Host_Poweron
+    [Teardown]  Restore LDAP Privilege
+
+    ${old_ldap_privilege}=  Get LDAP Privilege
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Operator  ${GROUP_NAME}
+    # Provide adequate time for LDAP daemon to restart after the update.
+    Sleep  10s
+
+    ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    ${new_ldap_privilege}=  Set Variable
+    ...  ${ldap_config["LDAP"]["RemoteRoleMapping"][0]["LocalRole"]}
+    Should Be Equal  ${new_ldap_privilege}  Operator
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    # Verify that the LDAP user with operator privilege is able to power the system on.
+    Redfish Power On
+    Redfish.Logout
+
+
+Verify LDAP User With Read Privilege Able To Check Inventory
+    [Documentation]  Verify LDAP user with read privilege able to
+    ...  read firmware inventory.
+    [Tags]  Verify_LDAP_User_With_Read_Privilege_Able_To_Check_Inventory
+    [Teardown]  Restore LDAP Privilege
+    [Template]  Set Read Privilege And Check Firmware Inventory
+
+    User
+    Callback
+
+
+Verify LDAP User With Read Privilege Should Not Do Host Poweron
+    [Documentation]  Verify LDAP user with read privilege should not be
+    ...  allowed to power on the host.
+    [Tags]  Verify_LDAP_User_With_Read_Privilege_Should_Not_Do_Host_Poweron
+    [Teardown]  Restore LDAP Privilege
+    [Template]  Set Read Privilege And Check Poweron
+
+    User
+    Callback
+
+
 *** Keywords ***
-Suite Setup Execution
-    [Documentation]  Do suite setup tasks.
-
-    Should Not Be Empty  ${LDAP_TYPE}
-    redfish.Login
-    Get LDAP Configuration  ${LDAP_TYPE}
-    redfish.Logout
-
-
-Test Setup Execution
-    [Documentation]  Do test case setup tasks.
-
-    redfish.Login
-
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
+
     FFDC On Test Case Fail
-    redfish.Logout
+    Redfish.Logout
+
+
+Set Read Privilege And Check Firmware Inventory
+    [Documentation]  Set read privilege and check firmware inventory.
+    [Arguments]  ${read_privilege}
+    # Description of argument(s):
+    # read_privilege  The read privilege role (e.g. "User" / "Callback").
+
+    Redfish.Login
+    ${old_ldap_privilege}=  Get LDAP Privilege
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${read_privilege}  ${GROUP_NAME}
+
+    ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    ${new_ldap_privilege}=  Set Variable
+    ...  ${ldap_config["LDAP"]["RemoteRoleMapping"][0]["LocalRole"]}
+    # Rvalid is not working.
+    # Rvalid Value  new_ldap_privilege  read_privilege
+    # Rvalid is not working, Hence going back to Robot.
+    Should Be Equal  ${new_ldap_privilege}  ${read_privilege}
+    Redfish.Logout
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    # Verify that the LDAP user with read privilege is able to read inventory.
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
+    Should Be True  ${resp.dict["Members@odata.count"]} >= ${1}
+    Length Should Be  ${resp.dict["Members"]}  ${resp.dict["Members@odata.count"]}
+    Redfish.Logout
+    Redfish.Login
+    FFDC On Test Case Fail
+    Redfish.Logout
+
+
+Set Read Privilege And Check Poweron
+    [Documentation]  Set read privilege and power on should not be possible.
+    [Arguments]  ${read_privilege}
+    # Description of argument(s):
+    # read_privilege  The read privilege role (e.g. "User" / "Callback").
+
+    Redfish.Login
+    ${old_ldap_privilege}=  Get LDAP Privilege
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${read_privilege}  ${GROUP_NAME}
+    ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    ${new_ldap_privilege}=  Set Variable
+    ...  ${ldap_config["LDAP"]["RemoteRoleMapping"][0]["LocalRole"]}
+    # Rvalid Value  new_ldap_privilege  read_privilege
+    # Rvalid is not working, Hence going back to Robot.
+    Should Be Equal  ${new_ldap_privilege}  ${read_privilege}
+    Redfish.Logout
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Post  ${REDFISH_POWER_URI}
+    ...  body={'ResetType': 'On'}   valid_status_codes=[401]
+    Redfish.Logout
+    Redfish.Login
+    FFDC On Test Case Fail
+    Redfish.Logout
+
+
+Suite Setup Execution
+    [Documentation]  Do suite setup tasks.
+
+    Rvalid Value  LDAP_TYPE
+    Rvalid Value  LDAP_USER
+    Rvalid Value  LDAP_USER_PASSWORD
+    Rvalid Value  GROUP_PRIVILEGE
+    Rvalid Value  GROUP_NAME
+    Redfish.Login
+    Get LDAP Configuration  ${LDAP_TYPE}
 
 
 Get LDAP Configuration
@@ -111,4 +214,22 @@ Update LDAP Configuration with LDAP User Role And Group
     ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+    # Provide adequate time for LDAP daemon to restart after the update.
+    Sleep  10s
 
+
+Get LDAP Privilege
+    [Documentation]  Get LDAP privilege and return it.
+
+    ${ldap_config}=  Get LDAP Configuration  ${LDAP_TYPE}
+    [Return]  ${ldap_config["RemoteRoleMapping"][0]["LocalRole"]}
+
+
+Restore LDAP Privilege
+    [Documentation]  Restore the LDAP privilege to its original value.
+
+    # Login back to update the original privilege.
+    Redfish.Login
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${old_ldap_privilege}  ${GROUP_NAME}
+    Redfish.Logout
