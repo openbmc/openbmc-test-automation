@@ -93,7 +93,7 @@ Verify Redfish User Persistence After Reboot
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}callback_user
 
 Verify User Creation With Invalid Role Id
-    [Documentation]  Verify user creation with invalid role id.
+    [Documentation]  Verify user creation with invalid role ID.
     [Tags]  Verify_User_Creation_With_Invalid_Role_Id
 
     # Make sure the user account in question does not already exist.
@@ -186,6 +186,57 @@ Verify User Account Locked
 
     Redfish.Logout
 
+Verify Admin User Privilege
+    [Documentation]  Verify admin user privilege.
+    [Tags]  Verify_Admin_User_Privilege
+
+    Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
+    Redfish Create User  operator_user  TestPwd123  Operator  ${True}
+    Redfish Create User  user_user  TestPwd123  User  ${True}
+
+    # Change role ID of operator user with admin user.
+    # Login with admin user.
+    Redfish.Login  admin_user  TestPwd123
+
+    # Modify Role ID of Operator user.
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}operator_user  body={'RoleId': 'Administrator'}
+
+    # Verify modified user.
+    Redfish Verify User  operator_user  TestPwd123  Administrator  ${True}
+
+    # Change password of 'user' user with admin user.
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}user_user  body={'Password': 'NewTestPwd123'}
+
+    # Verify modified user.
+    Redfish Verify User  user_user  NewTestPwd123  User  ${True}
+
+Verify Operator User Privilege
+    [Documentation]  Verify operator user privilege.
+    [Tags]  Verify_operator_User_Privilege
+
+    Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
+    Redfish Create User  operator_user  TestPwd123  Operator  ${True}
+
+    # Login with operator user.
+    Redfish.Login  operator_user  TestPwd123
+
+    # Verify power on system.
+    Redfish OBMC Reboot (off)  stack_mode=normal
+
+    # Attempt to change password of admin user with operator user.
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}admin_user  body={'Password': 'NewTestPwd123'}
+    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+Verify 'User' User Privilege
+    [Documentation]  Verify 'user' user privilege.
+    [Tags]  Verify_User_User_Privilege
+
+    Redfish Create User  user_user  TestPwd123  User  ${True}
+
+    # Read system level data.
+    ${system_model}=  Redfish_Utils.Get Attribute
+    ...  ${SYSTEM_BASE_URI}  Model
+
 
 *** Keywords ***
 
@@ -208,7 +259,7 @@ Redfish Create User
     # Description of argument(s):
     # username            The username to be created.
     # password            The password to be assigned.
-    # role_id             The role id of the user to be created
+    # role_id             The role ID of the user to be created
     #                     (e.g. "Administrator", "Operator", etc.).
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
@@ -237,7 +288,7 @@ Redfish Create User
     Run Keyword If  ${enabled} == False
     ...  Redfish.Login
 
-    # Validate Role Id of created user.
+    # Validate Role ID of created user.
     ${role_config}=  Redfish_Utils.Get Attribute
     ...  ${REDFISH_ACCOUNTS_URI}${username}  RoleId
     Should Be Equal  ${role_id}  ${role_config}
@@ -250,7 +301,7 @@ Redfish Verify User
     # Description of argument(s):
     # username            The username to be created.
     # password            The password to be assigned.
-    # role_id             The role id of the user to be created
+    # role_id             The role ID of the user to be created
     #                     (e.g. "Administrator", "Operator", etc.).
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
@@ -277,7 +328,7 @@ Redfish Create And Verify User
     # Description of argument(s):
     # username            The username to be created.
     # password            The password to be assigned.
-    # role_id             The role id of the user to be created
+    # role_id             The role ID of the user to be created
     #                     (e.g. "Administrator", "Operator", etc.).
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
@@ -310,7 +361,7 @@ Verify Redfish User with Wrong Password
     # Description of argument(s):
     # username            The username to be created.
     # password            The password to be assigned.
-    # role_id             The role id of the user to be created
+    # role_id             The role ID of the user to be created
     #                     (e.g. "Administrator", "Operator", etc.).
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
@@ -335,7 +386,7 @@ Verify Login with Deleted Redfish User
     # Description of argument(s):
     # username            The username to be created.
     # password            The password to be assigned.
-    # role_id             The role id of the user to be created
+    # role_id             The role ID of the user to be created
     #                     (e.g. "Administrator", "Operator", etc.).
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
@@ -364,7 +415,7 @@ Verify Create User Without Enabling
     # Description of argument(s):
     # username            The username to be created.
     # password            The password to be assigned.
-    # role_id             The role id of the user to be created
+    # role_id             The role ID of the user to be created
     #                     (e.g. "Administrator", "Operator", etc.).
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
