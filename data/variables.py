@@ -166,7 +166,8 @@ POWER_GRACEFUL_OFF = "GracefulShutdown"
 POWER_GRACEFUL_RESTART = "GracefulRestart"
 POWER_FORCE_OFF = 'ForceOff'
 
-REDFISH_POWER_URI = 'Systems/1/Actions/ComputerSystem.Reset'
+REDFISH_POWER = 'Systems/system/Actions/ComputerSystem.Reset'
+REDFISH_POWER_URI = REDFISH_BASE_URI + REDFISH_POWER
 
 # rsyslog variables.
 REMOTE_LOGGING_URI = OPENBMC_BASE_URI + 'logging/config/remote/'
