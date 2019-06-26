@@ -158,6 +158,59 @@ Verify Modifying User Attributes
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}callback_user
 
+Verify Admin User Privilege
+    [Documentation]  Verify admin user privilege.
+    [Tags]  Verify_Admin_User_Privilege
+
+    Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
+    Redfish Create User  operator_user  TestPwd123  Operator        ${True}
+    Redfish Create User  user_user      TestPwd123  User            ${True}
+
+    # Change role id of operator user with admin user.
+    # Login with admin user.
+    Redfish.Login  admin_user  TestPwd123
+
+    # Modify Role id of Operator user.
+    ${payload}=  Create Dictionary  RoleId=Administrator
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}operator_user  body=&{payload}
+
+    # Verify modified user.
+    Redfish Verify User  operator_user  TestPwd123  Administrator  ${True}
+
+    # Change password of user user with admin user.
+    ${payload}=  Create Dictionary  Password=NewTestPwd123
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}user_user  body=&{payload}
+
+    # Verify modified user.
+    Redfish Verify User  user_user  NewTestPwd123  User  ${True}
+
+Verify Operator User Privilege
+    [Documentation]  Verify operator user privilege.
+    [Tags]  Verify_operator_User_Privilege
+
+    Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
+    Redfish Create User  operator_user  TestPwd123  Operator        ${True}
+
+    # Login with operator user.
+    Redfish.Login  operator_user  TestPwd123
+
+    # Verify power on system.
+    Redfish OBMC Reboot (off)  stack_mode=normal
+
+    # Change password of admin user with operator user.
+    ${payload}=  Create Dictionary  Password=NewTestPwd123
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}admin_user  body=&{payload}
+    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+Verify User User Privilege
+    [Documentation]  Verify user user privilege.
+    [Tags]  Verify_User_User_Privilege
+
+    Redfish Create User  user_user  TestPwd123  User  ${True}
+
+    # Read system level data.
+    ${system_model}=  Redfish_Utils.Get Attribute
+    ...  ${SYSTEM_BASE_URI}  Model
 
 
 *** Keywords ***
@@ -171,7 +224,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    #FFDC On Test Case Fail
+    FFDC On Test Case Fail
     Redfish.Logout
 
 Redfish Create User
