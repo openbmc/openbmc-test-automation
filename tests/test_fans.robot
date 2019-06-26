@@ -40,5 +40,6 @@ Fan Base Check Number Of Fan Monitors
 *** Keywords ***
 
 Suite Setup Execution
+    [Documentation]  Get and set fan count and names.
     ${number_of_fans}  ${fan_names}=  Get Fan Count And Names
     Set Suite Variable  ${number_of_fans}  children=true
