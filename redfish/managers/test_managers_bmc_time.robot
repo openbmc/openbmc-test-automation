@@ -169,5 +169,3 @@ Suite Setup Execution
 
     Printn
     Redfish.Login
-
-

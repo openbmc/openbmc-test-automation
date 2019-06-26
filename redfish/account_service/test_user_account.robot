@@ -169,8 +169,10 @@ Verify User Account Locked
 
     Redfish Create User  admin_user  TestPwd123  Administrator   ${True}
 
+    ${patch_body}=  Catenate  {'AccountLockoutThreshold': ${account_lockout_threshold}
+    ...  , 'AccountLockoutDuration': ${account_lockout_duration}}
     Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}
-    ...  body={'AccountLockoutThreshold': ${account_lockout_threshold}, 'AccountLockoutDuration': ${account_lockout_duration}}
+    ...  body=${patch_body}
 
     # Make ${account_lockout_threshold} failed login attempts.
     Repeat Keyword  ${account_lockout_threshold} times

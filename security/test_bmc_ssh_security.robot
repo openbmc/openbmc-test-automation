@@ -36,11 +36,11 @@ Verify BMC SSH Weak Cipher And Algorithm
     # debug2: ciphers stoc: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,
     #         aes128-gcm@openssh.com,aes256-gcm@openssh.com
     # debug2: MACs ctos: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,
-    #         hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,
-    #         hmac-sha2-256,hmac-sha2-512,hmac-sha1
+    #         hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,
+    #         umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
     # debug2: MACs stoc: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,
-    #         hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,
-    #         hmac-sha2-256,hmac-sha2-512,hmac-sha1
+    #         hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,
+    #         umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
 
     # Example of weak algorithms to check:
     # - encryption: triple-DES ("DES-CBC3").

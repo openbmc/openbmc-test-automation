@@ -4,3 +4,4 @@
 --ignore FileTooLong
 --ignore TooManyTestSteps
 --ignore TooManyTestCases
+--ignore InvalidTable
