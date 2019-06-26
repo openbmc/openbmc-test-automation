@@ -123,3 +123,23 @@ Delete SNMP Manager And Object
     ${status}=  Run Keyword And Return Status  Verify SNMP Manager
     ...  ${snmp_ip}  ${port}
     Should Be Equal  ${status}  ${False}  msg=SNMP manager is not deleted.
+
+
+Start SNMP Manager Listener
+    [Documentation]  Start snmp listener on the remote SNMP server.
+
+    Open Connection And Log In  ${SNMP_MGR1_USR}  ${SNMP_MGR1_PSWD}
+    ...  alias=snmp_server  host=${SNMP_MGR1_IP}
+    SSHLibrary.write  ${SNMP_TRAPD_CMD} &
+
+
+Suite Setup Execution
+    [Documentation]  Do the suite setup.
+    Should Not Be Empty  ${SNMP_MGR1_USR}
+    Should Not Be Empty  ${SNMP_MGR1_PSWD}
+    Should Not Be Empty  ${SNMP_MGR1_IP}
+
+
+Test Teardown Execution
+    [Documentation]  Do the test teardown.
+    FFDC On Test Case Fail

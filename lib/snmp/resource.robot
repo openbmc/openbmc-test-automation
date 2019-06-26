@@ -21,3 +21,12 @@ ${out_of_range_port}  ${65536}
 ${alpha_port}         ab
 ${negative_port}      ${-12}
 ${empty_port}         ${EMPTY}
+
+#User Name Password
+${SNMP_MGR1_USR}      ${EMPTY} 
+${SNMP_MGR1_PSWD}     ${EMPTY}
+
+#SNMP Command
+${SNMP_TRAPD_CMD}       sudo /usr/local/sbin/snmptrapd -f -c
+...                     /usr/local/etc/snmp/snmptrapd.conf -Lo
+${SNMP_TRAP_BMC_ERROR}  example.xyz.openbmc_project.Example.Elog.AutoTestSimple
