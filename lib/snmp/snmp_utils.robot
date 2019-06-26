@@ -123,3 +123,11 @@ Delete SNMP Manager And Object
     ${status}=  Run Keyword And Return Status  Verify SNMP Manager
     ...  ${snmp_ip}  ${port}
     Should Be Equal  ${status}  ${False}  msg=SNMP manager is not deleted.
+
+
+Start SNMP Manager
+    [Documentation]  Start SNMP listener on the remote SNMP server.
+
+    Open Connection And Log In  ${SNMP_MGR1_USERNAME}  ${SNMP_MGR1_PASSWORD}
+    ...  alias=snmp_server  host=${SNMP_MGR1_IP}
+    SSHLibrary.write  ${SNMP_TRAPD_CMD} &
