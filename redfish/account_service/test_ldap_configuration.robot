@@ -8,7 +8,8 @@ Resource         ../../lib/openbmc_ffdc.robot
 Library          ../../lib/gen_robot_valid.py
 
 Suite Setup      Suite Setup Execution
-Suite Teardown   Redfish.Logout
+Suite Teardown   Run Keywords  Restore LDAP Privilege  And
+...  Redfish.Logout
 Test Teardown    FFDC On Test Case Fail
 
 Force Tags       LDAP_Test
@@ -71,7 +72,7 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
 
 
 Verify LDAP User With Operator Privilege Able To Do Host Poweron
-    [Documentation]  Verify LDAP user with operator privilege able to do host up.
+    [Documentation]  Verify LDAP user with operator privilege can do host power on.
     [Tags]  Verify_LDAP_User_With_Operator_Privilege_Able_To_Do_Host_Poweron
     [Teardown]  Restore LDAP Privilege
 
@@ -107,6 +108,28 @@ Verify AccountLockout Attributes Set To Zero
     ...  body=[('AccountLockoutThreshold', 0)]
 
 
+Verify LDAP User With Read Privilege Able To Check Inventory
+    [Documentation]  Verify LDAP user with read privilege able to
+    ...  read firmware inventory.
+    [Tags]  Verify_LDAP_User_With_Read_Privilege_Able_To_Check_Inventory
+    [Teardown]  Restore LDAP Privilege
+    [Template]  Set Read Privilege And Check Firmware Inventory
+
+    User
+    Callback
+
+
+Verify LDAP User With Read Privilege Should Not Do Host Poweron
+    [Documentation]  Verify LDAP user with read privilege should not be
+    ...  allowed to power on the host.
+    [Tags]  Verify_LDAP_User_With_Read_Privilege_Should_Not_Do_Host_Poweron
+    [Teardown]  Run Keywords  FFDC On Test Case Fail And  Restore LDAP Privilege
+    [Template]  Set Read Privilege And Check Poweron
+
+    User
+    Callback
+
+
 *** Keywords ***
 
 Restore AccountLockout Attributes
@@ -130,10 +153,56 @@ Suite Setup Execution
     Redfish.Login
     # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
     Get LDAP Configuration  ${LDAP_TYPE}
+    ${old_ldap_privilege}=  Get LDAP Privilege
 
 
-Test Teardown Execution
-    [Documentation]  Do the post test teardown.
+Set Read Privilege And Check Firmware Inventory
+    [Documentation]  Set read privilege and check firmware inventory.
+    [Arguments]  ${read_privilege}
+    # Description of argument(s):
+    # read_privilege  The read privilege role (e.g. "User" / "Callback").
+
+    Redfish.Login
+    ${old_ldap_privilege}=  Get LDAP Privilege
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${read_privilege}  ${GROUP_NAME}
+
+    ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    ${new_ldap_privilege}=  Set Variable
+    ...  ${ldap_config[${LDAP_TYPE}]["RemoteRoleMapping"][0]["LocalRole"]}
+    Rvalid Value  new_ldap_privilege  valid_values=['${read_privilege}']
+    Redfish.Logout
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    # Verify that the LDAP user with read privilege is able to read inventory.
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
+    Should Be True  ${resp.dict["Members@odata.count"]} >= ${1}
+    Length Should Be  ${resp.dict["Members"]}  ${resp.dict["Members@odata.count"]}
+    Redfish.Logout
+    Redfish.Login
+    FFDC On Test Case Fail
+    Redfish.Logout
+
+
+Set Read Privilege And Check Poweron
+    [Documentation]  Set read privilege and power on should not be possible.
+    [Arguments]  ${read_privilege}
+    # Description of argument(s):
+    # read_privilege  The read privilege role (e.g. "User" / "Callback").
+
+    Redfish.Login
+    ${old_ldap_privilege}=  Get LDAP Privilege
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${read_privilege}  ${GROUP_NAME}
+    ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    ${new_ldap_privilege}=  Set Variable
+    ...  ${ldap_config["${LDAP_TYPE}"]["RemoteRoleMapping"][0]["LocalRole"]}
+    Rvalid Value  new_ldap_privilege  valid_values=['${read_privilege}']
+    Redfish.Logout
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Post  ${REDFISH_POWER_URI}
+    ...  body={'ResetType': 'On'}   valid_status_codes=[401]
+    Redfish.Logout
+    Redfish.Login
     FFDC On Test Case Fail
     Redfish.Logout
 
@@ -163,6 +232,8 @@ Update LDAP Configuration with LDAP User Role And Group
     ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+    # Provide adequate time for LDAP daemon to restart after the update.
+    Sleep  10s
 
 
 Get LDAP Privilege
@@ -179,5 +250,3 @@ Restore LDAP Privilege
     Redfish.Login
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${old_ldap_privilege}  ${GROUP_NAME}
-    FFDC On Test Case Fail
-    Redfish.Logout
