@@ -4,9 +4,11 @@ Documentation       Getting the systems thermal records for temperature.
 Resource            ../../lib/bmc_redfish_resource.robot
 Resource            ../../lib/bmc_redfish_utils.robot
 Resource            ../../lib/openbmc_ffdc.robot
+Library             ../../lib/gen_robot_valid.py
 
 Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
+Test Setup          Printn
 Test Teardown       Test Teardown Execution
 
 
@@ -32,21 +34,27 @@ Get Thermal Records and Verify
     # reading_type   The thermal temperature readings (e.g. "ReadingCelsius")
 
     # A valid record will have "State" key "Enabled" and "Health" key "OK"
-
     ${records}=  Redfish.Get Attribute
     ...  ${REDFISH_CHASSIS_THERMAL_URI}  ${record_type}
 
     ${num_records}=  Get Length  ${records}
+    Rprint Vars  num_records  records  fmt=terse
 
-    ${valid_records}=  Filter Struct  ${records}
-    ...  [('Health', '^OK$'), ('State', '^Enabled$'), ('${reading_type}', '')]  regex=1
+    ${invalid_records}=  Filter Struct  ${records}
+    ...  [('Health', '^OK$'), ('State', '^Enabled$'), ('${reading_type}', '')]  regex=1  invert=1
+    ${num_invalid_records}=  Get Length  ${invalid_records}
 
-    ${num_valid_records}=  Get Length  ${valid_records}
+    Run Keyword If  ${num_invalid_records} > ${0}
+    ...  Rprint Vars  num_invalid_records  invalid_records  fmt=terse
+    Rvalid Value  num_invalid_records  valid_values=[0]
 
-    Rprint Vars  num_records  records  valid_records
-    ...  num_valid_records  fmt=terse
+    ${invalid_records}=  Evaluate
+    ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['ReadingCelsius'] <= x['UpperThresholdNonCritical']]
 
-    Should Be Equal As Integers  ${num_records}  ${num_valid_records}
+    ${num_invalid_records}=  Get Length  ${invalid_records}
+    Run Keyword If  ${num_invalid_records} > ${0}
+    ...  Rprint Vars  num_invalid_records  invalid_records  fmt=terse
+    Rvalid Value   num_invalid_records  valid_values=[0]
 
 Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
@@ -56,6 +64,7 @@ Suite Teardown Execution
 Suite Setup Execution
     [Documentation]  Do test case setup tasks.
 
+    Printn
     Redfish.Login
 
 Test Teardown Execution
