@@ -448,7 +448,7 @@ Get List of Images
     :FOR  ${uri}  IN  @{installed_images}
     \  ${resp}=  OpenBMC Get Request  ${uri}
     \  ${json}=  To JSON  ${resp.content}
-    \  Log  ${json}["data"]
+    \  Log  ${json["data"]}
 
 
 Check Software Object Attribute
