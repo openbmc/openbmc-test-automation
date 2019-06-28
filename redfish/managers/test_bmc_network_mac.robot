@@ -144,13 +144,13 @@ Configure MAC Settings
     ${payload}=  Create Dictionary  MACAddress=${mac_address}
 
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body=&{payload}
-    ...  valid_status_codes=[200, 400]
+    ...  valid_status_codes=[200, 400, 500]
 
     # After any modification on network interface, BMC restarts network
     # module, wait until it is reachable.
 
-    Wait For Host To Ping  ${OPENBMC_HOST}
-    ...  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}
+    Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}
+    ...  redfish.Get  ${REDFISH_NW_ETH0_URI}
 
     # Verify whether new MAC address is populated on BMC system.
     # It should not allow to configure invalid settings.
