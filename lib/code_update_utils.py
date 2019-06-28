@@ -79,9 +79,9 @@ def delete_all_pnor_images():
     for image_name in images:
         BuiltIn().log_to_console(image_name)
         # Delete twice, in case the image is in the /tmp/images directory
-        keyword.run_key("Call Method  " + image_name
+        keyword.run_key("Call Method  " + image_name + '/'
                         + "  delete  data={\"data\":[]}")
-        keyword.run_key("Call Method  " + image_name
+        keyword.run_key("Call Method  " + image_name + '/'
                         + "  delete  data={\"data\":[]}")
 
 
