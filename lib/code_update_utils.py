@@ -79,10 +79,10 @@ def delete_all_pnor_images():
     for image_name in images:
         BuiltIn().log_to_console(image_name)
         # Delete twice, in case the image is in the /tmp/images directory
-        keyword.run_key("Call Method  " + image_name
-                        + "  delete  data={\"data\":[]}")
-        keyword.run_key("Call Method  " + image_name
-                        + "  delete  data={\"data\":[]}")
+        keyword.run_key("Call Method  " + image_name + '/'
+                        + "  Delete  data={\"data\":[]}")
+        keyword.run_key("Call Method  " + image_name + '/'
+                        + "  Delete  data={\"data\":[]}")
 
 
 def wait_for_activation_state_change(version_id, initial_state):
