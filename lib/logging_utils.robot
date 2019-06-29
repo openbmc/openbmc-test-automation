@@ -204,9 +204,16 @@ Get Event Logs
     [Return]  ${members}
 
 
+Count Event Logs
+    [Documentation]  Count the EventLog entries.
+
+    ${members}=  Get Event Logs
+    ${num_event_logs}=  Get Length  ${members}
+    [Return]  ${num_event_logs}
+
+
 Redfish Purge Event Log
     [Documentation]  Do Redfish EventLog purge.
 
     Redfish.Post  ${EVENT_LOG_URI}Actions/LogService.Reset
     ...  valid_status_codes=[${HTTP_NO_CONTENT}]
-
