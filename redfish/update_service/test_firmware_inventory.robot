@@ -104,6 +104,28 @@ Verify BMC Version Matches With FirmwareInventory
     ...  BMC version not there in Firmware Inventory
 
 
+Verify UpdateService Supports TransferProtocol TFTP
+    [Documentation]  Verify update service supported value have TFTP protocol.
+    [Tags]  Verify_UpdateService_Supports_TransferProtocol_TFTP
+
+    # Example:
+    #   "Actions": {
+    #     "#UpdateService.SimpleUpdate": {
+    #       "TransferProtocol@Redfish.AllowableValues": [
+    #         "TFTP"
+    #       ],
+    #       "target": "/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate"
+    #     }
+    #  },
+
+    ${allowable_values}=  Redfish_Utils.Get Attribute  /redfish/v1/UpdateService  Actions
+    Should Be Equal
+    ...  ${allowable_values["#UpdateService.SimpleUpdate"]["TransferProtocol@Redfish.AllowableValues"][0]}  TFTP
+
+    Should Be Equal  ${allowable_values["#UpdateService.SimpleUpdate"]["target"]}
+    ...  /redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate
+
+
 *** Keywords ***
 
 Test Setup Execution
