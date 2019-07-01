@@ -4,6 +4,7 @@ Documentation    Verify that Redfish software inventory can be collected.
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Library          ../../lib/gen_robot_valid.py
 
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
@@ -102,6 +103,26 @@ Verify BMC Version Matches With FirmwareInventory
     \  Exit For Loop If  '${resp_resource.dict["Version"]}' == '${manager_bmc_version.strip('"')}'
     \  Run Keyword If  '${entry}' == '${actual_count}'  Fail
     ...  BMC version not there in Firmware Inventory
+
+
+Verify UpdateService Supports TransferProtocol TFTP
+    [Documentation]  Verify update service supported values have TFTP protocol.
+    [Tags]  Verify_UpdateService_Supports_TransferProtocol_TFTP
+
+    # Example:
+    #   "Actions": {
+    #     "#UpdateService.SimpleUpdate": {
+    #       "TransferProtocol@Redfish.AllowableValues": [
+    #         "TFTP"
+    #       ],
+    #       "target": "/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate"
+    #     }
+    #  },
+
+    ${allowable_values}=  Redfish.Get Attribute  /redfish/v1/UpdateService  Actions
+
+    Rvalid Value  allowable_values["#UpdateService.SimpleUpdate"]["TransferProtocol@Redfish.AllowableValues"][0]  valid_values=['TFTP']
+    Rvalid Value  allowable_values["#UpdateService.SimpleUpdate"]["target"]  valid_values=['/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate']
 
 
 *** Keywords ***
