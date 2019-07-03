@@ -193,9 +193,7 @@ Check IPMI SOL Output Content
     # file_path  The file path on the local machine to check SOL content.
     #            By default it check SOL content from /tmp/sol_<BMC_IP>.
 
-    ${rc}  ${output}=  Run and Return RC and Output  cat ${file_path}
-    Should Be Equal  ${rc}  ${0}  msg=${output}
-
+    ${output}=  OperatingSystem.Get File  ${file_path}  encoding_errors=ignore
     Should Contain  ${output}  ${data}  case_insensitive=True
 
 
