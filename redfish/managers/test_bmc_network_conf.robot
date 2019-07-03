@@ -47,6 +47,7 @@ ${network_id}              10.7.7.0
 ${hex_ip}                  0xa.0xb.0xc.0xd
 ${negative_ip}             10.-7.-7.7
 ${hex_ip}                  0xa.0xb.0xc.0xd
+@{static_name_servers}     10.5.5.5
 
 *** Test Cases ***
 
@@ -351,6 +352,26 @@ Configure Hexadecimal IP For Gateway
     # ip               subnet_mask          gateway    valid_status_codes
     ${test_ipv4_addr}  ${test_subnet_mask}  ${hex_ip}  ${HTTP_BAD_REQUEST}
 
+Get DNS Server And Verify
+    [Documentation]  Get DNS server via Redfish and verify.
+    [Tags]  Get_DNS_Server_And_Verify
+
+    Verify CLI and Redfish Nameservers
+
+Configure DNS Server And Verify
+    [Documentation]  Configure DNS server and verify.
+    [Tags]  Configure_DNS_Server_And_Verify
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    ${original_redfish_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
+    Rprint Vars  original_redfish_nameservers
+    # Set suite variables to trigger restoration during teardown.
+    Set Suite Variable  ${original_redfish_nameservers}
+
+    Configure Static Name Servers  ${static_name_servers}
+    Verify CLI and Redfish Nameservers
+
 *** Keywords ***
 
 Test Setup Execution
@@ -585,3 +606,38 @@ Clear IP Settings On Fail
 
     Test Teardown Execution
 
+Verify CLI and Redfish Nameservers
+    [Documentation]  Verify that nameservers obtained via Redfish do not
+    ...  match those found in /etc/resolv.conf.
+
+    ${redfish_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
+    ${resolve_conf_nameservers}=  CLI Get Nameservers
+    Rqprint Vars  redfish_nameservers  resolve_conf_nameservers  fmt=terse
+
+    # Check that the 2 lists are equivalent.
+    ${match}=  Evaluate  set($redfish_nameservers) == set($resolve_conf_nameservers)
+    Should Be True  ${match}
+    ...  The nameservers obtained via Redfish do not match those found in /etc/resolv.conf.
+
+CLI Get Nameservers
+    [Documentation]  Get the nameserver IPs from /etc/resolv.conf and return as a list.
+
+    # Example of /etc/resolv.conf data:
+    # nameserver x.x.x.x
+    # nameserver y.y.y.y
+
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  egrep nameserver /etc/resolv.conf | cut -f2- -d ' '
+    ${nameservers}=  Split String  ${stdout}
+
+    [Return]  ${nameservers}
+
+
+Configure Static Name Servers
+    [Documentation]  Configure DNS server on BMC.
+    [Arguments]  ${static_name_servers}=${original_redfish_nameservers}
+
+    # Descripton of the argument(s):
+    # static_name_servers  A list of static name server IPs to be
+    #                      configured on the BMC.
+
+    Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'StaticNameServers': ${static_name_servers}}
