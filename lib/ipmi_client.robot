@@ -417,4 +417,5 @@ Delete All Non Root IPMI User
       ${user_info}=  Get User Info  ${userid}
       Run Keyword If  "${user_info['user_name']}" != ""
       ...  Run IPMI Standard Command  user set name ${userid} ""
+      Sleep  10s
     END
