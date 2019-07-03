@@ -5,12 +5,15 @@ Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 
 Test Teardown    FFDC On Test Case Fail
-Suite Teardown   Redfish Power Off
 
 *** Variables ***
 
 # User may pass LOOP_COUNT.
 ${LOOP_COUNT}  ${1}
+
+${power_on_timeout}       15 mins
+${power_off_timeout}      15 mins
+${state_change_timeout}   3 mins
 
 *** Test Cases ***
 
@@ -35,6 +38,12 @@ Verify BMC Power Cycle via IPMI
     Run IPMI Standard Command  chassis power cycle
     Wait Until Keyword Succeeds  3 min  10 sec  Is IPMI Chassis Off
     Wait Until Keyword Succeeds  3 min  10 sec  Is IPMI Chassis On
+
+    ${state}=  Get State
+    ${match_state}=  Anchor State  ${state}
+    ${state}=  Wait State  ${match_state}  wait_time=${state_change_timeout}  interval=10 seconds  invert=1
+    ${state}=  Wait State  os_running_match_state  wait_time=${power_on_timeout}  interval=10 seconds
+
 
 
 *** Keywords ***
