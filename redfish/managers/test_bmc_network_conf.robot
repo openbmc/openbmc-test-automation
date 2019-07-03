@@ -9,7 +9,7 @@ Library        ../../lib/bmc_network_utils.py
 Library        Collections
 
 Test Setup     Test Setup Execution
-Test Teardown  Test Teardown Execution
+#Test Teardown  Test Teardown Execution
 
 Force Tags     Network_Conf_Test
 
@@ -47,6 +47,7 @@ ${network_id}              10.7.7.0
 ${hex_ip}                  0xa.0xb.0xc.0xd
 ${negative_ip}             10.-7.-7.7
 ${hex_ip}                  0xa.0xb.0xc.0xd
+${dns_ip}                  10.5.5.6
 
 *** Test Cases ***
 
@@ -351,6 +352,29 @@ Configure Hexadecimal IP For Gateway
     # ip               subnet_mask          gateway    valid_status_codes
     ${test_ipv4_addr}  ${test_subnet_mask}  ${hex_ip}  ${HTTP_BAD_REQUEST}
 
+Get DNS Server And Verify
+    [Documentation]  Get DNS server via Redfish and verify.
+    [Tags]  Get_DNS_Server_And_Verify
+
+    @{nameservers}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
+
+    : FOR  ${nameserver}  IN  @{nameservers}
+    \  ${dns_ip}=  Create List  ${nameserver}
+    \  Validate Nameserver On BMC  ${dns_ip}
+
+Configure DNS Server And Verify
+    [Documentation]  Configure DNS server and verify.
+    [Tags]  Configure_DNS_Server_And_Verify
+
+    ${nameservers}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
+    ${dns_ips}=  Create List  ${dns_ip}
+    Configure DNS Server  ${dns_ips}
+    Validate Nameserver On BMC  ${dns_ips}
+
+    # Revert back initial DNS server.
+    Configure DNS Server  ${nameservers}
+    Validate Nameserver On BMC  ${nameservers}
+
 *** Keywords ***
 
 Test Setup Execution
@@ -584,4 +608,29 @@ Clear IP Settings On Fail
     ...  Delete IP Address  ${ip}
 
     Test Teardown Execution
+
+Validate Nameserver On BMC
+    [Documentation]  Verify that the nameserver read via Redfish is the same as the
+    ...  nameserver configured on system.
+    [Arguments]  ${nameserver}
+
+    # Description of argument(s):
+    # nameserver  A nameserver value which is to be compared to the nameserver
+    #             configured on system.
+
+    ${sys_nameserver}  ${stderr}  ${rc}=  BMC Execute Command  cat /etc/resolv.conf
+
+    @{servers}=  Split String  ${sys_nameserver}
+    List Should Contain Sub List  ${servers}  ${nameserver}
+
+Configure DNS Server
+    [Documentation]  Configure DNS server on BMC.
+    [Arguments]  ${dns_ip}
+
+    #  Descripton of the argument(s):
+    #  dns_ip  DNS server IP address to be configured on BMC.
+    #  status_code  Expected return code from patch operation (e.g. "200").
+
+    ${dns_data}=  Create Dictionary  StaticNameServers=@{dns_ip}
+    Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body=${dns_data}
 
