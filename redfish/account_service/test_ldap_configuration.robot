@@ -8,14 +8,16 @@ Resource         ../../lib/openbmc_ffdc.robot
 Library          ../../lib/gen_robot_valid.py
 
 Suite Setup      Suite Setup Execution
-Suite Teardown   Redfish.Logout
-Test Teardown    FFDC On Test Case Fail
+Suite Teardown   Run Keywords  Restore LDAP Privilege  AND  Redfish.Logout
+Test Teardown    Run Keywords  FFDC On Test Case Fail  AND  Redfish.Logout
+...  AND  Redfish.Login
 
 Force Tags       LDAP_Test
 
 *** Variables ***
 ${old_ldap_privilege}  ${EMPTY}
 &{old_account_service}  &{EMPTY}
+&{old_ldap_config}  &{EMPTY}
 
 ** Test Cases **
 
@@ -35,7 +37,8 @@ Verify LDAP User Login
     ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
     ...  ${LDAP_USER_PASSWORD}
     Should Be Equal  ${resp}  ${True}  msg=LDAP user is not able to login.
-    redfish.Logout
+    Redfish.Logout
+    Redfish.Login
 
 
 Verify LDAP Service Available
@@ -71,15 +74,12 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
 
 
 Verify LDAP User With Operator Privilege Able To Do Host Poweron
-    [Documentation]  Verify LDAP user with operator privilege able to do host up.
+    [Documentation]  Verify LDAP user with operator privilege can do host power on.
     [Tags]  Verify_LDAP_User_With_Operator_Privilege_Able_To_Do_Host_Poweron
     [Teardown]  Restore LDAP Privilege
 
-    ${old_ldap_privilege}=  Get LDAP Privilege
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  Operator  ${GROUP_NAME}
-    # Provide adequate time for LDAP daemon to restart after the update.
-    Sleep  10s
 
     ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
     ${new_ldap_privilege}=  Set Variable
@@ -89,6 +89,7 @@ Verify LDAP User With Operator Privilege Able To Do Host Poweron
     # Verify that the LDAP user with operator privilege is able to power the system on.
     Redfish Power On
     Redfish.Logout
+    Redfish.Login
 
 
 Verify AccountLockout Attributes Set To Zero
@@ -107,7 +108,95 @@ Verify AccountLockout Attributes Set To Zero
     ...  body=[('AccountLockoutThreshold', 0)]
 
 
+Verify LDAP User With Read Privilege Able To Check Inventory
+    [Documentation]  Verify LDAP user with read privilege able to
+    ...  read firmware inventory.
+    [Tags]  Verify_LDAP_User_With_Read_Privilege_Able_To_Check_Inventory
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore LDAP Privilege
+    [Template]  Set Read Privilege And Check Firmware Inventory
+
+    User
+    Callback
+
+
+Verify LDAP User With Read Privilege Should Not Do Host Poweron
+    [Documentation]  Verify LDAP user with read privilege should not be
+    ...  allowed to power on the host.
+    [Tags]  Verify_LDAP_User_With_Read_Privilege_Should_Not_Do_Host_Poweron
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore LDAP Privilege
+    [Template]  Set Read Privilege And Check Poweron
+
+    User
+    Callback
+
+
+Verify LDAP Configuration Created
+    [Documentation]  Verify LDAP configuration created.
+    [Tags]  Verify_LDAP_Configuration_Created
+
+    Create LDAP Configuration
+    # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
+    Get LDAP Configuration  ${LDAP_TYPE}
+    Sleep  10s
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+
+
+Verify LDAP Service Disable
+    [Documentation]  Verify LDAP is disabled and LDAP user should not be login.
+    [Tags]  Verify_LDAP_Service_Disable
+
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}
+    Sleep  15s
+    ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
+    ...  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${False}  msg=LDAP user is not able to login.
+    Redfish.Logout
+    Redfish.Login
+    # Enabling LDAP so that LDAP user works.
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
+    Redfish.Logout
+    Redfish.Login
+
+
 *** Keywords ***
+
+
+Create LDAP Configuration
+    [Documentation]  Create LDAP configuration.
+    [Arguments]  ${ldap_type}=${LDAP_TYPE}  ${ldap_server_uri}=${LDAP_SERVER_URI}
+    ...  ${ldap_bind_dn}=${LDAP_BIND_DN}  ${ldap_bind_dn_password}=${LDAP_BIND_DN_PASSWORD}
+    ...  ${ldap_base_dn}=${LDAP_BASE_DN}
+
+    # Description of argument(s):
+    # ldap_type              The LDAP type ("ActiveDirectory" or "LDAP").
+    # ldap_server_uri        LDAP server uri (e.g. ldap://XX.XX.XX.XX).
+    # ldap_bind_dn           The LDAP bind distinguished name.
+    # ldap_bind_dn_password  The LDAP bind distinguished name password.
+    # ldap_base_dn           The LDAP base distinguished name.
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'ServiceEnabled': ${True}}}
+    Sleep  15s
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'ServiceAddresses': ['${ldap_server_uri}']}}
+    Sleep  15s
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'Authentication': {'AuthenticationType':'UsernameAndPassword'}}}
+    Sleep  15s
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'Authentication': {'Username':'${ldap_bind_dn}'}}}
+    Sleep  15s
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'Authentication': {'Password':'${ldap_bind_dn_password}'}}}
+    Sleep  15s
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'LDAPService': {'SearchSettings': {'BaseDistinguishedNames': ['${ldap_base_dn}']}}}}
+    Sleep  15s
+
 
 Restore AccountLockout Attributes
     [Documentation]  Restore AccountLockout Attributes.
@@ -128,14 +217,48 @@ Suite Setup Execution
     Rvalid Value  GROUP_PRIVILEGE
     Rvalid Value  GROUP_NAME
     Redfish.Login
-    # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
-    Get LDAP Configuration  ${LDAP_TYPE}
+    ${old_ldap_config}=  Get LDAP Configuration  ${LDAP_TYPE}
+    Run Keyword If  'ldap' in ${old_ldap_config}  Create LDAP Configuration
+    ${old_ldap_privilege}=  Get LDAP Privilege
 
 
-Test Teardown Execution
-    [Documentation]  Do the post test teardown.
-    FFDC On Test Case Fail
+Set Read Privilege And Check Firmware Inventory
+    [Documentation]  Set read privilege and check firmware inventory.
+    [Arguments]  ${read_privilege}
+
+    # Description of argument(s):
+    # read_privilege  The read privilege role (e.g. "User" / "Callback").
+
+    Redfish.Login
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${read_privilege}  ${GROUP_NAME}
+
     Redfish.Logout
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    # Verify that the LDAP user with read privilege is able to read inventory.
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
+    Should Be True  ${resp.dict["Members@odata.count"]} >= ${1}
+    Length Should Be  ${resp.dict["Members"]}  ${resp.dict["Members@odata.count"]}
+    Redfish.Logout
+    Redfish.Login
+
+
+Set Read Privilege And Check Poweron
+    [Documentation]  Set read privilege and power on should not be possible.
+    [Arguments]  ${read_privilege}
+
+    # Description of argument(s):
+    # read_privilege  The read privilege role (e.g. "User" / "Callback").
+
+    Redfish.Login
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${read_privilege}  ${GROUP_NAME}
+    Redfish.Logout
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Post  ${REDFISH_POWER_URI}
+    ...  body={'ResetType': 'On'}   valid_status_codes=[401, 403]
+    Redfish.Logout
+    Redfish.Login
 
 
 Get LDAP Configuration
@@ -146,6 +269,7 @@ Get LDAP Configuration
     # ldap_type  The LDAP type ("ActiveDirectory" or "LDAP").
 
     ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    Rprint Vars  ldap_config
     [Return]  ${ldap_config["${ldap_type}"]}
 
 
@@ -163,6 +287,8 @@ Update LDAP Configuration with LDAP User Role And Group
     ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+    # Provide adequate time for LDAP daemon to restart after the update.
+    Sleep  10s
 
 
 Get LDAP Privilege
@@ -175,9 +301,8 @@ Get LDAP Privilege
 Restore LDAP Privilege
     [Documentation]  Restore the LDAP privilege to its original value.
 
-    # Login back to update the original privilege.
+    Return From Keyword If  '${old_ldap_privilege}' == '${EMPTY}'
+    # Log back in to restore the original privilege.
     Redfish.Login
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${old_ldap_privilege}  ${GROUP_NAME}
-    FFDC On Test Case Fail
-    Redfish.Logout
