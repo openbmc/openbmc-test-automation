@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation   Module to test OS reboot functionality.
 
-Resource    ../lib/boot_utils.robot
-Resource    ../extended/obmc_boot_test_resource.robot
+Resource        ../../lib/openbmc_ffdc.robot
+Resource        ../../lib/boot_utils.robot
 
 Suite Setup     Run Key  Start SOL Console Logging
 Test Teardown   Test Teardown Execution
@@ -30,7 +30,7 @@ Host Reboot Loop
     # Note: Host Reboot is implemented by the OBMC Boot Test tool.
     # OBMC Boot Test will take the necessary steps to get the OBMC
     # to a host powered on state before attempting the Host Reboot.
-    Repeat Keyword  ${BOOT_LOOP_COUNT} times  Host Reboot
+    Repeat Keyword  ${BOOT_LOOP_COUNT} times  Redfish Host Reboot
 
 *** Keywords ***
 
