@@ -473,3 +473,17 @@ Image Should Be Signed
 
     Directory Should Exist  ${ACTIVATION_DIR_PATH}
     ...  msg=${ACTIVATION_DIR_PATH} does not exist. Therefore, the image is not signed.
+
+
+Redfish Set Apply Time
+    [Documentation]  Set apply time.
+    [Arguments]  ${value}
+
+    # Description of arguments(s)
+    # value  Apply time attribute value.
+    #        (e.g. ApplyTime=OnReset,
+    #              ApplyTime=Immediate)
+
+    ${payload}=  Create Dictionary  ApplyTime=${value}
+    Redfish.post  ${REDFISH_BASE_URI}UpdateService  body=&{payload}
+
