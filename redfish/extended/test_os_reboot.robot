@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation   Module to test OS reboot functionality.
 
+Resource        ../../lib/bmc_redfish_resource.robot
 Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/boot_utils.robot
 

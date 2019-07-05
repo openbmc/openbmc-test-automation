@@ -4,6 +4,8 @@ Documentation       This suite tests IPMI SOL in OpenBMC.
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/state_manager.robot
+Resource            ../lib/boot_utils.robot
+Resource            ../lib/bmc_redfish_resource.robot
 Library             ../lib/ipmi_utils.py
 
 Test Setup          Start SOL Console Logging
@@ -123,20 +125,11 @@ Verify SOL During Boot
     [Documentation]  Verify SOL during boot.
     [Tags]  Verify_SOL_During_Boot
 
-    ${current_state}=  Get Host State Via External IPMI
-    Run Keyword If  '${current_state}' == 'on'
-    ...  Initiate Host PowerOff Via External IPMI
-    Initiate Host Boot Via External IPMI  wait=${0}
-
     Activate SOL Via IPMI
-    Wait Until Keyword Succeeds  3 mins  30 secs
-    ...  Check IPMI SOL Output Content  Welcome to Hostboot
+    Redfish Power On
 
-    Wait Until Keyword Succeeds  3 mins  30 secs
-    ...  Check IPMI SOL Output Content  ISTEP
-
-    # Allow the host to boot.
-    Wait Until Keyword Succeeds  5 min  20 sec  Is Host Running
+    Check IPMI SOL Output Content  Welcome to Hostboot
+    Check IPMI SOL Output Content  ISTEP
 
 
 Verify Deactivate Non Existing SOL
