@@ -293,7 +293,7 @@ Boot Host And Verify Data Is Synced To Remote Server
     Run Keyword And Ignore Error  Redfish Power On
     ${bmc_journald}=  Stop Journal Log
 
-    ${cmd}=  Catenate  SEPARATOR=  egrep '${bmc_hostname}' /var/log/syslog
+    ${cmd}=  Catenate  SEPARATOR=  egrep -a '${bmc_hostname}' /var/log/syslog
     ${remote_journald}=  Remote Logging Server Execute Command  command=${cmd}
 
     @{lines}=  Split To Lines  ${bmc_journald}
