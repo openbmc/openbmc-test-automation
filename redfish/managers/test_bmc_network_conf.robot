@@ -420,7 +420,7 @@ Get Network Configuration
     #  }
 
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
-    @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4Addresses
+    @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
     [Return]  @{network_configurations}
 
 
@@ -452,8 +452,7 @@ Add IP Address
 
     ${empty_dict}=  Create Dictionary
     ${ip_data}=  Create Dictionary  Address=${ip}
-    ...  AddressOrigin=Static  SubnetMask=${subnet_mask}
-    ...  Gateway=${gateway}
+    ...  SubnetMask=${subnet_mask}  Gateway=${gateway}
 
     ${patch_list}=  Create List
     ${network_configurations}=  Get Network Configuration
@@ -464,7 +463,7 @@ Add IP Address
 
     # We need not check for existence of IP on BMC while adding.
     Append To List  ${patch_list}  ${ip_data}
-    ${data}=  Create Dictionary  IPv4Addresses=${patch_list}
+    ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
 
     Redfish.patch  ${REDFISH_NW_ETH0_URI}  body=&{data}
     ...  valid_status_codes=[${valid_status_codes}]
@@ -503,7 +502,7 @@ Delete IP Address
     Pass Execution If  ${ip_found} == ${False}  ${ip} does not exist on BMC
 
     # Run patch command only if given IP is found on BMC
-    ${data}=  Create Dictionary  IPv4Addresses=${patch_list}
+    ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
 
     Redfish.patch  ${REDFISH_NW_ETH0_URI}  body=&{data}
     ...  valid_status_codes=[${valid_status_codes}]
