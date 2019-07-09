@@ -372,6 +372,37 @@ Configure DNS Server And Verify
     Configure Static Name Servers  ${static_name_servers}
     Verify CLI and Redfish Nameservers
 
+Delete DNS Server And Verify
+    [Documentation]  Delete DNS server and verify.
+    [Tags]  Delete_DNS_Server_And_Verify
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    ${original_redfish_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
+
+    # Set suite variables to trigger restoration during teardown.
+    Set Suite Variable  ${original_redfish_nameservers}
+
+    Delete Static Name Servers
+    Verify CLI and Redfish Nameservers
+
+Configure DNS Server And Check Persistency
+    [Documentation]  Configure DNS server and check persistency on reboot.
+    [Tags]  Configure_DNS_Server_And_Check_Persistency
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    ${original_redfish_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
+    Rprint Vars  original_redfish_nameservers
+    # Set suite variables to trigger restoration during teardown.
+    Set Suite Variable  ${original_redfish_nameservers}
+
+    Configure Static Name Servers  ${static_name_servers}
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+    Verify CLI and Redfish Nameservers
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -591,7 +622,7 @@ Validate Hostname On BMC
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish.Logout
 
 Clear IP Settings On Fail
@@ -641,3 +672,14 @@ Configure Static Name Servers
     #                      configured on the BMC.
 
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'StaticNameServers': ${static_name_servers}}
+
+Delete Static Name Servers
+    [Documentation]  Delete static name servers.
+
+    ${empty_list}=  Create List
+    Configure Static Name Servers  ${empty_list}
+
+    # Check if all name servers deleted on BMC.
+    ${nameservers}=  CLI Get Nameservers
+    Should Be Empty  ${nameservers}
+
