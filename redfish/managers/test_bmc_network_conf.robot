@@ -361,16 +361,35 @@ Get DNS Server And Verify
 Configure DNS Server And Verify
     [Documentation]  Configure DNS server and verify.
     [Tags]  Configure_DNS_Server_And_Verify
+    [Setup]  DNS Test Setup Execution
     [Teardown]  Run Keywords
     ...  Configure Static Name Servers  AND  Test Teardown Execution
 
-    ${original_redfish_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
-    Rprint Vars  original_redfish_nameservers
-    # Set suite variables to trigger restoration during teardown.
-    Set Suite Variable  ${original_redfish_nameservers}
-
     Configure Static Name Servers  ${static_name_servers}
     Verify CLI and Redfish Nameservers
+
+Delete DNS Server And Verify
+    [Documentation]  Delete DNS server and verify.
+    [Tags]  Delete_DNS_Server_And_Verify
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    Delete Static Name Servers
+    Verify CLI and Redfish Nameservers
+
+Configure DNS Server And Check Persistency
+    [Documentation]  Configure DNS server and check persistency on reboot.
+    [Tags]  Configure_DNS_Server_And_Check_Persistency
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    Configure Static Name Servers  ${static_name_servers}
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+    Verify CLI and Redfish Nameservers
+
 
 *** Keywords ***
 
@@ -633,10 +652,29 @@ CLI Get Nameservers
 
 Configure Static Name Servers
     [Documentation]  Configure DNS server on BMC.
-    [Arguments]  ${static_name_servers}=${original_redfish_nameservers}
+    [Arguments]  ${static_name_servers}=${original_nameservers}
 
     # Description of the argument(s):
     # static_name_servers  A list of static name server IPs to be
     #                      configured on the BMC.
 
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'StaticNameServers': ${static_name_servers}}
+
+Delete Static Name Servers
+    [Documentation]  Delete static name servers.
+
+    Configure Static Name Servers  @{EMPTY}
+
+    # Check if all name servers deleted on BMC.
+    ${nameservers}=  CLI Get Nameservers
+    Should Be Empty  ${nameservers}
+
+DNS Test Setup Execution
+    [Documentation]  Do DNS test setup execution.
+
+    Redfish.Login
+
+    ${original_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
+    Rprint Vars  original_nameservers
+    # Set suite variables to trigger restoration during teardown.
+    Set Suite Variable  ${original_nameservers}
