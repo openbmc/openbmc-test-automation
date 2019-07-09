@@ -473,3 +473,67 @@ Image Should Be Signed
 
     Directory Should Exist  ${ACTIVATION_DIR_PATH}
     ...  msg=${ACTIVATION_DIR_PATH} does not exist. Therefore, the image is not signed.
+
+
+Get Latest Image ID
+    [Documentation]  Return the ID of the most recently extracted image.
+    # Note: This keyword will fail if there is no such file.
+
+    # Example: # ls /tmp/images/
+    #            1b714fb7
+    ${image_id}=  Get Latest File  /tmp/images/
+    Rvalid Value  image_id
+
+    # It could so happen that image extract is in progress. Check one of the files
+    # is in progress needed to be in the extracted directory.
+    BMC Execute Command  ls -l /tmp/images/${image_id}/MANIFEST
+
+    [Return]  ${image_id}
+
+
+Check Image Update Progress State
+    [Documentation]  Check that the image update progress state matches the specified state.
+    [Arguments]  ${match_state}  ${image_id}
+
+    # Description of argument(s):
+    # match_state    The expected state. This may be one or more comma-separated values
+    #                (e.g. "Disabled", "Disabled, Updating"). If the actual state matches
+    #                any of the states named in this argument, this keyword passes.
+    # image_id       The image ID (e.g. "1b714fb7").
+
+    ${state}=  Get Image Update Progress State  image_id=${image_id}
+    Rvalid Value  state  valid_values=[${match_state}]
+
+
+Get Image Update Progress State
+    [Documentation]  Return the current state of the image update.
+    [Arguments]  ${image_id}
+
+    # Description of argument(s):
+    # image_id         The image ID (e.g. "1b714fb7").
+
+    # In this example, this keyword would return the value "Enabled".
+    #  "Status": {
+    #              "Health": "OK",
+    #              "HealthRollup": "OK",
+    #              "State": "Enabled"
+    #            },
+    ${status}=  Redfish.Get Attribute  /redfish/v1/UpdateService/FirmwareInventory/${image_id}  Status
+    Rprint Vars  status
+
+    [Return]  ${status["State"]}
+
+
+Get Firmware Image Version
+    [Documentation]  Get the version of the currently installed firmware and return it.
+    [Arguments]  ${image_id}
+
+    # Description of argument(s):
+    # image_id      The image ID (e.g. "1b714fb7").
+
+    # Example of a version returned by this keyword:
+    # 2.8.0-dev-19-g6d5764b33
+    ${version}=  Redfish.Get Attribute  /redfish/v1/UpdateService/FirmwareInventory/${image_id}  Version
+    Rprint Vars  version
+
+    [Return]  ${version}
