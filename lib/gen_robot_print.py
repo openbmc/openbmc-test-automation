@@ -33,10 +33,13 @@ def sprint_vars(*args, **kwargs):
 
     if 'fmt' in kwargs:
         # Find format option names in kwargs['fmt'] and wrap them with "gp."
-        # and "()" to make them into function calls.  For example, terse would
-        # be converted to "gp.terse()".  This allows the user to simply
-        # specify "fmt=terse" (vs. fmt=gp.terse()).
-        regex = "(" + "|".join(gp.valid_fmts()) + ")"
+        # and "()" to make them into function calls.  For example, verbose
+        # would be converted to "gp.verbose()".  This allows the user to
+        # simply specify "fmt=verbose" (vs. fmt=gp.verbose()).
+        # Note "terse" has been explicitly added for backward compatibility.
+        # Once the repo has been purged of its use, this code can return to
+        # its original form.
+        regex = "(" + "|".join(gp.valid_fmts()) + "|terse)"
         kwargs['fmt'] = \
             re.sub(regex, "gp.\\1()", kwargs['fmt'])
     kwargs = fa.args_to_objects(kwargs)
