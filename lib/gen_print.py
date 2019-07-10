@@ -854,7 +854,7 @@ def valid_fmts():
         'octal',
         'binary',
         'blank',
-        'terse',
+        'verbose',
         'quote_keys',
         'show_type']
 
@@ -891,6 +891,17 @@ def create_fmt_definition():
 # Dynamically create fmt definitions (for use with the fmt argument of
 # sprint_varx function):
 exec(create_fmt_definition())
+
+
+def terse():
+    r"""
+    Constant function to return fmt value of 0.
+
+    Now that sprint_varx defaults to printing in terse format, the terse
+    option is deprecated.  This function is here for backward compatibility.
+    """
+
+    return 0
 
 
 def list_pop(a_list, index=0, default=None):
@@ -943,11 +954,11 @@ def parse_fmt(fmt):
     This would generate the following output:
 
     ord_dict:
-      ord_dict[one]:             1
-      ord_dict[two]:             2
-      ord_dict[sub]:
-        ord_dict[sub][three]:    3
-        ord_dict[sub][four]:     4
+      [one]:                     1
+      [two]:                     2
+      [sub]:
+        [three]:                 3
+        [four]:                  4
 
     The first level in this example is the line that simply says "ord_dict".
     The second level is comprised of the dictionary entries with the keys
@@ -955,22 +966,22 @@ def parse_fmt(fmt):
     (i.e. printed values 3 and 4).
 
     Given the data structure shown above, the programmer could code the
-    following where fmt is a simple integer value set by calling the terse()
+    following where fmt is a simple integer value set by calling the verbose()
     function.
 
-    print_var(ord_dict, fmt=terse())
+    print_var(ord_dict, fmt=verbose())
 
     The output would look like this:
 
     ord_dict:
-      [one]:                     1
-      [two]:                     2
-      [sub]:
-        [three]:                 3
-        [four]:                  4
+      ord_dict[one]:             1
+      ord_dict[two]:             2
+      ord_dict[sub]:
+        ord_dict[sub][three]:    3
+        ord_dict[sub][four]:     4
 
-    Note the terse format where the name of the object ("ord_dict") is not
-    repeated on every line as it was in example #1.
+    Note the verbose format where the name of the object ("ord_dict") is
+    repeated on every line.
 
     If the programmer wishes to get more granular with the fmt argument,
     he/she can specify it as a list where each entry corresponds to a level of
@@ -1089,23 +1100,23 @@ def sprint_varx(var_name,
                                     subordinate levels.  The bits can be set
                                     using the dynamically created functionhs
                                     above.  Example: sprint_varx("var1", var1,
-                                    fmt=terse()).  Note that these values can
-                                    be OR'ed together: print_var(var1, hexa()
-                                    | terse()).  If the caller ORs mutually
-                                    exclusive bits (hexa() | octal()),
-                                    behavior is not guaranteed.  The following
-                                    features are supported:
+                                    fmt=verbose()).  Note that these values
+                                    can be OR'ed together: print_var(var1,
+                                    hexa() | verbose()).  If the caller ORs
+                                    mutually exclusive bits (hexa() |
+                                    octal()), behavior is not guaranteed.  The
+                                    following features are supported:
         hexa                        Print all integer values in hexadecimal
                                     format.
         octal                       Print all integer values in octal format.
         binary                      Print all integer values in binary format.
         blank                       For blank string values, print "<blank>"
                                     instead of an actual blank.
-        terse                       For structured values like dictionaries,
-                                    lists, etc. do not repeat the name of the
+        verbose                     For structured values like dictionaries,
+                                    lists, etc. repeat the name of the
                                     variable on each line to the right of the
                                     key or subscript value.  Example: print
-                                    "[key1]" instead of "my_dict[key1]".
+                                    "my_dict[key1]" instead of just "[key1]".
         quote_keys                  Quote dictionary keys in the output.
                                     Example: my_dict['key1'] instead of
                                     my_dict[key1].
@@ -1195,7 +1206,7 @@ def sprint_varx(var_name,
                 format_string += " "
             format_string += type_str
         format_string += trailing_char
-        if fmt & terse():
+        if not fmt & verbose():
             # Strip everything leading up to the first left square brace.
             var_name = re.sub(r".*\[", "[", var_name)
         if value_format == "0x%08x":
@@ -1205,7 +1216,7 @@ def sprint_varx(var_name,
             return format_string % ("", str(var_name) + delim, var_value)
     else:
         # The data type is complex in the sense that it has subordinate parts.
-        if fmt & terse():
+        if not (fmt & verbose()):
             # Strip everything leading up to the first square brace.
             loc_var_name = re.sub(r".*\[", "[", var_name)
         else:
