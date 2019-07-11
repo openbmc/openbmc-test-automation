@@ -169,6 +169,10 @@ Verify User Account Locked
 
     Redfish Create User  admin_user  TestPwd123  Administrator   ${True}
 
+    Redfish.Logout
+
+    Redfish.Login
+
     ${payload}=  Create Dictionary  AccountLockoutThreshold=${account_lockout_threshold}
     ...  AccountLockoutDuration=${account_lockout_duration}
     Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
