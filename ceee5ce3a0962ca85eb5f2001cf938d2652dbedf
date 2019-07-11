@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea88f968_1c81a1c8",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-11T16:28:46Z",
+      "side": 1,
+      "message": "Do not use colon characters in section headings",
+      "range": {
+        "startLine": 11,
+        "startChar": 28,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "ceee5ce3a0962ca85eb5f2001cf938d2652dbedf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64496a9a_f88df0f5",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-11T16:28:46Z",
+      "side": 1,
+      "message": "Wrap lines to 80 characters (similar to https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md)\nUse longer lines for links (line 3 above) as needed.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "ceee5ce3a0962ca85eb5f2001cf938d2652dbedf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8e94b1d_aac1aa6a",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-11T16:28:46Z",
+      "side": 1,
+      "message": "Spelling",
+      "range": {
+        "startLine": 13,
+        "startChar": 242,
+        "endLine": 13,
+        "endChar": 246
+      },
+      "revId": "ceee5ce3a0962ca85eb5f2001cf938d2652dbedf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9aeaf6f_ba619629",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-11T16:28:46Z",
+      "side": 1,
+      "message": "Define your acronyms:\nFunctional Test Cycle (FTC):",
+      "revId": "ceee5ce3a0962ca85eb5f2001cf938d2652dbedf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e6345a4_fe924ca9",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-11T16:28:46Z",
+      "side": 1,
+      "message": "I understand this means: The direction is to move away from the phosphor-REST APIs, but they are still in use and are part of this test plan.",
+      "range": {
+        "startLine": 48,
+        "startChar": 171,
+        "endLine": 48,
+        "endChar": 212
+      },
+      "revId": "ceee5ce3a0962ca85eb5f2001cf938d2652dbedf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbaa79ac_857c8a2e",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-11T16:28:46Z",
+      "side": 1,
+      "message": "Yes, please remove trailing space.  In Emacs you can: M-x delete-trailing-whitespace",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 13
+      },
+      "revId": "ceee5ce3a0962ca85eb5f2001cf938d2652dbedf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7e7514a_6a069315",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-11T16:28:46Z",
+      "side": 1,
+      "message": "move to previous line?",
+      "range": {
+        "startLine": 69,
+        "startChar": 3,
+        "endLine": 69,
+        "endChar": 11
+      },
+      "revId": "ceee5ce3a0962ca85eb5f2001cf938d2652dbedf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74040b4e_3eef3702",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-11T16:28:46Z",
+      "side": 1,
+      "message": "remove leading space",
+      "range": {
+        "startLine": 72,
+        "startChar": 3,
+        "endLine": 72,
+        "endChar": 4
+      },
+      "revId": "ceee5ce3a0962ca85eb5f2001cf938d2652dbedf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15a8ab42_1dc7175c",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-11T16:28:46Z",
+      "side": 1,
+      "message": "Change all tabs to spaces",
+      "revId": "ceee5ce3a0962ca85eb5f2001cf938d2652dbedf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc76d6d3_b96c1772",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-11T16:28:46Z",
+      "side": 1,
+      "message": "Spelling: Yocto",
+      "range": {
+        "startLine": 147,
+        "startChar": 23,
+        "endLine": 147,
+        "endChar": 28
+      },
+      "revId": "ceee5ce3a0962ca85eb5f2001cf938d2652dbedf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
