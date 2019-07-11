@@ -158,6 +158,46 @@ Set Priority To Invalid Value And Expect Error
     ...  Set Host Software Property  @{images}[0]  Priority  ${priority}
 
 
+Redfish Upload Image
+    [Documentation]  Upload an image to the BMC via redfish.
+    [Arguments]  ${image_file_path}
+
+    # Description of argument(s):
+    # image_file_path     The path to the image tarball to upload.
+    # uri                 URI for uploading image via redfish.
+
+    OperatingSystem.File Should Exist  ${image_file_path}
+    ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
+    Wait Until Keyword Succeeds  3 times  60 sec
+    ...  Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  data=${image_data}
+
+
+Redfish Verify Running BMC Image
+    [Documentation]  Verify that the version on the BMC is the same as the
+    ...              version in the given image via Redfish.
+    [Arguments]      ${image_file_path}
+
+    # Description of argument(s):
+    # image_file_path   Path to the BMC image tarball.
+
+    ${tar_version}=  Get Version Tar  ${image_file_path}
+    ${bmc_version}=  Redfish Get BMC Version
+    Should Be Equal  ${tar_version}  ${bmc_version}
+
+
+Redfish Verify Running Host Image
+    [Documentation]  Verify that the version of the PNOR image that is on the
+    ...              BMC is the same as the one in the given image via Redfish.
+    [Arguments]      ${image_file_path}
+
+    # Description of argument(s):
+    # image_file_path   Path to the PNOR image tarball.
+
+    ${tar_version}=  Get Version Tar  ${image_file_path}
+    ${host_version}=  Redfish Get Host Version
+    Should Be Equal  ${tar_version}  ${host_version}
+
+
 Upload And Activate Image
     [Documentation]  Upload an image to the BMC and activate it with REST.
     [Arguments]  ${image_file_path}  ${wait}=${1}  ${skip_if_active}=false
