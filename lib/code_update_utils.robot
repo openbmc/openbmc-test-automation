@@ -5,6 +5,7 @@ Library     code_update_utils.py
 Library     OperatingSystem
 Library     String
 Library     utilities.py
+Library     gen_robot_valid.py
 Variables   ../data/variables.py
 Resource    boot_utils.robot
 Resource    rest_client.robot
@@ -156,6 +157,50 @@ Set Priority To Invalid Value And Expect Error
 
     Run Keyword And Expect Error  403 != 200
     ...  Set Host Software Property  @{images}[0]  Priority  ${priority}
+
+
+Redfish Upload Image
+    [Documentation]  Upload an image to the BMC via redfish.
+    [Arguments]  ${uri}  ${image_file_path}
+
+    # Description of argument(s):
+    # uri                 URI for uploading image via redfish.
+    # image_file_path     The path to the image tarball.
+
+    ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
+
+    Wait Until Keyword Succeeds  3 times  60 sec
+    ...  Upload Image To BMC  ${uri}  data=${image_data}
+
+
+Redfish Verify BMC Version
+    [Documentation]  Verify that the version on the BMC is the same as the
+    ...              version in the given image via Redfish.
+    [Arguments]      ${image_file_path}
+
+    # Description of argument(s):
+    # image_file_path   Path to the image tarball.
+
+    # Extract the version from the image tarball on our local system.
+    ${tar_version}=  Get Version Tar  ${image_file_path}
+    ${bmc_version}=  Redfish Get BMC Version
+
+    Rvalid Value  bmc_version  valid_values=['${tar_version}']
+
+
+Redfish Verify Host Version
+    [Documentation]  Verify that the version of the PNOR image that is on the
+    ...              BMC is the same as the one in the given image via Redfish.
+    [Arguments]      ${image_file_path}
+
+    # Description of argument(s):
+    # image_file_path   Path to the image tarball.
+
+    # Extract the version from the image tarball on our local system.
+    ${tar_version}=  Get Version Tar  ${image_file_path}
+    ${host_version}=  Redfish Get Host Version
+
+    Rvalid Value  host_version  valid_values=['${tar_version}']
 
 
 Upload And Activate Image
@@ -537,3 +582,4 @@ Get Firmware Image Version
     Rprint Vars  version
 
     [Return]  ${version}
+
