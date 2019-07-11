@@ -851,6 +851,19 @@ GET BMC PNOR Version
     [Return]  ${bmc_version}  ${pnor_version}
 
 
+Redfish Get BMC Version
+    [Documentation]  Get BMC version via Redfish.
+
+    ${output}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/bmc  FirmwareVersion
+    [Return]  ${output}
+
+Redfish Get Host Version
+    [Documentation]  Get host version via Redfish.
+
+    ${output}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Systems/system  BiosVersion
+    [Return]  ${output}
+
+
 Copy Address Translation Utils To HOST OS
     [Documentation]  Copy address translation utils to host OS.
 
