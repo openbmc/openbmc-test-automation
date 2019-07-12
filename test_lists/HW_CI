@@ -4,6 +4,7 @@
 #Verify SSH and IPMI interfaces
 -i Test_SSH_And_IPMI_Connections
 -i Verify_AccountService_Available
+-i GET_Redfish_Resources_With_Login
 #REST SSL connection test.
 -i Test_SSL_Connection
 #Basic poweron test
