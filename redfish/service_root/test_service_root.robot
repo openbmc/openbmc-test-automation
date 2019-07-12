@@ -33,10 +33,18 @@ GET Redfish Hypermedia Without Login
 GET Redfish SessionService Resource With Login
     [Documentation]  Login to BMCweb and get /redfish/v1/SessionService.
     [Tags]  GET_Redfish_SessionService_Resource_With_Login
+    [Setup]  Redfish.Login
+    [Template]  GET And Verify Redfish Response
 
-    Redfish.Login
-    ${resp}=  Redfish.Get  /redfish/v1/SessionService
-    Redfish.Logout
+    # Expect status      Resource URL Path
+    ${HTTP_OK}           /redfish/v1/SessionService
+    ${HTTP_OK}           /redfish/v1/AccountService
+    ${HTTP_OK}           /redfish/v1/Systems/system
+    ${HTTP_OK}           /redfish/v1/Chassis/chassis
+    ${HTTP_OK}           /redfish/v1/Chassis/motherboard
+    ${HTTP_OK}           /redfish/v1/Managers/bmc
+    ${HTTP_OK}           /redfish/v1/UpdateService
+
 
 
 GET Redfish SessionService Without Login
