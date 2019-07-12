@@ -73,9 +73,9 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
     Redfish.Login
 
 
-Verify LDAP User With Operator Privilege Able To Do Host Poweron
-    [Documentation]  Verify LDAP user with operator privilege can do host power on.
-    [Tags]  Verify_LDAP_User_With_Operator_Privilege_Able_To_Do_Host_Poweron
+Verify LDAP User With Operator Privilege Able To Do Host Poweroff
+    [Documentation]  Verify LDAP user with operator privilege can do host power off.
+    [Tags]  Verify_LDAP_User_With_Operator_Privilege_Able_To_Do_Host_Poweroff
     [Teardown]  Restore LDAP Privilege
 
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
@@ -86,8 +86,9 @@ Verify LDAP User With Operator Privilege Able To Do Host Poweron
     ...  ${ldap_config["LDAP"]["RemoteRoleMapping"][0]["LocalRole"]}
     Should Be Equal  ${new_ldap_privilege}  Operator
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
-    # Verify that the LDAP user with operator privilege is able to power the system on.
-    Redfish Power On
+    # Verify that the LDAP user with operator privilege is able to power the system off.
+    Redfish.Post  ${REDFISH_POWER_URI}
+    ...  body={'ResetType': 'Off'}   valid_status_codes=[200]
     Redfish.Logout
     Redfish.Login
 
