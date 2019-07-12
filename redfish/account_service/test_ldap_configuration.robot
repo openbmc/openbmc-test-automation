@@ -88,7 +88,7 @@ Verify LDAP User With Operator Privilege Able To Do Host Poweroff
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # Verify that the LDAP user with operator privilege is able to power the system off.
     Redfish.Post  ${REDFISH_POWER_URI}
-    ...  body={'ResetType': 'Off'}   valid_status_codes=[200]
+    ...  body={'ResetType': 'ForceOff'}   valid_status_codes=[200]
     Redfish.Logout
     Redfish.Login
 
