@@ -17,3 +17,5 @@
 -i REST_Logout_Session_To_BMC
 #Verify no error logs generated
 -i Verify_Error_Log_Is_Clear
+#Redfish test
+-i GET_Redfish_Resources_With_Login
