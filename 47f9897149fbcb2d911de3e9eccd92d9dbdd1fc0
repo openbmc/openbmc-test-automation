@@ -22,6 +22,30 @@
       "revId": "47f9897149fbcb2d911de3e9eccd92d9dbdd1fc0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0402587f_e83caa6c",
+        "filename": "docs/openbmc_libdoc_generation.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2019-07-12T14:40:29Z",
+      "side": 1,
+      "message": "shall I push the script file on this path \"/openbmc-test-automation/tools/libdoc_gen.py\"",
+      "parentUuid": "64be2fc8_2b2a1de9",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 8
+      },
+      "revId": "47f9897149fbcb2d911de3e9eccd92d9dbdd1fc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
