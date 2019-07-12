@@ -214,7 +214,8 @@ Violate Secure Boot Using Corrupt Image
 
     # Starting a power on.
     # TODO: Need to move to REST Power On. Needs more testing.
-    BMC Execute Command  /usr/sbin/obmcutil poweron
+    Redfish Power On  stack_mode=skip  quiet=1
+    Set Auto Reboot  1
     Wait Until Keyword Succeeds  15 min  15 sec  Error Logs Should Exist
 
     #TODO: This will be enabled little later as more tesing required
