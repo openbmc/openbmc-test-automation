@@ -10,7 +10,7 @@ Library                      ../../lib/gen_robot_valid.py
 
 Test Teardown                Test Teardown Execution
 Suite Setup                  Suite Setup Execution
-Suite Teardown               Redfish.Logout
+Suite Teardown               Suite Teardown Execution
 
 *** Variables ***
 ${max_time_diff_in_seconds}  6
@@ -117,7 +117,6 @@ Verify NTP Server Setting Persist After BMC Reboot
     ...  msg=NTP server value ${ntp_server_1} not stored.
     Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_2}
     ...  msg=NTP server value ${ntp_server_2} not stored.
-    Redfish.Logout
 
 
 Verify Enable NTP
@@ -189,3 +188,9 @@ Suite Setup Execution
 
     Printn
     Redfish.Login
+    Rest Set Time Owner
+
+Suite Teardown Execution
+    [Documentation]  Do the suite level teardown.
+    Rest Set Time Owner
+    Redfish.Logout
