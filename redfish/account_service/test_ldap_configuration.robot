@@ -87,7 +87,8 @@ Verify LDAP User With Operator Privilege Able To Do Host Poweron
     Should Be Equal  ${new_ldap_privilege}  Operator
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # Verify that the LDAP user with operator privilege is able to power the system on.
-    Redfish Power On
+    Redfish.Post  ${REDFISH_POWER_URI}
+    ...  body={'ResetType': 'On'}   valid_status_codes=[200]
     Redfish.Logout
     Redfish.Login
 
