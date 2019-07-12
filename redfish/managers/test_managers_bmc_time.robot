@@ -10,7 +10,7 @@ Library                      ../../lib/gen_robot_valid.py
 
 Test Teardown                Test Teardown Execution
 Suite Setup                  Suite Setup Execution
-Suite Teardown               Redfish.Logout
+Suite Teardown               Suite Teardown Execution
 
 *** Variables ***
 ${max_time_diff_in_seconds}  6
@@ -189,3 +189,9 @@ Suite Setup Execution
 
     Printn
     Redfish.Login
+    Rest Set Time Owner
+
+Suite Teardown Execution
+    [Documentation]  Do the suite level teardown.
+    Rest Set Time Owner
+    Redfish.Logout
