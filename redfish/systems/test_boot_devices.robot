@@ -106,6 +106,7 @@ Set And Verify BootSource And BootType
     ${payload}=  Create Dictionary  Boot=${data}
 
     Redfish.Patch  /redfish/v1/Systems/system  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     ${resp}=  Redfish.Get  /redfish/v1/Systems/system
     Should Be Equal As Strings  ${resp.dict["Boot"]["BootSourceOverrideEnabled"]}
