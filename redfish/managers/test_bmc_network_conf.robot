@@ -635,7 +635,7 @@ Configure Static Name Servers
     [Documentation]  Configure DNS server on BMC.
     [Arguments]  ${static_name_servers}=${original_redfish_nameservers}
 
-    # Descripton of the argument(s):
+    # Description of the argument(s):
     # static_name_servers  A list of static name server IPs to be
     #                      configured on the BMC.
 
