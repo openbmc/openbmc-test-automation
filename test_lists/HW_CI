@@ -31,7 +31,7 @@
 #Redfish tests cases.
 -i Redfish_Login_And_Logout
 -i GET_Redfish_Hypermedia_Without_Login
--i GET_Redfish_SessionService_Resource_With_Login
+-i GET_Redfish_Resources_With_Login
 -i GET_Redfish_SessionService_Without_Login
 -i Redfish_Login_Using_Invalid_Token
 -i Delete_Redfish_Session_Using_Valid_Login
