@@ -193,4 +193,6 @@ Suite Setup Execution
 Suite Teardown Execution
     [Documentation]  Do the suite level teardown.
     Rest Set Time Owner
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={'NTPServers': ['${EMPTY}', '${EMPTY}']}
     Redfish.Logout
