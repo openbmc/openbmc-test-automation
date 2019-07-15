@@ -6,6 +6,8 @@ Resource         ../../lib/common_utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/boot_utils.robot
 Resource         ../../lib/open_power_utils.robot
+Resource         ../../lib/bmc_network_utils.robot
+Library          ../../lib/gen_robot_valid.py
 
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
@@ -54,6 +56,20 @@ Verify Redfish BMC Manager Properties
     Should Be Equal As Strings  ${resp.dict["Name"]}  OpenBmc Manager
     Should Not Be Empty  ${resp.dict["UUID"]}
     Should Be Equal As Strings  ${resp.dict["PowerState"]}  On
+
+
+Verify MAC Address Property Is Populated
+    [Documentation]  Verify BMC managers resource properties.
+    [Tags]  Verify_MAC_Address_Property_Is_Populated
+
+    ${redfish_mac_addr}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0  MACAddress
+    Rprint Vars  redfish_mac_addr  fmt=terse
+    Rvalid Value  redfish_mac_addr
+
+    ${ipaddr_mac_addr}=  Get BMC MAC Address List
+    Rprint Vars  ipaddr_mac_addr  fmt=terse
+
+    List Should Contain Value  ${ipaddr_mac_addr}  ${redfish_mac_addr}
 
 
 Redfish BMC Manager GracefulRestart When Host Off
