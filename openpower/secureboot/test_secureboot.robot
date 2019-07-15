@@ -213,8 +213,7 @@ Violate Secure Boot Using Corrupt Image
     Log  ${error_log_path}
 
     # Starting a power on.
-    Redfish Power On  stack_mode=skip  quiet=1
-    Set Auto Reboot  1
+    BMC Execute Command  /usr/bin/obmcutil poweron
     Wait Until Keyword Succeeds  15 min  15 sec  Error Logs Should Exist
 
     #TODO: This will be enabled little later as more tesing required
