@@ -179,7 +179,7 @@ version 2.3.1 or greater is required) or via Robot CLI command.
 
 * Run tests:
     ```
-    $ tox -e tests
+    $ tox tests
     ```
 
 * How to run individual test:
