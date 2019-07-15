@@ -118,6 +118,7 @@ Verify Error Upon Creating Same Users With Different Privileges
     Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}test_user
 
 Verify Modifying User Attributes
     [Documentation]  Verify modifying user attributes.
@@ -191,6 +192,10 @@ Verify User Account Locked
 
     Redfish.Logout
 
+    Redfish.Login
+
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
+
 Verify Admin User Privilege
     [Documentation]  Verify admin user privilege.
     [Tags]  Verify_Admin_User_Privilege
@@ -215,6 +220,12 @@ Verify Admin User Privilege
     # Verify modified user.
     Redfish Verify User  user_user  NewTestPwd123  User  ${True}
 
+    Redfish.Login
+
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}operator_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
+
 Verify Operator User Privilege
     [Documentation]  Verify operator user privilege.
     [Tags]  Verify_operator_User_Privilege
@@ -232,6 +243,12 @@ Verify Operator User Privilege
     Redfish.Patch  ${REDFISH_ACCOUNTS_URI}admin_user  body={'Password': 'NewTestPwd123'}
     ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
 
+    Redfish.Login
+
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}operator_user
+
+
 Verify 'User' User Privilege
     [Documentation]  Verify 'user' user privilege.
     [Tags]  Verify_User_User_Privilege
@@ -241,6 +258,10 @@ Verify 'User' User Privilege
     # Read system level data.
     ${system_model}=  Redfish_Utils.Get Attribute
     ...  ${SYSTEM_BASE_URI}  Model
+
+    Redfish.Login
+
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
 
 
 *** Keywords ***
