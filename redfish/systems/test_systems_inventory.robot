@@ -15,6 +15,7 @@ Test Teardown       Test Teardown Execution
 # The passing criteria.  Must have at least this many.
 ${min_num_dimms}   2
 ${min_num_cpus}    1
+${min_num_cores}   18
 
 
 *** Test Cases ***
@@ -24,6 +25,36 @@ Get Processor Inventory Via Redfish And Verify
     [Tags]  Get_Processor_Inventory_Via_Redfish_And_Verify
 
     Verify FRU Inventory Minimums  Processors  ${min_num_cpus}
+
+
+Get Available CPU Cores And Verify
+    [Documentation]  Get the total number of cores in the system.
+    [Tags]  Get_Available_CPU_Cores_And_Verify
+
+    ${total_num_cores}=  Set Variable  ${0}
+
+    ${processor_uris}=
+    ...  Redfish_Utils.Get Member List  ${SYSTEM_BASE_URI}Processors
+    # Example of processor_uris:
+    # /redfish/v1/Systems/system/Processors/cpu0
+    # /redfish/v1/Systems/system/Processors/cpu1
+
+    :FOR  ${processor}  IN  @{processor_uris}
+        # If the status of the processor is "OK" and "Enabled", get its number
+        # of cores.
+        ${status}=  Redfish.Get Attribute  ${processor}  Status
+        ${processor_cores}=  Run Keyword If
+        ...  "${status['Health']}" == "OK" and "${status['State']}" == "Enabled"
+        ...     Redfish.Get Attribute  ${processor}  TotalCores
+        ...  ELSE
+        ...     Set Variable  ${0}
+        # Add the number of processor_cores to the total.
+        ${total_num_cores}=  Evaluate  $total_num_cores + $processor_cores
+    END
+
+    Rprint Vars  total_num_cores
+    Run Keyword If  ${total_num_cores} < ${min_num_cores}
+    ...  Fail  Too few CPU cores found.
 
 
 Get Memory Inventory Via Redfish And Verify
