@@ -67,7 +67,8 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
     ...  ${GROUP_PRIVILEGE}  ${GROUP_NAME}
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # With LDAP user and with right privilege trying to do BMC reboot.
-    Redfish OBMC Reboot (off)
+    Redfish.Post  ${REDFISH_BMC_REBOOT_URI}
+    ...  body={'ResetType': 'GracefulRestart'}   valid_status_codes=[200]
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
     Redfish.Login

@@ -171,6 +171,9 @@ POWER_FORCE_OFF = 'ForceOff'
 REDFISH_POWER = 'Systems/system/Actions/ComputerSystem.Reset'
 REDFISH_POWER_URI = REDFISH_BASE_URI + REDFISH_POWER
 
+REDFISH_BMC_REBOOT = 'Managers/bmc/Actions/Manager.Reset'
+REDFISH_BMC_REBOOT_URI = REDFISH_BASE_URI + REDFISH_BMC_REBOOT
+
 # rsyslog variables.
 REMOTE_LOGGING_URI = OPENBMC_BASE_URI + 'logging/config/remote/'
 
