@@ -146,6 +146,11 @@ class tally_sheet:
                                     used.
         """
 
+        if row_key in self.__table:
+            # If we allow this, the row values get re-initialized.
+            message = "An entry for \"" + row_key + "\" already exists in"
+            message += " tally sheet."
+            raise ValueError(message)
         if init_fields_dict is None:
             init_fields_dict = self.__init_fields_dict
         try:
@@ -268,19 +273,22 @@ class tally_sheet:
         dash_format_string = '{0:-<' + str(key_width) + '}'
         field_num = 0
 
-        first_rec = next(iter(self.__table.items()))
-        for row_key, value in first_rec[1].items():
-            field_num += 1
-            if isinstance(value, int):
-                align = ':>'
-            else:
-                align = ':<'
-            format_string += ' {' + str(field_num) + align +\
-                             str(len(row_key)) + '}'
-            dash_format_string += ' {' + str(field_num) + ':->' +\
-                                  str(len(row_key)) + '}'
-            report_width += 1 + len(row_key)
-            col_names.append(row_key.title())
+        try:
+            first_rec = next(iter(self.__table.items()))
+            for row_key, value in first_rec[1].items():
+                field_num += 1
+                if isinstance(value, int):
+                    align = ':>'
+                else:
+                    align = ':<'
+                format_string += ' {' + str(field_num) + align +\
+                                 str(len(row_key)) + '}'
+                dash_format_string += ' {' + str(field_num) + ':->' +\
+                                      str(len(row_key)) + '}'
+                report_width += 1 + len(row_key)
+                col_names.append(row_key.title())
+        except StopIteration:
+            pass
         num_fields = field_num + 1
         totals_line_fmt = '{0:=<' + str(report_width) + '}'
 
