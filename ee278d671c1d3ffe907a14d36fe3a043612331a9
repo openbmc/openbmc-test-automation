@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ddd0ff3c_45f2d0ee",
+        "filename": "tools/libdoc_gen.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-16T12:55:18Z",
+      "side": 1,
+      "message": "Please fix the white space here",
+      "revId": "ee278d671c1d3ffe907a14d36fe3a043612331a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
