@@ -16,8 +16,93 @@ Force Tags       LDAP_Test
 *** Variables ***
 ${old_ldap_privilege}  ${EMPTY}
 &{old_account_service}  &{EMPTY}
+&{old_ldap_config}  &{EMPTY}
 
 ** Test Cases **
+
+Verify LDAP Configuration Created
+    [Documentation]  Verify LDAP configuration created.
+    [Tags]  Verify_LDAP_Configuration_Created
+
+    Create LDAP Configuration
+    # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
+    Get LDAP Configuration  ${LDAP_TYPE}
+    Sleep  10s
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+    Redfish.Login
+
+
+Verify LDAP Service Disable
+    [Documentation]  Verify LDAP is disabled and that LDAP user cannot login.
+    [Tags]  Verify_LDAP_Service_Disable
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}
+    Sleep  15s
+    ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
+    ...  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${False}  msg=LDAP user was able to login even though the LDAP service was disabled.
+    Redfish.Logout
+    Redfish.Login
+    # Enabling LDAP so that LDAP user works.
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
+    Redfish.Logout
+    Redfish.Login
+
+
+Verify LDAP Login With ServiceEnabled
+    [Documentation]  Verify LDAP Login with ServiceEnabled.
+    [Tags]  Verify_LDAP_Login_With_ServiceEnabled
+
+    Disable Other LDAP
+    # Actual service enablement.
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
+    Sleep  15s
+    # After update, LDAP login.
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+    Redfish.Login
+
+
+Verify LDAP Login With Correct AuthenticationType
+    [Documentation]  Verify LDAP Login with right AuthenticationType.
+    [Tags]  Verify_LDAP_Login_With_Correct_AuthenticationType
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'Authentication': {'AuthenticationType':'UsernameAndPassword'}}}
+    Sleep  15s
+    # After update, LDAP login.
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+    Redfish.Login
+
+
+Verify LDAP Config Update With Incorrect AuthenticationType
+    [Documentation]  Verify invalid AuthenticationType is not updated.
+    [Tags]  Verify_LDAP_Update_With_Incorrect_AuthenticationType
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'Authentication': {'AuthenticationType':'KerberosKeytab'}}}  valid_status_codes=[400]
+
+
+Verify LDAP Login With Correct LDAP URL
+    [Documentation]  Verify LDAP Login with right LDAP URL.
+    [Tags]  Verify_LDAP_Login_With_Correct_LDAP_URL
+
+    Config LDAP URL  ${LDAP_SERVER_URI}
+
+
+Verify LDAP Config Update With Incorrect LDAP URL
+    [Documentation]  Verify LDAP Login fails with invalid LDAP URL.
+    [Tags]  Verify_LDAP_Config_Update_With_Incorrect_LDAP_URL
+    [Teardown]  Run Keywords  Restore LDAP URL  AND
+    ...  FFDC On Test Case Fail
+
+    Config LDAP URL  "ldap://1.2.3.4"
+
 
 Verify LDAP Configuration Exist
     [Documentation]  Verify LDAP configuration is available.
@@ -32,9 +117,7 @@ Verify LDAP User Login
     [Documentation]  Verify LDAP user able to login into BMC.
     [Tags]  Verify_LDAP_User_Login
 
-    ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
-    ...  ${LDAP_USER_PASSWORD}
-    Should Be Equal  ${resp}  ${True}  msg=LDAP user is not able to login.
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
     Redfish.Login
 
@@ -81,10 +164,6 @@ Verify LDAP User With Operator Privilege Able To Do Host Poweroff
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  Operator  ${GROUP_NAME}
 
-    ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
-    ${new_ldap_privilege}=  Set Variable
-    ...  ${ldap_config["LDAP"]["RemoteRoleMapping"][0]["LocalRole"]}
-    Should Be Equal  ${new_ldap_privilege}  Operator
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # Verify that the LDAP user with operator privilege is able to power the system off.
     Redfish.Post  ${REDFISH_POWER_URI}
@@ -102,7 +181,7 @@ Verify AccountLockout Attributes Set To Zero
 
     ${old_account_service}=  Redfish.Get Properties
     ...  ${REDFISH_BASE_URI}AccountService
-    Rprint Vars  old_account_service  fmt=terse
+    Rprint Vars  old_account_service
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=[('AccountLockoutDuration', 0)]
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
@@ -132,6 +211,60 @@ Verify LDAP User With Read Privilege Should Not Do Host Poweron
 
 
 *** Keywords ***
+
+Disable Other LDAP
+    [Documentation]  Disable other LDAP configuration.
+
+    # First disable other LDAP.
+    ${inverse_ldap_type}=  Set Variable If  '${LDAP_TYPE}' == 'LDAP'  ActiveDirectory  LDAP
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${inverse_ldap_type}': {'ServiceEnabled': ${False}}}
+    Sleep  15s
+
+
+Create LDAP Configuration
+    [Documentation]  Create LDAP configuration.
+    [Arguments]  ${ldap_type}=${LDAP_TYPE}  ${ldap_server_uri}=${LDAP_SERVER_URI}
+    ...  ${ldap_bind_dn}=${LDAP_BIND_DN}  ${ldap_bind_dn_password}=${LDAP_BIND_DN_PASSWORD}
+    ...  ${ldap_base_dn}=${LDAP_BASE_DN}
+
+    # Description of argument(s):
+    # ldap_type              The LDAP type ("ActiveDirectory" or "LDAP").
+    # ldap_server_uri        LDAP server uri (e.g. ldap://XX.XX.XX.XX).
+    # ldap_bind_dn           The LDAP bind distinguished name.
+    # ldap_bind_dn_password  The LDAP bind distinguished name password.
+    # ldap_base_dn           The LDAP base distinguished name.
+
+    Disable Other LDAP
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'ServiceEnabled': ${True}, 'ServiceAddresses': ['${ldap_server_uri}'], 'Authentication': {'AuthenticationType':'UsernameAndPassword', 'Username':'${ldap_bind_dn}', 'Password':'${ldap_bind_dn_password}'}, 'LDAPService': {'SearchSettings': {'BaseDistinguishedNames': ['${ldap_base_dn}']}}}}
+    Sleep  15s
+
+
+Config LDAP URL
+    [Documentation]  Config LDAP URL.
+    [Arguments]  ${ldap_server_uri}=${LDAP_SERVER_URI}
+
+    # Description of argument(s):
+    # ldap_server_uri LDAP server uri (e.g. "ldap://XX.XX.XX.XX/").
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'ServiceAddresses': ['${ldap_server_uri}']}}
+    Sleep  15s
+    # After update, LDAP login.
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+    Redfish.Login
+
+
+Restore LDAP URL
+    [Documentation]  Restore LDAP URL.
+
+    # Restoring the working LDAP server uri.
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'ServiceAddresses': ['${LDAP_SERVER_URI}']}}
+    Sleep  15s
+
 
 Restore AccountLockout Attributes
     [Documentation]  Restore AccountLockout Attributes.
@@ -218,7 +351,7 @@ Update LDAP Configuration with LDAP User Role And Group
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
     # Provide adequate time for LDAP daemon to restart after the update.
-    Sleep  10s
+    Sleep  15s
 
 
 Get LDAP Privilege
