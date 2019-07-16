@@ -65,11 +65,15 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
 
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${GROUP_PRIVILEGE}  ${GROUP_NAME}
+    Set Global Variable  ${OPENBMC_USER_NAME}  ${LDAP_USER}
+    Set Global Variable  ${OPENBMC_PASSWORD}  ${LDAP_USER_PASSWORD}
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # With LDAP user and with right privilege trying to do BMC reboot.
     Redfish OBMC Reboot (off)
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
+    Set Global Variable  ${OPENBMC_USER_NAME}  root
+    Set Global Variable  ${OPENBMC_PASSWORD}  0penBmc 
     Redfish.Login
 
 
