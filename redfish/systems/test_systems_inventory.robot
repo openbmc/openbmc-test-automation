@@ -15,6 +15,8 @@ Test Teardown       Test Teardown Execution
 # The passing criteria.  Must have at least this many.
 ${min_num_dimms}   2
 ${min_num_cpus}    1
+${min_num_cores}   16
+${min_num_powersupplies}  1
 
 
 *** Test Cases ***
@@ -24,6 +26,36 @@ Get Processor Inventory Via Redfish And Verify
     [Tags]  Get_Processor_Inventory_Via_Redfish_And_Verify
 
     Verify FRU Inventory Minimums  Processors  ${min_num_cpus}
+
+
+Get Available CPU Cores And Verify
+    [Documentation]  Get the total number of cores in the system.
+    [Tags]  Get_Available_CPU_Cores_And_Verify
+
+    ${total_num_cores}=  Set Variable  ${0}
+
+    ${processor_uris}=
+    ...  Redfish_Utils.Get Member List  ${SYSTEM_BASE_URI}Processors
+    # Example of processor_uris:
+    # /redfish/v1/Systems/system/Processors/cpu0
+    # /redfish/v1/Systems/system/Processors/cpu1
+
+    :FOR  ${processor}  IN  @{processor_uris}
+        # If the status of the processor is "OK" and "Enabled", get its number
+        # of cores.
+        ${status}=  Redfish.Get Attribute  ${processor}  Status
+        ${processor_cores}=  Run Keyword If
+        ...  "${status['Health']}" == "OK" and "${status['State']}" == "Enabled"
+        ...     Redfish.Get Attribute  ${processor}  TotalCores
+        ...  ELSE
+        ...     Set Variable  ${0}
+        # Add the number of processor_cores to the total.
+        ${total_num_cores}=  Evaluate  $total_num_cores + $processor_cores
+    END
+
+    Rprint Vars  total_num_cores
+    Run Keyword If  ${total_num_cores} < ${min_num_cores}
+    ...  Fail  Too few CPU cores found.
 
 
 Get Memory Inventory Via Redfish And Verify
@@ -51,6 +83,28 @@ Get Model And Verify Populated
     Rprint Vars  model
 
 
+Get Available Power Supplies And Verify
+    [Documentation]  Get the number of power supplies that are functional.
+    [Tags]  Get_Available_Power_Supplies_And_Verify
+
+    ${total_num_supplies}=  Set Variable  ${0}
+
+    ${processor_uris}=  Redfish_Utils.Get Member List  /redfish/v1/Chassis
+    :FOR  ${processor}  IN  @{processor_uris}
+        ${is_supply}=  Evaluate  "powersupply" in $processor
+        ${is_functional}=  Run Keyword If  ${is_supply}
+        ...    Check If Supply Is Functional  ${processor}
+        ...  ELSE
+        ...    Set Variable  ${0}
+        ${total_num_supplies}=  Evaluate  $total_num_supplies + $is_functional
+    END
+
+    Rprint Vars  total_num_supplies
+
+    Run Keyword If  ${total_num_supplies} < ${min_num_powersupplies}
+    ...  Fail  Too few power supplies found.
+
+
 *** Keywords ***
 
 
@@ -69,6 +123,25 @@ Verify FRU Inventory Minimums
 
     Return From Keyword If  ${num_valid_frus} >= ${min_num_frus}
     Fail  Too few "${fru_type}" FRUs found, found only ${num_valid_frus}.
+
+
+Check If Supply is Functional
+    [Documentation]  Return 1 if a power supply is OK and Enabled, 0 otherwise.
+    [Arguments]  ${supply_uri}
+
+    # Description of Argument(s):
+    # supply_uri    The Redfish uri of a power supply
+    #               (e.g. "/redfish/v1/Chassis/powersupply0").
+
+    ${status}=  Redfish.Get Attribute  ${supply_uri}  Status
+
+    ${is_functional}=  Run Keyword If
+    ...  "${status['Health']}" == "OK" and "${status['State']}" == "Enabled"
+    ...     Set Variable  ${1}
+    ...  ELSE
+    ...     Set Variable  ${0]
+
+    [Return]  ${is_functional}
 
 
 Suite Teardown Execution
