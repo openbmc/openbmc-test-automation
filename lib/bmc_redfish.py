@@ -85,7 +85,7 @@ class bmc_redfish(redfish_plus):
         Example robot code:
 
         ${properties}=  Get Properties  /redfish/v1/Systems/system/
-        Rprint Vars  properties  fmt=terse
+        Rprint Vars  properties
 
         Output:
 

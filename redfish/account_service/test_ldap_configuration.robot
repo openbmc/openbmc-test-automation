@@ -100,7 +100,7 @@ Verify AccountLockout Attributes Set To Zero
 
     ${old_account_service}=  Redfish.Get Properties
     ...  ${REDFISH_BASE_URI}AccountService
-    Rprint Vars  old_account_service  fmt=terse
+    Rprint Vars  old_account_service
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=[('AccountLockoutDuration', 0)]
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService

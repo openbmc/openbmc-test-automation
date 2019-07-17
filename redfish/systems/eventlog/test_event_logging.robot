@@ -366,11 +366,11 @@ Test Event Log Wrapping
     ${event_log}=  Get Event Logs
 
     ${log_entries}=  Filter Struct  ${event_log}  [('Id', '1')]
-    Rprint Vars  log_entries  fmt=terse
+    Rprint Vars  log_entries
     Should Be Equal As Strings  ${log_entries[0]["Id"]}  1
 
     ${log_entries}=  Filter Struct  ${event_log}  [('Id', '${max_num_event_logs}')]
-    Rprint Vars  log_entries  fmt=terse
+    Rprint Vars  log_entries
     Should Be Equal As Strings  ${log_entries[0]["Id"]}  ${max_num_event_logs}
 
     # Create event log and verify the entry ID, ${max_num_event_logs + 1}.
@@ -381,12 +381,12 @@ Test Event Log Wrapping
     ${event_log}=  Get Event Logs
 
     ${log_entries}=  Filter Struct  ${event_log}  [('Id', '${next_event_log_id}')]
-    Rprint Vars  log_entries  fmt=terse
+    Rprint Vars  log_entries
     Should Be Equal As Strings  ${log_entries[0]["Id"]}  ${next_event_log_id}
 
     # Event log 1 should be wrapped.
     ${log_entries}=  Filter Struct  ${event_log}  [('Id', '1')]
-    Rprint Vars  log_entries  fmt=terse
+    Rprint Vars  log_entries
 
     ${length_log_entries}  Get Length  ${log_entries}
     Should Be Equal As Integers  ${length_log_entries}  0

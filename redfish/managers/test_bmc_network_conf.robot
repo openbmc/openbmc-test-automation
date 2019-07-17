@@ -612,7 +612,7 @@ Verify CLI and Redfish Nameservers
 
     ${redfish_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
     ${resolve_conf_nameservers}=  CLI Get Nameservers
-    Rqprint Vars  redfish_nameservers  resolve_conf_nameservers  fmt=terse
+    Rqprint Vars  redfish_nameservers  resolve_conf_nameservers
 
     # Check that the 2 lists are equivalent.
     ${match}=  Evaluate  set($redfish_nameservers) == set($resolve_conf_nameservers)
