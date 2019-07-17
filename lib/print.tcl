@@ -509,7 +509,19 @@ proc sprint_var { var_name args } {
     return $buffer
   }
 
-  return [sprint_varx $var_name $var_value {*}$args]
+  # If var_value is not defined, catch the error and print its value as
+  # "variable not set".
+  if {[catch {set buffer [sprint_varx $var_name $var_value {*}$args]} error_text options]} {
+    set regex ":\[ \]no\[ \]such\[ \]variable"
+    if { [regexp -expanded ${regex} ${error_text}]} {
+      return [sprint_varx $var_name {** variable not set **} {*}$args]
+    } else {
+      print_dict options
+      exit 1
+    }
+  } else {
+    return $buffer
+  }
 
 }
 
