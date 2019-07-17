@@ -20,54 +20,58 @@ Library   Collections
 ...  status_file_path  openbmc_model  boot_pass  boot_fail  ffdc_dir_path_style
 ...  ffdc_check  ffdc_only  ffdc_function_list  state_change_timeout
 ...  power_on_timeout  power_off_timeout  boot_fail_threshold  delete_errlogs
-...  call_post_stack_plug  test_mode  quiet  debug
+...  call_post_stack_plug  do_pre_boot_plug_in_setup  test_mode  quiet  debug
 
 # Initialize each program parameter.
-${openbmc_host}             ${EMPTY}
-${openbmc_nickname}         ${openbmc_host}
-${openbmc_username}         root
-${openbmc_password}         0penBmc
-${rest_username}            ${openbmc_username}
-${rest_password}            ${openbmc_password}
-${ipmi_username}            ${openbmc_username}
-${ipmi_password}            ${openbmc_password}
-${os_host}                  ${EMPTY}
-${os_username}              root
-${os_password}              P@ssw0rd
-${pdu_host}                 ${EMPTY}
-${pdu_username}             admin
-${pdu_password}             admin
-${pdu_slot_no}              ${EMPTY}
-${openbmc_serial_host}      ${EMPTY}
-${openbmc_serial_port}      ${EMPTY}
-${stack_mode}               normal
-${boot_stack}               ${EMPTY}
-${boot_list}                ${EMPTY}
-${max_num_tests}            0
-${plug_in_dir_paths}        ${EMPTY}
-${status_file_path}         ${EMPTY}
-${openbmc_model}            ${EMPTY}
+${openbmc_host}               ${EMPTY}
+${openbmc_nickname}           ${openbmc_host}
+${openbmc_username}           root
+${openbmc_password}           0penBmc
+${rest_username}              ${openbmc_username}
+${rest_password}              ${openbmc_password}
+${ipmi_username}              ${openbmc_username}
+${ipmi_password}              ${openbmc_password}
+${os_host}                    ${EMPTY}
+${os_username}                root
+${os_password}                P@ssw0rd
+${pdu_host}                   ${EMPTY}
+${pdu_username}               admin
+${pdu_password}               admin
+${pdu_slot_no}                ${EMPTY}
+${openbmc_serial_host}        ${EMPTY}
+${openbmc_serial_port}        ${EMPTY}
+${stack_mode}                 normal
+${boot_stack}                 ${EMPTY}
+${boot_list}                  ${EMPTY}
+${max_num_tests}              0
+${plug_in_dir_paths}          ${EMPTY}
+${status_file_path}           ${EMPTY}
+${openbmc_model}              ${EMPTY}
 # The reason boot_pass and boot_fail are parameters is that it is possible to
 # be called by a program that has already done some tests.  This allows us to
 # keep the grand total.
-${boot_pass}                ${0}
-${boot_fail}                ${0}
-${ffdc_dir_path_style}      ${EMPTY}
-${ffdc_check}               ${EMPTY}
-${ffdc_only}                ${0}
-${ffdc_function_list}       ${EMPTY}
-${state_change_timeout}     3 mins
-${power_on_timeout}         14 mins
-${power_off_timeout}        2 mins
+${boot_pass}                  ${0}
+${boot_fail}                  ${0}
+${ffdc_dir_path_style}        ${EMPTY}
+${ffdc_check}                 ${EMPTY}
+${ffdc_only}                  ${0}
+${ffdc_function_list}         ${EMPTY}
+${state_change_timeout}       3 mins
+${power_on_timeout}           14 mins
+${power_off_timeout}          2 mins
 # If the number of boot failures, exceeds boot_fail_threshold, this program
 # returns non-zero.
-${boot_fail_threshold}      ${0}
-${delete_errlogs}           ${0}
+${boot_fail_threshold}        ${0}
+${delete_errlogs}             ${0}
 # This variable indicates whether post_stack plug-in processing should be done.
-${call_post_stack_plug}     ${1}
-${test_mode}                0
-${quiet}                    0
-${debug}                    0
+${call_post_stack_plug}       ${1}
+# do_pre_boot_plug_in_setup is only heeded when -v ffdc_only:1.  Callers may
+# choose whether to run pre_boot_plug_in_setup which clears existing FFDC file
+# lists and sets new ffdc_prefix value.
+${do_pre_boot_plug_in_setup}  ${1}
+${test_mode}                  0
+${quiet}                      0
+${debug}                      0
 
 # Flag variables.
 # test_really_running is needed by DB_Logging plug-in.
