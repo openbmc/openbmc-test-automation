@@ -183,10 +183,6 @@ def main():
 
     print_plug_in_header()
 
-    rest_fail()
-
-    esel_stop_check()
-
     if STOP_COMMAND.upper() == "FAIL":
         if AUTOBOOT_BOOT_SUCCESS == "0":
             print_timen("The caller wishes to stop after each boot failure.")
@@ -199,6 +195,10 @@ def main():
         if shell_rc != 0:
             print_timen("The caller wishes to stop test execution.")
             stop_check()
+
+    rest_fail()
+
+    esel_stop_check()
 
     qprint_timen("The caller does not wish to stop the test run.")
     return True
