@@ -38,14 +38,14 @@ Get Thermal Records and Verify
     ...  ${REDFISH_CHASSIS_THERMAL_URI}  ${record_type}
 
     ${num_records}=  Get Length  ${records}
-    Rprint Vars  num_records  records  fmt=terse
+    Rprint Vars  num_records  records
 
     ${invalid_records}=  Filter Struct  ${records}
     ...  [('Health', '^OK$'), ('State', '^Enabled$'), ('${reading_type}', '')]  regex=1  invert=1
     ${num_invalid_records}=  Get Length  ${invalid_records}
 
     Run Keyword If  ${num_invalid_records} > ${0}
-    ...  Rprint Vars  num_invalid_records  invalid_records  fmt=terse
+    ...  Rprint Vars  num_invalid_records  invalid_records
     Rvalid Value  num_invalid_records  valid_values=[0]
 
     ${invalid_records}=  Evaluate
@@ -53,7 +53,7 @@ Get Thermal Records and Verify
 
     ${num_invalid_records}=  Get Length  ${invalid_records}
     Run Keyword If  ${num_invalid_records} > ${0}
-    ...  Rprint Vars  num_invalid_records  invalid_records  fmt=terse
+    ...  Rprint Vars  num_invalid_records  invalid_records
     Rvalid Value   num_invalid_records  valid_values=[0]
 
 Suite Teardown Execution

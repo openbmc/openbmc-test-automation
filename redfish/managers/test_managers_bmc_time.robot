@@ -126,11 +126,11 @@ Verify Enable NTP
 
     ${original_ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
     Set Suite Variable  ${original_ntp}
-    Rprint Vars  original_ntp  fmt=terse
+    Rprint Vars  original_ntp
     # The following patch command should set the ["NTP"]["ProtocolEnabled"] property to "True".
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={u'NTPEnabled': ${True}}
     ${ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
-    Rprint Vars  ntp  fmt=terse
+    Rprint Vars  ntp
     Rvalid Value  ntp["ProtocolEnabled"]  valid_values=[True]
 
 

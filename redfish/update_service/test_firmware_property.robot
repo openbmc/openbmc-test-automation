@@ -30,7 +30,7 @@ Verify Firmware Update ApplyTime Immediate
 
     # TODO: Move to redfish when avialable.
     ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
-    Rprint Vars  apply_time  fmt=terse
+    Rprint Vars  apply_time
     Should Be Equal   ${apply_time}  xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.Immediate
 
 
@@ -52,7 +52,7 @@ Verify Firmware Update ApplyTime OnReset
 
     # TODO: Move to redfish when avialable.
     ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
-    Rprint Vars  apply_time  fmt=terse
+    Rprint Vars  apply_time
     Should Be Equal   ${apply_time}  xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.OnReset
 
 

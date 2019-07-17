@@ -28,7 +28,7 @@ def get_dump_dict(quiet=None):
     Example robot program call:
 
     ${dump_dict}=  Get Dump Dict
-    Rprint Vars  dump_dict  fmt=terse
+    Rprint Vars  dump_dict
 
     Example output:
 
