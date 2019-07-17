@@ -44,13 +44,15 @@ master_pid = os.environ.get('AUTOBOOT_MASTER_PID', program_pid)
 pgm_name = re.sub('\\.py$', '', os.path.basename(__file__))
 
 # Set up boot data structures.
-boot_table = create_boot_table()
+os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
+boot_table = create_boot_table(os_host=os_host)
 valid_boot_types = create_valid_boot_list(boot_table)
 
 boot_lists = read_boot_lists()
-# The maximum number of entries that can be in the last_ten global variable.
+
+# The maximum number of entries that can be in the boot_history global variable.
 max_boot_history = 10
-last_ten = []
+boot_history = []
 
 state = st.return_state_constant('default_state')
 cp_setup_called = 0
@@ -68,7 +70,8 @@ default_power_off = "REST Power Off"
 boot_count = 0
 
 LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
-ffdc_prefix = ""
+AUTOBOOT_FFDC_PREFIX = os.environ.get('AUTOBOOT_FFDC_PREFIX', '')
+ffdc_prefix = AUTOBOOT_FFDC_PREFIX
 boot_start_time = ""
 boot_end_time = ""
 save_stack = vs.var_stack('save_stack')
@@ -152,7 +155,8 @@ def process_pgm_parms():
     # The following subset of parms should be processed as integers.
     int_list = ['max_num_tests', 'boot_pass', 'boot_fail', 'ffdc_only',
                 'boot_fail_threshold', 'delete_errlogs',
-                'call_post_stack_plug', 'quiet', 'test_mode', 'debug']
+                'call_post_stack_plug', 'do_pre_boot_plug_in_setup', 'quiet',
+                'test_mode', 'debug']
     for parm in parm_list:
         if parm in int_list:
             sub_cmd = "int(BuiltIn().get_variable_value(\"${" + parm +\
@@ -177,7 +181,7 @@ def process_pgm_parms():
     global boot_stack
     global boot_results_file_path
     global boot_results
-    global last_ten
+    global boot_history
     global ffdc_list_file_path
     global ffdc_report_list_path
     global ffdc_summary_list_path
@@ -196,8 +200,8 @@ def process_pgm_parms():
 
     if os.path.isfile(boot_results_file_path):
         # We've been called before in this run so we'll load the saved
-        # boot_results and last_ten objects.
-        boot_results, last_ten =\
+        # boot_results and boot_history objects.
+        boot_results, boot_history =\
             pickle.load(open(boot_results_file_path, 'rb'))
     else:
         boot_results = boot_results(boot_table, boot_pass, boot_fail)
@@ -431,7 +435,7 @@ def setup():
     host = socket.gethostname()
     host_name, host_ip = gm.get_host_name_ip(host)
 
-    gp.dprint_var(boot_table, 1)
+    gp.dprint_var(boot_table)
     gp.dprint_var(boot_lists)
 
 
@@ -492,7 +496,7 @@ def validate_parms():
         error_message = "You have selected the following boots which" +\
                         " require a PDU host but no value for pdu_host:\n"
         error_message += gp.sprint_var(selected_PDU_boots)
-        error_message += gp.sprint_var(pdu_host, 2)
+        error_message += gp.sprint_var(pdu_host, fmt=gp.blank())
         BuiltIn().fail(gp.sprint_error(error_message))
 
     return
@@ -596,8 +600,8 @@ def select_boot():
             gp.qprint_timen("The machine state does not match the required"
                             + " starting state for a '" + boot_candidate
                             + "' boot test:")
-            gp.qprint_varx("boot_table[" + boot_candidate + "][start]",
-                           boot_table[boot_candidate]['start'], 1)
+            gp.qprint_varx("boot_table_start_entry",
+                           boot_table[boot_candidate]['start'])
             boot_stack.append(boot_candidate)
             transitional_boot_selected = True
             popped_boot = boot_candidate
@@ -629,20 +633,6 @@ def select_boot():
     boot = random.choice(boot_candidates)
 
     return boot
-
-
-def print_last_boots():
-    r"""
-    Print the last ten boots done with their time stamps.
-    """
-
-    # indent 0, 90 chars wide, linefeed, char is "="
-    gp.qprint_dashes(0, 90)
-    gp.qprintn("Last 10 boots:\n")
-
-    for boot_entry in last_ten:
-        gp.qprint(boot_entry)
-    gp.qprint_dashes(0, 90)
 
 
 def print_defect_report(ffdc_file_list):
@@ -719,7 +709,7 @@ def print_defect_report(ffdc_file_list):
               openbmc_serial_host_name, openbmc_serial_ip, openbmc_serial_port)
 
     gp.qprintn()
-    print_last_boots()
+    print_boot_history(boot_history)
     gp.qprintn()
     gp.qprint_var(state)
     gp.qprintn()
@@ -771,7 +761,7 @@ def print_test_start_message(boot_keyword):
                   (e.g. "BMC Power On").
     """
 
-    global last_ten
+    global boot_history
     global boot_start_time
 
     doing_msg = gp.sprint_timen("Doing \"" + boot_keyword + "\".")
@@ -782,10 +772,7 @@ def print_test_start_message(boot_keyword):
 
     gp.qprint(doing_msg)
 
-    last_ten.append(doing_msg)
-
-    # Trim list to max number of entries.
-    del last_ten[:max(0, len(last_ten) - max_boot_history)]
+    update_boot_history(boot_history, doing_msg, max_boot_history)
 
 
 def stop_boot_test(signal_number=0,
@@ -835,7 +822,7 @@ def run_boot(boot):
         grpi.rprocess_plug_in_packages(call_point="pre_boot")
     if rc != 0:
         error_message = "Plug-in failed with non-zero return code.\n" +\
-            gp.sprint_var(rc, 1)
+            gp.sprint_var(rc, fmt=gp.hexa())
         set_default_siguser1()
         BuiltIn().fail(gp.sprint_error(error_message))
 
@@ -861,7 +848,7 @@ def run_boot(boot):
                 grpi.rprocess_plug_in_packages(call_point="post_reboot")
             if rc != 0:
                 error_message = "Plug-in failed with non-zero return code.\n"
-                error_message += gp.sprint_var(rc, 1)
+                error_message += gp.sprint_var(rc, fmt=gp.hexa())
                 set_default_siguser1()
                 BuiltIn().fail(gp.sprint_error(error_message))
         else:
@@ -884,7 +871,7 @@ def run_boot(boot):
         grpi.rprocess_plug_in_packages(call_point="post_boot")
     if rc != 0:
         error_message = "Plug-in failed with non-zero return code.\n" +\
-            gp.sprint_var(rc, 1)
+            gp.sprint_var(rc, fmt=gp.hexa())
         set_default_siguser1()
         BuiltIn().fail(gp.sprint_error(error_message))
 
@@ -992,11 +979,11 @@ def obmc_boot_test_teardown():
             call_point='cleanup', stop_on_plug_in_failure=0)
 
     if 'boot_results_file_path' in globals():
-        # Save boot_results and last_ten objects to a file in case they are
+        # Save boot_results and boot_history objects to a file in case they are
         # needed again.
         gp.qprint_timen("Saving boot_results to the following path.")
         gp.qprint_var(boot_results_file_path)
-        pickle.dump((boot_results, last_ten),
+        pickle.dump((boot_results, boot_history),
                     open(boot_results_file_path, 'wb'),
                     pickle.HIGHEST_PROTOCOL)
 
@@ -1052,9 +1039,8 @@ def post_stack():
         grpi.rprocess_plug_in_packages(call_point='post_stack',
                                        stop_on_plug_in_failure=0,
                                        return_history=True)
-    last_ten.extend(history)
-    # Trim list to max number of entries.
-    del last_ten[:max(0, len(last_ten) - max_boot_history)]
+    for doing_msg in history:
+        update_boot_history(boot_history, doing_msg, max_boot_history)
     if rc != 0:
         boot_success = 0
 
@@ -1119,7 +1105,8 @@ def obmc_boot_test_py(loc_boot_stack=None,
 
     if ffdc_only:
         gp.qprint_timen("Caller requested ffdc_only.")
-        pre_boot_plug_in_setup()
+        if do_pre_boot_plug_in_setup:
+            pre_boot_plug_in_setup()
         grk.run_key_u("my_ffdc")
         return
 
