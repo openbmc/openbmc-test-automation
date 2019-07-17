@@ -218,7 +218,7 @@ Test SDR Info
 Suite Setup Execution
     [Documentation]  Do the initial suite setup.
 
-    Redfish Power On
+    Redfish Power On  stack_mode=skip  quiet=1
 
     ${uri_list}=  Read Properties  ${OPENBMC_BASE_URI}list
     Set Suite Variable  ${SYSTEM_URI}  ${uri_list}
