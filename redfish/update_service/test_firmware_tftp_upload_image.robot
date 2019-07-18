@@ -31,11 +31,7 @@ TFTP Download Install With ApplyTime OnReset Policy
     [Documentation]  Download image to BMC using TFTP with OnReset policy and verify installation.
     [Tags]  TFTP_Download_Install_With_ApplyTime_OnReset_Policy
 
-    # Set and verify the firmware OnReset policy.
-    Redfish.Patch  ${REDFISH_BASE_URI}UpdateService  body={'ApplyTime' : 'OnReset'}
-    ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
-    Rvalid Value  apply_time  valid_values=['xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.OnReset']
-    Rprint Vars  apply_time
+    Set ApplyTime Setting  policy=OnReset
 
     # Download image from TFTP server to BMC.
     Redfish.Post  /redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate
@@ -56,7 +52,44 @@ TFTP Download Install With ApplyTime OnReset Policy
     Check Image Update Progress State  match_state='Updating'  image_id=${image_id}
 
     # Wait for the image to install complete.
-    Wait Until Keyword Succeeds  5 min  15 sec
+    Wait Until Keyword Succeeds  8 min  15 sec
+    ...  Check Image Update Progress State  match_state='Enabled'  image_id=${image_id}
+
+    Redfish OBMC Reboot (off)
+
+    # Verify the image is installed and functional.
+    ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '=' | sed 's/"//g'
+    ${functional_version}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
+    Rvalid Value  functional_version  valid_values=['${install_version}']
+    Rprint Vars  functional_version
+
+
+ImageURI Download Install With ApplyTime OnReset Policy
+    [Documentation]  Download image to BMC using ImageURI with OnReset policy and verify installation.
+    [Tags]  ImageURI_Download_Install_With_ApplyTime_OnReset_Policy
+
+    Set ApplyTime Setting  policy=OnReset
+
+    # Download image from TFTP server via ImageURI to BMC.
+    Redfish.Post  /redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate
+    ...  body={"ImageURI": "tftp://${TFTP_SERVER}/${IMAGE_FILE_NAME}"}
+
+    # Wait for image tar file to download complete.
+    ${image_id}=  Wait Until Keyword Succeeds  60 sec  10 sec  Get Latest Image ID
+    Rprint Vars  image_id
+
+    # Let the image get extracted and it should not fail.
+    Sleep  5s
+    Check Image Update Progress State  match_state='Disabled', 'Updating'  image_id=${image_id}
+
+    # Get image version currently installation in progress.
+    ${install_version}=  Get Firmware Image Version  image_id=${image_id}
+    Rprint Vars  install_version
+
+    Check Image Update Progress State  match_state='Updating'  image_id=${image_id}
+
+    # Wait for the image to install complete.
+    Wait Until Keyword Succeeds  8 min  15 sec
     ...  Check Image Update Progress State  match_state='Enabled'  image_id=${image_id}
 
     Redfish OBMC Reboot (off)
