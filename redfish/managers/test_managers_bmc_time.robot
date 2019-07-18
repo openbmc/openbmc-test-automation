@@ -14,6 +14,7 @@ Suite Teardown               Suite Teardown Execution
 
 *** Variables ***
 ${max_time_diff_in_seconds}  6
+${date_time_with_offset}     2019-04-25T26:24:46+00:00
 ${invalid_datetime}          "2019-04-251T12:24:46+00:00"
 ${ntp_server_1}              "9.9.9.9"
 ${ntp_server_2}              "2.2.3.3"
@@ -51,6 +52,26 @@ Verify Set Time Using Redfish
     ...  ${new_bmc_time}
     ${time_diff}=  Evaluate  abs(${time_diff})
     Rprint Vars   old_bmc_time  new_bmc_time  cli_bmc_time  time_diff  max_time_diff_in_seconds
+    Should Be True  ${time_diff} < ${max_time_diff_in_seconds}
+    ...  The difference between Redfish time and CLI time exceeds the allowed time difference.
+    # Setting back to old bmc time.
+    Redfish Set DateTime  ${old_bmc_time}
+
+
+Verify Set DateTime With Offset Using Redfish
+    [Documentation]  Verify set DateTime with offset using redfish API.
+    [Tags]  Verify_Set_DateTime_With_Offset_Using_Redfish
+
+
+    ${old_bmc_time}=  CLI Get BMC DateTime
+    Redfish Set DateTime  ${date_time_with_offset}
+    ${cli_bmc_time}=  CLI Get BMC DateTime
+    # To verify offset is added to a day.
+    Should Be Equal As Integers  ${cli_bmc_time.day}  26
+    ${time_diff}=  Subtract Date From Date  ${cli_bmc_time}
+    ...  ${date_time_with_offset}
+    ${time_diff}=  Evaluate  abs(${time_diff})
+    Rprint Vars   old_bmc_time  date_time_with_offset  cli_bmc_time  time_diff  max_time_diff_in_seconds
     Should Be True  ${time_diff} < ${max_time_diff_in_seconds}
     ...  The difference between Redfish time and CLI time exceeds the allowed time difference.
     # Setting back to old bmc time.
