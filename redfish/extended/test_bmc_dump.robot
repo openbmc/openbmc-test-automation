@@ -2,12 +2,12 @@
 
 Documentation       Test dump functionality of OpenBMC.
 
-Resource            ../lib/openbmc_ffdc.robot
-Resource            ../lib/rest_client.robot
-Resource            ../lib/dump_utils.robot
-Resource            ../lib/boot_utils.robot
-Resource            ../lib/utils.robot
-Library             ../lib/bmc_ssh_utils.py
+Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/rest_client.robot
+Resource            ../../lib/dump_utils.robot
+Resource            ../../lib/boot_utils.robot
+Resource            ../../lib/utils.robot
+Library             ../../lib/bmc_ssh_utils.py
 
 Test Setup          Open Connection And Log In
 Test Teardown       Test Teardown Execution
@@ -27,7 +27,7 @@ Verify User Initiated BMC Dump When Powered Off
     ...  verify dump entry for it.
     [Tags]  Verify_User_Initiated_BMC_Dump_When_Powered_Off
 
-    REST Power Off  stack_mode=skip
+    Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated Dump
     Check Existence of BMC Dump file  ${dump_id}
 
@@ -126,7 +126,7 @@ Verify User Initiated BMC Dump When Host Booted
     ...  verify dump entry for it.
     [Tags]  Verify_User_Initiated_BMC_Dump_When_Host_Booted
 
-    REST Power On  stack_mode=skip
+    Redfish Power On  stack_mode=skip
     Create User Initiated Dump
 
 
@@ -191,7 +191,7 @@ Verify Dump After Host Watchdog Error Injection
     [Documentation]  Inject host watchdog error and verify whether dump is generated.
     [Tags]  Verify_Dump_After_Host_Watchdog_Error_Injection
 
-    REST Power On
+    Redfish Power On
 
     Run Keyword And Ignore Error  Delete All Dumps
 
