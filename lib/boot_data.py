@@ -379,7 +379,7 @@ def update_boot_history(boot_history, boot_start_message, max_boot_history=10):
                                     text announcing the start of a boot test.
     max_boot_history                The max number of entries to be kept in
                                     the boot_history list.  The oldest entries
-                                    are deleted to acheive this list size.
+                                    are deleted to achieve this list size.
     """
 
     boot_history.append(boot_start_message)
