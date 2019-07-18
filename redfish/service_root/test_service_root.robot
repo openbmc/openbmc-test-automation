@@ -93,6 +93,24 @@ Delete Redfish Session Using Valid login
     List Should Not Contain Value  ${resp}  ${session_info["location"]}
 
 
+Redfish Login Via SessionService
+    [Documentation]  Login to BMC via redfish session service.
+    [Tags]   Redfish_Login_Via_SessionService
+
+    Create Session  openbmc  https://${OPENBMC_HOST}
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${data}=  Create Dictionary  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}
+
+    ${resp}=  Post Request  openbmc  /redfish/v1/SessionService/Sessions  data=${data}  headers=${headers}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
+
+    ${content} =  To JSON  ${resp.content}
+    ${headers}=  Create Dictionary   Content-Type=application/json
+    ...  X-Auth-Token=${resp.headers["X-Auth-Token"]}
+    ${resp}=  Delete Request  openbmc  /redfish/v1/SessionService/Sessions/${content["Id"]}  headers=${headers}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
 *** Keywords ***
 
 GET And Verify Redfish Response
