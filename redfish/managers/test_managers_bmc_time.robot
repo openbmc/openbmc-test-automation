@@ -14,6 +14,10 @@ Suite Teardown               Suite Teardown Execution
 
 *** Variables ***
 ${max_time_diff_in_seconds}  6
+# The "offset" consists of the value "26" specified for hours.  Redfish will
+# convert that to the next day + 2 hours. 
+${date_time_with_offset}     2019-04-25T26:24:46+00:00
+${expected_date_time}        2019-04-26T02:24:46+00:00
 ${invalid_datetime}          "2019-04-251T12:24:46+00:00"
 ${ntp_server_1}              "9.9.9.9"
 ${ntp_server_2}              "2.2.3.3"
@@ -55,6 +59,22 @@ Verify Set Time Using Redfish
     ...  The difference between Redfish time and CLI time exceeds the allowed time difference.
     # Setting back to old bmc time.
     Redfish Set DateTime  ${old_bmc_time}
+
+
+Verify Set DateTime With Offset Using Redfish
+    [Documentation]  Verify set DateTime with offset using redfish API.
+    [Tags]  Verify_Set_DateTime_With_Offset_Using_Redfish
+    [Teardown]  Run Keywords  Redfish Set DateTime  AND  FFDC On Test Case Fail
+
+    Redfish Set DateTime  ${date_time_with_offset}
+    ${cli_bmc_time}=  CLI Get BMC DateTime
+
+    ${date_time_diff}=  Subtract Date From Date  ${cli_bmc_time}
+    ...  ${expected_date_time}  exclude_millis=yes
+    ${date_time_diff}=  Convert to Integer  ${date_time_diff}
+    Rpvars  date_time_with_offset  expected_date_time  cli_bmc_time
+    ...  date_time_diff  max_time_diff_in_seconds
+    Rvalid Range  date_time_diff  0..${max_time_diff_in_seconds}
 
 
 Verify Set DateTime With Invalid Data Using Redfish
@@ -152,16 +172,23 @@ Redfish Get DateTime
 
 Redfish Set DateTime
     [Documentation]  Set DateTime using Redfish.
-    [Arguments]  ${date_time}  &{kwargs}
+    [Arguments]  ${date_time}=${EMPTY}  &{kwargs}
     # Description of argument(s):
     # date_time                     New time to set for BMC (eg.
-    #                               "2019-06-30 09:21:28").
+    #                               "2019-06-30 09:21:28"). If this value is
+    #                               empty, it will be set to the UTC current
+    #                               date time of the local system.
     # kwargs                        Additional parms to be passed directly to
     #                               th Redfish.Patch function.  A good use for
     #                               this is when testing a bad date-time, the
     #                               caller can specify
     #                               valid_status_codes=[${HTTP_BAD_REQUEST}].
 
+    # Assign default value of UTC current date time if date_time is empty.
+    ${date_time}=  Run Keyword If
+    ...  '${date_time}' == '${EMPTY}'  Get Current Date  time_zone=UTC
+    ...  ELSE
+    ...  Set Variable  ${date_time}
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
     ...  &{kwargs}
 
@@ -172,6 +199,7 @@ Rest Set Time Owner
     # BMC_OWNER is defined in variable.py.
     ${data}=  Create Dictionary  data=${BMC_OWNER}
     Write Attribute  ${TIME_MANAGER_URI}owner  TimeOwner  data=${data}  verify=${TRUE}
+
 
 Restore NTP Mode
     [Documentation]  Restore the original NTP mode.
@@ -192,7 +220,8 @@ Suite Setup Execution
 
 Suite Teardown Execution
     [Documentation]  Do the suite level teardown.
-    Rest Set Time Owner
+
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTPServers': ['${EMPTY}', '${EMPTY}']}
+    Rest Set Time Owner
     Redfish.Logout
