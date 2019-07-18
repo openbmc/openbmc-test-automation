@@ -537,3 +537,16 @@ Get Firmware Image Version
     Rprint Vars  version
 
     [Return]  ${version}
+
+
+Set ApplyTime
+    [Documentation]  Set and verify the firmware "ApplyTime" policy.
+    [Arguments]  ${policy}
+
+    # Description of argument(s):
+    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
+
+    Redfish.Patch  ${REDFISH_BASE_URI}UpdateService  body={'ApplyTime' : '${policy}'}
+    ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
+    Rvalid Value  apply_time  valid_values=["xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.${policy}"]
+    Rprint Vars  apply_time
