@@ -2,10 +2,10 @@
 Documentation       This suite is for Verifying BMC & BIOS version exposed part
 ...                 of system inventory
 
-Resource            ../lib/rest_client.robot
-Resource            ../lib/openbmc_ffdc.robot
-Resource            ../lib/connection_client.robot
-Resource            ../lib/code_update_utils.robot
+Resource            ../../lib/rest_client.robot
+Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/connection_client.robot
+Resource            ../../lib/code_update_utils.robot
 
 Test Teardown       FFDC On Test Case Fail
 
