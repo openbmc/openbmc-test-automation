@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed2fea6_838b93ae",
+        "filename": "docs/openbmc_libdoc_generation.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "- I would move the reference section up to the top of this document.\n\n- Much of what you have in this doc is already in https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#libdoc so I don\u0027t really see the value of repeating it here.\n\n- What I think IS appropriate for this document:\n  - Actual examples you could run on code in our repo like this:\n    python -m robot.libdoc -f html lib/bmc_ssh_utils.py docs/bmc_ssh_utils.html\n  - Any tips about information that you felt you really had to struggle to learn it from the https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#libdoc.  Maybe they skipped valuable information or explained it poorly.\n  - You\u0027re working on some code to automatically generate libdocs for us.  Any descriptions of how to use YOUR code would be valuable.",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e35ddc4_8dd723ea",
+        "filename": "docs/openbmc_libdoc_generation.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "*mentioned",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "540a55b2_6b710cae",
+        "filename": "docs/openbmc_libdoc_generation.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "Or could you just replace all of this text with the single link:\n\nhttps://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#libdoc",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a68f31f_ca1405ae",
+        "filename": "docs/openbmc_libdoc_generation.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "Can you make these bulleted?\n\n- Refer to ....",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d8fab4f_3dc4fd54",
+        "filename": "docs/openbmc_libdoc_generation.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "- Search for \"Built-in tools\" heading.",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7692f9f1_134fdff3",
+        "filename": "docs/openbmc_libdoc_generation.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "- Click on Libdoc \"View\" button",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8bb6bd1_39a4b85f",
+        "filename": "tools/libdoc_gen.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "- We have a template for all free-standing python programs that I\u0027d like you to use.  Please copy templates/python_pgm_template to the name you\u0027ve chosen and then add your functions and options to it.  If you try running templates/python_pgm_template you\u0027ll see it is already a functional program with help text started, etc.\n\n- I\u0027d like the name of this program to sound a little more action-oriented (even by just putting \"gen\" in front).  I assume \"gen\" means generate.  Will this one program generate docs for ALL of our files?  Anyway, I\u0027m thinking the program name should be more like:\n\ngenerate_repo_libdoc.py\n\nI\u0027ll hold off on a complete review until you\u0027ve done this (though I will make some comments where I can).",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b20b55ca_ba66f971",
+        "filename": "tools/libdoc_gen.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "I don\u0027t see this being used.  Review your imports to make sure they are all necessary.",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f79f8794_d701e78f",
+        "filename": "tools/libdoc_gen.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "Please do this:\n\nfrom gen_cmd import *\n\nThen delete this execute_command function and instead use shell_cmd.\n\nFor example, where you have this:\n\n  output, error, status_code \u003d execute_command(locate_file_cmd)\n\nReplace it with this:\n\n    rc, output \u003d gc.shell_cmd(locate_file_cmd)\n\nYou can read about the various options available on shell_cmd.\n\n- I\u0027ll also recommend this.  In all the places where you use execute_command, you fail the program if you get a bad return code.  With the use of shell_cmd, if you create a global...\n\nignore_err \u003d 1\n\nIt will automatically fail the program on a bad rc unless you explicitly tell it not to.\n\nThat can reduce code like this:\n\n    output, error, status_code \u003d execute_command(locate_file_cmd)\n\n    if status_code \u003d\u003d 0:\n        output \u003d [line for line in output.decode(\u0027utf-8\u0027).split(\u0027\\n\u0027)]\n        return output\n    else:\n        sys.exit()\n\nTo just this:\n\n    rc, output \u003d gc.shell_cmd(locate_file_cmd)\n    output \u003d [line for line in output.decode(\u0027utf-8\u0027).split(\u0027\\n\u0027)]\n        return output",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "377aee4f_bb85c422",
+        "filename": "tools/libdoc_gen.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "Consider deleting this function and replacing call with:\n\n    python_version \u003d sys.version.split()[0]",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8be11caa_f378a059",
+        "filename": "tools/libdoc_gen.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-19T23:09:03Z",
+      "side": 1,
+      "message": "Can you replace lines 101-102 with this:\n\n    python_version \u003d sys.version.split()[0]",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
