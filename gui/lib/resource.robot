@@ -121,7 +121,7 @@ Test Setup Execution
     Launch Browser And Login OpenBMC GUI
     Log To Console  Verifying the system state and stablity...
 
-    Click Button  ${xpath_select_server_power}
+    Click Element  ${xpath_select_server_power}
     ${obmc_current_state}=  Get Text  ${xpath_power_indicator}
     Rpvars  obmc_current_state
 
@@ -235,21 +235,6 @@ Open Browser With URL
     [Return]  ${browser_ID}
 
 
-Model Server Power Click Button
-    [Documentation]  Click main server power in the header section.
-    [Arguments]  ${div_element}  ${anchor_element}
-
-    # Description of argument(s):
-    # div_element     Server power header divisional element
-    #                 (e.g. header_wrapper.)
-    # anchor_element  Server power header anchor element
-    #                 (e.g. header_wrapper_elt.)
-
-    Wait Until Element Is Visible
-    ...  //*[@id='header__wrapper']/div/div[${div_element}]/a[${anchor_element}]/span
-    Click Element
-    ...  //*[@id='header__wrapper']/div/div[${div_element}]/a[${anchor_element}]/span
-
 Controller Server Power Click Button
     [Documentation]  Click main server power in the header section.
     [Arguments]  ${controller_element}
@@ -285,8 +270,6 @@ Controller Power Operations Confirmation Click Button
 GUI Power On
     [Documentation]  Power on the host using GUI.
 
-    Model Server Power Click Button  ${header_wrapper}  ${header_wrapper_elt}
-    Page Should Contain  Attempts to power on the server
     Controller Server Power Click Button  power__power-on
     Page Should Contain  Running
 
