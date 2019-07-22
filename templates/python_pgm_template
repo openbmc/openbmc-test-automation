@@ -3,6 +3,7 @@
 r"""
 python_pgm_template: Copy this template as a base to get a start on a python
 program.  You may remove any generic comments (like this one).
+See help text for details.
 """
 
 import sys
