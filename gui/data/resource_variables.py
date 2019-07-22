@@ -141,3 +141,10 @@ class resource_variables():
         "//*[@id='event__actions-bar']/div[2]/div[2]/button[2]"
     xpath_individual_event_export = \
         "//*[@id='event__actions-bar']/div[2]/div[2]/a"
+
+    # Main menu locators
+    xpath_select_server_control = '//*[contains(@class,"btn-control")]'
+    xpath_select_server_health_menu = '//*[contains(@class, "btn-health")]'
+
+    # GUI Header elements
+    xpath_select_header_power_button = '//*[@class="header__server-power"]'
