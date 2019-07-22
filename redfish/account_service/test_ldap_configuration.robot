@@ -19,6 +19,65 @@ ${old_ldap_privilege}  ${EMPTY}
 
 ** Test Cases **
 
+Verify LDAP Login With ServiceEnabled
+    [Documentation]  Verify LDAP Login with ServiceEnabled.
+    [Tags]  Verify_LDAP_Login_With_ServiceEnabled
+
+    # First disable other LDAP.
+    ${inverse_ldap_type}=  Set Variable If  '${LDAP_TYPE}' == 'LDAP'  ActiveDirectory  LDAP
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${inverse_ldap_type}': {'ServiceEnabled': ${False}}}
+    Sleep  15s
+    # Actual service enablement.
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
+    Sleep  15s
+    # After update, LDAP login.
+    ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
+    ...  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${True}  msg=LDAP user not able to login.
+    Redfish.Logout
+    Redfish.Login
+
+
+Verify LDAP Login With Correct AuthenticationType
+    [Documentation]  Verify LDAP Login with right AuthenticationType.
+    [Tags]  Verify_LDAP_Login_With_Correct_AuthenticationType
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'Authentication': {'AuthenticationType':'UsernameAndPassword'}}}
+    Sleep  15s
+    # After update, LDAP login.
+    ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
+    ...  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${True}  msg=LDAP user not able to login.
+    Redfish.Logout
+    Redfish.Login
+
+
+Verify LDAP Config Update With Incorrect AuthenticationType
+    [Documentation]  Verify invalid AuthenticationType is not updated.
+    [Tags]  Verify_LDAP_Update_With_Incorrect_AuthenticationType
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'Authentication': {'AuthenticationType':'KerberosKeytab'}}}  valid_status_codes=[400]
+
+
+Verify LDAP Login With Correct LDAP URL
+    [Documentation]  Verify LDAP Login with right LDAP URL.
+    [Tags]  Verify_LDAP_Login_With_Correct_LDAP_URL
+
+    Config LDAP URL  ${LDAP_SERVER_URI}
+
+
+Verify LDAP Config Update With Incorrect LDAP URL
+    [Documentation]  Verify LDAP Login fails with invalid LDAP URL.
+    [Tags]  Verify_LDAP_Config_Update_With_Incorrect_LDAP_URL
+    [Teardown]  Restore LDAP URL
+
+    Config LDAP URL  "ldap://1.2.3.4"
+
+
 Verify LDAP Configuration Exist
     [Documentation]  Verify LDAP configuration is available.
     [Tags]  Verify_LDAP_Configuration_Exist
@@ -132,6 +191,33 @@ Verify LDAP User With Read Privilege Should Not Do Host Poweron
 
 
 *** Keywords ***
+
+Config LDAP URL
+    [Documentation]  Config LDAP URL.
+    [Arguments]  ${ldap_server_uri}=${LDAP_SERVER_URI}
+
+    # Description of argument(s):
+    # ldap_server_uri LDAP server uri (e.g. "ldap://XX.XX.XX.XX/")
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'ServiceAddresses': ['${ldap_server_uri}']}}
+    Sleep  15s
+    # After update, LDAP login.
+    ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
+    ...  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${True}  msg=LDAP user not able to login.
+    Redfish.Logout
+    Redfish.Login
+
+
+Restore LDAP URL
+    [Documentation]  Restore LDAP URL.
+
+    # Restoring the working LDAP server uri.
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${ldap_type}': {'ServiceAddresses': ['${LDAP_SERVER_URI}']}}
+    Sleep  15s
+
 
 Restore AccountLockout Attributes
     [Documentation]  Restore AccountLockout Attributes.
