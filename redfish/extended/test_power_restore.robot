@@ -4,14 +4,12 @@ Documentation   This suite verifies the power restore policy supported by
 ...             Refer here for documentation on the REST interfaces
 ...             https://github.com/openbmc/docs/blob/master/rest-api.md
 
-Resource        ../lib/rest_client.robot
-Resource        ../lib/utils.robot
-Resource        ../lib/openbmc_ffdc.robot
-Resource        ../lib/state_manager.robot
-Library         ../lib/state_map.py
-
-
-Library         SSHLibrary
+Resource        ../../lib/rest_client.robot
+Resource        ../../lib/utils.robot
+Resource        ../../lib/openbmc_ffdc.robot
+Resource        ../../lib/state_manager.robot
+Resource        ../../lib/boot_utils.robot
+Library         ../../lib/state_map.py
 
 Test Teardown   Test Teardown Execution
 Suite Teardown  Suite Teardown Execution
@@ -120,7 +118,7 @@ Verify Restore Policy
 
     Set Initial Test State  ${expectedState}
 
-    Initiate BMC Reboot
+    Redfish Power Operation  reset_type=GracefulRestart
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Valid Boot States  ${nextState}
@@ -147,10 +145,10 @@ Set Initial Test State
     # expectedState    Test initial host state.
 
     Run Keyword If  '${expectedState}' == 'Running'
-    ...  Initiate Host Boot
+    ...  Redfish Power On
 
     Run Keyword If  '${expectedState}' == 'Off'
-    ...  Initiate Host PowerOff
+    ...  Redfish Power Off
 
 
 Test Teardown Execution
