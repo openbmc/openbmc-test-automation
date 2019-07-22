@@ -11,8 +11,8 @@ Suite Teardown  Close Browser
 
 
 *** Variables ***
-${xpath_select_server_control}  //*[@id="header__wrapper"]/div/div[2]/p[2]
-${xpath_select_refresh_button}  //*[@id="header__wrapper"]/div/div[3]/button
+${xpath_server_name}            //*[contains(@class, "header__server-ip")]
+${xpath_select_refresh_button}  //*[contains(@class, "header__page-refresh")]
 ${xpath_select_date_text}       //*[@id="header__wrapper"]/div/div[3]/p/span
 ${xpath_header_scroll_front}    //*[@id="header__wrapper"]/div/div[3]/a[1]/span
 ${xpath_header_scroll_back}     //*[@id="header__wrapper"]/div/div[3]/a[1]/i
@@ -23,14 +23,16 @@ Verify Server Power Button
     [Documentation]  Verify server power page on clicking server power button.
     [Tags]  Verify_Server_Power_Button
 
-    Click Button  ${xpath_select_server_power}
+    Click Button  ${xpath_select_server_control}
+    Click Element  ${xpath_select_server_power}
     Wait Until Page Contains  Select a power operation
 
 Verify Server Health Button
     [Documentation]  Verify server health page on clicking server health button.
     [Tags]  Verify_Server_Health_Button
 
-    Click Button  ${xpath_select_server_health}
+    Click Button  ${xpath_select_server_health_menu}
+    Click Element  ${xpath_select_server_health}
     Wait Until Page Contains  All events from the BMC
 
 Verify IP address
@@ -39,7 +41,7 @@ Verify IP address
 
     # NOTE: gui_displayed_ip can be either a host name or an IP address.
     #       (e.g. "machinex" or "xx.xx.xx.xx").
-    ${gui_displayed_ip}=  Get Text  ${xpath_select_server_control}
+    ${gui_displayed_ip}=  Get Text  ${xpath_server_name}
     Should Contain  ${gui_displayed_ip}  ${OPENBMC_HOST}
 
 
