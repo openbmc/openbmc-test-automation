@@ -7,6 +7,8 @@ Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/certificate_utils.robot
 Library          String
 
+Force Tags       Certificate_Test
+
 Suite Setup      Suite Setup Execution
 Test Teardown    Test Teardown Execution
 
