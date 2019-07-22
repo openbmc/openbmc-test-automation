@@ -219,6 +219,30 @@ Verify Dump After Host Watchdog Error Injection
     Should Be True  0 < ${dump_size} < 204800
 
 
+BMC Dump Download Test
+    [Documentation]  Download user created dump, verify size and name.
+    [Tags]  BMC_Dump_Download_Test
+
+    ${dump_id}=  Create User Initiated Dump  check_out_of_space=${False}
+    ${bmc_dump_name}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ls /var/lib/phosphor-debug-collector/dumps/${dump_id}
+
+    ${response}=  OpenBMC Get Request  ${DUMP_DOWNLOAD_URI}${dump_id}
+    ...  quiet=${1}
+    Should Be Equal As Strings  ${response.status_code}  ${HTTP_OK}
+    Create Binary File  ${EXECDIR}${/}logs   ${response.content}
+    Run  tar -xvf ${EXECDIR}${/}logs
+
+    ${download_dump_name}=  Run  ls ${EXECDIR}|grep obmcdump
+    Should Contain  ${bmc_dump_name}  ${download_dump_name}
+    ...  msg=Created Dump Name and Downloaded Dump Name Dosen't Match.
+
+    ${download_dump_size}=  Run
+    ...  du -s ${EXECDIR}${/}${download_dump_name}|awk '{print$1}'
+    Run  rm -rf ${EXECDIR}${/}${download_dump_name};rm ${EXECDIR}${/}logs
+    Should Be True  ${700} <${download_dump_size}
+
+
 *** Keywords ***
 
 Test Teardown Execution
