@@ -219,6 +219,35 @@ Verify Dump After Host Watchdog Error Injection
     Should Be True  0 < ${dump_size} < 204800
 
 
+Verify Download BMC Dump
+    [Documentation]  Verify that a BMC dump can be downloaded to the local machine.
+    [Tags]  Verify_Download_BMC_Dump
+
+    ${dump_id}=  Create User Initiated Dump
+    ${dump_dict}=  Get Dump Dict
+    ${bmc_dump_name}=  Fetch From Right  ${dump_dict['${dump_id}']}  /
+    ${bmc_dump_checksum}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  md5sum ${dump_dict['${dump_id}']}|awk '{print$1}'
+    ${bmc_dump_size}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  stat -c "%s" ${dump_dict['${dump_id}']}
+
+    ${response}=  OpenBMC Get Request  ${DUMP_DOWNLOAD_URI}${dump_id}
+    ...  quiet=${1}
+    Should Be Equal As Strings  ${response.status_code}  ${HTTP_OK}
+    Create Binary File  ${EXECDIR}${/}logs   ${response.content}
+    Run  tar -xvf ${EXECDIR}${/}logs
+    ${download_dump_name}=  Fetch From Left  ${bmc_dump_name}  .
+    ${download_dump_checksum}=  Run  md5sum ${EXECDIR}/logs|awk '{print$1}'
+    ${download_dump_size}=  Run  stat -c "%s" ${EXECDIR}${/}logs
+ 
+    OperatingSystem.Directory Should Exist  ${EXECDIR}/${download_dump_name}
+    ...  msg=Created dump name and downloaded dump name don't match.
+    Should Be Equal As Strings  ${bmc_dump_checksum}  ${download_dump_checksum}
+    Should Be Equal As Strings  ${bmc_dump_size}  ${download_dump_size}
+
+    Run  rm -rf ${EXECDIR}${/}${download_dump_name};rm ${EXECDIR}${/}logs
+
+
 *** Keywords ***
 
 Test Teardown Execution
