@@ -121,7 +121,8 @@ Test Setup Execution
     Launch Browser And Login OpenBMC GUI
     Log To Console  Verifying the system state and stablity...
 
-    Click Button  ${xpath_select_server_power}
+    Click Button  ${xpath_select_server_control}
+    Click Element  ${xpath_select_server_power}
     ${obmc_current_state}=  Get Text  ${xpath_power_indicator}
     Rpvars  obmc_current_state
 
