@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c35eb77_8dbe12d5",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-22T16:09:05Z",
+      "side": 1,
+      "message": "Intel (capitalize)",
+      "range": {
+        "startLine": 17,
+        "startChar": 28,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "353ee3e4_03641993",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-22T16:09:05Z",
+      "side": 1,
+      "message": "Change to: OpenPOWER\nCan you add a reference to the OpenPOWER project?  Perhaps link to https://openpowerfoundation.org/\nIt seems like you need some way to help your readers understand when you use OpenPOWER terminology (such as PNOR) later in this document.",
+      "range": {
+        "startLine": 19,
+        "startChar": 67,
+        "endLine": 19,
+        "endChar": 72
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0b4c5c7_cfe4e769",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-22T16:09:05Z",
+      "side": 1,
+      "message": "Redfish (first letter capitalized)",
+      "range": {
+        "startLine": 62,
+        "startChar": 11,
+        "endLine": 62,
+        "endChar": 18
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "227ae9af_3a43f3a2",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-22T16:09:05Z",
+      "side": 1,
+      "message": "What is an \"official build\"?  Does this mean the fix is verified using the normal development process?",
+      "range": {
+        "startLine": 152,
+        "startChar": 22,
+        "endLine": 152,
+        "endChar": 53
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28a7ff10_9cd7481d",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-22T16:09:05Z",
+      "side": 1,
+      "message": "This bullet feels like an IBM specific statement.\nThis main idea is that we can leave minor defects in the code.\nHow is that different from the previous bullet?",
+      "range": {
+        "startLine": 155,
+        "startChar": 7,
+        "endLine": 156,
+        "endChar": 67
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8ee044a_42ed4b5c",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-22T16:09:05Z",
+      "side": 1,
+      "message": "What does \"officially released\" mean?  Does this mean the code has to be merged into the master branch or into a stable release branch (such as warrior for 2.7.0)?",
+      "range": {
+        "startLine": 159,
+        "startChar": 25,
+        "endLine": 159,
+        "endChar": 54
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2398212_802f406c",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2019-07-22T16:09:05Z",
+      "side": 1,
+      "message": "remove blank line?",
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
