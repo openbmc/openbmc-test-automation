@@ -67,9 +67,9 @@ Verify REST Logging On BMC Journal When Disabled
     # Takes around 5 seconds for the REST to restart service when policy is changed.
     Sleep  10s
 
-    ${login_footprint}=  Catenate  login json:None 200 OK
+    ${login_footprint}=  Catenate  login json: None 200 OK
     # Example: Just get the message part of the syslog
-    # user:root POST http://xx.xx.xx.xx/login json:None 200 OK
+    # user:root POST http://xx.xx.xx.xx/login json: None 200 OK
     ${cmd}=  Catenate  SEPARATOR=  --no-pager | egrep '${login_footprint}'
     ...  | awk -F': ' '{print $2}'
 
@@ -97,7 +97,7 @@ Verify REST Logging On BMC Journal When Enabled
     Log Out OpenBMC
     ${bmc_journald}=  Stop Journal Log
 
-    Should Contain  ${bmc_journald}  login json:None 200 OK
+    Should Contain  ${bmc_journald}  login json: None 200 OK
     ...  msg=${bmc_journald} doesn't contains REST entries.
 
 
