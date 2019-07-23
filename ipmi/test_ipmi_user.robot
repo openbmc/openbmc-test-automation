@@ -99,7 +99,7 @@ Verify Setting IPMI User With Invalid Password
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  user set password ${random_userid} ${invalid_password}
 
-    Should Contain  ${msg}  Invalid data field in request
+    Should Contain  ${msg}  Set User Name command failed
 
 
 Verify Setting IPMI Root User With New Name
