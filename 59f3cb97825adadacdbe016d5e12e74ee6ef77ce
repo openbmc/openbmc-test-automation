@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "feb6a278_f36d60e7",
+        "filename": "docs/openbmc_libdoc_generation.md",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-23T19:56:54Z",
+      "side": 1,
+      "message": "*files",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b1faa08e_89119280",
+        "filename": "tools/generate_repo_libdoc.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-23T19:56:54Z",
+      "side": 1,
+      "message": "- When I cherry picked your change, this file did not have the execute bit turned on.  To fix that, do this and push your changes:\n\nchmod +x tools/generate_repo_libdoc.py\n\n- Can you move this to bin?  We have all of our environment variables set up nicely to run programs from bin.\n\nPlease make this change AFTER you make all other changes.  Otherwise, the file diff gerrit won\u0027t work for me.",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6660fd1a_c7243468",
+        "filename": "tools/generate_repo_libdoc.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-23T19:56:54Z",
+      "side": 1,
+      "message": "This is a preference of mine but since the text here will almost always be close to the main help text, I often just have this for my entire program doc string:\n\nSee help text for details.\n\nThis is mainly to avoid having to maintain this summary text in 2 places.",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac95092f_ea3d605e",
+        "filename": "tools/generate_repo_libdoc.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-23T19:56:54Z",
+      "side": 1,
+      "message": "Delete this line.\n\nThe only changes you have to make from the original python_pgm_template is to add your variables and help text, to add your functions and to add your code wherever it says \"your code here\".",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cb25af7_c1f1827d",
+        "filename": "tools/generate_repo_libdoc.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-23T19:56:54Z",
+      "side": 1,
+      "message": "I always work under the assumption that it is the user\u0027s job to set up the environment so that the necessary python files can be found.  That means setting PYTHONPATH up to point to the ../lib directory.\n\nSo, can you delete this line?",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d8942fb_e2400b6f",
+        "filename": "tools/generate_repo_libdoc.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-23T19:56:54Z",
+      "side": 1,
+      "message": "Remove these 5 lines.  They are not needed.",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35451f70_84ba8dfc",
+        "filename": "tools/generate_repo_libdoc.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-23T19:56:54Z",
+      "side": 1,
+      "message": "Stick with the template version.  Change back to:\n\n    usage\u003d\u0027%(prog)s [OPTIONS]\u0027,",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8597291_1ed96ede",
+        "filename": "tools/generate_repo_libdoc.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-23T19:56:54Z",
+      "side": 1,
+      "message": "Good summary.\n\nJust a few changes.\n\n    description\u003d\"%(prog)s uses the libdoc.py file provided by robot \" +\n    \"framework to generate the keyword documentation for library and\" +\n    \" resource files.\",\n\nAlso, note that I used the + to concat the lines.  My preference.",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b2e5e9d_c7cb6634",
+        "filename": "tools/generate_repo_libdoc.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-23T19:56:54Z",
+      "side": 1,
+      "message": "We do not bother with short options.  Please remove them in all cases.\n\n    \u0027--format\u0027,",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89f06be6_a930e7ad",
+        "filename": "tools/generate_repo_libdoc.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-23T19:56:54Z",
+      "side": 1,
+      "message": "IMPORTANT:\n\nI have more comments I can make about the particulars of the code but I\u0027m going to stop pending an answer to the following question.\n\nWhat benefit does this program offer my over and above calling robot.libdoc directly:\n\nExample:\n\nI tried it like this:\n\ngenerate_repo_libdoc.py -f\u003dhtml /afs/rchland.ibm.com/usr6/micwalsh/git/openbmc-test-automation/lib/gen_robot_ssh.py /tmp/gen_robot_ssh.html\n\nWhich cause it to do this:\n\npython /opt/rh/rh-python36/root/usr/lib/python3.6/site-packages/robot/libdoc.py --format html /afs/rchland.ibm.com/usr6/micwalsh/git/openbmc-test-automation/lib/gen_robot_ssh.py /tmp/gen_robot_ssh.html\n\nOr simpler yet, I can just run this:\n\npython -m robot.libdoc -f html /afs/rchland.ibm.com/usr6/micwalsh/git/openbmc-test-automation/lib/gen_robot_ssh.py /tmp/gen_robot_ssh.html\n\nCan you list the benefits?  I\u0027m trying to understand if this program is worthwhile.",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
