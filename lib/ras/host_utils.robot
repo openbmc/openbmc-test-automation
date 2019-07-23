@@ -230,11 +230,11 @@ Inject Error Through BMC At HOST Boot
     Delete Error Logs
 
     REST Power On  stack_mode=skip
-    Set Auto Reboot  1
 
     Gard Operations On OS  clear all
 
     REST Power Off
+    Set Auto Reboot  1
     Initiate Host Boot  wait=${0}
 
     Start SOL Console Logging   ${EXECDIR}/esol.log
