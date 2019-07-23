@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3532bbad_9f0f9f04",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-23T14:56:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c35eb77_8dbe12d5",
+      "range": {
+        "startLine": 17,
+        "startChar": 28,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "353ee3e4_03641993",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "398287e8_22d96e8e",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-23T14:56:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "353ee3e4_03641993",
+      "range": {
+        "startLine": 19,
+        "startChar": 67,
+        "endLine": 19,
+        "endChar": 72
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "cd12d459_186ee6eb",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-23T14:56:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0b4c5c7_cfe4e769",
+      "range": {
+        "startLine": 62,
+        "startChar": 11,
+        "endLine": 62,
+        "endChar": 18
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "227ae9af_3a43f3a2",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2019-07-22T16:09:05Z",
       "side": 1,
       "message": "What is an \"official build\"?  Does this mean the fix is verified using the normal development process?",
+      "range": {
+        "startLine": 152,
+        "startChar": 22,
+        "endLine": 152,
+        "endChar": 53
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17612a74_c715c003",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-23T14:56:02Z",
+      "side": 1,
+      "message": "\"official build\" means what is available in openpower.xyz or what release notes indicates.",
+      "parentUuid": "227ae9af_3a43f3a2",
       "range": {
         "startLine": 152,
         "startChar": 22,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "67646b75_4b2a5cb8",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-23T14:56:02Z",
+      "side": 1,
+      "message": "Yes, make sense, removed it.",
+      "parentUuid": "28a7ff10_9cd7481d",
+      "range": {
+        "startLine": 155,
+        "startChar": 7,
+        "endLine": 156,
+        "endChar": 67
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8ee044a_42ed4b5c",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 3
@@ -128,6 +248,30 @@
       "writtenOn": "2019-07-22T16:09:05Z",
       "side": 1,
       "message": "What does \"officially released\" mean?  Does this mean the code has to be merged into the master branch or into a stable release branch (such as warrior for 2.7.0)?",
+      "range": {
+        "startLine": 159,
+        "startChar": 25,
+        "endLine": 159,
+        "endChar": 54
+      },
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b7afd90_5a35ddb4",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-23T14:56:02Z",
+      "side": 1,
+      "message": "code has to be merged and it is available in http://openpower.xyz/ or location indicated by release notes.",
+      "parentUuid": "c8ee044a_42ed4b5c",
       "range": {
         "startLine": 159,
         "startChar": 25,
@@ -154,6 +298,24 @@
       "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4022ddb5_b44b0678",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-23T14:56:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2398212_802f406c",
+      "revId": "d9572a83a21547f791e11fe999b0e24ebd34844d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
