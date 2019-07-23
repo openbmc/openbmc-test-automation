@@ -161,7 +161,7 @@ def svalid_value(var_value,
         error_message += "The following variable has an invalid" +\
                          " value:\n" +\
                          gp.sprint_varx(get_var_name(var_name), var_value,
-                                        gp.blank()) +\
+                                        gp.blank() | gp.verbose()) +\
                          "\nIt must be one of the following values:\n" +\
                          gp.sprint_var(valid_values, gp.blank())
         return error_message
@@ -176,7 +176,7 @@ def svalid_value(var_value,
 
     error_message += "The following variable has an invalid value:\n" +\
                      gp.sprint_varx(get_var_name(var_name), var_value,
-                                    gp.blank()) +\
+                                    gp.blank() | gp.verbose()) +\
                      "\nIt must NOT be one of the following values:\n" +\
                      gp.sprint_var(invalid_values, gp.blank())
     return error_message
