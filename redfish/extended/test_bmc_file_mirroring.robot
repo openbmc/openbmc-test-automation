@@ -46,6 +46,9 @@ Test BMC Alt Side Mirroring
     # Example output from "ls /media/alt/var/persist/etc/":
     # group  group-  gshadow  gshadow-  hostname  machine-id  ssl  systemd
 
+    # Wait time for syncing to ALT side.
+    Sleep  2
+
     ${curr_hostname}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat /media/alt/var/persist/etc/hostname
 
