@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e2a0e41_6b664520",
+        "filename": "docs/openbmc_libdoc_generation.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2019-07-23T17:22:27Z",
+      "side": 1,
+      "message": "I have made changes, with respect to generate_repo_libdoc, let me know your view.",
+      "parentUuid": "0ed2fea6_838b93ae",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e35ddc4_8dd723ea",
         "filename": "docs/openbmc_libdoc_generation.md",
         "patchSetId": 11
@@ -121,6 +139,24 @@
     },
     {
       "key": {
+        "uuid": "971ce4c4_168fced8",
+        "filename": "tools/libdoc_gen.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2019-07-23T17:22:27Z",
+      "side": 1,
+      "message": "Address the review comments",
+      "parentUuid": "d8bb6bd1_39a4b85f",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b20b55ca_ba66f971",
         "filename": "tools/libdoc_gen.py",
         "patchSetId": 11
@@ -132,6 +168,24 @@
       "writtenOn": "2019-07-19T23:09:03Z",
       "side": 1,
       "message": "I don\u0027t see this being used.  Review your imports to make sure they are all necessary.",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "046e3c95_8a729af8",
+        "filename": "tools/libdoc_gen.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2019-07-23T17:22:27Z",
+      "side": 1,
+      "message": "removed from import section",
+      "parentUuid": "b20b55ca_ba66f971",
       "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
@@ -155,6 +209,24 @@
     },
     {
       "key": {
+        "uuid": "b46d6017_28a7aa63",
+        "filename": "tools/libdoc_gen.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2019-07-23T17:22:27Z",
+      "side": 1,
+      "message": "Address the review comments",
+      "parentUuid": "f79f8794_d701e78f",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "377aee4f_bb85c422",
         "filename": "tools/libdoc_gen.py",
         "patchSetId": 11
@@ -166,6 +238,24 @@
       "writtenOn": "2019-07-19T23:09:03Z",
       "side": 1,
       "message": "Consider deleting this function and replacing call with:\n\n    python_version \u003d sys.version.split()[0]",
+      "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f63e9cb5_8e087a1f",
+        "filename": "tools/libdoc_gen.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2019-07-23T17:22:27Z",
+      "side": 1,
+      "message": "Address the review comments",
+      "parentUuid": "377aee4f_bb85c422",
       "revId": "aa67ce1f47dbb3470e777d01395a562e5d8a6996",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
