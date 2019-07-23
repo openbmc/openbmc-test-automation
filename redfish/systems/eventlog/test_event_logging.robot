@@ -8,9 +8,10 @@ Resource            ../../../lib/openbmc_ffdc.robot
 Resource            ../../../lib/ipmi_client.robot
 Library             ../../../lib/logging_utils.py
 
+Suite Setup         Suite Setup Execution
+Suite Teardown      Suite Teardown Execution
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
-Suite Teardown      Suite Teardown Execution
 
 ** Variables ***
 
@@ -395,6 +396,17 @@ Test Event Log Wrapping
 
 *** Keywords ***
 
+Suite Setup Execution
+   [Documentation]  Do test case setup tasks.
+
+    Redfish.Login
+
+    Redfish Purge Event Log
+
+    ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
+    Run Keyword If  ${status} == ${False}  Install Tarball
+
+
 Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
 
@@ -403,8 +415,6 @@ Suite Teardown Execution
 
 Test Setup Execution
    [Documentation]  Do test case setup tasks.
-
-    Redfish.Login
 
     Redfish Purge Event Log
 
