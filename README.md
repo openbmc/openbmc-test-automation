@@ -25,6 +25,7 @@
 * Remote Logging via Rsyslog
 * LDAP (Lightweight Directory Access Protocol)
 * Certificate
+* Local User Management(Redfish/IPMI)
 
 **Debugging Supported List**
 * SOL collection
@@ -69,10 +70,12 @@ If using Python 3.x, use the corresponding `pip3` to install packages.
 
 These documents contain details on developing OpenBMC test code and debugging.
 
- - [MAINTAINERS](https://github.com/openbmc/docs/blob/master/MAINTAINERS): OpenBMC code maintainers information.
+ - [MAINTAINERS](MAINTAINERS): OpenBMC test code maintainers information.
  - [CONTRIBUTING.md](CONTRIBUTING.md): Coding guidelines.
  - [REST-cheatsheet.md](https://github.com/openbmc/docs/blob/master/REST-cheatsheet.md): Quick reference for some common
-   curl commands required for testing.
+   curl commands required for legacy REST testing.
+ - [REDFISH-cheatsheet.md](https://github.com/openbmc/docs/blob/master/REDFISH-cheatsheet.md): Quick reference for some common
+   curl commands required for redfish testing.
  - [README.md](https://github.com/openbmc/phosphor-webui/blob/master/README.md): Web UI setup reference.
  - [Tools.md](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/openbmc_test_tools.md): Reference information for helper tools.
  - [Corporate CLA and Individual CLA](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server): Submitting changes via Gerrit server
