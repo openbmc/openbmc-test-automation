@@ -16,10 +16,10 @@ ${xpath_select_network_settings}  //a[@href='#/configuration/network']
 ${xpath_hostname_input}  //*[@id="net-config__mac"]
 ${xpath_network_save_settings}  //*[@id="configuration-network"]/form/section[3]/div[2]/button[1]
 ${xpath_continue}  //*[@id=""]/main/section/div/div[4]/button[2]
-${xpath_network_config_ipv4_address}  //*[@id="net-config__ipv4-address"]
+${xpath_network_config_ipv4_address}  //*[@id="ipv4-address-1"]
 ${xpath_default_gateway_input}  //*[@id="net-config__domain"]
 ${xpath_mac_address_input}  //*[@id="net-config__host"]
-${xpath_ipv4-address-input}  //*[@id="net-config__ipv4-address"]
+${xpath_ipv4-address-input}  //*[@id="ipv4-address-1"]
 ${xpath_network_DHCP_button}  //*[@id="configuration-network"]/form/section[2]/fieldset/div[1]/label/span
 ${xpath_network_static_button}  //*[@id="configuration-network"]/form/section[2]/fieldset/div[2]/label/span
 
