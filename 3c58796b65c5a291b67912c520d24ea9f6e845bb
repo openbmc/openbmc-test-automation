@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "50e5fbac_400eff93",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-24T05:05:45Z",
+      "side": 1,
+      "message": "U may want to remove this",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e205c1d3_bfc155d1",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-24T05:05:45Z",
+      "side": 1,
+      "message": "We need to define what is FTC in terms of community.. This looks like of the definition. we will need to get buy in from community who ll be responsible for xyz orgs or community as a whole",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 63
+      },
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64f3cc64_b22eb88c",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 4
@@ -45,6 +91,75 @@
       "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69dc94e1_0817c75a",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-24T05:05:45Z",
+      "side": 1,
+      "message": "This are witherspoon specific.. so we shouldnt have here",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 81
+      },
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c7fe39b_94618382",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-24T05:05:45Z",
+      "side": 1,
+      "message": "This is also OEM specific, shouldnt be listed here",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 99
+      },
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cded08d8_51a61418",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-24T05:05:45Z",
+      "side": 1,
+      "message": "This are upcoming work and not for Master 2.7",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 63
+      },
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
