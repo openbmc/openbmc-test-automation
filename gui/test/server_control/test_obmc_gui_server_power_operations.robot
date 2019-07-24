@@ -8,7 +8,7 @@ Test Setup       Test Setup Execution  ${OBMC_PowerOff_state}
 Test Teardown    Test Teardown Execution
 
 *** Variables ***
-${xpath_select_server_control}           //*[@id="nav__top-level"]/li[3]/button/span
+${xpath_select_server_control}           //*[contains(@class,"btn-control")]
 ${xpath_select_server_power_operations}  //a[@href='#/server-control/power-operations']
 ${string_server_power_operations}        Server power operations
 ${string_current_status}                 Current status
@@ -142,7 +142,7 @@ Verify Warm Reboot Should Not Happen By Clicking No Button
 
     Select Server Power Operations Sub Menu
     Click Element  ${xpath_select_button_warm_reboot}
-    Verify Warning Message Display Text  ${xpath_warm_reboot_warning_message}
+    Verify Warning Message Display Text  ${xpath_operation_warning_message}
     ...  ${text_warm_reboot_warning_message}
     Verify No Button Functionality
     ...  ${xpath_select_button_warm_reboot_no}
@@ -154,7 +154,7 @@ Verify Cold Reboot Should Not Happen By Clicking No Button
 
     Select Server Power Operations Sub Menu
     Click Element  ${xpath_select_button_cold_reboot}
-    Verify Warning Message Display Text  ${xpath_cold_reboot_warning_message}
+    Verify Warning Message Display Text  ${xpath_operation_warning_message}
     ...  ${text_cold_reboot_warning_message}
     Verify No Button Functionality
     ...  ${xpath_select_button_cold_reboot_no}
@@ -166,7 +166,7 @@ Verify Orderly Shutdown Should Not Happen By Clicking No Button
 
     Select Server Power Operations Sub Menu
     Click Element  ${xpath_select_button_orderly_shutdown}
-    Verify Warning Message Display Text  ${xpath_orderly_shutdown_warning_message}
+    Verify Warning Message Display Text  ${xpath_operation_warning_message}
     ...  ${text_orderly_shutdown_warning_message}
     Verify No Button Functionality
     ...  ${xpath_select_button_orderly_shutdown_button_no}
@@ -178,7 +178,7 @@ Verify Immediate Shutdown Should Not Happen By Clicking No Button
 
     Select Server Power Operations Sub Menu
     Click Element  ${xpath_select_button_immediate_shutdown}
-    Verify Warning Message Display Text  ${xpath_immediate_shutdown_warning_message}
+    Verify Warning Message Display Text  ${xpath_operation_warning_message}
     ...  ${text_immediate_shutdown_warning_message}
     Verify No Button Functionality
     ...  ${xpath_select_button_immediate_shutdown_no}
@@ -222,7 +222,7 @@ Select Server Power Operations Sub Menu
     [Documentation]  Selecting of OpenBMC "Server Power Operations" Submenu.
 
     Click Button  ${xpath_select_server_control}
-    Click Button  ${xpath_select_server_power_operations}
+    Click Element  ${xpath_select_server_power_operations}
 
 Verify Presence of Power Button And Text Info
     [Documentation]  Verify the presens fo power button and text message info.
@@ -241,5 +241,5 @@ Verify No Button Functionality
     # xpath_no_button      Xpath of "No" button.
 
     Click No Button  ${xpath_no_button}
-    ${obmc_current_state}=  Get Text  ${xpath_display_server_power_status}
+    ${obmc_current_state}=  Get Text  ${xpath_power_indicator}
     Should Contain  ${obmc_current_state}  ${obmc_running_state}

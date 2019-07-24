@@ -122,6 +122,7 @@ Test Setup Execution
     Log To Console  Verifying the system state and stablity...
 
     Click Element  ${xpath_select_server_power}
+    Wait Until Page Does Not Contain  Unreachable
     ${obmc_current_state}=  Get Text  ${xpath_power_indicator}
     Rpvars  obmc_current_state
 
@@ -144,7 +145,7 @@ Power Off OpenBMC
     [Documentation]  Power off the OBMC system.
 
     Log To Console  Power Off OpenBMC...
-    Click Element  ${xpath_display_server_power_status}
+    Click Element  ${xpath_select_server_power}
     Execute JavaScript  window.scrollTo(0, document.body.scrollHeight)
     Click Button  ${xpath_select_button_orderly_shutdown}
     Click Yes Button  ${xpath_select_button_orderly_shutdown_yes}
@@ -154,7 +155,7 @@ Power On OpenBMC
     [Documentation]  Power on the OBMC system.
 
     Log To Console  Power On OpenBMC...
-    Click Element  ${xpath_display_server_power_status}
+    Click Element  ${xpath_select_server_power}
     Click Button  ${xpath_select_button_power_on }
     Wait OpenBMC To Become Stable  ${obmc_running_state}
 
@@ -162,7 +163,7 @@ Reboot OpenBMC
     [Documentation]  Rebooting the OBMC system.
 
     Log To Console  Reboting the OpenBMC...
-    Click Element  ${xpath_display_server_power_status}
+    Click Element  ${xpath_select_server_power}
     Click Button  ${xpath_select_button_orderly_shutdown}
     Click Yes Button  ${xpath_select_button_orderly_shutdown_yes}
     Wait OpenBMC To Become Stable  ${obmc_off_state}
@@ -179,7 +180,7 @@ Wait OpenBMC To Become Stable
     #                          above total wait time.
 
     Wait Until Keyword Succeeds  ${retry_time}  ${retry_interval}
-    ...  Wait Until Element Contains  ${xpath_display_server_power_status}
+    ...  Wait Until Element Contains  ${xpath_select_server_power}
     ...  ${obmc_expected_state}
     Wait Until Keyword Succeeds  ${retry_time}  ${retry_interval}
     ...  Verify OpenBMC State From REST Interface  ${obmc_expected_state}
@@ -287,7 +288,7 @@ Warm Reboot openBMC
 
     Log To Console  Warm Reboting the OpenBMC...
     Click Element  ${xpath_select_button_warm_reboot}
-    Verify Warning Message Display Text  ${xpath_warm_reboot_warning_message}
+    Verify Warning Message Display Text  ${xpath_operation_warning_message}
     ...  ${text_warm_reboot_warning_message}
     Click Yes Button  ${xpath_select_button_warm_reboot_yes}
     Wait OpenBMC To Become Stable  ${obmc_running_state}
@@ -306,7 +307,7 @@ Cold Reboot openBMC
 
     Log To Console  Cold Reboting the OpenBMC...
     Click Element  ${xpath_select_button_cold_reboot}
-    Verify Warning Message Display Text  ${xpath_cold_reboot_warning_message}
+    Verify Warning Message Display Text  ${xpath_operation_warning_message}
     ...  ${text_cold_reboot_warning_message}
     Click Yes Button  ${xpath_select_button_cold_reboot_yes}
     Wait OpenBMC To Become Stable  ${obmc_running_state}
@@ -316,7 +317,7 @@ Orderly Shutdown OpenBMC
 
     Log To Console  Orderly Shutdown the OpenBMC...
     Click Element  ${xpath_select_button_orderly_shutdown}
-    Verify Warning Message Display Text  ${xpath_orderly_shutdown_warning_message}
+    Verify Warning Message Display Text  ${xpath_operation_warning_message}
     ...  ${text_orderly_shutdown_warning_message}
     Click Yes Button  ${xpath_select_button_orderly_shutdown_yes}
     Wait OpenBMC To Become Stable  ${obmc_off_state}
@@ -327,7 +328,7 @@ Immediate Shutdown openBMC
     Log To Console  Immediate Shutdown the OpenBMC...
     Click Element  ${xpath_select_button_immediate_shutdown}
     Verify Warning Message Display Text
-    ...  ${xpath_immediate_shutdown_warning_message}
+    ...  ${xpath_operation_warning_message}
     ...  ${text_immediate_shutdown_warning_message}
     Click Yes Button  ${xpath_select_button_immediate_shutdown_yes}
     Wait OpenBMC To Become Stable  ${obmc_off_state}
@@ -339,7 +340,7 @@ Verify Warning Message Display Text
     # xpath_text_message  Xpath of warning message display.
     # text_message        Content of the display message info.
 
-    Element Text Should Be  ${xpath_text_message}  ${text_message}
+    Element Should Contain  ${xpath_text_message}  ${text_message}
 
 
 Expected Initial Test State
