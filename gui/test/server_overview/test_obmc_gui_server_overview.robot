@@ -7,7 +7,7 @@ Test Setup       Test Setup Execution  ${OBMC_PowerOff_state}
 Test Teardown    Test Teardown Execution
 
 *** Variables ***
-${xpath_select_overview_1}         //*[@id="nav__top-level"]/li[1]/a/span
+${xpath_select_overview_1}         //*[@href="#/overview/server"]
 ${string_content}                  witherspoon
 ${string_server_info}              Server information
 ${string_high_priority_events}     High priority events
@@ -140,7 +140,8 @@ Verify Launching Of Serial Over LAN Console At OBMC Power Running State
 Select Server Overview Menu
     [Documentation]  Selecting of OpenBMC "Server overview" menu.
 
-    Click Button  ${xpath_select_overview_1}
+    Click Element  ${xpath_select_overview_1}
+    Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
 
 Verify Display Content
     [Documentation]  Verify text content display.
