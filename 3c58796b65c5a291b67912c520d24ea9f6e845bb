@@ -2,6 +2,159 @@
   "comments": [
     {
       "key": {
+        "uuid": "b51a8a02_cc0f4b81",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "You could probably shorten this paragraph up a little.\n\nThe objective of OpenBMC FVT is to verify that the hardware and firmware perform according to architectural specifications.  This is done through both black box and white box testing.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aba44eb4_5e06aa9a",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "verification *tests",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46c1c5f0_db536578",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "\"problems that would ensure usability\" doesn\u0027t read right.  Maybe this?\n\n\"...and fix problems with the OpenBMC-based servers.\"",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c47f9f5_166bc98c",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- \"functionality tests are focused on...functionality\" - reads as a little redundant.\n\nMaybe drop \"functionality\" from the start of the sentence:\n\n- Do you need \"(OpenBmc)\" in there?\n\n- \"focus\" vs \"are focused\" - when reasonable, use active voice.\n\nThese tests focus on the basic hardware and firmware functionality to ensure...",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e69babe_2d6d1f8a",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Capitalize the first word in each of these bullet points.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b562f75_870fbf0e",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "\"requisite\" and \"requirements\" basically mean the same thing:\n\n##  Functional Verification Test (FVT) Pre-requisites",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "370c1e7d_f0ddd9f0",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- Test target machine must be \u003cwhatever you need to say here\u003e",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26bebe31_fd307568",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "I\u0027m not clear on what this means.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0492ac9_0a4d2beb",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Because this is the actual name of a tool, make it all lower case.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50e5fbac_400eff93",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 4
@@ -25,6 +178,74 @@
     },
     {
       "key": {
+        "uuid": "d7a4d222_2e82a11b",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Since you\u0027re listing the phases, can you make this a bullet point?\n\n- Functional Test Cycle (FTC):",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf31e1f4_c538d007",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Redundancy:\n\n\"meets architectural specification\" and \"meets architectural specification\" pretty much say the same thing twice.\n\nHere\u0027s my attempt at it:\n\nEnsure that function implementation meets architectural specifications as\ndocumented in  the design document.  In this phase, function owners work\nclosely with test owners.\n\nNote that I chose to use the \"phrase-as-an-English-command\" approach.  Certainly not obligatory though.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d496479_ae040ae9",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Since you\u0027re listing the phases, can you make this a bullet point?\n\n- FVT Regression Phase:\n\nIn the first bullet you DON\u0027T include the word \"phase\" and here you do.  Pick a way and do it the same for both.  My preference is to remove the word \"Phase\" since we already know by the section of the document that these are phases.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68c77630_a363e5fc",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Am I right in saying that regression testing is done regularly on changed product code and not just once as a phase.  It may be good to phrase this to include that information:\n\nRegularly re-run selected test cases on changed firmware to ensure that no existing functions have been broken.  The selection of tests is chosen by the test team leaders to deliver the greatest value for the necessarily limited amount of test run time.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e205c1d3_bfc155d1",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 4
@@ -42,6 +263,523 @@
         "endLine": 57,
         "endChar": 63
       },
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0afc737c_b8fdfb83",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "\"e.g.\" essentially means \"For example\" so a little redundancy here.  Since this document is more formal, go ahead and spell it out:\n\nFor example, run HTX on...",
+      "parentUuid": "e205c1d3_bfc155d1",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 63
+      },
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "180a53f4_d0636095",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Any newly introduced OpenBmc feature falls within the scope of FVT.  This includes any features from the various supported interfaces such as Redfish, REST, IPMI, GUI, etc.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "687d49c4_08e52c0b",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "I\u0027d just drop the \"Not sure\" sentence.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9af015a_cf0a9c49",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you\u0027re saying here.\n\nDo you mean that the features that you\u0027re talking about in the first paragraph are limited to features that can be accessed directly by the end-user?  What about features that are only accessed indirectly?  Don\u0027t those count?",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c99057ed_896c12b2",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "If a function is purely firmware or host related, then it would not fall within the OpenBMC FVT test scope.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5849503e_591dffb3",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Is it correct ot have \"firmware\" included in the prior sentence?  Isn\u0027t it our mission to test OpenBMC firmware?  Or did you mean other firmware?",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca977807_44bcaf27",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "No need to use the word \"list\" when a list clearly follows:\n\nFeatures currently in OpenBMC FVT scope:",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bce720d2_f3c12828",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- Collapse double space to single.\n- Put the various types of code update in parenthesis:\n\n - Code update (both OpenBMC and PNOR)",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72034c53_503cbe92",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- Watch the caps\n- Shorten like this:\n\n - Host power on/off",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87b9e806_55785061",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "*including",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be3b4e25_9ec8ae6b",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- Simple Network Management Protocol (SNMP)",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5bf63b0_74016f57",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- Lightweight Directory Access Protocol (LDAP) certificates",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30cb8a9f_783dae59",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Is \"OS continous boot\" one of many \"HTX Soft bootme\" functions?  Maybe this would clarify:\n\n - HTX Soft bootme: OS continuous boot",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3af347ed_0e660ad7",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- HTX Hard bootme: Whole system power cycle and boot all the way to OS and run HTX",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9eebf0_1ad6fb33",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- Collapse double spaces\n- Do we even need the \"depends on\" phrase?  If so, I\u0027d parenthesize it.\n\n - GPU/IO related test (depending on availability of adequate HW)",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dae95138_9cb00856",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Features which are related to testing using OpenBMC commands like busctl, systemctl, etc. are considered as out of scope.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c0499b3_c7cc2651",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "\"Methodology\" doesn\u0027t seem to be the right term here.\n\n# Test Types",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "335aa409_45dfbe3d",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "What is a host test?  Does it fit into this list?",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dde66033_c263c13e",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- For your section headers you seem to follow the rule of capitalizing each word in the title so be sure to do that here as well.\n- Is this the entry criteria for FTC phase?  If so, can that also be included in the title?\n\n**Entry Criteria For FTC:**",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf7e072_8116729b",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "I think I was initially confused because I thought you were talking here about machine state requirements for a given test (like setup and teardown stuff).  Am I now correct that you\u0027re simply saying that some OpenBMC functions may enter the test phase as soon as they meet the requirements even though not all other functions are ready?",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5bfd7c2_0a18949f",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- The function *behavior should...\n\n- You\u0027re writing each of these bullet points as full sentences so make sure you end all of them with a period.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb61f5d0_69f35ead",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "*case (\"case\" is being used as an adjective so it should not be plural).",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcf98f54_50c17c58",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Run-on sentence.  Change \";\" to \".\" and capitalize \"the\".\n\n - The target driver is identified. The...\n\nAlso, is \"driver\" a good industry standard term here?  I don\u0027t know the answer.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a4c0c43_c3fbc78e",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "Drop \"new\".\n\n - All code for...",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57876dcc_c2580625",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- Why _FTC_ vs FTC?\n\nAddress throughout if you change it.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab025d7d_943b773c",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- \"setup\" should be \"set up\" in this context.  \"setup\" is a noun.  \"set up\" essentially a past-participle.\n- End \"etc\" with a period.  Fix globally.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f3752a4_8fa378fd",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "*set up",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14a2da2c_598ab9d3",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "End sentence and start a new one:\n\nready).  In addition...",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c71aa796_9671e8d3",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "You don\u0027t need to say both \"All\" and \"100%\".  \"100%\" sounds more emphatic so I\u0027d go with that one:\n\n...include: 100% of test cases...\n\nFix throughout.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd5c121b_96720f86",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-24T19:38:18Z",
+      "side": 1,
+      "message": "- This is a sub-bullet to the one on line 145.  Can you indent it accordingly along with any other relevant bullets?\n\n- Capitalize the first word (\"The\").\n\nCould this all be said more simply?\n\n  - The test case execution either succeeds or there is a defect record open to document the failure.",
       "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
