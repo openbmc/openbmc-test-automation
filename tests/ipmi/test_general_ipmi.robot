@@ -41,17 +41,17 @@ Verify Chassis Identify via IPMI
 
     # Set to default "chassis identify" and verify that LED blinks for 15s.
     Run IPMI Standard Command  chassis identify
-    Verify Identify LED State  Blink
+    Verify Identify LED State  ${1}
 
     Sleep  15s
-    Verify Identify LED State  Off
+    Verify Identify LED State  ${0}
 
     # Set "chassis identify" to 10s and verify that the LED blinks for 10s.
     Run IPMI Standard Command  chassis identify 10
-    Verify Identify LED State  Blink
+    Verify Identify LED State  ${1}
 
     Sleep  10s
-    Verify Identify LED State  Off
+    Verify Identify LED State  ${0}
 
 
 Verify Chassis Identify Off And Force Identify On via IPMI
@@ -61,11 +61,11 @@ Verify Chassis Identify Off And Force Identify On via IPMI
 
     # Set the LED to "Force Identify On".
     Run IPMI Standard Command  chassis identify force
-    Verify Identify LED State  Blink
+    Verify Identify LED State  ${1}
 
     # Set "chassis identify" to 0 and verify that the LED turns off.
     Run IPMI Standard Command  chassis identify 0
-    Verify Identify LED State  Off
+    Verify Identify LED State  ${0}
 
 
 Test Watchdog Reset Via IPMI And Verify Using REST
