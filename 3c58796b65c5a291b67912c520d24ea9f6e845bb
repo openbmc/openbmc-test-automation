@@ -246,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "cfb6d292_aa69aea3",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-25T15:57:05Z",
+      "side": 1,
+      "message": "OK.  Something more like this then?\n\n - Initial unit-test has been performed by product code developers.",
+      "parentUuid": "6fbf5267_1c188db1",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0492ac9_0a4d2beb",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 4
@@ -468,6 +486,24 @@
       "writtenOn": "2019-07-24T19:38:18Z",
       "side": 1,
       "message": "Am I right in saying that regression testing is done regularly on changed product code and not just once as a phase.  It may be good to phrase this to include that information:\n\nRegularly re-run selected test cases on changed firmware to ensure that no existing functions have been broken.  The selection of tests is chosen by the test team leaders to deliver the greatest value for the necessarily limited amount of test run time.",
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9c0137f_1970ed0f",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-25T15:57:05Z",
+      "side": 1,
+      "message": "Need a response here.",
+      "parentUuid": "68c77630_a363e5fc",
       "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
