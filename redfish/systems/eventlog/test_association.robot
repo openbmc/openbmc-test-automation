@@ -1,12 +1,17 @@
 *** Settings ***
-Documentation       Test Error callout association.
+Documentation       REST test Error callout association.
 
-Resource            ../lib/connection_client.robot
-Resource            ../lib/openbmc_ffdc.robot
-Resource            ../lib/utils.robot
-Resource            ../lib/state_manager.robot
-Resource            ../lib/boot_utils.robot
+Resource            ../../../lib/bmc_redfish_resource.robot
+Resource            ../../../lib/bmc_redfish_utils.robot
+Resource            ../../../lib/connection_client.robot
+Resource            ../../../lib/openbmc_ffdc.robot
+Resource            ../../../lib/utils.robot
+Resource            ../../../lib/state_manager.robot
+Resource            ../../../lib/boot_utils.robot
 
+
+Suite Setup         Suite Setup Execution
+Suite Teardown      Suite Teardown Execution
 Test Setup          Test Setup Execution
 Test Teardown       FFDC On Test Case Fail
 
@@ -175,6 +180,7 @@ Create Two Test Error Callout And Delete
     ${resp}=  OpenBMC Get Request  ${elog_entry[1]}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
+
 Create Test Error Callout And Verify LED
     [Documentation]  Create an error log callout and verify respective
     ...  LED state.
@@ -184,6 +190,7 @@ Create Test Error Callout And Verify LED
 
     ${resp}=  Get LED State XYZ  cpu0_fault
     Should Be Equal  ${resp}  ${1}
+
 
 Set Resolved Field And Verify Callout Deletion
     [Documentation]  Set the "Resolved" error log and verify callout is deleted
@@ -262,6 +269,7 @@ Verify Test Error Log And Callout
     ...  xyz.openbmc_project.Logging.Entry.Level.Error
 
     ${content}=  Read Attribute  ${elog_entry[0]}/callout  endpoints
+
     Should Be Equal  ${content[0]}
     ...  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
 
@@ -269,7 +277,7 @@ Verify Test Error Log And Callout
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    REST Power On  stack_mode=skip  quiet=1
+    Redfish Power On  stack_mode=skip  quiet=1
     ${status}=  Run Keyword And Return Status  Callout Test Binary Exist
     Run Keyword If  ${status} == ${False}  Install Tarball
     Delete All Error Logs
@@ -281,3 +289,20 @@ Install Tarball
     Run Keyword If  '${DEBUG_TARBALL_PATH}' == '${EMPTY}'  Return from Keyword
     BMC Execute Command  rm -rf /tmp/tarball
     Install Debug Tarball On BMC  ${DEBUG_TARBALL_PATH}
+
+
+Suite Setup Execution
+   [Documentation]  Do test case setup tasks.
+
+    Redfish.Login
+
+    Redfish Purge Event Log
+
+    ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
+    Run Keyword If  ${status} == ${False}  Install Tarball
+
+
+Suite Teardown Execution
+    [Documentation]  Do the post suite teardown.
+
+    Redfish.Logout
