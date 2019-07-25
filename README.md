@@ -26,6 +26,8 @@
 * LDAP (Lightweight Directory Access Protocol)
 * Certificate
 * Local User Management(Redfish/IPMI)
+* DateTime
+* Event Logging
 
 **Debugging Supported List**
 * SOL collection
@@ -105,16 +107,13 @@ classified as follows:
           verification. The "tests" subdirectory uses legacy REST and will be
           deprecated at some point and therefore no longer supported.
 
-`extended/`: Contains test cases for boot testing, code update testing, etc.
+`extended/`: Contains test cases for boot testing, code update testing using legacy REST, etc.
 
 `systest/`: Contains test cases for HTX bootme testing.
 
 `xcat/`: Contains test cases for XCAT automation.
 
 `gui/`: Contains test cases for web UI and security scanning tool automation.
-
-`network/`: Contains test cases for network testing. It covers IPv4 in static mode
-            and in DHCP mode.
 
 `snmp/`: Contains test cases for SNMP (Simple Network Management Protocol)
          configuration testing.
@@ -140,7 +139,7 @@ OpenBMC is moving steadily towards DTMF Redfish, which is an open industry stand
 specification and schema that meets the expectations of end users for simple,
 modern and secure management of scalable platform hardware.
 
-`redfish`: Contains test cases for DMTF Redfish-related feature supported on OpenBMC.
+`redfish/`: Contains test cases for DMTF Redfish-related feature supported on OpenBMC.
 
 `redfish/extended/`: Contains test cases for combined legacy REST and DMTF Redfish-related
                      feature supported on OpenBMC.
