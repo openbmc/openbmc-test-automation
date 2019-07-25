@@ -1,9 +1,3 @@
-# https://github.com/openbmc/openbmc/issues/1142
--e Check_BMC_Name_Property_Is_Set
--e Check_BMC_Clocks_Name_Property_Is_Set
--e Check_BMC_Clocks_Compatible_Property_Is_Set
--e Check_BMC_FSI_Compatible_Property_Is_Set
--e Check_BMC_FSI_Name_Property_Is_Set
 # https://github.com/openbmc/openbmc-test-automation/issues/822
 -e Verify_Minimal_Memory_Buffer_Inventory
 -e Verify_Minimal_Main_Planar_Inventory
