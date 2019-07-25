@@ -169,6 +169,24 @@
       "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f280c297_ec5bbd96",
+        "filename": "tools/generate_repo_libdoc.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2019-07-25T20:32:36Z",
+      "side": 1,
+      "message": "No, All are same as mention in your example\u0027s.                 \nBut benefits can be added. i have share my suggestion over slack. let me know you inputs.                                  Same Added here for reference.                                             By adding additional optional arguments-\n\nfilename\u003d file_1.robot,file_2.robot,file_3.robot\nfilename\u003d All\n\n\nCommand e.g. :\n\npython generate_repo_libdoc.py filename\u003dfile_1.robot,file_2.robot,file_3.robot /path/source_directory/ /path/destination_directory/\n\nabove command will accept the file names from argument \"filename\", specify source directory path,\n\nthen using generate_repo_libdoc.py tool generate keyword documentation files for listed file name in \"filename\" arguments.\n\npython generate_repo_libdoc.py filename\u003d All /path/source_directory/ /path/destination_directory/\n\nSimilar to above command , but will take all the files from source directory and generate the keyword documentation.\n\n\n--FileType\u003d Robot\n\npython generate_repo_libdoc.py --FileType\u003d Robot /path/source_directory/ /path/destination_directory/\n\nHere it will consider all the ROBOT files only in given path and then will generate keyword documentation.                                                        \n                                      \n (* Adding comments only for this point, once feature gets define, developed, will address other review comments)",
+      "parentUuid": "89f06be6_a930e7ad",
+      "revId": "59f3cb97825adadacdbe016d5e12e74ee6ef77ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
