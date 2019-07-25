@@ -52,7 +52,7 @@ Verify Front And Rear LED At Standby
     [Tags]  Verify_Front_And_Rear_LED_At_Standby
 
     REST Power Off  stack_mode=skip  quiet=1
-    Verify Identify LED State  Off
+    Verify Identify LED State  ${0}
 
 
 Verify Application Services Running At Standby

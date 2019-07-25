@@ -601,23 +601,14 @@ Get LED State XYZ
 
 
 Verify Identify LED State
-    [Documentation]  Verify the identify LED state
-    ...  matches caller's expectations.
+    [Documentation]  Verify that the identify state of the LED group matches caller's expectations.
     [Arguments]  ${expected_state}
 
     # Description of argument(s):
-    # expected_state  The LED state expected by the caller ("Blink" or "Off").
+    # expected_state  The expected LED asserted state (1 = asserted, 0 = not asserted).
 
-    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/front_id  State
-    Should Be Equal  ${resp}
-    ...  xyz.openbmc_project.Led.Physical.Action.${expected_state}
-    ...  msg=Unexpected LED state.
-
-    ${resp}=  Read Attribute  ${LED_PHYSICAL_URI}/rear_id  State
-    Should Be Equal  ${resp}
-    ...  xyz.openbmc_project.Led.Physical.Action.${expected_state}
-    ...  msg=Unexpected LED state.
-
+    ${led_state}=  Get LED State XYZ  enclosure_identify
+    Should Be Equal  ${led_state}  ${expected_state}  msg=Unexpected LED state.
 
 Verify The Attribute
     [Documentation]  Verify the given attribute.
