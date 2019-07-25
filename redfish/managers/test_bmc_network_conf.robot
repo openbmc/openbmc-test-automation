@@ -390,6 +390,41 @@ Configure DNS Server And Check Persistency
     OBMC Reboot (off)
     Verify CLI and Redfish Nameservers
 
+Configure Loopback IP For Gateway
+    [Documentation]  Configure loopback IP for gateway and expect an error.
+    [Tags]  Configure_Loopback_IP_For_Gateway
+    [Template]  Add IP Address
+    [Teardown]  Clear IP Settings On Fail  ${test_ipv4_addr}
+
+    # ip               subnet_mask          gateway         valid_status_codes
+    ${test_ipv4_addr}  ${test_subnet_mask}  ${loopback_ip}  ${HTTP_BAD_REQUEST}
+
+Configure Network ID For Gateway
+    [Documentation]  Configure network ID for gateway and expect an error.
+    [Tags]  Configure_Network_ID_For_Gateway
+    [Template]  Add IP Address
+    [Teardown]  Clear IP Settings On Fail  ${test_ipv4_addr}
+
+    # ip               subnet_mask          gateway        valid_status_codes
+    ${test_ipv4_addr}  ${test_subnet_mask}  ${network_id}  ${HTTP_BAD_REQUEST}
+
+Configure Multicast IP For Gateway
+    [Documentation]  Configure multicast IP for gateway and expect an error.
+    [Tags]  Configure_Multicast_IP_For_Gateway
+    [Template]  Add IP Address
+    [Teardown]  Clear IP Settings On Fail  ${test_ipv4_addr}
+
+    # ip               subnet_mask          gateway           valid_status_codes
+    ${test_ipv4_addr}  ${test_subnet_mask}  ${multicaste_ip}  ${HTTP_BAD_REQUEST}
+
+Configure Broadcast IP For Gateway
+    [Documentation]  Configure broadcast IP for gateway and expect an error.
+    [Tags]  Configure_Broadcast_IP_For_Gateway
+    [Template]  Add IP Address
+    [Teardown]  Clear IP Settings On Fail  ${test_ipv4_addr}
+
+    # ip               subnet_mask          gateway          valid_status_codes
+    ${test_ipv4_addr}  ${test_subnet_mask}  ${broadcast_ip}  ${HTTP_BAD_REQUEST}
 
 *** Keywords ***
 
