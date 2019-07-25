@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ad2b92b_624ee1c3",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "We would need to expand and say what FVT stands for by forware declaring it. since we are using it all over in the documentation.",
+      "range": {
+        "startLine": 11,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b67bbfc8_075c63ab",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "Are we talking here about what the OpenBMC test community is doing or should do vs  just a generic test documentation ?",
+      "range": {
+        "startLine": 13,
+        "startChar": 17,
+        "endLine": 13,
+        "endChar": 28
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41ccfa18_224318ca",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "Can u add the link where are those specification architecture",
+      "range": {
+        "startLine": 14,
+        "startChar": 13,
+        "endLine": 14,
+        "endChar": 41
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99bb42c8_447c06c5",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "we dont fix, but just identify / raise bug / report to community.\nso drop that",
+      "range": {
+        "startLine": 17,
+        "startChar": 57,
+        "endLine": 17,
+        "endChar": 64
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3753fab_86a39531",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "we do more than basic testing.. so u can use \"generic\" instead",
+      "range": {
+        "startLine": 18,
+        "startChar": 70,
+        "endLine": 18,
+        "endChar": 75
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e938b16b_70ab5c79",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "drop this.. we support what OpenBMC community support, shouldnt be just those two based\n\n\" OpenBMC based servers\"",
+      "range": {
+        "startLine": 20,
+        "startChar": 51,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4fc60e57_b4cbac90",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "This shouldnt be the case, the test focus could be for Witherspoon but in a spec support unless u named the \"openbmc_functional_test_specification.md\" to \"openbmc_ibm_functional_test_specification.md\" we shouldnt add this one",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4578445a_dbfaef45",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "Well to be generic, we would need to reword this. something in the line to say.\n\n - Test target machine should be OpenBMC supported systems.\n\nJoseph/Kurt can comment here.",
+      "range": {
+        "startLine": 35,
+        "startChar": 31,
+        "endLine": 35,
+        "endChar": 42
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b35b76c_dffbdf50",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "Well, since the openbmc design doc talk about software design flow  but it neither detailed to the point to actual says its a design document per se but accepted in openBMC to say we document it.\n\nso architectural or specification wouldn\u0027t be the correct term here.. you can just say\n\n\"derived application requirement\"",
+      "range": {
+        "startLine": 47,
+        "startChar": 42,
+        "endLine": 47,
+        "endChar": 70
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "854106bd_16972344",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "Is this an expectation or a directive statement ?. This is more of a generic functional case than what openbmc community should do collectively. would need reword",
+      "range": {
+        "startLine": 48,
+        "startChar": 52,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f58545e3_2edb3674",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "new or re-designed",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 20
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c43c7308_2f23623d",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "please drop this word.",
+      "range": {
+        "startLine": 65,
+        "startChar": 14,
+        "endLine": 65,
+        "endChar": 17
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
