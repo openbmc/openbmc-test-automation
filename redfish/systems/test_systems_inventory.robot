@@ -35,13 +35,26 @@ Get Available CPU Cores And Verify
 
     ${total_num_cores}=  Set Variable  ${0}
 
+    # Example of processor member list:
+    # /redfish/v1/Systems/system/Processors/cpu0
+    # /redfish/v1/Systems/system/Processors/cpu1
+    # /redfish/v1/Systems/system/Processors/gv100card0
+    # /redfish/v1/Systems/system/Processors/gv100card1
+    # /redfish/v1/Systems/system/Processors/gv100card2
+    # /redfish/v1/Systems/system/Processors/gv100card3
+    # /redfish/v1/Systems/system/Processors/gv100card4
+    # /redfish/v1/Systems/system/Processors/gv100card5
+
     ${processor_uris}=
     ...  Redfish_Utils.Get Member List  ${SYSTEM_BASE_URI}Processors
+
+    ${cpu_list}=  Get Matches  ${processor_uris}  *cpu*
+
     # Example of processor_uris:
     # /redfish/v1/Systems/system/Processors/cpu0
     # /redfish/v1/Systems/system/Processors/cpu1
 
-    :FOR  ${processor}  IN  @{processor_uris}
+    :FOR  ${processor}  IN  @{cpu_list}
         # If the status of the processor is "OK" and "Enabled", get its number
         # of cores.
         ${status}=  Redfish.Get Attribute  ${processor}  Status
