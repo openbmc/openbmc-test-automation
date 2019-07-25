@@ -8,6 +8,7 @@ Library             ../../lib/gen_robot_valid.py
 
 Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
+Test Setup          Printn
 Test Teardown       Test Teardown Execution
 
 *** Variables ***
@@ -21,11 +22,14 @@ ${min_num_powersupplies}  1
 
 *** Test Cases ***
 
+
 Get Processor Inventory Via Redfish And Verify
     [Documentation]  Get the number of CPUs that are functional and enabled.
     [Tags]  Get_Processor_Inventory_Via_Redfish_And_Verify
 
-    Verify FRU Inventory Minimums  Processors  ${min_num_cpus}
+    Rprint Vars  num_valid_cpus
+    Rprint Vars  min_num_cpus
+    Rvalid Range  num_valid_cpus  ${min_num_cpus}..
 
 
 Get Available CPU Cores And Verify
@@ -35,39 +39,15 @@ Get Available CPU Cores And Verify
 
     ${total_num_cores}=  Set Variable  ${0}
 
-    # Example of processor member list:
-    # /redfish/v1/Systems/system/Processors/cpu0
-    # /redfish/v1/Systems/system/Processors/cpu1
-    # /redfish/v1/Systems/system/Processors/gv100card0
-    # /redfish/v1/Systems/system/Processors/gv100card1
-    # /redfish/v1/Systems/system/Processors/gv100card2
-    # /redfish/v1/Systems/system/Processors/gv100card3
-    # /redfish/v1/Systems/system/Processors/gv100card4
-    # /redfish/v1/Systems/system/Processors/gv100card5
-
-    ${processor_uris}=
-    ...  Redfish_Utils.Get Member List  ${SYSTEM_BASE_URI}Processors
-
-    ${cpu_list}=  Get Matches  ${processor_uris}  *cpu*
-
-    # Example of processor_uris:
-    # /redfish/v1/Systems/system/Processors/cpu0
-    # /redfish/v1/Systems/system/Processors/cpu1
-
-    :FOR  ${processor}  IN  @{cpu_list}
-        # If the status of the processor is "OK" and "Enabled", get its number
-        # of cores.
-        ${status}=  Redfish.Get Attribute  ${processor}  Status
-        ${processor_cores}=  Run Keyword If
-        ...  "${status['Health']}" == "OK" and "${status['State']}" == "Enabled"
-        ...     Redfish.Get Attribute  ${processor}  TotalCores
-        ...  ELSE
-        ...     Set Variable  ${0}
-        # Add the number of processor_cores to the total.
+    :FOR  ${processor}  IN  @{cpu_uris}
+        ${is_functional}=  Check If FRU Is Functional  ${processor}
+        Run Keyword If  not ${is_functional}  Continue For Loop
+        ${processor_cores}=   Get CPU TotalCores  ${processor}
         ${total_num_cores}=  Evaluate  $total_num_cores + $processor_cores
     END
 
     Rprint Vars  total_num_cores
+
     Run Keyword If  ${total_num_cores} < ${min_num_cores}
     ...  Fail  Too few CPU cores found.
 
@@ -104,18 +84,8 @@ Get Available Power Supplies And Verify
 
     ${total_num_supplies}=  Set Variable  ${0}
 
-    ${chassis_uris}=  Redfish_Utils.Get Member List  ${REDFISH_CHASSIS_URI}
-    # Example of chassis_uris:
-    # /redfish/v1/Chassis/chasis
-    # /redfish/v1/Chassis/motherboard
-    # /redfish/v1/Chassis/powersupply0
-
-    :FOR  ${chassis_uri}  IN  @{chassis_uris}
-        ${is_supply}=  Evaluate  "powersupply" in $chassis_uri
-        ${is_functional}=  Run Keyword If  ${is_supply}
-        ...    Check If Power Supply Is Functional  ${chassis_uri}
-        ...  ELSE
-        ...    Set Variable  ${0}
+    :FOR  ${chassis_uri}  IN  @{powersupply_uris}
+        ${is_functional}=  Check If FRU Is Functional  ${chassis_uri}
         ${total_num_supplies}=  Evaluate  $total_num_supplies + $is_functional
     END
 
@@ -135,7 +105,65 @@ Get Motherboard Serial And Verify Populated
     Rprint Vars  serial_number
 
 
+Get GPU Inventory Via Redfish
+    [Documentation]  Get the number of GPUs.
+    [Tags]  Get_GPU_Inventory_Via_Redfish
+
+    # There may be 0-6 GPUs in a system.
+    # GPUs may have one of three states:
+    # "Absent", "Enabled", or "UnavailableOffline".
+    # Or GPUs may not be listed at all under the URI
+    # /redfish/v1/Systems/system/Processors.
+    # So for now, only print the total of GPUs present.
+
+    Rprint Vars  num_valid_gpus
+
+
 *** Keywords ***
+
+
+Get Inventory URIs
+    [Documentation]  Get and return a tuple of lists of URIs for CPU,
+    ...              GPU and PowerSupplies.
+
+    ${processor_uris}=
+    ...  Redfish_Utils.Get Member List  ${SYSTEM_BASE_URI}Processors
+    # Example of processor_uris:
+    # /redfish/v1/Systems/system/Processors/cpu0
+    # /redfish/v1/Systems/system/Processors/cpu1
+    # /redfish/v1/Systems/system/Processors/gv100card0
+    # /redfish/v1/Systems/system/Processors/gv100card1
+    # /redfish/v1/Systems/system/Processors/gv100card2
+    # /redfish/v1/Systems/system/Processors/gv100card3
+    # /redfish/v1/Systems/system/Processors/gv100card4
+
+    ${cpu_uris}=  Get Matches  ${processor_uris}  *cpu*
+    ${gpu_uris}=  Get Matches  ${processor_uris}  *gv*
+
+    ${chassis_uris}=  Redfish_Utils.Get Member List  ${REDFISH_CHASSIS_URI}
+    # Example of chassis_uris:
+    # /redfish/v1/Chassis/chasis
+    # /redfish/v1/Chassis/motherboard
+    # /redfish/v1/Chassis/powersupply0
+    # /redfish/v1/Chassis/powersupply1
+
+    ${powersupply_uris}=  Get Matches  ${chassis_uris}  *powersupp*
+
+    [Return]  ${cpu_uris}  ${gpu_uris}  ${powersupply_uris}
+
+
+Get CPU TotalCores
+    [Documentation]  Return the TotalCores of a CPU.
+    ...              Return 0 if this attribute is missing or NONE.
+    [Arguments]      ${processor}
+
+    # Description of Argument(s):
+    # processor     The Redfish URI of a CPU (e.g.
+    #               "/redfish/v1/Systems/system/Processors/cpu0").
+
+    ${total_cores}=  Redfish.Get Attribute  ${processor}  TotalCores
+    Return From Keyword If  ${total_cores} is ${NONE}  ${0}
+    [Return]  ${total_cores}
 
 
 Verify FRU Inventory Minimums
@@ -151,11 +179,13 @@ Verify FRU Inventory Minimums
 
     ${status}  ${num_valid_frus}=  Run Key U  Get Num Valid FRUs \ ${fru_type}
 
+    Rprint Vars  fru_type  num_valid_frus  min_num_frus
+
     Return From Keyword If  ${num_valid_frus} >= ${min_num_frus}
     Fail  Too few "${fru_type}" FRUs found, found only ${num_valid_frus}.
 
 
-Check If Power Supply Is Functional
+Check If FRU Is Functional
     [Documentation]  Return 1 if a power supply is OK and either
     ...   Enabled or StandbyOffline.  Return 0 otherwise.
     [Arguments]  ${chassis_uri}
@@ -187,8 +217,20 @@ Suite Teardown Execution
 Suite Setup Execution
     [Documentation]  Do test case setup tasks.
 
+    Redfish Power On  stack_mode=skip
     Redfish.Login
-    Printn
+
+    ${cpu_uris}  ${gpu_uris}  ${powersupply_uris}=  Get Inventory URIs
+
+    Set Suite Variable  ${cpu_uris}
+    Set Suite Variable  ${gpu_uris}
+    Set Suite Variable  ${powersupply_uris}
+
+    ${num_valid_cpus}=  Get Length  ${cpu_uris}
+    ${num_valid_gpus}=  Get Length  ${gpu_uris}
+
+    Set Suite Variable  ${num_valid_cpus}
+    Set Suite Variable  ${num_valid_gpus}
 
 
 Test Teardown Execution
