@@ -328,6 +328,30 @@
     },
     {
       "key": {
+        "uuid": "d7e6adde_f2aa0f10",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-07-25T15:28:46Z",
+      "side": 1,
+      "message": "Well I dont think we should add something specific support to certain org. Though its open , its not designed to address the community to align to keep this documentation very generic.\n\nSame with HTX tool as well.",
+      "parentUuid": "a168aaca_c6bea4b2",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "3c58796b65c5a291b67912c520d24ea9f6e845bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7a4d222_2e82a11b",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 4
