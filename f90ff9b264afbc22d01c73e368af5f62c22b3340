@@ -209,6 +209,23 @@
     },
     {
       "key": {
+        "uuid": "88176081_636b3556",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-25T15:57:05Z",
+      "side": 1,
+      "message": "Collapse double space to single (my fault :).",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "854106bd_16972344",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -272,6 +289,125 @@
         "endLine": 65,
         "endChar": 17
       },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9da39f2_c417fced",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-25T15:57:05Z",
+      "side": 1,
+      "message": "Drop the spaces around the \"/\".\n\n - Host power on/off",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15959b09_c876a238",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-25T15:57:05Z",
+      "side": 1,
+      "message": "Do not precede the \":\" with a space.\nCollapse double space to single.",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a9e9ff3_3662db6f",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-25T15:57:05Z",
+      "side": 1,
+      "message": "Do not precede the \":\" with a space.",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2704640c_5dafb5db",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-25T15:57:05Z",
+      "side": 1,
+      "message": "You didn\u0027t include all of my corrections.  Just copy my sentence to get them:\n\n- \"is\" should be \"are\" (done)\n- *commans (plural)\n- Need comma after \"systemctl",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b19ac2f_52c3e34d",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-25T15:57:05Z",
+      "side": 1,
+      "message": "I missed this one:  delete the word \"as\".",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29b01466_45b5e721",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-25T15:57:05Z",
+      "side": 1,
+      "message": "*set up (2 words)",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd2e345e_9566bc09",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-07-25T15:57:05Z",
+      "side": 1,
+      "message": "Indent this bullet and any others which are sub-bullets of bullet at line 145.",
       "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
