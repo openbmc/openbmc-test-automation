@@ -48,7 +48,7 @@ ${hex_ip}                  0xa.0xb.0xc.0xd
 ${negative_ip}             10.-7.-7.7
 ${hex_ip}                  0xa.0xb.0xc.0xd
 @{static_name_servers}     10.5.5.5
-
+@{null_value}              null
 *** Test Cases ***
 
 Get IP Address And Verify
@@ -426,6 +426,15 @@ Configure Broadcast IP For Gateway
     # ip               subnet_mask          gateway          valid_status_codes
     ${test_ipv4_addr}  ${test_subnet_mask}  ${broadcast_ip}  ${HTTP_BAD_REQUEST}
 
+Configure Null Value For DNS Server
+    [Documentation]  Configure null value for DNS server and expect an error.
+    [Tags]  Configure_Null_Value_For_DNS_Server
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    Configure Static Name Servers  ${null_value}  ${HTTP_BAD_REQUEST}
+
 *** Keywords ***
 
 Test Setup Execution
@@ -688,16 +697,23 @@ CLI Get Nameservers
 Configure Static Name Servers
     [Documentation]  Configure DNS server on BMC.
     [Arguments]  ${static_name_servers}=${original_nameservers}
+     ...  ${valid_status_codes}=${HTTP_OK}
 
     # Description of the argument(s):
     # static_name_servers  A list of static name server IPs to be
     #                      configured on the BMC.
 
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'StaticNameServers': ${static_name_servers}}
+    ...  valid_status_codes=[${valid_status_codes}]
 
     # Check if newly added DNS server is configured on BMC.
     ${cli_nameservers}=  CLI Get Nameservers
-    List Should Contain Sub List  ${cli_nameservers}  ${static_name_servers}
+    ${cmd_status}=  Run Keyword And Return Status
+    ...  List Should Contain Sub List  ${cli_nameservers}  ${static_name_servers}
+
+    Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
+    ...  Should Be True  ${cmd_status} == ${True}
+    ...  ELSE  Should Be True  ${cmd_status} == ${False}
 
 Delete Static Name Servers
     [Documentation]  Delete static name servers.
