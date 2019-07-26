@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "78a5b1cb_03a2dac2",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ad2b92b_624ee1c3",
+      "range": {
+        "startLine": 11,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b67bbfc8_075c63ab",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2019-07-25T15:28:46Z",
       "side": 1,
       "message": "Are we talking here about what the OpenBMC test community is doing or should do vs  just a generic test documentation ?",
+      "range": {
+        "startLine": 13,
+        "startChar": 17,
+        "endLine": 13,
+        "endChar": 28
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc950b50_40e67449",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "this is openbmc test community.",
+      "parentUuid": "b67bbfc8_075c63ab",
       "range": {
         "startLine": 13,
         "startChar": 17,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7e0f0d05_1e51dcd2",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "That is hardware architectural specification, George. It can be Witherspoon for IBM, Romulus for Google etc.",
+      "parentUuid": "41ccfa18_224318ca",
+      "range": {
+        "startLine": 14,
+        "startChar": 13,
+        "endLine": 14,
+        "endChar": 41
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99bb42c8_447c06c5",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -82,6 +154,30 @@
       "writtenOn": "2019-07-25T15:28:46Z",
       "side": 1,
       "message": "we dont fix, but just identify / raise bug / report to community.\nso drop that",
+      "range": {
+        "startLine": 17,
+        "startChar": 57,
+        "endLine": 17,
+        "endChar": 64
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dbd48022_7b4c20d6",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99bb42c8_447c06c5",
       "range": {
         "startLine": 17,
         "startChar": 57,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "6ae6afa8_28eba580",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3753fab_86a39531",
+      "range": {
+        "startLine": 18,
+        "startChar": 70,
+        "endLine": 18,
+        "endChar": 75
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e938b16b_70ab5c79",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -128,6 +248,30 @@
       "writtenOn": "2019-07-25T15:28:46Z",
       "side": 1,
       "message": "drop this.. we support what OpenBMC community support, shouldnt be just those two based\n\n\" OpenBMC based servers\"",
+      "range": {
+        "startLine": 20,
+        "startChar": 51,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03649258_dd6084b8",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e938b16b_70ab5c79",
       "range": {
         "startLine": 20,
         "startChar": 51,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "19119e7b_f12ba9a8",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fc60e57_b4cbac90",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4578445a_dbfaef45",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -174,6 +342,30 @@
       "writtenOn": "2019-07-25T15:28:46Z",
       "side": 1,
       "message": "Well to be generic, we would need to reword this. something in the line to say.\n\n - Test target machine should be OpenBMC supported systems.\n\nJoseph/Kurt can comment here.",
+      "range": {
+        "startLine": 35,
+        "startChar": 31,
+        "endLine": 35,
+        "endChar": 42
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e04e578a_68f37582",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4578445a_dbfaef45",
       "range": {
         "startLine": 35,
         "startChar": 31,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "ed0f0945_adc46c4b",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Make sense, Done.",
+      "parentUuid": "0b35b76c_dffbdf50",
+      "range": {
+        "startLine": 47,
+        "startChar": 42,
+        "endLine": 47,
+        "endChar": 70
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88176081_636b3556",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -226,6 +442,24 @@
     },
     {
       "key": {
+        "uuid": "beeba3d3_845ef5c9",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88176081_636b3556",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "854106bd_16972344",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -237,6 +471,30 @@
       "writtenOn": "2019-07-25T15:28:46Z",
       "side": 1,
       "message": "Is this an expectation or a directive statement ?. This is more of a generic functional case than what openbmc community should do collectively. would need reword",
+      "range": {
+        "startLine": 48,
+        "startChar": 52,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54d57697_8285cdec",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "There are functional owners who sign off Kurt Taylors\u0027s excel sheet and similarly test owner also sign off. I am meaning that, George.",
+      "parentUuid": "854106bd_16972344",
       "range": {
         "startLine": 48,
         "startChar": 52,
@@ -272,6 +530,30 @@
     },
     {
       "key": {
+        "uuid": "e5aeb846_f7fdb4e2",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f58545e3_2edb3674",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 20
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c43c7308_2f23623d",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -283,6 +565,30 @@
       "writtenOn": "2019-07-25T15:28:46Z",
       "side": 1,
       "message": "please drop this word.",
+      "range": {
+        "startLine": 65,
+        "startChar": 14,
+        "endLine": 65,
+        "endChar": 17
+      },
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f02d45a_6b6a9853",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c43c7308_2f23623d",
       "range": {
         "startLine": 65,
         "startChar": 14,
@@ -312,6 +618,24 @@
     },
     {
       "key": {
+        "uuid": "0e5b7cec_86374fdb",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9da39f2_c417fced",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15959b09_c876a238",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -323,6 +647,24 @@
       "writtenOn": "2019-07-25T15:57:05Z",
       "side": 1,
       "message": "Do not precede the \":\" with a space.\nCollapse double space to single.",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83dfc60b_0aa50c1f",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15959b09_c876a238",
       "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
@@ -346,6 +688,24 @@
     },
     {
       "key": {
+        "uuid": "296fdc0b_d4ecb4d5",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a9e9ff3_3662db6f",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2704640c_5dafb5db",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -357,6 +717,24 @@
       "writtenOn": "2019-07-25T15:57:05Z",
       "side": 1,
       "message": "You didn\u0027t include all of my corrections.  Just copy my sentence to get them:\n\n- \"is\" should be \"are\" (done)\n- *commans (plural)\n- Need comma after \"systemctl",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a9681ec_89e58ec6",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2704640c_5dafb5db",
       "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
@@ -380,6 +758,24 @@
     },
     {
       "key": {
+        "uuid": "90c87d67_6de9333a",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b19ac2f_52c3e34d",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29b01466_45b5e721",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -397,6 +793,24 @@
     },
     {
       "key": {
+        "uuid": "adc1778d_b97b264c",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29b01466_45b5e721",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd2e345e_9566bc09",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 5
@@ -408,6 +822,24 @@
       "writtenOn": "2019-07-25T15:57:05Z",
       "side": 1,
       "message": "Indent this bullet and any others which are sub-bullets of bullet at line 145.",
+      "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b3b7e92_d009fd61",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-26T14:28:12Z",
+      "side": 1,
+      "message": "They are sub-bullets mike.\n     - A redesign and/or code implementation correct the misbehavior. The\n       defect is then verified with an official build and closed.\n     - With the OpenBMC community approval, document the new behavior for\n       the end user (customer) as the expected behavior.\n     - Defect verification and test case re-execution may not use sandbox\n       build or firmware patch. All defect fixes have been integrated, built,\n       and verified with a firmware image build by the build server\n(https://openpower.xyz).",
+      "parentUuid": "fd2e345e_9566bc09",
       "revId": "f90ff9b264afbc22d01c73e368af5f62c22b3340",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
