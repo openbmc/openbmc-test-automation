@@ -695,6 +695,10 @@ Configure Static Name Servers
 
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'StaticNameServers': ${static_name_servers}}
 
+    # Check if newly added DNS server is configured on BMC.
+    ${cli_nameservers}=  CLI Get Nameservers
+    List Should Contain Sub List  ${cli_nameservers}  ${static_name_servers}
+
 Delete Static Name Servers
     [Documentation]  Delete static name servers.
 
