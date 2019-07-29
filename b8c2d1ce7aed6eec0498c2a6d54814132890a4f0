@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f88d726e_73a68131",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-29T04:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac50b7c7_321545d9",
+      "revId": "b8c2d1ce7aed6eec0498c2a6d54814132890a4f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c38fc2c_043dc9eb",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 6
@@ -30,6 +48,30 @@
       "writtenOn": "2019-07-27T17:37:31Z",
       "side": 1,
       "message": "Isn\u0027t this an IBMism, can we just use openbmc-test-automation ?",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 32
+      },
+      "revId": "b8c2d1ce7aed6eec0498c2a6d54814132890a4f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4594e36_ed162900",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-29T04:59:34Z",
+      "side": 1,
+      "message": "FVT is a very generic terminology and here we are testing the function what available in openbmc.  As we are testing openbmc, then openbmc-test-automation may be the direct reference. Changing it accordingly.",
+      "parentUuid": "5c38fc2c_043dc9eb",
       "range": {
         "startLine": 29,
         "startChar": 4,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "995b070f_9b5992a2",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-29T04:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f08da81_67356e15",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 34
+      },
+      "revId": "b8c2d1ce7aed6eec0498c2a6d54814132890a4f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b311cf4e_40b42038",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 6
@@ -76,6 +142,24 @@
       "writtenOn": "2019-07-27T17:37:31Z",
       "side": 1,
       "message": "Why is this a requirement ?",
+      "revId": "b8c2d1ce7aed6eec0498c2a6d54814132890a4f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a24e0a4b_172119bd",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-29T04:59:34Z",
+      "side": 1,
+      "message": "To shift left defect/issue identification, this is required. Expecting unit test to be completed.",
+      "parentUuid": "b311cf4e_40b42038",
       "revId": "b8c2d1ce7aed6eec0498c2a6d54814132890a4f0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "bcf34ee5_363953a6",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-29T04:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24a65803_b193080f",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 12
+      },
+      "revId": "b8c2d1ce7aed6eec0498c2a6d54814132890a4f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbcd3cf6_227c1505",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 6
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "7b0a97cd_d60870fa",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-29T04:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbcd3cf6_227c1505",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 17
+      },
+      "revId": "b8c2d1ce7aed6eec0498c2a6d54814132890a4f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4c2f12f_181b14f9",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 6
@@ -148,6 +280,30 @@
       "revId": "b8c2d1ce7aed6eec0498c2a6d54814132890a4f0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "596c7e78_b889edbe",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-29T04:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4c2f12f_181b14f9",
+      "range": {
+        "startLine": 163,
+        "startChar": 31,
+        "endLine": 163,
+        "endChar": 32
+      },
+      "revId": "b8c2d1ce7aed6eec0498c2a6d54814132890a4f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
