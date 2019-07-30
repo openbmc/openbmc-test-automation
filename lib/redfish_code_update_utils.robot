@@ -61,8 +61,36 @@ Get Software Inventory State
         Set To Dictionary  ${tmp_dict}  image_type  ${image_info["Description"]}
         ${functional}=  Get Software Functional State  ${uri_path.split("/")[-1]}
         Set To Dictionary  ${tmp_dict}  functional  ${functional}
-        Set To Dictionary  ${sw_inv_dict}  ${uri_path.split("/")[-1]}  ${tmp_dict}
         Set To Dictionary  ${tmp_dict}  version  ${image_info["Version"]}
+        Set To Dictionary  ${sw_inv_dict}  ${uri_path.split("/")[-1]}  ${tmp_dict}
     END
 
     [Return]  &{sw_inv_dict}
+
+
+Get Software Inventory State By Version
+    [Documentation]  Return image type, functional and image id of the software version.
+    [Arguments]  ${software_version}
+
+    # Description of argument(s):
+    # software_version     A BMC or Host version (e.g "2.8.0-dev-150-g04508dc9f").
+
+    ${sw_inv_dict}=  Get Software Inventory State
+
+    # Software image id list:
+    # dict_keys:
+    #  [0]:          1e662ba8
+    #  [1]:          98744d76
+    #  [2]:          9a8028ec
+
+    ${dict_keys}=  Get Dictionary Keys  ${sw_inv_dict}
+
+    # Returns the following if software version exist:
+    # image_type:     BMC update
+    # functional:     True
+    # image_id:       1e662ba8
+
+    FOR  ${image_id}  IN  @{dict_keys}
+        Return From Keyword If  '${sw_inv_dict['${image_id}']['version']}' == '${software_version}'
+        ...  ${sw_inv_dict['${image_id}']['image_type']}  ${sw_inv_dict['${image_id}']['functional']}  ${image_id}
+    END
