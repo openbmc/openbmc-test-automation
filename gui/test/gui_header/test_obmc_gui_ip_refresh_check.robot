@@ -51,8 +51,10 @@ Verify Refresh Button
     # Verify power is on after refresh button.
 
     Expected Initial Test State  Off
+    Wait Until Element Is Visible  ${xpath_select_refresh_button}
     Click Element  ${xpath_select_refresh_button}
     GUI Power On
+    Wait Until Element Is Visible  ${xpath_select_refresh_button}
     Click Element  ${xpath_select_refresh_button}
     Wait Until Page Contains  Running
 
@@ -60,7 +62,9 @@ Verify Date Last Refreshed
     [Documentation]  Verify Date Last Refreshed text in GUI header.
     [Tags]  Verify_Date_Last_Refreshed
 
+    Wait Until Element Is Visible  ${xpath_select_date_text}
     ${date_info_1st_read}=  Get Text  ${xpath_select_date_text}
+    Should Not Be Empty  ${date_info_1st_read}
     ${current_date}=  Get Time
     ${date_conversion}=  Convert Date  ${current_date}  result_format=%b %d %Y
 
