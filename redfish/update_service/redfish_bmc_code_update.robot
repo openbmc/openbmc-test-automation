@@ -6,6 +6,8 @@ Resource          ../../lib/bmc_redfish_resource.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/common_utils.robot
 Resource          ../../lib/code_update_utils.robot
+Resource          ../../lib/dump_utils.robot
+Resource          ../../lib/logging_utils.robot
 Library           ../../lib/gen_robot_valid.py
 
 Suite Setup       Suite Setup Execution
@@ -54,5 +56,11 @@ Suite Setup Execution
     [Documentation]  Do the suite setup.
 
     Redfish.Login
+
+    # Delete BMC dump and Error logs
+    Delete All BMC Dump
+    Redfish Purge Event Log
+
     # Checking for file existence.
     OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
+
