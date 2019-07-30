@@ -257,3 +257,48 @@ Configure Hostname
     ${data}=  Create Dictionary  HostName=${hostname}
     Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
 
+
+Verify IP On BMC
+    [Documentation]  Verify IP on BMC.
+    [Arguments]  ${ip}
+
+    # Description of argument(s):
+    # ip  IP address to be verified (e.g. "10.7.7.7").
+
+    # Get IP address details on BMC using IP command.
+    @{ip_data}=  Get BMC IP Info
+    Should Contain Match  ${ip_data}  ${ip}/*
+    ...  msg=IP address does not exist.
+
+
+Verify Gateway On BMC
+    [Documentation]  Verify gateway on BMC.
+    [Arguments]  ${gateway_ip}=0.0.0.0
+
+    # Description of argument(s):
+    # gateway_ip  Gateway IP address.
+
+    ${route_info}=  Get BMC Route Info
+
+    # If gateway IP is empty or 0.0.0.0 it will not have route entry.
+
+    Run Keyword If  '${gateway_ip}' == '0.0.0.0'
+    ...      Pass Execution  Gateway IP is "0.0.0.0".
+    ...  ELSE
+    ...      Should Contain  ${route_info}  ${gateway_ip}
+    ...      msg=Gateway IP address not matching.
+
+
+Get BMC DNS Info
+    [Documentation]  Get system DNS info.
+
+
+    # Sample output of "resolv.conf":
+    # ### Generated manually via dbus settings ###
+    # nameserver 8.8.8.8
+
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  cat /etc/resolv.conf
+
+    [Return]  ${cmd_output}
+
