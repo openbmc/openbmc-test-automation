@@ -509,18 +509,6 @@ Get Network Configuration
     [Return]  @{network_configurations}
 
 
-Verify IP On BMC
-    [Documentation]  Verify IP on BMC.
-    [Arguments]  ${ip}
-
-    # Description of argument(s):
-    # ip  IP address to be verified (e.g. "10.7.7.7").
-
-    # Get IP address details on BMC using IP command.
-    @{ip_data}=  Get BMC IP Info
-    Should Contain Match  ${ip_data}  ${ip}/*
-    ...  msg=IP address does not exist.
-
 Add IP Address
     [Documentation]  Add IP Address To BMC.
     [Arguments]  ${ip}  ${subnet_mask}  ${gateway}
@@ -627,23 +615,6 @@ Verify Netmask On BMC
     Should Contain Match  ${ip_data}  */${prefix_length}
     ...  msg=Prefix length does not exist.
 
-Verify Gateway On BMC
-    [Documentation]  Verify gateway on BMC.
-    [Arguments]  ${gateway_ip}=0.0.0.0
-
-    # Description of argument(s):
-    # gateway_ip  Gateway IP address.
-
-    ${route_info}=  Get BMC Route Info
-
-    # If gateway IP is empty or 0.0.0.0 it will not have route entry.
-
-    Run Keyword If  '${gateway_ip}' == '0.0.0.0'
-    ...      Pass Execution  Gateway IP is "0.0.0.0".
-    ...  ELSE
-    ...      Should Contain  ${route_info}  ${gateway_ip}
-    ...      msg=Gateway IP address not matching.
-
 Verify IP And Netmask On BMC
     [Documentation]  Verify IP and netmask on BMC.
     [Arguments]  ${ip}  ${netmask}
@@ -702,18 +673,6 @@ Verify CLI and Redfish Nameservers
     ${match}=  Evaluate  set($redfish_nameservers) == set($resolve_conf_nameservers)
     Should Be True  ${match}
     ...  The nameservers obtained via Redfish do not match those found in /etc/resolv.conf.
-
-CLI Get Nameservers
-    [Documentation]  Get the nameserver IPs from /etc/resolv.conf and return as a list.
-
-    # Example of /etc/resolv.conf data:
-    # nameserver x.x.x.x
-    # nameserver y.y.y.y
-
-    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  egrep nameserver /etc/resolv.conf | cut -f2- -d ' '
-    ${nameservers}=  Split String  ${stdout}
-
-    [Return]  ${nameservers}
 
 
 Configure Static Name Servers
