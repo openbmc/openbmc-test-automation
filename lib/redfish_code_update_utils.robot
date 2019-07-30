@@ -36,14 +36,17 @@ Get Software Inventory State
     # sw_inv_dict:
     #   [ace821ef]:
     #     [image_type]:                 Host update
+    #     [image_id]:                   ace821ef
     #     [functional]:                 True
     #     [version]:                    witherspoon-xx.xx.xx.xx
     #   [b9101858]:
     #     [image_type]:                 BMC update
+    #     [image_id]:                   b9101858
     #     [functional]:                 True
     #     [version]:                    2.8.0-dev-150-g04508dc9f
     #   [c45eafa5]:
     #     [image_type]:                 BMC update
+    #     [image_id]:                   c45eafa5
     #     [functional]:                 False
     #     [version]:                    2.8.0-dev-149-g1a8df5077
 
@@ -59,10 +62,41 @@ Get Software Inventory State
         &{tmp_dict}=  Create Dictionary
         ${image_info}=  Redfish.Get Properties  ${uri_path}
         Set To Dictionary  ${tmp_dict}  image_type  ${image_info["Description"]}
+        Set To Dictionary  ${tmp_dict}  image_id  ${uri_path.split("/")[-1]}
         ${functional}=  Get Software Functional State  ${uri_path.split("/")[-1]}
         Set To Dictionary  ${tmp_dict}  functional  ${functional}
-        Set To Dictionary  ${sw_inv_dict}  ${uri_path.split("/")[-1]}  ${tmp_dict}
         Set To Dictionary  ${tmp_dict}  version  ${image_info["Version"]}
+        Set To Dictionary  ${sw_inv_dict}  ${uri_path.split("/")[-1]}  ${tmp_dict}
     END
 
     [Return]  &{sw_inv_dict}
+
+
+Get Software Inventory State By Version
+    [Documentation]  Return image type, functional and image id of the software version.
+    [Arguments]  ${software_version}
+
+    # Description of argument(s):
+    # software_version     A BMC or Host version (e.g "2.8.0-dev-150-g04508dc9f").
+
+    ${sw_inv_dict}=  Get Software Inventory State
+
+    # Software image id list:
+    # dict_keys:
+    #  [0]:          1e662ba8
+    #  [1]:          98744d76
+    #  [2]:          9a8028ec
+
+    ${dict_keys}=  Get Dictionary Keys  ${sw_inv_dict}
+
+    # Returns the dictionary of the version if software version exist:
+    # sw_version:
+    #   [image_type]:              BMC update
+    #   [image_id]:                1e662ba8
+    #   [functional]:              True
+    #   [version]:                 2.8.0-dev-150-g04508dc9f
+
+    FOR  ${image_id}  IN  @{dict_keys}
+        Return From Keyword If  '${sw_inv_dict['${image_id}']['version']}' == '${software_version}'
+        ...  ${sw_inv_dict['${image_id}']}
+    END
