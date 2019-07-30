@@ -77,6 +77,7 @@ def openbmctool_execute_command(command_string,
     # would be broken into 2 list elements.  We will also break on ">"
     # (re-direct).
     pipeline = map(str.strip, re.split(r' ([\|>]) ', str(command_string)))
+    pipeline = list(pipeline)
     # The "tail" command below prevents a "egrep: write error: Broken pipe"
     # error if the user is piping the output to a sub-process.
     # Use "egrep -v" to get rid of editorial output from openbmctool.py.
