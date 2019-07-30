@@ -10,12 +10,60 @@ Test Teardown          FFDC On Test Case Fail
 
 Force Tags             IPMI_Network
 
+
 *** Variables ***
 
 ${initial_lan_config}   &{EMPTY}
 
 
 *** Test Cases ***
+
+Retrieve IP Address Via IPMI And Verify Using Redfish
+    [Documentation]  Retrieve IP address using IPMI and verify using Redfish.
+    [Tags]  Retrieve_IP_Address_Via_IPMI_And_Verify_Using_Redish
+
+    ${lan_print_ipmi}=  Get LAN Print Dict
+
+    # Fetch IP address list using redfish.
+    ${ip_list_redfish}=  Create List
+    Redfish.Login
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
+    @{network_config_redfish}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
+    : FOR  ${network_config_redfish}  IN  @{network_config_redfish}
+    \  Append To List  ${ip_list_redfish}  ${network_config_redfish['Address']}
+
+    Valid Value  lan_print_ipmi['IP Address']  ${ip_list_redfish}
+
+
+Retrieve Default Gateway Via IPMI And Verify Using Redfish
+    [Documentation]  Retrieve default gateway via IPMI and verify using Redfish.
+    [Tags]  Retrieve_Default_Gateway_Via_IPMI_And_Verify_Using_Redfish
+
+    ${lan_print_ipmi}=  Get LAN Print Dict
+
+    # Fetch gateway address list using redfish.
+    ${gateway_list_redfish}=  Create List
+    Redfish.Login
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
+    @{network_config_redfish}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
+    : FOR  ${network_config_redfish}  IN  @{network_config_redfish}
+    \  Append To List  ${gateway_list_redfish}  ${network_config_redfish['Gateway']}
+
+    Valid Value  lan_print_ipmi['Default Gateway IP']  ${gateway_list_redfish}
+
+
+Retrieve MAC Address Via IPMI And Verify Using Redfish
+    [Documentation]  Retrieve MAC address via IPMI and verify using Redfish.
+    [Tags]  Retrieve_MAC_Address_Via_IPMI_And_Verify_Using_Redfish
+
+    ${lan_print_ipmi}=  Get LAN Print Dict
+
+    Redfish.Login
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ${mac_address_redfish}=  Get From Dictionary  ${resp.dict}  MACAddress
+
+    Valid Value  lan_print_ipmi['MAC Address']  ${mac_address_redfish}
+
 
 Verify IPMI Inband Network Configuration
     [Documentation]  Verify BMC network configuration via inband IPMI.
@@ -59,10 +107,10 @@ Set IPMI Inband Network Configuration
 
 Restore Configuration
     [Documentation]  Restore the configuration to its pre-test state
-
     ${length}=  Get Length  ${initial_lan_config}
     Return From Keyword If  ${length} == ${0}
 
     Set IPMI Inband Network Configuration  ${initial_lan_config['IP Address']}
     ...  ${initial_lan_config['Subnet Mask']}
     ...  ${initial_lan_config['Default Gateway IP']}  login=${0}
+
