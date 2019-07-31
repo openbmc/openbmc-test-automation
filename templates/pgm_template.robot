@@ -8,6 +8,7 @@ Documentation  Base to get a start on a robot program.
 Library                     pgm_template.py
 Library                     gen_print.py
 Library                     gen_robot_print.py
+Resource                    bmc_redfish_resource.robot
 
 Suite Setup                 Suite Setup
 Suite Teardown              Suite Teardown
@@ -26,5 +27,5 @@ ${DEBUG}                    0
 
 *** Test Cases ***
 Test Case 1
-    [Documentation]  <test case doc here>
+
     Print Timen  First test case.
