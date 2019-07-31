@@ -13,26 +13,6 @@ Test Teardown          Test Teardown Execution
 
 *** Test Cases ***
 
-IPMI Chassis Status On
-    [Documentation]  This test case verfies system power on status
-    ...               using IPMI Get Chassis status command.
-    [Tags]  IPMI_Chassis_Status_On
-
-    Initiate Host Boot
-    ${resp}=  Run IPMI Standard Command  chassis status
-    ${power_status}=  Get Lines Containing String  ${resp}  System Power
-    Should Contain  ${power_status}  on
-
-IPMI Chassis Status Off
-    [Documentation]  This test case verfies system power off status
-    ...               using IPMI Get Chassis status command.
-    [Tags]  IPMI_Chassis_Status_Off
-
-    Initiate Host PowerOff
-    ${resp}=  Run IPMI Standard Command  chassis status
-    ${power_status}=  Get Lines Containing String  ${resp}  System Power
-    Should Contain  ${power_status}    off
-
 IPMI Chassis Restore Power Policy
      [Documentation]  Verify IPMI chassis restore power policy.
      [Tags]  IPMI_Chassis_Restore_Power_Policy
