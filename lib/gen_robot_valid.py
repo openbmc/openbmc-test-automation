@@ -1,200 +1,223 @@
 #!/usr/bin/env python
 
 r"""
-This file contains functions useful for validating variables in robot.
+This module provides validation functions like valid_value(), valid_integer(),
+etc. for robot programs.
 """
 
+import re
 import gen_print as gp
 import gen_valid as gv
+import func_args as fa
 
 from robot.libraries.BuiltIn import BuiltIn
-from robot.api import logger
 
 
-def rvalid_value(var_name,
-                 invalid_values=[],
-                 valid_values=[]):
+def valid_var_name(var_name):
     r"""
-    Validate a robot value.
+    Validate the robot variable name and return its value.
 
-    This function is the robot wrapper for gen_valid.svalid_value.
+    If the variable is undefined, this function will print an error message
+    and call BuiltIn().fail().
 
-    Description of arguments:
-    var_name                        The name of the variable whose value is to
-                                    be validated.
-    invalid_values                  A list of invalid values.  If var_value is
-                                    equal to any of these, it is invalid.
-                                    Note that if you specify anything for
-                                    invalid_values (below), the valid_values
-                                    list is not even processed.
-    valid_values                    A list of invalid values.  var_value must
-                                    be equal to one of these values to be
-                                    considered valid.
-
-    If either the invalid_values or the valid_values parms are not of type
-    "list", they will be processed as python code in order to generate a list.
-    This allows the robot programmer to essentially specify a list literal.
-    For example, the robot code could contain the following:
-
-    Rvalid Value  var1  valid_values=['one', 'two']
-
-    Examples of robot calls and corresponding output:
-
-    Robot code...
-    rvalid_value                    MY_PARM
-
-    Output...
-    #(CDT) 2016/11/02 10:04:20 - **ERROR** Variable "MY_PARM" not found (i.e.
-    #it's undefined).
-
-    or if it is defined but blank:
-
-    Output...
-    #(CDT) 2016/11/02 10:14:24 - **ERROR** The following variable has an
-    #invalid value:
-    MY_PARM:
-
-    It must NOT be one of the following values:
-    invalid_values:
-      invalid_values[0]:         <blank>
-
-    Robot code...
-    ${invalid_values}=  Create List  one  two  three
-    ${MY_PARM}=  Set Variable  one
-    rvalid_value                    MY_PARM  invalid_values=${invalid_values}
-
-    Output...
-    #(CDT) 2016/11/02 10:20:05 - **ERROR** The following variable has an
-    #invalid value:
-    MY_PARM:                     one
-
-    It must NOT be one of the following values:
-    invalid_values:
-        invalid_values[0]:       one
-        invalid_values[1]:       two
-        invalid_values[2]:       three
-
-    """
-
-    # Note: get_variable_value() seems to have no trouble with local variables.
-    var_value = BuiltIn().get_variable_value("${" + var_name + "}")
-
-    if type(valid_values) is not list:
-        # Evaluate python syntax to convert to a list.
-        exec("valid_values = " + valid_values)
-    if type(invalid_values) is not list:
-        # Evaluate python syntax to convert to a list.
-        exec("invalid_values = " + invalid_values)
-
-    if var_value is None:
-        var_value = ""
-        error_message = "Variable \"" + var_name +\
-                        "\" not found (i.e. it's undefined).\n"
-    else:
-        error_message = gv.svalid_value(var_value, invalid_values,
-                                        valid_values, var_name)
-    if not error_message == "":
-        error_message = gp.sprint_error_report(error_message)
-        BuiltIn().fail(error_message)
-
-
-def rvalid_integer(var_name):
-    r"""
-    Validate a robot integer.
-
-    This function is the robot wrapper for gen_valid.svalid_integer.
-
-    Description of arguments:
-    var_name                        The name of the variable whose value is to
-                                    be validated.
-
-    Examples of robot calls and corresponding output:
-
-    Robot code...
-    Rvalid Integer  MY_PARM
-
-    Output...
-    #(CDT) 2016/11/02 10:44:43 - **ERROR** Variable "MY_PARM" not found (i.e.
-    #it's undefined).
-
-    or if it is defined but blank:
-
-    Output...
-    #(CDT) 2016/11/02 10:45:37 - **ERROR** Invalid integer value:
-    MY_PARM:                     <blank>
-
-    Robot code...
-    ${MY_PARM}=  Set Variable  HELLO
-    Rvalid Integer  MY_PARM
-
-    Output...
-    #(CDT) 2016/11/02 10:46:18 - **ERROR** Invalid integer value:
-    MY_PARM:                     HELLO
-
+    Description of arguments():
+    var_name                        The name of the robot variable (e.g.
+                                    "var1").  Do not include "${}" (e.g.
+                                    "${var1}".  Just provide the simple name
+                                    of the variable.
     """
 
     # Note: get_variable_value() seems to have no trouble with local variables.
     var_value = BuiltIn().get_variable_value("${" + var_name + "}")
 
     if var_value is None:
-        var_value = ""
-        error_message = "Variable \"" + var_name +\
-                        "\" not found (i.e. it's undefined).\n"
-    else:
-        error_message = gv.svalid_integer(var_value, var_name)
-    if not error_message == "":
-        error_message = gp.sprint_error_report(error_message)
+        var_value = "<undefined>"
+        error_message = gv.valid_value(var_value, invalid_values=[var_value],
+                                       var_name=var_name)
         BuiltIn().fail(error_message)
 
+    return var_value
 
-def rvalid_range(var_name,
-                 range):
+
+def valid_init(var_name, *args, **kwargs):
     r"""
-    Validate that a robot integer is within the given range.
+    Do initialization for variable validation and return var_name, args and
+    kwargs.
 
-    This function is the robot wrapper for gen_valid.svalid_range.
+    This function is to be called by all of the various validation functions
+    in this module.
 
-    Description of arguments:
-    var_name                        The name of the variable whose value is to
-                                    be validated.
-    range                           A list comprised of one or two elements
-                                    which are the lower and upper ends of a
-                                    range.  These values must be integers
-                                    except where noted.  Valid specifications
-                                    may be of the following forms: [lower,
-                                    upper], [lower] or [None, upper].  The
-                                    caller may also specify this value as a
-                                    string which will then be converted to a
-                                    list in the aforementioned format:
-                                    lower..upper, lower.. or ..upper.
+    This function is designed solely for use by other functions in this file.
 
-    Examples of robot calls and corresponding output:
-
-    Robot code...
-    Rvalid Range  MY_PARM  5..9
-
-    Output...
-    #(CDT) 2018/05/09 11:45:00.166344 -    0.004252 - **ERROR** The following
-    # variable is not within the expected range:
-    MY_PARM:                                          4
-    valid_range:                                      5..9
+    Description of argument(s):
+    var_name                        The name of the variable to be validated.
+    args                            The positional arguments to be passed to
+                                    validation function.
+    args                            The keyword arguments to be passed to
+                                    validation function.
     """
 
-    var_value = BuiltIn().get_variable_value("${" + var_name + "}")
+    var_value = valid_var_name(var_name)
+    # Convert python string object definitions to objects (useful for robot
+    # callers).
+    args = fa.args_to_objects(args)
+    kwargs = fa.args_to_objects(kwargs)
+    return var_value, args, kwargs
 
-    if var_value is None:
-        var_value = ""
-        error_message = "Variable \"" + var_name +\
-                        "\" not found (i.e. it's undefined).\n"
-    else:
-        try:
-            range = range.split("..")
-        except AttributeError:
-            pass
-        if range[0] == "":
-            range[0] = None
-        range = [x for x in range if x]
-        error_message = gv.svalid_range(var_value, range, var_name)
-    if not error_message == "":
+
+def process_error_message(error_message):
+    r"""
+    Process an error message.
+
+    If error_message is non-blank, fail.  Otherwise, do nothing.
+
+    This function is designed solely for use by other functions in this file.
+
+    Description of argument(s):
+    error_message                   The error message to be processed.
+    """
+
+    if error_message:
         error_message = gp.sprint_error_report(error_message)
         BuiltIn().fail(error_message)
+
+
+# The docstring header will be pre-pended to each validation function's
+# existing docstring.
+docstring_header = \
+    r"""
+    Fail if the variable named by var_name is invalid.
+    """
+
+
+def customize_doc_string(doc_string):
+    r"""
+    Customize a gen_valid function docstring and return the result.
+
+    This function is designed solely for use by other functions in this file.
+
+    The caller should pass a docstring from a gen_valid.py validation
+    function.  This docstring will be changed to make a suitable docstring for
+    this module's corresponding validation function.
+
+    For example:
+
+    Let's suppose that gen_valid.py has a function called "valid_value()".
+    This module could make the following call to essentially copy gen_valid's
+    "valid_value()" function, modify it and then assign it to the local
+    version of the valid_value() function.
+
+    valid.__doc__ = customize_doc_string(gv.valid.__doc__)
+
+    Description of argument(s):
+    doc_string                      The docstring to be customized.
+    """
+
+    doc_string = docstring_header + doc_string
+    doc_string = doc_string.split("\n")
+
+    start_ix = 0
+    # Find the "var_value" line.
+    start_ix = next((index for index, value in
+                     enumerate(doc_string[start_ix:], start_ix)
+                     if re.match("[ ]+var_value  ", value)), None)
+    doc_string[start_ix] = "    var_name                        " \
+        + "The name of the variable to be validated."
+
+    return "\n".join(doc_string)
+
+
+# All of the following functions are robot wrappers for the equivalent
+# functions defined in gen_valid.py.  Note that the only difference between
+# them is the function name and the gv.<function name> which they call.  Also,
+# note that the docstring for each is created by modifying the docstring from
+# the supporting gen_valid.py function.
+
+def valid_type(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_type(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+def valid_value(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_value(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+def valid_range(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_range(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+def valid_integer(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_integer(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+def valid_dir_path(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_dir_path(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+def valid_file_path(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_file_path(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+def valid_path(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_path(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+def valid_list(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_list(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+def valid_dict(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_dict(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+# Modify the validation function docstrings by calling customize_doc_string
+# for each function in the func_names list.
+func_names = [
+    "valid_type", "valid_value", "valid_range", "valid_integer",
+    "valid_dir_path", "valid_dir_path", "valid_path", "valid_list",
+    "valid_dict"
+]
+
+for func_name in func_names:
+    cmd_buf = func_name \
+        + ".__doc__ = customize_doc_string(gv.raw_doc_strings['" \
+        + func_name + "'])"
+    exec(cmd_buf)
+
+# Define aliases for backward compatibility.
+rvalid_value = valid_value
