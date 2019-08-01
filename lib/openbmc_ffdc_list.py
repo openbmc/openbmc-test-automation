@@ -36,16 +36,16 @@ FFDC_BMC_FILE = {
     'BMC FILES':
     {
         # File Name         Command
-        'BMC_flash_side': 'cat /sys/class/watchdog/watchdog1/bootstatus',
-        'BMC_proc_list': 'top -n 1 -b',
-        'BMC_proc_fd_active_list': 'ls -Al /proc/*/fd/',
-        'BMC_journalctl_nopager': 'journalctl --no-pager',
-        'BMC_journalctl_pretty': 'journalctl -o json-pretty',
-        'BMC_dmesg': 'dmesg',
-        'BMC_procinfo': 'cat /proc/cpuinfo',
-        'BMC_meminfo': 'cat /proc/meminfo',
-        'BMC_systemd': 'systemctl status --all',
-        'SOL': 'cat /var/log/obmc-console.log',
+        'BMC_flash_side': 'cat /sys/class/watchdog/watchdog1/bootstatus >/tmp/BMC_flash_side.txt 2>&1',
+        'BMC_proc_list': 'top -n 1 -b >/tmp/BMC_proc_list.txt 2>&1',
+        'BMC_proc_fd_active_list': 'ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt 2>&1',
+        'BMC_journalctl_nopager': 'journalctl --no-pager >/tmp/BMC_journalctl_nopager.txt 2>&1',
+        'BMC_journalctl_pretty': 'journalctl -o json-pretty >/tmp/BMC_journalctl_pretty.txt 2>&1',
+        'BMC_dmesg': 'dmesg >/tmp/BMC_dmesg.txt 2>&1',
+        'BMC_procinfo': 'cat /proc/cpuinfo >/tmp/BMC_procinfo.txt 2>&1',
+        'BMC_meminfo': 'cat /proc/meminfo >/tmp/BMC_meminfo.txt 2>&1',
+        'BMC_systemd': 'systemctl status --all >/tmp/BMC_systemd.txt 2>&1',
+        'SOL': 'cat /var/log/obmc-console.log >/tmp/SOL.txt 2>&1',
     },
 }
 # Add file name and correcponding command needed for all Linux distributions
