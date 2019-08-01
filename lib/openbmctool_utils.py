@@ -502,7 +502,7 @@ def get_health_check(verify=False):
                                              ignore_err=False)
     health_check = vf.key_value_outbuf_to_dict(output, delim=":")
     if int(verify):
-        err_msg = gv.svalid_dict(health_check, health_check_fields())
+        err_msg = gv.valid_dict(health_check, health_check_fields())
         if err_msg != "":
             BuiltIn().fail(gp.sprint_error(err_msg))
 
@@ -551,8 +551,8 @@ def get_remote_logging_view(verify=False):
                                          ignore_err=False)
 
     if int(verify):
-        err_msg = gv.svalid_dict(remote_logging_view,
-                                 remote_logging_view_fields())
+        err_msg = gv.valid_dict(remote_logging_view,
+                                remote_logging_view_fields())
         if err_msg != "":
             BuiltIn().fail(gp.sprint_error(err_msg))
 
