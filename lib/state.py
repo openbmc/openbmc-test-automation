@@ -249,8 +249,8 @@ def compare_states(state,
     match_type      This may be 'and' or 'or'.
     """
 
-    error_message = gv.svalid_value(match_type, var_name="match_type",
-                                    valid_values=['and', 'or'])
+    error_message = gv.valid_value(match_type, var_name="match_type",
+                                   valid_values=['and', 'or'])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
@@ -310,22 +310,22 @@ def get_os_state(os_host="",
     # Set parm defaults where necessary and validate all parms.
     if os_host == "":
         os_host = BuiltIn().get_variable_value("${OS_HOST}")
-    error_message = gv.svalid_value(os_host, var_name="os_host",
-                                    invalid_values=[None, ""])
+    error_message = gv.valid_value(os_host, var_name="os_host",
+                                   invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
     if os_username == "":
         os_username = BuiltIn().get_variable_value("${OS_USERNAME}")
-    error_message = gv.svalid_value(os_username, var_name="os_username",
-                                    invalid_values=[None, ""])
+    error_message = gv.valid_value(os_username, var_name="os_username",
+                                   invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
     if os_password == "":
         os_password = BuiltIn().get_variable_value("${OS_PASSWORD}")
-    error_message = gv.svalid_value(os_password, var_name="os_password",
-                                    invalid_values=[None, ""])
+    error_message = gv.valid_value(os_password, var_name="os_password",
+                                   invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
@@ -415,25 +415,25 @@ def get_state(openbmc_host="",
     # Set parm defaults where necessary and validate all parms.
     if openbmc_host == "":
         openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
-    error_message = gv.svalid_value(openbmc_host,
-                                    var_name="openbmc_host",
-                                    invalid_values=[None, ""])
+    error_message = gv.valid_value(openbmc_host,
+                                   var_name="openbmc_host",
+                                   invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
     if openbmc_username == "":
         openbmc_username = BuiltIn().get_variable_value("${OPENBMC_USERNAME}")
-    error_message = gv.svalid_value(openbmc_username,
-                                    var_name="openbmc_username",
-                                    invalid_values=[None, ""])
+    error_message = gv.valid_value(openbmc_username,
+                                   var_name="openbmc_username",
+                                   invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
     if openbmc_password == "":
         openbmc_password = BuiltIn().get_variable_value("${OPENBMC_PASSWORD}")
-    error_message = gv.svalid_value(openbmc_password,
-                                    var_name="openbmc_password",
-                                    invalid_values=[None, ""])
+    error_message = gv.valid_value(openbmc_password,
+                                   var_name="openbmc_password",
+                                   invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
@@ -853,8 +853,8 @@ def wait_for_comm_cycle(start_boot_seconds,
     quiet = int(gp.get_var_value(quiet, 0))
 
     # Validate parms.
-    error_message = gv.svalid_integer(start_boot_seconds,
-                                      var_name="start_boot_seconds")
+    error_message = gv.valid_integer(start_boot_seconds,
+                                     var_name="start_boot_seconds")
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
