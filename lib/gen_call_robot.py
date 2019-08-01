@@ -140,11 +140,9 @@ def init_robot_test_base_dir_path():
                 # Use to the apollo dir path.
                 ROBOT_TEST_BASE_DIR_PATH = apollo_dir_path + suffix
 
-    if not gv.valid_value(ROBOT_TEST_BASE_DIR_PATH):
-        return False
+    gv.valid_value(ROBOT_TEST_BASE_DIR_PATH)
     gp.dprint_vars(ROBOT_TEST_RUNNING_FROM_SB, ROBOT_TEST_BASE_DIR_PATH)
-    if not gv.valid_dir_path(ROBOT_TEST_BASE_DIR_PATH):
-        return False
+    gv.valid_dir_path(ROBOT_TEST_BASE_DIR_PATH)
 
     ROBOT_TEST_BASE_DIR_PATH = gm.add_trailing_slash(ROBOT_TEST_BASE_DIR_PATH)
     gm.set_mod_global(ROBOT_TEST_BASE_DIR_PATH)
@@ -177,8 +175,7 @@ def init_robot_file_path(robot_file_path):
                                     file.
     """
 
-    if not gv.valid_value(robot_file_path):
-        raise ValueError('Programmer error.')
+    gv.valid_value(robot_file_path)
 
     try:
         if ROBOT_TEST_BASE_DIR_PATH is NONE:
@@ -213,8 +210,7 @@ def init_robot_file_path(robot_file_path):
                 break
 
     gp.dprint_var(robot_file_path)
-    if not gv.valid_file_path(robot_file_path):
-        raise ValueError('Programmer error.')
+    gv.valid_file_path(robot_file_path)
 
     return robot_file_path
 
@@ -398,8 +394,7 @@ def robot_cmd_fnc(robot_cmd_buf,
                                     apolloxxx import files, programs, etc.
     """
 
-    if not gv.valid_value(robot_cmd_buf):
-        return False
+    gv.valid_value(robot_cmd_buf)
 
     # Set global variables to aid in cleanup with process_robot_output_files.
     global gcr_last_robot_cmd_buf
