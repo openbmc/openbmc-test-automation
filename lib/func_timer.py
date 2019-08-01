@@ -201,7 +201,8 @@ class func_timer_class:
             if self.__time_out is not None:
                 self.__time_out = int(self.__time_out)
                 # Ensure that time_out is non-negative.
-                message = gv.svalid_range(self.__time_out, [0], "time_out")
+                message = gv.valid_range(self.__time_out, 0,
+                                         var_name="time_out")
                 if message != "":
                     raise ValueError("\n"
                                      + gp.sprint_error_report(message,
