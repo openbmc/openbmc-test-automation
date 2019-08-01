@@ -27,9 +27,8 @@ Get Processor Inventory Via Redfish And Verify
     [Documentation]  Get the number of CPUs that are functional and enabled.
     [Tags]  Get_Processor_Inventory_Via_Redfish_And_Verify
 
-    Rprint Vars  num_valid_cpus
-    Rprint Vars  min_num_cpus
-    Rvalid Range  num_valid_cpus  ${min_num_cpus}..
+    Rprint Vars  num_valid_cpus  min_num_cpus
+    Valid Range  num_valid_cpus  ${min_num_cpus}
 
 
 Get Available CPU Cores And Verify
