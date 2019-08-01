@@ -134,8 +134,8 @@ def set_ffdc_defaults(ffdc_dir_path=None,
             if FFDC_LOG_PATH == "":
                 FFDC_LOG_PATH = os.path.dirname(
                     BuiltIn().get_variable_value("${LOG_FILE}")) + "/"
-            error_message = gv.svalid_value(FFDC_LOG_PATH,
-                                            var_name="FFDC_LOG_PATH")
+            error_message = gv.valid_value(FFDC_LOG_PATH,
+                                           var_name="FFDC_LOG_PATH")
             if error_message != "":
                 error_message = gp.sprint_error_report(error_message)
                 BuiltIn().fail(error_message)

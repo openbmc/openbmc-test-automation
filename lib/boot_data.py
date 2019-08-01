@@ -165,9 +165,9 @@ def valid_boot_list(boot_list,
 
     for boot_name in boot_list:
         boot_name = boot_name.strip(" ")
-        error_message = gv.svalid_value(boot_name,
-                                        valid_values=valid_boot_types,
-                                        var_name="boot_name")
+        error_message = gv.valid_value(boot_name,
+                                       valid_values=valid_boot_types,
+                                       var_name="boot_name")
         if error_message != "":
             BuiltIn().fail(gp.sprint_error(error_message))
 
