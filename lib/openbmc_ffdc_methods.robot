@@ -194,11 +194,17 @@ BMC FFDC Files
     # entries:
     #   entries[0]: BMC FILES
 
+    scp.Open Connection
+    ...  ${OPENBMC_HOST}  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+
     @{ffdc_file_list}=  Create List
     :FOR  ${index}  IN  @{entries}
     \    ${ffdc_file_sub_list}=  Create File and Write Data  ${index}
     \     ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...       ${ffdc_file_sub_list}
+
+    BMC Execute Command  rm -rf /tmp/BMC_* /tmp/SOL.txt
+    scp.Close Connection
 
     [Return]  ${ffdc_file_list}
 
@@ -217,6 +223,7 @@ Create File and Write Data
     \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
     \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
     ...      ${cmd[1]}  ${logpath}
+    \    Run Key U  scp.Get File \ /tmp/${cmd[0]}.txt \ ${LOG_PREFIX}${cmd[0]}.txt
     \     ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...       ${ffdc_file_sub_list}
 
@@ -317,8 +324,7 @@ Log OS All distros FFDC
     \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
     ...  ${cmd[1]}  ${logpath}  target=OS
     \    # scp it to the LOG_PREFIX ffdc directory.
-    \    Log To Console  scp.Get File /tmp/${cmd[0]}.txt ${LOG_PREFIX}${cmd[0]}.txt
-    \    scp.Get File  /tmp/${cmd[0]}.txt  ${LOG_PREFIX}${cmd[0]}.txt
+    \    Run Key U  scp.Get File \ /tmp/${cmd[0]}.txt \ ${LOG_PREFIX}${cmd[0]}.txt
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
 
@@ -341,8 +347,7 @@ Log OS SPECIFIC DISTRO FFDC
     \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
     \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
     ...      ${cmd[1]}  ${logpath}  target=OS
-    \    Log To Console  scp.Get File /tmp/${cmd[0]}.txt ${LOG_PREFIX}${cmd[0]}.txt
-    \    scp.Get File  /tmp/${cmd[0]}.txt  ${LOG_PREFIX}${cmd[0]}.txt
+    \    Run Key U  scp.Get File \ /tmp/${cmd[0]}.txt \ ${LOG_PREFIX}${cmd[0]}.txt
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
 
