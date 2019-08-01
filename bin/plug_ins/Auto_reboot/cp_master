@@ -81,7 +81,7 @@ def validate_parms():
 
     get_plug_vars()
 
-    valid_value(AUTOBOOT_OPENBMC_HOST, ["", None])
+    valid_value(AUTOBOOT_OPENBMC_HOST)
     global AUTO_REBOOT_DISABLE
     if pgm_name == "cp_cleanup":
         AUTO_REBOOT_DISABLE = 0
