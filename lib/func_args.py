@@ -8,7 +8,7 @@ import gen_print as gp
 import collections
 
 
-def pop_arg(default, *args, **kwargs):
+def pop_arg(default=None, *args, **kwargs):
     r"""
     Pop a named argument from the args/kwargs and return a tuple consisting of
     the argument value, the modified args and the modified kwargs.
@@ -146,8 +146,9 @@ def source_to_object(value):
     # code.
     value = value.strip()
 
-    # Try special case of collections.OrderedDict:
-    if value.startswith("["):
+    # Try special case of collections.OrderedDict which accepts a list of
+    # tuple pairs.
+    if value.startswith("[("):
         try:
             return eval("collections.OrderedDict(" + value + ")")
         except (TypeError, NameError, ValueError):
