@@ -8,6 +8,7 @@ Resource                     ../../lib/utils.robot
 Resource                     ../../lib/rest_client.robot
 Library                      ../../lib/gen_robot_valid.py
 
+Test Setup                   Printn
 Test Teardown                Test Teardown Execution
 Suite Setup                  Suite Setup Execution
 Suite Teardown               Suite Teardown Execution
@@ -72,9 +73,9 @@ Verify Set DateTime With Offset Using Redfish
     ${date_time_diff}=  Subtract Date From Date  ${cli_bmc_time}
     ...  ${expected_date_time}  exclude_millis=yes
     ${date_time_diff}=  Convert to Integer  ${date_time_diff}
-    Rpvars  date_time_with_offset  expected_date_time  cli_bmc_time
+    Rprint Vars  date_time_with_offset  expected_date_time  cli_bmc_time
     ...  date_time_diff  max_time_diff_in_seconds
-    Rvalid Range  date_time_diff  0..${max_time_diff_in_seconds}
+    Valid Range  date_time_diff  0  ${max_time_diff_in_seconds}
 
 
 Verify Set DateTime With Invalid Data Using Redfish
