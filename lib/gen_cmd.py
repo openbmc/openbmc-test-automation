@@ -70,7 +70,7 @@ def cmd_fnc(cmd_buf,
     if debug:
         gp.print_vars(cmd_buf, quiet, test_mode, debug)
 
-    err_msg = gv.svalid_value(cmd_buf)
+    err_msg = gv.valid_value(cmd_buf)
     if err_msg != "":
         raise ValueError(err_msg)
 
@@ -367,7 +367,7 @@ def shell_cmd(command_string,
     stack_ignore_err = gp.get_stack_var('ignore_err', global_ignore_err)
     ignore_err = int(gm.dft(ignore_err, gm.dft(stack_ignore_err, 1)))
 
-    err_msg = gv.svalid_value(command_string)
+    err_msg = gv.valid_value(command_string)
     if err_msg != "":
         raise ValueError(err_msg)
 
