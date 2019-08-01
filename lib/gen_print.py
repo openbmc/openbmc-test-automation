@@ -1652,7 +1652,8 @@ def sprint_pgm_header(indent=0,
 
 def sprint_error_report(error_text="\n",
                         indent=2,
-                        format=None):
+                        format=None,
+                        stack_frame_ix=None):
     r"""
     Return a string with a standardized report which includes the caller's
     error text, the call stack and the program header.
@@ -1666,6 +1667,9 @@ def sprint_error_report(error_text="\n",
     format                          Long or short format.  Long includes
                                     extras like lines of dashes, call stack,
                                     etc.
+    stack_frame_ix                  The index of the first stack frame which
+                                    is to be shown in the print_call_stack
+                                    portion of the error report.
     """
 
     # Process input.
@@ -1684,14 +1688,18 @@ def sprint_error_report(error_text="\n",
     buffer += sprint_dashes(width=120, char="=")
     buffer += sprint_error(error_text)
     buffer += "\n"
-    # Calling sprint_call_stack with stack_frame_ix of 0 causes it to show
-    # itself and this function in the call stack.  This is not helpful to a
-    # debugger and is therefore clutter.  We will adjust the stack_frame_ix to
-    # hide that information.
-    stack_frame_ix = 1
-    caller_func_name = sprint_func_name(2)
-    if caller_func_name.endswith("print_error_report"):
-        stack_frame_ix += 1
+    if not stack_frame_ix:
+        # Calling sprint_call_stack with stack_frame_ix of 0 causes it to
+        # show itself and this function in the call stack.  This is not
+        # helpful to a debugger and is therefore clutter.  We will adjust the
+        # stack_frame_ix to hide that information.
+        stack_frame_ix = 1
+        caller_func_name = sprint_func_name(1)
+        if caller_func_name.endswith("print_error_report"):
+            stack_frame_ix += 1
+        caller_func_name = sprint_func_name(2)
+        if caller_func_name.endswith("print_error_report"):
+            stack_frame_ix += 1
     buffer += sprint_call_stack(indent, stack_frame_ix)
     buffer += sprint_pgm_header(indent)
     buffer += sprint_dashes(width=120, char="=")
