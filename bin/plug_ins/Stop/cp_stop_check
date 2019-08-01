@@ -21,6 +21,9 @@ from gen_call_robot import *
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)
 
+# Set exit_on_error for gen_valid functions.
+set_exit_on_error(True)
+
 # Initialize.
 STOP_REST_FAIL = ''
 STOP_COMMAND = ''
@@ -95,8 +98,7 @@ def validate_parms():
 
     get_plug_vars()
 
-    if not valid_value(AUTOBOOT_OPENBMC_HOST, ["", None]):
-        return False
+    valid_value(AUTOBOOT_OPENBMC_HOST)
 
     gen_post_validation(exit_function, signal_handler)
 
