@@ -23,7 +23,7 @@ from robot.libraries.BuiltIn import BuiltIn
 from boot_data import *
 import gen_print as gp
 import gen_robot_plug_in as grpi
-import gen_robot_valid as grv
+import gen_valid as gv
 import gen_misc as gm
 import gen_cmd as gc
 import gen_robot_keyword as grk
@@ -449,38 +449,38 @@ def validate_parms():
     gp.qprintn()
 
     global openbmc_model
-    grv.rvalid_value("openbmc_host")
-    grv.rvalid_value("openbmc_username")
-    grv.rvalid_value("openbmc_password")
-    grv.rvalid_value("rest_username")
-    grv.rvalid_value("rest_password")
-    grv.rvalid_value("ipmi_username")
-    grv.rvalid_value("ipmi_password")
+    gv.valid_value(openbmc_host)
+    gv.valid_value(openbmc_username)
+    gv.valid_value(openbmc_password)
+    gv.valid_value(rest_username)
+    gv.valid_value(rest_password)
+    gv.valid_value(ipmi_username)
+    gv.valid_value(ipmi_password)
     if os_host != "":
-        grv.rvalid_value("os_username")
-        grv.rvalid_value("os_password")
+        gv.valid_value(os_username)
+        gv.valid_value(os_password)
 
     if pdu_host != "":
-        grv.rvalid_value("pdu_username")
-        grv.rvalid_value("pdu_password")
-        grv.rvalid_integer("pdu_slot_no")
+        gv.valid_value(pdu_username)
+        gv.valid_value(pdu_password)
+        gv.valid_integer(pdu_slot_no)
     if openbmc_serial_host != "":
-        grv.rvalid_integer("openbmc_serial_port")
+        gv.valid_integer(openbmc_serial_port)
     if openbmc_model == "":
         status, ret_values =\
             grk.run_key_u("Get BMC System Model")
         openbmc_model = ret_values
         BuiltIn().set_global_variable("${openbmc_model}", openbmc_model)
-    grv.rvalid_value("openbmc_model")
-    grv.rvalid_integer("max_num_tests")
-    grv.rvalid_integer("boot_pass")
-    grv.rvalid_integer("boot_fail")
+    gv.valid_value(openbmc_model)
+    gv.valid_integer(max_num_tests)
+    gv.valid_integer(boot_pass)
+    gv.valid_integer(boot_fail)
 
     plug_in_packages_list = grpi.rvalidate_plug_ins(plug_in_dir_paths)
     BuiltIn().set_global_variable("${plug_in_packages_list}",
                                   plug_in_packages_list)
 
-    grv.rvalid_value("stack_mode", valid_values=['normal', 'skip'])
+    gv.valid_value(stack_mode, valid_values=['normal', 'skip'])
     if len(boot_list) == 0 and len(boot_stack) == 0 and not ffdc_only:
         error_message = "You must provide either a value for either the" +\
             " boot_list or the boot_stack parm.\n"
