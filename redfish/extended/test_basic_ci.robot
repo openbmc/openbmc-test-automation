@@ -9,8 +9,10 @@ Resource            ../../lib/boot_utils.robot
 Resource            ../../lib/openbmc_ffdc.robot
 Resource            ../../lib/bmc_redfish_resource.robot
 
+Suite Setup         Redfish.Login
 Test Setup          Printn
 Test Teardown       FFDC On Test Case Fail
+Suite Teardown      Redfish.Logout
 
 *** Variables ***
 

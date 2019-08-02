@@ -3,6 +3,9 @@ Documentation  Do random repeated boots based on the state of the BMC machine.
 
 Resource  obmc_boot_test_resource.robot
 
+Suite Setup     Run Keyword If  ${REDFISH_SUPPORTED}  Redfish.Login
+Suite Teardown  Run Keyword If  ${REDFISH_SUPPORTED}  Redfish.Logout
+
 *** Variables ***
 
 *** Test Cases ***
