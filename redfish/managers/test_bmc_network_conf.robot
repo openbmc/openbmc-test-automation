@@ -49,6 +49,9 @@ ${negative_ip}             10.-7.-7.7
 ${hex_ip}                  0xa.0xb.0xc.0xd
 @{static_name_servers}     10.5.5.5
 @{null_value}              null
+@{empty_dictionary}        {}
+@{string_value}            aa.bb.cc.dd
+
 *** Test Cases ***
 
 Get IP Address And Verify
@@ -434,6 +437,24 @@ Configure Null Value For DNS Server
     ...  Configure Static Name Servers  AND  Test Teardown Execution
 
     Configure Static Name Servers  ${null_value}  ${HTTP_BAD_REQUEST}
+
+Configure Empty Value For DNS Server
+    [Documentation]  Configure empty value for DNS server and expect an error.
+    [Tags]  Configure_Empty_Value_For_DNS_Server
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    Configure Static Name Servers  ${empty_dictionary}  ${HTTP_BAD_REQUEST}
+
+Configure String Value For DNS Server
+    [Documentation]  Configure string value for DNS server and expect an error.
+    [Tags]  Configure_String_Value_For_DNS_Server
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    Configure Static Name Servers  ${string_value}  ${HTTP_BAD_REQUEST}
 
 *** Keywords ***
 
