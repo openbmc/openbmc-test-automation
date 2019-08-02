@@ -27,11 +27,9 @@ Redfish Power Operation
     #  }
     # }
 
-    Redfish.Login
     ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/system/  ComputerSystem.Reset
     ${payload}=  Create Dictionary  ResetType=${reset_type}
     ${resp}=  Redfish.Post  ${target}  body=&{payload}
-    Redfish.Logout
 
 
 Redfish BMC Reset Operation
@@ -46,19 +44,16 @@ Redfish BMC Reset Operation
     #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
     # }
 
-    Redfish.Login
     ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Managers/bmc/  Manager.Reset
     ${payload}=  Create Dictionary  ResetType=GracefulRestart
     ${resp}=  Redfish.Post  ${target}  body=&{payload}
     # The logout may very well fail because the system was just asked to
     # reset itself.
-    Run Keyword And Ignore Error  Redfish.Logout
 
 
 Delete All Redfish Sessions
     [Documentation]  Delete all active redfish sessions.
 
-    Redfish.Login
     ${saved_session_info}=  Get Redfish Session Info
 
     ${resp_list}=  Redfish_Utils.Get Member List
@@ -69,8 +64,6 @@ Delete All Redfish Sessions
 
     :FOR  ${session}  IN  @{resp_list}
     \  Redfish.Delete  ${session}
-
-    Redfish.Logout
 
 
 Get Valid FRUs
