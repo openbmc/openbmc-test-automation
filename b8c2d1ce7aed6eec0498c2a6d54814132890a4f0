@@ -131,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "e2193fc0_6fc40b6e",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "I meant you could replace this whole sentence with \"OpenBMC supported hardware\"",
+      "parentUuid": "995b070f_9b5992a2",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 34
+      },
+      "revId": "b8c2d1ce7aed6eec0498c2a6d54814132890a4f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b311cf4e_40b42038",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 6
