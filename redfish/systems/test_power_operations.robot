@@ -5,6 +5,8 @@ Resource         ../../lib/boot_utils.robot
 Resource         ../../lib/common_utils.robot
 Resource         ../../lib/open_power_utils.robot
 
+Suite Setup      Redfish.Login
+Suite Teardown   Redfish.Logout
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
