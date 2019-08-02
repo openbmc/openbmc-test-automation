@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5f830f9_21c10b9f",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "Is there a better filename? Why does the filename have functional test in it?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82f27869_af5d7a45",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "The title surprised me. \nCan we call openbmc-test-automation ? Or Release testing?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c18d59bb_29988f59",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "Should this be moved to the Readme?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f41fb10_2ae82839",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "Move to Readme?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "380ee29e_dc276071",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "Should this be moved to the README?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18312cce_9847db58",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "why just POWER?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 6
+      },
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26001728_43d8a802",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "Don\u0027t you already have a feture list here: https://github.com/openbmc/openbmc-test-automation#features-of-openbmc-test-automation",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02759005_fa4663ff",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "Move to Readme?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a9d64e6_983159f6",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "Move to Readme?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0f65e5a_d7dd412d",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-02T16:50:46Z",
+      "side": 1,
+      "message": "How is this different than the dependencies list above ?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
