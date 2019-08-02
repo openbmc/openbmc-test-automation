@@ -25,8 +25,6 @@ Library   Collections
 # Initialize each program parameter.
 ${openbmc_host}               ${EMPTY}
 ${openbmc_nickname}           ${openbmc_host}
-${openbmc_username}           root
-${openbmc_password}           0penBmc
 ${rest_username}              ${openbmc_username}
 ${rest_password}              ${openbmc_password}
 ${ipmi_username}              ${openbmc_username}
