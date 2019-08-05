@@ -210,7 +210,49 @@ Verify LDAP User With Read Privilege Should Not Do Host Poweron
     Callback
 
 
+Update LDAP Group Name And Verify Operations
+    [Documentation]  Verify LDAP group name update and able to do right operations.
+    [Tags]  Update_LDAP_Group_Name_And_Verify_Operations
+    [Template]  Update LDAP Config And Verify Set Host Name
+    [Teardown]  Restore LDAP Privilege
+
+    # group_name             group_privilege  valid_status_codes
+    ${GROUP_NAME}            Administrator    [${HTTP_OK}]
+    ${GROUP_NAME}            Operator         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    ${GROUP_NAME}            User             [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    ${GROUP_NAME}            Callback         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    Invalid_LDAP_Group_Name  Administrator    [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    Invalid_LDAP_Group_Name  Operator         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    Invalid_LDAP_Group_Name  User             [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    Invalid_LDAP_Group_Name  Callback         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+
+
 *** Keywords ***
+
+Update LDAP Config And Verify Set Host Name
+    [Documentation]  Update LDAP config and verify by attempting to set host name.
+    [Arguments]  ${group_name}  ${group_privilege}=Administrator
+    ...  ${valid_status_codes}=[${HTTP_OK}]
+
+    # Description of argument(s):
+    # group_name                    The group name of user.
+    # group_privilege               The group privilege ("Administrator",
+    #                               "Operator", "User" or "Callback").
+    # valid_status_codes            Expected return code(s) from patch
+    #                               operation (e.g. "200") used to update
+    #                               HostName.  See prolog of rest_request
+    #                               method in redfish_plut.py for details.
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${group_privilege}  ${group_name}
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    # Verify that the LDAP user in ${group_name} with the given privilege is
+    # allowed to change the hostname.
+    ${hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'HostName': '${hostname}'}
+    ...  valid_status_codes=${valid_status_codes}
+    Redfish.Logout
+    Redfish.Login 
+
 
 Disable Other LDAP
     [Documentation]  Disable other LDAP configuration.
@@ -358,6 +400,9 @@ Get LDAP Privilege
     [Documentation]  Get LDAP privilege and return it.
 
     ${ldap_config}=  Get LDAP Configuration  ${LDAP_TYPE}
+    ${num_list_entries}=  Get Length  ${ldap_config["RemoteRoleMapping"]}
+    Return From Keyword If  ${num_list_entries} == ${0}  @{EMPTY}
+
     [Return]  ${ldap_config["RemoteRoleMapping"][0]["LocalRole"]}
 
 
