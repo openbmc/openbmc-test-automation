@@ -210,7 +210,51 @@ Verify LDAP User With Read Privilege Should Not Do Host Poweron
     Callback
 
 
+Verify LDAP Group Name Update
+    [Documentation]  Verify LDAP group name update.
+    [Tags]  Verify_LDAP_Group_Name_Update
+    [Template]  Check LDAP Group Name Update
+    [Teardown]  Restore LDAP Privilege
+
+    ${GROUP_NAME}  valid
+    Invalid_LDAP_Group_Name  invalid
+
+
 *** Keywords ***
+
+Check LDAP Group Name Update
+    [Documentation]  To check LDAP group name update.
+    [Arguments]  ${group_name}  ${group_valid_type}
+    # group_name        The group name of LDAP user.
+    # group_valid_type  The group valid type (e.g. valid or invalid). 
+
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${group_name}
+    
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    # Verify that the LDAP user in ${group_name} with Administrator privilege
+    # is allowed to change the hostname.
+    ${hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    ${data}=  Create Dictionary  HostName=${hostname}
+    Run Keyword If  '${group_valid_type}'== 'valid' 
+    ...  Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+    ...  ELSE IF  '${group_valid_type}'== 'invalid'
+    ...  Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}  valid_status_codes=[401, 403]
+    Redfish.Logout
+    Redfish.Login
+
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...   Operator  ${group_name}
+    
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    # Verify that the LDAP user in ${group_name} with operator privilege
+    # is not allowed to change the hostname.
+    ${hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    ${data}=  Create Dictionary  HostName=${hostname}
+    Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}  valid_status_codes=[401, 403]
+    Redfish.Logout
+    Redfish.Login
+
 
 Disable Other LDAP
     [Documentation]  Disable other LDAP configuration.
