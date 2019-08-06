@@ -38,7 +38,7 @@ Escale System On And PL Enabled
 
     Set DCMI Power Limit And Verify  ${max_power}
 
-    REST Power On  stack_mode=skip
+    Redfish Power On  stack_mode=skip
 
     Tool Exist  opal-prd
     OCC Tool Upload Setup
@@ -80,7 +80,7 @@ Escale System On And PL Disabled
 
     ${power_setting}=  Set Variable  ${near_max_power_100}
 
-    REST Power On  stack_mode=skip
+    Redfish Power On  stack_mode=skip
 
     Set DCMI Power Limit And Verify  ${power_setting}
 
@@ -102,7 +102,7 @@ Escale Check Settings System On Then Off
 
     ${power_setting}=  Set Variable  ${near_max_power_100}
 
-    REST Power On  stack_mode=skip
+    Redfish Power On  stack_mode=skip
 
     Set DCMI Power Limit And Verify  ${power_setting}
     Deactivate DCMI Power And Verify
@@ -115,7 +115,7 @@ Escale Check Settings System On Then Off
 
     Activate DCMI Power And Verify
 
-    REST Power On
+    Redfish Power On
 
     ${power}=  Get DCMI Power Limit
     Should Be True  ${power} == ${power_setting}
@@ -144,7 +144,7 @@ Escale Check Settings System Off Then On
     Activate DCMI Power And Verify
     Set DCMI Power Limit And Verify  ${power_setting}
 
-    REST Power On
+    Redfish Power On
 
     Fail If DCMI Power Is Not Activated
 
@@ -163,7 +163,7 @@ Escale Change Limit At Runtime
 
     Smart Power Off
 
-    REST Power On  stack_mode=skip
+    Redfish Power On  stack_mode=skip
 
     Set DCMI Power Limit And Verify  ${power_setting}
 
@@ -187,7 +187,7 @@ Escale Disable And Enable At Runtime
     Activate DCMI Power And Verify
 
     # Power on the system.
-    REST Power On
+    Redfish Power On
 
     # Check that DCMI power limit setting = ${power_setting}.
     ${power}=  Get DCMI Power Limit
