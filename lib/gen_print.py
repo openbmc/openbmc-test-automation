@@ -856,7 +856,9 @@ def valid_fmts():
         'blank',
         'verbose',
         'quote_keys',
-        'show_type']
+        'show_type',
+        'strip_brackets',
+        'no_header']
 
 
 def create_fmt_definition():
@@ -1125,6 +1127,15 @@ def sprint_varx(var_name,
                                     my_dict[key1].
         show_type                   Show the type of the data in angled
                                     brackets just to the right of the data.
+        strip_brackets              Strip the brackets from the variable name
+                                    portion of the output.  This is applicable
+                                    when printing complex objects like lists
+                                    or dictionaries.
+        no_header                   For complex objects like dictionaries, do
+                                    not include a header line.  This
+                                    necessarily means that the member lines
+                                    will be indented 2 characters less than
+                                    they otherwise would have been.
     indent                          The number of spaces to indent the output.
     col1_width                      The width of the output column containing
                                     the variable name.  The default value of
@@ -1212,6 +1223,8 @@ def sprint_varx(var_name,
         if not (fmt & verbose()):
             # Strip everything leading up to the first left square brace.
             var_name = re.sub(r".*\[", "[", var_name)
+        if (fmt & strip_brackets()):
+            var_name = re.sub(r"[\[\]]", "", var_name)
         if value_format == "0x%08x":
             return format_string % ("", str(var_name) + delim,
                                     var_value & 0xffffffff)
@@ -1219,16 +1232,20 @@ def sprint_varx(var_name,
             return format_string % ("", str(var_name) + delim, var_value)
     else:
         # The data type is complex in the sense that it has subordinate parts.
-        if not (fmt & verbose()):
-            # Strip everything leading up to the first square brace.
-            loc_var_name = re.sub(r".*\[", "[", var_name)
+        if (fmt & no_header()):
+            buffer = ""
         else:
-            loc_var_name = var_name
-        format_string = "%" + str(indent) + "s%s\n"
-        buffer = format_string % ("", loc_var_name + ":")
-        if fmt & show_type():
-            buffer = buffer.replace("\n", " " + type_str + "\n")
-        indent += 2
+            # Create header line.
+            if not (fmt & verbose()):
+                # Strip everything leading up to the first square brace.
+                loc_var_name = re.sub(r".*\[", "[", var_name)
+            else:
+                loc_var_name = var_name
+            format_string = "%" + str(indent) + "s%s\n"
+            buffer = format_string % ("", loc_var_name + ":")
+            if fmt & show_type():
+                buffer = buffer.replace("\n", " " + type_str + "\n")
+            indent += 2
         try:
             length = len(var_value)
         except TypeError:
@@ -1252,7 +1269,8 @@ def sprint_varx(var_name,
                     key = "'" + key + "'"
                 key = "[" + str(key) + "]"
                 buffer += sprint_varx(var_name + key, value, child_fmt, indent,
-                                      col1_width, loc_trailing_char, key_list)
+                                      col1_width, loc_trailing_char, key_list,
+                                      delim)
         elif type(var_value) in (list, tuple, set):
             for key, value in enumerate(var_value):
                 ix += 1
@@ -1260,7 +1278,8 @@ def sprint_varx(var_name,
                     loc_trailing_char = trailing_char
                 key = "[" + str(key) + "]"
                 buffer += sprint_varx(var_name + key, value, child_fmt, indent,
-                                      col1_width, loc_trailing_char, key_list)
+                                      col1_width, loc_trailing_char, key_list,
+                                      delim)
         elif isinstance(var_value, argparse.Namespace):
             for key in var_value.__dict__:
                 ix += 1
@@ -1268,7 +1287,8 @@ def sprint_varx(var_name,
                     loc_trailing_char = trailing_char
                 cmd_buf = "buffer += sprint_varx(var_name + \".\" + str(key)" \
                           + ", var_value." + key + ", child_fmt, indent," \
-                          + " col1_width, loc_trailing_char, key_list)"
+                          + " col1_width, loc_trailing_char, key_list," \
+                          + " delim)"
                 exec(cmd_buf)
         else:
             var_type = type(var_value).__name__
