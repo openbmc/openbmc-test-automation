@@ -27,8 +27,8 @@ Get Processor Inventory Via Redfish And Verify
     [Documentation]  Get the number of CPUs that are functional and enabled.
     [Tags]  Get_Processor_Inventory_Via_Redfish_And_Verify
 
-    Rprint Vars  num_valid_cpus  min_num_cpus
-    Valid Range  num_valid_cpus  ${min_num_cpus}
+    Rprint Vars  num_cpu_uris  min_num_cpus
+    Valid Range  num_cpu_uris  ${min_num_cpus}
 
 
 Get Available CPU Cores And Verify
@@ -83,8 +83,8 @@ Get Available Power Supplies And Verify
 
     ${total_num_supplies}=  Set Variable  ${0}
 
-    :FOR  ${chassis_uri}  IN  @{powersupply_uris}
-        ${is_functional}=  Check If FRU Is Functional  ${chassis_uri}
+    :FOR  ${powersupply_uri}  IN  @{powersupply_uris}
+        ${is_functional}=  Check If FRU Is Functional  ${powersupply_uri}
         ${total_num_supplies}=  Evaluate  $total_num_supplies + $is_functional
     END
 
@@ -104,18 +104,46 @@ Get Motherboard Serial And Verify Populated
     Rprint Vars  serial_number
 
 
-Get GPU Inventory Via Redfish
-    [Documentation]  Get the number of GPUs.
-    [Tags]  Get_GPU_Inventory_Via_Redfish
+Count GPUs Having OK Health
+    [Documentation]  Count number of GPUs that report Health = "OK".
+    ...              This number should match the number of GPU URIs.
+    [Tags]  Count_GPUs_Having_OK_Health
 
-    # There may be 0-6 GPUs in a system.
-    # GPUs may have one of three states:
-    # "Absent", "Enabled", or "UnavailableOffline".
-    # Or GPUs may not be listed at all under the URI
-    # /redfish/v1/Systems/system/Processors.
-    # So for now, only print the total of GPUs present.
+    # Any GPU that has {status['Health']}" == "OK is counted.
 
-    Rprint Vars  num_valid_gpus
+    Rprint Vars  num_gpu_uris
+
+    ${total_num_ok_gpus}=  Set Variable  ${0}
+
+    :FOR  ${gpu_uri}  IN  @{gpu_uris}
+        # Example uri: /redfish/v1/Systems/system/Processors/gv100card0.
+        ${status}=  Redfish.Get Attribute  ${gpu_uri}  Status
+        Run Keyword If  not "${status['Health']}" == "OK"  Continue For Loop
+        ${total_num_ok_gpus}=  Evaluate  $total_num_ok_gpus + ${1}
+    END
+
+    Rprint Vars   total_num_ok_gpus
+
+    # Fail if total_num_ok_gpus does not match the number of GPU URIs.
+    Valid Range  total_num_ok_gpus  ${num_gpu_uris}
+
+
+GPU State Check
+    [Documentation]  Check the State of the GPUs in the system. State
+    ...              should be "Absent", "Enabled", or "UnavailableOffline".
+    ...              Fail if not one of these values.
+    [Tags]  GPU_State_Check.
+
+    :FOR  ${gpu_uri}  IN  @{gpu_uris}
+        # Example uri: /redfish/v1/Systems/system/Processors/gv100card0.
+        ${status}=  Redfish.Get Attribute  ${gpu_uri}  Status
+        ${state}=  Set Variable  ${status['State']}
+        ${good_state}=  Evaluate
+        ...  any(x in '${state}' for x in ('Absent', 'Enabled', 'UnavailableOffline'))
+        Rprint Vars  gpu_uri  state
+        Run Keyword If  not ${good_state}  Fail
+        ...  msg=GPU State is not Absent, Enabled, or UnavailableOffline.
+    END
 
 
 *** Keywords ***
@@ -187,13 +215,13 @@ Verify FRU Inventory Minimums
 Check If FRU Is Functional
     [Documentation]  Return 1 if a power supply is OK and either
     ...   Enabled or StandbyOffline.  Return 0 otherwise.
-    [Arguments]  ${chassis_uri}
+    [Arguments]  ${powersupply_uri}
 
     # Description of Argument(s):
-    # chassis_uri    The Redfish uri of a power supply
-    #                (e.g. "/redfish/v1/Chassis/powersupply0").
+    # powersupply_uri    The Redfish URI of a power supply
+    #                    (e.g. "/redfish/v1/Chassis/powersupply0").
 
-    ${status}=  Redfish.Get Attribute  ${chassis_uri}  Status
+    ${status}=  Redfish.Get Attribute  ${powersupply_uri}  Status
 
     ${state_check}=  Set Variable  "${status['Health']}" == "OK" and
     ${state_check}=  Catenate  ${state_check}  ("${status['State']}" == "StandbyOffline" or
@@ -225,11 +253,11 @@ Suite Setup Execution
     Set Suite Variable  ${gpu_uris}
     Set Suite Variable  ${powersupply_uris}
 
-    ${num_valid_cpus}=  Get Length  ${cpu_uris}
-    ${num_valid_gpus}=  Get Length  ${gpu_uris}
+    ${num_cpu_uris}=  Get Length  ${cpu_uris}
+    ${num_gpu_uris}=  Get Length  ${gpu_uris}
 
-    Set Suite Variable  ${num_valid_cpus}
-    Set Suite Variable  ${num_valid_gpus}
+    Set Suite Variable  ${num_cpu_uris}
+    Set Suite Variable  ${num_gpu_uris}
 
 
 Test Teardown Execution
