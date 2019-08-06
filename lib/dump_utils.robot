@@ -67,25 +67,20 @@ Check For Too Many Dumps
     # Description of Argument(s):
     # resp   Response object from action/Create Dump attempt.
     #        Example object if there are too many dumps:
-    #        {
+    #       {
     #           "data": {
-    #              "description": "Internal Server Error",
-    #              "exception": "'Dump not captured due to a cap.'",
-    #              "traceback": [
-    #              "Traceback (most recent call last):",
-    #                ...
-    #              "DBusException: Create.Error.QuotaExceeded"
-    #                           ]
-    #              },
-    #           "message": "500 Internal Server Error",
+    #               "description": "xyz.openbmc_project.Dump.Create.Error.QuotaExceeded"
+    #           },
+    #           "message": "Dump not captured due to a cap.",
     #           "status": "error"
-    #        }
+    #       }
 
     # If dump was created normally, return the dump_id number.
     Run Keyword If  '${resp.status_code}' == '${HTTP_OK}'
     ...  Run Keyword And Return  Get The Dump Id  ${resp}
 
-    ${exception}=  Set Variable  ${resp.json()['data']['exception']}
+    ${json}=  To JSON   ${resp.content}
+    ${exception}=  Set Variable  ${json["message"]}
     ${at_capacity}=  Set Variable  Dump not captured due to a cap
     ${too_many_dumps}=  Evaluate  $at_capacity in $exception
     Printn
