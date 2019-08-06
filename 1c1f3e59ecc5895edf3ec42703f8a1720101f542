@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d403ab35_6a4f94fe",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-06T02:44:08Z",
+      "side": 1,
+      "message": "Are we not testing the function, Gunnar. What is your suggestion.",
+      "parentUuid": "e5f830f9_21c10b9f",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82f27869_af5d7a45",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2019-08-02T16:50:46Z",
       "side": 1,
       "message": "The title surprised me. \nCan we call openbmc-test-automation ? Or Release testing?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eae0275_6c2e9a44",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-06T02:44:08Z",
+      "side": 1,
+      "message": "Release testing is fine, I can change that.",
+      "parentUuid": "82f27869_af5d7a45",
       "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "95fa0fe6_1ac47d0a",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-06T02:44:08Z",
+      "side": 1,
+      "message": "Gunnar, Will add a link of this document into Readme or move it.\nAs of now, Have opened an issue https://github.com/openbmc/openbmc-test-automation/issues/1914 and will address there.",
+      "parentUuid": "c18d59bb_29988f59",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7f41fb10_2ae82839",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 8
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "90cf80c4_9f7f71c0",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-06T02:44:08Z",
+      "side": 1,
+      "message": "Gunnar, Will add a link of this document into Readme or move it.\nAs of now, Have opened an issue https://github.com/openbmc/openbmc-test-automation/issues/1914 and will address there.",
+      "parentUuid": "7f41fb10_2ae82839",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "380ee29e_dc276071",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 8
@@ -81,6 +153,24 @@
       "writtenOn": "2019-08-02T16:50:46Z",
       "side": 1,
       "message": "Should this be moved to the README?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3febfa53_b8717906",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-06T02:44:08Z",
+      "side": 1,
+      "message": "Gunnar, Will add a link of this document into Readme or move it.\nAs of now, Have opened an issue https://github.com/openbmc/openbmc-test-automation/issues/1914 and will address there.",
+      "parentUuid": "380ee29e_dc276071",
       "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -110,6 +200,30 @@
     },
     {
       "key": {
+        "uuid": "a12cd4bb_3fa92ded",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-06T02:44:08Z",
+      "side": 1,
+      "message": "Done, made it as host",
+      "parentUuid": "18312cce_9847db58",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 6
+      },
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26001728_43d8a802",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 8
@@ -121,6 +235,24 @@
       "writtenOn": "2019-08-02T16:50:46Z",
       "side": 1,
       "message": "Don\u0027t you already have a feture list here: https://github.com/openbmc/openbmc-test-automation#features-of-openbmc-test-automation",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15108706_f4abb9b6",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-06T02:44:08Z",
+      "side": 1,
+      "message": "As we are coming up with release test for the first time, decided to list. Next time, we can add only new scope.",
+      "parentUuid": "26001728_43d8a802",
       "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -144,6 +276,24 @@
     },
     {
       "key": {
+        "uuid": "ba54b116_e2a3e243",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-06T02:44:08Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/openbmc-test-automation/issues/1914",
+      "parentUuid": "02759005_fa4663ff",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a9d64e6_983159f6",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 8
@@ -161,6 +311,24 @@
     },
     {
       "key": {
+        "uuid": "3e8f6702_5783a7f7",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-06T02:44:08Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/openbmc-test-automation/issues/1914",
+      "parentUuid": "5a9d64e6_983159f6",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c0f65e5a_d7dd412d",
         "filename": "docs/openbmc_functional_test_specification.md",
         "patchSetId": 8
@@ -172,6 +340,24 @@
       "writtenOn": "2019-08-02T16:50:46Z",
       "side": 1,
       "message": "How is this different than the dependencies list above ?",
+      "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb223da8_813796df",
+        "filename": "docs/openbmc_functional_test_specification.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-06T02:44:08Z",
+      "side": 1,
+      "message": "Below are external factors. Above is what is coming from test side.",
+      "parentUuid": "c0f65e5a_d7dd412d",
       "revId": "1c1f3e59ecc5895edf3ec42703f8a1720101f542",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
