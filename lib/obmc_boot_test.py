@@ -65,8 +65,13 @@ boot_success = 0
 status_dir_path = os.environ.get('STATUS_DIR_PATH', "")
 if status_dir_path != "":
     status_dir_path = os.path.normpath(status_dir_path) + os.sep
-default_power_on = "REST Power On"
-default_power_off = "REST Power Off"
+redfish_supported = BuiltIn().get_variable_value("${REDFISH_SUPPORTED}", default=False)
+if redfish_supported:
+    default_power_on = "Redfish Power On"
+    default_power_off = "Redfish Power Off"
+else:
+    default_power_on = "REST Power On"
+    default_power_off = "REST Power Off"
 boot_count = 0
 
 LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
