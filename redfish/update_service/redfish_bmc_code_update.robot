@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     Update firmware on a target BMC via Redifsh.
+Documentation     Update the BMC code on a target BMC via Redifsh.
 
 # Test Parameters:
 # IMAGE_FILE_PATH    The path to the BMC image file.
@@ -14,11 +14,8 @@ Resource          ../../lib/bmc_redfish_resource.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/common_utils.robot
 Resource          ../../lib/code_update_utils.robot
-Resource          ../../lib/dump_utils.robot
-Resource          ../../lib/logging_utils.robot
 Resource          ../../lib/redfish_code_update_utils.robot
 Library           ../../lib/gen_robot_valid.py
-Library           ../../lib/tftp_update_utils.py
 
 Suite Setup       Suite Setup Execution
 Suite Teardown    Redfish.Logout
@@ -28,30 +25,113 @@ Test Teardown     FFDC On Test Case Fail
 Force Tags   BMC_Code_Update
 
 *** Variables ***
-${immediate}      Immediate
 ${onreset}        OnReset
+${priority}       Priority
+${functional}     functional
+${image_id}       image_id
 
 *** Test Cases ***
 
-Redfish Code Update With ApplyTime OnReset
-    [Documentation]  Update the firmaware image with ApplyTime of OnReset.
-    [Tags]  Redfish_Code_Update_With_ApplyTime_OnReset
-    [Template]  Redfish Update Firmware
+Redfish BMC Code Update
+    [Documentation]  Update the firmware image.
+    [Tags]  Redfish_BMC_Code_Update
 
-    # policy
-    ${onreset}
+    ${image_version}=  Get Version Tar  ${image_file_path}
 
+    ${resp_swinv_dict}=  Get Software Inventory State By Version  ${image_version}
 
-Redfish Code Update With ApplyTime Immediate
-    [Documentation]  Update the firmaware image with ApplyTime of Immediate.
-    [Tags]  Redfish_Code_Update_With_ApplyTime_Immediate
-    [Template]  Redfish Update Firmware
+    ${num_records}=  Get Length  ${resp_swinv_dict}
 
-    # policy
-    ${immediate}
+    ${status}=  Run Keyword If  '${num_records}' != '0'
+    ...  Pre Setup Code update  ${image_version}  ${resp_swinv_dict}
 
+    Run Keyword If  '${True}' == '${status}'
+    ...  Pass Execution  Pre-Setup Code Update Successful.
+
+    Run Keywords  Redfish Update Firmware
 
 *** Keywords ***
+
+Pre Setup Code update
+    [Documentation]  If Image is active, set priority to least value
+    ...  If image is functional, do nothing.
+    [Arguments]  ${image_version}  ${sw_inv_dict}
+
+    ${image_version}=  Get Version Tar  ${image_file_path}
+
+    ${ret_status}=  Run Keyword If  '${sw_inv_dict['${functional}']}' != 'True'
+    ...  Run Keyword And Return Status
+    ...      Set BMC Image Priority To Least  ${image_version}  ${sw_inv_dict}
+    ...  ELSE
+    ...   Run Keyword And Return Status
+    ...       Should Be Equal  ${sw_inv_dict['${functional}']}  ${True}
+
+    [Return]  ${ret_status}
+
+
+Get Image Priority
+    [Documentation]  Get Current Image Priority.
+    [Arguments]  ${image_version}  ${sw_inv_dict}
+    
+    ${sw_list}=  Get Software Objects  ${VERSION_PURPOSE_BMC}
+
+    ${resp_image_id}=  Get From Dictionary  ${sw_inv_dict}  ${image_id}
+
+    FOR  ${item}  IN  @{sw_list}
+        ${rest}  ${last}=  Split String From Right  ${item}  /  1
+        ${curr_value}=  Run Keyword If  '${resp_image_id}' == '${last}'
+        ...  Run Keyword And Return
+        ...      Read Software Attribute  ${item}  ${priority}
+    END
+
+
+Set BMC Image Priority To Least
+    [Documentation]  Set BMC image priority to least value.
+    [Arguments]  ${image_version}  ${sw_inv_dict}
+
+    ${image_id}=  Get From Dictionary  ${sw_inv_dict}  ${image_id}
+
+    ${least_priority}=  Get Least Value Priority Image  ${VERSION_PURPOSE_BMC}
+
+    ${cur_priority}=  Get Image Priority  ${image_version}  ${sw_inv_dict}
+
+    Run Keyword If  '${least_priority}' != ${cur_priority}
+    ...  Run Keyword
+    ...      Set Host Software Property
+    ...      ${SOFTWARE_VERSION_URI}${image_id}  Priority  ${least_priority}
+
+    # Reboot BMC And Login
+    Redfish OBMC Reboot (off)
+    Redfish.Login
+
+
+Redfish Update Firmware
+    [Documentation]  Code update with ApplyTime i.e.
+    ...  OnReset and verify installation.
+
+    Set ApplyTime  policy=${onreset}
+
+    ${base_redfish_uri}=  Set Variable  ${REDFISH_BASE_URI}UpdateService
+
+    Redfish Upload Image  ${base_redfish_uri}  ${IMAGE_FILE_PATH}
+
+    ${image_id}=  Get Latest Image ID
+    Rprint Vars  image_id
+
+    Check Image Update Progress State  match_state='Disabled', 'Updating'  image_id=${image_id}
+
+    # Wait a few seconds to check if the update progress started.
+    Sleep  5s
+    Check Image Update Progress State  match_state='Updating'  image_id=${image_id}
+
+    Wait Until Keyword Succeeds  5 min  20 sec
+    ...  Check Image Update Progress State  match_state='Enabled'  image_id=${image_id}
+
+    # Reboot BMC And Verify BMC Image
+    Redfish OBMC Reboot (off)
+    Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+
 
 Suite Setup Execution
     [Documentation]  Do the suite setup.
@@ -64,58 +144,4 @@ Suite Setup Execution
 
     # Checking for file existence.
     OperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}
-
-
-Redfish Update Firmware
-    [Documentation]  Code update with ApplyTime and verify installation.
-    [Arguments]  ${apply_time}
-
-    # Description of argument(s):
-    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
-
-    ${state}=  Get Pre Reboot State
-    Rprint Vars  state
-
-    Set ApplyTime  policy=${apply_time}
-
-    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
-
-    ${image_id}=  Get Latest Image ID
-    Rprint Vars  image_id
-
-    Check Image Update Progress State
-    ...  match_state='Disabled', 'Updating'  image_id=${image_id}
-
-    # Wait a few seconds to check if the update progress started.
-    Sleep  5s
-    Check Image Update Progress State
-    ...  match_state='Updating'  image_id=${image_id}
-
-    Wait Until Keyword Succeeds  8 min  20 sec
-    ...  Check Image Update Progress State
-    ...    match_state='Enabled'  image_id=${image_id}
-
-    Reboot BMC And Verify BMC Image
-    ...  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
-
-
-Reboot BMC And Verify BMC Image
-    [Documentation]  Reboot or wait for BMC standby post reboot and
-    ...  verify installed image is functional.
-    [Arguments]  ${apply_time}  ${start_boot_seconds}
-
-    # Description of argument(s):
-    # policy                ApplyTime allowed values (e.g. "OnReset", "Immediate").
-    # start_boot_seconds    See 'Wait For Reboot' for details.
-
-    Run Keyword if  'OnReset' == '${apply_time}'
-    ...  Run Keywords
-    ...      Redfish OBMC Reboot (off)  AND
-    ...      Redfish.Login  AND
-    ...      Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
-    ...  ELSE
-    ...    Run Keywords
-    ...        Wait For Reboot  start_boot_seconds=${start_boot_seconds}  AND
-    ...        Redfish.Login  AND
-    ...        Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
 
