@@ -169,6 +169,7 @@ Add Valid IPv4 Address And Check Persistency
 
     # Reboot BMC and verify persistency.
     OBMC Reboot (off)
+    Redfish.Login
     Verify IP On BMC  ${test_ipv4_addr}
     Delete IP Address  ${test_ipv4_addr}
 
