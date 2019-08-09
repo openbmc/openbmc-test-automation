@@ -7,6 +7,7 @@ Resource            ../../lib/rest_client.robot
 Resource            ../../lib/dump_utils.robot
 Resource            ../../lib/boot_utils.robot
 Resource            ../../lib/utils.robot
+Resource            ../../lib/state_manager.robot
 Library             ../../lib/bmc_ssh_utils.py
 
 Test Setup          Open Connection And Log In
