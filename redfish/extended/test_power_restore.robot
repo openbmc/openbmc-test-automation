@@ -9,6 +9,8 @@ Resource        ../../lib/utils.robot
 Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/state_manager.robot
 Resource        ../../lib/boot_utils.robot
+Resource        ../../lib/bmc_redfish_resource.robot
+Resource        ../../lib/bmc_redfish_utils.robot
 Library         ../../lib/state_map.py
 
 Test Teardown   Test Teardown Execution
@@ -114,14 +116,14 @@ Verify Restore Policy
     # expectedState    Test initial host state.
     # nextState        Test end host state.
 
-    Set BMC Power Policy  ${policy}
-
     Set Initial Test State  ${expectedState}
 
-    Redfish Power Operation  reset_type=GracefulRestart
+    Set BMC Power Policy  ${policy}
+
+    Redfish BMC Reset Operation
 
     Wait Until Keyword Succeeds
-    ...  10 min  10 sec  Valid Boot States  ${nextState}
+    ...  12 min  20 sec  Valid Boot States  ${nextState}
 
 
 Valid Boot States
@@ -145,10 +147,10 @@ Set Initial Test State
     # expectedState    Test initial host state.
 
     Run Keyword If  '${expectedState}' == 'Running'
-    ...  Redfish Power On
+    ...  Redfish Power On  stack_mode=skip
 
     Run Keyword If  '${expectedState}' == 'Off'
-    ...  Redfish Power Off
+    ...  Redfish Power Off  stack_mode=skip
 
 
 Test Teardown Execution
