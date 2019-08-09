@@ -123,6 +123,7 @@ Generate Error On BMC And Verify If Trap Is Sent
     BMC Execute Command  /tmp/tarball/bin/logging-test -c AutoTestSimple
     SSHLibrary.Switch Connection  snmp_server
     ${SNMP_LISTEN_OUT}=  Read  delay=1s
+    Delete SNMP Manager And Object  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     SSHLibrary.Execute Command  sudo killall snmptrapd
 
     Should Contain  ${SNMP_LISTEN_OUT}  ${SNMP_TRAP_BMC_ERROR}
