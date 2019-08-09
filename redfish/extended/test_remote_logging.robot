@@ -15,6 +15,8 @@ Resource         ../../lib/remote_logging_utils.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/ipmi_client.robot
 Resource         ../../lib/bmc_redfish_resource.robot
+Resource         ../../lib/ipmi_client.robot
+Library          ../../lib/ipmi_utils.py
 Library          ../../lib/gen_misc.py
 
 Suite Setup      Suite Setup Execution
@@ -381,12 +383,9 @@ Create Redfish And IPMI Users
     Redfish.Logout
 
     # Create IPMI local valid user.
-    ${ipmi_username}=  Generate Random String  8  [LETTERS]
-    Set Test Variable  ${ipmi_username}
+    ${random_username}=  Generate Random String  8  [LETTERS]
     ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    ${ipmi_cmd}=  Catenate  user set name ${random_userid} ${ipmi_username}
-    Run IPMI Standard Command  ${ipmi_cmd}
+    IPMI Create User  ${random_userid}  ${random_username}
 
     # Delete IPMI user.
     Run IPMI Standard Command  user set name ${random_userid} ""
-
