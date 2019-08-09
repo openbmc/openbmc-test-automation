@@ -114,11 +114,13 @@ Verify Restore Policy
     # expectedState    Test initial host state.
     # nextState        Test end host state.
 
-    Set BMC Power Policy  ${policy}
-
     Set Initial Test State  ${expectedState}
 
-    Redfish Power Operation  reset_type=GracefulRestart
+    Set BMC Power Policy  ${policy}
+
+    ${reset_type}=
+
+    Redfish BMC Reset Operation  reset_type=GracefulRestart
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Valid Boot States  ${nextState}
