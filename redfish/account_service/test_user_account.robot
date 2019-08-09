@@ -79,6 +79,7 @@ Verify Redfish User Persistence After Reboot
 
     # Reboot BMC.
     Redfish OBMC Reboot (off)  stack_mode=normal
+    Redfish.Login
 
     # Verify users after reboot.
     Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
@@ -305,7 +306,7 @@ Redfish Create User
     Redfish.Logout
 
     # Login with created user.
-    Run Keyword If  ${enabled} == False
+    Run Keyword If  ${enabled} == ${False}
     ...    Run Keyword And Expect Error  InvalidCredentialsError*
     ...    Redfish.Login  ${username}  ${password}
     ...  ELSE
