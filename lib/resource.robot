@@ -47,10 +47,14 @@ ${OS_PASSWORD}      ${EMPTY}
 ${OS_WAIT_TIMEOUT}  ${15*60}
 
 # Networking related parameters
-${NETWORK_PORT}        80
-${PACKET_TYPE}         tcp
-${NETWORK_RETRY_TIME}  6
-${NETWORK_TIMEOUT}     18
+${NETWORK_PORT}            80
+${PACKET_TYPE}             tcp
+${ICMP_PACKETS}            icmp
+${NETWORK_RETRY_TIME}      6
+${NETWORK_TIMEOUT}         18
+${ICMP_TIMESTAMP_REQUEST}  13
+${ICMP_ECHO_REQUEST}       08
+
 # BMC debug tarball parameter
 ${DEBUG_TARBALL_PATH}  ${EMPTY}
 
