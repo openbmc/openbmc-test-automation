@@ -28,3 +28,60 @@ Set Asset Tag With Invalid String Length
     ${resp}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  dcmi set_asset_tag ${random_string}
     Should Contain  ${resp}  Parameter out of range  ignore_case=True
+
+Verify IPMI Inband Network Configuration
+    [Documentation]  Run the standard IPMI command in-band
+    ...              to set Network Configuration.
+    [Tags]  Verify_IPMI_Inband_Network_Configuration
+
+    ${default_ip}  ${default_netmask}  ${default_gateway}=
+    ...  Get IPMI Inband Network Configuration  file_name=lan_var.txt
+
+    Set IPMI Inband Network Configuration  10.10.10.10  255.255.255.0  10.10.10.10
+    BuiltIn.Sleep  10
+
+    ${changed_ip}  ${changed_netmask}  ${changed_gateway}=
+    ...  Get IPMI Inband Network Configuration  file_name=lan_var.txt  login=${False}
+    Should Be Equal As Strings  "10.10.10.10"  "${changed_ip}"
+    Should Be Equal As Strings  "255.255.255.0"  "${changed_netmask}"
+    Should Be Equal As Strings  "10.10.10.10"  "${changed_gateway}"
+
+    Set IPMI Inband Network Configuration
+    ...  ${default_ip}  ${default_netmask}  ${default_gateway}
+
+
+*** Keywords ***
+
+Set IPMI Inband Network Configuration
+    [Documentation]  Run sequence of standard IPMI command in-band
+    ...              and set the IP configuration.
+    [Arguments]  ${ip}  ${netmask}  ${gateway}  ${login}=${False}
+
+    Run Inband IPMI Standard Command
+    ...  lan set 1 ipsrc static  login_host=${login}
+    Run Inband IPMI Standard Command
+    ...  lan set 1 ipaddr ${ip}  login_host=${login}
+    Run Inband IPMI Standard Command
+    ...  lan set 1 netmask ${netmask}  login_host=${login}
+    Run Inband IPMI Standard Command
+    ...  lan set 1 defgw ipaddr ${gateway}  login_host=${login}
+
+Get IPMI Inband Network Configuration
+    [Documentation]  Run sequence of standard IPMI command in-band
+    ...              and set the IP configuration.
+    [Arguments]  ${file_name}  ${login}=${True}
+
+    ${out}=  Run Inband IPMI Standard Command  lan print  login_host=${login}
+    Create Binary File  ${EXECDIR}${/}${file_name}  ${out}
+
+    ${ip}=
+    ...  Run  cat ${EXECDIR}${/}${file_name}|awk -F: 'NR==9{print$2}'|sed 's/ //g'
+    ${netmask}=
+    ...  Run  cat ${EXECDIR}${/}${file_name}|awk -F: 'NR==10{print$2}'|sed 's/ //g'
+    ${gateway}=
+    ...  Run  cat ${EXECDIR}${/}${file_name}|awk -F: 'NR==12{print$2}'|sed 's/ //g'
+    @{list}=  BuiltIn.Create List  ${ip}  ${netmask}  ${gateway}
+
+    Run  rm ${EXECDIR}${/}${file_name}
+
+    [Return]  @{list}
