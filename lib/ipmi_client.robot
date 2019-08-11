@@ -118,6 +118,7 @@ Run Inband IPMI Standard Command
     [Documentation]  Run the standard IPMI command in-band.
     [Arguments]  ${command}  ${fail_on_err}=${1}  ${os_host}=${OS_HOST}
     ...          ${os_username}=${OS_USERNAME}  ${os_password}=${OS_PASSWORD}
+    ...          ${login_host}=${True}
 
     # Description of argument(s):
     # command                       The IPMI command string to be executed
@@ -126,7 +127,8 @@ Run Inband IPMI Standard Command
     # os_username                   The OS host user name.
     # os_password                   The OS host passwrd.
 
-    Login To OS Host  ${os_host}  ${os_username}  ${os_password}
+    Run Keyword If  '${login_host}' == '${True}'
+    ...  Login To OS Host  ${os_host}  ${os_username}  ${os_password}
     Check If IPMI Tool Exist
 
     ${ipmi_cmd}=  Catenate  ${IPMI_INBAND_CMD}  ${command}
