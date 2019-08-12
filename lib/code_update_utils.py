@@ -69,22 +69,6 @@ def get_non_running_bmc_software_object():
     BuiltIn().fail("Did not find any non-running BMC images.")
 
 
-def delete_all_pnor_images():
-    r"""
-    Delete all PNOR images from the BMC.
-    """
-
-    status, images = keyword.run_key("Get Software Objects  "
-                                     + var.VERSION_PURPOSE_HOST)
-    for image_name in images:
-        BuiltIn().log_to_console(image_name)
-        # Delete twice, in case the image is in the /tmp/images directory
-        keyword.run_key("Call Method  " + image_name + '/'
-                        + "  Delete  data={\"data\":[]}")
-        keyword.run_key("Call Method  " + image_name + '/'
-                        + "  Delete  data={\"data\":[]}")
-
-
 def wait_for_activation_state_change(version_id, initial_state):
     r"""
     Wait for the current activation state of ${version_id} to

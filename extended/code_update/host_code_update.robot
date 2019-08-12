@@ -200,6 +200,21 @@ Delete Host Image
     Delete Image And Verify  @{software_objects}[0]  ${VERSION_PURPOSE_HOST}
 
 
+Delete All PNOR Images
+    [Documentation]  Delete all PNOR images from the BMC and PNOR flash chip.
+    [Tags]  Delete_All_Host_Images
+    [Setup]  Initiate Host PowerOff
+
+    ${software_objects}=  Get Software Objects
+    ...  version_type=${VERSION_PURPOSE_HOST}
+    ${num_images}=  Get Length  ${software_objects}
+    Should Be True  0 < ${num_images}
+    ...  msg=There are no PNOR images on the BMC to delete.
+
+    :FOR  ${index}  IN  @{software_objects}
+    \  Delete Image And Verify  ${index}  ${VERSION_PURPOSE_HOST}
+
+
 Verify Host Update When Host Reboot During Activation In Progress
     [Documentation]  Attempt to reboot the host while an image is activating.
     [Tags]  Verify_Host_Update_When_Host_Reboot_During_Activation_In_Progress
