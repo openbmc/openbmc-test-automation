@@ -333,7 +333,7 @@ Delete Software Object
 
     ${arglist}=  Create List
     ${args}=  Create Dictionary  data=${arglist}
-    ${resp}=  OpenBMC Post Request  ${software_object}/action/delete
+    ${resp}=  OpenBMC Post Request  ${software_object}/action/Delete
     ...  data=${args}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
