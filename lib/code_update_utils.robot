@@ -353,8 +353,6 @@ Delete Image And Verify
 
     # Delete the image.
     Delete Software Object  ${software_object}
-    # TODO: If/when we don't have to delete twice anymore, take this out
-    Run Keyword And Ignore Error  Delete Software Object  ${software_object}
 
     # Verify that it's gone from software.
     ${software_objects}=  Get Software Objects  version_type=${version_type}
