@@ -269,7 +269,6 @@ Code Update Setup
     ...  rm -f /var/lib/phosphor-software-manager/pnor/prsv/GUARD
 
     BMC Execute Command  rm -rf /tmp/images/*
-    BMC Execute Command  systemctl restart xyz.openbmc_project.Software.BMC.Updater.service xyz.openbmc_project.Software.Version.service xyz.openbmc_project.Software.Download.service
 
 Upload And Activate Multiple BMC Images Setup
     [Documentation]  Check that the ALTERNATE_FILE_PATH variable is set.
