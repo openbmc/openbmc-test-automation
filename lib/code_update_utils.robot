@@ -10,6 +10,7 @@ Variables   ../data/variables.py
 Resource    boot_utils.robot
 Resource    rest_client.robot
 Resource    openbmc_ffdc.robot
+Resource    state_manager.robot
 
 *** Keywords ***
 
@@ -370,6 +371,21 @@ Delete All Non Running BMC Images
     @{datalist}=  Create List
     ${data}=  Create Dictionary  data=@{datalist}
     Call Method  ${SOFTWARE_VERSION_URI}  DeleteAll  data=${data}
+
+
+Delete All PNOR Images
+    [Documentation]  Delete all PNOR images from the BMC and PNOR flash chip.
+
+    Initiate Host PowerOff
+
+    ${software_objects}=  Get Software Objects
+    ...  version_type=${VERSION_PURPOSE_HOST}
+    ${num_images}=  Get Length  ${software_objects}
+    Should Be True  0 < ${num_images}
+    ...  msg=There are no PNOR images on the BMC to delete.
+
+    :FOR  ${index}  IN  @{software_objects}
+    \  Delete Image And Verify  ${index}  ${VERSION_PURPOSE_HOST}
 
 
 Check Error And Collect FFDC
