@@ -20,8 +20,7 @@ Verify Power Supplies Input Watts
     [Template]  Verify Watts Record
 
     # record_type   redfish_uri                       reading_type
-    PowerSupplies   ${REDFISH_CHASSIS_PSUPPLY0_URI}   PowerInputWatts
-    PowerSupplies   ${REDFISH_CHASSIS_PSUPPLY1_URI}   PowerInputWatts
+    PowerSupplies   ${REDFISH_CHASSIS_POWER_URI}      PowerInputWatts
 
 
 Verify Power Supplies Input Output Voltages
@@ -30,8 +29,7 @@ Verify Power Supplies Input Output Voltages
     [Template]  Verify Voltage Records
 
     # record_type   redfish_uri                        reading_type
-    Voltages        ${REDFISH_CHASSIS_PSUPPLY0_URI}    ReadingVolts
-    Voltages        ${REDFISH_CHASSIS_PSUPPLY1_URI}    ReadingVolts
+    Voltages        ${REDFISH_CHASSIS_POWER_URI}       ReadingVolts
 
 
 *** Keywords ***
@@ -42,7 +40,7 @@ Verify Watts Record
 
     # Description of Arguments(s):
     # record_type    The sensor record type (e.g. "PowerSupplies")
-    # redfish_uri    The power supply URI (e.g. /redfish/v1/Chassis/powersupply0/Power)
+    # redfish_uri    The power supply URI (e.g. /redfish/v1/Chassis/chassis/Power)
     # reading_type   The power watt readings (e.g. "PowerInputWatts")
 
     Verify Valid Records  ${record_type}  ${redfish_uri}  ${reading_type}
@@ -54,7 +52,7 @@ Verify Voltage Records
 
     # Description of Arguments(s):
     # record_type    The sensor record type (e.g. "Voltages")
-    # redfish_uri    The power supply URI (e.g. /redfish/v1/Chassis/powersupply0/Power)
+    # redfish_uri    The power supply URI (e.g. /redfish/v1/Chassis/chassis/Power)
     # reading_type   The power voltage readings (e.g. "ReadingVolts")
 
     Verify Valid Records  ${record_type}  ${redfish_uri}  ${reading_type}
@@ -77,7 +75,7 @@ Verify Valid Records
 
     # Description of Arguments(s):
     # record_type    The sensor record type (e.g. "PowerSupplies")
-    # redfish_uri    The power supply URI (e.g. /redfish/v1/Chassis/powersupply0/Power)
+    # redfish_uri    The power supply URI (e.g. /redfish/v1/Chassis/chassis/Power)
     # reading_type   The power watt readings (e.g. "PowerInputWatts")
 
     # A valid record will have "State" key "Enabled" and "Health" key "OK".
@@ -106,7 +104,7 @@ Suite Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Printn
-    Redfish Power On
+    Redfish Power On  stack_mode=skip
     Redfish.Login
 
 
