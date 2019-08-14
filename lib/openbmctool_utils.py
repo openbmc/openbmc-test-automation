@@ -14,6 +14,8 @@ import utils as utils
 from robot.libraries.BuiltIn import BuiltIn
 import re
 import tempfile
+import collections
+import json
 
 
 def openbmctool_execute_command(command_string,
@@ -110,7 +112,11 @@ def openbmctool_execute_command_json(command_string,
     rc, output = openbmctool_execute_command(command_string,
                                              *args,
                                              **kwargs)
-    json_object = utils.to_json_ordered(output)
+    try:
+        json_object = utils.to_json_ordered(output)
+    except json.JSONDecodeError:
+        BuiltIn().fail(gp.sprint_error(output))
+
     if json_object['status'] != "ok":
         err_msg = "Error found in JSON data returned by the openbmctool.py "
         err_msg += "command. Expected a 'status' field value of \"ok\":\n"
@@ -558,3 +564,42 @@ def get_remote_logging_view(verify=False):
             BuiltIn().fail(gp.sprint_error(err_msg))
 
     return remote_logging_view
+
+
+def network(sub_command, **options):
+    r"""
+    Run an openbmctool.py network command and return the results as a dictionary.
+
+    Note that any valid network argument may be specified as a function argument.
+
+    Example robot code:
+
+    ${ip_records}=  Network  getIP  I=eth0
+    ${addresses}=  Nested Get  Address  ${ip_records}
+    Rprint Vars  addresses
+
+    Resulting output:
+
+    addresses:
+      [0]:             x.x.x.x
+      [1]:             x.x.x.x
+      [2]:             xxxx::xxxx:xxxx:xxxx:xxxx
+
+    Description of argument(s):
+    sub_command                     The sub-command accepted by the network
+                                    command (e.g. "view-config", "getIP",
+                                    etc.).
+    options                         Any options accepted by the network
+                                    command.
+    """
+
+    if gm.python_version < gm.ordered_dict_version:
+        new_options = collections.OrderedDict(options)
+    else:
+        new_options = options
+
+    command_string = gc.create_command_string('network ' + sub_command,
+                                              new_options)
+    return openbmctool_execute_command_json(command_string,
+                                            print_output=False,
+                                            ignore_err=False)
