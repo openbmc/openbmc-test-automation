@@ -426,8 +426,8 @@ def valid_path(var_value, *args, **kwargs):
     return process_error_message(error_message)
 
 
-def valid_list(var_value, valid_values=[], fail_on_empty=False, *args,
-               **kwargs):
+def valid_list(var_value, valid_values=[], invalid_values=[],
+               required_values=[], fail_on_empty=False, *args, **kwargs):
     r"""
     The variable value is valid if it is a list where each entry can be found
     in the valid_values list.
@@ -456,12 +456,55 @@ def valid_list(var_value, valid_values=[], fail_on_empty=False, *args,
         error_message += gp.sprint_varx(var_name, var_value, gp.show_type())
         return process_error_message(error_message)
 
+    if len(required_values):
+        found_error = 0
+        display_required_values = list(required_values)
+        for ix in range(0, len(required_values)):
+            if required_values[ix] not in var_value:
+                found_error = 1
+                display_required_values[ix] = \
+                    str(display_required_values[ix]) + "*"
+        if found_error:
+            var_name = get_var_name(*args, **kwargs)
+            error_message += "The following list is invalid:\n"
+            error_message += gp.sprint_varx(var_name, var_value,
+                                            gp.blank() | gp.show_type())
+            error_message += "\n"
+            error_message += "Because some of the values in the "
+            error_message += "required_values list are not present (see"
+            error_message += " entries marked with \"*\"):\n"
+            error_message += "\n"
+            error_message += gp.sprint_varx('required_values',
+                                            display_required_values,
+                                            gp.blank() | gp.show_type())
+            error_message += "\n"
+
+        return process_error_message(error_message)
+
+    if len(invalid_values):
+        found_error = 0
+        display_var_value = list(var_value)
+        for ix in range(0, len(var_value)):
+            if var_value[ix] in invalid_values:
+                found_error = 1
+                display_var_value[ix] = str(var_value[ix]) + "*"
+
+        if found_error:
+            var_name = get_var_name(*args, **kwargs)
+            error_message += "The following list is invalid (see entries"
+            error_message += " marked with \"*\"):\n"
+            error_message += gp.sprint_varx(var_name, display_var_value,
+                                            gp.blank() | gp.show_type())
+            error_message += "\n"
+            error_message += gp.sprint_var(invalid_values, gp.show_type())
+        return process_error_message(error_message)
+
     found_error = 0
     display_var_value = list(var_value)
     for ix in range(0, len(var_value)):
         if var_value[ix] not in valid_values:
             found_error = 1
-            display_var_value[ix] = var_value[ix] + "*"
+            display_var_value[ix] = str(var_value[ix]) + "*"
 
     if found_error:
         var_name = get_var_name(*args, **kwargs)
@@ -470,7 +513,7 @@ def valid_list(var_value, valid_values=[], fail_on_empty=False, *args,
         error_message += gp.sprint_varx(var_name, display_var_value,
                                         gp.blank() | gp.show_type())
         error_message += "\n"
-        error_message += gp.sprint_var(valid_values | gp.show_type())
+        error_message += gp.sprint_var(valid_values, gp.show_type())
         return process_error_message(error_message)
 
     return process_error_message(error_message)
@@ -496,7 +539,7 @@ def valid_dict(var_value, required_keys=[], *args, **kwargs):
         error_message += gp.sprint_varx(var_name, var_value,
                                         gp.blank() | gp.show_type())
         error_message += "\n"
-        error_message += gp.sprint_var(missing_keys | gp.show_type())
+        error_message += gp.sprint_var(missing_keys, gp.show_type())
     return process_error_message(error_message)
 
 
