@@ -735,7 +735,7 @@ def create_command_string(command, *pos_parms, **options):
         options = pos_parms[-1]
         # Now delete the last pos_parm.
         del pos_parms[-1]
-    else:
+    elif gm.python_version < gm.ordered_dict_version:
         # Either get stack_frame_ix from the caller via options or set it to
         # the default value.
         if '_stack_frame_ix_' in options:
