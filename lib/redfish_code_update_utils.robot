@@ -5,6 +5,7 @@ Library         code_update_utils.py
 Library         gen_robot_valid.py
 Library         tftp_update_utils.py
 Resource        bmc_redfish_utils.robot
+Resource        boot_utils.robot
 
 *** Keywords ***
 
@@ -146,4 +147,42 @@ Reboot BMC And Verify BMC Image
     ...        Wait For Reboot  start_boot_seconds=${start_boot_seconds}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+
+
+Poweron Host And Verify Host Image
+    [Documentation]  Power on Host and verify installed image is functional.
+
+    Redfish Power On
+    Redfish.Login
+    Redfish Verify Host Version  ${IMAGE_FILE_PATH}
+
+
+Get Host Power State
+    [Documentation]  Get host power state.
+    [Arguments]  ${quiet}=0
+
+    # Description of arguments:
+    # quiet    Indicates whether results should be printed.
+
+    ${state}=  Redfish.Get Attribute
+    ...  ${REDFISH_BASE_URI}Systems/system  PowerState
+    Rqprint Vars  state
+
+    [Return]  ${state}
+
+
+Check Host Power State
+    [Documentation]  Check that the machine's host state matches
+    ...  the caller's required host state.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state    The expected state. This may be one or more
+    #                comma-separated values (e.g. "On", "Off").
+    #                If the actual state matches any of the
+    #                states named in this argument,
+    #                this keyword passes.
+
+    ${state}=  Get Host Power State
+    Rvalid Value  state  valid_values=[${match_state}]
 
