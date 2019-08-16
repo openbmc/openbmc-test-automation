@@ -227,7 +227,72 @@ Update LDAP Group Name And Verify Operations
     Invalid_LDAP_Group_Name  Callback         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
 
+Verify LDAP BaseDN Update And LDAP Login
+    [Documentation]  Update LDAP BaseDN of LDAP configuration and verify
+    ...  LDAP login works.
+    [Tags]  Verify_LDAP_BaseDN_Update_And_LDAP_Login
+
+
+    ${body}=  Catenate  {'${LDAP_TYPE}': { 'LDAPService': {'SearchSettings':
+    ...   {'BaseDistinguishedNames': ['${LDAP_BASE_DN}']}}}}
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    Sleep  15s
+    Redfish Verify LDAP Login
+
+
+Verify LDAP BindDN Update And LDAP Login
+    [Documentation]  Update LDAP BindDN of LDAP configuration and verify
+    ...  LDAP login works.
+    [Tags]  Verify_LDAP_BindDN_Update_And_LDAP_Login
+
+    ${body}=  Catenate  {'${LDAP_TYPE}': { 'Authentication':
+    ...   {'AuthenticationType':'UsernameAndPassword', 'Username':
+    ...  '${LDAP_BIND_DN}'}}}
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    Sleep  15s
+    Redfish Verify LDAP Login
+
+
+Verify LDAP BindDN Password Update And LDAP Login
+    [Documentation]  Update LDAP BindDN password of LDAP configuration and
+    ...  verify LDAP login works.
+    [Tags]  Verify_LDAP_BindDN_Passsword_Update_And_LDAP_Login
+
+
+    ${body}=  Catenate  {'${LDAP_TYPE}': { 'Authentication':
+    ...   {'AuthenticationType':'UsernameAndPassword', 'Password':
+    ...  '${LDAP_BIND_DN_PASSWORD}'}}}
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    Sleep  15s
+    Redfish Verify LDAP Login
+
+
+Verify LDAP Type Update And LDAP Login
+    [Documentation]  Update LDAP type of LDAP configuration and verify
+    ...  LDAP login works.
+    [Tags]  Verify_LDAP_Type_Update_And_LDAP_Login
+
+    Disable Other LDAP
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
+    Sleep  15s
+    Redfish Verify LDAP Login
+
+
 *** Keywords ***
+
+Redfish Verify LDAP Login
+    [Documentation]  LDAP user log into BMC.
+
+    # According to our repo coding rules, Redfish.Login is to be done in Suite
+    # Setup and Redfish.Logout is to be done in Suite Teardown.  For any
+    # deviation from this rule (such as in this keyword), the deviant code
+    # must take steps to restore us to our original logged-in state.
+
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+    Redfish.Login
+
 
 Update LDAP Config And Verify Set Host Name
     [Documentation]  Update LDAP config and verify by attempting to set host name.
