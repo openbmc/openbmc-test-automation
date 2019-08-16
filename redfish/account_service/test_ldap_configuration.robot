@@ -227,7 +227,60 @@ Update LDAP Group Name And Verify Operations
     Invalid_LDAP_Group_Name  Callback         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
 
+Verify LDAP BaseDN Is Updated And LDAP Login Works
+    [Documentation]  Update LDAP BaseDN of LDAP configuration and verify
+    ...  LDAP login works.
+    [Tags]  Verify_LDAP_BaseDN_Is_Updated_And_LDAP_Login_Works
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': { 'LDAPService': {'SearchSettings': {'BaseDistinguishedNames': ['${LDAP_BASE_DN}']}}}}
+    Sleep  15s
+    LDAP Login
+
+
+Verify LDAP BindDN Is Updated And LDAP Login Works
+    [Documentation]  Update LDAP BindDN of LDAP configuration and verify
+    ...  LDAP login works.
+    [Tags]  Verify_LDAP_BindDN_Is_Updated_And_LDAP_Login_Works
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': { 'Authentication': { 'AuthenticationType':'UsernameAndPassword', 'Username':'${LDAP_BIND_DN}'}}}
+    Sleep  15s
+    LDAP Login
+
+
+Verify LDAP BindDN Password Is Updated And LDAP Login Works
+    [Documentation]  Update LDAP BindDN password of LDAP configuration and
+    ...  verify LDAP login works.
+    [Tags]  Verify_LDAP_BindDN_Passsword_Is_Updated_And_LDAP_Login_Works
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': { 'Authentication': { 'AuthenticationType':'UsernameAndPassword', 'Password':'${LDAP_BIND_DN_PASSWORD}'}}}
+    Sleep  15s
+    LDAP Login
+
+
+Verify LDAP Type Is Updated And LDAP Login Works
+    [Documentation]  Update LDAP type of LDAP configuration and verify
+    ...  LDAP login works.
+    [Tags]  Verify_LDAP_Type_Is_Updated_And_LDAP_Login_Works
+
+    Disable Other LDAP
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
+    Sleep  15s
+    LDAP Login
+
+
 *** Keywords ***
+
+LDAP Login
+    [Documentation]  LDAP user log into BMC.
+
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+    Redfish.Login
+
 
 Update LDAP Config And Verify Set Host Name
     [Documentation]  Update LDAP config and verify by attempting to set host name.
