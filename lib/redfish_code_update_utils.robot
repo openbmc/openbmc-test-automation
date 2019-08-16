@@ -3,7 +3,9 @@ Documentation   Redfish BMC and PNOR software utilities keywords.
 
 Library         code_update_utils.py
 Library         gen_robot_valid.py
+Library         tftp_update_utils.py
 Resource        bmc_redfish_utils.robot
+Resource        boot_utils.robot
 
 *** Keywords ***
 
@@ -99,3 +101,83 @@ Get Software Inventory State By Version
 
     # Return the first list entry.
     [Return]  ${software_inventory}[0]
+
+
+Redfish Upload Image And Check Progress State
+    [Documentation]  Code update with ApplyTime.
+    [Arguments]  ${apply_time}
+
+    # Description of argument(s):
+    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
+
+    Set ApplyTime  policy=${apply_Time}
+    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+
+    ${image_id}=  Get Latest Image ID
+    Rprint Vars  image_id
+
+    Check Image Update Progress State
+    ...  match_state='Disabled', 'Updating'  image_id=${image_id}
+
+    # Wait a few seconds to check if the update progress started.
+    Sleep  5s
+    Check Image Update Progress State
+    ...  match_state='Updating'  image_id=${image_id}
+
+    Wait Until Keyword Succeeds  8 min  20 sec
+    ...  Check Image Update Progress State
+    ...    match_state='Enabled'  image_id=${image_id}
+
+
+Reboot BMC And Verify BMC Image
+    [Documentation]  Reboot or wait for BMC standby post reboot and
+    ...  verify installed image is functional.
+    [Arguments]  ${apply_time}  ${start_boot_seconds}
+
+    # Description of argument(s):
+    # policy                ApplyTime allowed values
+    #                       (e.g. "OnReset", "Immediate").
+    # start_boot_seconds    See 'Wait For Reboot' for details.
+
+    Run Keyword if  'OnReset' == '${apply_time}'
+    ...  Run Keyword
+    ...      Redfish OBMC Reboot (off)
+    ...  ELSE
+    ...    Run Keyword
+    ...        Wait For Reboot  start_boot_seconds=${start_boot_seconds}
+    Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+
+
+Poweron Host And Verify Host Image
+    [Documentation]  Power on Host and verify installed image is functional.
+
+    Redfish Power On
+    Redfish.Login
+    Redfish Verify Host Version  ${IMAGE_FILE_PATH}
+
+
+Get Host Power State
+    [Documentation]  Get Host power state
+
+    ${status}=  Redfish.Get Attribute
+    ...  ${REDFISH_BASE_URI}Systems/system  PowerState
+    Rprint Vars  status
+
+    [Return]  ${status}
+
+
+Check Host Power State
+    [Documentation]  check for host state.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state    The expected state.This may be one or more
+    #                comma-separated values (e.g. "On", "Off").
+    #                If the actual state matches any of the
+    #                states named in this argument,
+    #                this keyword passes.
+
+    ${state}=  Get Host Power State
+    Rvalid Value  state  valid_values=[${match_state}]
+
