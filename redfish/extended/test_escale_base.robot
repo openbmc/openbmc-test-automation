@@ -6,11 +6,11 @@ Documentation     Energy scale base tests.
 # OPENBMC_HOST        The BMC host name or IP address.
 
 
-Resource          ../lib/energy_scale_utils.robot
-Resource          ../lib/openbmc_ffdc.robot
-Resource          ../lib/utils.robot
-Resource          ../lib/logging_utils.robot
-Library           ../lib/logging_utils.py
+Resource          ../../lib/energy_scale_utils.robot
+Resource          ../../lib/openbmc_ffdc.robot
+Resource          ../../lib/utils.robot
+Resource          ../../lib/logging_utils.robot
+Library           ../../lib/logging_utils.py
 
 
 Suite Setup      Suite Setup Execution
@@ -133,6 +133,8 @@ Test Power Limit
 Suite Setup Execution
     [Documentation]  Do test setup initialization.
 
+    Redfish.Login
+
     # Save the deactivation/activation setting.
     ${cmd}=  Catenate  dcmi power get_limit | grep State
     ${resp}=  Run External IPMI Standard Command  ${cmd}
@@ -163,3 +165,5 @@ Test Teardown Execution
 
     # Clean up any error logs before exiting.
     Delete All Error Logs
+
+    Redfish.Logout
