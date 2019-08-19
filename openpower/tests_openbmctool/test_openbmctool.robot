@@ -227,8 +227,8 @@ Verify Logging Parameters
 
     ${remote_logging_view}=  Get Remote Logging View  verify=${True}
 
-    Rvalid Value  remote_logging_view['Address']  valid_values=['${log_host}']
-    Rvalid Value  remote_logging_view['Port']  valid_values=[int(${log_port})]
+    Valid Value  remote_logging_view['Address']  valid_values=['${log_host}']
+    Valid Value  remote_logging_view['Port']  valid_values=[int(${log_port})]
 
 
 Verify Logging Disable
@@ -242,7 +242,7 @@ Verify Logging Disable
     ...  logging remote_logging disable
 
     ${remote_logging_view}=  Get Remote Logging View  verify=${True}
-    Rvalid Value  remote_logging_view['Address']  valid_values=['']
+    Valid Value  remote_logging_view['Address']  valid_values=['']
 
 
 Get Remote Logging Settings

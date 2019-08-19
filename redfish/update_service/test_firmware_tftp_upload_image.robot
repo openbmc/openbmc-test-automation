@@ -69,8 +69,8 @@ Suite Setup Execution
     [Documentation]  Do the suite setup.
 
     Redfish.Login
-    Rvalid Value  TFTP_SERVER
-    Rvalid Value  IMAGE_FILE_NAME
+    Valid Value  TFTP_SERVER
+    Valid Value  IMAGE_FILE_NAME
 
 
 TFTP Download Install
@@ -112,7 +112,7 @@ TFTP Download Install
     # Verify the image is installed and functional.
     ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '=' | sed 's/"//g'
     ${functional_version}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
-    Rvalid Value  functional_version  valid_values=['${install_version}']
+    Valid Value  functional_version  valid_values=['${install_version}']
     Rprint Vars  functional_version
 
 
@@ -154,7 +154,7 @@ ImageURI Download Install
     # Verify the image is installed and functional.
     ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '=' | sed 's/"//g'
     ${functional_version}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
-    Rvalid Value  functional_version  valid_values=['${install_version}']
+    Valid Value  functional_version  valid_values=['${install_version}']
     Rprint Vars  functional_version
 
 

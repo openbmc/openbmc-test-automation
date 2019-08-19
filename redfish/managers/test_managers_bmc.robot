@@ -64,7 +64,7 @@ Verify MAC Address Property Is Populated
 
     ${redfish_mac_addr}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0  MACAddress
     Rprint Vars  redfish_mac_addr  fmt=terse
-    Rvalid Value  redfish_mac_addr
+    Valid Value  redfish_mac_addr
 
     ${ipaddr_mac_addr}=  Get BMC MAC Address List
     Rprint Vars  ipaddr_mac_addr  fmt=terse
