@@ -321,15 +321,15 @@ Restore AccountLockout Attributes
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
-    Rvalid Value  LDAP_TYPE  valid_values=["ActiveDirectory", "LDAP"]
-    Rvalid Value  LDAP_USER
-    Rvalid Value  LDAP_USER_PASSWORD
-    Rvalid Value  GROUP_PRIVILEGE
-    Rvalid Value  GROUP_NAME
-    Rvalid Value  LDAP_SERVER_URI
-    Rvalid Value  LDAP_BIND_DN_PASSWORD
-    Rvalid Value  LDAP_BIND_DN
-    Rvalid Value  LDAP_BASE_DN
+    Valid Value  LDAP_TYPE  valid_values=["ActiveDirectory", "LDAP"]
+    Valid Value  LDAP_USER
+    Valid Value  LDAP_USER_PASSWORD
+    Valid Value  GROUP_PRIVILEGE
+    Valid Value  GROUP_NAME
+    Valid Value  LDAP_SERVER_URI
+    Valid Value  LDAP_BIND_DN_PASSWORD
+    Valid Value  LDAP_BIND_DN
+    Valid Value  LDAP_BASE_DN
 
     Redfish.Login
     # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.

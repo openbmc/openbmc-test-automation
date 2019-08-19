@@ -29,7 +29,7 @@ def validate_parms():
     Validate all program parameters.
     """
 
-    grv.rvalid_value("keyword_string")
+    grv.valid_value("keyword_string")
 
     return True
 

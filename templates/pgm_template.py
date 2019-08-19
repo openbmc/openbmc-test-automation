@@ -35,7 +35,7 @@ def validate_suite_parms():
     """
 
     # Programmer must add these.
-    grv.rvalid_value("OPENBMC_HOST")
+    grv.valid_value("OPENBMC_HOST")
 
     return
 

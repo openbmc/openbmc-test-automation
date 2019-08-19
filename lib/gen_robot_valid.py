@@ -219,6 +219,3 @@ for func_name in func_names:
         + ".__doc__ = customize_doc_string(gv.raw_doc_strings['" \
         + func_name + "'])"
     exec(cmd_buf)
-
-# Define aliases for backward compatibility.
-rvalid_value = valid_value

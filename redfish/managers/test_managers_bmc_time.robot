@@ -152,7 +152,7 @@ Verify Enable NTP
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={u'NTPEnabled': ${True}}
     ${ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
     Rprint Vars  ntp
-    Rvalid Value  ntp["ProtocolEnabled"]  valid_values=[True]
+    Valid Value  ntp["ProtocolEnabled"]  valid_values=[True]
 
 
 *** Keywords ***

@@ -63,7 +63,7 @@ Get System Serial And Verify Populated
     [Tags]  Get_System_Serial_And_Verify_Populated
 
     ${serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
-    Rvalid Value  serial_number
+    Valid Value  serial_number
     Rprint Vars  serial_number
 
 
@@ -72,7 +72,7 @@ Get Model And Verify Populated
     [Tags]  Get_Model_And_Verify_Populated
 
     ${model}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  Model
-    Rvalid Value  model
+    Valid Value  model
     Rprint Vars  model
 
 
@@ -110,7 +110,7 @@ Get Motherboard Serial And Verify Populated
 
     ${serial_number}=  Redfish.Get Attribute
     ...  ${REDFISH_CHASSIS_URI}motherboard  SerialNumber
-    Rvalid Value  serial_number
+    Valid Value  serial_number
     Rprint Vars  serial_number
 
 

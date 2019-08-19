@@ -43,9 +43,9 @@ BMC Multi Code Update
 Suite Setup Execution
     [Documentation]  Do test suite setup tasks.
 
-    Rvalid Value  IMAGE_FILE_PATH
-    Rvalid Value  N_MINUS_ONE_IMAGE_FILE_PATH
-    Rvalid Value  N_PLUS_ONE_IMAGE_FILE_PATH
+    Valid Value  IMAGE_FILE_PATH
+    Valid Value  N_MINUS_ONE_IMAGE_FILE_PATH
+    Valid Value  N_PLUS_ONE_IMAGE_FILE_PATH
 
 
 Code Update And Reboot BMC
