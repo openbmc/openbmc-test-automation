@@ -185,7 +185,7 @@ Redfish Verify BMC Version
     ${tar_version}=  Get Version Tar  ${image_file_path}
     ${bmc_version}=  Redfish Get BMC Version
 
-    Rvalid Value  bmc_version  valid_values=['${tar_version}']
+    Valid Value  bmc_version  valid_values=['${tar_version}']
 
 
 Redfish Verify Host Version
@@ -200,7 +200,7 @@ Redfish Verify Host Version
     ${tar_version}=  Get Version Tar  ${image_file_path}
     ${host_version}=  Redfish Get Host Version
 
-    Rvalid Value  host_version  valid_values=['${tar_version}']
+    Valid Value  host_version  valid_values=['${tar_version}']
 
 
 Upload And Activate Image
@@ -525,7 +525,7 @@ Get Latest Image ID
     # Example: # ls /tmp/images/
     #            1b714fb7
     ${image_id}=  Get Latest File  /tmp/images/
-    Rvalid Value  image_id
+    Valid Value  image_id
 
     # Though an image sub-directory was found, it really isn't valid unless
     # the MANIFEST file is present.
@@ -545,7 +545,7 @@ Check Image Update Progress State
     # image_id       The image ID (e.g. "1b714fb7").
 
     ${state}=  Get Image Update Progress State  image_id=${image_id}
-    Rvalid Value  state  valid_values=[${match_state}]
+    Valid Value  state  valid_values=[${match_state}]
 
 
 Get Image Update Progress State
@@ -591,5 +591,5 @@ Set ApplyTime
 
     Redfish.Patch  ${REDFISH_BASE_URI}UpdateService  body={'ApplyTime' : '${policy}'}
     ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
-    Rvalid Value  apply_time  valid_values=["xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.${policy}"]
+    Valid Value  apply_time  valid_values=["xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.${policy}"]
     Rprint Vars  apply_time

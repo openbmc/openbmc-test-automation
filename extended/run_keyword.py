@@ -11,6 +11,9 @@ import gen_robot_utils as gru
 from robot.libraries.BuiltIn import BuiltIn
 import re
 
+# Set exit_on_error for gen_valid functions.
+set_exit_on_error(True)
+
 
 def setup():
     r"""
@@ -29,7 +32,7 @@ def validate_parms():
     Validate all program parameters.
     """
 
-    grv.rvalid_value("keyword_string")
+    grv.valid_value("keyword_string")
 
     return True
 

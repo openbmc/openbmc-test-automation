@@ -7,6 +7,9 @@ This module is the python counterpart to pgm_template.py.
 import gen_print as gp
 import gen_robot_valid as grv
 
+# Set exit_on_error for gen_valid functions.
+set_exit_on_error(True)
+
 
 def suite_setup():
     r"""
@@ -35,7 +38,7 @@ def validate_suite_parms():
     """
 
     # Programmer must add these.
-    grv.rvalid_value("OPENBMC_HOST")
+    grv.valid_value("OPENBMC_HOST")
 
     return
 

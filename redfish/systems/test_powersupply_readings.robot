@@ -66,7 +66,7 @@ Verify Voltage Records
     ${num_invalid_records}=  Get Length  ${invalid_records}
     Run Keyword If  ${num_invalid_records} > ${0}
     ...  Rprint Vars  num_invalid_records  invalid_records
-    Rvalid Value  num_invalid_records  valid_values=[0]
+    Valid Value  num_invalid_records  valid_values=[0]
 
 
 Verify Valid Records
@@ -91,7 +91,7 @@ Verify Valid Records
 
     Run Keyword If  ${num_invalid_records} > ${0}
     ...  Rprint Vars  num_invalid_records  invalid_records
-    Rvalid Value  num_invalid_records  valid_values=[0]
+    Valid Value  num_invalid_records  valid_values=[0]
 
 
 Suite Teardown Execution
