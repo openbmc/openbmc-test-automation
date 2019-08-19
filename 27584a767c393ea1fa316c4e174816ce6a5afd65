@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c632ad1c_e9a765cd",
+        "filename": "docs/release_2.7_test_document.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-19T13:42:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9161402_0eaa5041",
+      "revId": "27584a767c393ea1fa316c4e174816ce6a5afd65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7131e6ce_ec4b545f",
         "filename": "docs/release_2.7_test_document.md",
         "patchSetId": 9
@@ -48,6 +66,24 @@
       "writtenOn": "2019-08-07T19:19:20Z",
       "side": 1,
       "message": "I feel we are duplicating a lot of the README here. I feel strongly that some of this should go into the README.",
+      "revId": "27584a767c393ea1fa316c4e174816ce6a5afd65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ddcee92_8f1c1b87",
+        "filename": "docs/release_2.7_test_document.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-19T13:42:31Z",
+      "side": 1,
+      "message": "Checking with my manager and will make changes accordingly. This and all for us stretch assignment, Gunnar.",
+      "parentUuid": "7131e6ce_ec4b545f",
       "revId": "27584a767c393ea1fa316c4e174816ce6a5afd65",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
