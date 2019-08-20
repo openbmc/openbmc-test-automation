@@ -612,3 +612,22 @@ def username():
             username = "?"
 
     return username
+
+
+def version_tuple(version):
+    r"""
+    Convert the version string to a tuple and return it.
+
+    Description of argument(s):
+    version                         A version string whose format is "n[.n]"
+                                    (e.g. "3.6.3", "3", etc.).
+    """
+
+    return tuple(map(int, (version.split("."))))
+
+
+# Note: Stripping out any revision code data (e.g. "3.6.3rc1" will become
+# "3.6.3").
+python_version = \
+    version_tuple(re.sub("rc[^ ]+", "", sys.version).split(" ")[0])
+ordered_dict_version = version_tuple("3.6")
