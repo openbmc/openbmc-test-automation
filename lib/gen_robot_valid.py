@@ -206,12 +206,20 @@ def valid_dict(var_name, *args, **kwargs):
     process_error_message(error_message)
 
 
+def valid_program(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_program(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
 # Modify the validation function docstrings by calling customize_doc_string
 # for each function in the func_names list.
 func_names = [
     "valid_type", "valid_value", "valid_range", "valid_integer",
     "valid_dir_path", "valid_file_path", "valid_path", "valid_list",
-    "valid_dict"
+    "valid_dict", "valid_program"
 ]
 
 for func_name in func_names:

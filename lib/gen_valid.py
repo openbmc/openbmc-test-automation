@@ -6,7 +6,9 @@ etc.
 """
 
 import os
+import re
 import gen_print as gp
+import gen_cmd as gc
 import func_args as fa
 
 exit_on_error = False
@@ -568,12 +570,35 @@ def valid_dict(var_value, required_keys=[], *args, **kwargs):
     return process_error_message(error_message)
 
 
+def valid_program(var_value, *args, **kwargs):
+    r"""
+    The variable value is valid if it contains the name of a program which can
+    be located using the "which" command.
+
+    Description of argument(s):
+    var_value                       The value being validated.
+    """
+
+    error_message = ""
+    rc, out_buf = gc.shell_cmd("which " + var_value, quiet=1, show_err=0,
+                               ignore_err=1)
+    if rc:
+        var_name = get_var_name(*args, **kwargs)
+        error_message += "The following required program could not be found"
+        error_message += " using the $PATH environment variable:\n"
+        error_message += gp.sprint_varx(var_name, var_value)
+        PATH = os.environ.get("PATH", "").split(":")
+        error_message += "\n"
+        error_message += gp.sprint_var(PATH)
+    return process_error_message(error_message)
+
+
 # Modify selected function docstrings by adding headers/footers.
 
 func_names = [
     "valid_type", "valid_value", "valid_range", "valid_integer",
     "valid_dir_path", "valid_file_path", "valid_path", "valid_list",
-    "valid_dict"
+    "valid_dict", "valid_program"
 ]
 
 raw_doc_strings = {}
