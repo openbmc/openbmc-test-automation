@@ -19,7 +19,7 @@ Documentation  Install RHEL OS and run an HTX bootme.
 #     HTX_INTERVAL              The time delay between checks of HTX
 #                               status, defaults to 10m.
 #     HTX_LOOPS                 The number of times to loop through
-#                               htx, defualts to 2.
+#                               htx, defaults to 2.
 #     DEBUG                     If this is set, extra debug information
 #                               will be printed out, defaults to 1.
 

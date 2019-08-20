@@ -124,7 +124,7 @@ def create_func_def_string(base_func_name,
     func_body_template              A function body in the form of a list.
                                     Each list element represents one line of a
                                     function  This is a template in so far as
-                                    text substitions will be done on it to
+                                    text substitutions will be done on it to
                                     arrive at a valid function definition.
                                     This template should NOT contain the
                                     function definition line (e.g. "def

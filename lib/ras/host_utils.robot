@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation       This module is for OS checkstop opertions.
+Documentation       This module is for OS checkstop operations.
 Resource            ../../lib/rest_client.robot
 Resource            ../../lib/utils.robot
 Variables           ../../lib/ras/variables.py

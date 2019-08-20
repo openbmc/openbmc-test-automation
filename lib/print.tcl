@@ -100,7 +100,7 @@ proc register_passwords {args} {
     lappend hidden_text $password
   }
 
-  # TODO: Excape metachars in the password_regex.
+  # TODO: Escape metachars in the password_regex.
   set password_regex [join $hidden_text |]
 
 }

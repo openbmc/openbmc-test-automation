@@ -161,7 +161,7 @@ def get_mtr_report(host=""):
     host   The DNS name or IP address to be passed to the mtr command.
     """
 
-    # Run the mtr command.  Exlude the header line.  Trim leading space from
+    # Run the mtr command.  Exclude the header line.  Trim leading space from
     # each line.  Change all multiple spaces delims to single space delims.
     cmd_buf = "mtr --report " + host +\
         " | tail -n +2 | sed -r -e 's/^[ ]+//g' -e 's/[ ]+/ /g'"
