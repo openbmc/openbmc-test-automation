@@ -693,10 +693,10 @@ def create_command_string(command, *pos_parms, **options):
 
     my program -pass 0 -fail 0 pos_parm1
 
-    Note to programmers who wish to write a wrapper to this function:  To get
-    the options to be processed correctly, the wrapper function must include a
-    _stack_frame_ix_ keyword argument to allow this function to properly
-    re-order options:
+    Note to programmers who wish to write a wrapper to this function:  If the
+    python version is less than 3.6, to get the options to be processed
+    correctly, the wrapper function must include a _stack_frame_ix_ keyword
+    argument to allow this function to properly re-order options:
 
     def create_ipmi_ext_command_string(command, **kwargs):
 
@@ -738,14 +738,11 @@ def create_command_string(command, *pos_parms, **options):
     else:
         # Either get stack_frame_ix from the caller via options or set it to
         # the default value.
-        if '_stack_frame_ix_' in options:
-            stack_frame_ix = options['_stack_frame_ix_']
-            del options['_stack_frame_ix_']
-        else:
-            stack_frame_ix = 1
-        # Re-establish the original options order as specified on the
-        # original line of code.  This function depends on correct order.
-        options = re_order_kwargs(stack_frame_ix, **options)
+        stack_frame_ix = options.pop('_stack_frame_ix_', 1)
+        if gm.python_version < gm.ordered_dict_version:
+            # Re-establish the original options order as specified on the
+            # original line of code.  This function depends on correct order.
+            options = re_order_kwargs(stack_frame_ix, **options)
     for key, value in options.items():
         # Check for special values in options and process them.
         if key == "arg_dashes":
