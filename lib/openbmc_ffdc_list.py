@@ -94,6 +94,7 @@ FFDC_OS_RHEL_FILE = {
                      + '>/tmp/OS_syslog.txt 2>&1',
         'OS_info': '{ lsb_release -a; cat /etc/redhat-release; '
                    + 'uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1',
+        'OS_sosreport': 'sosreport --batch --tmp-dir /tmp --label RHEL >/tmp/OS_sosreport.txt 2>&1',
     },
 }
 # Add file name and correcponding command needed for RHEL Linux
