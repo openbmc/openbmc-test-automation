@@ -81,6 +81,8 @@ FFDC_OS_UBUNTU_FILE = {
         'OS_syslog': 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1',
         'OS_info': '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } '
                    + '>/tmp/OS_info.txt 2>&1',
+        'OS_sosreport': '{ rm -rf /tmp/sosreport*FFDC* ; sosreport --batch --tmp-dir '
+                   + '/tmp --ticket-number FFDC ; } >/tmp/OS_sosreport.txt 2>&1',
     },
 }
 # Add file name and correcponding command needed for RHEL Linux
@@ -94,6 +96,8 @@ FFDC_OS_RHEL_FILE = {
                      + '>/tmp/OS_syslog.txt 2>&1',
         'OS_info': '{ lsb_release -a; cat /etc/redhat-release; '
                    + 'uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1',
+        'OS_sosreport': '{ rm -rf /tmp/sosreport*FFDC* ; sosreport --batch --tmp-dir '
+                   + '/tmp --label FFDC ; } >/tmp/OS_sosreport.txt 2>&1',
     },
 }
 # Add file name and correcponding command needed for RHEL Linux
