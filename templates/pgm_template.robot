@@ -8,6 +8,7 @@ Documentation  Base to get a start on a robot program.
 Library                     pgm_template.py
 Library                     gen_print.py
 Library                     gen_robot_print.py
+Library                     gen_robot_valid.py
 Resource                    bmc_redfish_resource.robot
 
 Suite Setup                 Suite Setup
