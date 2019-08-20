@@ -225,7 +225,7 @@ Select Server Power Operations Sub Menu
     Click Element  ${xpath_select_server_power_operations}
 
 Verify Presence of Power Button And Text Info
-    [Documentation]  Verify the presens fo power button and text message info.
+    [Documentation]  Verify the presence of power button and text message info.
     [Arguments]      ${power_button}  ${power_button_text}
 
     # power_button         Xpath of power button.

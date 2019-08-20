@@ -56,7 +56,7 @@
 -e Verify_Network_Interface_Recovery
 # Skipping RAS test cases
 -e Host_RAS
-# Skip multi threading test cuasing XML parser failure.
+# Skip multi threading test causing XML parser failure.
 -e Stress_BMC_REST_Server
 -e Stress_BMC_SSH_Server
 -e Stress_BMC_IPMI_Server
