@@ -351,6 +351,30 @@ Log OS SPECIFIC DISTRO FFDC
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
 
+    # Get the name of the sosreport* file.
+    ${filepath}  ${stderr}  ${rc}=  OS Execute Command
+    ...  ls /tmp/sosreport*RHEL*tar.xz  ignore_err=${True}
+    # Example:  filepath="/tmp/sosreport-myhost-RHEL-2019-08-20-pbuaqtk.tar.xz".
+
+    # Return if there is no sosreport file.
+    Return From Keyword If  ${rc} != ${0}  ${ffdc_file_list}
+
+    ${report_path}  ${report_basename}=  Split Path  ${filepath}
+    # Example:  report_path="/tmp",
+    #           report_basename="sosreport-myhost-RHEL-2019-08-20-pbuaqtk.tar.xz".
+
+    # Location where the sosreport file will be copied to.
+    ${sosreport_local_path}=  Set Variable  ${LOG_PREFIX}OS_${report_basename}
+
+    # Change file permissions otherwise scp will not see the file.
+    OS Execute Command  chmod 644 ${filepath}
+
+    # SCP the sosreport file from the OS.
+    Run Key U  scp.Get File \ ${filepath} \ ${sosreport_local_path}
+
+    # Add the file location to the ffdc_file_list.
+    Append To List  ${ffdc_file_list}  ${sosreport_local_path}
+
     [Return]  ${ffdc_file_list}
 
 
@@ -403,7 +427,7 @@ OS FFDC Files
     ...      ${ffdc_file_sub_list}
 
     # Delete ffdc files still on OS and close scp.
-    OS Execute Command  rm -rf /tmp/OS_*
+    OS Execute Command  rm -rf /tmp/OS_* /tmp/sosreport*RHEL*
     scp.Close Connection
 
     [Return]  ${ffdc_file_list}
