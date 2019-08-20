@@ -28,7 +28,7 @@ Verify Firmware Update ApplyTime Immediate
 
     Redfish.Patch  ${REDFISH_BASE_URI}UpdateService  body={'ApplyTime' : 'Immediate'}
 
-    # TODO: Move to redfish when avialable.
+    # TODO: Move to redfish when available.
     ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
     Rprint Vars  apply_time
     Should Be Equal   ${apply_time}  xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.Immediate
@@ -50,7 +50,7 @@ Verify Firmware Update ApplyTime OnReset
 
     Redfish.Patch  ${REDFISH_BASE_URI}UpdateService  body={'ApplyTime' : 'OnReset'}
 
-    # TODO: Move to redfish when avialable.
+    # TODO: Move to redfish when available.
     ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
     Rprint Vars  apply_time
     Should Be Equal   ${apply_time}  xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.OnReset

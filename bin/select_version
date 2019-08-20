@@ -17,7 +17,7 @@
 
 # If <program name>_VERSION is blank or not set, then the program version
 # will be whatever the system default program version is.  If <program
-# name>_VERSION is set to a value, then that value will be appened to the name
+# name>_VERSION is set to a value, then that value will be appended to the name
 # of the program (e.g. if PYTHON_VERSION = "3", then python3 will be used.).
 # If <program name>_VERSION is set to some value that does not correspond to a
 # valid program version for the given system, this program will fail.
