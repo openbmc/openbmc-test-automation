@@ -58,6 +58,19 @@ Get Memory Inventory Via Redfish And Verify
     Verify FRU Inventory Minimums  Memory  ${min_num_dimms}
 
 
+Get Memory Summary State And Verify Enabled
+    [Documentation]  Check that the state of the MemorySummary attribute
+    ...              under /redfish/v1/Systems/system is 'Enabled'.
+    [Tags]  Get_Memory_Summary_State_And_Verify_Enabled
+
+    ${status}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  MemorySummary
+    ${memory_summary_state}=  Set Variable  ${status['Status']['State']}
+    Rprint Vars  memory_summary_state
+
+    Should Be Equal As Strings  Enabled  ${memory_summary_state}
+    ...  msg=MemorySummary State is not 'Enabled'.
+
+
 Get System Serial And Verify Populated
     [Documentation]  Check that the System SerialNumber is non-blank.
     [Tags]  Get_System_Serial_And_Verify_Populated
