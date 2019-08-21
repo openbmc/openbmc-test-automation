@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "a8968bbc_64cfce11",
+        "filename": "docs/release_2.7_test_document.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-21T14:00:16Z",
+      "side": 1,
+      "message": "Hi Gunnar, There is patch 10 available. I think you are reviewing still old one.\n\nhttps://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/23339/10/docs/release_2.7_test_document.md",
+      "parentUuid": "8fcdbfdc_77164adf",
+      "revId": "27584a767c393ea1fa316c4e174816ce6a5afd65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7131e6ce_ec4b545f",
         "filename": "docs/release_2.7_test_document.md",
         "patchSetId": 9
