@@ -136,7 +136,7 @@ def login_ssh(login_args={},
         gp.lprint_var(login_attempt_num)
         try:
             out_buf = sshlib.login(**login_args)
-        except Exception as login_exception:
+        except Exception:
             # Login will sometimes fail if the connection is new.
             except_type, except_value, except_traceback = sys.exc_info()
             gp.lprint_var(except_type)
@@ -154,7 +154,7 @@ def login_ssh(login_args={},
 
     # If we get to this point, the login has failed on all attempts so the
     # exception will be raised again.
-    raise(login_exception)
+    raise(except_value)
 
 
 def execute_ssh_command(cmd_buf,
@@ -254,7 +254,7 @@ def execute_ssh_command(cmd_buf,
         cix = sshlib.open_connection(**open_connection_args)
         try:
             login_ssh(login_args)
-        except Exception as login_exception:
+        except Exception:
             except_type, except_value, except_traceback = sys.exc_info()
             rc = 1
             stderr = str(except_value)
@@ -279,7 +279,7 @@ def execute_ssh_command(cmd_buf,
                                        return_stderr=True,
                                        return_rc=True,
                                        time_out=time_out)
-        except Exception as execute_exception:
+        except Exception:
             except_type, except_value, except_traceback = sys.exc_info()
             gp.lprint_var(except_type)
             gp.lprint_varx("except_value", str(except_value))
@@ -296,7 +296,7 @@ def execute_ssh_command(cmd_buf,
                     # Now we must continue to next loop iteration to retry the
                     # execute_command.
                     continue
-                except Exception as login_exception:
+                except Exception:
                     except_type, except_value, except_traceback =\
                         sys.exc_info()
                     rc = 1
@@ -330,7 +330,7 @@ def execute_ssh_command(cmd_buf,
             # exception again.
             sshlib.close_all_connections()
             gp.lprintn(traceback.format_exc())
-            raise(execute_exception)
+            raise(except_value)
 
         # If we get to this point, the command was executed.
         break
