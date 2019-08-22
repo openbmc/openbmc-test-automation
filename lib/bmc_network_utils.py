@@ -5,10 +5,13 @@ Network generic functions.
 
 """
 
+import gen_cmd as gc
+import gen_misc as gm
+import var_funcs as vf
+import collections
 import re
 import ipaddress
 from robot.libraries.BuiltIn import BuiltIn
-import var_funcs as vf
 
 
 def netmask_prefix_length(netmask):
@@ -70,3 +73,54 @@ def parse_nping_output(output):
     nping_result['percent_lost'] = \
         float(nping_result['lost'].split(" ")[-1].strip("()%"))
     return nping_result
+
+
+def nping(host=None, **options):
+    r"""
+    Run the nping command and return the results either as a string or as a dictionary.
+
+    Note that any valid nping argument may be specified as a function argument.
+
+    Example robot code:
+
+    ${nping_result}=  Nping  delay=${delay}  count=${count}  icmp=${None}  icmp-type=echo
+    Rprint Vars  nping_result
+
+    Resulting output:
+
+    nping_result:
+      [max_rtt]:                                      0.534ms
+      [min_rtt]:                                      0.441ms
+      [avg_rtt]:                                      0.487ms
+      [raw_packets_sent]:                             4 (112B)
+      [rcvd]:                                         2 (92B)
+      [lost]:                                         2 (50.00%)
+      [percent_lost]:                                 50.0
+
+    Description of argument(s):
+    host                            The host name or IP of the target of the
+                                    nping command.
+    options                         Zero or more options accepted by the nping
+                                    command.  Plus the following:
+    parse_results                   Indicates that this function should parse
+                                    the nping results and return a dictionary.
+    """
+
+    # Get 'parse_results' parm if specified or default to value of 1.
+    parse_results = int(options.pop('parse_results', 1))
+    if not host:
+        # Set default host if not specified.
+        host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
+
+    if gm.python_version < gm.ordered_dict_version:
+        new_options = collections.OrderedDict(options)
+    else:
+        new_options = options
+
+    command_string = gc.create_command_string('nping', host, new_options)
+
+    rc, output = gc.shell_cmd(command_string, print_output=0, ignore_err=0)
+    if parse_results:
+        return parse_nping_output(output)
+
+    return output
