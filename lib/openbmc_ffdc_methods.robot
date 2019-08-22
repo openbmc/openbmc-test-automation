@@ -203,7 +203,7 @@ BMC FFDC Files
     \     ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...       ${ffdc_file_sub_list}
 
-    BMC Execute Command  rm -rf /tmp/BMC_* /tmp/SOL.txt
+    BMC Execute Command  rm -rf /tmp/BMC_*
     scp.Close Connection
 
     [Return]  ${ffdc_file_list}
