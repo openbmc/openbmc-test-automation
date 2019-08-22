@@ -5,10 +5,14 @@ Network generic functions.
 
 """
 
+import gen_print as gp
+import gen_cmd as gc
+import gen_misc as gm
+import var_funcs as vf
+import collections
 import re
 import ipaddress
 from robot.libraries.BuiltIn import BuiltIn
-import var_funcs as vf
 
 
 def netmask_prefix_length(netmask):
@@ -70,3 +74,51 @@ def parse_nping_output(output):
     nping_result['percent_lost'] = \
         float(nping_result['lost'].split(" ")[-1].strip("()%"))
     return nping_result
+
+
+openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
+
+
+def nping(host=openbmc_host, parse_results=1, **options):
+    r"""
+    Run the nping command and return the results either as a string or as a dictionary.
+
+    Do a 'man nping' for a complete description of the nping utility.
+
+    Note that any valid nping argument may be specified as a function argument.
+
+    Example robot code:
+
+    ${nping_result}=  Nping  delay=${delay}  count=${count}  icmp=${None}  icmp-type=echo
+    Rprint Vars  nping_result
+
+    Resulting output:
+
+    nping_result:
+      [max_rtt]:                                      0.534ms
+      [min_rtt]:                                      0.441ms
+      [avg_rtt]:                                      0.487ms
+      [raw_packets_sent]:                             4 (112B)
+      [rcvd]:                                         2 (92B)
+      [lost]:                                         2 (50.00%)
+      [percent_lost]:                                 50.0
+
+    Description of argument(s):
+    host                            The host name or IP of the target of the
+                                    nping command.
+    parse_results                   1 or True indicates that this function
+                                    should parse the nping results and return
+                                    a dictionary rather than the raw nping
+                                    output.  See the parse_nping_output()
+                                    function for details on the dictionary
+                                    structure.
+    options                         Zero or more options accepted by the nping
+                                    command.  Do a 'man nping' for details.
+    """
+
+    command_string = gc.create_command_string('nping', host, options)
+    rc, output = gc.shell_cmd(command_string, print_output=0, ignore_err=0)
+    if parse_results:
+        return parse_nping_output(output)
+
+    return output
