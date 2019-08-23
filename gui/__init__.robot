@@ -3,6 +3,7 @@ Documentation  Main initialization file for the test cases contained in this
 ...            directory and setting up the test environment variables.
 
 Resource          lib/resource.robot
+Library           lib/utils_get_version.py
 Suite Setup       Initializing Setup
 Suite Teardown    Init Teardown Steps
 
@@ -10,6 +11,8 @@ Suite Teardown    Init Teardown Steps
 Initializing Setup
     [Documentation]  Initialize test environment.
 
+    ${software_versions}=  utils_get_version.software_versions
+    Rprint Vars  software_versions
     Get OpenBMC System Info
     Launch OpenBMC GUI Browser
     Login OpenBMC GUI
