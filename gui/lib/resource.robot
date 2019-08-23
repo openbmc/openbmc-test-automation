@@ -17,6 +17,7 @@ Library      ../../lib/gen_robot_print.py
 Library      ../../lib/gen_valid.py
 Library      ../../lib/gen_robot_ssh.py
 Library      ../../lib/bmc_ssh_utils.py
+Library      ../lib/utils_get_version.py
 Resource     ../../lib/resource.robot
 Resource     ../../lib/rest_client.robot
 Resource     ../../lib/state_manager.robot
@@ -367,3 +368,9 @@ Logout And Close Browser
 
     Click Element  //*[text()='Log out']
     Close Browser
+
+Get Software Versions
+    [Documentation]  Get version of base packages installed on server running the tests.
+
+    utils_get_version.get_software_version
+
