@@ -74,7 +74,6 @@ Verify REST Logging On BMC Journal When Disabled
     # Example: Just get the message part of the syslog
     # user:root POST http://xx.xx.xx.xx/login json: None 200 OK
     ${cmd}=  Catenate  SEPARATOR=  --no-pager | egrep '${login_footprint}'
-    ...  | awk -F': ' '{print $2}'
 
     Start Journal Log  filter=${cmd}
     Initialize OpenBMC
