@@ -21,7 +21,7 @@ ${old_ldap_privilege}  ${EMPTY}
 ** Test Cases **
 
 Verify LDAP Configuration Created
-    [Documentation]  Verify LDAP configuration created.
+    [Documentation]  Verify that LDAP configuration created.
     [Tags]  Verify_LDAP_Configuration_Created
 
     Create LDAP Configuration
@@ -34,7 +34,8 @@ Verify LDAP Configuration Created
 
 
 Verify LDAP Service Disable
-    [Documentation]  Verify LDAP is disabled and that LDAP user cannot login.
+    [Documentation]  Verify that LDAP is disabled and that LDAP user cannot
+    ...  login.
     [Tags]  Verify_LDAP_Service_Disable
 
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
@@ -53,7 +54,7 @@ Verify LDAP Service Disable
 
 
 Verify LDAP Login With ServiceEnabled
-    [Documentation]  Verify LDAP Login with ServiceEnabled.
+    [Documentation]  Verify that LDAP Login with ServiceEnabled.
     [Tags]  Verify_LDAP_Login_With_ServiceEnabled
 
     Disable Other LDAP
@@ -68,7 +69,7 @@ Verify LDAP Login With ServiceEnabled
 
 
 Verify LDAP Login With Correct AuthenticationType
-    [Documentation]  Verify LDAP Login with right AuthenticationType.
+    [Documentation]  Verify that LDAP Login with right AuthenticationType.
     [Tags]  Verify_LDAP_Login_With_Correct_AuthenticationType
 
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
@@ -81,7 +82,7 @@ Verify LDAP Login With Correct AuthenticationType
 
 
 Verify LDAP Config Update With Incorrect AuthenticationType
-    [Documentation]  Verify invalid AuthenticationType is not updated.
+    [Documentation]  Verify that invalid AuthenticationType is not updated.
     [Tags]  Verify_LDAP_Update_With_Incorrect_AuthenticationType
 
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
@@ -96,7 +97,7 @@ Verify LDAP Login With Correct LDAP URL
 
 
 Verify LDAP Config Update With Incorrect LDAP URL
-    [Documentation]  Verify LDAP Login fails with invalid LDAP URL.
+    [Documentation]  Verify that LDAP Login fails with invalid LDAP URL.
     [Tags]  Verify_LDAP_Config_Update_With_Incorrect_LDAP_URL
     [Teardown]  Run Keywords  Restore LDAP URL  AND
     ...  FFDC On Test Case Fail
@@ -105,7 +106,7 @@ Verify LDAP Config Update With Incorrect LDAP URL
 
 
 Verify LDAP Configuration Exist
-    [Documentation]  Verify LDAP configuration is available.
+    [Documentation]  Verify that LDAP configuration is available.
     [Tags]  Verify_LDAP_Configuration_Exist
 
     ${resp}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}AccountService
@@ -114,7 +115,7 @@ Verify LDAP Configuration Exist
 
 
 Verify LDAP User Login
-    [Documentation]  Verify LDAP user able to login into BMC.
+    [Documentation]  Verify that LDAP user able to login into BMC.
     [Tags]  Verify_LDAP_User_Login
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
@@ -123,7 +124,7 @@ Verify LDAP User Login
 
 
 Verify LDAP Service Available
-    [Documentation]  Verify LDAP service is available.
+    [Documentation]  Verify that LDAP service is available.
     [Tags]  Verify_LDAP_Service_Available
 
     @{ldap_configuration}=  Get LDAP Configuration  ${LDAP_TYPE}
@@ -132,7 +133,7 @@ Verify LDAP Service Available
 
 
 Verify LDAP Login Works After BMC Reboot
-    [Documentation]  Verify LDAP login works after BMC reboot.
+    [Documentation]  Verify that LDAP login works after BMC reboot.
     [Tags]  Verify_LDAP_Login_Works_After_BMC_Reboot
 
     Redfish OBMC Reboot (off)
@@ -142,7 +143,7 @@ Verify LDAP Login Works After BMC Reboot
 
 
 Verify LDAP User With Admin Privilege Able To Do BMC Reboot
-    [Documentation]  Verify LDAP user with administrator privilege able to do BMC reboot.
+    [Documentation]  Verify that LDAP user with administrator privilege able to do BMC reboot.
     [Tags]  Verify_LDAP_User_With_Admin_Privilege_Able_To_Do_BMC_Reboot
 
 
@@ -157,7 +158,8 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
 
 
 Verify LDAP User With Operator Privilege Able To Do Host Poweroff
-    [Documentation]  Verify LDAP user with operator privilege can do host power off.
+    [Documentation]  Verify that LDAP user with operator privilege can do host
+    ...  power off.
     [Tags]  Verify_LDAP_User_With_Operator_Privilege_Able_To_Do_Host_Poweroff
     [Teardown]  Restore LDAP Privilege
 
@@ -173,7 +175,7 @@ Verify LDAP User With Operator Privilege Able To Do Host Poweroff
 
 
 Verify AccountLockout Attributes Set To Zero
-    [Documentation]  Verify attribute AccountLockoutDuration and
+    [Documentation]  Verify that attribute AccountLockoutDuration and
     ...  AccountLockoutThreshold are set to 0.
     [Teardown]  Run Keywords  Restore AccountLockout Attributes  AND
     ...  FFDC On Test Case Fail
@@ -189,7 +191,7 @@ Verify AccountLockout Attributes Set To Zero
 
 
 Verify LDAP User With Read Privilege Able To Check Inventory
-    [Documentation]  Verify LDAP user with read privilege able to
+    [Documentation]  Verify that LDAP user with read privilege able to
     ...  read firmware inventory.
     [Tags]  Verify_LDAP_User_With_Read_Privilege_Able_To_Check_Inventory
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore LDAP Privilege
@@ -200,7 +202,7 @@ Verify LDAP User With Read Privilege Able To Check Inventory
 
 
 Verify LDAP User With Read Privilege Should Not Do Host Poweron
-    [Documentation]  Verify LDAP user with read privilege should not be
+    [Documentation]  Verify that LDAP user with read privilege should not be
     ...  allowed to power on the host.
     [Tags]  Verify_LDAP_User_With_Read_Privilege_Should_Not_Do_Host_Poweron
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore LDAP Privilege
@@ -211,7 +213,8 @@ Verify LDAP User With Read Privilege Should Not Do Host Poweron
 
 
 Update LDAP Group Name And Verify Operations
-    [Documentation]  Verify LDAP group name update and able to do right operations.
+    [Documentation]  Verify that LDAP group name update and able to do right
+    ...  operations.
     [Tags]  Update_LDAP_Group_Name_And_Verify_Operations
     [Template]  Update LDAP Config And Verify Set Host Name
     [Teardown]  Restore LDAP Privilege
@@ -229,7 +232,7 @@ Update LDAP Group Name And Verify Operations
 
 Verify LDAP BaseDN Update And LDAP Login
     [Documentation]  Update LDAP BaseDN of LDAP configuration and verify
-    ...  LDAP login works.
+    ...  that LDAP login works.
     [Tags]  Verify_LDAP_BaseDN_Update_And_LDAP_Login
 
 
@@ -242,7 +245,7 @@ Verify LDAP BaseDN Update And LDAP Login
 
 Verify LDAP BindDN Update And LDAP Login
     [Documentation]  Update LDAP BindDN of LDAP configuration and verify
-    ...  LDAP login works.
+    ...  that LDAP login works.
     [Tags]  Verify_LDAP_BindDN_Update_And_LDAP_Login
 
     ${body}=  Catenate  {'${LDAP_TYPE}': { 'Authentication':
@@ -255,7 +258,7 @@ Verify LDAP BindDN Update And LDAP Login
 
 Verify LDAP BindDN Password Update And LDAP Login
     [Documentation]  Update LDAP BindDN password of LDAP configuration and
-    ...  verify LDAP login works.
+    ...  verify that LDAP login works.
     [Tags]  Verify_LDAP_BindDN_Passsword_Update_And_LDAP_Login
 
 
@@ -269,7 +272,7 @@ Verify LDAP BindDN Password Update And LDAP Login
 
 Verify LDAP Type Update And LDAP Login
     [Documentation]  Update LDAP type of LDAP configuration and verify
-    ...  LDAP login works.
+    ...  that LDAP login works.
     [Tags]  Verify_LDAP_Type_Update_And_LDAP_Login
 
     Disable Other LDAP
@@ -279,17 +282,82 @@ Verify LDAP Type Update And LDAP Login
     Redfish Verify LDAP Login
 
 
+Verify Authorization With Null Privilege
+    [Documentation]  Verify the failure of LDAP authorization with empty
+    ...  privilege.
+    [Tags]  Verify_LDAP_Authorization_With_Null_Privilege
+    [Setup]  Create LDAP Configuration
+    [Teardown]  Restore LDAP Privilege
+
+    Update LDAP Config And Verify Set Host Name  ${GROUP_NAME}  ${EMPTY}
+    ...  [${HTTP_FORBIDDEN}]
+
+
+Verify Authorization With Invalid Privilege
+    [Documentation]  Verify that LDAP user authorization with wrong privilege
+    ...  fails.
+    [Tags]  Verify_LDAP_Authorization_With_Invalid_Privilege
+    [Setup]  Create LDAP Configuration
+    [Teardown]  Restore LDAP Privilege
+
+    Update LDAP Config And Verify Set Host Name  ${GROUP_NAME}
+    ...  Invalid_Privilege  [${HTTP_FORBIDDEN}]
+
+
+Verify LDAP Login With Invalid Data
+    [Documentation]  Verify that LDAP login with Invalid LDAP data and
+    ...  right LDAP user fails.
+    [Tags]  Verify_LDAP_Login_With_Invalid_Data
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create LDAP Configuration
+
+    Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
+    ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD
+    ...  Invalid_LDAP_BASE_DN
+    Sleep  15s
+    Redfish Verify LDAP Login  ${False}
+
+
+Verify LDAP Config Creation Without BASE_DN
+    [Documentation]  Verify that LDAP login with LDAP configuration
+    ...  created without BASE_DN fails.
+    [Tags]  Verify_LDAP_Config_Creation_Without_BASE_DN
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create LDAP Configuration
+
+    Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
+    ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD  ${EMPTY}
+    Sleep  15s
+    Redfish Verify LDAP Login  ${False}
+
+
+Verify LDAP Authentication Without Password
+    [Documentation]  Verify that LDAP user authentication without LDAP
+    ...  user password fails.
+    [Tags]  Verify_LDAP_Authentication_Without_Password
+    [Setup]  Create LDAP Configuration
+
+    ${status}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
+    Valid Value  status  [${False}]
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
     [Documentation]  LDAP user log into BMC.
+    [Arguments]  ${valid_status}=${True}
+
+    # Description of argument(s):
+    # valid_status  Expected status of LDAP login ("True" or "False").
 
     # According to our repo coding rules, Redfish.Login is to be done in Suite
     # Setup and Redfish.Logout is to be done in Suite Teardown.  For any
     # deviation from this rule (such as in this keyword), the deviant code
     # must take steps to restore us to our original logged-in state.
 
-    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    ${status}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
+    ...  ${LDAP_USER_PASSWORD}
+    Valid Value  status  [${valid_status}]
     Redfish.Logout
     Redfish.Login
 
