@@ -150,6 +150,7 @@ Dump Out Of Space Test
     [Documentation]  Verify out of dump space is reported when attempt
     ...  to create too many dumps.
     [Tags]  Dump_Out_Of_Space_Test
+    [Setup]  Delete All BMC Dump
 
     # Systems typically hold 8-14 dumps before running out of dump space.
     # Attempt to create too_many_dumps.  Expect to run out of space
