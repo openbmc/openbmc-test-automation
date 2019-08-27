@@ -279,17 +279,83 @@ Verify LDAP Type Update And LDAP Login
     Redfish Verify LDAP Login
 
 
+Verify Authorization Without Privilege
+    [Documentation]  LDAP user authorization should fail with privilege
+    ...  removed.
+    [Tags]  Verify_LDAP_Authorization_Without_Privilege
+    [Setup]  Create LDAP Configuration
+    [Teardown]  Restore LDAP Privilege
+
+    Update LDAP Config And Verify Set Host Name  ${GROUP_NAME}  ""
+    ...  [${HTTP_FORBIDDEN}]
+
+
+Verify Authorization With Invalid Privilege
+    [Documentation]  LDAP user authorization should fail with wrong
+    ...  privilege.
+    [Tags]  Verify_LDAP_Authorization_With_Invalid_Privilege
+    [Setup]  Create LDAP Configuration
+    [Teardown]  Restore LDAP Privilege
+
+    Update LDAP Config And Verify Set Host Name  ${GROUP_NAME}
+    ...  Invalid_Privilege  [${HTTP_FORBIDDEN}]
+
+
+Verify LDAP Login With Invalid Data
+    [Documentation]  LDAP login should fail with Invalid LDAP data and
+    ...  right LDAP user.
+    [Tags]  Verify_LDAP_Login_With_Invalid_Data
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create LDAP Configuration
+
+    Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
+    ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD
+    ...  Invalid_LDAP_BASE_DN
+    Sleep  15s
+    Redfish Verify LDAP Login  ${False}
+
+
+Verify LDAP Config Creation Without BASE_DN
+    [Documentation]  LDAP login should fail when LDAP configuration
+    ...  created without BASE_DN.
+    [Tags]  Verify_LDAP_Config_Creation_Without_BASE_DN
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create LDAP Configuration
+
+    Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
+    ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD
+    ...  " "
+    Sleep  15s
+    Redfish Verify LDAP Login  ${False}
+
+
+Verify LDAP Authentication Without Password
+    [Documentation]  LDAP user authentication should fail without LDAP
+    ...  user password.
+    [Tags]  Verify_LDAP_Authentication_Without_Password
+    [Setup]  Create LDAP Configuration
+
+    ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
+    Should Be Equal  ${resp}  ${False}
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
     [Documentation]  LDAP user log into BMC.
+    [Arguments]  ${valid_status}=${True}
+
+    # Description of argument(s):
+    # valid_status  Expected status of LDAP login ("True" or "False").
 
     # According to our repo coding rules, Redfish.Login is to be done in Suite
     # Setup and Redfish.Logout is to be done in Suite Teardown.  For any
     # deviation from this rule (such as in this keyword), the deviant code
     # must take steps to restore us to our original logged-in state.
 
-    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
+    ...  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${valid_status}
     Redfish.Logout
     Redfish.Login
 
