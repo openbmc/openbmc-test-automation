@@ -338,17 +338,25 @@ Call Method
     ...  timeout=${timeout}  quiet=${quiet}  &{kwargs}
     [Return]     ${resp}
 
+
 Upload Image To BMC
-    [Documentation]  Upload image to BMC device using REST POST operation.
-    [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${1}  &{kwargs}
+    [Documentation]  Upload image to BMC via REST and return status code.
+    [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${1}
+    ...  ${valid_status_codes}=[${HTTP_OK}]  &{kwargs}
 
     # Description of argument(s):
-    # uri             URI for uploading image via REST e.g. "/upload/image".
-    # timeout         Time allocated for the REST command to return status
-    #                 (specified in Robot Framework Time Format e.g. "3 mins").
-    # quiet           If enabled, turns off logging to console.
-    # kwargs          A dictionary keys/values to be passed directly to
-    #                 Post Request.
+    # uri                           URI for uploading image via REST e.g.
+    #                               "/upload/image".
+    # timeout                       Time allocated for the REST command to
+    #                               return status (specified in Robot
+    #                               Framework Time Format e.g. "3 mins").
+    # quiet                         If enabled, turns off logging to console.
+    # valid_status_codes            A list of status codes that are valid for
+    #                               the REST post command. This can be
+    #                               specified as a string the evaluates to a
+    #                               python object (e.g. [${HTTP_OK}]).
+    # kwargs                        A dictionary keys/values to be passed
+    #                               directly to Post Request.
 
     Initialize OpenBMC  ${timeout}  quiet=${quiet}
     ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
@@ -359,5 +367,8 @@ Upload Image To BMC
     ...  base_uri=${base_uri}  args=&{kwargs}
     ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
-    Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
+    Valid Value  ret.status_code  ${valid_status_codes}
     Delete All Sessions
+
+    [Return]  ${ret.status_code}
+
