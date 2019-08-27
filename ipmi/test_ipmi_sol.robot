@@ -272,4 +272,4 @@ Test Teardown Execution
     ${sol_log}=  Stop SOL Console Logging
     Log   ${sol_log}
     FFDC On Test Case Fail
-    Restore Default SOL Configuration
+    Wait Until Keyword Succeeds  15 sec  5 sec  Restore Default SOL Configuration

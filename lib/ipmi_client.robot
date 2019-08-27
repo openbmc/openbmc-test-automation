@@ -66,7 +66,6 @@ Run IPMI Standard Command
     ...  ELSE IF  '${IPMI_COMMAND}' == 'Dbus'
     ...    Run Dbus IPMI Standard Command  ${command}
     ...  ELSE  Fail  msg=Invalid IPMI Command type provided : ${IPMI_COMMAND}
-
     [Return]  ${resp}
 
 
