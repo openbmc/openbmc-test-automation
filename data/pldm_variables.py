@@ -1,0 +1,58 @@
+#!/usr/bin/python
+
+r"""
+Contains PLDM-related constants.
+"""
+
+
+PLDM_TYPE_BASE = '00'
+PLDM_TYPE_PLATFORM = '02'
+PLDM_TYPE_BIOS = '03'
+PLDM_TYPE_OEM = '3F'
+
+pldm_cmd = {
+        'PLDM_GET_TID': '2',
+        'PLDM_GET_PLDM_VERSION': '3',
+        'PLDM_GET_PLDM_TYPES': '4',
+        'PLDM_GET_PLDM_COMMANDS': '5'}
+
+PLDM_SUCCESS = '00'
+PLDM_ERROR = '01'
+PLDM_ERROR_INVALID_DATA = '02'
+PLDM_ERROR_INVALID_LENGTH = '03'
+PLDM_ERROR_NOT_READY = '04'
+PLDM_ERROR_UNSUPPORTED_PLDM_CMD = '05'
+PLDM_ERROR_INVALID_PLDM_TYPE = '20'
+
+BIOS_TABLE_UNAVAILABLE = '83',
+INVALID_BIOS_TABLE_DATA_INTEGRITY_CHECK = '84',
+INVALID_BIOS_TABLE_TYPE = '85'
+
+pldm_bios_cmd = {
+    'GET_BIOS_TABLE' : '01',
+    'SET_BIOS_ATTRIBUTE_CURRENT_VALUE' : '07',
+    'GET_BIOS_ATTRIBUTE_CURRENT_VALUE_BY_HANDLE' : '08',
+    'GET_DATE_TIME' : '0c'}
+
+pldm_platform_cmd = {
+        'SET_STATE_EFFECTER_STATES': '39',
+        'GET_PDR': '51'}
+
+pldm_pdr_types = {
+    'STATE_EFFECTER_PDR': '11'}
+
+# PLDM OEM related variables.
+pldm_fileio_cmd = {
+        'GET_FILE_TABLE': '1',
+        'READ_FILE': '4',
+        'WRITE_FILE': '5',
+        'READ_FILE_INTO_MEMORY': '6',
+        'WRITE_FILE_FROM_MEMORY': '7'}
+
+pldm_fileio_completion_codes = {
+        'INVALID_FILE_HANDLE': '80',
+        'DATA_OUT_OF_RANGE': '81',
+        'INVALID_READ_LENGTH': '82',
+        'INVALID_WRITE_LENGTH': '83',
+        'FILE_TABLE_UNAVAILABLE': '84',
+        'INVALID_FILE_TABLE_TYPE': '85'}
