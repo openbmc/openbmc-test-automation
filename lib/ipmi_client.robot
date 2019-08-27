@@ -60,6 +60,7 @@ Run IPMI Standard Command
     #                               used for external IPMI commands.
 
     ${resp}=  Run Keyword If  '${IPMI_COMMAND}' == 'External'
+    ...    Wait Until Keyword Succeeds  15 sec  5 sec
     ...    Run External IPMI Standard Command  ${command}  ${fail_on_err}  ${expected_rc}  &{options}
     ...  ELSE IF  '${IPMI_COMMAND}' == 'Inband'
     ...    Run Inband IPMI Standard Command  ${command}  ${fail_on_err}
