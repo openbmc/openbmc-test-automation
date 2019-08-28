@@ -29,4 +29,4 @@ ${DEBUG}                    0
 *** Test Cases ***
 Test Case 1
 
-    Print Timen  First test case.
+    Qprint Timen  First test case.
