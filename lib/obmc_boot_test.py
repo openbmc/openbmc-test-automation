@@ -43,11 +43,6 @@ program_pid = os.getpid()
 master_pid = os.environ.get('AUTOBOOT_MASTER_PID', program_pid)
 pgm_name = re.sub('\\.py$', '', os.path.basename(__file__))
 
-# Set up boot data structures.
-os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
-boot_table = create_boot_table(os_host=os_host)
-valid_boot_types = create_valid_boot_list(boot_table)
-
 boot_lists = read_boot_lists()
 
 # The maximum number of entries that can be in the boot_history global variable.
@@ -65,16 +60,20 @@ boot_success = 0
 status_dir_path = os.environ.get('STATUS_DIR_PATH', "")
 if status_dir_path != "":
     status_dir_path = os.path.normpath(status_dir_path) + os.sep
-redfish_supported = BuiltIn().get_variable_value("${REDFISH_SUPPORTED}", default=False)
-if redfish_supported:
-    default_power_on = "Redfish Power On"
-    default_power_off = "Redfish Power Off"
-else:
-    default_power_on = "REST Power On"
-    default_power_off = "REST Power Off"
+try:
+    redfish_supported = BuiltIn().get_variable_value("${REDFISH_SUPPORTED}", default=False)
+    if redfish_supported:
+        default_power_on = "Redfish Power On"
+        default_power_off = "Redfish Power Off"
+    else:
+        default_power_on = "REST Power On"
+        default_power_off = "REST Power Off"
+    LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
+except Exception as e:
+    if type(e).__name__ != "RobotNotRunningError":
+        raise Exception(e)
 boot_count = 0
 
-LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
 AUTOBOOT_FFDC_PREFIX = os.environ.get('AUTOBOOT_FFDC_PREFIX', '')
 ffdc_prefix = AUTOBOOT_FFDC_PREFIX
 boot_start_time = ""
@@ -449,6 +448,10 @@ def validate_parms():
     Validate all program parameters.
     """
 
+    # Set up boot data structures.
+    os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
+    boot_table = create_boot_table(os_host=os_host)
+    valid_boot_types = create_valid_boot_list(boot_table)
     process_pgm_parms()
 
     gp.qprintn()
@@ -648,6 +651,10 @@ def print_defect_report(ffdc_file_list):
     ffdc_file_list  A list of files which were collected by our ffdc functions.
     """
 
+    # Set up boot data structures.
+    os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
+    boot_table = create_boot_table(os_host=os_host)
+    valid_boot_types = create_valid_boot_list(boot_table)
     # Making deliberate choice to NOT run plug_in_setup().  We don't want
     # ffdc_prefix updated.
     rc, shell_rc, failed_plug_in_name = grpi.rprocess_plug_in_packages(

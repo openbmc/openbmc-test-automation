@@ -37,18 +37,19 @@ class bmc_redfish(redfish_plus):
         likewise be deleted.
         """
         self.__inited__ = False
-        try:
-            super(bmc_redfish, self).__init__(*args, **kwargs)
-            self.__inited__ = True
-        except ValueError as get_exception:
-            except_type, except_value, except_traceback = sys.exc_info()
-            regex = r"The HTTP status code was not valid:[\r\n]+status:[ ]+502"
-            result = re.match(regex, str(except_value), flags=re.MULTILINE)
-            if not result:
-                gp.lprint_var(except_type)
-                gp.lprint_varx("except_value", str(except_value))
-                raise(get_exception)
-        BuiltIn().set_global_variable("${REDFISH_SUPPORTED}", self.__inited__)
+        if(args and kwargs):
+            try:
+                super(bmc_redfish, self).__init__(*args, **kwargs)
+                self.__inited__ = True
+            except ValueError as get_exception:
+                except_type, except_value, except_traceback = sys.exc_info()
+                regex = r"The HTTP status code was not valid:[\r\n]+status:[ ]+502"
+                result = re.match(regex, str(except_value), flags=re.MULTILINE)
+                if not result:
+                    gp.lprint_var(except_type)
+                    gp.lprint_varx("except_value", str(except_value))
+                    raise(get_exception)
+            BuiltIn().set_global_variable("${REDFISH_SUPPORTED}", self.__inited__)
 
     def login(self, *args, **kwargs):
         r"""
