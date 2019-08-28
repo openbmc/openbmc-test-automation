@@ -268,11 +268,14 @@ def shell_cmd_timed_out(signal_number,
     """
 
     gp.dprint_executing()
+    global command_timed_out
+    command_timed_out = True
     # Get subprocess pid from shell_cmd's call stack.
     sub_proc = gp.get_stack_var('sub_proc', 0)
     pid = sub_proc.pid
-    # Terminate the child process.
-    os.kill(pid, signal.SIGTERM)
+    gp.dprint_var(pid)
+    # Terminate the child process group.
+    os.killpg(pid, signal.SIGKILL)
     # Restore the original SIGALRM handler.
     signal.signal(signal.SIGALRM, original_sigalrm_handler)
 
@@ -287,7 +290,7 @@ def shell_cmd(command_string,
               time_out=None,
               max_attempts=1,
               retry_sleep_time=5,
-              allowed_shell_rcs=[0],
+              valid_rcs=[0],
               ignore_err=None,
               return_stderr=0,
               fork=0):
@@ -312,8 +315,8 @@ def shell_cmd(command_string,
                                     print a standardized error report if the
                                     shell command fails (i.e. if the shell
                                     command returns a shell_rc that is not in
-                                    allowed_shell_rcs).  Note: Error text is
-                                    only printed if ALL attempts to run the
+                                    valid_rcs).  Note: Error text is only
+                                    printed if ALL attempts to run the
                                     command_string fail.  In other words, if
                                     the command execution is ultimately
                                     successful, initial failures are hidden.
@@ -336,7 +339,7 @@ def shell_cmd(command_string,
                                     made to run the command string.
     retry_sleep_time                The number of seconds to sleep between
                                     attempts.
-    allowed_shell_rcs               A list of integers indicating which
+    valid_rcs                       A list of integers indicating which
                                     shell_rc values are not to be considered
                                     errors.
     ignore_err                      Ignore error means that a failure
@@ -359,131 +362,110 @@ def shell_cmd(command_string,
                                     stdout/stderr).
     """
 
+    err_msg = gv.valid_value(command_string)
+    if err_msg:
+        raise ValueError(err_msg)
+
     # Assign default values to some of the arguments to this function.
     quiet = int(gm.dft(quiet, gp.get_stack_var('quiet', 0)))
     print_output = int(gm.dft(print_output, not quiet))
     show_err = int(show_err)
-    global_ignore_err = gp.get_var_value(ignore_err, 1)
-    stack_ignore_err = gp.get_stack_var('ignore_err', global_ignore_err)
-    ignore_err = int(gm.dft(ignore_err, gm.dft(stack_ignore_err, 1)))
+    ignore_err = int(gm.dft(ignore_err, gp.get_stack_var('ignore_err', 1)))
 
-    err_msg = gv.valid_value(command_string)
-    if err_msg != "":
-        raise ValueError(err_msg)
-
-    if not quiet:
-        gp.print_issuing(command_string, test_mode)
-
+    gp.qprint_issuing(command_string, test_mode)
     if test_mode:
-        if return_stderr:
-            return 0, "", ""
-        else:
-            return 0, ""
+        return (0, "", "") if return_stderr else (0, "")
 
+    # Convert a string python dictionary definition to a dictionary.
+    valid_rcs = fa.source_to_object(valid_rcs)
     # Convert each list entry to a signed value.
-    allowed_shell_rcs = fa.source_to_object(allowed_shell_rcs)
-    allowed_shell_rcs = [gm.to_signed(x) for x in allowed_shell_rcs]
+    valid_rcs = [gm.to_signed(x) for x in valid_rcs]
 
-    if return_stderr:
-        stderr = subprocess.PIPE
-    else:
-        stderr = subprocess.STDOUT
+    stderr = subprocess.PIPE if return_stderr else subprocess.STDOUT
 
-    shell_rc = 0
-    out_buf = ""
-    err_buf = ""
-    # Write all output to func_history_stdout rather than directly to stdout.
-    # This allows us to decide what to print after all attempts to run the
-    # command string have been made.  func_history_stdout will contain the
-    # complete stdout history from the current invocation of this function.
-    func_history_stdout = ""
+    # Write all output to func_out_history_buf rather than directly to
+    # stdout.  This allows us to decide what to print after all attempts to
+    # run the command string have been made.  func_out_history_buf will
+    # contain the complete history from the current invocation of this
+    # function.
+    global command_timed_out
+    command_timed_out = False
+    func_out_history_buf = ""
     for attempt_num in range(1, max_attempts + 1):
         sub_proc = subprocess.Popen(command_string,
+                                    preexec_fn=os.setsid,
                                     bufsize=1,
                                     shell=True,
+                                    universal_newlines=True,
                                     executable='/bin/bash',
                                     stdout=subprocess.PIPE,
                                     stderr=stderr)
-        out_buf = ""
-        err_buf = ""
-        # Output from this loop iteration is written to func_stdout for later
-        # processing.
-        func_stdout = ""
         if fork:
-            break
-        command_timed_out = False
-        if time_out is not None:
+            return (0, "", "") if return_stderr else (0, "")
+
+        if time_out:
+            command_timed_out = False
             # Designate a SIGALRM handling function and set alarm.
             signal.signal(signal.SIGALRM, shell_cmd_timed_out)
             signal.alarm(time_out)
         try:
-            if return_stderr:
-                for line in sub_proc.stderr:
-                    try:
-                        err_buf += line
-                    except TypeError:
-                        line = line.decode("utf-8")
-                        err_buf += line
-                    if not print_output:
-                        continue
-                    func_stdout += line
-            for line in sub_proc.stdout:
-                try:
-                    out_buf += line
-                except TypeError:
-                    line = line.decode("utf-8")
-                    out_buf += line
-                if not print_output:
-                    continue
-                func_stdout += line
+            stdout_buf, stderr_buf = sub_proc.communicate()
         except IOError:
             command_timed_out = True
-        sub_proc.communicate()
-        shell_rc = sub_proc.returncode
         # Restore the original SIGALRM handler and clear the alarm.
         signal.signal(signal.SIGALRM, original_sigalrm_handler)
         signal.alarm(0)
-        if shell_rc in allowed_shell_rcs:
+
+        # Output from this loop iteration is written to func_out_buf for
+        # later processing.  This can include stdout, stderr and our own error
+        # messages.
+        func_out_buf = ""
+        if print_output:
+            if return_stderr:
+                func_out_buf += stderr_buf
+            func_out_buf += stdout_buf
+        shell_rc = sub_proc.returncode
+        if shell_rc in valid_rcs:
             break
         err_msg = "The prior shell command failed.\n"
-        if quiet:
-            err_msg += gp.sprint_var(command_string)
-        if command_timed_out:
-            err_msg += gp.sprint_var(command_timed_out)
-            err_msg += gp.sprint_var(time_out)
-            err_msg += gp.sprint_varx("child_pid", sub_proc.pid)
         err_msg += gp.sprint_var(attempt_num)
-        err_msg += gp.sprint_var(shell_rc, gp.hexa())
-        err_msg += gp.sprint_var(allowed_shell_rcs, gp.hexa())
+        err_msg += gp.sprint_vars(command_string, command_timed_out, time_out)
+        err_msg += gp.sprint_varx("child_pid", sub_proc.pid)
+        err_msg += gp.sprint_vars(shell_rc, valid_rcs, fmt=gp.hexa())
         if not print_output:
             if return_stderr:
-                err_msg += "err_buf:\n" + err_buf
-            err_msg += "out_buf:\n" + out_buf
+                err_msg += "stderr_buf:\n" + stderr_buf
+            err_msg += "stdout_buf:\n" + stdout_buf
         if show_err:
-            func_stdout += gp.sprint_error_report(err_msg)
-        func_history_stdout += func_stdout
+            func_out_buf += gp.sprint_error_report(err_msg)
         if attempt_num < max_attempts:
-            func_history_stdout += gp.sprint_issuing("time.sleep("
-                                                     + str(retry_sleep_time)
-                                                     + ")")
-            time.sleep(retry_sleep_time)
+            cmd_buf = "time.sleep(" + str(retry_sleep_time) + ")"
+            if show_err:
+                func_out_buf += gp.sprint_issuing(cmd_buf)
+            exec(cmd_buf)
+        func_out_history_buf += func_out_buf
 
-    if shell_rc not in allowed_shell_rcs:
-        func_stdout = func_history_stdout
-
-    gp.gp_print(func_stdout)
-
-    if shell_rc not in allowed_shell_rcs:
+    if shell_rc in valid_rcs:
+        gp.gp_print(func_out_buf)
+    else:
+        if show_err:
+            gp.gp_print(func_out_history_buf, stream='stderr')
+        else:
+            # There is no error information to show so just print output from
+            # last loop iteration.
+            gp.gp_print(func_out_buf)
         if not ignore_err:
+            # If the caller has already asked to show error info, avoid
+            # repeating that in the failure message.
+            err_msg = "The prior shell command failed.\n" if show_err \
+                else err_msg
             if robot_env:
                 BuiltIn().fail(err_msg)
             else:
-                raise ValueError("The prior shell command failed.\n")
+                raise ValueError(err_msg)
 
-    if return_stderr:
-        return shell_rc, out_buf, err_buf
-    else:
-        return shell_rc, out_buf
+    return (shell_rc, stdout_buf, stderr_buf) if return_stderr \
+        else (shell_rc, stdout_buf)
 
 
 def t_shell_cmd(command_string, **kwargs):
@@ -500,8 +482,7 @@ def t_shell_cmd(command_string, **kwargs):
         gp.print_error_report(error_message)
         exit(1)
 
-    test_mode = gp.get_stack_var('test_mode',
-                                 int(gp.get_var_value(None, 0, "test_mode")))
+    test_mode = int(gp.get_stack_var('test_mode', 0))
     kwargs['test_mode'] = test_mode
 
     return shell_cmd(command_string, **kwargs)
