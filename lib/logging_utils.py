@@ -14,7 +14,11 @@ sys.path.append(base_path + "data/")
 import variables as var
 from robot.libraries.BuiltIn import BuiltIn
 import gen_robot_utils as gru
-gru.my_import_resource("logging_utils.robot")
+try:
+    gru.my_import_resource("logging_utils.robot")
+except Exception as e:
+    if type(e).__name__ != "RobotNotRunningError":
+        raise Exception(e)
 
 
 def print_error_logs(error_logs, key_list=None):

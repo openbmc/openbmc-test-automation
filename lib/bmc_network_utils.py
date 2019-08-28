@@ -76,10 +76,7 @@ def parse_nping_output(output):
     return nping_result
 
 
-openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
-
-
-def nping(host=openbmc_host, parse_results=1, **options):
+def nping(host=None, parse_results=1, **options):
     r"""
     Run the nping command and return the results either as a string or as a dictionary.
 
@@ -116,6 +113,7 @@ def nping(host=openbmc_host, parse_results=1, **options):
                                     command.  Do a 'man nping' for details.
     """
 
+    host = host or BuiltIn().get_variable_value("${OPENBMC_HOST}")
     command_string = gc.create_command_string('nping', host, options)
     rc, output = gc.shell_cmd(command_string, print_output=0, ignore_err=0)
     if parse_results:

@@ -12,10 +12,14 @@ from robot.libraries.BuiltIn import BuiltIn
 
 # Set default values for required IPMI options.
 ipmi_interface = 'lanplus'
-ipmi_cipher_suite = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}", '3')
-ipmi_username = BuiltIn().get_variable_value("${IPMI_USERNAME}", "root")
-ipmi_password = BuiltIn().get_variable_value("${IPMI_PASSWORD}", "0penBmc")
-ipmi_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
+try:
+    ipmi_cipher_suite = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}", '3')
+    ipmi_username = BuiltIn().get_variable_value("${IPMI_USERNAME}", "root")
+    ipmi_password = BuiltIn().get_variable_value("${IPMI_PASSWORD}", "0penBmc")
+    ipmi_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
+except Exception as e:
+    if type(e).__name__ != "RobotNotRunningError":
+        raise Exception(e)
 
 # Create a list of the required IPMI options.
 ipmi_required_options = ['I', 'C', 'U', 'P', 'H']
@@ -132,9 +136,6 @@ def ipmi_setup():
     """
 
     verify_ipmi_user_parm_accepted()
-
-
-ipmi_setup()
 
 
 def process_ipmi_user_options(command):

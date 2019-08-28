@@ -56,19 +56,23 @@ def my_import_resource(path):
 
     """
 
-    # Retrieve the values of all current variables into a dictionary.
-    pre_var_dict = BuiltIn().get_variables()
-    # Do the import.
-    BuiltIn().import_resource(path)
-    # Once again, retrieve the values of all current variables into a
-    # dictionary.
-    post_var_dict = BuiltIn().get_variables()
+    try:
+        # Retrieve the values of all current variables into a dictionary.
+        pre_var_dict = BuiltIn().get_variables()
+        # Do the import.
+        BuiltIn().import_resource(path)
+        # Once again, retrieve the values of all current variables into a
+        # dictionary.
+        post_var_dict = BuiltIn().get_variables()
 
-    # If any variable values were changed due to the prior import, set them
-    # back to their original values.
-    for key, value in post_var_dict.items():
-        if key in pre_var_dict:
-            if value != pre_var_dict[key]:
-                global_var_name = re.sub("[@&]", "$", key)
-                BuiltIn().set_global_variable(global_var_name,
-                                              pre_var_dict[key])
+        # If any variable values were changed due to the prior import, set them
+        # back to their original values.
+        for key, value in post_var_dict.items():
+            if key in pre_var_dict:
+                if value != pre_var_dict[key]:
+                    global_var_name = re.sub("[@&]", "$", key)
+                    BuiltIn().set_global_variable(global_var_name,
+                                                  pre_var_dict[key])
+    except Exception as e:
+        if type(e).__name__ != "RobotNotRunningError":
+            raise Exception(e)
