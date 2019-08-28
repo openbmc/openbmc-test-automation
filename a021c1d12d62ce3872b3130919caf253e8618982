@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ae631bc_c29d64dc",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-28T13:56:51Z",
+      "side": 1,
+      "message": "I think this should go in the README.",
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6666200c_7913b98f",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-28T13:56:51Z",
+      "side": 1,
+      "message": "Maybe README too?",
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f7b1383_10f2bc7c",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-28T13:56:51Z",
+      "side": 1,
+      "message": "I really think this should go in the README, e.g. https://github.com/openbmc/openbmc-test-automation#installation-setup-guide",
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59ba9d6e_8cd30d0e",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-28T13:56:51Z",
+      "side": 1,
+      "message": "I really don\u0027t think we have a 2nd list of features to maintain, I think this should go in the README, e.g. https://github.com/openbmc/openbmc-test-automation#features-of-openbmc-test-automation",
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4471674b_27763282",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-08-28T13:56:51Z",
+      "side": 1,
+      "message": "Some of these are already listed on line 28, why both lists?",
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
