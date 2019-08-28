@@ -19,6 +19,75 @@
     },
     {
       "key": {
+        "uuid": "aa93ebce_a109a33f",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "openbmc automation",
+      "range": {
+        "startLine": 16,
+        "startChar": 12,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc7d402f_7d678cab",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "and report to community whenever possible through issues, IRC or mailing list.",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a7f48d4_58da20b3",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "test",
+      "range": {
+        "startLine": 18,
+        "startChar": 67,
+        "endLine": 18,
+        "endChar": 70
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6666200c_7913b98f",
         "filename": "docs/release_testing.md",
         "patchSetId": 11
@@ -33,6 +102,52 @@
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28b81a43_cc62b0fd",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "this also contributors as well.. since we have Dev as well contributing to test code",
+      "range": {
+        "startLine": 24,
+        "startChar": 30,
+        "endLine": 24,
+        "endChar": 37
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b622d05d_80b9a7ad",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "is derived",
+      "range": {
+        "startLine": 25,
+        "startChar": 18,
+        "endLine": 25,
+        "endChar": 65
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +168,213 @@
     },
     {
       "key": {
+        "uuid": "2cc685ef_9ffadc43",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "BMC",
+      "range": {
+        "startLine": 30,
+        "startChar": 62,
+        "endLine": 31,
+        "endChar": 10
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c8b922f_feb4c0ae",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "This is redundant.. Line 173 Dependencies..\n\nhave it in one place..",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 20
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ab1b000_4cbfa563",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "if any or refer to existing open source or documented else where to refer.",
+      "range": {
+        "startLine": 43,
+        "startChar": 33,
+        "endLine": 43,
+        "endChar": 34
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "625f064e_56ca55a9",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "test community contributors through inviting gerrit code review/IRC or mailing list.",
+      "range": {
+        "startLine": 44,
+        "startChar": 13,
+        "endLine": 44,
+        "endChar": 24
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d16eb1da_e2c8bc9b",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "remove this",
+      "range": {
+        "startLine": 47,
+        "startChar": 39,
+        "endLine": 47,
+        "endChar": 46
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c8306dc_af35685e",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "remove this",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 11
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66500590_780d61f9",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "add more use case variants to",
+      "range": {
+        "startLine": 52,
+        "startChar": 40,
+        "endLine": 53,
+        "endChar": 9
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c27ab4b_72068528",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "remove this",
+      "range": {
+        "startLine": 53,
+        "startChar": 15,
+        "endLine": 53,
+        "endChar": 20
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d464e4f5_89e27261",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "Can u give an example why it shouldnt be..",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 46
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59ba9d6e_8cd30d0e",
         "filename": "docs/release_testing.md",
         "patchSetId": 11
@@ -70,6 +392,362 @@
     },
     {
       "key": {
+        "uuid": "071f042f_bb25d83a",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "This wont be correct",
+      "range": {
+        "startLine": 73,
+        "startChar": 36,
+        "endLine": 73,
+        "endChar": 40
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3653670_a7dd2876",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "Secureboot(image signing/ TPM)  perhaps ?",
+      "range": {
+        "startLine": 81,
+        "startChar": 3,
+        "endLine": 81,
+        "endChar": 13
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33cf7fa6_41f49ea0",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "I wouldnt say they are test type.. u mean to say\n- BMC Interface functions ( REST / Redfish / IPMI ) \n- BMC Web Provisions\n- Host Boot functions\n- Host stress testing\n- Tool testing\netc. something like that perhaps",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 23
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ad50e2f_465e5923",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "metrics",
+      "range": {
+        "startLine": 118,
+        "startChar": 72,
+        "endLine": 118,
+        "endChar": 78
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8593f0b_d23b2794",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "metric doesnt need approval, its a result of the test run.",
+      "range": {
+        "startLine": 119,
+        "startChar": 3,
+        "endLine": 119,
+        "endChar": 11
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "babcb0f3_e154f5c9",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "only when its merged into the openbmc sub repos only it gets into image.. If we test an image it means its there in the repository.\n\nso its understood and we should drop this line",
+      "range": {
+        "startLine": 120,
+        "startChar": 36,
+        "endLine": 121,
+        "endChar": 9
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34b40235_f0b37547",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "There is no way from test we can track this sanely. Its community responsibility to ensure any fucntions they add, they write unit test",
+      "range": {
+        "startLine": 122,
+        "startChar": 3,
+        "endLine": 122,
+        "endChar": 38
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "090f80de_e7d9110b",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "Can u elaborate what this pervasive means ?",
+      "range": {
+        "startLine": 123,
+        "startChar": 7,
+        "endLine": 123,
+        "endChar": 26
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5048ab2_9b1a4ce8",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "Who defines this ? openbmc Release  team ?",
+      "range": {
+        "startLine": 128,
+        "startChar": 11,
+        "endLine": 128,
+        "endChar": 29
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74a0ad4b_fa8000b7",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "is there place where we keep all our test plans for community to access.. If not, can u reword this.",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 28
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b2c3323_0d07d48f",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "can u mention where its opened those defects ? openbmc github or sub repo issues",
+      "range": {
+        "startLine": 142,
+        "startChar": 57,
+        "endLine": 142,
+        "endChar": 63
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "468c4fb0_2dcf1e90",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "Can we drop this",
+      "range": {
+        "startLine": 144,
+        "startChar": 3,
+        "endLine": 144,
+        "endChar": 56
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0feea7c0_3a938241",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "who would document this ? Dev/Test ?",
+      "range": {
+        "startLine": 149,
+        "startChar": 44,
+        "endLine": 149,
+        "endChar": 52
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35ceac9c_5436d862",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "Can u add a new line",
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c2c3394_47af0deb",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "Add Current 2.7 too like above as well ?",
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c8d3c1c_6bbda17b",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "This wont be correct wording.. its more of user setup to run those test continuously as part for DevOps.\n\n## Test Automation Environments\n\nI can live with that ^^^",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 31
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4471674b_27763282",
         "filename": "docs/release_testing.md",
         "patchSetId": 11
@@ -84,6 +762,230 @@
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbf9337f_d0ebc176",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "???? Isnt it understood we need both BMC and Host image.. if not add/mention both BMC and PNOR",
+      "range": {
+        "startLine": 177,
+        "startChar": 3,
+        "endLine": 177,
+        "endChar": 13
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7bfe34db_761318c5",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "I would differ this one.. mentioning UNIT test.. since its a Dev call not a test context",
+      "range": {
+        "startLine": 178,
+        "startChar": 1,
+        "endLine": 178,
+        "endChar": 61
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82d79b54_60fd0d1e",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "ipmitool , \n\n$ ipmitool -V\nipmitool version 1.8.18\n\nu may want to tell version 1.8.18   or higher",
+      "range": {
+        "startLine": 179,
+        "startChar": 3,
+        "endLine": 179,
+        "endChar": 11
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5427de7_02ade481",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "I think it would good to segregate \n\nTooling dependencies vs System Test setup \nto have a clear cut picture of whats needed..",
+      "range": {
+        "startLine": 181,
+        "startChar": 1,
+        "endLine": 182,
+        "endChar": 20
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd6f5bc6_2e086520",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "- SNMP Server\n- Remote Logging Server",
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56e62c08_47116f8d",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "Are we saying sample of test areas to give an idea ?\u003e if so can u add a note saying the bellow or scope examples of test functional area for reference",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 37
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6f411d8_62c9fb37",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "Where is this coming from ?",
+      "range": {
+        "startLine": 191,
+        "startChar": 1,
+        "endLine": 191,
+        "endChar": 9
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8abca6ae_20ebcdbf",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "remove the space and make it same spacing for all",
+      "range": {
+        "startLine": 193,
+        "startChar": 12,
+        "endLine": 193,
+        "endChar": 13
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef0249c_8a836c17",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "remove space",
+      "range": {
+        "startLine": 209,
+        "startChar": 9,
+        "endLine": 209,
+        "endChar": 11
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29a7477a_363121a6",
+        "filename": "docs/release_testing.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-08-28T14:16:53Z",
+      "side": 1,
+      "message": "Redundant Line 188",
+      "range": {
+        "startLine": 227,
+        "startChar": 1,
+        "endLine": 227,
+        "endChar": 107
+      },
+      "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
