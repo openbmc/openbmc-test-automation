@@ -19,8 +19,12 @@ sys.path.append(repo_data_dir_path)
 import gen_robot_keyword as keyword
 import variables as var
 
-BuiltIn().import_resource("state_manager.robot")
-BuiltIn().import_resource("rest_client.robot")
+try:
+    BuiltIn().import_resource("state_manager.robot")
+    BuiltIn().import_resource("rest_client.robot")
+except Exception as e:
+    if type(e).__name__ != "RobotNotRunningError":
+        raise Exception(e)
 
 # We will build eventually the mapping for warm, cold reset as well.
 VALID_STATES = {

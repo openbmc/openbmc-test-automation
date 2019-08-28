@@ -4,10 +4,13 @@ r"""
 This module provides some functions for Secure Boot verification.
 """
 
+import sys, subprocess
+git_root = subprocess.check_output("git rev-parse --show-toplevel",shell=True).strip()
+sys.path.append(git_root.decode('utf-8') + "/lib")
 import bmc_ssh_utils as bsu
 import var_funcs as vf
-from robot.libraries.BuiltIn import BuiltIn
 
+from robot.libraries.BuiltIn import BuiltIn
 
 # Define 'constant' functions.
 def secure_boot_mask():
