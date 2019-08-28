@@ -51,6 +51,9 @@ class redfish_plus(HttpClient):
 
     ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
 
+    def __init__(self):
+        pass
+
     def rest_request(self, func, *args, **kwargs):
         r"""
         Perform redfish rest request and return response.

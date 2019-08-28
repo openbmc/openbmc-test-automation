@@ -14,7 +14,11 @@ import bmc_ssh_utils as bsu
 import var_funcs as vf
 import ipmi_client as ic
 import tempfile
-gru.my_import_resource("ipmi_client.robot")
+try:
+    gru.my_import_resource("ipmi_client.robot")
+except Exception as e:
+    if type(e).__name__ != "RobotNotRunningError":
+        raise Exception(e)
 from robot.libraries.BuiltIn import BuiltIn
 
 

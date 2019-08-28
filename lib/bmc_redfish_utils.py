@@ -16,7 +16,11 @@ class bmc_redfish_utils(object):
         Initialize the bmc_redfish_utils object.
         """
         # Obtain a reference to the global redfish object.
-        self._redfish_ = BuiltIn().get_library_instance('redfish')
+        try:
+            self._redfish_ = BuiltIn().get_library_instance('redfish')
+        except Exception as e:
+            if type(e).__name__ != "RobotNotRunningError":
+                raise Exception(e)
 
     def get_redfish_session_info(self):
         r"""
