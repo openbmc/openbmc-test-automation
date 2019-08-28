@@ -1631,18 +1631,18 @@ def sprint_pgm_header(indent=0,
     buffer += sprint_var(DISPLAY, 0, indent, col1_width)
     PYTHON_VERSION = os.environ.get('PYTHON_VERSION', None)
     if PYTHON_VERSION is not None:
-        buffer += sprint_var(PYTHON_VERSION)
+        buffer += sprint_var(PYTHON_VERSION, 0, indent, col1_width)
     PYTHON_PGM_PATH = os.environ.get('PYTHON_PGM_PATH', None)
     if PYTHON_PGM_PATH is not None:
-        buffer += sprint_var(PYTHON_PGM_PATH)
+        buffer += sprint_var(PYTHON_PGM_PATH, 0, indent, col1_width)
     python_version = sys.version.replace("\n", "")
-    buffer += sprint_var(python_version)
+    buffer += sprint_var(python_version, 0, indent, col1_width)
     ROBOT_VERSION = os.environ.get('ROBOT_VERSION', None)
     if ROBOT_VERSION is not None:
-        buffer += sprint_var(ROBOT_VERSION)
+        buffer += sprint_var(ROBOT_VERSION, 0, indent, col1_width)
     ROBOT_PGM_PATH = os.environ.get('ROBOT_PGM_PATH', None)
     if ROBOT_PGM_PATH is not None:
-        buffer += sprint_var(ROBOT_PGM_PATH)
+        buffer += sprint_var(ROBOT_PGM_PATH, 0, indent, col1_width)
 
     # TODO: Add code to print caller's parms.
 
@@ -1938,9 +1938,10 @@ def get_stack_var(var_name,
                   default="",
                   init_stack_ix=2):
     r"""
-    Starting with the caller's stack level, search upward in the call stack,
+    Starting with the caller's stack level, search upward in the call stack
     for a variable named var_name and return its value.  If the variable
-    cannot be found, return default.
+    cannot be found in the stack, attempt to get the global value.  If the
+    variable still cannot be found, return default.
 
     Example code:
 
@@ -1968,6 +1969,7 @@ def get_stack_var(var_name,
     """
 
     work_around_inspect_stack_cwd_failure()
+    default = get_var_value(var_name=var_name, default=default)
     return next((frame[0].f_locals[var_name]
                  for frame in inspect.stack()[init_stack_ix:]
                  if var_name in frame[0].f_locals), default)
@@ -2153,15 +2155,13 @@ print_func_template = \
 
 qprint_func_template = \
     [
-        "    quiet_default = <mod_qualifier>get_var_value(None, 0, \"quiet\")",
-        "    quiet = <mod_qualifier>get_stack_var(\"quiet\", quiet_default)",
+        "    quiet = <mod_qualifier>get_stack_var(\"quiet\", 0)",
         "    if int(quiet): return"
     ] + print_func_template
 
 dprint_func_template = \
     [
-        "    debug_default = <mod_qualifier>get_var_value(None, 0, \"debug\")",
-        "    debug = <mod_qualifier>get_stack_var(\"debug\", debug_default)",
+        "    debug = <mod_qualifier>get_stack_var(\"debug\", 0)",
         "    if not int(debug): return"
     ] + print_func_template
 
