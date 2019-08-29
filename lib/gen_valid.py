@@ -6,7 +6,6 @@ etc.
 """
 
 import os
-import re
 import gen_print as gp
 import gen_cmd as gc
 import func_args as fa
@@ -388,7 +387,7 @@ def valid_dir_path(var_value, *args, **kwargs):
     if not os.path.isdir(str(var_value)):
         var_name = get_var_name(*args, **kwargs)
         error_message += "The following directory does not exist:\n"
-        error_message += gp.sprint_varx(var_name, var_value)
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank())
 
     return process_error_message(error_message)
 
@@ -405,7 +404,7 @@ def valid_file_path(var_value, *args, **kwargs):
     if not os.path.isfile(str(var_value)):
         var_name = get_var_name(*args, **kwargs)
         error_message += "The following file does not exist:\n"
-        error_message += gp.sprint_varx(var_name, var_value)
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank())
 
     return process_error_message(error_message)
 
@@ -423,7 +422,7 @@ def valid_path(var_value, *args, **kwargs):
     if not (os.path.isfile(str(var_value)) or os.path.isdir(str(var_value))):
         var_name = get_var_name(*args, **kwargs)
         error_message += "Invalid path (file or directory does not exist):\n"
-        error_message += gp.sprint_varx(var_name, var_value)
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank())
 
     return process_error_message(error_message)
 
@@ -586,7 +585,7 @@ def valid_program(var_value, *args, **kwargs):
         var_name = get_var_name(*args, **kwargs)
         error_message += "The following required program could not be found"
         error_message += " using the $PATH environment variable:\n"
-        error_message += gp.sprint_varx(var_name, var_value)
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank())
         PATH = os.environ.get("PATH", "").split(":")
         error_message += "\n"
         error_message += gp.sprint_var(PATH)
