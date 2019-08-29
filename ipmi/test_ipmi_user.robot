@@ -149,6 +149,9 @@ Verify Setting Valid Password For IPMI User
     # Enable IPMI user
     Run IPMI Standard Command  user enable ${random_userid}
 
+    # Delay added for IPMI user to get enable
+    Sleep  5s
+
     # Set admin privilege and enable IPMI messaging for newly created user
     Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
 
