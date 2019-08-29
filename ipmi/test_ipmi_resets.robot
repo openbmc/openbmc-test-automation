@@ -23,7 +23,7 @@ Test IPMI Cold Reset
     [Documentation]  Check IPMI cold reset and wait for BMC to become online.
     [Tags]  Test_IPMI_Cold_Reset
 
-    Repeat Keyword  ${LOOP_COUNT} times  IPMI MC Reset Cold (off)
+    Repeat Keyword  ${LOOP_COUNT} times  IPMI MC Reset Cold (run)
 
 
 Verify BMC Power Cycle via IPMI
