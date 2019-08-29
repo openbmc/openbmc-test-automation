@@ -23,6 +23,32 @@ Verify AccountService Available
     ${resp} =  Redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
     Should Be Equal As Strings  ${resp}  ${True}
 
+Verify Redfish User Persistence After Reboot
+    [Documentation]  Verify Redfish user persistence after reboot.
+    [Tags]  Verify_Redfish_User_Persistence_After_Reboot
+
+    # Create Redfish users.
+    Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
+    Redfish Create User  operator_user  TestPwd123  Operator        ${True}
+    Redfish Create User  user_user      TestPwd123  User            ${True}
+    Redfish Create User  callback_user  TestPwd123  Callback        ${True}
+
+    # Reboot BMC.
+    Redfish OBMC Reboot (off)  stack_mode=normal
+    Redfish.Login
+
+    # Verify users after reboot.
+    Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
+    Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
+    Redfish Verify User  user_user      TestPwd123  User            ${True}
+    Redfish Verify User  callback_user  TestPwd123  Callback        ${True}
+
+    # Delete created users.
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}operator_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}callback_user
+
 Redfish Create and Verify Users
     [Documentation]  Create Redfish users with various roles.
     [Tags]  Redfish_Create_and_Verify_Users
@@ -67,31 +93,6 @@ Verify User Creation Without Enabling It
     user_user      TestPwd123  User            ${False}
     callback_user  TestPwd123  Callback        ${False}
 
-Verify Redfish User Persistence After Reboot
-    [Documentation]  Verify Redfish user persistence after reboot.
-    [Tags]  Verify_Redfish_User_Persistence_After_Reboot
-
-    # Create Redfish users.
-    Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
-    Redfish Create User  operator_user  TestPwd123  Operator        ${True}
-    Redfish Create User  user_user      TestPwd123  User            ${True}
-    Redfish Create User  callback_user  TestPwd123  Callback        ${True}
-
-    # Reboot BMC.
-    Redfish OBMC Reboot (off)  stack_mode=normal
-    Redfish.Login
-
-    # Verify users after reboot.
-    Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
-    Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
-    Redfish Verify User  user_user      TestPwd123  User            ${True}
-    Redfish Verify User  callback_user  TestPwd123  Callback        ${True}
-
-    # Delete created users.
-    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
-    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}operator_user
-    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
-    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}callback_user
 
 Verify User Creation With Invalid Role Id
     [Documentation]  Verify user creation with invalid role ID.
@@ -312,7 +313,7 @@ Redfish Create User
     ...  ELSE
     ...    Redfish.Login  ${username}  ${password}
 
-    Run Keyword If  ${enabled} == False
+    Run Keyword If  ${enabled} == ${False}
     ...  Redfish.Login
 
     # Validate Role ID of created user.
