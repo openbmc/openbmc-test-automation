@@ -8,11 +8,21 @@ Submitting changes via Gerrit server
 -   Reference [OpenBMC CLA signers](https://github.com/openbmc/openbmc-tools/blob/master/emilyshaffer/cla-signers/cla-signers)
 -   Reference [OpenBMC docs](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server)
 
+Links
+-----
+
+- [Redfish Coding Guidelines](docs/redfish_coding_guidelines.md)
+
 Robot Coding Guidelines
 -----------------------
 -   For this project, we will write Robot keyword definitions in either Robot
     or Python.  Robot code should be quite simple.  Therefore, if the algorithm
     in question is the least bit complex, please write it in Python.
+
+    See the following for support on writing most keywords in python.
+      - [Quit Writing Ugly Robot Code](https://esalagea.wordpress.com/2014/11/24/robot-framework-quit-writing-ugly-robot-code-just-write-proper-python/)
+      - [Robot Dos and Don'ts](https://www.slideshare.net/pekkaklarck/robot-framework-dos-and-donts)
+
 -   Observe a maximum line length of 110 characters.
 -   Avoid trailing space at the end of any line of Robot code.
 -   Avoid the use of tabs.
@@ -44,7 +54,7 @@ Robot Coding Guidelines
       ...    Run Keywords  Key1  parms
       ...    AND  Key2  parms
       ```
--   Use spaces to make conditions more readable:
+-   Use single spaces to make conditions more readable:
 
     Correct example:
     ```
@@ -79,7 +89,7 @@ Robot Coding Guidelines
     soisthis
 
         # This keyword name is incorrect because of 1) a failure to
-        # separate words with spaces and 2) a failure to capitalize
+        # separate words with single spaces and 2) a failure to capitalize
         # each word in the keyword.
 
     BMC Is An Acronym
@@ -148,14 +158,25 @@ Robot Coding Guidelines
         ```
         Get URL List
             [Documentation]  Return list of URLs under given URL.
-            [Arguments]  ${openbmc_url}  ${policy}
+            [Arguments]  ${openbmc_url}  ${policy}   ${verify}
 
             # Description of argument(s):
             # openbmc_url  URL for list operation (e.g.
             #              "/xyz/openbmc_project/inventory").
             # policy       Power restore policy (e.g "RESTORE_LAST_STATE",
-            #              ${RESTORE_LAST_STATE}).
+            #              ${RESTORE_LAST_STATE}, etc.).
+            # verify       Verify the results (${TRUE}/${FALSE}).
         ```
+        Additional rules for example text in descriptions:
+        - Put parentheses around your examples.  Leave one space prior to the
+          left parenthesis.
+        - Use "e.g." (which effectively means "for example") to set introduce
+          your examples.
+        - Quote string examples.
+        - Include ", etc." after multiple examples.
+        - For cases where you're providing an complete list of possible values
+          (${TRUE}/${FALSE} or "PASS"/"FAIL"), do NOT use "e.g." and do NOT
+          use "etc.".  Separate such values with a slash.
 -   Variable assignments:
 
     When assigning a variable as output from a keyword, do not precede the
@@ -173,7 +194,7 @@ Robot Coding Guidelines
     ${var1} =  My Keyword
     ```
 -   General variable naming conventions:
-    -   Variable names should be lower case with few exceptions:
+    -   Variable names should be lower case with few exceptions (listed here):
         -   Environment variables should be all upper case.
         -   Variables intended to be set by Robot -v parameters may be all
             upper case.
@@ -189,6 +210,55 @@ Robot Coding Guidelines
         ${HostName}
         ${ProgramPid}
         ```
+    -   Use good judgement in choosing variable names that are neither way too
+        short nor way too long.
+
+        Correct examples:
+        ```
+        ${host_name}
+        ${program_pid}
+        ```
+        Incorrect examples:
+        ```
+        ${HostName}
+        ${ProgramPid}
+        ```
+    -   Avoid having the variable's type as a suffix portion of the name:
+
+        Incorrect examples:
+        ```
+        ${inventory_dict}
+        ${led_list}
+        ```
+
+        Incorrect examples:
+        ```
+        ${inventory}
+        # Use plural name to indicate that it is a list.
+        ${leds}
+        ```
+
+        A possible exception to this rule is when your keyword or function has
+        an ongoing need to refer to one piece of data in more than one format
+        (e.g. date_str, date_epoch, etc.).
+
+    -   Consistency of variable names:
+
+        Try to avoid referring to the same data entity by multiple different
+        names.  It creates a lot of confusion for the reader.
+
+        Incorrect example:
+        ```
+        # Why call the receiving variable rc (return code) when the keyword is
+        # supposed to return status.
+        ${rc}=  Run Keyword And Return Status  Bla Bla
+        ```
+
+        Correct example:
+        ```
+        ${status}=  Run Keyword And Return Status  Bla Bla
+        ```
+
 -   Special variable naming conventions.
 
     For certain very commonly used kinds of variables, please observe these
@@ -197,7 +267,7 @@ Robot Coding Guidelines
     -   hosts
 
         When a variable is intended to contain **either** an IP address **or**
-        a host name (either long or short), please give it a suffix of "_host".
+        a host name (whether long or short), please give it a suffix of "_host".
 
         Examples:
         ```
@@ -251,7 +321,7 @@ Robot Coding Guidelines
                 ```
             -   If your variable is to contain the path to a file, use a suffix of
                 _file_path.  Bear in mind that a file path can be relative or
-                absolute so that should not be a consideration in whether to use
+                absolute, so that should not be a consideration in whether to use
                 the "_file_path" suffix.
 
                 Examples:
@@ -283,7 +353,7 @@ Robot Coding Guidelines
                 ```
             -   If your variable is to contain the path to a directory, use a
                 suffix of _dir_path.  Bear in mind that a dir path can be
-                relative or absolute so that should not be a consideration in
+                relative or absolute, so that should not be a consideration in
                 whether to use _dir_path.
 
                 Examples:
@@ -371,9 +441,11 @@ Robot Coding Guidelines
 
 Python Coding Guidelines
 -----------------------
--   The minimum required Python version is 2.7.x.
--   Run pycodestyle on all Python files and correct errors to follow the guidelines in
-    https://www.python.org/dev/peps/pep-0008/.  Note that when python code is checked into gerrit, pycodestyle is run automatically on it.
+-   The minimum required Python version is 2.7.x.  In the very near future, we
+    will stop supporting python 2 and will require python 3.
+-   Run pycodestyle on all Python files and correct errors to follow the
+    guidelines in https://www.python.org/dev/peps/pep-0008/.  Note that when
+    python code is checked into gerrit, pycodestyle is run automatically on it.
 
     Example as run from a Linux command line:
     ```
@@ -457,8 +529,8 @@ Python Coding Guidelines
 
             # The doc string above is not phrased as a command.
         ```
-    -   Doc strings should begin with a summary line which one terse, descriptive sentence.
-        Put additional commentary below.
+    -   Doc strings should begin with a summary line which is one terse,
+        descriptive sentence.  Put additional commentary below.
 
         Correct example:
         ```
@@ -480,10 +552,10 @@ Python Coding Guidelines
             fail if there is no running system console process.
             """
 
-            # This doc string is way too long.
+            # This summary is way too long.
         ```
 -   General variable naming conventions:
-    -   Variable names should be lower case with few exceptions:
+    -   Variable names should be lower case with few exceptions (listed here):
         -   Environment variables should be all upper case.
     -   Words within a variable name should be separated by underscores:
 
@@ -559,7 +631,7 @@ Python Coding Guidelines
             ```
         -   If your variable is to contain the path to a file, use a suffix of
             _file_path.  Bear in mind that a file path can be relative or
-            absolute so that should not be a consideration in whether to use
+            absolute, so that should not be a consideration in whether to use
             the "_file_path" suffix.
 
             Examples:
@@ -591,7 +663,7 @@ Python Coding Guidelines
             ```
         -   If your variable is to contain the path to a directory, use a
             suffix of _dir_path.  Bear in mind that a dir path can be
-            relative or absolute so that should not be a consideration in
+            relative or absolute so, that should not be a consideration in
             whether to use _dir_path.
 
             Examples:
@@ -634,8 +706,8 @@ Python Coding Guidelines
     -   Do not keep commented-out code in your program.  Instead, remove it
         entirely.
 
-Template Usage Guidelines
--------------------------
+Template Usage Requirements
+---------------------------
 We have several templates in the templates/ sub-directory. If there is a
 template that applies to your programming situation (Python, bash, etc.),
 it should be used to create new programs as in the following example
@@ -644,25 +716,25 @@ it should be used to create new programs as in the following example
 
     ```
     $ cd templates
-    $ cp python_pgm_template ../bin/my_new_program.py
+    $ cp python_pgm_template] ../bin/my_new_program.py
     ```
 
 These templates have much of your preliminary work done for you and will help
 us all follow a similar structure.
 
+See [python_pgm_template](templates/python_pgm_template) as an example.
+
 - Features:
     - Help text and arg parsing started for you.
     - Support for "stock" parameters like "quiet", "debug", "test_mode".
-    - "exit_function" and "signal_handler" defined.
-    - "validate_parms" function pre-created.
+    - "exit_function" pre-defined.
+    - "validate_parms" function pre-defined.
     - "main" function follows conventional startup sequence:
 
         ```
-            if not gen_get_options(parser, stock_list):
-                return False
+            gen_get_options(parser, stock_list)
 
-            if not validate_parms():
-                return False
+            validate_parms()
 
             qprint_pgm_header()
 
