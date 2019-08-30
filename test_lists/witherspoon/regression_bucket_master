@@ -46,7 +46,6 @@
 -i Test_IPMI_No_Access_Privilege_Level
 -i Enable_IPMI_User_And_Verify
 -i Disable_IPMI_User_And_Verify
--i Verify_Administrator_And_No_Access_Privilege_For_Different_Channels
 -i Verify_Operator_And_User_Privilege_For_Different_Channels
 -i Redfish_Create_and_Verify_Users
 -i Verify_Login_with_Deleted_Redfish_Users
