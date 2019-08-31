@@ -5,6 +5,8 @@ Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/resource.robot
 Resource          ../lib/boot_utils.robot
+Resource          ../lib/boot_utils.robot
+Resource          ../lib/bmc_redfish_resource.robot
 
 Suite Setup      Suite Setup Execution
 Test Teardown    Post Test Case Execution
@@ -22,6 +24,7 @@ Poll BMC For Errors
     ...  exist.
     [Tags]  Poll_BMC_For_Errors
 
+    Redfish.Login
     Repeat Keyword  ${POLL_DURATION}
     ...  Run Keywords  Enumerate Sensors And Check For Errors
     ...  AND  Sleep  ${POLL_INTERVAL}
@@ -31,8 +34,7 @@ Poll BMC For Errors
 Enumerate Sensors And Check For Errors
     [Documentation]  Enumerate and check if there is any error reported.
 
-    ${resp}=  OpenBMC Get Request  /xyz/openbmc_project/sensors/
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    Redfish.Get  /redfish/v1/Chassis/chassis/Sensors
 
     Error Logs Should Not Exist
 
@@ -47,14 +49,16 @@ Suite Setup Execution
     Should Not Be Empty
     ...  ${OS_PASSWORD}  msg=You must provide OS host user password.
 
-    # Boot to OS.
-    REST Power On
+    Redfish.Login
+    Redfish Power On
 
     Delete Error Logs
     Error Logs Should Not Exist
+
 
 Post Test Case Execution
     [Documentation]  Do the post test teardown.
     ...  1. Capture FFDC on test failure.
 
     FFDC On Test Case Fail
+    Redfish.Logout
