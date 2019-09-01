@@ -593,3 +593,23 @@ Set ApplyTime
     ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
     Valid Value  apply_time  valid_values=["xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.${policy}"]
     Rprint Vars  apply_time
+
+
+Get Image Version From TFTP Server
+    [Documentation]  Get the version dfound in the MANIFEST file of
+    ...              an image on the given TFTP server.
+    [Arguments]  ${tftp_server_ip}  ${tftp_image_file_name}
+
+    # Description of argument(s):
+    # tftp_server_ip   The server ip.
+    # tftp_image_file_name  The file name of the image.
+
+    ${stripped_file_path}=  Strip String  ${tftp_image_file_name}  characters=/
+    ${rc}=  OperatingSystem.Run And Return RC
+    ...  curl -s tftp://${tftp_server_ip}/${stripped_file_path} > tftp_image.tar
+    Should Be Equal As Integers  0  ${rc}
+    ...  msg=Could not download image to check version.
+    ${version}=  Get Version Tar  tftp_image.tar
+    OperatingSystem.Remove File  tftp_image.tar
+    [Return]  ${version}
+
