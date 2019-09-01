@@ -1,15 +1,18 @@
 *** Settings ***
-Documentation  BMC and PNOR update utilities keywords.
+Documentation   BMC and PNOR update utilities keywords.
 
-Library     code_update_utils.py
-Library     OperatingSystem
-Library     String
-Library     utilities.py
-Library     gen_robot_valid.py
-Variables   ../data/variables.py
-Resource    boot_utils.robot
-Resource    rest_client.robot
-Resource    openbmc_ffdc.robot
+Library         code_update_utils.py
+Library         OperatingSystem
+Library         String
+Library         utilities.py
+Library         gen_robot_valid.py
+Variables       ../data/variables.py
+Resource        boot_utils.robot
+Resource        rest_client.robot
+Resource        openbmc_ffdc.robot
+
+*** Variables ***
+${ignore_err}    ${0}
 
 *** Keywords ***
 
@@ -593,3 +596,21 @@ Set ApplyTime
     ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
     Valid Value  apply_time  valid_values=["xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.${policy}"]
     Rprint Vars  apply_time
+
+
+Get Image Version From TFTP Server
+    [Documentation]  Get and return the image version
+    ...  from the TFTP server.
+    [Arguments]  ${server_host}  ${image_file_name}
+
+    # Description of argument(s):
+    # server_host   The host name or IP address of the TFTP server.
+    # image_file_name  The file name of the image.
+
+    Shell Cmd
+    ...  curl -s tftp://${server_host}/${image_file_name} > tftp_image.tar
+    ${version}=  Get Version Tar  tftp_image.tar
+    OperatingSystem.Remove File  tftp_image.tar
+
+    [Return]  ${version}
+
