@@ -12,10 +12,9 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_select_certificate_management}  //a[@href='#/configuration/certificate']
-${xpath_select_server_configuration}    //*[@id="nav__top-level"]/li[4]/button
-${xpath_add_certificate_button}         //button[text() ="Add new certificate"]
-
+${xpath_select_certificate_management}  //a[@href='#/access-control/ssl-certificates']
+${xpath_select_access_control}          //*[@id="nav__top-level"]/li[5]/button
+${xpath_add_certificate_button}         //*[contains(text(), "Add new certificate")]
 
 *** Test Cases ***
 
@@ -41,7 +40,7 @@ Test Setup Execution
    [Documentation]  Do test case setup tasks.
 
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
-    Click Element  ${xpath_select_server_configuration}
+    Click Element  ${xpath_select_access_control}
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Click Element  ${xpath_select_certificate_management}
     Wait Until Page Contains  SSL certificates
