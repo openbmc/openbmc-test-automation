@@ -7,7 +7,7 @@ Library      Collections
 Library      DateTime
 Library      XvfbRobot
 Library      OperatingSystem
-Library      Selenium2Library  120  120
+Library      SeleniumLibrary
 Library      AngularJSLibrary
 Library      SSHLibrary  30 Seconds
 Library      Process
