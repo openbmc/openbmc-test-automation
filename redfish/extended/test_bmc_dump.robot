@@ -155,10 +155,7 @@ Dump Out Of Space Test
     # Systems typically hold 8-14 dumps before running out of dump space.
     # Attempt to create too_many_dumps.  Expect to run out of space
     # before this.
-    ${too_many_dumps}  Set Variable  ${100}
-
-    # Should be able to create at least this many dumps.
-    ${minimum_number_of_dumps}   Set Variable  ${7}
+    ${too_many_dumps}  Set Variable  ${20}
 
     # Loop, creating a dump each iteration.  Will either get dump_id or
     # will get EMPTY when out of dump space.
@@ -169,9 +166,6 @@ Dump Out Of Space Test
 
     Run Keyword If  '${dump_id}' != '${EMPTY}'  Fail
     ...  msg=Did not run out of dump space as expected.
-
-    Run Keyword If  ${n} < ${minimum_number_of_dumps}  Fail
-    ...  msg=Insufficient space for at least ${minimum_number_of_dumps} dumps.
 
 
 Post Dump BMC Performance Test

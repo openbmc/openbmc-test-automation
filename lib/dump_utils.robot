@@ -26,8 +26,9 @@ Create User Initiated Dump
     ...  ${DUMP_URI}action/CreateDump  data=${data}  quiet=${1}
 
     Run Keyword If  '${check_out_of_space}' == '${False}'
-    ...  Run Keyword And Return  Get The Dump Id  ${resp}
-    ...  ELSE   Run Keyword And Return  Check For Too Many Dumps  ${resp}
+    ...      Run Keyword And Return  Get The Dump Id  ${resp}
+    ...  ELSE
+    ...      Run Keyword And Return  Check For Too Many Dumps  ${resp}
 
 
 Get The Dump Id
