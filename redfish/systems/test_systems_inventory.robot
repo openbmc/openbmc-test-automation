@@ -125,6 +125,26 @@ Get Motherboard Serial And Verify Populated
     ...  ${REDFISH_CHASSIS_URI}motherboard  SerialNumber
     Valid Value  serial_number
     Rprint Vars  serial_number
+ 
+
+Get Motherboard Manufacturer and Verify Populated
+    [Documentation]  Check that the Motherboard manufacturer is non-blank.
+    [Tags]  Get_Motherboard_Manufacturer_And_Verify_Populated
+
+    ${manufacturer}=  Redfish.Get Attribute
+    ...  ${REDFISH_CHASSIS_URI}motherboard  Manufacturer
+    Valid Value  manufacturer
+    Rprint Vars  manufacturer
+
+
+Get Motherboard Partnumber and Verify Populated
+    [Documentation]  Check that the Motherboard Partnumber is non-blank.
+    [Tags]  Get_Motherboard_Partnumber_And_Verify_Populated
+
+    ${part_number}=  Redfish.Get Attribute
+    ...  ${REDFISH_CHASSIS_URI}motherboard  PartNumber
+    Valid Value  part_number
+    Rprint Vars  part_number
 
 
 Check GPU States When Power On
