@@ -272,7 +272,7 @@ GUI Power On
     [Documentation]  Power on the host using GUI.
 
     Controller Server Power Click Button  power__power-on
-    Page Should Contain  Running
+    Wait Until Page Contains  Running   timeout=30s
 
 Verify Display Content
     [Documentation]  Verify text content display.
