@@ -127,6 +127,24 @@ Get Motherboard Serial And Verify Populated
     Rprint Vars  serial_number
 
 
+Verify Motherboard Manufacturer Field Value Populated
+    [Documentation]  Check that the Motherboard manufacturer is non-blank.
+    [Tags]  Verify_Motherboard_Manufacturer_Field_Value_Populated
+
+    ${motherboard_manufacturer}=  Redfish.Get Attribute
+    ...  ${REDFISH_CHASSIS_URI}motherboard  Manufacturer
+    Valid Value  motherboard_manufacturer
+
+
+Verify Motherboard Partnumber Field Value Populated
+    [Documentation]  Check that the Motherboard partnumber is non-blank.
+    [Tags]  Verify_Motherboard_Partnumber_Field_Value_Populated
+
+    ${motherboard_part_number}=  Redfish.Get Attribute
+    ...  ${REDFISH_CHASSIS_URI}motherboard  PartNumber
+    Valid Value  motherboard_part_number
+
+
 Check GPU States When Power On
     [Documentation]  Check the State of each of the GPUs
     ...              in the system.  A system may have 0-6 GPUs.
