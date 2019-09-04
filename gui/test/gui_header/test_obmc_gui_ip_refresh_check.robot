@@ -12,9 +12,9 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 ${xpath_bmc_ip}                 //*[contains(@class, "header__server-ip")]
-${xpath_select_refresh_button}  //*[contains(@class, "header__page-refresh")]
-${xpath_select_date_text}       //p[@class="header__refresh"]
-${xpath_header_scroll}          //*[@class="header__info"]
+${xpath_select_refresh_button}  //*[text()[contains(.,"Refresh")]]
+${xpath_select_date_text}       //*[@class="header__refresh"]
+${xpath_header_scroll}          //*[contains(@class,"header__action")]
 
 *** Test Cases ***
 
@@ -24,7 +24,7 @@ Verify Server Power Button
 
     Wait Until Element Is Visible   ${xpath_select_server_power}
     Click Element  ${xpath_select_server_power}
-    Wait Until Page Contains  Select a power operation
+    Wait Until Page Contains  Server power operations
 
 Verify Server Health Button
     [Documentation]  Verify server health page on clicking server health button.
@@ -42,7 +42,6 @@ Verify IP address
     #       (e.g. "machinex" or "xx.xx.xx.xx").
     ${gui_displayed_ip}=  Get Text  ${xpath_bmc_ip}
     Should Contain  ${gui_displayed_ip}  ${OPENBMC_HOST}
-
 
 Verify Refresh Button
     [Documentation]  Verify Refresh Button in GUI header.
@@ -66,7 +65,7 @@ Verify Date Last Refreshed
     ${date_info_1st_read}=  Get Text  ${xpath_select_date_text}
     Should Not Be Empty  ${date_info_1st_read}
     ${current_date}=  Get Time
-    ${date_conversion}=  Convert Date  ${current_date}  result_format=%b %d %Y
+    ${date_conversion}=  Convert Date  ${current_date}  result_format=%b %-d %Y
 
     ${mmmdd}  ${yyyy}=  Split String From Right  ${date_conversion}  ${SPACE}  1
     Should Contain  ${date_info_1st_read}  ${mmmdd}  msg=Month and day mismatch.
@@ -78,7 +77,7 @@ Verify Date Last Refreshed
 
     ${date_info_2nd_read}=  Get Text  ${xpath_select_date_text}
     ${current_date}=  Get Time
-    ${date_conversion}=  Convert Date  ${current_date}  result_format=%b %d %Y
+    ${date_conversion}=  Convert Date  ${current_date}  result_format=%b %-d %Y
 
     ${mmmdd}  ${yyyy}=  Split String From Right  ${date_conversion}  ${SPACE}  1
     Should Contain  ${date_info_1st_read}  ${mmmdd}  msg=Month and day mismatch.
