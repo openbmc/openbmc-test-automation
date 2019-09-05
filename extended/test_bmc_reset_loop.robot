@@ -18,7 +18,7 @@ Suite Setup     Suite Setup Execution
 ${LOOP_COUNT}    ${50}
 
 # Error strings to check from journald.
-${ERROR_REGEX}     SEGV|core-dump
+${ERROR_REGEX}     SEGV|core-dump|FAILURE|Failed to start
 
 *** Test Cases ***
 
@@ -74,7 +74,7 @@ BMC REST Reset Cycle
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
     ${bmc_version_after}=  Get BMC Version
     Should Be Equal  ${bmc_version_before}  ${bmc_version_after}
-    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}
+    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
     Verify BMC RTC And UTC Time Drift
     Field Mode Should Be Enabled
 
