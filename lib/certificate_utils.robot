@@ -148,3 +148,14 @@ Check If Openssl Tool Exist
     ${rc}  ${output}=  Run And Return RC and Output  which openssl
     Should Not Be Empty  ${output}  msg=Openssl tool not installed.
 
+
+Verify Certificate Visible Via OpenSSL
+    [Documentation]  Checks if given certificate is visible via openssl's showcert command.
+    [Arguments]  ${cert_file_path}
+
+    # Description of argument(s):
+    # cert_file_path           Certificate file path.
+
+    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
+    ${openssl_cert_content}=  Get Certificate Content From BMC Via Openssl
+    Should Contain  ${cert_file_content}  ${openssl_cert_content}

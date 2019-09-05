@@ -205,18 +205,6 @@ Replace Certificate Via Redfish
     ...    Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
 
 
-Verify Certificate Visible Via OpenSSL
-    [Documentation]  Checks if given certificate is visible via openssl's showcert command.
-    [Arguments]  ${cert_file_path}
-
-    # Description of argument(s):
-    # cert_file_path           Certificate file path.
-
-    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
-    ${openssl_cert_content}=  Get Certificate Content From BMC Via Openssl
-    Should Contain  ${cert_file_content}  ${openssl_cert_content}
-
-
 Delete Certificate Via BMC CLI
     [Documentation]  Delete certificate via BMC CLI.
     [Arguments]  ${cert_type}
