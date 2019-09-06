@@ -16,10 +16,10 @@ ${xpath_inventory_export}  //a[contains(text(), "Export")]
 ${xpath_inventory_search}  //*[@id="content__search-input"]
 ${xpath_inventory_search_button}  //*[@id="content__search-submit"]
 ${xpath_inventory_search_text_clear}  //button[@class='clear-input']
-${xpath_bmc_expand}  //*[@id="inventory-categories"]/div[5]/button
-${xpath_system_expand}  //*[@id="inventory-categories"]/div[2]/button
-${xpath_motherboard_expand}  //*[@id="inventory-categories"]/div[4]/button
-${xpath_chassis_expand}  //*[@id="inventory-categories"]/div[3]/button
+${xpath_bmc_expand}  //h4[text()="bmc"]//following::button[1]
+${xpath_system_expand}  //h4[text()="system"]//following::button[1]
+${xpath_motherboard_expand}  //h4[text()="motherboard"]//following::button[1]
+${xpath_chassis_expand}  //h4[text()="chassis"]//following::button[1]
 
 *** Test Cases ***
 
@@ -74,8 +74,8 @@ Verify System Inventory Expand
     # xpath_hardware_item
     ${xpath_system_expand}
     ${xpath_chassis_expand}
-    ${xpath_bmc_expand}
     ${xpath_motherboard_expand}
+    ${xpath_bmc_expand}
 
 *** Keywords ***
 
@@ -94,5 +94,4 @@ Verify Hardware Inventory Expand
    # Description of argument(s):
    # xpath_hardware_item    Hardware inventory item to be expand. e.g. fan.
 
-   Page Should Contain Element  ${xpath_hardware_item}
-   Click Element  ${xpath_hardware_item}
+   Click Button  ${xpath_hardware_item}
