@@ -16,10 +16,10 @@ ${xpath_inventory_export}  //a[contains(text(), "Export")]
 ${xpath_inventory_search}  //*[@id="content__search-input"]
 ${xpath_inventory_search_button}  //*[@id="content__search-submit"]
 ${xpath_inventory_search_text_clear}  //button[@class='clear-input']
-${xpath_bmc_expand}  //*[@id="inventory-categories"]/div[5]/button
-${xpath_system_expand}  //*[@id="inventory-categories"]/div[2]/button
-${xpath_motherboard_expand}  //*[@id="inventory-categories"]/div[4]/button
-${xpath_chassis_expand}  //*[@id="inventory-categories"]/div[3]/button
+${xpath_bmc_expand}  //p[text()="bmc"]//following::button[1]
+${xpath_system_expand}  //p[text()="system"]//following::button[1]
+${xpath_motherboard_expand}  //p[text()="motherboard"]//following::button[1]
+${xpath_chassis_expand}  //p[text()="chassis"]//following::button[1]
 
 *** Test Cases ***
 
