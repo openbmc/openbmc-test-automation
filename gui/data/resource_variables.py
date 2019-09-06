@@ -8,7 +8,7 @@ menus.
 
 class resource_variables():
 
-    xpath_textbox_hostname = "//input[@id='host']"
+    xpath_textbox_hostname = "//input[@ng-model='host']"
     xpath_textbox_username = "//input[@id='username']"
     xpath_textbox_password = "//input[@id='password']"
     xpath_button_login = "//*[@id='login__submit']"
