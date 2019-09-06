@@ -1241,6 +1241,8 @@ def sprint_varx(var_name,
                 loc_var_name = re.sub(r".*\[", "[", var_name)
             else:
                 loc_var_name = var_name
+            if (fmt & strip_brackets()):
+                loc_var_name = re.sub(r"[\[\]]", "", loc_var_name)
             format_string = "%" + str(indent) + "s%s\n"
             buffer = format_string % ("", loc_var_name + ":")
             if fmt & show_type():
