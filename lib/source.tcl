@@ -1,9 +1,9 @@
 # This file is an aid in sourcing other tcl files.  It provides the following
 # advantages:
 # - It shortens the number of lines of code needed to intelligently source
-# files.
+#   files.
 # - Its my_source procedure provides several benefits (see my_source prolog
-# below).
+#   below).
 
 # By convention, this file, or a link to this file, must exist in one of the
 # directories named in the PATH environment variable.
