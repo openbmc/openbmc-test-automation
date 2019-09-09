@@ -7,6 +7,7 @@ Resource          ../lib/resource.robot
 Resource          ../lib/boot_utils.robot
 Resource          ../lib/boot_utils.robot
 Resource          ../lib/bmc_redfish_resource.robot
+Resource          ../lib/esel_utils.robot
 
 Suite Setup      Suite Setup Execution
 Test Teardown    Post Test Case Execution
@@ -16,6 +17,11 @@ Test Teardown    Post Test Case Execution
 # Default duration and interval of test to run.
 ${POLL_DURATION}  48 hours
 ${POLL_INTERVAL}  10 second
+
+# Error log Severities to ignore when checking Error Logs.
+@{ESEL_WHITELIST}
+...  xyz.openbmc_project.Logging.Entry.Level.Informational
+
 
 *** Test Cases ***
 
@@ -36,7 +42,7 @@ Enumerate Sensors And Check For Errors
 
     Redfish.Get  /redfish/v1/Chassis/chassis/Sensors
 
-    Error Logs Should Not Exist
+    Check For Error Logs Not On Whitelist  ${ESEL_WHITELIST}
 
 
 Suite Setup Execution
@@ -49,8 +55,8 @@ Suite Setup Execution
     Should Not Be Empty
     ...  ${OS_PASSWORD}  msg=You must provide OS host user password.
 
+    Redfish Power On  stack_mode=skip
     Redfish.Login
-    Redfish Power On
 
     Delete Error Logs
     Error Logs Should Not Exist
