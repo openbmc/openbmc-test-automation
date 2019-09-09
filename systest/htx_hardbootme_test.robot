@@ -40,6 +40,7 @@ Resource        ../syslib/utils_os.robot
 Resource        ../lib/openbmc_ffdc_utils.robot
 Resource        ../lib/logging_utils.robot
 Resource        ../lib/code_update_utils.robot
+Resource        ../lib/esel_utils.robot
 Library         ../syslib/utils_keywords.py
 Library         ../lib/utils_files.py
 Library         ../lib/logging_utils.py
@@ -61,10 +62,6 @@ ${INV_IGNORE_LIST}           size
 ${PREV_INV_FILE_PATH}        NONE
 
 ${rest_keyword}              REST
-
-# Error log Severities to ignore when checking for eSELs.
-@{ESEL_WHITELIST}
-...  xyz.openbmc_project.Logging.Entry.Level.Informational
 
 
 *** Test Cases ***
@@ -213,36 +210,11 @@ Report Inventory Mismatch
     Fail  Significant difference in inventory found, rc=${diff_rc}
 
 
-Check For ESELs
-    [Documentation]  Terminate if eSELs with Severity field not on WHITELIST.
-
-    Print Timen  Checking eSEL Error Logs.
-    ${error_logs}=  Get Error Logs
-
-    ${num_error_logs}=  Get Length  ${error_logs}
-    Rprint Vars  num_error_logs
-    Return From Keyword If  ${num_error_logs} == ${0}
-
-    Print Error Logs  ${error_logs}
-
-    # Get a list of the severities of the error logs.
-    ${error_log_severities}=  Nested Get  Severity  ${error_logs}
-    # Subtract the WHITELIST from the error_log_severities.
-    ${problem_error_logs}=
-    ...  Evaluate  list(set($error_log_severities) - set($ESEL_WHITELIST))
-    ${num_error_logs_not_on_whitelist}=  Get Length  ${problem_error_logs}
-
-    Return From Keyword If  ${num_error_logs_not_on_whitelist} == ${0}
-
-    Rprint Vars  ESEL_WHITELIST
-    Fail  msg=Found error logs with Severity not matching ESEL_WHITELIST.
-
-
 Loop HTX Health Check
     [Documentation]  Run until HTX exerciser fails.
     Repeat Keyword  ${HTX_DURATION}
     ...  Run Keywords  Check HTX Run Status
-    ...  AND  Check For ESELs
+    ...  AND  Check For ESELs Not Informational
     ...  AND  Sleep  ${HTX_INTERVAL}
 
 
