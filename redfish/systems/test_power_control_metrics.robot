@@ -1,4 +1,4 @@
-*** Settings ***
+** Settings ***
 Documentation       Get the systems power supply voltage readings.
 
 Resource            ../../lib/bmc_redfish_resource.robot
@@ -14,39 +14,18 @@ Test Teardown       Test Teardown Execution
 
 *** Test Cases ***
 
-Verify Power Supplies Input Watts
-    [Documentation]  Verify there are no invalid power supply input watt records.
-    [Tags]  Verify_Power_Supplies_Input_Watts
-    [Template]  Verify Watts Record
+Verify Power Control Consumed Watts
+    [Documentation]  Verify there are no invalid power control consumed watt records.
+    [Tags]  Verify_Power_Control_Consumed_Watts
+    [Template]  Verify Power Metric Records
 
     # record_type   redfish_uri                   reading_type
-    PowerSupplies   ${REDFISH_CHASSIS_POWER_URI}  PowerInputWatts
-
-
-Verify Power Supplies Input Output Voltages
-    [Documentation]  Verify there are no invalid power supply voltage records.
-    [Tags]  Verify_Power_Supplies_Input_Output_Voltages
-    [Template]  Verify Voltage Records
-
-    # record_type   redfish_uri                    reading_type
-    Voltages        ${REDFISH_CHASSIS_POWER_URI}   ReadingVolts
+    PowerControl    ${REDFISH_CHASSIS_POWER_URI}  PowerConsumedWatts
 
 
 *** Keywords ***
 
-Verify Watts Record
-    [Documentation]  Verify the power watt records.
-    [Arguments]  ${record_type}  ${redfish_uri}  ${reading_type}
-
-    # Description of Arguments(s):
-    # record_type    The sensor record type (e.g. "PowerSupplies")
-    # redfish_uri    The power supply URI (e.g. /redfish/v1/Chassis/chassis/Power)
-    # reading_type   The power watt readings (e.g. "PowerInputWatts")
-
-    Verify Valid Records  ${record_type}  ${redfish_uri}  ${reading_type}
-
-
-Verify Voltage Records
+Verify Power Metric Records
     [Documentation]  Verify the power voltage records.
     [Arguments]  ${record_type}  ${redfish_uri}  ${reading_type}
 
@@ -60,12 +39,12 @@ Verify Voltage Records
     ${records}=  Redfish.Get Attribute  ${redfish_uri}  ${record_type}
 
     ${invalid_records}=  Evaluate
-    ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
+    ...  [x for x in ${records} if not x['${reading_type}'] <= x['PowerMetrics']['MaxConsumedWatts']]
 
     ${num_invalid_records}=  Get Length  ${invalid_records}
     Run Keyword If  ${num_invalid_records} > ${0}
     ...  Rprint Vars  num_invalid_records  invalid_records
-    Rvalid Value  num_invalid_records  valid_values=[0]
+    Valid Value  num_invalid_records  valid_values=[0]
 
 
 Suite Teardown Execution
@@ -86,3 +65,4 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
+
