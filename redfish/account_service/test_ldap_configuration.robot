@@ -341,6 +341,81 @@ Verify LDAP Authentication Without Password
     Valid Value  status  [${False}]
 
 
+Verify LDAP Login With Invalid BASE_DN
+    [Documentation]  Verify that LDAP login with invalid BASE_DN and
+    ...  right LDAP user fails.
+    [Tags]  Verify_LDAP_Login_With_Invalid_BASE_DN
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create LDAP Configuration
+
+    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  Invalid_LDAP_BASE_DN
+    Sleep  15s
+    Redfish Verify LDAP Login  ${False}
+
+
+Verify LDAP Login With Invalid BIND_DN_PASSWORD
+    [Documentation]  Verify that LDAP login with invalid BIND_DN_PASSWORD and
+    ...  right LDAP user fails.
+    [Tags]  Verify_LDAP_Login_With_Invalid_BASE_DN
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create LDAP Configuration
+
+    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
+    ...  ${LDAP_BIND_DN}  INVALID_LDAP_BIND_DN_PASSWORD  ${LDAP_BASE_DN}
+    Sleep  15s
+    Redfish Verify LDAP Login  ${False}
+
+
+Verify LDAP Login With Invalid BASE_DN And Invalid BIND_DN
+    [Documentation]  Verify that LDAP login with invalid BASE_DN and invalid
+    ...  BIND_DN and right LDAP user fails.
+    [Tags]  Verify_LDAP_Login_With_Invalid_BASE_DN_And_Invalid_BIND_DN
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create LDAP Configuration
+
+    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
+    ...  INVALID_LDAP_BIND_DN  ${LDAP_BIND_DN_PASSWORD}  INVALID_LDAP_BASE_DN
+    Sleep  15s
+    Redfish Verify LDAP Login  ${False}
+
+
+Verify Group Name And Group Privilege Able To Modify
+    [Documentation]  Verify that LDAP group name and group privilege able to
+    ...  modify.
+    [Tags]  Verify_Group_Name_And_Group_Privilege_Able_To_Modify
+    [Setup]  Run Keywords  Create LDAP Configuration  AND
+    ...  Update LDAP Configuration with LDAP User Role And Group
+    ...  ${LDAP_TYPE}  Operator  ${GROUP_NAME}
+
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+
+
+Verify LDAP Login With Invalid BIND_DN
+    [Documentation]  Verify that LDAP login with invalid BIND_DN and
+    ...  right LDAP user fails.
+    [Tags]  Verify_LDAP_Login_With_Invalid_BIND_DN
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create LDAP Configuration
+
+    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
+    ...  Invalid_LDAP_BIND_DN  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+    Sleep  15s
+    Redfish Verify LDAP Login  ${False}
+
+
+Verify LDAP Authentication With Invalid LDAP User
+    [Documentation]  Verify that LDAP user authentication for user not exist
+    ...  in LDAP server and fails.
+    [Tags]  Verify_LDAP_Authentication_With_Invalid_LDAP_User
+    [Setup]  Create LDAP Configuration
+
+    ${status}=  Run Keyword And Return Status  Redfish.Login  INVALID_LDAP_USER
+    ...  ${LDAP_USER_PASSWORD}
+    Valid Value  status  [${False}]
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -410,7 +485,6 @@ Create LDAP Configuration
     # ldap_bind_dn_password  The LDAP bind distinguished name password.
     # ldap_base_dn           The LDAP base distinguished name.
 
-    Disable Other LDAP
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'ServiceEnabled': ${True}, 'ServiceAddresses': ['${ldap_server_uri}'], 'Authentication': {'AuthenticationType':'UsernameAndPassword', 'Username':'${ldap_bind_dn}', 'Password':'${ldap_bind_dn_password}'}, 'LDAPService': {'SearchSettings': {'BaseDistinguishedNames': ['${ldap_base_dn}']}}}}
     Sleep  15s
@@ -468,6 +542,7 @@ Suite Setup Execution
     # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
     Get LDAP Configuration  ${LDAP_TYPE}
     ${old_ldap_privilege}=  Get LDAP Privilege
+    Disable Other LDAP
 
 
 Set Read Privilege And Check Firmware Inventory
