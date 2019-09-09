@@ -59,3 +59,31 @@ Verify eSEL Entries
     ${elog_entry}=  Get Event Logs
     Should Be Equal  ${elog_entry[0]["Message"]}  org.open_power.Host.Error.Event
     Should Be Equal  ${elog_entry[0]["Severity"]}  Critical
+
+
+Check For ESELs Not Informational
+    [Documentation]  Ignore eSELs that are Informational, fail otherwise.
+
+    # Ignore eSELs with Severity in this list.
+    @{ESEL_WHITELIST}  Create List
+    ...  xyz.openbmc_project.Logging.Entry.Level.Informational
+
+    Print Timen  Checking eSEL Error Logs.
+    ${error_logs}=  Get Error Logs
+
+    ${num_error_logs}=  Get Length  ${error_logs}
+    Return From Keyword If  ${num_error_logs} == ${0}
+
+    # Get a list of the severities of the error logs.
+    ${error_log_severities}=  Nested Get  Severity  ${error_logs}
+    # Subtract the WHITELIST from the error_log_severities.
+    ${problem_error_logs}=
+    ...  Evaluate  list(set($error_log_severities) - set($ESEL_WHITELIST))
+    ${num_error_logs_not_on_whitelist}=  Get Length  ${problem_error_logs}
+
+    Return From Keyword If  ${num_error_logs_not_on_whitelist} == ${0}
+
+    Rprint Vars  num_error_logs
+    Print Error Logs  ${error_logs}
+    Rprint Vars  ESEL_WHITELIST
+    Fail  msg=Found eSELs with Severity not matching ESEL_WHITELIST.

@@ -7,6 +7,7 @@ Resource          ../lib/resource.robot
 Resource          ../lib/boot_utils.robot
 Resource          ../lib/boot_utils.robot
 Resource          ../lib/bmc_redfish_resource.robot
+Resource          ../lib/esel_utils.robot
 
 Suite Setup      Suite Setup Execution
 Test Teardown    Post Test Case Execution
@@ -36,7 +37,7 @@ Enumerate Sensors And Check For Errors
 
     Redfish.Get  /redfish/v1/Chassis/chassis/Sensors
 
-    Error Logs Should Not Exist
+    Check For ESELs Not Informational
 
 
 Suite Setup Execution
@@ -49,8 +50,8 @@ Suite Setup Execution
     Should Not Be Empty
     ...  ${OS_PASSWORD}  msg=You must provide OS host user password.
 
+    Redfish Power On  stack_mode=skip
     Redfish.Login
-    Redfish Power On
 
     Delete Error Logs
     Error Logs Should Not Exist
@@ -60,5 +61,5 @@ Post Test Case Execution
     [Documentation]  Do the post test teardown.
     ...  1. Capture FFDC on test failure.
 
-    FFDC On Test Case Fail
+    ####FFDC On Test Case Fail
     Redfish.Logout
