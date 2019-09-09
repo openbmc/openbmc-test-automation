@@ -59,3 +59,31 @@ Verify eSEL Entries
     ${elog_entry}=  Get Event Logs
     Should Be Equal  ${elog_entry[0]["Message"]}  org.open_power.Host.Error.Event
     Should Be Equal  ${elog_entry[0]["Severity"]}  Critical
+
+
+Check For Error Logs
+    [Documentation]  Fail if there are error logs. Ignore logs with
+    ...              severity in the whitelist.
+
+    [Arguments]  ${whitelist}
+
+    # Description of Argument(s):
+    # whitelist  A list to be used to filter out esels which are
+    #            of no interest to the caller.
+    #            Error Logs with Severity field matching an
+    #            entry in this list will be ignored. (e.g.
+    #            xyz.openbmc_project.Logging.Entry.Level.Error)
+
+    Print Timen  Checking Error Logs.
+    ${error_logs}=  Get Error Logs
+
+    ${num_error_logs}=  Get Length  ${error_logs}
+    Return From Keyword If  ${num_error_logs} == ${0}
+
+    # Get a list of the severities of the error logs.
+    ${error_log_severities}=  Nested Get  Severity  ${error_logs}
+    # Subtract the WHITELIST from the error_log_severities.
+    ${problem_error_logs}=  Evaluate
+    ...  list(set($error_log_severities) - set($whitelist))
+
+    Valid Length  problem_error_logs   max_length=0
