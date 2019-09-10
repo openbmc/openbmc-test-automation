@@ -202,9 +202,11 @@ class bmc_redfish_utils(object):
 
         while resources_to_be_enumerated:
             for resource in resources_to_be_enumerated:
-                # JsonSchemas data are not required in enumeration.
+                # JsonSchemas and SessionService data are not required in enumeration.
                 # Example: '/redfish/v1/JsonSchemas/' and sub resources.
-                if 'JsonSchemas' in resource:
+                #          '/redfish/v1/SessionService'
+                if (('JsonSchemas' in resource) or
+                    ('SessionService' in resource)):
                     continue
 
                 self._rest_response_ = \
