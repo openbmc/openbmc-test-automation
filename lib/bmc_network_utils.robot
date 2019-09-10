@@ -314,4 +314,3 @@ CLI Get Nameservers
     ${nameservers}=  Split String  ${stdout}
 
     [Return]  ${nameservers}
-
