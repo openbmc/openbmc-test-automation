@@ -75,14 +75,6 @@ Get Gateway And Verify
     : FOR  ${network_configuration}  IN  @{network_configurations}
     \  Verify Gateway On BMC  ${network_configuration['Gateway']}
 
-Get MAC Address And Verify
-    [Documentation]  Get MAC address and verify it's existence on the BMC.
-    [Tags]  Get_MAC_Address_And_Verify
-
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
-    ${macaddr}=  Get From Dictionary  ${resp.dict}  MACAddress
-    Validate MAC On BMC  ${macaddr}
-
 Verify All Configured IP And Netmask
     [Documentation]  Verify all configured IP and netmask on BMC.
     [Tags]  Verify_All_Configured_IP_And_Netmask

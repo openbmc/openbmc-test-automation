@@ -24,7 +24,11 @@ Test Setup              Printn
 ${ip}                   10.5.5.5
 ${dns_ip}               10.10.10.10
 ${domain_name}          randomName.com
+${mac}                  76:e2:84:14:87:91
+${ntp}                  pool.ntp.org
 ${parser}               |grep "ipv4"|awk -F/ 'NR==1{print$5}'
+${parser_a}             |grep NTP|awk -F\\" '{print$2}'
+${resource_path}        \/xyz\/openbmc_project\/network\/eth0
 ${ignore_err}           ${0}
 
 
@@ -110,6 +114,46 @@ Verify GetHostName
      ${bmc_hostname}=  Get BMC Hostname
 
      Should Be Equal As Strings  ${bmc_hostname}  ${tool_hostname}
+
+
+Verify SetMACAddress
+     [Documentation]  Verify that openbmctool.py can run the setMACAddress command.
+     [Tags]  Verify_SetMACAddress
+
+     Network  setMACAddress  I=eth0  MA=${mac}
+
+     Validate MAC On BMC  ${mac}
+
+Verify GetMACAddress
+     [Documentation]  Verify that openbmctool.py can run the getMACAddress command.
+     [Tags]  Verify_GetMACAddress
+
+     ${mac_addr}=  Network  getMACAddress  I=eth0
+
+     Validate MAC On BMC  ${mac_addr}
+
+
+Verify SetNTP
+     [Documentation]  Verify that openbmctool.py can run the setNTP command.
+     [Tags]  Verify_SetNTP
+
+     Network  setNTP  I=eth0  N=${ntp}
+     ${stdout}  ${stderr}  ${rc}=  BMC Execute Command
+     ...  busctl introspect xyz.openbmc_project.Network ${resource_path}${parser_a}
+
+     Should Be Equal  ${stdout}  ${ntp}
+
+Verify GetNTP
+     [Documentation]  Verify that openbmctool.py can run the getNTP command.
+     [Tags]  Verify_GetNTP
+
+     Network  setNTP  I=eth0  N=${ntp}
+     ${stdout}  ${stderr}  ${rc}=  BMC Execute Command
+     ...  busctl introspect xyz.openbmc_project.Network ${resource_path}${parser_a}
+
+     ${tool_ntp}=  Network  getNTP  I=eth0
+
+     Should Be Equal  ${stdout}  ${tool_ntp}[${0}]
 
 
 *** Keywords ***

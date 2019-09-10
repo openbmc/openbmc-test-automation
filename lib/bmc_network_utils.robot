@@ -315,3 +315,11 @@ CLI Get Nameservers
 
     [Return]  ${nameservers}
 
+
+Get MAC Address And Verify
+    [Documentation]  Get MAC address and verify it's existence on the BMC.
+    [Tags]  Get_MAC_Address_And_Verify
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ${macaddr}=  Get From Dictionary  ${resp.dict}  MACAddress
+    Validate MAC On BMC  ${macaddr}
