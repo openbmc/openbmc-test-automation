@@ -614,3 +614,10 @@ Get Image Version From TFTP Server
 
     [Return]  ${version}
 
+
+Verify BMC Signed Image
+    [Documentation]  Fail if the BMC firmware is not signed.
+
+    OperatingSystem.Directory Should Not Exist
+    ...  /etc/activationdata/OpenBMC
+
