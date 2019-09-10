@@ -517,8 +517,8 @@ Check Software Object Attribute
 Image Should Be Signed
     [Documentation]  Fail if the image is not signed.
 
-    Directory Should Exist  ${ACTIVATION_DIR_PATH}
-    ...  msg=${ACTIVATION_DIR_PATH} does not exist. Therefore, the image is not signed.
+    OperatingSystem.Directory Should Not Exist
+    ...  /etc/activationdata/OpenBMC
 
 
 Get Latest Image ID
