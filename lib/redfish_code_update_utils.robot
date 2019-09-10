@@ -155,7 +155,7 @@ Poweron Host And Verify Host Image
     Redfish Power On
     Redfish.Login
     Redfish Verify Host Version  ${IMAGE_FILE_PATH}
-
+    Redfish Power Off
 
 Get Host Power State
     [Documentation]  Get host power state.
