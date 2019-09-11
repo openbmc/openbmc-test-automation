@@ -310,11 +310,11 @@ def valid_range(var_value, lower=None, upper=None, *args, **kwargs):
     """
 
     error_message = ""
-    if not lower and not upper:
+    if lower is None and upper is None:
         return process_error_message(error_message)
-    if not lower and var_value <= upper:
+    if lower is None and var_value <= upper:
         return process_error_message(error_message)
-    if not upper and var_value >= lower:
+    if upper is None and var_value >= lower:
         return process_error_message(error_message)
     if lower and upper:
         if lower > upper:
@@ -589,6 +589,37 @@ def valid_program(var_value, *args, **kwargs):
         PATH = os.environ.get("PATH", "").split(":")
         error_message += "\n"
         error_message += gp.sprint_var(PATH)
+    return process_error_message(error_message)
+
+
+def valid_length(var_value, min_length=None, max_length=None, *args, **kwargs):
+    r"""
+    The variable value is valid if it is an object (e.g. list, dictionary)
+    whose length is within the specified range.
+
+    Description of argument(s):
+    var_value                       The value being validated.
+    min_length                      The minimum length of the object.  If not
+                                    None, the length of var_value must be
+                                    greater than or equal to min_length.
+    max_length                      The maximum length of the object.  If not
+                                    None, the length of var_value must be less
+                                    than or equal to min_length.
+    """
+
+    error_message = ""
+    length = len(var_value)
+    error_message = valid_range(length, min_length, max_length)
+    if error_message:
+        var_name = get_var_name(*args, **kwargs)
+        error_message = "The length of the following object is not within the"
+        error_message += " expected range:\n"
+        error_message += gp.sprint_var(length)
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank())
+        error_message += "\n"
+        error_message += gp.sprint_vars(min_length, max_length)
+        return process_error_message(error_message)
+
     return process_error_message(error_message)
 
 
