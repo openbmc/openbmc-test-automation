@@ -33,14 +33,14 @@ Run Multiple Power Cycle
     Repeat Keyword  ${LOOP_COUNT} times  Power Cycle System Via PDU
 
 
-Run Multiple BMC Reset Via REST
+Run Multiple BMC Reset Via Redfish
     [Documentation]  Execute multiple reboots via REST.
-    [Tags]  Run_Multiple_BMC_Reset_Via_REST
+    [Tags]  Run_Multiple_BMC_Reset_Via_Redfish
 
     # By default run test for 50 loops, else user input iteration.
     # Fails immediately if any of the execution rounds fail and
     # check if BMC is still pinging and FFDC is collected.
-    Repeat Keyword  ${LOOP_COUNT} times  BMC REST Reset Cycle
+    Repeat Keyword  ${LOOP_COUNT} times  BMC Redfish Reset Cycle
 
 
 Run Multiple BMC Reset Via Reboot
@@ -57,53 +57,42 @@ Run Multiple BMC Reset Via Reboot
 
 Power Cycle System Via PDU
     [Documentation]  Power cycle system and wait for BMC to reach Ready state.
-    Log  "Doing power cycle"
+
     PDU Power Cycle
     Check If BMC Is Up  5 min  10 sec
 
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
     Verify BMC RTC And UTC Time Drift
-    Field Mode Should Be Enabled
 
 
-BMC REST Reset Cycle
-    [Documentation]  Reset BMC via REST and wait for ready state.
-    Log  "Doing Reboot cycle"
-    ${bmc_version_before}=  Get BMC Version
-    Initiate BMC Reboot
-    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
-    ${bmc_version_after}=  Get BMC Version
-    Should Be Equal  ${bmc_version_before}  ${bmc_version_after}
+BMC Redfish Reset Cycle
+    [Documentation]  Reset BMC via Redfish and verify required states.
+
+    Redfish OBMC Reboot (off)
+    ${bmc_version}=  Get BMC Version
+    Valid Value  bmc_version  ${initial_bmc_version}
     Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
     Verify BMC RTC And UTC Time Drift
-    Field Mode Should Be Enabled
+    ${boot_side}=  Get BMC Flash Chip Boot Side
+    Valid Value  boot_side  ['0']
 
 
 BMC Reboot Cycle
     [Documentation]  Reboot BMC and wait for ready state.
-    Log  "Doing Reboot cycle"
-    ${bmc_version_before}=  Get BMC Version
+
     OBMC Reboot (off)  stack_mode=normal
-    ${bmc_version_after}=  Get BMC Version
-    Should Be Equal  ${bmc_version_before}  ${bmc_version_after}
+    ${bmc_version}=  Get BMC Version
+    Valid Value  bmc_version  ${initial_bmc_version}
     Verify BMC RTC And UTC Time Drift
     Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}
-    Field Mode Should Be Enabled
+    ${boot_side}=  Get BMC Flash Chip Boot Side
+    Valid Value  boot_side  ['0']
 
 
 Test Teardown Execution
     [Documentation]  Do test case tear-down.
     Ping Host  ${OPENBMC_HOST}
     FFDC On Test Case Fail
-
-    # Example of the u-boot-env o/p:
-    # root@witherspoon:~# grep fieldmode /dev/mtd/u-boot-env
-    # fieldmode=true
-    # fieldmode=true
-    ${field_mode}=
-    ...  BMC Execute Command  grep fieldmode /dev/mtd/u-boot-env
-    Should Contain  "${field_mode[0]}"  fieldmode=true
-    ...  msg=u-boot-env shows "fieldmode" is not set to true.
 
 
 Validate Parameters
@@ -116,6 +105,7 @@ Validate Parameters
 
 
 Suite Setup Execution
-    [Documentation]  Enable field mode.
-    Enable Field Mode And Verify Unmount
-    Field Mode Should Be Enabled
+    [Documentation]  Do suite setup.
+
+    ${bmc_version}=  Get BMC Version
+    Set Suite Variable  ${initial_bmc_version}  ${bmc_version}
