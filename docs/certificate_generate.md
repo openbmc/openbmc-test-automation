@@ -87,7 +87,7 @@ $ curl -c cjar -b cjar -k -H "X-Auth-Token: $bmc_token" -X POST https://${BMC_IP
 }
 ```
 
-4. Convert response into .csr file (device.csr)
+3. Convert response into .csr file (device.csr)
 
 ```
 $ cat device.csr
