@@ -66,7 +66,7 @@ Example:
     "CertificateCollection": {
         "@odata.id": "/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/"
     },
-    "CommonName": "9.3.111.222",
+    "CommonName": "x.x.x.x",
     "Country": "US",
     "Organization": "IBM",
     "OrganizationalUnit": "ISL",
