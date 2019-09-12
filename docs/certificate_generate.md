@@ -66,7 +66,7 @@ Example:
     "CertificateCollection": {
         "@odata.id": "/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/"
     },
-    "CommonName": "9.3.111.222",
+    "CommonName": "192.168.0.1",
     "Country": "US",
     "Organization": "IBM",
     "OrganizationalUnit": "ISL",
@@ -151,7 +151,7 @@ $ curl -c cjar -b cjar -k -H "X-Auth-Token: $bmc_token" -X POST https://${BMC_IP
   "Name": "HTTPS certificate",
   "Subject": {
     "City": "Austin",
-    "CommonName": "9.3.111.222",
+    "CommonName": "192.168.0.1",
     "Country": "US",
     "Organization": "IBM",
     "State": "AU"
