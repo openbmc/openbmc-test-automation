@@ -34,9 +34,9 @@ If you enter '.', the field will be left blank.
 Country Name (2 letter code) [AU]:US
 State or Province Name (full name) [Some-State]:Oregon
 Locality Name (eg, city) []:Portland
-Organization Name (eg, company) [Internet Widgits Pty Ltd]:Overlords
+Organization Name (eg, company) [Default Company Ltd]:XYZ
 Organizational Unit Name (eg, section) []:IT
-Common Name (eg, YOUR name) []:Data Center Overlords
+Common Name (eg, YOUR name) []:XYZ CERTIFICATE AUTHORITY
 Email Address []:none@none.com
 ```
 
@@ -66,10 +66,10 @@ Example:
     "CertificateCollection": {
         "@odata.id": "/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/"
     },
-    "CommonName": "9.3.111.222",
+    "CommonName": "xx.xx.xx.xx",
     "Country": "US",
-    "Organization": "IBM",
-    "OrganizationalUnit": "ISL",
+    "Organization": "ABC Limited",
+    "OrganizationalUnit": "IT",
     "State": "AU",
     "KeyPairAlgorithm": "RSA"
 }
@@ -80,11 +80,10 @@ Example:
 ```
 $ curl -c cjar -b cjar -k -H "X-Auth-Token: $bmc_token" -X POST https://${BMC_IP}/redfish/v1/CertificateService/Actions/CertificateService.GenerateCSR/ -d @csr_file.json
 {
-  "CSRString": "-----BEGIN CERTIFICATE REQUEST-----\nMIIBZzCCARECAQEwgasxJTAjBgNVHREMHHdzYm1jMDE1LmF1cy5zdGdsYWJzLmli\nbS5jb20xDzANBgNVBAcMBkF1c3RpbjESMBAGA1UEA  wwJOS4zLjIxLjU1MQ8wDQYD\nVQQpDAZteW5hbWUxCzAJBgNVBAYTAlVTMQ0wCwYEKw4DAgwDUlNBMRUwEwYDVR0P\nDAxLZXlBZ3JlZW1lbnQxDDAKBgNVBA  oMA0lCTTELMAkGA1UECAwCQVUwXDANBgkq\nhkiG9w0BAQEFAANLADBIAkEAwY9eVEdOobpT646Ssn7QmcxLeoWnCIulyP3hKR2f\n4E8Cy3FdO/j3HlrlKxJ  ijB8eBDmdB0zR8CnVUipUcknj4QIDAQABoAAwDQYJKoZI\nhvcNAQELBQADQQBcKCRdSZxqKoH7h4uta27Qchna88ljrJwX3PLqNES5nyCUaacx\ne8Xqddi9  iG7FcnULE9VLzhpr86UTZV4393+s\n-----END CERTIFICATE REQUEST-----\n",
+  "CSRString": "-----BEGIN CERTIFICATE REQUEST-----\nMIICyzCCAbMCAQEwgYUxDzANBgNVBAcMBkF1c3RpbjEUMBIGA1UEAwwLeHgueHgu\neHgueHgxCzAJBgNVBAYTAlVTMQ0wCwYEKw4DAgwDUlNBMR0wGwYDVR0lDBRTZXJ2\nZXJBdXRoZW50aWNhdGlvbjEUMBIGA1UECgwLQUJDIExpbWl0ZWQxCzAJBgNVBAgM\nAkFVMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7+OoXRmAI85W/5pB\nYjC5EdZ/atrPpkIxjT4sXANZLXm6/vkfR/BAxd5s8DYrifPjdfvJRv33cAPT6+pe\no/t793hdBx7Cwwzqlj3czfdbpvGp90I7BQ1OvKCo/NDmqeTm+5jphYpd8ZvKmBNC\nOfHV0sr3/dMPHME16aunDEHFJz1CzXpG5kSszRYbwcZrXC7rvmSi8UBX8BYoKWzx\nlAGdOYh9j5k/LVNQuKFJjqIfesYJ8fajgsJr8bj81o+bOzvG+zApvt+Ak8B8fqa7\nvET4jb1oeDuSi9D1/Xax+2qx3vInIQOOZz3OCVjxNLZMWOA+P86z59e/6YkXOg/Q\nkXG4uQIDAQABoAAwDQYJKoZIhvcNAQELBQADggEBAOTLICzJiYerbWa6VyXv/w8b\nr160bNDvIRXJf8E2b5+27NinZb+65WVa6oxE9Ai7UEN+mHkbnDpb2vujp/wuROER\nrgmjstePJST+EqX5PuoSxbPhE0ucHw7dTZf9agfvNLlpgTUo/Lv9A2pCSDa5KZ13\nu96AFsFBjBuanUK2k7aoEc/Rl7JhfxUaXNszzYqDgwIHggYWbZO7Ku7HHbY1qYGR\nD0XaLUyXAxgB76mcud004zu7swTJxDlM+c5+i0yqflWQiVWEAOW9HDeHvnYmShuT\n+HS1vhv+x/9HDHowxiWOt2Th18uzdf+F0446fR8uoIrG1z7KdNoxipUnVKfyXTg=\n-----END CERTIFICATE REQUEST-----\n",
   "CertificateCollection": {
     "@odata.id": "/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/"
   }
-}
 ```
 
 3. Convert response into .csr file (device.csr)
@@ -92,14 +91,21 @@ $ curl -c cjar -b cjar -k -H "X-Auth-Token: $bmc_token" -X POST https://${BMC_IP
 ```
 $ cat device.csr
 -----BEGIN CERTIFICATE REQUEST-----
-MIIBZzCCARECAQEwgasxJTAjBgNVHREMHHdzYm1jMDE1LmF1cy5zdGdsYWJzLmli
-bS5jb20xDzANBgNVBAcMBkF1c3RpbjESMBAGA1UEAwwJOS4zLjIxLjU1MQ8wDQYD
-VQQpDAZteW5hbWUxCzAJBgNVBAYTAlVTMQ0wCwYEKw4DAgwDUlNBMRUwEwYDVR0P
-DAxLZXlBZ3JlZW1lbnQxDDAKBgNVBAoMA0lCTTELMAkGA1UECAwCQVUwXDANBgkq
-hkiG9w0BAQEFAANLADBIAkEAwY9eVEdOobpT646Ssn7QmcxLeoWnCIulyP3hKR2f
-4E8Cy3FdO/j3HlrlKxJijB8eBDmdB0zR8CnVUipUcknj4QIDAQABoAAwDQYJKoZI
-hvcNAQELBQADQQBcKCRdSZxqKoH7h4uta27Qchna88ljrJwX3PLqNES5nyCUaacx
-e8Xqddi9iG7FcnULE9VLzhpr86UTZV4393+s
+MIICyzCCAbMCAQEwgYUxDzANBgNVBAcMBkF1c3RpbjEUMBIGA1UEAwwLeHgueHgu
+eHgueHgxCzAJBgNVBAYTAlVTMQ0wCwYEKw4DAgwDUlNBMR0wGwYDVR0lDBRTZXJ2
+ZXJBdXRoZW50aWNhdGlvbjEUMBIGA1UECgwLQUJDIExpbWl0ZWQxCzAJBgNVBAgM
+AkFVMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7+OoXRmAI85W/5pB
+YjC5EdZ/atrPpkIxjT4sXANZLXm6/vkfR/BAxd5s8DYrifPjdfvJRv33cAPT6+pe
+o/t793hdBx7Cwwzqlj3czfdbpvGp90I7BQ1OvKCo/NDmqeTm+5jphYpd8ZvKmBNC
+OfHV0sr3/dMPHME16aunDEHFJz1CzXpG5kSszRYbwcZrXC7rvmSi8UBX8BYoKWzx
+lAGdOYh9j5k/LVNQuKFJjqIfesYJ8fajgsJr8bj81o+bOzvG+zApvt+Ak8B8fqa7
+vET4jb1oeDuSi9D1/Xax+2qx3vInIQOOZz3OCVjxNLZMWOA+P86z59e/6YkXOg/Q
+kXG4uQIDAQABoAAwDQYJKoZIhvcNAQELBQADggEBAOTLICzJiYerbWa6VyXv/w8b
+r160bNDvIRXJf8E2b5+27NinZb+65WVa6oxE9Ai7UEN+mHkbnDpb2vujp/wuROER
+rgmjstePJST+EqX5PuoSxbPhE0ucHw7dTZf9agfvNLlpgTUo/Lv9A2pCSDa5KZ13
+u96AFsFBjBuanUK2k7aoEc/Rl7JhfxUaXNszzYqDgwIHggYWbZO7Ku7HHbY1qYGR
+D0XaLUyXAxgB76mcud004zu7swTJxDlM+c5+i0yqflWQiVWEAOW9HDeHvnYmShuT
++HS1vhv+x/9HDHowxiWOt2Th18uzdf+F0446fR8uoIrG1z7KdNoxipUnVKfyXTg=
 -----END CERTIFICATE REQUEST-----
 ```
 
@@ -109,6 +115,7 @@ e8Xqddi9iG7FcnULE9VLzhpr86UTZV4393+s
 ```
 openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days 500 -sha256
 ```
+Note: You will be prompted to give a password for private key.
 
 
 2. Create JSON file (certificate.json) with the device.crt file created in step 1.
@@ -116,7 +123,7 @@ openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateseria
 ```
 $ cat certificate.json
 {
-    "CertificateString": "-----BEGIN CERTIFICATE-----\nMIIC+TCCAeECCQCk+dNJDXfI1jANBgkqhkiG9w0BAQsFADCBmDELMAkGA1UEBhMC\nSU4xDjAMBgNVBAgMBURFTEhJMQ4wDAYDVQQHD  AVERUxISTEeMBwGA1UECgwVQ0VS\nVElGSUNBVEUgQVVUSE9SSVRZMQswCQYDVQQLDAJJVDEeMBwGA1UEAwwVRGF0YSBD\nZW50ZXIgT3ZlcmxvcmRzMRwwGg  YJKoZIhvcNAQkBFg1ub25lQG5vbmUuY29tMB4X\nDTE5MDYyNzExMTczNloXDTIwMTEwODExMTczNlowgasxJTAjBgNVHREMHHdzYm1j\nMDE1LmF1cy5zdGd  sYWJzLmlibS5jb20xDzANBgNVBAcMBkF1c3RpbjESMBAGA1UE\nAwwJOS4zLjIxLjU1MQ8wDQYDVQQpDAZteW5hbWUxCzAJBgNVBAYTAlVTMQ0wCwYE\nKw4D  AgwDUlNBMRUwEwYDVR0PDAxLZXlBZ3JlZW1lbnQxDDAKBgNVBAoMA0lCTTEL\nMAkGA1UECAwCQVUwXDANBgkqhkiG9w0BAQEFAANLADBIAkEAwY9eVEdOobp  T646S\nsn7QmcxLeoWnCIulyP3hKR2f4E8Cy3FdO/j3HlrlKxJijB8eBDmdB0zR8CnVUipU\ncknj4QIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAcYmkbcznF  fOm9bDuIeXHzNSus\nEwOhAberTXWvPMtjbDTmbVH5dRPU+DmgS+LEl2jhYC414R89EUApjrXmk1PzlBrN\nXEnBf9+OHOHOH7H4AIni3diw9PRzEdW5ENHUi  OIVoq7LxWP+RknSHGl8AfOghX/3\n6eRgtpIp+fTYwJkGdZaKb9cI5XXk0Eh1cZZ3W43PNsKbuv1BGLGjJVRRaswF9nb1\ng2M4iZLtVXltdkyHW/Z6TUWvG+  9+TYuKingixv0toaWyRGexjC1CeRORGhyYW8Dz\niGipRCWmVo97MC5sWtQjVAshB1TY6rUqipxzW9SqyjplBD+AHySY/IqGM+wU\n-----END CERTIFICATE-----\n",
+    "CertificateString": "-----BEGIN CERTIFICATE-----\nMIIDkTCCAnkCCQD7oPxudsyOjTANBgkqhkiG9w0BAQsFADCBjjELMAkGA1UEBhMC\nVVMxDzANBgNVBAgMBk9yZWdvbjERMA8GA1UEBwwIUG9ydGxhbmQxDDAKBgNVBAoM\nA1hZWjELMAkGA1UECwwCSVQxIjAgBgNVBAMMGVhZWiBDRVJUSUZJQ0FURSBBVVRI\nT1JJVFkxHDAaBgkqhkiG9w0BCQEWDW5vbmVAbm9uZS5jb20wHhcNMTkwOTEyMDkx\nMzQwWhcNMjEwMTI0MDkxMzQwWjCBhTEPMA0GA1UEBwwGQXVzdGluMRQwEgYDVQQD\nDAt4eC54eC54eC54eDELMAkGA1UEBhMCVVMxDTALBgQrDgMCDANSU0ExHTAbBgNV\nHSUMFFNlcnZlckF1dGhlbnRpY2F0aW9uMRQwEgYDVQQKDAtBQkMgTGltaXRlZDEL\nMAkGA1UECAwCQVUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDv46hd\nGYAjzlb/mkFiMLkR1n9q2s+mQjGNPixcA1ktebr++R9H8EDF3mzwNiuJ8+N1+8lG\n/fdwA9Pr6l6j+3v3eF0HHsLDDOqWPdzN91um8an3QjsFDU68oKj80Oap5Ob7mOmF\nil3xm8qYE0I58dXSyvf90w8cwTXpq6cMQcUnPULNekbmRKzNFhvBxmtcLuu+ZKLx\nQFfwFigpbPGUAZ05iH2PmT8tU1C4oUmOoh96xgnx9qOCwmvxuPzWj5s7O8b7MCm+\n34CTwHx+pru8RPiNvWh4O5KL0PX9drH7arHe8ichA45nPc4JWPE0tkxY4D4/zrPn\n17/piRc6D9CRcbi5AgMBAAEwDQYJKoZIhvcNAQELBQADggEBAJ+xLxyfBBpRXov/\noRVMyJSWRSSITfzvcZVMcbDXAWR591rdYPNmpmpuDSdtynIvJe33H9FyXRI1UMnw\n5BYpJrVjxxyEvIyoxbJSkLxjkO6TUJNI2w7wBJeUDpwdYWuwmUc6UfO5c5LGSb4z\nzbvfEdSsW+3pHuFopuhU8d/SR14rjZiGpU2MBF+/yEyUXmQ5jIU69UwvIvbch0Zy\naquTL4O3aL1Lc9ACVUsQ7mTUS+niduIsZLvvI+OWMShRo8CEUJl9BKijQJhwvUVf\nUBNa1pVzonLxdt3eRTv93X4cu5ole6wO2DA19PWnlt/16XYw61/5naYckslQTRdc\nGvsIpb0=\n-----END CERTIFICATE-----",
     "CertificateType": "PEM",
     "CertificateUri":
     {
@@ -136,27 +143,27 @@ $ curl -c cjar -b cjar -k -H "X-Auth-Token: $bmc_token" -X POST https://${BMC_IP
   "@odata.context": "/redfish/v1/$metadata#Certificate.Certificate",
   "@odata.id": "/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1",
   "@odata.type": "#Certificate.v1_0_0.Certificate",
-  "CertificateString": "-----BEGIN CERTIFICATE-----\nMIIC+TCCAeECCQCk+dNJDXfI1jANBgkqhkiG9w0BAQsFADCBmDELMAkGA1UEBhMC\nSU4xDjAMBgNVBAgMBURFTEhJMQ4wDAYDVQQHD  AVERUxISTEeMBwGA1UECgwVQ0VS\nVElGSUNBVEUgQVVUSE9SSVRZMQswCQYDVQQLDAJJVDEeMBwGA1UEAwwVRGF0YSBD\nZW50ZXIgT3ZlcmxvcmRzMRwwGg  YJKoZIhvcNAQkBFg1ub25lQG5vbmUuY29tMB4X\nDTE5MDYyNzExMTczNloXDTIwMTEwODExMTczNlowgasxJTAjBgNVHREMHHdzYm1j\nMDE1LmF1cy5zdGd  sYWJzLmlibS5jb20xDzANBgNVBAcMBkF1c3RpbjESMBAGA1UE\nAwwJOS4zLjIxLjU1MQ8wDQYDVQQpDAZteW5hbWUxCzAJBgNVBAYTAlVTMQ0wCwYE\nKw4D  AgwDUlNBMRUwEwYDVR0PDAxLZXlBZ3JlZW1lbnQxDDAKBgNVBAoMA0lCTTEL\nMAkGA1UECAwCQVUwXDANBgkqhkiG9w0BAQEFAANLADBIAkEAwY9eVEdOobp  T646S\nsn7QmcxLeoWnCIulyP3hKR2f4E8Cy3FdO/j3HlrlKxJijB8eBDmdB0zR8CnVUipU\ncknj4QIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAcYmkbcznF  fOm9bDuIeXHzNSus\nEwOhAberTXWvPMtjbDTmbVH5dRPU+DmgS+LEl2jhYC414R89EUApjrXmk1PzlBrN\nXEnBf9+OHOHOH7H4AIni3diw9PRzEdW5ENHUi  OIVoq7LxWP+RknSHGl8AfOghX/3\n6eRgtpIp+fTYwJkGdZaKb9cI5XXk0Eh1cZZ3W43PNsKbuv1BGLGjJVRRaswF9nb1\ng2M4iZLtVXltdkyHW/Z6TUWvG+  9+TYuKingixv0toaWyRGexjC1CeRORGhyYW8Dz\niGipRCWmVo97MC5sWtQjVAshB1TY6rUqipxzW9SqyjplBD+AHySY/IqGM+wU\n-----END CERTIFICATE-----\n",
+  "CertificateString": "-----BEGIN CERTIFICATE-----\nMIIDkTCCAnkCCQD7oPxudsyOjTANBgkqhkiG9w0BAQsFADCBjjELMAkGA1UEBhMC\nVVMxDzANBgNVBAgMBk9yZWdvbjERMA8GA1UEBwwIUG9ydGxhbmQxDDAKBgNVBAoM\nA1hZWjELMAkGA1UECwwCSVQxIjAgBgNVBAMMGVhZWiBDRVJUSUZJQ0FURSBBVVRI\nT1JJVFkxHDAaBgkqhkiG9w0BCQEWDW5vbmVAbm9uZS5jb20wHhcNMTkwOTEyMDkx\nMzQwWhcNMjEwMTI0MDkxMzQwWjCBhTEPMA0GA1UEBwwGQXVzdGluMRQwEgYDVQQD\nDAt4eC54eC54eC54eDELMAkGA1UEBhMCVVMxDTALBgQrDgMCDANSU0ExHTAbBgNV\nHSUMFFNlcnZlckF1dGhlbnRpY2F0aW9uMRQwEgYDVQQKDAtBQkMgTGltaXRlZDEL\nMAkGA1UECAwCQVUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDv46hd\nGYAjzlb/mkFiMLkR1n9q2s+mQjGNPixcA1ktebr++R9H8EDF3mzwNiuJ8+N1+8lG\n/fdwA9Pr6l6j+3v3eF0HHsLDDOqWPdzN91um8an3QjsFDU68oKj80Oap5Ob7mOmF\nil3xm8qYE0I58dXSyvf90w8cwTXpq6cMQcUnPULNekbmRKzNFhvBxmtcLuu+ZKLx\nQFfwFigpbPGUAZ05iH2PmT8tU1C4oUmOoh96xgnx9qOCwmvxuPzWj5s7O8b7MCm+\n34CTwHx+pru8RPiNvWh4O5KL0PX9drH7arHe8ichA45nPc4JWPE0tkxY4D4/zrPn\n17/piRc6D9CRcbi5AgMBAAEwDQYJKoZIhvcNAQELBQADggEBAJ+xLxyfBBpRXov/\noRVMyJSWRSSITfzvcZVMcbDXAWR591rdYPNmpmpuDSdtynIvJe33H9FyXRI1UMnw\n5BYpJrVjxxyEvIyoxbJSkLxjkO6TUJNI2w7wBJeUDpwdYWuwmUc6UfO5c5LGSb4z\nzbvfEdSsW+3pHuFopuhU8d/SR14rjZiGpU2MBF+/yEyUXmQ5jIU69UwvIvbch0Zy\naquTL4O3aL1Lc9ACVUsQ7mTUS+niduIsZLvvI+OWMShRo8CEUJl9BKijQJhwvUVf\nUBNa1pVzonLxdt3eRTv93X4cu5ole6wO2DA19PWnlt/16XYw61/5naYckslQTRdc\nGvsIpb0=\n-----END CERTIFICATE-----\n",
   "Description": "HTTPS certificate",
   "Id": "1",
   "Issuer": {
-    "City": "DELHI",
-    "CommonName": "Data Center Overlords",
-    "Country": "IN",
-    "Organization": "CERTIFICATE AUTHORITY",
+    "City": "Portland",
+    "CommonName": "XYZ CERTIFICATE AUTHORITY",
+    "Country": "US",
+    "Organization": "XYZ",
     "OrganizationalUnit": "IT",
-    "State": "DELHI"
+    "State": "Oregon"
   },
   "KeyUsage": [],
   "Name": "HTTPS certificate",
   "Subject": {
     "City": "Austin",
-    "CommonName": "9.3.111.222",
+    "CommonName": "xx.xx.xx.xx",
     "Country": "US",
-    "Organization": "IBM",
+    "Organization": "ABC Limited",
     "State": "AU"
   },
-  "ValidNotAfter": "2020-11-07T23:17:36+00:00",
-  "ValidNotBefore": "2019-06-26T23:17:36+00:00"
+  "ValidNotAfter": "2021-01-23T21:13:40+00:00",
+  "ValidNotBefore": "2019-09-11T21:13:40+00:00"
 }
 ```
