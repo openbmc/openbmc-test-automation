@@ -3,9 +3,13 @@
 To create and install a CA signed server certificate, follow these steps:
 
 A. Create your own SSL certificate authority
+
 B. Generate CSR for server certificate
+
 C. Create CA signed server certificate using CSR request
+
 D. Install CA signed server certificate
+
 
 **Create your own SSL certificate authority**
 
