@@ -16,7 +16,7 @@ ${LOGIN_SESSION_COUNT}   ${50}
 ...                     X-Frame-Options=DENY
 ...                     Pragma=no-cache
 ...                     Cache-Control=no-Store,no-Cache
-...                     Content-Security-Policy=default-src 'self'; img-src 'self' data:
+...                     Content-Security-Policy=default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' wss:
 ...                     X-XSS-Protection=1; mode=block
 ...                     X-Content-Type-Options=nosniff
 
