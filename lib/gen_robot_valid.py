@@ -227,7 +227,7 @@ def valid_length(var_name, *args, **kwargs):
 func_names = [
     "valid_type", "valid_value", "valid_range", "valid_integer",
     "valid_dir_path", "valid_file_path", "valid_path", "valid_list",
-    "valid_dict", "valid_program"
+    "valid_dict", "valid_program", "valid_length"
 ]
 
 for func_name in func_names:

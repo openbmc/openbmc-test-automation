@@ -28,11 +28,11 @@ def set_exit_on_error(value):
     exit_on_error = value
 
 
-def get_var_name(*args, **kwargs):
+def get_var_name(var_name):
     r"""
-    If args/kwargs contain a var_name, simply return its value.  Otherwise,
-    get the variable name of the first argument used to call the validation
-    function (e.g. valid, valid_integer, etc.) and return it.
+    If var_name is not None, simply return its value.  Otherwise, get the
+    variable name of the first argument used to call the validation function
+    (e.g. valid, valid_integer, etc.) and return it.
 
     This function is designed solely for use by other functions in this file.
 
@@ -64,10 +64,7 @@ def get_var_name(*args, **kwargs):
     var_name                        The name of the variable.
     """
 
-    var_name, args, kwargs = fa.pop_arg(*args, **kwargs)
-    if var_name:
-        return var_name
-    return gp.get_arg_name(0, 1, stack_frame_ix=3)
+    return var_name or gp.get_arg_name(0, 1, stack_frame_ix=3)
 
 
 def process_error_message(error_message):
@@ -80,8 +77,7 @@ def process_error_message(error_message):
 
     For the following explanations, assume the caller of this function is a
     function with the following definition:
-    valid_value(var_value, valid_values=[], invalid_values=[], *args,
-    **kwargs):
+    valid_value(var_value, valid_values=[], invalid_values=[], var_name=None):
 
     If the user of valid_value() is assigning the valid_value() return value
     to a variable, process_error_message() will simply return the
@@ -131,11 +127,11 @@ def process_error_message(error_message):
 
 # Note to programmers:  All of the validation functions in this module should
 # follow the same basic template:
-# def valid_value(var_value, var1, var2, varn, *args, **kwargs):
+# def valid_value(var_value, var1, var2, varn, var_name=None):
 #
 #     error_message = ""
 #     if not valid:
-#         var_name = get_var_name(*args, **kwargs)
+#         var_name = get_var_name(var_name)
 #         error_message += "The following variable is invalid because...:\n"
 #         error_message += gp.sprint_varx(var_name, var_value, gp.blank())
 #
@@ -155,12 +151,6 @@ docstring_header = \
 
 additional_args_docstring_footer = \
     r"""
-    args                            Additional positional arguments (described
-                                    below).
-    kwargs                          Additional keyword arguments (described
-                                    below).
-
-    Additional argument(s):
     var_name                        The name of the variable whose value is
                                     passed in var_value.  For the general
                                     case, this argument is unnecessary as this
@@ -171,7 +161,7 @@ additional_args_docstring_footer = \
     """
 
 
-def valid_type(var_value, required_type, *args, **kwargs):
+def valid_type(var_value, required_type, var_name=None):
     r"""
     The variable value is valid if it is of the required type.
 
@@ -196,7 +186,7 @@ def valid_type(var_value, required_type, *args, **kwargs):
             return process_error_message(error_message)
 
     # If we get to this point, the validation has failed.
-    var_name = get_var_name(*args, **kwargs)
+    var_name = get_var_name(var_name)
     error_message += "Invalid variable type:\n"
     error_message += gp.sprint_varx(var_name, var_value,
                                     gp.blank() | gp.show_type())
@@ -206,8 +196,7 @@ def valid_type(var_value, required_type, *args, **kwargs):
     return process_error_message(error_message)
 
 
-def valid_value(var_value, valid_values=[], invalid_values=[], *args,
-                **kwargs):
+def valid_value(var_value, valid_values=[], invalid_values=[], var_name=None):
 
     r"""
     The variable value is valid if it is either contained in the valid_values
@@ -259,7 +248,7 @@ def valid_value(var_value, valid_values=[], invalid_values=[], *args,
         # Processing the valid_values list.
         if var_value in valid_values:
             return process_error_message(error_message)
-        var_name = get_var_name(*args, **kwargs)
+        var_name = get_var_name(var_name)
         error_message += "Invalid variable value:\n"
         error_message += gp.sprint_varx(var_name, var_value,
                                         gp.blank() | gp.verbose()
@@ -279,7 +268,7 @@ def valid_value(var_value, valid_values=[], invalid_values=[], *args,
     if var_value not in invalid_values:
         return process_error_message(error_message)
 
-    var_name = get_var_name(*args, **kwargs)
+    var_name = get_var_name(var_name)
     error_message += "Invalid variable value:\n"
     error_message += gp.sprint_varx(var_name, var_value,
                                     gp.blank() | gp.verbose()
@@ -292,7 +281,7 @@ def valid_value(var_value, valid_values=[], invalid_values=[], *args,
     return process_error_message(error_message)
 
 
-def valid_range(var_value, lower=None, upper=None, *args, **kwargs):
+def valid_range(var_value, lower=None, upper=None, var_name=None):
     r"""
     The variable value is valid if it is within the specified range.
 
@@ -318,7 +307,7 @@ def valid_range(var_value, lower=None, upper=None, *args, **kwargs):
         return process_error_message(error_message)
     if lower and upper:
         if lower > upper:
-            var_name = get_var_name(*args, **kwargs)
+            var_name = get_var_name(var_name)
             error_message += "Programmer error - the lower value is greater"
             error_message += " than the upper value:\n"
             error_message += gp.sprint_vars(lower, upper, fmt=gp.show_type())
@@ -326,7 +315,7 @@ def valid_range(var_value, lower=None, upper=None, *args, **kwargs):
         if lower <= var_value <= upper:
             return process_error_message(error_message)
 
-    var_name = get_var_name(*args, **kwargs)
+    var_name = get_var_name(var_name)
     error_message += "The following variable is not within the expected"
     error_message += " range:\n"
     error_message += gp.sprint_varx(var_name, var_value, gp.show_type())
@@ -336,7 +325,7 @@ def valid_range(var_value, lower=None, upper=None, *args, **kwargs):
     return process_error_message(error_message)
 
 
-def valid_integer(var_value, lower=None, upper=None, *args, **kwargs):
+def valid_integer(var_value, lower=None, upper=None, var_name=None):
     r"""
     The variable value is valid if it is an integer or can be interpreted as
     an integer (e.g. 7, "7", etc.).
@@ -355,7 +344,7 @@ def valid_integer(var_value, lower=None, upper=None, *args, **kwargs):
     """
 
     error_message = ""
-    var_name = get_var_name(*args, **kwargs)
+    var_name = get_var_name(var_name)
     try:
         var_value = int(str(var_value), 0)
     except ValueError:
@@ -374,7 +363,7 @@ def valid_integer(var_value, lower=None, upper=None, *args, **kwargs):
     return process_error_message(error_message)
 
 
-def valid_dir_path(var_value, *args, **kwargs):
+def valid_dir_path(var_value, var_name=None):
     r"""
     The variable value is valid if it contains the path of an existing
     directory.
@@ -385,14 +374,14 @@ def valid_dir_path(var_value, *args, **kwargs):
 
     error_message = ""
     if not os.path.isdir(str(var_value)):
-        var_name = get_var_name(*args, **kwargs)
+        var_name = get_var_name(var_name)
         error_message += "The following directory does not exist:\n"
         error_message += gp.sprint_varx(var_name, var_value, gp.blank())
 
     return process_error_message(error_message)
 
 
-def valid_file_path(var_value, *args, **kwargs):
+def valid_file_path(var_value, var_name=None):
     r"""
     The variable value is valid if it contains the path of an existing file.
 
@@ -402,14 +391,14 @@ def valid_file_path(var_value, *args, **kwargs):
 
     error_message = ""
     if not os.path.isfile(str(var_value)):
-        var_name = get_var_name(*args, **kwargs)
+        var_name = get_var_name(var_name)
         error_message += "The following file does not exist:\n"
         error_message += gp.sprint_varx(var_name, var_value, gp.blank())
 
     return process_error_message(error_message)
 
 
-def valid_path(var_value, *args, **kwargs):
+def valid_path(var_value, var_name=None):
     r"""
     The variable value is valid if it contains the path of an existing file or
     directory.
@@ -420,7 +409,7 @@ def valid_path(var_value, *args, **kwargs):
 
     error_message = ""
     if not (os.path.isfile(str(var_value)) or os.path.isdir(str(var_value))):
-        var_name = get_var_name(*args, **kwargs)
+        var_name = get_var_name(var_name)
         error_message += "Invalid path (file or directory does not exist):\n"
         error_message += gp.sprint_varx(var_name, var_value, gp.blank())
 
@@ -428,7 +417,7 @@ def valid_path(var_value, *args, **kwargs):
 
 
 def valid_list(var_value, valid_values=[], invalid_values=[],
-               required_values=[], fail_on_empty=False, *args, **kwargs):
+               required_values=[], fail_on_empty=False, var_name=None):
     r"""
     The variable value is valid if it is a list where each entry can be found
     in the valid_values list or if none of its values can be found in the
@@ -471,13 +460,13 @@ def valid_list(var_value, valid_values=[], invalid_values=[],
         return process_error_message(error_message)
 
     if type(var_value) is not list:
-        var_name = get_var_name(*args, **kwargs)
+        var_name = get_var_name(var_name)
         error_message = valid_type(var_value, list, var_name=var_name)
         if error_message:
             return process_error_message(error_message)
 
     if fail_on_empty and len(var_value) == 0:
-        var_name = get_var_name(*args, **kwargs)
+        var_name = get_var_name(var_name)
         error_message += "Invalid empty list:\n"
         error_message += gp.sprint_varx(var_name, var_value, gp.show_type())
         return process_error_message(error_message)
@@ -491,7 +480,7 @@ def valid_list(var_value, valid_values=[], invalid_values=[],
                 display_required_values[ix] = \
                     str(display_required_values[ix]) + "*"
         if found_error:
-            var_name = get_var_name(*args, **kwargs)
+            var_name = get_var_name(var_name)
             error_message += "The following list is invalid:\n"
             error_message += gp.sprint_varx(var_name, var_value,
                                             gp.blank() | gp.show_type())
@@ -516,7 +505,7 @@ def valid_list(var_value, valid_values=[], invalid_values=[],
                 display_var_value[ix] = str(var_value[ix]) + "*"
 
         if found_error:
-            var_name = get_var_name(*args, **kwargs)
+            var_name = get_var_name(var_name)
             error_message += "The following list is invalid (see entries"
             error_message += " marked with \"*\"):\n"
             error_message += gp.sprint_varx(var_name, display_var_value,
@@ -533,7 +522,7 @@ def valid_list(var_value, valid_values=[], invalid_values=[],
             display_var_value[ix] = str(var_value[ix]) + "*"
 
     if found_error:
-        var_name = get_var_name(*args, **kwargs)
+        var_name = get_var_name(var_name)
         error_message += "The following list is invalid (see entries marked"
         error_message += " with \"*\"):\n"
         error_message += gp.sprint_varx(var_name, display_var_value,
@@ -545,7 +534,7 @@ def valid_list(var_value, valid_values=[], invalid_values=[],
     return process_error_message(error_message)
 
 
-def valid_dict(var_value, required_keys=[], *args, **kwargs):
+def valid_dict(var_value, required_keys=[], var_name=None):
     r"""
     The variable value is valid if it is a dictionary containing all of the
     required keys.
@@ -559,7 +548,7 @@ def valid_dict(var_value, required_keys=[], *args, **kwargs):
     error_message = ""
     missing_keys = list(set(required_keys) - set(var_value.keys()))
     if len(missing_keys) > 0:
-        var_name = get_var_name(*args, **kwargs)
+        var_name = get_var_name(var_name)
         error_message += "The following dictionary is invalid because it is"
         error_message += " missing required keys:\n"
         error_message += gp.sprint_varx(var_name, var_value,
@@ -569,7 +558,7 @@ def valid_dict(var_value, required_keys=[], *args, **kwargs):
     return process_error_message(error_message)
 
 
-def valid_program(var_value, *args, **kwargs):
+def valid_program(var_value, var_name=None):
     r"""
     The variable value is valid if it contains the name of a program which can
     be located using the "which" command.
@@ -582,7 +571,7 @@ def valid_program(var_value, *args, **kwargs):
     rc, out_buf = gc.shell_cmd("which " + var_value, quiet=1, show_err=0,
                                ignore_err=1)
     if rc:
-        var_name = get_var_name(*args, **kwargs)
+        var_name = get_var_name(var_name)
         error_message += "The following required program could not be found"
         error_message += " using the $PATH environment variable:\n"
         error_message += gp.sprint_varx(var_name, var_value, gp.blank())
@@ -592,7 +581,7 @@ def valid_program(var_value, *args, **kwargs):
     return process_error_message(error_message)
 
 
-def valid_length(var_value, min_length=None, max_length=None, *args, **kwargs):
+def valid_length(var_value, min_length=None, max_length=None, var_name=None):
     r"""
     The variable value is valid if it is an object (e.g. list, dictionary)
     whose length is within the specified range.
@@ -611,7 +600,7 @@ def valid_length(var_value, min_length=None, max_length=None, *args, **kwargs):
     length = len(var_value)
     error_message = valid_range(length, min_length, max_length)
     if error_message:
-        var_name = get_var_name(*args, **kwargs)
+        var_name = get_var_name(var_name)
         error_message = "The length of the following object is not within the"
         error_message += " expected range:\n"
         error_message += gp.sprint_var(length)
@@ -628,7 +617,7 @@ def valid_length(var_value, min_length=None, max_length=None, *args, **kwargs):
 func_names = [
     "valid_type", "valid_value", "valid_range", "valid_integer",
     "valid_dir_path", "valid_file_path", "valid_path", "valid_list",
-    "valid_dict", "valid_program"
+    "valid_dict", "valid_program", "valid_length"
 ]
 
 raw_doc_strings = {}
