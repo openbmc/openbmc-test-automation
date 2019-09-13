@@ -100,3 +100,44 @@ Get Num Valid FRUs
     ${num_valid_frus}=  Get length  ${fru_records}
 
     [Return]  ${num_valid_frus}
+
+
+Verify Valid Records
+    [Documentation]  Verify all records retrieved with the given arguments are valid.
+    [Arguments]  ${record_type}  ${redfish_uri}  ${reading_type}
+
+    # Description of Argument(s):
+    # record_type    The sensor record type (e.g. "PowerSupplies")
+    # redfish_uri    The power supply URI (e.g. /redfish/v1/Chassis/chassis/Power)
+    # reading_type   The power watt readings (e.g. "PowerInputWatts")
+
+    # A valid record will have "State" key "Enabled" and "Health" key "OK".
+    ${records}=  Redfish.Get Attribute  ${redfish_uri}  ${record_type}
+
+    Rprint Vars  records
+
+    # Example results of records:
+    #
+    # num_records:                     1
+    # records:
+    #   [0]:
+    #     [@odata.id]:                 /redfish/v1/Chassis/chassis/Power#/PowerControl/0
+    #     [@odata.type]:               #Power.v1_0_0.PowerControl
+    #     [MemberId]:                  0
+    #     [Name]:                      Chassis Power Control
+    #     [PowerConsumedWatts]:        264.0
+    #     [PowerLimit]:
+    #       [LimitInWatts]:            None
+    #     [PowerMetrics]:
+    #       [AverageConsumedWatts]:    325
+    #       [IntervalInMin]:           3
+    #       [MaxConsumedWatts]:        538
+    #     [Status]:
+    #       [Health]:                  OK
+    #       [State]:                   Enabled
+
+
+    ${invalid_records}=  Filter Struct  ${records}
+    ...  [('Health', '^OK$'), ('State', '^Enabled$'), ('${reading_type}', '')]  regex=1  invert=1
+
+    Valid Length  invalid_records  max_length=0
