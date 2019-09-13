@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation       Get the systems' power supply voltage readings.
+Documentation       Get the system power supply voltage readings.
 
 Resource            ../../lib/bmc_redfish_resource.robot
 Resource            ../../lib/bmc_redfish_utils.robot
@@ -57,42 +57,12 @@ Verify Voltage Records
 
     Verify Valid Records  ${record_type}  ${redfish_uri}  ${reading_type}
 
-    ${records}=  Redfish.Get Attribute
-    ...  ${redfish_uri}  ${record_type}
+    ${records}=  Redfish.Get Attribute  ${redfish_uri}  ${record_type}
 
     ${invalid_records}=  Evaluate
     ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
 
-    ${num_invalid_records}=  Get Length  ${invalid_records}
-    Run Keyword If  ${num_invalid_records} > ${0}
-    ...  Rprint Vars  num_invalid_records  invalid_records
-    Valid Value  num_invalid_records  valid_values=[0]
-
-
-Verify Valid Records
-    [Documentation]  Verify all the valid records.
-    [Arguments]  ${record_type}  ${redfish_uri}  ${reading_type}
-
-    # Description of Arguments(s):
-    # record_type    The sensor record type (e.g. "PowerSupplies")
-    # redfish_uri    The power supply URI (e.g. /redfish/v1/Chassis/chassis/Power)
-    # reading_type   The power watt readings (e.g. "PowerInputWatts")
-
-    # A valid record will have "State" key "Enabled" and "Health" key "OK".
-    ${records}=  Redfish.Get Attribute
-    ...  ${redfish_uri}  ${record_type}
-
-    ${num_records}=  Get Length  ${records}
-    Rprint Vars  num_records  records
-
-    ${invalid_records}=  Filter Struct  ${records}
-    ...  [('Health', '^OK$'), ('State', '^Enabled$'), ('${reading_type}', '')]  regex=1  invert=1
-    ${num_invalid_records}=  Get Length  ${invalid_records}
-
-    Run Keyword If  ${num_invalid_records} > ${0}
-    ...  Rprint Vars  num_invalid_records  invalid_records
-    Valid Value  num_invalid_records  valid_values=[0]
-
+    Valid Length  invalid_records  max_length=0
 
 Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
