@@ -200,12 +200,49 @@ def sprint_args(arg_obj,
     col1_width = gp.dft_col1_width + indent
 
     buffer = ""
-
     for key in arg_obj.__dict__:
         buffer += gp.sprint_varx(key, getattr(arg_obj, key), 0, indent,
                                  col1_width)
-
     return buffer
+
+
+module = sys.modules["__main__"]
+
+
+def gen_exit_function(signal_number=0,
+                      frame=None):
+    r"""
+    Execute whenever the program ends normally or with the signals that we
+    catch (i.e. TERM, INT).
+    """
+
+    gp.dprint_executing()
+    gp.dprint_var(signal_number)
+
+    # Call the main module's exit_function if it is defined.
+    exit_function = getattr(module, "exit_function", None)
+    if exit_function:
+        exit_function(signal_number, frame)
+
+    gp.qprint_pgm_footer()
+
+
+def gen_signal_handler(signal_number,
+                       frame):
+    r"""
+    Handle signals.  Without a function to catch a SIGTERM or SIGINT, the
+    program would terminate immediately with return code 143 and without
+    calling the exit_function.
+    """
+
+    # The convention is to set up exit_function with atexit.register() so
+    # there is no need to explicitly call exit_function from here.
+
+    gp.dprint_executing()
+
+    # Calling exit prevents control from returning to the code that was
+    # running when the signal was received.
+    exit(0)
 
 
 def gen_post_validation(exit_function=None,
@@ -221,13 +258,39 @@ def gen_post_validation(exit_function=None,
 
     Description of arguments:
     exit_function                   A function object pointing to the caller's
-                                    exit function.
+                                    exit function.  This defaults to this
+                                    module's gen_exit_function.
     signal_handler                  A function object pointing to the caller's
-                                    signal_handler function.
+                                    signal_handler function.  This defaults to
+                                    this module's gen_signal_handler.
     """
 
-    if exit_function is not None:
-        atexit.register(exit_function)
-    if signal_handler is not None:
-        signal.signal(signal.SIGINT, signal_handler)
-        signal.signal(signal.SIGTERM, signal_handler)
+    # Get defaults.
+    exit_function = exit_function or gen_exit_function
+    signal_handler = signal_handler or gen_signal_handler
+
+    atexit.register(exit_function)
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+
+def gen_setup():
+    r"""
+    Do general setup for a program.
+    """
+
+    # Set exit_on_error for gen_valid functions.
+    gv.set_exit_on_error(True)
+
+    # Get main module variable values.
+    parser = getattr(module, "parser")
+    stock_list = getattr(module, "stock_list")
+    validate_parms = getattr(module, "validate_parms", None)
+
+    gen_get_options(parser, stock_list)
+
+    if validate_parms:
+        validate_parms()
+    gen_post_validation()
+
+    gp.qprint_pgm_header()
