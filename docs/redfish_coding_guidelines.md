@@ -83,7 +83,7 @@ It is desirable to avoid excessive redfish logins/logouts for the following
 reasons:
 -	It simplifies the code base.
 -	It allows calling keywords and testcases to keep control over login
-    paramters like USERNAME, PASSWORD, etc.  Consider the following example:
+    parameters like USERNAME, PASSWORD, etc.  Consider the following example:
 
     ```
     # Login to redfish with non-standard username/password.
