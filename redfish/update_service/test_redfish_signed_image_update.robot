@@ -47,6 +47,21 @@ Redfish Fail Unsigned Code Update
     ${IMAGE_FILE_PATH}
 
 
+REST Field Mode Disable Fail
+    [Documentation]  Un-able to set field mode value to false, if field mode value is set to true.
+    [Tags]  REST_Field_Mode_Disable_Fail
+
+    ${field_mode_status}=  Run Keyword and Return Status  Field Mode Should Be Enabled
+    Run Keyword If  '${field_mode_status}' == 'True'
+    ...  Run Keyword
+    ...   REST Disable Field Mode
+    ...  ELSE
+    ...    Run Keywords
+    ...      Enable Field Mode And Verify Unmount  AND
+    ...      Field Mode Should Be Enabled  AND
+    ...      REST Disable Field Mode
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -95,4 +110,12 @@ Redfish Unsigned Firmware Update
     ...    match_state='Disabled', 'Updating', 'Disabled'  image_id=${image_id}
     Delete Software Object
     ...  /xyz/openbmc_project/software/${image_id}
+
+
+REST Disable Field Mode
+    [Documentation]  Failed to set field mode value to False.
+
+    ${args}=  Create Dictionary  data=${0}
+    ${resp}=  OpenBMC Post Request  ${SOFTWARE_VERSION_URI}attr/FieldModeEnabled  data=${args}    
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_METHOD_NOT_ALLOWED}
 
