@@ -425,7 +425,8 @@ Verify IPMI Command
     #                  of above password and privilege (i.e. "Passed" or "Failed").
 
     ${expected_rc}=  Set Variable If  '${expected_status}' == 'Passed'  ${0}  ${1}
-    Run IPMI Standard Command  sel info ${channel}  expected_rc=${expected_rc}  U=${username}  P=${password}
+    Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Standard Command
+    ...  sel info ${channel}  expected_rc=${expected_rc}  U=${username}  P=${password}
     ...  L=${privilege}
 
 

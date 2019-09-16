@@ -22,7 +22,8 @@ Verify Get And Set Management Controller ID String
     # Example:
     # Get Management Controller Identifier String: witherspoon
 
-    ${cmd_output}=  Run IPMI Standard Command  dcmi get_mc_id_string
+    ${cmd_output}=  Wait Until Keyword Succeeds  15 sec  5 sec
+    ...  Run IPMI Standard Command  dcmi get_mc_id_string
 
     # Extract management controller ID from cmd_output.
     ${initial_mc_id}=  Fetch From Right  ${cmd_output}  :${SPACE}
