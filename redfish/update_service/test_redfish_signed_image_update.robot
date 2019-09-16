@@ -47,6 +47,15 @@ Redfish Fail Unsigned Code Update
     ${IMAGE_FILE_PATH}
 
 
+REST Field Mode Disable Fail
+    [Documentation]  Un-able to set field mode value to false, if field mode value is set to true.
+    [Tags]  REST_Field_Mode_Disable_Fail
+
+    ${args}=  Create Dictionary  data=${0}
+    ${resp}=  OpenBMC Post Request  ${SOFTWARE_VERSION_URI}attr/FieldModeEnabled  data=${args}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_METHOD_NOT_ALLOWED}
+
+
 *** Keywords ***
 
 Suite Setup Execution
