@@ -21,20 +21,6 @@ ${allowed_power_diff}=  ${10}
 
 *** Test Cases ***
 
-Set Asset Tag With Valid String Length Via REST
-    [Documentation]  Set valid asset tag via REST and verify.
-    [Tags]  Set_Asset_Tag_With_Valid_String_Length_Via_REST
-
-    ${random_string}=  Generate Random String  63
-    ${args}=  Create Dictionary  data=${random_string}
-    Write Attribute  /xyz/openbmc_project/inventory/system  AssetTag
-    ...  data=${args}
-
-    ${asset_tag}=  Read Attribute  /xyz/openbmc_project/inventory/system
-    ...  AssetTag
-    Should Be Equal As Strings  ${asset_tag}  ${random_string}
-
-
 Verify Chassis Identify via IPMI
     [Documentation]  Verify "chassis identify" using IPMI command.
     [Tags]  Verify_Chassis_Identify_via_IPMI
