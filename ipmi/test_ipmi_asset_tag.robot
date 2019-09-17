@@ -6,6 +6,7 @@ Resource         ../lib/openbmc_ffdc.robot
 
 Test Teardown    FFDC On Test Case Fail
 
+
 *** Test Cases ***
 
 Set Asset Tag With Valid String Length
@@ -28,3 +29,16 @@ Set Asset Tag With Invalid String Length
     ${resp}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  dcmi set_asset_tag ${random_string}
     Should Contain  ${resp}  Parameter out of range  ignore_case=True
+
+
+Set Asset Tag Via IPMI And Verify Using Redfish
+    [Documentation]  Set valid asset tag via IPMI and verify using Redfish.
+    [Tags]  Set_Asset_Tag_Via_IPMI_And_Verify_Using_Redfish
+
+    ${random_string}=  Generate Random String  63
+    Run Keyword  Run IPMI Standard Command  dcmi set_asset_tag ${random_string}
+
+    Redfish.Login
+    ${asset_tag}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  AssetTag
+    Should Be Equal As Strings  ${asset_tag}  ${random_string}
+    Redfish.Logout
