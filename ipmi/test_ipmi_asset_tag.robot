@@ -28,3 +28,17 @@ Set Asset Tag With Invalid String Length
     ${resp}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  dcmi set_asset_tag ${random_string}
     Should Contain  ${resp}  Parameter out of range  ignore_case=True
+
+
+Set Asset Tag With Valid String Length Via Redfish
+    [Documentation]  Set valid asset tag via Redfish and verify.
+    [Tags]  Set_Asset_Tag_With_Valid_String_Length_Via_Redfish
+
+    ${random_string}=  Generate Random String  63
+
+    ${data}=  Create Dictionary  AssetTag=${random_string}
+    Redfish.Login
+    Redfish.Patch  /redfish/v1/Systems/system  body=&{data}
+
+    ${asset_tag}=  Redfish.Get Attribute  /redfish/v1/Systems/system  AssetTag
+    Should Be Equal As Strings  ${asset_tag}  ${random_string}
