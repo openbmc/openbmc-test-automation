@@ -4,6 +4,7 @@ Documentation  Verify OBMC tool's network fuctionality.
 
 Library                 String
 Library                 OperatingSystem
+Library                 ../../lib/bmc_network_utils.py
 Library                 ../../lib/gen_print.py
 Library                 ../../lib/gen_robot_print.py
 Library                 ../../lib/openbmctool_utils.py
@@ -27,7 +28,6 @@ ${domain_name}          randomName.com
 ${mac_address}          76:e2:84:14:87:91
 ${ntp_server}           pool.ntp.org
 ${parser}               |grep "ipv4"|awk -F/ 'NR==1{print$5}'
-${eth0_resource_path}   /xyz/openbmc_project/network/eth0
 ${ignore_err}           ${0}
 
 
@@ -127,10 +127,9 @@ Verify SetNTP
      [Tags]  Verify_SetNTP
 
      Network  setNTP  I=eth0  N=${ntp_server}
-     # Get NTP server details via REST.
-     ${eth0}=  Read Properties  ${eth0_resource_path}  quiet=1
-     Rprint Vars  eth0
-     Valid Value  eth0['NTPServers'][0]  ['${ntp_server}']
+     # Get NTP server details via REDFISH.
+     ${eth0}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+     Valid Value  eth0['NTP']['NTPServers'][0]  ['${ntp_server}']
 
 
 Verify GetNTP
@@ -138,11 +137,33 @@ Verify GetNTP
      [Tags]  Verify_GetNTP
 
      Network  setNTP  I=eth0  N=${ntp_server}
-     # Get NTP server details via REST method.
-     ${eth0}=  Read Properties  ${eth0_resource_path}  quiet=1
-     Rprint Vars  eth0
+     # Get NTP server details via REDFISH.
+     ${eth0}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
      ${tool_ntp}=  Network  getNTP  I=eth0
-     Valid Value  eth0['NTPServers'][0]  ['${tool_ntp}']
+     Valid Value  eth0['NTP']['NTPServers'][0]  ['${tool_ntp}']
+
+
+Verify SetDomainName
+     [Documentation]  Verify set domain name via openbmctool.
+     [Tags]  Verify_SetDomainName
+
+     Network  setDomainName  I=eth0  D=${domain_name}
+     ${eth0}=  Redfish.Get Properties  ${REDFISH_NW_ETH0_URI}
+     ${eth0_domain_name}=  Strip String  ${eth0['FQDN']}
+     ...  characters=${eth0['HostName']}.  mode=left
+     Valid Value  eth0_domain_name  ['${domain_name}']
+
+
+Verify GetDomainName
+     [Documentation]  Verify get domain name via openbmctool.
+     [Tags]  Verify_GetDomainName
+
+     Network  setDomainName  I=eth0  D=${domain_name}
+     ${eth0}=  Redfish.Get Properties  ${REDFISH_NW_ETH0_URI}
+     ${eth0_domain_name}=  Strip String  ${eth0['FQDN']}
+     ...  characters=${eth0['HostName']}.  mode=left
+     ${tool_domain_name}=  Network  getDomainName  I=eth0
+     Valid Value  eth0_domain_name  ['${tool_domain_name}']
 
 
 *** Keywords ***
@@ -153,6 +174,7 @@ Suite Setup Execution
     Valid Value  OPENBMC_HOST
     Valid Value  OPENBMC_USERNAME
     Valid Value  OPENBMC_PASSWORD
+    Redfish.Login
 
     # Verify connectivity to the BMC host.
     ${bmc_version}=  Get BMC Version
