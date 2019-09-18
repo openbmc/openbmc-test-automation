@@ -145,6 +145,25 @@ Verify GetNTP
      Valid Value  eth0['NTPServers'][0]  ['${tool_ntp}']
 
 
+Verify SetDomainName
+     [Documentation]  Verify set domain name via openbmctool.
+     [Tags]  Verify_SetDomainName
+
+     Network  setDomainName  I=eth0  D=${domain_name}
+     ${eth0}=  Read Properties  ${eth0_resource_path}  quiet=1
+     Valid Value  eth0['DomainName'][0]  ['${domain_name}']
+
+
+Verify GetDomainName
+     [Documentation]  Verify get domain name via openbmctool.
+     [Tags]  Verify_GetDomainName
+
+     Network  setDomainName  I=eth0  D=${domain_name}
+     ${eth0}=  Read Properties  ${eth0_resource_path}  quiet=1
+     ${tool_domain_name}=  Network  getDomainName  I=eth0
+     Valid Value  eth0['DomainName'][0]  ['${tool_domain_name}']
+
+
 *** Keywords ***
 
 Suite Setup Execution
