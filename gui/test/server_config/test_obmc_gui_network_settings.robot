@@ -14,14 +14,14 @@ Test Setup      Test Setup Execution
 ${xpath_select_server_configuration}  //*[@id="nav__top-level"]/li[4]/button
 ${xpath_select_network_settings}  //a[@href='#/configuration/network']
 ${xpath_hostname_input}  //*[@id="net-config__mac"]
-${xpath_network_save_settings}  //*[@id="configuration-network"]/form/section[3]/div[2]/button[1]
+${xpath_network_save_settings}  //*[text()="Save settings"]
 ${xpath_continue}  //*[@id=""]/main/section/div/div[4]/button[2]
 ${xpath_network_config_ipv4_address}  //*[@id="ipv4-address-1"]
 ${xpath_default_gateway_input}  //*[@id="net-config__domain"]
 ${xpath_mac_address_input}  //*[@id="net-config__host"]
 ${xpath_ipv4-address-input}  //*[@id="ipv4-address-1"]
-${xpath_network_DHCP_button}  //*[@id="configuration-network"]/form/section[2]/fieldset/div[1]/label/span
-${xpath_network_static_button}  //*[@id="configuration-network"]/form/section[2]/fieldset/div[2]/label/span
+${xpath_network_DHCP_button}  //label[contains(text(),"Obtain an IP address automatically")]
+${xpath_network_static_button}  //label[contains(text(),"Assign a static IP address")]
 
 *** Test Cases ***
 
@@ -43,6 +43,7 @@ Verify Hostname Text Configuration
     Click Element  ${xpath_network_save_settings}
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Click Element  ${xpath_continue}
+    Reload Page
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain  witherspoon1
 
