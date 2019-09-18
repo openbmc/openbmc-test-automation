@@ -3,6 +3,7 @@
 Documentation          Module to test IPMI network functionality.
 Resource               ../lib/ipmi_client.robot
 Resource               ../lib/openbmc_ffdc.robot
+Resource               ../lib/bmc_network_utils.robot
 Library                ../lib/ipmi_utils.py
 Library                ../lib/gen_robot_valid.py
 
@@ -65,6 +66,37 @@ Retrieve MAC Address Via IPMI And Verify Using Redfish
     Valid Value  lan_print_ipmi['MAC Address']  ${mac_address_redfish}
 
 
+Test Valid IPMI Channels Supported
+    [Documentation]  Verify IPMI channels supported on a given system.
+    [Tags]  Test_Valid_IPMI_Channels_Supported
+
+    ${channel_count}=  Get Physical Network Interface Count
+
+    # Note: IPMI network channel logically starts from 1.
+    :FOR  ${channel_number}  IN RANGE  1  ${channel_count}
+    \  Run IPMI Standard Command  lan print ${channel_number}
+
+
+Test Invalid IPMI Channel Response
+    [Documentation]  Verify invalid IPMI channels supported response.
+    [Tags]  Test_Invalid_IPMI_Channel_Response
+
+    ${channel_count}=  Get Physical Network Interface Count
+
+    # To target invalid channel, increment count.
+    ${channel_number}=  Evaluate  ${channel_count} + 1
+
+    # Example of invalid channel:
+    # $ ipmitool -I lanplus -H xx.xx.xx.xx -P password lan print 3
+    # Get Channel Info command failed: Parameter out of range
+    # Invalid channel: 3
+
+    ${stdout}=  Run External IPMI Standard Command
+    ...  lan print ${channel_number}  fail_on_err=${0}
+    Should Contain  ${stdout}  Invalid channel
+    ...  msg=IPMI channel ${channel_number} is invalid but seen working.
+
+
 Verify IPMI Inband Network Configuration
     [Documentation]  Verify BMC network configuration via inband IPMI.
     [Tags]  Verify_IPMI_Inband_Network_Configuration
@@ -84,6 +116,19 @@ Verify IPMI Inband Network Configuration
 
 
 *** Keywords ***
+
+Get Physical Network Interface Count
+    [Documentation]  Return valid physical network interfaces count.
+    # Example:
+    # link/ether 22:3a:7f:70:92:cb brd ff:ff:ff:ff:ff:ff
+    # link/ether 0e:8e:0d:6b:e9:e4 brd ff:ff:ff:ff:ff:ff
+
+    ${mac_entry_list}=  Get BMC MAC Address List
+    ${mac_unique_list}=  Remove Duplicates  ${mac_entry_list}
+    ${physical_interface_count}=  Get Length  ${mac_unique_list}
+
+    [Return]  ${physical_interface_count}
+
 
 Set IPMI Inband Network Configuration
     [Documentation]  Run sequence of standard IPMI command in-band and set
