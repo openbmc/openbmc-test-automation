@@ -70,7 +70,7 @@ BMC Redfish Reset Cycle
 
     Redfish OBMC Reboot (off)
     ${bmc_version}=  Get BMC Version
-    Valid Value  bmc_version  [${initial_bmc_version}]
+    Valid Value  bmc_version  ["${initial_bmc_version}"]
     Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
     Verify BMC RTC And UTC Time Drift
     ${boot_side}=  Get BMC Flash Chip Boot Side
@@ -82,7 +82,7 @@ BMC Reboot Cycle
 
     OBMC Reboot (off)  stack_mode=normal
     ${bmc_version}=  Get BMC Version
-    Valid Value  bmc_version  [${initial_bmc_version}]
+    Valid Value  bmc_version  ["${initial_bmc_version}"]
     Verify BMC RTC And UTC Time Drift
     Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}
     ${boot_side}=  Get BMC Flash Chip Boot Side
