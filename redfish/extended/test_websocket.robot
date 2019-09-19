@@ -24,7 +24,7 @@ Test Teardown        Test Teardown Execution
 
 *** Variables ***
 
-${monitor_pgm}          bin/websocket_monitor.py
+${monitor_pgm}          websocket_monitor.py
 ${monitor_file}         websocket_monitor_out.txt
 ${expected_string}      eSEL received over websocket interface
 ${min_number_chars}     22
