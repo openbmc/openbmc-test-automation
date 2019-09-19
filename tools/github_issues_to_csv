@@ -18,7 +18,7 @@ def write_issues(response, csv_out):
     r"""
     Parses JSON response and writes to CSV.
     """
-    print response
+    print(response)
     if response.status_code != 200:
         raise Exception(response.status_code)
     for issue in response.json():
@@ -61,8 +61,8 @@ def get_issues_from_github_to_csv(name, response):
     name  Name of the GitHub repository
     response  GitHub repository response
     """
-    print name
-    print states
+    print(name)
+    print(states)
 
     # Multiple requests are required if response is paged
     if 'link' in response.headers:
@@ -108,7 +108,7 @@ for repository in args.repositories:
     csvfilename_temp = '{}'.format(repository.replace('/', '-'))
     csvfilename = csvfilename + csvfilename_temp
 csvfilename = csvfilename + '-issues.csv'
-with open(csvfilename, 'wb') as csvfileout:
+with open(csvfilename, 'w') as csvfileout:
     csv_out = csv.writer(csvfileout)
     csv_out.writerow(['Labels', 'Title', 'State', 'Open Date',
                       'Close Date', 'URL', 'Author', 'Assignees',
