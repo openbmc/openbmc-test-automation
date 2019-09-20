@@ -32,6 +32,32 @@ Verify Power Supplies Input Output Voltages
     Voltages        ${REDFISH_CHASSIS_POWER_URI}       ReadingVolts
 
 
+Verify Power Supplies Efficiency Percentage
+    [Documentation]  Verify the efficiency percentage is set to correct value.
+    [Tags]  Verify_Power_Supplies_Efficiency_Percentage
+
+    # Example output:
+    # records:
+    #   [0]:
+    #     [@odata.id]:                /redfish/v1/Chassis/chassis/Power#/PowerSupplies/0
+    #     [EfficiencyPercent]:        90
+    #     [IndicatorLED]:             Off
+    #     [Manufacturer]:
+    #     [MemberId]:                 powersupply0
+    #     [Model]:                    2B1D
+    #     [Name]:                     powersupply0
+    #     [PartNumber]:               01KL779
+    #     [PowerInputWatts]:          106.0
+    #     [SerialNumber]:             75B1C2
+    #     [Status]:
+    #       [Health]:                 OK
+    #       [State]:                  Enabled
+
+    ${records}=  Verify Valid Records  PowerSupplies  ${REDFISH_CHASSIS_POWER_URI}  EfficiencyPercent
+    ${efficiency_percentages}=  Nested Get  EfficiencyPercent  ${records}
+    Valid List  efficiency_percentages  [90]
+
+
 *** Keywords ***
 
 Verify Watts Record
@@ -63,6 +89,7 @@ Verify Voltage Records
     ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
 
     Valid Length  invalid_records  max_length=0
+
 
 Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
