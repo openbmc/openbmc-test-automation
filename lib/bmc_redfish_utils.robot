@@ -137,3 +137,5 @@ Verify Valid Records
     ${invalid_records}=  Filter Struct  ${records}
     ...  [('Health', '^OK$'), ('State', '^Enabled$'), ('${reading_type}', '')]  regex=1  invert=1
     Valid Length  invalid_records  max_length=0
+
+    [Return]  ${records}
