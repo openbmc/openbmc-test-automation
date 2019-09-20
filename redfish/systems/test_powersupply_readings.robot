@@ -32,6 +32,38 @@ Verify Power Supplies Input Output Voltages
     Voltages        ${REDFISH_CHASSIS_POWER_URI}       ReadingVolts
 
 
+Verify Power Supplies Efficiency Percentage
+    [Documentation]  Verify the efficiency percentage is set to correct value.
+    [Tags]  Verify_Power_Supplies_Efficiency_Percentage
+
+    Verify Valid Records  PowerSupplies  ${REDFISH_CHASSIS_POWER_URI}  EfficiencyPercent
+
+    ${records}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_POWER_URI}  PowerSupplies
+    Rprint Vars  records
+
+    # Example output:
+    # records:
+    #   [0]:
+    #     [@odata.id]:                /redfish/v1/Chassis/chassis/Power#/PowerSupplies/0
+    #     [EfficiencyPercent]:        90
+    #     [IndicatorLED]:             Off
+    #     [Manufacturer]:
+    #     [MemberId]:                 powersupply0
+    #     [Model]:                    2B1D
+    #     [Name]:                     powersupply0
+    #     [PartNumber]:               01KL779
+    #     [PowerInputWatts]:          106.0
+    #     [SerialNumber]:             75B1C2
+    #     [Status]:
+    #       [Health]:                 OK
+    #       [State]:                  Enabled
+
+    ${resp}=  Redfish.Get  ${REDFISH_CHASSIS_POWER_URI}
+    @{power_supply_efficiency}=  Get From Dictionary  ${resp.dict}  PowerSupplies
+    : FOR  ${power_supply_efficiency}  IN  @{power_supply_efficiency}
+    \  Valid Value  power_supply_efficiency['EfficiencyPercent']  [90]
+
+
 *** Keywords ***
 
 Verify Watts Record
@@ -63,6 +95,7 @@ Verify Voltage Records
     ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
 
     Valid Length  invalid_records  max_length=0
+
 
 Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
