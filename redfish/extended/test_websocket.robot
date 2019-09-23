@@ -24,7 +24,8 @@ Test Teardown        Test Teardown Execution
 
 *** Variables ***
 
-${monitor_pgm}          websocket_monitor.py
+#${monitor_pgm}          websocket_monitor.py
+${monitor_pgm}          ${EXECDIR}/bin/websocket_monitor.py
 ${monitor_file}         websocket_monitor_out.txt
 ${expected_string}      eSEL received over websocket interface
 ${min_number_chars}     22
@@ -129,7 +130,7 @@ Suite Setup Execution
 Test Teardown Execution
     [Documentation]  Do teardown tasks after a test.
 
-    FFDC On Test Case Fail
+    ####FFDC On Test Case Fail
     Run Keyword If  '${TEST_STATUS}' == 'FAIL'  Print Websocket Monitor Log
     Kill Websocket Monitor
 
