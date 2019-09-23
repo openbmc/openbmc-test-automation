@@ -24,7 +24,7 @@ Test Teardown        Test Teardown Execution
 
 *** Variables ***
 
-${monitor_pgm}          websocket_monitor.py
+${monitor_pgm}          python websocket_monitor.py
 ${monitor_file}         websocket_monitor_out.txt
 ${expected_string}      eSEL received over websocket interface
 ${min_number_chars}     22
@@ -37,6 +37,30 @@ ${monitor_cmd}          ${monitor_pgm} ${OPENBMC_HOST} --openbmc_username ${OPEN
 Test BMC Websocket Interface
     [Documentation]  Verify eSELs are seen over the websocket interface.
     [Tags]  Test_BMC_Websocket_Interface
+
+    Log To Console  ========================================= SMS000 ============================
+    ${bmc_version}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  cat /etc/os-release
+    Printn
+    Rprint Vars  bmc_version
+    Log To Console  ========================================= SMS000A ============================
+
+    Log To Console  ===================================EXECDIR=${EXECDIR} ===================
+
+    ${dirlist}=  OperatingSystem.List Directory  ${EXECDIR}/bin
+    Rprint Vars  dirlist
+    Log To Console  ========================================= SMS000B ============================
+
+    ${openbmctool_file_path}=  which  openbmctool.py
+    Printn
+    Rprint Vars  openbmctool_file_path
+    Log To Console  ========================================= SMS000C ============================
+
+    ${my_file_path}=  which  websocket_monitor.py
+    Printn
+    Rprint Vars  my_file_path
+    Log To Console  ========================================= SMS000B ============================
+
 
     # Spawn the websocket monitor program and then generate an eSEL.
     # The monitor should asynchronously receive the eSEL through the
@@ -51,6 +75,11 @@ Test BMC Websocket Interface
 
     ${current_esel_count}=   Get Number Of Event Logs
 
+
+
+    Log To Console  ========================================= SMS001 ============================
+    Rprint Vars  initial_esel_count  current_esel_count
+    Log To Console  ========================================= SMS001 ============================
     Run Keyword If  ${initial_esel_count} == ${current_esel_count}
     ...  Fail  msg=System failed to generate eSEL upon request.
 
@@ -129,7 +158,7 @@ Suite Setup Execution
 Test Teardown Execution
     [Documentation]  Do teardown tasks after a test.
 
-    FFDC On Test Case Fail
+    ####FFDC On Test Case Fail
     Run Keyword If  '${TEST_STATUS}' == 'FAIL'  Print Websocket Monitor Log
     Kill Websocket Monitor
 
