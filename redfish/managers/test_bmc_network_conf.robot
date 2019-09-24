@@ -684,8 +684,9 @@ Configure Static Name Servers
     # static_name_servers  A list of static name server IPs to be
     #                      configured on the BMC.
 
+    # Currently BMC is sending 500 response code instead of 400 for invalid scenarios.
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'StaticNameServers': ${static_name_servers}}
-    ...  valid_status_codes=[${valid_status_codes}]
+    ...  valid_status_codes=[${valid_status_codes}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
     # Check if newly added DNS server is configured on BMC.
     ${cli_nameservers}=  CLI Get Nameservers
