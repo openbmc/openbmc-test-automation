@@ -685,7 +685,7 @@ Configure Static Name Servers
     #                      configured on the BMC.
 
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'StaticNameServers': ${static_name_servers}}
-    ...  valid_status_codes=[${valid_status_codes}]
+    ...  valid_status_codes=[${valid_status_codes}, 500]
 
     # Check if newly added DNS server is configured on BMC.
     ${cli_nameservers}=  CLI Get Nameservers
