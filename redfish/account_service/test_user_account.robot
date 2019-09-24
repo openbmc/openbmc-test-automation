@@ -13,7 +13,6 @@ Test Teardown    Test Teardown Execution
 ${account_lockout_duration}   ${30}
 ${account_lockout_threshold}  ${3}
 
-
 ** Test Cases **
 
 Verify AccountService Available
@@ -315,6 +314,9 @@ Redfish Create User
 
     Run Keyword If  ${enabled} == ${False}
     ...  Redfish.Login
+
+    Run Keyword If  '${role_id}' == 'Callback'
+    ...  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     # Validate Role ID of created user.
     ${role_config}=  Redfish_Utils.Get Attribute
