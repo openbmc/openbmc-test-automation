@@ -359,7 +359,10 @@ def shell_cmd(command_string,
     fork                            Run the command string asynchronously
                                     (i.e. don't wait for status of the child
                                     process and don't try to get
-                                    stdout/stderr).
+                                    stdout/stderr) and return the Popen object
+                                    created by the subprocess.popen()
+                                    function.  See the kill_cmd function for
+                                    details on how to process the popen object.
     """
 
     err_msg = gv.valid_value(command_string)
@@ -401,7 +404,7 @@ def shell_cmd(command_string,
                                     stdout=subprocess.PIPE,
                                     stderr=stderr)
         if fork:
-            return (0, "", "") if return_stderr else (0, "")
+            return sub_proc
 
         if time_out:
             command_timed_out = False
@@ -486,6 +489,32 @@ def t_shell_cmd(command_string, **kwargs):
     kwargs['test_mode'] = test_mode
 
     return shell_cmd(command_string, **kwargs)
+
+
+def kill_cmd(popen, sig=signal.SIGTERM):
+    r"""
+    Kill the subprocess represented by the Popen object and return a tuple
+    consisting of the shell return code and the output.
+
+    This function is meant to be used as the follow-up for a call to
+    shell_cmd(..., fork=1).
+
+    Example:
+    popen = shell_cmd("some_pgm.py", fork=1)
+    ...
+    shell_rc, output = kill_cmd(popen)
+
+    Description of argument(s):
+    popen                           A Popen object returned by the
+                                    subprocess.Popen() command.
+    sig                             The signal to be sent to the child process.
+    """
+
+    gp.dprint_var(popen.pid)
+    os.killpg(popen.pid, sig)
+    stdout, stderr = popen.communicate()
+    shell_rc = popen.returncode
+    return (shell_rc, stdout, stderr) if stderr else (shell_rc, stdout)
 
 
 def re_order_kwargs(stack_frame_ix, **kwargs):
