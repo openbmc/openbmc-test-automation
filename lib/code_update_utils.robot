@@ -592,7 +592,8 @@ Set ApplyTime
     # Description of argument(s):
     # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
-    Redfish.Patch  ${REDFISH_BASE_URI}UpdateService  body={'ApplyTime' : '${policy}'}
+    Redfish.Patch  ${REDFISH_BASE_URI}UpdateService
+    ...  body={'HttpPushUriOptions' : {'HttpPushUriApplyTime' : {'ApplyTime' : '${policy}'}}}
     ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
     Valid Value  apply_time  valid_values=["xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.${policy}"]
     Rprint Vars  apply_time
