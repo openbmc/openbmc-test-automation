@@ -36,21 +36,13 @@ Retrieve IP Address Via IPMI And Verify Using Redfish
     Valid Value  lan_print_ipmi['IP Address']  ${ip_list_redfish}
 
 
-Retrieve Default Gateway Via IPMI And Verify Using Redfish
-    [Documentation]  Retrieve default gateway via IPMI and verify using Redfish.
-    [Tags]  Retrieve_Default_Gateway_Via_IPMI_And_Verify_Using_Redfish
+Retrieve Default Gateway Via IPMI And Verify
+    [Documentation]  Retrieve default gateway via IPMI and verify it's existence on the BMC.
+    [Tags]  Retrieve_Default_Gateway_Via_IPMI_And_Verify
 
     ${lan_print_ipmi}=  Get LAN Print Dict
 
-    # Fetch gateway address list using redfish.
-    ${gateway_list_redfish}=  Create List
-    Redfish.Login
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
-    @{network_config_redfish}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
-    : FOR  ${network_config_redfish}  IN  @{network_config_redfish}
-    \  Append To List  ${gateway_list_redfish}  ${network_config_redfish['Gateway']}
-
-    Valid Value  lan_print_ipmi['Default Gateway IP']  ${gateway_list_redfish}
+    Verify Gateway On BMC  ${lan_print_ipmi['Default Gateway IP']}
 
 
 Retrieve MAC Address Via IPMI And Verify Using Redfish
