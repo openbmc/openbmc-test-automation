@@ -14,9 +14,10 @@ Test Teardown    FFDC On Test Case Fail
 Force Tags       LDAP_Test
 
 *** Variables ***
-${old_ldap_privilege}  ${EMPTY}
+${old_ldap_privilege}   ${EMPTY}
 &{old_account_service}  &{EMPTY}
-&{old_ldap_config}  &{EMPTY}
+&{old_ldap_config}      &{EMPTY}
+${hostname}             ${EMPTY}
 
 ** Test Cases **
 
@@ -286,7 +287,6 @@ Verify Authorization With Null Privilege
     [Documentation]  Verify the failure of LDAP authorization with empty
     ...  privilege.
     [Tags]  Verify_LDAP_Authorization_With_Null_Privilege
-    [Setup]  Create LDAP Configuration
     [Teardown]  Restore LDAP Privilege
 
     Update LDAP Config And Verify Set Host Name  ${GROUP_NAME}  ${EMPTY}
@@ -297,7 +297,6 @@ Verify Authorization With Invalid Privilege
     [Documentation]  Verify that LDAP user authorization with wrong privilege
     ...  fails.
     [Tags]  Verify_LDAP_Authorization_With_Invalid_Privilege
-    [Setup]  Create LDAP Configuration
     [Teardown]  Restore LDAP Privilege
 
     Update LDAP Config And Verify Set Host Name  ${GROUP_NAME}
@@ -335,7 +334,6 @@ Verify LDAP Authentication Without Password
     [Documentation]  Verify that LDAP user authentication without LDAP
     ...  user password fails.
     [Tags]  Verify_LDAP_Authentication_Without_Password
-    [Setup]  Create LDAP Configuration
 
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
     Valid Value  status  [${False}]
@@ -384,8 +382,7 @@ Verify Group Name And Group Privilege Able To Modify
     [Documentation]  Verify that LDAP group name and group privilege able to
     ...  modify.
     [Tags]  Verify_Group_Name_And_Group_Privilege_Able_To_Modify
-    [Setup]  Run Keywords  Create LDAP Configuration  AND
-    ...  Update LDAP Configuration with LDAP User Role And Group
+    [Setup]  Update LDAP Configuration with LDAP User Role And Group
     ...  ${LDAP_TYPE}  Operator  ${GROUP_NAME}
 
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
@@ -409,7 +406,6 @@ Verify LDAP Authentication With Invalid LDAP User
     [Documentation]  Verify that LDAP user authentication for user not exist
     ...  in LDAP server and fails.
     [Tags]  Verify_LDAP_Authentication_With_Invalid_LDAP_User
-    [Setup]  Create LDAP Configuration
 
     ${status}=  Run Keyword And Return Status  Redfish.Login  INVALID_LDAP_USER
     ...  ${LDAP_USER_PASSWORD}
@@ -455,7 +451,6 @@ Update LDAP Config And Verify Set Host Name
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # Verify that the LDAP user in ${group_name} with the given privilege is
     # allowed to change the hostname.
-    ${hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=${valid_status_codes}
     Redfish.Logout
@@ -543,6 +538,8 @@ Suite Setup Execution
     Get LDAP Configuration  ${LDAP_TYPE}
     ${old_ldap_privilege}=  Get LDAP Privilege
     Disable Other LDAP
+    Create LDAP Configuration
+    ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
 
 
 Set Read Privilege And Check Firmware Inventory
