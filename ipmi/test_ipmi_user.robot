@@ -6,7 +6,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Library             ../lib/ipmi_utils.py
 
 Test Teardown       Test Teardown Execution
-
+Suite Teardown      Delete All Non Root IPMI User
 
 *** Variables ***
 
@@ -434,4 +434,3 @@ Test Teardown Execution
     [Documentation]  Do the test teardown execution.
 
     FFDC On Test Case Fail
-    Delete All Non Root IPMI User
