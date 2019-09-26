@@ -4,6 +4,7 @@ Documentation    Verify that firmware update properties.
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Library          ../../lib/gen_robot_valid.py
 
 Suite Setup      Redfish.Login
 Suite Teardown   Redfish.Logout
@@ -17,21 +18,19 @@ Verify Firmware Update ApplyTime Immediate
     [Tags]  Verify_Firmware_Update_ApplyTime_Immediate
 
     # Example:
-    # /xyz/openbmc_project/software/apply_time
-    # {
-    #   "data": {
-    #       "RequestedApplyTime": "xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.Immediate"
-    #   },
-    #   "message": "200 OK",
-    #   "status": "ok"
+    # /redfish/v1/UpdateService
+    # "HttpPushUriOptions": {
+    #    "HttpPushUriApplyTime": {
+    #        "ApplyTime": "Immediate"
+    #    }
     # }
 
-    Redfish.Patch  ${REDFISH_BASE_URI}UpdateService  body={'ApplyTime' : 'Immediate'}
+    Redfish.Patch  ${REDFISH_BASE_URI}UpdateService
+    ...  body={'HttpPushUriOptions' : {'HttpPushUriApplyTime' : {'ApplyTime' : 'Immediate'}}}
 
-    # TODO: Move to redfish when available.
-    ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
-    Rprint Vars  apply_time
-    Should Be Equal   ${apply_time}  xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.Immediate
+    ${apply_time_dict}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}UpdateService  HttpPushUriOptions
+    Rprint Vars  apply_time_dict
+    Valid Value  apply_time_dict["HttpPushUriApplyTime"]["ApplyTime"]  ['Immediate']
 
 
 Verify Firmware Update ApplyTime OnReset
@@ -39,25 +38,24 @@ Verify Firmware Update ApplyTime OnReset
     [Tags]  Verify_Firmware_Update_ApplyTime_OnReset
 
     # Example:
-    # /xyz/openbmc_project/software/apply_time
-    # {
-    #   "data": {
-    #       "RequestedApplyTime": "xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.OnReset"
-    #   },
-    #   "message": "200 OK",
-    #   "status": "ok"
+    # /redfish/v1/UpdateService
+    # "HttpPushUriOptions": {
+    #    "HttpPushUriApplyTime": {
+    #        "ApplyTime": "OnReset"
+    #    }
     # }
 
-    Redfish.Patch  ${REDFISH_BASE_URI}UpdateService  body={'ApplyTime' : 'OnReset'}
+    Redfish.Patch  ${REDFISH_BASE_URI}UpdateService
+    ...  body={'HttpPushUriOptions' : {'HttpPushUriApplyTime' : {'ApplyTime' : 'OnReset'}}}
 
-    # TODO: Move to redfish when available.
-    ${apply_time}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
-    Rprint Vars  apply_time
-    Should Be Equal   ${apply_time}  xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.OnReset
+    ${apply_time_dict}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}UpdateService  HttpPushUriOptions
+    Rprint Vars  apply_time_dict
+    Valid Value  apply_time_dict["HttpPushUriApplyTime"]["ApplyTime"]  ['OnReset']
 
 
 Verify Firmware Update ApplyTime Invalid
     [Documentation]  Verify supported apply time returns error on invalid value.
     [Tags]  Verify_Firmware_Update_ApplyTime_Invalid
 
-    Redfish.Patch  ${REDFISH_BASE_URI}UpdateService  body={'ApplyTime' : 'Invalid'}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    Redfish.Patch  ${REDFISH_BASE_URI}UpdateService
+    ...  body={'HttpPushUriOptions' : {'HttpPushUriApplyTime' : {'ApplyTime' : 'Invalid'}}}  valid_status_codes=[${HTTP_BAD_REQUEST}]
