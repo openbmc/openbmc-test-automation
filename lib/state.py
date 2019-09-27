@@ -97,6 +97,7 @@ valid_req_states = ['ping',
                     'packet_loss',
                     'uptime',
                     'epoch_seconds',
+                    'elapsed_boot_time',
                     'rest',
                     'chassis',
                     'requested_chassis',
@@ -190,13 +191,13 @@ def anchor_state(state):
     each item in the state dictionary passed in.  Return the resulting
     dictionary.
 
-    Description of Arguments:
+    Description of argument(s):
     state    A dictionary such as the one returned by the get_state()
              function.
     """
 
     anchored_state = state.copy()
-    for key, match_state_value in anchored_state.items():
+    for key in anchored_state.keys():
         anchored_state[key] = "^" + str(anchored_state[key]) + "$"
 
     return anchored_state
@@ -208,16 +209,23 @@ def strip_anchor_state(state):
     of each item in the state dictionary passed in.  Return the resulting
     dictionary.
 
-    Description of Arguments:
+    Description of argument(s):
     state    A dictionary such as the one returned by the get_state()
              function.
     """
 
     stripped_state = state.copy()
-    for key, match_state_value in stripped_state.items():
+    for key in stripped_state.keys():
         stripped_state[key] = stripped_state[key].strip("^$")
 
     return stripped_state
+
+
+def expressions_key():
+    r"""
+    Return expressions key constant.
+    """
+    return '<expressions>'
 
 
 def compare_states(state,
@@ -230,7 +238,7 @@ def compare_states(state,
     that it does have, the corresponding state entry will be checked for a
     match.
 
-    Description of arguments:
+    Description of argument(s):
     state           A state dictionary such as the one returned by the
                     get_state function.
     match_state     A dictionary whose key/value pairs are "state field"/
@@ -241,16 +249,28 @@ def compare_states(state,
                     be matching.  If match_type is 'or', if any two of the
                     elements compared match, the two dictionaries are
                     considered to be matching.
+
                     This value may also be any string accepted by
-                    return_state_constant (e.g. "standby_match_state").
-                    In such a case this function will call
-                    return_state_constant to convert it to a proper
-                    dictionary as described above.
+                    return_state_constant (e.g. "standby_match_state").  In
+                    such a case this function will call return_state_constant
+                    to convert it to a proper dictionary as described above.
+
+                    Finally, one special value is accepted for the key field:
+                    expression_key().  If such an entry exists, its value is
+                    taken to be a list of expressions to be evaluated.  These
+                    expressions may reference state dictionary entries by
+                    simply coding them in standard python syntax (e.g.
+                    state['key1']).  What follows is an example expression:
+
+                    "int(float(state['uptime'])) < int(state['elapsed_boot_time'])"
+
+                    In this example, if the state dictionary's 'uptime' entry
+                    is less than its 'elapsed_boot_time' entry, it would
+                    qualify as a match.
     match_type      This may be 'and' or 'or'.
     """
 
-    error_message = gv.valid_value(match_type, var_name="match_type",
-                                   valid_values=['and', 'or'])
+    error_message = gv.valid_value(match_type, valid_values=['and', 'or'])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
@@ -264,13 +284,19 @@ def compare_states(state,
         # Blank match_state_value means "don't care".
         if match_state_value == "":
             continue
-        try:
-            match = (re.match(match_state_value, str(state[key])) is not None)
-        except KeyError:
-            match = False
-
-        if match != default_match:
-            return match
+        if key == expressions_key():
+            for expr in match_state_value:
+                # Use python interpreter to evaluate the expression.
+                match = eval(expr)
+                if match != default_match:
+                    return match
+        else:
+            try:
+                match = (re.match(match_state_value, str(state[key])) is not None)
+            except KeyError:
+                match = False
+            if match != default_match:
+                return match
 
     return default_match
 
@@ -287,7 +313,7 @@ def get_os_state(os_host="",
 
     Note that all substate values are strings.
 
-    Description of arguments:
+    Description of argument(s):
     os_host      The DNS name or IP address of the operating system.
                  This defaults to global ${OS_HOST}.
     os_username  The username to be used to login to the OS.
@@ -310,22 +336,19 @@ def get_os_state(os_host="",
     # Set parm defaults where necessary and validate all parms.
     if os_host == "":
         os_host = BuiltIn().get_variable_value("${OS_HOST}")
-    error_message = gv.valid_value(os_host, var_name="os_host",
-                                   invalid_values=[None, ""])
+    error_message = gv.valid_value(os_host, invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
     if os_username == "":
         os_username = BuiltIn().get_variable_value("${OS_USERNAME}")
-    error_message = gv.valid_value(os_username, var_name="os_username",
-                                   invalid_values=[None, ""])
+    error_message = gv.valid_value(os_username, invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
     if os_password == "":
         os_password = BuiltIn().get_variable_value("${OS_PASSWORD}")
-    error_message = gv.valid_value(os_password, var_name="os_password",
-                                   invalid_values=[None, ""])
+    error_message = gv.valid_value(os_password, invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
@@ -390,7 +413,12 @@ def get_state(openbmc_host="",
 
     Note that all substate values are strings.
 
-    Description of arguments:
+    Note: If elapsed_boot_time is included in req_states, it is the caller's
+    duty to call set_start_boot_seconds() in order to set global
+    start_boot_seconds.  elapsed_boot_time is the current time minus
+    start_boot_seconds.
+
+    Description of argument(s):
     openbmc_host      The DNS name or IP address of the BMC.
                       This defaults to global ${OPENBMC_HOST}.
     openbmc_username  The username to be used to login to the BMC.
@@ -415,25 +443,19 @@ def get_state(openbmc_host="",
     # Set parm defaults where necessary and validate all parms.
     if openbmc_host == "":
         openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
-    error_message = gv.valid_value(openbmc_host,
-                                   var_name="openbmc_host",
-                                   invalid_values=[None, ""])
+    error_message = gv.valid_value(openbmc_host, invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
     if openbmc_username == "":
         openbmc_username = BuiltIn().get_variable_value("${OPENBMC_USERNAME}")
-    error_message = gv.valid_value(openbmc_username,
-                                   var_name="openbmc_username",
-                                   invalid_values=[None, ""])
+    error_message = gv.valid_value(openbmc_username, invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
     if openbmc_password == "":
         openbmc_password = BuiltIn().get_variable_value("${OPENBMC_PASSWORD}")
-    error_message = gv.valid_value(openbmc_password,
-                                   var_name="openbmc_password",
-                                   invalid_values=[None, ""])
+    error_message = gv.valid_value(openbmc_password, invalid_values=[None, ""])
     if error_message != "":
         BuiltIn().fail(gp.sprint_error(error_message))
 
@@ -465,6 +487,7 @@ def get_state(openbmc_host="",
     packet_loss = ''
     uptime = ''
     epoch_seconds = ''
+    elapsed_boot_time = ''
     rest = ''
     chassis = ''
     requested_chassis = ''
@@ -503,8 +526,8 @@ def get_state(openbmc_host="",
         cmd_buf = ["BMC Execute Command",
                    re.sub('\\$', '\\$', remote_cmd_buf), 'quiet=1',
                    'test_mode=0']
-        gp.print_issuing(cmd_buf, 0)
-        gp.print_issuing(remote_cmd_buf, 0)
+        gp.qprint_issuing(cmd_buf, 0)
+        gp.qprint_issuing(remote_cmd_buf, 0)
         try:
             stdout, stderr, rc =\
                 BuiltIn().wait_until_keyword_succeeds("10 sec", "0 sec",
@@ -514,7 +537,7 @@ def get_state(openbmc_host="",
         except AssertionError as my_assertion_error:
             pass
 
-    if 'epoch_seconds' in req_states:
+    if 'epoch_seconds' in req_states or 'elapsed_boot_time' in req_states:
         date_cmd_buf = "date -u +%s"
         if USE_BMC_EPOCH_TIME:
             cmd_buf = ["BMC Execute Command", date_cmd_buf, 'quiet=${1}']
@@ -532,6 +555,10 @@ def get_state(openbmc_host="",
                                              print_output=0)
             if shell_rc == 0:
                 epoch_seconds = out_buf.rstrip("\n")
+
+    if 'elapsed_boot_time' in req_states:
+        global start_boot_seconds
+        elapsed_boot_time = int(epoch_seconds) - start_boot_seconds
 
     master_req_rest = ['rest', 'host', 'requested_host', 'operating_system',
                        'attempts_left', 'boot_progress', 'chassis',
@@ -648,7 +675,7 @@ def check_state(match_state,
     state.  On success, this keyword returns the machine's composite state as a
     dictionary.
 
-    Description of arguments:
+    Description of argument(s):
     match_state       A dictionary whose key/value pairs are "state field"/
                       "state value".  The state value is interpreted as a
                       regular expression.  Example call from robot:
@@ -686,7 +713,10 @@ def check_state(match_state,
     except TypeError:
         pass
 
-    req_states = match_state.keys()
+    req_states = list(match_state.keys())
+    # Remove special-case match key from req_states.
+    if expressions_key() in req_states:
+        req_states.remove(expressions_key())
     # Initialize state.
     state = get_state(openbmc_host=openbmc_host,
                       openbmc_username=openbmc_username,
@@ -737,7 +767,7 @@ def wait_state(match_state=(),
     state.  On success, this keyword returns the machine's composite state as
     a dictionary.
 
-    Description of arguments:
+    Description of argument(s):
     match_state       A dictionary whose key/value pairs are "state field"/
                       "state value".  See check_state (above) for details.
                       This value may also be any string accepted by
@@ -831,13 +861,24 @@ def wait_state(match_state=(),
     return state
 
 
+def set_start_boot_seconds(value=0):
+    global start_boot_seconds
+    start_boot_seconds = int(value)
+
+
+set_start_boot_seconds(0)
+
+
 def wait_for_comm_cycle(start_boot_seconds,
                         quiet=None):
     r"""
-    Wait for communications to the BMC to stop working and then resume working.
-    This function is useful when you have initiated some kind of reboot.
+    Wait for the BMC uptime to be less than elapsed_boot_time.
 
-    Description of arguments:
+    This function will tolerate an expected loss of communication to the BMC.
+    This function is useful when some kind of reboot has been initiated by the
+    caller.
+
+    Description of argument(s):
     start_boot_seconds  The time that the boot test started.  The format is the
                         epoch time in seconds, i.e. the number of seconds since
                         1970-01-01 00:00:00 UTC.  This value should be obtained
@@ -853,45 +894,17 @@ def wait_for_comm_cycle(start_boot_seconds,
     quiet = int(gp.get_var_value(quiet, 0))
 
     # Validate parms.
-    error_message = gv.valid_integer(start_boot_seconds,
-                                     var_name="start_boot_seconds")
-    if error_message != "":
+    error_message = gv.valid_integer(start_boot_seconds)
+    if error_message:
         BuiltIn().fail(gp.sprint_error(error_message))
 
-    match_state = anchor_state(DotDict([('packet_loss', '100')]))
-    # Wait for 100% packet loss trying to ping machine.
-    wait_state(match_state, wait_time="8 mins", interval="0 seconds")
-
-    match_state['packet_loss'] = '^0$'
-    # Wait for 0% packet loss trying to ping machine.
-    wait_state(match_state, wait_time="8 mins", interval="0 seconds")
-
-    # Get the uptime and epoch seconds for comparisons.  We want to be sure
-    # that the uptime is less than the elapsed boot time.  Further proof that
-    # a reboot has indeed occurred (vs random network instability giving a
-    # false positive.  We also use wait_state because the BMC may take a short
-    # while to be ready to process SSH requests.
+    # Wait for uptime to be less than elapsed_boot_time.
+    set_start_boot_seconds(start_boot_seconds)
+    expr = 'int(float(state[\'uptime\'])) < int(state[\'elapsed_boot_time\'])'
     match_state = DotDict([('uptime', '^[0-9\\.]+$'),
-                           ('epoch_seconds', '^[0-9]+$')])
-    state = wait_state(match_state, wait_time="2 mins", interval="1 second")
-
-    elapsed_boot_time = int(state['epoch_seconds']) - start_boot_seconds
-    gp.qprint_var(elapsed_boot_time)
-    if state['uptime'] == "":
-        error_message = "Unable to obtain uptime from the BMC. BMC is not" +\
-            " communicating."
-        BuiltIn().fail(gp.sprint_error(error_message))
-    if int(float(state['uptime'])) < elapsed_boot_time:
-        uptime = state['uptime']
-        gp.qprint_var(uptime)
-        gp.qprint_timen("The uptime is less than the elapsed boot time,"
-                        + " as expected.")
-    else:
-        error_message = "The uptime is greater than the elapsed boot time," +\
-                        " which is unexpected:\n" +\
-                        gp.sprint_var(start_boot_seconds) +\
-                        gp.sprint_var(state)
-        BuiltIn().fail(gp.sprint_error(error_message))
+                           ('elapsed_boot_time', '^[0-9]+$'),
+                           (expressions_key(), [expr])])
+    wait_state(match_state, wait_time="8 mins", interval="5 seconds")
 
     gp.qprint_timen("Verifying that REST API interface is working.")
     match_state = DotDict([('rest', '^1$')])
