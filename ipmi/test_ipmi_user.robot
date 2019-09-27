@@ -254,6 +254,9 @@ Enable IPMI User And Verify
     # Set admin privilege and enable IPMI messaging for newly created user.
     Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
 
+    # Delay added for user privilge to get set.
+    Sleep  5s
+
     # Enable IPMI user and verify.
     Run IPMI Standard Command  user enable ${random_userid}
     ${user_info}=  Get User Info  ${random_userid}
@@ -301,7 +304,8 @@ Verify IPMI Root User Password Change
     ...  user set password ${root_userid} ${valid_password}
 
     # Verify that root user is able to run IPMI command using new password.
-    Verify IPMI Username And Password  root  ${valid_password}
+    Wait Until Keyword Succeeds  15 sec  5 sec  Verify IPMI Username And Password
+    ...  root  ${valid_password}
 
 
 Verify Administrator And No Access Privilege For Different Channels
@@ -398,6 +402,9 @@ Test IPMI User Privilege
 
     # Set privilege and enable IPMI messaging for newly created user.
     Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege_level}
+
+    # Delay added for user privilge to get set.
+    Sleep  5s
 
     # Enable IPMI user and verify.
     Run IPMI Standard Command  user enable ${random_userid}
