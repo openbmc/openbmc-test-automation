@@ -84,7 +84,7 @@ BMC Reboot Cycle
     ${bmc_version}=  Get BMC Version
     Valid Value  bmc_version  ["${initial_bmc_version}"]
     Verify BMC RTC And UTC Time Drift
-    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}
+    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
     ${boot_side}=  Get BMC Flash Chip Boot Side
     Valid Value  boot_side  ['0']
 
