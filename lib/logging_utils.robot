@@ -204,6 +204,14 @@ Get Event Logs
     [Return]  ${members}
 
 
+Get Event Logs Not Ok
+    [Documentation]  Get all event logs where the 'Severity' is not 'OK'.
+
+    ${members}=  Get Event Logs
+    ${severe_logs}=  Evaluate  [elog for elog in $members if elog['Severity'] != 'OK']
+    [Return]  ${severe_logs}
+
+
 Get Number Of Event Logs
     [Documentation]  Return the number of EventLog members.
 
