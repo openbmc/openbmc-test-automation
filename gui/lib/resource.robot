@@ -139,7 +139,7 @@ Test Setup Execution
     ...  Run Keywords  Power On OpenBMC  AND
     ...  Wait Until Keyword Succeeds  10 min  60 sec  Is Host Running
     Run Keyword If  '${obmc_test_setup_state}' == '${obmc_PowerOff_state}'
-    ...  Power Off OpenBMC
+    ...  Run Keywords  Redfish.Login  AND  Redfish Power Off
 
 Power Off OpenBMC
     [Documentation]  Power off the OBMC system.
