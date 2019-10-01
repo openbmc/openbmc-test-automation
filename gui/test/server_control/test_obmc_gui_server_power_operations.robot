@@ -7,6 +7,8 @@ Resource         ../../lib/resource.robot
 Test Setup       Test Setup Execution  ${OBMC_PowerOff_state}
 Test Teardown    Test Teardown Execution
 
+Force Tags       Power_Operations
+
 *** Variables ***
 ${xpath_select_server_control}           //*[contains(@class,"btn-control")]
 ${xpath_select_server_power_operations}  //a[@href='#/server-control/power-operations']
