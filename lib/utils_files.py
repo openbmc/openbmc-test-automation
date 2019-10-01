@@ -119,7 +119,7 @@ def file_diff(file1_path,
     if robot_env == 1:
         BuiltIn().log_to_console("DIFF:\n" + out_buf)
     else:
-        print ("DIFF:\n", out_buf)
+        print("DIFF:\n", out_buf)
 
     file.write(out_buf)
     file.close()
