@@ -696,3 +696,20 @@ CLI Get BMC DateTime
 
     ${bmc_time_via_date}  ${stderr}  ${rc}=  BMC Execute Command  date +"%Y-%m-%d %H:%M:%S"  print_err=1
     [Return]  ${bmc_time_via_date}
+
+
+Update Root Password
+    [Documentation]  Update system "root" user password.
+    [Arguments]  ${openbmc_password}=${OPENBMC_PASSWORD}
+
+    # Description of argument(s):
+    # openbmc_password   The root password for the open BMC system.
+
+    @{password}=  Create List  ${openbmc_password}
+    ${data}=  Create Dictionary  data=@{password}
+
+    ${headers}=  Create Dictionary  Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
+    ${resp}=  Post Request  openbmc  ${BMC_USER_URI}root/action/SetPassword
+    ...  data=${data}  headers=${headers}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ...  msg=Updating the new root password failed, RC=${resp.status_code}.
