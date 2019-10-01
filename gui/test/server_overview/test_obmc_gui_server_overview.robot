@@ -3,6 +3,7 @@ Documentation  This test suite will validate the "OpenBMC ASMI Menu ->
 ...            Server Overview" module.
 
 Resource         ../../lib/resource.robot
+Resource         ../lib/bmc_network_utils.robot
 Test Setup       Test Setup Execution  ${OBMC_PowerOff_state}
 Test Teardown    Test Teardown Execution
 
@@ -12,7 +13,7 @@ ${string_content}                  witherspoon
 ${string_server_info}              Server information
 ${string_high_priority_events}     High priority events
 ${string_BMC_info}                 BMC information
-${string_power_info}               Power information
+${string_power_info}               Power Consumption
 ${xpath_high_priority_events}      //a[@href='#/server-health/event-log']
 ${string_event_log}                Event log
 ${xpath_launch_serial_over_lan}    //a[@class='no-icon quick-links__item']
@@ -54,9 +55,9 @@ Verify BMC Information Should Display At OBMC Power Off State
     Select Server Overview Menu
     Verify Display Content  ${string_BMC_info}
 
-Verify POWER Information Should Display At OBMC Power Off State
-    [Documentation]  Verify existence of text "Power information".
-    [Tags]  Verify_Power_Information_Should_Display_At_OBMC_Power_Off_State
+Verify POWER Consumption Should Display At OBMC Power Off State
+    [Documentation]  Verify existence of text "Power Consumption".
+    [Tags]  Verify_Power_Consumption_Should_Display_At_OBMC_Power_Off_State
     ...  OBMC_PowerOff_State
 
     Select Server Overview Menu
