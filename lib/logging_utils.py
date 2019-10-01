@@ -76,6 +76,7 @@ def print_error_logs(error_logs, key_list=None):
 
     gp.print_var(error_logs, key_list=key_list)
 
+
 def print_non_informational_error_logs(error_logs):
     r"""
     Print non informational error logs and return the string generated for printing.
@@ -86,9 +87,10 @@ def print_non_informational_error_logs(error_logs):
     """
 
     info_log_flag = 'xyz.openbmc_project.Logging.Entry.Level.Informational'
-    non_info_error_logs = {k:v for k, v in error_logs.items() if 'Severity' in list(v.keys())
+    non_info_error_logs = {k: v for k, v in error_logs.items() if 'Severity' in list(v.keys())
                            and v['Severity'] != info_log_flag}
     return gp.sprint_var(non_info_error_logs)
+
 
 def get_esels(error_logs=None):
     r"""
