@@ -8,6 +8,8 @@ Resource  ../../lib/resource.robot
 Test Setup      Test Setup Execution
 Test Teardown   Close Browser
 
+Force Tags      Header_Power_Operations
+
 *** Test Cases ***
 
 Power On The Host

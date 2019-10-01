@@ -8,6 +8,7 @@ Resource        ../../lib/resource.robot
 Test Setup      Test Setup Execution
 Test Teardown   Close Browser
 
+Force Tags      Manage_User
 
 *** Variables ***
 
