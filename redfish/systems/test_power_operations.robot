@@ -16,6 +16,7 @@ Verify Redfish Host GracefulShutdown
 
     Redfish Power Off
 
+
 Verify Redfish BMC PowerOn
     [Documentation]  Verify Redfish host power on operation.
     [Tags]  Verify_Redfish_Host_PowerOn
@@ -25,11 +26,18 @@ Verify Redfish BMC PowerOn
     # TODO: Replace OCC state check with redfish property when available.
     Verify OCC State
 
+    Redfish.Login
+    ${power_control}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_POWER_URI}  PowerControl
+    Rprint Vars   power_control
+    Valid Dict  power_control[${0}]  ['PowerConsumedWatts']
+
+
 Verify Redfish BMC GracefulRestart
     [Documentation]  Verify Redfish host graceful restart operation.
     [Tags]  Verify_Redfish_Host_GracefulRestart
 
     Redfish Host Reboot
+
 
 Verify Redfish BMC PowerOff
     [Documentation]  Verify Redfish host power off operation.
