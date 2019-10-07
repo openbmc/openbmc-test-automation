@@ -688,6 +688,9 @@ Configure Static Name Servers
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'StaticNameServers': ${static_name_servers}}
     ...  valid_status_codes=[${valid_status_codes}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
+    # Patch operation takes 1 to 3 seconds to set new value.
+    Sleep  3s
+
     # Check if newly added DNS server is configured on BMC.
     ${cli_nameservers}=  CLI Get Nameservers
     ${cmd_status}=  Run Keyword And Return Status
