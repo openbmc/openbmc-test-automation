@@ -74,6 +74,9 @@ HOST_INVENTORY_URI = OPENBMC_BASE_URI + 'inventory/'
 # Led URI variable
 LED_GROUPS_URI = OPENBMC_BASE_URI + 'led/groups/'
 LED_PHYSICAL_URI = OPENBMC_BASE_URI + 'led/physical/'
+LED_LAMP_TEST_ASSERTED_URI = LED_GROUPS_URI + 'lamp_test/attr/Asserted'
+LED_PHYSICAL_PS0_URI = LED_PHYSICAL_URI + 'cffps1_69/attr/State'
+LED_PHYSICAL_PS1_URI = LED_PHYSICAL_URI + 'cffps1_68/attr/State'
 
 # Host control URI variables.
 CONTROL_HOST_URI = OPENBMC_BASE_URI + 'control/host0/'
