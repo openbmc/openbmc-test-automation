@@ -139,3 +139,19 @@ Verify Valid Records
     Valid Length  invalid_records  max_length=0
 
     [Return]  ${records}
+
+
+Set Initial Test State
+    [Documentation]  Set system to standby or runtime per test requirement.
+    [Arguments]  ${pre_req_state}
+
+    # Description of argument(s):
+    # pre_req_state  The pre-requisite state of the host to perform the test (e.g. "Running")
+
+    Run Keyword If  '${pre_req_state}' == 'Running'
+    ...  Redfish Power On  stack_mode=skip
+
+    Run Keyword If  '${pre_req_state}' == 'Off'
+    ...  Redfish Power Off  stack_mode=skip
+
+    Redfish.Login
