@@ -28,7 +28,6 @@
 -i Verify_Firmware_Update_ApplyTime_OnReset
 # DateTime
 -i Verify_Redfish_BMC_Time
--i Verify_Set_Time_Using_Redfish
 -i Verify_Enable_NTP
 # Local user IPMI and Redfish test.
 -i Create_Admin_Redfish_User_And_Verify_Login_Via_IPMI
