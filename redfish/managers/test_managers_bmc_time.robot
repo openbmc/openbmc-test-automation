@@ -197,7 +197,10 @@ Redfish Set DateTime
 Rest Set Time Owner
     [Documentation]  Set time owner of the system via REST.
 
-    # BMC_OWNER is defined in variable.py.
+    ${data}=  Create Dictionary  data=${MANUAL_MODE}
+    Write Attribute  ${TIME_MANAGER_URI}sync_method  TimeSyncMethod  data=${data}  verify=${TRUE}
+    Sleep  5s
+
     ${data}=  Create Dictionary  data=${BMC_OWNER}
     Write Attribute  ${TIME_MANAGER_URI}owner  TimeOwner  data=${data}  verify=${TRUE}
 
