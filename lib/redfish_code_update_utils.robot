@@ -108,7 +108,7 @@ Redfish Upload Image And Check Progress State
     [Arguments]  ${apply_time}
 
     # Description of argument(s):
-    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
+    # apply_time     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
     Set ApplyTime  policy=${apply_Time}
     Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
@@ -135,7 +135,7 @@ Reboot BMC And Verify BMC Image
     [Arguments]  ${apply_time}  ${start_boot_seconds}
 
     # Description of argument(s):
-    # policy                ApplyTime allowed values
+    # apply_time            ApplyTime allowed values
     #                       (e.g. "OnReset", "Immediate").
     # start_boot_seconds    See 'Wait For Reboot' for details.
 
@@ -151,8 +151,20 @@ Reboot BMC And Verify BMC Image
 
 Poweron Host And Verify Host Image
     [Documentation]  Power on Host and verify installed image is functional.
+    [Arguments]  ${apply_time}
 
-    Redfish Power On
+    # Description of argument(s):
+    # apply_time            ApplyTime allowed values
+    #                       (e.g. "OnReset", "Immediate").
+
+    Run Keyword if  'OnReset' == '${apply_time}'
+    ...  Run Keyword
+    ...      Redfish Host Reboot
+    ...  ELSE
+    ...    Run Keywords
+    ...        Is Host Rebooted  AND
+    ...        Is OS Booted  AND
+    ...        Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     Redfish.Login
     Redfish Verify Host Version  ${IMAGE_FILE_PATH}
 
