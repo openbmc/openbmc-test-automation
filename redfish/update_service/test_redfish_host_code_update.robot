@@ -47,6 +47,7 @@ Redfish Code Update With ApplyTime Immediate
     # policy
     Immediate
 
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -56,7 +57,7 @@ Suite Setup Execution
     Redfish.Login
     Delete All BMC Dump
     Redfish Purge Event Log
-    Redfish Power Off  stack_mode=skip
+    Redfish Power On  stack_mode=skip
 
 
 Redfish Update Firmware
@@ -68,5 +69,5 @@ Redfish Update Firmware
 
     Redfish.Login
     Redfish Upload Image And Check Progress State  ${apply_time}
-    Poweron Host And Verify Host Image
+    Poweron Host And Verify Host Image  ${apply_time}
 
