@@ -78,6 +78,7 @@ REST BMC Code Update
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
     Verify Running BMC Image  ${IMAGE_FILE_PATH}
+    Check Host Related Files Exist
 
 
 Verify Error Log Persistency
@@ -271,3 +272,11 @@ Test Teardown Execution
     FFDC On Test Case Fail
     Run Keyword If  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
     Close All Connections
+
+
+Check Host Related Files Exist
+    [Documentation]  Check relavant host files available under /etc.
+
+    BMC Execute Command  cat /etc/host.conf
+    BMC Execute Command  cat /etc/hosts
+    BMC Execute Command  cat /etc/hostname
