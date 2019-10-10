@@ -18,6 +18,7 @@ Resource                 ../../lib/code_update_utils.robot
 Resource                 ../../lib/dump_utils.robot
 Resource                 ../../lib/logging_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
+Resource                 ../../lib/state_manager.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
 
@@ -47,6 +48,7 @@ Redfish Code Update With ApplyTime Immediate
     # policy
     Immediate
 
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -56,7 +58,8 @@ Suite Setup Execution
     Redfish.Login
     Delete All BMC Dump
     Redfish Purge Event Log
-    Redfish Power Off  stack_mode=skip
+    ${status}=  Run Keyword And Return Status  Is Host Running
+    Run Keyword If  ${status} == False  REST Power On
 
 
 Redfish Update Firmware
@@ -68,5 +71,5 @@ Redfish Update Firmware
 
     Redfish.Login
     Redfish Upload Image And Check Progress State  ${apply_time}
-    Poweron Host And Verify Host Image
+    Poweron Host And Verify Host Image  ${apply_time}
 

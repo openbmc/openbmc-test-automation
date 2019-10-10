@@ -151,8 +151,20 @@ Reboot BMC And Verify BMC Image
 
 Poweron Host And Verify Host Image
     [Documentation]  Power on Host and verify installed image is functional.
+    [Arguments]  ${apply_time}
 
-    Redfish Power On
+    # Description of argument(s):
+    # policy                ApplyTime allowed values
+    #                       (e.g. "OnReset", "Immediate").
+
+    Run Keyword if  'OnReset' == '${apply_time}'
+    ...  Run Keyword
+    ...      Redfish Host Reboot
+    ...  ELSE
+    ...    Run Keywords
+    ...        Is Host Rebooted  AND
+    ...        Is OS Booted  AND
+    ...        Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     Redfish.Login
     Redfish Verify Host Version  ${IMAGE_FILE_PATH}
 
