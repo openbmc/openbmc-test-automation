@@ -363,7 +363,7 @@ Test IPMI Restriction Mode
 
     # Attempt non white-listed operation expecting failure.
     Run Keyword And Expect Error  *Insufficient privilege level*
-    ...  Run Inband IPMI Standard Command  mc reset cold
+    ...  Run Inband IPMI Standard Command  lan set 1 access on
 
 
 *** Keywords ***
