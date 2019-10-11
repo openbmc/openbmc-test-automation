@@ -65,8 +65,6 @@ Get Certificate File Content From BMC
 
     ${certificate}  ${stderr}  ${rc}=  Run Keyword If  '${cert_type}' == 'Client'
     ...    BMC Execute Command  cat /etc/nslcd/certs/cert.pem
-    ...  ELSE IF  '${cert_type}' == 'CA'
-    ...    BMC Execute Command  cat /etc/ssl/certs/Root-CA.pem
 
     [Return]  ${certificate}
 

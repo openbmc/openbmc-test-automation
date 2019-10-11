@@ -16,6 +16,7 @@ Test Teardown    Test Teardown Execution
 *** Variables ***
 
 ${invalid_value}  abc
+${ROOT_CA_FILE_PATH}  /etc/ssl/certs/authority/*
 
 
 ** Test Cases **
@@ -167,14 +168,15 @@ Install And Verify Certificate Via Redfish
     ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}
     ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
 
-    Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
+    ${cert_id}=  Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
+    Logging  Installed certificate id: ${cert_id}
 
     # Adding delay after certificate installation.
     Sleep  30s
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
-    ...  ${certificate_uri}/1  CertificateString
+    ...  ${certificate_uri}/${cert_id}  CertificateString
 
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
 
@@ -198,6 +200,8 @@ Install Certificate File On BMC
     Set To Dictionary  ${kwargs}  headers  ${headers}
 
     ${ret}=  Post Request  openbmc  ${uri}  &{kwargs}
+    ${content_json}=  To JSON  ${ret.content}
+    ${cert_id}=  Set Variable If  '${ret.status_code}' == '${HTTP_OK}'  ${content_json["Id"]}  -1
 
     Run Keyword If  '${status}' == 'ok'
     ...  Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
@@ -206,6 +210,7 @@ Install Certificate File On BMC
 
     Delete All Sessions
 
+    [Return]  ${cert_id}
 
 Replace Certificate Via Redfish
     [Documentation]  Test 'replace certificate' operation in the BMC via Redfish.
@@ -304,7 +309,7 @@ Delete Certificate Via BMC CLI
     ...    Set Variable  /etc/nslcd/certs/cert.pem  phosphor-certificate-manager@nslcd.service
     ...    ${REDFISH_LDAP_CERTIFICATE_URI}
     ...  ELSE IF  '${cert_type}' == 'CA'
-    ...    Set Variable  /etc/ssl/certs/Root-CA.pem  phosphor-certificate-manager@authority.service
+    ...    Set Variable  ${ROOT_CA_FILE_PATH}  phosphor-certificate-manager@authority.service
     ...    ${REDFISH_CA_CERTIFICATE_URI}
 
     ${file_status}  ${stderr}  ${rc}=  BMC Execute Command
@@ -313,8 +318,9 @@ Delete Certificate Via BMC CLI
     Return From Keyword If  "${file_status}" != "Found"
     BMC Execute Command  rm ${certificate_file_path}
     BMC Execute Command  systemctl restart ${certificate_service}
+    BMC Execute Command  systemctl daemon-reload
     Wait Until Keyword Succeeds  1 min  10 sec
-    ...  Redfish.Get  ${certificate_uri}/1  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR}]
+    ...  Redfish.Get  ${certificate_uri}/1  valid_status_codes=[${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
 
 Suite Setup Execution
