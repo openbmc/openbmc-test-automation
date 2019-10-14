@@ -72,13 +72,21 @@ REST BMC Code Update
     [Tags]  REST_BMC_Code_Update
     [Teardown]  REST BMC Code Update Teardown
 
+    ${file_contents_before_codeupdate}  ${stderr}  ${rc}=
+    ...  BMC Execute Command  cd /etc ; cat host.conf hosts hostname
+    Should Be Equal As Integers  0  ${rc}
     Run Keyword And Ignore Error  List Installed Images  BMC
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
     Verify Running BMC Image  ${IMAGE_FILE_PATH}
-    BMC Execute Command  cd /etc ; cat host.conf hosts hostname  print_out=1
+    ${file_contents_after_codeupdate}  ${stderr}  ${rc}=
+    ...  BMC Execute Command  cd /etc ; cat host.conf hosts hostname
+    Should Be Equal As Integers  0  ${rc}
+    Log  ${file_contents_after_codeupdate}
+    Should Be Equal  ${file_contents_before_codeupdate}
+    ...  ${file_contents_after_codeupdate}  msg=File corruption occurred.
 
 
 Verify Error Log Persistency
