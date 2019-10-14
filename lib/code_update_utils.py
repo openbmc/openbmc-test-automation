@@ -149,6 +149,7 @@ def get_version_tar(tar_file_path):
                                     version inside the MANIFEST.
     """
 
+    version = ""
     tar = tarfile.open(tar_file_path)
     for member in tar.getmembers():
         f = tar.extractfile(member)
