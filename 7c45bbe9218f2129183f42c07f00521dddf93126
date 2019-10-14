@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c57bffa_d7d162ac",
+        "filename": "extended/code_update/bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2019-10-14T17:41:18Z",
+      "side": 1,
+      "message": "I dont think we would need to do this.\n\nassuming someone adding new entry to those files in a CI would cause this code update to fail.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 68
+      },
+      "revId": "7c45bbe9218f2129183f42c07f00521dddf93126",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
