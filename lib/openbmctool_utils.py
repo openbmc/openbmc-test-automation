@@ -525,7 +525,6 @@ def remote_logging_view_fields():
     return\
         [
             "Address",
-            "AddressFamily",
             "Port"
         ]
 
