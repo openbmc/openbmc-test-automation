@@ -16,7 +16,6 @@ Resource                 ../../lib/openbmc_ffdc.robot
 Resource                 ../../lib/common_utils.robot
 Resource                 ../../lib/code_update_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
-Resource                 ../../extended/code_update/update_bmc.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/var_funcs.py
 
