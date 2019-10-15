@@ -125,6 +125,7 @@ Verify SOL During Boot
     [Documentation]  Verify SOL during boot.
     [Tags]  Verify_SOL_During_Boot
 
+    Redfish Power Off
     Activate SOL Via IPMI
     Redfish Power On
 
