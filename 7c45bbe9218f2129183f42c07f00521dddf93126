@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a3577cf7_8a936b19",
+        "filename": "extended/code_update/bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-10-15T12:22:34Z",
+      "side": 1,
+      "message": "As of now, this is working, right. When someone add without much discussion then it is good to fail and then we can fix it. More awareness will get create.",
+      "parentUuid": "4c57bffa_d7d162ac",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 68
+      },
+      "revId": "7c45bbe9218f2129183f42c07f00521dddf93126",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b7789f8_4ed6f32d",
         "filename": "extended/code_update/bmc_code_update.robot",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2019-10-14T22:34:18Z",
       "side": 1,
       "message": "File corruption occurred.",
+      "revId": "7c45bbe9218f2129183f42c07f00521dddf93126",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ff7d84c_93db77ca",
+        "filename": "extended/code_update/bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-10-15T12:22:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b7789f8_4ed6f32d",
       "revId": "7c45bbe9218f2129183f42c07f00521dddf93126",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
