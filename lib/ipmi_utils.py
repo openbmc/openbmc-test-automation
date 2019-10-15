@@ -495,3 +495,19 @@ def get_user_info(userid, channel_number=1):
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
+
+
+def get_channel_ciphers():
+
+    r"""
+    Get IPMI channel cipher supported ID and return values.
+
+	ID   IANA    Auth Alg        Integrity Alg   Confidentiality Alg
+	3    N/A     hmac_sha1       hmac_sha1_96    aes_cbc_128
+	17   N/A     hmac_sha256     sha256_128      aes_cbc_128
+    """
+
+    cmd_buf = "channel getciphers ipmi | awk 'NR > 1 {print $1}'"
+    stdout, stderr, rc = execute_ipmi_cmd(cmd_buf, "external", print_output=0)
+    result = vf.key_value_outbuf_to_dict(stdout, process_indent=0)
+    return result
