@@ -34,10 +34,13 @@ Verify Unsupported Cipher List
 Verify Supported Cipher List Via Lan Print
     [Documentation]  Verify supported cipher list via IPMI lan print command.
     [Tags]  Verify_Supported_Cipher_List_Via_Lan_Print
-    ${network_info_dict}=  Get Lan Print Dict
-    # Example 'RMCP+ Cipher Suites' entry: 3,17
-    ${cipher_list}=  Evaluate
-    ...  list(map(int, $network_info_dict['RMCP+ Cipher Suites'].split(',')))
+
+    ${channel_ipmi_cipher}=  Get Channel Ciphers
+
+    # Example cipher entry: 3 17
+    Rprint Vars  channel_ipmi_cipher
+
+    ${cipher_list}=  Evaluate  list(map(int, $channel_ipmi_cipher))
     Lists Should Be Equal  ${cipher_list}  ${valid_cipher_list}
 
 
