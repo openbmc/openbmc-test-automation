@@ -495,3 +495,33 @@ def get_user_info(userid, channel_number=1):
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
+
+
+def channel_getciphers_ipmi():
+
+    r"""
+    Run 'channel getciphers ipmi' command and return the result as a list of dictionaries.
+
+    Example robot code:
+    ${ipmi_channel_ciphers}=  Channel Getciphers IPMI
+    Rprint Vars  ipmi_channel_ciphers
+
+    Example output:
+    ipmi_channel_ciphers:
+      [0]:
+        [id]:                                         3
+        [iana]:                                       N/A
+        [auth_alg]:                                   hmac_sha1
+        [integrity_alg]:                              hmac_sha1_96
+        [confidentiality_alg]:                        aes_cbc_128
+      [1]:
+        [id]:                                         17
+        [iana]:                                       N/A
+        [auth_alg]:                                   hmac_sha256
+        [integrity_alg]:                              sha256_128
+        [confidentiality_alg]:                        aes_cbc_128
+    """
+
+    cmd_buf = "channel getciphers ipmi | sed -re 's/ Alg/_Alg/g'"
+    stdout, stderr, rc = execute_ipmi_cmd(cmd_buf, "external", print_output=0)
+    return vf.outbuf_to_report(stdout)
