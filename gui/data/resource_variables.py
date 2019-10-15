@@ -88,10 +88,10 @@ class resource_variables():
         "//*[@id='header__wrapper']/div/div[3]/a[2]/span"
     xpath_select_refresh_button = \
         "//*[contains(text(),'Refresh')]"
-    xpath_event_severity_all = "//*[@id='event-filter']/div[1]/button[1]"
-    xpath_event_severity_high = "//*[@id='event-filter']/div[1]/button[2]"
-    xpath_event_severity_medium = "//*[@id='event-filter']/div[1]/button[3]"
-    xpath_event_severity_low = "//*[@id='event-filter']/div[1]/button[4]"
+    xpath_event_severity_all = "//*[text()='Filter by severity']/following-sibling::button[1]"
+    xpath_event_severity_high = "//*[text()='Filter by severity']/following-sibling::button[2]"
+    xpath_event_severity_medium = "//*[text()='Filter by severity']/following-sibling::button[3]"
+    xpath_event_severity_low = "//*[text()='Filter by severity']/following-sibling::button[4]"
     xpath_drop_down_timezone_edt = \
         "//*[@id='event-log']/section[1]/div/div/button"
     xpath_refresh_circle = "/html/body/main/loader/div[1]/svg/circle"
