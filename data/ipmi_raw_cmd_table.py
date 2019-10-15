@@ -7,12 +7,12 @@ IPMI raw commands table:
 
 """
 
-# The currently supported cipher level list.
+# The currently supported cipher list.
 # Refer:
 # openbmc/meta-openbmc-machines/meta-openpower/meta-ibm/meta-witherspoon/recipe
 # s-phosphor/ipmi/phosphor-ipmi-host/cipher_list.json
-valid_cipher_list = [3, 17]
-unsupported_cipher_list = [1, 2, 15, 16]
+valid_ciphers = ['3', '17']
+unsupported_ciphers = ['1', '2', '15', '16']
 
 IPMI_RAW_CMD = {
     # Interface name

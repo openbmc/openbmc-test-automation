@@ -3,58 +3,65 @@ Documentation    Module to test IPMI chipher functionality.
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Library          ../lib/ipmi_utils.py
+Library          ../lib/var_funcs.py
 Variables        ../data/ipmi_raw_cmd_table.py
+Library          String
 
+Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
-
-*** Variables ***
-
 
 *** Test Cases ***
 
-Verify Supported Cipher List
-    [Documentation]  Execute all supported cipher levels and verify.
-    [Tags]  Verify_Supported_Cipher_List
-    :FOR  ${cipher_level}  IN  @{valid_cipher_list}
-    \  ${status}  ${output}=  Run Keyword And Ignore Error
-    ...    Run External IPMI Standard Command  power status  C=${cipher_level}
-    \  Should Be Equal  ${status}  PASS  msg=${output}  values=False
+Verify Supported Ciphers
+    [Documentation]  Execute all supported ciphers and verify.
+    [Tags]  Verify_Supported_Ciphers
+    FOR  ${cipher}  IN  @{valid_ciphers}
+      Run External IPMI Standard Command  power status  C=${cipher}
+    END
 
 
-Verify Unsupported Cipher List
-    [Documentation]  Execute all unsupported cipher levels and verify error.
-    [Tags]  Verify_Unsupported_Cipher_List
-    :FOR  ${cipher_level}  IN  @{unsupported_cipher_list}
-    \  ${status}  ${output}=  Run Keyword And Ignore Error
-    ...  Run External IPMI Standard Command  power status  C=${cipher_level}
-    \  Should Be Equal  ${status}  FAIL  values=False
-    ...  msg=ipmitool execution with cipher suite value of ${cipher_level} should have failed.
+Verify Unsupported Ciphers
+    [Documentation]  Execute all unsupported ciphers and verify error.
+    [Tags]  Verify_Unsupported_Ciphers
+    FOR  ${cipher}  IN  @{unsupported_ciphers}
+      Run Keyword And Expect Error  *invalid * algorithm*
+      ...  Run External IPMI Standard Command  power status  C=${cipher}
+    END
 
 
-Verify Supported Cipher List Via Lan Print
-    [Documentation]  Verify supported cipher list via IPMI lan print command.
-    [Tags]  Verify_Supported_Cipher_List_Via_Lan_Print
-    ${network_info_dict}=  Get Lan Print Dict
+Verify Supported Ciphers Via Lan Print
+    [Documentation]  Verify supported ciphers via IPMI lan print command.
+    [Tags]  Verify_Supported_Ciphers_Via_Lan_Print
+
+    ${lan_print}=  Get Lan Print Dict
     # Example 'RMCP+ Cipher Suites' entry: 3,17
-    ${cipher_list}=  Evaluate
-    ...  list(map(int, $network_info_dict['RMCP+ Cipher Suites'].split(',')))
-    Lists Should Be Equal  ${cipher_list}  ${valid_cipher_list}
+    ${ciphers}=  Split String  ${lan_print['RMCP+ Cipher Suites']}  ,
+    Rprint Vars  ciphers
+    Valid List  ciphers  valid_values=${valid_ciphers}
 
 
 Verify Supported Cipher Via Getciphers
-    [Documentation]  Verify supported chiper list via IPMI getciphers command.
+    [Documentation]  Verify supported chipers via IPMI getciphers command.
     [Tags]  Verify_Supported_Cipher_Via_Getciphers
-    ${output}=  Run IPMI Standard Command  channel getciphers ipmi
-    # Example of getciphers command output:
-    # ID   IANA    Auth Alg        Integrity Alg   Confidentiality Alg
-    # 3    N/A     hmac_sha1       hmac_sha1_96    aes_cbc_128
-    # 17   N/A     hmac_sha256     sha256_128      aes_cbc_128
 
-    ${report}=  Outbuf To Report  ${output}
-    # Make list from the 'id' column in the report.
-    ${cipher_list}=  Evaluate  [int(x['id']) for x in $report]
-    Lists Should Be Equal  ${cipher_list}  ${valid_cipher_list}
+    # Example output from 'Channel Getciphers IPMI':
+    # ipmi_channel_ciphers:
+    #   [0]:
+    #     [id]:                                         3
+    #     [iana]:                                       N/A
+    #     [auth_alg]:                                   hmac_sha1
+    #     [integrity_alg]:                              hmac_sha1_96
+    #     [confidentiality_alg]:                        aes_cbc_128
+    #   [1]:
+    #     [id]:                                         17
+    #     [iana]:                                       N/A
+    #     [auth_alg]:                                   hmac_sha256
+    #     [integrity_alg]:                              sha256_128
+    #     [confidentiality_alg]:                        aes_cbc_128
 
-
-*** Keywords ***
-
+    ${ipmi_channel_ciphers}=  Channel Getciphers IPMI
+    # Example cipher entry: 3 17
+    Rprint Vars  ipmi_channel_ciphers
+    ${ipmi_channel_cipher_ids}=  Nested Get  id  ${ipmi_channel_ciphers}
+    Rpvars  ipmi_channel_cipher_ids
+    Valid List  ipmi_channel_cipher_ids  valid_values=${valid_ciphers}
