@@ -21,10 +21,8 @@ def get_plug_in_package_name(case=None):
     Return the plug-in package name (e.g. "OS_Console", "DB_Logging").
 
     Description of argument(s):
-    case                            Indicates whether the value returned
-                                    should be converted to upper or lower
-                                    case.  Valid values are "upper", "lower"
-                                    or None.
+    case                            Indicates whether the value returned should be converted to upper or
+                                    lower case.  Valid values are "upper", "lower" or None.
     """
 
     plug_in_package_name = os.path.basename(gp.pgm_dir_path[:-1])
@@ -39,8 +37,7 @@ def get_plug_in_package_name(case=None):
 def return_plug_vars(general=True,
                      custom=True):
     r"""
-    Return an OrderedDict which is sorted by key and which contains all of the
-    plug-in environment variables.
+    Return an OrderedDict which is sorted by key and which contains all of the plug-in environment variables.
 
     Example excerpt of resulting dictionary:
 
@@ -51,26 +48,30 @@ def return_plug_vars(general=True,
       ...
 
     This function also does the following:
-    - Set a default value for environment variable
-      AUTOBOOT_OPENBMC_NICKNAME/AUTOIPL_FSP1_NICKNAME if it is not already set.
+    - Set a default value for environment variable AUTOBOOT_OPENBMC_NICKNAME/AUTOIPL_FSP1_NICKNAME if it is
+      not already set.
     - Register PASSWORD variables to prevent their values from being printed.
 
-    Note: The programmer may set a default for any given environment variable
-    by declaring a global variable of the same name and setting its value.
-    For example, let's say the calling program has this global declaration:
+    Note: The programmer may set a default for any given environment variable by declaring a global variable
+    of the same name and setting its value.  For example, let's say the calling program has this global
+    declaration:
 
     PERF_EXERCISERS_TOTAL_TIMEOUT = '180'
 
-    If environment variable PERF_EXERCISERS_TOTAL_TIMEOUT is blank or not set,
-    this function will set it to 180.
+    If environment variable PERF_EXERCISERS_TOTAL_TIMEOUT is blank or not set, this function will set it to
+    '180'.
+
+    Furthermore, if such a default variable declaration is not a string, this function will preserve that
+    non-string type in setting global variables (with the exception of os.environ values which must be
+    string).  Example:
+
+    NVDIMM_ENCRYPT = 0
 
     Description of argument(s):
-    general                         Return general plug-in parms (e.g. those
-                                    beginning with "AUTOBOOT" or "AUTOGUI").
-    custom                          Return custom plug-in parms (i.e. those
-                                    beginning with the upper case name of the
-                                    plug-in package, for example
-                                    "OBMC_SAMPLE_PARM1").
+    general                         Return general plug-in parms (e.g. those beginning with "AUTOBOOT" or
+                                    "AUTOGUI").
+    custom                          Return custom plug-in parms (i.e. those beginning with the upper case
+                                    name of the plug-in package, for example "OBMC_SAMPLE_PARM1").
     """
 
     regex_list = []
@@ -93,8 +94,7 @@ def return_plug_vars(general=True,
         os.environ['AUTOIPL_FSP1_NICKNAME'] = \
             os.environ.get("AUTOIPL_FSP1_NAME", "").split(".")[0]
 
-    # For all variables specified in the parm_def file, we want them to
-    # default to "" rather than being unset.
+    # For all variables specified in the parm_def file, we want them to default to "" rather than being unset.
     # Process the parm_def file if it exists.
     parm_def_file_path = gp.pgm_dir_path + "parm_def"
     if os.path.exists(parm_def_file_path):
@@ -107,8 +107,8 @@ def return_plug_vars(general=True,
     #   parm_defs[command]:             string
     #   parm_defs[esel_stop_file_path]: string
 
-    # Create a list of plug-in environment variables by pre-pending <all caps
-    # plug-in package name>_<all caps var name>
+    # Create a list of plug-in environment variables by pre-pending <all caps plug-in package name>_<all
+    # caps var name>
     plug_in_parm_names = [plug_in_package_name + "_" + x for x in
                           map(str.upper, parm_defs.keys())]
     # Example plug_in_parm_names:
@@ -117,12 +117,17 @@ def return_plug_vars(general=True,
     #  plug_in_parm_names[1]: STOP_COMMAND
     #  plug_in_parm_names[2]: STOP_ESEL_STOP_FILE_PATH
 
+    # os.environ only accepts string values.  However, if the user defines default values of other types
+    # (e.g. int), we wish to preserve the type.
+    non_string_defaults = {}
     # Initialize unset plug-in vars.
     for var_name in plug_in_parm_names:
-        # If there is a global variable with the same name as the environment
-        # variable, use its value as a default.
+        # If there is a global variable with the same name as the environment variable, use its value as a
+        # default.
         default_value = gm.get_mod_global(var_name, "")
-        os.environ[var_name] = os.environ.get(var_name, default_value)
+        if type(default_value) is not str:
+            non_string_defaults[var_name] = type(default_value)
+        os.environ[var_name] = os.environ.get(var_name, str(default_value))
         if os.environ[var_name] == "":
             os.environ[var_name] = default_value
 
@@ -130,8 +135,17 @@ def return_plug_vars(general=True,
         collections.OrderedDict(sorted({k: v for (k, v) in
                                         os.environ.items()
                                         if re.match(regex, k)}.items()))
-    # Register password values to prevent printing them out.  Any plug var
-    # whose name ends in PASSWORD will be registered.
+    # Restore the types of any variables where the caller had defined default values.
+    for key, value in non_string_defaults.items():
+        cmd_buf = "plug_var_dict[key] = " + str(value).split("'")[1] + "(plug_var_dict[key]"
+        if value is int:
+            # Use int base argument of 0 to allow it to interpret hex strings.
+            cmd_buf += ", 0)"
+        else:
+            cmd_buf += ")"
+        exec(cmd_buf)
+    # Register password values to prevent printing them out.  Any plug var whose name ends in PASSWORD will
+    # be registered.
     password_vals = {k: v for (k, v) in plug_var_dict.items()
                      if re.match(r".*_PASSWORD$", k)}.values()
     map(gp.register_passwords, password_vals)
@@ -141,9 +155,8 @@ def return_plug_vars(general=True,
 
 def sprint_plug_vars(headers=1, **kwargs):
     r"""
-    Sprint the plug-in environment variables (i.e. those that begin with the
-    global PLUG_VAR_PREFIX value or those that begin with <plug-in
-    package_name>_ in upper case letters.).
+    Sprint the plug-in environment variables (i.e. those that begin with the global PLUG_VAR_PREFIX value or
+    those that begin with <plug-in package_name>_ in upper case letters.).
 
     Example excerpt of output:
     AUTOBOOT_BASE_TOOL_DIR_PATH=/tmp/
@@ -153,9 +166,8 @@ def sprint_plug_vars(headers=1, **kwargs):
 
     Description of argument(s):
     headers                         Print a header and a footer.
-    kwargs                          These are passed directly to
-                                    return_plug_vars.  See return_plug_vars
-                                    doc string for details.
+    kwargs                          These are passed directly to return_plug_vars.  See return_plug_vars doc
+                                    string for details.
     """
     plug_var_dict = return_plug_vars(**kwargs)
     buffer = ""
@@ -173,15 +185,12 @@ def print_plug_in_header():
     r"""
     Print plug-in header.
 
-    When debug is set, print all plug_prefix variables (e.g.
-    AUTOBOOT_OPENBMC_HOST, etc.) and all plug-in environment variables (e.g.
-    OBMC_SAMPLE_PARM1) with surrounding dashed lines.  When debug is not set,
-    print only the plug-in environment variables (e.g. OBMC_SAMPLE_PARM1) with
-    no surrounding dashed lines.
+    When debug is set, print all plug_prefix variables (e.g. AUTOBOOT_OPENBMC_HOST, etc.) and all plug-in
+    environment variables (e.g. OBMC_SAMPLE_PARM1) with surrounding dashed lines.  When debug is not set,
+    print only the plug-in environment variables (e.g. OBMC_SAMPLE_PARM1) with no surrounding dashed lines.
 
-    NOTE: plug-in environment variables means any variable defined in the
-    <plug-in dir>/parm_def file plus any environment variables whose names
-    begin with the upper-case plug-in package name.
+    NOTE: plug-in environment variables means any variable defined in the <plug-in dir>/parm_def file plus
+    any environment variables whose names begin with the upper-case plug-in package name.
     """
 
     dprint_plug_vars()
@@ -193,18 +202,16 @@ def get_plug_vars(mod_name="__main__"):
     r"""
     Get all plug-in variables and put them in corresponding global variables.
 
-    This would include all environment variables beginning with either the
-    global PLUG_VAR_PREFIX value or with the upper case version of the plug-in
-    package name + underscore (e.g. OP_SAMPLE_VAR1 for plug-in OP_Sample).
+    This would include all environment variables beginning with either the global PLUG_VAR_PREFIX value or
+    with the upper case version of the plug-in package name + underscore (e.g. OP_SAMPLE_VAR1 for plug-in
+    OP_Sample).
 
-    The global variables to be set will be both with and without the global
-    PLUG_VAR_PREFIX value prefix.  For example, if the environment variable in
-    question is AUTOBOOT_OPENBMC_HOST, this function will set global variable
-    AUTOBOOT_OPENBMC_HOST and global variable OPENBMC_HOST.
+    The global variables to be set will be both with and without the global PLUG_VAR_PREFIX value prefix.
+    For example, if the environment variable in question is AUTOBOOT_OPENBMC_HOST, this function will set
+    global variable AUTOBOOT_OPENBMC_HOST and global variable OPENBMC_HOST.
 
     Description of argument(s):
-    mod_name                        The name of the module whose global
-                                    plug-in variables should be retrieved.
+    mod_name                        The name of the module whose global plug-in variables should be retrieved.
     """
 
     module = sys.modules[mod_name]
@@ -224,55 +231,46 @@ def get_plug_default(var_name,
     Dependencies:
     Global variable PLUG_VAR_PREFIX must be set.
 
-    This function will assign a default by checking the following environment
-    variables in the order shown.  The first one that has a value will be used.
+    This function will assign a default by checking the following environment variables in the order shown.
+    The first one that has a value will be used.
     - <upper case package_name>_<var_name>
     - <PLUG_VAR_PREFIX>_OVERRIDE_<var_name>
     - <PLUG_VAR_PREFIX>_<var_name>
 
-    If none of these are found, this function will return the value passed by
-    the caller in the "default" parm.
+    If none of these are found, this function will return the value passed by the caller in the "default"
+    parm.
 
     Example:
 
-    Let's say your plug-in is named "OS_Console" and you call this function as
-    follows:
+    Let's say your plug-in is named "OS_Console" and you call this function as follows:
 
     get_plug_default("quiet", 0)
 
-    The first of these environment variables that is found to be set will be
-    used to provide the default value.
+    The first of these environment variables that is found to be set will be used to provide the default
+    value.
     - OS_CONSOLE_QUIET
     - AUTOBOOT_OVERRIDE_QUIET
     - AUTOBOOT_QUIET
 
-    If none of those has a value, 0 (as specified by the caller in this
-    example) is returned.
+    If none of those has a value, 0 (as specified by the caller in this example) is returned.
 
-    Let's say the master driver program is named obmc_boot.  obmc_boot program
-    is responsible for calling plug-ins.  Let's further suppose that the user
-    wishes to run the master program with --debug=0 but wishes to have all
-    plug-ins run with --debug=1.  This could be accomplished with the
-    following call:
-    export AUTOBOOT_OVERRIDE_DEBUG=1 ; obmc_boot --debug=0
+    Let's say the master driver program is named obmc_boot.  obmc_boot program is responsible for calling
+    plug-ins.  Let's further suppose that the user wishes to run the master program with --debug=0 but wishes
+    to have all plug-ins run with --debug=1.  This could be accomplished with the following call:
+    export AUTOBOOT_OVERRIDE_DEBUG=1 ; obmc_boot --debug=0 --plug_in_dir_paths=<list of plug ins>
+
+    As another example, let's suppose that the user wishes to have just the OS_Console plug-in run with debug
+    and everything else to default to debug=0.  This could be accomplished as follows:
+    export OS_CONSOLE_DEBUG=1 ; obmc_boot --debug=0 --plug_in_dir_paths=<list of plug ins>
+
+    And as one more example, let's say the user wishes to have obmc_boot and OS_Console run without debug but
+    have all other plug-ins run with debug:
+    export AUTOBOOT_OVERRIDE_DEBUG=1 ; export OS_CONSOLE_DEBUG=0 ; obmc_boot --debug=0
     --plug_in_dir_paths=<list of plug ins>
 
-    As another example, let's suppose that the user wishes to have just the
-    OS_Console plug-in run with debug and everything else to default to
-    debug=0.  This could be accomplished as follows:
-    export OS_CONSOLE_DEBUG=1 ; obmc_boot --debug=0 --plug_in_dir_paths=<list
-    of plug ins>
-
-    And as one more example, let's say the user wishes to have obmc_boot and
-    OS_Console run without debug but have all other plug-ins run with debug:
-    export AUTOBOOT_OVERRIDE_DEBUG=1 ; export OS_CONSOLE_DEBUG=0 ; obmc_boot
-    --debug=0 --plug_in_dir_paths=<list of plug ins>
-
     Description of argument(s):
-    var_name                        The name of the variable for which a
-                                    default value is to be calculated.
-    default                         The default value if one cannot be
-                                    determined.
+    var_name                        The name of the variable for which a default value is to be calculated.
+    default                         The default value if one cannot be determined.
     """
 
     var_name = var_name.upper()
@@ -287,15 +285,13 @@ def get_plug_default(var_name,
     plug_var_name = PLUG_VAR_PREFIX + "_OVERRIDE_" + var_name
     default_value = os.environ.get(plug_var_name, None)
     if default_value is not None:
-        # A PLUG_VAR_PREFIX version of the variable was found so return its
-        # value.
+        # A PLUG_VAR_PREFIX version of the variable was found so return its value.
         return default_value
 
     plug_var_name = PLUG_VAR_PREFIX + "_" + var_name
     default_value = os.environ.get(plug_var_name, None)
     if default_value is not None:
-        # A PLUG_VAR_PREFIX version of the variable was found so return its
-        # value.
+        # A PLUG_VAR_PREFIX version of the variable was found so return its value.
         return default_value
 
     return default
@@ -304,23 +300,19 @@ def get_plug_default(var_name,
 def srequired_plug_in(req_plug_in_names,
                       plug_in_dir_paths=None):
     r"""
-    Return an empty string if the required plug-ins are found in
-    plug_in_dir_paths.  Otherwise, return an error string.
+    Return an empty string if the required plug-ins are found in plug_in_dir_paths.  Otherwise, return an
+    error string.
 
     Example call:
     error_message = srequired_plug_in(req_plug_in_names, plug_in_dir_paths)
 
     Description of argument(s):
-    req_plug_in_names               A list of plug_in names that the caller
-                                    requires (e.g. ['OS_Console']).
-    plug_in_dir_paths               A string which is a colon-delimited list
-                                    of plug-ins specified by the user (e.g.
-                                    DB_Logging:FFDC:OS_Console:Perf).  Path
-                                    values (e.g. "/home/robot/dir1") will be
-                                    stripped from this list to do the
-                                    analysis.  Default value is the
-                                    <PLUG_VAR_PREFIX>_PLUG_IN_DIR_PATHS
-                                    environment variable.
+    req_plug_in_names               A list of plug_in names that the caller requires (e.g. ['OS_Console']).
+    plug_in_dir_paths               A string which is a colon-delimited list of plug-ins specified by the
+                                    user (e.g. DB_Logging:FFDC:OS_Console:Perf).  Path values (e.g.
+                                    "/home/robot/dir1") will be stripped from this list to do the analysis.
+                                    Default value is the <PLUG_VAR_PREFIX>_PLUG_IN_DIR_PATHS environment
+                                    variable.
     """
 
     # Calculate default value for plug_in_dir_paths.
@@ -348,9 +340,8 @@ def srequired_plug_in(req_plug_in_names,
 def required_plug_in(req_plug_in_names,
                      plug_in_dir_paths=None):
     r"""
-    Return True if each of the plug-ins in req_plug_in_names can be found in
-    plug_in_dir_paths  Otherwise, return False and print an error message to
-    stderr.
+    Return True if each of the plug-ins in req_plug_in_names can be found in plug_in_dir_paths  Otherwise,
+    return False and print an error message to stderr.
 
     Example call:
     if not required_plug_in(['OS_Console'], AUTOBOOT_PLUG_IN_DIR_PATHS):
@@ -370,18 +361,15 @@ def required_plug_in(req_plug_in_names,
 
 def compose_plug_in_save_dir_path(plug_in_package_name=None):
     r"""
-    Create and return a directory path name that is suitable for saving
-    plug-in data.
+    Create and return a directory path name that is suitable for saving plug-in data.
 
-    The name will be comprised of things such as plug_in package name, pid,
-    etc. in order to guarantee that it is unique for a given test run.
+    The name will be comprised of things such as plug_in package name, pid, etc. in order to guarantee that
+    it is unique for a given test run.
 
     Description of argument(s):
-    plug_in_package_name            The plug-in package name.  This defaults
-                                    to the name of the caller's plug-in
-                                    package.  However, the caller can specify
-                                    another value in order to retrieve data
-                                    saved by another plug-in package.
+    plug_in_package_name            The plug-in package name.  This defaults to the name of the caller's
+                                    plug-in package.  However, the caller can specify another value in order
+                                    to retrieve data saved by another plug-in package.
     """
 
     plug_in_package_name = gm.dft(plug_in_package_name,
@@ -403,14 +391,12 @@ def compose_plug_in_save_dir_path(plug_in_package_name=None):
 
 def create_plug_in_save_dir(plug_in_package_name=None):
     r"""
-    Create a directory suitable for saving plug-in processing data and return
-    its path name.
+    Create a directory suitable for saving plug-in processing data and return its path name.
 
     See compose_plug_in_save_dir_path for details.
 
     Description of argument(s):
-    plug_in_package_name            See compose_plug_in_save_dir_path for
-                                    details.
+    plug_in_package_name            See compose_plug_in_save_dir_path for details.
     """
 
     plug_in_save_dir_path = compose_plug_in_save_dir_path(plug_in_package_name)
@@ -422,12 +408,10 @@ def create_plug_in_save_dir(plug_in_package_name=None):
 
 def delete_plug_in_save_dir(plug_in_package_name=None):
     r"""
-    Delete the plug_in save directory.  See compose_plug_in_save_dir_path for
-    details.
+    Delete the plug_in save directory.  See compose_plug_in_save_dir_path for details.
 
     Description of argument(s):
-    plug_in_package_name            See compose_plug_in_save_dir_path for
-                                    details.
+    plug_in_package_name            See compose_plug_in_save_dir_path for details.
     """
 
     gc.shell_cmd("rm -rf "
@@ -436,24 +420,22 @@ def delete_plug_in_save_dir(plug_in_package_name=None):
 
 def save_plug_in_value(value, plug_in_package_name=None):
     r"""
-    Save a value in a plug-in save file.  The value may be retrieved later via
-    a call to the restore_plug_in_value function.
+    Save a value in a plug-in save file.  The value may be retrieved later via a call to the
+    restore_plug_in_value function.
 
-    This function will figure out the variable name of the value passed and
-    use that name in creating the plug-in save file.
+    This function will figure out the variable name of the value passed and use that name in creating the
+    plug-in save file.
 
     Example call:
 
     my_var1 = 5
     save_plug_in_value(my_var1)
 
-    In this example, the value "5" would be saved to the "my_var1" file in the
-    plug-in save directory.
+    In this example, the value "5" would be saved to the "my_var1" file in the plug-in save directory.
 
     Description of argument(s):
     value                           The value to be saved.
-    plug_in_package_name            See compose_plug_in_save_dir_path for
-                                    details.
+    plug_in_package_name            See compose_plug_in_save_dir_path for details.
     """
 
     # Get the name of the variable used as argument one to this function.
@@ -468,21 +450,18 @@ def restore_plug_in_value(default="", plug_in_package_name=None):
     r"""
     Return a value from a plug-in save file.
 
-    The name of the value to be restored will be determined by this function
-    based on the lvalue being assigned.  Consider the following example:
+    The name of the value to be restored will be determined by this function based on the lvalue being
+    assigned.  Consider the following example:
 
     my_var1 = restore_plug_in_value(2)
 
-    In this example, this function would look for the "my_var1" file in the
-    plug-in save directory, read its value and return it.  If no such file
-    exists, the default value of 2 would be returned.
+    In this example, this function would look for the "my_var1" file in the plug-in save directory, read its
+    value and return it.  If no such file exists, the default value of 2 would be returned.
 
     Description of argument(s):
-    default                         The default value to be returned if there
-                                    is no plug-in save file for the value in
-                                    question.
-    plug_in_package_name            See compose_plug_in_save_dir_path for
-                                    details.
+    default                         The default value to be returned if there is no plug-in save file for the
+                                    value in question.
+    plug_in_package_name            See compose_plug_in_save_dir_path for details.
     """
 
     # Get the lvalue from the caller's invocation of this function.
@@ -511,8 +490,7 @@ def restore_plug_in_value(default="", plug_in_package_name=None):
 
 def exit_not_master():
     r"""
-    Exit the program with return code zero if this program was NOT called by
-    the master program.
+    Exit the program with return code zero if this program was NOT called by the master program.
 
     There are cases where plug-ins are called by a multi-layered stack:
 
@@ -520,11 +498,9 @@ def exit_not_master():
         obmc_boot_test.py
             Example_plug_in/cp_setup
 
-    In a scenario like this, Example_plug_in/cp_setup may be called once
-    directly by master_wrapper (the master) and and then called again directly
-    by obmc_boot_test.py (the child).  Some plug-in programs may wish to avoid
-    doing any processing on the second such call.  This function will achieve
-    that purpose.
+    In a scenario like this, Example_plug_in/cp_setup may be called once directly by master_wrapper (the
+    master) and and then called again directly by obmc_boot_test.py (the child).  Some plug-in programs may
+    wish to avoid doing any processing on the second such call.  This function will achieve that purpose.
 
     This function will print a standard message to stdout prior to exiting.
     """
@@ -541,13 +517,22 @@ def exit_not_master():
         exit(0)
 
 
+def stop_test_rc():
+    r"""
+    Return the constant stop test return code value.
+
+    When a plug-in call point program returns this value, it indicates that master program should stop
+    running.
+    """
+
+    return 0x00000002
+
+
 # Create print wrapper functions for all sprint functions defined above.
-# func_names contains a list of all print functions which should be created
-# from their sprint counterparts.
+# func_names contains a list of all print functions which should be created from their sprint counterparts.
 func_names = ['print_plug_vars']
 
-# stderr_func_names is a list of functions whose output should go to stderr
-# rather than stdout.
+# stderr_func_names is a list of functions whose output should go to stderr rather than stdout.
 stderr_func_names = []
 
 replace_dict = dict(gp.replace_dict)
