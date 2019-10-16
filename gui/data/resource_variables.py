@@ -97,11 +97,9 @@ class resource_variables():
     xpath_refresh_circle = "/html/body/main/loader/div[1]/svg/circle"
     xpath_drop_down_timezone_utc =  \
         "//*[@id='event-log']/section[1]/div/div/ul/li[2]/button"
-    xpath_event_filter_all = "//*[@id='event-filter']/div[3]/div/button"
-    xpath_event_filter_resolved =  \
-        "//*[@id='event-filter']/div[3]/div/ul/li[2]/button"
-    xpath_event_filter_unresolved = \
-        "//*[@id='event-filter']/div[3]/div/ul/li[3]/button"
+    xpath_event_filter_all = "//*[text()='All events']"
+    xpath_event_filter_resolved = "//*[text()='Resolved events']"
+    xpath_event_filter_unresolved = "//*[text()='Unresolved events']"
     xpath_event_action_bars = \
         "//*[@id='event__actions-bar']/div[1]/label/span"
     xpath_event_action_delete = \
@@ -117,15 +115,12 @@ class resource_variables():
         "//*[@id='event__actions-bar']/div[2]/div[1]/div[2]/button[2]"
     xpath_event_delete_yes = \
         "//*[@id='event__actions-bar']/div[2]/div[1]/div[2]/button[1]"
-    xpath_individual_event_select = \
-        "//*[@id='event-log__events']/log-event[1]/div/div[1]/div[2]/label/" +\
-        "span"
+    xpath_individual_event_select = "(//*[@class='control__indicator'])[1]"
     xpath_individual_event_delete = \
         "//*[@id='event__actions-bar']/div[2]/div[2]/button[1]"
-    xpath_second_event_select = \
-        "//*[@id='event-log__events']/log-event[2]/div/div[1]/div[2]/label/" +\
-        "span"
+    xpath_second_event_select = "(//*[@class='control__indicator'])[2]"
     xpath_individual_event_resolved = \
         "//*[@id='event__actions-bar']/div[2]/div[2]/button[2]"
     xpath_individual_event_export = \
         "//*[@id='event__actions-bar']/div[2]/div[2]/a"
+    xpath_select_all_events = "//*[@class='column small-1 large-1 event-log__col-check']"
