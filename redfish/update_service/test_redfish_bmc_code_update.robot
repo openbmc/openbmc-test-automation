@@ -47,6 +47,15 @@ Redfish Code Update With ApplyTime Immediate
     Immediate
 
 
+Redfish Code Update With Multiple Firmware
+    [Documentation]  Update the firmaware image with ApplyTime of Immediate.
+    [Tags]  Redfish_Code_Update_With_Multiple_Firmware
+    [Template]  Redfish Multiple Upload Image And Check Progress State
+
+    # policy   image_file_path     alternate_image_file_path
+    Immediate  ${IMAGE_FILE_PATH}  ${ALTERNATE_IMAGE_FILE_PATH}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -73,4 +82,40 @@ Redfish Update Firmware
     Reboot BMC And Verify BMC Image
     ...  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
     Verify Get ApplyTime  ${apply_time}
+
+
+Redfish Multiple Upload Image And Check Progress State
+    [Documentation]  Update multiple BMC firmware via redfish interface and check status.
+    [Arguments]  ${apply_time}  ${IMAGE_FILE_PATH}  ${ALTERNATE_IMAGE_FILE_PATH}
+
+    # Description of argument(s):
+    # apply_time                 ApplyTime allowed values (e.g. "OnReset", "Immediate").
+    # IMAGE_FILE_PATH            The path to BMC image file.
+    # ALTERNATE_IMAGE_FILE_PATH  The path to alternate BMC image file.
+
+    Valid File Path  ALTERNATE_IMAGE_FILE_PATH
+    ${state}=  Get Pre Reboot State
+    Rprint Vars  state
+
+    Set ApplyTime  policy=${apply_time}
+    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+
+    ${first_image_id}=  Get Latest Image ID
+    Rprint Vars  first_image_id
+    Sleep  5s
+    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${ALTERNATE_IMAGE_FILE_PATH}
+
+    ${second_image_id}=  Get Latest Image ID
+    Rprint Vars  second_image_id
+
+    Check Image Update Progress State
+    ...  match_state='Updating', 'Disabled'  image_id=${second_image_id}
+
+    Check Image Update Progress State
+    ...  match_state='Updating'  image_id=${first_image_id}
+
+    Wait Until Keyword Succeeds  8 min  20 sec
+    ...  Check Image Update Progress State
+    ...    match_state='Enabled'  image_id=${first_image_id}
+    Reboot BMC And Verify BMC Image  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
 
