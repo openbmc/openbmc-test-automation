@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6f886f44_02fbe702",
+        "filename": "extended/code_update/bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-10-17T05:04:29Z",
+      "side": 1,
+      "message": "George, As we discussed yesterday during scrum, that better identify system current file system corruption in /etc/host* area before actual code update happens, right. This will help us to identify whether new code update created an issue or system were in problematic condition itself.",
+      "parentUuid": "a3577cf7_8a936b19",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 68
+      },
+      "revId": "7c45bbe9218f2129183f42c07f00521dddf93126",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b7789f8_4ed6f32d",
         "filename": "extended/code_update/bmc_code_update.robot",
         "patchSetId": 1
