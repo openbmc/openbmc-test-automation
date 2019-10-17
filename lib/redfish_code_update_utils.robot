@@ -6,6 +6,7 @@ Library         gen_robot_valid.py
 Library         tftp_update_utils.py
 Resource        bmc_redfish_utils.robot
 Resource        boot_utils.robot
+Resource        code_update_utils.robot
 
 *** Keywords ***
 
@@ -146,6 +147,7 @@ Reboot BMC And Verify BMC Image
     ...    Run Keyword
     ...        Wait For Reboot  start_boot_seconds=${start_boot_seconds}
     Redfish.Login
+    Verify ApplyTime  ${apply_time}
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
 
 
@@ -162,6 +164,7 @@ Poweron Host And Verify Host Image
     ...  ELSE
     ...    Wait State  os_running_match_state  10 mins
     Redfish.Login
+    Verify ApplyTime  ${apply_time}
     Redfish Verify Host Version  ${IMAGE_FILE_PATH}
 
 
