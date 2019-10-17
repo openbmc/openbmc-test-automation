@@ -129,6 +129,19 @@ Redfish Upload Image And Check Progress State
     ...    match_state='Enabled'  image_id=${image_id}
 
 
+Verify ApplyTime
+    [Documentation]  verify the firmware "ApplyTime" policy.
+    [Arguments]  ${apply_time}
+
+    # Description of argument(s):
+    # apply_time     ApplyTime allowed values (e.g. "OnReset", "Immediate").
+
+    ${system_applytime}=  Read Attribute   ${SOFTWARE_VERSION_URI}apply_time  RequestedApplyTime
+    Valid Value  system_applytime
+    ...  valid_values=["xyz.openbmc_project.Software.ApplyTime.RequestedApplyTimes.${apply_time}"]
+    Rprint Vars  system_applytime
+
+
 Reboot BMC And Verify BMC Image
     [Documentation]  Reboot or wait for BMC standby post reboot and
     ...  verify installed image is functional.
@@ -146,6 +159,7 @@ Reboot BMC And Verify BMC Image
     ...    Run Keyword
     ...        Wait For Reboot  start_boot_seconds=${start_boot_seconds}
     Redfish.Login
+    Verify ApplyTime  ${apply_time}
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
 
 
@@ -162,6 +176,7 @@ Poweron Host And Verify Host Image
     ...  ELSE
     ...    Wait State  os_running_match_state  10 mins
     Redfish.Login
+    Verify ApplyTime  ${apply_time}
     Redfish Verify Host Version  ${IMAGE_FILE_PATH}
 
 
