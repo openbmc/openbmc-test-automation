@@ -129,6 +129,41 @@ Redfish Upload Image And Check Progress State
     ...    match_state='Enabled'  image_id=${image_id}
 
 
+Redfish Multiple Upload Image And Check Progress State
+    [Documentation]  Update multiple BMC firmware and check status.
+    [Arguments]  ${apply_time}  ${IMAGE_FILE_PATH}  ${ALTERNATE_IMAGE_FILE_PATH}
+
+    # Description of argument(s):
+    # apply_time                 ApplyTime allowed values (e.g. "OnReset", "Immediate").
+    # IMAGE_FILE_PATH            The path to BMC image file.
+    # ALTERNATE_IMAGE_FILE_PATH  The path to alternate BMC image file.
+
+    ${state}=  Get Pre Reboot State
+    Rprint Vars  state
+
+    Set ApplyTime  policy=${apply_time}
+    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+
+    ${image_id}=  Get Latest Image ID
+    Rprint Vars  image_id
+    Sleep  5s
+    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${ALTERNATE_IMAGE_FILE_PATH}
+
+    ${alter_image_id}=  Get Latest Image ID
+    Rprint Vars  alter_image_id
+
+    Check Image Update Progress State
+    ...  match_state='Updating', 'Disabled'  image_id=${alter_image_id}
+
+    Check Image Update Progress State
+    ...  match_state='Updating'  image_id=${image_id}
+
+    Wait Until Keyword Succeeds  8 min  20 sec
+    ...  Check Image Update Progress State
+    ...    match_state='Enabled'  image_id=${image_id}
+    Reboot BMC And Verify BMC Image  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
+
+
 Reboot BMC And Verify BMC Image
     [Documentation]  Reboot or wait for BMC standby post reboot and
     ...  verify installed image is functional.
