@@ -47,6 +47,15 @@ Redfish Code Update With ApplyTime Immediate
     Immediate
 
 
+Redfish Code Update With Multiple Firmware
+    [Documentation]  Update the firmaware image with ApplyTime of Immediate.
+    [Tags]  Redfish_Code_Update_With_Multiple_Firmware
+    [Template]  Redfish Multiple Update Firmware
+
+    # policy
+    Immediate
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -73,4 +82,15 @@ Redfish Update Firmware
     Redfish Upload Image And Check Progress State  ${apply_time}
     Reboot BMC And Verify BMC Image
     ...  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
+
+
+Redfish Multiple Update Firmware
+    [Documentation]  Update the BMC firmware via redfish interface.
+    [Arguments]  ${apply_time}
+
+    # Description of argument(s):
+    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
+
+    Valid File Path  ALTERNATE_IMAGE_FILE_PATH
+    Redfish Multiple Upload Image And Check Progress State  ${apply_time}
 
