@@ -160,6 +160,8 @@ BMC Image Priority Attribute Test
     [Template]  Temporarily Set BMC Attribute
 
     # Property        Value
+    Priority          ${False}
+    Priority          ${True}
     Priority          ${0}
     Priority          ${1}
     Priority          ${127}
