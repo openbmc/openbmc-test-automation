@@ -105,3 +105,12 @@ Verify GUI Header Scrolls
     Click Element  ${xpath_header_scroll}
     # Restore to original browser size.
     Set Window Size  ${current_browser_width}  ${current_browser_height}
+
+
+OpenBMC GUI Logoff
+    [Documentation]  Log out from openBMC GUI.
+    [Tags]  OpenBMC_GUI_Logoff
+
+    Log  ${xpath_openbmc_url}
+    Log To Console  ${xpath_openbmc_url}
+    Click Element  header
