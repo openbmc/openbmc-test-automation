@@ -70,7 +70,7 @@ class event_notification():
               [Value]:               23813
 
         Description of argument(s):
-        dbus_path              The subcribing event's path (e.g.
+        dbus_path              The subscribing event's path (e.g.
                                "/xyz/openbmc_project/sensors").
         enable_trace           Enable or disable trace.
         """
