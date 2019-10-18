@@ -286,8 +286,8 @@ Put Response Codes
 
     # Expect status                 URL Path
     ${HTTP_METHOD_NOT_ALLOWED}      /
-    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
-    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/i/dont/exist/
+    ${HTTP_NOT_FOUND}               /xyz/
+    ${HTTP_FORBIDDEN}               /xyz/i/dont/exist/
 
 
 Put Data Validation
@@ -308,7 +308,7 @@ Post Response Code
 
     # Expect status                 URL Path
     ${HTTP_METHOD_NOT_ALLOWED}      /
-    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
+    ${HTTP_NOT_FOUND}               /xyz/
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/i/dont/exist/
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/login
 
@@ -321,7 +321,7 @@ Delete Response Code
 
     # Expect status                 URL Path
     ${HTTP_METHOD_NOT_ALLOWED}      /
-    ${HTTP_METHOD_NOT_ALLOWED}      /xyz/
+    ${HTTP_NOT_FOUND}               /xyz/
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/nothere/
     ${HTTP_METHOD_NOT_ALLOWED}      /xyz/openbmc_project/state/
 
