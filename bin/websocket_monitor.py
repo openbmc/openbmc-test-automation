@@ -24,10 +24,6 @@ sys.path.insert(0, save_path_0)
 # Set exit_on_error for gen_valid functions.
 set_exit_on_error(True)
 
-# URI of the logging interface. This should end with the word "logging" and
-# have no / character at the end.
-logging_uri = '/xyz/openbmc_project/logging'
-
 
 parser = argparse.ArgumentParser(
     usage='%(prog)s [OPTIONS]',
@@ -49,6 +45,12 @@ parser.add_argument(
     '--openbmc_password',
     default='',
     help='The password for the open BMC system.')
+parser.add_argument(
+    '--monitor_type',
+    choices=['logging', 'dump'],
+    default='logging',
+    help='The type of notifications from websocket to monitor.')
+
 
 stock_list = [("test_mode", 0), ("quiet", 0), ("debug", 0)]
 
@@ -78,7 +80,7 @@ def signal_handler(signal_number,
 
     dprint_executing()
 
-    # Calling exit prevents us from returning to the code that was running
+    # Calling exit prevents returning to the code that was running
     # when the signal was received.
     exit(0)
 
@@ -92,6 +94,8 @@ def validate_parms():
     valid_value(openbmc_host)
     valid_value(openbmc_username)
     valid_value(openbmc_password)
+    global monitoring_uri
+    monitoring_uri = '/xyz/openbmc_project/' + monitor_type
     gen_post_validation(exit_function, signal_handler)
 
 
@@ -137,14 +141,17 @@ def on_message(websocket_obj, message):
     qprint_executing()
 
     # A typical message:
-    # {"event":"PropertiesChanged","interface":"xyz.openbmc_
-    # project.Logging.Entry","path":"/xyz/openbmc_project/lo
-    # gging/entry/24","properties":{"Id":24}}
+    # /xyz/openbmc_project/logging/entry/24","properties":{"Id":24}}
+    # or
+    # /xyz/openbmc_project/dump/entry/1","properties":{"Size":186180}}').
 
-    if logging_uri + '/entry' in message and 'Id' in message:
-        qprint_timen('eSEL received over websocket interface.')
-        qprint_timen("Closing websocket. Expect to receive 'NoneType' object has no attribute 'connected'.")
-        websocket_obj.close()
+    if monitoring_uri + '/entry' in message:
+        if 'Id' in message:
+            qprint_timen('eSEL received over websocket interface.')
+            websocket_obj.close()
+        elif 'Size' in message:
+            qprint_timen('Dump notification received over websocket interface.')
+            websocket_obj.close()
 
 
 def on_error(websocket_obj, wserror):
@@ -186,9 +193,9 @@ def on_open(websocket_obj):
 
     qprint_dashes(width=160)
     qprint_executing()
-    data = {"paths": [logging_uri]}
+    data = {"paths": [monitoring_uri]}
     websocket_obj.send(json.dumps(data))
-    qprint_timen("Registered for websocket monitoring: " + logging_uri)
+    qprint_timen("Registered for websocket monitoring: " + monitoring_uri)
 
 
 def open_socket(openbmc_host, openbmc_username, openbmc_password):
@@ -224,6 +231,7 @@ def main():
     gen_get_options(parser, stock_list)
     validate_parms()
     qprint_pgm_header()
+    qprint_var(monitoring_uri)
     open_socket(openbmc_host, openbmc_username, openbmc_password)
 
 
