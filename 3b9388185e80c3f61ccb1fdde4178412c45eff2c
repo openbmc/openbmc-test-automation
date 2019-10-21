@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6aa0a94d_65226530",
+        "filename": "extended/code_update/bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2019-10-21T05:19:19Z",
+      "side": 1,
+      "message": "What I was looking is the scenario when rc fails.\nI would say ...if rc fails, we should not proceed with the test case. Make sense?",
+      "parentUuid": "9762cc36_27315eaa",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 57
+      },
+      "revId": "3b9388185e80c3f61ccb1fdde4178412c45eff2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "20f0143a_3e0ff1bd",
         "filename": "extended/code_update/bmc_code_update.robot",
         "patchSetId": 2
@@ -89,6 +113,29 @@
         "startChar": 9,
         "endLine": 84,
         "endChar": 68
+      },
+      "revId": "3b9388185e80c3f61ccb1fdde4178412c45eff2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d52557b4_30163b93",
+        "filename": "extended/code_update/bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2019-10-21T05:19:19Z",
+      "side": 1,
+      "message": "So can we remove this command.",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 76
       },
       "revId": "3b9388185e80c3f61ccb1fdde4178412c45eff2c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
