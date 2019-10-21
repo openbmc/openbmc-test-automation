@@ -635,7 +635,8 @@ def list_to_report(report_list,
         # Pad the line with spaces on the right to facilitate processing with
         # field_desc_regex.
         header_line = pad_format_string % header_line
-        columns = map(str.strip, re.findall(field_desc_regex, header_line)[0])
+        columns = list(map(str.strip,
+                           re.findall(field_desc_regex, header_line)[0]))
 
     report_obj = []
     for report_line in report_list[1:]:
@@ -645,7 +646,8 @@ def list_to_report(report_list,
             # Pad the line with spaces on the right to facilitate processing
             # with field_desc_regex.
             report_line = pad_format_string % report_line
-            line = map(str.strip, re.findall(field_desc_regex, report_line)[0])
+            line = list(map(str.strip,
+                            re.findall(field_desc_regex, report_line)[0]))
         try:
             line_dict = collections.OrderedDict(zip(columns, line))
         except AttributeError:
