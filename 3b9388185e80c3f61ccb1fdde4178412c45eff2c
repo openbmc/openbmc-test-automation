@@ -188,6 +188,29 @@
       "revId": "3b9388185e80c3f61ccb1fdde4178412c45eff2c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fa589ad_7ff2840d",
+        "filename": "extended/code_update/bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2019-10-22T09:27:33Z",
+      "side": 1,
+      "message": "So can\u0027t we just log file content by replacing this command with below command.\n\nLog  ${file_contents_after_codeupdate}",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 76
+      },
+      "revId": "3b9388185e80c3f61ccb1fdde4178412c45eff2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
