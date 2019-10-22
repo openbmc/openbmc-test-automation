@@ -143,7 +143,7 @@ def return_plug_vars(general=True,
             cmd_buf += ", 0)"
         else:
             cmd_buf += ")"
-        exec(cmd_buf)
+        exec(cmd_buf) in globals(), locals()
     # Register password values to prevent printing them out.  Any plug var whose name ends in PASSWORD will
     # be registered.
     password_vals = {k: v for (k, v) in plug_var_dict.items()
