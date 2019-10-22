@@ -65,6 +65,12 @@ class resource_variables():
     obmc_standby_state = "Standby"
     obmc_running_state = "Running"
 
+    # xpath for main menu.
+    xpath_select_server_control = "//button[contains(@class,'btn-control')]"
+
+    # xpath for sub main menu.
+    xpath_select_server_power_operations = "//a[@href='#/server-control/power-operations']"
+
     # Power operation elements needed for power on.
     header_wrapper = "3"
     header_wrapper_elt = "3"
