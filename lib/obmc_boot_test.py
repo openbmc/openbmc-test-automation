@@ -363,8 +363,8 @@ def default_sigusr1(signal_number=0,
     frame          The frame data.
     """
 
-    gp.printn()
-    gp.print_executing()
+    gp.qprintn()
+    gp.qprint_executing()
     gp.lprint_executing()
 
 
@@ -373,8 +373,8 @@ def set_default_siguser1():
     Set the default_sigusr1 function to be the SIGUSR1 handler.
     """
 
-    gp.printn()
-    gp.print_executing()
+    gp.qprintn()
+    gp.qprint_executing()
     gp.lprint_executing()
     signal.signal(signal.SIGUSR1, default_sigusr1)
 
@@ -790,8 +790,8 @@ def stop_boot_test(signal_number=0,
     frame          The frame data.
     """
 
-    gp.printn()
-    gp.print_executing()
+    gp.qprintn()
+    gp.qprint_executing()
     gp.lprint_executing()
 
     # Restore original sigusr1 handler.
@@ -964,7 +964,7 @@ def test_loop_body():
         stop_on_non_zero_rc=1)
     if shell_rc == stop_test_rc():
         message = "Stopping as requested by user.\n"
-        gp.print_time(message)
+        gp.qprint_time(message)
         BuiltIn().fail(message)
 
     # This should help prevent ConnectionErrors.
@@ -1069,7 +1069,7 @@ def post_stack():
         stop_on_non_zero_rc=1)
     if shell_rc == stop_test_rc():
         message = "Stopping as requested by user.\n"
-        gp.print_time(message)
+        gp.qprint_time(message)
         BuiltIn().fail(message)
 
 
