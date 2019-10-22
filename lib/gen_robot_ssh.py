@@ -306,7 +306,8 @@ def execute_ssh_command(cmd_buf,
 
             if (except_type is paramiko.ssh_exception.SSHException
                 and re.match(r"SSH session not active", str(except_value))) or\
-               (except_type is socket.error
+               ((except_type is socket.error
+                 or except_type is ConnectionResetError)
                 and re.match(r"\[Errno 104\] Connection reset by peer",
                              str(except_value))) or\
                (except_type is paramiko.ssh_exception.SSHException
