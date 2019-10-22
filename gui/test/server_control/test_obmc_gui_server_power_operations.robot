@@ -97,26 +97,6 @@ Verify Power On At Power Off
 
 # OpenBMC @ Power Running state test cases.
 
-Verify Warm Reboot Button Should Present At Power Running
-    [Documentation]  Verify presence of "Warm reboot" button.
-    [Tags]  Verify_Warm_Reboot_Button_Should_Present_At_Power_Running
-    ...  OBMC_PowerRunning_State
-    [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
-
-    Select Server Power Operations Sub Menu
-    Verify Presence of Power Button And Text Info
-    ...  ${xpath_select_button_warm_reboot}  ${string_warm_reboot}
-
-Verify Cold Reboot Button Should Present At Power Running
-    [Documentation]  Verify presence of "cold reboot" button.
-    [Tags]  Verify_Cold_Reboot_Button_Should_Present_At_Power_Running
-    ...  OBMC_PowerRunning_State
-    [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
-
-    Select Server Power Operations Sub Menu
-    Verify Presence of Power Button And Text Info
-    ...  ${xpath_select_button_cold_reboot}  ${string_cold_reboot}
-
 Verify Orderly Shutdown Button Should Present At Power Running
     [Documentation]  Verify presence of "Orderly shutdow " button.
     [Tags]  Verify_Orderly_Shutdown_Button_Should_Present_At_Power_Running
@@ -126,6 +106,7 @@ Verify Orderly Shutdown Button Should Present At Power Running
     Select Server Power Operations Sub Menu
     Verify Presence of Power Button And Text Info
     ...  ${xpath_select_button_orderly_shutdown}  ${string_orderly_shutdown}
+
 
 Verify Immediate Shutdown Button Should Present At Power Running
     [Documentation]  Verify presence of "Immediate shutdown" button.
@@ -137,29 +118,6 @@ Verify Immediate Shutdown Button Should Present At Power Running
     Verify Presence of Power Button And Text Info
     ...  ${xpath_select_button_immediate_shutdown}  ${string_immediate_shutdown}
 
-Verify Warm Reboot Should Not Happen By Clicking No Button
-    [Documentation]  Verify functionality of warm reboot "No" button clicking.
-    [Tags]  Verify_Warm_Reboot_Should_Not_Happen_By_Clicking_No_Button
-    [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
-
-    Select Server Power Operations Sub Menu
-    Click Element  ${xpath_select_button_warm_reboot}
-    Verify Warning Message Display Text  ${xpath_operation_warning_message}
-    ...  ${text_warm_reboot_warning_message}
-    Verify No Button Functionality
-    ...  ${xpath_select_button_warm_reboot_no}
-
-Verify Cold Reboot Should Not Happen By Clicking No Button
-    [Documentation]  Verify functionality of cold reboot "No" button clicking.
-    [Tags]  Verify_Cold_Reboot_Should_Not_Happen_By_Clicking_No_Button
-    [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
-
-    Select Server Power Operations Sub Menu
-    Click Element  ${xpath_select_button_cold_reboot}
-    Verify Warning Message Display Text  ${xpath_operation_warning_message}
-    ...  ${text_cold_reboot_warning_message}
-    Verify No Button Functionality
-    ...  ${xpath_select_button_cold_reboot_no}
 
 Verify Orderly Shutdown Should Not Happen By Clicking No Button
     [Documentation]  Verify functionality of orderly shutdown "No" button clicking.
@@ -185,21 +143,6 @@ Verify Immediate Shutdown Should Not Happen By Clicking No Button
     Verify No Button Functionality
     ...  ${xpath_select_button_immediate_shutdown_no}
 
-Verify Warm Reboot Should Happen By Clicking Yes Button
-    [Documentation]  Verify functionality of warm reboot "Yes" button clicking.
-    [Tags]  Verify_Warm_Reboot_Should_Happen_By_Clicking_Yes_Button
-    [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
-
-    Select Server Power Operations Sub Menu
-    Warm Reboot openBMC
-
-Verify Cold Reboot Should Happen By Clicking Yes Button
-    [Documentation]  Verify functionality of cold reboot "Yes" button clicking.
-    [Tags]  Verify_Cold_Reboot_Should_Happen_By_Clicking_Yes_Button
-    [Setup]  Test Setup Execution  ${OBMC_PowerRunning_state}
-
-    Select Server Power Operations Sub Menu
-    Cold Reboot openBMC
 
 Verify Orderly Shutdown Should Happen By Clicking Yes Button
     [Documentation]  Verify functionality of orderly shutdown "Yes" button clicking.
@@ -218,6 +161,7 @@ Verify Immediate Shutdown Should Happen By Clicking Yes Button
 
     Select Server Power Operations Sub Menu
     Immediate Shutdown openBMC
+
 
 *** Keywords ***
 Select Server Power Operations Sub Menu
