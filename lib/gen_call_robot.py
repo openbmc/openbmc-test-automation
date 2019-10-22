@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 r"""
-This module provides functions which are useful to plug-ins call-point
-programs that wish to make external robot program calls.
+This module provides functions which are useful to plug-ins call-point programs that wish to make external
+robot program calls.
 """
 
 import sys
@@ -30,21 +30,19 @@ def init_robot_out_parms(extra_prefix=""):
 
     outputdir, output, log, report, loglevel
 
-    This function would typically be called prior to calling
-    create_robot_cmd_string.
+    This function would typically be called prior to calling create_robot_cmd_string.
 
     Description of argument(s):
-    extra_prefix                    An extra prefix to be appended to the
-                                    default prefix for output file names.
+    extra_prefix                    An extra prefix to be appended to the default prefix for output file
+                                    names.
     """
 
     gp.dprint_executing()
     AUTOBOOT_OPENBMC_NICKNAME = gm.get_mod_global("AUTOBOOT_OPENBMC_NICKNAME")
 
     # Set values for call to create_robot_cmd_string.
-    # Environment variable TMP_ROBOT_DIR_PATH can be set by the user to
-    # indicate that robot-generated output should initially be written to the
-    # specified temporary directory and then moved to the normal output
+    # Environment variable TMP_ROBOT_DIR_PATH can be set by the user to indicate that robot-generated output
+    # should initially be written to the specified temporary directory and then moved to the normal output
     # location after completion.
     outputdir =\
         os.environ.get("TMP_ROBOT_DIR_PATH",
@@ -57,9 +55,8 @@ def init_robot_out_parms(extra_prefix=""):
     time_string = time.strftime("%y%m%d.%H%M%S", loc_time)
     file_prefix = AUTOBOOT_OPENBMC_NICKNAME + "." + extra_prefix +\
         time_string + "."
-    # Environment variable SAVE_STATUS_POLICY governs when robot-generated
-    # output files (e.g. the log.html) will be moved from TMP_ROBOT_DIR_PATH
-    # to FFDC_DIR_PATH.  Valid values are "ALWAYS", "NEVER" and "FAIL".
+    # Environment variable SAVE_STATUS_POLICY governs when robot-generated output files (e.g. the log.html)
+    # will be moved from TMP_ROBOT_DIR_PATH to FFDC_DIR_PATH.  Valid values are "ALWAYS", "NEVER" and "FAIL".
     SAVE_STATUS_POLICY = os.environ.get("SAVE_STATUS_POLICY", "ALWAYS")
     if SAVE_STATUS_POLICY == "NEVER":
         output = "NONE"
@@ -81,24 +78,21 @@ def init_robot_out_parms(extra_prefix=""):
 
 def init_robot_test_base_dir_path():
     r"""
-    Initialize and validate the environment variable, ROBOT_TEST_BASE_DIR_PATH
-    and set corresponding global variable ROBOT_TEST_RUNNING_FROM_SB.
+    Initialize and validate the environment variable, ROBOT_TEST_BASE_DIR_PATH and set corresponding global
+    variable ROBOT_TEST_RUNNING_FROM_SB.
 
-    If ROBOT_TEST_BASE_DIR_PATH is already set, this function will merely
-    validate it.  This function will also set environment variable
-    ROBOT_TEST_RUNNING_FROM_SB when ROBOT_TEST_BASE_DIR_PATH is not pre-set.
+    If ROBOT_TEST_BASE_DIR_PATH is already set, this function will merely validate it.  This function will
+    also set environment variable ROBOT_TEST_RUNNING_FROM_SB when ROBOT_TEST_BASE_DIR_PATH is not pre-set.
     """
 
     # ROBOT_TEST_BASE_DIR_PATH will be set as follows:
-    # This function will determine whether we are running in a user sandbox
-    # or from a standard apolloxxx environment.
+    # This function will determine whether we are running in a user sandbox or from a standard apolloxxx
+    # environment.
     # - User sandbox:
-    # If there is a <developer's home dir>/git/openbmc-test-automation/,
-    # ROBOT_TEST_BASE_DIR_PATH will be set to that path.  Otherwise, we set it
-    # to <program dir path>/git/openbmc-test-automation/
+    # If there is a <developer's home dir>/git/openbmc-test-automation/, ROBOT_TEST_BASE_DIR_PATH will be
+    # set to that path.  Otherwise, we set it to <program dir path>/git/openbmc-test-automation/
     # - Not in user sandbox:
-    # ROBOT_TEST_BASE_DIR_PATH will be set to <program dir
-    # path>/git/openbmc-test-automation/
+    #   ROBOT_TEST_BASE_DIR_PATH will be set to <program dir path>/git/openbmc-test-automation/
 
     ROBOT_TEST_BASE_DIR_PATH = os.environ.get('ROBOT_TEST_BASE_DIR_PATH', "")
     ROBOT_TEST_RUNNING_FROM_SB = \
@@ -111,8 +105,8 @@ def init_robot_test_base_dir_path():
         else:
             suffix = "git/openbmc-test-automation/"
 
-            # Determine whether we're running out of a developer sandbox or
-            # simply out of an apolloxxx/bin path.
+            # Determine whether we're running out of a developer sandbox or simply out of an apolloxxx/bin
+            # path.
             shell_rc, out_buf = gc.shell_cmd('dirname $(which gen_print.py)',
                                              quiet=(not debug), print_output=0)
             executable_base_dir_path = os.path.realpath(out_buf.rstrip()) + "/"
@@ -159,20 +153,16 @@ raw_robot_file_search_path = "${ROBOT_TEST_BASE_DIR_PATH}:" +\
 
 def init_robot_file_path(robot_file_path):
     r"""
-    Determine full path name for the file path passed in robot_file_path and
-    return it.
+    Determine full path name for the file path passed in robot_file_path and return it.
 
-    If robot_file_path contains a fully qualified path name, this function
-    will verify that the file exists.  If robot_file_path contains a relative
-    path, this function will search for the file and set robot_file_path so
-    that it contains the absolute path to the robot file.  This function will
-    search for the robot file using the raw_robot_file_search_path (defined
-    above).  Note that if ROBOT_TEST_BASE_DIR_PATH is not set, this function
-    will call init_robot_test_base_dir_path to set it.
+    If robot_file_path contains a fully qualified path name, this function will verify that the file exists.
+    If robot_file_path contains a relative path, this function will search for the file and set
+    robot_file_path so that it contains the absolute path to the robot file.  This function will search for
+    the robot file using the raw_robot_file_search_path (defined above).  Note that if
+    ROBOT_TEST_BASE_DIR_PATH is not set, this function will call init_robot_test_base_dir_path to set it.
 
     Description of arguments:
-    robot_file_path                 The absolute or relative path to a robot
-                                    file.
+    robot_file_path                 The absolute or relative path to a robot file.
     """
 
     gv.valid_value(robot_file_path)
@@ -217,9 +207,8 @@ def init_robot_file_path(robot_file_path):
 
 def get_robot_parm_names():
     r"""
-    Return a list containing all of the long parm names (e.g. --outputdir)
-    supported by the robot program.  Double dashes are not included in the
-    names returned.
+    Return a list containing all of the long parm names (e.g. --outputdir) supported by the robot program.
+    Double dashes are not included in the names returned.
     """
 
     cmd_buf = "robot -h | egrep " +\
@@ -232,32 +221,26 @@ def get_robot_parm_names():
 
 def create_robot_cmd_string(robot_file_path, *parms):
     r"""
-    Create a robot command string and return it.  On failure, return an empty
-    string.
+    Create a robot command string and return it.  On failure, return an empty string.
 
     Description of arguments:
     robot_file_path                 The path to the robot file to be run.
-    parms                           The list of parms to be included in the
-                                    command string.  The name of each variable
-                                    in this list must be the same as the name
-                                    of the corresponding parm.  This function
-                                    figures out that name.  This function is
-                                    also able to distinguish robot parms (e.g.
-                                    --outputdir) from robot program parms (all
-                                    other parms which will be passed as "-v
-                                    PARM_NAME:parm_value")..
+    parms                           The list of parms to be included in the command string.  The name of each
+                                    variable in this list must be the same as the name of the corresponding
+                                    parm.  This function figures out that name.  This function is also able
+                                    to distinguish robot parms (e.g. --outputdir) from robot program parms
+                                    (all other parms which will be passed as "-v PARM_NAME:parm_value")..
 
     Example:
 
     The following call to this function...
-    cmd_buf = create_robot_cmd_string("tools/start_sol_console.robot",
-    OPENBMC_HOST, quiet, test_mode, debug, outputdir, output, log, report)
+    cmd_buf = create_robot_cmd_string("tools/start_sol_console.robot", OPENBMC_HOST, quiet, test_mode, debug,
+    outputdir, output, log, report)
 
     Would return a string something like this.
     robot -v OPENBMC_HOST:beye6 -v quiet:0 -v test_mode:1 -v debug:1
-    --outputdir=/gsa/ausgsa/projects/a/status
-    --output=beye6.OS_Console.output.xml --log=beye6.OS_Console.log.html
-    --report=beye6.OS_Console.report.html tools/start_sol_console.robot
+    --outputdir=/gsa/ausgsa/projects/a/status --output=beye6.OS_Console.output.xml
+    --log=beye6.OS_Console.log.html --report=beye6.OS_Console.report.html tools/start_sol_console.robot
     """
 
     robot_file_path = init_robot_file_path(robot_file_path)
@@ -296,17 +279,14 @@ def process_robot_output_files(robot_cmd_buf=None,
                                gzip=None):
     r"""
     Process robot output files which can involve several operations:
-    - If the files are in a temporary location, using SAVE_STATUS_POLICY to
-      decide whether to move them to a permanent location or to delete them.
+    - If the files are in a temporary location, using SAVE_STATUS_POLICY to decide whether to move them to a
+      permanent location or to delete them.
     - Gzipping them.
 
     Description of argument(s):
-    robot_cmd_buf                   The complete command string used to invoke
-                                    robot.
-    robot_rc                        The return code from running the robot
-                                    command string.
-    gzip                            Indicates whether robot-generated output
-                                    should be gzipped.
+    robot_cmd_buf                   The complete command string used to invoke robot.
+    robot_rc                        The return code from running the robot command string.
+    gzip                            Indicates whether robot-generated output should be gzipped.
     """
 
     robot_cmd_buf = gm.dft(robot_cmd_buf, gcr_last_robot_cmd_buf)
@@ -314,15 +294,14 @@ def process_robot_output_files(robot_cmd_buf=None,
     gzip = gm.dft(gzip, int(os.environ.get("GZIP_ROBOT", "1")))
 
     if robot_cmd_buf == "":
-        # This can legitimately occur if this function is called from an
-        # exit_function without the program having ever run robot_cmd_fnc.
+        # This can legitimately occur if this function is called from an exit_function without the program
+        # having ever run robot_cmd_fnc.
         return
 
     SAVE_STATUS_POLICY = os.environ.get("SAVE_STATUS_POLICY", "ALWAYS")
     gp.qprint_vars(SAVE_STATUS_POLICY)
 
-    # When SAVE_STATUS_POLICY is "NEVER" robot output files don't even get
-    # generated.
+    # When SAVE_STATUS_POLICY is "NEVER" robot output files don't even get generated.
     if SAVE_STATUS_POLICY == "NEVER":
         return
 
@@ -355,15 +334,13 @@ def process_robot_output_files(robot_cmd_buf=None,
         # Update the values in file_list.
         file_list = re.sub(" ", ".gz ", file_list) + ".gz"
 
-    # It TMP_ROBOT_DIR_PATH is set, it means the caller wanted the robot
-    # output initially directed to TMP_ROBOT_DIR_PATH but later moved to
-    # FFDC_DIR_PATH.  Otherwise, we're done.
+    # It TMP_ROBOT_DIR_PATH is set, it means the caller wanted the robot output initially directed to
+    # TMP_ROBOT_DIR_PATH but later moved to FFDC_DIR_PATH.  Otherwise, we're done.
 
     if os.environ.get("TMP_ROBOT_DIR_PATH", "") is "":
         return
 
-    # We're directing these to the FFDC dir path so that they'll be subjected
-    # to FFDC cleanup.
+    # We're directing these to the FFDC dir path so that they'll be subjected to FFDC cleanup.
     target_dir_path = os.environ.get("FFDC_DIR_PATH",
                                      os.environ.get("HOME", ".")
                                      + "/ffdc")
@@ -384,14 +361,13 @@ def robot_cmd_fnc(robot_cmd_buf,
     r"""
     Run the robot command string.
 
-    This function will set the various PATH variables correctly so that you
-    are running the proper version of all imported files, etc.
+    This function will set the various PATH variables correctly so that you are running the proper version of
+    all imported files, etc.
 
     Description of argument(s):
     robot_cmd_buf                   The complete robot command string.
-    robot_jail                      Indicates that this is to run in "robot
-                                    jail" meaning without visibility to any
-                                    apolloxxx import files, programs, etc.
+    robot_jail                      Indicates that this is to run in "robot jail" meaning without visibility
+                                    to any apolloxxx import files, programs, etc.
     """
 
     gv.valid_value(robot_cmd_buf)
@@ -433,13 +409,11 @@ def robot_cmd_fnc(robot_cmd_buf,
     os.environ["SAVED_PATH"] = os.environ.get("PATH", "")
 
     if robot_jail:
-        # Make sure required programs like python and robot can be found in
-        # the new restricted PATH.
+        # Make sure required programs like python and robot can be found in the new restricted PATH.
         required_programs = "python robot"
-        # It is expected that there will be a "python" program in the tool
-        # base bin path which is really a link to select_version.  Ditto for
-        # "robot".  Call each with the --print_only option to get the paths to
-        # the "real" programs.
+        # It is expected that there will be a "python" program in the tool base bin path which is really a
+        # link to select_version.  Ditto for "robot".  Call each with the --print_only option to get the
+        # paths to the "real" programs.
         cmd_buf = "for program in " + required_programs \
             + " ; do dirname $(${program} --print_only) ; done 2>/dev/null"
         rc, out_buf = gc.shell_cmd(cmd_buf, quiet=1, print_output=0)

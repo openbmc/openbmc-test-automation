@@ -1,7 +1,6 @@
 #!/usr/bin/expect
 
-# This file provides many valuable expect procedures like handle_timeout and
-# handle_eof.
+# This file provides many valuable expect procedures like handle_timeout and handle_eof.
 
 my_source [list print.tcl]
 
@@ -11,8 +10,7 @@ proc handle_timeout { description } {
   # Print timeout error message to stderr and exit 1.
 
   # Description of argument(s):
-  # description                     A description of what was being expected
-  #                                 (e.g. "an SOL login prompt").
+  # description                     A description of what was being expected (e.g. "an SOL login prompt").
 
   global spawn_id
   global expect_out
@@ -45,8 +43,7 @@ proc handle_eof { description } {
   # Print end-of-file error message to stderr and exit 1.
 
   # Description of argument(s):
-  # description                     A description of what was being expected
-  #                                 (e.g. "an SOL login prompt").
+  # description                     A description of what was being expected (e.g. "an SOL login prompt").
 
   global spawn_id
 
@@ -67,36 +64,26 @@ proc handle_eof { description } {
 
 proc expect_wrap {pattern_list message {timeout 15} {fail_on_timeout 1}} {
 
-  # Run the expect command for the caller and return the list index of the
-  # matching pattern.
+  # Run the expect command for the caller and return the list index of the matching pattern.
 
-  # This function offers the following benefits over calling the expect
-  # command directly:
-  # - It makes program debug easier.  When the program is run with --debug=1,
-  # this function prints useful debug output.
+  # This function offers the following benefits over calling the expect command directly:
+  # - It makes program debug easier.  When the program is run with --debug=1, this function prints useful
+  #   debug output.
   # - It will do standardized timeout and eof handling.
 
   # Description of argument(s):
-  # pattern_list                    A list of patterns to be matched.  If one
-  #                                 of the patterns matches, the list index of
-  #                                 the matching item will be returned.  By
-  #                                 default, each pattern is presumed to be a
-  #                                 regex.  If the caller wishes to, they may
-  #                                 precede each pattern with either of the
-  #                                 following: "-re ", "-gl " or "-ex " in
-  #                                 order to explicitly choose the kind of
-  #                                 match to be done..
-  # message                         A message explaining what is being
-  #                                 expected (e.g. "an SOL login prompt").
+  # pattern_list                    A list of patterns to be matched.  If one of the patterns matches, the
+  #                                 list index of the matching item will be returned.  By default, each
+  #                                 pattern is presumed to be a regex.  If the caller wishes to, they may
+  #                                 precede each pattern with either of the following: "-re ", "-gl " or "-ex
+  #                                 " in order to explicitly choose the kind of match to be done..
+  # message                         A message explaining what is being expected (e.g. "an SOL login prompt").
   #                                 This will be included in output messages.
   # timeout                         The expect timeout value.
-  # fail_on_timeout                 A flag governing the behavior when the
-  #                                 expect command results in a timeout. If
-  #                                 set to 1, this procedure will print an
-  #                                 error message to standard error and exit
-  #                                 the program with a non-zero return code.
-  #                                 If set to 0, it will return
-  #                                 [expect_wrap_timeout].
+  # fail_on_timeout                 A flag governing the behavior when the expect command results in a
+  #                                 timeout. If set to 1, this procedure will print an error message to
+  #                                 standard error and exit the program with a non-zero return code. If set
+  #                                 to 0, it will return [expect_wrap_timeout].
 
   # Example usage:
   #   set result [expect_wrap\
@@ -128,8 +115,8 @@ proc expect_wrap {pattern_list message {timeout 15} {fail_on_timeout 1}} {
   append cmd_buf "expect {\n"
   set ix 0
   foreach pattern $pattern_list {
-    # Check to see whether the caller has specified a flag (e.g. "-re",
-    # "-ex", etc.) at the beginning of the pattern.
+    # Check to see whether the caller has specified a flag (e.g. "-re", "-ex", etc.) at the beginning of the
+    # pattern.
     set tokens [split $pattern " "]
     if { [lsearch $flags [lindex $tokens 0]] != -1 } {
       # Caller specified a flag.
@@ -174,14 +161,12 @@ proc send_wrap {buffer {add_lf 1}} {
 
   # Send the buffer to the spawned process.
 
-  # This function offers the following benefits over calling the send command
-  # directly:
-  # - It makes program debug easier.  When the program is run with --debug=1,
-  # this function prints useful debug output.
+  # This function offers the following benefits over calling the send command directly:
+  # - It makes program debug easier.  When the program is run with --debug=1, this function prints useful
+  #   debug output.
 
   # Description of argument(s):
-  # buffer                          The string to be sent to the spawned
-  #                                 process.
+  # buffer                          The string to be sent to the spawned process.
   # add_lf                          Send a line feed after sending the buffer.
 
   # Example usage.
@@ -212,42 +197,30 @@ proc send_wrap {buffer {add_lf 1}} {
 proc shell_command {command_string {prompt_regex} { quiet {} } \
   { test_mode {} } { show_err {} } { ignore_err {} } {trim_cr_lf 1}} {
 
-  # Execute the command_string on the shell command line and return a list
-  # consisting of 1) the return code of the command 2) the stdout/stderr.
+  # Execute the command_string on the shell command line and return a list consisting of 1) the return code
+  # of the command 2) the stdout/stderr.
 
-  # It is the caller's responsibility to spawn the appropriate process
-  # (ssh,telnet) and to get the process to a shell command line (by logging
-  # in, etc.).
+  # It is the caller's responsibility to spawn the appropriate process (ssh,telnet) and to get the process
+  # to a shell command line (by logging in, etc.).
 
   # Description of argument(s):
-  # command_string                  The command string which is to be run on
-  #                                 the shell (e.g. "hostname" or "grep this
-  #                                 that").
-  # prompt_regex                    A regular expression to match the prompt
-  #                                 for current shell to run on (e.g "/ #").
-  # quiet                           Indicates whether this procedure should
-  #                                 run the print_issuing() procedure which
-  #                                 prints "Issuing: <cmd string>" to stdout.
-  #                                 The default value is 0.
-  # test_mode                       If test_mode is set, this procedure will
-  #                                 not actually run the command.  If
-  #                                 print_output is set, it will print
-  #                                 "(test_mode) Issuing: <cmd string>" to
-  #                                 stdout.  The default value is 0.
-  # show_err                        If show_err is set, this procedure will
-  #                                 print a standardized error report if the
-  #                                 shell command returns non-zero.  The
-  #                                 default value is 1.
-  # ignore_err                      If ignore_err is set, this procedure will
-  #                                 not fail if the shell command fails.
-  #                                 However, if ignore_err is not set, this
-  #                                 procedure will exit 1 if the shell command
-  #                                 fails.  The default value is 1.
-  # trim_cr_lf                      Trim any trailing carriage return or line
-  #                                 feed from the result.
+  # command_string                  The command string which is to be run on the shell (e.g. "hostname" or
+  #                                 "grep this that").
+  # prompt_regex                    A regular expression to match the prompt for current shell to run on (e.g
+  #                                 "/ #").
+  # quiet                           Indicates whether this procedure should run the print_issuing() procedure
+  #                                 which prints "Issuing: <cmd string>" to stdout. The default value is 0.
+  # test_mode                       If test_mode is set, this procedure will not actually run the command.
+  #                                 If print_output is set, it will print "(test_mode) Issuing: <cmd string>"
+  #                                 to stdout.  The default value is 0.
+  # show_err                        If show_err is set, this procedure will print a standardized error report
+  #                                 if the shell command returns non-zero.  The default value is 1.
+  # ignore_err                      If ignore_err is set, this procedure will not fail if the shell command
+  #                                 fails.  However, if ignore_err is not set, this procedure will exit 1 if
+  #                                 the shell command fails.  The default value is 1.
+  # trim_cr_lf                      Trim any trailing carriage return or line feed from the result.
 
-  # Set defaults (this section allows users to pass blank values for certain
-  # args).
+  # Set defaults (this section allows users to pass blank values for certain args).
   set_var_default quiet [get_stack_var quiet 0 2]
   set_var_default test_mode 0
   set_var_default show_err 1

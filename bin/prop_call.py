@@ -67,8 +67,7 @@ stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
 def exit_function(signal_number=0,
                   frame=None):
     r"""
-    Execute whenever the program ends normally or with the signals that we
-    catch (i.e. TERM, INT).
+    Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
     """
 
     dprint_executing()
@@ -80,25 +79,22 @@ def exit_function(signal_number=0,
 def signal_handler(signal_number,
                    frame):
     r"""
-    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our
-    program would terminate immediately with return code 143 and without
-    calling our exit_function.
+    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our program would terminate immediately
+    with return code 143 and without calling our exit_function.
     """
 
-    # Our convention is to set up exit_function with atexit.register() so
-    # there is no need to explicitly call exit_function from here.
+    # Our convention is to set up exit_function with atexit.register() so there is no need to explicitly
+    # call exit_function from here.
 
     dprint_executing()
 
-    # Calling exit prevents us from returning to the code that was running
-    # when we received the signal.
+    # Calling exit prevents us from returning to the code that was running when we received the signal.
     exit(0)
 
 
 def validate_parms():
     r"""
-    Validate program parameters, etc.  Return True or False (i.e. pass/fail)
-    accordingly.
+    Validate program parameters, etc.  Return True or False (i.e. pass/fail) accordingly.
     """
 
     global prop_dir_path

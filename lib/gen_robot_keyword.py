@@ -15,30 +15,25 @@ def run_key(keyword_buf,
     r"""
     Run the given keyword, return the status and the keyword return values.
 
-    The advantage of using this function verses having robot simply run your
-    keyword is the handling of parameters like quiet, test_mode and ignore.
+    The advantage of using this function verses having robot simply run your keyword is the handling of
+    parameters like quiet, test_mode and ignore.
 
     Description of arguments:
     keyword_buf                     The keyword string to be run.
-    quiet                           Indicates whether this function should run
-                                    the pissuing function to print 'Issuing:
-                                    <keyword string>' to stdout.
-    test_mode                       If test_mode is set, this function will
-                                    not actually run the command.  If quiet is
-                                    0, it will print a message indicating what
-                                    it would have run (e.g. "Issuing:
-                                    (test_mode) your command").
-    ignore                          Ignore errors from running keyword.  If
-                                    this is 0, this function will fail with
-                                    whatever error occurred when running the
-                                    keyword.
+    quiet                           Indicates whether this function should run the pissuing function to print
+                                    'Issuing: <keyword string>' to stdout.
+    test_mode                       If test_mode is set, this function will not actually run the command.  If
+                                    quiet is 0, it will print a message indicating what it would have run
+                                    (e.g. "Issuing: (test_mode) your command").
+    ignore                          Ignore errors from running keyword.  If this is 0, this function will
+                                    fail with whatever error occurred when running the keyword.
 
     Example usage from a robot script:
 
     ${status}  ${ret_values}=  Run Key  My Keyword \ Arg1 \ Arg2
 
-    Note that to get robot to pass your command + args as a single string to
-    this function, you must escape extra spaces with a backslash.
+    Note that to get robot to pass your command + args as a single string to this function, you must escape
+    extra spaces with a backslash.
 
     Also note that ret_values is a python list:
     ret_values:
@@ -51,11 +46,9 @@ def run_key(keyword_buf,
     test_mode = int(gp.get_var_value(test_mode, 0))
     ignore = int(ignore)
 
-    # Convert the keyword_buf into a list split wherever 2 or more spaces are
-    # found.
+    # Convert the keyword_buf into a list split wherever 2 or more spaces are found.
     keyword_list = keyword_buf.split('  ')
-    # Strip spaces from each argument to make the output look clean and
-    # uniform.
+    # Strip spaces from each argument to make the output look clean and uniform.
     keyword_list = [item.strip(' ') for item in keyword_list]
 
     if not quiet:
@@ -87,12 +80,10 @@ def run_key_u(keyword_buf,
               quiet=None,
               ignore=0):
     r"""
-    Run keyword unconditionally (i.e. without regard to global test_mode
-    setting).
+    Run keyword unconditionally (i.e. without regard to global test_mode setting).
 
-    This function will simply call the run_key function passing on all of the
-    callers parameters except test_mode which will be hard-coded to 0.  See
-    run_key (above) for details.
+    This function will simply call the run_key function passing on all of the callers parameters except
+    test_mode which will be hard-coded to 0.  See run_key (above) for details.
 
     See the proglog of "run_key" function above for description of arguments.
     """

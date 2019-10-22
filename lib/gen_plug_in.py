@@ -33,9 +33,8 @@ def get_plug_in_base_paths():
     r"""
     Get plug-in base paths and return them as a list.
 
-    This function searches the PATH_LIST (created from PATH environment
-    variable) for any paths that have a "plug_ins" subdirectory.  All such
-    paths are considered plug_in_base paths.
+    This function searches the PATH_LIST (created from PATH environment variable) for any paths that have a
+    "plug_ins" subdirectory.  All such paths are considered plug_in_base paths.
     """
 
     global PATH_LIST
@@ -50,19 +49,17 @@ def get_plug_in_base_paths():
     return plug_in_base_path_list
 
 
-# Define global plug_in_base_path_list and call get_plug_in_base_paths to set
-# its value.
+# Define global plug_in_base_path_list and call get_plug_in_base_paths to set its value.
 plug_in_base_path_list = get_plug_in_base_paths()
 
 
 def find_plug_in_package(plug_in_name):
     r"""
-    Find and return the normalized directory path of the specified plug in.
-    This is done by searching the global plug_in_base_path_list.
+    Find and return the normalized directory path of the specified plug in.  This is done by searching the
+    global plug_in_base_path_list.
 
     Description of arguments:
-    plug_in_name                    The unqualified name of the plug-in
-                                    package.
+    plug_in_name                    The unqualified name of the plug-in package.
     """
 
     global plug_in_base_path_list
@@ -79,15 +76,12 @@ def find_plug_in_package(plug_in_name):
 def validate_plug_in_package(plug_in_dir_path,
                              mch_class="obmc"):
     r"""
-    Validate the plug in package and return the normalized plug-in directory
-    path.
+    Validate the plug in package and return the normalized plug-in directory path.
 
     Description of arguments:
-    plug_in_dir_path                The "relative" or absolute path to a plug
-                                    in package directory.
-    mch_class                       The class of machine that we are testing
-                                    (e.g. "op" = "open power", "obmc" = "open
-                                    bmc", etc).
+    plug_in_dir_path                The "relative" or absolute path to a plug in package directory.
+    mch_class                       The class of machine that we are testing (e.g. "op" = "open power",
+                                    "obmc" = "open bmc", etc).
     """
 
     gp.dprint_executing()
@@ -101,8 +95,7 @@ def validate_plug_in_package(plug_in_dir_path,
                                   + plug_in_dir_path + "\" does not exist.\n")
             exit(1)
     else:
-        # The plug_in_dir_path is actually a simple name (e.g.
-        # "OBMC_Sample")...
+        # The plug_in_dir_path is actually a simple name (e.g. "OBMC_Sample")...
         candidate_plug_in_dir_path = find_plug_in_package(plug_in_dir_path)
         if candidate_plug_in_dir_path == "":
             global PATH_LIST
@@ -129,16 +122,14 @@ def validate_plug_in_package(plug_in_dir_path,
 
 def return_integrated_plug_ins(mch_class="obmc"):
     r"""
-    Return a list of integrated plug-ins.  Integrated plug-ins are plug-ins
-    which are selected without regard for whether the user has specified them.
-    In other words, they are "integrated" into the program suite.  The
-    programmer designates a plug-in as integrated by putting a file named
-    "integrated" into the plug-in package directory.
+    Return a list of integrated plug-ins.  Integrated plug-ins are plug-ins which are selected without regard
+    for whether the user has specified them.  In other words, they are "integrated" into the program suite.
+    The programmer designates a plug-in as integrated by putting a file named "integrated" into the plug-in
+    package directory.
 
     Description of arguments:
-    mch_class                       The class of machine that we are testing
-                                    (e.g. "op" = "open power", "obmc" = "open
-                                    bmc", etc).
+    mch_class                       The class of machine that we are testing (e.g. "op" = "open power",
+                                    "obmc" = "open bmc", etc).
     """
 
     global plug_in_base_path_list
@@ -171,16 +162,13 @@ def return_integrated_plug_ins(mch_class="obmc"):
 def return_plug_in_packages_list(plug_in_dir_paths,
                                  mch_class="obmc"):
     r"""
-    Return a list of plug-in packages given the plug_in_dir_paths string.
-    This function calls validate_plug_in_package so it will fail if
-    plug_in_dir_paths contains any invalid plug-ins.
+    Return a list of plug-in packages given the plug_in_dir_paths string.  This function calls
+    validate_plug_in_package so it will fail if plug_in_dir_paths contains any invalid plug-ins.
 
     Description of arguments:
-    plug_in_dir_path                The "relative" or absolute path to a plug
-                                    in package directory.
-    mch_class                       The class of machine that we are testing
-                                    (e.g. "op" = "open power", "obmc" = "open
-                                    bmc", etc).
+    plug_in_dir_path                The "relative" or absolute path to a plug in package directory.
+    mch_class                       The class of machine that we are testing (e.g. "op" = "open power",
+                                    "obmc" = "open bmc", etc).
     """
 
     if plug_in_dir_paths != "":
@@ -190,9 +178,9 @@ def return_plug_in_packages_list(plug_in_dir_paths,
 
     # Get a list of integrated plug-ins (w/o full path names).
     integrated_plug_ins_list = return_integrated_plug_ins(mch_class)
-    # Put both lists together in plug_in_packages_list with no duplicates.
-    # NOTE: This won't catch duplicates if the caller specifies the full path
-    # name of a native plug-in but that should be rare enough.
+    # Put both lists together in plug_in_packages_list with no duplicates.  NOTE: This won't catch
+    # duplicates if the caller specifies the full path name of a native plug-in but that should be rare
+    # enough.
 
     plug_in_packages_list = plug_in_packages_list + integrated_plug_ins_list
 

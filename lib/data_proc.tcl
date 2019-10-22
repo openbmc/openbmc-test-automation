@@ -1,18 +1,15 @@
 #!/usr/bin/wish
 
-# This file provides many valuable data processing procedures like
-# lappend_unique, get_var, etc.
+# This file provides many valuable data processing procedures like lappend_unique, get_var, etc.
 
 
 proc lappend_unique { args } {
 
-  # Add the each entry to a list if and only if they do not already exist in
-  # the list.
+  # Add the each entry to a list if and only if they do not already exist in the list.
 
   # Description of argument(s):
-  # args                            The first argument should be the list
-  #                                 name.  All other arguments are items to be
-  #                                 added to the list.
+  # args                            The first argument should be the list name.  All other arguments are
+  #                                 items to be added to the list.
 
   set list_name [lindex $args 0]
   # Remove first entry from args list.
@@ -37,11 +34,9 @@ proc lsubtract {main_list_name removal_list} {
 
   # Description of argument(s):
   # main_list_name                  The name of your master list.
-  # removal_list                    The list of items to be removed from
-  #                                 master list.
+  # removal_list                    The list of items to be removed from master list.
 
-  # For each element in the removal list, find the corresponding entry in the
-  # master list and remove it.
+  # For each element in the removal list, find the corresponding entry in the master list and remove it.
   for {set removal_ix 0} {$removal_ix < [llength $removal_list ]}\
       {incr removal_ix} {
     set value [lindex $removal_list $removal_ix]
@@ -54,15 +49,13 @@ proc lsubtract {main_list_name removal_list} {
 
 proc list_map { list expression } {
 
-  # Create and return a new list where each element of the new list is a
-  # result of running the given expression on the corresponding entry from the
-  # original list.
+  # Create and return a new list where each element of the new list is a result of running the given
+  # expression on the corresponding entry from the original list.
 
   # Description of argument(s):
   # list                            A list to be operated on.
-  # expression                      A command expression to be run on each
-  #                                 element in the list (e.g. '[string range
-  #                                 $x 1 end]').
+  # expression                      A command expression to be run on each element in the list (e.g. '[string
+  #                                 range $x 1 end]').
 
   foreach x $list {
     set cmd_buf "lappend new_list ${expression}"
@@ -76,15 +69,14 @@ proc list_map { list expression } {
 
 proc list_filter { list expression } {
 
-  # Create and return a new list consisting of all elements of the original
-  # list that do NOT pass the expression.
+  # Create and return a new list consisting of all elements of the original list that do NOT pass the
+  # expression.
 
   # Description of argument(s):
   # list                            A list to be operated on.
-  # expression                      A command expression to be run on each
-  #                                 element in the list (e.g. 'regexp
-  #                                 -expanded {^[[:blank:]]*\#|^[[:blank:]]*$}
-  #                                 $x', 'string equal $x ""', etc.).
+  # expression                      A command expression to be run on each element in the list (e.g. 'regexp
+  #                                 -expanded {^[[:blank:]]*\#|^[[:blank:]]*$} $x', 'string equal $x ""',
+  #                                 etc.).
 
   set new_list {}
 
@@ -118,17 +110,15 @@ proc list_filter_comments { list } {
 proc get_var { var_var { default ""} } {
   upvar 1 $var_var var_ref
 
-  # Return the value of the variable expression or the value of default if
-  # the variable is not defined.
+  # Return the value of the variable expression or the value of default if the variable is not defined.
 
   # Example use:
   # set PATH [get_var ::env(PATH) "/usr/bin"]
 
   # Description of argument(s):
-  # var_var                         The name of a variable (e.g.
-  #                                 "::env(NANOSECOND)" or "var1").
-  # default                         The default value to return if the
-  #                                 variable named in var_var does not exist.
+  # var_var                         The name of a variable (e.g. "::env(NANOSECOND)" or "var1").
+  # default                         The default value to return if the variable named in var_var does not
+  #                                 exist.
 
   expr { [info exists var_ref] ? [return $var_ref] : [return $default] }
 
@@ -138,17 +128,15 @@ proc get_var { var_var { default ""} } {
 proc set_var_default { var_name { default ""} } {
   upvar 1 $var_name var_ref
 
-  # If the variable named in var_name is either blank or non-existent, set
-  # its value to the default.
+  # If the variable named in var_name is either blank or non-existent, set its value to the default.
 
   # Example use:
   # set_var_default indent 0
 
   # Description of argument(s):
   # var_name                        The name of a variable.
-  # default                         The default value to assign to the
-  #                                 variable if the variable named in var_name
-  #                                 is blank or non-existent.
+  # default                         The default value to assign to the variable if the variable named in
+  #                                 var_name is blank or non-existent.
 
   if { ! ([info exists var_ref] && $var_ref != "") } {
     set var_ref $default
@@ -161,16 +149,13 @@ proc split_path {path dir_path base_name} {
   upvar $dir_path ref_dir_path
   upvar $base_name ref_base_name
 
-  # Split a path into it's dir_path and base_name.  The dir_path variable
-  # will include a trailing slash.
+  # Split a path into it's dir_path and base_name.  The dir_path variable will include a trailing slash.
 
   # Description of argument(s):
   # path                            The directory or file path.
-  # dir_path                        The variable to contain the resulting
-  #                                 directory path which will include a
+  # dir_path                        The variable to contain the resulting directory path which will include a
   #                                 trailing slash.
-  # base_name                       The variable to contain the resulting base
-  #                                 directory or file name.
+  # base_name                       The variable to contain the resulting base directory or file name.
 
   set ref_dir_path "[file dirname ${path}]/"
   set ref_base_name "[file tail $path]"
@@ -187,15 +172,13 @@ proc read_properties_file {parm_file_path} {
 
   # The properties file must have the following format:
   # var_name=var_value
-  # Comment lines (those beginning with a "#") and blank lines are allowed
-  # and will be ignored.  Leading and trailing single or double quotes will be
-  # stripped from the value.  E.g.
+  # Comment lines (those beginning with a "#") and blank lines are allowed and will be ignored.  Leading and
+  # trailing single or double quotes will be stripped from the value.  E.g.
   # var1="This one"
   # Quotes are stripped so the resulting value for var1 is:
   # This one
 
-  # Suggestion: The caller can then process the result as an array or a
-  # dictionary.
+  # Suggestion: The caller can then process the result as an array or a dictionary.
 
   # Example usage:
 
@@ -240,8 +223,7 @@ proc read_properties_file {parm_file_path} {
 
 proc convert_array_key {key {convert_commands} {prefix ""} } {
 
-  # Convert the key according to the caller's convert_commands and return the
-  # result.
+  # Convert the key according to the caller's convert_commands and return the result.
 
   # This is designed as a helper procedure to be called by convert_array_keys.
 
@@ -273,35 +255,26 @@ proc convert_array_keys {source_arr target_arr {convert_commands}\
   upvar $source_arr source_arr_ref
   upvar $target_arr target_arr_ref
 
-  # Convert the keys of source_arr according to the caller's convert_commands
-  # and put the resulting array in target_arr. If this procedure fails for any
-  # reason, it will return non-zero.
+  # Convert the keys of source_arr according to the caller's convert_commands and put the resulting array in
+  # target_arr. If this procedure fails for any reason, it will return non-zero.
 
-  # Note that despite the name of this procedure, it will also work on a
-  # dictionary.  In other words, if source_arr is NOT an array, it will be
-  # processed as a dictionary and target_arr will be created as a dictionary
-  # as well.
+  # Note that despite the name of this procedure, it will also work on a dictionary.  In other words, if
+  # source_arr is NOT an array, it will be processed as a dictionary and target_arr will be created as a
+  # dictionary as well.
 
   # Description of argument(s):
   # source_arr                      The source array that is to be converted.
-  # target_arr                      The target array that results from the
-  #                                 conversion.
-  # convert_commands                A list of custom commands that indicate
-  #                                 the type of conversion(s) the caller
-  #                                 wishes to see. Currently the accepted
-  #                                 values are as follows:
-  #   upper                         Convert key value to uppercase.
-  #   lower                         Convert key value to lowercase.
-  #   prefix                        Prepend prefix to the key, provided that
-  #                                 it does not already exist. If upper or
-  #                                 lower is included in convert_commands
-  #                                 list, the prefix will be converted to the
-  #                                 specified case as well.
-  #   rm_prefix                     Remove a prefix that is prepended,
-  #                                 provided that it exists.
-  # prefix                          The prefix to be used for "prefix" and
-  #                                 "rm_prefix" commands (see convert_commands
-  #                                 text above).
+  # target_arr                      The target array that results from the conversion.
+  # convert_commands                A list of custom commands that indicate the type of conversion(s) the
+  #                                 caller wishes to see. Currently the accepted values are as follows:
+  # upper                           Convert key value to uppercase.
+  # lower                           Convert key value to lowercase.
+  # prefix                          Prepend prefix to the key, provided that it does not already exist. If
+  #                                 upper or lower is included in convert_commands list, the prefix will be
+  #                                 converted to the specified case as well.
+  # rm_prefix                       Remove a prefix that is prepended, provided that it exists.
+  # prefix                          The prefix to be used for "prefix" and "rm_prefix" commands (see
+  #                                 convert_commands text above).
 
   # Validate arguments.
   if { [lsearch $convert_commands lower] != -1 } {
@@ -343,8 +316,7 @@ proc convert_array_keys {source_arr target_arr {convert_commands}\
   } else {
     # Initialize targ dictionary.
     set target_arr_ref [list]
-    # Walk the source dictionary doing the conversion specified in
-    # convert_commands.
+    # Walk the source dictionary doing the conversion specified in convert_commands.
     foreach {key value} $source_arr_ref {
       set new_key [convert_array_key $key $convert_commands $prefix]
       set cmd_buf "dict append target_arr_ref $new_key \$value"
@@ -358,8 +330,8 @@ proc convert_array_keys {source_arr target_arr {convert_commands}\
 proc expand_shell_string {buffer} {
   upvar $buffer ref_buffer
 
-  # Call upon the shell to expand the string in "buffer", i.e. the shell will
-  # make substitutions for environment variables and glob expressions.
+  # Call upon the shell to expand the string in "buffer", i.e. the shell will make substitutions for
+  # environment variables and glob expressions.
 
   # Description of argument(s):
   # buffer                          The buffer to be expanded.
@@ -367,8 +339,8 @@ proc expand_shell_string {buffer} {
   # This is done to keep echo from interpreting all of the double quotes away.
   regsub -all {\"} $ref_buffer "\\\"" ref_buffer
 
-  # Bash will compress extra space delimiters if you don't quote the string.
-  # So, we quote the argument to echo.
+  # Bash will compress extra space delimiters if you don't quote the string.  So, we quote the argument to
+  # echo.
   if {[catch {set ref_buffer [exec bash -c "echo \"$ref_buffer\""]} result]} {
     puts stderr $result
     exit 1
@@ -380,13 +352,11 @@ proc expand_shell_string {buffer} {
 proc add_trailing_string { buffer { add_string "/" } } {
   upvar $buffer ref_buffer
 
-  # Add the add string to the end of the buffer if and only if it doesn't
-  # already end with the add_string.
+  # Add the add string to the end of the buffer if and only if it doesn't already end with the add_string.
 
   # Description of argument(s):
   # buffer                          The buffer to be modified.
-  # add_string                      The string to conditionally append to the
-  #                                 buffer.
+  # add_string                      The string to conditionally append to the buffer.
 
   regsub -all "${add_string}$" $ref_buffer {} ref_buffer
   set ref_buffer "${ref_buffer}${add_string}"

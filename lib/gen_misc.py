@@ -57,8 +57,7 @@ def which(file_path):
     The PATH environment variable dictates the results of this function.
 
     Description of arguments:
-    file_path                       The relative file path (e.g. "my_file" or
-                                    "lib/my_file").
+    file_path                       The relative file path (e.g. "my_file" or "lib/my_file").
     """
 
     shell_rc, out_buf = gc.cmd_fnc_u("which " + file_path, quiet=1,
@@ -83,8 +82,7 @@ def add_path(new_path,
              path,
              position=0):
     r"""
-    Add new_path to path, provided that path doesn't already contain new_path,
-    and return the result.
+    Add new_path to path, provided that path doesn't already contain new_path, and return the result.
 
     Example:
     If PATH has a value of "/bin/user:/lib/user".  The following code:
@@ -94,15 +92,11 @@ def add_path(new_path,
     will change PATH to "/tmp/new_path:/bin/user:/lib/user".
 
     Description of argument(s):
-    new_path                        The path to be added.  This function will
-                                    strip the trailing slash.
-    path                            The path value to which the new_path
-                                    should be added.
-    position                        The position in path where the new_path
-                                    should be added.  0 means it should be
-                                    added to the beginning, 1 means add it as
-                                    the 2nd item, etc.  sys.maxsize means it
-                                    should be added to the end.
+    new_path                        The path to be added.  This function will strip the trailing slash.
+    path                            The path value to which the new_path should be added.
+    position                        The position in path where the new_path should be added.  0 means it
+                                    should be added to the beginning, 1 means add it as the 2nd item, etc.
+                                    sys.maxsize means it should be added to the end.
     """
 
     path_list = list(filter(None, path.split(":")))
@@ -126,8 +120,7 @@ def dft(value, default):
 
     Description of arguments:
     value                           The value to be returned.
-    default                         The default value to return if value is
-                                    None.
+    default                         The default value to return if value is None.
     """
 
     return default if value is None else value
@@ -143,12 +136,9 @@ def get_mod_global(var_name,
     calling get_variable_value.
 
     Description of arguments:
-    var_name                        The name of the variable whose value is
-                                    sought.
-    default                         The value to return if the global does not
-                                    exist.
-    mod_name                        The name of the module containing the
-                                    global variable.
+    var_name                        The name of the variable whose value is sought.
+    default                         The value to return if the global does not exist.
+    mod_name                        The name of the module containing the global variable.
     """
 
     if robot_env:
@@ -183,9 +173,8 @@ def global_default(var_value,
 
     Description of arguments:
     var_value                       The value being evaluated.
-    default                         The value to be returned if var_value is
-                                    None AND the global variable of the same
-                                    name does not exist.
+    default                         The value to be returned if var_value is None AND the global variable of
+                                    the same name does not exist.
     """
 
     var_name = gp.get_arg_name(0, 1, stack_frame_ix=2)
@@ -201,11 +190,9 @@ def set_mod_global(var_value,
 
     Description of arguments:
     var_value                       The value to set in the variable.
-    mod_name                        The name of the module whose variable is
-                                    to be set.
-    var_name                        The name of the variable to set.  This
-                                    defaults to the name of the variable used
-                                    for var_value when calling this function.
+    mod_name                        The name of the module whose variable is to be set.
+    var_name                        The name of the variable to set.  This defaults to the name of the
+                                    variable used for var_value when calling this function.
     """
 
     try:
@@ -224,26 +211,23 @@ def set_mod_global(var_value,
 
 def my_parm_file(prop_file_path):
     r"""
-    Read a properties file, put the keys/values into a dictionary and return
-    the dictionary.
+    Read a properties file, put the keys/values into a dictionary and return the dictionary.
 
     The properties file must have the following format:
     var_name<= or :>var_value
-    Comment lines (those beginning with a "#") and blank lines are allowed and
-    will be ignored.  Leading and trailing single or double quotes will be
-    stripped from the value.  E.g.
+    Comment lines (those beginning with a "#") and blank lines are allowed and will be ignored.  Leading and
+    trailing single or double quotes will be stripped from the value.  E.g.
     var1="This one"
     Quotes are stripped so the resulting value for var1 is:
     This one
 
     Description of arguments:
-    prop_file_path                  The caller should pass the path to the
-                                    properties file.
+    prop_file_path                  The caller should pass the path to the properties file.
     """
 
-    # ConfigParser expects at least one section header in the file (or you
-    # get ConfigParser.MissingSectionHeaderError).  Properties files don't
-    # need those so I'll write a dummy section header.
+    # ConfigParser expects at least one section header in the file (or you get
+    # ConfigParser.MissingSectionHeaderError).  Properties files don't need those so I'll write a dummy
+    # section header.
 
     try:
         string_file = StringIO.StringIO()
@@ -282,16 +266,11 @@ def file_to_list(file_path,
     list is one line from the file.
 
     Description of arguments:
-    file_path                       The path to the file (relative or
-                                    absolute).
-    newlines                        Include newlines from the file in the
-                                    results.
-    comments                        Include comment lines and blank lines in
-                                    the results.  Comment lines are any that
-                                    begin with 0 or more spaces followed by
-                                    the pound sign ("#").
-    trim                            Trim white space from the beginning and
-                                    end of each line.
+    file_path                       The path to the file (relative or absolute).
+    newlines                        Include newlines from the file in the results.
+    comments                        Include comment lines and blank lines in the results.  Comment lines are
+                                    any that begin with 0 or more spaces followed by the pound sign ("#").
+    trim                            Trim white space from the beginning and end of each line.
     """
 
     lines = []
@@ -323,9 +302,8 @@ def file_to_str(*args, **kwargs):
 
 def return_path_list():
     r"""
-    This function will split the PATH environment variable into a PATH_LIST
-    and return it.  Each element in the list will be normalized and have a
-    trailing slash added.
+    This function will split the PATH environment variable into a PATH_LIST and return it.  Each element in
+    the list will be normalized and have a trailing slash added.
     """
 
     PATH_LIST = os.environ['PATH'].split(":")
@@ -365,9 +343,8 @@ def quote_bash_parm(parm):
     parm                            The string to be quoted.
     """
 
-    # If any of these characters are found in the parm string, then the
-    # string should be quoted.  This list is by no means complete and should
-    # be expanded as needed by the developer of this function.
+    # If any of these characters are found in the parm string, then the string should be quoted.  This list
+    # is by no means complete and should be expanded as needed by the developer of this function.
     # Spaces
     # Single or double quotes.
     # Bash variables (therefore, any string with a "$" may need quoting).
@@ -391,14 +368,12 @@ def quote_bash_parm(parm):
 def get_host_name_ip(host=None,
                      short_name=0):
     r"""
-    Get the host name and the IP address for the given host and return them as
-    a tuple.
+    Get the host name and the IP address for the given host and return them as a tuple.
 
     Description of argument(s):
     host                            The host name or IP address to be obtained.
-    short_name                      Include the short host name in the
-                                    returned tuple, i.e. return host, ip and
-                                    short_host.
+    short_name                      Include the short host name in the returned tuple, i.e. return host, ip
+                                    and short_host.
     """
 
     host = dft(host, socket.gethostname())
@@ -465,8 +440,7 @@ def to_signed(number,
     var1:  -15
     var1:  0xfffffffffffffff1
 
-    The same code but with var1 set to 0x000000000000007f produces the
-    following:
+    The same code but with var1 set to 0x000000000000007f produces the following:
     var1:  127
     var1:  0x000000000000007f
     var1:  127
@@ -474,9 +448,8 @@ def to_signed(number,
 
     Description of argument(s):
     number                          The number to be converted.
-    bit_width                       The number of bits that defines a complete
-                                    hex value.  Typically, this would be a
-                                    multiple of 32.
+    bit_width                       The number of bits that defines a complete hex value.  Typically, this
+                                    would be a multiple of 32.
     """
 
     if bit_width is None:
@@ -497,8 +470,8 @@ def to_signed(number,
 def get_child_pids(quiet=1):
 
     r"""
-    Get and return a list of pids representing all first-generation processes
-    that are the children of the current process.
+    Get and return a list of pids representing all first-generation processes that are the children of the
+    current process.
 
     Example:
 
@@ -510,8 +483,7 @@ def get_child_pids(quiet=1):
       children[0]:           9123
 
     Description of argument(s):
-    quiet                           Display output to stdout detailing how
-                                    this child pids are obtained.
+    quiet                           Display output to stdout detailing how this child pids are obtained.
     """
 
     if psutil_imported:
@@ -524,34 +496,30 @@ def get_child_pids(quiet=1):
 
         ps_cmd_buf = "ps --no-headers --ppid " + str(os.getpid()) +\
             " -o pid,args"
-        # Route the output of ps to a temporary file for later grepping.
-        # Avoid using " | grep" in the ps command string because it creates
-        # yet another process which is of no interest to the caller.
+        # Route the output of ps to a temporary file for later grepping.  Avoid using " | grep" in the ps
+        # command string because it creates yet another process which is of no interest to the caller.
         temp = tempfile.NamedTemporaryFile()
         temp_file_path = temp.name
         gc.shell_cmd(ps_cmd_buf + " > " + temp_file_path,
                      print_output=print_output)
         # Sample contents of the temporary file:
         # 30703 sleep 2
-        # 30795 /bin/bash -c ps --no-headers --ppid 30672 -o pid,args >
-        # /tmp/tmpqqorWY
-        # Use egrep to exclude the "ps" process itself from the results
-        # collected with the prior shell_cmd invocation.  Only the other
-        # children are of interest to the caller.  Use cut on the grep results
-        # to obtain only the pid column.
+        # 30795 /bin/bash -c ps --no-headers --ppid 30672 -o pid,args > /tmp/tmpqqorWY
+        # Use egrep to exclude the "ps" process itself from the results collected with the prior shell_cmd
+        # invocation.  Only the other children are of interest to the caller.  Use cut on the grep results to
+        # obtain only the pid column.
         rc, output = \
             gc.shell_cmd("egrep -v '" + re.escape(ps_cmd_buf) + "' "
                          + temp_file_path + " | cut -c1-5",
                          print_output=print_output)
-        # Split the output buffer by line into a list.  Strip each element of
-        # extra spaces and convert each element to an integer.
+        # Split the output buffer by line into a list.  Strip each element of extra spaces and convert each
+        # element to an integer.
         return map(int, map(str.strip, filter(None, output.split("\n"))))
 
 
 def json_loads_multiple(buffer):
     r"""
-    Convert the contents of the buffer to a JSON array, run json.loads() on it
-    and return the result.
+    Convert the contents of the buffer to a JSON array, run json.loads() on it and return the result.
 
     The buffer is expected to contain one or more JSON objects.
 
@@ -559,12 +527,10 @@ def json_loads_multiple(buffer):
     buffer                          A string containing several JSON objects.
     """
 
-    # Any line consisting of just "}", which indicates the end of an object,
-    # should have a comma appended.
+    # Any line consisting of just "}", which indicates the end of an object, should have a comma appended.
     regex = "([\\r\\n])[\\}]([\\r\\n])"
     buffer = re.sub(regex, "\\1},\\2", buffer, 1)
-    # Remove the comma from after the final object and place the whole buffer
-    # inside square brackets.
+    # Remove the comma from after the final object and place the whole buffer inside square brackets.
     buffer = "[" + re.sub(",([\r\n])$", "\\1}", buffer, 1) + "]"
     if gp.robot_env:
         return json.loads(buffer, object_pairs_hook=DotDict)
@@ -576,8 +542,7 @@ def file_date_time_stamp():
     r"""
     Return a date/time stamp in the following format: yymmdd.HHMMSS
 
-    This value is suitable for including in file names.  Example
-    file1.181001.171716.status
+    This value is suitable for including in file names.  Example file1.181001.171716.status
     """
 
     return time.strftime("%y%m%d.%H%M%S", time.localtime(time.time()))
@@ -587,8 +552,7 @@ def get_function_stack():
     r"""
     Return a list of all the function names currently in the call stack.
 
-    This function's name will be at offset 0.  This function's caller's name
-    will be at offset 1 and so on.
+    This function's name will be at offset 0.  This function's caller's name will be at offset 1 and so on.
     """
 
     return [str(stack_frame[3]) for stack_frame in inspect.stack()]
@@ -619,15 +583,13 @@ def version_tuple(version):
     Convert the version string to a tuple and return it.
 
     Description of argument(s):
-    version                         A version string whose format is "n[.n]"
-                                    (e.g. "3.6.3", "3", etc.).
+    version                         A version string whose format is "n[.n]" (e.g. "3.6.3", "3", etc.).
     """
 
     return tuple(map(int, (version.split("."))))
 
 
-# Note: Stripping out any revision code data (e.g. "3.6.3rc1" will become
-# "3.6.3").
+# Note: Stripping out any revision code data (e.g. "3.6.3rc1" will become "3.6.3").
 python_version = \
     version_tuple(re.sub("rc[^ ]+", "", sys.version).split(" ")[0])
 ordered_dict_version = version_tuple("3.6")

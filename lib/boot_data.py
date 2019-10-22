@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 r"""
-This module has functions to support various data structures such as the
-boot_table, valid_boot_list and boot_results_table.
+This module has functions to support various data structures such as the boot_table, valid_boot_list and
+boot_results_table.
 """
 
 import os
@@ -23,8 +23,7 @@ import gen_misc as gm
 import gen_cmd as gc
 import var_funcs as vf
 
-# The code base directory will be one level up from the directory containing
-# this module.
+# The code base directory will be one level up from the directory containing this module.
 code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
 
 
@@ -33,26 +32,19 @@ def create_boot_table(file_path=None,
     r"""
     Read the boot table JSON file, convert it to an object and return it.
 
-    Note that if the user is running without a global OS_HOST robot variable
-    specified, this function will remove all of the "os_" start and end state
-    requirements from the JSON data.
+    Note that if the user is running without a global OS_HOST robot variable specified, this function will
+    remove all of the "os_" start and end state requirements from the JSON data.
 
     Description of argument(s):
-    file_path                       The path to the boot_table file.  If this
-                                    value is not specified, it will be
-                                    obtained from the "BOOT_TABLE_PATH"
-                                    environment variable, if set.  Otherwise,
-                                    it will default to "data/boot_table.json".
-                                    If this value is a relative path, this
-                                    function will use the code_base_dir_path
-                                    as the base directory (see definition
-                                    above).
-    os_host                         The host name or IP address of the host
-                                    associated with the machine being tested.
-                                    If the user is running without an OS_HOST
-                                    (i.e. if this argument is blank), we
-                                    remove os starting and ending state
-                                    requirements from the boot entries.
+    file_path                       The path to the boot_table file.  If this value is not specified, it will
+                                    be obtained from the "BOOT_TABLE_PATH" environment variable, if set.
+                                    Otherwise, it will default to "data/boot_table.json".  If this value is a
+                                    relative path, this function will use the code_base_dir_path as the base
+                                    directory (see definition above).
+    os_host                         The host name or IP address of the host associated with the machine being
+                                    tested.  If the user is running without an OS_HOST (i.e. if this argument
+                                    is blank), we remove os starting and ending state requirements from the
+                                    boot entries.
     """
     if file_path is None:
         file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table.json')
@@ -70,8 +62,8 @@ def create_boot_table(file_path=None,
     boot_file = open(temp_file_path)
     boot_table = json.load(boot_file, object_hook=DotDict)
 
-    # If the user is running without an OS_HOST, we remove os starting and
-    # ending state requirements from the boot entries.
+    # If the user is running without an OS_HOST, we remove os starting and ending state requirements from
+    # the boot entries.
     if os_host == "":
         for boot in boot_table:
             state_keys = ['start', 'end']
@@ -91,12 +83,10 @@ def create_boot_table(file_path=None,
 
 def create_valid_boot_list(boot_table):
     r"""
-    Return a list of all of the valid boot types (e.g. ['REST Power On', 'REST
-    Power Off', ...]).
+    Return a list of all of the valid boot types (e.g. ['REST Power On', 'REST Power Off', ...]).
 
     Description of argument(s):
-    boot_table                      A boot table such as is returned by the
-                                    create_boot_table function.
+    boot_table                      A boot table such as is returned by the create_boot_table function.
     """
 
     return list(boot_table.keys())
@@ -104,16 +94,15 @@ def create_valid_boot_list(boot_table):
 
 def read_boot_lists(dir_path="data/boot_lists/"):
     r"""
-    Read the contents of all the boot lists files found in the given boot
-    lists directory and return dictionary of the lists.
+    Read the contents of all the boot lists files found in the given boot lists directory and return
+    dictionary of the lists.
 
-    Boot lists are simply files containing a boot test name on each line.
-    These files are useful for categorizing and organizing boot tests.  For
-    example, there may be a "Power_on" list, a "Power_off" list, etc.
+    Boot lists are simply files containing a boot test name on each line.  These files are useful for
+    categorizing and organizing boot tests.  For example, there may be a "Power_on" list, a "Power_off" list,
+    etc.
 
-    The names of the boot list files will be the keys to the top level
-    dictionary.  Each dictionary entry is a list of all the boot tests found
-    in the corresponding file.
+    The names of the boot list files will be the keys to the top level dictionary.  Each dictionary entry is
+    a list of all the boot tests found in the corresponding file.
 
     Here is an abbreviated look at the resulting boot_lists dictionary.
 
@@ -128,11 +117,9 @@ def read_boot_lists(dir_path="data/boot_lists/"):
     ...
 
     Description of argument(s):
-    dir_path                        The path to the directory containing the
-                                    boot list files.  If this value is a
-                                    relative path, this function will use the
-                                    code_base_dir_path as the base directory
-                                    (see definition above).
+    dir_path                        The path to the directory containing the boot list files.  If this value
+                                    is a relative path, this function will use the code_base_dir_path as the
+                                    base directory (see definition above).
     """
 
     if not dir_path.startswith("/"):
@@ -157,10 +144,9 @@ def valid_boot_list(boot_list,
     Verify that each entry in boot_list is a supported boot test.
 
     Description of argument(s):
-    boot_list                       An array (i.e. list) of boot test types
-                                    (e.g. "REST Power On").
-    valid_boot_types                A list of valid boot types such as that
-                                    returned by create_valid_boot_list.
+    boot_list                       An array (i.e. list) of boot test types (e.g. "REST Power On").
+    valid_boot_types                A list of valid boot types such as that returned by
+                                    create_valid_boot_list.
     """
 
     for boot_name in boot_list:
@@ -187,20 +173,15 @@ class boot_results:
         Initialize the boot results object.
 
         Description of argument(s):
-        boot_table                  Boot table object (see definition above).
-                                    The boot table contains all of the valid
-                                    boot test types.  It can be created with
-                                    the create_boot_table function.
-        boot_pass                   An initial boot_pass value.  This program
-                                    may be called as part of a larger test
-                                    suite.  As such there may already have
-                                    been some successful boot tests that we
-                                    need to keep track of.
-        boot_fail                   An initial boot_fail value.  This program
-                                    may be called as part of a larger test
-                                    suite.  As such there may already have
-                                    been some unsuccessful boot tests that we
-                                    need to keep track of.
+        boot_table                  Boot table object (see definition above).  The boot table contains all of
+                                    the valid boot test types.  It can be created with the create_boot_table
+                                    function.
+        boot_pass                   An initial boot_pass value.  This program may be called as part of a
+                                    larger test suite.  As such there may already have been some successful
+                                    boot tests that we need to keep track of.
+        boot_fail                   An initial boot_fail value.  This program may be called as part of a
+                                    larger test suite.  As such there may already have been some unsuccessful
+                                    boot tests that we need to keep track of.
         obj_name                    The name of this object.
         """
 
@@ -217,8 +198,8 @@ class boot_results:
                                           'boot_test_results')
         self.__boot_results.set_sum_fields(['total', 'pass', 'fail'])
         self.__boot_results.set_calc_fields(['total=pass+fail'])
-        # Create one row in the result table for each kind of boot test in
-        # the boot_table (i.e. for all supported boot tests).
+        # Create one row in the result table for each kind of boot test in the boot_table (i.e. for all
+        # supported boot tests).
         for boot_name in list(boot_table.keys()):
             self.__boot_results.add_row(boot_name)
 
@@ -227,16 +208,14 @@ class boot_results:
         Add row to tally_sheet class object.
 
         Description of argument(s):
-        See add_row method in tally_sheet.py for a description of all
-        arguments.
+        See add_row method in tally_sheet.py for a description of all arguments.
         """
         self.__boot_results.add_row(*args, **kwargs)
 
     def return_total_pass_fail(self):
         r"""
-        Return the total boot_pass and boot_fail values.  This information is
-        comprised of the pass/fail values from the table plus the initial
-        pass/fail values.
+        Return the total boot_pass and boot_fail values.  This information is comprised of the pass/fail
+        values from the table plus the initial pass/fail values.
         """
 
         totals_line = self.__boot_results.calc()
@@ -248,16 +227,13 @@ class boot_results:
                boot_status):
         r"""
         Update our boot_results_table.  This includes:
-        - Updating the record for the given boot_type by incrementing the pass
-          or fail field.
+        - Updating the record for the given boot_type by incrementing the pass or fail field.
         - Calling the calc method to have the totals calculated.
 
         Description of argument(s):
-        boot_type                   The type of boot test just done (e.g.
-                                    "REST Power On").
-        boot_status                 The status of the boot just done.  This
-                                    should be equal to either "pass" or "fail"
-                                    (case-insensitive).
+        boot_type                   The type of boot test just done (e.g. "REST Power On").
+        boot_status                 The status of the boot just done.  This should be equal to either "pass"
+                                    or "fail" (case-insensitive).
         """
 
         self.__boot_results.inc_row_field(boot_type, boot_status.lower())
@@ -269,8 +245,8 @@ class boot_results:
         String-print the formatted boot_resuls_table and return them.
 
         Description of argument(s):
-        header_footer               This indicates whether a header and footer
-                                    are to be included in the report.
+        header_footer               This indicates whether a header and footer are to be included in the
+                                    report.
         """
 
         buffer = ""
@@ -289,9 +265,8 @@ class boot_results:
 
         Description of argument(s):
         See sprint_report for details.
-        quiet                       Only print if this value is 0.  This
-                                    function will search upward in the stack
-                                    to get the default value.
+        quiet                       Only print if this value is 0.  This function will search upward in the
+                                    stack to get the default value.
         """
 
         quiet = int(gm.dft(quiet, gp.get_stack_var('quiet', 0)))
@@ -300,8 +275,7 @@ class boot_results:
 
     def sprint_obj(self):
         r"""
-        sprint the fields of this object.  This would normally be for debug
-        purposes only.
+        sprint the fields of this object.  This would normally be for debug purposes only.
         """
 
         buffer = ""
@@ -316,8 +290,7 @@ class boot_results:
 
     def print_obj(self):
         r"""
-        Print the fields of this object to stdout.  This would normally be for
-        debug purposes.
+        Print the fields of this object to stdout.  This would normally be for debug purposes.
         """
 
         gp.gp_print(self.sprint_obj())
@@ -330,13 +303,10 @@ def create_boot_results_file_path(pgm_name,
     Create a file path to be used to store a boot_results object.
 
     Description of argument(s):
-    pgm_name                        The name of the program.  This will form
-                                    part of the resulting file name.
-    openbmc_nickname                The name of the system.  This could be a
-                                    nickname, a hostname, an IP, etc.  This
-                                    will form part of the resulting file name.
-    master_pid                      The master process id which will form part
-                                    of the file name.
+    pgm_name                        The name of the program.  This will form part of the resulting file name.
+    openbmc_nickname                The name of the system.  This could be a nickname, a hostname, an IP,
+                                    etc.  This will form part of the resulting file name.
+    master_pid                      The master process id which will form part of the file name.
    """
 
     USER = os.environ.get("USER", "")
@@ -351,12 +321,10 @@ def create_boot_results_file_path(pgm_name,
 
 def cleanup_boot_results_file():
     r"""
-    Delete all boot results files whose corresponding pids are no longer
-    active.
+    Delete all boot results files whose corresponding pids are no longer active.
     """
 
-    # Use create_boot_results_file_path to create a globex to find all of the
-    # existing boot results files.
+    # Use create_boot_results_file_path to create a globex to find all of the existing boot results files.
     globex = create_boot_results_file_path("*", "*", "*")
     file_list = sorted(glob.glob(globex))
     for file_path in file_list:
@@ -370,16 +338,15 @@ def cleanup_boot_results_file():
 
 def update_boot_history(boot_history, boot_start_message, max_boot_history=10):
     r"""
-    Update the boot_history list by appending the boot_start_message and by
-    removing all but the last n entries.
+    Update the boot_history list by appending the boot_start_message and by removing all but the last n
+    entries.
 
     Description of argument(s):
     boot_history                    A list of boot start messages.
-    boot_start_message              This is typically a time-stamped line of
-                                    text announcing the start of a boot test.
-    max_boot_history                The max number of entries to be kept in
-                                    the boot_history list.  The oldest entries
-                                    are deleted to achieve this list size.
+    boot_start_message              This is typically a time-stamped line of text announcing the start of a
+                                    boot test.
+    max_boot_history                The max number of entries to be kept in the boot_history list.  The
+                                    oldest entries are deleted to achieve this list size.
     """
 
     boot_history.append(boot_start_message)
@@ -393,9 +360,8 @@ def print_boot_history(boot_history, quiet=None):
     Print the last ten boots done with their time stamps.
 
     Description of argument(s):
-    quiet                           Only print if this value is 0.  This
-                                    function will search upward in the stack
-                                    to get the default value.
+    quiet                           Only print if this value is 0.  This function will search upward in the
+                                    stack to get the default value.
     """
 
     quiet = int(gm.dft(quiet, gp.get_stack_var('quiet', 0)))

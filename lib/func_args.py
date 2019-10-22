@@ -10,15 +10,13 @@ import collections
 
 def pop_arg(default=None, *args, **kwargs):
     r"""
-    Pop a named argument from the args/kwargs and return a tuple consisting of
-    the argument value, the modified args and the modified kwargs.
+    Pop a named argument from the args/kwargs and return a tuple consisting of the argument value, the
+    modified args and the modified kwargs.
 
-    The name of the argument is determined automatically by this function by
-    examining the source code which calls it (see examples below).  If no
-    suitable argument can be found, the default value passed to this function
-    will be returned as the argument value.  This function is useful for
-    wrapper functions that wish to process arguments in some way before
-    calling subordinate function.
+    The name of the argument is determined automatically by this function by examining the source code which
+    calls it (see examples below).  If no suitable argument can be found, the default value passed to this
+    function will be returned as the argument value.  This function is useful for wrapper functions that wish
+    to process arguments in some way before calling subordinate function.
 
     Examples:
 
@@ -37,24 +35,20 @@ def pop_arg(default=None, *args, **kwargs):
 
         'Johnson', [], {'ssn': "111-11-1111"}
 
-    Notice that the 'args' value returned is an empty list. Since last_name
-    was assumed to be the first positional argument, it was popped from args.
+    Notice that the 'args' value returned is an empty list. Since last_name was assumed to be the first
+    positional argument, it was popped from args.
 
     Now consider this call to func1:
 
     func1(last_name='Johnson', ssn='111-11-1111')
 
-    The pop_arg in func1 would return the same last_name value as in the
-    previous example.  The only difference being that the last_name value was
-    popped from kwargs rather than from args.
+    The pop_arg in func1 would return the same last_name value as in the previous example.  The only
+    difference being that the last_name value was popped from kwargs rather than from args.
 
     Description of argument(s):
-    default                         The value to return if the named argument
-                                    is not present in args/kwargs.
-    args                            The positional arguments passed to the
-                                    calling function.
-    kwargs                          The keyword arguments passed to the
-                                    calling function.
+    default                         The value to return if the named argument is not present in args/kwargs.
+    args                            The positional arguments passed to the calling function.
+    kwargs                          The keyword arguments passed to the calling function.
     """
 
     # Retrieve the argument name by examining the source code.
@@ -74,19 +68,18 @@ def pop_arg(default=None, *args, **kwargs):
 
 def source_to_object(value):
     r"""
-    Evaluate string value as python source code and return the resulting
-    object.
+    Evaluate string value as python source code and return the resulting object.
 
-    If value is NOT a string or can not be interpreted as a python source
-    object definition, simply return value.
+    If value is NOT a string or can not be interpreted as a python source object definition, simply return
+    value.
 
-    The idea is to convert python object definition source code (e.g. for
-    lists, dictionaries, tuples, etc.) into an object.
+    The idea is to convert python object definition source code (e.g. for lists, dictionaries, tuples, etc.)
+    into an object.
 
     Example:
 
-    Note that this first example is a special case in that it is a short-cut
-    for specifying a collections.OrderedDict.
+    Note that this first example is a special case in that it is a short-cut for specifying a
+    collections.OrderedDict.
 
     result = source_to_object("[('one', 1), ('two', 2), ('three', 3)]")
 
@@ -104,8 +97,8 @@ def source_to_object(value):
         ('two', 2),
         ('three', 3)])")
 
-    Also note that support for this special-case short-cut precludes the
-    possibility of interpreting such a string as a list of tuples.
+    Also note that support for this special-case short-cut precludes the possibility of interpreting such a
+    string as a list of tuples.
 
     Example:
 
@@ -120,8 +113,7 @@ def source_to_object(value):
 
     Example:
 
-    In this example, the value passed to this function is not a string, so it
-    is simply returned.
+    In this example, the value passed to this function is not a string, so it is simply returned.
 
     result = source_to_object(1)
 
@@ -132,22 +124,18 @@ def source_to_object(value):
     etc.
 
     Description of argument(s):
-    value                           If value is a string, it will be evaluated
-                                    as a python statement.  If the statement
-                                    is valid, the resulting object will be
-                                    returned.  In all other cases, the value
-                                    will simply be returned.
+    value                           If value is a string, it will be evaluated as a python statement.  If the
+                                    statement is valid, the resulting object will be returned.  In all other
+                                    cases, the value will simply be returned.
     """
 
     if type(value) not in gp.get_string_types():
         return value
 
-    # Strip white space prior to attempting to interpret the string as python
-    # code.
+    # Strip white space prior to attempting to interpret the string as python code.
     value = value.strip()
 
-    # Try special case of collections.OrderedDict which accepts a list of
-    # tuple pairs.
+    # Try special case of collections.OrderedDict which accepts a list of tuple pairs.
     if value.startswith("[("):
         try:
             return eval("collections.OrderedDict(" + value + ")")
@@ -167,9 +155,8 @@ def args_to_objects(args):
     Run source_to_object() on each element in args and return the result.
 
     Description of argument(s):
-    args                            A type of dictionary, list, set, tuple or
-                                    simple object whose elements are to be
-                                    converted via a call to source_to_object().
+    args                            A type of dictionary, list, set, tuple or simple object whose elements
+                                    are to be converted via a call to source_to_object().
     """
 
     type_of_dict = gp.is_dict(args)
