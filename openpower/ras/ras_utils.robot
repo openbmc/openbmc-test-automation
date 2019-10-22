@@ -155,7 +155,7 @@ RAS Test SetUp
     ...  ${OS_PASSWORD}  msg=You must provide OS host user password.
 
     # Boot to OS.
-    REST Power On  quiet=${1}
+    REST Power On
     # Adding delay after host bring up.
     Sleep  60s
 
@@ -174,7 +174,7 @@ RAS Suite Setup
     Set Environment Variable  PATH  %{PATH}:${ESEL_BIN_PATH}
 
     # Boot to Os.
-    REST Power On  quiet=${1}
+    REST Power On
 
     # Check Opal-PRD service enabled on host.
     ${opal_prd_state}=  Is Opal-PRD Service Enabled
@@ -186,7 +186,7 @@ RAS Suite Cleanup
     ...              boots after test suite run.
 
     # Boot to OS.
-    REST Power On  quiet=${1}
+    REST Power On
     Delete Error Logs
     Gard Operations On OS  clear all
 
