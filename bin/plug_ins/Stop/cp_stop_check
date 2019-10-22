@@ -49,9 +49,8 @@ parser = argparse.ArgumentParser(
     formatter_class=argparse.RawTextHelpFormatter,
     prefix_chars='-+')
 
-# The stock_list will be passed to gen_get_options.  We populate it with the
-# names of stock parm options we want.  These stock parms are pre-defined by
-# gen_get_options.
+# The stock_list will be passed to gen_get_options.  We populate it with the names of stock parm options we
+# want.  These stock parms are pre-defined by gen_get_options.
 stock_list = [("test_mode", 0),
               ("quiet", get_plug_default("quiet", 0)),
               ("debug", get_plug_default("debug", 0))]
@@ -60,8 +59,7 @@ stock_list = [("test_mode", 0),
 def exit_function(signal_number=0,
                   frame=None):
     r"""
-    Execute whenever the program ends normally or with the signals that we
-    catch (i.e. TERM, INT).
+    Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
     """
 
     dprint_executing()
@@ -75,25 +73,22 @@ def exit_function(signal_number=0,
 def signal_handler(signal_number,
                    frame):
     r"""
-    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our
-    program would terminate immediately with return code 143 and without
-    calling our exit_function.
+    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our program would terminate immediately
+    with return code 143 and without calling our exit_function.
     """
 
-    # Our convention is to set up exit_function with atexit.register() so
-    # there is no need to explicitly call exit_function from here.
+    # Our convention is to set up exit_function with atexit.register() so there is no need to explicitly
+    # call exit_function from here.
 
     dprint_executing()
 
-    # Calling exit prevents us from returning to the code that was running
-    # when we received the signal.
+    # Calling exit prevents us from returning to the code that was running when we received the signal.
     exit(0)
 
 
 def validate_parms():
     r"""
-    Validate program parameters, etc.  Return True or False (i.e. pass/fail)
-    accordingly.
+    Validate program parameters, etc.  Return True or False (i.e. pass/fail) accordingly.
     """
 
     get_plug_vars()
@@ -118,9 +113,8 @@ def stop_check():
 
 def rest_fail():
     r"""
-    If STOP_REST_FAIL, then this function will determine whether REST commands
-    to the target are working.  If not, this function will stop the program by
-    returning stop_test_rc.
+    If STOP_REST_FAIL, then this function will determine whether REST commands to the target are working.  If
+    not, this function will stop the program by returning stop_test_rc.
     """
 
     if STOP_REST_FAIL != '1':
@@ -153,9 +147,8 @@ def rest_fail():
 
 def esel_stop_check():
     r"""
-    Run the esel_stop_check program to determine whether any eSEL entries
-    found warrant stopping the test run.  See esel_stop_check help text for
-    details.
+    Run the esel_stop_check program to determine whether any eSEL entries found warrant stopping the test
+    run.  See esel_stop_check help text for details.
     """
 
     if STOP_ESEL_STOP_FILE_PATH == "":

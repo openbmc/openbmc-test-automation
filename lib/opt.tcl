@@ -1,29 +1,24 @@
 #!/usr/bin/wish
 
-# This file provides many valuable parm and argument processing procedures
-# such as longoptions, pos_parms, gen_get_options, etc.
+# This file provides many valuable parm and argument processing procedures such as longoptions, pos_parms,
+# gen_get_options, etc.
 
 my_source [list escape.tcl data_proc.tcl print.tcl]
 
 
 proc get_arg_req { opt_name } {
 
-  # Determine whether the given opt_name is "optional", "required" or
-  # "not_allowed" and return that result.
+  # Determine whether the given opt_name is "optional", "required" or "not_allowed" and return that result.
 
-  # Note:  This procedure assumes that global list longoptions has been
-  # initialized via a call to the longoptions procedure.
+  # Note:  This procedure assumes that global list longoptions has been initialized via a call to the
+  # longoptions procedure.
 
   # Description of argument(s):
-  # opt_name                        The name of the option including its
-  #                                 requirement indicator as accepted by the
-  #                                 bash getopt longoptions parameter: No
-  #                                 colon means the option takes no argument,
-  #                                 one colon means the option requires an
-  #                                 argument and two colons indicate that an
-  #                                 argument is optional (the value of the
-  #                                 option will be 1 if no argument is
-  #                                 specified.
+  # opt_name                        The name of the option including its requirement indicator as accepted by
+  #                                 the bash getopt longoptions parameter: No colon means the option takes no
+  #                                 argument, one colon means the option requires an argument and two colons
+  #                                 indicate that an argument is optional (the value of the option will be 1
+  #                                 if no argument is specified.
 
   global longoptions
 
@@ -40,29 +35,25 @@ proc get_arg_req { opt_name } {
 
 proc longoptions { args } {
 
-  # Populate the global longoptions list and set global option variable
-  # defaults.
+  # Populate the global longoptions list and set global option variable defaults.
 
   # Description of argument(s):
-  # args                            Each arg is comprised of 1) the name of
-  #                                 the option 2) zero, one or 2 colons to
-  #                                 indicate whether the corresponding
-  #                                 argument value is a) not required, b)
-  #                                 required or c) optional 3) Optionally, an
-  #                                 equal sign followed by a default value for
-  #                                 the parameter.
+  # args                            Each arg is comprised of 1) the name of the option 2) zero, one or 2
+  #                                 colons to indicate whether the corresponding argument value is a) not
+  #                                 required, b) required or c) optional 3) Optionally, an equal sign
+  #                                 followed by a default value for the parameter.
 
   # Example usage:
   # longoptions parm1 parm2: parm3:: test_mode:=0 quiet:=0
 
   global longoptions
 
-  # Note: Because this procedure manipulates global variables, we use the
-  # "_opt_<varname>_" format to minimize the possibility of naming collisions.
+  # Note: Because this procedure manipulates global variables, we use the "_opt_<varname>_" format to
+  # minimize the possibility of naming collisions.
   set _opt_debug_ 0
   foreach _opt_arg_ $args {
-    # Create an option record which is a 2-element list consisting of the
-    # option specification and a possible default value.  Example:;
+    # Create an option record which is a 2-element list consisting of the option specification and a
+    # possible default value.  Example:;
     # opt_rec:
     #   opt_rec[0]:      test_mode:
     #   opt_rec[1]:      0
@@ -77,12 +68,11 @@ proc longoptions { args } {
     set _opt_default_value_ [lindex $_opt_rec_ 1]
     set _opt_arg_req_ [get_arg_req $_opt_name_]
     if { $_opt_arg_req_ == "not_allowed" && $_opt_default_value_ == "" } {
-      # If this parm takes no arg and no default was specified by the user,
-      # we will set the default to 0.
+      # If this parm takes no arg and no default was specified by the user, we will set the default to 0.
       set _opt_default_value_ 0
     }
-    # Set a global variable whose name is identical to the option name.  Set
-    # the default value if there is one.
+    # Set a global variable whose name is identical to the option name.  Set the default value if there is
+    # one.
     set _opt_cmd_buf_ "global ${_opt_name_}"
     if { $_opt_debug_ } { print_issuing $_opt_cmd_buf_ }
     eval $_opt_cmd_buf_
@@ -99,9 +89,8 @@ proc pos_parms { args } {
   # Populate the global pos_parms list and set global option variable defaults.
 
   # Description of argument(s):
-  # args                            Each arg is comprised of the name of a
-  #                                 positional parm and a possible initial
-  #                                 value.
+  # args                            Each arg is comprised of the name of a positional parm and a possible
+  #                                 initial value.
 
   # Example usage:
   # pos_parms user_name=mike
@@ -109,13 +98,13 @@ proc pos_parms { args } {
   global pos_parms
 
   set pos_parms [list]
-  # Note: Because this procedure manipulates global variables, we use the
-  # "_opt_<varname>_" format to minimize the possibility of naming collisions.
+  # Note: Because this procedure manipulates global variables, we use the "_opt_<varname>_" format to
+  # minimize the possibility of naming collisions.
   set _opt_debug_ 0
   foreach _opt_arg_ $args {
     if { $_opt_debug_ } { print_var _opt_arg_ }
-    # Create an option record which is a 2-element list consisting of the
-    # option specification and a possible default value.  Example:;
+    # Create an option record which is a 2-element list consisting of the option specification and a
+    # possible default value.  Example:;
     # opt_rec:
     #   opt_rec[0]:      test_mode:
     #   opt_rec[1]:      0
@@ -129,8 +118,8 @@ proc pos_parms { args } {
     # Get the option's default value, if any.
     set _opt_parm_default_value_ [lindex $_opt_parm_rec_ 1]
     if { $_opt_debug_ } { print_var _opt_parm_default_value_ }
-    # Set a global variable whose name is identical to the option name.  Set
-    # the default value if there is one.
+    # Set a global variable whose name is identical to the option name.  Set the default value if there is
+    # one.
     set _opt_cmd_buf_ "global ${_opt_parm_name_} ; set ${_opt_parm_name_}"
     append _opt_cmd_buf_ " {${_opt_parm_default_value_}}"
     if { $_opt_debug_ } { pissuing $_opt_cmd_buf_ }
@@ -142,22 +131,18 @@ proc pos_parms { args } {
 
 proc gen_get_options { argv } {
 
-  # Get the command line options/arguments and use them to set the
-  # corresponding global option variable names.
+  # Get the command line options/arguments and use them to set the corresponding global option variable names.
 
-  # Note:  This procedure assumes that global list longoptions has been
-  # initialized via a call to the longoptions procedure and that global
-  # pos_parms has been initialized via a call to the pos_parms procdure.
-  # These data structures indicates what options and arguments are supported
-  # by the calling program.
+  # Note:  This procedure assumes that global list longoptions has been initialized via a call to the
+  # longoptions procedure and that global pos_parms has been initialized via a call to the pos_parms
+  # procdure.  These data structures indicates what options and arguments are supported by the calling
+  # program.
 
-  # Note: If the last var_name in pos_parms ends in "_list", then the caller
-  # can specify as many parms as they desire and they will all be appended to
-  # the variable in question.
+  # Note: If the last var_name in pos_parms ends in "_list", then the caller can specify as many parms as
+  # they desire and they will all be appended to the variable in question.
 
   # Description of argument(s):
-  # argv                            The argv array that is set for this
-  #                                 program.
+  # argv                            The argv array that is set for this program.
 
   # Example call:
   # gen_get_options $argv
@@ -166,8 +151,8 @@ proc gen_get_options { argv } {
   global pos_parms
   global program_name
 
-  # Note: Because this procedure manipulates global variables, we use the
-  # "_opt_<varname>_" format to minimize the possibility of naming collisions.
+  # Note: Because this procedure manipulates global variables, we use the "_opt_<varname>_" format to
+  # minimize the possibility of naming collisions.
   set _opt_debug_ 0
 
   set _opt_len_pos_parms_ [llength $pos_parms]
@@ -178,17 +163,14 @@ proc gen_get_options { argv } {
     print_var _opt_len_pos_parms_
   }
 
-  # Rather than write the algorithm from scratch, we will call upon the bash
-  # getopt program to help us.  This program has several advantages:
+  # Rather than write the algorithm from scratch, we will call upon the bash getopt program to help us.
+  # This program has several advantages:
   # - It will reject illegal options
-  # - It supports different posix input styles (e.g. -option <arg> vs
-  # --option=<arg>).
-  # - It allows the program's caller to abbreviate option names provided that
-  # there is no ambiguity.
+  # - It supports different posix input styles (e.g. -option <arg> vs --option=<arg>).
+  # - It allows the program's caller to abbreviate option names provided that there is no ambiguity.
 
-  # Convert curly braces to single quotes.  This includes escaping existing
-  # quotes in the argv string.  This will allow us to use the result in a bash
-  # command string.  Example: {--parm3=Kathy's cat} will become
+  # Convert curly braces to single quotes.  This includes escaping existing quotes in the argv string.  This
+  # will allow us to use the result in a bash command string.  Example: {--parm3=Kathy's cat} will become
   # '--parm3=Kathy'\''s cat'.
   if { $_opt_debug_ } { print_var argv }
   set _opt_bash_args_ [curly_braces_to_quotes $argv]
@@ -327,19 +309,14 @@ proc print_option_help { option help_text { data_desc {} } { print_default {}}\
   # Print help text for the given option.
 
   # Description of argument(s):
-  # option                          The option for which help text should be
-  #                                 printed.  This value should include a
-  #                                 leading "--" to indicate that this is an
-  #                                 optional rather than a positional parm.
-  # data_desc                       A description of the data (e.g. "dir
-  #                                 path", "1,0", etc.)0
-  # print_default                   Indicates whether the current value of the
-  #                                 global variable representing the option is
-  #                                 to be printed as a default value.  For
-  #                                 example, if the option value is "--parm1",
-  #                                 global value parm1 is "no" and
-  #                                 print_default is set, the following phrase
-  #                                 will be appended to the help text: The
+  # option                          The option for which help text should be printed.  This value should
+  #                                 include a leading "--" to indicate that this is an optional rather than a
+  #                                 positional parm.
+  # data_desc                       A description of the data (e.g. "dir path", "1,0", etc.)0
+  # print_default                   Indicates whether the current value of the global variable representing
+  #                                 the option is to be printed as a default value.  For example, if the
+  #                                 option value is "--parm1", global value parm1 is "no" and print_default
+  #                                 is set, the following phrase will be appended to the help text: The
   #                                 default value is "no".
   # width                           The width of the arguments column.
 
@@ -407,11 +384,9 @@ proc gen_print_help { { width 30 } } {
 
   # Print general help text based on user's pos_parms and longoptions.
 
-  # Note: To use this procedure, the user must create a global help_dict
-  # containing entries for each of their options and one for the program as a
-  # whole.  The keys of this dictionary are the option names and the values
-  # are lists whose values map to arguments from the print_option_help
-  # procedure:
+  # Note: To use this procedure, the user must create a global help_dict containing entries for each of
+  # their options and one for the program as a whole.  The keys of this dictionary are the option names and
+  # the values are lists whose values map to arguments from the print_option_help procedure:
   # - help_text
   # - data_desc (optional)
   # - print_default (1 or 0 - default is 1)
@@ -457,8 +432,7 @@ proc gen_print_help { { width 30 } } {
     puts ""
     puts "positional arguments:"
     foreach option $pos_parms {
-      # Retrieve the print_option_help parm values from the help_dict and
-      # call print_option_help.
+      # Retrieve the print_option_help parm values from the help_dict and call print_option_help.
       set help_entry [dict get $help_dict ${option}]
       set help_text [lindex $help_entry 0]
       set data_desc [lindex $help_entry 1]
@@ -473,8 +447,7 @@ proc gen_print_help { { width 30 } } {
     puts "optional arguments:"
     foreach option $longoptions {
       set option [string trim $option ":"]
-      # Retrieve the print_option_help parm values from the help_dict and
-      # call print_option_help.
+      # Retrieve the print_option_help parm values from the help_dict and call print_option_help.
       set help_entry [dict get $help_dict ${option}]
       set help_text [lindex $help_entry 0]
       set data_desc [lindex $help_entry 1]
@@ -513,13 +486,11 @@ proc global_program_options {} {
 
 proc gen_pre_validation {} {
 
-  # Do generic post-validation processing.  By "post", we mean that this is
-  # to be called from a validation function after the caller has done any
-  # validation desired.  If the calling program passes exit_function and
-  # signal_handler parms, this function will register them.  In other words,
-  # it will make the signal_handler functions get called for SIGINT and
-  # SIGTERM and will make the exit_function function run prior to the
-  # termination of the program.
+  # Do generic post-validation processing.  By "post", we mean that this is to be called from a validation
+  # function after the caller has done any validation desired.  If the calling program passes exit_function
+  # and signal_handler parms, this function will register them.  In other words, it will make the
+  # signal_handler functions get called for SIGINT and SIGTERM and will make the exit_function function run
+  # prior to the termination of the program.
 
   # Make all program option global variables available to the calling function.
   uplevel global_program_options
@@ -529,13 +500,11 @@ proc gen_pre_validation {} {
 
 proc gen_post_validation {} {
 
-  # Do generic post-validation processing.  By "post", we mean that this is
-  # to be called from a validation function after the caller has done any
-  # validation desired.  If the calling program passes exit_function and
-  # signal_handler parms, this function will register them.  In other words,
-  # it will make the signal_handler functions get called for SIGINT and
-  # SIGTERM and will make the exit_function function run prior to the
-  # termination of the program.
+  # Do generic post-validation processing.  By "post", we mean that this is to be called from a validation
+  # function after the caller has done any validation desired.  If the calling program passes exit_function
+  # and signal_handler parms, this function will register them.  In other words, it will make the
+  # signal_handler functions get called for SIGINT and SIGTERM and will make the exit_function function run
+  # prior to the termination of the program.
 
   trap { exit_proc } [list SIGTERM SIGINT]
 

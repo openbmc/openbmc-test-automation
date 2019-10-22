@@ -100,8 +100,7 @@ stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
 def exit_function(signal_number=0,
                   frame=None):
     r"""
-    Execute whenever the program ends normally or with the signals that we
-    catch (i.e. TERM, INT).
+    Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
     """
 
     dprint_executing()
@@ -113,18 +112,16 @@ def exit_function(signal_number=0,
 def signal_handler(signal_number,
                    frame):
     r"""
-    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our
-    program would terminate immediately with return code 143 and without
-    calling our exit_function.
+    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our program would terminate immediately
+    with return code 143 and without calling our exit_function.
     """
 
-    # Our convention is to set up exit_function with atexit.register() so
-    # there is no need to explicitly call exit_function from here.
+    # Our convention is to set up exit_function with atexit.register() so there is no need to explicitly
+    # call exit_function from here.
 
     dprint_executing()
 
-    # Calling exit prevents us from returning to the code that was running
-    # when we received the signal.
+    # Calling exit prevents us from returning to the code that was running when we received the signal.
     exit(0)
 
 
@@ -154,8 +151,7 @@ def validate_parms():
     if status_file_name == "":
         if prefix == "":
             prefix = command_string.split(" ")[0]
-            # File extensions (e.g. ".sh", ".py", .etc), look clumsy in
-            # status file names.
+            # File extensions (e.g. ".sh", ".py", .etc), look clumsy in status file names.
             extension_regex = "\\.[a-zA-Z0-9]{1,3}$"
             prefix = re.sub(extension_regex, "", prefix)
             set_pgm_arg(prefix)
@@ -175,13 +171,12 @@ def validate_parms():
 
 def script_func(command_string, status_file_path):
     r"""
-    Run the command string producing both stdout and file output via the
-    script command and return the shell_rc.
+    Run the command string producing both stdout and file output via the script command and return the
+    shell_rc.
 
     Description of argument(s):
     command_string                  The command string to be run.
-    status_file_path                The path to the status file which is to
-                                    contain a copy of all stdout.
+    status_file_path                The path to the status file which is to contain a copy of all stdout.
     """
 
     cmd_buf = "script -a -q -f " + status_file_path + " -c '" \
@@ -192,8 +187,7 @@ def script_func(command_string, status_file_path):
     sub_proc.communicate()
     shell_rc = sub_proc.returncode
 
-    # Retrieve return code by examining ret_code_str output statement from
-    # status file.
+    # Retrieve return code by examining ret_code_str output statement from status file.
     # Example text to be analyzed.
     # auto_status_file_ret_code:                        127
     cmd_buf = "tail -n 10 " + status_file_path + " | egrep -a \"" \
@@ -207,13 +201,11 @@ def script_func(command_string, status_file_path):
 
 def tee_func(command_string, status_file_path):
     r"""
-    Run the command string producing both stdout and file output via the tee
-    command and return the shell_rc.
+    Run the command string producing both stdout and file output via the tee command and return the shell_rc.
 
     Description of argument(s):
     command_string                  The command string to be run.
-    status_file_path                The path to the status file which is to
-                                    contain a copy of all stdout.
+    status_file_path                The path to the status file which is to contain a copy of all stdout.
     """
 
     cmd_buf = "set -o pipefail ; " + command_string + " 2>&1 | tee -a " \

@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
 r"""
-This module provides many valuable ssh functions such as sprint_connection,
-execute_ssh_command, etc.
+This module provides many valuable ssh functions such as sprint_connection, execute_ssh_command, etc.
 """
 
 import sys
@@ -29,10 +28,9 @@ def sprint_connection(connection,
     r"""
     sprint data from the connection object to a string and return it.
 
-    connection                      A connection object which is created by
-                                    the SSHlibrary open_connection() function.
-    indent                          The number of characters to indent the
-                                    output.
+    connection                      A connection object which is created by the SSHlibrary open_connection()
+                                    function.
+    indent                          The number of characters to indent the output.
     """
 
     buffer = gp.sindent("", indent)
@@ -60,13 +58,10 @@ def sprint_connections(connections=None,
     r"""
     sprint data from the connections list to a string and return it.
 
-    connections                     A list of connection objects which are
-                                    created by the SSHlibrary open_connection
-                                    function.  If this value is null, this
-                                    function will populate with a call to the
-                                    SSHlibrary get_connections() function.
-    indent                          The number of characters to indent the
-                                    output.
+    connections                     A list of connection objects which are created by the SSHlibrary
+                                    open_connection function.  If this value is null, this function will
+                                    populate with a call to the SSHlibrary get_connections() function.
+    indent                          The number of characters to indent the output.
     """
 
     if connections is None:
@@ -81,17 +76,14 @@ def sprint_connections(connections=None,
 
 def find_connection(open_connection_args={}):
     r"""
-    Find connection that matches the given connection arguments and return
-    connection object.  Return False if no matching connection is found.
+    Find connection that matches the given connection arguments and return connection object.  Return False
+    if no matching connection is found.
 
     Description of argument(s):
-    open_connection_args            A dictionary of arg names and values which
-                                    are legal to pass to the SSHLibrary
-                                    open_connection function as parms/args.
-                                    For a match to occur, the value for each
-                                    item in open_connection_args must match
-                                    the corresponding value in the connection
-                                    being examined.
+    open_connection_args            A dictionary of arg names and values which are legal to pass to the
+                                    SSHLibrary open_connection function as parms/args.  For a match to occur,
+                                    the value for each item in open_connection_args must match the
+                                    corresponding value in the connection being examined.
     """
 
     global sshlib
@@ -109,19 +101,16 @@ def find_connection(open_connection_args={}):
 def login_ssh(login_args={},
               max_login_attempts=5):
     r"""
-    Login on the latest open SSH connection.  Retry on failure up to
-    max_login_attempts.
+    Login on the latest open SSH connection.  Retry on failure up to max_login_attempts.
 
     The caller is responsible for making sure there is an open SSH connection.
 
     Description of argument(s):
-    login_args                      A dictionary containing the key/value
-                                    pairs which are acceptable to the
-                                    SSHLibrary login function as parms/args.
-                                    At a minimum, this should contain a
-                                    'username' and a 'password' entry.
-    max_login_attempts              The max number of times to try logging in
-                                    (in the event of login failures).
+    login_args                      A dictionary containing the key/value pairs which are acceptable to the
+                                    SSHLibrary login function as parms/args.  At a minimum, this should
+                                    contain a 'username' and a 'password' entry.
+    max_login_attempts              The max number of times to try logging in (in the event of login
+                                    failures).
     """
 
     gp.lprint_executing()
@@ -145,15 +134,13 @@ def login_ssh(login_args={},
                     re.match(r"No existing session", str(except_value)):
                 continue
             else:
-                # We don't tolerate any other error so break from loop and
-                # re-raise exception.
+                # We don't tolerate any other error so break from loop and re-raise exception.
                 break
         # If we get to this point, the login has worked and we can return.
         gp.lprint_var(out_buf)
         return
 
-    # If we get to this point, the login has failed on all attempts so the
-    # exception will be raised again.
+    # If we get to this point, the login has failed on all attempts so the exception will be raised again.
     raise(except_value)
 
 
@@ -168,53 +155,39 @@ def execute_ssh_command(cmd_buf,
                         test_mode=None,
                         time_out=None):
     r"""
-    Run the given command in an SSH session and return the stdout, stderr and
-    the return code.
+    Run the given command in an SSH session and return the stdout, stderr and the return code.
 
-    If there is no open SSH connection, this function will connect and login.
-    Likewise, if the caller has not yet logged in to the connection, this
-    function will do the login.
+    If there is no open SSH connection, this function will connect and login.  Likewise, if the caller has
+    not yet logged in to the connection, this function will do the login.
 
-    NOTE: There is special handling when open_connection_args['alias'] equals
-    "device_connection".
+    NOTE: There is special handling when open_connection_args['alias'] equals "device_connection".
     - A write, rather than an execute_command, is done.
     - Only stdout is returned (no stderr or rc).
     - print_err, ignore_err and fork are not supported.
 
     Description of arguments:
-    cmd_buf                         The command string to be run in an SSH
-                                    session.
-    open_connection_args            A dictionary of arg names and values which
-                                    are legal to pass to the SSHLibrary
-                                    open_connection function as parms/args.
-                                    At a minimum, this should contain a 'host'
-                                    entry.
-    login_args                      A dictionary containing the key/value
-                                    pairs which are acceptable to the
-                                    SSHLibrary login function as parms/args.
-                                    At a minimum, this should contain a
-                                    'username' and a 'password' entry.
-    print_out                       If this is set, this function will print
-                                    the stdout/stderr generated by the shell
-                                    command.
-    print_err                       If show_err is set, this function will
-                                    print a standardized error report if the
-                                    shell command returns non-zero.
-    ignore_err                      Indicates that errors encountered on the
-                                    sshlib.execute_command are to be ignored.
-    fork                            Indicates that sshlib.start is to be used
-                                    rather than sshlib.execute_command.
-    quiet                           Indicates whether this function should run
-                                    the pissuing() function which prints an
-                                    "Issuing: <cmd string>" to stdout.  This
-                                    defaults to the global quiet value.
-    test_mode                       If test_mode is set, this function will
-                                    not actually run the command.  This
-                                    defaults to the global test_mode value.
-    time_out                        The amount of time to allow for the
-                                    execution of cmd_buf.  A value of None
-                                    means that there is no limit to how long
-                                    the command may take.
+    cmd_buf                         The command string to be run in an SSH session.
+    open_connection_args            A dictionary of arg names and values which are legal to pass to the
+                                    SSHLibrary open_connection function as parms/args.  At a minimum, this
+                                    should contain a 'host' entry.
+    login_args                      A dictionary containing the key/value pairs which are acceptable to the
+                                    SSHLibrary login function as parms/args.  At a minimum, this should
+                                    contain a 'username' and a 'password' entry.
+    print_out                       If this is set, this function will print the stdout/stderr generated by
+                                    the shell command.
+    print_err                       If show_err is set, this function will print a standardized error report
+                                    if the shell command returns non-zero.
+    ignore_err                      Indicates that errors encountered on the sshlib.execute_command are to be
+                                    ignored.
+    fork                            Indicates that sshlib.start is to be used rather than
+                                    sshlib.execute_command.
+    quiet                           Indicates whether this function should run the pissuing() function which
+                                    prints an "Issuing: <cmd string>" to stdout.  This defaults to the global
+                                    quiet value.
+    test_mode                       If test_mode is set, this function will not actually run the command.
+                                    This defaults to the global test_mode value.
+    time_out                        The amount of time to allow for the execution of cmd_buf.  A value of
+                                    None means that there is no limit to how long the command may take.
     """
 
     gp.lprint_executing()
@@ -327,8 +300,7 @@ def execute_ssh_command(cmd_buf,
                 login_ssh(login_args)
                 continue
 
-            # We do not handle any other RuntimeErrors so we will raise the
-            # exception again.
+            # We do not handle any other RuntimeErrors so we will raise the exception again.
             sshlib.close_all_connections()
             gp.lprintn(traceback.format_exc())
             raise(except_value)

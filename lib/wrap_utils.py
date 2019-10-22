@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 
 r"""
-This module provides functions which are useful for writing python wrapper
-functions (i.e. in this context, a wrapper function is one whose aim is to
-call some other function on the caller's behalf but to provide some additional
-functionality over and above what the base function provides).
+This module provides functions which are useful for writing python wrapper functions (i.e. in this context, a
+wrapper function is one whose aim is to call some other function on the caller's behalf but to provide some
+additional functionality over and above what the base function provides).
 """
 
 import sys
@@ -18,12 +17,11 @@ def create_wrapper_def_and_call(base_func_name,
 
     This is a utility for helping to create wrapper functions.
 
-    For example, if there existed a function with the following definition
-    line:
+    For example, if there existed a function with the following definition line:
     def sprint_foo_bar(headers=1):
 
-    And the user wished to write a print_foo_bar wrapper function, they could
-    call create_wrapper_def_and_call as follows:
+    And the user wished to write a print_foo_bar wrapper function, they could call
+    create_wrapper_def_and_call as follows:
 
     func_def_line, call_line = create_wrapper_def_and_call("sprint_foo_bar",
                                                            "print_foo_bar")
@@ -32,23 +30,18 @@ def create_wrapper_def_and_call(base_func_name,
     func_def_line                   def print_foo_bar(headers=1):
     call_line                       sprint_foo_bar(headers=headers)
 
-    The func_def_line is suitable as the definition line for the wrapper
-    function.  The call_line is suitable for use in the new wrapper function
-    wherever it wishes to call the base function.  By explicitly specifying
-    each parm in the definition and the call line, we allow the caller of the
-    wrapper function to refer to any given parm by name rather than having to
-    specify parms positionally.
+    The func_def_line is suitable as the definition line for the wrapper function.  The call_line is suitable
+    for use in the new wrapper function wherever it wishes to call the base function.  By explicitly
+    specifying each parm in the definition and the call line, we allow the caller of the wrapper function to
+    refer to any given parm by name rather than having to specify parms positionally.
 
     Description of argument(s):
-    base_func_name                  The name of the base function around which
-                                    a wrapper is being created.
-    wrap_func_name                  The name of the wrapper function being
-                                    created.
+    base_func_name                  The name of the base function around which a wrapper is being created.
+    wrap_func_name                  The name of the wrapper function being created.
     """
 
-    # Get caller's module name.  Note: that for the present we've hard-coded
-    # the stack_frame_ix value because we expect a call stack to this function
-    # to be something like this:
+    # Get caller's module name.  Note: that for the present we've hard-coded the stack_frame_ix value
+    # because we expect a call stack to this function to be something like this:
     # caller
     #   create_print_wrapper_funcs
     #     create_func_def_string
@@ -82,8 +75,7 @@ def create_wrapper_def_and_call(base_func_name,
     num_defaults = len(base_default_list)
     num_non_defaults = num_args - num_defaults
 
-    # Create base_arg_default_string which is a reconstruction of the base
-    # function's argument list.
+    # Create base_arg_default_string which is a reconstruction of the base function's argument list.
     # Example base_arg_default_string:
     # headers, last=2, first=[1]
     # First, create a new list where each entry is of the form "arg=default".
@@ -119,34 +111,25 @@ def create_func_def_string(base_func_name,
                            func_body_template,
                            replace_dict):
     r"""
-    Create and return a complete function definition as a string.  The caller
-    may run "exec" on the resulting string to create the desired function.
+    Create and return a complete function definition as a string.  The caller may run "exec" on the resulting
+    string to create the desired function.
 
     Description of argument(s):
-    base_func_name                  The name of the base function around which
-                                    a wrapper is being created.
-    wrap_func_name                  The name of the wrapper function being
-                                    created.
-    func_body_template              A function body in the form of a list.
-                                    Each list element represents one line of a
-                                    function  This is a template in so far as
-                                    text substitutions will be done on it to
-                                    arrive at a valid function definition.
-                                    This template should NOT contain the
-                                    function definition line (e.g. "def
-                                    func1():").  create_func_def_string will
-                                    pre-pend the definition line.  The
-                                    template should also contain the text
-                                    "<call_line>" which is to be replaced by
-                                    text which will call the base function
-                                    with appropriate arguments.
-    replace_dict                    A dictionary indicating additional text
-                                    replacements to be done.  For example, if
-                                    the template contains a "<sub1>" (be sure
-                                    to include the angle brackets), and the
-                                    dictionary contains a key/value pair of
-                                    'sub1'/'replace1', then all instances of
-                                    "<sub1>" will be replaced by "replace1".
+    base_func_name                  The name of the base function around which a wrapper is being created.
+    wrap_func_name                  The name of the wrapper function being created.
+    func_body_template              A function body in the form of a list.  Each list element represents one
+                                    line of a function  This is a template in so far as text substitutions
+                                    will be done on it to arrive at a valid function definition.  This
+                                    template should NOT contain the function definition line (e.g. "def
+                                    func1():").  create_func_def_string will pre-pend the definition line.
+                                    The template should also contain the text "<call_line>" which is to be
+                                    replaced by text which will call the base function with appropriate
+                                    arguments.
+    replace_dict                    A dictionary indicating additional text replacements to be done.  For
+                                    example, if the template contains a "<sub1>" (be sure to include the
+                                    angle brackets), and the dictionary contains a key/value pair of
+                                    'sub1'/'replace1', then all instances of "<sub1>" will be replaced by
+                                    "replace1".
     """
 
     # Create the initial function definition list as a copy of the template.
@@ -154,11 +137,10 @@ def create_func_def_string(base_func_name,
     # Call create_wrapper_def_and_call to get func_def_line and call_line.
     func_def_line, call_line = create_wrapper_def_and_call(base_func_name,
                                                            wrap_func_name)
-    # Insert the func_def_line composed by create_wrapper_def_and_call is the
-    # first list entry.
+    # Insert the func_def_line composed by create_wrapper_def_and_call is the first list entry.
     func_def.insert(0, func_def_line)
-    # Make sure the replace_dict has a 'call_line'/call_line pair so that any
-    # '<call_line>' text gets replaced as intended.
+    # Make sure the replace_dict has a 'call_line'/call_line pair so that any '<call_line>' text gets
+    # replaced as intended.
     replace_dict['call_line'] = call_line
 
     # Do the replacements.

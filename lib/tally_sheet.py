@@ -20,8 +20,8 @@ import gen_print as gp
 class tally_sheet:
 
     r"""
-    This class is the implementation of a tally sheet.  The sheet can be
-    viewed as rows and columns.  Each row has a unique key field.
+    This class is the implementation of a tally sheet.  The sheet can be viewed as rows and columns.  Each
+    row has a unique key field.
 
     This class provides methods to tally the results (totals, etc.).
 
@@ -29,17 +29,14 @@ class tally_sheet:
 
     # Create an ordered dict to represent your field names/initial values.
     try:
-        boot_results_fields = collections.OrderedDict([('total', 0), ('pass',
-        0), ('fail', 0)])
+        boot_results_fields = collections.OrderedDict([('total', 0), ('pass', 0), ('fail', 0)])
     except AttributeError:
         boot_results_fields = DotDict([('total', 0), ('pass', 0), ('fail', 0)])
     # Create the tally sheet.
-    boot_test_results = tally_sheet('boot type', boot_results_fields,
-    'boot_test_results')
+    boot_test_results = tally_sheet('boot type', boot_results_fields, 'boot_test_results')
     # Set your sum fields (fields which are to be totalled).
     boot_test_results.set_sum_fields(['total', 'pass', 'fail'])
-    # Set calc fields (within a row, a certain field can be derived from
-    # other fields in the row.
+    # Set calc fields (within a row, a certain field can be derived from other fields in the row.
     boot_test_results.set_calc_fields(['total=pass+fail'])
 
     # Create some records.
@@ -62,7 +59,7 @@ class tally_sheet:
     BMC Power On                            2    1    1
     BMC Power Off                           1    1    0
     ===================================================
-    Totals                                  3    2    1
+    Totals                          3    2    1
 
     """
 
@@ -74,10 +71,8 @@ class tally_sheet:
         Create a tally sheet object.
 
         Description of arguments:
-        row_key_field_name          The name of the row key field (e.g.
-                                    boot_type, team_name, etc.)
-        init_fields_dict            A dictionary which contains field
-                                    names/initial values.
+        row_key_field_name          The name of the row key field (e.g. boot_type, team_name, etc.)
+        init_fields_dict            A dictionary which contains field names/initial values.
         obj_name                    The name of the tally sheet.
         """
 
@@ -85,9 +80,8 @@ class tally_sheet:
         # The row key field uniquely identifies the row.
         self.__row_key_field_name = row_key_field_name
         # Create a "table" which is an ordered dictionary.
-        # If we're running python 2.7 or later, collections has an
-        # OrderedDict we can use.  Otherwise, we'll try to use the DotDict (a
-        # robot library).  If neither of those are available, we fail.
+        # If we're running python 2.7 or later, collections has an OrderedDict we can use.  Otherwise, we'll
+        # try to use the DotDict (a robot library).  If neither of those are available, we fail.
         try:
             self.__table = collections.OrderedDict()
         except AttributeError:
@@ -108,8 +102,8 @@ class tally_sheet:
 
     def set_sum_fields(self, sum_fields):
         r"""
-        Set the sum fields, i.e. create a list of field names which are to be
-        summed and included on the totals line of reports.
+        Set the sum fields, i.e. create a list of field names which are to be summed and included on the
+        totals line of reports.
 
         Description of arguments:
         sum_fields                  A list of field names.
@@ -119,14 +113,12 @@ class tally_sheet:
 
     def set_calc_fields(self, calc_fields):
         r"""
-        Set the calc fields, i.e. create a list of field names within a given
-        row which are to be calculated for the user.
+        Set the calc fields, i.e. create a list of field names within a given row which are to be calculated
+        for the user.
 
         Description of arguments:
-        calc_fields                 A string expression such as
-                                    'total=pass+fail' which shows which field
-                                    on a given row is derived from other
-                                    fields in the same row.
+        calc_fields                 A string expression such as 'total=pass+fail' which shows which field on
+                                    a given row is derived from other fields in the same row.
         """
 
         self.__calc_fields = calc_fields
@@ -137,13 +129,10 @@ class tally_sheet:
 
         Description of arguments:
         row_key                     A unique key value.
-        init_fields_dict            A dictionary of field names/initial
-                                    values.  The number of fields in this
-                                    dictionary must be the same as what was
-                                    specified when the tally sheet was
-                                    created.  If no value is passed, the value
-                                    used to create the tally sheet will be
-                                    used.
+        init_fields_dict            A dictionary of field names/initial values.  The number of fields in this
+                                    dictionary must be the same as what was specified when the tally sheet
+                                    was created.  If no value is passed, the value used to create the tally
+                                    sheet will be used.
         """
 
         if row_key in self.__table:
@@ -163,48 +152,40 @@ class tally_sheet:
         Update a field in a row with the specified value.
 
         Description of arguments:
-        row_key                     A unique key value that identifies the row
-                                    to be updated.
-        field_key                   The key that identifies which field in the
-                                    row that is to be updated.
-        value                       The value to set into the specified
-                                    row/field.
+        row_key                     A unique key value that identifies the row to be updated.
+        field_key                   The key that identifies which field in the row that is to be updated.
+        value                       The value to set into the specified row/field.
         """
 
         self.__table[row_key][field_key] = value
 
     def inc_row_field(self, row_key, field_key):
         r"""
-        Increment the value of the specified field in the specified row.  The
-        value of the field must be numeric.
+        Increment the value of the specified field in the specified row.  The value of the field must be
+        numeric.
 
         Description of arguments:
-        row_key                     A unique key value that identifies the row
-                                    to be updated.
-        field_key                   The key that identifies which field in the
-                                    row that is to be updated.
+        row_key                     A unique key value that identifies the row to be updated.
+        field_key                   The key that identifies which field in the row that is to be updated.
         """
 
         self.__table[row_key][field_key] += 1
 
     def dec_row_field(self, row_key, field_key):
         r"""
-        Decrement the value of the specified field in the specified row.  The
-        value of the field must be numeric.
+        Decrement the value of the specified field in the specified row.  The value of the field must be
+        numeric.
 
         Description of arguments:
-        row_key                     A unique key value that identifies the row
-                                    to be updated.
-        field_key                   The key that identifies which field in the
-                                    row that is to be updated.
+        row_key                     A unique key value that identifies the row to be updated.
+        field_key                   The key that identifies which field in the row that is to be updated.
         """
 
         self.__table[row_key][field_key] -= 1
 
     def calc(self):
         r"""
-        Calculate totals and row calc fields.  Also, return totals_line
-        dictionary.
+        Calculate totals and row calc fields.  Also, return totals_line dictionary.
         """
 
         self.__totals_line = copy.deepcopy(self.__init_fields_dict)
@@ -233,8 +214,7 @@ class tally_sheet:
 
     def sprint_obj(self):
         r"""
-        sprint the fields of this object.  This would normally be for debug
-        purposes.
+        sprint the fields of this object.  This would normally be for debug purposes.
         """
 
         buffer = ""
@@ -253,8 +233,7 @@ class tally_sheet:
 
     def print_obj(self):
         r"""
-        print the fields of this object to stdout.  This would normally be for
-        debug purposes.
+        print the fields of this object to stdout.  This would normally be for debug purposes.
         """
 
         sys.stdout.write(self.sprint_obj())

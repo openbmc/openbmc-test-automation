@@ -1,12 +1,9 @@
-# This file is an aid in sourcing other tcl files.  It provides the following
-# advantages:
-# - It shortens the number of lines of code needed to intelligently source
-#   files.
-# - Its my_source procedure provides several benefits (see my_source prolog
-#   below).
+# This file is an aid in sourcing other tcl files.  It provides the following advantages:
+# - It shortens the number of lines of code needed to intelligently source files.
+# - Its my_source procedure provides several benefits (see my_source prolog below).
 
-# By convention, this file, or a link to this file, must exist in one of the
-# directories named in the PATH environment variable.
+# By convention, this file, or a link to this file, must exist in one of the directories named in the PATH
+# environment variable.
 
 # Example use:
 # source [exec bash -c "which source.tcl"]
@@ -17,8 +14,8 @@ set path_list [split $::env(PATH) :]
 
 proc tcl_which { file_name } {
 
-  # Search the PATH environment variable for the first executable instance of
-  # $file_name and return the full path.  On failure, return a blank string.
+  # Search the PATH environment variable for the first executable instance of $file_name and return the full
+  # path.  On failure, return a blank string.
 
   # This procedure runs much faster than [exec bash -c "which $file_name"].
 
@@ -45,8 +42,7 @@ proc my_source { source_files } {
 
   # Source each file in the source_files list.
 
-  # This procedure provides the following benefits verses just using the
-  # source command directly.
+  # This procedure provides the following benefits verses just using the source command directly.
   # - Use of PATH environment variable to locate files.
   # - Better error handling.
   # - Will only source each file once.

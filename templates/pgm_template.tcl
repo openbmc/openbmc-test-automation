@@ -24,8 +24,7 @@ proc help {} {
 
 proc exit_proc { {ret_code 0} } {
 
-  # Execute whenever the program ends normally or with the signals that we
-  # catch (i.e. TERM, INT).
+  # Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
 
   dprint_executing
   dprint_var ret_code

@@ -1,7 +1,7 @@
 *** Settings ***
 
-# Copy this template as a base to get a start on a robot program. You may
-# remove any generic comments (like this one).
+# Copy this template as a base to get a start on a robot program. You may remove any generic comments (like
+# this one).
 
 Documentation  Base to get a start on a robot program.
 

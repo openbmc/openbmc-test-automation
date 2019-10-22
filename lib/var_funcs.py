@@ -21,8 +21,8 @@ import func_args as fa
 
 def create_var_dict(*args):
     r"""
-    Create a dictionary whose keys/values are the arg names/arg values passed
-    to it and return it to the caller.
+    Create a dictionary whose keys/values are the arg names/arg values passed to it and return it to the
+    caller.
 
     Note: The resulting dictionary will be ordered.
 
@@ -68,12 +68,11 @@ def join_dict(dict,
     Join a dictionary's keys and values into a string and return the string.
 
     Description of argument(s):
-    dict                            The dictionary whose keys and values are
-                                    to be joined.
-    record_delim                    The delimiter to be used to separate
-                                    dictionary pairs in the resulting string.
-    key_val_delim                   The delimiter to be used to separate keys
-                                    from values in the resulting string.
+    dict                            The dictionary whose keys and values are to be joined.
+    record_delim                    The delimiter to be used to separate dictionary pairs in the resulting
+                                    string.
+    key_val_delim                   The delimiter to be used to separate keys from values in the resulting
+                                    string.
 
     Example use:
 
@@ -85,8 +84,7 @@ def join_dict(dict,
     var_dict:
       var_dict[first_name]:                           Steve
       var_dict[last_name]:                            Smith
-    str1:
-    first_name.Steve:last_name.Smith
+    str1:                                             first_name.Steve:last_name.Smith
     """
 
     format_str = '%s' + key_val_delim + '%s'
@@ -103,14 +101,10 @@ def split_to_dict(string,
     This function is the complement to join_dict.
 
     Description of argument(s):
-    string                          The string to be split into a dictionary.
-                                    The string must have the proper delimiters
-                                    in it.  A string created by join_dict
-                                    would qualify.
-    record_delim                    The delimiter to be used to separate
-                                    dictionary pairs in the input string.
-    key_val_delim                   The delimiter to be used to separate
-                                    keys/values in the input string.
+    string                          The string to be split into a dictionary.  The string must have the
+                                    proper delimiters in it.  A string created by join_dict would qualify.
+    record_delim                    The delimiter to be used to separate dictionary pairs in the input string.
+    key_val_delim                   The delimiter to be used to separate keys/values in the input string.
 
     Example use:
 
@@ -120,8 +114,7 @@ def split_to_dict(string,
 
 
     Program output.
-    str1:
-    first_name.Steve:last_name.Smith
+    str1:                                             first_name.Steve:last_name.Smith
     new_dict:
       new_dict[first_name]:                           Steve
       new_dict[last_name]:                            Smith
@@ -150,12 +143,10 @@ def create_file_path(file_name_dict,
     Create a file path using the given parameters and return it.
 
     Description of argument(s):
-    file_name_dict                  A dictionary with keys/values which are to
-                                    appear as part of the file name.
-    dir_path                        The dir_path that is to appear as part of
-                                    the file name.
-    file_suffix                     A suffix to be included as part of the
-                                    file name.
+    file_name_dict                  A dictionary with keys/values which are to appear as part of the file
+                                    name.
+    dir_path                        The dir_path that is to appear as part of the file name.
+    file_suffix                     A suffix to be included as part of the file name.
     """
 
     dir_path = gm.add_trailing_slash(dir_path)
@@ -164,8 +155,7 @@ def create_file_path(file_name_dict,
 
 def parse_file_path(file_path):
     r"""
-    Parse a file path created by create_file_path and return the result as a
-    dictionary.
+    Parse a file path created by create_file_path and return the result as a dictionary.
 
     This function is the complement to create_file_path.
 
@@ -180,8 +170,7 @@ def parse_file_path(file_path):
     Program output.
 
     boot_results_file_path:
-    /tmp/pgm_name.obmc_boot_test:openbmc_nickname.beye6:master_pid.2039:boot_re
-    sults
+    /tmp/pgm_name.obmc_boot_test:openbmc_nickname.beye6:master_pid.2039:boot_results
     file_path_data:
       file_path_data[dir_path]:                       /tmp/
       file_path_data[pgm_name]:                       obmc_boot_test
@@ -213,24 +202,22 @@ def parse_key_value(string,
     r"""
     Parse a key/value string and return as a key/value tuple.
 
-    This function is useful for parsing a line of program output or data that
-    is in the following form:
+    This function is useful for parsing a line of program output or data that is in the following form:
     <key or variable name><delimiter><value>
 
     An example of a key/value string would be as follows:
 
     Current Limit State: No Active Power Limit
 
-    In the example shown, the delimiter is ":".  The resulting key would be as
-    follows:
+    In the example shown, the delimiter is ":".  The resulting key would be as follows:
     Current Limit State
 
-    Note: If one were to take the default values of to_lower=1 and
-    underscores=1, the resulting key would be as follows:
+    Note: If one were to take the default values of to_lower=1 and underscores=1, the resulting key would be
+    as follows:
     current_limit_state
 
-    The to_lower and underscores arguments are provided for those who wish to
-    have their key names have the look and feel of python variable names.
+    The to_lower and underscores arguments are provided for those who wish to have their key names have the
+    look and feel of python variable names.
 
     The resulting value for the example above would be as follows:
     No Active Power Limit
@@ -238,19 +225,15 @@ def parse_key_value(string,
     Another example:
     name=Mike
 
-    In this case, the delim would be "=", the key is "name" and the value is
-    "Mike".
+    In this case, the delim would be "=", the key is "name" and the value is "Mike".
 
     Description of argument(s):
     string                          The string to be parsed.
-    delim                           The delimiter which separates the key from
-                                    the value.
-    strip                           The characters (if any) to strip from the
-                                    beginning and end of both the key and the
-                                    value.
+    delim                           The delimiter which separates the key from the value.
+    strip                           The characters (if any) to strip from the beginning and end of both the
+                                    key and the value.
     to_lower                        Change the key name to lower case.
-    underscores                     Change any blanks found in the key name to
-                                    underscores.
+    underscores                     Change any blanks found in the key name to underscores.
     """
 
     pair = string.split(delim)
@@ -273,8 +256,7 @@ def key_value_list_to_dict(list,
                            process_indent=0,
                            **args):
     r"""
-    Convert a list containing key/value strings or tuples to a dictionary and
-    return it.
+    Convert a list containing key/value strings or tuples to a dictionary and return it.
 
     See docstring of parse_key_value function for details on key/value strings.
 
@@ -322,8 +304,7 @@ def key_value_list_to_dict(list,
       [content-length]:          559
       [x-xss-protection]:        1; mode=block
 
-    Another example containing a sub-list (see process_indent description
-    below):
+    Another example containing a sub-list (see process_indent description below):
 
     Provides Device SDRs      : yes
     Additional Device Support :
@@ -332,11 +313,9 @@ def key_value_list_to_dict(list,
         FRU Inventory Device
         Chassis Device
 
-    Note that the 2 qualifications for containing a sub-list are met: 1)
-    'Additional Device Support' has no value and 2) The entries below it are
-    indented.  In this case those entries contain no delimiters (":") so they
-    will be processed as a list rather than as a dictionary.  The result would
-    be as follows:
+    Note that the 2 qualifications for containing a sub-list are met: 1) 'Additional Device Support' has no
+    value and 2) The entries below it are indented.  In this case those entries contain no delimiters (":")
+    so they will be processed as a list rather than as a dictionary.  The result would be as follows:
 
     mc_info:
       mc_info[provides_device_sdrs]:            yes
@@ -347,20 +326,14 @@ def key_value_list_to_dict(list,
         mc_info[additional_device_support][3]:  Chassis Device
 
     Description of argument(s):
-    list                            A list of key/value strings.  (See
-                                    docstring of parse_key_value function for
-                                    details).
-    process_indent                  This indicates that indented
-                                    sub-dictionaries and sub-lists are to be
-                                    processed as such.  An entry may have a
-                                    sub-dict or sub-list if 1) It has no value
-                                    other than blank 2) There are entries
-                                    below it that are indented.  Note that
-                                    process_indent is not allowed for a list
-                                    of tuples (vs. a list of key/value
-                                    strings).
-    **args                          Arguments to be interpreted by
-                                    parse_key_value.  (See docstring of
+    list                            A list of key/value strings.  (See docstring of parse_key_value function
+                                    for details).
+    process_indent                  This indicates that indented sub-dictionaries and sub-lists are to be
+                                    processed as such.  An entry may have a sub-dict or sub-list if 1) It has
+                                    no value other than blank 2) There are entries below it that are
+                                    indented.  Note that process_indent is not allowed for a list of tuples
+                                    (vs. a list of key/value strings).
+    **args                          Arguments to be interpreted by parse_key_value.  (See docstring of
                                     parse_key_value function for details).
     """
 
@@ -389,18 +362,15 @@ def key_value_list_to_dict(list,
         indent = len(entry) - len(entry.lstrip())
 
         if indent > parent_indent and parent_value == "":
-            # This line is indented compared to the parent entry and the
-            # parent entry has no value.
+            # This line is indented compared to the parent entry and the parent entry has no value.
             # Append the entry to sub_list for later processing.
             sub_list.append(str(entry))
             continue
 
-        # Process any outstanding sub_list and add it to
-        # result_dict[parent_key].
+        # Process any outstanding sub_list and add it to result_dict[parent_key].
         if len(sub_list) > 0:
             if any(delim in word for word in sub_list):
-                # If delim is found anywhere in the sub_list, we'll process
-                # as a sub-dictionary.
+                # If delim is found anywhere in the sub_list, we'll process as a sub-dictionary.
                 result_dict[parent_key] = key_value_list_to_dict(sub_list,
                                                                  **args)
             else:
@@ -416,8 +386,7 @@ def key_value_list_to_dict(list,
     # Any outstanding sub_list to be processed?
     if len(sub_list) > 0:
         if any(delim in word for word in sub_list):
-            # If delim is found anywhere in the sub_list, we'll process as a
-            # sub-dictionary.
+            # If delim is found anywhere in the sub_list, we'll process as a sub-dictionary.
             result_dict[parent_key] = key_value_list_to_dict(sub_list, **args)
         else:
             result_dict[parent_key] = map(str.strip, sub_list)
@@ -428,8 +397,7 @@ def key_value_list_to_dict(list,
 def key_value_outbuf_to_dict(out_buf,
                              **args):
     r"""
-    Convert a buffer with a key/value string on each line to a dictionary and
-    return it.
+    Convert a buffer with a key/value string on each line to a dictionary and return it.
 
     Each line in the out_buf should end with a \n.
 
@@ -459,11 +427,9 @@ def key_value_outbuf_to_dict(out_buf,
       [sampling_period]:            0 seconds
 
     Description of argument(s):
-    out_buf                         A buffer with a key/value string on each
-                                    line. (See docstring of parse_key_value
-                                    function for details).
-    **args                          Arguments to be interpreted by
-                                    parse_key_value.  (See docstring of
+    out_buf                         A buffer with a key/value string on each line. (See docstring of
+                                    parse_key_value function for details).
+    **args                          Arguments to be interpreted by parse_key_value.  (See docstring of
                                     parse_key_value function for details).
     """
 
@@ -475,11 +441,9 @@ def key_value_outbuf_to_dict(out_buf,
 def create_field_desc_regex(line):
 
     r"""
-    Create a field descriptor regular expression based on the input line and
-    return it.
+    Create a field descriptor regular expression based on the input line and return it.
 
-    This function is designed for use by the list_to_report function (defined
-    below).
+    This function is designed for use by the list_to_report function (defined below).
 
     Example:
 
@@ -491,8 +455,7 @@ def create_field_desc_regex(line):
 
     (.{8})   (.{12}) (.{18}) (.{24})
 
-    This means that other report lines interpreted using the regular
-    expression are expected to have:
+    This means that other report lines interpreted using the regular expression are expected to have:
     - An 8 character field
     - 3 spaces
     - A 12 character field
@@ -502,8 +465,8 @@ def create_field_desc_regex(line):
     - A 24 character field
 
     Description of argument(s):
-    line                            A line consisting of dashes to represent
-                                    fields and spaces to delimit fields.
+    line                            A line consisting of dashes to represent fields and spaces to delimit
+                                    fields.
     """
 
     # Split the line into a descriptors list.  Example:
@@ -541,16 +504,14 @@ def list_to_report(report_list,
                    to_lower=1,
                    field_delim=None):
     r"""
-    Convert a list containing report text lines to a report "object" and
-    return it.
+    Convert a list containing report text lines to a report "object" and return it.
 
-    The first entry in report_list must be a header line consisting of column
-    names delimited by white space.  No column name may contain white space.
-    The remaining report_list entries should contain tabular data which
-    corresponds to the column names.
+    The first entry in report_list must be a header line consisting of column names delimited by white space.
+    No column name may contain white space.  The remaining report_list entries should contain tabular data
+    which corresponds to the column names.
 
-    A report object is a list where each entry is a dictionary whose keys are
-    the field names from the first entry in report_list.
+    A report object is a list where each entry is a dictionary whose keys are the field names from the first
+    entry in report_list.
 
     Example:
     Given the following report_list as input:
@@ -578,38 +539,31 @@ def list_to_report(report_list,
         [use%]:                        0%
         [mounted]:                     /dev
 
-    Notice that because "Mounted on" contains a space, "on" would be
-    considered the 7th field.  In this case, there is never any data in field
-    7 so things work out nicely.  A caller could do some pre-processing if
+    Notice that because "Mounted on" contains a space, "on" would be considered the 7th field.  In this case,
+    there is never any data in field 7 so things work out nicely.  A caller could do some pre-processing if
     desired (e.g. change "Mounted on" to "Mounted_on").
 
     Example 2:
 
-    If the 2nd line of report data is a series of dashes and spaces as in the
-    following example, that line will serve to delineate columns.
+    If the 2nd line of report data is a series of dashes and spaces as in the following example, that line
+    will serve to delineate columns.
 
     The 2nd line of data is like this:
-    ID                              status       size
-                                    tool,clientid,userid
+    ID                              status       size               tool,clientid,userid
     -------- ------------ ------------------ ------------------------
     20000001 in progress  0x7D0              ,,
 
     Description of argument(s):
-    report_list                     A list where each entry is one line of
-                                    output from a report.  The first entry
-                                    must be a header line which contains
-                                    column names.  Column names may not
-                                    contain spaces.
-    to_lower                        Change the resulting key names to lower
-                                    case.
-    field_delim                     Indicates that there are field delimiters
-                                    in report_list entries (which should be
-                                    removed).
+    report_list                     A list where each entry is one line of output from a report.  The first
+                                    entry must be a header line which contains column names.  Column names
+                                    may not contain spaces.
+    to_lower                        Change the resulting key names to lower case.
+    field_delim                     Indicates that there are field delimiters in report_list entries (which
+                                    should be removed).
     """
 
     if len(report_list) <= 1:
-        # If we don't have at least a descriptor line and one line of data,
-        # return an empty array.
+        # If we don't have at least a descriptor line and one line of data, return an empty array.
         return []
 
     if field_delim is not None:
@@ -632,8 +586,7 @@ def list_to_report(report_list,
     if field_desc_regex == "":
         columns = header_line.split()
     else:
-        # Pad the line with spaces on the right to facilitate processing with
-        # field_desc_regex.
+        # Pad the line with spaces on the right to facilitate processing with field_desc_regex.
         header_line = pad_format_string % header_line
         columns = list(map(str.strip,
                            re.findall(field_desc_regex, header_line)[0]))
@@ -643,8 +596,7 @@ def list_to_report(report_list,
         if field_desc_regex == "":
             line = report_line.split()
         else:
-            # Pad the line with spaces on the right to facilitate processing
-            # with field_desc_regex.
+            # Pad the line with spaces on the right to facilitate processing with field_desc_regex.
             report_line = pad_format_string % report_line
             line = list(map(str.strip,
                             re.findall(field_desc_regex, report_line)[0]))
@@ -660,8 +612,7 @@ def list_to_report(report_list,
 def outbuf_to_report(out_buf,
                      **args):
     r"""
-    Convert a text buffer containing report lines to a report "object" and
-    return it.
+    Convert a text buffer containing report lines to a report "object" and return it.
 
     Refer to list_to_report (above) for more details.
 
@@ -669,8 +620,7 @@ def outbuf_to_report(out_buf,
 
     Given the following out_buf:
 
-    Filesystem                      1K-blocks      Used Available Use% Mounted
-                                    on
+    Filesystem                      1K-blocks      Used Available Use% Mounted on
     dev                             247120         0    247120   0% /dev
     tmpfs                           248408     79792    168616  32% /run
 
@@ -694,15 +644,12 @@ def outbuf_to_report(out_buf,
 
     Other possible uses:
     - Process the output of a ps command.
-    - Process the output of an ls command (the caller would need to supply
-      column names)
+    - Process the output of an ls command (the caller would need to supply column names)
 
     Description of argument(s):
-    out_buf                         A text report.  The first line must be a
-                                    header line which contains column names.
-                                    Column names may not contain spaces.
-    **args                          Arguments to be interpreted by
-                                    list_to_report.  (See docstring of
+    out_buf                         A text report.  The first line must be a header line which contains
+                                    column names.  Column names may not contain spaces.
+    **args                          Arguments to be interpreted by list_to_report.  (See docstring of
                                     list_to_report function for details).
     """
 
@@ -712,8 +659,7 @@ def outbuf_to_report(out_buf,
 
 def nested_get(key_name, structure):
     r"""
-    Return a list of all values from the nested structure that have the given
-    key name.
+    Return a list of all values from the nested structure that have the given key name.
 
     Example:
 
@@ -740,13 +686,10 @@ def nested_get(key_name, structure):
 
     Description of argument(s):
     key_name                        The key name (e.g. 'last_name').
-    structure                       Any nested combination of lists or
-                                    dictionaries (e.g. a dictionary, a
-                                    dictionary of dictionaries, a list of
-                                    dictionaries, etc.).  This function will
-                                    locate the given key at any level within
-                                    the structure and include its value in the
-                                    returned list.
+    structure                       Any nested combination of lists or dictionaries (e.g. a dictionary, a
+                                    dictionary of dictionaries, a list of dictionaries, etc.).  This function
+                                    will locate the given key at any level within the structure and include
+                                    its value in the returned list.
     """
 
     result = []
@@ -765,8 +708,7 @@ def nested_get(key_name, structure):
 
 def match_struct(structure, match_dict, regex=False):
     r"""
-    Return True or False to indicate whether the structure matches the match
-    dictionary.
+    Return True or False to indicate whether the structure matches the match dictionary.
 
     Example:
 
@@ -789,23 +731,18 @@ def match_struct(structure, match_dict, regex=False):
     match_struct(personnel, {'last_name': 'Johnson'}, regex=True)
 
     Description of argument(s):
-    structure                       Any nested combination of lists or
-                                    dictionaries.  See the prolog of
+    structure                       Any nested combination of lists or dictionaries.  See the prolog of
                                     get_nested() for details.
-    match_dict                      Each key/value pair in match_dict must
-                                    exist somewhere in the structure for the
-                                    structure to be considered a match.  A
-                                    match value of None is considered a
-                                    special case where the structure would be
-                                    considered a match only if the key in
-                                    question is found nowhere in the structure.
-    regex                           Indicates whether the values in the
-                                    match_dict should be interpreted as
+    match_dict                      Each key/value pair in match_dict must exist somewhere in the structure
+                                    for the structure to be considered a match.  A match value of None is
+                                    considered a special case where the structure would be considered a match
+                                    only if the key in question is found nowhere in the structure.
+    regex                           Indicates whether the values in the match_dict should be interpreted as
                                     regular expressions.
     """
 
-    # The structure must match for each match_dict entry to be considered a
-    # match.  Therefore, any failure to match is grounds for returning False.
+    # The structure must match for each match_dict entry to be considered a match.  Therefore, any failure
+    # to match is grounds for returning False.
     for match_key, match_value in match_dict.items():
         struct_key_values = nested_get(match_key, structure)
         if match_value is None:
@@ -828,11 +765,10 @@ def match_struct(structure, match_dict, regex=False):
 
 def filter_struct(structure, filter_dict, regex=False, invert=False):
     r"""
-    Filter the structure by removing any entries that do NOT contain the
-    keys/values specified in filter_dict and return the result.
+    Filter the structure by removing any entries that do NOT contain the keys/values specified in filter_dict
+    and return the result.
 
-    The selection process is directed only at the first-level entries of the
-    structure.
+    The selection process is directed only at the first-level entries of the structure.
 
     Example:
 
@@ -842,11 +778,9 @@ def filter_struct(structure, filter_dict, regex=False, invert=False):
       [/redfish/v1/Systems/system/Processors]:
         [Members]:
           [0]:
-            [@odata.id]:
-            /redfish/v1/Systems/system/Processors/cpu0
+            [@odata.id]:                              /redfish/v1/Systems/system/Processors/cpu0
           [1]:
-            [@odata.id]:
-            /redfish/v1/Systems/system/Processors/cpu1
+            [@odata.id]:                              /redfish/v1/Systems/system/Processors/cpu1
       [/redfish/v1/Systems/system/Processors/cpu0]:
         [Status]:
           [State]:                                    Enabled
@@ -868,41 +802,31 @@ def filter_struct(structure, filter_dict, regex=False, invert=False):
           [State]:                                    Enabled
           [Health]:                                   OK
 
-    Note that the first item in the original properties directory had no key
-    anywhere in the structure named "Health".  Therefore, that item failed to
-    make the cut.  The next item did have a key named "Health" whose value was
-    "OK" so it was included in the new structure.  The third item had a key
-    named "Health" but its value was not "OK" so it also failed to make the
-    cut.
+    Note that the first item in the original properties directory had no key anywhere in the structure named
+    "Health".  Therefore, that item failed to make the cut.  The next item did have a key named "Health"
+    whose value was "OK" so it was included in the new structure.  The third item had a key named "Health"
+    but its value was not "OK" so it also failed to make the cut.
 
     Description of argument(s):
-    structure                       Any nested combination of lists or
-                                    dictionaries.  See the prolog of
+    structure                       Any nested combination of lists or dictionaries.  See the prolog of
                                     get_nested() for details.
-    filter_dict                     For each key/value pair in filter_dict,
-                                    each entry in structure must contain the
-                                    same key/value pair at some level.  A
-                                    filter_dict value of None is treated as a
-                                    special case.  Taking the example shown
-                                    above, [('State', None)] would mean that
-                                    the result should only contain records
+    filter_dict                     For each key/value pair in filter_dict, each entry in structure must
+                                    contain the same key/value pair at some level.  A filter_dict value of
+                                    None is treated as a special case.  Taking the example shown above,
+                                    [('State', None)] would mean that the result should only contain records
                                     that have no State key at all.
-    regex                           Indicates whether the values in the
-                                    filter_dict should be interpreted as
+    regex                           Indicates whether the values in the filter_dict should be interpreted as
                                     regular expressions.
-    invert                          Invert the results.  Instead of including
-                                    only matching entries in the results,
-                                    include only NON-matching entries in the
-                                    results.
+    invert                          Invert the results.  Instead of including only matching entries in the
+                                    results, include only NON-matching entries in the results.
     """
 
-    # Convert filter_dict from a string containing a python object definition
-    # to an actual python object (if warranted).
+    # Convert filter_dict from a string containing a python object definition to an actual python object (if
+    # warranted).
     filter_dict = fa.source_to_object(filter_dict)
 
-    # Determine whether structure is a list or a dictionary and process
-    # accordingly.  The result returned will be of the same type as the
-    # structure.
+    # Determine whether structure is a list or a dictionary and process accordingly.  The result returned
+    # will be of the same type as the structure.
     if type(structure) is list:
         result = []
         for element in structure:

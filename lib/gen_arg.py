@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
 r"""
-This module provides valuable argument processing functions like
-gen_get_options and sprint_args.
+This module provides valuable argument processing functions like gen_get_options and sprint_args.
 """
 
 import sys
@@ -23,9 +22,9 @@ default_string = '  The default value is "%(default)s".'
 def gen_get_options(parser,
                     stock_list=[]):
     r"""
-    Parse the command line arguments using the parser object passed and return
-    True/False (i.e. pass/fail).  However, if gv.exit_on_error is set, simply
-    exit the program on failure.  Also set the following built in values:
+    Parse the command line arguments using the parser object passed and return True/False (i.e. pass/fail).
+    However, if gv.exit_on_error is set, simply exit the program on failure.  Also set the following built in
+    values:
 
     __builtin__.quiet      This value is used by the qprint functions.
     __builtin__.test_mode  This value is used by command processing functions.
@@ -34,18 +33,13 @@ def gen_get_options(parser,
     __builtin__.parser     This value is used by print_program_header, etc.
 
     Description of arguments:
-    parser                          A parser object.  See argparse module
-                                    documentation for details.
-    stock_list                      The caller can use this parameter to
-                                    request certain stock parameters offered
-                                    by this function.  For example, this
-                                    function will define a "quiet" option upon
-                                    request.  This includes stop help text and
-                                    parm checking.  The stock_list is a list
-                                    of tuples each of which consists of an
-                                    arg_name and a default value.  Example:
-                                    stock_list = [("test_mode", 0), ("quiet",
-                                    1), ("debug", 0)]
+    parser                          A parser object.  See argparse module documentation for details.
+    stock_list                      The caller can use this parameter to request certain stock parameters
+                                    offered by this function.  For example, this function will define a
+                                    "quiet" option upon request.  This includes stop help text and parm
+                                    checking.  The stock_list is a list of tuples each of which consists of
+                                    an arg_name and a default value.  Example: stock_list = [("test_mode",
+                                    0), ("quiet", 1), ("debug", 0)]
     """
 
     # This is a list of stock parms that we support.
@@ -146,10 +140,9 @@ def gen_get_options(parser,
     __builtin__.arg_obj = arg_obj
     __builtin__.parser = parser
 
-    # For each command line parameter, create a corresponding global variable
-    # and assign it the appropriate value.  For example, if the command line
-    # contained "--last_name='Smith', we'll create a global variable named
-    # "last_name" with the value "Smith".
+    # For each command line parameter, create a corresponding global variable and assign it the appropriate
+    # value.  For example, if the command line contained "--last_name='Smith', we'll create a global variable
+    # named "last_name" with the value "Smith".
     module = sys.modules['__main__']
     for key in arg_obj.__dict__:
         setattr(module, key, getattr(__builtin__.arg_obj, key))
@@ -160,14 +153,13 @@ def gen_get_options(parser,
 def set_pgm_arg(var_value,
                 var_name=None):
     r"""
-    Set the value of the arg_obj.__dict__ entry named in var_name with the
-    var_value provided.  Also, set corresponding global variable.
+    Set the value of the arg_obj.__dict__ entry named in var_name with the var_value provided.  Also, set
+    corresponding global variable.
 
     Description of arguments:
     var_value                       The value to set in the variable.
-    var_name                        The name of the variable to set.  This
-                                    defaults to the name of the variable used
-                                    for var_value when calling this function.
+    var_name                        The name of the variable to set.  This defaults to the name of the
+                                    variable used for var_value when calling this function.
     """
 
     if var_name is None:
@@ -187,14 +179,12 @@ def set_pgm_arg(var_value,
 def sprint_args(arg_obj,
                 indent=0):
     r"""
-    sprint_var all of the arguments found in arg_obj and return the result as
-    a string.
+    sprint_var all of the arguments found in arg_obj and return the result as a string.
 
     Description of arguments:
-    arg_obj                         An argument object such as is returned by
-                                    the argparse parse_args() method.
-    indent                          The number of spaces to indent each line
-                                    of output.
+    arg_obj                         An argument object such as is returned by the argparse parse_args()
+                                    method.
+    indent                          The number of spaces to indent each line of output.
     """
 
     col1_width = gp.dft_col1_width + indent
@@ -212,8 +202,7 @@ module = sys.modules["__main__"]
 def gen_exit_function(signal_number=0,
                       frame=None):
     r"""
-    Execute whenever the program ends normally or with the signals that we
-    catch (i.e. TERM, INT).
+    Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
     """
 
     gp.dprint_executing()
@@ -230,39 +219,33 @@ def gen_exit_function(signal_number=0,
 def gen_signal_handler(signal_number,
                        frame):
     r"""
-    Handle signals.  Without a function to catch a SIGTERM or SIGINT, the
-    program would terminate immediately with return code 143 and without
-    calling the exit_function.
+    Handle signals.  Without a function to catch a SIGTERM or SIGINT, the program would terminate immediately
+    with return code 143 and without calling the exit_function.
     """
 
-    # The convention is to set up exit_function with atexit.register() so
-    # there is no need to explicitly call exit_function from here.
+    # The convention is to set up exit_function with atexit.register() so there is no need to explicitly
+    # call exit_function from here.
 
     gp.dprint_executing()
 
-    # Calling exit prevents control from returning to the code that was
-    # running when the signal was received.
+    # Calling exit prevents control from returning to the code that was running when the signal was received.
     exit(0)
 
 
 def gen_post_validation(exit_function=None,
                         signal_handler=None):
     r"""
-    Do generic post-validation processing.  By "post", we mean that this is to
-    be called from a validation function after the caller has done any
-    validation desired.  If the calling program passes exit_function and
-    signal_handler parms, this function will register them.  In other words,
-    it will make the signal_handler functions get called for SIGINT and
-    SIGTERM and will make the exit_function function run prior to the
-    termination of the program.
+    Do generic post-validation processing.  By "post", we mean that this is to be called from a validation
+    function after the caller has done any validation desired.  If the calling program passes exit_function
+    and signal_handler parms, this function will register them.  In other words, it will make the
+    signal_handler functions get called for SIGINT and SIGTERM and will make the exit_function function run
+    prior to the termination of the program.
 
     Description of arguments:
-    exit_function                   A function object pointing to the caller's
-                                    exit function.  This defaults to this
-                                    module's gen_exit_function.
-    signal_handler                  A function object pointing to the caller's
-                                    signal_handler function.  This defaults to
-                                    this module's gen_signal_handler.
+    exit_function                   A function object pointing to the caller's exit function.  This defaults
+                                    to this module's gen_exit_function.
+    signal_handler                  A function object pointing to the caller's signal_handler function.  This
+                                    defaults to this module's gen_signal_handler.
     """
 
     # Get defaults.
