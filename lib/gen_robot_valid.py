@@ -152,6 +152,22 @@ def valid_integer(var_name, *args, **kwargs):
     process_error_message(error_message)
 
 
+def valid_float(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_float(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+def valid_date_time(var_name, *args, **kwargs):
+
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = \
+        gv.valid_date_time(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
 def valid_dir_path(var_name, *args, **kwargs):
 
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
@@ -213,7 +229,8 @@ def valid_length(var_name, *args, **kwargs):
 func_names = [
     "valid_type", "valid_value", "valid_range", "valid_integer",
     "valid_dir_path", "valid_file_path", "valid_path", "valid_list",
-    "valid_dict", "valid_program", "valid_length"
+    "valid_dict", "valid_program", "valid_length", "valid_float",
+    "valid_date_time"
 ]
 
 for func_name in func_names:

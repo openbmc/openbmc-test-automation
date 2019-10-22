@@ -8,6 +8,7 @@ import os
 import gen_print as gp
 import gen_cmd as gc
 import func_args as fa
+import datetime
 
 exit_on_error = False
 
@@ -343,6 +344,62 @@ def valid_integer(var_value, lower=None, upper=None, var_name=None):
     return process_error_message(error_message)
 
 
+def valid_float(var_value, lower=None, upper=None, var_name=None):
+    r"""
+    The variable value is valid if it is a floating point value or can be interpreted as a floating point
+    value (e.g. 7.5, "7.5", etc.).
+
+    This function also calls valid_range to make sure the float value is within the specified range (if any).
+
+    Description of argument(s):
+    var_value                       The value being validated.
+    lower                           The lower end of the range.  If not None, the var_value must be greater
+                                    than or equal to lower.
+    upper                           The upper end of the range.  If not None, the var_value must be less than
+                                    or equal to upper.
+    """
+
+    error_message = ""
+    var_name = get_var_name(var_name)
+    try:
+        var_value = float(str(var_value))
+    except ValueError:
+        error_message += "Invalid float value:\n"
+        error_message += gp.sprint_varx(var_name, var_value,
+                                        gp.blank() | gp.show_type())
+        return process_error_message(error_message)
+
+    # Check the range (if any).
+    if lower:
+        lower = float(str(lower))
+    if upper:
+        upper = float(str(upper))
+    error_message = valid_range(var_value, lower, upper, var_name=var_name)
+
+    return process_error_message(error_message)
+
+
+def valid_date_time(var_value, var_name=None):
+    r"""
+    The variable value is valid if it can be interpreted as a date/time (e.g. "14:49:49.981", "tomorrow",
+    etc.) by the linux date command.
+
+    Description of argument(s):
+    var_value                       The value being validated.
+    """
+
+    error_message = ""
+    rc, out_buf = gc.shell_cmd("date -d '" + str(var_value) + "'", quiet=1, show_err=0, ignore_err=1)
+    if rc:
+        var_name = get_var_name(var_name)
+        error_message += "Invalid date/time value:\n"
+        error_message += gp.sprint_varx(var_name, var_value,
+                                        gp.blank() | gp.show_type())
+        return process_error_message(error_message)
+
+    return process_error_message(error_message)
+
+
 def valid_dir_path(var_value, var_name=None):
     r"""
     The variable value is valid if it contains the path of an existing directory.
@@ -582,7 +639,8 @@ def valid_length(var_value, min_length=None, max_length=None, var_name=None):
 func_names = [
     "valid_type", "valid_value", "valid_range", "valid_integer",
     "valid_dir_path", "valid_file_path", "valid_path", "valid_list",
-    "valid_dict", "valid_program", "valid_length"
+    "valid_dict", "valid_program", "valid_length", "valid_float",
+    "valid_date_time"
 ]
 
 raw_doc_strings = {}
