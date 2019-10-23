@@ -73,4 +73,5 @@ Redfish Update Firmware
     Redfish Upload Image And Check Progress State  ${apply_time}
     Reboot BMC And Verify BMC Image
     ...  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
+    Verify Get ApplyTime  ${apply_time}
 
