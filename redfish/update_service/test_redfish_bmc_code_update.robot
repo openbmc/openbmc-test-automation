@@ -52,10 +52,8 @@ Redfish Code Update With ApplyTime Immediate
 Suite Setup Execution
     [Documentation]  Do the suite setup.
 
-    # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
     Redfish.Login
-    # Delete BMC dump and Error logs.
     Delete All BMC Dump
     Redfish Purge Event Log
 
@@ -73,4 +71,5 @@ Redfish Update Firmware
     Redfish Upload Image And Check Progress State  ${apply_time}
     Reboot BMC And Verify BMC Image
     ...  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
+    Verify Get ApplyTime  ${apply_time}
 
