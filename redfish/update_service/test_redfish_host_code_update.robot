@@ -71,4 +71,5 @@ Redfish Update Firmware
     Set ApplyTime  policy=${apply_Time}
     Redfish Upload Image And Check Progress State
     Poweron Host And Verify Host Image  ${apply_time}
+    Verify Get ApplyTime  ${apply_time}
 
