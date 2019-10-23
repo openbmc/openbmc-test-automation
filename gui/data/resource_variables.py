@@ -18,6 +18,8 @@ class resource_variables():
     xpath_openbmc_ip = "//*[@id='login__form']/input[1]"
     xpath_power_indicator = "//*[@id='power-indicator-bar']"
     xpath_select_button_power_on = "//*[@id='power__power-on']"
+    xpath_cancel_button = "//button[contains(text(),'Cancel')]"
+    xpath_save_setting_button = "//button[contains(text(),'Save settings')]"
 
     xpath_select_button_warm_reboot = \
         "//*[@id='power__warm-boot']"
@@ -64,6 +66,12 @@ class resource_variables():
     obmc_off_state = "Off"
     obmc_standby_state = "Standby"
     obmc_running_state = "Running"
+
+    # xpath for main menu.
+    xpath_select_server_configuration = "//button[contains(@class,'btn-config')]"
+
+    # xpath for sub main menu.
+    xpath_select_snmp_settings = "//a[@href='#/configuration/snmp']"
 
     # Power operation elements needed for power on.
     header_wrapper = "3"
