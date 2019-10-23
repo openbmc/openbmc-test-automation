@@ -64,7 +64,6 @@
 -i Configure_Hostname_And_Verify
 -i Add_Valid_IPv4_Addres_And_Verify
 -i Configure_DNS_Server_And_Verify
--i Delete_DNS_Server_And_Verify
 -i Configure_Valid_MAC_And_Verify
 # Remote Logging
 -i Test_Remote_Logging_Configuration
