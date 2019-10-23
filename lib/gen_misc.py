@@ -589,7 +589,18 @@ def version_tuple(version):
     return tuple(map(int, (version.split("."))))
 
 
-# Note: Stripping out any revision code data (e.g. "3.6.3rc1" will become "3.6.3").
+def get_python_version():
+    r"""
+    Get and return the python version.
+    """
+
+    sys_version = sys.version
+    # Strip out any revision code data (e.g. "3.6.3rc1" will become "3.6.3").
+    sys_version = re.sub("rc[^ ]+", "", sys_version).split(" ")[0]
+    # Remove any non-numerics, etc. (e.g. "2.7.15+" becomes ""2.7.15").
+    return re.sub("[^0-9\.]", "", sys_version)
+
+
 python_version = \
-    version_tuple(re.sub("rc[^ ]+", "", sys.version).split(" ")[0])
+    version_tuple(get_python_version())
 ordered_dict_version = version_tuple("3.6")
