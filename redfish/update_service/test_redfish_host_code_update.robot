@@ -70,4 +70,5 @@ Redfish Update Firmware
     Redfish.Login
     Redfish Upload Image And Check Progress State  ${apply_time}
     Poweron Host And Verify Host Image  ${apply_time}
+    Verify Get ApplyTime  ${apply_time}
 
