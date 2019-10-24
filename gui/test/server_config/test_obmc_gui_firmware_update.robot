@@ -86,7 +86,7 @@ Upload Firmware using TFTP Server
     Input Text  ${xpath_tftp_filename}  ${firmware_file_name}
     Click Button  ${xpath_download_firmware}
     Sleep  180s
-    Wait Until Page Does Not Contain Element  ${xpath_download_progress}
+    Wait Until Element Is Not Visible  ${xpath_download_progress}
 
     # ${message}=  Handle Alert  timeout=300s
     # Didn't work so commenting out currently.
