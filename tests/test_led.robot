@@ -82,7 +82,7 @@ Verify Rear Power LED With Host Power Off
     [Documentation]  Verify power LED state with host power off.
     [Tags]  Verify_Rear_Power_LED_With_Host_Power_Off
 
-    Initiate Host PowerOff
+    REST Power Off
     ${resp}=  Get System LED State  rear_power
     Should Be Equal  ${resp}  Blink
     ${resp}=  Get System LED State  front_power
@@ -93,7 +93,7 @@ Verify Rear Power LED With Host Power On
     [Documentation]  Verify power LED state with host power on.
     [Tags]  Verify_Rear_Power_LED_With_Host_Power_On
 
-    Initiate Host Boot
+    REST Power On
     ${resp}=  Get System LED State  rear_power
     Should Be Equal  ${resp}  On
     ${resp}=  Get System LED State  front_power
