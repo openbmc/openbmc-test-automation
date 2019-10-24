@@ -107,9 +107,9 @@ Test Turbo Allowed SDR Info
     ${state_ipmi}=  Get SDR Presence Via IPMI  turbo_allowed${SPACE}
 
     Run Keyword If  '${state_ipmi}' == 'Disabled'
-    ...    Should Be True  ${state_rest} == 0
+    ...    Should Be True  ${state_rest} == ${0}
     ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
-    ...    Should Be True  ${state_rest} == 1
+    ...    Should Be True  ${state_rest} == ${1}
 
 
 Test Auto Reboot SDR Info
@@ -124,9 +124,9 @@ Test Auto Reboot SDR Info
     ${state_ipmi}=  Get SDR Presence Via IPMI  auto_reboot${SPACE}
 
     Run Keyword If  '${state_ipmi}' == 'Disabled'
-    ...    Should Be True  ${state_rest} == 0
+    ...    Should Be True  ${state_rest} == ${0}
     ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
-    ...    Should Be True  ${state_rest} == 1
+    ...    Should Be True  ${state_rest} == ${1}
 
 
 Test TPM Enable SDR Info
@@ -141,9 +141,9 @@ Test TPM Enable SDR Info
     ${state_ipmi}=  Get SDR Presence Via IPMI  auto_reboot${SPACE}
 
     Run Keyword If  '${state_ipmi}' == 'Disabled'
-    ...    Should Be True  ${state_rest} == 0
+    ...    Should Be True  ${state_rest} == ${0}
     ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
-    ...    Should Be True  ${state_rest} == 1
+    ...    Should Be True  ${state_rest} == ${1}
 
 
 *** Keywords ***
@@ -255,13 +255,13 @@ Verify SDR
     ${presence_ipmi}=  Get SDR Presence Via IPMI  ${component_name}${SPACE}
 
     Run Keyword If  '${presence_ipmi}' == 'Disabled'
-    ...    Should Be True  ${presence_rest} == 0 and ${functional_rest} == 0
+    ...    Should Be True  ${presence_rest} == ${0} and ${functional_rest} == ${0}
     ...  ELSE IF  '${presence_ipmi}' == 'Presence Detected' or '${presence_ipmi}' == 'Presence detected'
-    ...    Should Be True  ${presence_rest} == 1 and ${functional_rest} == 1
+    ...    Should Be True  ${presence_rest} == ${1} and ${functional_rest} == ${1}
     ...  ELSE IF  '${presence_ipmi}' == 'State Asserted'
-    ...    Should Be True  ${presence_rest} == 1 and ${functional_rest} == 1
+    ...    Should Be True  ${presence_rest} == ${1} and ${functional_rest} == ${1}
     ...  ELSE IF  '${presence_ipmi}' == 'State Deasserted'
-    ...    Should Be True  ${presence_rest} == 1 and ${functional_rest} == 0
+    ...    Should Be True  ${presence_rest} == ${1} and ${functional_rest} == ${0}
     ...  ELSE  Fail  msg=Invalid Presence${presence_ipmi}
 
 
