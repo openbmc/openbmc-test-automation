@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Template to start a simple bash program.  This is designed only for the
-# simplest of programs where all program paramters are positional, there is no
+# simplest of programs where all program parameters are positional, there is no
 # help text, etc.
 
 # Description of argument(s):
