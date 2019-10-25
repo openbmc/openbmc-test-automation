@@ -329,8 +329,6 @@ Verify Watchdog Timedout Event
     Wait Until Keyword Succeeds  2 min  30 sec
     ...  Verify Watchdog EventLog Content
 
-    Redfish Power Off
-
 
 Verify Event Logs Capping
     [Documentation]  Verify event logs capping.
