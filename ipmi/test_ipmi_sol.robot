@@ -125,12 +125,17 @@ Verify SOL During Boot
     [Documentation]  Verify SOL during boot.
     [Tags]  Verify_SOL_During_Boot
 
-    Redfish Power Off
+    Redfish Hard Power Off
     Activate SOL Via IPMI
-    Redfish Power On
+    Initiate Host Boot Via External IPMI  wait=${0}
 
-    Check IPMI SOL Output Content  Welcome to Hostboot
-    Check IPMI SOL Output Content  ISTEP
+    Wait Until Keyword Succeeds  3 mins  15 secs
+    ...  Check IPMI SOL Output Content  Welcome to Hostboot
+
+    Wait Until Keyword Succeeds  3 mins  15 secs
+    ...  Check IPMI SOL Output Content  ISTEP
+
+    Redfish Hard Power Off
 
 
 Verify Deactivate Non Existing SOL
@@ -230,18 +235,17 @@ Verify SOL Setting
 
     Should Be Equal  '${setting_value}'  '${expected_value}'
 
-    # Power on host to check if SOL is working fine with new setting.
-    ${current_state}=  Get Host State Via External IPMI
-    Run Keyword If  '${current_state}' == 'on'
-    ...  Initiate Host PowerOff Via External IPMI
+    Redfish Hard Power Off
+
     Initiate Host Boot Via External IPMI  wait=${0}
 
     Activate SOL Via IPMI
-    Wait Until Keyword Succeeds  10 mins  30 secs
+    Wait Until Keyword Succeeds  3 mins  15 secs
     ...  Check IPMI SOL Output Content  Welcome to Hostboot
 
-    Wait Until Keyword Succeeds  3 mins  30 secs
+    Wait Until Keyword Succeeds  3 mins  15 secs
     ...  Check IPMI SOL Output Content  ISTEP
+
 
 Get SOL Setting
     [Documentation]  Returns status for given SOL setting.
@@ -269,8 +273,8 @@ Restore Default SOL Configuration
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
+    Wait Until Keyword Succeeds  15 sec  5 sec  Restore Default SOL Configuration
     Deactivate SOL Via IPMI
     ${sol_log}=  Stop SOL Console Logging
     Log   ${sol_log}
     FFDC On Test Case Fail
-    Wait Until Keyword Succeeds  15 sec  5 sec  Restore Default SOL Configuration
