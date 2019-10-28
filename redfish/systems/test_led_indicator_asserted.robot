@@ -59,6 +59,26 @@ Verify LED Power Supply Units Asserted At Runtime
     On                  "xyz.openbmc_project.Led.Physical.Action.Off"   Off
 
 
+Verify LED Fans Asserted At Standby
+    [Documentation]  Verify the fans are asserted at standby to lit or off.
+    [Tags]  Verify_LED_Fans_Asserted_At_Standby
+    [Template]  Set and Verify Fan LED Indicators
+
+    # pre_req_state     asserted                                        expected_indicator_led
+    Off                 "xyz.openbmc_project.Led.Physical.Action.On"    Lit
+    Off                 "xyz.openbmc_project.Led.Physical.Action.Off"   Off
+
+
+Verify LED Fans Asserted At Runtime
+    [Documentation]  Verify the fans are asserted at runtime to lit or off.
+    [Tags]  Verify_LED_Fans_Asserted_At_Runtime
+    [Template]  Set and Verify Fan LED Indicators
+
+    # pre_req_state     asserted                                        expected_indicator_led
+    On                  "xyz.openbmc_project.Led.Physical.Action.On"    Lit
+    On                  "xyz.openbmc_project.Led.Physical.Action.Off"   Off
+
+
 *** Keywords ***
 
 Set and Verify Lamp LED Indicator
@@ -137,6 +157,42 @@ Verify Indicator LEDs
     Rprint Vars  power_supplies
     FOR  ${power_supply_leds}  IN  @{power_supplies}
         Valid Value  power_supply_leds['IndicatorLED']  [${expected_indicator_led}]
+    END
+
+
+Set and Verify Fan LED Indicators
+    [Documentation]  Verify the indicator LED for the fans are asserted.
+    [Arguments]  ${pre_req_state}  ${asserted}  ${expected_indicator_led}
+
+    # Description of Arguments(s):
+    # pre_req_state           The pre-requisite state of the host to perform the test (e.g. "On")
+    # asserted                The assert property that sets the value (e.g. "xyz.openbmc_project.Led.Physical.Action.On")
+    # expected_indicator_led  The expected value of the IndicatorLED attribute for all the fans are initiated (e.g. "Lit")
+
+    Run Key U  Redfish Power ${pre_req_state} \ stack_mode=skip \ quiet=1
+    Redfish.Login
+
+    # Put all the fan LEDs On/Off to check all are asserted
+    Redfish.Put  ${LED_PHYSICAL_FAN0_URI}attr/State  body={"data":${asserted}}
+    Redfish.Put  ${LED_PHYSICAL_FAN2_URI}attr/State  body={"data":${asserted}}
+    Redfish.Put  ${LED_PHYSICAL_FAN3_URI}attr/State  body={"data":${asserted}}
+
+    # Example output:
+    # fans:
+    #   [0]:
+    #     [@odata.id]:                                  /redfish/v1/Chassis/chassis/Thermal#/Fans/0
+    #     [@odata.type]:                                #Thermal.v1_3_0.Fan
+    #     [IndicatorLED]:                               Lit
+    #     [MemberId]:                                   fan0_0
+    #     [Name]:                                       fan0 0
+    #     [Status]:
+    #       [Health]:                                   OK
+    #       [State]:                                    Enabled
+
+    ${fans}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_THERMAL_URI}  Fans
+    Rprint Vars  fans
+    FOR  ${fan_leds}  IN  @{fans}
+        Valid Value  fan_leds['IndicatorLED']  [${expected_indicator_led}]
     END
 
 
