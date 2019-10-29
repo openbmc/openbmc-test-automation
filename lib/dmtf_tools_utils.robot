@@ -8,6 +8,7 @@ Library         gen_cmd.py
 
 # ignore_err controls Shell Cmd behavior.
 ${ignore_err}     ${0}
+${stable_branch}  master
 
 *** Keywords ***
 
@@ -19,7 +20,7 @@ Download DMTF Tool
     # rsv_dir_path    Directory path for rsv tool (e.g. "Redfish-Service-Validator").
     # rsv_github_url  Github URL link(e.g "https://github.com/DMTF/Redfish-Service-Validator").
 
-    ${rc}  ${output}=  Shell Cmd  rm -rf ${rsv_dir_path} ; git clone ${rsv_github_url} ${rsv_dir_path}
+    ${rc}  ${output}=  Shell Cmd  rm -rf ${rsv_dir_path} ; git clone --branch ${stable_branch} ${rsv_github_url} ${rsv_dir_path}
 
 
 Run DMTF Tool
