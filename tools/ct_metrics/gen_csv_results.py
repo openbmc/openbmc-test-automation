@@ -13,7 +13,7 @@ import csv
 import robot.errors
 import re
 import stat
-from datetime import datetime
+import datetime
 from robot.api import ExecutionResult
 from robot.result.visitor import ResultVisitor
 from xml.etree import ElementTree
@@ -235,7 +235,7 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level,
 
     # Generate CSV file onto the path with current time stamp
     l_base_dir = csv_dir_path
-    l_timestamp = datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S")
+    l_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S")
     # Example: 2017-02-20-08-47-22_Witherspoon.csv
     l_csvfile = l_base_dir + l_timestamp + "_" + l_platform_type + ".csv"
 
@@ -288,7 +288,7 @@ def xml_to_csv_time(xml_datetime):
     """
 
     # 20170206 05:05:19.342
-    l_str = datetime.strptime(xml_datetime, "%Y%m%d %H:%M:%S.%f")
+    l_str = datetime.datetime.strptime(xml_datetime, "%Y%m%d %H:%M:%S.%f")
     # 2017-02-06-05-05-19
     l_str = l_str.strftime("%Y-%m-%d-%H-%M-%S")
     return str(l_str)
