@@ -74,6 +74,12 @@ class resource_variables():
     # xpath for sub main menu.
     xpath_select_server_power_operations = "//a[@href='#/server-control/power-operations']"
     xpath_select_snmp_settings = "//a[@href='#/configuration/snmp']"
+    xpath_select_manage_power_usage = "//a[@href='#/server-control/power-usage']"
+    xpath_select_virtual_media = "//a[@href='#/server-control/virtual-media']"
+    xpath_select_sol_console = "//a[@href='#/server-control/remote-console']"
+    xpath_select_reboot_bmc = "//a[@href='#/server-control/bmc-reboot']"
+    xpath_select_ldap = "//a[@href='#/access-control/ldap']"
+    xpath_select_server_health = "//a[@href='#/server-health/event-log']"
 
     # Power operation elements needed for power on.
     header_wrapper = "3"
@@ -93,7 +99,6 @@ class resource_variables():
     xpath_select_server_power = "//a[@href='#/server-control/power-operations']"
 
     # Server health elements locators.
-    xpath_select_server_health = "//a[@href='#/server-health/event-log']"
     xpath_server_health_text =  \
         "//*[@id='header__wrapper']/div/div[3]/a[2]/span"
     xpath_select_refresh_button = \
