@@ -105,12 +105,7 @@ Get Software Inventory State By Version
 
 Redfish Upload Image And Check Progress State
     [Documentation]  Code update with ApplyTime.
-    [Arguments]  ${apply_time}
 
-    # Description of argument(s):
-    # apply_time     ApplyTime allowed values (e.g. "OnReset", "Immediate").
-
-    Set ApplyTime  policy=${apply_Time}
     Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
 
     ${image_id}=  Get Latest Image ID
@@ -118,7 +113,6 @@ Redfish Upload Image And Check Progress State
 
     Check Image Update Progress State
     ...  match_state='Disabled', 'Updating'  image_id=${image_id}
-
     # Wait a few seconds to check if the update progress started.
     Sleep  5s
     Check Image Update Progress State

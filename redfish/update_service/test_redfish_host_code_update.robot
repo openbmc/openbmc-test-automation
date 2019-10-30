@@ -68,6 +68,7 @@ Redfish Update Firmware
     # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
     Redfish.Login
-    Redfish Upload Image And Check Progress State  ${apply_time}
+    Set ApplyTime  policy=${apply_Time}
+    Redfish Upload Image And Check Progress State
     Poweron Host And Verify Host Image  ${apply_time}
 
