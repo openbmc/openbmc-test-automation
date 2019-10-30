@@ -81,6 +81,12 @@ parser.add_argument(
     default="FVT")
 
 parser.add_argument(
+    '--subsystem',
+    help='Name of the subsystem, e.g. "OPENBMC" etc.\
+          This parameter is optional.',
+    default="OPENBMC")
+
+parser.add_argument(
     '--processor',
     help='Name of processor, e.g. "P9". This parameter is optional.',
     default="OPENPOWER")
@@ -188,7 +194,6 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level,
     l_csvlist = []
 
     # Default Test data
-    l_subsys = 'OPENBMC'
     l_test_type = test_phase
 
     l_pse_rel = 'Master'
@@ -259,7 +264,7 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level,
         # Data Sequence: test_start,test_end,subsys,test_type,
         #                test_result,test_name,pse_rel,driver,
         #                env,proc,platform_type,test_func_area,
-        l_data = [l_stime, l_etime, l_subsys, l_test_type, l_test_result,
+        l_data = [l_stime, l_etime, subsystem, l_test_type, l_test_result,
                   l_test_name, l_pse_rel, l_driver, l_env, l_proc,
                   l_platform_type, l_func_area]
         l_csvlist.append(l_data)
