@@ -80,6 +80,7 @@ class resource_variables():
     xpath_select_reboot_bmc = "//a[@href='#/server-control/bmc-reboot']"
     xpath_select_ldap = "//a[@href='#/access-control/ldap']"
     xpath_select_server_health = "//a[@href='#/server-health/event-log']"
+    xpath_select_server_LED = "//a[@href='#/server-control/server-led']"
 
     # Power operation elements needed for power on.
     header_wrapper = "3"
