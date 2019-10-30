@@ -70,7 +70,8 @@ Redfish Update Firmware
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
 
-    Redfish Upload Image And Check Progress State  ${apply_time}
+    Set ApplyTime  policy=${apply_Time}
+    Redfish Upload Image And Check Progress State
     Reboot BMC And Verify BMC Image
     ...  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
 

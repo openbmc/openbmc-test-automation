@@ -78,7 +78,8 @@ Redfish Signed Firmware Update
     ${image_version}=  Get Version Tar  ${image_file_path}
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
-    Redfish Upload Image And Check Progress State  Immediate
+    Set ApplyTime  policy=Immediate
+    Redfish Upload Image And Check Progress State
     ${image_info}=  Get Software Inventory State By Version  ${image_version}
     Run Keyword If  'BMC update' == '${image_info["image_type"]}'
     ...    Reboot BMC And Verify BMC Image  Immediate  start_boot_seconds=${state['epoch_seconds']}
