@@ -81,6 +81,7 @@ class resource_variables():
     xpath_select_ldap = "//a[@href='#/access-control/ldap']"
     xpath_select_server_health = "//a[@href='#/server-health/event-log']"
     xpath_select_server_led = "//a[@href='#/server-control/server-led']"
+    xpath_select_date_time_settings = "//a[@href='#/configuration/date-time']"
 
     # Power operation elements needed for power on.
     header_wrapper = "3"
