@@ -70,6 +70,7 @@ class resource_variables():
     # xpath for main menu.
     xpath_select_server_control = "//button[contains(@class,'btn-control')]"
     xpath_select_server_configuration = "//button[contains(@class,'btn-config')]"
+    xpath_select_access_control = "//button[contains(@class,'btn-access-control')]"
 
     # xpath for sub main menu.
     xpath_select_server_power_operations = "//a[@href='#/server-control/power-operations']"
