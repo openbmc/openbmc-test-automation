@@ -50,6 +50,38 @@ Verify Reboot Button At Power Off
     Element Should Not Be Visible  ${xpath_reboot_button}
 
 
+Verify Power On Button At Power Off
+    [Documentation]  Verify presence of "Power On" button at power off.
+    [Tags]  Verify_Power_On_Button_At_Power_Off
+
+    Test Setup Execution  ${OBMC_PowerOff_state}
+    Element Should Be Visible  ${xpath_power_on_button}
+
+
+Verify System State At Power On
+    [Documentation]  Verify system state at power on.
+    [Tags]  Verify_System_State_At_Power_On
+
+    Test Setup Execution  ${obmc_PowerRunning_state}
+    Element Should Contain  ${xpath_power_indicator_bar}  Running
+
+
+Verify Shutdown Button At Power On
+    [Documentation]  Verify that shutdown button is present at power On.
+    [Tags]  Verify_Shutdown_Button_At_Power_On
+
+    Test Setup Execution  ${obmc_PowerRunning_state}
+    Element Should Be Visible  ${xpath_shutdown_button}
+
+
+Verify Reboot Button At Power On
+    [Documentation]  Verify that reboot button is present at power On.
+    [Tags]  Verify_Reboot_Button_At_Power_On
+
+    Test Setup Execution  ${obmc_PowerRunning_state}
+    Element Should Be Visible  ${xpath_reboot_button}
+
+
 *** Keywords ***
 
 Navigate To Power Operation Page
