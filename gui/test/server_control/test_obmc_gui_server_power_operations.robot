@@ -5,9 +5,7 @@ Documentation   Test OpenBMC GUI "Server power operation" sub-menu of
 
 Resource        ../../lib/resource.robot
 
-Suite Setup     Launch Browser And Login OpenBMC GUI
-Suite Teardown  Close Browser
-Test Setup      Navigate To Power Operation Page
+Test Teardown   Close Browser
 
 
 *** Variables ***
@@ -22,14 +20,15 @@ ${xpath_reboot_button}           //button[contains(text(), "Reboot")]
 Verify System State At Power Off
     [Documentation]  Verify system state at power off.
     [Tags]  Verify_System_State_At_Power_Off
+    [Setup]  Setup For Test Execution  ${OBMC_PowerOff_state}
 
-    Test Setup Execution  ${OBMC_PowerOff_state}
     Element Should Contain  ${xpath_power_indicator_bar}  Off
 
 
 Verify BMC IP In Server Power Operation Page
     [Documentation]  Verify BMC IP in server power operation page.
     [Tags]  Verify_BMC_IP_In_Server_Power_Operation_Page
+    [Setup]  Setup For Test Execution  ${OBMC_PowerOff_state}
 
     Element Should Contain  ${xpath_power_indicator_bar}  ${OPENBMC_HOST}
 
@@ -37,24 +36,61 @@ Verify BMC IP In Server Power Operation Page
 Verify Shutdown Button At Power Off
     [Documentation]  Verify that shutdown button is not present at power Off.
     [Tags]  Verify_Shutdown_Button_At_Power_Off
+    [Setup]  Setup For Test Execution  ${OBMC_PowerOff_state}
 
-    Test Setup Execution  ${OBMC_PowerOff_state}
     Element Should Not Be Visible  ${xpath_shutdown_button}
 
 
 Verify Reboot Button At Power Off
     [Documentation]  Verify that reboot button is not present at power Off.
     [Tags]  Verify_Reboot_Button_At_Power_Off
+    [Setup]  Setup For Test Execution  ${OBMC_PowerOff_state}
 
-    Test Setup Execution  ${OBMC_PowerOff_state}
     Element Should Not Be Visible  ${xpath_reboot_button}
+
+
+Verify Power On Button At Power Off
+    [Documentation]  Verify presence of "Power On" button at power off.
+    [Tags]  Verify_Power_On_Button_At_Power_Off
+    [Setup]  Setup For Test Execution  ${OBMC_PowerOff_state}
+
+    Element Should Be Visible  ${xpath_power_on_button}
+
+
+Verify System State At Power On
+    [Documentation]  Verify system state at power on.
+    [Tags]  Verify_System_State_At_Power_On
+    [Setup]  Setup For Test Execution  ${obmc_PowerRunning_state}
+
+    Element Should Contain  ${xpath_power_indicator_bar}  Running
+
+
+Verify Shutdown Button At Power On
+    [Documentation]  Verify that shutdown button is present at power on.
+    [Tags]  Verify_Shutdown_Button_At_Power_On
+    [Setup]  Setup For Test Execution  ${obmc_PowerRunning_state}
+
+    Element Should Be Visible  ${xpath_shutdown_button}
+
+
+Verify Reboot Button At Power On
+    [Documentation]  Verify that reboot button is present at power on.
+    [Tags]  Verify_Reboot_Button_At_Power_On
+    [Setup]  Setup For Test Execution  ${obmc_PowerRunning_state}
+
+    Element Should Be Visible  ${xpath_reboot_button}
 
 
 *** Keywords ***
 
-Navigate To Power Operation Page
-   [Documentation]  Navigate to server power operation page.
+Setup For Test Execution
+    [Documentation]  Do setup tasks for every test case.
+    [Arguments]  ${obmc_required_state}
 
+    # Description of argument(s):
+    # obmc_required_state  The OpenBMC state which is required for the test.
+
+    Test Setup Execution  ${obmc_required_state}
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Click Element  ${xpath_select_server_control}
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
