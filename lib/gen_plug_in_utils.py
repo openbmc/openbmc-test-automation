@@ -129,7 +129,7 @@ def return_plug_vars(general=True,
             non_string_defaults[var_name] = type(default_value)
         os.environ[var_name] = os.environ.get(var_name, str(default_value))
         if os.environ[var_name] == "":
-            os.environ[var_name] = default_value
+            os.environ[var_name] = str(default_value)
 
     plug_var_dict = \
         collections.OrderedDict(sorted({k: v for (k, v) in
