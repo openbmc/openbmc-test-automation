@@ -1281,7 +1281,7 @@ func_line_style_std = None
 func_line_style_short = 1
 
 
-def sprint_func_line(stack_frame, style=None):
+def sprint_func_line(stack_frame, style=None, max_width=160):
     r"""
     For the given stack_frame, return a formatted string containing the function name and all its arguments.
 
@@ -1342,6 +1342,8 @@ def sprint_func_line(stack_frame, style=None):
         # Now we need to print this in a nicely-wrapped way.
         func_and_args = func_name + args_str
 
+    if len(func_and_args) > max_width:
+        func_and_args = func_and_args[0:max_width] + "..."
     return func_and_args
 
 
@@ -1432,7 +1434,7 @@ def sprint_executing(stack_frame_ix=None, style=None):
     work_around_inspect_stack_cwd_failure()
     stack_frame = inspect.stack()[stack_frame_ix]
 
-    func_and_args = sprint_func_line(stack_frame, style)
+    func_and_args = sprint_func_line(stack_frame, style, max_width=160 - (dft_col1_width + 11))
 
     return sprint_time() + "Executing: " + func_and_args + "\n"
 
