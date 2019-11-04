@@ -141,15 +141,6 @@ Test Setup Execution
     Run Keyword If  '${obmc_test_setup_state}' == '${obmc_PowerOff_state}'
     ...  Run Keywords  Redfish.Login  AND  Redfish Power Off  AND  Redfish.Logout
 
-Power Off OpenBMC
-    [Documentation]  Power off the OBMC system.
-
-    Log To Console  Power Off OpenBMC...
-    Click Element  ${xpath_select_server_power}
-    Execute JavaScript  window.scrollTo(0, document.body.scrollHeight)
-    Click Button  ${xpath_select_button_orderly_shutdown}
-    Click Yes Button  ${xpath_select_button_orderly_shutdown_yes}
-    Wait OpenBMC To Become Stable  ${obmc_off_state}
 
 Power On OpenBMC
     [Documentation]  Power on the OBMC system.
@@ -249,24 +240,6 @@ Controller Server Power Click Button
     Page Should Contain Button  ${controller_element}
     Click Element  ${controller_element}
 
-Controller Power Operations Confirmation Click Button
-    [Documentation]  Click Common Power Operations Confirmation.
-    [Arguments]  ${main_element}  ${sub_element}  ${confirm_msg_elt}  ${confirmation}
-
-    # Description of argument(s):
-    # main_element     Server power operations element
-    #                  (e.g. power_operations.)
-    # sub_element      Server power operations sub element
-    #                  (e.g. warm_boot, shut_down.)
-    # confirm_msg_elt  Server power operations confirm message element
-    #                  (e.g. confirm_msg.)
-    # confirmation     Server power operations confirmation
-    #                  (e.g. yes.)
-
-    ${element_path}=  Catenate  //*[@id='power-operations']/div[${main_element}]/div[${sub_element}]
-    ...  /confirm/div/div[${confirm_msg_elt}]/button[${confirmation}]
-    Click Element  ${element_path.replace(" ","")}
-
 
 GUI Power On
     [Documentation]  Power on the host using GUI.
@@ -283,55 +256,6 @@ Verify Display Content
 
     Page Should Contain  ${display_text}
 
-Warm Reboot openBMC
-    [Documentation]  Warm reboot the OBMC system.
-
-    Log To Console  Warm Reboting the OpenBMC...
-    Click Element  ${xpath_select_button_warm_reboot}
-    Verify Warning Message Display Text  ${xpath_operation_warning_message}
-    ...  ${text_warm_reboot_warning_message}
-    Click Yes Button  ${xpath_select_button_warm_reboot_yes}
-    Wait OpenBMC To Become Stable  ${obmc_running_state}
-
-Click No Button
-    [Documentation]  Click the 'No' button.
-    [Arguments]  ${xpath_button_no}
-
-    # Description of argument(s):
-    # xpath_button_no      The xpath of 'No' button.
-
-    Click Button  ${xpath_button_no}
-
-Cold Reboot openBMC
-    [Documentation]  Cold reboot the OBMC system.
-
-    Log To Console  Cold Reboting the OpenBMC...
-    Click Element  ${xpath_select_button_cold_reboot}
-    Verify Warning Message Display Text  ${xpath_operation_warning_message}
-    ...  ${text_cold_reboot_warning_message}
-    Click Yes Button  ${xpath_select_button_cold_reboot_yes}
-    Wait OpenBMC To Become Stable  ${obmc_running_state}
-
-Orderly Shutdown OpenBMC
-    [Documentation]  Do orderly shutdown the OBMC system.
-
-    Log To Console  Orderly Shutdown the OpenBMC...
-    Click Element  ${xpath_select_button_orderly_shutdown}
-    Verify Warning Message Display Text  ${xpath_operation_warning_message}
-    ...  ${text_orderly_shutdown_warning_message}
-    Click Yes Button  ${xpath_select_button_orderly_shutdown_yes}
-    Wait OpenBMC To Become Stable  ${obmc_off_state}
-
-Immediate Shutdown openBMC
-    [Documentation]  Do immediate shutdown the OBMC system.
-
-    Log To Console  Immediate Shutdown the OpenBMC...
-    Click Element  ${xpath_select_button_immediate_shutdown}
-    Verify Warning Message Display Text
-    ...  ${xpath_operation_warning_message}
-    ...  ${text_immediate_shutdown_warning_message}
-    Click Yes Button  ${xpath_select_button_immediate_shutdown_yes}
-    Wait OpenBMC To Become Stable  ${obmc_off_state}
 
 Verify Warning Message Display Text
     [Documentation]  Verify the warning message display text.
