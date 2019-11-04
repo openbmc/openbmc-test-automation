@@ -208,6 +208,10 @@ def gen_exit_function(signal_number=0,
     gp.dprint_executing()
     gp.dprint_var(signal_number)
 
+    # ignore_err influences the way shell_cmd processes errors.  Since we're doing exit processing, we don't
+    # want to stop the program due to a shell_cmd failure.
+    ignore_err = 1
+
     # Call the main module's exit_function if it is defined.
     exit_function = getattr(module, "exit_function", None)
     if exit_function:
