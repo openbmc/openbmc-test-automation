@@ -20,6 +20,7 @@ Documentation  Secure boot related test cases.
 # WOFDATA : Workload Optimized Frequency Data
 # MEMD  : Memory VPD
 
+Resource          ../../lib/resource.robot
 Resource          ../../lib/utils.robot
 Resource          ../../lib/state_manager.robot
 Resource          ../../lib/boot_utils.robot
@@ -27,6 +28,8 @@ Resource          ../../lib/secureboot/secureboot.robot
 Resource          ../../lib/open_power_utils.robot
 Resource          ../../lib/logging_utils.robot
 Resource          ../../lib/openbmc_ffdc_methods.robot
+Resource          ../../lib/openbmc_ffdc.robot
+Resource          ../../lib/openbmc_ffdc_utils.robot
 
 Library           ../../lib/gen_misc.py
 Library           ../../lib/secureboot/secureboot.py
@@ -40,7 +43,7 @@ Test Teardown     Test Teardown Execution
 ${security_access_bit_mask}  ${0xC000000000000000}
 # TODO: will enable this in next commit
 #${pnor_corruption_rc}        SECUREBOOT::RC_ROM_VERIFY
-${pnor_corruption_rc}        0x1E07
+${pnor_corruption_rc}        1E07
 ${bootkernel_corruption_rc}  log=0xffffffffffff8160
 ${bmc_image_dir_path}        /usr/local/share/pnor
 ${bmc_guard_part_path}       /var/lib/phosphor-software-manager/pnor/prsv/GUARD
@@ -206,7 +209,7 @@ Violate Secure Boot Using Corrupt Image
     Run Keyword And Ignore Error  scp.Put File
     ...  ${ENV_SB_CORRUPTED_BIN_PATH}/${partition}  ${bmc_image_dir_path}
 
-    ${error_log_path}=  Catenate  ${SB_LOG_DIR_PATH}/partition-corruption
+    ${error_log_path}=  Catenate  ${SB_LOG_DIR_PATH}
     Create Directory  ${error_log_path}
 
     Set Global Variable  ${error_log_path}
@@ -216,24 +219,17 @@ Violate Secure Boot Using Corrupt Image
     BMC Execute Command  /usr/bin/obmcutil poweron
     Wait Until Keyword Succeeds  15 min  15 sec  Error Logs Should Exist
 
-    #TODO: This will be enabled little later as more tesing required
-    #Wait Until Keyword Succeeds  5 min  5 sec
-    #...  Collect Error Logs and Verify SRC  ${error_rc}  ${error_log_path}
-
+    # Check for eSEL.
     # Expected behavior is that the error occurs early in the boot process,
     # therefore, no entry in the error log and nothing to decode.
     # The 1E07 error is written to PNOR & then goes into Quiesced state.
     # On the next valid boot, the error log will be sent to BMC &
-    # seen on SOL console
-    Run Keyword If  '${partition}' in '${NON_HB_PART_LIST}'
-    # Verify the RC 0x1E07 in the SOL logs.
-    ...    Get And Verify Partition Corruption  ${partition}  ${sol_log_file_path}
-    ...  ELSE IF  '${partition}' in '${HB_PART_LIST}'
-    ...    Log To Console  ${partition} corrupted, Going to quiesced state.
-    # If the partition corrupted is BOOTKERNEL then, host will not reach quisced.
-    # It will keep rebooting in loop for ever.
-    ...  ELSE IF  '${partition}' == 'BOOTKERNEL'
-    ...    Log To Console  ${partition} corrupted, It will keep rebooting in loop.
+    # seen on SOL console.
+    # We won't see any ESEL's for HBB, HBD, HBI or BOOTKERNEL because
+    # Hostboot has no mechanism to send an eSEL when it is dying.
+    Run Keyword If  '${partition}' not in ['HBB', 'HBD', 'HBI', 'BOOTKERNEL']
+    ...  Wait Until Keyword Succeeds  5 min  5 sec
+    ...  Collect Error Logs and Verify SRC  ${error_rc}  ${error_log_path}
 
     # Remove the file from /usr/local/share/pnor/.
     BMC Execute Command  rm -rf ${bmc_image_dir_path}*
@@ -246,11 +242,11 @@ Violate Secure Boot Using Corrupt Image
 
     # We will retry boot with corrupted partition removed
     # SOL console should show previous boot fail message (1E07) on current boot
-    # HBB corruption will never get far enough to log into PNOR.
+    # HBB, HBD or HBI corruption will never get far enough to log into PNOR.
     # so, it should be removed from consideration for this check
-    Run Keyword If  '${partition}' == 'HBB'
+    Run Keyword If  '${partition}' in ['HBB', 'HBD', 'HBI']
     ...  Log To Console  No more action on ${partition} corruption required.
-    ...  ELSE IF  '${partition}' in '[HBD, HBI, HBRT, HBBL]'
+    ...  ELSE IF  '${partition}' in ['HBRT']
     ...  Run Keywords
     ...    REST Power On  stack_mode=skip  quiet=1  AND
     ...    Wait Until Keyword Succeeds  5 min  5 sec  Error Logs Should Exist  AND
@@ -265,7 +261,7 @@ Collect Error Logs and Verify SRC
     # error_rc  Error log signature description.
     # log_prefix Log path prefix.
 
-    Error Logs Should Not Exist
+    Error Logs Should Exist
 
     Collect eSEL Log  ${log_prefix}
     ${error_log_file_path}=  Catenate  ${log_prefix}esel.txt
@@ -336,7 +332,7 @@ Get And Verify Partition Corruption
 
     # Verify the RC 0x1E07 from sol output".
     Should Be Equal As Strings
-    ...  ${corruption_rc_str}  ${pnor_corruption_rc}  ignore_case=True
+    ...  ${corruption_rc_str}  0x${pnor_corruption_rc}  ignore_case=True
     ...  msg=SB violation due to PNOR partition corruption not reported. values=False
 
 
@@ -386,8 +382,9 @@ Suite Setup Execution
 
     # All the corrupted binaries will go in here
     # Run this as input param
-    Should Not Be Empty  ${ENV_SB_CORRUPTED_BIN_PATH}
-    Set Environment Variable  PATH  %{PATH}:${ENV_SB_CORRUPTED_BIN_PATH}
+    Valid Path  ENV_SB_CORRUPTED_BIN_PATH
+    Valid Path  ESEL_BIN_PATH
+    Set Environment Variable  PATH  %{PATH}:${ENV_SB_CORRUPTED_BIN_PATH}:${ESEL_BIN_PATH}
 
 
 Test Setup Execution
