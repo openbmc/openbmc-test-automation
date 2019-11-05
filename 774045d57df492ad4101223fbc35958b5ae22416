@@ -16,6 +16,24 @@
       "revId": "774045d57df492ad4101223fbc35958b5ae22416",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58e0ff38_a5c9c315",
+        "filename": "extended/code_update/bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-11-05T13:28:48Z",
+      "side": 1,
+      "message": "I am not able to understand how during code update content of files likes host.conf ,hosts and hostname will change. Could you explain it please.",
+      "parentUuid": "d22a7b7d_a2159c12",
+      "revId": "774045d57df492ad4101223fbc35958b5ae22416",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
