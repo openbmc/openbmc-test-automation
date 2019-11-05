@@ -166,6 +166,30 @@ Verify GetDomainName
      Valid Value  eth0_domain_name  ['${tool_domain_name}']
 
 
+Verify Add VLAN
+     [Documentation]  Verify add vlan via openbmctool.
+     [Tags]  Verify_Add_VLAN
+
+     Network  addVLAN  I=eth0  n=35
+     ${vlan_id}=  Catenate  SEPARATOR=/  VLANs  eth0_35
+     ${eth0_vlan}=  Redfish.Get Properties  ${REDFISH_NW_ETH0_URI}${vlan_id}
+     Valid Value  eth0_vlan['Id']  ['eth0_35']
+
+
+Verify Delete VLAN
+     [Documentation]  Verify delete vlan via openbmctool.
+     [Tags]  Verify_Delete_VLAN
+
+     Network  addVLAN  I=eth0  n=35
+     ${vlan_id}=  Catenate  SEPARATOR=/  VLANs  eth0_35
+     ${eth0_vlan}=  Redfish.Get Properties  ${REDFISH_NW_ETH0_URI}${vlan_id}
+     Valid Value  eth0_vlan['Id']  ['eth0_35']
+     Network  deleteVLAN  I=eth0_35
+     ${status}=  Run Keyword And Return Status
+     ...  Redfish.Get Properties${REDFISH_NW_ETH0_URI}${vlan_id}
+     Should Be Equal  ${status}  ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
