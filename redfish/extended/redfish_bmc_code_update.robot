@@ -44,11 +44,9 @@ Suite Setup Execution
     [Documentation]  Do the suite setup.
 
     Redfish.Login
-
     # Delete BMC dump and Error logs.
     Delete All BMC Dump
     Redfish Purge Event Log
-
     # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
 
@@ -128,8 +126,8 @@ Redfish Update Firmware
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
 
-    Set ApplyTime  policy=Immediate
+    Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
     Redfish Upload Image And Check Progress State
     Reboot BMC And Verify BMC Image
-    ...  Immediate  start_boot_seconds=${state['epoch_seconds']}
+    ...  OnReset  start_boot_seconds=${state['epoch_seconds']}
 
