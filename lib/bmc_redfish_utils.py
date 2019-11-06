@@ -167,7 +167,8 @@ class bmc_redfish_utils(object):
             self.walk_nested_dict(self._rest_response_.dict)
         return list(sorted(self.__pending_enumeration))
 
-    def enumerate_request(self, resource_path, return_json=1):
+    def enumerate_request(self, resource_path, return_json=1,
+                          report_dead_resources=False):
         r"""
         Perform a GET enumerate request and return available resource paths.
 
@@ -177,6 +178,7 @@ class bmc_redfish_utils(object):
         return_json                 Indicates whether the result should be
                                     returned as a json string or as a
                                     dictionary.
+        report_dead_resources       Check if URI resource is valid.
         """
 
         gp.qprint_executing(style=gp.func_line_style_short)
@@ -198,6 +200,9 @@ class bmc_redfish_utils(object):
         # Variable having resources for which enumeration is completed.
         enumerated_resources = set()
 
+        if report_dead_resources:
+            dead_resources = {}
+
         resources_to_be_enumerated = (resource_path,)
 
         while resources_to_be_enumerated:
@@ -213,6 +218,13 @@ class bmc_redfish_utils(object):
                 # Enumeration is done for available resources ignoring the
                 # ones for which response is not obtained.
                 if self._rest_response_.status != 200:
+                    if report_dead_resources:
+                        try:
+                            dead_resources[self._rest_response_.status].append(
+                                resource)
+                        except KeyError:
+                            dead_resources[self._rest_response_.status] = \
+                                [resource]
                     continue
 
                 self.walk_nested_dict(self._rest_response_.dict, url=resource)
@@ -220,6 +232,9 @@ class bmc_redfish_utils(object):
             enumerated_resources.update(set(resources_to_be_enumerated))
             resources_to_be_enumerated = \
                 tuple(self.__pending_enumeration - enumerated_resources)
+
+        if report_dead_resources:
+            gp.print_var(dead_resources)
 
         if return_json:
             return json.dumps(self.__result, sort_keys=True,
