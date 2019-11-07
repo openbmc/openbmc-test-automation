@@ -140,16 +140,6 @@ Verify Pdbg Unrecoverable Callout Handling For L2FIR During Host Boot
     Inject Error At HOST Boot Path  ${value[0]}  ${value[1]}
     ...  ${value[2]}  ${err_log_path}
 
-Verify Pdbg Unrecoverable Callout Handling For NXDMAENG During Host Boot
-    [Documentation]  Verify unrecoverable callout handling for NXDMAENG
-    ...              using pdbg tool during Host Boot path.
-    [Tags]  Verify_Pdbg_Unrecoverable_Callout_Handling_For_NXDMAENG_During_Host_Boot
-
-    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_UE
-    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_ue
-    Inject Error At HOST Boot Path  ${value[0]}  ${value[1]}
-    ...  ${value[2]}  ${err_log_path}
-
 Verify Pdbg Unrecoverable Callout Handling For CXA During Host Boot
     [Documentation]  Verify unrecoverable callout handling for CXAFIR
     ...              using pdbg tool during Host Boot path.
