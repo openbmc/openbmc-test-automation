@@ -152,7 +152,7 @@ Dump Should Not Exist
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
-Check Existence of BMC Dump file
+Check Existence Of BMC Dump File
     [Documentation]  Verify existence of BMC dump file.
     [Arguments]  ${dump_id}
 
