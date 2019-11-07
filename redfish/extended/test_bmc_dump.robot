@@ -30,7 +30,7 @@ Verify User Initiated BMC Dump When Powered Off
 
     Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated Dump
-    Check Existence of BMC Dump file  ${dump_id}
+    Check Existence Of BMC Dump File  ${dump_id}
 
 
 Verify Dump Persistency On Service Restart
@@ -46,7 +46,7 @@ Verify Dump Persistency On Service Restart
 
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    Check Existence of BMC Dump file  ${dump_id}
+    Check Existence Of BMC Dump File  ${dump_id}
 
 
 Verify Dump Persistency On Reset
@@ -58,7 +58,7 @@ Verify Dump Persistency On Reset
     OBMC Reboot (off)
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    Check Existence of BMC Dump file  ${dump_id}
+    Check Existence Of BMC Dump File  ${dump_id}
 
 
 Delete User Initiated BMC Dump And Verify
@@ -66,7 +66,7 @@ Delete User Initiated BMC Dump And Verify
     [Tags]  Delete_User_Initiated_Dump_And_Verify
 
     ${dump_id}=  Create User Initiated Dump
-    Check Existence of BMC Dump file  ${dump_id}
+    Check Existence Of BMC Dump File  ${dump_id}
 
     Delete BMC Dump  ${dump_id}
 
@@ -80,7 +80,7 @@ Verify User Initiated Dump Size
     ${dump_size}=  Read Attribute  ${DUMP_ENTRY_URI}${dump_id}  Size
     # Max size for dump is 200k = 200x1024
     Should Be True  0 < ${dump_size} < 204800
-    Check Existence of BMC Dump file  ${dump_id}
+    Check Existence Of BMC Dump File  ${dump_id}
 
 
 Create Two User Initiated Dump And Delete One
@@ -97,7 +97,7 @@ Create Two User Initiated Dump And Delete One
 
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}${dump_id_2}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    Check Existence of BMC Dump file  ${dump_id_2}
+    Check Existence Of BMC Dump File  ${dump_id_2}
 
 
 Create And Delete BMC Dump Multiple Times
@@ -162,7 +162,7 @@ Dump Out Of Space Test
     :FOR  ${n}  IN RANGE  ${too_many_dumps}
     \  ${dump_id}=  Create User Initiated Dump  check_out_of_space=${True}
     \  Exit For Loop If  '${dump_id}' == '${EMPTY}'
-    \  Check Existence of BMC Dump file  ${dump_id}
+    \  Check Existence Of BMC Dump File  ${dump_id}
 
     Run Keyword If  '${dump_id}' != '${EMPTY}'  Fail
     ...  msg=Did not run out of dump space as expected.
