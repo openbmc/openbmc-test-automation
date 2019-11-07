@@ -148,7 +148,7 @@ Disable CPU States Through HOST
     # Disable state for all cpus.
     :FOR  ${count}  IN RANGE  ${no_of_states}
     \  ${cmd}=  Catenate  SEPARATOR=  for file_path in /sys/devices/system/cpu/
-     ...  cpu*/cpuidle/state${i}/disable; do echo 1 > $file_path; done
+     ...  cpu*/cpuidle/state${count}/disable; do echo 1 > $file_path; done
     \  ${output}  ${stderr}  ${rc}=  Run Keyword  OS Execute Command  ${cmd}
 
 Is Opal-PRD Service Enabled
