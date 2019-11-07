@@ -161,15 +161,6 @@ Verify Pdbg Recoverable Callout Handling For NXDMAENG With Threshold 32
     Inject Recoverable Error With Threshold Limit
     ...  BMC  ${value[0]}  ${value[1]}  32  ${value[2]}  ${err_log_path}
 
-Verify Pdbg Unrecoverable Callout Handling For NXDMAENG
-    [Documentation]  Verify unrecoverable callout handling for NXDMAENG
-    ...              with pdbg tool.
-    [Tags]  Verify_Pdbg_Unrecoverable_Callout_Handling_For_NXDMAENG
-
-    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  NX_UE
-    ${err_log_path}=  Catenate  ${RAS_LOG_DIR_PATH}nxfir_ue
-    Inject Unrecoverable Error  BMC
-    ...  ${value[0]}  ${value[1]}  1  ${value[2]}  ${err_log_path}
 
 #  L2FIR related error injection.
 
