@@ -13,6 +13,8 @@ Documentation  Websocket functionality test.
 Resource             ../../lib/esel_utils.robot
 Resource             ../../lib/bmc_redfish_resource.robot
 Resource             ../../lib/logging_utils.robot
+Resource             ../../lib/dump_utils.robot
+Resource             ../../syslib/utils_os.robot
 Library              ../../lib/gen_cmd.py
 Library              OperatingSystem
 
@@ -26,7 +28,8 @@ Test Teardown        Test Teardown Execution
 
 ${monitor_pgm}          websocket_monitor.py
 ${monitor_file}         websocket_monitor_out.txt
-${expected_string}      eSEL received over websocket interface
+${esel_received}        eSEL received over websocket interface
+${dump_received}        Dump notification received over websocket interface
 ${min_number_chars}     22
 ${monitor_cmd}          ${monitor_pgm} ${OPENBMC_HOST} --openbmc_username ${OPENBMC_USERNAME}
 
@@ -34,15 +37,18 @@ ${monitor_cmd}          ${monitor_pgm} ${OPENBMC_HOST} --openbmc_username ${OPEN
 *** Test Cases ***
 
 
-Test BMC Websocket Interface
-    [Documentation]  Verify eSELs are seen over the websocket interface.
-    [Tags]  Test_BMC_Websocket_Interface
+Test BMC Websocket ESEL Interface
+    [Documentation]  Verify eSELs are reported over the websocket interface.
+    [Tags]  Test_BMC_Websocket_ESEL_Interface
+
+    # Check that the ipmitool is available. That tool is used to create an eSEL.
+    Tool Exist  ipmitool
 
     # Spawn the websocket monitor program and then generate an eSEL.
     # The monitor should asynchronously receive the eSEL through the
     # websocket interface and report this fact to standard output.
 
-    Start Websocket Monitor
+    Start Websocket Monitor  logging
 
     ${initial_esel_count}=  Get Number Of Event Logs
 
@@ -54,7 +60,7 @@ Test BMC Websocket Interface
     Run Keyword If  ${initial_esel_count} == ${current_esel_count}
     ...  Fail  msg=System failed to generate eSEL upon request.
 
-    ${line}=  Grep File  ${monitor_file}  ${expected_string}
+    ${line}=  Grep File  ${monitor_file}  ${esel_received}
     # Typical monitor_file contents:
     # --------------- ON_MESSAGE:begin --------------------
     # {"event":"PropertiesChanged","interface":"xyz.openbmc_project.Logging.
@@ -66,18 +72,47 @@ Test BMC Websocket Interface
     ...  msg=No eSEL notification from websocket_monitor.py.
 
 
+Test BMC Websocket Dump Interface
+    [Documentation]  Verify dumps are reported over the websocket interface.
+    [Tags]  Test_BMC_Websocket_Dump_Interface
+
+    Delete All BMC Dump
+    Start Websocket Monitor  dump
+    ${dump_id}=  Create User Initiated Dump
+    Check Existence Of BMC Dump File  ${dump_id}
+
+    # Check that the monitor received notification of the dump.
+    ${line}=  Grep File  ${monitor_file}  ${dump_received}
+    # Typical monitor_file contents:
+    # --------------- ON_MESSAGE:begin --------------------
+    # {"event":"PropertiesChanged","interface":"xyz.openbmc_project.Dump.
+    # Entry","path":"/xyz/openbmc_project/dump/entry/1","properties":{"Size":157888}}
+    # Dump notification received over websocket interface.
+
+    ${num_chars}=  Get Length  ${line}
+    Run Keyword If  ${num_chars} < ${min_number_chars}  Fail
+    ...  msg=No dump notification from websocket_monitor.py.
+
+
 *** Keywords ***
 
 
 Start Websocket Monitor
     [Documentation]  Fork the monitor to run in the background.
+    [Arguments]  ${monitor_type}
+
+    # Description of Argument(s):
+    # monitor_type  The type of websocket notifications to monitor,
+    #               either "logging" or "dump".
 
     # Delete the previous output file, if any.
     Remove File  ${monitor_file}
 
+    ${command}=  Catenate  ${monitor_cmd} --openbmc_password ${OPENBMC_PASSWORD}
+    ...   --monitor_type ${monitor_type} 1>${monitor_file} 2>&1
+
     # Start the monitor. Fork so its a parallel task.
-    Shell Cmd
-    ...  ${monitor_cmd} --openbmc_password ${OPENBMC_PASSWORD} 1>${monitor_file} 2>&1  fork=${1}
+    Shell Cmd  ${command}  fork=${1}
 
     # Allow time for the monitor to initialize.
     Sleep  5s
@@ -132,6 +167,8 @@ Test Teardown Execution
     FFDC On Test Case Fail
     Run Keyword If  '${TEST_STATUS}' == 'FAIL'  Print Websocket Monitor Log
     Kill Websocket Monitor
+
+    Delete All BMC Dump
 
 
 Suite Teardown Execution
