@@ -6,6 +6,9 @@ Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/bmc_network_utils.robot
 Library                ../lib/ipmi_utils.py
 Library                ../lib/gen_robot_valid.py
+Library                ../lib/var_funcs.py
+
+Suite Setup            Redfish.Login
 
 Test Teardown          FFDC On Test Case Fail
 
@@ -23,18 +26,20 @@ Retrieve IP Address Via IPMI And Verify Using Redfish
     [Documentation]  Retrieve IP address using IPMI and verify using Redfish.
     [Tags]  Retrieve_IP_Address_Via_IPMI_And_Verify_Using_Redish
 
-    ${lan_print_ipmi}=  Get LAN Print Dict
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  cat /usr/share/ipmi-providers/channel_config.json
+    ${channel_ifaceName_table}=  Get Valid Channel IfaceName Dict  ${cmd_output}
 
-    # Fetch IP address list using redfish.
-    ${ip_list_redfish}=  Create List
-    Redfish.Login
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
-    @{network_config_redfish}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
-    : FOR  ${network_config_redfish}  IN  @{network_config_redfish}
-    \  Append To List  ${ip_list_redfish}  ${network_config_redfish['Address']}
+    :FOR  ${channel_number}  IN  @{channel_ifaceName_table.keys()}
+    \  ${ifaceName}=  Set Variable  ${channel_ifaceName_table["${channel_number}"]}
+    \  ${lan_print_ipmi}=  Get LAN Print Dict  ${channel_number}
 
-    Valid Value  lan_print_ipmi['IP Address']  ${ip_list_redfish}
-
+    # # Fetch IP address list using redfish.
+    \  ${ipv4_static_addresses}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ifaceName}  IPv4StaticAddresses
+    \  ${redfish_ips}=  Nested Get  Address  ${ipv4_static_addresses}
+    \  Rprint Vars  lan_print_ipmi  ipv4_static_addresses  redfish_ips
+    \  Valid Value  lan_print_ipmi['IP Address']  ${redfish_ips}
+    END
 
 Retrieve Default Gateway Via IPMI And Verify
     [Documentation]  Retrieve default gateway via IPMI and verify it's existence on the BMC.
@@ -49,13 +54,18 @@ Retrieve MAC Address Via IPMI And Verify Using Redfish
     [Documentation]  Retrieve MAC address via IPMI and verify using Redfish.
     [Tags]  Retrieve_MAC_Address_Via_IPMI_And_Verify_Using_Redfish
 
-    ${lan_print_ipmi}=  Get LAN Print Dict
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  cat /usr/share/ipmi-providers/channel_config.json
+    ${channel_ifaceName_table}=  Get Valid Channel IfaceName Dict  ${cmd_output}
 
-    Redfish.Login
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
-    ${mac_address_redfish}=  Get From Dictionary  ${resp.dict}  MACAddress
+    :FOR  ${channel_number}  IN  @{channel_ifaceName_table.keys()}
+    \  ${ifaceName}=  Set Variable  ${channel_ifaceName_table["${channel_number}"]}
+    \  ${lan_print_ipmi}=  Get LAN Print Dict  ${channel_number}
 
-    Valid Value  lan_print_ipmi['MAC Address']  ${mac_address_redfish}
+    \  ${redfish_mac_address}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ifaceName}  MACAddress
+    \  Rpvars  lan_print_ipmi  redfish_mac_address
+    \  Valid Value  lan_print_ipmi['MAC Address']  ${redfish_mac_address}
+    END
 
 
 Test Valid IPMI Channels Supported
@@ -95,13 +105,13 @@ Verify IPMI Inband Network Configuration
     [Teardown]  Run Keywords  Restore Configuration  AND  FFDC On Test Case Fail
 
     Redfish Power On
-    ${initial_lan_config}=  Get LAN Print Dict  inband
+    ${initial_lan_config}=  Get LAN Print Dict  ipmi_cmd_type=inband
     Set Suite Variable  ${initial_lan_config}
 
     Set IPMI Inband Network Configuration  10.10.10.10  255.255.255.0  10.10.10.10
     Sleep  10
 
-    ${lan_print_output}=  Get LAN Print Dict  inband
+    ${lan_print_output}=  Get LAN Print Dict  ipmi_cmd_type=inband
     Valid Value  lan_print_output['IP Address']  ["10.10.10.10"]
     Valid Value  lan_print_output['Subnet Mask']  ["255.255.255.0"]
     Valid Value  lan_print_output['Default Gateway IP']  ["10.10.10.10"]
@@ -150,4 +160,3 @@ Restore Configuration
     Set IPMI Inband Network Configuration  ${initial_lan_config['IP Address']}
     ...  ${initial_lan_config['Subnet Mask']}
     ...  ${initial_lan_config['Default Gateway IP']}  login=${0}
-

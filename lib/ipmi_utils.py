@@ -16,6 +16,7 @@ import ipmi_client as ic
 import tempfile
 gru.my_import_resource("ipmi_client.robot")
 from robot.libraries.BuiltIn import BuiltIn
+import json
 
 
 def get_sol_info():
@@ -121,7 +122,7 @@ def execute_ipmi_cmd(cmd_string,
         return stdout, stderr, rc
 
 
-def get_lan_print_dict(ipmi_cmd_type='external'):
+def get_lan_print_dict(channel_number='', ipmi_cmd_type='external'):
     r"""
     Get IPMI 'lan print' output and return it as a dictionary.
 
@@ -168,18 +169,19 @@ def get_lan_print_dict(ipmi_cmd_type='external'):
                                     'inband', 'external').
     """
 
+    channel_number = str(channel_number)
     # Notice in the example of data above that 'Auth Type Enable' needs some
     # special processing.  We essentially want to isolate its data and remove
     # the 'Auth Type Enable' string so that key_value_outbuf_to_dict can
     # process it as a sub-dictionary.
-    cmd_buf = "lan print | grep -E '^(Auth Type Enable)" +\
+    cmd_buf = "lan print " + channel_number + " | grep -E '^(Auth Type Enable)" +\
         "?[ ]+: ' | sed -re 's/^(Auth Type Enable)?[ ]+: //g'"
     stdout1, stderr, rc = execute_ipmi_cmd(cmd_buf, ipmi_cmd_type,
                                            print_output=0)
 
     # Now get the remainder of the data and exclude the lines with no field
     # names (i.e. the 'Auth Type Enable' sub-fields).
-    cmd_buf = "lan print | grep -E -v '^[ ]+: '"
+    cmd_buf = "lan print " + channel_number + " | grep -E -v '^[ ]+: '"
     stdout2, stderr, rc = execute_ipmi_cmd(cmd_buf, ipmi_cmd_type,
                                            print_output=0)
 
@@ -194,6 +196,68 @@ def get_lan_print_dict(ipmi_cmd_type='external'):
     lan_print_dict['Auth Type Enable'] = auth_type_enable_dict
 
     return lan_print_dict
+
+
+def get_valid_channel_ifaceName_dict(structure):
+    r"""
+    Get the correspondence of valid channels and interfaces and return it as a
+    dictionary.
+
+    Parsing channel_config.json in BMC to get the valid correspondence of
+     channels and interfaces. An example is shown below:
+
+     {
+        "0" : {
+          "name" : "IPMB",
+          "is_valid" : true,
+          "active_sessions" : 0,
+          "channel_info" : {
+            "medium_type" : "ipmb",
+            "protocol_type" : "ipmb-1.0",
+            "session_supported" : "session-less",
+            "is_ipmi" : true
+          }
+        },
+        "1" : {
+          "name" : "eth0",
+          "is_valid" : true,
+          "active_sessions" : 0,
+          "channel_info" : {
+            "medium_type" : "lan-802.3",
+            "protocol_type" : "ipmb-1.0",
+            "session_supported" : "multi-session",
+            "is_ipmi" : true
+          }
+        },
+        "2" : {
+          "name" : "eth1",
+          "is_valid" : true,
+          "active_sessions" : 0,
+          "channel_info" : {
+            "medium_type" : "lan-802.3",
+            "protocol_type" : "ipmb-1.0",
+            "session_supported" : "multi-session",
+            "is_ipmi" : true
+          }
+        }
+    }
+
+    For the data shown above, the following dictionary will be returned.
+
+      channel_ifaceName_table:
+        [1]:         eth0
+        [2]:         eth1
+
+    """
+    channel_configs = json.loads(structure)
+
+    result = {}
+
+    for channel_number, channel_config in channel_configs.items():
+        if channel_config['channel_info']['medium_type'] == "lan-802.3":
+            result[channel_number] = channel_config.get("name")
+
+    return result
 
 
 def get_ipmi_power_reading(strip_watts=1):
