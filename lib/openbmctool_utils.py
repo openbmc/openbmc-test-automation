@@ -63,6 +63,7 @@ def openbmctool_execute_command(command_string,
 
     # Get global BMC variable values.
     openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}", default="")
+    https_port = BuiltIn().get_variable_value("${HTTPS_PORT}", default="443")
     openbmc_username = BuiltIn().get_variable_value("${OPENBMC_USERNAME}",
                                                     default="")
     openbmc_password = BuiltIn().get_variable_value("${OPENBMC_PASSWORD}",
@@ -72,6 +73,8 @@ def openbmctool_execute_command(command_string,
     if not gv.valid_value(openbmc_username):
         return "", "", 1
     if not gv.valid_value(openbmc_password):
+        return "", "", 1
+    if not gv.valid_value(https_port):
         return "", "", 1
 
     # Break the caller's command up into separate piped commands.  For
@@ -87,7 +90,7 @@ def openbmctool_execute_command(command_string,
                     " has been logged out'")
 
     command_string = "set -o pipefail ; python3 $(which openbmctool.py) -H "\
-        + openbmc_host + " -U " + openbmc_username + " -P " + openbmc_password\
+        + openbmc_host + ":" + https_port + " -U " + openbmc_username + " -P " + openbmc_password\
         + " " + " ".join(pipeline)
 
     return gc.shell_cmd(command_string, *args, **kwargs)

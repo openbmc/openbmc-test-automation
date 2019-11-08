@@ -43,6 +43,7 @@ def bmc_execute_command(cmd_buf,
 
     # Get global BMC variable values.
     openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}", default="")
+    ssh_port = BuiltIn().get_variable_value("${SSH_PORT}", default="22")
     openbmc_username = BuiltIn().get_variable_value("${OPENBMC_USERNAME}",
                                                     default="")
     openbmc_password = BuiltIn().get_variable_value("${OPENBMC_PASSWORD}",
@@ -54,9 +55,11 @@ def bmc_execute_command(cmd_buf,
         return "", "", 1
     if not gv.valid_value(openbmc_password):
         return "", "", 1
+    if not gv.valid_value(ssh_port):
+        return "", "", 1
 
     open_connection_args = {'host': openbmc_host, 'alias': 'bmc_connection',
-                            'timeout': '25.0', 'prompt': '# '}
+                            'timeout': '25.0', 'prompt': '# ', 'port': ssh_port}
     login_args = {'username': openbmc_username, 'password': openbmc_password}
 
     return grs.execute_ssh_command(cmd_buf, open_connection_args, login_args,
