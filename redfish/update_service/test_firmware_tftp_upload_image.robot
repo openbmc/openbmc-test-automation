@@ -15,6 +15,7 @@ Resource         ../../lib/boot_utils.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/code_update_utils.robot
+Resource         ../../lib/redfish_code_update_utils.robot
 Library          ../../lib/code_update_utils.py
 Library          ../../lib/gen_robot_valid.py
 Library          ../../lib/tftp_update_utils.py
@@ -59,6 +60,15 @@ ImageURI Download Install With ApplyTime Immediate Policy
     [Documentation]  Download image to BMC using ImageURI with Immediate policy and verify installation.
     [Tags]  ImageURI_Download_Install_With_ApplyTime_Immediate_Policy
     [Template]  ImageURI Download Install
+
+    # policy
+    Immediate
+
+
+Same ImageURI Firmware Update
+    [Documentation]  Download same image twice to BMC using ImageURI and in second time firmware update should fail.
+    [Tags]  Same_ImageURI_Firmware_Update
+    [Template]  Same ImageURI Download Install
 
     # policy
     Immediate
@@ -133,7 +143,7 @@ ImageURI Download Install
     ...  body={"ImageURI": "tftp://${TFTP_SERVER}/${IMAGE_FILE_NAME}"}
 
     # Wait for image tar file download to complete.
-    ${image_id}=  Wait Until Keyword Succeeds  60 sec  10 sec  Get Latest Image ID
+    ${image_id}=  Wait Until Keyword Succeeds  120 sec  10 sec  Get Latest Image ID
     Rprint Vars  image_id
 
     # Let the image get extracted and it should not fail.
@@ -142,8 +152,6 @@ ImageURI Download Install
 
     ${install_version}=  Get Firmware Image Version  image_id=${image_id}
     Rprint Vars  install_version
-
-    Check Image Update Progress State  match_state='Updating'  image_id=${image_id}
 
     # Wait for the image to install complete.
     Wait Until Keyword Succeeds  8 min  15 sec
@@ -156,6 +164,35 @@ ImageURI Download Install
     ${functional_version}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     Valid Value  functional_version  valid_values=['${install_version}']
     Rprint Vars  functional_version
+
+
+Same ImageURI Download Install
+    [Documentation]  Download image to BMC using ImageURI with ApplyTime policy and verify installation.
+    [Arguments]  ${policy}
+
+    # Description of argument(s):
+    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
+
+    ImageURI Download Install  ${policy}
+
+    # Download image from TFTP server via ImageURI to BMC.
+    Redfish.Post  /redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate
+    ...  body={"ImageURI": "tftp://${TFTP_SERVER}/${IMAGE_FILE_NAME}"}
+
+    ${image_version}=  Get Image Version From TFTP Server  ${TFTP_SERVER}  ${IMAGE_FILE_NAME} 
+    ${software_inventory_record}=  Get Software Inventory State By Version
+    ...  ${image_version}
+    ${num_keys}=  Get Length  ${software_inventory_record}
+
+    Rprint Vars  software_inventory_record
+
+    ${image_id}=  Wait Until Keyword Succeeds  60 sec  10 sec  Get Latest Image ID
+    Rprint Vars  image_id
+
+    Check Image Update Progress State  match_state='Enabled'  image_id=${image_id}
+    # Check if the existing firmware is functional.
+    Pass Execution If  ${software_inventory_record['functional']}
+    ...  The existing ${image_version} firmware is already functional.
 
 
 Reboot And Wait For BMC Standby
