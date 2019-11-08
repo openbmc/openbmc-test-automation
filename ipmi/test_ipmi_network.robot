@@ -23,18 +23,23 @@ Retrieve IP Address Via IPMI And Verify Using Redfish
     [Documentation]  Retrieve IP address using IPMI and verify using Redfish.
     [Tags]  Retrieve_IP_Address_Via_IPMI_And_Verify_Using_Redish
 
-    ${lan_print_ipmi}=  Get LAN Print Dict
+    ${channel_count}=  Get Physical Network Interface Count
+    FOR  ${channel_number}  IN RANGE  ${1}  ${channel_count}
+    \  ${channel_number}=  Convert To String  ${channel_number}
+    \  ${lan_print_ipmi}=  Get LAN Print Dict  ${channel_number}
 
     # Fetch IP address list using redfish.
-    ${ip_list_redfish}=  Create List
-    Redfish.Login
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
-    @{network_config_redfish}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
-    : FOR  ${network_config_redfish}  IN  @{network_config_redfish}
-    \  Append To List  ${ip_list_redfish}  ${network_config_redfish['Address']}
+    \  ${ip_list_redfish}=  Create List
+    \  Redfish.Login
+    \  ${channel_number}=  Evaluate  ${channel_number}-1
+    \  ${redfish_network_ethx_uri}=  Catenate  SEPARATOR=  ${REDFISH_NW_ETH_IFACE}  eth${channel_number}
 
-    Valid Value  lan_print_ipmi['IP Address']  ${ip_list_redfish}
+    \  ${resp}=  Redfish.Get  ${redfish_network_ethx_uri}
+    \  @{network_config_redfish}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
+    \  ${ip_list_redfish}=  Append IP To IP List  @{network_config_redfish}
 
+    \  Valid Value  lan_print_ipmi['IP Address']  ${ip_list_redfish}
+    END
 
 Retrieve Default Gateway Via IPMI And Verify
     [Documentation]  Retrieve default gateway via IPMI and verify it's existence on the BMC.
@@ -49,13 +54,19 @@ Retrieve MAC Address Via IPMI And Verify Using Redfish
     [Documentation]  Retrieve MAC address via IPMI and verify using Redfish.
     [Tags]  Retrieve_MAC_Address_Via_IPMI_And_Verify_Using_Redfish
 
-    ${lan_print_ipmi}=  Get LAN Print Dict
+    ${channel_count}=  Get Physical Network Interface Count
+    FOR  ${channel_number}  IN RANGE  ${1}  ${channel_count}
+    \  ${channel_number}=  Convert To String  ${channel_number}
+    \  ${lan_print_ipmi}=  Get LAN Print Dict  ${channel_number}
 
-    Redfish.Login
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
-    ${mac_address_redfish}=  Get From Dictionary  ${resp.dict}  MACAddress
+    \  Redfish.Login
+    \  ${channel_number}=  Evaluate  ${channel_number}-1
+    \  ${redfish_network_ethx_uri}=  Catenate  SEPARATOR=  ${REDFISH_NW_ETH_IFACE}  eth${channel_number}
+    \  ${resp}=  Redfish.Get  ${redfish_network_ethx_uri}
+    \  ${mac_address_redfish}=  Get From Dictionary  ${resp.dict}  MACAddress
 
-    Valid Value  lan_print_ipmi['MAC Address']  ${mac_address_redfish}
+    \  Valid Value  lan_print_ipmi['MAC Address']  ${mac_address_redfish}
+    END
 
 
 Test Valid IPMI Channels Supported
@@ -95,13 +106,13 @@ Verify IPMI Inband Network Configuration
     [Teardown]  Run Keywords  Restore Configuration  AND  FFDC On Test Case Fail
 
     Redfish Power On
-    ${initial_lan_config}=  Get LAN Print Dict  inband
+    ${initial_lan_config}=  Get LAN Print Dict  ipmi_cmd_type=inband
     Set Suite Variable  ${initial_lan_config}
 
     Set IPMI Inband Network Configuration  10.10.10.10  255.255.255.0  10.10.10.10
     Sleep  10
 
-    ${lan_print_output}=  Get LAN Print Dict  inband
+    ${lan_print_output}=  Get LAN Print Dict  ipmi_cmd_type=inband
     Valid Value  lan_print_output['IP Address']  ["10.10.10.10"]
     Valid Value  lan_print_output['Subnet Mask']  ["255.255.255.0"]
     Valid Value  lan_print_output['Default Gateway IP']  ["10.10.10.10"]
@@ -150,4 +161,13 @@ Restore Configuration
     Set IPMI Inband Network Configuration  ${initial_lan_config['IP Address']}
     ...  ${initial_lan_config['Subnet Mask']}
     ...  ${initial_lan_config['Default Gateway IP']}  login=${0}
+
+Append IP To IP List
+    [Documentation]  Append the network configuration ip in redfish to the ip list
+    [Arguments]  @{network_config_redfish}
+
+    ${ip_list}=  Create List
+    : FOR  ${network_config_redfish}  IN  @{network_config_redfish}
+        \  Append To List  ${ip_list}  ${network_config_redfish['Address']}
+    [Return]  ${ip_list}
 
