@@ -121,7 +121,7 @@ def execute_ipmi_cmd(cmd_string,
         return stdout, stderr, rc
 
 
-def get_lan_print_dict(ipmi_cmd_type='external'):
+def get_lan_print_dict(channel_number='', ipmi_cmd_type='external'):
     r"""
     Get IPMI 'lan print' output and return it as a dictionary.
 
@@ -168,18 +168,19 @@ def get_lan_print_dict(ipmi_cmd_type='external'):
                                     'inband', 'external').
     """
 
+    channel_number = str(channel_number)
     # Notice in the example of data above that 'Auth Type Enable' needs some
     # special processing.  We essentially want to isolate its data and remove
     # the 'Auth Type Enable' string so that key_value_outbuf_to_dict can
     # process it as a sub-dictionary.
-    cmd_buf = "lan print | grep -E '^(Auth Type Enable)" +\
+    cmd_buf = "lan print " + channel_number + " | grep -E '^(Auth Type Enable)" +\
         "?[ ]+: ' | sed -re 's/^(Auth Type Enable)?[ ]+: //g'"
     stdout1, stderr, rc = execute_ipmi_cmd(cmd_buf, ipmi_cmd_type,
                                            print_output=0)
 
     # Now get the remainder of the data and exclude the lines with no field
     # names (i.e. the 'Auth Type Enable' sub-fields).
-    cmd_buf = "lan print | grep -E -v '^[ ]+: '"
+    cmd_buf = "lan print " + channel_number + " | grep -E -v '^[ ]+: '"
     stdout2, stderr, rc = execute_ipmi_cmd(cmd_buf, ipmi_cmd_type,
                                            print_output=0)
 
