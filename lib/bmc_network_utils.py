@@ -13,6 +13,8 @@ import collections
 import re
 import ipaddress
 from robot.libraries.BuiltIn import BuiltIn
+import json
+import bmc_ssh_utils as bsu
 
 
 def netmask_prefix_length(netmask):
@@ -122,3 +124,55 @@ def nping(host=openbmc_host, parse_results=1, **options):
         return parse_nping_output(output)
 
     return output
+
+
+def get_channel_config():
+    r"""
+    Get the channel config data and return as a dictionary.
+
+    Example:
+    channel_config = get_channel_config()
+    print_vars(channel_config)
+
+    channel_config:
+      [0]:
+        [name]:                  IPMB
+        [is_valid]:              True
+        [active_sessions]:       0
+        [channel_info]:
+          [medium_type]:         ipmb
+          [protocol_type]:       ipmb-1.0
+          [session_supported]:   session-less
+          [is_ipmi]:             True
+      [1]:
+        [name]:                  eth0
+        [is_valid]:              True
+        [active_sessions]:       0
+        [channel_info]:
+          [medium_type]:         other-lan
+          [protocol_type]:       ipmb-1.0
+          [session_supported]:   multi-session
+          [is_ipmi]:             True
+      [2]:
+        [name]:                  eth1
+        [is_valid]:              True
+        [active_sessions]:       0
+        [channel_info]:
+          [medium_type]:         lan-802.3
+          [protocol_type]:       ipmb-1.0
+          [session_supported]:   multi-session
+          [is_ipmi]:             True
+    (etc.)
+    """
+
+    stdout, stderr, rc = bsu.bmc_execute_command("cat /usr/share/ipmi-providers/channel_config.json")
+    return json.loads(stdout)
+
+
+def get_active_channel_config():
+    r"""
+    Channel configs which medium_type are 'other-lan' or 'lan-802.3' returned by
+     this function.
+    """
+
+    return vf.filter_struct(get_channel_config(), "[('medium_type', 'other-lan|lan-802.3')]", regex=1)
