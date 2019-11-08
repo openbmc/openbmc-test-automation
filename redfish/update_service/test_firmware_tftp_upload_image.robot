@@ -15,6 +15,7 @@ Resource         ../../lib/boot_utils.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/code_update_utils.robot
+Resource         ../../lib/redfish_code_update_utils.robot
 Library          ../../lib/code_update_utils.py
 Library          ../../lib/gen_robot_valid.py
 Library          ../../lib/tftp_update_utils.py
@@ -62,6 +63,16 @@ ImageURI Download Install With ApplyTime Immediate Policy
 
     # policy
     Immediate
+
+
+Install Same Image Two Times
+    [Documentation]  Download same image twice to BMC via ImageURI. Second attempt would fail.
+    [Tags]  Install_Same_Image_Two_Times
+    [Template]  Same Firmware Install Multiple Times
+
+    # policy
+    Immediate
+
 
 *** Keywords ***
 
@@ -156,6 +167,35 @@ ImageURI Download Install
     ${functional_version}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     Valid Value  functional_version  valid_values=['${install_version}']
     Rprint Vars  functional_version
+
+
+Same Firmware Install Multiple Times
+    [Documentation]  Download image to BMC using ImageURI with ApplyTime policy and verify installation.
+    [Arguments]  ${apply_time}  ${tftp_server}=${TFTP_SERVER}  ${image_file_name}=${IMAGE_FILE_NAME}
+
+    # Description of argument(s):
+    # apply_time       ApplyTime allowed values (e.g. "OnReset", "Immediate").
+    # tftp_server      Server IP.
+    # image_file_name  Image file name.
+
+    ImageURI Download Install  ${apply_time}
+
+    # Download image from TFTP server via ImageURI to BMC.
+    Redfish.Post  /redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate
+    ...  body={"ImageURI": "tftp://${tftp_server}/${image_file_name}"}
+
+    ${image_version}=  Get Image Version From TFTP Server  ${tftp_server}  ${image_file_name}
+    ${software_inventory_record}=  Get Software Inventory State By Version
+    ...  ${image_version}
+    Rprint Vars  software_inventory_record
+
+    ${image_id}=  Wait Until Keyword Succeeds  60 sec  10 sec  Get Latest Image ID
+    Rprint Vars  image_id
+
+    Check Image Update Progress State  match_state='Enabled'  image_id=${image_id}
+    # Check if the existing firmware is functional.
+    Pass Execution If  ${software_inventory_record['functional']}
+    ...  The existing ${image_version} firmware is already functional.
 
 
 Reboot And Wait For BMC Standby
