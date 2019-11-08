@@ -1,4 +1,5 @@
 import os
+from robot.libraries.BuiltIn import BuiltIn
 
 OPENBMC_BASE_URI = '/xyz/openbmc_project/'
 OPENBMC_BASE_DBUS = 'xyz.openbmc_project.'
@@ -197,7 +198,6 @@ CA_CERTIFICATE_URI = OPENBMC_BASE_URI + 'certs/authority/ldap'
 SYSTEM_BASE_URI = REDFISH_BASE_URI + 'Systems/system/'
 EVENT_LOG_URI = SYSTEM_BASE_URI + 'LogServices/EventLog/'
 
-
 '''
   QEMU HTTPS variable:
 
@@ -207,26 +207,7 @@ EVENT_LOG_URI = SYSTEM_BASE_URI + 'LogServices/EventLog/'
   the port from the OS environment
 '''
 
-
-def get_port_https():
-    # defaulted to empty string
-    l_suffix = ''
-    try:
-        l_https_port = os.getenv('HTTPS_PORT')
-        if l_https_port:
-            l_suffix = ':' + l_https_port
-    except BaseException:
-        print ("Environment variable HTTPS_PORT not set,\
-              using default HTTPS port")
-    return l_suffix
-
-
-AUTH_SUFFIX = {
-    "https_port": [get_port_https()],
-}
-
-# Update the ':Port number' to this variable
-AUTH_SUFFIX = AUTH_SUFFIX['https_port'][0]
+AUTH_SUFFIX = ":" + BuiltIn().get_variable_value("${HTTPS_PORT}", os.getenv('HTTPS_PORT', '443'))
 
 # Here contains a list of valid Properties bases on fru_type after a boot.
 INVENTORY_ITEMS = {
