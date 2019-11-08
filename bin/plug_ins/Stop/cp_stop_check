@@ -132,11 +132,9 @@ def rest_fail():
         interval + "  quiet=${1} ; Rpvar  state"
     set_mod_global(keyword_string)
 
-    cmd_buf = create_robot_cmd_string("extended/run_keyword.robot",
-                                      OPENBMC_HOST, REST_USERNAME,
-                                      REST_PASSWORD, keyword_string,
-                                      lib_file_path, quiet, test_mode, debug,
-                                      outputdir, output, log, report, loglevel)
+    cmd_buf = create_robot_cmd_string("extended/run_keyword.robot", OPENBMC_HOST, SSH_PORT, HTTPS_PORT,
+                                      REST_USERNAME, REST_PASSWORD, keyword_string, lib_file_path, quiet,
+                                      test_mode, debug, outputdir, output, log, report, loglevel)
     if not robot_cmd_fnc(cmd_buf):
         print_timen("The caller wishes to stop test execution if REST" +
                     " commands are failing.")

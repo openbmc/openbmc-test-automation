@@ -12,7 +12,7 @@ Library   Collections
 # Initialize program parameters variables.
 # Create parm_list containing all of our program parameters.  This is used by
 # 'Rqprint Pgm Header'
-@{parm_list}                openbmc_nickname  openbmc_host  openbmc_username
+@{parm_list}                  openbmc_nickname  ssh_port  https_port  openbmc_host  openbmc_username
 ...  openbmc_password  rest_username  rest_password  ipmi_username
 ...  ipmi_password  os_host  os_username  os_password  pdu_host  pdu_username
 ...  pdu_password  pdu_slot_no  openbmc_serial_host  openbmc_serial_port
@@ -24,6 +24,8 @@ Library   Collections
 
 # Initialize each program parameter.
 ${openbmc_host}               ${EMPTY}
+${ssh_port}                   22
+${https_port}                 443
 ${openbmc_nickname}           ${openbmc_host}
 ${openbmc_username}           root
 ${openbmc_password}           0penBmc
