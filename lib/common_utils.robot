@@ -12,6 +12,7 @@ Library                 OperatingSystem
 Library                 gen_print.py
 Library                 gen_robot_print.py
 Library                 gen_cmd.py
+Library                 gen_robot_valid.py
 Library                 gen_robot_keyword.py
 Library                 bmc_ssh_utils.py
 Library                 utils.py
@@ -305,11 +306,11 @@ Create OS Console Command String
 
 Get SOL Console Pid
     [Documentation]  Get the pid of the active SOL console job.
-    [Arguments]  ${expect_running}=${0}
+    [Arguments]  ${expect_running}=${0}  ${log_file_path}=${EMPTY}
 
     # Description of argument(s):
-    # expect_running  If set and if no SOL console job is found, print debug
-    #                 info and fail.
+    # expect_running                If set and if no SOL console job is found, print debug info and fail.
+    # log_file_path                 Needed to print debug info if expect_running is set and no pid is found.
 
     # Find the pid of the active system console logging session (if any).
     ${search_string}=  Create OS Console Command String
@@ -331,8 +332,7 @@ Get SOL Console Pid
 
     Cmd Fnc  cat ${log_file_path} ; echo ; ${ps_cmd}  quiet=${0}
     ...  print_output=${1}  show_err=${1}
-
-    Should Not Be Empty  ${os_con_pid}
+    Valid Value  os_con_pid
 
 
 Stop SOL Console Logging
@@ -418,7 +418,7 @@ Start SOL Console Logging
     Should Be Equal  ${rc}  ${0}
 
     Wait Until Keyword Succeeds  10 seconds  0 seconds
-    ...   Get SOL Console Pid  ${1}
+    ...   Get SOL Console Pid  ${1}  ${log_file_path}
 
     [Return]  ${log_output}
 
