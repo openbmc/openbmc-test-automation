@@ -211,7 +211,7 @@ Verify Inventory Association
     #    ]
     # },
 
-    ${sw_attr_data}=  Read Attribute  ${software_path}  associations
+    ${sw_attr_data}=  Read Attribute  ${software_path}  Associations
     List Should Contain Value  @{sw_attr_data}  ${assoiation_path}
 
     # Verify the inventory path in software manager entry.
