@@ -29,7 +29,7 @@ Verify Redfish User Persistence After Reboot
     # Create Redfish users.
     Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
     Redfish Create User  operator_user  TestPwd123  Operator        ${True}
-    Redfish Create User  user_user      TestPwd123  User            ${True}
+    Redfish Create User  readonly_user  TestPwd123   ReadOnly       ${True}
     Redfish Create User  callback_user  TestPwd123  Callback        ${True}
 
     # Reboot BMC.
@@ -39,13 +39,13 @@ Verify Redfish User Persistence After Reboot
     # Verify users after reboot.
     Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
     Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
-    Redfish Verify User  user_user      TestPwd123  User            ${True}
+    Redfish Verify User  readonly_user  TestPwd123  ReadOnly        ${True}
     Redfish Verify User  callback_user  TestPwd123  Callback        ${True}
 
     # Delete created users.
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}operator_user
-    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}readonly_user
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}callback_user
 
 Redfish Create and Verify Users
