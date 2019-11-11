@@ -63,12 +63,9 @@ Inject Recoverable Error With Threshold Limit
     # signature_desc      Error log signature description.
     # log_prefix          Log path prefix.
 
-    Run Keyword If  '${interface_type}' == 'HOST'
-    ...     Inject Error Through HOST  ${fir}  ${chip_address}  ${threshold_limit}
-    ...     ${master_proc_chip}
-    ...  ELSE
-    ...     Inject Error Through BMC  ${fir}  ${chip_address}  ${threshold_limit}
-    ...     ${master_proc_chip}
+
+    Run Keyword  Inject Error Through ${interface_type}
+    ...  ${fir}  ${chip_address}  ${threshold_limit}  ${master_proc_chip}
 
     Is Host Running
     ${output}=  Gard Operations On OS  list
@@ -88,7 +85,7 @@ Inject Unrecoverable Error
     ...              4. Verify error log entry & signature description.
     ...              5. Verify & clear dump entry.
     [Arguments]      ${interface_type}  ${fir}  ${chip_address}  ${threshold_limit}
-    ...              ${signature_desc}  ${log_prefix}
+    ...              ${signature_desc}  ${log_prefix}  ${bmc_reboot}=${0}
     # Description of argument(s):
     # interface_type      Inject error through 'BMC' or 'HOST'.
     # fir                 FIR (Fault isolation register) value (e.g. 2011400).
@@ -97,19 +94,25 @@ Inject Unrecoverable Error
     # signature_desc      Error Log signature description.
     #                     (e.g 'mcs(n0p0c0) (MCFIR[0]) mc internal recoverable')
     # log_prefix          Log path prefix.
+    # bmc_reboot          Do bmc reboot If bmc_reboot is set.
 
-    Run Keyword If  '${interface_type}' == 'HOST'
-    ...     Inject Error Through HOST  ${fir}  ${chip_address}  ${threshold_limit}
-    ...     ${master_proc_chip}
+    Run Keyword  Inject Error Through ${interface_type}
+    ...  ${fir}  ${chip_address}  ${threshold_limit}  ${master_proc_chip}
+
+    # Do BMC Reboot after error injection.
+    Run Keyword If  ${bmc_reboot}  Run Keywords
+    ...  Initiate BMC Reboot
+    ...  Check If BMC Reboot Is Initiated
+    ...  Wait For BMC Ready
+    ...  Initiate Host PowerOff
+    ...  Initiate Host Boot
     ...  ELSE
-    ...     Inject Error Through BMC  ${fir}  ${chip_address}  ${threshold_limit}
-    ...     ${master_proc_chip}
+    ...  Wait Until Keyword Succeeds  500 sec  20 sec  Is Host Rebooted
 
-    Wait Until Keyword Succeeds  500 sec  20 sec  Is Host Rebooted
     Wait for OS
     Verify Error Log Entry  ${signature_desc}  ${log_prefix}
-    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
-    Should Not Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    ${dump_entry_uris}=  Read Properties  ${DUMP_ENTRY_URI}list
+    Read Properties  ${DUMP_ENTRY_URI}list
     Delete All BMC Dump
     Verify And Clear Gard Records On HOST
 
@@ -154,8 +157,10 @@ RAS Test SetUp
     Should Not Be Empty
     ...  ${OS_PASSWORD}  msg=You must provide OS host user password.
 
+    Smart Power Off
+
     # Boot to OS.
-    REST Power On
+    REST Power On  quiet=${1}
     # Adding delay after host bring up.
     Sleep  60s
 
@@ -174,7 +179,7 @@ RAS Suite Setup
     Set Environment Variable  PATH  %{PATH}:${ESEL_BIN_PATH}
 
     # Boot to Os.
-    REST Power On
+    REST Power On  quiet=${1}
 
     # Check Opal-PRD service enabled on host.
     ${opal_prd_state}=  Is Opal-PRD Service Enabled
