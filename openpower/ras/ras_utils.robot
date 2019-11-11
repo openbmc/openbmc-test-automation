@@ -113,6 +113,52 @@ Inject Unrecoverable Error
     Delete All BMC Dump
     Verify And Clear Gard Records On HOST
 
+
+Inject Unrecoverable Error And Reboot
+    [Documentation]  Inject and verify unrecoverable error on processor through
+    ...              BMC/HOST.
+    ...              Test sequence:
+    ...              1. Inject unrecoverable error on a given target
+    ...                 (e.g: Processor core, CAPP, MCA) through BMC/HOST.
+    ...              2. Initate and check BMC reboot.
+    ...              3. Wait for BMC & initate host boot.
+    ...              4. Check If HOST is rebooted.
+    ...              5. Verify & clear gard records.
+    ...              6. Verify error log entry & signature description.
+    ...              7. Verify & clear dump entry.
+    [Arguments]      ${interface_type}  ${fir}  ${chip_address}  ${threshold_limit}
+    ...              ${signature_desc}  ${log_prefix}
+    # Description of argument(s):
+    # interface_type      Inject error through 'BMC' or 'HOST'.
+    # fir                 FIR (Fault isolation register) value (e.g. 2011400).
+    # chip_address        Chip address (e.g 2000000000000000).
+    # threshold_limit     Threshold limit (e.g 1, 5, 32).
+    # signature_desc      Error Log signature description.
+    #                     (e.g 'mcs(n0p0c0) (MCFIR[0]) mc internal recoverable')
+    # log_prefix          Log path prefix.
+
+    Run Keyword If  '${interface_type}' == 'HOST'
+    ...     Inject Error Through HOST  ${fir}  ${chip_address}  ${threshold_limit}
+    ...     ${master_proc_chip}
+    ...  ELSE
+    ...     Inject Error Through BMC  ${fir}  ${chip_address}  ${threshold_limit}
+    ...     ${master_proc_chip}
+
+    # Do BMC Reboot after error injection.
+    Initiate BMC Reboot
+    Check If BMC Reboot Is Initiated
+    Wait For BMC Ready
+    Initiate Host Boot
+
+    Wait Until Keyword Succeeds  500 sec  20 sec  Is Host Rebooted
+    Wait for OS
+    Verify Error Log Entry  ${signature_desc}  ${log_prefix}
+    ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
+    Should Not Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Delete All BMC Dump
+    Verify And Clear Gard Records On HOST
+
+
 Fetch FIR Address Translation Value
     [Documentation]  Fetch FIR address translation value through HOST.
     [Arguments]  ${fir}  ${target_type}
@@ -155,9 +201,9 @@ RAS Test SetUp
     ...  ${OS_PASSWORD}  msg=You must provide OS host user password.
 
     # Boot to OS.
-    REST Power On
+#    REST Power On  quiet=${1}
     # Adding delay after host bring up.
-    Sleep  60s
+#    Sleep  60s
 
 RAS Suite Setup
     [Documentation]  Create RAS log directory to store all RAS test logs.
@@ -174,7 +220,7 @@ RAS Suite Setup
     Set Environment Variable  PATH  %{PATH}:${ESEL_BIN_PATH}
 
     # Boot to Os.
-    REST Power On
+#    REST Power On  quiet=${1}
 
     # Check Opal-PRD service enabled on host.
     ${opal_prd_state}=  Is Opal-PRD Service Enabled
