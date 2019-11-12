@@ -17,16 +17,16 @@ ${xpath_choose_file_button}  //*[@class='vm__upload-choose-label']
 
 *** Test Cases ***
 
-Verify Existence Of All Sections In Virtaul Media Page
-    [Documentation]  Verify existence of all sections in virtaul media page.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Virtaul_Media_Page
+Verify Existence Of All Sections In Virtual Media Page
+    [Documentation]  Verify existence of all sections in virtual media page.
+    [Tags]  Verify_Existence_Of_All_Sections_In_Virtual_Media_Page
 
     Page Should Contain  Virtual media device
 
 
-Verify Existence Of All Buttons In Virtaul Media Page
+Verify Existence Of All Buttons In Virtual Media Page
     [Documentation]  Verify existence of all buttons in virtual media page.
-    [Tags]  Verify_Existence_Of_All_Buttons_In_Virtaul_Media_Page
+    [Tags]  Verify_Existence_Of_All_Buttons_In_Virtual_Media_Page
 
     Page Should Contain Element  ${xpath_start_button}
     Page Should Contain Element  ${xpath_choose_file_button}
