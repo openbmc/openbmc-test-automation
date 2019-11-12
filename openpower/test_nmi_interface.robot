@@ -1,13 +1,13 @@
 *** Settings ***
 Documentation   Test Non-maskable interrupt functionality.
 
-Resource        ../../lib/bmc_redfish_resource.robot
-Resource        ../../lib/boot_utils.robot
-Resource        ../../lib/openbmc_ffdc.robot
-Resource        ../../lib/secureboot/secureboot.robot
-Resource        ../../lib/state_manager.robot
-Library         ../../lib/bmc_ssh_utils.py
-Library         ../../syslib/utils_os.py
+Resource        ../lib/bmc_redfish_resource.robot
+Resource        ../lib/boot_utils.robot
+Resource        ../lib/openbmc_ffdc.robot
+Resource        ../lib/secureboot/secureboot.robot
+Resource        ../lib/state_manager.robot
+Library         ../lib/bmc_ssh_utils.py
+Library         ../syslib/utils_os.py
 
 Test Teardown   FFDC On Test Case Fail
 Suite Teardown  Redfish.Logout
