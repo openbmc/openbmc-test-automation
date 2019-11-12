@@ -13,7 +13,7 @@ Test Teardown   Close Browser
 ${xpath_power_indicator_bar}     //*[@id='power-indicator-bar']
 ${xpath_shutdown_button}         //button[contains(text(), "Shut down")]
 ${xpath_reboot_button}           //button[contains(text(), "Reboot")]
-
+${xpath_power_on_button}         //button[contains(text(), "Power on")]
 
 *** Test Cases ***
 
