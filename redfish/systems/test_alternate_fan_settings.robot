@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test Suite for Suppported Fan Modules.
+Documentation  Test Suite for Supported Fan Modules.
 
 Resource         ../../lib/rest_client.robot
 Resource         ../../lib/bmc_redfish_resource.robot
