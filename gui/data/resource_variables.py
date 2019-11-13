@@ -75,6 +75,7 @@ class resource_variables():
     xpath_select_server_health = "//a[@href='#/server-health/event-log']"
     xpath_select_server_led = "//a[@href='#/server-control/server-led']"
     xpath_select_date_time_settings = "//a[@href='#/configuration/date-time']"
+    xpath_select_local_users = "//a[@href='#/access-control/local-users']"
 
     # GUI header elements locators.
     xpath_select_server_power = "//a[@href='#/server-control/power-operations']"
