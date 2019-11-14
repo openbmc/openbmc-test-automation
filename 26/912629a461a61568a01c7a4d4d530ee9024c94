@@ -1,0 +1,9 @@
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Ok-To-Test+1: George Keishing <gkeishin@in.ibm.com>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+2: George Keishing <gkeishin@in.ibm.com>
+Submitted-by: George Keishing <gkeishin@in.ibm.com>
+Submitted-at: Thu, 14 Nov 2019 17:13:06 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/27245
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
