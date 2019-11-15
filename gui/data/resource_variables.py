@@ -18,6 +18,7 @@ class resource_variables():
     xpath_select_button_power_on = "//*[@id='power__power-on']"
     xpath_cancel_button = "//button[contains(text(),'Cancel')]"
     xpath_save_setting_button = "//button[contains(text(),'Save settings')]"
+    xpath_remove_button = "//button[contains(text(),'Remove')]"
 
     xpath_select_button_warm_reboot = \
         "//*[@id='power__warm-boot']"
