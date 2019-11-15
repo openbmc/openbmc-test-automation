@@ -15,6 +15,12 @@ Library         ../../../lib/gen_robot_keyword.py
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
+*** Variables ***
+
+${xpath_delete_remote_server}  //*[@class="remote-logging-server"]//button[2]
+${xpath_add_server}            //*[@class="remote-logging-server"]//button[1]
+${xpath_remote_server_ip}      //input[@id="remoteServerIP"]
+${xpath_remote_server_port}    //input[@id="remoteServerPort"]
 
 *** Test Cases ***
 
@@ -278,6 +284,28 @@ Select Multiple Error Log And Export
     Should Be Equal  ${number_of_events}  2
     ...  msg=Failed to export multiple error log entries.
 
+
+Verify Existence Of All Buttons In Remote Logging Server Page
+    [Documentation]  Verify existence of all buttons in remote logging server
+    ...              page.
+    [Tags]  Verify_Existence_Of_All_Buttons_In_Remote_Logging_Server_Page
+    [Setup]  Setup For Remote Logging Server
+    [Teardown]  Teardown For Remote Logging Server
+
+    Page Should Contain Button  ${xpath_cancel_button}
+    Page Should Contain Button  ${xpath_add_button}
+
+
+Verify Existence Of All Input Boxes In Remote Logging Server Page
+    [Documentation]  Verify existence of all input boxes in remote logging server
+    ...              page.
+    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Remote_Logging_Server_Page
+    [Setup]  Setup For Remote Logging Server
+    [Teardown]  Teardown For Remote Logging Server
+
+    Page Should Contain Textfield  ${xpath_remote_server_ip}
+    Page Should Contain Textfield  ${xpath_remote_server_port}
+
 *** Keywords ***
 
 Common Event Log Click Element
@@ -315,6 +343,15 @@ Double Event Log Click Element
    Common Event Log Click Element  ${action_element}
    ...  ${action_click_confirmation}
 
+Navigate To Event Log Page
+   [Documentation]  Go to event log page from BMC homepage.
+
+   Launch Browser And Login OpenBMC GUI
+   Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+   Click Element  ${xpath_select_server_health}
+   Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
+   Wait Until Page Contains  Event Log
+
 Test Setup Execution
    [Documentation]  Do test case setup tasks.
 
@@ -322,10 +359,7 @@ Test Setup Execution
    Run Keyword If  ${status} == ${False}  Install Tarball
    Delete Error Logs And Verify
 
-   # Launch the GUI and navigate to server health page.
-   Launch Browser And Login OpenBMC GUI
-   Click Element  ${xpath_select_server_health}
-   Wait Until Page Contains  Event log
+   Navigate To Event Log Page
 
 Test Teardown Execution
    [Documentation]  Do the post test teardown.
@@ -333,4 +367,28 @@ Test Teardown Execution
    FFDC On Test Case Fail
    Delete All Error Logs
    Close All Connections
+   Close Browser
+
+Delete Remote Logging Server
+   [Documentation]  Delete remote logging server entry.
+
+   Click Button  ${xpath_delete_remote_server}
+   Click Button  ${xpath_remove_button}
+
+Setup For Remote Logging Server
+   [Documentation]  Test setup for remote logging server page.
+
+   Navigate To Event Log Page
+
+   # An entry for remote server may not exist so ignoring if there is a fail
+   # when deleting the entry.
+   Run Keyword And Ignore Error  Delete Remote Logging Server
+   Click Button  ${xpath_add_server}
+   Page Should Contain  Add remote logging server
+
+Teardown For Remote Logging Server
+   [Documentation]  Test teardown for remote logging server page.
+
+   Click Button  ${xpath_cancel_button}
+   FFDC On Test Case Fail
    Close Browser
