@@ -123,42 +123,6 @@ Redfish Upload Image And Check Progress State
     ...    match_state='Enabled'  image_id=${image_id}
 
 
-Reboot BMC And Verify BMC Image
-    [Documentation]  Reboot or wait for BMC standby post reboot and
-    ...  verify installed image is functional.
-    [Arguments]  ${apply_time}  ${start_boot_seconds}
-
-    # Description of argument(s):
-    # apply_time            ApplyTime allowed values
-    #                       (e.g. "OnReset", "Immediate").
-    # start_boot_seconds    See 'Wait For Reboot' for details.
-
-    Run Keyword if  'OnReset' == '${apply_time}'
-    ...  Run Keyword
-    ...      Redfish OBMC Reboot (off)
-    ...  ELSE
-    ...    Run Keyword
-    ...        Wait For Reboot  start_boot_seconds=${start_boot_seconds}
-    Redfish.Login
-    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
-
-
-Poweron Host And Verify Host Image
-    [Documentation]  Power on Host and verify installed image is functional.
-    [Arguments]  ${apply_time}
-
-    # Description of argument(s):
-    # apply_time            ApplyTime allowed values
-    #                       (e.g. "OnReset", "Immediate").
-
-    Run Keyword if  'OnReset' == '${apply_time}'
-    ...    Redfish Host Reboot
-    ...  ELSE
-    ...    Wait State  os_running_match_state  10 mins
-    Redfish.Login
-    Redfish Verify Host Version  ${IMAGE_FILE_PATH}
-
-
 Get Host Power State
     [Documentation]  Get host power state.
     [Arguments]  ${quiet}=0
