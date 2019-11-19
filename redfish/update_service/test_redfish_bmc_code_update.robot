@@ -19,6 +19,7 @@ Resource                 ../../lib/logging_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
+Library                  ../../lib/gen_robot_keyword.py
 
 Suite Setup              Suite Setup Execution
 Suite Teardown           Redfish.Logout
@@ -76,11 +77,12 @@ Redfish Update Firmware
 
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
-
     Set ApplyTime  policy=${apply_Time}
+    ${get_json_file}=  OperatingSystem.Get File  lib/applytime_table.json
+    ${post_code_update_actions}=  Evaluate  json.loads('''${get_json_file}''')  json
     Redfish Upload Image And Check Progress State
-    Reboot BMC And Verify BMC Image
-    ...  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
+    Run Key  ${post_code_update_actions['bmc']['${apply_time}']}
+    Redfish.Login
     Verify Get ApplyTime  ${apply_time}
 
 
