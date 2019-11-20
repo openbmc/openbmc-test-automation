@@ -117,6 +117,16 @@ Redfish Login Via SessionService
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
+Verify Redfish Unresponsive URL paths
+    [Documentation]  Verify that all URLs in /redfish/v1 respond.
+    [Tags]   Verify_Redfish_Unresponsive_URL_paths
+
+    Redfish.Login
+    ${resource_list}  ${dead_resources}=  Enumerate Request  /redfish/v1  include_dead_resources=True
+    Redfish.Logout
+    Valid Length  dead_resources  max_length=0
+
+
 *** Keywords ***
 
 GET And Verify Redfish Response
