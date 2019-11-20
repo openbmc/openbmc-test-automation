@@ -10,6 +10,7 @@ import re
 import collections
 
 import gen_print as gp
+import gen_valid as gv
 import gen_misc as gm
 import gen_cmd as gc
 
@@ -303,66 +304,42 @@ def get_plug_default(var_name,
     return default
 
 
-def srequired_plug_in(req_plug_in_names,
-                      plug_in_dir_paths=None):
+def required_plug_in(required_plug_in_names,
+                     plug_in_dir_paths=None):
     r"""
-    Return an empty string if the required plug-ins are found in plug_in_dir_paths.  Otherwise, return an
-    error string.
+    Determine whether the required_plug_in_names are in plug_in_dir_paths, construct an error_message and
+    call gv.process_error_message(error_message).
+
+    In addition, for each plug-in in required_plug_in_names, set the global plug-in variables.  This is
+    useful for callers who then want to validate certain values from other plug-ins.
 
     Example call:
-    error_message = srequired_plug_in(req_plug_in_names, plug_in_dir_paths)
+    required_plug_in(required_plug_in_names)
 
     Description of argument(s):
-    req_plug_in_names               A list of plug_in names that the caller requires (e.g. ['OS_Console']).
+    required_plug_in_names          A list of plug_in names that the caller requires (e.g. ['OS_Console']).
     plug_in_dir_paths               A string which is a colon-delimited list of plug-ins specified by the
                                     user (e.g. DB_Logging:FFDC:OS_Console:Perf).  Path values (e.g.
                                     "/home/robot/dir1") will be stripped from this list to do the analysis.
-                                    Default value is the <PLUG_VAR_PREFIX>_PLUG_IN_DIR_PATHS environment
-                                    variable.
+                                    Default value is the AUTOGUI_PLUG_IN_DIR_PATHS or
+                                    <PLUG_VAR_PREFIX>_PLUG_IN_DIR_PATHS environment variable.
     """
 
     # Calculate default value for plug_in_dir_paths.
-    if plug_in_dir_paths is None:
-        plug_in_dir_paths = os.environ.get(PLUG_VAR_PREFIX
-                                           + "_PLUG_IN_DIR_PATHS", "")
-
-    error_message = ""
+    plug_in_dir_paths = gm.dft(plug_in_dir_paths,
+                               os.environ.get('AUTOGUI_PLUG_IN_DIR_PATHS',
+                                              os.environ.get(PLUG_VAR_PREFIX + "_PLUG_IN_DIR_PATHS", "")))
 
     # Convert plug_in_dir_paths to a list of base names.
     plug_in_dir_paths = \
         list(filter(None, map(os.path.basename, plug_in_dir_paths.split(":"))))
 
-    # Check for each of the user's required plug-ins.
-    for plug_in_name in req_plug_in_names:
-        if plug_in_name not in plug_in_dir_paths:
-            error_message = "The \"" + get_plug_in_package_name() +\
-                "\" plug-in cannot run unless the user also selects the \"" +\
-                plug_in_name + "\" plug in:\n" +\
-                gp.sprint_var(plug_in_dir_paths)
+    error_message = gv.valid_list(plug_in_dir_paths, required_values=required_plug_in_names)
+    if error_message:
+        return gv.process_error_message(error_message)
 
-    return error_message
-
-
-def required_plug_in(req_plug_in_names,
-                     plug_in_dir_paths=None):
-    r"""
-    Return True if each of the plug-ins in req_plug_in_names can be found in plug_in_dir_paths  Otherwise,
-    return False and print an error message to stderr.
-
-    Example call:
-    if not required_plug_in(['OS_Console'], AUTOBOOT_PLUG_IN_DIR_PATHS):
-        return False
-
-    Description of argument(s):
-    (See Description of arguments for srequired_plug_in (above)).
-    """
-
-    error_message = srequired_plug_in(req_plug_in_names, plug_in_dir_paths)
-    if not error_message == "":
-        gp.print_error_report(error_message)
-        return False
-
-    return True
+    for plug_in_package_name in required_plug_in_names:
+        get_plug_vars(general=False, plug_in_package_name=plug_in_package_name)
 
 
 def compose_plug_in_save_dir_path(plug_in_package_name=None):
