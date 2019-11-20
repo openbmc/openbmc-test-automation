@@ -106,8 +106,7 @@ def stop_check():
     """
 
     if MASTER_PID != PROGRAM_PID:
-        stop_check_rc = stop_test_rc
-        save_plug_in_value(stop_check_rc)
+        save_plug_in_value(stop_check_rc=stop_test_rc)
     exit(stop_test_rc)
 
 
