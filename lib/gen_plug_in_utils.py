@@ -13,6 +13,7 @@ import gen_print as gp
 import gen_valid as gv
 import gen_misc as gm
 import gen_cmd as gc
+import func_args as fa
 
 PLUG_VAR_PREFIX = os.environ.get("PLUG_VAR_PREFIX", "AUTOBOOT")
 
@@ -366,8 +367,7 @@ def compose_plug_in_save_dir_path(plug_in_package_name=None):
     if NICKNAME == "":
         NICKNAME = os.environ["AUTOIPL_FSP1_NICKNAME"]
     MASTER_PID = os.environ[PLUG_VAR_PREFIX + "_MASTER_PID"]
-    gp.qprint_vars(BASE_TOOL_DIR_PATH, NICKNAME, plug_in_package_name,
-                   MASTER_PID)
+    gp.dprint_vars(BASE_TOOL_DIR_PATH, NICKNAME, plug_in_package_name, MASTER_PID)
     return BASE_TOOL_DIR_PATH + gm.username() + "/" + NICKNAME + "/" +\
         plug_in_package_name + "/" + str(MASTER_PID) + "/"
 
