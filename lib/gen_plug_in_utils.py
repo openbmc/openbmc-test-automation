@@ -13,6 +13,7 @@ import gen_print as gp
 import gen_valid as gv
 import gen_misc as gm
 import gen_cmd as gc
+import func_args as fa
 
 PLUG_VAR_PREFIX = os.environ.get("PLUG_VAR_PREFIX", "AUTOBOOT")
 
@@ -366,8 +367,7 @@ def compose_plug_in_save_dir_path(plug_in_package_name=None):
     if NICKNAME == "":
         NICKNAME = os.environ["AUTOIPL_FSP1_NICKNAME"]
     MASTER_PID = os.environ[PLUG_VAR_PREFIX + "_MASTER_PID"]
-    gp.qprint_vars(BASE_TOOL_DIR_PATH, NICKNAME, plug_in_package_name,
-                   MASTER_PID)
+    gp.dprint_vars(BASE_TOOL_DIR_PATH, NICKNAME, plug_in_package_name, MASTER_PID)
     return BASE_TOOL_DIR_PATH + gm.username() + "/" + NICKNAME + "/" +\
         plug_in_package_name + "/" + str(MASTER_PID) + "/"
 
@@ -401,74 +401,109 @@ def delete_plug_in_save_dir(plug_in_package_name=None):
                  + compose_plug_in_save_dir_path(plug_in_package_name))
 
 
-def save_plug_in_value(value, plug_in_package_name=None):
+def save_plug_in_value(var_value=None, plug_in_package_name=None, **kwargs):
     r"""
     Save a value in a plug-in save file.  The value may be retrieved later via a call to the
     restore_plug_in_value function.
 
-    This function will figure out the variable name of the value passed and use that name in creating the
-    plug-in save file.
+    This function will figure out the variable name corresponding to the value passed and use that name in
+    creating the plug-in save file.
 
-    Example call:
+    The caller may pass the value as a simple variable or as a keyword=value (see examples below).
+
+    Example 1:
 
     my_var1 = 5
     save_plug_in_value(my_var1)
 
     In this example, the value "5" would be saved to the "my_var1" file in the plug-in save directory.
 
+    Example 2:
+
+    save_plug_in_value(my_var1=5)
+
+    In this example, the value "5" would be saved to the "my_var1" file in the plug-in save directory.
+
     Description of argument(s):
-    value                           The value to be saved.
+    var_value                       The value to be saved.
     plug_in_package_name            See compose_plug_in_save_dir_path for details.
+    kwargs                          The first entry may contain a var_name/var_value.  Other entries are
+                                    ignored.
     """
 
-    # Get the name of the variable used as argument one to this function.
-    var_name = gp.get_arg_name(0, 1, stack_frame_ix=2)
+    if var_value is None:
+        var_name = next(iter(kwargs))
+        var_value = kwargs[var_name]
+    else:
+        # Get the name of the variable used as argument one to this function.
+        var_name = gp.get_arg_name(0, 1, stack_frame_ix=2)
     plug_in_save_dir_path = create_plug_in_save_dir(plug_in_package_name)
     save_file_path = plug_in_save_dir_path + var_name
     gp.qprint_timen("Saving \"" + var_name + "\" value.")
-    gc.shell_cmd("echo '" + str(value) + "' > " + save_file_path)
+    gp.qprint_varx(var_name, var_value)
+    gc.shell_cmd("echo '" + str(var_value) + "' > " + save_file_path)
 
 
-def restore_plug_in_value(default="", plug_in_package_name=None):
+def restore_plug_in_value(*args, **kwargs):
     r"""
     Return a value from a plug-in save file.
 
-    The name of the value to be restored will be determined by this function based on the lvalue being
-    assigned.  Consider the following example:
+    The args/kwargs are interpreted differently depending on how this function is called.
+
+    Mode 1 - The output of this function is assigned to a variable:
+
+    Example:
 
     my_var1 = restore_plug_in_value(2)
 
-    In this example, this function would look for the "my_var1" file in the plug-in save directory, read its
-    value and return it.  If no such file exists, the default value of 2 would be returned.
+    In this mode, the lvalue ("my_var1" in this example) will serve as the name of the value to be restored.
+
+    Mode 2 - The output of this function is NOT assigned to a variable:
+
+    Example:
+
+    if restore_plug_in_value('my_var1', 2):
+        do_something()
+
+    In this mode, the caller must explicitly provide the name of the value being restored.
+
+    The args/kwargs are interpreted as follows:
 
     Description of argument(s):
+    var_name                        The name of the value to be restored. Only relevant in mode 1 (see
+                                    example above).
     default                         The default value to be returned if there is no plug-in save file for the
                                     value in question.
     plug_in_package_name            See compose_plug_in_save_dir_path for details.
     """
-
-    # Get the lvalue from the caller's invocation of this function.
+    # Process args.
     lvalue = gp.get_arg_name(0, -1, stack_frame_ix=2)
+    if lvalue:
+        var_name = lvalue
+    else:
+        var_name, args, kwargs = fa.pop_arg("", *args, **kwargs)
+    default, args, kwargs = fa.pop_arg("", *args, **kwargs)
+    plug_in_package_name, args, kwargs = fa.pop_arg(None, *args, **kwargs)
+    if args or kwargs:
+        error_message = "Programmer error - Too many arguments passed for this function."
+        raise ValueError(error_message)
     plug_in_save_dir_path = create_plug_in_save_dir(plug_in_package_name)
-    save_file_path = plug_in_save_dir_path + lvalue
+    save_file_path = plug_in_save_dir_path + var_name
     if os.path.isfile(save_file_path):
-        gp.qprint_timen("Restoring " + lvalue + " value from "
-                        + save_file_path + ".")
-        value = gm.file_to_list(save_file_path, newlines=0, comments=0,
-                                trim=1)[0]
+        gp.qprint_timen("Restoring " + var_name + " value from " + save_file_path + ".")
+        var_value = gm.file_to_list(save_file_path, newlines=0, comments=0, trim=1)[0]
         if type(default) is bool:
             # Convert from string to bool.
-            value = (value == 'True')
+            var_value = (var_value == 'True')
         if type(default) is int:
             # Convert from string to int.
-            value = int(value)
-        gp.qprint_varx(lvalue, value)
-        return value
+            var_value = int(var_value)
     else:
-        gp.qprint_timen("Save file " + save_file_path
-                        + " does not exist so returning default value.")
-        gp.qprint_var(default)
-        return default
+        var_value = default
+        gp.qprint_timen("Save file " + save_file_path + " does not exist so returning default value.")
+
+    gp.qprint_varx(var_name, var_value)
+    return var_value
 
 
 def exit_not_master():
