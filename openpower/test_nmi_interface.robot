@@ -32,13 +32,18 @@ Trigger NMI When OPAL/Host OS Is Running And Secureboot Is Disabled
     [Setup]  Test Setup Execution  ${0}
 
     Trigger NMI  valid_status_codes=[${HTTP_OK}]
-    # NMI Post Crash Dump Verification
+    Verify Crash Dump Directory After NMI Inject
+
+
+*** Keywords ***
+
+Verify Crash Dump Directory After NMI Inject
+    [Documentation]  Verification of crash dump directory after NMI inject.
+
     Wait Until Keyword Succeeds  10 min  1 min  Is Host Rebooted
     Is OS Booted
     Wait Until Keyword Succeeds  1 min  10 sec  Verify Crash Dump Directory
 
-
-*** Keywords ***
 
 Test Setup Execution
     [Documentation]  Test setup execution.
@@ -74,10 +79,12 @@ Trigger NMI
     Redfish.Post  ${SYSTEM_BASE_URI}Actions/ComputerSystem.Reset
     ...  body={"ResetType": "Nmi"}  valid_status_codes=${valid_status_codes}
 
+
 Verify Crash Dump Directory
     [Documentation]  Verify that the crash dump directory is not empty.
 
     # As per the requirement, there should be a crash dump file
     # after successful NMI injection.
+
     ${output}  ${stderr}  ${rc}=
     ...  OS Execute Command  ls -ltr /var/crash/*  print_out=1
