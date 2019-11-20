@@ -8,7 +8,7 @@ import gen_print as gp
 import collections
 
 
-def pop_arg(default=None, *args, **kwargs):
+def pop_arg(pop_arg_default=None, *args, **kwargs):
     r"""
     Pop a named argument from the args/kwargs and return a tuple consisting of the argument value, the
     modified args and the modified kwargs.
@@ -46,7 +46,7 @@ def pop_arg(default=None, *args, **kwargs):
     difference being that the last_name value was popped from kwargs rather than from args.
 
     Description of argument(s):
-    default                         The value to return if the named argument is not present in args/kwargs.
+    pop_arg_default                 The value to return if the named argument is not present in args/kwargs.
     args                            The positional arguments passed to the calling function.
     kwargs                          The keyword arguments passed to the calling function.
     """
@@ -61,7 +61,7 @@ def pop_arg(default=None, *args, **kwargs):
         if args:
             arg_value = args.pop(0)
         else:
-            arg_value = default
+            arg_value = pop_arg_default
 
     return arg_value, args, kwargs
 
