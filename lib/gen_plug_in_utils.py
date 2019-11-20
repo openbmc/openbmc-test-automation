@@ -202,7 +202,7 @@ def print_plug_in_header():
         qprint_plug_vars(headers=0, general=False, custom=True)
 
 
-def get_plug_vars(mod_name="__main__"):
+def get_plug_vars(mod_name="__main__", **kwargs):
     r"""
     Get all plug-in variables and put them in corresponding global variables.
 
@@ -216,10 +216,12 @@ def get_plug_vars(mod_name="__main__"):
 
     Description of argument(s):
     mod_name                        The name of the module whose global plug-in variables should be retrieved.
+    kwargs                          These are passed directly to return_plug_vars.  See return_plug_vars's
+                                    prolog for details.
     """
 
     module = sys.modules[mod_name]
-    plug_var_dict = return_plug_vars()
+    plug_var_dict = return_plug_vars(**kwargs)
 
     # Get all PLUG_VAR_PREFIX environment variables and put them into globals.
     for key, value in plug_var_dict.items():
