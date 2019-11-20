@@ -35,7 +35,8 @@ def get_plug_in_package_name(case=None):
 
 
 def return_plug_vars(general=True,
-                     custom=True):
+                     custom=True,
+                     plug_in_package_name=None):
     r"""
     Return an OrderedDict which is sorted by key and which contains all of the plug-in environment variables.
 
@@ -72,16 +73,18 @@ def return_plug_vars(general=True,
                                     "AUTOGUI").
     custom                          Return custom plug-in parms (i.e. those beginning with the upper case
                                     name of the plug-in package, for example "OBMC_SAMPLE_PARM1").
+    plug_in_package_name            The name of the plug-in package for which custom parms are to be
+                                    returned.  The default is the current plug in package name.
     """
 
     regex_list = []
     if not (general or custom):
         return collections.OrderedDict()
-    plug_in_package_name = get_plug_in_package_name(case="upper")
+    plug_in_package_name = gm.dft(plug_in_package_name, get_plug_in_package_name())
     if general:
         regex_list = [PLUG_VAR_PREFIX, "AUTOGUI"]
     if custom:
-        regex_list.append(plug_in_package_name)
+        regex_list.append(plug_in_package_name.upper())
 
     regex = "^(" + "|".join(regex_list) + ")_"
 
@@ -96,7 +99,8 @@ def return_plug_vars(general=True,
 
     # For all variables specified in the parm_def file, we want them to default to "" rather than being unset.
     # Process the parm_def file if it exists.
-    parm_def_file_path = gp.pgm_dir_path + "parm_def"
+    parm_def_file_path = os.path.dirname(gp.pgm_dir_path.rstrip("/")) + "/" + plug_in_package_name \
+        + "/parm_def"
     if os.path.exists(parm_def_file_path):
         parm_defs = gm.my_parm_file(parm_def_file_path)
     else:
@@ -109,7 +113,7 @@ def return_plug_vars(general=True,
 
     # Create a list of plug-in environment variables by pre-pending <all caps plug-in package name>_<all
     # caps var name>
-    plug_in_parm_names = [plug_in_package_name + "_" + x for x in
+    plug_in_parm_names = [plug_in_package_name.upper() + "_" + x for x in
                           map(str.upper, parm_defs.keys())]
     # Example plug_in_parm_names:
     # plug_in_parm_names:
