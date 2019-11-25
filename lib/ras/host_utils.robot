@@ -61,8 +61,8 @@ Get ProcChipId From OS
 
     ${proc_ids}=  Split String  ${proc_chip_id}
     ${proc_id}=  Run Keyword If  '${master_proc_chip}' == 'True'
-    \  ...  Get From List  ${proc_ids}  1
-    \  ...  ELSE  Get From List  ${proc_ids}  0
+    ...  Get From List  ${proc_ids}  1
+    ...  ELSE  Get From List  ${proc_ids}  0
 
     # Example output:
     # 00000008
@@ -181,71 +181,6 @@ BMC Putscom
     # fru                 FRU (field replaceable unit) (e.g. '2011400').
     # chip_address        Chip address (e.g. '4000000000000000').
 
-    ${cmd}=  Catenate  pdbg -d p9w -p${proc_chip_id} putscom 0x${fru} 0x${chip_address}
+    ${cmd}=  Catenate  pdbg -p${proc_chip_id} putscom 0x${fru} 0x${chip_address}
 
     BMC Execute Command  ${cmd}
-
-Inject Error Through BMC
-    [Documentation]  Inject checkstop on multiple targets like
-    ...              CPU/CME/OCC/NPU/CAPP/MCA etc. through BMC.
-    ...              Test sequence:
-    ...              1. Boot To HOST.
-    ...              2. Clear any existing gard records.
-    ...              3. Inject Error on processor.
-    [Arguments]      ${fir}  ${chip_address}  ${threshold_limit}
-    ...  ${master_proc_chip}=True
-    # Description of argument(s):
-    # fir                 FIR (Fault isolation register) value (e.g. '2011400').
-    # chip_address        Chip address (e.g. '2000000000000000').
-    # threshold_limit     Recoverable error threshold limit (e.g. '1', '5', '32').
-
-    Delete Error Logs
-    Login To OS Host
-    Set Auto Reboot  1
-
-    Gard Operations On OS  clear all
-
-    ${threshold_limit}=  Convert To Integer  ${threshold_limit}
-    :FOR  ${count}  IN RANGE  ${threshold_limit}
-    \  BMC Putscom  0  ${fir}
-    ...  ${chip_address}
-    # Adding delay after each error injection.
-    \  Sleep  10s
-    # Adding delay to get error log after error injection.
-    Sleep  120s
-
-
-Inject Error Through BMC At HOST Boot
-    [Documentation]  Inject error on multiple targets like
-    ...              CPU/CME/OCC/NPU/CAPP/MCA etc. through BMC at HOST Boot.
-    ...              Test sequence:
-    ...              1. Boot To HOST.
-    ...              2. Clear any existing gard records.
-    ...              3. Power off HOST and Boot.
-    ...              4. Inject Error on processor through BMC.
-    [Arguments]      ${fir}  ${chip_address}
-    # Description of argument(s):
-    # fir                 FIR (Fault isolation register) value (e.g. '2011400').
-    # chip_address        Chip address (e.g. '2000000000000000').
-
-    Delete Error Logs
-
-    REST Power On  stack_mode=skip
-
-    Gard Operations On OS  clear all
-
-    REST Power Off
-    Set Auto Reboot  1
-    Initiate Host Boot  wait=${0}
-
-    Start SOL Console Logging   ${EXECDIR}/esol.log
-
-    Wait Until Keyword Succeeds  5 min  5 sec
-    ...  Shell Cmd  grep 'ISTEP *14' ${EXECDIR}/esol.log  quiet=1
-    ...  print_output=0  show_err=0  ignore_err=0
-
-    BMC Putscom  0  ${fir}  ${chip_address}
-    # Adding delay to get error log after error injection.
-    Sleep  10s
-
-    Stop SOL Console Logging
