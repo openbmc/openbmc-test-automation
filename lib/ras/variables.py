@@ -83,3 +83,6 @@ ERROR_INJECT_DICT = {'MCACALIFIR_RECV1': ['07010900', '8000000000000000',
 # Address translation files
 probe_cpu_file_path = '/root/probe_cpus.sh'
 addr_translation_file_path = '/root/scom_addr_p9.sh'
+
+cfam_address = "2801"
+mem_address = "8208000"
