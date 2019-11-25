@@ -177,13 +177,57 @@ BMC Putscom
     [Arguments]      ${proc_chip_id}  ${fru}  ${chip_address}
 
     # Description of argument(s):
-    # proc_chip_id        Processor ID (e.g '0', '8').
+    # proc_chip_id        Processor ID (e.g '0', '1').
     # fru                 FRU (field replaceable unit) (e.g. '2011400').
     # chip_address        Chip address (e.g. '4000000000000000').
 
-    ${cmd}=  Catenate  pdbg -d p9w -p${proc_chip_id} putscom 0x${fru} 0x${chip_address}
+    ${cmd}=  Catenate  pdbg -p${proc_chip_id} putscom 0x${fru} 0x${chip_address}
 
     BMC Execute Command  ${cmd}
+
+BMC Getscom
+
+    [Documentation]  Executes getscom command through BMC.
+
+    [Arguments]      ${proc_chip_id}  ${fru}
+
+    # Description of argument(s):
+    # proc_chip_id        Processor ID (e.g '0', '1').
+    # fru                 FRU (field replaceable unit) (e.g. '2011400').
+
+    ${cmd}=  Catenate  pdbg -p${proc_chip_id} getscom 0x${fru}
+
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
+    [Return]  ${output}
+
+BMC Getcfam
+    [Documentation]  Executes getcfam command through BMC.
+
+    [Arguments]      ${proc_chip_id}  ${cfam_address}
+
+    # Description of argument(s):
+    # proc_chip_id        Processor ID (e.g '0', '1').
+    # cfam_address        Address (e.g. '2801').
+
+    ${cmd}=  Catenate  pdbg -p${proc_chip_id}  getcfam 0x${cfam_address}
+
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
+    [Return]  ${output}
+
+BMC Getmem
+    [Documentation]  Executes getmem command through BMC.
+
+    [Arguments]      ${proc_chip_id}  ${mem_address}  ${count}
+
+    # Description of argument(s):
+    # proc_chip_id        Processor ID (e.g '0', '1').
+    # mem_address         Address (e.g. '8208000').
+    # count               count (e.g 128, 256).
+
+    ${cmd}=  Catenate  pdbg -p${proc_chip_id} getmem 0x${mem_address} ${count}
+
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
+    [Return]  ${output}
 
 Inject Error Through BMC
     [Documentation]  Inject checkstop on multiple targets like
