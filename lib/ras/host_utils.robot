@@ -171,19 +171,6 @@ Enable Opal-PRD Service On HOST
     ${opal_prd_state}=  Is Opal-PRD Service Enabled
     Should Contain  ${opal_prd_state}  enabled
 
-BMC Putscom
-    [Documentation]  Executes putscom command through BMC.
-
-    [Arguments]      ${proc_chip_id}  ${fru}  ${chip_address}
-
-    # Description of argument(s):
-    # proc_chip_id        Processor ID (e.g '0', '8').
-    # fru                 FRU (field replaceable unit) (e.g. '2011400').
-    # chip_address        Chip address (e.g. '4000000000000000').
-
-    ${cmd}=  Catenate  pdbg -d p9w -p${proc_chip_id} putscom 0x${fru} 0x${chip_address}
-
-    BMC Execute Command  ${cmd}
 
 Inject Error Through BMC
     [Documentation]  Inject checkstop on multiple targets like
@@ -207,8 +194,7 @@ Inject Error Through BMC
 
     ${threshold_limit}=  Convert To Integer  ${threshold_limit}
     :FOR  ${count}  IN RANGE  ${threshold_limit}
-    \  BMC Putscom  0  ${fir}
-    ...  ${chip_address}
+    \  Pdbg  -p0 putscom 0x${fir} 0x${chip_address}
     # Adding delay after each error injection.
     \  Sleep  10s
     # Adding delay to get error log after error injection.
@@ -244,7 +230,7 @@ Inject Error Through BMC At HOST Boot
     ...  Shell Cmd  grep 'ISTEP *14' ${EXECDIR}/esol.log  quiet=1
     ...  print_output=0  show_err=0  ignore_err=0
 
-    BMC Putscom  0  ${fir}  ${chip_address}
+    Pdbg  -p0 putscom 0x${fir} 0x${chip_address}
     # Adding delay to get error log after error injection.
     Sleep  10s
 
