@@ -53,18 +53,18 @@ Inject Recoverable Error With Threshold Limit
     ...              2. Check If HOST is running.
     ...              3. Verify error log entry & signature description.
     ...              4. Verify & clear gard records.
-    [Arguments]      ${interface_type}  ${fir}  ${chip_address}  ${threshold_limit}
+    [Arguments]      ${interface_type}  ${fir_address}  ${value}  ${threshold_limit}
     ...              ${signature_desc}  ${log_prefix}
     # Description of argument(s):
     # interface_type      Inject error through 'BMC' or 'HOST'.
-    # fir                 FIR (Fault isolation register) value (e.g. 2011400).
-    # chip_address        Chip address (e.g 2000000000000000).
+    # fir_address         FIR (Fault isolation register) value (e.g. 2011400).
+    # value               (e.g 2000000000000000).
     # threshold_limit     Threshold limit (e.g 1, 5, 32).
     # signature_desc      Error log signature description.
     # log_prefix          Log path prefix.
 
     Run Keyword  Inject Error Through ${interface_type}
-    ...  ${fir}  ${chip_address}  ${threshold_limit}  ${master_proc_chip}
+    ...  ${fir_address}  ${value}  ${threshold_limit}  ${master_proc_chip}
 
     Is Host Running
     ${output}=  Gard Operations On OS  list
@@ -83,12 +83,12 @@ Inject Unrecoverable Error
     ...              3. Verify & clear gard records.
     ...              4. Verify error log entry & signature description.
     ...              5. Verify & clear dump entry.
-    [Arguments]      ${interface_type}  ${fir}  ${chip_address}  ${threshold_limit}
+    [Arguments]      ${interface_type}  ${fir_address}  ${value}  ${threshold_limit}
     ...              ${signature_desc}  ${log_prefix}  ${bmc_reboot}=${0}
     # Description of argument(s):
     # interface_type      Inject error through 'BMC' or 'HOST'.
-    # fir                 FIR (Fault isolation register) value (e.g. 2011400).
-    # chip_address        Chip address (e.g 2000000000000000).
+    # fir_address         FIR (Fault isolation register) value (e.g. 2011400).
+    # value               (e.g 2000000000000000).
     # threshold_limit     Threshold limit (e.g 1, 5, 32).
     # signature_desc      Error Log signature description.
     #                     (e.g 'mcs(n0p0c0) (MCFIR[0]) mc internal recoverable')
@@ -96,7 +96,7 @@ Inject Unrecoverable Error
     # bmc_reboot          Do bmc reboot If bmc_reboot is set.
 
     Run Keyword  Inject Error Through ${interface_type}
-    ...  ${fir}  ${chip_address}  ${threshold_limit}  ${master_proc_chip}
+    ...  ${fir_address}  ${value}  ${threshold_limit}  ${master_proc_chip}
 
     # Do BMC Reboot after error injection.
     Run Keyword If  ${bmc_reboot}  Run Keywords
@@ -115,9 +115,9 @@ Inject Unrecoverable Error
 
 Fetch FIR Address Translation Value
     [Documentation]  Fetch FIR address translation value through HOST.
-    [Arguments]  ${fir}  ${target_type}
+    [Arguments]  ${fir_address}  ${target_type}
     # Description of argument(s):
-    # fir                  FIR (Fault isolation register) value (e.g. '2011400').
+    # fir_address          FIR (Fault isolation register) value (e.g. '2011400').
     # core_id              Core ID (e.g. '9').
     # target_type          Target type (e.g. 'EX', 'EQ', 'C').
 
@@ -140,7 +140,7 @@ Fetch FIR Address Translation Value
     ${core_ids_sub_list}=   Evaluate  random.sample(${core_ids}, 1)  random
     ${core_id}=  Get From List  ${core_ids_sub_list}  0
     ${translated_fir_addr}=  FIR Address Translation Through HOST
-    ...  ${fir}  ${core_id}  ${target_type}
+    ...  ${fir_address}  ${core_id}  ${target_type}
 
     [Return]  ${translated_fir_addr}
 
@@ -204,14 +204,14 @@ Inject Error At HOST Boot Path
     ...              2. Check If HOST is rebooted and running.
     ...              3. Verify error log entry & signature description.
     ...              4. Verify & clear gard records.
-    [Arguments]      ${fir}  ${chip_address}  ${signature_desc}  ${log_prefix}
+    [Arguments]      ${fir_address}  ${value}  ${signature_desc}  ${log_prefix}
     # Description of argument(s):
-    # fir                 FIR (Fault isolation register) value (e.g. 2011400).
-    # chip_address        Chip address (e.g 2000000000000000).
+    # fir_address         FIR (Fault isolation register) value (e.g. 2011400).
+    # value               (e.g 2000000000000000).
     # signature_desc      Error log signature description.
     # log_prefix          Log path prefix.
 
-    Inject Error Through BMC At HOST Boot  ${fir}  ${chip_address}
+    Inject Error Through BMC At HOST Boot  ${fir_address}  ${value}
 
     Wait Until Keyword Succeeds  500 sec  20 sec  Is Host Rebooted
     Wait for OS
