@@ -8,21 +8,13 @@ import sys
 import subprocess
 import re
 
-save_path_0 = sys.path[0]
-del sys.path[0]
+save_dir_path = sys.path.pop(0)
 
-from gen_arg import *
-from gen_print import *
-from gen_valid import *
-from gen_misc import *
-from gen_cmd import *
-from var_funcs import *
+modules = ['gen_arg', 'gen_print', 'gen_valid', 'gen_misc', 'gen_cmd', 'var_funcs']
+for module in modules:
+    exec("from " + module + " import *")
 
-# Restore sys.path[0].
-sys.path.insert(0, save_path_0)
-
-# Set exit_on_error for gen_valid functions.
-set_exit_on_error(True)
+sys.path.insert(0, save_dir_path)
 
 parser = argparse.ArgumentParser(
     usage='%(prog)s [OPTIONS]',
@@ -97,34 +89,6 @@ parser.add_argument(
 stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
 
 
-def exit_function(signal_number=0,
-                  frame=None):
-    r"""
-    Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
-    """
-
-    dprint_executing()
-    dprint_var(signal_number)
-
-    qprint_pgm_footer()
-
-
-def signal_handler(signal_number,
-                   frame):
-    r"""
-    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our program would terminate immediately
-    with return code 143 and without calling our exit_function.
-    """
-
-    # Our convention is to set up exit_function with atexit.register() so there is no need to explicitly
-    # call exit_function from here.
-
-    dprint_executing()
-
-    # Calling exit prevents us from returning to the code that was running when we received the signal.
-    exit(0)
-
-
 def validate_parms():
     r"""
     Validate program parameters, etc.
@@ -165,8 +129,6 @@ def validate_parms():
     os.environ['AUTO_STATUS_FILE_PATH'] = status_file_path
     # Set deprecated but still used AUTOSCRIPT_STATUS_FILE_PATH value.
     os.environ['AUTOSCRIPT_STATUS_FILE_PATH'] = status_file_path
-
-    gen_post_validation(exit_function, signal_handler)
 
 
 def script_func(command_string, status_file_path):
@@ -226,11 +188,7 @@ def tee_func(command_string, status_file_path):
 
 def main():
 
-    gen_get_options(parser, stock_list)
-
-    validate_parms()
-
-    qprint_pgm_header()
+    gen_setup()
 
     global ret_code_str
     ret_code_str = re.sub("\\.py$", "", pgm_name) + "_ret_code"

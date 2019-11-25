@@ -1,34 +1,20 @@
 #!/usr/bin/env python
 
+r"""
+See help text for details.
+"""
+
 import sys
-try:
-    import __builtin__
-except ImportError:
-    import builtins as __builtin__
 import subprocess
 import os
-import argparse
 
-# python puts the program's directory path in sys.path[0].  In other words, the user ordinarily has no way
-# to override python's choice of a module from its own dir.  We want to have that ability in our environment.
-# However, we don't want to break any established python modules that depend on this behavior.  So, we'll
-# save the value from sys.path[0], delete it, import our modules and then restore sys.path to its original
-# value.
+save_dir_path = sys.path.pop(0)
 
-save_path_0 = sys.path[0]
-del sys.path[0]
+modules = ['gen_arg', 'gen_print', 'gen_valid', 'gen_plug_in', 'gen_cmd', 'gen_misc']
+for module in modules:
+    exec("from " + module + " import *")
 
-from gen_print import *
-from gen_valid import *
-from gen_arg import *
-from gen_plug_in import *
-from gen_cmd import *
-from gen_misc import *
-
-# Restore sys.path[0].
-sys.path.insert(0, save_path_0)
-
-# Create parser object to process command line parameters and args.
+sys.path.insert(0, save_dir_path)
 
 # Create parser object.
 parser = argparse.ArgumentParser(
@@ -120,36 +106,8 @@ parser.add_argument(
     default="obmc",
     help=mch_class_help_text + default_string)
 
-# The stock_list will be passed to gen_get_options.  We populate it with the names of stock parm options we
-# want.  These stock parms are pre-defined by gen_get_options.
+# Populate stock_list with options we want.
 stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
-
-
-def exit_function(signal_number=0,
-                  frame=None):
-    r"""
-    Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
-    """
-
-    dprint_executing()
-    dprint_var(signal_number)
-
-    qprint_pgm_footer()
-
-
-def signal_handler(signal_number, frame):
-    r"""
-    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our program would terminate immediately
-    with return code 143 and without calling our exit_function.
-    """
-
-    # Our convention is to set up exit_function with atexit.registr() so there is no need to explicitly call
-    # exit_function from here.
-
-    dprint_executing()
-
-    # Calling exit prevents us from returning to the code that was running when we received the signal.
-    exit(0)
 
 
 def validate_parms():
@@ -157,20 +115,14 @@ def validate_parms():
     Validate program parameters, etc.  Return True or False accordingly.
     """
 
-    if not valid_value(call_point):
-        return False
+    valid_value(call_point)
 
     global allow_shell_rc
-    if not valid_integer(allow_shell_rc):
-        return False
+    valid_integer(allow_shell_rc)
 
     # Convert to hex string for consistency in printout.
     allow_shell_rc = "0x%08x" % int(allow_shell_rc, 0)
     set_pgm_arg(allow_shell_rc)
-
-    gen_post_validation(exit_function, signal_handler)
-
-    return True
 
 
 def run_pgm(plug_in_dir_path,
@@ -262,22 +214,8 @@ def run_pgm(plug_in_dir_path,
 
 
 def main():
-    r"""
-    This is the "main" function.  The advantage of having this function vs just doing this in the true
-    mainline is that you can:
-    - Declare local variables
-    - Use "return" instead of "exit".
-    - Indent 4 chars like you would in any function.
-    This makes coding more consistent, i.e. it's easy to move code from here into a function and vice versa.
-    """
 
-    if not gen_get_options(parser, stock_list):
-        return False
-
-    if not validate_parms():
-        return False
-
-    qprint_pgm_header()
+    gen_setup()
 
     # Access program parameter globals.
     global plug_in_dir_paths
@@ -312,14 +250,9 @@ def main():
                         + " by caller.\n")
             break
 
-    if ret_code == 0:
-        return True
-    else:
+    if ret_code != 0:
         print_error("At least one plug-in failed.\n")
-        return False
+        exit(1)
 
 
-# Main
-
-if not main():
-    exit(1)
+main()
