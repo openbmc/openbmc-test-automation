@@ -181,9 +181,53 @@ BMC Putscom
     # fru                 FRU (field replaceable unit) (e.g. '2011400').
     # chip_address        Chip address (e.g. '4000000000000000').
 
-    ${cmd}=  Catenate  pdbg -d p9w -p${proc_chip_id} putscom 0x${fru} 0x${chip_address}
+    ${cmd}=  Catenate  pdbg -p${proc_chip_id} putscom 0x${fru} 0x${chip_address}
 
     BMC Execute Command  ${cmd}
+
+BMC Getscom
+
+    [Documentation]  Executes getscom command through BMC.
+
+    [Arguments]      ${proc_chip_id}  ${fru}
+
+    # Description of argument(s):
+    # proc_chip_id        Processor ID (e.g '0', '8').
+    # fru                 FRU (field replaceable unit) (e.g. '2011400').
+
+    ${cmd}=  Catenate  pdbg -p${proc_chip_id} getscom 0x${fru}
+
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
+    [Return]  ${output}
+
+BMC Getcfam
+    [Documentation]  Executes getcfam command through BMC.
+
+    [Arguments]      ${proc_chip_id}  ${fru}
+
+    # Description of argument(s):
+    # proc_chip_id        Processor ID (e.g '0', '8').
+    # fru                 FRU (field replaceable unit) (e.g. '2011400').
+
+    ${cmd}=  Catenate  pdbg -p${proc_chip_id}  getcfam 0x${fru}
+
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
+    [Return]  ${output}
+
+BMC Getmem
+    [Documentation]  Executes getmem command through BMC.
+
+    [Arguments]      ${proc_chip_id}  ${fru}  ${count}
+
+    # Description of argument(s):
+    # proc_chip_id        Processor ID (e.g '0', '8').
+    # fru                 FRU (field replaceable unit) (e.g. '2011400').
+    # count               memory count (e.g 128, 256).
+
+    ${cmd}=  Catenate  pdbg -p${proc_chip_id} getmem 0x${fru} ${count}
+
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
+    [Return]  ${output}
 
 Inject Error Through BMC
     [Documentation]  Inject checkstop on multiple targets like

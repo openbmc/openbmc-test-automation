@@ -302,3 +302,21 @@ def to_json_ordered(json_str):
         return json.loads(json_str, object_pairs_hook=DotDict)
     except TypeError:
         return json.loads(json_str.decode("utf-8"), object_pairs_hook=DotDict)
+
+
+def pdbg(option_string, **bsu_options):
+    r"""
+    Run pdbg on the BMC with the caller's option string and return the output.
+
+    Description of argument(s):
+    option_string                   A string of options which are to be processed by the pdbg command.
+    bsu_options                     Options to be passed directly to bmc_execute_command.  See its prolog for
+                                    details.
+    """
+
+    # Default print_out to 1.
+    if 'print_out' not in bsu_options:
+        bsu_options['print_out'] = 1
+
+    stdout, stderr, rc = bsu.bmc_execute_command('pdbg ' + option_string, **bsu_options)
+    return stdout
