@@ -4,21 +4,13 @@ Documentation   Test Non-maskable interrupt functionality.
 Resource        ../lib/bmc_redfish_resource.robot
 Resource        ../lib/boot_utils.robot
 Resource        ../lib/openbmc_ffdc.robot
+Resource        ../lib/secureboot/secureboot.robot
 Resource        ../lib/state_manager.robot
 Library         ../lib/bmc_ssh_utils.py
 Library         ../syslib/utils_os.py
 
 Test Teardown   FFDC On Test Case Fail
 Suite Teardown  Redfish.Logout
-
-
-*** Variables ***
-
-${cmd_set_secure_boot_disable}     mkdir -p /var/lib/obmc && /bin/echo -e '0 0x283a 0x16000000\n0 0x283F 0x20000000' > /var/lib/obmc/cfam_overrides
-${cmd_set_secure_boot_Enable}       rm -rf /var/lib/obmc/cfam_overrides
-${cmd_ verify_secure_boot_option}   pdbg -a getcfam 0x2801
-${regvalue_getcfam_output_disable}  0x80c00002
-${regvalue_getcfam_output_enable}   0x88c00002
 
 
 *** Test Cases ***
@@ -37,7 +29,7 @@ Trigger NMI When OPAL/Host OS Is Running And Secureboot Is Disabled
     ...  while injecting NMI, when HOST OS is running and
     ...  secureboot is disabled.
     [Tags]  Trigger_NMI_When_OPAL/Host_OS_Is_Running_And_Secureboot_Is_Disabled
-    [Setup]  Test Setup Execution
+    [Setup]  Test Setup Execution  ${0}
 
     Trigger NMI  valid_status_codes=[${HTTP_OK}]
     Verify Crash Dump Directotry After NMI Inject
@@ -55,21 +47,16 @@ Verify Crash Dump Directotry After NMI Inject
 
 Test Setup Execution
     [Documentation]  Test setup execution.
-    [Arguments]  ${cmd_set_secure_boot_mode}=${cmd_set_secure_boot_disable}
-    ...  ${regvalue_getcfam_output}=${regvalue_getcfam_output_disable}
+    [Arguments]  ${secure_boot_mode}=${1}
 
     # Description of argument(s):
-    # cmd_set_secure_boot_mode     BMC ClI command to Enable or
-    #                              Disable the secure boot.
-    # getcfam_output               Secure boot register value - >
-    #                              for Enable: 0x88c00002 and Disable: 0x88c00002
+    # secure_boot_mode  Secure boot -> Enable-1 or Disable-0.
 
     Redfish Power Off  stack_mode=skip
     Set Auto Reboot  ${1}
-    Bmc Execute Command  ${cmd_set_secure_boot_mode}  print_out=1
+    # Set and verify secure boot policy as disabled.
+    Set And Verify TPM Policy  ${secure_boot_mode}
     Redfish Power On
-    ${output}=  Bmc Execute Command  ${cmd_verify_secure_boot_option}  print_out=1
-    Should Contain  ${output[0]}  ${regvalue_getcfam_output}
     # Delete any pre-existing dump files.
     OS Execute Command  rm -rf /var/crash/*
     ${os_release_info}=  Get OS Release Info
