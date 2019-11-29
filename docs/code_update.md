@@ -1,5 +1,46 @@
 ## Code Update ##
 
+#### Redfish Code Update ####
+
+Currently supported BMC and PNOR update formats are UBI.
+For code update information, please refer to [code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
+
+* UBI Format *
+
+    For BMC code update, download the system type *.ubi.mdt.tar image from
+    https://openpower.xyz/job/openbmc-build/ and run as follows:
+
+    For Witherspoon system:
+    ```
+    * Code Update with OnReset Policy
+
+        $ cd redfish/update_service/test_redfish_bmc_code_update.robot
+        $ robot -v OPENBMC_HOST:x.x.x.x -v IMAGE_FILE_PATH:<image path>/obmc-phosphor-image-witherspoon.ubi.mtd.tar --include Redfish_Code_Update_With_ApplyTime_OnReset redfish/update_service/test_redfish_bmc_code_update.robot
+
+    * Code Update with Immediate Policy
+
+        $ cd redfish/update_service/test_redfish_bmc_code_update.robot
+        $ robot -v OPENBMC_HOST:x.x.x.x -v IMAGE_FILE_PATH:<image path>/obmc-phosphor-image-witherspoon.ubi.mtd.tar --include Redfish_Code_Update_With_ApplyTime_Immediate redfish/update_service/test_redfish_bmc_code_update.robot
+    ```
+
+    For host code update, download the system type *.pnor.squashfs.tar image
+    from https://openpower.xyz/job/openpower-op-build/ and run as follows:
+
+    For Witherspoon system:
+    ```
+    * Code Update with OnReset Policy
+
+        $ cd redfish/update_service/test_redfish_host_code_update.robot
+        $ robot -v OPENBMC_HOST:x.x.x.x -v IMAGE_FILE_PATH:<image path>/witherspoon.pnor.squashfs.tar --include Redfish_Code_Update_With_ApplyTime_OnReset redfish/update_service/test_redfish_host_code_update.robot
+
+    * Code Update with Immediate Policy
+
+        $ cd redfish/update_service/test_redfish_host_code_update.robot
+        $ robot -v OPENBMC_HOST:x.x.x.x -v IMAGE_FILE_PATH:<image path>/witherspoon.pnor.squashfs.tar --include Redfish_Code_Update_With_ApplyTime_Immediate redfish/update_service/test_redfish_host_code_update.robot
+    ```
+
+#### REST Code Update ####
+
 Currently supported BMC and PNOR update formats are UBI and non-UBI.
 For code update information, please refer to [code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
 
