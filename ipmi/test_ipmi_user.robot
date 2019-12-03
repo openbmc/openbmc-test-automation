@@ -4,8 +4,9 @@ Documentation       Test suite for OpenBMC IPMI user management.
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Library             ../lib/ipmi_utils.py
+Library             ../lib/gen_robot_valid.py
 
-Test Teardown       Test Teardown Execution
+#Test Teardown       Test Teardown Execution
 Suite Teardown      Delete All Non Root IPMI User
 
 *** Variables ***
@@ -34,9 +35,7 @@ Verify IPMI User Summary
     Delete All Non Root IPMI User
 
     # Create a valid user and enable it.
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
     Run IPMI Standard Command  user enable ${random_userid}
 
     # Verify maximum user count IPMI local user can have. Also verify
@@ -53,9 +52,7 @@ Verify IPMI User Creation With Valid Name And ID
     [Documentation]  Create user via IPMI and verify.
     [Tags]  Test_IPMI_User_Creation_With_Valid_Name_And_ID
 
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
 
 
 Verify IPMI User Creation With Invalid Name
@@ -91,9 +88,7 @@ Verify Setting IPMI User With Invalid Password
     [Tags]  Verify_Setting_IPMI_User_With_Invalid_Password
 
     # Create IPMI user.
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
 
     # Set invalid password for newly created user.
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
@@ -118,9 +113,7 @@ Verify IPMI User Password Via Test Command
     [Tags]  Verify_IPMI_User_Password_Via_Test_Command
 
     # Create IPMI user.
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
 
     # Set valid password for newly created user.
     Run IPMI Standard Command
@@ -138,9 +131,7 @@ Verify Setting Valid Password For IPMI User
     [Tags]  Verify_Setting_Valid_Password_For_IPMI_User
 
     # Create IPMI user.
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
 
     # Set valid password for newly created user.
     Run IPMI Standard Command
@@ -177,9 +168,7 @@ Verify Setting IPMI User With Null Password
     [Tags]  Verify_Setting_IPMI_User_With_Null_Password
 
     # Create IPMI user.
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
 
     # Set null password for newly created user.
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
@@ -192,9 +181,7 @@ Verify IPMI User Deletion
     [Documentation]  Delete user via IPMI and verify.
     [Tags]  Verify_IPMI_User_Deletion
 
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
 
     # Delete IPMI User and verify
     Run IPMI Standard Command  user set name ${random_userid} ""
@@ -245,22 +232,18 @@ Enable IPMI User And Verify
     [Tags]  Enable_IPMI_User_And_Verify
 
     # Create IPMI user and set valid password.
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
     Run IPMI Standard Command
     ...  user set password ${random_userid} ${valid_password}
 
     # Set admin privilege and enable IPMI messaging for newly created user.
     Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
 
-    # Delay added for user privilge to get set.
+    # Delay added for user privilege to get set.
     Sleep  5s
 
     # Enable IPMI user and verify.
-    Run IPMI Standard Command  user enable ${random_userid}
-    ${user_info}=  Get User Info  ${random_userid}
-    Should Be Equal  ${user_info['enable_status']}  enabled
+    Enable IPMI User and Verify It  ${random_userid}
 
     # Verify that enabled IPMI  user is able to run IPMI command.
     Verify IPMI Username And Password  ${random_username}  ${valid_password}
@@ -272,9 +255,7 @@ Disable IPMI User And Verify
     [Tags]  Disable_IPMI_User_And_Verify
 
     # Create IPMI user and set valid password.
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
     Run IPMI Standard Command
     ...  user set password ${random_userid} ${valid_password}
 
@@ -313,9 +294,7 @@ Verify Administrator And No Access Privilege For Different Channels
     [Tags]  Verify_Administrator_And_No_Access_Privilege_For_Different_Channels
 
     # Create IPMI user and set valid password.
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
     Run IPMI Standard Command
     ...  user set password ${random_userid} ${valid_password}
 
@@ -326,9 +305,7 @@ Verify Administrator And No Access Privilege For Different Channels
     Set Channel Access  ${random_userid}  ipmi=on privilege=${no_access_priv}  2
 
     # Enable IPMI user and verify.
-    Run IPMI Standard Command  user enable ${random_userid}
-    ${user_info}=  Get User Info  ${random_userid}
-    Should Be Equal  ${user_info['enable_status']}  enabled
+    Enable IPMI User and Verify It  ${random_userid}
 
     # Verify that user is able to run administrator level IPMI command with channel 1.
     Verify IPMI Command  ${random_username}  ${valid_password}  Administrator  1
@@ -342,9 +319,7 @@ Verify Operator And User Privilege For Different Channels
     [Tags]  Verify_Operator_And_User_Privilege_For_Different_Channels
 
     # Create IPMI user and set valid password.
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
     Run IPMI Standard Command
     ...  user set password ${random_userid} ${valid_password}
 
@@ -355,9 +330,7 @@ Verify Operator And User Privilege For Different Channels
     Set Channel Access  ${random_userid}  ipmi=on privilege=${user_priv}  2
 
     # Enable IPMI user and verify.
-    Run IPMI Standard Command  user enable ${random_userid}
-    ${user_info}=  Get User Info  ${random_userid}
-    Should Be Equal  ${user_info['enable_status']}  enabled
+    Enable IPMI User and Verify It  ${random_userid}
 
     # Verify that user is able to run operator level IPMI command with channel 1.
     Verify IPMI Command  ${random_username}  ${valid_password}  Operator  1
@@ -366,7 +339,66 @@ Verify Operator And User Privilege For Different Channels
     Verify IPMI Command  ${random_username}  ${valid_password}  User  2
 
 
+Verify Setting IPMI User With Valid 20 Character Password
+    [Documentation]  Verify IPMI user creation with password length of 20 characters.
+    [Tags]  Verify_Setting_IPMI_User_With_Valid_20_Character_Password
+    [Template]  Set User Password And Verify
+
+    20  password_option=20
+
+
+Verify Setting IPMI User With Invalid 21 Character Password
+    [Documentation]  Verify that IPMI user cannot be set with 21 character password using 16 char or 20 char
+    ...  password option.
+    [Tags]  Verify_Setting_IPMI_User_With_Invalid_21_Character_Password
+    [Template]  Set User Password And Verify
+
+    21  expected_result=${False}
+    21  password_option=20  expected_result=${False}
+
+
+Verify Setting IPMI User With 16 Character Password
+    [Documentation]  Verify that IPMI user can create a 16 character password using 16 char or 20 char
+    ...  password option.
+    [Tags]  Verify_Setting_IPMI_User_With_16_Character_Password
+    [Template]  Set User Password And Verify
+
+    16
+    16  password_option=20
+
+
+Verify Default Selection Of 16 Character Password For IPMI User
+    [Documentation]  Verify that ipmitool by default opts for the 16 character option when given a password
+    ...  whose length is in between 17 and 20.
+    [Tags]  Verify_Default_Selection_Of_16_Character_Password_For_IPMI_User
+    [Template]  Set User Password And Verify
+
+    17
+    20
+
+
 *** Keywords ***
+
+Create Random IPMI User
+    [Documentation]  Create IPMI user with random username and userid and return those fields.
+
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+    [Return]  ${random_userid}  ${random_username}
+
+
+Enable IPMI User And Verify It
+    [Documentation]  Enable the userid and verify that it has been enabled.
+    [Arguments]  ${userid}
+
+    # Description of argument(s):
+    # userid   A numeric userid (e.g. "4").
+
+    Run IPMI Standard Command  user enable ${userid}
+    ${user_info}=  Get User Info  ${userid}
+    Valid Value  user_info['enable_status']  ['enabled']
+
 
 Set Default Password For IPMI Root User
     [Documentation]  Set default password for IPMI root user (i.e. 0penBmc).
@@ -403,13 +435,11 @@ Test IPMI User Privilege
     # Set privilege and enable IPMI messaging for newly created user.
     Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege_level}
 
-    # Delay added for user privilge to get set.
+    # Delay added for user privilege to get set.
     Sleep  5s
 
     # Enable IPMI user and verify.
-    Run IPMI Standard Command  user enable ${random_userid}
-    ${user_info}=  Get User Info  ${random_userid}
-    Should Be Equal  ${user_info['enable_status']}  enabled
+    Enable IPMI User and Verify It  ${random_userid}
 
     Verify IPMI Command  ${random_username}  ${valid_password}  User
     ...  expected_status=${user_cmd_status}
@@ -426,7 +456,7 @@ Verify IPMI Command
     # Description of argument(s):
     # username         The user name (e.g. "root", "robert", etc.).
     # password         The user password (e.g. "0penBmc", "0penBmc1", etc.).
-    # privilege        The session privilge for IPMI command (e.g. "User", "Operator", etc.).
+    # privilege        The session privilege for IPMI command (e.g. "User", "Operator", etc.).
     # channel          The user channel number (e.g. "1" or "2").
     # expected_status  Expected status of IPMI command run with the user
     #                  of above password and privilege (i.e. "Passed" or "Failed").
@@ -435,6 +465,41 @@ Verify IPMI Command
     Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Standard Command
     ...  sel info ${channel}  expected_rc=${expected_rc}  U=${username}  P=${password}
     ...  L=${privilege}
+
+
+Set User Password And Verify
+    [Documentation]  Generates password and tries to set it to newly created IPMI user.
+    [Arguments]  ${password_length}  ${password_option}=16  ${expected_result}=${True}
+    # Description of argument(s):
+    # password_length  Length of password to be generated and used (e.g. "16").
+    # password_option  Password length option to be given in IPMI command (e.g. "16", "20").
+    # expected_result  Expected result for setting the password to user (e.g. "True", "False").
+
+    # Create IPMI user.
+    ${random_userid}  ${random_username}=  Create Random IPMI User
+
+    ${password}=  Generate Random String  length=${password_length}
+
+    # Set password for newly created user.
+    ${status}=  Run Keyword And Return Status  Run IPMI Standard Command
+    ...  user set password ${random_userid} ${password} ${password_option}
+    Should Be Equal  ${status}  ${expected_result}
+
+    # Set admin privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
+
+    # Delay added for user privilege to get set.
+    Sleep  5s
+
+    # Enable IPMI user and verify.
+    Enable IPMI User and Verify It  ${random_userid}
+
+    ${password}=  Set Variable If
+    ...  '${password_length}' >= '${17}' and '${password_length}' <= '${20}' and '${password_option}' == '16'
+    ...  ${password[:16]}  ${password}
+    ${status}=  Run Keyword And Return Status  Verify IPMI Username And Password  ${random_username}
+    ...  ${password}
+    Should Be Equal  ${status}  ${expected_result}
 
 
 Test Teardown Execution
