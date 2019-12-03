@@ -21,6 +21,10 @@ ${no_access_priv}       15
 ${valid_password}       0penBmc1
 ${max_password_length}  20
 ${ipmi_setaccess_cmd}   channel setaccess
+${20_char_password}     0penBmc10penBmc2Bmc3
+${21_char_password}     0penBmc10penBmc2Bmc34
+${16_char_password}     0penBmc10penBmc2
+${17_char_password}     0penBmc10penBmc2B
 
 
 *** Test Cases ***
@@ -364,6 +368,122 @@ Verify Operator And User Privilege For Different Channels
 
     # Verify that user is able to run user level IPMI command with channel 2.
     Verify IPMI Command  ${random_username}  ${valid_password}  User  2
+
+
+Verify Setting IPMI User With Valid 20 Character Password
+    [Documentation]  Verify IPMI user creation with password length of 20
+    ...  characters.
+    [Tags]  Verify_Setting_IPMI_User_With_Valid_20_Character_Password
+
+    # Create IPMI user.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Set password for newly created user.
+    ${msg}=  Run IPMI Standard Command
+    ...  user set password ${random_userid} ${20_char_password} ${max_password_length}
+    Should Contain  ${msg}  Set User Password command successful
+
+    # Set admin privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
+
+    # Delay added for user privilge to get set.
+    Sleep  5s
+
+    # Enable IPMI user and verify.
+    Run IPMI Standard Command  user enable ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  enabled
+    Verify IPMI Username And Password  ${random_username}  ${20_char_password}
+
+
+Verify Setting IPMI User With Invalid 21 Character Password
+    [Documentation]  Verify that IPMI user cannot be set with 21 character
+    ...  password using 16 char or 20 char password option.
+    [Tags]  Verify_Setting_IPMI_User_With_Invalid_21_Character_Password
+
+    # Create IPMI user.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Set 20 character password and verify.
+    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ...  user set password ${random_userid} ${21_char_password} ${max_password_length}
+    Should Contain  ${msg}  Password is too long (> 20 bytes)
+
+    # Set 16 character password and verify.
+    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ...  user set password ${random_userid} ${21_char_password}
+    Should Contain  ${msg}  Password is too long (> 20 bytes)
+
+
+Verify Setting IPMI User With 16 Character Password
+    [Documentation]  Verify that IPMI user can create a 16 character password using
+    ...  16 char or 20 char password option.
+    [Tags]  Verify_Setting_IPMI_User_With_16_Character_Password
+
+    # Create IPMI user.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Set 16 character password for newly created user.
+    ${msg}=  Run IPMI Standard Command
+    ...  user set password ${random_userid} ${16_char_password}
+    Should Contain  ${msg}  Set User Password command successful
+
+    # Set admin privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
+
+    # Delay added for user privilge to get set.
+    Sleep  5s
+
+    # Enable IPMI user and verify.
+    Run IPMI Standard Command  user enable ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  enabled
+    Verify IPMI Username And Password  ${random_username}  ${16_char_password}
+
+    # Set 16 character password by explicitly applying 20 character option.
+    ${msg}=  Run IPMI Standard Command
+    ...  user set password ${random_userid} ${16_char_password}  ${max_password_length}
+    Verify IPMI Username And Password  ${random_username}  ${16_char_password}
+
+
+Verify Default Selection Of 16 Character Password For IPMI User
+    [Documentation]  Verify that ipmitool by default opts for the 16 character
+    ...  option when given a password length >16 and <20
+    [Tags]  Verify_Default_Selection_Of_16_Character_Password_For_IPMI_User
+
+    # Create IPMI user.
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+
+    # Set 17 character password for newly created user.
+    ${msg}=  Run IPMI Standard Command
+    ...  user set password ${random_userid} ${17_char_password}
+    Should Contain  ${msg}  Set User Password command successful
+
+    # Set admin privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
+
+    # Delay added for user privilge to get set.
+    Sleep  5s
+
+    # Enable IPMI user and verify.
+    Run IPMI Standard Command  user enable ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}
+    Should Be Equal  ${user_info['enable_status']}  enabled
+    Verify IPMI Username And Password  ${random_username}  ${16_char_password}
+
+    # Set 20 character password and verify.
+    ${msg}=  Run IPMI Standard Command
+    ...  user set password ${random_userid} ${20_char_password}
+    Should Contain  ${msg}  Set User Password command successful
+    Verify IPMI Username And Password  ${random_username}  ${16_char_password}
 
 
 *** Keywords ***
