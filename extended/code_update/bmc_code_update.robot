@@ -14,6 +14,7 @@ Resource          ../../lib/code_update_utils.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/dump_utils.robot
 Resource          ../../lib/certificate_utils.robot
+Resource          ../../lib/redfish_code_update_utils.robot
 
 Suite Setup       Suite Setup Execution
 
@@ -73,6 +74,18 @@ REST BMC Code Update
     [Teardown]  REST BMC Code Update Teardown
 
     Run Keyword And Ignore Error  List Installed Images  BMC
+
+    ${image_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    Rprint Vars  image_version
+
+    Redfish.Login
+    ${software_inventory_record}=  Get Software Inventory State By Version
+    ...  ${image_version}
+    Rprint Vars  software_inventory_record
+
+    # Check if the existing firmware is functional.
+    Pass Execution If  ${software_inventory_record['functional']}
+    ...  The existing ${image_version} firmware is already functional.
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
