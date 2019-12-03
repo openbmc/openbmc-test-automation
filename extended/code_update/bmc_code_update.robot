@@ -74,6 +74,16 @@ REST BMC Code Update
 
     Run Keyword And Ignore Error  List Installed Images  BMC
 
+    ${image_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    Rprint Vars  image_version
+
+    ${functional_version}=  Get BMC Version
+    Rprint Vars  functional_version
+
+    # Check if the existing firmware is functional.
+    Pass Execution If  ${functional_version} == "${image_version}"
+    ...  The existing ${image_version} firmware is already functional.
+
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
