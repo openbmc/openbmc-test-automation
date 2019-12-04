@@ -1,0 +1,11 @@
+Code-Review+1: Prashanth Katti <prkatti1@in.ibm.com>
+Code-Review+1: Rahul Maheshwari <rahulmaheshwari@in.ibm.com>
+Code-Review+1: Michael Walsh <micwalsh@us.ibm.com>
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+2: George Keishing <gkeishin@in.ibm.com>
+Submitted-by: George Keishing <gkeishin@in.ibm.com>
+Submitted-at: Wed, 04 Dec 2019 16:34:49 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/27060
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
