@@ -141,8 +141,9 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
             gp.print_timen("Processing " + call_point
                            + " call point programs.")
 
-    proc_plug_pkg_rc = subprocess.call(cmd_buf, shell=True,
-                                       executable='/bin/bash')
+    sub_proc = subprocess.Popen(cmd_buf, shell=True, executable='/bin/bash')
+    sub_proc.communicate()
+    proc_plug_pkg_rc = sub_proc.returncode
 
     if return_history:
         # Get the "Running" statements from the output.
