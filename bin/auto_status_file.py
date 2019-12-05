@@ -63,7 +63,7 @@ parser.add_argument(
 
 parser.add_argument(
     '--tee',
-    default=0,
+    default=1,
     type=int,
     choices=[1, 0],
     help="Indicates that \"tee\" rather than \"script\" should be used.")
@@ -189,6 +189,8 @@ def tee_func(command_string, status_file_path):
 def main():
 
     gen_setup()
+
+    set_term_options(term_requests={'pgm_names': [command_string.split(" ")[0]]})
 
     global ret_code_str
     ret_code_str = re.sub("\\.py$", "", pgm_name) + "_ret_code"
