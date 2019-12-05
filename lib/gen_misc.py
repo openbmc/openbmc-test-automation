@@ -12,6 +12,7 @@ import collections
 import json
 import time
 import inspect
+import random
 try:
     import ConfigParser
 except ImportError:
@@ -298,6 +299,19 @@ def file_to_str(*args, **kwargs):
     """
 
     return '\n'.join(file_to_list(*args, **kwargs))
+
+
+def append_file(file_path, buffer):
+    r"""
+    Append the data in buffer to the file named in file_path.
+
+    Description of argument(s):
+    file_path                       The path to a file (e.g. "/tmp/root/file1").
+    buffer                          The buffer of data to be written to the file (e.g. "this and that").
+    """
+
+    with open(file_path, "a") as file:
+        file.write(buffer)
 
 
 def return_path_list():
@@ -604,3 +618,53 @@ def get_python_version():
 python_version = \
     version_tuple(get_python_version())
 ordered_dict_version = version_tuple("3.6")
+
+
+def create_temp_file_path(delim=":", suffix=""):
+    r"""
+    Create a temporary file path and return it.
+
+    This function is appropriate for users who with to create a temporary file and:
+    1) Have control over when and whether the file is deleted.
+    2) Have the name of the file indicate information such as program name, function name, line, pid, etc.
+    This can be an aid in debugging, cleanup, etc.
+
+    The dir path portion of the file path will be /tmp/<username>/.  This function will create this directory
+    if it doesn't already exist.
+
+    This function will NOT create the file.  The file will NOT automatically get deleted.  It is the
+    responsibility of the caller to dispose of it.
+
+    Example:
+
+    pgm123.py is run by user 'joe'.  It calls func1 which contains this code:
+
+    temp_file_path = create_temp_file_path(suffix='suffix1')
+    print_var(temp_file_path)
+
+    Output:
+
+    temp_file_path:                 /tmp/joe/pgm123.py:func1:line_55:pid_8199:831848:suffix1
+
+    Description of argument(s):
+    delim                           A delimiter to be used to separate the sub-components of the file name.
+    suffix                          A suffix to include as the last sub-component of the file name.
+    """
+
+    temp_dir_path = "/tmp/" + username() + "/"
+    try:
+        os.mkdir(temp_dir_path)
+    except FileExistsError:
+        pass
+
+    callers_stack_frame = inspect.stack()[1]
+    file_name_elements = \
+        [
+            gp.pgm_name, callers_stack_frame.function, "line_" + str(callers_stack_frame.lineno),
+            "pid_" + str(os.getpid()), str(random.randint(0, 1000000)), suffix
+        ]
+    temp_file_name = delim.join(file_name_elements)
+
+    temp_file_path = temp_dir_path + temp_file_name
+
+    return temp_file_path
