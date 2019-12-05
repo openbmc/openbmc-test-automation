@@ -223,5 +223,8 @@ Get Number Of Event Logs
 Redfish Purge Event Log
     [Documentation]  Do Redfish EventLog purge.
 
-    Redfish.Post  ${EVENT_LOG_URI}Actions/LogService.Reset
-    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+    ${get_target}=  redfish_utils.Get Target Actions
+    ...  /redfish/v1/Systems/system/LogServices/EventLog/  LogService.ClearLog
+    ${payload}=  Create Dictionary  target=${get_target}
+    ${resp}=  Redfish.Post  ${get_target}  body=&{payload}
+
