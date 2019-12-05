@@ -109,6 +109,8 @@ parser.add_argument(
 # Populate stock_list with options we want.
 stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
 
+original_path = os.environ.get('PATH')
+
 
 def validate_parms():
     r"""
@@ -185,8 +187,10 @@ def run_pgm(plug_in_dir_path,
         + " --quiet=1 --show_url=1 --prefix=" \
         + auto_status_file_prefix + " --stdout=" + str(stdout) + " "
 
-    cmd_buf = "PATH=" + plug_in_dir_path.rstrip("/") + ":${PATH} ; " +\
-        auto_status_file_subcmd + cp_prefix + call_point
+    cmd_buf = "PATH=" + plug_in_dir_path.rstrip("/") + ":${PATH}"
+    print_issuing(cmd_buf)
+    os.environ['PATH'] = plug_in_dir_path.rstrip("/") + os.pathsep + original_path
+    cmd_buf = auto_status_file_subcmd + cp_prefix + call_point
     print_issuing(cmd_buf)
 
     sub_proc = subprocess.Popen(cmd_buf, shell=True)
@@ -216,6 +220,8 @@ def run_pgm(plug_in_dir_path,
 def main():
 
     gen_setup()
+
+    set_term_options(term_requests='children')
 
     # Access program parameter globals.
     global plug_in_dir_paths
