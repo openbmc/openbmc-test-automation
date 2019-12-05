@@ -23,6 +23,7 @@ from robot.libraries.BuiltIn import BuiltIn
 from boot_data import *
 import gen_print as gp
 import gen_robot_plug_in as grpi
+import gen_arg as ga
 import gen_valid as gv
 import gen_misc as gm
 import gen_cmd as gc
@@ -975,8 +976,12 @@ def test_loop_body():
 
 def obmc_boot_test_teardown():
     r"""
-    Clean up after the Main keyword.
+    Clean up after the main keyword.
     """
+    gp.qprint_executing()
+
+    if ga.psutil_imported:
+        ga.terminate_descendants()
 
     if cp_setup_called:
         plug_in_setup()
@@ -1017,6 +1022,11 @@ def test_teardown():
     """
 
     gp.qprintn()
+    gp.qprint_executing()
+
+    if ga.psutil_imported:
+        ga.terminate_descendants()
+
     cmd_buf = ["Print Error",
                "A keyword timeout occurred ending this program.\n"]
     BuiltIn().run_keyword_if_timeout_occurred(*cmd_buf)
@@ -1081,6 +1091,8 @@ def obmc_boot_test_py(loc_boot_stack=None,
     """
 
     global save_stack
+
+    ga.set_term_options(term_requests={'pgm_names': ['process_plug_in_packages.py']})
 
     gp.dprintn()
     # Process function parms.
