@@ -1630,6 +1630,19 @@ def sprint_pgm_footer():
     return buffer
 
 
+def sprint_file(file_path):
+    r"""
+    Return the file data as a string.
+
+    Description of argument(s):
+    file_path                       The path to a file (e.g. "/tmp/file1").
+    """
+
+    with open(file_path, 'r') as file:
+        buffer = file.read()
+    return buffer
+
+
 def sprint(buffer=""):
     r"""
     Simply return the user's buffer.  This function is used by the qprint and dprint functions defined
@@ -2005,7 +2018,7 @@ func_names = ['print_time', 'print_timen', 'print_error', 'print_varx',
               'print_var', 'print_vars', 'print_dashes', 'indent',
               'print_call_stack', 'print_func_name', 'print_executing',
               'print_pgm_header', 'print_issuing', 'print_pgm_footer',
-              'print_error_report', 'print', 'printn']
+              'print_file', 'print_error_report', 'print', 'printn']
 
 # stderr_func_names is a list of functions whose output should go to stderr rather than stdout.
 stderr_func_names = ['print_error', 'print_error_report']
