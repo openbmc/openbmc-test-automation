@@ -5,6 +5,13 @@ This module provides valuable argument processing functions like gen_get_options
 """
 
 import sys
+import os
+import re
+try:
+    import psutil
+    psutil_imported = True
+except ImportError:
+    psutil_imported = False
 try:
     import __builtin__
 except ImportError:
@@ -15,8 +22,11 @@ import argparse
 
 import gen_print as gp
 import gen_valid as gv
+import gen_cmd as gc
+import gen_misc as gm
 
 default_string = '  The default value is "%(default)s".'
+module = sys.modules["__main__"]
 
 
 def gen_get_options(parser,
@@ -196,26 +206,229 @@ def sprint_args(arg_obj,
     return buffer
 
 
-module = sys.modules["__main__"]
+term_options = None
 
 
-def gen_exit_function(signal_number=0,
-                      frame=None):
+def set_term_options(**kwargs):
+    r"""
+    Set the global term_options.
+
+    If the global term_options is not None, gen_exit_function() will call terminate_descendants().
+
+    Description of arguments():
+    kwargs                          Supported keyword options follow:
+        term_requests               Requests to terminate specified descendants of this program.  The
+                                    following values for term_requests are supported:
+            children                Terminate the direct children of this program.
+            descendants             Terminate all descendants of this program.
+            <dictionary>            A dictionary with support for the following keys:
+                pgm_names           A list of program names which will be used to identify which descendant
+                                    processes should be terminated.
+    """
+
+    global term_options
+    # Validation:
+    arg_names = list(kwargs.keys())
+    gv.valid_list(arg_names, ['term_requests'])
+    if type(kwargs['term_requests']) is dict:
+        keys = list(kwargs['term_requests'].keys())
+        gv.valid_list(keys, ['pgm_names'])
+    else:
+        gv.valid_value(kwargs['term_requests'], ['children', 'descendants'])
+    term_options = kwargs
+
+
+if psutil_imported:
+    def match_process_by_pgm_name(process, pgm_name):
+        r"""
+        Return True or False to indicate whether the process matches the program name.
+
+        Description of argument(s):
+        process                     A psutil process object such as the one returned by psutil.Process().
+        pgm_name                    The name of a program to look for in the cmdline field of the process
+                                    object.
+        """
+
+        # This function will examine elements 0 and 1 of the cmdline field of the process object.  The
+        # following examples will illustrate the reasons for this:
+
+        # Example 1: Suppose a process was started like this:
+
+        # shell_cmd('python_pgm_template --quiet=0', fork=1)
+
+        # And then this function is called as follows:
+
+        # match_process_by_pgm_name(process, "python_pgm_template")
+
+        # The process object might contain the following for its cmdline field:
+
+        # cmdline:
+        #   [0]:                       /usr/bin/python
+        #   [1]:                       /my_path/python_pgm_template
+        #   [2]:                       --quiet=0
+
+        # Because "python_pgm_template" is a python program, the python interpreter (e.g. "/usr/bin/python")
+        # will appear in entry 0 of cmdline and the python_pgm_template will appear in entry 1 (with a
+        # qualifying dir path).
+
+        # Example 2: Suppose a process was started like this:
+
+        # shell_cmd('sleep 5', fork=1)
+
+        # And then this function is called as follows:
+
+        # match_process_by_pgm_name(process, "sleep")
+
+        # The process object might contain the following for its cmdline field:
+
+        # cmdline:
+        #   [0]:                       sleep
+        #   [1]:                       5
+
+        # Because "sleep" is a compiled executable, it will appear in entry 0.
+
+        optional_dir_path_regex = "(.*/)?"
+        cmdline = process.as_dict()['cmdline']
+        return re.match(optional_dir_path_regex + pgm_name + '( |$)', cmdline[0]) \
+            or re.match(optional_dir_path_regex + pgm_name + '( |$)', cmdline[1])
+
+    def select_processes_by_pgm_name(processes, pgm_name):
+        r"""
+        Select the processes that match pgm_name and return the result as a list of process objects.
+
+        Description of argument(s):
+        processes                   A list of psutil process objects such as the one returned by
+                                    psutil.Process().
+        pgm_name                    The name of a program to look for in the cmdline field of each process
+                                    object.
+        """
+
+        return [process for process in processes if match_process_by_pgm_name(process, pgm_name)]
+
+    def sprint_process_report(pids):
+        r"""
+        Create a process report for the given pids and return it as a string.
+
+        Description of argument(s):
+        pids                        A list of process IDs for processes to be included in the report.
+        """
+        report = "\n"
+        cmd_buf = "echo ; ps wwo user,pgrp,pid,ppid,lstart,cmd --forest " + ' '.join(pids)
+        report += gp.sprint_issuing(cmd_buf)
+        rc, outbuf = gc.shell_cmd(cmd_buf, quiet=1)
+        report += outbuf + "\n"
+
+        return report
+
+    def get_descendant_info(process=psutil.Process()):
+        r"""
+        Get info about the descendants of the given process and return as a tuple of descendants,
+        descendant_pids and process_report.
+
+        descendants will be a list of process objects.  descendant_pids will be a list of pids (in str form)
+        and process_report will be a report produced by a call to sprint_process_report().
+
+        Description of argument(s):
+        process                     A psutil process object such as the one returned by psutil.Process().
+        """
+        descendants = process.children(recursive=True)
+        descendant_pids = [str(process.pid) for process in descendants]
+        if descendants:
+            process_report = sprint_process_report([str(process.pid)] + descendant_pids)
+        else:
+            process_report = ""
+        return descendants, descendant_pids, process_report
+
+    def terminate_descendants():
+        r"""
+        Terminate descendants of the current process according to the requirements layed out in global
+        term_options variable.
+
+        Note: If term_options is not null, gen_exit_function() will automatically call this function.
+
+        When this function gets called, descendant processes may be running and may be printing to the same
+        stdout stream being used by this process.  If this function writes directly to stdout, its output can
+        be interspersed with any output generated by descendant processes.  This makes it very difficult to
+        interpret the output.  In order solve this problem, the activity of this process will be logged to a
+        temporary file.  After descendant processes have been terminated successfully, the temporary file
+        will be printed to stdout and then deleted.  However, if this function should fail to complete (i.e.
+        get hung waiting for descendants to terminate gracefully), the temporary file will not be deleted and
+        can be used by the developer for debugging.  If no descendant processes are found, this function will
+        return before creating the temporary file.
+
+        Note that a general principal being observed here is that each process is responsible for the
+        children it produces.
+        """
+
+        message = "\n" + gp.sprint_dashes(width=120) \
+            + gp.sprint_executing() + "\n"
+
+        current_process = psutil.Process()
+
+        descendants, descendant_pids, process_report = get_descendant_info(current_process)
+        if not descendants:
+            # If there are no descendants, then we have nothing to do.
+            return
+
+        terminate_descendants_temp_file_path = gm.create_temp_file_path()
+        gp.print_vars(terminate_descendants_temp_file_path)
+
+        message += gp.sprint_varx("pgm_name", gp.pgm_name) \
+            + gp.sprint_vars(term_options) \
+            + process_report
+
+        # Process the termination requests:
+        if term_options['term_requests'] == 'children':
+            term_processes = current_process.children(recursive=False)
+            term_pids = [str(process.pid) for process in term_processes]
+        elif term_options['term_requests'] == 'descendants':
+            term_processes = descendants
+            term_pids = descendant_pids
+        else:
+            # Process term requests by pgm_names.
+            term_processes = []
+            for pgm_name in term_options['term_requests']['pgm_names']:
+                term_processes.extend(select_processes_by_pgm_name(descendants, pgm_name))
+            term_pids = [str(process.pid) for process in term_processes]
+
+        message += gp.sprint_timen("Processes to be terminated:") \
+            + gp.sprint_var(term_pids)
+        for process in term_processes:
+            process.terminate()
+        message += gp.sprint_timen("Waiting on the following pids: " + ' '.join(descendant_pids))
+        gm.append_file(terminate_descendants_temp_file_path, message)
+        psutil.wait_procs(descendants)
+
+        # Checking after the fact to see whether any descendant processes are still alive.  If so, a process
+        # report showing this will be included in the output.
+        descendants, descendant_pids, process_report = get_descendant_info(current_process)
+        if descendants:
+            message = "\n" + gp.sprint_timen("Not all of the processes terminated:") \
+                + process_report
+            gm.append_file(terminate_descendants_temp_file_path, message)
+
+        message = gp.sprint_dashes(width=120)
+        gm.append_file(terminate_descendants_temp_file_path, message)
+        gp.print_file(terminate_descendants_temp_file_path)
+        os.remove(terminate_descendants_temp_file_path)
+
+
+def gen_exit_function():
     r"""
     Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
     """
-
-    gp.dprint_executing()
-    gp.dprint_var(signal_number)
 
     # ignore_err influences the way shell_cmd processes errors.  Since we're doing exit processing, we don't
     # want to stop the program due to a shell_cmd failure.
     ignore_err = 1
 
+    if psutil_imported and term_options:
+        terminate_descendants()
+
     # Call the main module's exit_function if it is defined.
     exit_function = getattr(module, "exit_function", None)
     if exit_function:
-        exit_function(signal_number, frame)
+        exit_function()
 
     gp.qprint_pgm_footer()
 
@@ -230,7 +443,7 @@ def gen_signal_handler(signal_number,
     # The convention is to set up exit_function with atexit.register() so there is no need to explicitly
     # call exit_function from here.
 
-    gp.dprint_executing()
+    gp.qprint_executing()
 
     # Calling exit prevents control from returning to the code that was running when the signal was received.
     exit(0)
