@@ -54,6 +54,7 @@ ${NETWORK_RETRY_TIME}      6
 ${NETWORK_TIMEOUT}         18
 ${ICMP_TIMESTAMP_REQUEST}  13
 ${ICMP_ECHO_REQUEST}       8
+${CHANNEL_NUMBER}          1
 
 # BMC debug tarball parameter
 ${DEBUG_TARBALL_PATH}  ${EMPTY}
