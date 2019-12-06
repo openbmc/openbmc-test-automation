@@ -397,7 +397,7 @@ IPMI Create User
 Set Channel Access
     [Documentation]  Verify that user is able to run IPMI command
     ...  with given username and password.
-    [Arguments]  ${userid}  ${options}  ${channel}=1
+    [Arguments]  ${userid}  ${options}  ${channel}=${CHANNEL}
 
     # Description of argument(s):
     # userid          The user ID (e.g. "1", "2", etc.).
