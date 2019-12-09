@@ -13,17 +13,19 @@ from robot.libraries.BuiltIn import BuiltIn
 # Set default values for required IPMI options.
 ipmi_interface = 'lanplus'
 ipmi_cipher_suite = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}", '3')
+ipmi_port = BuiltIn().get_variable_value("${IPMI_PORT}", '623')
 ipmi_username = BuiltIn().get_variable_value("${IPMI_USERNAME}", "root")
 ipmi_password = BuiltIn().get_variable_value("${IPMI_PASSWORD}", "0penBmc")
 ipmi_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
 
 # Create a list of the required IPMI options.
-ipmi_required_options = ['I', 'C', 'U', 'P', 'H']
+ipmi_required_options = ['I', 'C', 'p', 'U', 'P', 'H']
 # The following dictionary maps the ipmitool option names (e.g. "I") to our
 # more descriptive names (e.g. "interface") for the required options.
 ipmi_option_name_map = {
     'I': 'interface',
     'C': 'cipher_suite',
+    'p': 'port',
     'U': 'username',
     'P': 'password',
     'H': 'host',
@@ -40,14 +42,14 @@ def create_ipmi_ext_command_string(command, **options):
     ipmi_ext_cmd = create_ipmi_ext_command_string('power status')
 
     Result:
-    ipmitool -I lanplus -C 3 -P ******** -H x.x.x.x power status
+    ipmitool -I lanplus -C 3 -p 623 -P ******** -H x.x.x.x power status
 
     Example:
 
     ipmi_ext_cmd = create_ipmi_ext_command_string('power status', C='4')
 
     Result:
-    ipmitool -I lanplus -C 4 -P ******** -H x.x.x.x power status
+    ipmitool -I lanplus -C 4 -p 623 -P ******** -H x.x.x.x power status
 
     Description of argument(s):
     command                         The ipmitool command (e.g. 'power status').
