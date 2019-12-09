@@ -628,10 +628,10 @@ def create_command_string(command, *pos_parms, **options):
     my_pgm -i -m 1 --password="${my_pw}" /tmp/myfile
 
     command_string = create_command_string('ipmitool', 'power status',
-        I='lanplus', C='3', U='root', P='0penBmc', H='wsbmc010')
+        I='lanplus', C='3', 'p=623', U='root', P='0penBmc', H='xx.xx.xx.xx')
 
     Result:
-    ipmitool -I lanplus -C 3 -U root -P 0penBmc -H wsbmc010 power status
+    ipmitool -I lanplus -C 3 -p 623 -U root -P 0penBmc -H xx.xx.xx.xx power status
 
     By default create_command_string will take measures to preserve the order of the callers options.  In
     some cases, this effort may fail (as when calling directly from a robot program).  In this case, the

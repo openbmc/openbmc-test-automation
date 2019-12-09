@@ -17,7 +17,7 @@ ${netfnByte}=          ${EMPTY}
 ${cmdByte}=            ${EMPTY}
 ${arrayByte}=          array:byte:
 ${IPMI_USER_OPTIONS}   ${EMPTY}
-${IPMI_INBAND_CMD}=    ipmitool -C ${IPMI_CIPHER_LEVEL}
+${IPMI_INBAND_CMD}=    ipmitool -C ${IPMI_CIPHER_LEVEL} -p ${IPMI_PORT}
 ${HOST}=               -H
 ${RAW}=                raw
 

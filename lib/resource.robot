@@ -37,6 +37,7 @@ ${PDU_SLOT_NO}      ${EMPTY}
 # User define input SSH and HTTPS related parameters
 ${SSH_PORT}         22
 ${HTTPS_PORT}       443
+${IPMI_PORT}        623
 ${OPENBMC_SERIAL_HOST}      ${EMPTY}
 ${OPENBMC_SERIAL_PORT}      ${EMPTY}
 
