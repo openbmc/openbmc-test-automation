@@ -438,6 +438,78 @@ def key_value_outbuf_to_dict(out_buf,
     return key_value_list_to_dict(key_var_list, **args)
 
 
+def key_value_outbuf_to_dicts(out_buf,
+                              **args):
+    r"""
+    Convert a buffer containing multiple sections with key/value strings on each line to a list of
+    dictionaries and return it.
+
+    Sections in the output are delimited by blank lines.
+
+    Example usage:
+
+    For the following value of out_buf:
+
+    Maximum User IDs     : 15
+    Enabled User IDs     : 1
+
+    User ID              : 1
+    User Name            : root
+    Fixed Name           : No
+    Access Available     : callback
+    Link Authentication  : enabled
+    IPMI Messaging       : enabled
+    Privilege Level      : ADMINISTRATOR
+    Enable Status        : enabled
+
+    User ID              : 2
+    User Name            :
+    Fixed Name           : No
+    Access Available     : call-in / callback
+    Link Authentication  : disabled
+    IPMI Messaging       : disabled
+    Privilege Level      : NO ACCESS
+    Enable Status        : disabled
+
+    And the following call in python:
+
+    user_info = key_value_outbuf_to_dicts(out_buf)
+
+    The resulting user_info list would look like this:
+
+    user_info:
+      [0]:
+        [maximum_user_ids]:      15
+        [enabled_user_ids]:      1
+      [1]:
+        [user_id]:               1
+        [user_name]:             root
+        [fixed_name]:            No
+        [access_available]:      callback
+        [link_authentication]:   enabled
+        [ipmi_messaging]:        enabled
+        [privilege_level]:       ADMINISTRATOR
+        [enable_status]:         enabled
+      [2]:
+        [user_id]:               2
+        [user_name]:
+        [fixed_name]:            No
+        [access_available]:      call-in / callback
+        [link_authentication]:   disabled
+        [ipmi_messaging]:        disabled
+        [privilege_level]:       NO ACCESS
+        [enable_status]:         disabled
+
+    Description of argument(s):
+    out_buf                         A buffer with multiple secionts of key/value strings on each line.
+                                    Sections are delimited by one or more blank lines (i.e. line feeds). (See
+                                    docstring of parse_key_value function for details).
+    **args                          Arguments to be interpreted by parse_key_value.  (See docstring of
+                                    parse_key_value function for details).
+    """
+    return [key_value_outbuf_to_dict(x, **args) for x in re.split('\n[\n]+', out_buf)]
+
+
 def create_field_desc_regex(line):
 
     r"""
