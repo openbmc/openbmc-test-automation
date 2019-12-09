@@ -460,6 +460,9 @@ def get_user_info(userid, channel_number=1):
     userid          The userid (e.g. "1", "2", etc.).
     channel_number  The user's channel number (e.g. "1").
 
+    Note: If userid is blank, this function will return a list of dictionaries.  Each list entry represents
+    one userid record.
+
     The data is obtained by issuing the IPMI "channel getaccess" command.  An
     example is shown below for user id 1 and channel number 1.
 
@@ -487,15 +490,15 @@ def get_user_info(userid, channel_number=1):
       [ipmi_messaging]       enabled
       [privilege_level]      ADMINISTRATOR
       [enable_status]        enabled
-
     """
 
     status, ret_values = grk.run_key_u("Run IPMI Standard Command  channel getaccess "
                                        + str(channel_number) + " " + str(userid))
 
-    result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
-
-    return result
+    if userid == "":
+        return vf.key_value_outbuf_to_dicts(ret_values, process_indent=1)
+    else:
+        return vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
 
 def channel_getciphers_ipmi():
