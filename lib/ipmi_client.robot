@@ -8,6 +8,7 @@ Resource        ../lib/utils.robot
 Resource        ../lib/state_manager.robot
 
 Library         String
+Library         var_funcs.py
 Library         ipmi_client.py
 
 *** Variables ***
@@ -414,9 +415,14 @@ Set Channel Access
 Delete All Non Root IPMI User
     [Documentation]  Delete all non-root IPMI user.
 
-    FOR  ${userid}  IN RANGE  2  16
-      ${user_info}=  Get User Info  ${userid}
-      Run Keyword If  "${user_info['user_name']}" != ""
-      ...  Run IPMI Standard Command  user set name ${userid} ""
-      Sleep  5s
+    # Get complete list of user info records.
+    ${user_info}=  Get User Info  ${EMPTY}
+    # Remove header record.
+    ${user_info}=  Filter Struct  ${user_info}  [('user_name', None)]  invert=1
+    ${non_empty_user_info}=  Filter Struct  ${user_info}  [('user_name', '')]  invert=1
+    ${non_root_user_info}=  Filter Struct  ${non_empty_user_info}  [('user_name', 'root')]  invert=1
+
+    FOR  ${user_record}  IN  @{non_root_user_info}
+        Run IPMI Standard Command   user set name ${user_record['user_id']} ""
+        Sleep  5s
     END
