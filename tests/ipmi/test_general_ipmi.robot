@@ -245,7 +245,7 @@ Retrieve Network Mode Via IPMI And Verify Using REST
     Run Keyword If  '${network_mode_ipmi}' == 'Static Address'
     ...  Should Be Equal  ${network_mode_rest}  ${0}
     ...  msg=Verification of network setting failed.
-    ...  ELSE  IF  '${network_mode_ipmi}' == 'DHCP'
+    ...  ELSE IF  '${network_mode_ipmi}' == 'DHCP'
     ...  Should Be Equal  ${network_mode_rest}  ${1}
     ...  msg=Verification of network setting failed.
 
