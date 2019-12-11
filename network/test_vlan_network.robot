@@ -322,7 +322,7 @@ Get VLAN URI For IP
 
     Run Keyword If  '${expected_result}' == 'valid'
     ...      Should Be Equal  ${status}  ${True}
-    ...      msg=VLAN IP URI Dosen't exist!.
+    ...      msg=VLAN IP URI doesn't exist!.
     ...  ELSE
     ...      Should Be Equal  ${status}  ${False}
     ...      msg=VLAN IP URI exists!.
@@ -353,7 +353,7 @@ Verify Existence Of VLAN
     ...  msg=REST and CLI Output are not the same.
     Run Keyword If  '${expected_result}' == 'valid'
     ...      Should Be Equal  ${rest_status}  ${True}
-    ...      msg=VLAN ID Dosen't exist!.
+    ...      msg=VLAN ID doesn't exist!.
     ...  ELSE
     ...      Should Be Equal  ${rest_status}  ${False}
     ...      msg=VLAN ID exists!.
