@@ -4,6 +4,7 @@ r"""
 Contains PLDM-related constants.
 """
 
+
 # PLDM types.
 PLDM_TYPE_BASE = {'VALUE': '00', 'STRING': 'base'}
 PLDM_TYPE_PLATFORM = {'VALUE': '02', 'STRING': 'platform'}
@@ -82,7 +83,7 @@ PLDM_FRU_CMD = {
 
 # PLDM command format.
 
-CMD_GETPLDMTYPES = 'pldmtool base GetPLDMTypes'
+CMD_GETPLDMTYPES = 'base GetPLDMTypes'
 
 '''
 e.g. : GetPLDMVersion usage
@@ -94,7 +95,7 @@ pldm supported types
 base->0,platform->2,bios->3,fru->4
 
 '''
-CMD_GETPLDMVERSION = 'pldmtool base GetPLDMVersion -t %s'
+CMD_GETPLDMVERSION = 'base GetPLDMVersion -t %s'
 
 '''
 e.g. : PLDM raw command usage
@@ -104,10 +105,13 @@ pldmtool raw -d 0x80 0x00 0x03 0x00 0x00 0x00 0x00 0x01 0x00
 pldm raw -d 0x<header> 0x<pldm_type> 0x<pldm_cmd_type> 0x<payload_data>
 '''
 
-CMD_PLDMTOOL_RAW = 'pldmtool raw -d 0x80' + '0x%s' + ' ' + '0x%s'
+CMD_PLDMTOOL_RAW = 'raw -d 0x80' + '0x%s' + ' ' + '0x%s'
 
 
 # PLDM command payload data.
 
 PAYLOAD_GetPLDMVersion = \
     ' 0x00 0x00 0x00 0x00 0x%s 0x%s'    # %(TransferOperationFlag, PLDMType)
+
+
+PLDM_SUPPORTED_TYPES = ['base', 'platform', 'bios']
