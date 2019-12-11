@@ -4,6 +4,7 @@ r"""
 Contains PLDM-related constants.
 """
 
+
 # PLDM types.
 PLDM_TYPE_BASE = {'VALUE': '00', 'STRING': 'base'}
 PLDM_TYPE_PLATFORM = {'VALUE': '02', 'STRING': 'platform'}
@@ -111,3 +112,6 @@ CMD_PLDMTOOL_RAW = 'pldmtool raw -d 0x80' + '0x%s' + ' ' + '0x%s'
 
 PAYLOAD_GetPLDMVersion = \
     ' 0x00 0x00 0x00 0x00 0x%s 0x%s'    # %(TransferOperationFlag, PLDMType)
+
+
+required_supported_types = ['base', 'platform', 'bios']
