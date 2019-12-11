@@ -28,5 +28,6 @@ ${DEBUG}                    0
 
 *** Test Cases ***
 Test Case 1
+    [Documentation]  Test case 1 documentation.
 
     Qprint Timen  First test case.
