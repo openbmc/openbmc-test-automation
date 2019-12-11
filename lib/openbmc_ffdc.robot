@@ -48,8 +48,8 @@ FFDC On Test Case Fail
     ...               3. Delete error logs and BMC dumps post FFDC collection.
     [Arguments]  ${clean_up}=${TRUE}
     # Description of argument(s):
-    # clean_up:    Boolean value indicating whether error logs and dumps should be deleted on test failure after
-    #              FFDC collection.
+    # clean_up     Boolean value indicating whether error logs and dumps should be deleted
+    #              on test failure after FFDC collection.
 
     ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}=  Get Environment Variable  OVERRIDE_FFDC_ON_TEST_CASE_FAIL  0
     ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}=  Convert To Integer  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}

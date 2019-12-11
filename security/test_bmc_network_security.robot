@@ -65,7 +65,8 @@ Suite Setup Execution
 
 Send Network Packets And Get Packet Loss
     [Documentation]  Send TCP, UDP or ICMP packets to the target.
-    [Arguments]  ${host}  ${num}=${count}  ${packet_type}=${ICMP_PACKETS}  ${port}=80  ${icmp_type}=${ICMP_ECHO_REQUEST}
+    [Arguments]  ${host}  ${num}=${count}  ${packet_type}=${ICMP_PACKETS}
+    ...          ${port}=80  ${icmp_type}=${ICMP_ECHO_REQUEST}
 
     # Description of argument(s):
     # host         The host name or IP address of the target system.
