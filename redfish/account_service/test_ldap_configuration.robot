@@ -44,7 +44,8 @@ Verify LDAP Service Disable
     Sleep  15s
     ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
     ...  ${LDAP_USER_PASSWORD}
-    Should Be Equal  ${resp}  ${False}  msg=LDAP user was able to login even though the LDAP service was disabled.
+    Should Be Equal  ${resp}  ${False}
+    ...  msg=LDAP user was able to login even though the LDAP service was disabled.
     Redfish.Logout
     Redfish.Login
     # Enabling LDAP so that LDAP user works.

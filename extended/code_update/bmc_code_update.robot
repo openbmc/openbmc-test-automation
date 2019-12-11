@@ -284,5 +284,3 @@ Test Teardown Execution
     FFDC On Test Case Fail
     Run Keyword If  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
     Close All Connections
-
-
