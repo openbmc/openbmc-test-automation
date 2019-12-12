@@ -116,7 +116,8 @@ Set and Verify LED Indicator
 
     # Description of Arguments(s):
     # pre_req_state           The pre-requisite state of the host to perform the test (e.g. "On")
-    # asserted                The assert property that sets the value (e.g. "xyz.openbmc_project.Led.Physical.Action.On")
+    # asserted                The assert property that sets the value
+    #                         (e.g. "xyz.openbmc_project.Led.Physical.Action.On")
     # expected_indicator_led  The expected value of the IndicatorLED attribute for all the
     #                         power supplies units are initiated (e.g. "Lit")
 
@@ -166,8 +167,10 @@ Set and Verify Fan LED Indicators
 
     # Description of Arguments(s):
     # pre_req_state           The pre-requisite state of the host to perform the test (e.g. "On")
-    # asserted                The assert property that sets the value (e.g. "xyz.openbmc_project.Led.Physical.Action.On")
-    # expected_indicator_led  The expected value of the IndicatorLED attribute for all the fans are initiated (e.g. "Lit")
+    # asserted                The assert property that sets the value
+    #                         (e.g. "xyz.openbmc_project.Led.Physical.Action.On")
+    # expected_indicator_led  The expected value of the IndicatorLED attribute for all the fans
+    #                         are initiated (e.g. "Lit")
 
     Run Key U  Redfish Power ${pre_req_state} \ stack_mode=skip \ quiet=1
     Redfish.Login

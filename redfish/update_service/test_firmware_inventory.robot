@@ -121,8 +121,11 @@ Verify UpdateService Supports TransferProtocol TFTP
 
     ${allowable_values}=  Redfish.Get Attribute  /redfish/v1/UpdateService  Actions
 
-    Valid Value  allowable_values["#UpdateService.SimpleUpdate"]["TransferProtocol@Redfish.AllowableValues"][0]  valid_values=['TFTP']
-    Valid Value  allowable_values["#UpdateService.SimpleUpdate"]["target"]  valid_values=['/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate']
+    Valid Value
+    ...  allowable_values["#UpdateService.SimpleUpdate"]["TransferProtocol@Redfish.AllowableValues"][0]
+    ...  valid_values=['TFTP']
+    Valid Value  allowable_values["#UpdateService.SimpleUpdate"]["target"]
+    ...  valid_values=['/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate']
 
 
 Verify Redfish BIOS Version

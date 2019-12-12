@@ -113,7 +113,7 @@ Redfish Login Via SessionService
     ${content}=  To JSON  ${resp.content}
     ${headers}=  Create Dictionary   Content-Type=application/json
     ...  X-Auth-Token=${resp.headers["X-Auth-Token"]}
-    ${resp}=  Delete Request  openbmc  /redfish/v1/SessionService/Sessions/${content["Id"]}  headers=${headers}
+    ${resp}=  Delete Request  openbmc  ${REDFISH_SESSION}${/}${content["Id"]}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
