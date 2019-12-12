@@ -20,6 +20,7 @@ Suite Teardown                  Suite Teardown Execution
 
 *** Variables ***
 ${vlan_id}                      ${53}
+${vlan_id1}                     ${35}
 ${invalid_vlan_id}              abc
 ${vlan_resource}                ${NETWORK_MANAGER}action/VLAN
 ${network_resource}             xyz.openbmc_project.Network.IP.Protocol.IPv4
@@ -135,6 +136,18 @@ Configure VLAN And Check Persistency On Reboot
     ${lan_config}=  Get LAN Print Dict
     Valid Value  lan_config['IP Address']  ["${ip}"]
     Valid Value  lan_config['802.1q VLAN ID']  ["${vlan_id}"]
+
+
+Add Multiple VLAN Via REST And Verify
+    [Documentation]  Add Multiple VLAN via REST and verify it via CMD.
+    [Tags]  Add_Multiple_VLAN_Via_REST_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Run Keywords  Delete VLAN  ${vlan_id}  AND  Delete VLAN  ${vlan_id1}
+
+    Create VLAN  ${vlan_id}
+    Create VLAN  ${vlan_id1}
+    Verify Existence Of VLAN  ${vlan_id} 
+    Verify Existence Of VLAN  ${vlan_id1}
 
 
 *** Keywords ***
