@@ -20,6 +20,7 @@ Suite Teardown                  Suite Teardown Execution
 
 *** Variables ***
 ${vlan_id}                      ${53}
+@{vlan_id_list}                 ${35}  ${55}
 ${invalid_vlan_id}              abc
 ${vlan_resource}                ${NETWORK_MANAGER}action/VLAN
 ${network_resource}             xyz.openbmc_project.Network.IP.Protocol.IPv4
@@ -137,6 +138,21 @@ Configure VLAN And Check Persistency On Reboot
     Valid Value  lan_config['802.1q VLAN ID']  ["${vlan_id}"]
 
 
+Add Multiple VLANs Via REST And Verify
+    [Documentation]  Add multiple VLANs via REST and verify it via CLI.
+    [Tags]  Add_Multiple_VLANs_Via_REST_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Delete VLAN  ${vlan_id_list}
+
+    :FOR  ${vlan_id}  IN   @{vlan_id_list}
+    \    Create VLAN  ${vlan_id}
+    \    Verify Existence Of VLAN  ${vlan_id}
+
+    ${lan_config}=  Get LAN Print Dict
+    ${vlan_id_ipmi}=  Convert To Integer  ${lan_config["802.1q VLAN ID"]}
+    Valid List  vlan_id_list  required_values=[${vlan_id_ipmi}]
+
+
 *** Keywords ***
 
 
@@ -217,15 +233,21 @@ Suite Teardown Execution
 
 
 Delete VLAN
-    [Documentation]  Delete a VLAN.
-    [Arguments]  ${id}  ${interface}=eth0
+    [Documentation]  Delete a VLAN/VLANs.
+    [Arguments]  ${ids}  ${interface}=eth0
 
     # Description of argument(s):
-    # id  The VLAN ID (e.g. '53').
+    # ids  The VLAN ID/IDs (e.g. '53' or ['53','35','12']).
     # interface  The physical interface for the VLAN(e.g. 'eth0').
 
-    OpenBMC Delete Request  ${NETWORK_MANAGER}${interface}_${id}
-    Sleep  ${NETWORK_TIMEOUT}s
+    ${data_type}=    Evaluate  type(${ids}).__name__
+    Run Keyword And Return If  "${data_type}" == "int"
+    ...  Run Keywords  OpenBMC Delete Request  ${NETWORK_MANAGER}${interface}_${ids}
+    ...  AND  Sleep  ${NETWORK_TIMEOUT}s
+
+    :FOR  ${id}  IN  @{ids}
+    \  OpenBMC Delete Request  ${NETWORK_MANAGER}${interface}_${id}
+    \  Sleep  ${NETWORK_TIMEOUT}s
 
 
 Create VLAN
