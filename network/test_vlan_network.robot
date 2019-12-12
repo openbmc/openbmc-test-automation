@@ -13,6 +13,7 @@ Resource                        ../lib/state_manager.robot
 Library                         ../lib/utilities.py
 Library                         ../lib/ipmi_utils.py
 Library                         ../lib/var_funcs.py
+Library                         ../lib/func_args.py
 Library                         Collections
 
 Suite Teardown                  Suite Teardown Execution
@@ -20,11 +21,13 @@ Suite Teardown                  Suite Teardown Execution
 
 *** Variables ***
 ${vlan_id}                      ${53}
+@{vlan_ids}                     ${35}  ${55}
 ${invalid_vlan_id}              abc
 ${vlan_resource}                ${NETWORK_MANAGER}action/VLAN
 ${network_resource}             xyz.openbmc_project.Network.IP.Protocol.IPv4
 ${static_network_resource}      xyz.openbmc_project.Network.IP.AddressOrigin.Static
 ${ip}                           10.6.6.10
+@{ip_addresses}                 10.5.5.10  10.4.5.7
 ${netmask}                      ${24}
 ${gateway}                      0.0.0.0
 ${initial_vlan_config}          @{EMPTY}
@@ -32,12 +35,11 @@ ${initial_vlan_config}          @{EMPTY}
 
 *** Test Cases ***
 
-
 Add VLAN Via REST And Verify
     [Documentation]  Add VLAN via REST and verify it via REST and IPMI.
     [Tags]  Add_VLAN_Via_REST_And_Verify
     [Setup]  Test Setup Execution
-    [Teardown]  Delete VLAN  ${vlan_id}
+    [Teardown]  Delete VLANs  [${vlan_id}]
 
     Create VLAN  ${vlan_id}
     Verify Existence Of VLAN  ${vlan_id}
@@ -59,7 +61,7 @@ Delete VLAN Via REST
     [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
 
     Verify Existence Of VLAN  ${vlan_id}
-    Delete VLAN  ${vlan_id}
+    Delete VLANs  [${vlan_id}]
     Verify Existence Of VLAN  ${vlan_id}  expected_result=error
 
     ${lan_config}=  Get LAN Print Dict
@@ -70,7 +72,7 @@ Configure Network Settings On VLAN Via REST
     [Documentation]  Configure IP on VLAN and verify it via REST and IPMI.
     [Tags]  Configure_Network_Settings_On_VLAN_Via_REST
     [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
-    [Teardown]  Delete VLAN  ${vlan_id}
+    [Teardown]  Delete VLANs  [${vlan_id}]
 
     Configure Network Settings On VLAN  ${vlan_id}  ${ip}  ${netmask}
     Get VLAN URI For IP  ${vlan_id}  ${ip}
@@ -83,7 +85,7 @@ Delete IP On VLAN Via REST
     [Documentation]  Delete IP on VLAN and verify it via REST and IPMI.
     [Tags]  Delete_IP_On_VLAN_Via_REST
     [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
-    [Teardown]  Delete VLAN  ${vlan_id}
+    [Teardown]  Delete VLANs  [${vlan_id}]
 
     Configure Network Settings On VLAN  ${vlan_id}  ${ip}  ${netmask}
     ${lan_config}=  Get LAN Print Dict
@@ -102,12 +104,12 @@ Delete VLAN When IP Is Configured Via REST
     [Documentation]  Delete IP on VLAN and verify using IPMI.
     [Tags]  Delete_VLAN_When_IP_Is_Configured_Via_REST
     [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
-    [Teardown]  Delete VLAN  ${vlan_id}
+    [Teardown]  Delete VLANs  [${vlan_id}]
 
     Configure Network Settings On VLAN  ${vlan_id}  ${ip}  ${netmask}
     ${lan_config}=  Get LAN Print Dict
     Valid Value  lan_config['IP Address']  ["${ip}"]
-    Delete VLAN  ${vlan_id}
+    Delete VLANs  [${vlan_id}]
 
     Verify Existence Of VLAN  ${vlan_id}  expected_result=error
 
@@ -119,7 +121,7 @@ Configure VLAN And Check Persistency On Reboot
     [Documentation]  Create VLAN ID & IP , reboot and verify.
     [Tags]  Configure_VLAN_And_Check_Persistency_On_Reboot
     [Setup]  Test Setup Execution
-    [Teardown]  Delete VLAN  ${vlan_id}
+    [Teardown]  Delete VLANs  [${vlan_id}]
 
     Create VLAN  ${vlan_id}
     Configure Network Settings On VLAN  ${vlan_id}  ${ip}  ${netmask}
@@ -137,12 +139,72 @@ Configure VLAN And Check Persistency On Reboot
     Valid Value  lan_config['802.1q VLAN ID']  ["${vlan_id}"]
 
 
+Add Multiple VLANs Via REST And Verify
+    [Documentation]  Add multiple VLANs via REST and verify them via CLI.
+    [Tags]  Add_Multiple_VLANs_Via_REST_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Delete VLANs  ${vlan_ids}
+
+    FOR  ${vlan_id}  IN   @{vlan_ids}
+        Create VLAN  ${vlan_id}
+        Verify Existence Of VLAN  ${vlan_id}
+    END
+
+    ${lan_config}=  Get LAN Print Dict
+    ${vlan_id_ipmi}=  Convert To Integer  ${lan_config["802.1q VLAN ID"]}
+    Valid List  vlan_ids  required_values=[${vlan_id_ipmi}]
+
+Delete Multiple IPs On VLAN And Verify
+    [Documentation]  Delete multiple IPs on VLAN and verify each via REST and IPMI.
+    [Tags]  Delete_Multiple_IP_On_VLAN_Via_REST
+    [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
+    [Teardown]  Delete VLANs  [${vlan_id}]
+
+    FOR  ${ip}  IN  @{ip_addresses}
+        Configure Network Settings On VLAN  ${vlan_id}  ${ip}  ${netmask}
+        ${vlan_ip_uri}=  Get VLAN URI For IP  ${vlan_id}  ${ip}
+        Delete IP And Object  ${ip}  ${vlan_ip_uri}
+
+        Get VLAN URI For IP  ${vlan_id}  ${ip}  expected_result=error
+
+        ${lan_config}=  Get LAN Print Dict
+        Should Not Match  ${lan_config['IP Address']}  ${ip}
+    END
+
+Delete Multiple VLANs Via REST
+    [Documentation]  Delete multiple VLANs via REST and verify each via REST and IPMI.
+    [Tags]  Delete_Multiple_VLANs_Via_REST
+    [Setup]  Test Setup Execution
+
+    FOR  ${vlan_id}  IN   @{vlan_ids}
+        Create VLAN  ${vlan_id}
+    END
+
+    Delete VLANs  ${vlan_ids}
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']  ["Disabled"]
+
+Configure Multiple IPs On VLAN Via REST
+    [Documentation]  Configure Multiple IPs on VLAN and verify each via REST.
+    [Tags]  Configure_Multiple_IPs_On_VLAN_Via_REST
+    [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
+    [Teardown]  Delete VLANs  [${vlan_id}]
+
+    FOR  ${ip}  IN  @{ip_addresses}
+        Configure Network Settings On VLAN  ${vlan_id}  ${ip}  ${netmask}
+    END
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['IP Address']  ["${ip_addresses[0]}"]
+
 *** Keywords ***
 
 
 Test Setup Execution
     [Documentation]  Check and delete all previously created VLAN if any.
 
+    Printn
     ${lan_config}=  Get LAN Print Dict
     Return From Keyword If  '${lan_config['802.1q VLAN ID']}' == 'Disabled'
 
@@ -153,19 +215,17 @@ Test Setup Execution
     Set Suite Variable  ${initial_vlan_config}
 
     FOR  ${vlan_id}  IN  @{vlan_ids}
-    ${vlan_records}=  Read Properties
-    ...  ${NETWORK_MANAGER}eth0_${vlan_id}${/}enumerate  quiet=1
-    ${vlan_record}=  Filter Struct
-    ...  ${vlan_records}  [('Origin', '${static_network_resource}')]
+        ${vlan_records}=  Read Properties
+        ...  ${NETWORK_MANAGER}eth0_${vlan_id}${/}enumerate  quiet=1
+        ${vlan_record}=  Filter Struct
+        ...  ${vlan_records}  [('Origin', '${static_network_resource}')]
 
-    ${id}=  Convert To Integer  ${vlan_id}
-    Set Initial VLAN Config  ${vlan_record}  ${id}
+        ${id}=  Convert To Integer  ${vlan_id}
+        Set Initial VLAN Config  ${vlan_record}  ${id}
     END
     Rprint Vars  initial_vlan_config
 
-    FOR  ${vlan_id}  IN  @{vlan_ids}
-    Delete VLAN  ${vlan_id}
-    END
+    Delete VLANs  ${vlan_ids}
 
 
 Set Initial VLAN Config
@@ -186,10 +246,12 @@ Set Initial VLAN Config
     #     in the variable "vlan_record".
 
     ${uris}=  Get Dictionary Keys  ${vlan_record}
+
     FOR  ${uri}  IN  @{uris}
-    Append To List  ${initial_vlan_config}  ${id}  ${vlan_record['${uri}']['Address']}
-    ...  ${vlan_record['${uri}']['PrefixLength']}
+        Append To List  ${initial_vlan_config}  ${id}  ${vlan_record['${uri}']['Address']}
+        ...  ${vlan_record['${uri}']['PrefixLength']}
     END
+
     Run Keyword If  @{uris} == @{EMPTY}
     ...  Append To List  ${initial_vlan_config}  ${id}  ${EMPTY}  ${EMPTY}
 
@@ -203,29 +265,40 @@ Suite Teardown Execution
     ${previous_id}=  Set Variable  ${EMPTY}
     FOR  ${index}  IN RANGE  0  ${length}  3
 
-    Run Keyword If  '${initial_vlan_config[${index+1}]}' == '${EMPTY}'
-    ...  Create VLAN  ${initial_vlan_config[${index}]}
-    ...  ELSE IF  '${previous_id}' == '${initial_vlan_config[${index}]}'
-    ...  Configure Network Settings On VLAN  ${initial_vlan_config[${index}]}
-    ...  ${initial_vlan_config[${index+1}]}  ${initial_vlan_config[${index+2}]}
-    ...  ELSE  Run Keywords  Create VLAN  ${initial_vlan_config[${index}]}  AND
-    ...  Configure Network Settings On VLAN  ${initial_vlan_config[${index}]}
-    ...  ${initial_vlan_config[${index+1}]}  ${initial_vlan_config[${index+2}]}
+        Run Keyword If  '${initial_vlan_config[${index+1}]}' == '${EMPTY}'
+        ...  Create VLAN  ${initial_vlan_config[${index}]}
+        ...  ELSE IF  '${previous_id}' == '${initial_vlan_config[${index}]}'
+        ...  Configure Network Settings On VLAN  ${initial_vlan_config[${index}]}
+        ...  ${initial_vlan_config[${index+1}]}  ${initial_vlan_config[${index+2}]}
+        ...  ELSE  Run Keywords  Create VLAN  ${initial_vlan_config[${index}]}  AND
+        ...  Configure Network Settings On VLAN  ${initial_vlan_config[${index}]}
+        ...  ${initial_vlan_config[${index+1}]}  ${initial_vlan_config[${index+2}]}
 
-    ${previous_id}=  Set Variable  ${initial_vlan_config[${index}]}
+        ${previous_id}=  Set Variable  ${initial_vlan_config[${index}]}
     END
 
 
-Delete VLAN
-    [Documentation]  Delete a VLAN.
-    [Arguments]  ${id}  ${interface}=eth0
+Delete VLANs
+    [Documentation]  Delete one or more VLANs.
+    [Arguments]  ${ids}  ${interface}=eth0
 
     # Description of argument(s):
-    # id  The VLAN ID (e.g. '53').
-    # interface  The physical interface for the VLAN(e.g. 'eth0').
+    # ids                           A list of VLAN IDs (e.g. ['53'] or ['53', '35', '12']). Note that the
+    #                               caller may simply pass a list variable or he/she may specify a
+    #                               python-like list specification (see examples below).
+    # interface                     The physical interface for the VLAN (e.g. 'eth0').
 
-    OpenBMC Delete Request  ${NETWORK_MANAGER}${interface}_${id}
-    Sleep  ${NETWORK_TIMEOUT}s
+    # Example calls:
+    # Delete VLANs  ${vlan_ids}
+    # Delete Vlans  [53, 35]
+
+    # Allow for python-like list specifications (e.g. ids=['53']).
+    ${vlan_ids}=  Source To Object  ${ids}
+
+    FOR  ${id}  IN  @{vlan_ids}
+        OpenBMC Delete Request  ${NETWORK_MANAGER}${interface}_${id}
+    END
+    Run Key U  Sleep \ ${NETWORK_TIMEOUT}s
 
 
 Create VLAN
