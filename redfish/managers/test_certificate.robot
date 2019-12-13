@@ -319,8 +319,8 @@ Delete Certificate Via BMC CLI
     BMC Execute Command  rm ${certificate_file_path}
     BMC Execute Command  systemctl restart ${certificate_service}
     BMC Execute Command  systemctl daemon-reload
-    Wait Until Keyword Succeeds  1 min  10 sec
-    ...  Redfish.Get  ${certificate_uri}/1  valid_status_codes=[${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}]
+    Wait Until Keyword Succeeds  1 min  10 sec  Redfish.Get  ${certificate_uri}/1
+    ...  valid_status_codes=[${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
 
 Suite Setup Execution
