@@ -38,6 +38,7 @@ ${PDU_SLOT_NO}      ${EMPTY}
 ${SSH_PORT}         22
 ${HTTPS_PORT}       443
 ${IPMI_PORT}        623
+${HOST_SOL_PORT}    2200
 ${OPENBMC_SERIAL_HOST}      ${EMPTY}
 ${OPENBMC_SERIAL_PORT}      ${EMPTY}
 

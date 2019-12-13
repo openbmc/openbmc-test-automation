@@ -298,7 +298,7 @@ Create OS Console Command String
 
     ${ssh_pw_file_path}=  Set Variable  ${output}
 
-    ${cmd}=  Catenate  ${ssh_pw_file_path} ${OPENBMC_PASSWORD} -p 2200
+    ${cmd}=  Catenate  ${ssh_pw_file_path} ${OPENBMC_PASSWORD} -p ${HOST_SOL_PORT}
     ...  -o "StrictHostKeyChecking no" ${OPENBMC_USERNAME}@${OPENBMC_HOST}
 
     [Return]  ${cmd}
