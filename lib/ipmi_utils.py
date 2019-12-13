@@ -16,6 +16,7 @@ import ipmi_client as ic
 import tempfile
 gru.my_import_resource("ipmi_client.robot")
 from robot.libraries.BuiltIn import BuiltIn
+import json
 
 
 def get_sol_info():
@@ -529,3 +530,37 @@ def channel_getciphers_ipmi():
     cmd_buf = "channel getciphers ipmi | sed -re 's/ Alg/_Alg/g'"
     stdout, stderr, rc = execute_ipmi_cmd(cmd_buf, "external", print_output=0)
     return vf.outbuf_to_report(stdout)
+
+
+def get_device_id_config():
+    r"""
+    Get the device id config data and return as a dictionary.
+
+    Example:
+
+    dev_id_config =  get_device_id_config()
+    print_vars(dev_id_config)
+
+    dev_id_config:
+        [manuf_id]:            7244
+        [addn_dev_support]:     141
+        [prod_id]:            16976
+        [aux]:                    0
+        [id]:                    32
+        [revision]:             129
+        [device_revision]:        1
+    """
+    stdout, stderr, rc = bsu.bmc_execute_command("cat /usr/share/ipmi-providers/dev_id.json")
+
+    result = json.loads(stdout)
+
+    # Create device revision field for the user.
+    # Reference IPMI specification v2.0 "Get Device ID Command"
+    # [7]   1 = device provides Device SDRs
+    #       0 = device does not provide Device SDRs
+    # [6:4] reserved. Return as 0.
+    # [3:0] Device Revision, binary encoded.
+
+    result['device_revision'] = result['revision'] & 0x0F
+
+    return result
