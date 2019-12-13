@@ -29,8 +29,7 @@ parser.add_argument(
 stock_list = [("test_mode", 0), ("quiet", 0), ("debug", 0)]
 
 
-def exit_function(signal_number=0,
-                  frame=None):
+def exit_function():
     r"""
     Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
     """
