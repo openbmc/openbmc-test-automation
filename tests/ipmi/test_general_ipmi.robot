@@ -10,6 +10,8 @@ Resource            ../../lib/logging_utils.robot
 Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 Library             ../../lib/gen_misc.py
+Library             ../../lib/device_utils.py
+Library             ../../lib/gen_robot_valid.py
 
 Test Setup          Log to Console  ${EMPTY}
 Test Teardown       FFDC On Test Case Fail
@@ -276,10 +278,14 @@ Verify Get Device ID
     #     0x00
     #     0x03
 
+    # Verify Manufacturer and Product IDs, etc. directly from json file.
+    ${dev_id_config}=  Get Device Id Config
+    ${device_revision}=  Get Device Revision  ${dev_id_config}
+
     ${mc_info}=  Get MC Info
 
-    Should Be Equal  ${mc_info['device_id']}  0
-    Should Be Equal  ${mc_info['device_revision']}  0
+    Valid Value  ${mc_info['device_id']}  [${dev_id_config['id']}]
+    Valid Value  ${mc_info['device_revision']}  [${device_revision}]
 
     # Get firmware revision from mc info command output i.e. 2.01
     ${ipmi_fw_major_version}  ${ipmi_fw_minor_version}=
@@ -300,15 +306,14 @@ Verify Get Device ID
     Should Be Equal As Strings  ${ipmi_fw_minor_version}  ${major_minor_version[1]}
     ...  msg=Minor version mismatch.
 
-    Should Be Equal  ${mc_info['ipmi_version']}  2.0
+    Valid Value  mc_info['ipmi_version']  ['2.0']
 
-    # TODO: Verify Manufacturer and Product IDs directly from json file.
-    # Reference : openbmc/openbmc-test-automation#1244
-    Should Be Equal  ${mc_info['manufacturer_id']}  42817
-    Should Be Equal  ${mc_info['product_id']}  16975 (0x424f)
+    Valid Value  ${mc_info['manufacturer_id']}  [${dev_id_config['manuf_id']}]
+    ${product_id_hex} =  Convert To Hex  ${dev_id_config['prod_id']}
+    Valid Value  mc_info['product_id']  ['${dev_id_config['prod_id']} (0x${product_id_hex})']
 
-    Should Be Equal  ${mc_info['device_available']}  yes
-    Should Be Equal  ${mc_info['provides_device_sdrs']}  yes
+    Valid Value  mc_info['device_available']  ['yes']
+    Valid Value  mc_info['provides_device_sdrs']  ['yes']
     Should Contain  ${mc_info['additional_device_support']}  Sensor Device
     Should Contain  ${mc_info['additional_device_support']}  SEL Device
     Should Contain
