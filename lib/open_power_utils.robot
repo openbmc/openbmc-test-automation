@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation  Open power domain keywords.
 
-Library        ../data/variables.py
+Variables      ../data/variables.py
 Resource       ../lib/utils.robot
 
 *** Keywords ***
