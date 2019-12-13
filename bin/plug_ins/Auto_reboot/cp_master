@@ -7,19 +7,14 @@ Set the auto_boot policy according to the caller's wishes.
 import os
 import sys
 
-save_path_0 = sys.path[0]
-del sys.path[0]
+save_dir_path = sys.path.pop(0)
 
-from gen_print import *
-from gen_valid import *
-from gen_arg import *
-from gen_misc import *
-from gen_cmd import *
-from gen_plug_in_utils import *
-from gen_call_robot import *
+modules = ['gen_arg', 'gen_print', 'gen_valid', 'gen_misc', 'gen_cmd', 'gen_plug_in_utils', 'gen_call_robot']
+for module in modules:
+    exec("from " + module + " import *")
 
-# Restore sys.path[0].
-sys.path.insert(0, save_path_0)
+sys.path.insert(0, save_dir_path)
+
 
 # Set exit_on_error for gen_valid functions.
 set_exit_on_error(True)
@@ -39,35 +34,6 @@ stock_list = [("test_mode", get_plug_default("test_mode", 0)),
 
 AUTO_REBOOT_DISABLE = "1"
 
-def exit_function(signal_number=0,
-                  frame=None):
-    r"""
-    Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
-    """
-
-    dprint_executing()
-    dprint_var(signal_number)
-
-    # Your cleanup code here.
-
-    qprint_pgm_footer()
-
-
-def signal_handler(signal_number,
-                   frame):
-    r"""
-    Handle signals.  Without a function to catch a SIGTERM or SIGINT, our program would terminate immediately
-    with return code 143 and without calling our exit_function.
-    """
-
-    # Our convention is to set up exit_function with atexit.register() so there is no need to explicitly
-    # call exit_function from here.
-
-    dprint_executing()
-
-    # Calling exit prevents us from returning to the code that was running when we received the signal.
-    exit(0)
-
 
 def validate_parms():
 
@@ -85,16 +51,12 @@ def validate_parms():
         valid_value(AUTO_REBOOT_DISABLE, valid_values=["0", "1"])
         AUTO_REBOOT_DISABLE = int(AUTO_REBOOT_DISABLE)
 
-    gen_post_validation(exit_function, signal_handler)
-
 
 def main():
 
-    gen_get_options(parser, stock_list)
+    gen_setup()
 
-    validate_parms()
-
-    qprint_pgm_header()
+    set_term_options(term_requests='children')
 
     print_plug_in_header()
 
