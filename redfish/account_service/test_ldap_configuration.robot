@@ -87,8 +87,10 @@ Verify LDAP Config Update With Incorrect AuthenticationType
     [Documentation]  Verify that invalid AuthenticationType is not updated.
     [Tags]  Verify_LDAP_Update_With_Incorrect_AuthenticationType
 
+    ${body}=  Catenate  {'${ldap_type}': {'Authentication': {'AuthenticationType':'KerberosKeytab'}}}
+    ...  valid_status_codes=[400]
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
-    ...  body={'${ldap_type}': {'Authentication': {'AuthenticationType':'KerberosKeytab'}}}  valid_status_codes=[400]
+    ...  body=${body}
 
 
 Verify LDAP Login With Correct LDAP URL
@@ -481,8 +483,18 @@ Create LDAP Configuration
     # ldap_bind_dn_password  The LDAP bind distinguished name password.
     # ldap_base_dn           The LDAP base distinguished name.
 
-    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
-    ...  body={'${ldap_type}': {'ServiceEnabled': ${True}, 'ServiceAddresses': ['${ldap_server_uri}'], 'Authentication': {'AuthenticationType':'UsernameAndPassword', 'Username':'${ldap_bind_dn}', 'Password':'${ldap_bind_dn_password}'}, 'LDAPService': {'SearchSettings': {'BaseDistinguishedNames': ['${ldap_base_dn}']}}}}
+    ${body}=  Catenate  {'${ldap_type}':
+    ...  {'ServiceEnabled': ${True},
+    ...   'ServiceAddresses': ['${ldap_server_uri}'],
+    ...   'Authentication':
+    ...       {'AuthenticationType': 'UsernameAndPassword',
+    ...        'Username':'${ldap_bind_dn}',
+    ...        'Password': '${ldap_bind_dn_password}'},
+    ...   'LDAPService':
+    ...       {'SearchSettings':
+    ...           {'BaseDistinguishedNames': ['${ldap_base_dn}']}}}}
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     Sleep  15s
 
 
