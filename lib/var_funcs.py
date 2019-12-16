@@ -252,7 +252,7 @@ def parse_key_value(string,
     return key, value
 
 
-def key_value_list_to_dict(list,
+def key_value_list_to_dict(key_value_list,
                            process_indent=0,
                            **args):
     r"""
@@ -262,18 +262,18 @@ def key_value_list_to_dict(list,
 
     Example usage:
 
-    For the following value of list:
+    For the following value of key_value_list:
 
-    list:
-      list[0]:          Current Limit State: No Active Power Limit
-      list[1]:          Exception actions:   Hard Power Off & Log Event to SEL
-      list[2]:          Power Limit:         0 Watts
-      list[3]:          Correction time:     0 milliseconds
-      list[4]:          Sampling period:     0 seconds
+    key_value_list:
+      [0]:          Current Limit State: No Active Power Limit
+      [1]:          Exception actions:   Hard Power Off & Log Event to SEL
+      [2]:          Power Limit:         0 Watts
+      [3]:          Correction time:     0 milliseconds
+      [4]:          Sampling period:     0 seconds
 
     And the following call in python:
 
-    power_limit = key_value_outbuf_to_dict(list)
+    power_limit = key_value_outbuf_to_dict(key_value_list)
 
     The resulting power_limit directory would look like this:
 
@@ -326,7 +326,7 @@ def key_value_list_to_dict(list,
         mc_info[additional_device_support][3]:  Chassis Device
 
     Description of argument(s):
-    list                            A list of key/value strings.  (See docstring of parse_key_value function
+    key_value_list                  A list of key/value strings.  (See docstring of parse_key_value function
                                     for details).
     process_indent                  This indicates that indented sub-dictionaries and sub-lists are to be
                                     processed as such.  An entry may have a sub-dict or sub-list if 1) It has
@@ -343,7 +343,7 @@ def key_value_list_to_dict(list,
         result_dict = DotDict()
 
     if not process_indent:
-        for entry in list:
+        for entry in key_value_list:
             if type(entry) is tuple:
                 key, value = entry
             else:
@@ -354,9 +354,9 @@ def key_value_list_to_dict(list,
     # Process list while paying heed to indentation.
     delim = args.get("delim", ":")
     # Initialize "parent_" indentation level variables.
-    parent_indent = len(list[0]) - len(list[0].lstrip())
+    parent_indent = len(key_value_list[0]) - len(key_value_list[0].lstrip())
     sub_list = []
-    for entry in list:
+    for entry in key_value_list:
         key, value = parse_key_value(entry, **args)
 
         indent = len(entry) - len(entry.lstrip())
@@ -374,7 +374,7 @@ def key_value_list_to_dict(list,
                 result_dict[parent_key] = key_value_list_to_dict(sub_list,
                                                                  **args)
             else:
-                result_dict[parent_key] = map(str.strip, sub_list)
+                result_dict[parent_key] = list(map(str.strip, sub_list))
             del sub_list[:]
 
         result_dict[key] = value
@@ -389,7 +389,7 @@ def key_value_list_to_dict(list,
             # If delim is found anywhere in the sub_list, we'll process as a sub-dictionary.
             result_dict[parent_key] = key_value_list_to_dict(sub_list, **args)
         else:
-            result_dict[parent_key] = map(str.strip, sub_list)
+            result_dict[parent_key] = list(map(str.strip, sub_list))
 
     return result_dict
 
