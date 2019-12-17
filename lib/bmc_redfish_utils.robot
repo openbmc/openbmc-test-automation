@@ -5,6 +5,7 @@ Resource        resource.robot
 Resource        bmc_redfish_resource.robot
 
 
+
 *** Keywords ***
 
 Redfish Power Operation
@@ -53,6 +54,13 @@ Redfish BMC Reset Operation
     # The logout may very well fail because the system was just asked to
     # reset itself.
     Run Keyword And Ignore Error  Redfish.Logout
+
+
+Reset Bios Via Redfish
+    [Documentation]  Do Bios Rest Through Redfish.
+
+    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/system/Bios/  Bios.ResetBios
+    ${resp}=  Redfish.Post  ${target}
 
 
 Delete All Redfish Sessions
@@ -197,4 +205,5 @@ Create Users With Different Roles
     FOR  ${role}  IN  @{users}
       Redfish Create User  ${users['${role}'][0]}  ${users['${role}']}[1]  ${role}  ${True}  ${force}
     END
+
 
