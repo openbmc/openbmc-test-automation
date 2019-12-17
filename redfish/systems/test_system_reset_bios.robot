@@ -14,18 +14,7 @@ Resource        ../../lib/bmc_redfish_utils.robot
 
 *** Test Cases **
 
+System Reset Bios via Redfish
+         Redfish System Reset Bios Operation
 
-Redfish System Reset Bios Operation
 
-    [Documentation]  Do Redfish System  reset Bios  operation.
-    # Example
-    #"Actions": {"
-    #Bios.ResetBios": {"
-    #target": "/redfish/v1/Systems/system/Bios/Actions/Bios.ResetBios"
-    # }
-                
-    Redfish.Login
-    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/system/Bios  Bios.ResetBios
-    ${payload}=  Create Dictionary  ResetType=GracefulRestart
-    ${resp}=  Redfish.Post  ${target}  body=&{payload}
-    Redfish.Logout
