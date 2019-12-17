@@ -55,6 +55,13 @@ Redfish BMC Reset Operation
     Run Keyword And Ignore Error  Redfish.Logout
 
 
+Reset Bios Via Redfish
+    [Documentation]  Do Bios Rest Through Redfish.
+
+    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/system/Bios/  Bios.ResetBios
+    ${resp}=  Redfish.Post  ${target}
+
+
 Delete All Redfish Sessions
     [Documentation]  Delete all active redfish sessions.
 
