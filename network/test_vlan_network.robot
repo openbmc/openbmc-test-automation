@@ -171,7 +171,7 @@ Delete Multiple IP On VLAN Via REST
 
 
 Delete Multiple VLANs Via REST
-    [Documentation]  Delete Multiple VLAN via REST and verify it via REST and IPMI.
+    [Documentation]  Delete Multiple VLANs via REST and verify it via REST and IPMI.
     [Tags]  Delete_Multiple_VLANs_Via_REST
     [Setup]  Run Keywords  Test Setup Execution
 
@@ -182,6 +182,18 @@ Delete Multiple VLANs Via REST
     Delete VLAN  ${vlan_id_list}
     ${lan_config}=  Get LAN Print Dict
     Valid Value  lan_config['802.1q VLAN ID']  ["Disabled"]
+
+Configure Multiple IPs On VLAN Via REST
+    [Documentation]  Configure Multiple IPs on VLAN and verify it via REST.
+    [Tags]  Configure_Multiple_IPs_On_VLAN_Via_REST
+    [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
+    [Teardown]  Delete VLAN  ${vlan_id}
+    :FOR  ${ip}  IN  @{ip_address_list}
+    \  Configure Network Settings On VLAN  ${vlan_id}  ${ip}  ${netmask}
+    \  Get VLAN URI For IP  ${vlan_id}  ${ip}
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['IP Address']  ["${ip_address_list[0]}"]
 
 
 *** Keywords ***
