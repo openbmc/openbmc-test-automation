@@ -341,7 +341,7 @@ if psutil_imported:
 
     def terminate_descendants():
         r"""
-        Terminate descendants of the current process according to the requirements layed out in global
+        Terminate descendants of the current process according to the requirements laid out in global
         term_options variable.
 
         Note: If term_options is not null, gen_exit_function() will automatically call this function.
