@@ -27,3 +27,19 @@ IPMI Chassis Status Off
     ${resp}=  Run IPMI Standard Command  chassis status
     ${power_status}=  Get Lines Containing String  ${resp}  System Power
     Should Contain  ${power_status}  off
+
+Verify Host PowerOff Via IPMI
+    [Documentation]   Verify host power off status using external IPMI command
+    [Tags]  Verify_Host_PowerOff_Via_IPMI
+    
+    Redfish Power On
+    Run External IPMI Standard Command  chassis power off
+    Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off Via IPMI
+
+Verify Host PowerOn Via IPMI
+    [Documentation]   Verify host power on status using external IPMI command
+    [Tags]  Verify_Host_PowerOn_Via_IPMI
+    
+    Redfish Power Off
+    Run External IPMI Standard Command  chassis power on
+    Wait Until Keyword Succeeds  3 min  10 sec  Is Host On Via IPMI
