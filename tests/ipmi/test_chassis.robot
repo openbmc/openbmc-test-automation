@@ -43,18 +43,6 @@ IPMI Chassis Restore Power Policy
      ...  ${CONTROL_HOST_URI}/power_restore_policy  PowerRestorePolicy
      Should Be Equal  ${power_policy}  ${initial_power_policy}
 
-Verify Host PowerOn Via IPMI
-    [Documentation]   Verify host power on status using external IPMI command.
-    [Tags]  Verify_Host_PowerOn_Via_IPMI
-
-    Initiate Host Boot Via External IPMI
-
-Verify Host PowerOff Via IPMI
-    [Documentation]   Verify host power off status using external IPMI command.
-    [Tags]  Verify_Host_PowerOff_Via_IPMI
-
-    Initiate Host PowerOff Via External IPMI
-
 Verify Soft Shutdown via IPMI
     [Documentation]  Verify Host OS shutdown softly using IPMI command.
     [Tags]  Verify_Soft_Shutdown_via_IPMI
