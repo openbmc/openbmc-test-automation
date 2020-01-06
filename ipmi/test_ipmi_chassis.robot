@@ -27,3 +27,19 @@ IPMI Chassis Status Off
     ${resp}=  Run IPMI Standard Command  chassis status
     ${power_status}=  Get Lines Containing String  ${resp}  System Power
     Should Contain  ${power_status}  off
+
+Verify Host PowerOff Via IPMI
+    [Documentation]   Verify host power off operation using external IPMI command.
+    [Tags]  Verify_Host_PowerOff_Via_IPMI
+
+    IPMI Power Off
+    ${ipmi_state}=  Get Host State Via External IPMI
+    Valid Value  ipmi_state  ['off']
+
+Verify Host PowerOn Via IPMI
+    [Documentation]   Verify host power on operation using external IPMI command.
+    [Tags]  Verify_Host_PowerOn_Via_IPMI
+
+    IPMI Power On
+    ${ipmi_state}=  Get Host State Via External IPMI
+    Valid Value  ipmi_state  ['on']
