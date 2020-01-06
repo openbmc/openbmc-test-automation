@@ -426,3 +426,17 @@ Delete All Non Root IPMI User
         Run IPMI Standard Command   user set name ${user_record['user_id']} ""
         Sleep  5s
     END
+
+
+Is Host Off Via IPMI
+    [Documentation]  Verify if the Host is off using IPMI.
+
+    ${status}=  Run External IPMI Standard Command  chassis power status
+    Should Contain  ${status}  off
+
+
+Is Host On Via IPMI
+    [Documentation]  Verify if the Host is on using IPMI.
+
+    ${status}=  Run External IPMI Standard Command  chassis power status
+    Should Contain  ${status}  on
