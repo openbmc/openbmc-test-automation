@@ -477,6 +477,7 @@ Set User Password And Verify
     ...  user set password ${random_userid} ${password} ${password_option}
     Rprint Vars  status
     Valid Value  status  [${expected_result}]
+    Return From Keyword If  '${expected_result}' == '${False}'
 
     # Set admin privilege and enable IPMI messaging for newly created user.
     Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
