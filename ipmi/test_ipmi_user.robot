@@ -7,7 +7,6 @@ Library             ../lib/ipmi_utils.py
 Test Setup          Printn
 
 Test Teardown       Test Teardown Execution
-Suite Teardown      Delete All Non Root IPMI User
 
 *** Variables ***
 
@@ -462,6 +461,7 @@ Verify IPMI Command
 Set User Password And Verify
     [Documentation]  Create a user and set its password with given length and option.
     [Arguments]  ${password_length}  ${password_option}  ${expected_result}
+    [Teardown]  Run Keywords  Delete All Non Root IPMI User
     # Description of argument(s):
     # password_length  Length of password to be generated and used (e.g. "16").
     # password_option  Password length option to be given in IPMI command (e.g. "16", "20").
@@ -501,3 +501,4 @@ Test Teardown Execution
     [Documentation]  Do the test teardown execution.
 
     FFDC On Test Case Fail
+    Delete All Non Root IPMI User
