@@ -7,7 +7,6 @@ Library             ../lib/ipmi_utils.py
 Test Setup          Printn
 
 Test Teardown       Test Teardown Execution
-Suite Teardown      Delete All Non Root IPMI User
 
 *** Variables ***
 
@@ -32,11 +31,13 @@ Verify IPMI User Summary
     [Documentation]  Verify IPMI maximum supported IPMI user ID and
     ...  enabled user form user summary
     [Tags]  Verify_IPMI_User_Summary
-
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
     # Delete all non-root IPMI (i.e. except userid 1)
     Delete All Non Root IPMI User
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
     Run IPMI Standard Command  user enable ${random_userid}
 
     # Verify maximum user count IPMI local user can have. Also verify
@@ -52,8 +53,11 @@ Verify IPMI User Summary
 Verify IPMI User Creation With Valid Name And ID
     [Documentation]  Create user via IPMI and verify.
     [Tags]  Test_IPMI_User_Creation_With_Valid_Name_And_ID
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
 
 
 Verify IPMI User Creation With Invalid Name
@@ -87,8 +91,11 @@ Verify Setting IPMI User With Invalid Password
     [Documentation]  Verify error while setting IPMI user with invalid
     ...  password.
     [Tags]  Verify_Setting_IPMI_User_With_Invalid_Password
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
 
     # Set invalid password for newly created user.
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
@@ -111,8 +118,11 @@ Verify Setting IPMI Root User With New Name
 Verify IPMI User Password Via Test Command
     [Documentation]  Verify IPMI user password using test command.
     [Tags]  Verify_IPMI_User_Password_Via_Test_Command
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
 
     # Set valid password for newly created user.
     Run IPMI Standard Command
@@ -128,8 +138,11 @@ Verify IPMI User Password Via Test Command
 Verify Setting Valid Password For IPMI User
     [Documentation]  Set valid password for IPMI user and verify.
     [Tags]  Verify_Setting_Valid_Password_For_IPMI_User
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
 
     # Set valid password for newly created user.
     Run IPMI Standard Command
@@ -149,6 +162,8 @@ Verify Setting Valid Password For IPMI User
 Verify IPMI User Creation With Same Name
     [Documentation]  Verify error while creating two IPMI user with same name.
     [Tags]  Verify_IPMI_User_Creation_With_Same_Name
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  2
 
     ${random_username}=  Generate Random String  8  [LETTERS]
     IPMI Create User  2  ${random_username}
@@ -163,8 +178,11 @@ Verify Setting IPMI User With Null Password
     [Documentation]  Verify error while setting IPMI user with null
     ...  password.
     [Tags]  Verify_Setting_IPMI_User_With_Null_Password
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
 
     # Set null password for newly created user.
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
@@ -189,6 +207,8 @@ Test IPMI User Privilege Level
     [Documentation]  Verify IPMI user with user privilege can only run user level commands.
     [Tags]  Test_IPMI_User_Privilege_Level
     [Template]  Test IPMI User Privilege
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
     ${user_priv}         Passed           Failed               Failed
@@ -199,6 +219,8 @@ Test IPMI Operator Privilege Level
     ...  level is set to operator.
     [Tags]  Test_IPMI_Operator_Privilege_Level
     [Template]  Test IPMI User Privilege
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
     ${operator_priv}     Passed           Passed               Failed
@@ -208,6 +230,8 @@ Test IPMI Administrator Privilege Level
     [Documentation]  Verify IPMI user with admin privilege can run all levels command.
     [Tags]  Test_IPMI_Administrator_Privilege_Level
     [Template]  Test IPMI User Privilege
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
     ${admin_level_priv}  Passed           Passed               Passed
@@ -217,6 +241,8 @@ Test IPMI No Access Privilege Level
     [Documentation]  Verify IPMI user with no access privilege can not run only any level command.
     [Tags]  Test_IPMI_No_Access_Privilege_Level
     [Template]  Test IPMI User Privilege
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
     ${no_access_priv}    Failed           Failed               Failed
@@ -226,8 +252,11 @@ Enable IPMI User And Verify
     [Documentation]  Enable IPMI user and verify that the user is able
     ...  to run IPMI command.
     [Tags]  Enable_IPMI_User_And_Verify
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
     Run IPMI Standard Command
     ...  user set password ${random_userid} ${valid_password}
 
@@ -247,8 +276,11 @@ Disable IPMI User And Verify
     [Documentation]  Disable IPMI user and verify that that the user
     ...  is unable to run IPMI command.
     [Tags]  Disable_IPMI_User_And_Verify
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
     Run IPMI Standard Command
     ...  user set password ${random_userid} ${valid_password}
 
@@ -270,7 +302,8 @@ Verify IPMI Root User Password Change
     [Documentation]  Change IPMI root user password and verify that
     ...  root user is able to run IPMI command.
     [Tags]  Verify_IPMI_Root_User_Password_Change
-    [Teardown]  Wait Until Keyword Succeeds  15 sec  5 sec
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Wait Until Keyword Succeeds  15 sec  5 sec
     ...  Set Default Password For IPMI Root User
 
     # Set new password for root user.
@@ -285,8 +318,11 @@ Verify IPMI Root User Password Change
 Verify Administrator And No Access Privilege For Different Channels
     [Documentation]  Set administrator and no access privilege for different channels and verify.
     [Tags]  Verify_Administrator_And_No_Access_Privilege_For_Different_Channels
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
     Run IPMI Standard Command
     ...  user set password ${random_userid} ${valid_password}
 
@@ -308,8 +344,11 @@ Verify Administrator And No Access Privilege For Different Channels
 Verify Operator And User Privilege For Different Channels
     [Documentation]  Set operator and user privilege for different channels and verify.
     [Tags]  Verify_Operator_And_User_Privilege_For_Different_Channels
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
     Run IPMI Standard Command
     ...  user set password ${random_userid} ${valid_password}
 
@@ -422,6 +461,7 @@ Test IPMI User Privilege
     ${random_username}=  Generate Random String  8  [LETTERS]
     ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
     IPMI Create User  ${random_userid}  ${random_username}
+    Set Test Variable  ${random_userid}
     Run IPMI Standard Command
     ...  user set password ${random_userid} ${valid_password}
 
@@ -462,6 +502,7 @@ Verify IPMI Command
 Set User Password And Verify
     [Documentation]  Create a user and set its password with given length and option.
     [Arguments]  ${password_length}  ${password_option}  ${expected_result}
+    [Teardown]  Run Keyword  Delete Created User  ${random_userid}
     # Description of argument(s):
     # password_length  Length of password to be generated and used (e.g. "16").
     # password_option  Password length option to be given in IPMI command (e.g. "16", "20").
@@ -469,6 +510,7 @@ Set User Password And Verify
 
     Rprint Vars  password_length  password_option  expected_result
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
     ${password}=  Get From Dictionary  ${password_values}  ${password_length}
     Rprint Vars  random_userid  password
 
@@ -501,3 +543,13 @@ Test Teardown Execution
     [Documentation]  Do the test teardown execution.
 
     FFDC On Test Case Fail
+
+
+Delete Created User
+    [Documentation]  Delete Created IPMI user.
+    [Arguments]  ${userid}
+    # Description of argument(s):
+    # userid  The user ID (e.g. "1", "2", etc.).
+
+    Run IPMI Standard Command  user set name ${userid} ""
+    Sleep  5s
