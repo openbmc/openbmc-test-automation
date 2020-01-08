@@ -7,13 +7,13 @@ exec expect "$0" -- ${1+"$@"}
 # Example use case:
 # sol_utils.tcl --os_host=ip --os_password=password --os_username=username
 # --openbmc_host=ip --openbmc_password=password --openbmc_username=username
-# --proc_name=boot_to_petitboot
+# --proc_name=boot_to_petitboot --host_sol_port=port
 
 source [exec bash -c "which source.tcl"]
 my_source \
 [list print.tcl opt.tcl valid.tcl call_stack.tcl tools.exp cmd.tcl host.tcl]
 
-longoptions openbmc_host: openbmc_username:=root openbmc_password:=0penBmc\
+longoptions openbmc_host: openbmc_username:=root openbmc_password:=0penBmc host_sol_port:=2200\
   os_host: os_username:=root os_password: proc_name: ftp_username: \
   ftp_password: os_repo_url: autoboot_setting: test_mode:=0 quiet:=0 debug:=0
 pos_parms
@@ -32,6 +32,7 @@ set help_dict [dict create\
   os_host [list "The OS host name or IP address." "host"]\
   os_username [list "The OS username." "username"]\
   os_password [list "The OS password." "password"]\
+  host_sol_port [list "The HOST SOL port number." "port"]\
   proc_name [list "The proc_name you'd like to run.  Valid values are as\
     follows: [regsub -all {\s+} $valid_proc_name {, }]."]\
   autoboot_setting [list "The desired state of autoboot." "true/flase"]\
@@ -88,6 +89,7 @@ proc validate_parms {} {
   valid_value os_host
   valid_value os_username
   valid_password os_password
+  valid_value host_sol_port
   global valid_proc_name
   global proc_name proc_names
   set proc_names [split $proc_name " "]
@@ -112,11 +114,11 @@ proc sol_login {} {
   global spawn_id
   global expect_out
   global state
-  global openbmc_host openbmc_username openbmc_password
+  global openbmc_host openbmc_username openbmc_password host_sol_port
   global cr_lf_regex
   global ssh_password_prompt
 
-  set cmd_buf "spawn -nottycopy ssh -p 2200 $openbmc_username@$openbmc_host"
+  set cmd_buf "spawn -nottycopy ssh -p $host_sol_port $openbmc_username@$openbmc_host"
   qprint_issuing
   eval $cmd_buf
 
