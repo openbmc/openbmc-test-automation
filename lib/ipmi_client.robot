@@ -376,7 +376,7 @@ Verify IPMI Username And Password
     # username    The user name (e.g. "root", "robert", etc.).
     # password    The user password (e.g. "0penBmc", "0penBmc1", etc.).
 
-    ${output}=  Run External IPMI Standard Command
+    ${output}=  Wait Until Keyword Succeeds  15 sec  5 sec  Run External IPMI Standard Command
     ...  sel info  U=${username}  P=${password}
     Should Contain  ${output}  SEL Information  msg=SEL information not present
 
