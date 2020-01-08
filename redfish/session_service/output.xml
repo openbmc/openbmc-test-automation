@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20200108 00:58:49.753" generator="Robot 3.1 (Python 3.4.2 on linux)">
+<suite id="s1" source="/gsa/ausgsa-p10/00/indiateam01/vijaysk/session/redfish/session_service/test_sessions_management.robot" name="Test Sessions Management">
+<test id="s1-t1" name="Verify SessionService parameters">
+<kw name="Test Setup Execution" type="setup">
+<doc>Do test case setup tasks.</doc>
+<kw name="Redfish.Login">
+<msg level="FAIL" timestamp="20200108 00:59:02.970">No keyword with name 'Redfish.Login' found.</msg>
+<status starttime="20200108 00:59:02.970" endtime="20200108 00:59:02.970" status="FAIL"></status>
+</kw>
+<status starttime="20200108 00:59:02.959" endtime="20200108 00:59:02.970" status="FAIL"></status>
+</kw>
+<kw name="Test Teardown Execution" type="teardown">
+<doc>Do the post test teardown.</doc>
+<kw name="Redfish.Logout">
+<msg level="FAIL" timestamp="20200108 00:59:02.981">No keyword with name 'Redfish.Logout' found.</msg>
+<status starttime="20200108 00:59:02.981" endtime="20200108 00:59:02.981" status="FAIL"></status>
+</kw>
+<status starttime="20200108 00:59:02.970" endtime="20200108 00:59:02.981" status="FAIL">No keyword with name 'Redfish.Logout' found.</status>
+</kw>
+<doc>Verify SessionService parameters</doc>
+<tags>
+<tag>Verify_SessionService_Enabled</tag>
+</tags>
+<status critical="yes" starttime="20200108 00:59:02.958" endtime="20200108 00:59:02.981" status="FAIL">Setup failed:
+No keyword with name 'Redfish.Login' found.
+
+Also teardown failed:
+No keyword with name 'Redfish.Logout' found.</status>
+</test>
+<doc>Test Redfish user account.</doc>
+<status starttime="20200108 00:58:49.754" endtime="20200108 00:59:02.981" status="FAIL"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="0">Critical Tests</stat>
+<stat fail="1" pass="0">All Tests</stat>
+</total>
+<tag>
+<stat fail="1" pass="0">Verify_SessionService_Enabled</stat>
+</tag>
+<suite>
+<stat fail="1" pass="0" name="Test Sessions Management" id="s1">Test Sessions Management</stat>
+</suite>
+</statistics>
+<errors>
+<msg level="ERROR" timestamp="20200108 00:58:49.747">Error in file '/gsa/ausgsa-p10/00/indiateam01/vijaysk/session/redfish/session_service/test_sessions_management.robot': Unrecognized table header ''. Available headers for data: 'Setting(s)', 'Variable(s)', 'Test Case(s)', 'Task(s)' and 'Keyword(s)'. Use 'Comment(s)' to embedded additional data.</msg>
+<msg level="ERROR" timestamp="20200108 00:59:01.453">Error in file '/gsa/ausgsa-p10/00/indiateam01/vijaysk/session/lib/bmc_redfish_resource.robot': Initializing test library 'bmc_redfish' with arguments [ https://wspooncap18a.rch.stglabs.ibm.com:443 | root | 0penBmc ] failed: RetriesExhaustedError
+Traceback (most recent call last):
+  File "/gsa/ausgsa-p10/00/indiateam01/vijaysk/session/lib/bmc_redfish.py", line 41, in __init__
+    super(bmc_redfish, self).__init__(*args, **kwargs)
+  File "/opt/rh/rh-python34/root/usr/lib/python3.4/site-packages/redfish/rest/v1.py", line 937, in __init__
+    cafile=cafile)
+  File "/opt/rh/rh-python34/root/usr/lib/python3.4/site-packages/redfish/rest/v1.py", line 418, in __init__
+    self.get_root_object()
+  File "/opt/rh/rh-python34/root/usr/lib/python3.4/site-packages/redfish/rest/v1.py", line 546, in get_root_object
+    raise excp
+  File "/opt/rh/rh-python34/root/usr/lib/python3.4/site-packages/redfish/rest/v1.py", line 544, in get_root_object
+    resp = self.get('%s%s' % (self.__url.path, self.default_prefix))
+  File "/gsa/ausgsa-p10/00/indiateam01/vijaysk/session/lib/redfish_plus.py", line 114, in get
+    **kwargs)
+  File "/gsa/ausgsa-p10/00/indiateam01/vijaysk/session/lib/redfish_plus.py", line 107, in rest_request
+    response = func(*args, **kwargs)
+  File "/opt/rh/rh-python34/root/usr/lib/python3.4/site-packages/redfish/rest/v1.py", line 578, in get
+    headers=headers)
+  File "/opt/rh/rh-python34/root/usr/lib/python3.4/site-packages/redfish/rest/v1.py", line 964, in _rest_request
+    args=args, body=body, headers=headers)
+  File "/opt/rh/rh-python34/root/usr/lib/python3.4/site-packages/redfish/rest/v1.py", line 835, in _rest_request
+    raise RetriesExhaustedError()</msg>
+<msg level="ERROR" timestamp="20200108 00:59:01.461">Error in file '/gsa/ausgsa-p10/00/indiateam01/vijaysk/session/lib/bmc_redfish_resource.robot': Initializing test library 'bmc_redfish_utils' with no arguments failed: No library 'redfish' found.
+Traceback (most recent call last):
+  File "/gsa/ausgsa-p10/00/indiateam01/vijaysk/session/lib/bmc_redfish_utils.py", line 19, in __init__
+    self._redfish_ = BuiltIn().get_library_instance('redfish')
+  File "/opt/rh/rh-python34/root/usr/lib/python3.4/site-packages/robot/libraries/BuiltIn.py", line 3258, in get_library_instance
+    raise RuntimeError(unic(err))</msg>
+</errors>
+</robot>
