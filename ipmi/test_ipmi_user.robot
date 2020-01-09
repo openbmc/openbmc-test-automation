@@ -80,7 +80,7 @@ Verify IPMI User Creation With Invalid ID
     FOR  ${id}  IN  @{id_list}
       ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
       ...  user set name ${id} newuser
-      Should Contain  ${msg}  User ID is limited to range
+      Should Contain Any  ${msg}  User ID is limited to range  Parameter out of range
     END
 
 Verify Setting IPMI User With Invalid Password
