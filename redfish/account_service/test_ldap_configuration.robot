@@ -88,9 +88,9 @@ Verify LDAP Config Update With Incorrect AuthenticationType
     [Tags]  Verify_LDAP_Update_With_Incorrect_AuthenticationType
 
     ${body}=  Catenate  {'${ldap_type}': {'Authentication': {'AuthenticationType':'KerberosKeytab'}}}
-    ...  valid_status_codes=[400]
+
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
-    ...  body=${body}
+    ...  body=${body}  valid_status_codes=[400]
 
 
 Verify LDAP Login With Correct LDAP URL
@@ -106,8 +106,7 @@ Verify LDAP Config Update With Incorrect LDAP URL
     [Teardown]  Run Keywords  Restore LDAP URL  AND
     ...  FFDC On Test Case Fail
 
-    Config LDAP URL  "ldap://1.2.3.4"
-
+    Config LDAP URL  ldap://1.2.3.4/  ${FALSE}
 
 Verify LDAP Configuration Exist
     [Documentation]  Verify that LDAP configuration is available.
@@ -500,7 +499,7 @@ Create LDAP Configuration
 
 Config LDAP URL
     [Documentation]  Config LDAP URL.
-    [Arguments]  ${ldap_server_uri}=${LDAP_SERVER_URI}
+    [Arguments]  ${ldap_server_uri}=${LDAP_SERVER_URI}  ${expected_status}=${TRUE}
 
     # Description of argument(s):
     # ldap_server_uri LDAP server uri (e.g. "ldap://XX.XX.XX.XX/").
@@ -509,7 +508,9 @@ Config LDAP URL
     ...  body={'${ldap_type}': {'ServiceAddresses': ['${ldap_server_uri}']}}
     Sleep  15s
     # After update, LDAP login.
-    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    ${status}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Valid Value  status  [${expected_status}]
+
     Redfish.Logout
     Redfish.Login
 
