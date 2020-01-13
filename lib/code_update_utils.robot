@@ -172,7 +172,7 @@ Redfish Upload Image
 
     ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
 
-    Wait Until Keyword Succeeds  3 times  60 sec
+    Wait Until Keyword Succeeds  2 times  180 sec
     ...  Upload Image To BMC  ${uri}  data=${image_data}
 
 
