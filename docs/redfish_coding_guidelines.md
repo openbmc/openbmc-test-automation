@@ -118,3 +118,33 @@ reasons:
     username, etc.).
 -   Any keyword or test case which breaks the above rules is responsible for
     setting things right (i.e. back to a logged in state).
+
+Rules for use of data/variables.py
+==================================
+
+Avoid defining variables in data/variables.py for Redfish URIs.
+
+There's no obvious benefit to using such variables.  Conversely, with literal values,
+it is much easier for the programmer to interpret the code.
+
+Consider the following example.
+
+Here's an excerpt from data/variables.py:
+
+```
+# Redfish variables.
+REDFISH_BASE_URI = '/redfish/v1/'
+...
+REDFISH_ACCOUNTS = 'AccountService/Accounts/'
+REDFISH_ACCOUNTS_URI = REDFISH_BASE_URI + REDFISH_ACCOUNTS
+```
+
+And here is a corresponding Robot code example:
+
+```
+    # Rather than coding this:
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
+
+    # Code this:
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/user_user
+```
