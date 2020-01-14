@@ -6,6 +6,7 @@ See class prolog below for details.
 
 import sys
 import re
+import json
 from redfish_plus import redfish_plus
 from robot.libraries.BuiltIn import BuiltIn
 
@@ -146,3 +147,94 @@ class bmc_redfish(redfish_plus):
         """
 
         return self.get_session_key(), self.get_session_location()
+
+    def enumerate(self, resource_path, return_json=1, include_dead_resources=False):
+        r"""
+        Perform a GET enumerate request and return available resource paths.
+
+        Description of argument(s):
+        resource_path               URI resource absolute path (e.g. "/redfish/v1/SessionService/Sessions").
+        return_json                 Indicates whether the result should be returned as a json string or as a
+                                    dictionary.
+        include_dead_resources      Check and return a list of dead/broken URI resources.
+        """
+
+        gp.qprint_executing(style=gp.func_line_style_short)
+        # Set quiet variable to keep subordinate get() calls quiet.
+        quiet = 1
+
+        self.__result = {}
+        # Variable to hold the pending list of resources for which enumeration is yet to be obtained.
+        self.__pending_enumeration = set()
+        self.__pending_enumeration.add(resource_path)
+
+        # Variable having resources for which enumeration is completed.
+        enumerated_resources = set()
+        dead_resources = {}
+        resources_to_be_enumerated = (resource_path,)
+        while resources_to_be_enumerated:
+            for resource in resources_to_be_enumerated:
+                # JsonSchemas, SessionService or URLs containing # are not required in enumeration.
+                # Example: '/redfish/v1/JsonSchemas/' and sub resources.
+                #          '/redfish/v1/SessionService'
+                #          '/redfish/v1/Managers/bmc#/Oem'
+                if ('JsonSchemas' in resource) or ('SessionService' in resource) or ('#' in resource):
+                    continue
+
+                self._rest_response_ = self.get(resource, valid_status_codes=[200, 404, 500])
+                # Enumeration is done for available resources ignoring the ones for which response is not
+                # obtained.
+                if self._rest_response_.status != 200:
+                    if include_dead_resources:
+                        try:
+                            dead_resources[self._rest_response_.status].append(resource)
+                        except KeyError:
+                            dead_resources[self._rest_response_.status] = [resource]
+                    continue
+                self.walk_nested_dict(self._rest_response_.dict, url=resource)
+
+            enumerated_resources.update(set(resources_to_be_enumerated))
+            resources_to_be_enumerated = tuple(self.__pending_enumeration - enumerated_resources)
+
+        if return_json:
+            if include_dead_resources:
+                return json.dumps(self.__result, sort_keys=True,
+                                  indent=4, separators=(',', ': ')), dead_resources
+            else:
+                return json.dumps(self.__result, sort_keys=True,
+                                  indent=4, separators=(',', ': '))
+        else:
+            if include_dead_resources:
+                return self.__result, dead_resources
+            else:
+                return self.__result
+
+    def walk_nested_dict(self, data, url=''):
+        r"""
+        Parse through the nested dictionary and get the resource id paths.
+
+        Description of argument(s):
+        data                        Nested dictionary data from response message.
+        url                         Resource for which the response is obtained in data.
+        """
+        url = url.rstrip('/')
+
+        for key, value in data.items():
+
+            # Recursion if nested dictionary found.
+            if isinstance(value, dict):
+                self.walk_nested_dict(value)
+            else:
+                # Value contains a list of dictionaries having member data.
+                if 'Members' == key:
+                    if isinstance(value, list):
+                        for memberDict in value:
+                            self.__pending_enumeration.add(memberDict['@odata.id'])
+                if '@odata.id' == key:
+                    value = value.rstrip('/')
+                    # Data for the given url.
+                    if value == url:
+                        self.__result[url] = data
+                    # Data still needs to be looked up,
+                    else:
+                        self.__pending_enumeration.add(value)
