@@ -1,11 +1,12 @@
 *** Settings ***
+
 Documentation    Test Redfish SessionService.
 
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
-Suite Setup      Redfish.Login
+Suite Setup      Suite Setup Execution
 Suite Teardown   Redfish.Logout
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
@@ -13,13 +14,22 @@ Test Teardown    FFDC On Test Case Fail
 
 *** Test Cases ***
 
-Verify HTTP_CREATED Response From Session Creation Request
-    [Documentation]  Verify HTTP_CREATED response from session creation request.
-    [Tags]  Verify_HTTP_CREATED_Response_From_Session_Creation_Request
+Create Session And Verify Response Code Using Different Credentials
+    [Documentation]  Create session and verify response code using different credentials.
+    [Tags]  Create_Session_And_Verify_Response_Code_Using_Different_Credentails
+    [Template]  Create Session And Verify Response Code
 
-    Redfish.Post  /redfish/v1/SessionService/Sessions
-    ...  body={'UserName':'${OPENBMC_USERNAME}', 'Password': '${OPENBMC_PASSWORD}'}
-    ...  valid_status_codes=[${HTTP_CREATED}]
+    # username           password             valid_status_codes
+    ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${HTTP_CREATED}
+    r00t                 ${OPENBMC_PASSWORD}  ${HTTP_FORBIDDEN}
+    ${OPENBMC_USERNAME}  password             ${HTTP_FORBIDDEN}
+    r00t                 password             ${HTTP_FORBIDDEN}
+    admin_user           TestPwd123           ${HTTP_CREATED}
+    operator_user        TestPwd123           ${HTTP_CREATED}
+
+    # TODO: Uncomment these users accout creation when SW482962 is fixed
+    # user_user          TestPwd123           ${HTTP_CREATED}
+    # callback_user      TestPwd123           ${HTTP_CREATED}
 
 
 Verify SessionService Defaults
@@ -156,3 +166,64 @@ REST Logging Interface Read Should Be A SUCCESS For Authorized Users
     # Max 200 error logs are allowed in OpenBmc
     Run Keyword Unless   ${-1} < ${log_count} < ${201}  Fail
 
+
+
+*** Keywords ***
+
+Create Session And Verify Response Code
+    [Documentation]  Create Session And Verify Response Code
+    [Arguments]  ${username}=${OPENBMC_USERNAME}  ${password}=${OPENBMC_PASSWORD}
+    ...  ${valid_status_codes}=${HTTP_CREATED}
+
+    ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
+    ...  body={'UserName':'${username}', 'Password': '${password}'}
+    ...  valid_status_codes=[${valid_status_codes}]
+
+    Return From Keyword If  ${valid_status_codes} != ${HTTP_CREATED}
+
+    ${headers}=  Key Value List To Dict  ${resp.getheaders()}
+
+    # We need these tokens in future testcases (Yet to be automated)
+    Set Suite Variable  ${${username}_key}  ${headers['X-Auth-Token']}
+    Set Suite Variable  ${${username}_loc}  ${headers['Location']}
+
+
+Create Users With Different Roles
+    [Documentation]  Create users with different roles.
+
+    Create User Of Given Role  admin_user  TestPwd123  Administrator ${True}
+    Create User Of Given Role  operator_user  TestPwd123  Operator  ${True}
+
+    # TODO: Uncomment these users accout creation when SW482962 is fixed
+    # Create User Of Given Role  user_user  TestPwd123  User  ${True}
+    # Create User Of Given Role  callback_user  TestPwd123  Callback  ${True}
+
+
+Create User Of Given Role
+    [Documentation]  Create user of given role.
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+
+    # Make sure the user account in question does not already exist.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+
+Suite Setup Execution
+    [Documentation]  Suite Setup Execution.
+
+    Redfish.Login
+    Create Users With Different Roles
