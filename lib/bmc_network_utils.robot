@@ -255,7 +255,7 @@ Configure Hostname
     # hostname  A hostname value which is to be configured on BMC.
 
     ${data}=  Create Dictionary  HostName=${hostname}
-    Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+    Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}  valid_status_codes=[200, 204]
 
 
 Verify IP On BMC
