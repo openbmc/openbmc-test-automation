@@ -302,3 +302,61 @@ def to_json_ordered(json_str):
         return json.loads(json_str, object_pairs_hook=DotDict)
     except TypeError:
         return json.loads(json_str.decode("utf-8"), object_pairs_hook=DotDict)
+
+
+def get_bmc_release_info():
+    r"""
+    Get release info from the BMC and return as a dictionary.
+
+    Example:
+
+    ${release_info}=  Get BMC Release Info
+    Rprint Vars  release_info
+
+    Output:
+
+    release_info:
+      [id]:                                           openbmc-phosphor
+      [name]:                                         Phosphor OpenBMC (Phosphor OpenBMC Project Reference...
+      [version]:                                      2.8.0-dev
+      [version_id]:                                   2.8.0-dev-1083-g8954c3505
+      [pretty_name]:                                  Phosphor OpenBMC (Phosphor OpenBMC Project Reference...
+      [build_id]:                                     2.8.0-dev
+      [openbmc_target_machine]:                       witherspoon
+    """
+
+    out_buf, stderr, rc = bsu.bmc_execute_command('cat /etc/os-release')
+    return vf.key_value_outbuf_to_dict(out_buf, delim="=", strip='"')
+
+
+def get_os_release_info():
+    r"""
+    Get release info from the OS and return as a dictionary.
+
+    Example:
+
+    ${release_info}=  Get OS Release Info
+    Rprint Vars  release_info
+
+    Output:
+    release_info:
+      [name]:                                         Red Hat Enterprise Linux Server
+      [version]:                                      7.6 (Maipo)
+      [id]:                                           rhel
+      [id_like]:                                      fedora
+      [variant]:                                      Server
+      [variant_id]:                                   server
+      [version_id]:                                   7.6
+      [pretty_name]:                                  Red Hat Enterprise Linux Server 7.6 (Maipo)
+      [ansi_color]:                                   0;31
+      [cpe_name]:                                     cpe:/o:redhat:enterprise_linux:7.6:GA:server
+      [home_url]:                                     https://www.redhat.com/
+      [bug_report_url]:                               https://bugzilla.redhat.com/
+      [redhat_bugzilla_product]:                      Red Hat Enterprise Linux 7
+      [redhat_bugzilla_product_version]:              7.6
+      [redhat_support_product]:                       Red Hat Enterprise Linux
+      [redhat_support_product_version]:               7.6
+    """
+
+    out_buf, stderr, rc = bsu.os_execute_command('cat /etc/os-release')
+    return vf.key_value_outbuf_to_dict(out_buf, delim="=", strip='"')
