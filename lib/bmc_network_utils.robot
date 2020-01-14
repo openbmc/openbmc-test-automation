@@ -256,6 +256,7 @@ Configure Hostname
 
     ${data}=  Create Dictionary  HostName=${hostname}
     Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
 Verify IP On BMC
