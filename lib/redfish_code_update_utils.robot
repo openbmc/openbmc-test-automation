@@ -4,6 +4,7 @@ Documentation   Redfish BMC and PNOR software utilities keywords.
 Library         code_update_utils.py
 Library         gen_robot_valid.py
 Library         tftp_update_utils.py
+Library         gen_robot_keyword.py
 Resource        bmc_redfish_utils.robot
 Resource        boot_utils.robot
 

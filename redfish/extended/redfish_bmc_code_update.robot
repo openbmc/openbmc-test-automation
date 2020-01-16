@@ -17,6 +17,7 @@ Resource                 ../../lib/code_update_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/var_funcs.py
+Library                  ../../lib/gen_robot_keyword.py
 
 Suite Setup              Suite Setup Execution
 Suite Teardown           Redfish.Logout
@@ -128,6 +129,11 @@ Redfish Update Firmware
 
     Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
     Redfish Upload Image And Check Progress State
-    Reboot BMC And Verify BMC Image
-    ...  OnReset  start_boot_seconds=${state['epoch_seconds']}
+    ${tar_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    ${image_info}=  Get Software Inventory State By Version  ${tar_version}
+    ${get_json_file}=  OperatingSystem.Get File  lib/applytime_table.json
+    ${post_code_update_actions}=  Evaluate  json.loads('''${get_json_file}''')  json
+    Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
+    Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
 
