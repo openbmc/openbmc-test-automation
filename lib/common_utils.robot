@@ -62,11 +62,15 @@ ${bmc_power_policy_method}        ${EMPTY}
 @{valid_power_policy_vars}        RESTORE_LAST_STATE  ALWAYS_POWER_ON
 ...                               ALWAYS_POWER_OFF
 
+${check_performance}              ${1}
+
 
 *** Keywords ***
 
 Check BMC Performance
     [Documentation]  Check BMC basic CPU Mem File system performance.
+
+    Return From Keyword If   not ${check_performance}
 
     Check BMC CPU Performance
     Check BMC Mem Performance
@@ -583,14 +587,14 @@ BMC File System Usage Check
 Check BMC CPU Performance
     [Documentation]   Minimal 10% of proc should be free in 3 sample
     :FOR  ${var}  IN RANGE  1  4
-    \     BMC CPU Performance check
+    \     BMC CPU Performance Check
 
 
 Check BMC Mem Performance
     [Documentation]   Minimal 10% of memory should be free
 
     :FOR  ${var}  IN RANGE  1  4
-    \     BMC Mem Performance check
+    \     BMC Mem Performance Check
 
 
 Check BMC File System Performance
