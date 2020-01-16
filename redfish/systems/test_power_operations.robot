@@ -17,6 +17,16 @@ Verify Redfish Host GracefulShutdown
     Redfish Power Off
 
 
+Verify Redfish BMC PowerOn No Check Watts
+    [Documentation]  Verify Redfish host power on operation.
+    [Tags]  Verify_Redfish_Host_PowerOn_No_Check_Watts
+
+    Redfish Power On
+
+    # TODO: Replace OCC state check with redfish property when available.
+    Verify OCC State
+
+
 Verify Redfish BMC PowerOn
     [Documentation]  Verify Redfish host power on operation.
     [Tags]  Verify_Redfish_Host_PowerOn
