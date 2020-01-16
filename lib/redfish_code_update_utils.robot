@@ -4,6 +4,7 @@ Documentation   Redfish BMC and PNOR software utilities keywords.
 Library         code_update_utils.py
 Library         gen_robot_valid.py
 Library         tftp_update_utils.py
+Library         gen_robot_keyword.py
 Resource        bmc_redfish_utils.robot
 Resource        boot_utils.robot
 
@@ -121,6 +122,20 @@ Redfish Upload Image And Check Progress State
     Wait Until Keyword Succeeds  8 min  20 sec
     ...  Check Image Update Progress State
     ...    match_state='Enabled'  image_id=${image_id}
+
+
+Post Code Update Action
+    [Documentation]  Post code update action on BMC or Host update based on apply time policy.
+    [Arguments]  ${image_type}  ${apply_time}
+
+    # Description of argument(s):
+    # image_type            BMC image, Host image.
+    # apply_time            ApplyTime allowed values
+    #                       (e.g. "OnReset", "Immediate").
+
+    ${get_json_file}=  OperatingSystem.Get File  lib/applytime_table.json
+    ${post_code_update_actions}=  Evaluate  json.loads('''${get_json_file}''')  json
+    Run Key  ${post_code_update_actions['${image_type}']['${apply_time}']}
 
 
 Get Host Power State
