@@ -201,8 +201,7 @@ Verify LDAP User With Read Privilege Able To Check Inventory
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore LDAP Privilege
     [Template]  Set Read Privilege And Check Firmware Inventory
 
-    User
-    Callback
+    ReadOnly
 
 
 Verify LDAP User With Read Privilege Should Not Do Host Poweron
@@ -212,8 +211,7 @@ Verify LDAP User With Read Privilege Should Not Do Host Poweron
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore LDAP Privilege
     [Template]  Set Read Privilege And Check Poweron
 
-    User
-    Callback
+    ReadOnly
 
 
 Update LDAP Group Name And Verify Operations
@@ -226,12 +224,12 @@ Update LDAP Group Name And Verify Operations
     # group_name             group_privilege  valid_status_codes
     ${GROUP_NAME}            Administrator    [${HTTP_OK}]
     ${GROUP_NAME}            Operator         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
-    ${GROUP_NAME}            User             [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
-    ${GROUP_NAME}            Callback         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    ${GROUP_NAME}            ReadOnly         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    ${GROUP_NAME}            NoAccess         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     Invalid_LDAP_Group_Name  Administrator    [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     Invalid_LDAP_Group_Name  Operator         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
-    Invalid_LDAP_Group_Name  User             [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
-    Invalid_LDAP_Group_Name  Callback         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    Invalid_LDAP_Group_Name  ReadOnly         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    Invalid_LDAP_Group_Name  NoAccess         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
 
 Verify LDAP BaseDN Update And LDAP Login
