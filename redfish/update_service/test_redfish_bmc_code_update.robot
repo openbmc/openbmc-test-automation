@@ -77,12 +77,15 @@ Redfish Update Firmware
 
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
-    Set ApplyTime  policy=${apply_Time}
+    Set ApplyTime  policy=${apply_time}
+    Redfish Upload Image And Check Progress State
+    ${tar_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    ${image_info}=  Get Software Inventory State By Version  ${tar_version}
     ${get_json_file}=  OperatingSystem.Get File  lib/applytime_table.json
     ${post_code_update_actions}=  Evaluate  json.loads('''${get_json_file}''')  json
-    Redfish Upload Image And Check Progress State
-    Run Key  ${post_code_update_actions['bmc']['${apply_time}']}
+    Run Key  ${post_code_update_actions['${image_info["image_type"]}']['${apply_time}']}
     Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
     Verify Get ApplyTime  ${apply_time}
 
 
@@ -119,5 +122,12 @@ Redfish Multiple Upload Image And Check Progress State
     Wait Until Keyword Succeeds  8 min  20 sec
     ...  Check Image Update Progress State
     ...    match_state='Enabled'  image_id=${first_image_id}
-    Reboot BMC And Verify BMC Image  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
+
+    ${tar_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    ${image_info}=  Get Software Inventory State By Version  ${tar_version}
+    ${get_json_file}=  OperatingSystem.Get File  lib/applytime_table.json
+    ${post_code_update_actions}=  Evaluate  json.loads('''${get_json_file}''')  json
+    Run Key  ${post_code_update_actions['${image_info["image_type"]}']['${apply_time}']}
+    Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
 
