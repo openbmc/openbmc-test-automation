@@ -22,6 +22,7 @@ Redfish Login And Logout
 GET Redfish Hypermedia Without Login
     [Documentation]  GET hypermedia URL without login.
     [Tags]  GET_Redfish_Hypermedia_Without_Login
+    [Setup]  Redfish.Logout
     [Template]  GET And Verify Redfish Response
 
     # Expect status      Resource URL Path
@@ -33,6 +34,7 @@ GET Redfish Hypermedia Without Login
 GET Redfish SessionService Without Login
     [Documentation]  Get /redfish/v1/SessionService without login
     [Tags]  GET_Redfish_SessionService_Without_Login
+    [Setup]  Redfish.Logout
 
     ${resp}=  Redfish.Get  /redfish/v1/SessionService
     ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
