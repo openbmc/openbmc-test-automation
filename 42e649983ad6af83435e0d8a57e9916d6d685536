@@ -39,6 +39,30 @@
       "revId": "42e649983ad6af83435e0d8a57e9916d6d685536",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f93efe6_54d3ce76",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-01-17T05:16:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c61037c5_7dd45bcc",
+      "range": {
+        "startLine": 82,
+        "startChar": 40,
+        "endLine": 82,
+        "endChar": 55
+      },
+      "revId": "42e649983ad6af83435e0d8a57e9916d6d685536",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
