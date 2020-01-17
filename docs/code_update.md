@@ -5,7 +5,7 @@
 Currently supported BMC and PNOR update formats are UBI.
 For code update information, please refer to [code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
 
-* UBI Format *
+* UBI Format
 
     For BMC code update, download the system type *.ubi.mdt.tar image from
     https://openpower.xyz/job/openbmc-build/ and run as follows:
@@ -45,7 +45,7 @@ Currently supported BMC and PNOR update formats are UBI and non-UBI.
 For code update information, please refer to [code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
 
 
-* UBI Format *
+* UBI Format
 
     For BMC code update, download the system type *.ubi.mdt.tar image from
     https://openpower.xyz/job/openbmc-build/ and run as follows:
@@ -65,7 +65,7 @@ For code update information, please refer to [code-update.md](https://github.com
     $ robot -v OPENBMC_HOST:x.x.x.x -v IMAGE_FILE_PATH:<image path>/witherspoon.pnor.squashfs.tar --include REST_Host_Code_Update  host_code_update.robot
     ```
 
-* Non-UBI Format *
+* Non-UBI Format
 
     For BMC code update, download the system type *all.tar image from
     https://openpower.xyz/job/openbmc-build/ and run as follows:
