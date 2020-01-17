@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13695f2c_7a876e51",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2020-01-17T13:32:27Z",
+      "side": 1,
+      "message": "can u also mentiontemplate data parameter changes too here",
+      "revId": "ff1447c9c38f775e3925663290e4331a8cb89c9f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db29d69f_c2e3ac93",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2020-01-17T13:32:27Z",
+      "side": 1,
+      "message": "align with others",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 39,
+        "endChar": 33
+      },
+      "revId": "ff1447c9c38f775e3925663290e4331a8cb89c9f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
