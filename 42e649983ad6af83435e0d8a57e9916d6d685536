@@ -16,6 +16,29 @@
       "revId": "42e649983ad6af83435e0d8a57e9916d6d685536",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c61037c5_7dd45bcc",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2020-01-17T04:49:21Z",
+      "side": 1,
+      "message": "Can u change this to template.. Take it from template data driven",
+      "range": {
+        "startLine": 82,
+        "startChar": 40,
+        "endLine": 82,
+        "endChar": 55
+      },
+      "revId": "42e649983ad6af83435e0d8a57e9916d6d685536",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
