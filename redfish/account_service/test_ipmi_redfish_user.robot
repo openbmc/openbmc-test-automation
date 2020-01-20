@@ -207,12 +207,24 @@ Verify Failure To Exceed Max Number Of Users
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
+Create IPMI User Without Any Privilege And Verify Via Redfish
+    [Documentation]  Create user using IPMI without privilege and verify via redfish.
+    [Tags]  Create_IPMI_User_Without_Any_Privilege_And_Verify_Via_Redfish
+
+    ${username}  ${userid}=  IPMI Create Random User Plus Password And Privilege
+    ...  ${valid_password}
+
+    # Verify new user privilege level via Redfish.
+    ${privilege}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/${username}  RoleId
+    Valid Value  privilege  ['NoAccess']
+
 *** Keywords ***
 
 IPMI Create Random User Plus Password And Privilege
     [Documentation]  Create random IPMI user with given password and privilege
     ...  level.
-    [Arguments]  ${password}  ${privilege}
+    [Arguments]  ${password}  ${privilege}=0
 
     # Description of argument(s):
     # password      Password to be assigned for the user.
@@ -233,7 +245,8 @@ IPMI Create Random User Plus Password And Privilege
     Run IPMI Standard Command  user enable ${random_userid}
 
     # Set given privilege and enable IPMI messaging for newly created user.
-    Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege}
+    Run Keyword If  '${privilege}' != '0'
+    ...  Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege}
 
     [Return]  ${random_username}  ${random_userid}
 
