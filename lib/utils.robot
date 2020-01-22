@@ -713,3 +713,14 @@ Update Root Password
     ${resp}=  Post Request  openbmc  ${BMC_USER_URI}root/action/SetPassword
     ...  data=${data}  headers=${headers}
     Valid Value  resp.status_code  [${HTTP_OK}]
+
+
+Get Post Boot Action
+    [Documentation]  Get post boot action.
+
+    ${code_base_dir_path}=  Get Code Base Dir Path
+    ${post_code_update_actions}=  Evaluate
+    ...  json.load(open('${code_base_dir_path}data/applytime_table.json'))  modules=json
+
+    [Return]  ${post_code_update_actions}
+
