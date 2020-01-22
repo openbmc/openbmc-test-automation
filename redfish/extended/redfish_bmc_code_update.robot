@@ -15,6 +15,7 @@ Resource                 ../../lib/openbmc_ffdc.robot
 Resource                 ../../lib/common_utils.robot
 Resource                 ../../lib/code_update_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
+Resource                 ../../lib/utils.py
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/var_funcs.py
 Library                  ../../lib/gen_robot_keyword.py
@@ -50,6 +51,9 @@ Suite Setup Execution
     Redfish Purge Event Log
     # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
+    ${code_base_dir_path}=  Get Code Base Dir Path
+    ${post_code_update_actions}=  Evaluate
+    ...  json.load(open('${code_base_dir_path}data/applytime_table.json'))  modules=json
 
 
 Activate Existing Firmware
@@ -126,13 +130,10 @@ Redfish Update Firmware
 
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
-
     Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
     Redfish Upload Image And Check Progress State
     ${tar_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
     ${image_info}=  Get Software Inventory State By Version  ${tar_version}
-    ${get_json_file}=  OperatingSystem.Get File  ${EXECDIR}/lib/applytime_table.json
-    ${post_code_update_actions}=  Evaluate  json.loads('''${get_json_file}''')  json
     Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}

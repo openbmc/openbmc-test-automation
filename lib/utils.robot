@@ -713,3 +713,4 @@ Update Root Password
     ${resp}=  Post Request  openbmc  ${BMC_USER_URI}root/action/SetPassword
     ...  data=${data}  headers=${headers}
     Valid Value  resp.status_code  [${HTTP_OK}]
+
