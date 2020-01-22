@@ -713,3 +713,18 @@ Update Root Password
     ${resp}=  Post Request  openbmc  ${BMC_USER_URI}root/action/SetPassword
     ...  data=${data}  headers=${headers}
     Valid Value  resp.status_code  [${HTTP_OK}]
+
+
+Get JSON Data Object
+    [Documentation]  Get the json data from user requested json file.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name  The json file name.
+
+    ${json_file_path}=  Join Path  ${CURDIR}  data  ${file_name}
+    Log  ${EXECDIR}
+    ${json_file_path}=  Join Path  ${EXECDIR}  data  ${file_name}
+    ${json_data_obj}=  Evaluate  json.load(open('${json_file_path}'))  modules=json
+    [Return]  ${json_data_obj}
+    
