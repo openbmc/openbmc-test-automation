@@ -4,6 +4,7 @@ r"""
 Companion file to utils.robot.
 """
 
+import os
 import gen_print as gp
 import gen_robot_keyword as grk
 import bmc_ssh_utils as bsu
@@ -17,6 +18,16 @@ except ImportError:
     pass
 import collections
 
+json_directory = "data"
+
+def get_json_data(filename=""):
+    json_file_path = os.path.join(os.getcwd(), json_directory, filename)
+    if os.path.exists(json_file_path):
+        with open(json_file_path, 'r') as file_obj:
+            json_data = json.load(file_obj)
+        return json_data
+    else:
+        return False
 
 def set_power_policy_method():
     r"""
