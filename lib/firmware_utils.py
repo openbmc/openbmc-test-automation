@@ -20,7 +20,7 @@ def get_hard_disk_info(device="/dev/sdb"):
     Example result:
 
     sda_info:
-      [model_number]:                        MTFDDAK1T9TCB 00LY461 00LY570IBM
+      [model_number]:                        MTFDDAK1T9TCB 00LY461 00LY570XXX
       [serial_number]:                       179C413F
       [firmware_revision]:                   MJ06
       [transport]:                           Serial, ATA8-AST, SATA 1.0a, SATA II Extensions, SATA Rev 2.5,

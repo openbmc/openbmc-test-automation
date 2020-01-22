@@ -85,7 +85,7 @@ Get Image Priority
     [Arguments]  ${image_version}
 
     # Description of argument(s):
-    # image_version       The Fimware image version (e.g. ibm-v.x-xx).
+    # image_version       The Fimware image version (e.g. 2.8.0-dev-1107-g512028d95).
 
     ${software_info}=  Read Properties
     ...  ${SOFTWARE_VERSION_URI}/enumerate  quiet=1
@@ -104,7 +104,7 @@ Set BMC Image Priority To Least
     [Arguments]  ${image_version}  ${software_inventory}
 
     # Description of argument(s):
-    # image_version       The Fimware image version (e.g. ibm-v.x-xx).
+    # image_version       The Fimware image version (e.g. 2.8.0-dev-1107-g512028d95).
     # software_inventory  Software inventory details.
 
     ${least_priority}=  Get Least Value Priority Image  ${VERSION_PURPOSE_BMC}

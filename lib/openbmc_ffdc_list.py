@@ -100,18 +100,7 @@ FFDC_OS_RHEL_FILE = {
                    + '/tmp --label FFDC ; } >/tmp/OS_sosreport.txt 2>&1',
     },
 }
-# Add file name and correcponding command needed for RHEL Linux
-FFDC_OS_IBM_POWERKVM_FILE = {
-    'OS FILES':
-    {
-        # File Name         Command
-        'OS_secure': 'cat /var/log/secure >/tmp/OS_secure.txt 2>&1',
-        'OS_syslog': 'tail -n 200000 /var/log/messages '
-                     + '>/tmp/OS_syslog.txt 2>&1',
-        'OS_info': '{ lsb_release -a; uname -a; rpm -qa ; } '
-                   + '>/tmp/OS_info.txt 2>&1',
-    },
-}
+
 OPENBMC_BASE = '/xyz/openbmc_project/'
 OPENPOWER_BASE = '/org/open_power/'
 ENUMERATE_SENSORS = OPENBMC_BASE + 'sensors/enumerate'
