@@ -4,6 +4,7 @@ r"""
 Companion file to utils.robot.
 """
 
+import os
 import gen_print as gp
 import gen_robot_keyword as grk
 import bmc_ssh_utils as bsu
@@ -16,6 +17,18 @@ try:
 except ImportError:
     pass
 import collections
+
+
+# The code base directory will be one level up from the directory containing this module.
+code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
+
+
+def get_code_base_dir_path():
+    r"""
+    Return the dir path of our code base.
+    """
+
+    return code_base_dir_path
 
 
 def set_power_policy_method():
