@@ -4,6 +4,7 @@ r"""
 Companion file to utils.robot.
 """
 
+import os
 import gen_print as gp
 import gen_robot_keyword as grk
 import bmc_ssh_utils as bsu
@@ -16,6 +17,33 @@ try:
 except ImportError:
     pass
 import collections
+
+# The code base directory will be one level up from the directory containing this module.
+code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
+
+json_directory = "data"
+
+def get_json_data(file_path=""):
+    r"""
+    Read the requested JSON file, convert it to an object and return it.    
+
+    Description of argument(s):
+    file_path                       The path to the boot_table file.  If this value is not specified, it will
+                                    be obtained from the "BOOT_TABLE_PATH" environment variable, if set.
+                                    Otherwise, it will default to "data/boot_table.json".  If this value is a
+                                    relative path, this function will use the code_base_dir_path as the base
+                                    directory (see definition above).
+    """
+    if file_path is not None:
+        file_path = os.environ.get('BOOT_TABLE_PATH', file_path)
+    
+    if not file_path.startswith("/"):
+        file_path = code_base_dir_path + file_path
+
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as file_obj:
+            json_data = json.load(file_obj)
+        return json_data
 
 
 def set_power_policy_method():
