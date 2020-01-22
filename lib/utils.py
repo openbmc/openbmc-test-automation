@@ -4,6 +4,7 @@ r"""
 Companion file to utils.robot.
 """
 
+import os
 import gen_print as gp
 import gen_robot_keyword as grk
 import bmc_ssh_utils as bsu
@@ -17,6 +18,28 @@ except ImportError:
     pass
 import collections
 
+# The code base directory will be one level up from the directory containing this module.
+code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
+
+json_directory = "data"
+
+def get_json_data(file_path=""):
+    json_file_path = os.path.join("..", json_directory, file_path)
+    print(json_file_path, end="\n")
+    if file_path is not None:
+        file_path = os.environ.get('BOOT_TABLE_PATH', file_path)
+    
+    if not file_path.startswith("/"):
+        file_path = code_base_dir_path + file_path
+
+    print(file_path, ":",code_base_dir_path, ":", file_path ,end='\n')
+    print()
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as file_obj:
+            json_data = json.load(file_obj)
+        return json_data
+    else:
+        return False
 
 def set_power_policy_method():
     r"""
