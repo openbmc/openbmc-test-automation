@@ -4,6 +4,7 @@ r"""
 Companion file to utils.robot.
 """
 
+import os
 import gen_print as gp
 import gen_robot_keyword as grk
 import bmc_ssh_utils as bsu
@@ -17,6 +18,36 @@ except ImportError:
     pass
 import collections
 
+# The code base directory will be one level up from the directory containing this module.
+code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
+
+json_directory = "data"
+
+
+def get_json_data(file_name=""):
+    r"""
+    Read the requested JSON file, convert it to an object and return it.
+
+    Description of argument(s):
+    file_name                  The json file name.
+    """
+
+    excep_obj = None
+    file_exist = False
+    json_data = ""
+    try:
+        file_path = os.path.join(code_base_dir_path, json_directory, file_name)
+
+        if os.path.exists(file_path):
+            file_exist = True
+            with open(file_path, 'r') as file_obj:
+                json_data = json.load(file_obj)
+        else:
+            file_path = False
+    except Exception as excep_obj:
+        excep_obj = excep_obj
+    finally:
+        return json_data, file_exist, excep_obj
 
 def set_power_policy_method():
     r"""
