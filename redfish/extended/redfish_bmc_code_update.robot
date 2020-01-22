@@ -18,6 +18,7 @@ Resource                 ../../lib/redfish_code_update_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/var_funcs.py
 Library                  ../../lib/gen_robot_keyword.py
+Library                  ../../lib/utils.py
 
 Suite Setup              Suite Setup Execution
 Suite Teardown           Redfish.Logout
@@ -131,8 +132,7 @@ Redfish Update Firmware
     Redfish Upload Image And Check Progress State
     ${tar_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
     ${image_info}=  Get Software Inventory State By Version  ${tar_version}
-    ${get_json_file}=  OperatingSystem.Get File  ${EXECDIR}/lib/applytime_table.json
-    ${post_code_update_actions}=  Evaluate  json.loads('''${get_json_file}''')  json
+    ${post_code_update_actions}=  Get Json Data  applytime_table.json
     Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
