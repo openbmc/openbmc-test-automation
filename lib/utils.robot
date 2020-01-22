@@ -713,3 +713,30 @@ Update Root Password
     ${resp}=  Post Request  openbmc  ${BMC_USER_URI}root/action/SetPassword
     ...  data=${data}  headers=${headers}
     Valid Value  resp.status_code  [${HTTP_OK}]
+
+
+Get JSON Data Object
+    [Documentation]  Get the json data from user requested json file.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name  The json file name.
+
+    ${file_exist}=  Set Variable  'True'
+    ${exception_object}=  Set Variable  'None'
+    ${json_data_obj}  ${file_exist}  ${exception_object}=  Get JSON Data  ${file_name}
+    Should Be Equal  '${file_exist}'  'True'  msg='File not found'
+    Should Be Equal  '${exception_object}'  'None'  msg='${exception_object}'
+    [Return]  ${json_data_obj}
+
+
+Get JSON Data Object2
+    [Documentation]  Get the json data from user requested json file.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name  The json file name.
+
+    ${json_file_path}=  Join Paths  ${CURDIR}  data  ${file_name}
+
+    Log  ${json_file_path}
