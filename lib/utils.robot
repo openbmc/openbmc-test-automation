@@ -713,3 +713,28 @@ Update Root Password
     ${resp}=  Post Request  openbmc  ${BMC_USER_URI}root/action/SetPassword
     ...  data=${data}  headers=${headers}
     Valid Value  resp.status_code  [${HTTP_OK}]
+
+
+Get Post Boot Action
+    [Documentation]  Get post boot action.
+
+    #  Post code update action dictionay.
+    #
+    #  {
+    #     BMC image: {
+    #         OnReset: Redfish OBMC Reboot (off),
+    #         Immediate: Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}
+    #     },
+    #     Host image: {
+    #         OnReset: Redfish Host Reboot,
+    #         Immediate: Wait State  os_running_match_state  10 mins
+    #     }
+    #  }
+
+    ${code_base_dir_path}=  Get Code Base Dir Path
+    ${post_code_update_actions}=  Evaluate
+    ...  json.load(open('${code_base_dir_path}data/applytime_table.json'))  modules=json
+    Rprint Vars  post_code_update_actions
+
+    [Return]  ${post_code_update_actions}
+
