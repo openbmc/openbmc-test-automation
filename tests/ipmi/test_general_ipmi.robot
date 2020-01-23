@@ -233,24 +233,6 @@ Test Baseboard Temperature Via IPMI
     ...  msg=Baseboard temperature above allowed threshold ${allowed_temp_diff}.
 
 
-Retrieve Network Mode Via IPMI And Verify Using REST
-    [Documentation]  Retrieve network mode from LAN print using IPMI.
-    [Tags]  Retrieve_Network_Mode_Via_IPMI_And_Verify_Using_REST
-
-    # Fetch "Mode" from IPMI LAN print.
-    ${network_mode_ipmi}=  Fetch Details From LAN Print  Source
-
-    # Verify "Mode" using REST.
-    ${network_mode_rest}=  Read Attribute
-    ...  ${NETWORK_MANAGER}eth0  DHCPEnabled
-    Run Keyword If  '${network_mode_ipmi}' == 'Static Address'
-    ...  Should Be Equal  ${network_mode_rest}  ${0}
-    ...  msg=Verification of network setting failed.
-    ...  ELSE IF  '${network_mode_ipmi}' == 'DHCP'
-    ...  Should Be Equal  ${network_mode_rest}  ${1}
-    ...  msg=Verification of network setting failed.
-
-
 Verify Get Device ID
     [Documentation]  Verify get device ID command output.
     [Tags]  Verify_Get_Device_ID

@@ -100,6 +100,16 @@ Verify IPMI Inband Network Configuration
     Valid Value  lan_print_output['Default Gateway IP']  ["10.10.10.10"]
 
 
+Get IP Address Source And Verify Using Redfish
+    [Documentation]  Get IP address source and verify it using Redfish.
+    [Tags]  Get_IP_Address_Source_And_Verify_Using_Redfish
+
+    ${eth0}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0
+    ${ip_address_source}=  Set Variable If  ${eth0['DHCPv4']['DHCPEnabled']}  DHCP  Static Address
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['IP Address Source']  [${ip_address_source}]
+
+
 *** Keywords ***
 
 Get Physical Network Interface Count
