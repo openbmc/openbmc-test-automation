@@ -28,8 +28,8 @@ Verify Power Supplies Input Output Voltages
     [Tags]  Verify_Power_Supplies_Input_Output_Voltages
     [Template]  Verify Voltage Records
 
-    # record_type   redfish_uri                        reading_type
-    Voltages        ${REDFISH_CHASSIS_POWER_URI}       ReadingVolts
+    # record_type  reading_type  low_reading                high_reading
+    Voltages       ReadingVolts  LowerThresholdNonCritical  UpperThresholdNonCritical
 
 
 Verify Power Supplies Efficiency Percentage
@@ -74,19 +74,20 @@ Verify Watts Record
 
 Verify Voltage Records
     [Documentation]  Verify the power voltage records.
-    [Arguments]  ${record_type}  ${redfish_uri}  ${reading_type}
+    [Arguments]  ${record_type}  ${reading_type}  ${low_reading}  ${high_reading}
 
     # Description of Arguments(s):
     # record_type    The sensor record type (e.g. "Voltages")
-    # redfish_uri    The power supply URI (e.g. /redfish/v1/Chassis/chassis/Power)
     # reading_type   The power voltage readings (e.g. "ReadingVolts")
+    # low_reading    The low non-critical voltage reading (e.g. "LowerThresholdNonCritical")
+    # high_reading   The high non-critical voltage reading (e.g. "UpperThresholdNonCritical")
 
-    Verify Valid Records  ${record_type}  ${redfish_uri}  ${reading_type}
+    Verify Valid Records  ${record_type}  /redfish/v1/Chassis/chassis/Power/  ${reading_type}
 
-    ${records}=  Redfish.Get Attribute  ${redfish_uri}  ${record_type}
+    ${records}=  Redfish.Get Attribute  /redfish/v1/Chassis/chassis/Power/  ${record_type}
 
     ${invalid_records}=  Evaluate
-    ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
+    ...  [x for x in ${records} if not x['${low_reading}'] <= x['${reading_type}'] <= x['${high_reading}']]
 
     Valid Length  invalid_records  max_length=0
 
