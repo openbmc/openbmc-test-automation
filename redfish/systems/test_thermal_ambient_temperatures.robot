@@ -22,8 +22,8 @@ Get Ambient Temperature Records
     [Tags]  Get_Ambient_Temperature_Records
     [Template]  Get Thermal Records and Verify
 
-    # record_type   reading_type
-    Temperatures    ReadingCelsius
+    # record_type   reading_type    lower_threshold            higher_threshold
+    Temperatures    ReadingCelsius  LowerThresholdNonCritical  UpperThresholdNonCritical
 
 
 Reboot And Check Ambient Temperature Records Are Valid
@@ -34,25 +34,29 @@ Reboot And Check Ambient Temperature Records Are Valid
     Redfish.Login
 
     Get Thermal Records and Verify  Temperatures  ReadingCelsius
+    ...  LowerThresholdNonCritical  UpperThresholdNonCritical
 
 
 *** Keywords ***
 
 Get Thermal Records and Verify
     [Documentation]  Get the thermal records for temperatures.
-    [Arguments]  ${record_type}  ${reading_type}
+    [Arguments]  ${record_type}  ${reading_type}  ${lower_threshold}  ${higher_threshold}
 
     # Description of Arguments(s):
-    # record_type    The thermal record type (e.g. "Temperatures")
-    # reading_type   The thermal temperature readings (e.g. "ReadingCelsius")
+    # record_type      The thermal record type (e.g. "Temperatures")
+    # reading_type     The thermal temperature readings (e.g. "ReadingCelsius")
+    # lower_threshold  The low non-critical voltage reading (e.g. "LowerThresholdNonCritical")
+    # higher_threshold The high non-critical voltage reading (e.g. "UpperThresholdNonCritical")
 
     ${records}=  Verify Valid Records  ${record_type}  ${REDFISH_CHASSIS_THERMAL_URI}  ${reading_type}
 
     ${num_records}=  Get Length  ${records}
     Rprint Vars  num_records  records
 
-    ${invalid_records}=  Evaluate
-    ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
+    ${cmd}  Catenate  [x for x in ${records}
+    ...  if not x['$lower_threshold}'] <= x['${reading_type}'] <= x['${higher_threshold}']]
+    ${invalid_records}=  Evaluate  ${cmd}
 
     ${num_invalid_records}=  Get Length  ${invalid_records}
     Run Keyword If  ${num_invalid_records} > ${0}
