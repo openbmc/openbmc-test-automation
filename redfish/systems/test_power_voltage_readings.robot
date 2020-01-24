@@ -48,8 +48,9 @@ Get Voltage Records and Verify
     ...  Rprint Vars  num_invalid_records  invalid_records  fmt=terse
     Valid Value  num_invalid_records  valid_values=[0]
 
-    ${invalid_records}=  Evaluate
-    ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['ReadingVolts'] <= x['UpperThresholdNonCritical']]
+    ${cmd}  Catenate  [x for x in ${records}
+    ...  if not x['LowerThresholdNonCritical'] <= x['ReadingVolts'] <= x['UpperThresholdNonCritical']]
+    ${invalid_records}=  Evaluate  ${cmd}
 
     ${num_invalid_records}=  Get Length  ${invalid_records}
     Run Keyword If  ${num_invalid_records} > ${0}
