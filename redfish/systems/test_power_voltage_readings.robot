@@ -19,19 +19,21 @@ Get Power Sensor Voltage Records
     [Tags]  Get_Power_Sensor_Voltage_Records
     [Template]  Get Voltage Records and Verify
 
-    # record_type   reading_type
-    Voltages        ReadingVolts
+    # record_type   reading_type  low_reading                high_reading
+    Voltages        ReadingVolts  LowerThresholdNonCritical  UpperThresholdNonCritical
 
 
 *** Keywords ***
 
 Get Voltage Records and Verify
     [Documentation]  Get the power records for voltages.
-    [Arguments]  ${record_type}  ${reading_type}
+    [Arguments]  ${record_type}  ${reading_type}  ${low_reading}  ${high_reading}
 
     # Description of Arguments(s):
     # record_type    The sensor record type (e.g. "Voltages")
     # reading_type   The power voltage readings (e.g. "ReadingVolts")
+    # low_reading    The low non-critical voltage reading (e.g. "LowerThresholdNonCritical")
+    # high_reading   The high non-critical voltage reading (e.g. "UpperThresholdNonCritical")
 
     # A valid record will have "State" key "Enabled" and "Health" key "OK"
     ${records}=  Redfish.Get Attribute
@@ -49,7 +51,7 @@ Get Voltage Records and Verify
     Valid Value  num_invalid_records  valid_values=[0]
 
     ${invalid_records}=  Evaluate
-    ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['ReadingVolts'] <= x['UpperThresholdNonCritical']]
+    ...  [x for x in ${records} if not x['${low_reading}'] <= x['${reading_type}'] <= x['${high_reading}']]
 
     ${num_invalid_records}=  Get Length  ${invalid_records}
     Run Keyword If  ${num_invalid_records} > ${0}
