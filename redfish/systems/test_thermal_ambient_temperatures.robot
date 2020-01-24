@@ -51,8 +51,9 @@ Get Thermal Records and Verify
     ${num_records}=  Get Length  ${records}
     Rprint Vars  num_records  records
 
-    ${invalid_records}=  Evaluate
-    ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
+    ${cmd}  Catenate  [x for x in ${records}
+    ...  if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
+    ${invalid_records}=  Evaluate  ${cmd}
 
     ${num_invalid_records}=  Get Length  ${invalid_records}
     Run Keyword If  ${num_invalid_records} > ${0}
