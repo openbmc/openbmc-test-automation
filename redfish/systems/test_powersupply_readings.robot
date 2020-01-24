@@ -28,8 +28,8 @@ Verify Power Supplies Input Output Voltages
     [Tags]  Verify_Power_Supplies_Input_Output_Voltages
     [Template]  Verify Voltage Records
 
-    # record_type   redfish_uri                        reading_type
-    Voltages        ${REDFISH_CHASSIS_POWER_URI}       ReadingVolts
+    # record_type  redfish_uri                   reading_type  low_threshold              high_threshold
+    Voltages       ${REDFISH_CHASSIS_POWER_URI}  ReadingVolts  LowerThresholdNonCritical  UpperThresholdNonCritical
 
 
 Verify Power Supplies Efficiency Percentage
@@ -74,7 +74,7 @@ Verify Watts Record
 
 Verify Voltage Records
     [Documentation]  Verify the power voltage records.
-    [Arguments]  ${record_type}  ${redfish_uri}  ${reading_type}
+    [Arguments]  ${record_type}  ${redfish_uri}  ${reading_type}  ${low_threshold}  ${high_threshold}
 
     # Description of Arguments(s):
     # record_type    The sensor record type (e.g. "Voltages")
@@ -86,7 +86,7 @@ Verify Voltage Records
     ${records}=  Redfish.Get Attribute  ${redfish_uri}  ${record_type}
 
     ${invalid_records}=  Evaluate
-    ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
+    ...  [x for x in ${records} if not x['${low_threshold}'] <= x['${reading_type}'] <= x['${high_threshold}']]
 
     Valid Length  invalid_records  max_length=0
 

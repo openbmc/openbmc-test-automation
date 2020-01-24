@@ -22,8 +22,8 @@ Get Ambient Temperature Records
     [Tags]  Get_Ambient_Temperature_Records
     [Template]  Get Thermal Records and Verify
 
-    # record_type   reading_type
-    Temperatures    ReadingCelsius
+    # record_type   reading_type    low_threshold              high_threshold
+    Temperatures    ReadingCelsius  LowerThresholdNonCritical  UpperThresholdNonCritical
 
 
 Reboot And Check Ambient Temperature Records Are Valid
@@ -34,13 +34,14 @@ Reboot And Check Ambient Temperature Records Are Valid
     Redfish.Login
 
     Get Thermal Records and Verify  Temperatures  ReadingCelsius
+    ...  LowerThresholdNonCritical  UpperThresholdNonCritical
 
 
 *** Keywords ***
 
 Get Thermal Records and Verify
     [Documentation]  Get the thermal records for temperatures.
-    [Arguments]  ${record_type}  ${reading_type}
+    [Arguments]  ${record_type}  ${reading_type}  ${low_threshold}  ${high_threshold}
 
     # Description of Arguments(s):
     # record_type    The thermal record type (e.g. "Temperatures")
@@ -52,7 +53,7 @@ Get Thermal Records and Verify
     Rprint Vars  num_records  records
 
     ${invalid_records}=  Evaluate
-    ...  [x for x in ${records} if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
+    ...  [x for x in ${records} if not x['${low_threshold}'] <= x['${reading_type}'] <= x['${high_threshold}']]
 
     ${num_invalid_records}=  Get Length  ${invalid_records}
     Run Keyword If  ${num_invalid_records} > ${0}
