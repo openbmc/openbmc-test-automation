@@ -108,7 +108,7 @@ Verify NTP Server Set
     [Documentation]  Verify NTP server set.
     [Tags]  Verify_NTP_Server_Set
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}}
     ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
     Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_1}
     ...  msg=NTP server value ${ntp_server_1} not stored.
@@ -120,7 +120,7 @@ Verify NTP Server Value Not Duplicated
     [Documentation]  Verify NTP servers value not same for both primary and secondary server.
     [Tags]  Verify_NTP_Server_Value_Not_Duplicated
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTPServers': ['${ntp_server_1}', '${ntp_server_1}']}
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'NTPServers': ['${ntp_server_1}', '${ntp_server_1}']}}
     ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
     Should Contain X Times  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_1}  1
     ...  msg=NTP primary and secondary server values should not be same.
@@ -130,7 +130,7 @@ Verify NTP Server Setting Persist After BMC Reboot
     [Documentation]  Verify NTP server setting persist after BMC reboot.
     [Tags]  Verify_NTP_Server_Setting_Persist_After_BMC_Reboot
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}}
     Redfish OBMC Reboot (off)
     Redfish.Login
     ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
@@ -226,6 +226,7 @@ Suite Teardown Execution
     [Documentation]  Do the suite level teardown.
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
-    ...  body={'NTPServers': ['${EMPTY}', '${EMPTY}']}
+    ...  body={'NTP':{'NTPServers': ['${EMPTY}', '${EMPTY}']}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     Rest Set Time Owner
     Redfish.Logout
