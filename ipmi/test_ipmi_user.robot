@@ -308,6 +308,8 @@ Verify IPMI Root User Password Change
     ...  Wait Until Keyword Succeeds  15 sec  5 sec
     ...  Set Default Password For IPMI Root User
 
+    # User input password should be minimum 8 characters long.
+    Valid Length  OPENBMC_PASSWORD  min_length=8
     # Set new password for root user.
     Run IPMI Standard Command
     ...  user set password ${root_userid} ${valid_password}
