@@ -195,7 +195,7 @@ BMC FFDC Files
     #   entries[0]: BMC FILES
 
     scp.Open Connection
-    ...  ${OPENBMC_HOST}  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+    ...  ${OPENBMC_HOST}  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}  port=${SSH_PORT}
 
     @{ffdc_file_list}=  Create List
     :FOR  ${index}  IN  @{entries}
