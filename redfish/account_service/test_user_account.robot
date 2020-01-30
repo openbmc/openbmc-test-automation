@@ -265,6 +265,40 @@ Verify 'User' User Privilege
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}user_user
 
 
+Verify Minimum Password Length For Redfish User
+    [Documentation]  Verify minimum password length of 8 characters.
+    [Tags]  Verify_Minimum_Password_Length_For_Redfish_User
+
+    ${user_name}=  Set Variable  testUser
+
+    # Make sure the user account in question does not already exist.
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Try to create a user with invalid length password.
+    ${payload}=  Create Dictionary
+    ...  UserName=${user_name}  Password=UserPwd  RoleId=Administrator  Enabled=${True}
+    Run Keyword And Expect Error  ValueError*  Redfish.Post
+    ...  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
+
+    # Create specified user with valid length password.
+    Set To Dictionary  ${payload}  Password  UserPwd1
+    Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Try to change to an invalid password.
+    Run Keyword And Expect Error  ValueError*  Redfish.Patch
+    ...  ${REDFISH_ACCOUNTS_URI}${user_name}  body={'Password': 'UserPwd'}
+
+    # Change to a valid password.
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${user_name}  body={'Password': 'UserPwd1'}
+
+    # Verify login.
+    Run Keywords  Redfish.Logout  AND  Redfish.Login  ${user_name}  UserPwd1
+    ...  AND  Redfish.Logout  AND  Redfish.Login
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
+
+
 *** Keywords ***
 
 Test Setup Execution
