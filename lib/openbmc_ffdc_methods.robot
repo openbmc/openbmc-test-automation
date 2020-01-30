@@ -195,7 +195,7 @@ BMC FFDC Files
     #   entries[0]: BMC FILES
 
     scp.Open Connection
-    ...  ${OPENBMC_HOST}  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+    ...  ${OPENBMC_HOST}  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD} port=${SSH_PORT}
 
     @{ffdc_file_list}=  Create List
     :FOR  ${index}  IN  @{entries}
@@ -407,7 +407,7 @@ OS FFDC Files
     Rpvars  linux_distro
 
     scp.Open Connection
-    ...  ${OS_HOST}  username=${OS_USERNAME}  password=${OS_PASSWORD}
+    ...  ${OS_HOST}  username=${OS_USERNAME}  password=${OS_PASSWORD} port=${SSH_PORT}
 
     @{entries}=  Get FFDC OS All Distros Index
     :FOR  ${index}  IN  @{entries}
