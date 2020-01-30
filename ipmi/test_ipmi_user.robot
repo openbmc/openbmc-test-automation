@@ -23,6 +23,7 @@ ${max_password_length}  20
 ${ipmi_setaccess_cmd}   channel setaccess
 &{password_values}      16=0penBmc10penBmc2  17=0penBmc10penBmc2B
               ...       20=0penBmc10penBmc2Bmc3  21=0penBmc10penBmc2Bmc34
+              ...       7=0penBmc
 
 
 *** Test Cases ***
@@ -409,6 +410,16 @@ Verify Default Selection Of 16 Character Password For IPMI User
     # password_length  password_option  expected_status
     17                 16               ${True}
     20                 16               ${True}
+
+
+Verify Minimum Password Length For IPMI User
+    [Documentation]  Verify minimum password length of 8 characters.
+    [Tags]  Verify_Minimum_Password_Length_For_IPMI_User
+    [Template]  Set User Password And Verify
+
+    # password_length  password_option  expected_status
+    7                  16               ${False}
+    7                  20               ${False}
 
 
 *** Keywords ***
