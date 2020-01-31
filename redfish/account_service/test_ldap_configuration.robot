@@ -412,6 +412,40 @@ Verify LDAP Authentication With Invalid LDAP User
     Valid Value  status  [${False}]
 
 
+Verify LDAP User With ReadOnly Privilege Not Able To Do Host Poweroff
+    [Documentation]  Verify that LDAP user with ReadOnly privilege can not do host
+    ...  power off.
+    [Tags]  Verify_LDAP_User_With_ReadOnly_Privilege_Not_Able_To_Do_Host_Poweroff
+    [Teardown]  Restore LDAP Privilege
+
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ReadOnly  ${GROUP_NAME}
+
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    Redfish.Post  ${REDFISH_POWER_URI}
+    ...  body={'ResetType': 'ForceOff'}   valid_status_codes=[403]
+    Redfish.Logout
+    Redfish.Login
+
+
+Verify LDAP User With NoAccess Privilege Not Able To Do Host Poweroff
+    [Documentation]  Verify that LDAP user with NoAccess privilege can not do host
+    ...  power off.
+    [Tags]  Verify_LDAP_User_With_NoAccess_Privilege_Not_Able_To_Do_Host_Poweroff
+    [Teardown]  Restore LDAP Privilege
+
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  NoAccess  ${GROUP_NAME}
+
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    Redfish.Post  ${REDFISH_POWER_URI}
+    ...  body={'ResetType': 'ForceOff'}   valid_status_codes=[403]
+    Redfish.Logout
+    Redfish.Login
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
