@@ -412,6 +412,27 @@ Verify LDAP Authentication With Invalid LDAP User
     Valid Value  status  [${False}]
 
 
+Update LDAP User Roles And Verify Host Poweroff Operation
+    [Documentation]  Update LDAP user roles and verify host poweroff operation.
+    [Tags]  Update_LDAP_User_Roles_And_Verify_Host_Poweroff_Operation
+    [Teardown]  Restore LDAP Privilege
+
+    [Template]  Update LDAP User Role And Host Poweroff
+    # ldap_type   group_privilege  group_name     valid_status_codes
+
+    # Verify LDAP user with NoAccess privilege not able to do host poweroff.
+    ${LDAP_TYPE}  NoAccess         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+
+    # Verify LDAP user with ReadOnly privilege not able to do host poweroff.
+    ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+
+    # Verify LDAP user with Operator privilege able to do host poweroff.
+    ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_OK}
+
+    # Verify LDAP user with Administrator privilege able to do host poweroff.
+    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  ${HTTP_OK}
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -549,6 +570,7 @@ Suite Setup Execution
     # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
     Get LDAP Configuration  ${LDAP_TYPE}
     ${old_ldap_privilege}=  Get LDAP Privilege
+    Set Suite Variable  ${old_ldap_privilege}
     Disable Other LDAP
     Create LDAP Configuration
     ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
@@ -635,3 +657,33 @@ Restore LDAP Privilege
     # Log back in to restore the original privilege.
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${old_ldap_privilege}  ${GROUP_NAME}
+
+    Sleep  18s
+
+
+Update LDAP User Role And Host Poweroff
+    [Documentation]  Update LDAP user role and do host poweroff.
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status}
+    [Teardown]  Run Keywords  Restore LDAP Privilege  AND  Redfish Logout And Login
+
+    # Description of argument(s):
+    # ldap_type        The LDAP type ("ActiveDirectory" or "LDAP").
+    # group_privilege  The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_name       The group name of user.
+    # valid_status     The expected valid status code.
+
+    Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
+    ...  ${group_privilege}  ${group_name}
+
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    Redfish.Post  ${REDFISH_POWER_URI}
+    ...  body={'ResetType': 'ForceOff'}   valid_status_codes=[${valid_status}]
+
+
+Redfish Logout And Login
+    [Documentation]  Do Redfish logout and login.
+
+    Redfish.Logout
+    Redfish.Login
+
