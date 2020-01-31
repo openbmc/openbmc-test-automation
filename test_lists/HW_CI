@@ -1,29 +1,10 @@
-#rsyslog test.
-#TODO: Enable when remote logging is enabled in future.
-#-i Test_Remote_Logging_Configuration
 #Verify SSH and IPMI interfaces
 -i Test_SSH_And_IPMI_Connections
--i Verify_AccountService_Available
-#REST SSL connection test.
--i Test_SSL_Connection
 #Basic poweron test
--i Verify_Front_And_Rear_LED_At_Standby
 -i Verify_Redfish_Host_PowerOn
 -i Verify_Redfish_Host_PowerOff
 #Check for apps failures.
 -i Check_For_Application_Failures
-#Additional REST API tests
--i REST_Login_Session_To_BMC
--i Verify_REST_Get_Message_JSON_Compliant
--i Verify_REST_Post_Message_JSON_Compliant
-#TODO: Enable when fixed bmcweb crashing out due to this.
-#-i Verify_REST_Bad_Request_Post_Message_JSON_Compliant
--i REST_Put_Message_JSON_Format_Compliance_Test
--i Verify_REST_JSON_Data_On_Success
--i Verify_REST_JSON_Data_On_Failure
--i Multiple_Requests_On_BMC_Using_Single_REST_Session
--i REST_Delete_All_Sessions_And_Expect_Error
--i REST_Logout_Session_To_BMC
 #Verify system boot time average
 -i Verify_Uptime_Average_Against_Threshold
 #Check for BMC dump.
@@ -41,3 +22,10 @@
 -i Verify_Redfish_Software_Inventory_Collection
 -i Redfish_Software_Inventory_Status_Check
 -i Verify_Redfish_BMC_Manager_Properties
+#IPMI tests.
+-i Enable_IPMI_User_And_Verify
+-i Verify_IPMI_User_Deletion
+#Local user tests.
+-i Verify_AccountService_Available
+#DateTime tests.
+-i Verify_Enable_NTP
