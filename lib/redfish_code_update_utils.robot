@@ -152,3 +152,22 @@ Check Host Power State
     ${state}=  Get Host Power State
     Rvalid Value  state  valid_values=[${match_state}]
 
+
+Get System Firmware Details
+    [Documentation]  get the System firmware details via Redfish.
+
+    # {
+    #    FirmwareVersion: 2.8.0-dev-1067-gdc66ce1c5,
+    #    BiosVersion: witherspoon-XXX-XX.X-X
+    #  }
+
+    ${firmware_version}=  Redfish Get BMC Version
+    ${bios_version}=  Redfish Get Host Version
+
+    &{sys_firmware_dict}=  Create Dictionary
+    Set To Dictionary  ${sys_firmware_dict}  FirmwareVersion  ${firmware_version}
+    Set To Dictionary  ${sys_firmware_dict}  BiosVersion  ${bios_version}
+    Rprint Vars  sys_firmware_dict
+
+    [Return]  &{sys_firmware_dict}
+
