@@ -20,7 +20,7 @@ Library   Collections
 ...  status_file_path  openbmc_model  boot_pass  boot_fail  ffdc_dir_path_style
 ...  ffdc_check  ffdc_only  ffdc_function_list  state_change_timeout
 ...  power_on_timeout  power_off_timeout  boot_fail_threshold  delete_errlogs
-...  call_post_stack_plug  do_pre_boot_plug_in_setup  test_mode  quiet  debug
+...  call_post_stack_plug  do_pre_boot_plug_in_setup  boot_table_path  test_mode  quiet  debug
 
 # Initialize each program parameter.
 ${openbmc_host}               ${EMPTY}
@@ -71,6 +71,9 @@ ${call_post_stack_plug}       ${1}
 # choose whether to run pre_boot_plug_in_setup which clears existing FFDC file
 # lists and sets new ffdc_prefix value.
 ${do_pre_boot_plug_in_setup}  ${1}
+# The path to the boot_table.json file which defines the boot requirements.  This defaults to the value of
+# the BOOT_TABLE_PATH environment variable or to data/boot_table.json.
+${boot_table_path}            ${None}
 ${test_mode}                  0
 ${quiet}                      0
 ${debug}                      0
