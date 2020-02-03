@@ -139,3 +139,57 @@ Verify Valid Records
     Valid Length  invalid_records  max_length=0
 
     [Return]  ${records}
+
+
+Redfish Create User
+    [Documentation]  Redfish create user.
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+
+    Redfish.Login
+
+    # Make sure the user account in question does not already exist.
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${userName}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+    Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    Redfish.Logout
+
+    # Login with created user.
+    Run Keyword If  ${enabled} == ${False}
+    ...    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...    Redfish.Login  ${username}  ${password}
+    ...  ELSE
+    ...    Redfish.Login  ${username}  ${password}
+
+    Run Keyword If  ${enabled} == ${False}
+    ...  Redfish.Login
+
+    Run Keyword If  '${role_id}' == 'Callback'
+    ...  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+    # Validate Role ID of created user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  ${REDFISH_ACCOUNTS_URI}${username}  RoleId
+    Should Be Equal  ${role_id}  ${role_config}
+
+
+Create Users With Different Roles
+    [Documentation]  Create users with different roles.
+
+    Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
+    Redfish Create User  operator_user  TestPwd123  Operator  ${True}
+
+
