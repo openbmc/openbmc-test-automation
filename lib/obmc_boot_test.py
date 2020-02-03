@@ -46,8 +46,6 @@ pgm_name = re.sub('\\.py$', '', os.path.basename(__file__))
 
 # Set up boot data structures.
 os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
-boot_table = create_boot_table(os_host=os_host)
-valid_boot_types = create_valid_boot_list(boot_table)
 
 boot_lists = read_boot_lists()
 
@@ -191,6 +189,8 @@ def process_pgm_parms():
     global ffdc_list_file_path
     global ffdc_report_list_path
     global ffdc_summary_list_path
+    global boot_table
+    global valid_boot_types
 
     if ffdc_dir_path_style == "":
         ffdc_dir_path_style = int(os.environ.get('FFDC_DIR_PATH_STYLE', '0'))
@@ -198,6 +198,9 @@ def process_pgm_parms():
     # Convert these program parms to lists for easier processing..
     boot_list = list(filter(None, boot_list.split(":")))
     boot_stack = list(filter(None, boot_stack.split(":")))
+
+    boot_table = create_boot_table(boot_table_path, os_host=os_host)
+    valid_boot_types = create_valid_boot_list(boot_table)
 
     cleanup_boot_results_file()
     boot_results_file_path = create_boot_results_file_path(pgm_name,
