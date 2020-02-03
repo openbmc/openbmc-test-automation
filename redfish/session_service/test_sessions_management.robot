@@ -4,6 +4,7 @@ Documentation    Test Redfish SessionService.
 
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
+Resource         ../../lib/bmc_redfish_utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
 Suite Setup      Suite Setup Execution
@@ -21,9 +22,9 @@ Create Session And Verify Response Code Using Different Credentials
 
     # username           password             valid_status_code
     ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${HTTP_CREATED}
-    r00t                 ${OPENBMC_PASSWORD}  ${HTTP_FORBIDDEN}
-    ${OPENBMC_USERNAME}  password             ${HTTP_FORBIDDEN}
-    r00t                 password             ${HTTP_FORBIDDEN}
+    r00t                 ${OPENBMC_PASSWORD}  ${HTTP_UNAUTHORIZED}
+    ${OPENBMC_USERNAME}  password             ${HTTP_UNAUTHORIZED}
+    r00t                 password             ${HTTP_UNAUTHORIZED}
     admin_user           TestPwd123           ${HTTP_CREATED}
     operator_user        TestPwd123           ${HTTP_CREATED}
 
@@ -163,7 +164,6 @@ REST Logging Interface Read Should Be A SUCCESS For Authorized Users
     Run Keyword Unless   ${-1} < ${log_count} < ${201}  Fail
 
 
-
 *** Keywords ***
 
 Create Session And Verify Response Code
@@ -180,36 +180,6 @@ Create Session And Verify Response Code
     ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
     ...  body={'UserName':'${username}', 'Password': '${password}'}
     ...  valid_status_codes=[${valid_status_code}]
-
-
-Create Users With Different Roles
-    [Documentation]  Create users with different roles.
-
-    Create User Of Given Role  admin_user  TestPwd123  Administrator  ${True}
-    Create User Of Given Role  operator_user  TestPwd123  Operator  ${True}
-
-
-Create User Of Given Role
-    [Documentation]  Create user of given role.
-    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
-
-    # Description of argument(s):
-    # username            The username to be created.
-    # password            The password to be assigned.
-    # role_id             The role ID of the user to be created
-    #                     (e.g. "Administrator", "Operator", etc.).
-    # enabled             Indicates whether the username being created
-    #                     should be enabled (${True}, ${False}).
-
-    # Make sure the user account in question does not already exist.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
-
-    # Create specified user.
-    ${payload}=  Create Dictionary
-    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
-    ...  valid_status_codes=[${HTTP_CREATED}]
 
 
 Suite Setup Execution
