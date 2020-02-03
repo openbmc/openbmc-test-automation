@@ -4,6 +4,7 @@ Documentation    Test Redfish SessionService.
 
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
+Resource         ../../lib/bmc_redfish_utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
 Suite Setup      Suite Setup Execution
@@ -11,6 +12,10 @@ Suite Teardown   Redfish.Logout
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
+*** Variables ***
+@{ADMIN}       admin_user  TestPwd123
+@{OPERATOR}    operator_user  TestPwd123
+&{USERS}       Administrator=${ADMIN}  Operator=${OPERATOR}
 
 *** Test Cases ***
 
@@ -21,9 +26,9 @@ Create Session And Verify Response Code Using Different Credentials
 
     # username           password             valid_status_code
     ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${HTTP_CREATED}
-    r00t                 ${OPENBMC_PASSWORD}  ${HTTP_FORBIDDEN}
-    ${OPENBMC_USERNAME}  password             ${HTTP_FORBIDDEN}
-    r00t                 password             ${HTTP_FORBIDDEN}
+    r00t                 ${OPENBMC_PASSWORD}  ${HTTP_UNAUTHORIZED}
+    ${OPENBMC_USERNAME}  password             ${HTTP_UNAUTHORIZED}
+    r00t                 password             ${HTTP_UNAUTHORIZED}
     admin_user           TestPwd123           ${HTTP_CREATED}
     operator_user        TestPwd123           ${HTTP_CREATED}
 
@@ -90,7 +95,7 @@ Verify Managers Defaults
     Valid Value  managers['@odata.id']  ['/redfish/v1/Managers']
     Valid Value  managers['Members@odata.count']  [${managers_count}]
 
-    # Members can be one or more, hence checking in the list
+    # Members can be one or more, hence checking in the list.
     Valid List  managers['Members']  required_values=[{'@odata.id': '/redfish/v1/Managers/bmc'}]
 
 
@@ -108,8 +113,7 @@ Verify Chassis Defaults
     Valid Value  chassis['Members@odata.count']  [${chassis_count}]
     Valid Value  chassis['Members@odata.count']  [${chassis_count}]
 
-    # Members can be one or more, hence checking in the list
-    Log To Console  ${chassis['Members']}
+    # Members can be one or more, hence checking in the list.
     Valid List  chassis['Members']
     ...  required_values=[{'@odata.id': '/redfish/v1/Chassis/chassis'}]
 
@@ -128,7 +132,7 @@ Verify Systems Defaults
     Valid Value  systems['@odata.id']  ['/redfish/v1/Systems']
     Valid Value  systems['Members@odata.count']  [${systems_count}]
     Valid Value  systems['Members@odata.count']  [${systems_count}]
-    # Members can be one or more, hence checking in the list
+    # Members can be one or more, hence checking in the list.
     Valid List  systems['Members']  required_values=[{'@odata.id': '/redfish/v1/Systems/system'}]
 
 
@@ -136,14 +140,14 @@ Verify Session Persistency After BMC Reboot
     [Documentation]  Verify session persistency after BMC reboot.
     [Tags]  Verify_Session_Persistency_After_BMC_Reboot
 
-    # Note the current session location
+    # Note the current session location.
     ${session_location}=  Redfish.Get Session Location
 
     Redfish OBMC Reboot (off)  stack_mode=normal
     Redfish.Login
 
-    # Check for session persistency after BMC reboot
-    # sessions here will have list of all sessions location
+    # Check for session persistency after BMC reboot.
+    # sessions here will have list of all sessions location.
     ${sessions}=  Redfish.Get Attribute  /redfish/v1/SessionService/Sessions  Members
     ${payload}=  Create Dictionary  @odata.id=${session_location}
 
@@ -159,9 +163,8 @@ REST Logging Interface Read Should Be A SUCCESS For Authorized Users
     ${resp_output}=  evaluate  json.loads('''${resp.text}''')  json
     ${log_count}=  Get Length  ${resp_output["data"]}
 
-    # Max 200 error logs are allowed in OpenBmc
+    # Max 200 error logs are allowed in OpenBmc.
     Run Keyword Unless   ${-1} < ${log_count} < ${201}  Fail
-
 
 
 *** Keywords ***
@@ -174,46 +177,15 @@ Create Session And Verify Response Code
     # Description of argument(s):
     # username            The username to create a session.
     # password            The password to create a session.
-    # valid_status_code   Expected response code, default is ${HTTP_CREATED}
-
+    # valid_status_code   Expected response code, default is ${HTTP_CREATED}.
 
     ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
     ...  body={'UserName':'${username}', 'Password': '${password}'}
     ...  valid_status_codes=[${valid_status_code}]
 
 
-Create Users With Different Roles
-    [Documentation]  Create users with different roles.
-
-    Create User Of Given Role  admin_user  TestPwd123  Administrator  ${True}
-    Create User Of Given Role  operator_user  TestPwd123  Operator  ${True}
-
-
-Create User Of Given Role
-    [Documentation]  Create user of given role.
-    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
-
-    # Description of argument(s):
-    # username            The username to be created.
-    # password            The password to be assigned.
-    # role_id             The role ID of the user to be created
-    #                     (e.g. "Administrator", "Operator", etc.).
-    # enabled             Indicates whether the username being created
-    #                     should be enabled (${True}, ${False}).
-
-    # Make sure the user account in question does not already exist.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
-
-    # Create specified user.
-    ${payload}=  Create Dictionary
-    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
-    ...  valid_status_codes=[${HTTP_CREATED}]
-
-
 Suite Setup Execution
     [Documentation]  Suite Setup Execution.
 
     Redfish.Login
-    Create Users With Different Roles
+    Create Users With Different Roles  users=${USERS}  force=${True}
