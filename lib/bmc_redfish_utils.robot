@@ -139,3 +139,62 @@ Verify Valid Records
     Valid Length  invalid_records  max_length=0
 
     [Return]  ${records}
+
+
+Redfish Create User
+    [Documentation]  Redfish create user.
+    [Arguments]   ${user_name}  ${password}  ${role_id}  ${enabled}  ${force}=${False}
+
+    # Description of argument(s):
+    # user_name           The user name to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created.
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created.
+    #                     should be enabled (${True}, ${False}).
+    # force               Delete user account and re-create if force is True.
+
+    ${curr_role}=  Run Keyword And Ignore Error  Get User Role  ${user_name}
+    # Ex: ${curr_role} = ('PASS', 'Administrator')
+
+    ${user_exists}=  Run Keyword And Return Status  Should Be Equal As Strings  ${curr_role}[0]  PASS
+
+    # Delete user account when force is True.
+    Run Keyword If  ${force} == ${True}  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user when force is True or User does not exist.
+    ${payload}=  Create Dictionary
+    ...  UserName=${user_name}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+
+    Run Keyword If  ${force} == ${True} or ${user_exists} == ${False}
+    ...  Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+
+Get User Role
+    [Documentation]  Get User Role.
+    [Arguments]  ${user_name}
+
+    # Description of argument(s):
+    # user_name    User name to get it's role.
+
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  ${REDFISH_ACCOUNTS_URI}${user_name}  RoleId
+
+    [Return]  ${role_config}
+
+
+Create Users With Different Roles
+    [Documentation]  Create users with different roles.
+    [Arguments]  ${users}  ${force}=${False}
+
+    # Description of argument(s):
+    # users    Dictionary of roles and user credentails to be created.
+    #          Ex:  {'Administrator': '[admin_user, TestPwd123]', 'Operator': '[operator_user, TestPwd123]'}
+    # force    Delete given user account if already exists when force is True.
+
+    FOR  ${role}  IN  @{users}
+      Redfish Create User  ${users['${role}'][0]}  ${users['${role}']}[1]  ${role}  ${True}  ${force}
+    END
+
