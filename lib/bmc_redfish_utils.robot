@@ -139,3 +139,47 @@ Verify Valid Records
     Valid Length  invalid_records  max_length=0
 
     [Return]  ${records}
+
+
+Redfish Create User
+    [Documentation]  Redfish create user.
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}  ${force}=${False}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+    # force               Delete user account and re-create if force is True
+
+    Redfish.Login
+
+    # Delete and re-create user account if force is True
+    Run Keyword If  ${force} == ${True}  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${userName}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+    Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Validate Role ID of created user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  ${REDFISH_ACCOUNTS_URI}${username}  RoleId
+    Should Be Equal  ${role_id}  ${role_config}
+
+
+Create Users With Different Roles
+    [Documentation]  Create users with different roles.
+    [Arguments]  ${users}
+
+    # Description of argument(s):
+    # users    Dictionary of roles and user credentails to be created
+    #          Ex:  {'Administrator': '[admin_user, TestPwd123]', 'Operator': '[operator_user, TestPwd123]'}
+
+    :FOR    ${role}  IN  @{users}
+    \  Redfish Create User  ${users['${role}'][0]}  ${users['${role}']}[1]  ${role}  ${True}  ${True}
+
