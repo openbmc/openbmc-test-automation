@@ -241,5 +241,5 @@ Test Teardown Execution
     [Documentation]  Test teardown execution.
 
     Delete And Verify All Partitions on BMC
-#    FFDC On Test Case Fail
+    FFDC On Tes#t Case Fail
 
