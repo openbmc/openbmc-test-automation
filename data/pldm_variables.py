@@ -4,6 +4,7 @@ r"""
 Contains PLDM-related constants.
 """
 
+PLDM_SUPPORTED_TYPES = ['base', 'platform', 'bios']
 
 # PLDM types.
 PLDM_TYPE_BASE = {'VALUE': '00', 'STRING': 'base'}
@@ -83,8 +84,6 @@ PLDM_FRU_CMD = {
 
 # PLDM command format.
 
-CMD_GETPLDMTYPES = 'base GetPLDMTypes'
-
 '''
 e.g. : GetPLDMVersion usage
 
@@ -114,4 +113,10 @@ PAYLOAD_GetPLDMVersion = \
     ' 0x00 0x00 0x00 0x00 0x%s 0x%s'    # %(TransferOperationFlag, PLDMType)
 
 
-PLDM_SUPPORTED_TYPES = ['base', 'platform', 'bios']
+'''
+e.g. : SetDateTime usage
+
+pldmtool bios SetDateTime -d <YYYYMMDDHHMMSS>
+
+'''
+CMD_SETDATETIME = 'bios SetDateTime -d %s'

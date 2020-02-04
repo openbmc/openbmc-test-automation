@@ -52,7 +52,6 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
     bsu_options = fa.args_to_objects(bsu_options)
 
     stdout, stderr, rc = bsu.bmc_execute_command('pldmtool ' + option_string, **bsu_options)
-
     if parse_results:
         # Remove linefeeds following colons.
         stdout = re.sub(":\n", ":", stdout)
@@ -69,6 +68,10 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
                 supported_types['raw'].append(record[0])
                 supported_types['text'].append(record[1].rstrip(")"))
             result['supported_types'] = supported_types
+
+        if 'date_&_time' in result:
+            return result['yyyy-mm-dd_hh'].split(' - ')[1]
+
         return result
 
     return stdout
