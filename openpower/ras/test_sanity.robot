@@ -10,7 +10,7 @@ Resource        ../../openpower/ras/ras_utils.robot
 Variables       ../../lib/ras/variables.py
 Variables       ../../data/variables.py
 
-Suite Setup      REST Power On
+Suite Setup      Redfish Power On
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
