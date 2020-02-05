@@ -914,3 +914,19 @@ def filter_struct(structure, filter_dict, regex=False, invert=False):
                 result[struct_key] = struct_value
 
     return result
+
+
+def split_dict_on_key(split_key, dictionary):
+
+    dict1 = {}
+    dict2 = {}
+    found_split_key = False
+    for key in list(dictionary.keys()):
+        if key == split_key:
+            found_split_key = True
+        if found_split_key:
+            dict2[key] = dictionary[key]
+        else:
+            dict1[key] = dictionary[key]
+    return dict1, dict2
+
