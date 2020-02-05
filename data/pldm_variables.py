@@ -120,3 +120,46 @@ pldmtool bios SetDateTime -d <YYYYMMDDHHMMSS>
 
 '''
 CMD_SETDATETIME = 'bios SetDateTime -d %s'
+
+
+CMD_GETPDR = 'platform GetPDR -d %s'
+
+'''
+e.g. : SetStateEffecterStates usage
+
+pldmtool platform GetPDR -d <effecterID, requestSet, effecterState>
+
+pldmtool platform SetStateEffecterStates -d 1 1 1
+
+'''
+
+CMD_SETSTATEEFFECTERSTATES = 'platform SetStateEffecterStates -d %s'
+
+# GetPDR parsed response message for record handle.
+# Dictionary value array holds the expected output for record handle 1, 2.
+# e.g. : 'nextrecordhandle': ['0', '2']
+#
+# Note :
+#      Record handle - 0 is default &  has same behaviour as record handle 1
+#      Only record handle 0, 1, 2 are supported as of now.
+
+RESPONSE_DICT_GETPDR = {
+    'nextrecordhandle': ['0', '2'],
+    'responsecount': ['29', '30'],
+    'recordhandle': ['1', '2'],
+    'pdrheaderversion': '1',
+    'pdrtype': '11',
+    'recordchangenumber': '0',
+    'datalength': ['19', '20'],
+    'pldmterminushandle': '0',
+    'effecterid': ['1', '2'],
+    'entitytype': ['33', '45'],
+    'entityinstancenumber': '0',
+    'containerid': '0',
+    'effectersemanticid': '0',
+    'effecterinit': '0',
+    'effecterdescriptionpdr': 'false',
+    'compositeeffectercount': '1',
+    'statesetid': ['196', '260'],
+    'possiblestatessize': ['1', '2'],
+    'possiblestates': ['6', '0']}
