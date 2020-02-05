@@ -57,6 +57,7 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
         stdout = re.sub(":\n", ":", stdout)
         # Remove first line (e.g. "Encode request successfully").
         stdout = re.sub("^.*\\n", "", stdout)
+        stdout = re.sub('\x00', "", stdout)
         result = vf.key_value_outbuf_to_dict(stdout)
         if 'supported_types' in result:
             # 'supported types' begins like this:
@@ -68,9 +69,16 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
                 supported_types['raw'].append(record[0])
                 supported_types['text'].append(record[1].rstrip(")"))
             result['supported_types'] = supported_types
-
-        if 'date_&_time' in result:
+        elif 'date_&_time' in result:
+            # Date & Time :
+            # YYYY-MM-DD HH:MM:SS - 2020-02-24 06:44:16
             return result['yyyy-mm-dd_hh'].split(' - ')[1]
+        elif 'parsed_response_msg' in result:
+            dict_data1, dict_data2 = vf.split_dict_on_key('parsed_response_msg', result)
+            dict_data2.pop('parsed_response_msg')
+            if 'fru_datastructuretableintegritychecksum' in dict_data2:
+                dict_data2.pop('fru_datastructuretableintegritychecksum')
+            return dict_data2
 
         return result
 
