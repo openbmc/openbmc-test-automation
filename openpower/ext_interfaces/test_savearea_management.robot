@@ -5,6 +5,7 @@ Documentation    Test Save Area feature of Management Console on BMC.
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/resource.robot
+Resource          ../../lib/bmc_redfish_utils.robot
 Resource          ../../lib/utils.robot
 
 Suite Setup    Suite Setup Execution
@@ -13,9 +14,14 @@ Test Teardown  Test Teardown Execution
 
 *** Variables ***
 
-${MAX_SIZE_UPLOAD_MSG}  File size exceeds 200KB. Maximum allowed size is 200KB
-${FILE_UPLOADED_MSG}    File Created
+${MAX_SIZE_MSG}           File size exceeds 200KB. Maximum allowed size is 200KB
+${UPLOADED_MSG}           File Created
+${FORBIDDEN_MSG}          Forbidden
+${FILE_CREATE_ERROR_MSG}  Error while creating the file
 
+@{ADMIN}                  admin_user              TestPwd123
+@{OPERATOR}               operator_user           TestPwd123
+&{USERS}                  Administrator=${ADMIN}  Operator=${OPERATOR}
 
 *** Test Cases ***
 
@@ -24,10 +30,11 @@ Verify Small Partition File Upload And Delete
     [Tags]  Verify_Small_Partition_File_Upload_And_Delete
     [Template]  Upload File To Create Partition Then Delete Partition
 
-    # file_name  size_kb  partition_name  expect_resp_code     expected_msg             delete_partition
-    201KB_file   201      201KB           ${HTTP_BAD_REQUEST}  ${MAX_SIZE_UPLOAD_MSG}   ${True}
-    15KB_file    15       15KB            ${HTTP_OK}           ${FILE_UPLOADED_MSG}     ${True}
-    200KB_file   200      200KB           ${HTTP_OK}           ${FILE_UPLOADED_MSG}     ${True}
+    #                     partition                                         delete
+    # file_name  size_kb  name       expect_resp_code     expected_msg      partition    username
+    201KB_file   201      201KB      ${HTTP_BAD_REQUEST}  ${MAX_SIZE_MSG}   ${True}      ${OPENBMC_USERNAME}
+    15KB_file    15       15KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${True}      ${OPENBMC_USERNAME}
+    200KB_file   200      200KB      ${HTTP_OK}           ${UPLOADED_MSG}   ${True}      ${OPENBMC_USERNAME}
 
 
 Verify Multiple Files Upload
@@ -35,13 +42,14 @@ Verify Multiple Files Upload
     [Tags]  Verify_Multiple_Files_Upload
     [Template]  Upload File To Create Partition Then Delete Partition
 
-    # file_name  size_kb  partition_name  expect_resp_code     expected_msg             delete_partition
-    0KB_file     0        0KB             ${HTTP_OK}           ${FILE_UPLOADED_MSG}     ${False}
-    10KB_file    10       10KB            ${HTTP_OK}           ${FILE_UPLOADED_MSG}     ${False}
-    50KB_file    50       50KB            ${HTTP_OK}           ${FILE_UPLOADED_MSG}     ${False}
-    250KB_file   250      250KB           ${HTTP_BAD_REQUEST}  ${MAX_SIZE_UPLOAD_MSG}   ${False}
-    15KB_file    15       15KB            ${HTTP_OK}           ${FILE_UPLOADED_MSG}     ${False}
-    199KB_file   199      199KB           ${HTTP_OK}           ${FILE_UPLOADED_MSG}     ${False}
+    #                     partition                                         delete
+    # file_name  size_kb  name       expect_resp_code     expected_msg      partition    username
+    0KB_file     0        0KB        ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
+    10KB_file    10       10KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
+    50KB_file    50       50KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
+    250KB_file   250      250KB      ${HTTP_BAD_REQUEST}  ${MAX_SIZE_MSG}   ${False}     ${OPENBMC_USERNAME}
+    19KB_file    19       19KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
+    199KB_file   199      199KB      ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
 
 
 Verify Read Partition
@@ -59,6 +67,96 @@ Verify Read Partition
     ...  delete_partition=${False}
 
     Read Partition And Verify Content  ${partition_name}  ${content}
+
+
+Verify Non-Admin User Is Forbidden To Upload Partition File
+    [Documentation]  Verify non-admin user is forbidden to upload partition file.
+    [Tags]   Verify_Non-Admin_User_Is_Forbidden_To_Upload_Partition_File
+    [Template]  Upload File To Create Partition Then Delete Partition
+
+    #                     partition                                         delete
+    # file_name  size_kb  name       expect_resp_code     expected_msg      partition    username
+    12KB_file    12       12KB       ${HTTP_FORBIDDEN}    ${FORBIDDEN_MSG}  ${False}     operator_user
+
+
+Verify Partition Update On BMC
+    [Documentation]  Verify partition update on BMC.
+    [Tags]  Verify_Partition_Update_On_BMC
+
+    Set Test Variable  ${file_name}  testfile
+    Set Test Variable  ${partition_name}  part_read
+    Set Test Variable  ${content1}  Sample Content to test partition file upload
+    Set Test Variable  ${content2}  Sample Content to test partition file update
+
+    Upload Partition File With Some Known Contents  ${file_name}  ${partition_name}  ${content1}
+    Read Partition And Verify Content  ${partition_name}  ${content1}
+
+    # Upload the same partition with modified contents to verify update partition feature.
+    Upload Partition File With Some Known Contents  ${file_name}  ${partition_name}  ${content2}
+    Read Partition And Verify Content  ${partition_name}  ${content2}
+
+
+Verify Delete Partition When Partition Does Not Exist
+    [Documentation]  Verify delete partition when partition does not exist.
+    [Tags]  Verify_Delete_Partition_When_Partition_Does_Not_Exist
+    [Template]  Delete Partition And Verify On BMC
+
+    # partition_name    expect_resp_code      username
+    Does_not_exist      ${HTTP_NOT_FOUND}     ${OPENBMC_USERNAME}
+    Does_not_exist      ${HTTP_FORBIDDEN}     operator_user
+
+
+Verify Partition Files Persistency And Re-upload After BMC Reboot
+    [Documentation]  Verify partition files persistency and re-upload after BMC reboot.
+    [Tags]  Verify_Partition_Files_Persistency_And_Re-upload_After_BMC_Reboot
+
+    Set Test Variable  ${file_name}  testfile
+    Set Test Variable  ${partition_name}  part_read
+    Set Test Variable  ${content}  Sample Content to test partition file upload
+
+    Upload Partition File With Some Known Contents
+    ...  ${file_name}_1  ${partition_name}_1  ${content}_${file_name}_1
+    Upload Partition File With Some Known Contents
+    ...  ${file_name}_2  ${partition_name}_2  ${content}_${file_name}_2
+
+    OBMC Reboot (off)
+
+    # Get REST session to BMC.
+    Initialize OpenBMC
+
+    # Checking for the content of uploaded partitions after BMC reboot.
+    Read Partition And Verify Content  ${partition_name}_1  ${content}_${file_name}_1
+    Read Partition And Verify Content  ${partition_name}_2  ${content}_${file_name}_2
+
+    # Upload same partition with different content to test partition update after BMC reboot.
+    Upload Partition File With Some Known Contents
+    ...  ${file_name}_1  ${partition_name}_1  ${content}_${file_name}_2
+
+    # Upload different partition.
+    Upload Partition File With Some Known Contents  ${file_name}  ${partition_name}  ${content}
+
+
+Verify One Thousand Partitions File Upload
+    [Documentation]  Verify One Thousand Partitions File Upload.
+    [Tags]  Verify_One_Thousand_Partitions_File_Upload
+
+    # Note: 1000 Partitions file upload would take 15-20 minutes.
+    FOR  ${INDEX}  IN RANGE  1  1000
+        ${status}=  Run Keyword And Return Status  Upload File To Create Partition Then Delete Partition
+        ...  200KB  200  p${INDEX}  delete_partition=${False}
+        Run Keyword If  ${status} == ${True}  Continue For Loop
+
+        # Check if /var is full on BMC.
+        ${status}  ${stderr}  ${rc}=  BMC Execute Command  df -k | grep \' /var\' | grep -v /var/
+        ${var_size}=  Set Variable  ${status.split('%')[0].split()[1]}
+
+        # Should be a problem if partition file upload request has failed when /var is not full.
+        Exit For Loop If  ${var_size} != ${100}
+
+        # Expect HTTP_INTERNAL_SERVER_ERROR and FILE_CREATE_ERROR_MSG when /var is full.
+        Upload File To Create Partition Then Delete Partition
+        ...  200KB  200  p${INDEX}  ${HTTP_INTERNAL_SERVER_ERROR}  ${FILE_CREATE_ERROR_MSG}  ${False}
+    END
 
 
 *** Keywords ***
@@ -80,10 +178,23 @@ Create Partition File
     OperatingSystem.File Should Exist  ${file_name}
 
 
+Delete All Sessions And Login Using Given User
+    [Documentation]    Delete all sessions and login using given user.
+    [Arguments]   ${username}=${OPENBMC_USERNAME}
+
+    # Description of argument(s):
+    # username            Username to login. Default is OPENBMC_USERNAME.
+    #                     Ex: root, operator_user, admin_user, readonly_user etc.
+
+    Delete All Sessions
+    ${password}=  Set Variable If  '${username}' == '${OPENBMC_USERNAME}'  ${OPENBMC_PASSWORD}  TestPwd123
+    Initialize OpenBMC  rest_username=${username}  rest_password=${password}
+
+
 Upload File To Create Partition Then Delete Partition
     [Documentation]  Upload file to create partition the delete partition.
     [Arguments]  ${file_name}=dummyfile  ${size_kb}=15  ${partition_name}=p1  ${expect_resp_code}=${HTTP_OK}
-    ...  ${expected_msg}=File Created  ${delete_partition}=${True}
+    ...  ${expected_msg}=File Created  ${delete_partition}=${True}  ${username}=${OPENBMC_USERNAME}
 
     # Description of argument(s):
     # file_name           Name of the test file to be created.
@@ -91,6 +202,11 @@ Upload File To Create Partition Then Delete Partition
     # expect_resp_code    Expected REST response code, default is ${HTTP_OK}.
     # expected_msg        Expected message from file upload, default is 'File Created'.
     # delete_partition    Partition will be deleted if this is True.
+    # username            Login username
+
+    # Create a session with given user to test upload partition file.
+    Run Keyword If  '${username}' != '${OPENBMC_USERNAME}'
+    ...  Delete All Sessions And Login Using Given User  ${username}
 
     # Create a partition file.
     Create Partition File  ${file_name}  ${size_kb}
@@ -104,24 +220,57 @@ Upload File To Create Partition Then Delete Partition
     ${resp}=  Put Request  openbmc  /ibm/v1/Host/ConfigFiles/${partition_name}  &{data}
     Should Be Equal As Strings  ${resp.status_code}  ${expect_resp_code}
 
-    # Upload Success will have a response body as :
-    #           {
-    #             "Description": "File Created"
-    #           }
-    ${message}=  evaluate  json.loads('''${resp.text}''')  json
-    Should Be Equal As Strings  ${message["Description"]}  ${expected_msg}
+    ${description}=  Run Keyword If  ${expect_resp_code} != ${HTTP_FORBIDDEN}
+    ...  Return Description Of REST Response  ${resp.text}
+    ...  ELSE  Set Variable  ${FORBIDDEN_MSG}
+
+    Should Be Equal As Strings  ${description}  ${expected_msg}
 
     # Cleanup local space after upload attempt.
     Run Keyword And Ignore Error  Delete Local File Created To Upload  ${file_name}
 
     ${upload_success}=  Set Variable If   ${expect_resp_code} != ${HTTP_OK}  ${False}  ${True}
-    Verify Partition Available On BMC  ${partition_name}  ${upload_success}
+    Verify Partition Available On BMC  ${partition_name}  ${upload_success}  ${username}
 
     # Delete partition and verify on BMC.
-    Return From Keyword If  ${delete_partition} == ${False}
-    ${del_resp_code}=  Set Variable If  ${expect_resp_code} != ${HTTP_OK}  ${HTTP_NOT_FOUND}  ${HTTP_OK}
-    Delete Partition  ${partition_name}  ${del_resp_code}
-    Verify Partition Available On BMC  ${partition_name}  ${False}
+    ${expect_resp_code}=  Set Variable If  ${expect_resp_code} != ${HTTP_OK}  ${HTTP_NOT_FOUND}  ${HTTP_OK}
+    Run Keyword If  ${delete_partition} == ${True}  Delete Partition And Verify On BMC
+    ...  ${partition_name}  ${expect_resp_code}  ${username}
+
+
+Return Description Of REST Response
+    [Documentation]  Return description of REST response.
+    [Arguments]  ${resp_text}
+
+    # Description of argument(s):
+    # resp_text    REST response body.
+
+    # resp_text after successful partition file upload looks like:
+    #           {
+    #             "Description": "File Created"
+    #           }
+
+    ${message}=  Evaluate  json.loads('''${resp_text}''')  json
+
+    [Return]  ${message["Description"]}
+
+
+Delete Partition And Verify On BMC
+    [Documentation]  Delete partition and verify on BMC.
+    [Arguments]  ${partition_name}  ${expect_resp_code}=${HTTP_OK}  ${username}=${OPENBMC_USERNAME}
+
+    # Description of argument(s):
+    # partition_name      Name of the partition on BMC.
+    # expect_resp_code    Expected REST response code from DELETE request, default is ${HTTP_OK}.
+    # username            Username to login, if other than OPENBMC_USERNAME user.
+
+    # Create a session with given user to test delete operation.
+    # If user is a non-admin user then DELETE request is forbidden for the user.
+    Run Keyword If  '${username}' != '${OPENBMC_USERNAME}'
+    ...  Delete All Sessions And Login Using Given User  ${username}
+
+    Delete Partition  ${partition_name}  ${expect_resp_code}
+    Verify Partition Available On BMC  ${partition_name}  ${False}  ${username}
 
 
 Get List Of Partitions
@@ -143,13 +292,17 @@ Get List Of Partitions
 
 Verify Partition Available On BMC
     [Documentation]  Verify partition available on BMC.
-    [Arguments]  ${partition_name}=${EMPTY}  ${operation_status}=${True}
+    [Arguments]  ${partition_name}=${EMPTY}  ${operation_status}=${True}  ${username}=${OPENBMC_USERNAME}
 
     # Description of argument(s):
-    # partition_name    Name of the partition on BMC.
-    # operation_success   Status of the previous operation like upload/delete success or failure.
-    #                     True if operation was a success else False.
+    # partition_name     Name of the partition on BMC.
+    # operation_success  Status of the previous operation like upload/delete success or failure.
+    #                    True if operation was a success else False.
+    # username           Username used to upload/delete. Default is ${OPENBMC_USERNAME}.
 
+    # Non admin users will not have an access to do GET list
+    Run Keyword If  '${username}' != '${OPENBMC_USERNAME}'
+    ...  Delete All Sessions And Login Using Given User
 
     ${partitions}  ${partitions_cnt}=  Get List Of Partitions
     ${rest_response}=  Run Keyword And Return Status  List Should Contain Value  ${partitions}
@@ -230,8 +383,29 @@ Delete Local File Created To Upload
     Run Keyword And Ignore Error  Run  rm -f ${file_name}
 
 
+Upload Partition File With Some Known Contents
+    [Documentation]  Upload partition file with some known contents.
+    [Arguments]  ${file_name}  ${partition_name}  ${content}
+
+    # Description of argument(s):
+    # file_name           Name of the partition file to be uploaded.
+    # partition_name      Name of the partition on BMC.
+    # content             Content of the partition file to be uploaded.
+
+    Run  echo "${content}" > ${file_name}
+    OperatingSystem.File Should Exist  ${file_name}
+
+    Upload File To Create Partition Then Delete Partition  ${file_name}  1  ${partition_name}
+    ...  delete_partition=${False}
+
+
 Suite Setup Execution
     [Documentation]  Suite setup execution.
+
+    # Create different user accounts.
+    Redfish.Login
+    Create Users With Different Roles  users=${USERS}  force=${True}
+    Redfish.Logout
 
     # Get REST session to BMC.
     Initialize OpenBMC
