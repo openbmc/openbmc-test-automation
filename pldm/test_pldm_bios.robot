@@ -58,6 +58,32 @@ Verify SetDateTime
     ${pldm_output}=  Pldmtool  ${cmd_set_time}
     Valid Value  pldm_output['setdatetime']  ['SUCCESS']
 
+
+Verify GetBIOSTable For StringTable
+    [Documentation]  Verify GetBIOSTable for table type string table.
+    [Tags]           Verify_GetBIOSTable_For_StringTable
+
+    # pldm_output:
+    # [biosstringhandle]:                             BIOSString
+    # [0]:                                            Allowed
+    # [1]:                                            Disabled
+    # [2]:                                            Enabled
+    # [3]:                                            Not Allowed
+    # [4]:                                            Perm
+    # [5]:                                            Temp
+    # [6]:                                            pvm-fw-boot-side
+    # [7]:                                            pvm-inband-code-update
+    # [8]:                                            pvm-os-boot-side
+    # [9]:                                            pvm-pcie-error-inject
+    # [10]:                                           pvm-surveillance
+    # [11]:                                           pvm-system-name
+    # [12]:                                           vmi-if-count
+
+    ${pldm_output}=  Pldmtool  bios GetBIOSTable -t 0
+    Rprint Vars  pldm_output
+    # TODO: Implement verification for GetBIOSTable response message.
+    # Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETBIOSTABLE_STRTABLE}
+
 *** Keywords ***
 
 PLDM BIOS Suite Cleanup
