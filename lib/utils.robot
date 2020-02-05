@@ -718,7 +718,7 @@ Update Root Password
 Get Post Boot Action
     [Documentation]  Get post boot action.
 
-    # Post code update action dictionay.
+    # Post code update action dictionary.
     #
     # {
     #    BMC image: {

@@ -69,7 +69,7 @@ Create Partition File
 
     # Description of argument(s):
     # file_name           Name of the test file to be created. Examples:  p1.log, part1.txt etc.
-    # size_kb             Size of the test file to be created in KB, deafult is 15KB.
+    # size_kb             Size of the test file to be created in KB, default is 15KB.
     #                     Example : 15, 200 etc.
 
     ${file_exist}=  Run Keyword And Return Status  OperatingSystem.File Should Exist  ${file_name}
