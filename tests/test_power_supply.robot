@@ -106,23 +106,29 @@ Check Power Telemetry When Host On
     # power_paths  A list of power paths (example list element
     # "/org/open_power/sensors/aggregation/per_30s/ps0_input_power/average").
 
+    Reset 30s Aggregation Power Readings
+    # sleep for 3 minutes to get 6-7 readings.
+    Sleep  3m
+
     # Check for "average" aggregation.
-    :FOR  ${power_path}  IN  @{power_paths[0]}
-    \  ${averages}=  Get Sensors Aggregation Data  ${power_path}
-    \  ${max}  ${min}=  Evaluate  (max(@{averages}), min(@{averages}))
-    \  Should Be True  ${max} < ${upper_power_limit}
-    ...  msg=Wattage ${max} crossed ${upper_power_limit}.
-    \  Should Be True  ${min} >= ${lower_power_limit}
-    ...  msg=Wattage ${min} below ${lower_power_limit}.
+    FOR  ${power_path}  IN  @{power_paths[0]}
+       ${averages}=  Get Sensors Aggregation Data  ${power_path}
+       ${max}  ${min}=  Evaluate  (max(@{averages}), min(@{averages}))
+       Should Be True  ${max} < ${upper_power_limit}
+       ...  msg=Wattage ${max} crossed ${upper_power_limit}.
+       Should Be True  ${min} >= ${lower_power_limit}
+       ...  msg=Wattage ${min} below ${lower_power_limit}.
+    END
 
     # Check for "maximum" aggregation.
-    :FOR  ${power_path}  IN  @{power_paths[1]}
-    \  ${maximums}=  Get Sensors Aggregation Data  ${power_path}
-    \  ${max}  ${min}=  Evaluate  (max(@{maximums}), min(@{maximums}))
-    \  Should Be True  ${max} < ${upper_power_limit}
-    ...  msg=Wattage ${max} crossed ${upper_power_limit}.
-    \  Should Be True  ${min} >= ${lower_power_limit}
-    ...  msg=Wattage ${min} below ${lower_power_limit}.
+    FOR  ${power_path}  IN  @{power_paths[1]}
+       ${maximums}=  Get Sensors Aggregation Data  ${power_path}
+       ${max}  ${min}=  Evaluate  (max(@{maximums}), min(@{maximums}))
+       Should Be True  ${max} < ${upper_power_limit}
+     ...  msg=Wattage ${max} crossed ${upper_power_limit}.
+       Should Be True  ${min} >= ${lower_power_limit}
+     ...  msg=Wattage ${min} below ${lower_power_limit}.
+    END
 
     # Every 30 seconds the power wattage data is updated.
     Sleep  ${power_data_collection_interval}s
@@ -141,16 +147,28 @@ Check Power Telemetry When Host Off
     Sleep  ${power_data_collection_interval}s
 
     # Check for "average" aggregation.
-    :FOR  ${power_path}  IN  @{power_paths[0]}
-    \  ${averages}=  Get Sensors Aggregation Data  ${power_path}
-    \  Should Be True  ${averages[0]} < ${lower_power_limit}
-    ...  msg=Wattage ${averages[0]} more than ${lower_power_limit}.
+    FOR  ${power_path}  IN  @{power_paths[0]}
+       ${averages}=  Get Sensors Aggregation Data  ${power_path}
+       Should Be True  ${averages[0]} < ${lower_power_limit}
+       ...  msg=Wattage ${averages[0]} more than ${lower_power_limit}.
+    END
 
     # Check for "maximum" aggregation.
-    :FOR  ${power_path}  IN  @{power_paths[1]}
-    \  ${maximums}=  Get Sensors Aggregation Data  ${power_path}
-    \  Should Be True  ${maximums[0]} < ${lower_power_limit}
-    ...  msg=Wattage ${maximums[0]} more than ${lower_power_limit}.
+    FOR  ${power_path}  IN  @{power_paths[1]}
+       ${maximums}=  Get Sensors Aggregation Data  ${power_path}
+       Should Be True  ${maximums[0]} < ${lower_power_limit}
+       ...  msg=Wattage ${maximums[0]} more than ${lower_power_limit}.
+    END
+
+
+Reset 30s Aggregation Power Readings
+    [Documentation]  Reset 30s Aggregation Power Readings to ensure readings
+    ...              are collected after Power Supplies are done powering up.
+
+    BMC Execute Command  /bin/systemctl restart power-supply-monitor@0.service
+    BMC Execute Command  /bin/systemctl restart power-supply-monitor@1.service
+    # wait for services to restart.
+    Sleep  10s
 
 
 Set Power Supply Present

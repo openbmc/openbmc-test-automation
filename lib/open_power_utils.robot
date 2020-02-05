@@ -78,13 +78,14 @@ Verify OCC State
     ${cpu_list}=  Get Endpoint Paths
     ...  ${HOST_INVENTORY_URI}system/chassis/motherboard/  cpu*
 
-    :FOR  ${endpoint_path}  IN  @{cpu_list}
-    \  ${is_functional}=  Read Object Attribute  ${endpoint_path}  Functional
-    \  Continue For Loop If  ${is_functional} == ${0}
-    \  ${num}=  Set Variable  ${endpoint_path[-1]}
-    \  ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
-    \  Should Be Equal  ${occ_active}  ${expected_occ_active}
-    ...  msg=OCC not in right state
+    FOR  ${endpoint_path}  IN  @{cpu_list}
+       ${is_functional}=  Read Object Attribute  ${endpoint_path}  Functional
+       Continue For Loop If  ${is_functional} == ${0}
+       ${num}=  Set Variable  ${endpoint_path[-1]}
+       ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
+       Should Be Equal  ${occ_active}  ${expected_occ_active}
+       ...  msg=OCC not in right state
+    END
 
 
 Get Sensors Aggregation Data
@@ -114,8 +115,9 @@ Get Sensors Aggregation Data
 
     ${resp}=  Read Attribute  ${object_base_uri_path}  Values  quiet=${1}
     ${power_sensors_value_list}=  Create List
-    :FOR  ${entry}  IN  @{resp}
-    \  Append To List  ${power_sensors_value_list}  ${entry[1]}
+    FOR  ${entry}  IN  @{resp}
+       Append To List  ${power_sensors_value_list}  ${entry[1]}
+    END
     [Return]  ${power_sensors_value_list}
 
 
@@ -153,13 +155,10 @@ Get Sensors Aggregation URL List
     ${power_supply_avg_list}=  Create List
     ${power_supply_max_list}=  Create List
 
-    :FOR  ${entry}  IN  @{content["data"]}
-    \  ${status}=
-    ...  Run keyword And Return Status  Should Contain  ${entry}  average
-    \  Run Keyword If  ${status} == ${False}
-    ...    Append To List  ${power_supply_max_list}  ${entry}
-    ...  ELSE
-    ...    Append To List  ${power_supply_avg_list}  ${entry}
+    FOR  ${entry}  IN  @{content["data"]}
+        Run Keyword If  'average' in '${entry}'  Append To List  ${power_supply_avg_list}  ${entry}
+        Run Keyword If  'maximum' in '${entry}'  Append To List  ${power_supply_max_list}  ${entry}
+    END
 
     [Return]  ${power_supply_avg_list}  ${power_supply_max_list}
 
