@@ -58,7 +58,7 @@ Update User Password Via Redfish And Verify Using IPMI
     # Verify that IPMI command works with new password and fails with older password.
     Verify IPMI Username And Password  ${random_username}  ${valid_password2}
 
-    Run Keyword And Expect Error  Error: Unable to establish IPMI*
+    Run Keyword And Expect Error  *Error: Unable to establish IPMI*
     ...  Verify IPMI Username And Password  ${random_username}  ${valid_password}
 
 
@@ -115,7 +115,7 @@ Delete User Via Redfish And Verify Using IPMI
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${random_username}
 
     # Verify that IPMI command fails with deleted user.
-    Run Keyword And Expect Error  Error: Unable to establish IPMI*
+    Run Keyword And Expect Error  *Error: Unable to establish IPMI*
     ...  Verify IPMI Username And Password  ${random_username}  ${valid_password}
 
 
