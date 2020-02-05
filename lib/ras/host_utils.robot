@@ -61,8 +61,8 @@ Get ProcChipId From OS
 
     ${proc_ids}=  Split String  ${proc_chip_id}
     ${proc_id}=  Run Keyword If  '${master_proc_chip}' == 'True'
-    \  ...  Get From List  ${proc_ids}  1
-    \  ...  ELSE  Get From List  ${proc_ids}  0
+    ...  Get From List  ${proc_ids}  1
+    ...    ELSE  Get From List  ${proc_ids}  0
 
     # Example output:
     # 00000008
@@ -123,11 +123,13 @@ Inject Error Through HOST
     ${proc_chip_id}=  Get ProcChipId From OS  Processor  ${master_proc_chip}
 
     ${threshold_limit}=  Convert To Integer  ${threshold_limit}
-    :FOR  ${count}  IN RANGE  ${threshold_limit}
-    \  Run Keyword  Putscom Operations On OS  ${proc_chip_id}  ${fir_address}
-    ...  ${value}
-    # Adding delay after each error injection.
-    \  Sleep  10s
+    FOR  ${count}  IN RANGE  ${threshold_limit}
+        Run Keyword  Putscom Operations On OS  ${proc_chip_id}  ${fir_address}
+        ...  ${value}
+        # Adding delay after each error injection.
+        Sleep  10s
+    END
+
     # Adding delay to get error log after error injection.
     Sleep  120s
 
@@ -193,10 +195,12 @@ Inject Error Through BMC
     Gard Operations On OS  clear all
 
     ${threshold_limit}=  Convert To Integer  ${threshold_limit}
-    :FOR  ${count}  IN RANGE  ${threshold_limit}
-    \  Pdbg  -p0 putscom 0x${fir_address} 0x${value}
-    # Adding delay after each error injection.
-    \  Sleep  10s
+    FOR  ${count}  IN RANGE  ${threshold_limit}
+        Pdbg  -p0 putscom 0x${fir_address} 0x${value}
+        # Adding delay after each error injection.
+        Sleep  10s
+    END
+
     # Adding delay to get error log after error injection.
     Sleep  120s
 
