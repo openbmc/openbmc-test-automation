@@ -69,9 +69,38 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
                 supported_types['text'].append(record[1].rstrip(")"))
             result['supported_types'] = supported_types
 
-        if 'date_&_time' in result:
+        elif 'date_&_time' in result:
             return result['yyyy-mm-dd_hh'].split(' - ')[1]
+        elif 'parsed_response_msg' in result:
+            dict_data1, dict_data2 = vf.split_dict_on_key('parsed_response_msg', result)
+            return dict_data2
 
         return result
 
     return stdout
+
+def pldm_key_value_compare(pldm_output_dict, dict_data):
+
+    r"""
+        Function compare two dictionaries and return True/False.
+
+        Description of arguments:
+        pldm_output_dict - pldm response dictionary
+        dict_data        - dictionary to compare with pldm response dictionary
+
+    """
+
+    pldm_output_dict.pop('parsed_response_msg')
+    if len(pldm_output_dict) != len(dict_data):
+        return False
+
+    count = 0
+    for key in dict_data:
+        if type(dict_data[key]) is list:
+            if pldm_output_dict[key] not in dict_data[key]:
+                count = count + 1
+        elif pldm_output_dict[key] != dict_data[key]:
+            count = count + 1
+        if count:
+            return False
+    return True
