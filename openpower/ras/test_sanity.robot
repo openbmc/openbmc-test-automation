@@ -5,12 +5,12 @@ Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/openbmc_ffdc_utils.robot
 Resource        ../../lib/openbmc_ffdc_methods.robot
 Resource        ../../lib/ras/host_utils.robot
-Resource        ../../lib/utils.py
 Resource        ../../openpower/ras/ras_utils.robot
+Library         ../../lib/utils.py
 Variables       ../../lib/ras/variables.py
 Variables       ../../data/variables.py
 
-Suite Setup      REST Power On
+Suite Setup      Redfish Power On
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
