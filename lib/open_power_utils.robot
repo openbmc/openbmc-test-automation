@@ -156,10 +156,13 @@ Get Sensors Aggregation URL List
     :FOR  ${entry}  IN  @{content["data"]}
     \  ${status}=
     ...  Run keyword And Return Status  Should Contain  ${entry}  average
-    \  Run Keyword If  ${status} == ${False}
-    ...    Append To List  ${power_supply_max_list}  ${entry}
-    ...  ELSE
+    \  Run Keyword If  ${status} == ${True}
     ...    Append To List  ${power_supply_avg_list}  ${entry}
+
+    \  ${status}=
+    ...  Run keyword And Return Status  Should Contain  ${entry}  maximum
+    \  Run Keyword If  ${status} == ${True}
+    ...    Append To List  ${power_supply_max_list}  ${entry}
 
     [Return]  ${power_supply_avg_list}  ${power_supply_max_list}
 
