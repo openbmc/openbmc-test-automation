@@ -68,9 +68,12 @@ redfish_supported = BuiltIn().get_variable_value("${REDFISH_SUPPORTED}", default
 if redfish_supported:
     default_power_on = "Redfish Power On"
     default_power_off = "Redfish Power Off"
+    delete_errlogs_cmd = "Delete Error Logs"
+    # TODO: delete_errlogs_cmd="Redfish Purge Event Log"
 else:
     default_power_on = "REST Power On"
     default_power_off = "REST Power Off"
+    delete_errlogs_cmd = "Delete Error Logs"
 boot_count = 0
 
 LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
@@ -957,7 +960,7 @@ def test_loop_body():
 
     if delete_errlogs:
         # We need to purge error logs between boots or they build up.
-        grk.run_key("Delete Error logs", ignore=1)
+        grk.run_key(delete_errlogs_cmd, ignore=1)
 
     boot_results.print_report()
     gp.qprint_timen("Finished boot " + str(boot_count) + ".")
@@ -1129,6 +1132,10 @@ def obmc_boot_test_py(loc_boot_stack=None,
             pre_boot_plug_in_setup()
         grk.run_key_u("my_ffdc")
         return
+
+    if delete_errlogs:
+        # Delete errlogs prior to doing any boot tests.
+        grk.run_key(delete_errlogs_cmd, ignore=1)
 
     # Process caller's boot_stack.
     while (len(boot_stack) > 0):
