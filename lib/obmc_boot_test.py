@@ -1130,6 +1130,10 @@ def obmc_boot_test_py(loc_boot_stack=None,
         grk.run_key_u("my_ffdc")
         return
 
+    if delete_errlogs:
+        # We need to purge error logs between boots or they build up.
+        grk.run_key("Delete Error logs", ignore=1)
+
     # Process caller's boot_stack.
     while (len(boot_stack) > 0):
         test_loop_body()
