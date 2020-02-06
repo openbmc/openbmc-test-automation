@@ -17,6 +17,7 @@ Resource                 ../../lib/code_update_utils.robot
 Resource                 ../../lib/dump_utils.robot
 Resource                 ../../lib/logging_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
+Resource                 ../../lib/utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
 Library                  ../../lib/gen_robot_keyword.py
@@ -75,14 +76,14 @@ Redfish Update Firmware
     # Description of argument(s):
     # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
+    ${post_code_update_actions}=  Get Post Boot Action
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
     Set ApplyTime  policy=${apply_Time}
-    ${get_json_file}=  OperatingSystem.Get File  lib/applytime_table.json
-    ${post_code_update_actions}=  Evaluate  json.loads('''${get_json_file}''')  json
     Redfish Upload Image And Check Progress State
-    Run Key  ${post_code_update_actions['bmc']['${apply_time}']}
+    Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
     Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
     Verify Get ApplyTime  ${apply_time}
 
 
@@ -95,6 +96,7 @@ Redfish Multiple Upload Image And Check Progress State
     # IMAGE_FILE_PATH            The path to BMC image file.
     # ALTERNATE_IMAGE_FILE_PATH  The path to alternate BMC image file.
 
+    ${post_code_update_actions}=  Get Post Boot Action
     Valid File Path  ALTERNATE_IMAGE_FILE_PATH
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
@@ -119,5 +121,6 @@ Redfish Multiple Upload Image And Check Progress State
     Wait Until Keyword Succeeds  8 min  20 sec
     ...  Check Image Update Progress State
     ...    match_state='Enabled'  image_id=${first_image_id}
-    Reboot BMC And Verify BMC Image  ${apply_time}  start_boot_seconds=${state['epoch_seconds']}
-
+    Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
+    Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
