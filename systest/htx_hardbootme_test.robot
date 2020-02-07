@@ -245,7 +245,7 @@ Test Setup Execution
     Delete All Error Logs
     Tool Exist  htxcmdline
 
-    ${os_release_info}=  Get OS Release Info
+    ${os_release_info}=  utils_os.Get OS Release Info
     Rprint Vars  os_release_info  fmt=1
 
     # Shutdown if HTX is running.
