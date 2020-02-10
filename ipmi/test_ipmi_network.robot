@@ -173,6 +173,33 @@ Create VLAN Via IPMI When LAN And VLAN Exist On BMC
     Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
 
 
+Create VLAN Via IPMI And Verify
+    [Documentation]  Create and verify VLAN via IPMI.
+    [Tags]  Create_VLAN_Via_IPMI_And_Verify
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+
+    Create VLAN Via IPMI  ${vlan_id}
+
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
+    Valid Value  lan_config['IP Address']  ["${initial_lan_config['IP Address']}"]
+    Valid Value  lan_config['Subnet Mask']  ["${initial_lan_config['Subnet Mask']}"]
+
+
+Test Disable VLAN Via IPMI
+    [Documentation]  Disable VLAN and verify via IPMI.
+    [Tags]  Test_Disable_VLAN_Via_IPMI
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+
+    Create VLAN Via IPMI  ${vlan_id}
+    Create VLAN Via IPMI  off
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']  ['Disabled']
+
+
 *** Keywords ***
 
 Get Physical Network Interface Count
@@ -253,6 +280,7 @@ Verify MAC Address
 
 Create VLAN Via IPMI
     [Documentation]  Create VLAN via inband IPMI command.
+
     [Arguments]  ${vlan_id}  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
