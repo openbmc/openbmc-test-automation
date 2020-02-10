@@ -144,3 +144,4 @@ Verify MAC Address
     ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}  MACAddress
     Rprint Vars  lan_print_ipmi  redfish_mac_address
     Valid Value  lan_print_ipmi['MAC Address']  ['${redfish_mac_address}']
+
