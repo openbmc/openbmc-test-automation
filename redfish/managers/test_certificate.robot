@@ -157,7 +157,8 @@ Install And Verify Certificate Via Redfish
     #                     request (i.e. "ok" or "error").
 
     redfish.Login
-    Delete Certificate Via BMC CLI  ${cert_type}
+    Run Keyword If  '${cert_type}' == 'CA'  Delete All CA Certificate Via Redfish
+    ...  ELSE IF  '${cert_type}' == 'Client'  Delete Certificate Via BMC CLI  ${cert_type}
 
     ${time}=  Set Variable If  '${cert_format}' == 'Expired Certificate'  -10  365
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
@@ -321,6 +322,15 @@ Delete Certificate Via BMC CLI
     BMC Execute Command  systemctl daemon-reload
     Wait Until Keyword Succeeds  1 min  10 sec  Redfish.Get  ${certificate_uri}/1
     ...  valid_status_codes=[${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}]
+
+
+Delete All CA Certificate Via Redfish
+    [Documentation]  Delete all CA certificate via Redfish.
+
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Truststore/Certificates
+    FOR  ${cert}  IN  @{cert_list}
+      Redfish.Delete  ${cert}  valid_status_codes=[${HTTP_NO_CONTENT}]
+    END
 
 
 Suite Setup Execution
