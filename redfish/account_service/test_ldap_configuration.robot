@@ -680,4 +680,3 @@ Update LDAP User Role And Host Poweroff
     Redfish.Post  ${REDFISH_POWER_URI}
     ...  body={'ResetType': 'ForceOff'}   valid_status_codes=[${valid_status_code}]
 
-
