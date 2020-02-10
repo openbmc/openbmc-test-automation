@@ -11,7 +11,7 @@ Library                ../lib/bmc_network_utils.py
 
 Suite Setup            Suite Setup Execution
 Test Setup             Printn
-Test Teardown          FFDC On Test Case Fail
+#Test Teardown          FFDC On Test Case Fail
 
 Force Tags             IPMI_Network_Config
 
@@ -92,6 +92,33 @@ Create VLAN Via IPMI When LAN And VLAN Exist On BMC
     Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
 
 
+Create VLAN Via IPMI And Verify
+    [Documentation]  Create and verify VLAN via IPMI.
+    [Tags]  Create_VLAN_Via_IPMI_And_Verify
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+
+    Create VLAN Via IPMI  ${vlan_id}
+
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
+    Valid Value  lan_config['IP Address']  ${network_configurations[0]['Address']}
+    Valid Value  lan_config['Subnet Mask']  ${network_configurations[0]['SubnetMask']}
+
+
+Test Disable VLAN Via IPMI
+    [Documentation]  Disable VLAN and verify via IPMI.
+    [Tags]  Test_Disable_VLAN_Via_IPMI
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+
+    Create VLAN Via IPMI  ${vlan_id}
+    Create VLAN Via IPMI  off
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']  ['Disabled']
+
+
 *** Keywords ***
 
 Create VLAN Via IPMI
@@ -117,6 +144,7 @@ Set IPMI Inband Network Configuration
 
     Run Inband IPMI Standard Command
     ...  lan set ${CHANNEL_NUMBER} ipsrc static  login_host=${login}
+    Run Inband IPMI Standard Command
     Run Inband IPMI Standard Command
     ...  lan set ${CHANNEL_NUMBER} ipaddr ${ip}  login_host=${0}
     Run Inband IPMI Standard Command
