@@ -4,10 +4,17 @@ Documentation          Module to test IPMI network functionality.
 Resource               ../lib/ipmi_client.robot
 Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/bmc_network_utils.robot
+Resource               ../lib/bmc_redfish_resource.robot
+Resource               ../lib/boot_utils.robot
 Library                ../lib/ipmi_utils.py
 Library                ../lib/gen_robot_valid.py
 Library                ../lib/var_funcs.py
 Library                ../lib/bmc_network_utils.py
+Resource               ../lib/bmc_redfish_utils.robot
+
+Resource               ../lib/boot_utils.robot
+Resource               ../lib/common_utils.robot
+Resource               ../lib/open_power_utils.robot
 
 Suite Setup            Redfish.Login
 Test Setup             Printn
@@ -17,6 +24,8 @@ Force Tags             IPMI_Network
 
 
 *** Variables ***
+${vlan_id}              ${10}
+${ip_address}           10.0.0.1
 
 ${initial_lan_config}   &{EMPTY}
 
@@ -87,19 +96,18 @@ Verify IPMI Inband Network Configuration
     [Tags]  Verify_IPMI_Inband_Network_Configuration
     [Teardown]  Run Keywords  Restore Configuration  AND  FFDC On Test Case Fail
 
-    Redfish Power On
-    ${initial_lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    ${initial_lan_config}=  Get LAN Print Dict  ipmi_cmd_type=inband
     Set Suite Variable  ${initial_lan_config}
-
+    
+    Redfish Power On
     Set IPMI Inband Network Configuration  10.10.10.10  255.255.255.0  10.10.10.10
     Sleep  10
 
-    ${lan_print_output}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    ${lan_print_output}=  Get LAN Print Dict  ipmi_cmd_type=inband
     Valid Value  lan_print_output['IP Address']  ["10.10.10.10"]
     Valid Value  lan_print_output['Subnet Mask']  ["255.255.255.0"]
     Valid Value  lan_print_output['Default Gateway IP']  ["10.10.10.10"]
-
-
+    
 Get IP Address Source And Verify Using Redfish
     [Documentation]  Get IP address source and verify it using Redfish.
     [Tags]  Get_IP_Address_Source_And_Verify_Using_Redfish
@@ -108,6 +116,51 @@ Get IP Address Source And Verify Using Redfish
     ${ip_address_source}=  Set Variable If  ${eth0['DHCPv4']['DHCPEnabled']}  DHCP  Static Address
     ${lan_config}=  Get LAN Print Dict
     Valid Value  lan_config['IP Address Source']  [${ip_address_source}]
+
+Test Create VLAN Via IPMI
+    [Documentation]  Create and verify VLAN Via IPMI
+    [Tags]  Test_Create_VLAN_Via_IPMI
+    [Teardown]  Run Keywords  Set VLAN id off  AND  Restore Configuration
+    
+    ${initial_lan_config}=  Get LAN Print Dict  ipmi_cmd_type=inband
+    Set Suite Variable  ${initial_lan_config}
+
+    Set VLAN id Via IPMI  ${vlan_id}
+
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Valid Value  lan_config['802.1q VLAN ID']   '${vlan_id}'
+
+
+Test Disable VLAN Via IPMI
+    [Documentation]  Crate And Delete VLAN And verify Via IPMI
+    [Tags]  Test_Disable_VLAN_Via_IPMI
+    [Teardown]  Restore Configuration
+
+    ${initial_lan_config}=  Get LAN Print Dict  ipmi_cmd_type=inband
+    Set Suite Variable  ${initial_lan_config}
+
+    Set VLAN id Via IPMI  ${vlan_id}
+    Set VLAN id off
+    
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']   'Disabled'
+
+Configure IP On VLAN Via IPMI
+    [Documentation]   Configure IP On VLAN Via IPMI
+    [Tags]  Configure_IP_On_VLAN_Via_IPMI
+    [Teardown]  Run Keywords  Set VLAN id off  AND  Restore Configuration
+
+    ${initial_lan_config}=  Get LAN Print Dict  ipmi_cmd_type=inband
+    Set Suite Variable  ${initial_lan_config}
+   
+    Set VLAN id Via IPMI  ${vlan_id}
+
+    Run Inband IPMI Standard Command
+    ...  lan set ${CHANNEL_NUMBER} ipaddr ${ip_address}  login_host=${0}
+
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Valid Value  lan_config['802.1q VLAN ID']   '${vlan_id}'
+    Valid Value  lan_config['IP Address']  ["${ip_address}"]
 
 
 *** Keywords ***
@@ -123,7 +176,6 @@ Get Physical Network Interface Count
     ${physical_interface_count}=  Get Length  ${mac_unique_list}
 
     [Return]  ${physical_interface_count}
-
 
 Set IPMI Inband Network Configuration
     [Documentation]  Run sequence of standard IPMI command in-band and set
@@ -186,3 +238,15 @@ Verify MAC Address
     ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}  MACAddress
     Rprint Vars  lan_print_ipmi  redfish_mac_address
     Valid Value  lan_print_ipmi['MAC Address']  ['${redfish_mac_address}']
+
+Set VLAN id Via IPMI
+    [Arguments]  ${vlan_id}
+    
+    Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access on
+    Run Inband IPMI Standard Command
+    ...  lan set ${CHANNEL_NUMBER} vlan id ${vlan_id}  login_host=${0}
+
+Set VLAN id off
+    Run Inband IPMI Standard Command
+    ...  lan set ${CHANNEL_NUMBER} vlan id off  login_host=${0}
+
