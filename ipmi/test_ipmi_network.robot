@@ -17,7 +17,11 @@ Force Tags             IPMI_Network
 
 
 *** Variables ***
-
+${vlan_id}              ${10}
+@{vlan_ids}             ${20}  ${30}
+${interface}            eth0
+${vlan_resource}        ${NETWORK_MANAGER}action/VLAN
+${ip_address}           10.0.0.1
 ${initial_lan_config}   &{EMPTY}
 
 
@@ -109,6 +113,82 @@ Get IP Address Source And Verify Using Redfish
     ${lan_config}=  Get LAN Print Dict
     Valid Value  lan_config['IP Address Source']  [${ip_address_source}]
 
+Create VLAN Via IPMI And Verify
+    [Documentation]  Create and verify VLAN via IPMI.
+    [Tags]  Test_Create_VLAN_Via_IPMI
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Configure VLAN Via IPMI  off  AND  Restore Configuration
+
+    Configure VLAN Via IPMI  ${vlan_id}
+
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
+    Valid Value  lan_config['IP Address']  ["${initial_lan_config['IP Address']}"]
+    Valid Value  lan_config['Subnet Mask']  ["${initial_lan_config['Subnet Mask']}"]
+
+Disable VLAN Via IPMI
+    [Documentation]  Disable VLAN and verify via IPMI.
+    [Tags]  Test_Disable_VLAN_Via_IPMI
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Configure VLAN Via IPMI  off  AND  Restore Configuration
+
+    Configure VLAN Via IPMI  ${vlan_id}
+    Configure VLAN Via IPMI  off
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']  ['Disabled']
+
+Configure IP On VLAN Via IPMI
+    [Documentation]   Configure IP On VLAN Via IPMI.
+    [Tags]  Configure_IP_On_VLAN_Via_IPMI
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Configure VLAN Via IPMI  off  AND  Restore Configuration
+
+    Configure VLAN Via IPMI  ${vlan_id}
+
+    Run Inband IPMI Standard Command
+    ...  lan set ${CHANNEL_NUMBER} ipaddr ${ip_address}  login_host=${0}
+
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
+    Valid Value  lan_config['IP Address']  ["${ip_address}"]
+
+    Configure VLAN Via IPMI  off
+
+Create VLAN Via IPMI When LAN And VLAN Exist On BMC
+    [Documentation]  Create VLAN Via IPMI When LAN And VLAN Exist On BMC.
+    [Tags]   Create_VLAN_Via_IPMI_When_LAN_And_VLAN_Exist_On_BMC
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Configure VLAN Via IPMI  off  AND  Restore Configuration
+
+    @{data_vlan_id}=  Create List  ${interface}  ${vlan_id}
+    ${data}=  Create Dictionary   data=@{data_vlan_id}
+    ${resp}=  OpenBMC Post Request  ${vlan_resource}  data=${data}
+
+    Configure VLAN Via IPMI  ${vlan_id}
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
+
+    Configure VLAN Via IPMI  off
+
+Disable VLAN Via IPMI When Multiple VLAN Exist On BMC
+    [Documentation]  Disable  VLAN Via IPMI When Multiple VLAN Exist On BMC.
+    [Tags]   Test_Disable_VLAN_Via_IPMI_When_LAN_And_VLAN_Exist_On_BMC
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Configure VLAN Via IPMI  off  AND  Restore Configuration
+
+    FOR  ${id}  IN  @{vlan_ids}
+      @{data_vlan_id}=  Create List  ${interface}  ${id}
+      ${data}=  Create Dictionary   data=@{data_vlan_id}
+      ${resp}=  OpenBMC Post Request  ${vlan_resource}  data=${data}
+    END
+
+    Configure VLAN Via IPMI  off
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']  ['Disabled']
+
 
 *** Keywords ***
 
@@ -186,3 +266,13 @@ Verify MAC Address
     ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}  MACAddress
     Rprint Vars  lan_print_ipmi  redfish_mac_address
     Valid Value  lan_print_ipmi['MAC Address']  ['${redfish_mac_address}']
+
+
+Configure VLAN Via IPMI
+    [Arguments]  ${vlan_id}  ${channel_number}=${CHANNEL_NUMBER}
+
+    # Description of argument(s):
+    # vlan_id  The VLAN ID (e.g. '10').
+
+    Run Inband IPMI Standard Command
+    ...  lan set ${channel_number} vlan id ${vlan_id}  login_host=${0}
