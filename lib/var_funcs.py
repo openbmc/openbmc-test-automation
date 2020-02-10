@@ -914,3 +914,44 @@ def filter_struct(structure, filter_dict, regex=False, invert=False):
                 result[struct_key] = struct_value
 
     return result
+
+
+def split_dict_on_key(split_key, dictionary):
+    r"""
+    Split a dictionary into two dictionaries based on the first occurrence of the split key and return the
+    resulting sub-dictionaries.
+
+    Example:
+    dictionary = {'one': 1, 'two': 2, 'three':3, 'four':4}
+    dict1, dict2 = split_dict_on_key('three', dictionary)
+    pvars(dictionary, dict1, dict2)
+
+    Output:
+    dictionary:
+      [one]:                                          1
+      [two]:                                          2
+      [three]:                                        3
+      [four]:                                         4
+    dict1:
+      [one]:                                          1
+      [two]:                                          2
+    dict2:
+      [three]:                                        3
+      [four]:                                         4
+
+    Description of argument(s):
+    split_key                       The key value to be used to determine where the dictionary should be
+                                    split.
+    dictionary                      The dictionary to be split.
+    """
+    dict1 = {}
+    dict2 = {}
+    found_split_key = False
+    for key in list(dictionary.keys()):
+        if key == split_key:
+            found_split_key = True
+        if found_split_key:
+            dict2[key] = dictionary[key]
+        else:
+            dict1[key] = dictionary[key]
+    return dict1, dict2
