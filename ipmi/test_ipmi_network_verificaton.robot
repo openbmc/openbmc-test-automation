@@ -98,6 +98,33 @@ Get IP Address Source And Verify Using Redfish
     Valid Value  lan_config['IP Address Source']  ['${ip_address_source}']
 
 
+Create VLAN Via IPMI And Verify
+    [Documentation]  Create and verify VLAN via IPMI.
+    [Tags]  Create_VLAN_Via_IPMI_And_Verify
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+
+    Create VLAN Via IPMI  ${vlan_id}
+
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
+    Valid Value  lan_config['IP Address']  ["${initial_lan_config['IP Address']}"]
+    Valid Value  lan_config['Subnet Mask']  ["${initial_lan_config['Subnet Mask']}"]
+
+
+Test Disable VLAN Via IPMI
+    [Documentation]  Disable VLAN and verify via IPMI.
+    [Tags]  Test_Disable_VLAN_Via_IPMI
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+
+    Create VLAN Via IPMI  ${vlan_id}
+    Create VLAN Via IPMI  off
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']  ['Disabled']
+
+
 *** Keywords ***
 
 Get Physical Network Interface Count
@@ -144,3 +171,30 @@ Verify MAC Address
     ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}  MACAddress
     Rprint Vars  lan_print_ipmi  redfish_mac_address
     Valid Value  lan_print_ipmi['MAC Address']  ['${redfish_mac_address}']
+
+
+Create VLAN Via IPMI
+    [Documentation]  Create VLAN via inband IPMI command.
+
+    [Arguments]  ${vlan_id}  ${channel_number}=${CHANNEL_NUMBER}
+
+    # Description of argument(s):
+    # vlan_id  The VLAN ID (e.g. '10').
+
+    Run Inband IPMI Standard Command
+    ...  lan set ${channel_number} vlan id ${vlan_id}  login_host=${0}
+
+
+Suite Setup Execution
+    [Documentation]  Suite Setup Execution.
+
+    Redfish.Login
+
+    Run Inband IPMI Standard Command
+    ...  lan set ${CHANNEL_NUMBER} ipsrc static  login_host=${1}
+
+    @{network_configurations}=  Get Network Configuration
+    Set Suite Variable  @{network_configurations}
+
+    ${initial_lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Set Suite Variable  ${initial_lan_config}
