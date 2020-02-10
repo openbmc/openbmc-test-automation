@@ -18,6 +18,7 @@ Resource                 ../../lib/code_update_utils.robot
 Resource                 ../../lib/dump_utils.robot
 Resource                 ../../lib/logging_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
+Resource                 ../../lib/utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
 
@@ -78,9 +79,12 @@ Redfish Update Firmware
     # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
     Redfish.Login
+    ${post_code_update_actions}=  Get Post Boot Action
     Set ApplyTime  policy=${apply_Time}
     Redfish Upload Image And Check Progress State
-    Poweron Host And Verify Host Image  ${apply_time}
+    Run Key  ${post_code_update_actions['Host image']['${apply_time}']}
+    Redfish.Login
+    Redfish Verify Host Version  ${IMAGE_FILE_PATH}
     Verify Get ApplyTime  ${apply_time}
 
 
