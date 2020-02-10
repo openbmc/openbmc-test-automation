@@ -108,11 +108,13 @@ Get IP Address Source And Verify Using Redfish
     ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}
 
     ${ipv4_addresses}=  Redfish.Get Attribute
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}  IPv4Addresses
+    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel
+    ... _config['${CHANNEL_NUMBER}']['name']}  IPv4Addresses
 
     FOR  ${ipv4_address}  IN  @{ipv4_addresses}
-          ${ip_address_source}=  Set Variable if  '${ipv4_address['Address']}' == '${lan_config['IP Address']}'
-          ...  ${ipv4_address['AddressOrigin']} Address
+        ${ip_address_source}=
+        ...  Set Variable if  '${ipv4_address['Address']}' == '${lan_config['IP Address']}'
+        ...  ${ipv4_address['AddressOrigin']} Address
           Exit For Loop IF  "${ip_address_source}" != 'None'
     END
 
