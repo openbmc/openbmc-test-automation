@@ -17,6 +17,8 @@ Force Tags             IPMI_Network
 
 
 *** Variables ***
+${vlan_id}              ${10}
+${ip_address}           10.0.0.1
 
 ${initial_lan_config}   &{EMPTY}
 
@@ -99,7 +101,6 @@ Verify IPMI Inband Network Configuration
     Valid Value  lan_print_output['Subnet Mask']  ["255.255.255.0"]
     Valid Value  lan_print_output['Default Gateway IP']  ["10.10.10.10"]
 
-
 Get IP Address Source And Verify Using Redfish
     [Documentation]  Get IP address source and verify it using Redfish.
     [Tags]  Get_IP_Address_Source_And_Verify_Using_Redfish
@@ -108,6 +109,36 @@ Get IP Address Source And Verify Using Redfish
     ${ip_address_source}=  Set Variable If  ${eth0['DHCPv4']['DHCPEnabled']}  DHCP  Static Address
     ${lan_config}=  Get LAN Print Dict
     Valid Value  lan_config['IP Address Source']  [${ip_address_source}]
+
+Create VLAN Via IPMI And Verify
+    [Documentation]  Create and verify VLAN via IPMI.
+    [Tags]  Test_Create_VLAN_Via_IPMI
+    [Setup]  Setup Execution
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...   Configure VLAN Via IPMI  off   AND  Restore Configuration
+
+    Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access on
+    Configure VLAN Via IPMI  ${vlan_id}
+
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Valid Value  lan_config['802.1q VLAN ID']   '${vlan_id}'
+    Valid Value  lan_config['IP Address']     ${initial_lan_config['IP Address']}
+    Valid Value  lan_config['Subnet Mask']     ${initial_lan_config['Subnet Mask']}
+
+Test Disable VLAN Via IPMI
+    [Documentation]  Disable VLAN and verify via IPMI.
+    [Tags]  Test_Disable_VLAN_Via_IPMI
+    [Setup]  Setup Execution
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...   Configure VLAN Via IPMI  off  AND  Restore Configuration
+
+    Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access on
+
+    Configure VLAN Via IPMI  ${vlan_id}
+    Configure VLAN Via IPMI  off
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']   'Disabled'
 
 
 *** Keywords ***
@@ -123,7 +154,6 @@ Get Physical Network Interface Count
     ${physical_interface_count}=  Get Length  ${mac_unique_list}
 
     [Return]  ${physical_interface_count}
-
 
 Set IPMI Inband Network Configuration
     [Documentation]  Run sequence of standard IPMI command in-band and set
@@ -186,3 +216,17 @@ Verify MAC Address
     ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}  MACAddress
     Rprint Vars  lan_print_ipmi  redfish_mac_address
     Valid Value  lan_print_ipmi['MAC Address']  ['${redfish_mac_address}']
+
+Configure VLAN Via IPMI
+    [Arguments]  ${vlan_id}
+
+    # Description of argument(s):
+    # vlan_id  The VLAN ID (e.g. '10').
+
+    Run Inband IPMI Standard Command
+    ...  lan set ${CHANNEL_NUMBER} vlan id ${vlan_id}  login_host=${0}
+
+Setup Execution
+    ${initial_lan_config}=  Get LAN Print Dict  ipmi_cmd_type=inband
+    Set Suite Variable  ${initial_lan_config}
+
