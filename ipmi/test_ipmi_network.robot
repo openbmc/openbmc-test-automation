@@ -17,7 +17,8 @@ Force Tags             IPMI_Network
 
 
 *** Variables ***
-
+${vlan_id}              ${10}
+${ip_address}           10.0.0.1
 ${initial_lan_config}   &{EMPTY}
 
 
@@ -109,6 +110,31 @@ Get IP Address Source And Verify Using Redfish
     ${lan_config}=  Get LAN Print Dict
     Valid Value  lan_config['IP Address Source']  [${ip_address_source}]
 
+Create VLAN Via IPMI And Verify
+    [Documentation]  Create and verify VLAN via IPMI.
+    [Tags]  Test_Create_VLAN_Via_IPMI
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+
+    Create VLAN Via IPMI  ${vlan_id}
+
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
+    Valid Value  lan_config['IP Address']  ["${initial_lan_config['IP Address']}"]
+    Valid Value  lan_config['Subnet Mask']  ["${initial_lan_config['Subnet Mask']}"]
+
+Disable VLAN Via IPMI
+    [Documentation]  Disable VLAN and verify via IPMI.
+    [Tags]  Test_Disable_VLAN_Via_IPMI
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+
+    Create VLAN Via IPMI  ${vlan_id}
+    Create VLAN Via IPMI  off
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']  ['Disabled']
+
 
 *** Keywords ***
 
@@ -186,3 +212,13 @@ Verify MAC Address
     ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}  MACAddress
     Rprint Vars  lan_print_ipmi  redfish_mac_address
     Valid Value  lan_print_ipmi['MAC Address']  ['${redfish_mac_address}']
+
+
+Create VLAN Via IPMI
+    [Arguments]  ${vlan_id}  ${channel_number}=${CHANNEL_NUMBER}
+
+    # Description of argument(s):
+    # vlan_id  The VLAN ID (e.g. '10').
+
+    Run Inband IPMI Standard Command
+    ...  lan set ${channel_number} vlan id ${vlan_id}  login_host=${0}
