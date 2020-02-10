@@ -237,7 +237,7 @@ Verify Operator User Privilege
     # Login with operator user.
     Redfish.Login  operator_user  TestPwd123
 
-    # Verify power on system.
+    # Verify BMC reset.
     Redfish OBMC Reboot (off)  stack_mode=normal
 
     # Attempt to change password of admin user with operator user.
