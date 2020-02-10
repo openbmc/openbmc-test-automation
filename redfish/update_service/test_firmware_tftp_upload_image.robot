@@ -16,6 +16,7 @@ Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/code_update_utils.robot
 Resource         ../../lib/redfish_code_update_utils.robot
+Resource         ../../lib/utils.robot
 Library          ../../lib/code_update_utils.py
 Library          ../../lib/gen_robot_valid.py
 Library          ../../lib/tftp_update_utils.py
@@ -91,6 +92,7 @@ TFTP Download Install
     # Description of argument(s):
     # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
+    ${post_code_update_actions}=  Get Post Boot Action
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
 
@@ -118,7 +120,7 @@ TFTP Download Install
     Wait Until Keyword Succeeds  8 min  15 sec
     ...  Check Image Update Progress State  match_state='Enabled'  image_id=${image_id}
 
-    Reboot And Wait For BMC Standby  policy=${policy}  start_boot_seconds=${state['epoch_seconds']}
+    Run Key  ${post_code_update_actions['BMC image']['${policy}']}
 
     # Verify the image is installed and functional.
     ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '=' | sed 's/"//g'
@@ -134,6 +136,7 @@ ImageURI Download Install
     # Description of argument(s):
     # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
+    ${post_code_update_actions}=  Get Post Boot Action
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
 
@@ -160,7 +163,7 @@ ImageURI Download Install
     Wait Until Keyword Succeeds  8 min  15 sec
     ...  Check Image Update Progress State  match_state='Enabled'  image_id=${image_id}
 
-    Reboot And Wait For BMC Standby  policy=${policy}  start_boot_seconds=${state['epoch_seconds']}
+    Run Key  ${post_code_update_actions['BMC image']['${policy}']}
 
     # Verify the image is installed and functional.
     ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '=' | sed 's/"//g'
@@ -197,16 +200,3 @@ Same Firmware Install Two Times
     Pass Execution If  ${software_inventory_record['functional']}
     ...  The existing ${image_version} firmware is already functional.
 
-
-Reboot And Wait For BMC Standby
-    [Documentation]  Reboot or wait for BMC standby post reboot.
-    [Arguments]  ${policy}  ${start_boot_seconds}
-
-    # Description of argument(s):
-    # policy                ApplyTime allowed values (e.g. "OnReset", "Immediate").
-    # start_boot_seconds    See 'Wait For Reboot' for details.
-
-    Run Keyword If  '${policy}' == 'OnReset'
-    ...    Redfish OBMC Reboot (off)
-    ...  ELSE
-    ...    Wait For Reboot  start_boot_seconds=${start_boot_seconds}
