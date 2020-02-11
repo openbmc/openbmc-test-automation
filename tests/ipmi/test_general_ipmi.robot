@@ -30,14 +30,14 @@ Verify Chassis Identify via IPMI
     Run IPMI Standard Command  chassis identify
     Verify Identify LED State  ${1}
 
-    Sleep  15s
+    Sleep  18s
     Verify Identify LED State  ${0}
 
     # Set "chassis identify" to 10s and verify that the LED blinks for 10s.
     Run IPMI Standard Command  chassis identify 10
     Verify Identify LED State  ${1}
 
-    Sleep  10s
+    Sleep  12s
     Verify Identify LED State  ${0}
 
 
