@@ -77,6 +77,26 @@ Verify CA Certificate Install
     CA           Empty Certificate  error
 
 
+Verify Maximum CA Certificate Install
+    [Documentation]  Verify maximum CA certificate install.
+    [Tags]  Verify_Maximum_CA_Certificate_Install
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Delete All CA Certificate Via Redfish
+
+    # Get CA certificate count from BMC.
+    redfish.Login
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Truststore/Certificates
+    ${cert_count}=  Get Length  ${cert_list}
+
+    # Install CA certificate to reach maximum count of 10.
+    FOR  ${INDEX}  IN RANGE  ${cert_count}  10
+      Install And Verify Certificate Via Redfish  CA  Valid Certificate  ok  ${FALSE}
+      ${cert_count}=  Evaluate  ${cert_count} + 1
+    END
+
+    # Verify error while installing 11th CA certificate.
+    Install And Verify Certificate Via Redfish  CA  Valid Certificate  error  ${FALSE}
+
+
 Verify Server Certificate View Via Openssl
     [Documentation]  Verify server certificate via openssl command.
     [Tags]  Verify_Server_Certificate_View_Via_Openssl
@@ -147,7 +167,7 @@ Verify CSR Generation For Client Certificate With Invalid Value
 
 Install And Verify Certificate Via Redfish
     [Documentation]  Install and verify certificate using Redfish.
-    [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}
+    [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}  ${delete_cert}=${True}
 
     # Description of argument(s):
     # cert_type           Certificate type (e.g. "Client" or "CA").
@@ -155,10 +175,13 @@ Install And Verify Certificate Via Redfish
     #                     (e.g. "Valid_Certificate_Valid_Privatekey").
     # expected_status     Expected status of certificate replace Redfish
     #                     request (i.e. "ok" or "error").
+    # delete_cert         Certificate will be deleted before installing if this True.
 
     redfish.Login
-    Run Keyword If  '${cert_type}' == 'CA'  Delete All CA Certificate Via Redfish
-    ...  ELSE IF  '${cert_type}' == 'Client'  Delete Certificate Via BMC CLI  ${cert_type}
+    Run Keyword If  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
+    ...  Delete All CA Certificate Via Redfish
+    ...  ELSE IF  '${cert_type}' == 'Client' and '${delete_cert}' == '${True}'
+    ...  Delete Certificate Via BMC CLI  ${cert_type}
 
     ${time}=  Set Variable If  '${cert_format}' == 'Expired Certificate'  -10  365
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
