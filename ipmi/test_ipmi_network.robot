@@ -104,9 +104,18 @@ Get IP Address Source And Verify Using Redfish
     [Documentation]  Get IP address source and verify it using Redfish.
     [Tags]  Get_IP_Address_Source_And_Verify_Using_Redfish
 
-    ${eth0}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0
-    ${ip_address_source}=  Set Variable If  ${eth0['DHCPv4']['DHCPEnabled']}  DHCP  Static Address
-    ${lan_config}=  Get LAN Print Dict
+    ${active_channel_config}=  Get Active Channel Config
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}
+
+    ${ipv4_addresses}=  Redfish.Get Attribute
+    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}  IPv4Addresses
+
+    FOR  ${ipv4_address}  IN  @{ipv4_addresses}
+          ${ip_address_source}=  Set Variable if  '${ipv4_address['Address']}' == '${lan_config['IP Address']}'
+          ...  ${ipv4_address['AddressOrigin']} Address
+          Exit For Loop IF  "${ip_address_source}" != 'None'
+    END
+
     Valid Value  lan_config['IP Address Source']  [${ip_address_source}]
 
 
