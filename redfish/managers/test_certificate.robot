@@ -180,6 +180,7 @@ Install And Verify Certificate Via Redfish
     ...  ${certificate_uri}/${cert_id}  CertificateString
 
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    [Return]  ${cert_id}
 
 
 Install Certificate File On BMC
@@ -225,7 +226,7 @@ Replace Certificate Via Redfish
     #                     request (i.e. "ok" or "error").
 
     # Install certificate before replacing client or CA certificate.
-    Run Keyword If  '${cert_type}' == 'Client'
+    ${cert_id}=  Run Keyword If  '${cert_type}' == 'Client'
     ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate Valid Privatekey  ok
     ...  ELSE IF  '${cert_type}' == 'CA'
     ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate  ok
@@ -241,7 +242,7 @@ Replace Certificate Via Redfish
     ${certificate_uri}=  Set Variable If
     ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
     ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}/1
-    ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}/1
+    ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}/${cert_id}
 
     ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
     ${payload}=  Create Dictionary  CertificateString=${file_data}
