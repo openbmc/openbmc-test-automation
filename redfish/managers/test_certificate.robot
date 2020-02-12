@@ -97,6 +97,25 @@ Verify Maximum CA Certificate Install
     Install And Verify Certificate Via Redfish  CA  Valid Certificate  error  ${FALSE}
 
 
+Verify Error While Uploding Same CA Certificate
+    [Documentation]  Verify error while uploading same CA certificate two times.
+    [Tags]  Verify_Error_While_Uploding_Same_CA_Certificate
+
+    # Create certificate file.
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    # Install CA certificate
+    Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Adding delay after certificate installation.
+    Sleep  30s
+
+    # Check error while uploading same certificate.
+    Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  error  data=${file_data}
+
+
 Verify Server Certificate View Via Openssl
     [Documentation]  Verify server certificate via openssl command.
     [Tags]  Verify_Server_Certificate_View_Via_Openssl
@@ -203,6 +222,7 @@ Install And Verify Certificate Via Redfish
     ...  ${certificate_uri}/${cert_id}  CertificateString
 
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
+
 
 
 Install Certificate File On BMC
