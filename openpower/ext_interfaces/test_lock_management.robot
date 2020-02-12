@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation    Test Save Area feature of Management Console on BMC.
+Documentation    Test Lock Management feature of Management Console on BMC.
 
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/openbmc_ffdc.robot
@@ -9,19 +9,98 @@ Resource          ../../lib/bmc_redfish_utils.robot
 Resource          ../../lib/utils.robot
 
 Suite Setup    Suite Setup Execution
-Test Teardown  Test Teardown Execution
+#Test Teardown  Test Teardown Execution
 
 
 *** Variables ***
 
-${MAX_SIZE_MSG}           File size exceeds 200KB. Maximum allowed size is 200KB
-${UPLOADED_MSG}           File Created
-${FORBIDDEN_MSG}          Forbidden
-${FILE_CREATE_ERROR_MSG}  Error while creating the file
+&{LOCKALL_LEN1}                 LockFlag=LockAll  SegmentLength=${1}
+&{LOCKALL_LEN2}                 LockFlag=LockAll  SegmentLength=${2}
+&{LOCKALL_LEN3}                 LockFlag=LockAll  SegmentLength=${3}
+&{LOCKALL_LEN4}                 LockFlag=LockAll  SegmentLength=${4}
+&{LOCKALL_LEN5}                 LockFlag=LockAll  SegmentLength=${5}
+&{LOCKALL_INVALID_LEN1}         LockFlag=LOCKALL  SegmentLength=${1}
+&{LOCKALL_INVALID_LEN2}         LockFlag=LOCKAL   SegmentLength=${2}
+&{LOCKALL_INVALID_LEN3}         LockFla=LockAll   SegmentLength=${3}
+&{LOCKALL_INVALID_LEN2}         LOCKFLAG=LockAll  SegmentLength=${4}
+
+&{LOCKSAME_LEN1}                LockFlag=LockSame  SegmentLength=${1}
+&{LOCKSAME_LEN2}                LockFlag=LockSame  SegmentLength=${2}
+&{LOCKSAME_LEN3}                LockFlag=LockSame  SegmentLength=${3}
+&{LOCKSAME_LEN4}                LockFlag=LockSame  SegmentLength=${4}
+&{LOCKSAME_LEN5}                LockFlag=LockSame  SegmentLength=${5}
+&{LOCKSAME_INVALID_LEN1}        Lock=LOCK          SegmentLength=${1}
+&{LOCKSAME_INVALID_LEN_STR}     LockFlag=LockSame  SegmentLength=2
+&{LOCKSAME_INVALID_LEN_NEG}     LockFlag=LockSame  SegmentLength=${-3}
+&{LOCKSAME_INVALID_LEN_BOOL}    LockFlag=LockSame  SegmentLength=${True}
+
+&{DONTLOCK_LEN1}                LockFlag=DontLock  SegmentLength=${1}
+&{DONTLOCK_LEN2}                LockFlag=DontLock  SegmentLength=${2}
+&{DONTLOCK_LEN3}                LockFlag=DontLock  SegmentLength=${3}
+&{DONTLOCK_LEN4}                LockFlag=DontLock  SegmentLength=${4}
+&{DONTLOCK_LEN5}                LockFlag=DontLock  SegmentLength=${5}
+&{DONTLOCK_LEN5}                LockFlag=DontLock  SegmentLength=${5}
+&{DONTLOCK_INVALID_LEN_BOOL}    LockFlag=DONTLOCK  SegmentLength=${False}
+
+@{ONE_SEG_FLAG_ALL}             ${LOCKALL_LEN1}
+@{ONE_SEG_FLAG_SAME}            ${LOCKSAME_LEN3}
+@{ONE_SEG_FLAG_DONT}            ${DONTLOCK_LEN4}
+
+@{TWO_SEG_FLAG_1}               ${LOCKALL_LEN1}   ${LOCKSAME_LEN2}
+@{TWO_SEG_FLAG_2}               ${LOCKALL_LEN1}   ${DONTLOCK_LEN3}
+@{TWO_SEG_FLAG_3}               ${LOCKSAME_LEN3}  ${DONTLOCK_LEN4}
+
+@{TWO_SEG_FLAG_INVALID1}        ${LOCKSAME_INVALID_LEN1}  ${DONTLOCK_LEN4}
+@{TWO_SEG_FLAG_INVALID2}        ${LOCKSAME_INVALID_LEN_STR}  ${LOCKALL_LEN1}
+
+@{THREE_SEG_FLAG_1}             ${LOCKALL_LEN1}   ${TWO_SEG_FLAG_3}
+@{THREE_SEG_FLAG_2}             ${LOCKSAME_LEN4}  @{TWO_SEG_FLAG_2}
+@{THREE_SEG_FLAG_3}             ${DONTLOCK_LEN3}  @{TWO_SEG_FLAG_1}
+
+@{FOUR_SEG_FLAG_1}              ${LOCKALL_LEN1}   @{THREE_SEG_FLAG_2}
+@{FOUR_SEG_FLAG_2}              ${LOCKSAME_LEN4}  @{THREE_SEG_FLAG_3}
+@{FOUR_SEG_FLAG_3}              ${DONTLOCK_LEN3}  @{THREE_SEG_FLAG_1}
+
+@{FOUR_SEG_FLAG_INVALID1}       ${LOCKALL_LEN1}  ${LOCKSAME_INVALID_LEN_NEG}
+@{FOUR_SEG_FLAG_INVALID2}       ${LOCKSAME_LEN4}  ${DONTLOCK_INVALID_LEN_BOOL}
+
+@{FIVE_SEG_FLAG_1}              ${LOCKALL_LEN1}   @{FOUR_SEG_FLAG_2}
+@{FIVE_SEG_FLAG_2}              ${LOCKSAME_LEN4}  @{FOUR_SEG_FLAG_3}
+@{FIVE_SEG_FLAG_3}              ${DONTLOCK_LEN3}  @{FOUR_SEG_FLAG_1}
+
+@{SIX_SEG_FLAG_1}               ${LOCKALL_LEN1}   @{FIVE_SEG_FLAG_2}
+@{SIX_SEG_FLAG_2}               ${LOCKSAME_LEN4}  @{FIVE_SEG_FLAG_3}
+@{SIX_SEG_FLAG_3}               ${DONTLOCK_LEN3}  @{FIVE_SEG_FLAG_1}
+
+@{SEVEN_SEG_FLAG_1}             ${LOCKALL_LEN1}   @{SIX_SEG_FLAG_2}
+@{SEVEN_SEG_FLAG_2}             ${LOCKSAME_LEN4}  @{SIX_SEG_FLAG_3}
+@{SEVEN_SEG_FLAG_3}             ${DONTLOCK_LEN3}  @{SIX_SEG_FLAG_1}
+
+
+${LOCKFLAG_REQUIRED_MSG}  The property LockFlag is a required property and must be included in the request.
+${LOCKFLAG_INVALID_MSG}   The property LockFla is not in the list of valid properties for the resource.
+${INVALID_SEG_LEN_MSG}    for the property SegmentLength is of a different type than the property can accept.
+
+
+#@{TWO_SEG_FLAG}              ${LOCKALL_1}  ${LOCKSAME_2}
+#&{TWO_SEG_FLAG_READ}         LockType=Read  SegmentFlags=${TWO_SEG_FLAG}  ResourceID=${216173882346831872}
+#@{TWO_SEG_FLAG_READ_ENTRIES}  ${TWO_SEG_FLAG_READ}
+#&{TWO_SEG_FLAG_READ_REQ}     Request=${TWO_SEG_FLAG_READ_ENTRIES}
+
 
 
 *** Test Cases ***
 
+Print Variables
+    [Documentation]  Print Variables
+
+#    ${dict}=  Run Keyword  Return Data Dictionary For Single Request  Read  ${THREE_SEG_FLAG_2}  216173882346831872
+    ${dict}=  Run Keyword  Return Data Dictionary For Single Request  Write  ${TWO_SEG_FLAG_INVALID1}  134
+    ${dict}=  Run Keyword  Return Data Dictionary For Single Request  Write  ${TWO_SEG_FLAG_INVALID2}  134
+    ${dict}=  Run Keyword  Return Data Dictionary For Single Request  Write  ${FOUR_SEG_FLAG_INVALID2}  1345
+  
+
+*** comment ***
 Verify Small Partition File Upload And Delete
     [Documentation]  Verify small partition file upload and delete.
     [Tags]  Verify_Small_Partition_File_Upload_And_Delete
@@ -154,6 +233,17 @@ Verify One Thousand Partitions File Upload
 
 
 *** Keywords ***
+
+Return Data Dictionary For Single Request
+    [Documentation]  Return data dictionary for single request.
+    [Arguments]  ${lock}  ${SegFlags}  ${resource_id}
+
+    ${SEG_FLAGS_LOCK}=  Create Dictionary  LockType=${lock}  SegmentFlags=@{SegFlags}  ResourceID=${${resource_id}}
+    ${SEG_FLAGS_ENTRIES}=  Create List  ${SEG_FLAGS_LOCK}
+    ${LOCK_REQUEST}=  Create Dictionary  Request=${SEG_FLAGS_ENTRIES}
+
+    [Return]  ${LOCK_REQUEST}
+
 
 Create Partition File
     [Documentation]  Create partition file.
@@ -406,5 +496,5 @@ Test Teardown Execution
     [Documentation]  Test teardown execution.
 
     Delete And Verify All Partitions on BMC
-    FFDC On Test Case Fail
+#    FFDC On Test Case Fail
 
