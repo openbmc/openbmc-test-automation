@@ -126,8 +126,13 @@ Create IPMI User And Verify Login Via Redfish
     ${username}  ${userid}=  IPMI Create Random User Plus Password And Privilege
     ...  ${valid_password}  ${admin_level_priv}
 
+    Redfish.Logout
+
     # Verify user login using Redfish.
     Redfish.Login  ${username}  ${valid_password}
+    Redfish.Logout
+
+    Redfish.Login
 
 
 Update User Password Via IPMI And Verify Using Redfish
@@ -142,8 +147,13 @@ Update User Password Via IPMI And Verify Using Redfish
     Run IPMI Standard Command
     ...  user set password ${userid} ${valid_password2}
 
+    Redfish.Logout
+
     # Verify that user login works with new password using Redfish.
     Redfish.Login  ${username}  ${valid_password2}
+    Redfish.Logout
+
+    Redfish.Login
 
 
 Update User Privilege Via IPMI And Verify Using Redfish
