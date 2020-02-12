@@ -71,5 +71,22 @@ IPMI_RAW_CMD = {
             "dc",
             "Disable nibble position 6th LSB e.g. 0x00",
         ]
+    },
+    'SEL_entry':
+    {
+        'Add':
+        [
+            # raw command, expected output, comment
+            "0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00 0x04 0x01 0x17 0x00 0xa0 0x04 0x07",
+            "02 00",
+            "02 00 is Record ID for added record, LS Byte first",
+        ],
+        'Reserve':
+        [
+            # raw command, expected output, comment
+            "0x0a 0x42",
+            "27 00",
+            "27 is Reservation ID, LSB, 00 Reservation ID, MSB ",
+        ]
     }
 }
