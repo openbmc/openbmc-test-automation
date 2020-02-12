@@ -31,3 +31,10 @@ Verify BMC Power Cycle via IPMI
     [Tags]  Verify_BMC_Power_Cycle_via_IPMI
 
     Repeat Keyword  ${LOOP_COUNT} times  IPMI Power Cycle
+
+
+Verify Power Reset via IPMI
+    [Documentation]  Verify IPMI power reset command works fine.
+    [Tags]  Verify_Power_Reset_via_IPMI
+
+    Repeat Keyword  ${LOOP_COUNT} times  IPMI Power Reset
