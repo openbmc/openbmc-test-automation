@@ -182,6 +182,18 @@ Set Valid SOL Character Send Threshold
     # Setting name              Min valid value    Max valid value
     character-send-threshold    0                  255
 
+
+Verify Continuous Activation And Deactivation Of SOL
+    [Documentation]  Continuously on and off SOL.
+    [Tags]  Verify_Continuous_Activation_And_Deactivation_Of_SOL
+
+    ${iteration_count}=  Evaluate  random.randint(5,10)  modules=random
+    FOR  ${iter}  IN RANGE  ${iteration_count}
+        Activate SOL Via IPMI
+        Deactivate SOL Via IPMI
+    END
+
+
 *** Keywords ***
 
 Check IPMI SOL Output Content
