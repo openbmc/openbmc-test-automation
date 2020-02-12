@@ -30,7 +30,6 @@ Verify Redfish User Persistence After Reboot
     Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
     Redfish Create User  operator_user  TestPwd123  Operator        ${True}
     Redfish Create User  readonly_user  TestPwd123  ReadOnly        ${True}
-    Redfish Create User  callback_user  TestPwd123  Callback        ${True}
 
     # Reboot BMC.
     Redfish OBMC Reboot (off)  stack_mode=normal
@@ -40,13 +39,11 @@ Verify Redfish User Persistence After Reboot
     Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
     Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
     Redfish Verify User  readonly_user  TestPwd123  ReadOnly        ${True}
-    Redfish Verify User  callback_user  TestPwd123  Callback        ${True}
 
     # Delete created users.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/callback_user
 
 Redfish Create and Verify Users
     [Documentation]  Create Redfish users with various roles.
@@ -57,7 +54,6 @@ Redfish Create and Verify Users
     admin_user     TestPwd123  Administrator   ${True}
     operator_user  TestPwd123  Operator        ${True}
     readonly_user  TestPwd123  ReadOnly        ${True}
-    callback_user  TestPwd123  Callback        ${True}
 
 Verify Redfish User with Wrong Password
     [Documentation]  Verify Redfish User with Wrong Password.
@@ -68,7 +64,6 @@ Verify Redfish User with Wrong Password
     admin_user     TestPwd123  Administrator   ${True}  alskjhfwurh
     operator_user  TestPwd123  Operator        ${True}  12j8a8uakjhdaosiruf024
     readonly_user  TestPwd123  ReadOnly        ${True}  12
-    callback_user  TestPwd123  Callback        ${True}  !#@D#RF#@!D
 
 Verify Login with Deleted Redfish Users
     [Documentation]  Verify login with deleted Redfish Users.
@@ -79,7 +74,6 @@ Verify Login with Deleted Redfish Users
     admin_user     TestPwd123  Administrator   ${True}
     operator_user  TestPwd123  Operator        ${True}
     readonly_user  TestPwd123  ReadOnly        ${True}
-    callback_user  TestPwd123  Callback        ${True}
 
 Verify User Creation Without Enabling It
     [Documentation]  Verify User Creation Without Enabling it.
@@ -90,7 +84,6 @@ Verify User Creation Without Enabling It
     admin_user     TestPwd123  Administrator   ${False}
     operator_user  TestPwd123  Operator        ${False}
     readonly_user  TestPwd123  ReadOnly        ${False}
-    callback_user  TestPwd123  Callback        ${False}
 
 
 Verify User Creation With Invalid Role Id
@@ -129,7 +122,6 @@ Verify Modifying User Attributes
     Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
     Redfish Create User  operator_user  TestPwd123  Operator        ${True}
     Redfish Create User  readonly_user  TestPwd123  ReadOnly        ${True}
-    Redfish Create User  callback_user  TestPwd123  Callback        ${True}
 
     Redfish.Login
 
@@ -149,21 +141,15 @@ Verify Modifying User Attributes
     ${payload}=  Create Dictionary  RoleId=Operator
     Redfish.Patch  /redfish/v1/AccountService/Accounts/readonly_user  body=&{payload}
 
-    # Update callback_user to disable using Redfish.
-    ${payload}=  Create Dictionary  Enabled=${False}
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/callback_user  body=&{payload}
-
     # Verify users after updating
     Redfish Verify User  newadmin_user  TestPwd123     Administrator   ${True}
     Redfish Verify User  operator_user  NewTestPwd123  Operator        ${True}
     Redfish Verify User  readonly_user  TestPwd123     Operator        ${True}
-    Redfish Verify User  callback_user  TestPwd123     Callback        ${False}
 
     # Delete created users.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/newadmin_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/callback_user
 
 Verify User Account Locked
     [Documentation]  Verify user account locked upon trying with invalid password.
@@ -313,7 +299,7 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
-    Redfish.Logout
+    Run Keyword And Ignore Error  Redfish.Logout
 
 Redfish Create User
     [Documentation]  Redfish create user.
@@ -350,9 +336,6 @@ Redfish Create User
 
     Run Keyword If  ${enabled} == ${False}
     ...  Redfish.Login
-
-    Run Keyword If  '${role_id}' == 'Callback'
-    ...  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     # Validate Role ID of created user.
     ${role_config}=  Redfish_Utils.Get Attribute
