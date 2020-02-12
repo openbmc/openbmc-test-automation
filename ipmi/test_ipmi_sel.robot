@@ -6,6 +6,11 @@ Resource         ../lib/openbmc_ffdc.robot
 
 Test Teardown    FFDC On Test Case Fail
 
+*** Variables ***
+
+${CREATE_SEL_RAW_COMMAND}  0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00 0x04 0x01 0x17 0x00 0xa0 0x04 0x07
+
+
 *** Test Cases ***
 
 Verify IPMI SEL Version
@@ -27,3 +32,25 @@ Verify Empty SEL
     ${resp}=  Run IPMI Standard Command  sel list
     Should Contain  ${resp}  SEL has no entries  case_insensitive=True
 
+
+Verify Add SEL Entry
+    [Documentation]  Verify add SEL entry.
+    [Tags]  Verify_add_SEL_entry
+
+    Run IPMI Standard Command  sel clear
+    Sleep  5s
+
+    Create SEL
+    #Get last SEL entry
+    ${resp}=  Run IPMI Standard Command  sel elist last 1
+    Should Not Contain Any  ${resp}  SEL has no entries  error
+    ...  msg=Get SEL Entry failed.
+
+
+*** Keywords ***
+
+Create SEL
+    [Documentation]  Create a SEL.
+
+    #Create a SEL
+    Run IPMI command  ${CREATE_SEL_RAW_COMMAND}
