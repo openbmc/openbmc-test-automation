@@ -668,3 +668,19 @@ def create_temp_file_path(delim=":", suffix=""):
     temp_file_path = temp_dir_path + temp_file_name
 
     return temp_file_path
+
+
+def pause(message="Hit enter to continue..."):
+    r"""
+    Print the message, with time stamp, and pause until the user hits enter.
+
+    Description of argument(s):
+    message                         The message to be printed to stdout.
+    """
+    gp.print_time(message)
+    try:
+        input()
+    except SyntaxError:
+        pass
+
+    return
