@@ -9,6 +9,7 @@ import gen_print as gp
 import gen_cmd as gc
 import func_args as fa
 import datetime
+import copy
 
 exit_on_error = False
 
@@ -228,6 +229,14 @@ def valid_value(var_value, valid_values=[], invalid_values=[], var_name=None):
         error_message += " list but NOT both:\n"
         error_message += gp.sprint_var(invalid_values)
         error_message += gp.sprint_var(valid_values)
+        return process_error_message(error_message)
+
+    error_message = valid_type(valid_values, list, var_name='valid_values')
+    if error_message:
+        return process_error_message(error_message)
+
+    error_message = valid_type(invalid_values, list, var_name='invalid_values')
+    if error_message:
         return process_error_message(error_message)
 
     if len_valid_values > 0:
