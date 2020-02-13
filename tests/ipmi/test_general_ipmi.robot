@@ -96,29 +96,6 @@ Test Watchdog Off Via IPMI And Verify Using REST
     ...  msg=msg=Verification failed for watchdog off check.
 
 
-Test Power Reading Via IPMI With Host Off
-    [Documentation]  Test power reading via IPMI with host off state and
-    ...  verify using REST.
-    [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Off
-
-    REST Power Off  stack_mode=skip  quiet=1
-
-    Wait Until Keyword Succeeds  1 min  30 sec  Verify Power Reading
-
-
-Test Power Reading Via IPMI With Host Booted
-    [Documentation]  Test power reading via IPMI with host booted state and
-    ...  verify using REST.
-    [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Booted
-
-    REST Power On  stack_mode=skip  quiet=1
-
-    # For a good power reading take a 3 samples for 15 seconds interval and
-    # average it out.
-
-    Wait Until Keyword Succeeds  2 min  30 sec  Verify Power Reading
-
-
 Test Power Reading Via IPMI Raw Command
     [Documentation]  Test power reading via IPMI raw command and verify
     ...  using REST.
@@ -321,29 +298,6 @@ Fetch Details From LAN Print
     [Return]  ${value_fetch}
 
 
-Verify Power Reading
-    [Documentation]  Get dcmi power reading via IPMI.
-
-    # Example of power reading command output via IPMI.
-    # Instantaneous power reading:                   235 Watts
-    # Minimum during sampling period:                235 Watts
-    # Maximum during sampling period:                235 Watts
-    # Average power reading over sample period:      235 Watts
-    # IPMI timestamp:                                Thu Jan  1 00:00:00 1970
-    # Sampling period:                               00000000 Seconds.
-    # Power reading state is:                        deactivated
-
-    ${power_reading}=  Get IPMI Power Reading
-
-    ${host_state}=  Get Host State
-    Run Keyword If  '${host_state}' == 'Off'
-    ...  Should Be Equal  ${power_reading['instantaneous_power_reading']}  0
-    ...  msg=Power reading not zero when power is off.
-
-    Run Keyword If  '${power_reading['instantaneous_power_reading']}' != '0'
-    ...  Verify Power Reading Using REST  ${power_reading['instantaneous_power_reading']}
-
-
 Verify Power Reading Via Raw Command
     [Documentation]  Get dcmi power reading via IPMI raw command.
 
@@ -385,39 +339,6 @@ Verify Power Reading Via Raw Command
 
     Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
     ...  msg=Power Reading above allowed threshold ${allowed_power_diff}.
-
-
-Verify Power Reading Using REST
-    [Documentation]  Verify power reading using REST.
-    [Arguments]  ${power_reading}
-
-    # Description of argument(s):
-    # power_reading  IPMI Power reading
-
-    ${power_reading_rest}=  Read Attribute
-    ...  ${SENSORS_URI}power/total_power  Value
-
-    # Example of power reading via REST
-    #  "CriticalAlarmHigh": 0,
-    #  "CriticalAlarmLow": 0,
-    #  "CriticalHigh": 3100000000,
-    #  "CriticalLow": 0,
-    #  "Scale": -6,
-    #  "Unit": "xyz.openbmc_project.Sensor.Value.Unit.Watts",
-    #  "Value": 228000000,
-    #  "WarningAlarmHigh": 0,
-    #  "WarningAlarmLow": 0,
-    #  "WarningHigh": 3050000000,
-    #  "WarningLow": 0
-
-    # Get power value based on scale i.e. Value * (10 power Scale Value)
-    # e.g. from above case 228000000 * (10 power -6) = 228000000/1000000
-    ${power_reading_rest}=  Evaluate  ${power_reading_rest}/1000000
-    ${ipmi_rest_power_diff}=
-    ...  Evaluate  abs(${power_reading_rest} - ${power_reading})
-
-    Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
-    ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
 
 
 Set IPMI Restriction Mode
