@@ -3,6 +3,7 @@ Documentation  Validate IPMI sensor IDs using Redfish.
 
 Resource          ../lib/ipmi_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Library           ../lib/ipmi_utils.py
 
 Suite Setup       Redfish.Login
 Suite Teardown    Redfish.Logout
@@ -12,6 +13,7 @@ Test Teardown     FFDC On Test Case Fail
 
 *** Variables ***
 ${allowed_temp_diff}    ${1}
+${allowed_power_diff}   ${10}
 
 
 *** Test Cases ***
@@ -95,6 +97,26 @@ Test Ambient Temperature Via IPMI
     ...  msg=Ambient temperature above allowed threshold ${allowed_temp_diff}.
 
 
+Test Power Reading Via IPMI With Host Off
+    [Documentation]  Test power reading via IPMI with host off state and
+    ...  verify using Redfish.
+    [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Off
+
+    Redfish Power Off  stack_mode=skip
+
+    Wait Until Keyword Succeeds  1 min  30 sec  Verify Power Reading
+
+
+Test Power Reading Via IPMI With Host Booted
+    [Documentation]  Test power reading via IPMI with host booted state and
+    ...  verify using Redfish.
+    [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Booted
+
+    Redfish Power On  stack_mode=skip
+
+    Wait Until Keyword Succeeds  2 min  30 sec  Verify Power Reading
+
+
 *** Keywords ***
 
 Get Temperature Reading And Verify In Redfish
@@ -161,3 +183,44 @@ Get Temperature Reading From Redfish
         Exit For Loop If  '&{data}[MemberId]' == '${member_id}'
     END
     [Return]  ${redfish_value}
+
+
+Verify Power Reading
+    [Documentation]  Get power reading via IPMI and Redfish
+
+    # Example of power reading command output via IPMI.
+    # Instantaneous power reading:                   235 Watts
+    # Minimum during sampling period:                235 Watts
+    # Maximum during sampling period:                235 Watts
+    # Average power reading over sample period:      235 Watts
+    # IPMI timestamp:                                Thu Jan  1 00:00:00 1970
+    # Sampling period:                               00000000 Seconds.
+    # Power reading state is:                        deactivated
+
+    ${power_reading}=  Get IPMI Power Reading
+
+    ${host_state}=  Get Host State
+
+    Run Keyword If  '${host_state}' == 'Off'
+    ...  Should Be Equal  ${power_reading['instantaneous_power_reading']}  0
+    ...  msg=Power reading not zero when power is off.
+
+    Run Keyword If  '${power_reading['instantaneous_power_reading']}' != '0'
+    ...  Verify Power Reading Using IPMI And Redfish  ${power_reading['instantaneous_power_reading']}
+
+
+Verify Power Reading Using IPMI And Redfish
+    [Documentation]  Verify power reading using IPMI and Redfish.
+    [Arguments]  ${power_reading}
+
+    # Description of argument(s):
+    # power_reading  IPMI Power reading
+
+    ${power}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
+    ${power_reading_redfish}=  Set Variable  ${power['PowerControl'][0]['PowerConsumedWatts']}
+
+    ${ipmi_rest_power_diff}=
+    ...  Evaluate  abs(${power_reading_redfish} - ${power_reading})
+
+    Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
+    ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
