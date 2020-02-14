@@ -30,6 +30,7 @@ Verify Redfish User Persistence After Reboot
     Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
     Redfish Create User  operator_user  TestPwd123  Operator        ${True}
     Redfish Create User  readonly_user  TestPwd123  ReadOnly        ${True}
+    Redfish Create User  noaccess_user  TestPwd123  NoAccess        ${True}
 
     # Reboot BMC.
     Redfish OBMC Reboot (off)  stack_mode=normal
@@ -39,11 +40,13 @@ Verify Redfish User Persistence After Reboot
     Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
     Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
     Redfish Verify User  readonly_user  TestPwd123  ReadOnly        ${True}
+    Redfish Verify User  noaccess_user  TestPwd123  NoAccess        ${True}
 
     # Delete created users.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/noaccess_user
 
 Redfish Create and Verify Users
     [Documentation]  Create Redfish users with various roles.
@@ -54,6 +57,7 @@ Redfish Create and Verify Users
     admin_user     TestPwd123  Administrator   ${True}
     operator_user  TestPwd123  Operator        ${True}
     readonly_user  TestPwd123  ReadOnly        ${True}
+    noaccess_user  TestPwd123  NoAccess        ${True}
 
 Verify Redfish User with Wrong Password
     [Documentation]  Verify Redfish User with Wrong Password.
@@ -84,7 +88,7 @@ Verify User Creation Without Enabling It
     admin_user     TestPwd123  Administrator   ${False}
     operator_user  TestPwd123  Operator        ${False}
     readonly_user  TestPwd123  ReadOnly        ${False}
-
+    noaccess_user  TestPwd123  NoAccess        ${False}
 
 Verify User Creation With Invalid Role Id
     [Documentation]  Verify user creation with invalid role ID.
@@ -122,6 +126,7 @@ Verify Modifying User Attributes
     Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
     Redfish Create User  operator_user  TestPwd123  Operator        ${True}
     Redfish Create User  readonly_user  TestPwd123  ReadOnly        ${True}
+    Redfish Create User  noaccess_user  TestPwd123  NoAccess        ${True}
 
     Redfish.Login
 
@@ -141,15 +146,21 @@ Verify Modifying User Attributes
     ${payload}=  Create Dictionary  RoleId=Operator
     Redfish.Patch  /redfish/v1/AccountService/Accounts/readonly_user  body=&{payload}
 
+    # Update noaccess_user role using Redfish.
+    ${payload}=  Create Dictionary  RoleId=Administrator
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/noaccess_user  body=&{payload}
+
     # Verify users after updating
     Redfish Verify User  newadmin_user  TestPwd123     Administrator   ${True}
     Redfish Verify User  operator_user  NewTestPwd123  Operator        ${True}
     Redfish Verify User  readonly_user  TestPwd123     Operator        ${True}
+    Redfish Verify User  noaccess_user  TestPwd123     Administrator   ${True}
 
     # Delete created users.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/newadmin_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/noaccess_user
 
 Verify User Account Locked
     [Documentation]  Verify user account locked upon trying with invalid password.
@@ -357,6 +368,8 @@ Redfish Verify User
 
     # Trying to do a login with created user.
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${username}  ${password}
+
+    ${enabled}=  Set Variable If  '${role_id}' == 'NoAccess'  ${False}  ${enabled}
 
     # Doing a check of the returned status.
     Should Be Equal  ${status}  ${enabled}
