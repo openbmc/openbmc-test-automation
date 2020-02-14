@@ -198,3 +198,16 @@ Create Users With Different Roles
       Redfish Create User  ${users['${role}'][0]}  ${users['${role}']}[1]  ${role}  ${True}  ${force}
     END
 
+
+Delete BMC Users Via Redfish
+    [Documentation]  Delete BMC users via redfish.
+    [Arguments]  ${users}
+
+    # Description of argument(s):
+    # users    Dictionary of roles and user credentails to be deleted.
+
+    FOR  ${role}  IN  @{users}
+        Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${users['${role}'][0]}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+    END
+
