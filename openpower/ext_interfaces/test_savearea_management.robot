@@ -10,6 +10,7 @@ Resource          ../../lib/utils.robot
 
 Suite Setup    Suite Setup Execution
 Test Teardown  Test Teardown Execution
+Suite Teadown  Suite Teardown Execution
 
 
 *** Variables ***
@@ -417,3 +418,9 @@ Test Teardown Execution
     Delete And Verify All Partitions on BMC
     FFDC On Test Case Fail
 
+
+Suite Teardown Execution
+    [Documentation]  Suite teardown execution.
+
+    Delete Users  users=${USERS}
+    Delete All Sessions
