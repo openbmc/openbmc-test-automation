@@ -18,7 +18,7 @@ Get Software Functional State
 
     ${image_info}=  Redfish.Get Properties  /redfish/v1/UpdateService/FirmwareInventory/${image_id}
 
-    ${sw_functional}=  Run Keyword If  '${image_info["Description"]}' == 'BMC update'
+    ${sw_functional}=  Run Keyword If  '${image_info["Description"]}' == 'BMC image'
     ...    Redfish.Get Attribute  /redfish/v1/Managers/bmc  FirmwareVersion
     ...  ELSE
     ...    Redfish.Get Attribute  /redfish/v1/Systems/system  BiosVersion
