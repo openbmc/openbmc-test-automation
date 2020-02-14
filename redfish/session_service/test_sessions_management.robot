@@ -8,9 +8,10 @@ Resource         ../../lib/bmc_redfish_utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
 Suite Setup      Suite Setup Execution
-Suite Teardown   Redfish.Logout
+Suite Teardown   Suite Teardown Execution
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
+
 
 *** Variables ***
 @{ADMIN}       admin_user  TestPwd123
@@ -189,3 +190,10 @@ Suite Setup Execution
 
     Redfish.Login
     Create Users With Different Roles  users=${USERS}  force=${True}
+
+
+Suite Teardown Execution
+    [Documentation]  Suite teardown execution.
+
+    Delete Users  users=${USERS}
+    Redfish.Logout
