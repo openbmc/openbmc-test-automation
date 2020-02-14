@@ -8,8 +8,9 @@ Resource          ../../lib/resource.robot
 Resource          ../../lib/bmc_redfish_utils.robot
 Resource          ../../lib/utils.robot
 
-Suite Setup    Suite Setup Execution
-Test Teardown  Test Teardown Execution
+Suite Setup       Suite Setup Execution
+Test Teardown     Test Teardown Execution
+Suite Teardown    Suite Teardown Execution
 
 
 *** Variables ***
@@ -404,9 +405,7 @@ Suite Setup Execution
 
     # Create different user accounts.
     Redfish.Login
-    Create Users With Different Roles  users=${USERS}  force=${True}
-    Redfish.Logout
-
+    Create Users With Different Roles  users=${USERS}  force=${True} 
     # Get REST session to BMC.
     Initialize OpenBMC
 
@@ -417,3 +416,9 @@ Test Teardown Execution
     Delete And Verify All Partitions on BMC
     FFDC On Test Case Fail
 
+
+Suite Teardown Execution
+    [Documentation]  Suite teardown execution.
+
+    Delete BMC Users Via Redfish  users=${USERS}
+    Delete All Sessions
