@@ -293,6 +293,42 @@ Test IPMI Restriction Mode
     ...  Run Inband IPMI Standard Command  lan set 1 access on
 
 
+Test Get Self Test Results via IPMI
+    [Documentation]  Get Self Test Results via IPMI raw command
+    [Tags]  Test_Get_Self_Test_Results_via_IPMI
+
+     ${resp}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['Self_Test_Results']['Get'][0]}
+
+    # 55h = No error. All Self Tests Passed.
+    # 56h = Self Test function not implemented in this controller.
+    Should Contain Any  ${resp}  55 00  56 00
+
+
+Test Get Device GUID via IPMI and Verify via Redfish
+    [Documentation]  Get Device GUID via IPMI and Verify it via Redfish
+    [Tags]  Test_Get_Device_GUID_via_IPMI_and_Verify_via_Redfish
+
+    # This should match the /redfish/v1/Managers/bmc's UUID data.
+    ${resp}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['Device GUID']['Get'][0]}
+
+    ${guid_ipmi}=  Split String  ${resp}
+    @{guid_ipmi_list}=  Convert To List  ${guid_ipmi}
+    Reverse List  ${guid_ipmi_list}
+
+    ${guid_ipmi_string}=  Set Variable  ${Empty}
+    FOR  ${guid_ipmi_word}  IN  @{guid_ipmi_list}
+        ${guid_ipmi_string}=  Catenate  ${guid_ipmi_string}${guid_ipmi_word}
+    END
+
+    Redfish.Login
+    ${UUID}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  UUID
+    ${UUID}=  Remove String  ${UUID}  -
+
+    Should be Equal  ${UUID}  ${guid_ipmi_string}
+
+
 *** Keywords ***
 
 Set Watchdog Enabled Using REST
