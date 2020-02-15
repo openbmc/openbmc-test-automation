@@ -88,5 +88,26 @@ IPMI_RAW_CMD = {
             "27 00",
             "27 is Reservation ID, LSB, 00 Reservation ID, MSB ",
         ]
+    },
+    'Self_Test_Results':
+    {
+        'Get':
+        [
+            # raw command, expected output(s), comment
+            "0x06 0x04",
+            "56 00",
+            "56h = Self Test function not implemented in this controller.",
+        ]
+    },
+    'Device GUID':
+    {
+        'Get':
+        [
+            # raw command, expected output(s), comment
+            "0x06 0x08",
+            "01 70 9b ae da 6f dd 9c b4 4c 36 be 66 c8 49 28",
+            "Get GUID bytes 1 through 16.",
+
+        ]
     }
 }
