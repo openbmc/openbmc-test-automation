@@ -58,11 +58,11 @@ ${bootme_period}    3
 
 *** Test Cases ***
 
-Test Acceptance IPL
+Test Acceptance Boot
     [Documentation]  Stress every controller connected via PCI in an OS with
     ...  every resource available (CPU, RAM, storage, ethernet controllers,
     ...  etc).
-    [Tags]  Test_Acceptance_IPL
+    [Tags]  Test_Acceptance_Boot
 
     Run Build Net
     Run MDT Profile  ${HTX_MDT_PROFILE}

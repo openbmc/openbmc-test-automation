@@ -85,10 +85,10 @@ Verify Supported Fan Thermal Modes Switch At Runtime
     On                   MAX_BASE_FAN_FLOOR
 
 
-Verify Supported Fan Thermal Mode Remains Set After IPL
+Verify Supported Fan Thermal Mode Remains Set After Boot
     [Documentation]  Check that supported modes remain set at runtime.
-    [Tags]  Verify_Supported_Fan_Thermal_Mode_Remains_Set_After_IPL
-    [Template]  Set and Verify Thermal Mode After IPL
+    [Tags]  Verify_Supported_Fan_Thermal_Mode_Remains_Set_After_Boot
+    [Template]  Set and Verify Thermal Mode After Boot
 
     # pre_req_state      thermal_mode_type
     Off                  DEFAULT
@@ -118,7 +118,7 @@ Set and Verify Thermal Mode Switches
     Rprint Vars  current
 
 
-Set and Verify Thermal Mode After IPL
+Set and Verify Thermal Mode After Boot
     [Documentation]  Verify the thermal mode remains set at runtime.
     [Arguments]  ${pre_req_state}  ${thermal_mode}
 

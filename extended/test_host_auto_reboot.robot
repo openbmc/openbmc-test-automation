@@ -16,7 +16,7 @@ Suite Teardown      Suite Teardown Execution
 *** Test Cases ***
 
 Verify Host Quiesce State Without Auto Reboot During Boot
-    [Documentation]  Validate "Quiesce" state during IPL.
+    [Documentation]  Validate "Quiesce" state during boot.
     [Tags]  Verify_Host_Quiesce_State_Without_Auto_Reboot_During_Boot
     [Template]  Verify Host Quiesce State
 
@@ -25,7 +25,7 @@ Verify Host Quiesce State Without Auto Reboot During Boot
 
 
 Verify Host Quiesce State With Auto Reboot During Boot
-    [Documentation]  Validate "Quiesce" state during IPL.
+    [Documentation]  Validate "Quiesce" state during boot.
     [Tags]  Verify_Host_Quiesce_State_With_Auto_Reboot_During_Boot
     [Template]  Verify Host Quiesce State
 
