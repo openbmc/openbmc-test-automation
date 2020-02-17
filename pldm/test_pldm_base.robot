@@ -25,7 +25,7 @@ Verify Get PLDM Version For Base
 
     ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'base'
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
-    Valid Value  pldm_output['type_0(base)']  ${VERSION_BASE['STRING']}
+    Valid Value  pldm_output['type_0(base)']  ['${VERSION_BASE['STRING']}']
 
 
 Verify Get PLDM Version For Platform
@@ -34,7 +34,7 @@ Verify Get PLDM Version For Platform
 
     ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'platform'
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
-    Valid Value  pldm_output['type_2(platform)']  ${VERSION_PLATFORM['STRING']}
+    Valid Value  pldm_output['type_2(platform)']  ['${VERSION_PLATFORM['STRING']}']
 
 
 Verify Get PLDM Version For BIOS
@@ -43,7 +43,7 @@ Verify Get PLDM Version For BIOS
 
     ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'bios'
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
-    Valid Value  pldm_output['type_3(bios)']  ${VERSION_BIOS['STRING']}
+    Valid Value  pldm_output['type_3(bios)']  ['${VERSION_BIOS['STRING']}']
 
 
 Verify Get PLDM Version For FRU
@@ -52,4 +52,4 @@ Verify Get PLDM Version For FRU
 
     ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'fru'
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
-    Valid Value  pldm_output['type_4(fru)']  ${VERSION_FRU['STRING']}
+    Valid Value  pldm_output['type_4(fru)']  ['${VERSION_FRU['STRING']}']
