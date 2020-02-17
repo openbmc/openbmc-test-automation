@@ -51,12 +51,12 @@ Verify SetDateTime
     # Set date.
     ${cmd_set_date}=  Evaluate  $CMD_SETDATETIME % '${upgrade_date}'
     ${pldm_output}=  Pldmtool  ${cmd_set_date}
-    Valid Value  pldm_output['setdatetime']  'SUCCESS'
+    Valid Value  pldm_output['setdatetime']  ['SUCCESS']
 
     # Set time.
     ${cmd_set_time}=  Evaluate  $CMD_SETDATETIME % '${upgrade_time}'
     ${pldm_output}=  Pldmtool  ${cmd_set_time}
-    Valid Value  pldm_output['setdatetime']  'SUCCESS'
+    Valid Value  pldm_output['setdatetime']  ['SUCCESS']
 
 *** Keywords ***
 
@@ -68,4 +68,4 @@ PLDM BIOS Suite Cleanup
     ${current_date_time}=  Evaluate  re.sub(r'-* *:*', "", '${result}')  modules=re
     ${cmd_set_date_time}=  Evaluate  $CMD_SETDATETIME % '${current_date_time}'
     ${pldm_output}=  Pldmtool  ${cmd_set_date_time}
-    Valid Value  pldm_output['setdatetime']  'SUCCESS'
+    Valid Value  pldm_output['setdatetime']  ['SUCCESS']
