@@ -206,6 +206,26 @@ def sprint_args(arg_obj,
     return buffer
 
 
+def sync_args():
+    r"""
+    Synchronize the argument values to match their corresponding global variable values.
+
+    The user's validate_parms() function may manipulate global variables that correspond to program
+    arguments.  After validate_parms() is called, sync_args is called to set the altered values back into the
+    arg_obj.  This will ensure that the print-out of program arguments reflects the updated values.
+
+    Example:
+
+    def validate_parms():
+
+        # Set a default value for dir_path argument.
+        dir_path = gm.add_trailing_slash(gm.dft(dir_path, os.getcwd()))
+    """
+    module = sys.modules['__main__']
+    for key in arg_obj.__dict__:
+        arg_obj.__dict__[key] = getattr(module, key)
+
+
 term_options = None
 
 
@@ -472,6 +492,7 @@ def gen_post_validation(exit_function=None,
     atexit.register(exit_function)
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
+    sync_args()
 
 
 def gen_setup():
