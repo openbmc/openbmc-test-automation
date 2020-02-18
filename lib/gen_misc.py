@@ -51,6 +51,27 @@ def add_trailing_slash(dir_path):
     return os.path.normpath(dir_path) + os.path.sep
 
 
+def makedirs(path, mode=0o777, quiet=None):
+    r"""
+    Call os.makedirs with the caller's arguments.
+
+    This function offers 2 advantages over the base os.makedirs function:
+    1) It will not fail if the directory already exists.
+    2) It will print an "Issuing: os.makedirs" message.
+
+    Description of argument(s):
+    path                            The directory path of the directories to be created.
+    mode                            The mode or permissions to be granted to the created directories.
+    quiet                           Indicates whether this function should run the print_issuing() function.
+    """
+    quiet = int(dft(quiet, gp.get_stack_var('quiet', 0)))
+    gp.qprint_issuing("os.makedirs('" + path + "', mode=" + oct(mode) + ")")
+    try:
+        os.makedirs(path, mode)
+    except FileExistsError:
+        pass
+
+
 def which(file_path):
     r"""
     Find the full path of an executable file and return it.
