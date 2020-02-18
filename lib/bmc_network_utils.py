@@ -176,3 +176,31 @@ def get_active_channel_config():
     """
 
     return vf.filter_struct(get_channel_config(), "[('medium_type', 'other-lan|lan-802.3')]", regex=1)
+
+
+def get_channel_access_config():
+    r"""
+    Get the channel access config data and return as a dictionary.
+
+    Example:
+
+    channel_access_config =  get_channel_access_config()
+    print_vars(channel_access_config)
+
+    channel_access_config:
+        [1]:
+            [priv_limit]:                                 priv-admin
+            [per_msg_auth_disabled]:                      False
+            [access_mode]:                                always_available
+            [alerting_disabled]:                          False
+            [user_auth_disabled]:                         False
+        [2]:
+            [priv_limit]:                                 priv-admin
+            [per_msg_auth_disabled]:                      False
+            [access_mode]:                                always_available
+            [alerting_disabled]:                          False
+            [user_auth_disabled]:                         False
+    """
+    stdout, stderr, rc = bsu.bmc_execute_command("cat /usr/share/ipmi-providers/channel_access.json")
+
+    return json.loads(stdout)
