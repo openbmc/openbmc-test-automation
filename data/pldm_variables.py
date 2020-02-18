@@ -14,7 +14,7 @@ PLDM_TYPE_FRU = {'VALUE': '04', 'STRING': 'fru'}
 PLDM_TYPE_OEM = {'VALUE': '3F', 'STRING': 'oem'}
 
 VERSION_BASE = {'VALUE': ['f1', 'f0', 'f0', '00'], 'STRING': '1.0.0'}
-VERSION_PLATFORM = {'VALUE': ['f1', 'f0', 'f0', '00'], 'STRING': '1.1.1'}
+VERSION_PLATFORM = {'VALUE': ['f1', 'f2', 'f0', '00'], 'STRING': '1.2.0'}
 VERSION_BIOS = {'VALUE': ['f1', 'f1', 'f1', '00'], 'STRING': '1.0.0'}
 VERSION_FRU = {'VALUE': ['f1', 'f0', 'f0', '00'], 'STRING': '1.0.0'}
 
