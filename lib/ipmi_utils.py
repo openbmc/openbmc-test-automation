@@ -622,3 +622,34 @@ def get_chassis_status():
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
+
+
+def get_channel_info(channel_number=1):
+    r"""
+    Get the channel info and return as a dictionary.
+    Example:
+
+    channel_info:
+      [channel_0x2_info]:
+        [channel_medium_type]:                        802.3 LAN
+        [channel_protocol_type]:                      IPMB-1.0
+        [session_support]:                            multi-session
+        [active_session_count]:                       0
+        [protocol_vendor_id]:                         7154
+        [volatile(active)_settings]:
+        [alerting]:                                   enabled
+        [per-message_auth]:                           enabled
+        [user_level_auth]:                            enabled
+        [access_mode]:                                always available
+        [non-volatile_settings]:
+        [alerting]:                                   enabled
+        [per-message_auth]:                           enabled
+        [user_level_auth]:                            enabled
+        [access_mode]:                                always available
+    """
+
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  channel info " + str(channel_number))
+    result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
+
+    return result
