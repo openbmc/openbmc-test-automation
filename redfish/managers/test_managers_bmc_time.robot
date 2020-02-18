@@ -205,7 +205,7 @@ Rest Set Time Owner
     Write Attribute  ${TIME_MANAGER_URI}sync_method  TimeSyncMethod  data=${data}  verify=${TRUE}
     Sleep  5s
 
-    ${data}=  Create Dictionary  data=${BMC_OWNER}
+    ${data}=  Create Dictionary  data=${BOTH_OWNER}
     Write Attribute  ${TIME_MANAGER_URI}owner  TimeOwner  data=${data}  verify=${TRUE}
 
 
