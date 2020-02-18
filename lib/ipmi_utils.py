@@ -564,3 +564,92 @@ def get_device_id_config():
     result['device_revision'] = result['revision'] & 0x0F
 
     return result
+
+
+def get_channel_info(channel_number=1):
+    r"""
+    Get the channel info and return as a dictionary.
+    Example:
+
+    channel_info:
+      [channel_0x2_info]:
+        [channel_medium_type]:                        802.3 LAN
+        [channel_protocol_type]:                      IPMB-1.0
+        [session_support]:                            multi-session
+        [active_session_count]:                       0
+        [protocol_vendor_id]:                         7154
+        [volatile(active)_settings]:
+        [alerting]:                                   enabled
+        [per-message_auth]:                           enabled
+        [user_level_auth]:                            enabled
+        [access_mode]:                                always available
+        [non-volatile_settings]:
+        [alerting]:                                   enabled
+        [per-message_auth]:                           enabled
+        [user_level_auth]:                            enabled
+        [access_mode]:                                always available
+    """
+
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  channel info " + str(channel_number))
+    result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
+
+    return result
+
+
+def get_channel_medium_type_mapping_table(medium_type_ipmi):
+
+    medium_type_dict = {
+        "reserved": "reserved",
+        "IPMB (I2C)": "ipmb",
+        "ICMB v1.0": "icmb-v1.0",
+        "ICMB v0.9": "icmb-v0.9",
+        "802.3 LAN": "lan-802.3",
+        "Serial/Modem": "serial",
+        "Other LAN": "other-lan",
+        "PCI SMBus": "pci-smbus",
+        "SMBus v1.0/v1.1": "smbus-v1.0",
+        "SMBus v2.0": "smbus-v2.0",
+        "USB 1.x": "usb-1x",
+        "USB 2.x": "usb-2x",
+        "System Interface": "system-interface"
+    }
+    return medium_type_dict[medium_type_ipmi]
+
+
+def get_channel_protocol_type_mapping_table(protocol_type_ipmi):
+
+    protocol_type_dict = {
+        "reserved": "na",
+        "IPMB-1.0": "ipmb-1.0",
+        "ICMB-1.0": "icmb-2.0",
+        "reserved": "reserved",
+        "IPMI-SMBus": "ipmi-smbus",
+        "KCS": "kcs",
+        "SMIC": "smic",
+        "BT-10": "bt-10",
+        "BT-15": "bt-15",
+        "TMode": "tmode",
+        "OEM 1": "oem",
+    }
+    return protocol_type_dict[protocol_type_ipmi]
+
+
+def get_disabled_mapping_table(disabled_property):
+
+    disabled_dict = {
+        "disabled": "True",
+        "enabled": "False",
+    }
+    return disabled_dict[disabled_property]
+
+
+def get_channel_access_mode_mapping_table(access_mode_ipmi):
+
+    access_mode_dict = {
+        "disabled": "disabled",
+        "pre-boot only": "pre-boot",
+        "always available": "always_available",
+        "shared": "shared",
+    }
+    return access_mode_dict[access_mode_ipmi]
