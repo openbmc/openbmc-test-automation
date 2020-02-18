@@ -103,7 +103,7 @@ TFTP Download Install
     ...  body={"TransferProtocol" : "TFTP", "ImageURI" : "${TFTP_SERVER}/${IMAGE_FILE_NAME}"}
 
     # Wait for image tar file to download complete.
-    ${image_id}=  Wait Until Keyword Succeeds  60 sec  10 sec  Get Latest Image ID
+    ${image_id}=  Wait Until Keyword Succeeds  180 sec  10 sec  Get Latest Image ID
     Rprint Vars  image_id
 
     # Let the image get extracted and it should not fail.
@@ -147,7 +147,7 @@ ImageURI Download Install
     ...  body={"ImageURI": "tftp://${TFTP_SERVER}/${IMAGE_FILE_NAME}"}
 
     # Wait for image tar file download to complete.
-    ${image_id}=  Wait Until Keyword Succeeds  60 sec  10 sec  Get Latest Image ID
+    ${image_id}=  Wait Until Keyword Succeeds  180 sec  10 sec  Get Latest Image ID
     Rprint Vars  image_id
 
     # Let the image get extracted and it should not fail.
@@ -192,7 +192,7 @@ Same Firmware Install Two Times
     ...  ${image_version}
     Rprint Vars  software_inventory_record
 
-    ${image_id}=  Wait Until Keyword Succeeds  60 sec  10 sec  Get Latest Image ID
+    ${image_id}=  Wait Until Keyword Succeeds  180 sec  10 sec  Get Latest Image ID
     Rprint Vars  image_id
 
     Check Image Update Progress State  match_state='Enabled'  image_id=${image_id}
