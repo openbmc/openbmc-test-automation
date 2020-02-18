@@ -123,4 +123,6 @@ Redfish Multiple Upload Image And Check Progress State
     ...    match_state='Enabled'  image_id=${first_image_id}
     Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
     Redfish.Login
+    Log  ${first_image_id}
+    Log  ${second_image_id}
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
