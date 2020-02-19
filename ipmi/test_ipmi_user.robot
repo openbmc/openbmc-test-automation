@@ -51,6 +51,36 @@ Verify IPMI User Summary
     Should Contain  ${maximum_ids}  15
 
 
+Verify IPMI User List
+    [Documentation]  Verify user list via IPMI.
+    [Tags]  Verify_IPMI_User_List
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
+
+    ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
+
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+    Run IPMI Standard Command  user enable ${random_userid}
+    # Delay added for IPMI user to get enabled.
+    Sleep  5s
+    # Set admin privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
+
+    ${users_access}=  Get User Access Ipmi  ${CHANNEL_NUMBER}
+    Rprint Vars  users_access
+
+    ${index}=  Evaluate  ${random_userid} - 1
+    # Verify the user access of created user.
+    Valid Value  users_access[${index}]['id']  ['${random_userid}']
+    Valid Value  users_access[${index}]['name']  ['${random_username}']
+    Valid Value  users_access[${index}]['callin']  ['true']
+    Valid Value  users_access[${index}]['link']  ['false']
+    Valid Value  users_access[${index}]['auth']  ['true']
+    Valid Value  users_access[${index}]['ipmi']  ['ADMINISTRATOR']
+
+
 Verify IPMI User Creation With Valid Name And ID
     [Documentation]  Create user via IPMI and verify.
     [Tags]  Test_IPMI_User_Creation_With_Valid_Name_And_ID
