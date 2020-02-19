@@ -472,43 +472,6 @@ Test Setup Execution
     Set Test Variable  ${ip_data}
 
 
-Get Network Configuration
-    [Documentation]  Get network configuration.
-
-    # Sample output:
-    #{
-    #  "@odata.context": "/redfish/v1/$metadata#EthernetInterface.EthernetInterface",
-    #  "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth0",
-    #  "@odata.type": "#EthernetInterface.v1_2_0.EthernetInterface",
-    #  "Description": "Management Network Interface",
-    #  "IPv4Addresses": [
-    #    {
-    #      "Address": "169.254.xx.xx",
-    #      "AddressOrigin": "IPv4LinkLocal",
-    #      "Gateway": "0.0.0.0",
-    #      "SubnetMask": "255.255.0.0"
-    #    },
-    #    {
-    #      "Address": "xx.xx.xx.xx",
-    #      "AddressOrigin": "Static",
-    #      "Gateway": "xx.xx.xx.1",
-    #      "SubnetMask": "xx.xx.xx.xx"
-    #    }
-    #  ],
-    #  "Id": "eth0",
-    #  "MACAddress": "xx:xx:xx:xx:xx:xx",
-    #  "Name": "Manager Ethernet Interface",
-    #  "SpeedMbps": 0,
-    #  "VLAN": {
-    #    "VLANEnable": false,
-    #    "VLANId": 0
-    #  }
-
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
-    @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
-    [Return]  @{network_configurations}
-
-
 Add IP Address
     [Documentation]  Add IP Address To BMC.
     [Arguments]  ${ip}  ${subnet_mask}  ${gateway}
