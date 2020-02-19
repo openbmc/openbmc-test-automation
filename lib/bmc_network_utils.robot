@@ -47,7 +47,6 @@ Set MAC Address
 Get BMC IP Info
     [Documentation]  Get system IP address and prefix length.
 
-
     # Get system IP address and prefix length details using "ip addr"
     # Sample Output of "ip addr":
     # 1: eth0: <BROADCAST,MULTIAST> mtu 1500 qdisc mq state UP qlen 1000
@@ -76,7 +75,6 @@ Get BMC IP Info
 Get BMC Route Info
     [Documentation]  Get system route info.
 
-
     # Sample output of "ip route":
     # default via xx.xx.xx.x dev eth0
     # xx.xx.xx.0/23 dev eth0  src xx.xx.xx.xx
@@ -90,7 +88,6 @@ Get BMC Route Info
 # TODO: openbmc/openbmc-test-automation#1331
 Get BMC MAC Address
     [Documentation]  Get system MAC address.
-
 
     # Sample output of "ip addr | grep ether":
     # link/ether xx.xx.xx.xx.xx.xx brd ff:ff:ff:ff:ff:ff
@@ -109,7 +106,6 @@ Get BMC MAC Address
 
 Get BMC MAC Address List
     [Documentation]  Get system MAC address
-
     # Sample output of "ip addr | grep ether":
     # link/ether xx.xx.xx.xx.xx.xx brd ff:ff:ff:ff:ff:ff
 
@@ -131,7 +127,6 @@ Get BMC MAC Address List
 
 Get BMC Hostname
     [Documentation]  Get BMC hostname.
-
     # Sample output of  "hostname":
     # test_hostname
 
@@ -240,7 +235,6 @@ Validate MAC On BMC
 
 Run Build Net
     [Documentation]  Run build_net to preconfigure the ethernet interfaces.
-
     OS Execute Command  build_net help y y
     # Run pingum to check if the "build_net" was run correctly done.
     ${output}  ${stderr}  ${rc}=  OS Execute Command  pingum
@@ -293,7 +287,6 @@ Verify Gateway On BMC
 Get BMC DNS Info
     [Documentation]  Get system DNS info.
 
-
     # Sample output of "resolv.conf":
     # ### Generated manually via dbus settings ###
     # nameserver 8.8.8.8
@@ -306,7 +299,6 @@ Get BMC DNS Info
 
 CLI Get Nameservers
     [Documentation]  Get the nameserver IPs from /etc/resolv.conf and return as a list.
-
     # Example of /etc/resolv.conf data:
     # nameserver x.x.x.x
     # nameserver y.y.y.y
@@ -315,3 +307,39 @@ CLI Get Nameservers
     ${nameservers}=  Split String  ${stdout}
 
     [Return]  ${nameservers}
+
+Get Network Configuration
+    [Documentation]  Get network configuration.
+    # Sample output:
+    #{
+    #  "@odata.context": "/redfish/v1/$metadata#EthernetInterface.EthernetInterface",
+    #  "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth0",
+    #  "@odata.type": "#EthernetInterface.v1_2_0.EthernetInterface",
+    #  "Description": "Management Network Interface",
+    #  "IPv4Addresses": [
+    #    {
+    #      "Address": "169.254.xx.xx",
+    #      "AddressOrigin": "IPv4LinkLocal",
+    #      "Gateway": "0.0.0.0",
+    #      "SubnetMask": "255.255.0.0"
+    #    },
+    #    {
+    #      "Address": "xx.xx.xx.xx",
+    #      "AddressOrigin": "Static",
+    #      "Gateway": "xx.xx.xx.1",
+    #      "SubnetMask": "xx.xx.xx.xx"
+    #    }
+    #  ],
+    #  "Id": "eth0",
+    #  "MACAddress": "xx:xx:xx:xx:xx:xx",
+    #  "Name": "Manager Ethernet Interface",
+    #  "SpeedMbps": 0,
+    #  "VLAN": {
+    #    "VLANEnable": false,
+    #    "VLANId": 0
+    #  }
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
+    @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
+    [Return]  @{network_configurations}
+
