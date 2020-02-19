@@ -85,7 +85,6 @@ Verify User Creation Without Enabling It
     operator_user  TestPwd123  Operator        ${False}
     readonly_user  TestPwd123  ReadOnly        ${False}
 
-
 Verify User Creation With Invalid Role Id
     [Documentation]  Verify user creation with invalid role ID.
     [Tags]  Verify_User_Creation_With_Invalid_Role_Id
@@ -324,6 +323,11 @@ Redfish Create User
     ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Resetting pam tally count as a workaround for issue
+    # openbmc/phosphor-user-manager#4
+    ${cmd}=  Catenate  /usr/sbin/pam_tally2 -u ${username} --reset
+    Bmc Execute Command  ${cmd}
 
     Redfish.Logout
 
