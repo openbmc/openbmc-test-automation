@@ -164,3 +164,29 @@ Test Get Channel Authentication Capabilities via IPMI
     Valid Value  channel_auth_cap['anonymous_login_enabled']  ['no']
     Valid Value  channel_auth_cap['channel_supports_ipmi_v1.5']  ['no']
     Valid Value  channel_auth_cap['channel_supports_ipmi_v2.0']  ['yes']
+
+
+Test Set Session Privilege Level via IPMI Raw Command
+    [Documentation]  Set session privilegelLevel command via IPMI Raw Command.
+    [Tags]  Test_Set_Session_Privilege_Level_via_IPMI_Raw_Command
+    [Template]  Set Session Privilege Level
+
+    # privilege_level   expected_level
+    0x00                04
+    0x02                02
+    0x03                03
+    0x04                04
+
+
+*** Keywords ***
+
+Set Session Privilege Level
+    [Documentation]   Verify Set Seesion Privilege command with given privilege level and expected level.
+    [Arguments]  ${privilege_level}  ${expected_level}
+    # Description of argument(s):
+    # privilege_level    Requested to set session privilege level.
+    # expected_level     New Privilege Level (or present level if ‘return present privilege level’ was selected)
+
+    ${resp}=  Run IPMI Standard Command
+    ...  raw 0x06 0x3b ${privilege_level}
+    Should Contain  ${resp}  ${expected_level}
