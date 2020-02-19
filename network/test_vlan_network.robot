@@ -1,7 +1,6 @@
 *** Settings ***
 Documentation           Test setting VLAN and its configuration.
 
-
 Resource                        ../lib/rest_client.robot
 Resource                        ../lib/ipmi_client.robot
 Resource                        ../lib/utils.robot
@@ -51,7 +50,6 @@ Add VLAN Via REST And Verify
 Add Invalid VLAN Via REST And Verify
     [Documentation]  Add Invalid VLAN via REST and verify.
     [Tags]  Add_Invalid_VLAN_Via_REST_And_Verify
-
     Create VLAN  ${invalid_vlan_id}  expected_result=error
 
 
@@ -203,7 +201,6 @@ Configure Multiple IPs On VLAN Via REST
 
 Test Setup Execution
     [Documentation]  Check and delete all previously created VLAN if any.
-
     Printn
     ${lan_config}=  Get LAN Print Dict
     Return From Keyword If  '${lan_config['802.1q VLAN ID']}' == 'Disabled'
@@ -258,7 +255,6 @@ Set Initial VLAN Config
 
 Suite Teardown Execution
     [Documentation]  Restore VLAN configuration.
-
     ${length}=  Get Length  ${initial_vlan_config}
     Return From Keyword If  ${length} == ${0}
 
@@ -328,7 +324,6 @@ Create VLAN
 
 Get VLAN IDs
     [Documentation]  Return all VLAN IDs.
-
     ${vlan_ids}  ${stderr}  ${rc}=  BMC Execute Command
     ...  /sbin/ip addr | grep @eth0 | cut -f1 -d@ | cut -f2 -d.
     ${vlan_ids}=  Split String  ${vlan_ids}
