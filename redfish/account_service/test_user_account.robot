@@ -18,6 +18,7 @@ ${account_lockout_threshold}  ${3}
 Verify AccountService Available
     [Documentation]  Verify Redfish account service is available.
     [Tags]  Verify_AccountService_Available
+    [Setup]  Redfish.Login
 
     ${resp} =  Redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
     Should Be Equal As Strings  ${resp}  ${True}
@@ -84,7 +85,6 @@ Verify User Creation Without Enabling It
     admin_user     TestPwd123  Administrator   ${False}
     operator_user  TestPwd123  Operator        ${False}
     readonly_user  TestPwd123  ReadOnly        ${False}
-
 
 Verify User Creation With Invalid Role Id
     [Documentation]  Verify user creation with invalid role ID.
@@ -293,7 +293,8 @@ Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Redfish.Login
-
+    ${cmd}=  Catenate  /usr/sbin/pam_tally2 --reset
+    Bmc Execute Command  ${cmd}
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
