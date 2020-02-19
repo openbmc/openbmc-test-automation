@@ -1,7 +1,6 @@
 *** Settings ***
 Documentation           Test setting VLAN and its configuration.
 
-
 Resource                        ../lib/rest_client.robot
 Resource                        ../lib/ipmi_client.robot
 Resource                        ../lib/utils.robot
