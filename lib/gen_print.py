@@ -1293,6 +1293,8 @@ def sprint_func_line(stack_frame, style=None, max_width=160):
     stack_frame                     A stack frame (such as is returned by inspect.stack()).
     style                           Indicates the style or formatting of the result string.  Acceptable
                                     values are shown above.
+    max_width                       The max width of the result.  If it exceeds this length, it will be
+                                    truncated on the right.
 
     Description of styles:
     func_line_style_std             The standard formatting.
@@ -1405,7 +1407,7 @@ def sprint_call_stack(indent=0,
     return buffer
 
 
-def sprint_executing(stack_frame_ix=None, style=None):
+def sprint_executing(stack_frame_ix=None, style=None, max_width=None):
     r"""
     Print a line indicating what function is executing and with what parameter values.  This is useful for
     debugging.
@@ -1420,6 +1422,7 @@ def sprint_executing(stack_frame_ix=None, style=None):
                                     1 which is the index of the caller's stack frame.  If the caller is the
                                     wrapper function "print_executing", this function will bump it up by 1.
     style                           See the sprint_line_func prolog above for details.
+    max_width                       See the sprint_line_func prolog above for details.
     """
 
     # If user wants default stack_frame_ix.
@@ -1434,7 +1437,9 @@ def sprint_executing(stack_frame_ix=None, style=None):
     work_around_inspect_stack_cwd_failure()
     stack_frame = inspect.stack()[stack_frame_ix]
 
-    func_and_args = sprint_func_line(stack_frame, style, max_width=160 - (dft_col1_width + 11))
+    if max_width is None:
+        max_width = 160 - (dft_col1_width + 11)
+    func_and_args = sprint_func_line(stack_frame, style, max_width=max_width)
 
     return sprint_time() + "Executing: " + func_and_args + "\n"
 
