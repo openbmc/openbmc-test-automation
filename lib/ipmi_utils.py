@@ -653,3 +653,35 @@ def get_channel_info(channel_number=1):
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
+
+
+def get_user_access_ipmi(channel_number=1):
+
+    r"""
+    Run 'user list [<channel number>]' command and return the result as a list of dictionaries.
+
+    Example robot code:
+    ${users_access}=  user list 1
+    Rprint Vars  users_access
+
+    Example output:
+    users:
+      [0]:
+        [id]:                                         1
+        [name]:                                       root
+        [callin]:                                     false
+        [link]:                                       true
+        [auth]:                                       true
+        [ipmi]:                                       ADMINISTRATOR
+      [1]:
+        [id]:                                         2
+        [name]:                                       axzIDwnz
+        [callin]:                                     true
+        [link]:                                       false
+        [auth]:                                       true
+        [ipmi]:                                       ADMINISTRATOR
+    """
+
+    cmd_buf = "user list " + str(channel_number)
+    stdout, stderr, rc = execute_ipmi_cmd(cmd_buf, "external", print_output=0)
+    return vf.outbuf_to_report(stdout)
