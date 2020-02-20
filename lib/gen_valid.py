@@ -268,7 +268,7 @@ def valid_value(var_value, valid_values=[], invalid_values=[], var_name=None):
                                     gp.blank() | gp.verbose()
                                     | gp.show_type())
     error_message += "\n"
-    error_message += "It must NOT be one of the following values:\n"
+    error_message += "It must NOT be any of the following values:\n"
     error_message += "\n"
     error_message += gp.sprint_var(invalid_values,
                                    gp.blank() | gp.show_type())
@@ -567,14 +567,32 @@ def valid_list(var_value, valid_values=[], invalid_values=[],
     return process_error_message(error_message)
 
 
-def valid_dict(var_value, required_keys=[], var_name=None):
+def valid_dict(var_value, required_keys=[], valid_values={}, invalid_values={}, var_name=None):
     r"""
-    The variable value is valid if it is a dictionary containing all of the required keys.
+    The dictionary variable value is valid if it contains all required keys and each entry passes the
+    valid_value() call.
+
+    Examples:
+    person_record = {'last_name': 'Jones', 'first_name': 'John'}
+    valid_values = {'last_name': ['Doe', 'Jones', 'Johnson'], 'first_name': ['John', 'Mary']}
+    invalid_values = {'last_name': ['Manson', 'Hitler', 'Presley'], 'first_name': ['Mickey', 'Goofy']}
+
+    valid_dict(person_record, valid_values=valid_values)
+    valid_dict(person_record, invalid_values=invalid_values)
 
     Description of argument(s):
     var_value                       The value being validated.
     required_keys                   A list of keys which must be found in the dictionary for it to be
                                     considered valid.
+    valid_values                    A dictionary whose entries correspond to the entries in var_value.  Each
+                                    value in valid_values is itself a valid_values list for the correponding
+                                    value in var_value.  For any var_value[key] to be considered valid, its
+                                    value must be found in valid_values[key].
+
+    invalid_values                  A dictionary whose entries correspond to the entries in var_value.  Each
+                                    value in invalid_values is itself an invalid_values list for the
+                                    correponding value in var_value.  For any var_value[key] to be considered
+                                    valid, its value must NOT be found in invalid_values[key].
     """
 
     error_message = ""
@@ -583,10 +601,39 @@ def valid_dict(var_value, required_keys=[], var_name=None):
         var_name = get_var_name(var_name)
         error_message += "The following dictionary is invalid because it is"
         error_message += " missing required keys:\n"
-        error_message += gp.sprint_varx(var_name, var_value,
-                                        gp.blank() | gp.show_type())
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank() | gp.show_type())
         error_message += "\n"
         error_message += gp.sprint_var(missing_keys, gp.show_type())
+        return process_error_message(error_message)
+
+    var_name = get_var_name(var_name)
+    if len(valid_values):
+        keys = valid_values.keys()
+        error_message = valid_dict(var_value, required_keys=keys, var_name=var_name)
+        if error_message:
+            return process_error_message(error_message)
+    for key, value in valid_values.items():
+        key_name = "  [" + key + "]"
+        sub_error_message = valid_value(var_value[key], valid_values=value, var_name=key_name)
+        if sub_error_message:
+            error_message += "The following dictionary is invalid because one of its entries is invalid:\n"
+            error_message += gp.sprint_varx(var_name, var_value, gp.blank() | gp.show_type())
+            error_message += "\n"
+            error_message += sub_error_message
+            return process_error_message(error_message)
+
+    for key, value in invalid_values.items():
+        if key not in var_value:
+            continue
+        key_name = "  [" + key + "]"
+        sub_error_message = valid_value(var_value[key], invalid_values=value, var_name=key_name)
+        if sub_error_message:
+            error_message += "The following dictionary is invalid because one of its entries is invalid:\n"
+            error_message += gp.sprint_varx(var_name, var_value, gp.blank() | gp.show_type())
+            error_message += "\n"
+            error_message += sub_error_message
+            return process_error_message(error_message)
+
     return process_error_message(error_message)
 
 
