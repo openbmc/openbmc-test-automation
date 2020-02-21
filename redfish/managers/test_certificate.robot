@@ -230,9 +230,9 @@ Install Certificate File On BMC
     [Arguments]  ${uri}  ${status}=ok  &{kwargs}
 
     # Description of argument(s):
-    # uri         URI for installing certificate file via REST
-    #             e.g. "/xyz/openbmc_project/certs/server/https".
-    # status      Expected status of certificate installation via REST
+    # uri         URI for installing certificate file via Redfish
+    #             e.g. "/redfish/v1/AccountService/LDAP/Certificates".
+    # status      Expected status of certificate installation via Redfish
     #             e.g. error, ok.
     # kwargs      A dictionary of keys/values to be passed directly to
     #             POST Request.
