@@ -564,3 +564,61 @@ def get_device_id_config():
     result['device_revision'] = result['revision'] & 0x0F
 
     return result
+
+
+def get_chassis_status():
+    r"""
+    Get IPMI chassis status data and return it as a dictionary.
+
+    The data is obtained by issuing the IPMI "chassis status" command. An
+    example is shown below:
+
+    System Power              : off
+    Power Overload            : false
+    Power Interlock           : inactive
+    Main Power Fault          : false
+    Power Control Fault       : false
+    Power Restore Policy      : previous
+    Last Power Event          :
+    Chassis Intrusion         : inactive
+    Front-Panel Lockout       : inactive
+    Drive Fault               : false
+    Cooling/Fan Fault         : false
+    Sleep Button Disable      : not allowed
+    Diag Button Disable       : not allowed
+    Reset Button Disable      : not allowed
+    Power Button Disable      : allowed
+    Sleep Button Disabled     : false
+    Diag Button Disabled      : false
+    Reset Button Disabled     : false
+    Power Button Disabled     : false
+
+    For the data shown above, the following dictionary will be returned.
+
+    chassis_status:
+      [system_power]:                        off
+      [power_overload]:                      false
+      [power_interlock]:                     inactive
+      [main_power_fault]:                    false
+      [power_control_fault]:                 false
+      [power_restore_policy]:                previous
+      [last_power_event]:
+      [chassis_intrusion]:                   inactive
+      [front-panel_lockout]:                 inactive
+      [drive_fault]:                         false
+      [cooling/fan_fault]:                   false
+      [sleep_button_disable]:                not allowed
+      [diag_button_disable]:                 not allowed
+      [reset_button_disable]:                not allowed
+      [power_button_disable]:                allowed
+      [sleep_button_disabled]:               false
+      [diag_button_disabled]:                false
+      [reset_button_disabled]:               false
+      [power_button_disabled]:               false
+    """
+
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  chassis status")
+    result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
+
+    return result
