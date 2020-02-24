@@ -339,6 +339,13 @@ Initiate Host PowerOff Via External IPMI
     Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
 
 
+Is Host Off Via IPMI
+    [Documentation]  Verify if the Host is off using IPMI command.
+
+    ${status}=  Run External IPMI Standard Command  chassis power status
+    Should Contain  ${status}  off
+
+
 Get Host State Via External IPMI
     [Documentation]  Returns host state using external IPMI.
 
