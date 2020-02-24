@@ -90,7 +90,7 @@ Verify Watchdog Errorlog Content
     #      "Resolved": 0,
     #      "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     #      "Timestamp": 1492715244828,
-    #      "associations": []
+    #      "Associations": []
     # },
 
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
@@ -134,7 +134,7 @@ Create Test Error Log
     #     "Message": "example.xyz.openbmc_project.Example.Elog.AutoTestSimple",
     #     "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     #     "Timestamp": 1487743963328,
-    #     "associations": []
+    #     "Associations": []
     # }
     BMC Execute Command  /tmp/tarball/bin/logging-test -c AutoTestSimple
 

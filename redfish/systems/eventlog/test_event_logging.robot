@@ -143,7 +143,7 @@ Create Test Event Log And Verify Resolved Field
     #    "Resolved": 0,
     #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     #    "Timestamp": 1490817164983,
-    #    "associations": []
+    #    "Associations": []
     # },
 
     # To mark an error as resolved, without deleting the error, user would
