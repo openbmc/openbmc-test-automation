@@ -52,11 +52,11 @@ Create Test Error Callout And Verify AdditionalData
 
 
 Create Test Error Callout And Verify Associations
-    [Documentation]  Create test error callout and verify associations.
+    [Documentation]  Create test error callout and verify Associations.
     [Tags]  Create_Test_Error_Callout_And_Verify_Associations
 
     # Test error log association entry example:
-    # "associations": [
+    # "Associations": [
     #   [
     #        "callout",
     #        "fault",
@@ -68,10 +68,10 @@ Create Test Error Callout And Verify Associations
     ${elog_entry}=  Get Elog URL List
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
     ${jsondata}=  To JSON  ${resp.content}
-    List Should Contain Value  ${jsondata["data"]["associations"][0]}  callout
-    List Should Contain Value  ${jsondata["data"]["associations"][0]}  fault
+    List Should Contain Value  ${jsondata["data"]["Associations"][0]}  callout
+    List Should Contain Value  ${jsondata["data"]["Associations"][0]}  fault
     List Should Contain Value
-    ...  ${jsondata["data"]["associations"][0]}
+    ...  ${jsondata["data"]["Associations"][0]}
     ...  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
 
 
@@ -91,7 +91,7 @@ Create Test Error Callout And Delete
     #    "Resolved": 0,
     #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     #    "Timestamp": 1487747332528,
-    #    "associations": [
+    #    "Associations": [
     #        [
     #          "callout",
     #          "fault",
@@ -128,7 +128,7 @@ Create Two Test Error Callout And Delete
     #    "Resolved": 0,
     #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     #    "Timestamp": 1487747332528,
-    #    "associations": [
+    #    "Associations": [
     #        [
     #          "callout",
     #          "fault",
@@ -152,7 +152,7 @@ Create Two Test Error Callout And Delete
     #    "Resolved": 0,
     #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     #    "Timestamp": 1487747332528,
-    #    "associations": [
+    #    "Associations": [
     #        [
     #          "callout",
     #          "fault",
@@ -201,7 +201,7 @@ Set Resolved Field And Verify Callout Deletion
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
     ${jsondata}=  To JSON  ${resp.content}
-    Should Contain  ${jsondata["data"]["associations"][0]}  callout
+    Should Contain  ${jsondata["data"]["Associations"][0]}  callout
 
     # Set the error log field "Resolved".
     # By doing so, the callout object should get deleted automatically.
@@ -239,7 +239,7 @@ Create Test Error With Callout
     #    "Resolved": 0,
     #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     #    "Timestamp": 1487747332528,
-    #    "associations": [
+    #    "Associations": [
     #        [
     #          "callout",
     #          "fault",

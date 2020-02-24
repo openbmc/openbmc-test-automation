@@ -64,7 +64,7 @@ Verify eSEL Description And EntryID Using REST
     # "Resolved": 0,
     # "Severity": "xyz.openbmc_project.Logging.Entry.Level.Error",
     # "Timestamp": 1524233022072,
-    # "associations": [
+    # "Associations": [
     #    [
     #        "callout",
     #        "fault",
