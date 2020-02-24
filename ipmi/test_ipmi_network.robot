@@ -118,7 +118,7 @@ Get IP Address Source And Verify Using Redfish
           Exit For Loop IF  "${ip_address_source}" != 'None'
     END
 
-    Valid Value  lan_config['IP Address Source']  [${ip_address_source}]
+    Valid Value  lan_config['IP Address Source']  ['${ip_address_source}']
 
 
 *** Keywords ***
