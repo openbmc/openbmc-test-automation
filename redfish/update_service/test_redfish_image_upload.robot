@@ -176,5 +176,5 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Run Keyword If  '${image_id}'  Delete Software Object
-    ...  /xyz/openbmc_project/software/${image_id}
+    ...  /redfish/v1/UpdateService/FirmwareInventory/${image_id}
 

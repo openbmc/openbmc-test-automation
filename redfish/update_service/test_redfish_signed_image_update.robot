@@ -104,5 +104,5 @@ Redfish Unsigned Firmware Update
     ...  Check Image Update Progress State
     ...    match_state='Disabled', 'Updating', 'Disabled'  image_id=${image_id}
     Delete Software Object
-    ...  /xyz/openbmc_project/software/${image_id}
+    ...  /redfish/v1/UpdateService/FirmwareInventory/${image_id}
 
