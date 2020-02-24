@@ -43,3 +43,13 @@ Verify Host PowerOn Via IPMI
     IPMI Power On
     ${ipmi_state}=  Get Host State Via External IPMI
     Valid Value  ipmi_state  ['on']
+
+
+Verify Soft Shutdown
+    [Documentation]  Verify host OS shutdown softly via IPMI command.
+    [Tags]  Verify_Soft_Stutdown
+
+    Redfish Power On  stack_mode=skip
+    Run IPMI Standard Command  chassis power soft
+    Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off Via IPMI
+
