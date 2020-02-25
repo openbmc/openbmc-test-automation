@@ -24,7 +24,9 @@ Verify IPMI SEL Version
 Verify Empty SEL
     [Documentation]  Verify empty SEL list.
     [Tags]  Verify_Empty_SEL
+
     Run IPMI Standard Command  sel clear
+    Sleep  5s
 
     ${resp}=  Run IPMI Standard Command  sel list
     Should Contain  ${resp}  SEL has no entries  case_insensitive=True
