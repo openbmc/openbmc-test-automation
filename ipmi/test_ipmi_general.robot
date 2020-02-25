@@ -33,9 +33,10 @@ Verify Get DCMI Capabilities
     ...  Secondary LAN channel is not available for OOB
     ...  No serial channel is available
 
-    :FOR  ${capability}  IN  @{supported_capabilities}
-    \  Should Contain  ${cmd_output}  ${capability}  ignore_case=True
-    ...  msg=Supported DCMI capabilities not present.
+    FOR  ${capability}  IN  @{supported_capabilities}
+      Should Contain  ${cmd_output}  ${capability}  ignore_case=True
+      ...  msg=Supported DCMI capabilities not present.
+    END
 
 
 Test Get Self Test Results via IPMI Raw Command

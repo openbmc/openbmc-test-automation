@@ -28,9 +28,10 @@ Retrieve IP Address Via IPMI And Verify Using Redfish
     [Tags]  Retrieve_IP_Address_Via_IPMI_And_Verify_Using_Redish
 
     ${active_channel_config}=  Get Active Channel Config
-    :FOR  ${channel_number}  IN  @{active_channel_config.keys()}
-    \  Verify Channel Info  ${channel_number}  IPv4StaticAddresses  ${active_channel_config}
+    FOR  ${channel_number}  IN  @{active_channel_config.keys()}
+      Verify Channel Info  ${channel_number}  IPv4StaticAddresses  ${active_channel_config}
     END
+
 
 Retrieve Default Gateway Via IPMI And Verify
     [Documentation]  Retrieve default gateway via IPMI and verify it's existence on the BMC.
@@ -46,8 +47,8 @@ Retrieve MAC Address Via IPMI And Verify Using Redfish
     [Tags]  Retrieve_MAC_Address_Via_IPMI_And_Verify_Using_Redfish
 
     ${active_channel_config}=  Get Active Channel Config
-    :FOR  ${channel_number}  IN  @{active_channel_config.keys()}
-    \  Verify Channel Info  ${channel_number}  MACAddress  ${active_channel_config}
+    FOR  ${channel_number}  IN  @{active_channel_config.keys()}
+      Verify Channel Info  ${channel_number}  MACAddress  ${active_channel_config}
     END
 
 
@@ -58,8 +59,9 @@ Test Valid IPMI Channels Supported
     ${channel_count}=  Get Physical Network Interface Count
 
     # Note: IPMI network channel logically starts from 1.
-    :FOR  ${channel_number}  IN RANGE  1  ${channel_count}
-    \  Run IPMI Standard Command  lan print ${channel_number}
+    FOR  ${channel_number}  IN RANGE  1  ${channel_count}
+      Run IPMI Standard Command  lan print ${channel_number}
+    END
 
 
 Test Invalid IPMI Channel Response
@@ -112,10 +114,10 @@ Get IP Address Source And Verify Using Redfish
     ...  IPv4Addresses
 
     FOR  ${ipv4_address}  IN  @{ipv4_addresses}
-        ${ip_address_source}=
-        ...  Set Variable if  '${ipv4_address['Address']}' == '${lan_config['IP Address']}'
-        ...  ${ipv4_address['AddressOrigin']} Address
-          Exit For Loop IF  "${ip_address_source}" != 'None'
+      ${ip_address_source}=
+      ...  Set Variable if  '${ipv4_address['Address']}' == '${lan_config['IP Address']}'
+      ...  ${ipv4_address['AddressOrigin']} Address
+      Exit For Loop IF  "${ip_address_source}" != 'None'
     END
 
     Valid Value  lan_config['IP Address Source']  ['${ip_address_source}']
