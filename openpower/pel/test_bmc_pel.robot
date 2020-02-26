@@ -4,8 +4,8 @@ Documentation   This suite tests Platform Event Log (PEL) functionality of OpenB
 Library         ../../lib/pel_utils.py
 Resource        ../../lib/openbmc_ffdc.robot
 
-Test Setup      Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
-Test Teardown   FFDC On Test Case Fail
+Test Setup      Redfish.Login
+Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 
 
 *** Variables ***
@@ -21,8 +21,23 @@ Create Test PEL Log And Verify
     [Documentation]  Create PEL log using busctl command and verify via peltool.
     [Tags]  Create_Test_PEL_Log_And_Verify
 
+    Redfish Purge Event Log
     Create Test PEL Log
-    PEL Log Should Exist
+    ${pel_id}=  Get PEL Log Via BMC CLI
+    Should Not Be Empty  ${pel_id}  msg=System PEL log entry is empty.
+
+
+Verify PEL Log Persistence After BMC Reboot
+    [Documentation]  Verify PEL log persistence after BMC reboot.
+    [Tags]  Verify_PEL_Log_Persistence_After_BMC_Reboot
+
+    Create Test PEL Log
+    ${pel_before_reboot}=  Get PEL Log Via BMC CLI
+
+    Redfish OBMC Reboot (off)
+    ${pel_after_reboot}=  Get PEL Log Via BMC CLI
+
+    List Should Contain Sub List  ${pel_after_reboot}  ${pel_before_reboot}
 
 
 *** Keywords ***
@@ -47,9 +62,10 @@ Create Test PEL Log
     BMC Execute Command  ${CMD_INTERNAL_FAILURE}
 
 
-PEL Log Should Exist
-    [Documentation]  PEL log entries should exist.
+Get PEL Log Via BMC CLI
+    [Documentation]  Returns the list of PEL IDs using BMC CLI.
 
     ${pel_records}=  Peltool  -l
-    Should Not Be Empty  ${pel_records}  msg=System PEL log entry is not empty.
+    ${ids}=  Get Dictionary Keys  ${pel_records}
 
+    [Return]  ${ids}
