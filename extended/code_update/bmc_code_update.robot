@@ -204,10 +204,15 @@ Test Certificate Persistency After BMC Code Update
     ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
 
-    Install Certificate File On BMC  ${CLIENT_CERTIFICATE_URI}
-    ...  data=${file_data}
+    Redfish.Login
+    ${cert_id}=  Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
+    Logging  Installed certificate id: ${cert_id}
 
-    ${bmc_cert_content}=  Get Certificate File Content From BMC  Client
+    # Adding delay after certificate installation.
+    Sleep  30s
+
+    ${bmc_cert_content}=  redfish_utils.Get Attribute
+    ...  /redfish/v1/Managers/bmc/Truststore/Certificates/${cert_id}  CertificateString
     Should Contain  ${cert_file_content}  ${bmc_cert_content}
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
@@ -215,8 +220,12 @@ Test Certificate Persistency After BMC Code Update
     OBMC Reboot (off)
     Verify Running BMC Image  ${IMAGE_FILE_PATH}
 
-    ${bmc_cert_content}=  Get Certificate File Content From BMC  Client
+    Redfish.Login
+    ${bmc_cert_content}=  redfish_utils.Get Attribute
+    ...  ${REDFISH_CA_CERTIFICATE_URI}/${cert_id}  CertificateString
     Should Contain  ${cert_file_content}  ${bmc_cert_content}
+
+    Redfish.Logout
 
 
 Test Basic BMC Performance After Code Update

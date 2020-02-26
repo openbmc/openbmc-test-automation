@@ -225,37 +225,6 @@ Install And Verify Certificate Via Redfish
     [Return]  ${cert_id}
 
 
-Install Certificate File On BMC
-    [Documentation]  Install certificate file in BMC using POST operation.
-    [Arguments]  ${uri}  ${status}=ok  &{kwargs}
-
-    # Description of argument(s):
-    # uri         URI for installing certificate file via Redfish
-    #             e.g. "/redfish/v1/AccountService/LDAP/Certificates".
-    # status      Expected status of certificate installation via Redfish
-    #             e.g. error, ok.
-    # kwargs      A dictionary of keys/values to be passed directly to
-    #             POST Request.
-
-    Initialize OpenBMC  quiet=${quiet}
-
-    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
-    ...  X-Auth-Token=${XAUTH_TOKEN}
-    Set To Dictionary  ${kwargs}  headers  ${headers}
-
-    ${ret}=  Post Request  openbmc  ${uri}  &{kwargs}
-    ${content_json}=  To JSON  ${ret.content}
-    ${cert_id}=  Set Variable If  '${ret.status_code}' == '${HTTP_OK}'  ${content_json["Id"]}  -1
-
-    Run Keyword If  '${status}' == 'ok'
-    ...  Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
-    ...  ELSE IF  '${status}' == 'error'
-    ...  Should Be Equal As Strings  ${ret.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
-
-    Delete All Sessions
-
-    [Return]  ${cert_id}
-
 Replace Certificate Via Redfish
     [Documentation]  Test 'replace certificate' operation in the BMC via Redfish.
     [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}
