@@ -43,7 +43,6 @@ Verify SessionService Defaults
     ${session_service}=  Redfish.Get Properties  /redfish/v1/SessionService
     Rprint Vars  session_service
 
-    Valid Value  session_service['@odata.context']  ['/redfish/v1/$metadata#SessionService.SessionService']
     Valid Value  session_service['@odata.id']  ['/redfish/v1/SessionService/']
     Valid Value  session_service['Description']  ['Session Service']
     Valid Value  session_service['Id']  ['SessionService']
@@ -61,7 +60,6 @@ Verify Sessions Defaults
     Rprint Vars  sessions
     ${sessions_count}=  Get length  ${sessions['Members']}
 
-    Valid Value  sessions['@odata.context']  ['/redfish/v1/$metadata#SessionCollection.SessionCollection']
     Valid Value  sessions['@odata.id']  ['/redfish/v1/SessionService/Sessions/']
     Valid Value  sessions['Description']  ['Session Collection']
     Valid Value  sessions['Name']  ['Session Collection']
@@ -77,7 +75,6 @@ Verify Current Session Defaults
     ${session_properties}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions/${session_id}
     Rprint Vars  session_location  session_id  session_properties
 
-    Valid Value  session_properties['@odata.context']  ['/redfish/v1/$metadata#Session.Session']
     Valid Value  session_properties['@odata.id']  ['/redfish/v1/SessionService/Sessions/${session_id}']
     Valid Value  session_properties['Description']  ['Manager User Session']
     Valid Value  session_properties['Name']  ['User Session']
@@ -93,7 +90,6 @@ Verify Managers Defaults
     Rprint Vars  managers
     ${managers_count}=  Get Length  ${managers['Members']}
 
-    Valid Value  managers['@odata.context']  ['/redfish/v1/$metadata#ManagerCollection.ManagerCollection']
     Valid Value  managers['Name']  ['Manager Collection']
     Valid Value  managers['@odata.id']  ['/redfish/v1/Managers']
     Valid Value  managers['Members@odata.count']  [${managers_count}]
@@ -110,7 +106,6 @@ Verify Chassis Defaults
     Rprint Vars  chassis
     ${chassis_count}=  Get Length  ${chassis['Members']}
 
-    Valid Value  chassis['@odata.context']  ['/redfish/v1/$metadata#ChassisCollection.ChassisCollection']
     Valid Value  chassis['Name']  ['Chassis Collection']
     Valid Value  chassis['@odata.id']  ['/redfish/v1/Chassis']
     Valid Value  chassis['Members@odata.count']  [${chassis_count}]
@@ -128,8 +123,6 @@ Verify Systems Defaults
     ${systems}=  Redfish.Get Properties  /redfish/v1/Systems
     Rprint Vars  systems
     ${systems_count}=  Get Length  ${systems['Members']}
-
-    Valid Value  systems['@odata.context']
     ...  ['/redfish/v1/$metadata#ComputerSystemCollection.ComputerSystemCollection']
     Valid Value  systems['Name']  ['Computer System Collection']
     Valid Value  systems['@odata.id']  ['/redfish/v1/Systems']
