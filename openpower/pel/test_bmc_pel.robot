@@ -40,6 +40,16 @@ Verify PEL Log Persistence After BMC Reboot
     List Should Contain Sub List  ${pel_after_reboot}  ${pel_before_reboot}
 
 
+Verify PEL Log After Host Poweron
+    [Documentation]  Verify no PEL log generation after booting host.
+    [Tags]  Verify_PEL_Log_After_Host_Poweron
+
+    ${pel_before_poweron}=  Get PEL Log Via BMC CLI
+    Redfish Power On
+    ${pel_after_poweron}=  Get PEL Log Via BMC CLI
+    Lists Should Be Equal  ${pel_after_poweron}  ${pel_before_poweron}
+
+
 *** Keywords ***
 
 Create Test PEL Log
