@@ -68,7 +68,7 @@ def makedirs(path, mode=0o777, quiet=None):
     gp.qprint_issuing("os.makedirs('" + path + "', mode=" + oct(mode) + ")")
     try:
         os.makedirs(path, mode)
-    except FileExistsError:
+    except OSError:
         pass
 
 
