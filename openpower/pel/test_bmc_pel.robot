@@ -3,6 +3,7 @@ Documentation   This suite tests Platform Event Log (PEL) functionality of OpenB
 
 Library         ../../lib/pel_utils.py
 Variables       ../../data/pel_variables.py
+Resource        ../../lib/list_utils.robot
 Resource        ../../lib/openbmc_ffdc.robot
 
 Test Setup      Redfish.Login
@@ -152,6 +153,23 @@ Verify BMC Version From PEL
     Valid Value  bmc_version  ['${bmc_version}']
 
 
+Verify PEL Log After Host Poweron
+    [Documentation]  Verify PEL log generation while booting host.
+    [Tags]  Verify_PEL_Log_After_Host_Poweron
+
+    Redfish Power Off  stack_mode=skip
+    Redfish Purge Event Log
+    Redfish Power On  stack_mode=skip
+
+    ${pel_informational_error}=  Get PEL Log IDs  User Header  Event Severity  Informational Event
+    ${pel_bmc_created_error}=  Get PEL Log IDs  Private Header  Creator Subsystem  BMC
+
+    # Get BMC created non-infomational error.
+    ${pel_bmc_error}=  Subtract Lists  ${pel_bmc_created_error}  ${pel_informational_error}
+
+    Should Be Empty  ${pel_bmc_error}  msg=Unexpected error log generated during Host poweron.
+
+
 *** Keywords ***
 
 Create Test PEL Log
@@ -172,6 +190,53 @@ Create Test PEL Log
     # }
 
     BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+
+Get PEL Log IDs
+    [Documentation]  Returns the list of PEL log IDs which contains given field's value.
+    [Arguments]  ${pel_section}  ${pel_field}  @{pel_field_value}
+
+    # Description of argument(s):
+    # pel_section      The section of PEL (e.g. Private Header, User Header).
+    # pel_field        The PEL field (e.g. Event Severity, Event Type).
+    # pel_field_value  The list of PEL's field value (e.g. Unrecoverable Error).
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    @{pel_id_list}=  Create List
+
+    FOR  ${id}  IN  @{pel_ids}
+      ${pel_output}=  Peltool  -i ${id}
+      # Example of PEL output from "peltool -i <id>" command.
+      #  [Private Header]:
+      #    [Created at]:                                 08/24/1928 12:04:06
+      #    [Created by]:                                 0x584D
+      #    [Sub-section type]:                           0
+      #    [Entry Id]:                                   0x50000BB7
+      #    [Platform Log Id]:                            0x8200061D
+      #    [CSSVER]:
+      #    [Section Version]:                            1
+      #    [Creator Subsystem]:                          PHYP
+      #    [BMC Event Log Id]:                           341
+      #    [Committed at]:                               03/25/1920 12:06:22
+      #  [User Header]:
+      #    [Log Committed by]:                           0x4552
+      #    [Action Flags]:
+      #      [0]:                                        Report Externally
+      #    [Subsystem]:                                  I/O Subsystem
+      #    [Event Type]:                                 Miscellaneous, Informational Only
+      #    [Sub-section type]:                           0
+      #    [Event Scope]:                                Entire Platform
+      #    [Event Severity]:                             Informational Event
+      #    [Host Transmission]:                          Not Sent
+      #    [Section Version]:                            1
+
+      ${pel_section_output}=  Get From Dictionary  ${pel_output}  ${pel_section}
+      ${pel_field_output}=  Get From Dictionary  ${pel_section_output}  ${pel_field}
+      Run Keyword If  '${pel_field_output}' in @{pel_field_value}  Append To List  ${pel_id_list}  ${id}
+    END
+    Sort List  ${pel_id_list}
+
+    [Return]  ${pel_id_list}
 
 
 Get PEL Log Via BMC CLI
