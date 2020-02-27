@@ -32,8 +32,6 @@ import state as st
 import var_stack as vs
 import gen_plug_in_utils as gpu
 
-gv.set_exit_on_error(True)
-
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) +\
     os.sep
