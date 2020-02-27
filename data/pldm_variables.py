@@ -164,14 +164,6 @@ RESPONSE_DICT_GETPDR = {
     'possiblestatessize': ['1', '2'],
     'possiblestates': ['6', '0']}
 
-RESPONSE_DICT_GETFRURECORDTABLEMETADATA = {
-    'frudatamajorversion': ['1'],
-    'frudataminorversion': ['0'],
-    'frutablemaximumsize': ['4294967295'],
-    'frutablelength': ['60'],
-    'total_number_of_record_set_identifiers_in_table': ['1'],
-    'total_number_of_records_in_table': ['1']}
-
 RESPONSE_DICT_GETBIOSTABLE_STRTABLE = {
     'biosstringhandle': ['BIOSString'],
     '0': ['Allowed'],

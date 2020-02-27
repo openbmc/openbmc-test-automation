@@ -16,13 +16,19 @@ Verify GetFruRecordTableMetadata
     [Tags]  Verify_GetFruRecordTableMetadata
 
     # pldm_output:
-    # [frutablelength]:                                   60
     # [frudatamajorversion]:                              1
-    # [total_number_of_record_set_identifiers_in_table]:  1
     # [frudataminorversion]:                              0
-    # [total_number_of_records_in_table]:                 1
     # [frutablemaximumsize]:                              4294967295
+    # [frutablelength]:                                   60
+    # [total_number_of_record_set_identifiers_in_table]:  1
+    # [total_number_of_records_in_table]:                 1
 
     ${pldm_output}=  Pldmtool  fru GetFruRecordTableMetadata
     Rprint Vars  pldm_output
-    Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETFRURECORDTABLEMETADATA}
+
+    Valid Value  pldm_output['frudatamajorversion']  ['1']
+    Valid Value  pldm_output['frudataminorversion']  ['0']
+    Valid Value  pldm_output['frutablemaximumsize']  ['4294967295']
+    Valid Range  ${pldm_output['frutablelength']}  0
+    Valid Range  ${pldm_output['total_number_of_records_in_table']}  1
+    Valid Range  ${pldm_output['total_number_of_record_set_identifiers_in_table']}  1
