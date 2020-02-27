@@ -2,12 +2,15 @@
 
 Documentation    Module to test PLDM platform commands.
 
-Library          ../lib/pldm_utils.py
-Variables        ../data/pldm_variables.py
-Resource         ../lib/openbmc_ffdc.robot
+Library           ../lib/pldm_utils.py
+Variables         ../data/pldm_variables.py
+Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/bmc_redfish_resource.robot
+Resource          ../lib/boot_utils.robot
 
-Test Setup       Printn
-Test Teardown    FFDC On Test Case Fail
+Test Setup        Printn
+Test Teardown     FFDC On Test Case Fail
+Suite Teardown    Pldmtool Platform Suite Cleanup
 
 *** Test Cases ***
 
@@ -28,8 +31,8 @@ Verify SetStateEffecterStates
     [Template]  Verify SetStateEffecterStates For Effecter States
 
     # EffecterStates (effecterID requestSet effecterState)
-    '1 1 1'
-    '1 1 2'
+    '1 1 1'  # (effecterState -> 1 move OSStatus to 'standby')
+    '1 1 2'  # (effecterState -> 2 move OSStatus to 'BootComplete')
 
 *** Keywords ***
 
@@ -81,3 +84,9 @@ Verify SetStateEffecterStates For Effecter States
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Rprint Vars  pldm_output
     Valid Value  pldm_output['setstateeffecterstates']  ['SUCCESS']
+
+
+Pldmtool Platform Suite Cleanup
+    [Documentation]    Reset BMC at suite cleanup.
+
+    Redfish OBMC Reboot (off)
