@@ -6,8 +6,7 @@ Resource               ../../lib/ipmi_client.robot
 Resource               ../../lib/openbmc_ffdc.robot
 Resource               ../../lib/boot_utils.robot
 Library                ../../lib/ipmi_utils.py
-
-Variables              ../data/ipmi_rest_fru_field_map.py
+Library                ../../data/model.py
 
 Test Teardown          Test Teardown Execution
 Suite Setup            Suite Setup Execution
@@ -18,16 +17,15 @@ Suite Setup            Suite Setup Execution
 Test FRU Info At Power On
     [Documentation]  Verify FRU info via IPMI and REST at power on.
     [Tags]  Test_FRU_Info_At_Power_On
-    [Template]  Verify FRU Info
 
-    # component_name
-    cpu
-    dimm
-    fan
-    bmc
-    system
-    powersupply
-    gv100card
+    ${component_name_list}=  Get FRU Component Name List  ${OPENBMC_MODEL}
+    &{ipmi_rest_fru_field_map}=  Get Ipmi Rest Fru Field Map  ${OPENBMC_MODEL}
+    Set Global Variable  ${ipmi_rest_fru_field_map}
+    Rprint Vars  ipmi_rest_fru_field_map  component_name_list
+
+    FOR  ${component_name}  IN  @{component_name_list}
+         Verify FRU Info  ${component_name}
+    END
 
 
 *** Keywords ***
