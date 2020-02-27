@@ -27,6 +27,11 @@ Test Teardown            FFDC On Test Case Fail
 
 Force Tags               BMC_Code_Update
 
+*** Variables ***
+
+${FORCE_UPDATE}          ${0}
+
+
 *** Test Cases ***
 
 Redfish BMC Code Update
