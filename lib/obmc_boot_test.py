@@ -461,6 +461,12 @@ def validate_parms():
     gp.qprintn()
 
     global openbmc_model
+    if openbmc_model == "":
+        status, ret_values =\
+            grk.run_key_u("Get BMC System Model")
+        openbmc_model = ret_values
+        BuiltIn().set_global_variable("${openbmc_model}", openbmc_model)
+    gv.set_exit_on_error(True)
     gv.valid_value(openbmc_host)
     gv.valid_value(openbmc_username)
     gv.valid_value(openbmc_password)
@@ -471,39 +477,29 @@ def validate_parms():
     if os_host != "":
         gv.valid_value(os_username)
         gv.valid_value(os_password)
-
     if pdu_host != "":
         gv.valid_value(pdu_username)
         gv.valid_value(pdu_password)
         gv.valid_integer(pdu_slot_no)
     if openbmc_serial_host != "":
         gv.valid_integer(openbmc_serial_port)
-    if openbmc_model == "":
-        status, ret_values =\
-            grk.run_key_u("Get BMC System Model")
-        openbmc_model = ret_values
-        BuiltIn().set_global_variable("${openbmc_model}", openbmc_model)
     gv.valid_value(openbmc_model)
     gv.valid_integer(max_num_tests)
     gv.valid_integer(boot_pass)
     gv.valid_integer(boot_fail)
-
     plug_in_packages_list = grpi.rvalidate_plug_ins(plug_in_dir_paths)
     BuiltIn().set_global_variable("${plug_in_packages_list}",
                                   plug_in_packages_list)
-
     gv.valid_value(stack_mode, valid_values=['normal', 'skip'])
+    gv.set_exit_on_error(False)
     if len(boot_list) == 0 and len(boot_stack) == 0 and not ffdc_only:
         error_message = "You must provide either a value for either the" +\
             " boot_list or the boot_stack parm.\n"
         BuiltIn().fail(gp.sprint_error(error_message))
-
     valid_boot_list(boot_list, valid_boot_types)
     valid_boot_list(boot_stack, valid_boot_types)
-
     selected_PDU_boots = list(set(boot_list + boot_stack)
                               & set(boot_lists['PDU_reboot']))
-
     if len(selected_PDU_boots) > 0 and pdu_host == "":
         error_message = "You have selected the following boots which" +\
                         " require a PDU host but no value for pdu_host:\n"
