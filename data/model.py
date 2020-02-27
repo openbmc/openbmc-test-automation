@@ -57,3 +57,23 @@ def get_inventory_fru_type_list(module_name, fru_type):
 
 def call_keyword(keyword):
     return BuiltIn().run_keyword(keyword)
+
+
+def get_FRU_component_name_list(module_name):
+    name_list = []
+    m = imp.load_source('module.name', module_name)
+
+    for name in m.FRU_COMPONENT_NAME:
+        name_list.append(name)
+        print(name)
+
+    return name_list
+
+
+def get_ipmi_rest_fru_field_map(module_name):
+
+    m = imp.load_source('module.name', module_name)
+
+    ipmi_rest_fru_field_map = dict.copy(m.ipmi_rest_fru_field_map)
+
+    return ipmi_rest_fru_field_map
