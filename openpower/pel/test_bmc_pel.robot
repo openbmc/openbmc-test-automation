@@ -124,6 +124,19 @@ Verify PEL ID Numbering
     Should Be True  ${pel_ids[1]} == ${pel_ids[0]}+1
 
 
+Verify PEL Log After Host Poweron
+    [Documentation]  Verify PEL log generation while booting host.
+    [Tags]  Verify_PEL_Log_After_Host_Poweron
+
+    Redfish Power Off
+    ${pel_before_poweron}=  Get PEL Log Via BMC CLI
+    Redfish Power On
+    ${pel_after_poweron}=  Get PEL Log Via BMC CLI
+
+    # At present, PEL log should not get generate while booting host.
+    Lists Should Be Equal  ${pel_after_poweron}  ${pel_before_poweron}
+
+
 *** Keywords ***
 
 Create Test PEL Log
