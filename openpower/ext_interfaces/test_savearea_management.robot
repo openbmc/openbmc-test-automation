@@ -405,7 +405,7 @@ Suite Setup Execution
 
     # Create different user accounts.
     Redfish.Login
-    Create Users With Different Roles  users=${USERS}  force=${True} 
+    Create Users With Different Roles  users=${USERS}  force=${True}
     # Get REST session to BMC.
     Initialize OpenBMC
 

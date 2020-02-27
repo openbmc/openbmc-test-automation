@@ -585,13 +585,13 @@ def valid_dict(var_value, required_keys=[], valid_values={}, invalid_values={}, 
     required_keys                   A list of keys which must be found in the dictionary for it to be
                                     considered valid.
     valid_values                    A dictionary whose entries correspond to the entries in var_value.  Each
-                                    value in valid_values is itself a valid_values list for the correponding
+                                    value in valid_values is itself a valid_values list for the corresponding
                                     value in var_value.  For any var_value[key] to be considered valid, its
                                     value must be found in valid_values[key].
 
     invalid_values                  A dictionary whose entries correspond to the entries in var_value.  Each
                                     value in invalid_values is itself an invalid_values list for the
-                                    correponding value in var_value.  For any var_value[key] to be considered
+                                    corresponding value in var_value.  For any var_value[key] to be considered
                                     valid, its value must NOT be found in invalid_values[key].
     """
 

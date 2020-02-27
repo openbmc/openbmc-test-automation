@@ -720,5 +720,3 @@ Update LDAP User Role And Host Poweron
 
     Redfish.Post  ${REDFISH_POWER_URI}
     ...  body={'ResetType': 'On'}   valid_status_codes=[${valid_status_code}]
-
-
