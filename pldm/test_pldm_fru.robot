@@ -12,7 +12,7 @@ Test Teardown    FFDC On Test Case Fail
 *** Test Cases ***
 
 Verify GetFruRecordTableMetadata
-    [Documentation]  Verify get fru record table meta data reponse message.
+    [Documentation]  Verify get fru record table meta data response message.
     [Tags]  Verify_GetFruRecordTableMetadata
 
     # pldm_output:
