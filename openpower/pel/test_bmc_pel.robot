@@ -124,6 +124,19 @@ Verify PEL ID Numbering
     Should Be True  ${pel_ids[1]} == ${pel_ids[0]}+1
 
 
+Verify PEL Log After Host Poweron
+    [Documentation]  Verify PEL log generation while booting host.
+    [Tags]  Verify_PEL_Log_After_Host_Poweron
+
+    Redfish Power Off
+    ${pel_before_poweron}=  Get PEL Log IDs  User Header  Event Severity  Unrecoverable Error
+    Redfish Power On
+    ${pel_after_poweron}=  Get PEL Log IDs  User Header  Event Severity  Unrecoverable Error
+
+    # Verify that no additional Unrecoverable PEL log gets generated while booting.
+    Lists Should Be Equal  ${pel_after_poweron}  ${pel_before_poweron}
+
+
 *** Keywords ***
 
 Create Test PEL Log
@@ -144,6 +157,53 @@ Create Test PEL Log
     # }
 
     BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+
+Get PEL Log IDs
+    [Documentation]  Returns the list of PEL log IDs which contains given field's value.
+    [Arguments]  ${pel_field}  ${pel_sub_field}  @{sub_field_value}
+
+    # Description of argument(s):
+    # pel_field        The PEL field (e.g. Private Header, User Header).
+    # pel_sub_field    The PEL sub field (e.g. Event Severity, Event Type).
+    # sub_field_value  The list of PEL's sub field value (e.g. Unrecoverable Error).
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    @{pel_id_list}=  Create List
+
+    FOR  ${id}  IN  @{pel_ids}
+      ${pel_output}=  Peltool  -i ${id}
+      # Example of PEL output from "peltool -i <id>" command.
+      #  [Private Header]:
+      #    [Created at]:                                 08/24/1928 12:04:06
+      #    [Created by]:                                 0x584D
+      #    [Sub-section type]:                           0
+      #    [Entry Id]:                                   0x50000BB7
+      #    [Platform Log Id]:                            0x8200061D
+      #    [CSSVER]:
+      #    [Section Version]:                            1
+      #    [Creator Subsystem]:                          PHYP
+      #    [BMC Event Log Id]:                           341
+      #    [Committed at]:                               03/25/1920 12:06:22
+      #  [User Header]:
+      #    [Log Committed by]:                           0x4552
+      #    [Action Flags]:
+      #      [0]:                                        Report Externally
+      #    [Subsystem]:                                  I/O Subsystem
+      #    [Event Type]:                                 Miscellaneous, Informational Only
+      #    [Sub-section type]:                           0
+      #    [Event Scope]:                                Entire Platform
+      #    [Event Severity]:                             Informational Event
+      #    [Host Transmission]:                          Not Sent
+      #    [Section Version]:                            1
+
+      ${pel_field_output}=  Get From Dictionary  ${pel_output}  ${pel_field}
+      ${pel_sub_field_output}=  Get From Dictionary  ${pel_field_output}  ${pel_sub_field}
+      Run Keyword If  '${pel_sub_field_output}' in @{sub_field_value}  Append To List  ${pel_id_list}  ${id}
+    END
+    Sort List  ${pel_id_list}
+
+    [Return]  ${pel_id_list}
 
 
 Get PEL Log Via BMC CLI
