@@ -2,6 +2,7 @@
 Documentation   This suite tests Platform Event Log (PEL) functionality of OpenBMC.
 
 Library         ../../lib/pel_utils.py
+Variables       ../../data/pel_variables.py
 Resource        ../../lib/openbmc_ffdc.robot
 
 Test Setup      Redfish.Login
@@ -27,6 +28,55 @@ Create Test PEL Log And Verify
     Should Not Be Empty  ${pel_id}  msg=System PEL log entry is empty.
 
 
+Verify PEL Log Details
+    [Documentation]  Verify PEL log details via peltool.
+    [Tags]  Verify_PEL_Log_Details
+
+    Redfish Purge Event Log
+
+    ${bmc_time1}=  CLI Get BMC DateTime
+    Create Test PEL Log
+    ${bmc_time2}=  CLI Get BMC DateTime
+
+    ${pel_records}=  Peltool  -l
+
+    # Example output from 'Peltool  -l':
+    # pel_records:
+    # [0x50000012]:
+    #   [CreatorID]:                  BMC
+    #   [CompID]:                     0x1000
+    #   [PLID]:                       0x50000012
+    #   [Subsystem]:                  BMC Firmware
+    #   [Message]:                    An application had an internal failure
+    #   [SRC]:                        BD8D1002
+    #   [Commit Time]:                03/02/2020  09:35:15
+    #   [Sev]:                        Unrecoverable Error
+
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${id}=  Get From List  ${ids}  0
+
+    @{pel_fields}=  Create List  CreatorID  Subsystem  Message  Sev
+    FOR  ${field}  IN  @{pel_fields}
+      Valid Value  pel_records['${id}']['${field}']  ['${PEL_DETAILS['${field}']}']
+    END
+
+    Valid Value  pel_records['${id}']['PLID']  ['${id}']
+
+    # Verify if "CompID" and "SRC" fields of PEL has alphanumeric value.
+    Should Match Regexp  ${pel_records['${id}']['CompID']}  [a-zA-Z0-9]
+    Should Match Regexp  ${pel_records['${id}']['SRC']}  [a-zA-Z0-9]
+
+    ${pel_date_time}=  Convert Date  ${pel_records['${id}']['Commit Time']}
+    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=yes
+
+    # Convert BMC and PEL time to epoch time before comparing.
+    ${bmc_time1_epoch}=  Convert Date  ${bmc_time1}  epoch
+    ${pel_time_epoch}=  Convert Date  ${pel_date_time}  epoch
+    ${bmc_time2_epoch}=  Convert Date  ${bmc_time2}  epoch
+
+    Should Be True  ${bmc_time1_epoch} <= ${pel_time_epoch} <= ${bmc_time2_epoch}
+
+
 Verify PEL Log Persistence After BMC Reboot
     [Documentation]  Verify PEL log persistence after BMC reboot.
     [Tags]  Verify_PEL_Log_Persistence_After_BMC_Reboot
@@ -38,23 +88,6 @@ Verify PEL Log Persistence After BMC Reboot
     ${pel_after_reboot}=  Get PEL Log Via BMC CLI
 
     List Should Contain Sub List  ${pel_after_reboot}  ${pel_before_reboot}
-
-
-Verify PEL Log Details
-    [Documentation]  Verify PEL log details via peltool.
-    [Tags]  Verify_PEL_Log_Details
-
-    Redfish Purge Event Log
-    Create Test PEL Log
-    ${pel_id}=  Get PEL Log Via BMC CLI
-    ${pel_details}=  Get PEL Log Details  ${pel_id}
-
-    Valid Value  pel_details[SRC]  BD8D1002
-    Valid Value  pel_details[Message]  An application had an internal failure
-    Valid Value  pel_details[CreatorID]  BMC
-    Valid Value  pel_details[Subsystem]  BMC Firmware
-    Valid Value  pel_details[Sev]  Unrecoverable Error
-    Valid Value  pel_details[CompID]  0x1000
 
 
 *** Keywords ***
@@ -87,11 +120,3 @@ Get PEL Log Via BMC CLI
 
     [Return]  ${ids}
 
-
-Get PEL Log Details
-    [Documentation]  Return details regarding given PEL id.
-
-    ${pel_records}=  Peltool  -l
-    ${output}=  Get Dictionary Values  ${pel_id}
-
-    [Return]  ${output}
