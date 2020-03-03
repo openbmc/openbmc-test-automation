@@ -62,6 +62,7 @@ Host Reboot
 Host Reboot (mfg)
 Redfish Host Reboot
 Redfish Host Reboot (mfg)
+Redfish Host Force Reboot
 pflash
 Out of Band Code Update
 OS Code Update
