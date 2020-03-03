@@ -40,6 +40,40 @@ Verify PEL Log Persistence After BMC Reboot
     List Should Contain Sub List  ${pel_after_reboot}  ${pel_before_reboot}
 
 
+Verify PEL ID Numbering
+    [Documentation]  Verify PEL ID numbering.
+    [Tags]  Verify_PEL_ID_Numbering
+
+    Redfish Purge Event Log
+    Create Test PEL Log
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+
+    # Example of PEL IDs from PEL logs.
+    #  [0x50000012]:             <--- First PEL ID
+    #    [CreatorID]:                  BMC
+    #    [CompID]:                     0x1000
+    #    [PLID]:                       0x50000012
+    #    [Subsystem]:                  BMC Firmware
+    #    [Message]:                    An application had an internal failure
+    #    [SRC]:                        BD8D1002
+    #    [Commit Time]:                03/02/2020  09:35:15
+    #    [Sev]:                        Unrecoverable Error
+    #
+    #  [0x50000013]:             <--- Second PEL ID
+    #    [CreatorID]:                  BMC
+    #    [CompID]:                     0x1000
+    #    [PLID]:                       0x50000013
+    #    [Subsystem]:                  BMC Firmware
+    #    [Message]:                    An application had an internal failure
+    #    [SRC]:                        BD8D1002
+    #    [Commit Time]:                03/02/2020  09:35:15
+    #    [Sev]:                        Unrecoverable Error
+
+    Should Be True  ${pel_ids[1]} == ${pel_ids[0]}+1
+
+
 *** Keywords ***
 
 Create Test PEL Log
