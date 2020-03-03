@@ -40,6 +40,20 @@ Verify PEL Log Persistence After BMC Reboot
     List Should Contain Sub List  ${pel_after_reboot}  ${pel_before_reboot}
 
 
+Verify PEL ID Numbering
+    [Documentation]  Verify PEL ID numbering.
+    [Tags]  Verify_PEL_ID_Numbering
+
+    Redfish Purge Event Log
+    Create Test PEL Log
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${first_pel_id}=  Get From List  ${pel_ids}  0
+    ${second_pel_id}=  Get From List  ${pel_ids}  1
+    Should Be True  ${first_pel_id} < ${second_pel_id}
+
+
 *** Keywords ***
 
 Create Test PEL Log
