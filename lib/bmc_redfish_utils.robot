@@ -20,8 +20,12 @@ Redfish Power Operation
     #  "ResetType@Redfish.AllowableValues": [
     #    "On",
     #    "ForceOff",
+    #    "ForceOn",
+    #    "ForceRestart",
     #    "GracefulRestart",
     #    "GracefulShutdown"
+    #    "PowerCycle",
+    #    "Nmi"
     #  ],
     #  "target": "/redfish/v1/Systems/system/Actions/ComputerSystem.Reset"
     #  }
