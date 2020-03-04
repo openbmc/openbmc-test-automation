@@ -78,7 +78,8 @@ Verify Get Channel Info via IPMI
     [Tags]  Verify_Get_Channel_Info_via_IPMI
 
     # Get channel info via ipmi command "ipmitool channel info [channel number]".
-    # Verify channel info with files "channel_access.json" and "channel_config.json" in BMC.
+    # Verify channel info with files "channel_access_volatile.json", "channel_access_nv.json"
+    # and "channel_config.json" in BMC.
 
     # Example output from 'Get Channel Info':
     # channel_info:
@@ -88,16 +89,23 @@ Verify Get Channel Info via IPMI
     #     [session_support]:                            multi-session
     #     [active_session_count]:                       0
     #     [protocol_vendor_id]:                         7154
-    #     [volatile(active)_settings]:
-    #     [alerting]:                                   enabled
-    #     [per-message_auth]:                           enabled
-    #     [user_level_auth]:                            enabled
-    #     [access_mode]:                                always available
+    #   [volatile(active)_settings]:
+    #       [alerting]:                                 enabled
+    #       [per-message_auth]:                         enabled
+    #       [user_level_auth]:                          enabled
+    #       [access_mode]:                              always available
+    #   [Non-Volatile Settings]:
+    #       [alerting]:                                 enabled
+    #       [per-message_auth]:                         enabled
+    #       [user_level_auth]:                          enabled
+    #       [access_mode]:                              always available
 
     ${channel_info_ipmi}=  Get Channel Info  ${CHANNEL_NUMBER}
     ${active_channel_config}=  Get Active Channel Config
-    ${channel_access_config}=  Get Channel Access Config
-    Rprint Vars  channel_info_ipmi  active_channel_config  channel_access_config
+    ${channel_volatile_data_config}=  Get Channel Access Config  /run/ipmi/channel_access_volatile.json
+    ${channel_Nv_Data_config}=  Get Channel Access Config  /var/lib/ipmi/channel_access_nv.json
+
+    Rprint Vars  channel_info_ipmi  active_channel_config  channel_volatile_data_config  channel_Nv_Data_config
 
     Valid Value  medium_type_ipmi_conf_map['${channel_info_ipmi['channel_0x${CHANNEL_NUMBER}_info']['channel_medium_type']}']
     ...  ['${active_channel_config['${CHANNEL_NUMBER}']['channel_info']['medium_type']}']
@@ -113,14 +121,28 @@ Verify Get Channel Info via IPMI
     # IPMI Spec: The IPMI Enterprise Number is: 7154 (decimal)
     Valid Value  channel_info_ipmi['channel_0x${CHANNEL_NUMBER}_info']['protocol_vendor_id']  ['7154']
 
-    Valid Value  disabled_ipmi_conf_map['${channel_info_ipmi['channel_0x${CHANNEL_NUMBER}_info']['alerting']}']
-    ...  ['${channel_access_config['${CHANNEL_NUMBER}']['alerting_disabled']}']
+    # Verify volatile(active)_settings
+    Valid Value  disabled_ipmi_conf_map['${channel_info_ipmi['volatile(active)_settings']['alerting']}']
+    ...  ['${channel_volatile_data_config['${CHANNEL_NUMBER}']['alerting_disabled']}']
 
-    Valid Value  disabled_ipmi_conf_map['${channel_info_ipmi['channel_0x${CHANNEL_NUMBER}_info']['per-message_auth']}']
-    ...  ['${channel_access_config['${CHANNEL_NUMBER}']['per_msg_auth_disabled']}']
+    Valid Value  disabled_ipmi_conf_map['${channel_info_ipmi['volatile(active)_settings']['per-message_auth']}']
+    ...  ['${channel_volatile_data_config['${CHANNEL_NUMBER}']['per_msg_auth_disabled']}']
 
-    Valid Value  disabled_ipmi_conf_map['${channel_info_ipmi['channel_0x${CHANNEL_NUMBER}_info']['user_level_auth']}']
-    ...  ['${channel_access_config['${CHANNEL_NUMBER}']['user_auth_disabled']}']
+    Valid Value  disabled_ipmi_conf_map['${channel_info_ipmi['volatile(active)_settings']['user_level_auth']}']
+    ...  ['${channel_volatile_data_config['${CHANNEL_NUMBER}']['user_auth_disabled']}']
 
-    Valid Value  access_mode_ipmi_conf_map['${channel_info_ipmi['channel_0x${CHANNEL_NUMBER}_info']['access_mode']}']
-    ...  ['${channel_access_config['${CHANNEL_NUMBER}']['access_mode']}']
+    Valid Value  access_mode_ipmi_conf_map['${channel_info_ipmi['volatile(active)_settings']['access_mode']}']
+    ...  ['${channel_volatile_data_config['${CHANNEL_NUMBER}']['access_mode']}']
+
+    # Verify Non-Volatile Settings
+    Valid Value  disabled_ipmi_conf_map['${channel_info_ipmi['non-volatile_settings']['alerting']}']
+    ...  ['${channel_Nv_Data_config['${CHANNEL_NUMBER}']['alerting_disabled']}']
+
+    Valid Value  disabled_ipmi_conf_map['${channel_info_ipmi['non-volatile_settings']['per-message_auth']}']
+    ...  ['${channel_Nv_Data_config['${CHANNEL_NUMBER}']['per_msg_auth_disabled']}']
+
+    Valid Value  disabled_ipmi_conf_map['${channel_info_ipmi['non-volatile_settings']['user_level_auth']}']
+    ...  ['${channel_Nv_Data_config['${CHANNEL_NUMBER}']['user_auth_disabled']}']
+
+    Valid Value  access_mode_ipmi_conf_map['${channel_info_ipmi['non-volatile_settings']['access_mode']}']
+    ...  ['${channel_Nv_Data_config['${CHANNEL_NUMBER}']['access_mode']}']
