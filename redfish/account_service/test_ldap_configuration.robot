@@ -6,6 +6,7 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Library          ../../lib/gen_robot_valid.py
+Resource         ../../lib/bmc_network_utils.robot
 
 Suite Setup      Suite Setup Execution
 Suite Teardown   Run Keywords  Restore LDAP Privilege  AND  Redfish.Logout
@@ -18,6 +19,9 @@ ${old_ldap_privilege}   ${EMPTY}
 &{old_account_service}  &{EMPTY}
 &{old_ldap_config}      &{EMPTY}
 ${hostname}             ${EMPTY}
+${test_ip}              10.6.6.6
+${test_mask}            255.255.255.0
+${test_gw}              10.6.6.1
 
 ** Test Cases **
 
@@ -454,6 +458,25 @@ Update LDAP User Roles And Verify Host Poweron Operation
     ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  ${HTTP_OK}
 
 
+Configure IP Address Via Different User Roles And Verify
+    [Documentation]  Configure IP address via different user roles and verify.
+    [Tags]  Configure_IP_Address_Via_Different_User_Roles_And_Verify 
+    [Teardown]  Restore LDAP Privilege
+
+    [Template]  Update LDAP User Role And Configure IP Address
+    # Verify LDAP user with Administrator privilege able to configure IP address.
+    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  ${HTTP_OK}
+
+    # Verify LDAP user with ReadOnly privilege is forbidden to configure IP address.
+    ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+
+    # Verify LDAP user with NoAccess privilege is forbidden to configure IP address.
+    ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+
+    # Verify LDAP user with Operator privilege able to configure IP address.
+    ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_OK}
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -720,3 +743,24 @@ Update LDAP User Role And Host Poweron
 
     Redfish.Post  ${REDFISH_POWER_URI}
     ...  body={'ResetType': 'On'}   valid_status_codes=[${valid_status_code}]
+
+
+Update LDAP User Role And Configure IP Address
+    [Documentation]  Update LDAP user role and configure IP address.
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=${HTTP_OK}
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND  Delete IP Address  ${test_ip}
+
+    # Description of argument(s):
+    # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
+    # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_name         The group name of user.
+    # valid_status_code  The expected valid status code.
+
+    Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
+    ...  ${group_privilege}  ${group_name}
+
+    Redfish.Logout
+
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    Add IP Address  ${test_ip}  ${test_mask}  ${test_gw}  ${valid_status_code}
