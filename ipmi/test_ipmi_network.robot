@@ -252,6 +252,7 @@ Verify MAC Address
 
 
 Create VLAN Via IPMI
+    [Documentation]  Create VLAN via inband IPMI command.
     [Arguments]  ${vlan_id}  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
