@@ -636,12 +636,12 @@ def get_channel_info(channel_number=1):
         [session_support]:                            multi-session
         [active_session_count]:                       0
         [protocol_vendor_id]:                         7154
-        [volatile(active)_settings]:
+      [volatile(active)_settings]:
         [alerting]:                                   enabled
         [per-message_auth]:                           enabled
         [user_level_auth]:                            enabled
         [access_mode]:                                always available
-        [non-volatile_settings]:
+      [non-volatile_settings]:
         [alerting]:                                   enabled
         [per-message_auth]:                           enabled
         [user_level_auth]:                            enabled
@@ -650,6 +650,10 @@ def get_channel_info(channel_number=1):
 
     status, ret_values = \
         grk.run_key_u("Run IPMI Standard Command  channel info " + str(channel_number))
-    result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
-
+    key_var_list = list(filter(None, ret_values.split("\n")))
+    # To match the dict format, add a colon after 'Volatile(active) Settings' and 'Non-Volatile Settings'
+    # respectively.
+    key_var_list[6] = 'Volatile(active) Settings:'
+    key_var_list[11] = 'Non-Volatile Settings:'
+    result = vf.key_value_list_to_dict(key_var_list, process_indent=1)
     return result
