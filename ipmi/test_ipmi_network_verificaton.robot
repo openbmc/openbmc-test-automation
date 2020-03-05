@@ -9,20 +9,17 @@ Library                ../lib/gen_robot_valid.py
 Library                ../lib/var_funcs.py
 Library                ../lib/bmc_network_utils.py
 
-Suite Setup            Suite Setup Execution
+Suite Setup            Redfish.Login
 Test Setup             Printn
 Test Teardown          FFDC On Test Case Fail
 
-Force Tags             IPMI_Network
+Force Tags             IPMI_Network_Verify
 
 
 *** Variables ***
-${vlan_id}              ${10}
-@{vlan_ids}             ${20}  ${30}
-${interface}            eth0
-${ip}                   10.0.0.1
+
 ${initial_lan_config}   &{EMPTY}
-${vlan_resource}        ${NETWORK_MANAGER}action/VLAN
+
 
 *** Test Cases ***
 
@@ -34,7 +31,6 @@ Retrieve IP Address Via IPMI And Verify Using Redfish
     FOR  ${channel_number}  IN  @{active_channel_config.keys()}
       Verify Channel Info  ${channel_number}  IPv4StaticAddresses  ${active_channel_config}
     END
-
 
 Retrieve Default Gateway Via IPMI And Verify
     [Documentation]  Retrieve default gateway via IPMI and verify it's existence on the BMC.
@@ -123,55 +119,6 @@ Get IP Address Source And Verify Using Redfish
 
     Valid Value  lan_config['IP Address Source']  ['${ip_address_source}']
 
-Disable VLAN Via IPMI When Multiple VLAN Exist On BMC
-    [Documentation]  Disable  VLAN Via IPMI When Multiple VLAN Exist On BMC.
-    [Tags]   Disable_VLAN_Via_IPMI_When_LAN_And_VLAN_Exist_On_BMC
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
-
-    FOR  ${id}  IN  @{vlan_ids}
-      @{data_vlan_id}=  Create List  ${interface}  ${id}
-      ${data}=  Create Dictionary   data=@{data_vlan_id}
-      ${resp}=  OpenBMC Post Request  ${vlan_resource}  data=${data}
-    END
-
-    Create VLAN Via IPMI  off
-
-    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
-    Valid Value  lan_config['802.1q VLAN ID']  ['Disabled']
-
-
-Configure IP On VLAN Via IPMI
-    [Documentation]   Configure IP On VLAN Via IPMI.
-    [Tags]  Configure_IP_On_VLAN_Via_IPMI
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
-
-    Create VLAN Via IPMI  ${vlan_id}
-
-    Run Inband IPMI Standard Command
-    ...  lan set ${CHANNEL_NUMBER} ipaddr ${ip}  login_host=${0}
-
-    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
-    Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
-    Valid Value  lan_config['IP Address']  ["${ip}"]
-
-
-Create VLAN Via IPMI When LAN And VLAN Exist On BMC
-    [Documentation]  Create VLAN Via IPMI When LAN And VLAN Exist On BMC.
-    [Tags]   Create_VLAN_Via_IPMI_When_LAN_And_VLAN_Exist_On_BMC
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
-
-    @{data_vlan_id}=  Create List  ${interface}  ${vlan_id}
-    ${data}=  Create Dictionary   data=@{data_vlan_id}
-    ${resp}=  OpenBMC Post Request  ${vlan_resource}  data=${data}
-
-    Create VLAN Via IPMI  ${vlan_id}
-
-    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
-    Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
-
 
 *** Keywords ***
 
@@ -249,29 +196,3 @@ Verify MAC Address
     ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}  MACAddress
     Rprint Vars  lan_print_ipmi  redfish_mac_address
     Valid Value  lan_print_ipmi['MAC Address']  ['${redfish_mac_address}']
-
-
-Create VLAN Via IPMI
-    [Documentation]  Create VLAN via inband IPMI command.
-    [Arguments]  ${vlan_id}  ${channel_number}=${CHANNEL_NUMBER}
-
-    # Description of argument(s):
-    # vlan_id  The VLAN ID (e.g. '10').
-
-    Run Inband IPMI Standard Command
-    ...  lan set ${channel_number} vlan id ${vlan_id}  login_host=${0}
-
-
-Suite Setup Execution
-    [Documentation]  Suite Setup Execution.
-
-    Redfish.Login
-
-    Run Inband IPMI Standard Command
-    ...  lan set ${CHANNEL_NUMBER} ipsrc static  login_host=${1}
-
-    @{network_configurations}=  Get Network Configuration
-    Set Suite Variable  @{network_configurations}
-
-    ${initial_lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
-    Set Suite Variable  ${initial_lan_config}
