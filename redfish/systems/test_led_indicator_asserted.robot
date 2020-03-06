@@ -157,7 +157,7 @@ Verify Indicator LEDs
     ${power_supplies}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_POWER_URI}  PowerSupplies
     Rprint Vars  power_supplies
     FOR  ${power_supply_leds}  IN  @{power_supplies}
-        Valid Value  power_supply_leds['IndicatorLED']  [${expected_indicator_led}]
+        Valid Value  power_supply_leds['IndicatorLED']  ['${expected_indicator_led}']
     END
 
 
@@ -195,7 +195,7 @@ Set and Verify Fan LED Indicators
     ${fans}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_THERMAL_URI}  Fans
     Rprint Vars  fans
     FOR  ${fan_leds}  IN  @{fans}
-        Valid Value  fan_leds['IndicatorLED']  [${expected_indicator_led}]
+        Valid Value  fan_leds['IndicatorLED']  ['${expected_indicator_led}']
     END
 
 
