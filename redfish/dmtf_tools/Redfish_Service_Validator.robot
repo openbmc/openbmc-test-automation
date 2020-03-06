@@ -14,7 +14,7 @@ ${DEFAULT_PYTHON}  python3
 ${rsv_dir_path}    Redfish-Service-Validator
 ${rsv_github_url}  https://github.com/DMTF/Redfish-Service-Validator.git
 ${command_string}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishServiceValidator.py
-...                --ip ${OPENBMC_HOST} --nochkcert --forceauth -u ${OPENBMC_USERNAME}
+...                --ip ${OPENBMC_HOST} --nochkcert --authtype=Session -u ${OPENBMC_USERNAME}
 ...                -p ${OPENBMC_PASSWORD} --logdir ${EXECDIR}${/}logs${/} --debug_logging
 
 *** Test Case ***
