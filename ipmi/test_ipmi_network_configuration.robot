@@ -23,6 +23,10 @@ ${interface}            eth0
 ${ip}                   10.0.0.1
 ${initial_lan_config}   &{EMPTY}
 ${vlan_resource}        ${NETWORK_MANAGER}action/VLAN
+${network_resource}     xyz.openbmc_project.Network.IP.Protocol.IPv4
+${netmask}              ${24}
+${gateway}              0.0.0.0
+${id}                   ${30}
 
 *** Test Cases ***
 
@@ -90,6 +94,29 @@ Create VLAN Via IPMI When LAN And VLAN Exist On BMC
 
     ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
     Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
+
+
+Create VLAN when LAN and VLAN exist with IP address configured
+   [Documentation]  Create VLAN when LAN & VLAN exist with IP address configured.
+   [Tags]  Create_VLAN_when_LAN_and_VLAN_exist_with_IP_address_configured
+   [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+   ...   Create VLAN Via IPMI  off  AND  Restore Configuration
+
+   @{data_vlan_id}=  Create List  ${interface}  ${id}
+   ${data}=  Create Dictionary   data=@{data_vlan_id}
+   ${resp}=  OpenBMC Post Request  ${vlan_resource}  data=${data}
+
+   @{ip_parm_list}=  Create List  ${network_resource}
+   ...  ${ip}  ${netmask}   ${gateway}
+   ${data}=  Create Dictionary  data=@{ip_parm_list}
+
+   Run Keyword And Ignore Error  OpenBMC Post Request
+   ...  ${NETWORK_MANAGER}${interface}_${id}/action/IP  data=${data}
+
+   ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+   Valid Value  lan_config['IP Address']  ['${ip}']
+
+   Create VLAN Via IPMI   ${vlan_id}
 
 
 *** Keywords ***
