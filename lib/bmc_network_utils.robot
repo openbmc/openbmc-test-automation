@@ -66,10 +66,11 @@ Get BMC IP Info
     @{ip_data}=  Create List
 
     # Get all IP addresses and prefix lengths on system.
-    :FOR  ${ip_component}  IN  @{ip_components}
-    \  @{if_info}=  Split String  ${ip_component}
-    \  ${ip_n_prefix}=  Get From List  ${if_info}  1
-    \  Append To List  ${ip_data}  ${ip_n_prefix}
+    FOR  ${ip_component}  IN  @{ip_components}
+      @{if_info}=  Split String  ${ip_component}
+      ${ip_n_prefix}=  Get From List  ${if_info}  1
+      Append To List  ${ip_data}  ${ip_n_prefix}
+    END
 
     [Return]  ${ip_data}
 
@@ -123,9 +124,10 @@ Get BMC MAC Address List
 
     ${mac_list}=  Create List
     @{lines}=  Split To Lines  ${cmd_output}
-    :FOR  ${line}  IN  @{lines}
-    \  @{words}=  Split String  ${line}
-    \   Append To List  ${mac_list}  ${words[1]}
+    FOR  ${line}  IN  @{lines}
+      @{words}=  Split String  ${line}
+      Append To List  ${mac_list}  ${words[1]}
+    END
 
     [Return]  ${mac_list}
 
@@ -153,9 +155,10 @@ Get List Of IP Address Via REST
 
     ${ip_list}=  Create List
 
-    : FOR  ${ip_uri}  IN  @{ip_uri_list}
-    \  ${ip_addr}=  Read Attribute  ${ip_uri}  Address
-    \  Append To List  ${ip_list}  ${ip_addr}
+    FOR  ${ip_uri}  IN  @{ip_uri_list}
+      ${ip_addr}=  Read Attribute  ${ip_uri}  Address
+      Append To List  ${ip_list}  ${ip_addr}
+    END
 
     [Return]  @{ip_list}
 
@@ -169,9 +172,10 @@ Delete IP And Object
 
     # Find IP object having this IP address.
 
-    : FOR  ${ip_uri}  IN  @{ip_uri_list}
-    \  ${ip_addr1}=  Read Attribute  ${ip_uri}  Address
-    \  Run Keyword If  '${ip_addr}' == '${ip_addr1}'  Exit For Loop
+     FOR  ${ip_uri}  IN  @{ip_uri_list}
+       ${ip_addr1}=  Read Attribute  ${ip_uri}  Address
+       Run Keyword If  '${ip_addr}' == '${ip_addr1}'  Exit For Loop
+     END
 
     # If the given IP address is not configured, return.
     # Otherwise, delete the IP and object.
@@ -215,11 +219,12 @@ Get First Non Pingable IP From Subnet
     # First element in list is Network part.
     ${network_part}=  Get From List  ${split_ip}  0
 
-    : FOR  ${octet4}  IN RANGE  1  255
-    \  ${new_ip}=  Catenate  ${network_part}.${octet4}
-    \  ${status}=  Run Keyword And Return Status  Ping Host  ${new_ip}
-    # If IP is non-pingable, return it.
-    \  Return From Keyword If  '${status}' == 'False'  ${new_ip}
+    FOR  ${octet4}  IN RANGE  1  255
+      ${new_ip}=  Catenate  ${network_part}.${octet4}
+      ${status}=  Run Keyword And Return Status  Ping Host  ${new_ip}
+      # If IP is non-pingable, return it.
+      Return From Keyword If  '${status}' == 'False'  ${new_ip}
+    END
 
     Fail  msg=No non-pingable IP could be found in subnet ${network_part}.
 
@@ -352,6 +357,7 @@ Get Network Configuration
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
     [Return]  @{network_configurations}
 
+
 Add IP Address
     [Documentation]  Add IP Address To BMC.
     [Arguments]  ${ip}  ${subnet_mask}  ${gateway}
@@ -374,8 +380,9 @@ Add IP Address
     ${network_configurations}=  Get Network Configuration
     ${num_entries}=  Get Length  ${network_configurations}
 
-    : FOR  ${INDEX}  IN RANGE  0  ${num_entries}
-    \  Append To List  ${patch_list}  ${empty_dict}
+    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
+      Append To List  ${patch_list}  ${empty_dict}
+    END
 
     # We need not check for existence of IP on BMC while adding.
     Append To List  ${patch_list}  ${ip_data}
@@ -408,10 +415,11 @@ Delete IP Address
     ${patch_list}=  Create List
 
     @{network_configurations}=  Get Network Configuration
-    : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Run Keyword If  '${network_configuration['Address']}' == '${ip}'
-       ...  Append To List  ${patch_list}  ${null}
-       ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Run Keyword If  '${network_configuration['Address']}' == '${ip}'
+      ...  Append To List  ${patch_list}  ${null}
+      ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
+    END
 
     ${ip_found}=  Run Keyword And Return Status  List Should Contain Value
     ...  ${patch_list}  ${null}  msg=${ip} does not exist on BMC
@@ -441,7 +449,76 @@ Validate Network Config On BMC
 
     @{network_configurations}=  Get Network Configuration
     ${ip_data}=  Get BMC IP Info
-    : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Should Contain Match  ${ip_data}  ${network_configuration['Address']}/*
-    ...  msg=IP address does not exist.
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Should Contain Match  ${ip_data}  ${network_configuration['Address']}/*
+      ...  msg=IP address does not exist.
+    END
+
+
+Create VLAN
+    [Documentation]  Create a VLAN.
+    [Arguments]  ${id}  ${interface}=eth0  ${expected_result}=valid
+
+    # Description of argument(s):
+    # id  The VLAN ID (e.g. '53').
+    # interface  The physical interface for the VLAN(e.g. 'eth0').
+    # expected_result  Expected status of VLAN configuration.
+
+    @{data_vlan_id}=  Create List  ${interface}  ${id}
+    ${data}=  Create Dictionary   data=@{data_vlan_id}
+    ${resp}=  OpenBMC Post Request  ${vlan_resource}  data=${data}
+    ${resp.status_code}=  Convert To String  ${resp.status_code}
+    ${status}=  Run Keyword And Return Status
+    ...  Valid Value  resp.status_code  ["${HTTP_OK}"]
+
+    Run Keyword If  '${expected_result}' == 'error'
+    ...      Should Be Equal  ${status}  ${False}
+    ...      msg=Configuration of an invalid VLAN ID Failed.
+    ...  ELSE
+    ...      Should Be Equal  ${status}  ${True}
+    ...      msg=Configuration of a valid VLAN ID Failed.
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+
+Configure Network Settings On VLAN
+    [Documentation]  Configure network settings.
+    [Arguments]  ${id}  ${ip_addr}  ${prefix_len}  ${gateway_ip}=${gateway}
+    ...  ${expected_result}=valid  ${interface}=eth0
+
+    # Description of argument(s):
+    # id               The VLAN ID (e.g. '53').
+    # ip_addr          IP address of VLAN Interface.
+    # prefix_len       Prefix length of VLAN Interface.
+    # gateway_ip       Gateway IP address of VLAN Interface.
+    # expected_result  Expected status of network setting configuration.
+    # interface        Physical Interface on which the VLAN is defined.
+
+    @{ip_parm_list}=  Create List  ${network_resource}
+    ...  ${ip_addr}  ${prefix_len}  ${gateway_ip}
+
+    ${data}=  Create Dictionary  data=@{ip_parm_list}
+
+    Run Keyword And Ignore Error  OpenBMC Post Request
+    ...  ${NETWORK_MANAGER}${interface}_${id}/action/IP  data=${data}
+
+    # After any modification on network interface, BMC restarts network
+    # module, wait until it is reachable. Then wait 15 seconds for new
+    # configuration to be updated on BMC.
+
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    ...  ${NETWORK_RETRY_TIME}
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    # Verify whether new IP address is populated on BMC system.
+    # It should not allow to configure invalid settings.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify IP On BMC  ${ip_addr}
+
+    Run Keyword If  '${expected_result}' == 'error'
+    ...      Should Be Equal  ${status}  ${False}
+    ...      msg=Configuration of invalid IP Failed.
+    ...  ELSE
+    ...      Should Be Equal  ${status}  ${True}
+    ...      msg=Configuration of valid IP Failed.
 

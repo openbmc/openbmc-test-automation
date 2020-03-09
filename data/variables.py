@@ -17,6 +17,7 @@ SETTINGS_URI = '/org/openbmc/settings/'
 WATCHDOG_URI = OPENBMC_BASE_URI + 'watchdog/'
 TIME_MANAGER_URI = OPENBMC_BASE_URI + 'time/'
 NETWORK_MANAGER = OPENBMC_BASE_URI + 'network/'
+NETWORK_RESOURCE = 'xyz.openbmc_project.Network.IP.Protocol.IPv4'
 # SNMP
 SNMP_MANAGER_URI = NETWORK_MANAGER + 'snmp/manager/'
 # Sensors base variables.
