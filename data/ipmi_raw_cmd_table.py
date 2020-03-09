@@ -119,5 +119,37 @@ IPMI_RAW_CMD = {
             "11 02",
             "11 is Parameter revision, 02 is Configuration parameter data e.g. Cipher Suite Entry count",
         ]
+    },
+    'Payload':
+    {
+        'Get_Payload_Activation_Status':
+        [
+            # raw command, expected output(s), comment
+            "0x06 0x4a 0x01",
+            "01 00 00",
+            "1st byte is instance capacity, last two bytes is activation status of instances",
+        ],
+        'Activate_Payload':
+        [
+            # raw command, expected output(s), comment
+            "0x06 0x48 0x01 0x01 0xc6 0x00 0x00 0x00",
+            "00 00 00 00 ff 00 ff 00 6f 02 ff ff",
+            "Last two bits are payload vlan number, - FFFFh if VLAN addressing is not used",
+        ],
+        'Deactivate_Payload':
+        [
+            # raw command, expected output(s), comment
+            "0x06 0x49 0x01 0x01 0x00 0x00 0x00 0x00",
+            "",
+            "Line feed only",
+        ],
+        'Get_Payload_Instance_Info':
+        [
+            # raw command, expected output(s), comment
+            "0x06 0x4b 0x01 0x01",
+            "00 00 00 00 00 00 00 00 00 00 00 00",
+            "When the payload is activated, the first four bytes are the session ID,"
+            "otherwise it should be 00."
+        ]
     }
 }
