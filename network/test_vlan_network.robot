@@ -301,31 +301,6 @@ Delete VLANs
     Run Key U  Sleep \ ${NETWORK_TIMEOUT}s
 
 
-Create VLAN
-    [Documentation]  Create a VLAN.
-    [Arguments]  ${id}  ${interface}=eth0  ${expected_result}=valid
-
-    # Description of argument(s):
-    # id  The VLAN ID (e.g. '53').
-    # interface  The physical interface for the VLAN(e.g. 'eth0').
-
-    @{data_vlan_id}=  Create List  ${interface}  ${id}
-    ${data}=  Create Dictionary   data=@{data_vlan_id}
-    ${resp}=  OpenBMC Post Request  ${vlan_resource}  data=${data}
-    ${resp.status_code}=  Convert To String  ${resp.status_code}
-    ${status}=  Run Keyword And Return Status
-    ...  Valid Value  resp.status_code  ["${HTTP_OK}"]
-
-    Run Keyword If  '${expected_result}' == 'error'
-    ...      Should Be Equal  ${status}  ${False}
-    ...      msg=Configuration of an invalid VLAN ID Failed.
-    ...  ELSE
-    ...      Should Be Equal  ${status}  ${True}
-    ...      msg=Configuration of a valid VLAN ID Failed.
-
-    Sleep  ${NETWORK_TIMEOUT}s
-
-
 Get VLAN IDs
     [Documentation]  Return all VLAN IDs.
 
@@ -334,48 +309,6 @@ Get VLAN IDs
     ${vlan_ids}=  Split String  ${vlan_ids}
 
     [Return]  @{vlan_ids}
-
-
-Configure Network Settings On VLAN
-    [Documentation]  Configure network settings.
-    [Arguments]  ${id}  ${ip_addr}  ${prefix_len}  ${gateway_ip}=${gateway}
-    ...  ${expected_result}=valid  ${interface}=eth0
-
-    # Description of argument(s):
-    # id               The VLAN ID (e.g. '53').
-    # ip_addr          IP address of VLAN Interface.
-    # prefix_len       Prefix length of VLAN Interface.
-    # gateway_ip       Gateway IP address of VLAN Interface.
-    # expected_result  Expected status of network setting configuration.
-    # interface        Physical Interface on which the VLAN is defined.
-
-    @{ip_parm_list}=  Create List  ${network_resource}
-    ...  ${ip_addr}  ${prefix_len}  ${gateway_ip}
-
-    ${data}=  Create Dictionary  data=@{ip_parm_list}
-
-    Run Keyword And Ignore Error  OpenBMC Post Request
-    ...  ${NETWORK_MANAGER}${interface}_${id}/action/IP  data=${data}
-
-    # After any modification on network interface, BMC restarts network
-    # module, wait until it is reachable. Then wait 15 seconds for new
-    # configuration to be updated on BMC.
-
-    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
-    ...  ${NETWORK_RETRY_TIME}
-    Sleep  ${NETWORK_TIMEOUT}s
-
-    # Verify whether new IP address is populated on BMC system.
-    # It should not allow to configure invalid settings.
-    ${status}=  Run Keyword And Return Status
-    ...  Verify IP On BMC  ${ip_addr}
-
-    Run Keyword If  '${expected_result}' == 'error'
-    ...      Should Be Equal  ${status}  ${False}
-    ...      msg=Configuration of invalid IP Failed.
-    ...  ELSE
-    ...      Should Be Equal  ${status}  ${True}
-    ...      msg=Configuration of valid IP Failed.
 
 
 Get VLAN URI For IP
