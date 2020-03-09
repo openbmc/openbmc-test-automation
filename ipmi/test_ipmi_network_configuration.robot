@@ -23,6 +23,9 @@ ${interface}            eth0
 ${ip}                   10.0.0.1
 ${initial_lan_config}   &{EMPTY}
 ${vlan_resource}        ${NETWORK_MANAGER}action/VLAN
+${netmask}              ${24}
+${gateway}              0.0.0.0
+${id}                   ${30}
 
 *** Test Cases ***
 
@@ -31,7 +34,7 @@ Verify IPMI Inband Network Configuration
     [Tags]  Verify_IPMI_Inband_Network_Configuration
     [Teardown]  Run Keywords  Restore Configuration  AND  FFDC On Test Case Fail
 
-    Redfish Power On
+    # Redfish Power On
 
     Set IPMI Inband Network Configuration  10.10.10.10  255.255.255.0  10.10.10.10
     Sleep  10
@@ -45,8 +48,7 @@ Verify IPMI Inband Network Configuration
 Disable VLAN Via IPMI When Multiple VLAN Exist On BMC
     [Documentation]  Disable  VLAN Via IPMI When Multiple VLAN Exist On BMC.
     [Tags]   Disable_VLAN_Via_IPMI_When_LAN_And_VLAN_Exist_On_BMC
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+    [Teardown]  Test Teardown Execution
 
     FOR  ${id}  IN  @{vlan_ids}
       @{data_vlan_id}=  Create List  ${interface}  ${id}
@@ -63,8 +65,7 @@ Disable VLAN Via IPMI When Multiple VLAN Exist On BMC
 Configure IP On VLAN Via IPMI
     [Documentation]   Configure IP On VLAN Via IPMI.
     [Tags]  Configure_IP_On_VLAN_Via_IPMI
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+    [Teardown]  Test Teardown Execution
 
     Create VLAN Via IPMI  ${vlan_id}
 
@@ -79,8 +80,7 @@ Configure IP On VLAN Via IPMI
 Create VLAN Via IPMI When LAN And VLAN Exist On BMC
     [Documentation]  Create VLAN Via IPMI When LAN And VLAN Exist On BMC.
     [Tags]   Create_VLAN_Via_IPMI_When_LAN_And_VLAN_Exist_On_BMC
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Create VLAN Via IPMI  off  AND  Restore Configuration
+    [Teardown]  Test Teardown Execution
 
     @{data_vlan_id}=  Create List  ${interface}  ${vlan_id}
     ${data}=  Create Dictionary   data=@{data_vlan_id}
@@ -90,6 +90,27 @@ Create VLAN Via IPMI When LAN And VLAN Exist On BMC
 
     ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
     Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
+
+
+Create VLAN when LAN and VLAN exist with IP address configured
+   [Documentation]  Create VLAN when LAN & VLAN exist with IP address configured.
+   [Tags]  Create_VLAN_when_LAN_and_VLAN_exist_with_IP_address_configured
+   [Teardown]  Test Teardown Execution
+
+   @{data_vlan_id}=  Create List  ${interface}  ${id}
+   ${data}=  Create Dictionary   data=@{data_vlan_id}
+   ${resp}=  OpenBMC Post Request  ${vlan_resource}  data=${data}
+
+   @{ip_parm_list}=  Create List  ${NETWORK_RESOURCE}
+   ...  ${ip}  ${netmask}   ${gateway}
+   ${data}=  Create Dictionary  data=@{ip_parm_list}
+
+   OpenBMC Post Request  ${NETWORK_MANAGER}${interface}_${id}/action/IP  data=${data}
+
+   ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+   Valid Value  lan_config['IP Address']  ['${ip}']
+
+   Create VLAN Via IPMI   ${vlan_id}
 
 
 *** Keywords ***
@@ -148,3 +169,12 @@ Suite Setup Execution
 
     ${initial_lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
     Set Suite Variable  ${initial_lan_config}
+
+
+Test Teardown Execution
+   [Documentation]  Test Teardown Execution.
+
+   FFDC On Test Case Fail
+   Create VLAN Via IPMI  off
+   Restore Configuration
+
