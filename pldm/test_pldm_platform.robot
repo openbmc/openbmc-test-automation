@@ -10,7 +10,7 @@ Resource          ../lib/boot_utils.robot
 
 Test Setup        Printn
 Test Teardown     FFDC On Test Case Fail
-Suite Teardown    Pldmtool Platform Suite Cleanup
+#Suite Teardown    Pldmtool Platform Suite Cleanup
 
 *** Test Cases ***
 
@@ -30,9 +30,11 @@ Verify SetStateEffecterStates
     [Tags]  Verify_SetStateEffecterStates
     [Template]  Verify SetStateEffecterStates For Effecter States
 
-    # EffecterStates (effecterID requestSet effecterState)
-    '1 1 1'  # (effecterState -> 1 move OSStatus to 'standby')
-    '1 1 2'  # (effecterState -> 2 move OSStatus to 'BootComplete')
+    # EffecterHandle  Count  EffecterStates (effecterID effecterState)
+
+    '1'  '1'  '1 1'  # (effecterState -> 1 -> 'Boot Not Active')
+    '1'  '1'  '1 2'  # (effecterState -> 2 -> 'Boot Completed')
+    '2'  '1'  '1 9'  # (effecterState -> 9 -> 'System Power is in soft off mode')
 
 *** Keywords ***
 
@@ -71,16 +73,20 @@ Verify GetPDR For Record Handle
 
 Verify SetStateEffecterStates For Effecter States
     [Documentation]  Verify set state effecter states for given input effecter states.
-    [Arguments]  ${effecter_states}
+    [Arguments]  ${effecter_handle}  ${count}  ${effecter_states}
 
     # Description of argument(s):
-    # ${effecter_states}   (effecterID requestSet effecterState).
-    #                      e.g. '1 1 1'.
+    # ${effecter_handle}   A handle that is used to identify and access the effecter (e.g. '1').
+    #                      e.g. '1' is effecter handle 'Boot Progress'.
+    #                           '2' is effecter handle 'System Power State'.
+    # ${count}             The number of individual sets of effecter information (e.g. '1').
+    # ${effecter_states}   (effecterID effecterState).
+    #                      e.g. '1 1'.
 
     # Example output:
     # SetStateEffecterStates ]: SUCCESS
 
-    ${pldm_cmd}=  Evaluate  $CMD_SETSTATEEFFECTERSTATES % ${effecter_states}
+    ${pldm_cmd}=  Evaluate  $CMD_SETSTATEEFFECTERSTATES % (${effecter_handle}, ${count}, ${effecter_states})
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Rprint Vars  pldm_output
     Valid Value  pldm_output['setstateeffecterstates']  ['SUCCESS']
