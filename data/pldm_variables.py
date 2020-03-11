@@ -127,13 +127,12 @@ CMD_GETPDR = 'platform GetPDR -d %s'
 '''
 e.g. : SetStateEffecterStates usage
 
-pldmtool platform GetPDR -d <effecterID, requestSet, effecterState>
+pldmtool platform GetPDR -i <effter_handle> -c <count> -d <effecterID, effecterState>
 
-pldmtool platform SetStateEffecterStates -d 1 1 1
-
+pldmtool platform SetStateEffecterStates -i 1 -c 1 -d 1 1
 '''
 
-CMD_SETSTATEEFFECTERSTATES = 'platform SetStateEffecterStates -d %s'
+CMD_SETSTATEEFFECTERSTATES = 'platform SetStateEffecterStates -i %s -c %s -d %s'
 
 # GetPDR parsed response message for record handle.
 # Dictionary value array holds the expected output for record handle 1, 2.
