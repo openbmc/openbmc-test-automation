@@ -165,7 +165,7 @@ version 2.3.1 or greater is required) or via Robot CLI command.
 
 * Execute a test suite:
     ```
-    $ robot -v OPENBMC_HOST:xx.xx.xx.xx  tests/test_basic_poweron.robot
+    $ robot -v OPENBMC_HOST:xx.xx.xx.xx redfish/extended/test_basic_ci.robot
     ```
 
 * Initialize the following environment variables which will be used during testing:
