@@ -201,7 +201,9 @@ Verify Power Reading Using IPMI And Redfish
 
     ${ipmi_reading}=  Get IPMI Power Reading
 
+    Redfish.Login
     ${power}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
+    Redfish.Logout
     ${redfish_reading}=  Set Variable  ${power['PowerControl'][0]['PowerConsumedWatts']}
 
     ${ipmi_redfish_power_diff}=
