@@ -146,3 +146,21 @@ Verify Get Channel Info via IPMI
 
     Valid Value  access_mode_ipmi_conf_map['${channel_info_ipmi['non-volatile_settings']['access_mode']}']
     ...  ['${channel_nv_data_config['${CHANNEL_NUMBER}']['access_mode']}']
+
+
+Test Get Channel Authentication Capabilities via IPMI
+    [Documentation]  Test get channel authentication capabilities via IPMI.
+    [Tags]  Test_Get_Channel_Authentication_Capabilities_via_IPMI
+
+    ${channel_auth_cap}=  Get Channel Auth Capabilities  ${CHANNEL_NUMBER}
+    Rprint Vars  channel_auth_cap
+
+    Valid Value  channel_auth_cap['channel_number']  ['${CHANNEL_NUMBER}']
+    Valid Value  channel_auth_cap['kg_status']  ['default (all zeroes)']
+    Valid Value  channel_auth_cap['per_message_authentication']  ['enabled']
+    Valid Value  channel_auth_cap['user_level_authentication']  ['enabled']
+    Valid Value  channel_auth_cap['non-null_user_names_exist']  ['yes']
+    Valid Value  channel_auth_cap['null_user_names_exist']  ['no']
+    Valid Value  channel_auth_cap['anonymous_login_enabled']  ['no']
+    Valid Value  channel_auth_cap['channel_supports_ipmi_v1.5']  ['no']
+    Valid Value  channel_auth_cap['channel_supports_ipmi_v2.0']  ['yes']

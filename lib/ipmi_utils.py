@@ -689,3 +689,29 @@ def get_user_access_ipmi(channel_number=1):
     cmd_buf = "user list " + str(channel_number)
     stdout, stderr, rc = execute_ipmi_cmd(cmd_buf, "external", print_output=0)
     return vf.outbuf_to_report(stdout)
+
+
+def get_channel_auth_capabilities(channel_number=1):
+    r"""
+    Get the channel authentication capabilities and return as a dictionary.
+
+    Example:
+
+    channel_auth_cap:
+        [channel_number]:                               2
+        [ipmi_v1.5__auth_types]:
+        [kg_status]:                                    default (all zeroes)
+        [per_message_authentication]:                   enabled
+        [user_level_authentication]:                    enabled
+        [non-null_user_names_exist]:                    yes
+        [null_user_names_exist]:                        no
+        [anonymous_login_enabled]:                      no
+        [channel_supports_ipmi_v1.5]:                   no
+        [channel_supports_ipmi_v2.0]:                   yes
+    """
+
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  channel authcap " + str(channel_number) + " 4")
+    result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
+
+    return result
