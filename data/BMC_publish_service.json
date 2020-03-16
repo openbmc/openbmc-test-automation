@@ -1,0 +1,4 @@
+{
+    "RESTService": "avahi-browse -rt _obmc_rest._tcp",
+    "RedfishService": "avahi-browse -rt _obmc_redfish._tcp"
+}
