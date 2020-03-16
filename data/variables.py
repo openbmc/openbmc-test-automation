@@ -199,6 +199,10 @@ CA_CERTIFICATE_URI = OPENBMC_BASE_URI + 'certs/authority/ldap'
 SYSTEM_BASE_URI = REDFISH_BASE_URI + 'Systems/system/'
 EVENT_LOG_URI = SYSTEM_BASE_URI + 'LogServices/EventLog/'
 
+# External interface.
+AVAHI_DISCOVERY_CMD = {"RESTService": "avahi-browse -rt _obmc_rest._tcp",
+                       "RedfishService": "avahi-browse -rt _obmc_redfish._tcp"}
+
 '''
   QEMU HTTPS variable:
 
