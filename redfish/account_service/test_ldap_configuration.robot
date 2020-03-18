@@ -477,6 +477,25 @@ Configure IP Address Via Different User Roles And Verify
     ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_OK}
 
 
+Delete IP Address Via Different User Roles And Verify
+    [Documentation]  Delete IP address via different user roles and verify.
+    [Tags]  Delete_IP_Address_Via_Different_User_Roles_And_Verify
+    [Teardown]  Restore LDAP Privilege
+
+    [Template]  Update LDAP User Role And Delete IP Address
+    # Verify LDAP user with Administrator privilege is able to delete IP address.
+    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  ${HTTP_OK}
+
+    # Verify LDAP user with ReadOnly privilege is forbidden to delete IP address.
+    ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+
+    # Verify LDAP user with NoAccess privilege is forbidden to delete IP address.
+    ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+
+    # Verify LDAP user with Operator privilege is able to delete IP address.
+    ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_OK}
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -764,3 +783,27 @@ Update LDAP User Role And Configure IP Address
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
 
     Add IP Address  ${test_ip}  ${test_mask}  ${test_gw}  ${valid_status_code}
+
+
+Update LDAP User Role And Delete IP Address
+    [Documentation]  Update LDAP user role and delete IP address.
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=${HTTP_OK}
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND  Delete IP Address  ${test_ip}
+
+    # Description of argument(s):
+    # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
+    # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_name         The group name of user.
+    # valid_status_code  The expected valid status code.
+
+    # Configure IP address before deleting via LDAP user roles.
+    Add IP Address  ${test_ip}  ${test_mask}  ${test_gw}  ${valid_status_code}
+
+    Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
+    ...  ${group_privilege}  ${group_name}
+
+    Redfish.Logout
+
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    Delete IP Address  ${test_ip}
