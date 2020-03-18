@@ -36,17 +36,17 @@ FFDC_BMC_FILE = {
     'BMC FILES':
     {
         # File Name         Command
-        'BMC_flash_side': 'cat /sys/class/watchdog/watchdog1/bootstatus >/tmp/BMC_flash_side.txt 2>&1',
-        'BMC_proc_list': 'top -n 1 -b >/tmp/BMC_proc_list.txt 2>&1',
-        'BMC_proc_fd_active_list': 'ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt 2>&1',
-        'BMC_journalctl_nopager': 'journalctl --no-pager >/tmp/BMC_journalctl_nopager.txt 2>&1',
-        'BMC_journalctl_pretty': 'journalctl -o json-pretty >/tmp/BMC_journalctl_pretty.txt 2>&1',
-        'BMC_dmesg': 'dmesg >/tmp/BMC_dmesg.txt 2>&1',
-        'BMC_procinfo': 'cat /proc/cpuinfo >/tmp/BMC_procinfo.txt 2>&1',
-        'BMC_meminfo': 'cat /proc/meminfo >/tmp/BMC_meminfo.txt 2>&1',
-        'BMC_systemd': 'systemctl status --all >/tmp/BMC_systemd.txt 2>&1',
-        'BMC_obmc_console': 'cat /var/log/obmc-console.log >/tmp/BMC_obmc_console.txt 2>&1',
-        'PEL_logs': '{ peltool -l; peltool -a ; } >/tmp/PEL_logs.txt 2>&1',
+        'BMC_flash_side.txt': 'cat /sys/class/watchdog/watchdog1/bootstatus >/tmp/BMC_flash_side.txt 2>&1',
+        'BMC_proc_list.txt': 'top -n 1 -b >/tmp/BMC_proc_list.txt 2>&1',
+        'BMC_proc_fd_active_list.txt': 'ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt 2>&1',
+        'BMC_journalctl_nopager.txt': 'journalctl --no-pager >/tmp/BMC_journalctl_nopager.txt 2>&1',
+        'BMC_journalctl_pretty.json': 'journalctl -o json-pretty >/tmp/BMC_journalctl_pretty.json 2>&1',
+        'BMC_dmesg.txt': 'dmesg >/tmp/BMC_dmesg.txt 2>&1',
+        'BMC_procinfo.txt': 'cat /proc/cpuinfo >/tmp/BMC_procinfo.txt 2>&1',
+        'BMC_meminfo.txt': 'cat /proc/meminfo >/tmp/BMC_meminfo.txt 2>&1',
+        'BMC_systemd.txt': 'systemctl status --all >/tmp/BMC_systemd.txt 2>&1',
+        'BMC_obmc_console.txt': 'cat /var/log/obmc-console.log >/tmp/BMC_obmc_console.txt 2>&1',
+        'PEL_logs.json': '{ peltool -l; peltool -a ; } >/tmp/PEL_logs.json 2>&1',
     },
 }
 # Add file name and corresponding command needed for all Linux distributions
@@ -54,19 +54,19 @@ FFDC_OS_ALL_DISTROS_FILE = {
     'OS FILES':
     {
         # File Name         Command
-        'OS_msglog': 'cat /sys/firmware/opal/msglog >/tmp/OS_msglog.txt 2>&1',
-        'OS_cpufrequency': 'ppc64_cpu --frequency '
+        'OS_msglog.txt': 'cat /sys/firmware/opal/msglog >/tmp/OS_msglog.txt 2>&1',
+        'OS_cpufrequency.txt': 'ppc64_cpu --frequency '
                            + '>/tmp/OS_cpufrequency.txt 2>&1',
-        'OS_dmesg': 'dmesg >/tmp/OS_dmesg.txt 2>&1',
-        'OS_opal_prd': 'cat /var/log/opal-prd* >/tmp/OS_opal_prd.txt 2>&1',
-        'OS_boot': 'cat /var/log/boot.log >/tmp/OS_boot.txt 2>&1',
-        'OS_procinfo': 'cat /proc/cpuinfo >/tmp/OS_procinfo.txt 2>&1',
-        'OS_meminfo': 'cat /proc/meminfo >/tmp/OS_meminfo.txt 2>&1',
-        'OS_netstat': 'netstat -a >/tmp/OS_netstat.txt 2>&1',
-        'OS_lspci': 'lspci >/tmp/OS_lspci.txt 2>&1',
-        'OS_lscpu': 'lscpu >/tmp/OS_lscpu.txt 2>&1',
-        'OS_lscfg': 'lscfg >/tmp/OS_lscfg.txt 2>&1',
-        'OS_journalctl_nopager': 'journalctl --no-pager -b '
+        'OS_dmesg.txt': 'dmesg >/tmp/OS_dmesg.txt 2>&1',
+        'OS_opal_prd.txt': 'cat /var/log/opal-prd* >/tmp/OS_opal_prd.txt 2>&1',
+        'OS_boot.txt': 'cat /var/log/boot.log >/tmp/OS_boot.txt 2>&1',
+        'OS_procinfo.txt': 'cat /proc/cpuinfo >/tmp/OS_procinfo.txt 2>&1',
+        'OS_meminfo.txt': 'cat /proc/meminfo >/tmp/OS_meminfo.txt 2>&1',
+        'OS_netstat.txt': 'netstat -a >/tmp/OS_netstat.txt 2>&1',
+        'OS_lspci.txt': 'lspci >/tmp/OS_lspci.txt 2>&1',
+        'OS_lscpu.txt': 'lscpu >/tmp/OS_lscpu.txt 2>&1',
+        'OS_lscfg.txt': 'lscfg >/tmp/OS_lscfg.txt 2>&1',
+        'OS_journalctl_nopager.txt': 'journalctl --no-pager -b '
                                  + '> /tmp/OS_journalctl_nopager.txt  2>&1',
     },
 }
@@ -75,14 +75,14 @@ FFDC_OS_UBUNTU_FILE = {
     'OS FILES':
     {
         # File Name         Command
-        'OS_isusb': '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt 2>&1',
-        'OS_kern': 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt 2>&1',
-        'OS_authlog': '{ cat /var/log/auth.log; cat /var/log/auth.log.1 ; } '
+        'OS_isusb.txt': '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt 2>&1',
+        'OS_kern.txt': 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt 2>&1',
+        'OS_authlog.txt': '{ cat /var/log/auth.log; cat /var/log/auth.log.1 ; } '
                       + '>/tmp/OS_authlog.txt 2>&1',
-        'OS_syslog': 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1',
-        'OS_info': '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } '
+        'OS_syslog.txt': 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1',
+        'OS_info.txt': '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } '
                    + '>/tmp/OS_info.txt 2>&1',
-        'OS_sosreport': '{ rm -rf /tmp/sosreport*FFDC* ; sosreport --batch --tmp-dir '
+        'OS_sosreport.txt': '{ rm -rf /tmp/sosreport*FFDC* ; sosreport --batch --tmp-dir '
                    + '/tmp --ticket-number FFDC ; } >/tmp/OS_sosreport.txt 2>&1',
     },
 }
@@ -91,13 +91,13 @@ FFDC_OS_RHEL_FILE = {
     'OS FILES':
     {
         # File Name         Command
-        'OS_rsct': '/usr/bin/ctversion -bv >/tmp/OS_rsct.txt 2>&1',
-        'OS_secure': 'cat /var/log/secure >/tmp/OS_secure.txt 2>&1',
-        'OS_syslog': 'tail -n 200000 /var/log/messages '
+        'OS_rsct.txt': '/usr/bin/ctversion -bv >/tmp/OS_rsct.txt 2>&1',
+        'OS_secure.txt': 'cat /var/log/secure >/tmp/OS_secure.txt 2>&1',
+        'OS_syslog.txt': 'tail -n 200000 /var/log/messages '
                      + '>/tmp/OS_syslog.txt 2>&1',
-        'OS_info': '{ lsb_release -a; cat /etc/redhat-release; '
+        'OS_info.txt': '{ lsb_release -a; cat /etc/redhat-release; '
                    + 'uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1',
-        'OS_sosreport': '{ rm -rf /tmp/sosreport*FFDC* ; sosreport --batch --tmp-dir '
+        'OS_sosreport.txt': '{ rm -rf /tmp/sosreport*FFDC* ; sosreport --batch --tmp-dir '
                    + '/tmp --label FFDC ; } >/tmp/OS_sosreport.txt 2>&1',
     },
 }
@@ -120,16 +120,16 @@ FFDC_GET_REQUEST = {
     'GET REQUESTS':
     {
         # File Name         Command
-        'FIRMWARE_list': ENUMERATE_SW,
-        'BMC_sensor_list': ENUMERATE_SENSORS,
-        'BMC_control_list': ENUMERATE_CONTROL,
-        'BMC_inventory': ENUMERATE_INVENTORY,
-        'BMC_elog': ENUMERATE_ELOG,
-        'BMC_led': ENUMERATE_LED,
-        'BMC_state': ENUMERATE_STATE,
-        'OCC_state': ENUMERATE_OCC,
-        'BMC_dumps': ENUMERATE_DUMPS,
-        'BMC_USER': ENUMERATE_USER,
+        'FIRMWARE_list.txt': ENUMERATE_SW,
+        'BMC_sensor_list.txt': ENUMERATE_SENSORS,
+        'BMC_control_list.txt': ENUMERATE_CONTROL,
+        'BMC_inventory.txt': ENUMERATE_INVENTORY,
+        'BMC_elog.txt': ENUMERATE_ELOG,
+        'BMC_led.txt': ENUMERATE_LED,
+        'BMC_state.txt': ENUMERATE_STATE,
+        'OCC_state.txt': ENUMERATE_OCC,
+        'BMC_dumps.txt': ENUMERATE_DUMPS,
+        'BMC_USER.txt': ENUMERATE_USER,
     },
 }
 # Define your keywords in method/utils and call here
