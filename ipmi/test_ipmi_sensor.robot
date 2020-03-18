@@ -4,6 +4,7 @@ Documentation  Validate IPMI sensor IDs using Redfish.
 Resource          ../lib/ipmi_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Library           ../lib/ipmi_utils.py
+Variables         ../data/ipmi_raw_cmd_table.py
 
 Suite Setup       Redfish.Login
 Suite Teardown    Redfish.Logout
@@ -119,6 +120,16 @@ Test Power Reading Via IPMI With Host Booted
     Wait Until Keyword Succeeds  2 min  30 sec  Verify Power Reading Using IPMI And Redfish
 
 
+Test Power Reading Via IPMI Raw Command
+    [Documentation]  Test power reading via IPMI raw command and verify
+    ...  using Redfish.
+    [Tags]  Test_Power_Reading_Via_IPMI_Raw_Command
+
+    IPMI Power On  stack_mode=skip
+
+    Wait Until Keyword Succeeds  2 min  30 sec  Verify Power Reading Via Raw Command
+
+
 *** Keywords ***
 
 Get Temperature Reading And Verify In Redfish
@@ -207,6 +218,40 @@ Verify Power Reading Using IPMI And Redfish
 
     ${ipmi_redfish_power_diff}=
     ...  Evaluate  abs(${redfish_reading} - ${ipmi_reading['instantaneous_power_reading']})
+
+    Should Be True  ${ipmi_redfish_power_diff} <= ${allowed_power_diff}
+    ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
+
+
+Verify Power Reading Via Raw Command
+    [Documentation]  Get dcmi power reading via IPMI raw command.
+
+    ${ipmi_raw_output}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['power_reading']['Get'][0]}
+
+    @{raw_output_list}=  Split String  ${ipmi_raw_output}  ${SPACE}
+
+    # On successful execution of raw IPMI power reading command, completion
+    # code does not come in output. So current power value will start from 2
+    # byte instead of 3.
+
+    ${power_reading_ipmi_raw_3_item}=  Get From List  ${raw_output_list}  2
+    ${power_reading_ipmi_raw_3_item}=
+    ...  Convert To Integer  0x${power_reading_ipmi_raw_3_item}
+
+    #  Example of power reading via Redfish
+    #  "@odata.id": "/redfish/v1/Chassis/chassis/Power#/PowerControl/0",
+    #  "@odata.type": "#Power.v1_0_0.PowerControl",
+    #  "MemberId": "0",
+    #  "Name": "Chassis Power Control",
+    #  "PowerConsumedWatts": 145.0,
+
+    Redfish.Login
+    ${power}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
+    ${redfish_reading}=  Set Variable  ${power['PowerControl'][0]['PowerConsumedWatts']}
+
+    ${ipmi_redfish_power_diff}=
+    ...  Evaluate  abs(${redfish_reading} - ${power_reading_ipmi_raw_3_item})
 
     Should Be True  ${ipmi_redfish_power_diff} <= ${allowed_power_diff}
     ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
