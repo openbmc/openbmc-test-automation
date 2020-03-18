@@ -9,7 +9,7 @@ import bmc_ssh_utils as bsu
 import json
 
 
-def peltool(option_string, **bsu_options):
+def peltool(option_string, parse_json=True, **bsu_options):
     r"""
     Run peltool on the BMC with the caller's option string and return the result.
 
@@ -30,12 +30,18 @@ def peltool(option_string, **bsu_options):
         [CreatorID]:                    BMC
 
     Description of argument(s):
-    option_string           A string of options which are to be processed by the peltool command.
-    bsu_options             Options to be passed directly to bmc_execute_command. See its prolog for
-                            details.
+    option_string                   A string of options which are to be processed by the peltool command.
+    parse_json                      Indicates that the raw JSON data should parsed into a list of
+                                    dictionaries.
+    bsu_options                     Options to be passed directly to bmc_execute_command. See its prolog for
+                                    details.
     """
 
     bsu_options = fa.args_to_objects(bsu_options)
     out_buf, stderr, rc = bsu.bmc_execute_command('peltool ' + option_string, **bsu_options)
-    out_buf = json.loads(out_buf)
+    if parse_json:
+        try:
+            return json.loads(out_buf)
+        except json.JSONDecodeError:
+            return {}
     return out_buf
