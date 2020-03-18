@@ -4,11 +4,11 @@ Documentation  Validate IPMI sensor IDs using Redfish.
 Resource          ../lib/ipmi_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Library           ../lib/ipmi_utils.py
+Variables         ../data/ipmi_raw_cmd_table.py
 
-Suite Setup       Redfish.Login
-Suite Teardown    Redfish.Logout
-Test Setup        Printn
-Test Teardown     FFDC On Test Case Fail
+Test Setup        Redfish.Login
+Test Teardown     Run Keywords  FFDC On Test Case Fail  AND
+...  Redfish.Logout
 
 
 *** Variables ***
@@ -257,7 +257,6 @@ Verify Power Reading Using IPMI And Redfish
 
     ${ipmi_reading}=  Get IPMI Power Reading
 
-    Redfish.Login
     ${power}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
     ${redfish_reading}=  Set Variable  ${power['PowerControl'][0]['PowerConsumedWatts']}
 
