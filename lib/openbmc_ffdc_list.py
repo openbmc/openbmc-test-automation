@@ -46,9 +46,10 @@ FFDC_BMC_FILE = {
         'BMC_meminfo': 'cat /proc/meminfo >/tmp/BMC_meminfo.txt 2>&1',
         'BMC_systemd': 'systemctl status --all >/tmp/BMC_systemd.txt 2>&1',
         'BMC_obmc_console': 'cat /var/log/obmc-console.log >/tmp/BMC_obmc_console.txt 2>&1',
+        'PEL_logs': '{ peltool -l; peltool -a } >/tmp/PEL_logs.json 2>&1',
     },
 }
-# Add file name and correcponding command needed for all Linux distributions
+# Add file name and corresponding command needed for all Linux distributions
 FFDC_OS_ALL_DISTROS_FILE = {
     'OS FILES':
     {
