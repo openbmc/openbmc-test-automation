@@ -28,6 +28,7 @@
 * Local User Management(Redfish/IPMI)
 * DateTime
 * Event Logging
+* PLDM (Platform Level Data Model) via pldmtool
 
 **Debugging Supported List**
 * SOL collection
@@ -119,6 +120,9 @@ classified as follows:
 `xcat/`: Contains test cases for XCAT automation.
 
 `gui/`: Contains test cases for web UI and security scanning tool automation.
+
+`pldm/`: Contains test cases for platform monitoring and control specification
+         (base, bios, fru, platform etc.).
 
 `snmp/`: Contains test cases for SNMP (Simple Network Management Protocol)
          configuration testing.
