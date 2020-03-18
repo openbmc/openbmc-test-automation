@@ -96,62 +96,6 @@ Test Watchdog Off Via IPMI And Verify Using REST
     ...  msg=msg=Verification failed for watchdog off check.
 
 
-Test Power Reading Via IPMI Raw Command
-    [Documentation]  Test power reading via IPMI raw command and verify
-    ...  using REST.
-    [Tags]  Test_Power_Reading_Via_IPMI_Raw_Command
-
-    # Response data structure of power reading command output via IPMI.
-    # 1        Completion Code. Refer to section 8, DCMI Completion Codes.
-    # 2        Group Extension Identification = DCh
-    # 3:4      Current Power in watts
-
-    REST Power On  stack_mode=skip  quiet=1
-
-    Wait Until Keyword Succeeds  2 min  30 sec  Verify Power Reading Via Raw Command
-
-
-Test Baseboard Temperature Via IPMI
-    [Documentation]  Test baseboard temperature via IPMI and verify using REST.
-    [Tags]  Test_Baseboard_Temperature_Via_IPMI
-
-    # Example of IPMI dcmi get_temp_reading output:
-    #        Entity ID                       Entity Instance    Temp. Readings
-    # Inlet air temperature(40h)                      1               +19 C
-    # CPU temperature sensors(41h)                    5               +51 C
-    # CPU temperature sensors(41h)                    6               +50 C
-    # CPU temperature sensors(41h)                    7               +50 C
-    # CPU temperature sensors(41h)                    8               +50 C
-    # CPU temperature sensors(41h)                    9               +50 C
-    # CPU temperature sensors(41h)                    10              +48 C
-    # CPU temperature sensors(41h)                    11              +49 C
-    # CPU temperature sensors(41h)                    12              +47 C
-    # CPU temperature sensors(41h)                    8               +50 C
-    # CPU temperature sensors(41h)                    16              +51 C
-    # CPU temperature sensors(41h)                    24              +50 C
-    # CPU temperature sensors(41h)                    32              +43 C
-    # CPU temperature sensors(41h)                    40              +43 C
-    # Baseboard temperature sensors(42h)              1               +35 C
-
-    ${temp_reading}=  Run IPMI Standard Command  dcmi get_temp_reading -N 10
-    Should Contain  ${temp_reading}  Baseboard temperature sensors
-    ...  msg="Unable to get baseboard temperature via DCMI".
-    ${baseboard_temp_line}=
-    ...  Get Lines Containing String  ${temp_reading}
-    ...  Baseboard temperature  case-insensitive=True
-
-    ${baseboard_temp_ipmi}=  Fetch From Right  ${baseboard_temp_line}  +
-    ${baseboard_temp_ipmi}=  Remove String  ${baseboard_temp_ipmi}  ${SPACE}C
-
-    ${baseboard_temp_rest}=  Read Attribute
-    ...  /xyz/openbmc_project/sensors/temperature/pcie  Value
-    ${baseboard_temp_rest}=  Evaluate  ${baseboard_temp_rest}/1000
-
-    Should Be True
-    ...  ${baseboard_temp_rest} - ${baseboard_temp_ipmi} <= ${allowed_temp_diff}
-    ...  msg=Baseboard temperature above allowed threshold ${allowed_temp_diff}.
-
-
 Verify Get Device ID
     [Documentation]  Verify get device ID command output.
     [Tags]  Verify_Get_Device_ID
@@ -296,49 +240,6 @@ Fetch Details From LAN Print
     ${fetch_value}=  Get Lines Containing String  ${stdout}  ${field_name}
     ${value_fetch}=  Fetch From Right  ${fetch_value}  :${SPACE}
     [Return]  ${value_fetch}
-
-
-Verify Power Reading Via Raw Command
-    [Documentation]  Get dcmi power reading via IPMI raw command.
-
-    ${ipmi_raw_output}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['power_reading']['Get'][0]}
-
-    @{raw_output_list}=  Split String  ${ipmi_raw_output}  ${SPACE}
-
-    # On successful execution of raw IPMI power reading command, completion
-    # code does not come in output. So current power value will start from 2
-    # byte instead of 3.
-
-    ${power_reading_ipmi_raw_3_item}=  Get From List  ${raw_output_list}  2
-    ${power_reading_ipmi_raw_3_item}=
-    ...  Convert To Integer  0x${power_reading_ipmi_raw_3_item}
-
-    ${power_reading_rest}=  Read Attribute
-    ...  ${SENSORS_URI}power/total_power  Value
-
-    # Example of power reading via REST
-    #  "CriticalAlarmHigh": 0,
-    #  "CriticalAlarmLow": 0,
-    #  "CriticalHigh": 3100000000,
-    #  "CriticalLow": 0,
-    #  "Scale": -6,
-    #  "Unit": "xyz.openbmc_project.Sensor.Value.Unit.Watts",
-    #  "Value": 228000000,
-    #  "WarningAlarmHigh": 0,
-    #  "WarningAlarmLow": 0,
-    #  "WarningHigh": 3050000000,
-    #  "WarningLow": 0
-
-    # Get power value based on scale i.e. Value * (10 power Scale Value)
-    # e.g. from above case 228000000 * (10 power -6) = 228000000/1000000
-
-    ${power_reading_rest}=  Evaluate  ${power_reading_rest}/1000000
-    ${ipmi_rest_power_diff}=
-    ...  Evaluate  abs(${power_reading_rest} - ${power_reading_ipmi_raw_3_item})
-
-    Should Be True  ${ipmi_rest_power_diff} <= ${allowed_power_diff}
-    ...  msg=Power Reading above allowed threshold ${allowed_power_diff}.
 
 
 Set IPMI Restriction Mode
