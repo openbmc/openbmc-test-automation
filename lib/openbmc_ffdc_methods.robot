@@ -220,10 +220,10 @@ Create File and Write Data
     @{ffdc_file_list}=  Create List
     @{cmd_list}=  Get FFDC BMC File  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
+    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
     \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
     ...      ${cmd[1]}  ${logpath}
-    \    Run Key U  scp.Get File \ /tmp/${cmd[0]}.txt \ ${LOG_PREFIX}${cmd[0]}.txt
+    \    Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}
     \     ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...       ${ffdc_file_sub_list}
 
@@ -280,7 +280,7 @@ Log FFDC Get Requests
     @{ffdc_file_list}=  Create List
     @{cmd_list}=  Get FFDC Get Request  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
+    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
     \    ${resp}=  OpenBMC Get Request  ${cmd[1]}  quiet=${1}
     \    ${status}=  Run Keyword and Return Status
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -320,11 +320,11 @@ Log OS All distros FFDC
 
     @{cmd_list}=  Get FFDC OS All Distros Call  ${key_index}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
+    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
     \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
     ...  ${cmd[1]}  ${logpath}  target=OS
     \    # scp it to the LOG_PREFIX ffdc directory.
-    \    Run Key U  scp.Get File \ /tmp/${cmd[0]}.txt \ ${LOG_PREFIX}${cmd[0]}.txt
+    \    Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
 
@@ -344,10 +344,10 @@ Log OS SPECIFIC DISTRO FFDC
 
     @{cmd_list}=  Get FFDC OS Distro Call  ${key_index}  ${linux_distro}
     :FOR  ${cmd}  IN  @{cmd_list}
-    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}.txt
+    \    ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
     \    ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}
     ...      ${cmd[1]}  ${logpath}  target=OS
-    \    Run Key U  scp.Get File \ /tmp/${cmd[0]}.txt \ ${LOG_PREFIX}${cmd[0]}.txt
+    \    Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}
     \    ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}
     ...      ${ffdc_file_sub_list}
 
