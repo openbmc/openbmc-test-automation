@@ -391,3 +391,23 @@ def pdbg(option_string, **bsu_options):
 
     stdout, stderr, rc = bsu.bmc_execute_command('pdbg ' + option_string, **bsu_options)
     return stdout
+
+
+def ecmd(option_string, **bsu_options):
+    r"""
+    Run ecmd command on the BMC with the caller's option string and return the output.
+
+    Description of argument(s):
+    option_string                   A string of options which are to be executed on BMC.
+                                    (e.g. getscom pu 20010a40 -all,
+                                          putscom pu 20010a40 4000000000000000 -p0).
+    bsu_options                     Options to be passed directly to bmc_execute_command.  See its prolog for
+                                    details.
+    """
+
+    # Default print_out to 1.
+    if 'print_out' not in bsu_options:
+        bsu_options['print_out'] = 1
+
+    stdout, stderr, rc = bsu.bmc_execute_command(option_string, **bsu_options)
+    return stdout
