@@ -164,3 +164,16 @@ Test Get Channel Authentication Capabilities via IPMI
     Valid Value  channel_auth_cap['anonymous_login_enabled']  ['no']
     Valid Value  channel_auth_cap['channel_supports_ipmi_v1.5']  ['no']
     Valid Value  channel_auth_cap['channel_supports_ipmi_v2.0']  ['yes']
+
+
+Verify Close Session via IPMI
+    [Documentation]  Verify close session via IPMI.
+    [Tags]  Verify_Close_Session_via_IPMI
+
+    # The "close session command" can be tested with any out-of-band IPMI command.
+    # When the session is about to close, it will execute the close session command at the end.
+
+    ${cmd}=  Catenate  mc info -vvv 2>&1 | grep "Closed Session"
+    ${cmd_output}=  Run External IPMI Standard Command  ${cmd}
+
+    Should Contain  ${cmd_output}  Closed Session
