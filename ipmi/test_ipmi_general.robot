@@ -179,6 +179,19 @@ Verify Set Session Privilege Level via IPMI Raw Command
     0x04                04
 
 
+Verify Close Session via IPMI
+    [Documentation]  Verify close session via IPMI.
+    [Tags]  Verify_Close_Session_Via_IPMI
+
+    # The "close session command" can be tested with any out-of-band IPMI command.
+    # When the session is about to close, it will execute the close session command at the end.
+
+    ${cmd}=  Catenate  mc info -vvv 2>&1 | grep "Closed Session"
+    ${cmd_output}=  Run External IPMI Standard Command  ${cmd}
+
+    Should Contain  ${cmd_output}  Closed Session
+
+
 *** Keywords ***
 
 Set Session Privilege Level And Verify
