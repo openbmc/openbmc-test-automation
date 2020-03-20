@@ -4,6 +4,19 @@ Documentation    Error logging utility keywords.
 Resource        rest_client.robot
 Variables       ../data/variables.py
 
+
+*** Variables ***
+
+
+# Define variables for use by callers of 'Get Error Logs'.
+${low_severity_errlog_regex}  \\.(Informational|Notice|Debug)$
+&{low_severity_errlog_filter}  Severity=${low_severity_errlog_regex}
+&{low_severity_errlog_filter_args}  filter_dict=${low_severity_errlog_filter}  regex=${True}  invert=${True}
+# The following is equivalent to &{low_severity_errlog_filter_args} but the name may be more intuitive for
+# users. Example usage:
+# ${err_logs}=  Get Error Logs  &{filter_low_severity_errlogs}
+&{filter_low_severity_errlogs}  &{low_severity_errlog_filter_args}
+
 *** Keywords ***
 
 Get Logging Entry List
@@ -44,24 +57,35 @@ Logging Entry Should Exist
 
 
 Get Error Logs
-    [Documentation]  Return a dictionary which contains the BMC error logs.
-    [Arguments]   ${quiet}=1
+    [Documentation]  Return the BMC error logs as a dictionary.
+    [Arguments]   ${quiet}=1  &{filter_struct_args}
+
+    # Example of call using pre-defined filter args (defined above).
+
+    # ${err_logs}=  Get Error Logs  &{filter_low_severity_errlogs}
+
+    # In this example, all error logs with "Severity" fields that are neither Informational, Debug nor
+    # Notice will be returned.
 
     # Description of argument(s):
-    # quiet   Indicates whether this keyword should run without any output to
-    #         the console, 0 = verbose, 1 = quiet.
+    # quiet                         Indicates whether this keyword should run without any output to the
+    #                               console, 0 = verbose, 1 = quiet.
+    # filter_struct_args            filter_struct args (e.g. filter_dict, regex, etc.) to be passed directly
+    #                               to the Filter Struct keyword.  See its prolog for details.
 
     #  The length of the returned dictionary indicates how many logs there are.
-    #  Printing of error logs can be done with the keyword Print Error Logs,
-    #  for example, Print Error Logs  ${error_logs}  Message.
+
+    # Use 'Print Error Logs' to print.  Example:
+
+    # Print Error Logs  ${error_logs}  Message.
 
     ${status}  ${error_logs}=  Run Keyword And Ignore Error  Read Properties
-    ...  /xyz/openbmc_project/logging/entry/enumerate
-    ...  timeout=30  quiet=${quiet}
-
-    ${empty_dict}=  Create Dictionary
-    Return From Keyword If  '${status}' == 'FAIL'  ${empty_dict}
-    [Return]  ${error_logs}
+    ...  /xyz/openbmc_project/logging/entry/enumerate  timeout=30  quiet=${quiet}
+    Return From Keyword If  '${status}' == 'FAIL'  &{EMPTY}
+    ${num_filter_struct_args}=  Get Length  ${filter_struct_args}
+    Return From Keyword If  '${num_filter_struct_args}' == '${0}'  ${error_logs}
+    ${filtered_error_logs}=  Filter Struct  ${error_logs}  &{filter_struct_args}
+    [Return]  ${filtered_error_logs}
 
 
 Get IPMI SEL Setting
