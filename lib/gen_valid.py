@@ -591,8 +591,8 @@ def valid_dict(var_value, required_keys=[], valid_values={}, invalid_values={}, 
 
     invalid_values                  A dictionary whose entries correspond to the entries in var_value.  Each
                                     value in invalid_values is itself an invalid_values list for the
-                                    corresponding value in var_value.  For any var_value[key] to be considered
-                                    valid, its value must NOT be found in invalid_values[key].
+                                    corresponding value in var_value.  For any var_value[key] to be
+                                    considered valid, its value must NOT be found in invalid_values[key].
     """
 
     error_message = ""
