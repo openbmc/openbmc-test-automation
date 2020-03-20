@@ -119,6 +119,62 @@ Test Power Reading Via IPMI With Host Booted
     Wait Until Keyword Succeeds  2 min  30 sec  Verify Power Reading Using IPMI And Redfish
 
 
+Test Baseboard Temperature Via IPMI
+    [Documentation]  Test baseboard temperature via IPMI and verify using Redfish.
+    [Tags]  Test_Baseboard_Temperature_Via_IPMI
+
+    # Example of IPMI dcmi get_temp_reading output:
+    #        Entity ID                       Entity Instance    Temp. Readings
+    # Inlet air temperature(40h)                      1               +19 C
+    # CPU temperature sensors(41h)                    5               +51 C
+    # CPU temperature sensors(41h)                    6               +50 C
+    # CPU temperature sensors(41h)                    7               +50 C
+    # CPU temperature sensors(41h)                    8               +50 C
+    # CPU temperature sensors(41h)                    9               +50 C
+    # CPU temperature sensors(41h)                    10              +48 C
+    # CPU temperature sensors(41h)                    11              +49 C
+    # CPU temperature sensors(41h)                    12              +47 C
+    # CPU temperature sensors(41h)                    8               +50 C
+    # CPU temperature sensors(41h)                    16              +51 C
+    # CPU temperature sensors(41h)                    24              +50 C
+    # CPU temperature sensors(41h)                    32              +43 C
+    # CPU temperature sensors(41h)                    40              +43 C
+    # Baseboard temperature sensors(42h)              1               +35 C
+
+    ${temp_reading}=  Run IPMI Standard Command  dcmi get_temp_reading -N 10
+    Should Contain  ${temp_reading}  Baseboard temperature sensors
+    ...  msg="Unable to get baseboard temperature via DCMI".
+    ${baseboard_temp_line}=
+    ...  Get Lines Containing String  ${temp_reading}
+    ...  Baseboard temperature  case-insensitive=True
+
+    ${baseboard_temp_ipmi}=  Set Variable  ${baseboard_temp_line.split('+')[1].strip(' C')}
+
+    # Example of Baseboard temperature via Redfish
+
+    #"@odata.id": "/redfish/v1/Chassis/chassis/Thermal#/Temperatures/9",
+    #"@odata.type": "#Thermal.v1_3_0.Temperature",
+    #"LowerThresholdCritical": 0.0,
+    #"LowerThresholdNonCritical": 0.0,
+    #"MaxReadingRangeTemp": 0.0,
+    #"MemberId": "pcie",
+    #"MinReadingRangeTemp": 0.0,
+    #"Name": "pcie",
+    #"ReadingCelsius": 28.687,
+    #"Status": {
+          #"Health": "OK",
+          #"State": "Enabled"
+    #},
+    #"UpperThresholdCritical": 70.0,
+    #"UpperThresholdNonCritical": 60.0
+
+    ${baseboard_temp_redfish}=  Get Temperature Reading From Redfish  pcie
+
+    Should Be True
+    ...  ${baseboard_temp_redfish} - ${baseboard_temp_ipmi} <= ${allowed_temp_diff}
+    ...  msg=Baseboard temperature above allowed threshold ${allowed_temp_diff}.
+
+
 *** Keywords ***
 
 Get Temperature Reading And Verify In Redfish
