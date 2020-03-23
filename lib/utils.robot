@@ -726,7 +726,7 @@ Get Post Boot Action
     #        Immediate: Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}
     #    },
     #    Host image: {
-    #        OnReset: Redfish Host Reboot,
+    #        OnReset: RF SYS GracefulRestart,
     #        Immediate: Wait State  os_running_match_state  10 mins
     #    }
     # }
