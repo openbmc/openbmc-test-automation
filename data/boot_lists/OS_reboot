@@ -8,6 +8,6 @@ Auto Reboot
 Auto Reboot (mfg)
 Host Reboot
 Host Reboot (mfg)
-Redfish Host Reboot
-Redfish Host Reboot (mfg)
+RF SYS GracefulRestart
+RF SYS GracefulRestart (mfg)
 RF SYS ForceRestart
