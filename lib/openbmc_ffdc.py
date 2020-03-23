@@ -16,7 +16,8 @@ from robot.libraries.BuiltIn import BuiltIn
 
 def ffdc(ffdc_dir_path=None,
          ffdc_prefix=None,
-         ffdc_function_list=""):
+         ffdc_function_list="",
+         comm_check=True):
     r"""
     Gather First Failure Data Capture (FFDC).
 
@@ -27,14 +28,14 @@ def ffdc(ffdc_dir_path=None,
     - Call BMC methods to write/collect FFDC data.
 
     Description of arguments:
-    ffdc_dir_path       The dir path where FFDC data should be put.
-    ffdc_prefix         The prefix to be given to each FFDC file name
-                        generated.
-    ffdc_function_list  A colon-delimited list of all the types of FFDC data
-                        you wish to have collected.  A blank value means that
-                        all possible kinds of FFDC are to be collected.  See
-                        FFDC_METHOD_CALL object in lib/openbmc_ffdc_list.py
-                        for possible choices.
+    ffdc_dir_path                   The dir path where FFDC data should be put.
+    ffdc_prefix                     The prefix to be given to each FFDC file name generated.
+    ffdc_function_list              A colon-delimited list of all the types of FFDC data you wish to have
+                                    collected.  A blank value means that all possible kinds of FFDC are to be
+                                    collected.  See FFDC_METHOD_CALL object in lib/openbmc_ffdc_list.py for
+                                    possible choices.
+    comm_check                      Do a communications check prior to collecting FFDC.  If commincation to
+                                    the BMC can't be established, abort the FFDC collection.
     """
 
     ffdc_file_list = []
@@ -42,21 +43,22 @@ def ffdc(ffdc_dir_path=None,
     # Check if Ping and SSH connection is alive
     OPENBMC_HOST = BuiltIn().get_variable_value("${OPENBMC_HOST}")
 
-    state = st.get_state(req_states=['ping', 'uptime', 'rest'])
-    gp.qprint_var(state)
-    if not int(state['ping']):
-        gp.print_error("BMC is not ping-able.  Terminating FFDC collection.\n")
-        return ffdc_file_list
+    if comm_check:
+        state = st.get_state(req_states=['ping', 'uptime', 'rest'])
+        gp.qprint_var(state)
+        if not int(state['ping']):
+            gp.print_error("BMC is not ping-able.  Terminating FFDC collection.\n")
+            return ffdc_file_list
 
-    if not int(state['rest']):
-        gp.print_error("REST commands to the BMC are failing."
-                       + "  Terminating FFDC collection.\n")
-        return ffdc_file_list
+        if not int(state['rest']):
+            gp.print_error("REST commands to the BMC are failing."
+                           + "  Terminating FFDC collection.\n")
+            return ffdc_file_list
 
-    if state['uptime'] == "":
-        gp.print_error("BMC is not communicating via ssh.  Terminating FFDC"
-                       + " collection.\n")
-        return ffdc_file_list
+        if state['uptime'] == "":
+            gp.print_error("BMC is not communicating via ssh.  Terminating FFDC"
+                           + " collection.\n")
+            return ffdc_file_list
 
     gp.qprint_timen("Collecting FFDC.")
 
