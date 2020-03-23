@@ -53,7 +53,7 @@ Verify OCC State After Host Reboot
 
     ${occ_count_before}=  Count OCC Object Entry
     Verify OCC State  ${1}
-    Redfish Host Reboot
+    RF SYS GracefulRestart
     Verify OCC State  ${1}
     ${occ_count_after}=  Count OCC Object Entry
     Should be Equal  ${occ_count_before}  ${occ_count_after}

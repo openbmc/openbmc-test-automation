@@ -824,8 +824,8 @@ Host Reboot
     Run Key U  ${cmd_buf}
 
 
-Redfish Host Reboot
-    [Documentation]  Do "Redfish Host Reboot" boot test.
+RF SYS GracefulRestart
+    [Documentation]  Do "RF SYS GracefulRestart" boot test.
     [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}
 
     # Description of argument(s):
@@ -845,7 +845,7 @@ Redfish Host Reboot
     #                               information.  The default value is the
     #                               global value of "${quiet}"
 
-    ${cmd_buf}  Catenate  OBMC Boot Test \ loc_boot_stack=Redfish Host Reboot
+    ${cmd_buf}  Catenate  OBMC Boot Test \ loc_boot_stack=RF SYS GracefulRestart
     ...  \ loc_stack_mode=${stack_mode} \ loc_quiet=${quiet}
     Run Key U  ${cmd_buf}
 
