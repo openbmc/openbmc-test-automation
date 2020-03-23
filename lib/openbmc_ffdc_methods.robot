@@ -509,6 +509,14 @@ Collect Dump Log
     ${dump_list}=  Get Dictionary Keys  ${data}
 
 
+Collect PEL Log
+    [Documentation]  Collect PEL files from from BMC.
+
+    Create Directory  ${FFDC_DIR_PATH}${/}pel_files/
+    scp.Get File  /var/lib/phosphor-logging/extensions/pels/logs/
+    ...  ${FFDC_DIR_PATH}${/}pel_files  recursive=True
+
+
 Enumerate Redfish Resources
     [Documentation]  Enumerate /redfish/v1 resources and properties to
     ...              a file. Return a list which contains the file name.
