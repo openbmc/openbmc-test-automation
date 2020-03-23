@@ -739,7 +739,7 @@
         "lib_file_path": "utils.robot"
     },
     # Initiate host reboot using the Redfish API interface (GracefulRestart).
-    "Redfish Host Reboot": {
+    "RF SYS GracefulRestart": {
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
