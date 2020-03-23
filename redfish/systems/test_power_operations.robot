@@ -46,7 +46,7 @@ Verify Redfish BMC GracefulRestart
     [Documentation]  Verify Redfish host graceful restart operation.
     [Tags]  Verify_Redfish_Host_GracefulRestart
 
-    Redfish Host Reboot
+    RF SYS GracefulRestart
 
 
 Verify Redfish BMC PowerOff

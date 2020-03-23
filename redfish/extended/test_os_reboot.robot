@@ -31,7 +31,7 @@ Host Reboot Loop
     # Note: Host Reboot is implemented by the OBMC Boot Test tool.
     # OBMC Boot Test will take the necessary steps to get the OBMC
     # to a host powered on state before attempting the Host Reboot.
-    Repeat Keyword  ${BOOT_LOOP_COUNT} times  Redfish Host Reboot
+    Repeat Keyword  ${BOOT_LOOP_COUNT} times  RF SYS GracefulRestart
 
 *** Keywords ***
 
