@@ -6,6 +6,10 @@ Library              SSHLibrary
 Library              ../../lib/external_intf/management_console_utils.py
 Library              ../../lib/gen_robot_print.py
 Library              ../../lib/gen_print.py
+Library              ../../lib/gen_misc.py
+Resource             ../../lib/external_intf/management_console_utils.robot
+Resource             ../../lib/boot_utils.robot
+Resource             ../../syslib/utils_os.robot
 
 Suite Setup          Suite Setup Execution
 
@@ -21,6 +25,14 @@ Discover BMC With Different Service Type
     _obmc_redfish._tcp
 
 
+Kill AvahiDaemon And Discover BMC In Next Reboot
+    [Documentation]  First kill the avahi daemon and in next reboot BMC should discoverable.
+    [Tags]  Kill_AvahiDaemon_And_Discover_BMC_In_Next_Reboot
+    [Template]  Disable Daemon And Discover BMC In Next Reboot
+
+    # Service type
+    _obmc_rest._tcp
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -29,7 +41,7 @@ Suite Setup Execution
     Should Not Be Empty  ${AVAHI_CLIENT}
     Should Not Be Empty  ${AVAHI_CLIENT_USERNAME}
     Should Not Be Empty  ${AVAHI_CLIENT_PASSWORD}
-    Login To Avahi Client  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
+    Login To OS  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
     Check Avahi Package
 
 
@@ -43,20 +55,6 @@ Check Avahi Package
     ${resp_rpm}  ${stderr}=  Execute Command  ${command}  return_stderr=True
     Should Be Empty  ${stderr}
     Should Contain  ${resp_rpm}  avahi-tools  ignore_case=True  msg=avahi-tools is not available.
-
-
-Check Avahi Service Status
-    [Documentation]  To check for avahi service.
-
-     # Expected command output as below.
-     # CGroup: /system.slice/avahi-daemon.service
-     #      ├─289 avahi-daemon: running [System Name]
-     #      └─317 avahi-daemon: chroot helper
-
-    ${command}=  Set Variable  systemctl status avahi-daemon
-    ${resp_rpm}  ${stderr}=  Execute Command  ${command}  return_stderr=True
-    Should Be Empty  ${stderr}
-    Should Contain  ${resp_rpm}  avahi-daemon: running  ignore_case=True  msg=avahi-daemon is not running.
 
 
 Discover BMC With Service Type
@@ -86,18 +84,22 @@ Discover BMC With Service Type
     Print Timen  Exception message is ${exc_msg}
     Should Not Be Empty  ${bmc_list}
     Rprint Vars  bmc_list
+    [Return]  ${bmc_list}
 
 
-Login To Avahi Client
-    [Documentation]  Login to avahi client.
-    [Arguments]  ${os_host}=${AVAHI_CLIENT}  ${os_username}=${AVAHI_CLIENT_USERNAME}
-    ...          ${os_password}=${AVAHI_CLIENT_PASSWORD}
-    ...          ${alias_name}=os_connection
-    # Description of argument(s):
-    # os_host      IP address of the OS Host.
-    # os_username  OS Host Login user name.
-    # os_password  OS Host Login passwrd.
-    # alias_name   Default OS SSH session connection alias name.
+Disable Daemon And Discover BMC In Next Reboot
+    [Documentation]  Discover BMC in Next reboot.
+    [Arguments]  ${service_type}
 
-    Open Connection  ${os_host}  alias=${alias_name}
-    Login  ${os_username}  ${os_password}
+    ${bmc_list}=  Discover BMC With Service Type  ${service_type}
+    ${openbmc_host_name}  ${openbmc_ip}=  Get Host Name IP  host=${OPENBMC_HOST}
+    ${resp}=  Check BMC Record Exists  ${bmc_list}  ${openbmc_ip}
+    Should Be True  'True' == '${resp}'
+    Set AvahiDaemon Service  command=stop
+    Redfish OBMC Reboot (off)
+    Sleep  120s
+    Login To OS  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
+    ${bmc_list}=  Discover BMC With Service Type  ${service_type}
+    ${openbmc_host_name}  ${openbmc_ip}=  Get Host Name IP  host=${OPENBMC_HOST}
+    ${resp}=  Check BMC Record Exists  ${bmc_list}  ${openbmc_ip}
+    Should Be True  'True' == '${resp}'
