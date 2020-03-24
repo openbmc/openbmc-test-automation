@@ -19,6 +19,26 @@ class Exception(Exception):
         return repr(self.exc_value)
 
 
+def Check_bmc_record_exists(bmc_records, bmc_ip):
+    r"""
+    Parse the BMC records to check for passed input.
+
+    Description of arguments:
+    bmc_records            Contains the list of discoverd BMC records.
+    bmc_ip                 BMC ip address.
+    """
+
+    try:
+        for bmc_key, bmc_val in bmc_records.items():
+            temp_ip = bmc_val.get('address', None)
+            if bmc_ip.strip() == temp_ip.strip():
+                return True
+        else:
+            return False
+    except Exception as exc_obj:
+        return exc_obj
+
+
 def validate_bmc_properties(bmc_prop_pattern, bmc_prop, bmc_value,
                             bmc_rec_valid):
     r"""
@@ -117,7 +137,7 @@ def get_bmc_records(service_type, bmc_records):
 
     Description of arguments:
     service_type     Service type (e.g. RESTService, RedfishService).
-    bmc_records      Contains the lis of discoverd BMC records.
+    bmc_records      Contains the list of discoverd BMC records.
 
     This function will return this variable i.e.
     bmc_inv_list in dictionary form as mention below.
