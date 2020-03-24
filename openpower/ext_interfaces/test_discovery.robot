@@ -6,6 +6,9 @@ Library              SSHLibrary
 Library              ../../lib/external_intf/management_console_utils.py
 Library              ../../lib/gen_robot_print.py
 Library              ../../lib/gen_print.py
+Library              ../../lib/gen_misc.py
+Resource             ../../lib/external_intf/management_console_utils.robot
+Resource             ../../lib/boot_utils.robot
 Resource             ../../syslib/utils_os.robot
 
 Suite Setup          Suite Setup Execution
@@ -21,6 +24,25 @@ Discover BMC With Different Service Type
     _obmc_rest._tcp
     _obmc_redfish._tcp
 
+
+Discover BMC Pre And Post Reboot
+    [Documentation]  Discover BMC before and after reboot.
+    [Tags]  Discover_BMC_Pre_And_Post_Reboot
+    [Template]  Disable Daemon And Discover BMC In Next Reboot
+
+    # Service type
+    _obmc_rest._tcp
+    _obmc_redfish._tcp
+
+
+Disable AvahiDaemon And Discover BMC In Next Reboot
+    [Documentation]  Check the input BMC is discoverd and then disable the avahi daemon,
+    ...  in next reboot same input BMC should discoverable.
+    [Tags]  Disable_AvahiDaemon_And_Discover_BMC_In_Next_Reboot
+    [Template]  Disable Daemon And Discover BMC In Next Reboot
+
+    # Service type    skip
+    _obmc_rest._tcp   True
 
 *** Keywords ***
 
@@ -73,3 +95,27 @@ Discover BMC With Service Type
     Print Timen  Exception message is ${exc_msg}
     Should Not Be Empty  ${bmc_list}
     Rprint Vars  bmc_list
+    [Return]  ${bmc_list}
+
+
+Disable Daemon And Discover BMC In Next Reboot
+    [Documentation]  Discover BMC in Next reboot.
+    [Arguments]  ${service_type}  ${skip}=False
+
+    # Description of argument(s):
+    # service_type  BMC service type e.g.
+    #               (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+    # skip          Run part of code, based on the input provided e.g. (True or False).
+
+    ${bmc_list}=  Discover BMC With Service Type  ${service_type}
+    ${openbmc_host_name}  ${openbmc_ip}=  Get Host Name IP  host=${OPENBMC_HOST}
+    ${resp}=  Check BMC Record Exists  ${bmc_list}  ${openbmc_ip}
+    Should Be True  'True' == '${resp}'
+    Run Keyword If  '${skip}' == 'True'  Set AvahiDaemon Service  command=stop
+    Redfish OBMC Reboot (off)
+    Verify AvahiDaemon Service Status  message=start
+    Login To OS  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
+    ${bmc_list}=  Discover BMC With Service Type  ${service_type}
+    ${openbmc_host_name}  ${openbmc_ip}=  Get Host Name IP  host=${OPENBMC_HOST}
+    ${resp}=  Check BMC Record Exists  ${bmc_list}  ${openbmc_ip}
+    Should Be True  'True' == '${resp}'
