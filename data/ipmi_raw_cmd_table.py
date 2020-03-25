@@ -109,5 +109,15 @@ IPMI_RAW_CMD = {
             "Get GUID bytes 1 through 16.",
 
         ]
+    },
+    'LAN_Config_Params':
+    {
+        'Get':
+        [
+            # raw command, expected output, comment
+            "0x0c 0x02",
+            "11 02",
+            "11 is Parameter revision, 02 is Configuration parameter data e.g. Cipher Suite Entry count",
+        ]
     }
 }
