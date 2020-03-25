@@ -179,6 +179,18 @@ Verify Set Session Privilege Level via IPMI Raw Command
     0x04                04
 
 
+Verify Set Invalid Session Privilege Level via IPMI Raw Command
+    [Documentation]  Verify set invalid session privilege level via IPMI raw command.
+    [Tags]  Verify_Set_Invalid_Session_Privilege_Level_Via_IPMI_Raw_Command
+    [Template]  Set Invalid Session Privilege Level And Verify
+
+    # invalid_privilege_level
+    0x05
+    0x06
+    0x07
+    0x0F
+
+
 Verify Close Session via IPMI
     [Documentation]  Verify close session via IPMI.
     [Tags]  Verify_Close_Session_Via_IPMI
@@ -205,3 +217,15 @@ Set Session Privilege Level And Verify
     ${resp}=  Run IPMI Standard Command
     ...  raw 0x06 0x3b ${privilege_level}
     Should Contain  ${resp}  ${expected_level}
+
+
+Set Invalid Session Privilege Level And Verify
+    [Documentation]   Set invalid session privilege level and verify the response.
+    [Arguments]  ${privilege_level}
+    # Description of argument(s):
+    # privilege_level    Requested Privilege Level.
+
+    # Verify requested level exceeds Channel and/or User Privilege Limit.
+    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ...  raw 0x06 0x3b ${privilege_level}
+    Should Contain  ${msg}  Unknown  rsp=0x81
