@@ -8,6 +8,7 @@ Library                ../lib/ipmi_utils.py
 Library                ../lib/gen_robot_valid.py
 Library                ../lib/var_funcs.py
 Library                ../lib/bmc_network_utils.py
+Variables              ../data/ipmi_raw_cmd_table.py
 
 Suite Setup            Suite Setup Execution
 Test Setup             Printn
@@ -119,6 +120,18 @@ Create VLAN Via IPMI And Disable VLAN
     Valid Value  lan_config['802.1q VLAN ID']  ['Disabled']
 
 
+Test Get LAN Configuration Parameters
+    [Documentation]  Get LAN configuration parameters and verify.
+    [Tags]  Test_Get_LAN_Configuration_Parameters
+    [Template]  Get LAN Configuration Parameters
+
+    # TODO: Add other parameters.
+    # Parameter selector
+    0x00
+    0x01
+    0x16
+
+
 *** Keywords ***
 
 Create VLAN Via IPMI
@@ -175,3 +188,65 @@ Suite Setup Execution
 
     ${initial_lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
     Set Suite Variable  ${initial_lan_config}
+
+
+Get LAN Configuration Parameters
+    [Documentation]  Test Get LAN Configuration Parameters by executing IPMI raw command with
+    ...  different Parameters.
+    [Arguments]  ${parameter_selector}
+
+    # Description of argument(s):
+    # parameter_selector       The parameter selector of LAN configuration.
+
+    Run Keyword If  '${parameter_selector}' == '0x00'
+    ...    Verify Get Set In Progress
+    ...  ELSE IF  '${parameter_selector}' == '0x01'
+    ...    Verify Cipher Suite Entry Count
+    ...  ELSE IF  '${parameter_selector}' == '0x16'
+    ...    Verify Authentication Type Support
+
+
+Verify Get Set In Progress
+    [Documentation]  Verify Get Set In Progress via IPMI raw Command.
+
+    ${Get_Set_In_Progress}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['LAN_Config_Params']['Get'][0]} ${CHANNEL_NUMBER} 0x00 0x00 0x00
+
+    ${Get_Set_In_Progress}=  Split String  ${Get_Set_In_Progress}
+
+    # 00b = set complete.
+    # 01b = set in progress.
+    Should Contain Any  ${Get_Set_In_Progress[1]}  00  01
+
+
+Verify Cipher Suite Entry Count
+    [Documentation]  Verify cipher suite entry count via IPMI raw Command.
+
+    ${cipher_suite_entry_count}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['LAN_Config_Params']['Get'][0]} ${CHANNEL_NUMBER} 0x16 0x00 0x00
+    ${cipher_suite_entry_count}=  Split String  ${cipher_suite_entry_count}
+
+    # Convert minor cipher suite entry count from BCD format to integer. i.e. 01 to 1
+    ${cipher_suite_entry_count[1]}=  Convert To Integer  ${cipher_suite_entry_count[1]}
+    ${cnt}=  Get length  ${valid_ciphers}
+
+    should be Equal  ${cipher_suite_entry_count[1]}  ${cnt}
+
+
+Verify Authentication Type Support
+    [Documentation]  Verify authentication type support via IPMI raw Command.
+
+    ${authentication_type_support}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['LAN_Config_Params']['Get'][0]} ${CHANNEL_NUMBER} 0x01 0x00 0x00
+
+    ${authentication_type_support}=  Split String  ${authentication_type_support}
+    # All bits:
+    # 1b = supported
+    # 0b = authentication type not available for use
+    # [5] - OEM proprietary (per OEM identified by the IANA OEM ID in the RMCP Ping Response)
+    # [4] - straight password / key
+    # [3] - reserved
+    # [2] - MD5
+    # [1] - MD2
+    # [0] - none
+    Should Contain Any  ${authentication_type_support[1]}  00  01  02  03  04  05
