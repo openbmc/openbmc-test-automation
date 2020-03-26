@@ -88,7 +88,7 @@ ${PROP_ERR}             is not in the list of valid properties for the resource.
 ${PROP_TYPE_ERR}        is of a different type than the property can accept.
 
 # Build error patterns list.
-@{EMPTY LIST}
+@{EMPTY_LIST}
 @{ERR_PATTERN1}                   ${PROP_REQ_ERR}                ${PROP_ERR}
 @{ERR_PATTERN2}                   ${PROP_TYPE_ERR}
 @{ERR_PATTERN3}                   ${PROP_REQ_ERR}                ${PROP_ERR}                 ${PROP_TYPE_ERR}
@@ -106,38 +106,38 @@ Acquire And Release Different Read Locks
 
     # lock  seg_flags                     resource_id  hmc_id  exp_status_code      err_msgs         new_sess
     # type                                                                                            req
-    Read    ${ONE_SEG_FLAG_ALL}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${ONE_SEG_FLAG_SAME}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${ONE_SEG_FLAG_DONT}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${TWO_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${TWO_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${TWO_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${TWO_SEG_FLAG_4}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${TWO_SEG_FLAG_5}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${THREE_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${THREE_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${THREE_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${FOUR_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${FOUR_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${FOUR_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${FIVE_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${FIVE_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${FIVE_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${SIX_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${SIX_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${SIX_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY LIST}    ${True}
-    Read    ${SEVEN_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${SEVEN_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${SEVEN_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${LOCKSAME_INVALID_LEN1}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
+    Read    ${ONE_SEG_FLAG_ALL}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${ONE_SEG_FLAG_SAME}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${ONE_SEG_FLAG_DONT}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${TWO_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${TWO_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${TWO_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${TWO_SEG_FLAG_4}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${TWO_SEG_FLAG_5}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${THREE_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${THREE_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${THREE_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${FOUR_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${FOUR_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${FOUR_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${FIVE_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${FIVE_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${FIVE_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${SIX_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${SIX_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${SIX_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${SEVEN_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${SEVEN_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${SEVEN_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${LOCKSAME_INVALID_LEN1}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
     Read    ${LOCKSAME_INVALID_LEN_STR}   ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${ERR_PATTERN2}  ${True}
     Read    ${LOCKSAME_INVALID_LEN_NEG}   ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${ERR_PATTERN2}  ${True}
     Read    ${LOCKSAME_INVALID_LEN_BOOL}  ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${ERR_PATTERN2}  ${True}
     Read    ${DONTLOCK_INVALID_LEN_BOOL}  ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${ERR_PATTERN2}  ${True}
-    Read    ${TWO_SEG_FLAG_INVALID1}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${TWO_SEG_FLAG_INVALID2}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${TWO_SEG_FLAG_INVALID3}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
-    Read    ${TWO_SEG_FLAG_INVALID4}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY LIST}    ${True}
+    Read    ${TWO_SEG_FLAG_INVALID1}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${TWO_SEG_FLAG_INVALID2}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${TWO_SEG_FLAG_INVALID3}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${TWO_SEG_FLAG_INVALID4}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
     Read    ${TWO_SEG_FLAG_INVALID5}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${ERR_PATTERN1}  ${True}
     Read    ${TWO_SEG_FLAG_INVALID6}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${ERR_PATTERN1}  ${True}
     Read    ${TWO_SEG_FLAG_INVALID7}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${ERR_PATTERN3}  ${True}
@@ -153,35 +153,35 @@ Acquire And Release Different Write Locks
 
     # lock  seg_flags                    resource_id  hmc_id  exp_status_code       err_msgs         new_sess
     # type                                                                                            req
-    Write  ${ONE_SEG_FLAG_ALL}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${ONE_SEG_FLAG_SAME}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${ONE_SEG_FLAG_DONT}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${TWO_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${TWO_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_OK}            ${EMPTY LIST}    ${True}
-    Write  ${TWO_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_OK}            ${EMPTY LIST}    ${True}
-    Write  ${TWO_SEG_FLAG_INVALID4}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${THREE_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${THREE_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${THREE_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${FOUR_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${FOUR_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${FOUR_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${FIVE_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${FIVE_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${FIVE_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${SIX_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${SIX_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${SIX_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY LIST}    ${True}
-    Write  ${SEVEN_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${SEVEN_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${SEVEN_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${LOCKSAME_INVALID_LEN1}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${LOCKSAME_INVALID_LEN_STR}   ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${LOCKSAME_INVALID_LEN_NEG}   ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${LOCKSAME_INVALID_LEN_BOOL}  ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${DONTLOCK_INVALID_LEN_BOOL}  ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${TWO_SEG_FLAG_INVALID1}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
-    Write  ${TWO_SEG_FLAG_INVALID2}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY LIST}    ${True}
+    Write  ${ONE_SEG_FLAG_ALL}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${ONE_SEG_FLAG_SAME}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${ONE_SEG_FLAG_DONT}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${TWO_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${TWO_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_OK}            ${EMPTY_LIST}    ${True}
+    Write  ${TWO_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_OK}            ${EMPTY_LIST}    ${True}
+    Write  ${TWO_SEG_FLAG_INVALID4}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${THREE_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${THREE_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${THREE_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${FOUR_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${FOUR_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${FOUR_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${FIVE_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${FIVE_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${FIVE_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${SIX_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${SIX_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${SIX_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${SEVEN_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${SEVEN_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${SEVEN_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${LOCKSAME_INVALID_LEN1}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${LOCKSAME_INVALID_LEN_STR}   ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${LOCKSAME_INVALID_LEN_NEG}   ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${LOCKSAME_INVALID_LEN_BOOL}  ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${DONTLOCK_INVALID_LEN_BOOL}  ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${TWO_SEG_FLAG_INVALID1}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${TWO_SEG_FLAG_INVALID2}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${TWO_SEG_FLAG_INVALID8}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${ERR_PATTERN1}  ${True}
     Write  ${TWO_SEG_FLAG_INVALID5}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${ERR_PATTERN1}  ${True}
     Write  ${TWO_SEG_FLAG_INVALID9}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${ERR_PATTERN2}  ${True}
@@ -199,6 +199,19 @@ Verify GetLockList Returns An Empty Record For An Invalid Session Id
     ${records}=  Run Keyword  Get Locks List  ZZzZZz9zzZ
     ${length}=  Get Length  ${records}
     Should Be Equal  ${length}  ${0}
+
+
+Verify Lock Conflicts
+    [Documentation]  Verify lock conflicts.
+    [Tags]  Verify_Lock_Conflicts
+    [Template]  Acquire And Release Lock
+
+    Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
+    Read   ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_CONFLICT}  ['NA']  ${False}
+    Read   ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
+    Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_CONFLICT}  ['NA']  ${False}
+    Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
+    Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_CONFLICT}  ['NA']  ${False}
 
 
 *** Keywords ***
@@ -224,27 +237,29 @@ Return Data Dictionary For Single Request
 Acquire Lock On A Given Resource
     [Documentation]  Acquire lock on a given resource.
     [Arguments]  ${lock_type}  ${seg_flags}  ${resource_id}  ${exp_status_code}=${HTTP_OK}
-    ...  ${err_msgs}=${EMPTY LIST}
+    ...  ${err_msgs}=${EMPTY_LIST}
 
     # Description of argument(s):
-    # lock_type        Type of lock (Read/Write).
-    # seg_flags        Segmentation Flags to identify lock elements under system level in the hierarchy.
-    #                  Ex:  [{'LockFlag': 'LockAll', 'SegmentLength': 1},
-    #                   {'LockFlag': 'LockSame', 'SegmentLength': 2}]
-    # resource_id      Decimal +ve integer value of maximum 8 hex bytes.  Ex: 134, 2048 etc.
-    # exp_status_code  expected status code from the AcquireLock request for given inputs.
+    # lock_type            Type of lock (Read/Write).
+    # seg_flags            Segmentation Flags to identify lock elements under system level in the hierarchy.
+    #                      Ex:  [{'LockFlag': 'LockAll', 'SegmentLength': 1},
+    #                           {'LockFlag': 'LockSame', 'SegmentLength': 2}]
+    # resource_id          Decimal +ve integer value of maximum 8 hex bytes.  Ex: 134, 2048 etc.
+    # exp_status_code      expected status code from the AcquireLock request for given inputs.
 
     ${data}=  Return Data Dictionary For Single Request  ${lock_type}  ${seg_flags}  ${resource_id}
     ${resp}=  Redfish.Post  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock
     ...  body=${data}  valid_status_codes=[${exp_status_code}]
 
-    Log To Console  ${resp.text}
     ${transaction_id}=  Run Keyword If  ${exp_status_code} != ${HTTP_OK}
     ...  Set Variable  ${0}
-    ...  ELSE  Load Lock Record And Build Transaction To Session Map  ${resp.text}
+    ...  ELSE   Load Lock Record And Build Transaction To Session Map  ${resp.text}
 
-    Run Keyword If  ${exp_status_code} != ${HTTP_OK} and ${err_msgs} != ${EMPTY LIST}
+    Run Keyword If  ${exp_status_code} == ${HTTP_CONFLICT} and ${err_msgs} == ['NA']
+    ...  Load Response And Verify Conflict  ${resp.text}  ${SESSION_ID}
+    ...  ELSE  Run Keyword If  ${exp_status_code} != ${HTTP_OK} and ${err_msgs} != ${EMPTY_LIST}
     ...  Load Response And Verify Error  ${resp.text}  err_msgs=${err_msgs}
+
     Append Transaction Id And Session Id To Locks Dictionary  ${transaction_id}
 
     [Return]  ${transaction_id}
@@ -265,7 +280,7 @@ Load Lock Record And Build Transaction To Session Map
 
 Load Response And Verify Error
     [Documentation]  Load response and verify error.
-    [Arguments]  ${error_resp}  ${err_msgs}=${EMPTY LIST}
+    [Arguments]  ${error_resp}  ${err_msgs}=${EMPTY_LIST}
 
     # Description of argument(s):
     # error_resp  Error response from a REST request.
@@ -290,7 +305,7 @@ Load Response And Verify Error
 
 Expect List Of Errors In An Extended Errors
     [Documentation]  Expect list of errors in an extended errors.
-    [Arguments]  ${exp_error}  ${extended_errors}=${EMPTY LIST}
+    [Arguments]  ${exp_error}  ${extended_errors}=${EMPTY_LIST}
 
     ${found}=  Set Variable  ${False}
 
@@ -309,13 +324,7 @@ Append Transaction Id And Session Id To Locks Dictionary
     # Description of argument(s):
     # transaction_id  Transaction ID created from acquire lock request. Ex: 8, 9 etc.
 
-    ${session_location}=  Redfish.Get Session Location
-    ${session_key}=  Redfish.Get Session Key
-    ${session_id}=  Evaluate  os.path.basename($session_location)  modules=os
     Set To Dictionary  ${LOCKS}  ${${transaction_id}}  ${session_id}
-    Log To Console  session=${session_id}
-    Log To Console  X-AUTH-Token=${session_key}
-    Log To Console  LOCKS=${LOCKS}
 
 
 Get Locks List
@@ -379,10 +388,26 @@ Verify Lock Record
     Should Be Equal  ${lock_record_found}  ${lock_found}
 
 
+Load Response And Verify Conflict
+    [Documentation]  Load response and verify conflict.
+    [Arguments]  ${conflict_resp}  ${sessions}
+
+    # Description of argument(s):
+    # conflict_resp  Conflict response from a REST request.
+    # sessions       Comma separated list of sessions
+
+    ${curr_locks}=  Run Keyword  Get Locks List  ${sessions}
+    ${conflict_resp}=  Replace String  ${conflict_resp}  \"  \\"
+    ${conflict_response}=  Evaluate  json.loads('''${conflict_resp}''')  json
+
+    ${conflicts}=  Get Dictionary Values  ${conflict_response}
+    List Should Contain Value  ${conflicts}  ${PREV_INPUTS}
+
+
 Acquire And Release Lock
     [Documentation]  Acquire and release lock.
     [Arguments]  ${lock_type}  ${seg_flags}  ${resource_id}  ${hmc_id}  ${exp_status_code}=${HTTP_OK}
-    ...  ${err_msgs}=${EMPTY LIST}  ${new_sess_req}=${True}
+    ...  ${err_msgs}=${EMPTY_LIST}  ${new_sess_req}=${True}
 
     # Description of argument(s):
     # lock_type        Type of lock (Read/Write).
@@ -402,14 +427,19 @@ Acquire And Release Lock
     ${transaction_id}=  Run Keyword  Acquire Lock On A Given Resource  ${inputs["LockType"]}
     ...  ${inputs["SegmentFlags"]}  ${inputs["ResourceID"]}  ${exp_status_code}  err_msgs=${err_msgs}
 
+    Run Keyword If  ${new_sess_req} == ${True}  Set Test Variable Dictionary Of Previous Lock Request
+    ...  ${lock_type}  ${seg_flags}  ${resource_id}  ${hmc_id}  ${SESSION_ID}  ${transaction_id}
+
     ${session}=  Get From Dictionary  ${LOCKS}  ${transaction_id}
+    Set To Dictionary  ${inputs}  TransactionID=${${transaction_id}}  SessionID=${session}
     ${locks}=  Run Keyword  Get Locks List  ${session}
 
-    Set To Dictionary  ${inputs}  TransactionID=${${transaction_id}}  SessionID=${session}
+    Run Keyword If  ${new_sess_req} == ${True}  Set Test Variable  ${PREV_LOCKS}  ${locks}
+
     ${lock_found}=  Set Variable If  ${exp_status_code} == ${HTTP_OK}  ${True}  ${False}
     Verify Lock Record  ${lock_found}  &{inputs}
 
-    Return From Keyword If  ${exp_status_code} != ${HTTP_OK}
+    Return From Keyword If  '${exp_status_code}' != '${HTTP_OK}' or ${err_msgs} == ['NA']
 
     Release Lock  ${transaction_id}
     ${locks}=  Run Keyword  Get Locks List  ${session}
@@ -422,13 +452,14 @@ Acquire And Release Lock
 Create New Session
     [Documentation]  Create new session.
 
-    # Delete current session if any.
+    # Delete current session.
     Redfish.Logout
 
     # Get a redfish session to BMC.
     Redfish.Login
-    ${session_location}=  Redfish.Get Session Location
-    ${session_key}=  Redfish.Get Session Key
+    ${session_id}  ${session_key}=  Return Session Id And Session Key
+    Set Test Variable  ${SESSION_ID}  ${session_id}
+    Set Test Variable  ${SESSION_KEY}  ${session_key}
 
 
 Test Teardown Execution
@@ -436,4 +467,44 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Redfish.Logout
+
+
+Return Session Id And Session Key
+    [Documentation]  Return session id and sesion key.
+
+    ${session_location}=  Redfish.Get Session Location
+    ${session_id}=  Evaluate  os.path.basename($session_location)  modules=os
+    ${session_key}=  Redfish.Get Session Key
+
+    [Return]  ${session_id}  ${session_key}
+
+
+Test Setup Execution
+    [Documentation]  Test setup execution.
+
+    Create New Session
+
+    Set Test Variable Dictionary Of Previous Lock Request  ${EMPTY}  ${EMPTY_LIST}  ${EMPTY}  ${EMPTY}
+    ...  ${EMPTY}  ${EMPTY}
+
+
+Set Test Variable Dictionary Of Previous Lock Request
+    [Documentation]  Set test variable dictionary of previous lock request.
+    [Arguments]  ${lock_type}  ${seg_flags}  ${resource_id}  ${hmc_id}  ${session_id}  ${transaction_id}
+
+    # Description of argument(s):
+    # lock_type            Type of lock (Read/Write).
+    # seg_flags            Segmentation Flags to identify lock elements under system level in the hierarchy.
+    #                      Ex:  [{'LockFlag': 'LockAll', 'SegmentLength': 1},
+    #                           {'LockFlag': 'LockSame', 'SegmentLength': 2}]
+    # resource_id          Decimal +ve integer value of maximum 8 hex bytes.  Ex: 134, 2048 etc.
+    # hmc_id               Hardware management console id.
+    # session_id           Session id of the transaction.
+    # transaction_id       Transaction_id of the lock request.
+
+    ${prev_inputs}=  Create Dictionary  LockType=${lock_type}  ResourceID=${resource_id}
+    ...  SegmentFlags=${seg_flags}  HMCID=${hmc_id}  SessionID=${session_id}  TransactionID=${transaction_id}
+
+    Set Test Variable  ${PREV_INPUTS}  ${prev_inputs}
+    Set Test Variable  ${PREV_LOCKS}   ${EMPTY_LIST}
 
