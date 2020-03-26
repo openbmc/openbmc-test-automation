@@ -20,6 +20,8 @@ Suite Setup       Suite Setup Execution
 
 ${root_cmd_args}       redfishtool raw -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME} -p ${OPENBMC_PASSWORD} -S Always
 ${min_number_sensors}  ${15}
+${min_number_roles}    ${4}
+${min_number_users}    ${1}
 
 *** Test Cases ***
 
@@ -74,7 +76,66 @@ Verify Redfishtool Delete Users
     Should Be True  ${status} == False
 
 
+Verify Redfishtool Login with Deleted Redfish Users
+    [Documentation]  Verify login with deleted user via Redfishtool.
+    [Tags]  Verify_Redfishtool_Login_with_Deleted_Redfish_Users
+
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  true  expected_error=400
+    Redfishtool Delete User  "UserT100"
+    Redfishtool Access Resource  /redfish/v1/AccountService/Accounts  "UserT100"  "TestPwd123"  ${HTTP_UNAUTHORIZED}
+
+Verify Redfishtool Error Upon Creating Same Users With Different Privileges
+    [Documentation]  Verify error upon creating same users with different previleges.
+    [Tags]  Verify_Redfishtool_Error_Upon_Creating_Same_Users_With_Different_Privileges
+    [Teardown]  Redfishtool Delete User  "UserT100"
+
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  true
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "Administrator"  true  expected_error=${HTTP_BAD_REQUEST}
+
+
+Verify Redfishtool Admin User Privilege
+    [Documentation]  Create user via Redfishtool and verify.
+    [Tags]  Verify_Redfishtool_Create_Users
+    [Teardown]  Run Keywords  Redfishtool Delete User  "admin_userUserT100"  AND
+    ...  Redfishtool Delete User  "operator_userUserT101"
+
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "Administrator"  true
+    Redfishtool Create User  "UserT101"  "TestPwd123"  "Operator"  true
+
+    # Change role ID of operator user with admin user.
+    Redfishtool Update User Role  "UserT101"  "Administrator"  "UserT100"  "TestPwd123"
+
+    # Verify modified user.
+    Redfishtool Verify User  "UserT101"  "Administrator"
+
+
+Verify Redfishtool ReadOnly User Privilege
+    [Documentation]  Verify Redfishtool ReadOnly user privilege works.
+    [Tags]  Verify_Redfishtool_ReadOnly_User_Privilege
+    [Teardown]  Redfishtool Delete User  "UserT100"
+
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "ReadOnly"  true
+    Redfishtool Access Resource  /redfish/v1/Systems/  "UserT100"  "TestPwd123"
+
+
+Verify Redfishtool User List
+    [Documentation]  Verify the list of users.
+
+    ${usr_accounts}=   Redfishtool Get  /redfish/v1/AccountService/Accounts
+    ${resp}=  Run Keyword And Return Status  Evaluate  json.loads('''${usr_accounts}''')  json
+    Should Be True  ${resp}
+    ${json_object}=  Evaluate  json.loads('''${usr_accounts}''')  json
+    Should Be True  ${json_object["Members@odata.count"]} >= ${min_number_users}
+    ...  msg=There should be at least ${min_number_users} users.
+
 *** Keywords ***
+
+Redfishtool Access Resource
+    [Documentation]  Access resource.
+    [Arguments]  ${uri}   ${login_user}  ${login_pasword}  ${expected_error}=""
+
+    ${user_cmd_args}=  Set Variable  redfishtool raw -r ${OPENBMC_HOST} -u ${login_user} -p ${login_pasword} -S Always
+    Redfishtool Get  ${uri}  ${user_cmd_args}  ${expected_error}
 
 
 Is HTTP error Expected
@@ -91,7 +152,7 @@ Is HTTP error Expected
 
 Redfishtool Create User
     [Documentation]  Create new user.
-    [Arguments]  ${user_name}  ${password}  ${roleID}  ${enable}  ${expected_error}=""
+    [Arguments]  ${user_name}  ${password}  ${roleID}  ${enable}  ${login_user}=""  ${login_pasword}=""  ${expected_error}=""
 
     # Description of argument(s):
     # user_name      The user name (e.g. "test", "robert", etc.).
@@ -100,10 +161,14 @@ Redfishtool Create User
     # enable         Enabled attribute of (e.g. true or false).
     # expected_error Expected error optionally provided in testcase (e.g. 401 /
     #                authentication error, etc. )
-
+    
+    ${user_cmd_args}=  Set Variable  redfishtool raw -r ${OPENBMC_HOST} -u ${login_user} -p ${login_pasword} -S Always
     ${data}=  Set Variable  '{"UserName":${user_name},"Password":${password},"RoleId":${roleId},"Enabled":${enable}}'
-    Redfishtool Post  ${data}  /redfish/v1/AccountService/Accounts  ${root_cmd_args}
-    ...  ${expected_error}
+    Run Keyword If  ${login_user} == ""
+    ...   Redfishtool Post  ${data}  /redfish/v1/AccountService/Accounts  ${root_cmd_args}  ${expected_error}
+    ...   ELSE
+    ...   Redfishtool Post  ${data}  /redfish/v1/AccountService/Accounts  ${user_cmd_args}  ${expected_error}
+
 
 Redfishtool Update User Role
     [Documentation]  Update user role.
@@ -118,8 +183,12 @@ Redfishtool Update User Role
     # expected_error Expected error optionally provided in testcase (e.g. 401 /
     #                authentication error, etc. )
 
-    Redfishtool Patch  '{"RoleId":${newRole}}'  /redfish/v1/AccountService/Accounts/${user_name}
-    ...  ${root_cmd_args}  ${expected_error}
+    ${user_cmd_args}=  Set Variable  redfishtool raw -r ${OPENBMC_HOST} -u ${login_user} -p ${login_pasword} -S Always
+    Run Keyword If  ${login_user} == ""
+    ...   Redfishtool Patch  '{"RoleId":${newRole}}'  /redfish/v1/AccountService/Accounts/${user_name}  ${root_cmd_args}  ${expected_error}
+    ...   ELSE
+    ...   Redfishtool Patch  '{"RoleId":${newRole}}'  /redfish/v1/AccountService/Accounts/${user_name}  ${user_cmd_args}  ${expected_error}
+
 
 Redfishtool Delete User
     [Documentation]  Delete an user.
@@ -224,6 +293,6 @@ Redfishtool Delete
 
 Suite Setup Execution
     [Documentation]  Do suite setup execution.
-
+    
     ${tool_exist}=  Run  which redfishtool
     Should Not Be Empty  ${tool_exist}
