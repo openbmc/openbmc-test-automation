@@ -8,6 +8,7 @@ This module provides many valuable functions such as my_parm_file.
 import sys
 import errno
 import os
+import shutil
 import collections
 import json
 import time
@@ -70,6 +71,24 @@ def makedirs(path, mode=0o777, quiet=None):
         os.makedirs(path, mode)
     except OSError:
         pass
+
+
+def rmtree(path, ignore_errors=False, onerror=None, quiet=None):
+    r"""
+    Call shutil.rmtree with the caller's arguments.
+
+    This function offers this advantage over the base function:
+    - It will print an "Issuing: shutil.rmtree" message.
+
+    Description of argument(s):
+    (All parms are passed directly to shutil.rmtree.  See its prolog for details)
+    quiet                           Indicates whether this function should run the print_issuing() function.
+    """
+    quiet = int(dft(quiet, gp.get_stack_var('quiet', 0)))
+    print_string = gp.sprint_executing()
+    print_string = re.sub(r"Executing: ", "Issuing: shutil.", print_string.rstrip("\n"))
+    gp.qprintn(re.sub(r", quiet[ ]?=.*", ")", print_string))
+    shutil.rmtree(path, ignore_errors, onerror)
 
 
 def chdir(path, quiet=None):
