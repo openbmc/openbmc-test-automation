@@ -15,7 +15,7 @@ Library   Collections
 
 *** Variables ***
 
-${iterations}         10000
+${iterations}         ${10000}
 ${hostname}           test_hostname
 ${MAX_UNAUTH_PER_IP}  ${5}
 
@@ -98,7 +98,31 @@ Flood Post Without Auth Token And Check Stability Of BMC
     Should Be Equal  ${fail_count}  0  msg=Post operation failed ${fail_count} times in ${verify_count} attempts
 
 
+Check SSH Wrong Login Attempt With Many Requests
+    [Documentation]  Check BMC stability with large number of SSH wrong login requests.
+    [Tags]  Check_SSH_Wrong_Login_Attempt_With_Many Requests
+    [Setup]  Set Account Lockout Threshold
+    [Teardown]  Run keywords  FFDC On Test Case Fail  AND  Redfish.Logout
+
+    @{ssh_status_list}=  Create List
+    FOR  ${i}  IN RANGE  ${iterations}
+      ${invalid_password}=   Catenate  ${OPENBMC_PASSWORD}${i}
+      Run Keyword And Ignore Error  Open Connection And Log In  ${OPENBMC_USERNAME}  ${invalid_password}
+
+      # Every 100th iteration Login with correct credentials
+      ${status}=   Run key word If  ${i} % ${100} == ${0}  Run Keyword And Return Status
+      ...   Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+      Run Keyword If  ${status} == ${False}  Append To List  ${ssh_status_list}  ${status}
+      SSHLibrary.Close Connection
+    END
+
+    ${valid_login_count}=  Evaluate  ${iterations}/100
+    ${fail_count}=  Get Length  ${ssh_status_list}
+    Should Be Equal  ${fail_count}  ${0}  msg= Login Failed ${fail_count} times in ${valid_login_count} attempts.
+
+
 *** Keywords ***
+
 
 Login And Configure Hostname
     [Documentation]  Login and configure hostname
@@ -120,3 +144,10 @@ Login And Create User
 
     ${user_info}=  Create Dictionary  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}  valid_status_codes=[${HTTP_OK}]
+
+
+Set Account Lockout Threshold
+   [Documentation]  Set user account lockout threshold.
+
+   Redfish.Login
+   Redfish.Patch  /redfish/v1/AccountService  body=[('AccountLockoutThreshold', 0)]
