@@ -16,6 +16,7 @@ Library   Collections
 *** Variables ***
 
 ${iterations}         10000
+${loop_iteration}     ${1000}
 ${hostname}           test_hostname
 ${MAX_UNAUTH_PER_IP}  ${5}
 
@@ -47,7 +48,8 @@ Flood Patch Without Auth Token And Check Stability Of BMC
     ${verify_count}=  Evaluate  ${iterations}/100
     ${fail_count}=  Get Length  ${status_list}
 
-    Should Be Equal  ${fail_count}  0  msg=Patch operation failed ${fail_count} times in ${verify_count} attempts
+    Should Be Equal  ${fail_count}  0
+    ...  msg=Patch operation failed ${fail_count} times in ${verify_count} attempts
 
 
 Verify Uer Cannot Login After 5 Non-Logged In Sessions
@@ -70,7 +72,8 @@ Test Post Without Auth Token Fails
     [Documentation]  Send post method without auth token and verify it throws an error.
     [Tags]   Test_Post_Without_Auth_Token_Fails
 
-    ${user_info}=  Create Dictionary  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
+    ${user_info}=  Create Dictionary
+    ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
     ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
@@ -80,7 +83,8 @@ Flood Post Without Auth Token And Check Stability Of BMC
     [Tags]  Flood_Post_Without_Auth_Token_And_Check_Stability_Of_BMC
 
     @{status_list}=  Create List
-    ${user_info}=  Create Dictionary  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
+    ${user_info}=  Create Dictionary
+    ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
 
     FOR  ${i}  IN RANGE  ${1}  ${iterations}
         Log To Console  ${i}th iteration
@@ -95,7 +99,35 @@ Flood Post Without Auth Token And Check Stability Of BMC
     ${verify_count}=  Evaluate  ${iterations}/100
     ${fail_count}=  Get Length  ${status_list}
 
-    Should Be Equal  ${fail_count}  0  msg=Post operation failed ${fail_count} times in ${verify_count} attempts
+    Should Be Equal  ${fail_count}  0
+    ...  msg=Post operation failed ${fail_count} times in ${verify_count} attempts
+
+
+Make Large Number Of Wrong SSH Login Attempts And Check Stability
+    [Documentation]  Check BMC stability with large number of SSH wrong login requests.
+    [Tags]  Make_Large_Number_Of_Wrong_SSH_Login_Attempts_And_Check_Stability
+    [Setup]  Set Account Lockout Threshold
+    [Teardown]  FFDC On Test Case Fail
+
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    @{ssh_status_list}=  Create List
+    FOR  ${i}  IN RANGE  ${loop_iteration}
+      Log To Console  ${i}th iteration
+      ${invalid_password}=   Catenate  ${OPENBMC_PASSWORD}${i}
+      Run Keyword and Ignore Error
+      ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${invalid_password}
+
+      # Every 100th iteration Login with correct credentials
+      ${status}=   Run keyword If  ${i} % ${100} == ${0}  Run Keyword And Return Status
+      ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+      Run Keyword If  ${status} == ${False}  Append To List  ${ssh_status_list}  ${status}
+      SSHLibrary.Close Connection
+    END
+
+    ${valid_login_count}=  Evaluate  ${iterations}/100
+    ${fail_count}=  Get Length  ${ssh_status_list}
+    Should Be Equal  ${fail_count}  ${0}
+    ...  msg= Login Failed ${fail_count} times in ${valid_login_count} attempts.
 
 
 *** Keywords ***
@@ -118,5 +150,16 @@ Login And Create User
 
     Redfish.Login
 
-    ${user_info}=  Create Dictionary  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}  valid_status_codes=[${HTTP_OK}]
+    ${user_info}=  Create Dictionary
+    ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
+    ...  valid_status_codes=[${HTTP_OK}]
+
+
+Set Account Lockout Threshold
+   [Documentation]  Set user account lockout threshold.
+
+   [Teardown]  Redfish.Logout
+
+   Redfish.Login
+   Redfish.Patch  /redfish/v1/AccountService  body=[('AccountLockoutThreshold', 0)]
