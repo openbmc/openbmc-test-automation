@@ -19,11 +19,28 @@ except ImportError:
 import atexit
 import signal
 import argparse
+import textwrap as textwrap
 
 import gen_print as gp
 import gen_valid as gv
 import gen_cmd as gc
 import gen_misc as gm
+
+
+class MultilineFormatter(argparse.HelpFormatter):
+    def _fill_text(self, text, width, indent):
+        r"""
+        Split text into formatted lines for every "%%n" encountered in the text and return the result.
+        """
+        lines = self._whitespace_matcher.sub(' ', text).strip().split('%n')
+        formatted_lines = \
+            [textwrap.fill(x, width, initial_indent=indent, subsequent_indent=indent) + '\n' for x in lines]
+        return ''.join(formatted_lines)
+
+
+class ArgumentDefaultsHelpMultilineFormatter(MultilineFormatter, argparse.ArgumentDefaultsHelpFormatter):
+    pass
+
 
 default_string = '  The default value is "%(default)s".'
 module = sys.modules["__main__"]
