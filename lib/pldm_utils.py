@@ -56,6 +56,10 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
                 supported_types['text'].append(record[1].rstrip(")"))
             result['supported_types'] = supported_types
 
+        elif 'supported_commands' in result:
+            commands = result['supported_commands'].split(":")[0].split(" ")
+            return commands
+
         elif 'yyyy-mm-dd_hh' in result:
             # Date & Time :
             # YYYY-MM-DD HH:MM:SS - 2020-02-24 06:44:16
