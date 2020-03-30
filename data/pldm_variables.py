@@ -80,45 +80,51 @@ CMD_SETSTATEEFFECTERSTATES = 'platform SetStateEffecterStates -i %s -c %s -d %s'
 
 # GetPDR parsed response message for record handle.
 # Dictionary value array holds the expected output for record handle 1, 2.
-# e.g. : 'nextrecordhandle': ['0', '2']
 #
 # Note :
 #      Record handle - 0 is default &  has same behaviour as record handle 1
 #      Only record handle 0, 1, 2 are supported as of now.
 
-RESPONSE_DICT_GETPDR = {
-    'nextrecordhandle': ['0', '2', '3'],
+RESPONSE_DICT_GETPDR_SETSTATEEFFECTER = {
     'responsecount': ['29', '30'],
-    'recordhandle': ['1', '2'],
     'pdrheaderversion': ['1'],
     'pdrtype': ['11'],
     'recordchangenumber': ['0'],
     'datalength': ['19', '20'],
     'pldmterminushandle': ['0'],
-    'effecterid': ['1', '2'],
-    'entitytype': ['33', '45'],
+    'effecterid': ['1', '2', '3'],
+    'entitytype': ['33', '45', '31'],
     'entityinstancenumber': ['0'],
     'containerid': ['0'],
     'effectersemanticid': ['0'],
     'effecterinit': ['0'],
     'effecterdescriptionpdr': ['false'],
     'compositeeffectercount': ['1'],
-    'statesetid': ['196', '260'],
+    'statesetid': ['196', '260', '129'],
     'possiblestatessize': ['1', '2'],
-    'possiblestates': ['6', '0']}
+    'possiblestates': ['6', '0', '64']}
 
-RESPONSE_DICT_GETBIOSTABLE_STRTABLE = {
-    'biosstringhandle': ['BIOSString'],
-    '0': ['Allowed'],
-    '1': ['Disabled'],
-    '2': ['Enabled'],
-    '3': ['Not Allowed'],
-    '4': ['Perm'],
-    '5': ['Temp'],
-    '6': ['pvm-fw-boot-side'],
-    '7': ['pvm-inband-code-update'],
-    '8': ['pvm-os-boot-side'],
-    '9': ['pvm-pcie-error-inject'],
-    '10': ['pvm-surveillance'],
-    '11': ['pvm-system-name'],
-    '12': ['vmi-if-count']}
+RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER = {
+    'responsecount': ['20'],
+    'pdrheaderversion': ['1'],
+    'pdrtype': ['20'],
+    'recordchangenumber': ['0'],
+    'datalength': ['10'],
+    'pldmterminushandle': ['0'],
+    'entitytype': ['System Board', 'Chassis front panel board (control panel)',
+                   'Management Controller', '208(OEM)', 'Power converter'],
+    'containerid': ['0', '1']}
+
+RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION = {
+    'pdrheaderversion': ['1'],
+    'pdrtype': ['15'],
+    'recordchangenumber': ['0'],
+    'containerid': ['1'],
+    'associationtype': ['Physical'],
+    'containerentitytype': ['System Board'],
+}
+
+PLDM_PDR_TYPES = {
+    'PLDM_STATE_EFFECTER_PDR': '11',
+    'PLDM_PDR_FRU_RECORD_SET': '20',
+    'PLDM_PDR_ENTITY_ASSOCIATION': '15'}
