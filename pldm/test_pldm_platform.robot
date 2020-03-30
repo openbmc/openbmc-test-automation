@@ -9,21 +9,22 @@ Resource          ../lib/bmc_redfish_resource.robot
 Resource          ../lib/boot_utils.robot
 
 Test Setup        Printn
-Test Teardown     FFDC On Test Case Fail
-Suite Teardown    Pldmtool Platform Suite Cleanup
+#Test Teardown     FFDC On Test Case Fail
+#Suite Teardown    Pldmtool Platform Suite Cleanup
 
 *** Test Cases ***
-
 Verify GetPDR
     [Documentation]  Verify GetPDR (Platform Descpritor Record) response message.
     [Tags]  Verify_GetPDR
-    [Template]  Verify GetPDR For Record Handle
 
-    # RecordHandle
-    '0'
-    '1'
-    '2'
-
+    ${record_handle}=  Set Variable  ${1}
+    # Note: Record handle count is unknown and it is dynamic in nature.
+    #       Assuming there are 100 record handle.
+    FOR   ${i}  IN RANGE  100
+       ${next_record_handle}=  Run Keyword  Verify GetPDR For Record Handle  ${record_handle}
+       Exit For Loop If  ${next_record_handle} == 0
+       ${record_handle}=  Set Variable  ${next_record_handle}
+    END
 
 Verify SetStateEffecterStates
     [Documentation]  Verify set state effecter states response message.
@@ -32,20 +33,23 @@ Verify SetStateEffecterStates
 
     # EffecterHandle  Count  EffecterStates (effecterID effecterState)
 
-    '1'  '1'  '1 1'  # (effecterState -> 1 -> 'Boot Not Active')
-    '1'  '1'  '1 2'  # (effecterState -> 2 -> 'Boot Completed')
-    '2'  '1'  '1 9'  # (effecterState -> 9 -> 'System Power is in soft off mode')
+    '1'              '1'    '1 1'  # (effecterState -> 1 -> 'Boot Not Active')
+    '1'              '1'    '1 2'  # (effecterState -> 2 -> 'Boot Completed')
+    '2'              '1'    '1 9'  # (effecterState -> 9 -> 'System Power is in soft off mode')
+    '3'              '1'    '1 6'  # (effecterState -> 6 -> 'Graceful Restart Requested')
 
 *** Keywords ***
 
 Verify GetPDR For Record Handle
-    [Documentation]  Verify GetPDR (Platform Descpritor Record) for given input record handle.
+    [Documentation]  Verify GetPDR (Platform Descpritor Record) for given input
+    ...              record handle and return next record handle.
     [Arguments]  ${record_handle}
 
     # Description of argument(s):
     # ${record_handle}  Record handle.
-    #                   e.g. '1' is record handle 'Boot Progress'.
-    #                        '2' is record handle 'System Power State'.
+    #                   e.g. '1' is record handle 'Boot Progress' (196).
+    #                        '2' is record handle 'System Power State (260)'.
+    #                        '3' is record handle 'Software Termination Status (129)'.
 
     # pldm_output:
     # [responseCount]:                               29
@@ -70,8 +74,22 @@ Verify GetPDR For Record Handle
     ${pldm_cmd}=  Evaluate  $CMD_GETPDR % ${record_handle}
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Rprint Vars  pldm_output
-    Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR}
+   
+    Log To Console  ${pldm_output['pdrtype']} 
+    Run Keyword If  ${pldm_output['pdrtype']} == ${PLDM_PDR_TYPES['PLDM_STATE_EFFECTER_PDR']}
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_SETSTATEEFFECTER}
+    ...  ELSE IF  ${pldm_output['pdrtype']} == ${PLDM_PDR_TYPES['PLDM_PDR_FRU_RECORD_SET']}
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER}
+    ...  ELSE IF  ${pldm_output['pdrtype']} == ${PLDM_PDR_TYPES['PLDM_PDR_ENTITY_ASSOCIATION']}
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION}
 
+    ${next_record_handle}=  Set Variable  ${pldm_output['nextrecordhandle']}
+    Should be equal as strings  ${pldm_output['recordhandle']}  ${record_handle}
+    Pop From Dictionary  ${pldm_output}  recordhandle
+    Pop From Dictionary  ${pldm_output}  nextrecordhandle
+    Remove From Dictionary  ${pldm_output}  frurecordsetidentifier
+    Remove From Dictionary  ${pldm_output}  entityinstancenumber
+    [Return]  ${next_record_handle} 
 
 Verify SetStateEffecterStates For Effecter States
     [Documentation]  Verify set state effecter states for given input effecter states.
@@ -92,7 +110,6 @@ Verify SetStateEffecterStates For Effecter States
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Rprint Vars  pldm_output
     Valid Value  pldm_output['setstateeffecterstates']  ['SUCCESS']
-
 
 Pldmtool Platform Suite Cleanup
     [Documentation]    Reset BMC at suite cleanup.
