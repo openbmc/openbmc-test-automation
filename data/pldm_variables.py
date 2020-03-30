@@ -87,25 +87,39 @@ CMD_SETSTATEEFFECTERSTATES = 'platform SetStateEffecterStates -i %s -c %s -d %s'
 #      Only record handle 0, 1, 2 are supported as of now.
 
 RESPONSE_DICT_GETPDR = {
-    'nextrecordhandle': ['0', '2', '3'],
+    'nextrecordhandle': ['0', '2', '3', '4'],
     'responsecount': ['29', '30'],
-    'recordhandle': ['1', '2'],
+    'recordhandle': ['1', '2', '3'],
     'pdrheaderversion': ['1'],
     'pdrtype': ['11'],
     'recordchangenumber': ['0'],
     'datalength': ['19', '20'],
     'pldmterminushandle': ['0'],
-    'effecterid': ['1', '2'],
-    'entitytype': ['33', '45'],
+    'effecterid': ['1', '2', '3'],
+    'entitytype': ['33', '45', '31'],
     'entityinstancenumber': ['0'],
     'containerid': ['0'],
     'effectersemanticid': ['0'],
     'effecterinit': ['0'],
     'effecterdescriptionpdr': ['false'],
     'compositeeffectercount': ['1'],
-    'statesetid': ['196', '260'],
+    'statesetid': ['196', '260', '129'],
     'possiblestatessize': ['1', '2'],
-    'possiblestates': ['6', '0']}
+    'possiblestates': ['6', '0', '64']}
+
+RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER = {
+    'nextrecordhandle': ['5', '0'],
+    'responsecount': ['20'],
+    'recordhandle': ['4', '5'],
+    'pdrheaderversion': ['1'],
+    'pdrtype': ['20'],
+    'recordchangenumber': ['0'],
+    'datalength': ['10'],
+    'pldmterminushandle': ['0'],
+    'frurecordsetidentifier': ['1', '2'],
+    'entitytype': ['Management Controller', '208(OEM)'],
+    'entityinstancenumber': ['1'],
+    'containerid': ['0']}
 
 RESPONSE_DICT_GETBIOSTABLE_STRTABLE = {
     'biosstringhandle': ['BIOSString'],

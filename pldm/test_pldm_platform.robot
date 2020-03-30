@@ -13,17 +13,19 @@ Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Pldmtool Platform Suite Cleanup
 
 *** Test Cases ***
-
 Verify GetPDR
     [Documentation]  Verify GetPDR (Platform Descpritor Record) response message.
     [Tags]  Verify_GetPDR
-    [Template]  Verify GetPDR For Record Handle
 
-    # RecordHandle
-    '0'
-    '1'
-    '2'
-
+    ${record_handle}=  Set Variable  ${0}
+    # Note: Record handle count is unknown and it is dynamic in nature.
+    #       Assuming there are 100 record handle.
+    FOR   ${i}  IN RANGE  100
+    \  ${pldm_cmd}=  Evaluate  $CMD_GETPDR % ${record_handle}
+    \  ${nextrecordhandle}=  Run Keyword  Verify GetPDR For Record Handle  ${record_handle}
+    \  Exit For Loop If  ${nextrecordhandle} == 0
+    \  ${record_handle}=  Set Variable  ${nextrecordhandle}
+    END
 
 Verify SetStateEffecterStates
     [Documentation]  Verify set state effecter states response message.
@@ -35,17 +37,20 @@ Verify SetStateEffecterStates
     '1'  '1'  '1 1'  # (effecterState -> 1 -> 'Boot Not Active')
     '1'  '1'  '1 2'  # (effecterState -> 2 -> 'Boot Completed')
     '2'  '1'  '1 9'  # (effecterState -> 9 -> 'System Power is in soft off mode')
+    '3'  '1'  '1 6'  # (effecterState -> 6 -> 'Graceful Restart Requested')
 
 *** Keywords ***
 
 Verify GetPDR For Record Handle
-    [Documentation]  Verify GetPDR (Platform Descpritor Record) for given input record handle.
+    [Documentation]  Verify GetPDR (Platform Descpritor Record) for given input
+    ...              record handle and return next record handle.
     [Arguments]  ${record_handle}
 
     # Description of argument(s):
     # ${record_handle}  Record handle.
-    #                   e.g. '1' is record handle 'Boot Progress'.
-    #                        '2' is record handle 'System Power State'.
+    #                   e.g. '1' is record handle 'Boot Progress' (196).
+    #                        '2' is record handle 'System Power State (260)'.
+    #                        '3' is record handle 'Software Termination Status (129)'.
 
     # pldm_output:
     # [responseCount]:                               29
@@ -70,7 +75,14 @@ Verify GetPDR For Record Handle
     ${pldm_cmd}=  Evaluate  $CMD_GETPDR % ${record_handle}
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Rprint Vars  pldm_output
-    Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR}
+    Run Keyword If  ${pldm_output['pdrtype']} == "11" 
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_SETSTATEEFFECTER}
+    ...  ELSE IF  ${pldm_output['pdrtype']} == "20"
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER}
+    ...  ELSE IF  ${pldm_output['pdrtype']} == "15"
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION}
+    [Return]  ${pldm_output['nextrecordhandle']}
+
 
 
 Verify SetStateEffecterStates For Effecter States
