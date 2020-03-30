@@ -23,7 +23,16 @@ Verify GetPDR
     '0'
     '1'
     '2'
+    '3'
 
+Verify GetPDR FRURecordSetIdentifier
+    [Documentation]  Verify GetPDR FRURecordSetIdentifier response message.
+    [Tags]  Verify_GetPDR_FRURecordSetIdentifier
+    [Template]  Verify GetPDR FRURecordSetIdentifier For Record Handle
+
+    # RecordHandle
+    '4'
+    '5'
 
 Verify SetStateEffecterStates
     [Documentation]  Verify set state effecter states response message.
@@ -35,6 +44,7 @@ Verify SetStateEffecterStates
     '1'  '1'  '1 1'  # (effecterState -> 1 -> 'Boot Not Active')
     '1'  '1'  '1 2'  # (effecterState -> 2 -> 'Boot Completed')
     '2'  '1'  '1 9'  # (effecterState -> 9 -> 'System Power is in soft off mode')
+    '3'  '1'  '1 6'  # (effecterState -> 6 -> 'Graceful Restart Requested')
 
 *** Keywords ***
 
@@ -44,8 +54,9 @@ Verify GetPDR For Record Handle
 
     # Description of argument(s):
     # ${record_handle}  Record handle.
-    #                   e.g. '1' is record handle 'Boot Progress'.
-    #                        '2' is record handle 'System Power State'.
+    #                   e.g. '1' is record handle 'Boot Progress' (196).
+    #                        '2' is record handle 'System Power State (260)'.
+    #                        '3' is record handle 'Software Termination Status (129)'.
 
     # pldm_output:
     # [responseCount]:                               29
@@ -71,6 +82,33 @@ Verify GetPDR For Record Handle
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Rprint Vars  pldm_output
     Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR}
+
+
+Verify GetPDR FRURecordSetIdentifier For Record Handle
+    [Documentation]  Verify GetPDR (Platform Descpritor Record) for given input record handle.
+    [Arguments]  ${record_handle}
+
+    # Description of argument(s):
+    # ${record_handle}  Record handle.
+
+    # pldm_output:
+    # [nextrecordhandle]:                             5
+    # [responsecount]:                                20
+    # [recordhandle]:                                 4
+    # [pdrheaderversion]:                             1
+    # [pdrtype]:                                      20
+    # [recordchangenumber]:                           0
+    # [datalength]:                                   10
+    # [pldmterminushandle]:                           0
+    # [frurecordsetidentifier]:                       1
+    # [entitytype]:                                   Management Controller
+    # [entityinstancenumber]:                         1
+    # [containerid]:                                  0
+
+    ${pldm_cmd}=  Evaluate  $CMD_GETPDR % ${record_handle}
+    ${pldm_output}=  Pldmtool  ${pldm_cmd}
+    Rprint Vars  pldm_output
+    Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER}
 
 
 Verify SetStateEffecterStates For Effecter States
