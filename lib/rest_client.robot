@@ -342,7 +342,7 @@ Call Method
 Upload Image To BMC
     [Documentation]  Upload image to BMC via REST and return status code.
     [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${1}
-    ...  ${valid_status_codes}=[${HTTP_OK}]  &{kwargs}
+    ...  ${valid_status_codes}=[${HTTP_OK}, ${HTTP_ACCEPTED}]  &{kwargs}
 
     # Description of argument(s):
     # uri                           URI for uploading image via REST e.g.
