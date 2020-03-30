@@ -64,6 +64,35 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
             # Date & Time :
             # YYYY-MM-DD HH:MM:SS - 2020-02-24 06:44:16
             return result['yyyy-mm-dd_hh'].split(' - ')[1]
+
+        # Simplfying dict output for GetPDR with type PDREntityAssociation.
+        # Example :
+
+        # pldmtool platform GetPDR -d 10
+        # Entity Association
+        # nextRecordHandle: 0
+        # responseCount: 56
+        # recordHandle: 10
+        # PDRHeaderVersion: 1
+        # PDRType: 15
+        # recordChangeNumber: 0
+        # dataLength: 46
+        # containerID: 1
+        # associationType: Physical
+        # containerEntityType: System Board
+        # containerEntityInstanceNumber: 1
+        # containerEntityContainerID: 0
+        # containedEntityCount: 6
+        # containedEntityType[1]: Chassis front panel board (control panel)
+        # containedEntityInstanceNumber[1]: 1
+        # containedEntityContainerID[1]: 1
+        # containedEntityType[2]: Chassis front panel board (control panel)
+        # containedEntityInstanceNumber[2]: 2
+        # containedEntityContainerID[2]: 1
+        elif 'containerentitycontainerid' in result:
+            dict_data1, dict_data2 = vf.split_dict_on_key('containerentitycontainerid', result)
+            return dict_data1
+
         return result
 
     return stdout
