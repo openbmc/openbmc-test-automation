@@ -18,69 +18,13 @@ VERSION_PLATFORM = {'VALUE': ['f1', 'f2', 'f0', '00'], 'STRING': '1.2.0'}
 VERSION_BIOS = {'VALUE': ['f1', 'f1', 'f1', '00'], 'STRING': '1.0.0'}
 VERSION_FRU = {'VALUE': ['f1', 'f0', 'f0', '00'], 'STRING': '1.0.0'}
 
-# PLDM base related variables.
-PLDM_BASE_CMD = {
-    'GET_TID': '02',
-    'GET_PLDM_VERSION': '03',
-    'GET_PLDM_TYPES': '04',
-    'GET_PLDM_COMMANDS': '05'}
 
-# Response lengths are inclusive of completion code.
-GET_TID_RESP_BYTES = 2
-GET_PLDM_VERSION_RESP_BYTES = 10
-GET_PLDM_TYPES_RESP_BYTES = 9
-GET_PLDM_COMMANDS_RESP_BYTES = 33
-
-# PLDM bios related variables.
-PLDM_BIOS_CMD = {
-    'GET_BIOS_TABLE': '01',
-    'SET_BIOS_ATTRIBUTE_CURRENT_VALUE': '07',
-    'GET_BIOS_ATTRIBUTE_CURRENT_VALUE_BY_HANDLE': '08',
-    'GET_DATE_TIME': '0c'}
-
-PLDM_BIOS_TABLE_TYPES = {
-    'STRING_TABLE': '00',
-    'ATTRIBUTE_TABLE': '01',
-    'ATTRIBUTE_VAL_TABLE': '02'}
-
-TRANSFER_OPERATION_FLAG = {
-    'GETNEXTPART': '00',
-    'GETFIRSTPART': '01'}
-
-TRANSFER_RESP_FLAG = {
-    'PLDM_START': '01',
-    'PLDM_MIDDLE': '02',
-    'PLDM_END': '04',
-    'PLDM_START_AND_END': '05'}
-
-# PLDM platform related variables.
-PLDM_PLATFORM_CMD = {
-    'SET_STATE_EFFECTER_STATES': '39',
-    'GET_PDR': '51'}
-
-PLDM_PDR_TYPES = {
-    'STATE_EFFECTER_PDR': '11'}
-
-# PLDM OEM related variables.
-PLDM_FILEIO_CMD = {
-    'GET_FILE_TABLE': '1',
-    'READ_FILE': '4',
-    'WRITE_FILE': '5',
-    'READ_FILE_INTO_MEMORY': '6',
-    'WRITE_FILE_FROM_MEMORY': '7'}
-
-PLDM_FILEIO_COMPLETION_CODES = {
-    'INVALID_FILE_HANDLE': '80',
-    'DATA_OUT_OF_RANGE': '81',
-    'INVALID_READ_LENGTH': '82',
-    'INVALID_WRITE_LENGTH': '83',
-    'FILE_TABLE_UNAVAILABLE': '84',
-    'INVALID_FILE_TABLE_TYPE': '85'}
-
-# PLDM FRU related variables.
-PLDM_FRU_CMD = {
-    'PLDM_GET_FRU_RECORD_TABLE_METADATA': '01',
-    'PLDM_GET_FRU_RECORD_TABLE': '02'}
+PLDM_BASE_CMDS = ['2(GetTID)', '3(GetPLDMVersion)', '4(GetPLDMTypes)', '5(GetPLDMCommands)']
+PLDM_PLATFORM_CMDS = ['57(SetStateEffecterStates)', '81(GetPDR)']
+PLDM_BIOS_CMDS = ['1(GetBIOSTable)', '7(SetBIOSAttributeCurrentValue)',
+                  '8(GetBIOSAttributeCurrentValueByHandle)', '12(GetDateTime)',
+                  '13(SetDateTime)']
+PLDM_FRU_CMDS = ['1(GetFRURecordTableMetadata)', '2(GetFRURecordTable)']
 
 # PLDM command format.
 
