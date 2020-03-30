@@ -143,7 +143,7 @@ CMD_SETSTATEEFFECTERSTATES = 'platform SetStateEffecterStates -i %s -c %s -d %s'
 #      Only record handle 0, 1, 2 are supported as of now.
 
 RESPONSE_DICT_GETPDR = {
-    'nextrecordhandle': ['0', '2'],
+    'nextrecordhandle': ['0', '2', '3'],
     'responsecount': ['29', '30'],
     'recordhandle': ['1', '2'],
     'pdrheaderversion': ['1'],
