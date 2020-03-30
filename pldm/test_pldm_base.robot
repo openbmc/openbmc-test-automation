@@ -10,6 +10,7 @@ Test Teardown    FFDC On Test Case Fail
 
 
 *** Test Cases ***
+
 Verify Get PLDM Types
     [Documentation]  Verify supported PLDM types.
     [Tags]  Verify_Get_PLDM_Types
@@ -64,3 +65,33 @@ Verify GetTID
     Rprint Vars  pldm_output
 
     Valid Dict  pldm_output  valid_values={'tid': ['1']}
+
+Verify GetPLDMCommands
+    [Documentation]  Verify GetPLDMCommands response message.
+    [Tags]  Verify_GetPLDMCommands
+    [Template]  Verify GetPLDMCommands For PLDM Type
+
+    # pldm_type    # expected_pldm_cmds
+
+    '0'            ${PLDM_BASE_CMDS}
+    '2'            ${PLDM_PLATFORM_CMDS}
+    '3'            ${PLDM_BIOS_CMDS}
+    '4'            ${PLDM_FRU_CMDS}
+
+*** keywords ***
+
+Verify GetPLDMCommands For PLDM Type
+    [Documentation]  Verify GetPLDMCommands for given input pldm type with expected pldm cmds.
+    [Arguments]  ${pldm_type}  ${expected_pldm_cmds}
+
+    # Description of argument(s):
+    # pldm_type             pldm type (e.g. '0', '2', '3', '4').
+    #                      '0' -> base, '2' -> platform, '3' -> 'bios', '4' -> 'fru'.
+    # expected_pldm_cmds    expected pldm commands for given pldm type.
+
+    # Example output:
+    # Supported Commands : 2(GetTID) 3(GetPLDMVersion) 4(GetPLDMTypes) 5(GetPLDMCommands)
+
+    ${pldm_output}=  Pldmtool  base GetPLDMCommands -t ${pldm_type}
+    Rprint Vars  pldm_output
+    Valid List  pldm_output  ${expected_pldm_cmds}
