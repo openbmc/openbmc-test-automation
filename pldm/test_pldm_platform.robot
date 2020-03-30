@@ -23,7 +23,16 @@ Verify GetPDR
     '0'
     '1'
     '2'
+    '3'
 
+Verify GetPDR FRURecordSetIdentifier
+    [Documentation]  Verify GetPDR FRURecordSetIdentifier response message.
+    [Tags]  Verify_GetPDR_FRURecordSetIdentifier
+    [Template]  Verify GetPDR FRURecordSetIdentifier For Record Handle
+
+    # RecordHandle
+    '4'
+    '5'
 
 Verify SetStateEffecterStates
     [Documentation]  Verify set state effecter states response message.
@@ -71,6 +80,33 @@ Verify GetPDR For Record Handle
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Rprint Vars  pldm_output
     Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR}
+
+
+Verify GetPDR FRURecordSetIdentifier For Record Handle
+    [Documentation]  Verify GetPDR (Platform Descpritor Record) for given input record handle.
+    [Arguments]  ${record_handle}
+
+    # Description of argument(s):
+    # ${record_handle}  Record handle.
+
+    # pldm_output:
+    # [nextrecordhandle]:                             5
+    # [responsecount]:                                20
+    # [recordhandle]:                                 4
+    # [pdrheaderversion]:                             1
+    # [pdrtype]:                                      20
+    # [recordchangenumber]:                           0
+    # [datalength]:                                   10
+    # [pldmterminushandle]:                           0
+    # [frurecordsetidentifier]:                       1
+    # [entitytype]:                                   Management Controller
+    # [entityinstancenumber]:                         1
+    # [containerid]:                                  0
+
+    ${pldm_cmd}=  Evaluate  $CMD_GETPDR % ${record_handle}
+    ${pldm_output}=  Pldmtool  ${pldm_cmd}
+    Rprint Vars  pldm_output
+    Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER}
 
 
 Verify SetStateEffecterStates For Effecter States
