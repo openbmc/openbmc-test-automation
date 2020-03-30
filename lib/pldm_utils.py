@@ -64,6 +64,12 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
             # Date & Time :
             # YYYY-MM-DD HH:MM:SS - 2020-02-24 06:44:16
             return result['yyyy-mm-dd_hh'].split(' - ')[1]
+
+        #  Simplfying dict output for GetPDR with type PDREntityAssociation.
+        elif 'containerentitycontainerid' in result:
+            dict_data1, dict_data2 = vf.split_dict_on_key('containerentitycontainerid', result)
+            return dict_data1
+
         return result
 
     return stdout
