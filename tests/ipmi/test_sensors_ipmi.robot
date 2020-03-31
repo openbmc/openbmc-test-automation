@@ -48,24 +48,6 @@ DIMM Functional And Not Functional
     ...  Functional  ${1}
 
 
-CPU Present
-    [Documentation]  Verify the IPMI sensor for CPU present.
-    [Tags]  CPU_Present
-    [Template]  Check Present Bit
-
-    # sensor_id  component
-    0x5a          cpu0
-
-
-CPU Not Present
-    [Documentation]  Verify the IPMI sensor for CPU not present.
-    [Tags]  CPU_Not_Present
-    [Template]  Check Not Present Bit
-
-    # sensor_id  component
-    0x5a          cpu0
-
-
 CPU Functional
     [Documentation]  Verify the IPMI sensor for CPU functional.
     [Tags]  CPU_Functional
@@ -82,24 +64,6 @@ CPU Not Functional
 
     # sensor_id  component
     0x5a          cpu0
-
-
-GPU Present
-    [Documentation]  Verify the IPMI sensor for GPU present.
-    [Tags]  GPU_Present
-    [Template]  Check Present Bit
-
-    # sensor_id  component
-    0xC5          gv100card0
-
-
-GPU Not Present
-    [Documentation]  Verify the IPMI sensor for GPU not present.
-    [Tags]  GPU_Not_Present
-    [Template]  Check Not Present Bit
-
-    # sensor_id  component
-    0xC5          gv100card0
 
 
 GPU Functional
