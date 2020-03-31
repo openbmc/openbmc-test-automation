@@ -56,6 +56,15 @@ Discover BMC After Code Update Of Same Build
     # Service type   Service type
     _obmc_rest._tcp  _obmc_redfish._tcp
 
+
+Discover BMC After Code Update Of Different Build
+    [Documentation]  Discover BMC, when code update occurs for same release.
+    [Tags]  Discover_BMC_After_Code_Update_Of_Different_Build
+    [Template]  Discover BMC After Code Update
+
+    # Service type   Service type
+    _obmc_rest._tcp  _obmc_redfish._tcp
+
 *** Keywords ***
 
 Suite Setup Execution
