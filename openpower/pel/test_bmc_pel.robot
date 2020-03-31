@@ -124,6 +124,34 @@ Verify PEL ID Numbering
     Should Be True  ${pel_ids[1]} == ${pel_ids[0]}+1
 
 
+Verify Host Off State From PEL
+    [Documentation]  Verify Host off state from PEL.
+    [Tags]  Verify_Host_Off_State_From_PEL
+
+    Redfish Power Off  stack_mode=skip
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_host_state}=  Get PEL Field Value  ${id}  User Data  HostState
+
+    Valid Value  pel_host_state  ['Off']
+
+
+Verify BMC Version From PEL
+    [Documentation]  Verify BMC Version from PEL.
+    [Tags]  Verify_BMC_Version_From_PEL
+
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_bmc_version}=  Get PEL Field Value  ${id}  User Data  BMC Version ID
+
+    ${bmc_version}=  Get BMC Version
+    Valid Value  bmc_version  ['${bmc_version}']
+
+
 *** Keywords ***
 
 Create Test PEL Log
@@ -151,5 +179,47 @@ Get PEL Log Via BMC CLI
 
     ${pel_records}=  Peltool  -l
     ${ids}=  Get Dictionary Keys  ${pel_records}
+    Sort List  ${ids}
 
     [Return]  ${ids}
+
+
+Get PEL Field Value
+    [Documentation]  Returns the value of given PEL's field.
+    [Arguments]  ${pel_id}  ${pel_field}  ${pel_sub_field}
+
+    # Description of argument(s):
+    # pel_id           The ID of PEL (e.g. 0x5000002D, 0x5000002E).
+    # pel_field        The PEL field (e.g. Private Header, User Header).
+    # pel_sub_field    The PEL sub field (e.g. Event Severity, Event Type).
+
+    ${pel_output}=  Peltool  -i ${pel_id}
+
+    # Example of PEL output from "peltool -i <id>" command.
+    #  [Private Header]:
+    #    [Created at]:                                 08/24/1928 12:04:06
+    #    [Created by]:                                 0x584D
+    #    [Sub-section type]:                           0
+    #    [Entry Id]:                                   0x50000BB7
+    #    [Platform Log Id]:                            0x8200061D
+    #    [CSSVER]:
+    #    [Section Version]:                            1
+    #    [Creator Subsystem]:                          PHYP
+    #    [BMC Event Log Id]:                           341
+    #    [Committed at]:                               03/25/1920 12:06:22
+    #  [User Header]:
+    #    [Log Committed by]:                           0x4552
+    #    [Action Flags]:
+    #      [0]:                                        Report Externally
+    #    [Subsystem]:                                  I/O Subsystem
+    #    [Event Type]:                                 Miscellaneous, Informational Only
+    #    [Sub-section type]:                           0
+    #    [Event Scope]:                                Entire Platform
+    #    [Event Severity]:                             Informational Event
+    #    [Host Transmission]:                          Not Sent
+    #    [Section Version]:                            1
+
+    ${pel_field_output}=  Get From Dictionary  ${pel_output}  ${pel_field}
+    ${pel_sub_field_output}=  Get From Dictionary  ${pel_field_output}  ${pel_sub_field}
+
+    [Return]  ${pel_sub_field_output}
