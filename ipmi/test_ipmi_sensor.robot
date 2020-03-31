@@ -185,6 +185,42 @@ Test Power Reading Via IPMI Raw Command
     Wait Until Keyword Succeeds  2 min  30 sec  Verify Power Reading Via Raw Command
 
 
+Verify CPU Present
+    [Documentation]  Verify the IPMI sensor for CPU present using Redfish.
+    [Tags]  Verify_CPU_Present
+    [Template]  Enable Present Bit Via IPMI and Verify Using Redfish
+
+    # sensor_id  component
+    0x5a         cpu0
+
+
+Verify CPU Not Present
+    [Documentation]  Verify the IPMI sensor for CPU not present using Redfish.
+    [Tags]  Verify_CPU_Not_Present
+    [Template]  Disable Present Bit Via IPMI and Verify Using Redfish
+
+    # sensor_id  component
+    0x5a         cpu0
+
+
+Verify GPU Present
+    [Documentation]  Verify the IPMI sensor for GPU present using Redfish.
+    [Tags]  Verify_GPU_Present
+    [Template]  Enable Present Bit Via IPMI and Verify Using Redfish
+
+    # sensor_id  component
+    0xC5         gv100card0
+
+
+Verify GPU Not Present
+    [Documentation]  Verify the IPMI sensor for GPU not present using Redfish.
+    [Tags]  Verify_GPU_Not_Present
+    [Template]  Disable Present Bit Via IPMI and Verify Using Redfish
+
+    # sensor_id  component
+    0xC5         gv100card0
+
+
 *** Keywords ***
 
 Get Temperature Reading And Verify In Redfish
@@ -302,3 +338,66 @@ Verify Power Reading Via Raw Command
 
     Should Be True  ${ipmi_redfish_power_diff} <= ${allowed_power_diff}
     ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
+
+
+Enable Present Bit Via IPMI and Verify Using Redfish
+    [Documentation]  Enable present bit of sensor via IPMI and verify using Redfish.
+    [Arguments]  ${sensor_id}  ${component}
+
+    # Description of argument(s):
+    # sensor_id    The sensor id of IPMI sensor.
+    # component    The Redfish component of IPMI sensor.
+
+    Run IPMI Command
+    ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
+
+    #  Example of CPU state via Redfish
+    #"@odata.id": "/redfish/v1/Systems/system/Processors/cpu0",
+    #"@odata.type": "#Processor.v1_7_0.Processor",
+    #"Id": "cpu0",
+    #"InstructionSet": "PowerISA",
+    #"Manufacturer": "IBM",
+    #"Model": "",
+    #"Name": "Processor",
+    #"PartNumber": "02CY211",
+    #"ProcessorArchitecture": "Power",
+    #"ProcessorType": "CPU",
+    #"SerialNumber": "YA1934302447",
+    #"Status": {
+    #    "Health": "OK",
+    #    "State": "Enabled"
+    #}
+
+    ${redfish_value}=  Redfish.Get Properties  /redfish/v1/Systems/system/Processors/${component}
+    Should Be True  '${redfish_value['Status']['State']}' == 'Enabled'
+
+
+Disable Present Bit Via IPMI and Verify Using Redfish
+    [Documentation]  Disable present bit of sensor via IPMI and verify using Redfish.
+    [Arguments]  ${sensor_id}  ${component}
+
+    # Description of argument(s):
+    # sensor_id    The sensor id of IPMI sensor.
+    # component    The Redfish component of IPMI sensor.
+
+    Run IPMI Command
+    ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
+
+    #  Example of CPU state via Redfish
+    #"@odata.context": "/redfish/v1/$metadata#Processor.Processor",
+    #"@odata.id": "/redfish/v1/Systems/system/Processors/cpu0",
+    #"@odata.type": "#Processor.v1_3_1.Processor",
+    #"Id": "cpu0",
+    #"InstructionSet": "PowerISA",
+    #"Manufacturer": "IBM",
+    #"Model": "",
+    #"Name": "Processor",
+    #"ProcessorArchitecture": "Power",
+    #"ProcessorType": "CPU",
+    #"Status": {
+    #    "Health": "OK",
+    #    "State": "Absent"
+    #}
+
+    ${redfish_value}=  Redfish.Get Properties  /redfish/v1/Systems/system/Processors/${component}
+    Should Be True  '${redfish_value['Status']['State']}' == 'Absent'
