@@ -124,6 +124,34 @@ Verify PEL ID Numbering
     Should Be True  ${pel_ids[1]} == ${pel_ids[0]}+1
 
 
+Verify Host Off State From PEL
+    [Documentation]  Verify Host off state from PEL.
+    [Tags]  Verify_Host_Off_State_From_PEL
+
+    Redfish Power Off  stack_mode=skip
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_host_state}=  Get PEL Field Value  ${id}  User Data  HostState
+
+    Valid Value  pel_host_state  ['Off']
+
+
+Verify BMC Version From PEL
+    [Documentation]  Verify BMC Version from PEL.
+    [Tags]  Verify_BMC_Version_From_PEL
+
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_bmc_version}=  Get PEL Field Value  ${id}  User Data  BMC Version ID
+
+    ${bmc_version}=  Get BMC Version
+    Valid Value  bmc_version  ['${bmc_version}']
+
+
 *** Keywords ***
 
 Create Test PEL Log
