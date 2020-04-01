@@ -80,7 +80,10 @@ Get MAC Address And Verify
     [Documentation]  Get MAC address and verify it's existence on the BMC.
     [Tags]  Get_MAC_Address_And_Verify
 
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ${macaddr}=  Get From Dictionary  ${resp.dict}  MACAddress
     Validate MAC On BMC  ${macaddr}
 
@@ -432,7 +435,7 @@ Configure Multicast IP For Gateway
     [Teardown]  Clear IP Settings On Fail  ${test_ipv4_addr}
 
     # ip               subnet_mask          gateway           valid_status_codes
-    ${test_ipv4_addr}  ${test_subnet_mask}  ${multicaste_ip}  ${HTTP_BAD_REQUEST}
+    ${test_ipv4_addr}  ${test_subnet_mask}  ${multicast_ip}  ${HTTP_BAD_REQUEST}
 
 Configure Broadcast IP For Gateway
     [Documentation]  Configure broadcast IP for gateway and expect an error.
@@ -559,7 +562,10 @@ Verify CLI and Redfish Nameservers
     [Documentation]  Verify that nameservers obtained via Redfish do not
     ...  match those found in /etc/resolv.conf.
 
-    ${redfish_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${redfish_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  StaticNameServers
     ${resolve_conf_nameservers}=  CLI Get Nameservers
     Rqprint Vars  redfish_nameservers  resolve_conf_nameservers
 
@@ -578,8 +584,11 @@ Configure Static Name Servers
     # static_name_servers  A list of static name server IPs to be
     #                      configured on the BMC.
 
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
     # Currently BMC is sending 500 response code instead of 400 for invalid scenarios.
-    Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'StaticNameServers': ${static_name_servers}}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body={'StaticNameServers': ${static_name_servers}}
     ...  valid_status_codes=[${valid_status_codes}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
     # Patch operation takes 1 to 3 seconds to set new value.
@@ -608,7 +617,11 @@ DNS Test Setup Execution
 
     Redfish.Login
 
-    ${original_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  StaticNameServers
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${original_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  StaticNameServers
+
     Rprint Vars  original_nameservers
     # Set suite variables to trigger restoration during teardown.
     Set Suite Variable  ${original_nameservers}
