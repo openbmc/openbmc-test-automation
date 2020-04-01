@@ -54,8 +54,10 @@ Get BMC IP Info
     #     link/ether xx:xx:xx:xx:xx:xx brd ff:ff:ff:ff:ff:ff
     #     inet xx.xx.xx.xx/24 brd xx.xx.xx.xx scope global eth0
 
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  /sbin/ip addr | grep eth0
+    ...  /sbin/ip addr | grep ${ethernet_interface}
 
     # Get line having IP address details.
     ${lines}=  Get Lines Containing String  ${cmd_output}  inet
@@ -353,7 +355,9 @@ Get Network Configuration
     #    "VLANId": 0
     #  }
 
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ${active_channel_config}=  Get Active Channel Config
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
     [Return]  @{network_configurations}
 
@@ -388,7 +392,10 @@ Add IP Address
     Append To List  ${patch_list}  ${ip_data}
     ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
 
-    Redfish.patch  ${REDFISH_NW_ETH0_URI}  body=&{data}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
     ...  valid_status_codes=[${valid_status_codes}]
 
     Return From Keyword If  '${valid_status_codes}' != '${HTTP_OK}'
@@ -428,7 +435,10 @@ Delete IP Address
     # Run patch command only if given IP is found on BMC
     ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
 
-    Redfish.patch  ${REDFISH_NW_ETH0_URI}  body=&{data}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
     ...  valid_status_codes=[${valid_status_codes}]
 
     # Note: Network restart takes around 15-18s after patch request processing
