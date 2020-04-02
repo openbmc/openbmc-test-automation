@@ -51,7 +51,7 @@ parser = argparse.ArgumentParser(
 
 # The stock_list will be passed to gen_get_options.  We populate it with the names of stock parm options we
 # want.  These stock parms are pre-defined by gen_get_options.
-stock_list = [("test_mode", 0),
+stock_list = [("test_mode", get_plug_default("test_mode", 0)),
               ("quiet", get_plug_default("quiet", 0)),
               ("debug", get_plug_default("debug", 0))]
 
