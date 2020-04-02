@@ -182,3 +182,45 @@ Get PEL Log Via BMC CLI
     Sort List  ${ids}
 
     [Return]  ${ids}
+
+
+Get PEL Field Value
+    [Documentation]  Returns the value of given PEL's field.
+    [Arguments]  ${pel_id}  ${pel_section}  ${pel_field}
+
+    # Description of argument(s):
+    # pel_id           The ID of PEL (e.g. 0x5000002D, 0x5000002E).
+    # pel_section      The section of PEL (e.g. Private Header, User Header)
+    # pel_field        The PEL field (e.g. Event Severity, Event Type).
+
+    ${pel_output}=  Peltool  -i ${pel_id}
+
+    # Example of PEL output from "peltool -i <id>" command.
+    #  [Private Header]:
+    #    [Created at]:                                 08/24/1928 12:04:06
+    #    [Created by]:                                 0x584D
+    #    [Sub-section type]:                           0
+    #    [Entry Id]:                                   0x50000BB7
+    #    [Platform Log Id]:                            0x8200061D
+    #    [CSSVER]:
+    #    [Section Version]:                            1
+    #    [Creator Subsystem]:                          PHYP
+    #    [BMC Event Log Id]:                           341
+    #    [Committed at]:                               03/25/1920 12:06:22
+    #  [User Header]:
+    #    [Log Committed by]:                           0x4552
+    #    [Action Flags]:
+    #      [0]:                                        Report Externally
+    #    [Subsystem]:                                  I/O Subsystem
+    #    [Event Type]:                                 Miscellaneous, Informational Only
+    #    [Sub-section type]:                           0
+    #    [Event Scope]:                                Entire Platform
+    #    [Event Severity]:                             Informational Event
+    #    [Host Transmission]:                          Not Sent
+    #    [Section Version]:                            1
+
+    ${pel_section_output}=  Get From Dictionary  ${pel_output}  ${pel_section}
+    ${pel_field_output}=  Get From Dictionary  ${pel_section_output}  ${pel_field}
+
+    [Return]  ${pel_field_output}
+
