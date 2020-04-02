@@ -20,10 +20,13 @@ Check And Reset MAC
     # Description of argument(s):
     # mac_address  The mac address (e.g. 00:01:6c:80:02:28).
 
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
     Should Not Be Empty  ${mac_address}
     Open Connection And Log In
     ${bmc_mac_addr}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  cat /sys/class/net/eth0/address
+    ...  cat /sys/class/net/${ethernet_interface}/address
     Run Keyword If  '${mac_address.lower()}' != '${bmc_mac_addr.lower()}'
     ...  Set MAC Address
 
@@ -35,13 +38,16 @@ Set MAC Address
     # Description of argument(s):
     # mac_address  The mac address (e.g. 00:01:6c:80:02:28).
 
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
     Write  fw_setenv ethaddr ${mac_address}
     OBMC Reboot (off)
 
     # Take SSH session post BMC reboot.
     Open Connection And Log In
     ${bmc_mac_addr}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  cat /sys/class/net/eth0/address
+    ...  cat /sys/class/net/${ethernet_interface}/address
     Should Be Equal  ${bmc_mac_addr}  ${mac_address}  ignore_case=True
 
 
@@ -99,8 +105,11 @@ Get BMC MAC Address
     # Sample output of "ip addr | grep ether":
     # link/ether xx.xx.xx.xx.xx.xx brd ff:ff:ff:ff:ff:ff
 
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  /sbin/ip addr | grep ether
+    ...  /sbin/ip addr | grep ${ethernet_interface} -A 1 | grep ether
 
     # Split the line and return MAC address.
     # Split list data:
