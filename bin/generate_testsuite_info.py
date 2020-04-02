@@ -112,7 +112,7 @@ def parse_test_suites(source_path, option):
                       for file in files]
 
     for file_path in file_paths:
-        print (file_path)
+        print(file_path)
         if "__init__.robot" in file_path:
             continue
         test_suite_obj = TestData(parent=None, source=file_path)
@@ -136,15 +136,15 @@ def parse_test_file(test_suite_obj, option):
 
     for testcase in test_suite_obj.testcase_table:
         if option == "name":
-            print (testcase.name)
+            print(testcase.name)
         elif option == "tags":
-            print (testcase.tags)
+            print(testcase.tags)
         elif option == "doc":
-            print (testcase.doc)
+            print(testcase.doc)
         elif option == "all":
-            print (testcase.name)
-            print (testcase.tags)
-            print (testcase.doc)
+            print(testcase.name)
+            print(testcase.tags)
+            print(testcase.doc)
 
 
 def main():

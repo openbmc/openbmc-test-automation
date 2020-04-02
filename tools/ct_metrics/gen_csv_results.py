@@ -34,7 +34,7 @@ sys.path.insert(0, save_path_0)
 this_program = sys.argv[0]
 info = " For more information:  " + this_program + '  -h'
 if len(sys.argv) == 1:
-    print (info)
+    print(info)
     sys.exit(1)
 
 
