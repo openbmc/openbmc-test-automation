@@ -122,9 +122,11 @@ Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
     Redfish.Login
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     # Get BMC MAC address.
-    ${resp}=  redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ${resp}=  redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     Set Suite Variable  ${initial_mac_address}  ${resp.dict['MACAddress']}
 
     Validate MAC On BMC  ${initial_mac_address}
@@ -140,17 +142,20 @@ Configure MAC Settings
     # mac_address      MAC address of BMC.
     # expected_result  Expected status of MAC configuration.
 
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
     Redfish.Login
     ${payload}=  Create Dictionary  MACAddress=${mac_address}
 
-    Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body=&{payload}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
     ...  valid_status_codes=[200, 400, 500]
 
     # After any modification on network interface, BMC restarts network
     # module, wait until it is reachable.
 
     Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}
-    ...  redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ...  redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
 
     # Verify whether new MAC address is populated on BMC system.
     # It should not allow to configure invalid settings.
