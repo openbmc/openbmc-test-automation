@@ -124,6 +124,21 @@ Verify PEL ID Numbering
     Should Be True  ${pel_ids[1]} == ${pel_ids[0]}+1
 
 
+Verify BMC Event Log ID
+    [Documentation]  Verify BMC Event Log ID from PEL.
+    [Tags]  Verify_BMC_Event_Log_ID
+
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_bmc_event_log_id}=  Get PEL Field Value  ${id}  Private Header  BMC Event Log Id
+
+    ${bmc_event_log_ids}=  Redfish.Get  /redfish/v1/Systems/system/LogServices/EventLog/Entries/
+
+    Valid Value  bmc_event_log_ids  ['${pel_bmc_event_log_id}']
+
+
 *** Keywords ***
 
 Create Test PEL Log
