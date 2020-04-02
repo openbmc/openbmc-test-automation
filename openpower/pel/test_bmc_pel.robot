@@ -151,5 +151,6 @@ Get PEL Log Via BMC CLI
 
     ${pel_records}=  Peltool  -l
     ${ids}=  Get Dictionary Keys  ${pel_records}
+    Sort List  ${ids}
 
     [Return]  ${ids}
