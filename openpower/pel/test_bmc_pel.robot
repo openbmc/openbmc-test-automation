@@ -124,6 +124,33 @@ Verify PEL ID Numbering
     Should Be True  ${pel_ids[1]} == ${pel_ids[0]}+1
 
 
+Verify BMC Event Log ID
+    [Documentation]  Verify BMC Event Log ID from PEL.
+    [Tags]  Verify_BMC_Event_Log_ID
+
+    Redfish Purge Event Log
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${pel_bmc_event_log_id}=  Get PEL Field Value  ${pel_ids[0]}  Private Header  BMC Event Log Id
+
+    # Example "BMC Event Log Id" field value from "Private Header" section of PEL.
+    #  [Private Header]:
+    #    [Created at]:                                 08/24/1928 12:04:06
+    #    [Created by]:                                 0x584D
+    #    [Sub-section type]:                           0
+    #    [Entry Id]:                                   0x50000BB7
+    #    [Platform Log Id]:                            0x8200061D
+    #    [CSSVER]:
+    #    [Section Version]:                            1
+    #    [Creator Subsystem]:                          PHYP
+    #    [BMC Event Log Id]:                           341      <---- BMC event log id value
+    #    [Committed at]:                               03/25/1920 12:06:22
+
+    ${redfish_event_logs}=  Redfish.Get Properties  /redfish/v1/Systems/system/LogServices/EventLog/Entries
+    Valid Value  pel_bmc_event_log_id  ['${redfish_event_logs['Members'][0]['Id']}']
+
+
 *** Keywords ***
 
 Create Test PEL Log
