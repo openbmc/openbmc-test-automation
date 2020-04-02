@@ -134,9 +134,17 @@ def init_robot_test_base_dir_path():
                 # Use to the apollo dir path.
                 ROBOT_TEST_BASE_DIR_PATH = apollo_dir_path + suffix
 
+    OBMC_TOOLS_BASE_DIR_PATH = \
+        os.path.dirname(ROBOT_TEST_BASE_DIR_PATH.rstrip("/")) \
+        + "/openbmc-tools/"
+    OPENBMCTOOL_DIR_PATH = OBMC_TOOLS_BASE_DIR_PATH + "thalerj/"
+    MSBARTH_TOOLS_DIR_PATH = OBMC_TOOLS_BASE_DIR_PATH + "msbarth/"
+
     gv.valid_value(ROBOT_TEST_BASE_DIR_PATH)
-    gp.dprint_vars(ROBOT_TEST_RUNNING_FROM_SB, ROBOT_TEST_BASE_DIR_PATH)
+    gp.dprint_vars(ROBOT_TEST_RUNNING_FROM_SB, ROBOT_TEST_BASE_DIR_PATH, OBMC_TOOLS_BASE_DIR_PATH,
+                   OPENBMCTOOL_DIR_PATH, MSBARTH_TOOLS_DIR_PATH)
     gv.valid_dir_path(ROBOT_TEST_BASE_DIR_PATH)
+    gv.valid_dir_path(OPENBMCTOOL_DIR_PATH)
 
     ROBOT_TEST_BASE_DIR_PATH = gm.add_trailing_slash(ROBOT_TEST_BASE_DIR_PATH)
     gm.set_mod_global(ROBOT_TEST_BASE_DIR_PATH)
@@ -144,6 +152,15 @@ def init_robot_test_base_dir_path():
 
     gm.set_mod_global(ROBOT_TEST_RUNNING_FROM_SB)
     os.environ['ROBOT_TEST_RUNNING_FROM_SB'] = str(ROBOT_TEST_RUNNING_FROM_SB)
+
+    gm.set_mod_global(OBMC_TOOLS_BASE_DIR_PATH)
+    os.environ['OBMC_TOOLS_BASE_DIR_PATH'] = str(OBMC_TOOLS_BASE_DIR_PATH)
+
+    gm.set_mod_global(OPENBMCTOOL_DIR_PATH)
+    os.environ['OPENBMCTOOL_DIR_PATH'] = str(OPENBMCTOOL_DIR_PATH)
+
+    gm.set_mod_global(MSBARTH_TOOLS_DIR_PATH)
+    os.environ['MSBARTH_TOOLS_DIR_PATH'] = str(MSBARTH_TOOLS_DIR_PATH)
 
 
 raw_robot_file_search_path = "${ROBOT_TEST_BASE_DIR_PATH}:" +\
@@ -357,7 +374,7 @@ def process_robot_output_files(robot_cmd_buf=None,
 
 
 def robot_cmd_fnc(robot_cmd_buf,
-                  robot_jail=os.environ.get('ROBOT_JAIL', '')):
+                  robot_jail=os.environ.get('ROBOT_JAIL', ''), test_mode=0):
     r"""
     Run the robot command string.
 
@@ -368,6 +385,7 @@ def robot_cmd_fnc(robot_cmd_buf,
     robot_cmd_buf                   The complete robot command string.
     robot_jail                      Indicates that this is to run in "robot jail" meaning without visibility
                                     to any apolloxxx import files, programs, etc.
+    test_mode                       If test_mode is set, this function will not actually run the command.
     """
 
     gv.valid_value(robot_cmd_buf)
@@ -385,8 +403,8 @@ def robot_cmd_fnc(robot_cmd_buf,
         init_robot_test_base_dir_path()
         ROBOT_TEST_BASE_DIR_PATH = getattr(module, "ROBOT_TEST_BASE_DIR_PATH")
 
-    ROBOT_TEST_RUNNING_FROM_SB = \
-        gm.get_mod_global("ROBOT_TEST_RUNNING_FROM_SB")
+    ROBOT_TEST_RUNNING_FROM_SB = gm.get_mod_global("ROBOT_TEST_RUNNING_FROM_SB")
+    OPENBMCTOOL_DIR_PATH = gm.get_mod_global("OPENBMCTOOL_DIR_PATH")
 
     if robot_jail == "":
         if ROBOT_TEST_RUNNING_FROM_SB:
@@ -398,11 +416,6 @@ def robot_cmd_fnc(robot_cmd_buf,
     ROBOT_JAIL = os.environ.get('ROBOT_JAIL', '')
     gp.dprint_vars(ROBOT_TEST_BASE_DIR_PATH, ROBOT_TEST_RUNNING_FROM_SB,
                    ROBOT_JAIL, robot_jail)
-
-    OBMC_TOOLS_BASE_DIR_PATH = \
-        os.path.dirname(ROBOT_TEST_BASE_DIR_PATH.rstrip("/")) \
-        + "/openbmc-tools/"
-    openbmctool_dir_path = OBMC_TOOLS_BASE_DIR_PATH + "thalerj"
 
     # Save PATH and PYTHONPATH to be restored later.
     os.environ["SAVED_PYTHONPATH"] = os.environ.get("PYTHONPATH", "")
@@ -422,13 +435,13 @@ def robot_cmd_fnc(robot_cmd_buf,
         NEW_PATH_LIST.extend(list(set(out_buf.rstrip("\n").split("\n"))))
         NEW_PATH_LIST.extend(["/usr/local/sbin", "/usr/local/bin", "/usr/sbin",
                               "/usr/bin", "/sbin", "/bin",
-                              openbmctool_dir_path])
+                              OPENBMCTOOL_DIR_PATH.rstrip('/')])
         PATH = ":".join(NEW_PATH_LIST)
     else:
         PYTHONPATH = os.environ.get('PYTHONPATH', '') + ":" +\
             ROBOT_TEST_BASE_DIR_PATH + "lib"
         PATH = os.environ.get('PATH', '') + ":" + ROBOT_TEST_BASE_DIR_PATH +\
-            "bin" + ":" + openbmctool_dir_path
+            "bin" + ":" + OPENBMCTOOL_DIR_PATH.rstrip('/')
 
     os.environ['PYTHONPATH'] = PYTHONPATH
     os.environ['PATH'] = PATH
@@ -436,8 +449,6 @@ def robot_cmd_fnc(robot_cmd_buf,
 
     os.environ['FFDC_DIR_PATH_STYLE'] = os.environ.get('FFDC_DIR_PATH_STYLE',
                                                        '1')
-    test_mode = getattr(module, "test_mode")
-
     gp.qpissuing(robot_cmd_buf, test_mode)
     if test_mode:
         os.environ["PATH"] = os.environ.get("SAVED_PATH", "")
