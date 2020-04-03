@@ -214,7 +214,39 @@ Verify Lock Conflicts
     Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_CONFLICT}  ['NA']  ${False}
 
 
+Verify Persistency Of Locks After BMC Reboot
+    [Documentation]  Verify persistency of locks after BMC reboot.
+    [Tags]  Verify_Persistency_Of_Locks_After_BMC_Reboot
+    [Template]  Locks Persistency Check After BMC Reboot
+
+    # lock_type  seg_flags          resource_id
+    Read         ${TWO_SEG_FLAG_2}  ${234}
+    Write        ${TWO_SEG_FLAG_2}  ${234}
+
+
 *** Keywords ***
+
+Locks Persistency Check After BMC Reboot
+    [Documentation]  Locks persistency check after BMC reboot.
+    [Arguments]  ${lock_type}  ${seg_flags}  ${resource_id}
+
+    # Description of argument(s):
+    # lock_type    Type of lock (Read/Write).
+    # seg_flags    Segmentation Flags to identify lock elements under system level in the hierarchy.
+    # resource_id  Decimal +ve integer value of maximum 8 hex bytes.  Ex: 134, 2048 etc.
+
+    ${transaction_id}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  ${lock_type}  ${seg_flags}  ${resource_id}
+
+    ${locks_prev}=  Run Keyword  Get Locks List  ${SESSION_ID}
+
+    Initialize OpenBMC
+    OBMC Reboot (off)
+
+    ${locks_curr}=  Run Keyword  Get Locks List  ${SESSION_ID}
+    Should Be Equal  ${locks_prev}  ${locks_curr}
+    Release Lock  ${transaction_id}
+
 
 Return Data Dictionary For Single Request
     [Documentation]  Return data dictionary for single request.
