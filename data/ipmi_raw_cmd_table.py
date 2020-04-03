@@ -11,7 +11,7 @@ IPMI raw commands table:
 # Refer:
 # openbmc/meta-openbmc-machines/meta-openpower/meta-ibm/meta-witherspoon/recipe
 # s-phosphor/ipmi/phosphor-ipmi-host/cipher_list.json
-valid_ciphers = ['3', '17']
+valid_ciphers = ['17']
 unsupported_ciphers = ['1', '2', '15', '16']
 
 IPMI_RAW_CMD = {
