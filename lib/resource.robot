@@ -25,7 +25,7 @@ ${OPENBMC_REBOOT_TIMEOUT}   ${10}
 # can override to "Dbus" from command line.
 ${IPMI_COMMAND}    External
 # IPMI chipher default.
-${IPMI_CIPHER_LEVEL}  ${3}
+${IPMI_CIPHER_LEVEL}  ${17}
 
 # PDU related parameters
 ${PDU_TYPE}         ${EMPTY}

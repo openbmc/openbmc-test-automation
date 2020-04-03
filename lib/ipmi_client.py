@@ -12,7 +12,7 @@ from robot.libraries.BuiltIn import BuiltIn
 
 # Set default values for required IPMI options.
 ipmi_interface = 'lanplus'
-ipmi_cipher_suite = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}", '3')
+ipmi_cipher_suite = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}", '17')
 ipmi_port = BuiltIn().get_variable_value("${IPMI_PORT}", '623')
 ipmi_username = BuiltIn().get_variable_value("${IPMI_USERNAME}", "root")
 ipmi_password = BuiltIn().get_variable_value("${IPMI_PASSWORD}", "0penBmc")
