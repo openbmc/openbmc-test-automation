@@ -198,6 +198,31 @@ Configure Multiple IPs On VLAN Via REST
     ${lan_config}=  Get LAN Print Dict
     Valid Value  lan_config['IP Address']  ["${ip_addresses[0]}"]
 
+
+Create And Delete VLAN And IP On It Multiple Times With BMC Reboot
+    [Documentation]  Create and delete VLAN and IP on it multiple times with BMC reboot.
+    [Tags]  Create_And_Delete_VLAN_And_IP_On_It_Multiple_Times_With_BMC_Reboot
+    [Setup]  Test Setup Execution
+
+    FOR  ${i}  IN RANGE   ${5}
+      Create VLAN  ${vlan_id}
+      Verify Existence Of VLAN  ${vlan_id}
+      Configure Network Settings On VLAN  ${vlan_id}  ${ip}  ${netmask}
+      ${vlan_ip_uri}=  Get VLAN URI For IP  ${vlan_id}  ${ip}
+      Delete IP And Object  ${ip}  ${vlan_ip_uri}
+      Get VLAN URI For IP  ${vlan_id}  ${ip}  expected_result=error
+      Delete VLANs  [${vlan_id}]
+      Verify Existence Of VLAN  ${vlan_id}  expected_result=error
+      Initiate BMC Reboot
+      Sleep  ${NETWORK_TIMEOUT}s
+      Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+      Verify Existence Of VLAN  ${vlan_id}  expected_result=error
+    END
+
+    ${lan_config}=  Get LAN Print Dict
+    Valid Value  lan_config['802.1q VLAN ID']  ["Disabled"]
+
+
 *** Keywords ***
 
 
