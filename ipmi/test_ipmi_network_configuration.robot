@@ -10,7 +10,6 @@ Library                ../lib/var_funcs.py
 Library                ../lib/bmc_network_utils.py
 
 Suite Setup            Suite Setup Execution
-Suite Teardown         Redfish.Logout
 Test Setup             Printn
 Test Teardown          Test Teardown Execution
 
@@ -72,7 +71,7 @@ Configure IP On VLAN Via IPMI
 
     ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
     Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id_for_ipmi}']
-    Valid Value  lan_config['IP Address']  ["${ip}"]
+    Valid Value  lan_config['IP Address']  ['${ip}']
 
 
 Create VLAN Via IPMI When LAN And VLAN Exist On BMC
@@ -94,8 +93,8 @@ Create VLAN Via IPMI And Verify
 
     ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
     Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id_for_ipmi}']
-    Valid Value  lan_config['IP Address']  ['${network_configurations[0]['Address']}']
-    Valid Value  lan_config['Subnet Mask']  ['${network_configurations[0]['SubnetMask']}']
+    Valid Value  lan_config['IP Address']  ['${ip_address}']
+    Valid Value  lan_config['Subnet Mask']  ['${netmask_address}']
 
 
 Test Disabling Of VLAN Via IPMI
@@ -120,6 +119,23 @@ Create VLAN When LAN And VLAN Exist With IP Address Configured
    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
    Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id_for_ipmi}']
    Valid Value  lan_config['IP Address']  ['${ip}']
+
+
+Create Multiple VLANs Via IPMI And Verify
+    [Documentation]  Create multiple VLANs throught IPMI.
+    [Tags]    Create_Multiple_VLANs_Via_IPMI_And_Verify
+
+    FOR  ${vlan_id}  IN  @{vlan_ids}
+      Create VLAN Via IPMI  ${vlan_id}
+      ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+      Valid Value  lan_config['802.1q VLAN ID']  ['${vlan_id}']
+    END
+
+    ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Valid Value  lan_config['IP Address']  ['${ip_address}']
+    Valid Value  lan_config['Subnet Mask']  ['${netmask_address}']
+
+
 
 *** Keywords ***
 
@@ -159,22 +175,21 @@ Restore Configuration
     ${length}=  Get Length  ${initial_lan_config}
     Return From Keyword If  ${length} == ${0}
 
-    Set IPMI Inband Network Configuration  ${network_configurations[0]['Address']}
-    ...  ${network_configurations[0]['SubnetMask']}
+    Set IPMI Inband Network Configuration  ${ip_address}  ${netmask_address}
     ...  ${initial_lan_config['Default Gateway IP']}  login=${0}
 
 
 Suite Setup Execution
     [Documentation]  Suite Setup Execution.
 
-    Redfish.Login
-
     Run Inband IPMI Standard Command
     ...  lan set ${CHANNEL_NUMBER} ipsrc static  login_host=${1}
 
-    @{network_configurations}=  Get Network Configuration
-    Set Suite Variable  @{network_configurations}
-
+    ${ip_data}=  Get BMC IP Info
+    ${ip_address}=  Remove String Using Regexp  ${ip_data[1]}  /\\d{2}
+    ${netmask_address}=  Get BMC Subnemask
+    Set Suite Variable  ${netmask_address}
+    Set Suite Variable  ${ip_address}
     ${initial_lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
     Set Suite Variable  ${initial_lan_config}
 
@@ -186,3 +201,10 @@ Test Teardown Execution
    Create VLAN Via IPMI  off
    Restore Configuration
 
+
+Get BMC Subnemask
+    ${ip_data}=  Get BMC IP Info
+    ${prefix_length}=  Get Regexp Matches  ${ip_data[1]}  /\\d{2}
+    ${netmask_prefix_lenght}=    Remove String  ${prefix_length[0]}  /
+    ${netmask}=  Get Netmask Address  ${netmask_prefix_lenght}
+    [Return]  ${netmask}
