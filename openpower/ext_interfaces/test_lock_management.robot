@@ -224,6 +224,95 @@ Verify Persistency Of Locks After BMC Reboot
     Write        ${TWO_SEG_FLAG_2}  ${234}
 
 
+Verify Valid Lock Transactions Release
+    [Documentation]  Verify valid lock transactions release.
+    [Tags]  Verify_Valid_Lock_Transactions_Release
+
+    ${transaction_id1}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${locks_before}=  Run Keyword  Get Locks List  ${SESSION_ID}
+
+    ${transaction_id2}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  Read  ${TWO_SEG_FLAG_3}  ${234}
+    ${transaction_id3}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${transaction_id4}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  Read  ${TWO_SEG_FLAG_3}  ${234}
+
+    ${transaction_ids}=  Create List  ${transaction_id2}  ${transaction_id3}  ${transaction_id4}
+    Release Locks  ${transaction_ids}
+
+    ${locks_after}=  Run Keyword  Get Locks List  ${SESSION_ID}
+    Should Be Equal  ${locks_before}  ${locks_after}
+
+
+Verify Invalid Lock Transactions Release
+    [Documentation]  Verify invalid lock transactions release.
+    [Tags]  Verify_Invalid_Lock_Transactions_Release
+
+    ${transaction_id1}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${locks_before}=  Run Keyword  Get Locks List  ${SESSION_ID}
+
+    ${transaction_id2}=  Evaluate  ${transaction_id1} + 1
+    ${transaction_id3}=  Evaluate  ${transaction_id1} - 1
+    ${transaction_ids}=  Create List  ${transaction_id2}  ${transaction_id1}  ${transaction_id3}
+
+    # If any transaction/s in the list does not belong to current session then it will be a bad request.
+    Release Locks  ${transaction_ids}  exp_status_code=${HTTP_BAD_REQUEST}
+    ${locks_after}=  Run Keyword  Get Locks List  ${SESSION_ID}
+
+    Should Be Equal  ${locks_before}  ${locks_after}
+
+
+Verify Locks Release By Session
+    [Documentation]  Verify locks release by session.
+    [Tags]  Verify_Locks_Release_By_Session
+
+    ${locks_before}=  Run Keyword  Get Locks List  ${SESSION_ID}
+    ${transaction_id1}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  Write  ${TWO_SEG_FLAG_2}  ${234}
+
+    # Release Lock by Session without mentioning transaction_ids.
+    Release Locks  release_type=Session
+    ${locks_after}=  Run Keyword  Get Locks List  ${SESSION_ID}
+    Should Be Equal  ${locks_before}  ${locks_after}
+
+    ${transaction_id1}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${transaction_id2}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  Read  ${TWO_SEG_FLAG_3}  ${234}
+    ${transaction_ids}=  Create List  ${transaction_id1}  ${transaction_id2}
+
+    # Release Lock by Session by mentioning transaction_ids also in the request.
+    Release Locks  ${transaction_ids}  release_type=Session
+
+
+Verify Locks Created By One Session Cannot Be Delete By Another Session
+    [Documentation]  Verify locks created by one session cannot be deleted by another session.
+    [Tags]  Verify_Locks_Created_By_One_Session_Cannot_Be_Delete_By_Another_Session.
+
+    ${transaction_id1}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
+
+    Redfish.Login
+    ${session_id}  ${session_key}=  Return Session Id And Session Key
+
+    ${transaction_id2}=  Run Keyword  Acquire Lock On A Given Resource
+    ...  Read  ${TWO_SEG_FLAG_3}  ${234}
+    ${locks_before}=  Run Keyword  Get Locks List  ${SESSION_ID}
+
+    ${transaction_ids}=  Create List  ${transaction_id1}  ${transaction_id2}
+    Release Locks  ${transaction_ids}  exp_status_code=${HTTP_UNAUTHORIZED}
+    ${locks_after}=  Run Keyword  Get Locks List  ${SESSION_ID}
+    Should Be Equal  ${locks_before}  ${locks_after}
+
+    # When release_type=Session, transaction_ids should be ignored.
+    Release Locks  ${transaction_ids}  release_type=Session
+    ${locks_after}=  Run Keyword  Get Locks List  ${SESSION_ID}
+    Should Be Equal  ${EMPTY_LIST}  ${locks_after}
+
+
 *** Keywords ***
 
 Locks Persistency Check After BMC Reboot
@@ -245,7 +334,7 @@ Locks Persistency Check After BMC Reboot
 
     ${locks_curr}=  Run Keyword  Get Locks List  ${SESSION_ID}
     Should Be Equal  ${locks_prev}  ${locks_curr}
-    Release Lock  ${transaction_id}
+    Release Locks  ${transaction_id}
 
 
 Return Data Dictionary For Single Request
@@ -378,16 +467,17 @@ Get Locks List
     [Return]  ${locks["Records"]}
 
 
-Release Lock
-    [Documentation]  Release lock.
-    [Arguments]  @{transaction_ids}  ${release_type}=Transaction  ${exp_status_code}=${HTTP_OK}
+Release Locks
+    [Documentation]  Release locks.
+    [Arguments]  ${transaction_ids}=${EMPTY_LIST}  ${release_type}=Transaction  ${exp_status_code}=${HTTP_OK}
 
     # Description of argument(s):
-    # transaction_ids  List of transaction ids. Ex: [15, 18]
+    # transaction_ids  List of transaction ids or session ids. Ex: [15, 18]  or ["euHoAQpvNe", "ecTjANqwFr"]
     # release_type     Release all locks acquired using current session or only given transaction numbers.
     #                  Ex:  Session,  Transaction.  Default will be Transaction.
     # exp_status_code  expected status code from the ReleaseLock request for given inputs.
 
+    # When release_type=Session then TransactionIDs list will be ignored.
     ${data}=  Set Variable  {"Type": "${release_type}", "TransactionIDs": ${transaction_ids}}
     ${data}=  Evaluate  json.dumps(${data})  json
     Redfish.Post  /ibm/v1/HMC/LockService/Actions/LockService.ReleaseLock
@@ -479,7 +569,7 @@ Acquire And Release Lock
 
     Return From Keyword If  '${exp_status_code}' != '${HTTP_OK}' or ${err_msgs} == ['NA']
 
-    Release Lock  ${transaction_id}
+    Release Locks  ${transaction_id}
     Verify Lock Record  ${False}  &{inputs}
 
     # Delete the session.
