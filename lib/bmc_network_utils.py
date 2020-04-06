@@ -30,6 +30,18 @@ def netmask_prefix_length(netmask):
     return ipaddress.ip_network('0.0.0.0/' + netmask).prefixlen
 
 
+def get_netmask_address(prefix_len):
+    r"""
+    Return the netmask address.
+
+    Description of argument(s):
+    prefix_len     Prefix length value (e.g. "24", "23", "22", etc.).
+    """
+
+    # IP address netmask format: '0.0.0.0/24'
+    return ipaddress.ip_network('0.0.0.0/' + prefix_len).netmask
+
+
 def parse_nping_output(output):
     r"""
     Parse the output from the nping command and return as a dictionary.
