@@ -297,7 +297,7 @@ def valid_range(var_value, lower=None, upper=None, var_name=None):
         return process_error_message(error_message)
     if upper is None and var_value >= lower:
         return process_error_message(error_message)
-    if lower and upper:
+    if lower is not None and upper is not None:
         if lower > upper:
             var_name = get_var_name(var_name)
             error_message += "Programmer error - the lower value is greater"
