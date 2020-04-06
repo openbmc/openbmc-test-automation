@@ -144,7 +144,6 @@ def init_robot_test_base_dir_path():
     gp.dprint_vars(ROBOT_TEST_RUNNING_FROM_SB, ROBOT_TEST_BASE_DIR_PATH, OBMC_TOOLS_BASE_DIR_PATH,
                    OPENBMCTOOL_DIR_PATH, MSBARTH_TOOLS_DIR_PATH)
     gv.valid_dir_path(ROBOT_TEST_BASE_DIR_PATH)
-    gv.valid_dir_path(OPENBMCTOOL_DIR_PATH)
 
     ROBOT_TEST_BASE_DIR_PATH = gm.add_trailing_slash(ROBOT_TEST_BASE_DIR_PATH)
     gm.set_mod_global(ROBOT_TEST_BASE_DIR_PATH)
