@@ -152,6 +152,18 @@ Verify BMC Version From PEL
     Valid Value  bmc_version  ['${bmc_version}']
 
 
+Verify Delete All PEL
+    [Documentation]  Verify deleting all PEL logs.
+    [Tags]  Verify_Delete_All_PEL
+
+    Create Test PEL Log
+    Create Test PEL Log
+    ${pel_output}=  Peltool  --delete-all  False
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    Should Be Empty  ${pel_ids}
+
+
 *** Keywords ***
 
 Create Test PEL Log
