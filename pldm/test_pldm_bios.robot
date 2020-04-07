@@ -77,10 +77,24 @@ Verify GetBIOSTable For StringTable
     # [11]:                                           pvm-system-name
     # [12]:                                           vmi-if-count
 
-    ${pldm_output}=  Pldmtool  bios GetBIOSTable -t 0
-    Rprint Vars  pldm_output
-    # TODO: Implement verification for GetBIOSTable response message.
-    # Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETBIOSTABLE_STRTABLE}
+    ${pldm_output}=  Pldmtool  bios GetBIOSTable --type StringTable 
+    Valid List  pldm_output  required_values=${RESPONSE_LIST_GETBIOSTABLE_STRTABLE}
+
+
+Verify GetBIOSTable For AttributeTable
+    [Documentation]  Verify GetBIOSTable for table type attribute table.
+    [Tags]  Verify_GetBIOSTable_For_AttributeTable
+
+    ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeTable
+    Valid Value  pldm_output  [True]
+
+
+Verify GetBIOSTable For AttributeValueTable
+    [Documentation]  Verify GetBIOSTable for table type attribute value table.
+    [Tags]  Verify_GetBIOSTable_For_AttributeValueTable
+
+    ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeValueTable
+    Valid Value  pldm_output  [True]
 
 *** Keywords ***
 
