@@ -123,6 +123,31 @@ Verify PEL ID Numbering
 
     Should Be True  ${pel_ids[1]} == ${pel_ids[0]}+1
 
+Verify Machine Type Model And Serial Number
+    [Documentation]  Verify machine type model and serial number from PEL.
+    [Tags]  Verify_Machine_Type_Model_And_Serial_Number
+
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_serial_number}=  Get PEL Field Value  ${id}  Failing MTMS  Serial Number
+    ${pel_machine_type_model}=  Get PEL Field Value  ${id}  Failing MTMS  Machine Type Model
+
+    # Example of "Machine Type Model" and "Serial Number" fields value from "Failing MTMS" section of PEL.
+    #  [Failing MTMS]:
+    #    [Created by]:                                 0x2000
+    #    [Machine Type Model]:                         8335-GTH   <---- Machine type
+    #    [Section Version]:                            1
+    #    [Serial Number]:                              789AE3A    <---- Serial number
+    #    [Sub-section type]:                           0
+
+    ${redfish_machine_model}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  Model
+    ${redfish_serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
+
+    Valid Value  pel_machine_type_model  ['${redfish_machine_model}']
+    Valid Value  pel_serial_number  ['${redfish_serial_number}']
+
 
 *** Keywords ***
 
@@ -154,3 +179,4 @@ Get PEL Log Via BMC CLI
     Sort List  ${ids}
 
     [Return]  ${ids}
+
