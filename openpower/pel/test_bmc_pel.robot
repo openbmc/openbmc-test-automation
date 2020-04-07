@@ -123,6 +123,38 @@ Verify PEL ID Numbering
 
     Should Be True  ${pel_ids[1]} == ${pel_ids[0]}+1
 
+Verify Machine Type Model And Serial Number
+    [Documentation]  Verify machine type model and serial number from PEL.
+    [Tags]  Verify_Machine_Type_Model_And_Serial_Number
+
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_serial_number}=  Get PEL Field Value  ${id}  Failing MTMS  Serial Number
+    ${pel_machine_type_model}=  Get PEL Field Value  ${id}  Failing MTMS  Machine Type Model
+
+    # Example of "Machine Type Model" and "Serial Number" fields value from "Failing MTMS" section of PEL.
+    #  [Failing MTMS]:
+    #    [Created by]:                                 0x2000
+    #    [Machine Type Model]:                         1234-ABC   <---- Machine type
+    #    [Section Version]:                            1
+    #    [Serial Number]:                              ABCDEFG    <---- Serial number
+    #    [Sub-section type]:                           0
+
+    ${redfish_machine_model}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  Model
+    ${redfish_serial_number}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  SerialNumber
+
+    Valid Value  pel_machine_type_model  ['${redfish_machine_model}']
+    Valid Value  pel_serial_number  ['${redfish_serial_number}']
+
+    # Check "Machine Type Model" and "Serial Number" fields value from "Extended User Header" section of PEL.
+    ${pel_machine_type_model}=  Get PEL Field Value  ${id}  Extended User Header  Reporting Machine Type
+    ${pel_serial_number}=  Get PEL Field Value  ${id}  Extended User Header  Reporting Serial Number
+
+    Valid Value  pel_machine_type_model  ['${redfish_machine_model}']
+    Valid Value  pel_serial_number  ['${redfish_serial_number}']
+
 
 Verify Host Off State From PEL
     [Documentation]  Verify Host off state from PEL.
@@ -223,4 +255,3 @@ Get PEL Field Value
     ${pel_field_output}=  Get From Dictionary  ${pel_section_output}  ${pel_field}
 
     [Return]  ${pel_field_output}
-
