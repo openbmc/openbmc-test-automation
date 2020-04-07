@@ -128,3 +128,11 @@ PLDM_PDR_TYPES = {
     'PLDM_STATE_EFFECTER_PDR': '11',
     'PLDM_PDR_FRU_RECORD_SET': '20',
     'PLDM_PDR_ENTITY_ASSOCIATION': '15'}
+
+RESPONSE_LIST_GETBIOSTABLE_STRTABLE = [
+    'Allowed', 'Disabled', 'Enabled', 'IPv4DHCP', 'IPv4Static', 'Not Allowed',\
+    'Perm', 'Temp', 'pvm-fw-boot-side', 'pvm-inband-code-update', 'pvm-os-boot-side',\
+    'pvm-pcie-error-inject', 'pvm-surveillance', 'pvm-system-name', 'vmi-hostname',\
+    'vmi-if-count', 'vmi-if0-ipv4-ipaddr', 'vmi-if0-ipv4-method',\
+    'vmi-if0-ipv4-prefix-length', 'vmi-if1-ipv4-ipaddr', 'vmi-if1-ipv4-method',\
+    'vmi-if1-ipv4-prefix-length', 'vmi-ipv4-gateway']
