@@ -93,6 +93,34 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
             dict_data1, dict_data2 = vf.split_dict_on_key('containerentitycontainerid', result)
             return dict_data1
 
+        # Collect bios strings from bios string table in to list.
+        # Example output for pldmtool GetBIOSTable --type stringTable
+        # PLDM StringTable:
+        # BIOSStringHandle : BIOSString
+        # 0 : Allowed
+        # 1 : Disabled
+        # 2 : Enabled
+        elif 'pldm_stringtable' in result:
+            result.pop('pldm_stringtable')
+            result.pop('biosstringhandle')
+            bios_string_list = []
+            for data in result:
+                bios_string_list.append(result[data])
+            # Example for bios_string_list:
+            # bios_string_list = ['Allowed', 'Disabled', 'Enabled']
+            return bios_string_list
+
+        # Check if parameter pldm_attributetable/pldm_attributevaluetable present for
+        # pldmtool GetBIOSTable --type AttributeTable/AttributeValueTable.
+        # Note: Ouput for AttributeTable/AttributeValueTable is huge and verification of
+        #       table content is not available.
+        elif 'pldm_attributetable' in result:
+            result['pldm_attributetable'] = True
+            return result
+        elif 'pldm_attributevaluetable' in result:
+            result['pldm_attributevaluetable'] = True
+            return result
+
         return result
 
     return stdout
