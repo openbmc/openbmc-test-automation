@@ -216,6 +216,18 @@ Verify BMC Event Log ID
     Valid Value  pel_bmc_event_log_id  ['${redfish_event_logs['Members'][0]['Id']}']
 
 
+Verify Delete All PEL
+    [Documentation]  Verify deleting all PEL logs.
+    [Tags]  Verify_Delete_All_PEL
+
+    Create Test PEL Log
+    Create Test PEL Log
+    Peltool  --delete-all  False
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    Should Be Empty  ${pel_ids}
+
+
 *** Keywords ***
 
 Create Test PEL Log
