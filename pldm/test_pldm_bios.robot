@@ -61,7 +61,7 @@ Verify GetBIOSTable For StringTable
     [Documentation]  Verify GetBIOSTable for table type string table.
     [Tags]  Verify_GetBIOSTable_For_StringTable
 
-    # pldm_output:
+    # Example pldm_output:
     # [biosstringhandle]:                             BIOSString
     # [0]:                                            Allowed
     # [1]:                                            Disabled
@@ -77,10 +77,47 @@ Verify GetBIOSTable For StringTable
     # [11]:                                           pvm-system-name
     # [12]:                                           vmi-if-count
 
-    ${pldm_output}=  Pldmtool  bios GetBIOSTable -t 0
+    ${pldm_output}=  Pldmtool  bios GetBIOSTable --type StringTable
+    Valid List  pldm_output  required_values=${RESPONSE_LIST_GETBIOSTABLE_STRTABLE}
+
+
+Verify GetBIOSTable For AttributeTable
+    [Documentation]  Verify if attribute table content exist for
+    ...            GetBIOSTable with table type attribute table.
+    [Tags]  Verify_GetBIOSTable_For_AttributeTable
+
+    # Example pldm_output:
+    # [pldm_attributetable]:                          True
+    # [attributehandle]:                               0
+    # [ AttributeNameHandle]:                          20(vmi-if1-ipv4-method)
+    # [     attributetype]:                            BIOSStringReadOnly
+    # [     StringType]:                               0x01
+    # [     minimumstringlength]:                      1
+    # [     maximumstringlength]:                      100
+    # [     defaultstringlength]:                      15
+    # [     defaultstring]:                            witherspoon-128
+
+    ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeTable
     Rprint Vars  pldm_output
-    # TODO: Implement verification for GetBIOSTable response message.
-    # Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETBIOSTABLE_STRTABLE}
+    Valid Value  pldm_output['pldm_attributetable']  [True]
+
+
+Verify GetBIOSTable For AttributeValueTable
+    [Documentation]  Verify if attribute value table content exist for
+    ...              GetBIOSTable with table type attribute value table.
+    [Tags]  Verify_GetBIOSTable_For_AttributeValueTable
+
+    # Example pldm_output:
+    # [pldm_attributevaluetable]:                     True
+    # [attributehandle]:                              0
+    # [     attributetype]:                           BIOSStringReadOnly
+    # [     currentstringlength]:                     15
+    # [     currentstring]:                           witherspoon-128
+
+    ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeValueTable
+    Log To Console  ${pldm_output}
+    Rprint Vars  pldm_output
+    Valid Value  pldm_output['pldm_attributevaluetable']  [True]
 
 *** Keywords ***
 
