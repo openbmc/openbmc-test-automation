@@ -156,22 +156,22 @@ Acquire And Release Different Write Locks
     Write  ${ONE_SEG_FLAG_ALL}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${ONE_SEG_FLAG_SAME}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${ONE_SEG_FLAG_DONT}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
-    Write  ${TWO_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${TWO_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${TWO_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_OK}            ${EMPTY_LIST}    ${True}
     Write  ${TWO_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_OK}            ${EMPTY_LIST}    ${True}
     Write  ${TWO_SEG_FLAG_INVALID4}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
-    Write  ${THREE_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${THREE_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${THREE_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FOUR_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FOUR_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FOUR_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FIVE_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FIVE_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FIVE_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${SIX_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${SIX_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${SIX_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${THREE_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${THREE_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${THREE_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FOUR_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FOUR_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FOUR_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FIVE_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FIVE_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FIVE_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${SIX_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${SIX_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${SIX_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${SEVEN_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${SEVEN_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${SEVEN_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
@@ -187,6 +187,7 @@ Acquire And Release Different Write Locks
     Write  ${TWO_SEG_FLAG_INVALID9}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${ERR_PATTERN2}  ${True}
     Write  ${TWO_SEG_FLAG_3}             234          hmc-id  ${HTTP_BAD_REQUEST}   ${ERR_PATTERN2}  ${True}
 
+*** comment ***
 
 Verify GetLockList Returns An Empty Record For An Invalid Session Id
     [Documentation]  Verify GetLockList returns an empty record for an invalid session id.
@@ -502,7 +503,7 @@ Create New Session
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish.Logout
 
 
