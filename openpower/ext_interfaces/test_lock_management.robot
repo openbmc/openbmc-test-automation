@@ -109,23 +109,23 @@ Acquire And Release Different Read Locks
     Read    ${ONE_SEG_FLAG_ALL}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
     Read    ${ONE_SEG_FLAG_SAME}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
     Read    ${ONE_SEG_FLAG_DONT}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
-    Read    ${TWO_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${TWO_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
     Read    ${TWO_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
     Read    ${TWO_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
     Read    ${TWO_SEG_FLAG_4}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
     Read    ${TWO_SEG_FLAG_5}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
-    Read    ${THREE_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${THREE_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${THREE_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${FOUR_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${FOUR_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${FOUR_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${FIVE_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${FIVE_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${FIVE_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${SIX_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${SIX_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
-    Read    ${SIX_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_OK}           ${EMPTY_LIST}    ${True}
+    Read    ${THREE_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${THREE_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${THREE_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${FOUR_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${FOUR_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${FOUR_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${FIVE_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${FIVE_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${FIVE_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${SIX_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${SIX_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
+    Read    ${SIX_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
     Read    ${SEVEN_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
     Read    ${SEVEN_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
     Read    ${SEVEN_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}  ${EMPTY_LIST}    ${True}
