@@ -97,8 +97,8 @@ ${PROP_TYPE_ERR}        is of a different type than the property can accept.
 &{LOCKS}
 
 
-*** Test Cases ***
-
+#*** Test Cases ***
+*** comment ***
 Acquire And Release Different Read Locks
     [Documentation]  Acquire and release different read locks.
     [Tags]  Acquire_And_Release_Different_Read_Locks
@@ -287,6 +287,7 @@ Verify Locks Release By Session
     # Release Lock by Session by mentioning transaction_ids also in the request.
     Release Locks  ${transaction_ids}  release_type=Session
 
+*** Test Cases ***
 
 Verify Locks Created By One Session Cannot Be Deleted By Another Session
     [Documentation]  Verify locks created by one session cannot be deleted by another session.
@@ -294,6 +295,7 @@ Verify Locks Created By One Session Cannot Be Deleted By Another Session
 
     ${transaction_id1}=  Acquire Lock On A Given Resource
     ...  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${locks_tran1}=  Get Locks List  ${SESSION_ID}
 
     Redfish.Login
     ${session_id}  ${session_key}=  Return Session Id And Session Key
@@ -303,7 +305,7 @@ Verify Locks Created By One Session Cannot Be Deleted By Another Session
     ${locks_before}=  Get Locks List  ${SESSION_ID}
 
     ${transaction_ids}=  Create List  ${transaction_id1}  ${transaction_id2}
-    Release Locks  ${transaction_ids}  exp_status_code=${HTTP_UNAUTHORIZED}
+    Release Locks  ${transaction_ids}  exp_status_code=${HTTP_UNAUTHORIZED}  conflict_record=${locks_tran1}
     ${locks_after}=  Get Locks List  ${SESSION_ID}
     Should Be Equal  ${locks_before}  ${locks_after}
 
@@ -470,19 +472,32 @@ Get Locks List
 Release Locks
     [Documentation]  Release locks.
     [Arguments]  ${transaction_ids}=${EMPTY_LIST}  ${release_type}=Transaction  ${exp_status_code}=${HTTP_OK}
+    ...  ${conflict_record}=${EMPTY_LIST}
 
     # Description of argument(s):
     # transaction_ids  List of transaction ids or session ids. Ex: [15, 18]  or ["euHoAQpvNe", "ecTjANqwFr"]
     # release_type     Release all locks acquired using current session or only given transaction numbers.
     #                  Ex:  Session,  Transaction.  Default will be Transaction.
     # exp_status_code  expected status code from the ReleaseLock request for given inputs.
+    # conflict_record  Expected conflict record. Same as explained in acquire lock transaction record.
 
     # When release_type=Session then TransactionIDs list will be ignored.
     ${data}=  Set Variable  {"Type": "${release_type}", "TransactionIDs": ${transaction_ids}}
     ${data}=  Evaluate  json.dumps(${data})  json
-    Redfish.Post  /ibm/v1/HMC/LockService/Actions/LockService.ReleaseLock
+    ${resp}=  Redfish.Post  /ibm/v1/HMC/LockService/Actions/LockService.ReleaseLock
     ...  body=${data}  valid_status_codes=[${exp_status_code}]
+    Log To Console  RELEASE LOCKS : ${resp.text} ${resp.status}
+    Should Be True  ${resp.status}  ${exp_status_code}
 
+    Return From Keyword If  ${conflict_record} == ${EMPTY_LIST}
+    ${conflict}=  Evaluate  json.loads('''${resp.text}''')  json
+
+    # Example of conflict
+    # {"Record": { "HMCID": "hmc-id", "LockType": "Read", "ResourceID": 234, "SegmentFlags": [
+    # { "LockFlag": "DontLock", "SegmentLength": 3}, { "LockFlag": "LockAll", "SegmentLength": 1 }],
+    # "SessionID": "OorUVwrXuT", "TransactionID": 47 }}
+
+    Should Be Equal  ${conflict_record[0]}  ${conflict["Record"]}
 
 Verify Lock Record
     [Documentation]  Verify lock record.
@@ -592,7 +607,7 @@ Create New Session
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish.Logout
 
 
