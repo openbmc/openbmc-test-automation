@@ -156,22 +156,22 @@ Acquire And Release Different Write Locks
     Write  ${ONE_SEG_FLAG_ALL}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${ONE_SEG_FLAG_SAME}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${ONE_SEG_FLAG_DONT}          ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
-    Write  ${TWO_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${TWO_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${TWO_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_OK}            ${EMPTY_LIST}    ${True}
     Write  ${TWO_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_OK}            ${EMPTY_LIST}    ${True}
     Write  ${TWO_SEG_FLAG_INVALID4}      ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
-    Write  ${THREE_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${THREE_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${THREE_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FOUR_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FOUR_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FOUR_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FIVE_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FIVE_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${FIVE_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${SIX_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${SIX_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
-    Write  ${SIX_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_CONFLICT}      ${EMPTY_LIST}    ${True}
+    Write  ${THREE_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${THREE_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${THREE_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FOUR_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FOUR_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FOUR_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FIVE_SEG_FLAG_1}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FIVE_SEG_FLAG_2}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${FIVE_SEG_FLAG_3}            ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${SIX_SEG_FLAG_1}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${SIX_SEG_FLAG_2}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
+    Write  ${SIX_SEG_FLAG_3}             ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${SEVEN_SEG_FLAG_1}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${SEVEN_SEG_FLAG_2}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
     Write  ${SEVEN_SEG_FLAG_3}           ${234}       hmc-id  ${HTTP_BAD_REQUEST}   ${EMPTY_LIST}    ${True}
@@ -271,7 +271,7 @@ Verify Locks Release By Session
 
     ${locks_before}=  Get Locks List  ${SESSION_ID}
     ${transaction_id1}=  Acquire Lock On A Given Resource
-    ...  Write  ${TWO_SEG_FLAG_2}  ${234}
+    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
 
     # Release Lock by Session without mentioning transaction_ids.
     Release Locks  release_type=Session
@@ -335,7 +335,8 @@ Locks Persistency Check After BMC Reboot
 
     ${locks_curr}=  Run Keyword  Get Locks List  ${SESSION_ID}
     Should Be Equal  ${locks_prev}  ${locks_curr}
-    Release Locks  ${transaction_id}
+    ${transaction_ids}=  Create List  ${transaction_id}
+    Release Locks  ${transaction_ids}
 
 
 Return Data Dictionary For Single Request
@@ -583,8 +584,8 @@ Acquire And Release Lock
     Verify Lock Record  ${lock_found}  &{inputs}
 
     Return From Keyword If  '${exp_status_code}' != '${HTTP_OK}' or ${err_msgs} == ['NA']
-
-    Release Locks  ${transaction_id}
+    ${transaction_ids}=  Create List  ${transaction_id}
+    Release Locks  ${transaction_ids}
     Verify Lock Record  ${False}  &{inputs}
 
     # Delete the session.
