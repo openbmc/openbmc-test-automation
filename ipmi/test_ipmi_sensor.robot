@@ -352,17 +352,10 @@ Enable Present Bit Via IPMI and Verify Using Redfish
     ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
 
     #  Example of CPU state via Redfish
-    #"@odata.id": "/redfish/v1/Systems/system/Processors/cpu0",
-    #"@odata.type": "#Processor.v1_7_0.Processor",
-    #"Id": "cpu0",
-    #"InstructionSet": "PowerISA",
-    #"Manufacturer": "IBM",
-    #"Model": "",
+
     #"Name": "Processor",
-    #"PartNumber": "02CY211",
     #"ProcessorArchitecture": "Power",
     #"ProcessorType": "CPU",
-    #"SerialNumber": "YA1934302447",
     #"Status": {
     #    "Health": "OK",
     #    "State": "Enabled"
@@ -384,13 +377,7 @@ Disable Present Bit Via IPMI and Verify Using Redfish
     ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
 
     #  Example of CPU state via Redfish
-    #"@odata.context": "/redfish/v1/$metadata#Processor.Processor",
-    #"@odata.id": "/redfish/v1/Systems/system/Processors/cpu0",
-    #"@odata.type": "#Processor.v1_3_1.Processor",
-    #"Id": "cpu0",
-    #"InstructionSet": "PowerISA",
-    #"Manufacturer": "IBM",
-    #"Model": "",
+
     #"Name": "Processor",
     #"ProcessorArchitecture": "Power",
     #"ProcessorType": "CPU",
