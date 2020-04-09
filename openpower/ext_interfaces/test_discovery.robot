@@ -53,7 +53,6 @@ Discover BMC With Service Type
     # Description of argument(s):
     # service_type    BMC service type e.g.
     #                 (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
-
     # bmc_list:
     # [1]:
     #    [service]:          _obmc_XXXX._tcp
