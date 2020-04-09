@@ -6,6 +6,9 @@ Library              SSHLibrary
 Library              ../../lib/external_intf/management_console_utils.py
 Library              ../../lib/gen_robot_print.py
 Library              ../../lib/gen_print.py
+Library              ../../lib/gen_misc.py
+Resource             ../../lib/external_intf/management_console_utils.robot
+Resource             ../../lib/boot_utils.robot
 Resource             ../../syslib/utils_os.robot
 
 Suite Setup          Suite Setup Execution
@@ -22,6 +25,28 @@ Discover BMC With Different Service Type
     _obmc_redfish._tcp
 
 
+Disable AvahiDaemon And Discover BMC With REST ServiceType In Next Reboot
+    [Documentation]  Check the input BMC is discoverd and then disable the avahi daemon,
+    ...  in next reboot same input BMC should discoverable with service type rest.
+    [Tags]  Disable_AvahiDaemon_And_Discover_BMC_With_REST_ServiceType_In_Next_Reboot
+    [Template]  Disable Daemon And Discover BMC In Next Reboot
+    [Setup]  Test Setup To Check BMC Existence  service_type=_obmc_rest._tcp
+
+    # Service type
+    _obmc_rest._tcp
+
+
+Disable AvahiDaemon And Discover BMC With Redfish ServiceType In Next Reboot
+    [Documentation]  Check the input BMC is discoverd and then disable the avahi daemon,
+    ...  in next reboot same input BMC should discoverable with service type redfish.
+    [Tags]  Disable_AvahiDaemon_And_Discover_BMC_With_Redfish_ServiceType_In_Next_Reboot
+    [Template]  Disable Daemon And Discover BMC In Next Reboot
+    [Setup]  Test Setup To Check BMC Existence  service_type=_obmc_rest._tcp
+
+    # Service type
+    _obmc_redfish._tcp
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -32,6 +57,17 @@ Suite Setup Execution
     Should Not Be Empty  ${AVAHI_CLIENT_PASSWORD}
     Login To OS  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
     Check Avahi Package
+
+
+Test Setup To Check BMC Existence
+    [Documentation]  Do the suite setup to check for BMC existence.
+    [Arguments]  ${service_type}
+
+    # Description of argument(s):
+    # service_type  BMC service type e.g.
+    #               (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+
+    Verify Existence Of BMC Record From List  ${service_type}
 
 
 Check Avahi Package
@@ -51,8 +87,8 @@ Discover BMC With Service Type
     [Arguments]  ${service_type}
 
     # Description of argument(s):
-    # service_type    BMC service type e.g.
-    #                 (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+    # service_type  BMC service type e.g.
+    #               (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
 
     # bmc_list:
     # [1]:
@@ -73,3 +109,35 @@ Discover BMC With Service Type
     Print Timen  Exception message is ${exc_msg}
     Should Not Be Empty  ${bmc_list}
     Rprint Vars  bmc_list
+    [Return]  ${bmc_list}
+
+
+Verify Existence Of BMC Record From List
+    [Documentation]  Verify the existence of BMC record from list of BMC records.
+    [Arguments]  ${service_type}
+
+    # Description of argument(s):
+    # service_type  BMC service type e.g.
+    #               (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+
+    ${bmc_list}=  Discover BMC With Service Type  ${service_type}
+    ${openbmc_host_name}  ${openbmc_ip}=  Get Host Name IP  host=${OPENBMC_HOST}
+    ${resp}=  Check BMC Record Exists  ${bmc_list}  ${openbmc_ip}
+    Should Be True  'True' == '${resp}'
+
+
+Disable Daemon And Discover BMC In Next Reboot
+    [Documentation]  Discover BMC in Next reboot.
+    [Arguments]  ${service_type}
+
+    # Description of argument(s):
+    # service_type  BMC service type e.g.
+    #               (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+
+    Verify Existence Of BMC Record From List  ${service_type}
+    Set AvahiDaemon Service  command=stop
+    Redfish OBMC Reboot (off)
+    Verify AvahiDaemon Service Status  message=start
+    Login To OS  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
+    Wait Until Keyword Succeeds  2 min  30 sec
+    ...  Verify Existence Of BMC Record From List  ${service_type}
