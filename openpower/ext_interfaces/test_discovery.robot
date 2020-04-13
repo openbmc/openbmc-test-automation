@@ -26,15 +26,25 @@ Discover BMC With Different Service Type
     _obmc_redfish._tcp
 
 
-Disable AvahiDaemon And Discover BMC After Reboot
-    [Documentation]  Check the input BMC is discoverd and then disable the avahi daemon,
-    ...  in next reboot same input BMC should discoverable.
-    [Tags]  Disable_AvahiDaemon_And_Discover_BMC_After_Reboot
-    [Template]  Disable Daemon And Discover BMC After Reboot
+Discover BMC Pre And Post Reboot
+    [Documentation]  Discover BMC before and after reboot.
+    [Tags]  Discover_BMC_Pre_And_Post_Reboot
+    [Template]  Set Daemon And Discover BMC After Reboot
 
     # Service type
     _obmc_rest._tcp
     _obmc_redfish._tcp
+
+
+Disable AvahiDaemon And Discover BMC After Reboot
+    [Documentation]  Check the input BMC is discoverd and then disable the avahi daemon,
+    ...  in next reboot same input BMC should discoverable.
+    [Tags]  Disable_AvahiDaemon_And_Discover_BMC_After_Reboot
+    [Template]  Set Daemon And Discover BMC After Reboot
+
+    # Service type       skip
+    _obmc_rest._tcp      True
+    _obmc_redfish._tcp   True
 
 *** Keywords ***
 
@@ -104,15 +114,19 @@ Verify Existence Of BMC Record From List
     Should Be True  'True' == '${resp}'
 
 
-Disable Daemon And Discover BMC After Reboot
+Set Daemon And Discover BMC After Reboot
     [Documentation]  Discover BMC After reboot.
-    [Arguments]  ${service_type}
+    [Arguments]  ${service_type}  ${skip}=False
 
     # Description of argument(s):
     # service_type  BMC service type e.g.
     #               (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+    # skip          Default value set to False.
+    #               If the value is True, Disable the AvahiDaemon.
+    #               If the value is False, skip the step to disbale the AvahiDaemon.
 
-    Set AvahiDaemon Service  command=stop
+    Verify Existence Of BMC Record From List  ${service_type}
+    Run Keyword If  '${skip}' == 'True'  Set AvahiDaemon Service  command=stop
     Redfish OBMC Reboot (off)
     Verify AvahiDaemon Service Status  message=start
     Login To OS  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
