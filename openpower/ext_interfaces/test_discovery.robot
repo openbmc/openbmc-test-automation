@@ -56,6 +56,15 @@ Discover BMC Pre And Post Firmware Update Of Same Build
     # Service type   Service type
     _obmc_rest._tcp  _obmc_redfish._tcp
 
+
+Discover BMC Pre And Post Firmware Update Of Different Build
+    [Documentation]  Discover BMC when code update occurs for different release.
+    [Tags]  Discover_BMC_Pre_And_Post_Firmware_Update_Of_Different_Build
+    [Template]  Discover BMC Pre And Post Firmware Update
+
+    # Service type   Service type
+    _obmc_rest._tcp  _obmc_redfish._tcp
+
 *** Keywords ***
 
 Suite Setup Execution
