@@ -36,8 +36,8 @@ Redfish Code Update With ApplyTime OnReset
     [Tags]  Redfish_Code_Update_With_ApplyTime_OnReset
     [Template]  Redfish Update Firmware
 
-    # policy
-    OnReset
+    # policy  image type
+    OnReset   BMC image
 
 
 Redfish Code Update With ApplyTime Immediate
@@ -45,8 +45,8 @@ Redfish Code Update With ApplyTime Immediate
     [Tags]  Redfish_Code_Update_With_ApplyTime_Immediate
     [Template]  Redfish Update Firmware
 
-    # policy
-    Immediate
+    # policy   image type
+    Immediate  BMC image
 
 
 Redfish Code Update With Multiple Firmware
@@ -67,24 +67,6 @@ Suite Setup Execution
     Redfish.Login
     Delete All BMC Dump
     Redfish Purge Event Log
-
-
-Redfish Update Firmware
-    [Documentation]  Update the BMC firmware via redfish interface.
-    [Arguments]  ${apply_time}
-
-    # Description of argument(s):
-    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
-
-    ${post_code_update_actions}=  Get Post Boot Action
-    ${state}=  Get Pre Reboot State
-    Rprint Vars  state
-    Set ApplyTime  policy=${apply_Time}
-    Redfish Upload Image And Check Progress State
-    Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
-    Redfish.Login
-    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
-    Verify Get ApplyTime  ${apply_time}
 
 
 Redfish Multiple Upload Image And Check Progress State
