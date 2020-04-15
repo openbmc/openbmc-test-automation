@@ -36,8 +36,8 @@ Redfish Code Update With ApplyTime OnReset
     [Tags]  Redfish_Code_Update_With_ApplyTime_OnReset
     [Template]  Redfish Update Firmware
 
-    # policy
-    OnReset
+    # policy  image type
+    OnReset   Host image
 
 
 Redfish Code Update With ApplyTime Immediate
@@ -45,8 +45,8 @@ Redfish Code Update With ApplyTime Immediate
     [Tags]  Redfish_Code_Update_With_ApplyTime_Immediate
     [Template]  Redfish Update Firmware
 
-    # policy
-    Immediate
+    # policy   image type
+    Immediate  Host image
 
 
 BMC Reboot When PNOR Update Goes On
@@ -69,23 +69,6 @@ Suite Setup Execution
     Delete All BMC Dump
     Redfish Purge Event Log
     Redfish Power On  stack_mode=skip
-
-
-Redfish Update Firmware
-    [Documentation]  Update the BMC firmware via redfish interface.
-    [Arguments]  ${apply_time}
-
-    # Description of argument(s):
-    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
-
-    Redfish.Login
-    ${post_code_update_actions}=  Get Post Boot Action
-    Set ApplyTime  policy=${apply_Time}
-    Redfish Upload Image And Check Progress State
-    Run Key  ${post_code_update_actions['Host image']['${apply_time}']}
-    Redfish.Login
-    Redfish Verify Host Version  ${IMAGE_FILE_PATH}
-    Verify Get ApplyTime  ${apply_time}
 
 
 Redfish Firmware Update And Do BMC Reboot

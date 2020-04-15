@@ -126,6 +126,26 @@ Redfish Upload Image And Check Progress State
     ...    match_state='Enabled'  image_id=${image_id}
 
 
+Redfish Update Firmware
+    [Documentation]  Update the BMC/Host firmware via redfish interface.
+    [Arguments]  ${apply_time}  ${image_type}
+
+    # Description of argument(s):
+    # policy      ApplyTime allowed values (e.g. "OnReset", "Immediate").
+    # image_type  BMC image or Host image
+
+    ${post_code_update_actions}=  Get Post Boot Action
+    ${state}=  Get Pre Reboot State
+    Rprint Vars  state
+    Set ApplyTime  policy=${apply_Time}
+    Redfish Upload Image And Check Progress State
+    Run Key  ${post_code_update_actions['${image_type}']['${apply_time}']}
+    Redfish.Login
+    Run Keyword If  '${image_type}' == 'BMC image'  Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+    ...  ELSE  Redfish Verify Host Version  ${IMAGE_FILE_PATH}
+    Verify Get ApplyTime  ${apply_time}
+
+
 Get Host Power State
     [Documentation]  Get host power state.
     [Arguments]  ${quiet}=0
