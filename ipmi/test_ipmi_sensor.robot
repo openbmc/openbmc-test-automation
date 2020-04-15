@@ -12,7 +12,7 @@ Test Teardown     Run Keywords  FFDC On Test Case Fail  AND
 
 
 *** Variables ***
-${allowed_temp_diff}    ${1}
+${allowed_temp_diff}    ${2}
 ${allowed_power_diff}   ${10}
 
 
