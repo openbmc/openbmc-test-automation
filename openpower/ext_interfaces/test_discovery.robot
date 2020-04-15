@@ -9,10 +9,12 @@ Library              ../../lib/gen_robot_print.py
 Library              ../../lib/gen_print.py
 Library              ../../lib/gen_misc.py
 Resource             ../../lib/external_intf/management_console_utils.robot
+Resource             ../../lib/redfish_code_update_utils.robot
 Resource             ../../lib/boot_utils.robot
 Resource             ../../syslib/utils_os.robot
 
 Suite Setup          Suite Setup Execution
+Test Teardown        FFDC On Test Case Fail
 
 *** Test Cases ***
 
@@ -45,6 +47,15 @@ Disable AvahiDaemon And Discover BMC After Reboot
     # Service type       skip
     _obmc_rest._tcp      True
     _obmc_redfish._tcp   True
+
+
+Discover BMC Pre And Post Firmware Update Of Same Build
+    [Documentation]  Discover BMC, when code update occurs for same build.
+    [Tags]  Discover_BMC_Pre_And_Post_Firmware_Update_Of_Same_Build
+    [Template]  Discover BMC Pre And Post Firmware Update
+
+    # Service type   Service type
+    _obmc_rest._tcp  _obmc_redfish._tcp
 
 *** Keywords ***
 
@@ -132,3 +143,20 @@ Set Daemon And Discover BMC After Reboot
     Login To OS  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
     Wait Until Keyword Succeeds  2 min  30 sec
     ...  Verify Existence Of BMC Record From List  ${service_type}
+
+
+Discover BMC Pre And Post Firmware Update
+    [Documentation]  Discover BMC, After code update.
+    [Arguments]  ${service_type1}  ${service_type2}
+
+    # Description of argument(s):
+    # service_type     BMC service type e.g.
+    #                  (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+
+    Valid File Path  IMAGE_FILE_PATH
+    Verify Existence Of BMC Record From List  ${service_type1}
+    Verify Existence Of BMC Record From List  ${service_type2}
+    Redfish.Login
+    Redfish Update Firmware  apply_time=Immediate   image_type=BMC image
+    Verify Existence Of BMC Record From List  ${service_type1}
+    Verify Existence Of BMC Record From List  ${service_type2}
