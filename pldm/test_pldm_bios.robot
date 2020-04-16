@@ -95,7 +95,6 @@ Verify GetBIOSTable For AttributeTable
     # [     minimumstringlength]:                      1
     # [     maximumstringlength]:                      100
     # [     defaultstringlength]:                      15
-    # [     defaultstring]:                            witherspoon-128
 
     ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeTable
     Rprint Vars  pldm_output
@@ -112,7 +111,6 @@ Verify GetBIOSTable For AttributeValueTable
     # [attributehandle]:                              0
     # [     attributetype]:                           BIOSStringReadOnly
     # [     currentstringlength]:                     15
-    # [     currentstring]:                           witherspoon-128
 
     ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeValueTable
     Log To Console  ${pldm_output}
