@@ -107,4 +107,5 @@ Verify SetStateEffecterStates For Effecter States
 Pldmtool Platform Suite Cleanup
     [Documentation]    Reset BMC at suite cleanup.
 
+    Redfish Hard Power Off
     Redfish OBMC Reboot (off)
