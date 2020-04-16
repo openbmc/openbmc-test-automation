@@ -112,7 +112,7 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
 
         # Check if parameter pldm_attributetable/pldm_attributevaluetable present for
         # pldmtool GetBIOSTable --type AttributeTable/AttributeValueTable.
-        # Note: Ouput for AttributeTable/AttributeValueTable is huge and verification of
+        # Note: Output for AttributeTable/AttributeValueTable is huge and verification of
         #       table content is not available.
         elif 'pldm_attributetable' in result:
             result['pldm_attributetable'] = True

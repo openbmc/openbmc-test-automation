@@ -20,7 +20,7 @@ Set AvahiDaemon Service
     [Arguments]  ${command}
 
     # Description of argument(s):
-    # command  Get command from dictionay.
+    # command  Get command from dictionary.
 
     ${service_command}=  Get From Dictionary  ${daemon_command}  ${command}
     ${resp}  ${stderr}  ${rc}=  BMC Execute Command  ${service_command}  print_out=1
@@ -32,7 +32,7 @@ Verify AvahiDaemon Service Status
     [Arguments]  ${message}
 
     # Description of argument(s):
-    # message  Get status message from dictionay.
+    # message  Get status message from dictionary.
 
     ${service_command}=  Get From Dictionary  ${daemon_command}  status
     ${service_message}=  Get From Dictionary  ${daemon_message}  ${message}
