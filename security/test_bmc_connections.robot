@@ -18,7 +18,7 @@ ${hostname}    test_hostname
 
 Test Patch Without Auth Token Fails
     [Documentation]  Send patch method without auth token and verify it throws an error.
-    [Tags]   Test Patch Without Auth Token Fails
+    [Tags]  Test_Patch_Without_Auth_Token_Fails
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
@@ -42,7 +42,8 @@ Flood Patch Without Auth Token And Check Stability Of BMC
     ${verify_count}=  Evaluate  ${iterations}/100
     ${fail_count}=  Get Length  ${status_list}
 
-    Should Be Equal  ${fail_count}  0  msg=Patch operation failed ${fail_count} times in ${verify_count} attempts
+    Should Be Equal  ${fail_count}  0
+    ...  msg=Patch operation failed ${fail_count} times in ${verify_count} attempts
 
 
 *** Keywords ***

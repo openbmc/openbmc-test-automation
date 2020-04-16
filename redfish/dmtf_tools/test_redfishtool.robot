@@ -24,7 +24,8 @@ Suite Setup             Suite Setup Execution
 
 *** Variables ***
 
-${root_cmd_args}        redfishtool raw -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME} -p ${OPENBMC_PASSWORD} -S Always
+${root_cmd_args}        redfishtool raw -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
+...                     -p ${OPENBMC_PASSWORD} -S Always
 ${HTTTP_ERROR}          Error
 ${min_number_sensors}   ${15}
 
