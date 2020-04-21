@@ -115,9 +115,10 @@ Configure Hostname And Verify
 Add Valid IPv4 Address And Verify
     [Documentation]  Add IPv4 Address via Redfish and verify.
     [Tags]  Add_Valid_IPv4_Addres_And_Verify
-
+    [Teardown]   Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
+    
      Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
-     Delete IP Address  ${test_ipv4_addr}
 
 Add Invalid IPv4 Address And Verify
     [Documentation]  Add Invalid IPv4 Address via Redfish and verify.
@@ -164,6 +165,8 @@ Configure Loopback IP
 Add Valid IPv4 Address And Check Persistency
     [Documentation]  Add IPv4 address and check peristency.
     [Tags]  Add_Valid_IPv4_Addres_And_Check_Persistency
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
 
@@ -171,63 +174,70 @@ Add Valid IPv4 Address And Check Persistency
     OBMC Reboot (off)
     Redfish.Login
     Verify IP On BMC  ${test_ipv4_addr}
-    Delete IP Address  ${test_ipv4_addr}
 
 Add Fourth Octet Threshold IP And Verify
     [Documentation]  Add fourth octet threshold IP and verify.
     [Tags]  Add_Fourth_Octet_Threshold_IP_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  10.7.7.254  AND  Test Teardown Execution
 
      Add IP Address  10.7.7.254  ${test_subnet_mask}  ${test_gateway}
-     Delete IP Address  10.7.7.254
 
 Add Fourth Octet Lowest IP And Verify
     [Documentation]  Add fourth octet lowest IP and verify.
     [Tags]  Add_Fourth_Octet_Lowest_IP_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  10.7.7.1  AND  Test Teardown Execution
 
      Add IP Address  10.7.7.1  ${test_subnet_mask}  ${test_gateway}
-     Delete IP Address  10.7.7.1
 
 Add Third Octet Threshold IP And Verify
     [Documentation]  Add third octet threshold IP and verify.
     [Tags]  Add_Third_Octet_Threshold_IP_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  10.7.255.7  AND  Test Teardown Execution
 
      Add IP Address  10.7.255.7  ${test_subnet_mask}  ${test_gateway}
-     Delete IP Address  10.7.255.7
 
 Add Third Octet Lowest IP And Verify
     [Documentation]  Add third octet lowest IP and verify.
     [Tags]  Add_Third_Octet_Lowest_IP_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  10.7.0.7  AND  Test Teardown Execution
 
      Add IP Address  10.7.0.7  ${test_subnet_mask}  ${test_gateway}
-     Delete IP Address  10.7.0.7
 
 Add Second Octet Threshold IP And Verify
     [Documentation]  Add second octet threshold IP and verify.
     [Tags]  Add_Second_Octet_Threshold_IP_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  10.255.7.7  AND  Test Teardown Execution
 
      Add IP Address  10.255.7.7  ${test_subnet_mask}  ${test_gateway}
-     Delete IP Address  10.255.7.7
 
 Add Second Octet Lowest IP And Verify
     [Documentation]  Add second octet lowest IP and verify.
     [Tags]  Add_Second_Octet_Lowest_IP_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  10.0.7.7  AND  Test Teardown Execution
 
      Add IP Address  10.0.7.7  ${test_subnet_mask}  ${test_gateway}
-     Delete IP Address  10.0.7.7
 
 Add First Octet Threshold IP And Verify
     [Documentation]  Add first octet threshold IP and verify.
     [Tags]  Add_First_Octet_Threshold_IP_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  233.7.7.7  AND  Test Teardown Execution
 
      Add IP Address  223.7.7.7  ${test_subnet_mask}  ${test_gateway}
-     Delete IP Address  223.7.7.7
 
 Add First Octet Lowest IP And Verify
     [Documentation]  Add first octet lowest IP and verify.
     [Tags]  Add_First_Octet_Lowest_IP_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  1.7.7.7  AND  Test Teardown Execution
 
      Add IP Address  1.7.7.7  ${test_subnet_mask}  ${test_gateway}
-     Delete IP Address  1.7.7.7
 
 Configure Invalid Netmask
     [Documentation]  Verify error while setting invalid netmask.
@@ -272,16 +282,18 @@ Configure Less Byte Netmask
 Configure Threshold Netmask And Verify
     [Documentation]  Configure threshold netmask and verify.
     [Tags]  Configure_Threshold_Netmask_And_verify
+    [Teardown]  Run Keywords
+    ...   Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
      Add IP Address  ${test_ipv4_addr}  ${threshold_netmask}  ${test_gateway}
-     Delete IP Address  ${test_ipv4_addr}
 
 Configure Lowest Netmask And Verify
     [Documentation]  Configure lowest netmask and verify.
     [Tags]  Configure_Lowest_Netmask_And_verify
+    [Teardown]  Run Keywords
+    ...   Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
      Add IP Address  ${test_ipv4_addr}  ${lowest_netmask}  ${test_gateway}
-     Delete IP Address  ${test_ipv4_addr}
 
 Configure Network ID
     [Documentation]  Verify error while configuring network ID.
@@ -456,6 +468,7 @@ Configure String Value For DNS Server
     ...  Configure Static Name Servers  AND  Test Teardown Execution
 
     Configure Static Name Servers  ${string_value}  ${HTTP_BAD_REQUEST}
+
 
 *** Keywords ***
 
