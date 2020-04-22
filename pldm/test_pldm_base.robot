@@ -18,7 +18,6 @@ Verify Get PLDM Types
     ${pldm_output}=  Pldmtool  base GetPLDMTypes
     Valid List  pldm_output['supported_types']['text']  required_values=${PLDM_SUPPORTED_TYPES}
 
-
 Verify Get PLDM Version For Base
     [Documentation]  Verify supported PLDM version for base type.
     [Tags]  Verify_Get_PLDM_Version_For_Base
@@ -54,6 +53,16 @@ Verify Get PLDM Version For FRU
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Valid Value  pldm_output['type_4(fru)']  ['${VERSION_FRU['STRING']}']
 
+
+Verify Get PLDM Version For OEM
+    [Documentation]  Verify supported PLDM version for oem-ibm type.
+    [Tags]  Verify_Get_PLDM_Version_For_OEM
+
+    ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'oem-ibm'
+    ${pldm_output}=  Pldmtool  ${pldm_cmd}
+    Valid Value  pldm_output['type_63(oem-ibm)']  ['${VERSION_OEM['STRING']}']
+
+
 Verify GetTID
     [Documentation]  Verify GetTID (Terminus ID) response message.
     [Tags]  Verify_GetTID
@@ -77,6 +86,7 @@ Verify GetPLDMCommands
     '2'            ${PLDM_PLATFORM_CMDS}
     '3'            ${PLDM_BIOS_CMDS}
     '4'            ${PLDM_FRU_CMDS}
+    '63'           ${PLDM_OEM_CMDS}
 
 *** keywords ***
 
@@ -85,8 +95,9 @@ Verify GetPLDMCommands For PLDM Type
     [Arguments]  ${pldm_type}  ${expected_pldm_cmds}
 
     # Description of argument(s):
-    # pldm_type             pldm type (e.g. '0', '2', '3', '4').
-    #                      '0' -> base, '2' -> platform, '3' -> 'bios', '4' -> 'fru'.
+    # pldm_type             pldm type (e.g. '0', '2', '3', '4', '63').
+    #                      '0' -> base, '2' -> platform, '3' -> 'bios', '4' -> 'fru'
+    #                      '63' -> oem-ibm.
     # expected_pldm_cmds    expected pldm commands for given pldm type.
 
     # Example output:
