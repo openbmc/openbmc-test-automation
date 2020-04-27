@@ -4,6 +4,7 @@ Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
 Library                 ../lib/gen_misc.py
 Library                 ../lib/utils.py
+Library                 ../lib/bmc_network_utils.py
 
 *** Variables ***
 # MAC input from user.
@@ -352,8 +353,8 @@ Get Network Configuration
     #    "VLANEnable": false,
     #    "VLANId": 0
     #  }
-
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}
+    ${active_channel_config}=  Get Active Channel Config
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
     [Return]  @{network_configurations}
 
