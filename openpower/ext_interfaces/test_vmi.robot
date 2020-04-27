@@ -2,274 +2,179 @@
 
 Documentation    VMI static/dynamic IP config and certificate exchange tests.
 
+Library          OperatingSystem
+Library          String
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
+Resource          ../../lib/rest_client.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Resource          ../../lib/utils.robot
 
-Suite Setup       Redfish.Login
-Test Teardown     FFDC On Test Case Fail
+
+Suite Setup      Suite Setup Execution
+Test Teardown    FFDC On Test Case Fail
 
 *** Variables ***
 
-&{DHCP_ENABLED}           DHCPEnabled=${${True}}
-&{DHCP_DISABLED}          DHCPEnabled=${${False}}
+@{ADMIN}          admin_user              TestPwd123
+@{OPERATOR}       operator_user           TestPwd123
+&{USERS}          Administrator=${ADMIN}  Operator=${OPERATOR}
 
-&{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
-&{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
+&{DHCP_ENABLED}   DHCPEnabled=${${True}}
+&{DHCP_DISABLED}  DHCPEnabled=${${False}}
+
+&{ENABLE_DHCP}    DHCPv4=&{DHCP_ENABLED}
+&{DISABLE_DHCP}   DHCPv4=&{DHCP_DISABLED}
 
 
 *** Test Cases ***
 
-Verify All VMI EthernetInterfaces
-    [Documentation]  Verify all VMI ethernet interfaces.
-    [Tags]  Verify_All_VMI_EthernetINterfaces
+Get SignCSR Certificate Using Different Users
+    [Documentation]  Get SignCSR certificate using different users.
+    [Tags]  Get_SignCSR_Certificate_Using_Different_Users
+    [Template]  Get Certificate
 
-    Verify VMI EthernetInterfaces
-
-
-Verify Existing VMI Network Interface Details
-    [Documentation]  Verify existing VMI network interface details.
-    [Tags]  Verify_VMI_Network_Interface_Details
-
-    ${vmi_ip}=  Get VMI Network Interface Details
-    ${origin}=  Set Variable If  ${vmi_ip["DHCPv4"]} == ${False}  Static  DHCP
-
-    Should Not Be Equal  ${vmi_ip["DHCPv4"]}  ${vmi_ip["IPv4StaticAddresses"]}
-    Should Be Equal As Strings  ${origin}  ${vmi_ip["IPv4_AddressOrigin"]}
-    Should Be Equal As Strings  ${vmi_ip["Id"]}  intf0
-    Should Be Equal As Strings  ${vmi_ip["Description"]}  Virtual Interface Management Network Interface
-    Should Be Equal As Strings  ${vmi_ip["Name"]}  Virtual Management Ethernet Interface
-    Should Be True  ${vmi_ip["InterfaceEnabled"]}
+    # cert_type  username       password    force_create  valid_csr  valid_status_code
+    SignCSR      admin_user     TestPwd123  ${True}       ${True}    ${HTTP_OK}
+    SignCSR      operator_user  TestPwd123  ${False}      ${True}    ${HTTP_UNAUTHORIZED}
 
 
-Delete Existing Static VMI IP Address
-    [Documentation]  Delete existing static VMI ip address.
-    [Tags]  Delete_Existing_Static_VMI_IP_Address
+Get SignCSR Certificate With Valid And Invalid CSR
+    [Documentation]  Get SignCSR certificate with valid and invalid csr.
+    [Template]  Get Certificate
 
-    ${curr_origin}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
-    Run Keyword If  ${curr_origin} == ${True}  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}
-
-    Delete VMI IPv4 Address  IPv4StaticAddresses  valid_status_code=${HTTP_ACCEPTED}
-    ${default}=  Set Variable  0.0.0.0
-    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}  ${True}
+    # cert_type  username         password             force_create  valid_csr  valid_status_code
+    SignCSR      ${OPENBMC_USER}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_OK}
+    SignCSR      ${OPENBMC_USER}  ${OPENBMC_PASSWORD}  ${True}       ${False}   ${HTTP_BAD_REQUEST}
 
 
-Verify User Cannot Delete ReadOnly Property IPv4Addresses
-    [Documentation]  Verify user cannot delete readonly property IPv4Addresses.
-    [Tags]  Verify_User_Cannot_Delete_ReadOnly_Property_IPv4Addresses
+Get Root Certificate Using Different Users
+    [Documentation]  Get root certificate using different users.
+    [Tags]  Get_Root_Certificate_Using_Different_Users
+    [Template]  Get Certificate
 
-    ${curr_origin}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
-    Run Keyword If  ${curr_origin} == ${False}  Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
-    Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_BAD_REQUEST}
+    # cert_type  username       password    force_create  valid_csr  valid_status_code
+    root         admin_user     TestPwd123  ${True}       ${True}    ${HTTP_OK}
+    root         operator_user  TestPwd123  ${False}      ${True}    ${HTTP_UNAUTHORIZED}
+    
 
+Verify Certificates Do Persist And Valid After Host Reboot
+    [Documentation]  Verify certificates do persist and valid after host reboot.
+    [Tags]  Verify_Certificates_Do_Persist_And_Valid_After_Host_Reboot
+    [Template]  Verify Certificate Remains Same After Host Reboot Also
 
-Assign Static IPv4 Address To VMI
-    [Documentation]  Assign static ipv4 address to VMI.
-    [Tags]  Assign_Static_IPv4_Address_To_VMI
-    [Template]  Verify Assigning Static IPv4 Address To VMI
-
-    # ip          gateway         netmask         del_curr_ip  host_reboot  valid_status_code
-    ${VMI_IP}     ${VMI_GATEWAY}  ${VMI_NETMASK}  ${False}     ${True}      ${HTTP_ACCEPTED}
-    a.3.118.94    ${VMI_GATEWAY}  ${VMI_NETMASK}  ${False}     ${False}     ${HTTP_BAD_REQUEST}
-    10.118.94     10.118.3.Z      ${VMI_NETMASK}  ${False}     ${False}     ${HTTP_BAD_REQUEST}
-
-
-Switch Between Static And Dynamic VMI IPv4
-    [Documentation]  Switch between static and dynamic VMI IPv4.
-    [Tags]  Switch_Between_Static_And_Dynamic_VMI_IPv4
-
-    Switch VMI IPv4 Origin And Verify Details
-    Switch VMI IPv4 Origin And Verify Details
-
-
-Verify Persistency Of VMI IPv4 Details After Host Reboot
-    [Documentation]  Verify persistency of VMI ipv4 details after host reboot.
-    [Tags]  Verify_Persistency_Of_VMI_IPv4_Details_After_Host_Reboot
-
-    # Verifying persistency of dynamic address
-    Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
-    ${default}=  Set Variable  0.0.0.0
-    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}  ${True}
-    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}  ${True}
-
-    # Verifying persistency of static address
-    Switch Between Static And Dynamic VMI IPv4
-    Verify Assigning Static IPv4 Address To VMI  ${VMI_IP}  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${False}
-    Verify VMI Network Interface Details  ${VMI_IP}  Static  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${True}
+    # cert_type  username         password             force_create  valid_csr  valid_status_code
+    SignCSR      ${OPENBMC_USER}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_OK}
+    root         ${OPENBMC_USER}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_OK} 
 
 
 *** Keywords ***
 
-Get VMI Network Interface Details
-    [Documentation]  Get VMI network interface details.
-    [Arguments]  ${valid_status_code}=${HTTP_OK}
+Generate A CSR String
+    [Documentation]  Generate a csr string.
+
+    # Note: Generates and returns csr string.
+    ${ssl_cmd}=  Set Variable  openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr
+    ${ssl_sub}=  Set Variable
+    ...  -subj "/C=US/ST=Texas/L=Austin/O=IBM/OU=Systems/CN=ibm.com/emailAddress=devindia@in.ibm.com"
+    ${output}=  Run  ${ssl_cmd} ${ssl_sub}
+
+    ${csr}=  OperatingSystem.Get File  server.csr
+    @{lines}=  Split to lines  ${csr}
+    ${csr_content}=  Set Variable  ${EMPTY}
+
+    FOR  ${line}  IN  @{lines}
+        ${csr_content}=  Catenate  SEPARATOR=  ${csr_content}  ${line}\\n
+    END
+
+    Remove String  ${csr_content}  END CERTIFICATE REQUEST-----\n
+    ${csr_content}=  Catenate  SEPARATOR=  ${csr_content}  -----END CERTIFICATE REQUEST-----
+
+    [Return]  ${csr_content}
+
+
+Get Certificate
+    [Documentation]  Get certificate.
+    [Arguments]  ${cert_type}=root  ${username}=${OPENBMC_USER}  ${password}=${OPENBMC_PASSWORD}
+    ...  ${force_create}=${False}  ${valid_csr}=${True}  ${valid_status_code}=${HTTP_OK}
 
     # Description of argument(s):
-    # valid_status_code  Expected valid status code from GET request.
+    # cert_type          Type of the certificate requesting. Ex: root/SignCSR
+    # username           Username to create a REST session.
+    # password           Password to create a REST session.
+    # force_create       Create a new REST session if True.
+    # valid_csr          Uses valid CSR string in the REST request if True.
+    #                    This is not applicable for root certificate.
+    # valid_status_code  Expected status code from REST request.
 
-    # Note: It returns a dictionary of VMI intf0 parameters
+    Run Keyword If  '${XAUTH_TOKEN}' != '${EMPTY}' or  ${force_create} == ${True}
+    ...  Initialize OpenBMC  rest_username=${username}  rest_password=${password}
 
-    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0
-    ...  valid_status_codes=[${valid_status_code}]
+    ${data}=  Create Dictionary
+    ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
 
-    ${ip_resp}=  Evaluate  json.loads('''${resp.text}''')  json
+    ${cert_uri}=  Set Variable If  '${cert_type}' == 'root'  /ibm/v1/Host/Actions/SignCSR
+    ...  /ibm/v1/Host/Certificate/root
 
-    ${static_exists}=  Run Keyword And Ignore Error
-    ...  Set Variable  ${ip_resp["IPv4StaticAddresses"][0]["Address"]}
-    ${static_exists}=  Set Variable If  '${static_exists[0]}' == 'PASS'  ${True}  ${False}
+    ${csr}=  Set Variable If  ${valid_csr} == ${True}  ${CSR}  ${CORRUPTED_CSR}
+    Run Keyword If  '${cert_type}' == 'SignCSR'  Set To Dictionary  ${data}  Certificate  ${csr}
 
-    ${vmi_ip}=  Create Dictionary  DHCPv4=${${ip_resp["DHCPv4"]["DHCPEnabled"]}}  Id=${ip_resp["Id"]}
-    ...  Description=${ip_resp["Description"]}  IPv4_Address=${ip_resp["IPv4Addresses"][0]["Address"]}
-    ...  IPv4_AddressOrigin=${ip_resp["IPv4Addresses"][0]["AddressOrigin"]}  Name=${ip_resp["Name"]}
-    ...  IPv4_Gateway=${ip_resp["IPv4Addresses"][0]["Gateway"]}  InterfaceEnabled=${${ip_resp["InterfaceEnabled"]}}
-    ...  IPv4_SubnetMask=${ip_resp["IPv4Addresses"][0]["SubnetMask"]}  MACAddress=${ip_resp["MACAddress"]}
-    ...  IPv4StaticAddresses=${${static_exists}}
+    ${resp}=  Post Request  openbmc  ${cert_uri}  &{data}
+    Should Be Equal As Strings  ${resp.status_code}  ${valid_status_code}
 
-    [Return]  &{vmi_ip}
+    Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
+    ${cert}=  Evaluate  json.loads('''${resp.text}''')  json
 
+    Should Contain  ${cert["Certificate"]}  BEGIN CERTIFICATE
+    Should Contain  ${cert["Certificate"]}  END CERTIFICATE
 
-Get Immediate Child Parameter From VMI Network Interface
-    [Documentation]  Get immediate child parameter from vmi network interface.
-    [Arguments]  ${parameter}  ${valid_status_code}=${HTTP_OK}
-
-    # Description of argument(s):
-    # parameter          parameter for which value is required. Ex: DHCPEnabled, MACAddress etc.
-    # valid_status_code  Expected valid status code from GET request.
-
-    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0
-    ...  valid_status_codes=[${valid_status_code}]
-
-    ${ip_resp}=  Evaluate  json.loads('''${resp.text}''')  json
-    ${value}=  Set Variable If  '${parameter}' != 'DHCPEnabled'   ${ip_resp["${parameter}"]}
-    ...  ${ip_resp["DHCPv4"]["${parameter}"]}
-
-    [Return]  ${value}
+    [Return]  ${cert["Certificate"]}
 
 
-Verify VMI EthernetInterfaces
-    [Documentation]  Verify VMI ethernet interfaces.
-    [Arguments]  ${valid_status_code}=${HTTP_OK}
+Verify Certificate Remains Same After Host Reboot Also
+    [Documentation]  Verify certificate remains same after system reboot also.
+    [Arguments]  ${cert_type}=root  ${username}=${OPENBMC_USER}  ${password}=${OPENBMC_PASSWORD}
+    ...  ${force_create}=${False}  ${valid_csr}=${True}  ${valid_status_code}=${HTTP_OK}
 
     # Description of argument(s):
-    # valid_status_code  Expected valid status code from GET request.
+    # cert_type          Type of the certificate requesting. Ex: root/SignCSR
+    # username           Username to create a REST session.
+    # password           Password to create a REST session.
+    # force_create       Create a new REST session if True.
+    # valid_csr          Uses valid CSR string in the REST request if True.
+    #                    This is not applicable for root certificate.
+    # valid_status_code  Expected status code from REST request.
 
-    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces
-    ...  valid_status_codes=[${valid_status_code}]
+    ${cert_before}=  Get Certificate  ${cert_type}  ${username}  ${password}  ${force_create}  ${valid_csr}
+    ...  ${valid_status_code}
 
-    ${resp}=  Evaluate  json.loads('''${resp.text}''')  json
-    ${interfaces}=  Set Variable  ${resp["Members"]}
+    Run Keywords  Redfish Power Off  AND  Redfish Power On  AND  Redfish.Login
+    
+    ${cert_after}=  Get Certificate  ${cert_type}  ${username}  ${password}  ${False}  ${valid_csr}
+    ...  ${valid_status_code}
 
-    Should Be Equal As Strings  ${interfaces[0]}[@odata.id]
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0
-    Should Be Equal As Strings  ${interfaces[1]}[@odata.id]
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf1
-
-    Should Be Equal  ${resp["Members@odata.count"]}  ${2}
-
-
-Verify VMI Network Interface Details
-    [Documentation]  Verify VMI network interface details.
-    [Arguments]  ${ip}  ${origin}  ${gateway}  ${netmask}
-    ...  ${host_reboot}=${False}  ${valid_status_code}=${HTTP_OK}
-
-    # Description of argument(s):
-    # ip                 VMI ipv4 address.
-    # origin             Origin of ipv4 address i,e Static or DHCP.
-    # gateway            Gateway for VMI ip.
-    # netmask            Subnetmask for VMI ip.
-    # valid_status_code  Expected valid status code from GET request. Default is HTTP_OK.
-    # host_reboot        Reboot HOST if True.
-
-    Run Keyword If  ${host_reboot} == ${True}  Run Keywords
-    ...  Redfish Power Off  AND  Redfish Power On  AND  Redfish.Login
-
-    ${vmi_ip}=  Get VMI Network Interface Details  ${valid_status_code}
-    Should Be Equal As Strings  ${origin}  ${vmi_ip["IPv4_AddressOrigin"]}
-    Should Be Equal As Strings  ${gateway}  ${vmi_ip["IPv4_Gateway"]}
-    Should Be Equal As Strings  ${netmask}  ${vmi_ip["IPv4_SubnetMask"]}
-
-    Return From Keyword If  '${origin}' == 'DHCP'
-    Should Be Equal As Strings  ${ip}  ${vmi_ip["IPv4_Address"]}
+   Should Be Equal As Strings  ${cert_before}  ${cert_after}
 
 
-Set Static IPv4 Address To VMI
-    [Documentation]  Set static ipv4 address to VMI.
-    [Arguments]  ${ip}  ${gateway}  ${netmask}  ${valid_status_code}=${HTTP_ACCEPTED}
+Suite Setup Execution
+    [Documentation]  Suite setup execution.
 
-    # Description of argument(s):
-    # ip                 VMI ipv4 address.
-    # gateway            Gateway for VMI ip.
-    # netmask            Subnetmask for VMI ip.
-    # valid_status_code  Expected valid status code from GET request. Default is HTTP_ACCEPTED
+    # Create different user accounts.
+    Redfish.Login
+    Create Users With Different Roles  users=${USERS}  force=${True}
 
-    ${data}=  Set Variable
-    ...  {"IPv4StaticAddresses": [{"Address": "${ip}","SubnetMask": "${netmask}","Gateway": "${gateway}"}]}
+    # Get REST and Redfish session to BMC.
+    Initialize OpenBMC
 
-    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0  body=${data}
-    ...  valid_status_codes=[${valid_status_code}]
-    Redfish Power On  stack_mode=skip
-    Log To Console  ${resp.text}
+    ${csr}=  Generate A CSR String
+    ${corrupted_csr}=  Convert To Lowercase  ${csr}
+
+    Set Suite Variable  ${CSR}  ${csr}
+    Set Suite Variable  ${CORRUPTED_CSR}  ${corrupted_csr}
 
 
-Verify Assigning Static IPv4 Address To VMI
-    [Documentation]    Verify assigning static ipv4 address to vmi.
-    [Arguments]  ${ip}  ${gateway}  ${netmask}  ${del_curr_ip}=${True}  ${host_reboot}=${True}
-    ...  ${valid_status_code}=${HTTP_ACCEPTED}
+Suite Teardown Execution
+    [Documentation]  Suite teardown execution.
 
-    # Description of argument(s):
-    # ip                 VMI ipv4 address.
-    # gateway            Gateway for VMI ip.
-    # netmask            Subnetmask for VMI ip.
-    # del_curr_ip        Delete current VMI static ip if True
-    # host_reboot        True when HOST reboot is required
-    # valid_status_code  Expected valid status code from GET request. Default is HTTP_ACCEPTED
+    Delete BMC Users Via Redfish  users=${USERS}
 
-    # Delete current static ip based on user input
-    ${curr_origin}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
-    Run Keyword If  ${curr_origin} == ${False} and ${del_curr_ip} == ${True}  Delete VMI IPv4 Address
-
-    Set Static IPv4 Address To VMI  ${ip}  ${gateway}  ${netmask}  valid_status_code=${valid_status_code}
-    Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
-
-    Verify VMI Network Interface Details  ${ip}  Static  ${gateway}  ${netmask}  host_reboot=${host_reboot}
-
-
-Delete VMI IPv4 Address
-    [Documentation]  Delete VMI ipv4 address.
-    [Arguments]  ${delete_param}=IPv4StaticAddresses  ${valid_status_code}=${HTTP_ACCEPTED}
-
-    # Description of argument(s):
-    # delete_param       Parameter to be deleted i,e IPv4StaticAddresses
-    #                    OR IPv4Addresses. Default is IPv4StaticAddresses.
-    # valid_status_code  Expected valid status code from PATCH request. Default is HTTP_OK.
-
-    ${data}=  Set Variable  {"${delete_param}": [${Null}]}
-    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0  body=${data}
-    ...  valid_status_codes=[${valid_status_code}]
-
-
-Set VMI IPv4 Origin
-    [Documentation]  Set VMI ipv4 origin.
-    [Arguments]  ${dhcp_enabled}=${False}  ${valid_status_code}=${HTTP_ACCEPTED}
-
-    # Description of argument(s):
-    # dhcp_enabled       True if user wants to enable DHCP. Default is Static, hence value is set to False.
-    # valid_status_code  Expected valid status code from PATCH request. Default is HTTP_OK.
-
-    ${data}=  Set Variable If  ${dhcp_enabled} == ${False}  ${DISABLE_DHCP}  ${ENABLE_DHCP}
-    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0  body=${data}
-    ...  valid_status_codes=[${valid_status_code}]
-
-
-Switch VMI IPv4 Origin And Verify Details
-    [Documentation]  Switch vmi ipv4 origin and verify details.
-
-    ${curr_mode}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
-    ${dhcp_enabled}=  Set Variable If  ${curr_mode} == ${False}  ${True}  ${False}
-
-    ${default}=  Set Variable  0.0.0.0
-    ${origin}=  Set Variable If  ${curr_mode} == ${False}  DHCP  Static
-    Set VMI IPv4 Origin  ${dhcp_enabled}  ${HTTP_ACCEPTED}
-    Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}  ${False}
-
-    [Return]  ${origin}
