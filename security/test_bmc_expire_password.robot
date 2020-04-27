@@ -25,6 +25,7 @@ Expire Root Password And Check IPMI Access Fails
     ${status}=  Run Keyword And Return Status   Run External IPMI Standard Command  lan print -v
     Should Be Equal  ${status}  ${False}
 
+
 Expire And Change Root User Password And Access Via SSH
     [Documentation]   Expire and change root user password and access via SSH.
     [Tags]  Expire_Root_User_Password_And_Access_Via_SSH
@@ -59,6 +60,28 @@ Expire Root Password And Update Bad Password Length Via Redfish
    ...  body={'Password': '0penBmc0penBmc0penBmc'}
    Should Be Equal  ${status}  ${False}
 
+Expire And Change Root User Password Via Redfish And Verify
+   [Documentation]   Expire and change root user password via Redfish and verify.
+   [Tags]  Expire_And_Change_Root_User_Password_Via_Redfish_And_Verify
+   [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+   ...  Wait Until Keyword Succeeds  1 min  10 sec
+   ...  Restore Default Password For Root User
+
+   # User input password should be minimum 8 characters long.
+   Valid Length  OPENBMC_PASSWORD  min_length=8
+
+   Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+   ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
+   Should Contain  ${output}  password expiry information changed
+   Redfish.Login
+   # Change to a valid password.
+   Redfish.Patch  /redfish/v1/AccountService/Accounts/${OPENBMC_USERNAME}  body={'Password': '0penBmc123'}
+   Redfish.Logout
+   # Verify login with the new password.
+   Redfish.Login  ${OPENBMC_USERNAME}  0penBmc123
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -75,4 +98,5 @@ Restore Default Password For Root User
     ...   body={'Password': '${OPENBMC_PASSWORD}'}  valid_status_codes=[${HTTP_OK}]
     # Verify that root user is able to run Redfish command using default password.
     Redfish.login
+
 
