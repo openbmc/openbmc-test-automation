@@ -285,6 +285,19 @@ Verify Minimum Password Length For Redfish User
     Redfish.Login
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
 
+Change Host Password Via Redfish And Verify
+   [Documentation]   Change Host password via Redfish and verify.
+   [Tags]  Change_Host_Password_Via_Redfish_And_Verify
+
+   # Change to a valid password.
+   Redfish.Patch  /redfish/v1/AccountService/Accounts/${OPENBMC_USERNAME}  body={'Password': '0penBmc123'}
+
+   # Verify login.
+   Redfish.Logout
+   Redfish.Login  ${OPENBMC_USERNAME}  0penBmc123
+
+   Redfish.Patch  /redfish/v1/AccountService/Accounts/${OPENBMC_USERNAME}  body={'Password': '${OPENBMC_PASSWORD}'}
+
 
 *** Keywords ***
 
