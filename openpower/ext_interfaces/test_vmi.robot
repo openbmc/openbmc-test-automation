@@ -1,0 +1,180 @@
+*** Settings ***
+
+Documentation    VMI static/dynamic IP config and certificate exchange tests.
+
+Library          OperatingSystem
+Library          String
+Resource         ../../lib/resource.robot
+Resource         ../../lib/bmc_redfish_resource.robot
+Resource          ../../lib/rest_client.robot
+Resource         ../../lib/openbmc_ffdc.robot
+Resource          ../../lib/utils.robot
+
+
+Suite Setup      Suite Setup Execution
+Test Teardown    FFDC On Test Case Fail
+
+*** Variables ***
+
+@{ADMIN}          admin_user              TestPwd123
+@{OPERATOR}       operator_user           TestPwd123
+&{USERS}          Administrator=${ADMIN}  Operator=${OPERATOR}
+
+&{DHCP_ENABLED}   DHCPEnabled=${${True}}
+&{DHCP_DISABLED}  DHCPEnabled=${${False}}
+
+&{ENABLE_DHCP}    DHCPv4=&{DHCP_ENABLED}
+&{DISABLE_DHCP}   DHCPv4=&{DHCP_DISABLED}
+
+
+*** Test Cases ***
+
+Get SignCSR Certificate Using Different Users
+    [Documentation]  Get SignCSR certificate using different users.
+    [Tags]  Get_SignCSR_Certificate_Using_Different_Users
+    [Template]  Get Certificate
+
+    # cert_type  username       password    force_create  valid_csr  valid_status_code
+    SignCSR      admin_user     TestPwd123  ${True}       ${True}    ${HTTP_OK}
+    SignCSR      operator_user  TestPwd123  ${False}      ${True}    ${HTTP_UNAUTHORIZED}
+
+
+Get SignCSR Certificate With Valid And Invalid CSR
+    [Documentation]  Get SignCSR certificate with valid and invalid csr.
+    [Template]  Get Certificate
+
+    # cert_type  username         password             force_create  valid_csr  valid_status_code
+    SignCSR      ${OPENBMC_USER}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_OK}
+    SignCSR      ${OPENBMC_USER}  ${OPENBMC_PASSWORD}  ${True}       ${False}   ${HTTP_BAD_REQUEST}
+
+
+Get Root Certificate Using Different Users
+    [Documentation]  Get root certificate using different users.
+    [Tags]  Get_Root_Certificate_Using_Different_Users
+    [Template]  Get Certificate
+
+    # cert_type  username       password    force_create  valid_csr  valid_status_code
+    root         admin_user     TestPwd123  ${True}       ${True}    ${HTTP_OK}
+    root         operator_user  TestPwd123  ${False}      ${True}    ${HTTP_UNAUTHORIZED}
+
+
+Verify Certificates Do Persist And Valid After Host Reboot
+    [Documentation]  Verify certificates do persist and valid after host reboot.
+    [Tags]  Verify_Certificates_Do_Persist_And_Valid_After_Host_Reboot
+    [Template]  Verify Certificate Remains Same After Host Reboot Also
+
+    # cert_type  username         password             force_create  valid_csr  valid_status_code
+    SignCSR      ${OPENBMC_USER}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_OK}
+    root         ${OPENBMC_USER}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_OK}
+
+
+*** Keywords ***
+
+Generate A CSR String
+    [Documentation]  Generate a csr string.
+
+    # Note: Generates and returns csr string.
+    ${ssl_cmd}=  Set Variable  openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr
+    ${ssl_sub}=  Set Variable
+    ...  -subj "/C=US/ST=Texas/L=Austin/O=IBM/OU=Systems/CN=ibm.com/emailAddress=devindia@in.ibm.com"
+    ${output}=  Run  ${ssl_cmd} ${ssl_sub}
+
+    ${csr}=  OperatingSystem.Get File  server.csr
+    @{lines}=  Split to lines  ${csr}
+    ${csr_content}=  Set Variable  ${EMPTY}
+
+    FOR  ${line}  IN  @{lines}
+        ${csr_content}=  Catenate  SEPARATOR=  ${csr_content}  ${line}\\n
+    END
+
+    Remove String  ${csr_content}  END CERTIFICATE REQUEST-----\n
+    ${csr_content}=  Catenate  SEPARATOR=  ${csr_content}  -----END CERTIFICATE REQUEST-----
+
+    [Return]  ${csr_content}
+
+
+Get Certificate
+    [Documentation]  Get certificate.
+    [Arguments]  ${cert_type}=root  ${username}=${OPENBMC_USER}  ${password}=${OPENBMC_PASSWORD}
+    ...  ${force_create}=${False}  ${valid_csr}=${True}  ${valid_status_code}=${HTTP_OK}
+
+    # Description of argument(s):
+    # cert_type          Type of the certificate requesting. eg. root or SignCSR.
+    # username           Username to create a REST session.
+    # password           Password to create a REST session.
+    # force_create       Create a new REST session if True.
+    # valid_csr          Uses valid CSR string in the REST request if True.
+    #                    This is not applicable for root certificate.
+    # valid_status_code  Expected status code from REST request.
+
+    Run Keyword If  '${XAUTH_TOKEN}' != '${EMPTY}' or  ${force_create} == ${True}
+    ...  Initialize OpenBMC  rest_username=${username}  rest_password=${password}
+
+    ${data}=  Create Dictionary
+    ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
+
+    ${cert_uri}=  Set Variable If  '${cert_type}' == 'root'  /ibm/v1/Host/Actions/SignCSR
+    ...  /ibm/v1/Host/Certificate/root
+
+    ${csr}=  Set Variable If  ${valid_csr} == ${True}  ${CSR}  ${CORRUPTED_CSR}
+    Run Keyword If  '${cert_type}' == 'SignCSR'  Set To Dictionary  ${data}  CsrString  ${csr}
+ 
+    ${request}=  Set Variable If  '${cert_type}' == 'SignCSR'  Post  Get
+    ${resp}=  ${request} Request  openbmc  ${cert_uri}  &{data}
+    Should Be Equal As Strings  ${resp.status_code}  ${valid_status_code}
+
+    Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
+    ${cert}=  Evaluate  json.loads('''${resp.text}''')  json
+
+    Should Contain  ${cert["Certificate"]}  BEGIN CERTIFICATE
+    Should Contain  ${cert["Certificate"]}  END CERTIFICATE
+
+    [Return]  ${cert["Certificate"]}
+
+
+Verify Certificate Remains Same After Host Reboot Also
+    [Documentation]  Verify certificate remains same after system reboot also.
+    [Arguments]  ${cert_type}=root  ${username}=${OPENBMC_USER}  ${password}=${OPENBMC_PASSWORD}
+    ...  ${force_create}=${False}  ${valid_csr}=${True}  ${valid_status_code}=${HTTP_OK}
+
+    # Description of argument(s):
+    # cert_type          Type of the certificate requesting. eg. root or SignCSR.
+    # username           Username to create a REST session.
+    # password           Password to create a REST session.
+    # force_create       Create a new REST session if True.
+    # valid_csr          Uses valid CSR string in the REST request if True.
+    #                    This is not applicable for root certificate.
+    # valid_status_code  Expected status code from REST request.
+
+    ${cert_before}=  Get Certificate  ${cert_type}  ${username}  ${password}  ${force_create}  ${valid_csr}
+    ...  ${valid_status_code}
+
+    Run Keywords  Redfish Power Off  AND  Redfish Power On  AND  Redfish.Login
+
+    ${cert_after}=  Get Certificate  ${cert_type}  ${username}  ${password}  ${False}  ${valid_csr}
+    ...  ${valid_status_code}
+    Should Be Equal As Strings  ${cert_before}  ${cert_after}
+
+
+Suite Setup Execution
+    [Documentation]  Suite setup execution.
+
+    # Create different user accounts.
+    Redfish.Login
+    Create Users With Different Roles  users=${USERS}  force=${True}
+
+    # Get REST and Redfish session to BMC.
+    Initialize OpenBMC
+
+    ${csr}=  Generate A CSR String
+    ${corrupted_csr}=  Convert To Lowercase  ${csr}
+
+    Set Suite Variable  ${CSR}  ${csr}
+    Set Suite Variable  ${CORRUPTED_CSR}  ${corrupted_csr}
+
+
+Suite Teardown Execution
+    [Documentation]  Suite teardown execution.
+
+    Delete BMC Users Via Redfish  users=${USERS}
+
