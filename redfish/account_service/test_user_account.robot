@@ -285,7 +285,6 @@ Verify Minimum Password Length For Redfish User
     Redfish.Login
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
 
-
 *** Keywords ***
 
 Test Setup Execution
