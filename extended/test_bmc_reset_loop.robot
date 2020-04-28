@@ -15,7 +15,8 @@ Test Teardown   Test Teardown Execution
 Suite Setup     Suite Setup Execution
 
 *** Variables ***
-${LOOP_COUNT}    ${50}
+${LOOP_COUNT}          ${50}
+${CHECK_FOR_ERRORS}    ${1}
 
 # Error strings to check from journald.
 ${ERROR_REGEX}     SEGV|core-dump|FAILURE|Failed to start
@@ -69,12 +70,14 @@ BMC Redfish Reset Cycle
     [Documentation]  Reset BMC via Redfish and verify required states.
 
     Redfish OBMC Reboot (off)
+
     ${bmc_version}=  Get BMC Version
-    Valid Value  bmc_version  ["${initial_bmc_version}"]
-    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+    Valid Value  bmc_version  valid_values=['${initial_bmc_version}']
+
+    Run Keyword If  '${CHECK_FOR_ERRORS}' == '${1}'
+    ...  Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+
     Verify BMC RTC And UTC Time Drift
-    ${boot_side}=  Get BMC Flash Chip Boot Side
-    Valid Value  boot_side  ['0']
 
 
 BMC Reboot Cycle
