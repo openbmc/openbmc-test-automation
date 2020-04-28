@@ -7,6 +7,10 @@ Variables        ../data/ipmi_raw_cmd_table.py
 
 Test Teardown    FFDC On Test Case Fail
 
+*** Variables ***
+
+${sensor_number}      0x17
+
 
 *** Test Cases ***
 
@@ -43,7 +47,7 @@ Verify Add SEL Entry
     Create SEL
     # Get last SEL entry.
     ${resp}=  Run IPMI Standard Command  sel elist last 1
-    Run Keywords  Should Contain  ${resp}  Temperature #0x17  AND
+    Run Keywords  Should Contain  ${resp}  Temperature #${sensor_number}  AND
     ...  Should Contain  ${resp}  Asserted
     ...  msg=Add SEL Entry failed.
 
@@ -70,5 +74,5 @@ Create SEL
     # Create a SEL.
     # Example:
     # a | 02/14/2020 | 01:16:58 | Temperature #0x17 |  | Asserted
-    Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['SEL_entry']['Add'][0]}
+    Run IPMI Command
+    ...  0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00 0x04 0x01 ${sensor_number} 0x00 0xa0 0x04 0x07
