@@ -328,7 +328,11 @@ CLI Get Nameservers
     # nameserver x.x.x.x
     # nameserver y.y.y.y
 
-    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  egrep nameserver /etc/resolv.conf | cut -f2- -d ' '
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${cmd}=  Set Variable  egrep "\\<DNS\\>" /etc/systemd/network/00-bmc-${ethernet_interface}.network | cut -d = -f2
+
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     ${nameservers}=  Split String  ${stdout}
 
     [Return]  ${nameservers}
