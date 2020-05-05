@@ -40,7 +40,7 @@ parser = argparse.ArgumentParser(
     " should stop after any boot test.  If environment variable" +
     " STOP_REST_FAIL is set, OBMC Boot Test will stop if REST commands are" +
     " no longer working.",
-    formatter_class=argparse.RawTextHelpFormatter,
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     prefix_chars='-+')
 
 # The stock_list will be passed to gen_get_options.  We populate it with the names of stock parm options we
