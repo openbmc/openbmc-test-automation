@@ -1,0 +1,83 @@
+#!/usr/bin/env python
+
+from gen_print import *
+from gen_valid import *
+from gen_arg import *
+from gen_misc import *
+from gen_cmd import *
+from gen_plug_in_utils import *
+from gen_call_robot import *
+
+# Set exit_on_error for gen_valid functions.
+set_exit_on_error(True)
+
+parser = argparse.ArgumentParser(
+    usage='%(prog)s [OPTIONS]',
+    description="%(prog)s will determine whether FFDC should be collected.  If so, it will return "
+    + repr(dump_ffdc_rc()) + ".",
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    prefix_chars='-+')
+
+# The stock_list will be passed to gen_get_options.  We populate it with the names of stock parm options we
+# want.  These stock parms are pre-defined by gen_get_options.
+stock_list = [("test_mode", get_plug_default("test_mode", 0)),
+              ("quiet", get_plug_default("quiet", 0)),
+              ("debug", get_plug_default("debug", 0))]
+
+# For now we are hard-coding this value vs adding a soft_errors=boolean entry in the parm_def file.
+FFDC_SOFT_ERRORS = 1
+
+
+def exit_function(signal_number=0,
+                  frame=None):
+    r"""
+    Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
+
+    This function will be called by gen_exit_function().
+    """
+
+    process_robot_output_files()
+
+
+def validate_parms():
+    r"""
+    Validate program parameters, etc.
+
+    This function will be called by gen_setup().
+    """
+
+    get_plug_vars()
+
+    valid_value(AUTOBOOT_OPENBMC_HOST)
+
+
+def main():
+
+    gen_setup()
+
+    print_plug_in_header()
+
+    if FFDC_COMMAND.upper() == "FAIL":
+        if AUTOBOOT_BOOT_SUCCESS == "0":
+            print_timen("The caller wishes to dump FFDC after each boot failure.")
+            exit(dump_ffdc_rc())
+    elif FFDC_COMMAND.upper() == "ALL":
+        print_timen("The caller wishes to dump FFDC after each boot test.")
+        exit(dump_ffdc_rc())
+    elif len(FFDC_COMMAND) > 0:
+        shell_rc, out_buf = shell_cmd(FFDC_COMMAND, quiet=quiet)
+        if shell_rc != 0:
+            print_timen("The caller wishes to dump FFDC.")
+            exit(dump_ffdc_rc())
+    if FFDC_SOFT_ERRORS:
+        # Check the num_error_logs value left by the Soft_errors plug-in.
+        num_error_logs = int(restore_plug_in_value(0, "Soft_errors"))
+        if num_error_logs > 0:
+            print_timen("The \"Soft_errors\" plug-in found soft_errors and the"
+                        + " caller wishes to dump FFDC on soft errors.")
+            exit(dump_ffdc_rc())
+
+    print_timen("The caller does not wish for any FFDC to be collected.")
+
+
+main()
