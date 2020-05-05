@@ -546,6 +546,16 @@ def stop_test_rc():
     return 0x00000002
 
 
+def dump_ffdc_rc():
+    r"""
+    Return the constant dump FFDC return code value.
+
+    When a plug-in call point program returns this value, it indicates that FFDC data should be collected.
+    """
+
+    return 0x00000002
+
+
 # Create print wrapper functions for all sprint functions defined above.
 # func_names contains a list of all print functions which should be created from their sprint counterparts.
 func_names = ['print_plug_vars']
