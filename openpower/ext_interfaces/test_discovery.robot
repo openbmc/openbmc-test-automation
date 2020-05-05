@@ -14,6 +14,8 @@ Resource             ../../lib/boot_utils.robot
 Resource             ../../syslib/utils_os.robot
 
 Suite Setup          Suite Setup Execution
+Suite Teardown       Redfish.Logout
+Test Setup           Printn
 Test Teardown        FFDC On Test Case Fail
 
 *** Test Cases ***
@@ -58,9 +60,18 @@ Discover BMC Pre And Post Firmware Update Of Same Build
 
 
 Discover BMC Pre And Post Firmware Update Of Different Build
-    [Documentation]  Discover BMC when code update occurs for different release.
+    [Documentation]  Discover BMC, when code update occurs for different release.
     [Tags]  Discover_BMC_Pre_And_Post_Firmware_Update_Of_Different_Build
     [Template]  Discover BMC Pre And Post Firmware Update
+
+    # Service type   Service type
+    _obmc_rest._tcp  _obmc_redfish._tcp
+
+
+Discover BMC Pre And While Host Boot InProgress
+    [Documentation]  Discover BMC, while Host boot in progress.
+    [Tags]  Discover_BMC_Pre_And_While_Host_Boot_InProgress
+    [Template]  Discover BMC Before And During Host Boot
 
     # Service type   Service type
     _obmc_rest._tcp  _obmc_redfish._tcp
@@ -75,6 +86,7 @@ Suite Setup Execution
     Should Not Be Empty  ${AVAHI_CLIENT_PASSWORD}
     Login To OS  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
     Check Avahi Package
+    Redfish.Login
 
 
 Check Avahi Package
@@ -158,13 +170,35 @@ Discover BMC Pre And Post Firmware Update
     [Arguments]  ${service_type1}  ${service_type2}
 
     # Description of argument(s):
-    # service_type  BMC service type e.g.
-    #               (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+    # service_type     BMC service type e.g.
+    #                  (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
 
     Valid File Path  IMAGE_FILE_PATH
     Verify Existence Of BMC Record From List  ${service_type1}
     Verify Existence Of BMC Record From List  ${service_type2}
-    Redfish.Login
     Redfish Update Firmware  apply_time=Immediate   image_type=BMC image
     Verify Existence Of BMC Record From List  ${service_type1}
     Verify Existence Of BMC Record From List  ${service_type2}
+
+
+Discover BMC Before And During Host Boot
+    [Documentation]  Discover BMC, when host boot in progress.
+    [Arguments]  ${service_type1}  ${service_type2}
+
+    # Description of argument(s):
+    # service_type     BMC service type e.g.
+    #                  (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+
+    Verify Existence Of BMC Record From List  ${service_type1}
+    Verify Existence Of BMC Record From List  ${service_type2}
+    Redfish Power Off  stack_mode=skip
+    Get Host Power State
+    Redfish Power Operation  reset_type=On
+    Sleep  15s
+    Login To OS  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
+    FOR  ${index}  IN RANGE  10
+        Sleep  3s
+        Verify Existence Of BMC Record From List  ${service_type1}
+        Verify Existence Of BMC Record From List  ${service_type2}
+    END
+    Wait Until Keyword Succeeds  10 min  10 sec  Is OS Booted
