@@ -50,28 +50,37 @@ Disable AvahiDaemon And Discover BMC After Reboot
     _obmc_redfish._tcp   True
 
 
-Discover BMC Pre And Post Firmware Update Of Same Build
-    [Documentation]  Discover BMC, when code update occurs for same build.
-    [Tags]  Discover_BMC_Pre_And_Post_Firmware_Update_Of_Same_Build
+Discover BMC Pre And Post Firmware Update Of Same Release
+    [Documentation]  Discover BMC, when firmware update occurs for same release.
+    [Tags]  Discover_BMC_Pre_And_Post_Firmware_Update_Of_Same_Release
     [Template]  Discover BMC Pre And Post Firmware Update
 
-    # Service type   Service type
-    _obmc_rest._tcp  _obmc_redfish._tcp
+    # Service type   Service type        status
+    _obmc_rest._tcp  _obmc_redfish._tcp  True
 
 
-Discover BMC Pre And Post Firmware Update Of Different Build
-    [Documentation]  Discover BMC, when code update occurs for different release.
-    [Tags]  Discover_BMC_Pre_And_Post_Firmware_Update_Of_Different_Build
+Discover BMC Pre And Post Firmware Update Of Different Release
+    [Documentation]  Discover BMC, when firmware update occurs for different release.
+    [Tags]  Discover_BMC_Pre_And_Post_Firmware_Update_Of_Different_Release
     [Template]  Discover BMC Pre And Post Firmware Update
 
-    # Service type   Service type
-    _obmc_rest._tcp  _obmc_redfish._tcp
+    # Service type   Service type        status
+    _obmc_rest._tcp  _obmc_redfish._tcp  True
 
 
-Discover BMC Pre And While Host Boot InProgress
-    [Documentation]  Discover BMC, while Host boot in progress.
-    [Tags]  Discover_BMC_Pre_And_While_Host_Boot_InProgress
-    [Template]  Discover BMC Before And During Host Boot
+Discover BMC Fail After Firmware Update Of Different Release
+    [Documentation]  Discover BMC fail, when firmware update occurs for different release.
+    [Tags]  Discover_BMC_Fail_After_Firmware_Update_Of_Different_Release
+    [Template]  Discover BMC Pre And Post Firmware Update
+
+    # Service type   Service type        status
+    _obmc_rest._tcp  _obmc_redfish._tcp  False
+
+
+Discover BMC Pre And Post When Host Boot InProgress
+    [Documentation]  Discover BMC, when Host boot in progress.
+    [Tags]  Discover_BMC_Pre_And_Post_When_Host_Boot_InProgress
+    [Template]  Discover BMC Pre And Post When Host Boot
 
     # Service type   Service type
     _obmc_rest._tcp  _obmc_redfish._tcp
@@ -177,12 +186,16 @@ Discover BMC Pre And Post Firmware Update
     Verify Existence Of BMC Record From List  ${service_type1}
     Verify Existence Of BMC Record From List  ${service_type2}
     Redfish Update Firmware  apply_time=Immediate   image_type=BMC image
-    Verify Existence Of BMC Record From List  ${service_type1}
-    Verify Existence Of BMC Record From List  ${service_type2}
+    ${keyword_status}=  Run Keyword And Return Status
+    ...  Verify Existence Of BMC Record From List  ${service_type1}
+    Should Be Equal  '${status}'  '${keyword_status}'
+    ${keyword_status}=  Run Keyword And Return Status
+    ...  Verify Existence Of BMC Record From List  ${service_type2}
+    Should Be Equal  '${status}'  '${keyword_status}'
 
 
-Discover BMC Before And During Host Boot
-    [Documentation]  Discover BMC, when host boot in progress.
+Discover BMC Pre And Post When Host Boot
+    [Documentation]  Discover BMC, when host boot progress.
     [Arguments]  ${service_type1}  ${service_type2}
 
     # Description of argument(s):
