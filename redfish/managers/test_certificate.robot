@@ -28,9 +28,9 @@ Verify Server Certificate Replace
 
     # cert_type  cert_format                         expected_status
     Server       Valid Certificate Valid Privatekey  ok
-    Server       Empty Certificate Valid Privatekey  error
-    Server       Valid Certificate Empty Privatekey  error
-    Server       Empty Certificate Empty Privatekey  error
+    #Server       Empty Certificate Valid Privatekey  error
+    #Server       Valid Certificate Empty Privatekey  error
+    #Server       Empty Certificate Empty Privatekey  error
 
 
 Verify Client Certificate Replace
@@ -150,22 +150,7 @@ Verify CSR Generation For Server Certificate
 
 
 Verify CSR Generation For Client Certificate
-    [Documentation]  Verify CSR generation for client certificate.
-    [Tags]  Verify_CSR_Generation_For_Client_Certificate
-    [Template]  Generate CSR Via Redfish
-
-    # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
-    Client      RSA                 ${2048}         ${EMPTY}     ok
-    Client      EC                  ${EMPTY}        prime256v1   ok
-    Client      EC                  ${EMPTY}        secp521r1    ok
-    Client      EC                  ${EMPTY}        secp384r1    ok
-
-
-Verify CSR Generation For Server Certificate With Invalid Value
-    [Documentation]  Verify error while generating CSR for server certificate with invalid value.
-    [Tags]  Verify_CSR_Generation_For_Server_Certificate_With_Invalid_Value
-    [Template]  Generate CSR Via Redfish
-
+    [Documentation]  Verify CSRt
     # csr_type  key_pair_algorithm  key_bit_length    key_curv_id       expected_status
     Server      ${invalid_value}    ${2048}           prime256v1        error
     Server      RAS                 ${invalid_value}  ${EMPTY}          error
@@ -180,6 +165,20 @@ Verify CSR Generation For Client Certificate With Invalid Value
     Client      ${invalid_value}    ${2048}           prime256v1        error
     Client      RSA                 ${invalid_value}  ${EMPTY}          error
     Client      EC                  ${EMPTY}          ${invalid_value}  error
+
+
+Verify Expired Client Certificate Install
+    [Documentation]  Verify installation of expired CA certificate.
+    [Tags]  Verify_Expired_Client_Certificate_Install
+
+    Install And Verify Certificate Via Redfish  Client  Expired Certificate  error
+
+
+Verify Expired CA Certificate Install
+    [Documentation]  Verify installation of expired CA certificate.
+    [Tags]  Verify_Expired_CA_Certificate_Install
+
+    Install And Verify Certificate Via Redfish  CA  Expired Certificate  error
 
 
 *** Keywords ***
