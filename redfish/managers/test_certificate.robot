@@ -182,6 +182,20 @@ Verify CSR Generation For Client Certificate With Invalid Value
     Client      EC                  ${EMPTY}          ${invalid_value}  error
 
 
+Verify Expired Client Certificate Install
+    [Documentation]  Verify installation of expired CA certificate.
+    [Tags]  Verify_Expired_Client_Certificate_Install
+
+    Install And Verify Certificate Via Redfish  Client  Expired Certificate  error
+
+
+Verify Expired CA Certificate Install
+    [Documentation]  Verify installation of expired CA certificate.
+    [Tags]  Verify_Expired_CA_Certificate_Install
+
+    Install And Verify Certificate Via Redfish  CA  Expired Certificate  error
+
+
 *** Keywords ***
 
 Install And Verify Certificate Via Redfish
