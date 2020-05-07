@@ -80,9 +80,10 @@ REST BMC Code Update
     ${functional_version}=  Get BMC Version
     Rprint Vars  functional_version
 
+    # TODO: openbmc/phosphor-bmc-code-mgmt/issues/4
     # Check if the existing firmware is functional.
-    Pass Execution If  ${functional_version} == "${image_version}"
-    ...  The existing ${image_version} firmware is already functional.
+    #Pass Execution If  ${functional_version} == "${image_version}"
+    #...  The existing ${image_version} firmware is already functional.
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
