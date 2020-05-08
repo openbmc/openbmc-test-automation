@@ -10,6 +10,7 @@ Library        Collections
 
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
+Suite Setup    Suite Setup Execution
 
 Force Tags     Network_Conf_Test
 
@@ -18,7 +19,6 @@ ${test_hostname}           openbmc
 ${test_ipv4_addr}          10.7.7.7
 ${test_ipv4_invalid_addr}  0.0.1.a
 ${test_subnet_mask}        255.255.0.0
-${test_gateway}            10.7.7.1
 ${broadcast_ip}            10.7.7.255
 ${loopback_ip}             127.0.0.2
 ${multicast_ip}            224.6.6.6
@@ -600,3 +600,9 @@ DNS Test Setup Execution
     Rprint Vars  original_nameservers
     # Set suite variables to trigger restoration during teardown.
     Set Suite Variable  ${original_nameservers}
+
+Suite Setup Execution
+    [Documentation]  Do suite setup execution.
+
+    ${test_gateway}=  Get BMC Default Gateway
+    Set Suite Variable  ${test_gateway}

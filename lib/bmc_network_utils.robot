@@ -522,3 +522,16 @@ Configure Network Settings On VLAN
     ...      Should Be Equal  ${status}  ${True}
     ...      msg=Configuration of valid IP Failed.
 
+
+Get BMC Default Gateway
+    [Documentation]  Get system default gateway.
+
+    ${route_info}=  Get BMC Route Info
+
+    ${lines}=  Get Lines Containing String  ${route_info}  default via
+    @{gateway_list}=  Split To Lines  ${lines}
+
+    # Extract first default gateway and return.
+    @{default_gw}=  Split String  ${gateway_list[0]}
+
+    [Return]  ${default_gw[2]}
