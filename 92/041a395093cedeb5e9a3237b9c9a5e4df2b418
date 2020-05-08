@@ -1,0 +1,8 @@
+Code-Review+1: Lakshminarayana R Kammath <lkammath@in.ibm.com>
+Code-Review+2: George Keishing <gkeishin@in.ibm.com>
+Verified+1: George Keishing <gkeishin@in.ibm.com>
+Submitted-by: George Keishing <gkeishin@in.ibm.com>
+Submitted-at: Fri, 08 May 2020 16:24:16 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/31618
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
