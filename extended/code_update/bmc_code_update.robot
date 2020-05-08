@@ -75,15 +75,14 @@ REST BMC Code Update
     Run Keyword And Ignore Error  List Installed Images  BMC
 
     ${image_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
-    Rprint Vars  image_version
-
-    ${functional_version}=  Get BMC Version
-    Rprint Vars  functional_version
+    ${bmc_release_info}=  Get BMC Release Info
+    ${functional_version}=  Set Variable  ${bmc_release_info['version_id']}
+    Rprint Vars  image_version  functional_version
 
     # TODO: openbmc/phosphor-bmc-code-mgmt/issues/4
     # Check if the existing firmware is functional.
-    #Pass Execution If  ${functional_version} == "${image_version}"
-    #...  The existing ${image_version} firmware is already functional.
+    Pass Execution If  '${functional_version}' == '${image_version}'
+    ...  The existing ${image_version} firmware is already functional.
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
