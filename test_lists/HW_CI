@@ -27,5 +27,3 @@
 -i Verify_IPMI_User_Deletion
 #Local user tests.
 -i Verify_AccountService_Available
-#DateTime tests.
--i Verify_Enable_NTP
