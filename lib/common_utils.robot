@@ -789,7 +789,7 @@ Set BMC Boot Count
     Set Global Variable  ${BOOT_COUNT}  ${count}
 
     # Set BOOT_TIME variable to current boot time.
-    Set Global Variable  ${BOOT_COUNT}  ${count}
+    Set Global Variable  ${BOOT_TIME}  ${cur_btime}
 
 
 Delete Error Log Entry
