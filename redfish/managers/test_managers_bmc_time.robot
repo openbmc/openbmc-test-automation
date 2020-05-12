@@ -224,7 +224,10 @@ Suite Setup Execution
 
     Printn
     Redfish.Login
+    Get NTP Initial Status
     Set Time To Manual Mode
+    Set NTP state  ${FALSE}
+
 
 Suite Teardown Execution
     [Documentation]  Do the suite level teardown.
@@ -233,4 +236,28 @@ Suite Teardown Execution
     ...  body={'NTP':{'NTPServers': ['${EMPTY}', '${EMPTY}']}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     Set Time To Manual Mode
+    Restore NTP Status
     Redfish.Logout
+
+
+Set NTP state
+    [Documentation]  Set NTP service inactive.
+    [Arguments]  ${state}
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${state}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+
+Get NTP Initial Status
+    [Documentation]  Get NTP service Status.
+
+    ${original_ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
+    Set Suite Variable  ${original_ntp}
+
+
+Restore NTP Status
+    [Documentation]  Restore NTP Status.
+
+    Run Keyword If  '${original_ntp["ProtocolEnabled"]}' == 'True'
+    ...    Set NTP state  ${TRUE}
+    ...  ELSE  Set NTP state  ${FALSE}
