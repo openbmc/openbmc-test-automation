@@ -229,6 +229,8 @@ Suite Setup Execution
     Printn
     Redfish.Login
     Rest Set Time Owner
+    Get NTP Initial Status
+    Set NTP state  no
 
 Suite Teardown Execution
     [Documentation]  Do the suite level teardown.
@@ -237,4 +239,27 @@ Suite Teardown Execution
     ...  body={'NTP':{'NTPServers': ['${EMPTY}', '${EMPTY}']}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     Rest Set Time Owner
+    Restore NTP Status
     Redfish.Logout
+
+
+Set NTP state
+    [Documentation]  Set NTP service inactive.
+    [Arguments]  ${state}
+
+    BMC Execute Command  timedatectl set-ntp ${state}
+
+
+Get NTP Initial Status
+    [Documentation]  Get NTP service Status.
+
+    ${status}  ${stderr}  ${rc}=  BMC Execute Command  timedatectl status | grep "NTP service" | awk '{print $3}'
+    Set Suite Variable  ${status}
+
+
+Restore NTP Status
+    [Documentation]  Restore NTP Status.
+
+    Run Keyword If  '${status}' == 'active'
+    ...    Set NTP state  yes
+    ...  ELSE  Set NTP state  no
