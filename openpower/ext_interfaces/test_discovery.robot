@@ -12,6 +12,7 @@ Resource             ../../lib/external_intf/management_console_utils.robot
 Resource             ../../lib/redfish_code_update_utils.robot
 Resource             ../../lib/boot_utils.robot
 Resource             ../../syslib/utils_os.robot
+Resource             ../../lib/code_update_utils.robot
 
 Suite Setup          Suite Setup Execution
 Suite Teardown       Redfish.Logout
@@ -174,18 +175,38 @@ Set Daemon And Discover BMC After Reboot
     ...  Verify Existence Of BMC Record From List  ${service_type}
 
 
+Redfish Update Firmware
+    [Documentation]  Update the BMC firmware via redfish interface and verify the bmc version
+    ...              and apply time.
+    [Arguments]  ${apply_time}
+
+    # Description of argument(s):
+    # apply_time    ApplyTime allowed values (e.g. "OnReset", "Immediate").
+
+    ${post_code_update_actions}=  Get Post Boot Action
+    ${state}=  Get Pre Reboot State
+    Rprint Vars  state
+    Set ApplyTime  policy=${apply_Time}
+    Redfish Upload Image And Check Progress State
+    Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
+    Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+    Verify Get ApplyTime  ${apply_time}
+
+
 Discover BMC Pre And Post Firmware Update
     [Documentation]  Discover BMC, After code update.
-    [Arguments]  ${service_type1}  ${service_type2}
+    [Arguments]  ${service_type1}  ${service_type2}  ${status}
 
     # Description of argument(s):
     # service_type     BMC service type e.g.
     #                  (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+    # status           True or False
 
     Valid File Path  IMAGE_FILE_PATH
     Verify Existence Of BMC Record From List  ${service_type1}
     Verify Existence Of BMC Record From List  ${service_type2}
-    Redfish Update Firmware  apply_time=Immediate   image_type=BMC image
+    Redfish Update Firmware  apply_time=Immediate
     ${keyword_status}=  Run Keyword And Return Status
     ...  Verify Existence Of BMC Record From List  ${service_type1}
     Should Be Equal  '${status}'  '${keyword_status}'
