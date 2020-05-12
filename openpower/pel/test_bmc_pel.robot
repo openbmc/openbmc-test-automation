@@ -132,8 +132,11 @@ Verify Machine Type Model And Serial Number
 
     ${pel_ids}=  Get PEL Log Via BMC CLI
     ${id}=  Get From List  ${pel_ids}  -1
+
     ${pel_serial_number}=  Get PEL Field Value  ${id}  Failing MTMS  Serial Number
+    ${pel_serial_number}=  Replace String Using Regexp  ${pel_serial_number}  ^0+  ${EMPTY}
     ${pel_machine_type_model}=  Get PEL Field Value  ${id}  Failing MTMS  Machine Type Model
+    ${pel_machine_type_model}=  Replace String Using Regexp  ${pel_machine_type_model}  ^0+  ${EMPTY}
 
     # Example of "Machine Type Model" and "Serial Number" fields value from "Failing MTMS" section of PEL.
     #  [Failing MTMS]:
@@ -144,14 +147,18 @@ Verify Machine Type Model And Serial Number
     #    [Sub-section type]:                           0
 
     ${redfish_machine_model}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  Model
+    ${redfish_machine_model}=  Replace String Using Regexp  ${redfish_machine_model}  ^0+  ${EMPTY}
     ${redfish_serial_number}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  SerialNumber
+    ${redfish_serial_number}=  Replace String Using Regexp  ${redfish_serial_number}  ^0+  ${EMPTY}
 
     Valid Value  pel_machine_type_model  ['${redfish_machine_model}']
     Valid Value  pel_serial_number  ['${redfish_serial_number}']
 
     # Check "Machine Type Model" and "Serial Number" fields value from "Extended User Header" section of PEL.
     ${pel_machine_type_model}=  Get PEL Field Value  ${id}  Extended User Header  Reporting Machine Type
+    ${pel_machine_type_model}=  Replace String Using Regexp  ${pel_machine_type_model}  ^0+  ${EMPTY}
     ${pel_serial_number}=  Get PEL Field Value  ${id}  Extended User Header  Reporting Serial Number
+    ${pel_serial_number}=  Replace String Using Regexp  ${pel_serial_number}  ^0+  ${EMPTY}
 
     Valid Value  pel_machine_type_model  ['${redfish_machine_model}']
     Valid Value  pel_serial_number  ['${redfish_serial_number}']
