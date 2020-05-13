@@ -97,7 +97,7 @@ Configure Less Byte MAC And Verify
 
 Configure More Byte MAC And Verify
     [Documentation]  Configure more byte MAC via Redfish and verify.
-    [Tags]  Configure_Less_Byte_MAC_And_Verify
+    [Tags]  Configure_More_Byte_MAC_And_Verify
 
     [Template]  Configure MAC Settings
     # MAC address     scenario
