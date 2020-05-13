@@ -193,6 +193,7 @@ Verify Expired CA Certificate Install
     [Documentation]  Verify installation of expired CA certificate.
     [Tags]  Verify_Expired_CA_Certificate_Install
 
+    ${rc}  ${output}=  Run And Return RC and Output  openssl version
     Install And Verify Certificate Via Redfish  CA  Expired Certificate  error
 
 
