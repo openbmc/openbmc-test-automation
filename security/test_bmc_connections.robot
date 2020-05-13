@@ -23,7 +23,7 @@ ${MAX_UNAUTH_PER_IP}  ${5}
 
 Test Patch Without Auth Token Fails
     [Documentation]  Send patch method without auth token and verify it throws an error.
-    [Tags]   Test Patch Without Auth Token Fails
+    [Tags]   Test_Patch_Without_Auth_Token_Fails
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
