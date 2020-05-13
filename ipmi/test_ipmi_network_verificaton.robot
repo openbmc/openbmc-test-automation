@@ -102,6 +102,7 @@ Get IP Address Source And Verify Using Redfish
 Verify Get Set In Progress
     [Documentation]  Verify Get Set In Progress which belongs to LAN Configuration Parameters
     ...              via IPMI raw Command.
+    [Tags]  Verify_Get_Set_In_Progress
 
     ${ipmi_output}=  Run IPMI Command
     ...  ${IPMI_RAW_CMD['LAN_Config_Params']['Get'][0]} ${CHANNEL_NUMBER} 0x00 0x00 0x00
@@ -117,6 +118,7 @@ Verify Get Set In Progress
 Verify Cipher Suite Entry Count
     [Documentation]  Verify cipher suite entry count which belongs to LAN Configuration Parameters
     ...              via IPMI raw Command.
+    [Tags]  Verify_Cipher_Suite_Entry_Count
 
     ${ipmi_output}=  Run IPMI Command
     ...  ${IPMI_RAW_CMD['LAN_Config_Params']['Get'][0]} ${CHANNEL_NUMBER} 0x16 0x00 0x00
@@ -132,6 +134,7 @@ Verify Cipher Suite Entry Count
 Verify Authentication Type Support
     [Documentation]  Verify authentication type support which belongs to LAN Configuration Parameters
     ...              via IPMI raw Command.
+    [Tags]  Verify_Authentication_Type_Support
 
     ${ipmi_output}=  Run IPMI Command
     ...  ${IPMI_RAW_CMD['LAN_Config_Params']['Get'][0]} ${CHANNEL_NUMBER} 0x01 0x00 0x00
