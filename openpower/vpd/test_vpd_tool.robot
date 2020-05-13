@@ -50,7 +50,7 @@ Verify VPD Field Read
 
 
 Verify VPD Field Write
-    [Documentation]  Verify writting VPD field value via vpdtool.
+    [Documentation]  Verify writing VPD field value via vpdtool.
     [Tags]  Verify_VPD_Field_Write
 
     ${components}=  Get Dictionary Keys  ${VPD_DETAILS}

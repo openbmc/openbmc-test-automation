@@ -85,7 +85,7 @@ Verify Redfishtool Login With Deleted Redfish Users
     Redfishtool Access Resource  /redfish/v1/AccountService/Accounts  "UserT100"  "TestPwd123"  ${HTTP_UNAUTHORIZED}
 
 Verify Redfishtool Error Upon Creating Same Users With Different Privileges
-    [Documentation]  Verify error upon creating same users with different previleges.
+    [Documentation]  Verify error upon creating same users with different privileges.
     [Tags]  Verify_Redfishtool_Error_Upon_Creating_Same_Users_With_Different_Privileges
     [Teardown]  Redfishtool Delete User  "UserT100"
 
@@ -94,7 +94,7 @@ Verify Redfishtool Error Upon Creating Same Users With Different Privileges
 
 
 Verify Redfishtool Admin User Privilege
-    [Documentation]  Verify previlege of admin user.
+    [Documentation]  Verify privilege of admin user.
     [Tags]  Verify_Redfishtool_Admin_User_Privilege
     [Teardown]  Run Keywords  Redfishtool Delete User  "UserT100"  AND
     ...  Redfishtool Delete User  "UserT101"

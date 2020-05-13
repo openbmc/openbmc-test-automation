@@ -41,7 +41,7 @@ Discover BMC Pre And Post Reboot
 
 
 Disable AvahiDaemon And Discover BMC After Reboot
-    [Documentation]  BMC should be discoverable in next reboot even after disabling Avahi deamon.
+    [Documentation]  BMC should be discoverable in next reboot even after disabling Avahi daemon.
     [Tags]  Disable_AvahiDaemon_And_Discover_BMC_After_Reboot
     [Template]  Set Daemon And Discover BMC After Reboot
 
