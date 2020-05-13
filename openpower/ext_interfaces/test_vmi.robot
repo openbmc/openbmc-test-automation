@@ -122,7 +122,8 @@ Get VMI Network Interface Details
     ${vmi_ip}=  Create Dictionary  DHCPv4=${${ip_resp["DHCPv4"]["DHCPEnabled"]}}  Id=${ip_resp["Id"]}
     ...  Description=${ip_resp["Description"]}  IPv4_Address=${ip_resp["IPv4Addresses"][0]["Address"]}
     ...  IPv4_AddressOrigin=${ip_resp["IPv4Addresses"][0]["AddressOrigin"]}  Name=${ip_resp["Name"]}
-    ...  IPv4_Gateway=${ip_resp["IPv4Addresses"][0]["Gateway"]}  InterfaceEnabled=${${ip_resp["InterfaceEnabled"]}}
+    ...  IPv4_Gateway=${ip_resp["IPv4Addresses"][0]["Gateway"]}
+    ...  InterfaceEnabled=${${ip_resp["InterfaceEnabled"]}}
     ...  IPv4_SubnetMask=${ip_resp["IPv4Addresses"][0]["SubnetMask"]}  MACAddress=${ip_resp["MACAddress"]}
     ...  IPv4StaticAddresses=${${static_exists}}
 
