@@ -116,11 +116,12 @@ RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER = {
     'pdrtype': ['20'],
     'recordchangenumber': ['0'],
     'datalength': ['10'],
-    'pldmterminushandle': ['0'],
+    'pldmterminushandle': ['0', '2'],
     'entitytype': ['System Board', 'Chassis front panel board (control panel)',
                    'Management Controller', '208(OEM)', 'Power converter',
                    'System (logical)', 'System chassis (main enclosure)',
-                   'Chassis front panel board (control panel)'],
+                   'Chassis front panel board (control panel)',
+                   'Processor Module', 'Memory Module'],
     'containerid': ['0', '1', '2', '3']}
 
 RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION = {
