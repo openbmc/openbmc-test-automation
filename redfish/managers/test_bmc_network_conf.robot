@@ -23,6 +23,7 @@ ${broadcast_ip}            10.7.7.255
 ${loopback_ip}             127.0.0.2
 ${multicast_ip}            224.6.6.6
 ${out_of_range_ip}         10.7.7.256
+${test_ipv4_addr2}         10.7.7.8
 
 # Valid netmask is 4 bytes long and has continuos block of 1s.
 # Maximum valid value in each octet is 255 and least value is 0.
@@ -469,6 +470,17 @@ Configure String Value For DNS Server
 
     Configure Static Name Servers  ${string_value}  ${HTTP_BAD_REQUEST}
 
+Modify IPv4 Address And Verify
+    [Documentation]  Modify IP address via Redfish and verify.
+    [Tags]  Modify_IPv4_Addres_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr2}  AND  Delete IP Address  ${test_ipv4_addr}
+    ...  AND  Test Teardown Execution
+
+     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+
+     Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
+
 
 *** Keywords ***
 
@@ -606,3 +618,44 @@ Suite Setup Execution
 
     ${test_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${test_gateway}
+
+Update IP Address
+    [Documentation]  Update IP address of BMC.
+    [Arguments]  ${ip}  ${new_ip}  ${netmask}  ${gw_ip}  ${valid_status_codes}=${HTTP_OK}
+
+    # Description of argument(s):
+    # ip                  IP address to be replaced (e.g. "10.7.7.7").
+    # new_ip              New IP address to be configured.
+    # netmask             Netmask value.
+    # gw_ip               Gateway IP address.
+    # valid_status_codes  Expected return code from patch operation
+    #                     (e.g. "200").  See prolog of rest_request
+    #                     method in redfish_plus.py for details.
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    ${ip_data}=  Create Dictionary  Address=${new_ip}  SubnetMask=${netmask}  Gateway=${gw_ip}
+
+    # Find the position of IP address to be modified.
+    @{network_configurations}=  Get Network Configuration
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Run Keyword If  '${network_configuration['Address']}' == '${ip}'
+      ...  Append To List  ${patch_list}  ${ip_data}
+      ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    ${ip_found}=  Run Keyword And Return Status  List Should Contain Value
+    ...  ${patch_list}  ${ip_data}  msg=${ip} does not exist on BMC
+    Pass Execution If  ${ip_found} == ${False}  ${ip} does not exist on BMC
+
+    # Run patch command only if given IP is found on BMC
+    ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
+
+    Redfish.patch  ${REDFISH_NW_ETH0_URI}  body=&{data}  valid_status_codes=[${valid_status_codes}]
+
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    Verify IP On BMC  ${new_ip}
+    Validate Network Config On BMC
