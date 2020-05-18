@@ -34,14 +34,14 @@ Verify Server Health Button
     Click Element  ${xpath_select_server_health}
     Wait Until Page Contains  All events from the BMC
 
-Verify IP address
-    [Documentation]  Verify BMC IP address displayed in GUI header.
-    [Tags]  Verify_IP_address
 
-    # NOTE: gui_displayed_ip can be either a host name or an IP address.
-    #       (e.g. "machinex" or "xx.xx.xx.xx").
-    ${gui_displayed_ip}=  Get Text  ${xpath_bmc_ip}
-    Should Contain  ${gui_displayed_ip}  ${OPENBMC_HOST}
+Verify Header Text
+    [Documentation]  Verify text in GUI header.
+    [Tags]  Verify_Header_Text
+
+    ${gui_header_text}=  Get Text  ${xpath_header_text}
+    Should Contain  ${gui_header_text}  BMC System Management
+
 
 Verify Refresh Button
     [Documentation]  Verify Refresh Button in GUI header.
@@ -112,4 +112,5 @@ OpenBMC GUI Logoff
     [Tags]  OpenBMC_GUI_Logoff
 
     Click Element  ${xpath_button_logout}
-    Wait Until Page Contains Element  ${xpath_button_login}
+    Wait Until Page Contains Element  ${xpath_button_login}  timeout=15s
+
