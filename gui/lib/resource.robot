@@ -292,3 +292,33 @@ Logout And Close Browser
     Click Button  ${xpath_button_user_action}
     Click Button  ${xpath_button_logout}
     Close Browser
+
+
+Launch Browser And Login GUI
+    [Documentation]  Launch browser and login to OpenBMC GUI.
+
+    Open Browser With URL  ${obmc_gui_url}
+    Login GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+
+Login GUI
+    [Documentation]  Login to OpenBMC GUI.
+    [Arguments]  ${username}=${OPENBMC_USERNAME}  ${password}=${OPENBMC_PASSWORD}
+
+    # Description of argument(s):
+    # username  The username to be used for login.
+    # password  The password to be used for login.
+
+    Go To  ${obmc_gui_url}
+    Wait Until Element Is Enabled  ${xpath_textbox_username}
+    Input Text  ${xpath_textbox_username}  ${username}
+    Input Password  ${xpath_textbox_password}  ${password}
+    Click Element  ${xpath_login_button}
+    Wait Until Page Contains  Overview  timeout=30s
+
+
+Logout GUI
+    [Documentation]  Logout of OpenBMC GUI.
+
+    Click Element  ${xpath_logout_button}
+    Wait Until Page Contains Element  ${xpath_login_button}
