@@ -25,6 +25,7 @@ ${min_number_sensors}  ${15}
 ${min_number_roles}    ${4}
 ${min_number_users}    ${1}
 
+
 *** Test Cases ***
 
 
@@ -157,7 +158,44 @@ Verify Redfishtool CA Certificate Install Valid Cert
     Verify Redfishtool Install Certificate  CA  Valid Certificate  ok
 
 
+Verify Redfishtool Replace Server Certificate Errors
+    [Documentation]  Verify error while replacing invalid server certificate.
+    [Tags]  Verify_Redfishtool_Replace_Server_Certificate_Errors
+    [Template]  Verify Redfishtool Replace Certificate
+
+    Server  Empty Certificate Empty Privatekey  error
+    Server  Empty Certificate Valid Privatekey  error
+    Server  Valid Certificate Empty Privatekey  error
+
+
+Verify Redfishtool Replace Client Certificate Errors
+    [Documentation]  Verify error while replacing invalid client certificate. 
+    [Tags]  Verify_Redfishtool_Replace_Client_Certificate_Errors
+    [Template]  Verify Redfishtool Replace Certificate
+
+    Client  Empty Certificate Empty Privatekey  error
+    Client  Empty Certificate Valid Privatekey  error
+    Client  Valid Certificate Empty Privatekey  error
+
+Verify Redfishtool Replace CA Certificate Errors
+    [Documentation]  Verify error while replacing invalid CA certificate. 
+    [Tags]  Verify_Redfishtool_Replace_CA_Certificate_Valid_Cert
+    [Template]  Verify Redfishtool Replace Certificate
+
+    CA  Empty Certificate  error
+
+Verify Redfishtool Client Certificate Install Errors 
+    [Documentation]  Verify error while installing invalid client certificate. 
+    [Tags]  Verify_Redfishtool_Client_Certificate_Install_Errors
+    [Template]  Verify Redfishtool Install Certificate
+
+    Client  Empty Certificate Empty Privatekey  error
+    Client  Empty Certificate Valid Privatekey  error
+    Client  Valid Certificate Empty Privatekey  error
+
+
 *** Keywords ***
+
 
 Redfishtool Access Resource
     [Documentation]  Access resource.
@@ -183,8 +221,9 @@ Is HTTP error Expected
     # cmd_output      Output of an HTTP operation.
     # error_expected  Expected error.
 
-    ${error_expected}=  Evaluate  "${error_expected}" in """${cmd_output}"""
-    Should Be True  ${error_expected} == True
+    @{words} =  Split String    ${error_expected}       ,
+    @{errorString}=  Split String    ${cmd_output}       ${SPACE}
+    Should Contain Any  ${errorString}  @{words}
 
 
 Redfishtool Create User
@@ -272,22 +311,6 @@ Redfishtool Verify User Name Exists
     [return]  ${status}
 
 
-Redfishtool Get
-    [Documentation]  Execute redfishtool for GET operation.
-    [Arguments]  ${uri}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
-
-    # Description of argument(s):
-    # uri             URI for GET operation (e.g. /redfish/v1/AccountService/Accounts/).
-    # cmd_args        Commandline arguments.
-    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
-    #                 authentication error, etc. ).
-
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} GET ${uri}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-
-    [Return]  ${cmd_output}
-
-
 Verify Redfishtool Install Certificate
     [Documentation]  Install and verify certificate using Redfishtool.
     [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}  ${delete_cert}=${True}
@@ -312,7 +335,7 @@ Verify Redfishtool Install Certificate
     ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}
     ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
 
-    ${cert_id}=  Redfishtool Install Certificate File On BMC  ${certificate_uri}  data=${file_data}
+    ${cert_id}=  Redfishtool Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
     Logging  Installed certificate id: ${cert_id}
 
     # Adding delay after certificate installation.
@@ -320,7 +343,7 @@ Verify Redfishtool Install Certificate
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
 
-    ${bmc_cert_content}=  Redfishtool GetAttribute  ${certificate_uri}/${cert_id}  CertificateString
+    ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  Redfishtool GetAttribute  ${certificate_uri}/${cert_id}  CertificateString
 
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
 
@@ -405,7 +428,6 @@ Verify Redfishtool Replace Certificate
     # expected_status  Expected status of certificate replace Redfishtool
     #                  request (i.e. "ok" or "error").
 
-    Create Directory  certificate_dir
     # Install certificate before replacing client or CA certificate.
     ${cert_id}=  Run Keyword If  '${cert_type}' == 'Client'
     ...    Verify Redfishtool Install Certificate  ${cert_type}  Valid Certificate Valid Privatekey  ok
@@ -427,8 +449,11 @@ Verify Redfishtool Replace Certificate
     ${string}=  Convert To String  ${dict_objects}
     ${string}=  Replace String  ${string}  '  "
     ${payload}=  Set Variable  '${string}'
+
+    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
+    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}
     ${response}=  Redfishtool Post
-    ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+    ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate  expected_error=${expected_resp}
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  Redfishtool GetAttribute  ${certificate_uri}  CertificateString
@@ -437,6 +462,22 @@ Verify Redfishtool Replace Certificate
     ...    Should Contain  ${cert_file_content}  ${bmc_cert_content}
     ...  ELSE
     ...    Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
+
+
+Redfishtool Get
+    [Documentation]  Execute redfishtool for GET operation.
+    [Arguments]  ${uri}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
+
+    # Description of argument(s):
+    # uri             URI for GET operation (e.g. /redfish/v1/AccountService/Accounts/).
+    # cmd_args        Commandline arguments.
+    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
+    #                 authentication error, etc. ).
+
+    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} GET ${uri}
+    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
+
+    [Return]  ${cmd_output}
 
 
 Redfishtool GetAttribute
@@ -513,3 +554,6 @@ Suite Setup Execution
 
     ${tool_exist}=  Run  which redfishtool
     Should Not Be Empty  ${tool_exist}
+
+    # Create certificate sub-directory in current working directory.
+    Create Directory  certificate_dir
