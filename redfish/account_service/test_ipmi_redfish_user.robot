@@ -166,7 +166,7 @@ Update User Privilege Via IPMI And Verify Using Redfish
 
     # Change user privilege to opetrator using IPMI.
     Run IPMI Standard Command
-    ...  user priv ${userid} ${operator_level_priv}
+    ...  user priv ${userid} ${operator_level_priv} ${CHANNEL_NUMBER}
 
     # Verify new user privilege level via Redfish.
     ${privilege}=  Redfish_Utils.Get Attribute
