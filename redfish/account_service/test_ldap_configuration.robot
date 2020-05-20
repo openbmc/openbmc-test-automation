@@ -471,7 +471,7 @@ Configure IP Address Via Different User Roles And Verify
     ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
     # Verify LDAP user with NoAccess privilege is forbidden to configure IP address.
-    ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+    ${LDAP_TYPE}  NoAccess         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
     # Verify LDAP user with Operator privilege is able to configure IP address.
     ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_OK}
@@ -490,10 +490,25 @@ Delete IP Address Via Different User Roles And Verify
     ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
     # Verify LDAP user with NoAccess privilege is forbidden to delete IP address.
-    ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+    ${LDAP_TYPE}  NoAccess         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
     # Verify LDAP user with Operator privilege is able to delete IP address.
     ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_OK}
+
+
+Read Network Configuration Via Different User Roles And Verify
+    [Documentation]  Read network configuraton via different user roles and verify.
+    [Tags]  Read_Network_configuration_Via_Different_User_Roles_And_Verify  get
+    [Teardown]  Restore LDAP Privilege
+
+    [Template]  Update LDAP User Role And Read Network Configuration
+    ${LDAP_TYPE}  Administrator  ${GROUP_NAME}  ${HTTP_OK}
+
+    ${LDAP_TYPE}  ReadOnly       ${GROUP_NAME}  ${HTTP_OK}
+
+    ${LDAP_TYPE}  NoAccess       ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+
+    ${LDAP_TYPE}  Operator       ${GROUP_NAME}  ${HTTP_OK}
 
 
 *** Keywords ***
@@ -807,3 +822,23 @@ Update LDAP User Role And Delete IP Address
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
 
     Delete IP Address  ${test_ip}  ${valid_status_code}
+
+
+Update LDAP User Role And Read Network Configuration
+    [Documentation]  Update LDAP user role and read network confifuration.
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=${HTTP_OK}
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+    # Description of argument(s):
+    # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
+    # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_name         The group name of user.
+    # valid_status_code  The expected valid status code.
+
+    Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
+    ...  ${group_privilege}  ${group_name}
+
+    Redfish.Logout
+
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Get  ${REDFISH_NW_ETH0_URI}  valid_status_codes=[${valid_status_code}]
