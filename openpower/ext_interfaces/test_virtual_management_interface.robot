@@ -17,4 +17,6 @@ Redfish VMI Network Interface Exists
     [Documentation]  Verify VMI network interface exists.
     [Tags]  Redfish_VMI_Network_Interface_Exists
 
-    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces
+    Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces
+    Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0
+    Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf1
