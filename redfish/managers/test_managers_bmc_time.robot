@@ -206,10 +206,6 @@ Rest Set Time Owner
 
     ${data}=  Create Dictionary  data=${MANUAL_MODE}
     Write Attribute  ${TIME_MANAGER_URI}sync_method  TimeSyncMethod  data=${data}  verify=${TRUE}
-    Sleep  5s
-
-    ${data}=  Create Dictionary  data=${BOTH_OWNER}
-    Write Attribute  ${TIME_MANAGER_URI}owner  TimeOwner  data=${data}  verify=${TRUE}
 
 
 Restore NTP Mode
