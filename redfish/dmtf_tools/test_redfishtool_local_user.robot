@@ -11,7 +11,7 @@ Resource          ../../lib/resource.robot
 Resource          ../../lib/bmc_redfish_resource.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/certificate_utils.robot
-
+Resource          ../../lib/dmtf_redfishtool_utils.robot
 
 Suite Setup       Suite Setup Execution
 
@@ -103,7 +103,7 @@ Verify Redfishtool ReadOnly User Privilege
 
 Redfishtool Access Resource
     [Documentation]  Access resource.
-    [Arguments]  ${uri}   ${login_user}  ${login_pasword}  ${expected_error}=""
+    [Arguments]  ${uri}   ${login_user}  ${login_pasword}  ${expected_error}=200
 
     # Description of argument(s):
     # uri            URI for resource access.
@@ -117,23 +117,10 @@ Redfishtool Access Resource
     Redfishtool Get  ${uri}  ${user_cmd_args}  ${expected_error}
 
 
-Is HTTP error Expected
-    [Documentation]  Check if the HTTP error is expected.
-    [Arguments]  ${cmd_output}  ${error_expected}
-
-    # Description of argument(s):
-    # cmd_output      Output of an HTTP operation.
-    # error_expected  Expected error.
-
-    @{words} =  Split String  ${error_expected}  ,
-    @{errorString}=  Split String  ${cmd_output}  ${SPACE}
-    Should Contain Any  ${errorString}  @{words}
-
-
 Redfishtool Create User
     [Documentation]  Create new user.
     [Arguments]  ${user_name}  ${password}  ${roleID}  ${enable}  ${login_user}=""  ${login_pasword}=""
-    ...  ${expected_error}=""
+    ...  ${expected_error}=200
 
     # Description of argument(s):
     # user_name      The user name (e.g. "test", "robert", etc.).
@@ -156,7 +143,7 @@ Redfishtool Create User
 Redfishtool Update User Role
     [Documentation]  Update user role.
     [Arguments]  ${user_name}  ${newRole}  ${login_user}=""  ${login_pasword}=""
-    ...  ${expected_error}=""
+    ...  ${expected_error}=200
 
     # Description of argument(s):
     # user_name      The user name (e.g. "test", "robert", etc.).
@@ -178,7 +165,7 @@ Redfishtool Update User Role
 
 Redfishtool Delete User
     [Documentation]  Delete an user.
-    [Arguments]  ${user_name}  ${expected_error}=""
+    [Arguments]  ${user_name}  ${expected_error}=200
 
     # Description of argument(s):
     # user_name       The user name (e.g. "test", "robert", etc.).
@@ -213,73 +200,6 @@ Redfishtool Verify User Name Exists
     ...  /redfish/v1/AccountService/Accounts/${user_name}
 
     [return]  ${status}
-
-
-Redfishtool Get
-    [Documentation]  Execute redfishtool for GET operation.
-    [Arguments]  ${uri}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
-
-    # Description of argument(s):
-    # uri             URI for GET operation (e.g. /redfish/v1/AccountService/Accounts/).
-    # cmd_args        Commandline arguments.
-    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
-    #                 authentication error, etc. ).
-
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} GET ${uri}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-
-    [Return]  ${cmd_output}
-
-
-Redfishtool Post
-    [Documentation]  Execute redfishtool for  Post operation.
-    [Arguments]  ${payload}  ${uri}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
-
-    # Description of argument(s):
-    # payload         Payload with POST operation (e.g. data for user name, password, role,
-    #                 enabled attribute)
-    # uri             URI for POST operation (e.g. /redfish/v1/AccountService/Accounts/).
-    # cmd_args        Commandline arguments.
-    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
-    #                 authentication error, etc. ).
-
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} POST ${uri} --data=${payload}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-
-    [Return]  ${cmd_output}
-
-
-Redfishtool Patch
-    [Documentation]  Execute redfishtool for  Patch operation.
-    [Arguments]  ${payload}  ${uri}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
-
-    # Description of argument(s):
-    # payload         Payload with POST operation (e.g. data for user name, role, etc. ).
-    # uri             URI for PATCH operation (e.g. /redfish/v1/AccountService/Accounts/ ).
-    # cmd_args        Commandline arguments.
-    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
-    #                 authentication error, etc. ).
-
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} PATCH ${uri} --data=${payload}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-
-    [Return]  ${cmd_output}
-
-
-Redfishtool Delete
-    [Documentation]  Execute redfishtool for  Post operation.
-    [Arguments]  ${uri}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
-
-    # Description of argument(s):
-    # uri             URI for DELETE operation.
-    # cmd_args        Commandline arguments.
-    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
-    #                 authentication error, etc. ).
-
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} DELETE ${uri}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-
-    [Return]  ${cmd_output}
 
 
 Suite Setup Execution
