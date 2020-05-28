@@ -45,7 +45,7 @@ Verify Set Time Using Redfish
     [Documentation]  Verify set time using redfish API.
     [Tags]  Verify_Set_Time_Using_Redfish
 
-    Rest Set Time Owner
+    Set Time To Manual Mode
 
     ${old_bmc_time}=  CLI Get BMC DateTime
     # Add 3 days to current date.
@@ -201,15 +201,11 @@ Redfish Set DateTime
     ...  &{kwargs}
 
 
-Rest Set Time Owner
-    [Documentation]  Set time owner of the system via REST.
+Set Time To Manual Mode
+    [Documentation]  Set date time to manual mode via REST.
 
     ${data}=  Create Dictionary  data=${MANUAL_MODE}
     Write Attribute  ${TIME_MANAGER_URI}sync_method  TimeSyncMethod  data=${data}  verify=${TRUE}
-    Sleep  5s
-
-    ${data}=  Create Dictionary  data=${BOTH_OWNER}
-    Write Attribute  ${TIME_MANAGER_URI}owner  TimeOwner  data=${data}  verify=${TRUE}
 
 
 Restore NTP Mode
@@ -228,7 +224,7 @@ Suite Setup Execution
 
     Printn
     Redfish.Login
-    Rest Set Time Owner
+    Set Time To Manual Mode
 
 Suite Teardown Execution
     [Documentation]  Do the suite level teardown.
@@ -236,5 +232,5 @@ Suite Teardown Execution
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'NTPServers': ['${EMPTY}', '${EMPTY}']}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    Rest Set Time Owner
+    Set Time To Manual Mode
     Redfish.Logout
