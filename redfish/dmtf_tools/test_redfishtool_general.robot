@@ -10,6 +10,7 @@ Library           Collections
 Resource          ../../lib/resource.robot
 Resource          ../../lib/bmc_redfish_resource.robot
 Resource          ../../lib/openbmc_ffdc.robot
+Resource          ../../lib/dmtf_redfishtool_utils.robot
 
 
 Suite Setup       Suite Setup Execution
@@ -47,35 +48,6 @@ Verify Redfishtool Health Check Commands
 
 
 *** Keywords ***
-
-
-Is HTTP error Expected
-    [Documentation]  Check if the HTTP error is expected.
-    [Arguments]  ${cmd_output}  ${error_expected}
-
-    # Description of argument(s):
-    # cmd_output      Output of an HTTP operation.
-    # error_expected  Expected error.
-
-    @{words} =  Split String  ${error_expected}  ,
-    @{errorString}=  Split String  ${cmd_output}  ${SPACE}
-    Should Contain Any  ${errorString}  @{words}
-
-
-Redfishtool Get
-    [Documentation]  Execute redfishtool for GET operation.
-    [Arguments]  ${uri}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
-
-    # Description of argument(s):
-    # uri             URI for GET operation (e.g. /redfish/v1/AccountService/Accounts/).
-    # cmd_args        Commandline arguments.
-    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
-    #                 authentication error, etc. ).
-
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} GET ${uri}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-
-    [Return]  ${cmd_output}
 
 
 Suite Setup Execution
