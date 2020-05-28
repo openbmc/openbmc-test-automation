@@ -11,7 +11,7 @@ Resource          ../../lib/resource.robot
 Resource          ../../lib/bmc_redfish_resource.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/certificate_utils.robot
-
+Resource          ../../lib/dmtf_redfishtool_utils.robot
 
 Suite Setup       Suite Setup Execution
 
@@ -99,19 +99,6 @@ Verify Redfishtool Client Certificate Install Errors
 
 
 *** Keywords ***
-
-
-Is HTTP error Expected
-    [Documentation]  Check if the HTTP error is expected.
-    [Arguments]  ${cmd_output}  ${error_expected}
-
-    # Description of argument(s):
-    # cmd_output      Output of an HTTP operation.
-    # error_expected  Expected error.
-
-    @{words} =  Split String  ${error_expected}  ,
-    @{errorString}=  Split String  ${cmd_output}  ${SPACE}
-    Should Contain Any  ${errorString}  @{words}
 
 
 Verify Redfishtool Install Certificate
@@ -270,22 +257,6 @@ Verify Redfishtool Replace Certificate
     ...    Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
 
 
-Redfishtool Get
-    [Documentation]  Execute redfishtool for GET operation.
-    [Arguments]  ${uri}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
-
-    # Description of argument(s):
-    # uri             URI for GET operation (e.g. /redfish/v1/AccountService/Accounts/).
-    # cmd_args        Commandline arguments.
-    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
-    #                 authentication error, etc. ).
-
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} GET ${uri}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-
-    [Return]  ${cmd_output}
-
-
 Redfishtool GetAttribute
     [Documentation]  Execute redfishtool for GET operation.
     [Arguments]  ${uri}  ${Attribute}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
@@ -302,40 +273,6 @@ Redfishtool GetAttribute
     ${json_object}=  To JSON  ${cmd_output}
 
     [Return]  ${json_object["CertificateString"]}
-
-
-Redfishtool Post
-    [Documentation]  Execute redfishtool for  Post operation.
-    [Arguments]  ${payload}  ${uri}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
-
-    # Description of argument(s):
-    # payload         Payload with POST operation (e.g. data for user name, password, role,
-    #                 enabled attribute)
-    # uri             URI for POST operation (e.g. /redfish/v1/AccountService/Accounts/).
-    # cmd_args        Commandline arguments.
-    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
-    #                 authentication error, etc. ).
-
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} POST ${uri} --data=${payload}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-
-    [Return]  ${cmd_output}
-
-
-Redfishtool Delete
-    [Documentation]  Execute redfishtool for  Post operation.
-    [Arguments]  ${uri}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
-
-    # Description of argument(s):
-    # uri             URI for DELETE operation.
-    # cmd_args        Commandline arguments.
-    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
-    #                 authentication error, etc. ).
-
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} DELETE ${uri}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-
-    [Return]  ${cmd_output}
 
 
 Suite Setup Execution
