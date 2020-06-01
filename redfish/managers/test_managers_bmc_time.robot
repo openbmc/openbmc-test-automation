@@ -45,7 +45,7 @@ Verify Set Time Using Redfish
     [Documentation]  Verify set time using redfish API.
     [Tags]  Verify_Set_Time_Using_Redfish
 
-    Rest Set Time Owner
+    Set NTP Mode  ${False}
 
     ${old_bmc_time}=  CLI Get BMC DateTime
     # Add 3 days to current date.
@@ -108,10 +108,10 @@ Verify NTP Server Set
     [Documentation]  Verify NTP server set.
     [Tags]  Verify_NTP_Server_Set
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
     ...  body={'NTP':{'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    ${network_protocol}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/NetworkProtocol
     Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_1}
     ...  msg=NTP server value ${ntp_server_1} not stored.
     Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_2}
@@ -122,10 +122,10 @@ Verify NTP Server Value Not Duplicated
     [Documentation]  Verify NTP servers value not same for both primary and secondary server.
     [Tags]  Verify_NTP_Server_Value_Not_Duplicated
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
     ...  body={'NTP':{'NTPServers': ['${ntp_server_1}', '${ntp_server_1}']}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    ${network_protocol}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/NetworkProtocol
     Should Contain X Times  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_1}  1
     ...  msg=NTP primary and secondary server values should not be same.
 
@@ -134,12 +134,12 @@ Verify NTP Server Setting Persist After BMC Reboot
     [Documentation]  Verify NTP server setting persist after BMC reboot.
     [Tags]  Verify_NTP_Server_Setting_Persist_After_BMC_Reboot
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
     ...  body={'NTP':{'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     Redfish OBMC Reboot (off)
     Redfish.Login
-    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    ${network_protocol}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/NetworkProtocol
     Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_1}
     ...  msg=NTP server value ${ntp_server_1} not stored.
     Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_2}
@@ -151,13 +151,13 @@ Verify Enable NTP
     [Teardown]  Restore NTP Mode
     [Tags]  Verify_Enable_NTP
 
-    ${original_ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
+    ${original_ntp}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc/NetworkProtocol  NTP
     Set Suite Variable  ${original_ntp}
     Rprint Vars  original_ntp
     # The following patch command should set the ["NTP"]["ProtocolEnabled"] property to "True".
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${True}}}
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={'NTP':{'ProtocolEnabled': ${True}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    ${ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
+    ${ntp}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc/NetworkProtocol  NTP
     Rprint Vars  ntp
     Valid Value  ntp["ProtocolEnabled"]  valid_values=[True]
 
@@ -201,26 +201,23 @@ Redfish Set DateTime
     ...  &{kwargs}
 
 
-Rest Set Time Owner
-    [Documentation]  Set time owner of the system via REST.
-
-    ${data}=  Create Dictionary  data=${MANUAL_MODE}
-    Write Attribute  ${TIME_MANAGER_URI}sync_method  TimeSyncMethod  data=${data}  verify=${TRUE}
-    Sleep  5s
-
-    ${data}=  Create Dictionary  data=${BOTH_OWNER}
-    Write Attribute  ${TIME_MANAGER_URI}owner  TimeOwner  data=${data}  verify=${TRUE}
-
-
 Restore NTP Mode
     [Documentation]  Restore the original NTP mode.
 
-
     Return From Keyword If  &{original_ntp} == &{EMPTY}
     Print Timen  Restore NTP Mode.
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
-    ...  body={'NTP':{'ProtocolEnabled': ${original_ntp["ProtocolEnabled"]}}}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Set NTP Mode  ${original_ntp["ProtocolEnabled"]}
+
+
+Set NTP Mode
+    [Documentation]  Enable or disable NTP.
+    [Arguments]  ${enable}=${True}  ${expected_status}=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    # Description of argument(s):
+    # enable           Sets NTP mode when True.
+    # expected_status  Expected status for Redfish command.
+
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={'NTP':{'ProtocolEnabled': ${enable}}}
+    ...  valid_status_codes=${expected_status}
 
 
 Suite Setup Execution
@@ -228,13 +225,13 @@ Suite Setup Execution
 
     Printn
     Redfish.Login
-    Rest Set Time Owner
+    Set NTP Mode  ${False}
 
 Suite Teardown Execution
     [Documentation]  Do the suite level teardown.
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
     ...  body={'NTP':{'NTPServers': ['${EMPTY}', '${EMPTY}']}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    Rest Set Time Owner
+    Set NTP Mode  ${False}
     Redfish.Logout
