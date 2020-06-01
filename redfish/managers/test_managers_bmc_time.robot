@@ -211,12 +211,20 @@ Set Time To Manual Mode
 Restore NTP Mode
     [Documentation]  Restore the original NTP mode.
 
-
     Return From Keyword If  &{original_ntp} == &{EMPTY}
     Print Timen  Restore NTP Mode.
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
-    ...  body={'NTP':{'ProtocolEnabled': ${original_ntp["ProtocolEnabled"]}}}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Set NTP Mode  ${original_ntp["ProtocolEnabled"]}
+
+
+Set NTP Mode
+    [Documentation]  Enable or disable NTP.
+    [Arguments]  ${enable}=${True}  ${expected_status}=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    # Description of argument(s):
+    # enable           Sets NTP mode when True.
+    # expected_status  Expected status for Redfish command.
+
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={'NTP':{'ProtocolEnabled': ${enable}}}
+    ...  valid_status_codes=${expected_status}
 
 
 Suite Setup Execution
