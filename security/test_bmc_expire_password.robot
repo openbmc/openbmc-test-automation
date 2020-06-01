@@ -59,6 +59,23 @@ Expire Root Password And Update Bad Password Length Via Redfish
    ...  body={'Password': '0penBmc0penBmc0penBmc'}
    Should Be Equal  ${status}  ${False}
 
+
+Expire Root Password And Create New User Via Redfish
+    [Documentation]  Expire root password and expect an error while creating new user.
+    [Tags]  Expire_Root_Password_And_Create_New_User_Via_Redfish
+    [Setup]  No Operation
+    [Teardown]  No Operation
+
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
+    Should Contain  ${output}  password expiry information changed
+
+    ${payload}=  Create Dictionary
+    ...  UserName=admin_user  Password=TestPwd123  RoleId=Administrator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+
 *** Keywords ***
 
 Test Setup Execution
