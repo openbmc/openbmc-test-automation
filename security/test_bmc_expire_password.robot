@@ -50,7 +50,7 @@ Expire Root Password And Update Bad Password Length Via Redfish
    [Documentation]  Expire root password and update bad password via Redfish and expect an error.
    [Tags]  Expire_Root_Password_And_Update_Bad_Password_Length_Via_Redfish
    [Teardown]  Run Keywords  Wait Until Keyword Succeeds  1 min  10 sec
-    ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
+   ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
 
    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
@@ -87,10 +87,29 @@ Expire And Change Root User Password Via Redfish And Verify
    Redfish.Login  ${OPENBMC_USERNAME}  0penBmc123
 
 
+Verify Error While Creating User With Expired Password
+    [Documentation]  Expire root password and expect an error while creating new user.
+    [Tags]  Verify_Error_While_Creating_User_With_Expired_Password
+    [Teardown]  Run Keywords  Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
+
+
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
+    Should Contain  ${output}  password expiry information changed
+
+    Verify Root Password Expired
+    Redfish.Login
+    ${payload}=  Create Dictionary
+    ...  UserName=admin_user  Password=TestPwd123  RoleId=Administrator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_FORBIDDEN}]
+
+
 *** Keywords ***
 
 Suite Setup Execution
-   [Documentation]  Test setup  execution.
+   [Documentation]  Suite setup  execution.
 
    Redfish.login
    Redfish.Patch  /redfish/v1/AccountService/  body={"AccountLockoutThreshold": 0}
@@ -133,6 +152,4 @@ Verify Root Password Expired
     ${resp}=  Post Request  openbmc  /login  data=${data}  headers=${headers}
     ${json}=  To JSON  ${resp.content}
     Should Contain  ${json["extendedMessage"]}  POST the new password
-    Post Request  openbmc   /xyz/openbmc_project/user/root/action/SetPassword
-    ...  data={"data":["0penBmc006"]}  headers=${headers}
 
