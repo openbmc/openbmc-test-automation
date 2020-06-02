@@ -93,6 +93,13 @@ def pldmtool(option_string, parse_results=1, **bsu_options):
             dict_data1, dict_data2 = vf.split_dict_on_key('containerentitycontainerid', result)
             return dict_data1
 
+        elif 'entitytype' in result:
+            # Example :
+            # entityType: 24576(OEM)
+            # Note: OEM type number is dynamic
+            if 'OEM' in result['entitytype']:
+                result['entitytype'] = 'OEM'
+
         # Collect bios strings from bios string table in to list.
         # Example output for pldmtool GetBIOSTable --type stringTable
         # PLDM StringTable:

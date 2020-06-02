@@ -118,7 +118,7 @@ RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER = {
     'datalength': ['10'],
     'pldmterminushandle': ['0', '2'],
     'entitytype': ['System Board', 'Chassis front panel board (control panel)',
-                   'Management Controller', '208(OEM)', 'Power converter',
+                   'Management Controller', 'OEM', 'Power converter',
                    'System (logical)', 'System chassis (main enclosure)',
                    'Chassis front panel board (control panel)',
                    'Processor Module', 'Memory Module'],
@@ -137,7 +137,9 @@ RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION = {
 PLDM_PDR_TYPES = {
     'PLDM_STATE_EFFECTER_PDR': '11',
     'PLDM_PDR_FRU_RECORD_SET': '20',
-    'PLDM_PDR_ENTITY_ASSOCIATION': '15'}
+    'PLDM_PDR_ENTITY_ASSOCIATION': '15',
+    'PLDM_STATE_SENSOR_PDR': '4',
+    'PLDM_NUMERIC_EFFECTER_PDR': '9'}
 
 RESPONSE_LIST_GETBIOSTABLE_STRTABLE = [
     'Allowed', 'Disabled', 'Enabled', 'IPv4DHCP', 'IPv4Static', 'Not Allowed',
