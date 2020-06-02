@@ -26,6 +26,7 @@ Verify GetPDR
        ${record_handle}=  Set Variable  ${next_record_handle}
     END
 
+
 Verify SetStateEffecterStates
     [Documentation]  Verify set state effecter states response message.
     [Tags]  Verify_SetStateEffecterStates
@@ -80,6 +81,11 @@ Verify GetPDR For Record Handle
     ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER}
     ...  ELSE IF  ${pldm_output['pdrtype']} == ${PLDM_PDR_TYPES['PLDM_PDR_ENTITY_ASSOCIATION']}
     ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION}
+    ...  ELSE IF  ${pldm_output['pdrtype']} == ${PLDM_PDR_TYPES['PLDM_NUMERIC_EFFECTER_PDR']}
+    ...  Log To Console  "Found PDR Type - PLDM_NUMERIC_EFFECTER_PDR"
+    ...  ELSE IF  ${pldm_output['pdrtype']} == ${PLDM_PDR_TYPES['PLDM_STATE_SENSOR_PDR']}
+    ...  Log To Console  "Found PDR Type - PLDM_STATE_SENSOR_PDR"
+    ...  ELSE  Fail  msg="Unknown PDR Type is received"
 
     Should be equal as strings  ${pldm_output['recordhandle']}  ${record_handle}
     [Return]  ${pldm_output['nextrecordhandle']}
@@ -97,7 +103,7 @@ Verify SetStateEffecterStates For Effecter States
     #                      e.g. '1 1'.
 
     # Example output:
-    # SetStateEffecterStates ]: SUCCESS
+    # [SetStateEffecterStates ]: SUCCESS
 
     ${pldm_cmd}=  Evaluate  $CMD_SETSTATEEFFECTERSTATES % (${effecter_handle}, ${count}, ${effecter_states})
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
