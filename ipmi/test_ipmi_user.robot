@@ -43,7 +43,8 @@ Verify IPMI User Summary
 
     # Verify maximum user count IPMI local user can have. Also verify
     # currently enabled users.
-    ${resp}=  Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Standard Command  user summary
+    ${resp}=  Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Standard Command
+    ...  user summary ${CHANNEL_NUMBER}
     ${enabled_user_count}=
     ...  Get Lines Containing String  ${resp}  Enabled User Count
     ${maximum_ids}=  Get Lines Containing String  ${resp}  Maximum IDs
