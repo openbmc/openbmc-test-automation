@@ -214,7 +214,7 @@ Set Session Privilege Level And Verify
     # privilege_level    Requested Privilege Level.
     # expected_level     New Privilege Level (or present level if ‘return present privilege level’ was selected).
 
-    ${resp}=  Run IPMI Command
+    ${resp}=  Run External IPMI Raw Command
     ...  0x06 0x3b ${privilege_level}
     Should Contain  ${resp}  ${expected_level}
 
@@ -226,6 +226,6 @@ Set Invalid Session Privilege Level And Verify
     # privilege_level    Requested Privilege Level.
 
     # Verify requested level exceeds Channel and/or User Privilege Limit.
-    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Command
+    ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Raw Command
     ...  0x06 0x3b ${privilege_level}
     Should Contain  ${msg}  Unknown  rsp=0x81
