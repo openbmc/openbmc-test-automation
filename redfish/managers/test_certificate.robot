@@ -10,6 +10,7 @@ Library          String
 Force Tags       Certificate_Test
 
 Suite Setup      Suite Setup Execution
+Suite Teardown   Suite Teardown
 Test Teardown    Test Teardown Execution
 
 
@@ -83,7 +84,6 @@ Verify Maximum CA Certificate Install
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Delete All CA Certificate Via Redfish
 
     # Get CA certificate count from BMC.
-    redfish.Login
     ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Truststore/Certificates
     ${cert_count}=  Get Length  ${cert_list}
 
@@ -119,8 +119,6 @@ Verify Error While Uploding Same CA Certificate
 Verify Server Certificate View Via Openssl
     [Documentation]  Verify server certificate via openssl command.
     [Tags]  Verify_Server_Certificate_View_Via_Openssl
-
-    redfish.Login
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
@@ -185,6 +183,8 @@ Verify CSR Generation For Client Certificate With Invalid Value
 Verify Expired Client Certificate Install
     [Documentation]  Verify installation of expired CA certificate.
     [Tags]  Verify_Expired_Client_Certificate_Install
+    [Setup]  Get Current BMC Date
+    [Teardown]  Restore BMC Date
 
     Install And Verify Certificate Via Redfish  Client  Expired Certificate  error
 
@@ -192,6 +192,8 @@ Verify Expired Client Certificate Install
 Verify Expired CA Certificate Install
     [Documentation]  Verify installation of expired CA certificate.
     [Tags]  Verify_Expired_CA_Certificate_Install
+    [Setup]  Get Current BMC Date
+    [Teardown]  Restore BMC Date
 
     Install And Verify Certificate Via Redfish  CA  Expired Certificate  error
 
@@ -210,20 +212,20 @@ Install And Verify Certificate Via Redfish
     #                     request (i.e. "ok" or "error").
     # delete_cert         Certificate will be deleted before installing if this True.
 
-    redfish.Login
     Run Keyword If  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
     ...  Delete All CA Certificate Via Redfish
     ...  ELSE IF  '${cert_type}' == 'Client' and '${delete_cert}' == '${True}'
     ...  Delete Certificate Via BMC CLI  ${cert_type}
 
-    ${time}=  Set Variable If  '${cert_format}' == 'Expired Certificate'  -10  365
-    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
+    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
     ${certificate_uri}=  Set Variable If
     ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}
     ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
+
+    Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date
 
     ${cert_id}=  Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
     Logging  Installed certificate id: ${cert_id}
@@ -238,6 +240,35 @@ Install And Verify Certificate Via Redfish
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
     [Return]  ${cert_id}
 
+Modify BMC Date
+    [Documentation]  Modify date in BMC.
+    [Arguments]  ${date_set_type}=future
+
+    # Description of argument(s):
+    # date_set_type    Set BMC date to a future or old date by 375 days.
+
+    Redfish Power Off  stack_mode=skip
+    ${new_time}=  Run Keyword If  '${date_set_type}' == 'future'  Add Time To Date  ${cli_date_time}  375 days
+    ...  ELSE  Subtract Time From Date  ${cli_date_time}  375 days
+    #${new_time}=  Add Time To Date  ${cli_date_time}  375 days
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={'NTP':{'ProtocolEnabled': ${False}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${new_time}'}
+    ...  valid_status_codes=[${HTTP_OK}]
+
+Get Current BMC Date
+    [Documentation]  Get current BMC date.
+
+    ${cli_date_time}=  CLI Get BMC DateTime
+    Set Test Variable  ${cli_date_time}
+
+Restore BMC Date
+    [Documentation]  Restore BMC date to its prior value.
+
+    Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${cli_date_time}'}
+    ...  valid_status_codes=[${HTTP_OK}]
+    FFDC On Test Case Fail
 
 Replace Certificate Via Redfish
     [Documentation]  Test 'replace certificate' operation in the BMC via Redfish.
@@ -255,8 +286,6 @@ Replace Certificate Via Redfish
     ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate Valid Privatekey  ok
     ...  ELSE IF  '${cert_type}' == 'CA'
     ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate  ok
-
-    redfish.Login
 
     ${time}=  Set Variable If  '${cert_format}' == 'Expired Certificate'  -10  365
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
@@ -298,8 +327,6 @@ Generate CSR Via Redfish
     # key_curv_id         CSR key curv id ("prime256v1" or "secp521r1" or "secp384r1").
     # expected_status     Expected status of certificate replace Redfish
     #                     request ("ok" or "error").
-
-    redfish.Login
 
     ${certificate_uri}=  Set Variable If
     ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/
@@ -364,10 +391,15 @@ Suite Setup Execution
 
     # Create certificate sub-directory in current working directory.
     Create Directory  certificate_dir
+    Redfish.Login
 
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
-    redfish.Logout
+
+Suite Teardown
+    [Documentation]  Do suite teardown tasks.
+
+    Redfish.Logout
