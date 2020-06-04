@@ -50,7 +50,7 @@ Set Valid System Time
     # Added delay for NTP mode to get disabled fully
     Sleep  30s
 
-    ${resp}=  Run IPMI Standard Command  sel time set "${SYSTEM_TIME_VALID}"
+    ${resp}=  Run External IPMI Standard Command  sel time set "${SYSTEM_TIME_VALID}"
     ${setdate}=  Convert Date  ${SYSTEM_TIME_VALID}
     ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=yes
     ${bmcdate}=  Get BMC Time Using IPMI
@@ -68,7 +68,7 @@ Set Invalid System Time
     Set Time Owner  ${HOST_OWNER}
     Set Time Mode  ${MANUAL_MODE}
 
-    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Standard Command
     ...  sel time set "${SYSTEM_TIME_INVALID}"
     Should Start With  ${msg}  Specified time could not be parsed
 
@@ -80,7 +80,7 @@ Set System Time with no time
     Set Time Owner  ${HOST_OWNER}
     Set Time Mode  ${MANUAL_MODE}
 
-    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Standard Command
     ...  sel time set ""
     Should Start With  ${msg}  Specified time could not be parsed
 
