@@ -64,10 +64,11 @@ Subtract Lists
     # list2      The list which is to be subtracted from list1.
 
     ${diff_list}=  Create List
-    :FOR  ${item}  IN  @{list1}
-    \  ${status}=  Run Keyword And Return Status
-    ...  Should Contain  ${list2}  ${item}
-    \  Run Keyword If  '${status}' == '${False}'
-    ...  Append To List  ${diff_list}  ${item}
+    FOR  ${item}  IN  @{list1}
+        ${status}=  Run Keyword And Return Status
+        ...  Should Contain  ${list2}  ${item}
+        Run Keyword If  '${status}' == '${False}'
+        ...  Append To List  ${diff_list}  ${item}
+    END
 
     [Return]  ${diff_list}
