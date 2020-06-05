@@ -36,10 +36,11 @@ Get Software Objects
     ${host_list}=  Create List
     ${sw_list}=  Read Properties  ${SOFTWARE_VERSION_URI}
 
-    :FOR  ${index}  IN  @{sw_list}
-    \  ${attr_purpose}=  Read Software Attribute  ${index}  Purpose
-    \  Continue For Loop If  '${attr_purpose}' != '${version_type}'
-    \  Append To List  ${host_list}  ${index}
+    FOR  ${index}  IN  @{sw_list}
+      ${attr_purpose}=  Read Software Attribute  ${index}  Purpose
+      Continue For Loop If  '${attr_purpose}' != '${version_type}'
+      Append To List  ${host_list}  ${index}
+    END
 
     [Return]  ${host_list}
 
@@ -240,14 +241,14 @@ Upload And Activate Image
     ...    AND
     ...      Return From Keyword
 
-    Should Be Equal As Strings  &{software_state}[Activation]  ${READY}
+    Should Be Equal As Strings  ${software_state}[Activation]  ${READY}
 
     # Request the image to be activated.
     ${args}=  Create Dictionary  data=${REQUESTED_ACTIVE}
     Write Attribute  ${SOFTWARE_VERSION_URI}${version_id}
     ...  RequestedActivation  data=${args}
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
-    Should Be Equal As Strings  &{software_state}[RequestedActivation]
+    Should Be Equal As Strings  ${software_state}[RequestedActivation]
     ...  ${REQUESTED_ACTIVE}
 
     # Does caller want to wait for activation to complete?
@@ -256,7 +257,7 @@ Upload And Activate Image
     # Verify code update was successful and Activation state is Active.
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
-    Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+    Should Be Equal As Strings  ${software_state}[Activation]  ${ACTIVE}
 
     # Uploaded and activated image should have priority set to 0. Due to timing
     # contention, it may take up to 10 seconds to complete updating priority.
@@ -491,10 +492,11 @@ Get List of Images
     [Documentation]  Get List of Images
     [Arguments]  ${installed_images}
 
-    :FOR  ${uri}  IN  @{installed_images}
-    \  ${resp}=  OpenBMC Get Request  ${uri}
-    \  ${json}=  To JSON  ${resp.content}
-    \  Log  ${json["data"]}
+    FOR  ${uri}  IN  @{installed_images}
+      ${resp}=  OpenBMC Get Request  ${uri}
+      ${json}=  To JSON  ${resp.content}
+      Log  ${json["data"]}
+    END
 
 
 Check Software Object Attribute
