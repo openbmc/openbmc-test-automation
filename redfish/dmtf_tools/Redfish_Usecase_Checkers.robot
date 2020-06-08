@@ -19,11 +19,11 @@ ${rsv_dir_path}           Redfish-Usecase-Checkers
 
 ${command_account}        ${DEFAULT_PYTHON} ${rsv_dir_path}${/}account_management/account_management.py
 ...                       -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
-...                       -p ${OPENBMC_PASSWORD} -S Always -d ${EXECDIR}${/}logs${/} -v
+...                       -p ${OPENBMC_PASSWORD} -S Always -d ${EXECDIR}${/}logs${/}
 
 ${command_power_control}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}power_control/power_control.py
 ...                       -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
-...                       -p ${OPENBMC_PASSWORD} -S Always --F
+...                       -p ${OPENBMC_PASSWORD} -S Always
 
 ${power_on_timeout}       15 mins
 ${power_off_timeout}      15 mins
