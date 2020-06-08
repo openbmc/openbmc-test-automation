@@ -19,11 +19,11 @@ ${rsv_dir_path}           Redfish-Usecase-Checkers
 
 ${command_account}        ${DEFAULT_PYTHON} ${rsv_dir_path}${/}account_management/account_management.py
 ...                       -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
-...                       -p ${OPENBMC_PASSWORD} -S Always -d ${EXECDIR}${/}logs${/} -v
+...                       -p ${OPENBMC_PASSWORD} -S Always -d ${EXECDIR}${/}logs${/}
 
 ${command_power_control}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}power_control/power_control.py
 ...                       -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
-...                       -p ${OPENBMC_PASSWORD} -S Always --F
+...                       -p ${OPENBMC_PASSWORD} -S Always
 
 ${power_on_timeout}       15 mins
 ${power_off_timeout}      15 mins
@@ -35,10 +35,26 @@ Test BMC Redfish Account Management
     [Documentation]  Check Account Management with a Redfish interface.
     [Tags]  Test_BMC_Redfish_Account_Management
 
-    ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_account}
+    ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_account}  check_error=1
 
     ${output}=  Shell Cmd  cat ${EXECDIR}${/}logs${/}results.json
     Log  ${output}
+
+    ${json}=  OperatingSystem.Get File    ${EXECDIR}${/}logs${/}results.json
+
+    ${object}=  Evaluate  json.loads('''${json}''')  json
+
+    ${result_list}=  Set Variable  ${object["TestResults"]}
+
+    @{failed_tc_list}=    Create List
+
+    FOR  ${result}  IN  @{result_list}
+       ${rc}=    evaluate    'ErrorMessages'=='${result}'
+       ${num}=  Run Keyword If  ${rc} == False  Set Variable  ${result_list["${result}"]["fail"]}
+       Run Keyword If  ${num} != None and ${num} > 0  Append To List  ${failed_tc_list}   ${result}
+    END
+
+    Should Be Empty  ${failed_tc_list}  Failed test cases are ${failed_tc_list}
 
 
 Test BMC Redfish Boot Host And ForceOff
