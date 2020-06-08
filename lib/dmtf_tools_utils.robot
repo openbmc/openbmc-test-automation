@@ -33,7 +33,9 @@ Run DMTF Tool
     # rsv_dir_path    Directory path for rsv tool (e.g. "Redfish-Service-Validator").
     # command_string  The complete rsv command string to be run.
 
-    ${rc}  ${output}=  Shell Cmd  ${command_string}
+    ${rc}  ${output}=  Shell Cmd  ${command_string}  ignore_err=1
+
+    #Log To Console  inside Run DMTF Tool rc value : ${rc}
     Log  ${output}
     [Return]  ${output}
 
