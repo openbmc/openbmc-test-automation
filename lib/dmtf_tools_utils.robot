@@ -27,15 +27,20 @@ Download DMTF Tool
 
 Run DMTF Tool
     [Documentation]  Execution of the command.
-    [Arguments]      ${rsv_dir_path}  ${command_string}
+    [Arguments]      ${rsv_dir_path}  ${command_string}  ${ignore_error}=False
 
     # Description of arguments:
     # rsv_dir_path    Directory path for rsv tool (e.g. "Redfish-Service-Validator").
     # command_string  The complete rsv command string to be run.
 
-    ${rc}  ${output}=  Shell Cmd  ${command_string}
+    ${rc}  ${output}=  Run Keyword If  ${ignore_error} == True
+    ...  Shell Cmd  ${command_string}  ignore_err=1
+    ...  ELSE
+    ...  Shell Cmd  ${command_string}
+
+    #Log To Console  inside Run DMTF Tool rc value : ${rc}
     Log  ${output}
-    [Return]  ${output}
+    [Return]  ${output}  ${rc}
 
 
 Redfish Service Validator Result

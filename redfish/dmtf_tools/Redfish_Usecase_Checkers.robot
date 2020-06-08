@@ -19,11 +19,11 @@ ${rsv_dir_path}           Redfish-Usecase-Checkers
 
 ${command_account}        ${DEFAULT_PYTHON} ${rsv_dir_path}${/}account_management/account_management.py
 ...                       -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
-...                       -p ${OPENBMC_PASSWORD} -S Always -d ${EXECDIR}${/}logs${/} -v
+...                       -p ${OPENBMC_PASSWORD} -S Always -d ${EXECDIR}${/}logs${/}
 
 ${command_power_control}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}power_control/power_control.py
 ...                       -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
-...                       -p ${OPENBMC_PASSWORD} -S Always --F
+...                       -p ${OPENBMC_PASSWORD} -S Always
 
 ${power_on_timeout}       15 mins
 ${power_off_timeout}      15 mins
@@ -35,9 +35,12 @@ Test BMC Redfish Account Management
     [Documentation]  Check Account Management with a Redfish interface.
     [Tags]  Test_BMC_Redfish_Account_Management
 
-    ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_account}
+    ${output}  ${rc}=  Run DMTF Tool  ${rsv_dir_path}  ${command_account}  ignore_error=True
 
     ${output}=  Shell Cmd  cat ${EXECDIR}${/}logs${/}results.json
+
+    Should Be True  ${rc} == 0  One or more test cases have failed
+
     Log  ${output}
 
 
