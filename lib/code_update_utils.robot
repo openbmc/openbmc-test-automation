@@ -231,7 +231,7 @@ Upload And Activate Image
     # Verify the image is 'READY' to be activated or if it's already active,
     # set priority to 0 and reboot the BMC.
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
-    ${activation}=  Set Variable  &{software_state}[Activation]
+    ${activation}=  Set Variable  ${software_state}[Activation]
 
     Run Keyword If
     ...  '${skip_if_active}' == 'true' and '${activation}' == '${ACTIVE}'
