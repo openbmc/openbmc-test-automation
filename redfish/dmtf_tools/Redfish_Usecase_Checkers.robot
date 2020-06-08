@@ -19,11 +19,11 @@ ${rsv_dir_path}           Redfish-Usecase-Checkers
 
 ${command_account}        ${DEFAULT_PYTHON} ${rsv_dir_path}${/}account_management/account_management.py
 ...                       -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
-...                       -p ${OPENBMC_PASSWORD} -S Always -d ${EXECDIR}${/}logs${/} -v
+...                       -p ${OPENBMC_PASSWORD} -S Always -d ${EXECDIR}${/}logs${/}
 
 ${command_power_control}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}power_control/power_control.py
 ...                       -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
-...                       -p ${OPENBMC_PASSWORD} -S Always --F
+...                       -p ${OPENBMC_PASSWORD} -S Always
 
 ${power_on_timeout}       15 mins
 ${power_off_timeout}      15 mins
@@ -39,6 +39,18 @@ Test BMC Redfish Account Management
 
     ${output}=  Shell Cmd  cat ${EXECDIR}${/}logs${/}results.json
     Log  ${output}
+
+    ${json}=  OperatingSystem.Get File    ${EXECDIR}${/}logs${/}results.json
+
+    ${object}=  Evaluate  json.loads('''${json}''')  json
+
+    ${result_list}=  Set Variable  ${object["TestResults"]}
+
+    FOR  ${result}  IN  @{result_list}
+       ${rc}=    evaluate    'ErrorMessages'=='${result}'
+       ${num}=  Run Keyword If  ${rc} == False  Set Variable  ${result_list["${result}"]["fail"]}
+       Run Keyword If  ${num} != None  Should Be True  ${num} == 0  '${result}' test cases failed
+    END
 
 
 Test BMC Redfish Boot Host And ForceOff
