@@ -13,12 +13,13 @@ Smart Combine Lists
 
     ${list_size}=  Get Length  ${lists}
     ${index}=  Set Variable  ${0}
-    : FOR  ${arg}  IN  @{lists}
-    \    ${type_arg}=  Evaluate  str(type($lists[${index}])).split("'")[1]
-    \    Run Keyword If  '${type_arg}' != 'list'  Run Keywords
-    ...      Remove From List  ${lists}  ${index}  AND
-    ...      Continue For Loop
-    \    ${index}=  Evaluate  ${index}+1
+
+    FOR  ${arg}  IN  @{lists}
+      ${type_arg}=  Evaluate  str(type($lists[${index}])).split("'")[1]
+      Run Keyword If  '${type_arg}' != 'list'  Run Keywords  Remove From List  ${lists}  ${index}  AND
+      ...  Continue For Loop
+      ${index}=  Evaluate  ${index}+1
+    END
 
     ${new_list}=  Combine Lists  @{lists}
 
@@ -43,11 +44,10 @@ Intersect Lists
     @{smaller_list}=  Set Variable If  ${length1} >= ${length2}  ${list2}
     ...                                ${length1} < ${length2}  ${list1}
 
-    :FOR  ${element}  IN  @{larger_list}
-    \  ${rc}=  Run Keyword and Return Status  List Should Contain Value
-    ...  ${smaller_list}  ${element}
-    \  Run Keyword If  '${rc}' == 'True'  Append to List  ${intersected_list}
-    ...  ${element}
+    FOR  ${element}  IN  @{larger_list}
+      ${rc}=  Run Keyword and Return Status  List Should Contain Value  ${smaller_list}  ${element}
+      Run Keyword If  '${rc}' == 'True'  Append to List  ${intersected_list}  ${element}
+    END
 
     @{intersected_list}=  Remove Duplicates  ${intersected_list}
 
