@@ -44,7 +44,6 @@ Set Valid System Time
     ...              correctly set in BMC.
     [Tags]  Set_Valid_System_Time
 
-    Set Time Owner  ${HOST_OWNER}
     Set Time Mode  ${MANUAL_MODE}
 
     # Added delay for NTP mode to get disabled fully
@@ -65,7 +64,6 @@ Set Invalid System Time
     ...              that it should throw error.
     [Tags]  Set_Invalid_System_Time
 
-    Set Time Owner  ${HOST_OWNER}
     Set Time Mode  ${MANUAL_MODE}
 
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
@@ -77,7 +75,6 @@ Set System Time with no time
     ...              that it should throw error.
     [Tags]  Set_System_Time_with_no_time
 
-    Set Time Owner  ${HOST_OWNER}
     Set Time Mode  ${MANUAL_MODE}
 
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
@@ -263,22 +260,6 @@ Set Invalid Time Mode
     Should Not Be Equal  ${mode}
     ...  xyz.openbmc_project.Time.Synchronization.Method.abc
 
-Set Invalid Time Owner
-    [Documentation]  Set time owner with invalid value using REST and verify
-    ...              that it should throw error.
-    [Tags]  Set_Invalid_Time_Owner
-
-    ${timeowner}=  Set Variable  xyz.openbmc_project.Time.Owner.Owners.xyz
-    ${valueDict}=  Create Dictionary  data=${timeowner}
-
-    ${resp}=  OpenBMC Put Request
-    ...  ${TIME_MANAGER_URI}owner/attr/TimeOwner  data=${valueDict}
-    ${jsondata}=  to JSON  ${resp.content}
-    Should Be Equal  ${jsondata['status']}  error
-
-    ${owner}=  Read Attribute  ${TIME_MANAGER_URI}owner  TimeOwner
-    Should Not Be Equal  ${owner}  xyz.openbmc_project.Time.Owner.Owners.xyz
-
 
 *** Keywords ***
 
@@ -294,24 +275,6 @@ Get BMC Time Using IPMI
     ...  exclude_millis=yes
     Should Not Be Empty  ${resp}
     [Return]  ${resp}
-
-
-Verify Set Time Via REST
-    [Documentation]  Verify set time via REST.
-    [Arguments]  ${target}  ${expected_status}
-    # Description of argument(s):
-    # target           The target of the set time operation: "bmc" or "host".
-    # expected_status  Expected status of set time operation
-
-    ${time_owner_url}=  Set Variable  ${TIME_MANAGER_URI}${target}
-
-    ${args}=  Create Dictionary  data=${SYSTEM_TIME_VALID_EPOCH}
-    ${resp}=  OpenBMC Put Request
-    ...  ${time_owner_url}/attr/Elapsed  data=${args}
-    ${jsondata}=  to Json  ${resp.content}
-    Run Keyword If  "${expected_status}" == "ok"
-    ...  Should Not Be Equal As Strings  ${jsondata['message']}  403 Forbidden
-    Should Be Equal As Strings  ${jsondata['status']}  ${expected_status}
 
 
 Set Time Owner
@@ -336,6 +299,24 @@ Set Time Owner
     Should Be Equal  ${owner}  ${args}
 
     [Return]  ${jsondata['status']}
+
+
+Verify Set Time Via REST
+    [Documentation]  Verify set time via REST.
+    [Arguments]  ${target}  ${expected_status}
+    # Description of argument(s):
+    # target           The target of the set time operation: "bmc" or "host".
+    # expected_status  Expected status of set time operation
+
+    ${time_owner_url}=  Set Variable  ${TIME_MANAGER_URI}${target}
+
+    ${args}=  Create Dictionary  data=${SYSTEM_TIME_VALID_EPOCH}
+    ${resp}=  OpenBMC Put Request
+    ...  ${time_owner_url}/attr/Elapsed  data=${args}
+    ${jsondata}=  to Json  ${resp.content}
+    Run Keyword If  "${expected_status}" == "ok"
+    ...  Should Not Be Equal As Strings  ${jsondata['message']}  403 Forbidden
+    Should Be Equal As Strings  ${jsondata['status']}  ${expected_status}
 
 
 Set Time Mode
@@ -480,6 +461,5 @@ Post Test Case Execution
     ...  3. Close all open SSH connections.
 
     FFDC On Test Case Fail
-    Set Time Owner  ${BMC_OWNER}
     Set Time Mode  ${NTP_MODE}
     Close All Connections
