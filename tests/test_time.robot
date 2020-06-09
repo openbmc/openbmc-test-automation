@@ -44,7 +44,6 @@ Set Valid System Time
     ...              correctly set in BMC.
     [Tags]  Set_Valid_System_Time
 
-    Set Time Owner  ${HOST_OWNER}
     Set Time Mode  ${MANUAL_MODE}
 
     # Added delay for NTP mode to get disabled fully
@@ -65,7 +64,6 @@ Set Invalid System Time
     ...              that it should throw error.
     [Tags]  Set_Invalid_System_Time
 
-    Set Time Owner  ${HOST_OWNER}
     Set Time Mode  ${MANUAL_MODE}
 
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
@@ -77,7 +75,6 @@ Set System Time with no time
     ...              that it should throw error.
     [Tags]  Set_System_Time_with_no_time
 
-    Set Time Owner  ${HOST_OWNER}
     Set Time Mode  ${MANUAL_MODE}
 
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
@@ -90,6 +87,7 @@ Set BMC Time With BMC And Manual
     ...              manual.
     [Tags]  Set_BMC_Time_With_BMC_And_Manual
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation    Owner          Mode            Status  BMC Time  Host Time
     Set BMC Time  ${BMC_OWNER}   ${MANUAL_MODE}  ok      Set       Change
@@ -100,7 +98,7 @@ Set BMC Time With Both And Manual
     ...              manual.
     [Tags]  Set_BMC_Time_With_Both_And_Manual
     [Template]  Set Time Using REST
-
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
     #Operation    Owner          Mode            Status  BMC Time  Host Time
     Set BMC Time  ${BOTH_OWNER}  ${MANUAL_MODE}  ok      Set       Change
 
@@ -110,7 +108,7 @@ Set BMC Time With Split And Manual
     ...              manual.
     [Tags]  Set_BMC_Time_With_Split_And_Manual
     [Template]  Set Time Using REST
-
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
     #Operation    Owner           Mode            Status  BMC Time  Host Time
     Set BMC Time  ${SPLIT_OWNER}  ${MANUAL_MODE}  ok      Set       No Change
 
@@ -120,7 +118,7 @@ Set BMC Time With BMC And NTP
     ...              NTP.
     [Tags]  Set_BMC_Time_With_BMC_And_NTP
     [Template]  Set Time Using REST
-
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
     #Operation    Owner           Mode            Status  BMC Time  Host Time
     Set BMC Time  ${BMC_OWNER}    ${NTP_MODE}     error   Not Set   No Change
 
@@ -130,6 +128,7 @@ Set BMC Time With Host And Manual
     ...              Manual.
     [Tags]  Set_BMC_Time_With_Host_And_Manual
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation    Owner           Mode            Status  BMC Time  Host Time
     Set BMC Time  ${HOST_OWNER}   ${MANUAL_MODE}  error   Not Set   No Change
@@ -140,6 +139,7 @@ Set BMC Time With Both And NTP
     ...              NTP.
     [Tags]  Set_BMC_Time_With_Both_And_NTP
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation    Owner           Mode            Status  BMC Time  Host Time
     Set BMC Time  ${BOTH_OWNER}   ${NTP_MODE}     error   Not Set   No Change
@@ -150,6 +150,7 @@ Set BMC Time With Split And NTP
     ...              NTP.
     [Tags]  Set_BMC_Time_With_Split_And_NTP
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation    Owner           Mode            Status  BMC Time  Host Time
     Set BMC Time  ${SPLIT_OWNER}  ${NTP_MODE}     error   Not Set   No Change
@@ -160,6 +161,7 @@ Set BMC Time With Host And NTP
     ...              NTP.
     [Tags]  Set_BMC_Time_With_Host_And_NTP
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation    Owner           Mode            Status  BMC Time  Host Time
     Set BMC Time  ${HOST_OWNER}   ${NTP_MODE}     error   Not Set   No Change
@@ -170,6 +172,7 @@ Set Host Time With Host And Manual
     ...              manual.
     [Tags]  Set_Host_Time_With_Host_And_Manual
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation     Owner          Mode            Status  BMC Time  Host Time
     Set Host Time  ${HOST_OWNER}  ${MANUAL_MODE}  ok      Change    Set
@@ -180,6 +183,7 @@ Set Host Time With Both And NTP
     ...              NTP.
     [Tags]  Set_Host_Time_With_Both_And_NTP
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation     Owner           Mode           Status  BMC Time   Host Time
     Set Host Time  ${BOTH_OWNER}   ${NTP_MODE}    error   No Change  Not Set
@@ -190,6 +194,7 @@ Set Host Time With Split And Manual
     ...              manual.
     [Tags]  Set_Host_Time_With_Split_And_Manual
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation     Owner           Mode            Status  BMC Time   Host Time
     Set Host Time  ${SPLIT_OWNER}  ${MANUAL_MODE}  ok      No Change  Set
@@ -200,6 +205,7 @@ Set Host Time With Split And NTP
     ...              NTP.
     [Tags]  Set_Host_Time_With_Split_And_NTP
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation     Owner           Mode            Status   BMC Time   HOST Time
     Set Host Time  ${SPLIT_OWNER}  ${NTP_MODE}     ok       No Change  Set
@@ -210,6 +216,7 @@ Set Host Time With BMC And Manual
     ...              Manual.
     [Tags]  Set_Host_Time_With_BMC_And_Manual
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation     Owner           Mode            Status   BMC Time   HOST Time
     Set Host Time  ${BMC_OWNER}    ${MANUAL_MODE}  error    No Change  Not Set
@@ -220,6 +227,7 @@ Set Host Time With BMC Owner NTP
     ...              NTP.
     [Tags]  Set_Host_Time_With_BMC_And_NTP
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation     Owner           Mode            Status   BMC Time   HOST Time
     Set Host Time  ${BMC_OWNER}    ${NTP_MODE}     error    No Change  Not Set
@@ -230,6 +238,7 @@ Set Host Time With Host And NTP
     ...              NTP.
     [Tags]  Set_Host_Time_With_Host_And_NTP
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation     Owner           Mode            Status  BMC Time    Host Time
     Set Host Time  ${HOST_OWNER}   ${NTP_MODE}     error   Not Change  No Set
@@ -240,6 +249,7 @@ Set Host Time With Both And Manual
     ...              manual.
     [Tags]  Set_Host_Time_With_Both_And_Manual
     [Template]  Set Time Using REST
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     #Operation     Owner          Mode            Status  BMC Time  Host Time
     Set Host Time  ${BOTH_OWNER}  ${MANUAL_MODE}  ok      Change    Set
@@ -249,6 +259,7 @@ Set Invalid Time Mode
     [Documentation]  Set time mode with invalid value using REST and verify
     ...              that it should throw error.
     [Tags]  Set_Invalid_Time_Mode
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     ${timemode}=
     ...  Set Variable  xyz.openbmc_project.Time.Synchronization.Method.abc
@@ -263,10 +274,12 @@ Set Invalid Time Mode
     Should Not Be Equal  ${mode}
     ...  xyz.openbmc_project.Time.Synchronization.Method.abc
 
+
 Set Invalid Time Owner
     [Documentation]  Set time owner with invalid value using REST and verify
     ...              that it should throw error.
     [Tags]  Set_Invalid_Time_Owner
+    [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 
     ${timeowner}=  Set Variable  xyz.openbmc_project.Time.Owner.Owners.xyz
     ${valueDict}=  Create Dictionary  data=${timeowner}
@@ -296,24 +309,6 @@ Get BMC Time Using IPMI
     [Return]  ${resp}
 
 
-Verify Set Time Via REST
-    [Documentation]  Verify set time via REST.
-    [Arguments]  ${target}  ${expected_status}
-    # Description of argument(s):
-    # target           The target of the set time operation: "bmc" or "host".
-    # expected_status  Expected status of set time operation
-
-    ${time_owner_url}=  Set Variable  ${TIME_MANAGER_URI}${target}
-
-    ${args}=  Create Dictionary  data=${SYSTEM_TIME_VALID_EPOCH}
-    ${resp}=  OpenBMC Put Request
-    ...  ${time_owner_url}/attr/Elapsed  data=${args}
-    ${jsondata}=  to Json  ${resp.content}
-    Run Keyword If  "${expected_status}" == "ok"
-    ...  Should Not Be Equal As Strings  ${jsondata['message']}  403 Forbidden
-    Should Be Equal As Strings  ${jsondata['status']}  ${expected_status}
-
-
 Set Time Owner
     [Arguments]  ${args}
     [Documentation]  Set time owner of the system via REST
@@ -336,6 +331,24 @@ Set Time Owner
     Should Be Equal  ${owner}  ${args}
 
     [Return]  ${jsondata['status']}
+
+
+Verify Set Time Via REST
+    [Documentation]  Verify set time via REST.
+    [Arguments]  ${target}  ${expected_status}
+    # Description of argument(s):
+    # target           The target of the set time operation: "bmc" or "host".
+    # expected_status  Expected status of set time operation
+
+    ${time_owner_url}=  Set Variable  ${TIME_MANAGER_URI}${target}
+
+    ${args}=  Create Dictionary  data=${SYSTEM_TIME_VALID_EPOCH}
+    ${resp}=  OpenBMC Put Request
+    ...  ${time_owner_url}/attr/Elapsed  data=${args}
+    ${jsondata}=  to Json  ${resp.content}
+    Run Keyword If  "${expected_status}" == "ok"
+    ...  Should Not Be Equal As Strings  ${jsondata['message']}  403 Forbidden
+    Should Be Equal As Strings  ${jsondata['status']}  ${expected_status}
 
 
 Set Time Mode
@@ -480,6 +493,5 @@ Post Test Case Execution
     ...  3. Close all open SSH connections.
 
     FFDC On Test Case Fail
-    Set Time Owner  ${BMC_OWNER}
     Set Time Mode  ${NTP_MODE}
     Close All Connections
