@@ -13,7 +13,6 @@ Test Teardown          Test Teardown Execution
 
 *** Variables ***
 &{ipmi_redfish_fru_field_map}  board_serial=SerialNumber  board_part_number=PartNumber
-...  board_product=Name
 
 *** Test Cases ***
 
@@ -78,6 +77,7 @@ Compare IPMI And Redfish FRU Component
     ${key_map}=  Get Dictionary Items   ${ipmi_redfish_fru_field_map}
 
     FOR    ${key}    ${value}    IN    @{key_map}
+      Exit For Loop IF    "${value}" == "${EMPTY}"
       Should Contain  ${redfish_fru_component_obj['${value}']}
       ...  ${ipmi_fru_component_obj['${key}']}
       ...  msg=Comparison failed.
