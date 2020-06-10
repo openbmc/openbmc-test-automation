@@ -202,6 +202,16 @@ Verify Expired CA Certificate Install
     Install And Verify Certificate Via Redfish  CA  Expired Certificate  error
 
 
+Verify Expired Server Certificate Replace
+    [Documentation]  Verify replacing the server certificate with an expired one.
+    [Tags]  Verify_Expired_Server_Certificate_Replace
+    [Setup]  Get Current BMC Date
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Restore BMC Date
+
+    Modify BMC Date
+    Replace Certificate Via Redfish  Server  Expired Certificate  error
+
 *** Keywords ***
 
 Install And Verify Certificate Via Redfish
@@ -298,11 +308,12 @@ Replace Certificate Via Redfish
     ...  ELSE IF  '${cert_type}' == 'CA'
     ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate  ok
 
-    ${time}=  Set Variable If  '${cert_format}' == 'Expired Certificate'  -10  365
-    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
+    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
 
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date  future
 
     ${certificate_uri}=  Set Variable If
     ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
