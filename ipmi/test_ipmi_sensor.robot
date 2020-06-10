@@ -221,6 +221,18 @@ Verify GPU Not Present
     0xC5         gv100card0
 
 
+Test Sensor Threshold Via IPMI
+    [Documentation]  Test sensor threshold via IPMI and verify using Redfish.
+    [Tags]  Test_Sensor_Threshold_Via_IPMI
+    [Template]  Verify Power Supply Sensor Threshold
+
+    # threshold_id             component
+    Upper Non-Critical         UpperThresholdNonCritical
+    Upper Critical             UpperThresholdCritical
+    Lower Non-Critical         LowerThresholdNonCritical
+    Lower Critical             LowerThresholdCritical
+
+
 *** Keywords ***
 
 Get Temperature Reading And Verify In Redfish
@@ -388,3 +400,51 @@ Disable Present Bit Via IPMI and Verify Using Redfish
 
     ${redfish_value}=  Redfish.Get Properties  /redfish/v1/Systems/system/Processors/${component}
     Should Be True  '${redfish_value['Status']['State']}' == 'Absent'
+
+
+Verify Power Supply Sensor Threshold
+    [Documentation]  Get power supply sensor threshold value via IPMI and verify using Redfish.
+    [Arguments]  ${ipmi_threshold_id}  ${redfish_threshold_id}
+
+    #  Example of ipmi sensor output
+    # Sensor ID              : ps0_output_curre (0xfb)
+    # Entity ID             : 10.23
+    # Sensor Type (Threshold)  : Current
+    # Sensor Reading        : 9 (+/- 0) Amps
+    # Status                : ok
+    # Lower Non-Recoverable : na
+    # Lower Critical        : na
+    # Lower Non-Critical    : na
+    # Upper Non-Critical    : 170.000
+    # Upper Critical        : 180.000
+    # Upper Non-Recoverable : na
+    # Positive Hysteresis   : Unspecified
+    # Negative Hysteresis   : Unspecified
+
+    ${ipmi_sensor_output}=  Run External IPMI Standard Command  sensor get ps0_input_voltag
+    ${ipmi_threshold_output}=  Get Lines Containing String  ${ipmi_sensor_output}  ${ipmi_threshold_id}
+    ${split_threshold_output}=   Fetch From Right  ${ipmi_threshold_output}  :${SPACE}
+
+    ${ipmi_threshold_reading}=   Set Variable If  '${split_threshold_output}' == 'na'
+    ...  ${0}  ${split_threshold_output}
+
+    #  Example of redfish sensor output
+    #"@odata.id": "/redfish/v1/Chassis/chassis/Power#/Voltages/0",
+    #"@odata.type": "#Power.v1_0_0.Voltage",
+    #"LowerThresholdCritical": 180.0,
+    #"LowerThresholdNonCritical": 200.0,
+    #"MaxReadingRange": 0.0,
+    #"MemberId": "ps0_input_voltage",
+    #"MinReadingRange": 0.0,
+    #"Name": "ps0 input voltage",
+    #"ReadingVolts": 209.5,
+    #"Status": {
+          #"Health": "OK",
+          #"State": "Enabled"
+    #},
+    #"UpperThresholdCritical": 300.0,
+    #"UpperThresholdNonCritical": 290.0
+
+    ${redfish_sensor_output}=  Redfish.Get Attribute  /redfish/v1/Chassis/chassis/Power  Voltages
+    ${redfish_threshold_reading}=  Set Variable  ${redfish_sensor_output[0]['${redfish_threshold_id}']}
+    Should Be Equal As Numbers  ${redfish_threshold_reading}  ${ipmi_threshold_reading}
