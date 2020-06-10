@@ -221,6 +221,16 @@ Verify GPU Not Present
     0xC5         gv100card0
 
 
+Test Sensor Threshold Via IPMI
+    [Documentation]  Test sensor threshold via IPMI and verify using Redfish.
+    [Tags]  Test_Sensor_Threshold_Via_IPMI
+    [Template]  Verify Sensor Threshold
+
+    # ipmi_threshold_id    redfish_threshold_id
+    Upper Non-Critical     UpperCaution
+    Upper Critical         UpperCritical
+
+
 *** Keywords ***
 
 Get Temperature Reading And Verify In Redfish
@@ -388,3 +398,15 @@ Disable Present Bit Via IPMI and Verify Using Redfish
 
     ${redfish_value}=  Redfish.Get Properties  /redfish/v1/Systems/system/Processors/${component}
     Should Be True  '${redfish_value['Status']['State']}' == 'Absent'
+
+
+Verify Sensor Threshold
+    [Documentation]  Get dcmi power reading via IPMI raw command.
+    [Arguments]  ${ipmi_threshold_id}  ${redfish_threshold_id}
+
+    ${ipmi_sensor_value}=  Run External IPMI Standard Command  sensor get ps0_output_curre
+    ${ipmi_threshold_reading}=  Get Lines Containing String  ${ipmi_sensor_value}  ${ipmi_threshold_id}
+
+    ${redfish_sensor_value}=  Redfish.Get  /redfish/v1/Chassis/chassis/Sensors/ps0_output_current
+    ${redfish_threshold_reading}=  Set Variable  ${redfish_sensor_value.dict['Thresholds']['${redfish_threshold_id}']['Reading']}
+    Should Be True  ${redfish_threshold_reading}  ${ipmi_threshold_reading}
