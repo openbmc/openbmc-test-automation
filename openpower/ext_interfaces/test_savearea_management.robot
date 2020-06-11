@@ -15,7 +15,7 @@ Suite Teardown    Suite Teardown Execution
 
 *** Variables ***
 
-${MAX_SIZE_MSG}           File size exceeds 200KB. Maximum allowed size is 200KB
+${MAX_SIZE_MSG}           File size exceeds maximum allowed size[500KB]
 ${UPLOADED_MSG}           File Created
 ${FORBIDDEN_MSG}          Forbidden
 ${FILE_CREATE_ERROR_MSG}  Error while creating the file
@@ -33,9 +33,9 @@ Verify Small Partition File Upload And Delete
 
     #                     partition                                         delete
     # file_name  size_kb  name       expect_resp_code     expected_msg      partition    username
-    201KB_file   201      201KB      ${HTTP_BAD_REQUEST}  ${MAX_SIZE_MSG}   ${True}      ${OPENBMC_USERNAME}
+    501KB_file   501      501KB      ${HTTP_BAD_REQUEST}  ${MAX_SIZE_MSG}   ${True}      ${OPENBMC_USERNAME}
     15KB_file    15       15KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${True}      ${OPENBMC_USERNAME}
-    200KB_file   200      200KB      ${HTTP_OK}           ${UPLOADED_MSG}   ${True}      ${OPENBMC_USERNAME}
+    500KB_file   500      500KB      ${HTTP_OK}           ${UPLOADED_MSG}   ${True}      ${OPENBMC_USERNAME}
 
 
 Verify Multiple Files Upload
@@ -48,9 +48,9 @@ Verify Multiple Files Upload
     0KB_file     0        0KB        ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
     10KB_file    10       10KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
     50KB_file    50       50KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
-    250KB_file   250      250KB      ${HTTP_BAD_REQUEST}  ${MAX_SIZE_MSG}   ${False}     ${OPENBMC_USERNAME}
+    550KB_file   550      550KB      ${HTTP_BAD_REQUEST}  ${MAX_SIZE_MSG}   ${False}     ${OPENBMC_USERNAME}
     19KB_file    19       19KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
-    199KB_file   199      199KB      ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
+    499KB_file   199      499KB      ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
 
 
 Verify Read Partition
