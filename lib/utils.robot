@@ -679,7 +679,6 @@ Redfish Set Auto Reboot
     # Description of argument(s):
     # setting    The reboot setting, "RetryAttempts" and "Disabled".
 
-    ${data}=  Create Dictionary  Boot={"AutomaticRetryConfig":"Disabled"}
     Redfish.Login
     Redfish.patch  /redfish/v1/Systems/system  body={"Boot": {"AutomaticRetryConfig": "${setting}"}}
     ...  valid_status_codes=[200, 204]
