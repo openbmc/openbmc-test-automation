@@ -497,7 +497,7 @@ Delete IP Address Via Different User Roles And Verify
 
 
 Read Network Configuration Via Different User Roles And Verify
-    [Documentation]  Read network configuraton via different user roles and verify.
+    [Documentation]  Read network configuration via different user roles and verify.
     [Tags]  Read_Network_configuration_Via_Different_User_Roles_And_Verify
     [Teardown]  Restore LDAP Privilege
 
