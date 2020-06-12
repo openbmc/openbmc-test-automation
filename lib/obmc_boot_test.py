@@ -38,6 +38,8 @@ base_path = os.path.dirname(os.path.dirname(
 sys.path.append(base_path + "extended/")
 import run_keyword as rk
 
+redfish = BuiltIn().get_library_instance('redfish')
+
 # Setting master_pid correctly influences the behavior of plug-ins like
 # DB_Logging
 program_pid = os.getpid()
@@ -70,10 +72,12 @@ if redfish_supported:
     default_power_off = "Redfish Power Off"
     delete_errlogs_cmd = "Delete Error Logs"
     # TODO: delete_errlogs_cmd="Redfish Purge Event Log"
+    default_set_power_policy = "Redfish Set Power Restore Policy  AlwaysOff"
 else:
     default_power_on = "REST Power On"
     default_power_off = "REST Power Off"
     delete_errlogs_cmd = "Delete Error Logs"
+    default_set_power_policy = "Set BMC Power Policy  ALWAYS_POWER_OFF"
 boot_count = 0
 
 LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
@@ -259,7 +263,7 @@ def initial_plug_in_setup():
     additional_values = ["program_pid", "master_pid", "ffdc_dir_path",
                          "status_dir_path", "base_tool_dir_path",
                          "ffdc_list_file_path", "ffdc_report_list_path",
-                         "ffdc_summary_list_path", "execdir"]
+                         "ffdc_summary_list_path", "execdir", "redfish_supported"]
 
     plug_in_vars = parm_list + additional_values
 
@@ -396,6 +400,9 @@ def setup():
 
     gp.qprintn()
 
+    if redfish_supported:
+        redfish.login()
+
     set_default_siguser1()
     transitional_boot_selected = False
 
@@ -421,7 +428,7 @@ def setup():
 
     gp.qprint_pgm_header()
 
-    grk.run_key("Set BMC Power Policy  ALWAYS_POWER_OFF")
+    grk.run_key_u(default_set_power_policy)
 
     initial_plug_in_setup()
 
@@ -1032,6 +1039,9 @@ def test_teardown():
     cmd_buf = ["Print Error",
                "A keyword timeout occurred ending this program.\n"]
     BuiltIn().run_keyword_if_timeout_occurred(*cmd_buf)
+
+    if redfish_supported:
+        redfish.logout()
 
     gp.qprint_pgm_footer()
 
