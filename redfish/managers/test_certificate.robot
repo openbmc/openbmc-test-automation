@@ -183,9 +183,9 @@ Verify CSR Generation For Client Certificate With Invalid Value
 Verify Expired Client Certificate Install
     [Documentation]  Verify installation of expired CA certificate.
     [Tags]  Verify_Expired_Client_Certificate_Install
-    [Setup]  Get Current BMC Date
+    [Setup]  Modify BMC Date
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Restore BMC Date
+    ...  Modify BMC Date
 
     Install And Verify Certificate Via Redfish  Client  Expired Certificate  error
 
@@ -193,9 +193,9 @@ Verify Expired Client Certificate Install
 Verify Expired CA Certificate Install
     [Documentation]  Verify installation of expired CA certificate.
     [Tags]  Verify_Expired_CA_Certificate_Install
-    [Setup]  Get Current BMC Date
+    [Setup]  Modify BMC Date
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Restore BMC Date
+    ...  Modify BMC Date
 
     Install And Verify Certificate Via Redfish  CA  Expired Certificate  error
 
@@ -227,7 +227,7 @@ Install And Verify Certificate Via Redfish
     ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}
     ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
 
-    Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date
+    Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date  future
 
     ${cert_id}=  Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
     Logging  Installed certificate id: ${cert_id}
@@ -244,32 +244,27 @@ Install And Verify Certificate Via Redfish
 
 Modify BMC Date
     [Documentation]  Modify date in BMC.
-    [Arguments]  ${date_set_type}=future
+    [Arguments]  ${date_set_type}=current
 
     # Description of argument(s):
-    # date_set_type    Set BMC date to a future or old date by 375 days.
+    # date_set_type    Set BMC date to a current, future, old date by 375 days.
+    #                  current - Sets date to local system date.
+    #                  future - Sets to a future date from current date.
+    #                  old - Sets to a old date from current date.
 
     Redfish Power Off  stack_mode=skip
-    ${new_time}=  Run Keyword If  '${date_set_type}' == 'future'
-    ...  Add Time To Date  ${cli_date_time}  375 days
-    ...  ELSE  Subtract Time From Date  ${cli_date_time}  375 days
+    ${current_date_time}=  Get Current Date
+    ${new_time}=  Run Keyword If  '${date_set_type}' == 'current'  Set Variable  ${current_date_time}
+    ...  ELSE IF  '${date_set_type}' == 'future'
+    ...  Add Time To Date  ${current_date_time}  375 days
+    ...  ELSE IF  '${date_set_type}' == 'old'
+    ...  Subtract Time From Date  ${current_date_time}  375 days
+
     # Enable manaual mode.
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'ProtocolEnabled': ${False}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${new_time}'}
-    ...  valid_status_codes=[${HTTP_OK}]
-
-Get Current BMC Date
-    [Documentation]  Get current BMC date.
-
-    ${cli_date_time}=  CLI Get BMC DateTime
-    Set Test Variable  ${cli_date_time}
-
-Restore BMC Date
-    [Documentation]  Restore BMC date to its prior value.
-
-    Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${cli_date_time}'}
     ...  valid_status_codes=[${HTTP_OK}]
 
 Replace Certificate Via Redfish
