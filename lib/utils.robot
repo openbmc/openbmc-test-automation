@@ -353,6 +353,15 @@ Old Get Power Policy
     [Return]  ${currentPolicy}
 
 
+Redfish Get Power Policy
+    [Documentation]  Returns the BMC power policy.
+
+    Redfish.Login
+    ${resp}=  Redfish.get  /redfish/v1/Systems/system
+    Redfish.Logout
+    [Return]  ${resp.dict['PowerRestorePolicy']}
+
+
 Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
     ${setting}=  Read Attribute  ${CONTROL_HOST_URI}/auto_reboot  AutoReboot
@@ -647,6 +656,19 @@ Old Set Power Policy
 
     ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
+
+
+Redfish Set Power Policy
+    [Documentation]   Set the given BMC power policy.
+    [Arguments]   ${policy}
+
+    # Description of argument(s):
+    # policy    Power restore policy (e.g. "AlwaysOff").
+
+    Redfish.Login
+    ${data}=  Create Dictionary  PowerRestorePolicy=${policy}
+    Redfish.patch  /redfish/v1/Systems/system  body=&{data}  valid_status_codes=[200, 204]
+    Redfish.Logout
 
 
 Set Auto Reboot
