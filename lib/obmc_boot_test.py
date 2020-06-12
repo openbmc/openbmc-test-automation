@@ -70,10 +70,12 @@ if redfish_supported:
     default_power_off = "Redfish Power Off"
     delete_errlogs_cmd = "Delete Error Logs"
     # TODO: delete_errlogs_cmd="Redfish Purge Event Log"
+    default_set_power_policy= "Redfish Set Power Restore Policy  AlwaysOff"
 else:
     default_power_on = "REST Power On"
     default_power_off = "REST Power Off"
     delete_errlogs_cmd = "Delete Error Logs"
+    default_set_power_policy= "Set BMC Power Policy  ALWAYS_POWER_OFF"
 boot_count = 0
 
 LOG_LEVEL = BuiltIn().get_variable_value("${LOG_LEVEL}")
@@ -421,7 +423,7 @@ def setup():
 
     gp.qprint_pgm_header()
 
-    grk.run_key("Set BMC Power Policy  ALWAYS_POWER_OFF")
+    grk.run_key(default_set_power_policy)
 
     initial_plug_in_setup()
 
