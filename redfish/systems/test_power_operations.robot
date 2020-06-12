@@ -70,4 +70,8 @@ Test Teardown Execution
     FFDC On Test Case Fail
     ${sol_log}=    Stop SOL Console Logging
     Log   ${sol_log}
-    Set Auto Reboot  ${1}
+
+    Run Keyword If  ${REDFISH_SUPPORTED}
+    ...    Redfish Set Auto Reboot  RetryAttempts
+    ...  ELSE
+    ...    Set Auto Reboot  ${1}
