@@ -421,7 +421,10 @@ def setup():
 
     gp.qprint_pgm_header()
 
-    grk.run_key("Set BMC Power Policy  ALWAYS_POWER_OFF")
+    if redfish_supported:
+        grk.run_key("Redfish Set Power Policy  AlwaysOff")
+    else:
+        grk.run_key("Set BMC Power Policy  ALWAYS_POWER_OFF")
 
     initial_plug_in_setup()
 
