@@ -98,6 +98,56 @@ Verify Redfishtool Client Certificate Install Errors
     Client  Valid Certificate Empty Privatekey  error
 
 
+Verify Redfishtool CA Certificate Install Errors
+    [Documentation]  Verify error while installing invalid CA certificate.
+    [Tags]  Verify_Redfishtool_CA_Certificate_Install_Errors
+    [Template]  Verify Redfishtool Install Certificate
+
+    CA  Empty Certificate  error
+
+
+Verify Error While Uploding Same CA Certificate Via Redfishtool
+    [Documentation]  Verify error while uploading same CA certificate two times.
+    [Tags]  Verify_Error_While_Uploding_Same_CA_Certificate_Via_Redfishtool
+
+    # Create certificate file for uploading.
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    # Install CA certificate.
+    Redfishtool Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Adding delay after certificate installation.
+    Sleep  30s
+
+    # Check error while uploading same certificate.
+    Redfishtool Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  error  data=${file_data}
+
+
+Verify Server Certificate View With Openssl Via Redfishtool
+    [Documentation]  Verify server certificate With openssl command.
+    [Tags]  Verify_Server_Certificate_View_With_Openssl_Via Redfishtool
+
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    ${certificate_dict}=  Create Dictionary
+    ...  @odata.id=/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
+
+    ${dict_objects}=  Create Dictionary  CertificateString=${file_data}
+    ...  CertificateType=PEM  CertificateUri=${certificate_dict}
+
+    ${string}=  Convert To String  ${dict_objects}
+    ${string}=  Replace String  ${string}  '  "
+    ${payload}=  Set Variable  '${string}'
+
+    ${response}=  Redfishtool Post
+    ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+
+    Wait Until Keyword Succeeds  2 mins  15 secs  Verify Certificate Visible Via OpenSSL  ${cert_file_path}
+
 *** Keywords ***
 
 
