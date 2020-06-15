@@ -98,6 +98,21 @@ Verify Redfishtool ReadOnly User Privilege
     ...  "UserT101"  "TestPwd123"  "Operator"  true  "UserT100"  "TestPwd123"  ${HTTP_FORBIDDEN}
 
 
+Verify AccountService Available
+    [Documentation]  Verify Redfish account service is available.
+    [Tags]  Verify_AccountService_Available
+
+    ${resp} =  Redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
+    Should Be Equal As Strings  ${resp}  ${True}
+
+
+Verify Redfish User with Wrong Password
+    [Documentation]  Verify Redfish User with Wrong Password.
+    [Tags]  Verify_Redfish_User_with_Wrong_Password
+    [Teardown]  Redfishtool Delete User  "UserT100"
+
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "Administrator"  true  
+
 *** Keywords ***
 
 
