@@ -98,6 +98,14 @@ Verify Redfishtool ReadOnly User Privilege
     ...  "UserT101"  "TestPwd123"  "Operator"  true  "UserT100"  "TestPwd123"  ${HTTP_FORBIDDEN}
 
 
+Verify Error While Running Redfishtool With Incorrect Password
+    [Documentation]  Verify error while running redfishtool with incorrect Password.
+    [Tags]  Verify_Error_While_Running_Redfishtool_With_Incorrect_Password
+    [Teardown]  Redfishtool Delete User  "UserT100"
+
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "Administrator"  true
+    Redfishtool Access Resource  /redfish/v1/Systems/  "UserT100"  "TestPwd234"  ${HTTP_UNAUTHORIZED}
+
 *** Keywords ***
 
 
