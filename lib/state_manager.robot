@@ -313,3 +313,40 @@ Power Off Request
 Wait For BMC Ready
     [Documentation]  Check BMC state and wait for BMC Ready.
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+
+Redfish Get BMC State
+    [Documentation]  Return BMC health state.
+
+    # "Enabled" ->  BMC Ready, "Starting" -> BMC NotReady
+
+    # Example:
+    # "Status": {
+    #    "Health": "OK",
+    #    "HealthRollup": "OK",
+    #    "State": "Enabled"
+    # },
+
+    Redfish.Login
+    ${status}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Status
+    Redfish.Logout
+    [Return]  ${status["State"]}
+
+
+Redfish Get Host State
+    [Documentation]  Return BMC health state.
+
+    # Redfer: http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Status
+
+    # Example:
+    # "PowerState": "Off",
+    # "Status": {
+    #    "Health": "OK",
+    #    "HealthRollup": "OK",
+    #    "State": "StandbyOffline"
+    # },
+
+    Redfish.Login
+    ${resp}=  Redfish.Get  /redfish/v1/Chassis/chassis
+    Redfish.Logout
+    [Return]  [${resp.dict["PowerState"]}, ${resp.dict["Status"]["State"]}]
