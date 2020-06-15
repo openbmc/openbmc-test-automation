@@ -98,6 +98,53 @@ Verify Redfishtool Client Certificate Install Errors
     Client  Valid Certificate Empty Privatekey  error
 
 
+Verify Redfishtool CA Certificate Install Errors
+    [Documentation]  Verify error while installing invalid client certificate.
+    [Tags]  Verify_Redfishtool_Client_Certificate_Install_Errors
+    [Template]  Verify Redfishtool Install Certificate
+
+    CA  Empty Certificate  error
+
+
+Verify Error While Uploding Same CA Certificate
+    [Documentation]  Verify error while uploading same CA certificate two times.
+    [Tags]  Verify_Error_While_Uploding_Same_CA_Certificate
+
+    # Create certificate file for uploading.
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    # Install CA certificate.
+    Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Adding delay after certificate installation.
+    Sleep  30s
+
+    # Check error while uploading same certificate.
+    Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  error  data=${file_data}
+
+
+Verify Server Certificate View Via Openssl
+    [Documentation]  Verify server certificate via openssl command.
+    [Tags]  Verify_Server_Certificate_View_Via_Openssl
+
+    #redfish.Login
+
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    ${certificate_dict}=  Create Dictionary
+    ...  @odata.id=/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
+    ${payload}=  Create Dictionary  CertificateString=${file_data}
+    ...  CertificateType=PEM  CertificateUri=${certificate_dict}
+
+    ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+    ...  body=${payload}
+
+    Wait Until Keyword Succeeds  2 mins  15 secs  Verify Certificate Visible Via OpenSSL  ${cert_file_path}
+
 *** Keywords ***
 
 
