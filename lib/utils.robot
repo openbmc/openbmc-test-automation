@@ -364,9 +364,9 @@ Redfish Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
 
     Redfish.Login
-    ${resp}=  Redfish.get  /redfish/v1/Systems/system
+    ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/system  Boot
     Redfish.Logout
-    [Return]  ${resp.dict["Boot"]["AutomaticRetryConfig"]}
+    [Return]  ${resp["AutomaticRetryConfig"]}
 
 
 Trigger Warm Reset
@@ -680,8 +680,10 @@ Redfish Set Auto Reboot
     # setting    The reboot setting, "RetryAttempts" and "Disabled".
 
     Redfish.Login
-    Redfish.patch  /redfish/v1/Systems/system  body={"Boot": {"AutomaticRetryConfig": "${setting}"}}
-    ...  valid_status_codes=[200, 204]
+    Redfish.Patch  /redfish/v1/Systems/system  body={"Boot": {"AutomaticRetryConfig": "${setting}"}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Redfish.Logout
+
     ${current_setting}=  Redfish Get Auto Reboot
     Should Be Equal As Strings  ${current_setting}  ${setting}
 
