@@ -28,7 +28,7 @@ def init_robot_out_parms(extra_prefix=""):
 
     This function will set global values for the following robot output parms.
 
-    outputdir, output, log, report, loglevel
+    outputdir, output, log, report, loglevel, consolecolors, consolemarkers
 
     This function would typically be called prior to calling create_robot_cmd_string.
 
@@ -67,6 +67,8 @@ def init_robot_out_parms(extra_prefix=""):
         log = file_prefix + "log.html"
         report = file_prefix + "report.html"
     loglevel = "TRACE"
+    consolecolors = 'off'
+    consolemarkers = 'off'
 
     # Make create_robot_cmd_string values global.
     gm.set_mod_global(outputdir)
@@ -74,6 +76,10 @@ def init_robot_out_parms(extra_prefix=""):
     gm.set_mod_global(log)
     gm.set_mod_global(report)
     gm.set_mod_global(loglevel)
+    gm.set_mod_global(consolecolors)
+    gm.set_mod_global(consolemarkers)
+
+    return outputdir, output, log, report, loglevel, consolecolors, consolemarkers
 
 
 def init_robot_test_base_dir_path():
@@ -373,7 +379,7 @@ def process_robot_output_files(robot_cmd_buf=None,
 
 
 def robot_cmd_fnc(robot_cmd_buf,
-                  robot_jail=os.environ.get('ROBOT_JAIL', ''), test_mode=0):
+                  robot_jail=os.environ.get('ROBOT_JAIL', ''), quiet=None, test_mode=0):
     r"""
     Run the robot command string.
 
@@ -387,6 +393,7 @@ def robot_cmd_fnc(robot_cmd_buf,
     test_mode                       If test_mode is set, this function will not actually run the command.
     """
 
+    quiet = int(gm.dft(quiet, gp.get_stack_var('quiet', 0)))
     gv.valid_value(robot_cmd_buf)
 
     # Set global variables to aid in cleanup with process_robot_output_files.
