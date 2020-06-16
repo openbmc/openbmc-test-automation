@@ -64,17 +64,18 @@ Redfish Software Inventory Status Check
     # {'@odata.id': '/redfish/v1/UpdateService/FirmwareInventory/a7c79f71'}
     # {'@odata.id': '/redfish/v1/UpdateService/FirmwareInventory/ace821ef'}
 
-    :FOR  ${entry}  IN RANGE  0  ${resp.dict["Members@odata.count"]}
-    \  ${resp_resource}=  Redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
+    FOR  ${entry}  IN RANGE  0  ${resp.dict["Members@odata.count"]}
+      ${resp_resource}=  Redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
     # Example:
     # "Status": {
     #     "Health": "OK",
     #     "HealthRollup": "OK",
     #     "State": "Enabled"
     # },
-    \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["Health"]}  OK
-    \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["HealthRollup"]}  OK
-    \  Should Be Equal As Strings  ${resp_resource.dict["Status"]["State"]}  Enabled
+      Should Be Equal As Strings  ${resp_resource.dict["Status"]["Health"]}  OK
+      Should Be Equal As Strings  ${resp_resource.dict["Status"]["HealthRollup"]}  OK
+      Should Be Equal As Strings  ${resp_resource.dict["Status"]["State"]}  Enabled
+    END
 
 
 Verify BMC Version Matches With FirmwareInventory
@@ -95,15 +96,14 @@ Verify BMC Version Matches With FirmwareInventory
     # {'@odata.id': '/redfish/v1/UpdateService/FirmwareInventory/ace821ef'}
 
     ${actual_count}=  Evaluate  ${resp.dict["Members@odata.count"]}-1
-    :FOR  ${entry}  IN RANGE  0  ${resp.dict["Members@odata.count"]}
-    \  ${resp_resource}=  Redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
+    FOR  ${entry}  IN RANGE  0  ${resp.dict["Members@odata.count"]}
+      ${resp_resource}=  Redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
     # 3rd comparison of BMC version and verify FirmwareInventory bmc version.
     # Example:
     # "Version": 2.7.0-dev-19-g9b44ea7
-    \  Exit For Loop If  '${resp_resource.dict["Version"]}' == '${manager_bmc_version.strip('"')}'
-    \  Run Keyword If  '${entry}' == '${actual_count}'  Fail
-    ...  BMC version not there in Firmware Inventory
-
+      Exit For Loop If  '${resp_resource.dict["Version"]}' == '${manager_bmc_version.strip('"')}'
+      Run Keyword If  '${entry}' == '${actual_count}'  Fail  BMC version not there in Firmware Inventory
+    END
 
 Verify UpdateService Supports TransferProtocol TFTP
     [Documentation]  Verify update service supported values have TFTP protocol.
