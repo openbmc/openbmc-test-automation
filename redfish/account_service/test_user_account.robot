@@ -53,7 +53,7 @@ Redfish Create and Verify Users
     #username      password    role_id         enabled
     admin_user     TestPwd123  Administrator   ${True}
     operator_user  TestPwd123  Operator        ${True}
-    readonly_user  TestPwd123  ReadOnly        ${True}
+    readonly_user  TestPwd123  Callback        ${True}
 
 Verify Redfish User with Wrong Password
     [Documentation]  Verify Redfish User with Wrong Password.
@@ -63,7 +63,9 @@ Verify Redfish User with Wrong Password
     #username      password    role_id         enabled  wrong_password
     admin_user     TestPwd123  Administrator   ${True}  alskjhfwurh
     operator_user  TestPwd123  Operator        ${True}  12j8a8uakjhdaosiruf024
-    readonly_user  TestPwd123  ReadOnly        ${True}  12
+    readonly_user  TestPwd123  Callback        ${True}  12
+    operator_user  TestPwd123  User            ${True}  12abcdefghijklmnop
+
 
 Verify Login with Deleted Redfish Users
     [Documentation]  Verify login with deleted Redfish Users.
