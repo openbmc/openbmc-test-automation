@@ -62,6 +62,7 @@ Test Setup Execution
 
     Printn
     Start SOL Console Logging
+    Redfish.Login
 
 
 Test Teardown Execution
@@ -71,7 +72,9 @@ Test Teardown Execution
     ${sol_log}=    Stop SOL Console Logging
     Log   ${sol_log}
 
+    Redfish.Login
     Run Keyword If  ${REDFISH_SUPPORTED}
     ...    Redfish Set Auto Reboot  RetryAttempts
     ...  ELSE
     ...    Set Auto Reboot  ${1}
+    Redfish.Logout

@@ -9,7 +9,7 @@ Resource            ../../lib/boot_utils.robot
 Resource            ../../lib/openbmc_ffdc.robot
 Resource            ../../lib/bmc_redfish_resource.robot
 
-Test Setup          Printn
+Test Setup          Test Setup Execution
 Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
@@ -80,6 +80,13 @@ Test SSH And IPMI Connections
 
 
 *** Keywords ***
+
+Test Setup Execution
+   [Documentation]  Do test case setup tasks.
+
+   Printn
+   Redfish.Login
+
 
 Check BMC Uptime Journald
     [Documentation]  Check BMC journald uptime entry.
