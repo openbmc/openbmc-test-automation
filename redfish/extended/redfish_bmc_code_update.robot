@@ -121,9 +121,7 @@ Set BMC Image Priority To Least
     ...  ${SOFTWARE_VERSION_URI}${software_inventory['image_id']}
     ...  Priority  ${least_priority}
 
-    # Reboot BMC And Login
     Redfish OBMC Reboot (off)
-    Redfish.Login
 
 
 Redfish Update Firmware
