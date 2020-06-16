@@ -777,3 +777,24 @@ Get Post Boot Action
 
     [Return]  ${post_code_update_actions}
 
+
+Redfish Set Boot Default
+    [Documentation]  Set And Verify BootSource And BootType.
+    [Arguments]      ${override_enabled}  ${override_target}
+
+    # Description of argument(s):
+    # override_enabled    Boot source enable type.
+    #                     ('Once', 'Continuous', 'Disabled').
+    # override_target     Boot target type.
+    #                     ('Pxe', 'Cd', 'Hdd', 'Diags', 'BiosSetup', 'None').
+
+    ${data}=  Create Dictionary  BootSourceOverrideEnabled=${override_enabled}
+    ...  BootSourceOverrideTarget=${override_target}
+    ${payload}=  Create Dictionary  Boot=${data}
+
+    Redfish.Patch  /redfish/v1/Systems/system  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+
+    ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/system  Boot
+    Should Be Equal As Strings  ${resp["BootSourceOverrideEnabled"]}  ${override_enabled}
+    Should Be Equal As Strings  ${resp["BootSourceOverrideTarget"]}  ${override_target}
