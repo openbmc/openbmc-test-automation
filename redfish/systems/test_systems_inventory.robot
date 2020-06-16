@@ -159,7 +159,6 @@ Check GPU States When Power Off
     [Tags]  Check_GPU_States_When_Power_Off
 
     Redfish Power Off
-    Redfish.Login
     GPU State Check
 
 
@@ -245,8 +244,8 @@ Suite Teardown Execution
 Suite Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Redfish Power On  stack_mode=skip
     Redfish.Login
+    Redfish Power On  stack_mode=skip
 
     ${cpu_info}  ${gpu_info}  ${power_supplies}=  Get Inventory URIs
 
