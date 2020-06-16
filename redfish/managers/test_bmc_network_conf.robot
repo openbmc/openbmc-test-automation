@@ -59,22 +59,28 @@ Get IP Address And Verify
     [Documentation]  Get IP Address And Verify.
     [Tags]  Get_IP_Address_And_Verify
 
-    : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Verify IP On BMC  ${network_configuration['Address']}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Verify IP On BMC  ${network_configuration['Address']}
+    END
+
 
 Get Netmask And Verify
     [Documentation]  Get Netmask And Verify.
     [Tags]  Get_Netmask_And_Verify
 
-    : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Verify Netmask On BMC  ${network_configuration['SubnetMask']}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Verify Netmask On BMC  ${network_configuration['SubnetMask']}
+    END
+
 
 Get Gateway And Verify
     [Documentation]  Get gateway and verify it's existence on the BMC.
     [Tags]  Get_Gateway_And_Verify
 
-    : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Verify Gateway On BMC  ${network_configuration['Gateway']}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Verify Gateway On BMC  ${network_configuration['Gateway']}
+    END
+
 
 Get MAC Address And Verify
     [Documentation]  Get MAC address and verify it's existence on the BMC.
@@ -87,13 +93,16 @@ Get MAC Address And Verify
     ${macaddr}=  Get From Dictionary  ${resp.dict}  MACAddress
     Validate MAC On BMC  ${macaddr}
 
+
 Verify All Configured IP And Netmask
     [Documentation]  Verify all configured IP and netmask on BMC.
     [Tags]  Verify_All_Configured_IP_And_Netmask
 
-    : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Verify IP And Netmask On BMC  ${network_configuration['Address']}
-    ...  ${network_configuration['SubnetMask']}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Verify IP And Netmask On BMC  ${network_configuration['Address']}
+      ...  ${network_configuration['SubnetMask']}
+    END
+
 
 Get Hostname And Verify
     [Documentation]  Get hostname via Redfish and verify.
@@ -102,6 +111,7 @@ Get Hostname And Verify
     ${hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
 
     Validate Hostname On BMC  ${hostname}
+
 
 Configure Hostname And Verify
     [Documentation]  Configure hostname via Redfish and verify.
@@ -116,6 +126,7 @@ Configure Hostname And Verify
     Configure Hostname  ${hostname}
     Validate Hostname On BMC  ${hostname}
 
+
 Add Valid IPv4 Address And Verify
     [Documentation]  Add IPv4 Address via Redfish and verify.
     [Tags]  Add_Valid_IPv4_Addres_And_Verify
@@ -124,12 +135,14 @@ Add Valid IPv4 Address And Verify
 
      Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
 
+
 Add Invalid IPv4 Address And Verify
     [Documentation]  Add Invalid IPv4 Address via Redfish and verify.
     [Tags]  Add_Invalid_IPv4_Addres_And_Verify
 
     Add IP Address  ${test_ipv4_invalid_addr}  ${test_subnet_mask}
     ...  ${test_gateway}  valid_status_codes=${HTTP_BAD_REQUEST}
+
 
 Configure Out Of Range IP
     [Documentation]  Configure out-of-range IP address.
@@ -138,6 +151,7 @@ Configure Out Of Range IP
 
     # ip                subnet_mask          gateway          valid_status_codes
     ${out_of_range_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
 
 Configure Broadcast IP
     [Documentation]  Configure broadcast IP address.
@@ -148,6 +162,7 @@ Configure Broadcast IP
     # ip             subnet_mask          gateway          valid_status_codes
     ${broadcast_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
+
 Configure Multicast IP
     [Documentation]  Configure multicast IP address.
     [Tags]  Configure_Multicast_IP
@@ -157,6 +172,7 @@ Configure Multicast IP
     # ip             subnet_mask          gateway          valid_status_codes
     ${multicast_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
+
 Configure Loopback IP
     [Documentation]  Configure loopback IP address.
     [Tags]  Configure_Loopback_IP
@@ -165,6 +181,7 @@ Configure Loopback IP
 
     # ip            subnet_mask          gateway          valid_status_codes
     ${loopback_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
 
 Add Valid IPv4 Address And Check Persistency
     [Documentation]  Add IPv4 address and check peristency.
@@ -179,6 +196,7 @@ Add Valid IPv4 Address And Check Persistency
     Redfish.Login
     Verify IP On BMC  ${test_ipv4_addr}
 
+
 Add Fourth Octet Threshold IP And Verify
     [Documentation]  Add fourth octet threshold IP and verify.
     [Tags]  Add_Fourth_Octet_Threshold_IP_And_Verify
@@ -186,6 +204,7 @@ Add Fourth Octet Threshold IP And Verify
     ...  Delete IP Address  10.7.7.254  AND  Test Teardown Execution
 
      Add IP Address  10.7.7.254  ${test_subnet_mask}  ${test_gateway}
+
 
 Add Fourth Octet Lowest IP And Verify
     [Documentation]  Add fourth octet lowest IP and verify.
@@ -195,6 +214,7 @@ Add Fourth Octet Lowest IP And Verify
 
      Add IP Address  10.7.7.1  ${test_subnet_mask}  ${test_gateway}
 
+
 Add Third Octet Threshold IP And Verify
     [Documentation]  Add third octet threshold IP and verify.
     [Tags]  Add_Third_Octet_Threshold_IP_And_Verify
@@ -202,6 +222,7 @@ Add Third Octet Threshold IP And Verify
     ...  Delete IP Address  10.7.255.7  AND  Test Teardown Execution
 
      Add IP Address  10.7.255.7  ${test_subnet_mask}  ${test_gateway}
+
 
 Add Third Octet Lowest IP And Verify
     [Documentation]  Add third octet lowest IP and verify.
@@ -211,6 +232,7 @@ Add Third Octet Lowest IP And Verify
 
      Add IP Address  10.7.0.7  ${test_subnet_mask}  ${test_gateway}
 
+
 Add Second Octet Threshold IP And Verify
     [Documentation]  Add second octet threshold IP and verify.
     [Tags]  Add_Second_Octet_Threshold_IP_And_Verify
@@ -218,6 +240,7 @@ Add Second Octet Threshold IP And Verify
     ...  Delete IP Address  10.255.7.7  AND  Test Teardown Execution
 
      Add IP Address  10.255.7.7  ${test_subnet_mask}  ${test_gateway}
+
 
 Add Second Octet Lowest IP And Verify
     [Documentation]  Add second octet lowest IP and verify.
@@ -227,6 +250,7 @@ Add Second Octet Lowest IP And Verify
 
      Add IP Address  10.0.7.7  ${test_subnet_mask}  ${test_gateway}
 
+
 Add First Octet Threshold IP And Verify
     [Documentation]  Add first octet threshold IP and verify.
     [Tags]  Add_First_Octet_Threshold_IP_And_Verify
@@ -234,6 +258,7 @@ Add First Octet Threshold IP And Verify
     ...  Delete IP Address  233.7.7.7  AND  Test Teardown Execution
 
      Add IP Address  223.7.7.7  ${test_subnet_mask}  ${test_gateway}
+
 
 Add First Octet Lowest IP And Verify
     [Documentation]  Add first octet lowest IP and verify.
@@ -243,6 +268,7 @@ Add First Octet Lowest IP And Verify
 
      Add IP Address  1.7.7.7  ${test_subnet_mask}  ${test_gateway}
 
+
 Configure Invalid Netmask
     [Documentation]  Verify error while setting invalid netmask.
     [Tags]  Configure_Invalid_Netmask
@@ -250,6 +276,7 @@ Configure Invalid Netmask
 
     # ip               subnet_mask         gateway          valid_status_codes
     ${test_ipv4_addr}  ${invalid_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
 
 Configure Out Of Range Netmask
     [Documentation]  Verify error while setting out of range netmask.
@@ -259,6 +286,7 @@ Configure Out Of Range Netmask
     # ip               subnet_mask              gateway          valid_status_codes
     ${test_ipv4_addr}  ${out_of_range_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
+
 Configure Alpha Netmask
     [Documentation]  Verify error while setting alpha netmask.
     [Tags]  Configure_Alpha_Netmask
@@ -266,6 +294,7 @@ Configure Alpha Netmask
 
     # ip               subnet_mask       gateway          valid_status_codes
     ${test_ipv4_addr}  ${alpha_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
 
 Configure More Byte Netmask
     [Documentation]  Verify error while setting more byte netmask.
@@ -275,6 +304,7 @@ Configure More Byte Netmask
     # ip               subnet_mask           gateway          valid_status_codes
     ${test_ipv4_addr}  ${more_byte_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
+
 Configure Less Byte Netmask
     [Documentation]  Verify error while setting less byte netmask.
     [Tags]  Configure_Less_Byte_Netmask
@@ -282,6 +312,7 @@ Configure Less Byte Netmask
 
     # ip               subnet_mask           gateway          valid_status_codes
     ${test_ipv4_addr}  ${less_byte_netmask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
 
 Configure Threshold Netmask And Verify
     [Documentation]  Configure threshold netmask and verify.
@@ -291,6 +322,7 @@ Configure Threshold Netmask And Verify
 
      Add IP Address  ${test_ipv4_addr}  ${threshold_netmask}  ${test_gateway}
 
+
 Configure Lowest Netmask And Verify
     [Documentation]  Configure lowest netmask and verify.
     [Tags]  Configure_Lowest_Netmask_And_verify
@@ -298,6 +330,7 @@ Configure Lowest Netmask And Verify
     ...   Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
      Add IP Address  ${test_ipv4_addr}  ${lowest_netmask}  ${test_gateway}
+
 
 Configure Network ID
     [Documentation]  Verify error while configuring network ID.
@@ -308,6 +341,7 @@ Configure Network ID
     # ip           subnet_mask          gateway          valid_status_codes
     ${network_id}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
+
 Configure Less Octet IP
     [Documentation]  Verify error while Configuring less octet IP address.
     [Tags]  Configure_Less_Octet_IP
@@ -315,6 +349,7 @@ Configure Less Octet IP
 
     # ip              subnet_mask          gateway          valid_status_codes
     ${less_octet_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
 
 Configure Empty IP
     [Documentation]  Verify error while Configuring empty IP address.
@@ -324,6 +359,7 @@ Configure Empty IP
     # ip      subnet_mask          gateway          valid_status_codes
     ${EMPTY}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
+
 Configure Special Char IP
     [Documentation]  Configure invalid IP address containing special chars.
     [Tags]  Configure_Special_Char_IP
@@ -331,6 +367,7 @@ Configure Special Char IP
 
     # ip          subnet_mask          gateway          valid_status_codes
     @@@.%%.44.11  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
 
 Configure Hexadecimal IP
     [Documentation]  Configure invalid IP address containing hex value.
@@ -340,6 +377,7 @@ Configure Hexadecimal IP
     # ip       subnet_mask          gateway          valid_status_codes
     ${hex_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
+
 Configure Negative Octet IP
     [Documentation]  Configure invalid IP address containing negative octet.
     [Tags]  Configure_Negative_Octet_IP
@@ -347,6 +385,7 @@ Configure Negative Octet IP
 
     # ip            subnet_mask          gateway          valid_status_codes
     ${negative_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
+
 
 Configure Incomplete IP For Gateway
     [Documentation]  Configure incomplete IP for gateway and expect an error.
@@ -356,6 +395,7 @@ Configure Incomplete IP For Gateway
     # ip               subnet_mask          gateway           valid_status_codes
     ${test_ipv4_addr}  ${test_subnet_mask}  ${less_octet_ip}  ${HTTP_BAD_REQUEST}
 
+
 Configure Special Char IP For Gateway
     [Documentation]  Configure special char IP for gateway and expect an error.
     [Tags]  Configure_Special_Char_IP_For_Gateway
@@ -363,6 +403,7 @@ Configure Special Char IP For Gateway
 
     # ip               subnet_mask          gateway       valid_status_codes
     ${test_ipv4_addr}  ${test_subnet_mask}  @@@.%%.44.11  ${HTTP_BAD_REQUEST}
+
 
 Configure Hexadecimal IP For Gateway
     [Documentation]  Configure hexadecimal IP for gateway and expect an error.
@@ -372,11 +413,13 @@ Configure Hexadecimal IP For Gateway
     # ip               subnet_mask          gateway    valid_status_codes
     ${test_ipv4_addr}  ${test_subnet_mask}  ${hex_ip}  ${HTTP_BAD_REQUEST}
 
+
 Get DNS Server And Verify
     [Documentation]  Get DNS server via Redfish and verify.
     [Tags]  Get_DNS_Server_And_Verify
 
     Verify CLI and Redfish Nameservers
+
 
 Configure DNS Server And Verify
     [Documentation]  Configure DNS server and verify.
@@ -388,6 +431,7 @@ Configure DNS Server And Verify
     Configure Static Name Servers  ${static_name_servers}
     Verify CLI and Redfish Nameservers
 
+
 Delete DNS Server And Verify
     [Documentation]  Delete DNS server and verify.
     [Tags]  Delete_DNS_Server_And_Verify
@@ -397,6 +441,7 @@ Delete DNS Server And Verify
 
     Delete Static Name Servers
     Verify CLI and Redfish Nameservers
+
 
 Configure DNS Server And Check Persistency
     [Documentation]  Configure DNS server and check persistency on reboot.
@@ -410,6 +455,7 @@ Configure DNS Server And Check Persistency
     OBMC Reboot (off)
     Verify CLI and Redfish Nameservers
 
+
 Configure Loopback IP For Gateway
     [Documentation]  Configure loopback IP for gateway and expect an error.
     [Tags]  Configure_Loopback_IP_For_Gateway
@@ -418,6 +464,7 @@ Configure Loopback IP For Gateway
 
     # ip               subnet_mask          gateway         valid_status_codes
     ${test_ipv4_addr}  ${test_subnet_mask}  ${loopback_ip}  ${HTTP_BAD_REQUEST}
+
 
 Configure Network ID For Gateway
     [Documentation]  Configure network ID for gateway and expect an error.
@@ -428,6 +475,7 @@ Configure Network ID For Gateway
     # ip               subnet_mask          gateway        valid_status_codes
     ${test_ipv4_addr}  ${test_subnet_mask}  ${network_id}  ${HTTP_BAD_REQUEST}
 
+
 Configure Multicast IP For Gateway
     [Documentation]  Configure multicast IP for gateway and expect an error.
     [Tags]  Configure_Multicast_IP_For_Gateway
@@ -436,6 +484,7 @@ Configure Multicast IP For Gateway
 
     # ip               subnet_mask          gateway           valid_status_codes
     ${test_ipv4_addr}  ${test_subnet_mask}  ${multicast_ip}  ${HTTP_BAD_REQUEST}
+
 
 Configure Broadcast IP For Gateway
     [Documentation]  Configure broadcast IP for gateway and expect an error.
@@ -446,6 +495,7 @@ Configure Broadcast IP For Gateway
     # ip               subnet_mask          gateway          valid_status_codes
     ${test_ipv4_addr}  ${test_subnet_mask}  ${broadcast_ip}  ${HTTP_BAD_REQUEST}
 
+
 Configure Null Value For DNS Server
     [Documentation]  Configure null value for DNS server and expect an error.
     [Tags]  Configure_Null_Value_For_DNS_Server
@@ -454,6 +504,7 @@ Configure Null Value For DNS Server
     ...  Configure Static Name Servers  AND  Test Teardown Execution
 
     Configure Static Name Servers  ${null_value}  ${HTTP_BAD_REQUEST}
+
 
 Configure Empty Value For DNS Server
     [Documentation]  Configure empty value for DNS server and expect an error.
@@ -464,6 +515,7 @@ Configure Empty Value For DNS Server
 
     Configure Static Name Servers  ${empty_dictionary}  ${HTTP_BAD_REQUEST}
 
+
 Configure String Value For DNS Server
     [Documentation]  Configure string value for DNS server and expect an error.
     [Tags]  Configure_String_Value_For_DNS_Server
@@ -472,6 +524,7 @@ Configure String Value For DNS Server
     ...  Configure Static Name Servers  AND  Test Teardown Execution
 
     Configure Static Name Servers  ${string_value}  ${HTTP_BAD_REQUEST}
+
 
 Modify IPv4 Address And Verify
     [Documentation]  Modify IP address via Redfish and verify.
@@ -512,6 +565,7 @@ Verify Netmask On BMC
     Should Contain Match  ${ip_data}  */${prefix_length}
     ...  msg=Prefix length does not exist.
 
+
 Verify IP And Netmask On BMC
     [Documentation]  Verify IP and netmask on BMC.
     [Arguments]  ${ip}  ${netmask}
@@ -527,6 +581,7 @@ Verify IP And Netmask On BMC
     Should Contain  ${ip_data}  ${ip_with_netmask}
     ...  msg=IP and netmask pair does not exist.
 
+
 Validate Hostname On BMC
     [Documentation]  Verify that the hostname read via Redfish is the same as the
     ...  hostname configured on system.
@@ -540,11 +595,13 @@ Validate Hostname On BMC
     Should Be Equal  ${sys_hostname}  ${hostname}
     ...  ignore_case=True  msg=Hostname does not exist.
 
+
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
     FFDC On Test Case Fail
     Redfish.Logout
+
 
 Clear IP Settings On Fail
     [Documentation]  Clear IP settings on fail.
@@ -557,6 +614,7 @@ Clear IP Settings On Fail
     ...  Delete IP Address  ${ip}
 
     Test Teardown Execution
+
 
 Verify CLI and Redfish Nameservers
     [Documentation]  Verify that nameservers obtained via Redfish do not
@@ -603,6 +661,7 @@ Configure Static Name Servers
     ...  Should Be True  ${cmd_status} == ${True}
     ...  ELSE  Should Be True  ${cmd_status} == ${False}
 
+
 Delete Static Name Servers
     [Documentation]  Delete static name servers.
 
@@ -611,6 +670,7 @@ Delete Static Name Servers
     # Check if all name servers deleted on BMC.
     ${nameservers}=  CLI Get Nameservers
     Should Be Empty  ${nameservers}
+
 
 DNS Test Setup Execution
     [Documentation]  Do DNS test setup execution.
@@ -626,11 +686,13 @@ DNS Test Setup Execution
     # Set suite variables to trigger restoration during teardown.
     Set Suite Variable  ${original_nameservers}
 
+
 Suite Setup Execution
     [Documentation]  Do suite setup execution.
 
     ${test_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${test_gateway}
+
 
 Update IP Address
     [Documentation]  Update IP address of BMC.

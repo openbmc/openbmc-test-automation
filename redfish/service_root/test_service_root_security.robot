@@ -188,5 +188,6 @@ Multiple Session Cleanup
 
     FFDC On Test Case Fail
 
-    :FOR  ${item}  IN  @{session_list}
-    \  Redfish.Delete  ${item}
+    FOR  ${item}  IN  @{session_list}
+      Redfish.Delete  ${item}
+    END
