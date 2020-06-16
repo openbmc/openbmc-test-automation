@@ -101,18 +101,8 @@ Set And Verify BootSource And BootType
     # - BIOS Mux Control Override : BIOS uses recommended setting of the mux at
     #   the end of POST
 
-    ${data}=  Create Dictionary  BootSourceOverrideEnabled=${override_enabled}
-    ...  BootSourceOverrideTarget=${override_target}
-    ${payload}=  Create Dictionary  Boot=${data}
+    Redfish Set Boot Default  ${override_enabled}  ${override_target}
 
-    Redfish.Patch  /redfish/v1/Systems/system  body=&{payload}
-    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-
-    ${resp}=  Redfish.Get  /redfish/v1/Systems/system
-    Should Be Equal As Strings  ${resp.dict["Boot"]["BootSourceOverrideEnabled"]}
-    ...  ${override_enabled}
-    Should Be Equal As Strings  ${resp.dict["Boot"]["BootSourceOverrideTarget"]}
-    ...  ${override_target}
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
     Should Contain  ${output}  ${redfish_ipmi_enabled_map['${override_enabled}']}
     Should Contain  ${output}  ${redfish_ipmi_target_map['${override_target}']}

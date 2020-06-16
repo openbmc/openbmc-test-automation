@@ -43,6 +43,7 @@ Redfish Default
     [Documentation]  Set REST defaults.
 
     Redfish.Login
+    Run Keyword And Ignore Error  Redfish Set Boot Default  Disabled  None
     Run Keyword And Ignore Error  Redfish Set Power Restore Policy  AlwaysOff
     Redfish.Logout
 
