@@ -59,22 +59,25 @@ Get IP Address And Verify
     [Documentation]  Get IP Address And Verify.
     [Tags]  Get_IP_Address_And_Verify
 
-    : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Verify IP On BMC  ${network_configuration['Address']}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Verify IP On BMC  ${network_configuration['Address']}
+    END
 
 Get Netmask And Verify
     [Documentation]  Get Netmask And Verify.
     [Tags]  Get_Netmask_And_Verify
 
-    : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Verify Netmask On BMC  ${network_configuration['SubnetMask']}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Verify Netmask On BMC  ${network_configuration['SubnetMask']}
+    END
 
 Get Gateway And Verify
     [Documentation]  Get gateway and verify it's existence on the BMC.
     [Tags]  Get_Gateway_And_Verify
 
-    : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Verify Gateway On BMC  ${network_configuration['Gateway']}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Verify Gateway On BMC  ${network_configuration['Gateway']}
+    END
 
 Get MAC Address And Verify
     [Documentation]  Get MAC address and verify it's existence on the BMC.
@@ -91,9 +94,10 @@ Verify All Configured IP And Netmask
     [Documentation]  Verify all configured IP and netmask on BMC.
     [Tags]  Verify_All_Configured_IP_And_Netmask
 
-    : FOR  ${network_configuration}  IN  @{network_configurations}
-    \  Verify IP And Netmask On BMC  ${network_configuration['Address']}
-    ...  ${network_configuration['SubnetMask']}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Verify IP And Netmask On BMC  ${network_configuration['Address']}
+      ...  ${network_configuration['SubnetMask']}
+    END
 
 Get Hostname And Verify
     [Documentation]  Get hostname via Redfish and verify.
@@ -626,11 +630,13 @@ DNS Test Setup Execution
     # Set suite variables to trigger restoration during teardown.
     Set Suite Variable  ${original_nameservers}
 
+
 Suite Setup Execution
     [Documentation]  Do suite setup execution.
 
     ${test_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${test_gateway}
+
 
 Update IP Address
     [Documentation]  Update IP address of BMC.
