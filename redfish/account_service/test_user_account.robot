@@ -5,6 +5,7 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
+Suite Setup      Suite Setup Execution
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
@@ -33,7 +34,6 @@ Verify Redfish User Persistence After Reboot
 
     # Reboot BMC.
     Redfish OBMC Reboot (off)  stack_mode=normal
-    Redfish.Login
 
     # Verify users after reboot.
     Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
@@ -487,3 +487,9 @@ Verify Create User Without Enabling
 
     # Delete newly created user.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
+
+
+Suite Setup Execution
+    [Documentation]  Do test case setup tasks.
+
+    Redfish.Login
