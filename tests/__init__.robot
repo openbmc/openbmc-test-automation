@@ -23,11 +23,29 @@ System Driver Data
     Run Keyword And Ignore Error  Log PNOR Driver Details
     Run Keyword And Ignore Error  Log BMC Model
     Run Keyword And Ignore Error  Enable Core Dump On BMC
+
+    Run Keyword If  ${REDFISH_SUPPORTED}
+    ...    Redfish Default
+    ...  ELSE
+    ...    REST Default
+
+REST Default
+    [Documentation]  Set REST defaults.
+
     Run Keyword And Ignore Error  Set Boot Defaults
     Run Keyword And Ignore Error  Set BMC Power Policy  ${ALWAYS_POWER_OFF}
     Run Keyword If  ${FIELD_MODE} == ${True}
     ...  Enable Field Mode And Verify Unmount
     Run Keyword And Ignore Error  Clear BMC Gard Record
+
+
+Redfish Default
+    [Documentation]  Set REST defaults.
+
+    Redfish.Login
+    Run Keyword And Ignore Error  Redfish Set Power Restore Policy  AlwaysOff
+    Redfish.Logout
+
 
 Set Boot Defaults
     [Documentation]  Set boot defaults.
