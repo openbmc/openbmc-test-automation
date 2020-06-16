@@ -72,7 +72,8 @@ if redfish_supported:
     default_power_off = "Redfish Power Off"
     delete_errlogs_cmd = "Delete Error Logs"
     # TODO: delete_errlogs_cmd="Redfish Purge Event Log"
-    default_set_power_policy = "Redfish Set Power Restore Policy  AlwaysOff"
+    # TODO: default_set_power_policy = "Redfish Set Power Restore Policy  AlwaysOff"
+    default_set_power_policy = "Set BMC Power Policy  ALWAYS_POWER_OFF"
 else:
     default_power_on = "REST Power On"
     default_power_off = "REST Power Off"
