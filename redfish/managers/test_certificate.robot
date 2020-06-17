@@ -202,6 +202,39 @@ Verify Expired CA Certificate Install
     Install And Verify Certificate Via Redfish  CA  Expired Certificate  error
 
 
+Verify Not Yet Valid Client Certificate Install
+    [Documentation]  Verify installation of not yet valid client certificate.
+    [Tags]  Verify_Not_Yet_Valid_Client_Certificate_Install
+    [Setup]  Get Current BMC Date
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Restore BMC Date
+
+    Modify BMC Date
+    Install And Verify Certificate Via Redfish  Client  Not Yet Valid Certificate  ok
+
+
+Verify Not Yet Valid CA Certificate Install
+    [Documentation]  Verify installation of not yet valid CA certificate.
+    [Tags]  Verify_Not_Yet_Valid_CA_Certificate_Install
+    [Setup]  Get Current BMC Date
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Restore BMC Date
+
+    Modify BMC Date
+    Install And Verify Certificate Via Redfish  CA  Not Yet Valid Certificate  ok
+
+
+Verify Not Yet Valid Server Certificate Replace
+    [Documentation]  Verify replacing Server certificate with a not yet valid one.
+    [Tags]  Verify_Not_Yet_Valid_Server_Certificate_Replace
+    [Setup]  Get Current BMC Date
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Restore BMC Date
+
+    Modify BMC Date
+    Replace Certificate Via Redfish  Server  Not Yet Valid Certificate  ok
+
+
 *** Keywords ***
 
 Install And Verify Certificate Via Redfish
@@ -230,6 +263,7 @@ Install And Verify Certificate Via Redfish
     ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
 
     Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date  future
+    ...  ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'  Modify BMC Date  old
 
     ${cert_id}=  Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
     Logging  Installed certificate id: ${cert_id}
@@ -298,11 +332,13 @@ Replace Certificate Via Redfish
     ...  ELSE IF  '${cert_type}' == 'CA'
     ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate  ok
 
-    ${time}=  Set Variable If  '${cert_format}' == 'Expired Certificate'  -10  365
-    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}  ${time}
+    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
 
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date  future
+    ...  ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'  Modify BMC Date  old
 
     ${certificate_uri}=  Set Variable If
     ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
