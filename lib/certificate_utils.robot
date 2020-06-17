@@ -109,7 +109,7 @@ Generate Certificate File Via Openssl
     ...  Remove String  ${file_content}  ${private_key_content}
     ...  ELSE IF  '${cert_format}' == 'Empty Certificate Empty Privatekey'
     ...  Remove String  ${file_content}  ${cert_content}  ${private_key_content}
-    ...  ELSE IF  '${cert_format}' == 'Expired Certificate'
+    ...  ELSE IF  '${cert_format}' == 'Expired Certificate' or '${cert_format}' == 'Not Yet Valid Certificate'
     ...  OperatingSystem.Get File  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
     ...  ELSE IF  '${cert_format}' == 'Valid Certificate'
     ...  Remove String  ${file_content}  ${private_key_content}
