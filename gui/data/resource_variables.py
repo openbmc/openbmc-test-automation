@@ -11,6 +11,10 @@ class resource_variables():
     xpath_textbox_hostname = "//input[@id='host']"
     xpath_textbox_username = "//input[@id='username']"
     xpath_textbox_password = "//input[@id='password']"
+    xpath_input_password = "//input[@id='password']"
+    xpath_input_confirm_password = "//input[@id='passwordConfirm']"
+    xpath_submit_button = '//button[@type="submit"]'
+    xpath_button_profile_settings = '//a[@href="#/profile-settings"]'
     xpath_button_login = "//*[@id='login__submit']"
     xpath_button_user_action = "//button[@id='user-actions']"
     xpath_button_logout = '//button[text()="Log out"]'
