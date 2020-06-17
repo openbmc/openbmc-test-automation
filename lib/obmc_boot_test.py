@@ -38,8 +38,6 @@ base_path = os.path.dirname(os.path.dirname(
 sys.path.append(base_path + "extended/")
 import run_keyword as rk
 
-redfish = BuiltIn().get_library_instance('redfish')
-
 # Setting master_pid correctly influences the behavior of plug-ins like
 # DB_Logging
 program_pid = os.getpid()
@@ -68,6 +66,7 @@ if status_dir_path != "":
     status_dir_path = os.path.normpath(status_dir_path) + os.sep
 redfish_supported = BuiltIn().get_variable_value("${REDFISH_SUPPORTED}", default=False)
 if redfish_supported:
+    redfish = BuiltIn().get_library_instance('redfish')
     default_power_on = "Redfish Power On"
     default_power_off = "Redfish Power Off"
     delete_errlogs_cmd = "Delete Error Logs"
