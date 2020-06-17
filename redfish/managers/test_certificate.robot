@@ -202,6 +202,28 @@ Verify Expired CA Certificate Install
     Install And Verify Certificate Via Redfish  CA  Expired Certificate  error
 
 
+Verify Not Yet Valid Client Certificate Install
+    [Documentation]  Verify installation of not yet valid client certificate.
+    [Tags]  Verify_Not_Yet_Valid_Client_Certificate_Install
+    [Setup]  Get Current BMC Date
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Restore BMC Date
+
+    Modify BMC Date
+    Install And Verify Certificate Via Redfish  Client  Not Yet Valid Certificate  ok
+
+
+Verify Not Yet Valid CA Certificate Install
+    [Documentation]  Verify installation of not yet valid CA certificate.
+    [Tags]  Verify_Not_Yet_Valid_CA_Certificate_Install
+    [Setup]  Get Current BMC Date
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Restore BMC Date
+
+    Modify BMC Date
+    Install And Verify Certificate Via Redfish  CA  Not Yet Valid Certificate  ok
+
+
 *** Keywords ***
 
 Install And Verify Certificate Via Redfish
@@ -230,6 +252,7 @@ Install And Verify Certificate Via Redfish
     ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
 
     Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date  future
+    ...  ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'  Modify BMC Date  old
 
     ${cert_id}=  Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
     Logging  Installed certificate id: ${cert_id}
