@@ -106,7 +106,7 @@ Login OpenBMC GUI
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
     Click Element  login__submit
-    Wait Until Element Is Enabled  ${xpath_button_logout}
+    Wait Until Element Is Enabled  ${xpath_button_user_action}
     Page Should Contain  Server information
 
 
@@ -289,5 +289,6 @@ Launch Browser And Login OpenBMC GUI
 Logout And Close Browser
     [Documentation]  Logout from openbmc application and close the browser.
 
+    Click Button  ${xpath_button_user_action}
     Click Element  //*[text()='Log out']
     Close Browser
