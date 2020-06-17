@@ -54,6 +54,8 @@ Get To Stable State
 
     Open Connection And Log In  host=${OPENBMC_HOST}
 
+    Run Keyword If  ${REDFISH_SUPPORTED}  Redfish.Login
+
     Wait Until Keyword Succeeds
     ...  1 min  30 sec  Initialize OpenBMC
 
@@ -66,6 +68,7 @@ Get To Stable State
     Prune Journal Log
 
     Run Keyword And Ignore Error  Set BMC Power Policy  ${ALWAYS_POWER_OFF}
+    Run Keyword And Ignore Error  Redfish Set Power Restore Policy  AlwaysOff
 
     # TODO: Enable MAC AES check latter.
     # Reference : openbmc/openbmc-test-automation#998
