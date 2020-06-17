@@ -180,37 +180,53 @@ Verify CSR Generation For Client Certificate With Invalid Value
     Client      EC                  ${EMPTY}          ${invalid_value}  error
 
 
-Verify Expired Client Certificate Install
-    [Documentation]  Verify installation of expired CA certificate.
-    [Tags]  Verify_Expired_Client_Certificate_Install
-    [Setup]  Get Current BMC Date
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Restore BMC Date
+Verify Expired Certificate Install
+    [Documentation]  Verify installation of expired certificate.
+    [Tags]  Verify_Expired_Certificate_Install
+    [Setup]  Run Keywords  Get Current BMC Date  AND  Modify BMC Date
+    [Template]  Install And Verify Certificate Via Redfish
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
 
-    Modify BMC Date
-    Install And Verify Certificate Via Redfish  Client  Expired Certificate  error
-
-
-Verify Expired CA Certificate Install
-    [Documentation]  Verify installation of expired CA certificate.
-    [Tags]  Verify_Expired_CA_Certificate_Install
-    [Setup]  Get Current BMC Date
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Restore BMC Date
-
-    Modify BMC Date
-    Install And Verify Certificate Via Redfish  CA  Expired Certificate  error
+    # cert_type  cert_format          expected_status
+    Client       Expired Certificate  error
+    CA           Expired Certificate  error
 
 
-Verify Expired Server Certificate Replace
-    [Documentation]  Verify replacing the server certificate with an expired one.
-    [Tags]  Verify_Expired_Server_Certificate_Replace
-    [Setup]  Get Current BMC Date
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Restore BMC Date
+Verify Expired Certificate Replace
+    [Documentation]  Verify replacing the certificate with an expired one.
+    [Tags]  Verify_Expired_Certificate_Replace
+    [Setup]  Run Keywords  Get Current BMC Date  AND  Modify BMC Date
+    [Template]  Replace Certificate Via Redfish
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
 
-    Modify BMC Date
-    Replace Certificate Via Redfish  Server  Expired Certificate  error
+    # cert_type  cert_format          expected_status
+    Server       Expired Certificate  error
+
+
+Verify Not Yet Valid Certificate Install
+    [Documentation]  Verify installation of not yet valid certificates.
+    [Tags]  Verify_Not_Yet_Valid_Certificate_Install
+    [Setup]  Run Keywords  Get Current BMC Date  AND  Modify BMC Date
+    [Template]  Install And Verify Certificate Via Redfish
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
+
+    # cert_type  cert_format                expected_status
+    Client       Not Yet Valid Certificate  ok
+    CA           Not Yet Valid Certificate  ok
+
+
+Verify Not Yet Valid Certificate Replace
+    [Documentation]  Verify replacing certificate with a not yet valid one.
+    [Tags]  Verify_Not_Yet_Valid_Certificate_Replace
+    [Setup]  Run Keywords  Get Current BMC Date  AND  Modify BMC Date
+    [Template]  Replace Certificate Via Redfish
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
+
+    # cert_type  cert_format                expected_status
+    Server       Not Yet Valid Certificate  ok
+    Client       Not Yet Valid Certificate  ok
+    CA           Not Yet Valid Certificate  ok
+
 
 *** Keywords ***
 
@@ -240,6 +256,7 @@ Install And Verify Certificate Via Redfish
     ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
 
     Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date  future
+    ...  ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'  Modify BMC Date  old
 
     ${cert_id}=  Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
     Logging  Installed certificate id: ${cert_id}
@@ -272,10 +289,11 @@ Modify BMC Date
     ...  ELSE IF  '${date_set_type}' == 'old'
     ...  Subtract Time From Date  ${current_date_time}  375 days
 
-    # Enable manaual mode.
+    # Enable manual mode.
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'ProtocolEnabled': ${False}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Sleep  2s
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${new_time}'}
     ...  valid_status_codes=[${HTTP_OK}]
 
@@ -313,7 +331,11 @@ Replace Certificate Via Redfish
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
-    Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date  future
+    Run Keyword If  '${cert_format}' == 'Expired Certificate'
+    ...    Modify BMC Date  future
+    ...  ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'
+    ...    Modify BMC Date  old
+
 
     ${certificate_uri}=  Set Variable If
     ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
