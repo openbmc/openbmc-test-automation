@@ -21,6 +21,7 @@ class resource_variables():
     xpath_save_button = "//button[contains(text(),'Save')]"
     xpath_remove_button = "//button[contains(text(),'Remove')]"
     xpath_add_button = "//button[@type='submit']"
+    xpath_button_user_action  = '//button[@id="user-actions"]'
 
     xpath_select_button_warm_reboot = \
         "//*[@id='power__warm-boot']"

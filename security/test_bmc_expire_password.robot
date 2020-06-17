@@ -2,6 +2,7 @@
 Documentation     Test root user expire password.
 
 Resource          ../lib/resource.robot
+Resource          ../gui/lib/resource.robot
 Resource          ../lib/bmc_redfish_resource.robot
 Resource          ../lib/ipmi_client.robot
 Library           ../lib/bmc_ssh_utils.py
@@ -50,7 +51,7 @@ Expire Root Password And Update Bad Password Length Via Redfish
    [Documentation]  Expire root password and update bad password via Redfish and expect an error.
    [Tags]  Expire_Root_Password_And_Update_Bad_Password_Length_Via_Redfish
    [Teardown]  Run Keywords  Wait Until Keyword Succeeds  1 min  10 sec
-    ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
+   ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
 
    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
@@ -87,10 +88,34 @@ Expire And Change Root User Password Via Redfish And Verify
    Redfish.Login  ${OPENBMC_USERNAME}  0penBmc123
 
 
+Expire And Change Root Password Via GUI
+    [Documentation]  Expire and change root password via GUI.
+    [Tags]  Expire_And_Change_Root_Password_Via_GUI
+    [Setup]  Run Keywords  Launch Browser And Login OpenBMC GUI
+    [Teardown]  Run Keywords  Logout And Close Browser
+    ...  AND  Restore Default Password For Root User  AND  FFDC On Test Case Fail
+
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
+    Should Contain  ${output}  password expiry information changed
+
+    Click Button  ${xpath_button_user_action}
+    Click Element  //a[@href="#/profile-settings"]
+    Page Should Contain  Change password
+    Sleep  2s
+    # Change valid password.
+    Input Text  ${xpath_textbox_password}  0penBmc123
+    Input Text  //input[@id="passwordConfirm"]  0penBmc123
+    Click Button  //button[@type="submit"]
+
+    # Verify valid password.
+    Redfish.Login  ${OPENBMC_USERNAME}  0penBmc123
+
+
 *** Keywords ***
 
 Suite Setup Execution
-   [Documentation]  Test setup  execution.
+   [Documentation]  Suite setup  execution.
 
    Redfish.login
    Redfish.Patch  /redfish/v1/AccountService/  body={"AccountLockoutThreshold": 0}
