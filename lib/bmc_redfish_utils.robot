@@ -63,7 +63,6 @@ Reset BIOS Via Redfish
 Delete All Redfish Sessions
     [Documentation]  Delete all active redfish sessions.
 
-    Redfish.Login
     ${saved_session_info}=  Get Redfish Session Info
 
     ${resp_list}=  Redfish_Utils.Get Member List
@@ -74,8 +73,6 @@ Delete All Redfish Sessions
 
     :FOR  ${session}  IN  @{resp_list}
     \  Redfish.Delete  ${session}
-
-    Redfish.Logout
 
 
 Get Valid FRUs
