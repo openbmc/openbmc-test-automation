@@ -10,10 +10,10 @@ Library         ../../lib/utils.py
 Variables       ../../lib/ras/variables.py
 Variables       ../../data/variables.py
 
-Suite Setup      Redfish Power On
+Suite Setup      Suite Setup Execution
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
-
+Suite Teardown   Suite Setup Teardown
 
 *** Variables ***
 ${proc_chip_id}    0
@@ -38,3 +38,17 @@ Test BMC Getmem
     [Documentation]  Do getmem operation.
     [Tags]  Test_BMC_Getmem
     Pdbg  -p${proc_chip_id} getmem 0x${mem_address} ${count}
+
+*** Keywords ***
+
+Suite Setup Execution
+    [Documentation]  Do the suite setup.
+
+     Redfish.Login
+     Redfish Power On
+
+
+Suite Setup Teardown
+    [Documentation]  Do the suite setup.
+
+     Redfish.Logout
