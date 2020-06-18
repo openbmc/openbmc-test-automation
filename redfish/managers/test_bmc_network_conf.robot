@@ -569,7 +569,8 @@ Verify CLI and Redfish Nameservers
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    ${redfish_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  StaticNameServers
+    ${redfish_nameservers}=  Redfish.Get Attribute
+    ...  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  StaticNameServers
     ${resolve_conf_nameservers}=  CLI Get Nameservers
     Rqprint Vars  redfish_nameservers  resolve_conf_nameservers
 
@@ -592,7 +593,8 @@ Configure Static Name Servers
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     # Currently BMC is sending 500 response code instead of 400 for invalid scenarios.
-    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body={'StaticNameServers': ${static_name_servers}}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body={'StaticNameServers': ${static_name_servers}}
     ...  valid_status_codes=[${valid_status_codes}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
     # Patch operation takes 1 to 3 seconds to set new value.
@@ -624,7 +626,8 @@ DNS Test Setup Execution
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    ${original_nameservers}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  StaticNameServers
+    ${original_nameservers}=  Redfish.Get Attribute
+    ...  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  StaticNameServers
 
     Rprint Vars  original_nameservers
     # Set suite variables to trigger restoration during teardown.
