@@ -8,7 +8,6 @@ Library      DateTime
 Library      XvfbRobot
 Library      OperatingSystem
 Library      SeleniumLibrary
-Library      AngularJSLibrary
 Library      SSHLibrary  30 Seconds
 Library      Process
 Library      supporting_libs.py
@@ -91,6 +90,7 @@ Launch Headless Browser
 
     [Return]  ${browser_ID}
 
+
 Login OpenBMC GUI
     [Documentation]  Perform login to open BMC GUI.
     [Arguments]  ${username}=${OPENBMC_USERNAME}
@@ -101,13 +101,11 @@ Login OpenBMC GUI
     # password      The password.
 
     Go To  ${obmc_gui_url}
-    Wait Until Element Is Enabled  ${xpath_textbox_hostname}
-    Input Text  ${xpath_textbox_hostname}  ${OPENBMC_HOST}
+    Wait Until Element Is Enabled  ${xpath_textbox_username}
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
-    Click Element  login__submit
-    Wait Until Element Is Enabled  ${xpath_button_logout}
-    Page Should Contain  Server information
+    Click Element  ${xpath_button_login}
+    Wait Until Page Contains  Overview  timeout=30s
 
 
 Test Setup Execution
