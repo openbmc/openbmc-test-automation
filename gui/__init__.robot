@@ -33,7 +33,7 @@ Get OpenBMC System Info
     Rpvars  OPENBMC_HOST  OPENBMC_HOST_NAME
     ${build_info}  ${stderr}  ${rc}=  BMC Execute Command  cat /etc/os-release
     ...  print_output=1
-    Print Dashes  0  100  1  =
+    #Print Dashes  0  100  1  =
 
 Init Teardown Steps
     [Documentation]  End the test execution by closing browser.
