@@ -4,9 +4,10 @@ Documentation    Test Redfish user account.
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/bmc_redfish_utils.robot
 
-Suite Setup      Suite Setup Execution
-Test Setup       Test Setup Execution
+Suite Setup      Redfish.Login
+Suite Teardown   Redfish.Logout
 Test Teardown    Test Teardown Execution
 
 *** Variables ***
@@ -122,8 +123,6 @@ Verify Modifying User Attributes
     Redfish Create User  operator_user  TestPwd123  Operator        ${True}
     Redfish Create User  readonly_user  TestPwd123  ReadOnly        ${True}
 
-    Redfish.Login
-
     # Make sure the new user account does not already exist.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/newadmin_user
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
@@ -156,13 +155,11 @@ Verify User Account Locked
 
     Redfish Create User  admin_user  TestPwd123  Administrator   ${True}
 
-    Redfish.Logout
-
-    Redfish.Login
-
     ${payload}=  Create Dictionary  AccountLockoutThreshold=${account_lockout_threshold}
     ...  AccountLockoutDuration=${account_lockout_duration}
     Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
+
+    Redfish.Logout
 
     # Make ${account_lockout_threshold} failed login attempts.
     Repeat Keyword  ${account_lockout_threshold} times
@@ -190,6 +187,8 @@ Verify Admin User Privilege
     Redfish Create User  operator_user  TestPwd123  Operator  ${True}
     Redfish Create User  readonly_user  TestPwd123  ReadOnly  ${True}
 
+    Redfish.Logout
+
     # Change role ID of operator user with admin user.
     # Login with admin user.
     Redfish.Login  admin_user  TestPwd123
@@ -206,6 +205,7 @@ Verify Admin User Privilege
     # Verify modified user.
     Redfish Verify User  readonly_user  NewTestPwd123  ReadOnly  ${True}
 
+    Redfish.Logout
     Redfish.Login
 
     Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
@@ -219,15 +219,18 @@ Verify Operator User Privilege
     Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
     Redfish Create User  operator_user  TestPwd123  Operator  ${True}
 
+    Redfish.Logout
     # Login with operator user.
     Redfish.Login  operator_user  TestPwd123
 
     # Verify BMC reset.
-    Redfish OBMC Reboot (off)  stack_mode=normal
+    Run Keyword And Expect Error  ValueError*  Redfish BMC Reset Operation
 
     # Attempt to change password of admin user with operator user.
     Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user  body={'Password': 'NewTestPwd123'}
-    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+
+    Redfish.Logout
 
     Redfish.Login
 
@@ -244,8 +247,6 @@ Verify ReadOnly User Privilege
     # Read system level data.
     ${system_model}=  Redfish_Utils.Get Attribute
     ...  ${SYSTEM_BASE_URI}  Model
-
-    Redfish.Login
 
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}readonly_user
 
@@ -288,17 +289,14 @@ Verify Minimum Password Length For Redfish User
 
 *** Keywords ***
 
-Test Setup Execution
-    [Documentation]  Do test case setup tasks.
-
-    Redfish.Login
-
-
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
+    # Making sure to login as root if there is a failure.
+    Run Keyword If  '${TEST_STATUS}' == 'FAIL'
+    ...  Run Keywords  Redfish.Logout  AND  Redfish.Login
     FFDC On Test Case Fail
-    Run Keyword And Ignore Error  Redfish.Logout
+
 
 Redfish Create User
     [Documentation]  Redfish create user.
@@ -311,8 +309,6 @@ Redfish Create User
     #                     (e.g. "Administrator", "Operator", etc.).
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
-
-    Redfish.Login
 
     # Make sure the user account in question does not already exist.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
@@ -346,6 +342,9 @@ Redfish Create User
     ...  /redfish/v1/AccountService/Accounts/${username}  RoleId
     Should Be Equal  ${role_id}  ${role_config}
 
+    Run Keyword If  ${enabled} == ${True}  Run Keywords
+    ...  Redfish.Logout  AND  Redfish.Login
+
 
 Redfish Verify User
     [Documentation]  Redfish user verification.
@@ -358,6 +357,8 @@ Redfish Verify User
     #                     (e.g. "Administrator", "Operator", etc.).
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
+
+    Redfish.Logout
 
     # Trying to do a login with created user.
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${username}  ${password}
@@ -422,6 +423,8 @@ Verify Redfish User with Wrong Password
 
     Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
 
+    Redfish.Logout
+
     # Attempt to login with created user with invalid password.
     Run Keyword And Expect Error  InvalidCredentialsError*
     ...  Redfish.Login  ${username}  ${wrong_password}
@@ -455,11 +458,14 @@ Verify Login with Deleted Redfish User
     # Delete newly created user.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
 
+    Redfish.Logout
+
     # Attempt to login with deleted user account.
     Run Keyword And Expect Error  InvalidCredentialsError*
     ...  Redfish.Login  ${username}  ${password}
 
     Redfish.Login
+
 
 Verify Create User Without Enabling
     [Documentation]  Verify Create User Without Enabling.
@@ -472,8 +478,6 @@ Verify Create User Without Enabling
     #                     (e.g. "Administrator", "Operator", etc.).
     # enabled             Indicates whether the username being created
     #                     should be enabled (${True}, ${False}).
-
-    Redfish.Login
 
     Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
 
@@ -488,8 +492,3 @@ Verify Create User Without Enabling
     # Delete newly created user.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
 
-
-Suite Setup Execution
-    [Documentation]  Do test case setup tasks.
-
-    Redfish.Login
