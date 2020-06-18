@@ -539,8 +539,9 @@ Delete Error Logs
 
     # Get the list of error logs entries and delete them all.
     ${elog_entries}=  Get URL List  ${BMC_LOGGING_ENTRY}
-    :FOR  ${entry}  IN  @{elog_entries}
-    \  Delete Error Log Entry  ${entry}
+    FOR  ${entry}  IN  @{elog_entries}
+        Delete Error Log Entry  ${entry}
+    END
 
 
 Delete All Error Logs
