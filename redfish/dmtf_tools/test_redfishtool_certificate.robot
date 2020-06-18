@@ -246,7 +246,8 @@ Verify Redfishtool Replace Certificate
     ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}
 
     ${response}=  Redfishtool Post
-    ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate  expected_error=${expected_resp}
+    ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+    ...  expected_error=${expected_resp}
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  Redfishtool GetAttribute  ${certificate_uri}  CertificateString
