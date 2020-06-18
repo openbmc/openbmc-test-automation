@@ -13,6 +13,7 @@ class resource_variables():
     xpath_textbox_password = "//input[@id='password']"
     xpath_button_login = "//*[@id='login__submit']"
     xpath_button_logout = '//a[contains(text(), "Log out")]'
+
     xpath_yes_button = "//button[text()='Yes']"
     xpath_power_indicator = "//*[@id='power-indicator-bar']"
     xpath_select_button_power_on = "//*[@id='power__power-on']"
