@@ -66,16 +66,22 @@ def main():
 
     # Get the number of error logs from the BMC.
     init_robot_out_parms(get_plug_in_package_name() + "." + pgm_name + ".")
-
+    high_sev_elogs_file_path = AUTOBOOT_FFDC_DIR_PATH + AUTOBOOT_FFDC_PREFIX + "high_severity_errorlog.json"
     lib_file_path = init_robot_file_path("lib/logging_utils.robot")
     lib_file_path += ":" + init_robot_file_path("lib/gen_robot_print.py")
     set_mod_global(lib_file_path)
 
-    keyword_string = "${error_logs}=  Get Error Logs  &{filter_low_severity_errlogs}"
-    keyword_string += " ; ${num_error_logs}=  Get Length  ${error_logs}"
-    keyword_string += " ; Rprint Vars  num_error_logs"
-    set_mod_global(keyword_string)
+    keyword_strings = \
+        [
+            "${error_logs}=  Get Error Logs  &{filter_low_severity_errlogs}",
+            "${num_error_logs}=  Get Length  ${error_logs}",
+            "Rprint Vars  num_error_logs",
+            "${json_string}=  Evaluate  json.dumps($error_logs, indent=4)  modules=json",
+            "Append To File  " + high_sev_elogs_file_path + "  ${json_string}"
+        ]
 
+    keyword_string = ' ; '.join(keyword_strings)
+    set_mod_global(keyword_string)
     cmd_buf = create_robot_cmd_string("extended/run_keyword.robot", OPENBMC_HOST, SSH_PORT, HTTPS_PORT,
                                       REST_USERNAME, REST_PASSWORD, keyword_string, lib_file_path, quiet,
                                       test_mode, debug, outputdir, output, log, report)
@@ -87,6 +93,11 @@ def main():
     result = key_value_outbuf_to_dict(out_buf)
     num_error_logs = int(result['num_error_logs'])
     save_plug_in_value(num_error_logs)
+    if num_error_logs > 0:
+        qprint_timen("Adding the name of the high severity error logs FFDC file to the file list.")
+        shell_cmd("echo " + high_sev_elogs_file_path + " > " + AUTOBOOT_FFDC_LIST_FILE_PATH)
+    else:
+        os.remove(high_sev_elogs_file_path)
 
 
 main()
