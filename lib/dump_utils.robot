@@ -134,10 +134,10 @@ Delete All Dumps
 
     # Get the list of dump entries and delete them all.
     ${dump_entries}=  Get URL List  ${DUMP_ENTRY_URI}
-    :FOR  ${entry}  IN  @{dump_entries}
-    \  ${dump_id}=  Fetch From Right  ${entry}  /
-    \  Delete BMC Dump  ${dump_id}
-
+    FOR  ${entry}  IN  @{dump_entries}
+        ${dump_id}=  Fetch From Right  ${entry}  /
+        Delete BMC Dump  ${dump_id}
+    END
 
 Delete All BMC Dump
     [Documentation]  Delete all BMC dump entries using "DeleteAll" interface.

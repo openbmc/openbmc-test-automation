@@ -27,9 +27,10 @@ Get Logging Entry List
     Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
     ${jsondata}=  To JSON  ${resp.content}
 
-    :FOR  ${entry}  IN  @{jsondata["data"]}
-    \  Continue For Loop If  '${entry.rsplit('/', 1)[1]}' == 'callout'
-    \  Append To List  ${entry_list}  ${entry}
+    FOR  ${entry}  IN  @{jsondata["data"]}
+        Continue For Loop If  '${entry.rsplit('/', 1)[1]}' == 'callout'
+        Append To List  ${entry_list}  ${entry}
+    END
 
     # Logging entries list.
     # ['/xyz/openbmc_project/logging/entry/14',
@@ -47,11 +48,12 @@ Logging Entry Should Exist
 
     @{elog_entries}=  Get Logging Entry List
 
-    :FOR  ${entry}  IN  @{elog_entries}
-    \  ${resp}=  Read Properties  ${entry}
-    \  ${status}=  Run Keyword And Return Status
-    ...  Should Be Equal As Strings  ${message_id}  ${resp["Message"]}
-    \  Return From Keyword If  ${status} == ${TRUE}  ${entry}
+    FOR  ${entry}  IN  @{elog_entries}
+         ${resp}=  Read Properties  ${entry}
+         ${status}=  Run Keyword And Return Status
+         ...  Should Be Equal As Strings  ${message_id}  ${resp["Message"]}
+         Return From Keyword If  ${status} == ${TRUE}  ${entry}
+    END
 
     Fail  No ${message_id} logging entry found.
 

@@ -246,11 +246,12 @@ Byte Conversion
     Set Global Variable  ${arrayByte}   array:byte:
     @{listargs}=   Split String  ${args}
     ${index}=   Set Variable   ${0}
-    :FOR  ${word}  IN  @{listargs}
-    \    Run Keyword if   ${index} == 0   Set NetFn Byte  ${word}
-    \    Run Keyword if   ${index} == 1   Set Cmd Byte    ${word}
-    \    Run Keyword if   ${index} > 1    Set Array Byte  ${word}
-    \    ${index}=    Set Variable    ${index + 1}
+    FOR  ${word}  IN  @{listargs}
+         Run Keyword if   ${index} == 0   Set NetFn Byte  ${word}
+         Run Keyword if   ${index} == 1   Set Cmd Byte    ${word}
+         Run Keyword if   ${index} > 1    Set Array Byte  ${word}
+         ${index}=    Set Variable    ${index + 1}
+    END
     ${length}=   Get Length  ${arrayByte}
     ${length}=   Evaluate  ${length} - 1
     ${arrayByteLocal}=  Get Substring  ${arrayByte}  0   ${length}
