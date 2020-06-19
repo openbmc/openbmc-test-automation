@@ -94,9 +94,10 @@ Header Message
 
     # --- FFDC header notes ---
     @{entries}=  Get ffdc cmd index
-    :FOR  ${index}  IN  @{entries}
-    \   Write Data To File  * ${index.upper()}
-    \   Write Data To File  ${\n}
+    FOR  ${index}  IN  @{entries}
+        Write Data To File  * ${index.upper()}
+        Write Data To File  ${\n}
+    END
 
     Write Data To File  ${MSG_DETAIL}
     [Return]  ${ffdc_file_list}

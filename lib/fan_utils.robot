@@ -107,12 +107,13 @@ Get Target Speed Of Fans
 
     ${max_target}=  Set Variable  0
     ${paths}=  Get Endpoint Paths  ${SENSORS_URI}fan_tach/  0
-    :FOR  ${path}  IN  @{paths}
-    \  ${response}=  OpenBMC Get Request  ${path}
-    \  ${json}=  To JSON  ${response.content}
-    \  ${target_speed}=  Set Variable  ${json["data"]["Target"]}
-    \  ${max_target}=  Run Keyword If  ${target_speed} > ${max_target}
-    ...  Set Variable  ${target_speed}  ELSE  Set Variable  ${max_target}
+    FOR  ${path}  IN  @{paths}
+        ${response}=  OpenBMC Get Request  ${path}
+        ${json}=  To JSON  ${response.content}
+        ${target_speed}=  Set Variable  ${json["data"]["Target"]}
+        ${max_target}=  Run Keyword If  ${target_speed} > ${max_target}
+        ...  Set Variable  ${target_speed}  ELSE  Set Variable  ${max_target}
+    END
     [Return]  ${max_target}
 
 
@@ -251,9 +252,9 @@ Reset Fans
     # fan_names    A list containing the names of the fans (e.g. fan0
     #              fan2 fan3).
 
-    :FOR  ${fan_name}  IN  @{fan_names}
-    \  Set Fan State  ${fan_name}  ${fan_functional}
-
+    FOR  ${fan_name}  IN  @{fan_names}
+        Set Fan State  ${fan_name}  ${fan_functional}
+    END
 
 Verify Fan Speed
     [Documentation]  Verify fans are running at or near target speed.
@@ -268,18 +269,18 @@ Verify Fan Speed
     # fan_names   A list containing the names of the fans (e.g. fan0 fan1).
 
     # Compare the fan's speed with its target speed.
-    :FOR  ${fan_name}  IN  @{fan_names}
-    \  ${target_speed}  ${fan_speed}=  Get Fan Target And Speed  ${fan_name}
-    \  Rpvars  fan_name  target_speed  fan_speed
-    \  # Calculate tolerance, which is a % of the target speed.
-    \  ${tolerance_value}=  Evaluate  ${tolerance}*${target_speed}
-    \  # Calculate upper and lower speed limits.
-    \  ${max_limit}=  Evaluate   ${target_speed}+${tolerance_value}
-    \  ${min_limit}=  Evaluate   ${target_speed}-${tolerance_value}
-    \  Run Keyword If
-    ...  ${fan_speed} < ${min_limit} or ${fan_speed} > ${max_limit}
-    ...  Fail  msg=${fan_name} speed of ${fan_speed} is out of range.
-
+    FOR  ${fan_name}  IN  @{fan_names}
+        ${target_speed}  ${fan_speed}=  Get Fan Target And Speed  ${fan_name}
+        Rpvars  fan_name  target_speed  fan_speed
+        # Calculate tolerance, which is a % of the target speed.
+        ${tolerance_value}=  Evaluate  ${tolerance}*${target_speed}
+        # Calculate upper and lower speed limits.
+        ${max_limit}=  Evaluate   ${target_speed}+${tolerance_value}
+        ${min_limit}=  Evaluate   ${target_speed}-${tolerance_value}
+        Run Keyword If
+        ...  ${fan_speed} < ${min_limit} or ${fan_speed} > ${max_limit}
+        ...  Fail  msg=${fan_name} speed of ${fan_speed} is out of range.
+    END
 
 Verify Direct Fan Control
     [Documentation]  Verify direct control of fans.
@@ -312,15 +313,16 @@ Verify Direct Fan Control
 
     # For each fan, set a new target speed and wait for the fan to
     # accelerate.  Then check that the fan is running near that speed.
-    :FOR  ${fan_name}  IN  @{fan_names}
-    \  Set Fan Target Speed  ${fan_name}  ${max_speed}
-    \  Run Key U  Sleep \ 60s
-    \  ${target_speed}  ${cw_speed}  ${ccw_speed}=
-    ...  Get Target And Blade Speeds  ${fan_name}
-    \  Rpvars  fan_name  target_speed  cw_speed  ccw_speed
-    \  Run Keyword If
-    ...  ${cw_speed} < ${min_speed} or ${ccw_speed} < ${min_speed}
-    ...  Fail  msg=${fan_name} failed manual speed test.
+    FOR  ${fan_name}  IN  @{fan_names}
+        Set Fan Target Speed  ${fan_name}  ${max_speed}
+        Run Key U  Sleep \ 60s
+        ${target_speed}  ${cw_speed}  ${ccw_speed}=
+        ...  Get Target And Blade Speeds  ${fan_name}
+        Rpvars  fan_name  target_speed  cw_speed  ccw_speed
+        Run Keyword If
+        ...  ${cw_speed} < ${min_speed} or ${ccw_speed} < ${min_speed}
+        ...  Fail  msg=${fan_name} failed manual speed test.
+    END
 
     # Check the fan speeds in the BMC file system.
 
@@ -344,13 +346,14 @@ Verify Direct Fan Control
     Rpvars  speeds
     # Count the number of speeds > ${min_speed}.
     ${count}=  Set Variable  ${0}
-    :FOR  ${speed}  IN  @{speeds}
-    \  ${count}=  Run Keyword If  ${speed} > ${min_speed}
-    ...  Evaluate  ${count}+1  ELSE  Set Variable  ${count}
-    # Because each fan has two rotating fan blades, the count should be
-    # equual to 2*${number_of_fans}.  On water-cooled systems some
-    # speeds may be reported by hwmon as 0.  That is expected,
-    # and the number_of_fans reported in the system will be less.
+    FOR  ${speed}  IN  @{speeds}
+        ${count}=  Run Keyword If  ${speed} > ${min_speed}
+        ...  Evaluate  ${count}+1  ELSE  Set Variable  ${count}
+        # Because each fan has two rotating fan blades, the count should be
+        # equual to 2*${number_of_fans}.  On water-cooled systems some
+        # speeds may be reported by hwmon as 0.  That is expected,
+        # and the number_of_fans reported in the system will be less.
+    END
     ${fail_test}=  Evaluate  (2*${number_of_fans})-${count}
 
     # Re-enable the fan daemon
@@ -425,8 +428,9 @@ Verify System Shutdown Due To Fans
     ${wait_after_poweroff}=  Set Variable  15s
 
     # Set fans to be non-functional.
-    :FOR  ${fan_name}  IN  @{fan_names}
-    \  Set Fan State  ${fan_name}  ${fan_nonfunctional}
+    FOR  ${fan_name}  IN  @{fan_names}
+        Set Fan State  ${fan_name}  ${fan_nonfunctional}
+    END
 
     # System should notice the non-functional fans and power-off.
     # The Wait For PowerOff keyword will time-out and report
