@@ -1513,8 +1513,6 @@ def sprint_pgm_header(indent=0,
     if ROBOT_PGM_PATH is not None:
         buffer += sprint_var(ROBOT_PGM_PATH, 0, indent, col1_width)
 
-    # TODO: Add code to print caller's parms.
-
     # __builtin__.arg_obj is created by the get_arg module function, gen_get_options.
     try:
         buffer += ga.sprint_args(__builtin__.arg_obj, indent)
