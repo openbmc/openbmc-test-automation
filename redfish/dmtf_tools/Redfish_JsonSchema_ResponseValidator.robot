@@ -30,11 +30,12 @@ Test BMC Redfish Using Redfish JsonSchema ResponseValidator
 
     Set Test Variable  ${test_run_status}  ${True}
 
-    :FOR  ${url}  IN  @{url_list}
-    \  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_string} -i ${url}
-    \  ${status}=  Run Keyword And Return Status  Redfish JsonSchema ResponseValidator Result  ${output}
-    \  Run Keyword If  ${status} == ${False}  Set Test Variable  ${test_run_status}  ${status}
-    \  Save Logs For Debugging  ${status}  ${url}
+    FOR  ${url}  IN  @{url_list}
+        ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_string} -i ${url}
+        ${status}=  Run Keyword And Return Status  Redfish JsonSchema ResponseValidator Result  ${output}
+        Run Keyword If  ${status} == ${False}  Set Test Variable  ${test_run_status}  ${status}
+        Save Logs For Debugging  ${status}  ${url}
+    END
 
     Run Keyword If  ${test_run_status} == ${False}
     ...  Fail  Redfish-JsonSchema-ResponseValidator detected errors.

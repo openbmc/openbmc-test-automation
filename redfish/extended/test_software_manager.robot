@@ -23,11 +23,12 @@ Verify Software Purposes
 
     ${object_uris}=  Read Properties  ${SOFTWARE_VERSION_URI}list
 
-    :FOR  ${uri}  IN  @{object_uris}
-    \  ${object}=  Read Properties  ${uri}
-    \  Continue For Loop If  not 'Purpose' in ${object}
-    \  Should Contain Any  &{object}[Purpose]  ${VERSION_PURPOSE_HOST}
-    ...  ${VERSION_PURPOSE_BMC}
+    FOR  ${uri}  IN  @{object_uris}
+      ${object}=  Read Properties  ${uri}
+      Continue For Loop If  not 'Purpose' in ${object}
+      Should Contain Any  &{object}[Purpose]  ${VERSION_PURPOSE_HOST}
+      ...  ${VERSION_PURPOSE_BMC}
+    END
 
 
 BMC Software Hex ID

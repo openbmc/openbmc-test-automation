@@ -39,7 +39,7 @@ Verify CPU And Core Count
 
     # Get the number of cores.
     ${total_num_cores}=  Set Variable  ${0}
-    :FOR  ${cpu}  IN  @{cpus_ok}
+    FOR  ${cpu}  IN  @{cpus_ok}
         ${cores}=   Get CPU TotalCores  ${cpu}
         ${total_num_cores}=  Evaluate  $total_num_cores + ${cores}
     END
@@ -99,7 +99,7 @@ Get Available Power Supplies And Verify
 
     # Count the power supplies that are Enabled or StandbyOffline.
     ${total_num_supplies}=  Set Variable  ${0}
-    :FOR  ${power_supply}  IN  @{power_supplies_ok}
+    FOR  ${power_supply}  IN  @{power_supplies_ok}
         # Example of power_supply:
         # power_supply = {'@odata.id': '/redfish/v1/Chassis/chassis/Power#/PowerSupplies/0',
         # 'Manufacturer': '', 'MemberId': 'powersupply0', 'Model': '2100', 'Name':
@@ -186,7 +186,7 @@ GPU State Check
     # Select only GPUs with Health = "OK".
     ${gpus_ok}=  Filter Struct  ${gpu_info}  [('Health', 'OK')]
 
-    :FOR  ${gpu}  IN  @{gpus_ok}
+    FOR  ${gpu}  IN  @{gpus_ok}
         ${status}=  Redfish.Get Attribute  ${gpu}  Status
         ${state}=  Set Variable  ${status['State']}
         ${good_state}=  Evaluate
