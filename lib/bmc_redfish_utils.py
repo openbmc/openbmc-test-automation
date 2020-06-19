@@ -11,12 +11,27 @@ import gen_print as gp
 
 class bmc_redfish_utils(object):
 
+    ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
+
     def __init__(self):
         r"""
         Initialize the bmc_redfish_utils object.
         """
         # Obtain a reference to the global redfish object.
+        self.__inited__ = False
         self._redfish_ = BuiltIn().get_library_instance('redfish')
+
+        # There is a possibility that a given driver support both pure redfish
+        # legacy REST.
+        self._redfish_.login()
+        self._rest_response_ = \
+            self._redfish_.get("/xyz/openbmc_project/", valid_status_codes=[200, 404])
+
+        # If REST URL /xyz/openbmc_project/ is not supported.
+        if self._rest_response_.status == 200:
+            self.__inited__ = True
+
+        BuiltIn().set_global_variable("${REDFISH_REST_SUPPORTED}", self.__inited__)
 
     def get_redfish_session_info(self):
         r"""
