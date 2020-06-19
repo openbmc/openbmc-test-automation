@@ -104,9 +104,10 @@ Create And Delete BMC Dump Multiple Times
     [Documentation]  Create and delete BMC dump multiple times.
     [Tags]  Create_And_Delete_BMC_Dump_Multiple_Times
 
-    :FOR  ${INDEX}  IN RANGE  1  5
-    \  ${dump_id}=  Create User Initiated Dump
-    \  Delete BMC Dump  ${dump_id}
+    FOR  ${INDEX}  IN  1  5
+      ${dump_id}=  Create User Initiated Dump
+      Delete BMC Dump  ${dump_id}
+    END
 
 
 Delete All BMC Dumps And Verify
@@ -159,10 +160,11 @@ Dump Out Of Space Test
 
     # Loop, creating a dump each iteration.  Will either get dump_id or
     # will get EMPTY when out of dump space.
-    :FOR  ${n}  IN RANGE  ${too_many_dumps}
-    \  ${dump_id}=  Create User Initiated Dump  check_out_of_space=${True}
-    \  Exit For Loop If  '${dump_id}' == '${EMPTY}'
-    \  Check Existence Of BMC Dump File  ${dump_id}
+    FOR  ${n}  IN RANGE  0  ${too_many_dumps}
+      ${dump_id}=  Create User Initiated Dump  check_out_of_space=${True}
+      Exit For Loop If  '${dump_id}' == '${EMPTY}'
+      Check Existence Of BMC Dump File  ${dump_id}
+    END
 
     Run Keyword If  '${dump_id}' != '${EMPTY}'  Fail
     ...  msg=Did not run out of dump space as expected.

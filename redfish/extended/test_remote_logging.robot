@@ -300,10 +300,11 @@ Boot Host And Verify Data Is Synced To Remote Server
 
     @{lines}=  Split To Lines  ${bmc_journald}
 
-    :FOR  ${line}  IN  @{lines}
-    \  Log To Console  \n ${line}
-    \  Should Contain  ${remote_journald}  ${line}
-    ...  mgs=${line} line doesn't contain in ${remote_journald}.
+    FOR  ${line}  IN  @{lines}
+      Log To Console  \n ${line}
+      Should Contain  ${remote_journald}  ${line}
+      ...  mgs=${line} line doesn't contain in ${remote_journald}.
+    END
 
 
 *** Keywords ***
