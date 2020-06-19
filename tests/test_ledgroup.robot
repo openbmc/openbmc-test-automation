@@ -134,13 +134,14 @@ Verify LED Group
     Should Be True  ${list_length} > 0
     ...  msg=No ${led_prefix} ${led_suffix} LED found
 
-    :FOR  ${led}  IN  @{led_list}
-    \  Set LED State  On  ${led}
-    \  ${resp}=  Get LED State XYZ  ${led}
-    \  Should Be Equal  ${resp}  ${1}
-    \  Set LED State  Off  ${led}
-    \  ${resp}=  Get LED State XYZ  ${led}
-    \  Should Be Equal  ${resp}  ${0}
+    FOR  ${led}  IN  @{led_list}
+      Set LED State  On  ${led}
+      ${resp}=  Get LED State XYZ  ${led}
+      Should Be Equal  ${resp}  ${1}
+      Set LED State  Off  ${led}
+      ${resp}=  Get LED State XYZ  ${led}
+      Should Be Equal  ${resp}  ${0}
+    END
 
 Setup The Suite
     [Documentation]  Test setup before running this suite.
@@ -159,9 +160,10 @@ Get LED List
     ...  ${LED_GROUPS}  regexp=^.*[0-9a-z_].${led_prefix}.*${led_suffix}
     ${led_list}=  Create List
 
-    : FOR  ${element}  IN  @{list}
-    \  ${element}=  Remove String  ${element}  ${LED_GROUPS_URI}
-    \  Append To List  ${led_list}  ${element}
+    FOR  ${element}  IN  @{list}
+      ${element}=  Remove String  ${element}  ${LED_GROUPS_URI}
+      Append To List  ${led_list}  ${element}
+    END
     Sort List  ${led_list}
 
     [Return]  ${led_list}

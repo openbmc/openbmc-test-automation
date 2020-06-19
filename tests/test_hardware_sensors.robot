@@ -54,16 +54,14 @@ Verify Fan Sensors Attributes
    #     "Value": 0
    # }
 
-   :FOR  ${entry}  IN  @{fans}
-   \  ${resp}=  OpenBMC Get Request  ${entry}
-   \  ${json}=  To JSON  ${resp.content}
-   \  Should Be True  ${json["data"]["Scale"]} >= 0
-   \  Run Keyword And Ignore Error
-   ...  Should Be True  ${json["data"]["Target"]} >= 0
-   \  Should Be Equal As Strings
-   ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.RPMS
-   \  Should Be True  ${json["data"]["Value"]} >= 0
-
+   FOR  ${entry}  IN  @{fans}
+     ${resp}=  OpenBMC Get Request  ${entry}
+     ${json}=  To JSON  ${resp.content}
+     Should Be True  ${json["data"]["Scale"]} >= 0
+     Run Keyword And Ignore Error  Should Be True  ${json["data"]["Target"]} >= 0
+     Should Be Equal As Strings  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.RPMS
+     Should Be True  ${json["data"]["Value"]} >= 0
+   END
 
 Verify PCIE Sensors Attributes
    [Documentation]  Probe PCIE attributes.
@@ -82,14 +80,14 @@ Verify PCIE Sensors Attributes
    # }
 
 
-   :FOR  ${entry}  IN  @{temp_pcie}
-   \  ${resp}=  OpenBMC Get Request  ${entry}
-   \  ${json}=  To JSON  ${resp.content}
-   \  Should Be True  ${json["data"]["Scale"]} == -3
-   \  Should Be Equal As Strings
-   ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
-   \  ${temp_in_DegreeC}=  Evaluate  ${json["data"]["Value"]} / 1000
-   \  Should Be True  ${temp_in_DegreeC} > 0
+   FOR  ${entry}  IN  @{temp_pcie}
+     ${resp}=  OpenBMC Get Request  ${entry}
+     ${json}=  To JSON  ${resp.content}
+     Should Be True  ${json["data"]["Scale"]} == -3
+     Should Be Equal As Strings  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
+     ${temp_in_DegreeC}=  Evaluate  ${json["data"]["Value"]} / 1000
+     Should Be True  ${temp_in_DegreeC} > 0
+   END
 
 
 Verify Rail Voltage Sensors Attributes
@@ -110,14 +108,14 @@ Verify Rail Voltage Sensors Attributes
    #    "Value": 5097
    # },
 
-   :FOR  ${entry}  IN  @{temp_rail}
-   \  ${resp}=  OpenBMC Get Request  ${entry}
-   \  ${json}=  To JSON  ${resp.content}
-   \  Should Be True  ${json["data"]["Scale"]} == -3
-   \  Should Be Equal As Strings
-   ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.Volts
-   \  ${volts}=  Evaluate  ${json["data"]["Value"]} / 1000
-   \  Should Be True  ${volts} > 0
+   FOR  ${entry}  IN  @{temp_rail}
+     ${resp}=  OpenBMC Get Request  ${entry}
+     ${json}=  To JSON  ${resp.content}
+     Should Be True  ${json["data"]["Scale"]} == -3
+     Should Be Equal As Strings  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.Volts
+     ${volts}=  Evaluate  ${json["data"]["Value"]} / 1000
+     Should Be True  ${volts} > 0
+   END
 
 
 Verify VDN Temperature Sensors Attributes
@@ -137,15 +135,14 @@ Verify VDN Temperature Sensors Attributes
    #    "Value": 3000
    # }
 
-   :FOR  ${entry}  IN  @{temp_vdn}
-   \  ${resp}=  OpenBMC Get Request  ${entry}
-   \  ${json}=  To JSON  ${resp.content}
-   \  Should Be True  ${json["data"]["Scale"]} == -3
-   \  Should Be Equal As Strings
-   ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
-   \  ${vdn_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
-   \  Should Be True  ${vdn_temp} > 0
-
+   FOR  ${entry}  IN  @{temp_vdn}
+     ${resp}=  OpenBMC Get Request  ${entry}
+     ${json}=  To JSON  ${resp.content}
+     Should Be True  ${json["data"]["Scale"]} == -3
+     Should Be Equal As Strings  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
+     ${vdn_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
+     Should Be True  ${vdn_temp} > 0
+   END
 
 Verify VCS Temperature Sensors Attributes
    [Documentation]  Check vcs temperature attributes.
@@ -165,14 +162,14 @@ Verify VCS Temperature Sensors Attributes
    # },
 
 
-   :FOR  ${entry}  IN  @{temp_vcs}
-   \  ${resp}=  OpenBMC Get Request  ${entry}
-   \  ${json}=  To JSON  ${resp.content}
-   \  Should Be True  ${json["data"]["Scale"]} == -3
-   \  Should Be Equal As Strings
-   ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
-   \  ${vcs_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
-   \  Should Be True  ${vcs_temp} > 0
+   FOR  ${entry}  IN  @{temp_vcs}
+     ${resp}=  OpenBMC Get Request  ${entry}
+     ${json}=  To JSON  ${resp.content}
+     Should Be True  ${json["data"]["Scale"]} == -3
+     Should Be Equal As Strings  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
+     ${vcs_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
+     Should Be True  ${vcs_temp} > 0
+   END
 
 
 Verify VDD Temperature Sensors Attributes
@@ -192,14 +189,14 @@ Verify VDD Temperature Sensors Attributes
    #     "Value": 4000
    # }
 
-   :FOR  ${entry}  IN  @{temp_vdd}
-   \  ${resp}=  OpenBMC Get Request  ${entry}
-   \  ${json}=  To JSON  ${resp.content}
-   \  Should Be True  ${json["data"]["Scale"]} == -3
-   \  Should Be Equal As Strings
-   ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
-   \  ${vdd_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
-   \  Should Be True  ${vdd_temp} > 0
+   FOR  ${entry}  IN  @{temp_vdd}
+     ${resp}=  OpenBMC Get Request  ${entry}
+     ${json}=  To JSON  ${resp.content}
+     Should Be True  ${json["data"]["Scale"]} == -3
+     Should Be Equal As Strings  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
+     ${vdd_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
+     Should Be True  ${vdd_temp} > 0
+   END
 
 
 Verify VDDR Temperature Sensors Attributes
@@ -220,14 +217,14 @@ Verify VDDR Temperature Sensors Attributes
    #     "Value": 4000
    # }
 
-   :FOR  ${entry}  IN  @{temp_vddr}
-   \  ${resp}=  OpenBMC Get Request  ${entry}
-   \  ${json}=  To JSON  ${resp.content}
-   \  Should Be True  ${json["data"]["Scale"]} == -3
-   \  Should Be Equal As Strings
-   ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
-   \  ${vddr_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
-   \  Should Be True  ${vddr_temp} > 0
+   FOR  ${entry}  IN  @{temp_vddr}
+     ${resp}=  OpenBMC Get Request  ${entry}
+     ${json}=  To JSON  ${resp.content}
+     Should Be True  ${json["data"]["Scale"]} == -3
+     Should Be Equal As Strings  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.DegreesC
+     ${vddr_temp}=  Evaluate  ${json["data"]["Value"]} / 1000
+     Should Be True  ${vddr_temp} > 0
+   END
 
 
 Verify Power Redundancy Using REST

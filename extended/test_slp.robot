@@ -28,10 +28,13 @@ Verify SLP Service Types
 Verify Service Agents For Service Types
     [Documentation]  Find And verify service agents.
     [Tags]  Verify_Service_Agents_For_Service_Types
+
     @{parameters}=  Split String  ${SLP_SERVICES}  ${\n}
-    :FOR  ${parameter}  IN  @{parameters}
-    \  ${output}=  Run SLP command  ${service_agents}  ${parameter}
-    \  Verify Service Agents  ${output}  ${parameter}
+
+    FOR  ${parameter}  IN  @{parameters}
+      ${output}=  Run SLP command  ${service_agents}  ${parameter}
+      Verify Service Agents  ${output}  ${parameter}
+    END
 
 *** Keywords ***
 
@@ -67,9 +70,10 @@ Verify Service Types
     ${file_count}=  Get Line Count  ${stdout}
     Should Be Equal  ${service_count}  ${file_count}
     ...  msg=Number of services on system & command are not equal.
-    :FOR  ${service}  IN  @{services}
-    \  Should Contain  ${stdout}  ${service}
-    ...  msg=Services on system & command are not same.
+
+    FOR  ${service}  IN  @{services}
+      Should Contain  ${stdout}  ${service}  msg=Services on system & command are not same.
+    END
 
 Verify Service Agents
     [Documentation]  Verifies the output of srvs.
