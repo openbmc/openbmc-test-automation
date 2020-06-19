@@ -70,18 +70,6 @@ Get To Stable State
     Run Keyword And Ignore Error  Set BMC Power Policy  ${ALWAYS_POWER_OFF}
     Run Keyword And Ignore Error  Redfish Set Power Restore Policy  AlwaysOff
 
-    # TODO: Enable MAC AES check latter.
-    # Reference : openbmc/openbmc-test-automation#998
-    #Run Keyword If  '${MAC_ADDRESS}' != '${EMPTY}'
-    #...  Check And Reset MAC
-
-    # TODO: Add new UBI File system cleanup.
-    # Reference : openbmc/openbmc-test-automation#998
-    #${rc}=  Execute Command  find ${CLEANUP_DIR_PATH}
-    #...  return_stdout=False  return_rc=True
-    #Run Keyword If  '${CLEANUP_DIR_PATH}' != '${EMPTY}' and ${rc} == 0
-    #...  Cleanup Dir
-
     Run Keyword And Ignore Error  Delete All Error Logs
     Run Keyword And Ignore Error  Redfish Purge Event Log
     Run Keyword And Ignore Error  Delete All Dumps

@@ -145,7 +145,6 @@ Initialize OpenBMC
 
     Return From Keyword If  ${bmcweb_status} == ${True}
 
-    # TODO : Task to revert this changes openbmc/openbmc-test-automation#532
     # This will retry at 20 second interval.
     Wait Until Keyword Succeeds  40 sec  20 sec
     ...  Post Login Request  ${timeout}  ${quiet}

@@ -11,8 +11,7 @@ OPENPOWER_SENSORS = OPENPOWER_BASE_URI + 'sensors/'
 
 # REST URI base endpoint paths.
 CONTROL_URI = OPENBMC_BASE_URI + 'control/'
-# old vs new code dependencies in many places.
-# TODO: remove when ready.
+# Continue to keep to support legacy code.
 SETTINGS_URI = '/org/openbmc/settings/'
 WATCHDOG_URI = OPENBMC_BASE_URI + 'watchdog/'
 TIME_MANAGER_URI = OPENBMC_BASE_URI + 'time/'

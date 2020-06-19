@@ -93,7 +93,6 @@ Retry SCP
 
     ${targ_file_path}=  Set Variable  /tmp/flashimg
 
-    # TODO: Need to remove this when new code update in place.
     # Example output:
     # root@witherspoon:~# ls -lh /tmp/flashimg
     # -rwxr-xr-x    1 root     root       32.0M Jun 29 01:12 /tmp/flashimg
