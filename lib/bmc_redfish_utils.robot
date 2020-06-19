@@ -71,9 +71,9 @@ Delete All Redfish Sessions
     # Remove the current login session from the list.
     Remove Values From List  ${resp_list}  ${saved_session_info["location"]}
 
-    :FOR  ${session}  IN  @{resp_list}
-    \  Redfish.Delete  ${session}
-
+    FOR  ${session}  IN  @{resp_list}
+        Redfish.Delete  ${session}
+    END
 
 Get Valid FRUs
     [Documentation]  Return a dictionary containing all of the valid FRU records for the given fru_type.

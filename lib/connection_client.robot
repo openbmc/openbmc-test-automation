@@ -105,33 +105,33 @@ Validate Or Open Connection
 
     # Connect to the alias or host that matches. If both are given, only connect
     # to a connection that has both.
-    :FOR  ${connection}  IN  @{open_connections}
-    \  Log  ${connection}
-    \  ${alias_match}=  Evaluate  '${alias}' == '${connection.alias}'
-    \  ${host_match}=  Evaluate  '${host}' == '${connection.host}'
-    \  ${given_alias}=  Evaluate  '${alias}' != 'None'
-    \  ${no_alias}=  Evaluate  '${alias}' == 'None'
-    \  ${given_host}=  Evaluate  '${host}' != '${EMPTY}'
-    \  ${no_host}=  Evaluate  '${host}' == '${EMPTY}'
-    \  Run Keyword If
-    ...    ${given_alias} and ${given_host} and ${alias_match} and ${host_match}
-    ...    Run Keywords
-    ...      Switch Connection  ${alias}  AND
-    ...      Log to Console  Found connection. Switched to ${alias} ${host}  AND
-    ...      Return From Keyword If  ${alias_match} and ${host_match}
-    ...    ELSE  Run Keyword If
-    ...      ${given_alias} and ${no_host} and ${alias_match}
-    ...      Run Keywords
-    ...        Switch Connection  ${alias}  AND
-    ...        Log to Console  Found connection. Switched to: ${alias}  AND
-    ...        Return From Keyword If  ${alias_match}
-    ...    ELSE  Run Keyword If
-    ...       ${given_host} and ${no_alias} and ${host_match}
-    ...       Run Keywords
-    ...         Switch Connection  ${connection.index}  AND
-    ...         Log to Console  Found Connection. Switched to: ${host}  AND
-    ...         Return From Keyword If  ${host_match}
-
+    FOR  ${connection}  IN  @{open_connections}
+        Log  ${connection}
+        ${alias_match}=  Evaluate  '${alias}' == '${connection.alias}'
+        ${host_match}=  Evaluate  '${host}' == '${connection.host}'
+        ${given_alias}=  Evaluate  '${alias}' != 'None'
+        ${no_alias}=  Evaluate  '${alias}' == 'None'
+        ${given_host}=  Evaluate  '${host}' != '${EMPTY}'
+        ${no_host}=  Evaluate  '${host}' == '${EMPTY}'
+        Run Keyword If
+        ...    ${given_alias} and ${given_host} and ${alias_match} and ${host_match}
+        ...    Run Keywords
+        ...      Switch Connection  ${alias}  AND
+        ...      Log to Console  Found connection. Switched to ${alias} ${host}  AND
+        ...      Return From Keyword If  ${alias_match} and ${host_match}
+        ...    ELSE  Run Keyword If
+        ...      ${given_alias} and ${no_host} and ${alias_match}
+        ...      Run Keywords
+        ...        Switch Connection  ${alias}  AND
+        ...        Log to Console  Found connection. Switched to: ${alias}  AND
+        ...        Return From Keyword If  ${alias_match}
+        ...    ELSE  Run Keyword If
+        ...       ${given_host} and ${no_alias} and ${host_match}
+        ...       Run Keywords
+        ...         Switch Connection  ${connection.index}  AND
+        ...         Log to Console  Found Connection. Switched to: ${host}  AND
+        ...         Return From Keyword If  ${host_match}
+    END
     # If no connections are found, open a connection with the provided args.
     Log  No connection with provided arguments.  Opening a connection.
     Open Connection and Log In  &{connection_args}

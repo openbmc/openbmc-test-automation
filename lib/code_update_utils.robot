@@ -74,9 +74,9 @@ Get Software Objects Id
     ${sw_id_list}=  Create List
     ${sw_list}=  Get Software Objects  ${version_type}
 
-    :FOR  ${index}  IN  @{sw_list}
-    \  Append To List  ${sw_id_list}  ${index.rsplit('/', 1)[1]}
-
+    FOR  ${index}  IN  @{sw_list}
+        Append To List  ${sw_id_list}  ${index.rsplit('/', 1)[1]}
+    END
     [Return]  ${sw_id_list}
 
 
@@ -98,11 +98,11 @@ Get Host Software Objects Details
     ${software}=  Create List
 
     ${pnor_details}=  Get Software Objects  ${VERSION_PURPOSE_HOST}
-    :FOR  ${pnor}  IN  @{pnor_details}
-    \  ${resp}=  OpenBMC Get Request  ${pnor}  quiet=${1}
-    \  ${json}=  To JSON  ${resp.content}
-    \  Append To List  ${software}  ${json["data"]}
-
+    FOR  ${pnor}  IN  @{pnor_details}
+        ${resp}=  OpenBMC Get Request  ${pnor}  quiet=${1}
+        ${json}=  To JSON  ${resp.content}
+        Append To List  ${software}  ${json["data"]}
+    END
     [Return]  ${software}
 
 Set Host Software Property
@@ -420,11 +420,11 @@ Get Least Value Priority Image
     ${priority_value_list}=  Create List
     ${sw_list}=  Get Software Objects  version_type=${version_type}
 
-    :FOR  ${index}  IN  @{sw_list}
-    \  ${priority_value}=
-    ...  Read Software Attribute  ${index}  Priority
-    \  Append To List  ${priority_value_list}  ${priority_value}
-
+    FOR  ${index}  IN  @{sw_list}
+        ${priority_value}=
+        ...  Read Software Attribute  ${index}  Priority
+        Append To List  ${priority_value_list}  ${priority_value}
+    END
     ${min_value}=  Min List Value  ${priority_value_list}
 
     [Return]  ${min_value}

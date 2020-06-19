@@ -25,8 +25,9 @@ Cleanup Dir
     Should Not Be Empty  ${SKIP_LIST}
 
     ${skip_list_string}=  Set Variable  cd ${cleanup_dir_path}
-    :FOR  ${file}  IN  @{skip_list}
-    \  ${skip_list_string}=   Set Variable  ${skip_list_string} && rm ${file}
+    FOR  ${file}  IN  @{skip_list}
+        ${skip_list_string}=   Set Variable  ${skip_list_string} && rm ${file}
+    END
 
     ${file_count1}  ${stderr}  ${rc}=  BMC Execute Command
     ...  find ${cleanup_dir_path} | wc -l

@@ -518,10 +518,11 @@ IP Address To Hex String
     @{ip}=  Split String  ${i_ipaddress}    .
     ${index}=  Set Variable  ${0}
 
-    :FOR    ${item}     IN      @{ip}
-    \   ${hex}=  Convert To Hex    ${item}    prefix=0x    lowercase=yes
-    \   Set List Value    ${ip}    ${index}    ${hex}
-    \   ${index}=  Set Variable    ${index + 1}
+    FOR    ${item}     IN      @{ip}
+        ${hex}=  Convert To Hex    ${item}    prefix=0x    lowercase=yes
+        Set List Value    ${ip}    ${index}    ${hex}
+        ${index}=  Set Variable    ${index + 1}
+    END
     ${ip_hex}=  Catenate    @{ip}
 
     [Return]    ${ip_hex}
@@ -586,23 +587,23 @@ BMC File System Usage Check
 
 Check BMC CPU Performance
     [Documentation]   Minimal 10% of proc should be free in 3 sample
-    :FOR  ${var}  IN RANGE  1  4
-    \     BMC CPU Performance Check
-
+    FOR  ${var}  IN RANGE  1  4
+        BMC CPU Performance Check
+    END
 
 Check BMC Mem Performance
     [Documentation]   Minimal 10% of memory should be free
 
-    :FOR  ${var}  IN RANGE  1  4
-    \     BMC Mem Performance Check
-
+    FOR  ${var}  IN RANGE  1  4
+        BMC Mem Performance Check
+    END
 
 Check BMC File System Performance
     [Documentation]  Check for file system usage for 4 times
 
-    :FOR  ${var}  IN RANGE  1  4
-    \     BMC File System Usage check
-
+    FOR  ${var}  IN RANGE  1  4
+        BMC File System Usage check
+    END
 
 Get URL List
     [Documentation]  Return list of URLs under given URL.
