@@ -265,7 +265,7 @@ Check BMC Version
 
     # Description of argument(s):
     # software_object   Software object path.
-    # version           Software version (e.g. "v1.99.2-107-g2be34d2-dirty")
+    # version           Software version (e.g. "2.9.0-dev-257-gc97c74782")
 
     ${min_value}=  Get Least Value Priority Image  ${VERSION_PURPOSE_BMC}
     ${priority_value}=  Read Software Attribute  ${software_object}  Priority
