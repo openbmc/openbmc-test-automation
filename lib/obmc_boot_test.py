@@ -65,14 +65,17 @@ status_dir_path = os.environ.get('STATUS_DIR_PATH', "")
 if status_dir_path != "":
     status_dir_path = os.path.normpath(status_dir_path) + os.sep
 redfish_supported = BuiltIn().get_variable_value("${REDFISH_SUPPORTED}", default=False)
+redfish_rest_supported = BuiltIn().get_variable_value("${REDFISH_REST_SUPPORTED}", default=False)
 if redfish_supported:
     redfish = BuiltIn().get_library_instance('redfish')
     default_power_on = "Redfish Power On"
     default_power_off = "Redfish Power Off"
-    delete_errlogs_cmd = "Delete Error Logs"
-    # TODO: delete_errlogs_cmd="Redfish Purge Event Log"
-    # TODO: default_set_power_policy = "Redfish Set Power Restore Policy  AlwaysOff"
-    default_set_power_policy = "Set BMC Power Policy  ALWAYS_POWER_OFF"
+    if redfish_rest_supported:
+        delete_errlogs_cmd = "Delete Error Logs"
+        default_set_power_policy = "Set BMC Power Policy  ALWAYS_POWER_OFF"
+    else:
+        delete_errlogs_cmd = "Redfish Purge Event Log"
+        default_set_power_policy = "Redfish Set Power Restore Policy  AlwaysOff"
 else:
     default_power_on = "REST Power On"
     default_power_off = "REST Power Off"
