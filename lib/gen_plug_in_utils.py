@@ -535,6 +535,21 @@ def exit_not_master():
         exit(0)
 
 
+def add_tarball_tools_dir_to_path(quiet=0):
+    r"""
+    Find the directory containing the tarball tools and pre-pend it to PATH.
+
+    The calling program is responsible for making sure that the tarball has been unpacked.
+    """
+    AUTOBOOT_BASE_TOOL_DIR_PATH = gm.get_mod_global("AUTOBOOT_BASE_TOOL_DIR_PATH")
+    AUTOBOOT_OPENBMC_NICKNAME = gm.get_mod_global("AUTOBOOT_OPENBMC_NICKNAME")
+
+    tool_dir_path = AUTOBOOT_BASE_TOOL_DIR_PATH + os.environ.get('USER') + os.sep \
+        + AUTOBOOT_OPENBMC_NICKNAME + os.sep
+    tarball_tools_dir_path = tool_dir_path + 'tarball/x86/bin'
+    os.environ['PATH'] = gm.add_path(tarball_tools_dir_path, os.environ.get('PATH', ''))
+
+
 def stop_test_rc():
     r"""
     Return the constant stop test return code value.
