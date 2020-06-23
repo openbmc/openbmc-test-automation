@@ -26,6 +26,19 @@ Expire Root Password And Check IPMI Access Fails
     ${status}=  Run Keyword And Return Status   Run External IPMI Standard Command  lan print -v
     Should Be Equal  ${status}  ${False}
 
+
+Expire Root Password And Check SSH Access Fails
+    [Documentation]   Expire root user password and expect an error while access via SSH.
+    [Tags]  Expire_Root_Password_And_Check_SSH_Access_Fails
+
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ${output}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
+
+    ${status}=  Run Keyword And Return Status
+    ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Should Be Equal  ${status}  ${False}
+
+
 Expire And Change Root User Password And Access Via SSH
     [Documentation]   Expire and change root user password and access via SSH.
     [Tags]  Expire_Root_User_Password_And_Access_Via_SSH
@@ -33,7 +46,6 @@ Expire And Change Root User Password And Access Via SSH
     ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
 
     Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-
     ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
     Should Contain  ${output}  password expiry information changed
 
@@ -96,7 +108,6 @@ Suite Setup Execution
    Redfish.Patch  /redfish/v1/AccountService/  body={"AccountLockoutThreshold": 0}
    Valid Length  OPENBMC_PASSWORD  min_length=8
    Redfish.Logout
-
 
 Restore Default Password For Root User
     [Documentation]  Restore default password for root user (i.e. 0penBmc).
