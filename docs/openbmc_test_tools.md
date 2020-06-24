@@ -22,7 +22,7 @@ Refer to [README](https://github.com/openbmc/phosphor-logging/blob/master/README
 Pre-requisite: A Power Linux system is required.
 
 * Obtain the SEL (System Error Log) parser tools:
-    - Go to https://openpower.xyz/job/openpower-op-build/
+    - Go to https://openpower.xyz/job/openpower/job/openpower-op-build/
     - Click the link for the BMC system of interest (e.g. witherspoon)
     - Click the "host_fw_debug.tar" link in order to download the tar file.
     - On your Power Linux system, untar the file with the following command:
