@@ -23,8 +23,7 @@ ${count}           128
 Test Ecmd Getscom
     [Documentation]  Do getscom operation through BMC.
     [Tags]  Test_Ecmd_Getscom
-    ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  COREFIR_RECV1
-    Ecmd  getscom pu ${value[0]} -all
+    Ecmd  getscom pu 20028440 -all
 
 Test Ecmd Getcfam
     [Documentation]  Do getcfam operation through BMC.
