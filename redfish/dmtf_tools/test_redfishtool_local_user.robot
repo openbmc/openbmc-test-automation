@@ -98,6 +98,77 @@ Verify Redfishtool ReadOnly User Privilege
     ...  "UserT101"  "TestPwd123"  "Operator"  true  "UserT100"  "TestPwd123"  ${HTTP_FORBIDDEN}
 
 
+Verify Operator User Privilege
+    [Documentation]  Verify operator user privilege.
+    [Tags]  Verify_operator_User_Privilege
+
+    Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
+    Redfish Create User  operator_user  TestPwd123  Operator  ${True}
+
+    # Login with operator user.
+    Redfish.Login  operator_user  TestPwd123
+
+    # Verify BMC reset.
+    Redfish OBMC Reboot (off)  stack_mode=normal
+
+    # Attempt to change password of admin user with operator user.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user  body={'Password': 'NewTestPwd123'}
+    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+    Redfish.Login
+
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+
+
+Verify AccountService Available
+    [Documentation]  Verify Redfish account service is available.
+    [Tags]  Verify_AccountService_Available
+
+    ${resp} =  Redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
+    Should Be Equal As Strings  ${resp}  ${True}
+
+
+Verify User Creation With Invalid Role Id
+    [Documentation]  Verify user creation with invalid role ID.
+    [Tags]  Verify_User_Creation_With_Invalid_Role_Id
+
+    # Make sure the user account in question does not already exist.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=test_user  Password=TestPwd123  RoleId=wrongroleid  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
+Verify Minimum Password Length For Redfish User
+    [Documentation]  Verify minimum password length for new and existing user.
+    [Tags]  Verify_Minimum_Password_Length_For_Redfish_User
+    [Teardown]  Redfishtool Delete User  "UserT100"
+
+    Redfishtool Create User  "UserT100"  "TestPwd"  "Operator"  true  expected_error=${HTTP_BAD_REQUEST}
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  true
+
+
+Verify Create User Without Enabling
+    [Documentation]  Verify Create User Without Enabling.
+    [Teardown]  Redfishtool Delete User  "UserT100"
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  false
+    Redfishtool Access Resource  /redfish/v1/AccountService/Accounts  "UserT100"  "TestPwd123"
+    ...  ${HTTP_UNAUTHORIZED}
+
 *** Keywords ***
 
 
