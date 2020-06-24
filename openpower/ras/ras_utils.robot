@@ -33,7 +33,6 @@ Verify Error Log Entry
     # signature_desc  Error log signature description.
     # log_prefix      Log path prefix.
 
-    # TODO: Need to move this keyword to common utility.
 
     Error Logs Should Exist
 
@@ -70,7 +69,6 @@ Inject Recoverable Error With Threshold Limit
     ${output}=  Gard Operations On OS  list
     Should Contain  ${output}  No GARD
     Verify Error Log Entry  ${signature_desc}  ${log_prefix}
-    # TODO: Verify SOL console logs.
 
 
 Inject Unrecoverable Error
