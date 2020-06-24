@@ -24,7 +24,6 @@ ${root_cmd_args} =  SEPARATOR=
 
 *** Test Cases ***
 
-
 Verify Redfishtool Create Users
     [Documentation]  Create user via Redfishtool and verify.
     [Tags]  Verify_Redfishtool_Create_Users
@@ -97,6 +96,51 @@ Verify Redfishtool ReadOnly User Privilege
     Redfishtool Create User
     ...  "UserT101"  "TestPwd123"  "Operator"  true  "UserT100"  "TestPwd123"  ${HTTP_FORBIDDEN}
 
+
+Verify Redfishtool Operator User Privilege
+    [Documentation]  Verify that an operator user is able to perform operator privilege task(e.g. create user, delete user). 
+    [Tags]  Verify_Redfishtool_Operator_User_Privilege
+    [Teardown]  Redfishtool Delete User  "UserT100"
+
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "ReadOnly"  true
+    Redfishtool Access Resource  /redfish/v1/Systems/  "UserT100"  "TestPwd123"
+
+    Redfishtool Create User
+    ...  "UserT101"  "TestPwd123"  "Operator"  true  "UserT100"  "TestPwd123"  ${HTTP_FORBIDDEN}
+
+
+Verify AccountService Available
+    [Documentation]  Verify Redfish account service is available.
+    [Tags]  Verify_AccountService_Available
+
+    ${resp} =  Redfishtool GetAttribute  /redfish/v1/AccountService  ServiceEnabled
+    Should Be Equal As Strings  ${resp}  ${True}
+
+
+Verify Error While Creating User With Invalid Role
+    [Documentation]  Verify error while creating a user with invalid role using Redfishtool.
+    [Tags]  Verify_Error_While_Creating_User_With_Invalid_Role 
+    [Teardown]  Redfishtool Delete User  "UserT100"
+
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "wrongroleid"  true  expected_error=${HTTP_BAD_REQUEST}
+
+
+Verify Minimum Password Length For Redfish User
+    [Documentation]  Verify minimum password length of eight characters for new and existing user.
+    [Tags]  Verify_Minimum_Password_Length_For_Redfish_User
+    [Teardown]  Redfishtool Delete User  "UserT100"
+
+    Redfishtool Create User  "UserT100"  "TestPwd"  "Operator"  true  expected_error=${HTTP_BAD_REQUEST}
+    Redfishtool Create User  "UserT100"  "TestPwd1"  "Operator"  true
+
+
+Verify Create User Without Enabling
+    [Documentation]  Verify Create User Without Enabling and check user's access is not permitted.
+    [Teardown]  Redfishtool Delete User  "UserT100"
+
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  false
+    Redfishtool Access Resource  /redfish/v1/AccountService/Accounts  "UserT100"  "TestPwd123"
+    ...  ${HTTP_UNAUTHORIZED}
 
 *** Keywords ***
 
@@ -200,6 +244,24 @@ Redfishtool Verify User Name Exists
     ...  /redfish/v1/AccountService/Accounts/${user_name}
 
     [return]  ${status}
+
+
+Redfishtool GetAttribute
+    [Documentation]  Execute redfishtool for GET operation.
+    [Arguments]  ${uri}  ${Attribute}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
+
+    # Description of argument(s):
+    # uri             URI for GET operation (e.g. /redfish/v1/AccountService/Accounts/).
+    # Attribute       The specific attribute to be retrieved with the URI.
+    # cmd_args        Commandline arguments.
+    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
+    #                 authentication error, etc. ).
+
+    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} GET ${uri}
+    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
+    ${json_object}=  To JSON  ${cmd_output}
+
+    [Return]  ${json_object["${Attribute}"]}
 
 
 Suite Setup Execution
