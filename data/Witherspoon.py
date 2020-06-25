@@ -340,13 +340,10 @@ GPIO_CONFIG['POWER_BUTTON'] = \
 GPIO_CONFIG['RESET_BUTTON'] = \
     {'gpio_pin': 'J1', 'direction': 'both'}
 
-# FIXME: needed for Witherspoon?
-# Tracked by openbmc/openbmc#814
 # FP_ID_BTN_N
 GPIO_CONFIG['IDBTN'] = \
     {'gpio_pin': 'Q7', 'direction': 'out'}
 
-# TODO openbmc/openbmc#2288 - Determine if any pci resets needed
 GPIO_CONFIGS = {
     'power_config': {
         'power_good_in': 'SYS_PWROK_BUFF',
