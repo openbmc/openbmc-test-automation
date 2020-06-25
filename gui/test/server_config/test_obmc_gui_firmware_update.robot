@@ -91,7 +91,6 @@ Upload Firmware using TFTP Server
     # ${message}=  Handle Alert  timeout=300s
     # Didn't work so commenting out currently.
     # Alert not getting captured.
-    # TODO: Issue https://github.com/openbmc/openbmc-test-automation/issues/1412
 
     Check No Error Log Exist
 
