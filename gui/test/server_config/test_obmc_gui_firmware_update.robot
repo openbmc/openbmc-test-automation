@@ -88,11 +88,6 @@ Upload Firmware using TFTP Server
     Wait Until Element Is Visible  ${xpath_download_progress}  timeout=180
     Wait Until Element Is Not Visible  ${xpath_download_progress}  timeout=180
 
-    # ${message}=  Handle Alert  timeout=300s
-    # Didn't work so commenting out currently.
-    # Alert not getting captured.
-    # TODO: Issue https://github.com/openbmc/openbmc-test-automation/issues/1412
-
     Check No Error Log Exist
 
 Check No Error Log Exist
