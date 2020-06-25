@@ -89,10 +89,9 @@ proc register_passwords {args} {
     # Skip already-registered passwords.
     if { [lsearch -exact $hidden_text $password] != -1 } { continue }
     # Put the password into the global hidden_text list.
-    lappend hidden_text $password
+    lappend hidden_text [escape_regex_metachars $password]
   }
 
-  # TODO: Escape metachars in the password_regex.
   set password_regex [join $hidden_text |]
 
 }
