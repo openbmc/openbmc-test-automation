@@ -2,7 +2,7 @@
 
 # This file provides many valuable print procedures such as sprint_var, sprint_time, sprint_error, etc.
 
-my_source [list data_proc.tcl call_stack.tcl]
+my_source [list data_proc.tcl call_stack.tcl escape.tcl]
 
 # Need "Expect" package for trap procedure.
 package require Expect
@@ -89,10 +89,9 @@ proc register_passwords {args} {
     # Skip already-registered passwords.
     if { [lsearch -exact $hidden_text $password] != -1 } { continue }
     # Put the password into the global hidden_text list.
-    lappend hidden_text $password
+    lappend hidden_text [escape_regex_metachars $password]
   }
 
-  # TODO: Escape metachars in the password_regex.
   set password_regex [join $hidden_text |]
 
 }

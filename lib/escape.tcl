@@ -112,3 +112,27 @@ proc curly_braces_to_quotes { buffer } {
 }
 
 
+proc escape_regex_metachars { buffer } {
+
+  # Escape every regex metacharacter found in buffer and return the result.
+
+  # Example code:
+
+  # set var1 {john*sm(]ith}
+  # print_vars var1
+  # set var1 [escape_regex_metachars $var1]
+  # print_vars var1
+
+  # Example output:
+
+  # var1:                        john*sm(]ith
+  # var1:                        john\*sm\(\]ith
+
+  # Description of argument(s):
+  # buffer                          The string whose regex metacharacters are to be escaped.
+
+  set escape_chars_regex {[\\\^\$\/\(\)\|\?\+\*\[\]\{\}\,\.]}
+  regsub -all ${escape_chars_regex} ${buffer} {\\\0} buffer
+  return ${buffer}
+
+}
