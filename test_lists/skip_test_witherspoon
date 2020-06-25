@@ -43,12 +43,12 @@
 -e General_boot_testing
 -e SLP_Service_Test
 -e Check_Network_Latency
-# TODO: Configure invalid IP address use cases.
+# Configure invalid IP address use cases.
 -e Configure_Broadcast_IP
 -e Configure_Multicast_IP
 -e Configure_Loopback_IP
 -e Configure_Network_ID
-# TODO: Invalid gateway address configuration.
+# Invalid gateway address configuration.
 -e Configure_Broadcast_IP_For_Gateway
 -e Configure_Loopback_IP_For_Gateway
 -e Configure_Multicast_IP_For_Gateway
