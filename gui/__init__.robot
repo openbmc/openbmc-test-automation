@@ -23,8 +23,7 @@ Initial Message
     [Documentation]  Display initial info about the test cases.
 
     Rpvars  EXECDIR
-    Print Timen  OBMC_GUI Testing ==> [IN PROGRESS]
-    Print Dashes  0  100  1  =
+    Log To Console  OBMC_GUI Testing ==> [IN PROGRESS]
 
 Get OpenBMC System Info
     [Documentation]  Display open BMC system info like system name and IP.
@@ -33,11 +32,9 @@ Get OpenBMC System Info
     Rpvars  OPENBMC_HOST  OPENBMC_HOST_NAME
     ${build_info}  ${stderr}  ${rc}=  BMC Execute Command  cat /etc/os-release
     ...  print_output=1
-    Print Dashes  0  100  1  =
 
 Init Teardown Steps
     [Documentation]  End the test execution by closing browser.
 
-    Print Timen  OBMC_GUI Testing ==> [Finished]
-    Print Dashes  0  100  1  =
+    Log To Console  OBMC_GUI Testing ==> [Finished]
     Close Browser
