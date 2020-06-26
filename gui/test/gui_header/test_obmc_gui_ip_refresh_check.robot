@@ -111,5 +111,7 @@ OpenBMC GUI Logoff
     [Documentation]  Log out from openBMC GUI.
     [Tags]  OpenBMC_GUI_Logoff
 
-    Click Element  ${xpath_button_logout}
+
+    Click Button  ${xpath_button_user_action}
+    Click Button  ${xpath_button_logout}
     Wait Until Page Contains Element  ${xpath_button_login}
