@@ -1,0 +1,10 @@
+Code-Review+1: Jeff Whitlock <v2aic232@us.ibm.com>
+Code-Review+1: David L. Shaw <dlshaw@us.ibm.com>
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: George Keishing <gkeishin@in.ibm.com>
+Verified+1: George Keishing <gkeishin@in.ibm.com>
+Submitted-by: George Keishing <gkeishin@in.ibm.com>
+Submitted-at: Mon, 29 Jun 2020 05:58:29 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/33863
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
