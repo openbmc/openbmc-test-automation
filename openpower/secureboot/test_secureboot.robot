@@ -41,8 +41,6 @@ Test Teardown     Test Teardown Execution
 *** Variables ***
 
 ${security_access_bit_mask}  ${0xC000000000000000}
-# TODO: will enable this in next commit
-#${pnor_corruption_rc}        SECUREBOOT::RC_ROM_VERIFY
 ${pnor_corruption_rc}        1E07
 ${bootkernel_corruption_rc}  log=0xffffffffffff8160
 ${bmc_image_dir_path}        /usr/local/share/pnor
@@ -55,7 +53,6 @@ ${MIXED_PART_LIST}           [SBE, HBD, OCC, HBRT, HBBL, HCODE, WOFDATA, MEMD, P
 
 # All the test cases requires by default jumpers to be positioned
 # between 1 & 2. If this is not met test cases would fail
-# TODO:https://github.com/openbmc/openbmc-test-automation/issues/1644
 Validate Secure Cold Boot With TPM Policy Disabled
     [Documentation]  Validate secure cold boot with TPM policy disabled.
     [Tags]  Validate_Secure_Cold_Boot_With_TPM_Policy_Disabled
