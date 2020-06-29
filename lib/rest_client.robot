@@ -371,3 +371,31 @@ Upload Image To BMC
 
     [Return]  ${ret.status_code}
 
+
+Redfish Login
+    [Documentation]  Do BMC web-based login.
+    [Arguments]  ${timeout}=20  ${rest_username}=${REST_USERNAME}
+    ...  ${rest_password}=${REST_PASSWORD}  ${kwargs}=${EMPTY}
+
+    # Description of argument(s):
+    # timeout        REST login attempt time out.
+    # rest_username  The REST username.
+    # rest_password  The REST password.
+    # kwargs   Any additional arguments to be passed directly to the
+    #          Get Request call. For example, the caller might
+    #          set kwargs as follows:
+    #          ${kwargs}=  Create Dictionary  allow_redirect=${True}.
+
+    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${data}=  Set Variable If  '${kwargs}' == '${EMPTY}'
+    ...    {"UserName":"${rest_username}", "Password":"${rest_password}"}
+    ...    {"UserName":"${rest_username}", "Password":"${rest_password}", ${kwargs}}
+
+    ${resp}=  Post Request  openbmc  /redfish/v1/SessionService/Sessions
+    ...  data=${data}  headers=${headers}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
+
+    Set Global Variable  ${XAUTH_TOKEN}  ${resp.headers["X-Auth-Token"]}
+
+    [Return]  ${resp}
