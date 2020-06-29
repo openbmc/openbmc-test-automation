@@ -162,6 +162,20 @@ Verify Enable NTP
     Valid Value  ntp["ProtocolEnabled"]  valid_values=[True]
 
 
+Verify Immediate Consumption of BMC Date
+    [Documentation]  Verify immediate change in BMC date time.
+    [Tags]  Verify_Immediate_Consumption_Of_BMC_Date
+    [Setup]  Run Keywords  Set Time To Manual Mode  AND
+    ...  Sleep  2s  AND  Redfish Set DateTime  valid_status_codes=[${HTTP_OK}]
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Redfish Set DateTime  valid_status_codes=[${HTTP_OK}]
+    [Template]  Set BMC Date And Verify
+
+    # bmc_state
+    on
+    off
+
+
 *** Keywords ***
 
 
@@ -261,3 +275,20 @@ Restore NTP Status
     Run Keyword If  '${original_ntp["ProtocolEnabled"]}' == 'True'
     ...    Set NTP state  ${TRUE}
     ...  ELSE  Set NTP state  ${FALSE}
+
+
+Set BMC Date And Verify
+    [Documentation]  Set BMC Date Time at a given BMC state and verify.
+    [Arguments]  ${bmc_state}
+    # Description of argument(s):
+    # bmc_state  BMC state at which date time will be updated for verification
+    # ...       (eg. on, off).
+
+    Run Keyword If  '${bmc_state}' == 'on'  Redfish Power On  stack_mode=skip
+    ...  ELSE  Redfish Power off  stack_mode=skip
+    ${current_date}=  Get Current Date  time_zone=UTC
+    ${new_value}=  Subtract Time From Date  ${current_date}  1 day
+    Redfish Set DateTime  ${new_value}  valid_status_codes=[${HTTP_OK}]
+    ${current_value}=  Redfish Get DateTime
+    ${time_diff}=  Subtract Date From Date  ${current_value}  ${new_value}
+    Should Be True  '${time_diff}'<='10'
