@@ -33,12 +33,11 @@ Verify Redfish BMC PowerOn
 
     Redfish Power On
 
-    # TODO: Replace OCC state check with redfish property when available.
-    Verify OCC State
-
-    ${power_control}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_POWER_URI}  PowerControl
-    Rprint Vars   power_control
-    Valid Dict  power_control[${0}]  ['PowerConsumedWatts']
+    Run Keyword If  ${REDFISH_REST_SUPPORTED} == ${False}
+    ...     Check OCC And Power Control
+    ...  ESLE
+    ...     Pass Execution
+    # TODO: Add OCC state check with redfish property when available.
 
 
 Verify Redfish BMC GracefulRestart
@@ -76,3 +75,14 @@ Test Teardown Execution
     ...  ELSE
     ...    Set Auto Reboot  ${1}
     Redfish.Logout
+
+
+Check OCC And Power Control
+    [Documentation]  Miscellaneous OCC and power check.
+
+    Verify OCC State
+
+    ${power_control}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_POWER_URI}  PowerControl
+    Rprint Vars   power_control
+    Valid Dict  power_control[${0}]  ['PowerConsumedWatts']
+
