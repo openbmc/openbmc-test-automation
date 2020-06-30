@@ -396,6 +396,8 @@ Redfish Login
     ...  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
 
+    ${content}=  To JSON  ${resp.content}
+
     Set Global Variable  ${XAUTH_TOKEN}  ${resp.headers["X-Auth-Token"]}
 
-    [Return]  ${resp}
+    [Return]  ${content}
