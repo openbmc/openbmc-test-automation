@@ -37,14 +37,15 @@ Get Fan Names
     #             added to.  This list is returned to the caller.
 
     ${fan_uris}=  Get Endpoint Paths  ${HOST_INVENTORY_URI}system  fan
-    : FOR  ${fan_uri}  IN  @{fan_uris}
-    \  ${fan_properties}=  Read Properties  ${fan_uri}
-    \  ${fan_present}=  Get Variable Value  ${fan_properties['Present']}  0
-    \  ${fan_functional}=  Get Variable Value
-    ...  ${fan_properties['Functional']}  0
-    \  Continue For Loop If  ${fan_present} == 0 or ${fan_functional} == 0
-    \  ${remaining_uri}  ${fan_name}=  Split Path  ${fan_uri}
-    \  Append To List  ${fan_names}  ${fan_name}
+    FOR  ${fan_uri}  IN  @{fan_uris}
+        ${fan_properties}=  Read Properties  ${fan_uri}
+        ${fan_present}=  Get Variable Value  ${fan_properties['Present']}  0
+        ${fan_functional}=  Get Variable Value
+        ...  ${fan_properties['Functional']}  0
+        Continue For Loop If  ${fan_present} == 0 or ${fan_functional} == 0
+        ${remaining_uri}  ${fan_name}=  Split Path  ${fan_uri}
+        Append To List  ${fan_names}  ${fan_name}
+    END
 
     [Return]  ${fan_names}
 

@@ -93,11 +93,12 @@ Get SNMP Manager Object
     # port           Network port where SNMP manager is listening.
 
     ${snmp_objs}=  Read Properties  ${SNMP_MANAGER_URI}enumerate
-    : FOR  ${snmp_obj}  IN   @{snmp_objs}
-    \  ${obj}=  Set Variable  ${snmp_objs['${snmp_obj}']}
-    \   Run Keyword If
-    ...  '${obj['Address']}' == '${ip}' and '${obj['Port']}' == '${port}'
-    ...    Return From Keyword  ${snmp_obj}
+    FOR  ${snmp_obj}  IN   @{snmp_objs}
+        ${obj}=  Set Variable  ${snmp_objs['${snmp_obj}']}
+        Run Keyword If
+        ...  '${obj['Address']}' == '${ip}' and '${obj['Port']}' == '${port}'
+        ...    Return From Keyword  ${snmp_obj}
+    END
 
     Return From Keyword  ${EMPTY}
 
