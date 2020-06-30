@@ -58,10 +58,11 @@ Get List Of SNMP Manager And Port Configured On BMC
     #      "Port": 186
     #    },
 
-    : FOR  ${snmp_uri}  IN   @{snmp_uri_list}
-    \  ${ip}=  Read Attribute  ${snmp_uri}  Address
-    \  ${port}=  Read Attribute  ${snmp_uri}  Port
-    \  Append To List  ${ip_and_port_list}  ${ip}  ${port}
+    FOR  ${snmp_uri}  IN   @{snmp_uri_list}
+      ${ip}=  Read Attribute  ${snmp_uri}  Address
+      ${port}=  Read Attribute  ${snmp_uri}  Port
+      Append To List  ${ip_and_port_list}  ${ip}  ${port}
+    END
 
     [Return]  @{ip_and_port_list}
 
