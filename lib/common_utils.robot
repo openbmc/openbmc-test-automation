@@ -74,7 +74,7 @@ Check BMC Performance
 
     Check BMC CPU Performance
     Check BMC Mem Performance
-    Check BMC File System Performance
+    #Check BMC File System Performance
 
 
 Verify PNOR Update
