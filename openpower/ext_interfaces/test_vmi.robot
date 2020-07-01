@@ -18,6 +18,9 @@ Suite Teardown    Redfish.Logout
 &{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
 &{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
 
+${vmi_description}       Ethernet Interface for Virtual Management Interface
+${vmi_name}              Virtual Management Interface
+
 
 *** Test Cases ***
 
@@ -38,9 +41,8 @@ Verify Existing VMI Network Interface Details
     Should Not Be Equal  ${vmi_ip["DHCPv4"]}  ${vmi_ip["IPv4StaticAddresses"]}
     Should Be Equal As Strings  ${origin}  ${vmi_ip["IPv4_AddressOrigin"]}
     Should Be Equal As Strings  ${vmi_ip["Id"]}  intf0
-    Should Be Equal As Strings  ${vmi_ip["Description"]}
-    ...  Ethernet Interface for Virtual Management Interface
-    Should Be Equal As Strings  ${vmi_ip["Name"]}  Virtual Management Interface
+    Should Be Equal As Strings  ${vmi_ip["Description"]}  ${vmi_description}
+    Should Be Equal As Strings  ${vmi_ip["Name"]}  ${vmi_name}
     Should Be True  ${vmi_ip["InterfaceEnabled"]}
 
 
