@@ -38,8 +38,9 @@ Verify Existing VMI Network Interface Details
     Should Not Be Equal  ${vmi_ip["DHCPv4"]}  ${vmi_ip["IPv4StaticAddresses"]}
     Should Be Equal As Strings  ${origin}  ${vmi_ip["IPv4_AddressOrigin"]}
     Should Be Equal As Strings  ${vmi_ip["Id"]}  intf0
-    Should Be Equal As Strings  ${vmi_ip["Description"]}  Virtual Interface Management Network Interface
-    Should Be Equal As Strings  ${vmi_ip["Name"]}  Virtual Management Ethernet Interface
+    Should Be Equal As Strings  ${vmi_ip["Description"]}
+    ...  Ethernet Interface for Virtual Management Interface
+    Should Be Equal As Strings  ${vmi_ip["Name"]}  Virtual Management Interface
     Should Be True  ${vmi_ip["InterfaceEnabled"]}
 
 
