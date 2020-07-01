@@ -37,13 +37,15 @@ Run Entire Test Suite Multiple Time
    Log To Console  ${RESULT_DIR_PATH}
    Create Directory  ${RESULT_DIR_PATH}
 
-   : FOR    ${INDEX}    IN RANGE    0    ${ITERATION}
-    \    Log To Console  \n Iteration:   no_newline=True
-    \    Log To Console  ${INDEX}
-    \    Run  OPENBMC_HOST=${OPENBMC_HOST} tox -e ${OPENBMC_SYSTEMMODEL} -- ${LOOP_TEST_COMMAND}
-    \    Run  sed -i 's/'${OPENBMC_HOST}'/DUMMYIP/g' output.xml
-    \    Copy File  output.xml   ${RESULT_DIR_PATH}/output${INDEX}.xml
-    \    Copy File  log.html   ${RESULT_DIR_PATH}/log${INDEX}.html
+   FOR    ${INDEX}    IN RANGE    0    ${ITERATION}
+     Log To Console  \n Iteration:   no_newline=True
+     Log To Console  ${INDEX}
+     Run  OPENBMC_HOST=${OPENBMC_HOST} tox -e ${OPENBMC_SYSTEMMODEL} -- ${LOOP_TEST_COMMAND}
+     Run  sed -i 's/'${OPENBMC_HOST}'/DUMMYIP/g' output.xml
+     Copy File  output.xml   ${RESULT_DIR_PATH}/output${INDEX}.xml
+     Copy File  log.html   ${RESULT_DIR_PATH}/log${INDEX}.html
+   END
+
 
 Create Combined Report
    [Documentation]  Using output[?].xml and create combined log.html

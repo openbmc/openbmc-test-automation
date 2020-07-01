@@ -57,10 +57,12 @@ Set Valid SOL Privilege Level
     [Tags]  Set_Valid_SOL_Privilege_Level
 
     ${privilege_level_list}=  Create List  user  operator  admin  oem
-    : FOR  ${item}  IN  @{privilege_level_list}
-    \  Set SOL Setting  privilege-level  ${item}
-    \  ${output}=  Get SOL Setting  Privilege Level
-    \  Should Contain  ${output}  ${item}  ignore_case=True
+
+    FOR  ${item}  IN  @{privilege_level_list}
+      Set SOL Setting  privilege-level  ${item}
+      ${output}=  Get SOL Setting  Privilege Level
+      Should Contain  ${output}  ${item}  ignore_case=True
+    END
 
 
 Set Invalid SOL Privilege Level

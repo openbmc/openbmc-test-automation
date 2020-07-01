@@ -273,10 +273,12 @@ Test SDR Info
     # component_name    Component name (e.g. "core", "dimm", etc.).
 
     ${component_uri_list}=  Get Component URIs  ${component_name}
-    : FOR  ${uri}  IN  @{component_uri_list}
-    \  ${component_name}=  Fetch From Right  ${uri}  motherboard/
-    \  Log To Console  ${component_name}
-    \  Verify SDR  ${component_name}
+
+    FOR  ${uri}  IN  @{component_uri_list}
+      ${component_name}=  Fetch From Right  ${uri}  motherboard/
+      Log To Console  ${component_name}
+      Verify SDR  ${component_name}
+    END
 
 
 Suite Setup Execution

@@ -23,36 +23,44 @@ Add BMC Nodes To XCAT
     [Tags]  Add_BMC_Nodes_To_XCAT
 
     # Add BMC nodes one by one and check whether it is successfully added.
-    : FOR  ${bmc}  IN  @{BMC_LIST}
-    \  Add Nodes To XCAT  ${bmc}
-    \  Validate Added Node  ${bmc}
+    FOR  ${bmc}  IN  @{BMC_LIST}
+      Add Nodes To XCAT  ${bmc}
+      Validate Added Node  ${bmc}
+    END
+
 
 Power On Via XCAT And Validate
     [Documentation]  Power on via XCAT and validate.
     [Tags]  Power_On_Via_XCAT_And_Validate
 
     # Power on each BMC node and validate the power status.
-    : FOR  ${bmc}  IN  @{BMC_LIST}
-    \  Power On Via XCAT  ${bmc}
-    \  Validate Power Status Via XCAT  ${bmc}  ${poweron_flag}
+    FOR  ${bmc}  IN  @{BMC_LIST}
+      Power On Via XCAT  ${bmc}
+      Validate Power Status Via XCAT  ${bmc}  ${poweron_flag}
+    END
+
 
 Power Off Via XCAT And Validate
     [Documentation]  Power off via XCAT and validate.
     [Tags]  Power_Off_Via_XCAT_And_Validate
 
     # Power off each BMC node and validate the power status.
-    : FOR  ${bmc}  IN  @{BMC_LIST}
-    \  Power Off Via XCAT  ${bmc}
-    \  Validate Power Status Via XCAT  ${bmc}  ${poweroff_flag}
+    FOR  ${bmc}  IN  @{BMC_LIST}
+      Power Off Via XCAT  ${bmc}
+      Validate Power Status Via XCAT  ${bmc}  ${poweroff_flag}
+    END
+
 
 Add Nodes To Group List
     [Documentation]  Add BMC nodes into group.
     [Tags]  Move_Added_Nodes_To_Group
 
     # Add BMC nodes to group and validate.
-    : FOR  ${bmc}  IN  @{BMC_LIST}
-    \  Add Nodes To Group  ${bmc}  ${GROUP}
-    \  Validate Node Added In Group  ${bmc}  ${GROUP}
+    FOR  ${bmc}  IN  @{BMC_LIST}
+      Add Nodes To Group  ${bmc}  ${GROUP}
+      Validate Node Added In Group  ${bmc}  ${GROUP}
+    END
+
 
 Power On Group And Validate
     [Documentation]  Power on all BMCs in group and validate.
@@ -72,8 +80,10 @@ Power On Group And Validate
     @{bmc_nodes}=  Split String  ${nodes}
 
     # Validate power status on each BMC node one by one.
-    : FOR  ${bmc_node}  IN  @{bmc_nodes}
-    \  Validate Power Status Via XCAT  ${bmc_node}  ${poweron_flag}
+    FOR  ${bmc_node}  IN  @{bmc_nodes}
+      Validate Power Status Via XCAT  ${bmc_node}  ${poweron_flag}
+    END
+
 
 Power Off Group And Validate
     [Documentation]  Power off all BMCs in group and validate.
@@ -92,8 +102,10 @@ Power Off Group And Validate
     @{bmc_nodes}=  Split String  ${nodes}
 
     # Validate power status on each BMC node one by one.
-    : FOR  ${bmc_node}  IN  @{bmc_nodes}
-    \  Validate Power Status Via XCAT  ${bmc_node}  ${poweroff_flag}
+    FOR  ${bmc_node}  IN  @{bmc_nodes}
+      Validate Power Status Via XCAT  ${bmc_node}  ${poweroff_flag}
+    END
+
 
 Continuous Node Power Status
     [Documentation]  Continuously get the power status.
@@ -109,8 +121,10 @@ Continuous Node Power Status
     # It bascially stress the BMC node and test REST implementation
     # of the BMC node
 
-    : FOR  ${index}  IN RANGE  1  ${NUM_POWER_STATUS_CHECKS}
-    \  Validate Power Status Via XCAT  ${BMC_LIST[1]}  ${poweron_flag}
+    FOR  ${index}  IN RANGE  1  ${NUM_POWER_STATUS_CHECKS}
+      Validate Power Status Via XCAT  ${BMC_LIST[1]}  ${poweron_flag}
+    END
+
 
 Get Temperature Reading Via XCAT
     [Documentation]  Get temperature reading via XCAT.
@@ -129,10 +143,12 @@ Get Temperature Reading Via XCAT
 
     # Get temperature reading from each BMC node.
 
-    : FOR  ${bmc}  IN  @{BMC_LIST}
-    \  ${temp_reading}=  Get Hardware Vitals Via XCAT  ${bmc}  temp
-    \  Should Match  ${temp_reading}  ${bmc}* C
-    \  Log  \n Temperature reading on $[bmc}\n ${temp_reading}
+    FOR  ${bmc}  IN  @{BMC_LIST}
+      ${temp_reading}=  Get Hardware Vitals Via XCAT  ${bmc}  temp
+      Should Match  ${temp_reading}  ${bmc}* C
+      Log  \n Temperature reading on $[bmc}\n ${temp_reading}
+    END
+
 
 Get Fanspeed Via XCAT
     [Documentation]  Get fanspeed via XCAT.
@@ -146,10 +162,11 @@ Get Fanspeed Via XCAT
 
     # Get fanspeed from each BMC node.
 
-    : FOR  ${bmc}  IN  @{BMC_LIST}
-    \  ${fanspeed}=  Get Hardware Vitals Via XCAT  ${bmc}  fanspeed
-    \  Should Match  ${fanspeed}  ${bmc}* RPMS
-    \  Log  \n fanspeed on $[bmc}\n ${fanspeed}
+    FOR  ${bmc}  IN  @{BMC_LIST}
+      ${fanspeed}=  Get Hardware Vitals Via XCAT  ${bmc}  fanspeed
+      Should Match  ${fanspeed}  ${bmc}* RPMS
+      Log  \n fanspeed on $[bmc}\n ${fanspeed}
+    END
 
 
 Get Voltage Reading Via XCAT
@@ -162,9 +179,11 @@ Get Voltage Reading Via XCAT
 
     # Get voltage reading from each BMC node.
 
-    : FOR  ${bmc}  IN  @{BMC_LIST}
-    \  ${voltage}=  Get Hardware Vitals Via XCAT  ${bmc}  voltage
-    \  Log  \n Voltage reading on $[bmc}\n ${voltage}
+    FOR  ${bmc}  IN  @{BMC_LIST}
+      ${voltage}=  Get Hardware Vitals Via XCAT  ${bmc}  voltage
+      Log  \n Voltage reading on $[bmc}\n ${voltage}
+    END
+
 
 Get Wattage Via XCAT
     [Documentation]  Get wattage via XCAT.
@@ -176,10 +195,10 @@ Get Wattage Via XCAT
 
     # Get wattage reading from each BMC node.
 
-    : FOR  ${bmc}  IN  @{BMC_LIST}
-    \  ${wattage}=  Get Hardware Vitals Via XCAT  ${bmc}  wattage
-    \  Log  \n Wattage reading on $[bmc}\n ${wattage}
-
+    FOR  ${bmc}  IN  @{BMC_LIST}
+      ${wattage}=  Get Hardware Vitals Via XCAT  ${bmc}  wattage
+      Log  \n Wattage reading on $[bmc}\n ${wattage}
+    END
 
 *** Keywords ***
 

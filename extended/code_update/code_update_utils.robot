@@ -79,9 +79,10 @@ Loop SCP Retry
     # Description of argument(s):
     # image_file_path  Downloaded BMC tar file image path.
 
-    : FOR  ${index}  IN RANGE  0  4
-    \  ${status}=  Retry SCP  ${image_file_path}
-    \  Exit For Loop If  '${status}' == '${True}'
+    FOR  ${index}  IN RANGE  0  4
+      ${status}=  Retry SCP  ${image_file_path}
+      Exit For Loop If  '${status}' == '${True}'
+    END
 
 
 Retry SCP
