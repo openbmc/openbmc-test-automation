@@ -3,11 +3,13 @@
 Documentation    Test Lock Management feature of Management Console on BMC.
 
 Resource         ../../lib/resource.robot
-Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/bmc_redfish_utils.robot
 
+Suite Setup      Delete All Redfish Sessions
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
+Suite Teardown   Delete All Redfish Sessions
 
 *** Variables ***
 
@@ -192,11 +194,10 @@ Verify GetLockList Returns An Empty Record For An Invalid Session Id
     [Documentation]  Verify GetLockList returns an empty record for an invalid session id.
     [Tags]  Verify_GetLockList_Returns_An_Empty_Record_For_An_Invalid_Session_Id
 
-    ${session_location}=  Redfish.Get Session Location
-    ${session_id}=  Evaluate  os.path.basename($session_location)  modules=os
+    ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${hmc_id}"}}
 
-    ${records}=  Run Keyword  Get Locks List  ${session_id}
-    ${records}=  Run Keyword  Get Locks List  ZZzZZz9zzZ
+    ${records}=  Get Locks List  ${resp['Id']}
+    ${records}=  Get Locks List  ZZzZZz9zzZ
     ${length}=  Get Length  ${records}
     Should Be Equal  ${length}  ${0}
 
@@ -208,19 +209,27 @@ Verify Lock Conflicts
 
     Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
     Read   ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_CONFLICT}  ['NA']  ${False}
-    Read   ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
+    #Read   ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
     Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_CONFLICT}  ['NA']  ${False}
-    Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
+    #Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
     Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_CONFLICT}  ['NA']  ${False}
 
 
-Verify Persistency Of Locks After BMC Reboot
+Verify Persistency Of Read Locks After BMC Reboot
     [Documentation]  Verify persistency of locks after BMC reboot.
-    [Tags]  Verify_Persistency_Of_Locks_After_BMC_Reboot
+    [Tags]  Verify_Persistency_Of_Read_Locks_After_BMC_Reboot
     [Template]  Locks Persistency Check After BMC Reboot
 
     # lock_type  seg_flags          resource_id
     Read         ${TWO_SEG_FLAG_2}  ${234}
+
+
+Verify Persistency Of Write Locks After BMC Reboot
+    [Documentation]  Verify persistency of locks after BMC reboot.
+    [Tags]  Verify_Persistency_Of_Write_Locks_After_BMC_Reboot
+    [Template]  Locks Persistency Check After BMC Reboot
+
+    # lock_type  seg_flags          resource_id
     Write        ${TWO_SEG_FLAG_2}  ${234}
 
 
@@ -228,16 +237,12 @@ Verify Valid Lock Transactions Release
     [Documentation]  Verify valid lock transactions release.
     [Tags]  Verify_Valid_Lock_Transactions_Release
 
-    ${transaction_id1}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${transaction_id1}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_2}  ${234}
     ${locks_before}=  Get Locks List  ${SESSION_ID}
 
-    ${transaction_id2}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_3}  ${234}
-    ${transaction_id3}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
-    ${transaction_id4}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_3}  ${234}
+    ${transaction_id2}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_3}  ${234}
+    ${transaction_id3}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${transaction_id4}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_3}  ${234}
 
     ${transaction_ids}=  Create List  ${transaction_id2}  ${transaction_id3}  ${transaction_id4}
     Release Locks  ${transaction_ids}
@@ -249,8 +254,7 @@ Verify Invalid Lock Transactions Release
     [Documentation]  Verify invalid lock transactions release.
     [Tags]  Verify_Invalid_Lock_Transactions_Release
 
-    ${transaction_id1}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${transaction_id1}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_2}  ${234}
     ${locks_before}=  Get Locks List  ${SESSION_ID}
 
     ${transaction_id2}=  Evaluate  ${transaction_id1} + 1
@@ -268,18 +272,15 @@ Verify Locks Release By Session
     [Tags]  Verify_Locks_Release_By_Session
 
     ${locks_before}=  Get Locks List  ${SESSION_ID}
-    ${transaction_id1}=  Acquire Lock On A Given Resource
-    ...  Write  ${TWO_SEG_FLAG_2}  ${234}
+    ${transaction_id1}=  Acquire Lock On A Given Resource  Write  ${TWO_SEG_FLAG_2}  ${234}
 
     # Release Lock by Session without mentioning transaction_ids.
     Release Locks  release_type=Session
     ${locks_after}=  Get Locks List  ${SESSION_ID}
     Should Be Equal  ${locks_before}  ${locks_after}
 
-    ${transaction_id1}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
-    ${transaction_id2}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_3}  ${234}
+    ${transaction_id1}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${transaction_id2}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_3}  ${234}
     ${transaction_ids}=  Create List  ${transaction_id1}  ${transaction_id2}
 
     # Release Lock by Session by mentioning transaction_ids also in the request.
@@ -289,17 +290,18 @@ Verify Locks Release By Session
 Verify Locks Created By One Session Cannot Be Deleted By Another Session
     [Documentation]  Verify locks created by one session cannot be deleted by another session.
     [Tags]  Verify_Locks_Created_By_One_Session_Cannot_Be_Deleted_By_Another_Session
+    [Setup]  No Operation
 
-    ${transaction_id1}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
-    ${locks_tran1}=  Get Locks List  ${SESSION_ID}
+    ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"hmc-id"}}
+    Set Test Variable  ${SESSION_ID}  ${resp['Id']}
+    ${transaction_id1}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${locks_tran1}=  Get Locks List  ${resp['Id']}
 
-    Redfish.Login
-    ${session_id}  ${session_key}=  Return Session Id And Session Key
+    ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"hmc-id"}}
+    Set Test Variable  ${SESSION_ID}  ${resp['Id']}
 
-    ${transaction_id2}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_3}  ${234}
-    ${locks_before}=  Get Locks List  ${SESSION_ID}
+    ${transaction_id2}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_3}  ${234}
+    ${locks_before}=  Get Locks List  ${resp['Id']}
 
     ${transaction_ids}=  Create List  ${transaction_id1}  ${transaction_id2}
     Release Locks  ${transaction_ids}  exp_status_code=${HTTP_UNAUTHORIZED}  conflict_record=${locks_tran1}
@@ -323,16 +325,16 @@ Locks Persistency Check After BMC Reboot
     # seg_flags    Segmentation Flags to identify lock elements under system level in the hierarchy.
     # resource_id  Decimal +ve integer value of maximum 8 hex bytes.  Ex: 134, 2048 etc.
 
-    ${transaction_id}=  Run Keyword  Acquire Lock On A Given Resource
-    ...  ${lock_type}  ${seg_flags}  ${resource_id}
+    ${transaction_id}=  Acquire Lock On A Given Resource  ${lock_type}  ${seg_flags}  ${resource_id}
 
-    ${locks_prev}=  Run Keyword  Get Locks List  ${SESSION_ID}
+    ${locks_prev}=  Get Locks List  ${SESSION_ID}
 
-    Initialize OpenBMC
-    OBMC Reboot (off)
+    Redfish OBMC Reboot (off)
+    Redfish Login
 
-    ${locks_curr}=  Run Keyword  Get Locks List  ${SESSION_ID}
+    ${locks_curr}=  Get Locks List  ${SESSION_ID}
     Should Be Equal  ${locks_prev}  ${locks_curr}
+
     ${transaction_ids}=  Create List  ${transaction_id}
     Release Locks  ${transaction_ids}
 
@@ -350,7 +352,7 @@ Return Data Dictionary For Single Request
     ...  ResourceID=${resource_id}
     ${SEG_FLAGS_ENTRIES}=  Create List  ${SEG_FLAGS_LOCK}
     ${LOCK_REQUEST}=  Create Dictionary  Request=${SEG_FLAGS_ENTRIES}
-    Log To Console  ${LOCK_REQUEST}
+    Log To Console  \n ${LOCK_REQUEST}
 
     [Return]  ${LOCK_REQUEST}
 
@@ -370,17 +372,17 @@ Acquire Lock On A Given Resource
     # err_msgs         List of expected error messages.
 
     ${data}=  Return Data Dictionary For Single Request  ${lock_type}  ${seg_flags}  ${resource_id}
-    ${resp}=  Redfish.Post  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock
-    ...  body=${data}  valid_status_codes=[${exp_status_code}]
+    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${data}
 
     ${transaction_id}=  Run Keyword If  ${exp_status_code} != ${HTTP_OK}
-    ...  Set Variable  ${0}
-    ...  ELSE  Load Lock Record And Build Transaction To Session Map  ${resp.text}
+    ...      Set Variable  ${0}
+    ...  ELSE
+    ...     Load Lock Record And Build Transaction To Session Map  ${resp.text}
 
     Run Keyword If  ${exp_status_code} == ${HTTP_CONFLICT} and ${err_msgs} == ['NA']
-    ...  Load Response And Verify Conflict  ${resp.text}  ${SESSION_ID}
+    ...      Load Response And Verify Conflict  ${resp.text}  ${SESSION_ID}
     ...  ELSE  Run Keyword If  ${exp_status_code} != ${HTTP_OK} and ${err_msgs} != ${EMPTY_LIST}
-    ...  Load Response And Verify Error  ${resp.text}  err_msgs=${err_msgs}
+    ...     Load Response And Verify Error  ${resp.text}  err_msgs=${err_msgs}
 
     Append Transaction Id And Session Id To Locks Dictionary  ${transaction_id}
 
@@ -418,7 +420,7 @@ Load Response And Verify Error
       Append To List  ${extended_errors}  ${error[0]["Message"]}
     END
 
-    Log To Console  EXTENDED = ${extended_errors}
+    Log To Console  \n ${extended_errors}
 
     FOR  ${exp_error}  IN  @{err_msgs}
         Run Keyword  Expect List Of Errors In An Extended Errors  ${exp_error}  ${extended_errors}
@@ -459,9 +461,8 @@ Get Locks List
 
     ${sessions}=  Evaluate  json.dumps(${sessions})  json
     ${data}=  Set Variable  {"SessionIDs": ${sessions}}
-    ${resp}=  Redfish.Post  /ibm/v1/HMC/LockService/Actions/LockService.GetLockList
-    ...  body=${data}  valid_status_codes=[${exp_status_code}]
-
+    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.GetLockList
+    ...  data=${data}
     ${locks}=  Evaluate  json.loads('''${resp.text}''')  json
 
     [Return]  ${locks["Records"]}
@@ -482,9 +483,8 @@ Release Locks
     # When release_type=Session then TransactionIDs list will be ignored.
     ${data}=  Set Variable  {"Type": "${release_type}", "TransactionIDs": ${transaction_ids}}
     ${data}=  Evaluate  json.dumps(${data})  json
-    ${resp}=  Redfish.Post  /ibm/v1/HMC/LockService/Actions/LockService.ReleaseLock
-    ...  body=${data}  valid_status_codes=[${exp_status_code}]
-    Should Be True  ${resp.status}  ${exp_status_code}
+    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.ReleaseLock  data=${data}
+    Should Be True  ${resp.status_code}  ${exp_status_code}
     Return From Keyword If  ${conflict_record} == ${EMPTY_LIST}
 
     ${conflict}=  Evaluate  json.loads('''${resp.text}''')  json
@@ -522,7 +522,7 @@ Verify Lock Record
     # lock_records  A dictionary containing key value pairs of a lock record.
 
     ${session}=  Get From Dictionary  ${LOCKS}  ${lock_records["TransactionID"]}
-    ${locks}=  Run Keyword  Get Locks List  ${session}
+    ${locks}=  Get Locks List  ${session}
 
     ${lock_record_found}=  Set Variable  ${False}
 
@@ -552,7 +552,7 @@ Load Response And Verify Conflict
     #                            "SessionID": "B6geYEdo6T", "TransactionID": 104 } }
     # sessions       Comma separated list of sessions
 
-    ${curr_locks}=  Run Keyword  Get Locks List  ${sessions}
+    ${curr_locks}=  Get Locks List  ${sessions}
     ${conflict_resp}=  Replace String  ${conflict_resp}  \"  \\"
     ${conflict_response}=  Evaluate  json.loads('''${conflict_resp}''')  json
 
@@ -579,10 +579,13 @@ Acquire And Release Lock
     # Get REST session to BMC.
     Run Keyword If  ${new_sess_req} == ${True}  Create New Session
 
-    ${inputs}=  Create Dictionary  LockType=${lock_type}  ResourceID=${resource_id}
-    ...  SegmentFlags=${seg_flags}  HMCID=${hmc_id}
+    ${inputs}=  Create Dictionary
+    ...  LockType=${lock_type}
+    ...  ResourceID=${resource_id}
+    ...  SegmentFlags=${seg_flags}
+    ...  HMCID=${hmc_id}
 
-    ${transaction_id}=  Run Keyword  Acquire Lock On A Given Resource  ${inputs["LockType"]}
+    ${transaction_id}=  Acquire Lock On A Given Resource  ${inputs["LockType"]}
     ...  ${inputs["SegmentFlags"]}  ${inputs["ResourceID"]}  ${exp_status_code}  err_msgs=${err_msgs}
 
     # Each lock request from a new session is saved so that for next lock request using same session
@@ -602,27 +605,21 @@ Acquire And Release Lock
     Verify Lock Record  ${False}  &{inputs}
 
     # Delete the session.
-    Redfish.Logout
+    Delete All Redfish Sessions
 
 
 Create New Session
     [Documentation]  Create new session.
 
-    # Delete current session.
-    Redfish.Logout
-
-    # Get a redfish session to BMC.
-    Redfish.Login
-    ${session_id}  ${session_key}=  Return Session Id And Session Key
-    Set Test Variable  ${SESSION_ID}  ${session_id}
-    Set Test Variable  ${SESSION_KEY}  ${session_key}
+    ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${hmc_id}"}}
+    Set Test Variable  ${SESSION_ID}  ${resp['Id']}
 
 
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
     FFDC On Test Case Fail
-    Redfish.Logout
+    Delete All Redfish Sessions
 
 
 Return Session Id And Session Key
@@ -638,10 +635,12 @@ Return Session Id And Session Key
 Test Setup Execution
     [Documentation]  Test setup execution.
 
+    # This is a test constant value.
+    Set Test Variable  ${hmc_id}  hmc-id
     Create New Session
 
-    Set Test Variable Dictionary Of Previous Lock Request  ${EMPTY}  ${EMPTY_LIST}  ${EMPTY}  ${EMPTY}
-    ...  ${EMPTY}  ${EMPTY}
+    Set Test Variable Dictionary Of Previous Lock Request
+    ...  ${EMPTY}  ${EMPTY_LIST}  ${EMPTY}  ${EMPTY}  ${EMPTY}  ${EMPTY}
 
 
 Set Test Variable Dictionary Of Previous Lock Request
