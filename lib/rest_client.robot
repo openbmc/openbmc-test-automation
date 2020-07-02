@@ -9,6 +9,8 @@ Library           utils.py
 Library           gen_misc.py
 Library           var_funcs.py
 Resource          rest_response_code.robot
+#Resource          bmc_redfish_resource.robot
+#Library           bmc_redfish_utils.py  WITH NAME  redfish_utils
 
 *** Variables ***
 # Assign default value to QUIET for programs which may not define it.
@@ -386,13 +388,13 @@ Redfish Login
     #          set kwargs as follows:
     #          ${kwargs}=  Create Dictionary  allow_redirect=${True}.
 
-    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}
+    Create Session  redfish  ${AUTH_URI}  timeout=${timeout}
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${data}=  Set Variable If  '${kwargs}' == '${EMPTY}'
     ...    {"UserName":"${rest_username}", "Password":"${rest_password}"}
     ...    {"UserName":"${rest_username}", "Password":"${rest_password}", ${kwargs}}
 
-    ${resp}=  Post Request  openbmc  /redfish/v1/SessionService/Sessions
+    ${resp}=  Post Request  redfish  /redfish/v1/SessionService/Sessions
     ...  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
 
@@ -401,3 +403,31 @@ Redfish Login
     Set Global Variable  ${XAUTH_TOKEN}  ${resp.headers["X-Auth-Token"]}
 
     [Return]  ${content}
+
+
+Redfish Post Request
+    [Documentation]  Do REST POST request and return the result.
+    [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+
+    # Description of argument(s):
+    # uri      The URI to establish connection with
+    #          (e.g. '/xyz/openbmc_project/software/').
+    # timeout  Timeout in seconds to establish connection with URI.
+    # quiet    If enabled, turns off logging to console.
+    # kwargs   Any additional arguments to be passed directly to the
+    #          Post Request call. For example, the caller might
+    #          set kwargs as follows:
+    #          ${kwargs}=  Create Dictionary  allow_redirect=${True}.
+
+    # Get a redfish session if active.
+    #${s_id}=  redfish_utils.Get Redfish Session Info
+    #Log To Console  \n POST : ${s_id}
+
+    ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
+    ${headers}=  Create Dictionary   Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
+    Set To Dictionary   ${kwargs}  headers  ${headers}
+    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post  base_uri=${base_uri}  args=&{kwargs}
+    ${resp}=  Post Request  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}
+    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
+
+    [Return]  ${resp}
