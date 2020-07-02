@@ -738,7 +738,7 @@ Install Debug Tarball On BMC
     # Description of arguments:
     # tarball_file_path      Path of the debug tarball file.
     #                        The tar file is downloaded from the build page
-    #                        https://openpower.xyz/job/openbmc-build/
+    #                        https://jenkins.openbmc.org/job/latest-master/
     #                        obmc-phosphor-debug-tarball-witherspoon.tar.xz
     #
     # targ_tarball_dir_path  The directory path where the tarball is to be

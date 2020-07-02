@@ -8,7 +8,7 @@ For code update information, please refer to [code-update.md](https://github.com
 * UBI Format
 
     For BMC code update, download the system type *.ubi.mdt.tar image from
-    https://openpower.xyz/job/openbmc-build/ and run as follows:
+    https://jenkins.openbmc.org/job/latest-master/ and run as follows:
 
     For Witherspoon system:
     ```
@@ -48,7 +48,7 @@ For code update information, please refer to [code-update.md](https://github.com
 * UBI Format
 
     For BMC code update, download the system type *.ubi.mdt.tar image from
-    https://openpower.xyz/job/openbmc-build/ and run as follows:
+    https://jenkins.openbmc.org/job/latest-master/ and run as follows:
 
     For Witherspoon system:
     ```
@@ -68,7 +68,7 @@ For code update information, please refer to [code-update.md](https://github.com
 * Non-UBI Format
 
     For BMC code update, download the system type *all.tar image from
-    https://openpower.xyz/job/openbmc-build/ and run as follows:
+    https://jenkins.openbmc.org/job/latest-master/ and run as follows:
 
     For a Zaius system:
     ```
