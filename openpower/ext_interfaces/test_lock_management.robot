@@ -5,9 +5,12 @@ Documentation    Test Lock Management feature of Management Console on BMC.
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/bmc_redfish_utils.robot
 
+Suite Setup      Delete All Redfish Sessions
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
+Suite Teardown   Delete All Redfish Sessions
 
 *** Variables ***
 
@@ -192,10 +195,9 @@ Verify GetLockList Returns An Empty Record For An Invalid Session Id
     [Documentation]  Verify GetLockList returns an empty record for an invalid session id.
     [Tags]  Verify_GetLockList_Returns_An_Empty_Record_For_An_Invalid_Session_Id
 
-    ${session_location}=  Redfish.Get Session Location
-    ${session_id}=  Evaluate  os.path.basename($session_location)  modules=os
+    ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${hmc_id}"}}
 
-    ${records}=  Run Keyword  Get Locks List  ${session_id}
+    ${records}=  Run Keyword  Get Locks List  ${resp['Id']}
     ${records}=  Run Keyword  Get Locks List  ZZzZZz9zzZ
     ${length}=  Get Length  ${records}
     Should Be Equal  ${length}  ${0}
@@ -208,9 +210,9 @@ Verify Lock Conflicts
 
     Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
     Read   ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_CONFLICT}  ['NA']  ${False}
-    Read   ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
+    #Read   ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
     Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_CONFLICT}  ['NA']  ${False}
-    Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
+    #Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_OK}        ['NA']  ${True}
     Write  ${TWO_SEG_FLAG_2}  ${234}  hmc-id  ${HTTP_CONFLICT}  ['NA']  ${False}
 
 
@@ -268,18 +270,15 @@ Verify Locks Release By Session
     [Tags]  Verify_Locks_Release_By_Session
 
     ${locks_before}=  Get Locks List  ${SESSION_ID}
-    ${transaction_id1}=  Acquire Lock On A Given Resource
-    ...  Write  ${TWO_SEG_FLAG_2}  ${234}
+    ${transaction_id1}=  Acquire Lock On A Given Resource  Write  ${TWO_SEG_FLAG_2}  ${234}
 
     # Release Lock by Session without mentioning transaction_ids.
     Release Locks  release_type=Session
     ${locks_after}=  Get Locks List  ${SESSION_ID}
     Should Be Equal  ${locks_before}  ${locks_after}
 
-    ${transaction_id1}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
-    ${transaction_id2}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_3}  ${234}
+    ${transaction_id1}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${transaction_id2}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_3}  ${234}
     ${transaction_ids}=  Create List  ${transaction_id1}  ${transaction_id2}
 
     # Release Lock by Session by mentioning transaction_ids also in the request.
@@ -289,17 +288,18 @@ Verify Locks Release By Session
 Verify Locks Created By One Session Cannot Be Deleted By Another Session
     [Documentation]  Verify locks created by one session cannot be deleted by another session.
     [Tags]  Verify_Locks_Created_By_One_Session_Cannot_Be_Deleted_By_Another_Session
+    [Setup]  No Operation
 
-    ${transaction_id1}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_2}  ${234}
-    ${locks_tran1}=  Get Locks List  ${SESSION_ID}
+    ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"hmc-id"}}
+    Set Test Variable  ${SESSION_ID}  ${resp['Id']}
+    ${transaction_id1}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_2}  ${234}
+    ${locks_tran1}=  Get Locks List  ${resp['Id']}
 
-    Redfish.Login
-    ${session_id}  ${session_key}=  Return Session Id And Session Key
+    ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"hmc-id"}}
+    Set Test Variable  ${SESSION_ID}  ${resp['Id']}
 
-    ${transaction_id2}=  Acquire Lock On A Given Resource
-    ...  Read  ${TWO_SEG_FLAG_3}  ${234}
-    ${locks_before}=  Get Locks List  ${SESSION_ID}
+    ${transaction_id2}=  Acquire Lock On A Given Resource  Read  ${TWO_SEG_FLAG_3}  ${234}
+    ${locks_before}=  Get Locks List  ${resp['Id']}
 
     ${transaction_ids}=  Create List  ${transaction_id1}  ${transaction_id2}
     Release Locks  ${transaction_ids}  exp_status_code=${HTTP_UNAUTHORIZED}  conflict_record=${locks_tran1}
@@ -370,17 +370,18 @@ Acquire Lock On A Given Resource
     # err_msgs         List of expected error messages.
 
     ${data}=  Return Data Dictionary For Single Request  ${lock_type}  ${seg_flags}  ${resource_id}
-    ${resp}=  Redfish.Post  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock
-    ...  body=${data}  valid_status_codes=[${exp_status_code}]
+    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock
+    ...  data=${data}
 
     ${transaction_id}=  Run Keyword If  ${exp_status_code} != ${HTTP_OK}
-    ...  Set Variable  ${0}
-    ...  ELSE  Load Lock Record And Build Transaction To Session Map  ${resp.text}
+    ...      Set Variable  ${0}
+    ...  ELSE
+    ...     Load Lock Record And Build Transaction To Session Map  ${resp.text}
 
     Run Keyword If  ${exp_status_code} == ${HTTP_CONFLICT} and ${err_msgs} == ['NA']
-    ...  Load Response And Verify Conflict  ${resp.text}  ${SESSION_ID}
+    ...      Load Response And Verify Conflict  ${resp.text}  ${SESSION_ID}
     ...  ELSE  Run Keyword If  ${exp_status_code} != ${HTTP_OK} and ${err_msgs} != ${EMPTY_LIST}
-    ...  Load Response And Verify Error  ${resp.text}  err_msgs=${err_msgs}
+    ...     Load Response And Verify Error  ${resp.text}  err_msgs=${err_msgs}
 
     Append Transaction Id And Session Id To Locks Dictionary  ${transaction_id}
 
@@ -457,11 +458,12 @@ Get Locks List
     # sessions         List of comma separated strings. Ex: ["euHoAQpvNe", "ecTjANqwFr"]
     # exp_status_code  expected status code from the GetLockList request for given inputs.
 
+    # Get a redfish session if active.
+
     ${sessions}=  Evaluate  json.dumps(${sessions})  json
     ${data}=  Set Variable  {"SessionIDs": ${sessions}}
-    ${resp}=  Redfish.Post  /ibm/v1/HMC/LockService/Actions/LockService.GetLockList
-    ...  body=${data}  valid_status_codes=[${exp_status_code}]
-
+    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.GetLockList
+    ...  data=${data}
     ${locks}=  Evaluate  json.loads('''${resp.text}''')  json
 
     [Return]  ${locks["Records"]}
@@ -482,9 +484,9 @@ Release Locks
     # When release_type=Session then TransactionIDs list will be ignored.
     ${data}=  Set Variable  {"Type": "${release_type}", "TransactionIDs": ${transaction_ids}}
     ${data}=  Evaluate  json.dumps(${data})  json
-    ${resp}=  Redfish.Post  /ibm/v1/HMC/LockService/Actions/LockService.ReleaseLock
-    ...  body=${data}  valid_status_codes=[${exp_status_code}]
-    Should Be True  ${resp.status}  ${exp_status_code}
+    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.ReleaseLock
+    ...  data=${data}
+    Should Be True  ${resp.status_code}  ${exp_status_code}
     Return From Keyword If  ${conflict_record} == ${EMPTY_LIST}
 
     ${conflict}=  Evaluate  json.loads('''${resp.text}''')  json
@@ -602,27 +604,21 @@ Acquire And Release Lock
     Verify Lock Record  ${False}  &{inputs}
 
     # Delete the session.
-    Redfish.Logout
+    Delete All Redfish Sessions
 
 
 Create New Session
     [Documentation]  Create new session.
 
-    # Delete current session.
-    Redfish.Logout
-
-    # Get a redfish session to BMC.
-    Redfish.Login
-    ${session_id}  ${session_key}=  Return Session Id And Session Key
-    Set Test Variable  ${SESSION_ID}  ${session_id}
-    Set Test Variable  ${SESSION_KEY}  ${session_key}
+    ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${hmc_id}"}}
+    Set Test Variable  ${SESSION_ID}  ${resp['Id']}
 
 
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
     FFDC On Test Case Fail
-    Redfish.Logout
+    Delete All Redfish Sessions
 
 
 Return Session Id And Session Key
@@ -638,6 +634,8 @@ Return Session Id And Session Key
 Test Setup Execution
     [Documentation]  Test setup execution.
 
+    # This is a test constant value for HMC ID.
+    Set Test Variable  ${hmc_id}  hmc-id
     Create New Session
 
     Set Test Variable Dictionary Of Previous Lock Request  ${EMPTY}  ${EMPTY_LIST}  ${EMPTY}  ${EMPTY}
