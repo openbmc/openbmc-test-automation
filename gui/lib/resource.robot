@@ -8,7 +8,7 @@ Library      DateTime
 Library      XvfbRobot
 Library      OperatingSystem
 Library      SeleniumLibrary
-Library      AngularJSLibrary
+#Library      AngularJSLibrary
 Library      SSHLibrary  30 Seconds
 Library      Process
 Library      supporting_libs.py
