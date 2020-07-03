@@ -31,3 +31,4 @@ Test Setup Execution
     Click Element  ${xpath_control_menu}
     Click Element  ${xpath_manage_power_usage_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  manage-power-usage
+

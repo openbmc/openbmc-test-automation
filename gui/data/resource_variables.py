@@ -138,3 +138,5 @@ class resource_variables():
     xpath_reboot_bmc_sub_menu = "//a[@href='#/control/reboot-bmc']"
     xpath_server_led_sub_menu = "//a[@href='#/control/server-led']"
     xpath_server_power_operations_sub_menu = "//a[@href='#/control/server-power-operations']"
+
+

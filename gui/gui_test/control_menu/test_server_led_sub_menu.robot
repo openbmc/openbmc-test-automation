@@ -29,3 +29,4 @@ Test Setup Execution
     Click Element  ${xpath_control_menu}
     Click Element  ${xpath_server_led_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  server-led
+

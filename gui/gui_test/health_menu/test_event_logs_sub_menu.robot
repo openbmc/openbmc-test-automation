@@ -26,3 +26,4 @@ Test Setup Execution
     Click Element  ${xpath_health_menu}
     Click Element  ${xpath_event_logs_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  event-logs
+
