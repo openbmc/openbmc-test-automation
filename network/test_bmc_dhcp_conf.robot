@@ -16,15 +16,10 @@ Enable DHCP Via Redfish And Verify
     [Tags]  Enable_DHCP_Via_Redfish_And_Verify
     [Teardown]  Run Keywords  Restore Configuration
     ...  AND  FFDC On Test Case Fail
+    [Template]  Apply Ethernet Config
 
-    ${active_channel_config}=  Get Active Channel Config
-    Redfish.Patch
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
-    ...  body={"DHCPv4":{"DHCPEnabled":${True}}}
-
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Should Be Equal As Strings  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${True}
+    # property            Value
+    DHCPEnabled           ${True}
 
 
 Disable DHCP Via Redfish And Verify
@@ -32,15 +27,10 @@ Disable DHCP Via Redfish And Verify
     [Tags]  Disable_DHCP_Via_Redfish_And_Verify
     [Teardown]  Run Keywords  Restore Configuration
     ...  AND  FFDC On Test Case Fail
+    [Template]  Apply Ethernet Config
 
-    ${active_channel_config}=  Get Active Channel Config
-    Redfish.Patch
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
-    ...  body={"DHCPv4":{"DHCPEnabled":${False}}}
-
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Should Be Equal As Strings  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${False}
+    # property            Value
+    DHCPEnabled           ${False}
 
 
 Enable UseDNSServers Via Redfish And Verify
@@ -48,15 +38,10 @@ Enable UseDNSServers Via Redfish And Verify
     [Tags]  Enable_UseDNSServers_Via_Redfish_And_Verify
     [Teardown]  Run Keywords  Restore Configuration
     ...  AND  FFDC On Test Case Fail
+    [Template]  Apply Ethernet Config
 
-    ${active_channel_config}=  Get Active Channel Config
-    Redfish.Patch
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
-    ...  body={"DHCPv4":{"UseDNSServers":${True}}}
-
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Should Be Equal As Strings  ${resp.dict["DHCPv4"]["UseDNSServers"]}  ${True}
+    # property            Value
+    UseDNSServers         ${True}
 
 
 Disable UseDNSServers Via Redfish And Verify
@@ -64,15 +49,10 @@ Disable UseDNSServers Via Redfish And Verify
     [Tags]  Disable_UseDNSServers_Via_Redfish_And_Verify
     [Teardown]  Run Keywords  Restore Configuration
     ...  AND  FFDC On Test Case Fail
+    [Template]  Apply Ethernet Config
 
-    ${active_channel_config}=  Get Active Channel Config
-    Redfish.Patch
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
-    ...  body={"DHCPv4":{"UseDNSServers":${False}}}
-
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Should Be Equal As Strings  ${resp.dict["DHCPv4"]["UseDNSServers"]}  ${False}
+    # property            Value
+    UseDNSServers         ${False}
 
 
 Enable UseDomainName Via Redfish And Verify
@@ -80,15 +60,11 @@ Enable UseDomainName Via Redfish And Verify
     [Tags]  Enable_UseDomainName_Via_Redfish_And_Verify
     [Teardown]  Run Keywords  Restore Configuration
     ...  AND  FFDC On Test Case Fail
+    [Template]  Apply Ethernet Config
 
-    ${active_channel_config}=  Get Active Channel Config
-    Redfish.Patch
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
-    ...  body={"DHCPv4":{"UseDomainName":${True}}}
+    # property            Value
+    UseDomainName         ${True}
 
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Should Be Equal As Strings  ${resp.dict["DHCPv4"]["UseDomainName"]}  ${True}
 
 
 Disable UseDomainName Via Redfish And Verify
@@ -96,15 +72,10 @@ Disable UseDomainName Via Redfish And Verify
     [Tags]  Disable_UseDomainName_Via_Redfish_And_Verify
     [Teardown]  Run Keywords  Restore Configuration
     ...  AND  FFDC On Test Case Fail
+    [Template]  Apply Ethernet Config
 
-    ${active_channel_config}=  Get Active Channel Config
-    Redfish.Patch
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
-    ...  body={"DHCPv4":{"UseDomainName":${False}}}
-
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Should Be Equal As Strings  ${resp.dict["DHCPv4"]["UseDomainName"]}  ${False}
+    # property            Value
+    UseDomainName         ${False}
 
 
 Enable UseNTPServers Via Redfish And Verify
@@ -112,15 +83,10 @@ Enable UseNTPServers Via Redfish And Verify
     [Tags]  Enable_UseNTPServers_Via_Redfish_And_Verify
     [Teardown]  Run Keywords  Restore Configuration
     ...  AND  FFDC On Test Case Fail
+    [Template]  Apply Ethernet Config
 
-    ${active_channel_config}=  Get Active Channel Config
-    Redfish.Patch
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
-    ...  body={"DHCPv4":{"UseNTPServers":${True}}}
-
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Should Be Equal As Strings  ${resp.dict["DHCPv4"]["UseNTPServers"]}  ${True}
+    # property            Value
+    UseNTPServers         ${True}
 
 
 Disable UseNTPServers Via Redfish And Verify
@@ -128,15 +94,10 @@ Disable UseNTPServers Via Redfish And Verify
     [Tags]  Disable_UseNTPServers_Via_Redfish_And_Verify
     [Teardown]  Run Keywords  Restore Configuration
     ...  AND  FFDC On Test Case Fail
+    [Template]  Apply Ethernet Config
 
-    ${active_channel_config}=  Get Active Channel Config
-    Redfish.Patch
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
-    ...  body={"DHCPv4":{"UseNTPServers":${False}}}
-
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Should Be Equal As Strings  ${resp.dict["DHCPv4"]["UseNTPServers"]}  ${False}
+    # property            Value
+    UseNTPServers         ${False}
 
 
 *** Keywords ***
@@ -191,4 +152,22 @@ Restore Configuration
 
     Set IPMI Inband Network Configuration  ${ip_address}  ${subnet_mask}
     ...  ${initial_lan_config['Default Gateway IP']}
+
+
+Apply Ethernet Config
+   [Documentation]  Set the given Ethernet config property.
+   [Arguments]  ${property}   ${value}
+
+   # Description of argument(s):
+   # property   Ethernet property to be set..
+   # value      Value to be set. E.g. True or False.
+
+   ${active_channel_config}=  Get Active Channel Config
+   Redfish.Patch
+   ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
+   ...  body={"DHCPv4":{"${property}":${value}}}
+
+   ${resp}=  Redfish.Get
+   ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+   Should Be Equal As Strings  ${resp.dict["DHCPv4"]["${property}"]}  ${value}
 
