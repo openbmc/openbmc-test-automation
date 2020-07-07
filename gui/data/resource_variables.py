@@ -116,3 +116,13 @@ class resource_variables():
     xpath_individual_event_export = \
         "//*[@id='event__actions-bar']/div[2]/div[2]/a"
     xpath_select_all_events = "(//*[@class='control__indicator'])[1]"
+
+
+    # New GUI variables
+
+    ${xpath_control_menu}            //button[@aria-controls="control-menu"]
+
+    ${xpath_manage_power_usage_sub_menu}   //a[@href='#/control/manage-power-usage']
+    ${xpath_reboot_bmc_sub_menu}     //a[@href='#/control/reboot-bmc']
+    ${xpath_server_led_sub_menu}     //a[@href='#/control/server-led']
+    ${xpath_server_power_operations_sub_menu}   //a[@href='#/control/server-power-operations']
