@@ -116,3 +116,22 @@ class resource_variables():
     xpath_individual_event_export = \
         "//*[@id='event__actions-bar']/div[2]/div[2]/a"
     xpath_select_all_events = "(//*[@class='control__indicator'])[1]"
+
+    # New GUI variables
+    xpath_login_button = "//button[@type='submit']"
+    xpath_logout_button = "//button[@id='app-header-logout']"
+
+    xpath_control_menu = "//button[@aria-controls='control-menu']"
+    xpath_overview_menu = "//a[@href='#/']"
+    xpath_health_menu = "//button[@aria-controls='health-menu']"
+
+    xpath_event_logs_sub_menu = "//a[@href='#/health/event-logs']"
+    xpath_manage_power_usage_sub_menu = "//a[@href='#/control/manage-power-usage']"
+    xpath_reboot_bmc_sub_menu = "//a[@href='#/control/reboot-bmc']"
+    xpath_server_led_sub_menu = "//a[@href='#/control/server-led']"
+    xpath_server_power_operations_sub_menu = "//a[@href='#/control/server-power-operations']"
+
+    # New GUI variables for access-control-menu
+    xpath_access_control_menu = "//button[@aria-controls='access-control-menu']"
+    xpath_local_user_management_sub_menu = "//a[@href='#/access-control/local-user-management']"
+
