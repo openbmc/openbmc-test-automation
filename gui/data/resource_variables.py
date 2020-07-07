@@ -128,6 +128,10 @@ class resource_variables():
     # xpath for overview menu
     xpath_overview_menu = "//a[@href='#/']"
 
+    # xpath for health menu
+    xpath_health_menu = "//button[@aria-controls='health-menu']"
+    xpath_event_logs_sub_menu = "//a[@href='#/health/event-logs']"
+
     # xpath for control menu
     xpath_control_menu = "//button[@aria-controls='control-menu']"
     xpath_manage_power_usage_sub_menu = "//a[@href='#/control/manage-power-usage']"
