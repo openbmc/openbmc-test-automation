@@ -116,3 +116,7 @@ class resource_variables():
     xpath_individual_event_export = \
         "//*[@id='event__actions-bar']/div[2]/div[2]/a"
     xpath_select_all_events = "(//*[@class='control__indicator'])[1]"
+
+    # New GUI variables
+    xpath_health_menu = "//button[@aria-controls='health-menu']"
+    xpath_event_logs_sub_menu = "//a[@href='#/health/event-logs']"
