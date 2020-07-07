@@ -15,7 +15,7 @@ Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 ${CMD_INTERNAL_FAILURE}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...  xyz.openbmc_project.Logging.Entry.Level.Error 0
-
+@{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 *** Test Cases ***
 
@@ -76,6 +76,20 @@ Verify PEL Log Details
     ${bmc_time2_epoch}=  Convert Date  ${bmc_time2}  epoch
 
     Should Be True  ${bmc_time1_epoch} <= ${pel_time_epoch} <= ${bmc_time2_epoch}
+
+
+Verify Mandatory Sections Of Error Log PEL
+    [Documentation]  Verify mandatory sections of error log PEL.
+    [Tags]  Verify_Mandatory_Sections_Of_Error_Log_PEL
+
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${pel_id}=  Get From List  ${pel_ids}  -1
+    ${pel_output}=  Peltool  -i ${pel_id}
+    ${pel_sections}=  Get Dictionary Keys  ${pel_output}
+
+    List Should Contain Sub List  ${pel_sections}  ${mandatory_pel_fileds}
 
 
 Verify PEL Log Persistence After BMC Reboot
