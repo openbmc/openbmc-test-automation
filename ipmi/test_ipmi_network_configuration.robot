@@ -51,7 +51,7 @@ Disable VLAN Via IPMI When Multiple VLAN Exist On BMC
     [Documentation]  Disable  VLAN Via IPMI When Multiple VLAN Exist On BMC.
     [Tags]   Disable_VLAN_Via_IPMI_When_LAN_And_VLAN_Exist_On_BMC
 
-    FOR  ${id}  IN  @{vlan_ids}
+    FOR  ${vlan_id_for_rest}  IN  @{vlan_ids}
       Create VLAN  ${vlan_id_for_rest}
     END
 
@@ -189,6 +189,9 @@ Suite Setup Execution
     [Documentation]  Suite Setup Execution.
 
     Redfish.Login
+    ${initial_lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
+    Set Suite Variable  ${initial_lan_config}
+
     Run Inband IPMI Standard Command
     ...  lan set ${CHANNEL_NUMBER} ipsrc static  login_host=${1}
 
