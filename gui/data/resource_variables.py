@@ -125,6 +125,9 @@ class resource_variables():
     xpath_login_button = "//button[@type='submit']"
     xpath_logout_button = "//button[@id='app-header-logout']"
 
+    # xpath for overview menu
+    xpath_overview_menu = "//a[@href='#/']"
+
     # xpath for control menu
     xpath_control_menu = "//button[@aria-controls='control-menu']"
     xpath_manage_power_usage_sub_menu = "//a[@href='#/control/manage-power-usage']"
