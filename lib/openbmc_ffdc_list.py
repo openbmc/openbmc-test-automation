@@ -37,6 +37,7 @@ FFDC_BMC_FILE = {
     {
         # File Name         Command
         'BMC_flash_side.txt': 'cat /sys/class/watchdog/watchdog1/bootstatus >/tmp/BMC_flash_side.txt 2>&1',
+        'BMC_hwmon.txt': 'grep -r . /sys/class/hwmon/* >/tmp/BMC_hwmon.txt 2>&1',
         'BMC_proc_list.txt': 'top -n 1 -b >/tmp/BMC_proc_list.txt 2>&1',
         'BMC_proc_fd_active_list.txt': 'ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt 2>&1',
         'BMC_journalctl_nopager.txt': 'journalctl --no-pager >/tmp/BMC_journalctl_nopager.txt 2>&1',
