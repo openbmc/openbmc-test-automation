@@ -294,9 +294,9 @@ Get Temperature Reading From Redfish
 
     @{redfish_readings}=  Redfish.Get Attribute  /redfish/v1/Chassis/chassis/Thermal  Temperatures
     FOR  ${data}  IN  @{redfish_readings}
-        ${redfish_value}=  Set Variable If  '&{data}[MemberId]' == '${member_id}'
+        ${redfish_value}=  Set Variable If  '${data}[MemberId]' == '${member_id}'
         ...  &{data}[ReadingCelsius]
-        Exit For Loop If  '&{data}[MemberId]' == '${member_id}'
+        Exit For Loop If  '${data}[MemberId]' == '${member_id}'
     END
     [Return]  ${redfish_value}
 
