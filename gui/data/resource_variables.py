@@ -149,3 +149,4 @@ class resource_variables():
     xpath_ldap_sub_menu = "//a[@href='#/access-control/ldap']"
     xpath_save_settings_button = "//button[contains(text(),'Save settings')]"
     xpath_local_user_management_sub_menu = "//a[@href='#/access-control/local-user-management']"
+    xpath_ssl_certificates_sub_menu = "//a[@href='#/access-control/ssl-certificates']"
