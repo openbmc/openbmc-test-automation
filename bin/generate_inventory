@@ -18,8 +18,8 @@ print_var(inventory_items)
 fru_inventory_file_path = 'inventory.py'
 print_var(fru_inventory_file_path)
 
-# Properties master list
-yaml_master_list = []
+# Properties inventory list
+yaml_inventory_list = []
 
 # Clone the phosphor-dbus-interfaces repository
 cmd_buf = 'git clone https://github.com/openbmc/phosphor-dbus-interfaces'
@@ -54,22 +54,22 @@ yaml_gpu_list = ['Inventory/Item.interface.yaml',
                  'Inventory/Decorator/Replaceable.interface.yaml',
                  'State/Decorator/OperationalStatus.interface.yaml', ]
 
-# Append to master list
-yaml_master_list.append(yaml_fru_list)
-yaml_master_list.append(yaml_core_list)
-yaml_master_list.append(yaml_fan_list)
-yaml_master_list.append(yaml_fan_wc_list)
-yaml_master_list.append(yaml_gpu_list)
+# Append to inventory list
+yaml_inventory_list.append(yaml_fru_list)
+yaml_inventory_list.append(yaml_core_list)
+yaml_inventory_list.append(yaml_fan_list)
+yaml_inventory_list.append(yaml_fan_wc_list)
+yaml_inventory_list.append(yaml_gpu_list)
 
-print_var(yaml_master_list)
+print_var(yaml_inventory_list)
 
 # Populate Inventory data
 inventory_dict = {}
 
-for master_index in range(len(yaml_master_list)):
-    print_var(master_index)
-    inventory_dict[str(inventory_items[master_index])] = []
-    for rel_yaml_file_path in yaml_master_list[master_index]:
+for inv_index in range(len(yaml_inventory_list)):
+    print_var(inv_index)
+    inventory_dict[str(inventory_items[inv_index])] = []
+    for rel_yaml_file_path in yaml_inventory_list[inv_index]:
         yaml_file_path = base_dir_path + rel_yaml_file_path
 
         # Get the yaml dictionary data
@@ -79,7 +79,7 @@ for master_index in range(len(yaml_master_list)):
         f.close()
         for item in range(0, len(yaml_data['properties'])):
             tmp_data = yaml_data['properties'][item]['name']
-            inventory_dict[str(inventory_items[master_index])].append(tmp_data)
+            inventory_dict[str(inventory_items[inv_index])].append(tmp_data)
 
 # Pretty print json formatter
 data = json.dumps(inventory_dict,
