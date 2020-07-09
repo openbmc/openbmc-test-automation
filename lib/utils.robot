@@ -496,14 +496,14 @@ Get Endpoint Paths
     # Make sure path ends with slash.
     ${path}=  Add Trailing Slash  ${path}
 
-    ${resp}=  Read Properties  ${path}enumerate  timeout=30
+    ${resp}=  Read Properties  ${path}enumerate  timeout=30  quiet=${1}
     Log Dictionary  ${resp}
 
     ${list}=  Get Dictionary Keys  ${resp}
     # For a given string, look for prefix and suffix for matching expression.
     # Start of string followed by zero or more of any character followed by
     # any digit or lower case character.
-    ${resp}=  Get Matches  ${list}  regexp=^.*[0-9a-z_].${endpoint}\[0-9a-z]*$
+    ${resp}=  Get Matches  ${list}  regexp=^.*[0-9a-z_].${endpoint}\[_0-9a-z]*$  case_insensitive=${True}
 
     [Return]  ${resp}
 
