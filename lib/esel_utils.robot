@@ -63,12 +63,12 @@ Verify eSEL Entries
 
 Check For Error Logs
     [Documentation]  Fail if there are error logs. Ignore logs with
-    ...              severity in the whitelist.
+    ...              severity in the ignorelist.
 
-    [Arguments]  ${whitelist}
+    [Arguments]  ${ignorelist
 
     # Description of Argument(s):
-    # whitelist  A list to be used to filter out esels which are
+    # ignorelist A list to be used to filter out esels which are
     #            of no interest to the caller.
     #            Error Logs with Severity field matching an
     #            entry in this list will be ignored. (e.g.
@@ -82,8 +82,8 @@ Check For Error Logs
 
     # Get a list of the severities of the error logs.
     ${error_log_severities}=  Nested Get  Severity  ${error_logs}
-    # Subtract the WHITELIST from the error_log_severities.
+    # Subtract the IGNORETLIST from the error_log_severities.
     ${problem_error_logs}=  Evaluate
-    ...  list(set($error_log_severities) - set($whitelist))
+    ...  list(set($error_log_severities) - set($ignorelist)
 
     Valid Length  problem_error_logs   max_length=0
