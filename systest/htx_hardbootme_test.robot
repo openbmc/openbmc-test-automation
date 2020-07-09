@@ -64,7 +64,7 @@ ${PREV_INV_FILE_PATH}        NONE
 ${rest_keyword}              REST
 
 # Error log Severities to ignore when checking Error Logs.
-@{ESEL_WHITELIST}
+@{ESEL_IGNORE_LIST}
 ...  xyz.openbmc_project.Logging.Entry.Level.Informational
 
 
@@ -219,7 +219,7 @@ Loop HTX Health Check
     [Documentation]  Run until HTX exerciser fails.
     Repeat Keyword  ${HTX_DURATION}
     ...  Run Keywords  Check HTX Run Status
-    ...  AND  Check For Error Logs  ${ESEL_WHITELIST}
+    ...  AND  Check For Error Logs  ${ESEL_IGNORE_LIST}
     ...  AND  Sleep  ${HTX_INTERVAL}
 
 

@@ -19,7 +19,7 @@ ${POLL_DURATION}  48 hours
 ${POLL_INTERVAL}  10 second
 
 # Error log Severities to ignore when checking Error Logs.
-@{ESEL_WHITELIST}
+@{ESEL_IGNORE_LIST}
 ...  xyz.openbmc_project.Logging.Entry.Level.Informational
 
 
@@ -42,7 +42,7 @@ Enumerate Sensors And Check For Errors
 
     Redfish.Get  /redfish/v1/Chassis/chassis/Sensors
 
-    Check For Error Logs  ${ESEL_WHITELIST}
+    Check For Error Logs  ${ESEL_IGNORE_LIST}
 
 
 Suite Setup Execution
