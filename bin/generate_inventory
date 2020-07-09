@@ -90,7 +90,7 @@ data = json.dumps(inventory_dict,
 
 # Check if there is mismatch in data vs expect list
 if len(inventory_dict) != len(inventory_items):
-    print_error("The generated list doesn't match Master Inventory List.\n")
+    print_error("The generated list doesn't match Inventory List.\n")
     print (data)
     print_var(inventory_items)
     sys.exit()
