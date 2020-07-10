@@ -100,6 +100,32 @@ Disable UseNTPServers Via Redfish And Verify
     UseNTPServers         ${False}
 
 
+Enable Multiple Properties via Redfish And Verify
+   [Documentation]  Enable multiple properties via Redfish and verify.
+   [Tags]  Enable_Multiple_Properties_Via_Redfish_And_Verify
+   [Teardown]  Run Keywords  Restore Configuration
+   ...  AND  FFDC On Test Case Fail
+   [Template]  Apply Ethernet Config
+
+   # property            Value
+   UseDNSServers         ${True}
+   UseDomainName         ${True}
+   UseNTPServers         ${True}
+
+
+Disable Multiple Properties via Redfish And Verify
+   [Documentation]  Disable multiple properties via Redfish and verify.
+   [Tags]  Disable_Multiple_Properties_Via_Redfish_And_Verify
+   [Teardown]  Run Keywords  Restore Configuration
+   ...  AND  FFDC On Test Case Fail
+   [Template]  Apply Ethernet Config
+
+   # property            Value
+   UseDNSServers         ${False}
+   UseDomainName         ${False}
+   UseNTPServers         ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
