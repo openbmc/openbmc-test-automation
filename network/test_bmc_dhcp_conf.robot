@@ -9,6 +9,28 @@ Library                ../lib/bmc_network_utils.py
 Suite Setup            Suite Setup Execution
 Suite Teardown         Redfish.Logout
 
+*** Variables ***
+
+&{dhcp_enable_dict}                DHCPEnabled=${True}
+&{dhcp_disable_dict}               DHCPEnabled=${False}
+
+&{dns_enable_dict}                 UseDNSServers=${True}
+&{dns_disable_dict}                UseDNSServers=${False}
+
+&{ntp_enable_dict}                 UseNTPServers=${True}
+&{ntp_disable_dict}                UseNTPServers=${False}
+
+&{domain_name_enable_dict}         UseDomainName=${True}
+&{domain_name_disable_dict}        UseDomainName=${False}
+
+&{enable_multiple_properties}      UseDomainName=${True}
+...                                UseNTPServers=${True}
+...                                UseDNSServers=${True}
+
+&{disable_multiple_properties}     UseDomainName=${False}
+...                                UseNTPServers=${False}
+...                                UseDNSServers=${False}
+
 *** Test Cases ***
 
 Enable DHCP Via Redfish And Verify
@@ -18,8 +40,8 @@ Enable DHCP Via Redfish And Verify
     ...  AND  FFDC On Test Case Fail
     [Template]  Apply Ethernet Config
 
-    # property            Value
-    DHCPEnabled           ${True}
+    # property
+    ${dhcp_enable_dict}
 
 
 Disable DHCP Via Redfish And Verify
@@ -29,8 +51,8 @@ Disable DHCP Via Redfish And Verify
     ...  AND  FFDC On Test Case Fail
     [Template]  Apply Ethernet Config
 
-    # property            Value
-    DHCPEnabled           ${False}
+    # property
+    ${dhcp_disable_dict}
 
 
 Enable UseDNSServers Via Redfish And Verify
@@ -40,8 +62,8 @@ Enable UseDNSServers Via Redfish And Verify
     ...  AND  FFDC On Test Case Fail
     [Template]  Apply Ethernet Config
 
-    # property            Value
-    UseDNSServers         ${True}
+    # property
+    ${dns_enable_dict}
 
 
 Disable UseDNSServers Via Redfish And Verify
@@ -51,9 +73,8 @@ Disable UseDNSServers Via Redfish And Verify
     ...  AND  FFDC On Test Case Fail
     [Template]  Apply Ethernet Config
 
-    # property            Value
-    UseDNSServers         ${False}
-
+    # property
+    ${dns_disable_dict}
 
 Enable UseDomainName Via Redfish And Verify
     [Documentation]  Enable UseDomainName via Redfish and verify.
@@ -62,9 +83,8 @@ Enable UseDomainName Via Redfish And Verify
     ...  AND  FFDC On Test Case Fail
     [Template]  Apply Ethernet Config
 
-    # property            Value
-    UseDomainName         ${True}
-
+    # property
+    ${domain_name_enable_dict}
 
 
 Disable UseDomainName Via Redfish And Verify
@@ -74,8 +94,8 @@ Disable UseDomainName Via Redfish And Verify
     ...  AND  FFDC On Test Case Fail
     [Template]  Apply Ethernet Config
 
-    # property            Value
-    UseDomainName         ${False}
+    # property
+    ${domain_name_disable_dict}
 
 
 Enable UseNTPServers Via Redfish And Verify
@@ -85,8 +105,8 @@ Enable UseNTPServers Via Redfish And Verify
     ...  AND  FFDC On Test Case Fail
     [Template]  Apply Ethernet Config
 
-    # property            Value
-    UseNTPServers         ${True}
+    # property
+    ${ntp_enable_dict}
 
 
 Disable UseNTPServers Via Redfish And Verify
@@ -96,8 +116,30 @@ Disable UseNTPServers Via Redfish And Verify
     ...  AND  FFDC On Test Case Fail
     [Template]  Apply Ethernet Config
 
-    # property            Value
-    UseNTPServers         ${False}
+    # property
+    ${ntp_disable_dict}
+
+
+Enable Multiple Properties via Redfish And Verify
+   [Documentation]  Enable multiple properties via Redfish and verify.
+   [Tags]  Enable_Multiple_Properties_Via_Redfish_And_Verify
+   [Teardown]  Run Keywords  Restore Configuration
+   ...  AND  FFDC On Test Case Fail
+   [Template]  Apply Ethernet Config
+
+    # property
+    ${enable_multiple_properties}
+
+
+Disable Multiple Properties via Redfish And Verify
+   [Documentation]  Disable multiple properties via Redfish and verify.
+   [Tags]  Disable_Multiple_Properties_Via_Redfish_And_Verify
+   [Teardown]  Run Keywords  Restore Configuration
+   ...  AND  FFDC On Test Case Fail
+   [Template]  Apply Ethernet Config
+
+    # property
+    ${disable_multiple_properties}
 
 
 *** Keywords ***
@@ -156,18 +198,42 @@ Restore Configuration
 
 Apply Ethernet Config
    [Documentation]  Set the given Ethernet config property.
-   [Arguments]  ${property}   ${value}
+   [Arguments]  ${property}
 
    # Description of argument(s):
    # property   Ethernet property to be set..
-   # value      Value to be set. E.g. True or False.
 
    ${active_channel_config}=  Get Active Channel Config
    Redfish.Patch
    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
-   ...  body={"DHCPv4":{"${property}":${value}}}
+   ...  body={"DHCPv4":${property}}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
    ${resp}=  Redfish.Get
    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-   Should Be Equal As Strings  ${resp.dict["DHCPv4"]["${property}"]}  ${value}
+   Verify Ethernet Config Property  ${property}  ${resp.dict["DHCPv4"]}
+
+Verify Ethernet Config Property
+    [Documentation]  verify ethernet config properties.
+    [Arguments]  ${property}  ${response_data}
+
+    # Description of argument(s):
+    # ${property}       DHCP Properties in dictionary.
+    # Example:
+    # property         value
+    # DHCPEnabled      :False
+    # UseDomainName    :True
+    # UseNTPServers    :True
+    # UseDNSServers    :True
+    # ${response_data}  DHCP Response data in dictionary.
+    # Example:
+    # property         value
+    # DHCPEnabled      :False
+    # UseDomainName    :True
+    # UseNTPServers    :True
+    # UseDNSServers    :True
+
+   ${key_map}=  Get Dictionary Items  ${property}
+   FOR  ${key}  ${value}  IN  @{key_map}
+      Should Be Equal As Strings  ${response_data['${key}']}  ${value}
+   END
 
