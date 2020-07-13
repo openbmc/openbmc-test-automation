@@ -196,7 +196,7 @@ Test IPMI Restriction Mode
     # }
 
     # Refer to: #openbmc/phosphor-host-ipmid/blob/master/host-ipmid-whitelist.conf
-    # Set the restriction mode to Whitelist IPMI commands only:
+    # Set the restriction mode to Allowed list IPMI commands only:
     # /xyz/openbmc_project/control/host0/restriction_mode/attr/RestrictionMode
     # {
     #    "data": "xyz.openbmc_project.Control.Security.RestrictionMode.Modes.Whitelist",
@@ -206,10 +206,10 @@ Test IPMI Restriction Mode
 
     Set IPMI Restriction Mode  xyz.openbmc_project.Control.Security.RestrictionMode.Modes.Whitelist
 
-    # Attempt white-listed operation expecting success.
+    # Attempt allowed listed operation expecting success.
     IPMI Power On
 
-    # Attempt non white-listed operation expecting failure.
+    # Attempt non allowed listed operation expecting failure.
     Run Keyword And Expect Error  *Insufficient privilege level*
     ...  Run Inband IPMI Standard Command  lan set 1 access on
 
