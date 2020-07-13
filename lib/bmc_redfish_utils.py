@@ -5,6 +5,7 @@ BMC redfish utility functions.
 """
 
 import json
+import re
 from robot.libraries.BuiltIn import BuiltIn
 import gen_print as gp
 
@@ -81,6 +82,25 @@ class bmc_redfish_utils(object):
 
         resp = self._redfish_.get(resource_path)
         return resp.dict
+
+    def get_endpoint_path_list(self, resource_path, end_point_prefix):
+        r"""
+        Returns list with entries ending in "/endpoint".
+
+        Description of argument(s):
+        resource_path      URI resource base path (e.g. "/redfish/v1/Chassis/").
+        end_point_prefix   Name of the enpoint (e.g. 'Power').
+
+        Find all list entries ending in "/endpoint" combination such as
+        /redfish/v1/Chassis/<foo>/Power
+        /redfish/v1/Chassis/<bar>/Power
+        """
+
+        end_point_list = self.list_request(resource_path)
+
+        # Regex to match entries ending in "/prefix" with optional underscore.
+        regex = ".*/" + end_point_prefix + "[_]?[0-9]*?"
+        return [x for x in end_point_list if re.match(regex, x, re.IGNORECASE)]
 
     def get_target_actions(self, resource_path, target_attribute):
         r"""
