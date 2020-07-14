@@ -315,14 +315,35 @@ Verify Power Reading Using IPMI And Redfish
 
     ${ipmi_reading}=  Get IPMI Power Reading
 
-    ${power}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
-    ${redfish_reading}=  Set Variable  ${power['PowerControl'][0]['PowerConsumedWatts']}
+    ${power_uri_list}=  redfish_utils.Get Members URI  /redfish/v1/Chassis/  PowerControl
+    Log List  ${power_uri_list}
 
-    ${ipmi_redfish_power_diff}=
-    ...  Evaluate  abs(${redfish_reading} - ${ipmi_reading['instantaneous_power_reading']})
+    # Power entries could be seen across different redfish path, remove the URI
+    # where the attribute is non-existent.
+    # Example:
+    #     ['/redfish/v1/Chassis/chassis/Power',
+    #      '/redfish/v1/Chassis/motherboard/Power']
+    FOR  ${idx}  IN  @{power_uri_list}
+        ${power}=  redfish_utils.Get Attribute  ${idx}  PowerControl
+        Log Dictionary  ${power[0]}
 
-    Should Be True  ${ipmi_redfish_power_diff} <= ${allowed_power_diff}
-    ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
+        # Ensure the path does have the attribute else set to EMPTY as default to skip.
+        ${status}=  Get Variable Value  ${power[0]['PowerConsumedWatts']}  ${EMPTY}
+        Run Keyword If  "${status}" == "${EMPTY}"
+        ...  Remove Values From List  ${power_uri_list}  ${idx}
+
+        # Check the next available element in the list.
+        Continue For Loop If  "${status}" == "${EMPTY}"
+
+        ${ipmi_redfish_power_diff}=
+        ...  Evaluate  abs(${${power[0]['PowerConsumedWatts']}} - ${ipmi_reading['instantaneous_power_reading']})
+        Should Be True  ${ipmi_redfish_power_diff} <= ${allowed_power_diff}
+        ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
+    END
+
+    # Double check, the validation has atleast one valid path.
+    Should Not Be Empty  ${power_uri_list}
+    ...  msg=Should contain atleast one element in the list.
 
 
 Verify Power Reading Via Raw Command
