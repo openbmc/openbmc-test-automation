@@ -25,7 +25,7 @@ PLDM_PLATFORM_CMDS = ['57(SetStateEffecterStates)', '81(GetPDR)']
 PLDM_BIOS_CMDS = ['1(GetBIOSTable)', '7(SetBIOSAttributeCurrentValue)',
                   '8(GetBIOSAttributeCurrentValueByHandle)', '12(GetDateTime)',
                   '13(SetDateTime)']
-PLDM_FRU_CMDS = ['1(GetFRURecordTableMetadata)', '2(GetFRURecordTable)']
+PLDM_FRU_CMDS = ['1(GetFRURecordTableMetadata)', '2(GetFRURecordTable)', '4(GetFRURecordByOption)']
 PLDM_OEM_CMDS = ['1(GetFileTable)', '4(ReadFile)', '5(WriteFile)', '6(ReadFileInToMemory)',
                  '7(WriteFileFromMemory)', '8(ReadFileByTypeIntoMemory)',
                  '9(WriteFileByTypeFromMemory)', '10(NewFileAvailable)',
