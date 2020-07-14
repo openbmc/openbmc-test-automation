@@ -123,4 +123,3 @@ class resource_variables():
 
     xpath_health_menu = "//button[@aria-controls='health-menu']"
 
-
