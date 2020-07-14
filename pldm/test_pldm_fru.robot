@@ -32,3 +32,33 @@ Verify GetFruRecordTableMetadata
     Valid Range  ${pldm_output['frutablelength']}  1
     Valid Range  ${pldm_output['total_number_of_records_in_table']}  1
     Valid Range  ${pldm_output['total_number_of_record_set_identifiers_in_table']}  1
+
+Verify GetFruRecordTable
+    [Documentation]  Verify GetFruRecordTable response message.
+    [Tags]  Verify_GetFruRecordTable
+
+    ${pldm_output}=  Pldmtool  fru GetFruRecordTable
+    Should Not Be Empty  ${pldm_output}
+    #TODO: Verify the fru table content.
+
+Verify GetFRURecordByOption
+    [Documentation]  Verify GetFRURecordByOption response message for
+    ...              the available FRU record identifier.
+    [Tags]  Verify_GetFRURecordByOption
+
+    # pldm_output:
+    # [fru_record_set_identifier]:                    2
+    # [fru_record_type]:                              1(General)
+    # [number_of_fru_fields]:                         4
+    # [encoding_type_for_fru_fields]:                 1(ASCII)
+    # [     fru_field_type]:                              Name
+    # [     fru_field_length]:                            12
+    # [     fru_field_value]:                             BMC PLANAR
+
+    ${pldm_output}=  Pldmtool  fru GetFruRecordTableMetadata
+    ${fru_rec_id}=  Convert To Integer  ${pldm_output['total_number_of_record_set_identifiers_in_table']}
+    FOR   ${i}  IN RANGE  ${fru_rec_id+1}
+       ${pldm_output}=  Run Keyword  Pldmtool  fru GetFRURecordByOption -i ${i} -r 0 -f 0
+       Run Keyword  Rprint Vars  pldm_output
+       Should Not Be Empty  ${pldm_output}
+    END

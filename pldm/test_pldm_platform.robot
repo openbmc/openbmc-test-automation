@@ -26,7 +26,6 @@ Verify GetPDR
        ${record_handle}=  Set Variable  ${next_record_handle}
     END
 
-
 Verify SetStateEffecterStates
     [Documentation]  Verify set state effecter states response message.
     [Tags]  Verify_SetStateEffecterStates
@@ -80,7 +79,7 @@ Verify GetPDR For Record Handle
     #       GetPDR type 'PLDM_STATE_SENSOR_PDR' Dev implementation is still in progress
     #       TODO: Verify output of GetPDR type 'PLDM_STATE_SENSOR_PDR'
     Run Keyword If  ${pldm_output['pdrtype']} == ${PLDM_PDR_TYPES['PLDM_STATE_EFFECTER_PDR']}
-    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_SETSTATEEFFECTER}
+    ...  Log To Console  "Found PDR Type - PLDM_STATE_EFFECTER_PDR"
     ...  ELSE IF  ${pldm_output['pdrtype']} == ${PLDM_PDR_TYPES['PLDM_PDR_FRU_RECORD_SET']}
     ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER}
     ...  ELSE IF  ${pldm_output['pdrtype']} == ${PLDM_PDR_TYPES['PLDM_PDR_ENTITY_ASSOCIATION']}
