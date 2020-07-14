@@ -83,6 +83,37 @@ class bmc_redfish_utils(object):
         resp = self._redfish_.get(resource_path)
         return resp.dict
 
+    def get_members_uri(self, resource_path, attribute):
+        r"""
+        Returns the list of valid path which has a given attribute.
+
+        Description of argument(s):
+        resource_path            URI resource base path (e.g.
+                                 '/redfish/v1/Systems/',
+                                 '/redfish/v1/Chassis/').
+        attribute                Name of the attribute (e.g. 'PowerSupplies').
+        """
+
+        # Get the member id list.
+        # e.g. ['/redfish/v1/Chassis/foo', '/redfish/v1/Chassis/bar']
+        resource_path_list = self.get_member_list(resource_path)
+        BuiltIn().log_to_console(resource_path_list)
+
+        valid_path_list = []
+
+        for path_idx in resource_path_list:
+            # Get all the child object path under the member id e.g.
+            # ['/redfish/v1/Chassis/foo/Power','/redfish/v1/Chassis/bar/Power']
+            child_path_list = self.list_request(path_idx)
+            BuiltIn().log_to_console(child_path_list)
+
+            # Iterate and check if path object has the attribute.
+            for child_path_idx in child_path_list:
+                if self.get_attribute(child_path_idx, attribute):
+                    valid_path_list.append(child_path_idx)
+
+        return valid_path_list
+
     def get_endpoint_path_list(self, resource_path, end_point_prefix):
         r"""
         Returns list with entries ending in "/endpoint".
