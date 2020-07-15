@@ -110,6 +110,10 @@ class bmc_redfish_utils(object):
 
             # Iterate and check if path object has the attribute.
             for child_path_idx in child_path_list:
+                if ('JsonSchemas' in child_path_idx)\
+                       or ('SessionService' in child_path_idx)\
+		               or ('#' in child_path_idx):
+                    continue
                 if self.get_attribute(child_path_idx, attribute):
                     valid_path_list.append(child_path_idx)
 
