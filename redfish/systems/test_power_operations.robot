@@ -36,9 +36,33 @@ Verify Redfish BMC PowerOn
     # TODO: Replace OCC state check with redfish property when available.
     Verify OCC State
 
-    ${power_control}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_POWER_URI}  PowerControl
-    Rprint Vars   power_control
-    Valid Dict  power_control[${0}]  ['PowerConsumedWatts']
+    ${power_uri_list}=  redfish_utils.Get Members URI  /redfish/v1/Chassis/  PowerControl
+    Log List  ${power_uri_list}
+
+    # Power entries could be seen across different redfish path, remove the URI
+    # where the attribute is non-existent.
+    # Example:
+    #     ['/redfish/v1/Chassis/chassis/Power',
+    #      '/redfish/v1/Chassis/motherboard/Power']
+    FOR  ${idx}  IN  @{power_uri_list}
+        ${power_control}=  redfish_utils.Get Attribute  ${idx}  PowerControl
+        Log Dictionary  ${power_control[0]}
+
+        # Ensure the path does have the attribute else set to EMPTY as default to skip.
+        ${value}=  Get Variable Value  ${power_control[0]['PowerConsumedWatts']}  ${EMPTY}
+        Run Keyword If  "${value}" == "${EMPTY}"
+        ...  Remove Values From List  ${power_uri_list}  ${idx}
+
+        # Check the next available element in the list.
+        Continue For Loop If  "${value}" == "${EMPTY}"
+
+        Valid Dict  power_control[${0}]  ['PowerConsumedWatts']
+
+    END
+
+    # Double check, the validation has atleast one valid path.
+    Should Not Be Empty  ${power_uri_list}
+    ...  msg=Should contain atleast one element in the list.
 
 
 Verify Redfish BMC GracefulRestart
