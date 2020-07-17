@@ -62,7 +62,35 @@ Verify MAC Address Property Is Populated
     [Documentation]  Verify BMC managers resource properties.
     [Tags]  Verify_MAC_Address_Property_Is_Populated
 
-    ${redfish_mac_addr}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0  MACAddress
+    # Get OrderedDict from the BMC which contains active ethernet channel.
+    # Example: ([('1', {'name': 'eth0',
+    #                   'is_valid': True,
+    #                   'active_sessions': 0,
+    #                   'channel_info': {'medium_type': 'lan-802.3',
+    #                                    'protocol_type': 'ipmb-1.0',
+    #                                    'session_supported': 'multi-session',
+    #                                    'is_ipmi': True
+    #                                   }
+    #                  }
+    #          )])
+
+    ${active_channel_config}=  Get Active Channel Config
+
+    FOR  ${channel_number}  IN  @{active_channel_config.keys()}
+        Log Dictionary  ${active_channel_config["${channel_number}"]}
+
+        # Get ethernet valid paths in redfish.
+        # Example: ['/redfish/v1/Managers/bmc/EthernetInterfaces']
+        ${eth_interface}=  redfish_utils.Get Endpoint Path List
+        ...  /redfish/v1/Managers/  EthernetInterfaces
+
+        # Get the MACAddress attrivute value with the 'name': 'eth0'.
+        # Example: /redfish/v1/Managers/bmc/EthernetInterfaces/eth0
+        ${redfish_mac_addr}=  Redfish.Get Attribute
+        ...  ${eth_interface[0]}/${active_channel_config["${channel_number}"]["name"]}
+        ...  MACAddress
+    END
+
     Rprint Vars  redfish_mac_addr  fmt=terse
     Valid Value  redfish_mac_addr
 
