@@ -124,3 +124,7 @@ class resource_variables():
     # New GUI variables
     xpath_login_button = "//button[@type='submit']"
     xpath_logout_button = "//button[@id='app-header-logout']"
+
+    # New GUI variables for access-control sub-menu
+    xpath_access_control_menu = "//button[@aria-controls='access-control-menu']"
+    xpath_local_user_management_sub_menu = "//a[@href='#/access-control/local-user-management']"
