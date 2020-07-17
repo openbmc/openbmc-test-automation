@@ -675,6 +675,22 @@ Redfish Set Power Restore Policy
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
+Set Auto Reboot Setting
+    [Documentation]  Set the given auto reboot setting (REST or Redfish).
+    [Arguments]  ${value}
+
+    # This is to cater to boot call points and plugin script which will always
+    # send using value 0 or 1. This dictionary maps to redfish string values.
+    ${rest_redfish_dict}=  Create Dictionary
+    ...                    1=RetryAttempts
+    ...                    0=Disabled
+
+    Run Keyword If  ${REDFISH_REST_SUPPORTED} == ${TRUE}
+    ...    Set Auto Reboot  ${value}
+    ...  ELSE
+    ...    Redfish Set Auto Reboot  ${rest_redfish_dict["${value}"]}
+
+
 Set Auto Reboot
     [Documentation]  Set the given auto reboot setting.
     [Arguments]  ${setting}
@@ -682,6 +698,7 @@ Set Auto Reboot
     # Description of argument(s):
     # setting    The reboot setting, 1 for enabling and 0 for disabling.
 
+    Log To Console  \n Set Auto Reboot
     ${valueDict}=  Convert To Integer  ${setting}
     ${data}=  Create Dictionary  data=${valueDict}
     Write Attribute  ${CONTROL_HOST_URI}/auto_reboot  AutoReboot   data=${data}
@@ -695,6 +712,8 @@ Redfish Set Auto Reboot
 
     # Description of argument(s):
     # setting    The reboot setting, "RetryAttempts" and "Disabled".
+
+    Log To Console  \n Redfish Set Auto Reboot
 
     Redfish.Patch  /redfish/v1/Systems/system  body={"Boot": {"AutomaticRetryConfig": "${setting}"}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
