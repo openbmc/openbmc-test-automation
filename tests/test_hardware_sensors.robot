@@ -8,7 +8,7 @@ Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/ipmi_client.robot
 Variables       ../data/ipmi_raw_cmd_table.py
 
-Suite Setup     Suite Setup Execution
+#Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
 
 *** Test Cases ***
@@ -37,30 +37,37 @@ Verify System Ambient Temperature
 Verify Fan Sensors Attributes
    [Documentation]  Check fan attributes.
    [Tags]  Verify_Fan_Sensor_Attributes
+
    # Example:
-   # /xyz/openbmc_project/sensors/fan_tach/fan0
-   # /xyz/openbmc_project/sensors/fan_tach/fan1
-   # /xyz/openbmc_project/sensors/fan_tach/fan2
-   # /xyz/openbmc_project/sensors/fan_tach/fan3
+   # "/xyz/openbmc_project/sensors/fan_tach/fan0_0",
+   # "/xyz/openbmc_project/sensors/fan_tach/fan0_1",
+   # "/xyz/openbmc_project/sensors/fan_tach/fan1_0",
+   # "/xyz/openbmc_project/sensors/fan_tach/fan1_1",
+   # "/xyz/openbmc_project/sensors/fan_tach/fan2_0",
+   # "/xyz/openbmc_project/sensors/fan_tach/fan2_1",
+   # "/xyz/openbmc_project/sensors/fan_tach/fan3_0",
+   # "/xyz/openbmc_project/sensors/fan_tach/fan3_1"
+
    ${fans}=  Get Endpoint Paths  /xyz/openbmc_project/sensors/  fan*
 
    # Access the properties of the fan and it should contain
    # the following entries:
-   # /xyz/openbmc_project/sensors/fan_tach/fan0
+   # /xyz/openbmc_project/sensors/fan_tach/fan0_0
    # {
-   #     "Scale": 0,
-   #     "Target": 0,
+   #     "Functional": true,
+   #     "MaxValue": 0.0,
+   #     "MinValue": 0.0,
+   #     "Target": 10500,
    #     "Unit": "xyz.openbmc_project.Sensor.Value.Unit.RPMS",
-   #     "Value": 0
+   #     "Value": 0.0
    # }
 
    FOR  ${entry}  IN  @{fans}
      ${resp}=  OpenBMC Get Request  ${entry}
      ${json}=  To JSON  ${resp.content}
-     Should Be True  ${json["data"]["Scale"]} >= 0
      Run Keyword And Ignore Error  Should Be True  ${json["data"]["Target"]} >= 0
-     Should Be Equal As Strings  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.RPMS
-     Should Be True  ${json["data"]["Value"]} >= 0
+     Should Be True
+     ...   ${json["data"]["MinValue"]} <= ${json["data"]["Value"]} <= ${json["data"]["MaxValue"]}
    END
 
 Verify PCIE Sensors Attributes
