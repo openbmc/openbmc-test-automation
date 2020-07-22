@@ -109,9 +109,9 @@ Get VMI Network Interface Details
     # Description of argument(s):
     # valid_status_code  Expected valid status code from GET request.
 
-    # Note: It returns a dictionary of VMI intf0 parameters.
+    # Note: It returns a dictionary of VMI eth0 parameters.
 
-    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
     ...  valid_status_codes=[${valid_status_code}]
 
     ${ip_resp}=  Evaluate  json.loads('''${resp.text}''')  json
@@ -139,7 +139,7 @@ Get Immediate Child Parameter From VMI Network Interface
     # parameter          parameter for which value is required. Ex: DHCPEnabled, MACAddress etc.
     # valid_status_code  Expected valid status code from GET request.
 
-    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
     ...  valid_status_codes=[${valid_status_code}]
 
     ${ip_resp}=  Evaluate  json.loads('''${resp.text}''')  json
@@ -163,9 +163,9 @@ Verify VMI EthernetInterfaces
     ${interfaces}=  Set Variable  ${resp["Members"]}
 
     Should Be Equal As Strings  ${interfaces[0]}[@odata.id]
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
     Should Be Equal As Strings  ${interfaces[1]}[@odata.id]
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf1
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth1
 
     Should Be Equal  ${resp["Members@odata.count"]}  ${2}
 
@@ -208,7 +208,7 @@ Set Static IPv4 Address To VMI
     ${data}=  Set Variable
     ...  {"IPv4StaticAddresses": [{"Address": "${ip}","SubnetMask": "${netmask}","Gateway": "${gateway}"}]}
 
-    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0  body=${data}
+    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=${data}
     ...  valid_status_codes=[${valid_status_code}]
     Redfish Power On  stack_mode=skip
     Log To Console  ${resp.text}
@@ -247,7 +247,7 @@ Delete VMI IPv4 Address
     # valid_status_code  Expected valid status code from PATCH request. Default is HTTP_OK.
 
     ${data}=  Set Variable  {"${delete_param}": [${Null}]}
-    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0  body=${data}
+    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=${data}
     ...  valid_status_codes=[${valid_status_code}]
 
 
@@ -260,7 +260,7 @@ Set VMI IPv4 Origin
     # valid_status_code  Expected valid status code from PATCH request. Default is HTTP_OK.
 
     ${data}=  Set Variable If  ${dhcp_enabled} == ${False}  ${DISABLE_DHCP}  ${ENABLE_DHCP}
-    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/intf0  body=${data}
+    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=${data}
     ...  valid_status_codes=[${valid_status_code}]
 
 
