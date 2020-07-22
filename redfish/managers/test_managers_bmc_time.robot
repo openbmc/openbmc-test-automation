@@ -166,7 +166,7 @@ Verify Immediate Consumption Of BMC Date
     [Documentation]  Verify immediate change in BMC date time.
     [Tags]  Verify_Immediate_Consumption_Of_BMC_Date
     [Setup]  Run Keywords  Set Time To Manual Mode  AND
-    ...  Sleep  2s  AND  Redfish Set DateTime  valid_status_codes=[${HTTP_OK}]
+    ...  Redfish Set DateTime  valid_status_codes=[${HTTP_OK}]
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Redfish Set DateTime  valid_status_codes=[${HTTP_OK}]
     [Template]  Set BMC Date And Verify
@@ -211,7 +211,7 @@ Redfish Set DateTime
     ...  '${date_time}' == '${EMPTY}'  Get Current Date  time_zone=UTC
     ...  ELSE
     ...  Set Variable  ${date_time}
-    Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
+    Wait Until Keyword Succeeds  1min  5sec  Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}
     ...  &{kwargs}
 
 
