@@ -156,7 +156,7 @@ def get_version_tar(tar_file_path):
         if content.find(b"version=") == -1:
             # This tar member does not contain the version.
             continue
-        content = content.decode("utf-8").split("\n")
+        content = content.decode("utf-8", "ignore").split("\n")
         content = [x for x in content if "version=" in x]
         version = content[0].split("=")[-1]
         break
