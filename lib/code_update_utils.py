@@ -9,6 +9,7 @@ import re
 import sys
 import tarfile
 import time
+from robot.libraries.BuiltIn import BuiltIn
 
 robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
 repo_data_path = re.sub('/lib', '/data', robot_pgm_dir_path)
@@ -151,12 +152,15 @@ def get_version_tar(tar_file_path):
     version = ""
     tar = tarfile.open(tar_file_path)
     for member in tar.getmembers():
+        BuiltIn().log_to_console(member.name)
+        if member.name != "MANIFEST":
+            continue
         f = tar.extractfile(member)
         content = f.read()
         if content.find(b"version=") == -1:
             # This tar member does not contain the version.
             continue
-        content = content.decode("utf-8").split("\n")
+        content = content.decode("utf-8", "ignore").split("\n")
         content = [x for x in content if "version=" in x]
         version = content[0].split("=")[-1]
         break
