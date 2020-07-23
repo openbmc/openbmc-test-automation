@@ -94,7 +94,7 @@ CMD_SETSTATEEFFECTERSTATES = 'platform SetStateEffecterStates -i %s -c %s -d %s'
 RESPONSE_DICT_GETPDR_SETSTATEEFFECTER = {
     'responsecount': ['29', '30'],
     'pdrheaderversion': ['1'],
-    'pdrtype': ['11'],
+    'pdrtype': ['State Effecter PDR(11)'],
     'recordchangenumber': ['0'],
     'datalength': ['19', '20'],
     'pldmterminushandle': ['0'],
@@ -106,14 +106,15 @@ RESPONSE_DICT_GETPDR_SETSTATEEFFECTER = {
     'effecterinit': ['0'],
     'effecterdescriptionpdr': ['false'],
     'compositeeffectercount': ['1'],
-    'statesetid': ['196', '260', '129'],
+    'statesetid': ['Boot Progress(196)',
+                   'System Power State(260)', 'Software Termination Status(129)'],
     'possiblestatessize': ['1', '2'],
     'possiblestates': ['6', '0', '64']}
 
 RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER = {
     'responsecount': ['20'],
     'pdrheaderversion': ['1'],
-    'pdrtype': ['20'],
+    'pdrtype': ['FRU Record Set PDR(20)'],
     'recordchangenumber': ['0'],
     'datalength': ['10'],
     'pldmterminushandle': ['0', '2'],
@@ -121,12 +122,12 @@ RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER = {
                    'Management Controller', 'OEM', 'Power converter',
                    'System (logical)', 'System chassis (main enclosure)',
                    'Chassis front panel board (control panel)',
-                   'Processor Module', 'Memory Module'],
+                   'Processor Module', 'Memory Module', 'Power Supply'],
     'containerid': ['0', '1', '2', '3']}
 
 RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION = {
     'pdrheaderversion': ['1'],
-    'pdrtype': ['15'],
+    'pdrtype': ['Entity Association PDR(15)'],
     'recordchangenumber': ['0'],
     'containerid': ['1', '2', '3'],
     'associationtype': ['Physical'],
@@ -134,12 +135,20 @@ RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION = {
                             'System chassis (main enclosure)']
 }
 
+RESPONSE_DICT_GETPDR_STATESENSORPDR = {
+    'entitytype': ['Communication Channel', 'Connector'],
+    'sensorinit': ['noInit'],
+    'sensorauxiliarynamespdr': ['false'],
+    'statesetid': ['Availability(2)', 'Configuration State(15)']
+}
+
 PLDM_PDR_TYPES = {
-    'PLDM_STATE_EFFECTER_PDR': '11',
-    'PLDM_PDR_FRU_RECORD_SET': '20',
-    'PLDM_PDR_ENTITY_ASSOCIATION': '15',
-    'PLDM_STATE_SENSOR_PDR': '4',
-    'PLDM_NUMERIC_EFFECTER_PDR': '9'}
+    'PLDM_STATE_EFFECTER_PDR': 'State Effecter PDR(11)',
+    'PLDM_PDR_FRU_RECORD_SET': 'FRU Record Set PDR(20)',
+    'PLDM_PDR_ENTITY_ASSOCIATION': 'Entity Association PDR(15)',
+    'PLDM_STATE_SENSOR_PDR': 'State Sensor PDR(4)',
+    'PLDM_NUMERIC_EFFECTER_PDR': 'Numeric Effecter PDR(9)',
+    'PLDM_TERMINUS_LOCATOR_PDR': 'Terminus Locator PDR(1)'}
 
 RESPONSE_LIST_GETBIOSTABLE_STRTABLE = [
     'Allowed', 'Disabled', 'Enabled', 'IPv4DHCP', 'IPv4Static', 'Not Allowed',
