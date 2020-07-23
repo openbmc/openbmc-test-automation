@@ -594,6 +594,7 @@ Get ApplyTime
     # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
     ${system_applytime}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}UpdateService  HttpPushUriOptions
+
     [Return]  ${system_applytime["HttpPushUriApplyTime"]["ApplyTime"]}
 
 
@@ -607,6 +608,8 @@ Verify Get ApplyTime
     ${system_applytime}=  Get ApplyTime  ${policy}
     Valid Value  system_applytime  ['${policy}']
 
+    [Return]  ${system_applytime}
+
 
 Set ApplyTime
     [Documentation]  Set and verify the firmware "ApplyTime" policy.
@@ -617,7 +620,8 @@ Set ApplyTime
 
     Redfish.Patch  ${REDFISH_BASE_URI}UpdateService
     ...  body={'HttpPushUriOptions' : {'HttpPushUriApplyTime' : {'ApplyTime' : '${policy}'}}}
-    Verify Get ApplyTime  ${policy}
+    ${apply_time}=  Verify Get ApplyTime  ${policy}
+
     Rprint Vars  apply_time
 
 
