@@ -139,6 +139,7 @@ class resource_variables():
     xpath_reboot_bmc_sub_menu = "//a[@href='#/control/reboot-bmc']"
     xpath_server_led_sub_menu = "//a[@href='#/control/server-led']"
     xpath_server_power_operations_sub_menu = "//a[@href='#/control/server-power-operations']"
+    xpath_sol_sub_menu = "//a[@href='#/control/serial-over-lan']"
 
     # xpath for configuration menu
     xpath_server_configuration = "//button[@aria-controls='configuration-menu']"
@@ -150,3 +151,7 @@ class resource_variables():
     xpath_save_settings_button = "//button[contains(text(),'Save settings')]"
     xpath_local_user_management_sub_menu = "//a[@href='#/access-control/local-user-management']"
     xpath_ssl_certificates_sub_menu = "//a[@href='#/access-control/ssl-certificates']"
+
+    # xpath for control menu
+    xpath_control_menu = "//button[@aria-controls='control-menu']"
+    xpath_sol_sub_menu = "//a[@href='#/control/serial-over-lan']"
