@@ -594,6 +594,7 @@ Get ApplyTime
     # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
     ${system_applytime}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}UpdateService  HttpPushUriOptions
+
     [Return]  ${system_applytime["HttpPushUriApplyTime"]["ApplyTime"]}
 
 
@@ -605,6 +606,7 @@ Verify Get ApplyTime
     # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
     ${system_applytime}=  Get ApplyTime  ${policy}
+    Rprint Vars  system_applytime
     Valid Value  system_applytime  ['${policy}']
 
 
@@ -618,7 +620,6 @@ Set ApplyTime
     Redfish.Patch  ${REDFISH_BASE_URI}UpdateService
     ...  body={'HttpPushUriOptions' : {'HttpPushUriApplyTime' : {'ApplyTime' : '${policy}'}}}
     Verify Get ApplyTime  ${policy}
-    Rprint Vars  apply_time
 
 
 Get Image Version From TFTP Server
