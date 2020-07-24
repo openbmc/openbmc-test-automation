@@ -3,21 +3,22 @@ Documentation     Test root user expire password.
 
 Resource          ../lib/resource.robot
 Resource          ../gui/lib/resource.robot
-Resource          ../lib/bmc_redfish_resource.robot
 Resource          ../lib/ipmi_client.robot
 Library           ../lib/bmc_ssh_utils.py
 Library           SSHLibrary
 
-Suite Setup       Suite Setup Execution
-Suite Teardown    Suite Teardown Execution
+*** Variables ***
 
-Test Teardown     Test Teardown Execution
+# If user re-tries more than 5 time incorrectly, the user gets locked for 5 minutes.
+${default_lockout_duration}   ${300}
+
 
 *** Test Cases ***
 
 Expire Root Password And Check IPMI Access Fails
     [Documentation]   Expire root user password and expect an error while access via IPMI.
     [Tags]  Expire_Root_Password_And_Check_IPMI_Access_Fails
+    [Teardown]  Test Teardown Execution
 
     Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
 
@@ -31,6 +32,7 @@ Expire Root Password And Check IPMI Access Fails
 Expire Root Password And Check SSH Access Fails
     [Documentation]   Expire root user password and expect an error while access via SSH.
     [Tags]  Expire_Root_Password_And_Check_SSH_Access_Fails
+    [Teardown]  Test Teardown Execution
 
     Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
@@ -90,7 +92,6 @@ Expire And Change Root User Password Via Redfish And Verify
    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
    Should Contain  ${output}  password expiry information changed
 
-
    Redfish.Login
    Verify Root Password Expired
    # Change to a valid password.
@@ -146,9 +147,26 @@ Expire And Change Root Password Via GUI
     Redfish.Login  ${OPENBMC_USERNAME}  0penBmc123
 
 
+Verify Maximum Failed Attempts And Check Root User Account Locked
+    [Documentation]  Verify maximum failed attempts and locks out root user account.
+    [Tags]  Verify_Maximum_Failed_Attempts_And_Check_Root_User_Account_Locked
+
+    # Make maximum failed login attempts.
+    Repeat Keyword  ${5} times
+    ...  Run Keyword And Expect Error  InvalidCredentialsError*  Redfish.Login  root  0penBmc123
+
+    # Verify that legitimate login fails due to lockout.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+    # Wait for lockout duration to expire and then verify that login works.
+    Sleep  ${default_lockout_duration}s
+    Redfish.Login
+
+
 *** Keywords ***
 
-Suite Setup Execution
+Test Setup Execution
    [Documentation]  Suite setup  execution.
 
    Redfish.login
@@ -171,15 +189,9 @@ Test Teardown Execution
 
     Redfish.Login
     Wait Until Keyword Succeeds  1 min  10 sec  Restore Default Password For Root User
-    FFDC On Test Case Fail
-
-
-Suite Teardown Execution
-    [Documentation]  Do suite teardown task.
-
-    Redfish.login
     Redfish.Patch  /redfish/v1/AccountService/  body={"AccountLockoutThreshold": 5}
     Redfish.Logout
+    FFDC On Test Case Fail
 
 Verify Root Password Expired
     [Documentation]  Checking whether root password expired or not.
