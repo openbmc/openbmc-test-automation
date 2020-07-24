@@ -41,6 +41,10 @@ Redfish BMC Code Update
     ${image_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
     Rprint Vars  image_version
 
+    ${bmc_release_info}=  Get BMC Release Info
+    ${functional_version}=  Set Variable  ${bmc_release_info['version_id']}
+    Rprint Vars  functional_version
+
     Run Keyword If  not ${FORCE_UPDATE}
     ...  Activate Existing Firmware  ${image_version}
     Redfish Update Firmware
