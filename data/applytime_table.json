@@ -3,7 +3,15 @@
         "OnReset": "Redfish OBMC Reboot (off)",
         "Immediate": "Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}"
     },
+    "BMC update": {
+        "OnReset": "Redfish OBMC Reboot (off)",
+        "Immediate": "Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}"
+    },
     "Host image": {
+        "OnReset": "RF SYS GracefulRestart",
+        "Immediate": "Wait State  os_running_match_state  10 mins"
+    },
+    "Host update": {
         "OnReset": "RF SYS GracefulRestart",
         "Immediate": "Wait State  os_running_match_state  10 mins"
     }
