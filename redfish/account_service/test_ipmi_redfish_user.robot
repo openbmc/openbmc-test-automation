@@ -34,6 +34,9 @@ Create Admin Redfish User And Verify Login Via IPMI
     Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
+    # Delay added for created new user password to get set.
+    Sleep  5s
+
     Verify IPMI Username And Password  ${random_username}  ${valid_password}
 
 

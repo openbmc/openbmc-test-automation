@@ -133,6 +133,9 @@ Verify Setting IPMI User With Invalid Password
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  user set password ${random_userid} ${invalid_password}
 
+    # Delay added for user password to get set.
+    Sleep  5s
+
     Should Contain  ${msg}  Set User Password command failed
 
 Verify Setting IPMI Root User With New Name
@@ -345,6 +348,9 @@ Verify IPMI Root User Password Change
     # Set new password for root user.
     Run IPMI Standard Command
     ...  user set password ${root_userid} ${valid_password}
+
+    # Delay added for user password to get set.
+    Sleep  5s
 
     # Verify that root user is able to run IPMI command using new password.
     Wait Until Keyword Succeeds  15 sec  5 sec  Verify IPMI Username And Password
