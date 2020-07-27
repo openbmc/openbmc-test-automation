@@ -265,6 +265,7 @@ Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Redfish.Login
+    Sleep  5s
 
 
 Test Teardown Execution

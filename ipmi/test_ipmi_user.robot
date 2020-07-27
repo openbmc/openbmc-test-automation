@@ -1,4 +1,4 @@
-*** Settings ***
+ *** Settings ***
 Documentation       Test suite for OpenBMC IPMI user management.
 
 Resource            ../lib/ipmi_client.robot
@@ -590,6 +590,7 @@ Set User Password And Verify
 Test Teardown Execution
     [Documentation]  Do the test teardown execution.
 
+    Sleep  5s
     FFDC On Test Case Fail
 
 
