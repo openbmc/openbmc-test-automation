@@ -263,6 +263,71 @@ Verify Power Sensors Attributes
      Should Be True  ${json["data"]["Value"]} >= 0
    END
 
+
+Verify Voltage Sensors Attributes
+   [Documentation]  Check voltage sensors attributes.
+   [Tags]  Verify_Voltage_Sensor_Attributes
+
+   # Example:
+   # "/xyz/openbmc_project/sensors/voltage/voltage0",
+   # "/xyz/openbmc_project/sensors/volatge/voltage_1",
+   # "/xyz/openbmc_project/sensors/voltage/VOLTAGE_2",
+   # "/xyz/openbmc_project/sensors/voltage/VOLTAGE1",
+   # "/xyz/openbmc_project/sensors/voltage/voltage".
+
+   ${voltage}=  Get Endpoint Paths  /xyz/openbmc_project/sensors/voltage/  *
+
+   # Access the properties of the voltage sensors and it should contain
+   # the following entries:
+   # /xyz/openbmc_project/sensors/voltage/voltage0
+   # {
+   #     "MaxValue": 255.0,
+   #     "MinValue": 0.0,
+   #     "Unit": xyz.openbmc_project.Sensor.Value.Unit.Volts
+   #     "Value": 0.0
+   # }
+
+   FOR  ${entry}  IN  @{voltage}
+     ${resp}=  OpenBMC Get Request  ${entry}
+     ${json}=  To JSON  ${resp.content}
+     Run Keyword And Ignore Error  Should Be Equal As Strings
+     ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.Volts
+     Run Keyword And Ignore Error  Should Be True  ${json["data"]["Value"]} >= 0
+   END
+
+
+Verify Current Sensors Attributes
+   [Documentation]  Check current sensors attributes.
+   [Tags]  Verify_Current_Sensor_Attributes
+
+   # Example:
+   # "/xyz/openbmc_project/sensors/current/current0",
+   # "/xyz/openbmc_project/sensors/current/current_1",
+   # "/xyz/openbmc_project/sensors/current/CURRENT_2",
+   # "/xyz/openbmc_project/sensors/current/CURRENT1",
+   # "/xyz/openbmc_project/sensors/current/current".
+
+   ${current}=  Get Endpoint Paths  /xyz/openbmc_project/sensors/  curr*
+
+   # Access the properties of the current sensors and it should contain
+   # the following entries:
+   # /xyz/openbmc_project/sensors/current/current0
+   # {
+   #     "MaxValue": 255.0,
+   #     "MinValue": 0.0,
+   #     "Unit": xyz.openbmc_project.Sensor.Value.Unit.Amperes
+   #     "Value": 0.0
+   # }
+
+   FOR  ${entry}  IN  @{current}
+     ${resp}=  OpenBMC Get Request  ${entry}
+     ${json}=  To JSON  ${resp.content}
+     Run Keyword And Ignore Error  Should Be Equal As Strings
+     ...  ${json["data"]["Unit"]}  xyz.openbmc_project.Sensor.Value.Unit.Amperes
+     Should Be True  ${json["data"]["Value"]} >= 0
+   END
+
+
 Verify Power Redundancy Using REST
    [Documentation]  Verify power redundancy is enabled.
    [Tags]  Verify_Power_Redundancy_Using_REST
