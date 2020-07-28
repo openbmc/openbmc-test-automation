@@ -75,27 +75,31 @@ Verify GetPDR For Record Handle
     ${pldm_cmd}=  Evaluate  $CMD_GETPDR % ${record_handle}
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Rprint Vars  pldm_output
+
     # Note: Output of GetPDR type 'PLDM_NUMERIC_EFFECTER_PDR' has dynamic content
     #       hence just checking pdrtype only
     #       GetPDR type 'PLDM_STATE_SENSOR_PDR' Dev implementation is still in progress
     #       TODO: Verify output of GetPDR type 'PLDM_STATE_SENSOR_PDR'
+
     Run Keyword If  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_STATE_EFFECTER_PDR']}'
-    ...  Run Keywords  Log To Console  "Found PDR Type - PLDM_STATE_EFFECTER_PDR"  AND
+    ...  Log To Console  "Found PDR Type - PLDM_STATE_EFFECTER_PDR"
+
+    ...  ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_PDR_FRU_RECORD_SET']}'
     ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER}
 
-    ...    ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_PDR_ENTITY_ASSOCIATION']}'
-    ...    Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION}
+    ...  ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_PDR_ENTITY_ASSOCIATION']}'
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION}
 
-    ...    ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_STATE_SENSOR_PDR']}'
-    ...    Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_STATESENSORPDR}
+    ...  ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_STATE_SENSOR_PDR']}'
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_STATESENSORPDR}
 
-    ...    ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_NUMERIC_EFFECTER_PDR']}'
-    ...    Log To Console  "Found PDR Type - PLDM_NUMERIC_EFFECTER_PDR"
+    ...  ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_NUMERIC_EFFECTER_PDR']}'
+    ...  Log To Console  "Found PDR Type - PLDM_NUMERIC_EFFECTER_PDR"
 
-    ...    ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_TERMINUS_LOCATOR_PDR']}'
-    ...    Log To Console  "Found PDR Type - PLDM_TERMINUS_LOCATOR_PDR"
+    ...  ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_TERMINUS_LOCATOR_PDR']}'
+    ...  Log To Console  "Found PDR Type - PLDM_TERMINUS_LOCATOR_PDR"
 
-    ...    ELSE  Fail  msg="Unknown PDR Type is received"
+    ...  ELSE  Fail  msg="Unknown PDR Type is received"
 
     Should be equal as strings  ${pldm_output['recordhandle']}  ${record_handle}
     [Return]  ${pldm_output['nextrecordhandle']}
