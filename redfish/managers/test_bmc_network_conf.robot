@@ -235,7 +235,7 @@ Add First Octet Threshold IP And Verify
     [Documentation]  Add first octet threshold IP and verify.
     [Tags]  Add_First_Octet_Threshold_IP_And_Verify
     [Teardown]  Run Keywords
-    ...  Delete IP Address  233.7.7.7  AND  Test Teardown Execution
+    ...  Delete IP Address  223.7.7.7  AND  Test Teardown Execution
 
      Add IP Address  223.7.7.7  ${test_subnet_mask}  ${test_gateway}
 
