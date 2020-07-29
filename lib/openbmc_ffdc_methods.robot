@@ -284,7 +284,7 @@ Log FFDC Get Requests
 
     FOR  ${cmd}  IN  @{cmd_list}
       ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
-      ${resp}=  OpenBMC Get Request  ${cmd[1]}  quiet=${1}
+      ${resp}=  OpenBMC Get Request  ${cmd[1]}  quiet=${1}  timeout=${30}
       ${status}=  Run Keyword and Return Status  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
       Run Keyword If  '${status}' == '${False}'  Continue For Loop
       ${jsondata}=  to json  ${resp.content}  pretty_print=True
@@ -507,7 +507,7 @@ Collect Dump Log
     [Documentation]  Collect dumps from dump entry.
     [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
 
-    ${data}=  Read Properties  ${DUMP_ENTRY_URI}enumerate  quiet=${1}
+    ${data}=  Read Properties  ${DUMP_ENTRY_URI}enumerate  quiet=${1}  timeout=${30}
 
     # Grab the list of entries from dump/entry/
     # The data shown below is the result of the "Get Dictionary Keys".
