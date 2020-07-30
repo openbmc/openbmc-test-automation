@@ -12,9 +12,24 @@ import var_funcs as vf
 import collections
 import re
 import ipaddress
+import subprocess
 from robot.libraries.BuiltIn import BuiltIn
 import json
 import bmc_ssh_utils as bsu
+
+ip_regex = r"\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}"
+
+
+def get_running_system_ip():
+    r"""
+    Get the IP address of server from which robot code is running.
+    """
+
+    stdout = subprocess.check_output("ifconfig", shell=True)
+    stdout = stdout.decode("utf-8")
+    ip_list = re.findall(ip_regex, stdout)
+
+    return ip_list
 
 
 def netmask_prefix_length(netmask):
