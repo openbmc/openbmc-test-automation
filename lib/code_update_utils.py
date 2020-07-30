@@ -10,6 +10,7 @@ import sys
 import tarfile
 import time
 from robot.libraries.BuiltIn import BuiltIn
+import collections
 
 robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
 repo_data_path = re.sub('/lib', '/data', robot_pgm_dir_path)
@@ -20,6 +21,17 @@ import gen_robot_keyword as keyword
 import gen_print as gp
 import variables as var
 from robot.libraries.BuiltIn import BuiltIn
+
+
+def get_bmc_firmware(imagetype, swdict):
+
+    tempdict = collections.OrderedDict()
+    for key, value in swdict.items():
+        if value['image_type'] == imagetype:
+             tempdict[key] = value
+        else:
+             pass
+    return tempdict
 
 
 def verify_no_duplicate_image_priorities(image_purpose):
