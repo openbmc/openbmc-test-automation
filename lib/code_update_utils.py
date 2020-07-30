@@ -9,6 +9,7 @@ import re
 import sys
 import tarfile
 import time
+import collections
 from robot.libraries.BuiltIn import BuiltIn
 
 robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
@@ -20,6 +21,24 @@ import gen_robot_keyword as keyword
 import gen_print as gp
 import variables as var
 from robot.libraries.BuiltIn import BuiltIn
+
+
+def get_bmc_firmware(imagetype, swdict):
+    r"""
+    Get the dictionary of image based on image type like either BMC or Host.
+
+    Description of argument(s):
+    imagetype                     This value is reither BMC type or host type.
+    swdict                        This contains dictionay of firmware inventory information.
+    """
+
+    tempdict = collections.OrderedDict()
+    for key, value in swdict.items():
+        if value['image_type'] == imagetype:
+            tempdict[key] = value
+        else:
+            pass
+    return tempdict
 
 
 def verify_no_duplicate_image_priorities(image_purpose):
