@@ -19,6 +19,7 @@ Resource                 ../../lib/utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/var_funcs.py
 Library                  ../../lib/gen_robot_keyword.py
+Library                  ../../lib/code_update_utils.py
 
 Suite Setup              Suite Setup Execution
 Suite Teardown           Redfish.Logout
@@ -53,6 +54,15 @@ Redfish BMC Code Update
     ...  Activate Existing Firmware  ${image_version}
     Redfish Update Firmware
 
+
+Redfish Firmware Update Loop
+    [Documentation]  Update the firmware image in loop.
+    [Tags]  Redfish_Firmware_Update_Loop
+    [Template]  Redfish Firmware Update In Range
+
+    ${LOOP_COUNT}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -64,6 +74,70 @@ Suite Setup Execution
     Run Keyword And Ignore Error  Redfish Purge Event Log
     # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
+
+
+Redfish Firmware Update In Range
+    [Documentation]  Update the firmware in range.
+    [Arguments]  ${LOOP_COUNT}
+
+    ${before_fuc_image}=  Get BMC Functional Firmware
+    FOR  ${time}  IN RANGE  ${LOOP_COUNT}
+      Print Timen  *************************************
+      Print Timen  The Current Loop Count is ${time}
+      Print Timen  *************************************
+      Redfish.Login
+      Redfish Update Firmware
+      ${sw_inv}=  Get Functional Firmware  BMC update
+      ${non_sw_inv}=  Get Non Fucntional Firmware  ${sw_inv}  False
+      Run Keyword If  ${non_sw_inv['functional']} == False
+      ...  Activate Existing Firmware  ${non_sw_inv['version']}
+      Redfish.Login
+      ${sw_inv}=  Get Functional Firmware  BMC update
+      ${non_sw_inv}=  Get Non Fucntional Firmware  ${sw_inv}  False
+      #Redfish.Delete  /redfish/v1/UpdateService/FirmwareInventory/${non_sw_inv['image_id']}
+      Delete BMC Image
+    END
+    ${after_fuc_image}=  Get BMC Functional Firmware
+    Valid Value  before_fuc_image["version"]  ['${after_fuc_image["version"]}'] 
+
+Get BMC Functional Firmware
+    [Documentation]
+    [Arguments]
+
+    ${sw_inv}=  Get Functional Firmware  BMC update
+    ${sw_inv}=  Get Non Fucntional Firmware  ${sw_inv}  True
+
+    [Return]  ${sw_inv}
+    
+Get Functional Firmware
+    [Documentation]
+    [Arguments]  ${type}
+
+    ${software_inventory}=  Get Software Inventory State
+    ${bmc_inv}=  Get BMC Firmware  ${type}  ${software_inventory}
+    [Return]  ${bmc_inv}
+
+
+Get Non Fucntional Firmware
+    [Documentation]
+    [Arguments]  ${sw_inv}  ${value}
+
+    ${resp}=  Filter Struct  ${sw_inv}  [('functional', ${value})]
+    ${resp}=  Get Dictionary Values  ${resp}
+    ${num_records}=  Get Length  ${resp}
+
+    Return From Keyword If  ${num_records} == ${0}  ${EMPTY}
+
+    [Return]  ${resp}[0]
+
+
+Delete BMC Image
+    [Documentation]  Delete a BMC image from the BMC flash chip.
+    [Tags]  Delete_BMC_Image
+
+    ${software_object}=  Get Non Running BMC Software Object
+    Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
+
 
 Activate Existing Firmware
     [Documentation]  Set fimware image to lower priority.
@@ -90,7 +164,7 @@ Activate Existing Firmware
     Print Timen  The existing ${image_version} firmware is not yet functional.
     Set BMC Image Priority To Least  ${image_version}  ${software_inventory_record}
 
-    Pass Execution  The existing ${image_version} firmware is now functional.
+    Print Timen  The existing ${image_version} firmware is now functional.
 
 
 Get Image Priority
