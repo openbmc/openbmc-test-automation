@@ -9,6 +9,7 @@ import re
 import sys
 import tarfile
 import time
+import subprocess
 from robot.libraries.BuiltIn import BuiltIn
 
 robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
@@ -20,6 +21,15 @@ import gen_robot_keyword as keyword
 import gen_print as gp
 import variables as var
 from robot.libraries.BuiltIn import BuiltIn
+
+
+def get_running_system_ip():
+   r"""
+   Get the IP address from which robot code is running.
+   """
+
+   stdout = subprocess.check_output("hostname  -I | cut -f1 -d' '",shell=True) 
+   return stdout
 
 
 def verify_no_duplicate_image_priorities(image_purpose):
