@@ -19,6 +19,7 @@ Resource                 ../../lib/utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/var_funcs.py
 Library                  ../../lib/gen_robot_keyword.py
+Library                  ../../lib/code_update_utils.py
 
 Suite Setup              Suite Setup Execution
 Suite Teardown           Redfish.Logout
@@ -30,7 +31,7 @@ Force Tags               BMC_Code_Update
 *** Variables ***
 
 ${FORCE_UPDATE}          ${0}
-
+${LOOP_COUNT}            20
 
 *** Test Cases ***
 
@@ -53,6 +54,15 @@ Redfish BMC Code Update
     ...  Activate Existing Firmware  ${image_version}
     Redfish Update Firmware
 
+
+Redfish Firmware Update Loop
+    [Documentation]  Update the firmware image in loop.
+    [Tags]  Redfish_Firmware_Update_Loop
+    [Template]  Redfish Firmware Update In Loop
+
+    ${LOOP_COUNT}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -64,6 +74,78 @@ Suite Setup Execution
     Run Keyword And Ignore Error  Redfish Purge Event Log
     # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
+
+
+Redfish Firmware Update In Loop
+    [Documentation]  Update the firmware in loop.
+    [Arguments]  ${LOOP_COUNT}
+
+    # Description of argument(s):
+    # LOOP_COUNT    This value is used to run the firmware update in loop.
+
+    ${before_image_state}=  Get BMC Functional Firmware
+    FOR  ${count}  IN RANGE  ${LOOP_COUNT}
+      Print Timen  **************************************
+      Print Timen  * The Current Loop Count is ${count} *
+      Print Timen  **************************************
+      Redfish Update Firmware
+      ${sw_inv}=  Get Functional Firmware  BMC update
+      ${nonfunctional_sw_inv}=  Get Non Fucntional Firmware  ${sw_inv}  False
+      Run Keyword If  ${nonfunctional_sw_inv['functional']} == False
+      ...  Activate Existing Firmware  ${nonfunctional_sw_inv['version']}
+      Redfish.Login
+      ${sw_inv}=  Get Functional Firmware  BMC update
+      ${nonfunctional_sw_inv}=  Get Non Fucntional Firmware  ${sw_inv}  False
+      Delete BMC Image
+    END
+    ${after_image_state}=  Get BMC Functional Firmware
+    Valid Value  before_image_state["version"]  ['${after_image_state["version"]}']
+
+
+Get BMC Functional Firmware
+    [Documentation]  Get BMC functional firmware details.
+
+    ${sw_inv}=  Get Functional Firmware  BMC update
+    ${sw_inv}=  Get Non Fucntional Firmware  ${sw_inv}  True
+
+    [Return]  ${sw_inv}
+
+
+Get Functional Firmware
+    [Documentation]  Get all the BMC firmware details.
+    [Arguments]  ${image_type}
+
+    # Description of argument(s):
+    # image_type    Image value can be either BMC update or Host update.
+
+    ${software_inventory}=  Get Software Inventory State
+    ${bmc_inv}=  Get BMC Firmware  ${image_type}  ${software_inventory}
+    [Return]  ${bmc_inv}
+
+
+Get Non Fucntional Firmware
+    [Documentation]  Get BMC non functional fimware details.
+    [Arguments]  ${sw_inv}  ${functional_sate}
+
+    # Description of argument(s):
+    # sw_inv           This dictionay contains all the BMC fimware details.
+    # functional_sate  Functional state can be either True or False.
+
+    ${resp}=  Filter Struct  ${sw_inv}  [('functional', ${functional_sate})]
+    ${resp}=  Get Dictionary Values  ${resp}
+    ${num_records}=  Get Length  ${resp}
+
+    Return From Keyword If  ${num_records} == ${0}  ${EMPTY}
+
+    [Return]  ${resp}[0]
+
+
+Delete BMC Image
+    [Documentation]  Delete a BMC image from the BMC flash chip.
+
+    ${software_object}=  Get Non Running BMC Software Object
+    Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
+
 
 Activate Existing Firmware
     [Documentation]  Set fimware image to lower priority.
@@ -90,7 +172,7 @@ Activate Existing Firmware
     Print Timen  The existing ${image_version} firmware is not yet functional.
     Set BMC Image Priority To Least  ${image_version}  ${software_inventory_record}
 
-    Pass Execution  The existing ${image_version} firmware is now functional.
+    Print Timen  The existing ${image_version} firmware is now functional.
 
 
 Get Image Priority
