@@ -570,7 +570,7 @@ def get_state(openbmc_host="",
     state = DotDict()
     if need_rest:
         cmd_buf = ["Read Properties", SYSTEM_STATE_URI + "enumerate",
-                   "quiet=${" + str(quiet) + "}"]
+                   "quiet=${" + str(quiet) + "}", "timeout=30"]
         gp.dprint_issuing(cmd_buf)
         status, ret_values = \
             BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
