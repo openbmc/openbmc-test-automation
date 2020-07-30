@@ -18,7 +18,7 @@ Get Software Functional State
 
     ${image_info}=  Redfish.Get Properties  /redfish/v1/UpdateService/FirmwareInventory/${image_id}
 
-    ${sw_functional}=  Run Keyword If  '${image_info["Description"]}' == 'BMC image'
+    ${sw_functional}=  Run Keyword If  '${image_info["Description"]}'
     ...    Redfish.Get Attribute  /redfish/v1/Managers/bmc  FirmwareVersion
     ...  ELSE
     ...    Redfish.Get Attribute  /redfish/v1/Systems/system  BiosVersion
@@ -113,11 +113,15 @@ Redfish Upload Image And Check Progress State
 
     ${manifest}  ${stderr}  ${rc}=  BMC Execute Command  cat /tmp/images/${image_id}/MANIFEST
     Rprint Vars  manifest
+    Sleep  5s
 
-    Check Image Update Progress State
-    ...  match_state='Disabled', 'Updating'  image_id=${image_id}
+    Wait Until Keyword Succeeds  1 min  00 sec
+    ...  Check Image Update Progress State
+    ...    match_state='Disabled', 'Updating'  image_id=${image_id}
+
     # Wait a few seconds to check if the update progress started.
     Sleep  5s
+
     Check Image Update Progress State
     ...  match_state='Updating'  image_id=${image_id}
 
