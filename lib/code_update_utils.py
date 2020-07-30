@@ -9,6 +9,7 @@ import re
 import sys
 import tarfile
 import time
+import subprocess
 from robot.libraries.BuiltIn import BuiltIn
 
 robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
@@ -20,6 +21,20 @@ import gen_robot_keyword as keyword
 import gen_print as gp
 import variables as var
 from robot.libraries.BuiltIn import BuiltIn
+
+ip_regex = r"\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}"
+
+
+def get_running_system_ip():
+    r"""
+    Get the IP address from which robot code is running.
+    """
+
+    stdout = subprocess.check_output("ifconfig", shell=True)
+    stdout = stdout.decode("utf-8")
+    ip_list = re.findall(ip_regex, stdout)
+
+    return ip_list
 
 
 def verify_no_duplicate_image_priorities(image_purpose):
