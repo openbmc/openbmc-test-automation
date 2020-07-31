@@ -224,7 +224,7 @@ Update LDAP Group Name And Verify Operations
     [Teardown]  Restore LDAP Privilege
 
     # group_name             group_privilege  valid_status_codes
-    ${GROUP_NAME}            Administrator    [${HTTP_OK}]
+    ${GROUP_NAME}            Administrator    [${HTTP_OK}, ${HTTP_NO_CONTENT}]
     ${GROUP_NAME}            Operator         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     ${GROUP_NAME}            ReadOnly         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     ${GROUP_NAME}            NoAccess         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
@@ -410,6 +410,7 @@ Verify LDAP Authentication With Invalid LDAP User
     [Documentation]  Verify that LDAP user authentication for user not exist
     ...  in LDAP server and fails.
     [Tags]  Verify_LDAP_Authentication_With_Invalid_LDAP_User
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     ${status}=  Run Keyword And Return Status  Redfish.Login  INVALID_LDAP_USER
     ...  ${LDAP_USER_PASSWORD}
