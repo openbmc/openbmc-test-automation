@@ -580,7 +580,7 @@ Acquire And Release Lock
     # new_sess_req     Create a new session before acquiring a lock if True.
 
     # Delete the session.
-    Run Keyword If  ${new_sess_req} == ${True}  Delete All Redfish Sessions
+    Run Keyword If  ${new_sess_req} == ${True}  Run Keyword And Ignore Error  Delete All Redfish Sessions
 
     # Get REST session to BMC.
     Run Keyword If  ${new_sess_req} == ${True}  Create New Session
@@ -622,7 +622,7 @@ Test Teardown Execution
     [Documentation]  Test teardown execution.
 
     FFDC On Test Case Fail
-    Delete All Redfish Sessions
+    Run Keyword And Ignore Error  Delete All Redfish Sessions
 
 
 Return Session Id And Session Key
