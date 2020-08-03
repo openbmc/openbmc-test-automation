@@ -6,10 +6,10 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/bmc_redfish_utils.robot
 
-Suite Setup      Delete All Redfish Sessions
+Suite Setup      Run Keyword And Ignore Error  Delete All Redfish Sessions
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
-Suite Teardown   Delete All Redfish Sessions
+Suite Teardown   Run Keyword And Ignore Error  Delete All Redfish Sessions
 
 *** Variables ***
 
