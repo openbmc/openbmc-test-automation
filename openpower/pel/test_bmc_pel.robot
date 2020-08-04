@@ -15,6 +15,16 @@ Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 ${CMD_INTERNAL_FAILURE}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
+${CMD_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.Timeout
+...  xyz.openbmc_project.Logging.Entry.Level.Error 2 "TIMEOUT_IN_MSEC" "5"
+...  "CALLOUT_INVENTORY_PATH" "/xyz/openbmc_project/inventory/system/chassis/motherboard"
+
+${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} org.open_power.Logging.Error.TestError1
+...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 
@@ -270,6 +280,74 @@ Verify BMC Event Log ID
     Valid Value  pel_bmc_event_log_id  ['${redfish_event_logs['Members'][0]['Id']}']
 
 
+Verify FRU Callout
+    [Documentation]  Verify FRU callout from PEL log.
+    [Tags]  Verify_FRU_Callout
+
+    Create Test PEL Log  FRU Callout
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_callout_section}=  Get PEL Field Value  ${id}  Primary SRC  Callout Section
+
+    # Example of PEL Callout Section from "peltool -i <id>" command.
+    #  [Callouts]:
+    #    [0]:
+    #      [FRU Type]:                                 Maintenance Procedure Required
+    #      [Priority]:                                 Mandatory, replace all with this type as a unit
+    #      [Procedure Number]:                         BMCSP01
+    #  [Callout Count]:                                1
+
+    Valid Value  pel_callout_section['Callout Count']  ['1']
+    Valid Value  pel_callout_section['Callouts'][0]['FRU Type']  ['Maintenance Procedure Required']
+    Should Contain  ${pel_callout_section['Callouts'][0]['Priority']}  Mandatory
+    # Verify if "Procedure Number" field of PEL has alphanumeric value.
+    Should Match Regexp  ${pel_callout_section['Callouts'][0]['Procedure Number']}  [a-zA-Z0-9]
+
+    # Verify if "PEL callout inventory path" field of PEL has correct inventory path.
+    ${pel_callout_inventory_path}=  Get PEL Field Value  ${id}  User Data 1  CALLOUT_INVENTORY_PATH
+    Valid Value  pel_callout_inventory_path  ['/xyz/openbmc_project/inventory/system/chassis/motherboard']
+
+
+Verify Procedure And Symbolic FRU Callout
+    [Documentation]  Verify procedure and symbolic FRU callout from PEL log.
+    [Tags]  Verify_Procedure_And_Symbolic_FRU_Callout
+
+    Create Test PEL Log   Procedure And Symbolic FRU Callout
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_callout_section}=  Get PEL Field Value  ${id}  Primary SRC  Callout Section
+
+    # Example of PEL Callout Section from "peltool -i <id>" command.
+    #  [Callouts]:
+    #    [0]:
+    #      [Priority]:                                 Mandatory, replace all with this type as a unit
+    #      [Procedure Number]:                         BMCSP02
+    #      [FRU Type]:                                 Maintenance Procedure Required
+    #    [1]:
+    #      [Priority]:                                 Medium Priority
+    #      [Part Number]:                              SVCDOCS
+    #      [FRU Type]:                                 Symbolic FRU
+    #  [Callout Count]:                                2
+
+    Valid Value  pel_callout_section['Callout Count']  ['2']
+
+    # Verify procedural callout info.
+
+    Valid Value  pel_callout_section['Callouts'][0]['FRU Type']  ['Maintenance Procedure Required']
+    Should Contain  ${pel_callout_section['Callouts'][0]['Priority']}  Mandatory
+    # Verify if "Procedure Number" field of PEL has an alphanumeric value.
+    Should Match Regexp  ${pel_callout_section['Callouts'][0]['Procedure Number']}  [a-zA-Z0-9]
+
+    # Verify procedural callout info.
+
+    Valid Value  pel_callout_section['Callouts'][1]['FRU Type']  ['Symbolic FRU']
+    Should Contain  ${pel_callout_section['Callouts'][1]['Priority']}  Medium Priority
+    # Verify if "Part Number" field of Symbolic FRU has an alphanumeric value.
+    Should Match Regexp  ${pel_callout_section['Callouts'][1]['Part Number']}  [a-zA-Z0-9]
+
+
 Verify Delete All PEL
     [Documentation]  Verify deleting all PEL logs.
     [Tags]  Verify_Delete_All_PEL
@@ -286,6 +364,10 @@ Verify Delete All PEL
 
 Create Test PEL Log
     [Documentation]  Generate test PEL log.
+    [Arguments]  ${pel_type}=Internal Failure
+
+    # Description of argument(s):
+    # pel_type      The PEL type (e.g. Internal Failure, FRU Callout, Procedural Callout).
 
     # Test PEL log entry example:
     # {
@@ -301,7 +383,12 @@ Create Test PEL Log
     #    }
     # }
 
-    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+    Run Keyword If  '${pel_type}' == 'Internal Failure'
+    ...   BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+    ...  ELSE IF  '${pel_type}' == 'FRU Callout'
+    ...   BMC Execute Command  ${CMD_FRU_CALLOUT}
+    ...  ELSE IF  '${pel_type}' == 'Procedure And Symbolic FRU Callout'
+    ...   BMC Execute Command  ${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}
 
 
 Get PEL Log IDs
