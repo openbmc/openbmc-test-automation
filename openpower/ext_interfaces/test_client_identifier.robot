@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation     Test KYC feature on BMC.
+Documentation     Test client identifier feature on BMC.
 
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/openbmc_ffdc.robot
@@ -12,7 +12,7 @@ Library           ../../lib/code_update_utils.py
 Library           ../../lib/gen_robot_valid.py
 
 Suite Setup       Redfish.Login
-Suite Teardown    Delete All Redfish Sessions
+Suite Teardown    Suite Teardown Execution
 Test Setup        Printn
 Test Teardown     FFDC On Test Case Fail
 
@@ -27,10 +27,27 @@ Redfish Session With ClientID
    #ClientID
    12345
    123456
-   HMCID-01
-   HMCID-02
+   EXTERNAL-CLIENT-01
+   EXTERNAL-CLIENT-02
+
+
+Check Redfish Session With ClientID Persistency
+   [Documentation]  Create a session with client id and verify client id is same after the reboot.
+   [Tags]  Check_Redfish_Session_With_ClientID_Persistency
+   [Template]  Redfish Persistence Session With ClientID
+
+   #ClientID
+   12345
+   EXTERNAL-CLIENT-01
 
 *** Keywords ***
+
+Suite Teardown Execution
+    [Documentation]  Suite teardown execution.
+
+    Delete All Redfish Sessions
+    Redfish.Logout
+
 
 Create Redfish Session With ClientID
     [Documentation]  Create redifish session with client id.
@@ -38,7 +55,7 @@ Create Redfish Session With ClientID
 
     # Description of argument(s):
     # client_id    This client id can contain string value
-    #              (e.g. 12345, "HMCID").
+    #              (e.g. 12345, "EXTERNAL-CLIENT").
 
     ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
     Set Test Variable  ${session_id}  ${resp['Id']}
@@ -51,7 +68,7 @@ Verify Redfish Session Created With ClientID
 
     # Description of argument(s):
     # client_id    This client id can contain string value
-    #              (e.g. 12345, "HMCID").
+    #              (e.g. 12345, "EXTERNAL-CLIENT").
     # session_id   This value is a session id.
 
     ${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions/${session_id}
@@ -78,3 +95,16 @@ Verify Redfish Session Created With ClientID
     Set Test Variable  ${temp_ipaddr}  ${words}[-1]
     Valid Value  sessions["Id"]  ['${session_id}']
     Valid Value  temp_ipaddr  ${ipaddr}
+
+
+Redfish Persistence Session With ClientID
+    [Documentation]  Create redifish session with client id.
+    [Arguments]  ${client_id}
+
+    # Description of argument(s):
+    # client_id    This client id can contain string value
+    #              (e.g. 12345, "EXTERNAL-CLIENT").
+
+    Create Redfish Session With ClientID  ${client_id}
+    Redfish OBMC Reboot (off)
+    Verify Redfish Session Created With ClientID  ${client_id}  ${session_id}
