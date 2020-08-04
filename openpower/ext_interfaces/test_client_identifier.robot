@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation     Test KYC feature on BMC.
+Documentation     Test client identifier feature on BMC.
 
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/openbmc_ffdc.robot
@@ -29,6 +29,16 @@ Redfish Session With ClientID
    123456
    HMCID-01
    HMCID-02
+
+
+Check Redfish Session With ClientID Persistency
+   [Documentation]  Create a session with client id and verify client id is same after the reboot.
+   [Tags]  Check_Redfish_Session_With_ClientID_Persistency
+   [Template]  Redfish Persistence Session With ClientID
+
+   #ClientID
+   12345
+   HMCID-01
 
 *** Keywords ***
 
@@ -78,3 +88,16 @@ Verify Redfish Session Created With ClientID
     Set Test Variable  ${temp_ipaddr}  ${words}[-1]
     Valid Value  sessions["Id"]  ['${session_id}']
     Valid Value  temp_ipaddr  ${ipaddr}
+
+
+Redfish Persistence Session With ClientID
+    [Documentation]  Create redifish session with client id.
+    [Arguments]  ${client_id}
+
+    # Description of argument(s):
+    # client_id    This client id can contain string value
+    #              (e.g. 12345, "HMCID").
+
+    Create Redfish Session With ClientID  ${client_id}
+    Redfish OBMC Reboot (off)
+    Verify Redfish Session Created With ClientID  ${client_id}  ${session_id}
