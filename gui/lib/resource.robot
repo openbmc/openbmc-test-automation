@@ -8,7 +8,7 @@ Library      DateTime
 Library      XvfbRobot
 Library      OperatingSystem
 Library      SeleniumLibrary
-Library      AngularJSLibrary
+#Library      AngularJSLibrary
 Library      SSHLibrary  30 Seconds
 Library      Process
 Library      supporting_libs.py
@@ -314,6 +314,8 @@ Login GUI
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
     Click Element  ${xpath_login_button}
+    Redfish.Login
+    Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
     Wait Until Page Contains  Overview  timeout=30s
 
 
