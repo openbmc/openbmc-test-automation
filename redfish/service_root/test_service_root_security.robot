@@ -68,7 +68,7 @@ Redfish Login Using HTTPS Wrong Port 80 Protocol
 Create Multiple Login Sessions And Verify
     [Documentation]  Create 50 login instances and verify.
     [Tags]  Create_Multiple_Login_Sessions_And_Verify
-    [Teardown]  Multiple Session Cleanup
+    [Teardown]  Run Keyword And Ignore Error  Multiple Session Cleanup
 
     Redfish.Login
     # Example:
