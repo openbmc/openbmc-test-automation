@@ -355,7 +355,7 @@ Return Data Dictionary For Single Request
 
     ${SEG_FLAGS_ENTRIES}=  Create List  ${SEG_FLAGS_LOCK}
     ${LOCK_REQUEST}=  Create Dictionary  Request=${SEG_FLAGS_ENTRIES}
-    Log To Console  \n ${LOCK_REQUEST}
+    Log To Console  \n${SPACE}${LOCK_REQUEST}
 
     [Return]  ${LOCK_REQUEST}
 
