@@ -350,7 +350,7 @@ Delete And Verify All Partitions on BMC
     ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${data}  headers  ${headers}
 
-    ${resp}=  Post Request  openbmc  /ibm/v1/Host/ConfigFiles/Actions/FileCollection.DeleteAll  &{data}
+    ${resp}=  Post Request  openbmc  /ibm/v1/Host/ConfigFiles/Actions/IBMConfigFiles.DeleteAll  &{data}
     Should Be Equal As Strings  ${resp.status_code}  ${expect_resp_code}
 
     Return From Keyword If  ${expect_resp_code} != ${HTTP_OK}
