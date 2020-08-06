@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation     Test KYC feature on BMC.
+Documentation     Test client identifier feature on BMC.
 
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/openbmc_ffdc.robot
@@ -10,10 +10,11 @@ Resource          ../../lib/utils.robot
 Resource          ../../lib/boot_utils.robot
 Library           ../../lib/code_update_utils.py
 Library           ../../lib/gen_robot_valid.py
+Library           ../../lib/external_intf/management_console_utils.py
 
 Suite Setup       Redfish.Login
-Suite Teardown    Delete All Redfish Sessions
-Test Setup        Printn
+Suite Teardown    Suite Teardown Execution
+Test Setup        Delete All Redfish Sessions
 Test Teardown     FFDC On Test Case Fail
 
 
@@ -27,8 +28,8 @@ Redfish Session With ClientID
    #ClientID
    12345
    123456
-   HMCID-01
-   HMCID-02
+   EXTERNAL-CLIENT01
+   EXTERNAL-CLIENT02
 
 
 Check Redfish Session With ClientID Persistency
@@ -38,9 +39,25 @@ Check Redfish Session With ClientID Persistency
 
    #ClientID
    12345
-   HMCID-01
+   EXTERNAL-CLIENT01
+
+
+Redfish Multiple Session With ClientID
+   [Documentation]  Create a mutilple session with client id and verify client id is same.
+   [Tags]  Redfish_Multiple_Session_With_ClientID
+   [Template]  Create Redfish Session With ClientID
+
+   #ClientID
+   EXTERNAL-CLIENT01,EXTERNAL-CLIENT02
 
 *** Keywords ***
+
+Suite Teardown Execution
+    [Documentation]  Suite teardown execution.
+
+    Delete All Redfish Sessions
+    Redfish.Logout
+
 
 Create Redfish Session With ClientID
     [Documentation]  Create redifish session with client id.
@@ -48,23 +65,26 @@ Create Redfish Session With ClientID
 
     # Description of argument(s):
     # client_id    This client id can contain string value
-    #              (e.g. 12345, "HMCID").
+    #              (e.g. 12345, "EXTERNAL-CLIENT").
 
-    ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
-    Set Test Variable  ${session_id}  ${resp['Id']}
-    Verify Redfish Session Created With ClientID  ${client_id}  ${session_id}
+    ${client_rec}=  Split String  ${client_id}  ,
+    FOR  ${client}  IN  @{client_rec} 
+      ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client}"}}
+      &{session_dict}=  Create Dictionary
+      Set To Dictionary  ${session_dict}  ${client}  ${resp['Id']}
+      Verify Redfish Session Created With ClientID  ${client_id}  ${session_dict}
+    END
 
+    [Return]  ${session_dict}
 
 Verify Redfish Session Created With ClientID
     [Documentation]  verify Session Created with ClientID.
-    [Arguments]  ${client_id}  ${session_id}
+    [Arguments]  ${client_id}  ${session_dict}
 
     # Description of argument(s):
     # client_id    This client id can contain string value
-    #              (e.g. 12345, "HMCID").
-    # session_id   This value is a session id.
-
-    ${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions/${session_id}
+    #              (e.g. 12345, "EXTERNAL-CLIENT").
+    # session_dict This contain values of session id.
 
     # {
     #   "@odata.id": "/redfish/v1/SessionService/Sessions/H8q2ZKucSJ",
@@ -82,12 +102,15 @@ Verify Redfish Session Created With ClientID
     #   "UserName": "root"
     # }
 
-    Rprint Vars  sessions
-    @{words} =  Split String  ${sessions["Oem"]["OpenBMC"]["ClientOriginIP"]}  :
-    ${ipaddr}=  Get Running System IP
-    Set Test Variable  ${temp_ipaddr}  ${words}[-1]
-    Valid Value  sessions["Id"]  ['${session_id}']
-    Valid Value  temp_ipaddr  ${ipaddr}
+    FOR  ${session}  IN  @{session_dict.keys()}
+      ${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions/${session_dict['${session}']}
+      Rprint Vars  sessions
+      @{words} =  Split String  ${sessions["Oem"]["OpenBMC"]["ClientOriginIP"]}  :
+      ${ipaddr}=  Get Running System IP
+      Set Test Variable  ${temp_ipaddr}  ${words}[-1]
+      Valid Value  sessions["Id"]  ['${session_dict['${session}']}']
+      Valid Value  temp_ipaddr  ${ipaddr}
+    END
 
 
 Redfish Persistence Session With ClientID
@@ -96,8 +119,8 @@ Redfish Persistence Session With ClientID
 
     # Description of argument(s):
     # client_id    This client id can contain string value
-    #              (e.g. 12345, "HMCID").
+    #              (e.g. 12345, "EXTERNAL-CLIENT").
 
-    Create Redfish Session With ClientID  ${client_id}
+    ${session_dict}=  Create Redfish Session With ClientID  ${client_id}
     Redfish OBMC Reboot (off)
-    Verify Redfish Session Created With ClientID  ${client_id}  ${session_id}
+    Verify Redfish Session Created With ClientID  ${client_id}  ${session_dict}
