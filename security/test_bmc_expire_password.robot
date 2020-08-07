@@ -164,6 +164,27 @@ Verify Maximum Failed Attempts And Check Root User Account Locked
     Redfish.Login
     Redfish.Logout
 
+Expire And Change Password And Check Persistency
+    [Documentation]  Expire and chnage password and check persistency.
+    [Tags]  Expire_And_Change_Password_And_Check_Persistency
+    [Setup]  Test Setup Execution
+    [Teardown]  Run Keywords  Restore Default Password For Root User
+    ...  AND  FFDC On Test Case Fail
+
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
+    Should Contain  ${output}  password expiry information changed
+    Redfish.Login
+    # Change to a valid password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${OPENBMC_USERNAME}
+    ...  body={'Password': '0penBmc123'}
+
+     # Reboot BMC and verify persistency.
+     OBMC Reboot (off)
+
+    # verify new password
+    Redfish.Login  ${OPENBMC_USERNAME}  0penBmc123
+    
 
 *** Keywords ***
 
