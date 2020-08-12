@@ -12,8 +12,8 @@ Suite Teardown    Redfish.Logout
 
 *** Variables ***
 
-&{DHCP_ENABLED}           DHCPEnabled=${${True}}
-&{DHCP_DISABLED}          DHCPEnabled=${${False}}
+&{DHCP_ENABLED}           DHCPEnabled=${True}
+&{DHCP_DISABLED}          DHCPEnabled=${False}
 
 &{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
 &{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
@@ -98,6 +98,46 @@ Verify Persistency Of VMI IPv4 Details After Host Reboot
     Switch VMI IPv4 Origin And Verify Details  ${True}
     Verify Assigning Static IPv4 Address To VMI  ${VMI_IP}  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${False}
     Verify VMI Network Interface Details  ${VMI_IP}  Static  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${True}
+
+Enabled And Disabled DHCP And Verify IP And Type
+    [Dcoumentation]  Enable DHCP and VMI should get an IP from DHCP.
+    [Tags]  Enabled_And_Disabled_DHCP_And_Verify_IP_And_Type
+
+    Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=&{ENABLE_DHCP}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+    Redfish Power On  stack_mode=skip
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
+    Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${True}
+    Should Be Equal  ${resp.dict["IPv4Addresses"][0]["Address"]}  0.0.0.0
+    Should Be Equal  ${resp.dict["IPv4Addresses"][0]["AddressOrigin"]}  DHCP
+
+    Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=&{DISABLE_DHCP}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+    Redfish Power Off
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0 
+    Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${False}
+
+
+Multiple Times Enable And Disable DHCP And Verify
+    [Documentation]  Enable and Disable DHCP in a loop and verify VMI getsan IP address from DHCP
+    ...  each time when DHCP is enabled
+    [Tags]  Multiple_Times_Enable_And_Dsiable_DHCP_And_Verify
+
+    FOR  ${i}  IN RANGE  ${5}
+      Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=&{ENABLE_DHCP}
+      ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+      Redfish Power On  stack_mode=skip
+      ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
+      Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${True}
+      Should Be Equal  ${resp.dict["IPv4Addresses"][0]["Address"]}  0.0.0.0
+      Should Be Equal  ${resp.dict["IPv4Addresses"][0]["AddressOrigin"]}  DHCP
+
+      Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=&{DISABLE_DHCP}
+      ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+      Redfish Power Off
+      ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
+      Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${False}
+    END
 
 
 *** Keywords ***
