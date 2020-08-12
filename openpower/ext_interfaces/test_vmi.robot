@@ -261,6 +261,31 @@ Verify To Read VMI Network Configuration With Different User Roles
     noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
 
 
+Enable And Disable DHCP And Verify
+    [Documentation]  verify enable DHCP and disable DHCP.
+    [Tags]  Enabled_And_Disabled_DHCP_Verify
+
+    Set VMI IPv4 Origin  ${True}
+    ${default}=  Set Variable  0.0.0.0
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+    Set VMI IPv4 Origin  ${False}
+    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
+
+
+Multiple Times Enable And Disable DHCP And Verify
+    [Documentation]  Enable and Disable DHCP in a loop and verify VMI gets an IP address from DHCP
+    ...  each time when DHCP is enabled
+    [Tags]  Multiple_Times_Enable_And_Disable_DHCP_And_Verify
+
+    ${default}=  Set Variable  0.0.0.0
+    FOR  ${i}  IN RANGE  ${2}
+      Set VMI IPv4 Origin  ${True}
+      Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+      Set VMI IPv4 Origin  ${False}
+      Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
+    END
+
+
 *** Keywords ***
 
 Suite Setup Execution
