@@ -138,9 +138,9 @@ Verify Persistency Of VMI IPv4 Details After Host Reboot
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
     # Verifying persistency of static address.
-    Switch VMI IPv4 Origin And Verify Details  ${True}
+    Switch VMI IPv4 Origin And Verify Details
     Verify Assigning Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}  ${test_netmask}
-    Verify VMI Network Interface Details  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+    Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
 
 
 Delete VMI Static IP Address And Verify
@@ -180,7 +180,8 @@ Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
 
     ${LOOP_COUNT}=  Set Variable  ${3}
     Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
-    Run Keywords  Redfish Power Off  AND  Redfish Power On
+    Redfish Power Off
+    Redfish Power On
     ${vmi_ip_config}=  Get VMI Network Interface Details
     # Verifying persistency of dynamic address after multiple reboots.
     Repeat Keyword  ${LOOP_COUNT} times
@@ -268,6 +269,36 @@ Verify To Read VMI Network Configuration With Different User Roles
     readonly_user  TestPwd123   ${HTTP_OK}
     noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
 
+
+Verify Enable And Disable DHCP IP
+    [Documentation]  verify enable DHCP and disable DHCP.
+    [Tags]  Verify Enabled_And_Disabled_DHCP
+
+    Set VMI IPv4 Origin  ${True}
+    ${default}=  Set Variable  0.0.0.0
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+
+    Set VMI IPv4 Origin  ${False}
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Should Be Empty  ${resp.dict["IPv4StaticAddresses"]}
+
+
+Multiple Times Enable And Disable DHCP And Verify
+    [Documentation]  Enable and Disable DHCP in a loop and verify VMI getsan IP address from DHCP
+    ...  each time when DHCP is enabled
+    [Tags]  Multiple_Times_Enable_And_Dsiable_DHCP_And_Verify
+
+    ${default}=  Set Variable  0.0.0.0
+    FOR  ${i}  IN RANGE  ${2}
+      Set VMI IPv4 Origin  ${True}
+      Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+      Set VMI IPv4 Origin  ${False}
+    END
+
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Should Be Empty  ${resp.dict["IPv4StaticAddresses"]}
 
 *** Keywords ***
 
@@ -417,7 +448,6 @@ Verify Assigning Static IPv4 Address To VMI
     # netmask            Subnetmask for VMI IP.
     # valid_status_code  Expected valid status code from GET request. Default is HTTP_ACCEPTED.
 
-
     Set Static IPv4 Address To VMI  ${ip}  ${gateway}  ${netmask}  valid_status_code=${valid_status_code}
     Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
 
@@ -455,19 +485,13 @@ Set VMI IPv4 Origin
 
 Switch VMI IPv4 Origin And Verify Details
     [Documentation]  Switch VMI IPv4 origin and verify details.
-    [Arguments]  ${host_reboot}=${False}
-
-    # Description of argument(s):
-    # host_reboot        Reboot HOST if True.
 
     ${curr_mode}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
     ${dhcp_enabled}=  Set Variable If  ${curr_mode} == ${False}  ${True}  ${False}
-
     ${default}=  Set Variable  0.0.0.0
     ${origin}=  Set Variable If  ${curr_mode} == ${False}  DHCP  Static
     Set VMI IPv4 Origin  ${dhcp_enabled}  ${HTTP_ACCEPTED}
     Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}
-
     [Return]  ${origin}
 
 
