@@ -147,6 +147,7 @@ class resource_variables():
     # xpath for configuration menu
     xpath_server_configuration = "//button[@aria-controls='configuration-menu']"
     xpath_select_network_settings = "//a[@href='#/configuration/network-settings']"
+    xpath_date_time_settings_sub_menu = "//a[@href='#/configuration/date-time-settings']"
 
     # xpath for access control menu
     xpath_access_control_menu = "//*[@data-test-id='nav-button-accessControl']"
