@@ -5,6 +5,7 @@ Documentation    VMI static/dynamic IP config and certificate exchange tests.
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Library          ../../lib/bmc_network_utils.py
 
 Suite Setup       Redfish.Login
 Test Teardown     FFDC On Test Case Fail
@@ -98,6 +99,48 @@ Verify Persistency Of VMI IPv4 Details After Host Reboot
     Switch VMI IPv4 Origin And Verify Details  ${True}
     Verify Assigning Static IPv4 Address To VMI  ${VMI_IP}  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${False}
     Verify VMI Network Interface Details  ${VMI_IP}  Static  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${True}
+
+Enabled And Disabled DHCP And Verify IP And Type
+    [Documentation]  Enable DHCP and VMI should get an IP from DHCP.
+    [Tags]  Enabled_And_Disabled_DHCP_And_Verify_IP_And_Type
+
+    ${active_channel_config}=  Get Active Channel Config
+    Redfish.Patch
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ...  body=&{ENABLE_DHCP}  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+    Verify VMI Network Interface Details  0.0.0.0  DHCP  0.0.0.0  255.255.252.0  ${True}
+    Redfish.Patch
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ...  body=&{DISABLE_DHCP}  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+    Redfish Power Off
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${False}
+    Log  ${resp.dict["IPv4Addresses"]}
+    Should Be Empty  ${resp.dict["IPv4Addresses"]}
+
+
+Multiple Times Enable And Disable DHCP And Verify
+    [Documentation]  Enable and Disable DHCP in a loop and verify VMI getsan IP address from DHCP
+    ...  each time when DHCP is enabled
+    [Tags]  Multiple_Times_Enable_And_Dsiable_DHCP_And_Verify
+
+    ${active_channel_config}=  Get Active Channel Config
+    FOR  ${i}  IN RANGE  ${5}
+      Redfish.Patch
+      ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+      ...  body=&{ENABLE_DHCP}  valid_status_codes=[${HTTP_ACCEPTED}]
+      Verify VMI Network Interface Details  0.0.0.0  DHCP  0.0.0.0  255.255.252.0  ${True}
+      Redfish.Patch
+      ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+      ...   body=&{DISABLE_DHCP}  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+      Redfish Power Off
+      ${resp}=  Redfish.Get
+      ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+      Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${False}
+    END
+
+    Should Be Empty  ${resp.dict["IPv4Addresses"]}
 
 
 *** Keywords ***
