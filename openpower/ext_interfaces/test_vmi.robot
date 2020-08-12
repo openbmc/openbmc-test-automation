@@ -9,7 +9,7 @@ Resource         ../../lib/bmc_redfish_utils.robot
 Library          ../../lib/bmc_network_utils.py
 
 Suite Setup       Suite Setup Execution
-Test Teardown     FFDC On Test Case Fail
+#Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Redfish.Logout
 
 *** Variables ***
@@ -174,7 +174,8 @@ Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
 
     ${LOOP_COUNT}=  Set Variable  ${3}
     Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
-    Run Keywords  Redfish Power Off  AND  Redfish Power On
+    Redfish Power Off
+    Redfish Power On
     ${vmi_ip_config}=  Get VMI Network Interface Details
     # Verifying persistency of dynamic address after multiple reboots.
     Repeat Keyword  ${LOOP_COUNT} times
@@ -261,13 +262,38 @@ Verify To Read VMI Network Configuration With Different User Roles
     noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
 
 
+Enable And Disable DHCP And Verify
+    [Documentation]  verify enable DHCP and disable DHCP.
+    [Tags]  Enabled_And_Disabled_DHCP_Verify
+
+    Set VMI IPv4 Origin  ${True}
+    ${default}=  Set Variable  0.0.0.0
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+    Set VMI IPv4 Origin  ${False}
+    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
+
+
+Multiple Times Enable And Disable DHCP And Verify
+    [Documentation]  Enable and Disable DHCP in a loop and verify VMI gets an IP address from DHCP
+    ...  each time when DHCP is enabled
+    [Tags]  Multiple_Times_Enable_And_Disable_DHCP_And_Verify
+
+    ${default}=  Set Variable  0.0.0.0
+    FOR  ${i}  IN RANGE  ${2}
+      Set VMI IPv4 Origin  ${True}
+      Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+      Set VMI IPv4 Origin  ${False}
+      Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
+    END
+
+
 *** Keywords ***
 
 Suite Setup Execution
     [Documentation]  Do test setup execution task.
 
     Redfish.Login
-    Redfish Power On
+ #   Redfish Power On
     ${active_channel_config}=  Get Active Channel Config
     Set Suite Variable   ${active_channel_config}
     ${resp}=  Redfish.Get
@@ -281,7 +307,7 @@ Suite Setup Execution
 Test Teardown Execution
     [Documentation]  Do test teardown execution task.
 
-    FFDC On Test Case Fail
+ #   FFDC On Test Case Fail
     ${curr_mode}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
     Run Keyword If  ${curr_mode} == ${True}  Set VMI IPv4 Origin  ${False}
     Run Keyword If  ${vmi_network_conf} != ${None}
@@ -449,7 +475,6 @@ Switch VMI IPv4 Origin And Verify Details
 
     ${curr_mode}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
     ${dhcp_enabled}=  Set Variable If  ${curr_mode} == ${False}  ${True}  ${False}
-
     ${default}=  Set Variable  0.0.0.0
     ${origin}=  Set Variable If  ${curr_mode} == ${False}  DHCP  Static
     Set VMI IPv4 Origin  ${dhcp_enabled}  ${HTTP_ACCEPTED}
