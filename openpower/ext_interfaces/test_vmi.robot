@@ -7,13 +7,13 @@ Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
 Suite Setup       Redfish.Login
-Test Teardown     FFDC On Test Case Fail
+#Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Redfish.Logout
 
 *** Variables ***
 
-&{DHCP_ENABLED}           DHCPEnabled=${${True}}
-&{DHCP_DISABLED}          DHCPEnabled=${${False}}
+&{DHCP_ENABLED}           DHCPEnabled=${True}
+&{DHCP_DISABLED}          DHCPEnabled=${False}
 
 &{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
 &{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
@@ -99,6 +99,47 @@ Verify Persistency Of VMI IPv4 Details After Host Reboot
     Verify Assigning Static IPv4 Address To VMI  ${VMI_IP}  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${False}
     Verify VMI Network Interface Details  ${VMI_IP}  Static  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${True}
 
+Enabled And Disabled DHCP And Verify IP And Type
+    [Dcoumentation]  Enable DHCP and VMI should get an IP from DHCP.
+    [Tags]  Enabled_And_Disabled_DHCP_And_Verify_IP_And_Type
+
+    Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=&{ENABLE_DHCP}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+    Redfish Power On  stack_mode=skip
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
+    Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${True}
+    Should Be Equal  ${resp.dict["IPv4Addresses"][0]["Address"]}  0.0.0.0
+    Should Be Equal  ${resp.dict["IPv4Addresses"][0]["AddressOrigin"]}  DHCP
+
+    Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=&{ENABLE_DHCP}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+    Redfish Power Off
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0   
+    Redfish Power Off
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
+    Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${False}
+
+
+Multiple Times Enable And Disable DHCP And Verify 
+    [Documentation]   Enable and Disable DHCP in a loop and verify IP address from DHCP.
+    [Tags]  Multiple_Times_Enable_And_Dsiable_DHCP_And_Verify
+
+    FOR  ${i}  IN RANGE  ${5}
+      Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=&{ENABLE_DHCP}
+      ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+      Redfish Power On  stack_mode=skip
+      ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
+      Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${True}
+      Should Be Equal  ${resp.dict["IPv4Addresses"][0]["Address"]}  0.0.0.0
+      Should Be Equal  ${resp.dict["IPv4Addresses"][0]["AddressOrigin"]}  DHCP
+
+      Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=&{DISABLE_DHCP}
+      ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+      Redfish Power Off
+      ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
+      Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${False}
+    END
+
 
 *** Keywords ***
 
@@ -112,7 +153,7 @@ Get VMI Network Interface Details
     # Note: It returns a dictionary of VMI eth0 parameters.
 
     ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
-    ...  valid_status_codes=[${valid_status_code}]
+    ...  valid_status_codes=[200]
 
     ${ip_resp}=  Evaluate  json.loads('''${resp.text}''')  json
 
@@ -206,9 +247,9 @@ Set Static IPv4 Address To VMI
     # valid_status_code  Expected valid status code from GET request. Default is HTTP_ACCEPTED.
 
     ${data}=  Set Variable
-    ...  {"IPv4StaticAddresses": [{"Address": "${ip}","SubnetMask": "${netmask}","Gateway": "${gateway}"}]}
+    ...  {"IPv4StaticAddresses=[{"Address": "${ip}","SubnetMask": "${netmask}","Gateway": "${gateway}"}]}
 
-    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=${data}
+    Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=${data}
     ...  valid_status_codes=[${valid_status_code}]
     Redfish Power On  stack_mode=skip
     Log To Console  ${resp.text}
@@ -280,3 +321,4 @@ Switch VMI IPv4 Origin And Verify Details
     Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}  ${host_reboot}
 
     [Return]  ${origin}
+
