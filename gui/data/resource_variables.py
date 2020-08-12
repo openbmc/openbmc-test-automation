@@ -146,7 +146,7 @@ class resource_variables():
     xpath_select_network_settings = "//a[@href='#/configuration/network-settings']"
 
     # xpath for access control menu
-    xpath_access_control_menu = "//button[@aria-controls='access-control-menu']"
+    xpath_access_control_menu = "//*[@data-test-id='nav-button-accessControl']"
     xpath_ldap_sub_menu = "//a[@href='#/access-control/ldap']"
     xpath_save_settings_button = "//button[contains(text(),'Save settings')]"
     xpath_local_user_management_sub_menu = "//a[@href='#/access-control/local-user-management']"
