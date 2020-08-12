@@ -142,6 +142,7 @@ class resource_variables():
     xpath_server_led_sub_menu = "//a[@href='#/control/server-led']"
     xpath_server_power_operations_sub_menu = "//a[@href='#/control/server-power-operations']"
     xpath_sol_sub_menu = "//a[@href='#/control/serial-over-lan']"
+    xpath_kvm_sub_menu = "//a[@href='#/control/kvm']"
 
     # xpath for configuration menu
     xpath_server_configuration = "//button[@aria-controls='configuration-menu']"
