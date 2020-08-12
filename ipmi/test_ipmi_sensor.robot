@@ -341,9 +341,9 @@ Verify Power Reading Using IPMI And Redfish
         ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
     END
 
-    # Double check, the validation has atleast one valid path.
+    # Double check, the validation has at least one valid path.
     Should Not Be Empty  ${power_uri_list}
-    ...  msg=Should contain atleast one element in the list.
+    ...  msg=Should contain at least one element in the list.
 
 
 Verify Power Reading Via Raw Command

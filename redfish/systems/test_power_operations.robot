@@ -60,9 +60,9 @@ Verify Redfish BMC PowerOn
 
     END
 
-    # Double check, the validation has atleast one valid path.
+    # Double check, the validation has at least one valid path.
     Should Not Be Empty  ${power_uri_list}
-    ...  msg=Should contain atleast one element in the list.
+    ...  msg=Should contain at least one element in the list.
 
 
 Verify Redfish BMC GracefulRestart

@@ -126,7 +126,7 @@ class bmc_redfish_utils(object):
 
         Description of argument(s):
         resource_path      URI resource base path (e.g. "/redfish/v1/Chassis/").
-        end_point_prefix   Name of the enpoint (e.g. 'Power').
+        end_point_prefix   Name of the endpoint (e.g. 'Power').
 
         Find all list entries ending in "/endpoint" combination such as
         /redfish/v1/Chassis/<foo>/Power
