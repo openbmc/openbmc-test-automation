@@ -1,0 +1,94 @@
+{
+	"Valid Case": {
+		"ResourceID": 234,
+		"SegmentFlag": "SegmentFlags",
+		"LockOperationRead": {
+			"LockType": "Read"
+		},
+		"LockOperationWrite": {
+			"LockType": "Write"
+		},
+		"LockType1": {
+			"LockFlag": "LockAll"
+		},
+		"LockType2": {
+			"LockFlag": "LockSame"
+		},
+		"LockType3": {
+			"LockFlag": "DontLock"
+		},
+		"SegmentLenght1": {
+			"SegmentLength": 1
+		},
+		"SegmentLenght2": {
+			"SegmentLength": 2
+		},
+		"SegmentLenght3": {
+			"SegmentLength": 3
+		},
+		"SegmentLenght4": {
+			"SegmentLength": 4
+		},
+		"SegmentLenght5": {
+			"SegmentLength": 5
+		},
+		"ReadCase1": {
+			"Read": [{
+				"LockFlag": "LockAll",
+				"SegmentLength": 2
+			}, {
+				"LockFlag": "DontLock",
+				"SegmentLength": 1
+			}]
+		},
+                "ReadCase2": {
+                        "Read": [{
+                                "LockFlag": "DontLock",
+                                "SegmentLength": 3
+                        }, {
+                                "LockFlag": "LockAll",
+                                "SegmentLength": 1
+                        }]
+                },
+                "ReadCase3": {
+                        "Read": [{
+                                "LockFlag": "DontLock",
+                                "SegmentLength": 4
+                        }, {
+                                "LockFlag": "LockSame",
+                                "SegmentLength": 3
+                        }]
+                },
+                "WriteCase1": {
+                        "Read": [{
+                                "LockFlag": "LockAll",
+                                "SegmentLength": 2
+                        }, {
+                                "LockFlag": "DontLock",
+                                "SegmentLength": 1
+                        }]
+                },
+                "WriteCase2": {
+                        "Write": [{
+                                "LockFlag": "DontLock",
+                                "SegmentLength": 3
+                        }, {
+                                "LockFlag": "LockAll",
+                                "SegmentLength": 1
+                        }]
+                },
+                "WriteCase3": {
+                        "Write": [{
+                                "LockFlag": "DontLock",
+                                "SegmentLength": 4
+                        }, {
+                                "LockFlag": "LockSame",
+                                "SegmentLength": 3
+                        }]
+                }
+
+	},
+	"Invalid Case": {
+
+	}
+}
