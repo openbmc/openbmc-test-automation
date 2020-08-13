@@ -1,0 +1,308 @@
+{
+    "Valid Case": {
+        "ResourceID": 234,
+        "ReadCase1": {
+            "Read": [{
+                "LockFlag": "LockAll",
+                "SegmentLength": 2
+            }, {
+                "LockFlag": "DontLock",
+                "SegmentLength": 1
+            }]
+        },
+        "ReadCase2": {
+            "Read": [{
+                "LockFlag": "DontLock",
+                "SegmentLength": 3
+	    }, {
+                "LockFlag": "LockAll",
+                "SegmentLength": 1
+            }]
+        },
+        "ReadCase3": {
+            "Read": [{
+                "LockFlag": "DontLock",
+                "SegmentLength": 4
+            }, {
+                "LockFlag": "LockSame",
+                "SegmentLength": 3
+            }]
+        },
+        "WriteCase1": {
+            "Write": [{
+                "LockFlag": "LockAll",
+                "SegmentLength": 2
+            }, {
+                 "LockFlag": "DontLock",
+                 "SegmentLength": 1
+            }]
+        },
+        "WriteCase2": {
+            "Write": [{
+                "LockFlag": "DontLock",
+                "SegmentLength": 3
+            }, {
+                "LockFlag": "LockAll",
+                "SegmentLength": 1
+            }]
+        },
+        "WriteCase3": {
+            "Write": [{
+                "LockFlag": "DontLock",
+                "SegmentLength": 4
+            }, {
+                "LockFlag": "LockSame",
+                "SegmentLength": 3
+            }]
+         }
+
+    },
+    "Invalid Case": {
+        "ReadCase1": {
+            "read": [{
+                "LockFlag": "DontLock",
+                "SegmentLength": 3
+            }, {
+                "LockFlag": "LockSame",
+                "SegmentLength": 1
+            }]
+        },
+        "ReadCase2": {
+            "READ": [{
+                "LockFlag": "DontLock",
+                "SegmentLength": 3
+            }, {
+                "LockFlag": "LockSame",
+                "SegmentLength": 1
+            }]
+        },
+        "ReadCase3": {
+            "Red": [{
+                "LockFlag": "DontLock",
+                "SegmentLength": 3
+            }, {
+                "LockFlag": "LockSame",
+                "SegmentLength": 1
+            }]
+        },
+        "ReadCase4": {
+            "*Read": [{
+                "LockFlag": "DontLock",
+                "SegmentLength": 3
+            }, {
+                "LockFlag": "LockSame",
+                "SegmentLength": 1
+            }]
+        },
+        "ReadCase5": {
+            "ReaD": [{
+                "LockFlag": "DontLock",
+                "SegmentLength": 3
+            }, {
+                "LockFlag": "LockSame",
+                "SegmentLength": 1
+            }]
+         },
+         "ReadCase6": {
+             "Read": [{
+                 "LockFlag": "lockall",
+                 "SegmentLength": 1
+              }]
+          },
+          "ReadCase7": {
+              "Read": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "locksame",
+                  "SegmentLength": 1
+              }]
+          },
+          "ReadCase8": {
+              "Read": [{
+                  "LockFlag": "dontlock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "locksame",
+                  "SegmentLength": 1
+              }]
+          },
+          "ReadCase9": {
+              "Read": [{
+                  "LockFlag": "ontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 1
+              }]
+          },
+          "ReadCase10": {
+              "Read": [{
+                  "LockFlag": "*DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 1
+              }]
+          },
+          "ReadCase11": {
+              "Read": [{
+                  "LockFlag": "dontlock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "lockall",
+                  "SegmentLength": 1
+              }]
+          },
+          "ReadCase12": {
+              "Read": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 7
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 0
+              }]
+          },
+          "ReadCase13": {
+              "Read": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 0
+              }]
+          },
+          "ReadCase14": {
+              "Read": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 7
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase1": {
+              "write": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockSame",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase2": {
+              "WRITE": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockSame",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase3": {
+              "*Write": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockSame",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase4": {
+              "Wrte": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockSame",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase5": {
+              "WritE": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockSame",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase6": {
+              "Write": [{
+                  "LockFlag": "lockall",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase7": {
+              "Write": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "locksame",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase8": {
+              "Write": [{
+                  "LockFlag": "dontlock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "locksame",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase9": {
+              "Write": [{
+                  "LockFlag": "ontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase10": {
+              "Write": [{
+                  "LockFlag": "*DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase11": {
+              "Write": [{
+                  "LockFlag": "dontlock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "lockall",
+                   "SegmentLength": 1
+              }]
+          },
+          "WriteCase12": {
+              "Write": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 7
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 0
+              }]
+          },
+          "WriteCase13": {
+              "Write": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 0
+              }]
+          },
+          "WriteCase14": {
+              "Write": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 7
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 1
+              }]
+          }
+    }
+}
