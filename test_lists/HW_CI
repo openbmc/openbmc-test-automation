@@ -8,7 +8,7 @@
 #Verify system boot time average
 -i Verify_Uptime_Average_Against_Threshold
 #Check for BMC dump.
--i Verify_No_BMC_Dump
+-i Verify_No_BMC_Dump_And_Application_Failures
 #Redfish tests cases.
 -i Redfish_Login_And_Logout
 -i GET_Redfish_Hypermedia_Without_Login

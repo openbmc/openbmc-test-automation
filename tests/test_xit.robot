@@ -7,6 +7,11 @@ Resource        ../lib/dump_utils.robot
 
 Test Teardown   FFDC On Test Case Fail
 
+*** Variables ***
+
+# Error strings to check from journald.
+${ERROR_REGEX}     SEGV|core-dump|FAILURE|Failed to start
+
 *** Test Cases ***
 
 Verify Field Mode Is Disable
@@ -19,10 +24,12 @@ Verify Field Mode Is Disable
     Disable Field Mode And Verify Unmount
 
 
-Verify No BMC Dump
+Verify No BMC Dump And Application Failures
     [Documentation]  Verify no BMC dump exist.
-    [Tags]  Verify_No_BMC_Dump
+    [Tags]  Verify_No_BMC_Dump_And_Application_Failures
 
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     ...  msg=BMC dump(s) were not deleted as expected.
+
+    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
