@@ -38,4 +38,4 @@
 #BMC sync list test
 -i Test_BMC_Alt_Side_Mirroring
 # Check for BMC dump.
--i Verify_No_BMC_Dump
+-i Verify_No_BMC_Dump_And_Application_Failures
