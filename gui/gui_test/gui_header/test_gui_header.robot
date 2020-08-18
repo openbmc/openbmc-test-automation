@@ -10,7 +10,7 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_header_text}    //*[contains(@class, "navbar-text")]
+${xpath_header_text}   //*[contains(@class, "navbar-text")]
 
 
 *** Test Cases ***
@@ -27,5 +27,6 @@ Verify GUI Logout
     [Documentation]  Verify OpenBMC GUI logout.
     [Tags]  Verify_GUI_Logout
 
+    Click Element  ${xpath_root_button_menu}
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}  timeout=15s
