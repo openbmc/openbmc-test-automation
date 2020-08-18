@@ -10,7 +10,7 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 ${xpath_sensors_export}         //a[contains(text(), "Export")]
-${xpath_sensors_search}         //input[@id="searchInput"]
+${xpath_sensors_search}         //input[contains(@class,"search-input")]
 
 *** Test Cases ***
 Verify Select Sensors From Server Health
