@@ -101,6 +101,19 @@ Verify Persistency Of VMI IPv4 Details After Host Reboot
     Verify VMI Network Interface Details  ${VMI_IP}  Static  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${True}
 
 
+Delete VMI Static IP Address And Verify
+   [Documentation]  Delete VMI static IP address and verify.
+   [Tags]  Delete_VMI_Static_IP_Address_And_Verify
+
+   Set Static IPv4 Address To VMI  10.10.20.30  0.0.0.0  255.255.252.0
+   Verify VMI Network Interface Details  10.10.20.30  Static  0.0.0.0  255.255.252.0  ${True}
+   Delete VMI IPv4 Address  IPv4Addresses  ${HTTP_ACCEPTED}
+   ${active_channel_config}=  Get Active Channel Config
+   ${resp}=  Redfish.Get
+   ...   /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+   Should Be Empty   ${resp.dict["IPv4Addresses"]}
+
+
 *** Keywords ***
 
 Get VMI Network Interface Details
