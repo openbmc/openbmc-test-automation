@@ -123,7 +123,7 @@ class resource_variables():
 
     # New GUI variables
     xpath_login_button = "//button[@type='submit']"
-    xpath_logout_button = "//button[@id='app-header-logout']"
+    xpath_logout_button = "//*[@data-test-id='appHeader-link-logout']"
 
     # xpath for overview menu
     xpath_overview_menu = "//a[@href='#/']"
