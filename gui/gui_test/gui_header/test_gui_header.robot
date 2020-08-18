@@ -10,7 +10,8 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_header_text}    //*[contains(@class, "navbar-text")]
+${xpath_header_text}   //*[contains(@class, "navbar-text")]
+${xpath_header_image}  //img[@class='header-logo']
 
 
 *** Test Cases ***
@@ -19,6 +20,7 @@ Verify GUI Header Text
     [Documentation]  Verify text in GUI header.
     [Tags]  Verify_GUI_Header_Text
 
+    Page Should Contain Image  ${xpath_header_image}
     ${gui_header_text}=  Get Text  ${xpath_header_text}
     Should Contain  ${gui_header_text}  BMC System Management
 
@@ -27,5 +29,21 @@ Verify GUI Logout
     [Documentation]  Verify OpenBMC GUI logout.
     [Tags]  Verify_GUI_Logout
 
+    Click Element  ${xpath_root_button_menu}
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}  timeout=15s
+
+
+Verify Refresh Button
+    [Documentation]  Verify Refresh Button in GUI header.
+    [Tags]  Verify_Refresh_Button
+    # Verify power is on after refresh button.
+
+    REST Power Off  stack_mode=skip  quiet=1
+    Wait Until Element Is Visible  ${xpath_select_refresh_button}
+    Click Element  ${xpath_select_refresh_button}
+    #GUI Power On
+    #Wait Until Element Is Visible  ${xpath_select_refresh_button}
+    #Click Element  ${xpath_select_refresh_button}
+    #Wait Until Page Contains  Running
+
