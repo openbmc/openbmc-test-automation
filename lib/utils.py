@@ -221,6 +221,9 @@ def compare_mac_address(sys_mac_addr, user_mac_addr):
     # Example: ['70', 'e2', '84', '14', '2a', '08']
     mac_list = user_mac_addr.split(":")
     for item in sys_mac_addr.split(":"):
+        if (int(mac_list[index], 16)) >= 256:
+            mac_int_index = str(mac_list[index])
+            mac_list[index] = mac_int_index [:2]
         if int(item, 16) == int(mac_list[index], 16):
             index = index + 1
             continue
