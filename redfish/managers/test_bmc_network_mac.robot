@@ -40,6 +40,15 @@ Configure Valid MAC And Verify
     # Verify whether new MAC is configured on BMC.
     Validate MAC On BMC  ${valid_mac}
 
+Configure Valid MAC And Verify On FW_Env
+    [Documentation]  Configure valid MAC via Redfish and verify on FW_Env.
+    [Tags]  Configure_Valid_MAC_And_Verify_On_FW_Env
+
+    Configure MAC Settings  ${valid_mac}  valid
+
+    # Verify whether new MAC is configured on FW_Env.
+    Validate MAC On FW_Env  ${valid_mac}
+
 
 Configure Zero MAC And Verify
     [Documentation]  Configure zero MAC via Redfish and verify.
@@ -48,6 +57,15 @@ Configure Zero MAC And Verify
     [Template]  Configure MAC Settings
     # MAC address  scenario
     ${zero_mac}    error
+
+Configure Zero MAC And Verify On FW_Env
+    [Documentation]  Configure zero MAC via Redfish and verify on FW_Env.
+    [Tags]  Configure_Zero_MAC_And_Verify_On_FW_Env
+
+    Configure MAC Settings  ${zero_mac}  error
+
+    # Verify whether initial MAC is configured on FW_Env.
+    Validate MAC On FW_Env  ${initial_mac_address}
 
 
 Configure Broadcast MAC And Verify
@@ -58,6 +76,15 @@ Configure Broadcast MAC And Verify
     # MAC address    scenario
     ${broadcast_mac}  error
 
+Configure Broadcast MAC And Verify On FW_Env
+    [Documentation]  Configure Broadcast MAC via Redfish and verify on FW_Env
+    [Tags]  Configure_Broadcast_MAC_And_Verify_On_FW_Env
+
+    Configure MAC Settings  ${broadcast_mac}  error
+
+    # Verify whether initial MAC is configured on FW_Env.
+    Validate MAC On FW_Env  ${initial_mac_address}
+
 Configure Invalid MAC And Verify
     [Documentation]  Configure invalid MAC address which is a string.
     [Tags]  Configure_Invalid_MAC_And_Verify
@@ -65,6 +92,15 @@ Configure Invalid MAC And Verify
     [Template]  Configure MAC Settings
     # MAC Address        Expected_Result
     ${special_char_mac}  error
+
+Configure Invalid MAC And Verify On FW_Env
+    [Documentation]  Configure invalid MAC address which is a string and verify on FW_Env.
+    [Tags]  Configure_Invalid_MAC_And_Verify_On_FW_Env
+
+    Configure MAC Settings  ${special_char_mac}  error
+
+    # Verify whether initial MAC is configured on FW_Env.
+    Validate MAC On FW_Env  ${initial_mac_address}
 
 Configure Valid MAC And Check Persistency
     [Documentation]  Configure valid MAC and check persistency.
@@ -79,6 +115,28 @@ Configure Valid MAC And Check Persistency
     OBMC Reboot (off)
     Validate MAC On BMC  ${valid_mac}
 
+Configure Valid MAC And Verify Persistency On FW_Env
+    [Documentation]  Configure valid MAC and verify persistency on FW_Env.
+    [Tags]  Configure_Valid_MAC_And_Verify_Persistency_On_FW_Env
+
+    Configure MAC Settings  ${valid_mac}  valid
+
+    # Reboot BMC and check whether MAC is persistent on FW_Env.
+    OBMC Reboot (off)
+    Validate MAC On FW_Env  ${valid_mac}
+
+Configure Invalid MAC And Verify Persistency On FW_Env
+    [Documentation]  Configure invalid MAC and verify persistency on FW_Env.
+    [Tags]  Configure_Invalid_MAC_And_Verify_Persistency_On_FW_Env
+
+    Configure MAC Settings  ${special_char_mac}  error
+
+    # Reboot BMC and check whether MAC is persistent on FW_Env.
+    # It should match with initial mac address.
+    OBMC Reboot (off)
+    Validate MAC On FW_Env  ${initial_mac_address}
+
+
 Configure Out Of Range MAC And Verify
     [Documentation]  Configure out of range MAC via Redfish and verify.
     [Tags]  Configure_Out_Of_Range_MAC_And_Verify
@@ -86,6 +144,16 @@ Configure Out Of Range MAC And Verify
     [Template]  Configure MAC Settings
     # MAC address        scenario
     ${out_of_range_mac}  error
+
+Configure Out Of Range MAC And Verify On FW_Env
+    [Documentation]  Configure out of range MAC via Redfish and verify on FW_Env.
+    [Tags]  Configure_Out_Of_Range_MAC_And_Verify_On_FW_Env
+
+    Configure MAC Settings  ${out_of_range_mac}  error
+
+    # Verify whether initial MAC is configured on FW_Env.
+    Validate MAC On FW_Env  ${initial_mac_address}
+
 
 Configure Less Byte MAC And Verify
     [Documentation]  Configure less byte MAC via Redfish and verify.
@@ -95,6 +163,16 @@ Configure Less Byte MAC And Verify
     # MAC address     scenario
     ${less_byte_mac}  error
 
+Configure Less Byte MAC And Verify On FW_Env
+    [Documentation]  Configure less byte MAC via Redfish and verify on FW_Env.
+    [Tags]  Configure_Less_Byte_MAC_And_Verify_On_FW_Env
+
+    Configure MAC Settings  ${less_byte_mac}  error
+
+    # Verify whether initial MAC is configured on FW_Env
+    Validate MAC On FW_Env  ${initial_mac_address}
+
+
 Configure More Byte MAC And Verify
     [Documentation]  Configure more byte MAC via Redfish and verify.
     [Tags]  Configure_More_Byte_MAC_And_Verify
@@ -102,6 +180,16 @@ Configure More Byte MAC And Verify
     [Template]  Configure MAC Settings
     # MAC address     scenario
     ${more_byte_mac}  error
+
+Configure More Byte MAC And Verify On FW_Env
+    [Documentation]  Configure more byte MAC via Redfish and verify on FW_Env.
+    [Tags]  Configure_More_Byte_MAC_And_Verify_On_FW_Env
+
+    Configure MAC Settings  ${more_byte_mac}  error
+
+    # Verify whether initial MAC is configured on FW_Env
+    Validate MAC On FW_Env  ${initial_mac_address}
+
 
 *** Keywords ***
 
