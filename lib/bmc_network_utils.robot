@@ -153,6 +153,24 @@ Get BMC Hostname
 
     [Return]  ${output}
 
+Get FW_Env MAC Address
+    [Documentation]  Get FW_Env MAC address.
+
+    # Sample output of "fw_printenv | grep ethaddr"
+    # ethaddr=xx:xx:xx:xx:xx:xx:xx
+
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  /sbin/fw_printenv | grep ethaddr
+
+    # Split the line and return MAC address.
+    # Split list data:
+    # ethaddr | xx:xx:xx:xx:xx:xx:xx
+
+    @{words}=  Split String  ${cmd_output}  =
+
+    [Return]  ${words[1]}
+
+
 Get List Of IP Address Via REST
     [Documentation]  Get list of IP address via REST.
     [Arguments]  @{ip_uri_list}
@@ -253,6 +271,19 @@ Validate MAC On BMC
     ${status}=  Compare MAC Address  ${system_mac}  ${mac_addr}
     Should Be True  ${status}
     ...  msg=MAC address ${system_mac} does not match ${mac_addr}.
+
+Validate MAC On FW_Env
+    [Documentation]  Validate MAC on FW_Env.
+    [Arguments]  ${mac_addr}
+
+    # Description of argument(s):
+    # mac_addr  MAC address of the BMC.
+
+    ${fw_env_addr}=  Get FW_Env MAC Address
+
+    ${status}=  Compare MAC Address  ${fw_env_addr}  ${mac_addr}
+    Should Be True  ${status}
+    ...  msg=MAC address ${fw_env_addr} does not match ${mac_addr}.
 
 
 Run Build Net
