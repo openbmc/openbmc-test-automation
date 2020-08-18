@@ -40,6 +40,15 @@ Configure Valid MAC And Verify
     # Verify whether new MAC is configured on BMC.
     Validate MAC On BMC  ${valid_mac}
 
+Configure Valid MAC And Verify On FW_Env
+    [Documentation]  Configure valid MAC via Redfish and verify on FW_Env.
+    [Tags]  Configure_Valid_MAC_And_Verify_On_FW_Env
+
+    Configure MAC Settings  ${valid_mac}  valid
+
+    # Verify whether new MAC is configured on FW_Env.
+    Validate MAC On FW_Env  ${valid_mac}
+
 
 Configure Zero MAC And Verify
     [Documentation]  Configure zero MAC via Redfish and verify.
@@ -48,6 +57,20 @@ Configure Zero MAC And Verify
     [Template]  Configure MAC Settings
     # MAC address  scenario
     ${zero_mac}    error
+
+Configure Invalid MAC And Verify on FW_Env
+    [Documentation]  Configure Invalid  MAC via Redfish and verify on FW_Env.
+    [Tags]  Configure_Invalid_MAC_And_Verify_On_FW_Env
+
+    [Template]  Configure MAC Settings
+
+    # invalid_MAC        scenario
+    ${zero_mac}          error
+    ${broadcast_mac}     error
+    ${special_char_mac}  error
+    ${less_byte_mac}     error
+    ${out_of_range_mac}  error
+    ${more_byte_mac}     error
 
 
 Configure Broadcast MAC And Verify
@@ -66,6 +89,7 @@ Configure Invalid MAC And Verify
     # MAC Address        Expected_Result
     ${special_char_mac}  error
 
+
 Configure Valid MAC And Check Persistency
     [Documentation]  Configure valid MAC and check persistency.
     [Tags]  Configure_Valid_MAC_And_Check_Persistency
@@ -78,6 +102,27 @@ Configure Valid MAC And Check Persistency
     # Reboot BMC and check whether MAC is persistent.
     OBMC Reboot (off)
     Validate MAC On BMC  ${valid_mac}
+
+Configure Valid MAC And Verify Persistency On FW_Env
+    [Documentation]  Configure valid MAC and verify persistency on FW_Env.
+    [Tags]  Configure_Valid_MAC_And_Verify_Persistency_On_FW_Env
+
+    Configure MAC Settings  ${valid_mac}  valid
+
+    # Reboot BMC and check whether MAC is persistent on FW_Env.
+    OBMC Reboot (off)
+    Validate MAC On FW_Env  ${valid_mac}
+
+Configure Invalid MAC And Verify Persistency On FW_Env
+    [Documentation]  Configure invalid MAC and verify persistency on FW_Env.
+    [Tags]  Configure_Invalid_MAC_And_Verify_Persistency_On_FW_Env
+
+    Configure MAC Settings  ${special_char_mac}  error
+
+    # Reboot BMC and check whether MAC is persistent on FW_Env.
+    # It should match with initial mac address.
+    OBMC Reboot (off)
+    Validate MAC On FW_Env  ${initial_mac_address}
 
 Configure Out Of Range MAC And Verify
     [Documentation]  Configure out of range MAC via Redfish and verify.
@@ -159,6 +204,7 @@ Configure MAC Settings
 
     # Verify whether new MAC address is populated on BMC system.
     # It should not allow to configure invalid settings.
+    # Also,validates MAC on FW_Env as initial MAC address for invalid settings.
 
     ${status}=  Run Keyword And Return Status
     ...  Validate MAC On BMC  ${mac_address}
@@ -169,4 +215,10 @@ Configure MAC Settings
     ...  ELSE
     ...      Should Be Equal  ${status}  ${True}
     ...      msg=Not allowing the configuration of a valid MAC.
+
+    Run Keyword If  '${expected_result}' == 'error'
+    ...      Validate MAC On FW_Env  ${initial_mac_address}
+
+
+
 
