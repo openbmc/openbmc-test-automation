@@ -20,13 +20,23 @@ Test Teardown     FFDC On Test Case Fail
 Create A Session With ClientID And Verify
    [Documentation]  Create a session with client id and verify client id is same.
    [Tags]  Create_A_Session_With_ClientID_And_Verify
-   [Template]  Create A Session With ClientID
+   [Template]  Create And Verify Session ClientID
 
-   # client_id
-   12345
-   123456
-   EXTERNAL-CLIENT-01
-   EXTERNAL-CLIENT-02
+   # client_id           # reboot_flag
+   12345                 False
+   123456                False
+   EXTERNAL-CLIENT-01    False
+   EXTERNAL-CLIENT-02    False
+
+
+Check ClientID Persistency On BMC Reboot
+   [Documentation]  Create a session with client id and verify client id is same after the reboot.
+   [Tags]  Check_ClientID_Persistency_On_BMC_Reboot
+   [Template]  Create And Verify Session ClientID
+
+   # client_id           # reboot_flag
+   12345                 True
+   EXTERNAL-CLIENT-01    True
 
 *** Keywords ***
 
@@ -39,8 +49,8 @@ Create A Session With ClientID
     #              (e.g. 12345, "EXTERNAL-CLIENT").
 
     ${resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
-    Verify A Session Created With ClientID  ${client_id}  ${resp['Id']}
 
+    [Return]  ${resp}
 
 Verify A Session Created With ClientID
     [Documentation]  Verify session created with client id.
@@ -75,3 +85,20 @@ Verify A Session Created With ClientID
     Valid Value  client_id  ['${sessions["Oem"]["OpenBMC"]["ClientID"]}']
     Valid Value  sessions["Id"]  ['${session_id}']
     Valid Value  temp_ipaddr  ${ipaddr}
+
+
+Create And Verify Session ClientID
+    [Documentation]  Create redifish session with client id and verify it remain same.
+    [Arguments]  ${client_id}  ${reboot_flag}=False
+
+    # Description of argument(s):
+    # client_id    This client id contain string value
+    #              (e.g. 12345, "EXTERNAL-CLIENT").
+    # reboot_flag  Flag is used to run reboot the BMC code.
+    #               (e.g. True or False).
+
+    ${session_info}=  Create A Session With ClientID  ${client_id}
+    Verify A Session Created With ClientID  ${client_id}  ${session_info['Id']}
+    Run Keyword If  '${reboot_flag}' == 'True'
+    ...  Redfish OBMC Reboot (off)
+    Verify A Session Created With ClientID  ${client_id}  ${session_info['Id']}
