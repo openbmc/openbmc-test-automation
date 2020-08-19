@@ -13,6 +13,7 @@ Test Setup      Test Setup Execution
 
 ${xpath_new_password}      //input[@id="password"]
 ${xpath_confirm_password}  //input[@id="password-confirmation"]
+${xpath_logged_usename}    //*[@data-test-id='appHeader-container-user']
 
 *** Test Cases ***
 
@@ -42,6 +43,15 @@ Verify Existence Of All Buttons And Input Boxes In Profile Settings Page
 
     # Buttons in profile settings page.
     Page Should Contain Element  ${xpath_save_settings_button}
+
+
+Verify Logged In Username
+    [Documentation]  Verify logged in username in profile settings page.
+    [Tags]  Verify_Logged_In_Username
+
+    Wait Until Page Contains Element  ${xpath_logged_usename}
+    ${gui_logged_username}=  Get Text  ${xpath_logged_usename}
+    Should Contain  ${gui_logged_username}  ${OPENBMC_USERNAME}
 
 
 *** Keywords ***
