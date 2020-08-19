@@ -12,7 +12,8 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_overview_page_header}  //h1[contains(text(), "Overview")]
+${xpath_overview_page_header}          //h1[contains(text(), "Overview")]
+${xpath_edit_network_settings_button}  //*[@data-test-id='overviewQuickLinks-button-networkSettings']
 
 *** Test Cases ***
 
@@ -58,6 +59,14 @@ Verify BMC Information Section
 
     ${firmware_version}=  Redfish Get BMC Version
     Page Should Contain  ${firmware_version}
+
+
+Verify Edit Network Setting Button
+    [Documentation]  Verify navigation to network setting page after clicking the button in overview page.
+    [Tags]  Verify_Edit_Network_Setting_Button
+
+    Click Element  ${xpath_edit_network_settings_button}
+    Wait Until Page Contains Element  ${xpath_network_page_header}
 
 
 *** Keywords ***
