@@ -23,6 +23,15 @@ Verify GUI Header Text
     Should Contain  ${gui_header_text}  BMC System Management
 
 
+Verify Server Health Button
+    [Documentation]  Verify event log page on clicking health button.
+    [Tags]  Verify_Server_Health_Button
+
+    Wait Until Element Is Visible   ${xpath_server_health_header}
+    Click Element  ${xpath_server_health_header}
+    Wait Until Page Contains Element  ${xpath_event_header}  timeout=15s
+
+
 Verify GUI Logout
     [Documentation]  Verify OpenBMC GUI logout.
     [Tags]  Verify_GUI_Logout
