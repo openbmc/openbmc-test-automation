@@ -135,6 +135,7 @@ class resource_variables():
     xpath_event_header = "//h1[text()='Event logs']"
     xpath_server_power_header = "//*[@data-test-id='appHeader-container-power']"
     xpath_refresh_button = "//*[@data-test-id='appHeader-button-refresh']"
+    xpath_network_page_header = "//h1[contains(text(), 'Network settings')]"
 
     # xpath for health menu
     xpath_health_menu = "//button[@aria-controls='health-menu']"
