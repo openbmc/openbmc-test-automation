@@ -17,7 +17,7 @@ ${xpath_tpm_policy_button}               //input[@id='tpm-required-policy']
 
 
 Verify Existence Of Buttons In Host Os Boot Settings
-    [Documentation]  Verify existence of all buttons in Host Os Boot Settings.
+    [Documentation]  Verify existence of all buttons in Host OS boot settings.
     [Tags]  Verify_Existence_Of_Buttons_In_Host_Os_Boot_Settings
 
     Page Should Contain Element  ${xpath_tpm_policy_button}
