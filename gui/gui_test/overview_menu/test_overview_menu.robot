@@ -12,9 +12,17 @@ Test Setup      Test Setup Execution
 *** Variables ***
 
 ${xpath_overview_page_header}  //h1[contains(text(), "Overview")]
+${xpath_edit_network_settings}  //*[@data-test-id='overviewQuickLinks-button-networkSettings']
 
 
 *** Test Cases ***
+
+Verify edit network setting button
+    [Documentation]  edit network setting button.
+    [Tags]  Verify_edit_network_setting_button
+
+    Page Should Contain Element  ${xpath_edit_network_settings}
+
 
 Verify Existence Of All Sections In Overview Page
     [Documentation]  Verify existence of all sections in Overview page.
