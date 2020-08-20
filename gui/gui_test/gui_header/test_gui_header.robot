@@ -32,6 +32,15 @@ Verify Server Health Button
     Wait Until Page Contains Element  ${xpath_event_header}  timeout=15s
 
 
+Verify Server Power Button
+    [Documentation]  Verify server power operations page on clicking power button.
+    [Tags]  Verify_Server_Power_Button
+
+    Wait Until Element Is Visible   ${xpath_server_power_header}
+    Click Element  ${xpath_server_power_header}
+    Wait Until Page Contains  Server power operations
+
+
 Verify GUI Logout
     [Documentation]  Verify OpenBMC GUI logout.
     [Tags]  Verify_GUI_Logout
