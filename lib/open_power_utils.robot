@@ -1,8 +1,9 @@
 *** Settings ***
 Documentation  Open power domain keywords.
 
-Variables      ../data/variables.py
-Resource       ../lib/utils.robot
+Variables       ../data/variables.py
+Resource        ../lib/connection_client.robot
+Resource        ../lib/utils.robot
 
 *** Keywords ***
 
@@ -169,3 +170,23 @@ REST Verify No Gard Records
     ${resp}=  Read Properties  ${OPENPOWER_CONTROL}gard/enumerate
     Log Dictionary  ${resp}
     Should Be Empty  ${resp}  msg=Found gard records.
+
+
+Inject OPAL TI
+    [Documentation]  OPAL terminate immediate procedure.
+    [Arguments]      ${stable_branch}=master
+    ...              ${repo_dir_path}=${EXECDIR}/repository
+    ...              ${repo_github_url}=https://github.com/open-power/op-test
+
+    # Description of arguments:
+    # stable_branch    Git branch to clone. (default: master)
+    # repo_dir_path    Directory path for repo tool (e.g. "op-test").
+    # repo_github_url  Github URL link (e.g. "https://github.com/open-power/op-test").
+
+    ${cmd_buf}  Catenate  rm -rf ${repo_dir_path} ;
+    ...  git clone --branch ${stable_branch} ${repo_github_url} ${repo_dir_path}
+    ${rc}  ${output}=  Shell Cmd  ${cmd_buf}
+
+    Open Connection for SCP
+    scp.Put File  ${EXECDIR}/repository/test_binaries/deadbeef  /tmp
+    Pdbg  -a putmem 0x300000f8 < /tmp/deadbeef
