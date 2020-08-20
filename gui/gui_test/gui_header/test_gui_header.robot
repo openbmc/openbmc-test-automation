@@ -30,3 +30,12 @@ Verify GUI Logout
     Click Element  ${xpath_root_button_menu}
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}  timeout=15s
+
+
+Verify Power Button
+    [Documentation]  Verify server power operations page on clicking power button.
+    [Tags]  Verify_Power_Button
+
+    Wait Until Element Is Visible   ${xpath_select_power}
+    Click Element  ${xpath_select_power}
+    Wait Until Page Contains  Server power operations

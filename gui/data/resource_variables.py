@@ -129,6 +129,7 @@ class resource_variables():
     xpath_overview_menu = "//a[@href='#/']"
     xpath_root_button_menu = "//*[@id='app-header-user__BV_toggle_']"
     xpath_profile_settings = "//a[@href='#/profile-settings']"
+    xpath_select_power = "//*[@data-test-id='appHeader-container-power']"
 
     # xpath for health menu
     xpath_health_menu = "//button[@aria-controls='health-menu']"
