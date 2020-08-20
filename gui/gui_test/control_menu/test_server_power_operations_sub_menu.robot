@@ -14,6 +14,11 @@ Test Setup      Test Setup Execution
 ${xpath_enable_onetime_boot_checkbox}      //*[contains(@class,'custom-checkbox')]
 ${xpath_boot_option_select}                //*[@id='boot-option']
 
+${xpath_shutdown_button}    //*[@data-test-id='serverPowerOperations-button-shutDown']
+${xpath_reboot_button}      //*[@data-test-id='serverPowerOperations-button-reboot']
+${xpath_poweron_button}     //*[@data-test-id='serverPowerOperations-button-powerOn']
+
+
 *** Test Cases ***
 
 Verify Existence Of All Input Boxes In Host Os Boot Settings
@@ -39,6 +44,25 @@ Verify Existence Of All Sections In Server Power Operations Page
     Page Should Contain  Current status
     Page Should Contain  Host OS boot settings
     Page Should Contain  Operations
+
+
+Verify PowerOn Button Should Present At Power Off
+    [Documentation]  Verify existence of poweron button at power off.
+    [Tags]  Verify_PowerOn_Button_Should_Present_At_Power_Off
+
+    Redfish Power Off  stack_mode=skip
+    # TODO: Implement power off using GUI later.
+    Page Should Contain Element  ${xpath_poweron_button}
+
+
+Verify Shutdown And Reboot Buttons Presence At Power On
+    [Documentation]  Verify existence of shutdown and reboot buttons at power on.
+    [Tags]  Verify_Shutdown_And_Reboot_Buttons_Presence_At_Power_On
+
+    Redfish Power On  stack_mode=skip
+    # TODO: Implement power on using GUI later.
+    Page Should Contain Element  ${xpath_shutdown_button}
+    Page Should Contain Element  ${xpath_reboot_button}
 
 
 *** Keywords ***
