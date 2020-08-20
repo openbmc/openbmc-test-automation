@@ -59,6 +59,15 @@ Check Multiple ClientID Persistency On BMC Reboot
     EXTERNAL-CLIENT-01,EXTERNAL-CLIENT-02    True
 
 
+Fail To Set Client Origin IP
+    [Documentation]  Fail to set the client origin IP.
+    [Tags]  Fail_To_Set_Client_Origin_IP
+    [Template]  Create Session And Fail To Set Client Origin IP
+
+    # client_id
+    12345
+    EXTERNAL-CLIENT-01
+
 *** Keywords ***
 
 Create A Session With ClientID
@@ -144,3 +153,21 @@ Create And Verify Session ClientID
     Run Keyword If  '${reboot_flag}' == 'True'
     ...  Run Keywords  Redfish OBMC Reboot (off)  AND
     ...  Verify A Session Created With ClientID  ${client_ids}  ${session_info}
+
+
+Set Client Origin IP
+    [Documentation]  Set client origin ip.
+    [Arguments]  ${client_id}  ${client_ip}  ${status}
+
+    ${session}=  Run Keyword And Return Status
+    ...  Redfish Login
+    ...  kwargs= "Oem":{"OpenBMC": {"ClientID":"${client_id}", "ClientOriginIP":"${client_ip}"}}
+    Valid Value  session  [${status}]
+
+
+Create Session And Fail To Set Client Origin IP
+    [Documentation]  Create redifish session with client id and fail to set client origin ip.
+    [Arguments]  ${client_id}
+
+    Set Test Variable  ${client_ip}  10.6.7.8
+    ${resp}=  Set Client Origin IP  ${client_id}  ${client_ip}  status=False
