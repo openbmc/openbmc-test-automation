@@ -791,5 +791,32 @@
         "method_type": "keyword",
         "method": "Redfish Power Operation  ForceRestart",
         "lib_file_path": "bmc_redfish_utils.robot"
+    },
+    # OPAL Terminate Immediate.
+    "OPAL TI": {
+        "start": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "rest": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^FW Progress, Starting OS|OSStart$",
+            "operating_system": "^BootComplete$",
+            "host": "^Running$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Inject OPAL TI",
+        "lib_file_path": "open_power_utils.robot"
     }
 }
