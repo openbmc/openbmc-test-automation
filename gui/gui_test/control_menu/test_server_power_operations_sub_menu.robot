@@ -11,8 +11,17 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
+${xpath_tpm_policy_button}               //input[@id='tpm-required-policy']
 
 *** Test Cases ***
+
+
+Verify Existence Of Buttons In Host Os Boot Settings
+    [Documentation]  Verify existence of buttons in Host OS boot settings.
+    [Tags]  Verify_Existence_Of_Buttons_In_Host_Os_Boot_Settings
+
+    Page Should Contain Element  ${xpath_tpm_policy_button}
+
 
 Verify Existence Of All Sections In Server Power Operations Page
     [Documentation]  Verify existence of all sections in Server Power Operations page.
