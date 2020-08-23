@@ -95,6 +95,7 @@ class resource_variables():
     xpath_drop_down_timezone_edt = \
         "//*[@id='event-log']/section[1]/div/div/button"
     xpath_refresh_circle = "/html/body/main/loader/div[1]/svg/circle"
+    xpath_refresh_button = "//*[@data-test-id='appHeader-button-refresh']"
     xpath_drop_down_timezone_utc =  \
         "//*[@id='event-log']/section[1]/div/div/ul/li[2]/button"
     xpath_event_filter_all = "//*[text()='All events']"
