@@ -19,6 +19,7 @@ Test Setup      Test Setup Execution
 ${xpath_overview_page_header}          //h1[contains(text(), "Overview")]
 ${xpath_edit_network_settings_button}  //*[@data-test-id='overviewQuickLinks-button-networkSettings']
 ${view_all_event_logs}                 //*[@data-test-id='overviewEvents-button-eventLogs']
+${xpath_launch_serial_over_lan}        //*[@data-test-id='overviewQuickLinks-button-solConsole']
 
 *** Test Cases ***
 
@@ -120,6 +121,14 @@ Verify View All Event Logs Button
     Page Should Contain Element  ${view_all_event_logs}  timeout=30
     Click Element  ${view_all_event_logs}
     Wait Until Page Contains Element  ${xpath_event_header}  timeout=30
+
+
+Verify Serial Over LAN Console Button In Overview Page
+    [Documentation]  Click serial over LAN button and verify page navigation to serial over LAN page.
+    [Tags]  Verify_Serial_Over_LAN_Console_Button_In_Overview_Page
+
+    Click Element  ${xpath_launch_serial_over_lan}
+    Wait Until Page Contains  ${xpath_sol_header}
 
 
 *** Keywords ***
