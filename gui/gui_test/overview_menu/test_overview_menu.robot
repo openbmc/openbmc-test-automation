@@ -15,6 +15,7 @@ Test Setup      Test Setup Execution
 
 ${xpath_overview_page_header}          //h1[contains(text(), "Overview")]
 ${xpath_edit_network_settings_button}  //*[@data-test-id='overviewQuickLinks-button-networkSettings']
+${view_all_event_logs}                 //*[@data-test-id='overviewEvents-button-eventLogs']
 
 *** Test Cases ***
 
@@ -78,6 +79,16 @@ Verify Event Under High Priority Events Section
     Click Element  ${xpath_refresh_button}
     Generate Test Error Log
     Wait Until Page Contains  xyz.openbmc_project.Common.Error.InternalFailure  timeout=30s
+
+
+Verify View All Event Logs Button
+    [Documentation]  Verify view all event log button in overview page.
+    [Tags]  Verify_View_All_Event_Logs_Button
+
+    Generate Test Error Log
+    Page Should Contain Element  ${view_all_event_logs}  timeout=30
+    Click Element  ${view_all_event_logs}
+    Wait Until Page Contains Element  ${xpath_event_header}  timeout=30
 
 
 *** Keywords ***
