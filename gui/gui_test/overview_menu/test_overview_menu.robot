@@ -11,8 +11,8 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_overview_page_header}  //h1[contains(text(), "Overview")]
-
+${xpath_overview_page_header}      //h1[contains(text(), "Overview")]
+${xpath_launch_serial_over_lan}    //*[@data-test-id='overviewQuickLinks-button-solConsole']
 
 *** Test Cases ***
 
@@ -25,6 +25,14 @@ Verify Existence Of All Sections In Overview Page
     Page Should Contain  Network information
     Page Should Contain  Power consumption
     Page Should Contain  High priority events
+
+
+Verify Serial Over LAN Console Button In Overview Page
+    [Documentation]  Click serial over LAN button and verify page navigation to serial over LAN page.
+    [Tags]  Verify_Serial_Over_LAN_Console_Button_In_Overview_Page
+
+    Click Element  ${xpath_launch_serial_over_lan}
+    Wait Until Page Contains  ${xpath_sol_header}
 
 
 *** Keywords ***

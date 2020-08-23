@@ -133,6 +133,7 @@ class resource_variables():
     xpath_profile_settings = "//a[@href='#/profile-settings']"
     xpath_server_health_header = "//*[@data-test-id='appHeader-container-health']"
     xpath_event_header = "//h1[text()="Event logs"]"
+    xpath_sol_header = "//h1[contains(text(), "Serial over LAN console")]"
 
     # xpath for health menu
     xpath_health_menu = "//button[@aria-controls='health-menu']"
