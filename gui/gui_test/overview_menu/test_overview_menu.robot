@@ -170,6 +170,16 @@ Verify Server LED Turn Off
     Should Be True  '${led_status}' == 'Off'
 
 
+Verify BMC Time In Overview Page
+    [Documentation]  Verify that BMC date from GUI matches with BMC time via Redfish.
+    [Tags]  Verify_BMC_Time_In_Overview_Page
+
+    ${date_time}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/bmc  DateTime
+    ${converted_date}=  Convert Date  ${date_time}  result_format=%Y-%m-%d
+
+    Page Should Contain  ${converted_date}
+
+
 *** Keywords ***
 
 Test Setup Execution
