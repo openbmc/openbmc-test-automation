@@ -16,6 +16,13 @@ ${xpath_overview_page_header}  //h1[contains(text(), "Overview")]
 
 *** Test Cases ***
 
+Verify Existence Of BMC Time Section
+    [Documentation]  Verify existence of BMC time section in Overview page.
+    [Tags]  Verify_Existence_Of_BMC_Time_Section
+
+    Page Should Contain  BMC time 
+
+
 Verify Existence Of All Sections In Overview Page
     [Documentation]  Verify existence of all sections in Overview page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Overview_Page
