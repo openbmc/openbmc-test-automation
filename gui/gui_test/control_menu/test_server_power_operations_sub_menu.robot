@@ -11,8 +11,27 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
+${Current_status}      //*[contains(@class,'row mb-4')]
 
 *** Test Cases ***
+
+Verify System State At Power Off
+    [Documentation]  Verify state of the system in power off state.
+    [Tags]  Verify_System_State_At_Power_Off
+
+    Redfish Power Off  stack_mode=skip
+    Page Should Contain Element  ${Current_status}
+    Element Should Contain   ${Current_status}  Off
+
+
+Verify System State At Power On
+    [Documentation]  Verify state of the system in power on state.
+    [Tags]  Verify_System_State_At_Power_On
+
+    Redfish Power On  stack_mode=skip
+    Page Should Contain Element  ${Current_status}
+    Element Should Contain   ${Current_status}  On
+
 
 Verify Existence Of All Sections In Server Power Operations Page
     [Documentation]  Verify existence of all sections in Server Power Operations page.
