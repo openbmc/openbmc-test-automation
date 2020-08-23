@@ -131,6 +131,18 @@ Verify Serial Over LAN Console Button In Overview Page
     Wait Until Page Contains  ${xpath_sol_header}
 
 
+Verify BMC Time In Overview Page
+    [Documentation]  We need to test is BMC time is reflected correct in the GUI.
+    [Tags]  Verify_Existence_Of_BMC_Time_Section
+
+    Page Should Contain  BMC time
+
+    ${date_time}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/bmc  DateTime
+    ${converted_date}=  Convert Date  ${date_time}  result_format=%Y-%m-%d
+
+    Page Should Contain  ${converted_date}
+
+
 *** Keywords ***
 
 Test Setup Execution
