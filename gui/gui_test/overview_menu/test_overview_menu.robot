@@ -34,6 +34,13 @@ Verify Existence Of All Sections In Overview Page
     Page Should Contain  High priority events
 
 
+Verify Existence Of BMC Time Section
+    [Documentation]  Verify existence of BMC time section in Overview page.
+    [Tags]  Verify_Existence_Of_BMC_Time_Section
+
+    Page Should Contain  BMC time
+
+
 Verify Message In High Priority Events Section For No Events
     [Documentation]  Verify message under high priority events section in case of no events.
     [Tags]  Verify_Message_In_High_Priority_Events_Section_For_No_Events
