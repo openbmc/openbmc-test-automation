@@ -114,6 +114,17 @@ Delete VMI Static IP Address And Verify
    Should Be Empty  ${resp.dict["IPv4Addresses"]}
 
 
+Enable DHCP When Static IP Configured And Verify Static IP
+   [Documentation]  Enable DHCP when static ip configured and verify static ip
+   [Tags]  Enable_DHCP_when_Static_IP_Configured_And_Verify_Static_IP
+
+   Verify Assigning Static IPv4 Address To VMI
+   ...  10.5.20.30  0.0.0.0  0.0.0.0  ${False}  ${True}  ${HTTP_ACCEPTED}
+   Apply VMI Ethernet Config  ${DHCP_ENABLED}
+   ${vmi_ip}=  Get VMI Network Interface Details
+   Should Not Be Equal As Strings  10.10.20.30  ${vmi_ip["IPv4_Address"]}
+
+
 *** Keywords ***
 
 Get VMI Network Interface Details
@@ -300,3 +311,20 @@ Switch VMI IPv4 Origin And Verify Details
     Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}  ${host_reboot}
 
     [Return]  ${origin}
+
+
+Apply VMI Ethernet Config
+    [Documentation]  Set the given Ethernet config property.
+    [Arguments]  ${property}  ${host_reboot}=${True}
+
+    ${active_channel_config}=  Get Active Channel Config
+    Redfish.Patch
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ...  body={"DHCPv4":${property}}  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+
+    Run Keyword If  ${host_reboot} == ${True}  Run Keywords
+    ...  Redfish Power Off  AND  Redfish Power On  AND  Redfish.Login
+
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Should Be Equal As Strings  ${property}  ${resp.dict["DHCPv4"]}
