@@ -11,6 +11,11 @@ Suite Teardown  Close Browser
 *** Variables ***
 ${xpath_sensors_export}         //a[contains(text(), "Export")]
 ${xpath_sensors_search}         //input[contains(@id,"searchInput")]
+${xpath_sensors_filter}    //button[contains(text(),'Filter')]
+${xpath_filter_ok}         //*[@data-test-id='tableFilter-checkbox-OK']
+${xpath_filter_warning}    //*[@data-test-id='tableFilter-checkbox-Warning']
+${xpath_filter_critical}   //*[@data-test-id='tableFilter-checkbox-Critical']
+${xpath_filter_clear_all}  //*[@data-test-id='tableFilter-button-clearAll']
 
 *** Test Cases ***
 Verify Select Sensors From Server Health
@@ -28,6 +33,21 @@ Verify Search Text Enterable
     Wait Until Page Contains Element  ${xpath_sensors_search}
     Input Text  ${xpath_sensors_search}  temp
     Wait Until Page Contains  p0 vcs temp  timeout=15
+
+
+Verify Sensors Filter From Server Health Clickable
+    [Documentation]  Verify sensors filter from server health clickable
+    [Tags]  Verify_Sensors_Filter_From_Server_Health_Clickable
+
+    Wait Until Element Is Visible   ${xpath_server_health_header}
+    Click Element  ${xpath_server_health_header}
+    Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
+    Click Element  ${xpath_sensors_filter}
+
+    Page Should Contain Element  ${xpath_filter_ok}
+    Page Should Contain Element  ${xpath_filter_warning}
+    Page Should Contain Element  ${xpath_filter_critical}
+    Page Should Contain Element  ${xpath_filter_clear_all}
 
 
 *** Keywords ***

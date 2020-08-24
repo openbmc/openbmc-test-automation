@@ -10,7 +10,7 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_header_text}   //*[contains(@class, "navbar-text")]
+${xpath_header_text}       //*[contains(@class, "navbar-text")]
 
 
 *** Test Cases ***
