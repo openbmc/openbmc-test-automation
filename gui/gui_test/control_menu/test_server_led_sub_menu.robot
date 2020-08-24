@@ -11,6 +11,8 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
+${xpath_led_value}           //*[@data-test-id='serverLed-checkbox-switchIndicatorLed']/following-sibling::label/span
+${xpath_overview_led_value}  //*[@data-test-id='overviewQuickLinks-checkbox-serverLed']/following-sibling::label/span
 
 *** Test Cases ***
 
@@ -19,6 +21,17 @@ Verify Existence Of All Sections In Server LED Page
     [Tags]  Verify_Existence_Of_All_Sections_In_Server_LED_Page
 
     Page Should Contain  LED light control
+
+
+Verify Server Led Sync With Overview Page LED Status
+    [Documentation]  Verify server LED sync with overview page LED status.
+    [Tags]  Verify_Server_Led_Sync_With_Overview_Page_LED_Status
+
+    ${gui_led_value} =  Get Text  ${xpath_led_value}
+    Click Element  ${xpath_overview_menu}
+    ${overview_led_value} =  Get Text  ${xpath_overview_led_value}
+
+    Should Be Equal  ${gui_led_value}  ${overview_led_value}
 
 
 *** Keywords ***
