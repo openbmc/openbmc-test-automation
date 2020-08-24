@@ -11,6 +11,7 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
+<<<<<<< HEAD
 ${xpath_led_value}           //*[@data-test-id='serverLed-checkbox-switchIndicatorLed']/following-sibling::label/span
 ${xpath_overview_led_value}  //*[@data-test-id='overviewQuickLinks-checkbox-serverLed']/following-sibling::label/span
 
@@ -32,6 +33,17 @@ Verify Server Led Sync With Overview Page LED Status
     ${overview_led_value} =  Get Text  ${xpath_overview_led_value}
 
     Should Be Equal  ${gui_led_value}  ${overview_led_value}
+
+
+Verify Server Led On
+    [Documentation]  Test gui server led on state and verify using Redfish.
+    [Tags]  Verify_Server_Led_On
+
+    ${gui_led_value} =  Get Text  ${xpath_led_value}
+    ${redfish_readings}=  Redfish.Get Properties  /redfish/v1/Systems/system
+    ${redfish_led_value}=  Set Variable If  '${redfish_readings["IndicatorLED"]}' == 'Lit'
+        ...  ${gui_led_value}
+    Should Be Equal  ${gui_led_value}  ${redfish_led_value}
 
 
 *** Keywords ***
