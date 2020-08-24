@@ -20,6 +20,7 @@ ${xpath_overview_page_header}          //h1[contains(text(), "Overview")]
 ${xpath_edit_network_settings_button}  //*[@data-test-id='overviewQuickLinks-button-networkSettings']
 ${view_all_event_logs}                 //*[@data-test-id='overviewEvents-button-eventLogs']
 ${xpath_launch_serial_over_lan}        //*[@data-test-id='overviewQuickLinks-button-solConsole']
+${xpath_LED_button}                    //*[@data-test-id='overviewQuickLinks-checkbox-serverLed']
 
 *** Test Cases ***
 
@@ -131,7 +132,57 @@ Verify Serial Over LAN Console Button In Overview Page
     Wait Until Page Contains  ${xpath_sol_header}
 
 
+Verify Turn On server LED button
+    [Documentation]  Verify server turn on led button.
+    [Tags]  Verify_Turn_On_server_LED_button
+
+    # Turn Off the server LED via Redfish
+    ${retx}=  Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Off"}   valid_status_codes=[200, 204]
+
+    # Refresh GUI, TBD
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains Element  ${xpath_LED_button}
+
+    # Turn on the server LED via GUI and sleep,TBD
+    #Click Element  ${xpath_LED_button}
+    Click Element At Coordinates  ${xpath_LED_button}  0  0
+
+    # Cross check that server LED on state via Redfish
+    ${led_statu}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
+    Should Be True  '${led_statu}' == 'Lit'
+
+
+Verify Turn Off server LED button
+    [Documentation]  Verify server turn off led button.
+    [Tags]  Verify_Turn_Off_server_LED_button
+
+    ${expected_LED_TEXT}=  Set Variable  Off
+    ${LED_TEXT}=  Get Text  ${xpath_LED_button}
+
+    # If not equal led is in On state, so togle and check if the label is Off
+    Run Keyword If  '${expected_LED_TEXT}' != '${LED_TEXT}'  Toggle And Confirm Expected Led  ${expected_LED_TEXT}
+
+
 *** Keywords ***
+
+Toggle And Confirm Expected Led
+    [Arguments]   ${LED_text_expected}
+
+    Click Element At Coordinates  ${xpath_LED_button}  0  0
+    Wait Until Keyword Succeeds  10 min  60 sec  Is ServerLed Text Expected  ${LED_text_expected}
+
+
+Is ServerLed Text Expected
+    [Arguments]   ${expected_LED_text}
+
+    ${Text_LED}=  Get Text  ${xpath_LED_button}
+    ${matched}=  Run Keyword If  '${Text_LED}' == '${expected_LED_text}'
+    ...    Set Variable  True
+    ...  ELSE
+    ...    Set Variable  False
+
+    [return]  ${matched}
+
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
