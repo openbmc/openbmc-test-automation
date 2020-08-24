@@ -7,11 +7,15 @@ Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Library          ../../lib/bmc_network_utils.py
 
-Suite Setup       Redfish.Login
+Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Redfish.Logout
 
 *** Variables ***
+
+${vmi_ip}                 10.10.20.30
+${vmi_netmask}            255.255.0.0
+${vmi_gateway}            0.0.0.0
 
 &{DHCP_ENABLED}           DHCPEnabled=${${True}}
 &{DHCP_DISABLED}          DHCPEnabled=${${False}}
@@ -105,8 +109,7 @@ Delete VMI Static IP Address And Verify
    [Documentation]  Delete VMI static IP address and verify.
    [Tags]  Delete_VMI_Static_IP_Address_And_Verify
 
-   Set Static IPv4 Address To VMI  10.10.20.30  0.0.0.0  255.255.252.0
-   Verify VMI Network Interface Details  10.10.20.30  Static  0.0.0.0  255.255.252.0  ${True}
+   Verify Assigning Static IPv4 Address To VMI  ${vmi_ip}  ${vmi_gateway}  ${vmi_netmask}
    Delete VMI IPv4 Address  IPv4Addresses  ${HTTP_ACCEPTED}
    ${active_channel_config}=  Get Active Channel Config
    ${resp}=  Redfish.Get
@@ -114,7 +117,47 @@ Delete VMI Static IP Address And Verify
    Should Be Empty  ${resp.dict["IPv4Addresses"]}
 
 
+Enable DHCP When Static IP Configured And Verify Static IP
+   [Documentation]  Enable DHCP when static ip configured and verify static ip
+   [Tags]  Enable_DHCP_when_Static_IP_Configured_And_Verify_Static_IP
+   [Teardown]  Test Teardown Execution
+
+   Verify Assigning Static IPv4 Address To VMI  ${vmi_ip}  ${vmi_gateway}  ${vmi_netmask}
+   Apply VMI Ethernet Config  ${DHCP_ENABLED}
+   ${vmi_ip}=  Get VMI Network Interface Details
+   Should Not Be Equal As Strings  ${vmi_ip}  ${vmi_ip["IPv4_Address"]}
+
+
 *** Keywords ***
+
+Suite Setup Execution
+    [Documentation]  DO test setup execution task.
+
+    Redfish.Login
+    ${active_channel_config}=  Get Active Channel Config
+    Set Suite Variable   ${active_channel_config}
+    ${vmi}=  Create Dictionary
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${ip_resp}=  Evaluate  json.loads('''${resp.text}''')  json
+    ${length}=  Get Length  ${ip_resp["IPv4StaticAddresses"]}
+    Run Keyword If  ${length} != ${0}
+    ...  Set To Dictionary  ${vmi}  IPv4_Address=${ip_resp["IPv4Addresses"]["Address"]}
+    ...  IPv4_Gateway=${ip_resp["IPv4Addresses"]["Gateway"]}
+    ...  IPv4_Netmask=${ip_resp["IPv4Addresses"]["SubnetMask"]}
+    Set Global Variable  ${vmi}
+
+
+Test Teardown Execution
+    [Documentation]  Do test teardown execution task.
+
+    Apply VMI Ethernet Config  ${DHCP_DISABLED}
+    ${len}=  Get Length  ${vmi}
+    Run Keyword If  ${len} != ${0}
+    ...  Verify Assigning Static IPv4 Address To VMI  ${vmi["IPv4_Address"]}  ${vmi["IPv4_Gateway"]}
+    ...  ${vmi["IPv4_Netmask"]}  ${True}
+    FFDC On Test Case Fail
+
 
 Get VMI Network Interface Details
     [Documentation]  Get VMI network interface details.
@@ -191,7 +234,7 @@ Verify VMI EthernetInterfaces
 Verify VMI Network Interface Details
     [Documentation]  Verify VMI network interface details.
     [Arguments]  ${ip}  ${origin}  ${gateway}  ${netmask}
-    ...  ${host_reboot}=${False}  ${valid_status_code}=${HTTP_OK}
+    ...  ${valid_status_code}=${HTTP_OK}
 
     # Description of argument(s):
     # ip                 VMI IPv4 address.
@@ -201,8 +244,7 @@ Verify VMI Network Interface Details
     # valid_status_code  Expected valid status code from GET request. Default is HTTP_OK.
     # host_reboot        Reboot HOST if True.
 
-    Run Keyword If  ${host_reboot} == ${True}  Run Keywords
-    ...  Redfish Power Off  AND  Redfish Power On  AND  Redfish.Login
+    Run Keywords  Redfish Power Off  AND  Redfish Power On
 
     ${vmi_ip}=  Get VMI Network Interface Details  ${valid_status_code}
     Should Be Equal As Strings  ${origin}  ${vmi_ip["IPv4_AddressOrigin"]}
@@ -228,7 +270,6 @@ Set Static IPv4 Address To VMI
     ${resp}=  Redfish.Patch
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ...  body=${data}  valid_status_codes=[${valid_status_code}]
-    Redfish Power On  stack_mode=skip
     Log To Console  ${resp.text}
 
 
@@ -236,7 +277,6 @@ Verify Assigning Static IPv4 Address To VMI
     [Documentation]    Verify assigning static IPv4 address to VMI.
     [Arguments]  ${ip}  ${gateway}  ${netmask}  ${del_curr_ip}=${True}  ${host_reboot}=${True}
     ...  ${valid_status_code}=${HTTP_ACCEPTED}
-
     # Description of argument(s):
     # ip                 VMI IPv4 address.
     # gateway            Gateway for VMI IP.
@@ -300,3 +340,19 @@ Switch VMI IPv4 Origin And Verify Details
     Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}  ${host_reboot}
 
     [Return]  ${origin}
+
+
+Apply VMI Ethernet Config
+    [Documentation]  Set the given Ethernet config property.
+    [Arguments]  ${property}  ${host_reboot}=${True}
+
+    Redfish.Patch
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ...  body={"DHCPv4":${property}}  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
+
+    Run Keyword If  ${host_reboot} == ${True}  Run Keywords
+    ...  Redfish Power Off  AND  Redfish Power On  AND  Redfish.Login
+
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Should Be Equal As Strings  ${property}  ${resp.dict["DHCPv4"]}
