@@ -4,6 +4,7 @@ Documentation   This suite tests Platform Event Log (PEL) functionality of OpenB
 Library         ../../lib/pel_utils.py
 Variables       ../../data/pel_variables.py
 Resource        ../../lib/list_utils.robot
+Resource        ../../lib/logging_utils.robot
 Resource        ../../lib/openbmc_ffdc.robot
 
 Test Setup      Redfish.Login
@@ -361,6 +362,54 @@ Verify Procedure And Symbolic FRU Callout
     Should Contain  ${pel_callout_section['Callouts'][1]['Priority']}  Medium Priority
     # Verify if "Part Number" field of Symbolic FRU has an alphanumeric value.
     Should Match Regexp  ${pel_callout_section['Callouts'][1]['Part Number']}  [a-zA-Z0-9]
+
+
+Verify PEL Log Entry For Event Log
+    [Documentation]  Create an event log and verify PEL log entry in BMC for the same.
+    [Tags]  Verify_PEL_Log_Entry_For_Event_Log
+
+    Redfish Purge Event Log
+    # Create an internal failure error log.
+    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+    ${elog_entry}=  Get Event Logs
+    # Example of Redfish event logs:
+    # elog_entry:
+    #  [0]:
+    #    [Message]:                                    xyz.openbmc_project.Common.Error.InternalFailure
+    #    [Created]:                                    2020-04-20T01:55:22+00:00
+    #    [Id]:                                         1
+    #    [@odata.id]:                                  /redfish/v1/Systems/system/LogServices/EventLog/Entries/1
+    #    [@odata.type]:                                #LogEntry.v1_4_0.LogEntry
+    #    [EntryType]:                                  Event
+    #    [Severity]:                                   Critical
+    #    [Name]:                                       System Event Log Entry
+
+    ${redfish_log_time}=  Convert Date  ${elog_entry[0]["Created"]}  epoch
+
+    ${pel_records}=  Peltool  -l
+    # Example output from 'Peltool  -l':
+    # pel_records:
+    # [0x50000023]:
+    #   [SRC]:                                        BD8D1002
+    #   [CreatorID]:                                  BMC
+    #   [Message]:                                    An application had an internal failure
+    #   [CompID]:                                     0x1000
+    #   [PLID]:                                       0x50000023
+    #   [Commit Time]:                                04/20/2020 01:55:22
+    #   [Subsystem]:                                  BMC Firmware
+    #   [Sev]:                                        Unrecoverable Error
+
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${id}=  Get From List  ${ids}  0
+    ${pel_log_time}=  Convert Date  ${pel_records['${id}']['Commit Time']}  epoch
+    ...  date_format=%m/%d/%Y %H:%M:%S
+
+    # Verify that both Redfish event and PEL has log entry for internal error with same time stamp.
+    Should Contain Any  ${pel_records['${id}']['Message']}  internal failure  ignore_case=True
+    Should Contain Any  ${elog_entry[0]['Message']}  InternalFailure  ignore_case=True
+
+    Should Be Equal  ${redfish_log_time}  ${pel_log_time}
 
 
 Verify Delete All PEL
