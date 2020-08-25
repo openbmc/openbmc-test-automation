@@ -3,6 +3,7 @@
 Documentation  Test OpenBMC GUI "Server power operations" sub-menu of "Server control".
 
 Resource        ../../lib/resource.robot
+Resource        ../../../lib/state_manager.robot  #Manash
 
 Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
@@ -20,7 +21,8 @@ ${xpath_poweron_button}                    //*[@data-test-id='serverPowerOperati
 ${xpath_tpm_policy_button}                 //input[@id='tpm-required-policy']
 ${xpath_save_button}                       //button[contains(text(),'Save')]
 ${Current_status}                          //*[contains(@class,'row mb-4')]
-
+${xpath_shutdown_orderly_radio}            //*[@data-test-id='serverPowerOperations-radio-shutdownOrderly']
+${xpath_shutdown_immediate_radio}          //*[@data-test-id='serverPowerOperations-radio-shutdownImmediate']
 
 *** Test Cases ***
 
@@ -29,6 +31,26 @@ Verify Navigation To Server Power Operations Page
     [Tags]  Verify_Navigation_To_Server_Power_Operations_Page
 
     Page Should Contain Element  ${xpath_server_power_heading}
+
+
+Verify Immediate Shutdown
+    [Documentation]  Verify shutdown after clicking immediate shutdown button.
+    [Tags]  Verify_Immediate_Shutdown
+
+    Redfish Power On  stack_mode=skip
+    Click Element At Coordinates  ${xpath_shutdown_immediate_radio}  0  0
+    Click Element  ${xpath_shutdown_button}
+    Wait Until Keyword Succeeds  10 min  60 sec  Is Host Off
+
+
+Verify Orderly Shutdown
+    [Documentation]  Verify shutdown after clicking orderly shutdown button.
+    [Tags]  Verify_Orderly_Shutdown
+
+    Redfish Power On  stack_mode=skip
+    Click Element At Coordinates  ${xpath_shutdown_orderly_radio}  0  0
+    Click Element  ${xpath_shutdown_button}
+    Wait Until Keyword Succeeds  10 min  60 sec  Is Host Off
 
 
 Verify Existence Of All Sections In Server Power Operations Page
