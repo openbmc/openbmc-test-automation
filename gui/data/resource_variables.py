@@ -20,6 +20,7 @@ class resource_variables():
     xpath_button_logout = '//button[text()="Log out"]'
     xpath_yes_button = "//button[text()='Yes']"
     xpath_power_indicator = "//*[@id='power-indicator-bar']"
+    xpath_current_power_state = "//*[contains(@class,'row mb-4')]"
     xpath_select_button_power_on = "//*[@id='power__power-on']"
     xpath_cancel_button = "//button[contains(text(),'Cancel')]"
     xpath_save_setting_button = "//button[contains(text(),'Save settings')]"
