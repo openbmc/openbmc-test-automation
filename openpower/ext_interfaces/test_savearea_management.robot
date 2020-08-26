@@ -17,6 +17,7 @@ Suite Teardown    Suite Teardown Execution
 
 ${MAX_SIZE_MSG}           File size exceeds maximum allowed size[500KB]
 ${UPLOADED_MSG}           File Created
+${FILE_UPDATED}           File Updated
 ${FORBIDDEN_MSG}          Forbidden
 ${FILE_CREATE_ERROR_MSG}  Error while creating the file
 
@@ -89,11 +90,11 @@ Verify Partition Update On BMC
     Set Test Variable  ${content1}  Sample Content to test partition file upload
     Set Test Variable  ${content2}  Sample Content to test partition file update
 
-    Upload Partition File With Some Known Contents  ${file_name}  ${partition_name}  ${content1}
+    Upload Partition File With Some Known Contents  ${file_name}  ${partition_name}  ${content1}  ${UPLOADED_MSG}
     Read Partition And Verify Content  ${partition_name}  ${content1}
 
     # Upload the same partition with modified contents to verify update partition feature.
-    Upload Partition File With Some Known Contents  ${file_name}  ${partition_name}  ${content2}
+    Upload Partition File With Some Known Contents  ${file_name}  ${partition_name}  ${content2}  ${FILE_UPDATED}
     Read Partition And Verify Content  ${partition_name}  ${content2}
 
 
@@ -131,10 +132,10 @@ Verify Partition Files Persistency And Re-upload After BMC Reboot
 
     # Upload same partition with different content to test partition update after BMC reboot.
     Upload Partition File With Some Known Contents
-    ...  ${file_name}_1  ${partition_name}_1  ${content}_${file_name}_2
+    ...  ${file_name}_1  ${partition_name}_1  ${content}_${file_name}_2  ${FILE_UPDATED}
 
     # Upload different partition.
-    Upload Partition File With Some Known Contents  ${file_name}  ${partition_name}  ${content}
+    Upload Partition File With Some Known Contents  ${file_name}  ${partition_name}  ${content}  ${UPLOADED_MSG}
 
 
 Verify One Thousand Partitions File Upload
@@ -386,7 +387,7 @@ Delete Local File Created To Upload
 
 Upload Partition File With Some Known Contents
     [Documentation]  Upload partition file with some known contents.
-    [Arguments]  ${file_name}  ${partition_name}  ${content}
+    [Arguments]  ${file_name}  ${partition_name}  ${content}  ${expected_msg}=${UPLOADED_MSG}
 
     # Description of argument(s):
     # file_name           Name of the partition file to be uploaded.
@@ -397,7 +398,7 @@ Upload Partition File With Some Known Contents
     OperatingSystem.File Should Exist  ${file_name}
 
     Upload File To Create Partition Then Delete Partition  ${file_name}  1  ${partition_name}
-    ...  delete_partition=${False}
+    ...  expected_msg=${expected_msg}  delete_partition=${False}
 
 
 Suite Setup Execution
