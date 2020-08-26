@@ -43,6 +43,14 @@ Verify Server Information Section
     Page Should Contain  ${redfish_motherboard_manufacturer}
 
 
+Verify BMC Information Section
+    [Documentation]  Verify BMC information section in overview page.
+    [Tags]  Verify_BMC_Information_Section
+
+    ${firmware_version}=  Redfish Get BMC Version
+    Page Should Contain  ${firmware_version}
+
+
 *** Keywords ***
 
 Test Setup Execution
