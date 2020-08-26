@@ -71,7 +71,7 @@ if redfish_supported:
     default_power_on = "Redfish Power On"
     default_power_off = "Redfish Power Off"
     if redfish_rest_supported:
-        delete_errlogs_cmd = "Delete Error Logs"
+        delete_errlogs_cmd = "Delete Error Logs  ${quiet}=${1}"
         default_set_power_policy = "Set BMC Power Policy  ALWAYS_POWER_OFF"
     else:
         delete_errlogs_cmd = "Redfish Purge Event Log"
@@ -79,7 +79,7 @@ if redfish_supported:
 else:
     default_power_on = "REST Power On"
     default_power_off = "REST Power Off"
-    delete_errlogs_cmd = "Delete Error Logs"
+    delete_errlogs_cmd = "Delete Error Logs  ${quiet}=${1}"
     default_set_power_policy = "Set BMC Power Policy  ALWAYS_POWER_OFF"
 boot_count = 0
 

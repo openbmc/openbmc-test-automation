@@ -107,11 +107,12 @@ OpenBMC Put Request
 OpenBMC Delete Request
     [Documentation]  Do REST request to delete the resource identified by the
     ...  URI.
-    [Arguments]    ${uri}    ${timeout}=10    &{kwargs}
+    [Arguments]    ${uri}    ${timeout}=10   ${quiet}=${0}    &{kwargs}
     # Description of argument(s):
     # uri      The URI to establish connection with
     #          (e.g. '/xyz/openbmc_project/software/').
     # timeout  Timeout in seconds to establish connection with URI.
+    # quiet    If enabled, turns off logging to console.
     # kwargs   Any additional arguments to be passed directly to the
     #          Delete Request call. For example, the caller might
     #          set kwargs as follows:
@@ -122,9 +123,10 @@ OpenBMC Delete Request
     ${headers}=  Create Dictionary   Content-Type=application/json
     ...  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary   ${kwargs}  headers   ${headers}
-    Log Request  method=Delete  base_uri=${base_uri}  args=&{kwargs}
+    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Delete
+    ...  base_uri=${base_uri}  args=&{kwargs}
     ${ret}=  Delete Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
-    Log Response    ${ret}
+    Run Keyword If  '${quiet}' == '${0}'  Log Response    ${ret}
     Delete All Sessions
     [Return]    ${ret}
 

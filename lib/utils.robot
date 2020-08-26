@@ -532,6 +532,7 @@ Set BMC Power Policy
 
 Delete Error Logs
     [Documentation]  Delete error logs.
+    [Arguments]  ${quiet}=${0}
 
     # Check if error logs entries exist, if not return.
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
@@ -540,7 +541,7 @@ Delete Error Logs
     # Get the list of error logs entries and delete them all.
     ${elog_entries}=  Get URL List  ${BMC_LOGGING_ENTRY}
     FOR  ${entry}  IN  @{elog_entries}
-        Delete Error Log Entry  ${entry}
+        Delete Error Log Entry  ${entry}  quiet=${quiet}
     END
 
 
