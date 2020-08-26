@@ -27,6 +27,14 @@ Verify Existence Of All Sections In Overview Page
     Page Should Contain  High priority events
 
 
+Verify BMC Information Section
+    [Documentation]  Verify BMC information section in overview page.
+    [Tags]  Verify_BMC_Information_Section
+
+    ${firmware_version}=  Redfish Get BMC Version
+    Page Should Contain  ${firmware_version}
+
+
 *** Keywords ***
 
 Test Setup Execution
