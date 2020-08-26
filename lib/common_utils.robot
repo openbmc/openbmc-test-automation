@@ -792,9 +792,10 @@ Set BMC Boot Count
 
 Delete Error Log Entry
     [Documentation]  Delete error log entry.
-    [Arguments]  ${entry_path}
+    [Arguments]  ${entry_path}  ${quiet}=${0}
 
     # Description of argument(s):
+    # quiet    If enabled, turns off logging to console.
     # entry_path  Delete an error log entry.
     #             Ex. /xyz/openbmc_project/logging/entry/1
 
@@ -807,7 +808,7 @@ Delete Error Log Entry
     Return From Keyword If  ${callout_entry}
 
     ${data}=  Create Dictionary  data=@{EMPTY}
-    ${resp}=  Openbmc Delete Request  ${entry_path}  data=${data}
+    ${resp}=  Openbmc Delete Request  ${entry_path}  data=${data}  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
