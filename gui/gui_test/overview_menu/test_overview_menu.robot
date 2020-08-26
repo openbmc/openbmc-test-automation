@@ -16,6 +16,15 @@ ${xpath_overview_page_header}  //h1[contains(text(), "Overview")]
 
 *** Test Cases ***
 
+Verify values under BMC information section
+    [Documentation]  Verify values under BMC information section.
+    [Tags]  Verify_values_under_BMC_information_section
+
+    Page Should Contain  Firmware version
+    ${firmware_version}=  Redfish Get BMC Version
+    Page Should Contain  ${firmware_version}
+
+
 Verify Existence Of All Sections In Overview Page
     [Documentation]  Verify existence of all sections in Overview page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Overview_Page
