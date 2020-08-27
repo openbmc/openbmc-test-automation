@@ -34,6 +34,10 @@ ${obmc_PowerStandby_state}   Standby
 ${GUI_BROWSER}               ff
 ${GUI_MODE}                  headless
 
+${CMD_INTERNAL_FAILURE}      busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
 *** Keywords ***
 Launch OpenBMC GUI Browser
     [Documentation]  Launch the OpenBMC GUI URL on a browser.
@@ -322,3 +326,9 @@ Logout GUI
 
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}
+
+
+Generate Test Error Log
+    [Documentation]  Generate test error log.
+
+    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
