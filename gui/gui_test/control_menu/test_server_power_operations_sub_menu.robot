@@ -18,6 +18,8 @@ ${xpath_reboot_button}                     //*[@data-test-id='serverPowerOperati
 ${xpath_poweron_button}                    //*[@data-test-id='serverPowerOperations-button-powerOn']
 ${xpath_tpm_policy_button}                 //input[@id='tpm-required-policy']
 ${xpath_save_button}                       //button[contains(text(),'Save')]
+${xpath_reboot_orderly_radio}              //*[@data-test-id='serverPowerOperations-radio-rebootOrderly']
+${xpath_reboot_immediate_radio}            //*[@data-test-id='serverPowerOperations-radio-rebootImmediate']
 
 *** Test Cases ***
 
@@ -71,6 +73,26 @@ Verify Existence Of Buttons In Host Os Boot Settings
 
     Page Should Contain Element  ${xpath_tpm_policy_button}
     Page Should Contain Element  ${xpath_save_button}
+
+
+Verify Reboot Should Happen By Clicking Immediate Reboot Button
+    [Documentation]  Verify Shutdown Should Happen By Clicking Immediate reboot Button.
+    [Tags]  Verify_Shutdown_Should_Happen_By_Clicking_Immediate_Reboot_Button
+
+    Redfish Power On  stack_mode=skip
+    Click Element  ${xpath_reboot_immediate_radio}
+    Click Element  ${xpath_reboot_button}
+    Wait Until Keyword Succeeds  10 min  60 sec  Is Host Rebooted
+
+
+Verify Reboot Should Happen By Clicking Orderly Reboot Button
+    [Documentation]  Verify Shutdown Should Happen By Clicking Orderly Reboot Button.
+    [Tags]  Verify_Shutdown_Should_Happen_By_Clicking_Orderly_Reboot_Button
+
+    Redfish Power On  stack_mode=skip
+    Click Element  ${xpath_reboot_orderly_radio}
+    Click Element  ${xpath_reboot_button}
+    Wait Until Keyword Succeeds  10 min  60 sec  Is Host Rebooted
 
 
 *** Keywords ***
