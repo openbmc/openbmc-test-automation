@@ -965,6 +965,11 @@ def test_loop_body():
             gpu.save_plug_in_value(soft_errors, pgm_name)
 
     if delete_errlogs:
+        # print error logs before delete
+        status, error_logs = grk.run_key_u("Get Error Logs")
+        status, pels= grk.run_key_u("Peltool -l")
+        qprint_vars(error_logs, pels)
+
         # We need to purge error logs between boots or they build up.
         grk.run_key(delete_errlogs_cmd, ignore=1)
 
@@ -1143,6 +1148,11 @@ def obmc_boot_test_py(loc_boot_stack=None,
         return
 
     if delete_errlogs:
+        # print error logs before delete
+        status, error_logs = grk.run_key_u("Get Error Logs")
+        status, pels= grk.run_key_u("Peltool -l")
+        qprint_vars(error_logs, pels)
+
         # Delete errlogs prior to doing any boot tests.
         grk.run_key(delete_errlogs_cmd, ignore=1)
 
