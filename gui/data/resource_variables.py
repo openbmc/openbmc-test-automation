@@ -132,7 +132,7 @@ class resource_variables():
     xpath_root_button_menu = "//*[@id='app-header-user__BV_toggle_']"
     xpath_profile_settings = "//a[@href='#/profile-settings']"
     xpath_server_health_header = "//*[@data-test-id='appHeader-container-health']"
-    xpath_event_header = "//h1[text()="Event logs"]"
+    xpath_event_header = "//h1[text()='Event logs']"
     xpath_server_power_header = "//*[@data-test-id='appHeader-container-power']"
 
     # xpath for health menu
