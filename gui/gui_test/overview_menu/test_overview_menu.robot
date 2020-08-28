@@ -12,7 +12,7 @@ Test Setup      Test Setup Execution
 *** Variables ***
 
 ${xpath_overview_page_header}  //h1[contains(text(), "Overview")]
-
+${xpath_server_info}           //*[@class='page-section'][contains(.,'Model') and contains(.,'Manufacturer') and contains(.,'Serial number')]
 
 *** Test Cases ***
 
@@ -25,6 +25,22 @@ Verify Existence Of All Sections In Overview Page
     Page Should Contain  Network information
     Page Should Contain  Power consumption
     Page Should Contain  High priority events
+
+
+Verify values under server information section
+    [Documentation]  Verify values under server information section in overview page.
+
+    Page Should Contain Element  ${xpath_server_info}
+
+    ${redfish_machine_model}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  Model
+    Page Should Contain  ${redfish_machine_model}
+
+    ${redfish_serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
+    Page Should Contain  ${redfish_serial_number}
+
+    ${redfish_motherboard_manufacturer}=  Redfish.Get Attribute
+    ...  ${REDFISH_CHASSIS_URI}motherboard  Manufacturer
+    Page Should Contain  ${redfish_motherboard_manufacturer}
 
 
 *** Keywords ***
