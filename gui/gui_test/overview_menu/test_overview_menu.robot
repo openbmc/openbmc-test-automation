@@ -5,6 +5,9 @@ Documentation  Test OpenBMC GUI "Overview" menu.
 Resource        ../../lib/resource.robot
 Resource        ../../../lib/logging_utils.robot
 Resource        ../../../lib/list_utils.robot
+Resource        ../../../lib/bmc_network_utils.robot
+
+Library         String
 
 Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
@@ -28,6 +31,34 @@ Verify Existence Of All Sections In Overview Page
     Page Should Contain  Network information
     Page Should Contain  Power consumption
     Page Should Contain  High priority events
+
+
+Verify Message In High Priority Events Section For No Events
+    [Documentation]  Verify message under high priority events section in case of no events.
+    [Tags]  Verify_Message_In_High_Priority_Events_Section_For_No_Events
+
+    Redfish Purge Event Log
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains  no high priority events to display  timeout=10
+
+
+Verify Network Information In Overview Page
+    [Documentation]  Verify values under network information section.
+    [Tags]  Verify_Network_Information_In_Overview Page
+
+    ${hostname}=  Get BMC Hostname
+    Page Should Contain  ${hostname}
+
+    # Get all IP addresses and prefix lengths on system.
+
+    ${ip_addr_list}=  Get BMC IP Info
+    FOR  ${ip_address}  IN  ${ip_addr_list}
+      ${ip}=  Fetch From Left  ${ip_address}  \/
+      Page Should Contain  ${ip}
+    END
+
+    ${macaddr}=  Get BMC MAC Address
+    Page Should Contain  ${macaddr}
 
 
 Verify Message In High Priority Events Section For No Events
