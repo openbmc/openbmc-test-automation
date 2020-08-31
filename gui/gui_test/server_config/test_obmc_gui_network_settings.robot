@@ -10,15 +10,46 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_hostname_input}         //*[@data-test-id="networkSettings-input-hostname"]
-${xpath_network_save_settings}  //button[@data-test-id="networkSettings-button-saveNetworkSettings"]
-${xpath_default_gateway_input}  //*[@data-test-id="networkSettings-input-gateway"]
-${xpath_mac_address_input}      //*[@data-test-id="networkSettings-input-macAddress"]
-${xpath_static_input_ip0}       //*[@data-test-id="networkSettings-input-staticIpv4-0"]
-${xpath_add_static_ip}          //button[contains(text(),"Add static IP")]
-${xpath_setting_success}        //*[contains(text(),"Successfully saved network settings.")]
+${xpath_network_setting_heading}  //h1[text()="Network settings"]
+${xpath_interface}                //h2[text()="Interface"]
+${xpath_system}                   //h2[text()="System"]
+${xpath_static_ipv4}              //h2[text()="Static IPv4"]
+${xpath_static_dns}               //h2[text()="Static DNS"]
+${xpath_hostname_input}           //*[@data-test-id="networkSettings-input-hostname"]
+${xpath_network_save_settings}    //button[@data-test-id="networkSettings-button-saveNetworkSettings"]
+${xpath_default_gateway_input}    //*[@data-test-id="networkSettings-input-gateway"]
+${xpath_mac_address_input}        //*[@data-test-id="networkSettings-input-macAddress"]
+${xpath_static_input_ip0}         //*[@data-test-id="networkSettings-input-staticIpv4-0"]
+${xpath_add_static_ip}            //button[contains(text(),"Add static IP")]
+${xpath_setting_success}          //*[contains(text(),"Successfully saved network settings.")]
+${xpath_add_dns_server}           //button[contains(text(),"Add DNS server")]
 
 *** Test Cases ***
+
+Verify Navigation To Network Settings Page
+    [Documentation]  Verify navigation to network settings page.
+    [Tags]  Verify_Navigation_To_Network_Settings_Page
+
+    Page Should Contain Element  ${xpath_network_setting_heading}
+
+
+Verify Existence Of All Sections In Network Settings Page
+    [Documentation]  Verify existence of all sections in network settings page.
+    [Tags]  Verify_Existence_Of_All_Sections_In_Network_Settings_Page
+
+    Page Should Contain Element  ${xpath_interface}
+    Page Should Contain Element  ${xpath_system}
+    Page Should Contain Element  ${xpath_static_ipv4}
+    Page Should Contain Element  ${xpath_static_dns}
+
+
+Verify Existence Of All Buttons In Network Settings Page
+    [Documentation]  Verify existence of all buttons in network settings page.
+    [Tags]  Verify_Existence_Of_All_Buttons_In_Network_Settings_Page
+
+    Page Should Contain Element  ${xpath_add_static_ip}
+    Page Should Contain Element  ${xpath_add_dns_server}
+
 
 Verify Network Settings From Server Configuration
     [Documentation]  Verify ability to select "Network Settings" sub-menu option
