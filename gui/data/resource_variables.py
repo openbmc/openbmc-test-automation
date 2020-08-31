@@ -139,6 +139,7 @@ class resource_variables():
     xpath_health_menu = "//button[@aria-controls='health-menu']"
     xpath_event_logs_sub_menu = "//a[@href='#/health/event-logs']"
     xpath_sensor_sub_menu = "//a[@href='#/health/sensors']"
+    xpath_hardware_status_menu = "//a[@href='#/health/hardware-status']"
 
     # xpath for control menu
     xpath_control_menu = "//button[@aria-controls='control-menu']"
