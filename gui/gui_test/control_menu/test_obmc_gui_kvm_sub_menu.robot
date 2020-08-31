@@ -10,11 +10,20 @@ Test Setup      Test Setup Execution
 
 
 *** Variables ***
+
 ${xpath_kvm_header}      //h1[text()="KVM"]
 ${xpath_new_tab_button}  //button[contains(text(),'Open in new tab')]
 ${xpath_send_button}     //button[contains(text(),'Send Ctrl+Alt+Delete')]
 
+
 *** Test Cases ***
+
+Verify Navigation To KVM Page
+    [Documentation]  Verify navigation to KVM page.
+    [Tags]  Verify_Navigation_To_KVM_Page
+
+    Page Should Contain Element  ${xpath_kvm_header}
+
 
 Verify Existence Of All Sections In KVM Page
     [Documentation]  Verify existence of all sections in KVM page.

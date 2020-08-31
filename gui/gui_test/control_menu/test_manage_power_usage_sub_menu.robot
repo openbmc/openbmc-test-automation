@@ -11,8 +11,17 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
+${xpath_manage_power_heading}      //h1[text()="Manage power usage"]
+
 
 *** Test Cases ***
+
+Verify Navigation To Manage Power Usage Page
+    [Documentation]  Verify navigation to manage power usage page.
+    [Tags]  Verify_Navigation_To_Manage_Power_Usage_Page
+
+    Page Should Contain Element  ${xpath_manage_power_heading}
+
 
 Verify Existence Of All Sections In Manage Power Usage Page
     [Documentation]  Verify existence of all sections in Manage Power Usage page.
