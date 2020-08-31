@@ -10,13 +10,21 @@ Test Setup      Test Setup Execution
 
 
 *** Variables ***
-${xpath_select_user}          //input[contains(@class,"custom-control-input")]
-${xpath_account_policy}       //button[contains(text(),'Account policy settings')]
-${xpath_add_user}             //button[contains(text(),'Add user')]
-${xpath_edit_user}            //button[@aria-label="Edit user"]
-${xpath_delete_user}          //button[@aria-label="Delete user"]
+${xpath_local_user_management_heading }  //h1[text()="Local user management"]
+${xpath_select_user}                     //input[contains(@class,"custom-control-input")]
+${xpath_account_policy}                  //button[contains(text(),'Account policy settings')]
+${xpath_add_user}                        //button[contains(text(),'Add user')]
+${xpath_edit_user}                       //button[@aria-label="Edit user"]
+${xpath_delete_user}                     //button[@aria-label="Delete user"]
 
 *** Test Cases ***
+
+Verify Navigation To Local User Management Page
+    [Documentation]  Verify navigation to local user management page.
+    [Tags]  Verify_Navigation_To_Local_User_Management_Page
+
+    Page Should Contain Element  ${xpath_local_user_management_heading}
+
 
 Verify Existence Of All Sections In Local User Management Page
     [Documentation]  Verify existence of all sections in local user management page.

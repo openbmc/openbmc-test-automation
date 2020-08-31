@@ -11,12 +11,20 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
+${xpath_ldap_heading}                   //h1[text()="LDAP"]
 ${xpath_enable_ldap_checkbox}           //*[@id='enable-ldap-auth']
 ${xpath_secure_ldap_checkbox}           //*[@id='enable-secure-ldap']
 ${xpath_service_radio_button}           //*[@data-test-id="ldap-radio-activeDirectoryEnabled"]
 ${xpath_add_role_group_button}          //button[contains(text(),'Add role group')]
 
 *** Test Cases ***
+
+Verify Navigation To LDAP Page
+    [Documentation]  Verify navigation to LDAP page.
+    [Tags]  Verify_Navigation_To_LDAP_Page
+
+    Page Should Contain Element  ${xpath_ldap_heading}
+
 
 Verify Existence Of All Sections In LDAP Page
     [Documentation]  Verify existence of all sections in LDAP page.
