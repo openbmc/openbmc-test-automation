@@ -25,7 +25,7 @@ def get_running_system_ip():
     Get the IP address of server from which robot code is running.
     """
 
-    stdout = subprocess.check_output("ifconfig", shell=True)
+    stdout = subprocess.check_output("/sbin/ifconfig", shell=True)
     stdout = stdout.decode("utf-8")
     ip_list = re.findall(ip_regex, stdout)
 
