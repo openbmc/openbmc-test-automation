@@ -10,6 +10,7 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
+${xpath_date_time_heading}     //h1[text()="Date and time settings"]
 ${xpath_select_manual}         //*[@data-test-id="dateTimeSettings-radio-configureManual"]
 ${xpath_select_ntp}            //*[@data-test-id="dateTimeSettings-radio-configureNTP"]
 ${xpath_manual_date}           //input[@data-test-id="dateTimeSettings-input-manualDate"]
@@ -21,6 +22,13 @@ ${xpath_select_save_settings}  //button[@data-test-id="dateTimeSettings-button-s
 
 
 *** Test Cases ***
+
+Verify Navigation To Date And Time Settings Page
+    [Documentation]  Verify navigation to date and time settings page.
+	[Tags]  Verify_Navigation_To_Date_And_Time_Settings_Page
+
+    Page Should Contain Element  ${xpath_date_time_heading}
+
 
 Verify Existence Of All Sections In Date And Time Settings Page
     [Documentation]  Verify existence of all sections in date and time settings page.
