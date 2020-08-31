@@ -9,10 +9,18 @@ Test Setup      Test Setup Execution
 
 
 *** Variables ***
+${xpath_sensor_heading}         //h1[text()="Sensors"]
 ${xpath_sensors_filter}         //button[contains(text(),'Filter')]
 ${xpath_sensors_search}         //input[contains(@class,"search-input")]
 
 *** Test Cases ***
+
+Verify Navigation To Sensors Page
+    [Documentation]  Verify navigation to Sensors page.
+    [Tags]  Verify_Navigation_To_Sensors_Page
+
+    Page Should Contain Element  ${xpath_sensor_heading}
+
 
 Verify Existence Of All Sections In Sensor Page
     [Documentation]  Verify existence of all sections in sensor page.
