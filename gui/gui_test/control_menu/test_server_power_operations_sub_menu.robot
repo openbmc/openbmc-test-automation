@@ -11,6 +11,7 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
+${xpath_server_power_heading}              //h1[text()="Server power operations"]
 ${xpath_enable_onetime_boot_checkbox}      //*[contains(@class,'custom-checkbox')]
 ${xpath_boot_option_select}                //*[@id='boot-option']
 ${xpath_shutdown_button}                   //*[@data-test-id='serverPowerOperations-button-shutDown']
@@ -19,7 +20,15 @@ ${xpath_poweron_button}                    //*[@data-test-id='serverPowerOperati
 ${xpath_tpm_policy_button}                 //input[@id='tpm-required-policy']
 ${xpath_save_button}                       //button[contains(text(),'Save')]
 
+
 *** Test Cases ***
+
+Verify Navigation To Server Power Operations Page
+    [Documentation]  Verify navigation to server power operations page.
+    [Tags]  Verify_Navigation_To_Server_Power_Operations_Page
+
+    Page Should Contain Element  ${xpath_server_power_heading}
+
 
 Verify Existence Of All Sections In Server Power Operations Page
     [Documentation]  Verify existence of all sections in Server Power Operations page.

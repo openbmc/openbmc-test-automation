@@ -11,10 +11,18 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
+${xpath_server_led_heading}  //h1[text()="Server LED"]
 ${xpath_led_value}           //*[@data-test-id='serverLed-checkbox-switchIndicatorLed']/following-sibling::label/span
 ${xpath_overview_led_value}  //*[@data-test-id='overviewQuickLinks-checkbox-serverLed']/following-sibling::label/span
 
 *** Test Cases ***
+
+Verify Navigation To Server LED Page
+    [Documentation]  Verify navigation to server LED page.
+    [Tags]  Verify_Navigation_To_Server_LED_Page
+
+    Page Should Contain Element  ${xpath_server_led_heading}
+
 
 Verify Existence Of All Sections In Server LED Page
     [Documentation]  Verify existence of all sections in Server LED page.
