@@ -4,6 +4,7 @@ Documentation   Test OpenBMC GUI "Network settings" sub-menu of
 ...             "Server configuration".
 
 Resource        ../../lib/resource.robot
+Resource        ../../../lib/bmc_network_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
@@ -20,6 +21,7 @@ ${xpath_network_save_settings}    //button[@data-test-id="networkSettings-button
 ${xpath_default_gateway_input}    //*[@data-test-id="networkSettings-input-gateway"]
 ${xpath_mac_address_input}        //*[@data-test-id="networkSettings-input-macAddress"]
 ${xpath_static_input_ip0}         //*[@data-test-id="networkSettings-input-staticIpv4-0"]
+${xpath_netmask_input_addr0}      //*[@data-test-id="networkSettings-input-subnetMask-0"]
 ${xpath_add_static_ip}            //button[contains(text(),"Add static IP")]
 ${xpath_setting_success}          //*[contains(text(),"Successfully saved network settings.")]
 ${xpath_add_dns_server}           //button[contains(text(),"Add DNS server")]
@@ -100,6 +102,21 @@ Verify Static IP Address Editable
     ...  Click Element  ${xpath_add_static_ip}
 
     Input Text  ${xpath_static_input_ip0}  ${OPENBMC_HOST}
+
+
+Verify System Section In Network Setting page
+    [Documentation]  Verify hostname, MAC address and default gateway
+    ... under system section of network setting page.
+    [Tags]  Verify_System_Section
+
+    ${host_name}  ${ip_address}=  Get Host Name IP  host=${OPENBMC_HOST}
+    Textfield Value Should Be  ${xpath_hostname_input}  ${hostname}
+
+    ${mac_address}=  Get BMC MAC Address
+    Textfield Value Should Be   ${xpath_mac_address_input}  ${mac_address}
+
+    ${default_gateway}=  Get BMC Default Gateway
+    Textfield Value Should Be  ${xpath_default_gateway_input}  ${default_gateway}
 
 
 *** Keywords ***
