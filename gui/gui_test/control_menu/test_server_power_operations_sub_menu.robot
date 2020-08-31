@@ -11,6 +11,7 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
+${xpath_server_power_heading}              //h1[text()="Server power operations"]
 ${xpath_enable_onetime_boot_checkbox}      //*[contains(@class,'custom-checkbox')]
 ${xpath_boot_option_select}                //*[@id='boot-option']
 ${xpath_shutdown_button}                   //*[@data-test-id='serverPowerOperations-button-shutDown']
@@ -20,24 +21,14 @@ ${xpath_tpm_policy_button}                 //input[@id='tpm-required-policy']
 ${xpath_save_button}                       //button[contains(text(),'Save')]
 ${Current_status}                          //*[contains(@class,'row mb-4')]
 
+
 *** Test Cases ***
 
-Verify System State At Power Off
-    [Documentation]  Verify state of the system in power off state.
-    [Tags]  Verify_System_State_At_Power_Off
+Verify Navigation To Server Power Operations Page
+    [Documentation]  Verify navigation to server power operations page.
+    [Tags]  Verify_Navigation_To_Server_Power_Operations_Page
 
-    Redfish Power Off  stack_mode=skip
-    Page Should Contain Element  ${Current_status}
-    Element Should Contain   ${Current_status}  Off
-
-
-Verify System State At Power On
-    [Documentation]  Verify state of the system in power on state.
-    [Tags]  Verify_System_State_At_Power_On
-
-    Redfish Power On  stack_mode=skip
-    Page Should Contain Element  ${Current_status}
-    Element Should Contain   ${Current_status}  On
+    Page Should Contain Element  ${xpath_server_power_heading}
 
 
 Verify Existence Of All Sections In Server Power Operations Page
@@ -63,6 +54,24 @@ Verify Existence Of All Sections In Host Os Boot Settings
 
     Page Should Contain  Boot settings override
     Page Should Contain  TPM required policy
+
+
+Verify System State At Power Off
+    [Documentation]  Verify state of the system in power off state.
+    [Tags]  Verify_System_State_At_Power_Off
+
+    Redfish Power Off  stack_mode=skip
+    Page Should Contain Element  ${Current_status}
+    Element Should Contain   ${Current_status}  Off
+
+
+Verify System State At Power On
+    [Documentation]  Verify state of the system in power on state.
+    [Tags]  Verify_System_State_At_Power_On
+
+    Redfish Power On  stack_mode=skip
+    Page Should Contain Element  ${Current_status}
+    Element Should Contain   ${Current_status}  On
 
 
 Verify PowerOn Button Should Present At Power Off

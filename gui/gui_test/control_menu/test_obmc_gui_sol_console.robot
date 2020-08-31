@@ -10,9 +10,19 @@ Test Setup      Test Setup Execution
 
 
 *** Variables ***
+
+${xpath_sol_console_heading}     //h1[text()="Serial over LAN console"]
 ${xpath_open_in_new_tab_button}  //button[contains(text(),'Open in new tab')]
 
+
 *** Test Cases ***
+
+Verify Navigation To SOL Console Page
+    [Documentation]  Verify navigation to SOL console page.
+    [Tags]  Verify_Navigation_To_SOL_Console_Page
+
+    Page Should Contain Element  ${xpath_sol_console_heading}
+
 
 Verify Existence Of All Sections In SOL Console Page
     [Documentation]  Verify existence of all sections in SOL console page.
