@@ -9,7 +9,17 @@ Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
 
+*** Variables ***
+${xpath_event_logs_heading}         //h1[text()="Event logs"]
+
 *** Test Cases ***
+
+Verify Navigation To Event Logs Page
+    [Documentation]  Verify navigation to Event Logs page.
+    [Tags]  Verify_Navigation_To_Event_Logs_Page
+
+    Page Should Contain Element  ${xpath_event_logs_heading}
+
 
 Verify Existence Of All Sections In Event Logs Page
     [Documentation]  Verify existence of all sections in Event Logs page.
