@@ -102,6 +102,21 @@ Verify Static IP Address Editable
     Input Text  ${xpath_static_input_ip0}  ${OPENBMC_HOST}
 
 
+Verify System Section In Network Setting page
+    [Documentation]  Verify hostname, MAC address and default gateway
+    ... under system section of network setting page.
+    [Tags]  Verify_System_Section
+
+    ${host_name}  ${ip_address}=  Get Host Name IP  host=${OPENBMC_HOST}
+    Textfield Value Should Be  ${xpath_hostname_input}  ${hostname}
+
+    ${mac_address}=  Get BMC MAC Address
+    Textfield Value Should Be   ${xpath_mac_address_input}  ${mac_address}
+
+    ${default_gateway}=  Get BMC Default Gateway
+    Textfield Value Should Be  ${xpath_default_gateway_input}  ${default_gateway}
+
+
 *** Keywords ***
 
 Suite Setup Execution
