@@ -11,9 +11,17 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
+${xpath_certificate_heading}     //h1[text()="SSL certificates"]
 ${xpath_add_certificate_button}  //button[contains(text(),"Add new certificate")]
 
 *** Test Cases ***
+
+Verify Navigation To SSL Certificate Page
+    [Documentation]  Verify navigation to ssl certificate page.
+    [Tags]  Verify_Navigation_To_SSL_Certificate_Page
+
+    Page Should Contain Element  ${xpath_certificate_heading}
+
 
 Verify Existence Of All Sections In Certificate Page
     [Documentation]  Verify existence of all sections in certificate page.
