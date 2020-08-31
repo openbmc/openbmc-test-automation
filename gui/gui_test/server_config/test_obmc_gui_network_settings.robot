@@ -4,6 +4,7 @@ Documentation   Test OpenBMC GUI "Network settings" sub-menu of
 ...             "Server configuration".
 
 Resource        ../../lib/resource.robot
+Resource        ../../../lib/bmc_network_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
@@ -20,11 +21,56 @@ ${xpath_network_save_settings}    //button[@data-test-id="networkSettings-button
 ${xpath_default_gateway_input}    //*[@data-test-id="networkSettings-input-gateway"]
 ${xpath_mac_address_input}        //*[@data-test-id="networkSettings-input-macAddress"]
 ${xpath_static_input_ip0}         //*[@data-test-id="networkSettings-input-staticIpv4-0"]
+${xpath_netmask_input_addr0}      //*[@data-test-id="networkSettings-input-subnetMask-0"]
 ${xpath_add_static_ip}            //button[contains(text(),"Add static IP")]
 ${xpath_setting_success}          //*[contains(text(),"Successfully saved network settings.")]
 ${xpath_add_dns_server}           //button[contains(text(),"Add DNS server")]
 
 *** Test Cases ***
+
+Verify BMC IP Address
+    [Documentation]  Verify BMC IP Address.
+    [Tags]  Verify_BMC_IP_Address
+
+    ${host_name}  ${ip_address}=  Get Host Name IP  host=${OPENBMC_HOST}
+    Textfield Value Should Be  ${xpath_static_input_ip0}  ${ip_address}
+
+
+Verify BMC MAC Address
+    [Documentation]  Verify MAC Address
+    [Tags]  Verify_MAC_Address.
+
+    ${mac_address}=  Get BMC MAC Address
+    Textfield Value Should Be   ${xpath_mac_address_input}  ${mac_address}
+
+
+Verify Default Gateway
+    [Documentation]  Verify Default Gateway.
+    [Tags]  Verify_Default_Gateway
+
+    @{network_configurations}=  Get Network Configuration
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Textfield Value Should Be  ${xpath_default_gateway_input}  ${network_configuration['Gateway']}
+    END
+
+
+Get Netmask And Verify
+    [Documentation]  Get netmask and verify.
+    [Tags]  Get_Netmask_And_Verify
+
+    @{network_configurations}=  Get Network Configuration
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Textfield Value Should Be  ${xpath_netmask_input_addr0}  ${network_configuration['SubnetMask']}
+    END
+
+
+Get Hostname And Verify
+    [Documentation]  Get hostname and verify.
+    [Tags]  Get_Hstname_And_Verify
+
+    ${hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    Textfield Value Should Be  ${xpath_hostname_input}  ${hostname}
+
 
 Verify Navigation To Network Settings Page
     [Documentation]  Verify navigation to network settings page.
