@@ -13,6 +13,7 @@ import collections
 import re
 import ipaddress
 import subprocess
+import socket
 from robot.libraries.BuiltIn import BuiltIn
 import json
 import bmc_ssh_utils as bsu
@@ -25,10 +26,12 @@ def get_running_system_ip():
     Get the IP address of server from which robot code is running.
     """
 
-    stdout = subprocess.check_output("/sbin/ifconfig", shell=True)
-    stdout = stdout.decode("utf-8")
-    ip_list = re.findall(ip_regex, stdout)
-
+    ip_list = list()
+    host_name = socket.gethostname()
+    temp_ip_list = socket.getaddrinfo(host_name, 80)
+    for item in temp_ip_list:
+      ip_addr = item[-1][0]
+      ip_list.insert(0, ip_addr)
     return ip_list
 
 
