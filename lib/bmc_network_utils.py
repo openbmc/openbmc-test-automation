@@ -13,6 +13,7 @@ import collections
 import re
 import ipaddress
 import subprocess
+import socket
 from robot.libraries.BuiltIn import BuiltIn
 import json
 import bmc_ssh_utils as bsu
@@ -20,16 +21,15 @@ import bmc_ssh_utils as bsu
 ip_regex = r"\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}"
 
 
-def get_running_system_ip():
+def get_hostname():
     r"""
-    Get the IP address of server from which robot code is running.
+    Get the host name of server from which robot code is running.
+
     """
 
-    stdout = subprocess.check_output("/sbin/ifconfig", shell=True)
-    stdout = stdout.decode("utf-8")
-    ip_list = re.findall(ip_regex, stdout)
+    host_name = socket.gethostname()
 
-    return ip_list
+    return host_name
 
 
 def netmask_prefix_length(netmask):
