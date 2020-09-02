@@ -76,6 +76,17 @@ Assign Valid And Invalid Static IPv4 Address To VMI
     10.5.20.30    0.0.0.0     255.255.252.0    ${False}      ${True}       ${HTTP_ACCEPTED}
     a.3.118.94    0.0.0.0     255.255.252.0    ${False}      ${False}      ${HTTP_BAD_REQUEST}
 
+Add Multiple IP Addresses On VMI Interface And Verify
+    [Documentation]  Add multiple IP addresses on VMI interface and verify.
+    [Tags]  Add_Multiple_IP_Addresses_On_VMI_Interface_And_Verify
+    [Template]  Verify Assigning Static IPv4 Address To VMI
+    [Teardown]  Delete VMI IPv4 Address  IPv4Addresses  ${HTTP_ACCEPTED}
+
+    # ip        gateway       netmask          del_curr_ip    host_reboot        valid_status_code
+    10.5.5.10   0.0.0.0     255.255.252.0       ${False}       ${True}            ${HTTP_ACCEPTED}
+    10.5.5.11   0.0.0.0     255.255.252.0       ${False}       ${True}            ${HTTP_ACCEPTED}
+    10.5.5.12   0.0.0.0     255.255.252.0       ${False}       ${True}            ${HTTP_ACCEPTED}
+    10.5.5.13   0.0.0.0     255.255.252.0       ${False}       ${True}            ${HTTP_ACCEPTED}
 
 Switch Between IP Origins On VMI And Verify Details
     [Documentation]  Switch between IP origins on VMI and verify details.
@@ -112,6 +123,16 @@ Delete VMI Static IP Address And Verify
    ${resp}=  Redfish.Get
    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
    Should Be Empty  ${resp.dict["IPv4Addresses"]}
+
+Verify Successful VMI IP Static Configuration When BMC Rebooted Before HOST Boot
+    [Documentation]  Verify Successful VMI IP Static configuration When BMC Rebooted Before HOST Boot
+    [Tags]  Verify_Successful_VMI_IP_Static_Configuration_When_BMC_Rebooted_Before_HOST_Boot
+    [Teardown]  Delete VMI IPv4 Address  IPv4Addresses  ${HTTP_ACCEPTED}
+
+    Set Static IPv4 Address To VMI  10.10.20.30  0.0.0.0  255.255.252.0
+
+    # Verifying successful static configuration when BMC reboot before host boot
+    Verify VMI Network Interface Details On BMC Reboot  10.10.20.30  Static   0.0.0.0  255.255.252.0  ${True}
 
 
 *** Keywords ***
@@ -210,6 +231,27 @@ Verify VMI Network Interface Details
     Should Be Equal As Strings  ${netmask}  ${vmi_ip["IPv4_SubnetMask"]}
     Should Be Equal As Strings  ${ip}  ${vmi_ip["IPv4_Address"]}
 
+Verify VMI Network Interface Details On BMC Reboot
+    [Documentation]  Verify VMI network interface details on BMC reboot.
+    [Arguments]  ${ip}  ${origin}  ${gateway}  ${netmask}
+    ...  ${OBMC_reboot}=${False}  ${valid_status_code}=${HTTP_OK}
+
+    # Description of argument(s):
+    # ip                 VMI IPv4 address.
+    # origin             Origin of IPv4 address eg. Static or DHCP.
+    # gateway            Gateway for VMI IP.
+    # netmask            Subnetmask for VMI IP.
+    # valid_status_code  Expected valid status code from GET request. Default is HTTP_OK.
+    # OBMC_reboot        Reboot BMC if True.
+
+    Run Keyword If  ${OBMC_reboot} == ${True}  Run Keywords
+    ...  Redfish OBMC Reboot (off)  AND  Redfish Power On  AND  Redfish.Login
+
+    ${vmi_ip}=  Get VMI Network Interface Details  ${valid_status_code}
+    Should Be Equal As Strings  ${origin}  ${vmi_ip["IPv4_AddressOrigin"]}
+    Should Be Equal As Strings  ${gateway}  ${vmi_ip["IPv4_Gateway"]}
+    Should Be Equal As Strings  ${netmask}  ${vmi_ip["IPv4_SubnetMask"]}
+    Should Be Equal As Strings  ${ip}  ${vmi_ip["IPv4_Address"]}
 
 Set Static IPv4 Address To VMI
     [Documentation]  Set static IPv4 address to VMI.
@@ -228,7 +270,6 @@ Set Static IPv4 Address To VMI
     ${resp}=  Redfish.Patch
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ...  body=${data}  valid_status_codes=[${valid_status_code}]
-    Redfish Power On  stack_mode=skip
     Log To Console  ${resp.text}
 
 
