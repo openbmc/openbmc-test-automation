@@ -1,249 +1,277 @@
 *** Settings ***
 
-Documentation    Test Save Area feature of Management Console on BMC.
+Documentation     Test Save Area feature of Management Console on BMC.
 
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/resource.robot
 Resource          ../../lib/bmc_redfish_utils.robot
 Resource          ../../lib/utils.robot
+Resource          ../../lib/bmc_redfish_resource.robot
 
 Suite Setup       Suite Setup Execution
 Test Teardown     Test Teardown Execution
 Suite Teardown    Suite Teardown Execution
 
-
 *** Variables ***
 
-${MAX_SIZE_MSG}           File size exceeds maximum allowed size[500KB]
-${UPLOADED_MSG}           File Created
-${FILE_UPDATED}           File Updated
-${FORBIDDEN_MSG}          Forbidden
-${FILE_CREATE_ERROR_MSG}  Error while creating the file
-
-@{ADMIN}                  admin_user              TestPwd123
-@{OPERATOR}               operator_user           TestPwd123
-&{USERS}                  Administrator=${ADMIN}  Operator=${OPERATOR}
+${MAXIMUM_SIZE_MESSAGE}     File size exceeds maximum allowed size[500KB]
+${FILE_UPLOAD_MESSAGE}      File Created
+${FILE_DELETED_MESSAGE}     File Deleted
+${FILE_UPDATED}             File Updated
+${FORBIDDEN_MESSAGE}        Forbidden
+${ERROR_MESSAGE}            Error while creating the file
+${RESOURCE_NOT_FOUND}       Resource Not Found
 
 *** Test Cases ***
 
-Verify Small Partition File Upload And Delete
-    [Documentation]  Verify small partition file upload and delete.
-    [Tags]  Verify_Small_Partition_File_Upload_And_Delete
-    [Template]  Upload File To Create Partition Then Delete Partition
+Redfish Upload Partition File To BMC
+    [Documentation]  Upload partition file to BMC using redfish.
+    [Tags]  Redfish_Upload_Partition_File_To_BMC
+    [Template]  Redfish Upload Partition File
 
-    #                     partition                                         delete
-    # file_name  size_kb  name       expect_resp_code     expected_msg      partition    username
-    501KB_file   501      501KB      ${HTTP_BAD_REQUEST}  ${MAX_SIZE_MSG}   ${True}      ${OPENBMC_USERNAME}
-    15KB_file    15       15KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${True}      ${OPENBMC_USERNAME}
-    500KB_file   500      500KB      ${HTTP_OK}           ${UPLOADED_MSG}   ${True}      ${OPENBMC_USERNAME}
+    # file_name
+    500KB_file
 
 
-Verify Multiple Files Upload
-    [Documentation]  Verify multiple files upload.
-    [Tags]  Verify_Multiple_Files_Upload
-    [Template]  Upload File To Create Partition Then Delete Partition
+Redfish Fail To Upload Partition File To BMC
+    [Documentation]  Fail to upload partition file to BMC using redfish.
+    [Tags]  Redfish_Fail_To_Upload_Partition_File_To_BMC
+    [Template]  Redfish Fail To Upload Partition File
 
-    #                     partition                                         delete
-    # file_name  size_kb  name       expect_resp_code     expected_msg      partition    username
-    0KB_file     0        0KB        ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
-    10KB_file    10       10KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
-    50KB_file    50       50KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
-    550KB_file   550      550KB      ${HTTP_BAD_REQUEST}  ${MAX_SIZE_MSG}   ${False}     ${OPENBMC_USERNAME}
-    19KB_file    19       19KB       ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
-    499KB_file   199      499KB      ${HTTP_OK}           ${UPLOADED_MSG}   ${False}     ${OPENBMC_USERNAME}
+    # file_name
+    501KB_file
 
 
-Verify Read Partition
-    [Documentation]  Verify read partition.
-    [Tags]  Verify_Read_Partition
+Redfish Upload Multiple Partition File To BMC
+    [Documentation]  Upload multiple partition file to BMC using redfish.
+    [Tags]  Redfish_Upload_Multiple_Partition_File_To_BMC
+    [Template]  Redfish Upload Partition File
 
-    Set Test Variable  ${file_name}  testfile
-    Set Test Variable  ${partition_name}  part_read
-    Set Test Variable  ${content}  Sample Content to test partition file upload
-
-    Run  echo "${content}" > ${file_name}
-    OperatingSystem.File Should Exist  ${file_name}
-
-    Upload File To Create Partition Then Delete Partition  ${file_name}  1  ${partition_name}
-    ...  delete_partition=${False}
-
-    Read Partition And Verify Content  ${partition_name}  ${content}
+    # file_name
+    250KB_file,500KB_file
 
 
-Verify Non-Admin User Is Forbidden To Upload Partition File
-    [Documentation]  Verify non-admin user is forbidden to upload partition file.
-    [Tags]   Verify_Non-Admin_User_Is_Forbidden_To_Upload_Partition_File
-    [Template]  Upload File To Create Partition Then Delete Partition
+Redfish Fail To Upload Multiple Partition File To BMC
+    [Documentation]  Fail to upload multiple partition file to BMC using redfish.
+    [Tags]  Redfish_Fail_To_Upload_Multiple_Partition_File_To_BMC
+    [Template]  Redfish Fail To Upload Partition File
 
-    #                     partition                                         delete
-    # file_name  size_kb  name       expect_resp_code     expected_msg      partition    username
-    12KB_file    12       12KB       ${HTTP_FORBIDDEN}    ${FORBIDDEN_MSG}  ${False}     operator_user
-
-
-Verify Partition Update On BMC
-    [Documentation]  Verify partition update on BMC.
-    [Tags]  Verify_Partition_Update_On_BMC
-
-    Set Test Variable  ${file_name}  testfile
-    Set Test Variable  ${partition_name}  part_read
-    Set Test Variable  ${content1}  Sample Content to test partition file upload
-    Set Test Variable  ${content2}  Sample Content to test partition file update
-
-    Upload Partition File With Some Known Contents
-    ...  ${file_name}  ${partition_name}  ${content1}  ${UPLOADED_MSG}
-    Read Partition And Verify Content  ${partition_name}  ${content1}
-
-    # Upload the same partition with modified contents to verify update partition feature.
-    Upload Partition File With Some Known Contents
-    ...  ${file_name}  ${partition_name}  ${content2}  ${FILE_UPDATED}
-    Read Partition And Verify Content  ${partition_name}  ${content2}
+    # file_name
+    650KB_file,501KB_file
 
 
-Verify Delete Partition When Partition Does Not Exist
-    [Documentation]  Verify delete partition when partition does not exist.
-    [Tags]  Verify_Delete_Partition_When_Partition_Does_Not_Exist
-    [Template]  Delete Partition And Verify On BMC
+Redfish Partition File Persistency On BMC Reboot
+    [Documentation]  Upload partition file to BMC using redfish and is same after reboot.
+    [Tags]  Redfish_Partition_File_Persistency_On_BMC_Reboot
+    [Template]  Redfish Partition File Persistency
 
-    # partition_name    expect_resp_code      username
-    Does_not_exist      ${HTTP_NOT_FOUND}     ${OPENBMC_USERNAME}
-    Does_not_exist      ${HTTP_FORBIDDEN}     operator_user
+    # file_name
+    500KB_file
 
 
-Verify Partition Files Persistency And Re-upload After BMC Reboot
-    [Documentation]  Verify partition files persistency and re-upload after BMC reboot.
-    [Tags]  Verify_Partition_Files_Persistency_And_Re-upload_After_BMC_Reboot
+Redfish Multiple Partition File Persistency On BMC Reboot
+    [Documentation]  Upload partition file to BMC using redfish and is same after reboot.
+    [Tags]  Redfish_Multiple_Partition_File_Persistency_On_BMC_Reboot
+    [Template]  Redfish Partition File Persistency
 
-    Set Test Variable  ${file_name}  testfile
-    Set Test Variable  ${partition_name}  part_read
-    Set Test Variable  ${content}  Sample Content to test partition file upload
+    # file_name
+    250KB_file,500KB_file
 
-    Upload Partition File With Some Known Contents
-    ...  ${file_name}_1  ${partition_name}_1  ${content}_${file_name}_1
-    Upload Partition File With Some Known Contents
-    ...  ${file_name}_2  ${partition_name}_2  ${content}_${file_name}_2
 
-    OBMC Reboot (off)
+Redfish Read Partition File On BMC
+    [Documentation]  Upload partition file to BMC using redfish and verify the content.
+    [Tags]  Redfish_Read_Partition_File_On_BMC
+    [Template]  Redfish Read Partition File
 
-    # Get REST session to BMC.
-    Initialize OpenBMC
+    # file_name            reboot_flag
+    testfile               False
+    testfile01,testfile02  False
 
-    # Checking for the content of uploaded partitions after BMC reboot.
-    Read Partition And Verify Content  ${partition_name}_1  ${content}_${file_name}_1
-    Read Partition And Verify Content  ${partition_name}_2  ${content}_${file_name}_2
 
-    # Upload same partition with different content to test partition update after BMC reboot.
-    Upload Partition File With Some Known Contents
-    ...  ${file_name}_1  ${partition_name}_1  ${content}_${file_name}_2  ${FILE_UPDATED}
+Redfish Read Partition File On BMC Reboot
+    [Documentation]  Upload partition file to BMC using redfish and verify the content after reboot.
+    [Tags]  Check_Redfish_Read_Partition_File_On_BMC_Reboot
+    [Template]  Redfish Read Partition File
 
-    # Upload different partition.
-    Upload Partition File With Some Known Contents
-    ...  ${file_name}  ${partition_name}  ${content}  ${UPLOADED_MSG}
+    # file_name            reboot_flag
+    testfile               True
+    testfile01,testfile02  True
+
+
+Redfish Update Partition File On BMC
+    [Documentation]  Upload partition file to BMC using redfish and verify the content.
+    [Tags]  Redfish_Update_Partition_File_On_BMC
+    [Template]  Redfish Update Partition File With Different Content
+
+    # file_name            reboot_flag
+    testfile01             False
+
+
+Redfish Update Partition File On BMC Reboot
+    [Documentation]  Upload partition file to BMC using redfish and verify the content after the reboot.
+    [Tags]  Redfish_Update_Partition_File_On_BMC_Reboot
+    [Template]  Redfish Update Partition File With Different Content
+
+    # file_name            reboot_flag
+    testfile01             True
+
+
+Redfish Persistency Update Partition File On BMC
+    [Documentation]  Upload partition file to BMC using redfish and verify the content.
+    [Tags]  Redfish_Persistency_Update_Partition_File_On_BMC
+    [Template]  Redfish Update Partition File With Same Content
+
+    # file_name            reboot_flag
+    testfile01             False
+
+
+Redfish Persistency Update Partition File On BMC Reboot
+    [Documentation]  Upload partition file to BMC using redfish and verify the content after the reboot.
+    [Tags]  Redfish_Persistency_Update_Partition_File_On_BMC_Reboot
+    [Template]  Redfish Update Partition File With Same Content
+
+    # file_name            reboot_flag
+    testfile01             True
+
+
+Redfish Delete Non Existence Of Partition File
+    [Documentation]  Delete the partition file if do not exists.
+    [Tags]  Redfish_Delete_Non_Existence_Of_Partition_File
+    [Template]  Redfish Delete Non Existence Partition File
+
+    # file_name
+    testfile01
 
 
 Verify One Thousand Partitions File Upload
-    [Documentation]  Verify One Thousand Partitions File Upload.
+    [Documentation]  Upload 1000 partition file to BMC.
     [Tags]  Verify_One_Thousand_Partitions_File_Upload
+    [Template]  Redfish Upload Partition File With Range
 
-    # Note: 1000 Partitions file upload would take 15-20 minutes.
-    FOR  ${INDEX}  IN RANGE  1  1000
-        ${status}=  Run Keyword And Return Status  Upload File To Create Partition Then Delete Partition
-        ...  200KB  200  p${INDEX}  delete_partition=${False}
-        Run Keyword If  ${status} == ${True}  Continue For Loop
+    # range
+    1000
 
-        # Check if /var is full on BMC.
-        ${status}  ${stderr}  ${rc}=  BMC Execute Command  df -k | grep \' /var\' | grep -v /var/
-        ${var_size}=  Set Variable  ${status.split('%')[0].split()[1]}
 
-        # Should be a problem if partition file upload request has failed when /var is not full.
-        Exit For Loop If  ${var_size} != ${100}
+Non Admin Users Fail To Upload Partition File
+    [Documentation]  Non admin user will fail to upload the partition file.
+    [Tags]  Non_Admin_Users_Fail_To_Upload_Partition_File
+    [Template]  Non Admin User To Upload Partition File
 
-        # Expect HTTP_INTERNAL_SERVER_ERROR and FILE_CREATE_ERROR_MSG when /var is full.
-        Upload File To Create Partition Then Delete Partition
-        ...  200KB  200  p${INDEX}  ${HTTP_INTERNAL_SERVER_ERROR}  ${FILE_CREATE_ERROR_MSG}  ${False}
-    END
+    # file_name    username         password       role_id
+    500KB_file     operator_user    TestPwd123     Operator
 
+
+Non Admin User Delete Non Existence Of Partition File
+    [Documentation]  Delete the partion file if does not exists.
+    [Tags]  Non_Admin_User_Delete_Non_Existence_Of_Partition_File
+    [Template]  Non Admin Delete Non Existence Partition File
+
+    # file_name    username         password       role_id
+    500KB_file     operator_user    TestPwd123     Operator
+
+
+Redfish Update Wrong Partition File To BMC
+    [Documentation]  Upload partition file to BMC by wrong URI using redfish.
+    [Tags]  Redfish_Update_Wrong_Partition_File_To_BMC
+    [Template]  Verify Update Wrong Partition File To BMC
+
+    # file_name
+    500KB_file
 
 *** Keywords ***
 
-Create Partition File
-    [Documentation]  Create partition file.
-    [Arguments]  ${file_name}=dummyfile  ${size_kb}=15
+Suite Setup Execution
+    [Documentation]  Suite setup execution.
 
-    # Description of argument(s):
-    # file_name           Name of the test file to be created. Examples:  p1.log, part1.txt etc.
-    # size_kb             Size of the test file to be created in KB, default is 15KB.
-    #                     Example : 15, 200 etc.
-
-    ${file_exist}=  Run Keyword And Return Status  OperatingSystem.File Should Exist  ${file_name}
-    Return From Keyword If  ${file_exist}  ${True}
-
-    # Create a partition file if it does not exist locally.
-    Run  dd if=/dev/zero of=${file_name} bs=1 count=0 seek=${size_kb}KB
-    OperatingSystem.File Should Exist  ${file_name}
+    Redfish.Login
 
 
-Delete All Sessions And Login Using Given User
-    [Documentation]    Delete all sessions and login using given user.
-    [Arguments]   ${username}=${OPENBMC_USERNAME}
+Test Teardown Execution
+    [Documentation]  Test teardown execution.
 
-    # Description of argument(s):
-    # username            Username to login. Default is OPENBMC_USERNAME.
-    #                     Ex: root, operator_user, admin_user, readonly_user etc.
+    Delete All BMC Partition File  ${HTTP_OK}
+    FFDC On Test Case Fail
+
+
+Suite Teardown Execution
+    [Documentation]  Suite teardown execution.
 
     Delete All Sessions
-    ${password}=  Set Variable If  '${username}' == '${OPENBMC_USERNAME}'  ${OPENBMC_PASSWORD}  TestPwd123
-    Initialize OpenBMC  rest_username=${username}  rest_password=${password}
 
 
-Upload File To Create Partition Then Delete Partition
-    [Documentation]  Upload file to create partition the delete partition.
-    [Arguments]  ${file_name}=dummyfile  ${size_kb}=15  ${partition_name}=p1  ${expect_resp_code}=${HTTP_OK}
-    ...  ${expected_msg}=File Created  ${delete_partition}=${True}  ${username}=${OPENBMC_USERNAME}
+Delete Local Partition File
+    [Documentation]  Delete local partition file.
+    [Arguments]  ${file_name}
 
     # Description of argument(s):
-    # file_name           Name of the test file to be created.
-    # partition_name      Name of the partition on BMC.
-    # expect_resp_code    Expected REST response code, default is ${HTTP_OK}.
-    # expected_msg        Expected message from file upload, default is 'File Created'.
-    # delete_partition    Partition will be deleted if this is True.
-    # username            Login username
+    # file_name    Partition file name.
 
-    # Create a session with given user to test upload partition file.
-    Run Keyword If  '${username}' != '${OPENBMC_USERNAME}'
-    ...  Delete All Sessions And Login Using Given User  ${username}
+    FOR  ${conf_file}  IN  @{file_name}
+      ${file_exist}=  Run Keyword And Return Status  OperatingSystem.File Should Exist  ${conf_file}
+      Run Keyword If  'True' == '${file_exist}'  Remove File  ${conf_file}
+    END
 
-    # Create a partition file.
-    Create Partition File  ${file_name}  ${size_kb}
 
-    # Get the content of the file and upload to BMC.
-    ${image_data}=  OperatingSystem.Get Binary File  ${file_name}
-    ${data}=  Create Dictionary  data  ${image_data}
+Create Partition File
+    [Documentation]  Create Partition file.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name    Partition file name.
+
+    Delete Local Partition File  ${file_name}
+
+    FOR  ${conf_file}  IN  @{file_name}
+      @{words}=  Split String  ${conf_file}  _
+      Run  dd if=/dev/zero of=${conf_file} bs=1 count=0 seek=${words}[-0]
+      OperatingSystem.File Should Exist  ${conf_file}
+    END
+
+
+Delete BMC Partition File
+    [Documentation]  Delete single partition file on BMC via redfish.
+    [Arguments]  ${file_name}  ${status_code}  ${expected_message}
+
+    # Description of argument(s):
+    # file_name           Partition file name.
+    # status_code         HTTPS status code.
+    # expected_message    Expected message of URI.
+
+    FOR  ${conf_file}  IN  @{file_name}
+      ${data}=  Create Dictionary
+      ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
+      Set To Dictionary  ${data}  headers  ${headers}
+
+      ${resp}=  Delete Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}  &{data}
+      Should Be Equal As Strings  ${resp.status_code}  ${status_code}
+
+      Run Keyword If  ${resp.status_code} == ${HTTP_FORBIDDEN}
+      ...    Should Be Equal As Strings  ${resp.text}  ${expected_message}
+      ${description}=  Run Keyword If  ${resp.status_code} == ${HTTP_OK}
+      ...  Return Description Of Response  ${resp.text}
+      Run Keyword If  '${description}' != 'None'
+      ...  Should Be Equal As Strings  ${description}  ${expected_message}
+    END
+
+
+Delete All BMC Partition File
+    [Documentation]  Delete multiple partition file on BMC via redfish.
+    [Arguments]  ${status_code}
+
+    # Description of argument(s):
+    # status_code       HTTPS status code.
+
+    Initialize OpenBMC
+    ${data}=  Create Dictionary
     ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
-
     Set To Dictionary  ${data}  headers  ${headers}
-    ${resp}=  Put Request  openbmc  /ibm/v1/Host/ConfigFiles/${partition_name}  &{data}
-    Should Be Equal As Strings  ${resp.status_code}  ${expect_resp_code}
 
-    ${description}=  Run Keyword If  ${expect_resp_code} != ${HTTP_FORBIDDEN}
-    ...  Return Description Of REST Response  ${resp.text}
-    ...  ELSE  Set Variable  ${FORBIDDEN_MSG}
-
-    Should Be Equal As Strings  ${description}  ${expected_msg}
-
-    # Cleanup local space after upload attempt.
-    Run Keyword And Ignore Error  Delete Local File Created To Upload  ${file_name}
-
-    ${upload_success}=  Set Variable If   ${expect_resp_code} != ${HTTP_OK}  ${False}  ${True}
-    Verify Partition Available On BMC  ${partition_name}  ${upload_success}  ${username}
-
-    # Delete partition and verify on BMC.
-    ${expect_resp_code}=  Set Variable If  ${expect_resp_code} != ${HTTP_OK}  ${HTTP_NOT_FOUND}  ${HTTP_OK}
-    Run Keyword If  ${delete_partition} == ${True}  Delete Partition And Verify On BMC
-    ...  ${partition_name}  ${expect_resp_code}  ${username}
+    ${resp}=  Post Request  openbmc  /ibm/v1/Host/ConfigFiles/Actions/IBMConfigFiles.DeleteAll  &{data}
+    Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
 
-Return Description Of REST Response
+Return Description Of Response
     [Documentation]  Return description of REST response.
     [Arguments]  ${resp_text}
 
@@ -251,178 +279,332 @@ Return Description Of REST Response
     # resp_text    REST response body.
 
     # resp_text after successful partition file upload looks like:
-    #           {
-    #             "Description": "File Created"
-    #           }
+    # {
+    #    "Description": "File Created"
+    # }
 
     ${message}=  Evaluate  json.loads('''${resp_text}''')  json
 
     [Return]  ${message["Description"]}
 
 
-Delete Partition And Verify On BMC
-    [Documentation]  Delete partition and verify on BMC.
-    [Arguments]  ${partition_name}  ${expect_resp_code}=${HTTP_OK}  ${username}=${OPENBMC_USERNAME}
+Upload Partition File To BMC
+    [Documentation]  Upload partition file to BMC.
+    [Arguments]  ${file_name}  ${status_code}  ${expected_message}  ${flag}=${True}
 
     # Description of argument(s):
-    # partition_name      Name of the partition on BMC.
-    # expect_resp_code    Expected REST response code from DELETE request, default is ${HTTP_OK}.
-    # username            Username to login, if other than OPENBMC_USERNAME user.
+    # file_name           Partition file name.
+    # status_code         HTTPS status code.
+    # expected_message    Expected message of URI.
+    # flag                If True run part of program, else skip.
 
-    # Create a session with given user to test delete operation.
-    # If user is a non-admin user then DELETE request is forbidden for the user.
-    Run Keyword If  '${username}' != '${OPENBMC_USERNAME}'
-    ...  Delete All Sessions And Login Using Given User  ${username}
+    Run Keyword If  '${flag}' == '${True}'  Initialize OpenBMC
+    FOR  ${conf_file}  IN  @{file_name}
+      # Get the content of the file and upload to BMC.
+      ${image_data}=  OperatingSystem.Get Binary File  ${conf_file}
+      ${data}=  Create Dictionary  data  ${image_data}
+      ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
+      Set To Dictionary  ${data}  headers  ${headers}
 
-    Delete Partition  ${partition_name}  ${expect_resp_code}
-    Verify Partition Available On BMC  ${partition_name}  ${False}  ${username}
+      ${resp}=  Put Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}  &{data}
+      Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
-
-Get List Of Partitions
-    [Documentation]  Get list of partitions.
-    [Arguments]  ${expect_resp_code}=${HTTP_OK}
-
-    # Description of argument(s):
-    # expect_resp_code    Expected REST response code, default is ${HTTP_OK}.
-
-    ${resp}=  Get Request  openbmc  /ibm/v1/Host/ConfigFiles
-    Should Be Equal As Strings  ${resp.status_code}  ${expect_resp_code}
-    Return From Keyword If  ${expect_resp_code} != ${HTTP_OK}
-
-    ${resp_json}=  To JSON  ${resp.content}
-    ${partitions_cnt}=  Get Length  ${resp_json['Members']}
-
-    [Return]  ${resp_json['Members']}  ${partitions_cnt}
+      Run Keyword If  ${resp.status_code} == ${HTTP_FORBIDDEN}
+      ...    Should Be Equal As Strings  ${resp.text}  ${expected_message}
+      ${description}=  Run Keyword If  ${resp.status_code} == ${HTTP_OK}
+      ...  Return Description Of Response  ${resp.text}
+      Run Keyword If  '${description}' != 'None'
+      ...  Should Be Equal As Strings  ${description}  ${expected_message}
+    END
 
 
-Verify Partition Available On BMC
-    [Documentation]  Verify partition available on BMC.
-    [Arguments]  ${partition_name}=${EMPTY}  ${operation_status}=${True}  ${username}=${OPENBMC_USERNAME}
+Verify Partition File On BMC
+    [Documentation]  Verify partition file on BMC.
+    [Arguments]  ${file_name}  ${Partition_status}
 
     # Description of argument(s):
-    # partition_name     Name of the partition on BMC.
-    # operation_success  Status of the previous operation like upload/delete success or failure.
-    #                    True if operation was a success else False.
-    # username           Username used to upload/delete. Default is ${OPENBMC_USERNAME}.
+    # file_name           Partition file name.
+    # Partition_status    Partition file status on BMC.
 
-    # Non admin users will not have an access to do GET list
-    Run Keyword If  '${username}' != '${OPENBMC_USERNAME}'
-    ...  Delete All Sessions And Login Using Given User
-
-    ${partitions}  ${partitions_cnt}=  Get List Of Partitions
-    ${rest_response}=  Run Keyword And Return Status  List Should Contain Value  ${partitions}
-    ...  /ibm/v1/Host/ConfigFiles/${partition_name}
-
-    ${status}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  ls -l /var/lib/obmc/bmc-console-mgmt/save-area/${partition_name} | wc -l
-    ${bmc_response}=  Run Keyword And Return Status  Should Be True  ${status} == ${1}
-
-    Run Keyword If  '${partition_name}' == '${EMPTY}'  Run Keywords
-    ...  Should Be Equal  ${rest_response}  ${False}  AND  Should Be Equal  ${bmc_response}  ${False}
-
-    Run Keyword And Return If  '${partition_name}' != '${EMPTY}'  Run Keywords
-    ...  Should Be True  ${rest_response} == ${operation_status}  AND
-    ...  Should Be True  ${bmc_response} == ${operation_status}
+    FOR  ${conf_file}  IN  @{file_name}
+      ${status}  ${stderr}  ${rc}=  BMC Execute Command
+      ...  ls -l /var/lib/obmc/bmc-console-mgmt/save-area/${conf_file} | wc -l
+      Valid Value  ${status}  [${Partition_status}]
+    END
 
 
-Delete Partition
-    [Documentation]  Delete partition.
-    [Arguments]  ${partition_name}='${EMPTY}'  ${expect_resp_code}=${HTTP_OK}
-
-    # Description of argument(s):
-    # partition_name      Name of the partition on BMC.
-    # expect_resp_code    Expected REST response code, default is ${HTTP_OK}.
-
-    ${data}=  Create Dictionary
-    ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
-    Set To Dictionary  ${data}  headers  ${headers}
-
-    ${resp}=  Delete Request  openbmc  /ibm/v1/Host/ConfigFiles/${partition_name}  &{data}
-    ${expect_resp_code}=  Set Variable If  '${partition_name}' == '${EMPTY}'
-    ...  ${HTTP_NOT_FOUND}  ${expect_resp_code}
-    Should Be Equal As Strings  ${resp.status_code}  ${expect_resp_code}
-
-
-Delete And Verify All Partitions on BMC
-    [Documentation]  Delete and verify all partitions on BMC.
-    [Arguments]  ${expect_resp_code}=${HTTP_OK}
-
-    # Description of argument(s):
-    # expect_resp_code    Expected REST response code, default is ${HTTP_OK}.
-
-    ${data}=  Create Dictionary
-    ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
-    Set To Dictionary  ${data}  headers  ${headers}
-
-    ${resp}=  Post Request  openbmc  /ibm/v1/Host/ConfigFiles/Actions/IBMConfigFiles.DeleteAll  &{data}
-    Should Be Equal As Strings  ${resp.status_code}  ${expect_resp_code}
-
-    Return From Keyword If  ${expect_resp_code} != ${HTTP_OK}
-    Verify Partition Available On BMC  operation_status=${False}
-
-
-Read Partition And Verify Content
-    [Documentation]  Read partition and verify content.
-    [Arguments]  ${partition_name}=p1  ${content}=${EMPTY}  ${expect_resp_code}=${HTTP_OK}
-
-    # Description of argument(s):
-    # partition_name      Name of the partition on BMC.
-    # content             Content of the partition file uploaded.
-    # expect_resp_code    Expected REST response code, default is ${HTTP_OK}.
-
-    ${resp}=  Get Request  openbmc  /ibm/v1/Host/ConfigFiles/${partition_name}
-    Should Be Equal As Strings  ${resp.status_code}  ${expect_resp_code}
-
-    ${partition_data}=  Remove String  ${resp.text}  \\n
-    ${partition_data}=  Evaluate  json.loads('''${partition_data}''')  json
-    Should Be Equal As Strings  ${partition_data["Data"]}  ${content}
-
-
-Delete Local File Created To Upload
-    [Documentation]  Delete local file created to upload.
+Redfish Upload Partition File
+    [Documentation]  Upload the partition file.
     [Arguments]  ${file_name}
 
     # Description of argument(s):
-    # file_name       Name of the local file to be deleted.
+    # file_name    Partition file name.
 
-    Run Keyword And Ignore Error  Run  rm -f ${file_name}
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    ${num_records}=  Get Length  ${Partition_file_list}
+    Create Partition File  ${Partition_file_list}
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+    Run Keyword If  ${num_records} == ${1}
+    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    ...  ELSE
+    ...    Delete All BMC Partition File  ${HTTP_OK}
+    Delete Local Partition File  ${Partition_file_list}
 
 
-Upload Partition File With Some Known Contents
-    [Documentation]  Upload partition file with some known contents.
-    [Arguments]  ${file_name}  ${partition_name}  ${content}  ${expected_msg}=${UPLOADED_MSG}
+Redfish Fail To Upload Partition File
+    [Documentation]  Fail to uplaod the partition file.
+    [Arguments]  ${file_name}
 
     # Description of argument(s):
-    # file_name           Name of the partition file to be uploaded.
-    # partition_name      Name of the partition on BMC.
-    # content             Content of the partition file to be uploaded.
+    # file_name    Partition file name.
 
-    Run  echo "${content}" > ${file_name}
-    OperatingSystem.File Should Exist  ${file_name}
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    Create Partition File  ${Partition_file_list}
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_BAD_REQUEST}  ${MAXIMUM_SIZE_MESSAGE}
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=0
+    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND}
+    Delete Local Partition File  ${Partition_file_list}
 
-    Upload File To Create Partition Then Delete Partition  ${file_name}  1  ${partition_name}
-    ...  expected_msg=${expected_msg}  delete_partition=${False}
 
+Redfish Partition File Persistency
+    [Documentation]  Upload the partition file and check for persistency after reboot.
+    [Arguments]  ${file_name}
 
-Suite Setup Execution
-    [Documentation]  Suite setup execution.
+    # Description of argument(s):
+    # file_name    Partition file name.
 
-    # Create different user accounts.
-    Redfish.Login
-    Create Users With Different Roles  users=${USERS}  force=${True}
-    # Get REST session to BMC.
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    ${num_records}=  Get Length  ${Partition_file_list}
+    Create Partition File  ${Partition_file_list}
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+    Redfish OBMC Reboot (off)
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
     Initialize OpenBMC
+    Run Keyword If  ${num_records} == ${1}
+    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    ...  ELSE
+    ...    Delete All BMC Partition File  ${HTTP_OK}
+    Delete Local Partition File  ${Partition_file_list}
 
 
-Test Teardown Execution
-    [Documentation]  Test teardown execution.
+Verify Redfish Partition File Content
+    [Documentation]  Verify partition file content.
+    [Arguments]  ${file_name}  ${content_dict}  ${status_code}
 
-    Delete And Verify All Partitions on BMC
-    FFDC On Test Case Fail
+    # Description of argument(s):
+    # file_name       Partition file name.
+    # content_dict    Dict contain the content.
+    # status_code     HTTPS status code.
+
+    FOR  ${conf_file}  IN  @{file_name}
+      ${resp}=  Get Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}
+      Should Be Equal As Strings  ${resp.status_code}  ${status_code}
+
+      ${Partition_file_data}=  Remove String  ${resp.text}  \\n
+      ${Partition_file_data}=  Evaluate  json.loads('''${Partition_file_data}''')  json
+      Should Be Equal As Strings  ${Partition_file_data["Data"]}  ${content_dict['${conf_file}']}
+    END
 
 
-Suite Teardown Execution
-    [Documentation]  Suite teardown execution.
+Add Content To Files
+    [Documentation]  Add defined content in partition file.
+    [Arguments]  ${file_name}  ${index}=${0}
 
-    Delete BMC Users Via Redfish  users=${USERS}
+    # Description of argument(s):
+    # file_name    Partition file name.
+    # index        Index
+
+    ${num_records}=  Get Length  ${file_name}
+    Set Test Variable  ${content-1}  Sample Content to test partition file upload
+    Set Test Variable  ${content-2}  Sample Content to test partition file upload after reboot
+    &{content_dict}=  Create Dictionary
+    FOR  ${conf_file}  IN  @{file_name}
+       ${index}=  Get Index From List  ${file_name}  ${conf_file}
+       ${index}=  Evaluate  ${index} + 1
+
+       Run  echo "${content-${index}}" > ${conf_file}
+       OperatingSystem.File Should Exist  ${conf_file}
+
+       Set To Dictionary  ${content_dict}  ${conf_file}  ${content-${index}}
+    END
+
+    [Return]  &{content_dict}
+
+
+Redfish Read Partition File
+    [Documentation]  Read partition file content.
+    [Arguments]  ${file_name}  ${reboot_flag}=False
+
+    # Description of argument(s):
+    # file_name      Partition file name.
+    # reboot_flag    Reboot flag.
+
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    ${content_dict}=  Add Content To Files  ${Partition_file_list}
+
+    ${num_records}=  Get Length  ${Partition_file_list}
+
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+    Verify Redfish Partition File Content  ${Partition_file_list}  ${content_dict}  ${HTTP_OK}
+
+    Run Keyword If  ${True} == ${reboot_flag}
+    ...  Run Keywords  Redfish OBMC Reboot (off)  AND
+    ...  Initialize OpenBMC  AND
+    ...  Verify Redfish Partition File Content  ${Partition_file_list}  ${content_dict}  ${HTTP_OK}
+    Run Keyword If  ${num_records} == ${1}
+    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    ...  ELSE
+    ...    Delete All BMC Partition File  ${HTTP_OK}
+    Delete Local Partition File  ${Partition_file_list}
+
+
+Redfish Update Partition File With Same Content
+    [Documentation]  Update partition file with same content.
+    [Arguments]  ${file_name}  ${reboot_flag}=False
+
+    # Description of argument(s):
+    # file_name      Partition file name.
+    # reboot_flag    Reboot flag.
+
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    ${content_dict}=  Add Content To Files  ${Partition_file_list}  ${0}
+
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+    Verify Redfish Partition File Content  ${Partition_file_list}  ${content_dict}  ${HTTP_OK}
+
+    Run Keyword If  ${True} == ${reboot_flag}
+    ...  Run Keywords  Redfish OBMC Reboot (off)  AND
+    ...  Initialize OpenBMC
+
+    ${content_dict}=  Add Content To Files  ${Partition_file_list}  ${0}
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED}
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+    Verify Redfish Partition File Content  ${Partition_file_list}  ${content_dict}  ${HTTP_OK}
+
+    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    Delete Local Partition File  ${Partition_file_list}
+
+
+Redfish Update Partition File With Different Content
+    [Documentation]  Update partition file with different content.
+    [Arguments]  ${file_name}  ${reboot_flag}=False
+
+    # Description of argument(s):
+    # file_name      Partition file name.
+    # reboot_flag    Reboot flag.
+
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    ${content_dict}=  Add Content To Files  ${Partition_file_list}  ${0}
+
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+    Verify Redfish Partition File Content  ${Partition_file_list}  ${content_dict}  ${HTTP_OK}
+
+    Run Keyword If  ${True} == ${reboot_flag}
+    ...  Run Keywords  Redfish OBMC Reboot (off)  AND
+    ...  Initialize OpenBMC
+
+    ${content_dict}=  Add Content To Files  ${Partition_file_list}  ${1}
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED}
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+    Verify Redfish Partition File Content  ${Partition_file_list}  ${content_dict}  ${HTTP_OK}
+
+    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    Delete Local Partition File  ${Partition_file_list}
+
+
+Create File Names
+    [Documentation]  Create partition file names.
+    [Arguments]  ${range}
+
+    # Description of argument(s):
+    # range    Range in numbers.
+
+    @{file_name_list}=  Create List
+    Set Test Variable  ${file_name}  rangefile
+    FOR  ${count}  IN RANGE  ${range}
+      Append To List  ${file_name_list}  200KB_file${count}
+    END
+    [Return]  ${file_name_list}
+
+
+Redfish Upload Partition File With Range
+    [Documentation]  Upload the partition file with the range of files.
+    [Arguments]  ${range}
+
+    # Description of argument(s):
+    # range    Range in numbers.
+
+    ${Partition_file_list}=  Create File Names  ${range}
+    Create Partition File  ${Partition_file_list}
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+    Delete All BMC Partition File  ${HTTP_OK}
+    Delete Local Partition File  ${Partition_file_list}
+
+
+Redfish Delete Non Existence Partition File
+    [Documentation]  Delete the partition file if do not exists.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name    Partition file name.
+
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND}
+
+
+Non Admin User To Upload Partition File
+    [Documentation]  Non admin user to uplaod the partition file.
+    [Arguments]  ${file_name}  ${username}  ${password}  ${role}  ${enabled}=${True}
+
+    # Description of argument(s):
+    # file_name    Partition file name.
+    # username     Username.
+    # password     Password.
+    # role         Role of user.
+    # enabled      Value can be True or False.
+
+    Redfish Create User  ${username}  ${password}  ${role}  ${enabled}
     Delete All Sessions
+    Initialize OpenBMC  rest_username=${username}  rest_password=${password}
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    Create Partition File  ${Partition_file_list}
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_FORBIDDEN}  ${FORBIDDEN_MESSAGE}  ${False}
+    Delete Local Partition File  ${Partition_file_list}
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
+
+
+Non Admin Delete Non Existence Partition File
+    [Documentation]  Non admin user to uplaod the partition file.
+    [Arguments]  ${file_name}  ${username}  ${password}  ${role}  ${enabled}=${True}
+
+    # Description of argument(s):
+    # file_name    Partition file name.
+    # username     Username.
+    # password     Password.
+    # role         Role of user.
+    # enabled      Value can be True or False.
+
+    Redfish Create User  ${username}  ${password}  ${role}  ${enabled}
+    Delete All Sessions
+    Initialize OpenBMC  rest_username=${username}  rest_password=${password}
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_FORBIDDEN}  ${FORBIDDEN_MESSAGE}
+
+
+Verify Update Wrong Partition File To BMC
+    [Documentation]  Upload the wrong partition file to BMC.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name    Partition file name.
+
+    Redfish.Login
+    ${resp}=  Run Keyword And Return Status
+    ...  Redfish.Put  /ibm/v1/Host/ConfigFiles/../../../../../etc/resolv.conf  body={"data": "test string"}
+    Should Be Equal As Strings  ${resp}  False
