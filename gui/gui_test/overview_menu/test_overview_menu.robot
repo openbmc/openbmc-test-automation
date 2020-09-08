@@ -82,7 +82,7 @@ Verify Server Information Section
     Page Should Contain  ${redfish_serial_number}
 
     ${redfish_motherboard_manufacturer}=  Redfish.Get Attribute
-    ...  ${REDFISH_CHASSIS_URI}motherboard  Manufacturer
+    ...  /redfish/v1/Systems/system/  Manufacturer
 
     Page Should Contain  ${redfish_motherboard_manufacturer}
 
