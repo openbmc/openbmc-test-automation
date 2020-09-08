@@ -13,6 +13,9 @@ Suite Teardown    Redfish.Logout
 
 *** Variables ***
 
+${test_ipv4}              10.10.20.30
+${test_gateway}           0.0.0.0
+${test_netmask}           255.255.252.0
 &{DHCP_ENABLED}           DHCPEnabled=${${True}}
 &{DHCP_DISABLED}          DHCPEnabled=${${False}}
 
@@ -113,6 +116,33 @@ Delete VMI Static IP Address And Verify
    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
    Should Be Empty  ${resp.dict["IPv4Addresses"]}
 
+Verify Successful VMI IP Static Configuration On HOST Boot After Session Delete
+    [Documentation]  Verify VMI IP static Configuration On HOST Boot After session deleted.
+    [Tags]  Verify_Successful_VMI_IP_Static_Configuration_On_HOST_Boot_After_Session_Delete
+    [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  Test Teardown
+
+    Set Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+
+    ${session_info}=  Get Redfish Session Info
+    Redfish.Delete  ${session_info["location"]}
+
+    # Create a new Redfish session
+    Run Keywords  Redfish Power Off  AND  Redfish Power On   AND  Redfish.Login
+
+    Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
+
+Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
+    [Documentation]  Verify Persistency Of VMI DHCP IP configuration After Multiple HOST Reboots
+    [Tags]  Verify_Persistency_Of_VMI_DHCP_IP_Configuration_After_Multiple_HOST_Reboots
+
+    ${LOOP_COUNT}=  Set Variable  ${3}
+    Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
+    Run Keywords  Redfish Power Off  AND  Redfish Power On
+    ${vmi_ip_config}=  Get VMI Network Interface Details
+    # Verifying persistency of dynamic address after multiple reboots.
+    Repeat Keyword  ${LOOP_COUNT} times
+    ...  Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}  DHCP  ${vmi_ip_config["IPv4_Gateway"]}
+    ...  ${vmi_ip_config["IPv4_SubnetMask"]}  ${True}
 
 *** Keywords ***
 
@@ -165,7 +195,6 @@ Get Immediate Child Parameter From VMI Network Interface
     ...  ${ip_resp["DHCPv4"]["${parameter}"]}
 
     [Return]  ${value}
-
 
 Verify VMI EthernetInterfaces
     [Documentation]  Verify VMI ethernet interfaces.
