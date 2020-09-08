@@ -113,6 +113,31 @@ Delete VMI Static IP Address And Verify
    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
    Should Be Empty  ${resp.dict["IPv4Addresses"]}
 
+Verify Successful VMI IP Static Configuration On HOST Boot After Session Delete
+    [Documentation]  Verify VMI IP static Configuration On HOST Boot After session deleted.
+    [Tags]  Verify_Successful_VMI_IP_Static_Configuration_On_HOST_Boot_After_Session_Delete
+    [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  Test Teardown
+
+    Set Static IPv4 Address To VMI  10.10.20.30  0.0.0.0  255.255.252.0
+
+    ${session_info}=  Get Redfish Session Info
+    Redfish.Delete  ${session_info["location"]}
+
+    # Create a new Redfish session
+    Run Keywords  Redfish Power Off  AND  Redfish Power On   AND  Redfish.Login
+
+    Verify VMI Network Interface Details  10.10.20.30  Static  0.0.0.0  255.255.252.0
+
+Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
+    [Documentation]  Verify Persistency Of VMI DHCP IP configuration After Multiple HOST Reboots
+    [Tags]  Verify_Persistency_Of_VMI_DHCP_IP_Configuration_After_Multiple_HOST_Reboots
+
+    ${LOOP_COUNT}=  Set Variable  ${3}
+    Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
+    ${ip_dhcp}  ${gateway_dhcp}  ${netmask_dhcp}  Get VMI DHCP Network Interface Details  ${True}
+    # Verifying persistency of dynamic address after multiple reboots.
+    Repeat Keyword  ${LOOP_COUNT} times
+    ...  Verify VMI Network Interface Details  ${ip_dhcp}  DHCP  ${gateway_dhcp}  ${netmask_dhcp}  ${True}
 
 *** Keywords ***
 
@@ -166,6 +191,23 @@ Get Immediate Child Parameter From VMI Network Interface
 
     [Return]  ${value}
 
+Get VMI DHCP Network Interface Details
+    [Documentation]  Get VMI network interface details.
+    [Arguments]  ${host_reboot}=${False}  ${valid_status_code}=${HTTP_OK}
+
+    # Description of argument(s):
+    # valid_status_code  Expected valid status code from GET request. Default is HTTP_OK.
+    # host_reboot        Reboot HOST if True.
+
+    Run Keyword If  ${host_reboot} == ${True}  Run Keywords
+    ...  Redfish Power Off  AND  Redfish Power On
+
+    ${vmi_ip_dhcp}=  Get VMI Network Interface Details  ${valid_status_code}
+    ${gateway} =  Set Variable  ${vmi_ip_dhcp["IPv4_Gateway"]}
+    ${netmask} =  Set Variable  ${vmi_ip_dhcp["IPv4_SubnetMask"]}
+    ${ip} =  Set Variable  ${vmi_ip_dhcp["IPv4_Address"]}
+
+    [Return]  ${ip}  ${gateway}  ${netmask}
 
 Verify VMI EthernetInterfaces
     [Documentation]  Verify VMI ethernet interfaces.
