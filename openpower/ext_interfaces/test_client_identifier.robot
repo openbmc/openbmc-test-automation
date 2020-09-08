@@ -129,13 +129,11 @@ Verify A Session Created With ClientID
       ${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions/${session_id}
       Rprint Vars  sessions
       @{words} =  Split String  ${sessions["Oem"]["OpenBMC"]["ClientOriginIP"]}  :
-      ${host_name}=  Get Hostname
-      ${host_name}  ${ip_address}=  Get Host Name IP  host=${host_name}
-      Set Suite Variable  ${ip_address}
+      ${ip_address}=  Get Running System IP
       Set Test Variable  ${temp_ipaddr}  ${words}[-1]
       Valid Value  client  ['${sessions["Oem"]["OpenBMC"]["ClientID"]}']
       Valid Value  sessions["Id"]  ['${session_id}']
-      Valid Value  temp_ipaddr  ['${ip_address}']
+      Valid Value  temp_ipaddr  ${ip_address}
     END
 
 
