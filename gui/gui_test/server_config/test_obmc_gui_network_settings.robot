@@ -104,11 +104,11 @@ Verify Static IP Address Editable
 
 Verify System Section In Network Setting page
     [Documentation]  Verify hostname, MAC address and default gateway
-    ... under system section of network setting page.
+    ...  under system section of network setting page.
     [Tags]  Verify_System_Section
 
-    ${host_name}  ${ip_address}=  Get Host Name IP  host=${OPENBMC_HOST}
-    Textfield Value Should Be  ${xpath_hostname_input}  ${hostname}
+    ${host_name}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    Textfield Value Should Be  ${xpath_hostname_input}  ${hos_name}
 
     ${mac_address}=  Get BMC MAC Address
     Textfield Value Should Be   ${xpath_mac_address_input}  ${mac_address}
