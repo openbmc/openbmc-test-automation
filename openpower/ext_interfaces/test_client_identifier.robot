@@ -68,6 +68,16 @@ Fail To Set Client Origin IP
     12345
     EXTERNAL-CLIENT-01
 
+
+Create Session For Non Admin User
+    [Documentation]  Create Session for non-admin user.
+    [Tags]  Create_Session_For_Non_Admin_User
+    [Template]  Non Admin User To Create Session
+
+    # client_id    username         password      role_id
+    12345          operator_user    TestPwd123    Operator
+
+
 *** Keywords ***
 
 Create A Session With ClientID
@@ -181,3 +191,84 @@ Create Session And Fail To Set Client Origin IP
 
     Set Test Variable  ${client_ip}  10.6.7.8
     ${resp}=  Set Client Origin IP  ${client_id}  ${client_ip}  status=False
+
+
+Create A Non Admin Session With ClientID
+    [Documentation]  Create redifish session with client id.
+    [Arguments]  ${client_id}  ${username}  ${password}
+
+    # Description of argument(s):
+    # client_id    This client id can contain string value
+    #              (e.g. 12345, "EXTERNAL-CLIENT").
+
+    @{session_list}=  Create List
+    &{tmp_dict}=  Create Dictionary
+
+    FOR  ${client}  IN  @{client_id}
+      ${resp}=  Redfish Login  rest_username=${username}  rest_password=${password}  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client}"}}
+      Append To List  ${session_list}  ${resp}
+    END
+
+    [Return]  ${session_list}
+
+
+Verify A Non Admin Session Created With ClientID
+    [Documentation]  Verify session created with client id.
+    [Arguments]  ${client_ids}  ${session_ids}
+
+    # Description of argument(s):
+    # client_id    External client name.
+    # session_id   This value is a session id.
+
+    # {
+    #   "@odata.id": "/redfish/v1/SessionService/Sessions/H8q2ZKucSJ",
+    #   "@odata.type": "#Session.v1_0_2.Session",
+    #   "Description": "Manager User Session",
+    #   "Id": "H8q2ZKucSJ",
+    #   "Name": "User Session",
+    #   "Oem": {
+    #   "OpenBMC": {
+    #  "@odata.type": "#OemSession.v1_0_0.Session",
+    #  "ClientID": "",
+    #  "ClientOriginIP": "::ffff:x.x.x.x"
+    #       }
+    #     },
+    #   "UserName": "root"
+    # }
+
+    FOR  ${client}  IN  @{client_ids}
+      ${session_id}=  Get Session Information By ClientID  ${client}  ${session_ids}
+      ${resp}=  Redfish Get Request  /redfish/v1/SessionService/Sessions/${session_id}
+      ${sessions}=     To Json    ${resp.content}
+      #Set Test Variable  ${sessions}  ${content["data"]}
+      Rprint Vars  sessions
+      Log  ${sessions}
+      @{words} =  Split String  ${sessions["Oem"]["OpenBMC"]["ClientOriginIP"]}  :
+      ${ip_address}=  Get Running System IP
+      Set Test Variable  ${temp_ipaddr}  ${words}[-1]
+      Valid Value  client  ['${sessions["Oem"]["OpenBMC"]["ClientID"]}']
+      Valid Value  sessions["Id"]  ['${session_id}']
+      Valid Value  temp_ipaddr  ${ip_address}
+    END
+
+
+Non Admin User To Create Session
+    [Documentation]  Non Admin user create a session and verify the session is created.
+    [Arguments]  ${client_id}  ${username}  ${password}  ${role}  ${enabled}=${True}
+
+    # Description of argument(s):
+    # client_id    This client id contain string value
+    #              (e.g. 12345, "EXTERNAL-CLIENT").
+    # username     Username.
+    # password     Password.
+    # role         Role of user.
+    # enabled      Value can be True or False.
+
+    Redfish.Login
+    Redfish Create User  ${username}  ${password}  ${role}  ${enabled}
+    Delete All Sessions
+    Redfish.Logout
+    Initialize OpenBMC  rest_username=${username}  rest_password=${password}
+    ${client_ids}=  Split String  ${client_id}  ,
+    ${session_info}=  Create A Non Admin Session With ClientID  ${client_ids}  ${username}  ${password}
+    Verify A Non Admin Session Created With ClientID  ${client_ids}  ${session_info}
