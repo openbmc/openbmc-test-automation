@@ -405,6 +405,30 @@ Redfish Login
     [Return]  ${content}
 
 
+Redfish Get Request
+     [Documentation]  Do REST POST request and return the result.
+    [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+
+    # Description of argument(s):
+    # uri      The URI to establish connection with
+    #          (e.g. '/xyz/openbmc_project/software/').
+    # timeout  Timeout in seconds to establish connection with URI.
+    # quiet    If enabled, turns off logging to console.
+    # kwargs   Any additional arguments to be passed directly to the
+    #          Post Request call. For example, the caller might
+    #          set kwargs as follows:
+    #          ${kwargs}=  Create Dictionary  allow_redirect=${True}.
+
+    ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
+    ${headers}=  Create Dictionary  Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
+    Set To Dictionary   ${kwargs}  headers  ${headers}
+    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post  base_uri=${base_uri}  args=&{kwargs}
+    ${resp}=  Get Request  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}
+    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
+
+    [Return]  ${resp}
+
+
 Redfish Post Request
     [Documentation]  Do REST POST request and return the result.
     [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
