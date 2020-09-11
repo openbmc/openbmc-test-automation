@@ -18,6 +18,7 @@ from robot.libraries.BuiltIn import BuiltIn
 import json
 import bmc_ssh_utils as bsu
 
+ip_regex = r"\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}"
 
 def get_running_system_ip():
     r"""
@@ -29,11 +30,9 @@ def get_running_system_ip():
     """
 
     ip_list = list()
-    host_name = socket.gethostname()
-    temp_ip_list = socket.getaddrinfo(host_name, 80)
-    for item in temp_ip_list:
-        ip_addr = item[-1][0]
-        ip_list.insert(0, ip_addr)
+    stdout = subprocess.check_output("ip addr show", shell=True)
+    stdout = stdout.decode("utf-8")
+    ip_list = re.findall(ip_regex, stdout)
 
     return ip_list
 
