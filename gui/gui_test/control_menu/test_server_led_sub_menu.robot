@@ -59,6 +59,21 @@ Verify Server LED ON
     Verify Server LED using Redfish and GUI  On
 
 
+Verify Server LED OFF
+    [Documentation]  Turn OFF the server LED button using GUI and verify it via Redfish.
+    [Tags]  Verify_Server_LED_OFF
+
+    # Turn ON the server LED via Redfish.
+    Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Lit"}   valid_status_codes=[200, 204]
+
+    # Turn Off the server LED via GUI.
+    Click Element At Coordinates  ${xpath_led_toggle}  0  0
+    Wait Until Element Contains  ${xpath_led_value}  Off  timeout=15
+
+    # Verify server LED via Redfish and GUI.
+    Verify Server LED using Redfish and GUI  Off
+
+
 *** Keywords ***
 
 Test Setup Execution
