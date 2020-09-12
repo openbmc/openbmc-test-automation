@@ -14,6 +14,7 @@ Test Setup      Test Setup Execution
 ${xpath_server_led_heading}  //h1[text()="Server LED"]
 ${xpath_led_value}           //*[@data-test-id='serverLed-checkbox-switchIndicatorLed']/following-sibling::label/span
 ${xpath_overview_led_value}  //*[@data-test-id='overviewQuickLinks-checkbox-serverLed']/following-sibling::label/span
+${xpath_led_toggle}          //*[@data-test-id='serverLed-checkbox-switchIndicatorLed']
 
 *** Test Cases ***
 
@@ -40,6 +41,21 @@ Verify Server Led Sync With Overview Page LED Status
     ${overview_led_value} =  Get Text  ${xpath_overview_led_value}
 
     Should Be Equal  ${gui_led_value}  ${overview_led_value}
+
+
+Verify Server LED OFF
+    [Documentation]  Turn OFF the server LED button using GUI and verify it via Redfish.
+    [Tags]  Verify_Server_LED_OFF
+
+    # Turn ON the server LED via Redfish.
+    Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Lit"}   valid_status_codes=[200, 204]
+
+    # Turn Off the server LED via GUI.
+    Click Element At Coordinates  ${xpath_led_toggle}  0  0
+    Wait Until Element Contains  ${xpath_led_value}  Off  timeout=15
+
+    # Verify server LED via Redfish and GUI.
+    Verify Server LED using Redfish and GUI  Off
 
 
 *** Keywords ***
