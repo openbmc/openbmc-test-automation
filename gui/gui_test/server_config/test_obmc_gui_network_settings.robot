@@ -4,6 +4,7 @@ Documentation   Test OpenBMC GUI "Network settings" sub-menu of
 ...             "Server configuration".
 
 Resource        ../../lib/resource.robot
+Resource        ../../../lib/bmc_network_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
@@ -23,6 +24,8 @@ ${xpath_static_input_ip0}         //*[@data-test-id="networkSettings-input-stati
 ${xpath_add_static_ip}            //button[contains(text(),"Add static IP")]
 ${xpath_setting_success}          //*[contains(text(),"Successfully saved network settings.")]
 ${xpath_add_dns_server}           //button[contains(text(),"Add DNS server")]
+${xpath_network_interface}        //select[@id="interface-select"]
+${xpath_input_netmask_addr0}      //*[@data-test-id="networkSettings-input-subnetMask-0"]
 
 *** Test Cases ***
 
@@ -115,6 +118,28 @@ Verify System Section In Network Setting page
 
     ${default_gateway}=  Get BMC Default Gateway
     Textfield Value Should Be  ${xpath_default_gateway_input}  ${default_gateway}
+
+
+Verify Network Interface Details
+    [Documentation]  The network interface name that will be tested.
+    [Tags]  Verify_Network_Interface_Details
+
+    Page Should Contain Element  ${xpath_interface}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${interfaces}=  Get Text  ${xpath_network_interface}
+    Should Contain  ${interfaces}  ${ethernet_interface}
+
+
+Verify Static IPv4 Section In Network Setting Page
+    [Documentation]  Verify static IPv4 section in network setting page.
+    [Tags]  Verify_Static_IPv4_Section_In_Network_Setting_Page
+
+    @{network_configurations}=  Get Network Configuration
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Textfield Value Should Be  ${xpath_static_input_ip0}  ${network_configuration["Address"]}
+      Textfield Value Should Be  ${xpath_input_netmask_addr0}  ${network_configuration['SubnetMask']}
+    END
 
 
 *** Keywords ***
