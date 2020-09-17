@@ -91,7 +91,7 @@ Configure Invalid MAC And Verify On FW_Env
     ${special_char_mac}  error
     ${less_byte_mac}     error
 
- Configure Invalid MAC And Verify Persistency On FW_Env
+Configure Invalid MAC And Verify Persistency On FW_Env
     [Documentation]  Configure invalid MAC and verify persistency on FW_Env.
     [Tags]  Configure_Invalid_MAC_And_Verify_Persistency_On_FW_Env
 
