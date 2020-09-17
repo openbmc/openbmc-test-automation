@@ -18,7 +18,10 @@ Suite Teardown    Suite Teardown Execution
 # users           User Name               password
 @{ADMIN}          admin_user              TestPwd123
 @{OPERATOR}       operator_user           TestPwd123
-&{USERS}          Administrator=${ADMIN}  Operator=${OPERATOR}
+@{ReadOnly}       readonly_user           TestPwd123
+@{NoAccess}       noaccess_user           TestPwd123
+&{USERS}          Administrator=${ADMIN}  Operator=${OPERATOR}  ReadOnly=${ReadOnly}
+...               NoAccess=${NoAccess}
 ${VMI_BASE_URI}   /ibm/v1/
 ${CSR_FILE}       csr_server.csr
 ${CSR_KEY}        csr_server.key
@@ -28,21 +31,59 @@ ${CSR_KEY}        csr_server.key
 Get CSR Request Signed By VMI And Verify
     [Documentation]  Get CSR request signed by VMI using different user roles and verify.
     [Tags]  Get_CSR_Request_Signed_By_VMI_And_Verify
+    [Setup]  Redfish Power On
     [Template]  Get Certificate Signed By VMI
 
     # username           password             force_create  valid_csr  valid_status_code
     ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_OK}
+
+    # Send CSR request from operator user.
     operator_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
+
+    # Send CSR request from ReadOnly user.
+    readonly_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
+
+    # Send CSR request from NoAccess user.
+    noaccess_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
 
 Get Root Certificate Using Different Privilege Users Roles
     [Documentation]  Get root certificate using different users.
     [Tags]  Get_Root_Certificate_Using_Different_Users
+    [Setup]  Redfish Power On
     [Template]  Get Root Certificate
 
     # username     password    force_create  valid_csr  valid_status_code
+    # Request root certificate from admin user.
     admin_user     TestPwd123  ${True}       ${True}    ${HTTP_OK}
+
+    # Request root certificate from operator user.
     operator_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
+
+    # Request root certificate from ReadOnly user.
+    readonly_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
+
+    # Request root certificate from NoAccess user.
+    noaccess_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
+
+
+Send CSR Request When VMI Is Off And Verify
+    [Documentation]  Send CSR signing request to VMI when it is off and expect an error.
+    [Tags]  Get_CSR_Request_When_VMI_Is_Off_And_verify
+    [Setup]  Redfish Power Off
+    [Template]  Get Certificate Signed By VMI
+
+    # username           password             force_create  valid_csr  valid_status_code
+    ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_INTERNAL_SERVER_ERROR}
+
+    # Send CSR request from operator user.
+    operator_user        TestPwd123           ${False}      ${True}    ${HTTP_INTERNAL_SERVER_ERROR}
+
+    # Send CSR request from ReadOnly user.
+    readonly_user        TestPwd123           ${False}      ${True}    ${HTTP_INTERNAL_SERVER_ERROR}
+
+    # Send CSR request from NoAccess user.
+    noaccess_user        TestPwd123           ${False}      ${True}    ${HTTP_INTERNAL_SERVER_ERROR}
 
 
 *** Keywords ***
@@ -58,7 +99,7 @@ Generate CSR String
     # Run openssl command to create a new private key and use that to generate a CSR string
     # in server.csr file.
     ${output}=  Run  ${ssl_cmd} ${ssl_sub}
-    ${csr}=  OperatingSystem.Get File  server.csr
+    ${csr}=  OperatingSystem.Get File  ${CSR_FILE}
 
     [Return]  ${csr}
 
