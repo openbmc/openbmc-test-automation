@@ -38,3 +38,14 @@ Verify AvahiDaemon Service Status
     ${service_message}=  Get From Dictionary  ${daemon_message}  ${message}
     ${resp}  ${stderr}  ${rc}=  BMC Execute Command  ${service_command}  print_out=1
     Should Contain  ${resp}  ${service_message}
+
+
+Get Lock Resource Information
+    [Documentation]  Get lock resource information.
+
+    ${code_base_dir_path}=  Get Code Base Dir Path
+    ${resource_lock_json}=  Evaluate
+    ...  json.load(open('${code_base_dir_path}data/resource_lock_table.json'))  modules=json
+    Rprint Vars  resource_lock_json
+
+    [Return]  ${resource_lock_json}
