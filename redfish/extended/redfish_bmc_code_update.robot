@@ -84,8 +84,9 @@ Redfish Firmware Update In Loop
     # update_loop_count    This value is used to run the firmware update in loop.
 
     ${before_image_state}=  Get BMC Functional Firmware
+    ${temp_update_loop_count}=  Evaluate  ${update_loop_count} + 1
 
-    FOR  ${count}  IN RANGE  ${update_loop_count}
+    FOR  ${count}  IN RANGE  1  ${temp_update_loop_count}
       Print Timen  **************************************
       Print Timen  * The Current Loop Count is ${count} of ${update_loop_count} *
       Print Timen  **************************************
