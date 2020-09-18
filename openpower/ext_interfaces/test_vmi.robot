@@ -6,6 +6,7 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/bmc_redfish_utils.robot
+Resource         ../../lib/state_manager.robot
 Library          ../../lib/bmc_network_utils.py
 
 Suite Setup       Suite Setup Execution
@@ -155,7 +156,7 @@ Verify Successful VMI IP Static Configuration On HOST Boot After Session Delete
     [Tags]  Verify_Successful_VMI_IP_Static_Configuration_On_HOST_Boot_After_Session_Delete
     [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  Test Teardown Execution
 
-    Set Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+    Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
 
     ${session_info}=  Get Redfish Session Info
     Redfish.Delete  ${session_info["location"]}
@@ -198,11 +199,66 @@ Verify VMI Static IP Configuration Persist On BMC Reset Before Host Boot
     [Tags]   Verify_VMI_Static_IP_Configuration_Persist_On_BMC_Reset_Before_Host_Boot
     [Teardown]  Run keywords  Delete VMI IPv4 Address  AND  FFDC On Test Case Fail
 
-    Set Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+    Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
     OBMC Reboot (off)
     Redfish Power On
     # Verifying the VMI static configuration
     Verify VMI Network Interface Details  ${test_ipv4}  Static   ${test_gateway}  ${test_netmask}
+
+Add Static IP When Host Poweroff And Verify On Poweron
+    [Documentation]  Add Static IP When Host Poweroff And Verify on power on
+    [Tags]   Add_Static_IP_When_Host_Poweroff_And_Verify_On_Poweron
+    [Setup]  Redfish Power Off
+    [Teardown]  Run keywords  Delete VMI IPv4 Address  AND  FFDC On Test Case Fail
+
+    Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+    Redfish Power On
+    Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
+
+Add VMI Static IP When Host Poweroff And Verify Static IP On BMC Reset
+    [Documentation]  Add Static IP When Host Poweroff And Verify Static IP On BMC Reset.
+    [Tags]  Add_VMI_Static_IP_When_Host_Poweroff_And_Verify_Static_IP_On_BMC_Reset
+    [Setup]  Redfish Power Off
+    [Teardown]  Run keywords  Delete VMI IPv4 Address  AND  FFDC On Test Case Fail
+
+    Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+    OBMC Reboot (off)
+    Redfish Power On
+    Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
+
+Enable DHCP When No Static IP Configured And Verify DHCP IP
+    [Documentation]  Enable DHCP when no static ip configured and verify dhcp ip
+    [Tags]  Enable_DHCP_When_No_Static_IP_Configured_And_Verify_DHCP_IP
+    [Setup]  Run Keyword And Ignore Error  Delete VMI IPv4 Address
+    [Teardown]  Test Teardown Execution
+
+    ${curr_origin}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
+    Run Keyword If  ${curr_origin} == ${False}  Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
+    ${vmi_ip_config}=  Get VMI Network Interface Details
+    Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}  DHCP  ${vmi_ip_config["IPv4_Gateway"]}
+    ...  ${vmi_ip_config["IPv4_SubnetMask"]}
+
+Verify User Cannot Delete VMI DHCP IP Address
+    [Documentation]  Verify user cannot delete VMI DHCP IP Address
+    [Tags]  Verify_User_Cannot_Delete_VMI_DHCP_IP_Address
+    [Setup]  Set VMI IPv4 Origin  ${True}
+    [Teardown]  Test Teardown Execution
+
+    Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_BAD_REQUEST}
+    ${active_channel_config}=  Get Active Channel Config
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Should Not Be Empty  ${resp.dict["IPv4Addresses"]}
+
+Enable DHCP When Static IP Configured DHCP Server Unavailable And Verify IP
+    [Documentation]  Enable DHCP When Static IP Configured And DHCP Server Unavailable And Verify No IP.
+    [Tags]  Enable_DHCP_When_Static_IP_Configured_DHCP_Server_Unavailable_And_Verify_IP
+    [Teardown]  Test Teardown Execution
+
+    Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+    Set VMI IPv4 Origin  ${True}
+    ${default}=  Set Variable  0.0.0.0
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
 
 Verify To Configure VMI Static IP Address With Different User Roles
@@ -453,7 +509,9 @@ Set Static IPv4 Address To VMI And Verify
     Sleep  ${wait_time}
 
     Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
-    Verify VMI Network Interface Details  ${ip}  Static  ${gateway}  ${netmask}
+    ${host_power_state}  ${host_state}=   Redfish Get Host State
+    Run Keyword If  '${host_power_state}' == 'On' and '${host_state}' == 'Enabled'
+    ...  Verify VMI Network Interface Details  ${ip}  Static  ${gateway}  ${netmask}
 
 
 Delete VMI IPv4 Address
