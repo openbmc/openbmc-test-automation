@@ -267,7 +267,8 @@ def initial_plug_in_setup():
     additional_values = ["program_pid", "master_pid", "ffdc_dir_path",
                          "status_dir_path", "base_tool_dir_path",
                          "ffdc_list_file_path", "ffdc_report_list_path",
-                         "ffdc_summary_list_path", "execdir", "redfish_supported"]
+                         "ffdc_summary_list_path", "execdir", "redfish_supported",
+                         "redfish_rest_supported"]
 
     plug_in_vars = parm_list + additional_values
 
