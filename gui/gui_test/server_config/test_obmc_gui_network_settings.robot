@@ -117,6 +117,18 @@ Verify System Section In Network Setting page
     Textfield Value Should Be  ${xpath_default_gateway_input}  ${default_gateway}
 
 
+Configure Invalid Network Addresses And Verify
+    [Documentation]  Configure invalid network addresses and verify.
+    [Tags]  Configure_Invalid_Network_Addresses_And_Verify
+    [Template]  Configure Invalid Network Address And Verify
+
+    # locator                        invalid_address
+    ${xpath_mac_address_input}       AA:AA:AA:AA:BB
+    ${xpath_default_gateway_input}   @@@.%%.44.11
+    ${xpath_static_input_ip0}        0.0.1.a
+    ${xpath_input_netmask_addr0}     255.256.255.0
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -126,4 +138,19 @@ Suite Setup Execution
     Click Element  ${xpath_server_configuration}
     Click Element  ${xpath_select_network_settings}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network-settings
+
+
+
+Configure Invalid Network Address And Verify
+    [Documentation]  Configure invalid network address And verify.
+    [Arguments]  ${locator}  ${invalid_address}
+
+    # Description of the argument(s):
+    # locator            Xpath to identify an HTML element on a web page.
+    # invalid_address    Invalid address to be added.
+
+    Wait Until Page Contains Element  ${locator}
+    Input Text  ${locator}  ${invalid_address}
+    Element Should Be Disabled  ${xpath_network_save_settings}
+    Page Should Contain  Invalid format
 
