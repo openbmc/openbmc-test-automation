@@ -111,7 +111,7 @@ Verify System Section In Network Setting page
     [Tags]  Verify_System_Section
 
     ${host_name}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
-    Textfield Value Should Be  ${xpath_hostname_input}  ${hos_name}
+    Textfield Value Should Be  ${xpath_hostname_input}  ${host_name}
 
     ${mac_address}=  Get BMC MAC Address
     Textfield Value Should Be   ${xpath_mac_address_input}  ${mac_address}
@@ -141,6 +141,18 @@ Verify Network Static IPv4 Details
     END
 
 
+Configure Invalid Network Addresses And Verify
+    [Documentation]  Configure invalid network addresses and verify.
+    [Tags]  Configure_Invalid_Network_Addresses_And_Verify
+    [Template]  Configure Invalid Network Address And Verify
+
+    # locator                        invalid_address
+    ${xpath_mac_address_input}       A.A.A.A
+    ${xpath_default_gateway_input}   a.b.c.d
+    ${xpath_static_input_ip0}        a.b.c.d
+    ${xpath_input_netmask_addr0}     255.256.255.0
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -150,4 +162,19 @@ Suite Setup Execution
     Click Element  ${xpath_server_configuration}
     Click Element  ${xpath_select_network_settings}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network-settings
+
+
+
+Configure Invalid Network Address And Verify
+    [Documentation]  Configure invalid network address And verify.
+    [Arguments]  ${locator}  ${invalid_address}
+
+    # Description of the argument(s):
+    # locator            Xpath to identify an HTML element on a web page.
+    # invalid_address    Invalid address to be added.
+
+    Wait Until Page Contains Element  ${locator}
+    Input Text  ${locator}  ${invalid_address}
+    Element Should Be Disabled  ${xpath_network_save_settings}
+    Page Should Contain  Invalid format
 
