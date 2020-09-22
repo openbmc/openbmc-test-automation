@@ -20,9 +20,11 @@ ${xpath_network_save_settings}    //button[@data-test-id="networkSettings-button
 ${xpath_default_gateway_input}    //*[@data-test-id="networkSettings-input-gateway"]
 ${xpath_mac_address_input}        //*[@data-test-id="networkSettings-input-macAddress"]
 ${xpath_static_input_ip0}         //*[@data-test-id="networkSettings-input-staticIpv4-0"]
+${xpath_static_input_ip1}         //*[@data-test-id="networkSettings-input-staticIpv4-1"]
 ${xpath_add_static_ip}            //button[contains(text(),"Add static IP")]
 ${xpath_setting_success}          //*[contains(text(),"Successfully saved network settings.")]
 ${xpath_add_dns_server}           //button[contains(text(),"Add DNS server")]
+${xpath_input_netmask_addr1}      //*[@data-test-id="networkSettings-input-subnetMask-1"]
 
 *** Test Cases ***
 
@@ -115,6 +117,50 @@ Verify System Section In Network Setting page
 
     ${default_gateway}=  Get BMC Default Gateway
     Textfield Value Should Be  ${xpath_default_gateway_input}  ${default_gateway}
+
+
+Configure Invalid MAC Address And Verify
+    [Documentation]  Configure invalid mac address and verify.
+    [Tags]  Configure_Invalid_MAC_Address_And_Verify
+
+    Wait Until Page Contains Element  ${xpath_mac_address_input}
+    Input Text  ${xpath_mac_address_input}  &A:$A:AA:AA:AA:^^
+    Element Should Be Disabled  ${xpath_network_save_settings}
+    Page Should Contain  Invalid format
+
+
+Configure Invalid Gateway And Verify
+    [Documentation]  Configure invalid gateway and verify.
+    [Tags]  Configure_Invalid_Gateway_And_Verify
+
+    Wait Until Page Contains Element  ${xpath_default_gateway_input}
+    Input Text  ${xpath_default_gateway_input}  @@@.%%.44.11
+    Element Should Be Disabled  ${xpath_network_save_settings}
+    Page Should Contain  Invalid format
+
+
+Configure Invalid IPv4 Address And Verify
+    [Documentation]  Configure invalid IPv4 address and verify.
+    [Tags]  Configure_Invalid_IPv4_Address_And_Verify
+
+    Wait Until Page Contains Element  ${xpath_add_static_ip}
+    Click Element  ${xpath_add_static_ip}
+    Input Text  ${xpath_static_input_ip1}  0.0.1.a
+    Input Text  ${xpath_input_netmask_addr1}  255.255.255.0
+    Element Should Be Disabled  ${xpath_network_save_settings}
+    Page Should Contain  Invalid format
+
+
+Configure Invalid Netmask And Verify
+    [Documentation]  Configure invalid netmask and verify.
+    [Tags]  Configure_Invalid_Netmask_And_Verify
+
+    Wait Until Page Contains Element  ${xpath_add_static_ip}
+    Click Element  ${xpath_add_static_ip}
+    Input Text  ${xpath_static_input_ip1}  10.7.7.7
+    Input Text  ${xpath_input_netmask_addr1}  255.256.255.0
+    Element Should Be Disabled  ${xpath_network_save_settings}
+    Page Should Contain  Invalid format
 
 
 *** Keywords ***
