@@ -136,10 +136,11 @@ RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION = {
 }
 
 RESPONSE_DICT_GETPDR_STATESENSORPDR = {
-    'entitytype': ['Communication Channel', 'Connector'],
+    'entitytype': ['Communication Channel', 'Connector', 'Processor Module'],
     'sensorinit': ['noInit'],
     'sensorauxiliarynamespdr': ['false'],
-    'statesetid': ['Availability(2)', 'Configuration State(15)']
+    'statesetid': ['Availability(2)', 'Configuration State(15)',
+                   'Operational Running Status(11)']
 }
 
 PLDM_PDR_TYPES = {
