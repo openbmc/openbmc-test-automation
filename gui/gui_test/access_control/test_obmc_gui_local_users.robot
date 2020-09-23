@@ -16,6 +16,12 @@ ${xpath_account_policy}                  //button[contains(text(),'Account polic
 ${xpath_add_user}                        //button[contains(text(),'Add user')]
 ${xpath_edit_user}                       //button[@aria-label="Edit user"]
 ${xpath_delete_user}                     //button[@aria-label="Delete user"]
+${xpath_policy_settings_header}          //*[text()="Account policy settings"]
+${xpath_auto_unlock}                     //*[@data-test-id='localUserManagement-radio-automaticUnlock']
+${xpath_manual_unlock}                   //*[@data-test-id='localUserManagement-radio-manualUnlock']
+${xpath_max_failed_login}                //*[@data-test-id='localUserManagement-input-lockoutThreshold']
+${xpath_submit_button}                   //*[@data-test-id='localUserManagement-button-submit']
+${xpath_cancel_button}                   //*[@data-test-id='localUserManagement-button-cancel']
 
 *** Test Cases ***
 
@@ -49,6 +55,18 @@ Verify Existence Of All Buttons In Local User Management Page
     Page Should Contain Button  ${xpath_edit_user}
     Page Should Contain Button  ${xpath_delete_user}
 
+
+Verify Existence Of All Buttons And Fields In Account Setting Policy Setting
+    [Documentation]  Verify existence of all buttons and fields in account policy settings page.
+    [Tags]  Verify_Existence_Of_All_Buttons_And_Fields_In_Account_Setting_Policy_Setting
+
+    Click Element  ${xpath_account_policy}
+    Wait Until Page Contains  ${xpath_policy_settings_header}
+    Page Should Contain Element  ${xpath_auto_unlock}
+    Page Should Contain Element  ${xpath_manual_unlock}
+    Page Should Contain Element  ${xpath_max_failed_login}
+    Page Should Contain Element  ${xpath_submit_button}
+    Page Should Contain Element  ${xpath_cancel_button}
 
 *** Keywords ***
 
