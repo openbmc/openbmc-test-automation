@@ -10,12 +10,18 @@ Test Setup      Test Setup Execution
 
 
 *** Variables ***
-${xpath_local_user_management_heading }  //h1[text()="Local user management"]
-${xpath_select_user}                     //input[contains(@class,"custom-control-input")]
-${xpath_account_policy}                  //button[contains(text(),'Account policy settings')]
-${xpath_add_user}                        //button[contains(text(),'Add user')]
-${xpath_edit_user}                       //button[@aria-label="Edit user"]
-${xpath_delete_user}                     //button[@aria-label="Delete user"]
+${xpath_local_user_management_heading }             //h1[text()="Local user management"]
+${xpath_select_user}                                //input[contains(@class,"custom-control-input")]
+${xpath_account_policy}                             //button[contains(text(),'Account policy settings')]
+${xpath_add_user}                                   //button[contains(text(),'Add user')]
+${xpath_edit_user}                                  //button[@aria-label="Edit user"]
+${xpath_delete_user}                                //button[@aria-label="Delete user"]
+${xpath_policy_settings_header}                     //h5[text()="Account policy settings"]
+${xpath_local_user_management_auto_unlock}          //*[@data-test-id='localUserManagement-radio-automaticUnlock']
+${xpath_local_user_management_manual_unlock}        //*[@data-test-id='localUserManagement-radio-manualUnlock']
+${xpath_local_user_management_input_lockThreshold}  //*[@data-test-id='localUserManagement-input-lockoutThreshold']
+${xpath_local_user_management_submit_button}        //*[@data-test-id='localUserManagement-button-submit']
+${xpath_local_user_management_cancel_button}        //*[@data-test-id='localUserManagement-button-cancel']
 
 *** Test Cases ***
 
@@ -49,6 +55,18 @@ Verify Existence Of All Buttons In Local User Management Page
     Page Should Contain Button  ${xpath_edit_user}
     Page Should Contain Button  ${xpath_delete_user}
 
+
+Verify existence of all button and fields in account setting policy setting
+    [Documentation]  Verify existence of all buttons and fields in account setting policy settings page.
+    [Tags]  Verify_existence_of_all_button_and_fields_in_account_setting_policy_setting
+
+    Click Element  ${xpath_account_policy}
+    Wait Until Page Contains  ${xpath_policy_settings_header}
+    Page Should Contain Element  ${xpath_local_user_management_auto_unlock}
+    Page Should Contain Element  ${xpath_local_user_management_manual_unlock}
+    Page Should Contain Element  ${xpath_local_user_management_input_lockThreshold}
+    Page Should Contain Element  ${xpath_local_user_management_submit_button}
+    Page Should Contain Element  ${xpath_local_user_management_cancel_button}
 
 *** Keywords ***
 
