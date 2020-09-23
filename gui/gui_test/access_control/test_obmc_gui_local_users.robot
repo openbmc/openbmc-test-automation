@@ -25,6 +25,10 @@ ${xpath_password_confirm_button}         //*[@data-test-id='localUserManagement-
 ${xpath_cancel_button}                   //*[@data-test-id='localUserManagement-button-cancel']
 ${xpath_submit_button}                   //*[@data-test-id='localUserManagement-button-submit']
 ${xpath_add_user_heading}                //h5[contains(text(),'Add user')]
+${xpath_policy_settings_header}          //*[text()="Account policy settings"]
+${xpath_auto_unlock}                     //*[@data-test-id='localUserManagement-radio-automaticUnlock']
+${xpath_manual_unlock}                   //*[@data-test-id='localUserManagement-radio-manualUnlock']
+${xpath_max_failed_login}                //*[@data-test-id='localUserManagement-input-lockoutThreshold']
 
 *** Test Cases ***
 
@@ -73,6 +77,19 @@ Verify Existence Of All Button And Fields In Add User
     Page Should Contain Element  ${xpath_password_confirm_button}
     Page Should Contain Element  ${xpath_cancel_button}
     Page Should Contain Element  ${xpath_submit_button}
+
+
+Verify Existence Of All Buttons And Fields In Account Policy Settings
+    [Documentation]  Verify existence of all buttons and fields in account policy settings page.
+    [Tags]  Verify_Existence_Of_All_Buttons_And_Fields_In_Account_Policy_Settings
+
+    Click Element  ${xpath_account_policy}
+    Wait Until Page Contains  ${xpath_policy_settings_header}
+    Page Should Contain Element  ${xpath_auto_unlock}
+    Page Should Contain Element  ${xpath_manual_unlock}
+    Page Should Contain Element  ${xpath_max_failed_login}
+    Page Should Contain Element  ${xpath_submit_button}
+    Page Should Contain Element  ${xpath_cancel_button}
 
 *** Keywords ***
 
