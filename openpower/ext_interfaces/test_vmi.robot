@@ -82,7 +82,7 @@ Assign Valid And Invalid Static IPv4 Address To VMI
 Add Multiple IP Addreses On VMI Interface And Verify
     [Documentation]  Add multiple IP addreses on VMI interface and verify.
     [Tags]  Add_Multiple_IP_Addreses_On_VMI_Interface_And_Verify
-    [Teardown]  Run Keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  Test Teardown
+    [Teardown]  Run Keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  FFDC On Test Case Fail
 
     ${ip1}=  Create dictionary  Address=10.5.5.10  SubnetMask=255.255.252.0  Gateway=0.0.0.0
     ${ip2}=  Create dictionary  Address=10.5.5.11  SubnetMask=255.255.252.0  Gateway=0.0.0.0
@@ -98,7 +98,7 @@ Modify IP Addresses On VMI Interface And Verify
     [Documentation]  Modify IP addresses on VMI interface and verify.
     [Tags]  Modify_IP_Addresses_On_VMI_Interface_And_Verify
     [Template]  Verify Assigning Static IPv4 Address To VMI
-    [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  Test Teardown
+    [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  FFDC On Test Case Fail
 
     # ip        gateway       netmask          del_curr_ip    host_reboot        valid_status_code
     10.5.5.10   0.0.0.0     255.255.252.0       ${False}       ${True}            ${HTTP_ACCEPTED}
@@ -143,7 +143,7 @@ Delete VMI Static IP Address And Verify
 Verify Successful VMI IP Static Configuration On HOST Boot After Session Delete
     [Documentation]  Verify VMI IP static Configuration On HOST Boot After session deleted.
     [Tags]  Verify_Successful_VMI_IP_Static_Configuration_On_HOST_Boot_After_Session_Delete
-    [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  Test Teardown
+    [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  FFDC On Test Case Fail
 
     Set Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}  ${test_netmask}
 
@@ -151,7 +151,7 @@ Verify Successful VMI IP Static Configuration On HOST Boot After Session Delete
     Redfish.Delete  ${session_info["location"]}
 
     # Create a new Redfish session
-    Run Keywords  Redfish Power Off  AND  Redfish Power On   AND  Redfish.Login
+    Run Keywords  Redfish.Login  AND  Redfish Power Off  AND  Redfish Power On
 
     Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
 
@@ -171,10 +171,10 @@ Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
 Verify VMI Static IP Configuration Persist On BMC Reset Before Host Boot
     [Documentation]  Verify VMI static IP configuration persist on BMC reset.
     [Tags]   Verify_VMI_Static_IP_Configuration_Persist_On_BMC_Reset_Before_Host_Boot
-    [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  Test Teardown
+    [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  FFDC On Test Case Fail
 
     Set Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}  ${test_netmask}
-    Run keywords  Redfish OBMC Reboot (off)  AND  Redfish Power On
+    Run keywords  OBMC Reboot (off)  AND  Redfish Power On
     # Verifying the VMI static configuration
     Verify VMI Network Interface Details  ${test_ipv4}  Static   ${test_gateway}  ${test_netmask}
 
