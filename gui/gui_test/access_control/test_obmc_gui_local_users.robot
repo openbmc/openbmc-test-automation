@@ -16,6 +16,15 @@ ${xpath_account_policy}                  //button[contains(text(),'Account polic
 ${xpath_add_user}                        //button[contains(text(),'Add user')]
 ${xpath_edit_user}                       //button[@aria-label="Edit user"]
 ${xpath_delete_user}                     //button[@aria-label="Delete user"]
+${xpath_radio_account_status_enabled}    //*[@data-test-id='localUserManagement-radioButton-statusEnabled']
+${xpath_radio_account_status_disabled}   //*[@data-test-id='localUserManagement-radioButton-statusDisabled']
+${xpath_input_username}                  //*[@data-test-id='localUserManagement-input-username']
+${xpath_list_privilege}                  //*[@data-test-id='localUserManagement-select-privilege']
+${xpath_input_password}                  //*[@data-test-id='localUserManagement-input-password']
+${xpath_input_password_confirmation}     //*[@data-test-id='localUserManagement-input-passwordConfirmation']
+${xpath_cancel_button}                   //*[@data-test-id='localUserManagement-button-cancel']
+${xpath_submit_button}                   //*[@data-test-id='localUserManagement-button-submit']
+${xpath_add_user_heading}                //h5[text()=" Add user "]
 
 *** Test Cases ***
 
@@ -49,6 +58,21 @@ Verify Existence Of All Buttons In Local User Management Page
     Page Should Contain Button  ${xpath_edit_user}
     Page Should Contain Button  ${xpath_delete_user}
 
+
+Verify existence of all button and fields in add user
+    [Documentation]  Verify existence of all buttons and fields in add user page.
+    [Tags]  Verify_existence_of_all_button_and_fields_in_add_user
+
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+    Page Should Contain Element  ${xpath_radio_account_status_enabled}
+    Page Should Contain Element  ${xpath_radio_account_status_disabled}
+    Page Should Contain Element  ${xpath_input_username}
+    Page Should Contain Element  ${xpath_list_privilege}
+    Page Should Contain Element  ${xpath_input_password}
+    Page Should Contain Element  ${xpath_input_password_confirmation}
+    Page Should Contain Element  ${xpath_cancel_button}
+    Page Should Contain Element  ${xpath_submit_button}
 
 *** Keywords ***
 
