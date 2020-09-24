@@ -7,6 +7,8 @@ Resource          ../lib/ipmi_client.robot
 Library           ../lib/bmc_ssh_utils.py
 Library           SSHLibrary
 
+Test Setup       Set Accont Lockout Threshold
+
 *** Variables ***
 
 # If user re-tries more than 5 time incorrectly, the user gets locked for 5 minutes.
@@ -150,6 +152,7 @@ Expire And Change Root Password Via GUI
 Verify Maximum Failed Attempts And Check Root User Account Locked
     [Documentation]  Verify maximum failed attempts and locks out root user account.
     [Tags]  Verify_Maximum_Failed_Attempts_And_Check_Root_User_Account_Locked
+    [Setup]   Set Accont Lockout Threshold  account_lockout_threshold=${5}
 
     # Make maximum failed login attempts.
     Repeat Keyword  ${5} times
@@ -180,7 +183,7 @@ Verify New Password Persistency After BMC Reboot
     ...  body={'Password': '0penBmc123'}
 
     # Reboot BMC and verify persistency.
-    OBMC Reboot (off)
+    Redfish OBMC Reboot (off)
 
     # verify new password
     Redfish.Login  ${OPENBMC_USERNAME}  0penBmc123
@@ -188,12 +191,16 @@ Verify New Password Persistency After BMC Reboot
 
 *** Keywords ***
 
-Test Setup Execution
-   [Documentation]  Suite setup  execution.
+Set Accont Lockout Threshold
+   [Documentation]  Set user account lockout threshold.
+   [Arguments]  ${account_lockout_threshold}=${0}
+
+   # Description of argument(s):
+   # account_lockout_threshold    Set lockout threshold value.
 
    Redfish.login
-   Redfish.Patch  /redfish/v1/AccountService/  body={"AccountLockoutThreshold": 0}
-   Valid Length  OPENBMC_PASSWORD  min_length=8
+   Redfish.Patch  /redfish/v1/AccountService/  body={"AccountLockoutThreshold":${account_lockout_threshold}}
+   gen_robot_valid.Valid Length  OPENBMC_PASSWORD  min_length=8
    Redfish.Logout
 
 Restore Default Password For Root User
@@ -211,8 +218,8 @@ Test Teardown Execution
 
     Redfish.Login
     Wait Until Keyword Succeeds  1 min  10 sec  Restore Default Password For Root User
-    Redfish.Patch  /redfish/v1/AccountService/  body={"AccountLockoutThreshold": 5}
     Redfish.Logout
+    Set Accont Lockout Threshold  account_lockout_threshold=${5}
     FFDC On Test Case Fail
 
 
