@@ -107,9 +107,15 @@ Inject Unrecoverable Error
 
     Wait for OS
     Verify Error Log Entry  ${signature_desc}  ${log_prefix}
+
+    ${resp}=  OpenBMC Get Request  ${DUMP_URI}
+    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    ...  Set Global Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
+
     Read Properties  ${DUMP_ENTRY_URI}list
     Delete All BMC Dump
     Verify And Clear Gard Records On HOST
+
 
 Fetch FIR Address Translation Value
     [Documentation]  Fetch FIR address translation value through HOST.
