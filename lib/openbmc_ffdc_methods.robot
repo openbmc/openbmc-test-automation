@@ -507,6 +507,10 @@ Collect Dump Log
     [Documentation]  Collect dumps from dump entry.
     [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
 
+    ${resp}=  OpenBMC Get Request  ${DUMP_URI}
+    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    ...  Set Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
+
     ${data}=  Read Properties  ${DUMP_ENTRY_URI}enumerate  quiet=${1}  timeout=${30}
 
     # Grab the list of entries from dump/entry/
