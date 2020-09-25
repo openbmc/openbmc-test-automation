@@ -98,9 +98,9 @@ ALWAYS_POWER_ON = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOn'
 ALWAYS_POWER_OFF = CONTROL_DBUS_BASE + 'Power.RestorePolicy.Policy.AlwaysOff'
 
 # Dump URI variables.
-DUMP_URI = OPENBMC_BASE_URI + 'dump/'
+DUMP_URI = OPENBMC_BASE_URI + 'dump/bmc/'
 DUMP_ENTRY_URI = DUMP_URI + 'entry/'
-DUMP_DOWNLOAD_URI = "/download/dump/"
+DUMP_DOWNLOAD_URI = "/download/dump/bmc/"
 # The path on the BMC where dumps are stored.
 DUMP_DIR_PATH = "/var/lib/phosphor-debug-collector/dumps/"
 
