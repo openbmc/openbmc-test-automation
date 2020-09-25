@@ -28,6 +28,10 @@ Verify No BMC Dump And Application Failures
     [Documentation]  Verify no BMC dump exist.
     [Tags]  Verify_No_BMC_Dump_And_Application_Failures
 
+    ${resp}=  OpenBMC Get Request  ${DUMP_URI}
+    ${DUMP_ENTRY_URI}=  Set Variable If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    ...  /xyz/openbmc_project/dump/entry/
+
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     ...  msg=BMC dump(s) were not deleted as expected.

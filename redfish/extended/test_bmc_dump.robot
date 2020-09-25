@@ -10,6 +10,7 @@ Resource            ../../lib/utils.robot
 Resource            ../../lib/state_manager.robot
 Library             ../../lib/bmc_ssh_utils.py
 
+Suite Setup         Suite Setup Execution
 Test Setup          Open Connection And Log In
 Test Teardown       Test Teardown Execution
 
@@ -247,6 +248,15 @@ Verify Download BMC Dump
 
 
 *** Keywords ***
+
+Suite Setup Execution
+    [Documentation]  Do initial suite setup tasks.
+
+    ${resp}=  OpenBMC Get Request  ${DUMP_URI}
+    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    ...  Run Keywords  Set Suite Variable  ${DUMP_URI}  /xyz/openbmc_project/dump/  AND
+    ...  Set Suite Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
+
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
