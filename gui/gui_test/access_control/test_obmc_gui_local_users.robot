@@ -16,6 +16,15 @@ ${xpath_account_policy}                  //button[contains(text(),'Account polic
 ${xpath_add_user}                        //button[contains(text(),'Add user')]
 ${xpath_edit_user}                       //button[@aria-label="Edit user"]
 ${xpath_delete_user}                     //button[@aria-label="Delete user"]
+${xpath_radio_account_status_enabled}    //*[@data-test-id='localUserManagement-radioButton-statusEnabled']
+${xpath_radio_account_status_disabled}   //*[@data-test-id='localUserManagement-radioButton-statusDisabled']
+${xpath_input_username}                  //*[@data-test-id='localUserManagement-input-username']
+${xpath_list_privilege}                  //*[@data-test-id='localUserManagement-select-privilege']
+${xpath_input_password}                  //*[@data-test-id='localUserManagement-input-password']
+${xpath_input_password_confirmation}     //*[@data-test-id='localUserManagement-input-passwordConfirmation']
+${xpath_cancel_button}                   //*[@data-test-id='localUserManagement-button-cancel']
+${xpath_submit_button}                   //*[@data-test-id='localUserManagement-button-submit']
+${xpath_add_user_heading}                //h5[text()=" Add user "]
 
 *** Test Cases ***
 
@@ -49,6 +58,29 @@ Verify Existence Of All Buttons In Local User Management Page
     Page Should Contain Button  ${xpath_edit_user}
     Page Should Contain Button  ${xpath_delete_user}
 
+
+Verify newly create user
+    [Documentation]  Create a new user and verifying that user is created.
+    [Tags]  Verify_newly_create_user
+    [Teardown]  Redfish.Delete  /redfish/v1/AccountService/Accounts/TestUser
+
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+
+    # input Username
+    Input Text  ${xpath_input_username}  TestUser
+
+    # input user password
+    Input Text  ${xpath_input_password}  TestPwd1
+
+    # confirm user password
+    Input Text  ${xpath_input_password_confirmation}  TestPwd1
+
+    # submit
+    Click Element  ${xpath_submit_button}
+
+    Wait Until Page Contains Element  ${xpath_add_user}
+    Page Should Contain  TestUser
 
 *** Keywords ***
 
