@@ -904,7 +904,7 @@ def wait_for_comm_cycle(start_boot_seconds,
     match_state = DotDict([('uptime', '^[0-9\\.]+$'),
                            ('elapsed_boot_time', '^[0-9]+$'),
                            (expressions_key(), [expr])])
-    wait_state(match_state, wait_time="8 mins", interval="5 seconds")
+    wait_state(match_state, wait_time="12 mins", interval="5 seconds")
 
     gp.qprint_timen("Verifying that REST API interface is working.")
     match_state = DotDict([('rest', '^1$')])
