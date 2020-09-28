@@ -90,9 +90,22 @@ default_req_states = ['rest',
                       'os_login',
                       'os_run_cmd']
 
+# TODO convert to redfish values
+default_req_states_redfish = ['rest',
+                      'chassis',
+                      'bmc',
+                      'boot_progress',
+                      'operating_system',
+                      'host',
+                      'os_ping',
+                      'os_login',
+                      'os_run_cmd']
+
 # valid_req_states is a list of sub states supported by the get_state function.
 # valid_req_states, default_req_states and master_os_up_match are used by the
 # get_state function.
+
+# TODO add redfish values
 valid_req_states = ['ping',
                     'packet_loss',
                     'uptime',
@@ -132,6 +145,8 @@ USE_BMC_EPOCH_TIME = int(os.environ.get('USE_BMC_EPOCH_TIME', 0))
 
 # Useful state constant definition(s).
 # default_state is an initial value which may be of use to callers.
+
+# TODO add default and standby redfish state value dicts
 default_state = DotDict([('rest', '1'),
                          ('chassis', 'On'),
                          ('bmc', 'Ready'),
@@ -560,6 +575,12 @@ def get_state(openbmc_host="",
         global start_boot_seconds
         elapsed_boot_time = int(epoch_seconds) - start_boot_seconds
 
+    master_req_redfish = []
+
+    req_redfish = [sub_state for sub_state in req_states if sub_state in
+                master_req_redfish]
+    need_redfish = (len(req_redfish) > 0)
+
     master_req_rest = ['rest', 'host', 'requested_host', 'operating_system',
                        'attempts_left', 'boot_progress', 'chassis',
                        'requested_chassis' 'bmc' 'requested_bmc']
@@ -579,6 +600,40 @@ def get_state(openbmc_host="",
         else:
             state['rest'] = '0'
 
+        if int(state['rest']):
+            for url_path in ret_values:
+                for attr_name in ret_values[url_path]:
+                    # Create a state key value based on the attr_name.
+                    try:
+                        ret_values[url_path][attr_name] = \
+                            re.sub(r'.*\.', "",
+                                   ret_values[url_path][attr_name])
+                    except TypeError:
+                        pass
+                    # Do some key name manipulations.
+                    new_attr_name = re.sub(r'^Current|(State|Transition)$',
+                                           "", attr_name)
+                    new_attr_name = re.sub(r'BMC', r'Bmc', new_attr_name)
+                    new_attr_name = re.sub(r'([A-Z][a-z])', r'_\1',
+                                           new_attr_name)
+                    new_attr_name = new_attr_name.lower().lstrip("_")
+                    new_attr_name = re.sub(r'power', r'chassis', new_attr_name)
+                    if new_attr_name in req_states:
+                        state[new_attr_name] = ret_values[url_path][attr_name]
+
+    if need_redfish:
+        # TODO the enumerate will have to be converted to individual calls
+        cmd_buf = ["Read Properties", SYSTEM_STATE_URI + "enumerate",
+                   "quiet=${" + str(quiet) + "}", "timeout=30"]
+        gp.dprint_issuing(cmd_buf)
+        status, ret_values = \
+            BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+        if status == "PASS":
+            state['rest'] = '1'
+        else:
+            state['rest'] = '0'
+
+        # TODO rest convert to redfish ??
         if int(state['rest']):
             for url_path in ret_values:
                 for attr_name in ret_values[url_path]:
