@@ -530,13 +530,17 @@ def my_get_state():
 
     global state
 
-    req_states = ['epoch_seconds'] + st.default_req_states
-
     gp.qprint_timen("Getting system state.")
     if test_mode:
         state['epoch_seconds'] = int(time.time())
     else:
-        state = st.get_state(req_states=req_states, quiet=quiet)
+        if redfish_rest_supported:
+            req_states = ['epoch_seconds'] + st.default_req_states
+            state = st.get_state(req_states=req_states, quiet=quiet)
+        else:
+            req_states = ['epoch_seconds'] + st.default_req_states_redfish
+            state = st.get_state(req_states=req_states, quiet=quiet)
+
     gp.qprint_var(state)
 
 
