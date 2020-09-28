@@ -91,6 +91,37 @@ Verify Existence Of All Buttons And Fields In Account Policy Settings
     Page Should Contain Element  ${xpath_submit_button}
     Page Should Contain Element  ${xpath_cancel_button}
 
+
+Verify Newly Create User
+    [Documentation]  Create a new user and verifying that user is created.
+    [Tags]  Verify_Newly_Create_User
+    [Teardown]  Redfish.Delete  /redfish/v1/AccountService/Accounts/TestUser
+
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+
+    # Input username, password and privilege.
+    Input Text  ${xpath_username_input_button}  TestUser
+    Select From List by Value  ${xpath_privilege_list_button}  Administrator
+
+    Input Text  ${xpath_password_input_button}  TestPwd1
+
+    Input Text  ${xpath_password_confirm_button}  TestPwd1
+
+    # Submit.
+    Click Element  ${xpath_submit_button}
+
+    # Refresh page and check new user is available.
+    Wait Until Page Contains Element  ${xpath_add_user}
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains  TestUser  timeout=15
+
+    # Cross check the privilege of newly added user via Redfish.
+    ${user_priv_redfish}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/TestUser  RoleId
+    Should Be Equal  Administrator  ${user_priv_redfish}
+
+
 *** Keywords ***
 
 Test Setup Execution
