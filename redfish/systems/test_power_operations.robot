@@ -8,6 +8,11 @@ Resource         ../../lib/open_power_utils.robot
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+*** Variables ***
+
+# Extended code to check OCC state, power metric and others.
+${additional_power_check}      ${1}
+
 *** Test Cases ***
 
 Verify Redfish Host GracefulShutdown
@@ -15,6 +20,13 @@ Verify Redfish Host GracefulShutdown
     [Tags]  Verify_Redfish_Host_GracefulShutdown
 
     Redfish Power Off
+
+
+Verify Redfish Host On
+    [Documentation]  Verify Redfish host power on operation.
+    [Tags]  Verify_Redfish_Host_On
+
+    Redfish Power On
 
 
 Verify Redfish BMC PowerOn With OCC State
@@ -31,38 +43,9 @@ Verify Redfish BMC PowerOn
     [Documentation]  Verify Redfish host power on operation.
     [Tags]  Verify_Redfish_Host_PowerOn
 
-    Redfish Power On
+    #Redfish Power On
 
-    # TODO: Replace OCC state check with redfish property when available.
-    Verify OCC State
-
-    ${power_uri_list}=  redfish_utils.Get Members URI  /redfish/v1/Chassis/  PowerControl
-    Log List  ${power_uri_list}
-
-    # Power entries could be seen across different redfish path, remove the URI
-    # where the attribute is non-existent.
-    # Example:
-    #     ['/redfish/v1/Chassis/chassis/Power',
-    #      '/redfish/v1/Chassis/motherboard/Power']
-    FOR  ${idx}  IN  @{power_uri_list}
-        ${power_control}=  redfish_utils.Get Attribute  ${idx}  PowerControl
-        Log Dictionary  ${power_control[0]}
-
-        # Ensure the path does have the attribute else set to EMPTY as default to skip.
-        ${value}=  Get Variable Value  ${power_control[0]['PowerConsumedWatts']}  ${EMPTY}
-        Run Keyword If  "${value}" == "${EMPTY}"
-        ...  Remove Values From List  ${power_uri_list}  ${idx}
-
-        # Check the next available element in the list.
-        Continue For Loop If  "${value}" == "${EMPTY}"
-
-        Valid Dict  power_control[${0}]  ['PowerConsumedWatts']
-
-    END
-
-    # Double check, the validation has at least one valid path.
-    Should Not Be Empty  ${power_uri_list}
-    ...  msg=Should contain at least one element in the list.
+    Run Keyword If  ${additional_power_check} == ${1}  Additional OCC And Power Check
 
 
 Verify Redfish BMC GracefulRestart
@@ -100,3 +83,38 @@ Test Teardown Execution
     ...  ELSE
     ...    Set Auto Reboot  ${1}
     Redfish.Logout
+
+
+Additional OCC And Power Check
+    [Documentation]  Verify OCC state and PowerConsumedWatts property.
+
+    # TODO: Replace OCC state check with redfish property when available.
+    Verify OCC State
+
+    ${power_uri_list}=  redfish_utils.Get Members URI  /redfish/v1/Chassis/  PowerControl
+    Log List  ${power_uri_list}
+
+    # Power entries could be seen across different redfish path, remove the URI
+    # where the attribute is non-existent.
+    # Example:
+    #     ['/redfish/v1/Chassis/chassis/Power',
+    #      '/redfish/v1/Chassis/motherboard/Power']
+    FOR  ${idx}  IN  @{power_uri_list}
+        ${power_control}=  redfish_utils.Get Attribute  ${idx}  PowerControl
+        Log Dictionary  ${power_control[0]}
+
+        # Ensure the path does have the attribute else set to EMPTY as default to skip.
+        ${value}=  Get Variable Value  ${power_control[0]['PowerConsumedWatts']}  ${EMPTY}
+        Run Keyword If  "${value}" == "${EMPTY}"
+        ...  Remove Values From List  ${power_uri_list}  ${idx}
+
+        # Check the next available element in the list.
+        Continue For Loop If  "${value}" == "${EMPTY}"
+
+        Valid Dict  power_control[${0}]  ['PowerConsumedWatts']
+
+    END
+
+    # Double check, the validation has at least one valid path.
+    Should Not Be Empty  ${power_uri_list}
+    ...  msg=Should contain at least one element in the list.
