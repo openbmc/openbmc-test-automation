@@ -58,6 +58,7 @@
 
     },
     "Invalid Case": {
+        "ResourceIDInvalidDataType": "234",
         "ReadCase1": {
             "read": [{
                 "LockFlag": "DontLock",
