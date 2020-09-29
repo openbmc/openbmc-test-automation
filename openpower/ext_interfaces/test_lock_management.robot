@@ -75,6 +75,20 @@ Fail To Acquire Lock On Another Lock
     HMCID-01       WriteCase2,ReadCase2
 
 
+Acquire Lock After Reboot
+    [Documentation]  Acquire and release read and write locks after reboot.
+    [Tags]  Acquire_Lock_After_Reboot
+    [Template]  Verify Acquire Lock After Reboot
+
+    # client_id    lock_type
+    HMCID-01       ReadCase1
+    HMCID-01       ReadCase2
+    HMCID-01       ReadCase3
+    HMCID-01       WriteCase1
+    HMCID-01       WriteCase2
+    HMCID-01       WriteCase3
+
+
 Acquire And Release Lock In Loop
     [Documentation]  Acquire and release read, write locks in loop.
     [Tags]  Acquire_And_Release_Lock_In_Loop
@@ -117,6 +131,16 @@ Fail To Release Lock For Another Session
 
     # client_id          lock_type
     HMCID-01,HMCID-02    ReadCase1,ReadCase1
+
+
+Fail To Acquire Lock For Invalid Resource ID Data Type
+    [Documentation]  Failed to acquire lock for invalid resource id data type.
+    [Tags]  Fail_To_Acquire_Lock_For_Invalid_Resource_ID_Data_Type
+    [Template]  Verify Fail To Acquire Lock For Invalid Resource ID Data Type
+
+    # client_id    lock_type
+    HMCID-01       ReadCase1
+    HMCID-01       WriteCase1
 
 
 Fail To Acquire Lock For Invalid Lock Type
@@ -259,6 +283,21 @@ Redfish Post Acquire Invalid Lock
     [Return]  ${resp}
 
 
+Redfish Post Acquire Invalid Lock With Invalid Data Type Of Resource ID
+    [Documentation]  Redfish to post request to acquire in-valid lock with invalid data type of resource id.
+    [Arguments]  ${lock_type}  ${status_code}=${HTTP_OK}
+
+    # Description of argument(s):
+    # lock_type      Read lock or Write lock.
+    # status_code    HTTP status code.
+
+    ${resp}=  Form Data To Acquire Invalid Lock With Invalid Data Type Of Resource ID  ${lock_type}
+    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${resp}
+    Should Be Equal As Strings  ${resp.status_code}  ${status_code}
+
+    [Return]  ${resp}
+
+
 Form Data To Acquire Lock
     [Documentation]  Create a dictionay for lock request.
     [Arguments]  ${lock_type}
@@ -271,6 +310,24 @@ Form Data To Acquire Lock
     ...    ${lock_res_info["Valid Case"]["${lock_type}"]}
     ...    ${lock_res_info["Valid Case"]["ResourceID"]}
     ${temp_list}=  Create List  ${resp}
+    ${lock_request}=  Create Dictionary  Request=${temp_list}
+
+    [Return]  ${lock_request}
+
+
+Form Data To Acquire Invalid Lock With Invalid Data Type Of Resource ID
+    [Documentation]  Create a dictionay for in-valid lock request.
+    [Arguments]  ${lock_type}
+
+    # Description of argument(s):
+    # lock_type      Read lock or Write lock.
+
+    ${lock_res_info}=  Get Lock Resource Information
+    ${resp}=  RW General Dictionary
+    ...    ${lock_res_info["Valid Case"]["${lock_type}"]}
+    ...    ${lock_res_info["Invalid Case"]["ResourceIDInvalidDataType"]}
+    ${temp_list}=  Create List  ${resp}
+    
     ${lock_request}=  Create Dictionary  Request=${temp_list}
 
     [Return]  ${lock_request}
@@ -483,6 +540,31 @@ Verify Acquire Lock Fails On Another Lock
     Redfish Delete Session  ${session_info}
 
 
+Verify Acquire Lock After Reboot
+    [Documentation]  Acquire read and write lock after the reboot and release lock.
+    [Arguments]  ${client_id}  ${lock_type}
+
+    # Description of argument(s):
+    # client_id    This client id can contain string value
+    #              (e.g. 12345, "HMCID").
+    # lock_type    Read lock or Write lock.
+
+    
+    ${trans_id_list}=  Create List
+    ${session_info}=  Create Redfish Session With ClientID  ${client_id}
+    ${BEROFE_REBOOT_XAUTH_TOKEN}=  Set Variable  ${XAUTH_TOKEN}
+    Redfish OBMC Reboot (off)
+    Redfish Login
+    Set Global Variable  ${XAUTH_TOKEN}  ${BEROFE_REBOOT_XAUTH_TOKEN}
+    ${trans_id}=  Redfish Post Acquire Lock  ${lock_type}
+    Append To List  ${trans_id_list}  ${trans_id}
+    Verify Lock On Resource  ${session_info}  ${trans_id_list}
+    Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
+    ${trans_id_emptylist}=  Create List
+    Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
+    Redfish Delete Session  ${session_info}
+ 
+
 Verify Acquire And Release Lock In Loop
     [Documentation]  Acquire lock in loop.
     [Arguments]  ${client_id}  ${lock_type}
@@ -614,8 +696,23 @@ Verify Fail To Release Lock For Another Session
     Redfish Delete Session  ${session_info2}
 
 
+Verify Fail To Acquire Lock For Invalid Resource ID Data Type
+    [Documentation]  Verify fail to acquire the lock with invalid resource id data type.
+    [Arguments]  ${client_id}  ${lock_type}
+
+    # Description of argument(s):
+    # client_id    This client id can contain string value
+    #              (e.g. 12345, "HMCID").
+    # lock_type    Read lock or Write lock.
+
+    ${session_info}=  Create Redfish Session With ClientID  ${client_id}
+    ${trans_id}=  Redfish Post Acquire Invalid Lock With Invalid Data Type Of Resource ID
+    ...  ${lock_type}  status_code=${HTTP_BAD_REQUEST}
+    Redfish Delete Session  ${session_info}
+
+
 Verify Fail To Acquire Lock For Invalid Lock Data
-    [Documentation]  Verify fail to quired lock with invalid lock types, lock flags, segement flags.
+    [Documentation]  Verify fail to acquired lock with invalid lock types, lock flags, segement flags.
     [Arguments]  ${client_id}  ${lock_type}  ${message}
 
     # Description of argument(s):
