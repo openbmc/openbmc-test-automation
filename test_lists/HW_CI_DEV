@@ -1,0 +1,29 @@
+#Verify SSH and IPMI interfaces
+-i Test_SSH_And_IPMI_Connections
+#Basic poweron test
+-i Verify_Redfish_Host_On
+-i Verify_Redfish_Host_PowerOff
+#Check for apps failures.
+-i Check_For_Application_Failures
+#Verify system boot time average
+-i Verify_Uptime_Average_Against_Threshold
+#Check for BMC dump.
+-i Verify_No_BMC_Dump_And_Application_Failures
+#Redfish tests cases.
+-i Redfish_Login_And_Logout
+-i GET_Redfish_Hypermedia_Without_Login
+-i GET_Redfish_Resources_With_Login
+-i GET_Redfish_SessionService_Without_Login
+-i Redfish_Login_Using_Invalid_Token
+-i Delete_Redfish_Session_Using_Valid_Login
+-i Redfish_Login_With_Invalid_Credentials
+-i Redfish_Login_Using_Unsecured_HTTP
+-i Verify_Update_Service_Enabled
+-i Verify_Redfish_Software_Inventory_Collection
+-i Redfish_Software_Inventory_Status_Check
+-i Verify_Redfish_BMC_Manager_Properties
+#IPMI tests.
+-i Enable_IPMI_User_And_Verify
+-i Verify_IPMI_User_Deletion
+#Local user tests.
+-i Verify_AccountService_Available
