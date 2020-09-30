@@ -5,13 +5,22 @@ Documentation    VMI static/dynamic IP config tests.
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/bmc_redfish_utils.robot
 Library          ../../lib/bmc_network_utils.py
 
 Suite Setup       Suite Setup Execution
-Test Teardown     FFDC On Test Case Fail
+#Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Redfish.Logout
 
 *** Variables ***
+
+# users           User Name               password
+@{ADMIN}          admin_user              TestPwd123
+@{OPERATOR}       operator_user           TestPwd123
+@{ReadOnly}       readonly_user           TestPwd123
+@{NoAccess}       noaccess_user           TestPwd123
+&{USERS}          Administrator=${ADMIN}  Operator=${OPERATOR}  ReadOnly=${ReadOnly}
+...               NoAccess=${NoAccess}
 
 ${test_ipv4}              10.10.20.30
 ${test_gateway}           0.0.0.0
@@ -58,7 +67,7 @@ Delete Existing Static VMI IP Address
 
     Delete VMI IPv4 Address  IPv4StaticAddresses  valid_status_code=${HTTP_ACCEPTED}
     ${default}=  Set Variable  0.0.0.0
-    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}  ${True}
+    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
 
 
 Verify User Cannot Delete ReadOnly Property IPv4Addresses
@@ -96,7 +105,7 @@ Add Multiple IP Addreses On VMI Interface And Verify
     ${active_channel_config}=  Get Active Channel Config
     Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ...  body={'IPv4StaticAddresses':${ips}}  valid_status_codes=[${HTTP_ACCEPTED}]
-    Verify VMI Network Interface Details   ${ip1["Address"]}  Static  ${ip1["Gateway"]}  ${ip1["SubnetMask"]}  ${True}
+    Verify VMI Network Interface Details   ${ip1["Address"]}  Static  ${ip1["Gateway"]}  ${ip1["SubnetMask"]}
 
 
 Modify IP Addresses On VMI Interface And Verify
@@ -106,9 +115,9 @@ Modify IP Addresses On VMI Interface And Verify
     [Teardown]   Run keywords  Delete VMI IPv4 Address  IPv4Addresses
     ...  AND  Test Teardown Execution
 
-    # ip        gateway       netmask          del_curr_ip    host_reboot        valid_status_code
-    10.5.5.10   0.0.0.0     255.255.252.0       ${False}       ${True}            ${HTTP_ACCEPTED}
-    10.5.5.11   0.0.0.0     255.255.252.0       ${False}       ${True}            ${HTTP_ACCEPTED}
+    # ip        gateway       netmask        valid_status_code
+    10.5.5.10   0.0.0.0     255.255.252.0    ${HTTP_ACCEPTED}
+    10.5.5.11   0.0.0.0     255.255.252.0    ${HTTP_ACCEPTED}
 
 Switch Between IP Origins On VMI And Verify Details
     [Documentation]  Switch between IP origins on VMI and verify details.
@@ -125,13 +134,13 @@ Verify Persistency Of VMI IPv4 Details After Host Reboot
     # Verifying persistency of dynamic address.
     Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
     ${default}=  Set Variable  0.0.0.0
-    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}  ${True}
-    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}  ${True}
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
     # Verifying persistency of static address.
     Switch VMI IPv4 Origin And Verify Details  ${True}
-    Verify Assigning Static IPv4 Address To VMI  ${VMI_IP}  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${False}
-    Verify VMI Network Interface Details  ${VMI_IP}  Static  ${VMI_GATEWAY}  ${VMI_NETMASK}  ${True}
+    Verify Assigning Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}  ${tes_netmask}
+    Verify VMI Network Interface Details  ${test_ipv4}  ${test_gateway}  ${tes_netmask}
 
 
 Delete VMI Static IP Address And Verify
@@ -198,11 +207,66 @@ Verify VMI Static IP Configuration Persist On BMC Reset Before Host Boot
     [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  FFDC On Test Case Fail
 
     Set Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}  ${test_netmask}
-    OBMC Reboot (off)
+   # OBMC Reboot (off)
     Redfish Power On
     # Verifying the VMI static configuration
     Verify VMI Network Interface Details  ${test_ipv4}  Static   ${test_gateway}  ${test_netmask}
 
+
+Verify To Configure VMI Static IP Address With Different User Roles
+    [Documentation]  Verify to configure vmi static ip address with different user roles.
+    [Tags]  Verify_To_Configure_VMI_Static_IP_Address_With_Different_User_Roles
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Config VMI Static IP Address Using Different Users
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
+
+    # username     password    ip_address    gateway          nemask           valid_status_code
+    admin_user     TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_ACCEPTED}
+    operator_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
+
+
+Verify To Delete VMI Static IP Address With Different User Roles
+    [Documentation]  Verify to delete vmi static IP address with different user roles.
+    [Tags]  Verify_To_Delete_VMI_Static_IP_Address_With_Different_User_Roles
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Delete VMI Static IP Address Using Different Users
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
+
+    # username     password     valid_status_code
+    admin_user     TestPwd123   ${HTTP_ACCEPTED}
+    operator_user  TestPwd123   ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123   ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
+
+
+Verify To Update VMI Static IP Address With Different User Roles
+    [Documentation]  Verify to update vmi static IP address with different user roles.
+    [Tags]  Verify_To_Update_VMI_Static_IP_Address_With_Different_User_Roles_And_Verify
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Config VMI Static IP Address Using Different Users
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
+
+    # username     password     ip_address  gateway  nemask       valid_status_code
+    admin_user     TestPwd123   10.5.10.20    0.0.0.0  255.255.0.0  ${HTTP_ACCEPTED}
+    operator_user  TestPwd123   10.5.10.30  0.0.0.0  255.255.0.0  ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123   10.5.20.40  0.0.0.0  255.255.0.0  ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123   10.5.30.50    0.0.0.0  255.255.0.0  ${HTTP_FORBIDDEN}
+
+
+Verify To Read VMI Network Configuration With Different User Roles
+    [Documentation]  Verify to read vmi network configuration with different user roles.
+    [Tags]  Verify_To_Read_VMI_Network_Configuration_Via_Different_User_Roles
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Read VMI Static IP Address Using Different Users
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
+
+    # username     password     valid_status_code
+    admin_user     TestPwd123   ${HTTP_OK}
+    operator_user  TestPwd123   ${HTTP_OK}
+    readonly_user  TestPwd123   ${HTTP_OK}
+    noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
 
 
 *** Keywords ***
@@ -258,7 +322,7 @@ Get VMI Network Interface Details
     ...  IPv4_AddressOrigin=${ip_resp["IPv4Addresses"][0]["AddressOrigin"]}  Name=${ip_resp["Name"]}
     ...  IPv4_Gateway=${ip_resp["IPv4Addresses"][0]["Gateway"]}
     ...  InterfaceEnabled=${${ip_resp["InterfaceEnabled"]}}
-    ...  IPv4_SubnetMask=${ip_resp["IPv4Addresses"][0]["SubnetMask"]}  MACAddress=${ip_resp["MACAddress"]}
+    ...  IPv4_SubnetMask=${ip_resp["IPv4Addresses"][0]["SubnetMask"]}
     ...  IPv4StaticAddresses=${${static_exists}}
 
     [Return]  &{vmi_ip}
@@ -406,3 +470,54 @@ Switch VMI IPv4 Origin And Verify Details
 
     [Return]  ${origin}
 
+
+Delete VMI Static IP Address Using Different Users
+    [Documentation]  Update user role and delete vmi static IP address.
+    [Arguments]  ${username}  ${password}  ${valid_status_code}
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  Verify Assigning Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}
+    ...  ${test_netmask}  ${HTTP_ACCEPTED}  AND  Redfish.Logout
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # valid_status_code   The expected valid status code.
+
+    Redfish.Login  ${username}  ${password}
+    Delete VMI IPv4 Address  delete_param=IPv4StaticAddresses  valid_status_code=${valid_status_code}
+    Redfish.Logout
+
+
+Config VMI Static IP Address Using Different Users
+   [Documentation]  Update user role and update vmi static ip address.
+   [Arguments]  ${username}  ${password}  ${ip}  ${gateway}  ${netmask}
+   ...  ${valid_status_code}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # ip                  IP address to be added (e.g. "10.7.7.7").
+    # subnet_mask         Subnet mask for the IP to be added
+    #                     (e.g. "255.255.0.0").
+    # gateway             Gateway for the IP to be added (e.g. "10.7.7.1").
+    # valid_status_code   The expected valid status code.
+
+    Redfish.Login  ${username}  ${password}
+    Verify Assigning Static IPv4 Address To VMI  ${ip}  ${gateway}  ${netmask}  ${valid_status_code}
+    Redfish.Logout
+
+
+Read VMI Static IP Address Using Different Users
+   [Documentation]  Update user role and read vmi static ip address.
+   [Arguments]  ${username}  ${password}  ${valid_status_code}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # valid_status_code   The expected valid status code.
+
+    Redfish.Login  ${username}  ${password}
+    Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ...  valid_status_codes=[${valid_status_code}]
+    Redfish.Logout
