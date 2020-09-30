@@ -50,7 +50,7 @@ def software_versions():
 
     quiet = 1
     versions = collections.OrderedDict()
-    for package in ['python', 'robot', 'firefox', 'google-chrome']:
+    for package in ['python', 'python3', 'robot', 'firefox', 'google-chrome']:
         # Note: "robot --version" returns 0x00000000000000fb.
         # Note: If package does not exist, 0x7f is returned.
         rc, version = gc.shell_cmd(package + " --version",
@@ -61,7 +61,7 @@ def software_versions():
 
     for package in ['robotframework-angularjs', 'robotframework-scplibrary',
                     'robotframework-extendedselenium2library']:
-        rc, version = gc.shell_cmd("pip show " + package
+        rc, version = gc.shell_cmd("pip3 show " + package
                                    + " | grep Version | sed -re 's/.*: //g'")
         versions[package] = "Not installed" if not version else version.rstrip('\n')
 
