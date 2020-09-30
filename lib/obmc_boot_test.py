@@ -32,6 +32,7 @@ import state as st
 import var_stack as vs
 import gen_plug_in_utils as gpu
 import pel_utils as pel
+import logging_utils as log
 
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) +\
@@ -970,7 +971,8 @@ def test_loop_body():
         # print error logs before delete
         status, error_logs = grk.run_key_u("Get Error Logs")
         pels = pel.peltool("-l", ignore_err=1)
-        gp.qprint_vars(error_logs, pels)
+        log.print_error_logs(error_logs, "AdditionalData Message Severity")
+        gp.qprint_var(pels)
 
         # We need to purge error logs between boots or they build up.
         grk.run_key(delete_errlogs_cmd, ignore=1)
@@ -1153,7 +1155,8 @@ def obmc_boot_test_py(loc_boot_stack=None,
         # print error logs before delete
         status, error_logs = grk.run_key_u("Get Error Logs")
         pels = pel.peltool("-l", ignore_err=1)
-        gp.qprint_vars(error_logs, pels)
+        log.print_error_logs(error_logs, "AdditionalData Message Severity")
+        gp.qprint_var(pels)
 
         # Delete errlogs prior to doing any boot tests.
         grk.run_key(delete_errlogs_cmd, ignore=1)
