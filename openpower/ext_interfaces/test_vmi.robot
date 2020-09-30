@@ -96,7 +96,7 @@ Add Multiple IP Addreses On VMI Interface And Verify
     ${active_channel_config}=  Get Active Channel Config
     Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ...  body={'IPv4StaticAddresses':${ips}}  valid_status_codes=[${HTTP_ACCEPTED}]
-    Verify VMI Network Interface Details   ${ip1["Address"]}  Static  ${ip1["Gateway"]}  ${ip1["SubnetMask"]}  ${True}
+    Verify VMI Network Interface Details   ${ip1["Address"]}  Static  ${ip1["Gateway"]}  ${ip1["SubnetMask"]}
 
 
 Modify IP Addresses On VMI Interface And Verify
@@ -106,9 +106,9 @@ Modify IP Addresses On VMI Interface And Verify
     [Teardown]   Run keywords  Delete VMI IPv4 Address  IPv4Addresses
     ...  AND  Test Teardown Execution
 
-    # ip        gateway       netmask          del_curr_ip    host_reboot        valid_status_code
-    10.5.5.10   0.0.0.0     255.255.252.0       ${False}       ${True}            ${HTTP_ACCEPTED}
-    10.5.5.11   0.0.0.0     255.255.252.0       ${False}       ${True}            ${HTTP_ACCEPTED}
+    # ip        gateway       netmask        valid_status_code
+    10.5.5.10   0.0.0.0     255.255.252.0    ${HTTP_ACCEPTED}
+    10.5.5.11   0.0.0.0     255.255.252.0    ${HTTP_ACCEPTED}
 
 Switch Between IP Origins On VMI And Verify Details
     [Documentation]  Switch between IP origins on VMI and verify details.
@@ -203,6 +203,60 @@ Verify VMI Static IP Configuration Persist On BMC Reset Before Host Boot
     # Verifying the VMI static configuration
     Verify VMI Network Interface Details  ${test_ipv4}  Static   ${test_gateway}  ${test_netmask}
 
+
+Configure VMI Static IP Address Via Different User Roles And Verify
+    [Documentation]  Configure vmi static IP address via different user roles And verify.
+    [Tags]  Configure_IP_Address_Via_Different_User_Roles_And_Verify
+    [Template]  Update User Role And Config Static IP Address
+    [Teardown]  Delete VMI IPv4 Address
+
+    # username     password    role_id         enabled   valid_status_code
+    admin_user     TestPwd123  Administrator   ${True}   ${HTTP_ACCEPTED}
+    operator_user  TestPwd123  Operator        ${True}   ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123  ReadOnly        ${True}   ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123  NoAccess        ${True}   ${HTTP_FORBIDDEN}
+
+
+Delete VMI Static IP Address Via Different User Roles And Verify
+    [Documentation]  Delete vmi static IP address via different user roles and verify.
+    [Tags]  Delete_VMI_Static_IP_Address_Via_Different_User_Roles_And_Verify
+    [Setup]  Verify Assigning Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}
+    ...  ${test_netmask}  ${HTTP_ACCEPTED}
+    [Template]  Update User Role And Delete Static IP Address
+    [Teardown]  Delete VMI IPv4 Address
+
+    # username     password    role_id         enabled   valid_status_code
+    admin_user     TestPwd123  Administrator   ${True}   ${HTTP_ACCEPTED}
+    operator_user  TestPwd123  Operator        ${True}   ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123  ReadOnly        ${True}   ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123  NoAccess        ${True}   ${HTTP_FORBIDDEN}
+
+
+Update VMI Static IP Address Via Different User Roles And Verify
+    [Documentation]  Update vmi static IP address via different user roles and verify.
+    [Tags]  Update_VMI_Static_IP_Address_Via_Different_User_Roles_And_Verify
+    [Setup]  Verify Assigning Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}
+    ...  ${test_netmask}  ${HTTP_ACCEPTED}
+    [Template]  Update User Role And Update Static IP Address
+    [Teardown]  Delete VMI IPv4 Address
+
+    # username     password    role_id        enabled  ip_address  gateway  nemask       valid_status_code
+    admin_user     TestPwd123  Administrator  ${True}  10.5.5.1    0.0.0.0  255.255.0.0  ${HTTP_ACCEPTED}
+    operator_user  TestPwd123  Operator       ${True}  10.5.5.2    0.0.0.0  255.255.0.0  ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123  ReadOnly       ${True}  10.5.5.3    0.0.0.0  255.255.0.0  ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123  NoAccess       ${True}  10.5.5.4    0.0.0.0  255.255.0.0  ${HTTP_FORBIDDEN}
+
+
+Read VMI Network Configuration Via Different User Roles And Verify
+    [Documentation]  Read vmi network configuration via different user roles and verify.
+    [Tags]  Read_VMI_Network_Configuration_Via_Different_User_Roles_And_Verify
+    [Template]  Update User Role And Read VMI NetworK Configuration
+
+    # username     password    role_id        enabled  valid_status_code
+    admin_user     TestPwd123  Administrator  ${True}  ${HTTP_OK}
+    operator_user  TestPwd123  Operator       ${True}  ${HTTP_OK}
+    readonly_user  TestPwd123  ReadOnly       ${True}  ${HTTP_OK}
+    noaccess_user  TestPwd123  NoAccess       ${True}  ${HTTP_FORBIDDEN}
 
 
 *** Keywords ***
@@ -405,4 +459,122 @@ Switch VMI IPv4 Origin And Verify Details
     Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}
 
     [Return]  ${origin}
+
+
+Update User Role And Config Static IP Address
+    [Documentation]  Update user role and config static IP address.
+    [Arguments]  ${username}  ${password}  ${role_id}  ${enabled}  ${valid_status_code}
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+    # valid_status_code   The expected valid status code.
+
+
+    Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
+    Redfish.Logout
+    Redfish.Login  ${username}  ${password}
+    Verify Assigning Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}
+    ...  ${test_netmask}  ${valid_status_code}
+
+
+Update User Role And Delete Static IP Address
+    [Documentation]  Update user role and delete static IP address.
+    [Arguments]  ${username}  ${password}  ${role_id}  ${enabled}  ${valid_status_code}
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND
+    ...   Verify Assigning Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}
+    ...  ${test_netmask}  ${HTTP_ACCEPTED}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+    # valid_status_code   The expected valid status code.
+
+
+    Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
+    Redfish.Logout
+    Redfish.Login  ${username}  ${password}
+    Delete VMI IPv4 Address  delete_param=IPv4StaticAddresses  valid_status_code=${valid_status_code}
+
+
+Update User Role And Update Static IP Address
+   [Documentation]  Update user role and update static ip address.
+   [Arguments]  ${username}  ${password}  ${role_id}  ${enabled}
+   ...  ${ip}  ${gateway}  ${netmask}  ${valid_status_code}
+   [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+    # ip                  IP address to be added (e.g. "10.7.7.7").
+    # subnet_mask         Subnet mask for the IP to be added
+    #                     (e.g. "255.255.0.0").
+    # gateway             Gateway for the IP to be added (e.g. "10.7.7.1").
+
+    # valid_status_code   The expected valid status code.
+
+
+    Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
+    Redfish.Logout
+    Redfish.Login  ${username}  ${password}
+    Verify Assigning Static IPv4 Address To VMI  ${ip}  ${gateway}  ${netmask}  ${valid_status_code}
+
+
+Update User Role And Read VMI NetworK Configuration
+   [Documentation]  Update user role and read vmi network configuration.
+   [Arguments]  ${username}  ${password}  ${role_id}  ${enabled}  ${valid_status_code}
+   [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+    # valid_status_code   The expected valid status code.
+
+
+    Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
+    Redfish.Logout
+    Redfish.Login  ${username}  ${password}
+    Redfish.Get  
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ...  valid_status_codes=[${valid_status_code}]
+
+
+Redfish Create User
+    [Documentation]  Redfish create user.
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+
+    # Make sure the user account in question does not already exist.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
 
