@@ -268,6 +268,34 @@ Verify To Read VMI Network Configuration With Different User Roles
     readonly_user  TestPwd123   ${HTTP_OK}
     noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
 
+Enable DHCP On VMI Network Via Different Users Roles And Verify
+    [Documentation]  Enable DHCP On VMI Network Via Different Users Roles And Verify.
+    [Tags]  Enable_DHCP_On_VMI_Network_Via_Different_Users_Roles_And_Verify
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Update User Role And Set VMI IPv4 Origin
+    [Teardown]  Delete BMC Users Using Redfish
+
+
+    # username     password     dhcp_enabled   valid_status_code
+    admin_user     TestPwd123   ${True}        ${HTTP_ACCEPTED}
+    operator_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
+
+Disable DHCP On VMI Network Via Different Users Roles And Verify
+    [Documentation]  Disable DHCP On VMI Network Via Different Users Roles And Verify.
+    [Tags]  Disable_DHCP_On_VMI_Network_Via_Different_Users_Roles_And_Verify
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Update User Role And Set VMI IPv4 Origin
+    [Teardown]  Delete BMC Users Using Redfish
+
+
+    # username     password     dhcp_enabled    valid_status_code
+    admin_user     TestPwd123   ${False}        ${HTTP_ACCEPTED}
+    operator_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
+
 
 *** Keywords ***
 
@@ -528,3 +556,18 @@ Delete BMC Users Using Redfish
 
    Redfish.Login
    Delete BMC Users Via Redfish  users=${USERS}
+
+Update User Role And Set VMI IPv4 Origin
+    [Documentation]  Update User Role And Set VMI IPv4 Origin.
+    [Arguments]  ${username}  ${password}  ${dhcp_enabled}  ${valid_status_code}
+
+    # Description of argument(s):
+    # username            The host username.
+    # password            The host password.
+    # dhcp_enabled        Indicates whether dhcp should be enabled
+    #                     (${True}, ${False}).
+    # valid_status_code   The expected valid status code.
+
+    Redfish.Login  ${username}  ${password}
+    Set VMI IPv4 Origin  ${dhcp_enabled}  ${valid_status_code}
+    Redfish.Logout
