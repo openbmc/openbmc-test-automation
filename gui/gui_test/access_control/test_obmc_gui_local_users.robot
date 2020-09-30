@@ -29,6 +29,7 @@ ${xpath_policy_settings_header}          //*[text()="Account policy settings"]
 ${xpath_auto_unlock}                     //*[@data-test-id='localUserManagement-radio-automaticUnlock']
 ${xpath_manual_unlock}                   //*[@data-test-id='localUserManagement-radio-manualUnlock']
 ${xpath_max_failed_login}                //*[@data-test-id='localUserManagement-input-lockoutThreshold']
+${test_user_password}                    TestPwd1
 
 *** Test Cases ***
 
@@ -104,9 +105,9 @@ Verify Newly Create User
     Input Text  ${xpath_username_input_button}  TestUser
     Select From List by Value  ${xpath_privilege_list_button}  Administrator
 
-    Input Text  ${xpath_password_input_button}  TestPwd1
+    Input Text  ${xpath_password_input_button}  ${test_user_password}
 
-    Input Text  ${xpath_password_confirm_button}  TestPwd1
+    Input Text  ${xpath_password_confirm_button}  ${test_user_password}
 
     # Submit.
     Click Element  ${xpath_submit_button}
@@ -120,6 +121,38 @@ Verify Newly Create User
     ${user_priv_redfish}=  Redfish_Utils.Get Attribute
     ...  /redfish/v1/AccountService/Accounts/TestUser  RoleId
     Should Be Equal  Administrator  ${user_priv_redfish}
+
+
+Verify Operator Privilege User
+    [Documentation]  Create a new user with operator priviledge and verify that user is created.
+    [Tags]  Verify_Operator_Privilege_User
+    [Teardown]  Redfish.Delete  /redfish/v1/AccountService/Accounts/TestOperator
+
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+
+    # input username.
+    Input Text  ${xpath_input_username}  TestOperator
+    Select From List by Value  ${xpath_list_privilege}  Operator
+
+    # input user password.
+    Input Text  ${xpath_input_password}  ${test_user_password}
+
+    # confirm user password.
+    Input Text  ${xpath_input_password_confirmation}  ${test_user_password}
+
+    # submit.
+    Click Element  ${xpath_submit_button}
+
+    # refresh page and check new user is available.
+    Wait Until Page Contains Element  ${xpath_add_user}
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains  TestOperator  timeout=15
+
+    # privilege of newly added user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/TestOperator  RoleId
+    Should Be Equal  Operator  ${role_config}
 
 
 *** Keywords ***
