@@ -204,6 +204,29 @@ Verify VMI Static IP Configuration Persist On BMC Reset Before Host Boot
     Verify VMI Network Interface Details  ${test_ipv4}  Static   ${test_gateway}  ${test_netmask}
 
 
+Enable DHCP With Different Users
+   [Documentation]  Enable DHCP With Different Users.
+   [Tags]  Enable_DHCP_With_Different_Users
+   [Template]  Update User Role And Set VMI IPv4 Origin
+
+
+    # username     password    role_id         enabled  dhcp_enabled   valid_status_code
+    admin_user     TestPwd123  Administrator   ${True}  ${True}        ${HTTP_ACCEPTED}
+    operator_user  TestPwd123  Operator        ${True}  ${True}        ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123  ReadOnly        ${True}  ${True}        ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123  NoAccess        ${True}  ${True}        ${HTTP_FORBIDDEN}
+
+Disable DHCP With Different Users
+   [Documentation]  Disable DHCP With Different Users.
+   [Tags]  Disable_DHCP_With_Different_Users
+   [Template]  Update User Role And Set VMI IPv4 Origin
+
+
+    # username     password    role_id         enabled  dhcp_enabled   valid_status_code
+    admin_user     TestPwd123  Administrator   ${True}  ${False}        ${HTTP_ACCEPTED}
+    operator_user  TestPwd123  Operator        ${True}  ${False}        ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123  ReadOnly        ${True}  ${False}        ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123  NoAccess        ${True}  ${False}        ${HTTP_FORBIDDEN}
 
 *** Keywords ***
 
@@ -405,4 +428,49 @@ Switch VMI IPv4 Origin And Verify Details
     Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}
 
     [Return]  ${origin}
+
+Update User Role And Set VMI IPv4 Origin
+   [Documentation]  Update User Role And Set VMI IPv4 Origin.
+   [Arguments]  ${username}  ${password}  ${role_id}  ${enabled}
+   ...    ${dhcp_enabled}  ${valid_status_code}
+   [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+    # dhcp_enabled        Indicates whether dhcp should be enabled
+    #                     (${True}, ${False}).
+    # valid_status_code   The expected valid status code.
+
+
+    Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
+    Redfish.Logout
+    Redfish.Login  ${username}  ${password}
+    Set VMI IPv4 Origin  ${dhcp_enabled}  ${valid_status_code}
+
+Redfish Create User
+    [Documentation]  Redfish create user.
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}  ${login_check}=${True}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+
+    # Make sure the user account asked for creation does not already exist.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
 
