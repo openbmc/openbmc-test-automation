@@ -268,6 +268,30 @@ Verify To Read VMI Network Configuration With Different User Roles
     readonly_user  TestPwd123   ${HTTP_OK}
     noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
 
+Enable DHCP On VMI Network Via Different Users Roles And Verify
+   [Documentation]  Enable DHCP On VMI Network Via Different Users Roles And Verify.
+   [Tags]  Enable_DHCP_On_VMI_Network_Via_Different_Users_Roles_And_Verify
+   [Template]  Update User Role And Set VMI IPv4 Origin
+
+
+    # username     password    role_id         enabled  dhcp_enabled   valid_status_code
+    admin_user     TestPwd123  Administrator   ${True}  ${True}        ${HTTP_ACCEPTED}
+    operator_user  TestPwd123  Operator        ${True}  ${True}        ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123  ReadOnly        ${True}  ${True}        ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123  NoAccess        ${True}  ${True}        ${HTTP_FORBIDDEN}
+
+Disable DHCP On VMI Network Via Different Users Roles And Verify
+   [Documentation]  Disable DHCP On VMI Network Via Different Users Roles And Verify.
+   [Tags]  Disable_DHCP_On_VMI_Network_Via_Different_Users_Roles_And_Verify
+   [Template]  Update User Role And Set VMI IPv4 Origin
+
+
+    # username     password    role_id         enabled  dhcp_enabled   valid_status_code
+    admin_user     TestPwd123  Administrator   ${True}  ${False}        ${HTTP_ACCEPTED}
+    operator_user  TestPwd123  Operator        ${True}  ${False}        ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123  ReadOnly        ${True}  ${False}        ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123  NoAccess        ${True}  ${False}        ${HTTP_FORBIDDEN}
+
 
 *** Keywords ***
 
@@ -528,3 +552,48 @@ Delete BMC Users Using Redfish
 
    Redfish.Login
    Delete BMC Users Via Redfish  users=${USERS}
+
+Update User Role And Set VMI IPv4 Origin
+   [Documentation]  Update User Role And Set VMI IPv4 Origin.
+   [Arguments]  ${username}  ${password}  ${role_id}  ${enabled}
+   ...    ${dhcp_enabled}  ${valid_status_code}
+   [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+    # dhcp_enabled        Indicates whether dhcp should be enabled
+    #                     (${True}, ${False}).
+    # valid_status_code   The expected valid status code.
+
+
+    Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
+    Redfish.Logout
+    Redfish.Login  ${username}  ${password}
+    Set VMI IPv4 Origin  ${dhcp_enabled}  ${valid_status_code}
+
+Redfish Create User
+    [Documentation]  Redfish create user.
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}  ${login_check}=${True}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+
+    # Make sure the user account asked for creation does not already exist.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
