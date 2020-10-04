@@ -93,17 +93,35 @@ Verify Existence Of All Buttons And Fields In Account Policy Settings
     Page Should Contain Element  ${xpath_cancel_button}
 
 
-Verify Newly Create User
-    [Documentation]  Create a new user and verifying that user is created.
-    [Tags]  Verify_Newly_Create_User
-    [Teardown]  Redfish.Delete  /redfish/v1/AccountService/Accounts/TestUser
+Verify User Access Privilege
+    [Documentation]  Create a new user with a priviledge and verify that user is created.
+    [Tags]  Verify_User_Access_Privilege
+    [Template]  Test User Access Privilege
+
+    # username      privilege_level
+    admin_user      Administrator
+    operator_user   Operator
+    readonly_user   ReadOnly
+    noaccess_user   NoAccess
+
+*** Keywords ***
+
+Test User Access Privilege
+    [Documentation]  Create a user with given user name and privilege and verify that the
+    ...              user is created successfully via GUI and Redfish.
+    [Teardown]  Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
+    [Arguments]  ${user_name}  ${user_privilege}
+
+    # Description of argument(s):
+    # user_name           Certificate type (e.g. "Server" or "Client").
+    # user_privilege      Privilege of the user.
 
     Click Element  ${xpath_add_user}
     Wait Until Page Contains Element  ${xpath_add_user_heading}
 
     # Input username, password and privilege.
-    Input Text  ${xpath_username_input_button}  TestUser
-    Select From List by Value  ${xpath_privilege_list_button}  Administrator
+    Input Text  ${xpath_username_input_button}  ${user_name}
+    Select From List by Value  ${xpath_privilege_list_button}  ${user_privilege}
 
     Input Text  ${xpath_password_input_button}  ${test_user_password}
 
@@ -115,47 +133,12 @@ Verify Newly Create User
     # Refresh page and check new user is available.
     Wait Until Page Contains Element  ${xpath_add_user}
     Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains  TestUser  timeout=15
+    Wait Until Page Contains  ${user_name}  timeout=15
 
     # Cross check the privilege of newly added user via Redfish.
     ${user_priv_redfish}=  Redfish_Utils.Get Attribute
-    ...  /redfish/v1/AccountService/Accounts/TestUser  RoleId
-    Should Be Equal  Administrator  ${user_priv_redfish}
-
-
-Verify Operator Privilege User
-    [Documentation]  Create a new user with operator priviledge and verify that user is created.
-    [Tags]  Verify_Operator_Privilege_User
-    [Teardown]  Redfish.Delete  /redfish/v1/AccountService/Accounts/TestOperator
-
-    Click Element  ${xpath_add_user}
-    Wait Until Page Contains Element  ${xpath_add_user_heading}
-
-    # input username.
-    Input Text  ${xpath_input_username}  TestOperator
-    Select From List by Value  ${xpath_list_privilege}  Operator
-
-    # input user password.
-    Input Text  ${xpath_input_password}  ${test_user_password}
-
-    # confirm user password.
-    Input Text  ${xpath_input_password_confirmation}  ${test_user_password}
-
-    # submit.
-    Click Element  ${xpath_submit_button}
-
-    # refresh page and check new user is available.
-    Wait Until Page Contains Element  ${xpath_add_user}
-    Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains  TestOperator  timeout=15
-
-    # privilege of newly added user.
-    ${role_config}=  Redfish_Utils.Get Attribute
-    ...  /redfish/v1/AccountService/Accounts/TestOperator  RoleId
-    Should Be Equal  Operator  ${role_config}
-
-
-*** Keywords ***
+    ...  /redfish/v1/AccountService/Accounts/${user_name}  RoleId
+    Should Be Equal  ${user_privilege}  ${user_priv_redfish}
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
@@ -164,4 +147,4 @@ Test Setup Execution
 
     Click Element  ${xpath_access_control_menu}
     Click Element  ${xpath_local_user_management_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  local-user-management
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  local-user-managemen
