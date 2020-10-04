@@ -50,6 +50,38 @@ Verify Existence Of All Buttons In Local User Management Page
     Page Should Contain Button  ${xpath_delete_user}
 
 
+Verify Readonly Access User
+    [Documentation]  Create a new user with readonly priviledge and verify that user is created.
+    [Tags]  Verify_Readonly_Access_User
+    [Teardown]  Redfish.Delete  /redfish/v1/AccountService/Accounts/TestReadonly
+
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+
+    # Input username.
+    Input Text  ${xpath_input_username}  TestReadonly
+    Select From List by Value  ${xpath_list_privilege}  ReadOnly
+
+    # Input user password.
+    Input Text  ${xpath_input_password}  ${test_user_password}
+
+    # Confirm user password.
+    Input Text  ${xpath_input_password_confirmation}  ${test_user_password}
+
+    # Submit.
+    Click Element  ${xpath_submit_button}
+
+    # Refresh page and check new user is available.
+    Wait Until Page Contains Element  ${xpath_add_user}
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains  TestReadonly  timeout=15
+
+    # Privilege of newly added user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/TestReadonly  RoleId
+    Should Be Equal  ReadOnly  ${role_config}
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -60,3 +92,4 @@ Test Setup Execution
     Click Element  ${xpath_access_control_menu}
     Click Element  ${xpath_local_user_management_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  local-user-management
+    Redfish.Login
