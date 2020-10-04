@@ -50,6 +50,46 @@ Verify Existence Of All Buttons In Local User Management Page
     Page Should Contain Button  ${xpath_delete_user}
 
 
+Verify No Access User
+    [Documentation]  Create a new user with no access priviledge and verify that user is created.
+    [Tags]  Verify_No_Access_User
+    [Teardown]  Redfish.Login  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/TestNoaccess
+
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+
+    # input username.
+    Input Text  ${xpath_input_username}  TestNoaccess
+    Select From List by Value  ${xpath_list_privilege}  NoAccess
+
+    # input user password.
+    Input Text  ${xpath_input_password}  ${test_user_password}
+
+    # confirm user password.
+    Input Text  ${xpath_input_password_confirmation}  ${test_user_password}
+
+    # submit.
+    Click Element  ${xpath_submit_button}
+
+    # refresh page and check new user is available.
+    Wait Until Page Contains Element  ${xpath_add_user}
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains  TestNoaccess  timeout=15
+
+    # privilege of newly added user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/TestNoaccess  RoleId
+    Should Be Equal  NoAccess  ${role_config}
+
+    Redfish.Logout
+    ${status}=  Run Keyword And Return Status  Redfish.Login  TestNoaccess  ${test_user_password}
+    Should Be Equal  ${status}  ${True}
+
+    Redfish.Get  /redfish/v1/Systems/  valid_status_codes=[401, 403]
+
+    Redfish.Logout
+
+
 *** Keywords ***
 
 Test Setup Execution
