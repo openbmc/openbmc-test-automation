@@ -104,9 +104,9 @@ Verify Newly Create User
     Input Text  ${xpath_username_input_button}  TestUser
     Select From List by Value  ${xpath_privilege_list_button}  Administrator
 
-    Input Text  ${xpath_password_input_button}  TestPwd1
+    Input Text  ${xpath_password_input_button}  ${test_user_password}
 
-    Input Text  ${xpath_password_confirm_button}  TestPwd1
+    Input Text  ${xpath_password_confirm_button}  ${test_user_password}
 
     # Submit.
     Click Element  ${xpath_submit_button}
@@ -120,6 +120,46 @@ Verify Newly Create User
     ${user_priv_redfish}=  Redfish_Utils.Get Attribute
     ...  /redfish/v1/AccountService/Accounts/TestUser  RoleId
     Should Be Equal  Administrator  ${user_priv_redfish}
+
+
+Verify No Access User
+    [Documentation]  Create a new user with no access priviledge and verify that user is created.
+    [Tags]  Verify_No_Access_User
+    [Teardown]  Redfish.Login  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/TestNoaccess
+
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+
+    # input username.
+    Input Text  ${xpath_username_input_button}  TestNoaccess
+    Select From List by Value  ${xpath_privilege_list_button}  NoAccess
+
+    # input user password.
+    Input Text  ${xpath_password_input_button}  ${test_user_password}
+
+    # confirm user password.
+    Input Text  ${xpath_password_confirm_button}  ${test_user_password}
+
+    # submit.
+    Click Element  ${xpath_submit_button}
+
+    # refresh page and check new user is available.
+    Wait Until Page Contains Element  ${xpath_add_user}
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains  TestNoaccess  timeout=15
+
+    # privilege of newly added user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/TestNoaccess  RoleId
+    Should Be Equal  NoAccess  ${role_config}
+
+    Redfish.Logout
+    ${status}=  Run Keyword And Return Status  Redfish.Login  TestNoaccess  ${test_user_password}
+    Should Be Equal  ${status}  ${True}
+
+    Redfish.Get  /redfish/v1/Systems/  valid_status_codes=[401, 403]
+
+    Redfish.Logout
 
 
 *** Keywords ***
