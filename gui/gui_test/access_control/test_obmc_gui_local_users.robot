@@ -16,6 +16,16 @@ ${xpath_account_policy}                  //button[contains(text(),'Account polic
 ${xpath_add_user}                        //button[contains(text(),'Add user')]
 ${xpath_edit_user}                       //button[@aria-label="Edit user"]
 ${xpath_delete_user}                     //button[@aria-label="Delete user"]
+i${xpath_radio_account_status_enabled}   //*[@data-test-id='localUserManagement-radioButton-statusEnabled']
+${xpath_radio_account_status_disabled}   //*[@data-test-id='localUserManagement-radioButton-statusDisabled']
+${xpath_input_username}                  //*[@data-test-id='localUserManagement-input-username']
+${xpath_list_privilege}                  //*[@data-test-id='localUserManagement-select-privilege']
+${xpath_input_password}                  //*[@data-test-id='localUserManagement-input-password']
+${xpath_input_password_confirmation}     //*[@data-test-id='localUserManagement-input-passwordConfirmation']
+${xpath_cancel_button}                   //*[@data-test-id='localUserManagement-button-cancel']
+${xpath_submit_button}                   //*[@data-test-id='localUserManagement-button-submit']
+${xpath_add_user_heading}                //h5[text()=" Add user "]
+${test_user_password}                    TestPwd1
 
 *** Test Cases ***
 
@@ -48,6 +58,49 @@ Verify Existence Of All Buttons In Local User Management Page
     Page should contain Button  ${xpath_add_user}
     Page Should Contain Button  ${xpath_edit_user}
     Page Should Contain Button  ${xpath_delete_user}
+
+
+Verify Disable User
+    [Documentation]  Create a new disabled user and verify.
+    [Tags]  Verify_Disable_User
+    [Teardown]  Redfish.Delete  /redfish/v1/AccountService/Accounts/DisabledUser
+
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+
+    # select disabled radio button
+    Click Element At Coordinates  ${xpath_radio_account_status_disabled}  0  0
+    # Click Element  ${xpath_radio_account_status_disabled}
+
+    # input username.
+    Input Text  ${xpath_input_username}  DisabledUser
+    Select From List by Value  ${xpath_list_privilege}  Operator
+
+    # input user password.
+    Input Text  ${xpath_input_password}  ${test_user_password}
+
+    # confirm user password.
+    Input Text  ${xpath_input_password_confirmation}  ${test_user_password}
+
+    # submit.
+    Click Element  ${xpath_submit_button}
+
+    # refresh page and check new user is available.
+    Wait Until Page Contains Element  ${xpath_add_user}
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains  DisabledUser  timeout=15
+
+    # privilege of newly added user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/DisabledUser  RoleId
+    Should Be Equal  Operator  ${role_config}
+
+    # check if the user is disabled.
+    Redfish.Logout
+    ${status}=  Run Keyword And Return Status  Redfish.Login  DisabledUser  ${test_user_password} 
+    Should Be Equal  ${status}  ${False}
+    Redfish.Logout
+    Redfish.Login
 
 
 *** Keywords ***
