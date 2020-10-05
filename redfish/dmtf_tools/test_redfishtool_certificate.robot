@@ -151,9 +151,9 @@ Install Server Certificate Using Redfishtool And Verify Via OpenSSL
     Wait Until Keyword Succeeds  2 mins  15 secs  Verify Certificate Visible Via OpenSSL  ${cert_file_path}
 
 
-Verify CSR Generation For Server Certificate
+Verify CSR Generation For Server Certificate Via Redfishtool
     [Documentation]  Verify CSR generation for server certificate.
-    [Tags]  Verify_CSR_Generation_For_Server_Certificate
+    [Tags]  Verify_CSR_Generation_For_Server_Certificate_Via_Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
     # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
@@ -163,9 +163,9 @@ Verify CSR Generation For Server Certificate
     Server      EC                  ${EMPTY}        secp384r1    ok
 
 
-Verify CSR Generation For Client Certificate
+Verify CSR Generation For Client Certificate Via Redfishtool
     [Documentation]  Verify CSR generation for client certificate.
-    [Tags]  Verify_CSR_Generation_For_Client_Certificate
+    [Tags]  Verify_CSR_Generation_For_Client_Certificate_Via_Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
     # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
@@ -175,9 +175,9 @@ Verify CSR Generation For Client Certificate
     Client      EC                  ${EMPTY}        secp384r1    ok
 
 
-Verify CSR Generation For Server Certificate With Invalid Value
+Verify CSR Generation For Server Certificate With Invalid Value Via Redfishtool
     [Documentation]  Verify error while generating CSR for server certificate with invalid value.
-    [Tags]  Verify_CSR_Generation_For_Server_Certificate_With_Invalid_Value
+    [Tags]  Verify_CSR_Generation_For_Server_Certificate_With_Invalid_Value_Via_Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
     # csr_type  key_pair_algorithm  key_bit_length    key_curv_id       expected_status
@@ -185,9 +185,9 @@ Verify CSR Generation For Server Certificate With Invalid Value
     Server      RAS                 ${invalid_value}  ${EMPTY}          error
 
 
-Verify CSR Generation For Client Certificate With Invalid Value
+Verify CSR Generation For Client Certificate With Invalid Value Via Redfishtool
     [Documentation]  Verify error while generating CSR for client certificate with invalid value.
-    [Tags]  Verify_CSR_Generation_For_Client_Certificate_With_Invalid_Value
+    [Tags]  Verify_CSR_Generation_For_Client_Certificate_With_Invalid_Value_Via_Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
     Client      ${invalid_value}    ${2048}           prime256v1        error
