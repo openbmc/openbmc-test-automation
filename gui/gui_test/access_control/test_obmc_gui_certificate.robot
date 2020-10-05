@@ -3,6 +3,7 @@
 Documentation  Test OpenBMC GUI "SSL Certificates" sub-menu of "Access control".
 
 Resource        ../../lib/resource.robot
+Resource        ../../../lib/certificate_utils.robot
 
 Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
@@ -37,6 +38,20 @@ Verify Existence Of Add Certificate Button
     [Tags]  Verify_Existence_Of_Add_Certificate_Button
 
     Page Should Contain Element  ${xpath_add_certificate_button}
+
+
+Verify Installed CA Certificate
+    [Documentation]  Install CA certificate and verify the installed certificate in GUI.
+    [Tags]  Verify_Installed_CA_Certificate
+
+    # install CA certificate
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+    Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Verify certificate is available in GUI
+    Page Should Contain  CA Certificate
 
 
 *** Keywords ***
