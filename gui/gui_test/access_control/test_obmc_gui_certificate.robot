@@ -3,6 +3,7 @@
 Documentation  Test OpenBMC GUI "SSL Certificates" sub-menu of "Access control".
 
 Resource        ../../lib/resource.robot
+Resource        ../../../lib/certificate_utils.robot
 
 Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
@@ -39,11 +40,54 @@ Verify Existence Of Add Certificate Button
     Page Should Contain Element  ${xpath_add_certificate_button}
 
 
+Verify Installed CA Certificate
+    [Documentation]  Install CA certificate and verify the installed certificate in GUI.
+    [Tags]  Verify_Installed_CA_Certificate
+
+    # install CA certificate
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+    Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Verify certificate is available in GUI
+    Page Should Contain  CA Certificate
+
+
+Verify Installed HTTPS Certificate
+    [Documentation]  Install https certificate and verify the installed certificate in GUI.
+    [Tags]  Verify_Installed_HTTPS_Certificate
+
+    # install HTTPS certificate.
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+    Install Certificate File On BMC  ${REDFISH_HTTPS_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Verify certificate is available in GUI.
+    Page Should Contain  HTTPS Certificate
+
+
+Verify Installed LDAP Certificate
+    [Documentation]  Install ldap certificate and verify the installed certificate in GUI.
+    [Tags]  Verify_Installed_LDAP_Certificate
+
+    # install HTTPS certificate.
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+    Install Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Verify certificate is available in GUI.
+    Page Should Contain  LDAP Certificate
+
+
 *** Keywords ***
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
+    Create Directory  certificate_dir
     Click Element  ${xpath_access_control_menu}
     Click Element  ${xpath_ssl_certificates_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ssl-certificates
