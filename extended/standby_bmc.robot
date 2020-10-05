@@ -47,7 +47,7 @@ Get To Stable State
     ...  Wait For Host To Ping  ${OPENBMC_HOST}  2 mins
 
     # Check if the ping works using 1400 MTU.
-    Run Keyword if  ${ping_status} == ${True}  MTU Ping Test
+    #Run Keyword if  ${ping_status} == ${True}  MTU Ping Test
 
     Run Keyword if  ${ping_status} == ${False}
     ...  Fail  ${OPENBMC_HOST} ping test failed.
