@@ -157,3 +157,10 @@ Verify Certificate Visible Via OpenSSL
     ${openssl_cert_content}=  Get Certificate Content From BMC Via Openssl
     Should Contain  ${cert_file_content}  ${openssl_cert_content}
 
+
+Delete All CA Certificate Via Redfish
+    [Documentation]  Delete all CA certificate via Redfish.
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Truststore/Certificates
+    FOR  ${cert}  IN  @{cert_list}
+      Redfish.Delete  ${cert}  valid_status_codes=[${HTTP_NO_CONTENT}]
+    END
