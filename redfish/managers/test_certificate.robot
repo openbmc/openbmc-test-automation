@@ -421,15 +421,6 @@ Delete Certificate Via BMC CLI
     ...  valid_status_codes=[${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
 
-Delete All CA Certificate Via Redfish
-    [Documentation]  Delete all CA certificate via Redfish.
-
-    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Truststore/Certificates
-    FOR  ${cert}  IN  @{cert_list}
-      Redfish.Delete  ${cert}  valid_status_codes=[${HTTP_NO_CONTENT}]
-    END
-
-
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
