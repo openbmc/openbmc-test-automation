@@ -138,7 +138,7 @@ Verify A Session Created With ClientID
       ${session_id}=  Get Session Information By ClientID  ${client}  ${session_ids}
       ${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions/${session_id}
       Rprint Vars  sessions
-      @{words} =  Split String  ${sessions["Oem"]["OpenBMC"]["ClientOriginIP"]}  :
+      @{words} =  Split String  ${sessions["ClientOriginIPAddress"]}  :
       ${ip_address}=  Get Running System IP
       Set Test Variable  ${temp_ipaddr}  ${words}[-1]
       Valid Value  client  ['${sessions["Oem"]["OpenBMC"]["ClientID"]}']
@@ -243,7 +243,7 @@ Verify A Non Admin Session Created With ClientID
       #Set Test Variable  ${sessions}  ${content["data"]}
       Rprint Vars  sessions
       Log  ${sessions}
-      @{words} =  Split String  ${sessions["Oem"]["OpenBMC"]["ClientOriginIP"]}  :
+      @{words} =  Split String  ${sessions["ClientOriginIPAddress"]}  :
       ${ip_address}=  Get Running System IP
       Set Test Variable  ${temp_ipaddr}  ${words}[-1]
       Valid Value  client  ['${sessions["Oem"]["OpenBMC"]["ClientID"]}']
