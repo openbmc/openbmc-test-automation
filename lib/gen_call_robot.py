@@ -143,12 +143,12 @@ def init_robot_test_base_dir_path():
     OBMC_TOOLS_BASE_DIR_PATH = \
         os.path.dirname(ROBOT_TEST_BASE_DIR_PATH.rstrip("/")) \
         + "/openbmc-tools/"
-    OPENBMCTOOL_DIR_PATH = OBMC_TOOLS_BASE_DIR_PATH + "thalerj/"
-    MSBARTH_TOOLS_DIR_PATH = OBMC_TOOLS_BASE_DIR_PATH + "msbarth/"
+    OPENBMCTOOL_DIR_PATH = OBMC_TOOLS_BASE_DIR_PATH + "openbmctool/"
+    JSON_CHECKER_TOOLS_DIR_PATH = OBMC_TOOLS_BASE_DIR_PATH + "expectedJsonChecker/"
 
     gv.valid_value(ROBOT_TEST_BASE_DIR_PATH)
     gp.dprint_vars(ROBOT_TEST_RUNNING_FROM_SB, ROBOT_TEST_BASE_DIR_PATH, OBMC_TOOLS_BASE_DIR_PATH,
-                   OPENBMCTOOL_DIR_PATH, MSBARTH_TOOLS_DIR_PATH)
+                   OPENBMCTOOL_DIR_PATH, JSON_CHECKER_TOOLS_DIR_PATH)
     gv.valid_dir_path(ROBOT_TEST_BASE_DIR_PATH)
 
     ROBOT_TEST_BASE_DIR_PATH = gm.add_trailing_slash(ROBOT_TEST_BASE_DIR_PATH)
@@ -164,8 +164,8 @@ def init_robot_test_base_dir_path():
     gm.set_mod_global(OPENBMCTOOL_DIR_PATH)
     os.environ['OPENBMCTOOL_DIR_PATH'] = str(OPENBMCTOOL_DIR_PATH)
 
-    gm.set_mod_global(MSBARTH_TOOLS_DIR_PATH)
-    os.environ['MSBARTH_TOOLS_DIR_PATH'] = str(MSBARTH_TOOLS_DIR_PATH)
+    gm.set_mod_global(JSON_CHECKER_TOOLS_DIR_PATH)
+    os.environ['JSON_CHECKER_TOOLS_DIR_PATH'] = str(JSON_CHECKER_TOOLS_DIR_PATH)
 
 
 raw_robot_file_search_path = "${ROBOT_TEST_BASE_DIR_PATH}:" +\
