@@ -198,6 +198,16 @@ Fail To Acquire Lock For Invalid Segment Flag
     HMCID-01       WriteCase13     ${BAD_REQUEST}
     HMCID-01       WriteCase14     ${BAD_REQUEST}
 
+
+Get Empty Lock Records For Session Where No Locks Acquired
+    [Documentation]  If session does not acquire locks then get lock should return
+    ...              empty lock records.
+    [Tags]  Get_Empty_Lock_Records_For_Session_Where_No_Locks_Acquired
+    [Template]  Verify No Locks Records For Session With No Acquired Lock
+
+    # client_id
+    HMCID-01
+
 *** Keywords ***
 
 Create Redfish Session With ClientID
@@ -727,4 +737,18 @@ Verify Fail To Acquire Lock For Invalid Lock Data
 
     ${session_info}=  Create Redfish Session With ClientID  ${client_id}
     ${trans_id}=  Redfish Post Acquire Invalid Lock  ${lock_type}  message=${message}  status_code=${HTTP_BAD_REQUEST}
+    Redfish Delete Session  ${session_info}
+
+
+Verify No Locks Records For Session With No Acquired Lock
+    [Documentation]  Verify no records found for a session where no lock is acquired.
+    [Arguments]  ${client_id}
+
+    # Description of argument(s):
+    # client_id    This client id can contain string value
+    #              (e.g. 12345, "HMCID").
+
+    ${session_info}=  Create Redfish Session With ClientID  ${client_id}
+    ${trans_id_emptylist}=  Create List
+    Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
     Redfish Delete Session  ${session_info}
