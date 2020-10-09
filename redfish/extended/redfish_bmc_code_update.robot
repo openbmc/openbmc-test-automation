@@ -50,8 +50,24 @@ Redfish BMC Code Update
     Pass Execution If  '${functional_version}' == '${image_version}'
     ...  The existing ${image_version} firmware is already functional.
 
-    Run Keyword If  not ${FORCE_UPDATE}
-    ...  Activate Existing Firmware  ${image_version}
+    # TODO: Replace with redfish ActiveSoftwareImage API.
+    #Run Keyword If  not ${FORCE_UPDATE}
+    #...  Activate Existing Firmware  ${image_version}
+
+    # Firmware inventory record of the given image version.
+    ${image_info}=  Get Software Inventory State By Version  ${image_version}
+
+    ${image_info_len}=  Get Length  ${image_info}
+
+    # REST delete the image to fresh code update for a given same image object
+    # which is already ACTIVE but on the alternate side. Irrespective of when
+    # REST is disabled in near future or the below operation fails, is purely
+    # done to give a chance.
+
+    Run Keyword If  '${image_info_len}' != 0
+    ...  Run Keyword And Ignore Error
+    ...    Delete Software Object  /xyz/openbmc_project/software/${image_info['image_id']}
+
     Redfish Update Firmware
 
 
