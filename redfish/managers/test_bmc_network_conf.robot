@@ -480,8 +480,7 @@ Modify IPv4 Address And Verify
     [Documentation]  Modify IP address via Redfish and verify.
     [Tags]  Modify_IPv4_Addres_And_Verify
     [Teardown]  Run Keywords
-    ...  Delete IP Address  ${test_ipv4_addr2}  AND  Delete IP Address  ${test_ipv4_addr}
-    ...  AND  Test Teardown Execution
+    ...  Delete IP Address  ${test_ipv4_addr2}  AND  Test Teardown Execution
 
      Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
 
@@ -611,7 +610,7 @@ Configure Static Name Servers
 Delete Static Name Servers
     [Documentation]  Delete static name servers.
 
-    Configure Static Name Servers  @{EMPTY}
+    Configure Static Name Servers  static_name_servers=@{EMPTY}
 
     # Check if all name servers deleted on BMC.
     ${nameservers}=  CLI Get Nameservers
