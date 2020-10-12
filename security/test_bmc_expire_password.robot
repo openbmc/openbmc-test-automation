@@ -198,6 +198,43 @@ Verify New Password Persistency After BMC Reboot
     Redfish.Login  admin_user  0penBmc123
 
 
+Force Expire And Update Unacceptable Password And Verify User Account
+    [Documentation]  Force Expire  and verify multiple unacceptable new password and retry lockout
+    [Setup]  Set Accont Lockout Threshold  account_lockout_threshold=${2}
+    [Tags]  Force_Expire_And_Update_Unacceptable_Password_And_Verify_User_Account
+    [Teardown]  Set Accont Lockout Threshold
+
+    Redfish.Login
+    # Make sure the user account in question does not already exist.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user.
+    ${payload}=  Create Dictionary
+    ...  UserName=admin_user  Password=TestPwd123  RoleId=Administrator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+    Redfish.Logout
+
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire admin_user
+    Should Contain  ${output}  password expiry information changed
+
+    Verify User Password Expired Using Redfish  username=admin_user  password=TestPwd123
+
+    # Change to a unacceptable password.
+    Repeat Keyword  ${5} times
+    ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user
+    ...  body={'Password': 'abcd'}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  admin_user  TestPwd123
+
+    # Wait for lockout duration to expire and then verify that login works.
+    Sleep  ${default_lockout_duration}s
+    Redfish.Login  admin_user  TestPwd123
+    Redfish.Logout
+
+
 *** Keywords ***
 
 Set Accont Lockout Threshold
@@ -243,3 +280,11 @@ Verify Root Password Expired
     ${json}=  To JSON  ${resp.content}
     Should Contain  ${json["extendedMessage"]}  POST the new password
 
+
+Verify User Password Expired Using Redfish
+    [Documentation]  Checking whether user password expired or not using redfish.
+    [Arguments]  ${username}  ${password}  ${expected_result}=${True}
+
+    Redfish.Login  ${username}  ${password}
+    ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/${username}
+    Should Be Equal  ${resp.dict["PasswordChangeRequired"]}  ${expected_result}
