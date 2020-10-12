@@ -65,6 +65,7 @@ Redfish BMC Code Update
     # done to give a chance.
 
     Run Keyword If  '${image_info_len}' != 0
+    ...  Run Keywords  Print Timen  The existing ${image_version} firmware is not yet functional and will be deleted before firmware update.  AND
     ...  Run Keyword And Ignore Error
     ...    Delete Software Object  /xyz/openbmc_project/software/${image_info['image_id']}
 
@@ -108,12 +109,12 @@ Redfish Firmware Update In Loop
       Print Timen  **************************************
       Redfish Update Firmware
       ${sw_inv}=  Get Functional Firmware  BMC update
-      ${nonfunctional_sw_inv}=  Get Non Fucntional Firmware  ${sw_inv}  False
+      ${nonfunctional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  False
       Run Keyword If  ${nonfunctional_sw_inv['functional']} == False
       ...  Set BMC Image Priority To Least  ${nonfunctional_sw_inv['version']}  ${nonfunctional_sw_inv}
       Redfish.Login
       ${sw_inv}=  Get Functional Firmware  BMC update
-      ${nonfunctional_sw_inv}=  Get Non Fucntional Firmware  ${sw_inv}  False
+      ${nonfunctional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  False
       Delete BMC Image
     END
 
@@ -125,7 +126,7 @@ Get BMC Functional Firmware
     [Documentation]  Get BMC functional firmware details.
 
     ${sw_inv}=  Get Functional Firmware  BMC update
-    ${sw_inv}=  Get Non Fucntional Firmware  ${sw_inv}  True
+    ${sw_inv}=  Get Non Functional Firmware  ${sw_inv}  True
 
     [Return]  ${sw_inv}
 
@@ -143,7 +144,7 @@ Get Functional Firmware
     [Return]  ${bmc_inv}
 
 
-Get Non Fucntional Firmware
+Get Non Functional Firmware
     [Documentation]  Get BMC non functional fimware details.
     [Arguments]  ${sw_inv}  ${functional_sate}
 
