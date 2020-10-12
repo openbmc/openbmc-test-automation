@@ -1,10 +1,10 @@
 {
     "BMC image": {
-        "OnReset": "Redfish OBMC Reboot (off)",
+        "OnReset": "Redfish BMC Reset Operation",
         "Immediate": "Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}"
     },
     "BMC update": {
-        "OnReset": "Redfish OBMC Reboot (off)",
+        "OnReset": "Redfish BMC Reset Operation",
         "Immediate": "Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}"
     },
     "Host image": {
