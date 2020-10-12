@@ -23,7 +23,7 @@ ${count}           128
 Test Ecmd Getscom
     [Documentation]  Do getscom operation through BMC.
     [Tags]  Test_Ecmd_Getscom
-    Ecmd  getscom pu 20028440 -all
+    Ecmd  getscom pu.c 20028440 -all
 
 Test Ecmd Getcfam
     [Documentation]  Do getcfam operation through BMC.
