@@ -50,6 +50,7 @@ class bmc_redfish(redfish_plus):
                 gp.lprint_varx("except_value", str(except_value))
                 raise(get_exception)
         BuiltIn().set_global_variable("${REDFISH_SUPPORTED}", self.__inited__)
+        BuiltIn().set_global_variable("${REDFISH_REST_SUPPORTED}", True)
 
     def login(self, *args, **kwargs):
         r"""
