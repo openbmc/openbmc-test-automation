@@ -106,7 +106,7 @@ Login OpenBMC GUI
 
     Go To  ${obmc_gui_url}
     Wait Until Element Is Enabled  ${xpath_textbox_hostname}
-    Input Text  ${xpath_textbox_hostname}  ${OPENBMC_HOST}
+    Input Text  ${xpath_textbox_hostname}  ${OPENBMC_HOST}:${HTTPS_PORT}
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
     Click Element  login__submit
