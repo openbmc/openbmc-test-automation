@@ -139,6 +139,17 @@ Delete All Dumps
         Delete BMC Dump  ${dump_id}
     END
 
+
+Redfish Delete All BMC Dumps
+    [Documentation]  Delete all BMC dumps via Redfish.
+
+    # Check if dump entries exist, if not return.
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    Return From Keyword If  ${resp.dict["Members@odata.count"]} == ${0}
+
+    Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.ClearLog
+
+
 Delete All BMC Dump
     [Documentation]  Delete all BMC dump entries using "DeleteAll" interface.
 
