@@ -73,6 +73,7 @@ Get To Stable State
     Run Keyword And Ignore Error  Delete All Error Logs
     Run Keyword And Ignore Error  Redfish Purge Event Log
     Run Keyword And Ignore Error  Delete All Dumps
+    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
     Run Keyword And Ignore Error  Delete All Redfish Sessions
     Check For Current Boot Application Failures
 
