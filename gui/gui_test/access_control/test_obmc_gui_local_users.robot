@@ -78,6 +78,7 @@ Verify Existence Of All Button And Fields In Add User
     Page Should Contain Element  ${xpath_password_confirm_button}
     Page Should Contain Element  ${xpath_cancel_button}
     Page Should Contain Element  ${xpath_submit_button}
+    Click Element  ${xpath_cancel_button}
 
 
 Verify Existence Of All Buttons And Fields In Account Policy Settings
