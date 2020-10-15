@@ -67,6 +67,7 @@ Verify Existence Of All Buttons In Local User Management Page
 Verify Existence Of All Button And Fields In Add User
     [Documentation]  Verify existence of all buttons and fields in add user page.
     [Tags]  Verify_Existence_Of_All_Button_And_Fields_In_Add_User
+    [Teardown]  Click Element  ${xpath_cancel_button}
 
     Click Element  ${xpath_add_user}
     Wait Until Page Contains Element  ${xpath_add_user_heading}
