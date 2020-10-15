@@ -976,6 +976,7 @@ def test_loop_body():
 
         # We need to purge error logs between boots or they build up.
         grk.run_key(delete_errlogs_cmd, ignore=1)
+        grk.run_key("Redfish Delete All BMC Dumps")
 
     boot_results.print_report()
     gp.qprint_timen("Finished boot " + str(boot_count) + ".")
@@ -1160,6 +1161,7 @@ def obmc_boot_test_py(loc_boot_stack=None,
 
         # Delete errlogs prior to doing any boot tests.
         grk.run_key(delete_errlogs_cmd, ignore=1)
+        grk.run_key("Redfish Delete All BMC Dumps")
 
     # Process caller's boot_stack.
     while (len(boot_stack) > 0):
