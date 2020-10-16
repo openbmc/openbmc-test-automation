@@ -12,6 +12,10 @@ Test Setup      Test Setup Execution
 ${xpath_sensor_heading}         //h1[text()="Sensors"]
 ${xpath_sensors_filter}         //button[contains(text(),'Filter')]
 ${xpath_sensors_search}         //input[contains(@class,"search-input")]
+${xpath_filter_ok}         //*[@data-test-id='tableFilter-checkbox-OK']
+${xpath_filter_warning}    //*[@data-test-id='tableFilter-checkbox-Warning']
+${xpath_filter_critical}   //*[@data-test-id='tableFilter-checkbox-Critical']
+${xpath_filter_clear_all}  //*[@data-test-id='tableFilter-button-clearAll']
 
 *** Test Cases ***
 
