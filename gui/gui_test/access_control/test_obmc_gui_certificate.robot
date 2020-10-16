@@ -89,6 +89,32 @@ Verify Installed CA Certificate
     Page Should Contain  CA Certificate
 
 
+Verify Installed HTTPS Certificate
+    [Documentation]  Install HTTPS certificate and verify the installed certificate in GUI.
+    [Tags]  Verify_Installed_HTTPS_Certificate
+
+    # Install HTTPS certificate.
+    ${file_data}=  Generate Certificate File Data
+    Install Certificate File On BMC  ${REDFISH_HTTPS_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Verify certificate is available in GUI.
+    Page Should Contain  HTTPS Certificate
+
+
+Verify Installed LDAP Certificate
+    [Documentation]  Install LDAP certificate and verify the installed certificate in GUI.
+    [Tags]  Verify_Installed_LDAP_Certificate
+
+    Delete Certificate Via BMC CLI  Client
+
+    # Install LDAP certificate.
+    ${file_data}=  Generate Certificate File Data
+    Install Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Verify certificate is available in GUI.
+    Page Should Contain  LDAP Certificate
+
+
 *** Keywords ***
 
 Generate Certificate File Data
