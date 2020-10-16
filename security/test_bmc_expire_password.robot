@@ -3,7 +3,9 @@ Documentation     Test root user expire password.
 
 Resource          ../lib/resource.robot
 Resource          ../gui/lib/resource.robot
+Resource          ../lib/code_update_utils.robot
 Resource          ../lib/ipmi_client.robot
+Resource          ../lib/bmc_redfish_utils.robot
 Library           ../lib/bmc_ssh_utils.py
 Library           SSHLibrary
 
@@ -11,6 +13,8 @@ Test Setup       Set Accont Lockout Threshold
 
 *** Variables ***
 
+@{admin}          admin_user  TestPwd123
+&{USERS}          Administrator=${admin}
 # If user re-tries more than 5 time incorrectly, the user gets locked for 5 minutes.
 ${default_lockout_duration}   ${300}
 
@@ -196,6 +200,66 @@ Verify New Password Persistency After BMC Reboot
 
     # verify new password
     Redfish.Login  admin_user  0penBmc123
+
+
+Expire And Change Password And Switch To Previous Image And Verify
+    [Documentation]  Expire and change password and switch to previous image and verify
+    [Tags]  Expire_And_Change_Password_And_Switch_To_Previous_Image_And_Verify
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
+
+    Redfish.Login  admin_user  TestPwd123
+    ${bmc_version_1}=  Get BMC Version
+
+    # Expire password using ssh
+    Open Connection And Log In  ${admin[0]}  ${admin[1]}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire admin_user
+    Should Contain  ${output}  password expiry information changed
+
+    # Change to a valid password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user
+    ...  body={'Password': '0penBmc123'}
+
+    # Switch to latest image using redfish.
+    ${resp}=  Redfish.GET  /redfish/v1/UpdateService/FirmwareInventory
+    ${item}    Set Variable  ${resp.dict["Members"][0]}
+    ${link}=  Create Dictionary  ActiveSoftwareImage=${item}
+    ${payload}=  Create Dictionary  Links=${link}
+    ${resp}=  Redfish.PATCH  /redfish/v1/Managers/bmc  body= &{payload}
+    Sleep  20s
+    Redfish.Login  admin_user  0penBmc123
+    ${bmc_version_2}=  Get BMC Version
+    Should Not Be Equal As Strings   ${bmc_version_1.strip('"')}  ${bmc_version_2.strip('"')}
+
+
+Expire And Change Password And Switch To Latest Image And Verify
+    [Documentation]  Expire and change password and switch to Latest image and verify
+    [Tags]  Expire_And_Change_Password_And_Switch_To_Latest_Image_And_Verify
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
+
+    Redfish.Login  admin_user  TestPwd123
+    ${bmc_version_1}=  Get BMC Version
+
+    # Expire password using ssh
+    Open Connection And Log In  ${admin[0]}  ${admin[1]}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire admin_user
+    Should Contain  ${output}  password expiry information changed
+
+    # Change to a valid password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user
+    ...  body={'Password': '0penBmc123'}
+
+    # Switch to latest image using redfish.
+    ${resp}=  Redfish.GET  /redfish/v1/UpdateService/FirmwareInventory
+    ${item}    Set Variable  ${resp.dict["Members"][1]}
+    ${link}=  Create Dictionary  ActiveSoftwareImage=${item}
+    ${payload}=  Create Dictionary  Links=${link}
+    ${resp}=  Redfish.PATCH  /redfish/v1/Managers/bmc  body= &{payload}
+    Sleep  20s
+    Redfish.Login  admin_user  0penBmc123
+    ${bmc_version_2}=  Get BMC Version
+    Should Not Be Equal As Strings   ${bmc_version_1.strip('"')}  ${bmc_version_2.strip('"')}
 
 
 *** Keywords ***
