@@ -139,7 +139,7 @@ class resource_variables():
     xpath_sol_header = "//h1[contains(text(), 'Serial over LAN console')]"
 
     # xpath for health menu
-    xpath_health_menu = "//button[@aria-controls='health-menu']"
+    xpath_health_menu = "//*[@data-test-id='nav-button-health']"
     xpath_event_logs_sub_menu = "//a[@href='#/health/event-logs']"
     xpath_sensor_sub_menu = "//a[@href='#/health/sensors']"
     xpath_hardware_status_sub_menu = "//a[@href='#/health/hardware-status']"
