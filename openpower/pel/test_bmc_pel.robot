@@ -26,6 +26,10 @@ ${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging 
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} org.open_power.Logging.Error.TestError1
 ...  xyz.openbmc_project.Logging.Entry.Level.Error 0
 
+${CMD_INFORMATIONAL_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.TestError2
+...  xyz.openbmc_project.Logging.Entry.Level.Informational 0
+
 ${CMD_INVENTORY_PREFIX}  busctl get-property xyz.openbmc_project.Inventory.Manager
 ...  /xyz/openbmc_project/inventory/system/chassis/motherboard
 
@@ -422,6 +426,34 @@ Verify Delete All PEL
 
     ${pel_ids}=  Get PEL Log Via BMC CLI
     Should Be Empty  ${pel_ids}
+
+
+Verify Informational Error Log
+    [Documentation]  Create an informational error log and verify.
+    [Tags]  Verify_Informational_Error_Log
+
+    Redfish Purge Event Log
+    # Create an informational error log.
+    BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    ${pel_records}=  Peltool  -lfh
+
+    # An example of information error log data:
+    # {
+    #    "0x500006A0": {
+    #            "SRC": "BD8D1002",
+    #            "Message": "An application had an internal failure",
+    #            "PLID": "0x500006A0",
+    #            "CreatorID": "BMC",
+    #            "Subsystem": "BMC Firmware",
+    #            "Commit Time": "10/14/2020 11:41:38",
+    #            "Sev": "Informational Event",
+    #            "CompID": "0x1000"
+    #    }
+    # }
+
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${id}=  Get From List  ${ids}  0
+    Should Contain  ${pel_records['${id}']['Sev']}  Informational
 
 
 *** Keywords ***
