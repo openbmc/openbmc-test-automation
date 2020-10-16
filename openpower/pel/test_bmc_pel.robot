@@ -26,6 +26,10 @@ ${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging 
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} org.open_power.Logging.Error.TestError1
 ...  xyz.openbmc_project.Logging.Entry.Level.Error 0
 
+${CMD_TEST_ERROR_INFORMATIONAL}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.TestError2
+...  xyz.openbmc_project.Logging.Entry.Level.Informational 0
+
 ${CMD_INVENTORY_PREFIX}  busctl get-property xyz.openbmc_project.Inventory.Manager
 ...  /xyz/openbmc_project/inventory/system/chassis/motherboard
 
@@ -422,6 +426,19 @@ Verify Delete All PEL
 
     ${pel_ids}=  Get PEL Log Via BMC CLI
     Should Be Empty  ${pel_ids}
+
+
+Verify Information Error Log
+    [Documentation]  Returns the value of given PEL's field.
+    [Tags]  Verify_Information_Error_Log
+
+    Redfish Purge Event Log
+    # Create an internal failure error log.
+    BMC Execute Command  ${CMD_TEST_ERROR_INFORMATIONAL}
+    ${pel_records}=  Peltool  -lfh
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${id}=  Get From List  ${ids}  0
+    Should Contain Any  ${pel_records['${id}']['Sev']}  Informational
 
 
 *** Keywords ***
