@@ -3,14 +3,18 @@ Documentation     Test root user expire password.
 
 Resource          ../lib/resource.robot
 Resource          ../gui/lib/resource.robot
+Resource          ../lib/code_update_utils.robot
+Resource          ../lib/redfish_code_update_utils.robot 
 Resource          ../lib/ipmi_client.robot
+Resource          ../lib/bmc_redfish_utils.robot
 Library           ../lib/bmc_ssh_utils.py
-Library           SSHLibrary
 
-Test Setup       Set Accont Lockout Threshold
+Test Setup       Set Account Lockout Threshold
 
 *** Variables ***
 
+@{ADMIN}          admin_user  TestPwd123
+&{USERS}          Administrator=${ADMIN}
 # If user re-tries more than 5 time incorrectly, the user gets locked for 5 minutes.
 ${default_lockout_duration}   ${300}
 
@@ -152,7 +156,7 @@ Expire And Change Root Password Via GUI
 Verify Maximum Failed Attempts And Check Root User Account Locked
     [Documentation]  Verify maximum failed attempts and locks out root user account.
     [Tags]  Verify_Maximum_Failed_Attempts_And_Check_Root_User_Account_Locked
-    [Setup]   Set Accont Lockout Threshold  account_lockout_threshold=${5}
+    [Setup]   Set Account Lockout Threshold  account_lockout_threshold=${5}
 
     # Make maximum failed login attempts.
     Repeat Keyword  ${5} times
@@ -198,9 +202,71 @@ Verify New Password Persistency After BMC Reboot
     Redfish.Login  admin_user  0penBmc123
 
 
+Switch To Latest Image After Expire And Change User Credential
+    [Documentation]  Expire and change password and switch to latest image and verify.
+    [Tags]  Switch_To_Latest_Image_After_Expire_And_Change_User_Credential
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
+
+    Redfish.Login  admin_user  TestPwd123
+
+    # Expire password using ssh.
+    Open Connection And Log In  admin_user  TestPwd123
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire admin_user
+    Should Contain  ${output}  password expiry information changed
+
+    # Change to a valid password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user
+    ...  body={'Password': '0penBmc123'}
+    Redfish.Logout
+
+    Redfish.Login
+    # Switch to latest image using redfish.
+    Redfish Update Firmware  OnReset
+    Redfish.Logout
+
+    # verify login with updated password on latest image.
+    Redfish.Login  admin_user  0penBmc123
+
+
+Switch To Backup Image After Expire And Change User Credential
+    [Documentation]  Expire and change password and switch to backup image and verify.
+    [Tags]  Switch_To_Backup_Image_After_Expire_And_Change_User_Credential
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
+
+    Redfish.Login  admin_user  TestPwd123
+    ${bmc_version_1}=  Get BMC Version
+    ${post_code_update_actions}=  Get Post Boot Action
+    ${state}=  Get Pre Reboot State
+    Rprint Vars  state
+
+    # Expire password using ssh.
+    Open Connection And Log In  admin_user  TestPwd123
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire admin_user
+    Should Contain  ${output}  password expiry information changed
+
+    # Change to a valid password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user
+    ...  body={'Password': '0penBmc123'}
+    Redfish.Logout
+
+    Redfish.Login
+    # change to backup image and reset the BMC.
+    Switch Backup Firmware Image To Functional
+
+    Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}
+    ${bmc_version_2}=  Get BMC Version
+    Should Not Be Equal As Strings   ${bmc_version_1.strip('"')}  ${bmc_version_2.strip('"')}
+    Redfish.Logout
+
+    # verify login with updated password on previous image.
+    Redfish.Login  admin_user  0penBmc123
+
+
 *** Keywords ***
 
-Set Accont Lockout Threshold
+Set Account Lockout Threshold
    [Documentation]  Set user account lockout threshold.
    [Arguments]  ${account_lockout_threshold}=${0}
 
@@ -228,7 +294,7 @@ Test Teardown Execution
     Redfish.Login
     Wait Until Keyword Succeeds  1 min  10 sec  Restore Default Password For Root User
     Redfish.Logout
-    Set Accont Lockout Threshold  account_lockout_threshold=${5}
+    Set Account Lockout Threshold  account_lockout_threshold=${5}
     FFDC On Test Case Fail
 
 
