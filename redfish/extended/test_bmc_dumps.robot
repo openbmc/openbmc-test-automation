@@ -18,10 +18,9 @@ Verify User Initiated BMC Dump When Host Powered Off
 
     Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated BMC Dump
-    ${dump_entries}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${dump_entries}=  Get BMC Dump Entries
     Length Should Be  ${dump_entries}  1
     List Should Contain Value  ${dump_entries}  ${dump_id}
-
 
 Verify User Initiated BMC Dump When Host Booted
     [Documentation]  Create user initiated BMC dump at host booted state and
@@ -30,7 +29,7 @@ Verify User Initiated BMC Dump When Host Booted
 
     Redfish Power On  stack_mode=skip
     ${dump_id}=  Create User Initiated BMC Dump
-    ${dump_entries}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${dump_entries}=  Get BMC Dump Entries
     Length Should Be  ${dump_entries}  1
     List Should Contain Value  ${dump_entries}  ${dump_id}
 
@@ -102,6 +101,20 @@ Create User Initiated BMC Dump
     # }
 
     [Return]  ${task_dict["Payload"]["HttpHeaders"][-1].split("/")[-1]}
+
+
+Get BMC Dump Entries
+    [Documentation]  Return BMC dump ids list.
+
+    ${dump_uris}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${dump_ids}=  Create List
+
+    FOR  ${dump_uri}  IN  @{dump_uris}
+      ${dump_id}=  Fetch From Right  ${dump_uri}  /
+      Append To List  ${dump_ids}  ${dump_id}
+    END
+
+    [Return]  ${dump_ids}
 
 
 Is Task Completed
