@@ -3,8 +3,9 @@
 Documentation  Test OpenBMC GUI "SSL Certificates" sub-menu of "Access control".
 
 Resource        ../../lib/resource.robot
+Resource        ../../../lib/certificate_utils.robot
 
-Suite Setup     Launch Browser And Login GUI
+Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
@@ -74,7 +75,43 @@ Verify Generate CSR Certificate Button
      Page Should Contain Element  ${xpath_generate_csr_submit}
 
 
+Verify Installed HTTPS Certificate
+    [Documentation]  Install HTTPS certificate and verify the installed certificate in GUI.
+    [Tags]  Verify_Installed_HTTPS_Certificate
+
+    # Install HTTPS certificate.
+    ${file_data}=  Generate Certificate File Data
+    Install Certificate File On BMC  ${REDFISH_HTTPS_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Verify certificate is available in GUI.
+    Page Should Contain  HTTPS Certificate
+
+
+Verify Installed LDAP Certificate
+    [Documentation]  Install LDAP certificate and verify the installed certificate in GUI.
+    [Tags]  Verify_Installed_LDAP_Certificate
+
+    Delete Certificate Via BMC CLI  Client
+
+    # Install LDAP certificate.
+    ${file_data}=  Generate Certificate File Data
+    Install Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}  ok  data=${file_data}
+
+    # Verify certificate is available in GUI.
+    Page Should Contain  LDAP Certificate
+
+
 *** Keywords ***
+
+Generate Certificate File Data
+    [Documentation]  Generate data of certificate file.
+
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    [return]  ${file_data}
+
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
@@ -82,3 +119,10 @@ Test Setup Execution
     Click Element  ${xpath_access_control_menu}
     Click Element  ${xpath_ssl_certificates_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ssl-certificates
+
+
+Suite Setup Execution
+    [Documentation]  Do test case suite setup tasks.
+
+    Launch Browser And Login GUI
+    Create Directory  certificate_dir
