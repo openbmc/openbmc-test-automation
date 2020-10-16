@@ -139,13 +139,13 @@ class resource_variables():
     xpath_sol_header = "//h1[contains(text(), 'Serial over LAN console')]"
 
     # xpath for health menu
-    xpath_health_menu = "//button[@aria-controls='health-menu']"
+    xpath_health_menu = "//*[@data-test-id='nav-button-health']"
     xpath_event_logs_sub_menu = "//a[@href='#/health/event-logs']"
     xpath_sensor_sub_menu = "//a[@href='#/health/sensors']"
     xpath_hardware_status_sub_menu = "//a[@href='#/health/hardware-status']"
 
     # xpath for control menu
-    xpath_control_menu = "//button[@aria-controls='control-menu']"
+    xpath_control_menu = "//*[@data-test-id='nav-button-control']"
     xpath_manage_power_usage_sub_menu = "//a[@href='#/control/manage-power-usage']"
     xpath_reboot_bmc_sub_menu = "//a[@href='#/control/reboot-bmc']"
     xpath_server_led_sub_menu = "//a[@href='#/control/server-led']"
@@ -154,13 +154,13 @@ class resource_variables():
     xpath_kvm_sub_menu = "//a[@href='#/control/kvm']"
 
     # xpath for configuration menu
-    xpath_server_configuration = "//button[@aria-controls='configuration-menu']"
+    xpath_server_configuration = "//*[@data-test-id='nav-button-configuration']"
     xpath_select_network_settings = "//a[@href='#/configuration/network-settings']"
     xpath_date_time_settings_sub_menu = "//a[@href='#/configuration/date-time-settings']"
     xpath_firmware_update_sub_menu = "//a[@href='#/configuration/firmware']"
 
     # xpath for access control menu
-    xpath_access_control_menu = "//*[@data-test-id='nav-button-accessControl']"
+    xpath_access_control_menu = "//*[@data-test-id='nav-button-access-control']"
     xpath_ldap_sub_menu = "//a[@href='#/access-control/ldap']"
     xpath_save_settings_button = "//button[contains(text(),'Save settings')]"
     xpath_local_user_management_sub_menu = "//a[@href='#/access-control/local-user-management']"
