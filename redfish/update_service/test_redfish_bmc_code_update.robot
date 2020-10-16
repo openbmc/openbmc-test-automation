@@ -18,6 +18,7 @@ Resource                 ../../lib/dump_utils.robot
 Resource                 ../../lib/logging_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
 Resource                 ../../lib/utils.robot
+Resource                 ../../lib/bmc_redfish_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
 Library                  ../../lib/gen_robot_keyword.py
@@ -28,6 +29,11 @@ Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
 
 Force Tags               BMC_Code_Update
+
+*** Variables ***
+
+@{ADMIN}          admin_user  TestPwd123
+&{USERS}          Administrator=${ADMIN}
 
 *** Test Cases ***
 
@@ -57,6 +63,57 @@ Redfish Code Update With Multiple Firmware
     # policy   image_file_path     alternate_image_file_path
     Immediate  ${IMAGE_FILE_PATH}  ${ALTERNATE_IMAGE_FILE_PATH}
 
+
+Verify If The Modified Admin Credential Is Valid Post Image Switched To Backup
+    [Tags]  Verify_If_The_Modified_Admin_Credentails_Is_Valid_Backup_Image
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
+
+    ${post_code_update_actions}=  Get Post Boot Action
+    ${state}=  Get Pre Reboot State
+
+    Redfish.Login  admin_user  TestPwd123
+    # Expire admin password using ssh.
+    Open Connection And Log In  admin_user  TestPwd123
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire admin_user
+    Should Contain  ${output}  password expiry information changed
+    # Change admin password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user
+    ...  body={'Password': '0penBmc123'}
+    Redfish.Logout
+
+    Redfish.Login
+    # change to backup image and reset the BMC.
+    Switch Backup Firmware Image To Functional
+    Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}
+    Redfish.Logout
+
+    # verify modified admin password on backup image.
+    Redfish.Login  admin_user  0penBmc123
+
+ 
+Verify If The Modified Admin Credential Is Valid Post Update
+    [Tags]  Verify_If_The_Modified_Admin_Credentails_Is_Valid_Post_Update
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
+
+    Redfish.Login  admin_user  TestPwd123
+    # Expire admin password using ssh.
+    Open Connection And Log In  admin_user  TestPwd123
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire admin_user
+    Should Contain  ${output}  password expiry information changed
+    # Change admin password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user
+    ...  body={'Password': '0penBmc123'}
+    Redfish.Logout
+
+    Redfish.Login
+    # Flash latest firmware using redfish.
+    Redfish Update Firmware  OnReset
+    Redfish.Logout
+
+    # verify modified admin credentails on latest image.
+    Redfish.Login  admin_user  0penBmc123
 
 *** Keywords ***
 
