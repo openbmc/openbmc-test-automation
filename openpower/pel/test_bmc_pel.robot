@@ -33,6 +33,14 @@ ${CMD_INFORMATIONAL_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc
 ${CMD_INVENTORY_PREFIX}  busctl get-property xyz.openbmc_project.Inventory.Manager
 ...  /xyz/openbmc_project/inventory/system/chassis/motherboard
 
+${CMD_UNRECOVERABLE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
+${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 
@@ -454,6 +462,32 @@ Verify Informational Error Log
     ${ids}=  Get Dictionary Keys  ${pel_records}
     ${id}=  Get From List  ${ids}  0
     Should Contain  ${pel_records['${id}']['Sev']}  Informational
+
+
+Verify Predictable Error Log
+    [Documentation]  Create a predictive error and verify.
+    [Tags]  Verify_Predictable_Error_Log
+
+    Redfish Purge Event Log
+    # Create an internal failure error log.
+    BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    ${pel_records}=  Peltool  -l
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${id}=  Get From List  ${ids}  0
+    Should Contain Any  ${pel_records['${id}']['Sev']}  Predictive
+
+
+Verify Unrecoverable Error Log
+    [Documentation]  Create an unrecoverable error and verify.
+    [Tags]  Verify_Unrecoverable_Error_Log
+
+    Redfish Purge Event Log
+    # Create an internal failure error log.
+    BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
+    ${pel_records}=  Peltool  -l
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${id}=  Get From List  ${ids}  0
+    Should Contain Any  ${pel_records['${id}']['Sev']}  Unrecoverable
 
 
 *** Keywords ***
