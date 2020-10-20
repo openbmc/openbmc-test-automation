@@ -60,6 +60,28 @@ Reset BIOS Via Redfish
     Redfish.Post  ${target}  valid_status_codes=[${HTTP_OK}]
 
 
+Redfish Delete Session
+    [Documentation]  Redfish delete session.
+    [Arguments]  ${session_info}
+
+    # Description of argument(s):
+    # session_info      Session information in dict.
+
+    Redfish.Delete  /redfish/v1/SessionService/Sessions/${session_info["SessionIDs"]}
+
+
+Redfish Delete List Of Session
+    [Documentation]  Redfish delete session.
+    [Arguments]  ${session_info}
+
+    # Description of argument(s):
+    # session_info      Session information in dict.
+
+    FOR  ${session}  IN  @{session_info}
+      Redfish.Delete  /redfish/v1/SessionService/Sessions/${session["SessionIDs"]}
+    END
+
+
 Delete All Redfish Sessions
     [Documentation]  Delete all active redfish sessions.
 
@@ -74,6 +96,7 @@ Delete All Redfish Sessions
     FOR  ${session}  IN  @{resp_list}
         Redfish.Delete  ${session}
     END
+
 
 Get Valid FRUs
     [Documentation]  Return a dictionary containing all of the valid FRU records for the given fru_type.
