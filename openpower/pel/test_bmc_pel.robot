@@ -41,7 +41,11 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
 
+${CMD_DISPLAY_DISK_USAGE}  du  /var/lib/phosphor-logging/errors
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
+
+${info_log_max_usage_percentage}  15
 
 
 *** Test Cases ***
@@ -518,7 +522,48 @@ Verify Unrecoverable Error Log
     Should Contain  ${pel_records['${id}']['Sev']}  Unrecoverable
 
 
+Verify Informational Error Log Size When Error Log Exceeds Limit
+    [Documentation]  Verify informational error log size when informational log size exceeds limit.
+    [Tags]  Verify_Informational_Error_Log_Error_Log_When_Size_Exceeds_Limit
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    # Create 3001 information logs.
+    FOR  ${LOG_COUNT}  IN RANGE  0  3001
+      BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    END
+
+    # Some time is required by the system to provide the correct log size after log creation,
+    # because of necessary log trimming/compression when log size exceeds defined limit.
+    Sleep  10s
+
+    # Check logsize and verify that disk usage is around 15%.
+    ${usage_percent}=  Get Disk Usage For Error Logs
+    ${percent_diff}=  Evaluate  ${usage_percent} - ${info_log_max_usage_percentage}
+    ${percent_diff}=   Evaluate  abs(${percent_diff})
+    Should Be True  ${percent_diff} <= 0.5
+
+
 *** Keywords ***
+
+Get Disk Usage For Error Logs
+    [Documentation]  Get disk usage percentage for error logs.
+
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  ${CMD_DISPLAY_DISK_USAGE}
+
+    ${usage_output}=  Fetch From Left  ${usage_output}  \/
+
+    # With below steps, we are calculating percentage utilization.
+    # Logging disk capacity limit is set to 20MB. So,steps are:
+    # 1. Convert to MB unit from KB unit of the log size in KB returned by du command.
+    # 2. Now, divide by 20MB, the logsize and calculate percenatge.
+
+    ${usage_output}=  Evaluate  ${usage_output} / 1024
+    ${usage_percent}=  Evaluate  ${usage_output} / 20 * 100
+
+    [return]  ${usage_percent}
+
 
 Create Test PEL Log
     [Documentation]  Generate test PEL log.
