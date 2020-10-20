@@ -43,9 +43,6 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
-${info_log_max_usage_percentage}  15
-
-
 *** Test Cases ***
 
 Create Test PEL Log And Verify
@@ -520,27 +517,15 @@ Verify Unrecoverable Error Log
     Should Contain  ${pel_records['${id}']['Sev']}  Unrecoverable
 
 
-Verify Informational Error Log Size When Error Log Exceeds Limit
-    [Documentation]  Verify informational error log size when informational log size exceeds limit.
-    [Tags]  Verify_Informational_Error_Log_Error_Log_When_Size_Exceeds_Limit
+Verify Error Logging Rotation Policy
+    [Documentation]  Verify error logging rotation policy.
+    [Tags]  Verify_Error_Logging_Rotation_Policy
+    [Template]  Test Error Logging Rotation Policy
 
-    # Initially remove all logs.
-    Redfish Purge Event Log
-
-    # Create 3001 information logs.
-    FOR  ${LOG_COUNT}  IN RANGE  0  3001
-      BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
-    END
-
-    # Delay for BMC to perform log compression when log size exceeds.
-    Sleep  10s
-
-    # Check logsize and verify that disk usage is around 15%.
-    ${usage_percent}=  Get Disk Usage For Error Logs
-    ${percent_diff}=  Evaluate  ${usage_percent} - ${info_log_max_usage_percentage}
-    ${percent_diff}=   Evaluate  abs(${percent_diff})
-    Should Be True  ${percent_diff} <= 0.5
-
+    # Error log type              Max allocated space
+    Informational                 15
+    Unrecoverable                 30
+    Predictive                    30
 
 Verify Reverse Order Of PEL Logs
     [Documentation]  Verify PEL command to output PEL logs in reverse order.
@@ -558,10 +543,42 @@ Verify Reverse Order Of PEL Logs
 
 *** Keywords ***
 
+Test Error Logging Rotation Policy
+    [Documentation]  Verify that when maximum log limit is reached, error logs are deleted to reach their max allocated space.
+    [Arguments]  ${error_log_type}  ${max_allocated_space_percentage}
+
+    # Description of argument(s):
+    # error_log_type                      Type of error logs.
+    # max_allocated_space_percentage      Predefined maximum alloted percentage disk usage for the error log.
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    # Determine the log generating command as per type of error
+    ${cmd_error}=  Set Variable If
+    ...  '${error_log_type}' == 'Informational'  ${CMD_INFORMATIONAL_ERROR}
+    ...  '${error_log_type}' == 'Unrecoverable'  ${CMD_UNRECOVERABLE_ERROR}
+    ...  '${error_log_type}' == 'Predictive'     ${CMD_PREDICTIVE_ERROR}
+
+    # Create 3001 information logs.
+    FOR  ${count}  IN RANGE  0  3001 
+      BMC Execute Command  ${cmd_error}
+    END
+
+    # Delay for BMC to perform delete older error logs when log limit exceeds.
+    Sleep  10s
+
+    # Verify disk usage is around max allocated space.
+    ${disk_usage_percentage}=  Get Disk Usage For Error Logs
+    ${percent_diff}=  Evaluate  ${disk_usage_percentage} - ${max_allocated_space_percentage}
+    ${percent_diff}=   Evaluate  abs(${percent_diff})
+    Should Be True  ${percent_diff} <= 0.5
+
+
 Get Disk Usage For Error Logs
     [Documentation]  Get disk usage percentage for error logs.
 
-    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du  /var/lib/phosphor-logging/errors
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du /var/lib/phosphor-logging/errors
 
     ${usage_output}=  Fetch From Left  ${usage_output}  \/
 
