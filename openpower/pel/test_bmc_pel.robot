@@ -26,8 +26,14 @@ ${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging 
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} org.open_power.Logging.Error.TestError1
 ...  xyz.openbmc_project.Logging.Entry.Level.Error 0
 
+${CMD_ERROR_INFORMATIONAL}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.TestError2
+...  xyz.openbmc_project.Logging.Entry.Level.Informational 0
+
 ${CMD_INVENTORY_PREFIX}  busctl get-property xyz.openbmc_project.Inventory.Manager
 ...  /xyz/openbmc_project/inventory/system/chassis/motherboard
+
+${CMD_DISPLAY_DISK_USAGE}  du -h /var/lib/phosphor-logging/errors | cut -c 0-3
 
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
@@ -422,6 +428,25 @@ Verify Delete All PEL
 
     ${pel_ids}=  Get PEL Log Via BMC CLI
     Should Be Empty  ${pel_ids}
+
+
+Verify Maximum Informational Error Logs
+    [Documentation]  Generate test PEL log.
+    [Tags]  Verify_Maximum_Informational_Error_Logs
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    # Create 3001 information logs.
+    : FOR  ${LOG_COUNT}  IN RANGE  0  3001
+    \  BMC Execute Command  ${CMD_ERROR_INFORMATIONAL}
+
+    # Check logsize and verify that disk usage is 15% or more.
+    Sleep  10s
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  ${CMD_DISPLAY_DISK_USAGE}
+    ${usage_percent}=  Evaluate  ${usage_output}/20 * 100
+
+    Should Be Equal  ${usage_percent}  ${15.5}
 
 
 *** Keywords ***
