@@ -33,6 +33,8 @@ ${CMD_INFORMATIONAL_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc
 ${CMD_INVENTORY_PREFIX}  busctl get-property xyz.openbmc_project.Inventory.Manager
 ...  /xyz/openbmc_project/inventory/system/chassis/motherboard
 
+${CMD_DISPLAY_DISK_USAGE}  du -h /var/lib/phosphor-logging/errors | cut -c 0-3
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 
@@ -454,6 +456,25 @@ Verify Informational Error Log
     ${ids}=  Get Dictionary Keys  ${pel_records}
     ${id}=  Get From List  ${ids}  0
     Should Contain  ${pel_records['${id}']['Sev']}  Informational
+
+
+Verify Maximum Informational Error Logs
+    [Documentation]  Generate test PEL log.
+    [Tags]  Verify_Maximum_Informational_Error_Logs
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    # Create 3001 information logs.
+    : FOR  ${LOG_COUNT}  IN RANGE  0  3001
+    \  BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+
+    # Check logsize and verify that disk usage is 15% or more.
+    Sleep  10s
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  ${CMD_DISPLAY_DISK_USAGE}
+    ${usage_percent}=  Evaluate  ${usage_output}/20 * 100
+
+    Should Be Equal  ${usage_percent}  ${15.5}
 
 
 *** Keywords ***
