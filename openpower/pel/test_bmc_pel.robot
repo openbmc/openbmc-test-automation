@@ -41,7 +41,11 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
 
+${CMD_DISPLAY_DISK_USAGE}  du -h /var/lib/phosphor-logging/errors | cut -c 0-3
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
+
+${allowed_usage_percentage_for_informational_log}  15
 
 
 *** Test Cases ***
@@ -518,7 +522,40 @@ Verify Unrecoverable Error Log
     Should Contain  ${pel_records['${id}']['Sev']}  Unrecoverable
 
 
+Verify Informational Error Log Size When Size Exceeds Limit
+    [Documentation]  Verify informational error log size when informational log size exceeds limit.
+    [Tags]  Verify_Informational_Error_Log_Size_When_Size_Exceeds_Limit
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    # Create 3001 information logs.
+    FOR  ${LOG_COUNT}  IN RANGE  0  3001
+      BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    END
+
+    # Check logsize and verify that disk usage is around 15%.
+    Sleep  10s
+    ${usage_percent}=  Get Disk Usage For Error Logs
+    ${percent_diff}=  Evaluate  ${usage_percent} - ${allowed_usage_percentage_for_informational_log}
+    ${percent_diff}=   Evaluate  abs(${percent_diff})
+    Should Be True  ${percent_diff} <= 0.5
+
+
 *** Keywords ***
+
+Get Disk Usage For Error Logs
+    [Documentation]  Get disk usage percentage for error logs.
+
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  ${CMD_DISPLAY_DISK_USAGE}
+
+    # Covert disk usage unit from KB to MB.
+    ${usage_output}=  Fetch From Left  ${usage_output}  \/
+    ${usage_output}=  Evaluate  ${usage_output} / 1024
+    ${usage_percent}=  Evaluate  ${usage_output} / 20 * 100
+
+    [return]  ${usage_percent}
+
 
 Create Test PEL Log
     [Documentation]  Generate test PEL log.
