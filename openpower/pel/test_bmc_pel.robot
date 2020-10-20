@@ -41,6 +41,8 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
 
+${CMD_DISPLAY_DISK_USAGE}  du -h /var/lib/phosphor-logging/errors | cut -c 0-3
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 
@@ -516,6 +518,27 @@ Verify Unrecoverable Error Log
     ${pel_ids}=  Get PEL Log Via BMC CLI
     ${id}=  Get From List  ${pel_ids}  -1
     Should Contain  ${pel_records['${id}']['Sev']}  Unrecoverable
+
+
+Verify Maximum Informational Error Logs
+    [Documentation]  Create a defined limit of informational logs and verify size.
+    [Tags]  Verify_Maximum_Informational_Error_Logs
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    # Create 3001 information logs.
+    FOR  ${LOG_COUNT}  IN RANGE  0  3001
+      BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    END
+
+    # Check logsize and verify that disk usage is 15% or more.
+    # After creation of logs exceeds 3000, disk usage for logs is 15.5 %.
+    Sleep  10s
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  ${CMD_DISPLAY_DISK_USAGE}
+    ${usage_percent}=  Evaluate  ${usage_output}/20 * 100
+
+    Should Be Equal  ${usage_percent}  ${15.5}
 
 
 *** Keywords ***
