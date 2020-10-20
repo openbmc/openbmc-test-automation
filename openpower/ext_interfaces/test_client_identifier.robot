@@ -81,17 +81,6 @@ Create Session For Non Admin User
 
 *** Keywords ***
 
-Get Session Information By ClientID
-    [Documentation]  Get session information by client id.
-    [Arguments]  ${client_id}  ${session_ids}
-
-    FOR  ${session}  IN  @{session_ids}
-       Return From Keyword If  '${client_id}' == '${session["Oem"]["OpenBMC"]["ClientID"]}'  ${session["Id"]}
-    END
-
-    [Return]  ${EMPTY}
-
-
 Create And Verify Session ClientID
     [Documentation]  Create redifish session with client id and verify it remain same.
     [Arguments]  ${client_id}  ${reboot_flag}=False
@@ -103,11 +92,12 @@ Create And Verify Session ClientID
     #               (e.g. True or False).
 
     ${client_ids}=  Split String  ${client_id}  ,
-    ${session_info}=  Create A Session With ClientID  ${client_ids}
+    ${session_info}=  Create Session With List Of ClientID  ${client_ids}
     Verify A Session Created With ClientID  ${client_ids}  ${session_info}
     Run Keyword If  '${reboot_flag}' == 'True'
     ...  Run Keywords  Redfish OBMC Reboot (off)  AND
     ...  Verify A Session Created With ClientID  ${client_ids}  ${session_info}
+    Redfish Delete Session  ${session_info}
 
 
 Set Client Origin IP
@@ -162,8 +152,8 @@ Verify A Non Admin Session Created With ClientID
     [Arguments]  ${client_ids}  ${session_ids}
 
     # Description of argument(s):
-    # client_id    External client name.
-    # session_id   This value is a session id.
+    # client_ids    External client name.
+    # session_ids   This value is a session id.
 
     # {
     #   "@odata.id": "/redfish/v1/SessionService/Sessions/H8q2ZKucSJ",
@@ -181,18 +171,15 @@ Verify A Non Admin Session Created With ClientID
     #   "UserName": "root"
     # }
 
-    FOR  ${client}  IN  @{client_ids}
-      ${session_id}=  Get Session Information By ClientID  ${client}  ${session_ids}
-      ${resp}=  Redfish Get Request  /redfish/v1/SessionService/Sessions/${session_id}
+    FOR  ${client}  ${session}  IN ZIP  ${client_ids}  ${session_ids}      
+      ${resp}=  Redfish Get Request  /redfish/v1/SessionService/Sessions/${session["Id"]}
       ${sessions}=     To Json    ${resp.content}
-      #Set Test Variable  ${sessions}  ${content["data"]}
       Rprint Vars  sessions
-      Log  ${sessions}
       @{words} =  Split String  ${sessions["ClientOriginIPAddress"]}  :
       ${ip_address}=  Get Running System IP
       Set Test Variable  ${temp_ipaddr}  ${words}[-1]
       Valid Value  client  ['${sessions["Oem"]["OpenBMC"]["ClientID"]}']
-      Valid Value  sessions["Id"]  ['${session_id}']
+      Valid Value  session["Id"]  ['${sessions["Id"]}']
       Valid Value  temp_ipaddr  ${ip_address}
     END
 
