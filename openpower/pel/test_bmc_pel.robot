@@ -43,8 +43,11 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
-${info_log_max_usage_percentage}  15
+${info_log_max_usage_percentage}    15
 
+${unreco_log_max_usage_percentage}  30
+
+${pred_log_max_usage_percentage}    30
 
 *** Test Cases ***
 
@@ -520,16 +523,33 @@ Verify Unrecoverable Error Log
     Should Contain  ${pel_records['${id}']['Sev']}  Unrecoverable
 
 
-Verify Informational Error Log Size When Error Log Exceeds Limit
+Verify Error Log Size When Error Log Exceeds Limit
     [Documentation]  Verify informational error log size when informational log size exceeds limit.
-    [Tags]  Verify_Informational_Error_Log_Error_Log_When_Size_Exceeds_Limit
+    [Tags]  Verify_Error_Log_Error_Log_When_Size_Exceeds_Limit
+    [Template]  Error Log Size When Error Log Exceeds Limit
+
+    # Log generator command        max percenteage for type of log
+    ${CMD_INFORMATIONAL_ERROR}     ${info_log_max_usage_percentage}
+    ${CMD_UNRECOVERABLE_ERROR}     ${unreco_log_max_usage_percentage}
+    ${CMD_PREDICTIVE_ERROR}        ${pred_log_max_usage_percentage}
+
+
+*** Keywords ***
+
+Error Log Size When Error Log Exceeds Limit
+    [Documentation]  Verify informational error log size when informational log size exceeds limit.
+    [Arguments]  ${CMD_ERROR}  ${log_max_usage_percentage}
+
+    # Description of argument(s):
+    # CMD_ERROR                     Command for specific error log generation.
+    # log_max_usage_percentage      Predefined maximum alloted percentage disk usage for the error log.
 
     # Initially remove all logs.
     Redfish Purge Event Log
 
     # Create 3001 information logs.
-    FOR  ${LOG_COUNT}  IN RANGE  0  3001
-      BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    FOR  ${count}  IN RANGE  0  3001
+      BMC Execute Command  ${CMD_ERROR}
     END
 
     # Delay for BMC to perform log compression when log size exceeds.
@@ -537,17 +557,15 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
 
     # Check logsize and verify that disk usage is around 15%.
     ${usage_percent}=  Get Disk Usage For Error Logs
-    ${percent_diff}=  Evaluate  ${usage_percent} - ${info_log_max_usage_percentage}
+    ${percent_diff}=  Evaluate  ${usage_percent} - ${log_max_usage_percentage}
     ${percent_diff}=   Evaluate  abs(${percent_diff})
     Should Be True  ${percent_diff} <= 0.5
 
 
-*** Keywords ***
-
 Get Disk Usage For Error Logs
     [Documentation]  Get disk usage percentage for error logs.
 
-    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du  /var/lib/phosphor-logging/errors
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du /var/lib/phosphor-logging/errors
 
     ${usage_output}=  Fetch From Left  ${usage_output}  \/
 
