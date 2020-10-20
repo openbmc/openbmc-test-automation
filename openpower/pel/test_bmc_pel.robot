@@ -43,8 +43,8 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
-${info_log_max_usage_percentage}  15
-
+${info_log_max_usage_percentage}    15
+${unreco_log_max_usage_percentage}  30 
 
 *** Test Cases ***
 
@@ -466,6 +466,7 @@ Verify Informational Error Log
     Should Contain  ${pel_records['${id}']['Sev']}  Informational
 
 
+<<<<<<< e8e9d0c262132c0b43ca70290273d025e1ad1f9a
 Verify Predictable Error Log
     [Documentation]  Create a predictive error and verify.
     [Tags]  Verify_Predictable_Error_Log
@@ -538,6 +539,28 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
     # Check logsize and verify that disk usage is around 15%.
     ${usage_percent}=  Get Disk Usage For Error Logs
     ${percent_diff}=  Evaluate  ${usage_percent} - ${info_log_max_usage_percentage}
+    ${percent_diff}=   Evaluate  abs(${percent_diff})
+    Should Be True  ${percent_diff} <= 0.5
+
+
+Verify Unrecoverable Error Log Size When Error Log Exceeds Limit
+    [Documentation]  Verify unrecoverable error log size when informational log size exceeds limit.
+    [Tags]  Verify_Unrecoverable_Error_Log_Error_Log_When_Size_Exceeds_Limit
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    # Create 3001 information logs.
+    FOR  ${LOG_COUNT}  IN RANGE  0  3001
+      BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
+    END
+
+    # Delay for BMC to perform log compression when log size exceeds.
+    Sleep  10s
+
+    # Check logsize and verify that disk usage is around 30%.
+    ${usage_percent}=  Get Disk Usage For Error Logs
+    ${percent_diff}=  Evaluate  ${usage_percent} - ${unreco_log_max_usage_percentage}
     ${percent_diff}=   Evaluate  abs(${percent_diff})
     Should Be True  ${percent_diff} <= 0.5
 
