@@ -41,10 +41,15 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
 
+${CMD_ERROR_PREDICTIVE}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 ${info_log_max_usage_percentage}  15
 
+${pred_log_max_usage_percentage}  30
 
 *** Test Cases ***
 
@@ -538,6 +543,28 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
     # Check logsize and verify that disk usage is around 15%.
     ${usage_percent}=  Get Disk Usage For Error Logs
     ${percent_diff}=  Evaluate  ${usage_percent} - ${info_log_max_usage_percentage}
+    ${percent_diff}=   Evaluate  abs(${percent_diff})
+    Should Be True  ${percent_diff} <= 0.5
+
+
+Verify Predictable Error Log Size When Error Log Exceeds Limit
+    [Documentation]  Verify predictable error log size when informational log size exceeds limit.
+    [Tags]  Verify_Predictable_Error_Log_Error_Log_When_Size_Exceeds_Limit
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    # Create 3001 information logs.
+    FOR  ${LOG_COUNT}  IN RANGE  0  3001
+      BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    END
+
+    # Delay for BMC to perform log compression when log size exceeds.
+    Sleep  10s
+
+    # Check logsize and verify that disk usage is around 30%.
+    ${usage_percent}=  Get Disk Usage For Error Logs
+    ${percent_diff}=  Evaluate  ${usage_percent} - ${pred_log_max_usage_percentage}
     ${percent_diff}=   Evaluate  abs(${percent_diff})
     Should Be True  ${percent_diff} <= 0.5
 
