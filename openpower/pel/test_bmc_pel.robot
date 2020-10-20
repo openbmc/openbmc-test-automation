@@ -41,6 +41,12 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
 
+${CMD_ERROR_PREDICTIVE}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
+
+${CMD_DISPLAY_DISK_USAGE}  du -h /var/lib/phosphor-logging/errors | cut -c 0-3
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 ${info_log_max_usage_percentage}  15
@@ -540,6 +546,20 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
     ${percent_diff}=  Evaluate  ${usage_percent} - ${info_log_max_usage_percentage}
     ${percent_diff}=   Evaluate  abs(${percent_diff})
     Should Be True  ${percent_diff} <= 0.5
+
+
+Verify Maximum Predictable Error Log
+    Redfish Purge Event Log
+
+    # Create 3001 predictive logs.
+    : FOR  ${LOG_COUNT}  IN RANGE  0  3001
+    \  BMC Execute Command  ${CMD_ERROR_PREDICTIVE}
+
+    Sleep  10s
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  ${CMD_DISPLAY_DISK_USAGE}
+    ${usage_percent}=  Evaluate  ${usage_output}/20 * 100
+
+    Should Be Equal  ${usage_percent}  ${30.5}
 
 
 *** Keywords ***
