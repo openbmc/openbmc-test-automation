@@ -11,7 +11,7 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_sol_console_heading}     //h1[text()="Serial over LAN console"]
+${xpath_sol_console_heading}     //h1[text()="Serial over LAN (SOL) console"]
 ${xpath_open_in_new_tab_button}  //button[contains(text(),'Open in new tab')]
 
 
