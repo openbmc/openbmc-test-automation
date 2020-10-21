@@ -175,6 +175,6 @@ Configure Invalid Network Address And Verify
 
     Wait Until Page Contains Element  ${locator}
     Input Text  ${locator}  ${invalid_address}
-    Element Should Be Disabled  ${xpath_network_save_settings}
+    Click Element  ${xpath_network_save_settings}
     Page Should Contain  Invalid format
 
