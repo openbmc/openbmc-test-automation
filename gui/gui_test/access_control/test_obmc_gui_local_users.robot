@@ -84,9 +84,10 @@ Verify Existence Of All Button And Fields In Add User
 Verify Existence Of All Buttons And Fields In Account Policy Settings
     [Documentation]  Verify existence of all buttons and fields in account policy settings page.
     [Tags]  Verify_Existence_Of_All_Buttons_And_Fields_In_Account_Policy_Settings
+    [Teardown]  Click Element  ${xpath_cancel_button}
 
     Click Element  ${xpath_account_policy}
-    Wait Until Page Contains  ${xpath_policy_settings_header}
+    Wait Until Page Contains Element  ${xpath_policy_settings_header}
     Page Should Contain Element  ${xpath_auto_unlock}
     Page Should Contain Element  ${xpath_manual_unlock}
     Page Should Contain Element  ${xpath_max_failed_login}
