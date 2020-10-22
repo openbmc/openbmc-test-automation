@@ -140,6 +140,16 @@ Delete All Dumps
     END
 
 
+Redfish Delete BMC Dump
+    [Documentation]  Deletes a given BMC dump via Redfish..
+    [Arguments]  ${dump_id}
+
+    # Description of Argument(s):
+    # dump_id  An integer value that identifies a particular dump (e.g. 1, 3).
+
+    Redfish.Delete  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+
+
 Redfish Delete All BMC Dumps
     [Documentation]  Delete all BMC dumps via Redfish.
 
