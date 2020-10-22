@@ -64,6 +64,30 @@ Verify Dump Persistency On BMC Reset
     Lists Should Be Equal  ${dump_entries_before}  ${dump_entries_after}
 
 
+Delete User Initiated BMC Dump And Verify
+    [Documentation]  Delete user initiated BMC dump and verify.
+    [Tags]  Delete_User_Initiated_BMC_Dump_And_Verify
+
+    ${dump_id}=  Create User Initiated BMC Dump
+    Redfish Delete BMC Dump  ${dump_id}
+
+    ${dump_entries}=  Get BMC Dump Entries
+    Should Be Empty  ${dump_entries}
+
+
+Delete All User Initiated BMC Dumps And Verify
+    [Documentation]  Delete all user initiated BMC dumps and verify.
+    [Tags]  Delete_All_User_Initiated_BMC_Dumps_And_Verify
+
+    # Create some BMC dump.
+    Create User Initiated BMC Dump
+    Create User Initiated BMC Dump
+
+    Redfish Delete All BMC Dumps
+    ${dump_entries}=  Get BMC Dump Entries
+    Should Be Empty  ${dump_entries}
+
+
 *** Keywords ***
 
 Create User Initiated BMC Dump
