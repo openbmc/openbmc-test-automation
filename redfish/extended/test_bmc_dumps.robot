@@ -88,6 +88,43 @@ Delete All User Initiated BMC Dumps And Verify
     Should Be Empty  ${dump_entries}
 
 
+Create Two User Initiated BMC Dumps
+    [Documentation]  Create two user initiated BMC dumps.
+    [Tags]  Create_Two_User_Initiated_BMC_Dumps
+
+    ${dump_id1}=  Create User Initiated BMC Dump
+    ${dump_id2}=  Create User Initiated BMC Dump
+
+    ${dump_entries}=  Get BMC Dump Entries
+    Length Should Be  ${dump_entries}  2
+    Should Contain  ${dump_entries}  ${dump_id1}
+    Should Contain  ${dump_entries}  ${dump_id2}
+
+
+Create Two User Initiated BMC Dumps And Delete One
+    [Documentation]  Create two dumps and delete the first.
+    [Tags]  Create_Two_User_Initiated_BMC_Dumps_And_Delete_One
+
+    ${dump_id1}=  Create User Initiated BMC Dump
+    ${dump_id2}=  Create User Initiated BMC Dump
+
+    Redfish Delete BMC Dump  ${dump_id1}
+
+    ${dump_entries}=  Get BMC Dump Entries
+    Length Should Be  ${dump_entries}  1
+    List Should Contain Value  ${dump_entries}  ${dump_id2}
+
+
+Create And Delete User Initiated BMC Dump Multiple Times
+    [Documentation]  Create and delete user initiated BMC dump multiple times.
+    [Tags]  Create_And_Delete_User_Initiated_BMC_Dump_Multiple_Times
+
+    FOR  ${INDEX}  IN  1  5
+      ${dump_id}=  Create User Initiated BMC Dump
+      Redfish Delete BMC Dump  ${dump_id}
+    END
+
+
 *** Keywords ***
 
 Create User Initiated BMC Dump
