@@ -358,7 +358,7 @@ Verify Procedure And Symbolic FRU Callout
     Valid Value  pel_callout_section['Callouts'][0]['FRU Type']  ['Maintenance Procedure Required']
     Should Contain  ${pel_callout_section['Callouts'][0]['Priority']}  Mandatory
     # Verify if "Procedure Number" field of PEL has an alphanumeric value.
-    Should Match Regexp  ${pel_callout_section['Callouts'][0]['Procedure Number']}  [a-zA-Z0-9]
+    Should Match Regexp  ${pel_callout_section['Callouts'][0]['Procedure']}  [a-zA-Z0-9]
 
     # Verify procedural callout info.
 
