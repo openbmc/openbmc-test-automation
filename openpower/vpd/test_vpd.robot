@@ -48,8 +48,9 @@ Verify VPD Via Busctl
     # Verify PrettyName
     ${busctl_output}=  BMC Execute Command
     ...  ${CMD_INVENTORY_PREFIX}${component} xyz.openbmc_project.Inventory.Item PrettyName
-    Should Be Equal  ${busctl_output[0].split('"')[1].strip('"')}
-    ...  ${VPD_DETAILS['${component}']['DR']}
+    #Should Be Equal  `${busctl_output[0].split('"')[1].strip('"')}`
+    #...  `${VPD_DETAILS['${component}']['DR']}`
+    Should Contain  ${busctl_output[0].split('"')[1].strip('"')}  ${VPD_DETAILS['${component}']['DR']}
 
     # Verify Part Number
     ${busctl_output}=  BMC Execute Command
