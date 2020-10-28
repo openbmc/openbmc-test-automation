@@ -6,6 +6,7 @@ Resource             ../../lib/resource.robot
 Resource             ../../lib/openbmc_ffdc.robot
 Resource             ../../lib/bmc_redfish_utils.robot
 Resource             ../../lib/external_intf/management_console_utils.robot
+Library              ../../lib/bmc_network_utils.py
 
 Suite Setup          Run Keyword And Ignore Error  Delete All Redfish Sessions
 Suite Teardown       Redfish.Logout
@@ -208,6 +209,16 @@ Get Empty Lock Records For Session Where No Locks Acquired
     # client_id
     HMCID-01
 
+
+Get Lock Records For Multiple Session
+    [Documentation]  Get lock records of multiple session.
+    [Tags]  Get_Lock_Records_For_Multiple_Session
+    [Template]  Verify Lock Records Of Multiple Session
+
+    # client_ids         lock_type
+    HMCID-01,HMCID-02    ReadCase1,ReadCase1
+
+
 *** Keywords ***
 
 Create Redfish Session With ClientID
@@ -399,16 +410,6 @@ Verify Lock On Resource
       Valid Value  session_info['SessionIDs']  ['${lock['SessionID']}']
       Should Be Equal As Integers  ${tran_id['TransactionID']}  ${lock['TransactionID']}
     END
-
-
-Redfish Delete Session
-    [Documentation]  Redfish delete session.
-    [Arguments]  ${session_info}
-
-    # Description of argument(s):
-    # session_info      Session information in dict.
-
-    Redfish.Delete  /redfish/v1/SessionService/Sessions/${session_info["SessionIDs"]}
 
 
 Acquire Lock On Resource
@@ -752,3 +753,116 @@ Verify No Locks Records For Session With No Acquired Lock
     ${trans_id_emptylist}=  Create List
     Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
     Redfish Delete Session  ${session_info}
+
+
+Create List Of Session ID
+    [Documentation]  Create session id list from session dict info.
+    [Arguments]  ${session_dict_info}
+
+    # Description of argument(s):
+    # session_dict_info      Session information in dict.
+
+    @{session_id_list}=  Create List
+
+    FOR  ${session}  IN  @{session_dict_info}
+      Append To List  ${session_id_list}  ${session["SessionIDs"]}
+    END
+
+    ${num_id}=  Get Length  ${session_id_list}
+    Should Not Be Equal As Integers  ${num_id}  ${0}
+
+    ${session_id_list}=  Evaluate  json.dumps(${session_id_list})  json
+
+    [Return]  ${session_id_list}
+
+
+Get Locks List On Resource With Session List
+    [Documentation]  Get locks list from session of list.
+    [Arguments]  ${session_id_list}  ${exp_status_code}=${HTTP_OK}
+
+    # Description of argument(s):
+    # session_id_list    Session ids list.
+    # exp_status_code    Expected HTTP status code.
+
+    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.GetLockList
+    ...  data={"SessionIDs": ${session_id_list}}
+    ${locks}=  Evaluate  json.loads('''${resp.text}''')  json
+
+    [Return]  ${locks}
+
+
+Verify List Of Session Lock On Resource
+    [Documentation]  Verify list of lock record from list of sessions.
+    [Arguments]  ${session_dict_info}  ${transaction_id_list}
+
+    # Description of argument(s):
+    # session_dict_info      Session information in dict.
+    # transaction_id_list    Transaction id in list stored in dict.
+
+    ${session_id_list}=  Create List Of Session ID  ${session_dict_info}
+    ${lock_list_resp}=  Get Locks List On Resource With Session List  ${session_id_list}
+    ${lock_list}=  Set Variable  ${lock_list_resp['Records']}
+
+    FOR  ${session_id}  ${tran_id}  ${lock_record}  IN ZIP  ${session_dict_info}  ${transaction_id_list}  ${lock_list}
+      Valid Value  session_id['SessionIDs']  ['${lock_record['SessionID']}']
+      Should Be Equal As Integers  ${tran_id['TransactionID']}  ${lock_record['TransactionID']}
+    END
+
+
+Verify Lock Records Of Multiple Session
+    [Documentation]  Verify all records found for a multiple sessions.
+    [Arguments]  ${client_ids}  ${lock_type}
+
+    # Description of argument(s):
+    # client_ids    This client id can contain string value
+    #               (e.g. 12345, "HMCID").
+    # lock_type     Read lock or Write lock.
+
+    ${client_id_list}=  Split String  ${client_ids}  ,
+    ${lock_type_list}=  Split String  ${lock_type}  ,
+    ${trans_id_list1}=  Create List
+    ${trans_id_list2}=  Create List
+
+    ${session_dict_list}=  Create List
+    ${lock_list}=  Create List
+
+    ${client_id1}=  Create List
+    Append To List  ${client_id1}  ${client_id_list}[0]
+    ${session_info1}=  Create Session With List Of ClientID  ${client_id1}
+    Append To List  ${session_dict_list}  ${session_info1}[0]
+    Verify A Session Created With ClientID  ${client_id1}  ${session_info1}
+
+    ${trans_id}=  Redfish Post Acquire Lock  ${lock_type_list}[0]
+    Append To List  ${trans_id_list1}  ${trans_id}
+    Append To List  ${lock_list}  ${trans_id}
+    Verify Lock On Resource  ${session_info1}[0]  ${trans_id_list1}
+
+
+    ${client_id2}=  Create List
+    Append To List  ${client_id2}  ${client_id_list}[1]
+    ${session_info2}=  Create Session With List Of ClientID  ${client_id2}
+    Append To List  ${session_dict_list}  ${session_info2}[0]
+    Verify A Session Created With ClientID  ${client_id2}  ${session_info2}
+
+    ${trans_id}=  Redfish Post Acquire Lock  ${lock_type_list}[1]
+    Append To List  ${trans_id_list2}  ${trans_id}
+    Append To List  ${lock_list}  ${trans_id}
+    Verify Lock On Resource  ${session_info2}[0]  ${trans_id_list2}
+
+    Verify List Of Session Lock On Resource  ${session_dict_list}  ${lock_list}
+
+    ${session_token}=  Get From Dictionary  ${session_info1}[0]  SessionToken
+    Set Global Variable  ${XAUTH_TOKEN}  ${session_token}
+
+    Release Locks On Resource  ${session_info1}  ${trans_id_list1}  release_lock_type=Transaction
+
+    ${session_token}=  Get From Dictionary  ${session_info2}[0]  SessionToken
+    Set Global Variable  ${XAUTH_TOKEN}  ${session_token}
+
+    Release Locks On Resource  ${session_info2}  ${trans_id_list2}  release_lock_type=Transaction
+
+    ${trans_id_emptylist}=  Create List
+    Verify Lock On Resource  ${session_info1}[0]  ${trans_id_emptylist}
+    Verify Lock On Resource  ${session_info2}[0]  ${trans_id_emptylist}
+
+    Redfish Delete List Of Session  ${session_dict_list}
