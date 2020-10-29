@@ -60,6 +60,103 @@ Reset BIOS Via Redfish
     Redfish.Post  ${target}  valid_status_codes=[${HTTP_OK}]
 
 
+Redfish Delete Session
+    [Documentation]  Redfish delete session.
+    [Arguments]  ${session_info}
+
+    # Description of argument(s):
+    # session_info      Session information are stored in dictionary.
+
+    # ${session_info} = {
+    #     'SessionIDs': 'XXXXXXXXX',
+    #     'ClientID': 'XXXXXX',
+    #     'SessionToken': 'XXXXXXXXX',
+    #     'SessionResp': session response from redfish login
+    # }
+
+    # SessionIDs   : Session IDs
+    # ClientID     : Client ID
+    # SessionToken : Session token
+    # SessionResp  : Response of creating an redfish login session
+
+    Redfish.Delete  /redfish/v1/SessionService/Sessions/${session_info["SessionIDs"]}
+
+
+Verify Redfish Session Deleted
+    [Documentation]  Verify the redfish session is deleted.
+    [Arguments]  ${session_info}
+
+    # Description of argument(s):
+    # session_info    Session information are stored in dictionary.
+
+    # ${session_info} = {
+    #     'SessionIDs': 'XXXXXXXXX',
+    #     'ClientID': 'XXXXXX',
+    #     'SessionToken': 'XXXXXXXXX',
+    #     'SessionResp': session response from redfish login
+    # }
+
+    # SessionIDs   : Session IDs
+    # ClientID     : Client ID
+    # SessionToken : Session token
+    # SessionResp  : Response of creating an redfish login session
+
+    ${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions
+
+    FOR  ${session}  IN  @{sessions['Members']}
+      Should Not Be Equal As Strings  session  ['/redfish/v1/SessionService/Sessions/${session_info["SessionIDs"]}']
+    END
+
+
+Redfish Delete List Of Session
+    [Documentation]  Redfish delete session from list of session records, individual session information
+    ...              are stored in dictionary.
+    [Arguments]  ${session_info_list}
+
+    # Description of argument(s):
+    # session_info_list    List contains individual session record are stored in dictionary.
+
+    # ${session_info_list} = [{
+    #     'SessionIDs': 'XXXXXXXXX',
+    #     'ClientID': 'XXXXXX',
+    #     'SessionToken': 'XXXXXXXXX',
+    #     'SessionResp': session response from redfish login
+    # }]
+
+    # SessionIDs   : Session IDs
+    # ClientID     : Client ID
+    # SessionToken : Session token
+    # SessionResp  : Response of creating an redfish login session
+
+    FOR  ${session_record}  IN  @{session_info_list}
+      Redfish.Delete  /redfish/v1/SessionService/Sessions/${session_record["SessionIDs"]}
+    END
+
+
+Verify Redfish List Of Session Deleted
+    [Documentation]  Verify all the list of redfish session is deleted.
+    [Arguments]  ${session_info_list}
+
+    # Description of argument(s):
+    # session_info_list    List contains individual session record are stored in dictionary.
+
+    # ${session_info_list} = [{
+    #     'SessionIDs': 'XXXXXXXXX',
+    #     'ClientID': 'XXXXXX',
+    #     'SessionToken': 'XXXXXXXXX',
+    #     'SessionResp': session response from redfish login
+    # }]
+
+    # SessionIDs   : Session IDs
+    # ClientID     : Client ID
+    # SessionToken : Session token
+    # SessionResp  : Response of creating an redfish login session
+
+    FOR  ${session_record}  IN  @{session_info_list}
+      Verify Redfish Session Deleted  ${session_record}
+    END
+
+
 Delete All Redfish Sessions
     [Documentation]  Delete all active redfish sessions.
 
@@ -74,6 +171,7 @@ Delete All Redfish Sessions
     FOR  ${session}  IN  @{resp_list}
         Redfish.Delete  ${session}
     END
+
 
 Get Valid FRUs
     [Documentation]  Return a dictionary containing all of the valid FRU records for the given fru_type.
