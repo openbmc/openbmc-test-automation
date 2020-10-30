@@ -542,6 +542,27 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
     Should Be True  ${percent_diff} <= 0.5
 
 
+Verify Listing Information Error
+    [Documentation]  Verify that information error logs can only be listed using -lfh option of peltool.
+    [Tags]  Verify_Listing_Information_Error
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+    BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+
+    # Generate informational logs and verify that it would not get listed by peltool's list command.
+    ${pel_records}=  peltool  -l
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    Should Not Contain  ${pel_records['${id}']['Sev']}  Informational
+
+    # Verify that information logs get listed using peltool's list command with -lfh option.
+    ${pel_records}=  peltool  -lfh
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    Should Contain  ${pel_records['${id}']['Sev']}  Informational
+
+
 *** Keywords ***
 
 Get Disk Usage For Error Logs
