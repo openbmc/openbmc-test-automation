@@ -556,6 +556,27 @@ Verify Reverse Order Of PEL Logs
     Should Be True  ${pel_ids}[0] > ${pel_ids}[1]
 
 
+Verify Total PEL Count
+    [Documentation]  Verify total PEL count returned by peltool command.
+    [Tags]  Verify_Total_PEL_Count
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    # Generate a random number between 1-20.
+    ${random}=  Evaluate  random.randint(1, 20)  modules=random
+
+    # Generate predictive error log multiple times.
+    FOR  ${count}  IN RANGE  0  ${random}
+      BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    END
+
+    # Check PEL log count via peltool command and compare it with actual generated log count.
+    ${pel_records}=  peltool  -n
+
+    Should Be Equal  ${pel_records['Number of PELs found']}   ${random}
+
+
 *** Keywords ***
 
 Get Disk Usage For Error Logs
