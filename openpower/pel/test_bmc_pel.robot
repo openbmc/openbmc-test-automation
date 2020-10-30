@@ -541,6 +541,26 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
     ${percent_diff}=   Evaluate  abs(${percent_diff})
     Should Be True  ${percent_diff} <= 0.5
 
+Verify Hidden Information Error Log
+    [Documentation]  Verify that information error log are hidden.
+    [Tags]  Verify_Hidden_Information_Error_Log
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+    BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+
+    # Informational logs are generally hidden, it would not be listed by peltool with default parameters.
+    ${pel_records}=  peltool  -l
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    Should Not Contain  ${pel_records['${id}']['Sev']}  Informational
+
+    # Informational logs are generally hidden, it would be listed using appropriate paremeters.
+    ${pel_records}=  peltool  -lfh
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    Should Contain  ${pel_records['${id}']['Sev']}  Informational
+
 
 *** Keywords ***
 
