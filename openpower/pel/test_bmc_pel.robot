@@ -542,6 +542,21 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
     Should Be True  ${percent_diff} <= 0.5
 
 
+Verify PEL Delete
+    [Documentation]  Verify if PEL command can delete the log based on id.
+    [Tags]  Verify_PEL_Delete
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    Peltool  -d ${id}
+    ${pel_data}=  peltool -i ${id}
+    Should Contain  ${pel_data}  PEL not found 
+
+
 *** Keywords ***
 
 Get Disk Usage For Error Logs
