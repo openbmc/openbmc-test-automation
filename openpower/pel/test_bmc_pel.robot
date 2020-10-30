@@ -542,6 +542,20 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
     Should Be True  ${percent_diff} <= 0.5
 
 
+Verify Reverse PEL Logs
+    [Documentation]  Verify pel reverse command works properly.
+    [Tags]  Verify_Reverse_PEL_Logs
+
+    Redfish Purge Event Log
+    BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
+    BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+
+    ${pel_records}=  Peltool  -rl
+    ${ids}=  Get Dictionary Keys   ${pel_records}   False
+
+    Should Be True  ${ids}[0] > ${ids}[1]
+
+
 *** Keywords ***
 
 Get Disk Usage For Error Logs
