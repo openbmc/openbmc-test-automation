@@ -542,6 +542,13 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
     Should Be True  ${percent_diff} <= 0.5
 
 
+Verify Reverse PEL Logs
+    [Documentation]  Verify pel reverse command works properly.
+    [Tags]  Verify_Reverse_PEL_Logs
+
+    ${pel_records}=  Peltool  -rl
+    # [TBD]
+
 *** Keywords ***
 
 Get Disk Usage For Error Logs
