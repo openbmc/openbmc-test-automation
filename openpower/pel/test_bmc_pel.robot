@@ -542,6 +542,27 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
     Should Be True  ${percent_diff} <= 0.5
 
 
+Verify Total PEL Count
+    [Documentation]  Verify total PEL count returned by peltool command.
+    [Tags]  Verify_Total_PEL_Count
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+
+    # Generate a random number between 10-20.
+    ${random}=  Evaluate  random.randint(10, 20)  modules=random
+
+    # Generate the logs with log count being generated random number.
+    FOR  ${LOG_COUNT}  IN RANGE  0  ${random}
+      BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    END
+
+    # Count with peltool and tally with actual generated logs.
+    ${pel_records}=  peltool  -n
+
+    Should Be Equal  ${pel_records['Number of PELs found']}   ${random}
+
+
 *** Keywords ***
 
 Get Disk Usage For Error Logs
