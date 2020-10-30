@@ -577,12 +577,33 @@ Verify Total PEL Count
     Should Be Equal  ${pel_records['Number of PELs found']}   ${random}
 
 
+Verify Listing Information Error
+    [Documentation]  Verify that information error logs can only be listed using -lfh option of peltool.
+    [Tags]  Verify_Listing_Information_Error
+
+    # Initially remove all logs.
+    Redfish Purge Event Log
+    BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+
+    # Generate informational logs and verify that it would not get listed by peltool's list command.
+    ${pel_records}=  peltool  -l
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    Should Not Contain  ${pel_records['${id}']['Sev']}  Informational
+
+    # Verify that information logs get listed using peltool's list command with -lfh option.
+    ${pel_records}=  peltool  -lfh
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    Should Contain  ${pel_records['${id}']['Sev']}  Informational
+
+
 *** Keywords ***
 
 Get Disk Usage For Error Logs
     [Documentation]  Get disk usage percentage for error logs.
 
-    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du  /var/lib/phosphor-logging/errors
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du /var/lib/phosphor-logging/errors
 
     ${usage_output}=  Fetch From Left  ${usage_output}  \/
 
