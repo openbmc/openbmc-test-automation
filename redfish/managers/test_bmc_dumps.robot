@@ -34,6 +34,27 @@ Verify User Initiated BMC Dump When Host Booted
     List Should Contain Value  ${dump_entries}  ${dump_id}
 
 
+Verify User Initiated BMC Dump Size
+    [Documentation]  Verify user initiated BMC dump size is under 200 KB.
+    [Tags]  Verify_User_Initiated_BMC_Dump_Size
+
+    ${dump_id}=  Create User Initiated BMC Dump
+    ${resp}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+
+    # Example of response from above Redfish GET request.
+    # "@odata.type": "#LogEntry.v1_7_0.LogEntry",
+    # "AdditionalDataSizeBytes": 31644,
+    # "AdditionalDataURI": "/redfish/v1/Managers/bmc/LogServices/Dump/attachment/9",
+    # "Created": "2020-10-23T06:32:53+00:00",
+    # "DiagnosticDataType": "Manager",
+    # "EntryType": "Event",
+    # "Id": "9",
+    # "Name": "BMC Dump Entry"
+
+    # Max size for dump is 200 KB = 200x1024 Byte.
+    Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 204800
+
+
 Verify Dump Persistency On Dump Service Restart
     [Documentation]  Create user dump, restart dump manager service and verify dump
     ...  persistency.
