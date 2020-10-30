@@ -556,6 +556,18 @@ Verify Reverse Order Of PEL Logs
     Should Be True  ${pel_ids}[0] > ${pel_ids}[1]
 
 
+Verify PEL Delete
+    [Documentation]  Verify that peltool command can delete PEL log based on id.
+    [Tags]  Verify_PEL_Delete
+
+    BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    Peltool  -d ${id}
+    ${output}=  peltool -i ${id}
+    Should Contain  ${output}  PEL not found
+
+
 *** Keywords ***
 
 Get Disk Usage For Error Logs
