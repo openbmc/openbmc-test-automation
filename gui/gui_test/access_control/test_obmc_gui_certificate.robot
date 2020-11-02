@@ -27,6 +27,7 @@ ${xpath_input_challenge_password}  //*[@data-test-id='modalGenerateCsr-input-cha
 ${xpath_input_contact_person}      //*[@data-test-id='modalGenerateCsr-input-contactPerson']
 ${xpath_input_email_address}       //*[@data-test-id='modalGenerateCsr-input-emailAddress']
 ${xpath_generate_csr_submit}       //*[@data-test-id='modalGenerateCsr-button-ok']
+${xpath_csr_cancel_button}         //button[contains(text(),"Cancel")]
 ${xpath_input_alternate_name}      //input[@id='alternate-name']
 ${xpath_select_algorithm_button}   //*[@data-test-id='modalGenerateCsr-select-keyPairAlgorithm']
 
@@ -57,22 +58,23 @@ Verify Existence Of Add Certificate Button
 Verify Generate CSR Certificate Button
     [Documentation]  Verify existence of all the fields of CSR generation.
     [Tags]  Verify_Generate_CSR_Certificate_Button
+    [Teardown]  Click Element  ${xpath_csr_cancel_button}
 
-     Page Should Contain Element  ${xpath_generate_csr_button}
-     Click Element  ${xpath_generate_csr_button}
-     Wait Until Page Contains Element  ${xpath_generate_csr_heading}
-     Page Should Contain Element  ${xpath_select_certificate_type}
-     Page Should Contain Element  ${xpath_select_country}
-     Page Should Contain Element  ${xpath_input_state}
-     Page Should Contain Element  ${xpath_input_city}
-     Page Should Contain Element  ${xpath_input_company_name}
-     Page Should Contain Element  ${xpath_input_common_name}
-     Page Should Contain Element  ${xpath_input_challenge_password}
-     Page Should Contain Element  ${xpath_input_contact_person}
-     Page Should Contain Element  ${xpath_input_email_address}
-     Page Should Contain Element  ${xpath_input_alternate_name}
-     Page Should Contain Element  ${xpath_select_algorithm_button}
-     Page Should Contain Element  ${xpath_generate_csr_submit}
+    Page Should Contain Element  ${xpath_generate_csr_button}
+    Click Element  ${xpath_generate_csr_button}
+    Wait Until Page Contains Element  ${xpath_generate_csr_heading}
+    Page Should Contain Element  ${xpath_select_certificate_type}
+    Page Should Contain Element  ${xpath_select_country}
+    Page Should Contain Element  ${xpath_input_state}
+    Page Should Contain Element  ${xpath_input_city}
+    Page Should Contain Element  ${xpath_input_company_name}
+    Page Should Contain Element  ${xpath_input_common_name}
+    Page Should Contain Element  ${xpath_input_challenge_password}
+    Page Should Contain Element  ${xpath_input_contact_person}
+    Page Should Contain Element  ${xpath_input_email_address}
+    Page Should Contain Element  ${xpath_input_alternate_name}
+    Page Should Contain Element  ${xpath_select_algorithm_button}
+    Page Should Contain Element  ${xpath_generate_csr_submit}
 
 
 Verify Installed CA Certificate
