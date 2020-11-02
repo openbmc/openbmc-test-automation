@@ -49,8 +49,8 @@ Verify Search Text Entered
     [Tags]  Verify_Search_Text_Entered
 
     Wait Until Page Contains Element  ${xpath_sensors_search}
-    Input Text  ${xpath_sensors_search}  temp
-    Wait Until Page Contains  p0 vcs temp  timeout=15
+    Input Text  ${xpath_sensors_search}  fan
+    Wait Until Page Contains  fan0 0  timeout=15
 
 
 Verify Sensors Filter From Server Health Clickable
