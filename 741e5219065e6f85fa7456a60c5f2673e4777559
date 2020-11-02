@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44bf31bb_06198932",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-02T14:42:29Z",
+      "side": 1,
+      "message": "Need to come up with new use cases.\nNow behavior is changed and settings will have to change on the fly.",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 19
+      },
+      "revId": "741e5219065e6f85fa7456a60c5f2673e4777559",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
