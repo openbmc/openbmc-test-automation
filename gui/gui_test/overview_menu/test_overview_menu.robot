@@ -129,7 +129,7 @@ Verify Serial Over LAN Console Button In Overview Page
     [Tags]  Verify_Serial_Over_LAN_Console_Button_In_Overview_Page
 
     Click Element  ${xpath_launch_serial_over_lan}
-    Wait Until Page Contains Element  ${xpath_sol_header}
+    Wait Until Page Contains Element  ${xpath_sol_console_heading}
 
 
 Verify Server LED Turn On
