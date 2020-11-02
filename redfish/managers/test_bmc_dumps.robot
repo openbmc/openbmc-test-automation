@@ -125,6 +125,28 @@ Create And Delete User Initiated BMC Dump Multiple Times
     END
 
 
+Verify Maximum BMC Dump Creation
+    [Documentation]  Create maximum BMC dump and verify error when dump runs
+    ...  out of space.
+    [Tags]  Verify_Maximum_BMC_Dump_Creation
+    [Teardown]  Redfish Delete All BMC Dumps
+
+    # Maximum allowed space for dump is 1024K. BMC typically hold 8-14 dumps
+    # before running out of this dump space. So trying to create dumps in 20
+    # iterations to run out of space.
+
+    FOR  ${n}  IN RANGE  0  20
+      Create User Initiated BMC Dump
+      ${dump_space}=  Get Disk Usage For Dumps
+      Exit For Loop If  ${dump_space} > 1024
+    END
+
+    # Check error while creating dump when dump size is full.
+    ${payload}=  Create Dictionary  DiagnosticDataType=Manager
+    Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ...  body=${payload}  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR}]
+
+
 *** Keywords ***
 
 Create User Initiated BMC Dump
@@ -176,6 +198,20 @@ Get BMC Dump Entries
     END
 
     [Return]  ${dump_ids}
+
+
+Get Disk Usage For Dumps
+    [Documentation]  Return disk usage in kilobyte for BMC dumps.
+
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du -s /var/lib/phosphor-debug-collector/dumps
+
+    # Example of output from above BMC cli command.
+    # $ du -s /var/lib/phosphor-debug-collector/dumps
+    # 516    /var/lib/phosphor-debug-collector/dumps
+
+    ${usage_output}=  Fetch From Left  ${usage_output}  \/
+    Log  ${usage_output}
+    [return]  ${usage_output}
 
 
 Is Task Completed
