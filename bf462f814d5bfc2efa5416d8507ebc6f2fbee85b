@@ -46,6 +46,53 @@
       "revId": "bf462f814d5bfc2efa5416d8507ebc6f2fbee85b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d666d18b_2f00f729",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-03T04:57:50Z",
+      "side": 1,
+      "message": "OK, verify that suggestion here.",
+      "parentUuid": "8c09a21e_142c861b",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 41
+      },
+      "revId": "bf462f814d5bfc2efa5416d8507ebc6f2fbee85b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "566f1c28_0836d645",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-03T04:57:50Z",
+      "side": 1,
+      "message": "Verify that suggestion.\nIs it possible to verify it does not allow any other operation other than changing passwd?",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 41
+      },
+      "revId": "bf462f814d5bfc2efa5416d8507ebc6f2fbee85b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
