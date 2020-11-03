@@ -153,6 +153,7 @@ class resource_variables():
     xpath_server_power_operations_sub_menu = "//a[@href='#/control/server-power-operations']"
     xpath_sol_sub_menu = "//a[@href='#/control/serial-over-lan']"
     xpath_kvm_sub_menu = "//a[@href='#/control/kvm']"
+    xpath_virtual_media_sub_menu = "//a[@href='#/control/virtual-media']"
 
     # xpath for configuration menu
     xpath_server_configuration = "//*[@data-test-id='nav-button-configuration']"
