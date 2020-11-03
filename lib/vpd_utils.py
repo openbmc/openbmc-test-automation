@@ -44,5 +44,8 @@ def vpdtool(option_string, **bsu_options):
 
     bsu_options = fa.args_to_objects(bsu_options)
     out_buf, stderr, rc = bsu.bmc_execute_command('vpd-tool ' + option_string, **bsu_options)
-    out_buf = json.loads(out_buf)
-    return out_buf
+
+    # Only return output if its a VPD read command.
+    if '-r' in option_string:
+        out_buf = json.loads(out_buf)
+        return out_buf
