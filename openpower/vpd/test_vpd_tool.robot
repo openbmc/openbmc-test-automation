@@ -55,7 +55,10 @@ Verify VPD Field Write
 
     ${components}=  Get Dictionary Keys  ${VPD_DETAILS}
     FOR  ${component}  IN  @{components}
-        Verify VPD Field Write Operation  ${component}
+        # VPD fields "DR", "CC" and "FN" will be added later.
+        @{vpd_fields}=  Create List  SN  PN
+        ${field}=  Evaluate  random.choice($vpd_fields)  random
+        Verify VPD Field Write Operation  ${component}  ${field}
     END
 
 
@@ -126,24 +129,35 @@ Verify VPD Field Read Operation
 
 
 Verify VPD Field Write Operation
-    [Documentation]  Verify writing all VPD fields for given compoment via vpdtool.
-    [Arguments]  ${component}
+    [Documentation]  Verify writing VPD fields for given component via vpdtool.
+    [Arguments]  ${component}  ${field}
+    [Teardown]  Restore VPD Value  ${component}  ${field}  ${old_field_value}
     # Description of arguments:
-    # component       VDP component (e.g. /system/chassis/motherboard/vdd_vrm1).
+    # component       VPD component (e.g. /system/chassis/motherboard/vdd_vrm1).
+    # field           VPD component field (e.g. PN, SN)
 
-    # Verification of "CC" and "FN" will be added later.
-    @{vpd_fields}=  Create List  DR  SN  PN
+    ${vpd_records}=  Vpdtool  -r -O ${component} -R VINI -K ${field}
+    ${old_field_value}=  Set Variable  ${vpd_records['${component}']['${field}']}
 
-    ${field}=  Evaluate  random.choice($vpd_fields)  random
+    ${write_value}=  Set Variable If
+    ...  '${field}' == 'DR'  ${DR_WRITE_VALUE}
+    ...  '${field}' == 'PN'  ${PN_WRITE_VALUE}
+    ...  '${field}' == 'SN'  ${SN_WRITE_VALUE}
 
-    FOR  ${fields}  IN   @{vpd_fields}
-        ${write_value}=  Set Variable If
-        ...  '${field}' == 'DR'  ${DR_WRITE_VALUE}
-        ...  '${field}' == 'PN'  ${PN_WRITE_VALUE}
-        ...  '${field}' == 'SN'  ${SN_WRITE_VALUE}
-        Vpdtool  -w -O ${component} -R VINI -K ${field} --value ${write_value}
-        Verify VPD Field Value  ${component}  ${fields}
-    END
+    Vpdtool  -w -O ${component} -R VINI -K ${field} --value ${write_value}
+
+    Verify VPD Field Value  ${component}  ${field}
+
+
+Restore VPD Value
+    [Documentation]  Restore VPD's field value of given component.
+    [Arguments]  ${component}  ${field}  ${value}
+    # Description of arguments:
+    # component       VPD component (e.g. /system/chassis/motherboard/vdd_vrm1).
+    # field           VPD component field (e.g. PN, SN)
+    # value           VPD value to be restore.
+
+    Vpdtool  -w -O ${component} -R VINI -K ${field} --value ${value}
 
 
 Verify VPD Field Value
