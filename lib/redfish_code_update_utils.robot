@@ -177,3 +177,22 @@ Get System Firmware Details
 
     [Return]  &{sys_firmware_dict}
 
+
+Redfish Change To Backup Firmware Image
+   [Documentation]  Change to backup firmware image using redfish URI.
+   [Arguments]  ${image_version}
+
+   # Description of argument(s):
+   # image_version       The Fimware image version (e.g. 2.8.0-dev-1107-g512028d95).
+
+   ${functional_version}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  FirmwareVersion
+   Should Not Be Equal As Strings  ${functional_version}  ${image_version}
+
+   ${image_info}=  Get Software Inventory State By Version  ${image_version}
+   Should Not Be Empty  ${image_version}
+
+   ${firmware_inv_path}=  Set Variable  /redfish/v1/UpdateService/FirmwareInventory/${image_info['image_id']}
+
+   # Below URI, change to backup image and reset the BMC.
+   Redfish.Patch  /redfish/v1/Managers/bmc
+   ...  body={'Links': {'ActiveSoftwareImage': {'@odata.id': '${firmware_inv_path}'}}}
