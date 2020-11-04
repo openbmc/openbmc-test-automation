@@ -177,3 +177,15 @@ Get System Firmware Details
 
     [Return]  &{sys_firmware_dict}
 
+
+Switch Backup Firmware Image To Functional
+   [Documentation]  Change to backup firmware image using redfish URI.
+
+   ${sw_inv}=  Get Functional Firmware  BMC image
+   ${nonfunctional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  False
+
+   ${firmware_inv_path}=  Set Variable  /redfish/v1/UpdateService/FirmwareInventory/${nonfunctional_sw_inv['image_id']}
+
+   # Below URI, change to backup image and reset the BMC.
+   Redfish.Patch  /redfish/v1/Managers/bmc
+   ...  body={'Links': {'ActiveSoftwareImage': {'@odata.id': '${firmware_inv_path}'}}}
