@@ -25,15 +25,13 @@ def get_running_system_ip():
     r"""
     Get the IP address of server from which robot code is running.
 
-    Example of getaddrinfo:
-
-    [(<AddressFamily.AF_INET: X>, <SocketKind.SOCK_STREAM: X>, X, '', ('XX.XX.XX.XX', port)),]
     """
 
     ip_list = list()
-    stdout = subprocess.check_output("ip addr show", shell=True)
-    stdout = stdout.decode("utf-8")
-    ip_list = re.findall(ip_regex, stdout)
+    stdout = subprocess.check_output(['hostname', '--all-fqdns'], shell=True)
+    host_fqdns = stdout.decode("utf-8").strip()
+    ip_address = socket.gethostbyname(str(host_fqdns))
+    ip_list.append(ip_address)
 
     return ip_list
 
