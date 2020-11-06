@@ -46,13 +46,20 @@ Redfish BMC Code Update
     ${functional_version}=  Set Variable  ${bmc_release_info['version_id']}
     Rprint Vars  functional_version
 
+    ${post_code_update_actions}=  Get Post Boot Action
+    ${state}=  Get Pre Reboot State
+    Rprint Vars  state
+
     # Check if the existing firmware is functional.
     Pass Execution If  '${functional_version}' == '${image_version}'
     ...  The existing ${image_version} firmware is already functional.
 
-    # TODO: Replace with redfish ActiveSoftwareImage API.
-    #Run Keyword If  not ${FORCE_UPDATE}
-    #...  Activate Existing Firmware  ${image_version}
+    # Redfish ActiveSoftwareImage API.
+    Run Keyword If  not ${FORCE_UPDATE}
+    ...  Run Keywords  Redfish Change To Backup Firmware Image  ${image_version}  AND
+    ...  Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}  AND
+    ...  Redfish Verify BMC Version  ${IMAGE_FILE_PATH}  AND
+    ...  Pass Execution  The firmware ${image_version} is backup image.
 
     # Firmware inventory record of the given image version.
     ${image_info}=  Get Software Inventory State By Version  ${image_version}
