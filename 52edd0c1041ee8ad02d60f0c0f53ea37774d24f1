@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "67c30635_a1941247",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-11-06T09:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f893b91_1d506828",
+      "range": {
+        "startLine": 182,
+        "startChar": 66,
+        "endLine": 182,
+        "endChar": 69
+      },
+      "revId": "52edd0c1041ee8ad02d60f0c0f53ea37774d24f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "176a935f_7f911ca3",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-11-06T05:41:37Z",
       "side": 1,
       "message": "${functional_version}\u003d  redfish_util.get_attribute     /redfish/v1/Managers/bmc   FirmwareVersion",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 57
+      },
+      "revId": "52edd0c1041ee8ad02d60f0c0f53ea37774d24f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "760a24ad_b2a4685e",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-11-06T09:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "176a935f_7f911ca3",
       "range": {
         "startLine": 188,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a9957cad_1d971e05",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-11-06T09:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08c5e769_3d61fddd",
+      "range": {
+        "startLine": 190,
+        "startChar": 35,
+        "endLine": 190,
+        "endChar": 67
+      },
+      "revId": "52edd0c1041ee8ad02d60f0c0f53ea37774d24f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46a04b3a_1eebcb90",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 2
@@ -82,6 +154,24 @@
       "writtenOn": "2020-11-06T05:41:37Z",
       "side": 1,
       "message": "# This will reset the BMC to switch to new backup image.",
+      "revId": "52edd0c1041ee8ad02d60f0c0f53ea37774d24f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc496b3a_82bc6cc8",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-11-06T09:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46a04b3a_1eebcb90",
       "revId": "52edd0c1041ee8ad02d60f0c0f53ea37774d24f1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
