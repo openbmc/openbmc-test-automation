@@ -57,15 +57,6 @@ Acquire Read Lock On Read Lock
     HMCID-01
 
 
-Get Lock Records Empty For Invalid Session
-    [Documentation]  Record of lock list is empty for invalid session.
-    [Tags]  Get_Lock_Records_Empty_For_Invalid_Session
-    [Template]  Verify Empty Lock Records For Invalid Session
-
-    # client_id
-    HMCID-01
-
-
 Fail To Acquire Lock On Another Lock
     [Documentation]  Fail to acquire another lock.
     [Tags]  Fail_To_Acquire_Lock_On_Another_Lock
@@ -237,6 +228,15 @@ Get Empty Lock Records For Session Where No Locks Acquired
     HMCID-01
 
 
+Get Lock Records Empty For Invalid Session
+    [Documentation]  Record of lock list is empty for invalid session.
+    [Tags]  Get_Lock_Records_Empty_For_Invalid_Session
+    [Template]  Verify Empty Lock Records For Invalid Session
+
+    # client_id
+    HMCID-01
+
+
 Get Lock Records For Multiple Session
     [Documentation]  Get lock records of multiple session.
     [Tags]  Get_Lock_Records_For_Multiple_Session
@@ -245,6 +245,14 @@ Get Lock Records For Multiple Session
     # client_ids         lock_type
     HMCID-01,HMCID-02    ReadCase1,ReadCase1
 
+
+Get Lock Records For Multiple Invalid Session
+    [Documentation]  Record of lock list is empty for list of invalid session.
+    [Tags]  Get_Lock_Records_For_Multiple_Invalid_Session
+    [Template]  Verify Lock Records For Multiple Invalid Session
+
+    # client_id
+    HMCID-01
 
 *** Keywords ***
 
@@ -652,9 +660,9 @@ Verify Empty Lock Records For Invalid Session
     set to dictionary  ${session_info2}  SessionIDs  xxyXyyYZZz
 
     ${lock_list2}=  Get Locks List On Resource  ${session_info2}
-    ${lock_length2}=  Get Length  ${lock_list1}
+    ${lock_length2}=  Get Length  ${lock_list2}
 
-    Valid Value  lock_length1  ${lock_list2}
+    Should Be Equal As Integers  ${lock_length1}  ${lock_length2}
 
     Redfish Delete Session  ${session_info1}
 
@@ -695,7 +703,7 @@ Verify Acquire Lock After Reboot
     # lock_type    Read lock or Write lock.
 
     ${trans_id_list}=  Create List
-    ${session_info}=  Create Redfish Session With ClientID  ${client_id}
+    ${session_info}=  Create Session With ClientID  ${client_id}
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
     Redfish OBMC Reboot (off)
     Redfish Login
@@ -997,3 +1005,36 @@ Verify Lock Records Of Multiple Session
     Verify Lock On Resource  ${session_info2}[0]  ${trans_id_emptylist}
 
     Redfish Delete List Of Session  ${session_dict_list}
+
+
+Verify Lock Records For Multiple Invalid Session
+    [Documentation]  Verify no lock record found for multiple invalid session.
+    [Arguments]  ${client_id}
+
+    # Description of argument(s):
+    # client_id    This client id can contain string value
+    #              (e.g. 12345, "HMCID").
+
+    ${session_dict_list}=  Create List
+    ${invalid_session_ids}=  Create List  xxyXyyYZZz  xXyXYyYZzz
+
+    ${session_info1}=  Create Session With ClientID  ${client_id}
+
+    ${session_info2}=  Copy Dictionary  ${session_info1}  deepcopy=True
+    set to dictionary  ${session_info2}  SessionIDs  ${invalid_session_ids}[0]
+    Append To List  ${session_dict_list}  ${session_info2}
+
+    ${session_info3}=  Copy Dictionary  ${session_info1}  deepcopy=True
+    set to dictionary  ${session_info3}  SessionIDs  ${invalid_session_ids}[0]
+    Append To List  ${session_dict_list}  ${session_info3}
+
+    ${lock_list1}=  Get Locks List On Resource  ${session_info1}
+    ${lock_length1}=  Get Length  ${lock_list1}
+
+    ${session_id_list}=  Create List Of Session ID  ${session_dict_list}
+    ${lock_list_resp}=  Get Locks List On Resource With Session List  ${session_id_list}
+    ${lock_length2}=  Get Length  ${lock_list_resp['Records']}
+
+    Should Be Equal As Integers  ${lock_length1}  ${lock_length2}
+
+    Redfish Delete Session  ${session_info1}
