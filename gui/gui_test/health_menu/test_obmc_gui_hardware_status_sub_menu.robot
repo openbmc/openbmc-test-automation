@@ -11,7 +11,7 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_hardware_status_heading}  //h1[text()="Hardware status"]
+${xpath_hardware_status_heading}  //a[text()="Hardware status"]
 
 *** Test Cases ***
 
