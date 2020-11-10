@@ -12,7 +12,9 @@ Test Setup      Test Setup Execution
 *** Variables ***
 
 ${xpath_manage_power_heading}      //h1[text()="Manage power usage"]
-
+${xpath_power_ops_checkbox}        //*[@data-test-id='managePowerUsage-checkbox-togglePowerCapField']
+${xpath_cap_input_button}          //*[@data-test-id='managePowerUsage-input-powerCapValue']
+${xpath_submit_button}             //*[@data-test-id='managePowerUsage-button-savePowerCapValue']
 
 *** Test Cases ***
 
@@ -32,7 +34,32 @@ Verify Existence Of All Sections In Manage Power Usage Page
     Page Should Contain  Power cap value
 
 
+Verify Server Power Cap Setting Is On
+    [Documentation]  Verify server power cap setting is on.
+    [Tags]  Verify_Server_Power_Cap_Setting_Is_On
+
+    Wait Until Page Contains Element  ${xpath_power_ops_checkbox}
+    Click Element At Coordinates  ${xpath_power_ops_checkbox}  0  0
+
+    ${resp}=  Run Keyword And Return Status  Checkbox Should Be Selected  ${xpath_power_ops_checkbox}
+    Run Keyword If  '${resp}' == 'False'  Click Element  ${xpath_power_ops_checkbox}
+
+    # Now input a cap value and submit.
+    Wait Until Element Is Enabled  ${xpath_cap_input_button}  timeout=10
+    Input Text  ${xpath_cap_input_button}  ${600}
+    Click Element  ${xpath_submit_button}
+    Wait Until Keyword Succeeds  1 min  15 sec  Is Power Cap Value Set  600
+
+
 *** Keywords ***
+
+Is Power Cap Value Set
+    [Documentation]  Check if power cap value is set to the given value.
+    [Arguments]  ${expected_value}
+
+    ${cap}=  Get Power Cap Value
+    Should Be Equal  ${current_cap}  ${expected_value}
+
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
