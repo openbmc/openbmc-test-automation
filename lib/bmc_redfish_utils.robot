@@ -261,3 +261,32 @@ Delete BMC Users Via Redfish
         ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
     END
 
+
+Get Power Cap Value
+    [Documentation]  Return the power cap value. 
+
+    ${redfish_power}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
+
+    # In Redfish version, LimitInWatts is for power cap. However, its stored NOT exactly in json
+    # format so with additional steps in consequent steps string is converted to json formatted
+    # so that a json object can be formed.
+    #
+    # "PowerControl": [
+    #    {
+    #        "@odata.id": "/redfish/v1/Chassis/chassis/Power#/PowerControl/0",
+    #        "@odata.type": "#Power.v1_0_0.PowerControl",
+    #        "MemberId": "0",
+    #        "Name": "Chassis Power Control",
+    #        "PowerLimit": {
+    #            "LimitInWatts": 3000.0
+    #        },
+    #        "PowerMetrics": {
+    #            "AverageConsumedWatts": 16,
+    #            "IntervalInMin": 10,
+    #            "MaxConsumedWatts": 22
+    #        }
+    #    }
+    # ],
+
+    ${power_cap}=  Set Variable  ${redfish_power['PowerControl'][0]['PowerLimit']['LimitInWatts']}
+    [return]  ${power_cap}
