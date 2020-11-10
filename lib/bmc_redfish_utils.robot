@@ -260,4 +260,3 @@ Delete BMC Users Via Redfish
         Redfish.Delete  /redfish/v1/AccountService/Accounts/${users['${role}'][0]}
         ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
     END
-

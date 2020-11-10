@@ -12,7 +12,9 @@ Test Setup      Test Setup Execution
 *** Variables ***
 
 ${xpath_manage_power_heading}      //h1[text()="Manage power usage"]
-
+${xpath_power_ops_checkbox}        //*[@data-test-id='managePowerUsage-checkbox-togglePowerCapField']
+${xpath_cap_input_button}          //*[@data-test-id='managePowerUsage-input-powerCapValue']
+${xpath_submit_button}             //*[@data-test-id='managePowerUsage-button-savePowerCapValue']
 
 *** Test Cases ***
 
@@ -32,7 +34,77 @@ Verify Existence Of All Sections In Manage Power Usage Page
     Page Should Contain  Power cap value
 
 
+Verify Server Power Cap Setting Is On
+    [Documentation]  Verify server power cap setting is on.
+    [Tags]  Verify_Server_Power_Cap_Setting_Is_On
+    [Setup]  Save Initial Power Cap State
+    [Teardown]  Restore Initial Power Cap State
+
+    Run Keyword If  '${checkbox_initial_state}' == 'False'
+    ...  Click Element At Coordinates  ${xpath_power_ops_checkbox}  0  0
+
+    # Now input a cap value and submit.
+    Wait Until Element Is Enabled  ${xpath_cap_input_button}  timeout=10
+    Input Text  ${xpath_cap_input_button}  ${600}
+    Click Element  ${xpath_submit_button}
+    Wait Until Keyword Succeeds  1 min  15 sec  Is Power Cap Value Set  600
+
+
 *** Keywords ***
+
+Is Power Cap Value Set
+    [Documentation]  Check if power cap value is set to the given value.
+    [Arguments]  ${expected_value}
+
+    ${cap}=  Get Power Cap Value
+    Should Be Equal  ${current_cap}  ${expected_value}
+
+
+Save Initial Power Cap State
+    [Documentation]  Save the initial power cap state.
+
+    Wait Until Page Contains Element  ${xpath_power_ops_checkbox}
+    ${status}=  Run Keyword And Return Status  Checkbox Should Be Selected  ${xpath_power_ops_checkbox}
+    Set Suite Variable  ${checkbox_initial_state}  ${status}
+
+
+Restore Initial Power Cap State
+    [Documentation]  Restore the initial power cap state.
+
+    ${status}=  Run Keyword And Return Status  Checkbox Should Be Selected  ${xpath_power_ops_checkbox}
+    Run Keyword If  ${status} != ${checkbox_initial_state}
+    ...  Click Element At Coordinates  ${xpath_power_ops_checkbox}  0  0
+
+
+Get Power Cap Value
+    [Documentation]  Return the power cap value.
+
+    ${redfish_power}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
+
+    # In Redfish version, LimitInWatts is for power cap. However, its stored NOT exactly in json
+    # format so with additional steps in consequent steps string is converted to json formatted
+    # so that a json object can be formed.
+    #
+    # "PowerControl": [
+    #    {
+    #        "@odata.id": "/redfish/v1/Chassis/chassis/Power#/PowerControl/0",
+    #        "@odata.type": "#Power.v1_0_0.PowerControl",
+    #        "MemberId": "0",
+    #        "Name": "Chassis Power Control",
+    #        "PowerLimit": {
+    #            "LimitInWatts": 3000.0
+    #        },
+    #        "PowerMetrics": {
+    #            "AverageConsumedWatts": 16,
+    #            "IntervalInMin": 10,
+    #            "MaxConsumedWatts": 22
+    #        }
+    #    }
+    # ],
+
+    ${power_cap}=  Set Variable  ${redfish_power['PowerControl'][0]['PowerLimit']['LimitInWatts']}
+    [return]  ${power_cap}
+
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
