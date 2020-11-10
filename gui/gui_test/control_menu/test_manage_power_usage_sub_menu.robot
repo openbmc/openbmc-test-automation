@@ -50,6 +50,29 @@ Verify Server Power Cap Setting Is On
     Wait Until Keyword Succeeds  1 min  15 sec  Is Power Cap Value Set  600
 
 
+Verify Server Power Cap Setting Is Off
+    [Documentation]  Verify power cap cannot be set when it is off.
+    [Tags]  Verify_Server_Power_Cap_Setting_Is_Off
+
+    Page Should Contain Element  ${xpath_power_ops_checkbox}
+
+    # Set a value in check box.
+    ${checkbox_Selected}=  Run Keyword And Return Status  Checkbox Should Be Selected  ${xpath_power_ops_checkbox}
+    Run Keyword If  False == ${checkbox_Selected}  Click Element  ${xpath_power_ops_checkbox}
+    Wait Until Element Is Enabled  ${xpath_cap_input_button}  timeout=10
+    Input Text  ${xpath_cap_input_button}  ${499}
+
+    # Now disable input box by deselecting the check box
+    Click Element  ${xpath_power_ops_checkbox}
+    Checkbox Should Not Be Selected  ${xpath_power_ops_checkbox}
+    Element Should Be Disabled  ${xpath_cap_input_button}
+
+    # Click submit.
+    Click Element  ${xpath_submit_button}
+    ${cap}=  Get Power Cap Value
+    Should Not Be True  ${cap} == 499
+
+
 *** Keywords ***
 
 Is Power Cap Value Set
