@@ -12,7 +12,8 @@ Test Setup      Test Setup Execution
 *** Variables ***
 
 ${xpath_manage_power_heading}      //h1[text()="Manage power usage"]
-
+${xpath_power_ops_checkbox}        //*[@data-test-id='managePowerUsage-checkbox-togglePowerCapField']
+${xpath_cap_input_button}          //*[@data-test-id='managePowerUsage-input-powerCapValue']
 
 *** Test Cases ***
 
@@ -31,6 +32,17 @@ Verify Existence Of All Sections In Manage Power Usage Page
     Page Should Contain  Power cap setting
     Page Should Contain  Power cap value
 
+Verify Server Power Cap Setting Is Off
+    [Documentation]  Verify navigation to manage power usage page.
+    [Tags]  Verify_Server_Power_Cap_Setting_Is_Off 
+
+    Page Should Contain Element  ${xpath_power_ops_chcekbox}
+    ${Checkbox_Not_Selected}=  Run Keyword And Return Status  Checkbox Should Not Be Selected  ${xpath_power_ops_checkbox}
+    Run Keyword If  False == ${Checkbox_Not_Selected}  Click Elemet  ${xpath_power_ops_checkbox}
+    Checkbox Should Not Be Selected  ${xpath_power_ops_checkbox}
+
+    # With chcekbox Not selected, apply cap edit box should be disabled .
+    Element Should Be Disabled  ${xpath_cap_input_button} 
 
 *** Keywords ***
 
