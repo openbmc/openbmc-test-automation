@@ -22,6 +22,18 @@ Verify Navigation To Hardware Status Page
     Page Should Contain Element  ${xpath_hardware_status_heading}
 
 
+Verify Components On Hardware Status Page
+    [Documentation]  Verify whether required components are displayed hardware status page.
+    [Tags]  Verify_Components_On_Hardware_Status_Page
+
+    Page Should Contain Text  System
+    Page Should Contain Text  BMC manager
+    Page Should Contain Text  Chassis
+    Page Should Contain Text  DIMM slot
+    Page Should Contain Text  Fans
+    Page Should Contain Text  Power supplies
+    Page Should Contain Text  Processors
+
 *** Keywords ***
 
 Test Setup Execution
