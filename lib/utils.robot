@@ -691,11 +691,12 @@ Set Auto Reboot Setting
     ...                    1=RetryAttempts
     ...                    0=Disabled
 
-    Run Keyword If  ${REDFISH_REST_SUPPORTED} == ${TRUE}
+    Run Keyword IF  ${REDFISH_SUPPORTED} == ${FALSE}
+    ...    Set Auto Reboot  ${value}
+    ...  ELSE IF  ${REDFISH_REST_SUPPORTED} == ${TRUE}
     ...    Set Auto Reboot  ${value}
     ...  ELSE
     ...    Redfish Set Auto Reboot  ${rest_redfish_dict["${value}"]}
-
 
 Set Auto Reboot
     [Documentation]  Set the given auto reboot setting.
