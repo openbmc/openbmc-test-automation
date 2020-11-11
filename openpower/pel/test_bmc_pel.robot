@@ -587,15 +587,13 @@ Verify Listing Information Error
 
     # Generate informational logs and verify that it would not get listed by peltool's list command.
     ${pel_records}=  peltool  -l
-    ${pel_ids}=  Get PEL Log Via BMC CLI
-    ${id}=  Get From List  ${pel_ids}  -1
-    Should Not Contain  ${pel_records['${id}']['Sev']}  Informational
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    Should Be Empty  ${ids}
 
     # Verify that information logs get listed using peltool's list command with -lfh option.
     ${pel_records}=  peltool  -lfh
-    ${pel_ids}=  Get PEL Log Via BMC CLI
-    ${id}=  Get From List  ${pel_ids}  -1
-    Should Contain  ${pel_records['${id}']['Sev']}  Informational
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    Should Not Be Empty  ${ids}
 
 
 *** Keywords ***
