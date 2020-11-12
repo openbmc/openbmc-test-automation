@@ -8,15 +8,19 @@ Resource         ../lib/openbmc_ffdc.robot
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
-
 *** Test Cases ***
-
 Verify Get PLDM Types
     [Documentation]  Verify supported PLDM types.
     [Tags]  Verify_Get_PLDM_Types
 
     ${pldm_output}=  Pldmtool  base GetPLDMTypes
-    Valid List  pldm_output['supported_types']['text']  required_values=${PLDM_SUPPORTED_TYPES}
+    ${count}=  Get Length  ${pldm_output}
+    ${cmd_list}=  Create List
+    FOR  ${i}  IN RANGE  ${count}
+      ${cmd}=  Catenate  ${pldm_output}[${i}][PLDM Type Code](${pldm_output}[${i}][PLDM Type])
+      Append To List  ${cmd_list}  ${cmd}
+    END
+    Valid List  cmd_list  required_values=${PLDM_SUPPORTED_TYPES}
 
 Verify Get PLDM Version For Base
     [Documentation]  Verify supported PLDM version for base type.
@@ -24,8 +28,7 @@ Verify Get PLDM Version For Base
 
     ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'base'
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
-    Valid Value  pldm_output['type_0(base)']  ['${VERSION_BASE['STRING']}']
-
+    Valid Value  pldm_output['Response']  ['${VERSION_BASE['STRING']}']
 
 Verify Get PLDM Version For Platform
     [Documentation]  Verify supported PLDM version for platform type.
@@ -33,7 +36,7 @@ Verify Get PLDM Version For Platform
 
     ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'platform'
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
-    Valid Value  pldm_output['type_2(platform)']  ['${VERSION_PLATFORM['STRING']}']
+    Valid Value  pldm_output['Response']  ['${VERSION_PLATFORM['STRING']}']
 
 
 Verify Get PLDM Version For BIOS
@@ -42,7 +45,7 @@ Verify Get PLDM Version For BIOS
 
     ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'bios'
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
-    Valid Value  pldm_output['type_3(bios)']  ['${VERSION_BIOS['STRING']}']
+    Valid Value  pldm_output['Response']  ['${VERSION_BIOS['STRING']}']
 
 
 Verify Get PLDM Version For FRU
@@ -51,7 +54,7 @@ Verify Get PLDM Version For FRU
 
     ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'fru'
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
-    Valid Value  pldm_output['type_4(fru)']  ['${VERSION_FRU['STRING']}']
+    Valid Value  pldm_output['Response']  ['${VERSION_FRU['STRING']}']
 
 
 Verify Get PLDM Version For OEM
@@ -60,7 +63,7 @@ Verify Get PLDM Version For OEM
 
     ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'oem-ibm'
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
-    Valid Value  pldm_output['type_63(oem-ibm)']  ['${VERSION_OEM['STRING']}']
+    Valid Value  pldm_output['Response']  ['${VERSION_OEM['STRING']}']
 
 
 Verify GetTID
@@ -68,12 +71,12 @@ Verify GetTID
     [Tags]  Verify_GetTID
 
     # Example output:
-    # TID : 1
+    # {
+    #     'Response' : 1
+    # }
 
     ${pldm_output}=  Pldmtool  base GetTID
-    Rprint Vars  pldm_output
-
-    Valid Dict  pldm_output  valid_values={'tid': ['1']}
+    Valid Value  pldm_output['Response']  [1]
 
 Verify GetPLDMCommands
     [Documentation]  Verify GetPLDMCommands response message.
@@ -104,5 +107,10 @@ Verify GetPLDMCommands For PLDM Type
     # Supported Commands : 2(GetTID) 3(GetPLDMVersion) 4(GetPLDMTypes) 5(GetPLDMCommands)
 
     ${pldm_output}=  Pldmtool  base GetPLDMCommands -t ${pldm_type}
-    Rprint Vars  pldm_output
-    Valid List  pldm_output  ${expected_pldm_cmds}
+    ${count}=  Get Length  ${pldm_output}
+    ${cmd_list}=  Create List
+    FOR  ${i}  IN RANGE  ${count}
+      ${cmd}=  Catenate  ${pldm_output}[${i}][PLDM Command Code](${pldm_output}[${i}][PLDM Command])
+      Append To List  ${cmd_list}  ${cmd}
+    END
+    Valid List  cmd_list  required_values=${expected_pldm_cmds}
