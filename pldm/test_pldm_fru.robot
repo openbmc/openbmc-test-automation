@@ -26,12 +26,12 @@ Verify GetFruRecordTableMetadata
     ${pldm_output}=  Pldmtool  fru GetFruRecordTableMetadata
     Rprint Vars  pldm_output
 
-    Valid Value  pldm_output['frudatamajorversion']  ['1']
-    Valid Value  pldm_output['frudataminorversion']  ['0']
-    Valid Value  pldm_output['frutablemaximumsize']  ['4294967295']
-    Valid Range  ${pldm_output['frutablelength']}  1
-    Valid Range  ${pldm_output['total_number_of_records_in_table']}  1
-    Valid Range  ${pldm_output['total_number_of_record_set_identifiers_in_table']}  1
+    Valid Value  pldm_output['FRUDATAMajorVersion']  [1]
+    Valid Value  pldm_output['FRUDATAMinorVersion']  [0]
+    Valid Value  pldm_output['FRUTableMaximumSize']  [4294967295]
+    Valid Range  pldm_output['FRUTableLength']  1
+    Valid Range  pldm_output['Total number of records in table']  1
+    Valid Range  pldm_output['Total number of Record Set Identifiers in table']  1
 
 Verify GetFruRecordTable
     [Documentation]  Verify GetFruRecordTable response message.
@@ -56,7 +56,7 @@ Verify GetFRURecordByOption
     # [     fru_field_value]:                             BMC PLANAR
 
     ${pldm_output}=  Pldmtool  fru GetFruRecordTableMetadata
-    ${fru_rec_id}=  Convert To Integer  ${pldm_output['total_number_of_record_set_identifiers_in_table']}
+    ${fru_rec_id}=  Convert To Integer  ${pldm_output['Total number of Record Set Identifiers in table']}
     FOR   ${i}  IN RANGE  ${fru_rec_id+1}
        ${pldm_output}=  Run Keyword  Pldmtool  fru GetFRURecordByOption -i ${i} -r 0 -f 0
        Run Keyword  Rprint Vars  pldm_output
