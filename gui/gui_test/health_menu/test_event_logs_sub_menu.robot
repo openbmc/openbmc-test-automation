@@ -66,6 +66,15 @@ Verify Event Log Options
     Page Should Contain Element  ${xpath_event_action_cancel}  limit=1
 
 
+Select All Error Logs And Click Export
+    [Documentation]  Select all error logs and click export element.
+    [Tags]  Select_All_Error_Logs_And_Click_Export
+
+    Create Error Logs  ${2}
+    Select All Events
+    Click Element At Coordinates  ${xpath_event_action_export}  0  0
+
+
 *** Keywords ***
 
 Suite Setup Execution
