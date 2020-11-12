@@ -138,6 +138,7 @@ class resource_variables():
     xpath_network_page_header = "//h1[contains(text(), 'Network settings')]"
     xpath_sol_header = "//h1[contains(text(), 'Serial over LAN console')]"
     xpath_sol_console_heading = "//h1[text()='Serial over LAN (SOL) console']"
+    xpath_profile_settings_save_button = "//*[@data-test-id='profileSettings-button-saveSettings']"
 
     # xpath for health menu
     xpath_health_menu = "//*[@data-test-id='nav-button-health']"
