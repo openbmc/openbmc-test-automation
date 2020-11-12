@@ -81,6 +81,17 @@ Select Single Error Log And Delete
     Should Be Equal  ${number_of_events_before -1}  ${number_of_events_after}
     ...  msg=Failed to delete single error log entry.
 
+
+Select All Error Logs And Click Export
+    [Documentation]  Select all error logs and click export element.
+    [Tags]  Select_All_Error_Logs_And_Click_Export
+
+    Create Error Logs  ${2}
+    Wait Until Element Is Visible  ${xpath_delete_first_row}
+    Select All Events
+    Wait Until Element Is Visible  ${xpath_event_action_export}
+
+
 *** Keywords ***
 
 Suite Setup Execution
