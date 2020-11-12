@@ -527,18 +527,37 @@ Verify Error Logging Rotation Policy
     Unrecoverable                 30
     Predictive                    30
 
+
 Verify Reverse Order Of PEL Logs
     [Documentation]  Verify PEL command to output PEL logs in reverse order.
     [Tags]  Verify_Reverse_PEL_Logs
 
     Redfish Purge Event Log
+
+    # Below commands create unrecoverable error log at first and then the predictable error.
     BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
     BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
 
-    ${pel_records}=  Peltool  -rl
-    ${pel_ids}=  Get Dictionary Keys   ${pel_records}   False
+    # Using peltool -lr, recent PELs appear first. Hence the ID of first PEL is greater than the next.
+    ${pel_records}=  peltool  -lr
 
-    Should Be True  ${pel_ids}[0] > ${pel_ids}[1]
+    # It is found that, variables like dictionary always keep items in sorted order that makes
+    # this verification not possible, hence json file is used to keep the items original order.
+    ${pel_records}=  Convert To String  ${pel_records}
+    Create File  pel_records.json  ${pel_records}
+    ${json_string}=  Operating System.Get file    pel_records.json
+    ${json_string}=  Replace String  ${json_string}  '  "
+
+    ${json_object}=  Evaluate  json.loads('''${json_string}''')  json
+
+    ${list}=  Convert To List  ${json_object}
+
+    ${id1}=  Get From List   ${list}  0
+    ${id1}=  Convert To Integer  ${id1}
+    ${id2}=  Get From List   ${list}  1
+    ${id2}=  Convert To Integer  ${id2}
+
+    Should Be True  ${id1} > ${id2}
 
 
 Verify Total PEL Count
