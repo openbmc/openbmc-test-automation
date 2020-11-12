@@ -54,6 +54,20 @@ Verify Logged In Username
     Should Contain  ${gui_logged_username}  ${OPENBMC_USERNAME}
 
 
+Verify Default UTC Timezone display
+    [Documentation]  Verify Default UTC Timezone display
+    [Tags]  Verify_Default_UTC_Timezone_Display
+
+    Click Element At Coordinates    ${xpath_default_UTC}    0    0
+    Click Element  ${xpath_profile_settings_save_button}
+
+    # verify in overview page
+
+    Click Element  ${xpath_overview_menu}
+    Wait Until Page Contains  Overview  timeout=30s
+    Page Should Not Contain  (IST UTC+5:30)
+
+
 *** Keywords ***
 
 Test Setup Execution
