@@ -26,7 +26,6 @@ Verify GetPDR
        ${record_handle}=  Set Variable  ${next_record_handle}
     END
 
-
 Verify SetStateEffecterStates
     [Documentation]  Verify set state effecter states response message.
     [Tags]  Verify_SetStateEffecterStates
@@ -74,35 +73,32 @@ Verify GetPDR For Record Handle
 
     ${pldm_cmd}=  Evaluate  $CMD_GETPDR % ${record_handle}
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
-    Rprint Vars  pldm_output
 
-    # Note: Output of GetPDR type 'PLDM_NUMERIC_EFFECTER_PDR' has dynamic content
-    #       hence just checking pdrtype only
-    #       GetPDR type 'PLDM_STATE_SENSOR_PDR' Dev implementation is still in progress
-    #       TODO: Verify output of GetPDR type 'PLDM_STATE_SENSOR_PDR'
+    Run Keyword If  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_STATE_EFFECTER_PDR']}'
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_SETSTATEEFFECTER}
 
-    Run Keyword If  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_STATE_EFFECTER_PDR']}'
-    ...  Log To Console  "Found PDR Type - PLDM_STATE_EFFECTER_PDR"
-
-    ...  ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_PDR_FRU_RECORD_SET']}'
+    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_PDR_FRU_RECORD_SET']}'
     ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER}
 
-    ...  ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_PDR_ENTITY_ASSOCIATION']}'
-    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION}
+    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_PDR_ENTITY_ASSOCIATION']}'
+    ...  Log To Console  "Found PDR Type - PLDM_ENTITY_ASSOCIATION_PDR"
 
-    ...  ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_STATE_SENSOR_PDR']}'
+    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_STATE_SENSOR_PDR']}'
     ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_STATESENSORPDR}
 
-    ...  ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_NUMERIC_EFFECTER_PDR']}'
-    ...  Log To Console  "Found PDR Type - PLDM_NUMERIC_EFFECTER_PDR"
+    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_NUMERIC_EFFECTER_PDR']}'
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_NUMERICEFFECTERPDR} 
 
-    ...  ELSE IF  '${pldm_output['pdrtype']}' == '${PLDM_PDR_TYPES['PLDM_TERMINUS_LOCATOR_PDR']}'
-    ...  Log To Console  "Found PDR Type - PLDM_TERMINUS_LOCATOR_PDR"
+    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_TERMINUS_LOCATOR_PDR']}'
+    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_TERMINUSLOCATORPDR}
+
+    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_COMPACT_NUMERIC_SENSOR_PDR']}'
+    ...  Log To Console  "Found PDR Type - PLDM_COMPACT_NUMERIC_SENSOR_PDR'
 
     ...  ELSE  Fail  msg="Unknown PDR Type is received"
 
-    Should be equal as strings  ${pldm_output['recordhandle']}  ${record_handle}
-    [Return]  ${pldm_output['nextrecordhandle']}
+    Should be equal as strings  ${pldm_output['recordHandle']}  ${record_handle}
+    [Return]  ${pldm_output['nextRecordHandle']}
 
 Verify SetStateEffecterStates For Effecter States
     [Documentation]  Verify set state effecter states for given input effecter states.
@@ -117,12 +113,14 @@ Verify SetStateEffecterStates For Effecter States
     #                      e.g. '1 1'.
 
     # Example output:
-    # [SetStateEffecterStates ]: SUCCESS
+    # {
+    # "Response": "SUCCESS"
+    # }
 
     ${pldm_cmd}=  Evaluate  $CMD_SETSTATEEFFECTERSTATES % (${effecter_handle}, ${count}, ${effecter_states})
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Rprint Vars  pldm_output
-    Valid Value  pldm_output['setstateeffecterstates']  ['SUCCESS']
+    Valid Value  pldm_output['Response']  ['SUCCESS']
 
 Pldmtool Platform Suite Cleanup
     [Documentation]    Reset BMC at suite cleanup.
