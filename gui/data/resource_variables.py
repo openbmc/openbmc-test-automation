@@ -126,7 +126,7 @@ class resource_variables():
     xpath_logout_button = "//*[@data-test-id='appHeader-link-logout']"
 
     # xpath for overview menu
-    xpath_overview_menu = "//a[@href='#/']"
+    xpath_overview_menu = "//*[@data-test-id='nav-item-overview']"
 
     # xpath for header
     xpath_root_button_menu = "//*[@id='app-header-user__BV_toggle_']"
