@@ -527,18 +527,46 @@ Verify Error Logging Rotation Policy
     Unrecoverable                 30
     Predictive                    30
 
+
 Verify Reverse Order Of PEL Logs
     [Documentation]  Verify PEL command to output PEL logs in reverse order.
     [Tags]  Verify_Reverse_PEL_Logs
 
     Redfish Purge Event Log
+
+    # Below commands create unrecoverable error log at first and then the predictable error.
+    # So unrecoverable error will have a smaller value comapred to preditive error.
     BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
     BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
 
-    ${pel_records}=  Peltool  -rl
-    ${pel_ids}=  Get Dictionary Keys   ${pel_records}   False
+    # The peltool command screen output displays the records in reversed way where record with higher key
+    # avalue comes at first position. As an example:
+    # {'0x50005258': {'Subsystem': 'BMC Firmware', 'SRC': 'BD8D1002', 'Sev': 'Predictive Error',
+    #                 'Message': 'An application had an internal failure', 'CompID': '0x1000',
+    #                  'PLID': '0x50005258', 'CreatorID': 'BMC', 'Commit Time': '11/15/2020 13:02:22'},
+    #  '0x50005257': {'Subsystem': 'BMC Firmware', 'SRC': 'BD8D1002', 'Sev': 'Unrecoverable Error',
+    #                   'Message': 'An application had an internal failure', 'CompID': '0x1000',
+    #                   'PLID': '0x50005257', 'CreatorID': 'BMC', 'Commit Time': '11/15/2020 13:02:22'}}
 
-    Should Be True  ${pel_ids}[0] > ${pel_ids}[1]
+    # It is found  when output of 'peltool -lr' is assigned to  a variable, the variable stores it in
+    # dictionary format with keys in the sorted order irrespective of original 'peltool -lr' output.
+    # So, screen output is considered for test here.
+
+    ${pel_records}=  peltool  -lr
+    ${pel_records}=  Convert To String  ${pel_records}
+    Create File  pel_records.json  ${pel_records}
+
+    ${json_string}=  Operating System.Get file    pel_records.json
+    ${json_string}=  Replace String  ${json_string}  '  "
+
+    ${json_object}=  Evaluate  json.loads('''${json_string}''')  json
+
+    ${list}=  Convert To List  ${json_object}
+
+    ${id1} =    Get From List   ${list}         0
+    ${id2} =    Get From List   ${list}         1
+
+    Should Be True  ${id1} > ${id2}
 
 
 Verify Total PEL Count
