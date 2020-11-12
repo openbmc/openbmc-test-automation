@@ -18,6 +18,6 @@ Verify GetAlertStatus
 
     ${pldm_output}=  Pldmtool  oem-ibm GetAlertStatus -i 0
     Rprint Vars  pldm_output
-    Valid Value  pldm_output['rack_entry']  ['0xff000030']
-    Valid Value  pldm_output['pri_cec_node']  ['0x00008030']
+    Valid Value  pldm_output['rack entry']  ['0xff000030']
+    Valid Value  pldm_output['pri cec node']  ['0x00008030']
 
