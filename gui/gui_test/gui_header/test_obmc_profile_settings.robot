@@ -11,9 +11,11 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_new_password}      //input[@id="password"]
-${xpath_confirm_password}  //input[@id="password-confirmation"]
-${xpath_logged_usename}    //*[@data-test-id='appHeader-container-user']
+${xpath_new_password}       //input[@id="password"]
+${xpath_confirm_password}   //input[@id="password-confirmation"]
+${xpath_logged_usename}     //*[@data-test-id='appHeader-container-user']
+${xpath_default_UTC}        //*[@data-test-id='profileSettings-radio-defaultUTC']
+${xpath_overview_BMC_time}  //div[@class='quicklinks-section']//dt[text() = 'BMC time']/following-sibling::dd
 
 *** Test Cases ***
 
@@ -52,6 +54,22 @@ Verify Logged In Username
     Wait Until Page Contains Element  ${xpath_logged_usename}
     ${gui_logged_username}=  Get Text  ${xpath_logged_usename}
     Should Contain  ${gui_logged_username}  ${OPENBMC_USERNAME}
+
+
+Verify Default UTC Timezone display
+    [Documentation]  Verify Default UTC Timezone display
+    [Tags]  Verify_Default_UTC_Timezone_Display
+
+    Click Element At Coordinates    ${xpath_default_UTC}    0    0
+    Click Element  ${xpath_profile_settings_save_button}
+
+    # verify in overview page
+    Click Element  ${xpath_overview_menu}
+    Wait Until Page Contains  Overview  timeout=30s
+
+    ${cli_date_time}=  CLI Get BMC DateTime
+    ${overview_bmc_time}=   Get Text  ${xpath_overview_BMC_time}
+    Should Contain  ${overview_bmc_time}  ${cli_date_time}
 
 
 *** Keywords ***
