@@ -141,7 +141,7 @@ class resource_variables():
 
     # xpath for health menu
     xpath_health_menu = "//*[@data-test-id='nav-button-health']"
-    xpath_event_logs_sub_menu = "//a[@href='#/health/event-logs']"
+    xpath_event_logs_sub_menu = "//a[@href='/health/event-logs']"
     xpath_sensor_sub_menu = "//a[@href='#/health/sensors']"
     xpath_hardware_status_sub_menu = "//*[@data-test-id='nav-item-hardware-status']"
 
