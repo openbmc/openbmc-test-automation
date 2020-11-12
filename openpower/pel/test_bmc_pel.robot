@@ -527,18 +527,41 @@ Verify Error Logging Rotation Policy
     Unrecoverable                 30
     Predictive                    30
 
+
 Verify Reverse Order Of PEL Logs
     [Documentation]  Verify PEL command to output PEL logs in reverse order.
     [Tags]  Verify_Reverse_PEL_Logs
 
     Redfish Purge Event Log
+
+    # Below commands create unrecoverable error log at first and then the predictable error.
+    # So unrecoverable error will have a smaller value comapred to preditive error.
     BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
     BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
 
-    ${pel_records}=  Peltool  -rl
-    ${pel_ids}=  Get Dictionary Keys   ${pel_records}   False
+    # The peltool command screen output displays the records in reversed way where record with higher key
+    # avalue comes at first position. As an example:
+    # {'0x50005258': {'Subsystem': 'BMC Firmware', 'SRC': 'BD8D1002', 'Sev': 'Predictive Error',
+    #                 'Message': 'An application had an internal failure', 'CompID': '0x1000',
+    #                  'PLID': '0x50005258', 'CreatorID': 'BMC', 'Commit Time': '11/15/2020 13:02:22'},
+    #  '0x50005257': {'Subsystem': 'BMC Firmware', 'SRC': 'BD8D1002', 'Sev': 'Unrecoverable Error',
+    #                   'Message': 'An application had an internal failure', 'CompID': '0x1000',
+    #                   'PLID': '0x50005257', 'CreatorID': 'BMC', 'Commit Time': '11/15/2020 13:02:22'}}
 
-    Should Be True  ${pel_ids}[0] > ${pel_ids}[1]
+    # It is found  when output of 'peltool -lr' is assigned to  a variable, the variable stores it in
+    # dictionary format with keys in the sorted order irrespective of original 'peltool -lr' output.
+    # So, screen output is considered for test here.
+
+    ${pel_records}=  BMC Execute Command  peltool -lr
+    ${screen_output}=  Fetch From Left  "${pel_records}"  :
+
+    ${pel_records}=  Peltool  -lr
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+
+    # Below it is verified that first ID should not be in the beginning.
+    # The second ID (bigger in value) should come in the beginning of screenn output.
+    Id Appears First In Screen Output  ${screen_output}  ${ids}[1]   ${True}
+    Id Appears First In Screen Output  ${screen_output}  ${ids}[0]   ${False}
 
 
 Verify Total PEL Count
@@ -768,3 +791,17 @@ Get PEL Field Value
     ${pel_field_output}=  Get From Dictionary  ${pel_section_output}  ${pel_field}
 
     [Return]  ${pel_field_output}
+
+
+Id Appears First In Screen Output
+     [Documentation]  The id is should appear first in screen output if expected so.
+     [Arguments]  ${screen_out}  ${id}  ${First}
+
+     # Description of argument(s):
+     # screen_out   The screenoutput of peltool -rl.
+     # id           The key.
+     # First        If the key is expected to appear first.
+
+     ${output}=  Fetch From Left  ${screen_out}  :
+     Run Keyword If  ${First} == ${True}  Should Contain  ${screen_out}  ${id}
+     ...  ELSE  Should Not Contain  ${screen_out}  ${id}
