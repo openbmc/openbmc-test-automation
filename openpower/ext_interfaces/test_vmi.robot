@@ -22,8 +22,8 @@ Suite Teardown    Redfish.Logout
 &{USERS}          Administrator=${ADMIN}  Operator=${OPERATOR}  ReadOnly=${ReadOnly}
 ...               NoAccess=${NoAccess}
 
-${test_ipv4}              10.10.20.30
-${test_gateway}           0.0.0.0
+${test_ipv4}              10.6.6.6
+${test_gateway}           10.6.6.1
 ${test_netmask}           255.255.252.0
 
 &{DHCP_ENABLED}           DHCPEnabled=${${True}}
@@ -31,6 +31,7 @@ ${test_netmask}           255.255.252.0
 
 &{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
 &{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
+${wait_time}              10s
 
 
 *** Test Cases ***
@@ -380,7 +381,6 @@ Verify VMI Network Interface Details
     # netmask            Subnetmask for VMI IP.
     # valid_status_code  Expected valid status code from GET request. Default is HTTP_OK.
 
-    Run Keywords  Redfish Power Off  AND  Redfish Power On
     ${vmi_ip}=  Get VMI Network Interface Details  ${valid_status_code}
     Should Be Equal As Strings  ${origin}  ${vmi_ip["IPv4_AddressOrigin"]}
     Should Be Equal As Strings  ${gateway}  ${vmi_ip["IPv4_Gateway"]}
@@ -404,6 +404,9 @@ Set Static IPv4 Address To VMI
     ${resp}=  Redfish.Patch
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ...  body=${data}  valid_status_codes=[${valid_status_code}]
+
+    # Wait few seconds for new configuration to get populated on runtime.
+    Sleep  ${wait_time}
     Log To Console  ${resp.text}
 
 
