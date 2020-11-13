@@ -227,6 +227,15 @@ Get Lock Records For Multiple Invalid Session
     # client_id
     HMCID-01
 
+
+Get Lock Records For Multiple Invalid And Valid Session
+    [Documentation]  Get record of lock from invalid and valid session.
+    [Tags]  Get_Lock_Records_For_Multiple_Invalid_And_Valid_Session
+    [Template]  Verify Lock Records For Multiple Invalid And Valid Session
+
+    # client_id          lock_type
+    HMCID-01,HMCID-02    ReadCase1
+
 *** Keywords ***
 
 Create Redfish Session With ClientID
@@ -957,3 +966,48 @@ Verify Lock Records For Multiple Invalid Session
     Should Be Equal As Integers  ${lock_length1}  ${lock_length2}
 
     Redfish Delete Session  ${session_info1}
+
+
+Verify Lock Records For Multiple Invalid And Valid Session
+    [Documentation]  Verify all records found for a valid and invalid sessions.
+    [Arguments]  ${client_ids}  ${lock_type}
+
+    # Description of argument(s):
+    # client_ids    This client id can contain string value
+    #               (e.g. 12345, "HMCID").
+    # lock_type     Read lock or Write lock.
+
+    ${client_id_list}=  Split String  ${client_ids}  ,
+    ${lock_type_list}=  Split String  ${lock_type}  ,
+    ${trans_id_list1}=  Create List
+    ${invalid_session_ids}=  Create List  xxyXyyYZZz
+
+    ${session_dict_list}=  Create List
+    ${lock_list}=  Create List
+
+    ${client_id1}=  Create List
+    Append To List  ${client_id1}  ${client_id_list}[0]
+    ${session_info1}=  Create Session With List Of ClientID  ${client_id1}
+    Append To List  ${session_dict_list}  ${session_info1}[0]
+    Verify A Session Created With ClientID  ${client_id1}  ${session_info1}
+
+    ${trans_id}=  Redfish Post Acquire Lock  ${lock_type_list}[0]
+    Append To List  ${trans_id_list1}  ${trans_id}
+    Append To List  ${lock_list}  ${trans_id}
+    Verify Lock On Resource  ${session_info1}[0]  ${trans_id_list1}
+
+    ${session_info2}=  Copy Dictionary  ${session_info1}  deepcopy=True
+    set to dictionary  ${session_info2}[0]  SessionIDs  ${invalid_session_ids}[0]
+    Append To List  ${session_dict_list}  ${session_info2}[0]
+
+    Verify List Of Session Lock On Resource  ${session_dict_list}  ${lock_list}
+
+    ${session_token}=  Get From Dictionary  ${session_info1}[0]  SessionToken
+    Set Global Variable  ${XAUTH_TOKEN}  ${session_token}
+
+    Release Locks On Resource  ${session_info1}  ${trans_id_list1}  release_lock_type=Transaction
+
+    ${trans_id_emptylist}=  Create List
+    Verify Lock On Resource  ${session_info1}[0]  ${trans_id_emptylist}
+
+    Redfish Delete Session  ${session_info1}[0]
