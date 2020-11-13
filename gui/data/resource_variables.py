@@ -141,28 +141,28 @@ class resource_variables():
 
     # xpath for health menu
     xpath_health_menu = "//*[@data-test-id='nav-button-health']"
-    xpath_event_logs_sub_menu = "//a[@href='#/health/event-logs']"
-    xpath_sensor_sub_menu = "//a[@href='#/health/sensors']"
+    xpath_event_logs_sub_menu = "//*[@data-test-id='nav-item-event-logs']"
+    xpath_sensor_sub_menu = "//*[@data-test-id='nav-item-sensors']"
     xpath_hardware_status_sub_menu = "//*[@data-test-id='nav-item-hardware-status']"
 
     # xpath for control menu
     xpath_control_menu = "//*[@data-test-id='nav-button-control']"
-    xpath_manage_power_usage_sub_menu = "//a[@href='#/control/manage-power-usage']"
-    xpath_reboot_bmc_sub_menu = "//a[@href='#/control/reboot-bmc']"
-    xpath_server_led_sub_menu = "//a[@href='#/control/server-led']"
-    xpath_server_power_operations_sub_menu = "//a[@href='#/control/server-power-operations']"
-    xpath_sol_sub_menu = "//a[@href='#/control/serial-over-lan']"
-    xpath_kvm_sub_menu = "//a[@href='#/control/kvm']"
+    xpath_manage_power_usage_sub_menu = "//*[@data-test-id='nav-item-manage-power-usage']"
+    xpath_reboot_bmc_sub_menu = "//*[@data-test-id='nav-item-reboot-bmc']"
+    xpath_server_led_sub_menu = "//*[@data-test-id='nav-item-server-led']"
+    xpath_server_power_operations_sub_menu = "//*[@data-test-id='nav-item-server-power-operations']"
+    xpath_sol_sub_menu = "//*[@data-test-id='nav-item-serial-over-lan']"
+    xpath_kvm_sub_menu = "//*[@data-test-id='nav-item-kvm']"
 
     # xpath for configuration menu
     xpath_server_configuration = "//*[@data-test-id='nav-button-configuration']"
-    xpath_select_network_settings = "//a[@href='#/configuration/network-settings']"
-    xpath_date_time_settings_sub_menu = "//a[@href='#/configuration/date-time-settings']"
-    xpath_firmware_update_sub_menu = "//a[@href='#/configuration/firmware']"
+    xpath_select_network_settings = "//*[@data-test-id='nav-item-network-settings']"
+    xpath_date_time_settings_sub_menu = "//*[@data-test-id='nav-item-date-time-settings']"
+    xpath_firmware_update_sub_menu = "//*[@data-test-id='nav-item-firmware']"
 
     # xpath for access control menu
     xpath_access_control_menu = "//*[@data-test-id='nav-button-access-control']"
-    xpath_ldap_sub_menu = "//a[@href='#/access-control/ldap']"
+    xpath_ldap_sub_menu = "//*[@data-test-id='nav-item-ldap']"
     xpath_save_settings_button = "//button[contains(text(),'Save settings')]"
-    xpath_local_user_management_sub_menu = "//a[@href='#/access-control/local-user-management']"
-    xpath_ssl_certificates_sub_menu = "//a[@href='#/access-control/ssl-certificates']"
+    xpath_local_user_management_sub_menu = "//*[@data-test-id='nav-item-local-user-management']"
+    xpath_ssl_certificates_sub_menu = "//*[@data-test-id='nav-item-ssl-certificates']"
