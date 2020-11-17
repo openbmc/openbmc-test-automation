@@ -68,7 +68,7 @@ Verify Server LED OFF
 
     # Turn Off the server LED via GUI.
     Click Element At Coordinates  ${xpath_led_toggle}  0  0
-    Wait Until Element Contains  ${xpath_led_value}  Off  timeout=15
+    Wait Until Element Contains  ${xpath_led_value}  Off  timeout=30
 
     # Verify server LED via Redfish and GUI.
     Verify Server LED using Redfish and GUI  Off
