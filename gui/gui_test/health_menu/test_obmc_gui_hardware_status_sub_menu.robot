@@ -2,7 +2,7 @@
 
 Documentation   Test OpenBMC GUI "Hardware Status" sub-menu of "Health" menu.
 
-Resource        ../../lib/resource.robot
+Resource        ../../lib/gui_resource.robot
 
 Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser

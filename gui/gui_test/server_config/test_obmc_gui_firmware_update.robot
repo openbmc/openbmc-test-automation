@@ -2,7 +2,7 @@
 
 Documentation  Test OpenBMC Firmware Update" sub menu of "Configuration".
 
-Resource        ../../lib/resource.robot
+Resource        ../../lib/gui_resource.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
