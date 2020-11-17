@@ -84,7 +84,7 @@ Verify Installed CA Certificate
     Delete All CA Certificate Via Redfish
 
     # Install CA certificate via Redfish.
-    ${file_data}=  Generate Certificate File Data
+    ${file_data}=  Generate Certificate File Data  CA
     Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
 
     # Verify CA certificate availability in GUI.
@@ -96,7 +96,7 @@ Verify Installed HTTPS Certificate
     [Tags]  Verify_Installed_HTTPS_Certificate
 
     # Install HTTPS certificate.
-    ${file_data}=  Generate Certificate File Data
+    ${file_data}=  Generate Certificate File Data  Server
     Install Certificate File On BMC  ${REDFISH_HTTPS_CERTIFICATE_URI}  ok  data=${file_data}
 
     # Verify certificate is available in GUI.
@@ -110,7 +110,7 @@ Verify Installed LDAP Certificate
     Delete Certificate Via BMC CLI  Client
 
     # Install LDAP certificate.
-    ${file_data}=  Generate Certificate File Data
+    ${file_data}=  Generate Certificate File Data  Client
     Install Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}  ok  data=${file_data}
 
     # Verify certificate is available in GUI.
@@ -122,7 +122,15 @@ Verify Installed LDAP Certificate
 Generate Certificate File Data
     [Documentation]  Generate data of certificate file.
 
-    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365
+    [Arguments]  ${cert_type}
+    
+    # Description of Arguments(s):
+    # cert_type      Certificate type (e.g. "Client" or  "CA").
+
+    ${cert_file_path}=  Run Keyword If  '${cert_type}' == 'Client' or 'Server'
+    ...    Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
+    ...  ELSE IF  '${cert_type}' == 'CA'
+    ...    Generate Certificate File Via Openssl  Valid Certificate
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
