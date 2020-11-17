@@ -526,6 +526,10 @@ Verify Error Logging Rotation Policy
     Informational                 15
     Unrecoverable                 30
     Predictive                    30
+    Inform_Unreco                 45
+    Inform_Predict                45
+    Unreco_Pred                   45
+    Info_Unreco_Pred              45
 
 
 Verify Reverse Order Of PEL Logs
@@ -629,18 +633,32 @@ Error Logging Rotation Policy
     Redfish Purge Event Log
 
     # Determine the log generating command as per type of error.
-    ${cmd}=  Set Variable If
-    ...  '${error_log_type}' == 'Informational'  ${CMD_INFORMATIONAL_ERROR}
-    ...  '${error_log_type}' == 'Unrecoverable'  ${CMD_UNRECOVERABLE_ERROR}
-    ...  '${error_log_type}' == 'Predictive'     ${CMD_PREDICTIVE_ERROR}
+
+    ${cmd}=  Run Keyword If
+    ...  '${error_log_type}' == 'Informational'  Create List  ${CMD_INFORMATIONAL_ERROR}
+    ${cmd}=  Run Keyword If
+    ...  '${error_log_type}' == 'Unrecoverable' and ${cmd} == None  Create List  ${CMD_UNRECOVERABLE_ERROR}  ELSE   Set Variable   ${cmd}
+    ${cmd}=  Run Keyword If
+    ...  '${error_log_type}' == 'Predictive' and ${cmd} == None  Create List  ${CMD_PREDICTIVE_ERROR}  ELSE   Set Variable   ${cmd}
+    ${cmd}=  Run Keyword If
+    ...  '${error_log_type}' == 'Inform_Unreco' and ${cmd} == None  Create List  ${CMD_INFORMATIONAL_ERROR}  ${CMD_UNRECOVERABLE_ERROR}  ELSE   Set Variable   ${cmd}
+    ${cmd}=  Run Keyword If
+    ...  '${error_log_type}' == 'Inform_Predict' and ${cmd} == None  Create List  ${CMD_INFORMATIONAL_ERROR}  ${CMD_PREDICTIVE_ERROR}  ELSE   Set Variable   ${cmd}
+    ${cmd}=  Run Keyword If
+    ...  '${error_log_type}' == 'Unreco_Pred' and ${cmd} == None  Create List  ${CMD_PREDICTIVE_ERROR}  ${CMD_UNRECOVERABLE_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+    ...  '${error_log_type}' == 'Info_Unreco_Pred' and ${cmd} == None  Create List  ${CMD_INFORMATIONAL_ERROR}  ${CMD_UNRECOVERABLE_ERROR}  ${CMD_PREDICTIVE_ERROR}  ELSE   Set Variable   ${cmd}
 
     # Create 3001 information logs. The logging disk capacity limit is set to 20MB and the max log
     # count limit is 3000. Once log count crosses the limit, both BMC and non BMC created information,
     # non-informational logs are reduced to 15% and 30% respectively(i.e. 3 MB, 6 MB).
 
-    FOR  ${count}  IN RANGE  0  3001
-      BMC Execute Command  ${cmd}
+    ${n}=  Get Length  ${cmd}
+    ${count_loop}=  Evaluate  3000 / ${n}
+    FOR  ${count}  IN RANGE  0  ${count_loop}
+      BMC Execute Commands  ${cmd}
     END
+    BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
 
     # Delay for BMC to perform delete older error logs when log limit exceeds.
     Sleep  10s
@@ -653,6 +671,16 @@ Error Logging Rotation Policy
     ${percent_diff}=  Evaluate  ${disk_usage_percentage} - ${max_allocated_space_percentage}
     ${percent_diff}=   Evaluate  abs(${percent_diff})
     Should Be True  ${percent_diff} <= 0.5
+
+
+BMC Execute Commands
+    [Arguments]  ${cmd_list}
+
+    ${n}=  Get Length  ${cmd_list}
+    FOR  ${cnt}  IN RANGE  0  ${n}
+       ${command}=  Set Variable  ${cmd_list}[${cnt}]
+       BMC Execute Command  ${command}
+    END
 
 
 Get Disk Usage For Error Logs
