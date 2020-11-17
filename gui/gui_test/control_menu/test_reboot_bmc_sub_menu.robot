@@ -30,6 +30,14 @@ Verify Existence Of All Buttons In Reboot BMC Page
     Page Should Contain Element  ${xpath_reboot_bmc_button}
 
 
+Verify Existence Of All Sections In Reboot BMC Page
+    [Documentation]  Verify Existence Of All Sections In Reboot BMC Page.
+    [Tags]  Verify_Existence_Of_All_Sections_In_Reboot_BMC_Page
+
+    Page Should Contain  Reboot BMC
+    Page Should Contain  Last BMC reboot
+
+
 *** Keywords ***
 
 Test Setup Execution
