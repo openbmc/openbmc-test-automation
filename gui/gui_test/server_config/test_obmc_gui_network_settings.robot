@@ -67,11 +67,10 @@ Verify Hostname Text Configuration
     ...  sub-menu.
     [Tags]  Verify_Hostname_Text_Configuration
 
+    Wait Until Element Is Enabled  ${xpath_hostname_input}
     Input Text  ${xpath_hostname_input}  witherspoon1
     Click Button  ${xpath_network_save_settings}
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=10
-    Element Should Be Disabled  ${xpath_network_save_settings}
-    Click Element  ${xpath_select_refresh_button}
     Wait Until Keyword Succeeds  15 sec  5 sec  Textfield Should Contain  ${xpath_hostname_input}
     ...  witherspoon1
 
@@ -162,7 +161,6 @@ Suite Setup Execution
     Click Element  ${xpath_server_configuration}
     Click Element  ${xpath_select_network_settings}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network-settings
-
 
 
 Configure Invalid Network Address And Verify
