@@ -127,7 +127,7 @@ Create User And Verify
 
     # Select disabled radio button if user needs to be disabled
     Run Keyword If  ${enabled} == ${False}
-    ...  Click Element At Coordinates  ${xpath_radio_account_status_disabled}  0  0
+    ...  Click Element At Coordinates  ${xpath_account_status_disabled_button}  0  0
 
     # Input username, password and privilege.
     Input Text  ${xpath_username_input_button}  ${user_name}
