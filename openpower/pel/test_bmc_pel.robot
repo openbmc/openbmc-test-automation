@@ -526,6 +526,8 @@ Verify Error Logging Rotation Policy
     Informational                 15
     Unrecoverable                 30
     Predictive                    30
+    Inform_Unreco                 45
+    Inform_Predict                45
 
 
 Verify Reverse Order Of PEL Logs
