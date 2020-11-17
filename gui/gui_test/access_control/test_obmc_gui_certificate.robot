@@ -2,7 +2,7 @@
 
 Documentation  Test OpenBMC GUI "SSL Certificates" sub-menu of "Access control".
 
-Resource        ../../lib/resource.robot
+Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/certificate_utils.robot
 
 Suite Setup     Suite Setup Execution
