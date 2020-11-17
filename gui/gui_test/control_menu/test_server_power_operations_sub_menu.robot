@@ -2,7 +2,7 @@
 
 Documentation  Test OpenBMC GUI "Server power operations" sub-menu of "Server control".
 
-Resource        ../../lib/resource.robot
+Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/state_manager.robot
 
 Suite Setup     Launch Browser And Login GUI

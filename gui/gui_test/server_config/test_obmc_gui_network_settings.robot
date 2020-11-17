@@ -3,7 +3,7 @@
 Documentation   Test OpenBMC GUI "Network settings" sub-menu of
 ...             "Server configuration".
 
-Resource        ../../lib/resource.robot
+Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/bmc_network_utils.robot
 
 Suite Setup     Suite Setup Execution
