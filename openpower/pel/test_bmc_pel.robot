@@ -542,6 +542,15 @@ Verify Informational Error Log Size When Error Log Exceeds Limit
     Should Be True  ${percent_diff} <= 0.5
 
 
+Verify Combinatorial Error Logging Rotation Policy
+    [Documentation]  Verify error logging rotation policy.
+    [Tags]  Verify_Combinatorial_Error_Logging_Rotation_Policy
+    [Template]  Combinatorial Error Logging Rotation Policy
+
+    # Error log type              Max allocated space % of total logging space
+    Inform_Unreco                 45
+    Inform_Predict                45
+
 Verify Reverse Order Of PEL Logs
     [Documentation]  Verify PEL command to output PEL logs in reverse order.
     [Tags]  Verify_Reverse_PEL_Logs
@@ -599,6 +608,43 @@ Verify Listing Information Error
 
 
 *** Keywords ***
+
+Combinatorial Error Logging Rotation Policy
+    [Documentation]  Verify that when maximum log limit is reached, given error logging type
+    ...  are deleted when reached their max allocated space.
+    [Arguments]  ${error_log_type}  ${max_allocated_space_percentage}
+
+    # Description of argument(s):
+    # error_log_type                      Error log type.
+    # max_allocated_space_percentage      The maximum percentage of disk usage for given error
+    #                                     log type when maximum log size is reached.The maximum
+    #                                     log size is when the log count crosses 3000.
+
+    # Initially remove all logs. Purging is done only to ensure that, we test only specific
+    # number of error logs in our test without any remaining/additional logs of the past.
+    Redfish Purge Event Log
+
+    # Determine the log generating command as per type of error.
+
+    @{cmd_list}=  Set Variable If
+    ...  '${error_log_type}' == 'Inform_Unreco'  ${CMD_INFORMATIONAL_ERROR}  ${CMD_UNRECOVERABLE_ERROR}
+    ...  '${error_log_type}' == 'Inform_Predict'  ${CMD_INFORMATIONAL_ERROR}  ${CMD_PREDICTIVE_ERROR}
+
+    FOR  ${count}  IN RANGE  0  1500
+      BMC Execute Command  @{cmd_list}[${0}]
+      BMC Execute Command  @{cmd_list}[${1}]
+    END
+
+    # Delay for BMC to perform delete older error logs when log limit exceeds.
+    Sleep  10s
+
+    # Verify disk usage is around max allocated space.
+
+    ${disk_usage_percentage}=  Get Disk Usage For Error Logs
+    ${percent_diff}=  Evaluate  ${disk_usage_percentage} - ${max_allocated_space_percentage}
+    ${percent_diff}=   Evaluate  abs(${percent_diff})
+    Should Be True  ${percent_diff} <= 0.5
+
 
 Get Disk Usage For Error Logs
     [Documentation]  Get disk usage percentage for error logs.
