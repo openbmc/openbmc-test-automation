@@ -2,7 +2,7 @@
 
 Documentation  Test OpenBMC GUI "Overview" menu.
 
-Resource        ../../lib/resource.robot
+Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/logging_utils.robot
 Resource        ../../../lib/list_utils.robot
 Resource        ../../../lib/bmc_network_utils.robot
