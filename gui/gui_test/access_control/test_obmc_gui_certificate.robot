@@ -122,7 +122,7 @@ Verify Installed LDAP Certificate
 Generate Certificate File Data
     [Documentation]  Generate data of certificate file.
 
-    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365
+    ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
