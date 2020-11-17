@@ -2,7 +2,7 @@
 
 Documentation  Test OpenBMC GUI "Event logs" sub-menu.
 
-Resource        ../../lib/resource.robot
+Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/logging_utils.robot
 
 Suite Setup     Suite Setup Execution
