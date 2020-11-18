@@ -13,6 +13,7 @@ Test Setup      Test Setup Execution
 
 ${xpath_reboot_bmc_heading}      //h1[text()="Reboot BMC"]
 ${xpath_reboot_bmc_button}       //button[contains(text(),'Reboot BMC')]
+${xpath_reboot_cancel_button}    //button[contains(text(),'Cancel')]
 
 *** Test Cases ***
 
@@ -28,6 +29,15 @@ Verify Existence Of All Buttons In Reboot BMC Page
     [Tags]  Verify_Existence_Of_All_Buttons_In_Reboot_BMC_Page
 
     Page Should Contain Element  ${xpath_reboot_bmc_button}
+
+
+Verify Canceling Operation On BMC Reboot Operation
+    [Documentation]  Verify Canceling Operation On BMC Reboot operation
+    [Tags]  Verify_Canceling_Operation_On_BMC_Reboot_Operation
+
+    Click Element  ${xpath_reboot_bmc_button}
+    Click Element  ${xpath_reboot_cancel_button}
+    Wait Until Element Is Not Visible  ${xpath_reboot_cancel_button}  timeout=15
 
 
 *** Keywords ***
