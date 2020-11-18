@@ -153,6 +153,7 @@ class resource_variables():
     xpath_server_power_operations_sub_menu = "//*[@data-test-id='nav-item-server-power-operations']"
     xpath_sol_sub_menu = "//*[@data-test-id='nav-item-serial-over-lan']"
     xpath_kvm_sub_menu = "//*[@data-test-id='nav-item-kvm']"
+    xpath_reboot_cancel_button = "//button[contains(text(),'Cancel')]"
 
     # xpath for configuration menu
     xpath_server_configuration = "//*[@data-test-id='nav-button-configuration']"
