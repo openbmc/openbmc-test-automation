@@ -37,6 +37,19 @@ Verify Existence Of All Buttons In SOL Console Page
     Page Should Contain Element  ${xpath_open_in_new_tab_button}
 
 
+Verify Open In New Tab Button In SOL Page
+    [Documentation]  Verify Open In New Tab Button in SOL page
+    [Tags]  Verify_Open_In_New_Tab_Button_In_SOL_Page
+
+    Click Element  ${xpath_open_in_new_tab_button}
+    #To load the new window
+
+    Sleep  10s
+    Select Window    locator=NEW
+    Title Should Be 	Serial over LAN (SOL) console
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  serial-over-lan-console
+
+
 *** Keywords ***
 
 Test Setup Execution
