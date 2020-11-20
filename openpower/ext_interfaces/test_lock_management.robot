@@ -6,6 +6,7 @@ Resource             ../../lib/resource.robot
 Resource             ../../lib/openbmc_ffdc.robot
 Resource             ../../lib/bmc_redfish_utils.robot
 Resource             ../../lib/external_intf/management_console_utils.robot
+Resource             ../../lib/rest_response_code.robot
 Library              ../../lib/bmc_network_utils.py
 
 Suite Setup          Run Keyword And Ignore Error  Delete All Redfish Sessions
@@ -102,6 +103,16 @@ Acquire And Release Lock In Loop
     HMCID-01       WriteCase1
     HMCID-01       WriteCase2
     HMCID-01       WriteCase3
+
+
+Fail To Acquire Read And Write In Single Request
+    [Documentation]  Fail to acquire read and write lock in single request.
+    [Tags]  Fail_To_Acquire_Read_And_Write_In_Single_Request
+    [Template]  Verify Fail To Acquire Read And Write In Single Request
+
+    # client_id    lock_type
+    HMCID-01       ReadCase1,WriteCase1
+    HMCID-01       WriteCase1,ReadCase1
 
 
 Verify Release Of Valid Locks
@@ -341,6 +352,21 @@ Redfish Post Acquire Lock
     [Return]  ${resp}
 
 
+Redfish Post Acquire List Lock
+    [Documentation]  Acquire and release lock.
+    [Arguments]  ${lock_type}  ${status_code}=${HTTP_OK}
+
+    # Description of argument(s):
+    # lock_type      Read lock or Write lock.
+    # status_code    HTTP status code.
+
+    ${lock_dict_param}=  Create Data To Acquire List Of Lock  ${lock_type}
+    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
+    Should Be Equal As Strings  ${resp.status_code}  ${status_code}
+
+    [Return]  ${resp}
+
+
 Redfish Post Acquire Invalid Lock
     [Documentation]  Redfish to post request to acquire in-valid lock.
     [Arguments]  ${lock_type}  ${message}  ${status_code}=${HTTP_OK}
@@ -385,6 +411,28 @@ Form Data To Acquire Lock
     ...    ${lock_res_info["Valid Case"]["${lock_type}"]}
     ...    ${lock_res_info["Valid Case"]["ResourceID"]}
     ${temp_list}=  Create List  ${resp}
+    ${lock_request_dict}=  Create Dictionary  Request=${temp_list}
+
+    [Return]  ${lock_request_dict}
+
+
+Create Data To Acquire List Of Lock
+    [Documentation]  Create a dictionay for list of lock request.
+    [Arguments]  ${lock_type_list}
+
+    # Description of argument(s):
+    # lock_type      Read lock or Write lock.
+
+    ${temp_list}=  Create List
+    ${lock_res_info}=  Get Lock Resource Information
+
+    FOR  ${lock_type}  IN  @{lock_type_list}
+      ${resp}=  RW General Dictionary
+      ...    ${lock_res_info["Valid Case"]["${lock_type}"]}
+      ...    ${lock_res_info["Valid Case"]["ResourceID"]}
+      Append To List  ${temp_list}  ${resp}
+    END
+
     ${lock_request_dict}=  Create Dictionary  Request=${temp_list}
 
     [Return]  ${lock_request_dict}
@@ -551,6 +599,23 @@ Acquire Lock On Another Lock
 
     ${trans_id_emptylist}=  Create List
     Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
+    Redfish Delete Session  ${session_info}
+
+
+Verify Fail To Acquire Read And Write In Single Request
+    [Documentation]  Verify fail to acquire read and write lock passed in single request.
+    [Arguments]  ${client_id}  ${lock_type}
+
+    # Description of argument(s):
+    # client_id    This client id can contain string value
+    #              (e.g. 12345, "HMCID").
+    # lock_type    Read lock or Write lock.
+
+    ${client_id_list}=  Split String  ${client_id}  ,
+    ${lock_type_list}=  Split String  ${lock_type}  ,
+
+    ${session_info}=  Create Redfish Session With ClientID  ${client_id}
+    ${trans_id}=  Redfish Post Acquire List Lock  ${lock_type_list}  status_code=${HTTP_BAD_REQUEST} 
     Redfish Delete Session  ${session_info}
 
 
