@@ -61,6 +61,15 @@ Redfish Fail To Upload Multiple Partition File To BMC
     650KB_file,501KB_file
 
 
+Redfish Partition File Upload Post BMC Reboot
+    [Documentation]  Upload partition file to BMC using redfish, after the BMC reboot.
+    [Tags]  Redfish_Partition_File_Upload_Post_BMC_Reboot
+    [Template]  Verify Partition File Upload Post BMC Reboot
+
+    # file_name
+    500KB_file
+
+
 Redfish Partition File Persistency On BMC Reboot
     [Documentation]  Upload partition file to BMC using redfish and is same after reboot.
     [Tags]  Redfish_Partition_File_Persistency_On_BMC_Reboot
@@ -365,6 +374,18 @@ Redfish Fail To Upload Partition File
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=0
     Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND}
     Delete Local Partition File  ${Partition_file_list}
+
+
+Verify Partition File Upload Post BMC Reboot
+    [Documentation]  Upload the partition file, after BMC reboot.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name    Partition file name.
+
+    Redfish OBMC Reboot (off)
+
+    Redfish Upload Partition File  ${file_name}
 
 
 Redfish Partition File Persistency
