@@ -182,6 +182,42 @@
                   "SegmentLength": 1
               }]
           },
+          "ReadCase15": {
+              "Read": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": "3"
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 1
+              }]
+          },
+          "ReadCase16": {
+              "Read": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": "1"
+              }]
+          },
+          "ReadCase17": {
+              "Read": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": "Three"
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 1
+              }]
+          },
+          "ReadCase18": {
+              "Read": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": "One"
+              }]
+          },
           "WriteCase1": {
               "write": [{
                   "LockFlag": "DontLock",
@@ -303,6 +339,42 @@
               }, {
                   "LockFlag": "LockAll",
                   "SegmentLength": 1
+              }]
+          },
+          "WriteCase15": {
+              "Write": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": "3"
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase16": {
+              "Write": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": "1"
+              }]
+          },
+          "WriteCase17": {
+              "Write": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": "Three"
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": 1
+              }]
+          },
+          "WriteCase18": {
+              "Write": [{
+                  "LockFlag": "DontLock",
+                  "SegmentLength": 3
+              }, {
+                  "LockFlag": "LockAll",
+                  "SegmentLength": "One"
               }]
           }
     }
