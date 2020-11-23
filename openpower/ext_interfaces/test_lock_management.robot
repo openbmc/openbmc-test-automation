@@ -200,6 +200,22 @@ Fail To Acquire Lock For Invalid Segment Flag
     HMCID-01       WriteCase14     ${BAD_REQUEST}
 
 
+Fail To Acquire Lock For Invalid Segment Data Type Flag
+    [Documentation]  Failed to acquire read write lock for invalid segment flag passed.
+    [Tags]  Fail_To_Acquire_Lock_For_Invalid_Segment_Data_Type_Flag
+    [Template]  Verify Fail To Acquire Lock For Invalid Lock Data
+
+     # client_id    lock_type       message
+    HMCID-01       ReadCase15      ${EMPTY}
+    HMCID-01       ReadCase16      ${EMPTY}
+    HMCID-01       ReadCase17      ${EMPTY}
+    HMCID-01       ReadCase18      ${EMPTY}
+    HMCID-01       WriteCase15     ${EMPTY}
+    HMCID-01       WriteCase16     ${EMPTY}
+    HMCID-01       WriteCase17     ${EMPTY}
+    HMCID-01       WriteCase18     ${EMPTY}
+
+
 Get Empty Lock Records For Session Where No Locks Acquired
     [Documentation]  If session does not acquire locks then get lock should return
     ...              empty lock records.
@@ -353,7 +369,8 @@ Redfish Post Acquire Invalid Lock
     ${lock_dict_param}=  Form Data To Acquire Invalid Lock  ${lock_type}
     ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
-    Valid Value  message  ['${resp.content}']
+    Run Keyword If  '${message}' != '${EMPTY}'
+    ...  Valid Value  message  ['${resp.content}']
 
     [Return]  ${resp}
 
