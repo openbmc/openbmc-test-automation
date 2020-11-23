@@ -583,6 +583,18 @@ Verify Listing Information Error
     Should Contain  ${pel_records['${id}']['Sev']}  Informational
 
 
+Verify PEL Delete
+    [Documentation]  Verify that peltool command can delete PEL log based on id.
+    [Tags]  Verify_PEL_Delete
+
+    BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    Peltool  -d ${id}
+    ${output}=  peltool -i ${id}
+    Should Contain  ${output}  PEL not found
+
+
 *** Keywords ***
 
 Error Logging Rotation Policy
