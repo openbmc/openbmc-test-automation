@@ -26,6 +26,11 @@ ${xpath_setting_success}          //*[contains(text(),"Successfully saved networ
 ${xpath_add_dns_server}           //button[contains(text(),"Add DNS server")]
 ${xpath_network_interface}        //*[@data-test-id="networkSettings-select-interface"]
 ${xpath_input_netmask_addr0}      //*[@data-test-id="networkSettings-input-subnetMask-0"]
+${xpath_input_dns_server}         //*[@data-test-id="networkSettings-input-dnsAddress-0"]
+${xpath_delete_dns_server}       //*[@title="Delete DNS row"]
+
+
+${static_name_servers}      10.10.10.10
 
 *** Test Cases ***
 
@@ -152,6 +157,26 @@ Configure Invalid Network Addresses And Verify
     ${xpath_input_netmask_addr0}     255.256.255.0
 
 
+Config DNS Server Via GUI
+    [Documentation]  Configure DNS server and verify.
+    [Tags]  Config_DNS_Server_Via_GUI
+    [Setup]   DNS Test Setup Execution
+    [Teardown]   Run Keywords  Delete DNS Server And Verify
+    ...  AND  DNS Test Teardown Execution
+
+    Add DNS Server And Veify  ${static_name_servers}
+
+
+Delete DNS Server Via GUI
+    [Documentation]  Delete DNS server and verify.
+    [Tags]  Delete_DNS_Server_Via_GUI
+    [Setup]   Run Keywords  DNS Test Setup Execution  AND
+    ...  Add DNS Server And Veify  ${static_name_servers}
+    [Teardown]  DNS Test Teardown Execution
+
+    Delete DNS Server And Verify
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -175,4 +200,57 @@ Configure Invalid Network Address And Verify
     Input Text  ${locator}  ${invalid_address}
     Click Element  ${xpath_network_save_settings}
     Page Should Contain  Invalid format
+
+
+Add DNS Server And Veify
+    [Documentation]  Add DNS server On BMC.
+    [Arguments]  ${static_name_servers}
+
+    Wait Until Page Contains Element  ${xpath_add_dns_server}
+    Click Button  ${xpath_add_dns_server}
+    Wait Until Element Is Enabled  ${xpath_input_dns_server}
+    Input Text  ${xpath_input_dns_server}  ${static_name_servers}
+    Click Button  ${xpath_network_save_settings}
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
+    Textfield Value Should Be  ${xpath_input_dns_server}  ${static_name_servers}
+
+    # Check if newly added DNS server is configured on BMC.
+    ${dns_config}=  CLI Get Nameservers
+    ${cmd_status}=  Run Keyword And Return Status
+    ...  List Should Contain Sub List  ${cli_nameservers}  ${static_name_servers}
+
+
+Delete DNS Server And Verify
+    [Documentation]  Delete static name servers.
+
+    Wait Until Element Is Enabled  ${xpath_delete_dns_server}
+    Click Button  ${xpath_delete_dns_server}
+    Click Button  ${xpath_network_save_settings}
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
+    Sleep  1s
+    Wait Until Element Is Not Visible  ${xpath_input_dns_server}
+
+    # Check if all name servers deleted on BMC.
+    ${nameservers}=  CLI Get Nameservers
+    Should Be Empty  ${nameservers}
+
+
+DNS Test Setup Execution
+    [Documentation]  Do DNS test setup execution.
+
+    ${Result}=  Run Keyword And Return Status
+    ...  Page Should Contain Textfield  ${xpath_input_dns_server}
+
+    ${original_nameservers}=  Run Keyword If  '${Result}'=='True'
+    ...   Get Value  ${xpath_input_dns_server}
+    Set Suite Variable   ${original_nameservers}
+    Run Keyword If  '${Result}'=='True'
+    ...  Delete DNS Server And Verify
+
+
+DNS Test Teardown Execution
+    [Documentation]  Do DNS test teardown execution.
+
+    Run Keyword If  '${original_nameservers}' != 'None'
+    ...  Add DNS Server And Veify  ${original_nameservers}
 
