@@ -61,6 +61,15 @@ Redfish Fail To Upload Multiple Partition File To BMC
     650KB_file,501KB_file
 
 
+Redfish Upload Partition File To BMC In Loop
+    [Documentation]  Upload same partition file to BMC using redfish in loop.
+    [Tags]  Redfish_Upload_Partition_File_To_BMC_In_Loop
+    [Template]  Redfish Upload Partition File In Loop
+
+    # file_name
+    500KB_file
+
+
 Redfish Partition File Upload Post BMC Reboot
     [Documentation]  Upload partition file to BMC using redfish, after the BMC reboot.
     [Tags]  Redfish_Partition_File_Upload_Post_BMC_Reboot
@@ -373,6 +382,29 @@ Redfish Fail To Upload Partition File
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_BAD_REQUEST}  ${MAXIMUM_SIZE_MESSAGE}
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=0
     Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND}
+    Delete Local Partition File  ${Partition_file_list}
+
+
+Redfish Upload Partition File In Loop
+    [Documentation]  Upload the same partition file multiple times to BMC.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name    Partition file name.
+
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    Create Partition File  ${Partition_file_list}
+
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
+    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+
+    FOR  ${count}  IN RANGE  1  11
+      Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED}
+      Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+    END
+
+    Initialize OpenBMC
+    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
     Delete Local Partition File  ${Partition_file_list}
 
 
