@@ -60,6 +60,18 @@ Verify Existence Of All Input Boxes In Date And Time Settings Page
     Page Should Contain Element  ${xpath_ntp_server3}
 
 
+Verify Date And Time From Configuration Section
+    [Documentation]  Get date and time from configuration section and verify it via BMC CLI.
+    [Tags]  Verify_Date_And_Time_From_Configuration_Section
+
+    Click Element At Coordinates  ${xpath_select_manual}  0  0
+    ${manual_date}=  Get Value  ${xpath_manual_date}
+    ${manual_time}=  Get Value  ${xpath_manual_time}
+
+    ${cli_date_time}=  CLI Get BMC DateTime
+    Should contain  ${cli_date_time}  ${manual_date}  ${manual_time}
+
+
 *** Keywords ***
 
 Suite Setup Execution
