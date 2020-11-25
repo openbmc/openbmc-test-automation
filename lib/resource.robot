@@ -7,6 +7,10 @@ Variables         ../data/variables.py
 
 *** Variables ***
 
+# Transition REST vs Redfish ONLY temporary changes for stagging
+# automation infrastructure change and for continuity.
+${REDFISH_SUPPORT_TRANS_STATE}    0
+
 ${OPENBMC_MODEL}  ${EMPTY}
 ${OPENBMC_HOST}   ${EMPTY}
 ${DBUS_PREFIX}    ${EMPTY}
