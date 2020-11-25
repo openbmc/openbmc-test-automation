@@ -19,6 +19,8 @@ ${xpath_ntp_server1}           //input[@data-test-id="dateTimeSettings-input-ntp
 ${xpath_ntp_server2}           //input[@data-test-id="dateTimeSettings-input-ntpServer2"]
 ${xpath_ntp_server3}           //input[@data-test-id="dateTimeSettings-input-ntpServer3"]
 ${xpath_select_save_settings}  //button[@data-test-id="dateTimeSettings-button-saveSettings"]
+${gui_current_date}            //div[@class='page-section']//dt[text() = 'Date']/following-sibling::dd
+${gui_current_time}            //div[@class='page-section']//dt[text() = '24-hour time']/following-sibling::dd
 
 
 *** Test Cases ***
@@ -58,6 +60,19 @@ Verify Existence Of All Input Boxes In Date And Time Settings Page
     Page Should Contain Element  ${xpath_ntp_server1}
     Page Should Contain Element  ${xpath_ntp_server2}
     Page Should Contain Element  ${xpath_ntp_server3}
+
+
+Verify Display of Date and Time in GUI Page
+    [Documentation]  Verify display of date and time in gui Page
+    [Tags]  Verify_Display_Of_Date_And_Time_In_Gui_Page
+
+    #Get Date and Time from GUI page.
+    ${gui_date}=  Get Text  ${gui_current_date}
+    ${gui_Time}=  Get Text  ${gui_current_time}
+
+    #Verify Date and Time with CLI.
+    ${cli_date_time}=  CLI Get BMC DateTime
+    Should contain  ${cli_date_time}  ${gui_date}  ${gui_Time}
 
 
 *** Keywords ***
