@@ -60,6 +60,18 @@ Verify Existence Of All Input Boxes In Date And Time Settings Page
     Page Should Contain Element  ${xpath_ntp_server3}
 
 
+Verify Manual Date And Time In Date And Time Settings Page
+    [Documentation]  Verify manual date and time under configuaration section.
+    [Tags]  Verify_Manual_Date_And_Time_In_Date_And_Time_Settings_Page
+
+    Click Element At Coordinates  ${xpath_select_manual}  0  0
+    ${manual_date}=  Get Value  ${xpath_manual_date}
+    ${manual_time}=  Get Value  ${xpath_manual_time}
+
+    Page Should Contain  ${manual_date}
+    Page Should Contain  ${manual_time}
+
+
 *** Keywords ***
 
 Suite Setup Execution
