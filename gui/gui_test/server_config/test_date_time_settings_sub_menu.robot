@@ -60,6 +60,17 @@ Verify Existence Of All Input Boxes In Date And Time Settings Page
     Page Should Contain Element  ${xpath_ntp_server3}
 
 
+Verify NTP Server Input Fields From Date And Time Page
+    [Documentation]  Verify NTP server input fields in date and time page.
+    [Tags]  Verify_NTP_Server_Input_Fields_From_Date_And_Time_Page
+    [Template]  Input NTP Server Address And Verify
+
+    # locator                         input_values
+    ${xpath_ntp_server1}             10.10.10.10
+    ${xpath_ntp_server2}             20.20.20.20
+    ${xpath_ntp_server3}             30.30.30.30
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -69,4 +80,17 @@ Suite Setup Execution
     Click Element  ${xpath_server_configuration}
     Click Element  ${xpath_date_time_settings_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time-settings
+
+
+Input NTP Server Address And Verify
+    [Documentation]  Configure invalid network address And verify.
+    [Arguments]  ${locator}  ${input_values}
+
+    # Description of the argument(s):
+    # locator            Xpath to identify HTML element in web page.
+    # input_values       NTP server random values to input.
+
+    Click Element At Coordinates  ${xpath_select_ntp}  0  0
+    Input Text  ${locator}  ${input_values}
+    Textfield Value Should Be  ${locator}  ${input_values}
 
