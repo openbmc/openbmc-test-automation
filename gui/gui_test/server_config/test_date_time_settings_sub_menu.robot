@@ -91,6 +91,23 @@ Verify Display Of Date and Time In GUI Page
     Page Should Contain  ${redfish_time}
 
 
+Verify NTP Server Input Fields In Date And Time Page
+    [Documentation]  Verify NTP server input fields in date and time page.
+    [Tags]  Verify_NTP_Server_Input_Fields_In_Date_And_Time_Page
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={'NTP':{'NTPServers': ['10.10.10.10', '20.20.20.20', '30.30.30.30']}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Refresh the NTP Page.
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains Element  ${xpath_select_ntp}  timeout=10s
+
+    Textfield Value Should Be  ${xpath_ntp_server1}  10.10.10.10
+    Textfield Value Should Be  ${xpath_ntp_server2}  20.20.20.20
+    Textfield Value Should Be  ${xpath_ntp_server3}  30.30.30.30
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -105,3 +122,5 @@ Navigate To Date and Time Page
     Click Element  ${xpath_server_configuration}
     Click Element  ${xpath_date_time_settings_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time-settings
+
+
