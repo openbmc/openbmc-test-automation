@@ -60,7 +60,32 @@ Verify Existence Of All Input Boxes In Date And Time Settings Page
     Page Should Contain Element  ${xpath_ntp_server3}
 
 
+Verify Display Of Date and Time In GUI Page
+     [Documentation]  Get date and time from Redfish and verify it via GUI date and time page.
+     [Tags]  Verify_Display_Of_Date_And_Time_In_Gui_Page
+
+     # Get date and time from Redfish.
+
+     ${date_time}=  Get Redfish DateTime
+     ${redfish_date}=  Convert Date  ${date_time}  result_format=%Y-%m-%d
+     ${redfish_time}=  Convert Date  ${date_time}  result_format=%H:%M
+     ${cli_date_time}=  CLI Get BMC DateTime
+     Should contain  ${cli_date_time}  ${redfish_date}  ${redfish_time}
+
+     # Verify date and time via redfish.
+
+     Page Should Contain  ${redfish_date}
+     Page Should Contain  ${redfish_time}
+
+
 *** Keywords ***
+
+Get Redfish DateTime
+    [Documentation]  Returns BMC Datetime value from Redfish.
+
+    ${redfish_date_time}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/bmc  DateTime
+    [Return]  ${redfish_date_time}
+
 
 Suite Setup Execution
    [Documentation]  Do test case setup tasks.
