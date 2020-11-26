@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8da6e96_943e390f",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-26T07:43:08Z",
+      "side": 1,
+      "message": "Why this parameter is required?\nWithout version number, we can\u0027t switch?",
+      "range": {
+        "startLine": 183,
+        "startChar": 16,
+        "endLine": 183,
+        "endChar": 32
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94c124f3_95273dea",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-26T07:43:08Z",
+      "side": 1,
+      "message": "Can the functional n backup version be same on BMC?",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 74
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
