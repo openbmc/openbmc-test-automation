@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9477c65_9456ef2c",
+        "filename": "gui/gui_test/server_config/test_date_time_settings_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-11-26T06:32:54Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 68,
+        "startChar": 37,
+        "endLine": 68,
+        "endChar": 38
+      },
+      "revId": "b29667dc45333517b5a8044b5124876955c840ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa99080c_4e168773",
+        "filename": "gui/gui_test/server_config/test_date_time_settings_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-11-26T06:32:54Z",
+      "side": 1,
+      "message": "Remove these additional lines here and one at the end.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 1
+      },
+      "revId": "b29667dc45333517b5a8044b5124876955c840ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
