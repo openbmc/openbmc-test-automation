@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9491cd99_6ea99cc3",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-11-27T07:13:42Z",
+      "side": 1,
+      "message": "I will reply left over comment in sperate patch.",
+      "parentUuid": "c540e45c_6462ddec",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 39
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e6d6283_c6961f8f",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 3
@@ -119,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "c4d44521_1036bcea",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-11-27T07:13:42Z",
+      "side": 1,
+      "message": "Initial it was used to support single image and later it has supported two images.\n\nAs per your suggestion \"to do\" in this keyword with out passing image version as parameter.\n\n1. Get the back up image details.\n2. Using redfish URI change to back Image. \n3. Verify the backup image is functional.\n\nyes, this could also be solution to make back up image as functional.\n\nIn current implementation, passing the Image version gives a control to user as which image need to be functional when there are more than two images are available. So, by considering this scenario I implemented this keyword with passing parameter as image version.",
+      "parentUuid": "cf1bc0c6_cfcf5ba0",
+      "range": {
+        "startLine": 183,
+        "startChar": 16,
+        "endLine": 183,
+        "endChar": 32
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94c124f3_95273dea",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 3
@@ -178,6 +226,30 @@
       "side": 1,
       "message": "OK, is this check required?",
       "parentUuid": "c57d0982_b9205dca",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 74
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef2687a0_b479c80f",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-11-27T07:13:42Z",
+      "side": 1,
+      "message": "yes, its required.",
+      "parentUuid": "ff955133_a7029815",
       "range": {
         "startLine": 189,
         "startChar": 0,
