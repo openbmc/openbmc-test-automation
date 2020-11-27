@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "c540e45c_6462ddec",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-27T06:07:07Z",
+      "side": 1,
+      "message": "Can you give a better name here:\nMay be like:\nSwitch Backup Firmware Image To Functional",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 39
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e6d6283_c6961f8f",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-27T06:07:07Z",
+      "side": 1,
+      "message": "Change it accordingly",
+      "range": {
+        "startLine": 182,
+        "startChar": 20,
+        "endLine": 182,
+        "endChar": 69
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8da6e96_943e390f",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 3
@@ -49,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "cf1bc0c6_cfcf5ba0",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-27T06:07:07Z",
+      "side": 1,
+      "message": "There will be one functional and one backup image on BMC, right?\nKeyword can get the version of backup image, it can pick it and change it.\nIf any user wants to use this keyword to change backup to functional, why he has to go and check system, instead keyword will pick backup and make it functional.",
+      "parentUuid": "93e4f120_a273c960",
+      "range": {
+        "startLine": 183,
+        "startChar": 16,
+        "endLine": 183,
+        "endChar": 32
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94c124f3_95273dea",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 3
@@ -84,6 +154,30 @@
       "side": 1,
       "message": "No, both i.e. functional/backup image can not have same image version.",
       "parentUuid": "94c124f3_95273dea",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 74
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff955133_a7029815",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-27T06:07:07Z",
+      "side": 1,
+      "message": "OK, is this check required?",
+      "parentUuid": "c57d0982_b9205dca",
       "range": {
         "startLine": 189,
         "startChar": 0,
