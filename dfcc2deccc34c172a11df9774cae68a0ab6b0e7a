@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "93e4f120_a273c960",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-11-27T05:35:48Z",
+      "side": 1,
+      "message": "-\u003e using image version as parameter for this keyword as redfish URI need the firmware version which needs to be switched i.e. \"/redfish/v1/UpdateService/FirmwareInventory/image_version\"\n\n-\u003e user will have a control as which image need to be switched.\n\n-\u003e version number needed as to specify which version needs to be switched.",
+      "parentUuid": "c8da6e96_943e390f",
+      "range": {
+        "startLine": 183,
+        "startChar": 16,
+        "endLine": 183,
+        "endChar": 32
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94c124f3_95273dea",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2020-11-26T07:43:08Z",
       "side": 1,
       "message": "Can the functional n backup version be same on BMC?",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 74
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c57d0982_b9205dca",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-11-27T05:35:48Z",
+      "side": 1,
+      "message": "No, both i.e. functional/backup image can not have same image version.",
+      "parentUuid": "94c124f3_95273dea",
       "range": {
         "startLine": 189,
         "startChar": 0,
