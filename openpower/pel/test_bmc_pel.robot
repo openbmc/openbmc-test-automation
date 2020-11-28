@@ -41,6 +41,18 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
 
+${CMD_INFORMATIONAL_NON_BMC_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.TestError2
+...  xyz.openbmc_project.Logging.Entry.Level.Informational 0
+
+${CMD_UNRECOVERABLE_NON_BMC_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
+${CMD_PREDICTIVE_NON_BMC_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 *** Test Cases ***
@@ -522,10 +534,13 @@ Verify Error Logging Rotation Policy
     [Tags]  Verify_Error_Logging_Rotation_Policy
     [Template]  Error Logging Rotation Policy
 
-    # Error log type              Max allocated space % of total logging space
-    Informational                 15
-    Unrecoverable                 30
-    Predictive                    30
+    # Error log type    Max allocated space % of total   Is OpenBMC error Log
+    Informational                 15                         ${True}
+    Unrecoverable                 30                         ${True}
+    Predictive                    30                         ${True}
+    Informational                 15                         ${False}
+    Unrecoverable                 15                         ${False}
+    Predictive                    15                         ${False}
 
 
 Verify Reverse Order Of PEL Logs
@@ -616,13 +631,15 @@ Verify PEL Delete
 Error Logging Rotation Policy
     [Documentation]  Verify that when maximum log limit is reached, given error logging type
     ...  are deleted when reached their max allocated space.
-    [Arguments]  ${error_log_type}  ${max_allocated_space_percentage}
+    [Arguments]  ${error_log_type}  ${max_allocated_space_percentage}  ${openbmc}
 
     # Description of argument(s):
     # error_log_type                      Error log type.
     # max_allocated_space_percentage      The maximum percentage of disk usage for given error
     #                                     log type when maximum count/log size is reached.
     #                                     The maximum error log count is 3000.
+    # openbmc                             A true value indicates an openbmc system, a false
+    #                                     indicates a non bmc based system.
 
     # Initially remove all logs. Purging is done to ensure that, only specific logs are present
     # in BMC during the test.
@@ -630,9 +647,12 @@ Error Logging Rotation Policy
 
     # Determine the log generating command as per type of error.
     ${cmd}=  Set Variable If
-    ...  '${error_log_type}' == 'Informational'  ${CMD_INFORMATIONAL_ERROR}
-    ...  '${error_log_type}' == 'Unrecoverable'  ${CMD_UNRECOVERABLE_ERROR}
-    ...  '${error_log_type}' == 'Predictive'     ${CMD_PREDICTIVE_ERROR}
+    ...  '${error_log_type}' == 'Informational' AND ${openbmc} == ${True}  ${CMD_INFORMATIONAL_ERROR}
+    ...  '${error_log_type}' == 'Unrecoverable' AND ${openbmc} == ${True}  ${CMD_UNRECOVERABLE_ERROR}
+    ...  '${error_log_type}' == 'Predictive'    AND ${openbmc} == ${True}  ${CMD_PREDICTIVE_NON_BMC_ERROR}
+    ...  '${error_log_type}' == 'Informational' AND ${openbmc} == ${False}  ${CMD_INFORMATIONAL_NON_BMC_ERROR}
+    ...  '${error_log_type}' == 'Unrecoverable' AND ${openbmc} == ${False}  ${CMD_UNRECOVERABLE_NON_BMC_ERROR}
+    ...  '${error_log_type}' == 'Informational' AND ${openbmc} == ${False}  ${CMD_PREDICTIVE_NON_BMC_ERROR}
 
     # Create 3001 information logs. The logging disk capacity limit is set to 20MB and the max log
     # count limit is 3000. Once log count crosses the limit, both BMC and non BMC created information,
