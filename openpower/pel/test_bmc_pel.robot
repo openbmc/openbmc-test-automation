@@ -522,11 +522,14 @@ Verify Error Logging Rotation Policy
     [Tags]  Verify_Error_Logging_Rotation_Policy
     [Template]  Error Logging Rotation Policy
 
-    # Error log type              Max allocated space % of total logging space
-    Informational                 15
-    Unrecoverable                 30
-    Predictive                    30
-
+    # Error log type                                                           Max allocated space % of total logging space
+    Predictive, BMC, 3000                                                                        30
+    Informational, BMC, 3000                                                                     15
+    Unrecoverable, BMC, 3000                                                                     30
+    Informational, BMC, 1500, Predictive, BMC, 1500                                              45
+    Informational, BMC, 1500, Unrecoverable, BMC, 1500                                           45
+    Unrecoverable, BMC, 1500, Predictive, BMC, 1500                                              30
+    Unrecoverable, BMC, 1000, Informational, BMC, 1000, Predictive, BMC, 1000                    45 
 
 Verify Reverse Order Of PEL Logs
     [Documentation]  Verify PEL command to output PEL logs in reverse order.
@@ -620,39 +623,37 @@ Error Logging Rotation Policy
 
     # Description of argument(s):
     # error_log_type                      Error log type.
+    # system                              System that Logs belong to
     # max_allocated_space_percentage      The maximum percentage of disk usage for given error
     #                                     log type when maximum count/log size is reached.
     #                                     The maximum error log count is 3000.
 
     # Initially remove all logs. Purging is done to ensure that, only specific logs are present
     # in BMC during the test.
-    Redfish Purge Event Log
 
-    # Determine the log generating command as per type of error.
-    ${cmd}=  Set Variable If
-    ...  '${error_log_type}' == 'Informational'  ${CMD_INFORMATIONAL_ERROR}
-    ...  '${error_log_type}' == 'Unrecoverable'  ${CMD_UNRECOVERABLE_ERROR}
-    ...  '${error_log_type}' == 'Predictive'     ${CMD_PREDICTIVE_ERROR}
+    @{words} =         Split String    ${error_log_type}  ,${SPACE}
+    ${ListLength}=    Get Length    ${words}
 
-    # Create 3001 information logs. The logging disk capacity limit is set to 20MB and the max log
-    # count limit is 3000. Once log count crosses the limit, both BMC and non BMC created information,
-    # non-informational logs are reduced to 15% and 30% respectively(i.e. 3 MB, 6 MB).
+    FOR  ${count}  IN RANGE  2  ${ListLength}
+        ${count3}=   Evaluate  (${count} + 1) % 3
+        ${count0}=   Evaluate  (${count} - 2)
+        ${count1}=   Evaluate  (${count} - 1)
+        ${count2}=   Set Variable  ${count}
 
-    FOR  ${count}  IN RANGE  0  3001
-      BMC Execute Command  ${cmd}
+        Run Keyword If  ${count3} == 0  BMC Execute Commands   ${words}[${count0}]   ${words}[${count1}]  ${words}[${count2}]
     END
 
-    # Delay for BMC to perform delete older error logs when log limit exceeds.
-    Sleep  10s
 
-    # Verify disk usage is around max allocated space. Maximum usage is around 3MB not exactly 3MB
-    # (for informational log) and around 6 MB for unrecoverable / predictive error log. So, usage
-    # percentage is NOT exactly 15% and 30%. So, an error/accuracy factor 0.5 percent is added.
+BMC Execute Commands
+    [Arguments]  ${type}   ${sys}   ${number}
 
-    ${disk_usage_percentage}=  Get Disk Usage For Error Logs
-    ${percent_diff}=  Evaluate  ${disk_usage_percentage} - ${max_allocated_space_percentage}
-    ${percent_diff}=   Evaluate  abs(${percent_diff})
-    Should Be True  ${percent_diff} <= 0.5
+    FOR  ${count}  IN RANGE  0  ${number}
+        ${cmd_exe}=  Set Variable If
+        ...  '${type}' == 'Informational'  ${CMD_INFORMATIONAL_ERROR}
+        ...  '${Type}' == 'Predictive'  ${CMD_PREDICTIVE_ERROR}
+        ...  '${Type}' == 'Unrecoverable'  ${CMD_UNRECOVERABLE_ERROR}
+        BMC Execute Command  ${cmd_exe}
+    END
 
 
 Get Disk Usage For Error Logs
