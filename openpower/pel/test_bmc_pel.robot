@@ -522,10 +522,14 @@ Verify Error Logging Rotation Policy
     [Tags]  Verify_Error_Logging_Rotation_Policy
     [Template]  Error Logging Rotation Policy
 
-    # Error log type              Max allocated space % of total logging space
-    Informational                 15
-    Unrecoverable                 30
-    Predictive                    30
+    # Error log type      system type          Max allocated space % of total logging space
+    Informational          bmc                      15
+    Unrecoverable          bmc                      30
+    Predictive             bmc                      30
+    Informational          nbmc_bmc                 30
+    Info_Unreco            nbmc_bmc                 45 
+    Unreco_Info            nbmc_bmc                 45
+    Info_Predict           nbmc_bmc                 45
 
 
 Verify Reverse Order Of PEL Logs
