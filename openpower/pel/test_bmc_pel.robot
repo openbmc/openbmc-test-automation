@@ -41,6 +41,18 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
 
+${CMD_INFORMATIONAL_NON_BMC_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.TestError2
+...  xyz.openbmc_project.Logging.Entry.Level.Informational 0
+
+${CMD_UNRECOVERABLE_NON_BMC_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
+${CMD_PREDICTIVE_NON_BMC_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 *** Test Cases ***
@@ -520,12 +532,20 @@ Verify Unrecoverable Error Log
 Verify Error Logging Rotation Policy
     [Documentation]  Verify error logging rotation policy.
     [Tags]  Verify_Error_Logging_Rotation_Policy
-    [Template]  Error Logging Rotation Policy
+    [Template]  testError Logging Rotation Policy
 
-    # Error log type              Max allocated space % of total logging space
-    Informational                 15
-    Unrecoverable                 30
-    Predictive                    30
+    # Error log type      system type          Max allocated space % of total logging space
+    Informational          bmc                      15
+    Unrecoverable          bmc                      30
+    Predictive             bmc                      30
+    Informational          nbmc                     15
+    Unrecoverable          nbmc                     30
+    Predictive             nbmc                     30
+    Info_Predict           bmc                      45
+    Informational          nbmc_bmc                 30
+    Info_Unreco            nbmc_bmc                 45
+    Unreco_Info            nbmc_bmc                 45
+    Info_Predict           nbmc_bmc                 45
 
 
 Verify Reverse Order Of PEL Logs
@@ -616,10 +636,11 @@ Verify PEL Delete
 Error Logging Rotation Policy
     [Documentation]  Verify that when maximum log limit is reached, given error logging type
     ...  are deleted when reached their max allocated space.
-    [Arguments]  ${error_log_type}  ${max_allocated_space_percentage}
+    [Arguments]  ${error_log_type}  ${system_type}  ${max_allocated_space_percentage}
 
     # Description of argument(s):
     # error_log_type                      Error log type.
+    # system                              System that Logs belong to
     # max_allocated_space_percentage      The maximum percentage of disk usage for given error
     #                                     log type when maximum count/log size is reached.
     #                                     The maximum error log count is 3000.
@@ -629,18 +650,19 @@ Error Logging Rotation Policy
     Redfish Purge Event Log
 
     # Determine the log generating command as per type of error.
-    ${cmd}=  Set Variable If
-    ...  '${error_log_type}' == 'Informational'  ${CMD_INFORMATIONAL_ERROR}
-    ...  '${error_log_type}' == 'Unrecoverable'  ${CMD_UNRECOVERABLE_ERROR}
-    ...  '${error_log_type}' == 'Predictive'     ${CMD_PREDICTIVE_ERROR}
+
+    ${cmd}=   FormulateCommands   ${error_log_type}   ${system_type}
 
     # Create 3001 information logs. The logging disk capacity limit is set to 20MB and the max log
     # count limit is 3000. Once log count crosses the limit, both BMC and non BMC created information,
     # non-informational logs are reduced to 15% and 30% respectively(i.e. 3 MB, 6 MB).
 
-    FOR  ${count}  IN RANGE  0  3001
-      BMC Execute Command  ${cmd}
+    ${n}=  Get Length  ${cmd}
+    ${count_loop}=  Evaluate  3000 / ${n}
+    FOR  ${count}  IN RANGE  0  ${count_loop}
+      BMC Execute Commands  ${cmd}
     END
+    BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
 
     # Delay for BMC to perform delete older error logs when log limit exceeds.
     Sleep  10s
@@ -653,6 +675,49 @@ Error Logging Rotation Policy
     ${percent_diff}=  Evaluate  ${disk_usage_percentage} - ${max_allocated_space_percentage}
     ${percent_diff}=   Evaluate  abs(${percent_diff})
     Should Be True  ${percent_diff} <= 0.5
+
+
+FormulateCommands
+     [Arguments]  ${error_log_type}   ${system_type}
+
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Informational' and '${system_type}' == 'bmc'  Create List  ${CMD_INFORMATIONAL_ERROR}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Informational' and '${system_type}' == 'nbmc_bmc'  Create List  ${CMD_INFORMATIONAL_ERROR}  ${CMD_INFORMATIONAL_NON_BMCERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Unrecoverable' and '${system_type}' == 'bmc'  Create List  ${CMD_UNRECOVERABLE_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Predictive' and '${system_type}' == 'bmc'  Create List  ${CMD_PREDICTIVE_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Informational' and '${system_type}' == 'nbmc'  Create List  ${CMD_INFORMATIONAL_NON_BMC_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Unrecoverable' and '${system_type}' == 'nbmc'  Create List  ${CMD_UNRECOVERABLE_NON_BMC_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Predictive' and '${system_type}' == 'nbmc'  Create List  ${CMD_PREDICTIVE_NON_BMC_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Info_Predict' and '${system_type}' == 'bmc'  Create List  ${CMD_INFORMATIONAL_ERROR}  ${CMD_PREDICTIVE_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Info_Unreco' and '${system_type}' == 'bmc_nbmc'  Create List  ${CMD_UNRECOVERABLE_NON_BMC_ERROR}  ${CMD_INFORMATIONAL_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Info_Unreco' and '${system_type}' == 'nbmc_bmc'  Create List  ${CMD_INFORMATIONAL_NON_BMC_ERROR}  ${CMD_UNRECOVERABLE_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Info_Predict' and '${system_type}' == 'nbmc_bmc'  Create List  ${CMD_INFORMATIONAL_NON_BMC_ERROR}  ${CMD_PREDICTIVE_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Unreco_Pred' and '${system_type}' == 'nbmc_bmc'  Create List  ${CMD_UNRECOVERABLE_NON_BMC_ERROR}  ${CMD_PREDICTIVE_ERROR}  ELSE   Set Variable   ${cmd}
+     ${cmd}=  Run Keyword If
+     ...  '${error_log_type}' == 'Info_Unreco_Pred' and '${system_type}' == 'nbmc_nbmc_bmc'  Create List  ${CMD_INFORMATIONAL_NON_BMC_ERROR}  ${CMD_UNRECOVERABLE_NON_BMC_ERROR}
+     ...  ${CMD_PREDICTIVE_ERROR}  ELSE   Set Variable   ${cmd}
+     [return]  ${cmd}
+
+
+BMC Execute Commands
+    [Arguments]  ${cmd_list}
+
+    ${n}=  Get Length  ${cmd_list}
+    FOR  ${cnt}  IN RANGE  0  ${n}
+       ${command}=  Set Variable  ${cmd_list}[${cnt}]
+       BMC Execute Command  ${command}
+    END
 
 
 Get Disk Usage For Error Logs
