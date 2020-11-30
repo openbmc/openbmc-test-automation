@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "328cc109_751bffa7",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-30T08:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9491cd99_6ea99cc3",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 39
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e6d6283_c6961f8f",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 3
@@ -167,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "255caeee_a366da04",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-30T08:20:26Z",
+      "side": 1,
+      "message": "if only one backup image, then it does not make sense to enter image version. do you know there will be support for multiple backup images? Is there any requirement for multiple backup images?",
+      "parentUuid": "c4d44521_1036bcea",
+      "range": {
+        "startLine": 183,
+        "startChar": 16,
+        "endLine": 183,
+        "endChar": 32
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94c124f3_95273dea",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 3
@@ -250,6 +298,30 @@
       "side": 1,
       "message": "yes, its required.",
       "parentUuid": "ff955133_a7029815",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 74
+      },
+      "revId": "dfcc2deccc34c172a11df9774cae68a0ab6b0e7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28a54f0c_7c2be6f0",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-11-30T08:20:26Z",
+      "side": 1,
+      "message": "when they both will never be same, validation is not required for making backup to functional.",
+      "parentUuid": "ef2687a0_b479c80f",
       "range": {
         "startLine": 189,
         "startChar": 0,
