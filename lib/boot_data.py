@@ -26,6 +26,8 @@ import var_funcs as vf
 # The code base directory will be one level up from the directory containing this module.
 code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
 
+redfish_support_trans_state = BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0)
+
 
 def create_boot_table(file_path=None,
                       os_host=""):
@@ -47,7 +49,10 @@ def create_boot_table(file_path=None,
                                     boot entries.
     """
     if file_path is None:
-        file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table.json')
+        if redfish_support_trans_state:
+            file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table_redfish.json')
+        else:
+            file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table.json')
 
     if not file_path.startswith("/"):
         file_path = code_base_dir_path + file_path
