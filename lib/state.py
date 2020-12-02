@@ -78,6 +78,9 @@ SYSTEM_STATE_URI = "/xyz/openbmc_project/state/"
 
 OBMC_STATES_VERSION = int(os.environ.get('OBMC_STATES_VERSION', 1))
 
+redfish_support_trans_state = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
+    int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
+
 # When a user calls get_state w/o specifying req_states, default_req_states
 # is used as its value.
 default_req_states = ['rest',
@@ -90,9 +93,13 @@ default_req_states = ['rest',
                       'os_login',
                       'os_run_cmd']
 
+if redfish_support_trans_state:
+    default_req_states.remove('operating_system')
+
 # valid_req_states is a list of sub states supported by the get_state function.
 # valid_req_states, default_req_states and master_os_up_match are used by the
 # get_state function.
+
 valid_req_states = ['ping',
                     'packet_loss',
                     'uptime',
@@ -131,50 +138,91 @@ default_os_req_states = ['os_ping',
 USE_BMC_EPOCH_TIME = int(os.environ.get('USE_BMC_EPOCH_TIME', 0))
 
 # Useful state constant definition(s).
-# default_state is an initial value which may be of use to callers.
-default_state = DotDict([('rest', '1'),
-                         ('chassis', 'On'),
-                         ('bmc', 'Ready'),
-                         ('boot_progress', 'OSStart'),
-                         ('operating_system', 'BootComplete'),
-                         ('host', 'Running'),
-                         ('os_ping', '1'),
-                         ('os_login', '1'),
-                         ('os_run_cmd', '1')])
+if not redfish_support_trans_state:
+    # default_state is an initial value which may be of use to callers.
+    default_state = DotDict([('rest', '1'),
+                             ('chassis', 'On'),
+                             ('bmc', 'Ready'),
+                             ('boot_progress', 'OSStart'),
+                             ('operating_system', 'BootComplete'),
+                             ('host', 'Running'),
+                             ('os_ping', '1'),
+                             ('os_login', '1'),
+                             ('os_run_cmd', '1')])
 
-# A match state for checking that the system is at "standby".
-standby_match_state = DotDict([('rest', '^1$'),
-                               ('chassis', '^Off$'),
-                               ('bmc', '^Ready$'),
-                               ('boot_progress', '^Off|Unspecified$'),
-                               ('operating_system', '^Inactive$'),
-                               ('host', '^Off$')])
+    # A match state for checking that the system is at "standby".
+    standby_match_state = DotDict([('rest', '^1$'),
+                                   ('chassis', '^Off$'),
+                                   ('bmc', '^Ready$'),
+                                   ('boot_progress', '^Off|Unspecified$'),
+                                   ('operating_system', '^Inactive$'),
+                                   ('host', '^Off$')])
 
-# A match state for checking that the system is at "os running".
-os_running_match_state = DotDict([('chassis', '^On$'),
+    # A match state for checking that the system is at "os running".
+    os_running_match_state = DotDict([('chassis', '^On$'),
+                                      ('bmc', '^Ready$'),
+                                      ('boot_progress',
+                                       'FW Progress, Starting OS|OSStart'),
+                                      ('operating_system', 'BootComplete'),
+                                      ('host', '^Running$'),
+                                      ('os_ping', '^1$'),
+                                      ('os_login', '^1$'),
+                                      ('os_run_cmd', '^1$')])
+
+    # A master dictionary to determine whether the os may be up.
+    master_os_up_match = DotDict([('chassis', '^On$'),
                                   ('bmc', '^Ready$'),
                                   ('boot_progress',
                                    'FW Progress, Starting OS|OSStart'),
                                   ('operating_system', 'BootComplete'),
-                                  ('host', '^Running$'),
-                                  ('os_ping', '^1$'),
-                                  ('os_login', '^1$'),
-                                  ('os_run_cmd', '^1$')])
+                                  ('host', '^Running|Quiesced$')])
 
-# A master dictionary to determine whether the os may be up.
-master_os_up_match = DotDict([('chassis', '^On$'),
-                              ('bmc', '^Ready$'),
-                              ('boot_progress',
-                               'FW Progress, Starting OS|OSStart'),
-                              ('operating_system', 'BootComplete'),
-                              ('host', '^Running|Quiesced$')])
+    invalid_state_match = DotDict([('rest', '^$'),
+                                   ('chassis', '^$'),
+                                   ('bmc', '^$'),
+                                   ('boot_progress', '^$'),
+                                   ('operating_system', '^$'),
+                                   ('host', '^$')])
+else:
+    # default_state is an initial value which may be of use to callers.
+    default_state = DotDict([('rest', '1'),
+                             ('chassis', 'On'),
+                             ('bmc', 'Ready'),
+                             ('boot_progress', 'SystemInitComplete|OSRunning'),
+                             ('host', 'Running'),
+                             ('os_ping', '1'),
+                             ('os_login', '1'),
+                             ('os_run_cmd', '1')])
 
-invalid_state_match = DotDict([('rest', '^$'),
-                               ('chassis', '^$'),
-                               ('bmc', '^$'),
-                               ('boot_progress', '^$'),
-                               ('operating_system', '^$'),
-                               ('host', '^$')])
+    # A match state for checking that the system is at "standby".
+    standby_match_state = DotDict([('rest', '^1$'),
+                                   ('chassis', '^Off$'),
+                                   ('bmc', '^Ready$'),
+                                   ('boot_progress', '^Off|Unspecified$'),
+                                   ('host', '^Off$')])
+
+    # A match state for checking that the system is at "os running".
+    os_running_match_state = DotDict([('chassis', '^On$'),
+                                      ('bmc', '^Ready$'),
+                                      ('boot_progress',
+                                       'SystemInitComplete|OSRunning'),
+                                      ('host', '^Running$'),
+                                      ('os_ping', '^1$'),
+                                      ('os_login', '^1$'),
+                                      ('os_run_cmd', '^1$')])
+
+    # A master dictionary to determine whether the os may be up.
+    master_os_up_match = DotDict([('chassis', '^On$'),
+                                  ('bmc', '^Ready$'),
+                                  ('boot_progress',
+                                   'SystemInitComplete|OSRunning'),
+                                  ('host', '^Running|Quiesced$')])
+
+    invalid_state_match = DotDict([('rest', '^$'),
+                                   ('chassis', '^$'),
+                                   ('bmc', '^$'),
+                                   ('boot_progress', '^$'),
+                                   ('host', '^$')])
 
 
 def return_state_constant(state_name='default_state'):
