@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa357074_dcb3b360",
+        "filename": "gui/gui_test/server_config/test_date_time_settings_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2020-12-02T02:56:22Z",
+      "side": 1,
+      "message": "I believe we decided to set some NTP value via Redfish and verify the same via GUI. Please make the change accordingly.",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 58
+      },
+      "revId": "b2dc4f3779b4e3b9750755c89810424d2fc1e170",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
