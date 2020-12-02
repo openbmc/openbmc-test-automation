@@ -23,6 +23,10 @@ Verify VPD Data
     # Component name
     /system/chassis/motherboard
     /system/chassis/motherboard/base_op_panel_blyth
+    /system/chassis/motherboard/cpu0
+    /system/chassis/motherboard/cpu1
+    /system/chassis/motherboard/cpu2
+    /system/chassis/motherboard/cpu3
     /system/chassis/motherboard/ebmc_card_bmc
     /system/chassis/motherboard/lcd_op_panel_hill
     /system/chassis/motherboard/tpm_wilson
