@@ -18,16 +18,11 @@ ${CMD_INVENTORY_PREFIX}  busctl get-property xyz.openbmc_project.Inventory.Manag
 Verify VPD Data
     [Documentation]  Verify VPD via busctl command.
     [Tags]  Verify_VPD_Data
-    [Template]  Verify VPD Via Busctl
 
-    # Component name
-    /system/chassis/motherboard
-    /system/chassis/motherboard/base_op_panel_blyth
-    /system/chassis/motherboard/ebmc_card_bmc
-    /system/chassis/motherboard/lcd_op_panel_hill
-    /system/chassis/motherboard/tpm_wilson
-    /system/chassis/motherboard/vdd_vrm0
-    /system/chassis/motherboard/vdd_vrm1
+    ${components}=  Get Dictionary Keys  ${VPD_DETAILS}
+    FOR  ${component}  IN  @{components}
+        Verify VPD Via Busctl  ${component}
+    END
 
 
 *** Keywords ***
