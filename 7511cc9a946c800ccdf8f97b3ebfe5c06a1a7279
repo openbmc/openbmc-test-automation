@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f3d6b64d_52563e4a",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-02T13:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c21935a4_4d417bd8",
+      "range": {
+        "startLine": 10,
+        "startChar": 10,
+        "endLine": 10,
+        "endChar": 18
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "857f2f10_a04f2039",
         "filename": "mpipl/test_mpipl_basic.robot",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2020-11-20T12:50:25Z",
       "side": 1,
       "message": "Trigger And Verify User Initiated Dump Using Diagnostic Mode Target",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 27
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96a5d6b6_098c9727",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-02T13:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "857f2f10_a04f2039",
       "range": {
         "startLine": 19,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c4a9f9cf_a59c6078",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-02T13:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "087f60d0_c8e2d59d",
+      "range": {
+        "startLine": 25,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 15
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d5fcb74_f3c9ffdd",
         "filename": "mpipl/test_mpipl_basic.robot",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2020-11-20T12:50:25Z",
       "side": 1,
       "message": "same comment as above",
+      "range": {
+        "startLine": 41,
+        "startChar": 3,
+        "endLine": 43,
+        "endChar": 45
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "397fd192_8d64e8ea",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-02T13:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d5fcb74_f3c9ffdd",
       "range": {
         "startLine": 41,
         "startChar": 3,
@@ -163,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "d9dbfcb9_d72590fe",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-02T13:49:36Z",
+      "side": 1,
+      "message": "There is , but it is for testing that getcfam command works. It doesnt check the value after running the command.",
+      "parentUuid": "c571bde1_c9ab693f",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 22
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "468b444c_eeca0f12",
         "filename": "mpipl/test_mpipl_basic.robot",
         "patchSetId": 1
@@ -174,6 +294,30 @@
       "writtenOn": "2020-11-20T12:50:25Z",
       "side": 1,
       "message": "Same comment as above",
+      "range": {
+        "startLine": 67,
+        "startChar": 3,
+        "endLine": 85,
+        "endChar": 44
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75f9c99c_dd576a5b",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-02T13:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "468b444c_eeca0f12",
       "range": {
         "startLine": 67,
         "startChar": 3,
@@ -209,6 +353,30 @@
     },
     {
       "key": {
+        "uuid": "77ea01d3_0a7f8779",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-02T13:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff4d9c6a_b21aeea3",
+      "range": {
+        "startLine": 90,
+        "startChar": 3,
+        "endLine": 90,
+        "endChar": 119
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "783f8bc5_64d6bd77",
         "filename": "mpipl/test_mpipl_basic.robot",
         "patchSetId": 1
@@ -232,6 +400,30 @@
     },
     {
       "key": {
+        "uuid": "025dc26d_f6778688",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-02T13:49:36Z",
+      "side": 1,
+      "message": "Same response",
+      "parentUuid": "783f8bc5_64d6bd77",
+      "range": {
+        "startLine": 93,
+        "startChar": 3,
+        "endLine": 102,
+        "endChar": 22
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "400ba92e_68eb3ded",
         "filename": "mpipl/test_mpipl_basic.robot",
         "patchSetId": 1
@@ -243,6 +435,30 @@
       "writtenOn": "2020-11-20T12:50:25Z",
       "side": 1,
       "message": "Is this commented on purpose?",
+      "range": {
+        "startLine": 111,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 28
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "340a8bde_d321749d",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-02T13:49:36Z",
+      "side": 1,
+      "message": "For testing purpose it was commented. Modified.",
+      "parentUuid": "400ba92e_68eb3ded",
       "range": {
         "startLine": 111,
         "startChar": 4,
