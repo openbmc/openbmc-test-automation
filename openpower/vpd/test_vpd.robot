@@ -1,5 +1,24 @@
 *** Settings ***
 Documentation   This suite tests Vital Product Data (VPD) via busctl command.
+...             Before running this suite, create a data/vpd_data.py file with
+...             all VPD data to verify from system.
+...
+...             #!/usr/bin/python
+...             
+...             VPD_DETAILS = {
+...                 "/system/chassis/motherboard": {
+...                     "DR": "SYSTEM BACKPLANE",
+...                     "LocationCode": "ABCD.EF1.1234567-P0",
+...                     "PN": "PN12345",
+...                     "SN": "SN1234567890",
+...                 },
+...                 "/system/chassis/motherboard/base_op_panel_blyth": {
+...                     "DR": "CEC OP PANEL",
+...                     "LocationCode": "ABCD.EF1.1234567-D0",
+...                     "PN": "PN12345",
+...                     "SN": "SN1234567890",
+...                 }
+...             }
 
 Variables       ../../data/vpd_data.py
 Resource        ../../lib/openbmc_ffdc.robot
@@ -15,19 +34,14 @@ ${CMD_INVENTORY_PREFIX}  busctl get-property xyz.openbmc_project.Inventory.Manag
 
 *** Test Cases ***
 
-Verify VPD Data
+Verify Vital Product Data
     [Documentation]  Verify VPD via busctl command.
-    [Tags]  Verify_VPD_Data
-    [Template]  Verify VPD Via Busctl
+    [Tags]  Verify_Vital_Product_Data
 
-    # Component name
-    /system/chassis/motherboard
-    /system/chassis/motherboard/base_op_panel_blyth
-    /system/chassis/motherboard/ebmc_card_bmc
-    /system/chassis/motherboard/lcd_op_panel_hill
-    /system/chassis/motherboard/tpm_wilson
-    /system/chassis/motherboard/vdd_vrm0
-    /system/chassis/motherboard/vdd_vrm1
+    ${components}=  Get Dictionary Keys  ${VPD_DETAILS}
+    FOR  ${component}  IN  @{components}
+        Verify VPD Via Busctl  ${component}
+    END
 
 
 *** Keywords ***
