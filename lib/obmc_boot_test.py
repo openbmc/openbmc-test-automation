@@ -994,7 +994,9 @@ def test_loop_body():
         BuiltIn().fail(message)
 
     # This should help prevent ConnectionErrors.
+    # Purge all redfish and REST connection sessions.
     grk.run_key_u("Close All Connections")
+    grk.run_key_u("Delete All Redfish Sessions")
 
     return True
 
