@@ -213,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "2aa4b0e2_565b12a9",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-03T15:37:20Z",
+      "side": 1,
+      "message": "As discussed ,that is currently not available yet. There is no specific state change during MPIPL. So keeping this as is for now. Will change once it is implemented.",
+      "parentUuid": "427e86f7_b96f79c0",
+      "range": {
+        "startLine": 47,
+        "startChar": 3,
+        "endLine": 47,
+        "endChar": 14
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3ec66e5_bb56507e",
         "filename": "mpipl/test_mpipl_basic.robot",
         "patchSetId": 1
@@ -224,6 +248,30 @@
       "writtenOn": "2020-11-20T12:50:25Z",
       "side": 1,
       "message": "This check is wrong. This can be BootComplete as well\n\nobmcutil state\nCurrentBMCState     : xyz.openbmc_project.State.BMC.BMCState.Ready\nCurrentPowerState   : xyz.openbmc_project.State.Chassis.PowerState.On\nCurrentHostState    : xyz.openbmc_project.State.Host.HostState.Running\nBootProgress        : xyz.openbmc_project.State.Boot.Progress.ProgressStages.Unspecified\nOperatingSystemState: xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.BootComplete",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 47
+      },
+      "revId": "7511cc9a946c800ccdf8f97b3ebfe5c06a1a7279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "022822dc_70ce4598",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-03T15:37:20Z",
+      "side": 1,
+      "message": "As discussed ,that is currently not available yet. There is no specific state change during MPIPL. So keeping this as is for now. Will change once it is implemented.",
+      "parentUuid": "c3ec66e5_bb56507e",
       "range": {
         "startLine": 49,
         "startChar": 4,
