@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e80c5e06_69269250",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2020-12-04T10:00:23Z",
+      "side": 1,
+      "message": "From where you importing this keyword\nactually this keyword in redfish/extended/redfish_bmc_code_update.robot test suite.\nyou can\u0027t use this keyword either you need to define this keyword in the Resource file",
+      "range": {
+        "startLine": 184,
+        "startChar": 15,
+        "endLine": 184,
+        "endChar": 38
+      },
+      "revId": "a9b933d327a7b1027d4ad3d64777197fe6f41f26",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96663da6_a28068aa",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2020-12-04T10:00:23Z",
+      "side": 1,
+      "message": "From where you importing this keyword\nactually this keyword in redfish/extended/redfish_bmc_code_update.robot test suite.\nyou can\u0027t use this keyword either you need to define this keyword in the Resource file",
+      "range": {
+        "startLine": 185,
+        "startChar": 29,
+        "endLine": 185,
+        "endChar": 56
+      },
+      "revId": "a9b933d327a7b1027d4ad3d64777197fe6f41f26",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
