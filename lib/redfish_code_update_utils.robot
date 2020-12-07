@@ -104,6 +104,42 @@ Get Software Inventory State By Version
     [Return]  ${software_inventory}[0]
 
 
+Get BMC Functional Firmware
+    [Documentation]  Get BMC functional firmware details.
+
+    ${sw_inv}=  Get Functional Firmware  BMC update
+    ${sw_inv}=  Get Non Functional Firmware  ${sw_inv}  True
+
+    [Return]  ${sw_inv}
+
+
+Get Functional Firmware
+    [Documentation]  Get all the BMC firmware details.
+    [Arguments]  ${image_type}
+
+    # Description of argument(s):
+    # image_type    Image value can be either BMC update or Host update.
+
+    ${software_inventory}=  Get Software Inventory State
+    ${bmc_inv}=  Get BMC Firmware  ${image_type}  ${software_inventory}
+
+    [Return]  ${bmc_inv}
+
+
+Get Non Functional Firmware
+    [Documentation]  Get BMC non functional fimware details.
+    [Arguments]  ${sw_inv}  ${functional_sate}
+
+    # Description of argument(s):
+    # sw_inv           This dictionay contains all the BMC fimware details.
+    # functional_sate  Functional state can be either True or False.
+
+    ${resp}=  Filter Struct  ${sw_inv}  [('functional', ${functional_sate})]
+    ${list_inv_dict}=  Get Dictionary Values  ${resp}
+
+    [Return]  ${list_inv_dict}[0]
+
+
 Redfish Upload Image And Check Progress State
     [Documentation]  Code update with ApplyTime.
 
