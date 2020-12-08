@@ -113,7 +113,7 @@ Verify Redfishtool Operator User Privilege
 Verify Error While Creating User With Invalid Role
     [Documentation]  Verify error while creating a user with invalid role using Redfishtool.
     [Tags]  Verify_Error_While_Creating_User_With_Invalid_Role
-    [Teardown]  Redfishtool Delete User  "UserT100"
+    [Teardown]  Redfishtool Delete User  "UserT100"  ${HTTP_NOT_FOUND}
 
     Redfishtool Create User  "UserT100"  "TestPwd123"  "wrongroleid"  true  expected_error=${HTTP_BAD_REQUEST}
 
