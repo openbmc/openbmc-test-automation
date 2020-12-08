@@ -346,3 +346,30 @@ Redfish Get Host State
 
     ${chassis}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis
     [Return]  ${chassis["PowerState"]}  ${chassis["Status"]["State"]}
+
+
+Redfish Get Boot Progress
+    [Documentation]  Return boot progress state.
+
+    # Example: /redfish/v1/Systems/system/
+    # "BootProgress": {
+    #    "LastState": "OSRunning"
+    # },
+
+    ${boot_progress}=  Redfish.Get Properties  /redfish/v1/Systems/system/
+    [Return]  ${boot_progress["BootProgress"]["LastState"]}
+
+
+Redfish Get States
+    [Documentation]  Return all the BMC and host states in dictionary.
+
+    ${bmc_state}=  Redfish Get BMC State
+    ${chassis_state}  ${power_state}=  Redfish Get Host State
+    ${boot_progress}=  Redfish Get Boot Progress
+
+    ${states}=  Create Dictionary
+    ...  bmc=${bmc_state}
+    ...  chassis=${chassis_state}
+    ...  boot_progress=${boot_progress}
+
+    [Return]  ${states}
