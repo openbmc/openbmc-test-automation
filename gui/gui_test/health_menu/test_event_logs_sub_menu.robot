@@ -104,6 +104,19 @@ Select And Verify Default UTC Timezone For Events
     Page Should Contain  ${redfish_event_date_time[1].split('+')[0]}
 
 
+Verify Displayed Event Details With Redfish
+    [Documentation]  Verify event details like severity, desc etc using Redfish.
+    [Tags]  Verify_Displayed_Event_Details_With_Redfish
+    [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
+    [Teardown]  Redfish.Logout
+
+    Create Error Logs  ${1}
+    ${event_data}=  Get Event Logs
+    Page Should Contain  ${event_data[0]["Severity"]}
+    Page Should Contain  ${event_data[0]["EntryType"]}
+    Page Should Contain  ${event_data[0]["Message"]}
+
+
 *** Keywords ***
 
 Suite Setup Execution
