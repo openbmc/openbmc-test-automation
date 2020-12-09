@@ -83,6 +83,19 @@ Select All Error Logs And Verify Buttons
     Element Should Be Visible  ${xpath_event_action_cancel}
 
 
+Verify displayed event details with Redfish
+    [Documentation]  Verify event details like severity, desc etc using Redfish.
+    [Tags]  Verify_displayed_event_details_with_Redfish
+    [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
+    [Teardown]  Redfish.Logout
+
+    Create Error Logs  ${1}
+    ${event_data}=  Get Event Logs
+    Page Should Contain  ${event_data[0]["Severity"]}
+    Page Should Contain  ${event_data[0]["EntryType"]}
+    Page Should Contain  ${event_data[0]["Message"]}
+
+
 *** Keywords ***
 
 Suite Setup Execution
