@@ -24,6 +24,10 @@ ${xpath_event_action_export}      //*[contains(text(),"Export")]
 ${xpath_event_action_cancel}      //button[contains(text(),"Cancel")]
 ${xpath_delete_first_row}         //*[@data-test-id="eventLogs-button-deleteRow-0"][2]
 ${xpath_confirm_delete}           //button[@class="btn btn-primary"]
+${xpath_first_event_id}           //*[@id="table-event-logs"]/tbody/tr[1]/td[2]
+${xpath_first_event_sev}          //*[@id="table-event-logs"]/tbody/tr[1]/td[3]
+${xpath_first_event_type}         //*[@id="table-event-logs"]/tbody/tr[1]/td[4]
+${xpath_first_event_desc}         //*[@id="table-event-logs"]/tbody/tr[1]/td[6]
 
 *** Test Cases ***
 
@@ -92,6 +96,25 @@ Select All Error Logs And Verify Buttons
     Wait Until Element Is Visible  ${xpath_event_action_delete}
     Element Should Be Visible  ${xpath_event_action_export}
     Element Should Be Visible  ${xpath_event_action_cancel}
+
+
+Verify displayed event details with Redfish
+    [Documentation]  Verify event details like severity, desc etc using Redfish.
+    [Tags]  Verify_displayed_event_details_with_Redfish
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
+
+    Create Error Logs  ${1}
+
+    ${event_id}=  Get Text  ${xpath_first_event_id}
+    ${event_sev}=  Get Text  ${xpath_first_event_sev}
+    ${event_type}=  Get Text  ${xpath_first_event_type}
+    ${event_desc}=  Get Text  ${xpath_first_event_desc}
+
+    ${error_data}=  Get Event Log Entry  ${event_id}
+    Should Be Equal  ${event_sev}  ${error_data["Severity"]}
+    Should Be Equal  ${event_type}  ${error_data["EntryType"]}
+    Should Be Equal  ${event_desc}  ${error_data["Message"]}
 
 
 *** Keywords ***
