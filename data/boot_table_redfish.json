@@ -4,16 +4,16 @@
     # Initiate a power on using the Redfish API interface.
     "Redfish Power On": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -26,16 +26,16 @@
     # Initiate a power on using the IPMI interface.
     "IPMI Power On": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -51,14 +51,14 @@
     # Initiate a power off using the Redfish API interface.
     "Redfish Power Off": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -71,14 +71,14 @@
     # Initiate a hard power off using the Redfish API interface.
     "Redfish Hard Power Off": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -91,14 +91,14 @@
     # Initiate a power off using the IPMI interface.
     "IPMI Power Off": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -111,14 +111,14 @@
     # Initiate a power soft using the IPMI interface.
     "IPMI Power Soft": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -131,19 +131,19 @@
     # Run a "shutdown" command on the OS_HOST.
     "Host Power Off": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -160,19 +160,19 @@
     # to 'PDU AC Cycle (run)'.
     "APOR": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -185,19 +185,19 @@
     # Run a "reboot" on the OBMC while host is running.
     "OBMC Reboot (run)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -209,19 +209,19 @@
     # Run a REST "reboot" on the OBMC while host is running.
     "REST OBMC Reboot (run)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -234,19 +234,19 @@
     # Run a Redfish "reboot" on the OBMC while host is running.
     "Redfish OBMC Reboot (run)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -259,14 +259,14 @@
     # Run a "reboot" on the OBMC while host is off.
     "OBMC Reboot (off)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -275,14 +275,14 @@
     # Run a "reboot" on the OBMC while host is off.
     "Redfish OBMC Reboot (off)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -292,19 +292,19 @@
     # Cycle AC via the PDU while host is off.
     "PDU AC Cycle (run)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -317,14 +317,14 @@
     # Cycle AC via the PDU while host is off.
     "PDU AC Cycle (off)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -335,19 +335,19 @@
     # powered on.
     "IPMI MC Reset Warm (run)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -361,14 +361,14 @@
     # powered off.
     "IPMI MC Reset Warm (off)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -379,19 +379,19 @@
     # powered on.
     "IPMI MC Reset Cold (run)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -405,14 +405,14 @@
     # powered off.
     "IPMI MC Reset Cold (off)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -423,19 +423,19 @@
     # is powered on.
     "IPMI Std MC Reset Warm (run)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -449,14 +449,14 @@
     # is powered off.
     "IPMI Std MC Reset Warm (off)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -467,19 +467,19 @@
     # is powered on.
     "IPMI Std MC Reset Cold (run)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -493,14 +493,14 @@
     # is powered off.
     "IPMI Std MC Reset Cold (off)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -513,19 +513,19 @@
     # Initiate a power cycle using the IPMI interface (equivalent to off/on).
     "IPMI Power Cycle": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -539,19 +539,19 @@
     # Functionally equivalent to "IPMI Power Cycle".
     "IPMI Power Reset": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -564,19 +564,19 @@
     # Do an auto reboot by setting auto reboot to "yes" and going to quiesce state.
     "Auto Reboot": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -589,19 +589,19 @@
     # Run a "reboot" command on the OS_HOST.
     "Host Reboot": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -614,19 +614,19 @@
     # Initiate host reboot using the Redfish API interface (GracefulRestart).
     "RF SYS GracefulRestart": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -639,19 +639,19 @@
     # Initiate host reboot using the Redfish API interface (ForceRestart).
     "RF SYS ForceRestart": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -664,19 +664,19 @@
     # OPAL Terminate Immediate.
     "OPAL TI": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
