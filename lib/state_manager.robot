@@ -365,6 +365,9 @@ Redfish Get States
 
     # Refer: openbmc/docs/designs/boot-progress.md
 
+    ${session_info}=  Redfish.Get Session Info
+    Log  ${session_info}
+
     ${bmc_state}=  Redfish Get BMC State
     ${chassis_state}  ${chassis_status}=  Redfish Get Host State
     ${boot_progress}  ${host_state}=  Redfish Get Boot Progress
