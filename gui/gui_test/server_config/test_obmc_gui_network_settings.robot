@@ -26,6 +26,7 @@ ${xpath_setting_success}          //*[contains(text(),"Successfully saved networ
 ${xpath_add_dns_server}           //button[contains(text(),"Add DNS server")]
 ${xpath_network_interface}        //*[@data-test-id="networkSettings-select-interface"]
 ${xpath_input_netmask_addr0}      //*[@data-test-id="networkSettings-input-subnetMask-0"]
+${xpath_delete_static_ip}         //*[@title="Delete IPv4 row"]
 
 *** Test Cases ***
 
@@ -44,6 +45,7 @@ Verify Existence Of All Sections In Network Settings Page
     Page Should Contain Element  ${xpath_system}
     Page Should Contain Element  ${xpath_static_ipv4}
     Page Should Contain Element  ${xpath_static_dns}
+    Page Should Contain Button   ${xpath_delete_static_ip}
 
 
 Verify Existence Of All Buttons In Network Settings Page
@@ -152,6 +154,19 @@ Configure Invalid Network Addresses And Verify
     ${xpath_input_netmask_addr0}     255.256.255.0
 
 
+Configure And Verify Empty Network Addresses
+    [Documentation]  Configure and verify empty network addresses.
+    [Tags]  Configure_And_Verify_Empty_Network_Addresses
+    [Template]  Configure Invalid Network Address And Verify
+
+    # locator                       invalid_address  expected_error
+    ${xpath_mac_address_input}        ${empty}       Field required
+    ${xpath_default_gateway_input}    ${empty}       Field required
+    ${xpath_static_input_ip0}         ${empty}       Field required
+    ${xpath_input_netmask_addr0}      ${empty}       Field required
+    ${xpath_hostname_input}           ${empty}       Field required
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -165,14 +180,17 @@ Suite Setup Execution
 
 Configure Invalid Network Address And Verify
     [Documentation]  Configure invalid network address And verify.
-    [Arguments]  ${locator}  ${invalid_address}
+    [Arguments]  ${locator}  ${invalid_address}  ${expected_error}=Invalid format
 
     # Description of the argument(s):
     # locator            Xpath to identify an HTML element on a web page.
     # invalid_address    Invalid address to be added.
+    # expected_error     Expected error optionally provided in testcase
+    # ....               (e.g. Invalid format / Field required)
 
-    Wait Until Page Contains Element  ${locator}
+    Wait Until Element Is Enabled  ${locator}
+    Clear Element Text  ${locator}
     Input Text  ${locator}  ${invalid_address}
     Click Element  ${xpath_network_save_settings}
-    Page Should Contain  Invalid format
+    Page Should Contain  ${expected_error}
 
