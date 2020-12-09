@@ -264,7 +264,7 @@ Code Update Setup
     Run Key  Delete All Dumps  ignore=1
     Run Key  Delete All Error Logs  ignore=1
     Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
-    ...  Delete All PNOR Images
+    ...  Delete All Non Running BMC Images
     Run Keyword If  'true' == '${DELETE_OLD_GUARD_FILE}'  BMC Execute Command
     ...  rm -f /var/lib/phosphor-software-manager/pnor/prsv/GUARD
 
