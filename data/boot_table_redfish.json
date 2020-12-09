@@ -7,13 +7,13 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "host": "^Disabled$"
         },
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -29,13 +29,13 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "host": "^Disabled$"
         },
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -58,7 +58,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -78,7 +78,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -98,7 +98,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -118,7 +118,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -133,8 +133,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -143,7 +143,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -162,8 +162,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -171,8 +171,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -187,8 +187,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -196,8 +196,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -211,8 +211,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -220,8 +220,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -236,8 +236,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -245,8 +245,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -266,7 +266,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -282,7 +282,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -294,8 +294,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -303,8 +303,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -324,7 +324,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -337,8 +337,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -346,8 +346,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -368,7 +368,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -381,8 +381,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -390,8 +390,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -412,7 +412,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -425,8 +425,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -434,8 +434,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -456,7 +456,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -469,8 +469,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -478,8 +478,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -500,7 +500,7 @@
             "rest": "^1$",
             "chassis": "^Off$",
             "boot_progress": "^Unspecified$",
-            "host": "^Off$"
+            "host": "^Disabled$"
         },
         "bmc_reboot": 1,
         "method_type": "keyword",
@@ -515,8 +515,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -524,8 +524,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -541,8 +541,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -550,8 +550,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -566,8 +566,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -575,8 +575,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -591,8 +591,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -600,8 +600,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -616,8 +616,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -625,8 +625,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -641,8 +641,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -650,8 +650,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -666,8 +666,8 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
@@ -675,8 +675,8 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "boot_progress": "^SystemInitComplete|OSRunning$",
-            "host": "^Running$",
+            "boot_progress": "^SystemHardwareInitializationComplete|OSRunning$",
+            "host": "^Enabled$",
             "os_ping": "^1$",
             "os_login": "^1$",
             "os_run_cmd": "^1$"
