@@ -83,6 +83,10 @@ REST BMC Code Update
     Pass Execution If  '${functional_version}' == '${image_version}'
     ...  The existing ${image_version} firmware is already functional.
 
+    # Try delete non functional image(s) by default to allow force update.
+    ${software_object}=  Get Non Running BMC Software Object
+    Run Keyword And Ignore Error  Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
+
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
