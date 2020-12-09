@@ -119,7 +119,7 @@ Delete All Redfish Sessions
     Remove Values From List  ${resp_list}  ${saved_session_info["location"]}
 
     FOR  ${session}  IN  @{resp_list}
-        Redfish.Delete  ${session}
+        Run Keyword And Ignore Error  Redfish.Delete  ${session}
     END
 
 
