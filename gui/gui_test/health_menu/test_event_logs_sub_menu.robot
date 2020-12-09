@@ -25,6 +25,7 @@ ${xpath_event_action_cancel}      //button[contains(text(),"Cancel")]
 ${xpath_delete_first_row}         //*[@data-test-id="eventLogs-button-deleteRow-0"][2]
 ${xpath_confirm_delete}           //button[@class="btn btn-primary"]
 
+
 *** Test Cases ***
 
 Verify Navigation To Event Logs Page
@@ -81,6 +82,20 @@ Select All Error Logs And Verify Buttons
     Wait Until Element Is Visible  ${xpath_event_action_delete}
     Element Should Be Visible  ${xpath_event_action_export}
     Element Should Be Visible  ${xpath_event_action_cancel}
+
+
+Verify displayed event details with Redfish
+    [Documentation]  Verify event details like severity, desc etc using Redfish.
+    [Tags]  Verify_displayed_event_details_with_Redfish
+    [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
+    [Teardown]  Redfish.Logout
+
+    Create Error Logs  ${1}
+    Refresh GUI error log page
+    ${event_data}=  Get Event Logs
+    Page Should Contain Text  ${event_data[0]["Severity"]}
+    Page Should Contain Text  ${event_data[0]["EntryType"]}
+    Page Should Contain Text  ${event_data[0]["Message"]}
 
 
 *** Keywords ***
