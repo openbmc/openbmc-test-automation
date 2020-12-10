@@ -105,3 +105,17 @@ Generate Test Error Log
     [Documentation]  Generate test error log.
 
     BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+
+Set Timezone In Profile Settings Page
+    [Documentation]  Set the given timezone in profile settings page.
+    [Arguments]  ${timezone}=Default
+
+    # Description of argument(s):
+    # timezone  Timezone to select (eg. Default or Browser_offset).
+
+    Wait Until Page Contains Element  ${xpath_root_button_menu}
+    Click Element  ${xpath_root_button_menu}
+    Click Element  ${xpath_profile_settings}
+    Click Element At Coordinates  ${xpath_default_UTC}  0  0
+    Click Element  ${xpath_profile_save_button}

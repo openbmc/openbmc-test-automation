@@ -55,3 +55,7 @@ class gui_variables():
     xpath_save_settings_button = "//button[contains(text(),'Save settings')]"
     xpath_local_user_management_sub_menu = "//*[@data-test-id='nav-item-local-user-management']"
     xpath_ssl_certificates_sub_menu = "//*[@data-test-id='nav-item-ssl-certificates']"
+
+    # Profile settings
+    xpath_default_UTC = "//*[@data-test-id='profileSettings-radio-defaultUTC']"
+    xpath_profile_save_button = "//*[@data-test-id='profileSettings-button-saveSettings']"
