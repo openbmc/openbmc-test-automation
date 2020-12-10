@@ -16,6 +16,24 @@
       "revId": "22d17e358722c79b9ab4c64e6424d1dece0fd3b8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db9b6dc0_3e260706",
+        "filename": "extended/code_update/host_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2020-12-10T05:24:43Z",
+      "side": 1,
+      "message": "This was just a trial.. noticed that the action/Delete does delete the PNOR image but when we upload the same image, it still seems to remember it exist when it was already deleted.",
+      "parentUuid": "cb8b340a_0eb95d92",
+      "revId": "22d17e358722c79b9ab4c64e6424d1dece0fd3b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
