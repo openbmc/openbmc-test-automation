@@ -5,10 +5,12 @@ Library         ../../lib/pel_utils.py
 Variables       ../../data/pel_variables.py
 Resource        ../../lib/list_utils.robot
 Resource        ../../lib/logging_utils.robot
+Resource        ../../lib/connection_client.robot
 Resource        ../../lib/openbmc_ffdc.robot
 
 Test Setup      Redfish.Login
 Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
+Suite Setup     Suite Setup Execution
 
 
 *** Variables ***
@@ -40,6 +42,11 @@ ${CMD_UNRECOVERABLE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc
 ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
+
+${CMD_UNRECOVERABLE_NON_BMC_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss}
+...  xyz.openbmc_project.Host.Error.Event xyz.openbmc_project.Logging.Entry.Level.Error 1
+...  RAWPEL /tmp/FILE_NBMC_UNRECOVERABLE
 
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
@@ -520,6 +527,7 @@ Verify Unrecoverable Error Log
 Verify Error Logging Rotation Policy
     [Documentation]  Verify error logging rotation policy.
     [Tags]  Verify_Error_Logging_Rotation_Policy
+    [Setup]  Run Keywords  Open Connection for SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}  /tmp/FILE_NBMC_UNRECOVERABLE
     [Template]  Error Logging Rotation Policy
 
     # Error logs to be created                                % of total logging space when error
@@ -531,6 +539,10 @@ Verify Error Logging Rotation Policy
     Informational BMC 1500, Unrecoverable BMC 1500                               45
     Unrecoverable BMC 1500, Predictive BMC 1500                                  30
     Unrecoverable BMC 1000, Informational BMC 1000, Predictive BMC 1000          45
+    Unrecoverable NON_BMC 3000                                                   30
+    Unrecoverable NON_BMC 1500, Informational BMC 1500                           45
+    Unrecoverable NON_BMC 1500, Predictive BMC 1500                              60
+    Unrecoverable NON_BMC 1500, Unrecoverable BMC 1500                           60
 
 Verify Reverse Order Of PEL Logs
     [Documentation]  Verify PEL command to output PEL logs in reverse order.
@@ -668,9 +680,10 @@ Create Error Log
 
     FOR  ${i}  IN RANGE  0  ${count}
         ${cmd}=  Set Variable If
-        ...  '${error_severity}' == 'Informational'  ${CMD_INFORMATIONAL_ERROR}
-        ...  '${error_severity}' == 'Predictive'  ${CMD_PREDICTIVE_ERROR}
-        ...  '${error_severity}' == 'Unrecoverable'  ${CMD_UNRECOVERABLE_ERROR}
+        ...  '${error_severity}' == 'Informational' and '${system_type}' == 'BMC'  ${CMD_INFORMATIONAL_ERROR}
+        ...  '${error_severity}' == 'Predictive' and '${system_type}' == 'BMC'  ${CMD_PREDICTIVE_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'BMC'  ${CMD_UNRECOVERABLE_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'NON_BMC'  ${CMD_UNRECOVERABLE_NON_BMC_ERROR}
         BMC Execute Command  ${cmd}
     END
 
