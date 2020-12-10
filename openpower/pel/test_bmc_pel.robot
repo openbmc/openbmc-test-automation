@@ -41,6 +41,10 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
 
+${CMD_UNRECOVERABLE_NON_BMC_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss}
+...  xyz.openbmc_project.Host.Error.Event xyz.openbmc_project.Logging.Entry.Level.Error 1 RAWPEL
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 *** Test Cases ***
@@ -531,6 +535,9 @@ Verify Error Logging Rotation Policy
     Informational BMC 1500, Unrecoverable BMC 1500                               45
     Unrecoverable BMC 1500, Predictive BMC 1500                                  30
     Unrecoverable BMC 1000, Informational BMC 1000, Predictive BMC 1000          45
+    Unrecoverable NON_BMC 3000                                                   30
+    Unrecoverable NON_BMC 1500, Informational BMC 1500                           45
+
 
 Verify Reverse Order Of PEL Logs
     [Documentation]  Verify PEL command to output PEL logs in reverse order.
@@ -668,9 +675,11 @@ Create Error Log
 
     FOR  ${i}  IN RANGE  0  ${count}
         ${cmd}=  Set Variable If
-        ...  '${error_severity}' == 'Informational'  ${CMD_INFORMATIONAL_ERROR}
-        ...  '${error_severity}' == 'Predictive'  ${CMD_PREDICTIVE_ERROR}
-        ...  '${error_severity}' == 'Unrecoverable'  ${CMD_UNRECOVERABLE_ERROR}
+        ...  '${error_severity}' == 'Informational' and '${system_type}' == 'BMC'  ${CMD_INFORMATIONAL_ERROR}
+        ...  '${error_severity}' == 'Predictive' and '${system_type}' == 'BMC'  ${CMD_PREDICTIVE_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'BMC'  ${CMD_UNRECOVERABLE_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'NON_BMC'
+        ...   ${CMD_UNRECOVERABLE_NON_BMC_ERROR}${SPACE}${UNRECOVERABLE_FILE_PATH}
         BMC Execute Command  ${cmd}
     END
 
