@@ -57,17 +57,6 @@ Verify Existence Of All Input boxes In Event Logs Page
     Page Should Contain Element  ${xpath_event_to_date}  limit=1
 
 
-Verify Event Log Options
-    [Documentation]  Verify all the options after selecting event logs.
-    [Tags]  Verify_Click_Event_Options
-
-    Create Error Logs  ${1}
-    Select All Events
-    Page Should Contain Button  ${xpath_event_action_delete}  limit=1
-    Page Should Contain Element  ${xpath_event_action_export}  limit=1
-    Page Should Contain Element  ${xpath_event_action_cancel}  limit=1
-
-
 Select Single Error Log And Delete
     [Documentation]  Select single error log and delete it.
     [Tags]  Select_Single_Error_Log_And_Delete
