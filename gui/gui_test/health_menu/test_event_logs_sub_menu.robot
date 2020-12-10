@@ -24,6 +24,11 @@ ${xpath_event_action_export}      //*[contains(text(),"Export")]
 ${xpath_event_action_cancel}      //button[contains(text(),"Cancel")]
 ${xpath_delete_first_row}         //*[@data-test-id="eventLogs-button-deleteRow-0"][2]
 ${xpath_confirm_delete}           //button[@class="btn btn-primary"]
+${xpath_default_UTC}              //*[@data-test-id='profileSettings-radio-defaultUTC']
+${xpath_first_event_id}           //*[@id="table-event-logs"]/tbody/tr[1]/td[2]
+${xpath_first_event_date}         //*[@id="table-event-logs"]/tbody/tr[1]/td[5][1]
+${xpath_first_event_time}         //*[@id="table-event-logs"]/tbody/tr[1]/td[5][1]
+${xpath_profile_save_button}      //*[@data-test-id='profileSettings-button-saveSettings']
 
 *** Test Cases ***
 
@@ -94,6 +99,33 @@ Select All Error Logs And Verify Buttons
     Element Should Be Visible  ${xpath_event_action_cancel}
 
 
+Select And Verify Default UTC Timezone For Events
+    [Documentation]  Select and verify that default UTC timezone is displayed for an event.
+    [Tags]  Select_And_Verify_Default_UTC_Timezone_For_Events
+    [Setup]  Redfish.Login
+	[Teardown]  Redfish.Logout
+
+    Set Given Timezone In Profile Settings Page
+
+    Navigate To Event Logs Page
+    Create Error Logs  ${1}
+
+    ${event_id}=  Get Text  ${xpath_first_event_id}
+
+    # Date format: 2020-12-08\n09:48:38 UTC.
+    ${event_date}=  Get Text  ${xpath_first_event_date}
+    ${event_day}=  Set Variable  ${event_date.splitlines()[0]}
+    ${event_time}=  Set Variable  ${event_date.splitlines()[1]}
+    ${event_time}=  Set Variable  ${event_time.split(' UTC')[0]}
+
+    ${error_data}=  Get Event Log Entry  ${event_id}
+    # Date format: 2020-12-07T15:18:35+00:00.
+	${redfish_event_date_time}=  Set Variable  ${error_data["Created"].split('T')}
+
+    Should Be Equal  ${event_day}  ${redfish_event_date_time[0]}
+    Should Be Equal  ${event_time}  ${redfish_event_date_time[1].split('+')[0]}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -108,7 +140,6 @@ Navigate To Event Logs Page
     Click Element  ${xpath_health_menu}
     Click Element  ${xpath_event_logs_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  event-logs
-
 
 Create Error Logs
     [Documentation]  Create given number of error logs.
@@ -125,3 +156,16 @@ Select All Events
     [Documentation]  Select all error logs.
 
     Click Element At Coordinates  ${xpath_select_all_events}  0  0
+
+Set Given Timezone In Profile Settings Page
+    [Documentation]  Select the given timezone in profile settings page.
+    [Arguments]  ${timezone}=Default
+
+    # Description of argument(s):
+    # timezone  Timezone to select (eg. Default or Browser_offset).
+
+    Wait Until Page Contains Element  ${xpath_root_button_menu}
+    Click Element  ${xpath_root_button_menu}
+    Click Element  ${xpath_profile_settings}
+    Click Element At Coordinates    ${xpath_default_UTC}    0    0
+	Click Element  ${xpath_profile_save_button}

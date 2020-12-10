@@ -254,3 +254,13 @@ Redfish Purge Event Log
     Redfish.Post  ${target_action}  body={'target': '${target_action}'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
+
+Get Event Log Entry
+    [Documentation]  Get event log entry details.
+    [Arguments]  ${entry_id}=1
+
+    # Description of argument(s):
+    # entry_id    Entry ID of the event.
+
+    ${data}=  Redfish.Get Properties  /redfish/v1/Systems/system/LogServices/EventLog/Entries/${entry_id}
+    [Return]  ${data}
