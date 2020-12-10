@@ -24,6 +24,8 @@ ${xpath_event_action_export}      //*[contains(text(),"Export")]
 ${xpath_event_action_cancel}      //button[contains(text(),"Cancel")]
 ${xpath_delete_first_row}         //*[@data-test-id="eventLogs-button-deleteRow-0"][2]
 ${xpath_confirm_delete}           //button[@class="btn btn-primary"]
+${xpath_default_UTC}              //*[@data-test-id='profileSettings-radio-defaultUTC']
+${xpath_profile_save_button}      //*[@data-test-id='profileSettings-button-saveSettings']
 
 *** Test Cases ***
 
@@ -83,6 +85,27 @@ Select All Error Logs And Verify Buttons
     Element Should Be Visible  ${xpath_event_action_cancel}
 
 
+Select And Verify Default UTC Timezone For Events
+    [Documentation]  Select and verify that default UTC timezone is displayed for an event.
+    [Tags]  Select_And_Verify_Default_UTC_Timezone_For_Events
+    [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
+    [Teardown]  Redfish.Logout
+
+    Create Error Logs  ${1}
+
+    # Set Default timezone in profile settings page.
+    Set Given Timezone In Profile Settings Page
+    Navigate To Event Logs Page
+
+    # Get date and time from backend.
+    ${event_data}=  Get Event Logs
+    # Date format: 2020-12-07T15:18:35+00:00.
+    ${redfish_event_date_time}=  Set Variable  ${event_data[0]["Created"].split('T')}
+
+    Page Should Contain  ${redfish_event_date_time[0]}
+    Page Should Contain  ${redfish_event_date_time[1].split('+')[0]}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -97,7 +120,6 @@ Navigate To Event Logs Page
     Click Element  ${xpath_health_menu}
     Click Element  ${xpath_event_logs_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  event-logs
-
 
 Create Error Logs
     [Documentation]  Create given number of error logs.
@@ -114,3 +136,16 @@ Select All Events
     [Documentation]  Select all error logs.
 
     Click Element At Coordinates  ${xpath_select_all_events}  0  0
+
+Set Given Timezone In Profile Settings Page
+    [Documentation]  Select the given timezone in profile settings page.
+    [Arguments]  ${timezone}=Default
+
+    # Description of argument(s):
+    # timezone  Timezone to select (eg. Default or Browser_offset).
+
+    Wait Until Page Contains Element  ${xpath_root_button_menu}
+    Click Element  ${xpath_root_button_menu}
+    Click Element  ${xpath_profile_settings}
+    Click Element At Coordinates    ${xpath_default_UTC}    0    0
+	Click Element  ${xpath_profile_save_button}
