@@ -70,6 +70,15 @@ Redfish Upload Same Partition File To BMC In Loop
     500KB_file
 
 
+Redfish Upload And Delete Same Partition File To BMC In Loop
+    [Documentation]  Upload same partition file to BMC using redfish in loop.
+    [Tags]  Redfish_Upload_And_Delete_Same_Partition_File_To_BMC_In_Loop
+    [Template]  Redfish Upload And Delete Partition File In Loop
+
+    # file_name
+    500KB_file
+
+
 Redfish Partition File Upload Post BMC Reboot
     [Documentation]  Upload partition file to BMC using redfish, after the BMC reboot.
     [Tags]  Redfish_Partition_File_Upload_Post_BMC_Reboot
@@ -406,6 +415,18 @@ Redfish Upload Partition File In Loop
     Initialize OpenBMC
     Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
     Delete Local Partition File  ${Partition_file_list}
+
+
+Redfish Upload And Delete Partition File In Loop
+    [Documentation]  Upload the same partition file multiple times in loop to BMC.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name    Partition file name.
+
+    FOR  ${count}  IN RANGE  1  11
+      Redfish Upload Partition File  ${file_name}
+    END
 
 
 Verify Partition File Upload Post BMC Reboot
