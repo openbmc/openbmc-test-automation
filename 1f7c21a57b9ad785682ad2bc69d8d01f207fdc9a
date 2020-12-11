@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12bbddf5_561c37e6",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-12-11T10:45:44Z",
+      "side": 1,
+      "message": "where is this used?",
+      "range": {
+        "startLine": 613,
+        "startChar": 0,
+        "endLine": 614,
+        "endChar": 53
+      },
+      "revId": "1f7c21a57b9ad785682ad2bc69d8d01f207fdc9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
