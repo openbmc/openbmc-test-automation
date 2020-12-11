@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae768726_01a932e2",
+        "filename": "lib/state.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2020-12-11T16:58:31Z",
+      "side": 1,
+      "message": "Reword\n\ngp.qprint_timen(\"Verifying that Redfish/REST API interface is working.\")",
+      "range": {
+        "startLine": 1014,
+        "startChar": 4,
+        "endLine": 1014,
+        "endChar": 68
+      },
+      "revId": "e69dceb7d131c1831cd46aa6d50e941a40bd0490",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3f96c50_0bcf735f",
+        "filename": "lib/state.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2020-12-11T16:58:31Z",
+      "side": 1,
+      "message": "Add the redfish support condition to switch rest and redfish state",
+      "range": {
+        "startLine": 1015,
+        "startChar": 3,
+        "endLine": 1015,
+        "endChar": 44
+      },
+      "revId": "e69dceb7d131c1831cd46aa6d50e941a40bd0490",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
