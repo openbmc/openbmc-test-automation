@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f18ce0aa_ad998b88",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-12-11T10:31:24Z",
+      "side": 1,
+      "message": "how you make out or whats the logic used to get previous image and latest image?",
+      "revId": "ee4396b6158e1ec03f169c6e38c2caccfbf13fd1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
