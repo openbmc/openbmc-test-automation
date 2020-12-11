@@ -189,6 +189,30 @@
       "revId": "bf462f814d5bfc2efa5416d8507ebc6f2fbee85b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed03938b_1df9a9d4",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2020-12-11T12:27:36Z",
+      "side": 1,
+      "message": "Verify Error While Creating User With Expired Password \n108th line test case\nthere expiring password, create the user, and change password there it should not allow creating a user.",
+      "parentUuid": "4214b7a3_05561564",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 41
+      },
+      "revId": "bf462f814d5bfc2efa5416d8507ebc6f2fbee85b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
