@@ -58,6 +58,10 @@ Verify VPD Via Busctl
     Should Be Equal  ${busctl_output[0].split('"')[1].strip('"')}
     ...  ${VPD_DETAILS['${component}']['LocationCode']}
 
+    # Skip check for other VPD fields if its an ethernet component.
+    ${status}=  Run Keyword And Return Status  Should Contain  ${component}  ethernet
+    Return From Keyword If  '${status}' == 'True'
+
     # Verify PrettyName
     ${busctl_output}=  BMC Execute Command
     ...  ${CMD_INVENTORY_PREFIX}${component} xyz.openbmc_project.Inventory.Item PrettyName
