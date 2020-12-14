@@ -16,6 +16,7 @@ ${xpath_filter_ok}           //*[@data-test-id='tableFilter-checkbox-OK']
 ${xpath_filter_warning}      //*[@data-test-id='tableFilter-checkbox-Warning']
 ${xpath_filter_critical}     //*[@data-test-id='tableFilter-checkbox-Critical']
 ${xpath_filter_clear_all}    //*[@data-test-id='tableFilter-button-clearAll']
+${xpath_selected_severity}   //*[@class="d-inline-block mb-0"]
 
 *** Test Cases ***
 
@@ -64,6 +65,26 @@ Verify Sensors Filter From Server Health Clickable
     Page Should Contain Element  ${xpath_filter_warning}
     Page Should Contain Element  ${xpath_filter_critical}
     Page Should Contain Element  ${xpath_filter_clear_all}
+
+
+Verify Clear All In Filters
+    [Documentation]  Select all severity and verify clear all button de-selects all severity.
+    [Tags]  Verify_Clear_All_In_Filters
+
+    Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
+    Click Element  ${xpath_sensors_filter}
+
+    # Select all severity from filter.
+    Click Element At Coordinates    ${xpath_filter_ok}    0    0
+    Click Element At Coordinates    ${xpath_filter_warning}    0    0
+    Click Element At Coordinates    ${xpath_filter_critical}    0    0
+
+    # De-select all severity using clear all button in filter.
+
+    Click Element At Coordinates    ${xpath_filter_clear_all}    0    0
+    Click Element  ${xpath_sensors_filter}
+
+    Element Should Not Be Visible  ${xpath_selected_severity}
 
 
 *** Keywords ***
