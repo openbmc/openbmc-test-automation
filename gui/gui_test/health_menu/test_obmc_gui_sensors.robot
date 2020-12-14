@@ -16,6 +16,7 @@ ${xpath_filter_ok}           //*[@data-test-id='tableFilter-checkbox-OK']
 ${xpath_filter_warning}      //*[@data-test-id='tableFilter-checkbox-Warning']
 ${xpath_filter_critical}     //*[@data-test-id='tableFilter-checkbox-Critical']
 ${xpath_filter_clear_all}    //*[@data-test-id='tableFilter-button-clearAll']
+${xpath_selected_severity}   //*[@class="d-inline-block mb-0"]
 
 *** Test Cases ***
 
@@ -74,6 +75,21 @@ Verify Invalid Text In Filter Sensors Search
     Input Text  ${xpath_sensors_search}  abcd123
 
     Page Should Contain  No items match the search query
+
+
+Verify Filter By Severity Button OK
+    [Documentation]  Select severity button OK from filter and verify.
+    [Tags]  Verify_Filter_By_Severity_Button_OK
+
+    Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
+    Click Element  ${xpath_sensors_filter}
+
+    # Select OK severity from filter.
+    Click Element At Coordinates  ${xpath_filter_ok}    0    0
+    Click Element  ${xpath_sensors_filter}
+
+    Element Should Not Contain  ${xpath_selected_severity}  Warning
+    Element Should Not Contain  ${xpath_selected_severity}  Critical
 
 
 *** Keywords ***
