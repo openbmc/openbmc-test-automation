@@ -213,6 +213,30 @@
       "revId": "bf462f814d5bfc2efa5416d8507ebc6f2fbee85b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e84d52c_518fda8e",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2020-12-14T13:08:53Z",
+      "side": 1,
+      "message": "Here scenarios are different.\nIdeally for all different scenarios, this needs to be verified.\nhere account is locked, then waited for account to get unlock",
+      "parentUuid": "ed03938b_1df9a9d4",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 41
+      },
+      "revId": "bf462f814d5bfc2efa5416d8507ebc6f2fbee85b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
