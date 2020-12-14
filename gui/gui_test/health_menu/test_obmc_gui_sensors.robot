@@ -66,6 +66,16 @@ Verify Sensors Filter From Server Health Clickable
     Page Should Contain Element  ${xpath_filter_clear_all}
 
 
+Verify Invalid Text In Filter Sensors Search
+    [Documentation]  Input invalid text in sensor search and verify error message.
+    [Tags]  Verify_Invalid_Text_In_Filter_Sensors_Search
+
+    Wait Until Page Contains Element  ${xpath_sensors_search}
+    Input Text  ${xpath_sensors_search}  abcd123
+
+    Page Should Contain  No items match the search query
+
+
 *** Keywords ***
 
 Test Setup Execution
