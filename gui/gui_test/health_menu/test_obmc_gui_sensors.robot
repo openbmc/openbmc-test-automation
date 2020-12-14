@@ -97,6 +97,24 @@ Verify Clear All Button In Sensor Page
     Element Should Not Be Visible  ${xpath_selected_severity}
 
 
+Verify Filter By Severity Button OK
+    [Documentation]  Select severity button OK from filter and verify.
+    [Tags]  Verify_Filter_By_Severity_Button_OK
+
+    Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
+    Click Element  ${xpath_sensors_filter}
+    
+   # Select OK severity from filter.
+    Wait Until Page Contains Element  ${xpath_filter_ok}  timeout=5s
+
+    Click Element At Coordinates  ${xpath_filter_ok}  0  0
+    Click Element  ${xpath_sensors_filter}
+
+    Element Should Contain  ${xpath_selected_severity}  OK
+    Element Should Not Contain  ${xpath_selected_severity}  Warning
+    Element Should Not Contain  ${xpath_selected_severity}  Critical
+
+
 *** Keywords ***
 
 Test Setup Execution
