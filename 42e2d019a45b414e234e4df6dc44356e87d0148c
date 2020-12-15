@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b5af412_dacd4773",
+        "filename": "gui/gui_test/gui_header/test_obmc_profile_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000564
+      },
+      "writtenOn": "2020-12-15T12:22:54Z",
+      "side": 1,
+      "message": "This xpath is included in below commit, once it is merged will do rebase.\nhttps://gerrit.openbmc-project.xyz/#/c/openbmc/openbmc-test-automation/+/38188/",
+      "range": {
+        "startLine": 70,
+        "startChar": 19,
+        "endLine": 70,
+        "endChar": 56
+      },
+      "revId": "42e2d019a45b414e234e4df6dc44356e87d0148c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
