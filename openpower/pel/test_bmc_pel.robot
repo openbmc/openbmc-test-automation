@@ -554,6 +554,34 @@ Verify Error Logging Rotation Policy With HOST Error Logs
     Unrecoverable HOST 1500, Unrecoverable BMC 1500                           60
 
 
+Verify Old Logs Are Deleted When Count Crosses Max
+    [Documentation]  Verify that when the count crosses max, older logs are deleted.
+    [Tags]  Verify_Old_Logs_Are_Deleted_When_Count_Crosses_Max
+
+    Redfish Purge Event Log
+
+    # Create 3000 error logs.
+    FOR  ${count}  IN RANGE  ${3000}
+        BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    END
+
+    # Retrieve the IDs of the logs.
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+
+    # Now create 3001st log to cross threshold limit and trigger error logs rotation.
+    BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    # Wait few seconds for error logs rotation to complete.
+    Sleep  10s
+
+    # Now verify that first log is no more available but the 3000th is available.
+    ${1st_id}=  Get From List  ${pel_ids}  0
+    ${3000th_id}=  Get From List  ${pel_ids}  3000
+    ${output}=  peltool -i ${1st_id}
+    Should Contain  ${output}  PEL not found
+    ${output}=  peltool -i ${3000th_id}
+    Should Not Contain  ${output}  PEL not found
+
+
 Verify Reverse Order Of PEL Logs
     [Documentation]  Verify PEL command to output PEL logs in reverse order.
     [Tags]  Verify_Reverse_PEL_Logs
