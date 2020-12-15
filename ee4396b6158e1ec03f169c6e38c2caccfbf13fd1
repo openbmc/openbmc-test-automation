@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "1d9701ce_9c2a54ba",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2020-12-15T07:21:20Z",
+      "side": 1,
+      "message": "yes.. both are interconnected",
+      "parentUuid": "201a2d53_1f397080",
+      "revId": "ee4396b6158e1ec03f169c6e38c2caccfbf13fd1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b897062a_e0dfda8d",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 2
