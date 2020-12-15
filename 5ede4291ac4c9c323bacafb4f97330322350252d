@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "479322d5_8e81be24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-12-15T10:47:04Z",
+      "side": 1,
+      "message": "Added testcase to verify clear all button in sensor page",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 51
+      },
+      "revId": "5ede4291ac4c9c323bacafb4f97330322350252d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27b4687d_66aad959",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-12-15T10:47:04Z",
+      "side": 1,
+      "message": "Verify Clear All Button In Sensors Page",
+      "revId": "5ede4291ac4c9c323bacafb4f97330322350252d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb1c83e6_3441d1a6",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-12-15T10:47:04Z",
+      "side": 1,
+      "message": "After this step, can you verify that the severity filter appears by doing this \nElement Should Be Visible  ${xpath_selected_severity}",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 70
+      },
+      "revId": "5ede4291ac4c9c323bacafb4f97330322350252d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd671e86_45d7ecf4",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-12-15T10:47:04Z",
+      "side": 1,
+      "message": "Keep 2 spaces only between keyword and args.\nRemove extra line after comment @line# 83",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 84,
+        "endChar": 71
+      },
+      "revId": "5ede4291ac4c9c323bacafb4f97330322350252d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fc80ca8_b3e50031",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-12-15T10:47:04Z",
+      "side": 1,
+      "message": "Why is this required?",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 42
+      },
+      "revId": "5ede4291ac4c9c323bacafb4f97330322350252d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
