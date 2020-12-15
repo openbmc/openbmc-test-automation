@@ -22,6 +22,30 @@
       "revId": "94aa590e800141a04886bcd5cfcac84d83727d9d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f1da515_894e7c93",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2020-12-15T16:31:43Z",
+      "side": 1,
+      "message": "this will give only BMC firmware details, in below keyword will give BMC+host .",
+      "parentUuid": "cb2aa690_ca10a988",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 23
+      },
+      "revId": "94aa590e800141a04886bcd5cfcac84d83727d9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
