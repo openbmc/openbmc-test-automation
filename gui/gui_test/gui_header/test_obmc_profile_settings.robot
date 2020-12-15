@@ -54,6 +54,27 @@ Verify Logged In Username
     Should Contain  ${gui_logged_username}  ${OPENBMC_USERNAME}
 
 
+Verify Browser Offset Timezone Display
+    [Documentation]  Set browser offset timezone via GUI and verify timezone value in overview page.
+    [Tags]  Verify_Browser_Offset_Timezone_Display
+
+    # Fetching BMC CLI time and adding 6 hour difference from CST(UTC -6).
+    ${bmc_time}=  CLI Get BMC DateTime
+    ${new_bmc_time}=  Add Time to Date  ${bmc_time}  06:00:00  exclude_millis=True
+    # Converting ${new_bmc_time} to 12hr format.
+    ${new_bmc_time}=  Convert Date  ${new_bmc_time}  result_format=%Y-%m-%d %I:%M
+
+    # Select browser offset option.
+    Click Element At Coordinates    ${xpath_browser_offset}    0    0
+    Click Element  ${xpath_profile_settings_save_button}
+
+    # Navigate to the overview page and verify.
+    Click Element  ${xpath_overview_menu}
+    Wait Until Page Contains  Overview  timeout=30s
+
+    Page Should Contain  ${new_bmc_time}
+
+
 *** Keywords ***
 
 Test Setup Execution
