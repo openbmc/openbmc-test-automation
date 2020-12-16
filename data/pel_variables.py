@@ -39,3 +39,6 @@ CMD_PREDICTIVE_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Common.E
 
 CMD_UNRECOVERABLE_HOST_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Host.Error.Event \
     xyz.openbmc_project.Logging.Entry.Level.Error 1 RAWPEL /tmp/FILE_NBMC_UNRECOVERABLE'
+
+CMD_INFORMATIONAL_HOST_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Host.Error.Event \
+    xyz.openbmc_project.Logging.Entry.Level.Error 1 RAWPEL /tmp/FILE_HOST_INFORMATIONAL'
