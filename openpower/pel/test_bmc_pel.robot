@@ -520,12 +520,16 @@ Verify Error Logging Rotation Policy With HOST Error Logs
     [Documentation]  Verify error logging rotation policy for non bmc error logs.
     [Tags]  Verify_Error_Logging_Rotation_Policy_With_HOST_Error_Logs
     [Setup]  Run Keywords  Open Connection for SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}
-    ...  /tmp/FILE_NBMC_UNRECOVERABLE  AND  Redfish.Login
+    ...  /tmp/FILE_HOST_UNRECOVERABLE  AND  scp.Put File  ${INFORMATIONAL_FILE_PATH}
+    ...  /tmp/FILE_HOST_INFORMATIONAL
     [Template]  Error Logging Rotation Policy
 
     # Error logs to be created                                % of total logging space when error
     #                                                         log exceeds max limit.
+    Informational HOST 3000                                                   30 
     Unrecoverable HOST 3000                                                   30
+    Informational HOST 1500, Informational BMC 1500                           30
+    Informational HOST 1500, Unrecoverable BMC 1500                           45
     Unrecoverable HOST 1500, Informational BMC 1500                           45
     Unrecoverable HOST 1500, Predictive BMC 1500                              60
 
@@ -695,8 +699,9 @@ Error Logging Rotation Policy
     ${disk_usage_percentage}=  Get Disk Usage For Error Logs
     ${percent_diff}=  Evaluate  ${disk_usage_percentage} - ${max_allocated_space_percentage}
     ${percent_diff}=   Evaluate  abs(${percent_diff})
-    Should Be True  ${percent_diff} <= 0.5
 
+    Run Keyword If  ${disk_usage_percentage} > ${max_allocated_space_percentage}
+    ...  Should Be True  ${percent_diff} <= 0.5
 
 Create Error Log
     [Arguments]  ${error_severity}   ${error_creator}   ${count}
