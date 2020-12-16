@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af053b06_79b09309",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000103
+      },
+      "writtenOn": "2020-12-16T05:24:45Z",
+      "side": 1,
+      "message": "Is this needed?",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 32,
+        "endChar": 42
+      },
+      "revId": "1f537f7115ddc7043d2bc25e6302ee7f0c060eaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34021452_61b4fb0c",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000103
+      },
+      "writtenOn": "2020-12-16T05:24:45Z",
+      "side": 1,
+      "message": "why this delay? I thought Redfish Power on is blocking call and won\u0027t come out until power on is not complete?",
+      "range": {
+        "startLine": 37,
+        "startChar": 3,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "1f537f7115ddc7043d2bc25e6302ee7f0c060eaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aefedac8_cb596b90",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000103
+      },
+      "writtenOn": "2020-12-16T05:24:45Z",
+      "side": 1,
+      "message": "Trigger And Verify User Initiated Dump Using Redfish",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 30
+      },
+      "revId": "1f537f7115ddc7043d2bc25e6302ee7f0c060eaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a3b5d2c_3e50807a",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000103
+      },
+      "writtenOn": "2020-12-16T05:24:45Z",
+      "side": 1,
+      "message": "same set of comments here",
+      "range": {
+        "startLine": 63,
+        "startChar": 3,
+        "endLine": 81,
+        "endChar": 44
+      },
+      "revId": "1f537f7115ddc7043d2bc25e6302ee7f0c060eaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
