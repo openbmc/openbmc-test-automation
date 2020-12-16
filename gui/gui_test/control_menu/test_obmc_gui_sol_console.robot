@@ -27,7 +27,7 @@ Verify Existence Of All Sections In SOL Console Page
     [Documentation]  Verify existence of all sections in SOL console page.
     [Tags]  Verify_Existence_Of_All_Sections_In_SOL_Console_Page
 
-    Page Should Contain  SOL console redirects server's serial port output to this window
+    Page Should Contain  SOL console redirects the server's serial port output to this window
 
 
 Verify Existence Of All Buttons In SOL Console Page
