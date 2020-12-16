@@ -14,6 +14,44 @@ Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 
 *** Variables ***
 
+${CMD_INTERNAL_FAILURE}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
+${CMD_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.Timeout
+...  xyz.openbmc_project.Logging.Entry.Level.Error 2 "TIMEOUT_IN_MSEC" "5"
+...  "CALLOUT_INVENTORY_PATH" "/xyz/openbmc_project/inventory/system/chassis/motherboard"
+
+${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} org.open_power.Logging.Error.TestError1
+...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
+${CMD_INFORMATIONAL_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.TestError2
+...  xyz.openbmc_project.Logging.Entry.Level.Informational 0
+
+${CMD_INVENTORY_PREFIX}  busctl get-property xyz.openbmc_project.Inventory.Manager
+...  /xyz/openbmc_project/inventory/system/chassis/motherboard
+
+${CMD_UNRECOVERABLE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
+${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
+
+${CMD_UNRECOVERABLE_HOST_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss}
+...  xyz.openbmc_project.Host.Error.Event xyz.openbmc_project.Logging.Entry.Level.Error 1
+...  RAWPEL /tmp/FILE_HOST_UNRECOVERABLE
+
+${CMD_INFORMATIONAL_HOST_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss}
+...  xyz.openbmc_project.Host.Error.Event xyz.openbmc_project.Logging.Entry.Level.Error 1
+...  RAWPEL /tmp/FILE_HOST_INFORMATIONAL
+
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
 
@@ -520,12 +558,16 @@ Verify Error Logging Rotation Policy With HOST Error Logs
     [Documentation]  Verify error logging rotation policy for non bmc error logs.
     [Tags]  Verify_Error_Logging_Rotation_Policy_With_HOST_Error_Logs
     [Setup]  Run Keywords  Open Connection for SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}
-    ...  /tmp/FILE_NBMC_UNRECOVERABLE  AND  Redfish.Login
+    ...  /tmp/FILE_HOST_UNRECOVERABLE  AND  scp.Put File  ${INFORMATIONAL_FILE_PATH}
+    ...  /tmp/FILE_HOST_INFORMATIONAL
     [Template]  Error Logging Rotation Policy
 
     # Error logs to be created                                % of total logging space when error
     #                                                         log exceeds max limit.
+    Informational HOST 3000                                                   15
     Unrecoverable HOST 3000                                                   30
+    Informational HOST 1500, Informational BMC 1500                           15
+    Informational HOST 1500, Unrecoverable BMC 1500                           45
     Unrecoverable HOST 1500, Informational BMC 1500                           45
     Unrecoverable HOST 1500, Predictive BMC 1500                              60
 
@@ -708,10 +750,20 @@ Create Error Log
 
     FOR  ${i}  IN RANGE  0  ${count}
         ${cmd}=  Set Variable If
+<<<<<<< 36db996ebe0a7ecff9130285097db9138e7f1d9f
         ...  '${error_severity}' == 'Informational' and '${error_creator}' == 'BMC'  ${CMD_INFORMATIONAL_ERROR}
         ...  '${error_severity}' == 'Predictive' and '${error_creator}' == 'BMC'  ${CMD_PREDICTIVE_ERROR}
         ...  '${error_severity}' == 'Unrecoverable' and '${error_creator}' == 'BMC'  ${CMD_UNRECOVERABLE_ERROR}
         ...  '${error_severity}' == 'Unrecoverable' and '${error_creator}' == 'HOST'  ${CMD_UNRECOVERABLE_HOST_ERROR}
+=======
+        ...  '${error_severity}' == 'Informational' and '${system_type}' == 'BMC'  ${CMD_INFORMATIONAL_ERROR}
+        ...  '${error_severity}' == 'Predictive' and '${system_type}' == 'BMC'  ${CMD_PREDICTIVE_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'BMC'  ${CMD_UNRECOVERABLE_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'HOST'
+        ...  ${CMD_UNRECOVERABLE_HOST_ERROR}
+        ...  '${error_severity}' == 'Informational' and '${system_type}' == 'HOST'
+        ...  ${CMD_INFORMATIONAL_HOST_ERROR}
+>>>>>>> Added tests for informational HOST error log
         BMC Execute Command  ${cmd}
     END
 
