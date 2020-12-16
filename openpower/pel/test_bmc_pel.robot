@@ -45,7 +45,12 @@ ${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_pr
 ${CMD_UNRECOVERABLE_HOST_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss}
 ...  xyz.openbmc_project.Host.Error.Event xyz.openbmc_project.Logging.Entry.Level.Error 1
-...  RAWPEL /tmp/FILE_NBMC_UNRECOVERABLE
+...  RAWPEL /tmp/FILE_HOST_UNRECOVERABLE
+
+${CMD_INFORMATIONAL_HOST_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss}
+...  xyz.openbmc_project.Host.Error.Event xyz.openbmc_project.Logging.Entry.Level.Error 1
+...  RAWPEL /tmp/FILE_HOST_INFORMATIONAL
 
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 
@@ -543,12 +548,16 @@ Verify Error Logging Rotation Policy With HOST Error Logs
     [Documentation]  Verify error logging rotation policy for non bmc error logs.
     [Tags]  Verify_Error_Logging_Rotation_Policy_With_HOST_Error_Logs
     [Setup]  Run Keywords  Open Connection for SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}
-    ...  /tmp/FILE_NBMC_UNRECOVERABLE
+    ...  /tmp/FILE_HOST_UNRECOVERABLE  AND  scp.Put File  ${INFORMATIONAL_FILE_PATH}
+    ...  /tmp/FILE_HOST_INFORMATIONAL
     [Template]  Error Logging Rotation Policy
 
     # Error logs to be created                                % of total logging space when error
     #                                                         log exceeds max limit.
+    Informational HOST 3000                                                   15
     Unrecoverable HOST 3000                                                   30
+    Informational HOST 1500, Informational BMC 1500                           15
+    Informational HOST 1500, Unrecoverable BMC 1500                           45
     Unrecoverable HOST 1500, Informational BMC 1500                           45
     Unrecoverable HOST 1500, Predictive BMC 1500                              60
     Unrecoverable HOST 1500, Unrecoverable BMC 1500                           60
@@ -693,7 +702,10 @@ Create Error Log
         ...  '${error_severity}' == 'Informational' and '${system_type}' == 'BMC'  ${CMD_INFORMATIONAL_ERROR}
         ...  '${error_severity}' == 'Predictive' and '${system_type}' == 'BMC'  ${CMD_PREDICTIVE_ERROR}
         ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'BMC'  ${CMD_UNRECOVERABLE_ERROR}
-        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'HOST'  ${CMD_UNRECOVERABLE_HOST_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'HOST'
+        ...  ${CMD_UNRECOVERABLE_HOST_ERROR}
+        ...  '${error_severity}' == 'Informational' and '${system_type}' == 'HOST'
+        ...  ${CMD_INFORMATIONAL_HOST_ERROR}
         BMC Execute Command  ${cmd}
     END
 
