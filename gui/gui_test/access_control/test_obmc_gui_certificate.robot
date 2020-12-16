@@ -88,7 +88,7 @@ Verify Installed CA Certificate
     Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
 
     # Verify CA certificate availability in GUI.
-    Page Should Contain  CA Certificate
+    Wait Until Page Contains  CA Certificate  timeout=10
 
 
 Verify Installed HTTPS Certificate
@@ -100,8 +100,7 @@ Verify Installed HTTPS Certificate
     Install Certificate File On BMC  ${REDFISH_HTTPS_CERTIFICATE_URI}  ok  data=${file_data}
 
     # Verify certificate is available in GUI.
-    Page Should Contain  HTTPS Certificate
-
+    Wait Until Page Contains  HTTPS Certificate  timeout=10
 
 Verify Installed LDAP Certificate
     [Documentation]  Install LDAP certificate via Redfish and verify it in GUI.
@@ -114,8 +113,7 @@ Verify Installed LDAP Certificate
     Install Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}  ok  data=${file_data}
 
     # Verify certificate is available in GUI.
-    Page Should Contain  LDAP Certificate
-
+    Wait Until Page Contains  LDAP Certificate  timeout=10
 
 *** Keywords ***
 
