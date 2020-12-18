@@ -68,7 +68,7 @@ def set_power_policy_method():
         if status == 'PASS':
             bmc_power_policy_method = 'New'
         else:
-            bmc_power_policy_method = 'Old'
+            bmc_power_policy_method = 'New'
 
     gp.qpvar(bmc_power_policy_method)
     # For old style, we will rewrite these global variable settings to old
