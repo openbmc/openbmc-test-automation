@@ -526,6 +526,7 @@ Set BMC Power Policy
     ${policy}=  Translate Power Policy Value  ${policy}
     # Run the appropriate keyword.
     Run Key  ${bmc_power_policy_method} Set Power Policy \ ${policy}
+    Sleep  30s
     ${currentPolicy}=  Get System Power Policy
     Should Be Equal    ${currentPolicy}   ${policy}
 
