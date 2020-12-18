@@ -47,11 +47,14 @@ ${less_octet_ip}           10.3.36
 ${network_id}              10.7.7.0
 ${hex_ip}                  0xa.0xb.0xc.0xd
 ${negative_ip}             10.-7.-7.7
-${hex_ip}                  0xa.0xb.0xc.0xd
 @{static_name_servers}     10.5.5.5
 @{null_value}              null
 @{empty_dictionary}        {}
 @{string_value}            aa.bb.cc.dd
+@{hex_value}               ${hex_ip}
+@{negative_value}          ${negative_ip}
+@{less_octet_value}        ${less_octet_ip}
+@{special_char_value}      @@@.%%.44.11
 
 *** Test Cases ***
 
@@ -487,6 +490,40 @@ Modify IPv4 Address And Verify
      Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
 
 
+Configure invalid Values For DNS Server
+    [Documentation]  Configure invalid values for DNS server and expect an error.
+    [Tags]  Configure_invalid_Value_For_DNS_Server
+    [Setup]  DNS Test Setup Execution
+    [Template]  Configure Static Name Servers
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+     # static_name_servers         valid_status_codes
+     ${hex_value}                  ${HTTP_BAD_REQUEST}
+     ${negative_value}             ${HTTP_BAD_REQUEST}
+     ${less_octet_value}           ${HTTP_BAD_REQUEST}
+     ${special_char_value}         ${HTTP_BAD_REQUEST}
+
+Config Multiple DNS Servers And Verify
+     [Documentation]  Config multiple DNS servers and verify
+     [Tags]  Config_Multiple_DNS_Servers_And_Verify
+     [Setup]  DNS Test Setup Execution
+     [Teardown]  Run Keywords
+     ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+     @{name_servers}=  Create List  10.5.5.10  10.20.5.10  10.5.6.7
+     ${length}=  Get Length  ${name_servers}
+     FOR  ${index}  IN RANGE  ${length}
+        @{name_server}=  Create List  ${name_servers}[${index}]
+        Configure Static Name Servers  ${name_server}
+     END
+
+    # Check if newly added DNS server is configured on BMC.
+    ${cli_nameservers}=  CLI Get Nameservers
+    ${cmd_status}=  Run Keyword And Return Status
+    ...  List Should Contain Sub List  ${cli_nameservers}  ${name_servers}
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -500,6 +537,10 @@ Test Setup Execution
     # Get BMC IP address and prefix length.
     ${ip_data}=  Get BMC IP Info
     Set Test Variable  ${ip_data}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Set Suite Variable  ${ethernet_interface}
 
 
 Verify Netmask On BMC
@@ -592,9 +633,10 @@ Configure Static Name Servers
 
     # Currently BMC is sending 500 response code instead of 400 for invalid scenarios.
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body={'StaticNameServers': ${static_name_servers}}
+    ...  body={'StaticNameServers':${static_name_servers}}
     ...  valid_status_codes=[${valid_status_codes}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
+    Return From Keyword If  '${valid_status_codes}' != '${HTTP_OK}'
     # Patch operation takes 1 to 3 seconds to set new value.
     Sleep  3s
 
