@@ -47,7 +47,6 @@ ${less_octet_ip}           10.3.36
 ${network_id}              10.7.7.0
 ${hex_ip}                  0xa.0xb.0xc.0xd
 ${negative_ip}             10.-7.-7.7
-${hex_ip}                  0xa.0xb.0xc.0xd
 @{static_name_servers}     10.5.5.5
 @{null_value}              null
 @{empty_dictionary}        {}
@@ -487,6 +486,33 @@ Modify IPv4 Address And Verify
      Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
 
 
+Configure Invalid Values For DNS Server
+    [Documentation]  Configure invalid values for DNS server and expect an error.
+    [Tags]  Configure_Invalid_Value_For_DNS_Server
+    [Setup]  DNS Test Setup Execution
+    [Template]  Configure Static Name Servers
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+     # static_name_servers        valid_status_codes
+      0xa.0xb.0xc.0xd             ${HTTP_BAD_REQUEST}
+      10.-7.-7.-7                 ${HTTP_BAD_REQUEST}
+      10.3.36                     ${HTTP_BAD_REQUEST}
+      @@@.%%.44.11                ${HTTP_BAD_REQUEST}
+
+
+Config Multiple DNS Servers And Verify
+    [Documentation]  Config multiple DNS servers and verify.
+    [Tags]  Config_Multiple_DNS_Servers_And_Verify
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+     @{list_name_servers}=  Create List  10.5.5.10  10.20.5.10  10.5.6.7
+     Configure Static Name Servers  ${list_name_servers}
+     Verify CLI and Redfish Nameservers
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -589,6 +615,10 @@ Configure Static Name Servers
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${type} =  Evaluate  type($static_name_servers).__name__
+    ${static_name_servers}=  Set Variable If  '${type}'=='str'
+    ...  '${static_name_servers}'  ${static_name_servers}
 
     # Currently BMC is sending 500 response code instead of 400 for invalid scenarios.
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
