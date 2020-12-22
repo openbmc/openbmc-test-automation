@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74893446_6bccf9f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2020-12-22T05:39:01Z",
+      "side": 1,
+      "message": "Added tests for informational HOST error log",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 32
+      },
+      "revId": "26f663b5ff7f445da46202b0cfdae54f0d2d54bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37fecf3f_bdafe757",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2020-12-22T05:39:01Z",
+      "side": 1,
+      "message": "These two are same. Remove one.",
+      "range": {
+        "startLine": 561,
+        "startChar": 0,
+        "endLine": 562,
+        "endChar": 80
+      },
+      "revId": "26f663b5ff7f445da46202b0cfdae54f0d2d54bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96dc5b_7d3724db",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2020-12-22T05:39:01Z",
+      "side": 1,
+      "message": "Exceeding 110 limit",
+      "range": {
+        "startLine": 706,
+        "startChar": 0,
+        "endLine": 707,
+        "endChar": 115
+      },
+      "revId": "26f663b5ff7f445da46202b0cfdae54f0d2d54bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    }
+  ]
+}
