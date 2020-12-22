@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9f3d3e8b_942badaa",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-22T06:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7548c42c_8d2d5cc3",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 10
+      },
+      "revId": "74986f53a9dc3d2b7557b93cedec0d1185b67a88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3537d1dd_71c5e013",
         "filename": "mpipl/test_mpipl_basic.robot",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2020-12-16T09:35:54Z",
       "side": 1,
       "message": "needs to be same as that of the test case name\n\n\nTrigger_And_Verify_User_Initiated_Dump_Using_Diagnostic_Mode_Target",
+      "range": {
+        "startLine": 21,
+        "startChar": 12,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "74986f53a9dc3d2b7557b93cedec0d1185b67a88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14e93b0c_e532de55",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-22T06:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3537d1dd_71c5e013",
       "range": {
         "startLine": 21,
         "startChar": 12,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "605d7175_864d0356",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-22T06:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "573460db_bed7e569",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 44
+      },
+      "revId": "74986f53a9dc3d2b7557b93cedec0d1185b67a88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "380ad61a_3829d920",
         "filename": "mpipl/test_mpipl_basic.robot",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2020-12-16T09:35:54Z",
       "side": 1,
       "message": "same comment as previous test",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 42
+      },
+      "revId": "74986f53a9dc3d2b7557b93cedec0d1185b67a88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0dfcd3b3_1d98f77f",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-22T06:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "380ad61a_3829d920",
       "range": {
         "startLine": 61,
         "startChar": 4,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "fa0ed2fa_d3e3c475",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-22T06:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f57832c_db7f9ff1",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 42
+      },
+      "revId": "74986f53a9dc3d2b7557b93cedec0d1185b67a88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97e7d9c0_b4f9ef08",
         "filename": "mpipl/test_mpipl_basic.robot",
         "patchSetId": 4
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "5741f179_6af73e1a",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-22T06:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97e7d9c0_b4f9ef08",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 44
+      },
+      "revId": "74986f53a9dc3d2b7557b93cedec0d1185b67a88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "409bfd45_119c2237",
         "filename": "mpipl/test_mpipl_basic.robot",
         "patchSetId": 4
@@ -151,6 +295,30 @@
       "writtenOn": "2020-12-16T09:35:54Z",
       "side": 1,
       "message": "Use this \n\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/lib/state_manager.robot#L351",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 44
+      },
+      "revId": "74986f53a9dc3d2b7557b93cedec0d1185b67a88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9225115_7bb420ff",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2020-12-22T06:24:40Z",
+      "side": 1,
+      "message": "In my current sandbox , this is not there . I will have to checkout fresh and add it . Can I add this in next check-in ? Will add a to-do",
+      "parentUuid": "409bfd45_119c2237",
       "range": {
         "startLine": 89,
         "startChar": 0,
