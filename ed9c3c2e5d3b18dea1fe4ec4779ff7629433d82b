@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e4609ef_9253a328",
+        "filename": "lib/rest_client.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2020-12-22T15:02:45Z",
+      "side": 1,
+      "message": "Content-Type isn\u0027t used on GET calls. \n\nContent-Type \tThe Media type of the body of the request (used with POST and PUT requests). https://en.wikipedia.org/wiki/List_of_HTTP_header_fields\n\nCan we just drop it here?",
+      "range": {
+        "startLine": 46,
+        "startChar": 36,
+        "endLine": 46,
+        "endChar": 65
+      },
+      "revId": "ed9c3c2e5d3b18dea1fe4ec4779ff7629433d82b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
