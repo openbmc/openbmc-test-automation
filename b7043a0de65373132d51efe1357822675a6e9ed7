@@ -22,6 +22,52 @@
       "revId": "b7043a0de65373132d51efe1357822675a6e9ed7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45cf3f07_f68ea18a",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2020-12-22T05:59:31Z",
+      "side": 1,
+      "message": "trigger error logs rotation.",
+      "range": {
+        "startLine": 570,
+        "startChar": 50,
+        "endLine": 570,
+        "endChar": 65
+      },
+      "revId": "b7043a0de65373132d51efe1357822675a6e9ed7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0ca7766_46bc6b6e",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2020-12-22T05:59:31Z",
+      "side": 1,
+      "message": "error logs rotation",
+      "range": {
+        "startLine": 572,
+        "startChar": 31,
+        "endLine": 572,
+        "endChar": 40
+      },
+      "revId": "b7043a0de65373132d51efe1357822675a6e9ed7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
