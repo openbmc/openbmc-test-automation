@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0ded7e3_c6fbd1d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-12-22T10:38:46Z",
+      "side": 1,
+      "message": "Added test case to verify old logs are deleted",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "21464512c04e0b6305d06d147dc922449aa2ade8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80257678_ce233f3a",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-12-22T10:38:46Z",
+      "side": 1,
+      "message": "Old",
+      "range": {
+        "startLine": 557,
+        "startChar": 7,
+        "endLine": 557,
+        "endChar": 13
+      },
+      "revId": "21464512c04e0b6305d06d147dc922449aa2ade8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b5067f1_b9e677fe",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-12-22T10:38:46Z",
+      "side": 1,
+      "message": "threshold",
+      "range": {
+        "startLine": 571,
+        "startChar": 37,
+        "endLine": 571,
+        "endChar": 46
+      },
+      "revId": "21464512c04e0b6305d06d147dc922449aa2ade8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "636de64a_b620dc9b",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-12-22T10:38:46Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 571,
+        "startChar": 50,
+        "endLine": 571,
+        "endChar": 56
+      },
+      "revId": "21464512c04e0b6305d06d147dc922449aa2ade8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98b6d653_0cd86b31",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2020-12-22T10:38:46Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 573,
+        "startChar": 27,
+        "endLine": 573,
+        "endChar": 31
+      },
+      "revId": "21464512c04e0b6305d06d147dc922449aa2ade8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
