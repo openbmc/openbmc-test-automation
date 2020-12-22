@@ -43,8 +43,7 @@ OpenBMC Get Request
     Initialize OpenBMC  ${timeout}  quiet=${quiet}
 
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
-    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
-    ...  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/octet-stream
+    ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/json
     Set To Dictionary  ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Get
     ...  base_uri=${base_uri}  args=&{kwargs}
@@ -362,7 +361,7 @@ Upload Image To BMC
     Initialize OpenBMC  ${timeout}  quiet=${quiet}
     ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
     ${headers}=  Create Dictionary  Content-Type=application/octet-stream
-    ...  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/json
     Set To Dictionary  ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
