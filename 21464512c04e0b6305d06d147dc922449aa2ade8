@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c2d7e416_3cfec3db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2020-12-23T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0ded7e3_c6fbd1d6",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "21464512c04e0b6305d06d147dc922449aa2ade8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "80257678_ce233f3a",
         "filename": "openpower/pel/test_bmc_pel.robot",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2020-12-22T10:38:46Z",
       "side": 1,
       "message": "Old",
+      "range": {
+        "startLine": 557,
+        "startChar": 7,
+        "endLine": 557,
+        "endChar": 13
+      },
+      "revId": "21464512c04e0b6305d06d147dc922449aa2ade8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6929b6a1_d04320af",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2020-12-23T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80257678_ce233f3a",
       "range": {
         "startLine": 557,
         "startChar": 7,
@@ -94,6 +142,54 @@
     },
     {
       "key": {
+        "uuid": "5b1e0e99_35b757d6",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2020-12-23T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "636de64a_b620dc9b",
+      "range": {
+        "startLine": 571,
+        "startChar": 50,
+        "endLine": 571,
+        "endChar": 56
+      },
+      "revId": "21464512c04e0b6305d06d147dc922449aa2ade8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7bdfc14_f3a60af9",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2020-12-23T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b5067f1_b9e677fe",
+      "range": {
+        "startLine": 571,
+        "startChar": 37,
+        "endLine": 571,
+        "endChar": 46
+      },
+      "revId": "21464512c04e0b6305d06d147dc922449aa2ade8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "98b6d653_0cd86b31",
         "filename": "openpower/pel/test_bmc_pel.robot",
         "patchSetId": 6
@@ -105,6 +201,30 @@
       "writtenOn": "2020-12-22T10:38:46Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 573,
+        "startChar": 27,
+        "endLine": 573,
+        "endChar": 31
+      },
+      "revId": "21464512c04e0b6305d06d147dc922449aa2ade8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ada17d2b_d6f0712e",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2020-12-23T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98b6d653_0cd86b31",
       "range": {
         "startLine": 573,
         "startChar": 27,
