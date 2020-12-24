@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "e6277081_3afcdb1d",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2020-12-24T09:35:16Z",
+      "side": 1,
+      "message": "That Keyword defined in same test suite ..",
+      "parentUuid": "1a5cb9f8_a6d53fcb",
+      "range": {
+        "startLine": 499,
+        "startChar": 9,
+        "endLine": 499,
+        "endChar": 38
+      },
+      "revId": "e8007206527da720d8537e9a00b9bc563b516921",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1c0d447_db4e0bf6",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 3
@@ -82,6 +106,30 @@
       "writtenOn": "2020-12-22T05:55:22Z",
       "side": 1,
       "message": "Directly use the value. Instead of calling variable.",
+      "range": {
+        "startLine": 502,
+        "startChar": 5,
+        "endLine": 502,
+        "endChar": 17
+      },
+      "revId": "e8007206527da720d8537e9a00b9bc563b516921",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e154b03_8532c2d6",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2020-12-24T09:35:16Z",
+      "side": 1,
+      "message": "here we passing DNS values in list format. we can\u0027t call directly \nelse create testcase like this\n\nConfigure Hexadcimal value\n    @{hex_value}\u003d  Create List  0xa.0xb.0xc.0xd\n    Configure Static Name Servers  ${hex_value}",
+      "parentUuid": "e1c0d447_db4e0bf6",
       "range": {
         "startLine": 502,
         "startChar": 5,
