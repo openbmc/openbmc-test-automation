@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5db01683_8b0819e8",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2020-12-28T07:30:23Z",
+      "side": 1,
+      "message": "if we pass deepcopy\u003dfalse, what will happen ?",
+      "range": {
+        "startLine": 942,
+        "startChar": 58,
+        "endLine": 942,
+        "endChar": 71
+      },
+      "revId": "435e1295da73b9df6bc0c22eea8f9db32a45d41f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8966c700_10eab8fa",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2020-12-28T07:30:23Z",
+      "side": 1,
+      "message": "can you pass it on teardown?\nIncase keyword fail at middle of the execution\n[Teardown]  Redfish Delete Session  ${session_info1}",
+      "range": {
+        "startLine": 959,
+        "startChar": 3,
+        "endLine": 959,
+        "endChar": 44
+      },
+      "revId": "435e1295da73b9df6bc0c22eea8f9db32a45d41f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
