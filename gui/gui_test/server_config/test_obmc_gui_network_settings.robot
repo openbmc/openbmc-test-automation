@@ -192,6 +192,20 @@ Delete And Verify DNS Server Via GUI
     Delete DNS Server And Verify  ${static_name_servers}
 
 
+Configure And Verify Invalid DNS Server
+    [Documentation]  Configure invalid DNS server and verify error.
+    [Tags]  Configure_And_Verify_Invalid_DNS_Server
+    [Template]  Configure Invalid Name Servers For DNS Server
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  DNS Test Teardown Execution
+
+    # invalid_ address      expected_error
+    a.b.c.d                 Invalid format
+    @@@.%%.44.11            Invalid format
+    ${empty}                Field required
+    null                    Invalid format
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -303,4 +317,22 @@ Verify Static Name Server Details On GUI
        Textfield Value Should Be   //*[@data-test-id="networkSettings-input-dnsAddress-${i}"]
        ...  ${static_name_servers}[${i}]
     END
+
+
+Configure Invalid Name Servers For DNS Server
+    [Documentation]  Configure invalid name for servers and expect an error.
+    [Arguments]  ${invalid_address}  ${expected_error}=Invalid format
+
+    # Description of the argument(s):
+    # invalid_address    Invalid address to be added.
+    # expected_error     Expected error optionally provided in testcase
+    # ....               (e.g. Invalid format / Field required).
+
+    Wait Until Page Contains Element  ${xpath_add_dns_server}
+    Click Button  ${xpath_add_dns_server}
+    Wait Until Element Is Enabled   ${xpath_input_dns_server}
+    Clear Element Text  ${xpath_input_dns_server}
+    Input Text  ${xpath_input_dns_server}  ${invalid_address}
+    Click Element  ${xpath_network_save_settings}
+    Page Should Contain  ${expected_error}
 
