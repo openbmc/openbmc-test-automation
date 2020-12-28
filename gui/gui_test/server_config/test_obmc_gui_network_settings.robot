@@ -30,8 +30,11 @@ ${xpath_delete_static_ip}         //*[@title="Delete IPv4 row"]
 ${xpath_input_dns_server}         //*[@data-test-id="networkSettings-input-dnsAddress-0"]
 ${xpath_delete_dns_server}        //*[@title="Delete DNS row"]
 
-
 @{static_name_servers}            10.10.10.10
+@{null_value}                     null
+@{empty_dictionary}               {}
+@{string_value}                   aa.bb.cc.dd
+@{special_char_value}             @@@.%%.44.11
 
 *** Test Cases ***
 
@@ -192,6 +195,20 @@ Delete And Verify DNS Server Via GUI
     Delete DNS Server And Verify  ${static_name_servers}
 
 
+Configure And Verify Invalid DNS Server
+    [Documentation]  Configure invalid DNS server and verify error.
+    [Tags]  Configure_And_Verify_Invalid_DNS_Server
+    [Template]  Add DNS Server And Verify
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  DNS Test Teardown Execution
+
+    # invalid_ address      expected_status
+    ${string_value}         Invalid format
+    ${special_char_value}   Invalid format
+    ${empty_dictionary}     Field required
+    ${null_value}           Invalid format
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -222,11 +239,13 @@ Configure Invalid Network Address And Verify
 
 Add DNS Server And Verify
     [Documentation]  Add DNS server on BMC and verify it via BMC CLI.
-    [Arguments]  ${static_name_servers}
+    [Arguments]  ${static_name_servers}   ${expected_status}= Valid format
 
     # Description of the argument(s):
     # static_name_servers  A list of static name server IPs to be
     #                      configured on the BMC.
+    # expected_status      Expected status while adding DNS server address
+    # ...                  (e.g. Invalid format / Field required).
 
     Wait Until Page Contains Element  ${xpath_add_dns_server}
     ${length}=  Get Length   ${static_name_servers}
@@ -237,8 +256,10 @@ Add DNS Server And Verify
     END
 
     Click Button  ${xpath_network_save_settings}
-    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
+    Run keyword if  '${expected_status}' != 'Valid format'
+    ...  Run keywords  Page Should Contain  ${expected_status}  AND  Return From Keyword
 
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
     Sleep  ${NETWORK_TIMEOUT}s
     Verify Static Name Server Details On GUI  ${static_name_servers}
     # Check if newly added DNS server is configured on BMC.
@@ -303,4 +324,5 @@ Verify Static Name Server Details On GUI
        Textfield Value Should Be   //*[@data-test-id="networkSettings-input-dnsAddress-${i}"]
        ...  ${static_name_servers}[${i}]
     END
+
 
