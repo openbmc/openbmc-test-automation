@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c3c862b_1f756b32",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2020-12-31T05:43:54Z",
+      "side": 1,
+      "message": "give one more tab space before all lines which have starting HMCID-01. Code is not aligned.",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 43
+      },
+      "revId": "c07f755699bdfc5483eea602c29edac40df89691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
