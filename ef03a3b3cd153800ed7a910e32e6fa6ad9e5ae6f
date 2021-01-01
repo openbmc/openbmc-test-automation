@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ddca910_fc335c30",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000103
+      },
+      "writtenOn": "2021-01-01T10:03:55Z",
+      "side": 1,
+      "message": "This is not required. Redfish Power Off will take care of all the expectation check else it will fail",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 42
+      },
+      "revId": "ef03a3b3cd153800ed7a910e32e6fa6ad9e5ae6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ccb36e6_a8d22813",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000103
+      },
+      "writtenOn": "2021-01-01T10:03:55Z",
+      "side": 1,
+      "message": "I think there is already keyword to check if system reached PHYP standby or runtime. Again this should be based on whether MPIPL is started at phyp standby or runtime",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 44
+      },
+      "revId": "ef03a3b3cd153800ed7a910e32e6fa6ad9e5ae6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39a9fb3a_f5f945b5",
+        "filename": "mpipl/test_mpipl_basic.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000103
+      },
+      "writtenOn": "2021-01-01T10:03:55Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 70,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 44
+      },
+      "revId": "ef03a3b3cd153800ed7a910e32e6fa6ad9e5ae6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
