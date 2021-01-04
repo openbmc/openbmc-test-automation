@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "828c5404_a39fd7bd",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-01-04T07:38:45Z",
+      "side": 1,
+      "message": "also,suggestion to write separate keyword for it ,if will be needed at further test cases",
+      "range": {
+        "startLine": 63,
+        "startChar": 9,
+        "endLine": 65,
+        "endChar": 57
+      },
+      "revId": "1194ef6ecd8119d55c651fc29deb898380fd74ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef874e83_0f4318c1",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-01-04T07:38:45Z",
+      "side": 1,
+      "message": "remove \".\"",
+      "range": {
+        "startLine": 66,
+        "startChar": 72,
+        "endLine": 66,
+        "endChar": 73
+      },
+      "revId": "1194ef6ecd8119d55c651fc29deb898380fd74ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
