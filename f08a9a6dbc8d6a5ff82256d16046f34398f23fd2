@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "243a3cc2_77173aee",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-04T07:23:04Z",
+      "side": 1,
+      "message": "Can you make it only one keyword for valid and error scenarios?",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 42
+      },
+      "revId": "f08a9a6dbc8d6a5ff82256d16046f34398f23fd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
