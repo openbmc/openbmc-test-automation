@@ -93,6 +93,29 @@
       "revId": "2d7b42a52da12b69276debd8c1e8e746336f28d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0b9dda4_fa9e2ff3",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-01-04T09:31:11Z",
+      "side": 1,
+      "message": "suggestion to add these as part of test teardown,as see these used in most testcases",
+      "range": {
+        "startLine": 668,
+        "startChar": 4,
+        "endLine": 673,
+        "endChar": 43
+      },
+      "revId": "2d7b42a52da12b69276debd8c1e8e746336f28d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
