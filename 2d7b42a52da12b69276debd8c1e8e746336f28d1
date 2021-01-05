@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "48641472_a2b35182",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-05T07:11:30Z",
+      "side": 1,
+      "message": "I have removed. can you re-check once.",
+      "parentUuid": "7427e2fa_363a92b9",
+      "range": {
+        "startLine": 350,
+        "startChar": 0,
+        "endLine": 350,
+        "endChar": 4
+      },
+      "revId": "2d7b42a52da12b69276debd8c1e8e746336f28d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16be614d_b3dd16ab",
         "filename": "openpower/ext_interfaces/test_lock_management.robot",
         "patchSetId": 1
@@ -130,6 +154,30 @@
       "writtenOn": "2021-01-05T06:04:10Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 663,
+        "startChar": 0,
+        "endLine": 663,
+        "endChar": 4
+      },
+      "revId": "2d7b42a52da12b69276debd8c1e8e746336f28d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b4bbfdf_1306c47c",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-05T07:11:30Z",
+      "side": 1,
+      "message": "I have removed. can you re-check once.",
+      "parentUuid": "b2ab0607_4e183e85",
       "range": {
         "startLine": 663,
         "startChar": 0,
@@ -225,6 +273,30 @@
       "side": 1,
       "message": "Makes sense to add these lines into keyword and call it as part of teardown wherever required.",
       "parentUuid": "baaf4598_713ab2d5",
+      "range": {
+        "startLine": 668,
+        "startChar": 4,
+        "endLine": 673,
+        "endChar": 43
+      },
+      "revId": "2d7b42a52da12b69276debd8c1e8e746336f28d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a27fad9c_0d93541c",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-05T07:11:30Z",
+      "side": 1,
+      "message": "this is not common to all for other test case.",
+      "parentUuid": "b4953b36_7eeaa7c9",
       "range": {
         "startLine": 668,
         "startChar": 4,
