@@ -93,6 +93,30 @@
       "revId": "435e1295da73b9df6bc0c22eea8f9db32a45d41f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab935df1_8fc20e60",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-05T05:38:47Z",
+      "side": 1,
+      "message": "Yeah, Teardown seems to be a better place to delete session.\nif keyword fails on any of the previous lines, then this will not get executed.",
+      "parentUuid": "e676ad09_20da79d4",
+      "range": {
+        "startLine": 959,
+        "startChar": 3,
+        "endLine": 959,
+        "endChar": 44
+      },
+      "revId": "435e1295da73b9df6bc0c22eea8f9db32a45d41f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
