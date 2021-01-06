@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "8a0bab1b_790ce96e",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-06T03:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c20582d_96864bea",
+      "range": {
+        "startLine": 12,
+        "startChar": 21,
+        "endLine": 12,
+        "endChar": 27
+      },
+      "revId": "ee4396b6158e1ec03f169c6e38c2caccfbf13fd1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "201a2d53_1f397080",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 2
@@ -77,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "f40c2ea5_63aa8174",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-06T03:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d9701ce_9c2a54ba",
+      "revId": "ee4396b6158e1ec03f169c6e38c2caccfbf13fd1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b897062a_e0dfda8d",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 2
@@ -88,6 +130,24 @@
       "writtenOn": "2020-12-14T13:48:56Z",
       "side": 1,
       "message": "https://gerrit.openbmc-project.xyz/#/c/openbmc/openbmc-test-automation/+/38973/1/redfish/extended/redfish_bmc_code_update.robot - you can use the logic from here in order to boot the back up image.",
+      "revId": "ee4396b6158e1ec03f169c6e38c2caccfbf13fd1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "661857af_b11ab4ce",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-06T03:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b897062a_e0dfda8d",
       "revId": "ee4396b6158e1ec03f169c6e38c2caccfbf13fd1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
@@ -123,6 +183,24 @@
       "side": 1,
       "message": "same as line no 205",
       "parentUuid": "f18ce0aa_ad998b88",
+      "revId": "ee4396b6158e1ec03f169c6e38c2caccfbf13fd1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "289d94b8_8327512f",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-06T03:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e4c280f_bfed550e",
       "revId": "ee4396b6158e1ec03f169c6e38c2caccfbf13fd1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
