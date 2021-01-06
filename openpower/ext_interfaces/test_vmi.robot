@@ -172,14 +172,15 @@ Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
     [Tags]  Verify_Persistency_Of_VMI_DHCP_IP_Configuration_After_Multiple_HOST_Reboots
     [Teardown]  Test Teardown Execution
 
-    ${LOOP_COUNT}=  Set Variable  ${3}
     Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
-    Run Keywords  Redfish Power Off  AND  Redfish Power On
     ${vmi_ip_config}=  Get VMI Network Interface Details
     # Verifying persistency of dynamic address after multiple reboots.
-    Repeat Keyword  ${LOOP_COUNT} times
-    ...  Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}  DHCP  ${vmi_ip_config["IPv4_Gateway"]}
+    FOR  ${i}  IN RANGE  ${2}
+        Redfish Power Off
+        Redfish Power On
+        Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}  DHCP  ${vmi_ip_config["IPv4_Gateway"]}
     ...  ${vmi_ip_config["IPv4_SubnetMask"]}
+    END
 
 
 Enable DHCP When Static IP Configured And Verify Static IP
@@ -187,7 +188,7 @@ Enable DHCP When Static IP Configured And Verify Static IP
     [Tags]  Enable_DHCP_when_Static_IP_Configured_And_Verify_Static_IP
     [Teardown]  Test Teardown Execution
 
-    Verify Assigning Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+    Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
     Set VMI IPv4 Origin  ${True}
     ${vmi_network_conf}=  Get VMI Network Interface Details
     Should Not Be Equal As Strings  ${test_ipv4}  ${vmi_network_conf["IPv4_Address"]}
@@ -336,7 +337,7 @@ Test Teardown Execution
     ${curr_mode}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
     Run Keyword If  ${curr_mode} == ${True}  Set VMI IPv4 Origin  ${False}
     Run Keyword If  ${vmi_network_conf} != ${None}
-    ...  Verify Assigning Static IPv4 Address To VMI  ${vmi_network_conf["IPv4_Address"]}
+    ...  Set Static IPv4 Address To VMI And Verify  ${vmi_network_conf["IPv4_Address"]}
     ...  ${vmi_network_conf["IPv4_Gateway"]}  ${vmi_network_conf["IPv4_SubnetMask"]}
 
 
@@ -515,7 +516,7 @@ Delete VMI Static IP Address Using Different Users
     [Documentation]  Update user role and delete vmi static IP address.
     [Arguments]  ${username}  ${password}  ${valid_status_code}
     [Teardown]  Run Keywords  Redfish.Login  AND
-    ...  Verify Assigning Static IPv4 Address To VMI  ${test_ipv4}  ${test_gateway}
+    ...  Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}
     ...  ${test_netmask}  ${HTTP_ACCEPTED}  AND  Redfish.Logout
 
     # Description of argument(s):
