@@ -58,6 +58,7 @@ Suite Setup Execution
 
     Redfish.Login
 
+    Redfish Power On
     # This keyword should login to host OS.
     Run Inband IPMI Standard Command
     ...  lan set ${CHANNEL_NUMBER} ipsrc static  login_host=${1}
