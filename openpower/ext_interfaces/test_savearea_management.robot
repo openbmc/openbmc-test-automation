@@ -355,7 +355,7 @@ Verify Partition File On BMC
 
     FOR  ${conf_file}  IN  @{file_name}
       ${status}  ${stderr}  ${rc}=  BMC Execute Command
-      ...  ls -l /var/lib/obmc/bmc-console-mgmt/save-area/${conf_file} | wc -l
+      ...  ls -l /var/lib/bmcweb/ibm-management-console/configfiles/${conf_file} | wc -l
       Valid Value  ${status}  [${Partition_status}]
     END
 
