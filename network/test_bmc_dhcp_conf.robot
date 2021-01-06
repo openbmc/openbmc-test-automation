@@ -39,7 +39,7 @@ Set Network Property via Redfish And Verify
    [Template]  Apply Ethernet Config
 
     # property
-    ${dhcp_enable_dict}
+#    ${dhcp_enable_dict}
     ${dhcp_disable_dict}
     ${dns_enable_dict}
     ${dns_disable_dict}
@@ -58,6 +58,7 @@ Suite Setup Execution
 
     Redfish.Login
 
+    Redfish Power On
     # This keyword should login to host OS.
     Run Inband IPMI Standard Command
     ...  lan set ${CHANNEL_NUMBER} ipsrc static  login_host=${1}
