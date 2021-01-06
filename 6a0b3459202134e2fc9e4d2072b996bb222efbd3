@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86c0d359_90fa1584",
+        "filename": "lib/rest_client.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2021-01-06T14:53:49Z",
+      "side": 1,
+      "message": "this is not correct for image upload",
+      "range": {
+        "startLine": 363,
+        "startChar": 36,
+        "endLine": 363,
+        "endChar": 65
+      },
+      "revId": "6a0b3459202134e2fc9e4d2072b996bb222efbd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
