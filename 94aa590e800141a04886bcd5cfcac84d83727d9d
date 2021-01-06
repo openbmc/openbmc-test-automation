@@ -109,6 +109,24 @@
       "revId": "94aa590e800141a04886bcd5cfcac84d83727d9d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "128f11fe_7f6e2854",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-06T12:22:19Z",
+      "side": 1,
+      "message": "Switch Backup Firmware Image To Functional - this keyword is created to perform only switch the backup firmware image to make functional.",
+      "parentUuid": "883969e5_e5f00956",
+      "revId": "94aa590e800141a04886bcd5cfcac84d83727d9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
