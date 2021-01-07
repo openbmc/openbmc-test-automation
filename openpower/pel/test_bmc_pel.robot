@@ -632,9 +632,8 @@ Verify PEL Delete
     BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
     ${pel_ids}=  Get PEL Log Via BMC CLI
     ${id}=  Get From List  ${pel_ids}  -1
-    Peltool  -d ${id}
-    ${output}=  peltool -i ${id}
-    Should Contain  ${output}  PEL not found
+    Peltool  -d ${id}  False
+    Run Keyword and Expect Error  *PEL not found*  Peltool  -i ${id}
 
 
 *** Keywords ***
@@ -690,10 +689,10 @@ Create Error Log
 
     FOR  ${i}  IN RANGE  0  ${count}
         ${cmd}=  Set Variable If
-        ...  '${error_severity}' == 'Informational' and '${system_type}' == 'BMC'  ${CMD_INFORMATIONAL_ERROR}
-        ...  '${error_severity}' == 'Predictive' and '${system_type}' == 'BMC'  ${CMD_PREDICTIVE_ERROR}
-        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'BMC'  ${CMD_UNRECOVERABLE_ERROR}
-        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'HOST'  ${CMD_UNRECOVERABLE_HOST_ERROR}
+        ...  '${error_severity}' == 'Informational' and '${error_creator}' == 'BMC'  ${CMD_INFORMATIONAL_ERROR}
+        ...  '${error_severity}' == 'Predictive' and '${error_creator}' == 'BMC'  ${CMD_PREDICTIVE_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${error_creator}' == 'BMC'  ${CMD_UNRECOVERABLE_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${error_creator}' == 'HOST'  ${CMD_UNRECOVERABLE_HOST_ERROR}
         BMC Execute Command  ${cmd}
     END
 
