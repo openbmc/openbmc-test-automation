@@ -143,6 +143,53 @@
     },
     {
       "key": {
+        "uuid": "5307f3bc_3ad11c94",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-07T12:00:32Z",
+      "side": 1,
+      "message": "unable to see new changes in Patchset 12",
+      "parentUuid": "d1f2c843_66eb2a1d",
+      "range": {
+        "startLine": 135,
+        "startChar": 5,
+        "endLine": 135,
+        "endChar": 22
+      },
+      "revId": "94aa590e800141a04886bcd5cfcac84d83727d9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9942ea7c_c73bea1f",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-07T12:00:32Z",
+      "side": 1,
+      "message": "same as 135 and 131",
+      "range": {
+        "startLine": 137,
+        "startChar": 58,
+        "endLine": 137,
+        "endChar": 75
+      },
+      "revId": "94aa590e800141a04886bcd5cfcac84d83727d9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "883969e5_e5f00956",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 8
