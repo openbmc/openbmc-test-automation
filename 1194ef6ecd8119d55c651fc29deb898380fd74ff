@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "859aeb84_54046259",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-07T10:59:01Z",
+      "side": 1,
+      "message": "what if image-version is neither functional nor backup?\nwhr is the code to do code update?",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 58,
+        "endChar": 26
+      },
+      "revId": "1194ef6ecd8119d55c651fc29deb898380fd74ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "828c5404_a39fd7bd",
         "filename": "redfish/extended/redfish_bmc_code_update.robot",
         "patchSetId": 1
