@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6aec9d9_f334d64d",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-07T10:36:51Z",
+      "side": 1,
+      "message": "when dhcp disabled check static is enabled or not.\nDont set static ip",
+      "revId": "8a40ec62fd44301449ffd6a3ac1cb4847710da38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
