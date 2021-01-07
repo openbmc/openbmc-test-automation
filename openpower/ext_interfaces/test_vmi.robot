@@ -296,7 +296,9 @@ Enable And Disable DHCP And Verify
     ${default}=  Set Variable  0.0.0.0
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
     Set VMI IPv4 Origin  ${False}
-    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Should Be Empty  ${resp.dict["IPv4Addresses"]}
 
 
 Multiple Times Enable And Disable DHCP And Verify
@@ -309,7 +311,9 @@ Multiple Times Enable And Disable DHCP And Verify
       Set VMI IPv4 Origin  ${True}
       Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
       Set VMI IPv4 Origin  ${False}
-      Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
+      ${resp}=  Redfish.Get
+      ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+      Should Be Empty  ${resp.dict["IPv4Addresses"]}
     END
 
 
