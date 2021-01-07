@@ -531,12 +531,12 @@ Verify Error Logging Rotation Policy
     # Error logs to be created                                % of total logging space when error
     #                                                         log exceeds max limit.
     Informational BMC 3000                                                       15
-    Predictive BMC 3000                                                          30
-    Unrecoverable BMC 3000                                                       30
-    Informational BMC 1500, Predictive BMC 1500                                  45
-    Informational BMC 1500, Unrecoverable BMC 1500                               45
-    Unrecoverable BMC 1500, Predictive BMC 1500                                  30
-    Unrecoverable BMC 1000, Informational BMC 1000, Predictive BMC 1000          45
+    #Predictive BMC 3000                                                          30
+    #Unrecoverable BMC 3000                                                       30
+    #Informational BMC 1500, Predictive BMC 1500                                  45
+    #Informational BMC 1500, Unrecoverable BMC 1500                               45
+    #Unrecoverable BMC 1500, Predictive BMC 1500                                  30
+    #Unrecoverable BMC 1000, Informational BMC 1000, Predictive BMC 1000          45
 
 
 Verify Error Logging Rotation Policy With HOST Error Logs
@@ -632,8 +632,8 @@ Verify PEL Delete
     BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
     ${pel_ids}=  Get PEL Log Via BMC CLI
     ${id}=  Get From List  ${pel_ids}  -1
-    Peltool  -d ${id}
-    ${output}=  peltool -i ${id}
+    Peltool  -d ${id}  False
+    ${output}=  Peltool  -i ${id}  False
     Should Contain  ${output}  PEL not found
 
 
@@ -690,10 +690,10 @@ Create Error Log
 
     FOR  ${i}  IN RANGE  0  ${count}
         ${cmd}=  Set Variable If
-        ...  '${error_severity}' == 'Informational' and '${system_type}' == 'BMC'  ${CMD_INFORMATIONAL_ERROR}
-        ...  '${error_severity}' == 'Predictive' and '${system_type}' == 'BMC'  ${CMD_PREDICTIVE_ERROR}
-        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'BMC'  ${CMD_UNRECOVERABLE_ERROR}
-        ...  '${error_severity}' == 'Unrecoverable' and '${system_type}' == 'HOST'  ${CMD_UNRECOVERABLE_HOST_ERROR}
+        ...  '${error_severity}' == 'Informational' and '${error_creator}' == 'BMC'  ${CMD_INFORMATIONAL_ERROR}
+        ...  '${error_severity}' == 'Predictive' and '${error_creator}' == 'BMC'  ${CMD_PREDICTIVE_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${error_creator}' == 'BMC'  ${CMD_UNRECOVERABLE_ERROR}
+        ...  '${error_severity}' == 'Unrecoverable' and '${error_creator}' == 'HOST'  ${CMD_UNRECOVERABLE_HOST_ERROR}
         BMC Execute Command  ${cmd}
     END
 
