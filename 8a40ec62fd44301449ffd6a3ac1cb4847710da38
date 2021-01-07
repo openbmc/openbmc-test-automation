@@ -16,6 +16,24 @@
       "revId": "8a40ec62fd44301449ffd6a3ac1cb4847710da38",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "156d6c1f_f0e170ab",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-01-07T11:01:42Z",
+      "side": 1,
+      "message": "when dhcp is disabled after enabling,no data is there related to static(it gets empty) which can be verified..only we can set one and then check",
+      "parentUuid": "b6aec9d9_f334d64d",
+      "revId": "8a40ec62fd44301449ffd6a3ac1cb4847710da38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
