@@ -128,13 +128,13 @@ Get Functional Firmware
 
 Get Non Functional Firmware
     [Documentation]  Get BMC non functional fimware details.
-    [Arguments]  ${sw_inv}  ${functional_sate}
+    [Arguments]  ${sw_inv}  ${functional_state}
 
     # Description of argument(s):
-    # sw_inv           This dictionay contains all the BMC fimware details.
-    # functional_sate  Functional state can be either True or False.
+    # sw_inv            This dictionay contains all the BMC fimware details.
+    # functional_state  Functional state can be either True or False.
 
-    ${resp}=  Filter Struct  ${sw_inv}  [('functional', ${functional_sate})]
+    ${resp}=  Filter Struct  ${sw_inv}  [('functional', ${functional_state})]
     ${list_inv_dict}=  Get Dictionary Values  ${resp}
 
     [Return]  ${list_inv_dict}[0]
@@ -212,4 +212,17 @@ Get System Firmware Details
     Rprint Vars  sys_firmware_dict
 
     [Return]  &{sys_firmware_dict}
+
+
+Switch Backup Firmware Image To Functional
+   [Documentation]  Switch the backup firmware image to make functional.
+
+   ${sw_inv}=  Get Functional Firmware  BMC image
+   ${nonfunctional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  False
+
+   ${firmware_inv_path}=  Set Variable  /redfish/v1/UpdateService/FirmwareInventory/${nonfunctional_sw_inv['image_id']}
+
+   # Below URI, change to backup image and reset the BMC.
+   Redfish.Patch  /redfish/v1/Managers/bmc
+   ...  body={'Links': {'ActiveSoftwareImage': {'@odata.id': '${firmware_inv_path}'}}}
 
