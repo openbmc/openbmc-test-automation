@@ -34,6 +34,24 @@
       "revId": "8a40ec62fd44301449ffd6a3ac1cb4847710da38",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e972bed3_6240c503",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-07T11:06:49Z",
+      "side": 1,
+      "message": "check for dhcp-enabled\u003dfalse\nand other fields are mpty.",
+      "parentUuid": "156d6c1f_f0e170ab",
+      "revId": "8a40ec62fd44301449ffd6a3ac1cb4847710da38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
