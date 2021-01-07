@@ -187,6 +187,30 @@
       "revId": "1194ef6ecd8119d55c651fc29deb898380fd74ff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be38a33e_04a55747",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-07T12:21:57Z",
+      "side": 1,
+      "message": "This is a transitory code and needed for now. it handles those bad upload where a Developer uses the same build ID with different content. so this one is needed till REST is supported",
+      "parentUuid": "28b8c223_b605a1a7",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 14
+      },
+      "revId": "1194ef6ecd8119d55c651fc29deb898380fd74ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
