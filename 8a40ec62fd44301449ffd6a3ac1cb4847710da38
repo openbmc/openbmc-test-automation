@@ -52,6 +52,24 @@
       "revId": "8a40ec62fd44301449ffd6a3ac1cb4847710da38",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dde8d7ff_90c2784f",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-01-08T07:28:28Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "e972bed3_6240c503",
+      "revId": "8a40ec62fd44301449ffd6a3ac1cb4847710da38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
