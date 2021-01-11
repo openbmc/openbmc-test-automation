@@ -487,6 +487,33 @@ Modify IPv4 Address And Verify
      Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
 
 
+Configure And Verify Multiple Static IPv4 Addresses
+    [Documentation]  Configure multiple static ipv4 address via Redfish and verify.
+    [Tags]  Configure_And_Verify_Multiple_Static_IPv4_Addresses
+    [Teardown]  Run Keywords  Delete Multiple Static IPv4 Addresses  ${test_ipv4_addresses}
+    ...  AND  Test Teardown Execution
+
+    ${test_ipv4_addresses}=  Create List  10.7.7.7  10.7.7.10
+    Configure Multiple Static IPv4 Addresses   ${test_ipv4_addresses}  ${test_subnet_mask}  ${test_gateway}
+
+
+Configure Multiple Static IPv4 Addresses And Check Persistency
+    [Documentation]  Configure multiple static ipv4 address via Redfish and check persistency.
+    [Tags]  Configure_Multiple_Static_IPv4_Addresses_And_Check_Persistency
+    [Teardown]  Run Keywords  Delete Multiple Static IPv4 Addresses  ${test_ipv4_addresses}
+    ...  AND  Test Teardown Execution
+
+    ${test_ipv4_addresses}=  Create List  10.7.7.7  10.7.7.10
+    Configure Multiple Static IPv4 Addresses  ${test_ipv4_addresses}  ${test_subnet_mask}  ${test_gateway}
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+
+    FOR  ${ip}  IN  @{test_ipv4_addresses}
+      Verify IP And Netmask On BMC  ${ip}  ${test_subnet_mask}
+    END
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -676,4 +703,31 @@ Update IP Address
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
     Verify IP On BMC  ${new_ip}
+    Validate Network Config On BMC
+
+Configure Multiple Static IPv4 Addresses
+    [Documentation]  Configure multiple static ipv4 address via Redfish and verify.
+    [Arguments]  ${ip_addreses}  ${subnet_mask}  ${gateway}
+
+    # Description of argument(s):
+    # ip_addreses         A List of IP addresses to be added (e.g.["10.7.7.7"]).
+    # subnet_mask         Subnet mask for the IP to be added
+    #                     (e.g. "255.255.0.0").
+    # gateway             Gateway for the IP to be added (e.g. "10.7.7.1").
+
+    FOR  ${ip}  IN   @{ip_addreses}
+       Add IP Address  ${ip}  ${subnet_mask}  ${gateway}
+    END
+    Validate Network Config On BMC
+
+Delete Multiple Static IPv4 Addresses
+    [Documentation]  delete multiple static ipv4 address via Redfish.
+    [Arguments]  ${ip_addreses}
+
+    # Description of argument(s):
+    # ip_addreses         A List of IP addresses to be delete (e.g.["10.7.7.7"]).
+
+    FOR  ${ip}  IN   @{ip_addreses}
+       Delete IP Address  ${ip}
+    END
     Validate Network Config On BMC
