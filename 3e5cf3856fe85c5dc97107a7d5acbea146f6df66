@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "210d8c3b_2faa3182",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-11T14:34:25Z",
+      "side": 1,
+      "message": "Redfish Get Host State\n\nuse this instead",
+      "range": {
+        "startLine": 509,
+        "startChar": 21,
+        "endLine": 509,
+        "endChar": 35
+      },
+      "revId": "3e5cf3856fe85c5dc97107a7d5acbea146f6df66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
