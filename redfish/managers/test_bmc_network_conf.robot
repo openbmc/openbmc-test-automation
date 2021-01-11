@@ -486,6 +486,31 @@ Modify IPv4 Address And Verify
 
      Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
 
+Configure And Verify Multiple Static IPv4 Addresses
+    [Documentation]  Configure multiple static ipv4 address via Redfish and verify.
+    [Tags]  Configure_And_Verify_Multiple_Static_IPv4_Addresses
+    [Teardown]  Run Keywords  Delete Multiple Static IPv4 Addresses  ${test_ipv4_addresses}
+    ...  AND  Test Teardown Execution
+
+    ${test_ipv4_addresses}=  Create List  10.7.7.7  10.7.7.10
+    Configure Multiple Static IPv4 Addresses   ${test_ipv4_addresses}  ${test_subnet_mask}  ${test_gateway}
+
+Configure Multiple Static IPv4 Addresses And Check Persistency
+    [Documentation]  Configure multiple static ipv4 address via Redfish and Check Persistency.
+    [Tags]  Configure_Multiple_Static_IPv4_Addresses_And_Check_Persistency
+    [Teardown]  Run Keywords  Delete Multiple Static IPv4 Addresses  ${test_ipv4_addresses}
+    ...  AND  Test Teardown Execution
+
+    ${test_ipv4_addresses}=  Create List  10.7.7.7  10.7.7.10
+    Configure Multiple Static IPv4 Addresses  ${test_ipv4_addresses}  ${test_subnet_mask}  ${test_gateway}
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+
+    FOR  ${ip}  IN  @{test_ipv4_addresses}
+      Verify IP And Netmask On BMC  ${ip}  ${test_subnet_mask}
+    END
+
 
 *** Keywords ***
 
@@ -676,4 +701,23 @@ Update IP Address
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
     Verify IP On BMC  ${new_ip}
+    Validate Network Config On BMC
+
+Configure Multiple Static IPv4 Addresses
+    [Documentation]  Configure multiple static ipv4 address via Redfish and verify.
+    [Arguments]  ${ip_addreses}  ${subnet_mask}  ${gateway}
+
+    FOR  ${ip}  IN   @{ip_addreses}
+       Add IP Address  ${ip}  ${subnet_mask}  ${gateway}
+       Verify IP On BMC  ${ip}
+    END
+    Validate Network Config On BMC
+
+Delete Multiple Static IPv4 Addresses
+    [Documentation]  delete multiple static ipv4 address via Redfish.
+    [Arguments]  ${ip_addreses}
+
+    FOR  ${ip}  IN   @{ip_addreses}
+       Delete IP Address  ${ip}
+    END
     Validate Network Config On BMC
