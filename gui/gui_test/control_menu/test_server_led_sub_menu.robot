@@ -94,6 +94,7 @@ Verify Server LED using Redfish and GUI
     ${gui_led_value} =  Get Text  ${xpath_led_value}
     ${redfish_led_value}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
 
-    ${redfish_led_value}=  Set Variable If  '${redfish_led_value}' == 'Lit'  On
+    ${redfish_led_value}=  Set Variable If  '${redfish_led_value}' == 'Lit'
+    ...  On  ${redfish_led_value}
     Should Be Equal  ${gui_led_value}  ${expected_led_status}
     Should Be Equal  ${redfish_led_value}  ${expected_led_status}
