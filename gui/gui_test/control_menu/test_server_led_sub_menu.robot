@@ -4,10 +4,10 @@ Documentation  Test OpenBMC GUI "Server LED" sub-menu of "Server control".
 
 Resource        ../../lib/gui_resource.robot
 
-Suite Setup     Launch Browser And Login GUI
-Suite Teardown  Close Browser
-Test Setup      Test Setup Execution
-
+Suite Setup      Launch Browser And Login GUI
+Suite Teardown   Close Browser
+Test Setup       Test Setup Execution
+Test Teardown    Test Teardown Execution
 
 *** Variables ***
 
@@ -82,7 +82,8 @@ Test Setup Execution
     Click Element  ${xpath_control_menu}
     Click Element  ${xpath_server_led_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  server-led
-
+   
+    Redfish.Login
 
 Verify Server LED using Redfish and GUI
     [Documentation]  Verify LED status using Redfish and GUI.
@@ -94,6 +95,15 @@ Verify Server LED using Redfish and GUI
     ${gui_led_value} =  Get Text  ${xpath_led_value}
     ${redfish_led_value}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
 
-    ${redfish_led_value}=  Set Variable If  '${redfish_led_value}' == 'Lit'  On
+    ${redfish_led_value}=  Set Variable If  '${redfish_led_value}' == 'Lit'
+    ...  On  ${redfish_led_value}
+
     Should Be Equal  ${gui_led_value}  ${expected_led_status}
     Should Be Equal  ${redfish_led_value}  ${expected_led_status}
+
+
+Test Teardown Execution
+    [Documentation]  Do the post test teardown.
+
+    Redfish.Logout
+
