@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90eda52a_14acca7c",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-12T09:31:43Z",
+      "side": 1,
+      "message": "[Setup]  Run Keyword And Ignore Error  Delete VMI IPv4 Address \n[Teardown]  Test Teardown Execution",
+      "revId": "b75bb207a3a132692904fcf4f19920d7add6cce3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27657437_b350a368",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-12T09:31:43Z",
+      "side": 1,
+      "message": "[Setup]  Set VMI IPv4 Origin  ${True}\n[Teardown]  Test Teardown Execution\nbelow testcase works when dhcp disable",
+      "revId": "b75bb207a3a132692904fcf4f19920d7add6cce3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49c48275_ebd61e2b",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-12T09:31:43Z",
+      "side": 1,
+      "message": "[Teardown]  Test Teardown Execution\nbecause next testcase works when dhcp disable.",
+      "revId": "b75bb207a3a132692904fcf4f19920d7add6cce3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
