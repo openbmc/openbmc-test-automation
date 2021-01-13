@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6b1ea9c_67705c3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2021-01-13T16:55:41Z",
+      "side": 1,
+      "message": "Why do this?\nCan you add some detail ?",
+      "revId": "2bdd12a14f8d9bd76c6f2bd657dd2b57a1731715",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
