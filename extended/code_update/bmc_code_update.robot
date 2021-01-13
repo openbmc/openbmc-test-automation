@@ -83,6 +83,11 @@ REST BMC Code Update
     Pass Execution If  '${functional_version}' == '${image_version}'
     ...  The existing ${image_version} firmware is already functional.
 
+    ${software_object}=  Get Non Running BMC Software Object
+    ${version}=  Read Software Attribute  ${software_object}  Version
+    Run Keyword If  '${image_version}' == '${version.split('=')[-1]}'
+    ...  Delete Software Object  ${software_object}
+
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
@@ -191,11 +196,6 @@ Delete All Non Running BMC Images
 
 
 Test Certificate Persistency After BMC Code Update
-    [Documentation]  Test certificate persistency after BMC update.
-    [Tags]  Test_Certificate_Persistency_After_BMC_Code_Update
-
-    # Create certificate sub-directory in current working directory.
-    Create Directory  certificate_dir
     OperatingSystem.Directory Should Exist  ${EXECDIR}${/}certificate_dir
 
     ${cert_file_path}=  Generate Certificate File Via Openssl
