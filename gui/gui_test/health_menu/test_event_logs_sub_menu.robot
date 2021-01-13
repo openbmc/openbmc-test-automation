@@ -6,7 +6,7 @@ Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/logging_utils.robot
 
 Suite Setup     Suite Setup Execution
-Suite Teardown  Close Browser
+Suite Teardown  Suite Teardown Execution
 
 
 *** Variables ***
@@ -124,6 +124,13 @@ Suite Setup Execution
 
     Launch Browser And Login GUI
     Navigate To Event Logs Page
+    Redfish.Login
+
+Suite Teardown Execution
+    [Documentation]  Suite teardown tasks.
+
+    Redfish.Login
+    Close Browser
 
 Navigate To Event Logs Page
     [Documentation]  Navigate to the event logs page from main menu.
