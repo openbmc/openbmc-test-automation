@@ -2,10 +2,6 @@
 Documentation    Test RAS sanity scenarios using ecmd commands.
 
 Resource        ../../lib/openbmc_ffdc.robot
-Resource        ../../lib/openbmc_ffdc_utils.robot
-Resource        ../../lib/openbmc_ffdc_methods.robot
-Resource        ../../lib/ras/host_utils.robot
-Library         ../../lib/utils.py
 Variables       ../../lib/ras/variables.py
 
 Suite Setup      Redfish Power On

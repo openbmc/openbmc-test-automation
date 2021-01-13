@@ -1,14 +1,9 @@
 *** Settings ***
 Documentation    Test RAS sanity scenarios.
 
+Resource        ../../lib/bmc_redfish_resource.robot
 Resource        ../../lib/openbmc_ffdc.robot
-Resource        ../../lib/openbmc_ffdc_utils.robot
-Resource        ../../lib/openbmc_ffdc_methods.robot
-Resource        ../../lib/ras/host_utils.robot
-Resource        ../../openpower/ras/ras_utils.robot
-Library         ../../lib/utils.py
 Variables       ../../lib/ras/variables.py
-Variables       ../../data/variables.py
 
 Suite Setup      Suite Setup Execution
 Test Setup       Printn
