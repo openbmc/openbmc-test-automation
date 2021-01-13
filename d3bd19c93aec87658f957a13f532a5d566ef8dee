@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "3fb9a1b4_3275dcd8",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-13T05:50:30Z",
+      "side": 1,
+      "message": "Description of expected_error missing",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 49
+      },
+      "revId": "d3bd19c93aec87658f957a13f532a5d566ef8dee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "871eca00_6ae69407",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 2
@@ -65,6 +88,29 @@
         "startChar": 70,
         "endLine": 257,
         "endChar": 85
+      },
+      "revId": "d3bd19c93aec87658f957a13f532a5d566ef8dee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "532f2563_2ceb0334",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-13T05:50:30Z",
+      "side": 1,
+      "message": "So I would say based on expected_error, verify proper message on the page and then return from the keyword. Like below\n\nRun keyword if  \u0027${expected_error}\u0027 !\u003d `Valid format` Run keywords  Page Should Contain  ${expected_error}  AND  Return From Keyword",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 49
       },
       "revId": "d3bd19c93aec87658f957a13f532a5d566ef8dee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
