@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4ff090f_65f68208",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-13T06:14:47Z",
+      "side": 1,
+      "message": "my suggestion \n[Setup]  Set Static IPv4 Address To VMI And Verify  ${test_ipv4}\n ...  ${test_gateway}  ${test_netmask}",
+      "range": {
+        "startLine": 258,
+        "startChar": 4,
+        "endLine": 258,
+        "endChar": 93
+      },
+      "revId": "a8ca4982da7edf62fbbe35500f6e58656b4b6a91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
