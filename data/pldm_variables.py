@@ -121,7 +121,7 @@ RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER = {
                    'System (logical)', 'System chassis (main enclosure)',
                    'Chassis front panel board (control panel)',
                    'Processor Module', 'Memory Module', 'Power Supply',
-                   '24576(OEM)'],
+                   '24576(OEM)', '60(OEM)', 'Processor', '142(OEM)'],
     'containerID': [0, 1, 2, 3]}
 
 RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION = {
