@@ -22,6 +22,30 @@
       "revId": "2e29460039b875feb367a9b4530bf582cb1e3aec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5db388b_591178cc",
+        "filename": "gui/gui_test/control_menu/test_server_led_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000564
+      },
+      "writtenOn": "2021-01-15T07:04:19Z",
+      "side": 1,
+      "message": "1. In Redfish, when the LED is on, it displays as \"LIT\" but in GUI it is \"ON\", so this condition is applied to have same value when state is matching.\n2. With above condition, when LED is off, the ${redfish_led_value} used to hold \"NONE\" as value, because of which tc used to fail. So made changes to retain the value as it is after checking with condition.",
+      "parentUuid": "f97509e6_5ad1ac4e",
+      "range": {
+        "startLine": 98,
+        "startChar": 9,
+        "endLine": 98,
+        "endChar": 33
+      },
+      "revId": "2e29460039b875feb367a9b4530bf582cb1e3aec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
