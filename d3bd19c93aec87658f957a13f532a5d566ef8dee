@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e4fa3fe5_d0d5b13d",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-18T06:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae90ea47_19d8b4f9",
+      "range": {
+        "startLine": 242,
+        "startChar": 42,
+        "endLine": 242,
+        "endChar": 58
+      },
+      "revId": "d3bd19c93aec87658f957a13f532a5d566ef8dee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fb9a1b4_3275dcd8",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "d3bd19c93aec87658f957a13f532a5d566ef8dee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11e41089_9ea0fa98",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-18T06:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fb9a1b4_3275dcd8",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 49
+      },
+      "revId": "d3bd19c93aec87658f957a13f532a5d566ef8dee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -115,6 +163,30 @@
       "revId": "d3bd19c93aec87658f957a13f532a5d566ef8dee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a0c7c5b_c099606a",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-18T06:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "532f2563_2ceb0334",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 49
+      },
+      "revId": "d3bd19c93aec87658f957a13f532a5d566ef8dee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
