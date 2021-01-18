@@ -9,8 +9,8 @@ Variables        ../data/pldm_variables.py
 Resource         ../lib/openbmc_ffdc.robot
 
 Test Setup       Printn
-Test Teardown    FFDC On Test Case Fail
-Suite Teardown   PLDM BIOS Suite Cleanup
+#Test Teardown    FFDC On Test Case Fail
+#Suite Teardown   PLDM BIOS Suite Cleanup
 
 *** Test Cases ***
 
@@ -92,7 +92,7 @@ Verify GetBIOSTable For StringTable
         Append To List  ${string_list}  ${pldm_output['${key}']}
     END
     Log To Console  ${string_list}
-    Valid List  string_list  required_values=${RESPONSE_LIST_GETBIOSTABLE_STRTABLE}
+    Valid List  string_list  required_values=${RESPONSE_LIST_GETBIOSTABLE_ATTRTABLE}
 
 
 Verify GetBIOSTable For AttributeTable
@@ -139,6 +139,45 @@ Verify GetBIOSTable For AttributeValueTable
     END
     Valid List  attr_val_list  required_values=${RESPONSE_LIST_GETBIOSTABLE_ATTRVALTABLE}
 
+
+Verify SetBIOSAttributeCurrentValue
+    [Documentation]  Verify SetBIOSAttributeCurrentValue with the
+    ...              various BIOS attribute handle and its values.
+
+    # Example output:
+    # {
+    #     "Response": "SUCCESS"
+    # }
+
+    ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeTable
+    ${attr_val_data}=  GenerateBIOSAttrHandleValueDict  ${pldm_output}
+    Log To Console  ${attr_val_data}
+    @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
+    FOR  ${i}  IN  @{attr_handles}
+        @{attr_val_list}=  Set Variable  ${attr_val_data}[${i}]
+        Log To Console  ${attr_val_list}
+        Validate SetBIOSAttributeCurrentValue  ${i}  @{attr_val_list}
+    END
+
+Verify GetBIOSAttributeCurrentValueByHandle
+    [Documentation]  Verify GetBIOSAttributeCurrentValueByHandle with the
+    ...              various BIOS attribute handle and its values.
+
+    # Example output:
+    # {
+    #     "CurrentValue": "Temp"
+    # }
+
+    ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeTable
+    ${attr_val_data}=  GenerateBIOSAttrHandleValueDict  ${pldm_output}
+    @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
+    FOR  ${i}  IN  @{attr_handles}
+        ${cur_attr}=  Pldmtool  bios GetBIOSAttributeCurrentValueByHandle -a ${i}
+        @{attr_val_list}=  Set Variable  ${attr_val_data}[${i}]
+        Run Keyword If  '${cur_attr['CurrentValue']}' not in @{attr_val_list}
+        ...  Fail  Invalid GetBIOSAttributeCurrentValueByHandle value found.
+    END
+
 *** Keywords ***
 
 PLDM BIOS Suite Cleanup
@@ -149,3 +188,22 @@ PLDM BIOS Suite Cleanup
     ${cmd_set_date_time}=  Evaluate  $CMD_SETDATETIME % '${current_date_time}'
     ${pldm_output}=  Pldmtool  ${cmd_set_date_time}
     Valid Value  pldm_output['Response']  ['SUCCESS']
+
+Validate SetBIOSAttributeCurrentValue
+    [Documentation]  For the given input attr_handle update with with available
+    ...              attribute handle values and revert back to original attr_handle value.
+    [Arguments]  ${attr_handle}  @{attr_val_list}
+
+    # Description of argument(s):
+    # ${attr_handle}    Bios Attribute handle (e.g. pvm_system_power_off_policy).
+    # @{attr_val_list}  List of the attribute values for the given attribute handle
+    #                   (e.g. ['"Power Off"', '"Stay On"', 'Automatic']).
+
+    ${cur_attr}=  Pldmtool  bios GetBIOSAttributeCurrentValueByHandle -a ${attr_handle}
+    Log To Console  ${cur_attr}
+    FOR  ${j}  IN  @{attr_val_list}
+        ${pldm_resp}=  pldmtool  bios SetBIOSAttributeCurrentValue -a ${attr_handle} -d ${j}
+        Valid Value  pldm_resp['Response']  ['SUCCESS']
+    END
+    ${pldm_resp}=  pldmtool  bios SetBIOSAttributeCurrentValue -a ${attr_handle} -d ${cur_attr['CurrentValue']}
+    Valid Value  pldm_resp['Response']  ['SUCCESS']
