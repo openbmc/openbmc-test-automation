@@ -40,6 +40,8 @@ Set MAC Address
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Run Keyword If  '${ethernet_interface}' == 'None'
+    ...   Fail   Valid interface not found
 
     Write  fw_setenv ethaddr ${mac_address}
     OBMC Reboot (off)
@@ -107,10 +109,13 @@ Get BMC MAC Address
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Run Keyword If  '${ethernet_interface}' == 'None'
+    ...   Fail   Valid interface not found
 
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  /sbin/ip addr | grep ${ethernet_interface} -A 1 | grep ether
 
+    Run Keyword If  ${rc} == 1  Fail  Valid interface not found
     # Split the line and return MAC address.
     # Split list data:
     # link/ether | xx:xx:xx:xx:xx:xx | brd | ff:ff:ff:ff:ff:ff
@@ -162,6 +167,7 @@ Get FW_Env MAC Address
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  /sbin/fw_printenv | grep ethaddr
 
+    Run Keyword If  ${rc} == 1  Fail  Valid interface not found
     # Split the line and return MAC address.
     # Split list data:
     # ethaddr | xx:xx:xx:xx:xx:xx:xx
