@@ -22,6 +22,30 @@
       "revId": "6106b1c4b31b3c1e669cc97bd41a0a6e48912d9d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e7b2b23_f1a22472",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-18T07:18:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b95cb02c_3c2cc148",
+      "range": {
+        "startLine": 247,
+        "startChar": 27,
+        "endLine": 248,
+        "endChar": 64
+      },
+      "revId": "6106b1c4b31b3c1e669cc97bd41a0a6e48912d9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
