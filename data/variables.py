@@ -200,6 +200,9 @@ SYSTEM_BASE_URI = REDFISH_BASE_URI + 'Systems/system/'
 EVENT_LOG_URI = SYSTEM_BASE_URI + 'LogServices/EventLog/'
 DUMP_URI = SYSTEM_BASE_URI + 'LogServices/Dump/'
 
+BIOS_ATTR_URI = SYSTEM_BASE_URI + 'Bios'
+BIOS_ATTR_SETTINGS_URI = BIOS_ATTR_URI + '/Settings'
+
 '''
   QEMU HTTPS variable:
 
