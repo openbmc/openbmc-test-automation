@@ -7,6 +7,7 @@ Resource       ../../lib/openbmc_ffdc.robot
 Library        ../../lib/bmc_network_utils.py
 
 Suite Setup    Suite Setup Execution
+Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
 
 Force Tags     MAC_Test
@@ -141,6 +142,13 @@ Test Teardown Execution
     FFDC On Test Case Fail
     Redfish.Logout
 
+Test Setup Execution
+     [Documentation]  Do the post test setup.
+
+    ${active_channel_config}=  Get Active Channel Config
+    Run Keyword If  '${active_channel_config['${CHANNEL_NUMBER}']['name']}' == 'None'
+    ...   Fail   Valid interface not found
+
 
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
@@ -168,6 +176,8 @@ Configure MAC Settings
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Run Keyword If  '${ethernet_interface}' == 'None'
+    ...   Fail   Valid interface not found
 
     Redfish.Login
     ${payload}=  Create Dictionary  MACAddress=${mac_address}
