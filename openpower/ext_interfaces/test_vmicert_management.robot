@@ -92,7 +92,7 @@ Get Corrupted CSR Request Signed By VMI And Verify
     [Template]  Get Certificate Signed By VMI
 
     # username           password             force_create  valid_csr   valid_status_code
-    ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${True}       ${False}    ${HTTP_INTERNAL_SERVER_ERROR}
+    admin_user           TestPwd123           ${True}       ${False}    ${HTTP_INTERNAL_SERVER_ERROR}
 
     # Send CSR request from operator user.
     operator_user        TestPwd123           ${False}      ${False}    ${HTTP_FORBIDDEN}
@@ -103,7 +103,42 @@ Get Corrupted CSR Request Signed By VMI And Verify
     # Send CSR request from NoAccess user.
     noaccess_user        TestPwd123           ${False}      ${False}    ${HTTP_FORBIDDEN}
 
+Get Root Certificate When VMI Is Off And Verify
+    [Documentation]  Get root certificate when vmi is off and verify.
+    [Tags]  Get_Root_Certificate_When_VMI_Is_Off_And_Verify
+    [Setup]  Redfish Power Off
+    [Template]  Get Root Certificate
 
+    # username     password    force_create  valid_csr  valid_status_code
+    admin_user     TestPwd123  ${True}       ${True}    ${HTTP_OK}
+
+    # Request root certificate from operator user.
+    operator_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
+
+    # Request root certificate from ReadOnly user.
+    readonly_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
+
+    # Request root certificate from NoAccess user.
+    noaccess_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
+
+
+Get Root Certificate After BMC Reboot And Verify
+    [Documentation]  Get root certificate after bmc reboot and verify.
+    [Tags]  Get_Root_Certificate_After_BMC_Reboot_And_Verify
+    [Setup]  Run Keywords  OBMC Reboot (off)  AND  Redfish Power On
+    [Template]  Get Root Certificate
+
+    # username     password    force_create  valid_csr  valid_status_code
+    admin_user     TestPwd123  ${True}       ${True}    ${HTTP_OK}
+
+    # Request root certificate from operator user.
+    operator_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
+
+    # Request root certificate from ReadOnly user.
+    readonly_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
+
+    # Request root certificate from NoAccess user.
+    noaccess_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
 
 *** Keywords ***
 
