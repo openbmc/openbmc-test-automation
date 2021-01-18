@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f291cb01_402b4025",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "test setup should align with library.",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef1ca73d_64c1cdb5",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "Suggestion: Flash Latest Firmware With New Credential After Expire Password",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06130232_5df7422d",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "Suggestion: When password expire, flash the latest firmware with new admin credentials.",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c0ef3c8_b7a14a71",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "Suggestion: Flash_Latest_Firmware_With_New_Credential_After_Expire_Password",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36a5b2ab_80ec06e1",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "Flash latest firmware using redfish.",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adb55120_a0e00183",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "does this keyword verify the firmware is functional using firmware version ?",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95762b85_4e31be6a",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "Suggestion: Switch To Backup Firmware With New Credential After Expire Password",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92598096_1f9e53dc",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "Suggestion: When password expire, switch to backup firmware with new admin credentials.",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3fe138d_289f4a5e",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "Suggestion: Switch_To_Backup_Firmware_With_New_Credential_After_Expire_Password",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff2a76e1_49d3b014",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "check stderr should be empty.",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82c07f87_5d3122dd",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-18T06:22:51Z",
+      "side": 1,
+      "message": "After switching to back up image, can you verify the backup image version is now functional version.",
+      "revId": "e8853e3f3cdaf9865b21aa090f7ab701e405a3e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
