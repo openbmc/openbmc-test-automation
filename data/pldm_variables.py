@@ -194,18 +194,12 @@ PLDM_PDR_TYPES = {
     'PLDM_TERMINUS_LOCATOR_PDR': 'Terminus Locator PDR',
     'PLDM_COMPACT_NUMERIC_SENSOR_PDR': '21'}
 
-RESPONSE_LIST_GETBIOSTABLE_STRTABLE = [
-    'Allowed', 'Disabled', 'Enabled', 'IPv4DHCP', 'IPv4Static', 'Not Allowed',
-    'Perm', 'Temp', 'pvm-fw-boot-side', 'pvm-inband-code-update', 'pvm-os-boot-side',
-    'pvm-pcie-error-inject', 'pvm-surveillance', 'pvm-system-name', 'vmi-hostname',
-    'vmi-if-count', 'vmi-if0-ipv4-ipaddr', 'vmi-if0-ipv4-method',
-    'vmi-if0-ipv4-prefix-length', 'vmi-if1-ipv4-ipaddr', 'vmi-if1-ipv4-method',
-    'vmi-if1-ipv4-prefix-length', 'vmi-ipv4-gateway']
-
-
 RESPONSE_LIST_GETBIOSTABLE_ATTRTABLE = [
     'pvm-fw-boot-side', 'pvm-inband-code-update', 'pvm-os-boot-side',
-    'pvm-pcie-error-inject', 'pvm-surveillance', 'pvm-system-name', 'vmi-hostname',
+    'pvm-pcie-error-inject', 'pvm-stop-at-standby',
+    'pvm-surveillance', 'pvm-system-name', 'pvm_default_os_type',
+    'pvm_fw_boot_side', 'pvm_hmc_managed', 'pvm_inband_code_update',
+    'pvm_rtad', 'pvm_system_power_off_policy', 'vmi-hostname',
     'vmi-if-count', 'vmi-if0-ipv4-ipaddr', 'vmi-if0-ipv4-method',
     'vmi-if0-ipv4-prefix-length', 'vmi-if1-ipv4-ipaddr', 'vmi-if1-ipv4-method',
     'vmi-if1-ipv4-prefix-length', 'vmi-ipv4-gateway']
