@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "627e70d1_17d49d3a",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-19T13:49:29Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 42
+      },
+      "revId": "fb96396cd9bc52a92d74f12f70da2c4db51eb28c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "020526a9_d8b13a2d",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-19T13:49:29Z",
+      "side": 1,
+      "message": "Why do we need this?\nrunning it twice without doing any ops in between test setup n here.",
+      "revId": "fb96396cd9bc52a92d74f12f70da2c4db51eb28c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
