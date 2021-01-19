@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74ac00bd_6a72f2ec",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-19T07:00:42Z",
+      "side": 1,
+      "message": "Add two lines gap between test cases",
+      "range": {
+        "startLine": 489,
+        "startChar": 0,
+        "endLine": 489,
+        "endChar": 1
+      },
+      "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0910a33_22a474aa",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-19T07:00:42Z",
+      "side": 1,
+      "message": "Keep two lines gap between two test cases. Same comments to below keywords also.",
+      "range": {
+        "startLine": 497,
+        "startChar": 0,
+        "endLine": 498,
+        "endChar": 1
+      },
+      "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0262fc02_84a70b20",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-19T07:00:42Z",
+      "side": 1,
+      "message": "check persistency.",
+      "range": {
+        "startLine": 499,
+        "startChar": 76,
+        "endLine": 499,
+        "endChar": 93
+      },
+      "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abfd0b55_e4b52f9c",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-19T07:00:42Z",
+      "side": 1,
+      "message": "Description of Argument(s) missing.",
+      "range": {
+        "startLine": 708,
+        "startChar": 0,
+        "endLine": 708,
+        "endChar": 59
+      },
+      "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22fd7592_7351485e",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-19T07:00:42Z",
+      "side": 1,
+      "message": "I think we can skip this as we are already doing validation below using - Validate Network Config On BMC",
+      "range": {
+        "startLine": 712,
+        "startChar": 7,
+        "endLine": 712,
+        "endChar": 30
+      },
+      "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
