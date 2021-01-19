@@ -235,6 +235,30 @@
       "revId": "1194ef6ecd8119d55c651fc29deb898380fd74ff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fddd7f39_5e1bae7a",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-19T07:30:50Z",
+      "side": 1,
+      "message": "As per the discussion, above lines of code is required for debugging.",
+      "parentUuid": "33f18c1b_d60aab24",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 14
+      },
+      "revId": "1194ef6ecd8119d55c651fc29deb898380fd74ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
