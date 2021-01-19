@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "28b564b3_8049ecce",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-19T14:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74ac00bd_6a72f2ec",
+      "range": {
+        "startLine": 489,
+        "startChar": 0,
+        "endLine": 489,
+        "endChar": 1
+      },
+      "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0910a33_22a474aa",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8724cff0_96cbe9e9",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-19T14:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0910a33_22a474aa",
+      "range": {
+        "startLine": 497,
+        "startChar": 0,
+        "endLine": 498,
+        "endChar": 1
+      },
+      "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "256bd0f1_d1c74f38",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-19T14:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0262fc02_84a70b20",
+      "range": {
+        "startLine": 499,
+        "startChar": 76,
+        "endLine": 499,
+        "endChar": 93
+      },
+      "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "abfd0b55_e4b52f9c",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "448cbc31_630f1cd0",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-19T14:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abfd0b55_e4b52f9c",
+      "range": {
+        "startLine": 708,
+        "startChar": 0,
+        "endLine": 708,
+        "endChar": 59
+      },
+      "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22fd7592_7351485e",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 1
@@ -114,6 +210,30 @@
       "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1603cff5_e121be65",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-19T14:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22fd7592_7351485e",
+      "range": {
+        "startLine": 712,
+        "startChar": 7,
+        "endLine": 712,
+        "endChar": 30
+      },
+      "revId": "ce8679709356a153e731801c18b9320c7cc679f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
