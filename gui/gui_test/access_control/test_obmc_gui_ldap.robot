@@ -12,10 +12,11 @@ Test Setup      Test Setup Execution
 *** Variables ***
 
 ${xpath_ldap_heading}                   //h1[text()="LDAP"]
-${xpath_enable_ldap_checkbox}           //*[@id='enable-ldap-auth']
-${xpath_secure_ldap_checkbox}           //*[@id='enable-secure-ldap']
+${xpath_enable_ldap_checkbox}           //*[@data-test-id='ldap-checkbox-ldapAuthenticationEnabled']
+${xpath_secure_ldap_checkbox}           //*[@data-test-id='ldap-checkbox-secureLdapEnabled']
 ${xpath_service_radio_button}           //*[@data-test-id="ldap-radio-activeDirectoryEnabled"]
 ${xpath_add_role_group_button}          //button[contains(text(),'Add role group')]
+
 
 *** Test Cases ***
 
