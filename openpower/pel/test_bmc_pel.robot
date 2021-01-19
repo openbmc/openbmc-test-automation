@@ -536,6 +536,15 @@ Verify Error Logging Rotation Policy
     Informational BMC 1500, Predictive BMC 1500                                  45
     Informational BMC 1500, Unrecoverable BMC 1500                               45
     Unrecoverable BMC 1500, Predictive BMC 1500                                  30
+
+
+Verify Error Logging Rotation Policy With All Types Of Errors
+    [Documentation]  Verify error logging rotation policy with all types of errors.
+    [Tags]  Verify_Error_Logging_Rotation_Policy_With_All_Types_Errors
+    [Template]  Error Logging Rotation Policy
+
+    # Error logs to be created                                           % of total logging space when error
+    #                                                                    log exceeds max limit.
     Unrecoverable BMC 1000, Informational BMC 1000, Predictive BMC 1000          45
 
 
@@ -551,6 +560,17 @@ Verify Error Logging Rotation Policy With HOST Error Logs
     Unrecoverable HOST 3000                                                   30
     Unrecoverable HOST 1500, Informational BMC 1500                           45
     Unrecoverable HOST 1500, Predictive BMC 1500                              60
+
+
+Verify Error Logging Rotation Policy With Unrecoverable HOST And BMC Error Logs
+    [Documentation]  Verify error logging rotation policy with unrecoverable HOST and BMC error logs.
+    [Tags]  Verify_Error_Logging_Rotation_Policy_With_Unrecoverable_HOST_And_BMC_Error_Logs
+    [Setup]  Run Keywords  Open Connection for SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}
+    ...  /tmp/FILE_NBMC_UNRECOVERABLE
+    [Template]  Error Logging Rotation Policy
+
+    # Error logs to be created                                % of total logging space when error
+    #                                                         log exceeds max limit.
     Unrecoverable HOST 1500, Unrecoverable BMC 1500                           60
 
 
