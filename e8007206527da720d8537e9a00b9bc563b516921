@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "a67a8a61_041bb2aa",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-19T06:17:27Z",
+      "side": 1,
+      "message": "Sure. I see",
+      "parentUuid": "e6277081_3afcdb1d",
+      "range": {
+        "startLine": 499,
+        "startChar": 9,
+        "endLine": 499,
+        "endChar": 38
+      },
+      "revId": "e8007206527da720d8537e9a00b9bc563b516921",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1c0d447_db4e0bf6",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 3
