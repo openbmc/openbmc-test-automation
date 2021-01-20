@@ -128,10 +128,10 @@ Verify Release Of Valid Locks
     HMCID-02       ReadCase1,ReadCase1,ReadCase1    Session
 
 
-Invalid Locks Fail To Release
+Fail To Release Multiple Lock With Invalid TransactionID
     [Documentation]  Release in-valid lock result in fail.
-    [Tags]  Invalid_Locks_Fail_To_Release
-    [Template]  Verify Invalid Locks Fail To Release
+    [Tags]  Fail_To_Release_Multiple_Lock_With_Invalid_TransactionID
+    [Template]  Verify Fail To Release Multiple Lock With Invalid TransactionID
 
     # client_id    lock_type                        release_lock_type
     HMCID-01       ReadCase1,ReadCase1,ReadCase1    Transaction
@@ -823,8 +823,8 @@ Acquire And Release Multiple Locks
     Redfish Delete Session  ${session_info}
 
 
-Verify Invalid Locks Fail To Release
-    [Documentation]  Verify invalid locks fails to be released.
+Verify Fail To Release Multiple Lock With Invalid TransactionID
+    [Documentation]  Verify fail to be release mutiple lock with invalid trasaction ID.
     [Arguments]  ${client_id}  ${lock_type}  ${release_lock_type}
 
     # Description of argument(s):
