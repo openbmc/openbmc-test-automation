@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b0b6b658_3dc916b8",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-20T07:27:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57507688_86fddf23",
+      "range": {
+        "startLine": 493,
+        "startChar": 10,
+        "endLine": 493,
+        "endChar": 17
+      },
+      "revId": "e8007206527da720d8537e9a00b9bc563b516921",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1eaab7f7_1c8b74a6",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2020-12-22T05:55:22Z",
       "side": 1,
       "message": "Invalid",
+      "range": {
+        "startLine": 495,
+        "startChar": 22,
+        "endLine": 495,
+        "endChar": 29
+      },
+      "revId": "e8007206527da720d8537e9a00b9bc563b516921",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76c83f07_0dcbc5c8",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-20T07:27:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1eaab7f7_1c8b74a6",
       "range": {
         "startLine": 495,
         "startChar": 22,
@@ -190,6 +238,30 @@
     },
     {
       "key": {
+        "uuid": "f7ead530_559eeb22",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-20T07:27:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9639fdb6_cb4bce2d",
+      "range": {
+        "startLine": 502,
+        "startChar": 5,
+        "endLine": 502,
+        "endChar": 17
+      },
+      "revId": "e8007206527da720d8537e9a00b9bc563b516921",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b88cd233_b78e718b",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 3
@@ -201,6 +273,30 @@
       "writtenOn": "2020-12-22T05:55:22Z",
       "side": 1,
       "message": "End with period \".\"",
+      "range": {
+        "startLine": 508,
+        "startChar": 54,
+        "endLine": 508,
+        "endChar": 60
+      },
+      "revId": "e8007206527da720d8537e9a00b9bc563b516921",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9992830_53a2035f",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-01-20T07:27:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b88cd233_b78e718b",
       "range": {
         "startLine": 508,
         "startChar": 54,
