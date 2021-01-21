@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c267f9a6_ee9e8949",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-01-21T09:53:42Z",
+      "side": 1,
+      "message": "You should make sure that the page does not contain Warning or critical sensors.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 68
+      },
+      "revId": "8da55173be6563a3f83fc37e9e38c11394dcc711",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
