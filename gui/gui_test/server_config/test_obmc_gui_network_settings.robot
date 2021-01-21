@@ -89,6 +89,7 @@ Verify Default Gateway Editable
     [Documentation]  Verify default gateway text input allowed from "network
     ...  settings".
     [Tags]  Verify_Default_Gateway_Editable
+    [Teardown]  Click Element  ${xpath_refresh_button}
 
     Wait Until Page Contains Element  ${xpath_default_gateway_input}
     Input Text  ${xpath_default_gateway_input}  10.6.6.7
@@ -98,6 +99,7 @@ Verify MAC Address Editable
     [Documentation]  Verify MAC address text input allowed from "network
     ...  settings".
     [Tags]  Verify_MAC_Address_Editable
+    [Teardown]  Click Element  ${xpath_refresh_button}
 
     Wait Until Page Contains Element  ${xpath_mac_address_input}
     Input Text  ${xpath_mac_address_input}  AA:E2:84:14:28:79
@@ -106,6 +108,7 @@ Verify MAC Address Editable
 Verify Static IP Address Editable
     [Documentation]  Verify static IP address is editable.
     [Tags]  Verify_Static_IP_Address_Editable
+    [Teardown]  Click Element  ${xpath_refresh_button}
 
     ${exists}=  Run Keyword And Return Status  Wait Until Page Contains Element  ${xpath_static_input_ip0}
     Run Keyword If  '${exists}' == '${False}'
@@ -200,7 +203,8 @@ Configure And Verify Invalid DNS Server
     [Tags]  Configure_And_Verify_Invalid_DNS_Server
     [Template]  Add DNS Server And Verify
     [Setup]  DNS Test Setup Execution
-    [Teardown]  DNS Test Teardown Execution
+    [Teardown]  Run Keywords  Click Element  ${xpath_refresh_button}
+    ...  AND  DNS Test Teardown Execution
 
     # invalid_ address      expected_status
     ${string_value}         Invalid format
@@ -223,6 +227,7 @@ Suite Setup Execution
 Configure Invalid Network Address And Verify
     [Documentation]  Configure invalid network address And verify.
     [Arguments]  ${locator}  ${invalid_address}  ${expected_error}=Invalid format
+    [Teardown]  Click Element  ${xpath_refresh_button}
 
     # Description of the argument(s):
     # locator            Xpath to identify an HTML element on a web page.
@@ -239,7 +244,7 @@ Configure Invalid Network Address And Verify
 
 Add DNS Server And Verify
     [Documentation]  Add DNS server on BMC and verify it via BMC CLI.
-    [Arguments]  ${static_name_servers}   ${expected_status}= Valid format
+    [Arguments]  ${static_name_servers}   ${expected_status}=Valid format
 
     # Description of the argument(s):
     # static_name_servers  A list of static name server IPs to be
@@ -259,9 +264,9 @@ Add DNS Server And Verify
     Run keyword if  '${expected_status}' != 'Valid format'
     ...  Run keywords  Page Should Contain  ${expected_status}  AND  Return From Keyword
 
-    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=60
+
     Sleep  ${NETWORK_TIMEOUT}s
-    Verify Static Name Server Details On GUI  ${static_name_servers}
     # Check if newly added DNS server is configured on BMC.
     ${cli_name_servers}=  CLI Get Nameservers
     List Should Contain Sub List  ${cli_name_servers}  ${static_name_servers}
@@ -276,6 +281,7 @@ Delete DNS Server And Verify
     #                      configured on the BMC.
 
     ${length}=  Get Length  ${static_name_servers}
+    Click Element  ${xpath_refresh_button}
     FOR  ${i}  IN RANGE   ${length}
        ${status}=  Run Keyword And Return Status
        ...  Page Should Contain Element  ${xpath_delete_dns_server}
@@ -285,7 +291,7 @@ Delete DNS Server And Verify
     END
 
     Click Button  ${xpath_network_save_settings}
-    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=60
 
     Sleep  ${NETWORK_TIMEOUT}s
     Page Should Not Contain Element  ${xpath_input_dns_server}
