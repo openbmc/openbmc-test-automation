@@ -239,7 +239,7 @@ Configure Invalid Network Address And Verify
 
 Add DNS Server And Verify
     [Documentation]  Add DNS server on BMC and verify it via BMC CLI.
-    [Arguments]  ${static_name_servers}   ${expected_status}= Valid format
+    [Arguments]  ${static_name_servers}   ${expected_status}=Valid format
 
     # Description of the argument(s):
     # static_name_servers  A list of static name server IPs to be
