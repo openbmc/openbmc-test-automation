@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3c9bef8_28fc118b",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-22T09:52:42Z",
+      "side": 1,
+      "message": "Please remove the single quotes from here. For this you would need to make a minor change in Configure Static Name Servers keyword.",
+      "range": {
+        "startLine": 498,
+        "startChar": 6,
+        "endLine": 498,
+        "endChar": 24
+      },
+      "revId": "d13ee89a3cbf791fbcce8c24812ef5f10b80e12e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
