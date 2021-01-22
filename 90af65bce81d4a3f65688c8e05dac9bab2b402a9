@@ -22,6 +22,30 @@
       "revId": "90af65bce81d4a3f65688c8e05dac9bab2b402a9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5583962_09dd519d",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-22T07:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "000dc6e7_ef04ad0c",
+      "range": {
+        "startLine": 827,
+        "startChar": 20,
+        "endLine": 827,
+        "endChar": 86
+      },
+      "revId": "90af65bce81d4a3f65688c8e05dac9bab2b402a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
