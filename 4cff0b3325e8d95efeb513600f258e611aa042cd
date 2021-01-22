@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fef65c1c_e93754a2",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-22T10:08:01Z",
+      "side": 1,
+      "message": "list",
+      "range": {
+        "startLine": 713,
+        "startChar": 28,
+        "endLine": 713,
+        "endChar": 32
+      },
+      "revId": "4cff0b3325e8d95efeb513600f258e611aa042cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1bfe260_003c722a",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-22T10:08:01Z",
+      "side": 1,
+      "message": "you can bring it up in one line",
+      "range": {
+        "startLine": 714,
+        "startChar": 0,
+        "endLine": 715,
+        "endChar": 47
+      },
+      "revId": "4cff0b3325e8d95efeb513600f258e611aa042cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5311ea27_2c04f910",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-22T10:08:01Z",
+      "side": 1,
+      "message": "We need to have two line space between two test cases",
+      "range": {
+        "startLine": 723,
+        "startChar": 0,
+        "endLine": 723,
+        "endChar": 37
+      },
+      "revId": "4cff0b3325e8d95efeb513600f258e611aa042cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42b47efe_15fd8e9d",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-22T10:08:01Z",
+      "side": 1,
+      "message": "Delete multiple static IPv4 address via Redfish and verify.",
+      "range": {
+        "startLine": 724,
+        "startChar": 21,
+        "endLine": 724,
+        "endChar": 69
+      },
+      "revId": "4cff0b3325e8d95efeb513600f258e611aa042cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10cc5492_3a59a35c",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-22T10:08:01Z",
+      "side": 1,
+      "message": "deleted",
+      "range": {
+        "startLine": 728,
+        "startChar": 55,
+        "endLine": 728,
+        "endChar": 61
+      },
+      "revId": "4cff0b3325e8d95efeb513600f258e611aa042cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1773cb06_3f3b097c",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-01-22T10:08:01Z",
+      "side": 1,
+      "message": "list",
+      "range": {
+        "startLine": 728,
+        "startChar": 28,
+        "endLine": 728,
+        "endChar": 32
+      },
+      "revId": "4cff0b3325e8d95efeb513600f258e611aa042cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
