@@ -73,6 +73,7 @@ REST BMC Code Update
     [Teardown]  REST BMC Code Update Teardown
 
     Run Keyword And Ignore Error  List Installed Images  BMC
+    Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
 
     ${image_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
     ${bmc_release_info}=  Get BMC Release Info
