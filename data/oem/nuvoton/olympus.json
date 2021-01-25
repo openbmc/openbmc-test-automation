@@ -1,0 +1,15 @@
+{
+    "npcm7xx": {
+        "cpld" : {
+            "fw1" : "2A01.svf",
+            "fw1ver" : "00 00 2a 01",
+            "fw2" : "2A02.svf",
+            "fw2ver" : "00 00 2a 02",
+            "readid" : "readid.svf",
+            "readusercode" : "read_usercode.svf"
+        },
+        "jtag_dev" : "/dev/jtag0",
+        "power_cycle_cmd" : "/usr/sbin/i2cset -f -y 8 0x11 0xd9"
+    }
+}
+
