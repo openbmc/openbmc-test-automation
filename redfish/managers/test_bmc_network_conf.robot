@@ -541,6 +541,41 @@ Configure Multiple Static IPv4 Addresses And Check Persistency
     END
 
 
+Configure And Verify Multiple IPv4 Addresses
+    [Documentation]  Configure multiple IPv4 addresses and verify.
+    [Tags]  Configure_And_Verify_Multiple_IPv4_Addresse
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Delete IP Address  ${test_ipv4_addr2}
+    ...  AND  Test Teardown Execution
+
+    ${ip1}=  Create dictionary  Address=${test_ipv4_addr}
+    ...  SubnetMask=255.255.0.0  Gateway=${test_gateway}
+    ${ip2}=  Create dictionary  Address=${test_ipv4_addr2}
+    ...  SubnetMask=255.255.252.0  Gateway=${test_gateway}
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    ${network_configurations}=  Get Network Configuration
+    ${num_entries}=  Get Length  ${network_configurations}
+
+    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
+      Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    # We need not check for existence of IP on BMC while adding.
+    Append To List  ${patch_list}  ${ip1}  ${ip2}
+    ${payload}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
+
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    Verify IP On BMC  ${test_ipv4_addr}
+    Verify IP On BMC  ${test_ipv4_addr2}
+
+
 *** Keywords ***
 
 Test Setup Execution
