@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19d487af_9572b2a5",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-01-27T12:48:01Z",
+      "side": 1,
+      "message": "can you remove extra space after \"Expire_\"",
+      "range": {
+        "startLine": 241,
+        "startChar": 12,
+        "endLine": 241,
+        "endChar": 97
+      },
+      "revId": "b98a958afe9d5fc8387b1ae9f5fc37cfcacb0df9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
