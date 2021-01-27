@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4ac054f_19f5a152",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-27T10:04:10Z",
+      "side": 1,
+      "message": "can u use test_ipv4_addr \u0026 test_ipv4_addr2 which are defined already",
+      "range": {
+        "startLine": 496,
+        "startChar": 42,
+        "endLine": 496,
+        "endChar": 61
+      },
+      "revId": "ff3a2495c92f6ad4190398e6e20612052127b272",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
