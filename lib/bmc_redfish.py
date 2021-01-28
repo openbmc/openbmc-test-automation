@@ -14,6 +14,9 @@ import func_args as fa
 import gen_print as gp
 
 
+MTLS_ENABLED = BuiltIn().get_variable_value("${MTLS_ENABLED}")
+
+
 class bmc_redfish(redfish_plus):
     r"""
     bmc_redfish is a child class of redfish_plus that is designed to provide
@@ -39,8 +42,11 @@ class bmc_redfish(redfish_plus):
         """
         self.__inited__ = False
         try:
-            super(bmc_redfish, self).__init__(*args, **kwargs)
-            self.__inited__ = True
+            if MTLS_ENABLED == 'True':
+                self.__inited__ = True
+            else:
+                super(bmc_redfish, self).__init__(*args, **kwargs)
+                self.__inited__ = True
         except ValueError as get_exception:
             except_type, except_value, except_traceback = sys.exc_info()
             regex = r"The HTTP status code was not valid:[\r\n]+status:[ ]+502"
@@ -62,6 +68,8 @@ class bmc_redfish(redfish_plus):
         kwargs                      See parent class method prolog for details.
         """
 
+        if MTLS_ENABLED == 'True':
+            return None
         if not self.__inited__:
             message = "bmc_redfish.__init__() was never successfully run.  It "
             message += "is likely that the target BMC firmware code level "
@@ -76,6 +84,13 @@ class bmc_redfish(redfish_plus):
 
         super(bmc_redfish, self).login(username, password, auth,
                                        *args, **kwargs)
+
+    def logout(self):
+
+        if MTLS_ENABLED == 'True':
+            return None
+        else:
+            super(bmc_redfish, self).logout()
 
     def get_properties(self, *args, **kwargs):
         r"""

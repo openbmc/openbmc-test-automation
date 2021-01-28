@@ -9,6 +9,8 @@ import re
 from robot.libraries.BuiltIn import BuiltIn
 import gen_print as gp
 
+MTLS_ENABLED = BuiltIn().get_variable_value("${MTLS_ENABLED}")
+
 
 class bmc_redfish_utils(object):
 
@@ -22,15 +24,18 @@ class bmc_redfish_utils(object):
         self.__inited__ = False
         self._redfish_ = BuiltIn().get_library_instance('redfish')
 
-        # There is a possibility that a given driver support both redfish and
-        # legacy REST.
-        self._redfish_.login()
-        self._rest_response_ = \
-            self._redfish_.get("/xyz/openbmc_project/", valid_status_codes=[200, 404])
-
-        # If REST URL /xyz/openbmc_project/ is supported.
-        if self._rest_response_.status == 200:
+        if MTLS_ENABLED == 'True':
             self.__inited__ = True
+        else:
+            # There is a possibility that a given driver support both redfish and
+            # legacy REST.
+            self._redfish_.login()
+            self._rest_response_ = \
+                self._redfish_.get("/xyz/openbmc_project/", valid_status_codes=[200, 404])
+
+            # If REST URL /xyz/openbmc_project/ is supported.
+            if self._rest_response_.status == 200:
+                self.__inited__ = True
 
         BuiltIn().set_global_variable("${REDFISH_REST_SUPPORTED}", self.__inited__)
 
