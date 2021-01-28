@@ -21,6 +21,14 @@ ${OPENBMC_USERNAME}    root
 ${OPENBMC_PASSWORD}    0penBmc
 ${REST_USERNAME}       root
 ${REST_PASSWORD}       0penBmc
+
+# MTLS_ENABLED indicates whether mTLS is enabled.
+${MTLS_ENABLED}        False
+# Valid mTLS certificate for authentication.
+${VALID_CERT}          ${EMPTY}
+# Path of mTLS certificates directory.
+${CERT_DIR_PATH}       ${EMPTY}
+
 ${IPMI_PASSWORD}       0penBmc
 ${MACHINE_TYPE}    palmetto
 ${DBUS_POLL_INTERVAL}      15s
