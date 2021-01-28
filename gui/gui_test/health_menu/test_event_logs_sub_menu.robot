@@ -43,6 +43,8 @@ Verify Existence Of All Buttons In Event Logs Page
     Page Should Contain Element  ${xpath_event_severity_ok}  limit=1
     Page Should Contain Element  ${xpath_event_severity_warning}  limit=1
     Page Should Contain Element  ${xpath_event_severity_critical}  limit=1
+    # Clicking the filter button again to hide event severity options
+    Click Element  ${xpath_filter_event}
 
 
 Verify Existence Of All Input boxes In Event Logs Page
