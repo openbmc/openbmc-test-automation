@@ -37,6 +37,7 @@ Verify Navigation To Event Logs Page
 Verify Existence Of All Buttons In Event Logs Page
     [Documentation]  Verify existence of all buttons in Event Logs page.
     [Tags]  Verify_Existence_Of_All_Buttons_In_Event_Logs_Page
+    [Teardown]  Click Element  ${xpath_filter_event}
 
     # Types of event severity: OK, Warning, Critical.
     Click Element  ${xpath_filter_event}
