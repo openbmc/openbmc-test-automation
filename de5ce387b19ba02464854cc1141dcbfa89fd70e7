@@ -196,6 +196,30 @@
     },
     {
       "key": {
+        "uuid": "9525bc44_40fdbeac",
+        "filename": "oem/nuvoton/test_redfish_mcu_fw_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2021-01-28T05:35:59Z",
+      "side": 1,
+      "message": "MCU for microcontroller unit",
+      "parentUuid": "f2fb6c7c_98895833",
+      "range": {
+        "startLine": 2,
+        "startChar": 53,
+        "endLine": 2,
+        "endChar": 57
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffff0e16_b10b1582",
         "filename": "oem/nuvoton/test_redfish_mcu_fw_update.robot",
         "patchSetId": 1
@@ -219,6 +243,30 @@
     },
     {
       "key": {
+        "uuid": "4dc99181_e5a10794",
+        "filename": "oem/nuvoton/test_redfish_mcu_fw_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2021-01-28T05:35:59Z",
+      "side": 1,
+      "message": "Yes, those robots doesn\u0027t need it. We will correct it. Thanks your review.",
+      "parentUuid": "ffff0e16_b10b1582",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 52
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8bfd31a8_a4ad6f98",
         "filename": "oem/nuvoton/test_redfish_mcu_fw_update.robot",
         "patchSetId": 1
@@ -230,6 +278,30 @@
       "writtenOn": "2021-01-28T05:12:40Z",
       "side": 1,
       "message": "u wont need this perhaps",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 52
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95b1b9bc_efc3597e",
+        "filename": "oem/nuvoton/test_redfish_mcu_fw_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2021-01-28T05:35:59Z",
+      "side": 1,
+      "message": "Yes, those robots doesn\u0027t need it. We will correct it. Thanks your review.",
+      "parentUuid": "8bfd31a8_a4ad6f98",
       "range": {
         "startLine": 23,
         "startChar": 0,
