@@ -7,7 +7,7 @@ Resource          ../lib/ipmi_client.robot
 Library           ../lib/bmc_ssh_utils.py
 Library           SSHLibrary
 
-Test Setup       Set Accont Lockout Threshold
+Test Setup       Set Account Lockout Threshold
 
 *** Variables ***
 
@@ -152,7 +152,7 @@ Expire And Change Root Password Via GUI
 Verify Maximum Failed Attempts And Check Root User Account Locked
     [Documentation]  Verify maximum failed attempts and locks out root user account.
     [Tags]  Verify_Maximum_Failed_Attempts_And_Check_Root_User_Account_Locked
-    [Setup]   Set Accont Lockout Threshold  account_lockout_threshold=${5}
+    [Setup]   Set Account Lockout Threshold  account_lockout_threshold=${5}
 
     # Make maximum failed login attempts.
     Repeat Keyword  ${5} times
@@ -200,7 +200,7 @@ Verify New Password Persistency After BMC Reboot
 
 *** Keywords ***
 
-Set Accont Lockout Threshold
+Set Account Lockout Threshold
    [Documentation]  Set user account lockout threshold.
    [Arguments]  ${account_lockout_threshold}=${0}
 
@@ -228,7 +228,7 @@ Test Teardown Execution
     Redfish.Login
     Wait Until Keyword Succeeds  1 min  10 sec  Restore Default Password For Root User
     Redfish.Logout
-    Set Accont Lockout Threshold  account_lockout_threshold=${5}
+    Set Account Lockout Threshold  account_lockout_threshold=${5}
     FFDC On Test Case Fail
 
 

@@ -118,7 +118,7 @@ Continuous Node Power Status
 
     # Get the power status of the node repeatedly.
     # By default it gets power status 1000 times.
-    # It bascially stress the BMC node and test REST implementation
+    # It basically stress the BMC node and test REST implementation
     # of the BMC node
 
     FOR  ${index}  IN RANGE  1  ${NUM_POWER_STATUS_CHECKS}

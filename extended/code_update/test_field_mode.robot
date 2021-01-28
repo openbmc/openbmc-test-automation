@@ -39,7 +39,7 @@ Verify Software Field Mode
     Enable Field Mode And Verify Unmount
 
 
-Attempt To Disable Field Mode Via REST And Veify
+Attempt To Disable Field Mode Via REST And Verify
     [Documentation]  Attempt to disable field mode with REST and verify that
     ...              it remains enabled.
     [Tags]  Attempt_To_Disable_Field_Mode_Via_REST

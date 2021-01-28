@@ -96,7 +96,7 @@ Verify Existence Of All Buttons And Fields In Account Policy Settings
 
 
 Verify User Access Privilege
-    [Documentation]  Create a new user with a priviledge and verify that user is created.
+    [Documentation]  Create a new user with a privilege and verify that user is created.
     [Tags]  Verify_User_Access_Privilege
     [Template]  Create User And Verify
 

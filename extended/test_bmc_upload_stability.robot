@@ -8,7 +8,7 @@ Documentation    Module to stress-test REST upload stability.
 # Test Parameters:
 # OPENBMC_HOST        The BMC host name or IP address.
 # LOOPS               The number of times to loop the test.
-#                     Defaule value for LOOPS is 1.
+#                     Default value for LOOPS is 1.
 
 
 Library            OperatingSystem

@@ -11,7 +11,7 @@ Variables      ../data/gui_variables.py
 *** Variables ***
 ${obmc_gui_url}              https://${OPENBMC_HOST}
 
-# Default GUI broswer and mode is set to "Firefox" and "headless"
+# Default GUI browser and mode is set to "Firefox" and "headless"
 # respectively here.
 ${GUI_BROWSER}               ff
 ${GUI_MODE}                  headless
