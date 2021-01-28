@@ -1,0 +1,244 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a637211_7f5573e1",
+        "filename": "oem/nuvoton/test_ipmi_flash.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "ideally u wont need this if you key in in your command line\n\n-v OS_HOST:xxxxx   -v OS_USERNAME:xxxxxx  -v OS_PASSWORD:xxxx\n\nthat would automatically take care of checking login and ping to the OS.. but yeah, your call.",
+      "range": {
+        "startLine": 96,
+        "startChar": 3,
+        "endLine": 96,
+        "endChar": 58
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7beb6e65_4a708ff5",
+        "filename": "oem/nuvoton/test_ipmi_flash.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "HOST_WORK_DIR  may be u can do something like this in variable section by default\n\n${HOST_WORK_DIR}    ${EXECDIR}\n\nanyway this will be override when u run with -v EXECDIR:/some path",
+      "range": {
+        "startLine": 99,
+        "startChar": 47,
+        "endLine": 99,
+        "endChar": 60
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "508e29cb_86d0d123",
+        "filename": "oem/nuvoton/test_ipmi_flash.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "# Description of argument(s):\n# state    please ???",
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70da8046_c0386e4d",
+        "filename": "oem/nuvoton/test_ipmi_flash.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "# Description of argument(s):\n#  image_file_path    please ???",
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7aab509_ddb365d0",
+        "filename": "oem/nuvoton/test_ipmi_flash.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "# Description of argument(s):\n# image_file_path    please ???",
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16f45693_9ad7dfd4",
+        "filename": "oem/nuvoton/test_ipmi_flash.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "# Description of argument(s):\n# image_file_path    please ???",
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c740b7a_b77f9882",
+        "filename": "oem/nuvoton/test_jtag_master.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "best would be to design like this , just a thought, \n\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/data/resource_lock_table.json\n\n\nmay be u can add data/oem/jtag_data.json  and add default values, and down the line if u want to run any config with different combination, you can always set the path to this JSON with new and run without have the code to upstream when there is a change needed..",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 23
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a98745d7_b1002c7b",
+        "filename": "oem/nuvoton/test_jtag_master.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "# Description of argument(s):\n    # file_name    please????",
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0a8dcd6_06cfb09e",
+        "filename": "oem/nuvoton/test_jtag_master.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "# Description of argument(s):\n    # file_name       please ???",
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2fb6c7c_98895833",
+        "filename": "oem/nuvoton/test_redfish_mcu_fw_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "what does MCU signifies",
+      "range": {
+        "startLine": 2,
+        "startChar": 53,
+        "endLine": 2,
+        "endChar": 57
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffff0e16_b10b1582",
+        "filename": "oem/nuvoton/test_redfish_mcu_fw_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "u wont need this i believe",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 52
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bfd31a8_a4ad6f98",
+        "filename": "oem/nuvoton/test_redfish_mcu_fw_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-01-28T05:12:40Z",
+      "side": 1,
+      "message": "u wont need this perhaps",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 52
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
