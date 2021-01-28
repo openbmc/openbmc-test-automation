@@ -69,7 +69,7 @@ Check If BMC is Up
     # max_timeout   Maximum time to wait.
     #               This should be expressed in Robot Framework's time format
     #               (e.g. "10 minutes").
-    # interfal      Interval to wait between status checks.
+    # interval      Interval to wait between status checks.
     #               This should be expressed in Robot Framework's time format
     #               (e.g. "5 seconds").
 

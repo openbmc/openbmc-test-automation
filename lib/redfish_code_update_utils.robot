@@ -127,11 +127,11 @@ Get Functional Firmware
 
 
 Get Non Functional Firmware
-    [Documentation]  Get BMC non functional fimware details.
+    [Documentation]  Get BMC non functional firmware details.
     [Arguments]  ${sw_inv}  ${functional_state}
 
     # Description of argument(s):
-    # sw_inv            This dictionay contains all the BMC fimware details.
+    # sw_inv            This dictionary contains all the BMC firmware details.
     # functional_state  Functional state can be either True or False.
 
     ${resp}=  Filter Struct  ${sw_inv}  [('functional', ${functional_state})]

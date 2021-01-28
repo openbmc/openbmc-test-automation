@@ -29,7 +29,7 @@ def get_bmc_firmware(image_type, sw_dict):
 
     Description of argument(s):
     image_type                     This value is either BMC update or Host update type.
-    sw_dict                        This contain dictionay of firmware inventory properties.
+    sw_dict                        This contain dictionary of firmware inventory properties.
     """
 
     temp_dict = collections.OrderedDict()

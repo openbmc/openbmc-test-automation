@@ -92,9 +92,9 @@ Assign Valid And Invalid Static IPv4 Address To VMI
     a.3.118.94    0.0.0.0     255.255.252.0    ${HTTP_BAD_REQUEST}
 
 
-Add Multiple IP Addreses On VMI Interface And Verify
-    [Documentation]  Add multiple IP addreses on VMI interface and verify.
-    [Tags]  Add_Multiple_IP_Addreses_On_VMI_Interface_And_Verify
+Add Multiple IP Addresses On VMI Interface And Verify
+    [Documentation]  Add multiple IP addresses on VMI interface and verify.
+    [Tags]  Add_Multiple_IP_Addresses_On_VMI_Interface_And_Verify
     [Teardown]   Run keywords  Delete VMI IPv4 Address  AND  Test Teardown Execution
 
     ${ip1}=  Create dictionary  Address=10.5.5.10  SubnetMask=255.255.252.0  Gateway=0.0.0.0

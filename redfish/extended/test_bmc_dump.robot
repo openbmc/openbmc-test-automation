@@ -204,7 +204,7 @@ Verify Dump After Host Watchdog Error Injection
     #Get dump details
     @{dump_entry_list}=  Read Properties  ${DUMP_ENTRY_URI}
 
-    # Verifing that there is only one dump
+    # Verifying that there is only one dump
     ${length}=  Get length  ${dump_entry_list}
     Should Be Equal As Integers  ${length}  ${1}
 

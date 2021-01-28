@@ -304,7 +304,7 @@ Create Redfish Session With ClientID
 
 
 RW General Dictionary
-    [Documentation]  Create dictionay of lock request.
+    [Documentation]  Create dictionary of lock request.
     [Arguments]  ${read_case}  ${res_id}
 
     # Description of argument(s):
@@ -459,7 +459,7 @@ Redfish Post Acquire Invalid Lock With Invalid Data Type Of Resource ID
 
 
 Form Data To Acquire Lock
-    [Documentation]  Create a dictionay for lock request.
+    [Documentation]  Create a dictionary for lock request.
     [Arguments]  ${lock_type}
 
     # Description of argument(s):
@@ -476,7 +476,7 @@ Form Data To Acquire Lock
 
 
 Create Data To Acquire List Of Lock
-    [Documentation]  Create a dictionay for list of lock request.
+    [Documentation]  Create a dictionary for list of lock request.
     [Arguments]  ${lock_type_list}
 
     # Description of argument(s):
@@ -498,7 +498,7 @@ Create Data To Acquire List Of Lock
 
 
 Form Data To Acquire Invalid Lock With Invalid Data Type Of Resource ID
-    [Documentation]  Create a dictionay for in-valid lock request.
+    [Documentation]  Create a dictionary for in-valid lock request.
     [Arguments]  ${lock_type}
 
     # Description of argument(s):
@@ -515,7 +515,7 @@ Form Data To Acquire Invalid Lock With Invalid Data Type Of Resource ID
 
 
 Form Data To Acquire Invalid Lock
-    [Documentation]  Create a dictionay for in-valid lock request.
+    [Documentation]  Create a dictionary for in-valid lock request.
     [Arguments]  ${lock_type}
 
     # Description of argument(s):
@@ -833,7 +833,7 @@ Acquire And Release Multiple Locks
 
 
 Verify Fail To Release Lock With Invalid TransactionID
-    [Documentation]  Verify fail to be release lock with invalid trasaction ID.
+    [Documentation]  Verify fail to be release lock with invalid transaction ID.
     [Arguments]  ${client_id}  ${lock_type}  ${release_lock_type}
 
     # Description of argument(s):
@@ -956,7 +956,7 @@ Verify Fail To Acquire Lock For Invalid Resource ID Data Type
 
 
 Verify Fail To Acquire Lock For Invalid Lock Data
-    [Documentation]  Verify fail to acquired lock with invalid lock types, lock flags, segement flags.
+    [Documentation]  Verify fail to acquired lock with invalid lock types, lock flags, segment flags.
     [Arguments]  ${client_id}  ${lock_type}  ${message}
 
     # Description of argument(s):

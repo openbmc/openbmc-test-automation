@@ -32,7 +32,7 @@ Force Tags               Host_Code_Update
 *** Test Cases ***
 
 Redfish Host Code Update With ApplyTime OnReset
-    [Documentation]  Update the firmaware image with ApplyTime of OnReset.
+    [Documentation]  Update the firmware image with ApplyTime of OnReset.
     [Tags]  Redfish_Host_Code_Update_With_ApplyTime_OnReset
     [Template]  Redfish Update Firmware
 
@@ -41,7 +41,7 @@ Redfish Host Code Update With ApplyTime OnReset
 
 
 Redfish Host Code Update With ApplyTime Immediate
-    [Documentation]  Update the firmaware image with ApplyTime of Immediate.
+    [Documentation]  Update the firmware image with ApplyTime of Immediate.
     [Tags]  Redfish_Host_Code_Update_With_ApplyTime_Immediate
     [Template]  Redfish Update Firmware
 

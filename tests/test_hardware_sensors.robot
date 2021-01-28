@@ -270,7 +270,7 @@ Verify Voltage Sensors Attributes
 
    # Example:
    # "/xyz/openbmc_project/sensors/voltage/voltage0",
-   # "/xyz/openbmc_project/sensors/volatge/voltage_1",
+   # "/xyz/openbmc_project/sensors/voltage/voltage_1",
    # "/xyz/openbmc_project/sensors/voltage/VOLTAGE_2",
    # "/xyz/openbmc_project/sensors/voltage/VOLTAGE1",
    # "/xyz/openbmc_project/sensors/voltage/voltage".

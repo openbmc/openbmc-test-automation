@@ -108,9 +108,9 @@ Verify Redfishtool CA Certificate Install Errors
     CA           Empty Certificate  error
 
 
-Verify Error While Uploding Same CA Certificate Via Redfishtool
+Verify Error While Uploading Same CA Certificate Via Redfishtool
     [Documentation]  Verify error while uploading same CA certificate two times.
-    [Tags]  Verify_Error_While_Uploding_Same_CA_Certificate_Via_Redfishtool
+    [Tags]  Verify_Error_While_Uploading_Same_CA_Certificate_Via_Redfishtool
 
     # Create certificate file for uploading.
     ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365

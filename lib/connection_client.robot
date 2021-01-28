@@ -21,7 +21,7 @@ Open Connection And Log In
     #                   keyword. This includes, but is not limited to, the
     #                   following:
     #                   host, alias, port, timeout, newline, prompt, term_type,
-    #                   width, height, path_separator, endcoding
+    #                   width, height, path_separator, encoding
     #                   (For more information, please visit the SSHLibrary doc)
 
     #                   Of the above arguments to Open Connection, this keyword

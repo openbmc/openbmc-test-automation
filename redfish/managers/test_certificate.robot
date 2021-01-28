@@ -97,9 +97,9 @@ Verify Maximum CA Certificate Install
     Install And Verify Certificate Via Redfish  CA  Valid Certificate  error  ${FALSE}
 
 
-Verify Error While Uploding Same CA Certificate
+Verify Error While Uploading Same CA Certificate
     [Documentation]  Verify error while uploading same CA certificate two times.
-    [Tags]  Verify_Error_While_Uploding_Same_CA_Certificate
+    [Tags]  Verify_Error_While_Uploading_Same_CA_Certificate
 
     # Create certificate file for uploading.
     ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate  365

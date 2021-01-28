@@ -94,7 +94,7 @@ Verify VPD Data
 
 
 Verify VPD Component Read Operation
-    [Documentation]  Verify reading VPD details of given compoment via vpdtool.
+    [Documentation]  Verify reading VPD details of given component via vpdtool.
     [Arguments]  ${component}
     # Description of arguments:
     # component       VDP component (e.g. /system/chassis/motherboard/vdd_vrm1).
@@ -115,7 +115,7 @@ Verify VPD Component Read Operation
 
 
 Verify VPD Field Read Operation
-    [Documentation]  Verify reading all VPD fields for given compoment via vpdtool.
+    [Documentation]  Verify reading all VPD fields for given component via vpdtool.
     [Arguments]  ${component}
     # Description of arguments:
     # component       VDP component (e.g. /system/chassis/motherboard/vdd_vrm1).

@@ -25,7 +25,7 @@ ${multicast_ip}            224.6.6.6
 ${out_of_range_ip}         10.7.7.256
 ${test_ipv4_addr2}         10.7.7.8
 
-# Valid netmask is 4 bytes long and has continuos block of 1s.
+# Valid netmask is 4 bytes long and has continuous block of 1s.
 # Maximum valid value in each octet is 255 and least value is 0.
 # 253 is not valid, as binary value is 11111101.
 ${invalid_netmask}         255.255.253.0

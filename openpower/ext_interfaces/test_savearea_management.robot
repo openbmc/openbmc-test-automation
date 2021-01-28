@@ -190,7 +190,7 @@ Non Admin Users Fail To Upload Partition File
 
 
 Non Admin User Delete Non Existence Of Partition File
-    [Documentation]  Delete the partion file if does not exists.
+    [Documentation]  Delete the partition file if does not exists.
     [Tags]  Non_Admin_User_Delete_Non_Existence_Of_Partition_File
     [Template]  Non Admin Delete Non Existence Partition File
 
@@ -380,7 +380,7 @@ Redfish Upload Partition File
 
 
 Redfish Fail To Upload Partition File
-    [Documentation]  Fail to uplaod the partition file.
+    [Documentation]  Fail to upload the partition file.
     [Arguments]  ${file_name}
 
     # Description of argument(s):
@@ -633,7 +633,7 @@ Redfish Delete Non Existence Partition File
 
 
 Non Admin User To Upload Partition File
-    [Documentation]  Non admin user to uplaod the partition file.
+    [Documentation]  Non admin user to upload the partition file.
     [Arguments]  ${file_name}  ${username}  ${password}  ${role}  ${enabled}=${True}
 
     # Description of argument(s):
@@ -654,7 +654,7 @@ Non Admin User To Upload Partition File
 
 
 Non Admin Delete Non Existence Partition File
-    [Documentation]  Non admin user to uplaod the partition file.
+    [Documentation]  Non admin user to upload the partition file.
     [Arguments]  ${file_name}  ${username}  ${password}  ${role}  ${enabled}=${True}
 
     # Description of argument(s):

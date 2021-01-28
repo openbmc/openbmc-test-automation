@@ -32,7 +32,7 @@ Force Tags               BMC_Code_Update
 *** Test Cases ***
 
 Redfish Code Update With ApplyTime OnReset
-    [Documentation]  Update the firmaware image with ApplyTime of OnReset.
+    [Documentation]  Update the firmware image with ApplyTime of OnReset.
     [Tags]  Redfish_Code_Update_With_ApplyTime_OnReset
     [Template]  Redfish Update Firmware
 
@@ -41,7 +41,7 @@ Redfish Code Update With ApplyTime OnReset
 
 
 Redfish Code Update With ApplyTime Immediate
-    [Documentation]  Update the firmaware image with ApplyTime of Immediate.
+    [Documentation]  Update the firmware image with ApplyTime of Immediate.
     [Tags]  Redfish_Code_Update_With_ApplyTime_Immediate
     [Template]  Redfish Update Firmware
 
@@ -50,7 +50,7 @@ Redfish Code Update With ApplyTime Immediate
 
 
 Redfish Code Update With Multiple Firmware
-    [Documentation]  Update the firmaware image with ApplyTime of Immediate.
+    [Documentation]  Update the firmware image with ApplyTime of Immediate.
     [Tags]  Redfish_Code_Update_With_Multiple_Firmware
     [Template]  Redfish Multiple Upload Image And Check Progress State
 

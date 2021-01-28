@@ -712,7 +712,7 @@ Check For Core Dumps
 Configure Initial Settings
     [Documentation]  Restore old IP and route.
     ...  This keyword requires initial settings viz IP address,
-    ...  Network Mask, default gatway and serial console IP and port
+    ...  Network Mask, default gateway and serial console IP and port
     ...  information which should be provided in command line.
 
     [Arguments]  ${host}=${OPENBMC_HOST}  ${mask}=${NET_MASK}
