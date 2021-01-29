@@ -199,6 +199,9 @@ CA_CERTIFICATE_URI = OPENBMC_BASE_URI + 'certs/authority/ldap'
 SYSTEM_BASE_URI = REDFISH_BASE_URI + 'Systems/system/'
 EVENT_LOG_URI = SYSTEM_BASE_URI + 'LogServices/EventLog/'
 
+BIOS_ATTR_URI = SYSTEM_BASE_URI + 'Bios'
+BIOS_ATTR_SETTINGS_URI = BIOS_ATTR_URI + '/Settings'
+
 '''
   QEMU HTTPS variable:
 
