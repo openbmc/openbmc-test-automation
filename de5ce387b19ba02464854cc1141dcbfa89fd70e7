@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bba110fd_6b303205",
+        "filename": "oem/nuvoton/test_ipmi_flash.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000342
+      },
+      "writtenOn": "2021-01-29T01:36:03Z",
+      "side": 1,
+      "message": "yes, this line is not needed, will remove it.",
+      "parentUuid": "1a637211_7f5573e1",
+      "range": {
+        "startLine": 96,
+        "startChar": 3,
+        "endLine": 96,
+        "endChar": 58
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7beb6e65_4a708ff5",
         "filename": "oem/nuvoton/test_ipmi_flash.robot",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2021-01-28T05:12:40Z",
       "side": 1,
       "message": "HOST_WORK_DIR  may be u can do something like this in variable section by default\n\n${HOST_WORK_DIR}    ${EXECDIR}\n\nanyway this will be override when u run with -v EXECDIR:/some path",
+      "range": {
+        "startLine": 99,
+        "startChar": 47,
+        "endLine": 99,
+        "endChar": 60
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15e6cf3b_f08268bd",
+        "filename": "oem/nuvoton/test_ipmi_flash.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000342
+      },
+      "writtenOn": "2021-01-29T01:36:03Z",
+      "side": 1,
+      "message": "HOST_WORK_DIR will be specified by command arguments",
+      "parentUuid": "7beb6e65_4a708ff5",
       "range": {
         "startLine": 99,
         "startChar": 47,
@@ -127,6 +175,30 @@
       "writtenOn": "2021-01-28T05:12:40Z",
       "side": 1,
       "message": "best would be to design like this , just a thought, \n\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/data/resource_lock_table.json\n\n\nmay be u can add data/oem/jtag_data.json  and add default values, and down the line if u want to run any config with different combination, you can always set the path to this JSON with new and run without have the code to upstream when there is a change needed..",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 23
+      },
+      "revId": "de5ce387b19ba02464854cc1141dcbfa89fd70e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2bc3b2b_bd4f74e3",
+        "filename": "oem/nuvoton/test_jtag_master.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000342
+      },
+      "writtenOn": "2021-01-29T01:36:03Z",
+      "side": 1,
+      "message": "thanks for review, this will be moved to a json file in data/oem/",
+      "parentUuid": "2c740b7a_b77f9882",
       "range": {
         "startLine": 10,
         "startChar": 0,
