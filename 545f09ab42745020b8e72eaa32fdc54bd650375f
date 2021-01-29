@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6ebefb64_0f23bfa5",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-29T11:02:47Z",
+      "side": 1,
+      "message": "Yep, not required. \nI\u0027ll remove it from here.",
+      "parentUuid": "fcd77ca8_f7a847d4",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 95
+      },
+      "revId": "545f09ab42745020b8e72eaa32fdc54bd650375f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a80d263c_4997db46",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2021-01-29T10:43:47Z",
       "side": 1,
       "message": "add ${ethernet_interface} as suite varaibale then we can directly use like below \n${resp}\u003d  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}",
+      "range": {
+        "startLine": 134,
+        "startChar": 4,
+        "endLine": 135,
+        "endChar": 103
+      },
+      "revId": "545f09ab42745020b8e72eaa32fdc54bd650375f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a826e9b6_530c189b",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-29T11:02:47Z",
+      "side": 1,
+      "message": "This is better as it handles interfaces dynamicaly.",
+      "parentUuid": "a80d263c_4997db46",
       "range": {
         "startLine": 134,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d58b212f_42575219",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-29T11:02:47Z",
+      "side": 1,
+      "message": "We are writing it for static IPv6.",
+      "parentUuid": "4306e594_7789ed6c",
+      "range": {
+        "startLine": 137,
+        "startChar": 72,
+        "endLine": 137,
+        "endChar": 91
+      },
+      "revId": "545f09ab42745020b8e72eaa32fdc54bd650375f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5ca1f115_900a1de3",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 1
@@ -82,6 +154,24 @@
       "writtenOn": "2021-01-29T10:43:47Z",
       "side": 1,
       "message": "we may use interface(eth0) in many places, instead of calling multiple times use at suite setup \nSuite Setup   Get Network Interface\n\nGet Network Interface\n    [Documentation]  Get network interface info.\n    ${active_channel_config}\u003d  Get Active Channel Config\n    ${ethernet_interface}\u003d  Set Variable  ${active_channel_config[\u0027${CHANNEL_NUMBER}\u0027][\u0027name\u0027]}\n    Set Suite Variable  ${ethernet_interface}",
+      "revId": "545f09ab42745020b8e72eaa32fdc54bd650375f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b5a357d_29fa6915",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-01-29T11:02:47Z",
+      "side": 1,
+      "message": "As and when we add or delete or modify IP addresses, network configurations get changed. So Configuration we captured at suite level will become invalid after that.\nSo we need to do this for each test case.",
+      "parentUuid": "5ca1f115_900a1de3",
       "revId": "545f09ab42745020b8e72eaa32fdc54bd650375f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
