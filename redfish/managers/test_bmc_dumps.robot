@@ -146,6 +146,19 @@ Create And Delete User Initiated BMC Dump Multiple Times
     END
 
 
+Verify BMC Dump Download
+    [Documentation]  Verify that a BMC dump can be downloaded to the local machine.
+    [Tags]  Verify_BMC_Dump_Download
+
+    ${dump_id}=  Create User Initiated BMC Dump
+    Initialize OpenBMC
+
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}
+
+    ${ret}=  Get Request  openbmc  /redfish/v1/Managers/bmc/LogServices/Dump/attachment/${dump_id} -o bmcdump${dump_id}  headers=${headers}
+
+
 Verify Maximum BMC Dump Creation
     [Documentation]  Create maximum BMC dump and verify error when dump runs out of space.
     [Tags]  Verify_Maximum_BMC_Dump_Creation
