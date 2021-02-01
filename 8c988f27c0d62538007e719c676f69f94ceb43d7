@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "feae9537_9c3f8f33",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T13:56:28Z",
+      "side": 1,
+      "message": "It will throw an error if latest image already functional,",
+      "parentUuid": "9d279965_c31b5db4",
+      "range": {
+        "startLine": 211,
+        "startChar": 1,
+        "endLine": 216,
+        "endChar": 75
+      },
+      "revId": "8c988f27c0d62538007e719c676f69f94ceb43d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "420dd99d_b9ea6451",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "1573ad78_ea0cafb4",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T13:56:28Z",
+      "side": 1,
+      "message": "This keyword will take care to flashing image",
+      "parentUuid": "420dd99d_b9ea6451",
+      "range": {
+        "startLine": 231,
+        "startChar": 3,
+        "endLine": 232,
+        "endChar": 36
+      },
+      "revId": "8c988f27c0d62538007e719c676f69f94ceb43d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ff14d05_c397fc54",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 7
@@ -59,6 +107,30 @@
       "writtenOn": "2021-02-01T13:49:06Z",
       "side": 1,
       "message": "Why do u need this ?",
+      "range": {
+        "startLine": 265,
+        "startChar": 1,
+        "endLine": 266,
+        "endChar": 93
+      },
+      "revId": "8c988f27c0d62538007e719c676f69f94ceb43d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf9c190e_e8d2664b",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T13:56:28Z",
+      "side": 1,
+      "message": "after switching image it checking whether image switched or not\nverifying build version",
+      "parentUuid": "9ff14d05_c397fc54",
       "range": {
         "startLine": 265,
         "startChar": 1,
