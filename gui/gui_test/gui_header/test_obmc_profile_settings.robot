@@ -11,8 +11,8 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_new_password}                  //input[@id="password"]
-${xpath_confirm_password}              //input[@id="password-confirmation"]
+${xpath_new_password}                  //*[@data-test-id='profileSettings-input-newPassword']
+${xpath_confirm_password}              //*[@data-test-id='profileSettings-input-confirmPassword']
 ${xpath_logged_usename}                //*[@data-test-id='appHeader-container-user']
 ${xpath_default_UTC}                   //*[@data-test-id='profileSettings-radio-defaultUTC']
 ${xpath_profile_settings_save_button}  //*[@data-test-id='profileSettings-button-saveSettings']

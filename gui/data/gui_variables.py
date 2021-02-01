@@ -9,16 +9,16 @@ class gui_variables():
 
     # Login page
     xpath_textbox_hostname = "//input[@id='host']"
-    xpath_textbox_username = "//input[@id='username']"
-    xpath_textbox_password = "//input[@id='password']"
-    xpath_login_button = "//button[@type='submit']"
+    xpath_textbox_username = "//*[@data-test-id='login-input-username']"
+    xpath_textbox_password = "//*[@data-test-id='login-input-password']"
+    xpath_login_button = "//*[@data-test-id='login-button-submit']"
     xpath_logout_button = "//*[@data-test-id='appHeader-link-logout']"
 
     # Overview menu
     xpath_overview_menu = "//*[@data-test-id='nav-item-overview']"
 
     # GUI header
-    xpath_root_button_menu = "//*[@id='app-header-user__BV_toggle_']"
+    xpath_root_button_menu = "//*[@data-test-id='appHeader-container-user']"
     xpath_profile_settings = "//*[@data-test-id='appHeader-link-profile']"
     xpath_server_health_header = "//*[@data-test-id='appHeader-container-health']"
     xpath_event_header = "//h1[text()='Event logs']"
