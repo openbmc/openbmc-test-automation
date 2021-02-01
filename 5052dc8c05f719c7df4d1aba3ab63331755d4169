@@ -284,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "07d87ac8_fa51b8d3",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-02-01T14:35:03Z",
+      "side": 1,
+      "message": "Yes this is good Delete Static IPv4 Addresses Except BMC IP \nSo change the input argument to BMC_IP instead of element. Also is it required to pass it? ${ip_data} is a suite variable right? So it can be directly used unless you want to use the keyword for some other purpose too.",
+      "parentUuid": "967af264_bd623564",
+      "range": {
+        "startLine": 404,
+        "startChar": 4,
+        "endLine": 405,
+        "endChar": 63
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dfae8fda_6b689e6b",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 2
