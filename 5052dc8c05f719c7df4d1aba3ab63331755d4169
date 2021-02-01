@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1ec2c3ef_9200a755",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25b5c13f_27d820dc",
+      "range": {
+        "startLine": 7,
+        "startChar": 47,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9c9bffa_6c71017d",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a97e552_f6a49b39",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9c9bffa_6c71017d",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 32
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "da1a04c0_cd2e8b69",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46b017d5_0cc54863",
+      "range": {
+        "startLine": 372,
+        "startChar": 21,
+        "endLine": 372,
+        "endChar": 56
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bbdecc4_6a7ee2d8",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc80d462_ceaebd6e",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bbdecc4_6a7ee2d8",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 393,
+        "endChar": 28
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "5f16f3bc_48107c50",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "685e5779_fae69f89",
+      "range": {
+        "startLine": 396,
+        "startChar": 46,
+        "endLine": 396,
+        "endChar": 49
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d857a8f0_dd94c4d0",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 2
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "967af264_bd623564",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "could you Suggest keyword name here\nDelete Static IPv4 Addresses Except BMC IP And Verify",
+      "parentUuid": "d857a8f0_dd94c4d0",
+      "range": {
+        "startLine": 404,
+        "startChar": 4,
+        "endLine": 405,
+        "endChar": 63
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dfae8fda_6b689e6b",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 2
@@ -160,6 +304,30 @@
       "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bcd7b08_47e8b50b",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfae8fda_6b689e6b",
+      "range": {
+        "startLine": 413,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 39
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +377,54 @@
     },
     {
       "key": {
+        "uuid": "59728bfe_e4f566ff",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6042ac2c_99e7b354",
+      "range": {
+        "startLine": 422,
+        "startChar": 4,
+        "endLine": 423,
+        "endChar": 65
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e32801c_a78d65dd",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df9a3696_3f7bff26",
+      "range": {
+        "startLine": 423,
+        "startChar": 67,
+        "endLine": 423,
+        "endChar": 91
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "acc1eb2c_1e453748",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 2
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "6d491a4b_a37e9216",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acc1eb2c_1e453748",
+      "range": {
+        "startLine": 432,
+        "startChar": 67,
+        "endLine": 432,
+        "endChar": 91
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8346acd9_a2fa609e",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 2
@@ -252,6 +492,30 @@
       "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1309688_6eaedb1c",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-01T04:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8346acd9_a2fa609e",
+      "range": {
+        "startLine": 436,
+        "startChar": 28,
+        "endLine": 436,
+        "endChar": 50
+      },
+      "revId": "5052dc8c05f719c7df4d1aba3ab63331755d4169",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
