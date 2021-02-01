@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82b6831d_a7f88e92",
+        "filename": "gui/gui_test/health_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-01T06:24:43Z",
+      "side": 1,
+      "message": "Commit message did not matches with this changes.. I believe to fix \"TEST Select Single Error Log And Delete\" test case I believe you need to change delete button xPATH from \"//button[@class\u003d\"btn btn-primary\"]\" to \"//*[@data-test-id\u003d\u0027eventLogs-button-deleteRow-0\u0027][2]\"",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 40
+      },
+      "revId": "380afd24d911e204a4f63a584018b1384e0d9ce5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
