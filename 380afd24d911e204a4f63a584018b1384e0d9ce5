@@ -22,6 +22,30 @@
       "revId": "380afd24d911e204a4f63a584018b1384e0d9ce5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "465193ce_6d9a2ae9",
+        "filename": "gui/gui_test/health_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-02-01T06:59:16Z",
+      "side": 1,
+      "message": "As discussed, leaving the xpath of pop up as it is.\nMoved Click Element  ${xpath_filter_event} to Teardown.",
+      "parentUuid": "82b6831d_a7f88e92",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 40
+      },
+      "revId": "380afd24d911e204a4f63a584018b1384e0d9ce5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
