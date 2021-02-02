@@ -2,6 +2,7 @@
 
 Documentation    VMI certificate exchange tests.
 
+Library          ../../lib/jobs_processing.py
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
@@ -23,8 +24,7 @@ Suite Teardown    Suite Teardown Execution
 &{USERS}          Administrator=${ADMIN}  Operator=${OPERATOR}  ReadOnly=${ReadOnly}
 ...               NoAccess=${NoAccess}
 ${VMI_BASE_URI}   /ibm/v1/
-${CSR_FILE}       csr_server.csr
-${CSR_KEY}        csr_server.key
+
 
 *** Test Cases ***
 
@@ -140,12 +140,57 @@ Get Root Certificate After BMC Reboot And Verify
     # Request root certificate from NoAccess user.
     noaccess_user         TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
+Execute Concurrent Get Root Certificate From Admin
+    [Documentation]  Execute multiple concurrent get root certificate requests and verify no errors.
+    [Tags]  Execute_Concurrent_Get_Root_Certificate_From_Admin
+
+     FOR  ${i}  IN RANGE  ${0}  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Execute Concurrent CSR Requests From Admin
+    [Documentation]  Execute multiple concurrent csr requests and verify no errors.
+    [Tags]  Execute_Concurrent_CSR_Requests_From_Admin
+    
+    FOR  ${i}  IN RANGE  ${0}  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Execute Concurrent Corrupted CSR Requests From Admin
+    [Documentation]  Execute multiple concurrent corrupted csr requests and verify no errors.
+    [Tags]  Execute_Concurrent_Corrupted_CSR_Requests_From_Admin
+
+     FOR  ${i}  IN RANGE  ${0}  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
 *** Keywords ***
 
 Generate CSR String
     [Documentation]  Generate a csr string.
 
     # Note: Generates and returns csr string.
+    ${csr_gen_time} =  Get Current Date Time
+    ${CSR_FILE}=  Catenate  SEPARATOR=_  ${csr_gen_time}  csr_server.csr
+    ${CSR_KEY}=   Catenate  SEPARATOR=_  ${csr_gen_time}  csr_server.key
+    Set Test Variable  ${CSR_FILE}
+    Set Test Variable  ${CSR_KEY}
     ${ssl_cmd}=  Set Variable  openssl req -new -newkey rsa:2048 -nodes -keyout ${CSR_KEY} -out ${CSR_FILE}
     ${ssl_sub}=  Set Variable
     ...  -subj "/C=XY/ST=Abcd/L=Efgh/O=ABC/OU=Systems/CN=abc.com/emailAddress=xyz@xx.ABC.com"
@@ -181,6 +226,7 @@ Send CSR To VMI And Get Signed
     Set To Dictionary  ${data}  data  ${csr_data}
 
     ${resp}=  Post Request  openbmc  ${cert_uri}  &{data}  headers=${headers}
+    Log to console  ${resp.content}
 
     [Return]  ${resp}
 
@@ -285,10 +331,12 @@ Get Certificate Signed By VMI
 
     # create a crt file with certificate string
     ${signed_cert}=  Set Variable  ${cert["Certificate"]}
+    ${testcert_gen_time} =  Get Current Date Time
+    ${test_cert_file}=   Catenate  SEPARATOR=_  ${testcert_gen_time}  test_certificate.cert
 
-    Create File  test_certificate.crt  ${signed_cert}
-    ${subject_signed_csr}=  Get Subject  test_certificate.crt  False
-    ${pubKey_signed_csr}=  Get Public Key  test_certificate.crt  False
+    Create File  ${test_cert_file}  ${signed_cert}
+    ${subject_signed_csr}=  Get Subject   ${test_cert_file}  False
+    ${pubKey_signed_csr}=  Get Public Key  ${test_cert_file}  False
 
     Should be equal as strings    ${subject_signed_csr}    ${subject_csr}
     Should be equal as strings    ${pubKey_signed_csr}     ${pubKey_csr}
@@ -299,12 +347,14 @@ Suite Setup Execution
 
     # Create different user accounts.
     Redfish.Login
+    Redfish Power On
     Create Users With Different Roles  users=${USERS}  force=${True}
 
 
 Suite Teardown Execution
     [Documentation]  Suite teardown execution.
 
+    Remove Files  *.csr  *.key  *.cert
     Delete BMC Users Via Redfish  users=${USERS}
     Delete All Sessions
     Redfish.Logout
