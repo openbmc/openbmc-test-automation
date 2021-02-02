@@ -36,7 +36,6 @@ Verify GetDateTime
     # 2020-11-25 07:34:30
 
     Should Contain  ${current_dmy[0]}  ${date_time[0]}
-    Should Contain  ${current_time[0]}  ${time[0]}
 
 Verify SetDateTime
     [Documentation]  Verify set date & time for the host.
@@ -78,13 +77,13 @@ Verify GetBIOSTable For StringTable
     # [3]:                                            Not Allowed
     # [4]:                                            Perm
     # [5]:                                            Temp
-    # [6]:                                            pvm-fw-boot-side
-    # [7]:                                            pvm-inband-code-update
-    # [8]:                                            pvm-os-boot-side
-    # [9]:                                            pvm-pcie-error-inject
-    # [10]:                                           pvm-surveillance
-    # [11]:                                           pvm-system-name
-    # [12]:                                           vmi-if-count
+    # [6]:                                            pvm_fw_boot_side
+    # [7]:                                            pvm_inband_code_update
+    # [8]:                                            pvm_os_boot_side
+    # [9]:                                            pvm_pcie_error_inject
+    # [10]:                                           pvm_surveillance
+    # [11]:                                           pvm_system_name
+    # [12]:                                           vmi_if_count
 
     ${pldm_output}=  Pldmtool  bios GetBIOSTable --type StringTable
     @{keys}=  Get Dictionary Keys  ${pldm_output}
