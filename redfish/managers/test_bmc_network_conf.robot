@@ -540,6 +540,77 @@ Configure Multiple Static IPv4 Addresses And Check Persistency
     END
 
 
+Configure Static IP Without Using Gateway And Verify
+    [Documentation]  Configure static IP without using gateway and verify error.
+    [Tags]  Configure_Static_IP_Without_Using_Gateway_And_Verify
+
+    ${ip}=  Create dictionary  Address=${test_ipv4_addr}
+    ...  SubnetMask=${test_subnet_mask}
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    ${network_configurations}=  Get Network Configuration
+    ${num_entries}=  Get Length  ${network_configurations}
+    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
+      Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    # We need not check for existence of IP on BMC while adding.
+    Append To List  ${patch_list}  ${ip}
+    ${payload}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
+Configure Static IP Without Using Netmask And Verify
+    [Documentation]  Configure static IP without using Netmask and verify error.
+    [Tags]  Configure_Static_IP_Without_Using_Netmask_And_Verify
+
+    ${ip}=  Create dictionary  Address=${test_ipv4_addr}
+    ...  Gateway=${test_gateway}
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    ${network_configurations}=  Get Network Configuration
+    ${num_entries}=  Get Length  ${network_configurations}
+    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
+      Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    # We need not check for existence of IP on BMC while adding.
+    Append To List  ${patch_list}  ${ip}
+    ${payload}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
+Configure Static IP Without Using IPv4 Address And Verify
+    [Documentation]  Configure static IP without using IPv4 address and verify error.
+    [Tags]  Configure_Static_IP_Without_Using_IPv4_Address_And_Verify
+
+    ${ip}=  Create dictionary  SubnetMask=${test_subnet_mask}
+    ...  Gateway=${test_gateway}
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    ${network_configurations}=  Get Network Configuration
+    ${num_entries}=  Get Length  ${network_configurations}
+    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
+      Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    # We need not check for existence of IP on BMC while adding.
+    Append To List  ${patch_list}  ${ip}
+    ${payload}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
 *** Keywords ***
 
 Test Setup Execution
