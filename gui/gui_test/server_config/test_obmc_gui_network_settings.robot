@@ -35,6 +35,7 @@ ${xpath_delete_dns_server}        //*[@title="Delete DNS row"]
 @{empty_dictionary}               {}
 @{string_value}                   aa.bb.cc.dd
 @{special_char_value}             @@@.%%.44.11
+@{test_subnet_mask}               255.255.0.0
 
 *** Test Cases ***
 
@@ -212,6 +213,93 @@ Configure And Verify Invalid DNS Server
     ${empty_dictionary}     Field required
     ${null_value}           Invalid format
 
+	
+Add Fourth Octet Threshold IP And Verify
+    [Documentation]  Add fourth octet threshold IP and verify.
+    [Tags]  Add_Fourth_Octet_Threshold_IP_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    ${fourth_octet_threshold_ip}=  Create List  10.7.7.254
+    Add Static IP Address And Verify  ${fourth_octet_threshold_ip}  ${test_subnet_mask}
+
+
+Add Fourth Octet Lowest IP And Verify
+    [Documentation]  Add fourth octet lowest IP and verify.
+    [Tags]  Add_Fourth_Octet_Lowest_IP_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    ${fourth_octet_lowest_ip}=  Create List  10.7.7.1
+    Add Static IP Address And Verify  ${fourth_octet_lowest_ip}  ${test_subnet_mask}
+
+
+Add Third Octet Threshold IP And Verify
+    [Documentation]  Add third octet threshold IP and verify.
+    [Tags]  Add_Third_Octet_Threshold_IP_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    ${third_octet_threshold_ip}=  Create List  10.7.255.7
+    Add Static IP Address And Verify  ${third_octet_threshold_ip}  ${test_subnet_mask}
+
+
+Add Third Octet Lowest IP And Verify
+    [Documentation]  Add third octet lowest IP and verify.
+    [Tags]  Add_Third_Octet_Lowest_IP_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    ${third_octet_lowest_ip}=  Create List  10.7.0.7
+    Add Static IP Address And Verify  ${third_octet_lowest_ip}  ${test_subnet_mask}
+
+
+Add Second Octet Threshold IP And Verify
+    [Documentation]  Add second octet threshold IP and verify.
+    [Tags]  Add_Second_Octet_Threshold_IP_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    ${second_octet_threshold_ip}=  Create List  10.255.7.7
+    Add Static IP Address And Verify  ${second_octet_threshold_ip}  ${test_subnet_mask}
+
+
+Add Second Octet Lowest IP And Verify
+    [Documentation]  Add second octet lowest IP and verify.
+    [Tags]  Add_Second_Octet_Lowest_IP_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    ${second_octet_lowest_ip}=  Create List  10.0.7.7
+    Add Static IP Address And Verify  ${second_octet_lowest_ip}  ${test_subnet_mask}
+
+
+Add First Octet Threshold IP And Verify
+    [Documentation]  Add first octet threshold IP and verify.
+    [Tags]  Add_First_Octet_Threshold_IP_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    ${first_octet_threshold_ip}=  Create List  223.7.7.7
+    Add Static IP Address And Verify  ${first_octet_threshold_ip}  ${test_subnet_mask}
+
+
+Add First Octet Lowest IP And Verify
+    [Documentation]  Add first octet lowest IP and verify.
+    [Tags]  Add_First_Octet_Lowest_IP_And_Verify
+    [Setup]  Test Setup Execution
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    ${first_octet_lowest_ip}=  Create List  1.7.7.7
+    Add Static IP Address And Verify  ${first_octet_lowest_ip}  ${test_subnet_mask}
 
 *** Keywords ***
 
