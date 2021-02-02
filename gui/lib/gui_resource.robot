@@ -91,7 +91,7 @@ Login GUI
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
     Click Element  ${xpath_login_button}
-    Wait Until Page Contains  Overview  timeout=30s
+    Wait Until Page Contains  Overview  timeout=60s
 
 
 Logout GUI
