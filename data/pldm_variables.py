@@ -100,15 +100,12 @@ RESPONSE_DICT_GETPDR_SETSTATEEFFECTER = {
     'effecterID': [0, 1, 2, 3, 4],
     'entityType': ['Virtual Machine Manager', 'System chassis (main enclosure)',
                    'System Firmware', 'Processor Module', '32801(OEM)'],
-    'entityInstanceNumber': [0, 1],
+    'entityInstanceNumber': [0, 1, 2],
     'containerID': [0, 1],
     'effecterSemanticID': [0],
     'effecterInit': ['noInit'],
     'effecterDescriptionPDR': [False],
-    'compositeEffecterCount': [1],
-    'stateSetID': ['Boot Progress(196)',
-                   'System Power State(260)', 'Software Termination Status(129)',
-                   'Boot/Restart Cause(192)']}
+    'compositeEffecterCount': [1]}
 
 RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER = {
     'PDRHeaderVersion': [1],
@@ -137,9 +134,7 @@ RESPONSE_DICT_GETPDR_STATESENSORPDR = {
     'entityType': ['Communication Channel', 'Connector', 'Processor Module',
                    '32774(OEM)', '57346(OEM)', '57347(OEM)', '32801(OEM)'],
     'sensorInit': ['noInit'],
-    'sensorAuxiliaryNamesPDR': [False],
-    'stateSetID': ['Availability(2)', 'Configuration State(15)',
-                   'Operational Running Status(11)', 'Software Termination Status(129)']}
+    'sensorAuxiliaryNamesPDR': [False]}
 
 RESPONSE_DICT_GETPDR_TERMINUSLOCATORPDR = {
     'PDRHeaderVersion': [1],
@@ -196,19 +191,19 @@ PLDM_PDR_TYPES = {
 
 RESPONSE_LIST_GETBIOSTABLE_STRTABLE = [
     'Allowed', 'Disabled', 'Enabled', 'IPv4DHCP', 'IPv4Static', 'Not Allowed',
-    'Perm', 'Temp', 'pvm-fw-boot-side', 'pvm-inband-code-update', 'pvm-os-boot-side',
-    'pvm-pcie-error-inject', 'pvm-surveillance', 'pvm-system-name', 'vmi-hostname',
-    'vmi-if-count', 'vmi-if0-ipv4-ipaddr', 'vmi-if0-ipv4-method',
-    'vmi-if0-ipv4-prefix-length', 'vmi-if1-ipv4-ipaddr', 'vmi-if1-ipv4-method',
-    'vmi-if1-ipv4-prefix-length', 'vmi-ipv4-gateway']
+    'Perm', 'Temp', 'pvm_fw_boot_side', 'pvm_inband_code_update', 'pvm_os_boot_side',
+    'pvm_pcie_error_inject', 'pvm_surveillance', 'pvm_system_name', 'vmi_hostname',
+    'vmi_if_count', 'vmi_if0_ipv4_ipaddr', 'vmi_if0_ipv4_method',
+    'vmi_if0_ipv4_prefix_length', 'vmi_if1_ipv4_ipaddr', 'vmi_if1_ipv4_method',
+    'vmi_if1_ipv4_prefix_length']
 
 
 RESPONSE_LIST_GETBIOSTABLE_ATTRTABLE = [
-    'pvm-fw-boot-side', 'pvm-inband-code-update', 'pvm-os-boot-side',
-    'pvm-pcie-error-inject', 'pvm-surveillance', 'pvm-system-name', 'vmi-hostname',
-    'vmi-if-count', 'vmi-if0-ipv4-ipaddr', 'vmi-if0-ipv4-method',
-    'vmi-if0-ipv4-prefix-length', 'vmi-if1-ipv4-ipaddr', 'vmi-if1-ipv4-method',
-    'vmi-if1-ipv4-prefix-length', 'vmi-ipv4-gateway']
+    'pvm_fw_boot_side', 'pvm_inband_code_update', 'pvm_os_boot_side',
+    'pvm_pcie_error_inject', 'pvm_surveillance', 'pvm_system_name', 'vmi_hostname',
+    'vmi_if_count', 'vmi_if0_ipv4_ipaddr', 'vmi_if0_ipv4_method',
+    'vmi_if0_ipv4_prefix_length', 'vmi_if1_ipv4_ipaddr', 'vmi_if1_ipv4_method',
+    'vmi_if1_ipv4_prefix_length']
 
 RESPONSE_LIST_GETBIOSTABLE_ATTRVALTABLE = [
     'BIOSString', 'BIOSInteger', 'BIOSEnumeration']
