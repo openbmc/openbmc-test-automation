@@ -45,7 +45,7 @@ Verify Immediate Shutdown
     Click Element  ${xpath_shutdown_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
-    Wait Until Keyword Succeeds  3 min  0 sec  Element Should Contain  ${xpath_current_power_state}  Off
+    Wait Until Keyword Succeeds  3 min  15 sec  Element Should Contain  ${xpath_current_power_state}  Off
 
 
 Verify Orderly Shutdown
