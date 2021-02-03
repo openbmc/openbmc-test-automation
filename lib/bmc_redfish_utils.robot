@@ -264,3 +264,39 @@ Delete BMC Users Via Redfish
         ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
     END
 
+
+Expire And Update New Password Via Redfish
+    [Documentation]  Expire and change password and verify using password.
+    [Arguments]  ${username}  ${password}  ${new_password}
+
+    # Description of argument(s):
+    # username        The username to be used to login to the BMC.
+    # password        The password to be used to login to the BMC.
+    # new_password    The new password to be used to update password.
+
+    # Expire admin password using ssh.
+    Open Connection And Log In  ${username}  ${password}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${username}
+    Should Contain  ${output}  password expiry information changed
+
+    # Verify user password expired using Redfish
+    Verify User Password Expired Using Redfish  ${username}  ${password}
+
+    # Change user password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user
+    ...  body={'Password': '${new_password}'}
+    Redfish.Logout
+
+
+Verify User Password Expired Using Redfish
+    [Documentation]  Checking whether user password expired or not using redfish.
+
+    # Description of argument(s):
+    # username        The username to be used to login to the BMC.
+    # password        The password to be used to login to the BMC.
+
+    [Arguments]  ${username}  ${password}  ${expected_result}=${True}
+    Redfish.Login  ${username}  ${password}
+    ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/${username}
+    Should Be Equal  ${resp.dict["PasswordChangeRequired"]}  ${expected_result}
+
