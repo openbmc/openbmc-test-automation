@@ -156,4 +156,4 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
-    redfish.Logout
+    Run Keyword And Ignore Error  redfish.Logout
