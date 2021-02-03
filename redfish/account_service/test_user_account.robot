@@ -373,7 +373,10 @@ Verify Redfish User Login
     # password            Login password.
 
     # Logout from current Redfish session.
-    Redfish.Logout
+    # We don't really care if the current session is flushed out since we are going to login
+    # with new credential in next.
+    Run Keyword And Ignore Error  Redfish.Logout
+
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${username}  ${password}
     [Return]  ${status}
 
