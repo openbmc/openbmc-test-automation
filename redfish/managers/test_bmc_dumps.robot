@@ -5,6 +5,7 @@ Documentation       Test BMC dump functionality of OpenBMC.
 Resource            ../../lib/openbmc_ffdc.robot
 Resource            ../../lib/dump_utils.robot
 
+Suite Setup         Redfish.Login
 Test Setup          Redfish Delete All BMC Dumps
 Test Teardown       Test Teardown Execution
 
