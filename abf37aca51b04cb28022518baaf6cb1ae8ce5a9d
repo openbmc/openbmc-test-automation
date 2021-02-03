@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "06b77fb4_6cc31d21",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-02-03T12:44:05Z",
+      "side": 1,
+      "message": "i need this check... some times there is no value in that case i need to append .. empty string",
+      "parentUuid": "8e975f93_a397d136",
+      "range": {
+        "startLine": 95,
+        "startChar": 20,
+        "endLine": 95,
+        "endChar": 29
+      },
+      "revId": "abf37aca51b04cb28022518baaf6cb1ae8ce5a9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "12f2a8a7_6d6fe159",
         "filename": "lib/pldm_utils.py",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2021-02-03T08:58:04Z",
       "side": 1,
       "message": "re.search(r\u0027\\((.*?)\\)\u0027, attr_values).group(1) can be used here.",
+      "range": {
+        "startLine": 105,
+        "startChar": 16,
+        "endLine": 106,
+        "endChar": 69
+      },
+      "revId": "abf37aca51b04cb28022518baaf6cb1ae8ce5a9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9f2dd44_0c6c45ef",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-02-03T12:44:05Z",
+      "side": 1,
+      "message": "As discussed not making any changes here",
+      "parentUuid": "12f2a8a7_6d6fe159",
       "range": {
         "startLine": 105,
         "startChar": 16,
@@ -68,6 +116,30 @@
       "revId": "abf37aca51b04cb28022518baaf6cb1ae8ce5a9d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4a6073a_6ea8987e",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-02-03T12:44:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08f487cb_097ef1e9",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "abf37aca51b04cb28022518baaf6cb1ae8ce5a9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
