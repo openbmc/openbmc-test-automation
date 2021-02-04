@@ -41,11 +41,14 @@ Verify Immediate Shutdown
     [Tags]  Verify_Immediate_Shutdown
 
     Redfish Power On  stack_mode=skip
+    Launch Browser And Login GUI
+    Test Setup Execution
+
     Click Element At Coordinates  ${xpath_shutdown_immediate_radio}  0  0
     Click Element  ${xpath_shutdown_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
-    Wait Until Keyword Succeeds  3 min  0 sec  Element Should Contain  ${xpath_current_power_state}  Off
+    Wait Until Keyword Succeeds  3 min  15 sec  Element Should Contain  ${xpath_current_power_state}  Off
 
 
 Verify Orderly Shutdown
@@ -53,11 +56,14 @@ Verify Orderly Shutdown
     [Tags]  Verify_Orderly_Shutdown
 
     Redfish Power On  stack_mode=skip
+    Launch Browser And Login GUI
+    Test Setup Execution
+
     Click Element At Coordinates  ${xpath_shutdown_orderly_radio}  0  0
     Click Element  ${xpath_shutdown_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
-    Wait Until Keyword Succeeds  10 min  0 sec  Element Should Contain  ${xpath_current_power_state}  Off
+    Wait Until Keyword Succeeds  10 min  15 sec  Element Should Contain  ${xpath_current_power_state}  Off
 
 
 Verify Existence Of All Sections In Server Power Operations Page
@@ -99,6 +105,9 @@ Verify System State At Power On
     [Tags]  Verify_System_State_At_Power_On
 
     Redfish Power On  stack_mode=skip
+    Launch Browser And Login GUI
+    Test Setup Execution
+
     Page Should Contain Element  ${xpath_current_power_state}
     Element Should Contain   ${xpath_current_power_state}  On
 
@@ -117,6 +126,9 @@ Verify Shutdown And Reboot Buttons Presence At Power On
     [Tags]  Verify_Shutdown_And_Reboot_Buttons_Presence_At_Power_On
 
     Redfish Power On  stack_mode=skip
+    Launch Browser And Login GUI
+    Test Setup Execution
+
     # TODO: Implement power on using GUI later.
     Page Should Contain Element  ${xpath_shutdown_button}
     Page Should Contain Element  ${xpath_reboot_button}
@@ -135,13 +147,16 @@ Verify Host Immediate Reboot
     [Tags]  Verify_Host_Immediate_Reboot
 
     Redfish Power On  stack_mode=skip
+    Launch Browser And Login GUI
+    Test Setup Execution
+
     Click Element At Coordinates  ${xpath_reboot_immediate_radio}  0  0
     Click Element  ${xpath_reboot_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
-    Wait Until Keyword Succeeds  3 min  0 sec  Element Should Contain  ${xpath_current_power_state}  Off
+    Wait Until Keyword Succeeds  3 min  15 sec  Element Should Contain  ${xpath_current_power_state}  Off
     Click Element  ${xpath_refresh_button}
-    Wait Until Keyword Succeeds  3 min  0 sec  Element Should Contain  ${xpath_current_power_state}  On
+    Wait Until Keyword Succeeds  3 min  15 sec  Element Should Contain  ${xpath_current_power_state}  On
 
 
 Verify Host Orderly Reboot
@@ -149,13 +164,16 @@ Verify Host Orderly Reboot
     [Tags]  Verify_Host_Orderly_Reboot
 
     Redfish Power On  stack_mode=skip
+    Launch Browser And Login GUI
+    Test Setup Execution
+
     Click Element At Coordinates  ${xpath_reboot_orderly_radio}  0  0
     Click Element  ${xpath_reboot_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
-    Wait Until Keyword Succeeds  10 min  0 sec  Element Should Contain  ${xpath_current_power_state}  Off
+    Wait Until Keyword Succeeds  3 min  15 sec  Element Should Contain  ${xpath_current_power_state}  Off
     Click Element  ${xpath_refresh_button}
-    Wait Until Keyword Succeeds  10 min  0 sec  Element Should Contain  ${xpath_current_power_state}  On
+    Wait Until Keyword Succeeds  3 min  15 sec  Element Should Contain  ${xpath_current_power_state}  On
 
 
 *** Keywords ***
@@ -166,3 +184,4 @@ Test Setup Execution
     Click Element  ${xpath_control_menu}
     Click Element  ${xpath_server_power_operations_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  server-power-operations
+
