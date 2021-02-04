@@ -292,6 +292,52 @@ Verify Minimum Password Length For Redfish User
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
 
 
+Verify Standard Roles Define By Redfish
+    [Documentation]  Verify standard roles define by Redfish.
+    [Tags]  Verify_Standard_Roles_Define_By_Redfish
+
+    ${member_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/AccountService/Roles
+    List Should Contain Value  ${member_list}
+    ...  /redfish/v1/AccountService/Roles/Administrator
+    List Should Contain Value  ${member_list}
+    ...  /redfish/v1/AccountService/Roles/Operator
+    List Should Contain Value  ${member_list}
+    ...  /redfish/v1/AccountService/Roles/ReadOnly
+
+    # The standard roles are: | Role name | Assigned privileges |
+    # | Administrator | Login , ConfigureManager ,
+    #   ConfigureUsers , ConfigureComponents , ConfigureSelf |
+    # | Operator | Login , ConfigureComponents , ConfigureSelf |
+    # | ReadOnly | Login , ConfigureSelf |
+
+    ${resp}=  redfish.Get  /redfish/v1/AccountService/Roles/Administrator
+    List Should Contain Value  ${resp.dict['AssignedPrivileges']}
+    ...  Login
+    List Should Contain Value  ${resp.dict['AssignedPrivileges']}
+    ...  ConfigureManager
+    List Should Contain Value  ${resp.dict['AssignedPrivileges']}
+    ...  ConfigureUsers
+    List Should Contain Value  ${resp.dict['AssignedPrivileges']}
+    ...  ConfigureSelf
+    List Should Contain Value  ${resp.dict['AssignedPrivileges']}
+    ...  ConfigureComponents
+
+    ${resp}=  redfish.Get  /redfish/v1/AccountService/Roles/Operator
+    List Should Contain Value  ${resp.dict['AssignedPrivileges']}
+    ...  Login
+    List Should Contain Value  ${resp.dict['AssignedPrivileges']}
+    ...  ConfigureSelf
+    List Should Contain Value  ${resp.dict['AssignedPrivileges']}
+    ...  ConfigureComponents
+
+    ${resp}=  redfish.Get  /redfish/v1/AccountService/Roles/ReadOnly
+    List Should Contain Value  ${resp.dict['AssignedPrivileges']}
+    ...  Login
+    List Should Contain Value  ${resp.dict['AssignedPrivileges']}
+    ...  ConfigureSelf
+
+
 *** Keywords ***
 
 Test Teardown Execution
