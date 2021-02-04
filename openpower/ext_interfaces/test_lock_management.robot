@@ -157,6 +157,16 @@ Fail To Release Multiple Lock With Valid And Invalid TransactionID
     HMCID-01       ReadCase1,ReadCase1    Transaction
 
 
+Fail To Release Lock With Invalid TransactionID Data Type
+    [Documentation]  Fail to release lock with invalid transaction id.
+    [Tags]  Fail_To_Release_Lock_With_Invalid_TransactionID_Data_Type
+    [Template]  Verify Fail To Release Lock With Invalid TransactionID Data Type
+
+    # client_id    lock_type     release_lock_type
+    HMCID-01       ReadCase1     Transaction
+    HMCID-01       WriteCase1    Transaction
+
+
 Fail To Release Lock For Another Session
     [Documentation]  Failed to release locks from another session.
     [Tags]  Fail_To_Release_Lock_For_Another_Session
@@ -943,6 +953,42 @@ Verify Fail To Release Multiple Lock With Valid And Invalid TransactionID
     ...  ${session_info}  ${trans_id_list}
     ...  release_lock_type=${release_lock_type}  status_code=${HTTP_BAD_REQUEST}
     Release Locks On Resource  ${session_info}  ${trans_id_list}  release_lock_type=Session
+
+    ${trans_id_emptylist}=  Create List
+    Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
+    Redfish Delete Session  ${session_info}
+
+
+Verify Fail To Release Lock With Invalid TransactionID Data Type
+    [Documentation]  Verify fail to be release lock with invalid trasaction ID data type.
+    [Arguments]  ${client_id}  ${lock_type}  ${release_lock_type}
+
+    # Description of argument(s):
+    # client_id          This client id can contain string value
+    #                    (e.g. 12345, "HMCID").
+    # lock_type          Read lock or Write lock.
+    # release_lock_type  The value can be Transaction or Session.
+
+    ${trans_id_list}=  Create List
+    @{lock_type_list}=  Split String  ${lock_type}  ,
+
+    ${session_info}=  Create Redfish Session With ClientID  ${client_id}
+
+    ${trans_id}=  Redfish Post Acquire Lock  ${lock_type_list}[0]
+
+    Append To List  ${trans_id_list}  ${trans_id}
+
+    ${temp_trans_id_list}=  Copy Dictionary  ${trans_id_list}  deepcopy=True
+
+    ${value}=  Get From Dictionary  ${trans_id_list}[0]  TransactionID
+    ${value}=  Set Variable  \'${value}\'
+    Set To Dictionary  ${temp_trans_id_list}[0]  TransactionID  ${value}
+
+    Release Locks On Resource
+    ...  ${session_info}  ${temp_trans_id_list}
+    ...  release_lock_type=${release_lock_type}  status_code=${HTTP_BAD_REQUEST}
+
+    Release Locks On Resource  ${session_info}  ${trans_id_list}  release_lock_type=${release_lock_type}
 
     ${trans_id_emptylist}=  Create List
     Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
