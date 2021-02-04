@@ -292,6 +292,44 @@ Verify Minimum Password Length For Redfish User
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
 
 
+Verify Standard User Roles Defined By Redfish
+    [Documentation]  Verify standard user roles defined by Redfish.
+    [Tags]  Verify_Standard_User_Roles_Defined_By_Redfish
+
+    ${member_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/AccountService/Roles
+
+    @{roles}=  Create List
+    ...  /redfish/v1/AccountService/Roles/Administrator
+    ...  /redfish/v1/AccountService/Roles/Operator
+    ...  /redfish/v1/AccountService/Roles/ReadOnly
+
+    List Should Contain Sub List  ${member_list}  ${roles}
+
+    # The standard roles are:
+
+    # | Role name | Assigned privileges |
+    # | Administrator | Login, ConfigureManager, ConfigureUsers, ConfigureComponents, ConfigureSelf |
+    # | Operator | Login, ConfigureComponents, ConfigureSelf |
+    # | ReadOnly | Login, ConfigureSelf |
+
+    @{admin}=  Create List  Login  ConfigureManager  ConfigureUsers  ConfigureComponents  ConfigureSelf
+    @{operator}=  Create List  Login  ConfigureComponents  ConfigureSelf
+    @{readOnly}=  Create List  Login  ConfigureSelf
+
+    ${roles_dict}=  create dictionary  admin_privileges=${admin}  operator_privileges=${operator}
+    ...  readOnly_privileges=${readOnly}
+
+    ${resp}=  redfish.Get  /redfish/v1/AccountService/Roles/Administrator
+    List Should Contain Sub List  ${resp.dict['AssignedPrivileges']}  ${roles_dict['admin_privileges']}
+
+    ${resp}=  redfish.Get  /redfish/v1/AccountService/Roles/Operator
+    List Should Contain Sub List  ${resp.dict['AssignedPrivileges']}  ${roles_dict['operator_privileges']}
+
+    ${resp}=  redfish.Get  /redfish/v1/AccountService/Roles/ReadOnly
+    List Should Contain Sub List  ${resp.dict['AssignedPrivileges']}  ${roles_dict['readOnly_privileges']}
+
+
 *** Keywords ***
 
 Test Teardown Execution
