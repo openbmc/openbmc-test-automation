@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdaf92eb_57aee8e1",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-04T14:36:47Z",
+      "side": 1,
+      "message": "Suggestion: Get Concurrent Root Certificate For Multiple Admin User\n\nlet me know your view then similar name can be assign to other keywords which I have commented in patch 3.",
+      "revId": "35c792b1b59078dfaf23e02b2c13ca37a64774b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "713881e2_6b49a98e",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-04T14:36:47Z",
+      "side": 1,
+      "message": "Align",
+      "revId": "35c792b1b59078dfaf23e02b2c13ca37a64774b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
