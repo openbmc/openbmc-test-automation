@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1e3fe3e_9e8ebe2d",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-04T09:44:00Z",
+      "side": 1,
+      "message": "Suggestion to add below information\n\nSingned CSR Request\n\nAdmin only can request\nOperator, readonly, no access fail to request\n\nSimilar way you can define for root certificate.",
+      "revId": "9572138de71dbbf43a70fe8645cdd9e74bd3a1fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8081eaf3_ada6b757",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-04T09:44:00Z",
+      "side": 1,
+      "message": "Suggestion:\n\nGet Concurrent Root Certificate For Admin User                                                           \n\nyou can also suggest another name for this and other keywords where I gave a comment.",
+      "revId": "9572138de71dbbf43a70fe8645cdd9e74bd3a1fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1a8e682_2040cbb2",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-04T09:44:00Z",
+      "side": 1,
+      "message": "align END",
+      "revId": "9572138de71dbbf43a70fe8645cdd9e74bd3a1fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a78358e2_50568a33",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-04T09:44:00Z",
+      "side": 1,
+      "message": "Suggestion:\n\nGet Concurrent CSR Certificate For Admin User",
+      "revId": "9572138de71dbbf43a70fe8645cdd9e74bd3a1fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83327b51_7aefc4b1",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-04T09:44:00Z",
+      "side": 1,
+      "message": "Suggestion:\n\nFail To Get Concurrent Corrupted CSR Certificate For Admin User",
+      "revId": "9572138de71dbbf43a70fe8645cdd9e74bd3a1fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bb4e766_bdc6aa88",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-04T09:44:00Z",
+      "side": 1,
+      "message": "Align FOR loop",
+      "revId": "9572138de71dbbf43a70fe8645cdd9e74bd3a1fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f9df4ab_9c72ffcc",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-04T09:44:00Z",
+      "side": 1,
+      "message": "Print Timen you can use this instead of log to console.",
+      "revId": "9572138de71dbbf43a70fe8645cdd9e74bd3a1fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b925cfc_a13bd0eb",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-04T09:44:00Z",
+      "side": 1,
+      "message": "Suggestion:\n\nyou can add in Suit Setup also.",
+      "revId": "9572138de71dbbf43a70fe8645cdd9e74bd3a1fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
