@@ -552,7 +552,7 @@ Verify Error Logging Rotation Policy With HOST Error Logs
     [Documentation]  Verify error logging rotation policy for non bmc error logs.
     [Tags]  Verify_Error_Logging_Rotation_Policy_With_HOST_Error_Logs
     [Setup]  Run Keywords  Open Connection for SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}
-    ...  /tmp/FILE_NBMC_UNRECOVERABLE
+    ...  /tmp/FILE_NBMC_UNRECOVERABLE  AND  Redfish.Login
     [Template]  Error Logging Rotation Policy
 
     # Error logs to be created                                % of total logging space when error
@@ -566,7 +566,7 @@ Verify Error Logging Rotation Policy With Unrecoverable HOST And BMC Error Logs
     [Documentation]  Verify error logging rotation policy with unrecoverable HOST and BMC error logs.
     [Tags]  Verify_Error_Logging_Rotation_Policy_With_Unrecoverable_HOST_And_BMC_Error_Logs
     [Setup]  Run Keywords  Open Connection for SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}
-    ...  /tmp/FILE_NBMC_UNRECOVERABLE
+    ...  /tmp/FILE_NBMC_UNRECOVERABLE  AND  Redfish.Login
     [Template]  Error Logging Rotation Policy
 
     # Error logs to be created                                % of total logging space when error
