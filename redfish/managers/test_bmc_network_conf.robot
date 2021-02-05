@@ -410,6 +410,7 @@ Configure DNS Server And Check Persistency
     Configure Static Name Servers  ${static_name_servers}
     # Reboot BMC and verify persistency.
     OBMC Reboot (off)
+    Redfish.Login
     Verify CLI and Redfish Nameservers
 
 Configure Loopback IP For Gateway
@@ -534,7 +535,7 @@ Configure Multiple Static IPv4 Addresses And Check Persistency
 
     # Reboot BMC and verify persistency.
     OBMC Reboot (off)
-
+    Redfish.Login
     FOR  ${ip}  IN  @{test_ipv4_addresses}
       Verify IP And Netmask On BMC  ${ip}  ${test_subnet_mask}
     END
