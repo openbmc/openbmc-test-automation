@@ -12,4 +12,4 @@ Get System Environment
 
     Run Keyword And Ignore Error  Get BMC PNOR Version
     # Run Keyword  Check BMC Performance
-    Check BMC Performance
+    Run Keyword And Ignore Error  Check BMC Performance
