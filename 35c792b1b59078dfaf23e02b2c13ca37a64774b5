@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6cf43bbd_8fb9b97e",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-02-05T07:33:39Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "cdaf92eb_57aee8e1",
+      "revId": "35c792b1b59078dfaf23e02b2c13ca37a64774b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "713881e2_6b49a98e",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "35c792b1b59078dfaf23e02b2c13ca37a64774b5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35d1920e_b729538b",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-02-05T07:33:39Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "713881e2_6b49a98e",
+      "revId": "35c792b1b59078dfaf23e02b2c13ca37a64774b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
