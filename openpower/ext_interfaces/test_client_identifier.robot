@@ -7,8 +7,10 @@ Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/resource.robot
 Resource          ../../lib/bmc_redfish_utils.robot
 Resource          ../../lib/external_intf/management_console_utils.robot
+Resource          ../../lib/utils.robot
 Library           ../../lib/bmc_network_utils.py
 Library           ../../lib/gen_robot_valid.py
+
 
 Suite Setup       Redfish.Login
 Suite Teardown    Run Keyword And Ignore Error  Delete All Redfish Sessions
@@ -94,9 +96,15 @@ Create And Verify Session ClientID
     ${client_ids}=  Split String  ${client_id}  ,
     ${session_info}=  Create Session With List Of ClientID  ${client_ids}
     Verify A Session Created With ClientID  ${client_ids}  ${session_info}
+    ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
+    Is BMC Standby
+
     Run Keyword If  '${reboot_flag}' == 'True'
-    ...  Run Keywords  Redfish OBMC Reboot (off)  AND
+    ...  Run Keywords  Redfish BMC Reset Operation  AND
+    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
+    ...  Is BMC Standby  AND
     ...  Verify A Session Created With ClientID  ${client_ids}  ${session_info}
+
     Redfish Delete List Of Session  ${session_info}
 
 
