@@ -95,7 +95,8 @@ Create And Verify Session ClientID
     ${session_info}=  Create Session With List Of ClientID  ${client_ids}
     Verify A Session Created With ClientID  ${client_ids}  ${session_info}
     Run Keyword If  '${reboot_flag}' == 'True'
-    ...  Run Keywords  Redfish OBMC Reboot (off)  AND
+    ...  Run Keywords  Redfish BMC Reset Operation  AND
+    ...  Sleep  50s  AND
     ...  Verify A Session Created With ClientID  ${client_ids}  ${session_info}
     Redfish Delete List Of Session  ${session_info}
 
