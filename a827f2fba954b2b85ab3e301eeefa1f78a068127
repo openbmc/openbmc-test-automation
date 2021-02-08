@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93b752c9_480b42c3",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-02-08T07:18:17Z",
+      "side": 1,
+      "message": "I gave similar comment on previous commit, for release lock can we have a common keyword which takes care of valid \u0026 error scenarios",
+      "range": {
+        "startLine": 962,
+        "startChar": 0,
+        "endLine": 995,
+        "endChar": 43
+      },
+      "revId": "a827f2fba954b2b85ab3e301eeefa1f78a068127",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
