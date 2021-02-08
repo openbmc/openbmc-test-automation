@@ -106,6 +106,24 @@
       "revId": "5033d7d5ab2f843d7c0163e83c175d0261cca755",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "501db600_584ff9cc",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-02-08T09:24:42Z",
+      "side": 1,
+      "message": "Here purpose of all keywords is same, same operation but different variants.\nSo lets have one keyword for one operation. Let it be complex or big code. We\u0027ll review and make it simpler.",
+      "parentUuid": "250f4d9e_ee9a9387",
+      "revId": "5033d7d5ab2f843d7c0163e83c175d0261cca755",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
