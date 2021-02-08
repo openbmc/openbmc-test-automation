@@ -232,9 +232,9 @@ Put BMC State
 
     ${bmc_state}=  Get BMC State
     Run Keyword If  '${bmc_state}' == '${expected_state}'
-    ...  Log  BMC is already in ${expected_state} state
-    ...  ELSE  Run Keywords  Initiate BMC Reboot  AND
-    ...  Wait for BMC state  ${expected_state}
+    ...    Log  BMC is already in ${expected_state} state
+    ...  ELSE
+    ...    OBMC Reboot (off)
 
 Initiate BMC Reboot
     [Documentation]  Initiate BMC reboot.

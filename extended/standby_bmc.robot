@@ -60,10 +60,12 @@ Get To Stable State
     ...  1 min  30 sec  Initialize OpenBMC
 
     ${ready_status}=  Run Keyword And Return Status  Is BMC Ready
-    Run Keyword If  '${ready_status}' == '${False}'  Put BMC State  Ready
-
-    ${host_off_status}=  Run Keyword And Return Status  Is Host Off
-    Run Keyword If  '${host_off_status}' == '${False}'  Initiate Host PowerOff
+    Run Keyword If  '${ready_status}' == '${False}'
+    ...  Put BMC State  Ready
+    ...  ELSE IF  ${REDFISH_SUPPORT_TRANS_STATE} == ${1}
+    ...    Redfish Power Off  stack_mode=skip
+    ...  ELSE
+    ...    REST Power Off  stack_mode=skip
 
     Prune Journal Log
 
