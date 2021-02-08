@@ -34,6 +34,24 @@
       "revId": "5033d7d5ab2f843d7c0163e83c175d0261cca755",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d79e4bf_ac0205a2",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-02-08T07:37:42Z",
+      "side": 1,
+      "message": "For release lock ideally there should be only one keyword, there are only 2 outcomes either it\u0027ll release or not-release.\nAgree it may increase few lines or complexity, Let the intelligence or complexity be in one place, rather than having in multiple keywords. At the end it reduces confusion \u0026 complexity of looking into multiple same keywords and reduce lot of lines and makes it more structured.",
+      "parentUuid": "783ace78_01bb78dd",
+      "revId": "5033d7d5ab2f843d7c0163e83c175d0261cca755",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
