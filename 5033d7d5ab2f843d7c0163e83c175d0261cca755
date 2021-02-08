@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3f12b64_7754baa1",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-02-08T07:16:37Z",
+      "side": 1,
+      "message": "There are many keywords starting with name `Verify Fail To Release Lock ...` and see duplicate code.\nCan you make common keyword which takes care of error n valid scenarios for release lock.",
+      "revId": "5033d7d5ab2f843d7c0163e83c175d0261cca755",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
