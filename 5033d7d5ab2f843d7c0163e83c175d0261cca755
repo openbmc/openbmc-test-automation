@@ -88,6 +88,24 @@
       "revId": "5033d7d5ab2f843d7c0163e83c175d0261cca755",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "250f4d9e_ee9a9387",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-02-08T09:15:05Z",
+      "side": 1,
+      "message": "as mention in above comments, I considered single keyword to address all 3 scenario. but the common code in all 3 scenario is just 3 lines code, as mention below.\n\nRelease Locks On Resource  ${session_info}  ${trans_id_list}  release_lock_type\u003dSession\n\n${trans_id_emptylist}\u003d  Create List\nVerify Lock On Resource  ${session_info}  ${trans_id_emptylist}\nRedfish Delete Session  ${session_info}\n\n\nHere their is no pass scenario , only fail scenario with different parameters.",
+      "parentUuid": "fc0574f1_65bca14b",
+      "revId": "5033d7d5ab2f843d7c0163e83c175d0261cca755",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
