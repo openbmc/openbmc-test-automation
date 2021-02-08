@@ -887,4 +887,31 @@ Redfish Get States
     ...  host=${host_state}
     ...  boot_progress=${boot_progress}
 
+    Log To Console  ${states}
+
     [Return]  ${states}
+
+
+Is BMC Standby
+    [Documentation]  Check if BMC is ready and host at standby.
+
+    ${standby_states}=  Create Dictionary
+    ...  bmc=Enabled
+    ...  chassis=Off
+    ...  host=Disabled
+    ...  boot_progress=None
+
+    Wait Until Keyword Succeeds  3 min  10 sec  Redfish Get States
+
+    Wait Until Keyword Succeeds  1 min  10 sec  Match State  ${standby_states}
+
+
+Match State
+    [Documentation]  Check if the expected and current states are matched.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state      Expected states in dictionary.
+
+    ${current_state}=  Redfish Get States
+    Dictionaries Should Be Equal  ${match_state}  ${current_state}
