@@ -70,6 +70,24 @@
       "revId": "5033d7d5ab2f843d7c0163e83c175d0261cca755",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc0574f1_65bca14b",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-02-08T07:59:59Z",
+      "side": 1,
+      "message": "OK, I\u0027m not asking to write single test case for all scenarios. You can add multiple test cases but use only one keyword. Debugging will be same if looked at log.html and more easier if looked at code level.\nEach test case will call this keyword and knows whether it is an error or valid scenario, and pass that param accordingly.\nKeyword has to just use that parameter and either expect error or 200OK while releasing lock.",
+      "parentUuid": "2f7d88f7_6d653081",
+      "revId": "5033d7d5ab2f843d7c0163e83c175d0261cca755",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
