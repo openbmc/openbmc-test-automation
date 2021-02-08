@@ -576,6 +576,20 @@ Configure And Verify Multiple IPv4 Addresses
     Verify IP On BMC  ${test_ipv4_addr2}
 
 
+Config Multiple DNS Servers And Check Persistency After BMC Reset
+    [Documentation]  Config multiple DNS and check persistency after BMC reset.
+    [Tags]  Config_Multiple_DNS_Servers_And_Check_Persistency_After_BMC_Reset
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    @{list_name_servers}=  Create List  10.5.5.10  10.20.5.10  10.5.6.7
+    Configure Static Name Servers  ${list_name_servers}
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+    Redfish.Login
+    Verify CLI and Redfish Nameservers
+
 *** Keywords ***
 
 Test Setup Execution
