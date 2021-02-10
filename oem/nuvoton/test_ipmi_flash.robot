@@ -82,7 +82,7 @@ Test Invalid BMC Firmware Update
 *** Keywords ***
 
 Suite Setup Execution
-    [Documentation]  Suite Setup Exection.
+    [Documentation]  Suite Setup Execution.
 
     ${os_state}=  Get Host State Attribute  OperatingSystemState
     Rprint Vars  os_state

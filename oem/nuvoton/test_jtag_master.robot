@@ -56,7 +56,7 @@ Put File To BMC
     scp.Put File  ${filename}  /var/${filename}
 
 Suite Setup Execution
-    [Documentation]  Suite Setup Exection.
+    [Documentation]  Suite Setup Execution.
 
     ${status}=  Run Keyword And Return Status  Variable Should Exist
     ...  ${TEST_PROGRAM_CPLD}
