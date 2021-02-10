@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4f13f0b6_c574dbef",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-10T05:14:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9af7088_d3db2f74",
+      "range": {
+        "startLine": 544,
+        "startChar": 0,
+        "endLine": 544,
+        "endChar": 49
+      },
+      "revId": "d4b39dfd7663b4a92045ce4659e5cae939d66a3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd07fce1_72c231d6",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2021-02-09T07:34:41Z",
       "side": 1,
       "message": "Suggestion to club all invalid scenarios under one and use the template to run different different cases.eg-\nConfigure Invalid IP Values For Gateway\n  \n    [Template]  Add IP Address\n    # ip               subnet_mask          gateway             valid_status_codes\n     \n    ${test_ipv4_addr}  ${test_subnet_mask}  ${out_of_range_ip}  ${HTTP_BAD_REQUEST}\n    ${test_ipv4_addr}  ${test_subnet_mask}  @@@.%%.44.11        ${HTTP_BAD_REQUEST}\n    ${test_ipv4_addr}  ${test_subnet_mask}  ${network_id}       ${HTTP_BAD_REQUEST}",
+      "range": {
+        "startLine": 559,
+        "startChar": 0,
+        "endLine": 559,
+        "endChar": 37
+      },
+      "revId": "d4b39dfd7663b4a92045ce4659e5cae939d66a3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af27f4b5_c35e3281",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-10T05:14:55Z",
+      "side": 1,
+      "message": "Prashanth review needed to confirm",
+      "parentUuid": "fd07fce1_72c231d6",
       "range": {
         "startLine": 559,
         "startChar": 0,
@@ -68,6 +116,30 @@
       "revId": "d4b39dfd7663b4a92045ce4659e5cae939d66a3f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fde692e2_91cc557f",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-10T05:14:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84f68842_4eb21fc5",
+      "range": {
+        "startLine": 561,
+        "startChar": 12,
+        "endLine": 561,
+        "endChar": 24
+      },
+      "revId": "d4b39dfd7663b4a92045ce4659e5cae939d66a3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
