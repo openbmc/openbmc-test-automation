@@ -462,7 +462,10 @@ def get_os_state(os_host="",
         if must_login:
             output, stderr, rc = bsu.os_execute_command("uptime", quiet=quiet,
                                                         ignore_err=1,
-                                                        time_out=20)
+                                                        time_out=20,
+                                                        os_host=os_host,
+                                                        os_username=os_username,
+                                                        os_password=os_password)
             if rc == 0:
                 os_login = 1
                 os_run_cmd = 1

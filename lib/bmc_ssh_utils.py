@@ -74,7 +74,11 @@ def os_execute_command(cmd_buf,
                        fork=0,
                        quiet=None,
                        test_mode=None,
-                       time_out=None):
+                       time_out=None,
+                       os_host="",
+                       os_username="",
+                       os_password=""):
+
     r"""
     Run the given command in an OS SSH session and return the stdout, stderr and the return code.
 
@@ -100,11 +104,12 @@ def os_execute_command(cmd_buf,
     """
 
     # Get global OS variable values.
-    os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
-    os_username = BuiltIn().get_variable_value("${OS_USERNAME}",
-                                               default="")
-    os_password = BuiltIn().get_variable_value("${OS_PASSWORD}",
-                                               default="")
+    if os_host == "":
+        os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
+    if os_username is "":
+        os_username = BuiltIn().get_variable_value("${OS_USERNAME}", default="")
+    if os_password is "":
+        os_password = BuiltIn().get_variable_value("${OS_PASSWORD}", default="")
 
     if not gv.valid_value(os_host):
         return "", "", 1
