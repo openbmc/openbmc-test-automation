@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0bf98d3_96e20376",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-02-11T09:33:20Z",
+      "side": 1,
+      "message": "defined",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "3b8ca0bdde9ca5621635d3b813d09542a1a40463",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d5c388b_4659df0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-02-11T09:33:20Z",
+      "side": 1,
+      "message": "described",
+      "range": {
+        "startLine": 9,
+        "startChar": 22,
+        "endLine": 9,
+        "endChar": 31
+      },
+      "revId": "3b8ca0bdde9ca5621635d3b813d09542a1a40463",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f0e177f_3323b1c6",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-02-11T09:33:20Z",
+      "side": 1,
+      "message": "Defined. \nPls change where ever applicable.",
+      "range": {
+        "startLine": 295,
+        "startChar": 22,
+        "endLine": 295,
+        "endChar": 29
+      },
+      "revId": "3b8ca0bdde9ca5621635d3b813d09542a1a40463",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ceab1d90_2dd751ab",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-02-11T09:33:20Z",
+      "side": 1,
+      "message": "Can have these roles in a list and then compare the 2 lists using \u0027List Should Contain Sub List\u0027",
+      "range": {
+        "startLine": 301,
+        "startChar": 4,
+        "endLine": 306,
+        "endChar": 50
+      },
+      "revId": "3b8ca0bdde9ca5621635d3b813d09542a1a40463",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28649168_8f760446",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-02-11T09:33:20Z",
+      "side": 1,
+      "message": "Same comment as above. \nPlease create a dictionary with expected Roles as the key and their privileges as values in a list. Then they can be compared as mentioned in previous comment.",
+      "range": {
+        "startLine": 315,
+        "startChar": 1,
+        "endLine": 338,
+        "endChar": 22
+      },
+      "revId": "3b8ca0bdde9ca5621635d3b813d09542a1a40463",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
