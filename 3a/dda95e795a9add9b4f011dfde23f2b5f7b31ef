@@ -1,0 +1,9 @@
+Code-Review+1: <shepos@us.ibm.com>
+Code-Review+2: George Keishing <gkeishin@in.ibm.com>
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: George Keishing <gkeishin@in.ibm.com>
+Submitted-at: Thu, 11 Feb 2021 19:42:51 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/40528
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
