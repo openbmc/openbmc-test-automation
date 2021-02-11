@@ -13,6 +13,9 @@ import state as st
 
 from robot.libraries.BuiltIn import BuiltIn
 
+redfish_support_trans_state = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
+    int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
+
 
 def ffdc(ffdc_dir_path=None,
          ffdc_prefix=None,
@@ -44,14 +47,19 @@ def ffdc(ffdc_dir_path=None,
     OPENBMC_HOST = BuiltIn().get_variable_value("${OPENBMC_HOST}")
 
     if comm_check:
-        state = st.get_state(req_states=['ping', 'uptime', 'rest'])
+        if not redfish_support_trans_state:
+            interface = 'rest'
+        else:
+            interface = 'redfish'
+
+        state = st.get_state(req_states=['ping', 'uptime', interface])
         gp.qprint_var(state)
         if not int(state['ping']):
             gp.print_error("BMC is not ping-able.  Terminating FFDC collection.\n")
             return ffdc_file_list
 
-        if not int(state['rest']):
-            gp.print_error("REST commands to the BMC are failing."
+        if not int(state[interface]):
+            gp.print_error("%s commands to the BMC are failing." % interface
                            + "  Terminating FFDC collection.\n")
             return ffdc_file_list
 
