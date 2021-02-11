@@ -662,6 +662,11 @@ def get_state(openbmc_host="",
 
             if int(state['rest']):
                 for url_path in ret_values:
+                    # Skip conflicting "CurrentHostState" URL from the enum
+                    # /xyz/openbmc_project/state/hypervisor0
+                    if "hypervisor0" in url_path:
+                        continue
+
                     for attr_name in ret_values[url_path]:
                         # Create a state key value based on the attr_name.
                         try:
