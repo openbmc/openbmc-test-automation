@@ -40,6 +40,13 @@ ${xpath_ip_table}                 //*[@aria-colcount="3"]
 @{test_ipv4_addr}                 10.7.7.7
 @{test_subnet_mask}               255.255.0.0
 
+# Valid netmask is 4 bytes long and has continuous block of 1s.
+# Maximum valid value in each octet is 255 and least value is 0.
+@{alpha_netmask}                  ff.ff.ff.ff
+@{out_of_range_netmask}           255.256.255.0
+@{more_byte_netmask}              255.255.255.0.0
+@{lowest_netmask}                 128.0.0.0
+
 *** Test Cases ***
 
 Verify Navigation To Network Settings Page
@@ -225,6 +232,31 @@ Configure And Verify Invalid DNS Server
     ${empty_dictionary}     Field required
     ${null_value}           Invalid format
 
+Modify IP Address And Verify
+    [Documentation]  Modify IP address and verify.
+    [Setup]  Test Setup Execution
+    [Tags]  Modify_IP_Address_And_Verify
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    ${test_ipv4_addr2}=  Create List  10.7.7.8
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
+    Update IP Address And Verify  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}
+
+
+Configure Netmask And Verify
+    [Documentation]  Configure and verify netmask.
+    [Tags]  Configure_And_Verify_Netmask
+    [Setup]  Test Setup Execution
+    [Template]  Add Static IP Address And Verify
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    # ip_addresses      subnet_masks             expected_status
+    ${test_ipv4_addr}   ${lowest_netmask}        Valid format
+    ${test_ipv4_addr}   ${more_byte_netmask}     Invalid format
+    ${test_ipv4_addr}   ${alpha_netmask}         Invalid format
+    ${test_ipv4_addr}   ${out_of_range_netmask}  Invalid format
 
 *** Keywords ***
 
@@ -464,4 +496,24 @@ Verify IP And Netmask On BMC Using GUI
        Textfield Value Should Be  //*[@data-test-id="networkSettings-input-subnetMask-${i}"]
        ...  ${subnet_masks}[${i}]
     END
+    Validate Network Config On BMC
+
+Update IP Address And Verify
+    [Arguments]  ${ip}  ${new_ip}  ${subnet_mask}
+
+    # Description of argument(s):
+    # ip                  IP address to be replaced (e.g. "10.7.7.7").
+    # new_ip              New IP address to be configured.
+    # subnet_mask         Netmask value.
+
+    ${get_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-0"]
+    Run Keyword If  '${ip}[${0}]'== '${get_ip}'
+    ...  Run Keywords  Clear Element Text  ${xpath_static_input_ip0}
+    ...  AND  Input Text  ${xpath_static_input_ip0}  ${new_ip}[${0}]
+
+    Click Button  ${xpath_network_save_settings}
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
+    Sleep  ${NETWORK_TIMEOUT}s
+    Click Element  ${xpath_refresh_button}
+    Verify IP And Netmask On BMC Using GUI  ${new_ip}  ${subnet_mask}
     Validate Network Config On BMC
