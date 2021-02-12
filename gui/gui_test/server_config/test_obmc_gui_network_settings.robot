@@ -21,11 +21,13 @@ ${xpath_network_save_settings}    //button[@data-test-id="networkSettings-button
 ${xpath_default_gateway_input}    //*[@data-test-id="networkSettings-input-gateway"]
 ${xpath_mac_address_input}        //*[@data-test-id="networkSettings-input-macAddress"]
 ${xpath_static_input_ip0}         //*[@data-test-id="networkSettings-input-staticIpv4-0"]
+${xpath_static_input_ip1}         //*[@data-test-id="networkSettings-input-staticIpv4-1"]
 ${xpath_add_static_ip}            //button[contains(text(),"Add static IP")]
 ${xpath_setting_success}          //*[contains(text(),"Successfully saved network settings.")]
 ${xpath_add_dns_server}           //button[contains(text(),"Add DNS server")]
 ${xpath_network_interface}        //*[@data-test-id="networkSettings-select-interface"]
 ${xpath_input_netmask_addr0}      //*[@data-test-id="networkSettings-input-subnetMask-0"]
+${xpath_input_netmask_addr1}      //*[@data-test-id="networkSettings-input-subnetMask-1"]
 ${xpath_delete_static_ip}         //*[@title="Delete IPv4 row"]
 ${xpath_input_dns_server}         //*[@data-test-id="networkSettings-input-dnsAddress-0"]
 ${xpath_delete_dns_server}        //*[@title="Delete DNS row"]
@@ -39,6 +41,14 @@ ${xpath_ip_table}                 //*[@aria-colcount="3"]
 
 @{test_ipv4_addr}                 10.7.7.7
 @{test_subnet_mask}               255.255.0.0
+
+# Valid netmask is 4 bytes long and has continuous block of 1s.
+# Maximum valid value in each octet is 255 and least value is 0.
+# Maximum value of octet in netmask is 255.
+@{alpha_netmask}                  ff.ff.ff.ff
+@{out_of_range_netmask}           255.256.255.0
+@{more_byte_netmask}              255.255.255.0.0
+@{lowest_netmask}                 128.0.0.0
 
 *** Test Cases ***
 
@@ -225,6 +235,31 @@ Configure And Verify Invalid DNS Server
     ${empty_dictionary}     Field required
     ${null_value}           Invalid format
 
+Modify IP Address And Verify
+    [Documentation]  Modify IP address and verify.
+    [Setup]  Test Setup Execution
+    [Tags]  Modify_IP_Address_And_Verify
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    Add IP Address And Verify  10.7.7.8  255.255.0.0
+    Update IP Address And Verify  10.7.7.8  10.7.7.9  255.255.0.0
+
+
+Configure Netmask And Verify
+    [Documentation]  Configure and verify netmask.
+    [Tags]  Configure_And_Verify_Netmask
+    [Setup]  Test Setup Execution
+    [Template]  Add Static IP Address And Verify
+    [Teardown]  Run Keywords  Click Element  ${xpath_refresh_button}
+    ...  AND  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    # ip_addresses      subnet_masks             expected_status
+    ${test_ipv4_addr}   ${lowest_netmask}        Valid format
+    ${test_ipv4_addr}   ${more_byte_netmask}     Invalid format
+    ${test_ipv4_addr}   ${alpha_netmask}         Invalid format
+    ${test_ipv4_addr}   ${out_of_range_netmask}  Invalid format
 
 *** Keywords ***
 
@@ -465,3 +500,59 @@ Verify IP And Netmask On BMC Using GUI
        ...  ${subnet_masks}[${i}]
     END
     Validate Network Config On BMC
+
+
+Update IP Address And Verify
+    [Documentation]  Update static IPv4 address and verify.
+    [Arguments]  ${ip}  ${new_ip}  ${subnet_mask}
+
+    # Description of argument(s):
+    # ip                  IP address to be replaced (e.g. "10.7.7.7").
+    # new_ip              New IP address to be configured.
+    # subnet_mask         Netmask value.
+
+    ${get_ip}=  Get Value  ${xpath_static_input_ip0}
+    Run Keyword If  '${ip}'== '${get_ip}'
+    ...  Run Keywords  Clear Element Text  ${xpath_static_input_ip0}
+    ...  AND  Input Text  ${xpath_static_input_ip0}  ${new_ip}
+
+    Click Button  ${xpath_network_save_settings}
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
+    Sleep  ${NETWORK_TIMEOUT}s
+    Click Element  ${xpath_refresh_button}
+    Verfiy IP On BMC  ${new_ip}  ${subnet_mask}
+    Validate Network Config On BMC
+
+
+Add IP Address And Verify
+    [Documentation]  Add only one static IPv4 address and verify.
+    [Arguments]  ${ip}  ${subnet_mask}
+
+    # Description of argument(s):
+    # ip                  IP address to be set (e.g. "10.7.7.7").
+    # subnet_mask         Netmask value to be set (e.g. "255.255.0.0").
+
+    Click Button  ${xpath_add_static_ip}
+    Clear Element Text  ${xpath_static_input_ip1}
+    Input Text  ${xpath_static_input_ip1}  ${ip}
+    Input Text  ${xpath_input_netmask_addr1}  ${subnet_mask}
+    Click Button  ${xpath_network_save_settings}
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
+    Sleep  ${NETWORK_TIMEOUT}s
+    Click Element  ${xpath_refresh_button}
+    Verfiy IP On BMC  ${ip}  ${subnet_mask}
+    Validate Network Config On BMC
+
+
+Verfiy IP On BMC
+    [Documentation]  Verify only one static IPv4 address.
+    [Arguments]  ${ip}  ${subnet_mask}
+
+    # Description of argument(s):
+    # ip             IP address which needs to be verified (e.g. "10.7.7.7").
+    # subnet_mask    Netmask value which needs to be verified.(e.g. "255.255.0.0").
+
+    ${get_ip}=  Get Value  ${xpath_static_input_ip0}
+    ${get_netmask}=  Get Value  ${xpath_input_netmask_addr0}
+    Should Be Equal  ${get_ip}  ${ip}
+    Should Be Equal  ${get_netmask}  ${subnet_mask}
