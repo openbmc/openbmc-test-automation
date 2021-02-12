@@ -40,6 +40,14 @@ ${xpath_ip_table}                 //*[@aria-colcount="3"]
 @{test_ipv4_addr}                 10.7.7.7
 @{test_subnet_mask}               255.255.0.0
 
+# Valid netmask is 4 bytes long and has continuous block of 1s.
+# Maximum valid value in each octet is 255 and least value is 0.
+@{alpha_netmask}                  ff.ff.ff.ff
+# Maximum value of octet in netmask is 255.
+@{out_of_range_netmask}           255.256.255.0
+@{more_byte_netmask}              255.255.255.0.0
+@{lowest_netmask}                 128.0.0.0
+
 *** Test Cases ***
 
 Verify Navigation To Network Settings Page
@@ -225,6 +233,31 @@ Configure And Verify Invalid DNS Server
     ${empty_dictionary}     Field required
     ${null_value}           Invalid format
 
+Modify IP Address And Verify
+    [Documentation]  Modify IP address and verify.
+    [Setup]  Test Setup Execution
+    [Tags]  Modify_IP_Address_And_Verify
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    ${test_ipv4_addr2}=  Create List  10.7.7.8
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
+    Update IP Address And Verify  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}
+
+
+Configure Netmask And Verify
+    [Documentation]  Configure and verify more byte netmask.
+    [Tags]  Configure_And_Verify_More_Byte_Netmask
+    [Setup]  Test Setup Execution
+    [Template]  Add Static IP Address And Verify
+    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
+    ...  AND  Test Teardown Execution
+
+    # ip_addresses      subnet_masks             expected_status
+    ${test_ipv4_addr}   ${lowest_netmask}        Valid format
+    ${test_ipv4_addr}   ${more_byte_netmask}     Invalid format
+    ${test_ipv4_addr}   ${alpha_netmask}         Invalid format
+    ${test_ipv4_addr}   ${out_of_range_netmask}  Invalid format
 
 *** Keywords ***
 
@@ -260,6 +293,7 @@ Configure Invalid Network Address And Verify
 Add DNS Server And Verify
     [Documentation]  Add DNS server on BMC and verify it via BMC CLI.
     [Arguments]  ${static_name_servers}   ${expected_status}=Valid format
+    [Teardown]  Click Element  ${xpath_refresh_button}
 
     # Description of the argument(s):
     # static_name_servers  A list of static name server IPs to be
@@ -405,8 +439,8 @@ Delete Static IPv4 Addresses Except BMC IP
     ${ip_location}=  Evaluate  ${element} + ${1}
     Wait Until Element Is Enabled  //*[@data-test-id="networkSettings-input-staticIpv4-${element}"]
     ${input_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-${element}"]
-    Run Keyword If  "${BMC_IP}" != "${input_ip}"
-    ...  Click Button  ${xpath_ip_table}/tbody/tr[${ip_location}]/td[3]/span/button
+    Continue For Loop If  "${BMC_IP}" == "${input_ip}"  
+    Click Button  ${xpath_ip_table}/tbody/tr[${ip_location}]/td[3]/span/button
 
     # Get delete ip elements.
     ${delete_ip_elements}=  Get Element Count  ${xpath_delete_static_ip}
@@ -432,7 +466,7 @@ Test Setup Execution
     Set Suite Variable  ${netmask_data}
 
     # Delete existing static IPv4 addresses and netmask if avilable.
-    Run keyword if  ${ip_data} == @{empty} and ${netmask_data} == @{empty}
+    Run keyword If  ${ip_data} != @{empty} and ${netmask_data} != @{empty}
     ...  Delete And Verify Static IP Address On BMC
 
 
@@ -443,7 +477,7 @@ Test Teardown Execution
     ${netmask_length}=  Get Length  ${netmask_data}
 
     # Restore existing IPv4 addresses and netmasks if any..
-    Run keyword If  ${ip_length} == ${0} and ${netmask_length} == ${0}
+    Run keyword If  ${ip_length} != ${0} and ${netmask_length} != ${0}
     ...  Add Static IP Address And Verify  ${ip_data}  ${netmask_data}
 
 
@@ -465,3 +499,23 @@ Verify IP And Netmask On BMC Using GUI
        ...  ${subnet_masks}[${i}]
     END
     Validate Network Config On BMC
+
+Update IP Address And Verify
+    [Arguments]  ${ip}  ${new_ip}  ${netmask}
+
+    ${ip_count}=  Get Length  ${ip}
+    FOR  ${i}  IN RANGE  ${ip_count}
+      ${input_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-${i}"]
+      Continue For Loop If  '${BMC_IP}' == '${input_ip}'
+      Run Keyword If  '${ip[${i}]}' == '${input_ip}'  
+      ...  Run Keywords  Clear Element Text  //*[@data-test-id="networkSettings-input-staticIpv4-${i}"]
+      ...  AND  Input Text  //*[@data-test-id="networkSettings-input-staticIpv4-${i}"]  ${new_ip}[${i}]
+    END
+
+    Click Button  ${xpath_network_save_settings}
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
+    Sleep  ${NETWORK_TIMEOUT}s
+    Click Element  ${xpath_refresh_button}
+    Verify IP And Netmask On BMC Using GUI  ${new_ip}  ${netmask}
+    Validate Network Config On BMC
+
