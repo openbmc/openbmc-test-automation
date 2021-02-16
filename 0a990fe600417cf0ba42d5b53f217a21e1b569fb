@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85051547_3a3c12dd",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-02-16T10:38:16Z",
+      "side": 1,
+      "message": "mostly duplicate code in new test cases.",
+      "range": {
+        "startLine": 547,
+        "startChar": 1,
+        "endLine": 564,
+        "endChar": 51
+      },
+      "revId": "0a990fe600417cf0ba42d5b53f217a21e1b569fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
