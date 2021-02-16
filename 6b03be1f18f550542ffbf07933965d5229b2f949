@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f35b8579_a370ca9a",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-02-16T10:31:07Z",
+      "side": 1,
+      "message": "remove this test case.\nDont add any test case related to gw.",
+      "range": {
+        "startLine": 559,
+        "startChar": 0,
+        "endLine": 565,
+        "endChar": 83
+      },
+      "revId": "6b03be1f18f550542ffbf07933965d5229b2f949",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
