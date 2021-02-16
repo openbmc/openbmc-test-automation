@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d98d0a10_c6a166d9",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-02-16T04:51:05Z",
+      "side": 1,
+      "message": "can we directly send attr_val_data?\nyou can remove Log to console and set variable",
+      "range": {
+        "startLine": 159,
+        "startChar": 52,
+        "endLine": 159,
+        "endChar": 69
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0c01627_f73d052c",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-02-16T04:51:05Z",
+      "side": 1,
+      "message": "where are you checking new values set?",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 55
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
