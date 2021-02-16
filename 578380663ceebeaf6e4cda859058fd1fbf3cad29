@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02e13b4d_75f4b15f",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-16T09:37:09Z",
+      "side": 1,
+      "message": "Convert these test cases into templet format.",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 83
+      },
+      "revId": "578380663ceebeaf6e4cda859058fd1fbf3cad29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
