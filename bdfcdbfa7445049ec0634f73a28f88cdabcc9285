@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75ad3d80_a440a27d",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-16T05:58:33Z",
+      "side": 1,
+      "message": "Can you keep this line at line 45? So that all the comments are together",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 43
+      },
+      "revId": "bdfcdbfa7445049ec0634f73a28f88cdabcc9285",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9baae24_692409b1",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-16T05:58:33Z",
+      "side": 1,
+      "message": "I see that the test case is not specific to more byte. So you can remove it.",
+      "range": {
+        "startLine": 249,
+        "startChar": 42,
+        "endLine": 249,
+        "endChar": 51
+      },
+      "revId": "bdfcdbfa7445049ec0634f73a28f88cdabcc9285",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "118e2d0c_15287e9c",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-16T05:58:33Z",
+      "side": 1,
+      "message": "Configure_And_Verify_Netmask",
+      "range": {
+        "startLine": 250,
+        "startChar": 12,
+        "endLine": 250,
+        "endChar": 50
+      },
+      "revId": "bdfcdbfa7445049ec0634f73a28f88cdabcc9285",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44add13c_2b37954d",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-16T05:58:33Z",
+      "side": 1,
+      "message": "Changes here seem to be test cases fixes. Can you drop these fixes as a separate commit.",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 481,
+        "endChar": 70
+      },
+      "revId": "bdfcdbfa7445049ec0634f73a28f88cdabcc9285",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47a23826_41ac2399",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-16T05:58:33Z",
+      "side": 1,
+      "message": "subnet_mask",
+      "range": {
+        "startLine": 504,
+        "startChar": 37,
+        "endLine": 504,
+        "endChar": 45
+      },
+      "revId": "bdfcdbfa7445049ec0634f73a28f88cdabcc9285",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc517458_6ba02f51",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-16T05:58:33Z",
+      "side": 1,
+      "message": "Description of argument missing",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 45
+      },
+      "revId": "bdfcdbfa7445049ec0634f73a28f88cdabcc9285",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "733c8319_06fed532",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-16T05:58:33Z",
+      "side": 1,
+      "message": "I believe netmask is not required here.",
+      "range": {
+        "startLine": 504,
+        "startChar": 35,
+        "endLine": 504,
+        "endChar": 45
+      },
+      "revId": "bdfcdbfa7445049ec0634f73a28f88cdabcc9285",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2a13f2b_9034571b",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-16T05:58:33Z",
+      "side": 1,
+      "message": "Can we only check the ip address which we have set and not the netmask.",
+      "range": {
+        "startLine": 519,
+        "startChar": 55,
+        "endLine": 519,
+        "endChar": 65
+      },
+      "revId": "bdfcdbfa7445049ec0634f73a28f88cdabcc9285",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
