@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "247f8417_403a8b38",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-02-22T07:01:26Z",
+      "side": 1,
+      "message": "suggestion:\nVerify Release multiple locks with valid and invalid transaction fails.",
+      "range": {
+        "startLine": 152,
+        "startChar": 21,
+        "endLine": 152,
+        "endChar": 77
+      },
+      "revId": "5033d7d5ab2f843d7c0163e83c175d0261cca755",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3f12b64_7754baa1",
         "filename": "openpower/ext_interfaces/test_lock_management.robot",
         "patchSetId": 2
