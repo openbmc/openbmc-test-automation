@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "600e659a_5f295788",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2021-02-22T17:23:35Z",
+      "side": 1,
+      "message": "But why? \nWe were seeing problems in the this area?",
+      "revId": "76b84b0a4d3c2c72a13ea784e6d029d4be95894c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
