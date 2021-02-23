@@ -22,6 +22,138 @@
       "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb921620_751aebc5",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-23T11:16:39Z",
+      "side": 1,
+      "message": "same as line 174",
+      "range": {
+        "startLine": 147,
+        "startChar": 25,
+        "endLine": 147,
+        "endChar": 29
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55a0497f_975d457f",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-23T11:16:39Z",
+      "side": 1,
+      "message": "same as line 174",
+      "range": {
+        "startLine": 160,
+        "startChar": 25,
+        "endLine": 160,
+        "endChar": 29
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37c53ed6_8f4da1c9",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-23T11:16:39Z",
+      "side": 1,
+      "message": "create keyword same as line 362",
+      "range": {
+        "startLine": 161,
+        "startChar": 1,
+        "endLine": 167,
+        "endChar": 51
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "252a3d11_0b29fbd3",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-23T11:16:39Z",
+      "side": 1,
+      "message": "not required ${0}, Loop start with 0",
+      "range": {
+        "startLine": 174,
+        "startChar": 25,
+        "endLine": 174,
+        "endChar": 29
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d65229d1_34fe0a10",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-23T11:16:39Z",
+      "side": 1,
+      "message": "${dict}\u003d  Get Concurrent Corrupted CSR Requests From Users  ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}",
+      "range": {
+        "startLine": 175,
+        "startChar": 5,
+        "endLine": 178,
+        "endChar": 129
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d27a1ac_58d01556",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-02-23T11:16:39Z",
+      "side": 1,
+      "message": "My suggestion: create keyword for this process\nGet Concurrent Corrupted CSR Requests From Users\n    [Arguments]  ${username}\u003d${OPENBMC_USERNAME}  ${password}\u003d${OPENBMC_PASSWORD}\n    ...  ${force_create}\u003d${False}  ${valid_csr}\u003d${True}  ${valid_status_code}\u003d${HTTP_OK}\n\n   ${dict}\u003d  Execute Process Multi Keyword  ${5}\n   ...  Get Certificate Signed By VMI ${username} ${password} ${force_create}  ${valid_csr}  ${valid_status_code}\n    ...  Get Certificate Signed By VMI ${username} ${password} ${force_create}  ${valid_csr}  ${valid_status_code}\n    ...  Get Certificate Signed By VMI ${username} ${password} ${force_create}  ${valid_csr}  ${valid_status_code}\n    [Return]  ${dict}",
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
