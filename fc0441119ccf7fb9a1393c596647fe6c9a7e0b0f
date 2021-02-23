@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "0cf974b1_2fe28733",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-02-23T11:46:03Z",
+      "side": 1,
+      "message": "vmi concurrency testcases are different from each other in respect of users combination and kind of certificate requested..so a separate keyword for every testcase will not be good. So,will keep the current format only.",
+      "parentUuid": "55a0497f_975d457f",
+      "range": {
+        "startLine": 160,
+        "startChar": 25,
+        "endLine": 160,
+        "endChar": 29
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37c53ed6_8f4da1c9",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 7
@@ -140,6 +164,30 @@
     },
     {
       "key": {
+        "uuid": "7b091493_7e23551b",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-02-23T11:46:03Z",
+      "side": 1,
+      "message": "answered above in line 167",
+      "parentUuid": "d65229d1_34fe0a10",
+      "range": {
+        "startLine": 175,
+        "startChar": 5,
+        "endLine": 178,
+        "endChar": 129
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d27a1ac_58d01556",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 7
@@ -154,6 +202,24 @@
       "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6096cbfe_2e4e9a26",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-02-23T11:46:03Z",
+      "side": 1,
+      "message": "answered above in line 167",
+      "parentUuid": "5d27a1ac_58d01556",
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
