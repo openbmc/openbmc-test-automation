@@ -106,9 +106,9 @@ def os_execute_command(cmd_buf,
     # Get global OS variable values.
     if os_host == "":
         os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
-    if os_username is "":
+    if os_username == "":
         os_username = BuiltIn().get_variable_value("${OS_USERNAME}", default="")
-    if os_password is "":
+    if os_password == "":
         os_password = BuiltIn().get_variable_value("${OS_PASSWORD}", default="")
 
     if not gv.valid_value(os_host):
