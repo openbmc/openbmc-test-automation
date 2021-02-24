@@ -21,7 +21,6 @@
 -i Verify_Update_Service_Enabled
 -i Verify_Redfish_Software_Inventory_Collection
 -i Redfish_Software_Inventory_Status_Check
--i Verify_Redfish_BMC_Manager_Properties
 #IPMI tests.
 -i Enable_IPMI_User_And_Verify
 -i Verify_IPMI_User_Deletion
