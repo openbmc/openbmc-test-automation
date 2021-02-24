@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e0aa059_7f02bf3d",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-02-24T10:17:34Z",
+      "side": 1,
+      "message": "Can u clean up the redfish session suite teardown\n\nDelete All Redfish Sessions\n\n\nto clean up any persistent newly created sessions.",
+      "revId": "efe3b5332f1bcb84c19c231c5c15977a18d954b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd5b4e4b_ec19c314",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-02-24T10:17:34Z",
+      "side": 1,
+      "message": "Can u add a per-requisite check that this variable is not EMPTY",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 19
+      },
+      "revId": "efe3b5332f1bcb84c19c231c5c15977a18d954b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e10aa712_0df0d1a1",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-02-24T10:17:34Z",
+      "side": 1,
+      "message": "may be add a variable up there with REMOTE_SERVER_IP\n\n${REMOTE_HTTPS_PORT}     443\n\nso that user can choose or key in override any port they want",
+      "range": {
+        "startLine": 41,
+        "startChar": 70,
+        "endLine": 41,
+        "endChar": 74
+      },
+      "revId": "efe3b5332f1bcb84c19c231c5c15977a18d954b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2effe47_e7b62bb7",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-02-24T10:17:34Z",
+      "side": 1,
+      "message": "Do u want to fail the test if teardown if just in case the Delete subscription fails ?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 24
+      },
+      "revId": "efe3b5332f1bcb84c19c231c5c15977a18d954b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
