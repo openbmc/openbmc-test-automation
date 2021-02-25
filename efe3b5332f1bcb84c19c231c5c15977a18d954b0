@@ -175,6 +175,30 @@
       "revId": "efe3b5332f1bcb84c19c231c5c15977a18d954b0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fd5490c_bb37b467",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-02-25T08:58:23Z",
+      "side": 1,
+      "message": "Never mind.. I was thinking if there were subscription where delete fails.. but yeah I m good with this\n\ncan u add the Description of Argument for this\n\n[Arguments]   ${subscription_list}\n\n# Description of argument(s):\n# subscription_list    This and that stuff.",
+      "parentUuid": "42e80de2_05835adb",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 24
+      },
+      "revId": "efe3b5332f1bcb84c19c231c5c15977a18d954b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
