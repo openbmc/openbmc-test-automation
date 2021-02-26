@@ -36,6 +36,24 @@ Create Session And Verify Response Code Using Different Credentials
     operator_user        TestPwd123           ${HTTP_CREATED}
 
 
+Set Session Timeout And Verify Response Code
+    [Documentation]  Set Session Timeout And Verify Response Code.
+    [Tags]  Set_Session_Timeout_And_Verify_Response_Code
+    [Template]  Set Session Timeout And Verify
+
+    # The mininum & maximum allowed values for session timeout are 30
+    # seconds and 86400 seconds respectively as per the session service
+    # schema mentioned at
+    # https://redfish.dmtf.org/schemas/v1/SessionService.v1_1_7.json
+
+    # value             valid_status_code
+    ${25}               ${HTTP_BAD_REQUEST}
+    ${30}               ${HTTP_OK}
+    ${86400}            ${HTTP_OK}
+    ${86500}            ${HTTP_BAD_REQUEST}
+    ${3600}             ${HTTP_OK}
+
+
 Verify SessionService Defaults
     [Documentation]  Verify SessionService default property values.
     [Tags]  Verify_SessionService_Defaults
@@ -79,7 +97,7 @@ Verify Current Session Defaults
     Valid Value  session_properties['Description']  ['Manager User Session']
     Valid Value  session_properties['Name']  ['User Session']
     Valid Value  session_properties['Id']  ['${session_id}']
-    Valid Value  session_properties['UserName']  ['${OPENBMC_USERNAME}']
+    Valid Value  session_properties['UserName']  ['${REDFISH_USERNAME}']
 
 
 Verify Managers Defaults
@@ -177,6 +195,29 @@ Create Session And Verify Response Code
     ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
     ...  body={'UserName':'${username}', 'Password': '${password}'}
     ...  valid_status_codes=[${valid_status_code}]
+
+    Run Keyword If  ${valid_status_code} != ${HTTP_UNAUTHORIZED}
+    ...  Redfish.Delete  /redfish/v1/SessionService/Sessions/${resp.dict["Id"]}
+
+
+Set Session Timeout And Verify
+    [Documentation]  Set Session Timeout And Verify.
+    [Arguments]  ${value}=3600  ${valid_status_code}=${HTTP_OK}
+
+    # Description of argument(s):
+    # value               The value to patch session timeout.
+    # valid_status_code   Expected response code, default is ${HTTP_OK}.
+
+    ${data}=  Create Dictionary  SessionTimeout=${value}
+    Redfish.Patch  ${REDFISH_BASE_URI}SessionService
+    ...  body=&{data}
+    ...  valid_status_codes=[${valid_status_code}]
+
+    ${session_timeout}=  Redfish.Get Attribute
+    ...  ${REDFISH_BASE_URI}SessionService  SessionTimeout
+
+    Run Keyword If  ${valid_status_code}==${HTTP_OK}
+    ...  Valid Value  session_timeout  [${value}]
 
 
 Suite Setup Execution
