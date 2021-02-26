@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5131b69_42428e54",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-02-26T10:03:46Z",
+      "side": 1,
+      "message": "can u set back to default once the test is done ?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 46
+      },
+      "revId": "bd819acaab5d167c0f415bcf5d917f7824d5a64a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
