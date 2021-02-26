@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0307845a_f8f76614",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-26T05:58:21Z",
+      "side": 1,
+      "message": "Verify_Event_Service_Available",
+      "range": {
+        "startLine": 22,
+        "startChar": 12,
+        "endLine": 22,
+        "endChar": 41
+      },
+      "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49eac30b_69a9525f",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-26T05:58:21Z",
+      "side": 1,
+      "message": "Subscribe to an event and verify.",
+      "range": {
+        "startLine": 29,
+        "startChar": 21,
+        "endLine": 29,
+        "endChar": 46
+      },
+      "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b30f6fe7_5465ca31",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-26T05:58:21Z",
+      "side": 1,
+      "message": "Leave one more blank line. Always keep two lines gap between two keywords.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 20
+      },
+      "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "505a0cb1_40735f51",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-02-26T05:58:21Z",
+      "side": 1,
+      "message": "FFDC On Test Case Fail\n    Run Keyword And Ignore Error  Redfish.Logout\n\nI would say better to Collect FFDC and then do the Redfish logout.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 26
+      },
+      "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
