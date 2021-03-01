@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4f3d2db1_f99abc8f",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a7365c5_ef310941",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 21
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1f42ec4_d2014918",
         "filename": "pldm/test_pldm_bios.robot",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32f73d31_da57471a",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1f42ec4_d2014918",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 154,
+        "endChar": 36
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "87c8776c_d08fb9b8",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60828d08_850dd4e1",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 40
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d98d0a10_c6a166d9",
         "filename": "pldm/test_pldm_bios.robot",
         "patchSetId": 6
@@ -82,6 +154,30 @@
       "writtenOn": "2021-02-16T04:51:05Z",
       "side": 1,
       "message": "can we directly send attr_val_data?\nyou can remove Log to console and set variable",
+      "range": {
+        "startLine": 159,
+        "startChar": 52,
+        "endLine": 159,
+        "endChar": 69
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8519adb_490d1c6f",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "it is easy to understand so i separated it out",
+      "parentUuid": "d98d0a10_c6a166d9",
       "range": {
         "startLine": 159,
         "startChar": 52,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "fad2d110_32cf4f1b",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fbc81b0_7032d8de",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 21
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66e94fb3_e8728ac3",
         "filename": "pldm/test_pldm_bios.robot",
         "patchSetId": 6
@@ -137,6 +257,30 @@
       "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85589632_3886bf39",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66e94fb3_e8728ac3",
+      "range": {
+        "startLine": 193,
+        "startChar": 60,
+        "endLine": 193,
+        "endChar": 69
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -186,6 +330,54 @@
     },
     {
       "key": {
+        "uuid": "390d8c81_b2284cb9",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed04dc9a_16dabff6",
+      "range": {
+        "startLine": 198,
+        "startChar": 29,
+        "endLine": 198,
+        "endChar": 38
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16a4a4e0_4e480c65",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe53c5fc_e9f80fe7",
+      "range": {
+        "startLine": 198,
+        "startChar": 6,
+        "endLine": 198,
+        "endChar": 20
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "371c794a_45b3c98b",
         "filename": "pldm/test_pldm_bios.robot",
         "patchSetId": 6
@@ -206,6 +398,30 @@
       "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7e7af5c_7990c335",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "371c794a_45b3c98b",
+      "range": {
+        "startLine": 199,
+        "startChar": 6,
+        "endLine": 199,
+        "endChar": 22
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "746a1305_6932427d",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c22a703_c71eb26e",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 31
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0c01627_f73d052c",
         "filename": "pldm/test_pldm_bios.robot",
         "patchSetId": 6
@@ -243,6 +483,30 @@
       "writtenOn": "2021-02-16T04:51:05Z",
       "side": 1,
       "message": "where are you checking new values set?",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 55
+      },
+      "revId": "f4a0adfeaae91b3ddd9184b54b18b395b614c778",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ebf1775_9b8bd4b6",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-01T10:42:58Z",
+      "side": 1,
+      "message": "@202 i will get the current value after the set bios attr with different value i will update with current value\nam checking the response message is success after set operation .that is enough..",
+      "parentUuid": "a0c01627_f73d052c",
       "range": {
         "startLine": 205,
         "startChar": 0,
