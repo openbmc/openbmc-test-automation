@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "601c1e4c_fc9b2d6c",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-03-02T08:12:37Z",
+      "side": 1,
+      "message": "But it used the word \u0027Available\u0027 in many places like\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/redfish/account_service/test_user_account.robot#L19\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/redfish/account_service/test_ldap_configuration.robot#L132",
+      "parentUuid": "d63d5af7_51c5fb78",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 30
+      },
+      "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0307845a_f8f76614",
         "filename": "redfish/systems/eventlog/test_event_service.robot",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0638733_6088f83b",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-03-02T08:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0307845a_f8f76614",
+      "range": {
+        "startLine": 22,
+        "startChar": 12,
+        "endLine": 22,
+        "endChar": 41
+      },
+      "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a7248dcc_0f36a13a",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-03-02T08:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49eac30b_69a9525f",
+      "range": {
+        "startLine": 29,
+        "startChar": 21,
+        "endLine": 29,
+        "endChar": 46
+      },
+      "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b30f6fe7_5465ca31",
         "filename": "redfish/systems/eventlog/test_event_service.robot",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "14acc9f3_2ffdb52f",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-03-02T08:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b30f6fe7_5465ca31",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 20
+      },
+      "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "505a0cb1_40735f51",
         "filename": "redfish/systems/eventlog/test_event_service.robot",
         "patchSetId": 3
@@ -114,6 +210,30 @@
       "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4946f901_ad0b7273",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-03-02T08:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "505a0cb1_40735f51",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 26
+      },
+      "revId": "563488b978f0589f685a217ff2f210d476f2e4aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
