@@ -7,6 +7,8 @@ Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/boot_utils.robot
 Resource         ../../lib/open_power_utils.robot
 Resource         ../../lib/bmc_network_utils.robot
+Resource         ../../lib/state_manager.robot
+Resource         ../../lib/bmc_redfish_utils.robot
 Library          ../../lib/gen_robot_valid.py
 
 Test Setup       Test Setup Execution
@@ -16,6 +18,7 @@ Test Teardown    Test Teardown Execution
 *** Variables ***
 
 ${SYSTEM_SHUTDOWN_TIME}    ${5}
+${test_hostname}           openbmc
 
 # Strings to check from journald.
 ${REBOOT_REGEX}    ^\-- Reboot --
@@ -142,6 +145,30 @@ Redfish BMC Manager GracefulRestart When Host Booted
 
     # TODO: Replace OCC state check with redfish property when available.
     Verify OCC State
+
+
+Verify BMC Reset To Defaults Operation
+    [Documentation]  Verify BMC reset to defaults operation.
+    [Tags]  Verify_BMC_Reset_To_Defaults_Operation
+    [Teardown]  Run Keywords
+    ...  Configure Hostname  ${init_hostname}  AND  Validate Hostname On BMC  ${init_hostname}
+
+    ${init_hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+
+    Configure Hostname  ${test_hostname}
+    Sleep  3s
+
+    Validate Hostname On BMC  ${test_hostname}
+
+    # The reset action resets the manager settings to factory defaults.
+    # This might cause the manager to reset.
+    # Description is mentioned in the Redfish document DSP2046.
+    Redfish BMC Reset To Defaults Operation
+
+    Check If BMC is Up  3 min  20 sec
+    Wait For BMC Ready
+
+    Validate Hostname On BMC  ${init_hostname}
 
 
 *** Keywords ***

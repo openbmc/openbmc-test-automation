@@ -56,6 +56,26 @@ Redfish BMC Reset Operation
     Redfish.Post  ${target}  body=&{payload}
 
 
+Redfish BMC Reset To Defaults Operation
+    [Documentation]  Do Redfish BMC reset to defaults operation.
+
+    # Example:
+    # "Actions": {
+    # "#Manager.ResetToDefaults": {
+    #   "ResetType@Redfish.AllowableValues": [
+    #     "ResetAll"
+    #   ],
+    #   "target": "/redfish/v1/Managers/bmc/Actions/Manager.ResetToDefaults"
+    # }
+
+    ${session_info}=  Redfish.Get Session Info
+    Log  ${session_info}
+
+    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Managers/bmc/  Manager.ResetToDefaults
+    ${payload}=  Create Dictionary  ResetToDefaultsType=ResetAll
+    Redfish.Post  ${target}  body=&{payload}
+
+
 Reset BIOS Via Redfish
     [Documentation]  Do BIOS reset through Redfish.
 

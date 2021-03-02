@@ -153,6 +153,21 @@ Get BMC Hostname
 
     [Return]  ${output}
 
+
+Validate Hostname On BMC
+    [Documentation]  Verify that the hostname read via Redfish is the same as the
+    ...  hostname configured on system.
+    [Arguments]  ${hostname}
+
+    # Description of argument(s):
+    # hostname  A hostname value which is to be compared to the hostname
+    #           configured on system.
+
+    ${sys_hostname}=  Get BMC Hostname
+    Should Be Equal  ${sys_hostname}  ${hostname}
+    ...  ignore_case=True  msg=Hostname does not exist.
+
+
 Get FW_Env MAC Address
     [Documentation]  Get FW_Env MAC address.
 
