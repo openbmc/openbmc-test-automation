@@ -84,9 +84,6 @@ REST BMC Code Update
     Pass Execution If  '${functional_version}' == '${image_version}'
     ...  The existing ${image_version} firmware is already functional.
 
-    ${software_object}=  Get Non Running BMC Software Object
-    Run Keyword And Ignore Error  Delete Software Object  ${software_object}
-
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
