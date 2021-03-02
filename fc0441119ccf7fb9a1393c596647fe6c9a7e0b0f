@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3fff09bd_129b1591",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-03-02T09:24:31Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "45f9660b_a0312c2f",
+      "range": {
+        "startLine": 144,
+        "startChar": 21,
+        "endLine": 144,
+        "endChar": 113
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb921620_751aebc5",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58e2712d_e9150a48",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-03-02T09:24:31Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "fb921620_751aebc5",
+      "range": {
+        "startLine": 147,
+        "startChar": 25,
+        "endLine": 147,
+        "endChar": 29
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "e27aef88_41659b47",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-03-02T09:24:31Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "0cf974b1_2fe28733",
+      "range": {
+        "startLine": 160,
+        "startChar": 25,
+        "endLine": 160,
+        "endChar": 29
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37c53ed6_8f4da1c9",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 7
@@ -118,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "dbe7e87d_2d48086e",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-03-02T09:24:31Z",
+      "side": 1,
+      "message": "answered above",
+      "parentUuid": "37c53ed6_8f4da1c9",
+      "range": {
+        "startLine": 161,
+        "startChar": 1,
+        "endLine": 167,
+        "endChar": 51
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "252a3d11_0b29fbd3",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 7
@@ -138,6 +234,30 @@
       "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d731f504_7e8fddc1",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-03-02T09:24:31Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "252a3d11_0b29fbd3",
+      "range": {
+        "startLine": 174,
+        "startChar": 25,
+        "endLine": 174,
+        "endChar": 29
+      },
+      "revId": "fc0441119ccf7fb9a1393c596647fe6c9a7e0b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
