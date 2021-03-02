@@ -133,8 +133,9 @@ Fail To Release Lock With Invalid TransactionID
     [Tags]  Fail_To_Release_Lock_With_Invalid_TransactionID
     [Template]  Verify Fail To Release Lock With Invalid TransactionID
 
-    # client_id    lock_type    release_lock_type
-    HMCID-01       ReadCase1    Transaction
+    # client_id    lock_type     release_lock_type
+    HMCID-01       ReadCase1     Transaction
+    HMCID-01       WriteCase1    Transaction
 
 
 Fail To Release Multiple Lock With Invalid TransactionID
