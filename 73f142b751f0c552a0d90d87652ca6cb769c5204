@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7676b04a_97a7252d",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-03-03T06:40:47Z",
+      "side": 1,
+      "message": "this will erase network configurations also, right?\nIf so IP address is lost and BMC is unreachable, how are you handling it?",
+      "revId": "73f142b751f0c552a0d90d87652ca6cb769c5204",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
