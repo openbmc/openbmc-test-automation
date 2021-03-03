@@ -887,7 +887,7 @@ Redfish Get States
     ...  host=${host_state}
     ...  boot_progress=${boot_progress}
 
-    Log To Console  ${states}
+    Log  ${states}
 
     [Return]  ${states}
 
