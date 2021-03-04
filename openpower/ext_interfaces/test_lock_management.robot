@@ -128,6 +128,16 @@ Verify Release Of Valid Locks
     HMCID-02       ReadCase1,ReadCase1,ReadCase1    Session
 
 
+Release Lock When Session Deleted
+    [Documentation]  Release lock when session gets deleted.
+    [Tags]  Release_Lock_When_Session_Deleted
+    [Template]  Verify Release Lock When Session Deleted
+
+    # client_id    lock_type
+    HMCID-01       ReadCase1
+    HMCID-01       WriteCase1
+
+
 Fail To Release Lock With Invalid TransactionID
     [Documentation]  Fail to release lock with invalid transaction id.
     [Tags]  Fail_To_Release_Lock_With_Invalid_TransactionID
@@ -852,6 +862,32 @@ Acquire And Release Multiple Locks
     Redfish Delete Session  ${session_info}
 
 
+Verify Release Lock When Session Deleted
+    [Documentation]  Verify lock get released when session are deleted.
+    [Arguments]  ${client_id}  ${lock_type}
+
+    # Description of argument(s):
+    # client_ids    This client id can contain string value
+    #               (e.g. 12345, "HMCID").
+    # lock_type     Read lock or Write lock.
+
+    ${trans_id_list}=  Create List
+    @{lock_type_list}=  Split String  ${lock_type}  ,
+
+    ${pre_session_info}=  Create Redfish Session With ClientID  ${client_id}
+
+    ${trans_id}=  Redfish Post Acquire Lock  ${lock_type_list}[0]
+    Append To List  ${trans_id_list}  ${trans_id}
+    Verify Lock On Resource  ${pre_session_info}  ${trans_id_list}
+
+    Redfish Delete Session  ${pre_session_info}
+    ${post_session_info}=  Create Redfish Session With ClientID  ${client_id}
+    ${resp}=  Get Locks List On Resource With Session List  ${pre_session_info}  ${HTTP_BAD_REQUEST}
+
+    Redfish Delete Session  ${post_session_info}
+
+
+
 Verify Fail To Release Lock With Invalid TransactionID
     [Documentation]  Verify fail to be release lock with invalid transaction ID.
     [Arguments]  ${client_id}  ${lock_type}  ${release_lock_type}
@@ -1105,6 +1141,7 @@ Get Locks List On Resource With Session List
 
     ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.GetLockList
     ...  data={"SessionIDs": ${session_id_list}}
+    Should Be Equal As Strings  ${resp.status_code}  ${exp_status_code}
     ${locks}=  Evaluate  json.loads('''${resp.text}''')  json
 
     [Return]  ${locks}
