@@ -62,6 +62,52 @@
       "revId": "4ee5465702b0614e4a389984bed74f62229a9751",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b96038c9_c44a3332",
+        "filename": "redfish/systems/test_bios_attributes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-04T15:58:43Z",
+      "side": 1,
+      "message": "Can you create a separate method to just revert the values and call it as part of teardown. Also it can be created in a library so that other modules can make use of it as well. I know I would need it.",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 60
+      },
+      "revId": "4ee5465702b0614e4a389984bed74f62229a9751",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f736f892_7af5338c",
+        "filename": "redfish/systems/test_bios_attributes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-04T15:58:43Z",
+      "side": 1,
+      "message": "Moving this method also to a library will help reusing.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 0
+      },
+      "revId": "4ee5465702b0614e4a389984bed74f62229a9751",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
