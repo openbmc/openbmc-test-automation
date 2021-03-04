@@ -84,6 +84,8 @@ REST BMC Code Update
     Pass Execution If  '${functional_version}' == '${image_version}'
     ...  The existing ${image_version} firmware is already functional.
 
+    Run Keyword And Ignore Error  Delete Only BMC Image
+
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
@@ -266,6 +268,14 @@ Upload And Activate Multiple BMC Images Setup
     [Documentation]  Check that the ALTERNATE_FILE_PATH variable is set.
 
     Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
+
+
+Delete Only BMC Image
+    [Documentation]  Delete a BMC image from the BMC flash chip.
+    [Tags]  Delete_BMC_Image
+
+    ${software_object}=  Get Non Running BMC Software Object
+    Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
 
 
 REST BMC Code Update Teardown
