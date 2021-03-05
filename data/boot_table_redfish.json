@@ -683,7 +683,7 @@
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "Inject OPAL TI",
+        "method": "Inject OPAL TI  repo_dir_path=/tmp/repository",
         "lib_file_path": "open_power_utils.robot"
     }
 }
