@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52a11eef_9aa92f03",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-05T07:25:18Z",
+      "side": 1,
+      "message": "What if the this does not match?",
+      "range": {
+        "startLine": 510,
+        "startChar": 0,
+        "endLine": 510,
+        "endChar": 47
+      },
+      "revId": "aceca6bd8716d72cac1ae7d23c65862b57cad2cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acbb4da7_3647a3b7",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-05T07:25:18Z",
+      "side": 1,
+      "message": "Is new_ip is a list? If yes, then you need to change the \"Description of argument\" section.",
+      "range": {
+        "startLine": 512,
+        "startChar": 53,
+        "endLine": 512,
+        "endChar": 68
+      },
+      "revId": "aceca6bd8716d72cac1ae7d23c65862b57cad2cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
