@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c315857_4e9bc0dd",
+        "filename": "data/boot_table_redfish.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-03-08T08:23:38Z",
+      "side": 1,
+      "message": "Inject OPAL TI\n    [Documentation]  OPAL terminate immediate procedure.\n    [Arguments]      ${stable_branch}\u003dmaster\n    ...              ${repo_dir_path}\u003d${EXECDIR}/repository\n    ...              ${repo_github_url}\u003dhttps://github.com/open-power/op-test\n\n\nwhy do we need the above path to be keyed in? atleast for this, i belive its handle well here",
+      "range": {
+        "startLine": 686,
+        "startChar": 7,
+        "endLine": 686,
+        "endChar": 66
+      },
+      "revId": "6da8e6ac135f4a8862f5ab6cb283c6b932dd75dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
