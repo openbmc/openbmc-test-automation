@@ -88,8 +88,8 @@ Assign Valid And Invalid Static IPv4 Address To VMI
     [Teardown]   Run keywords  Delete VMI IPv4 Address  AND  Test Teardown Execution
 
     # ip          gateway     netmask           valid_status_code
-    10.5.20.30    0.0.0.0     255.255.252.0    ${HTTP_ACCEPTED}
-    a.3.118.94    0.0.0.0     255.255.252.0    ${HTTP_BAD_REQUEST}
+    10.5.20.30    10.5.20.1     255.255.252.0    ${HTTP_ACCEPTED}
+    a.3.118.94    10.5.20.1     255.255.252.0    ${HTTP_BAD_REQUEST}
 
 
 Add Multiple IP Addresses On VMI Interface And Verify
@@ -97,9 +97,9 @@ Add Multiple IP Addresses On VMI Interface And Verify
     [Tags]  Add_Multiple_IP_Addresses_On_VMI_Interface_And_Verify
     [Teardown]   Run keywords  Delete VMI IPv4 Address  AND  Test Teardown Execution
 
-    ${ip1}=  Create dictionary  Address=10.5.5.10  SubnetMask=255.255.252.0  Gateway=0.0.0.0
-    ${ip2}=  Create dictionary  Address=10.5.5.11  SubnetMask=255.255.252.0  Gateway=0.0.0.0
-    ${ip3}=  Create dictionary  Address=10.5.5.12  SubnetMask=255.255.252.0  Gateway=0.0.0.0
+    ${ip1}=  Create dictionary  Address=10.5.5.10  SubnetMask=255.255.252.0  Gateway=10.5.5.1
+    ${ip2}=  Create dictionary  Address=10.5.5.11  SubnetMask=255.255.252.0  Gateway=10.5.5.1
+    ${ip3}=  Create dictionary  Address=10.5.5.12  SubnetMask=255.255.252.0  Gateway=10.5.5.1
     ${ips}=  Create List  ${ip1}  ${ip2}  ${ip3}
 
     Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
@@ -114,8 +114,8 @@ Modify IP Addresses On VMI Interface And Verify
     [Teardown]   Run keywords  Delete VMI IPv4 Address  AND  Test Teardown Execution
 
     # ip        gateway       netmask        valid_status_code
-    10.5.5.10   0.0.0.0     255.255.252.0    ${HTTP_ACCEPTED}
-    10.5.5.11   0.0.0.0     255.255.252.0    ${HTTP_ACCEPTED}
+    10.5.5.10   10.5.5.1     255.255.252.0    ${HTTP_ACCEPTED}
+    10.5.5.11   10.5.5.1     255.255.252.0    ${HTTP_ACCEPTED}
 
 Switch Between IP Origins On VMI And Verify Details
     [Documentation]  Switch between IP origins on VMI and verify details.
@@ -187,6 +187,7 @@ Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
 Enable DHCP When Static IP Configured And Verify Static IP
     [Documentation]  Enable DHCP when static ip configured and verify static ip
     [Tags]  Enable_DHCP_when_Static_IP_Configured_And_Verify_Static_IP
+    [Setup]  Redfish Power On
     [Teardown]  Test Teardown Execution
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
@@ -297,11 +298,11 @@ Verify To Update VMI Static IP Address With Different User Roles
     [Template]  Config VMI Static IP Address Using Different Users
     [Teardown]  Delete BMC Users Using Redfish
 
-    # username     password     ip_address  gateway  nemask       valid_status_code
-    admin_user     TestPwd123   10.5.10.20  0.0.0.0  255.255.0.0  ${HTTP_ACCEPTED}
-    operator_user  TestPwd123   10.5.10.30  0.0.0.0  255.255.0.0  ${HTTP_FORBIDDEN}
-    readonly_user  TestPwd123   10.5.20.40  0.0.0.0  255.255.0.0  ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123   10.5.30.50  0.0.0.0  255.255.0.0  ${HTTP_FORBIDDEN}
+    # username     password     ip_address  gateway    netmask       valid_status_code
+    admin_user     TestPwd123   10.5.10.20  10.5.10.1  255.255.0.0  ${HTTP_ACCEPTED}
+    operator_user  TestPwd123   10.5.10.30  10.5.10.1  255.255.0.0  ${HTTP_FORBIDDEN}
+    readonly_user  TestPwd123   10.5.20.40  10.5.20.1  255.255.0.0  ${HTTP_FORBIDDEN}
+    noaccess_user  TestPwd123   10.5.30.50  10.5.30.1  255.255.0.0  ${HTTP_FORBIDDEN}
 
 
 Verify To Read VMI Network Configuration With Different User Roles
