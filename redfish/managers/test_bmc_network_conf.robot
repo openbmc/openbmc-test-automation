@@ -575,7 +575,38 @@ Configure And Verify Multiple IPv4 Addresses
     Verify IP On BMC  ${test_ipv4_addr}
     Verify IP On BMC  ${test_ipv4_addr2}
 
+Verify Network Response When Host Is UP
+    [Documentation]  Verify network response when Host is up and running.
+    [Tags]  Verify_Network_Response_When_Host_Is_UP
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    Redfish Power On
+    Verify IP On BMC  ${test_ipv4_addr}
+
+    ${ping_status}=  Run Keyword And Return Status  Ping  ${OPENBMC_HOST}
+
+    Run Keyword if  ${ping_status} == ${False}
+    ...  Fail  ${OPENBMC_HOST} ping test failed.
+
+
+Verify Network Response When Host Is Down
+    [Documentation]  Verify network response when Host is off.
+    [Tags]  Verify_Network_Response_When_Host_Is_Down
+    [Setup]  Redfish Power On
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
+
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    Redfish Power Off
+    Verify IP On BMC  ${test_ipv4_addr}
+
+    ${ping_status}=  Run Keyword And Return Status  Ping  ${OPENBMC_HOST}
+
+    Run Keyword if  ${ping_status} == ${False}
+    ...  Fail  ${OPENBMC_HOST} ping test failed.
+ 
 *** Keywords ***
 
 Test Setup Execution
