@@ -576,6 +576,15 @@ Configure And Verify Multiple IPv4 Addresses
     Verify IP On BMC  ${test_ipv4_addr2}
 
 
+Verify Network Response When Host Is UP
+    [Documentation]  Verify network response when Host is up and running.
+    [Tags]  Verify_Network_Response_When_Host_Is_UP
+    [Template]  Get Network Response When Host Is Up and Down
+
+    # host_state
+    on
+    off
+
 *** Keywords ***
 
 Test Setup Execution
@@ -797,3 +806,29 @@ Delete Multiple Static IPv4 Addresses
        Delete IP Address  ${ip}
     END
     Validate Network Config On BMC
+
+
+Get Network Response When Host Is Up and Down
+    [Documentation]  Get network response when host is on and off.
+    [Arguments]  ${host_state}
+    [Teardown]  Run Keywords  Delete IP Address  ${test_ipv4_addr}
+    ...  AND  Set Global Variable  ${TEST_STATUS}  ${KEYWORD STATUS}  AND  FFDC On Test Case Fail
+
+    # Description of argument(s):
+    # host_state  Host state at which date time will be updated for verification
+    #             (eg. on, off).
+
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+
+    Run Keyword If  '${host_state}' == 'on'
+    ...    Redfish Power On  stack_mode=skip
+    ...  ELSE
+    ...    Redfish Power off  stack_mode=skip
+
+    ${ping_status}=  Run Keyword And Return Status
+    ...  Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    Run Keyword if  ${ping_status} == ${False}
+    ...  Fail  ${OPENBMC_HOST} ping test failed.
+
+    Verify IP On BMC  ${test_ipv4_addr}
