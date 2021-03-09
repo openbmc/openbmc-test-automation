@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0384b1c8_0daaaaa4",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-09T04:58:36Z",
+      "side": 1,
+      "message": "What is the use of session_info ?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 24
+      },
+      "revId": "73f142b751f0c552a0d90d87652ca6cb769c5204",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7676b04a_97a7252d",
         "filename": "lib/bmc_redfish_utils.robot",
         "patchSetId": 1
