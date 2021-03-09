@@ -576,7 +576,10 @@ def get_state(openbmc_host="",
     requested_chassis = ''
     bmc = ''
     requested_bmc = ''
-    boot_progress = ''
+    # BootProgress state will get populated when state logic enumerates the
+    # state URI. This is to prevent state dictionary  boot_progress value
+	# getting empty when the BootProgress is NOT found, making it optional.
+    boot_progress = 'NA'
     operating_system = ''
     host = ''
     requested_host = ''
