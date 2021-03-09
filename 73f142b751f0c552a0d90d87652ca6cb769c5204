@@ -16,6 +16,47 @@
       "revId": "73f142b751f0c552a0d90d87652ca6cb769c5204",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f870a85b_cc8de717",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-09T04:56:26Z",
+      "side": 1,
+      "message": "Yes I agree",
+      "parentUuid": "7676b04a_97a7252d",
+      "revId": "73f142b751f0c552a0d90d87652ca6cb769c5204",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eda61ce1_1e632024",
+        "filename": "redfish/managers/test_managers_bmc.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-09T04:56:26Z",
+      "side": 1,
+      "message": "Normally factory reset removes reset the ip address also. Are we doing this factory reset here? If yes then we need to restore ip address. But if this factory reset here just set other setting to default, then I would say just remove factory and keep \"The reset action resets the manager settings to defaults.\"",
+      "range": {
+        "startLine": 163,
+        "startChar": 53,
+        "endLine": 163,
+        "endChar": 70
+      },
+      "revId": "73f142b751f0c552a0d90d87652ca6cb769c5204",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
