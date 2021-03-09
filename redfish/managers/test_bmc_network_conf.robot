@@ -591,6 +591,16 @@ Config Multiple DNS Servers And Check Persistency
     Redfish.Login
     Verify CLI and Redfish Nameservers
 
+
+Test Network Response On Specified Host State
+    [Documentation]  Verify network response when Host is up and running.
+    [Tags]  Test_Network_Response_On_Specified_Host_State
+    [Template]  Verify Network Response On Specified Host State
+
+    # host_state
+    on
+    off
+
 *** Keywords ***
 
 Test Setup Execution
@@ -812,3 +822,29 @@ Delete Multiple Static IPv4 Addresses
        Delete IP Address  ${ip}
     END
     Validate Network Config On BMC
+
+Verify Network Response On Specified Host State
+    [Documentation]  Get network response when host is on and off.
+    [Arguments]  ${host_state}
+    [Teardown]  Run Keywords  Delete IP Address  ${test_ipv4_addr}
+    ...  AND  Set Global Variable  ${TEST_STATUS}  ${KEYWORD STATUS}  AND  FFDC On Test Case Fail
+
+    # Description of argument(s):
+    # host_state   if host_state is on then host is booted to operating system.
+    #              if host_state is off then host is power off.
+    #              (eg. on, off).
+
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+
+    Run Keyword If  '${host_state}' == 'on'
+    ...    Redfish Power On  stack_mode=skip
+    ...  ELSE
+    ...    Redfish Power off  stack_mode=skip
+
+    ${ping_status}=  Run Keyword And Return Status
+    ...  Ping Host  ${OPENBMC_HOST}
+
+    Run Keyword if  ${ping_status} == ${False}
+    ...  Fail  ${OPENBMC_HOST} ping test failed.
+
+    Verify IP On BMC  ${test_ipv4_addr}
