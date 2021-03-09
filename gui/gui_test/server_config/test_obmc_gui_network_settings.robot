@@ -432,7 +432,7 @@ Test Setup Execution
     Set Suite Variable  ${netmask_data}
 
     # Delete existing static IPv4 addresses and netmask if avilable.
-    Run keyword if  ${ip_data} == @{empty} and ${netmask_data} == @{empty}
+    Run Keyword If  ${ip_data} != @{empty} and ${netmask_data} != @{empty}
     ...  Delete And Verify Static IP Address On BMC
 
 
@@ -443,7 +443,7 @@ Test Teardown Execution
     ${netmask_length}=  Get Length  ${netmask_data}
 
     # Restore existing IPv4 addresses and netmasks if any..
-    Run keyword If  ${ip_length} == ${0} and ${netmask_length} == ${0}
+    Run Keyword If  ${ip_length} != ${0} and ${netmask_length} != ${0}
     ...  Add Static IP Address And Verify  ${ip_data}  ${netmask_data}
 
 
