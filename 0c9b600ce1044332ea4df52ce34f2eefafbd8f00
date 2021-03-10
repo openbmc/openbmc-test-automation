@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cab3d6f7_322c91fc",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-03-10T06:14:53Z",
+      "side": 1,
+      "message": "Suggestion:Believe it return lock value ,which would be empty or as you expect for test case.Can we add a line to compare if it gives expected value.",
+      "range": {
+        "startLine": 885,
+        "startChar": 3,
+        "endLine": 885,
+        "endChar": 13
+      },
+      "revId": "0c9b600ce1044332ea4df52ce34f2eefafbd8f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
