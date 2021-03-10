@@ -181,6 +181,64 @@ Get Concurrent Corrupted CSR Requests From Multiple Admin Users
         ...  msg=One or more operations has failed.
     END
 
+Get Concurrent Root Certificate Request And CSR Request From Different Admin Users
+    [Documentation]  Get multiple concurrent root certificate request and csr request from
+    ...  different Admins and verify no errors.
+    [Tags]  Get_Concurrent_Root_Certificate_Request_And_CSR_Request_From_Different_Admin_Users
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Get Concurrent CSR Request From Admin And Root Certificate Requests From Different Admin Users
+    [Documentation]  Get multiple concurrent csr request from admin and root certificate requests
+    ...  from different admin users and verify no errors.
+    [Tags]  Get_Concurrent_CSR_Request_From_Admin_And_Root_Certificate_Requests_From_Different_Admin_Users
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Get Concurrent Root Certificate Request And CSR Requests From Multiple Admin Users
+    [Documentation]  Get multiple concurrent root certificate request and csr request from
+    ...  multiple admins and verify no errors.
+    [Tags]  Get_Concurrent_Root_Certificate_Request_And_CSR_Requests_From_Multiple_Admin_Users
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Get Concurrent Root Certificate Request And Corrupted CSR Requests From Multiple Admin Users
+    [Documentation]  Get mutiple concurrent root certificate request and corrupted csr request from
+    ...  multiple admins and verify no errors.
+    [Tags]  Get_Concurrent_Root_Certificate_Request_And_Corrupted_CSR_Requests_From_Multiple_Admin_Users
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
 *** Keywords ***
 
 Generate CSR String
