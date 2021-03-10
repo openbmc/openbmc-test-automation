@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87c5bd50_b4e4644f",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-03-10T10:05:24Z",
+      "side": 1,
+      "message": "Suggestion: you can write these two test case in template form as code is very similar in nature.",
+      "revId": "ffff7d07b2ff25397d7de7b4a45d15a83c3103f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5583f8ab_386c3b15",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-03-10T10:05:24Z",
+      "side": 1,
+      "message": "Verify network response when Host is up and running.",
+      "revId": "ffff7d07b2ff25397d7de7b4a45d15a83c3103f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f58806e_5cacd9d4",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-03-10T10:05:24Z",
+      "side": 1,
+      "message": "Verify network response when Host is off.",
+      "revId": "ffff7d07b2ff25397d7de7b4a45d15a83c3103f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
