@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e84f0a5_c80296e9",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-03-10T09:59:10Z",
+      "side": 1,
+      "message": "Can you add description on below commands and error message.",
+      "revId": "7eb12fa720c8f1177f1e8faf6b3b68a2c2921055",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5fad6ab_ddcc5e58",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-03-10T09:59:10Z",
+      "side": 1,
+      "message": "tag should be \"Generate_Error_On_BMC_And_Verify_Trap_On_SNMP\"",
+      "revId": "7eb12fa720c8f1177f1e8faf6b3b68a2c2921055",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
