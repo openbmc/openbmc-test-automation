@@ -13,6 +13,25 @@ Library  SSHLibrary
 
 Test Teardown  FFDC On Test Case Fail
 
+*** Variables ***
+
+${CMD_INTERNAL_FAILURE}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
+${CMD_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.Timeout
+...  xyz.openbmc_project.Logging.Entry.Level.Error 2 "TIMEOUT_IN_MSEC" "5"
+...  "CALLOUT_INVENTORY_PATH" "/xyz/openbmc_project/inventory/system/chassis/motherboard"
+
+${CMD_INFORMATIONAL_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.TestError2
+...  xyz.openbmc_project.Logging.Entry.Level.Informational 0
+
+${SNMP_TRAP_BMC_INTERNAL_FAILURE}  xyz.openbmc_project.Common.Error.InternalFailure
+${SNMP_TRAP_BMC_CALLOUT_ERROR}  xyz.openbmc_project.Common.Error.Timeout
+${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}  xyz.openbmc_project.Common.Error.TestError2
+
 *** Test Cases ***
 Configure SNMP Manager On BMC And Verify
     [Documentation]  Configure SNMP Manager On BMC And Verify.
@@ -128,3 +147,36 @@ Generate Error On BMC And Verify If Trap Is Sent
 
     Should Contain  ${SNMP_LISTEN_OUT}  ${SNMP_TRAP_BMC_ERROR}
     ...  msg=Failed to receive trap message.
+
+Generate Error On BMC And Verify Trap On SNMP
+    [Documentation]  Generate error on bmc and verify trap on SNMP.
+    [Tags]  Generate_Error_On_BMC_And_Verify_Verify_Trap_On_SNMP
+    [Template]  Create Error On BMC And Verify If Trap Is Sent
+
+     # error_log                  expected_error
+     ${CMD_INTERNAL_FAILURE}      ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+     ${CMD_FRU_CALLOUT}           ${SNMP_TRAP_BMC_CALLOUT_ERROR}
+     ${CMD_INFORMATIONAL_ERROR}   ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
+
+*** Keywords ***
+
+Create Error On BMC And Verify If Trap Is Sent
+    [Documentation]  Generate Error On BMC And Verify If Trap Is Sent.
+    [Arguments]  ${error_log}  ${expected_error}
+
+    # Description of argument(s):
+    # error_log                           Error logs to be created.
+    # expected_error                      Expected error on SNMP.
+
+    Configure SNMP Manager On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}  Valid
+
+    Start SNMP Manager
+    BMC Execute Command  ${error_log}
+    SSHLibrary.Switch Connection  snmp_server
+    ${SNMP_LISTEN_OUT}=  Read  delay=1s
+    Delete SNMP Manager And Object  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    Should Contain  ${SNMP_LISTEN_OUT}  ${expected_error}
+    ...  msg=Failed to receive trap message.
+
