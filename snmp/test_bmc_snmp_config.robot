@@ -7,11 +7,31 @@ Resource  ../lib/snmp/resource.robot
 Resource  ../lib/snmp/snmp_utils.robot
 Resource  ../lib/openbmc_ffdc.robot
 Resource  ../lib/logging_utils.robot
+Library   ../lib/jobs_processing.py
 
 Library  String
 Library  SSHLibrary
 
-Test Teardown  FFDC On Test Case Fail
+#Test Teardown  FFDC On Test Case Fail
+
+*** Variables ***
+
+${CMD_INTERNAL_FAILURE}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
+...  xyz.openbmc_project.Logging.Entry.Level.Error 0
+
+${CMD_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.Timeout
+...  xyz.openbmc_project.Logging.Entry.Level.Error 2 "TIMEOUT_IN_MSEC" "5"
+...  "CALLOUT_INVENTORY_PATH" "/xyz/openbmc_project/inventory/system/chassis/motherboard"
+
+${CMD_INFORMATIONAL_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.TestError2
+...  xyz.openbmc_project.Logging.Entry.Level.Informational 0
+${CMD_DEBUG_TRABALL_ERROR}=  /tmp/tarball/bin/logging-test -c AutoTestSimple
+${SNMP_TRAP_BMC_INTERNAL_FAILURE}  xyz.openbmc_project.Common.Error.InternalFailure
+${SNMP_TRAP_BMC_CALLOUT_ERROR}  xyz.openbmc_project.Common.Error.Timeout
+${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}  xyz.openbmc_project.Common.Error.TestError2
 
 *** Test Cases ***
 Configure SNMP Manager On BMC And Verify
@@ -116,15 +136,47 @@ Generate Error On BMC And Verify If Trap Is Sent
     [Documentation]  Generate Error On BMC And Verify If Trap Is Sent.
     [Tags]  Generate_Error_On_BMC_And_Verify_If_Trap_Is_Sent
     [Setup]  Install Tarball
+    [Template]  Create Error On BMC And Verify If Trap Is Sent
+
+    # event_log                   expected_error
+    ${CMD_DEBUG_TRABALL_ERROR}    ${SNMP_TRAP_BMC_ERROR}
+
+Generate Error On BMC And Verify Trap On SNMP
+    [Documentation]  Generate error on bmc and verify trap on SNMP.
+    [Tags]  Generate_Error_On_BMC_And_Verify_Trap_On_SNMP
+    [Template]  Create Error On BMC And Verify If Trap Is Sent
+
+     # event_log                  expected_error
+     ${CMD_INTERNAL_FAILURE}      ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+     ${CMD_FRU_CALLOUT}           ${SNMP_TRAP_BMC_CALLOUT_ERROR}
+     ${CMD_INFORMATIONAL_ERROR}   ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
+
+*** Keywords ***
+
+Create Error On BMC And Verify If Trap Is Sent
+    [Documentation]  Generate Error On BMC And Verify If Trap Is Sent.
+    [Arguments]  ${event_log}  ${expected_error}
+
+    # Description of argument(s):
+    # event_log                           Event logs to be created.
+    # expected_error                      Expected error on SNMP.
 
     Configure SNMP Manager On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}  Valid
 
     Start SNMP Manager
-    BMC Execute Command  /tmp/tarball/bin/logging-test -c AutoTestSimple
+    ${date} =   Get Current Date  result_format=%Y-%m-%d
+    BMC Execute Command  ${event_log}
     SSHLibrary.Switch Connection  snmp_server
     ${SNMP_LISTEN_OUT}=  Read  delay=1s
     Delete SNMP Manager And Object  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     SSHLibrary.Execute Command  sudo killall snmptrapd
+    ${lines} =  Split To Lines 	 ${SNMP_LISTEN_OUT}
+    ${trap_info}=  Get From List  ${lines}  -1
+    ${SNMP_TRAP} =  Split String  ${trap_info}  \t
 
-    Should Contain  ${SNMP_LISTEN_OUT}  ${SNMP_TRAP_BMC_ERROR}
-    ...  msg=Failed to receive trap message.
+    Should Contain  ${SNMP_TRAP}[0]  DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks:
+    Should Be Equal  ${SNMP_TRAP}[1]  SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.49871.1.0.0.1
+    Should Match Regexp  ${SNMP_TRAP}[2]  SNMPv2-SMI::enterprises.49871.1.0.1.1 = Gauge32: \[0-9]*
+    Should Match Regexp  ${SNMP_TRAP}[3]  SNMPv2-SMI::enterprises.49871.1.0.1.2 = Opaque: UInt64: \[0-9]*
+    Should Match Regexp  ${SNMP_TRAP}[4]  SNMPv2-SMI::enterprises.49871.1.0.1.3 = INTEGER: \[0-9]
+    Should Be Equal  ${SNMP_TRAP}[5]  SNMPv2-SMI::enterprises.49871.1.0.1.4 = STRING: "${expected_error}"
