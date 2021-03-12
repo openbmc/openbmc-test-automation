@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "7ba74e54_dc1a4be4",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-03-12T07:42:09Z",
+      "side": 1,
+      "message": "This looks good, there is many error logs, we can call use this error logs directly using template.",
+      "parentUuid": "088ffa00_9260d70c",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 52
+      },
+      "revId": "7eb12fa720c8f1177f1e8faf6b3b68a2c2921055",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5fad6ab_ddcc5e58",
         "filename": "snmp/test_bmc_snmp_config.robot",
         "patchSetId": 1
@@ -56,6 +80,24 @@
       "revId": "7eb12fa720c8f1177f1e8faf6b3b68a2c2921055",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cc42083_09ecbc68",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-03-12T07:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5fad6ab_ddcc5e58",
+      "revId": "7eb12fa720c8f1177f1e8faf6b3b68a2c2921055",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +141,48 @@
     },
     {
       "key": {
+        "uuid": "57666273_a7be0417",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-03-12T07:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa34c730_d9b862ba",
+      "revId": "7eb12fa720c8f1177f1e8faf6b3b68a2c2921055",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "becdc83e_167cb8c3",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-03-12T07:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a74dd81a_65b9690d",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 19
+      },
+      "revId": "7eb12fa720c8f1177f1e8faf6b3b68a2c2921055",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4749951a_1bf7eeac",
         "filename": "snmp/test_bmc_snmp_config.robot",
         "patchSetId": 1
@@ -133,6 +217,24 @@
     },
     {
       "key": {
+        "uuid": "dde3c739_0c04fb65",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-03-12T07:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02b7043d_6d5a9e6a",
+      "revId": "7eb12fa720c8f1177f1e8faf6b3b68a2c2921055",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fda31c7a_1d956771",
         "filename": "snmp/test_bmc_snmp_config.robot",
         "patchSetId": 1
@@ -147,6 +249,24 @@
       "revId": "7eb12fa720c8f1177f1e8faf6b3b68a2c2921055",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "024351fe_7f7825f6",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-03-12T07:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fda31c7a_1d956771",
+      "revId": "7eb12fa720c8f1177f1e8faf6b3b68a2c2921055",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
