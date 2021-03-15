@@ -22,6 +22,30 @@
       "revId": "babf3fab5ae2b86503c79cdd880a8845ef89bfa6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e22e8ba5_21a83f3b",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-15T09:24:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54f4a424_da13396a",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 36
+      },
+      "revId": "babf3fab5ae2b86503c79cdd880a8845ef89bfa6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
