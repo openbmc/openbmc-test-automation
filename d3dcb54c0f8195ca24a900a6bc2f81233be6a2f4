@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89141d6b_88b3cab6",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-15T09:49:06Z",
+      "side": 1,
+      "message": "BIOS",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 12
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0cf5643_d02a9812",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-15T09:49:06Z",
+      "side": 1,
+      "message": "BIOS",
+      "range": {
+        "startLine": 80,
+        "startChar": 43,
+        "endLine": 80,
+        "endChar": 47
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f77c5181_aad6923d",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-15T09:49:06Z",
+      "side": 1,
+      "message": "Remove one blank line above.",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 20
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "993be52a_fd8419b7",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-15T09:49:06Z",
+      "side": 1,
+      "message": "Output of what? If it\u0027s the output of below pldmtool command. Then move this below pldmtool command.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 7
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8af312d8_e808a19e",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-15T09:49:06Z",
+      "side": 1,
+      "message": "Add one more blank line. Always keep two blank line between two keywords or test cases.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 8
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98bfcdb3_fa789642",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-15T09:49:06Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 7
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fe8f925_3a81f74b",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-15T09:49:06Z",
+      "side": 1,
+      "message": "Add one more blank line.",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 8
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bef976a_1bdfebca",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-15T09:49:06Z",
+      "side": 1,
+      "message": "Set BIOS attribute with the given values.",
+      "range": {
+        "startLine": 194,
+        "startChar": 21,
+        "endLine": 195,
+        "endChar": 91
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0ecbdf6_9e527e4c",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-15T09:49:06Z",
+      "side": 1,
+      "message": "BIOS",
+      "range": {
+        "startLine": 199,
+        "startChar": 21,
+        "endLine": 199,
+        "endChar": 25
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe31535e_0a0a0ba2",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-15T09:49:06Z",
+      "side": 1,
+      "message": "Remove these spaces to align with above line.",
+      "range": {
+        "startLine": 201,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 24
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
