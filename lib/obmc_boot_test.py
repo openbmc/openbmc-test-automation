@@ -66,6 +66,8 @@ boot_success = 0
 status_dir_path = os.environ.get('STATUS_DIR_PATH', "")
 if status_dir_path != "":
     status_dir_path = os.path.normpath(status_dir_path) + os.sep
+redfish_support_trans_state = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
+    int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
 redfish_supported = BuiltIn().get_variable_value("${REDFISH_SUPPORTED}", default=False)
 redfish_rest_supported = BuiltIn().get_variable_value("${REDFISH_REST_SUPPORTED}", default=False)
 if redfish_supported:
@@ -272,7 +274,7 @@ def initial_plug_in_setup():
                          "status_dir_path", "base_tool_dir_path",
                          "ffdc_list_file_path", "ffdc_report_list_path",
                          "ffdc_summary_list_path", "execdir", "redfish_supported",
-                         "redfish_rest_supported"]
+                         "redfish_rest_supported", "redfish_support_trans_state"]
 
     plug_in_vars = parm_list + additional_values
 
