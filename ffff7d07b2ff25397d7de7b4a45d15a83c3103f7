@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4bc9f693_4fb0196c",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-03-16T10:56:43Z",
+      "side": 1,
+      "message": "you can create a variable host_state and pass the value as ON in case you want to keep the Host ON state when OFF, Host needs to power off. by using this you can incorporate in single keyword.",
+      "parentUuid": "d0b2bec7_d626f314",
+      "revId": "ffff7d07b2ff25397d7de7b4a45d15a83c3103f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5583f8ab_386c3b15",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 1
