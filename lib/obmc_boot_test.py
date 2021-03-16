@@ -272,7 +272,7 @@ def initial_plug_in_setup():
                          "status_dir_path", "base_tool_dir_path",
                          "ffdc_list_file_path", "ffdc_report_list_path",
                          "ffdc_summary_list_path", "execdir", "redfish_supported",
-                         "redfish_rest_supported"]
+                         "redfish_rest_supported", "REDFISH_SUPPORT_TRANS_STATE"]
 
     plug_in_vars = parm_list + additional_values
 
