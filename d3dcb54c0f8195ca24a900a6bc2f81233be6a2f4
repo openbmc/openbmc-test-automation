@@ -237,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "23bf3ebf_1163e0f9",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-16T10:55:06Z",
+      "side": 1,
+      "message": "Actually blank line needs to be added before the keyword/test case name. So that two blank line are between two keywords or test cases.",
+      "parentUuid": "e69aae5b_e6927dcd",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 8
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98bfcdb3_fa789642",
         "filename": "pldm/test_pldm_bios.robot",
         "patchSetId": 9
@@ -319,6 +343,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "6fe8f925_3a81f74b",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 8
+      },
+      "revId": "d3dcb54c0f8195ca24a900a6bc2f81233be6a2f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca8d3df8_9def3627",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-03-16T10:55:06Z",
+      "side": 1,
+      "message": "Same comment as above. Please add blank like above keyword.",
+      "parentUuid": "634756f6_e4704765",
       "range": {
         "startLine": 193,
         "startChar": 0,
