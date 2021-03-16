@@ -117,6 +117,30 @@
       "revId": "0c9b600ce1044332ea4df52ce34f2eefafbd8f00",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2cd88cf_d46c3f2f",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-03-16T04:49:58Z",
+      "side": 1,
+      "message": "i thought not required , if it fail ,it will throw status code not match, you can debug from there.",
+      "parentUuid": "4e3aa1f8_d177b1ff",
+      "range": {
+        "startLine": 885,
+        "startChar": 3,
+        "endLine": 885,
+        "endChar": 11
+      },
+      "revId": "0c9b600ce1044332ea4df52ce34f2eefafbd8f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
