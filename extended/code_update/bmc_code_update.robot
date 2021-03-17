@@ -19,6 +19,9 @@ Suite Setup       Suite Setup Execution
 
 Test Teardown     Test Teardown Execution
 
+# Force the test to timedout to prevent test hanging.
+Test Timeout      20 minutes
+
 Force Tags        BMC_Code_Update
 
 *** Variables ***
