@@ -31,6 +31,23 @@ Get IPv6 Address And Verify
     END
 
 
+Get PrefixLength And Verify
+    [Documentation]  Get IPv6 prefix length and verify.
+    [Tags]  Get_PrefixLength_And_Verify
+
+    FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
+      Verify IPv6 On BMC  ${ipv6_network_configuration['PrefixLength']}
+    END
+
+
+Get IPv6 Default Gateway And Verify
+    [Documentation]  Get IPv6 default gatway and verify.
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${ipv6_gateway}=  Get From Dictionary  ${resp.dict}  IPv6DefaultGateway
+    Verify IPv6 Default Gateway On BMC  ${ipv6_gateway}
+
+
 *** Keywords ***
 
 Test Setup Execution
