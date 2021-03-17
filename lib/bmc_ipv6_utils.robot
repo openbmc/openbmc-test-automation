@@ -51,3 +51,39 @@ Verify IPv6 On BMC
     @{ip_data}=  Get BMC IPv6 Info
     Should Contain Match  ${ip_data}  ${ipv6}/*
     ...  msg=IPv6 address does not exist.
+
+
+Verify IPv6 Default Gateway On BMC
+    [Documentation]  Verify IPv6 default gateway on BMC.
+    [Arguments]  ${gateway_ip}=${EMPTY}
+
+    # Description of argument(s):
+    # gateway_ip  Gateway IPv6 address.
+
+    ${route_info}=  Get BMC IPv6 Route Info
+
+    # If gateway IP is empty it will not have route entry.
+
+    Run Keyword If  '${gateway_ip}' == '${EMPTY}'
+    ...      Pass Execution  Gateway IP is not configured.
+    ...  ELSE
+    ...      Should Contain  ${route_info}  ${gateway_ip}
+    ...      msg=Gateway IP address not matching
+
+
+Get BMC IPv6 Route Info
+    [Documentation]  Get IPv6 route info on BMC.
+
+    # Sample output of "ip -6 route":
+    # unreachable ::/96 dev lo metric 1024 error -113
+    # unreachable ::ffff:0.0.0.0/96 dev lo metric 1024 error -113
+    # 2xxx:xxxx:0:1::/64 dev eth0 proto kernel metric 256
+    # fe80::/64 dev eth1 proto kernel metric 256
+    # fe80::/64 dev eth0 proto kernel metric 256
+    # fe80::/64 dev eth2 proto kernel metric 256
+
+
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  /sbin/ip -6 route
+
+    [Return]  ${cmd_output}
