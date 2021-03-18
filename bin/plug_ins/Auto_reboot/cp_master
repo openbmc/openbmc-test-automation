@@ -6,7 +6,6 @@ Set the auto_boot policy according to the caller's wishes.
 
 import os
 import sys
-from robot.libraries.BuiltIn import BuiltIn
 
 save_dir_path = sys.path.pop(0)
 
@@ -35,12 +34,6 @@ stock_list = [("test_mode", get_plug_default("test_mode", 0)),
 
 AUTO_REBOOT_DISABLE = "1"
 
-REDFISH_SUPPORT_TRANS_STATE = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0))
-try:
-    REDFISH_SUPPORT_TRANS_STATE = REDFISH_SUPPORT_TRANS_STATE or \
-        int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
-except:
-    pass
 
 def validate_parms():
 
@@ -80,9 +73,8 @@ def main():
 
     cmd_buf = create_robot_cmd_string("extended/run_keyword.robot", OPENBMC_HOST, SSH_PORT, HTTPS_PORT,
                                       REST_USERNAME, REST_PASSWORD, OPENBMC_USERNAME, OPENBMC_PASSWORD,
-                                      REDFISH_SUPPORT_TRANS_STATE, keyword_string, lib_file_path, quiet,
+                                      keyword_string, lib_file_path, quiet,
                                       test_mode, debug, outputdir, output, log, report)
-
     if not robot_cmd_fnc(cmd_buf):
         print_error_report("Robot command execution failed.")
         exit(1)
