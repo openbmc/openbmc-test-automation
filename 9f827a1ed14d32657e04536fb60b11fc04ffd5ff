@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "219874c7_220543a4",
+        "filename": "redfish/systems/test_bios_attributes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-18T12:09:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "386404da_6545353d",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 8
+      },
+      "revId": "9f827a1ed14d32657e04536fb60b11fc04ffd5ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4252ce99_426ad3a6",
         "filename": "redfish/systems/test_bios_attributes.robot",
         "patchSetId": 1
@@ -53,6 +77,30 @@
       "writtenOn": "2021-03-18T09:31:34Z",
       "side": 1,
       "message": "we dont have possible values for string \u0026 integer attributes ? how are they tested ?",
+      "range": {
+        "startLine": 62,
+        "startChar": 24,
+        "endLine": 62,
+        "endChar": 68
+      },
+      "revId": "9f827a1ed14d32657e04536fb60b11fc04ffd5ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "057c4e81_5a7123b3",
+        "filename": "redfish/systems/test_bios_attributes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-18T12:09:09Z",
+      "side": 1,
+      "message": "string and integer values are not yet tested... currently taking care of att handles with multiple values in get bios table",
+      "parentUuid": "4252ce99_426ad3a6",
       "range": {
         "startLine": 62,
         "startChar": 24,
