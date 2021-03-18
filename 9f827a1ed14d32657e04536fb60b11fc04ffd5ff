@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1ad61b6f_f1d6252e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-18T12:14:37Z",
+      "side": 1,
+      "message": "oops something got appended by mistake",
+      "parentUuid": "d38d09dd_3ad07328",
+      "revId": "9f827a1ed14d32657e04536fb60b11fc04ffd5ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "386404da_6545353d",
         "filename": "redfish/systems/test_bios_attributes.robot",
         "patchSetId": 1
@@ -110,6 +128,30 @@
       "revId": "9f827a1ed14d32657e04536fb60b11fc04ffd5ff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "368f5d8b_4f53eb36",
+        "filename": "redfish/systems/test_bios_attributes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-03-18T12:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "057c4e81_5a7123b3",
+      "range": {
+        "startLine": 62,
+        "startChar": 24,
+        "endLine": 62,
+        "endChar": 68
+      },
+      "revId": "9f827a1ed14d32657e04536fb60b11fc04ffd5ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
