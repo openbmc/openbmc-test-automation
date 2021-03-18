@@ -871,6 +871,7 @@ Redfish Get Boot Progress
 
 Redfish Get States
     [Documentation]  Return all the BMC and host states in dictionary.
+    [Timeout]  30 Seconds
 
     # Refer: openbmc/docs/designs/boot-progress.md
 
