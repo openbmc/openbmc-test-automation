@@ -22,7 +22,7 @@ Open Telnet Connection To BMC Serial Console
     # i_port    The port of the serial console.
     # i_model   The path to the system data, i.e. "./data/Witherspoon.py".
 
-    ${prompt_string}=  Convert To Lowercase  ${OPENBMC_MODEL} login:
+    ${prompt_string}=  Convert To Lowercase  ${i_model} login:
     Telnet.Open Connection
     ...  ${i_host}  port=${i_port}  prompt=#
     Telnet.Set Timeout  30 seconds
