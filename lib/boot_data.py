@@ -29,6 +29,8 @@ code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
 redfish_support_trans_state = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
     int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
 
+platform_arch_type = BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
+
 
 def create_boot_table(file_path=None,
                       os_host=""):
@@ -52,6 +54,8 @@ def create_boot_table(file_path=None,
     if file_path is None:
         if redfish_support_trans_state:
             file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table_redfish.json')
+        elif platform_arch_type == "x86":
+            file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table_x86.json')
         else:
             file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table.json')
 
