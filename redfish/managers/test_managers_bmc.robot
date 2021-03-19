@@ -18,7 +18,7 @@ Test Teardown    Test Teardown Execution
 ${SYSTEM_SHUTDOWN_TIME}    ${5}
 
 # Strings to check from journald.
-${REBOOT_REGEX}    ^\-- Reboot --
+${REBOOT_REGEX}    ^\-- Boot
 
 *** Test Cases ***
 
