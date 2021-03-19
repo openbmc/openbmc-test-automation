@@ -7,6 +7,9 @@ Variables         ../data/variables.py
 
 *** Variables ***
 
+# By default power, support x86 as well.
+${PLATFORM_ARCH_TYPE}             power
+
 # Transition REST vs Redfish ONLY temporary changes for stagging
 # automation infrastructure change and for continuity.
 ${REDFISH_SUPPORT_TRANS_STATE}    ${0}

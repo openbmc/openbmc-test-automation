@@ -81,6 +81,8 @@ OBMC_STATES_VERSION = int(os.environ.get('OBMC_STATES_VERSION', 1))
 redfish_support_trans_state = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
     int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
 
+platform_arch_type = BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
+
 # valid_os_req_states and default_os_req_states are used by the os_get_state
 # function.
 # valid_os_req_states is a list of state information supported by the
@@ -254,6 +256,23 @@ else:
                                    ('bmc', '^$'),
                                    ('boot_progress', '^$'),
                                    ('host', '^$')])
+
+# Filter the states based on platform type.
+if platform_arch_type == "x86":
+    default_req_states.remove("operating_system")
+    default_req_states.remove("boot_progress")
+    valid_req_states.remove("operating_system")
+    valid_req_states.remove("boot_progress")
+    del default_state["operating_system"]
+    del default_state["boot_progress"]
+    del standby_match_state["operating_system"]
+    del standby_match_state["boot_progress"]
+    del os_running_match_state["operating_system"]
+    del os_running_match_state["boot_progress"]
+    del master_os_up_match["operating_system"]
+    del master_os_up_match["boot_progress"]
+    del invalid_state_match["operating_system"]
+    del invalid_state_match["boot_progress"]
 
 
 def return_state_constant(state_name='default_state'):
