@@ -68,6 +68,7 @@ if status_dir_path != "":
     status_dir_path = os.path.normpath(status_dir_path) + os.sep
 redfish_supported = BuiltIn().get_variable_value("${REDFISH_SUPPORTED}", default=False)
 redfish_rest_supported = BuiltIn().get_variable_value("${REDFISH_REST_SUPPORTED}", default=False)
+redfish_delete_sessions = int(BuiltIn().get_variable_value("${REDFISH_DELETE_SESSIONS}", default=1))
 if redfish_supported:
     redfish = BuiltIn().get_library_instance('redfish')
     default_power_on = "Redfish Power On"
@@ -995,8 +996,9 @@ def test_loop_body():
 
     # This should help prevent ConnectionErrors.
     # Purge all redfish and REST connection sessions.
-    grk.run_key_u("Close All Connections", ignore=1)
-    grk.run_key_u("Delete All Redfish Sessions", ignore=1)
+    if redfish_delete_sessions:
+        grk.run_key_u("Close All Connections", ignore=1)
+        grk.run_key_u("Delete All Redfish Sessions", ignore=1)
 
     return True
 

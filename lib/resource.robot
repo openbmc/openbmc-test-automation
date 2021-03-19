@@ -9,7 +9,10 @@ Variables         ../data/variables.py
 
 # Transition REST vs Redfish ONLY temporary changes for stagging
 # automation infrastructure change and for continuity.
-${REDFISH_SUPPORT_TRANS_STATE}    0
+${REDFISH_SUPPORT_TRANS_STATE}    ${0}
+
+# By default Delete all Redfish session per boot run.
+${REDFISH_DELETE_SESSIONS}        ${1}
 
 ${OPENBMC_MODEL}  ${EMPTY}
 ${OPENBMC_HOST}   ${EMPTY}
