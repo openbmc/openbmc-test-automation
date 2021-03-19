@@ -16,6 +16,24 @@
       "revId": "d86e45c6c52099e073273f92b5351e9e2ef8dd06",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9890b45b_d0cbd2a3",
+        "filename": "lib/obmc_boot_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-03-19T13:08:40Z",
+      "side": 1,
+      "message": "this is for user to override the default delete session , so it doesnt impact the verification testing for boot",
+      "parentUuid": "578e72f8_1032770f",
+      "revId": "d86e45c6c52099e073273f92b5351e9e2ef8dd06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
