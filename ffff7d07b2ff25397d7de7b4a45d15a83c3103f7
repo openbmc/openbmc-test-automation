@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "fd66213e_3e023272",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-03-19T06:42:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bc9f693_4fb0196c",
+      "revId": "ffff7d07b2ff25397d7de7b4a45d15a83c3103f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5583f8ab_386c3b15",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 1
