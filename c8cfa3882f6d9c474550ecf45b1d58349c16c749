@@ -34,6 +34,47 @@
       "revId": "c8cfa3882f6d9c474550ecf45b1d58349c16c749",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fbefe09_ed01602b",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-03-19T08:28:13Z",
+      "side": 1,
+      "message": "OK. It more of looks like consistency or stress test than fn verification.\nI think 2 loops is good enough, what you say.",
+      "parentUuid": "80b3ffa5_a14db278",
+      "revId": "c8cfa3882f6d9c474550ecf45b1d58349c16c749",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59021dc4_fec74d1c",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-03-19T08:28:13Z",
+      "side": 1,
+      "message": "any reason why 3 concurrent requests on above test and 4 here?",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 90
+      },
+      "revId": "c8cfa3882f6d9c474550ecf45b1d58349c16c749",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
