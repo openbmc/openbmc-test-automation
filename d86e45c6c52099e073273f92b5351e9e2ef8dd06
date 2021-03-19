@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "578e72f8_1032770f",
+        "filename": "lib/obmc_boot_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000280
+      },
+      "writtenOn": "2021-03-19T12:47:23Z",
+      "side": 1,
+      "message": "This won\u0027t work for a DVT GUI parameter.",
+      "revId": "d86e45c6c52099e073273f92b5351e9e2ef8dd06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
