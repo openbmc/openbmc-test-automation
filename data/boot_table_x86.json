@@ -6,13 +6,11 @@
         "start": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -28,13 +26,11 @@
         "start": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -50,13 +46,11 @@
         "start": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -79,7 +73,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -99,7 +92,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -119,7 +111,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -139,7 +130,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -159,7 +149,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -179,7 +168,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -195,7 +183,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -204,7 +191,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$",
             "os_ping": "^0$",
             "os_login": "^0$",
@@ -224,7 +210,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -233,7 +218,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -249,7 +233,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -258,7 +241,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -273,7 +255,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -282,7 +263,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -298,7 +278,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -307,7 +286,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -327,7 +305,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -343,7 +320,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -360,7 +336,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -373,7 +348,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -382,7 +356,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -402,7 +375,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -416,7 +388,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -425,7 +396,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -446,7 +416,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -460,7 +429,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -469,7 +437,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -490,7 +457,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -504,7 +470,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -513,7 +478,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -534,7 +498,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -548,7 +511,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -557,7 +519,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -578,7 +539,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^Off$",
-            "operating_system": "^Inactive$",
             "host": "^Off$"
         },
         "bmc_reboot": 1,
@@ -594,7 +554,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -603,7 +562,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -620,7 +578,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -629,7 +586,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -645,7 +601,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -654,7 +609,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -670,7 +624,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -679,7 +632,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -695,7 +647,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -704,7 +655,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -720,7 +670,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -729,7 +678,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -745,7 +693,6 @@
         "start": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
@@ -754,7 +701,6 @@
         "end": {
             "rest": "^1$",
             "chassis": "^On$",
-            "operating_system": "^BootComplete$",
             "host": "^Running$",
             "os_ping": "^1$",
             "os_login": "^1$",
