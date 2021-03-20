@@ -5,6 +5,8 @@ r"""
 #              commands and files to be collected as a part
 #              of the test case failure.
 """
+from robot.libraries.BuiltIn import BuiltIn
+
 # -------------------
 # FFDC default list
 # -------------------
@@ -154,6 +156,14 @@ FFDC_METHOD_CALL = {
         'Redfish Log': 'Enumerate Redfish Resources',
     },
 }
+
+platform_arch_type = BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
+#Filter the logs based on platform type.
+if platform_arch_type == "x86":
+    del FFDC_BMC_FILE['BMC FILES']['PEL_logs_list.json']
+    del FFDC_BMC_FILE['BMC FILES']['PEL_logs_display.json']
+    del FFDC_METHOD_CALL['BMC LOGS']['PEL Files']
+
 # -----------------------------------------------------------------
 # base class for FFDC default list
 
