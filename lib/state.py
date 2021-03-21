@@ -692,6 +692,12 @@ def get_state(openbmc_host="",
                     if "hypervisor0" in url_path:
                         continue
 
+                    if platform_arch_type == "x86":
+                        # Skip conflicting "CurrentPowerState" URL from the enum
+                        # /xyz/openbmc_project/state/chassis_system0
+                        if "chassis_system0" in url_path:
+                            continue
+
                     for attr_name in ret_values[url_path]:
                         # Create a state key value based on the attr_name.
                         try:
