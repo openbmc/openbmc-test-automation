@@ -65,7 +65,7 @@ Check For Error Logs
     [Documentation]  Fail if there are error logs. Ignore logs with
     ...              severity in the ignorelist.
 
-    [Arguments]  ${ignorelist
+    [Arguments]  ${ignorelist}
 
     # Description of Argument(s):
     # ignorelist A list to be used to filter out esels which are
@@ -84,6 +84,6 @@ Check For Error Logs
     ${error_log_severities}=  Nested Get  Severity  ${error_logs}
     # Subtract the IGNORETLIST from the error_log_severities.
     ${problem_error_logs}=  Evaluate
-    ...  list(set($error_log_severities) - set($ignorelist)
+    ...  list(set($error_log_severities) - set($ignorelist))
 
     Valid Length  problem_error_logs   max_length=0
