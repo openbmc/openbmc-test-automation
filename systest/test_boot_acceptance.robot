@@ -43,7 +43,7 @@ Library         ../lib/bmc_ssh_utils.py
 Resource        ../lib/resource.robot
 Resource        ../syslib/utils_os.robot
 Resource        ../lib/bmc_network_utils.robot
-Resource        ../../lib/bmc_redfish_resource.robot
+Resource        ../lib/bmc_redfish_resource.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Collect HTX Log Files
