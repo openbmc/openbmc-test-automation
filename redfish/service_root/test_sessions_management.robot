@@ -42,7 +42,7 @@ Set Session Timeout And Verify Response Code
     [Template]  Set Session Timeout And Verify
     [Teardown]  Set Session Timeout And Verify  ${3600}  ${HTTP_OK}
 
-    # The mininum & maximum allowed values for session timeout are 30
+    # The minimum & maximum allowed values for session timeout are 30
     # seconds and 86400 seconds respectively as per the session service
     # schema mentioned at
     # https://redfish.dmtf.org/schemas/v1/SessionService.v1_1_7.json

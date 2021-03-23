@@ -160,7 +160,7 @@ Fail To Release Multiple Lock With Invalid TransactionID
 
 
 Fail To Release Multiple Lock With Valid And Invalid TransactionID
-    [Documentation]  Release multiple lock with valid and invalid trasaction.
+    [Documentation]  Release multiple lock with valid and invalid transaction.
     [Tags]  Fail_To_Release_Multiple_Lock_With_Valid_And_Invalid_TransactionID
     [Template]  Verify Fail To Release Multiple Lock With Valid And Invalid TransactionID
 
@@ -963,7 +963,7 @@ Verify Fail To Release Multiple Lock With Invalid TransactionID
 
 
 Verify Fail To Release Multiple Lock With Valid And Invalid TransactionID
-    [Documentation]  Verify fail to be release multiple lock with valid and invalid trasaction ID.
+    [Documentation]  Verify fail to be release multiple lock with valid and invalid transaction ID.
     [Arguments]  ${client_id}  ${lock_type}  ${release_lock_type}
 
     # Description of argument(s):
@@ -997,7 +997,7 @@ Verify Fail To Release Multiple Lock With Valid And Invalid TransactionID
 
 
 Verify Fail To Release Lock With TransactionID As String Type
-    [Documentation]  Verify fail to be release lock with trasaction ID as string data type.
+    [Documentation]  Verify fail to be release lock with transaction ID as string data type.
     [Arguments]  ${client_id}  ${lock_type}  ${release_lock_type}
 
     # Description of argument(s):
