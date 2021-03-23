@@ -21,6 +21,10 @@ Resource          ../lib/bmc_redfish_resource.robot
 Resource          ../lib/bmc_redfish_utils.robot
 Library           ../lib/gen_misc.py
 
+# Force the test to timedout to prevent test hanging.
+Test Timeout      10 minutes
+
+
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0
 
@@ -54,32 +58,46 @@ Get To Stable State
 
     Open Connection And Log In  host=${OPENBMC_HOST}
 
-    Run Keyword If  ${REDFISH_SUPPORTED}  Redfish.Login
-
-    Wait Until Keyword Succeeds
-    ...  1 min  30 sec  Initialize OpenBMC
-
-    ${ready_status}=  Run Keyword And Return Status  Is BMC Ready
-    Run Keyword If  '${ready_status}' == '${False}'
-    ...  Put BMC State  Ready
-    ...  ELSE IF  ${REDFISH_SUPPORT_TRANS_STATE} == ${1}
-    ...    Redfish Power Off  stack_mode=skip
+    Run Keyword If  ${REDFISH_SUPPORTED}
+    ...    Redfish Clean Up
     ...  ELSE
-    ...    REST Power Off  stack_mode=skip
+    ...    REST Clean Up
+
 
     Prune Journal Log
-
-    Run Keyword And Ignore Error  Set BMC Power Policy  ${ALWAYS_POWER_OFF}
-    Run Keyword And Ignore Error  Redfish Set Power Restore Policy  AlwaysOff
-
-    Run Keyword And Ignore Error  Delete All Error Logs
-    Run Keyword And Ignore Error  Redfish Purge Event Log
-    Run Keyword And Ignore Error  Delete All Dumps
-    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
-    Run Keyword And Ignore Error  Delete All Redfish Sessions
     Check For Current Boot Application Failures
 
 *** Keywords ***
+
+
+REST Clean Up
+    [Documentation]  Check states, reboot if needed and poweroff.
+
+    Wait Until Keyword Succeeds  1 min  30 sec  Initialize OpenBMC
+
+    ${ready_status}=  Run Keyword And Return Status  Is BMC Ready
+    Run Keyword If  '${ready_status}' == '${False}'
+    ...    Put BMC State  Ready
+    ...  ELSE
+    ...    REST Power Off  stack_mode=skip
+
+    Run Keyword And Ignore Error  Set BMC Power Policy  ${ALWAYS_POWER_OFF}
+    Run Keyword And Ignore Error  Delete All Error Logs
+    Run Keyword And Ignore Error  Delete All Dumps
+
+
+Redfish Clean Up
+    [Documentation]  Check states, reboot if needed and poweroff.
+
+    Wait Until Keyword Succeeds  1 min  30 sec  Redfish.Login
+
+    Redfish Power Off  stack_mode=skip
+
+    Run Keyword And Ignore Error  Redfish Set Power Restore Policy  AlwaysOff
+    Run Keyword And Ignore Error  Redfish Purge Event Log
+    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
+    Run Keyword And Ignore Error  Delete All Redfish Sessions
+
 
 BMC Online Test
     [Documentation]   BMC ping, SSH, REST connection Test
