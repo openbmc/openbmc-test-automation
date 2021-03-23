@@ -875,8 +875,6 @@ Redfish Get States
 
     # Refer: openbmc/docs/designs/boot-progress.md
 
-    Redfish.Login
-
     ${bmc_state}=  Redfish Get BMC State
     ${chassis_state}  ${chassis_status}=  Redfish Get Host State
     ${boot_progress}  ${host_state}=  Redfish Get Boot Progress

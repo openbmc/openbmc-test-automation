@@ -95,13 +95,14 @@ Create And Verify Session ClientID
 
     ${client_ids}=  Split String  ${client_id}  ,
     ${session_info}=  Create Session With List Of ClientID  ${client_ids}
+    ${session_token}=  Get From Dictionary  ${session_info}[0]  SessionToken
+    Log  ${session_info}
+    Set Global Variable  ${XAUTH_TOKEN}  ${session_token}
     Verify A Session Created With ClientID  ${client_ids}  ${session_info}
-
-    ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
-
     Run Keyword If  '${reboot_flag}' == 'True'
     ...  Run Keywords  Redfish BMC Reset Operation  AND
-    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
+    ...  Set Global Variable  ${XAUTH_TOKEN}  ${session_token}  AND
+    ...  Sleep  30s  AND
     ...  Is BMC Standby  AND
     ...  Verify A Session Created With ClientID  ${client_ids}  ${session_info}
 

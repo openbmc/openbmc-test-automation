@@ -48,9 +48,6 @@ Redfish BMC Reset Operation
     #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
     # }
 
-    ${session_info}=  Redfish.Get Session Info
-    Log  ${session_info}
-
     ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Managers/bmc/  Manager.Reset
     ${payload}=  Create Dictionary  ResetType=GracefulRestart
     Redfish.Post  ${target}  body=&{payload}
