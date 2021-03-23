@@ -127,7 +127,7 @@ Verify SOL During Boot
     [Documentation]  Verify SOL during boot.
     [Tags]  Verify_SOL_During_Boot
 
-    Redfish Hard Power Off
+    Redfish Hard Power Off  stack_mode=skip
     Activate SOL Via IPMI
     Initiate Host Boot Via External IPMI  wait=${0}
 
@@ -249,7 +249,7 @@ Verify SOL Setting
 
     Should Be Equal  '${setting_value}'  '${expected_value}'
 
-    Redfish Hard Power Off
+    Redfish Hard Power Off  stack_mode=skip
 
     Initiate Host Boot Via External IPMI  wait=${0}
 
