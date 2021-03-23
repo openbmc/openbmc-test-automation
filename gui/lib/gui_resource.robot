@@ -91,6 +91,8 @@ Login GUI
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
     Click Element  ${xpath_login_button}
+    Redfish.Login
+    Redfish.Get Properties  /redfish/v1/Chassis/chassis/PowerSubsystem
     Wait Until Page Contains  Overview  timeout=60s
 
 
