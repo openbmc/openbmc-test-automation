@@ -887,7 +887,9 @@ Redfish Get States
     ...  host=${host_state}
     ...  boot_progress=${boot_progress}
 
-    Log  ${states}
+    # Disable loggoing state to prevent huge log.html record when boot
+    # test is run in loops.
+    #Log  ${states}
 
     [Return]  ${states}
 
