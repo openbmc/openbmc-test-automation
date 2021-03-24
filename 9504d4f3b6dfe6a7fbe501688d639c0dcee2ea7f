@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb111628_d1c057d0",
+        "filename": "lib/oem/ibm/bios_attr_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-24T08:08:02Z",
+      "side": 1,
+      "message": "1 blank line should be good.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "9504d4f3b6dfe6a7fbe501688d639c0dcee2ea7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d950a453_bddad5d5",
+        "filename": "lib/oem/ibm/bios_attr_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-24T08:08:02Z",
+      "side": 1,
+      "message": "Description of arguments missing",
+      "range": {
+        "startLine": 16,
+        "startChar": 5,
+        "endLine": 16,
+        "endChar": 47
+      },
+      "revId": "9504d4f3b6dfe6a7fbe501688d639c0dcee2ea7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "595e5614_2953187a",
+        "filename": "lib/oem/ibm/bios_attr_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-24T08:08:02Z",
+      "side": 1,
+      "message": "Remove this. Should be done in the test suite.",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 17
+      },
+      "revId": "9504d4f3b6dfe6a7fbe501688d639c0dcee2ea7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d6d7c14_b6987365",
+        "filename": "lib/oem/ibm/bios_attr_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-24T08:08:02Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 31,
+        "startChar": 3,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "9504d4f3b6dfe6a7fbe501688d639c0dcee2ea7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b9b68ae_a0f24199",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-24T08:08:02Z",
+      "side": 1,
+      "message": "Keep only 1 blank line",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "9504d4f3b6dfe6a7fbe501688d639c0dcee2ea7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b269452b_26d28222",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-24T08:08:02Z",
+      "side": 1,
+      "message": "I think it is better to create a keyword in resource file for this so that it can be reused.",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 59
+      },
+      "revId": "9504d4f3b6dfe6a7fbe501688d639c0dcee2ea7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95cb57d4_a64a584e",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-24T08:08:02Z",
+      "side": 1,
+      "message": "Please do it as part of teardown so that even if the test fails, the values are restored.",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 76
+      },
+      "revId": "9504d4f3b6dfe6a7fbe501688d639c0dcee2ea7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5665f84b_06be25eb",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-24T08:08:02Z",
+      "side": 1,
+      "message": "Login and logout can be done at suite level.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "9504d4f3b6dfe6a7fbe501688d639c0dcee2ea7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
