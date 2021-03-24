@@ -611,12 +611,12 @@ def get_state(openbmc_host="",
             " && [ ! -z \"${uptime}\" ] && echo ${uptime}"
         cmd_buf = ["BMC Execute Command",
                    re.sub('\\$', '\\$', remote_cmd_buf), 'quiet=1',
-                   'test_mode=0']
+                   'test_mode=0', 'time_out=5']
         gp.qprint_issuing(cmd_buf, 0)
         gp.qprint_issuing(remote_cmd_buf, 0)
         try:
             stdout, stderr, rc =\
-                BuiltIn().wait_until_keyword_succeeds("10 sec", "0 sec",
+                BuiltIn().wait_until_keyword_succeeds("10 sec", "5 sec",
                                                       *cmd_buf)
             if rc == 0 and stderr == "":
                 uptime = stdout
