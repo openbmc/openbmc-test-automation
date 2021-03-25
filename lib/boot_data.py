@@ -53,7 +53,7 @@ def create_boot_table(file_path=None,
                                     boot entries.
     """
     if file_path is None:
-        if redfish_support_trans_state:
+        if redfish_support_trans_state and platform_arch_type != "x86":
             file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table_redfish.json')
         elif platform_arch_type == "x86":
             file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table_x86.json')
