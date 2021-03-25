@@ -889,6 +889,10 @@ Redfish Get Boot Progress
     # },
 
     ${boot_progress}=  Redfish.Get Properties  /redfish/v1/Systems/system/
+
+    Return From Keyword If  "${PLATFORM_ARCH_TYPE}" == "x86"
+    ...  NA  ${boot_progress["Status"]["State"]}
+
     [Return]  ${boot_progress["BootProgress"]["LastState"]}  ${boot_progress["Status"]["State"]}
 
 
