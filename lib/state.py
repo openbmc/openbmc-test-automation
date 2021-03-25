@@ -259,19 +259,22 @@ else:
 
 # Filter the states based on platform type.
 if platform_arch_type == "x86":
-    default_req_states.remove("operating_system")
+
+    if not redfish_support_trans_state:
+        default_req_states.remove("operating_system")
+        valid_req_states.remove("operating_system")
+        del default_state["operating_system"]
+        del standby_match_state["operating_system"]
+        del os_running_match_state["operating_system"]
+        del master_os_up_match["operating_system"]
+        del invalid_state_match["operating_system"]
+
     default_req_states.remove("boot_progress")
-    valid_req_states.remove("operating_system")
     valid_req_states.remove("boot_progress")
-    del default_state["operating_system"]
     del default_state["boot_progress"]
-    del standby_match_state["operating_system"]
     del standby_match_state["boot_progress"]
-    del os_running_match_state["operating_system"]
     del os_running_match_state["boot_progress"]
-    del master_os_up_match["operating_system"]
     del master_os_up_match["boot_progress"]
-    del invalid_state_match["operating_system"]
     del invalid_state_match["boot_progress"]
 
 
