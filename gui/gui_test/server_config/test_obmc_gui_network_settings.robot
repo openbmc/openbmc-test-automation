@@ -14,7 +14,7 @@ Suite Teardown  Close Browser
 ${xpath_network_setting_heading}  //h1[text()="Network settings"]
 ${xpath_interface}                //h2[text()="Interface"]
 ${xpath_system}                   //h2[text()="System"]
-${xpath_static_ipv4}              //h2[text()="Static IPv4"]
+${xpath_static_ipv4}              //h2[text()="IPV4"]
 ${xpath_static_dns}               //h2[text()="Static DNS"]
 ${xpath_hostname_input}           //*[@data-test-id="networkSettings-input-hostname"]
 ${xpath_network_save_settings}    //button[@data-test-id="networkSettings-button-saveNetworkSettings"]
@@ -41,7 +41,6 @@ ${xpath_ip_table}                 //*[@aria-colcount="3"]
 
 @{test_ipv4_addr}                 10.7.7.7
 @{test_subnet_mask}               255.255.0.0
-
 # Valid netmask is 4 bytes long and has continuous block of 1s.
 # Maximum valid value in each octet is 255 and least value is 0.
 # Maximum value of octet in netmask is 255.
@@ -405,15 +404,15 @@ Add Static IP Address And Verify
     Run keyword if  '${expected_status}' != 'Valid format'
     ...  Run keywords  Page Should Contain  ${expected_status}  AND  Return From Keyword
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    Sleep  ${NETWORK_TIMEOUT}s
     Click Element  ${xpath_refresh_button}
+    Sleep  ${NETWORK_TIMEOUT}
     Verify IP And Netmask On BMC Using GUI  ${ip_addresses}  ${subnet_masks}
 
 Delete And Verify Static IP Address On BMC
     [Documentation]  Delete static IP address and verify
 
     ${all_match_elements}=  Get Element Count  ${xpath_delete_static_ip}
-    FOR  ${element}  IN RANGE  ${all_match_elements}
+    FOR  ${element}  IN RANGE  ${1}  ${all_match_elements}
       ${ip_location}=  Evaluate  ${element} + ${1}
       Delete Static IPv4 Addresses Except BMC IP  ${element}
       ${status}=  Run Keyword And Return Status  Page Should Contain Textfield
@@ -426,6 +425,7 @@ Delete And Verify Static IP Address On BMC
     ${all_match_elements}=  Get Element Count  ${xpath_delete_static_ip}
     Should Be Equal  ${all_match_elements}  ${1}
     Textfield Value Should Be  ${xpath_static_input_ip0}  ${BMC_IP}
+    Page Should Not Contain Element  ${xpath_static_input_ip1}
     Sleep  ${NETWORK_TIMEOUT}s
     Ping Host  ${OPENBMC_HOST}
     Validate Network Config On BMC
@@ -511,15 +511,15 @@ Update IP Address And Verify
     # new_ip              New IP address to be configured.
     # subnet_mask         Netmask value.
 
-    ${get_ip}=  Get Value  ${xpath_static_input_ip0}
+    ${get_ip}=  Get Value  ${xpath_static_input_ip1}
     Run Keyword If  '${ip}'== '${get_ip}'
-    ...  Run Keywords  Clear Element Text  ${xpath_static_input_ip0}
-    ...  AND  Input Text  ${xpath_static_input_ip0}  ${new_ip}
+    ...  Run Keywords  Clear Element Text  ${xpath_static_input_ip1}
+    ...  AND  Input Text  ${xpath_static_input_ip1}  ${new_ip}
 
     Click Button  ${xpath_network_save_settings}
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    Sleep  ${NETWORK_TIMEOUT}s
     Click Element  ${xpath_refresh_button}
+    Sleep  ${NETWORK_TIMEOUT}s
     Verfiy IP On BMC  ${new_ip}  ${subnet_mask}
     Validate Network Config On BMC
 
@@ -532,14 +532,15 @@ Add IP Address And Verify
     # ip                  IP address to be set (e.g. "10.7.7.7").
     # subnet_mask         Netmask value to be set (e.g. "255.255.0.0").
 
+    Wait Until Element Is Enabled  ${xpath_add_static_ip}
     Click Button  ${xpath_add_static_ip}
     Clear Element Text  ${xpath_static_input_ip1}
     Input Text  ${xpath_static_input_ip1}  ${ip}
     Input Text  ${xpath_input_netmask_addr1}  ${subnet_mask}
     Click Button  ${xpath_network_save_settings}
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    Sleep  ${NETWORK_TIMEOUT}s
     Click Element  ${xpath_refresh_button}
+    Sleep  ${NETWORK_TIMEOUT}s
     Verfiy IP On BMC  ${ip}  ${subnet_mask}
     Validate Network Config On BMC
 
@@ -552,7 +553,7 @@ Verfiy IP On BMC
     # ip             IP address which needs to be verified (e.g. "10.7.7.7").
     # subnet_mask    Netmask value which needs to be verified.(e.g. "255.255.0.0").
 
-    ${get_ip}=  Get Value  ${xpath_static_input_ip0}
-    ${get_netmask}=  Get Value  ${xpath_input_netmask_addr0}
+    ${get_ip}=  Get Value  ${xpath_static_input_ip1}
+    ${get_netmask}=  Get Value  ${xpath_input_netmask_addr1}
     Should Be Equal  ${get_ip}  ${ip}
     Should Be Equal  ${get_netmask}  ${subnet_mask}
