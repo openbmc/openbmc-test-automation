@@ -39,16 +39,17 @@ ${xpath_ip_table}                 //*[@aria-colcount="3"]
 @{string_value}                   aa.bb.cc.dd
 @{special_char_value}             @@@.%%.44.11
 
-@{test_ipv4_addr}                 10.7.7.7
-@{test_subnet_mask}               255.255.0.0
+${test_ipv4_addr}                 10.7.7.7
+${test_ipv4_addr2}                10.7.7.8
+${test_subnet_mask}               255.255.0.0
 
 # Valid netmask is 4 bytes long and has continuous block of 1s.
 # Maximum valid value in each octet is 255 and least value is 0.
 # Maximum value of octet in netmask is 255.
-@{alpha_netmask}                  ff.ff.ff.ff
-@{out_of_range_netmask}           255.256.255.0
-@{more_byte_netmask}              255.255.255.0.0
-@{lowest_netmask}                 128.0.0.0
+${alpha_netmask}                  ff.ff.ff.ff
+${out_of_range_netmask}           255.256.255.0
+${more_byte_netmask}              255.255.255.0.0
+${lowest_netmask}                 128.0.0.0
 
 *** Test Cases ***
 
@@ -63,7 +64,7 @@ Verify Existence Of All Sections In Network Settings Page
     [Documentation]  Verify existence of all sections in network settings page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Network_Settings_Page
 
-    Page Should Contain Element  ${xpath_interface}
+    Wait Until Page Contains Element  ${xpath_interface}
     Page Should Contain Element  ${xpath_system}
     Page Should Contain Element  ${xpath_static_ipv4}
     Page Should Contain Element  ${xpath_static_dns}
@@ -161,9 +162,9 @@ Verify Network Static IPv4 Details
     [Tags]  Verify_Network_static_IPv4_Details
 
     @{network_configurations}=  Get Network Configuration
+    ${ip_addresses}=  Get Static IPv4 Addresses From GUI
     FOR  ${network_configuration}  IN  @{network_configurations}
-      Textfield Value Should Be  ${xpath_static_input_ip0}  ${network_configuration["Address"]}
-      Textfield Value Should Be  ${xpath_input_netmask_addr0}  ${network_configuration['SubnetMask']}
+      List Should Contain Value  ${ip_addresses}  ${network_configuration["Address"]}
     END
 
 
@@ -211,12 +212,11 @@ Delete And Verify DNS Server Via GUI
 
     Delete DNS Server And Verify  ${static_name_servers}
 
+
 Configure And Verify Static IP Address
     [Documentation]  Configure and verify static ip addresses.
-    [Setup]  Test Setup Execution
     [Tags]  Configure_And_Verify_Static_IP_Address
-    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
-    ...  AND  Test Teardown Execution
+    [Teardown]  Delete And Verify Static IP Address On BMC  ${test_ipv4_addr}
 
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
 
@@ -235,25 +235,22 @@ Configure And Verify Invalid DNS Server
     ${empty_dictionary}     Field required
     ${null_value}           Invalid format
 
+
 Modify IP Address And Verify
     [Documentation]  Modify IP address and verify.
-    [Setup]  Test Setup Execution
     [Tags]  Modify_IP_Address_And_Verify
-    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
-    ...  AND  Test Teardown Execution
+    [Teardown]  Delete And Verify Static IP Address On BMC  ${test_ipv4_addr2}
 
-    Add IP Address And Verify  10.7.7.8  255.255.0.0
-    Update IP Address And Verify  10.7.7.8  10.7.7.9  255.255.0.0
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
+    Update IP Address And Verify  ${test_ipv4_addr}  ${test_ipv4_addr2}
 
 
 Configure Netmask And Verify
     [Documentation]  Configure and verify netmask.
     [Tags]  Configure_And_Verify_Netmask
-    [Setup]  Test Setup Execution
     [Template]  Add Static IP Address And Verify
     [Teardown]  Run Keywords  Click Element  ${xpath_refresh_button}
-    ...  AND  Delete And Verify Static IP Address On BMC
-    ...  AND  Test Teardown Execution
+    ...  AND  Delete And Verify Static IP Address On BMC  ${test_ipv4_addr}
 
     # ip_addresses      subnet_masks             expected_status
     ${test_ipv4_addr}   ${lowest_netmask}        Valid format
@@ -380,9 +377,10 @@ Verify Static Name Server Details On GUI
        ...  ${static_name_servers}[${i}]
     END
 
+
 Add Static IP Address And Verify
     [Documentation]  Add static IP on BMC and verify.
-    [Arguments]  ${ip_addresses}  ${subnet_masks}  ${expected_status}=Valid format
+    [Arguments]  ${ip}  ${subnet_mask}  ${expected_status}=Valid format
 
     # Description of argument(s):
     # ip_addresses         A list of IP address to be added (e.g. ["10.7.7.7"]).
@@ -390,169 +388,94 @@ Add Static IP Address And Verify
     # expected_status      Expected status while adding static ipv4 address
     # ....                (e.g. Invalid format / Field required).
 
-    ${ip_count}=  Get Length  ${ip_addresses}
-    FOR  ${i}  IN RANGE  ${ip_count}
-       ${ip_location}=  Evaluate  ${i} + ${1}
-       Wait Until Element Is Enabled  ${xpath_add_static_ip}
-       Click Button  ${xpath_add_static_ip}
-       Wait Until Element Is Enabled  //*[@data-test-id="networkSettings-input-staticIpv4-${ip_location}"]
-       Wait Until Element Is Enabled  //*[@data-test-id="networkSettings-input-subnetMask-${ip_location}"]
-       Input Text  //*[@data-test-id="networkSettings-input-staticIpv4-${ip_location}"]  ${ip_addresses}[${i}]
-       Input Text  //*[@data-test-id="networkSettings-input-subnetMask-${ip_location}"]  ${subnet_masks}[${i}]
-    END
+    ${location}=  Get Element Count  //*[contains(@aria-label,"Static IPv4 add")]
+    Wait Until Element Is Enabled  ${xpath_add_static_ip}
+    Click Button  ${xpath_add_static_ip}
+
+    Input Text
+    ...  //*[@data-test-id="networkSettings-input-staticIpv4-${location}"]  ${ip}
+    Input Text
+    ...  //*[@data-test-id="networkSettings-input-subnetMask-${location}"]  ${subnet_mask}
 
     Click Button  ${xpath_network_save_settings}
     Run keyword if  '${expected_status}' != 'Valid format'
     ...  Run keywords  Page Should Contain  ${expected_status}  AND  Return From Keyword
+
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    Sleep  ${NETWORK_TIMEOUT}s
     Click Element  ${xpath_refresh_button}
-    Verify IP And Netmask On BMC Using GUI  ${ip_addresses}  ${subnet_masks}
+    Wait Until Page Contains Element  ${xpath_static_input_ip0}
+    Validate Network Config On BMC
+    ${ip's}=  Get Static IPv4 Addresses From GUI
+    Should Contain  ${ip's}  ${ip}
+
+
+Get Static IPv4 Addresses From GUI
+    [Documentation]  get static IPV4 addresses from gui.
+
+    ${availble_ip_count}=  Get Element Count  //*[contains(@aria-label,"Static IPv4 add")]
+    ${static_ipv4_addresses}=  Create List
+
+    FOR   ${locator}   IN RANGE  ${availble_ip_count}
+       ${ip_address}=  Get value  //*[@data-test-id="networkSettings-input-staticIpv4-${locator}"]
+       Append To List  ${static_ipv4_addresses}  ${ip_address}
+    END
+
+    [Return]  ${static_ipv4_addresses}
+
 
 Delete And Verify Static IP Address On BMC
     [Documentation]  Delete static IP address and verify
+    [Arguments]  ${ip}
 
-    ${all_match_elements}=  Get Element Count  ${xpath_delete_static_ip}
-    FOR  ${element}  IN RANGE  ${all_match_elements}
-      ${ip_location}=  Evaluate  ${element} + ${1}
-      Delete Static IPv4 Addresses Except BMC IP  ${element}
-      ${status}=  Run Keyword And Return Status  Page Should Contain Textfield
-      ...  //*[@data-test-id="networkSettings-input-staticIpv4-${ip_location}"]
-      Exit For Loop IF  "${status}" == "${False}"
+    # Description of argument(s):
+    # ip                  IP address to be deleted (e.g. "10.7.7.7").
+
+    ${ip_addresses}=  Get Static IPv4 Addresses From GUI
+    Should Contain  ${ip_addresses}  ${ip}  msg=${ip} does not exist on BMC
+
+    ${available_ip's_count}=  Get Element Count   //*[contains(@aria-label,"Static IPv4 add")]
+    FOR  ${location}  IN RANGE  ${1}  ${available_ip's_count}+${1}
+       ${gui_ip}=  Get Value  //*[@aria-label="Static IPv4 address ${location}"]
+       Run Keyword If  '${gui_ip}' == '${ip}' and '${gui_ip}' != '${BMC_IP}'
+       ...  Run Keywords  Click Element  ${xpath_ip_table}/tbody/tr[${location}]/td[3]/span/button
+       ...  AND  Exit For Loop
     END
 
     Click Button  ${xpath_network_save_settings}
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    ${all_match_elements}=  Get Element Count  ${xpath_delete_static_ip}
-    Should Be Equal  ${all_match_elements}  ${1}
-    Textfield Value Should Be  ${xpath_static_input_ip0}  ${BMC_IP}
-    Sleep  ${NETWORK_TIMEOUT}s
     Ping Host  ${OPENBMC_HOST}
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains Element  ${xpath_static_input_ip0}
     Validate Network Config On BMC
-
-Delete Static IPv4 Addresses Except BMC IP
-    [Documentation]  Delete static IP addresses from IPv4 section on GUI except BMC IP.
-    [Arguments]   ${element}
-
-    # Description of argument(s):
-    # element          IP address location on GUI(e.g. 0 or 1).
-
-    ${ip_location}=  Evaluate  ${element} + ${1}
-    Wait Until Element Is Enabled  //*[@data-test-id="networkSettings-input-staticIpv4-${element}"]
-    ${input_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-${element}"]
-    Run Keyword If  "${BMC_IP}" != "${input_ip}"
-    ...  Click Button  ${xpath_ip_table}/tbody/tr[${ip_location}]/td[3]/span/button
-
-    # Get delete ip elements.
-    ${delete_ip_elements}=  Get Element Count  ${xpath_delete_static_ip}
-
-    # Delete IP Address on BMC if available more than 1.
-    Run Keyword If  ${delete_ip_elements} != ${1}
-    ...  Delete Static IPv4 Addresses Except BMC IP  ${element}
-
-Test Setup Execution
-    [Documentation]  Get and delete existing IPv4 addresses and netmask if any..
-
-    ${ip_data}=  Create List
-    ${netmask_data}=  Create List
-
-    # Get all IPv4 addresses and netmask on BMC.
-    ${network_configurations}=  Get Network Configuration
-    FOR  ${network_configuration}  IN  @{network_configurations}
-      Continue For Loop If  '${BMC_IP}' == '${network_configuration['Address']}'
-      Append To List  ${ip_data}  ${network_configuration['Address']}
-      Append To List  ${netmask_data}  ${network_configuration['SubnetMask']}
-    END
-    Set Suite Variable  ${ip_data}
-    Set Suite Variable  ${netmask_data}
-
-    # Delete existing static IPv4 addresses and netmask if available.
-    Run Keyword If  ${ip_data} != @{empty} and ${netmask_data} != @{empty}
-    ...  Delete And Verify Static IP Address On BMC
-
-
-Test Teardown Execution
-    [Documentation]  Restore existing IPv4 addresses and netmasks.
-
-    ${ip_length}=  Get Length  ${ip_data}
-    ${netmask_length}=  Get Length  ${netmask_data}
-
-    # Restore existing IPv4 addresses and netmasks if any..
-    Run Keyword If  ${ip_length} != ${0} and ${netmask_length} != ${0}
-    ...  Add Static IP Address And Verify  ${ip_data}  ${netmask_data}
-
-
-Verify IP And Netmask On BMC Using GUI
-    [Documentation]  Verify IP and netmask on GUI.
-    [Arguments]   ${ip_addresses}  ${subnet_masks}
-
-    # Description of argument(s):
-    # ip_addresses         A list of IP address to be added (e.g. ["10.7.7.7"]).
-    # subnet_masks         A list of Subnet mask for the IP to be added (e.g. ["255.255.0.0]").
-
-    ${ip_count}=  Get Length  ${ip_addresses}
-    FOR  ${i}  IN RANGE  ${ip_count}
-       ${input_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-${i}"]
-       Continue For Loop If  '${BMC_IP}' == '${input_ip}'
-       Textfield Value Should Be  //*[@data-test-id="networkSettings-input-staticIpv4-${i}"]
-       ...  ${ip_addresses}[${i}]
-       Textfield Value Should Be  //*[@data-test-id="networkSettings-input-subnetMask-${i}"]
-       ...  ${subnet_masks}[${i}]
-    END
-    Validate Network Config On BMC
+    ${ip's}=  Get Static IPv4 Addresses From GUI
+    Should Not Contain  ${ip's}  ${ip}
 
 
 Update IP Address And Verify
-    [Documentation]  Update static IPv4 address and verify.
-    [Arguments]  ${ip}  ${new_ip}  ${subnet_mask}
+    [Documentation]  Update and verify static ip address on BMC.
+    [Arguments]  ${ip}  ${new_ip}
 
     # Description of argument(s):
     # ip                  IP address to be replaced (e.g. "10.7.7.7").
     # new_ip              New IP address to be configured.
-    # subnet_mask         Netmask value.
 
-    ${get_ip}=  Get Value  ${xpath_static_input_ip0}
-    Run Keyword If  '${ip}'== '${get_ip}'
-    ...  Run Keywords  Clear Element Text  ${xpath_static_input_ip0}
-    ...  AND  Input Text  ${xpath_static_input_ip0}  ${new_ip}
+    ${ip_addresses}=  Get Static IPv4 Addresses From GUI
+    Should Contain  ${ip_addresses}  ${ip}  msg=${ip} does not exist on BMC
+
+    ${available_ip's_count}=  Get Element Count   //*[contains(@aria-label,"Static IPv4 add")]
+    FOR  ${location}  IN RANGE  ${1}  ${available_ip's_count}+${1}
+       ${gui_ip}=  Get Value  //*[@aria-label="Static IPv4 address ${location}"]
+       Run Keyword If  '${gui_ip}' == '${ip}'
+       ...  Run Keywords  Clear Element Text  //*[@aria-label="Static IPv4 address ${location}"]
+       ...  AND  Input Text
+       ...  //*[@aria-label="Static IPv4 address ${location}"]  ${new_ip}
+       ...  AND  Exit For Loop
+    END
 
     Click Button  ${xpath_network_save_settings}
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    Sleep  ${NETWORK_TIMEOUT}s
     Click Element  ${xpath_refresh_button}
-    Verfiy IP On BMC  ${new_ip}  ${subnet_mask}
+    Wait Until Page Contains Element  ${xpath_static_input_ip0}
     Validate Network Config On BMC
-
-
-Add IP Address And Verify
-    [Documentation]  Add only one static IPv4 address and verify.
-    [Arguments]  ${ip}  ${subnet_mask}
-
-    # Description of argument(s):
-    # ip                  IP address to be set (e.g. "10.7.7.7").
-    # subnet_mask         Netmask value to be set (e.g. "255.255.0.0").
-
-    Click Button  ${xpath_add_static_ip}
-    Clear Element Text  ${xpath_static_input_ip1}
-    Input Text  ${xpath_static_input_ip1}  ${ip}
-    Input Text  ${xpath_input_netmask_addr1}  ${subnet_mask}
-    Click Button  ${xpath_network_save_settings}
-    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    Sleep  ${NETWORK_TIMEOUT}s
-    Click Element  ${xpath_refresh_button}
-    Verfiy IP On BMC  ${ip}  ${subnet_mask}
-    Validate Network Config On BMC
-
-
-Verfiy IP On BMC
-    [Documentation]  Verify only one static IPv4 address.
-    [Arguments]  ${ip}  ${subnet_mask}
-
-    # Description of argument(s):
-    # ip             IP address which needs to be verified (e.g. "10.7.7.7").
-    # subnet_mask    Netmask value which needs to be verified.(e.g. "255.255.0.0").
-
-    ${get_ip}=  Get Value  ${xpath_static_input_ip0}
-    ${get_netmask}=  Get Value  ${xpath_input_netmask_addr0}
-    Should Be Equal  ${get_ip}  ${ip}
-    Should Be Equal  ${get_netmask}  ${subnet_mask}
+    ${ip's}=  Get Static IPv4 Addresses From GUI
+    Should Contain  ${ip's}  ${new_ip}
