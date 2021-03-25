@@ -14,7 +14,7 @@ Suite Teardown  Close Browser
 ${xpath_network_setting_heading}  //h1[text()="Network settings"]
 ${xpath_interface}                //h2[text()="Interface"]
 ${xpath_system}                   //h2[text()="System"]
-${xpath_static_ipv4}              //h2[text()="Static IPv4"]
+${xpath_static_ipv4}              //h2[text()="IPV4"]
 ${xpath_static_dns}               //h2[text()="Static DNS"]
 ${xpath_hostname_input}           //*[@data-test-id="networkSettings-input-hostname"]
 ${xpath_network_save_settings}    //button[@data-test-id="networkSettings-button-saveNetworkSettings"]
@@ -62,6 +62,7 @@ Verify Navigation To Network Settings Page
 Verify Existence Of All Sections In Network Settings Page
     [Documentation]  Verify existence of all sections in network settings page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Network_Settings_Page
+    [Setup]  Sleep  10s
 
     Page Should Contain Element  ${xpath_interface}
     Page Should Contain Element  ${xpath_system}
@@ -159,6 +160,8 @@ Verify Network Interface Details
 Verify Network Static IPv4 Details
     [Documentation]  Verify network static IPv4 details.
     [Tags]  Verify_Network_static_IPv4_Details
+    [Setup]  Test Setup Execution
+    [Teardown]  Test Teardown Execution
 
     @{network_configurations}=  Get Network Configuration
     FOR  ${network_configuration}  IN  @{network_configurations}
@@ -243,7 +246,7 @@ Modify IP Address And Verify
     ...  AND  Test Teardown Execution
 
     Add IP Address And Verify  10.7.7.8  255.255.0.0
-    Update IP Address And Verify  10.7.7.8  10.7.7.9  255.255.0.0
+    Update IP Address And Verify  10.7.7.8  10.7.7.9
 
 
 Configure Netmask And Verify
@@ -405,8 +408,8 @@ Add Static IP Address And Verify
     Run keyword if  '${expected_status}' != 'Valid format'
     ...  Run keywords  Page Should Contain  ${expected_status}  AND  Return From Keyword
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    Sleep  ${NETWORK_TIMEOUT}s
     Click Element  ${xpath_refresh_button}
+    Sleep  ${NETWORK_TIMEOUT}s
     Verify IP And Netmask On BMC Using GUI  ${ip_addresses}  ${subnet_masks}
 
 Delete And Verify Static IP Address On BMC
@@ -443,12 +446,6 @@ Delete Static IPv4 Addresses Except BMC IP
     Run Keyword If  "${BMC_IP}" != "${input_ip}"
     ...  Click Button  ${xpath_ip_table}/tbody/tr[${ip_location}]/td[3]/span/button
 
-    # Get delete ip elements.
-    ${delete_ip_elements}=  Get Element Count  ${xpath_delete_static_ip}
-
-    # Delete IP Address on BMC if available more than 1.
-    Run Keyword If  ${delete_ip_elements} != ${1}
-    ...  Delete Static IPv4 Addresses Except BMC IP  ${element}
 
 Test Setup Execution
     [Documentation]  Get and delete existing IPv4 addresses and netmask if any..
@@ -504,23 +501,25 @@ Verify IP And Netmask On BMC Using GUI
 
 Update IP Address And Verify
     [Documentation]  Update static IPv4 address and verify.
-    [Arguments]  ${ip}  ${new_ip}  ${subnet_mask}
+    [Arguments]  ${ip}  ${new_ip}
 
     # Description of argument(s):
     # ip                  IP address to be replaced (e.g. "10.7.7.7").
     # new_ip              New IP address to be configured.
-    # subnet_mask         Netmask value.
 
     ${get_ip}=  Get Value  ${xpath_static_input_ip0}
     Run Keyword If  '${ip}'== '${get_ip}'
     ...  Run Keywords  Clear Element Text  ${xpath_static_input_ip0}
     ...  AND  Input Text  ${xpath_static_input_ip0}  ${new_ip}
+    ...  ELSE
+    ...  Run Keywords  Clear Element Text  ${xpath_static_input_ip1}
+    ...  AND  Input Text  ${xpath_static_input_ip1}  ${new_ip}
 
     Click Button  ${xpath_network_save_settings}
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    Sleep  ${NETWORK_TIMEOUT}s
     Click Element  ${xpath_refresh_button}
-    Verfiy IP On BMC  ${new_ip}  ${subnet_mask}
+    Sleep  ${NETWORK_TIMEOUT}s
+    Verfiy IP On BMC  ${new_ip}
     Validate Network Config On BMC
 
 
@@ -538,21 +537,21 @@ Add IP Address And Verify
     Input Text  ${xpath_input_netmask_addr1}  ${subnet_mask}
     Click Button  ${xpath_network_save_settings}
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    Sleep  ${NETWORK_TIMEOUT}s
     Click Element  ${xpath_refresh_button}
-    Verfiy IP On BMC  ${ip}  ${subnet_mask}
+    Sleep  ${NETWORK_TIMEOUT}s
+    Verfiy IP On BMC  ${ip}
     Validate Network Config On BMC
 
 
 Verfiy IP On BMC
     [Documentation]  Verify only one static IPv4 address.
-    [Arguments]  ${ip}  ${subnet_mask}
+    [Arguments]  ${ip}
 
     # Description of argument(s):
     # ip             IP address which needs to be verified (e.g. "10.7.7.7").
-    # subnet_mask    Netmask value which needs to be verified.(e.g. "255.255.0.0").
 
-    ${get_ip}=  Get Value  ${xpath_static_input_ip0}
-    ${get_netmask}=  Get Value  ${xpath_input_netmask_addr0}
-    Should Be Equal  ${get_ip}  ${ip}
-    Should Be Equal  ${get_netmask}  ${subnet_mask}
+    ${get_ip0}=  Get Value  ${xpath_static_input_ip0}
+    ${get_ip1}=  Get Value  ${xpath_static_input_ip1}
+    
+    Run Keyword If  '${get_ip0}' != '${ip}'  Should Be Equal  ${get_ip1}  ${ip}
+    ...  ELSE  Should Be Equal  ${get_ip0}  ${ip}
