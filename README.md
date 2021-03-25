@@ -297,6 +297,11 @@ version 2.3.1 or greater is required) or via Robot CLI command.
     OPENBMC_HOST=x.x.x.x  LOOP_TEST_COMMAND="tests/test_fw_version.robot" ITERATION=5 OPENBMC_SYSTEMMODEL=witherspoon tox -e witherspoon -- ./extended/full_suite_regression.robot
     ```
 
+* Host CPU architecture
+
+    By default openbmc-test-automation framework assumes that host CPU is based on the POWER architecture.
+    If your host CPU is x86 add `-v PLATFORM_ARCH_TYPE:x86` variable setting to your CLI commands.
+
 **Jenkins jobs tox commands**
 * HW CI tox command:
     ```
