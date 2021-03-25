@@ -5,6 +5,8 @@ r"""
 #              commands and files to be collected as a part
 #              of the test case failure.
 """
+import os
+
 from robot.libraries.BuiltIn import BuiltIn
 
 # -------------------
@@ -157,7 +159,8 @@ FFDC_METHOD_CALL = {
     },
 }
 
-platform_arch_type = BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
+platform_arch_type = os.environ.get('PLATFORM_ARCH_TYPE', '') or \
+    BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
 # Filter the logs based on platform type.
 if platform_arch_type == "x86":
     del FFDC_BMC_FILE['BMC FILES']['PEL_logs_list.json']

@@ -81,7 +81,8 @@ OBMC_STATES_VERSION = int(os.environ.get('OBMC_STATES_VERSION', 1))
 redfish_support_trans_state = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
     int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
 
-platform_arch_type = BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
+platform_arch_type = os.environ.get('PLATFORM_ARCH_TYPE', '') or \
+    BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
 
 # valid_os_req_states and default_os_req_states are used by the os_get_state
 # function.

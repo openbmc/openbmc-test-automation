@@ -300,7 +300,10 @@ version 2.3.1 or greater is required) or via Robot CLI command.
 * Host CPU architecture
 
     By default openbmc-test-automation framework assumes that host CPU is based on the POWER architecture.
-    If your host CPU is x86 add `-v PLATFORM_ARCH_TYPE:x86` variable setting to your CLI commands.
+    If your host CPU is x86 add `-v PLATFORM_ARCH_TYPE:x86` variable setting to your CLI commands or set an environment variable:
+    ```
+    $ export PLATFORM_ARCH_TYPE=x86
+    ```
 
 **Jenkins jobs tox commands**
 * HW CI tox command:

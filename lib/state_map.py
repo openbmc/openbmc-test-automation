@@ -22,7 +22,8 @@ import variables as var
 BuiltIn().import_resource("state_manager.robot")
 BuiltIn().import_resource("rest_client.robot")
 
-platform_arch_type = BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
+platform_arch_type = os.environ.get('PLATFORM_ARCH_TYPE', '') or \
+    BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
 
 # We will build eventually the mapping for warm, cold reset as well.
 VALID_STATES = {
