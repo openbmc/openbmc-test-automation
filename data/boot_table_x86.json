@@ -24,12 +24,12 @@
     # Initiate a power on using the Redfish API interface.
     "Redfish Power On": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
             "host": "^Off$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
             "host": "^Running$",
             "os_ping": "^1$",
@@ -86,13 +86,13 @@
     # Initiate a power off using the Redfish API interface.
     "Redfish Power Off": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
-            "host": "^Off$",
+            "host": "^Disabled$",
             "os_ping": "^0$",
             "os_login": "^0$",
             "os_run_cmd": "^0$"
@@ -124,11 +124,11 @@
     # Initiate a hard power off using the Redfish API interface.
     "Redfish Hard Power Off": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
             "host": "^Off$",
             "os_ping": "^0$",
@@ -276,7 +276,7 @@
     # Run a Redfish "reboot" on the OBMC while host is running.
     "Redfish OBMC Reboot (run)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
             "host": "^Running$",
             "os_ping": "^1$",
@@ -284,7 +284,7 @@
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
             "host": "^Running$",
             "os_ping": "^1$",
@@ -330,11 +330,11 @@
     # Run a "reboot" on the OBMC while host is off.
     "Redfish OBMC Reboot (off)": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^Off$",
             "host": "^Off$"
         },
@@ -645,7 +645,7 @@
     # Initiate host reboot using the Redfish API interface (GracefulRestart).
     "RF SYS GracefulRestart": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
             "host": "^Running$",
             "os_ping": "^1$",
@@ -653,7 +653,7 @@
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
             "host": "^Running$",
             "os_ping": "^1$",
@@ -668,7 +668,7 @@
     # Initiate host reboot using the Redfish API interface (ForceRestart).
     "RF SYS ForceRestart": {
         "start": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
             "host": "^Running$",
             "os_ping": "^1$",
@@ -676,7 +676,7 @@
             "os_run_cmd": "^1$"
         },
         "end": {
-            "rest": "^1$",
+            "redfish": "^1$",
             "chassis": "^On$",
             "host": "^Running$",
             "os_ping": "^1$",
