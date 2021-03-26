@@ -140,6 +140,60 @@ Get Root Certificate After BMC Reboot And Verify
     # Request root certificate from NoAccess user.
     noaccess_user         TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
+Get Concurrent Root Certificate Request From Multiple Operator Users
+    [Documentation]  Get multiple concurrent root certificate from non admin users and verify no errors.
+    [Tags]  Get_Concurrent_Root_Certificate_Request_From_Multiple_Operator_Users
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Root Certificate operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Root Certificate operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Get Concurrent Root Certificate Request From Admin And Non Admin Users
+    [Documentation]  Get multiple concurrent root certificate from admin and non admin users
+    ...  and verify no errors.
+    [Tags]  Get_Concurrent_Root_Certificate_Request_From_Admin_And_Non_Admin_Users
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Root Certificate operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Root Certificate readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Get Concurrent Root Certificate Request From Different Non Admin Users
+    [Documentation]  Get multiple concurrent root certificate from different non admin users
+    ...  and verify no errors.
+    [Tags]  Get_Concurrent_Root_Certificate_Request_From_Different_Non_Admin_Users
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Root Certificate readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Root Certificate noaccess_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Get Concurrent CSR Request From Multiple Operator Users
+    [Documentation]  Get multiple concurrent csr request from non admin users and verify no errors.
+    [Tags]  Get_Concurrent_CSR_Request_From_Multiple_Operator_Users
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
 *** Keywords ***
 
 Generate CSR String
