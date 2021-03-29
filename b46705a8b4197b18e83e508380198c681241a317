@@ -22,6 +22,30 @@
       "revId": "b46705a8b4197b18e83e508380198c681241a317",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89f52d1a_9f253038",
+        "filename": "lib/ipmi_client.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-03-29T16:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d55db55f_795114f0",
+      "range": {
+        "startLine": 16,
+        "startChar": 63,
+        "endLine": 16,
+        "endChar": 66
+      },
+      "revId": "b46705a8b4197b18e83e508380198c681241a317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
