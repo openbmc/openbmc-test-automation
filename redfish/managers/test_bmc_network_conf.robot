@@ -591,6 +591,30 @@ Config Multiple DNS Servers And Check Persistency
     Redfish.Login
     Verify CLI and Redfish Nameservers
 
+
+Configure Static IP Without Using Gateway And Verify
+    [Documentation]  Configure static IP without using gateway and verify error.
+    [Tags]  Configure_Static_IP_Without_Using_Gateway_And_Verify
+
+    ${ip}=  Create dictionary  Address=${test_ipv4_addr}
+    ...  SubnetMask=${test_subnet_mask}
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    ${network_configurations}=  Get Network Configuration
+
+    ${num_entries}=  Get Length  ${network_configurations}
+    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
+      Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    # We need not check for existence of IP on BMC while adding.
+    Append To List  ${patch_list}  ${ip}
+    ${payload}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
 *** Keywords ***
 
 Test Setup Execution
