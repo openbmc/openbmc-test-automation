@@ -10,6 +10,7 @@ Suite Teardown   Redfish.Logout
 Test Teardown    FFDC On Test Case Fail
 
 
+
 *** Test Cases ***
 
 Set Asset Tag With Valid String Length
