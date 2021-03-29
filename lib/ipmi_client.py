@@ -66,6 +66,9 @@ def create_ipmi_ext_command_string(command, **options):
 
     new_options = collections.OrderedDict()
     for option in ipmi_required_options:
+        # This is to prevent boot table "-N 10" vs user input timeout.
+        if " -N " in command and option =="N":
+            continue
         if option in options:
             # If the caller has specified this particular option, use it in
             # preference to the default value.
