@@ -9,6 +9,8 @@ import var_funcs as vf
 import func_args as fa
 import bmc_ssh_utils as bsu
 import json
+import random
+import string
 
 
 def pldmtool(option_string, **bsu_options):
@@ -26,11 +28,6 @@ def pldmtool(option_string, **bsu_options):
           "Response": "1.0.0"
       }
 
-     pldmtool base GetTID
-     {
-         "Response": 1
-     }
-
     Description of argument(s):
     option_string                   A string of options which are to be processed by the pldmtool command.
     parse_results                   Parse the pldmtool results and return a dictionary rather than the raw
@@ -46,14 +43,14 @@ def pldmtool(option_string, **bsu_options):
     return json.loads(stdout)
 
 
-def GenerateBIOSAttrHandleValueDict(attr_val_table_data):
+def GetBIOSEnumAttributeOptionalValues(attr_val_table_data):
     """
-    From pldmtool bios GetBIOSTable of AttributeValueTable generate dictionary of
-    for BIOS attribute and its value.
+    From pldmtoolGetBIOSTable of type AttributeValueTable get the dict of
+    attribute handle and its optional values for BIOS Enumeration type.
 
     Description of argument(s):
     attr_val_table_data     pldmtool output from GetBIOSTable table type AttributeValueTable
-                             e.g.
+                            e.g.
                             [{
                                   "AttributeHandle": 20,
                                   "AttributeNameHandle": "23(pvm-pcie-error-inject)",
@@ -64,24 +61,9 @@ def GenerateBIOSAttrHandleValueDict(attr_val_table_data):
                                   "NumberOfDefaultValues": 1,
                                   "DefaultValueStringHandleIndex[0]": 1,
                                   "StringHandle": "4(Enabled)"
-                             },
-                             {
-                                  "AttributeHandle": 26,
-                                  "AttributeNameHandle": "28(pvm_fw_boot_side)",
-                                  "AttributeType": "BIOSEnumeration",
-                                  "NumberOfPossibleValues": 2,
-                                  "PossibleValueStringHandle[0]": "11(Perm)",
-                                  "PossibleValueStringHandle[1]": "15(Temp)",
-                                  "NumberOfDefaultValues": 1,
-                                  "DefaultValueStringHandleIndex[0]": 1,
-                                  "StringHandle": "15(Temp)"
                              }]
-
     @return                  Dictionary of BIOS attribute and its value.
-                             e.g. {
-                                   'pvm_pcie_error_inject': ['Disabled', 'Enabled'],
-                                   'pvm-fw-boot-side': ['Perm', 'Temp']
-                                  }
+                             e.g. {'pvm_pcie_error_inject': ['Disabled', 'Enabled']}
     """
 
     attr_val_data_dict = {}
@@ -103,4 +85,97 @@ def GenerateBIOSAttrHandleValueDict(attr_val_table_data):
 
                 attr_handle = re.findall(r'\(.*?\)', item["AttributeNameHandle"])
                 attr_val_data_dict[attr_handle[0][1:-1]] = value_list
+    return attr_val_data_dict
+
+def GetBIOSStrAndIntAttributeHandles(attr_type, attr_val_table_data):
+
+    """
+    From pldmtoolGetBIOSTable of type AttributeValueTable get the dict of
+    attribute handle and its values based on the attribute type.
+
+    Description of argument(s):
+    attr_type               "BIOSInteger" or "BIOSString".
+    attr_val_table_data     pldmtool output from GetBIOSTable table type AttributeValueTable.
+
+    @return                 Dict of BIOS attribute and its value base attribute type
+
+    """
+    attr_val_int_dict = {}
+    attr_val_str_dict = {}
+    for item in attr_val_table_data:
+        value_dict = {}
+        attr_handle = re.findall(r'\(.*?\)', item["AttributeNameHandle"])
+        # Example:
+        # {'vmi_if0_ipv4_prefix_length': {'UpperBound': 32, 'LowerBound': 0} 
+        if (item["AttributeType"] == "BIOSInteger"):
+            value_dict["LowerBound"] = item["LowerBound"]
+            value_dict["UpperBound"] = item["UpperBound"]
+            attr_val_int_dict[attr_handle[0][1:-1]] = value_dict
+        # Example:
+        # {'vmi_if1_ipv4_ipaddr': {'MaximumStringLength': 15, 'MinimumStringLength': 7}}
+        elif (item["AttributeType"] == "BIOSString"):
+            value_dict["MinimumStringLength"] = item["MinimumStringLength"]
+            value_dict["MaximumStringLength"] = item["MaximumStringLength"]
+            attr_val_str_dict[attr_handle[0][1:-1]] = value_dict
+
+    if (attr_type == "BIOSInteger"):
+        return attr_val_int_dict
+    elif (attr_type == "BIOSString"):
+        return attr_val_str_dict
+
+
+def GetRandomBIOSIntAndStrValues(attr_handle, count):
+
+    """
+    Get random integer or string values for BIOS attribute values based on the count.
+
+    Description of argument(s):
+    attr_val_table_data     pldmtool output from GetBIOSTable table type AttributeValueTable.
+
+    @return                 Dict of BIOS attribute and its value.
+
+    """
+    attr_random_value = ''
+
+    # Example
+    # 12.13.14.15
+    if 'gateway' in attr_handle:
+        attr_random_value = ".".join(map(str, (random.randint(0, 255) for _ in range(4))))
+    # Example
+    # 11.11.11.11
+    elif 'ipaddr' in attr_handle:
+        attr_random_value = ".".join(map(str, (random.randint(0, 255) for _ in range(4))))
+    # Example
+    # E5YWEDWJJ
+    elif 'name' in attr_handle:
+        data = string.ascii_uppercase + string.digits
+        attr_random_value = ''.join(random.choice(data) for _ in range(int(count)))
+
+    else:
+        attr_random_value = random.randint(0, int(count))
+    return attr_random_value
+
+
+def GetBIOSAttrOriginalValues(attr_val_table_data):
+
+    """
+    From pldmtoolGetBIOSTable of type AttributeValueTable get the dict of
+    attribute handle and its values.
+
+    Description of argument(s):
+    attr_val_table_data     pldmtool output from GetBIOSTable table type AttributeValueTable.
+
+    @return                 Dict of BIOS attribute and its value.
+
+    """
+    attr_val_data_dict = {}
+    for item in attr_val_table_data:
+        attr_handle = re.findall(r'\(.*?\)', item["AttributeNameHandle"])
+        attr_name = attr_handle[0][1:-1]
+        command = "bios GetBIOSAttributeCurrentValueByHandle -a " + attr_name
+        value = pldmtool(command)
+        attr_val_data_dict[attr_name] = value["CurrentValue"]
+        if not value["CurrentValue"]:
+            if 'name' in attr_name:
+                attr_val_data_dict[attr_name] = '""'
     return attr_val_data_dict
