@@ -13,18 +13,20 @@ from robot.libraries.BuiltIn import BuiltIn
 # Set default values for required IPMI options.
 ipmi_interface = 'lanplus'
 ipmi_cipher_suite = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}", '17')
+ipmi_timeout = BuiltIn().get_variable_value("${IPMI_TIMEOUT}", '3')
 ipmi_port = BuiltIn().get_variable_value("${IPMI_PORT}", '623')
 ipmi_username = BuiltIn().get_variable_value("${IPMI_USERNAME}", "root")
 ipmi_password = BuiltIn().get_variable_value("${IPMI_PASSWORD}", "0penBmc")
 ipmi_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
 
 # Create a list of the required IPMI options.
-ipmi_required_options = ['I', 'C', 'p', 'U', 'P', 'H']
+ipmi_required_options = ['I', 'C', 'N', 'p', 'U', 'P', 'H']
 # The following dictionary maps the ipmitool option names (e.g. "I") to our
 # more descriptive names (e.g. "interface") for the required options.
 ipmi_option_name_map = {
     'I': 'interface',
     'C': 'cipher_suite',
+    'N': 'timeout',
     'p': 'port',
     'U': 'username',
     'P': 'password',

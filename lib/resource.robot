@@ -44,6 +44,8 @@ ${OPENBMC_REBOOT_TIMEOUT}   ${10}
 ${IPMI_COMMAND}    External
 # IPMI chipher default.
 ${IPMI_CIPHER_LEVEL}  ${17}
+# IPMI timeout default.
+${IPMI_TIMEOUT}       ${3}
 
 # PDU related parameters
 ${PDU_TYPE}         ${EMPTY}
