@@ -112,6 +112,10 @@ class redfish_plus(HttpClient):
         # Convert python string object definitions to objects (mostly useful for robot callers).
         args = fa.args_to_objects(args)
         kwargs = fa.args_to_objects(kwargs)
+        timeout = kwargs.pop('timeout', 30)
+        self._timeout = timeout
+        max_retry = kwargs.pop('max_retry', 10)
+        self._max_retry = max_retry
         valid_status_codes = kwargs.pop('valid_status_codes', [200])
         response = func(*args, **kwargs)
         valid_http_status_code(response.status, valid_status_codes)
