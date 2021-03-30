@@ -107,11 +107,18 @@ class redfish_plus(HttpClient):
 
         As part of a robot test, the programmer has logged out to verify that the get request will generate a
         status code of 401 (i.e. "Unauthorized").
+
+        Timeout for GET/POST/PATCH/DELETE operations. By default 30 seconds, else user defined value.
+        Similarly, Max retry by default 10 attempt for the operation, else user defined value.
         """
         gp.qprint_executing(stack_frame_ix=3, style=gp.func_line_style_short)
         # Convert python string object definitions to objects (mostly useful for robot callers).
         args = fa.args_to_objects(args)
         kwargs = fa.args_to_objects(kwargs)
+        timeout = kwargs.pop('timeout', 30)
+        self._timeout = timeout
+        max_retry = kwargs.pop('max_retry', 10)
+        self._max_retry = max_retry
         valid_status_codes = kwargs.pop('valid_status_codes', [200])
         response = func(*args, **kwargs)
         valid_http_status_code(response.status, valid_status_codes)
