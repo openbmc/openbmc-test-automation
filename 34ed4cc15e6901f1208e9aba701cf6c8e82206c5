@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c693550_8ea0ea1c",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-31T06:27:09Z",
+      "side": 1,
+      "message": "Is it necessary to log to console? Log is sufficient I believe.",
+      "range": {
+        "startLine": 193,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 36
+      },
+      "revId": "34ed4cc15e6901f1208e9aba701cf6c8e82206c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24ae462b_d4d85437",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-31T06:27:09Z",
+      "side": 1,
+      "message": "same comment as above.",
+      "range": {
+        "startLine": 201,
+        "startChar": 8,
+        "endLine": 202,
+        "endChar": 40
+      },
+      "revId": "34ed4cc15e6901f1208e9aba701cf6c8e82206c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed5ae0c3_d683acc8",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-03-31T06:27:09Z",
+      "side": 1,
+      "message": "same comment as above.",
+      "range": {
+        "startLine": 237,
+        "startChar": 4,
+        "endLine": 237,
+        "endChar": 31
+      },
+      "revId": "34ed4cc15e6901f1208e9aba701cf6c8e82206c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
