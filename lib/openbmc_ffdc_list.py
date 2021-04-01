@@ -159,8 +159,12 @@ FFDC_METHOD_CALL = {
     },
 }
 
-platform_arch_type = os.environ.get('PLATFORM_ARCH_TYPE', '') or \
-    BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
+try:
+    platform_arch_type = os.environ.get('PLATFORM_ARCH_TYPE', '') or \
+        BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
+except RobotNotRunningError:
+    pass
+
 # Filter the logs based on platform type.
 if platform_arch_type == "x86":
     del FFDC_BMC_FILE['BMC FILES']['PEL_logs_list.json']
