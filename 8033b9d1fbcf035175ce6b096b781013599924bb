@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc0c1163_1e3f3289",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-01T07:29:33Z",
+      "side": 1,
+      "message": "where is this coming from ? do u need it ?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "8033b9d1fbcf035175ce6b096b781013599924bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "082751ec_a73b5f2f",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-01T07:29:33Z",
+      "side": 1,
+      "message": "Why do we explicitly need this here ?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 35
+      },
+      "revId": "8033b9d1fbcf035175ce6b096b781013599924bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "068e509f_c56b204a",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-01T07:29:33Z",
+      "side": 1,
+      "message": "default it OPENBMC_CONN_METHOD   in the variable section above , since use can over ride it anyway.. \n\nmay be\n\n${OPENBMC_CONN_METHOD}    ssh",
+      "range": {
+        "startLine": 96,
+        "startChar": 28,
+        "endLine": 96,
+        "endChar": 47
+      },
+      "revId": "8033b9d1fbcf035175ce6b096b781013599924bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "196c2b1d_72698677",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-01T07:29:33Z",
+      "side": 1,
+      "message": "if we can make or get it automatically via some logic, it would be great.\n\ncan u check this https://github.com/openbmc/openbmc-test-automation/blob/master/lib/common_utils.robot#L95",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "8033b9d1fbcf035175ce6b096b781013599924bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
