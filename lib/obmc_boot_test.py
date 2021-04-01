@@ -75,7 +75,7 @@ if redfish_supported:
     redfish = BuiltIn().get_library_instance('redfish')
     default_power_on = "Redfish Power On"
     default_power_off = "Redfish Power Off"
-    if redfish_rest_supported:
+    if not redfish_support_trans_state:
         delete_errlogs_cmd = "Delete Error Logs  ${quiet}=${1}"
         delete_bmcdump_cmd = "Delete All BMC Dump"
         default_set_power_policy = "Set BMC Power Policy  ALWAYS_POWER_OFF"
