@@ -88,6 +88,13 @@ These documents contain details on developing OpenBMC test code and debugging.
  - [Code Update](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/code_update.md): Currently supported BMC and PNOR update.
  - [Certificate Generate](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/certificate_generate.md): Steps to create and install CA signed certificate.
 
+## Supported Systems Architecture ##
+
+  OpenBMC test infrastructure is proven capable of running on:
+  - POWER
+  - x86
+  systems running OpenBMC firmware stack.
+
 ## Testing Setup Steps ##
 
 To verify the installation setup is completed and ready to execute.
@@ -152,6 +159,8 @@ modern and secure management of scalable platform hardware.
 `redfish/extended/`: Contains test cases for combined legacy REST and DMTF Redfish-related
                      feature supported on OpenBMC.
 
+Note: Work in progress test developement parameter `-v REDFISH_SUPPORT_TRANS_STATE:1` to force
+      test to run the test suites in redfish ONLY mode.
 
 
 ## Quickstart ##
