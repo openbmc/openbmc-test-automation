@@ -28,6 +28,8 @@ ${OPENBMC_PASSWORD}    0penBmc
 ${REST_USERNAME}       root
 ${REST_PASSWORD}       0penBmc
 
+${CHASSIS_ID}  chassis
+
 # MTLS_ENABLED indicates whether mTLS is enabled.
 ${MTLS_ENABLED}        False
 # Valid mTLS certificate for authentication.

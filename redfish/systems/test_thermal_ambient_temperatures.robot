@@ -46,7 +46,8 @@ Get Thermal Records and Verify
     # record_type    The thermal record type (e.g. "Temperatures")
     # reading_type   The thermal temperature readings (e.g. "ReadingCelsius")
 
-    ${records}=  Verify Valid Records  ${record_type}  ${REDFISH_CHASSIS_THERMAL_URI}  ${reading_type}
+    ${records}=  Verify Valid Records  ${record_type}
+    ...  ${REDFISH_CHASSIS_URI}/${CHASSIS_ID}/Thermal  ${reading_type}
 
     ${num_records}=  Get Length  ${records}
     Rprint Vars  num_records  records

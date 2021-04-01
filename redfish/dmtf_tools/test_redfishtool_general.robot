@@ -30,7 +30,7 @@ Verify Redfishtool Sensor Commands
     [Documentation]  Verify redfishtool's sensor commands.
     [Tags]  Verify_Redfishtool_Sensor_Commands
 
-    ${sensor_status}=  Redfishtool Get  /redfish/v1/Chassis/chassis/Sensors
+    ${sensor_status}=  Redfishtool Get  /redfish/v1/Chassis/${CHASSIS_ID}/Sensors
     ${json_object}=  Evaluate  json.loads('''${sensor_status}''')  json
     Should Be True  ${json_object["Members@odata.count"]} > ${min_number_sensors}
     ...  msg=There should be at least ${min_number_sensors} sensors.
@@ -40,7 +40,7 @@ Verify Redfishtool Health Check Commands
     [Documentation]  Verify redfishtool's health check command.
     [Tags]  Verify_Redfishtool_Health_Check_Commands
 
-    ${chassis_data}=  Redfishtool Get  /redfish/v1/Chassis/chassis/
+    ${chassis_data}=  Redfishtool Get  /redfish/v1/Chassis/${CHASSIS_ID}/
     ${json_object}=  Evaluate  json.loads('''${chassis_data}''')  json
     ${status}=  Set Variable  ${json_object["Status"]}
     Should Be Equal  OK  ${status["Health"]}

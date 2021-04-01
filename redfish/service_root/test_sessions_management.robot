@@ -132,7 +132,7 @@ Verify Chassis Defaults
 
     # Members can be one or more, hence checking in the list.
     Valid List  chassis['Members']
-    ...  required_values=[{'@odata.id': '/redfish/v1/Chassis/chassis'}]
+    ...  required_values=[{'@odata.id': '/redfish/v1/Chassis/${CHASSIS_ID}'}]
 
 
 Verify Systems Defaults
