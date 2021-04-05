@@ -42,6 +42,23 @@
     },
     {
       "key": {
+        "uuid": "bf32ca2d_8bcf126a",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000337
+      },
+      "writtenOn": "2021-04-05T17:11:48Z",
+      "side": 1,
+      "message": "Please refer for the rf user guide. https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html\nAlso Verify your test cases before pushing for review. Thanks.",
+      "revId": "65dd997b6a4cd2a50a67c1fcd1f6ffc2fc1fba18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f36baff6_47f65bc3",
         "filename": "ipmi/test_ipmi_fru_device.robot",
         "patchSetId": 2
