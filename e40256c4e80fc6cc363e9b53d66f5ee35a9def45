@@ -2,6 +2,121 @@
   "comments": [
     {
       "key": {
+        "uuid": "06e57266_2c45f74a",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-06T09:59:32Z",
+      "side": 1,
+      "message": "Should we not stick to one format while returning the output?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc71be4b_efd7d067",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-06T09:59:32Z",
+      "side": 1,
+      "message": "based on",
+      "range": {
+        "startLine": 108,
+        "startChar": 65,
+        "endLine": 108,
+        "endChar": 70
+      },
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f30d137b_d7924d39",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-06T09:59:32Z",
+      "side": 1,
+      "message": "I see this argument being used only in 2 cases. There should be a default value if it is irrelevant for first 2 scenarios.",
+      "range": {
+        "startLine": 135,
+        "startChar": 46,
+        "endLine": 135,
+        "endChar": 51
+      },
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "122df0e5_6b5b966c",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-06T09:59:32Z",
+      "side": 1,
+      "message": "Please change as per the current args.",
+      "range": {
+        "startLine": 140,
+        "startChar": 3,
+        "endLine": 143,
+        "endChar": 65
+      },
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "684d6069_a6749ef4",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-06T09:59:32Z",
+      "side": 1,
+      "message": "PLDM",
+      "range": {
+        "startLine": 167,
+        "startChar": 29,
+        "endLine": 167,
+        "endChar": 34
+      },
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dee0bfbd_6b23559d",
         "filename": "pldm/test_pldm_bios_attributes.robot",
         "patchSetId": 8
