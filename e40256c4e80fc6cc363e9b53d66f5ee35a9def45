@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dee0bfbd_6b23559d",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-04-06T07:37:33Z",
+      "side": 1,
+      "message": "can you remove extra space",
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80561db1_1a466c65",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-04-06T07:37:33Z",
+      "side": 1,
+      "message": "can you remove extra space",
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3ff5916_cd6b40c1",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-04-06T07:37:33Z",
+      "side": 1,
+      "message": "can you remove extra space",
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
