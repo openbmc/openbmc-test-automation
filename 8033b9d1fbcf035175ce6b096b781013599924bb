@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d7eb763d_f6af4a16",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-04-06T07:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc0c1163_1e3f3289",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "8033b9d1fbcf035175ce6b096b781013599924bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "082751ec_a73b5f2f",
         "filename": "redfish/systems/test_sensor_monitoring.robot",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "8033b9d1fbcf035175ce6b096b781013599924bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae89fe49_e95c29ee",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-04-06T07:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "082751ec_a73b5f2f",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 35
+      },
+      "revId": "8033b9d1fbcf035175ce6b096b781013599924bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d4d99e68_fed67eee",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-04-06T07:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "068e509f_c56b204a",
+      "range": {
+        "startLine": 96,
+        "startChar": 28,
+        "endLine": 96,
+        "endChar": 47
+      },
+      "revId": "8033b9d1fbcf035175ce6b096b781013599924bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "196c2b1d_72698677",
         "filename": "redfish/systems/test_sensor_monitoring.robot",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "8033b9d1fbcf035175ce6b096b781013599924bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b75e2a4d_81b81141",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-04-06T07:03:19Z",
+      "side": 1,
+      "message": "Actually, this variable is used to distinguish other machines in the verify table. You can refer to the keyword \u0027Check Sensors Present\u0027 in line 190. My think is that the purpose of this variable is to be used as a parameter when execute the test. So it shouldn\u0027t need to get it automatically in this test.",
+      "parentUuid": "196c2b1d_72698677",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "8033b9d1fbcf035175ce6b096b781013599924bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
