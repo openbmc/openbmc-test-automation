@@ -446,7 +446,7 @@ Delete Static IPv4 Addresses Except BMC IP
     # Get delete ip elements.
     ${delete_ip_elements}=  Get Element Count  ${xpath_delete_static_ip}
 
-    # Delete IP Address on BMC if avilable more than 1.
+    # Delete IP Address on BMC if available more than 1.
     Run Keyword If  ${delete_ip_elements} != ${1}
     ...  Delete Static IPv4 Addresses Except BMC IP  ${element}
 
@@ -466,7 +466,7 @@ Test Setup Execution
     Set Suite Variable  ${ip_data}
     Set Suite Variable  ${netmask_data}
 
-    # Delete existing static IPv4 addresses and netmask if avilable.
+    # Delete existing static IPv4 addresses and netmask if available.
     Run Keyword If  ${ip_data} != @{empty} and ${netmask_data} != @{empty}
     ...  Delete And Verify Static IP Address On BMC
 

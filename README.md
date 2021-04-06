@@ -159,7 +159,7 @@ modern and secure management of scalable platform hardware.
 `redfish/extended/`: Contains test cases for combined legacy REST and DMTF Redfish-related
                      feature supported on OpenBMC.
 
-Note: Work in progress test developement parameter `-v REDFISH_SUPPORT_TRANS_STATE:1` to force
+Note: Work in progress test development parameter `-v REDFISH_SUPPORT_TRANS_STATE:1` to force
       the test suites to execute in redfish mode only.
 
 

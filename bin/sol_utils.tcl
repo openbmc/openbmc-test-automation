@@ -616,7 +616,7 @@ proc root_password {} {
 
   qprintn ; qprint_timen "Entering root password."
   send_wrap "$os_password"
-  expect_wrap [list "confirm"] "comfirm root password prompt" 15
+  expect_wrap [list "confirm"] "confirm root password prompt" 15
 
   qprintn ; qprint_timen "Re-entering root password."
   send_wrap "$os_password"
