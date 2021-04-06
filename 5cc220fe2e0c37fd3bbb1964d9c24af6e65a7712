@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "705afb9c_302b35c9",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-06T11:01:21Z",
+      "side": 1,
+      "message": "${IPMI_COMMAND}         Inband",
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88afbf84_c542a02c",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-06T11:01:21Z",
+      "side": 1,
+      "message": "Redfish Power On  stack_mode\u003dskip\n\nProbably you ll need this.. This will power on if Host s off and NO-OP is Host is already up and booted",
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba4d5233_c92923b1",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-06T11:01:21Z",
+      "side": 1,
+      "message": "Should Not Be Empty   ${OS_PASSWORD} \n\nplease add that also",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 40
+      },
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54b957f9_175908f4",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-06T11:01:21Z",
+      "side": 1,
+      "message": "Remove this.. not required.. look at the \n*** Variables *****    comment there",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 55
+      },
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1a9e428_99eebdd7",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-06T11:01:21Z",
+      "side": 1,
+      "message": "This always be true even if we dont key in.. \nlib/resource.robot:${CHASSIS_ID}  chassis\n\nremove this please",
+      "range": {
+        "startLine": 100,
+        "startChar": 4,
+        "endLine": 100,
+        "endChar": 38
+      },
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b68700d_565b19e9",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-06T11:01:21Z",
+      "side": 1,
+      "message": "is this nothing but the OPENBMC_MODEL equivalent key right ?",
+      "range": {
+        "startLine": 197,
+        "startChar": 10,
+        "endLine": 197,
+        "endChar": 17
+      },
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
