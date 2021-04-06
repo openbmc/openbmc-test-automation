@@ -71,6 +71,30 @@ Verify Create LDAP Configuration
     Redfish.Logout
     Redfish.Login
 
+
+Verify LDAP Service Disable
+    [Documentation]  Verify that LDAP user cannot login when LDAP service is disabled.
+    [Tags]  Verify_LDAP_Service_Disable
+
+    ${status}=  Run Keyword And Return Status
+    ...  Checkbox Should Be Selected  ${xpath_enable_ldap_checkbox}
+
+    Run Keyword If  ${status} == ${True}
+    ...  Click Element At Coordinates  ${xpath_enable_ldap_checkbox}  0  0
+
+    Checkbox Should Not Be Selected  ${xpath_enable_ldap_checkbox}
+    Click Element  ${xpath_ldap_save_settings}
+    Wait Until Page Contains  Successfully saved Open LDAP settings
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains Element  ${xpath_ldap_heading}
+
+    ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
+    ...  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${False}
+    ...  msg=LDAP user was able to login even though the LDAP service was disabled.
+    Redfish.Logout
+
+
 *** Keywords ***
 
 Test Setup Execution
