@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1b379361_b7d6c94a",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-07T06:31:50Z",
+      "side": 1,
+      "message": "after navigating to network page ,network locators taking sometime to load",
+      "parentUuid": "23d5f93c_d6859f3f",
+      "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ce3a80e2_67d2188e",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "e892548d_f721ecd1",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-07T06:31:50Z",
+      "side": 1,
+      "message": "This keyword can modify single IP address based on position,\nthere are multiple IP address it will handle like below\n[setup] get all ip\u0027s and delete\nadd ip address\nupdate ip address\n[Teardown] Restore ip\u0027s",
+      "parentUuid": "ce3a80e2_67d2188e",
+      "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68bdc57a_9694a7d4",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2021-04-07T06:16:44Z",
       "side": 1,
       "message": "if there are 3-4 IP address exist on BMC, this code handles it?",
+      "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24c3b8c9_7cba0840",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-07T06:31:50Z",
+      "side": 1,
+      "message": "this keyword for adding single ip address , \n\"Add Static IP Address And Verify\"  this keyword can handle When multiple address exist",
+      "parentUuid": "68bdc57a_9694a7d4",
       "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
