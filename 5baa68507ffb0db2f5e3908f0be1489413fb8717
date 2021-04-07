@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77ff822f_98f6a055",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-04-07T06:09:05Z",
+      "side": 1,
+      "message": "this is already taken care by line 181-185.\nWhy are you adding again? if you add then it is double the actual timeout.",
+      "revId": "5baa68507ffb0db2f5e3908f0be1489413fb8717",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
