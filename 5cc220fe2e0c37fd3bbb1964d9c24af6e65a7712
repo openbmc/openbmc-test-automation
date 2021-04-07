@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "31e7e2a6_1b53c545",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-04-07T06:38:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "705afb9c_302b35c9",
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88afbf84_c542a02c",
         "filename": "redfish/systems/test_sensor_monitoring.robot",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ce7acbb_3e817514",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-04-07T06:38:03Z",
+      "side": 1,
+      "message": "Some of steps in this keyword will use \u0027REST interface\u0027 which is not used in our environment.\nSo it will fail if I use this keyword.",
+      "parentUuid": "88afbf84_c542a02c",
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "af5543ec_8be0d264",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-04-07T06:38:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba4d5233_c92923b1",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 40
+      },
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54b957f9_175908f4",
         "filename": "redfish/systems/test_sensor_monitoring.robot",
         "patchSetId": 2
@@ -79,6 +139,30 @@
       "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82e4f086_75c4bd5b",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-04-07T06:38:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54b957f9_175908f4",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 55
+      },
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "5df80cab_19be2b80",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-04-07T06:38:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1a9e428_99eebdd7",
+      "range": {
+        "startLine": 100,
+        "startChar": 4,
+        "endLine": 100,
+        "endChar": 38
+      },
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b68700d_565b19e9",
         "filename": "redfish/systems/test_sensor_monitoring.robot",
         "patchSetId": 2
@@ -125,6 +233,30 @@
       "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "295c6262_005ee0e8",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000335
+      },
+      "writtenOn": "2021-04-07T06:38:03Z",
+      "side": 1,
+      "message": "Yes, sorry for the misunderstanding. Modified it to ${OPENBMC_MODEL} at new patch set.",
+      "parentUuid": "2b68700d_565b19e9",
+      "range": {
+        "startLine": 197,
+        "startChar": 10,
+        "endLine": 197,
+        "endChar": 17
+      },
+      "revId": "5cc220fe2e0c37fd3bbb1964d9c24af6e65a7712",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
