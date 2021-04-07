@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23d5f93c_d6859f3f",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-04-07T06:16:44Z",
+      "side": 1,
+      "message": "why this is needed?",
+      "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce3a80e2_67d2188e",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-04-07T06:16:44Z",
+      "side": 1,
+      "message": "If there are multiple IP address, this code does not navigate all IPs and find location of IP address to be replaced.",
+      "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68bdc57a_9694a7d4",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-04-07T06:16:44Z",
+      "side": 1,
+      "message": "if there are 3-4 IP address exist on BMC, this code handles it?",
+      "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
