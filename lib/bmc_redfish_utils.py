@@ -180,7 +180,9 @@ class bmc_redfish_utils(object):
         # Return the matching target URL entry.
         for target in target_list:
             # target "/redfish/v1/Systems/system/Actions/ComputerSystem.Reset"
-            if target_attribute in target:
+            attribute_in_uri = target.rsplit('/', 1)[-1]
+            # attribute_in_uri "ComputerSystem.Reset"
+            if target_attribute == attribute_in_uri:
                 return target
 
         return None
