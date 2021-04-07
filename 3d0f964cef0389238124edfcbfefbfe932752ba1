@@ -72,6 +72,41 @@
     },
     {
       "key": {
+        "uuid": "0686330e_6eb98001",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-04-07T10:10:19Z",
+      "side": 1,
+      "message": "this should come in keyword.\nWhat user does is, he just sends which IP to be modified and new IP address. Based on that keyword should find position of IP and replace it.",
+      "parentUuid": "e892548d_f721ecd1",
+      "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf9bddde_779694eb",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-04-07T10:10:19Z",
+      "side": 1,
+      "message": "already you are waiting 15 seconds above and again 18 seconds, 33 seconds is too long for IP configuration update.",
+      "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68bdc57a_9694a7d4",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 5
@@ -101,6 +136,24 @@
       "side": 1,
       "message": "this keyword for adding single ip address , \n\"Add Static IP Address And Verify\"  this keyword can handle When multiple address exist",
       "parentUuid": "68bdc57a_9694a7d4",
+      "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe2b3a68_70ac9976",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-04-07T10:10:19Z",
+      "side": 1,
+      "message": "then why 2 keywords for same purpose?",
+      "parentUuid": "24c3b8c9_7cba0840",
       "revId": "3d0f964cef0389238124edfcbfefbfe932752ba1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
