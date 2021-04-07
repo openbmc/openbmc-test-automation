@@ -175,11 +175,14 @@ Configure MAC Settings
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
     ...  valid_status_codes=[200, 400, 500]
 
-    # After any modification on network interface, BMC restarts network
-    # module, wait until it is reachable.
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
 
-    Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}
-    ...  redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    # After any modification on network interface, BMC restarts network
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
 
     # Verify whether new MAC address is populated on BMC system.
     # It should not allow to configure invalid settings.
