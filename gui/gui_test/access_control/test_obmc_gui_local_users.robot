@@ -60,8 +60,8 @@ Verify Existence Of All Buttons In Local User Management Page
 
     Page should contain Button  ${xpath_account_policy}
     Page should contain Button  ${xpath_add_user}
-    Page Should Contain Button  ${xpath_edit_user}
-    Page Should Contain Button  ${xpath_delete_user}
+    Page Should Contain Element  ${xpath_edit_user}
+    Page Should Contain Element  ${xpath_delete_user}
 
 
 Verify Existence Of All Button And Fields In Add User
