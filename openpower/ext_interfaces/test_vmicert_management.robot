@@ -77,13 +77,13 @@ Send CSR Request When VMI Is Off And Verify
     ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_INTERNAL_SERVER_ERROR}
 
     # Send CSR request from operator user.
-    operator_user        TestPwd123           ${False}      ${True}    ${HTTP_INTERNAL_SERVER_ERROR}
+    operator_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
     # Send CSR request from ReadOnly user.
-    readonly_user        TestPwd123           ${False}      ${True}    ${HTTP_INTERNAL_SERVER_ERROR}
+    readonly_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
     # Send CSR request from NoAccess user.
-    noaccess_user        TestPwd123           ${False}      ${True}    ${HTTP_INTERNAL_SERVER_ERROR}
+    noaccess_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
 Get Corrupted CSR Request Signed By VMI And Verify
     [Documentation]  Send corrupted CSR for signing and expect an error.
