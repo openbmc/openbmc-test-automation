@@ -18,6 +18,9 @@ Test Teardown    FFDC On Test Case Fail
 @{ADMIN}       admin_user  TestPwd123
 @{OPERATOR}    operator_user  TestPwd123
 &{USERS}       Administrator=${ADMIN}  Operator=${OPERATOR}
+${duration}    6h
+${interval}    30s
+${reboot_interval}  30m
 
 
 *** Test Cases ***
@@ -181,6 +184,27 @@ REST Logging Interface Read Should Be A SUCCESS For Authorized Users
     Run Keyword Unless   ${-1} < ${log_count} < ${201}  Fail
 
 
+Create Session And Check Connection Stability
+    [Documentation]  Send heartbeat on session continuosly and verify connection stability.
+    [Tags]  Create_Session_And_Check_Connection_Stability
+    [Setup]  Redfish.logout
+
+    # Clear old session and start new session.
+    Redfish.Login
+
+    Repeat Keyword  ${duration}  Send Heartbeat
+
+
+Create Session And Check Connection Stability On Reboot
+    [Documentation]  Create Session And Check Connection Stability On Reboot
+    [Setup]  Redfish.logout
+
+    # Clear old session and start new session.
+    Redfish.Login
+
+    Repeat Keyword  ${duration}  Check Connection On Reboot
+
+
 *** Keywords ***
 
 Create Session And Verify Response Code
@@ -230,3 +254,20 @@ Suite Teardown Execution
 
     Delete BMC Users Via Redfish  users=${USERS}
     Redfish.Logout
+
+
+Send Heartbeat
+    [Documentation]  Send heartbeat to BMC.
+
+    ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    Sleep  ${interval}
+
+
+Check Connection On Reboot
+    [Documentation]  Send heartbeat on BMC reboot.
+
+    # Reboot BMC
+    Redfish OBMC Reboot (Off)
+
+    # Verify session is still active and no issues on connection after reboot. 
+    Repeat Keyword  ${reboot_interval}  Send Heartbeat
