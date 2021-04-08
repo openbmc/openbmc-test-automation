@@ -595,10 +595,14 @@ Verify Old Logs Are Deleted When Count Crosses Max
 
     # Now verify that first log is no more available but the 3000th is available.
     ${1st_id}=  Get From List  ${pel_ids}  0
-    ${3000th_id}=  Get From List  ${pel_ids}  3000
-    ${output}=  peltool -i ${1st_id}
+    ${3000th_id}=  Get From List  ${pel_ids}  2999
+
+    ${status}  ${output}=  Run Keyword And Ignore Error  Peltool  -i ${1st_id}
+    Should Be True  '${status}' == 'FAIL'
     Should Contain  ${output}  PEL not found
-    ${output}=  peltool -i ${3000th_id}
+
+    ${status}  ${output}=  Run Keyword And Ignore Error  Peltool  -i ${3000th_id}
+    Should Be True  '${status}' == 'PASS'
     Should Not Contain  ${output}  PEL not found
 
 
