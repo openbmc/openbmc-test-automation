@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b9d178f7_f7466020",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-04-08T08:14:44Z",
+      "side": 1,
+      "message": "this is need anu... in case of failure the output is not in the dict format it is just a string which throw the exception on json.loads",
+      "parentUuid": "06e57266_2c45f74a",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bc71be4b_efd7d067",
         "filename": "lib/pldm_utils.py",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8b5415d6_86f9c67f",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-04-08T08:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc71be4b_efd7d067",
+      "range": {
+        "startLine": 108,
+        "startChar": 65,
+        "endLine": 108,
+        "endChar": 70
+      },
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f30d137b_d7924d39",
         "filename": "lib/pldm_utils.py",
         "patchSetId": 8
@@ -59,6 +107,30 @@
       "writtenOn": "2021-04-06T09:59:32Z",
       "side": 1,
       "message": "I see this argument being used only in 2 cases. There should be a default value if it is irrelevant for first 2 scenarios.",
+      "range": {
+        "startLine": 135,
+        "startChar": 46,
+        "endLine": 135,
+        "endChar": 51
+      },
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "545a44c7_a61c9c7e",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-04-08T08:14:44Z",
+      "side": 1,
+      "message": "yess because for IP adrs n gateway min length is 7 n max length is 15 ..am using default value here to set width 1.1.1.1 format",
+      "parentUuid": "f30d137b_d7924d39",
       "range": {
         "startLine": 135,
         "startChar": 46,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "8a7f329d_ad65de38",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-04-08T08:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "122df0e5_6b5b966c",
+      "range": {
+        "startLine": 140,
+        "startChar": 3,
+        "endLine": 143,
+        "endChar": 65
+      },
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "684d6069_a6749ef4",
         "filename": "pldm/test_pldm_bios.robot",
         "patchSetId": 8
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "23b194ab_ea353f2f",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-04-08T08:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "684d6069_a6749ef4",
+      "range": {
+        "startLine": 167,
+        "startChar": 29,
+        "endLine": 167,
+        "endChar": 34
+      },
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dee0bfbd_6b23559d",
         "filename": "pldm/test_pldm_bios_attributes.robot",
         "patchSetId": 8
@@ -134,6 +254,24 @@
     },
     {
       "key": {
+        "uuid": "a552d53f_3d8b010c",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-04-08T08:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dee0bfbd_6b23559d",
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80561db1_1a466c65",
         "filename": "pldm/test_pldm_bios_attributes.robot",
         "patchSetId": 8
@@ -148,6 +286,24 @@
       "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "104c8c93_16890436",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-04-08T08:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80561db1_1a466c65",
+      "revId": "e40256c4e80fc6cc363e9b53d66f5ee35a9def45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
