@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fa9361e_86ebe2df",
+        "filename": "lib/pldm_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "remove white space.",
+      "range": {
+        "startLine": 145,
+        "startChar": 38,
+        "endLine": 145,
+        "endChar": 39
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "732b395f_96f50197",
+        "filename": "pldm/test_pldm_bios.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "Add one more blank line above... Keep two blank line between two keywords.",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 23
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e52ec30_2ce344ed",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "\"\u003d\" not required here",
+      "range": {
+        "startLine": 18,
+        "startChar": 16,
+        "endLine": 18,
+        "endChar": 17
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9f6db6a_c5352138",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "Keep two blank lines between two test cases. Applied to all below test cases.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 53
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47ce139d_7b84100d",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "enumeration",
+      "range": {
+        "startLine": 59,
+        "startChar": 64,
+        "endLine": 59,
+        "endChar": 75
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eb7fed3_2e9b4e1b",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "invalid",
+      "range": {
+        "startLine": 59,
+        "startChar": 32,
+        "endLine": 59,
+        "endChar": 39
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e476b4eb_40a545d5",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "integer",
+      "range": {
+        "startLine": 77,
+        "startChar": 68,
+        "endLine": 77,
+        "endChar": 75
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ece13183_64b7c67e",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "string",
+      "range": {
+        "startLine": 96,
+        "startChar": 67,
+        "endLine": 96,
+        "endChar": 73
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ff4f475_b6155b41",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "string",
+      "range": {
+        "startLine": 117,
+        "startChar": 37,
+        "endLine": 117,
+        "endChar": 43
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ce1ae76_a37a3aeb",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "integer",
+      "range": {
+        "startLine": 141,
+        "startChar": 37,
+        "endLine": 141,
+        "endChar": 44
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4128c9a5_3ce4755d",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "enumeration",
+      "range": {
+        "startLine": 165,
+        "startChar": 37,
+        "endLine": 165,
+        "endChar": 48
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d6875e2_b3a36ae1",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "bring it in one line",
+      "range": {
+        "startLine": 187,
+        "startChar": 21,
+        "endLine": 188,
+        "endChar": 51
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ded56b7_91ce545d",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "PLDM",
+      "range": {
+        "startLine": 199,
+        "startChar": 29,
+        "endLine": 199,
+        "endChar": 33
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e004bf3_7dd3f5ee",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "attribute",
+      "range": {
+        "startLine": 209,
+        "startChar": 39,
+        "endLine": 209,
+        "endChar": 48
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56187653_3cb13962",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-08T10:17:26Z",
+      "side": 1,
+      "message": "Description of argument(s) missing",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 37
+      },
+      "revId": "f57ec7fc595113f0d3c8e2a73ac1cae573f7ec22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
