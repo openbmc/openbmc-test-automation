@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "474042c0_65116cb5",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-09T09:11:54Z",
+      "side": 1,
+      "message": "Just below change here should be good enough to fix this issue.\n\nFOR  ${count}  IN RANGE  1  3000",
+      "range": {
+        "startLine": 584,
+        "startChar": 4,
+        "endLine": 584,
+        "endChar": 36
+      },
+      "revId": "0f4f5286e717ca3dd2922c8d683c66dc58532494",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
