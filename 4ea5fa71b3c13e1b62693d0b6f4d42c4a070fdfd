@@ -16,6 +16,24 @@
       "revId": "4ea5fa71b3c13e1b62693d0b6f4d42c4a070fdfd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "842a9af5_5e67bbc5",
+        "filename": "redfish/service_root/test_sessions_connection.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-04-09T05:44:19Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "64617c45_42f7e496",
+      "revId": "4ea5fa71b3c13e1b62693d0b6f4d42c4a070fdfd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
