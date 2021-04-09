@@ -151,6 +151,14 @@ Generate Error On BMC And Verify Trap On SNMP
      ${CMD_FRU_CALLOUT}           ${SNMP_TRAP_BMC_CALLOUT_ERROR}
      ${CMD_INFORMATIONAL_ERROR}   ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
 
+Configure SNMP Manager On BMC With Less Octet IP And Verify
+     [Documentation]  Configure SNMP Manager On BMC with less octet ip and verify.
+     [Tags]  Configure_SNMP_Manager_On_BMC_With_Less_Octet_IP_AND_Verify
+     [Template]  Configure SNMP Manager On BMC
+
+     # SNMP manager IP   Port                  Scenario
+     10.10.10            ${SNMP_DEFAULT_PORT}  error
+
 *** Keywords ***
 
 Create Error On BMC And Verify If Trap Is Sent
