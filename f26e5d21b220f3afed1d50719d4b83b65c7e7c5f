@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85171fcc_786b9c63",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-04-12T15:51:16Z",
+      "side": 1,
+      "message": "Suggestion: Configure BMC SNMP Manager With Invalid IP",
+      "revId": "f26e5d21b220f3afed1d50719d4b83b65c7e7c5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c29b7409_53937458",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-04-12T15:51:16Z",
+      "side": 1,
+      "message": "And instead of AND",
+      "revId": "f26e5d21b220f3afed1d50719d4b83b65c7e7c5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
