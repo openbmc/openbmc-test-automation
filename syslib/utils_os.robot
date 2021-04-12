@@ -515,7 +515,7 @@ Check HTX Run Status
     ...  htxcmdline -geterrlog
     Printn  ${htx_errlog}
 
-    Should Contain  ${htx_errlog}  file </tmp/htxerr> is empty
+    Should Contain  ${htx_errlog}  file </tmp/htx/htxerr> is empty
     ...  msg=HTX geterrorlog was not empty.
 
     Return From Keyword If  "${sleep_time}" == "${0}"
