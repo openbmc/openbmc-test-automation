@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation       This suite tests error log callout handling when checkstop
-                    is injected through HOST/BMC and BMC rebooted.
+...                 is injected through HOST/BMC and BMC rebooted.
 
 Resource            ../../lib/openbmc_ffdc.robot
 Resource            ../../lib/openbmc_ffdc_utils.robot
