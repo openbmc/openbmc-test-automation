@@ -194,6 +194,62 @@ Set The Boot Mode As Setup Using Ipmitool
     Should Contain  ${output}  Force Boot into BIOS Setup
 
 
+Set The Boot Type As Legacy Using REST API
+    [Documentation]  Set boot type as Legacy via REST and verify with both
+    ...              REST and IPMI.
+    [Tags]  Set_The_Boot_Type_As_Legacy_Using_REST_API
+
+    Set Boot Type  ${BOOT_TYPE_LEGACY}
+
+    ${boot_type}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootType
+    Should Be Equal As Strings  ${boot_type}  ${BOOT_TYPE_LEGACY}
+
+    ${output}=  Run IPMI Standard Command  chassis bootparam get 5
+    Should Contain  ${output}  BIOS PC Compatible (legacy) boot
+
+
+Set The Boot Type As Legacy Using Ipmitool
+    [Documentation]  Set boot type as Legacy via IPMI and verify with both
+    ...              REST and IPMI.
+    [Tags]  Set_The_Boot_Type_As_Legacy_Using_Ipmitool
+
+    Run IPMI command  0x0 0x8 0x05 0x80 0x00 0x00 0x00 0x00
+
+    ${boot_type}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootType
+    Should Be Equal As Strings  ${boot_type}  ${BOOT_TYPE_LEGACY}
+
+    ${output}=  Run IPMI Standard Command  chassis bootparam get 5
+    Should Contain  ${output}  BIOS PC Compatible (legacy) boot
+
+
+Set The Boot Type As EFI Using REST API
+    [Documentation]  Set boot type as EFI via REST and verify with both
+    ...              REST and IPMI.
+    [Tags]  Set_The_Boot_Type_As_EFI_Using_REST_API
+
+    Set Boot Type  ${BOOT_TYPE_EFI}
+
+    ${boot_type}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootType
+    Should Be Equal As Strings  ${boot_type}  ${BOOT_TYPE_EFI}
+
+    ${output}=  Run IPMI Standard Command  chassis bootparam get 5
+    Should Contain  ${output}  BIOS EFI boot
+
+
+Set The Boot Type As EFI Using Ipmitool
+    [Documentation]  Set boot type as EFI via IPMI and verify with both
+    ...              REST and IPMI.
+    [Tags]  Set_The_Boot_Type_As_EFI_Using_Ipmitool
+
+    Run IPMI command  0x0 0x8 0x05 0xA0 0x00 0x00 0x00 0x00
+
+    ${boot_type}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time  BootType
+    Should Be Equal As Strings  ${boot_type}  ${BOOT_TYPE_EFI}
+
+    ${output}=  Run IPMI Standard Command  chassis bootparam get 5
+    Should Contain  ${output}  BIOS EFI boot
+
+
 *** Keywords ***
 
 Set Boot Source
@@ -215,6 +271,17 @@ Set Boot Mode
 
     ${valueDict}=  Create Dictionary  data=${boot_mode}
     Write Attribute  ${CONTROL_HOST_URI}boot/one_time  BootMode
+    ...  data=${valueDict}
+
+
+Set Boot Type
+    [Documentation]  Set given boot type.
+    [Arguments]  ${boot_type}
+    # Description of argument(s):
+    # boot_type  Boot type which need to be set.
+
+    ${valueDict}=  Create Dictionary  data=${boot_type}
+    Write Attribute  ${CONTROL_HOST_URI}boot/one_time  BootType
     ...  data=${valueDict}
 
 
