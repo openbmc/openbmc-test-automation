@@ -132,6 +132,8 @@ BOOT_SOURCE_CDROM = 'xyz.openbmc_project.Control.Boot.Source.Sources.ExternalMed
 BOOT_MODE_SAFE = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Safe'
 BOOT_MODE_SETUP = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Setup'
 BOOT_MODE_REGULAR = 'xyz.openbmc_project.Control.Boot.Mode.Modes.Regular'
+BOOT_TYPE_LEGACY = 'xyz.openbmc_project.Control.Boot.Type.Types.Legacy'
+BOOT_TYPE_EFI = 'xyz.openbmc_project.Control.Boot.Type.Types.EFI'
 
 # Time variables.
 TIME_DBUS_BASE = 'xyz.openbmc_project.Time.'
