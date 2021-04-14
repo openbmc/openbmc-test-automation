@@ -16,6 +16,24 @@
       "revId": "bdaf57adc45f4e227ec2b22ff4a988c845a182d5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba707008_d408540d",
+        "filename": "lib/openbmc_ffdc_list.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-14T14:06:47Z",
+      "side": 1,
+      "message": "Yeap.. FFDC is design to collect all files possible.. if not there it will simply continue with remaining data collected.. so we are good here",
+      "parentUuid": "93710b4b_06850ad3",
+      "revId": "bdaf57adc45f4e227ec2b22ff4a988c845a182d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
