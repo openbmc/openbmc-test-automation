@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93710b4b_06850ad3",
+        "filename": "lib/openbmc_ffdc_list.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-04-14T13:27:53Z",
+      "side": 1,
+      "message": "Just want to double check. If this file is not present, will FFDC collection still complete ok? On some systems this file will not be there.",
+      "revId": "bdaf57adc45f4e227ec2b22ff4a988c845a182d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
