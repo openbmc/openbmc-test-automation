@@ -48,6 +48,9 @@ Verify Server LED ON
     [Documentation]  Turn ON the server LED button using GUI and verify it via Redfish.
     [Tags]  Verify_Server_LED_ON
 
+    #Logging the Redfish Server
+    Redfish.Login
+
     # Turn Off the server LED via Redfish.
     Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Off"}   valid_status_codes=[200, 204]
 
