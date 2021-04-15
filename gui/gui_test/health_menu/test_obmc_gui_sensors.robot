@@ -88,8 +88,8 @@ Verify Filter By Severity Button OK
     Click Element At Coordinates  ${xpath_filter_ok}    0    0
     Click Element  ${xpath_sensors_filter}
 
-    Element Should Not Contain  ${xpath_selected_severity}  Warning
-    Element Should Not Contain  ${xpath_selected_severity}  Critical
+    Page Should Not Contain  ${xpath_selected_severity}  Warning
+    Page Should Not Contain  ${xpath_selected_severity}  Critical
 
 
 *** Keywords ***
