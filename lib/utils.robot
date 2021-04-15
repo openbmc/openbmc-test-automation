@@ -801,17 +801,23 @@ Get Post Boot Action
 
 
 Redfish Set Boot Default
-    [Documentation]  Set and Verify BootSource and BootType.
-    [Arguments]      ${override_enabled}  ${override_target}
+    [Documentation]  Set and Verify Boot source override
+    [Arguments]      ${override_enabled}  ${override_target}  ${override_mode}
 
     # Description of argument(s):
-    # override_enabled    Boot source enable type.
+    # override_enabled    Boot source override enable type.
     #                     ('Once', 'Continuous', 'Disabled').
-    # override_target     Boot target type.
+    # override_target     Boot source override target.
     #                     ('Pxe', 'Cd', 'Hdd', 'Diags', 'BiosSetup', 'None').
+    # override_mode       Boot source override mode (relevant only for x86 arch).
+    #                     ('Legacy', 'UEFI').
 
     ${data}=  Create Dictionary  BootSourceOverrideEnabled=${override_enabled}
     ...  BootSourceOverrideTarget=${override_target}
+
+    Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
+    ...  Set To Dictionary  ${data}  BootSourceOverrideMode  ${override_mode}
+
     ${payload}=  Create Dictionary  Boot=${data}
 
     Redfish.Patch  /redfish/v1/Systems/system  body=&{payload}
@@ -820,6 +826,8 @@ Redfish Set Boot Default
     ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/system  Boot
     Should Be Equal As Strings  ${resp["BootSourceOverrideEnabled"]}  ${override_enabled}
     Should Be Equal As Strings  ${resp["BootSourceOverrideTarget"]}  ${override_target}
+    Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
+    ...  Should Be Equal As Strings  ${resp["BootSourceOverrideMode"]}  ${override_mode}
 
 
 # Redfish state keywords.
