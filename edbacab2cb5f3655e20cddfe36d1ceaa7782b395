@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f9f16001_de0a34a7",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-04-16T04:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4a28c55_0b8bc469",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 7
+      },
+      "revId": "edbacab2cb5f3655e20cddfe36d1ceaa7782b395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "590d640e_70aa5b67",
         "filename": "pldm/test_pldm_bios_attributes.robot",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2021-04-15T06:29:22Z",
       "side": 1,
       "message": "I didnt see this variable getting assigned. Where is it getting its value from?",
+      "range": {
+        "startLine": 92,
+        "startChar": 85,
+        "endLine": 92,
+        "endChar": 94
+      },
+      "revId": "edbacab2cb5f3655e20cddfe36d1ceaa7782b395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77079a03_71d0d367",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-04-16T04:34:58Z",
+      "side": 1,
+      "message": "yess one line is missed ... corrected",
+      "parentUuid": "590d640e_70aa5b67",
       "range": {
         "startLine": 92,
         "startChar": 85,
@@ -68,6 +116,30 @@
       "revId": "edbacab2cb5f3655e20cddfe36d1ceaa7782b395",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b608159a_b6953c32",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-04-16T04:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa9d7f87_0a008889",
+      "range": {
+        "startLine": 209,
+        "startChar": 27,
+        "endLine": 209,
+        "endChar": 40
+      },
+      "revId": "edbacab2cb5f3655e20cddfe36d1ceaa7782b395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
