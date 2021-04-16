@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a1c4d41c_bdd60b96",
+        "filename": "lib/utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2021-04-16T09:45:12Z",
+      "side": 1,
+      "message": "Done, added it to template as well",
+      "parentUuid": "bbb2ac1e_f2ab2f34",
+      "range": {
+        "startLine": 805,
+        "startChar": 62,
+        "endLine": 805,
+        "endChar": 78
+      },
+      "revId": "60e6443b358116d6d3b02281d7895187dac0bce4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e43e7f66_4d0a4646",
         "filename": "redfish/systems/test_boot_devices.robot",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2021-04-16T09:21:37Z",
       "side": 1,
       "message": "Source Override",
+      "range": {
+        "startLine": 44,
+        "startChar": 36,
+        "endLine": 44,
+        "endChar": 51
+      },
+      "revId": "60e6443b358116d6d3b02281d7895187dac0bce4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1966469e_cc93f40b",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2021-04-16T09:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e43e7f66_4d0a4646",
       "range": {
         "startLine": 44,
         "startChar": 36,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1dc44988_be55b647",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2021-04-16T09:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d82eb6eb_e7208c71",
+      "range": {
+        "startLine": 62,
+        "startChar": 35,
+        "endLine": 62,
+        "endChar": 47
+      },
+      "revId": "60e6443b358116d6d3b02281d7895187dac0bce4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c24357d4_facc300a",
         "filename": "redfish/systems/test_boot_devices.robot",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "ba3ad2e8_46ebf4af",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2021-04-16T09:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c24357d4_facc300a",
+      "range": {
+        "startLine": 79,
+        "startChar": 20,
+        "endLine": 79,
+        "endChar": 35
+      },
+      "revId": "60e6443b358116d6d3b02281d7895187dac0bce4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2c0c30b1_fba40c2f",
         "filename": "redfish/systems/test_boot_devices.robot",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2021-04-16T09:21:37Z",
       "side": 1,
       "message": "Source Override",
+      "range": {
+        "startLine": 136,
+        "startChar": 24,
+        "endLine": 136,
+        "endChar": 40
+      },
+      "revId": "60e6443b358116d6d3b02281d7895187dac0bce4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a9f6d81_5f23c43f",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2021-04-16T09:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c0c30b1_fba40c2f",
       "range": {
         "startLine": 136,
         "startChar": 24,
