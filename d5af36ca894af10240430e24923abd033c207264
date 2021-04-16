@@ -22,6 +22,29 @@
       "revId": "d5af36ca894af10240430e24923abd033c207264",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85167cd5_54e5d9f5",
+        "filename": "pldm/test_pldm_bios_attributes.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-16T07:32:43Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 4
+      },
+      "revId": "d5af36ca894af10240430e24923abd033c207264",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
