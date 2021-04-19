@@ -103,8 +103,7 @@ Add Multiple IP Addresses On VMI Interface And Verify
     ${ips}=  Create List  ${ip1}  ${ip2}  ${ip3}
 
     Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    ...  body={'IPv4StaticAddresses':${ips}}  valid_status_codes=[${HTTP_ACCEPTED}]
-    Verify VMI Network Interface Details   ${ip1["Address"]}  Static  ${ip1["Gateway"]}  ${ip1["SubnetMask"]}
+    ...  body={'IPv4StaticAddresses':${ips}}  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
 Modify IP Addresses On VMI Interface And Verify
