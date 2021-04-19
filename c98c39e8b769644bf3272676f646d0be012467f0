@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8cd2579b_16fdaf68",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-19T17:02:18Z",
+      "side": 1,
+      "message": "looks like extra space..remove",
+      "range": {
+        "startLine": 12,
+        "startChar": 39,
+        "endLine": 12,
+        "endChar": 40
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ce575bb_f0cf2d18",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-04-19T17:02:18Z",
+      "side": 1,
+      "message": "remove the \u003d and align",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 32
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
