@@ -302,7 +302,7 @@ Create Multiple Test Event Logs And Delete All
 # TODO: openbmc/openbmc-test-automation#1789
 Create Two Test Event Logs And Delete One
     [Documentation]  Create two event logs and delete the first entry.
-    [Tags]  Create_Two_Test_Eevent_Logs_And_Delete_One
+    [Tags]  Create_Two_Test_Event_Logs_And_Delete_One
 
     Redfish Purge Event Log
     Create Test Error Log

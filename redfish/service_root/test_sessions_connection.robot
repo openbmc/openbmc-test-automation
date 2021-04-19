@@ -23,7 +23,7 @@ ${REDFISH_DELETE_SESSIONS}  ${0}
 *** Test Cases ***
 
 Create Session And Check Connection Stability
-    [Documentation]  Send heartbeat on session continuosly and verify connection stability.
+    [Documentation]  Send heartbeat on session continuously and verify connection stability.
     [Tags]  Create_Session_And_Check_Connection_Stability
     [Setup]  Redfish.logout
 
