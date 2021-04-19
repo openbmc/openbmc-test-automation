@@ -131,11 +131,15 @@ Verify Persistency Of VMI IPv4 Details After Host Reboot
 
     # Verifying persistency of dynamic address.
     Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
+    Redfish Power Off  stack_mode=skip
+    Redfish Power On
     ${default}=  Set Variable  0.0.0.0
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
     # Verifying persistency of static address.
     Switch VMI IPv4 Origin And Verify Details
+    Redfish Power Off  stack_mode=skip
+    Redfish Power On
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
 
 
@@ -353,9 +357,8 @@ Enable And Disable DHCP And Verify
     ${default}=  Set Variable  0.0.0.0
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
     Set VMI IPv4 Origin  ${False}
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Should Be Empty  ${resp.dict["IPv4Addresses"]}
+    ${vmi_ip}=  Get VMI Network Interface Details
+    Should Be Empty  ${vmi_ip["IPv4_Address"]}
 
 
 Multiple Times Enable And Disable DHCP And Verify
@@ -368,9 +371,8 @@ Multiple Times Enable And Disable DHCP And Verify
       Set VMI IPv4 Origin  ${True}
       Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
       Set VMI IPv4 Origin  ${False}
-      ${resp}=  Redfish.Get
-      ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-      Should Be Empty  ${resp.dict["IPv4Addresses"]}
+      ${vmi_ip}=  Get VMI Network Interface Details
+      Should Be Empty  ${vmi_ip["IPv4_Address"]}
     END
 
 
@@ -572,7 +574,10 @@ Switch VMI IPv4 Origin And Verify Details
     ${default}=  Set Variable  0.0.0.0
     ${origin}=  Set Variable If  ${curr_mode} == ${False}  DHCP  Static
     Set VMI IPv4 Origin  ${dhcp_enabled}  ${HTTP_ACCEPTED}
-    Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}
+
+    ${curr_mode}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
+    Run Keyword If  ${curr_mode} == ${True}
+    ...  Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}
 
 
 Delete VMI Static IP Address Using Different Users
