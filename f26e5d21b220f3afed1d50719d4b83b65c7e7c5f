@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aacb60b1_49ba6de3",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-19T07:13:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85171fcc_786b9c63",
+      "revId": "f26e5d21b220f3afed1d50719d4b83b65c7e7c5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c29b7409_53937458",
         "filename": "snmp/test_bmc_snmp_config.robot",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "f26e5d21b220f3afed1d50719d4b83b65c7e7c5f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2264792_56404991",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-19T07:13:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c29b7409_53937458",
+      "revId": "f26e5d21b220f3afed1d50719d4b83b65c7e7c5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
