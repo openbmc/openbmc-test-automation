@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4474494e_79a023c4",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-19T05:42:44Z",
+      "side": 1,
+      "message": "not required, above keyword taking care",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 50
+      },
+      "revId": "2336ffcc772dfefe4361b89e77638847fd1003bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea73b063_f3f4b9a1",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-19T05:42:44Z",
+      "side": 1,
+      "message": "${vmi_ip}\u003d  Get VMI Network Interface Details\nShould Not Be Empty  ${vmi_ip[\"IPv4_Address\"]}",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 54
+      },
+      "revId": "2336ffcc772dfefe4361b89e77638847fd1003bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "799105c4_22a40b56",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-19T05:42:44Z",
+      "side": 1,
+      "message": "i didn\u0027t see HOST reboot.",
+      "revId": "2336ffcc772dfefe4361b89e77638847fd1003bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70684047_8d5b6f05",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-19T05:42:44Z",
+      "side": 1,
+      "message": "same as 141 line",
+      "revId": "2336ffcc772dfefe4361b89e77638847fd1003bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "940d89c4_8f84e517",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-19T05:42:44Z",
+      "side": 1,
+      "message": "same as line 381",
+      "range": {
+        "startLine": 364,
+        "startChar": 0,
+        "endLine": 366,
+        "endChar": 50
+      },
+      "revId": "2336ffcc772dfefe4361b89e77638847fd1003bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b37fea7c_4fb968dc",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-19T05:42:44Z",
+      "side": 1,
+      "message": "i suggest to use\n${vmi_ip}\u003d  Get VMI Network Interface Details\nShould Be Empty  ${vmi_ip[\"IPv4_Address\"]}",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 381,
+        "endChar": 52
+      },
+      "revId": "2336ffcc772dfefe4361b89e77638847fd1003bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e45b83c0_0bc74c47",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-19T05:42:44Z",
+      "side": 1,
+      "message": "${vmi_ip}\u003d  Run Keyword If  ${static_exists} \u003d\u003d ${True}\n    ...  Create Dictionary  DHCPv4\u003d${${ip_resp[\"DHCPv4\"][\"DHCPEnabled\"]}}  Id\u003d${ip_resp[\"Id\"]}\n    ...  Description\u003d${ip_resp[\"Description\"]}  IPv4_Address\u003d${ip_resp[\"IPv4StaticAddresses\"][0][\"Address\"]}\n    ...  IPv4_AddressOrigin\u003d${ip_resp[\"IPv4StaticAddresses\"][0][\"AddressOrigin\"]}  Name\u003d${ip_resp[\"Name\"]}\n    ...  IPv4_Gateway\u003d${ip_resp[\"IPv4StaticAddresses\"][0][\"Gateway\"]}\n    ...  InterfaceEnabled\u003d${${ip_resp[\"InterfaceEnabled\"]}}\n    ...  IPv4_SubnetMask\u003d${ip_resp[\"IPv4StaticAddresses\"][0][\"SubnetMask\"]}\n    ...  ELSE IF  ${ip_resp[\"IPv4StaticAddresses\"][0][\"Address\"]} \u003d\u003d \"0.0.0.0\"\n    ...  Create Dictionary  DHCPv4\u003d${${ip_resp[\"DHCPv4\"][\"DHCPEnabled\"]}}  Id\u003d${ip_resp[\"Id\"]}\n    ...  Description\u003d${ip_resp[\"Description\"]}  IPv4StaticAddresses\u003d${ip_resp[\"IPv4StaticAddresses\"]}\n    ...  Name\u003d${ip_resp[\"Name\"]}  InterfaceEnabled\u003d${${ip_resp[\"InterfaceEnabled\"]}}\n    ...  IPv4_Address\u003d${ip_resp[\"IPv4Addresses\"][0][\"Address\"]}\n    ...  IPv4_AddressOrigin\u003d${ip_resp[\"IPv4Addresses\"][0][\"AddressOrigin\"]}\n    ...  IPv4_Gateway\u003d${ip_resp[\"IPv4Addresses\"][0][\"Gateway\"]}\n    ...  IPv4_SubnetMask\u003d${ip_resp[\"IPv4Addresses\"][0][\"SubnetMask\"]}\n    ...  ELSE\n    ...  Create Dictionary  DHCPv4\u003d${${ip_resp[\"DHCPv4\"][\"DHCPEnabled\"]}}  Id\u003d${ip_resp[\"Id\"]}\n    ...  Description\u003d${ip_resp[\"Description\"]}  IPv4StaticAddresses\u003d${ip_resp[\"IPv4StaticAddresses\"]}\n    ...  Name\u003d${ip_resp[\"Name\"]}  InterfaceEnabled\u003d${${ip_resp[\"InterfaceEnabled\"]}}\n\n\nthree ways to get data 1.when static ip configured thenget vmi info.\n2.when dhcp enabled, get vmi info if vmi ip is 0.0.0.0 .\n3.get vmi info when no ip configured and dhcp not enabled.",
+      "range": {
+        "startLine": 431,
+        "startChar": 0,
+        "endLine": 447,
+        "endChar": 84
+      },
+      "revId": "2336ffcc772dfefe4361b89e77638847fd1003bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f7f3a68_df1f8670",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-19T05:42:44Z",
+      "side": 1,
+      "message": "i suggest to use \n${vmi_ip}\u003d  Get VMI Network Interface Details\nShould Be Empty  ${vmi_ip[\"IPv4_Address\"]}",
+      "range": {
+        "startLine": 553,
+        "startChar": 0,
+        "endLine": 555,
+        "endChar": 56
+      },
+      "revId": "2336ffcc772dfefe4361b89e77638847fd1003bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
