@@ -22,6 +22,30 @@
       "revId": "c48524b19bf7913a85b7b26716218710f253c2b5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6079a446_ac12605f",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-04-20T10:50:43Z",
+      "side": 1,
+      "message": "Configure SNMP Manager On BMC With Less Octet IP And Verify\nthis name looks good to me",
+      "parentUuid": "3debe0ea_dd70a771",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 52
+      },
+      "revId": "c48524b19bf7913a85b7b26716218710f253c2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
