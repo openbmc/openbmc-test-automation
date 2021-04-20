@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f8b0d3f8_10c1dde4",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-20T11:22:46Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "fb595a6e_ce5487d3",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 4
+      },
+      "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0b0c3d4_d58389a6",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7b6bf5d3_1da30814",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-20T11:22:46Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "a0b0c3d4_d58389a6",
+      "range": {
+        "startLine": 58,
+        "startChar": 49,
+        "endLine": 58,
+        "endChar": 53
+      },
+      "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "602a6925_ce2bdb20",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38922173_1565f58c",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-20T11:22:46Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "602a6925_ce2bdb20",
+      "range": {
+        "startLine": 425,
+        "startChar": 9,
+        "endLine": 425,
+        "endChar": 64
+      },
+      "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +189,54 @@
     },
     {
       "key": {
+        "uuid": "51d7da3c_29d67948",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-20T11:22:46Z",
+      "side": 1,
+      "message": "its was there ,for checking whether its static or dhcp ip config",
+      "parentUuid": "3b10055c_d8a4d118",
+      "range": {
+        "startLine": 427,
+        "startChar": 0,
+        "endLine": 427,
+        "endChar": 20
+      },
+      "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2432ba31_762036b4",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-20T11:22:46Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "d493cdce_d1ddfbb9",
+      "range": {
+        "startLine": 427,
+        "startChar": 0,
+        "endLine": 427,
+        "endChar": 90
+      },
+      "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16916879_0efc5f8f",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 2
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "578dbcaf_6f2d0e7d",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-20T11:22:46Z",
+      "side": 1,
+      "message": "it is needed to handle empty/no ip config scenario. So, need for test case 2 verification",
+      "parentUuid": "16916879_0efc5f8f",
+      "range": {
+        "startLine": 437,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 59
+      },
+      "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77620f2e_3faef8a4",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 2
@@ -154,6 +298,24 @@
       "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3beebd43_5358adeb",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-20T11:22:46Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "77620f2e_3faef8a4",
+      "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
