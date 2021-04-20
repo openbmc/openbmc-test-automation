@@ -175,7 +175,7 @@ REST Verify No Gard Records
 Inject OPAL TI
     [Documentation]  OPAL terminate immediate procedure.
     [Arguments]      ${stable_branch}=master
-    ...              ${repo_dir_path}=${EXECDIR}/repository
+    ...              ${repo_dir_path}=/tmp/repository
     ...              ${repo_github_url}=https://github.com/open-power/op-test
 
     # Description of arguments:
