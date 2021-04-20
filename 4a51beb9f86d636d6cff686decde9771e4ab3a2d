@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ff805a5_c694082d",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-04-20T10:14:03Z",
+      "side": 1,
+      "message": "Please prepare an appropriate xpath",
+      "revId": "4a51beb9f86d636d6cff686decde9771e4ab3a2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0df036a6_a8d0ef9f",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-04-20T10:14:03Z",
+      "side": 1,
+      "message": "Please add an wait statement for next buttons to appear after filter button click",
+      "revId": "4a51beb9f86d636d6cff686decde9771e4ab3a2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cea550ab_5ba13497",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-04-20T10:14:03Z",
+      "side": 1,
+      "message": "Make proper spacing",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 89,
+        "endChar": 42
+      },
+      "revId": "4a51beb9f86d636d6cff686decde9771e4ab3a2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
