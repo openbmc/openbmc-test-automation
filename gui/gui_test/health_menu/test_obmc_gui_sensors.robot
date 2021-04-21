@@ -88,7 +88,7 @@ Verify Clear All Button In Sensor Page
     Click Element At Coordinates    ${xpath_filter_ok}    0    0
     Click Element At Coordinates    ${xpath_filter_warning}    0    0
     Click Element At Coordinates    ${xpath_filter_critical}    0    0
-    Element Should Be Visible  ${xpath_selected_severity
+    Element Should Be Visible  ${xpath_selected_severity}
 
     # De-select all severity using clear all button in filter.
     Click Element At Coordinates  ${xpath_filter_clear_all}    0    0
