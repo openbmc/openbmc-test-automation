@@ -264,28 +264,32 @@ Auto Generate BMC Dump
 
 Get Dump Size
     [Documentation]  Get dump size.
-    [Arguments]  ${dump_id}
+    [Arguments]  ${dump_uri}
 
     # Description of argument(s):
-    # dump_id        Dump ID.
+    # dump_uri        Dump URI
+    #                 (Eg. 	/xyz/openbmc_project/dump/bmc/entry/1).
 
-    # Example of BMC Dump entry.
-    # "@odata.id": "/redfish/v1/Managers/bmc/LogServices/Dump/Entries/382",
-    # "@odata.type": "#LogEntry.v1_7_0.LogEntry",
-    # "AdditionalDataSizeBytes": 211072,
-    # "AdditionalDataURI": "/redfish/v1/Managers/bmc/LogServices/Dump/attachment/382",
-    # "Created": "2021-03-30T17:09:34+00:00",
-    # "DiagnosticDataType": "Manager",
-    # "EntryType": "Event",
-    # "Id": "382",
-    # "Name": "BMC Dump Entry"
+    # Example of Dump entry.
+    # "data": {
+    #   "CompletedTime": 1616760931,
+    #   "Elapsed": 1616760931,
+    #   "OffloadUri": "",
+    #   "Offloaded": false,
+    #   "Password": "",
+    #   "Size": 3056,
+    #   "SourceDumpId": 117440513,
+    #   "StartTime": 1616760931,
+    #   "Status": "xyz.openbmc_project.Common.Progress.OperationStatus.Completed",
+    #   "VSPString": ""
+    #  },
 
-    ${dump_data}=  Redfish.Get Properties
-    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
-    [Return]  ${dump_data["AdditionalDataSizeBytes"]}
+    Log  ${dump_uri}
+    ${dump_data}=  Redfish.Get Properties  ${dump_uri}
+    [Return]  ${dump_data["data"]["Size"]}
 
 Get Dump ID
-    [Documentation]  Return task status.
+    [Documentation]  Return dump ID.
     [Arguments]   ${task_id}
 
     # Description of argument(s):
@@ -322,6 +326,18 @@ Get Task Status
     ${resp}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
     [Return]  ${resp['TaskState']}
 
+Check Task Completion
+    [Documentation]  Check for task to end.
+    [Arguments]   ${task_id}
+
+    # Description of argument(s):
+    # task_id        Task ID.
+
+    ${status}=  Get Task Status  ${task_id}
+    Run Keyword Unless  '${status}' == 'Cancelled' or '${status}' == 'Completed'
+    ...  Fail  Task is still running.
+    [Return]  ${status}
+
 Get Dump ID And Status
     [Documentation]  Return dump ID and status.
     [Arguments]   ${task_id}
@@ -329,6 +345,34 @@ Get Dump ID And Status
     # Description of argument(s):
     # task_id        Task ID.
 
-    ${dump_id}=  Wait Until Keyword Succeeds  15 min  15 sec  Get Dump ID  ${task_id}
-    ${status}=  Get Task Status  ${task_id}
-    [Return]  ${dump_id}  ${status}
+    ${task_status}=  Wait Until Keyword Succeeds  10 min  15 sec  Check Task Completion  ${task_id}
+    ${dump_id}=  Run Keyword If  '${task_status}' == 'Completed'  Get Dump ID  ${task_id}
+    ...  ELSE  Set Variable  None
+    [Return]  ${dump_id}  ${task_status}
+
+Create User Initiated Resource Dump
+    [Documentation]  Trigger user initiated Resource dump via Redfish and return task id.
+
+    ${payload}=  Create Dictionary  DiagnosticDataType=OEM  OEMDiagnosticDataType=Resource_vsp_pwd
+    ${resp}=  Redfish.Post
+    ...  /redfish/v1/Systems/system/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}, ${HTTP_OK}]
+
+    # Example of response from above Redfish POST request.
+    # "@odata.id": "/redfish/v1/TaskService/Tasks/0",
+    # "@odata.type": "#Task.v1_4_3.Task",
+    # "Id": "0",
+    # "TaskState": "Running",
+    # "TaskStatus": "OK"
+
+    ${task_id}=  Set Variable  ${resp.dict['Id']}
+    [Return]  ${task_id}
+
+Auto Generate Resource Dump
+    [Documentation]  Auto generate Resource dump.
+
+    ${stdout}  ${stderr}  ${rc}=
+    ...  BMC Execute Command
+    ...  busctl --verbose call xyz.openbmc_project.Dump.Manager /xyz/openbmc_project/dump/resource xyz.openbmc_project.Dump.Create CreateDump a{ss} 2 "com.ibm.Dump.Create.CreateParameters.VSPString" "vsp" "com.ibm.Dump.Create.CreateParameters.Password" "Resource_vsp_pwd"
+    [Return]  ${stdout}  ${stderr}  ${rc}
+
