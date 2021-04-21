@@ -34,6 +34,24 @@
       "revId": "2fbad254a31d6da4d31141713670de7d199ea840",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65d3d2e0_762d15ca",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-04-21T09:45:19Z",
+      "side": 1,
+      "message": "check current mode is opposite of previos mode",
+      "parentUuid": "a9321a25_f84112c4",
+      "revId": "2fbad254a31d6da4d31141713670de7d199ea840",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
