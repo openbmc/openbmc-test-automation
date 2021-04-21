@@ -97,10 +97,11 @@ RESPONSE_DICT_GETPDR_SETSTATEEFFECTER = {
     'PDRType': ['State Effecter PDR'],
     'recordChangeNumber': [0],
     'PLDMTerminusHandle': [0, 1, 2],
-    'effecterID': [0, 1, 2, 3, 4],
+    'effecterID': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     'entityType': ['Virtual Machine Manager', 'System chassis (main enclosure)',
-                   'System Firmware', 'Processor Module', '32801(OEM)'],
-    'entityInstanceNumber': [0, 1, 2],
+                   'System Firmware', 'Processor Module', '32801(OEM)',
+                   'Management Controller', '24577(OEM)'],
+    'entityInstanceNumber': [0, 1, 2, 3, 4],
     'containerID': [0, 1],
     'effecterSemanticID': [0],
     'effecterInit': ['noInit'],
@@ -132,7 +133,8 @@ RESPONSE_DICT_GETPDR_PDRENTITYASSOCIATION = {
 
 RESPONSE_DICT_GETPDR_STATESENSORPDR = {
     'entityType': ['Communication Channel', 'Connector', 'Processor Module',
-                   '32774(OEM)', '57346(OEM)', '57347(OEM)', '32801(OEM)'],
+                   '32774(OEM)', '57346(OEM)', '57347(OEM)', '32801(OEM)',
+                   '91(OEM)', '5(OEM)', '24577(OEM)'],
     'sensorInit': ['noInit'],
     'sensorAuxiliaryNamesPDR': [False]}
 
@@ -157,9 +159,8 @@ RESPONSE_DICT_GETPDR_NUMERICEFFECTERPDR = {
     'effecterSemanticID': [0],
     'effecterInit': [0],
     'effecterAuxiliaryNames': [False],
-    'baseUnit': [0, 72],
+    'baseUnit': [0, 72, 21],
     'unitModifier': [0],
-    'rateUnit': [0],
     'baseOEMUnitHandle': [0],
     'auxUnit': [0],
     'auxUnitModifier': [0],
