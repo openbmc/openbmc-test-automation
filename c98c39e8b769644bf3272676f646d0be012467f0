@@ -36,6 +36,98 @@
     },
     {
       "key": {
+        "uuid": "0e70f83c_22231945",
+        "filename": "lib/oem/ibm/bios_attr_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-21T10:30:43Z",
+      "side": 1,
+      "message": "Login and the logout should be done at test case level.",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 17
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ec00bb7_e46aab24",
+        "filename": "lib/oem/ibm/bios_attr_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-21T10:30:43Z",
+      "side": 1,
+      "message": "Should be type_int right as you are checking whether it is of int type.",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 17
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "052e87ac_4243c3de",
+        "filename": "lib/oem/ibm/bios_attr_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-21T10:30:43Z",
+      "side": 1,
+      "message": "Use Set Variable If keyword",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "744812bf_60eff3ed",
+        "filename": "lib/oem/ibm/bios_attr_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-21T10:30:43Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 17
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8cd2579b_16fdaf68",
         "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
         "patchSetId": 4
@@ -75,6 +167,138 @@
         "startChar": 0,
         "endLine": 20,
         "endChar": 32
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34328eef_3e2781eb",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-21T10:30:43Z",
+      "side": 1,
+      "message": "Redfish.. modify throughout.",
+      "range": {
+        "startLine": 28,
+        "startChar": 21,
+        "endLine": 28,
+        "endChar": 28
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0497c53e_7490bcea",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-21T10:30:43Z",
+      "side": 1,
+      "message": "Can have a keyword for it as the code is repeating for many tests.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 59
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "342d102f_7ff44f81",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-21T10:30:43Z",
+      "side": 1,
+      "message": "Why is this required?",
+      "range": {
+        "startLine": 106,
+        "startChar": 8,
+        "endLine": 106,
+        "endChar": 61
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9750dfc3_eb9ff6b3",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-21T10:30:43Z",
+      "side": 1,
+      "message": "Remove",
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2f45f21_e3b59865",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-21T10:30:43Z",
+      "side": 1,
+      "message": "Redfish.Login is required.",
+      "range": {
+        "startLine": 152,
+        "startChar": 4,
+        "endLine": 156,
+        "endChar": 55
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d30882f_4323f9fb",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-21T10:30:43Z",
+      "side": 1,
+      "message": "Redfish.Logout is required.",
+      "range": {
+        "startLine": 163,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 7
       },
       "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
