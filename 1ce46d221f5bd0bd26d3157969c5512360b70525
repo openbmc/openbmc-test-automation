@@ -261,6 +261,30 @@
     },
     {
       "key": {
+        "uuid": "ce2f2947_b49c4adb",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-21T07:03:43Z",
+      "side": 1,
+      "message": "its in use in testcases eg tc 2.its an element in below created dictionary",
+      "parentUuid": "ecade129_d5a742b8",
+      "range": {
+        "startLine": 427,
+        "startChar": 0,
+        "endLine": 427,
+        "endChar": 20
+      },
+      "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16916879_0efc5f8f",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 2
@@ -320,6 +344,30 @@
       "side": 1,
       "message": "what will happen if these extra lines removed?",
       "parentUuid": "578dbcaf_6f2d0e7d",
+      "range": {
+        "startLine": 437,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 59
+      },
+      "revId": "1ce46d221f5bd0bd26d3157969c5512360b70525",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8b3709c_aebbb723",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-21T07:03:43Z",
+      "side": 1,
+      "message": "testcase 2 fails with IndexError in case when no vmi ip is configured ,as already existing dictionary has some elements defined like that eg- IPv4Addresses\"][0][\"Address\"]",
+      "parentUuid": "8d23fabd_8f37b524",
       "range": {
         "startLine": 437,
         "startChar": 0,
