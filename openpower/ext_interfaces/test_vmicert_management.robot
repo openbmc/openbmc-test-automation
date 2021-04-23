@@ -442,6 +442,65 @@ Send Corrupted CSR Requests From Admin And Operator User Concurrently And Verify
         ...  msg=One or more operations has failed.
     END
 
+Get Root Certificate From Admin And Send CSR Requests From Non Admin Concurrently And Verify
+    [Documentation]  Get root certificate from admin and csr requests from
+    ...  non admin users concurrently and verify gets root certificate for admin and
+    ...  errors for non-admins.
+    [Tags]  Get_Root_Certificate_From_Admin_And_Send_CSR_Requests_From_Non_Admin_Concurrently_And_Verify
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Get Root Certificate And Send CSR Requests From Non Admin Users Concurrently And Verify
+    [Documentation]  Get root certificate and send csr requests from non admin
+    ...  users and verify gets errors.
+    [Tags]  Get_Root_Certificate_And_Send_CSR_Requests_From_Non_Admin_Users_Concurrently_And_Verify
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Root Certificate readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Certificate Signed By VMI noaccess_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Send Corrupted CSR Request From Admin And CSR Requests From Non Admin Concurrently And Verify
+    [Documentation]  Send corrupted csr request from admin and csr request from non admin
+    ...  users concurrently and verify gets errors.
+    [Tags]  Send_Corrupted_CSR_Request_From_Admin_And_CSR_Requests_From_Non_Admin_Concurrently_And_Verify
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Send CSR Request And Corrupted CSR Requests From Non Admin Users Concurrently And Verify
+    [Documentation]  Send csr and corrupted csr request from non admin users
+    ...  and verify gets errors.
+    [Tags]  Send_CSR_Request_And_Corrupted_CSR_Requests_From_Non_Admin_Users_Concurrently_And_Verify
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${False} ${HTTP_FORBIDDEN}
+        ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${False} ${HTTP_FORBIDDEN}
+        ...  Get Certificate Signed By VMI noaccess_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
 *** Keywords ***
 
 Generate CSR String
