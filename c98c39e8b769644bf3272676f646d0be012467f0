@@ -448,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "b5cd2232_9e56e3ea",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-23T05:54:55Z",
+      "side": 1,
+      "message": "I meant the usage of GetBIOSEnumAttributeOptionalValues in general to get the attribute handle and then process. If you think there is a pattern to them which can be grouped on the datatype then a keyword can be created. Again it is up to you.",
+      "parentUuid": "40b09a05_5d8429a3",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 59
+      },
+      "revId": "c98c39e8b769644bf3272676f646d0be012467f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "342d102f_7ff44f81",
         "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
         "patchSetId": 4

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2343d9c3_187f5fa5",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-23T05:54:55Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 163,
+        "startChar": 4,
+        "endLine": 163,
+        "endChar": 17
+      },
+      "revId": "d3e6f94636cfd005f100290cb6ee362d26364a33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd0d33a3_17021681",
+        "filename": "redfish/systems/oem/ibm/test_bios_attributes.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-04-23T05:54:55Z",
+      "side": 1,
+      "message": "Not required to Login and logout here as it is already done at suite level. So remove them.",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 18
+      },
+      "revId": "d3e6f94636cfd005f100290cb6ee362d26364a33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
