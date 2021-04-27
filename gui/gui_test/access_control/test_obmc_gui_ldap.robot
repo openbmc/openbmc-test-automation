@@ -22,6 +22,10 @@ ${xpath_ldap_password}                  //*[@id='bind-password']
 ${xpath_ldap_base_dn}                   //*[@data-test-id='ldap-input-baseDn']
 ${xpath_ldap_save_settings}             //*[@data-test-id='ldap-button-saveSettings']
 ${xpath_select_refresh_button}          //*[text()[contains(.,"Refresh")]]
+${xpath_group_name}                     //*[@aria-colindex="2" and @role="cell"]
+${xpath_group_privilege}                //*[@aria-colindex="3" and @role="cell"]
+${xpath_add_group_name}                 //*[@id="role-group-name"]
+${xpath_add_group_Privilege}            //*[@id="privilege"]
 
 *** Test Cases ***
 
@@ -135,3 +139,61 @@ Get LDAP Configuration
     ...  ELSE
     ...  Checkbox Should Be Selected  ${radio_buttons}[${1}]
     Should Be Equal  ${status}  ${True}
+
+
+Get LDAP User Group Name
+    [Documentation]  Get LDAP user Role and group.
+
+    @{group_name_elements}=  Get WebElements  ${xpath_group_name}
+    ${group_names}=  Create List
+
+    FOR  ${group_name_element}  IN  @{group_name_elements}
+       ${group_name}=  Get Text  ${group_name_element}
+       Append To List  ${group_names}  ${group_name}
+    END
+
+    [Return]  ${group_names}
+
+
+Get LDAP Group Privileges
+    [Documentation]  Get LDAP group privileges.
+
+    @{group_privilege_elements}=  Get WebElements  ${xpath_group_privilege}
+    ${group_privileges}=  Create List
+
+    FOR  ${group_privilege_element}  IN  @{group_privilege_elements}
+      ${privilege}=  Get Text  ${group_privilege_element}
+      Append To List  ${group_privileges}  ${privilege}
+    END
+
+    [Return]  ${group_privileges}
+
+
+Restore LDAP Privileges
+    [Documentation]  Restore the LDAP privilege to its original value.
+
+    Return From Keyword If  ${old_ldap_group_privileges} == @{empty}
+    Update LDAP Configuration with LDAP User Role And Group
+    ...   ${old_ldap_group_names}  ${old_ldap_group_privileges}
+
+
+Update LDAP Configuration with LDAP User Role And Group
+    [Documentation]  Update LDAP configuration update with LDAP user Role and group.
+    [Arguments]  ${group_name}  ${group_privilege}
+
+    # Description of argument(s):
+    # group_name       The group name of user.
+    # group_privilege  The group privilege ("Administrator", "Operator", "User" or "Callback").
+
+    Click Element  ${xpath_add_role_group_button}
+    Input Text  ${xpath_add_group_name}  ${group_name}
+    Select From List By Value  ${xpath_add_group_Privilege}  ${group_privilege}
+    Wait Until Element Is Enabled  //button[contains(text(),"Add")]
+    ${add_privilege}=  Get WebElements  //button[contains(text(),"Add")]
+    Click Button   ${add_privilege_button}[${1}]
+    Wait Until Page Contains  Successfully added role group '${group_name}'.
+
+    ${ldap_group_name}=  Get LDAP User Group Name
+    List Should Contain Value  ${ldap_group_name}  ${group_name}
+    ${ldap_group_privilege}=  Get LDAP Group Privileges
+    List Should Contain Value  ${ldap_group_privilege}  ${group_privilege}
