@@ -3,6 +3,7 @@
 Documentation  Test OpenBMC GUI "LDAP" sub-menu of "Access control".
 
 Resource        ../../lib/gui_resource.robot
+Resource        ../../../lib/bmc_ldap_utils.robot
 
 Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
@@ -22,6 +23,11 @@ ${xpath_ldap_password}                  //*[@id='bind-password']
 ${xpath_ldap_base_dn}                   //*[@data-test-id='ldap-input-baseDn']
 ${xpath_ldap_save_settings}             //*[@data-test-id='ldap-button-saveSettings']
 ${xpath_select_refresh_button}          //*[text()[contains(.,"Refresh")]]
+${xpath_add_group_name}                 //*[@id="role-group-name"]
+${xpath_add_group_Privilege}            //*[@id="privilege"]
+${xpath_add_privilege_button}           //button[text()=" Add "]
+${xpath_delete_group_button}            //*[@title="Delete"]
+${xpath_delete_button}                  //button[text()="Delete"]
 
 *** Test Cases ***
 
@@ -95,6 +101,17 @@ Verify LDAP Service Disable
     Redfish.Logout
 
 
+Verify LDAP User With Admin Privilege
+    [Documentation]  Verify that LDAP user with administrator privilege is able to do BMC reboot.
+    [Tags]  Verify_LDAP_User_With_Admin_Privilege
+    [Teardown]  Run Keywords  Redfish.Login  AND  Delete LDAP Role Group  ${GROUP_NAME}
+
+    Update LDAP Configuration with LDAP User Role And Group  ${GROUP_NAME}  ${GROUP_PRIVILEGE}
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish OBMC Reboot (off)
+    Redfish.Logout
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -159,3 +176,44 @@ Get LDAP Configuration
     ...  ELSE
     ...  Checkbox Should Be Selected  ${radio_buttons}[${1}]
     Should Be Equal  ${status}  ${True}
+
+
+Update LDAP Configuration With LDAP User Role And Group
+    [Documentation]  Update LDAP configuration update with LDAP user role and group.
+    [Arguments]  ${group_name}  ${group_privilege}
+
+    # Description of argument(s):
+    # group_name       The group name of LDAP user.
+    # group_privilege  The group privilege for LDAP user
+    #                  (e.g. "Administrator", "Operator", "ReadOnly" or "NoAcccess").
+
+    Create LDAP Configuration
+    Click Element  ${xpath_add_role_group_button}
+    Input Text  ${xpath_add_group_name}  ${group_name}
+    Select From List By Value  ${xpath_add_group_Privilege}  ${group_privilege}
+    Click Element  ${xpath_add_privilege_button}
+
+    # Verify group name after adding.
+    ${ldap_group_name}=  Get LDAP Privilege And Group Name Via Redfish
+    List Should Contain Value  ${ldap_group_name}  ${group_name}
+
+
+Delete LDAP Role Group
+    [Documentation]  Delete LDAP role group.
+    [Arguments]  ${group_name}
+
+    # Description of argument(s):
+    # group_name         The group name of LDAP user.
+
+    #  Verify given group name is exist before deleting.
+    ${ldap_group_name}=  Get LDAP Privilege And Group Name Via Redfish
+    List Should Contain Value  ${ldap_group_name}  ${group_name}  msg=${group_name} not available.
+
+    ${get_groupname_index}=  Get Index From List  ${ldap_group_name}  ${group_name}
+    ${delete_group_elements}=  Get WebElements  ${xpath_delete_group_button}
+    Click Element  ${delete_group_elements}[${get_groupname_index}]
+    Click Element  ${xpath_delete_button}
+
+    # Verify group name after deleting.
+    ${ldap_group_name}=  Get LDAP Privilege And Group Name Via Redfish
+    List Should Not Contain Value  ${ldap_group_name}  ${group_name}  msg=${group_name} not available.
