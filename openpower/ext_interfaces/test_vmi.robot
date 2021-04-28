@@ -563,10 +563,10 @@ Switch VMI IPv4 Origin And Verify Details
     [Documentation]  Switch VMI IPv4 origin and verify details.
 
     ${dhcp_mode_before}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
-    ${dhcp_enabled}=  Set Variable If  ${curr_mode} == ${False}  ${True}  ${False}
+    ${dhcp_enabled}=  Set Variable If  ${dhcp_mode_before} == ${False}  ${True}  ${False}
 
     ${default}=  Set Variable  0.0.0.0
-    ${origin}=  Set Variable If  ${curr_mode} == ${False}  DHCP  Static
+    ${origin}=  Set Variable If  ${dhcp_mode_before} == ${False}  DHCP  Static
     Set VMI IPv4 Origin  ${dhcp_enabled}  ${HTTP_ACCEPTED}
 
     ${dhcp_mode_after}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
