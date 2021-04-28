@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc19631a_66bd378c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-28T09:20:59Z",
+      "side": 1,
+      "message": "Fix for LED Off test case",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 40
+      },
+      "revId": "4085b248ba246791782d840e15ade2e1d6bd14ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6bdc9a8_c5ff1e62",
+        "filename": "gui/gui_test/control_menu/test_server_led_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-28T09:20:59Z",
+      "side": 1,
+      "message": "# Login BMC via Redfish.",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 31
+      },
+      "revId": "4085b248ba246791782d840e15ade2e1d6bd14ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cc0c827_73ca4d6e",
+        "filename": "gui/gui_test/control_menu/test_server_led_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-28T09:20:59Z",
+      "side": 1,
+      "message": "Not required",
+      "range": {
+        "startLine": 101,
+        "startChar": 11,
+        "endLine": 101,
+        "endChar": 33
+      },
+      "revId": "4085b248ba246791782d840e15ade2e1d6bd14ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
