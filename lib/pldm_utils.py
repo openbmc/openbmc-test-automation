@@ -161,6 +161,10 @@ def GetRandomBIOSIntAndStrValues(attr_name, count):
         data = string.ascii_uppercase + string.digits
         attr_random_value = ''.join(random.choice(data) for _ in range(int(count)))
 
+    elif 'mfg_flags' in attr_name:
+        data = string.ascii_uppercase + string.digits
+        attr_random_value = ''.join(random.choice(data) for _ in range(int(count)))
+
     else:
         attr_random_value = random.randint(0, int(count))
     return attr_random_value
