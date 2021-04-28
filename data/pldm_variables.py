@@ -96,7 +96,6 @@ RESPONSE_DICT_GETPDR_SETSTATEEFFECTER = {
     'PDRHeaderVersion': [1],
     'PDRType': ['State Effecter PDR'],
     'recordChangeNumber': [0],
-    'PLDMTerminusHandle': [0, 1, 2],
     'effecterID': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     'entityType': ['Virtual Machine Manager', 'System chassis (main enclosure)',
                    'System Firmware', 'Processor Module', '32801(OEM)',
@@ -113,7 +112,6 @@ RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER = {
     'PDRType': ['FRU Record Set PDR'],
     'recordChangeNumber': [0],
     'dataLength': [10],
-    'PLDMTerminusHandle': [0, 2],
     'entityType': ['System Board', 'Chassis front panel board (control panel)',
                    'Management Controller', 'OEM', 'Power converter',
                    'System (logical)', 'System chassis (main enclosure)',
@@ -142,9 +140,8 @@ RESPONSE_DICT_GETPDR_TERMINUSLOCATORPDR = {
     'PDRHeaderVersion': [1],
     'PDRType': ['Terminus Locator PDR'],
     'recordChangeNumber': [0],
-    'PLDMTerminusHandle': [1],
     'validity': ['valid'],
-    'TID': [1, 208],
+    'TID': [0, 1, 208],
     'containerID': [0, 1],
     'terminusLocatorType': ['MCTP_EID'],
     'terminusLocatorValueSize': [1]}
@@ -153,7 +150,6 @@ RESPONSE_DICT_GETPDR_NUMERICEFFECTERPDR = {
     'PDRHeaderVersion': [1],
     'PDRType': ['Numeric Effecter PDR'],
     'recordChangeNumber': [0],
-    'PLDMTerminusHandle': [0, 1],
     'entityInstanceNumber': [0, 1],
     'containerID': [0],
     'effecterSemanticID': [0],
@@ -189,22 +185,6 @@ PLDM_PDR_TYPES = {
     'PLDM_NUMERIC_EFFECTER_PDR': 'Numeric Effecter PDR',
     'PLDM_TERMINUS_LOCATOR_PDR': 'Terminus Locator PDR',
     'PLDM_COMPACT_NUMERIC_SENSOR_PDR': '21'}
-
-RESPONSE_LIST_GETBIOSTABLE_STRTABLE = [
-    'Allowed', 'Disabled', 'Enabled', 'IPv4DHCP', 'IPv4Static', 'Not Allowed',
-    'Perm', 'Temp', 'pvm_fw_boot_side', 'pvm_inband_code_update', 'pvm_os_boot_side',
-    'pvm_pcie_error_inject', 'pvm_surveillance', 'pvm_system_name', 'vmi_hostname',
-    'vmi_if_count', 'vmi_if0_ipv4_ipaddr', 'vmi_if0_ipv4_method',
-    'vmi_if0_ipv4_prefix_length', 'vmi_if1_ipv4_ipaddr', 'vmi_if1_ipv4_method',
-    'vmi_if1_ipv4_prefix_length']
-
-
-RESPONSE_LIST_GETBIOSTABLE_ATTRTABLE = [
-    'pvm_fw_boot_side', 'pvm_inband_code_update', 'pvm_os_boot_side',
-    'pvm_pcie_error_inject', 'pvm_surveillance', 'pvm_system_name', 'vmi_hostname',
-    'vmi_if_count', 'vmi_if0_ipv4_ipaddr', 'vmi_if0_ipv4_method',
-    'vmi_if0_ipv4_prefix_length', 'vmi_if1_ipv4_ipaddr', 'vmi_if1_ipv4_method',
-    'vmi_if1_ipv4_prefix_length']
 
 RESPONSE_LIST_GETBIOSTABLE_ATTRVALTABLE = [
     'BIOSString', 'BIOSInteger', 'BIOSEnumeration']

@@ -70,62 +70,6 @@ Verify SetDateTime
     ${pldm_output}=  Pldmtool  ${cmd_set_time}
 
 
-Verify GetBIOSTable For StringTable
-
-    [Documentation]  Verify GetBIOSTable for table type string table.
-    [Tags]  Verify_GetBIOSTable_For_StringTable
-
-    # Example pldm_output:
-    # [biosstringhandle]:                             BIOSString
-    # [0]:                                            Allowed
-    # [1]:                                            Disabled
-    # [2]:                                            Enabled
-    # [3]:                                            Not Allowed
-    # [4]:                                            Perm
-    # [5]:                                            Temp
-    # [6]:                                            pvm_fw_boot_side
-    # [7]:                                            pvm_inband_code_update
-    # [8]:                                            pvm_os_boot_side
-    # [9]:                                            pvm_pcie_error_inject
-    # [10]:                                           pvm_surveillance
-    # [11]:                                           pvm_system_name
-    # [12]:                                           vmi_if_count
-
-    ${pldm_output}=  Pldmtool  bios GetBIOSTable --type StringTable
-    @{keys}=  Get Dictionary Keys  ${pldm_output}
-    ${string_list}=  Create List
-    FOR  ${key}  IN  @{keys}
-        Append To List  ${string_list}  ${pldm_output['${key}']}
-    END
-    Valid List  string_list  required_values=${RESPONSE_LIST_GETBIOSTABLE_ATTRTABLE}
-
-
-Verify GetBIOSTable For AttributeTable
-
-    [Documentation]  Verify if attribute table content exist for
-    ...            GetBIOSTable with table type attribute table.
-    [Tags]  Verify_GetBIOSTable_For_AttributeTable
-
-    # Example pldm_output:
-    # [pldm_attributetable]:                          True
-    # [attributehandle]:                               0
-    # [ AttributeNameHandle]:                          20(vmi-if1-ipv4-method)
-    # [     attributetype]:                            BIOSStringReadOnly
-    # [     StringType]:                               0x01
-    # [     minimumstringlength]:                      1
-    # [     maximumstringlength]:                      100
-    # [     defaultstringlength]:                      15
-
-    ${count}=  Get Length  ${attr_table_data}
-    ${attr_list}=  Create List
-    FOR  ${i}  IN RANGE  ${count}
-        ${data}=  Set Variable  ${attr_table_data}[${i}][AttributeNameHandle]
-        ${sub_string}=  Get Substring  ${data}  3  -1
-        Append To List  ${attr_list}  ${sub_string}
-    END
-    Valid List  attr_list  required_values=${RESPONSE_LIST_GETBIOSTABLE_ATTRTABLE}
-
-
 Verify GetBIOSTable For AttributeValueTable
 
     [Documentation]  Verify if attribute value table content exist for
@@ -143,6 +87,7 @@ Verify GetBIOSTable For AttributeValueTable
     FOR  ${i}  IN RANGE  ${count}
         Append To List  ${attr_val_list}  ${attr_table_data}[${i}][AttributeType]
     END
+    Log To Console  ${attr_val_list}
     Valid List  attr_val_list  required_values=${RESPONSE_LIST_GETBIOSTABLE_ATTRVALTABLE}
 
 
