@@ -46,6 +46,30 @@
       "revId": "8da55173be6563a3f83fc37e9e38c11394dcc711",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ffb2ab3_08d607c7",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-28T09:42:02Z",
+      "side": 1,
+      "message": "Anusha.. You are right.. But as of now it will add too much complexity to the code. So let\u0027s keep it the same and check if warning and Critical text does not show up in next to filter button.",
+      "parentUuid": "4b47f395_1109c732",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 68
+      },
+      "revId": "8da55173be6563a3f83fc37e9e38c11394dcc711",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
