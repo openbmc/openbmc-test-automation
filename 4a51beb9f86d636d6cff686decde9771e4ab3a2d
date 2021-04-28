@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b4f11efd_4637079b",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-04-28T09:34:30Z",
+      "side": 1,
+      "message": "As of now we don\u0027t have an alternative way.",
+      "parentUuid": "2ff805a5_c694082d",
+      "revId": "4a51beb9f86d636d6cff686decde9771e4ab3a2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0df036a6_a8d0ef9f",
         "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "4a51beb9f86d636d6cff686decde9771e4ab3a2d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4c7f92f_241beef4",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-04-28T09:34:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0df036a6_a8d0ef9f",
+      "revId": "4a51beb9f86d636d6cff686decde9771e4ab3a2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "4a51beb9f86d636d6cff686decde9771e4ab3a2d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd2bf02f_5120d284",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-04-28T09:34:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea550ab_5ba13497",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 89,
+        "endChar": 42
+      },
+      "revId": "4a51beb9f86d636d6cff686decde9771e4ab3a2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
