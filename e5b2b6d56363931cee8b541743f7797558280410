@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b323785f_5624c610",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-30T06:35:39Z",
+      "side": 1,
+      "message": "yes,rephrased",
+      "parentUuid": "b4d95e3b_d481708e",
+      "range": {
+        "startLine": 143,
+        "startChar": 61,
+        "endLine": 143,
+        "endChar": 76
+      },
+      "revId": "e5b2b6d56363931cee8b541743f7797558280410",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33b5b8e7_7f55d87a",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "fce80235_dcab9fca",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-30T06:35:39Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "33b5b8e7_7f55d87a",
+      "range": {
+        "startLine": 144,
+        "startChar": 21,
+        "endLine": 144,
+        "endChar": 90
+      },
+      "revId": "e5b2b6d56363931cee8b541743f7797558280410",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c5ce0c0c_b6786c8d",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "e5b2b6d56363931cee8b541743f7797558280410",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dab6340_29981984",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-04-30T06:35:39Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "c5ce0c0c_b6786c8d",
+      "range": {
+        "startLine": 156,
+        "startChar": 68,
+        "endLine": 156,
+        "endChar": 94
+      },
+      "revId": "e5b2b6d56363931cee8b541743f7797558280410",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
