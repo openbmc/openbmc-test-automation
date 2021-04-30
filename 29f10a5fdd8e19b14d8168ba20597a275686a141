@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6eaa6b9_f5ff9813",
+        "filename": "gui/gui_test/server_config/test_date_time_settings_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-30T06:33:56Z",
+      "side": 1,
+      "message": "Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}\n    ...  body\u003d{\u0027NTP\u0027:{\u0027NTPServers\u0027: [\u002710.10.10.10\u0027, \u002720.20.20.20\u0027, \u002730.30.30.30\u0027]}}\n    ...  valid_status_codes\u003d[${HTTP_OK}, ${HTTP_NO_CONTENT}]\n\n    Refresh the NTP page\n\n    Textfield Value Should Be  ${xpath_ntp_server1}  10.10.10.10\n    Textfield Value Should Be  ${xpath_ntp_server2}  20.20.20.20\n    Textfield Value Should Be  ${xpath_ntp_server3}  30.30.30.30",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 48
+      },
+      "revId": "29f10a5fdd8e19b14d8168ba20597a275686a141",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08a7dba6_c9094c4e",
+        "filename": "gui/gui_test/server_config/test_date_time_settings_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-04-30T06:33:56Z",
+      "side": 1,
+      "message": "This keyword is not required. Please make the changes as suggested above and test it.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 60
+      },
+      "revId": "29f10a5fdd8e19b14d8168ba20597a275686a141",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
