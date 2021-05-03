@@ -158,7 +158,6 @@ Verify Session Persistency After BMC Reboot
     ${session_location}=  Redfish.Get Session Location
 
     Redfish OBMC Reboot (off)  stack_mode=normal
-    Redfish.Login
 
     # Check for session persistency after BMC reboot.
     # sessions here will have list of all sessions location.
