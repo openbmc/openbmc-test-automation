@@ -5,7 +5,7 @@ work-in-progress, feel free to propose changes.
 
 Submitting changes via Gerrit server
 ------------------------------------
--   Reference [OpenBMC CLA signers](https://github.com/openbmc/openbmc-tools/blob/master/emilyshaffer/cla-signers/cla-signers)
+-   Reference [OpenBMC CLA](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server-to-openbmc)
 -   Reference [OpenBMC docs](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server)
 
 Links
