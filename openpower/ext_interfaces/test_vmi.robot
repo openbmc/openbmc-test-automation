@@ -558,6 +558,8 @@ Set VMI IPv4 Origin
     ${data}=  Set Variable If  ${dhcp_enabled} == ${False}  ${DISABLE_DHCP}  ${ENABLE_DHCP}
     ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0  body=${data}
     ...  valid_status_codes=[${valid_status_code}]
+
+    Sleep  ${wait_time}
     Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
