@@ -14,7 +14,7 @@ Suite Teardown  Close Browser
 ${xpath_network_setting_heading}  //h1[text()="Network settings"]
 ${xpath_interface}                //h2[text()="Interface"]
 ${xpath_system}                   //h2[text()="System"]
-${xpath_static_ipv4}              //h2[text()="Static IPv4"]
+${xpath_static_ipv4}              //h2[text()="IPV4"]
 ${xpath_static_dns}               //h2[text()="Static DNS"]
 ${xpath_hostname_input}           //*[@data-test-id="networkSettings-input-hostname"]
 ${xpath_network_save_settings}    //button[@data-test-id="networkSettings-button-saveNetworkSettings"]
