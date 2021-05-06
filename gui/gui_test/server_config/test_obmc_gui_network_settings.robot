@@ -14,7 +14,7 @@ Suite Teardown  Close Browser
 ${xpath_network_setting_heading}  //h1[text()="Network settings"]
 ${xpath_interface}                //h2[text()="Interface"]
 ${xpath_system}                   //h2[text()="System"]
-${xpath_static_ipv4}              //h2[text()="Static IPv4"]
+${xpath_static_ipv4}              //h2[text()="IPV4"]
 ${xpath_static_dns}               //h2[text()="Static DNS"]
 ${xpath_hostname_input}           //*[@data-test-id="networkSettings-input-hostname"]
 ${xpath_network_save_settings}    //button[@data-test-id="networkSettings-button-saveNetworkSettings"]
@@ -161,9 +161,9 @@ Verify Network Static IPv4 Details
     [Tags]  Verify_Network_static_IPv4_Details
 
     @{network_configurations}=  Get Network Configuration
+    ${ip_addresses}=  Get Static IPv4 Addresses From GUI
     FOR  ${network_configuration}  IN  @{network_configurations}
-      Textfield Value Should Be  ${xpath_static_input_ip0}  ${network_configuration["Address"]}
-      Textfield Value Should Be  ${xpath_input_netmask_addr0}  ${network_configuration['SubnetMask']}
+      List Should Contain Value  ${ip_addresses}  ${network_configuration["Address"]}
     END
 
 
