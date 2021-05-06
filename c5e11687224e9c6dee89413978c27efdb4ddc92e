@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1d0152d5_703333df",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-05-06T12:54:32Z",
+      "side": 1,
+      "message": "After clicking filter button, it takes some seconds to display the drop down so we are adding the wait here",
+      "parentUuid": "928cad16_5402aa32",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 73
+      },
+      "revId": "c5e11687224e9c6dee89413978c27efdb4ddc92e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "62062b90_72055a79",
         "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "c5e11687224e9c6dee89413978c27efdb4ddc92e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e7f29ec_6059278d",
+        "filename": "gui/gui_test/health_menu/test_obmc_gui_sensors.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-05-06T12:54:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62062b90_72055a79",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 67
+      },
+      "revId": "c5e11687224e9c6dee89413978c27efdb4ddc92e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
