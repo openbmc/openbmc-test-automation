@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb89773_63b51a27",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-06T05:59:14Z",
+      "side": 1,
+      "message": "As discussed move it back to - Page Should Contain Element",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 36
+      },
+      "revId": "4e301015bad33dad23bba7f3dec07b57ca3aead7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbfa3175_f1abd3b8",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-06T05:59:14Z",
+      "side": 1,
+      "message": "ip_address    IP address to be added(e.g. 10.7.7.7).",
+      "range": {
+        "startLine": 386,
+        "startChar": 6,
+        "endLine": 386,
+        "endChar": 18
+      },
+      "revId": "4e301015bad33dad23bba7f3dec07b57ca3aead7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09c7c11d_bce6e723",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-06T05:59:14Z",
+      "side": 1,
+      "message": "This is not really reliable way. Take the ip count from redfish.",
+      "range": {
+        "startLine": 391,
+        "startChar": 50,
+        "endLine": 391,
+        "endChar": 79
+      },
+      "revId": "4e301015bad33dad23bba7f3dec07b57ca3aead7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03c4b6c2_af7620ca",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-06T05:59:14Z",
+      "side": 1,
+      "message": "ip_addresses",
+      "range": {
+        "startLine": 408,
+        "startChar": 6,
+        "endLine": 408,
+        "endChar": 10
+      },
+      "revId": "4e301015bad33dad23bba7f3dec07b57ca3aead7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac4cccfa_b6c22ec7",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-06T05:59:14Z",
+      "side": 1,
+      "message": "Have one keyword to get existing IP address count.",
+      "range": {
+        "startLine": 415,
+        "startChar": 46,
+        "endLine": 415,
+        "endChar": 90
+      },
+      "revId": "4e301015bad33dad23bba7f3dec07b57ca3aead7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30861137_6de8e595",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-06T05:59:14Z",
+      "side": 1,
+      "message": "Not a reliable way. Also please declare xapth in the variable section before using and dont use directly like here.",
+      "range": {
+        "startLine": 436,
+        "startChar": 50,
+        "endLine": 436,
+        "endChar": 94
+      },
+      "revId": "4e301015bad33dad23bba7f3dec07b57ca3aead7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4ea69b7_924ddf3b",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-06T05:59:14Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "range": {
+        "startLine": 438,
+        "startChar": 30,
+        "endLine": 438,
+        "endChar": 80
+      },
+      "revId": "4e301015bad33dad23bba7f3dec07b57ca3aead7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2422e848_66079265",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-06T05:59:14Z",
+      "side": 1,
+      "message": "Same comment as above",
+      "range": {
+        "startLine": 465,
+        "startChar": 50,
+        "endLine": 465,
+        "endChar": 94
+      },
+      "revId": "4e301015bad33dad23bba7f3dec07b57ca3aead7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
