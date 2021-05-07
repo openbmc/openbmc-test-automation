@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "8a16bdec_8b1be23c",
+        "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-07T10:58:27Z",
+      "side": 1,
+      "message": "test setup can have redfish login, teardown a logout, or as other reviewer mentions, they can be pushed to suite for one time way",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 13
+      },
+      "revId": "3b8bc855eb6539329a622180dd45b158db06d753",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba7e1e48_67749a5e",
         "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
         "patchSetId": 5
