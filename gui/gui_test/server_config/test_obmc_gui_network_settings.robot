@@ -161,9 +161,9 @@ Verify Network Static IPv4 Details
     [Tags]  Verify_Network_static_IPv4_Details
 
     @{network_configurations}=  Get Network Configuration
+    ${ip_addresses}=  Get Static IPv4 Addresses From GUI
     FOR  ${network_configuration}  IN  @{network_configurations}
-      Textfield Value Should Be  ${xpath_static_input_ip0}  ${network_configuration["Address"]}
-      Textfield Value Should Be  ${xpath_input_netmask_addr0}  ${network_configuration['SubnetMask']}
+      List Should Contain Value  ${ip_addresses}  ${network_configuration["Address"]}
     END
 
 
@@ -556,3 +556,17 @@ Verfiy IP On BMC
     ${get_netmask}=  Get Value  ${xpath_input_netmask_addr0}
     Should Be Equal  ${get_ip}  ${ip}
     Should Be Equal  ${get_netmask}  ${subnet_mask}
+
+
+Get Static IPv4 Addresses From GUI
+    [Documentation]  get static IPV4 addresses from gui.
+
+    ${availble_ip_count}=  Get Network Configuration
+    ${static_ipv4_addresses}=  Create List
+
+    FOR   ${locator}   IN RANGE  len(${availble_ip_count})
+       ${ip_address}=  Get value  //*[@data-test-id="networkSettings-input-staticIpv4-${locator}"]
+       Append To List  ${static_ipv4_addresses}  ${ip_address}
+    END
+
+    [Return]  ${static_ipv4_addresses}
