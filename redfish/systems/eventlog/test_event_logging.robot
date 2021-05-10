@@ -55,6 +55,21 @@ Create Test Event Log And Verify
     Event Log Should Exist
 
 
+Delete Redfish Event Log And Verify
+    [Documentation]  Delete Redfish event log and verify via Redfish.
+    [Tags]  Delete_Redfish_Event_Log_And_Verify
+
+    Redfish.Login
+    Redfish Purge Event Log
+    Create Test PEL Log
+    ${elog_entry}=  Get Event Logs
+
+    Redfish.Delete  /redfish/v1/Systems/system/LogServices/EventLog/Entries/${elog_entry[0]["Id"]}
+
+    ${error_entries}=  Get Redfish Error Entries
+    Should Be Empty  ${error_entries}
+
+
 Test Event Log Persistency On Restart
     [Documentation]  Restart logging service and verify event logs.
     [Tags]  Test_Event_Log_Persistency_On_Restart
@@ -426,6 +441,19 @@ Test Teardown Execution
     FFDC On Test Case Fail
     Redfish.Login
     Redfish Purge Event Log
+
+
+Get Redfish Error Entries
+    [Documentation]  Return Redfish error ids list.
+    ${error_uris}=  redfish_utils.get_member_list  /redfish/v1/Systems/system/LogServices/EventLog/Entries
+    ${error_ids}=  Create List
+
+    FOR  ${error_uri}  IN  @{error_uris}
+      ${error_id}=  Fetch From Right  ${error_uri}  /
+      Append To List  ${error_ids}  ${error_id}
+    END
+
+    [Return]  ${error_ids}
 
 
 Event Log Should Not Exist
