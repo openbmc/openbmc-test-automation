@@ -90,6 +90,8 @@ Assign Valid And Invalid Static IPv4 Address To VMI
     # ip          gateway     netmask           valid_status_code
     10.5.20.30    10.5.20.1     255.255.252.0    ${HTTP_ACCEPTED}
     a.3.118.94    10.5.20.1     255.255.252.0    ${HTTP_BAD_REQUEST}
+    10.5.20       10.5.20.1     255.255.252.0    ${HTTP_BAD_REQUEST}
+    10.5.20.-5    10.5.20.1     255.255.252.0    ${HTTP_BAD_REQUEST}
 
 
 Add Multiple IP Addresses On VMI Interface And Verify
@@ -374,6 +376,29 @@ Multiple Times Enable And Disable DHCP And Verify
       ${vmi_ip}=  Get VMI Network Interface Details
       Should Be Empty  ${vmi_ip["IPv4_Address"]}
     END
+
+
+Assign Static IPv4 Address With Invalid Netmask To VMI
+    [Documentation]  Assign static IPv4 address with invalid netmask and expect error.
+    [Tags]  Assign_Static_IPv4_Address_With_Invalid_Netmask_To_VMI
+    [Template]  Set Static IPv4 Address To VMI And Verify
+
+    # ip          gateway          netmask         valid_status_code
+    ${test_ipv4}  ${test_gateway}  255.256.255.0   ${HTTP_BAD_REQUEST}
+    ${test_ipv4}  ${test_gateway}  ff.ff.ff.ff     ${HTTP_BAD_REQUEST}
+    ${test_ipv4}  ${test_gateway}  255.255.253.0   ${HTTP_BAD_REQUEST}
+
+
+Assign Static IPv4 Address With Invalid Gateway To VMI
+    [Documentation]  Add static IPv4 address with invalid gateway and expect error.
+    [Tags]  Assign_Static_IPv4_Address_With_Invalid_Gateway_To_VMI
+    [Template]  Set Static IPv4 Address To VMI And Verify
+
+    # ip          gateway          netmask           valid_status_code
+    ${test_ipv4}  @@@.%%.44.11     ${test_netmask}   ${HTTP_BAD_REQUEST}
+    ${test_ipv4}  0xa.0xb.0xc.0xd  ${test_netmask}   ${HTTP_BAD_REQUEST}
+    ${test_ipv4}  10.3.36          ${test_netmask}   ${HTTP_BAD_REQUEST}
+    ${test_ipv4}  10.3.36.-10      ${test_netmask}   ${HTTP_BAD_REQUEST}
 
 
 *** Keywords ***
