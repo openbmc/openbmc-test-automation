@@ -200,6 +200,47 @@ Create Test Event Log And Verify Time Stamp
     Should Be True  ${time_stamp2} > ${time_stamp1}
 
 
+Verify Setting Error Log As Resolved
+    [Documentation]  Verify modified field of error log is updated when error log is marked resolved.
+    [Tags]  Verify_Setting_Error_Log_As_Resolved
+
+    Create Test PEL Log
+    ${elog_entry}=  Get Event Logs
+
+    # Wait for 5 seconds after creating error log.
+    Sleep  5s
+
+    # Mark error log as resolved by setting it to true.
+    Redfish.Patch  ${EVENT_LOG_URI}Entries/${elog_entry[0]["Id"]}  body={'Resolved':True}
+
+    ${elog_entry}=  Get Event Logs
+
+    # Example error log with resolve field set to true:
+    # {
+    #  "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/2045",
+    #  "@odata.type": "#LogEntry.v1_8_0.LogEntry",
+    #  "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/attachment/2045",
+    #  "Created": "2021-05-11T04:45:07+00:00",
+    #  "EntryType": "Event",
+    #  "Id": "2045",
+    #  "Message": "xyz.openbmc_project.Host.Error.Event",
+    #  "Modified": "2021-05-11T07:24:36+00:00",
+    #  "Name": "System Event Log Entry",
+    #  "Resolved": true,
+    #  "Severity": "OK"
+    # }
+
+    Should Be Equal As Strings  ${elog_entry[0]["Resolved"]}  True
+
+    # Difference created and modified time of error log should be around 5 seconds.
+    ${creation_time}=  Convert Date  ${elog_entry[0]["Created"]}  epoch
+    ${modification_time}=  Convert Date  ${elog_entry[0]["Modified"]}  epoch
+
+    ${diff}=  Subtract Date From Date  ${modification_time}  ${creation_time}
+    ${diff}=  Convert To Number  ${diff}
+    Should Be True  4 < ${diff} < 8
+
+
 Verify IPMI SEL Delete
     [Documentation]  Verify IPMI SEL delete operation.
     [Tags]  Verify_IPMI_SEL_Delete
