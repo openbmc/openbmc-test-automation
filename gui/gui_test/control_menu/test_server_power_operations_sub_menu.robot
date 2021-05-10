@@ -23,7 +23,7 @@ ${xpath_save_button}                       //button[contains(text(),'Save')]
 ${xpath_shutdown_orderly_radio}            //*[@data-test-id='serverPowerOperations-radio-shutdownOrderly']
 ${xpath_shutdown_immediate_radio}          //*[@data-test-id='serverPowerOperations-radio-shutdownImmediate']
 ${xpath_confirm_button}                    //button[contains(text(),'Confirm')]
-${xpath_current_power_state}               //*[contains(@class,'row mb-4')]
+${xpath_current_power_state}               //*[@data-test-id='powerServerOps-text-hostStatus']
 ${xpath_reboot_orderly_radio}              //*[@data-test-id='serverPowerOperations-radio-rebootOrderly']
 ${xpath_reboot_immediate_radio}            //*[@data-test-id='serverPowerOperations-radio-rebootImmediate']
 
@@ -45,7 +45,7 @@ Verify Immediate Shutdown
     Click Element  ${xpath_shutdown_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
-    Wait Until Keyword Succeeds  3 min  0 sec  Element Should Contain  ${xpath_current_power_state}  Off
+    Wait Until Keyword Succeeds  3 min  15 sec  Element Should Contain  ${xpath_current_power_state}  Off
 
 
 Verify Orderly Shutdown
@@ -57,7 +57,7 @@ Verify Orderly Shutdown
     Click Element  ${xpath_shutdown_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
-    Wait Until Keyword Succeeds  10 min  0 sec  Element Should Contain  ${xpath_current_power_state}  Off
+    Wait Until Keyword Succeeds  10 min  15 sec  Element Should Contain  ${xpath_current_power_state}  Off
 
 
 Verify Existence Of All Sections In Server Power Operations Page
@@ -139,9 +139,9 @@ Verify Host Immediate Reboot
     Click Element  ${xpath_reboot_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
-    Wait Until Keyword Succeeds  3 min  0 sec  Element Should Contain  ${xpath_current_power_state}  Off
+    Wait Until Keyword Succeeds  3 min  2 sec  Element Should Contain  ${xpath_current_power_state}  Off
     Click Element  ${xpath_refresh_button}
-    Wait Until Keyword Succeeds  3 min  0 sec  Element Should Contain  ${xpath_current_power_state}  On
+    Wait Until Keyword Succeeds  10 min  15 sec  Element Should Contain  ${xpath_current_power_state}  On
 
 
 Verify Host Orderly Reboot
@@ -153,9 +153,9 @@ Verify Host Orderly Reboot
     Click Element  ${xpath_reboot_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
-    Wait Until Keyword Succeeds  10 min  0 sec  Element Should Contain  ${xpath_current_power_state}  Off
+    Wait Until Keyword Succeeds  3 min  2 sec  Element Should Contain  ${xpath_current_power_state}  Off
     Click Element  ${xpath_refresh_button}
-    Wait Until Keyword Succeeds  10 min  0 sec  Element Should Contain  ${xpath_current_power_state}  On
+    Wait Until Keyword Succeeds  10 min  15 sec  Element Should Contain  ${xpath_current_power_state}  On
 
 
 *** Keywords ***
