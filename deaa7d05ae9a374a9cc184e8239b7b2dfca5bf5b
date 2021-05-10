@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43e0266e_6f49a5c0",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-10T11:34:44Z",
+      "side": 1,
+      "message": "From code, test wants to check difference between error log creation and resolve times. There is no code to verify modified field of error log.",
+      "range": {
+        "startLine": 204,
+        "startChar": 21,
+        "endLine": 204,
+        "endChar": 100
+      },
+      "revId": "deaa7d05ae9a374a9cc184e8239b7b2dfca5bf5b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ff49e74_df68f322",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-10T11:34:44Z",
+      "side": 1,
+      "message": "As per documentation, why this code is necessary. Either change documentation or change the code.",
+      "range": {
+        "startLine": 219,
+        "startChar": 4,
+        "endLine": 225,
+        "endChar": 35
+      },
+      "revId": "deaa7d05ae9a374a9cc184e8239b7b2dfca5bf5b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5e8ce26_59d783db",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-10T11:34:44Z",
+      "side": 1,
+      "message": "remove commented lines",
+      "range": {
+        "startLine": 429,
+        "startChar": 4,
+        "endLine": 430,
+        "endChar": 59
+      },
+      "revId": "deaa7d05ae9a374a9cc184e8239b7b2dfca5bf5b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "339c702f_a632e1d1",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-10T11:34:44Z",
+      "side": 1,
+      "message": "remove commented lines",
+      "range": {
+        "startLine": 444,
+        "startChar": 4,
+        "endLine": 445,
+        "endChar": 59
+      },
+      "revId": "deaa7d05ae9a374a9cc184e8239b7b2dfca5bf5b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cfcd374_952b39e0",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-10T11:34:44Z",
+      "side": 1,
+      "message": "remove commented lines",
+      "range": {
+        "startLine": 451,
+        "startChar": 4,
+        "endLine": 451,
+        "endChar": 27
+      },
+      "revId": "deaa7d05ae9a374a9cc184e8239b7b2dfca5bf5b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
