@@ -3,7 +3,7 @@ Documentation    Error logging utility keywords.
 
 Resource        rest_client.robot
 Variables       ../data/variables.py
-
+Variables       ../data/pel_variables.py
 
 *** Variables ***
 
@@ -148,6 +148,36 @@ Clear Existing Error Logs
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     ...  msg=Could not clear BMC error logs.
+
+
+Create Test PEL Log
+    [Documentation]  Generate test PEL log.
+    [Arguments]  ${pel_type}=Internal Failure
+
+    # Description of argument(s):
+    # pel_type      The PEL type (e.g. Internal Failure, FRU Callout, Procedural Callout).
+
+    # Test PEL log entry example:
+    # {
+    #    "0x5000002D": {
+    #            "SRC": "BD8D1002",
+    #            "Message": "An application had an internal failure",
+    #            "PLID": "0x5000002D",
+    #            "CreatorID": "BMC",
+    #            "Subsystem": "BMC Firmware",
+    #            "Commit Time": "02/25/2020  04:47:09",
+    #            "Sev": "Unrecoverable Error",
+    #            "CompID": "0x1000"
+    #    }
+    # }
+
+    Run Keyword If  '${pel_type}' == 'Internal Failure'
+    ...   BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+    ...  ELSE IF  '${pel_type}' == 'FRU Callout'
+    ...   BMC Execute Command  ${CMD_FRU_CALLOUT}
+    ...  ELSE IF  '${pel_type}' == 'Procedure And Symbolic FRU Callout'
+    ...   BMC Execute Command  ${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}
+
 
 Create Test Error Log
     [Documentation]  Generate test error log.
