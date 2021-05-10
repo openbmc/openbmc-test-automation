@@ -14,40 +14,8 @@ Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 
 *** Variables ***
 
-${CMD_INTERNAL_FAILURE}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
-...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
-...  xyz.openbmc_project.Logging.Entry.Level.Error 0
-
-${CMD_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
-...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.Timeout
-...  xyz.openbmc_project.Logging.Entry.Level.Error 2 "TIMEOUT_IN_MSEC" "5"
-...  "CALLOUT_INVENTORY_PATH" "/xyz/openbmc_project/inventory/system/chassis/motherboard"
-
-${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
-...  xyz.openbmc_project.Logging.Create Create ssa{ss} org.open_power.Logging.Error.TestError1
-...  xyz.openbmc_project.Logging.Entry.Level.Error 0
-
-${CMD_INFORMATIONAL_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
-...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.TestError2
-...  xyz.openbmc_project.Logging.Entry.Level.Informational 0
-
-${CMD_INVENTORY_PREFIX}  busctl get-property xyz.openbmc_project.Inventory.Manager
-...  /xyz/openbmc_project/inventory/system/chassis/motherboard
-
-${CMD_UNRECOVERABLE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
-...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
-...  xyz.openbmc_project.Logging.Entry.Level.Error 0
-
-${CMD_PREDICTIVE_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
-...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
-...   xyz.openbmc_project.Logging.Entry.Level.Warning 0
-
-${CMD_UNRECOVERABLE_HOST_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
-...  xyz.openbmc_project.Logging.Create Create ssa{ss}
-...  xyz.openbmc_project.Host.Error.Event xyz.openbmc_project.Logging.Entry.Level.Error 1
-...  RAWPEL /tmp/FILE_NBMC_UNRECOVERABLE
-
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
+
 
 *** Test Cases ***
 
@@ -759,35 +727,6 @@ Get Disk Usage For Error Logs
     ${usage_percent}=  Evaluate  ${usage_output} / 20 * 100
 
     [return]  ${usage_percent}
-
-
-Create Test PEL Log
-    [Documentation]  Generate test PEL log.
-    [Arguments]  ${pel_type}=Internal Failure
-
-    # Description of argument(s):
-    # pel_type      The PEL type (e.g. Internal Failure, FRU Callout, Procedural Callout).
-
-    # Test PEL log entry example:
-    # {
-    #    "0x5000002D": {
-    #            "SRC": "BD8D1002",
-    #            "Message": "An application had an internal failure",
-    #            "PLID": "0x5000002D",
-    #            "CreatorID": "BMC",
-    #            "Subsystem": "BMC Firmware",
-    #            "Commit Time": "02/25/2020  04:47:09",
-    #            "Sev": "Unrecoverable Error",
-    #            "CompID": "0x1000"
-    #    }
-    # }
-
-    Run Keyword If  '${pel_type}' == 'Internal Failure'
-    ...   BMC Execute Command  ${CMD_INTERNAL_FAILURE}
-    ...  ELSE IF  '${pel_type}' == 'FRU Callout'
-    ...   BMC Execute Command  ${CMD_FRU_CALLOUT}
-    ...  ELSE IF  '${pel_type}' == 'Procedure And Symbolic FRU Callout'
-    ...   BMC Execute Command  ${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}
 
 
 Get PEL Log IDs
