@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a88c8d33_b0e1a732",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-05-10T11:26:28Z",
+      "side": 1,
+      "message": "suggestion-Assign Static IPv4 Address With Invalid Netmask To VMI",
+      "revId": "42f3ce88a13931ca37a4abd3240c5eb67695f77b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78ff3790_b246f3de",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-05-10T11:26:28Z",
+      "side": 1,
+      "message": "Assign Static IPv4 Address With Invalid Netmask To VMI and expect an error",
+      "revId": "42f3ce88a13931ca37a4abd3240c5eb67695f77b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79f28bf8_91b349af",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-05-10T11:26:28Z",
+      "side": 1,
+      "message": "pls rephrase similar as per comment in line 381",
+      "revId": "42f3ce88a13931ca37a4abd3240c5eb67695f77b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
