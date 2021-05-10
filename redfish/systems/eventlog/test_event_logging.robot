@@ -200,6 +200,31 @@ Create Test Event Log And Verify Time Stamp
     Should Be True  ${time_stamp2} > ${time_stamp1}
 
 
+Verify Setting Error Log As Resolved
+    [Documentation]  Verify modified field of error log is updated when error log is marked resolved.
+    [Tags]  Verify_Setting_Error_Log_As_Resolved
+
+    Redfish Purge Event Log
+    Create Test PEL Log
+    ${elog_entry}=  Get Event Logs
+
+    # Wait for 5 seconds after creating error log.
+    Sleep  5s
+
+    # Mark error log as resolved by setting it to true.
+    Redfish.Patch  ${EVENT_LOG_URI}Entries/${elog_entry[0]["Id"]}  body={'Resolved':True}
+
+    ${elog_entry}=  Get Event Logs
+
+    # Difference between error log create and resolve times should be around 5 seconds.
+    ${creation_time}=  Convert Date  ${elog_entry[0]["Created"]}  epoch
+    ${modification_time}=  Convert Date  ${elog_entry[0]["Modified"]}  epoch
+
+    ${diff}=  Subtract Date From Date  ${modification_time}  ${creation_time}
+    ${diff}=  Convert To Number  ${diff}
+    Should Be True  4 < ${diff} < 8
+
+
 Verify IPMI SEL Delete
     [Documentation]  Verify IPMI SEL delete operation.
     [Tags]  Verify_IPMI_SEL_Delete
@@ -401,8 +426,8 @@ Suite Setup Execution
 
     Redfish Purge Event Log
 
-    ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
-    Run Keyword If  ${status} == ${False}  Install Tarball
+    #${status}=  Run Keyword And Return Status  Logging Test Binary Exist
+    #Run Keyword If  ${status} == ${False}  Install Tarball
 
 
 Suite Teardown Execution
@@ -416,14 +441,14 @@ Test Setup Execution
 
     Redfish Purge Event Log
 
-    ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
-    Run Keyword If  ${status} == ${False}  Install Tarball
+    #${status}=  Run Keyword And Return Status  Logging Test Binary Exist
+    #Run Keyword If  ${status} == ${False}  Install Tarball
 
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish.Login
     Redfish Purge Event Log
 
