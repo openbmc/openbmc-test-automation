@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "15579ec7_3a2472f5",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-11T08:12:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5fe08a8_5eaf3d94",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "1e18641cdcca7f4c660671cf2582148aeca5555f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "467f9c9e_c936e1c9",
         "filename": "redfish/systems/eventlog/test_event_logging.robot",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "1e18641cdcca7f4c660671cf2582148aeca5555f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4202a11b_ef51505b",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-11T08:12:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "467f9c9e_c936e1c9",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 1
+      },
+      "revId": "1e18641cdcca7f4c660671cf2582148aeca5555f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e4187f78_0e68fb22",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-11T08:12:40Z",
+      "side": 1,
+      "message": "This test is for testing single error delete. We will add multiple error test deletion testcase later.",
+      "parentUuid": "1e82dc0c_00a5e673",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 23
+      },
+      "revId": "1e18641cdcca7f4c660671cf2582148aeca5555f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2ba8aed_daec64fd",
         "filename": "redfish/systems/eventlog/test_event_logging.robot",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2021-05-10T10:17:37Z",
       "side": 1,
       "message": "change to different naming from ${error_id} for good readability - like ${error_id_list}",
+      "range": {
+        "startLine": 448,
+        "startChar": 6,
+        "endLine": 448,
+        "endChar": 16
+      },
+      "revId": "1e18641cdcca7f4c660671cf2582148aeca5555f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2a8117a_da134554",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-11T08:12:40Z",
+      "side": 1,
+      "message": "We should avoid having the variable\u0027s type as a suffix portion of the name. Please refer our coding guideline - https://github.com/openbmc/openbmc-test-automation/blob/fa91cfa732f81d6af4d7393d7917590fdbc5e7b9/CONTRIBUTING.md",
+      "parentUuid": "d2ba8aed_daec64fd",
       "range": {
         "startLine": 448,
         "startChar": 6,
