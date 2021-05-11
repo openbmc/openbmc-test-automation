@@ -22,6 +22,30 @@
       "revId": "a8b8042cdcaa88e0e6f6a7270f5ea2db7cdd1f1c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "299fad9a_7f6455f1",
+        "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-11T11:40:06Z",
+      "side": 1,
+      "message": "Can I do it in a later commit? I have lost the sandbox for it.",
+      "parentUuid": "62ed447d_5b3a79a4",
+      "range": {
+        "startLine": 8,
+        "startChar": 15,
+        "endLine": 8,
+        "endChar": 104
+      },
+      "revId": "a8b8042cdcaa88e0e6f6a7270f5ea2db7cdd1f1c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
