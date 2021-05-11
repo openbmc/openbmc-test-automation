@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62ed447d_5b3a79a4",
+        "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-05-11T10:09:05Z",
+      "side": 1,
+      "message": "Can you create a keyword for this?",
+      "range": {
+        "startLine": 8,
+        "startChar": 15,
+        "endLine": 8,
+        "endChar": 104
+      },
+      "revId": "a8b8042cdcaa88e0e6f6a7270f5ea2db7cdd1f1c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}

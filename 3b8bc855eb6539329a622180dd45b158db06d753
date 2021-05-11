@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "abb92ab1_46be6cda",
+        "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-05-11T10:09:05Z",
+      "side": 1,
+      "message": "In all the suites we have Redfish login and logout to not to rely on other Redfish related keywords. But here it is a different case it is affecting GUI.\nGeorge, what is your take on this?",
+      "parentUuid": "939723a7_44e803fe",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 104
+      },
+      "revId": "3b8bc855eb6539329a622180dd45b158db06d753",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8a16bdec_8b1be23c",
         "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
         "patchSetId": 5
