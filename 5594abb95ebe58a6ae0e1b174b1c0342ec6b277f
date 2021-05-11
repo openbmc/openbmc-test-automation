@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0185b6fc_97b17c6d",
+        "filename": "gui/gui_test/control_menu/test_server_led_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-11T08:19:38Z",
+      "side": 1,
+      "message": "We only need to add Redfish login for these test cases. So do it like below:\n    [Tags]  Verify_Server_LED_ON\n    [Setup]  Redfish.Login\n    [Teardown]  Redfish.logout",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "5594abb95ebe58a6ae0e1b174b1c0342ec6b277f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4290b5ed_273f8325",
+        "filename": "gui/gui_test/control_menu/test_server_led_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-11T08:19:38Z",
+      "side": 1,
+      "message": "[Tags]  Verify_Server_LED_OFF\n    [Setup]  Redfish.Login\n    [Teardown]  Redfish.logout",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 33
+      },
+      "revId": "5594abb95ebe58a6ae0e1b174b1c0342ec6b277f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86f32778_edef3ad8",
+        "filename": "gui/gui_test/control_menu/test_server_led_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-11T08:19:38Z",
+      "side": 1,
+      "message": "Please changes as pointed above.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "5594abb95ebe58a6ae0e1b174b1c0342ec6b277f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
