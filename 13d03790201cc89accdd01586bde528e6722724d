@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83dd00c8_31fc5a7f",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-05-12T10:19:37Z",
+      "side": 1,
+      "message": "why this value of MAX is changed \u003e?",
+      "range": {
+        "startLine": 598,
+        "startChar": 46,
+        "endLine": 598,
+        "endChar": 50
+      },
+      "revId": "13d03790201cc89accdd01586bde528e6722724d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
