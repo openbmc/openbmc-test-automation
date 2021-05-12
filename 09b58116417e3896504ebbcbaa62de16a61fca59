@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6d666af_97d8d288",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-05-12T09:00:38Z",
+      "side": 1,
+      "message": "Should be part of setup",
+      "range": {
+        "startLine": 207,
+        "startChar": 4,
+        "endLine": 207,
+        "endChar": 27
+      },
+      "revId": "09b58116417e3896504ebbcbaa62de16a61fca59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2846b89_8416214b",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-05-12T09:00:38Z",
+      "side": 1,
+      "message": "This is not required.",
+      "range": {
+        "startLine": 217,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 34
+      },
+      "revId": "09b58116417e3896504ebbcbaa62de16a61fca59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3129d7ac_97cf5fc9",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-05-12T09:00:38Z",
+      "side": 1,
+      "message": "The validation should also check the error log\u0027s resolved status.",
+      "range": {
+        "startLine": 234,
+        "startChar": 4,
+        "endLine": 240,
+        "endChar": 35
+      },
+      "revId": "09b58116417e3896504ebbcbaa62de16a61fca59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
