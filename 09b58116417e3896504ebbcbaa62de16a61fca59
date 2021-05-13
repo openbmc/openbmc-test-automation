@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "77c7fde9_94d440df",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-13T09:26:11Z",
+      "side": 1,
+      "message": "Oh it\u0027s already part of test setup. Removed it.",
+      "parentUuid": "c6d666af_97d8d288",
+      "range": {
+        "startLine": 207,
+        "startChar": 4,
+        "endLine": 207,
+        "endChar": 27
+      },
+      "revId": "09b58116417e3896504ebbcbaa62de16a61fca59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2846b89_8416214b",
         "filename": "redfish/systems/eventlog/test_event_logging.robot",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2021-05-12T09:00:38Z",
       "side": 1,
       "message": "This is not required.",
+      "range": {
+        "startLine": 217,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 34
+      },
+      "revId": "09b58116417e3896504ebbcbaa62de16a61fca59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac049f0b_04a0401a",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-13T09:26:11Z",
+      "side": 1,
+      "message": "This is required in line 235 and 236",
+      "parentUuid": "a2846b89_8416214b",
       "range": {
         "startLine": 217,
         "startChar": 4,
@@ -68,6 +116,30 @@
       "revId": "09b58116417e3896504ebbcbaa62de16a61fca59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43e83f67_15b41587",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-13T09:26:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3129d7ac_97cf5fc9",
+      "range": {
+        "startLine": 234,
+        "startChar": 4,
+        "endLine": 240,
+        "endChar": 35
+      },
+      "revId": "09b58116417e3896504ebbcbaa62de16a61fca59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
