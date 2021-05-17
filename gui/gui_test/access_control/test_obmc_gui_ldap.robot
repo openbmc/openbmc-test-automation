@@ -100,7 +100,7 @@ Create LDAP Configuration
     Checkbox Should Be Selected  ${xpath_enable_ldap_checkbox}
     ${radio_buttons}=    Get WebElements    ${xpath_service_radio_button}
 
-    Run Keyword If  '${ldap_service_type}' == 'OpenLDAP'
+    Run Keyword If  '${ldap_service_type}' == 'LDAP'
     ...  Click Element At Coordinates  ${radio_buttons}[${0}]  0  0
     ...  ELSE  Click Element At Coordinates  ${radio_buttons}[${1}]  0  0
 
@@ -111,7 +111,7 @@ Create LDAP Configuration
     Input Text  ${xpath_ldap_base_dn}  ${ldap_base_dn}
     Click Element  ${xpath_ldap_save_settings}
 
-    Run Keyword If  '${ldap_service_type}'=='OpenLDAP'
+    Run Keyword If  '${ldap_service_type}'=='LDAP'
     ...  Wait Until Page Contains  Successfully saved Open LDAP settings
     ...  ELSE
     ...  Wait Until Page Contains  Successfully saved Active Directory settings
@@ -125,12 +125,12 @@ Get LDAP Configuration
     [Arguments]   ${ldap_type}
 
     # Description of argument(s):
-    # ldap_type  The LDAP type ("ActiveDirectory" or "OpenLDAP").
+    # ldap_type  The LDAP type ("ActiveDirectory" or "LDAP").
 
     ${radio_buttons}=  Get WebElements  ${xpath_service_radio_button}
 
     ${status}=  Run Keyword And Return Status
-    ...  Run Keyword If  '${ldap_type}'=='OpenLDAP'
+    ...  Run Keyword If  '${ldap_type}'=='LDAP'
     ...  Checkbox Should Be Selected  ${radio_buttons}[${0}]
     ...  ELSE
     ...  Checkbox Should Be Selected  ${radio_buttons}[${1}]
