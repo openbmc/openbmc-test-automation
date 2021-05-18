@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94d2ecc5_e8af51d2",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-18T10:46:37Z",
+      "side": 1,
+      "message": "All these are present in - data/pel_variables.py. No need to add it here.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 40
+      },
+      "revId": "4eeef2eb81a319e6afbcdee96d9cbe6086794b9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e94190af_03179ce1",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-18T10:46:37Z",
+      "side": 1,
+      "message": "I guess it will be 30 here",
+      "range": {
+        "startLine": 569,
+        "startChar": 78,
+        "endLine": 569,
+        "endChar": 80
+      },
+      "revId": "4eeef2eb81a319e6afbcdee96d9cbe6086794b9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
