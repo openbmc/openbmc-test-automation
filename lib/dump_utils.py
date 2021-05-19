@@ -133,3 +133,112 @@ def scp_dumps(targ_dir_path,
         dump_file_list.append(targ_file_path)
 
     return dump_file_list
+
+
+def get_dump_hb_dict(quiet=None):
+    r"""
+    Get dump information and return as an ordered dictionary where the keys
+    are the dump IDs and the values are the full path names of the dumps.
+
+    Example robot program call:
+
+    ${dump_dict}=  Get Dump HB Dict
+    Rprint Vars  dump_hb_dict
+
+    Example output:
+
+    dump__hb_dict:
+      [1]:
+      /var/lib/phosphor-debug-collector/hostbootdump/1/hbdump_1_1621421112.tar.gz
+
+    Description of argument(s):
+    quiet                           If quiet is set to 1, this function will
+                                    NOT write status messages to stdout.
+    """
+
+    quiet = int(gp.get_var_value(quiet, 1))
+    cmd_buf = "dump_hb_dir_path=" + var.DUMP_HB_DIR_PATH + " ; " \
+              + "for dump_id in $(ls ${dump_hb_dir_path} | sort -n) ; do " \
+              + "file_path=$(ls ${dump_hb_dir_path}${dump_id}/* 2>/dev/null)" \
+              + " || continue ; echo ${dump_id}:${file_path} ; done"
+    output, stderr, rc = bsu.bmc_execute_command(cmd_buf, quiet=quiet)
+
+    return vf.key_value_outbuf_to_dict(output)
+
+
+def valid_dump_hb(dump_id,
+                  dump_dict=None,
+                  quiet=None):
+    r"""
+    Verify that dump_id is a valid.  If it is not valid, issue robot failure
+    message.
+
+    A dump is valid if the indicated dump_id refers to an existing dump with a
+    valid associated dump file.
+
+    Description of argument(s):
+    dump_id                         A dump ID (e.g. "1", "2", etc.)
+    dump_dict                       A dump dictionary such as the one returned
+                                    by get_dump_hb_dict.  If this value is None,
+                                    this function will call get_dump_hb_dict on
+                                    the caller's behalf.
+    quiet                           If quiet is set to 1, this function will
+                                    NOT write status messages to stdout.
+    """
+
+    if dump_dict is None:
+        dump_dict = get_dump_hb_dict(quiet=quiet)
+
+    if dump_id not in dump_dict:
+        message = "The specified dump ID was not found among the existing" \
+            + " dumps:\n"
+        message += gp.sprint_var(dump_id)
+        message += gp.sprint_var(dump_dict)
+        BuiltIn().fail(gp.sprint_error(message))
+
+    if not dump_dict[dump_id].endswith("tar.gz"):
+        message = "There is no \"tar.gz\" file associated with the given" \
+            + " dump_id:\n"
+        message += gp.sprint_var(dump_id)
+        dump_file_path = dump_dict[dump_id]
+        message += gp.sprint_var(dump_file_path)
+        BuiltIn().fail(gp.sprint_error(message))
+
+
+def scp_dumps_hb(targ_dir_path,
+                 targ_file_prefix="",
+                 dump_dict=None,
+                 quiet=None):
+    r"""
+    SCP all dumps from the BMC to the indicated directory on the local system
+    and return a list of the new files.
+
+    Description of argument(s):
+    targ_dir_path                   The path of the directory to receive the
+                                    dump files.
+    targ_file_prefix                Prefix which will be pre-pended to each
+                                    target file's name.
+    dump_dict                       A dump dictionary such as the one returned
+                                    by get_dump_dict.  If this value is None,
+                                    this function will call get_dump_dict on
+                                    the caller's behalf.
+    quiet                           If quiet is set to 1, this function will
+                                    NOT write status messages to stdout.
+    """
+
+    targ_dir_path = gm.add_trailing_slash(targ_dir_path)
+
+    if dump_dict is None:
+        dump_dict = get_dump_hb_dict(quiet=quiet)
+
+    status, ret_values = grk.run_key("Open Connection for SCP", quiet=quiet)
+
+    dump_file_list = []
+    for dump_id, source_file_path in dump_dict.items():
+        targ_file_path = targ_dir_path + targ_file_prefix \
+            + os.path.basename(source_file_path)
+        status, ret_values = grk.run_key("scp.Get File  " + source_file_path
+                                         + "  " + targ_file_path, quiet=quiet)
+        dump_file_list.append(targ_file_path)
+
+    return dump_file_list
