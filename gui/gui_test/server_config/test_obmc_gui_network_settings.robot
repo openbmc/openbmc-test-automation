@@ -31,7 +31,7 @@ ${xpath_input_netmask_addr1}      //*[@data-test-id="networkSettings-input-subne
 ${xpath_delete_static_ip}         //*[@title="Delete IPv4 row"]
 ${xpath_input_dns_server}         //*[@data-test-id="networkSettings-input-dnsAddress-0"]
 ${xpath_delete_dns_server}        //*[@title="Delete DNS row"]
-${xpath_ip_table}                 //*[@aria-colcount="3"]
+${xpath_delete_static_ip}         //*[@title="Delete IPv4 row"]
 
 @{static_name_servers}            10.10.10.10
 @{null_value}                     null
@@ -214,10 +214,8 @@ Delete And Verify DNS Server Via GUI
 
 Configure And Verify Static IP Address
     [Documentation]  Configure and verify static ip addresses.
-    [Setup]  Test Setup Execution
     [Tags]  Configure_And_Verify_Static_IP_Address
-    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
-    ...  AND  Test Teardown Execution
+    [Teardown]  Delete And Verify Static IP Address On BMC  ${test_ipv4_addr}
 
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
 
@@ -238,10 +236,8 @@ Configure And Verify Invalid DNS Server
 
 Modify IP Address And Verify
     [Documentation]  Modify IP address and verify.
-    [Setup]  Test Setup Execution
     [Tags]  Modify_IP_Address_And_Verify
-    [Teardown]  Run Keywords  Delete And Verify Static IP Address On BMC
-    ...  AND  Test Teardown Execution
+    [Teardown]  Delete And Verify Static IP Address On BMC  ${test_ipv4_addr2}
 
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
     Update IP Address And Verify  ${test_ipv4_addr}  ${test_ipv4_addr2}
@@ -250,11 +246,9 @@ Modify IP Address And Verify
 Configure Netmask And Verify
     [Documentation]  Configure and verify netmask.
     [Tags]  Configure_And_Verify_Netmask
-    [Setup]  Test Setup Execution
     [Template]  Add Static IP Address And Verify
     [Teardown]  Run Keywords  Click Element  ${xpath_refresh_button}
-    ...  AND  Delete And Verify Static IP Address On BMC
-    ...  AND  Test Teardown Execution
+    ...  AND  Delete And Verify Static IP Address On BMC  ${test_ipv4_addr}
 
     # ip_addresses      subnet_masks             expected_status
     ${test_ipv4_addr}   ${lowest_netmask}        Valid format
@@ -418,44 +412,29 @@ Add Static IP Address And Verify
 
 Delete And Verify Static IP Address On BMC
     [Documentation]  Delete static IP address and verify
+    [Arguments]  ${ip_address}
 
-    ${all_match_elements}=  Get Element Count  ${xpath_delete_static_ip}
-    FOR  ${element}  IN RANGE  ${all_match_elements}
-      ${ip_location}=  Evaluate  ${element} + ${1}
-      Delete Static IPv4 Addresses Except BMC IP  ${element}
-      ${status}=  Run Keyword And Return Status  Page Should Contain Textfield
-      ...  //*[@data-test-id="networkSettings-input-staticIpv4-${ip_location}"]
-      Exit For Loop IF  "${status}" == "${False}"
+    # Description of argument(s):
+    # ip_address       IP address to be deleted (e.g. "10.7.7.7").
+
+    ${ip_addresses}=  Get Static IPv4 Addresses From GUI
+    Should Contain  ${ip_addresses}  ${ip_address}  msg=${ip_address} does not exist on BMC
+
+    ${delete_ip_buttons}=  Get WebElements  ${xpath_delete_static_ip} 
+    FOR  ${location}  IN RANGE  len(${ip_addresses})
+       ${gui_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-${location}"]
+       Run Keyword If  '${gui_ip}' == '${ip_address}' and '${gui_ip}' != '${BMC_IP}'
+       ...  Run Keywords  Click Element  ${delete_ip_buttons}[${location}]
+       ...  AND  Exit For Loop
     END
 
     Click Button  ${xpath_network_save_settings}
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=15
-    ${all_match_elements}=  Get Element Count  ${xpath_delete_static_ip}
-    Should Be Equal  ${all_match_elements}  ${1}
-    Textfield Value Should Be  ${xpath_static_input_ip0}  ${BMC_IP}
-    Sleep  ${NETWORK_TIMEOUT}s
-    Ping Host  ${OPENBMC_HOST}
+    Wait Until Page Contains Element  ${xpath_static_input_ip0}
     Validate Network Config On BMC
+    ${ip_addresses}=  Get Static IPv4 Addresses From GUI
+    Should Not Contain  ${ip_addresses}  ${ip_address}
 
-Delete Static IPv4 Addresses Except BMC IP
-    [Documentation]  Delete static IP addresses from IPv4 section on GUI except BMC IP.
-    [Arguments]   ${element}
-
-    # Description of argument(s):
-    # element          IP address location on GUI(e.g. 0 or 1).
-
-    ${ip_location}=  Evaluate  ${element} + ${1}
-    Wait Until Element Is Enabled  //*[@data-test-id="networkSettings-input-staticIpv4-${element}"]
-    ${input_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-${element}"]
-    Run Keyword If  "${BMC_IP}" != "${input_ip}"
-    ...  Click Button  ${xpath_ip_table}/tbody/tr[${ip_location}]/td[3]/span/button
-
-    # Get delete ip elements.
-    ${delete_ip_elements}=  Get Element Count  ${xpath_delete_static_ip}
-
-    # Delete IP Address on BMC if available more than 1.
-    Run Keyword If  ${delete_ip_elements} != ${1}
-    ...  Delete Static IPv4 Addresses Except BMC IP  ${element}
 
 Test Setup Execution
     [Documentation]  Get and delete existing IPv4 addresses and netmask if any..
