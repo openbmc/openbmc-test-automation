@@ -82,6 +82,7 @@ if redfish_supported:
     else:
         delete_errlogs_cmd = "Redfish Purge Event Log"
         delete_bmcdump_cmd = "Redfish Delete All BMC Dumps"
+        delete_sysdump_cmd = "Redfish Delete All System Dumps"
         default_set_power_policy = "Redfish Set Power Restore Policy  AlwaysOff"
 else:
     default_power_on = "REST Power On"
@@ -983,6 +984,8 @@ def test_loop_body():
         # We need to purge error logs between boots or they build up.
         grk.run_key(delete_errlogs_cmd, ignore=1)
         grk.run_key(delete_bmcdump_cmd, ignore=1)
+        if redfish_support_trans_state:
+            grk.run_key(delete_sysdump_cmd, ignore=1)
 
     boot_results.print_report()
     gp.qprint_timen("Finished boot " + str(boot_count) + ".")
@@ -1171,6 +1174,8 @@ def obmc_boot_test_py(loc_boot_stack=None,
         # Delete errlogs prior to doing any boot tests.
         grk.run_key(delete_errlogs_cmd, ignore=1)
         grk.run_key(delete_bmcdump_cmd, ignore=1)
+        if redfish_support_trans_state:
+            grk.run_key(delete_sysdump_cmd, ignore=1)
 
     # Process caller's boot_stack.
     while (len(boot_stack) > 0):
