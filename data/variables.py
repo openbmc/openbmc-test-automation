@@ -103,6 +103,7 @@ DUMP_ENTRY_URI = DUMP_URI + 'entry/'
 DUMP_DOWNLOAD_URI = "/download/dump/"
 # The path on the BMC where dumps are stored.
 DUMP_DIR_PATH = "/var/lib/phosphor-debug-collector/dumps/"
+DUMP_HB_DIR_PATH = "/var/lib/phosphor-debug-collector/hostbootdump/"
 
 # Boot progress variables.
 STATE_DBUS_BASE = 'xyz.openbmc_project.State.'

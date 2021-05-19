@@ -503,6 +503,15 @@ SCP Dump Files
     [Return]  ${ffdc_file_list}
 
 
+SCP Dump HB Files
+    [Documentation]  Copy all HB dump files from BMC to local system.
+
+    # Check if dumps exist
+    ${ffdc_file_list}=  Scp Dumps HB  ${FFDC_DIR_PATH}  ${FFDC_PREFIX}
+
+    [Return]  ${ffdc_file_list}
+
+
 Collect Dump Log
     [Documentation]  Collect dumps from dump entry.
     [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
