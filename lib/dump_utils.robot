@@ -176,6 +176,12 @@ Redfish Delete All BMC Dumps
     Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.ClearLog
 
 
+Redfish Delete All System Dumps
+    [Documentation]  Delete all system  dumps via Redfish.
+
+    Redfish.Post  /redfish/v1/Systems/system/LogServices/Dump/Actions/LogService.ClearLog
+
+
 Delete All BMC Dump
     [Documentation]  Delete all BMC dump entries using "DeleteAll" interface.
 
