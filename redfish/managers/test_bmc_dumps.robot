@@ -197,14 +197,14 @@ Create User Initiated BMC Dump
     #      "Connection: Keep-Alive",
     #      "Accept: */*",
     #      "Content-Length: 33",
-    #      "Location: /redfish/v1/Managers/bmc/LogServices/Dump/Entries/2"]
+    #      "Location: /redfish/v1/Managers/bmc/LogServices/Dump/Entries/2/"]
     #    ],
     #    "HttpOperation": "POST",
     #    "JsonBody": "{\"DiagnosticDataType\":\"Manager\"}",
     #     "TargetUri": "/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData"
     # }
 
-    [Return]  ${task_dict["Payload"]["HttpHeaders"][-1].split("/")[-1]}
+    [Return]  ${task_dict["Payload"]["HttpHeaders"][-1].split("/")[-2]}
 
 
 Get BMC Dump Entries
