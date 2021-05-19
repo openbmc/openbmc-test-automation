@@ -96,6 +96,7 @@ Redfish Clean Up
     Run Keyword And Ignore Error  Redfish Set Power Restore Policy  AlwaysOff
     Run Keyword And Ignore Error  Redfish Purge Event Log
     Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
+    Run Keyword And Ignore Error  Redfish Delete All System Dumps
     Run Keyword And Ignore Error  Delete All Redfish Sessions
 
 
