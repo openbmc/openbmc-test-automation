@@ -204,7 +204,7 @@ Create User Initiated BMC Dump
     #     "TargetUri": "/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData"
     # }
 
-    [Return]  ${task_dict["Payload"]["HttpHeaders"][-1].split("/")[-1]}
+    [Return]  ${task_dict["Payload"]["HttpHeaders"][-1].split("/")[-2]}
 
 
 Get BMC Dump Entries
