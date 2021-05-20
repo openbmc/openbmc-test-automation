@@ -135,10 +135,6 @@ Get Non Functional Firmware
     # functional_state  Functional state can be either True or False.
 
     ${resp}=  Filter Struct  ${sw_inv}  [('functional', ${functional_state})]
-
-    ${num_records}=  Get Length  ${resp}
-    Return From Keyword If  ${num_records} == ${0}  ${EMPTY}
-
     ${list_inv_dict}=  Get Dictionary Values  ${resp}
 
     [Return]  ${list_inv_dict}[0]
