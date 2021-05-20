@@ -62,11 +62,12 @@ Redfish BMC Code Update
 
     # Redfish active software image API.
     Run Keyword If  not ${FORCE_UPDATE}
-    ...  Run Keyword If  '${nonfunctional_sw_inv['version']}' == '${image_version}'
-    ...    Run Keywords  Switch Backup Firmware Image To Functional  AND
-    ...    Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}  AND
-    ...    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}  AND
-    ...    Pass Execution  The firmware ${image_version} is backup image.
+    ...  Run Keyword If  ${num_records} > 0
+    ...    Run Keyword If  '${nonfunctional_sw_inv['version']}' == '${image_version}'
+    ...      Run Keywords  Switch Backup Firmware Image To Functional  AND
+    ...      Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}  AND
+    ...      Redfish Verify BMC Version  ${IMAGE_FILE_PATH}  AND
+    ...      Pass Execution  The firmware ${image_version} is backup image.
 
     # Firmware inventory record of the given image version.
     ${image_info}=  Get Software Inventory State By Version  ${image_version}
