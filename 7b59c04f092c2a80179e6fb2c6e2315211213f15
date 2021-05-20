@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0405b478_4432dfc4",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-20T11:11:59Z",
+      "side": 1,
+      "message": "above Testcase name looks good.",
+      "parentUuid": "9b02b559_04ed946d",
+      "revId": "7b59c04f092c2a80179e6fb2c6e2315211213f15",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f1227e0_92820387",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2021-03-29T09:14:43Z",
       "side": 1,
       "message": "Suggestion: ${ip_addr_dict}",
+      "revId": "7b59c04f092c2a80179e6fb2c6e2315211213f15",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "347325cc_6d24f71e",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-20T11:11:59Z",
+      "side": 1,
+      "message": "above name looks meaningful",
+      "parentUuid": "8f1227e0_92820387",
       "revId": "7b59c04f092c2a80179e6fb2c6e2315211213f15",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
