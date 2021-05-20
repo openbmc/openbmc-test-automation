@@ -58,6 +58,21 @@ Verify Ping and REST Authentication
     Should Be Empty     ${stderr}
 
 
+Verify Ping SSH And Redfish Authentication
+    [Documentation]  Verify ping, SSH and redfish authentication.
+
+    ${l_ping}=   Run Keyword And Return Status  Ping Host  ${OPENBMC_HOST}
+    Run Keyword If  '${l_ping}' == '${False}'  Fail   msg=Ping Failed
+
+    ${l_rest}=   Run Keyword And Return Status   Redfish.Login
+    Run Keyword If  '${l_rest}' == '${False}'  Fail   msg=REST Authentication Failed
+
+    # Just to make sure the SSH is working.
+    Open Connection And Log In
+    ${system}   ${stderr}=    Execute Command   hostname   return_stderr=True
+    Should Be Empty     ${stderr}
+
+
 Check If BMC is Up
     [Documentation]  Wait for Host to be online. Checks every X seconds
     ...              interval for Y minutes and fails if timed out.

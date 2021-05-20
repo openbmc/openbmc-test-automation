@@ -36,7 +36,7 @@ Test Restore Policy ALWAYS_POWER_OFF With Host Off
     [Template]  Verify Restore Policy
 
     # Policy                Initial Host State     Expected Host State
-    ${ALWAYS_POWER_OFF}     Off                    Off
+    AlwaysOff               Off                    Off
 
 
 
@@ -46,7 +46,7 @@ Test Restore Policy ALWAYS_POWER_OFF With Host Running
     [Template]  Verify Restore Policy
 
     # Policy                Initial Host State     Expected Host State
-    ${ALWAYS_POWER_OFF}     Running                Running
+    AlwaysOff               Running                Running
 
 
 Test Restore Policy ALWAYS_POWER_ON With Host Off
@@ -63,7 +63,7 @@ Test Restore Policy ALWAYS_POWER_ON With Host Off
     [Template]  Verify Restore Policy
 
     # Policy                Initial Host State     Expected Host State
-    ${ALWAYS_POWER_ON}      Off                    Running
+    AlwaysOn                Off                    Running
 
 
 
@@ -73,7 +73,7 @@ Test Restore Policy ALWAYS_POWER_ON With Host Running
     [Template]  Verify Restore Policy
 
     # Policy                Initial Host State     Expected Host State
-    ${ALWAYS_POWER_ON}      Running                Running
+    AlwaysOn                Running                Running
 
 
 
@@ -91,7 +91,7 @@ Test Restore Policy Restore Last State With Host Running
     [Template]  Verify Restore Policy
 
     # Policy                Initial Host State     Expected Host State
-    ${RESTORE_LAST_STATE}   Running                Running
+    LastState               Running                Running
 
 
 
@@ -101,7 +101,7 @@ Test Restore Policy Restore Last State With Host Off
     [Template]  Verify Restore Policy
 
     # Policy                Initial Host State     Expected Host State
-    ${RESTORE_LAST_STATE}   Off                    Off
+    LastState               Off                    Off
 
 
 *** Keywords ***
@@ -118,10 +118,11 @@ Verify Restore Policy
 
     Set Initial Test State  ${expectedState}
 
-    Set BMC Power Policy  ${policy}
+    Redfish Set Power Restore Policy  ${policy}
 
     Redfish BMC Reset Operation
-    Check If BMC is Up
+    Sleep  20s
+    Wait For BMC Online
 
     Wait Until Keyword Succeeds
     ...  10 min  20 sec  Valid Boot States  ${nextState}
@@ -135,8 +136,8 @@ Valid Boot States
     # sys_state    system state list
     #              (e.g. "Off", "On", "Reboot", etc.).
 
-    ${current_state}=  Get Boot State
-    Valid Boot State  ${sys_state}  ${current_state}
+    ${current_state}=  Redfish Get States
+    Redfish Valid Boot State  ${sys_state}  ${current_state}
 
 
 Set Initial Test State
@@ -170,6 +171,24 @@ Suite Teardown Execution
     [Documentation]  Do the post suite teardown.
     # 1. Set policy to default.
 
-    Run Keyword And Ignore Error  Set BMC Power Policy  ${ALWAYS_POWER_OFF}
+    Run Keyword And Ignore Error  Redfish Set Power Restore Policy  AlwaysOff
     Redfish.Logout
 
+
+Wait For BMC Online
+    [Documentation]  Wait for Host to be online. Checks every X seconds
+    ...              interval for Y minutes and fails if timed out.
+    ...              Default MAX timedout is 10 min, interval 10 seconds.
+    [Arguments]      ${max_timeout}=${OPENBMC_REBOOT_TIMEOUT} min
+    ...              ${interval}=10 sec
+
+    # Description of argument(s):
+    # max_timeout   Maximum time to wait.
+    #               This should be expressed in Robot Framework's time format
+    #               (e.g. "10 minutes").
+    # interval      Interval to wait between status checks.
+    #               This should be expressed in Robot Framework's time format
+    #               (e.g. "5 seconds").
+
+    Wait Until Keyword Succeeds
+    ...   ${max_timeout}  ${interval}  Verify Ping SSH And Redfish Authentication

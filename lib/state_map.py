@@ -97,6 +97,58 @@ VALID_BOOT_STATES = {
         ),
     },
 }
+REDFISH_VALID_BOOT_STATES = {
+    'Off':  # Valid states when Host is Off.
+    {
+        # (BMC , Chassis , Host , BootProgress)
+        (
+            "Enabled",
+            "Off",
+            "Disabled",
+            "None",
+        ),
+    },
+    'Reboot':  # Valid states when BMC reset to standby.
+    {
+        # (BMC , Chassis , Host , BootProgress)
+        (
+            "Enabled",
+            "Off",
+            "Disabled",
+            "None",
+        ),
+    },
+    'Running':  # Valid states when Host is powering on.
+    {
+        # (BMC , Chassis , Host , BootProgress)
+        (
+            "Enabled",
+            "On",
+            "Enabled",
+            "OSRunning",
+        ),
+    },
+    'Booted':  # Valid state when Host is booted.
+    {
+        # (BMC , Chassis , Host , BootProgress)
+        (
+            "Enabled",
+            "On",
+            "Enabled",
+            "OSRunning",
+        ),
+    },
+    'ResetReload':  # Valid state BMC reset reload when host is booted.
+    {
+        # (BMC , Chassis , Host , BootProgress)
+        (
+            "Enabled",
+            "On",
+            "Enabled",
+            "OSRunning",
+        ),
+    },
+}
 
 if platform_arch_type == "x86":
     VALID_BOOT_STATES_X86 = {}
@@ -156,6 +208,21 @@ class state_map():
         """
 
         if state_set in set(VALID_BOOT_STATES[boot_type]):
+            return True
+        else:
+            return False
+
+    def redfish_valid_boot_state(self, boot_type, state_dict):
+        r"""
+        Validate a given set of states is valid.
+
+        Description of argument(s):
+        boot_type                   Boot type (e.g. off/running/host booted
+                                    etc.)
+        state_dict                  State dictionary.
+        """
+
+        if set(state_dict.values()) in set(REDFISH_VALID_BOOT_STATES[boot_type]):
             return True
         else:
             return False
