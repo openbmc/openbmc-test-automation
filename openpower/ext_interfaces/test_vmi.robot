@@ -412,7 +412,7 @@ Suite Setup Execution
     Set Suite Variable   ${active_channel_config}
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    ${ip_resp}=  Evaluate  json.loads('''${resp.text}''')  json
+    ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
     ${length}=  Get Length  ${ip_resp["IPv4StaticAddresses"]}
     ${vmi_network_conf}=  Run Keyword If  ${length} != ${0}  Get VMI Network Interface Details
     Set Suite Variable  ${vmi_network_conf}
@@ -443,7 +443,7 @@ Get VMI Network Interface Details
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ...  valid_status_codes=[${valid_status_code}]
 
-    ${ip_resp}=  Evaluate  json.loads('''${resp.text}''')  json
+    ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
 
     ${ip_exists}=  Set Variable If  ${ip_resp["IPv4Addresses"]} == @{empty}  ${False}  ${True}
     ${static_exists}=  Set Variable If  ${ip_resp["IPv4StaticAddresses"]} == @{empty}  ${False}  ${True}
@@ -478,7 +478,7 @@ Get Immediate Child Parameter From VMI Network Interface
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ...  valid_status_codes=[${valid_status_code}]
 
-    ${ip_resp}=  Evaluate  json.loads('''${resp.text}''')  json
+    ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
     ${value}=  Set Variable If  '${parameter}' != 'DHCPEnabled'   ${ip_resp["${parameter}"]}
     ...  ${ip_resp["DHCPv4"]["${parameter}"]}
 
@@ -495,7 +495,7 @@ Verify VMI EthernetInterfaces
     ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces
     ...  valid_status_codes=[${valid_status_code}]
 
-    ${resp}=  Evaluate  json.loads('''${resp.text}''')  json
+    ${resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
     ${interfaces}=  Set Variable  ${resp["Members"]}
 
     ${number_of_interfaces}=  Get Length  ${interfaces}
