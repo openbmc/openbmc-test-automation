@@ -470,6 +470,10 @@ Add IP Address
       Append To List  ${patch_list}  ${empty_dict}
     END
 
+    ${valid_status_codes}=  Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
+    ...  Set Variable   ${HTTP_OK},${HTTP_NO_CONTENT}
+    ...  ELSE  Set Variable  ${valid_status_codes}
+
     # We need not check for existence of IP on BMC while adding.
     Append To List  ${patch_list}  ${ip_data}
     ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
@@ -480,7 +484,7 @@ Add IP Address
     Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
     ...  valid_status_codes=[${valid_status_codes}]
 
-    Return From Keyword If  '${valid_status_codes}' != '${HTTP_OK}'
+    Return From Keyword If  '${valid_status_codes}' != '${HTTP_OK},${HTTP_NO_CONTENT}'
 
     # Note: Network restart takes around 15-18s after patch request processing.
     Sleep  ${NETWORK_TIMEOUT}s
