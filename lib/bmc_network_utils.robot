@@ -446,8 +446,7 @@ Get Network Configuration
 
 Add IP Address
     [Documentation]  Add IP Address To BMC.
-    [Arguments]  ${ip}  ${subnet_mask}  ${gateway}
-    ...  ${valid_status_codes}=${HTTP_OK}
+    [Arguments]  ${ip}  ${subnet_mask}  ${gateway}  ${valid_status_codes}=${HTTP_OK}
 
     # Description of argument(s):
     # ip                  IP address to be added (e.g. "10.7.7.7").
@@ -470,6 +469,10 @@ Add IP Address
       Append To List  ${patch_list}  ${empty_dict}
     END
 
+    ${status_codes}=  Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
+    ...  Set Variable   ${HTTP_OK},${HTTP_NO_CONTENT}
+    ...  ELSE  Set Variable  ${valid_status_codes}
+ 
     # We need not check for existence of IP on BMC while adding.
     Append To List  ${patch_list}  ${ip_data}
     ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
@@ -478,7 +481,7 @@ Add IP Address
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
-    ...  valid_status_codes=[${valid_status_codes}]
+    ...  valid_status_codes=[${status_codes}]
 
     Return From Keyword If  '${valid_status_codes}' != '${HTTP_OK}'
 
