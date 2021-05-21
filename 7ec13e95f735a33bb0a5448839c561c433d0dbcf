@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17e35182_b8af81e9",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-05-21T07:26:30Z",
+      "side": 1,
+      "message": "keep both 200 \u0026 204",
+      "revId": "7ec13e95f735a33bb0a5448839c561c433d0dbcf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eecc8c95_2d74279d",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-05-21T07:26:30Z",
+      "side": 1,
+      "message": "keep both 200 n 204",
+      "revId": "7ec13e95f735a33bb0a5448839c561c433d0dbcf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
