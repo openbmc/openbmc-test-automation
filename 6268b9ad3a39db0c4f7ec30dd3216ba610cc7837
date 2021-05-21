@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce2f5698_06dd4051",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-05-21T05:03:30Z",
+      "side": 1,
+      "message": "why r u adding IP address?\nDocumentation says check network response on poweron and poweroff",
+      "revId": "6268b9ad3a39db0c4f7ec30dd3216ba610cc7837",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7cc9dc6_8363a3a2",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-05-21T05:03:30Z",
+      "side": 1,
+      "message": "check ping to bmc shud work even during poweron n poweroff.",
+      "revId": "6268b9ad3a39db0c4f7ec30dd3216ba610cc7837",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
