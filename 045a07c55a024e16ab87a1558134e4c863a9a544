@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b801d8b_ba48e054",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-21T06:24:08Z",
+      "side": 1,
+      "message": "you didn\u0027t pass any arguments in that keyword",
+      "range": {
+        "startLine": 156,
+        "startChar": 75,
+        "endLine": 156,
+        "endChar": 85
+      },
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f38c137_5e34dee9",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-21T06:24:08Z",
+      "side": 1,
+      "message": "[Arguments]   ${obmc_gui_url}\n\nOpen Browser With URL  ${obmc_gui_url}",
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14a3ceed_10b97cd2",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-21T06:24:08Z",
+      "side": 1,
+      "message": "this xpath\u0027s declalred in gui/data/gui_variables.py \nyou can reuse this variables \n${xpath_textbox_username}",
+      "range": {
+        "startLine": 207,
+        "startChar": 16,
+        "endLine": 207,
+        "endChar": 35
+      },
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dbd5c21_de5119a4",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-21T06:24:08Z",
+      "side": 1,
+      "message": "${xpath_textbox_password}",
+      "range": {
+        "startLine": 208,
+        "startChar": 20,
+        "endLine": 208,
+        "endChar": 39
+      },
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46397995_5c77c6ed",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-21T06:24:08Z",
+      "side": 1,
+      "message": "${xpath_login_button}",
+      "range": {
+        "startLine": 209,
+        "startChar": 18,
+        "endLine": 209,
+        "endChar": 42
+      },
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6684d16_f7d6b7cb",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-21T06:24:08Z",
+      "side": 1,
+      "message": "Page Should Not Contain  Overview",
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
