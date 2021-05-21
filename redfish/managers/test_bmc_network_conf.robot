@@ -568,6 +568,7 @@ Configure And Verify Multiple IPv4 Addresses
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
     Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
 
     # Note: Network restart takes around 15-18s after patch request processing.
     Sleep  ${NETWORK_TIMEOUT}s
@@ -771,7 +772,7 @@ Suite Setup Execution
 
 Update IP Address
     [Documentation]  Update IP address of BMC.
-    [Arguments]  ${ip}  ${new_ip}  ${netmask}  ${gw_ip}  ${valid_status_codes}=${HTTP_OK}
+    [Arguments]  ${ip}  ${new_ip}  ${netmask}  ${gw_ip}  ${valid_status_codes}=${HTTP_NO_CONTENT}
 
     # Description of argument(s):
     # ip                  IP address to be replaced (e.g. "10.7.7.7").
