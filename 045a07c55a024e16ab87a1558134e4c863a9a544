@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5967da17_3bd1f1dc",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-05-21T06:56:15Z",
+      "side": 1,
+      "message": "line 149 taking care of it.",
+      "parentUuid": "1b801d8b_ba48e054",
+      "range": {
+        "startLine": 156,
+        "startChar": 75,
+        "endLine": 156,
+        "endChar": 85
+      },
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f38c137_5e34dee9",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2021-05-21T06:24:08Z",
       "side": 1,
       "message": "[Arguments]   ${obmc_gui_url}\n\nOpen Browser With URL  ${obmc_gui_url}",
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e772dc07_1b51aef4",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-05-21T06:56:15Z",
+      "side": 1,
+      "message": "Just to login to already opened page on line 149",
+      "parentUuid": "0f38c137_5e34dee9",
       "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "38554e35_be572a04",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-05-21T06:56:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14a3ceed_10b97cd2",
+      "range": {
+        "startLine": 207,
+        "startChar": 16,
+        "endLine": 207,
+        "endChar": 35
+      },
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6dbd5c21_de5119a4",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 2
@@ -85,6 +151,30 @@
       "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "867c9748_f4b49849",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-05-21T06:56:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dbd5c21_de5119a4",
+      "range": {
+        "startLine": 208,
+        "startChar": 20,
+        "endLine": 208,
+        "endChar": 39
+      },
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "87bb7a62_408576b3",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-05-21T06:56:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46397995_5c77c6ed",
+      "range": {
+        "startLine": 209,
+        "startChar": 18,
+        "endLine": 209,
+        "endChar": 42
+      },
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6684d16_f7d6b7cb",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 2
@@ -122,6 +236,24 @@
       "writtenOn": "2021-05-21T06:24:08Z",
       "side": 1,
       "message": "Page Should Not Contain  Overview",
+      "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "288913a4_2cd335d6",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-05-21T06:56:15Z",
+      "side": 1,
+      "message": "intention is to check stability not the functionality.\n\nenter wrong passwd, try to login, not interested in checking pass/fail\nrepeat above line",
+      "parentUuid": "a6684d16_f7d6b7cb",
       "revId": "045a07c55a024e16ab87a1558134e4c863a9a544",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
