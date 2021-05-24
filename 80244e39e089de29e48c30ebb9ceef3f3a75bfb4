@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e4c0cc7_439a1e6c",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-24T09:53:02Z",
+      "side": 1,
+      "message": "i guess this no need to mention",
+      "range": {
+        "startLine": 16,
+        "startChar": 27,
+        "endLine": 16,
+        "endChar": 36
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f27850f_801b146b",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-24T09:53:02Z",
+      "side": 1,
+      "message": "I guess this library no need.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 20
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2d5efb5_f9f64b02",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-24T09:53:02Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 20,
+        "startChar": 39,
+        "endLine": 20,
+        "endChar": 40
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f57b8668_342280d4",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-24T09:53:02Z",
+      "side": 1,
+      "message": "My suggestion:\nOpen Browser  ${bmc_url}\nMaximize Browser Window",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 31
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d39bb220_c3070152",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-24T09:53:02Z",
+      "side": 1,
+      "message": "above ur already opening browser, no need to pass url here.\nruntime error:\nKeyword \u0027Login to GUI With Wrong Credentials\u0027 expected 0 arguments, got 1.\nur not passing any arguments in that keyword.\nremove it , it will work.",
+      "range": {
+        "startLine": 157,
+        "startChar": 75,
+        "endLine": 157,
+        "endChar": 85
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
