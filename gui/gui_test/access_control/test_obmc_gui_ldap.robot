@@ -23,6 +23,9 @@ ${xpath_ldap_base_dn}                   //*[@data-test-id='ldap-input-baseDn']
 ${xpath_ldap_save_settings}             //*[@data-test-id='ldap-button-saveSettings']
 ${xpath_select_refresh_button}          //*[text()[contains(.,"Refresh")]]
 
+
+${incorrect_ip}     1.2.3.4
+
 *** Test Cases ***
 
 Verify Navigation To LDAP Page
@@ -61,20 +64,51 @@ Verify Existence Of All Checkboxes In LDAP Page
     Page Should Contain Element  ${xpath_secure_ldap_checkbox}
 
 
+Verify LDAP Configurations Editable
+    [Documentation]  Verify LDAP configurations are editable.
+    [Tags]  Verify_LDAP_Configurations_Editable
+
+    Create LDAP Configuration ${LDAP_SERVER_URI}  ${LDAP_TYPE}  ${LDAP_BIND_DN}
+    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+    Wait Until Page Contains Element  ${xpath_ldap_url}
+    Textfield Value Should Be  ${xpath_ldap_url}  ${LDAP_SERVER_URI}
+    Textfield Value Should Be  ${xpath_ldap_bind_dn}  ${LDAP_BIND_DN}
+    Textfield Value Should Be  ${xpath_ldap_password}  ${empty}
+    Textfield Value Should Be  ${xpath_ldap_base_dn}  ${LDAP_BASE_DN}
+
+
 Verify Create LDAP Configuration
     [Documentation]  Verify created LDAP configuration.
     [Tags]  Verify_Created_LDAP_Configuration
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     Create LDAP Configuration
     Get LDAP Configuration  ${LDAP_TYPE}
+    Redfish.Logut
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+
+Verify LDAP Config Update With Incorrect LDAP IP Address
+    [Documentation]  Verify that LDAP login fails with incorrect LDAP IP Address.
+    [Tags]  Verify_LDAP_Config_Update_With_Incorrect_LDAP_IP_Address
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+    Create LDAP Configuration  ${incorrect_ip}   ${LDAP_TYPE}  ${LDAP_BIND_DN}
+    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+
+    Get LDAP Configuration  ${LDAP_TYPE}
     Redfish.Logout
-    Redfish.Login
+
+    ${resp}=  Run Keyword And Return Status
+    ...  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${False}
+    ...  msg=LDAP user was able to login though the incorrect LDAP IP Address.
 
 
 Verify LDAP Service Disable
     [Documentation]  Verify that LDAP user cannot login when LDAP service is disabled.
     [Tags]  Verify_LDAP_Service_Disable
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     ${status}=  Run Keyword And Return Status
     ...  Checkbox Should Be Selected  ${xpath_enable_ldap_checkbox}
@@ -87,12 +121,12 @@ Verify LDAP Service Disable
     Wait Until Page Contains  Successfully saved Open LDAP settings
     Click Element  ${xpath_refresh_button}
     Wait Until Page Contains Element  ${xpath_ldap_heading}
+    Redfish.Logout
 
-    ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
-    ...  ${LDAP_USER_PASSWORD}
+    ${resp}=  Run Keyword And Return Status
+    ...  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Should Be Equal  ${resp}  ${False}
     ...  msg=LDAP user was able to login even though the LDAP service was disabled.
-    Redfish.Logout
 
 
 *** Keywords ***
