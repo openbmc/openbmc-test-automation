@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9d1d273e_78f5771d",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-24T07:57:26Z",
+      "side": 1,
+      "message": "yeah, removed ip configuration",
+      "parentUuid": "ce2f5698_06dd4051",
+      "revId": "6268b9ad3a39db0c4f7ec30dd3216ba610cc7837",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b7cc9dc6_8363a3a2",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "6268b9ad3a39db0c4f7ec30dd3216ba610cc7837",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eab57fdd_ca5607b4",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-05-24T07:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7cc9dc6_8363a3a2",
+      "revId": "6268b9ad3a39db0c4f7ec30dd3216ba610cc7837",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
