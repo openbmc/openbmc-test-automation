@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4862ec81_0027721c",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-26T10:58:55Z",
+      "side": 1,
+      "message": "redfish login is not found  for accesing redfish APIs. Use test setup/suite setup for this.",
+      "range": {
+        "startLine": 38,
+        "startChar": 14,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "1ff89cc5012b5d0e0ba8f87e9c522e73a776a75a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e98ac86_9bcb1706",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-26T10:58:55Z",
+      "side": 1,
+      "message": "Looks like ${resp} is not used except for log, so this code seems redundant.",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 11
+      },
+      "revId": "1ff89cc5012b5d0e0ba8f87e9c522e73a776a75a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f779ebd5_6f10a465",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-26T10:58:55Z",
+      "side": 1,
+      "message": "remove commented line.",
+      "range": {
+        "startLine": 64,
+        "startChar": 3,
+        "endLine": 64,
+        "endChar": 51
+      },
+      "revId": "1ff89cc5012b5d0e0ba8f87e9c522e73a776a75a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2635ba49_a50379c8",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-26T10:58:55Z",
+      "side": 1,
+      "message": "Hard coded uri",
+      "range": {
+        "startLine": 73,
+        "startChar": 34,
+        "endLine": 73,
+        "endChar": 72
+      },
+      "revId": "1ff89cc5012b5d0e0ba8f87e9c522e73a776a75a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eee0b624_a4892080",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-05-26T10:58:55Z",
+      "side": 1,
+      "message": "hard coded uri",
+      "range": {
+        "startLine": 74,
+        "startChar": 39,
+        "endLine": 74,
+        "endChar": 86
+      },
+      "revId": "1ff89cc5012b5d0e0ba8f87e9c522e73a776a75a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
