@@ -11,6 +11,7 @@ import bmc_ssh_utils as bsu
 import json
 import random
 import string
+from robot.api import logger
 
 
 def pldmtool(option_string, **bsu_options):
@@ -226,3 +227,63 @@ def GetBIOSAttrDefaultValues(attr_val_table_data):
             attr_val_data_dict[attr_name] = attr_default_value[0][1:-1]
 
     return attr_val_data_dict
+
+
+def GetNewValuesForAllBIOSAttrs(attr_table_data):
+
+    """
+    Get a new set of values for all attributes in Attribute Table.
+
+    Description of argument(s):
+    attr_table_data         pldmtool output from GetBIOSTable table type AttributeValueTable.
+
+    @return                 Dict of BIOS attribute and new attribute value.
+
+    """
+    existing_data = GetBIOSAttrOriginalValues(attr_table_data)
+    logger.info(existing_data)
+    string_attr_data = GetBIOSStrAndIntAttributeHandles("BIOSString", attr_table_data)
+    logger.info(string_attr_data)
+    int_attr_data = GetBIOSStrAndIntAttributeHandles("BIOSInteger", attr_table_data)
+    logger.info(int_attr_data)
+    enum_attr_data = GetBIOSEnumAttributeOptionalValues(attr_table_data)
+    logger.info(enum_attr_data)
+
+    attr_random_data = {}
+    temp_list = enum_attr_data.copy()
+    for attr in enum_attr_data:
+        try:
+            temp_list[attr].remove(existing_data[attr])
+        except ValueError:
+            try:
+                # The data values have a double quote in them.
+                # Eg: '"IBM I"' instead of just 'IBM I'
+                data = '"' + str(existing_data[attr]) + '"'
+                temp_list[attr].remove(data)
+            except ValueError:
+                logger.info("Unable to remove the existing value "
+                            + str(data) + " from list " + str(temp_list[attr]))
+        valid_values = temp_list[attr][:]
+        value = random.choice(valid_values)
+        attr_random_data[attr] = value.strip('"')
+    logger.info("Values generated for enumeration type attributes")
+
+    for attr in string_attr_data:
+        # Iterating to make sure we have a different value
+        # other than the existing value.
+        for iter in range(5):
+            random_val = GetRandomBIOSIntAndStrValues(attr, string_attr_data[attr]["MaximumStringLength"])
+            if random_val != existing_data[attr]:
+                break
+        attr_random_data[attr] = random_val.strip('"')
+    logger.info("Values generated for string type attributes")
+
+    for attr in int_attr_data:
+        for iter in range(5):
+            random_val = GetRandomBIOSIntAndStrValues(attr, int_attr_data[attr]["UpperBound"])
+            if random_val != existing_data[attr]:
+                break
+        attr_random_data[attr] = random_val
+    logger.info("Values generated for integer type attributes")
+
+    return attr_random_data
