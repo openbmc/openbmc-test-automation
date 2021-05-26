@@ -148,13 +148,13 @@ Set Initial Test State
     # Description of argument(s):
     # expectedState    Test initial host state.
 
+    Redfish.Login
+
     Run Keyword If  '${expectedState}' == 'Running'
     ...  Redfish Power On  stack_mode=skip
 
     Run Keyword If  '${expectedState}' == 'Off'
     ...  Redfish Power Off  stack_mode=skip
-
-    Redfish.Login
 
 
 Test Teardown Execution
@@ -164,7 +164,6 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Close All Connections
-    Redfish.Login
 
 
 Suite Teardown Execution
