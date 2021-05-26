@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d62f1121_4a8015b8",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-05-26T06:47:43Z",
+      "side": 1,
+      "message": "it should be 15. Please check",
+      "range": {
+        "startLine": 529,
+        "startChar": 77,
+        "endLine": 529,
+        "endChar": 80
+      },
+      "revId": "7ef19da2097ef1d7014e56c0916e53119ad09216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
