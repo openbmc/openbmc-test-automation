@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "673e9502_7331fb0d",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-05-27T06:21:53Z",
+      "side": 1,
+      "message": "143, 157, 172, 185 - can\u0027t be added in template form ?",
+      "revId": "e3307939d5a3ed1c2d2dc61e3fb1ede821daa1d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6f15a2d_48c44997",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-05-27T06:21:53Z",
+      "side": 1,
+      "message": "give one line of space.",
+      "revId": "e3307939d5a3ed1c2d2dc61e3fb1ede821daa1d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74d6fdbb_a3993600",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-05-27T06:21:53Z",
+      "side": 1,
+      "message": "same as line 176",
+      "revId": "e3307939d5a3ed1c2d2dc61e3fb1ede821daa1d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
