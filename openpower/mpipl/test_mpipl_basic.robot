@@ -1,12 +1,12 @@
 *** Settings ***
 Documentation    Test MPIPL.
 
-Resource         ../gui/lib/resource.robot
-Resource         ../lib/openbmc_ffdc.robot
-Resource         ../lib/bmc_redfish_utils.robot
-Resource         ../lib/bmc_redfish_resource.robot
-Resource         ../lib/resource.robot
-Resource         ../lib/boot_utils.robot
+Resource         ../../lib/resource.robot
+Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/bmc_redfish_utils.robot
+Resource         ../../lib/bmc_redfish_resource.robot
+Resource         ../../lib/boot_utils.robot
+
 Test Teardown    Test Teardown Execution
 
 *** Variables ***
