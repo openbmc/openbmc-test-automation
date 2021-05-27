@@ -729,8 +729,15 @@ def get_state(openbmc_host="",
         if need_rf:
             cmd_buf = ["Redfish Get States"]
             gp.dprint_issuing(cmd_buf)
-            status, ret_values = \
-                BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+            try:
+                status, ret_values = \
+                    BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+            except Exception as ex:
+                # Robot raised UserKeywordExecutionFailed error exception.
+                gp.dprint_issuing("Retrying Redfish Get States")
+                status, ret_values = \
+                    BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
+
             gp.dprint_vars(status, ret_values)
             if status == "PASS":
                 state['redfish'] = '1'
