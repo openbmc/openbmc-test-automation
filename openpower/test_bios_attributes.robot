@@ -1,13 +1,13 @@
 *** Settings ***
 Documentation    This suite test various BIOS attributes operations using Redfish.
 
-Resource         ../../lib/resource.robot
-Resource         ../../lib/bmc_redfish_resource.robot
-Resource         ../../lib/common_utils.robot
-Resource         ../../lib/openbmc_ffdc.robot
-Resource         ../../lib/oem/ibm/bios_attr_utils.robot
-Library          ../../lib/pldm_utils.py
-Variables        ../../data/pldm_variables.py
+Resource         ../lib/resource.robot
+Resource         ../lib/bmc_redfish_resource.robot
+Resource         ../lib/common_utils.robot
+Resource         ../lib/openbmc_ffdc.robot
+Resource         ../lib/bios_attr_utils.robot
+Library          ../lib/pldm_utils.py
+Variables        ../data/pldm_variables.py
 
 Test Teardown    FFDC On Test Case Fail
 
