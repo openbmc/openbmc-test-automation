@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "02cff7f9_bc3346f3",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-05-27T07:41:11Z",
+      "side": 1,
+      "message": "Its actually different combinations of keywords(run concurrently) in each testcase .. so, can\u0027t use a template. May be, we had discussed on this in beginning commits.",
+      "parentUuid": "673e9502_7331fb0d",
+      "revId": "e3307939d5a3ed1c2d2dc61e3fb1ede821daa1d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c6f15a2d_48c44997",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "b4ea3757_20620304",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-05-27T07:41:11Z",
+      "side": 1,
+      "message": "done, rebased too for merge conflict",
+      "parentUuid": "c6f15a2d_48c44997",
+      "revId": "e3307939d5a3ed1c2d2dc61e3fb1ede821daa1d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74d6fdbb_a3993600",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "e3307939d5a3ed1c2d2dc61e3fb1ede821daa1d6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b09dd7c_199337e8",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-05-27T07:41:11Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "74d6fdbb_a3993600",
+      "revId": "e3307939d5a3ed1c2d2dc61e3fb1ede821daa1d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
