@@ -288,7 +288,9 @@ Validate MAC On FW_Env
     ...  msg=MAC address ${fw_env_addr} does not match ${mac_new_addr}.
 
 Truncate MAC Address
+    [Documentation]  Truncates and returns user provided Mac address 
     [Arguments]    ${sys_mac_addr}  ${user_mac_addr}
+
     # Description of argument(s):
     # sys_mac_addr  MAC address of the BMC.
     # user_mac_addr user provided MAC address.
@@ -304,8 +306,9 @@ Truncate MAC Address
         Return From Keyword If  ${invalid_mac_byte}  ${user_mac_addr}
         ${mac_int} =    Convert To Integer      ${user_mac_list}[${mac_byte}]   16
         ${user_mac_len} =  Get Length  ${user_mac_list}
-        ${user_mac_byte}=  Run Keyword IF  ${mac_int} >= ${256}  Truncate MAC Bits  ${user_mac_list}[${mac_byte}]
-                                      ...  ELSE  Set Variable  ${user_mac_list}[${mac_byte}]
+        ${user_mac_byte}=  Run Keyword IF
+        ...  ${mac_int} >= ${256}  Truncate MAC Bits  ${user_mac_list}[${mac_byte}]
+        ...  ELSE  Set Variable  ${user_mac_list}[${mac_byte}]
 
         Append To List  ${user_new_mac_list}  ${user_mac_byte}
         ${mac_byte} =    Set Variable    ${mac_byte + 1}
@@ -316,7 +319,9 @@ Truncate MAC Address
     [Return]  ${user_new_mac_string}
 
 Truncate MAC Bits
+    [Documentation]  Truncates user provided MAC address byte to bits.
     [Arguments]    ${user_mac_addr_byte}
+
     # Description of argument(s):
     # user_mac_addr_byte user provided MAC address byte to truncate bits
 
