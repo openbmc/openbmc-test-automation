@@ -110,6 +110,17 @@ FFDC_OS_RHEL_FILE = {
         + '/tmp --label FFDC ; } >/tmp/OS_sosreport.txt 2>&1',
     },
 }
+# Add file name and correcponding command needed for AIX.
+FFDC_OS_AIX_FILE = {
+    'OS FILES':
+    {
+        # File Name         Command
+        'OS_netstat.txt': 'netstat -a >/tmp/OS_netstat.txt 2>&1',
+        'OS_lscfg.txt': 'lscfg >/tmp/OS_lscfg.txt 2>&1',
+        'OS_errpt.txt': 'errpt >/tmp/OS_errpt.txt 2>&1 ; errclear 0',
+        'OS_processors.txt': 'bindprocessor -q >/tmp/OS_processors.txt 2>&1',
+    },
+}
 
 OPENBMC_BASE = '/xyz/openbmc_project/'
 OPENPOWER_BASE = '/org/open_power/'
@@ -147,17 +158,7 @@ FFDC_METHOD_CALL = {
     {
         # Description               Keyword name
         'FFDC Generic Report': 'BMC FFDC Manifest',
-        'BMC Specific Files': 'BMC FFDC Files',
-        'Get Request FFDC': 'BMC FFDC Get Requests',
         'OS FFDC': 'OS FFDC Files',
-        'Core Files': 'SCP Coredump Files',
-        'SEL Log': 'Collect eSEL Log',
-        'Sys Inventory Files': 'System Inventory Files',
-        'Dump Log': 'Collect Dump Log',
-        'Dump Files': 'SCP Dump Files',
-        'Dump HB Files': 'SCP Dump HB Files',
-        'PEL Files': 'Collect PEL Log',
-        'Redfish Log': 'Enumerate Redfish Resources',
     },
 }
 
