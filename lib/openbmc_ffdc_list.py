@@ -110,6 +110,15 @@ FFDC_OS_RHEL_FILE = {
         + '/tmp --label FFDC ; } >/tmp/OS_sosreport.txt 2>&1',
     },
 }
+# Add file name and correcponding command needed for AIX.
+FFDC_OS_AIX_FILE = {
+    'OS FILES':
+    {
+        # File Name         Command
+        'OS_errpt.txt': 'errpt >/tmp/OS_errpt.txt 2>&1 ; errclear 0;',
+        'OS_processors.txt': 'bindprocessor -q >/tmp/OS_processors.txt 2>&1',
+    },
+}
 
 OPENBMC_BASE = '/xyz/openbmc_project/'
 OPENPOWER_BASE = '/org/open_power/'
