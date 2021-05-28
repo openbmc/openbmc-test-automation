@@ -35,7 +35,7 @@ FFDC_BMC_CMD = {
         'BMC state': '/usr/bin/obmcutil state',
     },
 }
-# Add file name and correcponding command needed for BMC
+# Add file name and corresponding command needed for BMC
 FFDC_BMC_FILE = {
     'BMC FILES':
     {
@@ -79,7 +79,7 @@ FFDC_OS_ALL_DISTROS_FILE = {
         + '> /tmp/OS_journalctl_nopager.txt  2>&1',
     },
 }
-# Add file name and correcponding command needed for Ubuntu Linux
+# Add file name and corresponding command needed for Ubuntu Linux
 FFDC_OS_UBUNTU_FILE = {
     'OS FILES':
     {
@@ -95,7 +95,7 @@ FFDC_OS_UBUNTU_FILE = {
         + '/tmp --ticket-number FFDC ; } >/tmp/OS_sosreport.txt 2>&1',
     },
 }
-# Add file name and correcponding command needed for RHEL Linux
+# Add file name and corresponding command needed for RHEL Linux
 FFDC_OS_RHEL_FILE = {
     'OS FILES':
     {
@@ -108,6 +108,15 @@ FFDC_OS_RHEL_FILE = {
         + 'uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1',
         'OS_sosreport.txt': '{ rm -rf /tmp/sosreport*FFDC* ; sosreport --batch --tmp-dir '
         + '/tmp --label FFDC ; } >/tmp/OS_sosreport.txt 2>&1',
+    },
+}
+# Add file name and corresponding command needed for AIX.
+FFDC_OS_AIX_FILE = {
+    'OS FILES':
+    {
+        # File Name         Command
+        'OS_errpt.txt': 'errpt >/tmp/OS_errpt.txt 2>&1 ; errclear 0;',
+        'OS_processors.txt': 'bindprocessor -q >/tmp/OS_processors.txt 2>&1',
     },
 }
 
@@ -124,7 +133,7 @@ ENUMERATE_OCC = OPENPOWER_BASE + '/enumerate'
 ENUMERATE_DUMPS = OPENBMC_BASE + 'dumps/enumerate'
 ENUMERATE_USER = OPENBMC_BASE + 'user/enumerate'
 
-# Add file name and correcponding Get Request
+# Add file name and corresponding Get Request
 FFDC_GET_REQUEST = {
     'GET REQUESTS':
     {
