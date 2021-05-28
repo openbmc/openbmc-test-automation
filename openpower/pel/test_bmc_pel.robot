@@ -200,7 +200,7 @@ Verify BMC Version From PEL
 
     ${pel_ids}=  Get PEL Log Via BMC CLI
     ${id}=  Get From List  ${pel_ids}  -1
-    ${pel_bmc_version}=  Get PEL Field Value  ${id}  User Data  BMC Version ID
+    ${pel_bmc_version}=  Get PEL Field Value  ${id}  User Data  FW Version ID
 
     ${bmc_version}=  Get BMC Version
     Valid Value  bmc_version  ['${bmc_version}']
