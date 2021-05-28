@@ -81,7 +81,7 @@ Redfish BMC Code Update
 
     Run Keyword If  '${image_info_len}' != 0
     ...  Run Keywords  Print Timen
-    ...  The ${image_version} version is installed but not functional, try delete and continue firmware update.
+    ...  The ${image_version} version is installed but not functional, delete and continue update.
     ...    AND
     ...  Run Keyword And Ignore Error
     ...    Delete Software Object  /xyz/openbmc_project/software/${image_info['image_id']}

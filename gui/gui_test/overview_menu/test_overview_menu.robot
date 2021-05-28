@@ -46,7 +46,7 @@ Verify Message In High Priority Events Section For No Events
 
 Verify Network Information In Overview Page
     [Documentation]  Verify values under network information section.
-    [Tags]  Verify_Network_Information_In_Overview Page
+    [Tags]  Verify_Network_Information_In_Overview_Page
 
     ${hostname}=  Get BMC Hostname
     Page Should Contain  ${hostname}

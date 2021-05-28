@@ -82,7 +82,7 @@ Verify GetBIOSTable For AttributeValueTable
     # [     attributetype]:                           BIOSStringReadOnly
     # [     currentstringlength]:                     15
 
-    ${count}=  Get Length  ${attr_table_data} 
+    ${count}=  Get Length  ${attr_table_data}
     ${attr_val_list}=  Create List
     FOR  ${i}  IN RANGE  ${count}
         Append To List  ${attr_val_list}  ${attr_table_data}[${i}][AttributeType]
