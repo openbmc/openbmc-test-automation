@@ -715,6 +715,7 @@ Error Logging Rotation Policy
 
 
 Create Error Log
+    [Documentation]  Create and error log.
     [Arguments]  ${error_severity}   ${error_creator}   ${count}
 
     # Description of argument(s):
