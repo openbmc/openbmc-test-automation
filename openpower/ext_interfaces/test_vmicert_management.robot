@@ -259,6 +259,7 @@ Generate CSR String
 
 
 Send CSR To VMI And Get Signed
+    [Documentation]  Upload CSR to VMI and get signed.
     [Arguments]  ${csr}  ${force_create}  ${username}  ${password}
 
     # Description of argument(s):
