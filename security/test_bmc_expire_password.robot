@@ -3,6 +3,7 @@ Documentation     Test root user expire password.
 
 Resource          ../lib/resource.robot
 Resource          ../gui/lib/resource.robot
+Resource          ../lib/bmc_redfish_utils.robot
 Resource          ../lib/ipmi_client.robot
 Library           ../lib/bmc_ssh_utils.py
 Library           SSHLibrary
@@ -14,6 +15,10 @@ Test Setup       Set Account Lockout Threshold
 # If user re-tries more than 5 time incorrectly, the user gets locked for 5 minutes.
 ${default_lockout_duration}   ${300}
 
+${username}      admin_user
+${password}      TestPwd123
+${new_password}  OpenBmc123
+${role}          Administrator
 
 *** Test Cases ***
 
@@ -31,38 +36,29 @@ Expire Root Password And Check IPMI Access Fails
     Should Be Equal  ${status}  ${False}
 
 
-Expire Root Password And Check SSH Access Fails
-    [Documentation]   Expire root user password and expect an error while access via SSH.
-    [Tags]  Expire_Root_Password_And_Check_SSH_Access_Fails
-    [Teardown]  Test Teardown Execution
+Expire User Password And Check SSH Access Fails
+    [Documentation]   Expire user password and expect an error while access via SSH.
+    [Tags]  Expire_User_Password_And_Check_SSH_Access_Fails
+    [Setup]  Redfish Create User  ${username}  ${password}  ${role}  ${True}
+    [Teardown]  Delete User via Redfish  ${username}
 
-    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
-    Should Contain  ${output}  password expiry information changed
-
+    Expire User Password And Verify  ${username}  ${password}
     ${status}=  Run Keyword And Return Status
-    ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ...  Open Connection And Log In  ${username}  ${password}
+    Close All Connections
     Should Be Equal  ${status}  ${False}
 
 
-Expire And Change Root User Password And Access Via SSH
-    [Documentation]   Expire and change root user password and access via SSH.
-    [Tags]  Expire_Root_User_Password_And_Access_Via_SSH
-    [Teardown]  Run Keywords  Wait Until Keyword Succeeds  1 min  10 sec
-    ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
+Expire And Change User Password And Access Via SSH
+    [Documentation]   Expire and change user password and access via SSH.
+    [Tags]  Expire_User_Password_And_Access_Via_SSH
+    [Setup]  Redfish Create User  ${username}  ${password}  ${role}  ${True}
+    [Teardown]  Delete User via Redfish  ${username}
 
-    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-
-    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
-    Should Contain  ${output}  password expiry information changed
-
-    Redfish.Login
-    # Change to a valid password.
-    ${resp}=  Redfish.Patch  /redfish/v1/AccountService/Accounts/${OPENBMC_USERNAME}
-    ...  body={'Password': '0penBmc123'}  valid_status_codes=[${HTTP_OK}]
-
+    Expire And Update New Password Via Redfish  ${username}  ${password}  ${new_password}
     # Verify login with the new password through SSH.
-    Open Connection And Log In  ${OPENBMC_USERNAME}  0penBmc123
+    Open Connection And Log In  ${username}  ${new_password}
+    Close All Connections
 
 
 Expire Root Password And Update Bad Password Length Via Redfish
@@ -243,3 +239,40 @@ Verify Root Password Expired
     ${json}=  To JSON  ${resp.content}
     Should Contain  ${json["extendedMessage"]}  POST the new password
 
+
+Expire User Password And Verify
+    [Documentation]  Expire user password and verify.
+    [Arguments]  ${username}  ${password}
+
+    Open Connection And Log In  ${username}  ${password}
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${username}
+    Close All Connections
+    Should Contain  ${output}  password expiry information changed
+
+
+Update User Password And Verify
+    [Documentation]  Update user password and verify (i.e. 0penBmc).
+    [Arguments]  ${username}  ${password}  ${new_password}
+    ...  ${valid_status_code}=${HTTP_OK}
+    [Teardown]  Redfish.Logout
+
+    # Login and verify user password expired using Redfish
+    Verify User Password Expired Using Redfish  ${username}  ${password}
+
+    # Update user password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${username}
+    ...   body={'Password': '${new_password}'}  valid_status_codes=[${valid_status_code}]
+
+    Return From Keyword If  ${valid_status_code}!=${HTTP_OK}
+
+    # Verify user able to login with updated password
+    Redfish.Login  ${username}  ${new_password}
+
+
+Delete User via Redfish
+    [Documentation]  Delete user using redfish.
+    [Arguments]  ${username}
+
+    Redfish.Login
+    # Delete created users.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
