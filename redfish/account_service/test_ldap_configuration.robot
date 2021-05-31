@@ -551,7 +551,7 @@ Update LDAP Config And Verify Set Host Name
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # Verify that the LDAP user in ${group_name} with the given privilege is
     # allowed to change the hostname.
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'HostName': '${hostname}'}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=${valid_status_codes}
     Redfish.Logout
     Redfish.Login
@@ -652,7 +652,10 @@ Suite Setup Execution
     Set Suite Variable  ${old_ldap_privilege}
     Disable Other LDAP
     Create LDAP Configuration
-    ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Set Suite Variable  ${ethernet_interface}
+    ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  HostName
 
 
 Set Read Privilege And Check Firmware Inventory
