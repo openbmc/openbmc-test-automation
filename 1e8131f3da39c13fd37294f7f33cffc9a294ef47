@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f980896_a147595f",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-05-31T05:13:34Z",
+      "side": 1,
+      "message": "add one more space",
+      "revId": "1e8131f3da39c13fd37294f7f33cffc9a294ef47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74d9246c_4ecd5511",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-05-31T05:13:34Z",
+      "side": 1,
+      "message": "[Documentation]  Update user password and verify (i.e. 0penBmc).",
+      "revId": "1e8131f3da39c13fd37294f7f33cffc9a294ef47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f05bec1a_74b4972d",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-05-31T05:13:34Z",
+      "side": 1,
+      "message": "Return From Keyword If  ${valid_status_code} !\u003d ${HTTP_OK}",
+      "revId": "1e8131f3da39c13fd37294f7f33cffc9a294ef47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
