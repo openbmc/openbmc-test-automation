@@ -65,6 +65,7 @@ Redfish Code Update With Multiple Firmware
 
 
 Verify If The Modified Admin Credential Is Valid Post Image Switched To Backup
+    [Documentation]  Verify updated admin credential remain same post switch to back up image.
     [Tags]  Verify_If_The_Modified_Admin_Credentails_Is_Valid_Backup_Image
     [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
     [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
@@ -82,7 +83,9 @@ Verify If The Modified Admin Credential Is Valid Post Image Switched To Backup
     Redfish.Login  admin_user  0penBmc123
     Redfish.Logout
 
+
 Verify If The Modified Admin Credential Is Valid Post Update
+    [Documentation]  Verify updated admin credential remain same post code update image.
     [Tags]  Verify_If_The_Modified_Admin_Credentails_Is_Valid_Post_Update
     [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
     [Teardown]  Run Keywords  Redfish.Login  AND  Delete BMC Users Via Redfish  users=${USERS}
