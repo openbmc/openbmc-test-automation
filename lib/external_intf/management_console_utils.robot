@@ -80,6 +80,7 @@ Create Session With List Of ClientID
 
 
 Verify A Session Created With ClientID
+    [Documentation]  Verify the session is created.
     [Arguments]  ${client_id}  ${session_ids}
 
     # Description of argument(s):
