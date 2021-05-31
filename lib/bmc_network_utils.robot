@@ -347,8 +347,11 @@ Configure Hostname
     # Description of argument(s):
     # hostname  A hostname value which is to be configured on BMC.
 
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
     ${data}=  Create Dictionary  HostName=${hostname}
-    Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
