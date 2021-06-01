@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba5d376c_e327fb43",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-01T11:38:34Z",
+      "side": 1,
+      "message": "Modify as discussed.",
+      "revId": "c826926d288d6a8b39bd2183c7d59003ee76aed2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49f035c3_50de9e3c",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-01T11:38:34Z",
+      "side": 1,
+      "message": "Get Root Certificate And Send Multiple CSR Requests Concurrently And Verify",
+      "revId": "c826926d288d6a8b39bd2183c7d59003ee76aed2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e59819d_47b3e2cb",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-01T11:38:34Z",
+      "side": 1,
+      "message": "Get Root Certificate And Send Multiple Corrupt CSR Requests Concurrently And Verify",
+      "revId": "c826926d288d6a8b39bd2183c7d59003ee76aed2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
