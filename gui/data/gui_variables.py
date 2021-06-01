@@ -51,6 +51,7 @@ class gui_variables():
 
     # Access control menu
     xpath_access_control_menu = "//*[@data-test-id='nav-button-access-control']"
+    xpath_client_sessions_sub_menu = "//*[@data-test-id='nav-item-client-sessions']"
     xpath_ldap_sub_menu = "//*[@data-test-id='nav-item-ldap']"
     xpath_save_settings_button = "//button[contains(text(),'Save settings')]"
     xpath_local_user_management_sub_menu = "//*[@data-test-id='nav-item-local-user-management']"
