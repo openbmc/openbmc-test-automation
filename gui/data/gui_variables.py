@@ -42,6 +42,7 @@ class gui_variables():
     xpath_server_power_operations_sub_menu = "//*[@data-test-id='nav-item-server-power-operations']"
     xpath_sol_sub_menu = "//*[@data-test-id='nav-item-serial-over-lan']"
     xpath_kvm_sub_menu = "//*[@data-test-id='nav-item-kvm']"
+    xpath_power_restore_policy_sub_menu = "//*[@data-test-id='nav-item-power-restore-policy']"
 
     # Configuration menu
     xpath_server_configuration = "//*[@data-test-id='nav-button-configuration']"
