@@ -30,6 +30,7 @@ class gui_variables():
 
     # Health menu
     xpath_health_menu = "//*[@data-test-id='nav-button-health']"
+    xpath_dumps_sub_menu = "//*[@data-test-id='nav-item-dumps']"
     xpath_event_logs_sub_menu = "//*[@data-test-id='nav-item-event-logs']"
     xpath_sensor_sub_menu = "//*[@data-test-id='nav-item-sensors']"
     xpath_hardware_status_sub_menu = "//*[@data-test-id='nav-item-hardware-status']"
