@@ -89,7 +89,7 @@ Escale Activation Test Via REST
     Fail If DCMI Power Is Not Activated
 
 
-Escale Dectivation Test Via REST
+Escale Deactivation Test Via REST
     [Documentation]  Deactivate power monitoring via REST and check via IPMI.
     [Tags]  Escale_Deactivation_Test_Via_REST
 
