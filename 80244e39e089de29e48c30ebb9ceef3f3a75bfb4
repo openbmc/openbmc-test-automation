@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "bb6e5aef_61dd9761",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-02T10:36:46Z",
+      "side": 1,
+      "message": "sure..",
+      "parentUuid": "ca42dbd5_f1efa42b",
+      "range": {
+        "startLine": 16,
+        "startChar": 27,
+        "endLine": 16,
+        "endChar": 36
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1f27850f_801b146b",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 3
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "needed for taking screenshot on failed test case",
       "parentUuid": "1f27850f_801b146b",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 20
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "577b9deb_6f700b4a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-02T10:36:46Z",
+      "side": 1,
+      "message": "okay",
+      "parentUuid": "f673368c_ec79e9bb",
       "range": {
         "startLine": 18,
         "startChar": 0,
@@ -178,6 +226,30 @@
       "side": 1,
       "message": "As discussed we are using 2 browser instances one for handling wrong credentials and another for checking whether login works for correct credentials.\nUsing alias to refer particular instance and can be used or switched based on need.",
       "parentUuid": "f57b8668_342280d4",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 31
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c207b3b7_a053302a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-02T10:36:46Z",
+      "side": 1,
+      "message": "yeah, this looks good.",
+      "parentUuid": "258dcf4d_a78c5289",
       "range": {
         "startLine": 150,
         "startChar": 0,
