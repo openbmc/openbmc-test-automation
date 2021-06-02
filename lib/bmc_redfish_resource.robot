@@ -7,5 +7,6 @@ Library         bmc_redfish.py  https://${OPENBMC_HOST}:${HTTPS_PORT}  ${OPENBMC
 ...             ${OPENBMC_PASSWORD}  WITH NAME  Redfish
 Library         bmc_redfish_utils.py  WITH NAME  redfish_utils
 Library         disable_warning_urllib.py
-
+Library         redfish_request.py  WITH NAME  redfish_request_utils
+#Library         test.py  WITH NAME  demo_test
 *** Keywords ***

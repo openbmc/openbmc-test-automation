@@ -8,15 +8,24 @@ Resource             ../../lib/bmc_redfish_utils.robot
 Resource             ../../lib/external_intf/management_console_utils.robot
 Resource             ../../lib/rest_response_code.robot
 Library              ../../lib/bmc_network_utils.py
+Resource             ../../lib/redfish_request.robot
+Library              ../../lib/bmc_network_utils.py
+Library              ../../lib/gen_robot_valid.py
+ 
 
-Suite Setup          Run Keyword And Ignore Error  Delete All Redfish Sessions
-Suite Teardown       Run Keyword And Ignore Error  Delete All Redfish Sessions
+
+#Suite Setup          Run Keyword And Ignore Error  Delete All Redfish Sessions
+#Suite Teardown       Run Keyword And Ignore Error  Delete All Redfish Sessions
 Test Setup           Printn
 Test Teardown        FFDC On Test Case Fail
 
 *** Variables ***
 
 ${BAD_REQUEST}       Bad Request
+
+${active_session_info}
+@{session_dict_list}
+
 
 *** Test Cases ***
 
@@ -27,11 +36,11 @@ Acquire Read Write Lock
 
     # client_id    lock_type     reboot_flag
     HMCID-01       ReadCase1     False
-    HMCID-01       ReadCase2     False
-    HMCID-01       ReadCase3     False
-    HMCID-01       WriteCase1    False
-    HMCID-01       WriteCase2    False
-    HMCID-01       WriteCase3    False
+    #HMCID-01       ReadCase2     False
+    #HMCID-01       ReadCase3     False
+    #HMCID-01       WriteCase1    False
+    #HMCID-01       WriteCase2    False
+    #HMCID-01       WriteCase3    False
 
 
 Check Lock Persistency On BMC Reboot
@@ -41,11 +50,11 @@ Check Lock Persistency On BMC Reboot
 
     # client_id    lock_type     reboot_flag
     HMCID-01       ReadCase1     True
-    HMCID-01       ReadCase2     True
-    HMCID-01       ReadCase3     True
-    HMCID-01       WriteCase1    True
-    HMCID-01       WriteCase2    True
-    HMCID-01       WriteCase3    True
+    #HMCID-01       ReadCase2     True
+    #HMCID-01       ReadCase3     True
+    #HMCID-01       WriteCase1    True
+    #HMCID-01       WriteCase2    True
+    #HMCID-01       WriteCase3    True
 
 
 Acquire Read Lock On Read Lock
@@ -429,8 +438,10 @@ Redfish Post Acquire Lock
     # status_code    HTTP status code.
 
     ${lock_dict_param}=  Form Data To Acquire Lock  ${lock_type}
-    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
-    Should Be Equal As Strings  ${resp.status_code}  ${status_code}
+    #${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
+    Set Test Variable  ${uri}  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock
+    ${resp}=  Redfish POST Request URI  ${active_session_info['headers']}  uri=${uri}  data=${lock_dict_param} 
+    #Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
     Run Keyword If  ${status_code} == ${HTTP_BAD_REQUEST}
     ...    Valid Value  ${BAD_REQUEST}  ['${resp.content}']
@@ -569,9 +580,19 @@ Get Locks List On Resource
     # session_info       Session information in dict.
     # exp_status_code    Expected HTTP status code.
 
-    ${data}=  Set Variable  {"SessionIDs": ["${session_info['SessionIDs']}"]}
-    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.GetLockList
-    ...  data=${data}
+    #${data}=  Set Variable  {"SessionIDs": ["${session_info['SessionIDs']}"]}
+    #${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.GetLockList
+    #...  data=${data}
+
+    #${data}=  Set Variable  {"SessionIDs": ["${active_session_info['Content']['Id']}"]}
+    ${session_id_list}=  Create List
+    Append To List  ${session_id_list}  ${active_session_info['Content']['Id']}
+    &{data}=  Create Dictionary
+    Set To Dictionary  ${data}  SessionIDs  ${session_id_list}
+    Log  ${data}
+    Set Test Variable  ${uri}  /ibm/v1/HMC/LockService/Actions/LockService.GetLockList
+    ${resp}=  Redfish POST Request URI  ${active_session_info['headers']}  ${uri}  ${data}
+ 
     ${locks}=  Evaluate  json.loads('''${resp.text}''')  json
 
     [Return]  ${locks["Records"]}
@@ -585,16 +606,20 @@ Verify Lock On Resource
     # session_info      Session information in dict.
     # transaction_id    Transaction id in list stored in dict.
 
-    ${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions/${session_info['SessionIDs']}
+    #${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions/${session_info['SessionIDs']}
+    Set Test Variable  ${uri}  ${active_session_info['Location']}
+    ${sessions}=  Redfish GET Request URI  ${active_session_info['headers']}  ${uri}
     Rprint Vars  sessions
     ${lock_list}=  Get Locks List On Resource  ${session_info}
     ${lock_length}=  Get Length  ${lock_list}
     ${tran_id_length}=  Get Length  ${transaction_id}
     Should Be Equal As Integers  ${tran_id_length}  ${lock_length}
-
+    Log  ${session_info}
+    Log  ${transaction_id}
+    Log  ${lock_list}
     FOR  ${tran_id}  ${lock}  IN ZIP  ${transaction_id}  ${lock_list}
-      Valid Value  session_info['ClientID']  ['${lock['HMCID']}']
-      Valid Value  session_info['SessionIDs']  ['${lock['SessionID']}']
+      Valid Value  session_info['Content']['Oem']['OpenBMC']['ClientID']  ['${lock['HMCID']}']
+      Valid Value  session_info['Content']['Id']  ['${lock['SessionID']}']
       Should Be Equal As Integers  ${tran_id['TransactionID']}  ${lock['TransactionID']}
     END
 
@@ -611,26 +636,34 @@ Acquire Lock On Resource
     #               (e.g. True or False).
 
     ${trans_id_list}=  Create List
-    ${session_info}=  Create Redfish Session With ClientID  ${client_id}
+    #${session_info}=  Create Redfish Session With ClientID  ${client_id}
+
+    ${admin_session}=  Redfish Generic Session Request  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Verify Redfish Generic Session  ${admin_session}
+
     ${trans_id}=  Redfish Post Acquire Lock  ${lock_type}
     Append To List  ${trans_id_list}  ${trans_id}
-    Verify Lock On Resource  ${session_info}  ${trans_id_list}
+    Verify Lock On Resource  ${admin_session}  ${trans_id_list}
 
-    ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
+    #${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
 
     Run Keyword If  '${reboot_flag}' == 'True'
-    ...  Run Keywords  Redfish OBMC Reboot (off)  AND
-    ...  Redfish Login  AND
-    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Verify Lock On Resource  ${session_info}  ${trans_id_list}  AND
-    ...  Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
+    ...  Run Keywords  Redfish Request BMC Reset Operation  AND
+    ...  Sleep  30s  AND
+    ...  Check BMC At Standby  AND
+    ...  Verify Redfish Generic Session  ${admin_session}  AND
+    #...  Run Keywords  Redfish OBMC Reboot (off)  AND
+    #...  Redfish Login  AND
+    #...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
+    ...  Verify Lock On Resource  ${admin_session}  ${trans_id_list}  AND
+    ...  Release Locks On Resource  ${admin_session}  ${trans_id_list}  Transaction  ${HTTP_OK}
 
     Run Keyword If  '${reboot_flag}' == 'False'
-    ...  Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
+    ...  Release Locks On Resource  ${admin_session}  ${trans_id_list}  Transaction  ${HTTP_OK}
 
     ${trans_id_emptylist}=  Create List
-    Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
-    Redfish Delete Session  ${session_info}
+    Verify Lock On Resource  ${admin_session}  ${trans_id_emptylist}
+    Redfish Request Delete Session  ${admin_session}
 
 
 Form Data To Release Lock
@@ -660,9 +693,14 @@ Release Locks On Resource
     # status_code         HTTP status code.
 
     ${tran_ids}=  Form Data To Release Lock  ${trans_id_list}
-    ${data}=  Set Variable  {"Type": "${release_lock_type}", "TransactionIDs":${tran_ids}}
-    ${data}=  Evaluate  json.dumps(${data})  json
-    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.ReleaseLock  data=${data}
+    #${data}=  Set Variable  {"Type": "${release_lock_type}", "TransactionIDs":${tran_ids}}
+    #${data}=  Evaluate  json.dumps(${data})  json
+    #${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.ReleaseLock  data=${data}
+    &{data}=  Create Dictionary
+    Set To Dictionary  ${data}  Type  ${release_lock_type}
+    Set To Dictionary  ${data}  TransactionIDs  ${tran_ids}
+    Set Test Variable  ${uri}  /ibm/v1/HMC/LockService/Actions/LockService.ReleaseLock
+    ${resp}=  redfish_request_utils.RequestPostMethod  headers=${active_session_info['headers']}  url=${uri}  data=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
 
