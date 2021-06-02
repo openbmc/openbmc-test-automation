@@ -24,9 +24,9 @@ ${PORT}           ${EMPTY}
 # AUTH_SUFFIX here is derived from variables.py
 ${AUTH_URI}       https://${OPENBMC_HOST}${AUTH_SUFFIX}
 ${OPENBMC_USERNAME}    root
-${OPENBMC_PASSWORD}    0penBmc
+${OPENBMC_PASSWORD}    CI5ever! 
 ${REST_USERNAME}       root
-${REST_PASSWORD}       0penBmc
+${REST_PASSWORD}       CI5ever!
 
 ${CHASSIS_ID}  chassis
 

@@ -8,12 +8,18 @@ Resource          ../../lib/resource.robot
 Resource          ../../lib/bmc_redfish_utils.robot
 Resource          ../../lib/utils.robot
 Resource          ../../lib/bmc_redfish_resource.robot
+Resource          ../../lib/redfish_request.robot
+Library           ../../lib/bmc_network_utils.py
+Library           ../../lib/gen_robot_valid.py
 
-Suite Setup       Suite Setup Execution
-Test Teardown     Test Teardown Execution
-Suite Teardown    Suite Teardown Execution
+#Suite Setup       Suite Setup Execution
+#Test Teardown     Test Teardown Execution
+#Suite Teardown    Suite Teardown Execution
 
 *** Variables ***
+
+${active_session_info}
+@{session_dict_list}
 
 ${MAXIMUM_SIZE_MESSAGE}     File size exceeds maximum allowed size[500KB]
 ${FILE_UPLOAD_MESSAGE}      File Created
@@ -31,7 +37,11 @@ Redfish Upload Partition File To BMC
     [Template]  Redfish Upload Partition File
 
     # file_name
-    500KB_file
+    99-file
+    100-file
+    100KB-file
+    200KB-file
+    500KB-file
 
 
 Redfish Fail To Upload Partition File To BMC
@@ -40,7 +50,7 @@ Redfish Fail To Upload Partition File To BMC
     [Template]  Redfish Fail To Upload Partition File
 
     # file_name
-    501KB_file
+    501KB-file
 
 
 Redfish Upload Multiple Partition File To BMC
@@ -49,7 +59,7 @@ Redfish Upload Multiple Partition File To BMC
     [Template]  Redfish Upload Partition File
 
     # file_name
-    250KB_file,500KB_file
+    250KB-file,500KB-file
 
 
 Redfish Fail To Upload Multiple Partition File To BMC
@@ -58,7 +68,7 @@ Redfish Fail To Upload Multiple Partition File To BMC
     [Template]  Redfish Fail To Upload Partition File
 
     # file_name
-    650KB_file,501KB_file
+    650KB-file,501KB-file
 
 
 Redfish Upload Same Partition File To BMC In Loop
@@ -67,7 +77,7 @@ Redfish Upload Same Partition File To BMC In Loop
     [Template]  Redfish Upload Partition File In Loop
 
     # file_name
-    500KB_file
+    500KB-file
 
 
 Redfish Upload And Delete Same Partition File To BMC In Loop
@@ -76,7 +86,7 @@ Redfish Upload And Delete Same Partition File To BMC In Loop
     [Template]  Redfish Upload And Delete Partition File In Loop
 
     # file_name
-    500KB_file
+    500KB-file
 
 
 Redfish Partition File Upload Post BMC Reboot
@@ -85,7 +95,7 @@ Redfish Partition File Upload Post BMC Reboot
     [Template]  Verify Partition File Upload Post BMC Reboot
 
     # file_name
-    500KB_file
+    500KB-file
 
 
 Redfish Partition File Persistency On BMC Reboot
@@ -94,7 +104,7 @@ Redfish Partition File Persistency On BMC Reboot
     [Template]  Redfish Partition File Persistency
 
     # file_name
-    500KB_file
+    500KB-file
 
 
 Redfish Multiple Partition File Persistency On BMC Reboot
@@ -103,7 +113,7 @@ Redfish Multiple Partition File Persistency On BMC Reboot
     [Template]  Redfish Partition File Persistency
 
     # file_name
-    250KB_file,500KB_file
+    250KB-file,500KB-file
 
 
 Redfish Read Partition File On BMC
@@ -186,7 +196,7 @@ Non Admin Users Fail To Upload Partition File
     [Template]  Non Admin User To Upload Partition File
 
     # file_name    username         password       role_id
-    500KB_file     operator_user    TestPwd123     Operator
+    500KB-file     operator_user    TestPwd123     Operator
 
 
 Non Admin User Delete Non Existence Of Partition File
@@ -195,7 +205,7 @@ Non Admin User Delete Non Existence Of Partition File
     [Template]  Non Admin Delete Non Existence Partition File
 
     # file_name    username         password       role_id
-    500KB_file     operator_user    TestPwd123     Operator
+    500KB-file     operator_user    TestPwd123     Operator
 
 
 Redfish Update Wrong Partition File To BMC
@@ -204,7 +214,7 @@ Redfish Update Wrong Partition File To BMC
     [Template]  Verify Update Wrong Partition File To BMC
 
     # file_name
-    500KB_file
+    500KB-file
 
 *** Keywords ***
 
@@ -250,9 +260,21 @@ Create Partition File
     Delete Local Partition File  ${file_name}
 
     FOR  ${conf_file}  IN  @{file_name}
-      @{words}=  Split String  ${conf_file}  _
+      @{words}=  Split String  ${conf_file}  -
+      Log  ${words}[-0]
+      ${size} =  Get Regexp Matches  ${words}[-0]  ([a-zA-z]{2})
+      Log  ${size}
+      ${number} =  Get Regexp Matches  ${words}[-0]  (.*[0-9])
+      Log  ${number}
+      #${result}=  Run Keyword If  'KB' == '${size}[0]'  Evaluate  ${number}[0] * 1000
+      #Log  ${result}
       Run  dd if=/dev/zero of=${conf_file} bs=1 count=0 seek=${words}[-0]
+      # Run  head -c ${words}[-0] /dev/urandom > ${conf_file}
+      #Set Local Variable  ${file_path}  /gsa/ausgsa/projects/i/indiateam/susilsi7/Automation/newfew_openbmc/nfopenbmc_0004/500newkbfile
       OperatingSystem.File Should Exist  ${conf_file}
+      ${file_size}=  Get File Size  ${conf_file}
+      Log  ${file_size}
+      #OperatingSystem.File Should Exist  /gsa/ausgsa/projects/i/indiateam/susilsi7/Automation/newfew_openbmc/nfopenbmc_0004/500newkbfile
     END
 
 
@@ -266,11 +288,9 @@ Delete BMC Partition File
     # expected_message    Expected message of URI.
 
     FOR  ${conf_file}  IN  @{file_name}
-      ${data}=  Create Dictionary
-      ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
-      Set To Dictionary  ${data}  headers  ${headers}
-
-      ${resp}=  Delete Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}  &{data}
+      ${headers}=  Get From Dictionary  ${active_session_info}  headers
+      Set Test Variable  ${uri}  /ibm/v1/Host/ConfigFiles/${conf_file}
+      ${resp}=  redfish_request_utils.RequestDeleteMethod  headers=${headers}  url=${uri}  timeout=30
       Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
       Run Keyword If  ${resp.status_code} == ${HTTP_FORBIDDEN}
@@ -289,13 +309,12 @@ Delete All BMC Partition File
     # Description of argument(s):
     # status_code       HTTPS status code.
 
-    Initialize OpenBMC
-    ${data}=  Create Dictionary
-    ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
-    Set To Dictionary  ${data}  headers  ${headers}
-
-    ${resp}=  Post Request  openbmc  /ibm/v1/Host/ConfigFiles/Actions/IBMConfigFiles.DeleteAll  &{data}
+    Log  ${active_session_info}
+    ${headers}=  Get From Dictionary  ${active_session_info}  headers
+    Set Test Variable  ${uri}  /ibm/v1/Host/ConfigFiles/Actions/IBMConfigFiles.DeleteAll
+    ${resp}=  redfish_request_utils.RequestPostMethod  headers=${headers}  url=${uri}  timeout=10
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
+
 
 
 Return Description Of Response
@@ -325,17 +344,28 @@ Upload Partition File To BMC
     # expected_message    Expected message of URI.
     # flag                If True run part of program, else skip.
 
-    Run Keyword If  '${flag}' == '${True}'  Initialize OpenBMC
     FOR  ${conf_file}  IN  @{file_name}
       # Get the content of the file and upload to BMC.
+      Log  ${EXECDIR}/500newkbfile
+      #${image_data1}=  OperatingSystem.Get File  ${conf_file}  encoding=ASCII  encoding_errors=strict
+      #Log  ${image_data1}
+      #${image_data1} =  Encode String To Bytes  ${image_data1}  UTF-8
+      #Log  ${image_data1} 
       ${image_data}=  OperatingSystem.Get Binary File  ${conf_file}
-      ${data}=  Create Dictionary  data  ${image_data}
-      ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
-      Set To Dictionary  ${data}  headers  ${headers}
-
-      ${resp}=  Put Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}  &{data}
+      ${data}=  Create Dictionary  file  ${image_data}
+      Log  ${data} 
+      ${headers}=  Get From Dictionary  ${active_session_info}  headers
+      Set To Dictionary  ${headers}  Content-Type  application/octet-stream
+      Log  ${headers}
+      #Set Test Variable  ${filename}  499newkbfile
+      #Log  ${filename}
+      Set Test Variable  ${uri}  /ibm/v1/Host/ConfigFiles/${conf_file}
+      ${resp}=  redfish_request_utils.RequestPutMethod  headers=${headers}  url=${uri}  files=${EXECDIR}/500newkbfile  timeout=30
+      ${return_value}=  Return Description Of Response  ${resp.text}
+      Log  ${return_value}
       Should Be Equal As Strings  ${resp.status_code}  ${status_code}
-
+      Log  ${resp}
+      Remove From Dictionary  ${headers}  Content-Type  application/octet-stream
       Run Keyword If  ${resp.status_code} == ${HTTP_FORBIDDEN}
       ...    Should Be Equal As Strings  ${resp.text}  ${expected_message}
       ${description}=  Run Keyword If  ${resp.status_code} == ${HTTP_OK}
@@ -343,6 +373,7 @@ Upload Partition File To BMC
       Run Keyword If  '${description}' != 'None'
       ...  Should Be Equal As Strings  ${description}  ${expected_message}
     END
+
 
 
 Verify Partition File On BMC
@@ -369,14 +400,22 @@ Redfish Upload Partition File
 
     @{Partition_file_list} =  Split String  ${file_name}  ,
     ${num_records}=  Get Length  ${Partition_file_list}
+
+    ${admin_session}=  Redfish Generic Session Request  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Verify Redfish Generic Session  ${admin_session}
+
     Create Partition File  ${Partition_file_list}
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
-    Run Keyword If  ${num_records} == ${1}
-    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
-    ...  ELSE
-    ...    Delete All BMC Partition File  ${HTTP_OK}
+
+    #Run Keyword If  ${num_records} == ${1}
+    #...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    #...  ELSE
+    #...    Delete All BMC Partition File  ${HTTP_OK}
+    #Delete All BMC Partition File  ${HTTP_OK}
     Delete Local Partition File  ${Partition_file_list}
+
+    Redfish Request Delete Session  ${admin_session}
 
 
 Redfish Fail To Upload Partition File
