@@ -1,10 +1,10 @@
 *** Settings ***
 Documentation    Module to test In band firmware update.
 
-Resource         ../lib/ipmi_client.robot
-Resource         ../lib/openbmc_ffdc.robot
-Resource         ../lib/connection_client.robot
-Resource         ../lib/code_update_utils.robot
+Resource         ../../lib/ipmi_client.robot
+Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/connection_client.robot
+Resource         ../../lib/code_update_utils.robot
 
 Suite Setup      Suite Setup Execution
 
