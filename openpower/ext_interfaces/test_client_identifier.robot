@@ -10,13 +10,22 @@ Resource          ../../lib/external_intf/management_console_utils.robot
 Resource          ../../lib/utils.robot
 Library           ../../lib/bmc_network_utils.py
 Library           ../../lib/gen_robot_valid.py
+Resource          ../../lib/bmc_redfish_resource.robot
+Resource          ../../lib/redfish_request.robot
+#Library           ../../lib/redfish_request.py
+#Library           ../../lib/test.py
+#Library           test.PrintClass
+#Library           redfish_request.RedfishRequest
 
-
-Suite Setup       Redfish.Login
+Suite Setup       Run Keyword And Ignore Error  Delete All Redfish Sessions
 Suite Teardown    Run Keyword And Ignore Error  Delete All Redfish Sessions
 Test Setup        Printn
-Test Teardown     FFDC On Test Case Fail
+Test Teardown     Run Keywords  Delete All Redfish Sessions  AND  FFDC On Test Case Fail
 
+
+*** Variables ***
+${active_session_info}
+@{session_dict_list}
 
 *** Test Cases ***
 
@@ -25,11 +34,8 @@ Create A Session With ClientID And Verify
     [Tags]  Create_A_Session_With_ClientID_And_Verify
     [Template]  Create And Verify Session ClientID
 
-    # client_id           reboot_flag
-    12345                 False
-    123456                False
-    EXTERNAL-CLIENT-01    False
-    EXTERNAL-CLIENT-02    False
+    # reboot_flag
+    False
 
 
 Check ClientID Persistency On BMC Reboot
@@ -37,39 +43,46 @@ Check ClientID Persistency On BMC Reboot
     [Tags]  Check_ClientID_Persistency_On_BMC_Reboot
     [Template]  Create And Verify Session ClientID
 
-    # client_id           reboot_flag
-    12345                 True
-    EXTERNAL-CLIENT-01    True
+    # reboot_flag
+    True
 
 
 Create A Multiple Session With ClientID And Verify
     [Documentation]  Create a multiple session with client id and verify client id is same.
     [Tags]  Create_A_Multiple_Session_With_ClientID_And_Verify
-    [Template]  Create And Verify Session ClientID
+    [Template]  Create And Verify Multiple Session ClientID
 
-    # client_id                              reboot_flag
-    12345,123456                             False
-    EXTERNAL-CLIENT-01,EXTERNAL-CLIENT-02    False
+    reboot_flag
+    False
 
 
 Check Multiple ClientID Persistency On BMC Reboot
     [Documentation]  Create a multiple session with client id and verify client id is same after the reboot.
     [Tags]  Check_Multiple_ClientID_Persistency_On_BMC_Reboot
-    [Template]  Create And Verify Session ClientID
+    [Template]  Create And Verify Multiple Session ClientID
 
-    # client_id                              reboot_flag
-    12345,123456                             True
-    EXTERNAL-CLIENT-01,EXTERNAL-CLIENT-02    True
+    reboot_flag
+    True
 
 
 Fail To Set Client Origin IP
     [Documentation]  Fail to set the client origin IP.
     [Tags]  Fail_To_Set_Client_Origin_IP
-    [Template]  Create Session And Fail To Set Client Origin IP
 
-    # client_id
-    12345
-    EXTERNAL-CLIENT-01
+    Set Test Variable  ${uri}   /redfish/v1/SessionService/Sessions
+    Set Test Variable  ${client_ip}  10.6.7.8
+
+    ${headers}=  Create Dictionary
+
+    Set Test Variable  ${active_session_info['headers']}  ${headers}
+    Log  ${active_session_info}
+    ${oem_id}=  GenerateOEMId
+    ${temp}=  Create Dictionary  ClientID=${oem_id}
+    Set To Dictionary  ${temp}  ClientOriginIP  ${client_ip}
+    ${temp}=  Create Dictionary  OpenBMC=${temp}
+    ${data}=  Create Dictionary  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}  Oem=${temp}
+
+    ${resp}=  Redfish POST Request URI  ${active_session_info['headers']}  ${uri}  ${data}  status_code=${HTTP_BAD_REQUEST}
 
 
 Create Session For Non Admin User
@@ -77,15 +90,15 @@ Create Session For Non Admin User
     [Tags]  Create_Session_For_Non_Admin_User
     [Template]  Non Admin User To Create Session
 
-    # client_id    username         password      role_id
-    12345          operator_user    TestPwd123    Operator
+    # username       password      role_id
+    operator_user    TestPwd123    Operator
 
 
 *** Keywords ***
 
 Create And Verify Session ClientID
     [Documentation]  Create redifish session with client id and verify it remain same.
-    [Arguments]  ${client_id}  ${reboot_flag}=False
+    [Arguments]  ${reboot_flag}=False
 
     # Description of argument(s):
     # client_id    This client id contain string value
@@ -93,47 +106,66 @@ Create And Verify Session ClientID
     # reboot_flag  Flag is used to run reboot the BMC code.
     #               (e.g. True or False).
 
-    ${client_ids}=  Split String  ${client_id}  ,
-    ${session_info}=  Create Session With List Of ClientID  ${client_ids}
-    Verify A Session Created With ClientID  ${client_ids}  ${session_info}
-
-    ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
-
+    ${admin_session}=  Redfish Generic Session Request  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Verify Redfish Generic Session  ${admin_session}
+    
     Run Keyword If  '${reboot_flag}' == 'True'
-    ...  Run Keywords  Redfish BMC Reset Operation  AND
-    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Is BMC Standby  AND
-    ...  Verify A Session Created With ClientID  ${client_ids}  ${session_info}
+    ...  Run Keywords  Redfish Request BMC Reset Operation  AND
+    ...  Sleep  30s  AND
+    ...  Check BMC At Standby  AND
+    ...  Verify Redfish Generic Session  ${admin_session}
 
-    Redfish Delete List Of Session  ${session_info}
+    Redfish Request Delete Session  ${admin_session}
 
 
-Set Client Origin IP
-    [Documentation]  Set client origin IP.
-    [Arguments]  ${client_id}  ${client_ip}  ${status}
+Create And Verify Multiple Session ClientID
+    [Documentation]  Create redifish session with client id and verify it remain same.
+    [Arguments]  ${reboot_flag}=False
 
     # Description of argument(s):
     # client_id    This client id contain string value
     #              (e.g. 12345, "EXTERNAL-CLIENT").
-    # client_ip    Valid IP address
-    # status       HTTP status code
+    # reboot_flag  Flag is used to run reboot the BMC code.
+    #               (e.g. True or False).
 
-    ${session}=  Run Keyword And Return Status
-    ...  Redfish Login
-    ...  kwargs= "Oem":{"OpenBMC": {"ClientID":"${client_id}", "ClientOriginIP":"${client_ip}"}}
-    Valid Value  session  [${status}]
+    ${admin_session_1}=  Redfish Generic Session Request  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Verify Redfish Generic Session  ${admin_session_1}
+    ${admin_session_2}=  Redfish Generic Session Request  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Verify Redfish Generic Session  ${admin_session_2}
+
+    Run Keyword If  '${reboot_flag}' == 'True'
+    ...  Run Keywords  Redfish Request BMC Reset Operation  AND
+    ...  Sleep  30s  AND
+    ...  Check BMC At Standby  AND
+    ...  Verify Redfish Generic Session  ${admin_session_1}  AND
+    ...  Verify Redfish Generic Session  ${admin_session_2}
+
+    Redfish Request Delete Session  ${admin_session_1}
+    Redfish Request Delete Session  ${admin_session_2}
 
 
 Create Session And Fail To Set Client Origin IP
     [Documentation]  Create redifish session with client id and fail to set client origin IP.
-    [Arguments]  ${client_id}
 
     # Description of argument(s):
     # client_id    This client id contain string value
     #              (e.g. 12345, "EXTERNAL-CLIENT").
 
+
+    Set Test Variable  ${uri}   /redfish/v1/SessionService/Sessions
     Set Test Variable  ${client_ip}  10.6.7.8
-    ${resp}=  Set Client Origin IP  ${client_id}  ${client_ip}  status=False
+
+    ${headers}=  Create Dictionary
+
+    Set Global Variable  ${active_session_info['headers']}  ${headers}
+    Log  ${active_session_info}
+    ${oem_id}=  GenerateOEMId
+    ${temp}=  Create Dictionary  ClientID=${oem_id}
+    Set To Dictionary  ${temp}  ClientOriginIP  ${client_ip}
+    ${temp}=  Create Dictionary  OpenBMC=${temp}
+    ${data}=  Create Dictionary  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}  Oem=${temp}
+
+    ${resp}=  Redfish POST Request URI  ${active_session_info['headers']}  ${uri}  ${data}  status_code=${HTTP_BAD_REQUEST}
 
 
 Create A Non Admin Session With ClientID
@@ -194,7 +226,7 @@ Verify A Non Admin Session Created With ClientID
 
 Non Admin User To Create Session
     [Documentation]  Non Admin user create a session and verify the session is created.
-    [Arguments]  ${client_id}  ${username}  ${password}  ${role}  ${enabled}=${True}
+    [Arguments]  ${username}  ${password}  ${role}  ${enabled}=${True}
 
     # Description of argument(s):
     # client_id    This client id contain string value
@@ -204,11 +236,24 @@ Non Admin User To Create Session
     # role         Role of user.
     # enabled      Value can be True or False.
 
-    Redfish.Login
-    Redfish Create User  ${username}  ${password}  ${role}  ${enabled}
-    Delete All Sessions
-    Redfish.Logout
-    Initialize OpenBMC  rest_username=${username}  rest_password=${password}
-    ${client_ids}=  Split String  ${client_id}  ,
-    ${session_info}=  Create A Non Admin Session With ClientID  ${client_ids}  ${username}  ${password}
-    Verify A Non Admin Session Created With ClientID  ${client_ids}  ${session_info}
+
+    ${admin_session}=  Redfish Generic Session Request  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Log  ${active_session_info}
+    Log  ${session_dict_list}
+    Verify Redfish Generic Session  ${admin_session}
+
+    Redfish Request Create User  ${username}  ${password}  ${role}  ${enabled}
+    ${operator_session}=  Redfish Generic Session Request  ${username}  ${password}
+    Verify Redfish Generic Session  ${operator_session}
+
+    ${curr_role}=  Run Keyword And Ignore Error  Redfish Request Get User Role  ${user_name}
+    ${user_exists}=  Run Keyword And Return Status  Should Be Equal As Strings  ${curr_role}[0]  PASS
+    Log  ${active_session_info}
+    Log  ${session_dict_list}
+    Set Global Variable  ${active_session_info}  ${admin_session}
+    Run Keyword If  ${user_exists} == ${True}
+    ...  Run Keywords  Set Test Variable  ${uri}  ${REDFISH_ACCOUNTS_URI}${user_name}  AND
+    ...  Redfish DELETE Request URI  ${active_session_info['headers']}  ${uri}
+    
+    Redfish Request Delete Session  ${operator_session}
+    Redfish Request Delete Session  ${admin_session}
