@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ca42dbd5_f1efa42b",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-02T06:29:40Z",
+      "side": 1,
+      "message": "used it for timer, so no need tomention this timer values in code",
+      "parentUuid": "8e4c0cc7_439a1e6c",
+      "range": {
+        "startLine": 16,
+        "startChar": 27,
+        "endLine": 16,
+        "endChar": 36
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1f27850f_801b146b",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2021-05-24T09:53:02Z",
       "side": 1,
       "message": "I guess this library no need.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 20
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f673368c_ec79e9bb",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-02T06:29:40Z",
+      "side": 1,
+      "message": "needed for taking screenshot on failed test case",
+      "parentUuid": "1f27850f_801b146b",
       "range": {
         "startLine": 18,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "dc58f5c0_7b37f25c",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-02T06:29:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2d5efb5_f9f64b02",
+      "range": {
+        "startLine": 20,
+        "startChar": 39,
+        "endLine": 20,
+        "endChar": 40
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f57b8668_342280d4",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2021-05-24T09:53:02Z",
       "side": 1,
       "message": "My suggestion:\nOpen Browser  ${bmc_url}\nMaximize Browser Window",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 31
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "258dcf4d_a78c5289",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-02T06:29:40Z",
+      "side": 1,
+      "message": "As discussed we are using 2 browser instances one for handling wrong credentials and another for checking whether login works for correct credentials.\nUsing alias to refer particular instance and can be used or switched based on need.",
+      "parentUuid": "f57b8668_342280d4",
       "range": {
         "startLine": 150,
         "startChar": 0,
@@ -114,6 +210,30 @@
       "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9a9e90d_a0811e02",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-02T06:29:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d39bb220_c3070152",
+      "range": {
+        "startLine": 157,
+        "startChar": 75,
+        "endLine": 157,
+        "endChar": 85
+      },
+      "revId": "80244e39e089de29e48c30ebb9ceef3f3a75bfb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
