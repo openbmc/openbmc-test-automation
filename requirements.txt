@@ -5,3 +5,5 @@ paramiko>=2.5.0
 robotframework-sshlibrary
 robotframework-scplibrary
 redfish
+click
+PyYAML
