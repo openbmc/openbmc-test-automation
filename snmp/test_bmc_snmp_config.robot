@@ -159,11 +159,31 @@ Configure SNMP Manager With Less Octet IP And Verify
      # SNMP manager IP   Port                  Scenario
      10.10.10            ${SNMP_DEFAULT_PORT}  error
 
+Verify SNMP SysUpTime
+    [Documentation]  Verify SNMP SysUpTime.
+    [Tags]  Verify_SNMP_SysUpTime
+
+    Generate Error And Verify System Up Time
+
+
+Verify SNMP SysUpTime On BMC Reboot
+    [Documentation]  Verify SNMP SysUpTime on BMC reboot.
+    [Tags]  Verify_SNMP_SysUpTime_On_BMC_Reboot
+
+    # Reboot BMC to reset system uptime.
+    OBMC Reboot (off)
+
+    ${uptime}=  Generate Error And Verify System Up Time
+
+    # Check if uptime is reset after reboot.
+    Should Be True  ${uptime} <= 1  msg=SNMP SysUpTime is not reset on reboot
+
+
 *** Keywords ***
 
 Create Error On BMC And Verify If Trap Is Sent
-    [Documentation]  Generate Error On BMC And Verify If Trap Is Sent.
-    [Arguments]  ${event_log}  ${expected_error}
+    [Documentation]  Generate error on BMC and verify if trap is sent.
+    [Arguments]  ${event_log}=${CMD_INTERNAL_FAILURE}  ${expected_error}=${SNMP_TRAP_BMC_INTERNAL_FAILURE}
 
     # Description of argument(s):
     # event_log                           Event logs to be created.
@@ -187,3 +207,42 @@ Create Error On BMC And Verify If Trap Is Sent
     Should Match Regexp  ${SNMP_TRAP}[3]  SNMPv2-SMI::enterprises.49871.1.0.1.2 = Opaque: UInt64: \[0-9]*
     Should Match Regexp  ${SNMP_TRAP}[4]  SNMPv2-SMI::enterprises.49871.1.0.1.3 = INTEGER: \[0-9]
     Should Be Equal  ${SNMP_TRAP}[5]  SNMPv2-SMI::enterprises.49871.1.0.1.4 = STRING: "${expected_error}"
+
+    [Return]  ${SNMP_TRAP}
+
+
+Generate Error And Verify System Up Time
+    [Documentation]  Generate error and verify system up time.
+
+    # Get system uptime on BMC.
+    # Example output of uptime:
+    # (8055.79 15032.86)
+
+    ${cmd_output}   ${stderr}  ${rc}=  BMC Execute Command  cat /proc/uptime
+    @{times}=  Split String  ${cmd_output}
+
+    ${bmc_uptime_in_minutes}=  Evaluate  int(${times}[0])/60
+
+    ${trap}=  Create Error On BMC And Verify If Trap Is Sent
+
+    # Extract System up time from SNMP trap.
+    # Example - SNMP trap:
+    # DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (252367) 0:42:03.67
+    # SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.49871.1.0.0.1
+    # SNMPv2-SMI::enterprises.49871.1.0.1.1 = Gauge32: 54
+    # SNMPv2-SMI::enterprises.49871.1.0.1.2 = Opaque: UInt64: 4622921648578756984
+    # SNMPv2-SMI::enterprises.49871.1.0.1.3 = INTEGER: 3
+    # SNMPv2-SMI::enterprises.49871.1.0.1.4 = STRING:
+
+    @{words}=  Split String  ${trap}[0]  =
+
+    ${timeticks}=  Fetch From Right  ${words}[1]  (
+    ${snmp_sysuptime}=  Fetch From Left  ${timeticks}  )
+
+    # SNMP SysUptime will be in milli seconds.
+    # Convert into minutes.
+    ${sysuptime_in_minutes}=  Evaluate  int(${snmp_sysuptime})/6000
+
+    Should Be Equal As Integers  ${bmc_uptime_in_minutes}  ${sysuptime_in_minutes}
+
+    [Return]  ${sysuptime_in_minutes}
