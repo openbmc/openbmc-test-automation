@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15765b89_0279c08a",
+        "filename": "ffdc/collectFFDC.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-03T13:44:16Z",
+      "side": 1,
+      "message": "reword it.. we are not doing util stuff here",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 80
+      },
+      "revId": "1e0f1879759eda55c629cc8cfecaf587ce226adc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a183db5_e77f84b2",
+        "filename": "ffdc/collectFFDC.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-03T13:44:16Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 40
+      },
+      "revId": "1e0f1879759eda55c629cc8cfecaf587ce226adc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f894670e_7f5bc153",
+        "filename": "ffdc/collectFFDC.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-03T13:44:16Z",
+      "side": 1,
+      "message": "Mention also like Redfish , scp",
+      "range": {
+        "startLine": 36,
+        "startChar": 49,
+        "endLine": 36,
+        "endChar": 99
+      },
+      "revId": "1e0f1879759eda55c629cc8cfecaf587ce226adc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b06304d_c1b77b3e",
+        "filename": "ffdc/collectFFDC.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-03T13:44:16Z",
+      "side": 1,
+      "message": "cli_ffdc",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 11
+      },
+      "revId": "1e0f1879759eda55c629cc8cfecaf587ce226adc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "060892dc_e34f5638",
+        "filename": "ffdc/collectFFDC.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-03T13:44:16Z",
+      "side": 1,
+      "message": "Refer comments and argument documentation \n\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/lib/state.py#L305",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 7
+      },
+      "revId": "1e0f1879759eda55c629cc8cfecaf587ce226adc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "874819d1_02a1e174",
+        "filename": "ffdc/ffdcConfig.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-03T13:44:16Z",
+      "side": 1,
+      "message": "Reword it\n\n# Command and Files to collect for a given OpenBMC systems.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 40
+      },
+      "revId": "1e0f1879759eda55c629cc8cfecaf587ce226adc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59bcc8ef_d3e1a05b",
+        "filename": "ffdc/ffdcConfig.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-03T13:44:16Z",
+      "side": 1,
+      "message": "BMC",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 3
+      },
+      "revId": "1e0f1879759eda55c629cc8cfecaf587ce226adc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1887c638_883d5f03",
+        "filename": "ffdc/setup.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-03T13:44:16Z",
+      "side": 1,
+      "message": "A standalone script to collect logs from a given system.",
+      "range": {
+        "startLine": 5,
+        "startChar": 18,
+        "endLine": 5,
+        "endChar": 98
+      },
+      "revId": "1e0f1879759eda55c629cc8cfecaf587ce226adc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
