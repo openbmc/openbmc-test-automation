@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "259ff0be_f33622d5",
+        "filename": "gui/gui_test/control_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-03T07:24:23Z",
+      "side": 1,
+      "message": "\"Server control\" menu.",
+      "range": {
+        "startLine": 3,
+        "startChar": 67,
+        "endLine": 3,
+        "endChar": 84
+      },
+      "revId": "c7f9270b363d05a2a05c9424f2c46eb0b597ecda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5143171f_81c738df",
+        "filename": "gui/gui_test/control_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-03T07:24:23Z",
+      "side": 1,
+      "message": "Remove whitespace and keep two blank lines above variable section.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 1
+      },
+      "revId": "c7f9270b363d05a2a05c9424f2c46eb0b597ecda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a6a00a4_dd30f9f1",
+        "filename": "gui/gui_test/control_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-03T07:24:23Z",
+      "side": 1,
+      "message": "Remove whitespace",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 1
+      },
+      "revId": "c7f9270b363d05a2a05c9424f2c46eb0b597ecda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2533d868_1e131275",
+        "filename": "gui/gui_test/control_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-03T07:24:23Z",
+      "side": 1,
+      "message": "Remove arrow for tab",
+      "range": {
+        "startLine": 13,
+        "startChar": 38,
+        "endLine": 13,
+        "endChar": 39
+      },
+      "revId": "c7f9270b363d05a2a05c9424f2c46eb0b597ecda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bd5f8c8_92b4d892",
+        "filename": "gui/gui_test/control_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-03T07:24:23Z",
+      "side": 1,
+      "message": "remove tab",
+      "range": {
+        "startLine": 14,
+        "startChar": 30,
+        "endLine": 14,
+        "endChar": 33
+      },
+      "revId": "c7f9270b363d05a2a05c9424f2c46eb0b597ecda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ced2555c_6b70ce5c",
+        "filename": "gui/gui_test/control_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-03T07:24:23Z",
+      "side": 1,
+      "message": "All Buttons In Power Restore Policy Page",
+      "range": {
+        "startLine": 33,
+        "startChar": 20,
+        "endLine": 33,
+        "endChar": 31
+      },
+      "revId": "c7f9270b363d05a2a05c9424f2c46eb0b597ecda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17be1fa0_f8377f10",
+        "filename": "gui/gui_test/control_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-03T07:24:23Z",
+      "side": 1,
+      "message": "Change with respect to above change.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 43
+      },
+      "revId": "c7f9270b363d05a2a05c9424f2c46eb0b597ecda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
