@@ -1,0 +1,110 @@
+---
+# This yaml formatted file contains defaults items to collect FFDC for the targeted system
+# COMMANDS - List of commands to be run on the corresponding targeted system (inband)
+#            to generate and/or collect data
+# FILES    - List of files; with complete path; on the corresponding targeted system
+#            to be copied to external destination
+#
+# Note: Items in COMMANDS and FILES are not necessarily one-to-one correspondence.
+#       For example, a file could have been created by an internal process,
+#       and is listed in FILES to be collected.
+
+# Commands and Files to collect for a given OpenBMC system.
+OPENBMC:
+    COMMANDS:
+        - 'cat /sys/class/watchdog/watchdog1/bootstatus >/tmp/BMC_flash_side.txt 2>&1'
+        - 'grep -r . /sys/class/hwmon/* >/tmp/BMC_hwmon.txt 2>&1'
+        - 'top -n 1 -b >/tmp/BMC_proc_list.txt 2>&1'
+        - 'ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt 2>&1'
+        - 'journalctl --no-pager >/tmp/BMC_journalctl_nopager.txt 2>&1'
+        - 'journalctl -o json-pretty >/tmp/BMC_journalctl_pretty.json 2>&1'
+        - 'dmesg >/tmp/BMC_dmesg.txt 2>&1'
+        - 'cat /proc/cpuinfo >/tmp/BMC_procinfo.txt 2>&1'
+        - 'cat /proc/meminfo >/tmp/BMC_meminfo.txt 2>&1'
+        - 'systemctl status --all >/tmp/BMC_systemd.txt 2>&1'
+        - 'systemctl list-units --failed >/tmp/BMC_failed_service.txt 2>&1'
+        - 'systemctl list-jobs >/tmp/BMC_list_service.txt 2>&1'
+        - 'cat /var/log/obmc-console.log >/tmp/BMC_obmc_console.txt 2>&1'
+        - 'cat /var/log/obmc-console1.log >/tmp/BMC_obmc_console1.txt 2>&1'
+        - 'peltool -l >/tmp/PEL_logs_list.json 2>&1'
+        - 'peltool -a >/tmp/PEL_logs_display.json 2>&1'
+    FILES:
+        - '/tmp/BMC_flash_side.txt'
+        - '/tmp/BMC_hwmon.txt'
+        - '/tmp/BMC_proc_list.txt'
+        - '/tmp/BMC_proc_fd_active_list.txt'
+        - '/tmp/BMC_journalctl_nopager.txt'
+        - '/tmp/BMC_journalctl_pretty.json'
+        - '/tmp/BMC_dmesg.txt'
+        - '/tmp/BMC_procinfo.txt'
+        - '/tmp/BMC_meminfo.txt'
+        - '/tmp/BMC_systemd.txt'
+        - '/tmp/BMC_failed_service.txt'
+        - '/tmp/BMC_list_service.txt'
+        - '/tmp/BMC_obmc_console.txt'
+        - '/tmp/BMC_obmc_console1.txt'
+        - '/tmp/PEL_logs_list.json'
+        - '/tmp/PEL_logs_display.json'
+
+# Commands and Files to collect for all Linux distributions
+LINUX:
+    COMMANDS:
+        - 'cat /sys/firmware/opal/msglog >/tmp/OS_msglog.txt 2>&1'
+        - 'ppc64_cpu --frequency >/tmp/OS_cpufrequency.txt 2>&1'
+        - 'dmesg >/tmp/OS_dmesg.txt 2>&1'
+        - 'cat /var/log/opal-prd* >/tmp/OS_opal_prd.txt 2>&1'
+        - 'cat /var/log/boot.log >/tmp/OS_boot.txt 2>&1'
+        - 'cat /proc/cpuinfo >/tmp/OS_procinfo.txt 2>&1'
+        - 'cat /proc/meminfo >/tmp/OS_meminfo.txt 2>&1'
+        - 'netstat -a >/tmp/OS_netstat.txt 2>&1'
+        - 'lspci >/tmp/OS_lspci.txt 2>&1'
+        - 'lscpu >/tmp/OS_lscpu.txt 2>&1'
+        - 'lscfg >/tmp/OS_lscfg.txt 2>&1'
+        - 'journalctl --no-pager -b > /tmp/OS_journalctl_nopager.txt  2>&1'
+    FILES:
+        - '/tmp/OS_msglog.txt'
+        - '/tmp/OS_cpufrequency.txt'
+        - '/tmp/OS_dmesg.txt'
+        - '/tmp/OS_opal_prd.txt'
+        - '/tmp/OS_boot.txt'
+        - '/tmp/OS_procinfo.txt'
+        - '/tmp/OS_meminfo.txt'
+        - '/tmp/OS_netstat.txt'
+        - '/tmp/OS_lspci.txt'
+        - '/tmp/OS_lscpu.txt'
+        - '/tmp/OS_lscfg.txt'
+        - '/tmp/OS_journalctl_nopager.txt'
+
+# Commands and Files to collect for Ubuntu Linux only
+UBUNTU_LINUX:
+    COMMANDS:
+        - '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt 2>&1'
+        - 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt 2>&1'
+        - '{ cat /var/log/auth.log; cat /var/log/auth.log.1 ; } >/tmp/OS_authlog.txt 2>&1'
+        - 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1'
+        - '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } >/tmp/OS_info.txt 2>&1'
+        - 'rm -rf /tmp/sosreport*FFDC*'
+        - 'sosreport --batch --tmp-dir /tmp --ticket-number FFDC >/tmp/OS_sosreport.txt 2>&1'
+    FILES:
+        - '/tmp/OS_isub.txt'
+        - '/tmp/OS_kern.txt'
+        - '/tmp/OS_authlog.txt'
+        - '/tmp/OS_syslog.txt'
+        - '/tmp/OS_info.txt'
+        - '/tmp/OS_sosreport.txt'
+
+# Commands and Files to collect for RHE Linux only
+RHEL_LINUX:
+    COMMANDS:
+        - '/usr/bin/ctversion -bv >/tmp/OS_rsct.txt 2>&1'
+        - 'cat /var/log/secure >/tmp/OS_secure.txt 2>&1'
+        - 'tail -n 200000 /var/log/messages >/tmp/OS_syslog.txt 2>&1'
+        - '{ lsb_release -a; cat /etc/redhat-release; uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1'
+        - 'rm -rf /tmp/sosreport*FFDC*'
+        - 'sosreport --batch --tmp-dir /tmp --label FFDC >/tmp/OS_sosreport.txt 2>&1'
+    FILES:
+        - '/tmp/OS_rsct.txt'
+        - '/tmp/OS_secure.txt'
+        - '/tmp/OS_syslog.txt'
+        - '/tmp/OS_info.txt'
+        - '/tmp/OS_sosreport.txt'
