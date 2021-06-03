@@ -4,6 +4,7 @@ Documentation    Verify that Redfish software inventory can be collected.
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/redfish_code_update_utils.robot
 Library          ../../lib/gen_robot_valid.py
 
 Test Setup       Test Setup Execution
@@ -126,6 +127,20 @@ Verify UpdateService Supports TransferProtocol TFTP
     ...  valid_values=['TFTP']
     Valid Value  allowable_values["#UpdateService.SimpleUpdate"]["target"]
     ...  valid_values=['/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate']
+
+
+Verify Redfish Software Hex ID
+    [Documentation]  Verify BMC images have valid 8-digit hex IDs.
+    [Tags]  Verify_Redfish_Software_Hex_ID
+
+    ${sw_inv_dict}=  Get Software Inventory State
+
+    FOR  ${id_key}  IN  @{sw_inv_dict}
+      ${sw_inv}=  Get From Dictionary  ${sw_inv_dict}  ${id_key}
+      Should Be Equal As Strings  ${id_key}  ${sw_inv['image_id']}
+      Length Should Be  ${sw_inv['image_id']}  ${8}
+      Should Match Regexp  ${sw_inv['image_id']}  [0-9a-f]*
+    END
 
 
 Verify Redfish BIOS Version
