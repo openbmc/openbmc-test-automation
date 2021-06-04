@@ -259,7 +259,8 @@ Auto Generate BMC Dump
 
     ${stdout}  ${stderr}  ${rc}=
     ...  BMC Execute Command
-    ...  busctl --verbose call xyz.openbmc_project.Dump.Manager /xyz/openbmc_project/dump/bmc xyz.openbmc_project.Dump.Create CreateDump a{ss} 0
+    ...  busctl --verbose call xyz.openbmc_project.Dump.Manager
+    ...  /xyz/openbmc_project/dump/bmc xyz.openbmc_project.Dump.Create CreateDump a{ss} 0
     [Return]  ${stdout}  ${stderr}  ${rc}
 
 Get Dump Size
