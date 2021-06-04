@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "6d03da50_f1c10b38",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-04T07:30:44Z",
+      "side": 1,
+      "message": "i think it is not required.",
+      "parentUuid": "d944f09d_dae16dcd",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 433,
+        "endChar": 30
+      },
+      "revId": "6aed78d044ca6f71e5071312cba85a58112b515f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68f60328_407f4a25",
         "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
         "patchSetId": 3
