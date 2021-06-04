@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "14778527_316b8946",
+        "filename": "gui/gui_test/control_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-04T11:12:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60db58c9_655c28b1",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 76
+      },
+      "revId": "6f8741c38efb16c33d0e067d112bfc6e12c862ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb3972ba_7274ac72",
         "filename": "gui/gui_test/control_menu/test_factory_reset_sub_menu.robot",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2021-06-03T07:39:27Z",
       "side": 1,
       "message": "1. This should be one time in the suite. Not required for every test case once you are in the page.\n\n2. Is there really a text element element \u0027factory-reset\u0027. I did not notice \u0027factory-reset\u0027 in the page.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 86
+      },
+      "revId": "6f8741c38efb16c33d0e067d112bfc6e12c862ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59e1eaaf_7b64a711",
+        "filename": "gui/gui_test/control_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-04T11:12:16Z",
+      "side": 1,
+      "message": "Point on is done.\n\nFor point 2, we are checking factory-reset in browser url and not in the page.",
+      "parentUuid": "fb3972ba_7274ac72",
       "range": {
         "startLine": 43,
         "startChar": 0,
