@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "8de12595_e3a7d896",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-06-04T08:00:21Z",
+      "side": 1,
+      "message": "maintain 2 spaces. For beautification/alignment need, if more space is required, then \u0027Wait Unitil...\u0027 should have more gap with  ${xpath_ldap_url}.",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 58
+      },
+      "revId": "3cf658356c11928ec4798c6c1a3bd78b6faa3d9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4198f42_2df5f773",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-06-04T08:00:21Z",
+      "side": 1,
+      "message": "Push such things in testcase setup",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 17
+      },
+      "revId": "3cf658356c11928ec4798c6c1a3bd78b6faa3d9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "254b6966_c28816e6",
         "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
         "patchSetId": 3
