@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f0f8141_cc8fb2f0",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-04T09:23:08Z",
+      "side": 1,
+      "message": "This is unused. Seem like we need to remove it.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 28
+      },
+      "revId": "4aff7a84c4601ce0b08bf822804db0ab5ed05455",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7efb768_8e4000d5",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-04T09:23:08Z",
+      "side": 1,
+      "message": "What is this for.",
+      "range": {
+        "startLine": 163,
+        "startChar": 97,
+        "endLine": 163,
+        "endChar": 102
+      },
+      "revId": "4aff7a84c4601ce0b08bf822804db0ab5ed05455",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e060ae8_01ec719b",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-04T09:23:08Z",
+      "side": 1,
+      "message": "So are we ignoring 1 time failure here?",
+      "range": {
+        "startLine": 167,
+        "startChar": 20,
+        "endLine": 167,
+        "endChar": 40
+      },
+      "revId": "4aff7a84c4601ce0b08bf822804db0ab5ed05455",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e366eb5d_84e7c43d",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-04T09:23:08Z",
+      "side": 1,
+      "message": "better to use `incorrect` here",
+      "range": {
+        "startLine": 205,
+        "startChar": 18,
+        "endLine": 205,
+        "endChar": 23
+      },
+      "revId": "4aff7a84c4601ce0b08bf822804db0ab5ed05455",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc2c37d3_3ddaa0ad",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-04T09:23:08Z",
+      "side": 1,
+      "message": "incorrect_password",
+      "range": {
+        "startLine": 209,
+        "startChar": 47,
+        "endLine": 209,
+        "endChar": 52
+      },
+      "revId": "4aff7a84c4601ce0b08bf822804db0ab5ed05455",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
