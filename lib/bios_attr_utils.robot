@@ -1,9 +1,9 @@
 *** Settings ***
 Documentation    Utilities for redfish BIOS attribute operations.
 
-Resource         ../../../lib/resource.robot
-Resource         ../../../lib/bmc_redfish_resource.robot
-Resource         ../../../lib/common_utils.robot
+Resource         resource.robot
+Resource         bmc_redfish_resource.robot
+Resource         common_utils.robot
 
 
 *** Keywords ***
