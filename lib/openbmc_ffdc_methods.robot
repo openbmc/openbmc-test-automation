@@ -655,7 +655,7 @@ OS Distro Type
 
     Return From Keyword If  ${rc} == ${0}  ${stdout}
 
-    # If linux distro doesnt have os-release, check for uname.
+    # If linux distro doesn't have os-release, check for uname.
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uname  ignore_err=${0}
 
    [Return]  ${stdout}
