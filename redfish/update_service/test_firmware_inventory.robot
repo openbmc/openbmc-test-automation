@@ -143,6 +143,28 @@ Verify Redfish Software Hex ID
     END
 
 
+Verify Redfish FirmwareInventory Is Updateable
+    [Documentation]  Verify the redfish firmware inventory path is updateable.
+    [Tags]  Verify_Redfish_FirmwareInventory_Is_Updateable
+
+    ${sw_member_list}=  Redfish_Utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+
+    # sw_member_list:
+    #   [0]:                            /redfish/v1/UpdateService/FirmwareInventory/98744d76
+    #   [1]:                            /redfish/v1/UpdateService/FirmwareInventory/9a8028ec
+    #   [2]:                            /redfish/v1/UpdateService/FirmwareInventory/acc9e073
+
+    FOR  ${sw_member}  IN  @{sw_member_list}
+      ${resp}=  Redfish.Get Attribute  ${sw_member}  Updateable
+
+      # Example:
+      # "Updateable": true,
+
+      Should Be Equal As Strings  ${resp}  True
+
+    END
+
+
 Verify Redfish BIOS Version
     [Documentation]  Get host firmware version from system inventory.
     [Tags]  Verify_Redfish_BIOS_Version
