@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fb885fc_a079feb3",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "IP",
+      "range": {
+        "startLine": 43,
+        "startChar": 37,
+        "endLine": 43,
+        "endChar": 40
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c997167_3a0a7d08",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "FFDC",
+      "range": {
+        "startLine": 44,
+        "startChar": 71,
+        "endLine": 44,
+        "endChar": 76
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c588adf5_a7cb2bee",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "Please captitalize the sentence and end with a period wherever applicable.",
+      "range": {
+        "startLine": 43,
+        "startChar": 1,
+        "endLine": 50,
+        "endChar": 7
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "778ed71c_751afa17",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "I believe this is not required.",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 24
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a72aba2_8801bbc8",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "were",
+      "range": {
+        "startLine": 59,
+        "startChar": 55,
+        "endLine": 59,
+        "endChar": 59
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e78dc612_048e2e79",
+        "filename": "ffdc/ffdc_config.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "copied",
+      "range": {
+        "startLine": 6,
+        "startChar": 19,
+        "endLine": 6,
+        "endChar": 24
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af6b5df3_8cee026f",
+        "filename": "lib/ffdc_collector.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "Not required. You can directly get the values for the key \"COMMANDS\" and loop through to execute the commands.",
+      "range": {
+        "startLine": 109,
+        "startChar": 16,
+        "endLine": 111,
+        "endChar": 80
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c92225c_d20e43eb",
+        "filename": "lib/ffdc_collector.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 44
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f74c364e_172205e0",
+        "filename": "lib/ffdc_collector.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "value",
+      "range": {
+        "startLine": 161,
+        "startChar": 22,
+        "endLine": 161,
+        "endChar": 29
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5137b68b_600d6a9a",
+        "filename": "lib/ffdc_collector.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "Move these to #162",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 169,
+        "endChar": 55
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba7520fd_d84bcba8",
+        "filename": "lib/ffdc_collector.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-07T07:00:06Z",
+      "side": 1,
+      "message": "I think a separate method is not return this variable. You can return it in generate_ffdc_ssh itself. Also since self.receive_file_list is an instance variable, it can be accessed directly as well.",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 37
+      },
+      "revId": "55df09548eb42daf6916f3544fdcd74e8423e387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
