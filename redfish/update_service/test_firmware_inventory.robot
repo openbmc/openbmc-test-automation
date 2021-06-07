@@ -143,6 +143,23 @@ Verify Redfish Software Hex ID
     END
 
 
+Verify Redfish FirmwareInventory Is Updateable
+    [Documentation]  Verify the redfish firmware inventory path is updateable.
+    [Tags]  Verify_Redfish_FirmwareInventory_Is_Updateable
+
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
+
+    FOR  ${entry}  IN RANGE  0  ${resp.dict["Members@odata.count"]}
+      ${resp_resource}=  Redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
+
+    # Example:
+    # "Updateable": true,
+
+      Should Be Equal As Strings  ${resp_resource.dict["Updateable"]}  True
+
+    END
+
+
 Verify Redfish BIOS Version
     [Documentation]  Get host firmware version from system inventory.
     [Tags]  Verify_Redfish_BIOS_Version
