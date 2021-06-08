@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation    Module to test npcm750 JTAG Master.
 
-Resource         ../lib/openbmc_ffdc.robot
-Resource         ../lib/connection_client.robot
+Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/connection_client.robot
 
 Suite Setup      Suite Setup Execution
 
