@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a31c13dd_8f69bac8",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-08T05:51:17Z",
+      "side": 1,
+      "message": "[Tags] \nmissing 164 \u0026 170",
+      "revId": "85cab77a77bf56765eca25656c56e888c1196dc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e086f5a_46992188",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-08T05:51:17Z",
+      "side": 1,
+      "message": "your taking by default arguments, this keyword only will works only at ${CMD_INTERNAL_FAILURE}\nhow will you get sysuptime for remaining errors",
+      "range": {
+        "startLine": 224,
+        "startChar": 14,
+        "endLine": 224,
+        "endChar": 60
+      },
+      "revId": "85cab77a77bf56765eca25656c56e888c1196dc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
