@@ -235,6 +235,54 @@ Get Concurrent CSR Request From Operator Users
         ...  msg=One or more operations has failed.
     END
 
+Get Root Certificate And Send Corrupted CSR From Admin CSR Request From Operator Concurrently
+    [Documentation]  Get root certificate and send corrupted csr request from admin and
+    ...  csr from operator concurrently and verify gets root certicate and errors for corrupted
+    ...  and for operator.
+    [Tags]  Get_Root_Certificate_And_Send_Corrupted_CSR_From_Admin_CSR_Request_From_Operator_Concurrently
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+Get Root Certificate From Operator And Send Corrupted CSR Request And CSR Request From Admin Concurrently
+    [Documentation]  Get root certificate from operator and send corrupted csr request
+    ...  and csr from admin and verify errors for operator and corrupted csr and signed certificate
+    ...  for valid csr.
+    [Tags]  Get_Root_Certificate_From_Operator_And_Send_Corrupted_CSR_Request_And_CSR_Request_From_Admin_Concurrently
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+
+Get Root Certificate From Operator And Admin Send CSR Request From Admin Concurrently
+    [Documentation]  Get root certificate from operator and admin and
+    ...  and send csr request from admin concurrently and verify error for operator
+    ...  and admin gets root and signed certificate.
+    [Tags]  Get_Root_Certificate_From_Operator_And_Admin_Send_CSR_Request_From_Admin_Concurrently
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
 *** Keywords ***
 
 Generate CSR String
