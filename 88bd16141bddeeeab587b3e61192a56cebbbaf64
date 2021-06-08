@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "352f9fec_ce81877a",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-08T09:33:22Z",
+      "side": 1,
+      "message": "Redfish.Get Properties",
+      "range": {
+        "startLine": 150,
+        "startChar": 14,
+        "endLine": 150,
+        "endChar": 25
+      },
+      "revId": "88bd16141bddeeeab587b3e61192a56cebbbaf64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
