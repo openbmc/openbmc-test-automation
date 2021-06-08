@@ -160,6 +160,19 @@ Verify Redfish FirmwareInventory Is Updateable
     END
 
 
+Verify Redfish Functional Version Is Same
+    [Documentation]  Verify the redfish firmware version is same..
+    [Tags]  Verify_Redfish_Functional_Version_Is_Same
+
+    ${sw_inv}=  Get Functional Firmware  BMC image
+    ${sw_inv}=  Get Non Functional Firmware  ${sw_inv}  True
+
+    ${firmware_version}=  Redfish.Get Attribute
+    ...  ${REDFISH_BASE_URI}Managers/bmc  FirmwareVersion
+
+    Should Be Equal  ${sw_inv['version']}  ${firmware_version}
+
+
 Verify Redfish BIOS Version
     [Documentation]  Get host firmware version from system inventory.
     [Tags]  Verify_Redfish_BIOS_Version
