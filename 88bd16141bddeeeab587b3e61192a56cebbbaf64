@@ -22,6 +22,30 @@
       "revId": "88bd16141bddeeeab587b3e61192a56cebbbaf64",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b6f2ac1_2eafe1be",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-06-08T10:06:53Z",
+      "side": 1,
+      "message": "Used Redfish_Utils.Get Member List as it list all the firmware id path.",
+      "parentUuid": "352f9fec_ce81877a",
+      "range": {
+        "startLine": 150,
+        "startChar": 14,
+        "endLine": 150,
+        "endChar": 25
+      },
+      "revId": "88bd16141bddeeeab587b3e61192a56cebbbaf64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
