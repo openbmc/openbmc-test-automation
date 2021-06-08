@@ -76,7 +76,7 @@ Test BMC Websocket Dump Interface
     [Documentation]  Verify dumps are reported over the websocket interface.
     [Tags]  Test_BMC_Websocket_Dump_Interface
 
-    Delete All BMC Dump
+    Redfish Delete All BMC Dumps
     Start Websocket Monitor  dump
     ${dump_id}=  Create User Initiated Dump
     Check Existence Of BMC Dump File  ${dump_id}
@@ -168,7 +168,7 @@ Test Teardown Execution
     Run Keyword If  '${TEST_STATUS}' == 'FAIL'  Print Websocket Monitor Log
     Kill Websocket Monitor
 
-    Delete All BMC Dump
+    Redfish Delete All BMC Dumps
 
 
 Suite Teardown Execution

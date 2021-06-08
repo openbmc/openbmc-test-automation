@@ -63,7 +63,7 @@ Suite Setup Execution
     Valid File Path  IMAGE_FILE_PATH
     Enable Field Mode And Verify Unmount
     Redfish.Login
-    Delete All BMC Dump
+    Redfish Delete All BMC Dumps
     Redfish Purge Event Log
 
 

@@ -101,7 +101,7 @@ Reset Fans And Error Logs
     Reset Fans  ${fan_names}
     Run Key U  Sleep \ 15s
     Delete All Error Logs
-    Delete All BMC Dump
+    Redfish Delete All BMC Dumps
     Set System LED State  front_fault  Off
     Set System LED State  rear_fault  Off
 
