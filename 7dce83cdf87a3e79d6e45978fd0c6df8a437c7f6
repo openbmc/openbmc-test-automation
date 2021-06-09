@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50545157_144be1e2",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-09T08:36:39Z",
+      "side": 1,
+      "message": "trap for system up time.",
+      "range": {
+        "startLine": 163,
+        "startChar": 33,
+        "endLine": 163,
+        "endChar": 43
+      },
+      "revId": "7dce83cdf87a3e79d6e45978fd0c6df8a437c7f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bf986d1_914fee5c",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-09T08:36:39Z",
+      "side": 1,
+      "message": "trap for system uptime after BMC reboot.",
+      "range": {
+        "startLine": 170,
+        "startChar": 33,
+        "endLine": 170,
+        "endChar": 42
+      },
+      "revId": "7dce83cdf87a3e79d6e45978fd0c6df8a437c7f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95aa7839_bac4081a",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-09T08:36:39Z",
+      "side": 1,
+      "message": "Generate error on BMC and verify if trap is sent.",
+      "range": {
+        "startLine": 185,
+        "startChar": 54,
+        "endLine": 185,
+        "endChar": 64
+      },
+      "revId": "7dce83cdf87a3e79d6e45978fd0c6df8a437c7f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e94dd869_a5df0b7e",
+        "filename": "snmp/test_bmc_snmp_config.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-09T08:36:39Z",
+      "side": 1,
+      "message": "As its a test case variable keep it all small latter ${snmp_trap}",
+      "range": {
+        "startLine": 211,
+        "startChar": 16,
+        "endLine": 211,
+        "endChar": 25
+      },
+      "revId": "7dce83cdf87a3e79d6e45978fd0c6df8a437c7f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
