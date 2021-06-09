@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "c222b589_e139bc61",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d1293ed_9a9f40f4",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 59
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4944b4ba_0ed19530",
         "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
         "patchSetId": 11
@@ -68,6 +92,30 @@
       "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0d98fa4_131aa229",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4944b4ba_0ed19530",
+      "range": {
+        "startLine": 104,
+        "startChar": 21,
+        "endLine": 104,
+        "endChar": 94
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "c9d0aabb_ca7ddbc1",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f8abb02_17853118",
+      "range": {
+        "startLine": 105,
+        "startChar": 12,
+        "endLine": 105,
+        "endChar": 71
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d71ad4a_1eb4d62c",
         "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
         "patchSetId": 11
@@ -105,6 +177,30 @@
       "writtenOn": "2021-06-04T09:09:18Z",
       "side": 1,
       "message": "I believe these needs to be provided via running robot test cases. If yes, add in the documentation info about all the parameters which are required to run this suite.",
+      "range": {
+        "startLine": 108,
+        "startChar": 61,
+        "endLine": 108,
+        "endChar": 94
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1585f11e_4b6e268d",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "I will add that in next commit",
+      "parentUuid": "2d71ad4a_1eb4d62c",
       "range": {
         "startLine": 108,
         "startChar": 61,
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "756a82a3_ec1a6a8f",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26373f74_7a316099",
+      "range": {
+        "startLine": 181,
+        "startChar": 26,
+        "endLine": 181,
+        "endChar": 31
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd87bc1b_2138d176",
         "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
         "patchSetId": 11
@@ -160,6 +280,30 @@
       "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cfa877b_ac689d96",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd87bc1b_2138d176",
+      "range": {
+        "startLine": 182,
+        "startChar": 69,
+        "endLine": 182,
+        "endChar": 73
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -186,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "8e2c2d03_6997620f",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5ca9221_e9389d63",
+      "range": {
+        "startLine": 186,
+        "startChar": 41,
+        "endLine": 186,
+        "endChar": 45
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "868313e7_3b4ea2f3",
         "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
         "patchSetId": 11
@@ -206,6 +374,30 @@
       "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "296e696b_2fe5b782",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "868313e7_3b4ea2f3",
+      "range": {
+        "startLine": 187,
+        "startChar": 23,
+        "endLine": 187,
+        "endChar": 42
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -232,6 +424,30 @@
     },
     {
       "key": {
+        "uuid": "e69f28b8_99abf7f9",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "548b234e_c6c956d6",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 36
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1eef12f0_c14456f3",
         "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
         "patchSetId": 11
@@ -255,6 +471,30 @@
     },
     {
       "key": {
+        "uuid": "5593ad42_f2a865e5",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1eef12f0_c14456f3",
+      "range": {
+        "startLine": 212,
+        "startChar": 44,
+        "endLine": 212,
+        "endChar": 53
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "142544cc_60829d55",
         "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
         "patchSetId": 11
@@ -275,6 +515,30 @@
       "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c13a0d9_3ee08a14",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-09T10:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "142544cc_60829d55",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 71
+      },
+      "revId": "4a35c48257e61d1dc2a8a4fbf8f55b11085f6518",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
