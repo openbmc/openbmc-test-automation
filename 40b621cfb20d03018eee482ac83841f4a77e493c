@@ -16,6 +16,24 @@
       "revId": "40b621cfb20d03018eee482ac83841f4a77e493c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4197b48_641765d2",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-06-09T10:48:45Z",
+      "side": 1,
+      "message": "Its actually different combinations of keywords(run concurrently) in each testcase . so, can\u0027t use a template. May be, we had discussed on this in beginning commits.",
+      "parentUuid": "ea7fc4a3_88a7ee21",
+      "revId": "40b621cfb20d03018eee482ac83841f4a77e493c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
