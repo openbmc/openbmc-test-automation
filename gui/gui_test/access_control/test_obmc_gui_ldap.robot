@@ -4,9 +4,8 @@ Documentation  Test OpenBMC GUI "LDAP" sub-menu of "Access control".
 
 Resource        ../../lib/gui_resource.robot
 
-Suite Setup     Launch Browser And Login GUI
+Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
-Test Setup      Test Setup Execution
 
 
 *** Variables ***
@@ -69,7 +68,7 @@ Verify LDAP Configurations Editable
     [Tags]  Verify_LDAP_Configurations_Editable
 
     Create LDAP Configuration ${LDAP_SERVER_URI}  ${LDAP_TYPE}  ${LDAP_BIND_DN}
-    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}  ${LDAP_MODE}
     Wait Until Page Contains Element  ${xpath_ldap_url}
     Textfield Value Should Be  ${xpath_ldap_url}  ${LDAP_SERVER_URI}
     Textfield Value Should Be  ${xpath_ldap_bind_dn}  ${LDAP_BIND_DN}
@@ -94,7 +93,7 @@ Verify LDAP Config Update With Incorrect LDAP IP Address
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     Create LDAP Configuration  ${incorrect_ip}   ${LDAP_TYPE}  ${LDAP_BIND_DN}
-    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}  ${LDAP_MODE}
 
     Get LDAP Configuration  ${LDAP_TYPE}
     Redfish.Logout
@@ -131,8 +130,10 @@ Verify LDAP Service Disable
 
 *** Keywords ***
 
-Test Setup Execution
+Suite Setup Execution
     [Documentation]  Do test case setup tasks.
+
+    Launch Browser And Login GUI
 
     # Navigate to https://xx.xx.xx.xx/#/access-control/ldap  LDAP page.
 
@@ -140,12 +141,23 @@ Test Setup Execution
     Click Element  ${xpath_ldap_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
 
+    Valid Value  LDAP_TYPE  valid_values=["ActiveDirectory", "LDAP"]
+    Valid Value  LDAP_USER
+    Valid Value  LDAP_USER_PASSWORD
+    Valid Value  GROUP_PRIVILEGE
+    Valid Value  GROUP_NAME
+    Valid Value  LDAP_SERVER_URI
+    Valid Value  LDAP_BIND_DN_PASSWORD
+    Valid Value  LDAP_BIND_DN
+    Valid Value  LDAP_BASE_DN
+    Valid Value  LDAP_MODE  valid_values=["secure", "nonsecure"]
+
 
 Create LDAP Configuration
     [Documentation]  Create LDAP configuration.
     [Arguments]  ${ldap_server_uri}=${LDAP_SERVER_URI}  ${ldap_servicetype}=${LDAP_TYPE}
     ...  ${ldap_bind_dn}=${LDAP_BIND_DN}  ${ldap_bind_dn_password}=${LDAP_BIND_DN_PASSWORD}
-    ...  ${ldap_base_dn}=${LDAP_BASE_DN}
+    ...  ${ldap_base_dn}=${LDAP_BASE_DN}  ${ldap_mode}=${LDAP_MODE}
 
     # Description of argument(s):
     # ldap_server_uri        LDAP server uri (e.g. ldap://XX.XX.XX.XX).
@@ -153,6 +165,7 @@ Create LDAP Configuration
     # ldap_bind_dn           The LDAP bind distinguished name.
     # ldap_bind_dn_password  The LDAP bind distinguished name password.
     # ldap_base_dn           The LDAP base distinguished name.
+    # ldap_mode              The LDAP mode (e.g. secure or nonsecure)
 
     Select Checkbox  ${xpath_enable_ldap_checkbox}
     Checkbox Should Be Selected  ${xpath_enable_ldap_checkbox}
@@ -161,6 +174,12 @@ Create LDAP Configuration
     Run Keyword If  '${ldap_service_type}' == 'LDAP'
     ...  Click Element At Coordinates  ${radio_buttons}[${0}]  0  0
     ...  ELSE  Click Element At Coordinates  ${radio_buttons}[${1}]  0  0
+
+    Run Keyword If  '${ldap_mode}' == 'secure'
+    ...  Run Keywords  Select Checkbox  ${xpath_secure_ldap_checkbox}  AND
+    ...  Checkbox Should Be Selected  ${xpath_secure_ldap_checkbox}
+    ...  ELSE  Run Keywords  Unselect Checkbox  ${xpath_secure_ldap_checkbox}  AND
+    ...  Checkbox Should Not Be Selected  ${xpath_secure_ldap_checkbox}
 
     Wait Until Page Contains Element  ${xpath_ldap_url}
     Input Text  ${xpath_ldap_url}  ${ldap_server_uri}
