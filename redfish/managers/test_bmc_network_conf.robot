@@ -171,8 +171,6 @@ Configure Loopback IP
 Add Valid IPv4 Address And Check Persistency
     [Documentation]  Add IPv4 address and check peristency.
     [Tags]  Add_Valid_IPv4_Addres_And_Check_Persistency
-    [Teardown]  Run Keywords
-    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
 
@@ -180,6 +178,7 @@ Add Valid IPv4 Address And Check Persistency
     OBMC Reboot (off)
     Redfish.Login
     Verify IP On BMC  ${test_ipv4_addr}
+    Delete IP Address  ${test_ipv4_addr}
 
 Add Fourth Octet Threshold IP And Verify
     [Documentation]  Add fourth octet threshold IP and verify.
