@@ -16,6 +16,24 @@
       "revId": "e9c8a341f01a8fb90db7755e6f03542430ab8384",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31ce1568_dfcc23f3",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-10T13:09:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab872027_c6bda642",
+      "revId": "e9c8a341f01a8fb90db7755e6f03542430ab8384",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
