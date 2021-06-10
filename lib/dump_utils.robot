@@ -257,10 +257,10 @@ Create User Initiated BMC Dump Using Redfish
 Auto Generate BMC Dump
     [Documentation]  Auto generate BMC dump.
 
-    ${stdout}  ${stderr}  ${rc}=
-    ...  BMC Execute Command
-    ...  busctl --verbose call xyz.openbmc_project.Dump.Manager
+    ${cmd}=  Catenate  busctl --verbose call xyz.openbmc_project.Dump.Manager
     ...  /xyz/openbmc_project/dump/bmc xyz.openbmc_project.Dump.Create CreateDump a{ss} 0
+    ${stdout}  ${stderr}  ${rc}=
+    ...  BMC Execute Command  ${cmd}
     [Return]  ${stdout}  ${stderr}  ${rc}
 
 Get Dump Size
