@@ -254,3 +254,57 @@ class bmc_redfish(redfish_plus):
                     # Data still needs to be looked up,
                     else:
                         self.__pending_enumeration.add(value)
+
+    def get_members_list(self, resource_path, filter=None):
+        r"""
+        Return members list in a given URL.
+
+        Description of argument(s):
+        resource_path    URI resource absolute path (e.g. "/redfish/v1/AccountService/Accounts").
+        filter           strings or regex
+
+        /redfish/v1/AccountService/Accounts/
+        {
+            "@odata.id": "/redfish/v1/AccountService/Accounts",
+            "@odata.type": "#ManagerAccountCollection.ManagerAccountCollection",
+            "Description": "BMC User Accounts",
+            "Members": [
+                {
+                    "@odata.id": "/redfish/v1/AccountService/Accounts/root"
+                },
+                {
+                    "@odata.id": "/redfish/v1/AccountService/Accounts/admin"
+                }
+           ],
+           "Members@odata.count": 2,
+           "Name": "Accounts Collection"
+        }
+
+        Return list of members if no filter is applied as:
+        ['/redfish/v1/AccountService/Accounts/root', "/redfish/v1/AccountService/Accounts/admin"]
+
+        Return list of members if filter (e.g "root") is applied as:
+        ['/redfish/v1/AccountService/Accounts/root']
+
+
+        Calling from robot code:
+           ${resp}=  Redfish.Get Members List  /redfish/v1/AccountService/Accounts
+           ${resp}=  Redfish.Get Members List  /redfish/v1/AccountService/Accounts  filter=root
+        """
+
+        member_list = []
+        self._rest_response_ = self.get(resource_path, valid_status_codes=[200])
+
+        try:
+            for member in self._rest_response_.dict["Members"]:
+                member_list.append(member["@odata.id"])
+        except KeyError:
+            # Non Members child objects at the top level, ignore.
+            pass
+
+        # Filter elements in the list and return matched elements.
+        if filter is not None:
+            regex = '.*/' + filter + '[^/]*$'
+            return [x for x in member_list if re.match(regex, x)]
+
+        return member_list
