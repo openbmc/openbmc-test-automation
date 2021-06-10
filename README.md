@@ -75,6 +75,7 @@ These documents contain details on developing OpenBMC test code and debugging.
 
  - [MAINTAINERS](MAINTAINERS): OpenBMC test code maintainers information.
  - [CONTRIBUTING.md](CONTRIBUTING.md): Coding guidelines.
+ - [Code Check Tools](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/code_standards_check.md): To check common code misspellings, syntax and standard checks.
  - [REST-cheatsheet.md](https://github.com/openbmc/docs/blob/master/REST-cheatsheet.md): Quick reference for some common
    curl commands required for legacy REST testing.
  - [REDFISH-cheatsheet.md](https://github.com/openbmc/docs/blob/master/REDFISH-cheatsheet.md): Quick reference for some common
