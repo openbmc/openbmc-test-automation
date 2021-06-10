@@ -42,6 +42,9 @@
 Packages required to be installed for OpenBmc Automation.
 Install the packages and it's dependencies via `pip`
 
+If using Python 3.x, use the corresponding `pip3` to install packages.
+Note: Older Python 2.x is not actively supported.
+
     REST base packages:
     ```
     $ pip install -U requests
@@ -62,12 +65,16 @@ Install the packages and it's dependencies via `pip`
     $ pip install robotframework-scplibrary
     ```
 
+    Installing requirement dependencies:
+    ```
+    $ pip install -r requirements.txt
+    ```
+    you'll find this file once your clone openbmc-test-automation repository.
+
     Installing tox:
     ```
     $ pip install -U tox
     ```
-
-If using Python 3.x, use the corresponding `pip3` to install packages.
 
 ## OpenBMC Test Development ##
 
