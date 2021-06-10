@@ -45,36 +45,36 @@ Install the packages and it's dependencies via `pip`
 If using Python 3.x, use the corresponding `pip3` to install packages.
 Note: Older Python 2.x is not actively supported.
 
-    REST base packages:
-    ```
+REST base packages:
+```
     $ pip install -U requests
     $ pip install -U robotframework-requests
     $ pip install -U robotframework-httplibrary
-    ```
+```
 
-    Python redfish library packages:
-    For more detailed intstructions see [python-redfish-library](https://github.com/DMTF/python-redfish-library)
-    ```
+Python redfish library packages:
+For more detailed intstructions see [python-redfish-library](https://github.com/DMTF/python-redfish-library)
+```
     $ pip install redfish
-    ```
+```
 
-    SSH and SCP base packages:
-    For more detailed installation instructions see [robotframework-sshlibrary](https://pypi.python.org/pypi/robotframework-sshlibrary)
-    ```
+SSH and SCP base packages:
+For more detailed installation instructions see [robotframework-sshlibrary](https://pypi.python.org/pypi/robotframework-sshlibrary)
+```
     $ pip install robotframework-sshlibrary
     $ pip install robotframework-scplibrary
-    ```
+```
 
-    Installing requirement dependencies:
-    ```
+Installing requirement dependencies:
+```
     $ pip install -r requirements.txt
-    ```
-    you'll find this file once your clone openbmc-test-automation repository.
+```
+you'll find this file once your clone openbmc-test-automation repository.
 
-    Installing tox:
-    ```
+Installing tox:
+```
     $ pip install -U tox
-    ```
+```
 
 ## OpenBMC Test Development ##
 
