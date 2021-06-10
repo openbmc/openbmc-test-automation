@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9278aa0_ba00d39c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-10T07:16:56Z",
+      "side": 1,
+      "message": "what is the error or issue is found here?",
+      "revId": "ce13647a43b41740640587187b9ba5caf02c6d2a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65bcc21a_eaafd750",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-10T07:16:56Z",
+      "side": 1,
+      "message": "why are you checking default gateway in the list of IPv6 addresses that are configured on BMC?",
+      "revId": "ce13647a43b41740640587187b9ba5caf02c6d2a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
