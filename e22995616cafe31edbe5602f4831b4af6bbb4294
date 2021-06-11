@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fe38332_81ca34ed",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-11T05:44:50Z",
+      "side": 1,
+      "message": "this should got to line# 178?",
+      "revId": "e22995616cafe31edbe5602f4831b4af6bbb4294",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
