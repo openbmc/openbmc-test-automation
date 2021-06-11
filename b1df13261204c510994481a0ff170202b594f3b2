@@ -16,6 +16,24 @@
       "revId": "b1df13261204c510994481a0ff170202b594f3b2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c6c3901_33bfb116",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-11T13:25:03Z",
+      "side": 1,
+      "message": "No, not assigning different host name to each interface",
+      "parentUuid": "5a4bee9b_5a790e52",
+      "revId": "b1df13261204c510994481a0ff170202b594f3b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
