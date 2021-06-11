@@ -55,7 +55,7 @@ Verify IPv6 On BMC
 
 Verify IPv6 Default Gateway On BMC
     [Documentation]  Verify IPv6 default gateway on BMC.
-    [Arguments]  ${gateway_ip}=${EMPTY}
+    [Arguments]  ${gateway_ip}=0:0:0:0:0:0:0:0
 
     # Description of argument(s):
     # gateway_ip  Gateway IPv6 address.
@@ -64,7 +64,7 @@ Verify IPv6 Default Gateway On BMC
 
     # If gateway IP is empty it will not have route entry.
 
-    Run Keyword If  '${gateway_ip}' == '${EMPTY}'
+    Run Keyword If  '${gateway_ip}' == '0:0:0:0:0:0:0:0'
     ...      Pass Execution  Gateway IP is not configured.
     ...  ELSE
     ...      Should Contain  ${route_info}  ${gateway_ip}

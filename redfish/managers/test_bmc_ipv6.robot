@@ -10,6 +10,7 @@ Library        Collections
 
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
+Suite Setup    Suite Setup Execution
 
 
 *** Variables ***
@@ -49,6 +50,15 @@ Get IPv6 Default Gateway And Verify
 
 
 *** Keywords ***
+
+Suite Setup Execution
+    [Documentation]  Do suite setup execution.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Set Suite variable  ${ethernet_interface}
+
 
 Test Setup Execution
     [Documentation]  Test setup execution.
