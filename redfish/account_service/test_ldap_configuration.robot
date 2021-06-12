@@ -19,6 +19,7 @@ ${old_ldap_privilege}   ${EMPTY}
 &{old_account_service}  &{EMPTY}
 &{old_ldap_config}      &{EMPTY}
 ${hostname}             ${EMPTY}
+${original_ntp}         ${EMPTY}
 ${test_ip}              10.6.6.6
 ${test_mask}            255.255.255.0
 
@@ -220,7 +221,7 @@ Update LDAP Group Name And Verify Operations
     [Documentation]  Verify that LDAP group name update and able to do right
     ...  operations.
     [Tags]  Update_LDAP_Group_Name_And_Verify_Operations
-    [Template]  Update LDAP Config And Verify Set Host Name
+    [Template]  Update LDAP Config And Verify Set NTP
     [Teardown]  Restore LDAP Privilege
 
     # group_name             group_privilege  valid_status_codes
@@ -533,6 +534,44 @@ Redfish Verify LDAP Login
     Redfish.Login
 
 
+Update LDAP Config And Verify Set NTP
+    [Documentation]  Update LDAP config and verify by attempting to set NTP.
+    [Arguments]  ${group_name}  ${group_privilege}=Administrator
+    ...  ${valid_status_codes}=[${HTTP_OK}]
+    ...  ${extra_status_codes}=[${HTTP_OK}]
+
+    # Description of argument(s):
+    # group_name                    The group name of user.
+    # group_privilege               The group privilege ("Administrator",
+    #                               "Operator", "User" or "Callback").
+    # valid_status_codes            Expected return code(s) from patch
+    #                               operation (e.g. "200") used to update
+    #                               HostName.  See prolog of rest_request
+    #                               method in redfish_plut.py for details.
+    #Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    #...  ${group_privilege}  ${group_name}
+    ${local_role_remote_group}=  Create Dictionary  LocalRole=${group_privilege}  RemoteGroup=${group_name}
+    ${remote_role_mapping}=  Create List  ${local_role_remote_group}
+    ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
+    ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+    ...  valid_status_codes=${extra_status_codes}
+    # Provide adequate time for LDAP daemon to restart after the update.
+    Sleep  15s
+    #
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    # Verify that the LDAP user in ${group_name} with the given privilege is
+    # allowed to change the NTP.
+    Run Keyword If  '${original_ntp["ProtocolEnabled"]}' == 'True'
+    ...    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${True}}}
+    ...    valid_status_codes=${valid_status_codes}
+    ...  ELSE
+    ...    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${False}}}
+    ...    valid_status_codes=${valid_status_codes}
+    Redfish.Logout
+    Redfish.Login
+
+
 Update LDAP Config And Verify Set Host Name
     [Documentation]  Update LDAP config and verify by attempting to set host name.
     [Arguments]  ${group_name}  ${group_privilege}=Administrator
@@ -653,6 +692,8 @@ Suite Setup Execution
     Disable Other LDAP
     Create LDAP Configuration
     ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    ${original_ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
+    Set Suite Variable  ${original_ntp}
 
 
 Set Read Privilege And Check Firmware Inventory
