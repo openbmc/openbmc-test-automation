@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1441d07d_3249d563",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T06:06:15Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "a1a1c6c1a2bb9f223512532e44ae17fe5896c8ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38905014_f576248d",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T06:06:15Z",
+      "side": 1,
+      "message": "u mean to say\n\n addresses and ports.",
+      "range": {
+        "startLine": 15,
+        "startChar": 64,
+        "endLine": 15,
+        "endChar": 82
+      },
+      "revId": "a1a1c6c1a2bb9f223512532e44ae17fe5896c8ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24627e6f_8f5855c9",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T06:06:15Z",
+      "side": 1,
+      "message": "can we have both ?  200 and 201 ?",
+      "range": {
+        "startLine": 45,
+        "startChar": 71,
+        "endLine": 45,
+        "endChar": 83
+      },
+      "revId": "a1a1c6c1a2bb9f223512532e44ae17fe5896c8ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0030ee16_17fe7ad0",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T06:06:15Z",
+      "side": 1,
+      "message": "data",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 19
+      },
+      "revId": "a1a1c6c1a2bb9f223512532e44ae17fe5896c8ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85c87fdc_b391ea88",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T06:06:15Z",
+      "side": 1,
+      "message": "Verify SNMP Manager Configured On BMC",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 26
+      },
+      "revId": "a1a1c6c1a2bb9f223512532e44ae17fe5896c8ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35830b3e_2dff537d",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T06:06:15Z",
+      "side": 1,
+      "message": "u wont need this",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 19
+      },
+      "revId": "a1a1c6c1a2bb9f223512532e44ae17fe5896c8ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95618037_c0c21330",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T06:06:15Z",
+      "side": 1,
+      "message": "subscription_uri\n\nsince this is not really a snmp URI",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 10
+      },
+      "revId": "a1a1c6c1a2bb9f223512532e44ae17fe5896c8ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89d630d9_c4650081",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T06:06:15Z",
+      "side": 1,
+      "message": "Add a code setup check to ensure these IP and defaults are key in.. and exit out before being execute",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 69
+      },
+      "revId": "a1a1c6c1a2bb9f223512532e44ae17fe5896c8ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
