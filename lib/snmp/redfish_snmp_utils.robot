@@ -115,3 +115,52 @@ Get SNMP Child URIs
     @{snmp_mgr_uris}=  Redfish.Get Members List  ${subscription_uri}  filter=snmp
 
     [Return]  ${snmp_mgr_uris}
+
+
+Delete SNMP Manager Via Redfish
+    [Documentation]  Delete SNMP manager.
+    [Arguments]  ${snmp_mgr_ip}  ${snmp_port}
+
+    # Description of argument(s):
+    # snmp_mgr_ip  SNMP manager IP.
+    # snmp_port    Network port where SNMP manager is listening.
+
+    ${is_snmp_found}=  Set Variable  ${False}
+    ${snmp_ip_port}=  Catenate  ${snmp_mgr_ip}:${snmp_port}
+
+    # Get the list of SNMP manager URIs.
+    @{snmp_mgr_uris}=  Get SNMP Child URIs
+
+    # Find the SNMP manager URI that has IP and port configured.
+    FOR  ${snmp_mgr_uri}  IN  @{snmp_mgr_uris}
+      # Sample output:
+      # {
+      #  "@odata.id": "/redfish/v1/EventService/Subscriptions/snmp1",
+      #  "@odata.type": "#EventDestination.v1_7_0.EventDestination",
+      #  "Context": "",
+      #  "Destination": "snmp://xx.xx.xx.xx:162",
+      #  "EventFormatType": "Event",
+      #  "Id": "snmp1",
+      #  "Name": "Event Destination snmp1",
+      #  "Protocol": "SNMPv2c",
+      #  "SubscriptionType": "SNMPTrap"
+
+      # Find the SNMP manager that has matching destination details.
+      ${snmp_mgr}=  Redfish.Get Attribute  ${snmp_mgr_uri}  Destination
+
+      # Delete the SNMP manager if the requested IP & ports are found
+      # and mark is_snmp_found to true.
+      Run Keyword If  'snmp://${snmp_ip_port}' == '${snmp_mgr}'
+      ...  Run Keywords  Set Local Variable  ${is_snmp_found}  ${True}
+      ...  AND  Redfish.Delete  ${snmp_mgr_uri}
+      ...  AND  Exit For Loop
+    END
+
+    Pass Execution If  ${is_snmp_found} == ${False}
+    ...  SNMP Manager: ${snmp_mgr_ip}:${snmp_port} is not configured on BMC
+
+    # Check if the SNMP manager is really deleted from BMC.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${snmp_mgr_ip}  ${snmp_port}
+
+    Should Be Equal  ${status}  ${False}  msg=SNMP manager is not deleted in the backend.
