@@ -28,6 +28,7 @@ ${subscription_uri}  /redfish/v1/EventService/Subscriptions
 Configure SNMP Manager On BMC And Verify
     [Documentation]  Configure SNMP manager on BMC via Redfish and verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_And_Verify
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
     Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}  ${HTTP_CREATED}
 
