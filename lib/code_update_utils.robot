@@ -552,6 +552,47 @@ Check Image Update Progress State
     Valid Value  state  valid_values=[${match_state}]
 
 
+Get Image Id
+    [Documentation]  Get image id.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state    The expected state. This may be one or more comma-separated values
+    #                (e.g. "Disabled", "Disabled, Updating"). If the actual state matches
+    #                any of the states named in this argument, this keyword passes.
+
+    ${sw_member_list}=  Redfish_Utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+
+    FOR  ${sw_member}  IN  @{sw_member_list}
+      ${state}=  Get Image State  ${sw_member}
+      ${result}=  Run Keyword And Return Status  Should Be Equal As Strings  '${state}'  ${match_state}
+      Return From Keyword If  ${result} == True  ${sw_member.split('/')[-1]}
+    END
+
+    [Return]  ${sw_member_list}
+
+
+Get Image State
+    [Documentation]  Get image state.
+    [Arguments]  ${sw_member}
+
+    # Description of argument(s):
+    # sw_member         Software object path.
+    #                   (e.g. "/xyz/openbmc_project/software/f3b29aa8").
+
+    # In this example, this keyword would return the value "Enabled".
+    #  "Status": {
+    #              "Health": "OK",
+    #              "HealthRollup": "OK",
+    #              "State": "Enabled"
+    #            },}
+
+    ${status}=  Redfish.Get Attribute  ${sw_member}  Status
+    Rprint Vars  status
+
+    [Return]  ${status["State"]}
+
+
 Get Image Update Progress State
     [Documentation]  Return the current state of the image update.
     [Arguments]  ${image_id}
