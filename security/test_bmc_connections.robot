@@ -34,7 +34,10 @@ Test Patch Without Auth Token Fails
     [Documentation]  Send patch method without auth token and verify it throws an error.
     [Tags]   Test_Patch_Without_Auth_Token_Fails
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'HostName': '${hostname}'}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
 
@@ -43,10 +46,13 @@ Flood Patch Without Auth Token And Check Stability Of BMC
     [Tags]  Flood_Patch_Without_Auth_Token_And_Check_Stability_Of_BMC
     @{status_list}=  Create List
 
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
     FOR  ${i}  IN RANGE  ${1}  ${iterations}
         Log To Console  ${i}th iteration
         Run Keyword And Ignore Error
-        ...  Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'HostName': '${hostname}'}
+        ...  Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body={'HostName': '${hostname}'}
 
         # Every 100th iteration, check BMC allows patch with auth token.
         ${status}=  Run Keyword If  ${i} % 100 == 0  Run Keyword And Return Status
