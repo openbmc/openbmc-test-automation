@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "564ff8ec_724e6faa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T15:25:23Z",
+      "side": 1,
+      "message": "Support to delete SNMP configuration\n\n\nChanges:\n    - Added new keyword to delete SNMP manager and verify.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 69
+      },
+      "revId": "dd644da18e3ccf3be96306d1d0d2692ad563b79e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf2d19ec_89b6aa71",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T15:25:23Z",
+      "side": 1,
+      "message": "align",
+      "range": {
+        "startLine": 125,
+        "startChar": 19,
+        "endLine": 126,
+        "endChar": 63
+      },
+      "revId": "dd644da18e3ccf3be96306d1d0d2692ad563b79e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4123d55_320d60c4",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T15:25:23Z",
+      "side": 1,
+      "message": "${snmp_mgr} \u003d  Get Attribute  ${snmp_mgr_uri}    Destination",
+      "range": {
+        "startLine": 149,
+        "startChar": 6,
+        "endLine": 150,
+        "endChar": 66
+      },
+      "revId": "dd644da18e3ccf3be96306d1d0d2692ad563b79e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47137bcb_9973fe11",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T15:25:23Z",
+      "side": 1,
+      "message": "Simplify like this\n\n     Continue For Loop If    \u0027snmp://${snmp_ip_port}\u0027 !\u003d \u0027${snmp_mgr}\u0027\n     Redfish.Delete  ${snmp_mgr_uri}",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 47
+      },
+      "revId": "dd644da18e3ccf3be96306d1d0d2692ad563b79e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f4c71a1_240edda7",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-14T15:25:23Z",
+      "side": 1,
+      "message": "its already deleted clean there.. so u wont need this.. remove it.. .the next line of codes does the work..",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 75
+      },
+      "revId": "dd644da18e3ccf3be96306d1d0d2692ad563b79e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
