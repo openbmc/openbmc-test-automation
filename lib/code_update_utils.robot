@@ -552,6 +552,27 @@ Check Image Update Progress State
     Valid Value  state  valid_values=[${match_state}]
 
 
+Get Image Id
+    [Documentation]  Get image id.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state    The expected state. This may be one or more comma-separated values
+    #                (e.g. "Disabled", "Disabled, Updating"). If the actual state matches
+    #                any of the states named in this argument, this keyword passes.
+
+    ${sw_member_list}=  Redfish_Utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+
+    ${sw_member_ids}=  Create List
+    FOR  ${sw_member}  IN  @{sw_member_list}
+      Append To List   ${sw_member_ids}  ${sw_member.split('/')[-1]}
+      ${status}=  Redfish.Get Attribute  ${sw_member}  Status
+      Return From Keyword If  '${status['State']}' == ${match_state}  ${sw_member.split('/')[-1]}
+    END
+
+    [Return]  ${sw_member_list}
+
+
 Get Image Update Progress State
     [Documentation]  Return the current state of the image update.
     [Arguments]  ${image_id}
