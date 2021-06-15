@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0aa88061_02634ab4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-15T06:37:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "564ff8ec_724e6faa",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 69
+      },
+      "revId": "dd644da18e3ccf3be96306d1d0d2692ad563b79e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf2d19ec_89b6aa71",
         "filename": "lib/snmp/redfish_snmp_utils.robot",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "974b3e6a_743dae9d",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-15T06:37:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf2d19ec_89b6aa71",
+      "range": {
+        "startLine": 125,
+        "startChar": 19,
+        "endLine": 126,
+        "endChar": 63
+      },
+      "revId": "dd644da18e3ccf3be96306d1d0d2692ad563b79e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4123d55_320d60c4",
         "filename": "lib/snmp/redfish_snmp_utils.robot",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2021-06-14T15:25:23Z",
       "side": 1,
       "message": "${snmp_mgr} \u003d  Get Attribute  ${snmp_mgr_uri}    Destination",
+      "range": {
+        "startLine": 149,
+        "startChar": 6,
+        "endLine": 150,
+        "endChar": 66
+      },
+      "revId": "dd644da18e3ccf3be96306d1d0d2692ad563b79e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c3531b2_0158cf13",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-15T06:37:21Z",
+      "side": 1,
+      "message": "Awesome, thanks",
+      "parentUuid": "a4123d55_320d60c4",
       "range": {
         "startLine": 149,
         "startChar": 6,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "3679f79d_a82adeb5",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-15T06:37:21Z",
+      "side": 1,
+      "message": "this is required to handle:\nIf user enters dummy IP or SNMP manager which does not exist on BMC",
+      "parentUuid": "47137bcb_9973fe11",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 47
+      },
+      "revId": "dd644da18e3ccf3be96306d1d0d2692ad563b79e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8f4c71a1_240edda7",
         "filename": "lib/snmp/redfish_snmp_utils.robot",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2021-06-14T15:25:23Z",
       "side": 1,
       "message": "its already deleted clean there.. so u wont need this.. remove it.. .the next line of codes does the work..",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 75
+      },
+      "revId": "dd644da18e3ccf3be96306d1d0d2692ad563b79e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae0c047a_98fb5710",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-15T06:37:21Z",
+      "side": 1,
+      "message": "This is needed to ensure user is informed what has happened",
+      "parentUuid": "8f4c71a1_240edda7",
       "range": {
         "startLine": 159,
         "startChar": 0,
