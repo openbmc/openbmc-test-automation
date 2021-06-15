@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5e4accb_d82889f2",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-15T07:04:47Z",
+      "side": 1,
+      "message": "My suggestion:\n      Run Keyword If  \u0027snmp://${snmp_ip_port}\u0027 \u003d\u003d \u0027${snmp_mgr}\u0027\n      ...  Run Keywords  Set Local Variable  ${is_snmp_found}  ${True}\n      ...  AND  Redfish.Delete  ${snmp_mgr_uri} AND  Exit For Loop\n\nif snmp manager found at first or middle iteration, delete it and exit loop ,without executing remaining iterations.",
+      "revId": "4b8a9123f1ce1b8719b9e0f99ab18cb1e59273f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66c4f75e_d031c690",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-15T07:04:47Z",
+      "side": 1,
+      "message": "are you passing testcase if snmp manager or port not found\nwhen you trying to delete not existing snmp manager or port, it should fail right ?",
+      "revId": "4b8a9123f1ce1b8719b9e0f99ab18cb1e59273f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
