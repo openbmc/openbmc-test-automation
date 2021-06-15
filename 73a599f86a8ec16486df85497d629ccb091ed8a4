@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8a948c82_c5137c7a",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-15T08:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcf3146c_8027f56d",
+      "range": {
+        "startLine": 149,
+        "startChar": 20,
+        "endLine": 149,
+        "endChar": 33
+      },
+      "revId": "73a599f86a8ec16486df85497d629ccb091ed8a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa26e277_0070bc98",
         "filename": "lib/snmp/redfish_snmp_utils.robot",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2021-06-15T07:52:15Z",
       "side": 1,
       "message": "This will work on New in Robot Framework 3.2",
+      "range": {
+        "startLine": 154,
+        "startChar": 25,
+        "endLine": 154,
+        "endChar": 43
+      },
+      "revId": "73a599f86a8ec16486df85497d629ccb091ed8a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8f0273e_84d095c0",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-15T08:03:15Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "fa26e277_0070bc98",
       "range": {
         "startLine": 154,
         "startChar": 25,
