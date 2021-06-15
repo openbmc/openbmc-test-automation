@@ -69,6 +69,24 @@
       "revId": "fd4fd8a51eb948767e57c7667c7214875c0d21e7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00d28f5a_6fee0a7c",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-15T11:22:33Z",
+      "side": 1,
+      "message": "It does the same thing.. it just that the above provide more flexibility to add others fields and lesser code..",
+      "parentUuid": "68052240_a3e41b97",
+      "revId": "fd4fd8a51eb948767e57c7667c7214875c0d21e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
