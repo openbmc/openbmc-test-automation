@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5da86b46_a8eb4dd5",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-15T10:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9845ec82_b327791a",
+      "revId": "fd4fd8a51eb948767e57c7667c7214875c0d21e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "413d64f3_4193641f",
         "filename": "openpower/vpd/test_redfish_vpd.robot",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2021-06-10T12:17:31Z",
       "side": 1,
       "message": "VPD\u003d{\n   \"BMC\": \"/redfish/v1/Managers/bmc\",\n   \"Chassis\": \"/redfish/v1/Chassis/chassis\",\n   \"CPU\": \"/redfish/v1/Systems/system/Processors/cpu0\",\n   \"vpd_field\": {\n     \u0027Model\u0027: \"CC\",\n     \u0027PartNumber\u0027: \"PN\",\n     \u0027SerialNumber\u0027 \u003d \"SN\",\n     \u0027SparePartNumber\u0027 \u003d \"FN\",\n     \u0027Location\u0027:  \"LocationCode\",\n   },\n}\n\n\nVerify VPD Data Via Redfish\n    [Documentation]  Verify VPD details via Redfish output.\n    [Tags]  Verify_VPD_Data_Via_Redfish\n\t[Template]  Verify Redfish VPD\n\t\n\t#component        #VPD Field\n\tBMC               SerialNumber\n\tChassis           SerialNumber\n\tCPU               SerialNumber\n\t\nVerify Redfish VPD\n    [Documentation]  Verify Redfish VPD of given URI.\n    [Arguments]  ${component}  ${component_uri}  ${field}\n    # Description of arguments:\n    # componet_uri       Redfish VPD uri (e.g. /redfish/v1/Systems/system/Processors/cpu1).\n    # field              Redfish VPD field (Model)\n\n    ${resp}\u003d  Redfish.Get Properties  ${VPD[\"$component\"]} \n\t\n\t${vpd_records}\u003d  Vpdtool  -r -O ${component} -R VINI -K  ${VPD[\"vpd_field\"][\"${field}\"]} \n    Should Be Equal As Strings  ${resp${VPD[\"vpd_field\"][\"${field}\"]} }  ${vpd_records[\u0027${vpd_component}\u0027][\u0027${vpd_field}\u0027]}",
+      "revId": "fd4fd8a51eb948767e57c7667c7214875c0d21e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68052240_a3e41b97",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-15T10:53:24Z",
+      "side": 1,
+      "message": "I would like to have all the fields verifications for all component at once so keeping it same.",
+      "parentUuid": "413d64f3_4193641f",
       "revId": "fd4fd8a51eb948767e57c7667c7214875c0d21e7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
