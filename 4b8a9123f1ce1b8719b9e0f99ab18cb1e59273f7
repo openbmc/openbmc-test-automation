@@ -69,6 +69,24 @@
       "revId": "4b8a9123f1ce1b8719b9e0f99ab18cb1e59273f7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "583308e6_472b9410",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-15T07:52:15Z",
+      "side": 1,
+      "message": "Got",
+      "parentUuid": "182483a3_cb215deb",
+      "revId": "4b8a9123f1ce1b8719b9e0f99ab18cb1e59273f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
