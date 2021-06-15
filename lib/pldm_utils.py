@@ -166,6 +166,9 @@ def GetRandomBIOSIntAndStrValues(attr_name, count):
         data = string.ascii_uppercase + string.digits
         attr_random_value = ''.join(random.choice(data) for _ in range(int(count)))
 
+    elif 'hb_lid_ids' in attr_name:
+        attr_random_value = str(random.randint(0, int(count)))
+
     else:
         attr_random_value = random.randint(0, int(count))
     return attr_random_value
@@ -194,7 +197,10 @@ def GetBIOSAttrOriginalValues(attr_val_table_data):
         if not value["CurrentValue"]:
             if 'name' in attr_name:
                 attr_val_data_dict[attr_name] = '""'
+            elif 'hb_lid_ids' in attr_name:
+                attr_val_data_dict[attr_name] = '""'
 
+    del attr_val_data_dict['pvm_inband_code_update']
     return attr_val_data_dict
 
 
@@ -220,12 +226,15 @@ def GetBIOSAttrDefaultValues(attr_val_table_data):
             if not item["DefaultString"]:
                 if 'name' in attr_name:
                     attr_val_data_dict[attr_name] = '""'
+                elif 'hb_lid_ids' in attr_name:
+                    attr_val_data_dict[attr_name] = '""'
         elif "DefaultValue" in item:
             attr_val_data_dict[attr_name] = item["DefaultValue"]
         elif "StringHandle" in item:
             attr_default_value = re.findall(r'\(.*?\)', item["StringHandle"])
             attr_val_data_dict[attr_name] = attr_default_value[0][1:-1]
 
+#    del attr_val_data_dict['pvm_inband_code_update']
     return attr_val_data_dict
 
 

@@ -29,6 +29,7 @@ Redfish Verify Set BIOS Attribute With Invalid Attribute Name
     [Tags]  Redfish_Verify_Set_BIOS_Attribute_With_Invalid_Attribute_Name
 
     ${random_str}=  Generate Random String  8  [LETTERS][NUMBERS]
+    Log To Console  ${random_str}
     Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${random_str}": '${random_str}'}}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
