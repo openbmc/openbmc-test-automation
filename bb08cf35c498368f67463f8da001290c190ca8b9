@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc7cd573_df8c95a5",
+        "filename": "openpower/test_bios_attributes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-15T13:31:27Z",
+      "side": 1,
+      "message": "Do you want this? If so use Log....",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "bb08cf35c498368f67463f8da001290c190ca8b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
