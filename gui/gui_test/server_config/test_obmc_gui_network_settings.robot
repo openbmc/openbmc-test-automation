@@ -436,58 +436,6 @@ Delete And Verify Static IP Address On BMC
     Should Not Contain  ${ip_addresses}  ${ip_address}
 
 
-Test Setup Execution
-    [Documentation]  Get and delete existing IPv4 addresses and netmask if any..
-
-    ${ip_data}=  Create List
-    ${netmask_data}=  Create List
-
-    # Get all IPv4 addresses and netmask on BMC.
-    ${network_configurations}=  Get Network Configuration
-    FOR  ${network_configuration}  IN  @{network_configurations}
-      Continue For Loop If  '${BMC_IP}' == '${network_configuration['Address']}'
-      Append To List  ${ip_data}  ${network_configuration['Address']}
-      Append To List  ${netmask_data}  ${network_configuration['SubnetMask']}
-    END
-    Set Suite Variable  ${ip_data}
-    Set Suite Variable  ${netmask_data}
-
-    # Delete existing static IPv4 addresses and netmask if available.
-    Run Keyword If  ${ip_data} != @{empty} and ${netmask_data} != @{empty}
-    ...  Delete And Verify Static IP Address On BMC
-
-
-Test Teardown Execution
-    [Documentation]  Restore existing IPv4 addresses and netmasks.
-
-    ${ip_length}=  Get Length  ${ip_data}
-    ${netmask_length}=  Get Length  ${netmask_data}
-
-    # Restore existing IPv4 addresses and netmasks if any..
-    Run Keyword If  ${ip_length} != ${0} and ${netmask_length} != ${0}
-    ...  Add Static IP Address And Verify  ${ip_data}  ${netmask_data}
-
-
-Verify IP And Netmask On BMC Using GUI
-    [Documentation]  Verify IP and netmask on GUI.
-    [Arguments]   ${ip_addresses}  ${subnet_masks}
-
-    # Description of argument(s):
-    # ip_addresses         A list of IP address to be added (e.g. ["10.7.7.7"]).
-    # subnet_masks         A list of Subnet mask for the IP to be added (e.g. ["255.255.0.0]").
-
-    ${ip_count}=  Get Length  ${ip_addresses}
-    FOR  ${i}  IN RANGE  ${ip_count}
-       ${input_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-${i}"]
-       Continue For Loop If  '${BMC_IP}' == '${input_ip}'
-       Textfield Value Should Be  //*[@data-test-id="networkSettings-input-staticIpv4-${i}"]
-       ...  ${ip_addresses}[${i}]
-       Textfield Value Should Be  //*[@data-test-id="networkSettings-input-subnetMask-${i}"]
-       ...  ${subnet_masks}[${i}]
-    END
-    Validate Network Config On BMC
-
-
 Update IP Address And Verify
     [Documentation]  Update and verify static IP address on BMC.
     [Arguments]  ${ip}  ${new_ip}
@@ -515,20 +463,6 @@ Update IP Address And Verify
     Validate Network Config On BMC
     ${ip_addresses}=  Get Static IPv4 Addresses From GUI
     Should Contain  ${ip_addresses}  ${new_ip}
-
-
-Verfiy IP On BMC
-    [Documentation]  Verify only one static IPv4 address.
-    [Arguments]  ${ip}  ${subnet_mask}
-
-    # Description of argument(s):
-    # ip             IP address which needs to be verified (e.g. "10.7.7.7").
-    # subnet_mask    Netmask value which needs to be verified.(e.g. "255.255.0.0").
-
-    ${get_ip}=  Get Value  ${xpath_static_input_ip0}
-    ${get_netmask}=  Get Value  ${xpath_input_netmask_addr0}
-    Should Be Equal  ${get_ip}  ${ip}
-    Should Be Equal  ${get_netmask}  ${subnet_mask}
 
 
 Get Static IPv4 Addresses From GUI
