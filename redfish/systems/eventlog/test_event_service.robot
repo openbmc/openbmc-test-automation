@@ -36,7 +36,7 @@ Verify Subscribe An Event
 
     ${HttpHeaders_dict}=  Create Dictionary  Content=application/json
     ${HttpHeaders_list}=  Create List  ${HttpHeaders_dict}
-    ${RegistryPrefixes_list}=  Create List  Base  OpenBMC  Task
+    ${RegistryPrefixes_list}=  Create List  Base  OpenBMC  TaskEvent
     ${ResourceTypes_list}=  Create List  Task
 
     ${payload}=  Create Dictionary
