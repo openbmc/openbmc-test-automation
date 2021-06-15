@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea3e287e_a98339f6",
+        "filename": "lib/code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-15T08:42:43Z",
+      "side": 1,
+      "message": "simplify this as\n\n\n    ${sw_member_list}\u003d  Redfish.Get Member List  /redfish/v1/UpdateService/FirmwareInventory\n\n    ${sw_member_ids}\u003d  Create List\n\tFOR  ${sw_member}  IN  @{sw_member_list}\n\t   Append To List   ${sw_member_ids}  ${sw_member.split(\u0027/\u0027)[-1]}\n\t   ${status}\u003d  Redfish.Get Attribute  ${sw_member}  Status\n\t   Continue For Loop If  \"${state}\" !\u003d \"${match_state}\"\n\t   Return From Keyword  ${sw_member.split(\u0027/\u0027)[-1]}\n\tEND \n\t\n\t[Return]  ${sw_member_ids}",
+      "range": {
+        "startLine": 566,
+        "startChar": 1,
+        "endLine": 570,
+        "endChar": 7
+      },
+      "revId": "f1cfcdc81747cb9ae62dbd671958c1bc7c371e02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b77d3e49_7f7db305",
+        "filename": "lib/code_update_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-15T08:42:43Z",
+      "side": 1,
+      "message": "Remove this keyword",
+      "range": {
+        "startLine": 574,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 0
+      },
+      "revId": "f1cfcdc81747cb9ae62dbd671958c1bc7c371e02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
