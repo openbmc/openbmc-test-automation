@@ -353,7 +353,7 @@ Send Concurrent CSR Request From Non Admin Users And Verify
 
 Get Root Certificate And Send Corrupted CSR From Admin CSR Request From Operator Concurrently
     [Documentation]  Get root certificate and send corrupted csr request from admin and
-    ...  csr from operator concurrently and verify gets root certicate and errors for corrupted
+    ...  csr from operator concurrently and verify gets root certificate and errors for corrupted
     ...  and for operator.
     [Tags]  Get_Root_Certificate_And_Send_Corrupted_CSR_From_Admin_CSR_Request_From_Operator_Concurrently
 

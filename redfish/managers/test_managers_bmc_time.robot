@@ -200,7 +200,7 @@ Redfish Set DateTime
     #                               "2019-06-30 09:21:28"). If this value is
     #                               empty, it will be set to the UTC current
     #                               date time of the local system.
-    # kwargs                        Additional parms to be passed directly to
+    # kwargs                        Additional parameters to be passed directly to
     #                               th Redfish.Patch function.  A good use for
     #                               this is when testing a bad date-time, the
     #                               caller can specify

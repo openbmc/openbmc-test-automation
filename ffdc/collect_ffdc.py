@@ -38,7 +38,7 @@ def cli_ffdc(hostname, username, password, ffdc_config, location):
 
         Description of argument(s):
 
-        hostname                Name/IP of the remote (targetting) host.
+        hostname                Name/IP of the remote (targeting) host.
         username                User on the remote host with access to FFDC files.
         password                Password for user on remote host.
         ffdc_config             Configuration file listing commands and files for FFDC.

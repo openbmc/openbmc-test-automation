@@ -19,7 +19,7 @@ class SSHRemoteclient:
         r"""
         Description of argument(s):
 
-        hostname                name/ip of the remote (targetting) host
+        hostname                name/ip of the remote (targeting) host
         username                user on the remote host with access to FFCD files
         password                password for user on remote host
         """
