@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01c2177f_f3c1ae77",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-15T04:51:23Z",
+      "side": 1,
+      "message": "Remove white space.",
+      "range": {
+        "startLine": 29,
+        "startChar": 24,
+        "endLine": 29,
+        "endChar": 25
+      },
+      "revId": "eaca4b289883ae98b244e03022abd8ab79ddfdcd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ede18f83_388bd05b",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-15T04:51:23Z",
+      "side": 1,
+      "message": "Remove white space",
+      "range": {
+        "startLine": 32,
+        "startChar": 26,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "eaca4b289883ae98b244e03022abd8ab79ddfdcd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c34b850_fd6fc93b",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-15T04:51:23Z",
+      "side": 1,
+      "message": "Remove white space",
+      "range": {
+        "startLine": 37,
+        "startChar": 27,
+        "endLine": 37,
+        "endChar": 28
+      },
+      "revId": "eaca4b289883ae98b244e03022abd8ab79ddfdcd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd068e2e_2178dd39",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-15T04:51:23Z",
+      "side": 1,
+      "message": "Please dont keep IP info here. use \"xxx.xxx.xxx.xxx\"",
+      "range": {
+        "startLine": 49,
+        "startChar": 36,
+        "endLine": 49,
+        "endChar": 48
+      },
+      "revId": "eaca4b289883ae98b244e03022abd8ab79ddfdcd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
