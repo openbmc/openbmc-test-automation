@@ -145,6 +145,24 @@ Get Non Functional Firmware
     [Return]  ${list_inv_dict}[0]
 
 
+Get Non Functional Firmware List
+    [Documentation]  Get BMC non functional firmware details.
+    [Arguments]  ${sw_inv}  ${functional_state}
+
+    # Description of argument(s):
+    # sw_inv            This dictionary contains all the BMC firmware details.
+    # functional_state  Functional state can be either True or False.
+
+    ${list_inv}=  Create List
+
+    FOR  ${key}  IN  @{sw_inv.keys()}
+      Run Keyword If  '${sw_inv['${key}']['functional']}' == '${functional_state}'
+      ...  Append To List  ${list_inv}  ${sw_inv['${key}']}
+    END
+
+    [Return]  ${list_inv}
+
+
 Redfish Upload Image And Check Progress State
     [Documentation]  Code update with ApplyTime.
 
