@@ -45,7 +45,7 @@ class FFDCCollector:
             self.receive_file_list = []
             self.target_type = ""
         else:
-            raise EnvironmentError("Python or python packages do not meet minimum version requirement.")
+            sys.exit(-1)
 
     def verify_script_env(self):
 
@@ -62,8 +62,9 @@ class FFDCCollector:
         print("\t{:<10}  {:>10}".format('click', click.__version__))
         print("\t{:<10}  {:>10}".format('paramiko', paramiko.__version__))
 
-        if eval(yaml.__version__.replace('.', ',')) < (5, 4):
-            print("\n\tERROR: PyYAML version 5.4 or higher is needed.")
+        if eval(yaml.__version__.replace('.', ',')) < (5, 4, 1):
+            print("\n\tERROR: Python or python packages do not meet minimum version requirement.")
+            print("\tERROR: PyYAML version 5.4.1 or higher is needed.\n")
             run_env_ok = False
 
         print("\t---- End script host environment ----")
@@ -187,7 +188,7 @@ class FFDCCollector:
 
             if not quiet:
                 if scp_result:
-                    print("\t\tSuccessfully copy from " + self.hostname + ':' + source_file_path + ".\n")
+                    print("\t\tSuccessfully copied from " + self.hostname + ':' + source_file_path + ".\n")
                 else:
                     print("\t\tFail to copy from " + self.hostname + ':' + source_file_path + ".\n")
             else:
