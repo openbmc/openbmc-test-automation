@@ -22,6 +22,30 @@
       "revId": "1c4490881e547a40e2c5837453c2c2ed84d43ed3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bf866c6_58d31a61",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-16T08:14:07Z",
+      "side": 1,
+      "message": "We are using templet here.. This is a correct usage of template\n\n    [Template]  Verify Redfish VPD Data\n\n    # Component\n    BMC\n    Chassis\n    CPU",
+      "parentUuid": "23d24e7d_350ff496",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 7
+      },
+      "revId": "1c4490881e547a40e2c5837453c2c2ed84d43ed3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
