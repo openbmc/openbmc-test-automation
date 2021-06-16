@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 
 import paramiko
-from paramiko.ssh_exception import AuthenticationException, NoValidConnectionsError, SSHException
+from paramiko.ssh_exception import AuthenticationException
+from paramiko.ssh_exception import NoValidConnectionsError
+from paramiko.ssh_exception import SSHException
+from paramiko.ssh_exception import BadHostKeyException
 from paramiko.buffered_pipe import PipeTimeout as PipeTimeout
 import scp
+import sys
 import socket
 from socket import timeout as SocketTimeout
 
@@ -19,9 +23,9 @@ class SSHRemoteclient:
         r"""
         Description of argument(s):
 
-        hostname                name/ip of the remote (targeting) host
-        username                user on the remote host with access to FFCD files
-        password                password for user on remote host
+        hostname        Name/IP of the remote (targeting) host
+        username        User on the remote host with access to FFCD files
+        password        Password for user on remote host
         """
 
         self.ssh_output = None
@@ -41,23 +45,18 @@ class SSHRemoteclient:
         try:
             # SSHClient to make connections to the remote server
             self.sshclient = paramiko.SSHClient()
-            # setting set_missing_host_key_policy() to allow any host.
+            # setting set_missing_host_key_policy() to allow any host
             self.sshclient.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            # pk=paramiko.RSAKey.from_private_key(open('~/.ssh_pub/id_rsa.pub'))
             # Connect to the server
             self.sshclient.connect(hostname=self.hostname,
                                    username=self.username,
                                    password=self.password)
 
-        except AuthenticationException:
-            print("\n>>>>>\tERROR: Authentication failed, please verify your login credentials")
-        except SSHException:
-            print("\n>>>>>\tERROR: Failures in SSH2 protocol negotiation or logic errors.")
-        except NoValidConnectionsError:
-            print('\n>>>>>\tERROR: No Valid SSH Connection after multiple attempts.')
-        except socket.error:
-            print("\n>>>>>\tERROR: SSH Connection refused.")
-        except Exception:
-            raise Exception("\n>>>>>\tERROR: Unexpected Exception.")
+        except (BadHostKeyException, AuthenticationException,
+                SSHException, NoValidConnectionsError, socket.error) as e:
+            print("\n>>>>>\tERROR: Unable to SSH to %s %s %s\n\n" % (self.hostname, e.__class__, e))
+            sys.exit(-1)
 
     def ssh_remoteclient_disconnect(self):
 
@@ -86,8 +85,9 @@ class SSHRemoteclient:
             response = stdout.readlines()
             return response
         except (paramiko.AuthenticationException, paramiko.SSHException,
-                paramiko.ChannelException) as ex:
-            print("\n>>>>>\tERROR: Remote command execution fails.")
+                paramiko.ChannelException) as e:
+            # Log command with error. Return to caller for next command, if any.
+            print("\n>>>>>\tERROR: Fail remote command %s %s %s\n\n" % (command, e.__class__, e))
 
     def scp_connection(self):
 
@@ -111,12 +111,9 @@ class SSHRemoteclient:
 
         try:
             self.scpclient.get(remote_file, local_file)
-        except scp.SCPException:
-            print("scp.SCPException scp %s from remotehost" % remote_file)
-            return False
-        except (SocketTimeout, PipeTimeout) as ex:
-            # Future enhancement: multiple retries on these exceptions due to bad ssh connection
-            print("Timeout scp %s from remotehost" % remote_file)
+        except (scp.SCPException, SocketTimeout, PipeTimeout) as e:
+            # Log command with error. Return to caller for next file, if any.
+            print("\n>>>>>\tERROR: Fail scp %s from remotehost %s %s\n\n" % (remote_file, e.__class__, e))
             return False
 
         # Return True for file accounting
