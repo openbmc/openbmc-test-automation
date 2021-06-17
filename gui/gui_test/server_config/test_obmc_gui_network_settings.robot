@@ -50,6 +50,8 @@ ${alpha_netmask}                  ff.ff.ff.ff
 ${out_of_range_netmask}           255.256.255.0
 ${more_byte_netmask}              255.255.255.0.0
 ${lowest_netmask}                 128.0.0.0
+${valid_mac}                      aa:e2:84:14:28:79
+${test_hostname}                   openbmc
 
 *** Test Cases ***
 
@@ -255,6 +257,27 @@ Configure Netmask And Verify
     ${test_ipv4_addr}   ${more_byte_netmask}     Invalid format
     ${test_ipv4_addr}   ${alpha_netmask}         Invalid format
     ${test_ipv4_addr}   ${out_of_range_netmask}  Invalid format
+
+
+Configure MAC Address And Verify
+    [Documentation]  Configure mac address and verify.
+    [Tags]  Configure_MAC_Address_And_Verify
+    [Teardown]  Configure And Verify Network Settings
+    ...  ${xpath_mac_address_input}  ${mac_address}
+
+    ${mac_address}=  Get Value  ${xpath_mac_address_input}
+    Configure And Verify Network Settings  ${xpath_mac_address_input}  ${valid_mac}
+
+
+Configure Hostname And Verify
+    [Documentation]  Configure hostname and verify.
+    [Tags]  Configure_Hostname_And_Verify
+    [Teardown]  Configure And Verify Network Settings
+    ...  ${xpath_hostname_input}  ${hostname}
+
+    ${hostname}=  Get Value  ${xpath_hostname_input}
+    Configure And Verify Network Settings  ${xpath_hostname_input}  ${test_hostname}
+
 
 *** Keywords ***
 
@@ -477,3 +500,18 @@ Get Static IPv4 Addresses From GUI
     END
 
     [Return]  ${static_ipv4_addresses}
+
+
+Configure And Verify Network Settings
+    [Documentation]  Configure and verify network settings.
+    [Arguments]  ${xpath}  ${nw_settings}
+
+    # Description of argument(s):
+    # xpath  xpath of the network settings.
+    # nw_settings  The mac address, hostname etc.
+
+    Wait Until Element Is Enabled  ${xpath}
+    Input Text  ${xpath}  ${nw_settings}
+    Click Button  ${xpath_network_save_settings}
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=10
+    Textfield Value Should Be  ${xpath}  ${nw_settings}
