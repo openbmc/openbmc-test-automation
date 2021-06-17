@@ -31,7 +31,6 @@ ${VMI_BASE_URI}   /ibm/v1/
 Get CSR Request Signed By VMI And Verify
     [Documentation]  Get CSR request signed by VMI using different user roles and verify.
     [Tags]  Get_CSR_Request_Signed_By_VMI_And_Verify
-    [Setup]  Redfish Power On
     [Template]  Get Certificate Signed By VMI
 
     # username           password             force_create  valid_csr  valid_status_code
@@ -50,7 +49,6 @@ Get CSR Request Signed By VMI And Verify
 Get Root Certificate Using Different Privilege Users Roles
     [Documentation]  Get root certificate using different users.
     [Tags]  Get_Root_Certificate_Using_Different_Users
-    [Setup]  Redfish Power On
     [Template]  Get Root Certificate
 
     # username     password    force_create  valid_csr  valid_status_code
@@ -71,6 +69,7 @@ Send CSR Request When VMI Is Off And Verify
     [Documentation]  Send CSR signing request to VMI when it is off and expect an error.
     [Tags]  Get_CSR_Request_When_VMI_Is_Off_And_verify
     [Setup]  Redfish Power Off
+    [Teardown]  Redfish Power On  stack_mode=skip
     [Template]  Get Certificate Signed By VMI
 
     # username           password             force_create  valid_csr  valid_status_code
@@ -88,7 +87,6 @@ Send CSR Request When VMI Is Off And Verify
 Get Corrupted CSR Request Signed By VMI And Verify
     [Documentation]  Send corrupted CSR for signing and expect an error.
     [Tags]  Get_Corrupted_CSR_Request_Signed_By_VMI_And_Verify
-    [Setup]  Redfish Power On
     [Template]  Get Certificate Signed By VMI
 
     # username           password             force_create  valid_csr   valid_status_code
@@ -107,6 +105,7 @@ Get Root Certificate When VMI Is Off And Verify
     [Documentation]  Get root certificate when vmi is off and verify.
     [Tags]  Get_Root_Certificate_When_VMI_Is_Off_And_Verify
     [Setup]  Redfish Power Off
+    [Teardown]  Redfish Power On  stack_mode=skip
     [Template]  Get Root Certificate
 
     # username           password             force_create  valid_csr  valid_status_code
