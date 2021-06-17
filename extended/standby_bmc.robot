@@ -66,6 +66,7 @@ Get To Stable State
 
     Prune Journal Log
     Check For Current Boot Application Failures
+    Cleanup Redfish Event Notification Subscriptions
 
 *** Keywords ***
 
@@ -168,3 +169,13 @@ MTU Ping Test
     ...  ping -M do -s ${mtu} -c 10 ${OPENBMC_HOST}
     Should Be Equal As Integers  ${rc}  0
     Should Not Contain  ${output}  100% packet loss
+
+
+Cleanup Redfish Event Notification Subscriptions
+    [Documentation]  Delete all event notification subscriptions.
+
+    ${subscriptions}=  Redfish.Get Attribute  /redfish/v1/EventService/Subscriptions  Members
+    FOR  ${subscription}  IN  @{subscriptions}
+        ${uri}=  Set Variable  ${subscription['@odata.id']}
+        Redfish.Delete  ${uri}
+    END
