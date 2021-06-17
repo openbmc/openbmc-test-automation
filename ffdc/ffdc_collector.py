@@ -120,6 +120,11 @@ class FFDCCollector:
 
         self.remoteclient.ssh_remoteclient_login()
         print("\n\t[Check] %s SSH connection established.\t [OK]" % self.hostname)
+
+        # Check scp connection.
+        # If scp connection fails,
+        # continue with FFDC generation but skip scp files to local host.
+        self.remoteclient.scp_connection()
         return True
 
     def generate_ffdc(self, working_protocol_list):
@@ -146,15 +151,18 @@ class FFDCCollector:
                         self.remoteclient.execute_command(command)
                         progress_counter += 1
                         self.print_progress(progress_counter)
-                    print("\n\t[Run] Commands execution completed \t\t [OK]")
+                    print("\n\t[Run] Commands execution completed.\t\t [OK]")
 
-                    print("\n\n\tCopying FFDC files from remote system %s \n\n" % self.hostname)
-                    # Get default values for scp action.
-                    # self.location == local system for now
-                    self.set_ffdc_defaults()
-                    # Retrieving files from target system
-                    list_of_files = ffdc_actions[machine_type]['FILES']
-                    self.scp_ffdc(self.ffdc_dir_path, self.ffdc_prefix, list_of_files)
+                    if self.remoteclient.scpclient:
+                        print("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
+                        # Get default values for scp action.
+                        # self.location == local system for now
+                        self.set_ffdc_defaults()
+                        # Retrieving files from target system
+                        list_of_files = ffdc_actions[machine_type]['FILES']
+                        self.scp_ffdc(self.ffdc_dir_path, self.ffdc_prefix, list_of_files)
+                    else:
+                        print("\n\n\tSkip copying FFDC files from remote system %s.\n" % self.hostname)
                 else:
                     print("\n\tProtocol %s is not yet supported by this script.\n"
                           % ffdc_actions[machine_type]['PROTOCOL'][0])
@@ -174,8 +182,6 @@ class FFDCCollector:
         file_dict                       A dictionary of files to scp from targeted system to this system
 
         """
-
-        self.remoteclient.scp_connection()
 
         self.receive_file_list = []
         progress_counter = 0

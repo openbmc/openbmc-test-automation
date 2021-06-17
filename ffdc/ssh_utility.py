@@ -6,7 +6,7 @@ from paramiko.ssh_exception import NoValidConnectionsError
 from paramiko.ssh_exception import SSHException
 from paramiko.ssh_exception import BadHostKeyException
 from paramiko.buffered_pipe import PipeTimeout as PipeTimeout
-import scp
+from scp import SCPClient, SCPException
 import sys
 import socket
 from socket import timeout as SocketTimeout
@@ -94,7 +94,14 @@ class SSHRemoteclient:
         r"""
         Create a scp connection for file transfer.
         """
-        self.scpclient = scp.SCPClient(self.sshclient.get_transport())
+        try:
+            self.scpclient = SCPClient(self.sshclient.get_transport())
+            print("\n\t[Check] %s SCP transport established.\t [OK]" % self.hostname)
+        except (SCPException, SocketTimeout, PipeTimeout) as e:
+            self.scpclient = None
+            print("\n>>>>>\tERROR: SCP get_transport has failed. %s %s" % (e.__class__, e))
+            print(">>>>>\tScript continues generating FFDC on %s." % self.hostname)
+            print(">>>>>\tCollected data will need to be manually offloaded.")
 
     def scp_file_from_remote(self, remote_file, local_file):
 
@@ -111,7 +118,7 @@ class SSHRemoteclient:
 
         try:
             self.scpclient.get(remote_file, local_file)
-        except (scp.SCPException, SocketTimeout, PipeTimeout) as e:
+        except (SCPException, SocketTimeout, PipeTimeout) as e:
             # Log command with error. Return to caller for next file, if any.
             print("\n>>>>>\tERROR: Fail scp %s from remotehost %s %s\n\n" % (remote_file, e.__class__, e))
             return False
