@@ -78,7 +78,7 @@ class FFDCCollector:
         """
         response = os.system("ping -c 1 -w 2 %s  2>&1 >/dev/null" % self.hostname)
         if response == 0:
-            print("\n\t%s is ping-able." % self.hostname)
+            print("\n\t%s is ping-able.\t\t\t [OK]" % self.hostname)
             return True
         else:
             print("\n>>>>>\tERROR: %s is not ping-able. FFDC collection aborted.\n" % self.hostname)
@@ -99,8 +99,10 @@ class FFDCCollector:
 
         """
 
-        print("\n\n\t---- Start communicating with %s ----\n" % self.hostname)
+        print("\n\n\t---- Start communicating with %s ----" % self.hostname)
         if self.target_is_pingable():
+            # Check supported protocol ping,ssh, redfish are working.
+            self.ssh_to_target_system()
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
             self.set_target_machine_type()
@@ -117,6 +119,8 @@ class FFDCCollector:
                                             self.password)
 
         self.remoteclient.ssh_remoteclient_login()
+        print("\n\t%s SSH connection established.\t [OK]" % self.hostname)
+
 
     def generate_ffdc(self):
 
@@ -133,10 +137,7 @@ class FFDCCollector:
 
                 if (ffdc_actions[machine_type]['PROTOCOL'][0] == 'SSH'):
 
-                    # Use SSH
-                    self.ssh_to_target_system()
-
-                    print("\n\tCollecting FFDC on " + self.hostname)
+                    print("\n\t---- Collecting FFDC on " + self.hostname + " ----")
                     list_of_commands = ffdc_actions[machine_type]['COMMANDS']
                     progress_counter = 0
                     for command in list_of_commands:
