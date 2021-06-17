@@ -16,6 +16,24 @@
       "revId": "6cee2e62be965307e6cdd87828f456f14716e6ab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb13e0c1_488f1ff8",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-06-17T07:34:03Z",
+      "side": 1,
+      "message": "with kind of operations in usecase and make it understable,this is the one for it.",
+      "parentUuid": "2777bcf1_7e0a726b",
+      "revId": "6cee2e62be965307e6cdd87828f456f14716e6ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
