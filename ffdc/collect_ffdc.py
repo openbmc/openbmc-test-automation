@@ -37,7 +37,7 @@ def cli_ffdc(remote, username, password, ffdc_config, location):
     Stand alone CLI to generate and collect FFDC from the selected target.
     """
 
-    click.echo("\n********** FFDC Starts **********")
+    click.echo("\n********** FFDC (First Failure Data Collection) Starts **********")
 
     if input_options_ok(remote, username, password, ffdc_config):
         thisFFDC = FFDCCollector(remote, username, password, ffdc_config, location)
