@@ -66,6 +66,7 @@ Get To Stable State
 
     Prune Journal Log
     Check For Current Boot Application Failures
+    Clear All Subscriptions
 
 *** Keywords ***
 
@@ -168,3 +169,12 @@ MTU Ping Test
     ...  ping -M do -s ${mtu} -c 10 ${OPENBMC_HOST}
     Should Be Equal As Integers  ${rc}  0
     Should Not Contain  ${output}  100% packet loss
+
+
+Clear All Subscriptions
+    [Documentation]  Delete all subscriptions.
+
+    ${subscriptions}=  Redfish.Get Attribute  /redfish/v1/EventService/Subscriptions  Members
+    FOR  ${subscription}  IN  @{subscriptions}
+        Redfish.Delete  ${subscription['@odata.id']}
+    END
