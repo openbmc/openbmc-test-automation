@@ -97,6 +97,7 @@ Redfish Clean Up
     Run Keyword And Ignore Error  Redfish Purge Event Log
     Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
     Run Keyword And Ignore Error  Redfish Delete All System Dumps
+    Run Keyword And Ignore Error  Clear All Subscriptions
     Run Keyword And Ignore Error  Delete All Redfish Sessions
 
 
@@ -168,3 +169,12 @@ MTU Ping Test
     ...  ping -M do -s ${mtu} -c 10 ${OPENBMC_HOST}
     Should Be Equal As Integers  ${rc}  0
     Should Not Contain  ${output}  100% packet loss
+
+
+Clear All Subscriptions
+    [Documentation]  Delete all subscriptions.
+
+    ${subscriptions}=  Redfish.Get Attribute  /redfish/v1/EventService/Subscriptions  Members
+    FOR  ${subscription}  IN  @{subscriptions}
+        Redfish.Delete  ${subscription['@odata.id']}
+    END
