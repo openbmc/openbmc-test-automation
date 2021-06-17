@@ -50,6 +50,8 @@ ${alpha_netmask}                  ff.ff.ff.ff
 ${out_of_range_netmask}           255.256.255.0
 ${more_byte_netmask}              255.255.255.0.0
 ${lowest_netmask}                 128.0.0.0
+${valid_mac}                      aa:e2:84:14:28:79
+${test_hostname}                  openbmc
 
 *** Test Cases ***
 
@@ -255,6 +257,25 @@ Configure Netmask And Verify
     ${test_ipv4_addr}   ${more_byte_netmask}     Invalid format
     ${test_ipv4_addr}   ${alpha_netmask}         Invalid format
     ${test_ipv4_addr}   ${out_of_range_netmask}  Invalid format
+
+
+Configure MAC Address And Verify
+    [Documentation]  Configure mac address and verify.
+    [Tags]  Configure_MAC_Address_And_Verify
+    [Teardown]  Configure And verify MAC Address  ${mac_address}
+
+    ${mac_address}=  Get Value  ${xpath_mac_address_input}
+    Configure And verify MAC Address  ${valid_mac}
+
+
+Configure Hostname And Verify
+    [Documentation]  Configure hostname and verify.
+    [Tags]  Configure_Hostname_And_Verify
+    [Teardown]  Configure And Verify Hostname  ${hostname}
+
+    ${hostname}=  Get Value  ${xpath_hostname_input}
+    Configure And Verify Hostname  ${test_hostname}
+
 
 *** Keywords ***
 
@@ -477,3 +498,31 @@ Get Static IPv4 Addresses From GUI
     END
 
     [Return]  ${static_ipv4_addresses}
+
+
+Configure And verify MAC Address
+    [Documentation]  Configure and verify mac address.
+    [Arguments]  ${mac_address}
+
+    # Description of argument(s):
+    # mac_address  The mac address (e.g. 00:01:6c:80:02:28).
+
+    Wait Until Element Is Enabled  ${xpath_mac_address_input}
+    Input Text  ${xpath_mac_address_input}  ${mac_address}
+    Click Button  ${xpath_network_save_settings}
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=10
+    Textfield Value Should Be  ${xpath_mac_address_input}  ${mac_address}
+
+
+Configure And Verify Hostname
+    [Documentation]  Configure and verify hostname.
+    [Arguments]  ${hostname}
+
+    # Description of argument(s):
+    # hostname  A hostname value which is to be configured on BMC.
+
+    Wait Until Element Is Enabled  ${xpath_hostname_input}  timeout=10
+    Input Text  ${xpath_hostname_input}  ${hostname}
+    Click Button  ${xpath_network_save_settings}
+    Wait Until Page Contains Element  ${xpath_setting_success}  timeout=10
+    Textfield Value Should Be  ${xpath_hostname_input}  ${hostname}
