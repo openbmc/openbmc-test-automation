@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0eb044e9_55280139",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-17T11:05:06Z",
+      "side": 1,
+      "message": "remove 82 line space",
+      "revId": "565b8740d2ebe586823a199d82a5dc9d4190823e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33e65186_dfccc29c",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-17T11:05:06Z",
+      "side": 1,
+      "message": "line Space required b/w 83 and 84",
+      "revId": "565b8740d2ebe586823a199d82a5dc9d4190823e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
