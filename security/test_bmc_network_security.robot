@@ -1,13 +1,15 @@
 *** Settings ***
 Documentation  Network stack stress tests using "nping" tool.
 
-Resource                ../lib/resource.robot
-Resource                ../../lib/bmc_redfish_resource.robot
+Resource                ../../lib/resource.robot
+Resource                ../lib/bmc_redfish_resource.robot
+Resource                ../lib/ipmi_client.robot
 
 Library                 OperatingSystem
 Library                 String
 Library                 ../lib/gen_robot_valid.py
 Library                 ../lib/bmc_network_utils.py
+Library                 ../lib/ipmi_utils.py
 
 Suite Setup             Suite Setup Execution
 
@@ -18,6 +20,7 @@ Force Tags              Network_Nping
 ${delay}                1000ms
 ${count}                4
 ${program_name}         nping
+${iterations}           5000
 
 *** Test Cases ***
 
@@ -47,13 +50,44 @@ Send Network Packets Continuously To Redfish Interface
 
     # Send large number of packets to Redfish interface.
     ${packet_loss}=  Send Network Packets And Get Packet Loss
-    ...  ${OPENBMC_HOST}  5000  ${TCP_PACKETS}  ${REDFISH_INTERFACE}
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_PACKETS}  ${REDFISH_INTERFACE}
     Should Be Equal  ${packet_loss}  0.0
     ...  msg=FAILURE: BMC is dropping some packets.
 
     # Check if Redfish interface is functional.
     Redfish.Login
     Redfish.Logout
+
+
+Send Network Packets Continuously To IPMI Port
+    [Documentation]  Send network packets continuously to IPMI port and verify stability.
+    [Tags]  Send_Network_Packets_Continuously_To_IPMI_Port
+
+    # Send large number of packets to IPMI port.
+    ${packet_loss}=  Send Network Packets And Get Packet Loss
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_PACKETS}  ${IPMI_PORT}
+    Should Be Equal  ${packet_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping some packets.
+
+    # Check if IPMI interface is functional.
+    Run IPMI Standard Command  chassis status
+
+
+Send Network Packets Continuously To SSH Port
+    [Documentation]  Send network packets continuously to SSH port and verify stability.
+    [Tags]  Send_Network_Packets_Continuously_To_SSH_Port
+
+    # Send large number of packets to SSH port.
+    ${packet_loss}=  Send Network Packets And Get Packet Loss
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_PACKETS}  ${SSH_PORT}
+    Should Be Equal  ${packet_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping some packets.
+
+    # Check if SSH interface is functional.
+
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
 
 *** Keywords ***
 
