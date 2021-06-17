@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3141facb_70cd4247",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-06-17T05:34:32Z",
+      "side": 1,
+      "message": "I have changed the oemid to clientid, which is same as redfish login attributes.",
+      "parentUuid": "f26cde54_e677aece",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 19
+      },
+      "revId": "63b0005dbcbf9bdd64822009ff462638b4d4f588",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5eb64472_f88e54a4",
         "filename": "lib/redfish_request.py",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2021-06-16T17:28:31Z",
       "side": 1,
       "message": "Where are we keying in if its not default.. dont hard code 443",
+      "range": {
+        "startLine": 48,
+        "startChar": 67,
+        "endLine": 48,
+        "endChar": 74
+      },
+      "revId": "63b0005dbcbf9bdd64822009ff462638b4d4f588",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c161abc_2ac367f9",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-06-17T05:34:32Z",
+      "side": 1,
+      "message": "I have removed the default value.",
+      "parentUuid": "5eb64472_f88e54a4",
       "range": {
         "startLine": 48,
         "startChar": 67,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "45391e04_f6f037d9",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-06-17T05:34:32Z",
+      "side": 1,
+      "message": "I have changed the function name to log_console.",
+      "parentUuid": "4e1b0521_152b164d",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 21
+      },
+      "revId": "63b0005dbcbf9bdd64822009ff462638b4d4f588",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d0bde6a_ad9e19c2",
         "filename": "lib/redfish_request.py",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "fa13fd92_64be7900",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-06-17T05:34:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d0bde6a_ad9e19c2",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 26
+      },
+      "revId": "63b0005dbcbf9bdd64822009ff462638b4d4f588",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c13cd0a4_8b29ea7e",
         "filename": "lib/redfish_request.py",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2021-06-16T17:28:31Z",
       "side": 1,
       "message": "if user doesnt choose the OEM how this play out",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 65
+      },
+      "revId": "63b0005dbcbf9bdd64822009ff462638b4d4f588",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a02e7672_b0cdf6a5",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-06-17T05:34:32Z",
+      "side": 1,
+      "message": "if user doesn\u0027t send the client / oemid , then it will generate the clientid before making login request.",
+      "parentUuid": "c13cd0a4_8b29ea7e",
       "range": {
         "startLine": 83,
         "startChar": 0,
@@ -137,6 +257,30 @@
       "revId": "63b0005dbcbf9bdd64822009ff462638b4d4f588",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22ded08e_4ba74562",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-06-17T05:34:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f3844f3_af7f27e6",
+      "range": {
+        "startLine": 94,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 26
+      },
+      "revId": "63b0005dbcbf9bdd64822009ff462638b4d4f588",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
