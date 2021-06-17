@@ -117,3 +117,14 @@ RHEL_LINUX:
         - '/tmp/OS_sosreport.txt'
     PROTOCOL:
         - 'SSH'
+
+# Commands and Files to collect for AIX only
+AIX_LINUX:
+    COMMANDS:
+        - 'errpt >/tmp/OS_errpt.txt 2>&1 ; errclear 0'
+        - 'OS_processors.txt': 'bindprocessor -q >/tmp/OS_processors.txt 2>&1'
+    FILES:
+        - '/tmp/OS_errpt.txt'
+        - '/tmp/OS_processors.txt'
+    PROTOCOL:
+        - 'SSH'
