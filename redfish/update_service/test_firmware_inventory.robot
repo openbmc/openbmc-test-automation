@@ -191,6 +191,16 @@ Verify Redfish Functional Version Is Same
     Should Be Equal  ${sw_inv_dict['version']}  ${firmware_version}
 
 
+Check Redfish Active Software Image And Firmware Inventory Are Same
+    [Documentation]  Check the redfish firmware inventory path is same as active software image of redfish managers.
+    [Tags]  Check_Redfish_Active_Software_Image_And_Firmware_Inventory_Are_Same
+    [Template]  Verify Redfish Active Software Image And Firmware Inventory Are Same
+
+    # image
+    functional_image
+    backup_image
+
+
 Verify Redfish BIOS Version
     [Documentation]  Get host firmware version from system inventory.
     [Tags]  Verify_Redfish_BIOS_Version
@@ -213,3 +223,48 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Redfish.Logout
+
+Backup Firmware Image Is Functional
+    [Documentation]  Switch to the backup firmware image to make functional.
+
+    ${state}=  Get Pre Reboot State
+    Rprint Vars  state
+    Switch Backup Firmware Image To Functional
+    Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}
+
+
+Verify Active Software Image And Firmware Inventory
+    [Documentation]  Verify redfish firmware inventory path and active software image is same.
+
+    # ActiveSoftwareImage
+    # /redfish/v1/UpdateService/FirmwareInventory/632c5114
+
+    ${firmware_inv_path}=  Redfish.Get Properties  ${REDFISH_BASE_URI}Managers/bmc
+    ${firmware_inv_path}=  Get From Dictionary  ${firmware_inv_path}  Links
+    ${active_sw_image}=  Get From Dictionary  ${firmware_inv_path}  ActiveSoftwareImage
+    ${active_sw_image}=  Get From Dictionary  ${active_sw_image}  @odata.id
+
+    ${sw_member_list}=  Redfish_Utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+    List Should Contain Value  ${sw_member_list}  ${active_sw_image}
+
+    ${sw_inv_dict}=  Get Functional Firmware  BMC image
+    ${sw_inv_dict}=  Get Non Functional Firmware  ${sw_inv_dict}  True
+
+    ${image_info}=  Redfish.Get Properties  ${active_sw_image}
+    Should Be Equal  ${sw_inv_dict['version']}  ${image_info["Version"]}
+
+
+Verify Redfish Active Software Image And Firmware Inventory Are Same
+    [Documentation]  Verify the redfish firmware inventory path is same as active software image of redfish managers.
+    [Arguments]  ${image}
+
+    # Description of argument(s):
+    # image           Fucntional Image or Backup Image
+
+    Verify Active Software Image And Firmware Inventory
+
+    Run Keyword If  'backup_image' == '${image}'
+    ...  Run Keywords  Backup Firmware Image Is Functional  AND
+    ...    Verify Active Software Image And Firmware Inventory  AND
+    ...    Backup Firmware Image Is Functional  AND
+    ...    Verify Active Software Image And Firmware Inventory
