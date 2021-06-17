@@ -22,7 +22,6 @@ class FFDCCollector:
     """
 
     def __init__(self, hostname, username, password, ffdc_config, location):
-
         r"""
         Description of argument(s):
 
@@ -71,14 +70,13 @@ class FFDCCollector:
         return run_env_ok
 
     def target_is_pingable(self):
-
         r"""
         Check if target system is ping-able.
 
         """
         response = os.system("ping -c 1 -w 2 %s  2>&1 >/dev/null" % self.hostname)
         if response == 0:
-            print("\n\t%s is ping-able." % self.hostname)
+            print("\n\t%s is ping-able.\t\t\t [OK]" % self.hostname)
             return True
         else:
             print("\n>>>>>\tERROR: %s is not ping-able. FFDC collection aborted.\n" % self.hostname)
@@ -93,14 +91,15 @@ class FFDCCollector:
         self.target_type = "OPENBMC"
 
     def collect_ffdc(self):
-
         r"""
         Initiate FFDC Collection depending on requested protocol.
 
         """
 
-        print("\n\n\t---- Start communicating with %s ----\n" % self.hostname)
+        print("\n\n\t---- Start communicating with %s ----" % self.hostname)
         if self.target_is_pingable():
+            # Check supported protocol ping,ssh, redfish are working.
+            self.ssh_to_target_system()
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
             self.set_target_machine_type()
@@ -117,14 +116,15 @@ class FFDCCollector:
                                             self.password)
 
         self.remoteclient.ssh_remoteclient_login()
+        print("\n\t%s SSH connection established.\t [OK]" % self.hostname)
 
     def generate_ffdc(self):
-
         r"""
         Send commands in ffdc_config file to targeted system.
 
         """
 
+        print("\n\t---- Executing commands on " + self.hostname + " ----")
         with open(self.ffdc_config, 'r') as file:
             ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
 
@@ -133,18 +133,16 @@ class FFDCCollector:
 
                 if (ffdc_actions[machine_type]['PROTOCOL'][0] == 'SSH'):
 
-                    # Use SSH
-                    self.ssh_to_target_system()
-
-                    print("\n\tCollecting FFDC on " + self.hostname)
+                    print("\n\t[Run] SSH commands list")
                     list_of_commands = ffdc_actions[machine_type]['COMMANDS']
                     progress_counter = 0
                     for command in list_of_commands:
                         self.remoteclient.execute_command(command)
                         progress_counter += 1
                         self.print_progress(progress_counter)
+                    print("\n\t[Run] SSH commands list \t\t [OK]")
 
-                    print("\n\n\tCopying FFDC from remote system %s \n\n" % self.hostname)
+                    print("\n\n\tCopying FFDC files from remote system %s \n\n" % self.hostname)
                     # Get default values for scp action.
                     # self.location == local system for now
                     self.set_ffdc_defaults()
@@ -160,7 +158,6 @@ class FFDCCollector:
                  targ_file_prefix="",
                  file_list=None,
                  quiet=None):
-
         r"""
         SCP all files in file_dict to the indicated directory on the local system.
 
@@ -198,7 +195,6 @@ class FFDCCollector:
         self.remoteclient.ssh_remoteclient_disconnect()
 
     def set_ffdc_defaults(self):
-
         r"""
         Set a default value for self.ffdc_dir_path and self.ffdc_prefix.
         Collected ffdc file will be stored in dir /self.location/hostname_timestr/.
