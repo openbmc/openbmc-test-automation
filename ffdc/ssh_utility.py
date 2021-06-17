@@ -47,11 +47,11 @@ class SSHRemoteclient:
             self.sshclient = paramiko.SSHClient()
             # setting set_missing_host_key_policy() to allow any host
             self.sshclient.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            # pk=paramiko.RSAKey.from_private_key(open('~/.ssh_pub/id_rsa.pub'))
             # Connect to the server
             self.sshclient.connect(hostname=self.hostname,
                                    username=self.username,
-                                   password=self.password)
+                                   password=self.password,
+                                   look_for_keys=False)
 
         except (BadHostKeyException, AuthenticationException,
                 SSHException, NoValidConnectionsError, socket.error) as e:
