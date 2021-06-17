@@ -79,6 +79,9 @@ ${NETWORK_TIMEOUT}         18
 ${ICMP_TIMESTAMP_REQUEST}  13
 ${ICMP_ECHO_REQUEST}       8
 ${CHANNEL_NUMBER}          1
+${TCP_PACKETS}             tcp
+${ICMP_NETMASK_REQUEST}    17
+${REDFISH_INTERFACE}       443
 
 # BMC debug tarball parameter
 ${DEBUG_TARBALL_PATH}  ${EMPTY}
