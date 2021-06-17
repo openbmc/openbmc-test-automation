@@ -9,6 +9,13 @@ Suite Setup         Redfish.Login
 Test Setup          Redfish Delete All BMC Dumps
 Test Teardown       Test Teardown Execution
 
+*** Variables ***
+
+# Total size of the dump in kilo bytes
+${BMC_DUMP_TOTAL_SIZE}       ${1024}
+
+# Minimum space required for one bmc dump in kilo bytes
+${BMC_DUMP_MIN_SPACE_REQD}   ${20}
 
 *** Test Cases ***
 
@@ -159,7 +166,7 @@ Verify Maximum BMC Dump Creation
     FOR  ${n}  IN RANGE  0  20
       Create User Initiated BMC Dump
       ${dump_space}=  Get Disk Usage For Dumps
-      Exit For Loop If  ${dump_space} >= 1024
+      Exit For Loop If  ${dump_space} >= (${BMC_DUMP_TOTAL_SIZE} - ${BMC_DUMP_MIN_SPACE_REQD})
     END
 
     # Check error while creating dump when dump size is full.
