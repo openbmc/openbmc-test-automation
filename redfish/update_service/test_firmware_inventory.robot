@@ -191,6 +191,29 @@ Verify Redfish Functional Version Is Same
     Should Be Equal  ${sw_inv_dict['version']}  ${firmware_version}
 
 
+Verify Redfish Software Image And Firmware Inventory Are Same
+    [Documentation]  Verify the firmware software inventory is same as software images of managers.
+    [Tags]  Verify_Redfish_Software_Image_And_Firmware_Inventory_Are_Same
+
+    # SoftwareImages
+    # /redfish/v1/UpdateService/FirmwareInventory/632c5114
+    # /redfish/v1/UpdateService/FirmwareInventory/e702a011
+
+    ${firmware_inv_path}=  Redfish.Get Properties  ${REDFISH_BASE_URI}Managers/bmc
+    ${firmware_inv_path}=  Get From Dictionary  ${firmware_inv_path}  Links
+    ${sw_image}=  Get From Dictionary  ${firmware_inv_path}  SoftwareImages
+
+    ${sw_member_list}=  Redfish_Utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+
+    FOR  ${sw_inv_path}  IN  @{sw_image}
+      List Should Contain Value  ${sw_member_list}  ${sw_inv_path['@odata.id']}
+    END
+
+    ${num_records_sw_image}=  Get Length  ${sw_image}
+    ${num_records_sw_inv}=  Get Length  ${sw_member_list}    
+    Should Be Equal  ${num_records_sw_image}  ${num_records_sw_inv}
+
+
 Verify Redfish BIOS Version
     [Documentation]  Get host firmware version from system inventory.
     [Tags]  Verify_Redfish_BIOS_Version
