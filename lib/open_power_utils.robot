@@ -80,7 +80,7 @@ Verify OCC State
     ...  ${HOST_INVENTORY_URI}system/chassis/motherboard/  cpu*
 
     FOR  ${endpoint_path}  IN  @{cpu_list}
-       ${is_functional}=  Read Object Attribute  ${endpoint_path}  Functional
+       ${is_functional}=  Read Object Attribute  ${endpoint_path}  Present
        Continue For Loop If  ${is_functional} == ${0}
        ${num}=  Set Variable  ${endpoint_path[-1]}
        ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
