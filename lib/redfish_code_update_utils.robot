@@ -153,8 +153,9 @@ Redfish Upload Image And Check Progress State
     ${image_id}=  Get Latest Image ID
     Rprint Vars  image_id
 
-    ${manifest}  ${stderr}  ${rc}=  BMC Execute Command  cat /tmp/images/${image_id}/MANIFEST
-    Rprint Vars  manifest
+    # TODO: Fix up code using Redfish update inventory
+    #${manifest}  ${stderr}  ${rc}=  BMC Execute Command  cat /tmp/images/${image_id}/MANIFEST
+    #Rprint Vars  manifest
 
     Wait Until Keyword Succeeds  1 min  05 sec
     ...  Check Image Update Progress State  match_state='Disabled', 'Updating'  image_id=${image_id}
