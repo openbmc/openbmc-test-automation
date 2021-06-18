@@ -529,12 +529,10 @@ Get Latest Image ID
     # Example: # ls /tmp/images/
     #            1b714fb7
     ${image_id}=  Get Latest File  /tmp/images/
-    Valid Value  image_id
 
-    # Though an image sub-directory was found, it really isn't valid unless
-    # the MANIFEST file is present.
-    BMC Execute Command  ls -l /tmp/images/${image_id}/MANIFEST
+    Return From Keyword If  '${image_id}' != '${EMPTY}'  ${image_id}
 
+    ${image_id}=   Get Image Id   Updating
     [Return]  ${image_id}
 
 

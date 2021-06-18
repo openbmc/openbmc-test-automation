@@ -148,25 +148,17 @@ Get Non Functional Firmware
 Redfish Upload Image And Check Progress State
     [Documentation]  Code update with ApplyTime.
 
+    Log To Console   Start uploading image to BMC.
     Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+    Log To Console   Completed image upload to BMC.
 
     ${image_id}=  Get Latest Image ID
     Rprint Vars  image_id
 
-    # TODO: Fix up code using Redfish update inventory
-    #${manifest}  ${stderr}  ${rc}=  BMC Execute Command  cat /tmp/images/${image_id}/MANIFEST
-    #Rprint Vars  manifest
-
-    Wait Until Keyword Succeeds  1 min  05 sec
+    Wait Until Keyword Succeeds  1 min  01 sec
     ...  Check Image Update Progress State  match_state='Disabled', 'Updating'  image_id=${image_id}
 
-    # Wait a few seconds to check if the update progress started.
-    Sleep  5s
-
-    Check Image Update Progress State
-    ...  match_state='Updating'  image_id=${image_id}
-
-    Wait Until Keyword Succeeds  8 min  20 sec
+    Wait Until Keyword Succeeds  8 min  10 sec
     ...  Check Image Update Progress State
     ...    match_state='Enabled'  image_id=${image_id}
 
