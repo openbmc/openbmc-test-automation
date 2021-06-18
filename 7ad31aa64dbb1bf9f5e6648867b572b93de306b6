@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68d887ba_8e2448a2",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-06-18T11:37:48Z",
+      "side": 1,
+      "message": "my suggestion:\n\n... ${snmp_manager}\u003d ${SNMP_MGR1_IP}  ${snmp_port}\u003d${SNMP_DEFAULT_PORT}\n\ninside keyword you can use this variables and use this keyword to generate error default and non default port instead of creating two",
+      "revId": "7ad31aa64dbb1bf9f5e6648867b572b93de306b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
