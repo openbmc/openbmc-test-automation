@@ -13,7 +13,7 @@ Resource  ../../lib/openbmc_ffdc.robot
 Resource  ../../lib/logging_utils.robot
 
 
-Test Teardown  FFDC On Test Case Fail
+#Test Teardown  FFDC On Test Case Fail
 Suite Setup    Suite Setup Execution
 
 *** Variables ***
@@ -80,6 +80,62 @@ Generate Error On BMC And Verify SNMP Trap
     [Documentation]  Generate error on BMC and verify trap and its fields.
     [Tags]  Generate_Error_On_BMC_And_Verify_SNMP_Trap
     [Template]  Create Error On BMC And Verify Trap
+
+    # event_log                 expected_error
+
+    # Generate internal failure error.
+    ${CMD_INTERNAL_FAILURE}     ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+    # Generate timeout error.
+    ${CMD_FRU_CALLOUT}          ${SNMP_TRAP_BMC_CALLOUT_ERROR}
+
+    # Generate informational error.
+    ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
+
+
+Configure SNMP Manager On BMC With Alpha Port And Verify
+    [Documentation]  Configure SNMP Manager On BMC with alpha port and verify.
+    [Tags]  Configure_SNMP_Manager_On_BMC_With_Alpha_Port_And_Verify
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${alpha_port}
+
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${alpha_port}  ${HTTP_BAD_REQUEST}
+
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${alpha_port}
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=BMC is allowing to configure invalid port.
+
+
+Configure SNMP Manager On BMC With Empty Port And Verify
+    [Documentation]  Configure SNMP Manager On BMC with empty port and verify
+    ...  SNMP manager gets configured with default port.
+    [Tags]  Configure_SNMP_Manager_On_BMC_With_Empty_Port_And_Verify
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${empty_port}
+
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+
+Configure Multiple SNMP Managers And Verify
+    [Documentation]  Configure multiple SNMP managers and verify.
+    [Tags]  Configure_Multiple_SNMP_Managers_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    ...  AND
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
+
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
+
+
+Generate Error On BMC And Verify SNMP Trap Is Sent To Non-Default Port
+    [Documentation]  Generate error on BMC and verify trap and its fields.
+    [Tags]  Generate_Error_On_BMC_And_Verify_SNMP_Trap_Is_Sent_To_Non-Default_Port
+    [Template]  Create Error On BMC And Verify Trap On Non-Default Port
 
     # event_log                 expected_error
 
