@@ -16,6 +16,24 @@
       "revId": "7ad31aa64dbb1bf9f5e6648867b572b93de306b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41f7f5f5_8b05eade",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-18T12:17:25Z",
+      "side": 1,
+      "message": "Good suggestion, even I thought of it.\nThen un-necessarily need to send additional arguments.\nNeed to add additional code to handle running snmp manager on different ports.\n\nI\u0027ll relook into it and optimize in later commits:\nThis can be tracked via: https://github.com/openbmc/openbmc-test-automation/issues/2119",
+      "parentUuid": "68d887ba_8e2448a2",
+      "revId": "7ad31aa64dbb1bf9f5e6648867b572b93de306b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
