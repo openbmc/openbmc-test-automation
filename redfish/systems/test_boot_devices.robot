@@ -20,7 +20,7 @@ Suite Teardown   Suite Teardown Execution
 # corresponding IPMI output value.
 &{redfish_ipmi_enabled_map}  Once=Options apply to only next boot
 ...                          Continuous=Options apply to all future boots
-...                          Disabled=Options apply to all future boots
+...                          Disabled=Boot Flag Invalid
 
 # This dictionary maps the redfish 'BootSourceOverrideTarget' value to the
 # corresponding IPMI output value.
@@ -49,11 +49,13 @@ Verify BMC Redfish Boot Source Override with Enabled Mode As Once
     Once                          Diags                       UEFI
     Once                          Cd                          UEFI
     Once                          BiosSetup                   UEFI
+    Once                          None                        UEFI
     Once                          Hdd                         Legacy
     Once                          Pxe                         Legacy
     Once                          Diags                       Legacy
     Once                          Cd                          Legacy
     Once                          BiosSetup                   Legacy
+    Once                          None                        Legacy
 
 
 Verify BMC Redfish Boot Source Override with Enabled Mode As Continuous
@@ -67,11 +69,33 @@ Verify BMC Redfish Boot Source Override with Enabled Mode As Continuous
     Continuous                    Diags                       UEFI
     Continuous                    Cd                          UEFI
     Continuous                    BiosSetup                   UEFI
+    Continuous                    None                        UEFI
     Continuous                    Hdd                         Legacy
     Continuous                    Pxe                         Legacy
     Continuous                    Diags                       Legacy
     Continuous                    Cd                          Legacy
     Continuous                    BiosSetup                   Legacy
+    Continuous                    None                        Legacy
+
+
+Verify BMC Redfish Boot Source Override with Enabled Mode As Disabled
+    [Documentation]  Verify BMC Redfish Boot Source Override with Enabled Mode As Disabled.
+    [Tags]           Verify_BMC_Redfish_Boot_Source_Override_with_Enabled_Mode_As_Disabled
+    [Template]  Set And Verify Boot Source Override
+
+    #BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
+    Disabled                      Hdd                         UEFI
+    Disabled                      Pxe                         UEFI
+    Disabled                      Diags                       UEFI
+    Disabled                      Cd                          UEFI
+    Disabled                      BiosSetup                   UEFI
+    Disabled                      None                        UEFI
+    Disabled                      Hdd                         Legacy
+    Disabled                      Pxe                         Legacy
+    Disabled                      Diags                       Legacy
+    Disabled                      Cd                          Legacy
+    Disabled                      BiosSetup                   Legacy
+    Disabled                      None                        Legacy
 
 
 *** Keywords ***
