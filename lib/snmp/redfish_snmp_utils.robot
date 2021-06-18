@@ -232,3 +232,61 @@ Start SNMP Manager
     # The execution of the SNMP_TRAPD_CMD is necessary to cause SNMP to begin
     # listening to SNMP messages.
     SSHLibrary.write  ${SNMP_TRAPD_CMD} &
+
+
+Create Error On BMC And Verify Trap On Non-Default Port
+    [Documentation]  Generate error on BMC and verify if trap is sent to non default port.
+    [Arguments]  ${event_log}=${CMD_INTERNAL_FAILURE}  ${expected_error}=${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+    # Description of argument(s):
+    # event_log       Event logs to be created.
+    # expected_error  Expected error on SNMP.
+
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
+
+    Start SNMP Manager On Specific Port  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
+
+    # Generate error log.
+    BMC Execute Command  ${event_log}
+
+    SSHLibrary.Switch Connection  snmp_server
+    ${SNMP_LISTEN_OUT}=  Read  delay=1s
+
+    Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
+
+    # Stop SNMP manager process.
+    SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    # Sample SNMP trap:
+    # 2021-06-16 07:05:29 xx.xx.xx.xx [UDP: [xx.xx.xx.xx]:58154->[xx.xx.xx.xx]:xxx]:
+    # DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (2100473) 5:50:04.73
+    #   SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.49871.1.0.0.1
+    #  SNMPv2-SMI::enterprises.49871.1.0.1.1 = Gauge32: 369    SNMPv2-SMI::enterprises.49871.1.0.1.2 = Opaque:
+    # UInt64: 1397718405502468474     SNMPv2-SMI::enterprises.49871.1.0.1.3 = INTEGER: 3
+    #      SNMPv2-SMI::enterprises.49871.1.0.1.4 = STRING: "xxx.xx.xx Failure"
+
+    ${lines}=  Split To Lines  ${SNMP_LISTEN_OUT}
+    ${trap_info}=  Get From List  ${lines}  -1
+    ${snmp_trap}=  Split String  ${trap_info}  \t
+
+    Verify SNMP Trap  ${snmp_trap}  ${expected_error}
+
+    [Return]  ${snmp_trap}
+
+
+Start SNMP Manager On Specific Port
+    [Documentation]  Start SNMP listener on specific port on the remote SNMP manager.
+    [Arguments]  ${snmp_mgr_ip}  ${snmp_port}
+
+    # Description of argument(s):
+    # snmp_mgr_ip  SNMP manager IP.
+    # snmp_port    Network port on which SNMP manager need to run.
+
+    ${ip_and_port}=  Catenate  ${snmp_mgr_ip}:${snmp_port}
+
+    Open Connection And Log In  ${SNMP_MGR1_USERNAME}  ${SNMP_MGR1_PASSWORD}
+    ...  alias=snmp_server  host=${SNMP_MGR1_IP}
+
+    # The execution of the SNMP_TRAPD_CMD is necessary to cause SNMP to begin
+    # listening to SNMP messages.
+    SSHLibrary.write  ${SNMP_TRAPD_CMD} ${ip_and_port} &
