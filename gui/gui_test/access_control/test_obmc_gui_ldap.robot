@@ -145,6 +145,14 @@ Verify LDAP User With Admin Privilege
     Redfish.Logout
 
 
+Verify Enabling LDAP
+     [Documentation]  Verify that LDAP can be enabled from disabled state.
+     [Tags]  Verify_Enabling_LDAP
+
+     Disable LDAP Configuration
+     Create LDAP Configuration
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -266,3 +274,20 @@ Delete LDAP Role Group
     # Verify group name after deleting.
     ${ldap_group_name}=  Get LDAP Privilege And Group Name Via Redfish
     List Should Not Contain Value  ${ldap_group_name}  ${group_name}  msg=${group_name} not available.
+
+
+Disable LDAP Configuration
+    [Documentation]  Disable LDAP configuration on BMC.
+
+    ${status}=  Run Keyword And Return Status
+    ...  Checkbox Should Be Selected  ${xpath_enable_ldap_checkbox}
+
+    Run Keyword If  ${status} == ${True}
+    ...  Click Element At Coordinates  ${xpath_enable_ldap_checkbox}  0  0
+
+    Checkbox Should Not Be Selected  ${xpath_enable_ldap_checkbox}
+    Click Element  ${xpath_ldap_save_settings}
+    Wait Until Page Contains  Successfully saved Open LDAP settings
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains Element  ${xpath_ldap_heading}
+
