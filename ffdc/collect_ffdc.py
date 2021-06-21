@@ -32,7 +32,9 @@ from ffdc_collector import FFDCCollector
               show_default=True, help="YAML Configuration file listing commands and files for FFDC.")
 @click.option('-l', '--location', default="/tmp",
               show_default=True, help="Location to store collected FFDC data")
-def cli_ffdc(remote, username, password, ffdc_config, location):
+@click.option('-t', '--remote_type', default="OPENBMC",
+              show_default=True, help="OS type of the remote (targeting) host. OPENBMC, RHEL, UBUNTU, AIX")
+def cli_ffdc(remote, username, password, ffdc_config, location, remote_type):
     r"""
     Stand alone CLI to generate and collect FFDC from the selected target.
     """
@@ -40,7 +42,7 @@ def cli_ffdc(remote, username, password, ffdc_config, location):
     click.echo("\n********** FFDC (First Failure Data Collection) Starts **********")
 
     if input_options_ok(remote, username, password, ffdc_config):
-        thisFFDC = FFDCCollector(remote, username, password, ffdc_config, location)
+        thisFFDC = FFDCCollector(remote, username, password, ffdc_config, location, remote_type)
         thisFFDC.collect_ffdc()
 
         if not thisFFDC.receive_file_list:

@@ -81,7 +81,7 @@ LINUX:
         - 'SSH'
 
 # Commands and Files to collect for Ubuntu Linux only
-UBUNTU_LINUX:
+UBUNTU:
     COMMANDS:
         - '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt 2>&1'
         - 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt 2>&1'
@@ -101,7 +101,7 @@ UBUNTU_LINUX:
         - 'SSH'
 
 # Commands and Files to collect for RHE Linux only
-RHEL_LINUX:
+RHEL:
     COMMANDS:
         - '/usr/bin/ctversion -bv >/tmp/OS_rsct.txt 2>&1'
         - 'cat /var/log/secure >/tmp/OS_secure.txt 2>&1'
@@ -119,7 +119,7 @@ RHEL_LINUX:
         - 'SSH'
 
 # Commands and Files to collect for AIX only
-AIX_LINUX:
+AIX:
     COMMANDS:
         - 'errpt >/tmp/OS_errpt.txt 2>&1 ; errclear 0;'
         - 'bindprocessor -q >/tmp/OS_processors.txt 2>&1'

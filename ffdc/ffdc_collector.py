@@ -21,7 +21,7 @@ class FFDCCollector:
 
     """
 
-    def __init__(self, hostname, username, password, ffdc_config, location):
+    def __init__(self, hostname, username, password, ffdc_config, location, remote_type):
         r"""
         Description of argument(s):
 
@@ -42,7 +42,7 @@ class FFDCCollector:
             self.ffdc_dir_path = ""
             self.ffdc_prefix = ""
             self.receive_file_list = []
-            self.target_type = ""
+            self.target_type = remote_type
         else:
             sys.exit(-1)
 
@@ -82,13 +82,15 @@ class FFDCCollector:
             print("\n>>>>>\tERROR: %s is not ping-able. FFDC collection aborted.\n" % self.hostname)
             sys.exit(-1)
 
-    def set_target_machine_type(self):
+    def inspect_target_machine_type(self):
         r"""
-        Determine and set target machine type.
+        Inspect remote host os-release.
 
         """
-        # Default to openbmc for first few sprints
-        self.target_type = "OPENBMC"
+        command = "cat /etc/os-release | grep 'PRETTY_NAME'"
+        response = self.remoteclient.execute_command(command)
+        print("\n\t[Informational] %s /etc/os-release\n" % self.hostname)
+        print("\t\t %s" % ' '.join(response))
 
     def collect_ffdc(self):
         r"""
@@ -104,7 +106,7 @@ class FFDCCollector:
                 working_protocol_list.append("SSH")
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
-            self.set_target_machine_type()
+            self.inspect_target_machine_type()
             print("\n\t---- Completed protocol pre-requisite check ----\n")
             self.generate_ffdc(working_protocol_list)
 
@@ -139,33 +141,48 @@ class FFDCCollector:
             ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
 
         for machine_type in ffdc_actions.keys():
-            if machine_type == self.target_type:
 
+            if machine_type == self.target_type:
                 if (ffdc_actions[machine_type]['PROTOCOL'][0] in working_protocol_list):
 
-                    print("\n\t[Run] Executing commands on %s using %s"
-                          % (self.hostname, ffdc_actions[machine_type]['PROTOCOL'][0]))
-                    list_of_commands = ffdc_actions[machine_type]['COMMANDS']
-                    progress_counter = 0
-                    for command in list_of_commands:
-                        self.remoteclient.execute_command(command)
-                        progress_counter += 1
-                        self.print_progress(progress_counter)
-                    print("\n\t[Run] Commands execution completed.\t\t [OK]")
+                    # For RHEL and UBUNTU, collect common Linux FFDC.
+                    if self.target_type == 'RHEL' \
+                            or self.target_type == 'UBUNTU':
 
-                    if self.remoteclient.scpclient:
-                        print("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
-                        # Get default values for scp action.
-                        # self.location == local system for now
-                        self.set_ffdc_defaults()
-                        # Retrieving files from target system
-                        list_of_files = ffdc_actions[machine_type]['FILES']
-                        self.scp_ffdc(self.ffdc_dir_path, self.ffdc_prefix, list_of_files)
-                    else:
-                        print("\n\n\tSkip copying FFDC files from remote system %s.\n" % self.hostname)
+                        self.collect_and_copy_ffdc(ffdc_actions['LINUX'])
+
+                    # Collect remote host specific FFDC.
+                    self.collect_and_copy_ffdc(ffdc_actions[machine_type])
                 else:
                     print("\n\tProtocol %s is not yet supported by this script.\n"
                           % ffdc_actions[machine_type]['PROTOCOL'][0])
+
+        # Close network connection after collecting all files
+        self.remoteclient.ssh_remoteclient_disconnect()
+
+    def collect_and_copy_ffdc(self,
+                              ffdc_actions_for_machine_type):
+
+        print("\n\t[Run] Executing commands on %s using %s"
+              % (self.hostname, ffdc_actions_for_machine_type['PROTOCOL'][0]))
+        list_of_commands = ffdc_actions_for_machine_type['COMMANDS']
+        progress_counter = 0
+        for command in list_of_commands:
+            self.remoteclient.execute_command(command)
+            progress_counter += 1
+            self.print_progress(progress_counter)
+            print("\n\t[Run] Commands execution completed.\t\t [OK]")
+
+        if self.remoteclient.scpclient:
+            print("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
+            # Get default values for scp action.
+            # self.location == local system for now
+            self.set_ffdc_defaults()
+            # Retrieving files from target system
+            list_of_files = ffdc_actions_for_machine_type['FILES']
+            self.scp_ffdc(self.ffdc_dir_path, self.ffdc_prefix, list_of_files)
+        else:
+            print("\n\n\tSkip copying FFDC files from remote system %s.\n" % self.hostname)
 
     def scp_ffdc(self,
                  targ_dir_path,
@@ -183,7 +200,6 @@ class FFDCCollector:
 
         """
 
-        self.receive_file_list = []
         progress_counter = 0
         for filename in file_list:
             source_file_path = filename
@@ -203,8 +219,6 @@ class FFDCCollector:
             else:
                 progress_counter += 1
                 self.print_progress(progress_counter)
-
-        self.remoteclient.ssh_remoteclient_disconnect()
 
     def set_ffdc_defaults(self):
         r"""
