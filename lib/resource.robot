@@ -82,6 +82,11 @@ ${CHANNEL_NUMBER}          1
 ${TCP_PACKETS}             tcp
 ${ICMP_NETMASK_REQUEST}    17
 ${REDFISH_INTERFACE}       443
+${SYN_PACKETS}             SYN
+${RESET_PACKETS}           RST
+${FIN_PACKETS}             FIN
+${SYN_ACK_RESET}           SAR
+${ALL_FLAGS}               ALL
 
 # BMC debug tarball parameter
 ${DEBUG_TARBALL_PATH}  ${EMPTY}
