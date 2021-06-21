@@ -11,6 +11,12 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
+${xpath_control_menu}                   //*[@data-test-id="nav-button-control"]
+${xpath_power_restore_policy_sub_menu}  //*[@data-test-id="nav-item-power-restore-policy"]
+${xpath_poweroff_host}                  //*[contains(text(),'Always off')]
+${xpath_poweron_host}                   //*[contains(text(),'Always on')]
+${xpath_power_save_settings}            //*[contains(text(),'Save settings')]
+${xpath_user_header}                    //*[@id="app-header-user"]
 ${xpath_ldap_heading}                   //h1[text()="LDAP"]
 ${xpath_enable_ldap_checkbox}           //*[@data-test-id='ldap-checkbox-ldapAuthenticationEnabled']
 ${xpath_secure_ldap_checkbox}           //*[@data-test-id='ldap-checkbox-secureLdapEnabled']
@@ -153,6 +159,17 @@ Verify Enabling LDAP
      Create LDAP Configuration
 
 
+Verify LDAP User With Admin Privilege Able To Power On Host
+    [Documentation]  Verify that LDAP user with admin privilege able to poweron host.
+    [Tags]  Verify_LDAP_User_With_Admin_Privilege_Able_To_Pweron_Host
+    [Teardown]  Login BMC And Delete LDAP Role Group
+    ...  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${GROUP_NAME}
+
+    Update LDAP Configuration with LDAP User Role And Group  ${GROUP_NAME}  Administrator
+    Logout BMC Via GUI
+    Login BMC And Power On/Off And Logout  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -273,6 +290,7 @@ Delete LDAP Role Group
 
     # Verify group name after deleting.
     ${ldap_group_name}=  Get LDAP Privilege And Group Name Via Redfish
+<<<<<<< 454b791a3560c4e4bcdc78474c3a7071272fa9aa
     List Should Not Contain Value  ${ldap_group_name}  ${group_name}  msg=${group_name} not available.
 
 
@@ -291,3 +309,80 @@ Disable LDAP Configuration
     Click Element  ${xpath_refresh_button}
     Wait Until Page Contains Element  ${xpath_ldap_heading}
 
+=======
+    List Should Not Contain Value  ${ldap_group_name}  ${group_name}  msg=${group_name} available.
+
+
+Logout BMC Via GUI
+     [Documentation]  Logout BMC via GUI.
+ 
+     Click Element  ${xpath_refresh_button}
+     Sleep  10s
+     Wait Until Element Is Visible  ${xpath_user_header}
+     Click Element  ${xpath_user_header}
+     Wait Until Element Is Visible  ${xpath_logout_button}  timeout=30
+     Double Click Element  ${xpath_logout_button}
+     Wait Until Element Is Enabled  ${xpath_login_button}
+
+
+Login BMC And Navigate To LDAP Page
+     [Documentation]  Login BMC and navigate to ldap page.
+     [Arguments]  ${username}=${OPENBMC_USERNAME}  ${password}=${OPENBMC_PASSWORD}
+
+     # Description of argument(s):
+     # username  The username to be used for login.
+     # password  The password to be used for login.
+
+     Login GUI  ${username}  ${password}
+     # Navigate to https://xx.xx.xx.xx/#/access-control/ldap  LDAP page.
+     Click Element  ${xpath_access_control_menu}
+     Click Element  ${xpath_ldap_sub_menu}
+     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
+     Sleep  10s
+
+
+Login BMC And Delete LDAP Role Group
+     [Documentation]  Login BMC navigate to ldap page and delete group.
+     [Arguments]  ${username}  ${password}  ${groupname}
+     
+     # Description of argument(s):
+     # username  The username to be used for login.
+     # password  The password to be used for login.
+
+     Login BMC And Navigate To LDAP Page  ${username}  ${password}
+     Delete LDAP Role Group  ${groupname}
+
+
+Login BMC And Power On/Off And Logout
+    [Documentation]  Login BMC, poweron/off and logout
+    [Arguments]  ${username}  ${password}  ${state}=On   ${expected}=valid
+    [Teardown]  Run Keyword If  ${status} == ${True}  Logout BMC Via GUI
+
+    # Description of argument(s):
+    # username  The username to be used for login.
+    # password  The password to be used for login.
+    # state     If host_state is on then host is booted to operating system.
+    #           If host_state is off then host is power off.
+    #           (eg. on, off).
+    # expected  Expected optionally provided in testcase (e.g. valid/ invalid)
+
+    ${status}=  Run Keyword And Return status  Login GUI  ${username}  ${password}
+    Should Be True  ${status}  msg=Please enter valid username and password.
+
+    Click Element  ${xpath_control_menu}
+    Click Element  ${xpath_power_restore_policy_sub_menu}
+    Wait Until Page Contains  Power restore policy
+    Wait Until Page Contains Element  ${xpath_poweron_host}
+
+    Run Keyword If  '${state}' =='On'
+    ...  Click Element  ${xpath_poweron_host}
+    ...  ELSE IF  '${state}' =='Off'
+    ...  Click Element  ${xpath_poweroff_host}
+
+    Click Element  ${xpath_power_save_settings}
+
+    Run Keyword If  '${expected}' == 'valid'
+    ...  Wait Until Page Contains  Power restore policy updated successfully.
+    ...  ELSE
+    ...  Wait Until Page Contains  Error saving settings.
+>>>>>>> Added testcases to Verify LDAP User With Admin Privilege Able To Power On Host
