@@ -42,7 +42,7 @@ ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}  xyz.openbmc_project.Common.Error.TestError
 
 *** Test Cases ***
 
-Configure SNMP Manager On BMC And Verify
+Configure SNMP Manager Via Redfish And Verify
     [Documentation]  Configure SNMP manager on BMC via Redfish and verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_And_Verify
     [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
@@ -52,8 +52,8 @@ Configure SNMP Manager On BMC And Verify
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
 
-Configure SNMP Manager On BMC With Non-default Port And Verify
-    [Documentation]  Configure SNMP Manager On BMC And Verify.
+Configure SNMP Manager Via Redfish With Non-default Port And Verify
+    [Documentation]  Configure SNMP Manager Via Redfish And Verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Non_Default_Port_And_Verify
     [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
@@ -62,8 +62,8 @@ Configure SNMP Manager On BMC With Non-default Port And Verify
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
 
-Configure SNMP Manager On BMC With Out Of Range Port And Verify
-    [Documentation]  Configure SNMP Manager On BMC with out-of range port and verify.
+Configure SNMP Manager Via Redfish With Out Of Range Port And Verify
+    [Documentation]  Configure SNMP Manager Via Redfish with out-of range port and verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Out_Of_Range_Port_And_Verify
     [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${out_of_range_port}
 
@@ -93,8 +93,8 @@ Generate Error On BMC And Verify SNMP Trap
     ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
 
 
-Configure SNMP Manager On BMC With Alpha Port And Verify
-    [Documentation]  Configure SNMP Manager On BMC with alpha port and verify.
+Configure SNMP Manager Via Redfish With Alpha Port And Verify
+    [Documentation]  Configure SNMP Manager Via Redfish with alpha port and verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Alpha_Port_And_Verify
     [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${alpha_port}
 
@@ -107,8 +107,8 @@ Configure SNMP Manager On BMC With Alpha Port And Verify
     ...  msg=BMC is allowing to configure invalid port.
 
 
-Configure SNMP Manager On BMC With Empty Port And Verify
-    [Documentation]  Configure SNMP Manager On BMC with empty port and verify
+Configure SNMP Manager Via Redfish With Empty Port And Verify
+    [Documentation]  Configure SNMP Manager Via Redfish with empty port and verify
     ...  SNMP manager gets configured with default port.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Empty_Port_And_Verify
     [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
@@ -149,6 +149,64 @@ Generate Error On BMC And Verify SNMP Trap Is Sent To Non-Default Port
     ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
 
 
+Verify SNMP SysUpTime
+    [Documentation]  Verify SNMP SysUpTime.
+    [Tags]  Verify_SNMP_SysUpTime
+
+    Generate Error And Verify System Up Time
+
+
+Verify SNMP SysUpTime On BMC Reboot
+    [Documentation]  Verify SNMP SysUpTime on BMC reboot.
+    [Tags]  Verify_SNMP_SysUpTime_On_BMC_Reboot
+
+    # Reboot BMC to reset system uptime.
+    OBMC Reboot (off)
+
+    ${uptime}=  Generate Error And Verify System Up Time
+
+    # Check if uptime is reset after reboot.
+    Should Be True  ${uptime} <= 1  msg=SNMP SysUpTime is not reset on reboot
+
+
+Configure Multiple SNMP Managers With Non-default Port And Verify
+    [Documentation]  Configure multiple SNMP Managers with non-default port And Verify.
+    [Tags]  Configure_Multiple_SNMP_Managers_With_Non_Default_Port_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
+    ...  AND
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+
+    # Configure multiple SNMP managers with non-default port.
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+
+    # Verify if SNMP managers are configured.
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+
+
+Configure Multiple SNMP Managers With Different Ports And Verify
+    [Documentation]  Configure multiple SNMP Managers with different ports And Verify.
+    [Tags]  Configure_Multiple_SNMP_Managers_With_Different_Ports_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    ...  AND
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+    ...  AND
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR3_IP}  ${NON_DEFAULT_PORT2}
+
+    # Configure multiple SNMP managers with diffrent ports.
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR3_IP}  ${NON_DEFAULT_PORT2}
+
+    # Verify if SNMP managers are configured.
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR3_IP}  ${NON_DEFAULT_PORT2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -159,3 +217,40 @@ Suite Setup Execution
     # Check for SNMP configurations.
     Valid Value  SNMP_MGR1_IP
     Valid Value  SNMP_DEFAULT_PORT
+
+
+Generate Error And Verify System Up Time
+    [Documentation]  Generate error and verify system up time.
+
+    # Get system uptime on BMC.
+    # Example output of uptime:
+    # (8055.79 15032.86)
+
+    ${cmd_output}   ${stderr}  ${rc}=  BMC Execute Command  cat /proc/uptime
+    @{times}=  Split String  ${cmd_output}
+
+    ${bmc_uptime_in_minutes}=  Evaluate  int(${times}[0])/60
+
+    ${trap}=  Create Error On BMC And Verify Trap
+
+    # Extract System up time from SNMP trap.
+    # Example - SNMP trap:
+    # DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (252367) 0:42:03.67
+    # SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.49871.1.0.0.1
+    # SNMPv2-SMI::enterprises.49871.1.0.1.1 = Gauge32: 54
+    # SNMPv2-SMI::enterprises.49871.1.0.1.2 = Opaque: UInt64: 4622921648578756984
+    # SNMPv2-SMI::enterprises.49871.1.0.1.3 = INTEGER: 3
+    # SNMPv2-SMI::enterprises.49871.1.0.1.4 = STRING:
+
+    @{words}=  Split String  ${trap}[0]  =
+
+    ${timeticks}=  Fetch From Right  ${words}[1]  (
+    ${snmp_sysuptime}=  Fetch From Left  ${timeticks}  )
+
+    # SNMP SysUptime will be in milli seconds.
+    # Convert into minutes.
+    ${sysuptime_in_minutes}=  Evaluate  int(${snmp_sysuptime})/6000
+
+    Should Be Equal As Integers  ${bmc_uptime_in_minutes}  ${sysuptime_in_minutes}
+
+    [Return]  ${sysuptime_in_minutes}
