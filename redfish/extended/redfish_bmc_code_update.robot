@@ -51,6 +51,7 @@ Redfish BMC Code Update
 
     ${post_code_update_actions}=  Get Post Boot Action
     ${state}=  Get Pre Reboot State
+    Set Test Variable  ${state}
     Rprint Vars  state
 
     # Check if the existing firmware is functional.
@@ -64,27 +65,11 @@ Redfish BMC Code Update
     Run Keyword If  not ${FORCE_UPDATE}
     ...  Run Keyword If  ${num_records} > 0
     ...    Run Keyword If  '${nonfunctional_sw_inv['version']}' == '${image_version}'
-    ...      Run Keywords  Switch Backup Firmware Image To Functional  AND
-    ...      Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}  AND
-    ...      Redfish Verify BMC Version  ${IMAGE_FILE_PATH}  AND
-    ...      Pass Execution  The firmware ${image_version} is backup image.
+    ...      Run Keywords  Print Timen
+    ...      Switch to back up image then BMC gets auto-reboot and back up image will become functional.  AND
+    ...      Set Backup Firmware To Functional
 
-    # Firmware inventory record of the given image version.
-    ${image_info}=  Get Software Inventory State By Version  ${image_version}
-
-    ${image_info_len}=  Get Length  ${image_info}
-
-    # REST delete the image to fresh code update for a given same image object
-    # which is already ACTIVE but on the alternate side. Irrespective of when
-    # REST is disabled in near future or the below operation fails, is purely
-    # done to give a chance.
-
-    Run Keyword If  '${image_info_len}' != 0
-    ...  Run Keywords  Print Timen
-    ...  The ${image_version} version is installed but not functional, delete and continue update.
-    ...    AND
-    ...  Run Keyword And Ignore Error
-    ...    Delete Software Object  /xyz/openbmc_project/software/${image_info['image_id']}
+    Print Timen  Fresh firmware update will start for firmware version ${image_version}.
 
     Redfish Update Firmware
 
@@ -211,6 +196,15 @@ Set BMC Image Priority To Least
     ...  Priority  ${least_priority}
 
     Redfish OBMC Reboot (off)
+
+
+Set Backup Firmware To Functional
+    [Documentation]  Set the backup firmware to fucntional.
+
+    Switch Backup Firmware Image To Functional
+    Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+    Pass Execution  The firmware ${image_version} is backup image.
 
 
 Redfish Update Firmware
