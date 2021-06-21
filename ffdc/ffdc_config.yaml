@@ -9,6 +9,9 @@
 # Note: Items in COMMANDS and FILES are not necessarily one-to-one correspondence.
 #       For example, a file could have been created by an internal process,
 #       and is listed in FILES to be collected.
+#
+# Note: When a new remote type is added to this configuration file,
+#       it is also need to be added the list of supported OSes in ffdc_lollector.py
 
 # Commands and Files to collect for a given OpenBMC system.
 OPENBMC:
@@ -81,7 +84,7 @@ LINUX:
         - 'SSH'
 
 # Commands and Files to collect for Ubuntu Linux only
-UBUNTU_LINUX:
+UBUNTU:
     COMMANDS:
         - '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt 2>&1'
         - 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt 2>&1'
@@ -101,7 +104,7 @@ UBUNTU_LINUX:
         - 'SSH'
 
 # Commands and Files to collect for RHE Linux only
-RHEL_LINUX:
+RHEL:
     COMMANDS:
         - '/usr/bin/ctversion -bv >/tmp/OS_rsct.txt 2>&1'
         - 'cat /var/log/secure >/tmp/OS_secure.txt 2>&1'
@@ -119,7 +122,7 @@ RHEL_LINUX:
         - 'SSH'
 
 # Commands and Files to collect for AIX only
-AIX_LINUX:
+AIX:
     COMMANDS:
         - 'errpt >/tmp/OS_errpt.txt 2>&1 ; errclear 0;'
         - 'bindprocessor -q >/tmp/OS_processors.txt 2>&1'
