@@ -64,7 +64,9 @@ Redfish BMC Code Update
     Run Keyword If  not ${FORCE_UPDATE}
     ...  Run Keyword If  ${num_records} > 0
     ...    Run Keyword If  '${nonfunctional_sw_inv['version']}' == '${image_version}'
-    ...      Run Keywords  Switch Backup Firmware Image To Functional  AND
+    ...      Run Keywords  Print Timen
+    ...      Switch to back up image then BMC gets auto-reboot and back up image will become functional.  AND
+    ...      Switch Backup Firmware Image To Functional  AND
     ...      Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}  AND
     ...      Redfish Verify BMC Version  ${IMAGE_FILE_PATH}  AND
     ...      Pass Execution  The firmware ${image_version} is backup image.
@@ -85,6 +87,8 @@ Redfish BMC Code Update
     ...    AND
     ...  Run Keyword And Ignore Error
     ...    Delete Software Object  /xyz/openbmc_project/software/${image_info['image_id']}
+
+    Print Timen  Fresh firmware update will start for firmware version ${image_version}.
 
     Redfish Update Firmware
 
