@@ -102,16 +102,27 @@ class FFDCCollector:
             print("\n\t[INFO] %s uname -a\n" % self.hostname)
             print("\t\t %s" % ' '.join(response))
             identity = self.find_os_type(response, 'AIX').split(' ')[0].upper()
+
+            # If OS does not have /etc/os-release and is not AIX,
+            # script does not yet know what to do.
             if not identity:
                 print(">>>>>\tERROR: Script does not yet know about %s" % ' '.join(response))
                 sys.exit(-1)
 
         if self.target_type not in identity:
             user_target_type = self.target_type
+            self.target_type = ""
             for each_os in FFDCCollector.supported_oses:
                 if each_os in identity:
                     self.target_type = each_os
                     break
+
+            # If OS in not one of ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU']
+            # script does not yet know what to do.
+            if not self.target_type:
+                print(">>>>>\tERROR: Script does not yet know about %s" % identity)
+                sys.exit(-1)
+
             print("\n\t[WARN] user request %s does not match remote host type %s.\n"
                   % (user_target_type, self.target_type))
             print("\t[WARN] FFDC collection continues for %s.\n" % self.target_type)
@@ -185,12 +196,27 @@ class FFDCCollector:
         with open(self.ffdc_config, 'r') as file:
             ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
 
+        # Set prefix values for scp files and directory.
+        # Since the time stamp is at second granularity, these values are set here
+        # to be sure that all files for this run will have same timestamps
+        # and they will be saved in the same directory.
+        # self.location == local system for now
+        self.set_ffdc_defaults()
+
         for machine_type in ffdc_actions.keys():
 
             if machine_type == self.target_type:
                 if (ffdc_actions[machine_type]['PROTOCOL'][0] in working_protocol_list):
 
-                    # For RHEL and UBUNTU, collect common Linux FFDC.
+                    # For OPENBMC, RHEL and UBUNTU, collect common Linux-based system info.
+                    if self.target_type == 'RHEL' \
+                            or self.target_type == 'UBUNTU' \
+                            or self.target_type == 'OPENBMC':
+
+                        self.collect_and_copy_ffdc(ffdc_actions['GENERAL'],
+                                                   form_filename=True)
+
+                    # For RHEL and UBUNTU, collect common Linux OS FFDC.
                     if self.target_type == 'RHEL' \
                             or self.target_type == 'UBUNTU':
 
@@ -206,7 +232,8 @@ class FFDCCollector:
         self.remoteclient.ssh_remoteclient_disconnect()
 
     def collect_and_copy_ffdc(self,
-                              ffdc_actions_for_machine_type):
+                              ffdc_actions_for_machine_type,
+                              form_filename=False):
         r"""
         Send commands in ffdc_config file to targeted system.
 
@@ -219,6 +246,8 @@ class FFDCCollector:
         list_of_commands = ffdc_actions_for_machine_type['COMMANDS']
         progress_counter = 0
         for command in list_of_commands:
+            if form_filename:
+                command = str(command % self.target_type)
             self.remoteclient.execute_command(command)
             progress_counter += 1
             self.print_progress(progress_counter)
@@ -227,18 +256,17 @@ class FFDCCollector:
 
         if self.remoteclient.scpclient:
             print("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
-            # Get default values for scp action.
-            # self.location == local system for now
-            self.set_ffdc_defaults()
+
             # Retrieving files from target system
             list_of_files = ffdc_actions_for_machine_type['FILES']
-            self.scp_ffdc(self.ffdc_dir_path, self.ffdc_prefix, list_of_files)
+            self.scp_ffdc(self.ffdc_dir_path, self.ffdc_prefix, form_filename, list_of_files)
         else:
             print("\n\n\tSkip copying FFDC files from remote system %s.\n" % self.hostname)
 
     def scp_ffdc(self,
                  targ_dir_path,
-                 targ_file_prefix="",
+                 targ_file_prefix,
+                 form_filename,
                  file_list=None,
                  quiet=None):
         r"""
@@ -254,6 +282,8 @@ class FFDCCollector:
 
         progress_counter = 0
         for filename in file_list:
+            if form_filename:
+                filename = str(filename % self.target_type)
             source_file_path = filename
             targ_file_path = targ_dir_path + targ_file_prefix + filename.split('/')[-1]
 
