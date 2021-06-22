@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ea72678_b91295bc",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_network_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-22T04:44:36Z",
+      "side": 1,
+      "message": "Configure And Verify Network Settings\n    [Documentation]  Configure and verify network settings.\n    [Arguments]  ${xpath}  ${nw_settings}\n\n    # Description of argument(s):\n    # xpath  xpath of the network settings.\n    # nw_settings  The mac address, hostname etc.\n\n    Wait Until Element Is Enabled  ${xpath}\n    Input Text  ${xpath}  ${nw_settings}\n    Click Button  ${xpath_network_save_settings}\n    Wait Until Page Contains Element  ${xpath_setting_success}  timeout\u003d10\n    Textfield Value Should Be  ${xpath}  ${nw_settings}\n\nyou can use template",
+      "revId": "5995c713466327711c3579d7572b2cfce91d154d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
