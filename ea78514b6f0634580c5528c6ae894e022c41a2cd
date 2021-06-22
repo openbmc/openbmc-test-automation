@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cf85a2a0_cc109c06",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-22T06:14:22Z",
+      "side": 1,
+      "message": "I prefer to keep it same here. Dont want to use dictionary here.",
+      "parentUuid": "318e42de_9b140107",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "ea78514b6f0634580c5528c6ae894e022c41a2cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e165b60e_5292ef7d",
         "filename": "openpower/vpd/test_redfish_vpd.robot",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3e00fe9f_da4c3658",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-22T06:14:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e165b60e_5292ef7d",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 25
+      },
+      "revId": "ea78514b6f0634580c5528c6ae894e022c41a2cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6718aee_75e3bf7c",
         "filename": "openpower/vpd/test_redfish_vpd.robot",
         "patchSetId": 6
@@ -59,6 +107,30 @@
       "writtenOn": "2021-06-22T05:48:24Z",
       "side": 1,
       "message": "Better to have a dictionary with these values.",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 59,
+        "endChar": 75
+      },
+      "revId": "ea78514b6f0634580c5528c6ae894e022c41a2cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cb08ec0_627147f9",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-22T06:14:22Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "parentUuid": "a6718aee_75e3bf7c",
       "range": {
         "startLine": 49,
         "startChar": 1,
