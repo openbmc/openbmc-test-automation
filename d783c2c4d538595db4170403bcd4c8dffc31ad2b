@@ -16,6 +16,24 @@
       "revId": "d783c2c4d538595db4170403bcd4c8dffc31ad2b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0aebbbc_25178736",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-06-22T08:08:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd719764_da100854",
+      "revId": "d783c2c4d538595db4170403bcd4c8dffc31ad2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
