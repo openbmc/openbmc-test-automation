@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd719764_da100854",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-06-22T07:31:53Z",
+      "side": 1,
+      "message": "pls correct-request_post_method needs to be changed to request_post\n\nAlso, suggestion to use self.request_post ,if looks feasible, else ok.",
+      "revId": "d783c2c4d538595db4170403bcd4c8dffc31ad2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
