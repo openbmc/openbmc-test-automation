@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a59549e2_314b41ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-22T07:33:59Z",
+      "side": 1,
+      "message": "verify enabling LDAP",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 57
+      },
+      "revId": "8fe0f82081503df8d758d60468ced28b2537edc2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea37bfc7_d3735615",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-22T07:33:59Z",
+      "side": 1,
+      "message": "Verify Enabling LDAP",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 39
+      },
+      "revId": "8fe0f82081503df8d758d60468ced28b2537edc2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "527a60c9_abfde494",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-22T07:33:59Z",
+      "side": 1,
+      "message": "Verify that LDAP can be enabled from disabled state.",
+      "range": {
+        "startLine": 149,
+        "startChar": 22,
+        "endLine": 149,
+        "endChar": 61
+      },
+      "revId": "8fe0f82081503df8d758d60468ced28b2537edc2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
