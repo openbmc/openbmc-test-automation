@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3c66e48_483dfa6e",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-22T16:36:25Z",
+      "side": 1,
+      "message": "This should ONLY be for OPENBMC",
+      "range": {
+        "startLine": 212,
+        "startChar": 19,
+        "endLine": 214,
+        "endChar": 61
+      },
+      "revId": "c1e9e9d737b774f9d61bda49601c847b254c52a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
