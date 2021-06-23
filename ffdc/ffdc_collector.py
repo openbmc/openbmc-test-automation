@@ -45,7 +45,6 @@ class FFDCCollector:
             self.remote_client = None
             self.ffdc_dir_path = ""
             self.ffdc_prefix = ""
-            self.receive_file_list = []
             self.target_type = remote_type.upper()
         else:
             sys.exit(-1)
@@ -213,6 +212,7 @@ class FFDCCollector:
 
                         self.collect_and_copy_ffdc(ffdc_actions['GENERAL'],
                                                    form_filename=True)
+                        self.group_copy(ffdc_actions['OPENBMC_DUMPS'])
 
                     # For RHEL and UBUNTU, collect common Linux OS FFDC.
                     if self.target_type == 'RHEL' \
@@ -262,6 +262,36 @@ class FFDCCollector:
         else:
             print("\n\n\tSkip copying FFDC files from remote system %s.\n" % self.hostname)
 
+    def group_copy(self,
+                   ffdc_actions_for_machine_type):
+
+        r"""
+        scp group of files (wild card) from remote host.
+
+        Description of argument(s):
+        ffdc_actions_for_machine_type    commands and files for the selected remote host type.
+        """
+        if self.remoteclient.scpclient:
+            print("\n\tCopying files from remote system %s.\n" % self.hostname)
+
+            # Retrieving files from target system, if any
+            list_of_files = ffdc_actions_for_machine_type['FILES']
+
+            for filename in list_of_files:
+                command = 'ls -AX ' + filename
+                response = self.remoteclient.execute_command(command)
+                # self.remoteclient.scp_file_from_remote() completed without exception,
+                # if any
+                if response:
+                    scp_result = self.remoteclient.scp_file_from_remote(filename, self.ffdc_dir_path)
+                    if scp_result:
+                        print("\t\tSuccessfully copied from " + self.hostname + ':' + filename)
+                else:
+                    print("\t\tThere is no  " + filename)
+
+        else:
+            print("\n\n\tSkip copying files from remote system %s.\n" % self.hostname)
+
     def scp_ffdc(self,
                  targ_dir_path,
                  targ_file_prefix,
@@ -289,8 +319,6 @@ class FFDCCollector:
             # self.remoteclient.scp_file_from_remote() completed without exception,
             # add file to the receiving file list.
             scp_result = self.remoteclient.scp_file_from_remote(source_file_path, targ_file_path)
-            if scp_result:
-                self.receive_file_list.append(targ_file_path)
 
             if not quiet:
                 if scp_result:
