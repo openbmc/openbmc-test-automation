@@ -153,6 +153,27 @@ Verify Enabling LDAP
      Create LDAP Configuration
 
 
+Verify LDAP User With Readonly Privilege
+    [Documentation]  Verify that LDAP user with readonly privilege can access network URI.
+    [Tags]  Verify_LDAP_User_With_Readonly_Privilege
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Delete LDAP Role Group  ${GROUP_NAME}
+
+    Update LDAP Configuration with LDAP User Role And Group  ${GROUP_NAME}  ReadOnly
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Get  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0
+
+
+Verify LDAP User With NoAccess Privilege
+    [Documentation]  Verify that LDAP user with no access privilege can not access network URI.
+    [Tags]  Verify_LDAP_User_With_NoAccess_Privilege
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Delete LDAP Role Group  ${GROUP_NAME}
+
+    Update LDAP Configuration with LDAP User Role And Group  ${GROUP_NAME}  NoAccess
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Get  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0
+    ...  valid_status_codes=[${HTTP_FORBIDDEN}]
+
+
 *** Keywords ***
 
 Suite Setup Execution
