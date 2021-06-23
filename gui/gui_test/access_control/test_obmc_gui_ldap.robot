@@ -153,6 +153,18 @@ Verify Enabling LDAP
      Create LDAP Configuration
 
 
+Read Network Configuration Via Different User Roles And Verify Using GUI
+    [Documentation]  Read network configuration via different user roles and verify.
+    [Tags]  Read_Network_Configuration_Via_Different_User_Roles_And_Verify_Using_GUI
+    [Template]  Update LDAP User Role And Read Network Configuration Via GUI
+
+    # group_name     user_role      valid_status_code
+    ${GROUP_NAME}    Administrator  ${HTTP_OK}
+    ${GROUP_NAME}    Operator       ${HTTP_OK}
+    ${GROUP_NAME}    ReadOnly       ${HTTP_OK}
+    ${GROUP_NAME}    NoAccess       ${HTTP_FORBIDDEN}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -164,6 +176,7 @@ Suite Setup Execution
     Click Element  ${xpath_access_control_menu}
     Click Element  ${xpath_ldap_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
+    Element Should Be Enabled   ${xpath_enable_ldap_checkbox}
 
     Valid Value  LDAP_TYPE  valid_values=["ActiveDirectory", "LDAP"]
     Valid Value  LDAP_USER
@@ -291,3 +304,48 @@ Disable LDAP Configuration
     Click Element  ${xpath_refresh_button}
     Wait Until Page Contains Element  ${xpath_ldap_heading}
 
+
+Login BMC And Navigate To LDAP Page
+    [Documentation]  Login BMC and navigate to ldap page.
+    [Arguments]  ${username}=${OPENBMC_USERNAME}  ${password}=${OPENBMC_PASSWORD}
+
+    # Description of argument(s):
+    # username  The username to be used for login.
+    # password  The password to be used for login.
+
+    Login GUI  ${username}  ${password}
+    # Navigate to https://xx.xx.xx.xx/#/access-control/ldap  LDAP page.
+    Click Element  ${xpath_access_control_menu}
+    Click Element  ${xpath_ldap_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
+
+
+Update LDAP User Role And Read Network Configuration Via GUI
+    [Documentation]  Update LDAP user role and read network configuration via GUI.
+    [Arguments]  ${group_name}  ${user_role}  ${valid_status_codes}
+    [Teardown]  Run Keywords  Logout GUI  AND  Login BMC And Navigate To LDAP Page
+    ...  AND  Delete LDAP Role Group  ${group_name}
+
+    # Description of argument(s):
+    # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_name         The group name of user.
+    # valid_status_code  The expected valid status code.
+
+
+    Update LDAP Configuration with LDAP User Role And Group  ${group_name}  ${user_role}
+    Logout GUI
+    Login GUI  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    Click Element  ${xpath_server_configuration}
+    Click Element  ${xpath_select_network_settings}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network-settings
+
+    t${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}  valid_status_codes=[${valid_status_codes}]
+    Return From Keyword If  ${valid_status_codes} == ${HTTP_FORBIDDEN}
+
+    ${host_name}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    Textfield Value Should Be  ${xpath_hostname_input}  ${host_name}
+
+    ${mac_address}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  MACAddress
+    Textfield Value Should Be  ${xpath_mac_address_input}  ${mac_address}
