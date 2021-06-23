@@ -501,6 +501,37 @@ Send CSR Request And Corrupted CSR Requests From Non Admin Users Concurrently An
         ...  msg=One or more operations has failed.
     END
 
+Get Root Certificate From Admin And Send CSR Requests From Admin Operator Concurrently And Verify
+    [Documentation]  Get root certificate from admin and send csr requests
+    ...  from admin and operator concurrently and verify gets root certificate
+    ...  and signed certificate and gets error for operator.
+    [Tags]  Get_Root_Certificate_From_Admin_And_Send_CSR_Requests_From_Admin_And_Operator_Concurrently_And_Verify
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
+
+Get Root Certificate From Admin And Send Corrupted CSR Requests From Admin Operator Concurrently And Verify
+    [Documentation]  Get root certificate from admin and send corrupted csr requests
+    ...  from admin and operator concurrently and verify gets root certificate and errors
+    ...  for corrupted csr.
+    [Tags]  Get_Root_Certificate_From_Admin_And_Send_Corrupted_CSR_Requests_From_Admin_Operator_Concurrently_And_Verify
+
+    FOR  ${i}  IN RANGE  ${5}
+        ${dict}=  Execute Process Multi Keyword  ${5}
+        ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${False} ${HTTP_FORBIDDEN}
+        Dictionary Should Not Contain Value  ${dict}  False
+        ...  msg=One or more operations has failed.
+    END
+
 *** Keywords ***
 
 Generate CSR String
