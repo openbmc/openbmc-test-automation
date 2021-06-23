@@ -153,6 +153,24 @@ Verify Enabling LDAP
      Create LDAP Configuration
 
 
+Update LDAP Group And Verify Login Using GUI
+    [Documentation]  Update LDAP group and verify LDAP user able to login from GUI.
+    [Tags]  Verify_LDAP_Group_And_Verify_Login_Using_GUI
+    [Template]  Update LDAP User Role And Verify Login Using GUI
+
+    # group_name    user_role
+    ${GROUP_NAME}   ReadOnly
+
+
+Update LDAP Group And Read Network Configuration
+    [Documentation]  Read network configuration via different user roles and verify.
+    [Tags]  Verify_LDAP_User_With_NoAccess_Privilege
+    [Template]  Update LDAP User Role And Read Network Configuration
+
+    # group_name     user_role      valid_status_code
+    ${GROUP_NAME}    NoAccess      ${HTTP_FORBIDDEN}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -291,3 +309,52 @@ Disable LDAP Configuration
     Click Element  ${xpath_refresh_button}
     Wait Until Page Contains Element  ${xpath_ldap_heading}
 
+
+Logout BMC Via GUI
+    [Documentation]  Logout BMC via GUI.
+
+    Click Element  ${xpath_refresh_button}
+    Sleep  10s
+    Wait Until Element Is Visible  ${xpath_user_header}
+    Click Element  ${xpath_user_header}
+    Wait Until Element Is Visible  ${xpath_logout_button}  timeout=30
+    Double Click Element  ${xpath_logout_button}
+    Wait Until Element Is Enabled  ${xpath_login_button}
+
+
+Login BMC And Navigate To LDAP Page
+    [Documentation]  Login BMC and navigate to ldap page.
+    [Arguments]  ${username}=${OPENBMC_USERNAME}  ${password}=${OPENBMC_PASSWORD}
+
+    # Description of argument(s):
+    # username  The username to be used for login.
+    # password  The password to be used for login.
+
+    Login GUI  ${username}  ${password}
+    # Navigate to https://xx.xx.xx.xx/#/access-control/ldap  LDAP page.
+    Click Element  ${xpath_access_control_menu}
+    Click Element  ${xpath_ldap_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
+
+
+Update LDAP User Role And Read Network Configuration
+    [Documentation]  Update LDAP role and read network configuration.
+    [Arguments]  ${group_name}  ${user_role}  ${valid_status_code}
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Delete LDAP Role Group  ${group_name}
+
+    Update LDAP Configuration with LDAP User Role And Group  ${group_name}  ${user_role}
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Get  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0
+    ...  valid_status_codes=[${valid_status_code}]
+
+
+Update LDAP User Role And Verify Login Using GUI
+    [Documentation]  Update LDAP role and verify login Using GUI.
+    [Arguments]  ${group_name}  ${user_role}
+    [Teardown]  Run Keywords  Login BMC And Navigate To LDAP Page  AND
+    ...  Delete LDAP Role Group  ${GROUP_NAME}
+
+    Update LDAP Configuration with LDAP User Role And Group  ${GROUP_NAME}  ReadOnly
+    Logout BMC Via GUI
+    Login GUI  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Logout BMC Via GUI
