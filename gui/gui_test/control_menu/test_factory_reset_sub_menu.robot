@@ -10,8 +10,10 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_factory_reset_heading}  //h1[text()="Factory reset"]
-${xpath_reset_button}           //button[contains(text(),'Reset')]
+${xpath_factory_reset_heading}          //h1[text()="Factory reset"]
+${xpath_reset_button}                   //button[contains(text(),'Reset')]
+${xpath_reset_server_radio_button}      //*[@data-test-id='factoryReset-radio-resetBios']
+${xpath_reset_bmc_server_radio_button}  //*[@data-test-id='factoryReset-radio-resetToDefaults']
 
 
 *** Test Cases ***
@@ -35,6 +37,14 @@ Verify Existence Of All Buttons In Factory Reset Page
     [Tags]  Verify_Existence_Of_All_Buttons_In_Factory_Reset_Page
 
     Page Should Contain Element  ${xpath_reset_button}
+
+
+Verify Existence Of All Radio Buttons In Factory Reset Page
+     [Documentation]  Verify existence of all radio buttons in factory reset page.
+     [Tags]  Verify_Existence_Of_All_Radio_Buttons_In_Factory_Reset_Page
+
+     Page Should Contain Element  ${xpath_reset_server_radio_button}
+     Page Should Contain Element  ${xpath_reset_bmc_server_radio_button}
 
 
 *** Keywords ***
