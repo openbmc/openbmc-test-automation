@@ -78,6 +78,19 @@ OPENBMC:
     PROTOCOL:
         - 'SSH'
 
+# Commands and Files to collect OPENBMC dumps
+OPENBMC_DUMPS:
+    COMMANDS:
+        - 'ls -AX /tmp/core_*'
+        - 'ls -AX /var/lib/phosphor-debug-collector/dumps/*.tar.xz'
+        - 'ls -AX /var/lib/phosphor-debug-collector/hostbootdump/*'
+    FILES:
+        - '/tmp/core_*'
+        - '/var/lib/phosphor-debug-collector/dumps/*.tar.xz'
+        - '/var/lib/phosphor-debug-collector/hostbootdump/*'
+    PROTOCOL:
+        - 'SSH'
+
 # Commands and Files to collect for all Linux distributions
 LINUX:
     COMMANDS:
