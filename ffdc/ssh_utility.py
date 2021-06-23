@@ -95,7 +95,7 @@ class SSHRemoteclient:
         Create a scp connection for file transfer.
         """
         try:
-            self.scpclient = SCPClient(self.sshclient.get_transport())
+            self.scpclient = SCPClient(self.sshclient.get_transport(), sanitize=lambda x: x)
             print("\n\t[Check] %s SCP transport established.\t [OK]" % self.hostname)
         except (SCPException, SocketTimeout, PipeTimeout) as e:
             self.scpclient = None
@@ -117,7 +117,7 @@ class SSHRemoteclient:
         """
 
         try:
-            self.scpclient.get(remote_file, local_file)
+            self.scpclient.get(remote_file, local_file, recursive=True)
         except (SCPException, SocketTimeout, PipeTimeout) as e:
             # Log command with error. Return to caller for next file, if any.
             print("\n>>>>>\tERROR: Fail scp %s from remotehost %s %s\n\n" % (remote_file, e.__class__, e))

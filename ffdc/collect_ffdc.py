@@ -45,11 +45,11 @@ def cli_ffdc(remote, username, password, ffdc_config, location, remote_type):
         thisFFDC = FFDCCollector(remote, username, password, ffdc_config, location, remote_type)
         thisFFDC.collect_ffdc()
 
-        if not thisFFDC.receive_file_list:
+        if len(os.listdir(thisFFDC.ffdc_dir_path)) == 0:
             click.echo("\n\tFFDC Collection from " + remote + " has failed.\n\n")
         else:
-            click.echo(str("\t" + str(len(thisFFDC.receive_file_list)))
-                       + " files were retrieved from " + remote)
+            click.echo(str("\t" + str(len(os.listdir(thisFFDC.ffdc_dir_path)))
+                       + " files were retrieved from " + remote))
             click.echo("\tFiles are stored in " + thisFFDC.ffdc_dir_path + "\n\n")
 
     click.echo("\n********** FFDC Finishes **********\n\n")
