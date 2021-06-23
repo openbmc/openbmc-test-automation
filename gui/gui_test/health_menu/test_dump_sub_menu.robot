@@ -37,6 +37,12 @@ Verify Existence Of All Buttons In Dump Page
 
     Page Should Contain Element  ${xpath_initiate_dump_button}
 
+Verify Existence Of All Input Boxes In Dump Page
+    [Documentation]  Verify existence of all input boxes in dump page.
+    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Dump_Page
+
+    Page Should Contain Element  ${xpath_dump_input_button}
+
 
 *** Keywords ***
 
