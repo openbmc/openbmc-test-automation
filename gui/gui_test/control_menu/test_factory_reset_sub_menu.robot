@@ -37,6 +37,13 @@ Verify Existence Of All Buttons In Factory Reset Page
     Page Should Contain Element  ${xpath_reset_button}
 
 
+Verify Existence Of All Radio Buttons In Factory Reset Page
+     [Documentation]  Verify existence of all radio buttons in factory reset page.
+     [Tags]  Verify_Existence_Of_All_Radio_Buttons_In_Factory_Reset_Page
+
+     Page Should Contain Element  ${xpath_radio_button}
+
+
 *** Keywords ***
 
 Suite Setup Execution
