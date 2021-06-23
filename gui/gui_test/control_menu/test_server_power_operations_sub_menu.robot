@@ -67,7 +67,7 @@ Verify Existence Of All Sections In Server Power Operations Page
     [Tags]  Verify_Existence_Of_All_Sections_In_Server_Power_Operations_Page
 
     Page Should Contain  Current status
-    Page Should Contain  Host OS boot settings
+    Page Should Contain  Boot settings
     Page Should Contain  Operations
 
 
