@@ -585,6 +585,35 @@ Enumerate Redfish Resources
     [Return]  ${ffdc_file_list}
 
 
+Enumerate Redfish OEM Resources
+    [Documentation]  Enumerate /<oem>/v1 resources and properties to
+    ...              a file. Return a list which contains the file name.
+    [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
+
+    # Description of argument(s):
+    # log_prefix_path    The location specifying where to create FFDC file(s).
+
+    # Login is needed to fetch Redfish information.
+    # If login fails, return from keyword.
+    Return From Keyword If   "${OEM_REDFISH_PATH}" == "${EMPTY}"
+
+    ${status}=  Run Keyword And Return Status  Redfish.Login
+    Return From Keyword If   ${status} == ${False}
+
+    # Get the Redfish resources and properties.
+    ${json_data}=  redfish_utils.Enumerate Request  ${OEM_REDFISH_PATH}
+
+    @{ffdc_file_list}=  Create List
+    ${logpath}=  Catenate  SEPARATOR=  ${log_prefix_path}
+    ...  redfish_oem_resource_properties.txt
+    Create File  ${logpath}
+    Write Data To File  "${\n}${json_data}${\n}"  ${logpath}
+
+    Append To List  ${ffdc_file_list}  ${logpath}
+
+    [Return]  ${ffdc_file_list}
+
+
 Collect eSEL Log
     [Documentation]  Create raw and formatted eSEL files.
     [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
