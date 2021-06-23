@@ -167,6 +167,7 @@ FFDC_METHOD_CALL = {
         'Dump HB Files': 'SCP Dump HB Files',
         'PEL Files': 'Collect PEL Log',
         'Redfish Log': 'Enumerate Redfish Resources',
+        'Redfish OEM Log': 'Enumerate Redfish OEM Resources',
     },
 }
 

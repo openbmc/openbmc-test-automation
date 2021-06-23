@@ -10,6 +10,9 @@ Variables         ../data/variables.py
 # By default power, support x86 as well.
 ${PLATFORM_ARCH_TYPE}             power
 
+# FFDC Redfish OEM path /<oem>/v1/
+${OEM_REDFISH_PATH}               ${EMPTY}
+
 # Transition REST vs Redfish ONLY temporary changes for stagging
 # automation infrastructure change and for continuity.
 ${REDFISH_SUPPORT_TRANS_STATE}    ${0}
