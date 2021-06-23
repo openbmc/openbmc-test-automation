@@ -12,6 +12,10 @@ Suite Teardown  Close Browser
 
 ${xpath_dumps_heading}         //h1[text()="Dumps"]
 ${xpath_initiate_dump_button}  //button[contains(text(),'Initiate dump')]
+${xpath_select_dump_type}      //*[@id="selectDumpType"]
+${xpath_dump_from_date}        //*[@id="input-from-date"]
+${xpath_dump_to_date}          //*[@id="input-to-date"]
+${xpath_dump_search_global}    //*[@class='search-global']
 
 
 *** Test Cases ***
@@ -36,6 +40,15 @@ Verify Existence Of All Buttons In Dump Page
     [Tags]  Verify_Existence_Of_All_Buttons_In_Dump_Page
 
     Page Should Contain Element  ${xpath_initiate_dump_button}
+
+Verify Existence Of All Input Boxes In Dump Page
+    [Documentation]  Verify existence of all input boxes in dump page.
+    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Dump_Page
+
+    Page Should Contain Element  ${xpath_select_dump_type}
+    Page Should Contain Element  ${xpath_dump_from_date}
+    Page Should Contain Element  ${xpath_dump_to_date}
+    Page Should Contain Element  ${xpath_dump_search_global}
 
 
 *** Keywords ***
