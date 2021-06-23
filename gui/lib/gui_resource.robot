@@ -97,6 +97,7 @@ Login GUI
 Logout GUI
     [Documentation]  Logout of OpenBMC GUI.
 
+    Click Element  ${xpath_user_header}
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}
 
