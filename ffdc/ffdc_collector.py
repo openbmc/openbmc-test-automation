@@ -79,7 +79,7 @@ class FFDCCollector:
         """
         response = os.system("ping -c 1 -w 2 %s  2>&1 >/dev/null" % self.hostname)
         if response == 0:
-            print("\n\t[Check] %s is ping-able.\t\t\t [OK]" % self.hostname)
+            print("\n\t[Check] %s is ping-able.\t\t [OK]" % self.hostname)
             return True
         else:
             print("\n>>>>>\tERROR: %s is not ping-able. FFDC collection aborted.\n" % self.hostname)
@@ -157,6 +157,7 @@ class FFDCCollector:
             # Check supported protocol ping,ssh, redfish are working.
             if self.ssh_to_target_system():
                 working_protocol_list.append("SSH")
+                working_protocol_list.append("SCP")
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
             self.inspect_target_machine_type()
@@ -272,7 +273,7 @@ class FFDCCollector:
         ffdc_actions_for_machine_type    commands and files for the selected remote host type.
         """
         if self.remoteclient.scpclient:
-            print("\n\tCopying files from remote system %s.\n" % self.hostname)
+            print("\n\tCopying DUMP files from remote system %s.\n" % self.hostname)
 
             # Retrieving files from target system, if any
             list_of_files = ffdc_actions_for_machine_type['FILES']
