@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af19ecf8_7b93e31b",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-24T07:46:04Z",
+      "side": 1,
+      "message": "as discussed use gui login",
+      "revId": "0a044c8a9e94c1e46b6aa168e211cef337077ac6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d4346bd_8644a4b6",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-24T07:46:04Z",
+      "side": 1,
+      "message": "Update LDAP User And Verify\n    [Arguments]  $group_name  $user_role  $valid_status_code\n    [Teardown]  Run Keywords  Redfish.Logout  AND  Delete LDAP Role Group  ${group_name}\n    Update LDAP Configuration with LDAP User Role And Group  $group_name  $user_rol\n    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}\n    Redfish.Get  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0\n    ...  valid_status_codes\u003d[$valid_status_code]",
+      "revId": "0a044c8a9e94c1e46b6aa168e211cef337077ac6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
