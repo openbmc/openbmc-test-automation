@@ -10,6 +10,7 @@ import yaml
 import time
 import platform
 from errno import EACCES, EPERM
+import subprocess
 from ssh_utility import SSHRemoteclient
 
 
@@ -22,7 +23,7 @@ class FFDCCollector:
     """
 
     # List of supported OSes.
-    supported_oses = ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU']
+    supported_oses = ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU', 'BMC_GET']
 
     def __init__(self, hostname, username, password, ffdc_config, location, remote_type):
         r"""
@@ -56,6 +57,9 @@ class FFDCCollector:
         import paramiko
 
         run_env_ok = True
+
+        redfishtool_version = self.run_redfishtool('-V').split(' ')[2]
+
         print("\n\t---- Script host environment ----")
         print("\t{:<10}  {:<10}".format('Script hostname', os.uname()[1]))
         print("\t{:<10}  {:<10}".format('Script host os', platform.platform()))
@@ -63,6 +67,7 @@ class FFDCCollector:
         print("\t{:<10}  {:>10}".format('PyYAML', yaml.__version__))
         print("\t{:<10}  {:>10}".format('click', click.__version__))
         print("\t{:<10}  {:>10}".format('paramiko', paramiko.__version__))
+        print("\t{:<10}  {:>10}".format('redfishtool', redfishtool_version))
 
         if eval(yaml.__version__.replace('.', ',')) < (5, 4, 1):
             print("\n\tERROR: Python or python packages do not meet minimum version requirement.")
@@ -108,7 +113,9 @@ class FFDCCollector:
                 print(">>>>>\tERROR: Script does not yet know about %s" % ' '.join(response))
                 sys.exit(-1)
 
-        if self.target_type not in identity:
+        if (self.target_type not in identity) \
+           and (self.target_type != 'BMC_GET'):
+
             user_target_type = self.target_type
             self.target_type = ""
             for each_os in FFDCCollector.supported_oses:
@@ -116,7 +123,7 @@ class FFDCCollector:
                     self.target_type = each_os
                     break
 
-            # If OS in not one of ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU']
+            # If OS in not one of ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU', 'BMC_GET']
             # script does not yet know what to do.
             if not self.target_type:
                 print(">>>>>\tERROR: Script does not yet know about %s" % identity)
@@ -158,6 +165,14 @@ class FFDCCollector:
             if self.ssh_to_target_system():
                 working_protocol_list.append("SSH")
                 working_protocol_list.append("SCP")
+
+            # Redfish
+            if self.verify_redfish():
+                working_protocol_list.append("REDFISH")
+                print("\n\t[Check] %s Redfish Service.\t\t [OK]" % self.hostname)
+            else:
+                print("\n\t[Check] %s Redfish Service.\t\t [FAILED]" % self.hostname)
+
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
             self.inspect_target_machine_type()
@@ -207,28 +222,66 @@ class FFDCCollector:
 
             if machine_type == self.target_type:
                 if (ffdc_actions[machine_type]['PROTOCOL'][0] in working_protocol_list):
-
-                    # For OPENBMC collect general system info.
-                    if self.target_type == 'OPENBMC':
-
-                        self.collect_and_copy_ffdc(ffdc_actions['GENERAL'],
-                                                   form_filename=True)
-                        self.group_copy(ffdc_actions['OPENBMC_DUMPS'])
-
-                    # For RHEL and UBUNTU, collect common Linux OS FFDC.
-                    if self.target_type == 'RHEL' \
-                            or self.target_type == 'UBUNTU':
-
-                        self.collect_and_copy_ffdc(ffdc_actions['LINUX'])
-
-                    # Collect remote host specific FFDC.
-                    self.collect_and_copy_ffdc(ffdc_actions[machine_type])
+                    if ffdc_actions[machine_type]['PROTOCOL'][0] == 'SSH':
+                        self.protocol_ssh(ffdc_actions, machine_type)
+                    elif ffdc_actions[machine_type]['PROTOCOL'][0] == 'REDFISH':
+                        self.protocol_redfish(ffdc_actions, machine_type)
                 else:
                     print("\n\tProtocol %s is not yet supported by this script.\n"
                           % ffdc_actions[machine_type]['PROTOCOL'][0])
 
         # Close network connection after collecting all files
         self.remoteclient.ssh_remoteclient_disconnect()
+
+    def protocol_ssh(self,
+                     ffdc_actions,
+                     machine_type):
+        r"""
+        Perform actions using SSH and SCP protocols.
+
+        Description of argument(s):
+        ffdc_actions        List of actions from ffdc_config.yaml.
+        machine_type        OS Type of remote host.
+        """
+
+        # For OPENBMC collect general system info.
+        if self.target_type == 'OPENBMC':
+
+            self.collect_and_copy_ffdc(ffdc_actions['GENERAL'],
+                                       form_filename=True)
+            self.group_copy(ffdc_actions['OPENBMC_DUMPS'])
+
+        # For RHEL and UBUNTU, collect common Linux OS FFDC.
+        if self.target_type == 'RHEL' \
+           or self.target_type == 'UBUNTU':
+
+            self.collect_and_copy_ffdc(ffdc_actions['LINUX'])
+
+        # Collect remote host specific FFDC.
+        self.collect_and_copy_ffdc(ffdc_actions[machine_type])
+
+    def protocol_redfish(self,
+                         ffdc_actions,
+                         machine_type):
+        r"""
+        Perform actions using Redfish protocol.
+
+        Description of argument(s):
+        ffdc_actions        ffdc_actions        List of actions from ffdc_config.yaml.
+        machine_type        OS Type of remote host.
+        """
+        list_of_URL = ffdc_actions[machine_type]['URL']
+        for index, each_url in enumerate(list_of_URL, start=0):
+            redfish_parm = '-u ' + self.username + ' -p ' + self.password + ' -r ' \
+                           + self.hostname + ' -S Always raw GET ' + each_url
+
+            result = self.run_redfishtool(redfish_parm)
+            if result:
+                file = self.ffdc_dir_path + ffdc_actions[machine_type]['FILES'][index]
+                # Creates a new file
+                with open(file, 'w') as fp:
+                    fp.write(result)
+                    fp.close
 
     def collect_and_copy_ffdc(self,
                               ffdc_actions_for_machine_type,
@@ -380,3 +433,35 @@ class FFDCCollector:
         sys.stdout.write("\r\t" + "+" * progress)
         sys.stdout.flush()
         time.sleep(.1)
+
+    def verify_redfish(self):
+        r"""
+        Verfiy remote host has redfish service active
+
+        """
+        redfish_parm = '-u ' + self.username + ' -p ' + self.password + ' -r ' \
+                       + self.hostname + ' -S Always raw GET /xyz/openbmc_project/state'
+        return(self.run_redfishtool(redfish_parm, True))
+
+    def run_redfishtool(self,
+                        redfishtool_parms_string,
+                        quiet=False):
+        r"""
+        Run CLI redfishtool
+
+        Description of variable:
+        redfishtool_parms_string     Subcommand and options for redfishtool.
+        quiet                        Do not print redfishtool error message if True
+        """
+
+        result = subprocess.run(['redfishtool ' + redfishtool_parms_string],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                shell=True,
+                                universal_newlines=True)
+
+        if result.stderr and not quiet:
+            print('\n\t\tERROR with redfishtool ' + redfishtool_parms_string)
+            print('\t\t' + result.stderr)
+
+        return result.stdout

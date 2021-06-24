@@ -91,6 +91,14 @@ OPENBMC_DUMPS:
     PROTOCOL:
         - 'SSH'
 
+BMC_GET:
+    URL:
+        - '/xyz/openbmc_project/software/enumerate'
+    FILES:
+        - 'software.json'
+    PROTOCOL:
+        - 'REDFISH'
+
 # Commands and Files to collect for all Linux distributions
 LINUX:
     COMMANDS:
