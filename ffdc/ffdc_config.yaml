@@ -91,6 +91,17 @@ OPENBMC_DUMPS:
     PROTOCOL:
         - 'SSH'
 
+# URLs and Files for OPENBMC redfish
+# URLs and Files are one-to-one corresponding.
+# File contains the data returned from 'redfishtool GET URL'
+OPENBMC_REDFISH:
+    URL:
+        - '/xyz/openbmc_project/software/enumerate'
+    FILES:
+        - 'software.json'
+    PROTOCOL:
+        - 'REDFISH'
+
 # Commands and Files to collect for all Linux distributions
 LINUX:
     COMMANDS:

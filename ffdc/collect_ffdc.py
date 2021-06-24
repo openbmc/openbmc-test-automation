@@ -33,8 +33,12 @@ from ffdc_collector import FFDCCollector
 @click.option('-l', '--location', default="/tmp",
               show_default=True, help="Location to store collected FFDC data")
 @click.option('-t', '--remote_type', default="OPENBMC",
-              show_default=True, help="OS type of the remote (targeting) host. OPENBMC, RHEL, UBUNTU, AIX")
-def cli_ffdc(remote, username, password, ffdc_config, location, remote_type):
+              show_default=True,
+              help="OS type of the remote (targeting) host. OPENBMC, RHEL, UBUNTU, AIX")
+@click.option('-rp', '--remote_protocol', default="ALL",
+              show_default=True,
+              help="Select protocol to communicate with remote host.  Default: all available.")
+def cli_ffdc(remote, username, password, ffdc_config, location, remote_type, remote_protocol):
     r"""
     Stand alone CLI to generate and collect FFDC from the selected target.
     """
@@ -42,13 +46,14 @@ def cli_ffdc(remote, username, password, ffdc_config, location, remote_type):
     click.echo("\n********** FFDC (First Failure Data Collection) Starts **********")
 
     if input_options_ok(remote, username, password, ffdc_config):
-        thisFFDC = FFDCCollector(remote, username, password, ffdc_config, location, remote_type)
+        thisFFDC = FFDCCollector(remote, username, password,
+                                 ffdc_config, location, remote_type, remote_protocol)
         thisFFDC.collect_ffdc()
 
         if len(os.listdir(thisFFDC.ffdc_dir_path)) == 0:
             click.echo("\n\tFFDC Collection from " + remote + " has failed.\n\n")
         else:
-            click.echo(str("\t" + str(len(os.listdir(thisFFDC.ffdc_dir_path)))
+            click.echo(str("\n\t" + str(len(os.listdir(thisFFDC.ffdc_dir_path)))
                        + " files were retrieved from " + remote))
             click.echo("\tFiles are stored in " + thisFFDC.ffdc_dir_path + "\n\n")
 

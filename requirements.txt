@@ -6,4 +6,5 @@ robotframework-sshlibrary
 robotframework-scplibrary
 redfish
 click
-PyYAML>=5.1 
+PyYAML>=5.1
+redfishtool

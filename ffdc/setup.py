@@ -8,6 +8,7 @@ setup(
         'click',
         'PyYAML',
         'paramiko',
+        'redfishtool'
     ],
     entry_points={
         'console_scripts': ['collectFFDC=commands.install_cmd:main']
