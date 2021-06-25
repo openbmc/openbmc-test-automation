@@ -4,13 +4,11 @@ Documentation  This testing requires special setup where SNMP trapd is
 ...            configuration refer http://www.net-snmp.org/.
 
 
-Resource  ../../lib/snmp/resource.robot
-Resource  ../../lib/snmp/redfish_snmp_utils.robot
-Resource  ../../lib/bmc_redfish_resource.robot
-Resource  ../../lib/openbmc_ffdc.robot
-Resource  ../../lib/bmc_redfish_resource.robot
-Resource  ../../lib/openbmc_ffdc.robot
-Resource  ../../lib/logging_utils.robot
+Resource      ../../lib/snmp/resource.robot
+Resource      ../../lib/snmp/redfish_snmp_utils.robot
+Resource      ../../lib/bmc_redfish_resource.robot
+Resource      ../../lib/openbmc_ffdc.robot
+Resource      ../../lib/logging_utils.robot
 
 
 Test Teardown  FFDC On Test Case Fail
@@ -196,7 +194,7 @@ Configure Multiple SNMP Managers With Different Ports And Verify
     ...  AND
     ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR3_IP}  ${NON_DEFAULT_PORT2}
 
-    # Configure multiple SNMP managers with diffrent ports.
+    # Configure multiple SNMP managers with different ports.
     Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     Configure SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
     Configure SNMP Manager Via Redfish  ${SNMP_MGR3_IP}  ${NON_DEFAULT_PORT2}
