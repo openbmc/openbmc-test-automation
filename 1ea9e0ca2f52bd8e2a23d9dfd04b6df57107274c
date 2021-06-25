@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29975e47_3f0ff771",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-25T02:26:16Z",
+      "side": 1,
+      "message": "since its not an OS type may be we shouldnt show here",
+      "range": {
+        "startLine": 37,
+        "startChar": 88,
+        "endLine": 37,
+        "endChar": 95
+      },
+      "revId": "1ea9e0ca2f52bd8e2a23d9dfd04b6df57107274c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfca9e10_b11b4ff6",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-25T02:26:16Z",
+      "side": 1,
+      "message": "probably wont need this check perhaps ?",
+      "range": {
+        "startLine": 117,
+        "startChar": 11,
+        "endLine": 117,
+        "endChar": 47
+      },
+      "revId": "1ea9e0ca2f52bd8e2a23d9dfd04b6df57107274c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59aae0e4_2ad89a42",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-25T02:26:16Z",
+      "side": 1,
+      "message": "remove this.. since its not really and OS target type but just a Redfih call",
+      "range": {
+        "startLine": 126,
+        "startChar": 69,
+        "endLine": 126,
+        "endChar": 79
+      },
+      "revId": "1ea9e0ca2f52bd8e2a23d9dfd04b6df57107274c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fa69908_5f91e111",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-25T02:26:16Z",
+      "side": 1,
+      "message": "use this instead    /redfish/v1/",
+      "range": {
+        "startLine": 443,
+        "startChar": 61,
+        "endLine": 443,
+        "endChar": 87
+      },
+      "revId": "1ea9e0ca2f52bd8e2a23d9dfd04b6df57107274c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
