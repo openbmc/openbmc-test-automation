@@ -22,6 +22,30 @@
       "revId": "b7d8b2cbf58d7bbdafb0a62ffe7733673e82c387",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "338c24ef_01f24b34",
+        "filename": "gui/gui_test/health_menu/test_dump_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-25T11:05:32Z",
+      "side": 1,
+      "message": "I am able to search them ... Just avoid using class in xpath like in ${xpath_dump_search_global}. you can use below instead - //*[@id\u003d\"searchInput-264\"]",
+      "parentUuid": "f8824e14_f0966b8c",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 58
+      },
+      "revId": "b7d8b2cbf58d7bbdafb0a62ffe7733673e82c387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
