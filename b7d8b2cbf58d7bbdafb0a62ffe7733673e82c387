@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8824e14_f0966b8c",
+        "filename": "gui/gui_test/health_menu/test_dump_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-25T11:00:03Z",
+      "side": 1,
+      "message": "Are these xPath working... I am unable to search these xpath on dump page.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 58
+      },
+      "revId": "b7d8b2cbf58d7bbdafb0a62ffe7733673e82c387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
