@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cc07c66f_18907cca",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-06-25T13:56:33Z",
+      "side": 1,
+      "message": "Remove BMC_GET reference.",
+      "parentUuid": "29975e47_3f0ff771",
+      "range": {
+        "startLine": 37,
+        "startChar": 88,
+        "endLine": 37,
+        "endChar": 95
+      },
+      "revId": "1ea9e0ca2f52bd8e2a23d9dfd04b6df57107274c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cfca9e10_b11b4ff6",
         "filename": "ffdc/ffdc_collector.py",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "1ea9e0ca2f52bd8e2a23d9dfd04b6df57107274c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7121e50f_c54dce5b",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-06-25T13:56:33Z",
+      "side": 1,
+      "message": "Remove BMC_GET reference since we add prefer_protocol option to user CLI.",
+      "parentUuid": "cfca9e10_b11b4ff6",
+      "range": {
+        "startLine": 117,
+        "startChar": 11,
+        "endLine": 117,
+        "endChar": 47
+      },
+      "revId": "1ea9e0ca2f52bd8e2a23d9dfd04b6df57107274c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "349c14a9_4ce6fa6b",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-06-25T13:56:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59aae0e4_2ad89a42",
+      "range": {
+        "startLine": 126,
+        "startChar": 69,
+        "endLine": 126,
+        "endChar": 79
+      },
+      "revId": "1ea9e0ca2f52bd8e2a23d9dfd04b6df57107274c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5fa69908_5f91e111",
         "filename": "ffdc/ffdc_collector.py",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "1ea9e0ca2f52bd8e2a23d9dfd04b6df57107274c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f2f0afc_58e87b25",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-06-25T13:56:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fa69908_5f91e111",
+      "range": {
+        "startLine": 443,
+        "startChar": 61,
+        "endLine": 443,
+        "endChar": 87
+      },
+      "revId": "1ea9e0ca2f52bd8e2a23d9dfd04b6df57107274c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
