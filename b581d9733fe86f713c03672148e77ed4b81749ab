@@ -1,0 +1,648 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68828a2c_44126d47",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "complete",
+      "range": {
+        "startLine": 39,
+        "startChar": 15,
+        "endLine": 39,
+        "endChar": 23
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3d8378e_f55fa007",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "Url",
+      "range": {
+        "startLine": 42,
+        "startChar": 27,
+        "endLine": 42,
+        "endChar": 31
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "431431c4_89611b59",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "Why is this repeated?",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 44
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea29af97_2fff4c5a",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "a",
+      "range": {
+        "startLine": 66,
+        "startChar": 34,
+        "endLine": 66,
+        "endChar": 36
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc48229f_38c6b695",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "passes the header",
+      "range": {
+        "startLine": 70,
+        "startChar": 37,
+        "endLine": 70,
+        "endChar": 53
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "644bf23e_d7420e45",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "served?",
+      "range": {
+        "startLine": 71,
+        "startChar": 65,
+        "endLine": 71,
+        "endChar": 72
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "285db228_2ede6f3f",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "suite",
+      "range": {
+        "startLine": 72,
+        "startChar": 88,
+        "endLine": 72,
+        "endChar": 92
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "117fe638_86d3e14e",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "How is the default credential taken?",
+      "range": {
+        "startLine": 72,
+        "startChar": 29,
+        "endLine": 72,
+        "endChar": 57
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c60f3973_41eb14fd",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "considered",
+      "range": {
+        "startLine": 72,
+        "startChar": 61,
+        "endLine": 72,
+        "endChar": 71
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f10ddd0_a8ab8512",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "seconds\n\nmention it is the login timeout",
+      "range": {
+        "startLine": 74,
+        "startChar": 58,
+        "endLine": 74,
+        "endChar": 61
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba551f36_7cbf3792",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "You should be catching the keyerror here.",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 70
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5d56c9a_c8d8ce3e",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "Is this required?",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 44
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06cb0213_f2521db9",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 99,
+        "startChar": 65,
+        "endLine": 99,
+        "endChar": 72
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebf37b26_9bdbcc77",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "unit for time",
+      "range": {
+        "startLine": 100,
+        "startChar": 58,
+        "endLine": 100,
+        "endChar": 61
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dec7ff4_5176c7de",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "You can mention what will be verified if this is enabled.",
+      "range": {
+        "startLine": 102,
+        "startChar": 29,
+        "endLine": 103,
+        "endChar": 97
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02a73947_d46babdc",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "required?",
+      "range": {
+        "startLine": 111,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 44
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b250d32_031fbcdf",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "Please correct throughout the file",
+      "range": {
+        "startLine": 128,
+        "startChar": 65,
+        "endLine": 128,
+        "endChar": 72
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d829e187_eec6ab6c",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "time unit.. entire script",
+      "range": {
+        "startLine": 131,
+        "startChar": 58,
+        "endLine": 131,
+        "endChar": 61
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c27b0af_9f30fc04",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "same comment as above. applies to the entire script.",
+      "range": {
+        "startLine": 133,
+        "startChar": 29,
+        "endLine": 133,
+        "endChar": 63
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcc71486_76c64e1f",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "required",
+      "range": {
+        "startLine": 142,
+        "startChar": 8,
+        "endLine": 142,
+        "endChar": 44
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55b082f8_3bd46a12",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "exceeding 80 chars",
+      "range": {
+        "startLine": 144,
+        "startChar": 14,
+        "endLine": 144,
+        "endChar": 104
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc31351c_c7b8f0e4",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "Dont you want to handle the exceptions? applies to the entire script",
+      "range": {
+        "startLine": 148,
+        "startChar": 8,
+        "endLine": 151,
+        "endChar": 23
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "103e8082_fb5ec07b",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 174,
+        "startChar": 1,
+        "endLine": 176,
+        "endChar": 104
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92e36863_2168262e",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "exceeding 80 chars",
+      "range": {
+        "startLine": 180,
+        "startChar": 8,
+        "endLine": 180,
+        "endChar": 109
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a227e6c_7bbdadd1",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 41
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e3c2e68_e6ac0a10",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 214,
+        "startChar": 8,
+        "endLine": 214,
+        "endChar": 109
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0c6d92a_fa8cf170",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 240,
+        "startChar": 1,
+        "endLine": 242,
+        "endChar": 104
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c94ebf28_a2ed017a",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-06-28T10:34:06Z",
+      "side": 1,
+      "message": "Can you comment here as to what you are doing?",
+      "range": {
+        "startLine": 275,
+        "startChar": 2,
+        "endLine": 281,
+        "endChar": 19
+      },
+      "revId": "b581d9733fe86f713c03672148e77ed4b81749ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
