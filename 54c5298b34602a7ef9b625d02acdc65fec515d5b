@@ -22,6 +22,30 @@
       "revId": "54c5298b34602a7ef9b625d02acdc65fec515d5b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96f03c38_186f74f8",
+        "filename": "lib/openbmc_ffdc_methods.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-06-28T09:46:12Z",
+      "side": 1,
+      "message": "ahh, thats correct.. I thought of clubbing together,, good catch will fix it up",
+      "parentUuid": "f854e13a_da0feaa8",
+      "range": {
+        "startLine": 596,
+        "startChar": 4,
+        "endLine": 597,
+        "endChar": 42
+      },
+      "revId": "54c5298b34602a7ef9b625d02acdc65fec515d5b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
