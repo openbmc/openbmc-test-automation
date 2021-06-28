@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "06b11380_d7e6d8b5",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-28T07:01:09Z",
+      "side": 1,
+      "message": "LDAP user from the LDAP group is",
+      "range": {
+        "startLine": 157,
+        "startChar": 50,
+        "endLine": 157,
+        "endChar": 59
+      },
+      "revId": "78b1b1deda3a8aed2c3e638f4c816355772f7385",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3255175_cf660425",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-28T07:01:09Z",
+      "side": 1,
+      "message": "You can have both test cases under one template\n\n    # group_name     user_role      valid_status_code   operation_to_check\n    ${GROUP_NAME}    NoAccess      ${HTTP_FORBIDDEN}    no_operation\n    ${GROUP_NAME}    ReadOnly      ${HTTP_OK}           read_operation",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 28
+      },
+      "revId": "78b1b1deda3a8aed2c3e638f4c816355772f7385",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fc2b3d3_f2197fb1",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-28T07:01:09Z",
+      "side": 1,
+      "message": "We already have a logout keyword in our automation. Please make use of it.",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 18
+      },
+      "revId": "78b1b1deda3a8aed2c3e638f4c816355772f7385",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eae448d3_9ac01fdd",
         "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
         "patchSetId": 4
@@ -55,6 +124,29 @@
       "message": "move these lines to line 345",
       "range": {
         "startLine": 358,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 22
+      },
+      "revId": "78b1b1deda3a8aed2c3e638f4c816355772f7385",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd43b792_4ed57514",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-28T07:01:09Z",
+      "side": 1,
+      "message": "You can have one keyword to check different privilege.",
+      "range": {
+        "startLine": 340,
         "startChar": 0,
         "endLine": 360,
         "endChar": 22
