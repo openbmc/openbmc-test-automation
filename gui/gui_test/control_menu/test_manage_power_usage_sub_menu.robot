@@ -57,7 +57,8 @@ Verify Server Power Cap Setting Is Off
     Page Should Contain Element  ${xpath_power_ops_checkbox}
 
     # Set a value in check box.
-    ${checkbox_Selected}=  Run Keyword And Return Status  Checkbox Should Be Selected  ${xpath_power_ops_checkbox}
+    ${checkbox_Selected}=  Run Keyword And Return Status
+    ...  Checkbox Should Be Selected  ${xpath_power_ops_checkbox}
     Run Keyword If  False == ${checkbox_Selected}  Click Element  ${xpath_power_ops_checkbox}
     Wait Until Element Is Enabled  ${xpath_cap_input_button}  timeout=10
     Input Text  ${xpath_cap_input_button}  ${499}

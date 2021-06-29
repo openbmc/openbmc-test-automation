@@ -361,14 +361,14 @@ Verify PEL Log Entry For Event Log
     # Example of Redfish event logs:
     # elog_entry:
     #  [0]:
-    #    [Message]:                                    xyz.openbmc_project.Common.Error.InternalFailure
-    #    [Created]:                                    2020-04-20T01:55:22+00:00
-    #    [Id]:                                         1
-    #    [@odata.id]:                                  /redfish/v1/Systems/system/LogServices/EventLog/Entries/1
-    #    [@odata.type]:                                #LogEntry.v1_4_0.LogEntry
-    #    [EntryType]:                                  Event
-    #    [Severity]:                                   Critical
-    #    [Name]:                                       System Event Log Entry
+    #    [Message]:                             xyz.openbmc_project.Common.Error.InternalFailure
+    #    [Created]:                             2020-04-20T01:55:22+00:00
+    #    [Id]:                                  1
+    #    [@odata.id]:                           /redfish/v1/Systems/system/LogServices/EventLog/Entries/1
+    #    [@odata.type]:                         #LogEntry.v1_4_0.LogEntry
+    #    [EntryType]:                           Event
+    #    [Severity]:                            Critical
+    #    [Name]:                                System Event Log Entry
 
     ${redfish_log_time}=  Convert Date  ${elog_entry[0]["Created"]}  epoch
 
@@ -376,14 +376,14 @@ Verify PEL Log Entry For Event Log
     # Example output from 'Peltool  -l':
     # pel_records:
     # [0x50000023]:
-    #   [SRC]:                                        BD8D1002
-    #   [CreatorID]:                                  BMC
-    #   [Message]:                                    An application had an internal failure
-    #   [CompID]:                                     0x1000
-    #   [PLID]:                                       0x50000023
-    #   [Commit Time]:                                04/20/2020 01:55:22
-    #   [Subsystem]:                                  BMC Firmware
-    #   [Sev]:                                        Unrecoverable Error
+    #   [SRC]:                                   BD8D1002
+    #   [CreatorID]:                             BMC
+    #   [Message]:                               An application had an internal failure
+    #   [CompID]:                                0x1000
+    #   [PLID]:                                  0x50000023
+    #   [Commit Time]:                           04/20/2020 01:55:22
+    #   [Subsystem]:                             BMC Firmware
+    #   [Sev]:                                   Unrecoverable Error
 
     ${ids}=  Get Dictionary Keys  ${pel_records}
     ${id}=  Get From List  ${ids}  0
@@ -711,7 +711,8 @@ Error Logging Rotation Policy
     # Number of logs can be 80% of the total logs created after trimming.
     ${expected_max_record}=   Evaluate  3000 * 0.8
 
-    Run Keyword If  ${trimmed_as_expected} == False   Should Be True  ${no_pel_records} <= ${expected_max_record}
+    Run Keyword If  ${trimmed_as_expected} == False
+    ...  Should Be True  ${no_pel_records} <= ${expected_max_record}
 
 
 Create Error Log

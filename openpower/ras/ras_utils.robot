@@ -108,7 +108,8 @@ Inject Unrecoverable Error
     Wait for OS
     Verify Error Log Entry  ${signature_desc}  ${log_prefix}
 
-    ${dump_service_status}  ${stderr}  ${rc}=  BMC Execute Command  systemctl status xyz.openbmc_project.Dump.Manager.service
+    ${dump_service_status}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  systemctl status xyz.openbmc_project.Dump.Manager.service
     Should Contain  ${dump_service_status}  Active: active (running)
 
     ${resp}=  OpenBMC Get Request  ${DUMP_URI}

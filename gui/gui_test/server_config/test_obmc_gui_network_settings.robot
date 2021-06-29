@@ -432,7 +432,7 @@ Delete And Verify Static IP Address On BMC
     ${ip_addresses}=  Get Static IPv4 Addresses From GUI
     Should Contain  ${ip_addresses}  ${ip_address}  msg=${ip_address} does not exist on BMC
 
-    ${delete_ip_buttons}=  Get WebElements  ${xpath_delete_static_ip} 
+    ${delete_ip_buttons}=  Get WebElements  ${xpath_delete_static_ip}
     FOR  ${location}  IN RANGE  len(${ip_addresses})
        ${gui_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-${location}"]
        Run Keyword If  '${gui_ip}' == '${ip_address}' and '${gui_ip}' != '${BMC_IP}'

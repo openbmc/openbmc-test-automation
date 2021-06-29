@@ -148,7 +148,8 @@ Create A Non Admin Session With ClientID
     &{tmp_dict}=  Create Dictionary
 
     FOR  ${client}  IN  @{client_id}
-      ${resp}=  Redfish Login  rest_username=${username}  rest_password=${password}  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client}"}}
+      ${resp}=  Redfish Login  rest_username=${username}  rest_password=${password}
+      ...  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client}"}}
       Append To List  ${session_list}  ${resp}
     END
 
