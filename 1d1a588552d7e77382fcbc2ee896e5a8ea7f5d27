@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa62e181_29afbd6a",
+        "filename": "gui/gui_test/control_menu/test_server_led_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-29T09:38:31Z",
+      "side": 1,
+      "message": "# Refresh GUI and turn ON the server LED via GUI.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 37
+      },
+      "revId": "1d1a588552d7e77382fcbc2ee896e5a8ea7f5d27",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae861890_6b0ea586",
+        "filename": "gui/gui_test/control_menu/test_server_led_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-29T09:38:31Z",
+      "side": 1,
+      "message": "# Refresh GUI and turn Off the server LED via GUI.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 38
+      },
+      "revId": "1d1a588552d7e77382fcbc2ee896e5a8ea7f5d27",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4ad0159_93a4dc0b",
+        "filename": "gui/gui_test/health_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-29T09:38:31Z",
+      "side": 1,
+      "message": "Add a comment like below.\n\n  # Added a delay for error log to appear on error log page.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 13
+      },
+      "revId": "1d1a588552d7e77382fcbc2ee896e5a8ea7f5d27",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
