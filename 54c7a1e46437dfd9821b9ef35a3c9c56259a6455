@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "388cf6ae_b0d4446b",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-06-29T13:18:56Z",
+      "side": 1,
+      "message": "Test BMC multiple network interface functionalities.",
+      "revId": "54c7a1e46437dfd9821b9ef35a3c9c56259a6455",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6afbd2c1_8ce6cf8a",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-06-29T13:18:56Z",
+      "side": 1,
+      "message": "suggestion- Verify Both Interfaces Are Pingable. pls modify tags accordingly",
+      "revId": "54c7a1e46437dfd9821b9ef35a3c9c56259a6455",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f501cb6_75a26b10",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-06-29T13:18:56Z",
+      "side": 1,
+      "message": "suggestion- Verify Both Interfaces Accessible Via SSH.pls modify tags accordingly",
+      "revId": "54c7a1e46437dfd9821b9ef35a3c9c56259a6455",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6f5710d_9998a429",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-06-29T13:18:56Z",
+      "side": 1,
+      "message": "will Get Host Name IP  help in getting \"eth1 ip\" if system hostname is used in ${OPENBMC_HOST_1},single hostname for all interfaces case",
+      "revId": "54c7a1e46437dfd9821b9ef35a3c9c56259a6455",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
