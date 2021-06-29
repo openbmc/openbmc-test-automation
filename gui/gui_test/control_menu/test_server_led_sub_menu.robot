@@ -52,7 +52,8 @@ Verify Server LED ON
     # Turn Off the server LED via Redfish.
     Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Off"}   valid_status_codes=[200, 204]
 
-    # Turn ON the server LED via GUI.
+    # Refresh GUI and turn ON the server LED via GUI.
+    Click Element  ${xpath_refresh_button}
     Click Element At Coordinates  ${xpath_led_toggle}  0  0
     Wait Until Element Contains  ${xpath_led_value}  On  timeout=15
 
@@ -69,7 +70,8 @@ Verify Server LED OFF
     # Turn ON the server LED via Redfish.
     Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Lit"}   valid_status_codes=[200, 204]
 
-    # Turn Off the server LED via GUI.
+    # Refresh GUI and turn OFF the server LED via GUI.
+    Click Element  ${xpath_refresh_button}
     Click Element At Coordinates  ${xpath_led_toggle}  0  0
     Wait Until Element Contains  ${xpath_led_value}  Off  timeout=30
 
