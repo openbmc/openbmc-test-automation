@@ -117,6 +117,19 @@ OPENBMC_REDFISH:
     PROTOCOL:
         - 'REDFISH'
 
+# Commands and Files to collect for via out of band IPMI.
+OPENBMC_IPMI:
+    COMMANDS:
+        - 'lan print'
+        - 'fru list'
+        - 'user list'
+    FILES:
+        - 'IPMI_LAN_print.txt'
+        - 'IPMI_FRU_list.txt'
+        - 'IPMI_USER_list.txt'
+    PROTOCOL:
+        - 'IPMI'
+
 # Commands and Files to collect for all Linux distributions
 LINUX:
     COMMANDS:
