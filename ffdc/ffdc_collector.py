@@ -66,7 +66,8 @@ class FFDCCollector:
 
         run_env_ok = True
 
-        redfishtool_version = self.run_redfishtool('-V').split(' ')[2]
+        redfishtool_version = self.run_redfishtool('-V').split(' ')[2].strip('\n')
+        ipmitool_version = self.run_ipmitool('-V').split(' ')[2]
 
         print("\n\t---- Script host environment ----")
         print("\t{:<10}  {:<10}".format('Script hostname', os.uname()[1]))
@@ -75,7 +76,8 @@ class FFDCCollector:
         print("\t{:<10}  {:>10}".format('PyYAML', yaml.__version__))
         print("\t{:<10}  {:>10}".format('click', click.__version__))
         print("\t{:<10}  {:>10}".format('paramiko', paramiko.__version__))
-        print("\t{:<10}  {:>10}".format('redfishtool', redfishtool_version))
+        print("\t{:<10}  {:>9}".format('redfishtool', redfishtool_version))
+        print("\t{:<10}  {:>12}".format('ipmitool', ipmitool_version))
 
         if eval(yaml.__version__.replace('.', ',')) < (5, 4, 1):
             print("\n\tERROR: Python or python packages do not meet minimum version requirement.")
@@ -144,7 +146,6 @@ class FFDCCollector:
     def find_os_type(self,
                      listing_from_os,
                      key):
-
         r"""
         Return OS information with the requested key
 
@@ -180,6 +181,12 @@ class FFDCCollector:
                 print("\n\t[Check] %s Redfish Service.\t\t [OK]" % self.hostname)
             else:
                 print("\n\t[Check] %s Redfish Service.\t\t [FAILED]" % self.hostname)
+
+            if self.verify_ipmi():
+                working_protocol_list.append("IPMI")
+                print("\n\t[Check] %s IPMI LAN Service.\t\t [OK]" % self.hostname)
+            else:
+                print("\n\t[Check] %s IPMI LAN Service.\t\t [FAILED]" % self.hostname)
 
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
@@ -243,6 +250,9 @@ class FFDCCollector:
                 if self.target_type == 'OPENBMC':
                     if self.remote_protocol == 'REDFISH' or self.remote_protocol == 'ALL':
                         self.protocol_redfish(ffdc_actions, 'OPENBMC_REDFISH')
+
+                    if self.remote_protocol == 'IPMI' or self.remote_protocol == 'ALL':
+                        self.protocol_ipmi(ffdc_actions, 'OPENBMC_IPMI')
 
         # Close network connection after collecting all files
         self.remoteclient.ssh_remoteclient_disconnect()
@@ -320,6 +330,52 @@ class FFDCCollector:
         for file in redfish_files_saved:
             print("\n\t\tSuccessfully save file " + file + ".")
 
+    def protocol_ipmi(self,
+                      ffdc_actions,
+                      machine_type):
+        r"""
+        Perform actions using ipmitool over LAN protocol.
+
+        Description of argument(s):
+        ffdc_actions        List of actions from ffdc_config.yaml.
+        machine_type        OS Type of remote host.
+        """
+
+        print("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'IPMI'))
+        ipmi_files_saved = []
+        progress_counter = 0
+        list_of_cmd = ffdc_actions[machine_type]['COMMANDS']
+        for index, each_cmd in enumerate(list_of_cmd, start=0):
+            ipmi_parm = '-U ' + self.username + ' -P ' + self.password + ' -H ' \
+                           + self.hostname + ' ' + each_cmd
+
+            result = self.run_ipmitool(ipmi_parm)
+            if result:
+                try:
+                    targ_file = ffdc_actions[machine_type]['FILES'][index]
+                except IndexError:
+                    targ_file = each_url.split('/')[-1]
+                    print("\n\t[WARN] Missing filename to store data from IPMI %s." % each_cmd)
+                    print("\t[WARN] Data will be stored in %s." % targ_file)
+
+                targ_file_with_path = (self.ffdc_dir_path
+                                       + self.ffdc_prefix
+                                       + targ_file)
+
+                # Creates a new file
+                with open(targ_file_with_path, 'w') as fp:
+                    fp.write(result)
+                    fp.close
+                    ipmi_files_saved.append(targ_file)
+
+            progress_counter += 1
+            self.print_progress(progress_counter)
+
+        print("\n\t[Run] Commands execution completed.\t\t [OK]")
+
+        for file in ipmi_files_saved:
+            print("\n\t\tSuccessfully save file " + file + ".")
+
     def collect_and_copy_ffdc(self,
                               ffdc_actions_for_machine_type,
                               form_filename=False):
@@ -355,7 +411,6 @@ class FFDCCollector:
 
     def group_copy(self,
                    ffdc_actions_for_machine_type):
-
         r"""
         scp group of files (wild card) from remote host.
 
@@ -480,6 +535,15 @@ class FFDCCollector:
                        + self.hostname + ' -S Always raw GET /redfish/v1/'
         return(self.run_redfishtool(redfish_parm, True))
 
+    def verify_ipmi(self):
+        r"""
+        Verify remote host has IPMI LAN service active
+
+        """
+        ipmi_parm = '-U ' + self.username + ' -P ' + self.password + ' -H ' \
+                       + self.hostname + ' power status'
+        return(self.run_ipmitool(ipmi_parm, True))
+
     def run_redfishtool(self,
                         parms_string,
                         quiet=False):
@@ -499,6 +563,29 @@ class FFDCCollector:
 
         if result.stderr and not quiet:
             print('\n\t\tERROR with redfishtool ' + parms_string)
+            print('\t\t' + result.stderr)
+
+        return result.stdout
+
+    def run_ipmitool(self,
+                     parms_string,
+                     quiet=False):
+        r"""
+        Run CLI IPMI tool.
+
+        Description of variable:
+        parms_string         ipmitool subcommand and options.
+        quiet                do not print redfishtool error message if True
+        """
+
+        result = subprocess.run(['ipmitool -I lanplus -C 17 ' + parms_string],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                shell=True,
+                                universal_newlines=True)
+
+        if result.stderr and not quiet:
+            print('\n\t\tERROR with ipmitool -I lanplus -C 17 ' + parms_string)
             print('\t\t' + result.stderr)
 
         return result.stdout
