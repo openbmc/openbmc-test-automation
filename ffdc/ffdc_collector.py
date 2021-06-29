@@ -107,7 +107,8 @@ class FFDCCollector:
         response = self.remoteclient.execute_command(command)
         if response:
             print("\n\t[INFO] %s /etc/os-release\n" % self.hostname)
-            print("\t\t %s" % self.find_os_type(response, 'PRETTY_NAME'))
+            for each_info in response:
+                print("\t\t %s" % each_info)
             identity = self.find_os_type(response, 'ID').split('=')[1].upper()
         else:
             response = self.remoteclient.execute_command('uname -a')

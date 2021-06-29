@@ -28,7 +28,7 @@ from ffdc_collector import FFDCCollector
               help="User on the remote host with access to FFDC files.[default: OPENBMC_USERNAME]")
 @click.option('-p', '--password', envvar='OPENBMC_PASSWORD',
               help="Password for user on remote host. [default: OPENBMC_PASSWORD]")
-@click.option('-f', '--ffdc_config', default=abs_path + "/ffdc_config.yaml",
+@click.option('-c', '--ffdc_config', default=abs_path + "/ffdc_config.yaml",
               show_default=True, help="YAML Configuration file listing commands and files for FFDC.")
 @click.option('-l', '--location', default="/tmp",
               show_default=True, help="Location to store collected FFDC data")
