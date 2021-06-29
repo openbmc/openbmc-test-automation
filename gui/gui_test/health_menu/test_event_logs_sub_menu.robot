@@ -112,6 +112,7 @@ Verify Displayed Event Details With Redfish
     [Teardown]  Redfish.Logout
 
     Create Error Logs  ${1}
+    Sleep  5s
     ${event_data}=  Get Event Logs
     Page Should Contain  ${event_data[0]["Severity"]}
     Page Should Contain  ${event_data[0]["EntryType"]}
