@@ -321,7 +321,7 @@ Get Dump ID
     ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
     ${key}  ${value}=  Set Variable  ${task_dict["Payload"]["HttpHeaders"][-1].split(":")}
     Run Keyword If  '${key}' != 'Location'  Fail
-    [Return]  ${value.split('/')[-1]}
+    [Return]  ${value.strip('/').split('/')[-1]}
 
 Get Task Status
     [Documentation]  Return task status.
