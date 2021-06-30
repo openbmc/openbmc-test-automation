@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48ac4d2c_8ab3ef40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-30T05:00:22Z",
+      "side": 1,
+      "message": "Test cases added:\n    - Verify service user availability",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "574d254bab8bb9318e0ef3e8253ddb5268728e39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc67b1c7_57eeea7f",
+        "filename": "service/test_service_user.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-30T05:00:22Z",
+      "side": 1,
+      "message": "This suite is to test service user functionality via Redfish.",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 3,
+        "endChar": 44
+      },
+      "revId": "574d254bab8bb9318e0ef3e8253ddb5268728e39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b842aba_3cfb4e37",
+        "filename": "service/test_service_user.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-30T05:00:22Z",
+      "side": 1,
+      "message": "Take this section out.. You can add it one you start adding variables",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "574d254bab8bb9318e0ef3e8253ddb5268728e39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0251fea_3b16a817",
+        "filename": "service/test_service_user.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-30T05:00:22Z",
+      "side": 1,
+      "message": "Just keep only one line below this.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "574d254bab8bb9318e0ef3e8253ddb5268728e39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10e2bbeb_9c4eb612",
+        "filename": "service/test_service_user.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-30T05:00:22Z",
+      "side": 1,
+      "message": "# Verify that service user has administrator privilege.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 53
+      },
+      "revId": "574d254bab8bb9318e0ef3e8253ddb5268728e39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ded08663_fdd1d50e",
+        "filename": "service/test_service_user.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-06-30T05:00:22Z",
+      "side": 1,
+      "message": "Only one line is required above.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 21
+      },
+      "revId": "574d254bab8bb9318e0ef3e8253ddb5268728e39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
