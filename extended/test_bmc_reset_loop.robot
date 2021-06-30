@@ -54,6 +54,15 @@ Run Multiple BMC Reset Via Reboot
     Repeat Keyword  ${LOOP_COUNT} times  BMC Reboot Cycle
 
 
+Run Multiple BMC Reset When Host Is Booted Via Redfish
+    [Documentation]  Execute multiple reboots via redfish.
+    [Tags]  Run_Multiple_BMC_Reset_When_Host_Is_Booted_Via_Redfish
+
+    # By default run test for 50 loops, else user input iteration.
+    # Fails immediately if any of the execution rounds fail and
+    # check if BMC is still pinging and FFDC is collected.
+    Repeat Keyword  ${LOOP_COUNT} times  BMC Redfish Reset Runtime Cycle
+
 *** Keywords ***
 
 Power Cycle System Via PDU
@@ -70,6 +79,20 @@ BMC Redfish Reset Cycle
     [Documentation]  Reset BMC via Redfish and verify required states.
 
     Redfish OBMC Reboot (off)
+
+    ${bmc_version}=  Get BMC Version
+    Valid Value  bmc_version  valid_values=['${initial_bmc_version}']
+
+    Run Keyword If  '${CHECK_FOR_ERRORS}' == '${1}'
+    ...  Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+
+    Verify BMC RTC And UTC Time Drift
+
+
+BMC Redfish Reset Runtime Cycle
+    [Documentation]  Reset BMC via Redfish and verify required states.
+
+    Redfish OBMC Reboot (run)
 
     ${bmc_version}=  Get BMC Version
     Valid Value  bmc_version  valid_values=['${initial_bmc_version}']
