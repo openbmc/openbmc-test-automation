@@ -12,6 +12,7 @@ import platform
 from errno import EACCES, EPERM
 import subprocess
 from ssh_utility import SSHRemoteclient
+from tn_utility import TelnetRemoteclient
 
 
 class FFDCCollector:
@@ -23,7 +24,7 @@ class FFDCCollector:
     """
 
     # List of supported OSes.
-    supported_oses = ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU']
+    supported_oses = ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU', 'FSP']
 
     def __init__(self,
                  hostname,
@@ -50,7 +51,8 @@ class FFDCCollector:
             self.password = password
             self.ffdc_config = ffdc_config
             self.location = location
-            self.remote_client = None
+            self.ssh_remoteclient = None
+            self.tn_remoteclient = None
             self.ffdc_dir_path = ""
             self.ffdc_prefix = ""
             self.target_type = remote_type.upper()
@@ -100,20 +102,105 @@ class FFDCCollector:
             print("\n>>>>>\tERROR: %s is not ping-able. FFDC collection aborted.\n" % self.hostname)
             sys.exit(-1)
 
-    def inspect_target_machine_type(self):
+    def inspect_target_machine_type(self, working_protocol_list):
         r"""
-        Inspect remote host os-release or uname.
+        Attempt to fetch OS Type from remote host
+
+        Description of argument(s):
+
+        working_protocol_list    List of verified remote host
+                                 communication protocols
+        """
+
+        if 'SSH' in working_protocol_list:
+            self.inspect_target_machine_type_ssh()
+        elif 'TELNET' in working_protocol_list:
+            self.inspect_target_machine_type_tn()
+        else:
+            print("\t[WARN] No SSH or Telnet to %s.\n" % self.target_type)
+            print("\t[WARN] Will do as requested.\n")
+
+    def inspect_target_machine_type_tn(self):
+
+        r"""
+        Attempt to fetch OS Type from remote host using telnet
+
+        """
+
+        result = self.tn_remoteclient.execute_command('uname -a')
+        if result:
+            print("\n\t[INFO] %s uname -a\n" % self.hostname)
+            print("\t\t %s" % result)
+
+            result_list = []
+            result_list.append(result)
+            user_target_type = self.target_type
+            if self.find_os_type(result_list, 'AIX').split(' ')[0].upper():
+                self.target_type = 'AIX'
+            elif self.find_os_type(result_list, 'FSP').split(' ')[0].upper():
+                self.target_type = 'FSP'
+
+            if user_target_type != self.target_type:
+                print("\n\t[WARN] user request %s does not match remote host type %s.\n"
+                      % (user_target_type, self.target_type))
+                print("\t[WARN] FFDC collection continues for %s.\n" % self.target_type)
+
+    def inspect_target_machine_type_ssh(self):
+        r"""
+        Inspect remote host os-release or uname using ssh.
 
         """
         command = "cat /etc/os-release"
-        response = self.remoteclient.execute_command(command)
+        response = self.ssh_remoteclient.execute_command(command)
         if response:
             print("\n\t[INFO] %s /etc/os-release\n" % self.hostname)
             for each_info in response:
                 print("\t\t %s" % each_info)
             identity = self.find_os_type(response, 'ID').split('=')[1].upper()
         else:
-            response = self.remoteclient.execute_command('uname -a')
+            response = self.ssh_remoteclient.execute_command('uname -a')
+            print("\n\t[INFO] %s uname -a\n" % self.hostname)
+            print("\t\t %s" % ' '.join(response))
+            identity = self.find_os_type(response, 'AIX').split(' ')[0].upper()
+
+            # If OS does not have /etc/os-release and is not AIX,
+            # script does not yet know what to do.
+            if not identity:
+                print(">>>>>\tERROR: Script does not yet know about %s" % ' '.join(response))
+                sys.exit(-1)
+
+        if (self.target_type not in identity):
+
+            user_target_type = self.target_type
+            self.target_type = ""
+            for each_os in FFDCCollector.supported_oses:
+                if each_os in identity:
+                    self.target_type = each_os
+                    break
+
+            # If OS in not one of ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU', 'FSP']
+            # script does not yet know what to do.
+            if not self.target_type:
+                print(">>>>>\tERROR: Script does not yet know about %s" % identity)
+                sys.exit(-1)
+
+            print("\n\t[WARN] user request %s does not match remote host type %s.\n"
+                  % (user_target_type, self.target_type))
+            print("\t[WARN] FFDC collection continues for %s.\n" % self.target_type)
+
+        r"""
+        Inspect remote host os-release or uname.
+
+        """
+        command = "cat /etc/os-release"
+        response = self.ssh_remoteclient.execute_command(command)
+        if response:
+            print("\n\t[INFO] %s /etc/os-release\n" % self.hostname)
+            for each_info in response:
+                print("\t\t %s" % each_info)
+            identity = self.find_os_type(response, 'ID').split('=')[1].upper()
+        else:
+            response = self.ssh_remoteclient.execute_command('uname -a')
             print("\n\t[INFO] %s uname -a\n" % self.hostname)
             print("\t\t %s" % ' '.join(response))
             identity = self.find_os_type(response, 'AIX').split(' ')[0].upper()
@@ -157,8 +244,8 @@ class FFDCCollector:
         """
 
         for each_item in listing_from_os:
-            if key in each_item:
-                return each_item
+            if key.upper() in each_item.upper():
+                return each_item.upper()
         return ''
 
     def collect_ffdc(self):
@@ -180,17 +267,22 @@ class FFDCCollector:
                 working_protocol_list.append("REDFISH")
                 print("\n\t[Check] %s Redfish Service.\t\t [OK]" % self.hostname)
             else:
-                print("\n\t[Check] %s Redfish Service.\t\t [FAILED]" % self.hostname)
+                print("\n\t[Check] %s Redfish Service.\t\t [NOT AVAILABLE]" % self.hostname)
 
+            # Impi
             if self.verify_ipmi():
                 working_protocol_list.append("IPMI")
                 print("\n\t[Check] %s IPMI LAN Service.\t\t [OK]" % self.hostname)
             else:
-                print("\n\t[Check] %s IPMI LAN Service.\t\t [FAILED]" % self.hostname)
+                print("\n\t[Check] %s IPMI LAN Service.\t\t [NOT AVAILABLE]" % self.hostname)
+
+            # Telnet
+            if self.telnet_to_target_system():
+                working_protocol_list.append("TELNET")
 
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
-            self.inspect_target_machine_type()
+            self.inspect_target_machine_type(working_protocol_list)
             print("\n\t---- Completed protocol pre-requisite check ----\n")
 
             if ((self.remote_protocol not in working_protocol_list) and (self.remote_protocol != 'ALL')):
@@ -208,18 +300,38 @@ class FFDCCollector:
 
         """
 
-        self.remoteclient = SSHRemoteclient(self.hostname,
-                                            self.username,
-                                            self.password)
+        self.ssh_remoteclient = SSHRemoteclient(self.hostname,
+                                                self.username,
+                                                self.password)
 
-        self.remoteclient.ssh_remoteclient_login()
-        print("\n\t[Check] %s SSH connection established.\t [OK]" % self.hostname)
+        if self.ssh_remoteclient.ssh_remoteclient_login():
+            print("\n\t[Check] %s SSH connection established.\t [OK]" % self.hostname)
 
-        # Check scp connection.
-        # If scp connection fails,
-        # continue with FFDC generation but skip scp files to local host.
-        self.remoteclient.scp_connection()
-        return True
+            # Check scp connection.
+            # If scp connection fails,
+            # continue with FFDC generation but skip scp files to local host.
+            self.ssh_remoteclient.scp_connection()
+            return True
+        else:
+            print("\n\t[Check] %s SSH connection.\t [NOT AVAILABLE]" % self.hostname)
+            return False
+
+    def telnet_to_target_system(self):
+        r"""
+        Open a telnet connection to targeted system.
+
+        """
+
+        self.tn_remoteclient = TelnetRemoteclient(self.hostname,
+                                                  self.username,
+                                                  self.password)
+
+        if self.tn_remoteclient.tn_remoteclient_login():
+            print("\n\t[Check] %s Telnet connection established.\t [OK]" % self.hostname)
+            return True
+        else:
+            print("\n\t[Check] %s Telnet connection.\t [NOT AVAILABLE]" % self.hostname)
+            return False
 
     def generate_ffdc(self, working_protocol_list):
         r"""
@@ -244,8 +356,16 @@ class FFDCCollector:
         for machine_type in ffdc_actions.keys():
 
             if machine_type == self.target_type:
-                if self.remote_protocol == 'SSH' or self.remote_protocol == 'ALL':
+
+                if (self.remote_protocol == 'SSH' or self.remote_protocol == 'ALL') \
+                   and (ffdc_actions[machine_type]['PROTOCOL'][0] == 'SSH') \
+                   and ('SSH' in working_protocol_list):
                     self.protocol_ssh(ffdc_actions, machine_type)
+
+                if (self.remote_protocol == 'TELNET' or self.remote_protocol == 'ALL') \
+                   and (ffdc_actions[machine_type]['PROTOCOL'][0] == 'TELNET') \
+                   and ('TELNET' in working_protocol_list):
+                    self.protocol_telnet(ffdc_actions, machine_type)
 
                 if self.target_type == 'OPENBMC':
                     if self.remote_protocol == 'REDFISH' or self.remote_protocol == 'ALL':
@@ -254,8 +374,9 @@ class FFDCCollector:
                     if self.remote_protocol == 'IPMI' or self.remote_protocol == 'ALL':
                         self.protocol_ipmi(ffdc_actions, 'OPENBMC_IPMI')
 
-        # Close network connection after collecting all files
-        self.remoteclient.ssh_remoteclient_disconnect()
+        # Close network connections after collecting all files
+        self.ssh_remoteclient.ssh_remoteclient_disconnect()
+        self.tn_remoteclient.tn_remoteclient_disconnect()
 
     def protocol_ssh(self,
                      ffdc_actions,
@@ -354,7 +475,7 @@ class FFDCCollector:
                 try:
                     targ_file = ffdc_actions[machine_type]['FILES'][index]
                 except IndexError:
-                    targ_file = each_url.split('/')[-1]
+                    targ_file = each_cmd
                     print("\n\t[WARN] Missing filename to store data from IPMI %s." % each_cmd)
                     print("\t[WARN] Data will be stored in %s." % targ_file)
 
@@ -376,6 +497,49 @@ class FFDCCollector:
         for file in ipmi_files_saved:
             print("\n\t\tSuccessfully save file " + file + ".")
 
+    def protocol_telnet(self,
+                        ffdc_actions,
+                        machine_type):
+        r"""
+        Perform actions using telnet protocol.
+
+        Description of argument(s):
+        ffdc_actions        List of actions from ffdc_config.yaml.
+        machine_type        OS Type of remote host.
+        """
+
+        print("\n\t[Run] Executing commands on %s using %s" % (self.hostname, 'TELNET'))
+        telnet_files_saved = []
+        progress_counter = 0
+        list_of_commands = ffdc_actions[machine_type]['COMMANDS']
+        for index, each_cmd in enumerate(list_of_commands, start=0):
+            result = self.tn_remoteclient.execute_command(each_cmd)
+            if result:
+                try:
+                    targ_file = ffdc_actions[machine_type]['FILES'][index]
+                except IndexError:
+                    targ_file = each_cmd
+                    print("\n\t[WARN] Missing filename to store data from telnet %s." % each_cmd)
+                    print("\t[WARN] Data will be stored in %s." % targ_file)
+
+                targ_file_with_path = (self.ffdc_dir_path
+                                       + self.ffdc_prefix
+                                       + targ_file)
+
+                # Creates a new file
+                with open(targ_file_with_path, 'w') as fp:
+                    fp.write(result)
+                    fp.close
+                    telnet_files_saved.append(targ_file)
+
+            progress_counter += 1
+            self.print_progress(progress_counter)
+
+        print("\n\t[Run] Commands execution completed.\t\t [OK]")
+
+        for file in telnet_files_saved:
+            print("\n\t\tSuccessfully save file " + file + ".")
+
     def collect_and_copy_ffdc(self,
                               ffdc_actions_for_machine_type,
                               form_filename=False):
@@ -394,13 +558,13 @@ class FFDCCollector:
         for command in list_of_commands:
             if form_filename:
                 command = str(command % self.target_type)
-            self.remoteclient.execute_command(command)
+            self.ssh_remoteclient.execute_command(command)
             progress_counter += 1
             self.print_progress(progress_counter)
 
         print("\n\t[Run] Commands execution completed.\t\t [OK]")
 
-        if self.remoteclient.scpclient:
+        if self.ssh_remoteclient.scpclient:
             print("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
 
             # Retrieving files from target system
@@ -417,7 +581,7 @@ class FFDCCollector:
         Description of argument(s):
         ffdc_actions_for_machine_type    commands and files for the selected remote host type.
         """
-        if self.remoteclient.scpclient:
+        if self.ssh_remoteclient.scpclient:
             print("\n\tCopying DUMP files from remote system %s.\n" % self.hostname)
 
             # Retrieving files from target system, if any
@@ -425,11 +589,11 @@ class FFDCCollector:
 
             for filename in list_of_files:
                 command = 'ls -AX ' + filename
-                response = self.remoteclient.execute_command(command)
-                # self.remoteclient.scp_file_from_remote() completed without exception,
+                response = self.ssh_remoteclient.execute_command(command)
+                # self.ssh_remoteclient.scp_file_from_remote() completed without exception,
                 # if any
                 if response:
-                    scp_result = self.remoteclient.scp_file_from_remote(filename, self.ffdc_dir_path)
+                    scp_result = self.ssh_remoteclient.scp_file_from_remote(filename, self.ffdc_dir_path)
                     if scp_result:
                         print("\t\tSuccessfully copied from " + self.hostname + ':' + filename)
                 else:
@@ -462,9 +626,9 @@ class FFDCCollector:
             source_file_path = filename
             targ_file_path = targ_dir_path + targ_file_prefix + filename.split('/')[-1]
 
-            # self.remoteclient.scp_file_from_remote() completed without exception,
+            # self.ssh_remoteclient.scp_file_from_remote() completed without exception,
             # add file to the receiving file list.
-            scp_result = self.remoteclient.scp_file_from_remote(source_file_path, targ_file_path)
+            scp_result = self.ssh_remoteclient.scp_file_from_remote(source_file_path, targ_file_path)
 
             if not quiet:
                 if scp_result:

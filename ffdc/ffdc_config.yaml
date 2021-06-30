@@ -117,7 +117,7 @@ OPENBMC_REDFISH:
     PROTOCOL:
         - 'REDFISH'
 
-# Commands and Files to collect for via out of band IPMI.
+# Commands and Files to collect for BMC via out of band IPMI.
 OPENBMC_IPMI:
     COMMANDS:
         - 'lan print'
@@ -129,6 +129,17 @@ OPENBMC_IPMI:
         - 'IPMI_USER_list.txt'
     PROTOCOL:
         - 'IPMI'
+
+# Commands and Files to collect for IBM Flexible Service Processor (FSP).
+FSP:
+    COMMANDS:
+        - 'cupdcmd -f'
+        - 'smgr mfgState'
+    FILES:
+        - 'software.txt'
+        - 'status.txt'
+    PROTOCOL:
+        - 'TELNET'
 
 # Commands and Files to collect for all Linux distributions
 LINUX:

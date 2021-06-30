@@ -42,6 +42,7 @@ class SSHRemoteclient:
         Method to create a ssh connection to remote host.
         """
 
+        is_ssh_login = True
         try:
             # SSHClient to make connections to the remote server
             self.sshclient = paramiko.SSHClient()
@@ -54,9 +55,10 @@ class SSHRemoteclient:
                                    look_for_keys=False)
 
         except (BadHostKeyException, AuthenticationException,
-                SSHException, NoValidConnectionsError, socket.error) as e:
-            print("\n>>>>>\tERROR: Unable to SSH to %s %s %s\n\n" % (self.hostname, e.__class__, e))
-            sys.exit(-1)
+                SSHException, NoValidConnectionsError, socket.error):
+            is_ssh_login = False
+
+        return is_ssh_login
 
     def ssh_remoteclient_disconnect(self):
 
