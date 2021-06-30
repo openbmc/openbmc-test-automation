@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9157b07f_725ee922",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-30T14:14:39Z",
+      "side": 1,
+      "message": "remove this",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 46
+      },
+      "revId": "4a6d05598e1d616a345cea99089c93e1d3dd3799",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d45b8bf6_4fecc970",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-06-30T14:14:39Z",
+      "side": 1,
+      "message": "remove this",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 46
+      },
+      "revId": "4a6d05598e1d616a345cea99089c93e1d3dd3799",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
