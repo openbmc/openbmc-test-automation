@@ -302,6 +302,8 @@ Post Test Case Execution
    FFDC On Test Case Fail
    Set Boot Source  ${BOOT_SOURCE_DEFAULT}
    Set Boot Mode  ${BOOT_MODE_REGULAR}
+   Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
+   ...  Set Boot Type  ${BOOT_TYPE_EFI}
 
 Test Suite Setup
     [Documentation]  Do the initial suite setup.
