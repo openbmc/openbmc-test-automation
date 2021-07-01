@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55d12c8c_3470faa8",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-01T09:10:45Z",
+      "side": 1,
+      "message": "Ideally it should have some other privilege like service user specific. As of now it might be showing admin. But I am fine with this as of now.",
+      "range": {
+        "startLine": 22,
+        "startChar": 21,
+        "endLine": 22,
+        "endChar": 34
+      },
+      "revId": "ede2abd3cffed458255713638b2bc1976593b7b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
