@@ -697,11 +697,8 @@ Verify CLI and Redfish Nameservers
     ${resolve_conf_nameservers}=  CLI Get Nameservers
     Rqprint Vars  redfish_nameservers  resolve_conf_nameservers
 
-    # Check that the 2 lists are equivalent.
-    ${match}=  Evaluate  set($redfish_nameservers) == set($resolve_conf_nameservers)
-    Should Be True  ${match}
-    ...  The nameservers obtained via Redfish do not match those found in /etc/resolv.conf.
-
+    List Should Contain Sub List  ${resolve_conf_nameservers}  ${redfish_nameservers}
+    ...  msg=The nameservers obtained via Redfish do not match those found in /etc/resolv.conf.
 
 Configure Static Name Servers
     [Documentation]  Configure DNS server on BMC.
