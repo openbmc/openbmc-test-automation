@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec7e76a_64c89bef",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-01T14:06:54Z",
+      "side": 1,
+      "message": "eth1",
+      "range": {
+        "startLine": 41,
+        "startChar": 43,
+        "endLine": 41,
+        "endChar": 47
+      },
+      "revId": "b5a9bbe1cb5eeefeda3d39df876eadcd51aeefe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a551f3a8_2be2c2fd",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-01T14:06:54Z",
+      "side": 1,
+      "message": "validate hostname on bmc  openbmc",
+      "revId": "b5a9bbe1cb5eeefeda3d39df876eadcd51aeefe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
