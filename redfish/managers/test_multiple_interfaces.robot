@@ -26,6 +26,29 @@ Verify Both Interfaces BMC IP Addreeses Accessible Via SSH
     Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${OPENBMC_HOST_1}
     Close All Connections
 
+Verify Access BMC with Both Interfaces IP Address Via Redfish
+    [Documentation]  Verify access BMC with both interfaces (eth0, eth1) IP addresses via Redfish.
+    [Tags]  Verify_Access_BMC_With_Both_Interfaces_IP_Address_Via_Redfish
+    [Teardown]  Run Keywords  Redfish.Login  AND  Redfish1.Login
+
+    Redfish1.Login
+    Redfish.Login
+
+    ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    ${data}=  Create Dictionary  HostName=openbmc
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}eth0  body=&{data}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}eth0
+    Should Be Equal  ${resp.dict['HostName']}  openbmc
+
+    ${data}=  Create Dictionary  HostName=${hostname}
+    Redfish1.patch  ${REDFISH_NW_ETH_IFACE}eth1  body=&{data}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    ${resp}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth1
+    Should Be Equal  ${resp.dict['HostName']}  ${hostname}
+
 
 *** Keywords ***
 
