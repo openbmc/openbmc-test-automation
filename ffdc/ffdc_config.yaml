@@ -13,6 +13,10 @@
 # Note: When a new remote type is added to this configuration file,
 #       it is also need to be added the list of supported OSes in ffdc_collector.py
 
+# User can add the distro or system type name in the list generic/OEM for log collection.
+DISTRO_OS:
+    - ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU']
+
 # Commands and Files to collect for a given OpenBMC system.
 OPENBMC:
     # Commands and File to take snapshot of linux based system.

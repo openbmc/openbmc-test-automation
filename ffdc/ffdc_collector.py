@@ -58,6 +58,13 @@ class FFDCCollector:
         else:
             sys.exit(-1)
 
+        # Load default or user define YAML configuration file.
+        with open(self.ffdc_config, 'r') as file:
+            self.ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
+
+        # List of supported OSes.
+        self.supported_oses = self.ffdc_actions['DISTRO_OS'][0]
+
     def verify_script_env(self):
 
         # Import to log version
@@ -105,6 +112,8 @@ class FFDCCollector:
         Inspect remote host os-release or uname.
 
         """
+        print("\n\tSupported distro: %s" % self.supported_oses)
+
         command = "cat /etc/os-release"
         response = self.remoteclient.execute_command(command)
         if response:
@@ -128,7 +137,7 @@ class FFDCCollector:
 
             user_target_type = self.target_type
             self.target_type = ""
-            for each_os in FFDCCollector.supported_oses:
+            for each_os in self.supported_oses:
                 if each_os in identity:
                     self.target_type = each_os
                     break
@@ -231,8 +240,6 @@ class FFDCCollector:
 
         print("\n\t---- Executing commands on " + self.hostname + " ----")
         print("\n\tWorking protocol list: %s" % working_protocol_list)
-        with open(self.ffdc_config, 'r') as file:
-            ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
 
         # Set prefix values for scp files and directory.
         # Since the time stamp is at second granularity, these values are set here
@@ -240,6 +247,7 @@ class FFDCCollector:
         # and they will be saved in the same directory.
         # self.location == local system for now
         self.set_ffdc_defaults()
+        ffdc_actions = self.ffdc_actions
 
         for machine_type in ffdc_actions.keys():
             if self.target_type != machine_type:
