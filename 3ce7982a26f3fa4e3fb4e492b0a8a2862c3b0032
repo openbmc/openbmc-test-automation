@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92b07153_c19687f3",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-01T11:05:04Z",
+      "side": 1,
+      "message": "Did u test this? I checked this one and it didnt give me the expected result.\n\nYou need to replace response with data each time you loop in this so that u get the target path. Also type(dict) condition should be --\u003e type(data) is dict and not type(data) is dict()\n\n\ncontinue is not required as the loop will go to the next item anyway. Also else is not required since u r not breaking out of the loop.",
+      "range": {
+        "startLine": 335,
+        "startChar": 1,
+        "endLine": 341,
+        "endChar": 23
+      },
+      "revId": "3ce7982a26f3fa4e3fb4e492b0a8a2862c3b0032",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
