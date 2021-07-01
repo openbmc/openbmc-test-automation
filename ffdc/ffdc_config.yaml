@@ -188,6 +188,15 @@ UBUNTU:
         PROTOCOL:
             - 'SSH'
 
+    # Commands and Files to collect dumps
+    DUMP_LOGS:
+        COMMANDS:
+            - 'ls -AX /tmp/sosreport*.tar.xz'
+        FILES:
+            - '/tmp/sosreport*.tar.xz'
+        PROTOCOL:
+            - 'SSH'
+
 # Commands and Files to collect for RHE Linux only
 RHEL:
     RHEL_LOGS:
@@ -204,6 +213,15 @@ RHEL:
             - '/tmp/OS_syslog.txt'
             - '/tmp/OS_info.txt'
             - '/tmp/OS_sosreport.txt'
+        PROTOCOL:
+            - 'SSH'
+
+    # Commands and Files to collect dumps
+    DUMP_LOGS:
+        COMMANDS:
+            - 'ls -AX /tmp/sosreport*.tar.xz'
+        FILES:
+            - '/tmp/sosreport*.tar.xz'
         PROTOCOL:
             - 'SSH'
 
