@@ -6,6 +6,7 @@ Documentation   Test BMC multiple network interface functionalities.
 Library         ../../lib/bmc_redfish.py  https://${OPENBMC_HOST_1}:${HTTPS_PORT}
 ...             ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  WITH NAME  Redfish1
 
+Resource        ../../gui/lib/gui_resource.robot
 Resource        ../../lib/resource.robot
 Resource        ../../lib/common_utils.robot
 Resource        ../../lib/connection_client.robot
@@ -18,6 +19,12 @@ Resource        ../../lib/snmp/redfish_snmp_utils.robot
 Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
 Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
+
+*** Variables ***
+
+${bmc_url}             https://${OPENBMC_HOST}
+${bmc_url_1}           https://${OPENBMC_HOST_1}
+
 
 *** Test Cases ***
 
@@ -85,6 +92,29 @@ Disable And Enable Eth0 Interface
     ${OPENBMC_HOST}   eth0      ${True}
 
 
+Verify BMC GUI Is Accessible Via Both Network Interfaces
+    [Documentation]  Verify BMC GUI is accessible via both network interfaces.
+    [Tags]  Verify_BMC_GUI_Is_Accessible_Via_Both_Network_Interfaces
+    [Teardown]  Close All Browsers
+
+    Start Virtual Display
+    ${browser_ID}=  Open Browser  ${bmc_url}  alias=tab1
+    Set Window Size  1920  1080
+
+    ${browser_ID}=  Open Browser  ${bmc_url_1}  alias=tab2
+    Set Window Size  1920  1080
+
+    Switch Browser  tab1
+    Login GUI
+    Switch Browser  tab2
+    Login GUI
+
+    Switch Browser  tab1
+    Logout GUI
+    Switch Browser  tab2
+    Logout GUI
+
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
@@ -147,3 +177,4 @@ Set BMC Ethernet Interfaces State
 
     Run Keyword If  ${enabled} == ${True}  Should Be Equal  ${status}  ${True}
     ...  ELSE  Should Be Equal  ${status}  ${False}
+

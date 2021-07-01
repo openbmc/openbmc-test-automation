@@ -86,7 +86,6 @@ Login GUI
     # username  The username to be used for login.
     # password  The password to be used for login.
 
-    Go To  ${obmc_gui_url}
     Wait Until Element Is Enabled  ${xpath_textbox_username}
     Input Text  ${xpath_textbox_username}  ${username}
     Input Password  ${xpath_textbox_password}  ${password}
@@ -97,6 +96,7 @@ Login GUI
 Logout GUI
     [Documentation]  Logout of OpenBMC GUI.
 
+    Click Element  ${xpath_root_button_menu}
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}
 
