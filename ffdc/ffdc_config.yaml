@@ -13,199 +13,204 @@
 # Note: When a new remote type is added to this configuration file,
 #       it is also need to be added the list of supported OSes in ffdc_collector.py
 
-# Commands and File to take snapshot of linux based system.
-# Filename is <OS>_general.txt, where <OS> is in [OPENBMC, RHEL, UBUNTU]
-GENERAL:
-    COMMANDS:
-        - 'rm -rf /tmp/%s_general.txt'
-        - 'echo "++++++++++ cat /etc/os-release ++++++++++" >> /tmp/%s_general.txt 2>&1'
-        - 'cat /etc/os-release >> /tmp/%s_general.txt 2>&1'
-        - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >> /tmp/%s_general.txt 2>&1'
-        - 'cat /etc/timestamp >> /tmp/%s_general.txt 2>&1'
-        - 'echo -e "\n++++++++++ uname -a ++++++++++" >> /tmp/%s_general.txt 2>&1'
-        - 'uname -a >> /tmp/%s_general.txt'
-        - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >> /tmp/%s_general.txt 2>&1'
-        - 'cat /etc/timestamp >> /tmp/%s_general.txt 2>&1'
-        - 'echo -e "\n++++++++++ uptime;cat /proc/uptime ++++++++++" >> /tmp/%s_general.txt 2>&1'
-        - 'uptime >> /tmp/%s_general.txt 2>&1'
-        - 'cat /proc/uptime >> /tmp/%s_general.txt 2>&1'
-        - 'echo -e "\n++++++++++ df -hT ++++++++++" >> /tmp/%s_general.txt 2>&1'
-        - 'df -hT >> /tmp/%s_general.txt 2>&1'
-        - 'echo -e "\n++++++++++ date;/sbin/hwclock --show ++++++++++" >> /tmp/%s_general.txt 2>&1'
-        - 'date >> /tmp/%s_general.txt 2>&1'
-        - '/sbin/hwclock --show >> /tmp/%s_general.txt 2>&1'
-        - '/usr/bin/timedatectl >> /tmp/%s_general.txt 2>&1'
-        - 'echo -e "\n++++++++++ /usr/bin/obmcutil state ++++++++++" >> /tmp/%s_general.txt 2>&1'
-        - '/usr/bin/obmcutil state >> /tmp/%s_general.txt 2>&1'
-    FILES:
-        - '/tmp/%s_general.txt'
-    PROTOCOL:
-        - 'SSH'
-
 # Commands and Files to collect for a given OpenBMC system.
 OPENBMC:
-    COMMANDS:
-        - 'cat /sys/class/watchdog/watchdog1/bootstatus >/tmp/BMC_flash_side.txt 2>&1'
-        - 'grep -r . /sys/class/hwmon/* >/tmp/BMC_hwmon.txt 2>&1'
-        - 'top -n 1 -b >/tmp/BMC_proc_list.txt 2>&1'
-        - 'ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt 2>&1'
-        - 'journalctl --no-pager >/tmp/BMC_journalctl_nopager.txt 2>&1'
-        - 'journalctl -o json-pretty >/tmp/BMC_journalctl_pretty.json 2>&1'
-        - 'dmesg >/tmp/BMC_dmesg.txt 2>&1'
-        - 'cat /proc/cpuinfo >/tmp/BMC_procinfo.txt 2>&1'
-        - 'cat /proc/meminfo >/tmp/BMC_meminfo.txt 2>&1'
-        - 'systemctl status --all >/tmp/BMC_systemd.txt 2>&1'
-        - 'systemctl list-units --failed >/tmp/BMC_failed_service.txt 2>&1'
-        - 'systemctl list-jobs >/tmp/BMC_list_service.txt 2>&1'
-        - 'cat /var/log/obmc-console.log >/tmp/BMC_obmc_console.txt 2>&1'
-        - 'cat /var/log/obmc-console1.log >/tmp/BMC_obmc_console1.txt 2>&1'
-        - 'peltool -l >/tmp/PEL_logs_list.json 2>&1'
-        - 'peltool -a >/tmp/PEL_logs_display.json 2>&1'
-    FILES:
-        - '/tmp/BMC_flash_side.txt'
-        - '/tmp/BMC_hwmon.txt'
-        - '/tmp/BMC_proc_list.txt'
-        - '/tmp/BMC_proc_fd_active_list.txt'
-        - '/tmp/BMC_journalctl_nopager.txt'
-        - '/tmp/BMC_journalctl_pretty.json'
-        - '/tmp/BMC_dmesg.txt'
-        - '/tmp/BMC_procinfo.txt'
-        - '/tmp/BMC_meminfo.txt'
-        - '/tmp/BMC_systemd.txt'
-        - '/tmp/BMC_failed_service.txt'
-        - '/tmp/BMC_list_service.txt'
-        - '/tmp/BMC_obmc_console.txt'
-        - '/tmp/BMC_obmc_console1.txt'
-        - '/tmp/PEL_logs_list.json'
-        - '/tmp/PEL_logs_display.json'
-    PROTOCOL:
-        - 'SSH'
+    # Commands and File to take snapshot of linux based system.
+    # Filename is <OS>_general.txt, where <OS> is in [OPENBMC, RHEL, UBUNTU]
+    GENERAL:
+        COMMANDS:
+            - 'rm -rf /tmp/%s_general.txt'
+            - 'echo "++++++++++ cat /etc/os-release ++++++++++" >> /tmp/%s_general.txt 2>&1'
+            - 'cat /etc/os-release >> /tmp/%s_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >> /tmp/%s_general.txt 2>&1'
+            - 'cat /etc/timestamp >> /tmp/%s_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ uname -a ++++++++++" >> /tmp/%s_general.txt 2>&1'
+            - 'uname -a >> /tmp/%s_general.txt'
+            - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >> /tmp/%s_general.txt 2>&1'
+            - 'cat /etc/timestamp >> /tmp/%s_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ uptime;cat /proc/uptime ++++++++++" >> /tmp/%s_general.txt 2>&1'
+            - 'uptime >> /tmp/%s_general.txt 2>&1'
+            - 'cat /proc/uptime >> /tmp/%s_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ df -hT ++++++++++" >> /tmp/%s_general.txt 2>&1'
+            - 'df -hT >> /tmp/%s_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ date;/sbin/hwclock --show ++++++++++" >> /tmp/%s_general.txt 2>&1'
+            - 'date >> /tmp/%s_general.txt 2>&1'
+            - '/sbin/hwclock --show >> /tmp/%s_general.txt 2>&1'
+            - '/usr/bin/timedatectl >> /tmp/%s_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ /usr/bin/obmcutil state ++++++++++" >> /tmp/%s_general.txt 2>&1'
+            - '/usr/bin/obmcutil state >> /tmp/%s_general.txt 2>&1'
+        FILES:
+            - '/tmp/%s_general.txt'
+        PROTOCOL:
+            - 'SSH'
 
-# Commands and Files to collect OPENBMC dumps
-OPENBMC_DUMPS:
-    COMMANDS:
-        - 'ls -AX /var/lib/systemd/coredump/core.*'
-        - 'ls -AX /var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'
-        - 'ls -AX /var/lib/phosphor-debug-collector/hostbootdump/*/*.tar.gz'
-    FILES:
-        - '/var/lib/systemd/coredump/core.*'
-        - '/var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'
-        - '/var/lib/phosphor-debug-collector/hostbootdump/*/*.tar.gz'
-    PROTOCOL:
-        - 'SSH'
+    OPENBMC_LOGS:
+        COMMANDS:
+            - 'cat /sys/class/watchdog/watchdog1/bootstatus >/tmp/BMC_flash_side.txt 2>&1'
+            - 'grep -r . /sys/class/hwmon/* >/tmp/BMC_hwmon.txt 2>&1'
+            - 'top -n 1 -b >/tmp/BMC_proc_list.txt 2>&1'
+            - 'ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt 2>&1'
+            - 'journalctl --no-pager >/tmp/BMC_journalctl_nopager.txt 2>&1'
+            - 'journalctl -o json-pretty >/tmp/BMC_journalctl_pretty.json 2>&1'
+            - 'dmesg >/tmp/BMC_dmesg.txt 2>&1'
+            - 'cat /proc/cpuinfo >/tmp/BMC_procinfo.txt 2>&1'
+            - 'cat /proc/meminfo >/tmp/BMC_meminfo.txt 2>&1'
+            - 'systemctl status --all >/tmp/BMC_systemd.txt 2>&1'
+            - 'systemctl list-units --failed >/tmp/BMC_failed_service.txt 2>&1'
+            - 'systemctl list-jobs >/tmp/BMC_list_service.txt 2>&1'
+            - 'cat /var/log/obmc-console.log >/tmp/BMC_obmc_console.txt 2>&1'
+            - 'cat /var/log/obmc-console1.log >/tmp/BMC_obmc_console1.txt 2>&1'
+            - 'peltool -l >/tmp/PEL_logs_list.json 2>&1'
+            - 'peltool -a >/tmp/PEL_logs_display.json 2>&1'
+        FILES:
+            - '/tmp/BMC_flash_side.txt'
+            - '/tmp/BMC_hwmon.txt'
+            - '/tmp/BMC_proc_list.txt'
+            - '/tmp/BMC_proc_fd_active_list.txt'
+            - '/tmp/BMC_journalctl_nopager.txt'
+            - '/tmp/BMC_journalctl_pretty.json'
+            - '/tmp/BMC_dmesg.txt'
+            - '/tmp/BMC_procinfo.txt'
+            - '/tmp/BMC_meminfo.txt'
+            - '/tmp/BMC_systemd.txt'
+            - '/tmp/BMC_failed_service.txt'
+            - '/tmp/BMC_list_service.txt'
+            - '/tmp/BMC_obmc_console.txt'
+            - '/tmp/BMC_obmc_console1.txt'
+            - '/tmp/PEL_logs_list.json'
+            - '/tmp/PEL_logs_display.json'
+        PROTOCOL:
+            - 'SSH'
 
-# URLs and Files for OPENBMC redfish
-# URLs and Files are one-to-one corresponding.
-# File contains the data returned from 'redfishtool GET URL'
-OPENBMC_REDFISH:
-    URL:
-        - '/xyz/openbmc_project/software/enumerate'
-        - '/xyz/openbmc_project/state/enumerate'
-        - '/org/open_power/enumerate'
-        - '/redfish/v1/AccountService/Accounts'
-        - '/redfish/v1/Managers/bmc/LogServices/Dump/Entries'
-        - '/redfish/v1/Systems/system/LogServices/Dump/Entries'
-        - '/redfish/v1/Systems/system/LogServices/EventLog/Entries'
-    FILES:
-        - 'software.json'
-        - 'bmc_state.json'
-        - 'openpower_control_occ_state.json'
-        - 'bmc_user_accounts.json'
-        - 'bmc_dump_entries.json'
-        - 'system_dumps_entries.json'
-        - 'event_log_entries.json'
-    PROTOCOL:
-        - 'REDFISH'
+    # Commands and Files to collect OPENBMC dumps
+    DUMP_LOGS:
+        COMMANDS:
+            - 'ls -AX /var/lib/systemd/coredump/core.*'
+            - 'ls -AX /var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'
+            - 'ls -AX /var/lib/phosphor-debug-collector/hostbootdump/*/*.tar.gz'
+        FILES:
+            - '/var/lib/systemd/coredump/core.*'
+            - '/var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'
+            - '/var/lib/phosphor-debug-collector/hostbootdump/*/*.tar.gz'
+        PROTOCOL:
+            - 'SSH'
 
-# Commands and Files to collect for via out of band IPMI.
-OPENBMC_IPMI:
-    COMMANDS:
-        - 'lan print'
-        - 'fru list'
-        - 'user list'
-    FILES:
-        - 'IPMI_LAN_print.txt'
-        - 'IPMI_FRU_list.txt'
-        - 'IPMI_USER_list.txt'
-    PROTOCOL:
-        - 'IPMI'
+    # URLs and Files for OPENBMC redfish
+    # URLs and Files are one-to-one corresponding.
+    # File contains the data returned from 'redfishtool GET URL'
+    REDFISH_LOGS:
+        URL:
+            - '/xyz/openbmc_project/software/enumerate'
+            - '/xyz/openbmc_project/state/enumerate'
+            - '/org/open_power/enumerate'
+            - '/redfish/v1/AccountService/Accounts'
+            - '/redfish/v1/Managers/bmc/LogServices/Dump/Entries'
+            - '/redfish/v1/Systems/system/LogServices/Dump/Entries'
+            - '/redfish/v1/Systems/system/LogServices/EventLog/Entries'
+        FILES:
+            - 'software.json'
+            - 'bmc_state.json'
+            - 'openpower_control_occ_state.json'
+            - 'bmc_user_accounts.json'
+            - 'bmc_dump_entries.json'
+            - 'system_dumps_entries.json'
+            - 'event_log_entries.json'
+        PROTOCOL:
+            - 'REDFISH'
+
+    # Commands and Files to collect for via out of band IPMI.
+    IPMI_LOGS:
+        COMMANDS:
+            - 'lan print'
+            - 'fru list'
+            - 'user list'
+        FILES:
+            - 'IPMI_LAN_print.txt'
+            - 'IPMI_FRU_list.txt'
+            - 'IPMI_USER_list.txt'
+        PROTOCOL:
+            - 'IPMI'
 
 # Commands and Files to collect for all Linux distributions
 LINUX:
-    COMMANDS:
-        - 'cat /sys/firmware/opal/msglog >/tmp/OS_msglog.txt 2>&1'
-        - 'ppc64_cpu --frequency >/tmp/OS_cpufrequency.txt 2>&1'
-        - 'dmesg >/tmp/OS_dmesg.txt 2>&1'
-        - 'cat /var/log/opal-prd* >/tmp/OS_opal_prd.txt 2>&1'
-        - 'cat /var/log/boot.log >/tmp/OS_boot.txt 2>&1'
-        - 'cat /proc/cpuinfo >/tmp/OS_procinfo.txt 2>&1'
-        - 'cat /proc/meminfo >/tmp/OS_meminfo.txt 2>&1'
-        - 'netstat -a >/tmp/OS_netstat.txt 2>&1'
-        - 'lspci >/tmp/OS_lspci.txt 2>&1'
-        - 'lscpu >/tmp/OS_lscpu.txt 2>&1'
-        - 'lscfg >/tmp/OS_lscfg.txt 2>&1'
-        - 'journalctl --no-pager -b > /tmp/OS_journalctl_nopager.txt  2>&1'
-    FILES:
-        - '/tmp/OS_msglog.txt'
-        - '/tmp/OS_cpufrequency.txt'
-        - '/tmp/OS_dmesg.txt'
-        - '/tmp/OS_opal_prd.txt'
-        - '/tmp/OS_boot.txt'
-        - '/tmp/OS_procinfo.txt'
-        - '/tmp/OS_meminfo.txt'
-        - '/tmp/OS_netstat.txt'
-        - '/tmp/OS_lspci.txt'
-        - '/tmp/OS_lscpu.txt'
-        - '/tmp/OS_lscfg.txt'
-        - '/tmp/OS_journalctl_nopager.txt'
-    PROTOCOL:
-        - 'SSH'
+    LINUX_LOGS:
+        COMMANDS:
+            - 'cat /sys/firmware/opal/msglog >/tmp/OS_msglog.txt 2>&1'
+            - 'ppc64_cpu --frequency >/tmp/OS_cpufrequency.txt 2>&1'
+            - 'dmesg >/tmp/OS_dmesg.txt 2>&1'
+            - 'cat /var/log/opal-prd* >/tmp/OS_opal_prd.txt 2>&1'
+            - 'cat /var/log/boot.log >/tmp/OS_boot.txt 2>&1'
+            - 'cat /proc/cpuinfo >/tmp/OS_procinfo.txt 2>&1'
+            - 'cat /proc/meminfo >/tmp/OS_meminfo.txt 2>&1'
+            - 'netstat -a >/tmp/OS_netstat.txt 2>&1'
+            - 'lspci >/tmp/OS_lspci.txt 2>&1'
+            - 'lscpu >/tmp/OS_lscpu.txt 2>&1'
+            - 'lscfg >/tmp/OS_lscfg.txt 2>&1'
+            - 'journalctl --no-pager -b > /tmp/OS_journalctl_nopager.txt  2>&1'
+        FILES:
+            - '/tmp/OS_msglog.txt'
+            - '/tmp/OS_cpufrequency.txt'
+            - '/tmp/OS_dmesg.txt'
+            - '/tmp/OS_opal_prd.txt'
+            - '/tmp/OS_boot.txt'
+            - '/tmp/OS_procinfo.txt'
+            - '/tmp/OS_meminfo.txt'
+            - '/tmp/OS_netstat.txt'
+            - '/tmp/OS_lspci.txt'
+            - '/tmp/OS_lscpu.txt'
+            - '/tmp/OS_lscfg.txt'
+            - '/tmp/OS_journalctl_nopager.txt'
+        PROTOCOL:
+            - 'SSH'
 
 # Commands and Files to collect for Ubuntu Linux only
 UBUNTU:
-    COMMANDS:
-        - '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt 2>&1'
-        - 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt 2>&1'
-        - '{ cat /var/log/auth.log; cat /var/log/auth.log.1 ; } >/tmp/OS_authlog.txt 2>&1'
-        - 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1'
-        - '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } >/tmp/OS_info.txt 2>&1'
-        - 'rm -rf /tmp/sosreport*FFDC*'
-        - 'sosreport --batch --tmp-dir /tmp --ticket-number FFDC >/tmp/OS_sosreport.txt 2>&1'
-    FILES:
-        - '/tmp/OS_isub.txt'
-        - '/tmp/OS_kern.txt'
-        - '/tmp/OS_authlog.txt'
-        - '/tmp/OS_syslog.txt'
-        - '/tmp/OS_info.txt'
-        - '/tmp/OS_sosreport.txt'
-    PROTOCOL:
-        - 'SSH'
+    UBUNTU_LOGS:
+        COMMANDS:
+            - '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt 2>&1'
+            - 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt 2>&1'
+            - '{ cat /var/log/auth.log; cat /var/log/auth.log.1 ; } >/tmp/OS_authlog.txt 2>&1'
+            - 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1'
+            - '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } >/tmp/OS_info.txt 2>&1'
+            - 'rm -rf /tmp/sosreport*FFDC*'
+            - 'sosreport --batch --tmp-dir /tmp --ticket-number FFDC >/tmp/OS_sosreport.txt 2>&1'
+        FILES:
+            - '/tmp/OS_isub.txt'
+            - '/tmp/OS_kern.txt'
+            - '/tmp/OS_authlog.txt'
+            - '/tmp/OS_syslog.txt'
+            - '/tmp/OS_info.txt'
+            - '/tmp/OS_sosreport.txt'
+        PROTOCOL:
+            - 'SSH'
 
 # Commands and Files to collect for RHE Linux only
 RHEL:
-    COMMANDS:
-        - '/usr/bin/ctversion -bv >/tmp/OS_rsct.txt 2>&1'
-        - 'cat /var/log/secure >/tmp/OS_secure.txt 2>&1'
-        - 'tail -n 200000 /var/log/messages >/tmp/OS_syslog.txt 2>&1'
-        - '{ lsb_release -a; cat /etc/redhat-release; uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1'
-        - 'rm -rf /tmp/sosreport*FFDC*'
-        - 'sosreport --batch --tmp-dir /tmp --label FFDC >/tmp/OS_sosreport.txt 2>&1'
-    FILES:
-        - '/tmp/OS_rsct.txt'
-        - '/tmp/OS_secure.txt'
-        - '/tmp/OS_syslog.txt'
-        - '/tmp/OS_info.txt'
-        - '/tmp/OS_sosreport.txt'
-    PROTOCOL:
-        - 'SSH'
+    RHEL_LOGS:
+        COMMANDS:
+            - '/usr/bin/ctversion -bv >/tmp/OS_rsct.txt 2>&1'
+            - 'cat /var/log/secure >/tmp/OS_secure.txt 2>&1'
+            - 'tail -n 200000 /var/log/messages >/tmp/OS_syslog.txt 2>&1'
+            - '{ lsb_release -a; cat /etc/redhat-release; uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1'
+            - 'rm -rf /tmp/sosreport*FFDC*'
+            - 'sosreport --batch --tmp-dir /tmp --label FFDC >/tmp/OS_sosreport.txt 2>&1'
+        FILES:
+            - '/tmp/OS_rsct.txt'
+            - '/tmp/OS_secure.txt'
+            - '/tmp/OS_syslog.txt'
+            - '/tmp/OS_info.txt'
+            - '/tmp/OS_sosreport.txt'
+        PROTOCOL:
+            - 'SSH'
 
 # Commands and Files to collect for AIX only
 AIX:
-    COMMANDS:
-        - 'errpt >/tmp/OS_errpt.txt 2>&1 ; errclear 0;'
-        - 'bindprocessor -q >/tmp/OS_processors.txt 2>&1'
-    FILES:
-        - '/tmp/OS_errpt.txt'
-        - '/tmp/OS_processors.txt'
-    PROTOCOL:
-        - 'SSH'
+    AIX_LOGS:
+        COMMANDS:
+            - 'errpt >/tmp/OS_errpt.txt 2>&1 ; errclear 0;'
+            - 'bindprocessor -q >/tmp/OS_processors.txt 2>&1'
+        FILES:
+            - '/tmp/OS_errpt.txt'
+            - '/tmp/OS_processors.txt'
+        PROTOCOL:
+            - 'SSH'

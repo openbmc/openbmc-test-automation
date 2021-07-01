@@ -242,63 +242,63 @@ class FFDCCollector:
         self.set_ffdc_defaults()
 
         for machine_type in ffdc_actions.keys():
+            if self.target_type != machine_type:
+                continue
 
-            if machine_type == self.target_type:
-                if self.remote_protocol == 'SSH' or self.remote_protocol == 'ALL':
-                    self.protocol_ssh(ffdc_actions, machine_type)
+            print("\tSystem Type: %s" % machine_type)
+            for k, v in ffdc_actions[machine_type].items():
 
-                if self.target_type == 'OPENBMC':
-                    if self.remote_protocol == 'REDFISH' or self.remote_protocol == 'ALL':
-                        self.protocol_redfish(ffdc_actions, 'OPENBMC_REDFISH')
+                if self.remote_protocol != ffdc_actions[machine_type][k]['PROTOCOL'][0] \
+                        and self.remote_protocol != 'ALL':
+                    continue
 
-                    if self.remote_protocol == 'IPMI' or self.remote_protocol == 'ALL':
-                        self.protocol_ipmi(ffdc_actions, 'OPENBMC_IPMI')
+                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SSH':
+                    self.protocol_ssh(ffdc_actions, machine_type, k)
+
+                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'REDFISH':
+                    self.protocol_redfish(ffdc_actions, machine_type, k)
+
+                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'IPMI':
+                    self.protocol_ipmi(ffdc_actions, machine_type, k)
 
         # Close network connection after collecting all files
         self.remoteclient.ssh_remoteclient_disconnect()
 
     def protocol_ssh(self,
                      ffdc_actions,
-                     machine_type):
+                     machine_type,
+                     sub_type):
         r"""
         Perform actions using SSH and SCP protocols.
 
         Description of argument(s):
         ffdc_actions        List of actions from ffdc_config.yaml.
         machine_type        OS Type of remote host.
+        sub_type            Group type of commands.
         """
 
-        # For OPENBMC collect general system info.
-        if self.target_type == 'OPENBMC':
-
-            self.collect_and_copy_ffdc(ffdc_actions['GENERAL'],
-                                       form_filename=True)
-            self.group_copy(ffdc_actions['OPENBMC_DUMPS'])
-
-        # For RHEL and UBUNTU, collect common Linux OS FFDC.
-        if self.target_type == 'RHEL' \
-           or self.target_type == 'UBUNTU':
-
-            self.collect_and_copy_ffdc(ffdc_actions['LINUX'])
-
-        # Collect remote host specific FFDC.
-        self.collect_and_copy_ffdc(ffdc_actions[machine_type])
+        if sub_type == 'DUMP_LOGS':
+            self.group_copy(ffdc_actions[machine_type][sub_type])
+        else:
+            self.collect_and_copy_ffdc(ffdc_actions[machine_type][sub_type])
 
     def protocol_redfish(self,
                          ffdc_actions,
-                         machine_type):
+                         machine_type,
+                         sub_type):
         r"""
         Perform actions using Redfish protocol.
 
         Description of argument(s):
         ffdc_actions        List of actions from ffdc_config.yaml.
         machine_type        OS Type of remote host.
+        sub_type            Group type of commands.
         """
 
         print("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'REDFISH'))
         redfish_files_saved = []
         progress_counter = 0
-        list_of_URL = ffdc_actions[machine_type]['URL']
+        list_of_URL = ffdc_actions[machine_type][sub_type]['URL']
         for index, each_url in enumerate(list_of_URL, start=0):
             redfish_parm = '-u ' + self.username + ' -p ' + self.password + ' -r ' \
                            + self.hostname + ' -S Always raw GET ' + each_url
@@ -306,7 +306,7 @@ class FFDCCollector:
             result = self.run_redfishtool(redfish_parm)
             if result:
                 try:
-                    targ_file = ffdc_actions[machine_type]['FILES'][index]
+                    targ_file = ffdc_actions[machine_type][sub_type]['FILES'][index]
                 except IndexError:
                     targ_file = each_url.split('/')[-1]
                     print("\n\t[WARN] Missing filename to store data from redfish URL %s." % each_url)
@@ -332,19 +332,21 @@ class FFDCCollector:
 
     def protocol_ipmi(self,
                       ffdc_actions,
-                      machine_type):
+                      machine_type,
+                      sub_type):
         r"""
         Perform actions using ipmitool over LAN protocol.
 
         Description of argument(s):
         ffdc_actions        List of actions from ffdc_config.yaml.
         machine_type        OS Type of remote host.
+        sub_type            Group type of commands.
         """
 
         print("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'IPMI'))
         ipmi_files_saved = []
         progress_counter = 0
-        list_of_cmd = ffdc_actions[machine_type]['COMMANDS']
+        list_of_cmd = ffdc_actions[machine_type][sub_type]['COMMANDS']
         for index, each_cmd in enumerate(list_of_cmd, start=0):
             ipmi_parm = '-U ' + self.username + ' -P ' + self.password + ' -H ' \
                 + self.hostname + ' ' + each_cmd
@@ -352,7 +354,7 @@ class FFDCCollector:
             result = self.run_ipmitool(ipmi_parm)
             if result:
                 try:
-                    targ_file = ffdc_actions[machine_type]['FILES'][index]
+                    targ_file = ffdc_actions[machine_type][sub_type]['FILES'][index]
                 except IndexError:
                     targ_file = each_url.split('/')[-1]
                     print("\n\t[WARN] Missing filename to store data from IPMI %s." % each_cmd)
