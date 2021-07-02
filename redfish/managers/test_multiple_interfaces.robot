@@ -47,6 +47,30 @@ Verify Redfish Works On Both Interfaces
     ${resp2}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth1
     Should Be Equal  ${resp1.dict['HostName']}  ${resp2.dict['HostName']}
 
+
+Create LDAP Configuration On Eth0 IP Address And Verify
+    [Documentation]  Create LDAP configurtion on eth0 and verify.
+    [Tags]  Create_LDAP_Configuration_On_Eth0_IP_Address_And_Verify
+    [Teardown]  Redfish.Login
+
+    ${body}=  Catenate  {'${LDAP_TYPE}':
+    ...  {'ServiceEnabled': ${True},
+    ...   'ServiceAddresses': ['${LDAP_SERVER_URI}'],
+    ...   'Authentication':
+    ...       {'AuthenticationType': 'UsernameAndPassword',
+    ...        'Username':'${LDAP_BIND_DN}',
+    ...        'Password': '${LDAP_BIND_DN_PASSWORD}'},
+    ...   'LDAPService':
+    ...       {'SearchSettings':
+    ...           {'BaseDistinguishedNames': ['${LDAP_BASE_DN}']}}}}
+
+    Redfish.Login
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    Sleep  20s
+    Redfish.Logout
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
