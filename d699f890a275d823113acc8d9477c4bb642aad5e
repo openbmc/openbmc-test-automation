@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2f5a4a6c_2510e410",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-07-02T10:13:40Z",
+      "side": 1,
+      "message": "existing one looks good to me-with kind of operations in usecase and to make it understable",
+      "parentUuid": "2dc540d4_21aa683d",
+      "revId": "d699f890a275d823113acc8d9477c4bb642aad5e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d03f1fa_611bb0d0",
         "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "d699f890a275d823113acc8d9477c4bb642aad5e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c805c1a_74efab96",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-07-02T10:13:40Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "9d03f1fa_611bb0d0",
+      "revId": "d699f890a275d823113acc8d9477c4bb642aad5e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
