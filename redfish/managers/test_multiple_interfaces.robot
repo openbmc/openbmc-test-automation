@@ -14,11 +14,11 @@ Resource        ../../lib/openbmc_ffdc.robot
 
 Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
-
+Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
 
 *** Test Cases ***
 
-Verify Both Interfaces BMC IP Addreeses Accessible Via SSH
+Verify Both Interfaces BMC IP Addresses Accessible Via SSH
     [Documentation]  Verify both interfaces (eth0, eth1) BMC IP addresses accessible via SSH.
     [Tags]  Verify_Both_Interfaces_BMC_IP_Addresses_Accessible_Via_SSH
 
@@ -47,6 +47,34 @@ Verify Redfish Works On Both Interfaces
     ${resp2}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth1
     Should Be Equal  ${resp1.dict['HostName']}  ${resp2.dict['HostName']}
 
+
+Verify LDAP Login Works When Eth1 IP Is Broken
+    [Documentation]  Verify LDAP login works when eth1 IP is broken.
+    [Tags]  Verify_LDAP_Login_Works_When_Eth1_IP_Is_Broken
+    [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${2}
+    ...  AND  Delete IP Address  ${OPENBMC_HOST_1}
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+
+    ${body}=  Catenate  {'${LDAP_TYPE}':
+    ...  {'ServiceEnabled': ${True},
+    ...   'ServiceAddresses': ['${LDAP_SERVER_URI}'],
+    ...   'Authentication':
+    ...       {'AuthenticationType': 'UsernameAndPassword',
+    ...        'Username':'${LDAP_BIND_DN}',
+    ...        'Password': '${LDAP_BIND_DN_PASSWORD}'},
+    ...   'LDAPService':
+    ...       {'SearchSettings':
+    ...           {'BaseDistinguishedNames': ['${LDAP_BASE_DN}']}}}}
+
+    Redfish.Login
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    Sleep  20s
+    Redfish.Logout
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
@@ -72,3 +100,17 @@ Suite Setup Execution
     # Check both interfaces are configured and reachable.
     Ping Host  ${OPENBMC_HOST}
     Ping Host  ${OPENBMC_HOST_1}
+
+    ${active_channel_config}=  Get Active Channel Config
+    Set Suite Variable  ${active_channel_config}
+
+    ${network_configurations}=  Get Network Configuration Using Channel Number  ${2}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+
+      Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST_1}'
+      ...  Run Keywords  Set Suite Variable  ${eth1_subnet_mask}  ${network_configuration['SubnetMask']}
+      ...  AND  Set Suite Variable  ${eth1_gateway}  ${network_configuration['Gateway']}
+      ...  AND  Exit For Loop
+
+    END
+
