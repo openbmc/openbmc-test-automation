@@ -59,3 +59,30 @@ Get LDAP Privilege And Group Name Via Redfish
 
     [Return]  ${ldap_group_names}
 
+
+Create LDAP Configuration
+    [Documentation]  Create LDAP configuration.
+    [Arguments]  ${ldap_type}=${LDAP_TYPE}  ${ldap_server_uri}=${LDAP_SERVER_URI}
+    ...  ${ldap_bind_dn}=${LDAP_BIND_DN}  ${ldap_bind_dn_password}=${LDAP_BIND_DN_PASSWORD}
+    ...  ${ldap_base_dn}=${LDAP_BASE_DN}
+
+    # Description of argument(s):
+    # ldap_type              The LDAP type ("ActiveDirectory" or "LDAP").
+    # ldap_server_uri        LDAP server uri (e.g. ldap://XX.XX.XX.XX).
+    # ldap_bind_dn           The LDAP bind distinguished name.
+    # ldap_bind_dn_password  The LDAP bind distinguished name password.
+    # ldap_base_dn           The LDAP base distinguished name.
+
+    ${body}=  Catenate  {'${ldap_type}':
+    ...  {'ServiceEnabled': ${True},
+    ...   'ServiceAddresses': ['${ldap_server_uri}'],
+    ...   'Authentication':
+    ...       {'AuthenticationType': 'UsernameAndPassword',
+    ...        'Username':'${ldap_bind_dn}',
+    ...        'Password': '${ldap_bind_dn_password}'},
+    ...   'LDAPService':
+    ...       {'SearchSettings':
+    ...           {'BaseDistinguishedNames': ['${ldap_base_dn}']}}}}
+
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    Sleep  15s
