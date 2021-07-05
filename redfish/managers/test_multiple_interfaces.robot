@@ -12,6 +12,8 @@ Resource        ../../lib/connection_client.robot
 Resource        ../../lib/bmc_network_utils.robot
 Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/bmc_ldap_utils.robot
+Resource        ../../lib/snmp/resource.robot
+Resource        ../../lib/snmp/redfish_snmp_utils.robot
 
 Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
@@ -62,6 +64,17 @@ Verify LDAP Login Works When Eth1 IP Is Not Configured
     Redfish.Logout
 
 
+Verify SNMP Works When Eth1 IP Is Not Configured
+    [Documentation]  Verify SNMP works when eth1 IP is not configured.
+    [Tags]  Verify_SNMP_Works_When_Eth1_IP_Is_Not_Configured
+    [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${2}
+    ...  AND  Delete IP Address  ${OPENBMC_HOST_1}
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+
+    Create Error On BMC And Verify Trap
+
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
@@ -97,4 +110,3 @@ Suite Setup Execution
       ...  AND  Exit For Loop
 
     END
-
