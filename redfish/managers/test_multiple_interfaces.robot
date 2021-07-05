@@ -11,10 +11,16 @@ Resource        ../../lib/common_utils.robot
 Resource        ../../lib/connection_client.robot
 Resource        ../../lib/bmc_network_utils.robot
 Resource        ../../lib/openbmc_ffdc.robot
+Resource        ../../lib/snmp/resource.robot
+Resource        ../../lib/snmp/redfish_snmp_utils.robot
+Library         ../../lib/jobs_processing.py
 
 Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
 
+*** Variables ***
+${nameserver1}     10.7.7.10
+${nameserver2}     10.7.7.11
 
 *** Test Cases ***
 
@@ -47,6 +53,52 @@ Verify Redfish Works On Both Interfaces
     ${resp2}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth1
     Should Be Equal  ${resp1.dict['HostName']}  ${resp2.dict['HostName']}
 
+
+Generate Error On Eth0 IP And Verify SNMP Trap When Eth1 IP Broken
+    [Documentation]  Generate error on BMC and verify trap when eth1 IP broken.
+    [Tags]  Generate_Error_On_Eth0_IP_And_Verify_SNMP_Trap_When_Eth1_IP_Broken
+    [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${2}
+    ...  AND  Delete IP Address  ${OPENBMC_HOST_1}
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+
+    Create Error On BMC And Verify Trap
+
+
+Verify Both Interfaces Wroks Concurrently Using Redfish
+    [Documentation]  Verify both interface works concurrently using redfish.
+    [Tags]  Verify_Both_Interfaces_Using_Redfish_Concurrently
+
+    Redfish1.Login
+    Redfish.Login
+
+    # Configuring nameservers on eth0 and eth1
+    ${dict}=  Execute Process Multi Keyword  ${2}
+    ...  Redfish.Patch ${REDFISH_NW_ETH_IFACE}eth0 body={'StaticNameServers':['${nameserver1}']}
+    ...  Redfish1.Patch ${REDFISH_NW_ETH_IFACE}eth1 body={'StaticNameServers':['${nameserver2}']}
+
+    Dictionary Should Not Contain Value  ${dict}  False
+    ...  msg=One or more operations has failed.
+
+    Sleep  3s
+    ${nameservers}=  CLI Get Nameservers
+    Should Contain  ${nameservers}  ${nameserver1}
+    Should Contain  ${nameservers}  ${nameserver2}
+
+    # Deleteing nameservrs on eth0 and eth1
+    ${dict}=  Execute Process Multi Keyword  ${2}
+    ...  Redfish.Patch ${REDFISH_NW_ETH_IFACE}eth0 body={'StaticNameServers':[]}
+    ...  Redfish1.Patch ${REDFISH_NW_ETH_IFACE}eth1 body={'StaticNameServers':[]}
+
+    Dictionary Should Not Contain Value  ${dict}  False
+    ...  msg=One or more operations has failed.
+
+    Sleep  3s
+    ${nameservers}=  CLI Get Nameservers
+    Should Not Contain  ${nameservers}  ${nameserver1}
+    Should Not Contain  ${nameservers}  ${nameserver2}
+
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
@@ -72,3 +124,11 @@ Suite Setup Execution
     # Check both interfaces are configured and reachable.
     Ping Host  ${OPENBMC_HOST}
     Ping Host  ${OPENBMC_HOST_1}
+
+    ${network_configurations}=  Get Network Configuration Using Channel Number  ${2}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST_1}'
+      ...  Run Keywords  Set Suite Variable  ${eth1_subnet_mask}  ${network_configuration['SubnetMask']}
+      ...  AND  Set Suite Variable  ${eth1_gateway}  ${network_configuration['Gateway']}
+      ...  AND  Exit For Loop
+    END
