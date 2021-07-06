@@ -32,8 +32,7 @@ from ffdc_collector import FFDCCollector
               show_default=True, help="YAML Configuration file listing commands and files for FFDC.")
 @click.option('-l', '--location', default="/tmp",
               show_default=True, help="Location to store collected FFDC data")
-@click.option('-t', '--remote_type', default="OPENBMC",
-              show_default=True,
+@click.option('-t', '--remote_type',
               help="OS type of the remote (targeting) host. OPENBMC, RHEL, UBUNTU, AIX")
 @click.option('-rp', '--remote_protocol', default="ALL",
               show_default=True,
@@ -46,7 +45,7 @@ def cli_ffdc(remote, username, password, ffdc_config, location, remote_type, rem
 
     click.echo("\n********** FFDC (First Failure Data Collection) Starts **********")
 
-    if input_options_ok(remote, username, password, ffdc_config):
+    if input_options_ok(remote, username, password, ffdc_config, remote_type):
         thisFFDC = FFDCCollector(remote, username, password,
                                  ffdc_config, location, remote_type, remote_protocol)
         thisFFDC.collect_ffdc()
@@ -62,7 +61,7 @@ def cli_ffdc(remote, username, password, ffdc_config, location, remote_type, rem
     click.echo("\n********** FFDC Finishes **********\n\n")
 
 
-def input_options_ok(remote, username, password, ffdc_config):
+def input_options_ok(remote, username, password, ffdc_config, remote_type):
     r"""
     Verify script options exist via CLI options or environment variables.
     """
@@ -82,6 +81,10 @@ def input_options_ok(remote, username, password, ffdc_config):
         print("\
         \n>>>>>\tERROR: Password for user on remote host is not specified in CLI options "
               + "or env OPENBMC_PASSWORD.")
+    if not remote_type:
+        all_options_ok = False
+        print("\
+        \n>>>>>\tERROR: Remote host os type is not specified in CLI options.")
     if not os.path.isfile(ffdc_config):
         all_options_ok = False
         print("\
