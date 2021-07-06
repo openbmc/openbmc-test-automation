@@ -112,13 +112,13 @@ OPENBMC:
             - '/redfish/v1/Systems/system/LogServices/Dump/Entries'
             - '/redfish/v1/Systems/system/LogServices/EventLog/Entries'
         FILES:
-            - 'software.json'
-            - 'bmc_state.json'
-            - 'openpower_control_occ_state.json'
-            - 'bmc_user_accounts.json'
-            - 'bmc_dump_entries.json'
-            - 'system_dumps_entries.json'
-            - 'event_log_entries.json'
+            - 'REDFISH_software.json'
+            - 'REDFISH_bmc_state.json'
+            - 'REDFISH_openpower_control_occ_state.json'
+            - 'REDFISH_bmc_user_accounts.json'
+            - 'REDFISH_bmc_dump_entries.json'
+            - 'REDFISH_system_dumps_entries.json'
+            - 'REDFISH_event_log_entries.json'
         PROTOCOL:
             - 'REDFISH'
 
