@@ -16,6 +16,24 @@
       "revId": "a284431849a3ecae47b96877ed2df833e4cf9e73",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5401983c_c89d4ce5",
+        "filename": "extended/code_update/bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-06T11:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57cdf21f_78f3e2fe",
+      "revId": "a284431849a3ecae47b96877ed2df833e4cf9e73",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
