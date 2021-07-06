@@ -61,9 +61,6 @@ class FFDCCollector:
         with open(self.ffdc_config, 'r') as file:
             self.ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
 
-        # List of supported OSes.
-        self.supported_oses = self.ffdc_actions['DISTRO_OS'][0]
-
     def verify_script_env(self):
 
         # Import to log version
@@ -106,51 +103,6 @@ class FFDCCollector:
             print("\n>>>>>\tERROR: %s is not ping-able. FFDC collection aborted.\n" % self.hostname)
             sys.exit(-1)
 
-    def inspect_target_machine_type(self):
-        r"""
-        Inspect remote host os-release or uname.
-
-        """
-        print("\n\tSupported distro: %s" % self.supported_oses)
-
-        command = "cat /etc/os-release"
-        response = self.remoteclient.execute_command(command)
-        if response:
-            print("\n\t[INFO] %s /etc/os-release\n" % self.hostname)
-            for each_info in response:
-                print("\t\t %s" % each_info)
-            identity = self.find_os_type(response, 'ID').split('=')[1].upper()
-        else:
-            response = self.remoteclient.execute_command('uname -a')
-            print("\n\t[INFO] %s uname -a\n" % self.hostname)
-            print("\t\t %s" % ' '.join(response))
-            identity = self.find_os_type(response, 'AIX').split(' ')[0].upper()
-
-            # If OS does not have /etc/os-release and is not AIX,
-            # script does not yet know what to do.
-            if not identity:
-                print(">>>>>\tERROR: Script does not yet know about %s" % ' '.join(response))
-                sys.exit(-1)
-
-        if (self.target_type not in identity):
-
-            user_target_type = self.target_type
-            self.target_type = ""
-            for each_os in self.supported_oses:
-                if each_os in identity:
-                    self.target_type = each_os
-                    break
-
-            # If OS in not one of ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU']
-            # script does not yet know what to do.
-            if not self.target_type:
-                print(">>>>>\tERROR: Script does not yet know about %s" % identity)
-                sys.exit(-1)
-
-            print("\n\t[WARN] user request %s does not match remote host type %s.\n"
-                  % (user_target_type, self.target_type))
-            print("\t[WARN] FFDC collection continues for %s.\n" % self.target_type)
-
     def find_os_type(self,
                      listing_from_os,
                      key):
@@ -189,17 +141,16 @@ class FFDCCollector:
                 working_protocol_list.append("REDFISH")
                 print("\n\t[Check] %s Redfish Service.\t\t [OK]" % self.hostname)
             else:
-                print("\n\t[Check] %s Redfish Service.\t\t [FAILED]" % self.hostname)
+                print("\n\t[Check] %s Redfish Service.\t\t [NOT AVAILABLE]" % self.hostname)
 
             if self.verify_ipmi():
                 working_protocol_list.append("IPMI")
                 print("\n\t[Check] %s IPMI LAN Service.\t\t [OK]" % self.hostname)
             else:
-                print("\n\t[Check] %s IPMI LAN Service.\t\t [FAILED]" % self.hostname)
+                print("\n\t[Check] %s IPMI LAN Service.\t\t [NOT AVAILABLE]" % self.hostname)
 
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
-            self.inspect_target_machine_type()
             print("\n\t---- Completed protocol pre-requisite check ----\n")
 
             if ((self.remote_protocol not in working_protocol_list) and (self.remote_protocol != 'ALL')):
@@ -261,13 +212,22 @@ class FFDCCollector:
                     continue
 
                 if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SSH':
-                    self.protocol_ssh(ffdc_actions, machine_type, k)
+                    if 'SSH' in working_protocol_list:
+                        self.protocol_ssh(ffdc_actions, machine_type, k)
+                    else:
+                        print("\n\tERROR: SSH is not available for %s." % self.hostname)
 
                 if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'REDFISH':
-                    self.protocol_redfish(ffdc_actions, machine_type, k)
+                    if 'REDFISH' in working_protocol_list:
+                        self.protocol_redfish(ffdc_actions, machine_type, k)
+                    else:
+                        print("\n\tERROR: REDFISH is not available for %s." % self.hostname)
 
                 if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'IPMI':
-                    self.protocol_ipmi(ffdc_actions, machine_type, k)
+                    if 'IPMI' in working_protocol_list:
+                        self.protocol_ipmi(ffdc_actions, machine_type, k)
+                    else:
+                        print("\n\tERROR: IMPI is not available for %s." % self.hostname)
 
         # Close network connection after collecting all files
         self.elapsed_time = time.strftime("%H:%M:%S", time.gmtime(time.time() - self.start_time))
@@ -398,19 +358,11 @@ class FFDCCollector:
         form_filename                    if true, pre-pend self.target_type to filename
         """
 
-        print("\n\t[Run] Executing commands on %s using %s"
-              % (self.hostname, ffdc_actions_for_machine_type['PROTOCOL'][0]))
-        list_of_commands = ffdc_actions_for_machine_type['COMMANDS']
-        progress_counter = 0
-        for command in list_of_commands:
-            if form_filename:
-                command = str(command % self.target_type)
-            self.remoteclient.execute_command(command)
-            progress_counter += 1
-            self.print_progress(progress_counter)
+        # Executing commands, , if any
+        self.ssh_execute_ffdc_commands(ffdc_actions_for_machine_type,
+                                       form_filename)
 
-        print("\n\t[Run] Commands execution completed.\t\t [OK]")
-
+        # Copying files
         if self.remoteclient.scpclient:
             print("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
 
@@ -420,6 +372,43 @@ class FFDCCollector:
         else:
             print("\n\n\tSkip copying FFDC files from remote system %s.\n" % self.hostname)
 
+    def ssh_execute_ffdc_commands(self,
+                                  ffdc_actions_for_machine_type,
+                                  form_filename=False):
+        r"""
+        Send commands in ffdc_config file to targeted system.
+
+        Description of argument(s):
+        ffdc_actions_for_machine_type    commands and files for the selected remote host type.
+        form_filename                    if true, pre-pend self.target_type to filename
+        """
+        print("\n\t[Run] Executing commands on %s using %s"
+              % (self.hostname, ffdc_actions_for_machine_type['PROTOCOL'][0]))
+        list_of_commands = ffdc_actions_for_machine_type['COMMANDS']
+
+        # If command list is empty, returns
+        if not list_of_commands:
+            return
+
+        progress_counter = 0
+        for command in list_of_commands:
+            if isinstance(command, dict):
+                command_txt = next(iter(command))
+                command_timeout = next(iter(command.values()))
+            elif isinstance(command, str):
+                command_txt = command
+                # Default ssh command timeout 60 seconds
+                command_timeout = 60
+
+            if form_filename:
+                command_txt = str(command_txt % self.target_type)
+
+            self.remoteclient.execute_command(command_txt, command_timeout)
+            progress_counter += 1
+            self.print_progress(progress_counter)
+
+        print("\n\t[Run] Commands execution completed.\t\t [OK]")
+
     def group_copy(self,
                    ffdc_actions_for_machine_type):
         r"""
@@ -428,6 +417,10 @@ class FFDCCollector:
         Description of argument(s):
         ffdc_actions_for_machine_type    commands and files for the selected remote host type.
         """
+
+        # Executing commands, if any
+        self.ssh_execute_ffdc_commands(ffdc_actions_for_machine_type)
+
         if self.remoteclient.scpclient:
             print("\n\tCopying DUMP files from remote system %s.\n" % self.hostname)
 
