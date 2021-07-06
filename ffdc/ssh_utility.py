@@ -70,7 +70,7 @@ class SSHRemoteclient:
         if self.scpclient:
             self.scpclient.close()
 
-    def execute_command(self, command):
+    def execute_command(self, command, default_timeout=60):
         """
         Execute command on the remote host.
 
@@ -80,7 +80,7 @@ class SSHRemoteclient:
         """
 
         try:
-            stdin, stdout, stderr = self.sshclient.exec_command(command)
+            stdin, stdout, stderr = self.sshclient.exec_command(command, timeout=default_timeout)
             stdout.channel.recv_exit_status()
             response = stdout.readlines()
             return response
