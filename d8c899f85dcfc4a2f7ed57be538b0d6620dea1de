@@ -34,6 +34,24 @@
       "revId": "d8c899f85dcfc4a2f7ed57be538b0d6620dea1de",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4304718_a96e833d",
+        "filename": "extended/test_bmc_reset_loop.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-06T04:39:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f80c23cf_834cbe82",
+      "revId": "d8c899f85dcfc4a2f7ed57be538b0d6620dea1de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
