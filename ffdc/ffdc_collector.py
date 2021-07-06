@@ -22,9 +22,6 @@ class FFDCCollector:
 
     """
 
-    # List of supported OSes.
-    supported_oses = ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU']
-
     def __init__(self,
                  hostname,
                  username,
@@ -55,6 +52,8 @@ class FFDCCollector:
             self.ffdc_prefix = ""
             self.target_type = remote_type.upper()
             self.remote_protocol = remote_protocol.upper()
+            self.start_time = 0
+            self.elapsed_time = ''
         else:
             sys.exit(-1)
 
@@ -177,6 +176,7 @@ class FFDCCollector:
         """
 
         print("\n\t---- Start communicating with %s ----" % self.hostname)
+        self.start_time = time.time()
         working_protocol_list = []
         if self.target_is_pingable():
             # Check supported protocol ping,ssh, redfish are working.
@@ -270,6 +270,7 @@ class FFDCCollector:
                     self.protocol_ipmi(ffdc_actions, machine_type, k)
 
         # Close network connection after collecting all files
+        self.elapsed_time = time.strftime("%H:%M:%S", time.gmtime(time.time() - self.start_time))
         self.remoteclient.ssh_remoteclient_disconnect()
 
     def protocol_ssh(self,

@@ -56,8 +56,9 @@ def cli_ffdc(remote, username, password, ffdc_config, location, remote_type, rem
         else:
             click.echo(str("\n\t" + str(len(os.listdir(thisFFDC.ffdc_dir_path)))
                        + " files were retrieved from " + remote))
-            click.echo("\tFiles are stored in " + thisFFDC.ffdc_dir_path + "\n\n")
+            click.echo("\tFiles are stored in " + thisFFDC.ffdc_dir_path)
 
+        click.echo("\tTotal elapsed time " + thisFFDC.elapsed_time + "\n\n")
     click.echo("\n********** FFDC Finishes **********\n\n")
 
 
