@@ -225,7 +225,7 @@ Update LDAP Group Name And Verify Operations
 
     # group_name             group_privilege  valid_status_codes
     ${GROUP_NAME}            Administrator    [${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    ${GROUP_NAME}            Operator         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
+    ${GROUP_NAME}            Operator         [${HTTP_OK}, ${HTTP_NO_CONTENT}]
     ${GROUP_NAME}            ReadOnly         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     ${GROUP_NAME}            NoAccess         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     Invalid_LDAP_Group_Name  Administrator    [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
@@ -537,6 +537,7 @@ Update LDAP Config And Verify Set Host Name
     [Documentation]  Update LDAP config and verify by attempting to set host name.
     [Arguments]  ${group_name}  ${group_privilege}=Administrator
     ...  ${valid_status_codes}=[${HTTP_OK}]
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     # Description of argument(s):
     # group_name                    The group name of user.
@@ -553,8 +554,6 @@ Update LDAP Config And Verify Set Host Name
     # allowed to change the hostname.
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=${valid_status_codes}
-    Redfish.Logout
-    Redfish.Login
 
 
 Disable Other LDAP
