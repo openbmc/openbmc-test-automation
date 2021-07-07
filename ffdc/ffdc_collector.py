@@ -197,11 +197,13 @@ class FFDCCollector:
                         and self.remote_protocol != 'ALL':
                     continue
 
-                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SSH':
-                    if 'SSH' in working_protocol_list:
+                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SSH' \
+                   or ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SCP':
+                    if 'SSH' in working_protocol_list \
+                       or 'SCP' in working_protocol_list:
                         self.protocol_ssh(ffdc_actions, machine_type, k)
                     else:
-                        print("\n\tERROR: SSH is not available for %s." % self.hostname)
+                        print("\n\tERROR: SSH or SCP is not available for %s." % self.hostname)
 
                 if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'REDFISH':
                     if 'REDFISH' in working_protocol_list:
@@ -261,7 +263,7 @@ class FFDCCollector:
             result = self.run_redfishtool(redfish_parm)
             if result:
                 try:
-                    targ_file = ffdc_actions[machine_type][sub_type]['FILES'][index]
+                    targ_file = self.get_file_list(ffdc_actions[machine_type][sub_type])[index]
                 except IndexError:
                     targ_file = each_url.split('/')[-1]
                     print("\n\t[WARN] Missing filename to store data from redfish URL %s." % each_url)
@@ -301,7 +303,7 @@ class FFDCCollector:
         print("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'IPMI'))
         ipmi_files_saved = []
         progress_counter = 0
-        list_of_cmd = ffdc_actions[machine_type][sub_type]['COMMANDS']
+        list_of_cmd = self.get_command_list(ffdc_actions[machine_type][sub_type])
         for index, each_cmd in enumerate(list_of_cmd, start=0):
             ipmi_parm = '-U ' + self.username + ' -P ' + self.password + ' -H ' \
                 + self.hostname + ' ' + each_cmd
@@ -309,7 +311,7 @@ class FFDCCollector:
             result = self.run_ipmitool(ipmi_parm)
             if result:
                 try:
-                    targ_file = ffdc_actions[machine_type][sub_type]['FILES'][index]
+                    targ_file = self.get_file_list(ffdc_actions[machine_type][sub_type])[index]
                 except IndexError:
                     targ_file = each_cmd.split('/')[-1]
                     print("\n\t[WARN] Missing filename to store data from IPMI %s." % each_cmd)
@@ -353,10 +355,38 @@ class FFDCCollector:
             print("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
 
             # Retrieving files from target system
-            list_of_files = ffdc_actions_for_machine_type['FILES']
+            list_of_files = self.get_file_list(ffdc_actions_for_machine_type)
             self.scp_ffdc(self.ffdc_dir_path, self.ffdc_prefix, form_filename, list_of_files)
         else:
             print("\n\n\tSkip copying FFDC files from remote system %s.\n" % self.hostname)
+
+    def get_command_list(self,
+                         ffdc_actions_for_machine_type):
+        r"""
+        Fetch list of commands from configuration file
+
+        Description of argument(s):
+        ffdc_actions_for_machine_type    commands and files for the selected remote host type.
+        """
+        try:
+            list_of_commands = ffdc_actions_for_machine_type['COMMANDS']
+        except KeyError:
+            list_of_commands = []
+        return list_of_commands
+
+    def get_file_list(self,
+                      ffdc_actions_for_machine_type):
+        r"""
+        Fetch list of commands from configuration file
+
+        Description of argument(s):
+        ffdc_actions_for_machine_type    commands and files for the selected remote host type.
+        """
+        try:
+            list_of_files = ffdc_actions_for_machine_type['FILES']
+        except KeyError:
+            list_of_files = []
+        return list_of_files
 
     def ssh_execute_ffdc_commands(self,
                                   ffdc_actions_for_machine_type,
@@ -370,8 +400,8 @@ class FFDCCollector:
         """
         print("\n\t[Run] Executing commands on %s using %s"
               % (self.hostname, ffdc_actions_for_machine_type['PROTOCOL'][0]))
-        list_of_commands = ffdc_actions_for_machine_type['COMMANDS']
 
+        list_of_commands = self.get_command_list(ffdc_actions_for_machine_type)
         # If command list is empty, returns
         if not list_of_commands:
             return
@@ -389,7 +419,8 @@ class FFDCCollector:
             if form_filename:
                 command_txt = str(command_txt % self.target_type)
 
-            self.remoteclient.execute_command(command_txt, command_timeout)
+            err, response = self.remoteclient.execute_command(command_txt, command_timeout)
+
             progress_counter += 1
             self.print_progress(progress_counter)
 
@@ -404,26 +435,29 @@ class FFDCCollector:
         ffdc_actions_for_machine_type    commands and files for the selected remote host type.
         """
 
-        # Executing commands, if any
-        self.ssh_execute_ffdc_commands(ffdc_actions_for_machine_type)
-
         if self.remoteclient.scpclient:
             print("\n\tCopying DUMP files from remote system %s.\n" % self.hostname)
 
-            # Retrieving files from target system, if any
-            list_of_files = ffdc_actions_for_machine_type['FILES']
+            list_of_commands = self.get_command_list(ffdc_actions_for_machine_type)
+            # If command list is empty, returns
+            if not list_of_commands:
+                return
 
-            for filename in list_of_files:
-                command = 'ls -AX ' + filename
-                response = self.remoteclient.execute_command(command)
-                # self.remoteclient.scp_file_from_remote() completed without exception,
-                # if any
+            for command in list_of_commands:
+                try:
+                    filename = command.split(' ')[2]
+                except IndexError:
+                    print("\t\tInvalid command %s for DUMP_LOGS block." % command)
+                    continue
+
+                err, response = self.remoteclient.execute_command(command)
+
                 if response:
                     scp_result = self.remoteclient.scp_file_from_remote(filename, self.ffdc_dir_path)
                     if scp_result:
                         print("\t\tSuccessfully copied from " + self.hostname + ':' + filename)
                 else:
-                    print("\t\tThere is no  " + filename)
+                    print("\t\tThere is no " + filename)
 
         else:
             print("\n\n\tSkip copying files from remote system %s.\n" % self.hostname)
@@ -452,9 +486,11 @@ class FFDCCollector:
             source_file_path = filename
             targ_file_path = targ_dir_path + targ_file_prefix + filename.split('/')[-1]
 
-            # self.remoteclient.scp_file_from_remote() completed without exception,
-            # add file to the receiving file list.
-            scp_result = self.remoteclient.scp_file_from_remote(source_file_path, targ_file_path)
+            # If source file name contains wild card, copy filename as is.
+            if '*' in source_file_path:
+                scp_result = self.remoteclient.scp_file_from_remote(source_file_path, self.ffdc_dir_path)
+            else:
+                scp_result = self.remoteclient.scp_file_from_remote(source_file_path, targ_file_path)
 
             if not quiet:
                 if scp_result:
