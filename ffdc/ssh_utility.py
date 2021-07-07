@@ -8,6 +8,7 @@ from paramiko.ssh_exception import BadHostKeyException
 from paramiko.buffered_pipe import PipeTimeout as PipeTimeout
 from scp import SCPClient, SCPException
 import sys
+import time
 import socket
 from socket import timeout as SocketTimeout
 
@@ -79,15 +80,26 @@ class SSHRemoteclient:
 
         """
 
+        empty = ''
+        cmd_start = time.time()
         try:
-            stdin, stdout, stderr = self.sshclient.exec_command(command, timeout=default_timeout)
-            stdout.channel.recv_exit_status()
-            response = stdout.readlines()
-            return response
+            stdin, stdout, stderr = \
+                self.sshclient.exec_command(command, timeout=default_timeout)
+            start = time.time()
+            while time.time() < start + default_timeout:
+                if stdout.channel.exit_status_ready():
+                    break
+                time.sleep(1)
+
+            return stderr.readlines(), stdout.readlines()
+
         except (paramiko.AuthenticationException, paramiko.SSHException,
-                paramiko.ChannelException) as e:
+                paramiko.ChannelException, SocketTimeout) as e:
             # Log command with error. Return to caller for next command, if any.
-            print("\n>>>>>\tERROR: Fail remote command %s %s %s\n\n" % (command, e.__class__, e))
+            print("\n>>>>>\tERROR: Fail remote command %s %s" % (e.__class__, e))
+            print(">>>>>\tCommand '%s' Elapsed Time %s" %
+                  (command, time.strftime("%H:%M:%S", time.gmtime(time.time() - cmd_start))))
+            return empty, empty
 
     def scp_connection(self):
 

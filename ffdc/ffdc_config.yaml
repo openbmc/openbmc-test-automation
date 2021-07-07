@@ -10,8 +10,6 @@
 #       For example, a file could have been created by an internal process,
 #       and is listed in FILES to be collected.
 #
-# Note: When a new remote type is added to this configuration file,
-#       it is also need to be added the list of supported OSes in ffdc_collector.py
 
 # Commands and Files to collect for a given OpenBMC system.
 OPENBMC:
@@ -82,7 +80,9 @@ OPENBMC:
         PROTOCOL:
             - 'SSH'
 
-    # Commands and Files to collect OPENBMC dumps
+    # DUMP_LOGS: This section provides option to 'SCP if file exist'.
+    #     COMMANDS: filename is preceeded by ls -AX '.
+    #     FILES: is not needed and is ignored if exists.
     DUMP_LOGS:
         COMMANDS:
             - 'ls -AX /var/lib/systemd/coredump/core.*'
@@ -93,7 +93,7 @@ OPENBMC:
             - '/var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'
             - '/var/lib/phosphor-debug-collector/hostbootdump/*/*.tar.gz'
         PROTOCOL:
-            - 'SSH'
+            - 'SCP'
 
     # URLs and Files for OPENBMC redfish
     # URLs and Files are one-to-one corresponding.
