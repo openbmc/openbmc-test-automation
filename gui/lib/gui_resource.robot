@@ -120,3 +120,11 @@ Set Timezone In Profile Settings Page
     Click Element  ${xpath_profile_settings}
     Click Element At Coordinates  ${xpath_default_UTC}  0  0
     Click Element  ${xpath_profile_save_button}
+
+
+Refresh GUI
+    [Documentation]  Refresh GUI via refresh button in header.
+
+    Click Element  ${xpath_refresh_button}
+    # Added delay for page to load fully after refresh.
+    Sleep  5s
