@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1c24cb1d_dda423de",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-07T11:59:37Z",
+      "side": 1,
+      "message": "above testcase name looks good, configuring LDAP on eth0",
+      "parentUuid": "913644ce_ee2b4208",
+      "revId": "b448897aeb2ecf7faf2ab977030205c59211ca7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44686da3_e1165dee",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2021-07-07T10:18:48Z",
       "side": 1,
       "message": "Line 104 to 114: is this common code which is required by other test case ?",
+      "revId": "b448897aeb2ecf7faf2ab977030205c59211ca7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bc83b96_99c5c78a",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-07T11:59:37Z",
+      "side": 1,
+      "message": "it is required for other testcases, network details storing into variables, after deleting network details, it will help to restoring network details we can use this variable",
+      "parentUuid": "44686da3_e1165dee",
       "revId": "b448897aeb2ecf7faf2ab977030205c59211ca7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
