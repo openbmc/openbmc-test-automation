@@ -66,6 +66,8 @@ Verify Existence Of All Sections In Server Power Operations Page
     [Documentation]  Verify existence of all sections in Server Power Operations page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Server_Power_Operations_Page
 
+    # Added wait here for the page to load boot settings section.
+    Wait Until Page Contains  Boot settings  timeout=5
     Page Should Contain  Current status
     Page Should Contain  Boot settings
     Page Should Contain  Operations
@@ -75,6 +77,8 @@ Verify Existence Of All Input Boxes In Host Os Boot Settings
     [Documentation]  Verify existence of all input boxes in host os boot settings.
     [Tags]  Verify_Existence_Of_Input_Boxes_In_Host_Os_Boot_Settings
 
+    # Added wait here for the page to load.
+    Wait Until Page Contains  Boot settings  timeout=5
     Page Should Contain Element  ${xpath_enable_onetime_boot_checkbox}
     Page Should Contain Element  ${xpath_boot_option_select}
 
@@ -130,6 +134,8 @@ Verify Existence Of Buttons In Host Os Boot Settings
     [Documentation]  Verify existence of buttons in Host OS boot settings.
     [Tags]  Verify_Existence_Of_Buttons_In_Host_Os_Boot_Settings
 
+    # Added wait here for the page to load.
+    Wait Until Page Contains  Boot settings  timeout=5
     Page Should Contain Element  ${xpath_tpm_policy_button}
     Page Should Contain Element  ${xpath_save_button}
 
@@ -172,4 +178,3 @@ Navigate to Server Power Operation Page
     Click Element  ${xpath_control_menu}
     Click Element  ${xpath_server_power_operations_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  server-power-operations
-
