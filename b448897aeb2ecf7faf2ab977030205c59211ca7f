@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "b4afce66_09ff0b4c",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-07-07T12:14:41Z",
+      "side": 1,
+      "message": "Addresses",
+      "revId": "b448897aeb2ecf7faf2ab977030205c59211ca7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66538a28_aae6e99b",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-07-07T12:14:41Z",
+      "side": 1,
+      "message": "is redfish logging out required at the end of the test case or in the tear down?\nRedfish1.Logout\nRedfish.Logout\nas we are logging in at the start of the test case.",
+      "revId": "b448897aeb2ecf7faf2ab977030205c59211ca7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "913644ce_ee2b4208",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 1
