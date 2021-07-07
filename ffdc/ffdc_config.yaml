@@ -10,8 +10,6 @@
 #       For example, a file could have been created by an internal process,
 #       and is listed in FILES to be collected.
 #
-# Note: When a new remote type is added to this configuration file,
-#       it is also need to be added the list of supported OSes in ffdc_collector.py
 
 # Commands and Files to collect for a given OpenBMC system.
 OPENBMC:
@@ -82,7 +80,9 @@ OPENBMC:
         PROTOCOL:
             - 'SSH'
 
-    # Commands and Files to collect OPENBMC dumps
+    # DUMP_LOGS: This section provides option to 'SCP if file exist'.
+    #     COMMANDS: filename is preceeded by ls -AX '.
+    #     FILES: is not needed and is ignored if exists.
     DUMP_LOGS:
         COMMANDS:
             - 'ls -AX /var/lib/systemd/coredump/core.*'
@@ -93,7 +93,7 @@ OPENBMC:
             - '/var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'
             - '/var/lib/phosphor-debug-collector/hostbootdump/*/*.tar.gz'
         PROTOCOL:
-            - 'SSH'
+            - 'SCP'
 
     # URLs and Files for OPENBMC redfish
     # URLs and Files are one-to-one corresponding.
@@ -131,8 +131,26 @@ OPENBMC:
         PROTOCOL:
             - 'IPMI'
 
-# Commands and Files to collect for all Linux distributions
-LINUX:
+# Commands and Files to collect for Ubuntu Linux only
+UBUNTU:
+    UBUNTU_LOGS:
+        COMMANDS:
+            - '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt 2>&1'
+            - 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt 2>&1'
+            - '{ cat /var/log/auth.log; cat /var/log/auth.log.1 ; } >/tmp/OS_authlog.txt 2>&1'
+            - 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1'
+            - '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } >/tmp/OS_info.txt 2>&1'
+            - 'rm -rf /tmp/sosreport*FFDC*'
+            - 'sosreport --batch --tmp-dir /tmp --ticket-number FFDC >/tmp/OS_sosreport.txt 2>&1'
+        FILES:
+            - '/tmp/OS_isub.txt'
+            - '/tmp/OS_kern.txt'
+            - '/tmp/OS_authlog.txt'
+            - '/tmp/OS_syslog.txt'
+            - '/tmp/OS_info.txt'
+            - '/tmp/OS_sosreport.txt'
+        PROTOCOL:
+            - 'SSH'
     LINUX_LOGS:
         COMMANDS:
             - 'cat /sys/firmware/opal/msglog >/tmp/OS_msglog.txt 2>&1'
@@ -163,27 +181,6 @@ LINUX:
         PROTOCOL:
             - 'SSH'
 
-# Commands and Files to collect for Ubuntu Linux only
-UBUNTU:
-    UBUNTU_LOGS:
-        COMMANDS:
-            - '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt 2>&1'
-            - 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt 2>&1'
-            - '{ cat /var/log/auth.log; cat /var/log/auth.log.1 ; } >/tmp/OS_authlog.txt 2>&1'
-            - 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1'
-            - '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } >/tmp/OS_info.txt 2>&1'
-            - 'rm -rf /tmp/sosreport*FFDC*'
-            - 'sosreport --batch --tmp-dir /tmp --ticket-number FFDC >/tmp/OS_sosreport.txt 2>&1'
-        FILES:
-            - '/tmp/OS_isub.txt'
-            - '/tmp/OS_kern.txt'
-            - '/tmp/OS_authlog.txt'
-            - '/tmp/OS_syslog.txt'
-            - '/tmp/OS_info.txt'
-            - '/tmp/OS_sosreport.txt'
-        PROTOCOL:
-            - 'SSH'
-
     # Commands and Files to collect dumps
     DUMP_LOGS:
         COMMANDS:
@@ -209,6 +206,35 @@ RHEL:
             - '/tmp/OS_syslog.txt'
             - '/tmp/OS_info.txt'
             - '/tmp/OS_sosreport.txt'
+        PROTOCOL:
+            - 'SSH'
+    LINUX_LOGS:
+        COMMANDS:
+            - 'cat /sys/firmware/opal/msglog >/tmp/OS_msglog.txt 2>&1'
+            - 'ppc64_cpu --frequency >/tmp/OS_cpufrequency.txt 2>&1'
+            - 'dmesg >/tmp/OS_dmesg.txt 2>&1'
+            - 'cat /var/log/opal-prd* >/tmp/OS_opal_prd.txt 2>&1'
+            - 'cat /var/log/boot.log >/tmp/OS_boot.txt 2>&1'
+            - 'cat /proc/cpuinfo >/tmp/OS_procinfo.txt 2>&1'
+            - 'cat /proc/meminfo >/tmp/OS_meminfo.txt 2>&1'
+            - 'netstat -a >/tmp/OS_netstat.txt 2>&1'
+            - 'lspci >/tmp/OS_lspci.txt 2>&1'
+            - 'lscpu >/tmp/OS_lscpu.txt 2>&1'
+            - 'lscfg >/tmp/OS_lscfg.txt 2>&1'
+            - 'journalctl --no-pager -b > /tmp/OS_journalctl_nopager.txt  2>&1'
+        FILES:
+            - '/tmp/OS_msglog.txt'
+            - '/tmp/OS_cpufrequency.txt'
+            - '/tmp/OS_dmesg.txt'
+            - '/tmp/OS_opal_prd.txt'
+            - '/tmp/OS_boot.txt'
+            - '/tmp/OS_procinfo.txt'
+            - '/tmp/OS_meminfo.txt'
+            - '/tmp/OS_netstat.txt'
+            - '/tmp/OS_lspci.txt'
+            - '/tmp/OS_lscpu.txt'
+            - '/tmp/OS_lscfg.txt'
+            - '/tmp/OS_journalctl_nopager.txt'
         PROTOCOL:
             - 'SSH'
 
