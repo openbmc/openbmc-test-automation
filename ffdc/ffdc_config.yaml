@@ -13,38 +13,34 @@
 # Note: When a new remote type is added to this configuration file,
 #       it is also need to be added the list of supported OSes in ffdc_collector.py
 
-# User can add the distro or system type name in the list generic/OEM for log collection.
-DISTRO_OS:
-    - ['OPENBMC', 'RHEL', 'AIX', 'UBUNTU']
-
 # Commands and Files to collect for a given OpenBMC system.
 OPENBMC:
     # Commands and File to take snapshot of linux based system.
     # Filename is <OS>_general.txt, where <OS> is in [OPENBMC, RHEL, UBUNTU]
     GENERAL:
         COMMANDS:
-            - 'rm -rf /tmp/%s_general.txt'
-            - 'echo "++++++++++ cat /etc/os-release ++++++++++" >> /tmp/%s_general.txt 2>&1'
-            - 'cat /etc/os-release >> /tmp/%s_general.txt 2>&1'
-            - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >> /tmp/%s_general.txt 2>&1'
-            - 'cat /etc/timestamp >> /tmp/%s_general.txt 2>&1'
-            - 'echo -e "\n++++++++++ uname -a ++++++++++" >> /tmp/%s_general.txt 2>&1'
-            - 'uname -a >> /tmp/%s_general.txt'
-            - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >> /tmp/%s_general.txt 2>&1'
-            - 'cat /etc/timestamp >> /tmp/%s_general.txt 2>&1'
-            - 'echo -e "\n++++++++++ uptime;cat /proc/uptime ++++++++++" >> /tmp/%s_general.txt 2>&1'
-            - 'uptime >> /tmp/%s_general.txt 2>&1'
-            - 'cat /proc/uptime >> /tmp/%s_general.txt 2>&1'
-            - 'echo -e "\n++++++++++ df -hT ++++++++++" >> /tmp/%s_general.txt 2>&1'
-            - 'df -hT >> /tmp/%s_general.txt 2>&1'
-            - 'echo -e "\n++++++++++ date;/sbin/hwclock --show ++++++++++" >> /tmp/%s_general.txt 2>&1'
-            - 'date >> /tmp/%s_general.txt 2>&1'
-            - '/sbin/hwclock --show >> /tmp/%s_general.txt 2>&1'
-            - '/usr/bin/timedatectl >> /tmp/%s_general.txt 2>&1'
-            - 'echo -e "\n++++++++++ /usr/bin/obmcutil state ++++++++++" >> /tmp/%s_general.txt 2>&1'
-            - '/usr/bin/obmcutil state >> /tmp/%s_general.txt 2>&1'
+            - 'rm -rf /tmp/OPENBMC_general.txt'
+            - 'echo "++++++++++ cat /etc/os-release ++++++++++" >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'cat /etc/os-release >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'cat /etc/timestamp >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ uname -a ++++++++++" >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'uname -a >> /tmp/OPENBMC_general.txt'
+            - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'cat /etc/timestamp >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ uptime;cat /proc/uptime ++++++++++" >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'uptime >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'cat /proc/uptime >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ df -hT ++++++++++" >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'df -hT >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ date;/sbin/hwclock --show ++++++++++" >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'date >> /tmp/OPENBMC_general.txt 2>&1'
+            - '/sbin/hwclock --show >> /tmp/OPENBMC_general.txt 2>&1'
+            - '/usr/bin/timedatectl >> /tmp/OPENBMC_general.txt 2>&1'
+            - 'echo -e "\n++++++++++ /usr/bin/obmcutil state ++++++++++" >> /tmp/OPENBMC_general.txt 2>&1'
+            - '/usr/bin/obmcutil state >> /tmp/OPENBMC_general.txt 2>&1'
         FILES:
-            - '/tmp/%s_general.txt'
+            - '/tmp/OPENBMC_general.txt'
         PROTOCOL:
             - 'SSH'
 
