@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1c817066_1b495543",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-07T11:54:14Z",
+      "side": 1,
+      "message": "above testcase name also looks good.",
+      "parentUuid": "2e9fae48_801f9830",
+      "revId": "90d6dab9a7caaab0ef2fa65e88a6085c549c2b75",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5ac35db_7d0d8284",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2021-07-07T10:24:25Z",
       "side": 1,
       "message": "Line 100 to 106: is this common code which is required by other test case ?",
+      "revId": "90d6dab9a7caaab0ef2fa65e88a6085c549c2b75",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "993975c4_49f0fa9f",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-07T11:54:14Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "a5ac35db_7d0d8284",
       "revId": "90d6dab9a7caaab0ef2fa65e88a6085c549c2b75",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
