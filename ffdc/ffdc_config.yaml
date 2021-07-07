@@ -84,10 +84,6 @@ OPENBMC:
 
     # Commands and Files to collect OPENBMC dumps
     DUMP_LOGS:
-        COMMANDS:
-            - 'ls -AX /var/lib/systemd/coredump/core.*'
-            - 'ls -AX /var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'
-            - 'ls -AX /var/lib/phosphor-debug-collector/hostbootdump/*/*.tar.gz'
         FILES:
             - '/var/lib/systemd/coredump/core.*'
             - '/var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'

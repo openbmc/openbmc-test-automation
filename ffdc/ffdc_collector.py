@@ -370,7 +370,13 @@ class FFDCCollector:
         """
         print("\n\t[Run] Executing commands on %s using %s"
               % (self.hostname, ffdc_actions_for_machine_type['PROTOCOL'][0]))
-        list_of_commands = ffdc_actions_for_machine_type['COMMANDS']
+
+        # For cases that FFDC are generated out-of-band of this script,
+        # COMMANDS block is not needed. This script only copies files from remote system.
+        try:
+            list_of_commands = ffdc_actions_for_machine_type['COMMANDS']
+        except KeyError:
+            list_of_commands = []
 
         # If command list is empty, returns
         if not list_of_commands:
@@ -389,7 +395,8 @@ class FFDCCollector:
             if form_filename:
                 command_txt = str(command_txt % self.target_type)
 
-            self.remoteclient.execute_command(command_txt, command_timeout)
+            err, response = self.remoteclient.execute_command(command_txt, command_timeout)
+
             progress_counter += 1
             self.print_progress(progress_counter)
 
@@ -415,15 +422,14 @@ class FFDCCollector:
 
             for filename in list_of_files:
                 command = 'ls -AX ' + filename
-                response = self.remoteclient.execute_command(command)
-                # self.remoteclient.scp_file_from_remote() completed without exception,
-                # if any
+                err, response = self.remoteclient.execute_command(command)
+
                 if response:
                     scp_result = self.remoteclient.scp_file_from_remote(filename, self.ffdc_dir_path)
                     if scp_result:
                         print("\t\tSuccessfully copied from " + self.hostname + ':' + filename)
                 else:
-                    print("\t\tThere is no  " + filename)
+                    print("\t\tThere is no " + filename)
 
         else:
             print("\n\n\tSkip copying files from remote system %s.\n" % self.hostname)
