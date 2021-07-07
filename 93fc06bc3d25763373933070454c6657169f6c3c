@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c985e74e_c68ff4e4",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-07T17:13:34Z",
+      "side": 1,
+      "message": "instead how about something like this\n\n # Retrieving files from target system, if any\n list_of_files \u003d ffdc_actions_for_machine_type[\u0027FILES\u0027]\n list_of_cmds \u003d ffdc_actions_for_machine_type[\u0027COMMNANDS\u0027]\n\n for command, filename in zip(list_of_cmds, list_of_files ):\n    err, response \u003d self.remoteclient.execute_command(command)",
+      "range": {
+        "startLine": 422,
+        "startChar": 0,
+        "endLine": 426,
+        "endChar": 0
+      },
+      "revId": "93fc06bc3d25763373933070454c6657169f6c3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
