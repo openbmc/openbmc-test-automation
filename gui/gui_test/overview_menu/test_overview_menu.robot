@@ -22,6 +22,7 @@ ${view_all_event_logs}                 //*[@data-test-id='overviewEvents-button-
 ${xpath_launch_serial_over_lan}        //*[@data-test-id='overviewQuickLinks-button-solConsole']
 ${xpath_led_button}                    //*[@data-test-id='overviewQuickLinks-checkbox-serverLed']
 
+
 *** Test Cases ***
 
 Verify Existence Of All Sections In Overview Page
@@ -130,14 +131,11 @@ Verify Server LED Turn On
     # Turn Off the server LED via Redfish.
     Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Off"}   valid_status_codes=[200, 204]
 
-    # Refresh GUI.
-    Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains Element  ${xpath_led_button}
-
-    # Turn on the server LED via GUI and sleep.
+    # Now Refresh GUI and Turn ON the LED via GUI.
+    Run Keyword  Refresh GUI
     Click Element At Coordinates  ${xpath_led_button}  0  0
 
-    # Cross check that server LED on state via Redfish.
+    # Cross check that server LED On state via Redfish.
     ${led_status}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
     Should Be True  '${led_status}' == 'Lit'
 
@@ -149,11 +147,8 @@ Verify Server LED Turn Off
     # Turn On the server LED via Redfish.
     Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Lit"}   valid_status_codes=[200, 204]
 
-    # Refresh GUI.
-    Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains Element  ${xpath_led_button}
-
-    # Now turn off the LED via GUI.
+    # Now Refresh GUI and Turn OFF the LED via GUI.
+    Run Keyword  Refresh GUI
     Click Element At Coordinates  ${xpath_led_button}  0  0
 
     # Cross check that server LED off state via Redfish.
@@ -178,4 +173,3 @@ Test Setup Execution
 
     Click Element  ${xpath_overview_menu}
     Wait Until Page Contains Element  ${xpath_overview_page_header}
-
