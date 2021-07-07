@@ -14,7 +14,11 @@ Resource        ../../lib/openbmc_ffdc.robot
 
 Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
+Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
 
+*** Variables ***
+
+${nameserver1}     10.7.7.10
 
 *** Test Cases ***
 
@@ -47,6 +51,26 @@ Verify Redfish Works On Both Interfaces
     ${resp2}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth1
     Should Be Equal  ${resp1.dict['HostName']}  ${resp2.dict['HostName']}
 
+
+Configure DNS And Verify On Eth0 IP Address When Eth1 IP Broken
+    [Documentation]  Configure DNS and verify on eth0 IP address when eth1 IP broken.
+    [Tags]  Configure_DNS_And_Verify_On_Eth0_IP_Address_When_Eth1_IP_Broken
+    [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${2}
+    ...  AND  Delete IP Address  ${OPENBMC_HOST_1}
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}eth0  body={'StaticNameServers':['${nameserver1}']}
+    Sleep  3s
+    ${nameservers}=  CLI Get Nameservers
+    Should Contain  ${nameservers}  ${nameserver1}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}eth0  body={'StaticNameServers':[]}
+    Sleep  3s
+    ${nameservers}=  CLI Get Nameservers
+    Should Not Contain  ${nameservers}  ${nameserver1}
+
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
@@ -72,3 +96,11 @@ Suite Setup Execution
     # Check both interfaces are configured and reachable.
     Ping Host  ${OPENBMC_HOST}
     Ping Host  ${OPENBMC_HOST_1}
+
+    ${network_configurations}=  Get Network Configuration Using Channel Number  ${2}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST_1}'
+      ...  Run Keywords  Set Suite Variable  ${eth1_subnet_mask}  ${network_configuration['SubnetMask']}
+      ...  AND  Set Suite Variable  ${eth1_gateway}  ${network_configuration['Gateway']}
+      ...  AND  Exit For Loop
+    END
