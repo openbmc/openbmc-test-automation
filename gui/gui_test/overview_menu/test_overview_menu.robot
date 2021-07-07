@@ -21,6 +21,8 @@ ${xpath_edit_network_settings_button}  //*[@data-test-id='overviewQuickLinks-but
 ${view_all_event_logs}                 //*[@data-test-id='overviewEvents-button-eventLogs']
 ${xpath_launch_serial_over_lan}        //*[@data-test-id='overviewQuickLinks-button-solConsole']
 ${xpath_led_button}                    //*[@data-test-id='overviewQuickLinks-checkbox-serverLed']
+${xpath_overview_led_button_value}     //*[@data-test-id='overviewQuickLinks-checkbox-serverLed']/following-sibling::label/span
+
 
 *** Test Cases ***
 
@@ -130,14 +132,15 @@ Verify Server LED Turn On
     # Turn Off the server LED via Redfish.
     Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Off"}   valid_status_codes=[200, 204]
 
-    # Refresh GUI.
+    # Refresh GUI.    
     Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains Element  ${xpath_led_button}
+    Wait Until Element Contains  ${xpath_overview_led_button_value}  Off  timeout=30
 
-    # Turn on the server LED via GUI and sleep.
+    # Now turn off the LED via GUI.
     Click Element At Coordinates  ${xpath_led_button}  0  0
+    Wait Until Element Contains  ${xpath_overview_led_button_value}  On  timeout=15
 
-    # Cross check that server LED on state via Redfish.
+    # Cross check that server LED off state via Redfish.
     ${led_status}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
     Should Be True  '${led_status}' == 'Lit'
 
@@ -151,10 +154,11 @@ Verify Server LED Turn Off
 
     # Refresh GUI.
     Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains Element  ${xpath_led_button}
+    Wait Until Element Contains  ${xpath_overview_led_button_value}  On  timeout=15
 
     # Now turn off the LED via GUI.
     Click Element At Coordinates  ${xpath_led_button}  0  0
+    Wait Until Element Contains  ${xpath_overview_led_button_value}  Off  timeout=30
 
     # Cross check that server LED off state via Redfish.
     ${led_status}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
