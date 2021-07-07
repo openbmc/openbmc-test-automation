@@ -132,9 +132,9 @@ Verify Server LED Turn On
 
     # Refresh GUI.
     Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains Element  ${xpath_led_button}
-
+    
     # Turn on the server LED via GUI and sleep.
+    Sleep  2s
     Click Element At Coordinates  ${xpath_led_button}  0  0
 
     # Cross check that server LED on state via Redfish.
@@ -151,9 +151,9 @@ Verify Server LED Turn Off
 
     # Refresh GUI.
     Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains Element  ${xpath_led_button}
 
     # Now turn off the LED via GUI.
+    Sleep  2s
     Click Element At Coordinates  ${xpath_led_button}  0  0
 
     # Cross check that server LED off state via Redfish.
