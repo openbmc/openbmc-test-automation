@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1213c503_47a22be8",
+        "filename": "ffdc/ffdc_config.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-08T18:13:56Z",
+      "side": 1,
+      "message": "can u revisit the YAML .. apart from the commens. we shouldnt be removing others",
+      "revId": "2a6c6c4cf3f7584571f0115a7eaab4aa49dca1dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
