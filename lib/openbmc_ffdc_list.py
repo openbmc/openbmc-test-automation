@@ -33,6 +33,7 @@ FFDC_BMC_CMD = {
     'APPLICATION DATA':
     {
         'BMC state': '/usr/bin/obmcutil state',
+        'bmcweb data': 'for f in `find /var/lib/bmcweb/ -name "*.json"`; do (echo $f; cat $f) done',
     },
 }
 # Add file name and corresponding command needed for BMC
