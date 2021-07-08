@@ -348,7 +348,11 @@ class bmc_redfish_utils(object):
                 if 'Members' == key:
                     if isinstance(value, list):
                         for memberDict in value:
-                            self.__pending_enumeration.add(memberDict['@odata.id'])
+                            if isinstance(memberDict, str):
+                                self.__pending_enumeration.add(memberDict)
+                            else:
+                                self.__pending_enumeration.add(memberDict['@odata.id'])
+
                 if '@odata.id' == key:
                     value = value.rstrip('/')
                     # Data for the given url.
