@@ -16,6 +16,24 @@
       "revId": "c66f3d1e52eaecc8968a038a08eef6479aa2cd77",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5cc3ab0_556fa822",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-08T15:01:55Z",
+      "side": 1,
+      "message": "planned for next commit",
+      "parentUuid": "3f45737d_e7422edd",
+      "revId": "c66f3d1e52eaecc8968a038a08eef6479aa2cd77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
