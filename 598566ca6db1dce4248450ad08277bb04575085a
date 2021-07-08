@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "63039f18_f89de8c8",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-08T13:11:12Z",
+      "side": 1,
+      "message": "Verify BMC GUI Is Accessible Via Both Network Interfaces?",
+      "revId": "598566ca6db1dce4248450ad08277bb04575085a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ecd8133a_d42f3d46",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 3
