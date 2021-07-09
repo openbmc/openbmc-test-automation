@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55e2df82_e3a94494",
+        "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-09T05:57:18Z",
+      "side": 1,
+      "message": "Better to add a check in test setup to make sure that the page properly. See below comment in Navigate to Server Power Operation Page keyword.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 62
+      },
+      "revId": "45416d1a3cf498aa130acbd5bf6b0f1e3b51e277",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44e7dd90_2374b8f6",
+        "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-09T05:57:18Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 54
+      },
+      "revId": "45416d1a3cf498aa130acbd5bf6b0f1e3b51e277",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d7d8939_b7d17a9d",
+        "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-09T05:57:18Z",
+      "side": 1,
+      "message": "Same comment as above",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 54
+      },
+      "revId": "45416d1a3cf498aa130acbd5bf6b0f1e3b51e277",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9de091f4_511d5eca",
+        "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-09T05:57:18Z",
+      "side": 1,
+      "message": "Better to add one more line to make sure that the page is loaded properly. You can do that by adding below line.\n\n    Wait Until Page Contains Element  ${xpath_server_power_heading}  timeout\u003d5",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 180,
+        "endChar": 97
+      },
+      "revId": "45416d1a3cf498aa130acbd5bf6b0f1e3b51e277",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
