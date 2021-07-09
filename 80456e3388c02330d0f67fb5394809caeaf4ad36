@@ -22,6 +22,30 @@
       "revId": "80456e3388c02330d0f67fb5394809caeaf4ad36",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ea19a00_3915112b",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-09T06:24:00Z",
+      "side": 1,
+      "message": "Just checking able to access opening BMC GUI with two ip addresses\n1) eth1 ip address\n2) eth0 ip address\nboth are different ip addresses",
+      "parentUuid": "2ed24081_c383938b",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "80456e3388c02330d0f67fb5394809caeaf4ad36",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
