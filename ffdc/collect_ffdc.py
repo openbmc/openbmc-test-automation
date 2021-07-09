@@ -33,7 +33,7 @@ from ffdc_collector import FFDCCollector
 @click.option('-l', '--location', default="/tmp",
               show_default=True, help="Location to store collected FFDC data")
 @click.option('-t', '--remote_type',
-              help="OS type of the remote (targeting) host. OPENBMC, RHEL, UBUNTU, AIX")
+              help="OS type of the remote (targeting) host. OPENBMC, RHEL, UBUNTU, SLES, AIX")
 @click.option('-rp', '--remote_protocol', default="ALL",
               show_default=True,
               help="Select protocol (SSH, SCP, REDFISH) to communicate with remote host. \
