@@ -85,6 +85,15 @@ Disable And Enable Eth0 Interface
     ${OPENBMC_HOST}   eth0      ${True}
 
 
+Able To Access Serial Console Via Both Network Interfaces
+    [Documentation]  Able to access serial console via both network interfaces.
+    [Tags]  Able_To_Access_Serial_Console_Via_Both_Network Interfaces
+
+    Open Connection And Log In  host=${OPENBMC_HOST}  port=2200
+    Open Connection And Log In  host=${OPENBMC_HOST_1}  port=2200
+    Close All Connections
+
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
