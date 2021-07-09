@@ -1,9 +1,9 @@
 *** Settings ***
 Documentation    This suite is to test service user functionality via Redfish.
 
-Resource         ../lib/connection_client.robot
-Resource         ../lib/openbmc_ffdc.robot
-Resource         ../lib/bmc_redfish_utils.robot
+Resource         ../../lib/connection_client.robot 
+Resource         ../../lib/openbmc_ffdc.robot
+Resource         ../../lib/bmc_redfish_utils.robot
 
 Suite Setup      Suite Setup Execution
 Suite Teardown   Redfish.Logout
@@ -21,6 +21,14 @@ Verify service user availability
 
     Should Be Equal  Administrator  ${role_config}
 
+
+Verify Creating User With Service Username
+    [Documentation]  Verify that user with service username can not be created.
+
+    ${payload}=  Create Dictionary
+    ...  UserName=service Password=TestPwd1  RoleId=Operator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 *** Keywords ***
 
