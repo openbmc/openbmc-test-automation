@@ -85,6 +85,15 @@ Disable And Enable Eth0 Interface
     ${OPENBMC_HOST}   eth0      ${True}
 
 
+Verify BMC Accessible With SSH 2201 Port Via Both Interfaces
+    [Documentation]  Verify BMC accessible with ssh 2201 port via both interfaces.
+    [Tags]  Verify_BMC_Accessible_With_SSH_2201_Port_Via_Both_Interfaces
+
+    Open Connection And Log In  host=${OPENBMC_HOST}  port=2201
+    Open Connection And Log In  host=${OPENBMC_HOST_1}  port=2201
+    Close All Connections
+
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
