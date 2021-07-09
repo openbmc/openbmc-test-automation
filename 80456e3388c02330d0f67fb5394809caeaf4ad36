@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "35bf5200_8fe6a34d",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-09T06:30:46Z",
+      "side": 1,
+      "message": "You can use existing \"Login GUI\" keyword from gui/lib/gui_resource.robot file",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 17
+      },
+      "revId": "80456e3388c02330d0f67fb5394809caeaf4ad36",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "169fe912_5bb9534d",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-09T06:30:46Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 17
+      },
+      "revId": "80456e3388c02330d0f67fb5394809caeaf4ad36",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2ed24081_c383938b",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 4
@@ -42,6 +88,53 @@
         "startChar": 0,
         "endLine": 77,
         "endChar": 14
+      },
+      "revId": "80456e3388c02330d0f67fb5394809caeaf4ad36",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d9ca1ae_9cc30990",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-09T06:30:46Z",
+      "side": 1,
+      "message": "Yeah I got it.. Later I realized.",
+      "parentUuid": "7ea19a00_3915112b",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "80456e3388c02330d0f67fb5394809caeaf4ad36",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf9ad87a_a486fa5c",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-09T06:30:46Z",
+      "side": 1,
+      "message": "This keyword is same as \"Login GUI\" keyword from gui/lib/gui_resource.robot file.",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 13
       },
       "revId": "80456e3388c02330d0f67fb5394809caeaf4ad36",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
