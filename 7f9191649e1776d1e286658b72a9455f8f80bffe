@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "812c27bd_55888953",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-09T11:14:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ca0757b_7e2b2ed8",
+      "range": {
+        "startLine": 169,
+        "startChar": 21,
+        "endLine": 170,
+        "endChar": 86
+      },
+      "revId": "7f9191649e1776d1e286658b72a9455f8f80bffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e056f0c5_b2c0ad0f",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "b2cb36be_d4d03fe3",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-09T11:14:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e056f0c5_b2c0ad0f",
+      "range": {
+        "startLine": 204,
+        "startChar": 32,
+        "endLine": 204,
+        "endChar": 40
+      },
+      "revId": "7f9191649e1776d1e286658b72a9455f8f80bffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c5640d29_0f9d00b2",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "7f9191649e1776d1e286658b72a9455f8f80bffe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3706cfea_0b86152f",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-09T11:14:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5640d29_0f9d00b2",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 35
+      },
+      "revId": "7f9191649e1776d1e286658b72a9455f8f80bffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
