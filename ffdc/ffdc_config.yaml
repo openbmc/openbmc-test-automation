@@ -173,7 +173,7 @@ UBUNTU:
             - 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1'
             - '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } >/tmp/OS_info.txt 2>&1'
             - 'rm -rf /tmp/sosreport*FFDC*'
-            - 'sosreport --batch --tmp-dir /tmp --ticket-number FFDC >/tmp/OS_sosreport.txt 2>&1'
+            - {'sosreport --batch --tmp-dir /tmp --ticket-number FFDC >/tmp/OS_sosreport.txt 2>&1': 1200}
         FILES:
             - '/tmp/OS_isub.txt'
             - '/tmp/OS_kern.txt'
@@ -181,14 +181,6 @@ UBUNTU:
             - '/tmp/OS_syslog.txt'
             - '/tmp/OS_info.txt'
             - '/tmp/OS_sosreport.txt'
-        PROTOCOL:
-            - 'SSH'
-
-    # Commands and Files to collect dumps
-    DUMP_LOGS:
-        COMMANDS:
-            - 'ls -AX /tmp/sosreport*.tar.xz'
-        FILES:
             - '/tmp/sosreport*.tar.xz'
         PROTOCOL:
             - 'SSH'
@@ -200,19 +192,11 @@ RHEL:
             - '{ cat /etc/os-release; uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1'
             - 'tail -n 200000 /var/log/messages >/tmp/OS_syslog.txt 2>&1'
             - 'rm -rf /tmp/sosreport*FFDC*'
-            - 'sosreport --batch --tmp-dir /tmp --label FFDC >/tmp/OS_sosreport.txt 2>&1'
+            - {'sosreport --batch --tmp-dir /tmp --label FFDC >/tmp/OS_sosreport.txt 2>&1': 1200}
         FILES:
             - '/tmp/OS_info.txt'
             - '/tmp/OS_syslog.txt'
             - '/tmp/OS_sosreport.txt'
-        PROTOCOL:
-            - 'SSH'
-
-    # Commands and Files to collect dumps
-    DUMP_LOGS:
-        COMMANDS:
-            - 'ls -AX /tmp/sosreport*.tar.xz'
-        FILES:
             - '/tmp/sosreport*.tar.xz'
         PROTOCOL:
             - 'SSH'
@@ -224,20 +208,12 @@ SLES:
             - '{ cat /etc/os-release; uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1'
             - 'tail -n 200000 /var/log/messages >/tmp/OS_syslog.txt 2>&1'
             - 'rm -rf /tmp/scc*.txz.md5'
-            - 'supportconfig >/tmp/OS_supportconfig.txt 2>&1'
+            - {'supportconfig >/tmp/OS_supportconfig.txt 2>&1': 1200}
             - 'cp /var/log/scc*.txz.md5 /tmp/'
         FILES:
             - '/tmp/OS_info.txt'
             - '/tmp/OS_syslog.txt'
             - '/tmp/OS_supportconfig.txt'
-        PROTOCOL:
-            - 'SSH'
-
-    # Commands and Files to collect dumps
-    DUMP_LOGS:
-        COMMANDS:
-            - 'ls -AX /tmp/scc*.txz.md5'
-        FILES:
             - '/tmp/scc*.txz.md5'
         PROTOCOL:
             - 'SSH'
