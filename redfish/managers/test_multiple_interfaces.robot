@@ -62,6 +62,16 @@ Verify LDAP Login Works When Eth1 IP Is Not Configured
     Redfish.Logout
 
 
+Enable And Disable Eth0 Interface
+    [Documentation]  Enable and disable ethernet interface via redfish.
+    [Tags]  Enable_And_Disable_Ethernet_Interfaces
+    [Template]  Set BMC Ethernet Interfaces State
+
+    # interface_ip   interface  enabled
+    ${OPENBMC_HOST}   eth0      ${False}
+    ${OPENBMC_HOST}   eth0      ${True}
+
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
@@ -98,3 +108,30 @@ Suite Setup Execution
 
     END
 
+
+Set BMC Ethernet Interfaces State
+    [Documentation]  Set BMC ethernet interface state.
+    [Arguments]  ${interface_ip}  ${interface}  ${enabled}
+    [Teardown]  Redfish1.Logout
+
+    # Description of argument(s):
+    # interface_ip    IP address of ethernet interface.
+    # interface       The ethernet interface name (eg. eth0 or eth1).
+    # enabled         Indicates interface should be enabled (eg. True or False).
+
+    Redfish1.Login
+
+    ${data}=  Create Dictionary  InterfaceEnabled=${enabled}
+
+    Redfish1.patch  ${REDFISH_NW_ETH_IFACE}${interface}  body=&{data}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    Sleep  ${NETWORK_TIMEOUT}s
+    ${interface_status}=   Redfish1.Get Attribute  ${REDFISH_NW_ETH_IFACE}${interface}  InterfaceEnabled
+    Should Be Equal  ${interface_status}  ${enabled}
+
+    Run Keyword If  ${enabled} == ${True}  Run Keywords  Ping Host  ${interface_ip}
+    ...  AND  Return From Keyword
+
+    ${status}=  Run Keyword And Return Status  Ping Host  ${interface_ip}
+    Should Be Equal  ${status}  ${False}
