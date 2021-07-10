@@ -14,6 +14,7 @@ Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/bmc_ldap_utils.robot
 Resource        ../../lib/snmp/resource.robot
 Resource        ../../lib/snmp/redfish_snmp_utils.robot
+Library         ../../lib/jobs_processing.py
 
 Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
@@ -84,6 +85,26 @@ Disable And Enable Eth0 Interface
     ${OPENBMC_HOST}   eth0      ${False}
     ${OPENBMC_HOST}   eth0      ${True}
 
+
+Verify Both Interfaces Access Concurrently Via Redfish
+    [Documentation]  Verify both interfaces access conurrently via redfish.
+    [Tags]  Verify_Both_Interfaces_Access_Concurrently_Via_Redfish
+
+    Redfish.Login
+    Redfish1.Login
+
+    ${dict}=  Execute Process Multi Keyword  ${2}
+    ...  Redfish.Patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
+    ...  Redfish1.Patch ${REDFISH_NW_ETH_IFACE}eth1 body={'DHCPv4':{'UseDNSServers':${True}}}
+
+    Dictionary Should Not Contain Value  ${dict}  False
+    ...  msg=One or more operations has failed.
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}eth0
+    ${resp1}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth1
+
+    Should Be Equal  ${resp.dict["DHCPv4"]['UseDNSServers']}  ${True}
+    Should Be Equal  ${resp1.dict["DHCPv4"]['UseDNSServers']}  ${True}
 
 *** Keywords ***
 
