@@ -34,6 +34,24 @@
       "revId": "4813ec926adbe59b3350f3fe74b1bb1b12af23e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baea8ba9_3137001f",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-07-12T10:36:52Z",
+      "side": 1,
+      "message": "Yes got it, just wanted to know if you will add the piece of code to enable LDAP here so that the suite doesn\u0027t fail.",
+      "parentUuid": "f5e35b4e_119e5dfc",
+      "revId": "4813ec926adbe59b3350f3fe74b1bb1b12af23e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
