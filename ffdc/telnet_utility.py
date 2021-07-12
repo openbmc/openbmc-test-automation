@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+
+import time
 import socket
 import telnetlib
 from collections import deque
@@ -73,8 +75,6 @@ class TelnetRemoteclient:
             pass
 
     def execute_command(self, cmd,
-                        rtnpartial=False,
-                        wait_cnt=5,
                         i_timeout=300):
 
         r'''
@@ -91,44 +91,21 @@ class TelnetRemoteclient:
         '''
 
         # Execute the command and read the command output
+        # Execute the command and read the command output
+        return_buffer = b''
         try:
 
             # Flush whatever data is in the read buffer by doing
             # a non-blocking read
-            self.tnclient.read_very_eager()
+            self.tnclient.read_very_eager().decode('utf-8')
 
             # Execute the command
-            self.tnclient.write(cmd.encode('utf-8') + b"\n")
+            self.tnclient.write(cmd.encode('utf-8') + b'\n')
+            time.sleep(i_timeout)
 
-            # Read the command output.  Read until we get command prompt
-            l_buf = ''
-            l_xcnt = 0
-            while(True):
-                index, match, b = self.tnclient.expect([br'\$', br'\#'], i_timeout)
+            # Read the command output.
+            return_buffer = self.tnclient.read_very_eager()
 
-                if(b == ''):
-                    # Nothing read.  Increment the counter & retry.
-                    l_xcnt = l_xcnt + 1
-                    if(l_xcnt >= wait_cnt):
-                        l_time_waited = str((l_xcnt * i_timeout) / 60)
-                        print("\t\t ERROR Timeout execute Telnet command")
-                        break
-                else:
-                    # We got some data.  Reset the counter.
-                    l_xcnt = 0
-                    l_buf = l_buf + b.decode('utf-8').strip()
-
-                if (index != -1) and (match is not None):
-                    # We got the command prompt. Have read the complete command
-                    # output.
-                    break
-
-                if rtnpartial:
-                    print("\t\t WARN "
-                          + "Have not read the command prompt. "
-                          + "Returning command output read.")
-
-                    return l_buf
         except (socket.error, EOFError) as e:
             self.tn_remoteclient_disconnect()
 
@@ -137,11 +114,8 @@ class TelnetRemoteclient:
             elif str(e).__contains__("telnet connection closed"):
                 msg = "Telnet connection closed."
             else:
-                msg = "Some other issue. Connection got reset!!"
+                msg = "Some other issue.%s %s %s\n\n" % (cmd, e.__class__, e)
 
             print("\t\t ERROR %s " % msg)
-            return ''
 
-        # Remove command prompt
-        c = l_buf[0: (len(l_buf) - 1)]
-        return c
+        return return_buffer

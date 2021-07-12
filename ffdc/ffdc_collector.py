@@ -12,6 +12,7 @@ import platform
 from errno import EACCES, EPERM
 import subprocess
 from ssh_utility import SSHRemoteclient
+from telnet_utility import TelnetRemoteclient
 
 
 class FFDCCollector:
@@ -47,7 +48,8 @@ class FFDCCollector:
             self.password = password
             self.ffdc_config = ffdc_config
             self.location = location
-            self.remote_client = None
+            self.ssh_remoteclient = None
+            self.telnet_remoteclient = None
             self.ffdc_dir_path = ""
             self.ffdc_prefix = ""
             self.target_type = remote_type.upper()
@@ -129,11 +131,16 @@ class FFDCCollector:
             else:
                 print("\n\t[Check] %s Redfish Service.\t\t [NOT AVAILABLE]" % self.hostname)
 
+            # IPMI
             if self.verify_ipmi():
                 working_protocol_list.append("IPMI")
                 print("\n\t[Check] %s IPMI LAN Service.\t\t [OK]" % self.hostname)
             else:
                 print("\n\t[Check] %s IPMI LAN Service.\t\t [NOT AVAILABLE]" % self.hostname)
+
+            # Telnet
+            if self.telnet_to_target_system():
+                working_protocol_list.append("TELNET")
 
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
@@ -154,18 +161,35 @@ class FFDCCollector:
 
         """
 
-        self.remoteclient = SSHRemoteclient(self.hostname,
-                                            self.username,
-                                            self.password)
+        self.ssh_remoteclient = SSHRemoteclient(self.hostname,
+                                                self.username,
+                                                self.password)
 
-        self.remoteclient.ssh_remoteclient_login()
-        print("\n\t[Check] %s SSH connection established.\t [OK]" % self.hostname)
+        if self.ssh_remoteclient.ssh_remoteclient_login():
+            print("\n\t[Check] %s SSH connection established.\t [OK]" % self.hostname)
 
-        # Check scp connection.
-        # If scp connection fails,
-        # continue with FFDC generation but skip scp files to local host.
-        self.remoteclient.scp_connection()
-        return True
+            # Check scp connection.
+            # If scp connection fails,
+            # continue with FFDC generation but skip scp files to local host.
+            self.ssh_remoteclient.scp_connection()
+            return True
+        else:
+            print("\n\t[Check] %s SSH connection.\t [NOT AVAILABLE]" % self.hostname)
+            return False
+
+    def telnet_to_target_system(self):
+        r"""
+        Open a telnet connection to targeted system.
+        """
+        self.telnet_remoteclient = TelnetRemoteclient(self.hostname,
+                                                      self.username,
+                                                      self.password)
+        if self.telnet_remoteclient.tn_remoteclient_login():
+            print("\n\t[Check] %s Telnet connection established.\t [OK]" % self.hostname)
+            return True
+        else:
+            print("\n\t[Check] %s Telnet connection.\t [NOT AVAILABLE]" % self.hostname)
+            return False
 
     def generate_ffdc(self, working_protocol_list):
         r"""
@@ -205,6 +229,12 @@ class FFDCCollector:
                     else:
                         print("\n\tERROR: SSH or SCP is not available for %s." % self.hostname)
 
+                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'TELNET':
+                    if 'TELNET' in working_protocol_list:
+                        self.protocol_telnet(ffdc_actions, machine_type, k)
+                    else:
+                        print("\n\tERROR: TELNET is not available for %s." % self.hostname)
+
                 if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'REDFISH':
                     if 'REDFISH' in working_protocol_list:
                         self.protocol_redfish(ffdc_actions, machine_type, k)
@@ -219,7 +249,8 @@ class FFDCCollector:
 
         # Close network connection after collecting all files
         self.elapsed_time = time.strftime("%H:%M:%S", time.gmtime(time.time() - self.start_time))
-        self.remoteclient.ssh_remoteclient_disconnect()
+        self.ssh_remoteclient.ssh_remoteclient_disconnect()
+        self.telnet_remoteclient.tn_remoteclient_disconnect()
 
     def protocol_ssh(self,
                      ffdc_actions,
@@ -238,6 +269,44 @@ class FFDCCollector:
             self.group_copy(ffdc_actions[machine_type][sub_type])
         else:
             self.collect_and_copy_ffdc(ffdc_actions[machine_type][sub_type])
+
+    def protocol_telnet(self,
+                        ffdc_actions,
+                        machine_type,
+                        sub_type):
+        r"""
+        Perform actions using telnet protocol.
+        Description of argument(s):
+        ffdc_actions        List of actions from ffdc_config.yaml.
+        machine_type        OS Type of remote host.
+        """
+        print("\n\t[Run] Executing commands on %s using %s" % (self.hostname, 'TELNET'))
+        telnet_files_saved = []
+        progress_counter = 0
+        list_of_commands = ffdc_actions[machine_type][sub_type]['COMMANDS']
+        for index, each_cmd in enumerate(list_of_commands, start=0):
+            command_txt, command_timeout = self.unpack_command(each_cmd)
+            result = self.telnet_remoteclient.execute_command(command_txt, command_timeout)
+            if result:
+                try:
+                    targ_file = ffdc_actions[machine_type][sub_type]['FILES'][index]
+                except IndexError:
+                    targ_file = each_cmd
+                    print("\n\t[WARN] Missing filename to store data from telnet %s." % each_cmd)
+                    print("\t[WARN] Data will be stored in %s." % targ_file)
+                targ_file_with_path = (self.ffdc_dir_path
+                                       + self.ffdc_prefix
+                                       + targ_file)
+                # Creates a new file
+                with open(targ_file_with_path, 'wb') as fp:
+                    fp.write(result)
+                    fp.close
+                    telnet_files_saved.append(targ_file)
+            progress_counter += 1
+            self.print_progress(progress_counter)
+        print("\n\t[Run] Commands execution completed.\t\t [OK]")
+        for file in telnet_files_saved:
+            print("\n\t\tSuccessfully save file " + file + ".")
 
     def protocol_redfish(self,
                          ffdc_actions,
@@ -351,7 +420,7 @@ class FFDCCollector:
                                        form_filename)
 
         # Copying files
-        if self.remoteclient.scpclient:
+        if self.ssh_remoteclient.scpclient:
             print("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
 
             # Retrieving files from target system
@@ -388,6 +457,24 @@ class FFDCCollector:
             list_of_files = []
         return list_of_files
 
+    def unpack_command(self,
+                       command):
+        r"""
+        Unpack command from config file
+
+        Description of argument(s):
+        command    Command from config file.
+        """
+        if isinstance(command, dict):
+            command_txt = next(iter(command))
+            command_timeout = next(iter(command.values()))
+        elif isinstance(command, str):
+            command_txt = command
+            # Default command timeout 60 seconds
+            command_timeout = 60
+
+        return command_txt, command_timeout
+
     def ssh_execute_ffdc_commands(self,
                                   ffdc_actions_for_machine_type,
                                   form_filename=False):
@@ -408,18 +495,12 @@ class FFDCCollector:
 
         progress_counter = 0
         for command in list_of_commands:
-            if isinstance(command, dict):
-                command_txt = next(iter(command))
-                command_timeout = next(iter(command.values()))
-            elif isinstance(command, str):
-                command_txt = command
-                # Default ssh command timeout 60 seconds
-                command_timeout = 60
+            command_txt, command_timeout = self.unpack_command(command)
 
             if form_filename:
                 command_txt = str(command_txt % self.target_type)
 
-            err, response = self.remoteclient.execute_command(command_txt, command_timeout)
+            err, response = self.ssh_remoteclient.execute_command(command_txt, command_timeout)
 
             progress_counter += 1
             self.print_progress(progress_counter)
@@ -435,7 +516,7 @@ class FFDCCollector:
         ffdc_actions_for_machine_type    commands and files for the selected remote host type.
         """
 
-        if self.remoteclient.scpclient:
+        if self.ssh_remoteclient.scpclient:
             print("\n\tCopying DUMP files from remote system %s.\n" % self.hostname)
 
             list_of_commands = self.get_command_list(ffdc_actions_for_machine_type)
@@ -450,10 +531,10 @@ class FFDCCollector:
                     print("\t\tInvalid command %s for DUMP_LOGS block." % command)
                     continue
 
-                err, response = self.remoteclient.execute_command(command)
+                err, response = self.ssh_remoteclient.execute_command(command)
 
                 if response:
-                    scp_result = self.remoteclient.scp_file_from_remote(filename, self.ffdc_dir_path)
+                    scp_result = self.ssh_remoteclient.scp_file_from_remote(filename, self.ffdc_dir_path)
                     if scp_result:
                         print("\t\tSuccessfully copied from " + self.hostname + ':' + filename)
                 else:
@@ -488,9 +569,9 @@ class FFDCCollector:
 
             # If source file name contains wild card, copy filename as is.
             if '*' in source_file_path:
-                scp_result = self.remoteclient.scp_file_from_remote(source_file_path, self.ffdc_dir_path)
+                scp_result = self.ssh_remoteclient.scp_file_from_remote(source_file_path, self.ffdc_dir_path)
             else:
-                scp_result = self.remoteclient.scp_file_from_remote(source_file_path, targ_file_path)
+                scp_result = self.ssh_remoteclient.scp_file_from_remote(source_file_path, targ_file_path)
 
             if not quiet:
                 if scp_result:
