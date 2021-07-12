@@ -7,7 +7,6 @@ from paramiko.ssh_exception import SSHException
 from paramiko.ssh_exception import BadHostKeyException
 from paramiko.buffered_pipe import PipeTimeout as PipeTimeout
 from scp import SCPClient, SCPException
-import sys
 import time
 import socket
 from socket import timeout as SocketTimeout
@@ -43,6 +42,7 @@ class SSHRemoteclient:
         Method to create a ssh connection to remote host.
         """
 
+        is_ssh_login = True
         try:
             # SSHClient to make connections to the remote server
             self.sshclient = paramiko.SSHClient()
@@ -56,8 +56,9 @@ class SSHRemoteclient:
 
         except (BadHostKeyException, AuthenticationException,
                 SSHException, NoValidConnectionsError, socket.error) as e:
-            print("\n>>>>>\tERROR: Unable to SSH to %s %s %s\n\n" % (self.hostname, e.__class__, e))
-            sys.exit(-1)
+            is_ssh_login = False
+
+        return is_ssh_login
 
     def ssh_remoteclient_disconnect(self):
 
