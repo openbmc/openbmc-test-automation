@@ -22,6 +22,30 @@
       "revId": "e20630329c1494159cd0c8b2c006285b6ba41de8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1b7196f_24d03272",
+        "filename": "gui/gui_test/access_control/test_obmc_gui_ldap.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-12T08:11:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2a56340_8475ad31",
+      "range": {
+        "startLine": 344,
+        "startChar": 5,
+        "endLine": 344,
+        "endChar": 6
+      },
+      "revId": "e20630329c1494159cd0c8b2c006285b6ba41de8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
