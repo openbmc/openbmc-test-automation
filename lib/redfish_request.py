@@ -3,12 +3,7 @@
 import requests
 import urllib.request
 from urllib3.exceptions import InsecureRequestWarning
-from getpass import getpass
-import sys
-import os
-import ssl
 import json
-import random
 import secrets
 import string
 
