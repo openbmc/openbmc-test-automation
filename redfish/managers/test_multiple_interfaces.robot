@@ -14,11 +14,23 @@ Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/bmc_ldap_utils.robot
 Resource        ../../lib/snmp/resource.robot
 Resource        ../../lib/snmp/redfish_snmp_utils.robot
+Resource        ../../gui/lib/gui_resource.robot
 Library         ../../lib/jobs_processing.py
 
 Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
 Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
+
+*** Variables ***
+
+${LDAP_FILE_PATH}  ${EMPTY}
+${CA_FILE_PATH}    ${EMPTY}
+${bmc_url_1}       https://${OPENBMC_HOST_1}
+
+${xpath_add_newcertificate}    //*[contains(text(), ' Add new certificate ')]
+${xpath_certificate_type}      //*[@id="certificate-type"]
+${xpath_upload_file}           //*[@id="certificate-file"]
+${xpath_load_certificate}      //button[text()=' Add ']
 
 *** Test Cases ***
 
@@ -116,6 +128,16 @@ Able To Access Serial Console Via Both Network Interfaces
     Close All Connections
 
 
+Verify Able To Load Certificates Via Eth1 IP Address
+    [Documentation]  Verify able load LDAP certificate using eth1 IP address.
+    [Tags]  Verify_Able_To_Load_Certificates_Via_Eth1_IP_Address
+    [Template]  Load Certificates On BMC Via GUI
+
+    # bmc_url     certificate_type  file_path
+    ${bmc_url_1}  LDAP Certificate  ${LDAP_FILE_PATH}
+    ${bmc_url_1}  CA Certificate    ${CA_FILE_PATH}
+
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
@@ -178,3 +200,37 @@ Set BMC Ethernet Interfaces State
 
     Run Keyword If  ${enabled} == ${True}  Should Be Equal  ${status}  ${True}
     ...  ELSE  Should Be Equal  ${status}  ${False}
+
+
+Load Certificates On BMC Via GUI
+    [Documentation]  Load certificate on BMC via GUI.
+    [Arguments]  ${bmc_url}  ${certificate_type}  ${file_path}
+    [Teardown]  Run Keywords  Logout GUI  AND  Close Browser
+
+    # Description of argument(s):
+    # bmc_url            Openbmc GUI URL to be open.
+    # certificate_type   Certificate type.
+    #                    (e.g. "LDAP Certificate" or "CA Certificate").
+    # file_path          Certificate file path (e.g. "/home/folder/file.pem").
+
+    ${path}  ${ext}=  Split Extension  ${file_path}
+
+    Start Virtual Display
+    ${browser_ID}=  Open Browser  ${bmc_url}  alias=tab1
+    Login GUI
+
+    Click Element  ${xpath_access_control_menu}
+    Click Element  ${xpath_ssl_certificates_sub_menu}
+
+    Page Should Contain  SSL certificates
+    Sleep  5s
+
+    Click Element  ${xpath_add_newcertificate}
+    Select From List By Value  ${xpath_certificate_type}  ${certificate_type}
+    Choose File  ${xpath_upload_file}  ${file_path}
+    Click Element  ${xpath_load_certificate}
+    Run Keyword If  '${ext}' !='pem'
+    ...  Run Keywords  Wait Until Page Contains  Error adding certificate.  AND  Return From Keyword
+    Wait Until Page Contains  Successfully added ${certificate_type}.  msg=Please upload valid certificate.
+    Page Should Contain  ${certificate_type}
+
