@@ -101,7 +101,7 @@ class FFDCCollector:
         Check if target system is ping-able.
 
         """
-        response = os.system("ping -c 1 -w 2 %s  2>&1 >/dev/null" % self.hostname)
+        response = os.system("ping -c 1 %s  2>&1 >/dev/null" % self.hostname)
         if response == 0:
             print("\n\t[Check] %s is ping-able.\t\t [OK]" % self.hostname)
             return True
