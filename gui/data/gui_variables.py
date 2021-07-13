@@ -63,3 +63,5 @@ class gui_variables():
     # Profile settings
     xpath_default_UTC = "//*[@data-test-id='profileSettings-radio-defaultUTC']"
     xpath_profile_save_button = "//*[@data-test-id='profileSettings-button-saveSettings']"
+    xpath_input_password = "//*[@data-test-id='profileSettings-input-newPassword']"
+    xpath_input_confirm_password = "//*[@data-test-id='profileSettings-input-confirmPassword']"
