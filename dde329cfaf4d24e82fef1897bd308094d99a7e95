@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63817b49_89202022",
+        "filename": "gui/gui_test/server_config/test_obmc_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-07-13T12:43:12Z",
+      "side": 1,
+      "message": "it would be better if you can include the keywords to delete the Certificates in suite setup and teardown\nDelete All CA Certificate Via Redfish\nDelete Certificate Via BMC CLI  Client",
+      "revId": "dde329cfaf4d24e82fef1897bd308094d99a7e95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
