@@ -47,7 +47,7 @@ class FFDCCollector:
             self.username = username
             self.password = password
             self.ffdc_config = ffdc_config
-            self.location = location
+            self.location = location + "/" + remote_type.upper()
             self.ssh_remoteclient = None
             self.telnet_remoteclient = None
             self.ffdc_dir_path = ""
@@ -597,6 +597,7 @@ class FFDCCollector:
 
         timestr = time.strftime("%Y%m%d-%H%M%S")
         self.ffdc_dir_path = self.location + "/" + self.hostname + "_" + timestr + "/"
+        print("\n\tFFDC Path: %s " % self.ffdc_dir_path)
         self.ffdc_prefix = timestr + "_"
         self.validate_local_store(self.ffdc_dir_path)
 
@@ -611,13 +612,13 @@ class FFDCCollector:
 
         if not os.path.exists(dir_path):
             try:
-                os.mkdir(dir_path, 0o755)
+                os.makedirs(dir_path, 0o755)
             except (IOError, OSError) as e:
                 # PermissionError
                 if e.errno == EPERM or e.errno == EACCES:
-                    print('>>>>>\tERROR: os.mkdir %s failed with PermissionError.\n' % dir_path)
+                    print('>>>>>\tERROR: os.makedirs %s failed with PermissionError.\n' % dir_path)
                 else:
-                    print('>>>>>\tERROR: os.mkdir %s failed with %s.\n' % (dir_path, e.strerror))
+                    print('>>>>>\tERROR: os.makedirs %s failed with %s.\n' % (dir_path, e.strerror))
                 sys.exit(-1)
 
     def print_progress(self, progress):
