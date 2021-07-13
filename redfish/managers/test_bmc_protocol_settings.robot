@@ -5,11 +5,20 @@ Resource   ../../lib/resource.robot
 Resource   ../../lib/bmc_redfish_resource.robot
 Resource   ../../lib/openbmc_ffdc.robot
 
-Suite Setup    Redfish.Login
-Test Teardown  FFDC On Test Case Fail
+Suite Setup     Redfish.Login
+Suite Teardown  Redfish.Logout
+Test Teardown   FFDC On Test Case Fail
 
 
 *** Test Cases ***
+
+Verify SSH Is Enabled By Default
+    [Documentation]  Verify SSH is enabled by default.
+    [Tags]  Verify_SSH_Is_Enabled_By_Default
+
+    # Check if SSH is enabled by default.
+    Verify SSH Protocol State  ${True}
+
 
 Enable SSH Protocol And Verify
     [Documentation]  Enable SSH protocol and verify.
@@ -76,6 +85,42 @@ Disable SSH Protocol And Check Persistency On BMC Reboot
 
     Should Be Equal As Strings  ${status}  False
     ...  msg=SSH Login and commands are working after disabling SSH.
+
+
+Verify Disabling SSH Port Does Not Disable Serial Console Port
+    [Documentation]  Verify disabling SSH does not disable serial console port.
+    [Tags]  Verify_Disabling_SSH_Port_Does_Not_Disable_Serial_Console_Port
+    [Teardown]  Enable SSH Protocol  ${True}
+
+    # Disable SSH interface.
+    Enable SSH Protocol  ${False}
+
+    # Check able to establish connection with serial port console.
+    Open Connection And Log In  host=${OPENBMC_HOST}  port=2200
+    Close All Connections
+
+
+Verify Existing SSH Session Gets Closed On Disabling SSH
+    [Documentation]  Verify existing SSH session gets closed on disabling ssh.
+    [Tags]  Verify_Existing_SSH_Session_Gets_Closed_On_Disabling_SSH
+    [Teardown]  Enable SSH Protocol  ${True}
+
+    # Open SSH connection.
+    Open Connection And Login
+
+    # Disable SSH interface.
+    Enable SSH Protocol  ${False}
+
+    # Check if SSH is really disabled via Redfish.
+    Verify SSH Protocol State  ${False}
+
+    # Try to execute CLI command on SSH connection.
+    # It should fail as disable SSH will close pre existing sessions.
+    ${status}=  Run Keyword And Return Status
+    ...  BMC Execute Command  /sbin/ip addr
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=Disabling SSH has not closed existing SSH sessions.
 
 
 *** Keywords ***
