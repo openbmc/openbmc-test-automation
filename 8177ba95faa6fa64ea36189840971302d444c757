@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88fe6355_118d123c",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-07-13T14:34:37Z",
+      "side": 1,
+      "message": "Also change to os.makedirs for Error message",
+      "range": {
+        "startLine": 619,
+        "startChar": 43,
+        "endLine": 619,
+        "endChar": 44
+      },
+      "revId": "8177ba95faa6fa64ea36189840971302d444c757",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92a812c0_5e905a5b",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-07-13T14:34:37Z",
+      "side": 1,
+      "message": "Same as above: Also change to os.makedirs for Error message",
+      "range": {
+        "startLine": 621,
+        "startChar": 44,
+        "endLine": 621,
+        "endChar": 50
+      },
+      "revId": "8177ba95faa6fa64ea36189840971302d444c757",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
