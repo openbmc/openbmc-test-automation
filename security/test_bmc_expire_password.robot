@@ -2,8 +2,9 @@
 Documentation     Test root user expire password.
 
 Resource          ../lib/resource.robot
-Resource          ../gui/lib/resource.robot
+Resource          ../gui/lib/gui_resource.robot
 Resource          ../lib/ipmi_client.robot
+Resource          ../lib/bmc_redfish_utils.robot
 Library           ../lib/bmc_ssh_utils.py
 Library           SSHLibrary
 
@@ -94,8 +95,7 @@ Expire And Change Root User Password Via Redfish And Verify
    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
    Should Contain  ${output}  password expiry information changed
 
-   Redfish.Login
-   Verify Root Password Expired
+   Verify User Password Expired Using Redfish  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
    # Change to a valid password.
    Redfish.Patch  /redfish/v1/AccountService/Accounts/${OPENBMC_USERNAME}
    ...  body={'Password': '0penBmc123'}
@@ -115,7 +115,7 @@ Verify Error While Creating User With Expired Password
     ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
     Should Contain  ${output}  password expiry information changed
 
-    Verify Root Password Expired
+    Verify User Password Expired Using Redfish  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     Redfish.Login
     ${payload}=  Create Dictionary
     ...  UserName=admin_user  Password=TestPwd123  RoleId=Administrator  Enabled=${True}
@@ -126,26 +126,29 @@ Verify Error While Creating User With Expired Password
 Expire And Change Root Password Via GUI
     [Documentation]  Expire and change root password via GUI.
     [Tags]  Expire_And_Change_Root_Password_Via_GUI
-    [Setup]  Run Keywords  Launch Browser And Login OpenBMC GUI
-    [Teardown]  Run Keywords  Logout And Close Browser
+    [Setup]  Launch Browser And Login GUI
+    [Teardown]  Run Keywords  Logout GUI  AND  Close Browser
     ...  AND  Restore Default Password For Root User  AND  FFDC On Test Case Fail
 
     Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
     Should Contain  ${output}  password expiry information changed
 
-    Click Button  ${xpath_button_user_action}
-    Click Element  ${xpath_button_profile_settings}
-    Page Should Contain  Change password
-    Sleep  2s
+    Wait Until Page Contains Element  ${xpath_root_button_menu}
+    Click Element  ${xpath_root_button_menu}
+    Click Element  ${xpath_profile_settings}
+    Wait Until Page Contains  Change password
+
     # Change valid password.
     Input Text  ${xpath_input_password}  0penBmc123
     Input Text  ${xpath_input_confirm_password}  0penBmc123
-    Click Button  ${xpath_submit_button}
+    Click Button  ${xpath_profile_save_button}
+    Wait Until Page Contains  Successfully saved account settings.
+    Wait Until Page Does Not Contain  Successfully saved account settings.  timeout=20
+    Logout GUI
 
     # Verify valid password.
-    Open Browser With URL  ${obmc_gui_url}
-    Login OpenBMC GUI  ${OPENBMC_USERNAME}  0penBmc123
+    Login GUI  ${OPENBMC_USERNAME}  0penBmc123
     Redfish.Login  ${OPENBMC_USERNAME}  0penBmc123
 
 
@@ -202,13 +205,16 @@ Verify New Password Persistency After BMC Reboot
 
 Set Account Lockout Threshold
    [Documentation]  Set user account lockout threshold.
-   [Arguments]  ${account_lockout_threshold}=${0}
+   [Arguments]  ${account_lockout_threshold}=${0}  ${account_lockout_duration}=${50}
 
    # Description of argument(s):
    # account_lockout_threshold    Set lockout threshold value.
+   # account_lockout_duration     Set lockout duration value.
 
    Redfish.login
-   Redfish.Patch  /redfish/v1/AccountService/  body={"AccountLockoutThreshold":${account_lockout_threshold}}
+   ${payload}=  Create Dictionary  AccountLockoutThreshold=${account_lockout_threshold}
+   ...  AccountLockoutDuration=${account_lockout_duration}
+   Redfish.Patch  /redfish/v1/AccountService/  body=&{payload}
    gen_robot_valid.Valid Length  OPENBMC_PASSWORD  min_length=8
    Redfish.Logout
 
@@ -230,16 +236,3 @@ Test Teardown Execution
     Redfish.Logout
     Set Account Lockout Threshold  account_lockout_threshold=${5}
     FFDC On Test Case Fail
-
-
-Verify Root Password Expired
-    [Documentation]  Checking whether root password expired or not.
-
-    Create Session  openbmc  ${AUTH_URI}
-    ${headers}=  Create Dictionary  Content-Type=application/json
-    @{credentials}=  Create List  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-    ${data}=  Create Dictionary  data=@{credentials}
-    ${resp}=  Post Request  openbmc  /login  data=${data}  headers=${headers}
-    ${json}=  To JSON  ${resp.content}
-    Should Contain  ${json["extendedMessage"]}  POST the new password
-
