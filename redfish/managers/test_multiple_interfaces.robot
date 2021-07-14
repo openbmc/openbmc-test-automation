@@ -14,6 +14,7 @@ Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/bmc_ldap_utils.robot
 Resource        ../../lib/snmp/resource.robot
 Resource        ../../lib/snmp/redfish_snmp_utils.robot
+Resource        ../../lib/ipmi_client.robot
 Library         ../../lib/jobs_processing.py
 
 Suite Setup     Suite Setup Execution
@@ -115,6 +116,23 @@ Able To Access Serial Console Via Both Network Interfaces
     Open Connection And Log In  host=${OPENBMC_HOST_1}  port=2200
     Close All Connections
 
+
+Verify Able To Access IPMI Via Both Interfaces
+    [Documentation]  verify able to access IPMI via both interfaces.
+    [Tags]  Verify_Able_To_Access_IPMI_Via_Both_Interfaces
+
+    ${sub_cmd}=  Set Variable  chassis power on
+
+    ${status}=  Run Keyword And Return Status
+    ...  Run External IPMI Standard Command  ${sub_cmd}
+    Should Be Equal  ${status}  ${True}
+
+    ${ipmi_predfix}=  Set Variable  ipmitool -I lanplus -C 17 -p 623    
+    ${ipmi_arguments}=  Set Variable  -U ${OPENBMC_PASSWORD} -P ${OPENBMC_PASSWORD} -H ${OPENBMC_HOST_1}
+    ${ipmi_cmd}=  Set Variable  ${ipmi_predfix} ${ipmi_arguments} ${sub_cmd}
+
+    ${rc}  ${output}  Run And Return Rc And Output  ${ipmi_cmd}
+    Should Be Equal  ${rc}  0
 
 *** Keywords ***
 
