@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "7c693103_d9363c7f",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-14T10:13:56Z",
+      "side": 1,
+      "message": "remove this \nbelow keyword take care to login and verify password is password is expired",
+      "range": {
+        "startLine": 98,
+        "startChar": 3,
+        "endLine": 98,
+        "endChar": 16
+      },
+      "revId": "517db90a79cf4c5853285e55cbc46e3585533ec8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dbe0c6eb_8aa17854",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 1
@@ -13,6 +36,29 @@
       "writtenOn": "2021-07-13T13:35:55Z",
       "side": 1,
       "message": "can you remove extra space.",
+      "revId": "517db90a79cf4c5853285e55cbc46e3585533ec8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c0a4667_52cfda22",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-14T10:13:56Z",
+      "side": 1,
+      "message": "not required , restore default password take care to logout",
+      "range": {
+        "startLine": 133,
+        "startChar": 2,
+        "endLine": 133,
+        "endChar": 28
+      },
       "revId": "517db90a79cf4c5853285e55cbc46e3585533ec8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
