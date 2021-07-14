@@ -14,11 +14,17 @@ Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/bmc_ldap_utils.robot
 Resource        ../../lib/snmp/resource.robot
 Resource        ../../lib/snmp/redfish_snmp_utils.robot
+Resource        ../../lib/certificate_utils.robot
+Resource        ../../lib/certificate_utils.robot
 Library         ../../lib/jobs_processing.py
+Library         OperatingSystem
 
 Suite Setup     Suite Setup Execution
-Test Teardown   FFDC On Test Case Fail
+#Test Teardown   FFDC On Test Case Fail
 Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
+*** Variables ***
+
+${bmc}    https://$OPENBMC_HOST_1}
 
 *** Test Cases ***
 
@@ -106,6 +112,17 @@ Verify Both Interfaces Access Concurrently Via Redfish
     Should Be Equal  ${resp.dict["DHCPv4"]['UseDNSServers']}  ${True}
     Should Be Equal  ${resp1.dict["DHCPv4"]['UseDNSServers']}  ${True}
 
+
+Verify Able To Load Certificates Via Eth1 IP Address
+    [Documentation]  Verify able to load certifcates via eth1 IP address.
+    [Setup]   Create Directory  certificate_dir
+    [Tags]  Verify_Able_To_Load_Certificates_Via_Eth1_IP_Address
+    [Template]  Install Certificate Via Redfish And Verify
+
+    # cert_type  cert_format                         expected_status
+    CA           Valid Certificate                   ok
+    Client       Valid Certificate Valid Privatekey  ok
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
@@ -168,3 +185,32 @@ Set BMC Ethernet Interfaces State
 
     Run Keyword If  ${enabled} == ${True}  Should Be Equal  ${status}  ${True}
     ...  ELSE  Should Be Equal  ${status}  ${False}
+
+
+Install Certificate Via Redfish And Verify
+    [Documentation]  Install and verify certificate using Redfish.
+    [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}  ${delete_cert}=${True}
+
+    Set Test Variable  ${AUTH_URI}  https://${OPENBMC_HOST_1}
+    Run Keyword If  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
+    ...  Delete All CA Certificate Via Redfish
+    ...  ELSE IF  '${cert_type}' == 'Client' and '${delete_cert}' == '${True}'
+    ...  Delete Certificate Via BMC CLI  ${cert_type}
+
+    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    ${certificate_uri}=  Set Variable If
+    ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}
+    ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
+
+    ${cert_id}=  Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
+    Logging  Installed certificate id: ${cert_id}
+
+    Sleep  30s
+    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
+    ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
+    ...  ${certificate_uri}/${cert_id}  CertificateString
+    Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    [Return]  ${cert_id}
