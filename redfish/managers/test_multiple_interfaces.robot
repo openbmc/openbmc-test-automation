@@ -20,6 +20,10 @@ Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
 Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
 
+*** Variables ***
+
+${cmd_prefix}  ipmitool -I lanplus -C 17 -p 623 -U ${OPENBMC_USERNAME} -P ${OPENBMC_PASSWORD}
+
 *** Test Cases ***
 
 Verify Both Interfaces BMC IP Addresses Accessible Via SSH
@@ -116,6 +120,14 @@ Able To Access Serial Console Via Both Network Interfaces
     Close All Connections
 
 
+Verify IPMI Works On Both Network Interfaces
+    [Documentation]  Verify IPMI works on both network interfaces.
+    [Tags]  Verify_IPMI_Works_On_Both_Network_Interfaces
+
+    ${status1}=  Run IPMI  power on  host=${OPENBMC_HOST}
+    ${status2}=  Run IPMI  power on  host=${OPENBMC_HOST_1}
+    Should Be Equal  ${status1}  ${status2}
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
@@ -178,3 +190,16 @@ Set BMC Ethernet Interfaces State
 
     Run Keyword If  ${enabled} == ${True}  Should Be Equal  ${status}  ${True}
     ...  ELSE  Should Be Equal  ${status}  ${False}
+
+
+Run IPMI
+    [Documentation]  Run IPMI command.
+    [Arguments]  ${command}  ${host}=${OPENBMC_HOST}
+
+    # Description of argument(s):
+    # command      The IPMI command string to be executed.
+    # host         BMC host name or IP address.
+
+    ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_prefix} -H ${host} ${command}
+    Should Be Equal As Strings  ${rc}  0
+    [Return]  ${output}
