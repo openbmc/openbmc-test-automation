@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9aca34d_ead886e4",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-07-14T05:48:24Z",
+      "side": 1,
+      "message": "need elaborate documentation",
+      "revId": "6645e4a512b1523c417e4dac6f7d166098484d32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01d73e53_398efa3e",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-07-14T05:48:24Z",
+      "side": 1,
+      "message": "Can we have a single keyword for both with just optional parameter ${store_session} \u003d True/False",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "6645e4a512b1523c417e4dac6f7d166098484d32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31654c03_717fc048",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-07-14T05:48:24Z",
+      "side": 1,
+      "message": "alignment",
+      "range": {
+        "startLine": 13,
+        "startChar": 3,
+        "endLine": 13,
+        "endChar": 43
+      },
+      "revId": "6645e4a512b1523c417e4dac6f7d166098484d32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b37a2e2_f96ce081",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2021-07-14T05:48:24Z",
+      "side": 1,
+      "message": "is it BMC ??",
+      "range": {
+        "startLine": 16,
+        "startChar": 31,
+        "endLine": 16,
+        "endChar": 37
+      },
+      "revId": "6645e4a512b1523c417e4dac6f7d166098484d32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
