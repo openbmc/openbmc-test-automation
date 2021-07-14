@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "917a4df5_4cdd2691",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-14T08:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9aca34d_ead886e4",
+      "revId": "6645e4a512b1523c417e4dac6f7d166098484d32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01d73e53_398efa3e",
         "filename": "lib/redfish_request.robot",
         "patchSetId": 6
@@ -30,6 +48,30 @@
       "writtenOn": "2021-07-14T05:48:24Z",
       "side": 1,
       "message": "Can we have a single keyword for both with just optional parameter ${store_session} \u003d True/False",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "6645e4a512b1523c417e4dac6f7d166098484d32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fbf2d31_b5c47c42",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-14T08:06:15Z",
+      "side": 1,
+      "message": "${store_session} \u003d True/False - adding another variable is not needed, as user always needed the session to perform other request. if user want only login response then he can either use \"Redfish Generic Login Request\" or else \"Redfish Generic Session Request\" as this keyword also provide similar details.",
+      "parentUuid": "01d73e53_398efa3e",
       "range": {
         "startLine": 11,
         "startChar": 0,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "a9bd7d47_b8a889fa",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-14T08:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31654c03_717fc048",
+      "range": {
+        "startLine": 13,
+        "startChar": 3,
+        "endLine": 13,
+        "endChar": 43
+      },
+      "revId": "6645e4a512b1523c417e4dac6f7d166098484d32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3b37a2e2_f96ce081",
         "filename": "lib/redfish_request.robot",
         "patchSetId": 6
@@ -76,6 +142,30 @@
       "writtenOn": "2021-07-14T05:48:24Z",
       "side": 1,
       "message": "is it BMC ??",
+      "range": {
+        "startLine": 16,
+        "startChar": 31,
+        "endLine": 16,
+        "endChar": 37
+      },
+      "revId": "6645e4a512b1523c417e4dac6f7d166098484d32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fdf4fa7_5cc6c32a",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-14T08:06:15Z",
+      "side": 1,
+      "message": "Yes, changed to BMC.",
+      "parentUuid": "3b37a2e2_f96ce081",
       "range": {
         "startLine": 16,
         "startChar": 31,
