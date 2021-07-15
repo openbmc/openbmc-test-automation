@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "491885e1_b5f72715",
+        "filename": "gui/gui_test/server_config/test_obmc_multiple_interfaces.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-15T07:21:31Z",
+      "side": 1,
+      "message": "xpath_add_new_certificate",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "bec41e368c6c1cdc4d955239770e641e217b8dfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25fcf0db_611981d9",
+        "filename": "gui/gui_test/server_config/test_obmc_multiple_interfaces.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-15T07:21:31Z",
+      "side": 1,
+      "message": "Load Certificates Via Eth1 IP Address And Verify",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 52
+      },
+      "revId": "bec41e368c6c1cdc4d955239770e641e217b8dfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43e45dc1_e742278e",
+        "filename": "gui/gui_test/server_config/test_obmc_multiple_interfaces.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-15T07:21:31Z",
+      "side": 1,
+      "message": "ability to",
+      "range": {
+        "startLine": 43,
+        "startChar": 28,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "bec41e368c6c1cdc4d955239770e641e217b8dfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfae840c_d79eb776",
+        "filename": "gui/gui_test/server_config/test_obmc_multiple_interfaces.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-15T07:21:31Z",
+      "side": 1,
+      "message": "Change as above.",
+      "range": {
+        "startLine": 44,
+        "startChar": 12,
+        "endLine": 44,
+        "endChar": 64
+      },
+      "revId": "bec41e368c6c1cdc4d955239770e641e217b8dfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd0378e7_a2403458",
+        "filename": "gui/gui_test/server_config/test_obmc_multiple_interfaces.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-15T07:21:31Z",
+      "side": 1,
+      "message": "Reuse Launch Browser And Login GUI from gui_resource.robot",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 13
+      },
+      "revId": "bec41e368c6c1cdc4d955239770e641e217b8dfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3879ac9_b77a36f7",
+        "filename": "gui/gui_test/server_config/test_obmc_multiple_interfaces.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-15T07:21:31Z",
+      "side": 1,
+      "message": "You can have a separate keyword to navigate to this page so that it can be used for other tests too. This should be part of the setup for the template.",
+      "range": {
+        "startLine": 81,
+        "startChar": 1,
+        "endLine": 86,
+        "endChar": 41
+      },
+      "revId": "bec41e368c6c1cdc4d955239770e641e217b8dfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
