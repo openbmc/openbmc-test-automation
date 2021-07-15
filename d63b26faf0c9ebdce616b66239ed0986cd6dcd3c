@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2e3f9dfb_1d1bee44",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-15T17:23:26Z",
+      "side": 1,
+      "message": "sure..",
+      "parentUuid": "7b2d43bd_121e7d89",
+      "range": {
+        "startLine": 99,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 23
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5c6e61b6_20240591",
         "filename": "ffdc/telnet_utility.py",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "We could make it longer but that will effect the total execution time.\nSo far the longest I have made is 2 seconds,",
       "parentUuid": "5c6e61b6_20240591",
+      "range": {
+        "startLine": 112,
+        "startChar": 16,
+        "endLine": 112,
+        "endChar": 63
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bbbbaad_5ce3283a",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-15T17:23:26Z",
+      "side": 1,
+      "message": "To me we better take some time and increase the chance then failing out with lesser time.",
+      "parentUuid": "9b4d085f_bbd65107",
       "range": {
         "startLine": 112,
         "startChar": 16,
@@ -140,6 +188,30 @@
       "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66bb0bd5_37442479",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-15T17:23:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4cdb7d60_e9337f0d",
+      "range": {
+        "startLine": 127,
+        "startChar": 17,
+        "endLine": 127,
+        "endChar": 24
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
