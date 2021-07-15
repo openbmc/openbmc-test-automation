@@ -7,8 +7,6 @@
 -i Check_For_Application_Failures
 #Verify system boot time average
 -i Verify_Uptime_Average_Against_Threshold
-#Check for BMC dump.
--i Verify_No_BMC_Dump_And_Application_Failures
 #Redfish tests cases.
 -i Redfish_Login_And_Logout
 -i GET_Redfish_Hypermedia_Without_Login
@@ -26,3 +24,5 @@
 -i Verify_IPMI_User_Deletion
 #Local user tests.
 -i Verify_AccountService_Available
+#Check for BMC dump.
+-i Verify_No_BMC_Dump_And_Application_Failures_In_BMC
