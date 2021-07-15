@@ -117,6 +117,30 @@
     },
     {
       "key": {
+        "uuid": "e0bae150_9b0485ed",
+        "filename": "gui/gui_test/server_config/test_obmc_multiple_interfaces.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-15T07:31:32Z",
+      "side": 1,
+      "message": "Launch Browser And Login GUI that keyword by default it is taking with eth0 ip address, i want to open with eth1 ip address",
+      "parentUuid": "fd0378e7_a2403458",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 13
+      },
+      "revId": "bec41e368c6c1cdc4d955239770e641e217b8dfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3879ac9_b77a36f7",
         "filename": "gui/gui_test/server_config/test_obmc_multiple_interfaces.robot",
         "patchSetId": 6
