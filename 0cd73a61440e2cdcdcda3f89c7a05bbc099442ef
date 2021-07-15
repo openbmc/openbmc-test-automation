@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d1b557d_7eb026c8",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-15T19:05:48Z",
+      "side": 1,
+      "message": "self.logger.error",
+      "range": {
+        "startLine": 709,
+        "startChar": 12,
+        "endLine": 709,
+        "endChar": 28
+      },
+      "revId": "0cd73a61440e2cdcdcda3f89c7a05bbc099442ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1222457_3b5b333e",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-15T19:05:48Z",
+      "side": 1,
+      "message": "self.logger.error(",
+      "range": {
+        "startLine": 710,
+        "startChar": 12,
+        "endLine": 710,
+        "endChar": 28
+      },
+      "revId": "0cd73a61440e2cdcdcda3f89c7a05bbc099442ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "161049ef_37ed0c6f",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-15T19:05:48Z",
+      "side": 1,
+      "message": "self.logger.error(",
+      "range": {
+        "startLine": 732,
+        "startChar": 12,
+        "endLine": 732,
+        "endChar": 28
+      },
+      "revId": "0cd73a61440e2cdcdcda3f89c7a05bbc099442ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38ac6bf9_ad6e9892",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-15T19:05:48Z",
+      "side": 1,
+      "message": "self.logger.error(",
+      "range": {
+        "startLine": 733,
+        "startChar": 12,
+        "endLine": 733,
+        "endChar": 28
+      },
+      "revId": "0cd73a61440e2cdcdcda3f89c7a05bbc099442ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
