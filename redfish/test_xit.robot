@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   This suite is to run some test at the end of execution.
 
-Resource        ../../lib/openbmc_ffdc.robot
+Resource        ../lib/openbmc_ffdc.robot
 
 Test Teardown   FFDC On Test Case Fail
 
