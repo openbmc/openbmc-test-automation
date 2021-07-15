@@ -81,7 +81,7 @@ OPENBMC:
             - 'SSH'
 
     # DUMP_LOGS: This section provides option to 'SCP if file exist'.
-    #     COMMANDS: filename is preceeded by ls -AX '.
+    #     COMMANDS: filename is preceded by ls -AX '.
     #     FILES: is not needed and is ignored if exists.
     DUMP_LOGS:
         COMMANDS:
