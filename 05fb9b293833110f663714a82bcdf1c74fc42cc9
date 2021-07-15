@@ -16,6 +16,24 @@
       "revId": "05fb9b293833110f663714a82bcdf1c74fc42cc9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "788f1eea_3b3bd3e2",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-15T10:33:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a24accd_0cd01a16",
+      "revId": "05fb9b293833110f663714a82bcdf1c74fc42cc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
