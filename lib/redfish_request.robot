@@ -55,3 +55,41 @@ Redfish Generic Session Request
     Append To List  ${session_dict_list}  ${session_dict}
 
     [Return]  ${session_dict}
+
+
+Verify Redfish Generic Session Request
+    [Documentation]  Verify the Redfish session existence.
+    [Arguments]  ${session_dict}
+
+    # Description of argument(s):
+    # session_dict    Session dictionary contains information related to session attributes
+    #                 like auth-token, location, client-id, headers etc.
+    #                 As part of verification following are verified:
+    #                 session id, client id and client origin IP.
+
+    Set Test Variable  ${uri}  ${session_dict["Location"]}
+    ${session_resp}=  Redfish GET Request URI  ${active_session_info['headers']}  ${uri}
+
+    # session_resp:
+    #  [@odata.id]:                                    /redfish/v1/SessionService/Sessions/1Nkn5H9q7k
+    #  [@odata.type]:                                  #Session.v1_3_0.Session
+    #  [ClientOriginIPAddress]:                        ::ffff:xx.xx.xx.xx
+    #  [Description]:                                  Manager User Session
+    #  [Id]:                                           1Nkn5H9q7k
+    #  [Name]:                                         User Session
+    #  [Oem]:
+    #    [OpenBMC]:
+    #      [@odata.type]:                              #OemSession.v1_0_0.Session
+    #      [ClientID]:                                 HMCID
+    #  [UserName]:                                     root
+
+    Rprint Vars  session_resp
+
+    @{words} =  Split String  ${session_resp["ClientOriginIPAddress"]}  :
+    Set Test Variable  ${session_resp_ip}  ${words}[-1]
+    ${ip_address}=  Get Running System IP
+
+    Valid Value  session_dict["Content"]["Oem"]["OpenBMC"]["ClientID"]
+    ...  ['${session_resp["Oem"]["OpenBMC"]["ClientID"]}']
+    Valid Value  session_dict["Content"]["Id"]  ['${session_resp["Id"]}']
+    Valid Value  session_resp_ip  ${ip_address}
