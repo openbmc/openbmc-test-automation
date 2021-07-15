@@ -9,6 +9,7 @@ from paramiko.buffered_pipe import PipeTimeout as PipeTimeout
 from scp import SCPClient, SCPException
 import time
 import socket
+import logging
 from socket import timeout as SocketTimeout
 
 
@@ -97,9 +98,9 @@ class SSHRemoteclient:
         except (paramiko.AuthenticationException, paramiko.SSHException,
                 paramiko.ChannelException, SocketTimeout) as e:
             # Log command with error. Return to caller for next command, if any.
-            print("\n>>>>>\tERROR: Fail remote command %s %s" % (e.__class__, e))
-            print(">>>>>\tCommand '%s' Elapsed Time %s" %
-                  (command, time.strftime("%H:%M:%S", time.gmtime(time.time() - cmd_start))))
+            logging.error("\n>>>>>\tERROR: Fail remote command %s %s" % (e.__class__, e))
+            logging.error(">>>>>\tCommand '%s' Elapsed Time %s" %
+                          (command, time.strftime("%H:%M:%S", time.gmtime(time.time() - cmd_start))))
             return empty, empty
 
     def scp_connection(self):
@@ -109,12 +110,12 @@ class SSHRemoteclient:
         """
         try:
             self.scpclient = SCPClient(self.sshclient.get_transport(), sanitize=lambda x: x)
-            print("\n\t[Check] %s SCP transport established.\t [OK]" % self.hostname)
+            logging.info("\n\t[Check] %s SCP transport established.\t [OK]" % self.hostname)
         except (SCPException, SocketTimeout, PipeTimeout) as e:
             self.scpclient = None
-            print("\n>>>>>\tERROR: SCP get_transport has failed. %s %s" % (e.__class__, e))
-            print(">>>>>\tScript continues generating FFDC on %s." % self.hostname)
-            print(">>>>>\tCollected data will need to be manually offloaded.")
+            logging.error("\n>>>>>\tERROR: SCP get_transport has failed. %s %s" % (e.__class__, e))
+            logging.info(">>>>>\tScript continues generating FFDC on %s." % self.hostname)
+            logging.info(">>>>>\tCollected data will need to be manually offloaded.")
 
     def scp_file_from_remote(self, remote_file, local_file):
 
@@ -133,7 +134,8 @@ class SSHRemoteclient:
             self.scpclient.get(remote_file, local_file, recursive=True)
         except (SCPException, SocketTimeout, PipeTimeout) as e:
             # Log command with error. Return to caller for next file, if any.
-            print("\n>>>>>\tERROR: Fail scp %s from remotehost %s %s\n\n" % (remote_file, e.__class__, e))
+            logging.error(
+                "\n>>>>>\tERROR: Fail scp %s from remotehost %s %s\n\n" % (remote_file, e.__class__, e))
             return False
 
         # Return True for file accounting

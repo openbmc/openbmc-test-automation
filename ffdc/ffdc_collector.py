@@ -8,6 +8,7 @@ import os
 import sys
 import yaml
 import time
+import logging
 import platform
 from errno import EACCES, EPERM
 import subprocess
@@ -30,7 +31,8 @@ class FFDCCollector:
                  ffdc_config,
                  location,
                  remote_type,
-                 remote_protocol):
+                 remote_protocol,
+                 log_level):
         r"""
         Description of argument(s):
 
@@ -42,29 +44,45 @@ class FFDCCollector:
         remote_type             os type of the remote host
 
         """
+
+        self.hostname = hostname
+        self.username = username
+        self.password = password
+        self.ffdc_config = ffdc_config
+        self.location = location + "/" + remote_type.upper()
+        self.ssh_remoteclient = None
+        self.telnet_remoteclient = None
+        self.ffdc_dir_path = ""
+        self.ffdc_prefix = ""
+        self.target_type = remote_type.upper()
+        self.remote_protocol = remote_protocol.upper()
+        self.start_time = 0
+        self.elapsed_time = ''
+        self.logger = None
+
+        # Set prefix values for scp files and directory.
+        # Since the time stamp is at second granularity, these values are set here
+        # to be sure that all files for this run will have same timestamps
+        # and they will be saved in the same directory.
+        # self.location == local system for now
+        self.set_ffdc_defaults()
+
+        # Logger for this run.  Need to be after set_ffdc_defaults()
+        self.script_logging(getattr(logging, log_level.upper()))
+
+        # Verify top level directory exists for storage
+        self.validate_local_store(self.location)
+
         if self.verify_script_env():
-            self.hostname = hostname
-            self.username = username
-            self.password = password
-            self.ffdc_config = ffdc_config
-            self.location = location + "/" + remote_type.upper()
-            self.ssh_remoteclient = None
-            self.telnet_remoteclient = None
-            self.ffdc_dir_path = ""
-            self.ffdc_prefix = ""
-            self.target_type = remote_type.upper()
-            self.remote_protocol = remote_protocol.upper()
-            self.start_time = 0
-            self.elapsed_time = ''
+            # Load default or user define YAML configuration file.
+            with open(self.ffdc_config, 'r') as file:
+                self.ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
+
+            if self.target_type not in self.ffdc_actions.keys():
+                self.logger.error(
+                    "\n\tERROR: %s is not listed in %s.\n\n" % (self.target_type, self.ffdc_config))
+                sys.exit(-1)
         else:
-            sys.exit(-1)
-
-        # Load default or user define YAML configuration file.
-        with open(self.ffdc_config, 'r') as file:
-            self.ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
-
-        if self.target_type not in self.ffdc_actions.keys():
-            print("\n\tERROR: %s is not listed in %s.\n\n" % (self.target_type, self.ffdc_config))
             sys.exit(-1)
 
     def verify_script_env(self):
@@ -78,23 +96,40 @@ class FFDCCollector:
         redfishtool_version = self.run_redfishtool('-V').split(' ')[2].strip('\n')
         ipmitool_version = self.run_ipmitool('-V').split(' ')[2]
 
-        print("\n\t---- Script host environment ----")
-        print("\t{:<10}  {:<10}".format('Script hostname', os.uname()[1]))
-        print("\t{:<10}  {:<10}".format('Script host os', platform.platform()))
-        print("\t{:<10}  {:>10}".format('Python', platform.python_version()))
-        print("\t{:<10}  {:>10}".format('PyYAML', yaml.__version__))
-        print("\t{:<10}  {:>10}".format('click', click.__version__))
-        print("\t{:<10}  {:>10}".format('paramiko', paramiko.__version__))
-        print("\t{:<10}  {:>9}".format('redfishtool', redfishtool_version))
-        print("\t{:<10}  {:>12}".format('ipmitool', ipmitool_version))
+        self.logger.info("\n\t---- Script host environment ----")
+        self.logger.info("\t{:<10}  {:<10}".format('Script hostname', os.uname()[1]))
+        self.logger.info("\t{:<10}  {:<10}".format('Script host os', platform.platform()))
+        self.logger.info("\t{:<10}  {:>10}".format('Python', platform.python_version()))
+        self.logger.info("\t{:<10}  {:>10}".format('PyYAML', yaml.__version__))
+        self.logger.info("\t{:<10}  {:>10}".format('click', click.__version__))
+        self.logger.info("\t{:<10}  {:>10}".format('paramiko', paramiko.__version__))
+        self.logger.info("\t{:<10}  {:>9}".format('redfishtool', redfishtool_version))
+        self.logger.info("\t{:<10}  {:>12}".format('ipmitool', ipmitool_version))
 
         if eval(yaml.__version__.replace('.', ',')) < (5, 4, 1):
-            print("\n\tERROR: Python or python packages do not meet minimum version requirement.")
-            print("\tERROR: PyYAML version 5.4.1 or higher is needed.\n")
+            self.logger.error("\n\tERROR: Python or python packages do not meet minimum version requirement.")
+            self.logger.error("\tERROR: PyYAML version 5.4.1 or higher is needed.\n")
             run_env_ok = False
 
-        print("\t---- End script host environment ----")
+        self.logger.info("\t---- End script host environment ----")
         return run_env_ok
+
+    def script_logging(self,
+                       log_level_attr):
+        r"""
+        Create logger
+
+        """
+        self.logger = logging.getLogger()
+        self.logger.setLevel(log_level_attr)
+        log_file_handler = logging.FileHandler(self.ffdc_dir_path + "collector.log")
+
+        stdout_handler = logging.StreamHandler(sys.stdout)
+        self.logger.addHandler(log_file_handler)
+        self.logger.addHandler(stdout_handler)
+
+        # Turn off paramiko INFO logging
+        logging.getLogger("paramiko").setLevel(logging.WARNING)
 
     def target_is_pingable(self):
         r"""
@@ -103,10 +138,11 @@ class FFDCCollector:
         """
         response = os.system("ping -c 1 %s  2>&1 >/dev/null" % self.hostname)
         if response == 0:
-            print("\n\t[Check] %s is ping-able.\t\t [OK]" % self.hostname)
+            self.logger.info("\n\t[Check] %s is ping-able.\t\t [OK]" % self.hostname)
             return True
         else:
-            print("\n>>>>>\tERROR: %s is not ping-able. FFDC collection aborted.\n" % self.hostname)
+            self.logger.error(
+                "\n>>>>>\tERROR: %s is not ping-able. FFDC collection aborted.\n" % self.hostname)
             sys.exit(-1)
 
     def collect_ffdc(self):
@@ -115,7 +151,7 @@ class FFDCCollector:
 
         """
 
-        print("\n\t---- Start communicating with %s ----" % self.hostname)
+        self.logger.info("\n\t---- Start communicating with %s ----" % self.hostname)
         self.start_time = time.time()
         working_protocol_list = []
         if self.target_is_pingable():
@@ -127,16 +163,16 @@ class FFDCCollector:
             # Redfish
             if self.verify_redfish():
                 working_protocol_list.append("REDFISH")
-                print("\n\t[Check] %s Redfish Service.\t\t [OK]" % self.hostname)
+                self.logger.info("\n\t[Check] %s Redfish Service.\t\t [OK]" % self.hostname)
             else:
-                print("\n\t[Check] %s Redfish Service.\t\t [NOT AVAILABLE]" % self.hostname)
+                self.logger.info("\n\t[Check] %s Redfish Service.\t\t [NOT AVAILABLE]" % self.hostname)
 
             # IPMI
             if self.verify_ipmi():
                 working_protocol_list.append("IPMI")
-                print("\n\t[Check] %s IPMI LAN Service.\t\t [OK]" % self.hostname)
+                self.logger.info("\n\t[Check] %s IPMI LAN Service.\t\t [OK]" % self.hostname)
             else:
-                print("\n\t[Check] %s IPMI LAN Service.\t\t [NOT AVAILABLE]" % self.hostname)
+                self.logger.info("\n\t[Check] %s IPMI LAN Service.\t\t [NOT AVAILABLE]" % self.hostname)
 
             # Telnet
             if self.telnet_to_target_system():
@@ -144,11 +180,11 @@ class FFDCCollector:
 
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
-            print("\n\t---- Completed protocol pre-requisite check ----\n")
+            self.logger.info("\n\t---- Completed protocol pre-requisite check ----\n")
 
             if ((self.remote_protocol not in working_protocol_list) and (self.remote_protocol != 'ALL')):
-                print("\n\tWorking protocol list: %s" % working_protocol_list)
-                print(
+                self.logger.info("\n\tWorking protocol list: %s" % working_protocol_list)
+                self.logger.error(
                     '>>>>>\tERROR: Requested protocol %s is not in working protocol list.\n'
                     % self.remote_protocol)
                 sys.exit(-1)
@@ -166,7 +202,7 @@ class FFDCCollector:
                                                 self.password)
 
         if self.ssh_remoteclient.ssh_remoteclient_login():
-            print("\n\t[Check] %s SSH connection established.\t [OK]" % self.hostname)
+            self.logger.info("\n\t[Check] %s SSH connection established.\t [OK]" % self.hostname)
 
             # Check scp connection.
             # If scp connection fails,
@@ -174,7 +210,7 @@ class FFDCCollector:
             self.ssh_remoteclient.scp_connection()
             return True
         else:
-            print("\n\t[Check] %s SSH connection.\t [NOT AVAILABLE]" % self.hostname)
+            self.logger.info("\n\t[Check] %s SSH connection.\t [NOT AVAILABLE]" % self.hostname)
             return False
 
     def telnet_to_target_system(self):
@@ -185,10 +221,10 @@ class FFDCCollector:
                                                       self.username,
                                                       self.password)
         if self.telnet_remoteclient.tn_remoteclient_login():
-            print("\n\t[Check] %s Telnet connection established.\t [OK]" % self.hostname)
+            self.logger.info("\n\t[Check] %s Telnet connection established.\t [OK]" % self.hostname)
             return True
         else:
-            print("\n\t[Check] %s Telnet connection.\t [NOT AVAILABLE]" % self.hostname)
+            self.logger.info("\n\t[Check] %s Telnet connection.\t [NOT AVAILABLE]" % self.hostname)
             return False
 
     def generate_ffdc(self, working_protocol_list):
@@ -199,22 +235,17 @@ class FFDCCollector:
         working_protocol_list    list of confirmed working protocols to connect to remote host.
         """
 
-        print("\n\t---- Executing commands on " + self.hostname + " ----")
-        print("\n\tWorking protocol list: %s" % working_protocol_list)
+        self.logger.info("\n\t---- Executing commands on " + self.hostname + " ----")
+        self.logger.info("\n\tWorking protocol list: %s" % working_protocol_list)
 
-        # Set prefix values for scp files and directory.
-        # Since the time stamp is at second granularity, these values are set here
-        # to be sure that all files for this run will have same timestamps
-        # and they will be saved in the same directory.
-        # self.location == local system for now
-        self.set_ffdc_defaults()
         ffdc_actions = self.ffdc_actions
 
         for machine_type in ffdc_actions.keys():
             if self.target_type != machine_type:
                 continue
 
-            print("\tSystem Type: %s" % machine_type)
+            self.logger.info("\n\tFFDC Path: %s " % self.ffdc_dir_path)
+            self.logger.info("\tSystem Type: %s" % machine_type)
             for k, v in ffdc_actions[machine_type].items():
 
                 if self.remote_protocol != ffdc_actions[machine_type][k]['PROTOCOL'][0] \
@@ -227,25 +258,25 @@ class FFDCCollector:
                        or 'SCP' in working_protocol_list:
                         self.protocol_ssh(ffdc_actions, machine_type, k)
                     else:
-                        print("\n\tERROR: SSH or SCP is not available for %s." % self.hostname)
+                        self.logger.error("\n\tERROR: SSH or SCP is not available for %s." % self.hostname)
 
                 if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'TELNET':
                     if 'TELNET' in working_protocol_list:
                         self.protocol_telnet(ffdc_actions, machine_type, k)
                     else:
-                        print("\n\tERROR: TELNET is not available for %s." % self.hostname)
+                        self.logger.error("\n\tERROR: TELNET is not available for %s." % self.hostname)
 
                 if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'REDFISH':
                     if 'REDFISH' in working_protocol_list:
                         self.protocol_redfish(ffdc_actions, machine_type, k)
                     else:
-                        print("\n\tERROR: REDFISH is not available for %s." % self.hostname)
+                        self.logger.error("\n\tERROR: REDFISH is not available for %s." % self.hostname)
 
                 if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'IPMI':
                     if 'IPMI' in working_protocol_list:
                         self.protocol_ipmi(ffdc_actions, machine_type, k)
                     else:
-                        print("\n\tERROR: IMPI is not available for %s." % self.hostname)
+                        self.logger.error("\n\tERROR: IMPI is not available for %s." % self.hostname)
 
         # Close network connection after collecting all files
         self.elapsed_time = time.strftime("%H:%M:%S", time.gmtime(time.time() - self.start_time))
@@ -280,7 +311,7 @@ class FFDCCollector:
         ffdc_actions        List of actions from ffdc_config.yaml.
         machine_type        OS Type of remote host.
         """
-        print("\n\t[Run] Executing commands on %s using %s" % (self.hostname, 'TELNET'))
+        self.logger.info("\n\t[Run] Executing commands on %s using %s" % (self.hostname, 'TELNET'))
         telnet_files_saved = []
         progress_counter = 0
         list_of_commands = ffdc_actions[machine_type][sub_type]['COMMANDS']
@@ -291,9 +322,10 @@ class FFDCCollector:
                 try:
                     targ_file = ffdc_actions[machine_type][sub_type]['FILES'][index]
                 except IndexError:
-                    targ_file = each_cmd
-                    print("\n\t[WARN] Missing filename to store data from telnet %s." % each_cmd)
-                    print("\t[WARN] Data will be stored in %s." % targ_file)
+                    targ_file = command_txt
+                    self.logger.warning(
+                        "\n\t[WARN] Missing filename to store data from telnet %s." % each_cmd)
+                    self.logger.warning("\t[WARN] Data will be stored in %s." % targ_file)
                 targ_file_with_path = (self.ffdc_dir_path
                                        + self.ffdc_prefix
                                        + targ_file)
@@ -304,9 +336,9 @@ class FFDCCollector:
                     telnet_files_saved.append(targ_file)
             progress_counter += 1
             self.print_progress(progress_counter)
-        print("\n\t[Run] Commands execution completed.\t\t [OK]")
+        self.logger.info("\n\t[Run] Commands execution completed.\t\t [OK]")
         for file in telnet_files_saved:
-            print("\n\t\tSuccessfully save file " + file + ".")
+            self.logger.info("\n\t\tSuccessfully save file " + file + ".")
 
     def protocol_redfish(self,
                          ffdc_actions,
@@ -321,7 +353,7 @@ class FFDCCollector:
         sub_type            Group type of commands.
         """
 
-        print("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'REDFISH'))
+        self.logger.info("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'REDFISH'))
         redfish_files_saved = []
         progress_counter = 0
         list_of_URL = ffdc_actions[machine_type][sub_type]['URL']
@@ -335,8 +367,9 @@ class FFDCCollector:
                     targ_file = self.get_file_list(ffdc_actions[machine_type][sub_type])[index]
                 except IndexError:
                     targ_file = each_url.split('/')[-1]
-                    print("\n\t[WARN] Missing filename to store data from redfish URL %s." % each_url)
-                    print("\t[WARN] Data will be stored in %s." % targ_file)
+                    self.logger.warning(
+                        "\n\t[WARN] Missing filename to store data from redfish URL %s." % each_url)
+                    self.logger.warning("\t[WARN] Data will be stored in %s." % targ_file)
 
                 targ_file_with_path = (self.ffdc_dir_path
                                        + self.ffdc_prefix
@@ -351,10 +384,10 @@ class FFDCCollector:
             progress_counter += 1
             self.print_progress(progress_counter)
 
-        print("\n\t[Run] Commands execution completed.\t\t [OK]")
+        self.logger.info("\n\t[Run] Commands execution completed.\t\t [OK]")
 
         for file in redfish_files_saved:
-            print("\n\t\tSuccessfully save file " + file + ".")
+            self.logger.info("\n\t\tSuccessfully save file " + file + ".")
 
     def protocol_ipmi(self,
                       ffdc_actions,
@@ -369,7 +402,7 @@ class FFDCCollector:
         sub_type            Group type of commands.
         """
 
-        print("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'IPMI'))
+        self.logger.info("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'IPMI'))
         ipmi_files_saved = []
         progress_counter = 0
         list_of_cmd = self.get_command_list(ffdc_actions[machine_type][sub_type])
@@ -383,8 +416,8 @@ class FFDCCollector:
                     targ_file = self.get_file_list(ffdc_actions[machine_type][sub_type])[index]
                 except IndexError:
                     targ_file = each_cmd.split('/')[-1]
-                    print("\n\t[WARN] Missing filename to store data from IPMI %s." % each_cmd)
-                    print("\t[WARN] Data will be stored in %s." % targ_file)
+                    self.logger.warning("\n\t[WARN] Missing filename to store data from IPMI %s." % each_cmd)
+                    self.logger.warning("\t[WARN] Data will be stored in %s." % targ_file)
 
                 targ_file_with_path = (self.ffdc_dir_path
                                        + self.ffdc_prefix
@@ -399,10 +432,10 @@ class FFDCCollector:
             progress_counter += 1
             self.print_progress(progress_counter)
 
-        print("\n\t[Run] Commands execution completed.\t\t [OK]")
+        self.logger.info("\n\t[Run] Commands execution completed.\t\t [OK]")
 
         for file in ipmi_files_saved:
-            print("\n\t\tSuccessfully save file " + file + ".")
+            self.logger.info("\n\t\tSuccessfully save file " + file + ".")
 
     def collect_and_copy_ffdc(self,
                               ffdc_actions_for_machine_type,
@@ -421,13 +454,13 @@ class FFDCCollector:
 
         # Copying files
         if self.ssh_remoteclient.scpclient:
-            print("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
+            self.logger.info("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
 
             # Retrieving files from target system
             list_of_files = self.get_file_list(ffdc_actions_for_machine_type)
             self.scp_ffdc(self.ffdc_dir_path, self.ffdc_prefix, form_filename, list_of_files)
         else:
-            print("\n\n\tSkip copying FFDC files from remote system %s.\n" % self.hostname)
+            self.logger.info("\n\n\tSkip copying FFDC files from remote system %s.\n" % self.hostname)
 
     def get_command_list(self,
                          ffdc_actions_for_machine_type):
@@ -485,8 +518,8 @@ class FFDCCollector:
         ffdc_actions_for_machine_type    commands and files for the selected remote host type.
         form_filename                    if true, pre-pend self.target_type to filename
         """
-        print("\n\t[Run] Executing commands on %s using %s"
-              % (self.hostname, ffdc_actions_for_machine_type['PROTOCOL'][0]))
+        self.logger.info("\n\t[Run] Executing commands on %s using %s"
+                         % (self.hostname, ffdc_actions_for_machine_type['PROTOCOL'][0]))
 
         list_of_commands = self.get_command_list(ffdc_actions_for_machine_type)
         # If command list is empty, returns
@@ -505,7 +538,7 @@ class FFDCCollector:
             progress_counter += 1
             self.print_progress(progress_counter)
 
-        print("\n\t[Run] Commands execution completed.\t\t [OK]")
+        self.logger.info("\n\t[Run] Commands execution completed.\t\t [OK]")
 
     def group_copy(self,
                    ffdc_actions_for_machine_type):
@@ -517,7 +550,7 @@ class FFDCCollector:
         """
 
         if self.ssh_remoteclient.scpclient:
-            print("\n\tCopying DUMP files from remote system %s.\n" % self.hostname)
+            self.logger.info("\n\tCopying DUMP files from remote system %s.\n" % self.hostname)
 
             list_of_commands = self.get_command_list(ffdc_actions_for_machine_type)
             # If command list is empty, returns
@@ -528,7 +561,7 @@ class FFDCCollector:
                 try:
                     filename = command.split(' ')[2]
                 except IndexError:
-                    print("\t\tInvalid command %s for DUMP_LOGS block." % command)
+                    self.logger.info("\t\tInvalid command %s for DUMP_LOGS block." % command)
                     continue
 
                 err, response = self.ssh_remoteclient.execute_command(command)
@@ -536,12 +569,12 @@ class FFDCCollector:
                 if response:
                     scp_result = self.ssh_remoteclient.scp_file_from_remote(filename, self.ffdc_dir_path)
                     if scp_result:
-                        print("\t\tSuccessfully copied from " + self.hostname + ':' + filename)
+                        self.logger.info("\t\tSuccessfully copied from " + self.hostname + ':' + filename)
                 else:
-                    print("\t\tThere is no " + filename)
+                    self.logger.info("\t\tThere is no " + filename)
 
         else:
-            print("\n\n\tSkip copying files from remote system %s.\n" % self.hostname)
+            self.logger.info("\n\n\tSkip copying files from remote system %s.\n" % self.hostname)
 
     def scp_ffdc(self,
                  targ_dir_path,
@@ -575,9 +608,11 @@ class FFDCCollector:
 
             if not quiet:
                 if scp_result:
-                    print("\t\tSuccessfully copied from " + self.hostname + ':' + source_file_path + ".\n")
+                    self.logger.info(
+                        "\t\tSuccessfully copied from " + self.hostname + ':' + source_file_path + ".\n")
                 else:
-                    print("\t\tFail to copy from " + self.hostname + ':' + source_file_path + ".\n")
+                    self.logger.info(
+                        "\t\tFail to copy from " + self.hostname + ':' + source_file_path + ".\n")
             else:
                 progress_counter += 1
                 self.print_progress(progress_counter)
@@ -597,7 +632,6 @@ class FFDCCollector:
 
         timestr = time.strftime("%Y%m%d-%H%M%S")
         self.ffdc_dir_path = self.location + "/" + self.hostname + "_" + timestr + "/"
-        print("\n\tFFDC Path: %s " % self.ffdc_dir_path)
         self.ffdc_prefix = timestr + "_"
         self.validate_local_store(self.ffdc_dir_path)
 
@@ -616,9 +650,11 @@ class FFDCCollector:
             except (IOError, OSError) as e:
                 # PermissionError
                 if e.errno == EPERM or e.errno == EACCES:
-                    print('>>>>>\tERROR: os.makedirs %s failed with PermissionError.\n' % dir_path)
+                    self.logger.error(
+                        '>>>>>\tERROR: os.makedirs %s failed with PermissionError.\n' % dir_path)
                 else:
-                    print('>>>>>\tERROR: os.makedirs %s failed with %s.\n' % (dir_path, e.strerror))
+                    self.logger.error(
+                        '>>>>>\tERROR: os.makedirs %s failed with %s.\n' % (dir_path, e.strerror))
                 sys.exit(-1)
 
     def print_progress(self, progress):
@@ -670,8 +706,8 @@ class FFDCCollector:
                                 universal_newlines=True)
 
         if result.stderr and not quiet:
-            print('\n\t\tERROR with redfishtool ' + parms_string)
-            print('\t\t' + result.stderr)
+            self.logger.info('\n\t\tERROR with redfishtool ' + parms_string)
+            self.logger.info('\t\t' + result.stderr)
 
         return result.stdout
 
@@ -693,7 +729,7 @@ class FFDCCollector:
                                 universal_newlines=True)
 
         if result.stderr and not quiet:
-            print('\n\t\tERROR with ipmitool -I lanplus -C 17 ' + parms_string)
-            print('\t\t' + result.stderr)
+            self.logger.info('\n\t\tERROR with ipmitool -I lanplus -C 17 ' + parms_string)
+            self.logger.info('\t\t' + result.stderr)
 
         return result.stdout
