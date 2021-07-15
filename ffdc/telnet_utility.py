@@ -3,6 +3,7 @@
 
 import time
 import socket
+import logging
 import telnetlib
 from collections import deque
 
@@ -47,14 +48,15 @@ class TelnetRemoteclient:
                             [b'Login incorrect', b'invalid login name or password.', br'\#', br'\$'],
                             timeout=self.read_timeout)
                     if n == 0 or n == 1:
-                        print("\n>>>>>\tERROR: Telnet Authentication Failed.  Check userid and password.\n\n")
+                        logging.error(
+                            "\n>>>>>\tERROR: Telnet Authentication Failed.  Check userid and password.\n\n")
                         is_telnet = False
                     else:
                         # login successful
                         self.fifo = deque()
                 else:
                     # Anything else, telnet server is not running
-                    print("\n>>>>>\tERROR: Telnet Connection Refused.\n\n")
+                    logging.error("\n>>>>>\tERROR: Telnet Connection Refused.\n\n")
                     is_telnet = False
             else:
                 is_telnet = False
@@ -91,20 +93,25 @@ class TelnetRemoteclient:
         '''
 
         # Execute the command and read the command output
-        # Execute the command and read the command output
         return_buffer = b''
         try:
 
-            # Flush whatever data is in the read buffer by doing
-            # a non-blocking read
-            self.tnclient.read_very_eager().decode('utf-8')
+            # Do at least one non-blocking read
+            #  to flush whatever data is in the read buffer.
+            while self.tnclient.read_very_eager():
+                continue
 
             # Execute the command
             self.tnclient.write(cmd.encode('utf-8') + b'\n')
             time.sleep(i_timeout)
 
-            # Read the command output.
+            local_buffer = b''
+            # Read the command output one block at a time.
             return_buffer = self.tnclient.read_very_eager()
+            while return_buffer:
+                local_buffer = b''.join([local_buffer, return_buffer])
+                time.sleep(3)  # let the buffer fill up a bit
+                return_buffer = self.tnclient.read_very_eager()
 
         except (socket.error, EOFError) as e:
             self.tn_remoteclient_disconnect()
@@ -116,6 +123,7 @@ class TelnetRemoteclient:
             else:
                 msg = "Some other issue.%s %s %s\n\n" % (cmd, e.__class__, e)
 
-            print("\t\t ERROR %s " % msg)
+            logging.error("\t\t ERROR %s " % msg)
 
-        return return_buffer
+        # Return binary data.
+        return local_buffer

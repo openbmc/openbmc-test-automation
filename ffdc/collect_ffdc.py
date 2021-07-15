@@ -38,7 +38,10 @@ from ffdc_collector import FFDCCollector
               show_default=True,
               help="Select protocol (SSH, SCP, REDFISH) to communicate with remote host. \
                     Default: all available.")
-def cli_ffdc(remote, username, password, ffdc_config, location, remote_type, remote_protocol):
+@click.option('--log_level', default="INFO",
+              show_default=True,
+              help="python logging level (CRITICAL, ERROR, WARNING, INFO, DEBUG)")
+def cli_ffdc(remote, username, password, ffdc_config, location, remote_type, remote_protocol, log_level):
     r"""
     Stand alone CLI to generate and collect FFDC from the selected target.
     """
@@ -47,7 +50,8 @@ def cli_ffdc(remote, username, password, ffdc_config, location, remote_type, rem
 
     if input_options_ok(remote, username, password, ffdc_config, remote_type):
         thisFFDC = FFDCCollector(remote, username, password,
-                                 ffdc_config, location, remote_type, remote_protocol)
+                                 ffdc_config, location,
+                                 remote_type, remote_protocol, log_level)
         thisFFDC.collect_ffdc()
 
         if len(os.listdir(thisFFDC.ffdc_dir_path)) == 0:
