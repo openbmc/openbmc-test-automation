@@ -1,6 +1,8 @@
 *** Settings ***
 Documentation   This suite is to run some test at the end of execution.
 
+Resource        ../lib/resource.robot
+Resource        ../lib/bmc_redfish_resource.robot
 Resource        ../lib/openbmc_ffdc.robot
 
 Test Teardown   FFDC On Test Case Fail
@@ -19,14 +21,23 @@ Verify No BMC Dump And Application Failures In BMC
     [Tags]  Verify_No_BMC_Dump_And_Application_Failures_In_BMC
 
     # Check dump entry based on Redfish API availability.
-    ${redfish_resp}=  OpenBMC Get Request  /redfish/v1/Systems/system/LogServices/Dump
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
-    ${resp}=  Run Keyword If  '${redfish_resp.status_code}' == '${HTTP_NOT_FOUND}'
-    ...  OpenBMC Get Request  /xyz/openbmc_project/dump/entry/list
-    ...  ELSE  Redfish.Get Properties  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    Log To Console  ${resp}
 
-    Run Keyword If  '${redfish_resp.status_code}' == '${HTTP_NOT_FOUND}'
-    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
-    ...  ELSE  Should Be Equal As Strings  ${resp["Members@odata.count"]}  0
+    ${status}=  Run Keyword If  '${resp.status}' == '${HTTP_OK}'
+    ...  Should Be Equal As Strings  ${resp.dict["Members@odata.count"]}  0
+    ...  msg=${resp.dict["Members@odata.count"]} dumps exist.
+
+    ${rest_resp}=  Run Keyword If  '${status}' == 'None'
+    ...  Redfish.Get  /xyz/openbmc_project/dump/bmc/entry/list
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    Log To Console  ${rest_resp}
+
+    Should Be Equal As Strings  ${rest_resp.status}  ${HTTP_NOT_FOUND}
+    ...  msg=1 or more dumps exist.
 
     Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+
