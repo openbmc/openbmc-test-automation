@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13b2821d_42b25c18",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-07-15T09:52:54Z",
+      "side": 1,
+      "message": "Please Remove this.\nSeems like this is added to test the piece of code.",
+      "revId": "caeb2bf782168182e5376d9a9121ff8d4f23b2c8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
