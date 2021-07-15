@@ -12,7 +12,7 @@ Test Teardown    FFDC On Test Case Fail
 
 *** Test Cases ***
 
-Verify service user availability
+Verify service user availability in Redfish
     [Documentation]  Verify service user avalability.
 
     # Verify that service user has administrator privilege.
@@ -22,13 +22,22 @@ Verify service user availability
     Should Be Equal  Administrator  ${role_config}
 
 
-Verify Creating User With Service Username
+Verify Creating User With Service Username in Redfish
     [Documentation]  Verify that user with service username can not be created.
 
     ${payload}=  Create Dictionary
     ...  UserName=service Password=TestPwd1  RoleId=Operator  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
+Verify Modifying Service User Password in Redfish
+     [Documentation]  Verify modifying service user password in redfish.
+
+     ${payload}=  Create Dictionary  Password=NewTestPwd123
+     Redfish.Patch  /redfish/v1/AccountService/Accounts/service  body=&{payload}
+     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
 
 *** Keywords ***
 
