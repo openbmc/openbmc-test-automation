@@ -91,20 +91,26 @@ class TelnetRemoteclient:
         '''
 
         # Execute the command and read the command output
-        # Execute the command and read the command output
         return_buffer = b''
         try:
 
-            # Flush whatever data is in the read buffer by doing
-            # a non-blocking read
-            self.tnclient.read_very_eager().decode('utf-8')
+            # Do at least one non-blocking read
+            #  to flush whatever data is in the read buffer.
+            while True:
+                if not self.tnclient.read_very_eager():
+                    break
 
             # Execute the command
             self.tnclient.write(cmd.encode('utf-8') + b'\n')
             time.sleep(i_timeout)
 
-            # Read the command output.
+            local_buffer = b''
+            # Read the command output one block at a time.
             return_buffer = self.tnclient.read_very_eager()
+            while return_buffer:
+                local_buffer = b''.join([local_buffer, return_buffer])
+                time.sleep(1.5)  # let the buffer fill up a bit
+                return_buffer = self.tnclient.read_very_eager()
 
         except (socket.error, EOFError) as e:
             self.tn_remoteclient_disconnect()
@@ -118,4 +124,5 @@ class TelnetRemoteclient:
 
             print("\t\t ERROR %s " % msg)
 
-        return return_buffer
+        # Return binary data.
+        return local_buffer
