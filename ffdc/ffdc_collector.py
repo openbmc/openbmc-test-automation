@@ -291,7 +291,7 @@ class FFDCCollector:
                 try:
                     targ_file = ffdc_actions[machine_type][sub_type]['FILES'][index]
                 except IndexError:
-                    targ_file = each_cmd
+                    targ_file = command_txt
                     print("\n\t[WARN] Missing filename to store data from telnet %s." % each_cmd)
                     print("\t[WARN] Data will be stored in %s." % targ_file)
                 targ_file_with_path = (self.ffdc_dir_path
