@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef7d85b9_aec7c5b0",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-15T05:18:09Z",
+      "side": 1,
+      "message": "Make it something like below:\nVerify Both Network Interfaces Respond To IPMI Messages\n                     OR\nVerify IPMI Works On Both Network Interfaces",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 46
+      },
+      "revId": "cc93f1b07f16bc02891cf79dc45afc116b057cc7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5563b66_89803a3d",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-15T05:18:09Z",
+      "side": 1,
+      "message": "*** Variables ***\n${cmd_prefix}  ipmitool -I lanplus -C 17 -p 623 -U $OPENBMC_USERNAME -P $OPENBMC_PASSWD\n\n\n*** Test Cases ***\n\n$status1\u003d Run IPMI  $OPENBMC_HOST   $sub_cmd\n$status2\u003d Run IPMI  $OPENBMC_HOST1  $sub_cmd\nShould Be Equal  $status1  $status2\n\n\n*** Keywords ***\nRun IPMI\n    [Arguments]  ${host}\u003d$OPENBMC_HOST  $sub_cmd\n\n    ${rc}  ${output}\u003d  Run And Return Rc And Output  $cmd_prefix -h $host $sub_cmd\n    Should Be Equal  ${rc}  0\n    [Return]  $output",
+      "revId": "cc93f1b07f16bc02891cf79dc45afc116b057cc7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
