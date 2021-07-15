@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "674bc3e3_1a58c7e2",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-15T16:01:08Z",
+      "side": 1,
+      "message": "This could be dangerous time to hang..",
+      "range": {
+        "startLine": 99,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 23
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c6e61b6_20240591",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-15T16:01:08Z",
+      "side": 1,
+      "message": "any reason we want to have this sleep.. perhaps make it more higher just in case of network slow or others?",
+      "range": {
+        "startLine": 112,
+        "startChar": 16,
+        "endLine": 112,
+        "endChar": 63
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f597e7a_60486046",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-07-15T16:01:08Z",
+      "side": 1,
+      "message": "is it a binary or a text data buffer?",
+      "range": {
+        "startLine": 127,
+        "startChar": 17,
+        "endLine": 127,
+        "endChar": 24
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
