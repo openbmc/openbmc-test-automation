@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7b2d43bd_121e7d89",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-07-15T17:19:47Z",
+      "side": 1,
+      "message": "I can change it to \nwhile self.tnclient.read_very_eager():\n   continue",
+      "parentUuid": "674bc3e3_1a58c7e2",
+      "range": {
+        "startLine": 99,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 23
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5c6e61b6_20240591",
         "filename": "ffdc/telnet_utility.py",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9b4d085f_bbd65107",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-07-15T17:19:47Z",
+      "side": 1,
+      "message": "We could make it longer but that will effect the total execution time.\nSo far the longest I have made is 2 seconds,",
+      "parentUuid": "5c6e61b6_20240591",
+      "range": {
+        "startLine": 112,
+        "startChar": 16,
+        "endLine": 112,
+        "endChar": 63
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8f597e7a_60486046",
         "filename": "ffdc/telnet_utility.py",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2021-07-15T16:01:08Z",
       "side": 1,
       "message": "is it a binary or a text data buffer?",
+      "range": {
+        "startLine": 127,
+        "startChar": 17,
+        "endLine": 127,
+        "endChar": 24
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cdb7d60_e9337f0d",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-07-15T17:19:47Z",
+      "side": 1,
+      "message": "Telnet transmission is in binary mode. Text in binary format not ASCII.\nFor example blank \u003d\u003d b\u0027\u0027.\nWhen attempted to convert to ASCII, some of the binary data causes the conversion to throw Exception.  Files are opened as \u0027wb\u0027 mode.  Data can be view as is without additional conversion.",
+      "parentUuid": "8f597e7a_60486046",
       "range": {
         "startLine": 127,
         "startChar": 17,
