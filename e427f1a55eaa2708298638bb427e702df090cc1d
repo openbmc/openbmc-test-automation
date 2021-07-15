@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55bc79cc_d1d40f05",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-15T07:31:43Z",
+      "side": 1,
+      "message": "Run IPMI  ${OPENBMC_HOST1}  power on\n    ${status1}\u003d  Run IPMI  ${OPENBMC_HOST}  power status\n    ${status2}\u003d  Run IPMI  ${OPENBMC_HOST_1}  power status",
+      "revId": "e427f1a55eaa2708298638bb427e702df090cc1d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
