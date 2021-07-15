@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3874f2e0_97342dd7",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-15T06:57:42Z",
+      "side": 1,
+      "message": "as discussed modify the code",
+      "revId": "609c1b67ed854a9116c2ca20e35e3dc7ba6cfda9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
