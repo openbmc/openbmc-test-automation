@@ -21,23 +21,31 @@ Verify No BMC Dump And Application Failures In BMC
     [Tags]  Verify_No_BMC_Dump_And_Application_Failures_In_BMC
 
     # Check dump entry based on Redfish API availability.
+    Redfish.Login
     ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     Log To Console  ${resp}
 
-    ${status}=  Run Keyword If  '${resp.status}' == '${HTTP_OK}'
+    Run Keyword If  '${resp.status}' == '${HTTP_OK}'
     ...  Should Be Equal As Strings  ${resp.dict["Members@odata.count"]}  0
     ...  msg=${resp.dict["Members@odata.count"]} dumps exist.
 
-    ${rest_resp}=  Run Keyword If  '${status}' == 'None'
-    ...  Redfish.Get  /xyz/openbmc_project/dump/bmc/entry/list
+    ${rest_resp}=  Run Keyword If  '${resp.status}' == '${HTTP_NOT_FOUND}'
+    ...  Check For REST Dumps
+
+    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+
+
+*** Keywords ***
+
+Check For REST Dumps
+    [Documentation]  Verify no BMC dump via REST path.
+
+    ${rest_resp}=  Redfish.Get  /xyz/openbmc_project/dump/bmc/entry/list
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     Log To Console  ${rest_resp}
 
     Should Be Equal As Strings  ${rest_resp.status}  ${HTTP_NOT_FOUND}
     ...  msg=1 or more dumps exist.
-
-    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
-
