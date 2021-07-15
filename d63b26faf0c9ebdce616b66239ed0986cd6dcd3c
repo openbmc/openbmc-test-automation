@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "1947fefa_a3d2675a",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-07-15T18:02:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e3f9dfb_1d1bee44",
+      "range": {
+        "startLine": 99,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 23
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c6e61b6_20240591",
         "filename": "ffdc/telnet_utility.py",
         "patchSetId": 1
@@ -141,6 +165,30 @@
       "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb5ac5a0_b8eeb077",
+        "filename": "ffdc/telnet_utility.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-07-15T18:02:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bbbbaad_5ce3283a",
+      "range": {
+        "startLine": 112,
+        "startChar": 16,
+        "endLine": 112,
+        "endChar": 63
+      },
+      "revId": "d63b26faf0c9ebdce616b66239ed0986cd6dcd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
