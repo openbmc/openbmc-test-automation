@@ -25,4 +25,4 @@
 #Local user tests.
 -i Verify_AccountService_Available
 #Check for BMC dump.
-#-i Verify_No_BMC_Dump_And_Application_Failures_In_BMC
+-i Verify_No_BMC_Dump_And_Application_Failures_In_BMC
