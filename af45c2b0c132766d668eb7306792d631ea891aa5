@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe6bd984_4cd91b55",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-15T07:15:15Z",
+      "side": 1,
+      "message": "yes,AUTH_URI is defined in resource.robot, here we are making local variable and assigning eth1 ip address, then install certificate using eth1 ip address, we are making AUTH_URI is local variable with eth1 ip address",
+      "parentUuid": "556693b0_92202425",
+      "revId": "af45c2b0c132766d668eb7306792d631ea891aa5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0127c023_0c382f53",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2021-07-15T06:57:03Z",
       "side": 1,
       "message": "can not we use existing certificate install code?",
+      "revId": "af45c2b0c132766d668eb7306792d631ea891aa5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "664bf973_b6c25883",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000563
+      },
+      "writtenOn": "2021-07-15T07:15:15Z",
+      "side": 1,
+      "message": "can\u0027t we use existing code, there is just installing the certificate, but here we are creating file_data using open ssl and providing that file_data as input then it will install it",
+      "parentUuid": "0127c023_0c382f53",
       "revId": "af45c2b0c132766d668eb7306792d631ea891aa5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
