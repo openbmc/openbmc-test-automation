@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a24accd_0cd01a16",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-07-15T10:20:59Z",
+      "side": 1,
+      "message": "may b add here- [Teardown]  Run keywords  Remove Directory  certificate_dir  recursive\u003dTrue  AND \nFFDC On Test Case Fail",
+      "revId": "05fb9b293833110f663714a82bcdf1c74fc42cc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
