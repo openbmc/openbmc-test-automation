@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4ff0f7e8_8efcaeb4",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-15T07:18:04Z",
+      "side": 1,
+      "message": "add comment.",
+      "parentUuid": "fe6bd984_4cd91b55",
+      "revId": "af45c2b0c132766d668eb7306792d631ea891aa5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0127c023_0c382f53",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 4
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "can\u0027t we use existing code, there is just installing the certificate, but here we are creating file_data using open ssl and providing that file_data as input then it will install it",
       "parentUuid": "0127c023_0c382f53",
+      "revId": "af45c2b0c132766d668eb7306792d631ea891aa5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32671419_d8b56767",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-15T07:18:04Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "664bf973_b6c25883",
       "revId": "af45c2b0c132766d668eb7306792d631ea891aa5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
