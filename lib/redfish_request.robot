@@ -55,3 +55,24 @@ Redfish Generic Session Request
     Append To List  ${session_dict_list}  ${session_dict}
 
     [Return]  ${session_dict}
+
+
+Verify Redfish Generic Session
+    [Documentation]  Verify
+    [Arguments]  ${session_dict}
+
+    # Description of argument(s):
+    # session_dict    Session dictionary contains information related to session attributes
+    #                 like auth-toke, location, client-id.
+
+    Set Test Variable  ${uri}  ${session_dict["Location"]}
+    ${session_resp}=  Redfish GET Request URI  ${active_session_info['headers']}  ${uri}
+    Rprint Vars  session_resp
+
+    @{words} =  Split String  ${session_resp["ClientOriginIPAddress"]}  :
+    ${ip_address}=  Get Running System IP
+    Set Test Variable  ${temp_ipaddr}  ${words}[-1]
+
+    Valid Value  session_dict["Content"]["Oem"]["OpenBMC"]["ClientID"]  ['${session_resp["Oem"]["OpenBMC"]["ClientID"]}']
+    Valid Value  session_dict["Content"]["Id"]  ['${session_resp["Id"]}']
+    Valid Value  temp_ipaddr  ${ip_address}
