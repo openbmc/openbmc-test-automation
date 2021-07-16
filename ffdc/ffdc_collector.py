@@ -48,6 +48,14 @@ class FFDCCollector:
         self.hostname = hostname
         self.username = username
         self.password = password
+        # This is for the env vars a user can use in YAML to load it at runtime.
+        # Example YAML:
+        # -COMMANDS:
+        #    - my_command ${hostname}  ${username}   ${password}
+        os.environ['hostname'] = hostname
+        os.environ['username'] = username
+        os.environ['password'] = password
+
         self.ffdc_config = ffdc_config
         self.location = location + "/" + remote_type.upper()
         self.ssh_remoteclient = None
@@ -155,6 +163,7 @@ class FFDCCollector:
         self.start_time = time.time()
         working_protocol_list = []
         if self.target_is_pingable():
+            working_protocol_list.append("SHELL")
             # Check supported protocol ping,ssh, redfish are working.
             if self.ssh_to_target_system():
                 working_protocol_list.append("SSH")
@@ -276,7 +285,13 @@ class FFDCCollector:
                     if 'IPMI' in working_protocol_list:
                         self.protocol_ipmi(ffdc_actions, machine_type, k)
                     else:
-                        self.logger.error("\n\tERROR: IMPI is not available for %s." % self.hostname)
+                        print("\n\tERROR: IMPI is not available for %s." % self.hostname)
+
+                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SHELL':
+                    if 'SHELL' in working_protocol_list:
+                        self.protocol_shell_script(ffdc_actions, machine_type, k)
+                    else:
+                        self.logger.error("\n\tERROR: can't execute SHELL script")
 
         # Close network connection after collecting all files
         self.elapsed_time = time.strftime("%H:%M:%S", time.gmtime(time.time() - self.start_time))
@@ -733,3 +748,72 @@ class FFDCCollector:
             self.logger.error('\t\t' + result.stderr)
 
         return result.stdout
+
+    def run_shell_script(self,
+                         parms_string,
+                         quiet=False):
+        r"""
+        Run CLI shell script tool.
+
+        Description of variable:
+        parms_string         script command options.
+        quiet                do not print redfishtool error message if True
+        """
+
+        result = subprocess.run([parms_string],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                shell=True,
+                                universal_newlines=True)
+
+        if result.stderr and not quiet:
+            self.logger.error('\n\t\tERROR executing %s' % parms_string)
+            self.logger.error('\t\t' + result.stderr)
+
+        return result.stdout
+
+    def protocol_shell_script(self,
+                              ffdc_actions,
+                              machine_type,
+                              sub_type):
+        r"""
+        Perform SHELL script execution locally.
+
+        Description of argument(s):
+        ffdc_actions        List of actions from ffdc_config.yaml.
+        machine_type        OS Type of remote host.
+        sub_type            Group type of commands.
+        """
+
+        self.logger.info("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'SHELL'))
+        shell_files_saved = []
+        progress_counter = 0
+        list_of_cmd = self.get_command_list(ffdc_actions[machine_type][sub_type])
+        for index, each_cmd in enumerate(list_of_cmd, start=0):
+
+            result = self.run_shell_script(each_cmd)
+            if result:
+                try:
+                    targ_file = self.get_file_list(ffdc_actions[machine_type][sub_type])[index]
+                except IndexError:
+                    targ_file = each_cmd.split('/')[-1]
+                    self.logger.warning("\n\t[WARN] Missing filename to store data %s." % each_cmd)
+                    self.logger.warning("\t[WARN] Data will be stored in %s." % targ_file)
+
+                targ_file_with_path = (self.ffdc_dir_path
+                                       + self.ffdc_prefix
+                                       + targ_file)
+
+                # Creates a new file
+                with open(targ_file_with_path, 'w') as fp:
+                    fp.write(result)
+                    fp.close
+                    shell_files_saved.append(targ_file)
+
+            progress_counter += 1
+            self.print_progress(progress_counter)
+
+        self.logger.info("\n\t[Run] Commands execution completed.\t\t [OK]")
+
+        for file in shell_files_saved:
+            self.logger.info("\n\t\tSuccessfully save file " + file + ".")
