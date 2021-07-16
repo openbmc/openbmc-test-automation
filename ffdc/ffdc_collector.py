@@ -285,7 +285,7 @@ class FFDCCollector:
                     if 'IPMI' in working_protocol_list:
                         self.protocol_ipmi(ffdc_actions, machine_type, k)
                     else:
-                        print("\n\tERROR: IMPI is not available for %s." % self.hostname)
+                        self.logger.error("\n\tERROR: IMPI is not available for %s." % self.hostname)
 
                 if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SHELL':
                     if 'SHELL' in working_protocol_list:
