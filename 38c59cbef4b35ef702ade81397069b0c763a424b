@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0cc3cd2d_a055922e",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-19T11:30:09Z",
+      "side": 1,
+      "message": "Not required as it is already in Redfish suite.",
+      "range": {
+        "startLine": 15,
+        "startChar": 32,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "38c59cbef4b35ef702ade81397069b0c763a424b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d060e20d_27259e7b",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-19T11:30:09Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "range": {
+        "startLine": 25,
+        "startChar": 43,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "revId": "38c59cbef4b35ef702ade81397069b0c763a424b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25340ec6_294411be",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-19T11:30:09Z",
+      "side": 1,
+      "message": "Verify Error While Modifying Service User Password\n     [Documentation]  Verify error while modifying service user password via Redfish.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 49
+      },
+      "revId": "38c59cbef4b35ef702ade81397069b0c763a424b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8062080a_50505f20",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-19T11:30:09Z",
+      "side": 1,
+      "message": "Test case tag is missing. Please do it for above test cases also.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 72
+      },
+      "revId": "38c59cbef4b35ef702ade81397069b0c763a424b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
