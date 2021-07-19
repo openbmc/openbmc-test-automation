@@ -463,7 +463,7 @@ class FFDCCollector:
         form_filename                    if true, pre-pend self.target_type to filename
         """
 
-        # Executing commands, , if any
+        # Executing commands, if any
         self.ssh_execute_ffdc_commands(ffdc_actions_for_machine_type,
                                        form_filename)
 
@@ -548,7 +548,13 @@ class FFDCCollector:
             if form_filename:
                 command_txt = str(command_txt % self.target_type)
 
-            err, response = self.ssh_remoteclient.execute_command(command_txt, command_timeout)
+            cmd_exit_code, err, response = \
+                self.ssh_remoteclient.execute_command(command_txt, command_timeout)
+
+            if cmd_exit_code:
+                self.logger.warning(
+                    "\n\t\t[WARN] %s exits with code %s." % (command_txt, str(cmd_exit_code)))
+                self.logger.warning("\t\t[WARN] %s " % err)
 
             progress_counter += 1
             self.print_progress(progress_counter)
@@ -579,8 +585,11 @@ class FFDCCollector:
                     self.logger.info("\t\tInvalid command %s for DUMP_LOGS block." % command)
                     continue
 
-                err, response = self.ssh_remoteclient.execute_command(command)
+                cmd_exit_code, err, response = \
+                    self.ssh_remoteclient.execute_command(command)
 
+                # If file does not exist, code take no action.
+                # cmd_exit_code is ignored for this scenario.
                 if response:
                     scp_result = self.ssh_remoteclient.scp_file_from_remote(filename, self.ffdc_dir_path)
                     if scp_result:

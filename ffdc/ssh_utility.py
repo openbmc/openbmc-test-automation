@@ -73,7 +73,8 @@ class SSHRemoteclient:
         if self.scpclient:
             self.scpclient.close()
 
-    def execute_command(self, command, default_timeout=60):
+    def execute_command(self, command,
+                        default_timeout=60):
         """
         Execute command on the remote host.
 
@@ -92,8 +93,8 @@ class SSHRemoteclient:
                 if stdout.channel.exit_status_ready():
                     break
                 time.sleep(1)
-
-            return stderr.readlines(), stdout.readlines()
+            cmd_exit_code = stdout.channel.recv_exit_status()
+            return cmd_exit_code, stderr.readlines(), stdout.readlines()
 
         except (paramiko.AuthenticationException, paramiko.SSHException,
                 paramiko.ChannelException, SocketTimeout) as e:
@@ -101,7 +102,7 @@ class SSHRemoteclient:
             logging.error("\n>>>>>\tERROR: Fail remote command %s %s" % (e.__class__, e))
             logging.error(">>>>>\tCommand '%s' Elapsed Time %s" %
                           (command, time.strftime("%H:%M:%S", time.gmtime(time.time() - cmd_start))))
-            return empty, empty
+            return 0, empty, empty
 
     def scp_connection(self):
 

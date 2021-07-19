@@ -173,7 +173,7 @@ UBUNTU:
             - 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1'
             - '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } >/tmp/OS_info.txt 2>&1'
             - 'rm -rf /tmp/sosreport*FFDC*'
-            - {'sosreport --batch --tmp-dir /tmp --ticket-number FFDC >/tmp/OS_sosreport.txt 2>&1': 1200}
+            - {'sosreport --batch --tmp-dir /tmp --ticket-number FFDC >/tmp/OS_sosreport.txt': 1200}
         FILES:
             - '/tmp/OS_isub.txt'
             - '/tmp/OS_kern.txt'
