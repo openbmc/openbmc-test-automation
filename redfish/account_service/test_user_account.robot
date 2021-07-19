@@ -363,9 +363,9 @@ Redfish Create User
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
-    # Resetting pam tally count as a workaround for issue
+    # Resetting faillock count as a workaround for issue
     # openbmc/phosphor-user-manager#4
-    ${cmd}=  Catenate  /usr/sbin/pam_tally2 -u ${username} --reset
+    ${cmd}=  Catenate  /usr/sbin/faillock --user USER --reset
     Bmc Execute Command  ${cmd}
 
     # Verify login with created user.
