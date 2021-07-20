@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "daefbe65_1a44ec1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-20T09:33:15Z",
+      "side": 1,
+      "message": "Added fix for GUI server power operation test case",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 31
+      },
+      "revId": "0b7a107aea0bdeaf93c5fef3fd34e5a42d434691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11c9138c_15d4fe3f",
+        "filename": "gui/gui_test/control_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-20T09:33:15Z",
+      "side": 1,
+      "message": "Boot settings override is not there. Try like below.\n\nWait Until Page Contains  Boot settings  timeout\u003d5",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 64
+      },
+      "revId": "0b7a107aea0bdeaf93c5fef3fd34e5a42d434691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
