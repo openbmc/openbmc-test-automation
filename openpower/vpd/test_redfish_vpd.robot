@@ -35,8 +35,11 @@ Verify Redfish VPD Data
     ...  '${component}' == 'CPU'  /redfish/v1/Systems/system/Processors/cpu0
     ...  '${component}' == 'System'  /redfish/v1/Systems/system
 
-    # TODO: Currently serial number is verified. Verification for other fields will be added later.
-    Verify Redfish VPD  ${component}  ${component_uri}  SerialNumber
+    # TODO: Verification for SparePartNumber and Location fields will be added later.
+    @{vpd_fields}=  Create List  Model  PartNumber  SerialNumber
+    FOR  ${field}  IN  @{vpd_fields}
+      Verify Redfish VPD  ${component}  ${component_uri}  ${field}
+    END
 
 
 Verify Redfish VPD
@@ -44,10 +47,10 @@ Verify Redfish VPD
     [Arguments]  ${component}  ${component_uri}  ${field}
     # Description of arguments:
     # component_uri       Redfish VPD uri (e.g. /redfish/v1/Systems/system/Processors/cpu1).
-    # field              Redfish VPD field (Model)
+    # field               Redfish VPD field (Model)
 
     ${resp}=  Redfish.Get Properties  ${component_uri}
-
+    Log  ${resp}
     ${vpd_field}=  Set Variable If
     ...  '${field}' == 'Model'  CC
     ...  '${field}' == 'PartNumber'  PN
@@ -62,4 +65,4 @@ Verify Redfish VPD
     ...  '${component}' == 'System'  /system
 
     ${vpd_records}=  Vpdtool  -r -O ${vpd_component} -R VINI -K ${vpd_field}
-    Should Be Equal As Strings  ${resp["SerialNumber"]}  ${vpd_records['${vpd_component}']['${vpd_field}']}
+    Should Be Equal As Strings  ${resp["${field}"]}  ${vpd_records['${vpd_component}']['${vpd_field}']}
