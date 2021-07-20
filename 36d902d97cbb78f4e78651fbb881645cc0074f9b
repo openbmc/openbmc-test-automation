@@ -16,6 +16,24 @@
       "revId": "36d902d97cbb78f4e78651fbb881645cc0074f9b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4f46f61_65cdc280",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-20T06:26:26Z",
+      "side": 1,
+      "message": "can you mention the variable name ?\n\nactive_session_info - this variable is created at suit level. yes in order to use this library then these variable should be define in suit variable section.",
+      "parentUuid": "cdb01139_f8551bf6",
+      "revId": "36d902d97cbb78f4e78651fbb881645cc0074f9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
