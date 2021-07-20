@@ -34,6 +34,15 @@ Verify Existence Of All Sections In Manage Power Usage Page
     Page Should Contain  Power cap value
 
 
+Verify Existence Of All Buttons In Manage Power Usage Page
+    [Documentation]  Verify existence of all buttons in manage power usage page.
+    [Tags]  Verify_Existence_Of_All_Buttons_In_Manage_Power_Usage_Page
+
+    Page Should Contain Element  ${xpath_power_ops_checkbox}
+    Page Should Contain Element  ${xpath_cap_input_button}
+    Page Should Contain Element  ${xpath_submit_button}
+
+
 Verify Server Power Cap Setting Is On
     [Documentation]  Verify server power cap setting is on.
     [Tags]  Verify_Server_Power_Cap_Setting_Is_On
