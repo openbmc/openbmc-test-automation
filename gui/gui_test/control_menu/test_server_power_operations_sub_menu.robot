@@ -87,7 +87,7 @@ Verify Existence Of All Sections In Host Os Boot Settings
     [Documentation]  Verify existence of all sections in host os boot settings.
     [Tags]  Verify_Existence_Of_All_Sections_In_Host_Os_Boot_Settings
 
-    Page Should Contain  Boot settings override
+    Wait Until Page Contains  Boot settings override  timeout=10
     Page Should Contain  TPM required policy
 
 
