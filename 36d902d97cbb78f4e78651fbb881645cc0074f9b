@@ -78,6 +78,48 @@
     },
     {
       "key": {
+        "uuid": "fecffcb6_81ea9094",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-20T08:52:22Z",
+      "side": 1,
+      "message": "keeping active_session_info  as global variable. no need to pass from any keyword always access from memory.",
+      "parentUuid": "838c1565_b439c1dd",
+      "range": {
+        "startLine": 71,
+        "startChar": 49,
+        "endLine": 71,
+        "endChar": 68
+      },
+      "revId": "36d902d97cbb78f4e78651fbb881645cc0074f9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b77a1a4_785f4473",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-20T08:52:22Z",
+      "side": 1,
+      "message": "if this active_session_info is added in suit level then Set Variable doesn\u0027t work, need to use Set Test Variable or Set Global Variable.",
+      "parentUuid": "dfcc6655_4bc7dc76",
+      "revId": "36d902d97cbb78f4e78651fbb881645cc0074f9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14dad9a1_cff84578",
         "filename": "lib/redfish_request.robot",
         "patchSetId": 7
@@ -89,6 +131,24 @@
       "writtenOn": "2021-07-20T07:41:38Z",
       "side": 1,
       "message": "why this test variable is required?",
+      "revId": "36d902d97cbb78f4e78651fbb881645cc0074f9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19a00235_42397e8f",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-20T08:52:22Z",
+      "side": 1,
+      "message": "using it in line 95 for comparing IP address.",
+      "parentUuid": "14dad9a1_cff84578",
       "revId": "36d902d97cbb78f4e78651fbb881645cc0074f9b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
