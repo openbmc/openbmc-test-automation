@@ -205,6 +205,38 @@ Configure Multiple SNMP Managers With Different Ports And Verify
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR3_IP}  ${NON_DEFAULT_PORT2}
 
 
+Configure SNMP Manager With Out Of Range IP On BMC And Verify
+    [Documentation]  Configure SNMP Manager On BMC with out-of range IP and expect an error.
+    [Tags]  Configure_SNMP_Manager_With_Out_Of_Range_IP_On_BMC_And_Verify
+    [Teardown]  Delete SNMP Manager Via Redfish  ${out_of_range_ip}  ${SNMP_DEFAULT_PORT}
+
+    Configure SNMP Manager Via Redfish  ${out_of_range_ip}  ${SNMP_DEFAULT_PORT}  ${HTTP_BAD_REQUEST}
+
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${out_of_range_ip}  ${SNMP_DEFAULT_PORT}
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=BMC is allowing to configure out of range IP.
+
+
+Verify Persistency Of SNMP Manager And Trap On BMC Reboot
+    [Documentation]  Verify persistency of SNMP manager configuration on BMC
+    ...  and BMC is able to send trap after reboot.
+    [Tags]  Verify_Persistency_Of_SNMP_Manager_And_Trap_On_BMC_Reboot
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}  ${HTTP_CREATED}
+
+    # Reboot BMC and check persistency SNMP manager.
+    OBMC Reboot (off)
+
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+    # Check if trap is generated and sent to SNMP manager after reboot.
+    Generate Error On BMC And Verify Trap
+    ...  ${CMD_INTERNAL_FAILURE}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+
 *** Keywords ***
 
 Suite Setup Execution
