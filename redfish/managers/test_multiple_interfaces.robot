@@ -133,7 +133,7 @@ Verify IPMI Works On Both Network Interfaces
 
 
 Verify Able To Load Certificates Via Eth1 IP Address
-    [Documentation]  Verify able to load certifcates via eth1 IP address.
+    [Documentation]  Verify able to load certificates via eth1 IP address.
     [Setup]   Create Directory  certificate_dir
     [Tags]  Verify_Able_To_Load_Certificates_Via_Eth1_IP_Address
     [Teardown]  Run Keywords  Remove Directory  certificate_dir  recursive=True
