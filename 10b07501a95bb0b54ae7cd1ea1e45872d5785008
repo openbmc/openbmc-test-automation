@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "632643d6_d026e2fa",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-20T05:35:11Z",
+      "side": 1,
+      "message": "Capitalize starting alphabet in each word.",
+      "range": {
+        "startLine": 17,
+        "startChar": 12,
+        "endLine": 17,
+        "endChar": 44
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b93588d6_3673046a",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-20T05:35:11Z",
+      "side": 1,
+      "message": "Creating",
+      "range": {
+        "startLine": 28,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 26
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cb83029_1654c204",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-20T05:35:11Z",
+      "side": 1,
+      "message": "Redfish",
+      "range": {
+        "startLine": 37,
+        "startChar": 64,
+        "endLine": 37,
+        "endChar": 71
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d14d86b_3755aa1c",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-20T05:35:11Z",
+      "side": 1,
+      "message": "You can add more documentation here saying about the expectation as well.",
+      "range": {
+        "startLine": 37,
+        "startChar": 22,
+        "endLine": 37,
+        "endChar": 71
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b947a524_79548cf0",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-20T05:35:11Z",
+      "side": 1,
+      "message": "Add a comment saying why changing password should not be successful.",
+      "range": {
+        "startLine": 41,
+        "startChar": 5,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53479c57_0738f32f",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-07-20T05:35:11Z",
+      "side": 1,
+      "message": "You can remove this keyword and call Redfish.Login directly @line 8. Since it is the only keyword here.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
