@@ -15,7 +15,6 @@ Verify VPD Data Via Redfish
     [Template]  Verify Redfish VPD Data
 
     # Component
-    System
     BMC
     Chassis
     CPU
@@ -33,7 +32,6 @@ Verify Redfish VPD Data
     ...  '${component}' == 'BMC'  /redfish/v1/Managers/bmc
     ...  '${component}' == 'Chassis'  /redfish/v1/Chassis/chassis
     ...  '${component}' == 'CPU'  /redfish/v1/Systems/system/Processors/cpu0
-    ...  '${component}' == 'System'  /redfish/v1/Systems/system
 
     # TODO: Currently serial number is verified. Verification for other fields will be added later.
     Verify Redfish VPD  ${component}  ${component_uri}  SerialNumber
@@ -59,7 +57,6 @@ Verify Redfish VPD
     ...  '${component}' == 'CPU'  /system/chassis/motherboard/cpu0
     ...  '${component}' == 'Chassis'  /system/chassis
     ...  '${component}' == 'BMC'  /system/chassis/motherboard/ebmc_card_bmc
-    ...  '${component}' == 'System'  /system
 
     ${vpd_records}=  Vpdtool  -r -O ${vpd_component} -R VINI -K ${vpd_field}
     Should Be Equal As Strings  ${resp["SerialNumber"]}  ${vpd_records['${vpd_component}']['${vpd_field}']}
