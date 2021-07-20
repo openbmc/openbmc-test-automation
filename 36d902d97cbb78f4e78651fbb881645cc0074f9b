@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdb01139_f8551bf6",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-20T06:16:09Z",
+      "side": 1,
+      "message": "this global variable is declared \u0026 created in above keyword.\nIf this keyword is used/called before calling above keyword then it\u0027ll fail.",
+      "revId": "36d902d97cbb78f4e78651fbb881645cc0074f9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
