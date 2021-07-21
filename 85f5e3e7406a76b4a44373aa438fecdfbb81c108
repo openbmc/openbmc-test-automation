@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "22a17054_8715b0ee",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-21T14:16:25Z",
+      "side": 1,
+      "message": "I mean to say that we are not just capturing trap, we are inducing it, capturing it and checking its content. so `Verify Trap` is more meaningful that just saying `trap is captured`",
+      "parentUuid": "4d3381f8_cd526400",
+      "revId": "85f5e3e7406a76b4a44373aa438fecdfbb81c108",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74d5bf54_8dc17525",
         "filename": "redfish/events/test_bmc_snmp_trap.robot",
         "patchSetId": 2
@@ -108,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "549dd5ef_7b7c3ab0",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-21T14:16:25Z",
+      "side": 1,
+      "message": "test case name should start with a test we are doing or what we are doing rather than test case expectation. so current name suits better.\nDocumentation will cover expectation part.",
+      "parentUuid": "f89ff1c1_bc26a001",
+      "revId": "85f5e3e7406a76b4a44373aa438fecdfbb81c108",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e8cab948_c7ddb705",
         "filename": "redfish/events/test_bmc_snmp_trap.robot",
         "patchSetId": 2
@@ -155,6 +191,24 @@
       "side": 1,
       "message": "you can split the the test case or you can re-name the keyword.",
       "parentUuid": "ad70de39_e156b9ec",
+      "revId": "85f5e3e7406a76b4a44373aa438fecdfbb81c108",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5c36910_91681f21",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-21T14:16:25Z",
+      "side": 1,
+      "message": "I dont see any problem with test case name, I tried to make it short and if any confusion documentation has details \u0026 will help understand it better. if we are able to cover two test cases in a single test case that saves time \u0026 few lines of code.",
+      "parentUuid": "a89466a3_1145e537",
       "revId": "85f5e3e7406a76b4a44373aa438fecdfbb81c108",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
