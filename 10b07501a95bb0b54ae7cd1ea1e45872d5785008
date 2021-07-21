@@ -94,6 +94,29 @@
     },
     {
       "key": {
+        "uuid": "d50787cb_bf7fea18",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-21T12:59:37Z",
+      "side": 1,
+      "message": "As suggested earlier please add more details in the doc section like below:\n     [Documentation]  Verify error while modifying service user password via Redfish.",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 72
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b947a524_79548cf0",
         "filename": "openpower/service_account/test_service_user.robot",
         "patchSetId": 2
