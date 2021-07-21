@@ -285,7 +285,7 @@ class FFDCCollector:
                     if 'IPMI' in working_protocol_list:
                         self.protocol_ipmi(ffdc_actions, machine_type, k)
                     else:
-                        self.logger.error("\n\tERROR: IMPI is not available for %s." % self.hostname)
+                        self.logger.error("\n\tERROR: IPMI is not available for %s." % self.hostname)
 
                 if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SHELL':
                     if 'SHELL' in working_protocol_list:
@@ -423,7 +423,7 @@ class FFDCCollector:
         list_of_cmd = self.get_command_list(ffdc_actions[machine_type][sub_type])
         for index, each_cmd in enumerate(list_of_cmd, start=0):
             ipmi_parm = '-U ' + self.username + ' -P ' + self.password + ' -H ' \
-                + self.hostname + ' ' + each_cmd
+                + self.hostname + ' -I lanplus ' + each_cmd
 
             result = self.run_ipmitool(ipmi_parm)
             if result:
@@ -709,7 +709,7 @@ class FFDCCollector:
 
         """
         ipmi_parm = '-U ' + self.username + ' -P ' + self.password + ' -H ' \
-            + self.hostname + ' power status'
+            + self.hostname + ' power status -I lanplus'
         return(self.run_ipmitool(ipmi_parm, True))
 
     def run_redfishtool(self,
