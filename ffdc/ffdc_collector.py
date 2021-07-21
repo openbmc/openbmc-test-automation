@@ -7,6 +7,7 @@ See class prolog below for details.
 import os
 import sys
 import yaml
+import json
 import time
 import logging
 import platform
@@ -32,6 +33,7 @@ class FFDCCollector:
                  location,
                  remote_type,
                  remote_protocol,
+                 env_vars,
                  log_level):
         r"""
         Description of argument(s):
@@ -91,6 +93,20 @@ class FFDCCollector:
                     "\n\tERROR: %s is not listed in %s.\n\n" % (self.target_type, self.ffdc_config))
                 sys.exit(-1)
         else:
+            sys.exit(-1)
+
+        # Load ENV vars from user.
+        try:
+            if env_vars:
+                env_dict = json.loads(env_vars)
+                self.logger.info("\n\tENV: User define input YAML variables")
+                self.logger.info(json.dumps(env_dict, indent=8, sort_keys=True))
+
+                # Export ENV vars default.
+                for key, value in env_dict.items():
+                    os.environ[key] = value
+        except json.decoder.JSONDecodeError as e:
+            self.logger.error("\n\tERROR: %s " % e)
             sys.exit(-1)
 
     def verify_script_env(self):
