@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4d3381f8_cd526400",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-21T13:08:49Z",
+      "side": 1,
+      "message": "I did not get you . Here I was suggesting you to rename the keyword.",
+      "parentUuid": "53c29e7e_09f727ba",
+      "revId": "85f5e3e7406a76b4a44373aa438fecdfbb81c108",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74d5bf54_8dc17525",
         "filename": "redfish/events/test_bmc_snmp_trap.robot",
         "patchSetId": 2
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "f89ff1c1_bc26a001",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-21T13:08:49Z",
+      "side": 1,
+      "message": "I gave another thought and suggesting you below keywords name.\n\nif keyword name start with fail or unable to set invalid IP address user can get some insight of test case, instead of reading complete documentation tag.\n\nFail To Configure BMC SNMP Manager With Invalid IP Address\nVerify Fail To Configure BMC SNMP Manager With Invalid IP Address\nVerify Unable to Set SNMP Manager With Invalid IP Address",
+      "parentUuid": "e6b359f0_b47f81d7",
+      "revId": "85f5e3e7406a76b4a44373aa438fecdfbb81c108",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e8cab948_c7ddb705",
         "filename": "redfish/events/test_bmc_snmp_trap.robot",
         "patchSetId": 2
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "I was trying to do 2 test cases here:\n1. SNMP manager configuration data persisted after reboot\n2. Traps are sent after reboot\nThat is the reason I named test cases like that.",
       "parentUuid": "e8cab948_c7ddb705",
+      "revId": "85f5e3e7406a76b4a44373aa438fecdfbb81c108",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a89466a3_1145e537",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-07-21T13:08:49Z",
+      "side": 1,
+      "message": "you can split the the test case or you can re-name the keyword.",
+      "parentUuid": "ad70de39_e156b9ec",
       "revId": "85f5e3e7406a76b4a44373aa438fecdfbb81c108",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
