@@ -22,6 +22,30 @@
       "revId": "d6ddebbf4a34fffd6e90b5cf17c269e19aac989b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55a6c374_8435050f",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-22T09:49:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "897c071f_945b3465",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 91
+      },
+      "revId": "d6ddebbf4a34fffd6e90b5cf17c269e19aac989b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
