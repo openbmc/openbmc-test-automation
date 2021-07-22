@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "897c071f_945b3465",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-22T09:04:57Z",
+      "side": 1,
+      "message": "Password is not carried in ACF certificate. So you can change comment message like below:\n\n     # Modification of service user password is not allowed via Redfish API.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 91
+      },
+      "revId": "d6ddebbf4a34fffd6e90b5cf17c269e19aac989b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
