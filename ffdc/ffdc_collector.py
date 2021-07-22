@@ -96,18 +96,26 @@ class FFDCCollector:
             sys.exit(-1)
 
         # Load ENV vars from user.
+        self.logger.info("\n\tENV: User define input YAML variables")
+        self.env_dict = {}
+
         try:
             if env_vars:
-                env_dict = json.loads(env_vars)
-                self.logger.info("\n\tENV: User define input YAML variables")
-                self.logger.info(json.dumps(env_dict, indent=8, sort_keys=True))
+                self.env_dict = json.loads(env_vars)
 
                 # Export ENV vars default.
-                for key, value in env_dict.items():
+                for key, value in self.env_dict.items():
                     os.environ[key] = value
+
         except json.decoder.JSONDecodeError as e:
             self.logger.error("\n\tERROR: %s " % e)
             sys.exit(-1)
+
+        # Append default Env.
+        self.env_dict['hostname'] = self.hostname
+        self.env_dict['username'] = self.username
+        self.env_dict['password'] = self.password
+        self.logger.info(json.dumps(self.env_dict, indent=8, sort_keys=True))
 
     def verify_script_env(self):
 
