@@ -188,28 +188,46 @@ class FFDCCollector:
         working_protocol_list = []
         if self.target_is_pingable():
             working_protocol_list.append("SHELL")
-            # Check supported protocol ping,ssh, redfish are working.
-            if self.ssh_to_target_system():
-                working_protocol_list.append("SSH")
-                working_protocol_list.append("SCP")
 
-            # Redfish
-            if self.verify_redfish():
-                working_protocol_list.append("REDFISH")
-                self.logger.info("\n\t[Check] %s Redfish Service.\t\t [OK]" % self.hostname)
-            else:
-                self.logger.info("\n\t[Check] %s Redfish Service.\t\t [NOT AVAILABLE]" % self.hostname)
+            for machine_type in self.ffdc_actions.keys():
+                if self.target_type != machine_type:
+                    continue
 
-            # IPMI
-            if self.verify_ipmi():
-                working_protocol_list.append("IPMI")
-                self.logger.info("\n\t[Check] %s IPMI LAN Service.\t\t [OK]" % self.hostname)
-            else:
-                self.logger.info("\n\t[Check] %s IPMI LAN Service.\t\t [NOT AVAILABLE]" % self.hostname)
+                for k, v in self.ffdc_actions[machine_type].items():
 
-            # Telnet
-            if self.telnet_to_target_system():
-                working_protocol_list.append("TELNET")
+                    # If config protocol is SSH or SCP
+                    if self.ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SSH' \
+                       or self.ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SCP':
+
+                        # Only check SSH/SCP once for both protocols
+                        if 'SSH' not in working_protocol_list \
+                           and 'SCP' not in working_protocol_list:
+                            if self.ssh_to_target_system():
+                                working_protocol_list.append("SSH")
+                                working_protocol_list.append("SCP")
+
+                    # If config protocol is TELNET
+                    if self.ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'TELNET':
+                        if self.telnet_to_target_system():
+                            working_protocol_list.append("TELNET")
+
+                    # If config protocol is REDFISH
+                    if self.ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'REDFISH':
+                        if self.verify_redfish():
+                            working_protocol_list.append("REDFISH")
+                            self.logger.info("\n\t[Check] %s Redfish Service.\t\t [OK]" % self.hostname)
+                        else:
+                            self.logger.info(
+                                "\n\t[Check] %s Redfish Service.\t\t [NOT AVAILABLE]" % self.hostname)
+
+                    # If config protocol is IPMI
+                    if self.ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'IPMI':
+                        if self.verify_ipmi():
+                            working_protocol_list.append("IPMI")
+                            self.logger.info("\n\t[Check] %s IPMI LAN Service.\t\t [OK]" % self.hostname)
+                        else:
+                            self.logger.info(
+                                "\n\t[Check] %s IPMI LAN Service.\t\t [NOT AVAILABLE]" % self.hostname)
 
             # Verify top level directory exists for storage
             self.validate_local_store(self.location)
@@ -319,8 +337,10 @@ class FFDCCollector:
 
         # Close network connection after collecting all files
         self.elapsed_time = time.strftime("%H:%M:%S", time.gmtime(time.time() - self.start_time))
-        self.ssh_remoteclient.ssh_remoteclient_disconnect()
-        self.telnet_remoteclient.tn_remoteclient_disconnect()
+        if self.ssh_remoteclient:
+            self.ssh_remoteclient.ssh_remoteclient_disconnect()
+        if self.telnet_remoteclient:
+            self.telnet_remoteclient.tn_remoteclient_disconnect()
 
     def protocol_ssh(self,
                      ffdc_actions,
