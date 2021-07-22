@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8b2079d7_1a8b4981",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-22T07:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "632643d6_d026e2fa",
+      "range": {
+        "startLine": 17,
+        "startChar": 12,
+        "endLine": 17,
+        "endChar": 44
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b93588d6_3673046a",
         "filename": "openpower/service_account/test_service_user.robot",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69afef58_75260c3b",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-22T07:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b93588d6_3673046a",
+      "range": {
+        "startLine": 28,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 26
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +165,78 @@
     },
     {
       "key": {
+        "uuid": "068344b9_3bfb5da9",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-22T07:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cb83029_1654c204",
+      "range": {
+        "startLine": 37,
+        "startChar": 64,
+        "endLine": 37,
+        "endChar": 71
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3ad89bf_051cb9cf",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-22T07:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d50787cb_bf7fea18",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 72
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d60121f6_3c706117",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-22T07:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d14d86b_3755aa1c",
+      "range": {
+        "startLine": 37,
+        "startChar": 22,
+        "endLine": 37,
+        "endChar": 71
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b947a524_79548cf0",
         "filename": "openpower/service_account/test_service_user.robot",
         "patchSetId": 2
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "1784a7b0_9b73df71",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-22T07:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b947a524_79548cf0",
+      "range": {
+        "startLine": 41,
+        "startChar": 5,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53479c57_0738f32f",
         "filename": "openpower/service_account/test_service_user.robot",
         "patchSetId": 2
@@ -151,6 +295,30 @@
       "writtenOn": "2021-07-20T05:35:11Z",
       "side": 1,
       "message": "You can remove this keyword and call Redfish.Login directly @line 8. Since it is the only keyword here.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "10b07501a95bb0b54ae7cd1ea1e45872d5785008",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56449b27_322d7c31",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-22T07:46:01Z",
+      "side": 1,
+      "message": "It was decided and done in an earlier commit as there is possibility of some new parameters. So I shall keep it like this in this commit.",
+      "parentUuid": "53479c57_0738f32f",
       "range": {
         "startLine": 47,
         "startChar": 0,
