@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3926f7bd_7f74696b",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-07-22T18:08:23Z",
+      "side": 1,
+      "message": "Default OPENBMC_HOST is removed in click. Need to be removed from message.",
+      "range": {
+        "startLine": 81,
+        "startChar": 30,
+        "endLine": 81,
+        "endChar": 34
+      },
+      "revId": "b6ff58573ec803acbfdcd752d6630f593e22ec03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d1200ba_1baf5b88",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-07-22T18:08:23Z",
+      "side": 1,
+      "message": "Default OPENBMC_USERNAME is removed in click. Need to be removed from message.",
+      "range": {
+        "startLine": 85,
+        "startChar": 38,
+        "endLine": 85,
+        "endChar": 43
+      },
+      "revId": "b6ff58573ec803acbfdcd752d6630f593e22ec03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15d9f594_2c61bee9",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-07-22T18:08:23Z",
+      "side": 1,
+      "message": "Default OPENBMC_PASSWORD is removed in click. Need to be removed from message.",
+      "range": {
+        "startLine": 90,
+        "startChar": 24,
+        "endLine": 90,
+        "endChar": 40
+      },
+      "revId": "b6ff58573ec803acbfdcd752d6630f593e22ec03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
