@@ -4,7 +4,9 @@ Documentation   This suite tests Vital Product Data (VPD) using Redfish.
 Resource        ../../lib/openbmc_ffdc.robot
 Library         ../../lib/vpd_utils.py
 
-#Test Teardown   FFDC On Test Case Fail
+Suite Setup     Redfish.Login
+Suite Teardown  Redfish.Logout
+Test Teardown   FFDC On Test Case Fail
 
 
 *** Test Cases ***
